@@ -1,11 +1,21 @@
 # Olympiad Template Registry
 
+> **Phase-1 topic mapping (canonical).** The sections below are the six **skill
+> families** (arithmetic / number_theory / algebra / geometry / combinatorics /
+> logic) — a classification layer for templates, NOT shipped topics. Shipped
+> questions and pack folders use only the **four** topicCodes
+> `arithmetic` / `geometry` / `logic` / `mixed`. Mapping: number_theory → `arithmetic`;
+> algebra → `mixed` (or `arithmetic`); combinatorics → `mixed` (or `logic`);
+> geometry → `geometry`; logic → `logic`. A `templateId` may keep its skill-family
+> prefix, but the generated question's `topicCode` must be one of the four.
+> See `olympiad-template-spec.md` (Topic Set) and `question-bank-taxonomy.md`.
+
 ## Summary
 
 - Total core templates: 36
-- Topics covered: 6
-- Core families per topic: 3
-- Difficulty layers per family: 2
+- Skill families covered: 6 (mapped onto 4 shipped topicCodes — see note above)
+- Core families per skill family: 3
+- Difficulty layers per family: 2 (`foundation`, `competition`)
 - Supported answer modes in phase 1:
   - `multiple_choice`
   - `integer_input`

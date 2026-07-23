@@ -2,10 +2,17 @@
 
 Worked samples: 6
 
-This document provides one worked sample per topic. These are template
-examples, not shipping question packs. Each example is designed to show how a
-future high-quality olympiad-style question should map into the current
-MathSpring JSON schema.
+This document provides one worked sample per **skill family**. These are template
+examples, not shipping question packs. Each example shows how a future
+high-quality olympiad-style question maps into the current MathSpring JSON schema.
+
+> **Phase-1 topic note (canonical).** The samples are grouped by the six skill
+> families for illustration. Some samples below use `"topic": "number_theory"` /
+> `"algebra"` / `"combinatorics"` — these are **not** valid shipped topicCodes.
+> A shipped question's `topic`/`topicCode` must be one of the four:
+> `arithmetic` / `geometry` / `logic` / `mixed` (number_theory → `arithmetic`;
+> algebra → `mixed`/`arithmetic`; combinatorics → `mixed`/`logic`). Treat the
+> skill-family label here as descriptive only. See `olympiad-template-spec.md`.
 
 ## arithmetic sample
 
