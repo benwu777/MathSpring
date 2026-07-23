@@ -166,6 +166,34 @@ prefix can be added:
 - `ai_geometry_grade4_foundation_001`
 - `editor_logic_grade6_foundation_002`
 
+## Display Code Rule（精簡顯示碼）
+
+除了內部主鍵 `id`（穩定唯一、不改），每題有一個給人看的**精簡顯示碼**，掃一眼即可判讀「類型 + 年級 + 難度」。
+
+格式：
+
+```text
+<TT>-G<grade>-<D>-<serial>
+```
+
+- `TT`（類型，兩碼）：`AR`=arithmetic、`GE`=geometry、`LO`=logic、`MX`=mixed
+- `G<grade>`：`G1`~`G6`，取自 `levelStage`（mixed pack 取其主年級）
+- `D`（難度）：`F`=foundation、`C`=competition
+- `serial`：3 碼流水號，與 `id` 尾碼相同
+
+範例：
+
+- `AR-G5-F-012` = 算術 · 5 年級 · 基礎 · 第 12 題
+- `GE-G3-C-004` = 幾何 · 3 年級 · 競賽 · 第 4 題
+- `LO-G6-F-008` = 邏輯 · 6 年級 · 基礎 · 第 8 題
+- `MX-G6-F-001` = 混合（袋鼠）· 6 年級 · 基礎 · 第 1 題
+
+規則：
+
+- 顯示碼是 `id` 的純函數（由 `topicCode` / `levelStage` / `challengeTier` / serial 推導），與 `id` 一對一，唯一性等同 `id`。
+- **優先由 app 即時推導，不必存進每題 JSON**（避免資料重複與漂移）；若確定要存成欄位，用 `displayCode`，並以 `id` 為單一真實來源、由 id 產生。
+- 推導參考（Dart getter 概念）：`"${{arithmetic:'AR',geometry:'GE',logic:'LO',mixed:'MX'}[topicCode]}-G${levelStage.replace('grade','')}-${challengeTier=='competition'?'C':'F'}-$serial"`
+
 ## Pack Shape
 
 Each pack file should contain one consistent metadata block and a list of
