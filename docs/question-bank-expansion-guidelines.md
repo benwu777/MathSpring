@@ -33,7 +33,15 @@
 
 1. 官方公開競賽題庫，用來抽取題型、難度、語氣、常見陷阱
 2. 官方題的安全改寫版
-3. 依既有模板系統擴寫的 olympiad-style 新題
+3. 依既有題型框架手工設計的 olympiad-style 原創新題
+
+補充原則：
+
+- 可以參考官方公開題庫的題型結構，但最終收錄到 app 的題目必須是原創成品
+- 不可把一題官方題和另一題官方題的條件或數字「混搭」後當成新題
+- 不可用同一骨架大量換數字生題
+- 不可把官方題稍微改句子、改數字、改角色名稱後，就視為安全可收錄成品
+- `template` 只能用來分類、校稿與檢查難度，不能直接當成 shipping 題目的生成器
 
 目前建議優先參考的來源：
 
@@ -58,6 +66,7 @@
 
 - 不是一般教科書練習題，而是有奧數型推理成分
 - 有唯一明確答案
+- 題目本身必須具有獨特性，不能只是既有題的弱變形
 - 題幹敘述直白，不使用模糊代稱或不必要包裝語
 - 有完整解題步驟，不只給答案
 - 能明確歸入既有 `topic` 與 `subtopic`
@@ -71,14 +80,16 @@
 - 和既有題只有換數字、沒有新推理差異
 - 用詞不自然，像是機器直接生成的題
 - 超出國小奧數常見認知範圍太多
+- 雖然可解，但和正式競賽題相比明顯更像一般學校數學題
 
 ## 難度分層規則
 
-目前題目 `difficulty` 使用三層：
+phase 1 正式採用**兩層**難度（`difficulty` 與 pack 的 `challengeTier` 都用這組值）：
 
 - `foundation`
-- `advanced`
 - `competition`
+
+不使用 `advanced`。舊文件曾出現的三層制（foundation / advanced / competition）已作廢，不要再新增 `advanced` 題。
 
 判定原則：
 
@@ -89,22 +100,18 @@
 - 幾乎沒有陷阱條件
 - 適合建立題型基礎
 
-### advanced
-
-- 2 到 3 個主要推理步驟
-- 題目有轉換或隱含條件
-- 比 `foundation` 更像正式競賽中段題
-
 ### competition
 
-- 3 到 4 個主要推理步驟
+- 2 到 4 個主要推理步驟
+- 與同 `subtopic` 的 foundation 題屬同一題型家族，但更難
 - 有明顯結構轉換、分類討論、反推、不變量、容斥、因數結構或較強幾何觀察
 - 接近真實競賽卷較後段題
 
 注意：
 
 - 難度提升不能只是數字變大
-- 同一 `subtopic` 下應盡量形成基礎版與競賽版的梯度
+- 同一 `subtopic` 下應盡量形成 foundation 版與 competition 版的梯度
+- 目前題庫 247 題全為 `foundation`；`competition` 層尚未有題，補 competition 題時務必與同題型的 foundation 版形成真實難度差，而非換大數字
 
 ## 類別與子分類規則
 
@@ -135,19 +142,23 @@
 - 題幹只換數字，推理骨架完全相同
 - 圖形只換尺寸，核心結論相同
 - 選項不同，但解法與陷阱結構相同
+- 只是把同一模板 family 平移到另一年級，沒有新增新的推理轉折
+- 平均數、比例、餘數、逆推等題型若僅更換數值規模，也視為重複
 
 視為可共存的情況：
 
 - 同一模板 family，但難度層不同
 - 同一主題，但解題核心不同
 - 同一題型，卻引入新的結構條件或錯誤誘因
+- 同一能力目標，但推理路徑明顯不同
 
 實務流程：
 
 1. 先找相同 `topic + subtopic`
 2. 再比對解法骨架
-3. 若只是數字換皮，不新增
-4. 若是同型進階版，可新增並標更高難度
+3. 再比對是否只是同一能力模板的弱變形
+4. 若只是數字換皮，不新增
+5. 若是同型進階版，必須能明確指出新增的推理轉折後才可新增
 
 ## 新題處理流程
 
@@ -165,10 +176,52 @@
    - 直接收官方題
    - 改寫成 app 版
    - 不收
-5. 補齊 JSON 欄位
-6. 若有圖，確認 renderer 支援
-7. 更新 `manifest.json`
-8. 跑題庫解析與 widget 測試
+5. 確認成品是否為原創且不屬於模板弱變形
+6. 做一次「奧數題複審」
+7. 複審不合格就淘汰或重寫，不得因為可解或欄位完整而放行
+8. 補齊 JSON 欄位
+9. 若有圖，確認 renderer 支援
+10. 更新 `manifest.json`
+11. 跑題庫解析與 widget 測試
+
+## 奧數題複審規則
+
+每一題在完成初稿後，必須再做一次獨立複審，確認它不是「一般數學題偽裝成奧數題」。
+
+複審至少檢查以下五點：
+
+1. 和公開正式競賽題相比，這題是否仍保有競賽感與 problem solving 結構。
+2. 是否至少存在一個真正的推理轉折，而不是單步直算。
+3. 是否避免裸題：
+   - 裸和差
+   - 裸平均
+   - 裸連加
+   - 裸逆運算
+   - 裸周長或面積代公式
+4. 是否不是只換數字、換名詞、換情境包裝的模板弱變形。
+5. 是否符合對應年級或競賽級別常見的思考深度。
+
+若任一題未通過上述檢查：
+
+- 不得標記為完成
+- 不得寫入 shipping pack
+- 必須重寫或淘汰
+
+## 模板使用邊界
+
+`olympiad-template-spec.md` 與 `olympiad-template-registry.md` 的用途是：
+
+- 幫題目分類到正確 family
+- 幫內容編輯者校對難度與能力目標
+- 幫審稿時確認題目是否仍保有奧數結構
+
+它們**不是**：
+
+- 題目量產器
+- 只換數字的出題腳本依據
+- 可直接對不同年級複製貼上的生題模版
+
+若一題能被描述成「只是某模板的另一組數字」，那題通常不應上架。
 
 ## JSON 必備欄位
 
@@ -192,6 +245,30 @@
 
 - `options`
 - `inputConstraints`
+
+## answerMode 規則（phase 1 硬規則）
+
+phase 1 **只允許**兩種 `answerMode`，不得新增其他型別：
+
+- `multiple_choice`
+- `integer_input`
+
+明確禁止（後續模型不得自行擴充）：
+
+- 分數輸入（fraction input）
+- 小數輸入（decimal input）
+- 自由文字輸入（free-response text）
+
+若一題的自然答案是分數或小數，必須改寫成整數作答（例如問「幾毫升」而非「幾公升」），或改成選擇題；不可為它發明新的 answerMode。
+
+## schema 欄位必填/可省規則
+
+- `figure`：**每題都必須有** `figure` 欄位。無圖題填 `{"type":"custom","kind":"none","params":{}}`；有圖題 `kind` 必須是 renderer 實際支援的值（目前 `shape_diagram` / `coordinate_plane`），且 `params` 需符合該 kind 的 schema。renderer 畫不出的圖（組合圖、切割線、角度器、一筆畫等）一律 `kind:none`，不可硬塞畫不出的參數。
+- `options`：**只有** `multiple_choice` 有；固定 4 個選項 A/B/C/D，四語系齊全，選項互不重複，`correctAnswer.value` 必須指向其中一個 key。`integer_input` 題不得出現 `options`。
+- `inputConstraints`：**只有** `integer_input` 有，必填 `allowNegative`（bool）與 `maxDigits`（int）。`multiple_choice` 題不得出現 `inputConstraints`。
+- `correctAnswer`：`multiple_choice` 用 `{"type":"choice","value":"<A-D>"}`；`integer_input` 用 `{"type":"integer","value":"<字串數字>"}`。其值必須與 `answer` 文字、`solutionSteps` 結論三者一致。
+- `source`：每題必填；改寫題用 `rewritten_olympiad_style`，官方參考題用 `official_reference`（詳見下方 source 規則）。
+- `solutionSteps`：四語系陣列長度必須一致（每個語言步數相同）。
 
 ## source 填寫規則
 
@@ -267,19 +344,53 @@
 若題目明顯過難：
 
 - 不要硬塞進 foundation pack
-- 可放到同 stage 的 `advanced` 或 `competition` 題
+- 可放到同 stage 的 `competition` 題（兩層制唯一的加難層）
 
-## 驗證清單
+## 上架驗收 checklist（每次補題後逐項核對）
 
-每次補題後至少確認：
+每一題、每一次補題後，必須逐項打勾；任一項不過即不得寫入 shipping pack。
 
-- JSON 可正常 parse
-- `manifest.questionCount` 與實際題數一致
-- 每題 `source` 存在
-- 每題至少有繁中與英文，正式收錄時補齊四語
-- 圖形題能正常 render
-- 同題型沒有無意義重複
-- 難度標記合理
+結構與 schema：
+
+- [ ] JSON 可正常 parse
+- [ ] `id` 唯一、且符合 `<topicCode>_<levelStage>_<challengeTier>_<serial>` 命名
+- [ ] `topic`/`topicCode` 屬四類之一（arithmetic/geometry/logic/mixed）
+- [ ] `difficulty` 與 `challengeTier` 屬兩層之一（foundation/competition）
+- [ ] `subtopic` 屬 registry 允許集合（見 `question-bank-subtopic-registry.md`）
+- [ ] `answerMode` 為 `multiple_choice` 或 `integer_input`（無其他型別）
+
+四語系：
+
+- [ ] `prompt` / `answer` / `solutionSteps`（＋ `options` 若有）四語系齊全（zh-Hant/zh-Hans/en/ja）
+- [ ] `solutionSteps` 四語系陣列長度一致
+- [ ] 翻譯保留數學條件精確性，非僅語感翻譯
+
+答案一致性：
+
+- [ ] `correctAnswer` 與 `answer` 文字、`solutionSteps` 結論三者一致
+- [ ] 已獨立重算/窮舉驗證答案正確（不只信任初稿）
+- [ ] `multiple_choice`：恰好一個正解、四選項不重複、`correctAnswer.value` 指向存在的 key
+- [ ] `integer_input`：`inputConstraints` 有 `allowNegative` 與 `maxDigits`，且無 `options`
+
+figure：
+
+- [ ] 無圖題填 `kind:none`；有圖題 `kind` 為 renderer 支援值且 `params` 合法（座標在畫布範圍內、shape 為支援形狀）
+- [ ] 圖與題意相符（圖是解題必要資訊，非裝飾），renderer 能穩定 render
+
+source：
+
+- [ ] 每題 `source` 存在且完整；改寫題 `rewritten_olympiad_style`、官方參考題 `official_reference`
+- [ ] 未把官方題原文照抄進 app（除非 rightsStatus 已 cleared）
+
+去重與奧數品質：
+
+- [ ] 已對同 `topic + subtopic` 做去重比對，非既有題的換數字弱變形
+- [ ] 已通過「奧數題複審」五點檢查（見下節），非一般學校數學題偽裝
+
+pack 與測試：
+
+- [ ] `manifest.questionCount` 與實際題數一致
+- [ ] 通過題庫解析與 widget 測試
 
 ## 推薦工作方式
 

@@ -20,14 +20,29 @@ Primary level rules:
 
 ## Major Topics
 
-- `算術`
-- `數論`
-- `代數`
-- `幾何`
-- `組合`
-- `邏輯`
+Phase 1 ships **four** top-level topics (these are the only `topicCode` values and
+the only pack folders):
 
-## Subtopics
+| `topicCode`  | display   |
+| ------------ | --------- |
+| `arithmetic` | 算術      |
+| `geometry`   | 幾何      |
+| `logic`      | 邏輯      |
+| `mixed`      | 混合      |
+
+The six mathematical **skill families** below (算術 / 數論 / 代數 / 幾何 / 組合 /
+邏輯) are a classification layer for subtopics only. They map onto the four shipped
+topics — they are NOT separate topics or folders:
+
+- 算術、數論 → `arithmetic`（跨家族競賽題可放 `mixed`）
+- 代數、組合 → `mixed`（純推理計數的組合題可放 `logic`）
+- 幾何 → `geometry`
+- 邏輯 → `logic`
+
+The canonical allowed `subtopic` list per shipped topic is maintained in
+`docs/question-bank-subtopic-registry.md`.
+
+## Subtopic Skill Families (classification layer)
 
 ### 算術
 
@@ -104,11 +119,18 @@ assets/questions/
   arithmetic/
     grade3_foundation.arithmetic.v1.json
     grade4_foundation.arithmetic.v1.json
-  number_theory/
-    grade4_foundation.number_theory.v1.json
   geometry/
     grade4_foundation.geometry.v1.json
+  logic/
+    grade4_foundation.logic.v1.json
+  mixed/
+    kangaroo56_foundation.mixed.v1.json
 ```
+
+Only the four shipped topic folders exist (`arithmetic`, `geometry`, `logic`,
+`mixed`). Do not create `number_theory/`, `algebra/`, or `combinatorics/`
+folders in phase 1 — those skill families live as subtopics under the four
+topics above.
 
 ## File Naming Rule
 

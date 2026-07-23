@@ -2,14 +2,20 @@
 
 ## Purpose
 
-This document defines the first formal olympiad-question generation framework
+This document defines the first formal olympiad-question authoring framework
 for MathSpring. It exists to replace low-quality free-form question writing with
-a template-driven system that is:
+a template-guided review system that is:
 
 - closer to real olympiad problem structure
 - consistent with the current app schema
 - easier to validate before shipping
 - extensible toward future official-source ingestion
+
+Important boundary:
+
+- templates are for classification, validation, and quality review
+- templates are not a license to mass-produce shipping questions by swapping numbers
+- every shipped question must still be an original standalone problem
 
 Current date reference for this spec: July 19, 2026.
 
@@ -18,9 +24,9 @@ Current date reference for this spec: July 19, 2026.
 Phase 1 covers:
 
 - elementary learners only
-- six major topics
-- two difficulty layers
-- two answer modes only
+- four shipped topics (`arithmetic`, `geometry`, `logic`, `mixed`)
+- two difficulty layers (`foundation`, `competition`)
+- two answer modes only (`multiple_choice`, `integer_input`)
 - JSON-first integration with the current bundled question bank
 
 Phase 1 does not cover:
@@ -33,7 +39,7 @@ Phase 1 does not cover:
 
 ## Current Project Schema Mapping
 
-All template output must map directly to the current question schema already
+All approved question output must map directly to the current question schema already
 used by the app:
 
 - `topic`
@@ -55,17 +61,33 @@ No parallel schema should be introduced.
 
 ## Topic Set
 
-Phase 1 uses six major topics:
+Phase 1 ships **four** top-level `topicCode` values (these are the only pack
+folders and the only allowed `topic`/`topicCode` values in shipped questions):
 
 - `arithmetic`
-- `number_theory`
-- `algebra`
 - `geometry`
-- `combinatorics`
 - `logic`
+- `mixed`
 
-Display names may remain localized in the app, but template definitions should
-use the stable internal `topicCode`.
+Six mathematical **skill families** are still used as a classification layer for
+templates and subtopics, but they are mapped onto the four shipped topicCodes —
+they are NOT separate top-level topics or pack folders:
+
+| skill family    | shipped `topicCode` |
+| --------------- | ------------------- |
+| arithmetic      | `arithmetic`        |
+| number theory   | `arithmetic` (or `mixed` for cross-family competition items) |
+| algebra         | `mixed` (or `arithmetic` when it is a plain word-relation) |
+| geometry        | `geometry`          |
+| combinatorics   | `mixed` (or `logic` for pure reasoning-count items) |
+| logic           | `logic`             |
+
+Cross-family, competition-style items (e.g. Math-Kangaroo mixed sets) ship under
+`topicCode = mixed`; each such question still records its specific skill family in
+its `subtopic`.
+
+Display names may remain localized in the app, but template definitions and
+shipped questions must use the stable internal `topicCode` from the four above.
 
 ## Difficulty Layers
 
@@ -117,17 +139,42 @@ Phase 1 supports only:
 
 The first production batch should define:
 
-- `6 topics`
-- `3 core template families per topic`
+- `6 skill families`
+- `3 core template families per skill family`
 - `2 difficulty layers per family`
 
 Total:
 
 - `36 core templates`
 
-This batch is intended to establish quality, not maximize question count.
+The skill families are the classification layer above; every resulting template
+still maps onto one of the four shipped topicCodes. This batch is intended to
+establish quality, not maximize question count.
+
+## Template Usage Boundary
+
+MathSpring templates are intentionally narrow. They may be used to:
+
+- identify the intended olympiad skill
+- define acceptable difficulty layering
+- validate whether a new question fits a known family
+
+They must not be used to:
+
+- generate large batches of near-duplicate shipping questions
+- justify cross-grade copies with only larger numbers
+- combine fragments of multiple official problems into one blended item
+
+If two questions differ mainly in numeric surface values while preserving the
+same reasoning path, they should be treated as the same template instance and
+normally only one of them should ship.
 
 ## Core Template Matrix
+
+The headings below are the six **skill families** (the classification layer), not
+shipped topics. Each maps onto one of the four shipped topicCodes per the Topic
+Set table (number-theory & plain algebra → `arithmetic`; combinatorics & mixed
+algebra → `mixed`/`logic`; geometry → `geometry`; logic → `logic`).
 
 ### Arithmetic
 
@@ -358,6 +405,7 @@ Every generated question should conceptually move through three states:
 - passed validation
 - manually sampled or reviewed
 - accepted for inclusion in bundled packs
+- passed a final olympiad-character review, not just structural correctness
 
 ## Quality Gate
 
@@ -371,6 +419,30 @@ true:
 - the reasoning depth matches the intended tier
 - the chosen answer mode is appropriate
 - its figure, if any, is consistent with the text
+- it still reads like an olympiad problem when compared against real contest-style questions
+
+## Final Olympiad Review Gate
+
+Before a question becomes shipping-ready, it must pass one more manual review
+focused specifically on olympiad character.
+
+This review is separate from:
+
+- schema validity
+- answer correctness
+- solution consistency
+- figure-field completeness
+
+The reviewer must reject the item if it is mainly:
+
+- a bare inverse-operation exercise
+- a bare sum-and-difference exercise
+- a bare average exercise
+- a bare perimeter or area plug-in exercise
+- a thin numeric rewrite of an existing template instance
+
+Passing this gate requires that the problem still feels like an elementary
+contest problem, not merely a correct school-math exercise.
 
 ## Template Output Expectations by Topic
 
