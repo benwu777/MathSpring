@@ -82,36 +82,19 @@
 - 超出國小奧數常見認知範圍太多
 - 雖然可解，但和正式競賽題相比明顯更像一般學校數學題
 
-## 難度分層規則
+## 難度規則（phase 1：不分難度層）
 
-phase 1 正式採用**兩層**難度（`difficulty` 與 pack 的 `challengeTier` 都用這組值）：
+phase 1 **只有一個維度來表示難易：年級（`levelStage`，grade1–grade6）**。不設獨立的難度分層。
 
-- `foundation`
-- `competition`
+- `difficulty` 與 `challengeTier` 兩個欄位**固定填 `foundation`**，作為 schema 佔位，不用來區分難易，也不得填 `advanced` 或 `competition`。
+- 廢除舊文件的難度分層制（不論兩層或三層）。不要再新增 advanced / competition 題，也不要用這兩個值。
+- 難度由「年級」決定：同一年級內的題目視為同一池，不再細分基礎/進階/競賽。
 
-不使用 `advanced`。舊文件曾出現的三層制（foundation / advanced / competition）已作廢，不要再新增 `advanced` 題。
+判定原則（以年級為準）：
 
-判定原則：
-
-### foundation
-
-- 1 到 2 個主要推理步驟
-- 題幹短
-- 幾乎沒有陷阱條件
-- 適合建立題型基礎
-
-### competition
-
-- 2 到 4 個主要推理步驟
-- 與同 `subtopic` 的 foundation 題屬同一題型家族，但更難
-- 有明顯結構轉換、分類討論、反推、不變量、容斥、因數結構或較強幾何觀察
-- 接近真實競賽卷較後段題
-
-注意：
-
-- 難度提升不能只是數字變大
-- 同一 `subtopic` 下應盡量形成 foundation 版與 competition 版的梯度
-- 目前題庫 247 題全為 `foundation`；`competition` 層尚未有題，補 competition 題時務必與同題型的 foundation 版形成真實難度差，而非換大數字
+- 題目難度須貼齊該 `levelStage`（見「年級與競賽級別規則」）。
+- 過難或過易都算不符：明顯超出該年級認知的題不要收；低於該年級兩級以上的裸題也不要收。
+- 難度提升不能只是數字變大；但也不要為了「更難」而超出年級範圍。
 
 ## 類別與子分類規則
 
@@ -343,8 +326,8 @@ phase 1 **只允許**兩種 `answerMode`，不得新增其他型別：
 
 若題目明顯過難：
 
-- 不要硬塞進 foundation pack
-- 可放到同 stage 的 `competition` 題（兩層制唯一的加難層）
+- 不要硬塞進該年級 pack
+- 改放到更高年級的 pack，或直接不收；不要用難度層來容納超綱題
 
 ## 上架驗收 checklist（每次補題後逐項核對）
 
@@ -353,9 +336,9 @@ phase 1 **只允許**兩種 `answerMode`，不得新增其他型別：
 結構與 schema：
 
 - [ ] JSON 可正常 parse
-- [ ] `id` 唯一、且符合 `<topicCode>_<levelStage>_<challengeTier>_<serial>` 命名
+- [ ] `id` 唯一、且符合 `<topicCode>_<levelStage>_<challengeTier>_<serial>` 命名（`challengeTier` 固定為 `foundation`）
 - [ ] `topic`/`topicCode` 屬四類之一（arithmetic/geometry/logic/mixed）
-- [ ] `difficulty` 與 `challengeTier` 屬兩層之一（foundation/competition）
+- [ ] `difficulty` 與 `challengeTier` 皆固定為 `foundation`（不分難度層；不得用 advanced/competition）
 - [ ] `subtopic` 屬 registry 允許集合（見 `question-bank-subtopic-registry.md`）
 - [ ] `answerMode` 為 `multiple_choice` 或 `integer_input`（無其他型別）
 

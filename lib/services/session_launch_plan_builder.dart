@@ -1,6 +1,9 @@
+import 'dart:math' as math;
+
 import 'package:mathspring/competition_profiles.dart';
 import 'package:mathspring/data/bundled/bundled_question_bank_repository.dart';
 import 'package:mathspring/models/learner_profile.dart';
+import 'package:mathspring/models/question.dart';
 
 class SessionLaunchPlanBuilder {
   static List<BundledQuestionPackInfo> pickEligiblePacks(
@@ -75,5 +78,18 @@ class SessionLaunchPlanBuilder {
       challengeTier: 'foundation',
       questionCount: mergedQuestionCount,
     );
+  }
+
+  static List<Question> randomizeQuestionOrderForSession(
+    List<Question> questions, {
+    int? seed,
+  }) {
+    if (questions.length < 2) {
+      return List<Question>.from(questions);
+    }
+
+    final List<Question> shuffled = List<Question>.from(questions);
+    shuffled.shuffle(seed == null ? math.Random() : math.Random(seed));
+    return shuffled;
   }
 }

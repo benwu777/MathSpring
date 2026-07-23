@@ -40,7 +40,7 @@
 9. 不要假設官方題可以任意整題照抄進 app。
 10. 不要因為題目數學上可解，就誤判它已符合奧數題標準。
 11. 不要使用 `multiple_choice` 與 `integer_input` 以外的 `answerMode`（禁止分數輸入、小數輸入、自由文字輸入）。
-12. 不要使用四類主題（arithmetic/geometry/logic/mixed）以外的 `topicCode`，也不要新增 `advanced` 難度層。
+12. 不要使用四類主題（arithmetic/geometry/logic/mixed）以外的 `topicCode`；不要使用難度分層，`difficulty`/`challengeTier` 一律 `foundation`。
 
 ## 題目標準
 
@@ -66,12 +66,11 @@
 
 ## 難度判定
 
-phase 1 只有**兩層**難度（不使用 `advanced`）：
+phase 1 **不分難度層**，難易只由**年級（`levelStage`）**決定。
 
-- `foundation`：1 到 2 個主要推理步驟，作為題型入門，但仍須帶有奧數推理感
-- `competition`：2 到 4 個主要推理步驟，與同題型 foundation 版屬同一家族但更難，接近正式競賽中後段題
-
-難度提升不能只是把數字變大。`difficulty` 與 `challengeTier` 都只能填 `foundation` 或 `competition`。
+- `difficulty` 與 `challengeTier` 一律固定填 `foundation`（schema 佔位，不區分難易），不得填 `advanced` 或 `competition`。
+- 題目難度貼齊該年級即可：仍要有奧數推理感，但不要超出該年級認知範圍。
+- 難度提升不能只是把數字變大，也不要用「更難的層」來裝超綱題。
 
 ## 類別規則
 

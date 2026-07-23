@@ -9,6 +9,11 @@
 > geometry → `geometry`; logic → `logic`. A `templateId` may keep its skill-family
 > prefix, but the generated question's `topicCode` must be one of the four.
 > See `olympiad-template-spec.md` (Topic Set) and `question-bank-taxonomy.md`.
+>
+> **Difficulty note.** The `foundation`/`competition` template pairs below are a
+> **design-reference catalog**. Phase-1 **shipped questions** use a single tier
+> (all `foundation`); grade (`levelStage`) is the only difficulty axis. Do not
+> ship `advanced` or `competition` `difficulty` values.
 
 ## Summary
 

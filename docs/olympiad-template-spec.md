@@ -25,7 +25,7 @@ Phase 1 covers:
 
 - elementary learners only
 - four shipped topics (`arithmetic`, `geometry`, `logic`, `mixed`)
-- two difficulty layers (`foundation`, `competition`)
+- a single difficulty tier — shipped questions do NOT use difficulty layering; `difficulty`/`challengeTier` are fixed at `foundation`, and grade (`levelStage`) is the only difficulty axis
 - two answer modes only (`multiple_choice`, `integer_input`)
 - JSON-first integration with the current bundled question bank
 
@@ -89,31 +89,23 @@ its `subtopic`.
 Display names may remain localized in the app, but template definitions and
 shipped questions must use the stable internal `topicCode` from the four above.
 
-## Difficulty Layers
+## Difficulty (single tier in phase 1)
 
-Each template must exist in two layers:
+Phase 1 does **not** ship a difficulty layering. Difficulty is expressed solely
+through **grade** (`levelStage`, grade1–grade6). Every shipped question keeps
+`difficulty` and `challengeTier` fixed at `foundation`; `advanced` and
+`competition` are not used.
 
-- `foundation`
-- `competition`
+Each shipped question should:
 
-### Foundation
-
-Foundation questions should:
-
-- teach the pattern of the problem type
-- require about 1 to 2 major reasoning turns
-- avoid excessive distractor conditions
-- keep numeric scale age-appropriate
-- remain olympiad-style rather than textbook drill
-
-### Competition
-
-Competition questions should:
-
-- use the same underlying problem family as the foundation template
-- require about 2 to 4 major reasoning turns
-- include transformation, hidden structure, or controlled trap conditions
+- fit its grade's cognitive range
+- require reasoning depth appropriate for that grade (still olympiad-style, not
+  textbook drill)
+- avoid going out of grade range just to be "harder"
 - avoid becoming merely "bigger numbers"
+
+The two-layer template-pairing idea (a harder companion per family) is deferred;
+it is not part of phase-1 shipping and template records should not rely on it.
 
 ## Answer Modes
 
@@ -141,11 +133,15 @@ The first production batch should define:
 
 - `6 skill families`
 - `3 core template families per skill family`
-- `2 difficulty layers per family`
+- `2 difficulty layers per family` (design-reference only)
 
 Total:
 
 - `36 core templates`
+
+Note: the two-layer template pairs are a **design/classification catalog**.
+Phase-1 **shipped questions** use a single tier (all `foundation`) — the
+competition-tier template rows are reference material, not shipped items.
 
 The skill families are the classification layer above; every resulting template
 still maps onto one of the four shipped topicCodes. This batch is intended to

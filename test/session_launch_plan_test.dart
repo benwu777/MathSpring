@@ -1,6 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mathspring/data/bundled/bundled_question_bank_repository.dart';
 import 'package:mathspring/models/learner_profile.dart';
+import 'package:mathspring/models/question.dart';
 import 'package:mathspring/services/session_launch_plan_builder.dart';
 
 void main() {
@@ -148,5 +149,58 @@ void main() {
     expect(selected, hasLength(1));
     expect(selected.single.topicCode, 'mixed');
     expect(selected.single.path, 'assets/questions/mixed/kangaroo56_foundation.mixed.v1.json');
+  });
+
+  test('randomizes question order once per launched session', () {
+    Question buildQuestion(String id) {
+      return Question.fromJson({
+        'id': id,
+        'topic': 'geometry',
+        'difficulty': 'foundation',
+        'levelStage': 'grade4',
+        'challengeTier': 'foundation',
+        'prompt': {'en': 'Prompt $id'},
+        'answer': {'en': 'Answer $id'},
+        'solutionSteps': {
+          'en': ['Step $id'],
+        },
+        'figure': {
+          'type': 'custom',
+          'kind': 'none',
+          'params': <String, dynamic>{},
+        },
+        'answerMode': 'integer_input',
+        'correctAnswer': {
+          'type': 'integer',
+          'value': '1',
+        },
+      });
+    }
+
+    final List<Question> questions = <Question>[
+      buildQuestion('q1'),
+      buildQuestion('q2'),
+      buildQuestion('q3'),
+      buildQuestion('q4'),
+      buildQuestion('q5'),
+    ];
+
+    final List<Question> randomized =
+        SessionLaunchPlanBuilder.randomizeQuestionOrderForSession(
+      questions,
+      seed: 7,
+    );
+
+    expect(randomized.map((question) => question.id), isNot(equals([
+      'q1',
+      'q2',
+      'q3',
+      'q4',
+      'q5',
+    ])));
+    expect(
+      randomized.map((question) => question.id).toSet(),
+      equals(<String>{'q1', 'q2', 'q3', 'q4', 'q5'}),
+    );
   });
 }

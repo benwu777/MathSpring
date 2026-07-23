@@ -219,9 +219,9 @@ void main() {
     expect(manifest.packs, hasLength(19));
     expect(manifest.packs.first.topicCode, 'geometry');
     expect(manifest.packs.first.levelStage, 'grade4');
-    expect(manifest.packs.first.questionCount, 10);
+    expect(manifest.packs.first.questionCount, greaterThanOrEqualTo(10));
     expect(
-      manifest.packs.every((pack) => pack.questionCount == 10),
+      manifest.packs.every((pack) => pack.questionCount >= 10),
       isTrue,
     );
   });
@@ -233,7 +233,7 @@ void main() {
 
     final String content = await registryFile.readAsString();
     expect(content, contains('Total core templates: 36'));
-    expect(content, contains('Topics covered: 6'));
+    expect(content, contains('Skill families covered: 6'));
     expect(content, contains('Difficulty layers per family: 2'));
     expect(
       RegExp(r'^### arithmetic$', multiLine: true).hasMatch(content),
@@ -387,6 +387,15 @@ void main() {
 
     final BundledQuestionBankRepository repository = BundledQuestionBankRepository();
     final List<QuestionBank> packs = await repository.loadAllPacks();
+    final Map<String, dynamic> manifestJson = jsonDecode(
+      await rootBundle.loadString('assets/questions/manifest.json'),
+    ) as Map<String, dynamic>;
+    final BundledQuestionManifest manifest = BundledQuestionManifest.fromJson(
+      manifestJson,
+    );
+    final int expectedTotalQuestions = manifest.packs
+        .map((pack) => pack.questionCount)
+        .fold(0, (sum, count) => sum + count);
 
     expect(packs, hasLength(19));
     expect(packs.first.questions, isNotEmpty);
@@ -394,9 +403,9 @@ void main() {
     final int totalQuestions = packs
         .map((pack) => pack.questions.length)
         .fold(0, (sum, count) => sum + count);
-    expect(totalQuestions, 190);
+    expect(totalQuestions, expectedTotalQuestions);
     expect(
-      packs.every((pack) => pack.questions.length == 10),
+      packs.every((pack) => pack.questions.length >= 10),
       isTrue,
     );
     final List<QuestionBank> geometryPacks = packs
@@ -406,13 +415,17 @@ void main() {
         .toList();
     expect(geometryPacks, hasLength(6));
     expect(
-      geometryPacks.every((pack) => pack.questions.length == 10),
+      geometryPacks.every((pack) => pack.questions.length >= 10),
       isTrue,
     );
     final int totalGeometryQuestions = geometryPacks
         .map((pack) => pack.questions.length)
         .fold(0, (sum, count) => sum + count);
-    expect(totalGeometryQuestions, 60);
+    final int expectedGeometryQuestions = manifest.packs
+        .where((pack) => pack.topicCode == 'geometry')
+        .map((pack) => pack.questionCount)
+        .fold(0, (sum, count) => sum + count);
+    expect(totalGeometryQuestions, expectedGeometryQuestions);
     expect(packs.first.questions.first.figure.type, FigureType.custom);
     expect(packs.first.questions.first.answerMode, isNotNull);
     expect(packs.first.questions.first.source?.type, 'rewritten_olympiad_style');
@@ -565,10 +578,10 @@ void main() {
 
     final Question grade4CoinsQuestion =
         findQuestion(grade4Pack, 'logic_grade4_foundation_004');
-    expect(grade4CoinsQuestion.correctAnswer.value, '6');
+    expect(grade4CoinsQuestion.correctAnswer.value, '4');
     expect(
       grade4CoinsQuestion.localizedPrompt('zh-Hant'),
-      contains('甲堆仍比乙堆多 4 枚'),
+      contains('三種顏色'),
     );
 
     final Question grade4ScheduleQuestion =
@@ -597,10 +610,10 @@ void main() {
 
     final Question grade6ArrangementQuestion =
         findQuestion(grade6Pack, 'logic_grade6_foundation_001');
-    expect(grade6ArrangementQuestion.correctAnswer.value, 'E');
+    expect(grade6ArrangementQuestion.correctAnswer.value, 'A');
     expect(
       grade6ArrangementQuestion.localizedAnswer('zh-Hant'),
-      '答案是 E。',
+      '答案是 A。',
     );
 
     final Question grade6MinimalCaseQuestion =
@@ -623,7 +636,7 @@ void main() {
         findQuestion(arithmeticGrade4Pack, 'arithmetic_grade4_foundation_004');
     expect(
       arithmeticTypoQuestion.localizedPrompt('zh-Hant'),
-      '144 枝筆平均分給 12 組，每組幾枝？',
+      '有一些貼紙。若平均分給 6 人，會多 2 張；若平均分給 7 人，剛好還差 5 張。共有幾張貼紙？',
     );
   });
 
@@ -635,7 +648,7 @@ void main() {
       'assets/questions/mixed/kangaroo56_foundation.mixed.v1.json',
     );
 
-    expect(mixedPack.questions, hasLength(10));
+    expect(mixedPack.questions.length, greaterThanOrEqualTo(10));
     expect(
       mixedPack.questions.first.prompt.keys,
       containsAll(<String>['zh-Hant', 'zh-Hans', 'en', 'ja']),
@@ -650,6 +663,58 @@ void main() {
         (question) => question.solutionSteps['zh-Hant']!.length >= 2,
       ),
       isTrue,
+    );
+  });
+
+  test('phase 1 ships a single foundation tier (no difficulty layering)', () async {
+    TestWidgetsFlutterBinding.ensureInitialized();
+
+    final BundledQuestionBankRepository repository = BundledQuestionBankRepository();
+    for (final String path in <String>[
+      'assets/questions/arithmetic/grade6_foundation.arithmetic.v1.json',
+      'assets/questions/geometry/grade6_foundation.geometry.v1.json',
+      'assets/questions/logic/grade6_foundation.logic.v1.json',
+      'assets/questions/mixed/kangaroo56_foundation.mixed.v1.json',
+    ]) {
+      final QuestionBank pack = await repository.loadPack(path);
+      // Grade is the only difficulty axis in phase 1; every question is foundation.
+      expect(
+        pack.questions.map((q) => q.difficulty).toSet(),
+        <String>{'foundation'},
+        reason: '$path should not use advanced/competition tiers',
+      );
+      expect(
+        pack.questions.map((q) => q.challengeTier).toSet(),
+        <String>{'foundation'},
+        reason: '$path challengeTier must stay foundation',
+      );
+    }
+  });
+
+  test('grade6 geometry official figure questions expose direct-drawing kinds',
+      () async {
+    TestWidgetsFlutterBinding.ensureInitialized();
+
+    final BundledQuestionBankRepository repository = BundledQuestionBankRepository();
+    final QuestionBank geometryPack = await repository.loadPack(
+      'assets/questions/geometry/grade6_foundation.geometry.v1.json',
+    );
+    Question findQuestion(QuestionBank pack, String id) {
+      return pack.questions.firstWhere((question) => question.id == id);
+    }
+
+    final Question circleSquareQuestion =
+        findQuestion(geometryPack, 'geometry_grade6_foundation_013');
+    final Question circleRegionQuestion =
+        findQuestion(geometryPack, 'geometry_grade6_foundation_014');
+
+    expect(circleSquareQuestion.figure.kind, 'shape_diagram');
+    expect(circleSquareQuestion.source?.type, 'official_reference');
+    expect(circleRegionQuestion.figure.kind, 'circle_quadrants_point');
+    expect(circleRegionQuestion.correctAnswer.value, '23');
+    expect(
+      circleRegionQuestion.localizedPrompt('zh-Hant'),
+      contains('三部分的面積為 12、15、20'),
     );
   });
 
@@ -700,7 +765,7 @@ void main() {
       'assets/questions/arithmetic/grade4_foundation.arithmetic.v1.json',
     );
 
-    expect(grade4Pack.questions.length, 10);
+    expect(grade4Pack.questions.length, greaterThanOrEqualTo(10));
     expect(
       grade4Pack.questions.first.prompt.keys,
       containsAll(<String>['zh-Hant', 'zh-Hans', 'en', 'ja']),
@@ -724,7 +789,7 @@ void main() {
       'assets/questions/arithmetic/grade3_foundation.arithmetic.v1.json',
     );
 
-    expect(grade3Pack.questions.length, 10);
+    expect(grade3Pack.questions.length, greaterThanOrEqualTo(10));
     expect(
       grade3Pack.questions.first.prompt.keys,
       containsAll(<String>['zh-Hant', 'zh-Hans', 'en', 'ja']),
@@ -748,7 +813,7 @@ void main() {
       'assets/questions/arithmetic/grade1_foundation.arithmetic.v1.json',
     );
 
-    expect(grade1Pack.questions.length, 10);
+    expect(grade1Pack.questions.length, greaterThanOrEqualTo(10));
     expect(
       grade1Pack.questions.first.prompt.keys,
       containsAll(<String>['zh-Hant', 'zh-Hans', 'en', 'ja']),
@@ -772,7 +837,7 @@ void main() {
       'assets/questions/arithmetic/grade2_foundation.arithmetic.v1.json',
     );
 
-    expect(grade2Pack.questions.length, 10);
+    expect(grade2Pack.questions.length, greaterThanOrEqualTo(10));
     expect(
       grade2Pack.questions.first.prompt.keys,
       containsAll(<String>['zh-Hant', 'zh-Hans', 'en', 'ja']),
@@ -796,7 +861,7 @@ void main() {
       'assets/questions/arithmetic/grade5_foundation.arithmetic.v1.json',
     );
 
-    expect(grade5Pack.questions.length, 10);
+    expect(grade5Pack.questions.length, greaterThanOrEqualTo(10));
     expect(
       grade5Pack.questions.first.prompt.keys,
       containsAll(<String>['zh-Hant', 'zh-Hans', 'en', 'ja']),
@@ -820,7 +885,7 @@ void main() {
       'assets/questions/arithmetic/grade6_foundation.arithmetic.v1.json',
     );
 
-    expect(grade6Pack.questions.length, 10);
+    expect(grade6Pack.questions.length, greaterThanOrEqualTo(10));
     expect(
       grade6Pack.questions.first.prompt.keys,
       containsAll(<String>['zh-Hant', 'zh-Hans', 'en', 'ja']),
@@ -852,7 +917,7 @@ void main() {
     for (final String path in logicPaths) {
       final QuestionBank pack = await repository.loadPack(path);
 
-      expect(pack.questions.length, 10, reason: path);
+      expect(pack.questions.length, greaterThanOrEqualTo(10), reason: path);
       expect(
         pack.questions.first.prompt.keys,
         containsAll(<String>['zh-Hant', 'zh-Hans', 'en', 'ja']),
@@ -867,6 +932,57 @@ void main() {
         pack.questions.first.source?.type,
         'rewritten_olympiad_style',
         reason: path,
+      );
+    }
+  });
+
+  test('logic packs provide expanded practice depth across grades', () async {
+    TestWidgetsFlutterBinding.ensureInitialized();
+
+    const Map<String, int> minimumCounts = <String, int>{
+      'assets/questions/logic/grade1_foundation.logic.v1.json': 22,
+      'assets/questions/logic/grade2_foundation.logic.v1.json': 22,
+      'assets/questions/logic/grade3_foundation.logic.v1.json': 24,
+      'assets/questions/logic/grade4_foundation.logic.v1.json': 22,
+      'assets/questions/logic/grade5_foundation.logic.v1.json': 22,
+      'assets/questions/logic/grade6_foundation.logic.v1.json': 25,
+    };
+
+    for (final MapEntry<String, int> entry in minimumCounts.entries) {
+      final String rawJson = await rootBundle.loadString(entry.key);
+      final Map<String, dynamic> decoded = jsonDecode(rawJson) as Map<String, dynamic>;
+      final QuestionBank bank = QuestionBank.fromJson(decoded);
+
+      expect(
+        bank.questions.length,
+        greaterThanOrEqualTo(entry.value),
+        reason: '${entry.key} should contain at least ${entry.value} logic questions',
+      );
+    }
+  });
+
+  test('arithmetic packs provide expanded olympiad-style depth across grades',
+      () async {
+    TestWidgetsFlutterBinding.ensureInitialized();
+
+    const Map<String, int> minimumCounts = <String, int>{
+      'assets/questions/arithmetic/grade1_foundation.arithmetic.v1.json': 32,
+      'assets/questions/arithmetic/grade2_foundation.arithmetic.v1.json': 32,
+      'assets/questions/arithmetic/grade3_foundation.arithmetic.v1.json': 35,
+      'assets/questions/arithmetic/grade4_foundation.arithmetic.v1.json': 32,
+      'assets/questions/arithmetic/grade5_foundation.arithmetic.v1.json': 32,
+      'assets/questions/arithmetic/grade6_foundation.arithmetic.v1.json': 36,
+    };
+
+    for (final MapEntry<String, int> entry in minimumCounts.entries) {
+      final String rawJson = await rootBundle.loadString(entry.key);
+      final Map<String, dynamic> decoded = jsonDecode(rawJson) as Map<String, dynamic>;
+      final QuestionBank bank = QuestionBank.fromJson(decoded);
+
+      expect(
+        bank.questions.length,
+        greaterThanOrEqualTo(entry.value),
+        reason: '${entry.key} should contain at least ${entry.value} arithmetic questions',
       );
     }
   });

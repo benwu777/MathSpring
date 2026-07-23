@@ -4187,6 +4187,27 @@ class _QuestionFigureView extends StatelessWidget {
           ),
           child: const SizedBox.expand(),
         ),
+      'composite_grid_shape' => CustomPaint(
+          painter: CompositeGridShapePainter(
+            rows: _intFromDynamic(question.figure.params['rows'], fallback: 3),
+            cols: _intFromDynamic(question.figure.params['cols'], fallback: 3),
+            filledCells: _cellListFromDynamic(question.figure.params['filledCells']),
+            cellLabels: _stringMapFromDynamic(question.figure.params['cellLabels']),
+          ),
+          child: const SizedBox.expand(),
+        ),
+      'circle_quadrants_point' => CustomPaint(
+          painter: CircleQuadrantsPointPainter(
+            regionLabels: _stringMapFromDynamic(
+              question.figure.params['regionLabels'],
+            ),
+            pointLabel:
+                question.figure.params['pointLabel'] as String? ?? 'P',
+            shadedRegion:
+                question.figure.params['shadedRegion'] as String? ?? 'topRight',
+          ),
+          child: const SizedBox.expand(),
+        ),
       _ => null,
     };
 
@@ -4197,6 +4218,8 @@ class _QuestionFigureView extends StatelessWidget {
     final double aspectRatio = switch (kind) {
       'shape_diagram' => 1.25,
       'coordinate_plane' => 1.35,
+      'composite_grid_shape' => 1.1,
+      'circle_quadrants_point' => 1.15,
       _ => 1.55,
     };
 
@@ -4268,6 +4291,10 @@ Future<void> _openFirstEligiblePack({
   if (mergedQuestions.isEmpty) {
     return;
   }
+  final List<Question> sessionQuestions =
+      SessionLaunchPlanBuilder.randomizeQuestionOrderForSession(
+    mergedQuestions,
+  );
 
   final bundled.BundledQuestionPackInfo launchPack =
       SessionLaunchPlanBuilder.buildLaunchPack(
@@ -4281,12 +4308,12 @@ Future<void> _openFirstEligiblePack({
     _SessionLaunchMode.practice => PracticeSessionPage(
         services: services,
         pack: launchPack,
-        initialQuestions: mergedQuestions,
+        initialQuestions: sessionQuestions,
       ),
     _SessionLaunchMode.quiz => QuizSessionPage(
         services: services,
         pack: launchPack,
-        initialQuestions: mergedQuestions,
+        initialQuestions: sessionQuestions,
       ),
   };
 
@@ -4767,6 +4794,100 @@ class ShapeDiagramPainter extends CustomPainter {
   }
 }
 
+class CircleQuadrantsPointPainter extends CustomPainter {
+  const CircleQuadrantsPointPainter({
+    required this.regionLabels,
+    required this.pointLabel,
+    required this.shadedRegion,
+  });
+
+  final Map<String, String> regionLabels;
+  final String pointLabel;
+  final String shadedRegion;
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final Paint outlinePaint = Paint()
+      ..color = const Color(0xFF111827)
+      ..strokeWidth = 2.5
+      ..style = PaintingStyle.stroke;
+    final Paint connectorPaint = Paint()
+      ..color = const Color(0xFF334155)
+      ..strokeWidth = 2
+      ..style = PaintingStyle.stroke;
+    final Paint fillPaint = Paint()
+      ..color = const Color(0xFFE0E7FF)
+      ..style = PaintingStyle.fill;
+    final Paint pointPaint = Paint()
+      ..color = const Color(0xFFDC2626)
+      ..style = PaintingStyle.fill;
+
+    final Offset center = Offset(size.width / 2, size.height / 2);
+    final double radius = math.min(size.width, size.height) * 0.34;
+    final Offset top = Offset(center.dx, center.dy - radius);
+    final Offset right = Offset(center.dx + radius, center.dy);
+    final Offset bottom = Offset(center.dx, center.dy + radius);
+    final Offset left = Offset(center.dx - radius, center.dy);
+    final Offset pointP = Offset(center.dx - radius * 0.18, center.dy + radius * 0.1);
+
+    if (shadedRegion == 'topRight') {
+      final Path shadedPath = Path()
+        ..moveTo(top.dx, top.dy)
+        ..arcTo(
+          Rect.fromCircle(center: center, radius: radius),
+          -math.pi / 2,
+          math.pi / 2,
+          false,
+        )
+        ..lineTo(pointP.dx, pointP.dy)
+        ..close();
+      canvas.drawPath(shadedPath, fillPaint);
+    }
+
+    canvas.drawCircle(center, radius, outlinePaint);
+    canvas.drawLine(top, pointP, connectorPaint);
+    canvas.drawLine(right, pointP, connectorPaint);
+    canvas.drawLine(bottom, pointP, connectorPaint);
+    canvas.drawLine(left, pointP, connectorPaint);
+
+    canvas.drawCircle(pointP, 4.5, pointPaint);
+
+    _paintText(canvas, 'A', Offset(top.dx - 6, top.dy - 24));
+    _paintText(canvas, 'B', Offset(right.dx + 18, right.dy - 8));
+    _paintText(canvas, 'C', Offset(bottom.dx - 6, bottom.dy + 12));
+    _paintText(canvas, 'D', Offset(left.dx - 24, left.dy - 8));
+    _paintText(canvas, pointLabel, pointP + const Offset(-6, -22));
+
+    _paintText(
+      canvas,
+      regionLabels['topLeft'],
+      Offset(center.dx - radius * 0.34, center.dy - radius * 0.28),
+    );
+    _paintText(
+      canvas,
+      regionLabels['topRight'],
+      Offset(center.dx + radius * 0.28, center.dy - radius * 0.26),
+    );
+    _paintText(
+      canvas,
+      regionLabels['bottomLeft'],
+      Offset(center.dx - radius * 0.38, center.dy + radius * 0.3),
+    );
+    _paintText(
+      canvas,
+      regionLabels['bottomRight'],
+      Offset(center.dx + radius * 0.26, center.dy + radius * 0.3),
+    );
+  }
+
+  @override
+  bool shouldRepaint(covariant CircleQuadrantsPointPainter oldDelegate) {
+    return oldDelegate.regionLabels.toString() != regionLabels.toString() ||
+        oldDelegate.pointLabel != pointLabel ||
+        oldDelegate.shadedRegion != shadedRegion;
+  }
+}
+
 class CoordinatePlanePainter extends CustomPainter {
   const CoordinatePlanePainter({
     required this.maxX,
@@ -4862,6 +4983,96 @@ class CoordinatePlanePainter extends CustomPainter {
   }
 }
 
+class CompositeGridShapePainter extends CustomPainter {
+  const CompositeGridShapePainter({
+    required this.rows,
+    required this.cols,
+    required this.filledCells,
+    required this.cellLabels,
+  });
+
+  final int rows;
+  final int cols;
+  final List<GridCell> filledCells;
+  final Map<String, String> cellLabels;
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final Paint fillPaint = Paint()
+      ..color = const Color(0xFFE0E7FF)
+      ..style = PaintingStyle.fill;
+    final Paint emptyPaint = Paint()
+      ..color = const Color(0xFFF8FAFC)
+      ..style = PaintingStyle.fill;
+    final Paint gridPaint = Paint()
+      ..color = const Color(0xFFCBD5E1)
+      ..strokeWidth = 1.2
+      ..style = PaintingStyle.stroke;
+    final Paint outlinePaint = Paint()
+      ..color = const Color(0xFF111827)
+      ..strokeWidth = 2.6
+      ..style = PaintingStyle.stroke;
+
+    final Set<String> filledKeys = filledCells
+        .map((cell) => '${cell.row},${cell.col}')
+        .toSet();
+
+    final double cellSize = math.min(
+      (size.width * 0.72) / cols,
+      (size.height * 0.72) / rows,
+    );
+    final double gridWidth = cols * cellSize;
+    final double gridHeight = rows * cellSize;
+    final double startX = (size.width - gridWidth) / 2;
+    final double startY = (size.height - gridHeight) / 2;
+
+    for (int row = 0; row < rows; row++) {
+      for (int col = 0; col < cols; col++) {
+        final Rect cellRect = Rect.fromLTWH(
+          startX + col * cellSize,
+          startY + row * cellSize,
+          cellSize,
+          cellSize,
+        );
+        final String key = '$row,$col';
+        canvas.drawRect(cellRect, filledKeys.contains(key) ? fillPaint : emptyPaint);
+        canvas.drawRect(cellRect, gridPaint);
+        _paintText(canvas, cellLabels[key], cellRect.center);
+      }
+    }
+
+    for (final GridCell cell in filledCells) {
+      final Rect cellRect = Rect.fromLTWH(
+        startX + cell.col * cellSize,
+        startY + cell.row * cellSize,
+        cellSize,
+        cellSize,
+      );
+
+      if (!filledKeys.contains('${cell.row - 1},${cell.col}')) {
+        canvas.drawLine(cellRect.topLeft, cellRect.topRight, outlinePaint);
+      }
+      if (!filledKeys.contains('${cell.row + 1},${cell.col}')) {
+        canvas.drawLine(cellRect.bottomLeft, cellRect.bottomRight, outlinePaint);
+      }
+      if (!filledKeys.contains('${cell.row},${cell.col - 1}')) {
+        canvas.drawLine(cellRect.topLeft, cellRect.bottomLeft, outlinePaint);
+      }
+      if (!filledKeys.contains('${cell.row},${cell.col + 1}')) {
+        canvas.drawLine(cellRect.topRight, cellRect.bottomRight, outlinePaint);
+      }
+    }
+  }
+
+  @override
+  bool shouldRepaint(covariant CompositeGridShapePainter oldDelegate) {
+    return oldDelegate.rows != rows ||
+        oldDelegate.cols != cols ||
+        oldDelegate.filledCells.toString() != filledCells.toString() ||
+        oldDelegate.cellLabels.toString() != cellLabels.toString();
+  }
+}
+
 void _paintText(Canvas canvas, String? text, Offset center) {
   if (text == null || text.isEmpty) {
     return;
@@ -4881,6 +5092,27 @@ void _paintText(Canvas canvas, String? text, Offset center) {
     canvas,
     Offset(center.dx - painter.width / 2, center.dy - painter.height / 2),
   );
+}
+
+class GridCell {
+  const GridCell({required this.row, required this.col});
+
+  final int row;
+  final int col;
+
+  @override
+  String toString() => 'GridCell(row: $row, col: $col)';
+}
+
+List<GridCell> _cellListFromDynamic(dynamic value) {
+  if (value is! List) {
+    return const <GridCell>[];
+  }
+  return value.whereType<List>().map((entry) {
+    final int row = entry.isNotEmpty ? _intFromDynamic(entry[0], fallback: 0) : 0;
+    final int col = entry.length > 1 ? _intFromDynamic(entry[1], fallback: 0) : 0;
+    return GridCell(row: row, col: col);
+  }).toList();
 }
 
 Map<String, String> _stringMapFromDynamic(dynamic raw) {

@@ -290,6 +290,118 @@ void main() {
     });
   }
 
+  Question createCircleQuadrantsPointQuestion() {
+    return Question.fromJson({
+      'id': 'geometry_grade6_foundation_014',
+      'topic': 'geometry',
+      'difficulty': 'competition',
+      'levelStage': 'grade6',
+      'challengeTier': 'foundation',
+      'prompt': {
+        'zh-Hant': '如圖，圓內有一點 P，與圓周上的四等分點 A、B、C、D 相連，分成四部分，其中三部分面積為 12、15、20。陰影部分面積是多少？',
+        'en': 'In the diagram, a point P inside the circle is connected to four equally spaced points A, B, C, and D on the circle, creating four regions. Three regions have areas 12, 15, and 20. What is the shaded area?',
+      },
+      'answer': {
+        'zh-Hant': '答案是 23。',
+        'en': 'The answer is 23.',
+      },
+      'solutionSteps': {
+        'zh-Hant': [
+          '由四等分點形成的四段弓形面積彼此相等。',
+          '利用正方形中心對稱拆分，可得陰影面積 = 15 + 20 - 12 = 23。',
+        ],
+        'en': [
+          'The four circular segments cut by the quarter points are equal in area.',
+          'Using the symmetric square model, the shaded area is 15 + 20 - 12 = 23.',
+        ],
+      },
+      'figure': {
+        'type': 'custom',
+        'kind': 'circle_quadrants_point',
+        'params': {
+          'regionLabels': {
+            'topLeft': '15',
+            'bottomLeft': '20',
+            'bottomRight': '12',
+            'topRight': '?',
+          },
+          'pointLabel': 'P',
+          'shadedRegion': 'topRight',
+        },
+      },
+      'answerMode': 'integer_input',
+      'correctAnswer': {
+        'type': 'integer',
+        'value': '23',
+      },
+      'inputConstraints': {
+        'allowNegative': false,
+        'maxDigits': 2,
+      },
+    });
+  }
+
+  Question createCompositeGridShapeQuestion() {
+    return Question.fromJson({
+      'id': 'geometry_grade3_foundation_019',
+      'topic': 'geometry',
+      'difficulty': 'foundation',
+      'levelStage': 'grade3',
+      'challengeTier': 'foundation',
+      'prompt': {
+        'zh-Hant': '一個長方形的一邊向內切進一個 2×1 的缺口。新圖形的周長比原來多幾？',
+        'en':
+            'A 2×1 notch is cut inward from one side of a rectangle. By how much does the perimeter increase?',
+      },
+      'answer': {
+        'zh-Hant': '答案是 2。',
+        'en': 'The answer is 2.',
+      },
+      'solutionSteps': {
+        'zh-Hant': [
+          '原來被切掉的那一段長是 2。',
+          '新圖形多出兩條深度各 1 的邊，所以增加 1 + 1 = 2。',
+        ],
+        'en': [
+          'The removed part on the old edge has length 2.',
+          'The notch adds two new depth edges of length 1 each, so the perimeter increases by 2.',
+        ],
+      },
+      'figure': {
+        'type': 'custom',
+        'kind': 'composite_grid_shape',
+        'params': {
+          'rows': 3,
+          'cols': 4,
+          'filledCells': [
+            [0, 0],
+            [0, 1],
+            [0, 2],
+            [0, 3],
+            [1, 0],
+            [1, 3],
+            [2, 0],
+            [2, 1],
+            [2, 2],
+            [2, 3],
+          ],
+          'cellLabels': {
+            '1,1': '?',
+          },
+        },
+      },
+      'answerMode': 'integer_input',
+      'correctAnswer': {
+        'type': 'integer',
+        'value': '2',
+      },
+      'inputConstraints': {
+        'allowNegative': false,
+        'maxDigits': 1,
+      },
+    });
+  }
+
   Question createEditorialQuestion() {
     return Question.fromJson({
       'id': 'geometry_grade5_foundation_editorial_001',
@@ -694,6 +806,94 @@ void main() {
 
     expect(
       find.byKey(const ValueKey<String>('figure_coordinate_plane')),
+      findsOneWidget,
+    );
+  });
+
+  testWidgets('practice session renders the circle quadrants figure',
+      (WidgetTester tester) async {
+    final TestWidgetsFlutterBinding binding =
+        TestWidgetsFlutterBinding.ensureInitialized();
+    binding.platformDispatcher.localeTestValue = const Locale('en');
+
+    final AppServices services = createTestServices();
+
+    await tester.binding.setSurfaceSize(const Size(1200, 1600));
+    await tester.pumpWidget(
+      MaterialApp(
+        locale: const Locale('en'),
+        supportedLocales: AppStrings.supportedLocales,
+        localizationsDelegates: const [
+          GlobalMaterialLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+        ],
+        home: PracticeSessionPage(
+          services: services,
+          pack: const BundledQuestionPackInfo(
+            path: 'assets/questions/geometry/grade6_foundation.geometry.v1.json',
+            topic: '幾何',
+            topicCode: 'geometry',
+            levelStage: 'grade6',
+            challengeTier: 'foundation',
+            questionCount: 1,
+          ),
+          initialQuestions: [createCircleQuadrantsPointQuestion()],
+        ),
+      ),
+    );
+    await tester.runAsync(() async {
+      await Future<void>.delayed(const Duration(milliseconds: 50));
+    });
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 300));
+
+    expect(
+      find.byKey(const ValueKey<String>('figure_circle_quadrants_point')),
+      findsOneWidget,
+    );
+  });
+
+  testWidgets('practice session renders a composite grid shape figure',
+      (WidgetTester tester) async {
+    final TestWidgetsFlutterBinding binding =
+        TestWidgetsFlutterBinding.ensureInitialized();
+    binding.platformDispatcher.localeTestValue = const Locale('en');
+
+    final AppServices services = createTestServices();
+
+    await tester.binding.setSurfaceSize(const Size(1200, 1600));
+    await tester.pumpWidget(
+      MaterialApp(
+        locale: const Locale('en'),
+        supportedLocales: AppStrings.supportedLocales,
+        localizationsDelegates: const [
+          GlobalMaterialLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+        ],
+        home: PracticeSessionPage(
+          services: services,
+          pack: const BundledQuestionPackInfo(
+            path: 'assets/questions/geometry/grade3_foundation.geometry.v1.json',
+            topic: '幾何',
+            topicCode: 'geometry',
+            levelStage: 'grade3',
+            challengeTier: 'foundation',
+            questionCount: 1,
+          ),
+          initialQuestions: [createCompositeGridShapeQuestion()],
+        ),
+      ),
+    );
+    await tester.runAsync(() async {
+      await Future<void>.delayed(const Duration(milliseconds: 50));
+    });
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 300));
+
+    expect(
+      find.byKey(const ValueKey<String>('figure_composite_grid_shape')),
       findsOneWidget,
     );
   });
