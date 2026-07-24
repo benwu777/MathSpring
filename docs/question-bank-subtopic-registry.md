@@ -43,7 +43,7 @@ for t in ['arithmetic','geometry','logic','mixed']: print(t, sorted(s[t]))
 EOF
 ```
 
-### arithmetic（含數論、代數的算術型） — 82 種
+### arithmetic（含數論、代數的算術型） — 88 種
 
 - `age_problem`（3 題）
 - `arrangements`（4 題）
@@ -53,6 +53,7 @@ EOF
 - `balance`（2 題）
 - `balance_transfer`（7 題）
 - `calendar_counting`（4 題）
+- `clue_narrowing`（1 題）
 - `coin_systems`（1 題）
 - `comparison`（2 題）
 - `comparison_system`（1 題）
@@ -63,6 +64,7 @@ EOF
 - `counting_groups`（3 題）
 - `decomposition`（1 題）
 - `difference`（1 題）
+- `difference_shift`（1 題）
 - `digit_arrangement`（5 題）
 - `digit_arrangement_sum`（2 題）
 - `digit_counting`（3 題）
@@ -78,6 +80,7 @@ EOF
 - `equal_groups`（4 題）
 - `equivalent_fractions`（1 題）
 - `exchange_chain`（5 題）
+- `factor_pair_min_sum`（1 題）
 - `factors_and_rectangles`（4 題）
 - `factors_counting`（4 題）
 - `four_operations`（3 題）
@@ -88,6 +91,7 @@ EOF
 - `handshake_counting`（1 題）
 - `hidden_card`（1 題）
 - `inclusion_exclusion`（6 題）
+- `lcm_range_search`（1 題）
 - `lcm_schedule`（3 題）
 - `maximization`（1 題）
 - `minimization`（1 題）
@@ -114,6 +118,7 @@ EOF
 - `ratio`（4 題）
 - `ratio_transfer`（1 題）
 - `remainders`（9 題）
+- `repdigit_divisibility`（1 題）
 - `route_counting`（5 題）
 - `scoring`（1 題）
 - `sequence`（3 題）
@@ -125,6 +130,7 @@ EOF
 - `successive_changes`（1 題）
 - `sum_difference`（3 題）
 - `sum_ratio_equalize`（1 題）
+- `sum_ratio_offset`（1 題）
 - `two_step`（2 題）
 - `work_backwards`（6 題）
 
