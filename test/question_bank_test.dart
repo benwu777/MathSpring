@@ -216,7 +216,7 @@ void main() {
     final BundledQuestionManifest manifest = BundledQuestionManifest.fromJson(decoded);
 
     expect(manifest.version, 1);
-    expect(manifest.packs, hasLength(19));
+    expect(manifest.packs, hasLength(20));
     expect(manifest.packs.first.topicCode, 'geometry');
     expect(manifest.packs.first.levelStage, 'grade4');
     expect(manifest.packs.first.questionCount, greaterThanOrEqualTo(10));
@@ -397,7 +397,7 @@ void main() {
         .map((pack) => pack.questionCount)
         .fold(0, (sum, count) => sum + count);
 
-    expect(packs, hasLength(19));
+    expect(packs, hasLength(20));
     expect(packs.first.questions, isNotEmpty);
     expect(packs.last.questions, isNotEmpty);
     final int totalQuestions = packs
@@ -410,7 +410,8 @@ void main() {
     );
     final List<QuestionBank> geometryPacks = packs
         .where(
-          (pack) => pack.questions.isNotEmpty && pack.questions.first.topic == 'geometry',
+          (pack) => pack.questions.isNotEmpty &&
+              pack.questions.every((question) => question.topic == 'geometry'),
         )
         .toList();
     expect(geometryPacks, hasLength(6));
@@ -576,12 +577,12 @@ void main() {
       isNot(contains('無解')),
     );
 
-    final Question grade4CoinsQuestion =
+    final Question grade4CalendarQuestion =
         findQuestion(grade4Pack, 'logic_grade4_foundation_004');
-    expect(grade4CoinsQuestion.correctAnswer.value, '4');
+    expect(grade4CalendarQuestion.correctAnswer.value, 'B');
     expect(
-      grade4CoinsQuestion.localizedPrompt('zh-Hant'),
-      contains('三種顏色'),
+      grade4CalendarQuestion.localizedPrompt('zh-Hant'),
+      contains('第 15 天'),
     );
 
     final Question grade4ScheduleQuestion =
@@ -640,30 +641,33 @@ void main() {
     );
   });
 
-  test('mixed kangaroo56 pack stays competition-like and multi-topic', () async {
+  test('split mixed packs stay competition-like and multi-topic', () async {
     TestWidgetsFlutterBinding.ensureInitialized();
 
     final BundledQuestionBankRepository repository = BundledQuestionBankRepository();
-    final QuestionBank mixedPack = await repository.loadPack(
-      'assets/questions/mixed/kangaroo56_foundation.mixed.v1.json',
-    );
+    for (final String path in <String>[
+      'assets/questions/mixed/grade5_foundation.mixed.v1.json',
+      'assets/questions/mixed/grade6_foundation.mixed.v1.json',
+    ]) {
+      final QuestionBank mixedPack = await repository.loadPack(path);
 
-    expect(mixedPack.questions.length, greaterThanOrEqualTo(10));
-    expect(
-      mixedPack.questions.first.prompt.keys,
-      containsAll(<String>['zh-Hant', 'zh-Hans', 'en', 'ja']),
-    );
+      expect(mixedPack.questions.length, greaterThanOrEqualTo(10));
+      expect(
+        mixedPack.questions.first.prompt.keys,
+        containsAll(<String>['zh-Hant', 'zh-Hans', 'en', 'ja']),
+      );
 
-    final Set<String> topics = mixedPack.questions
-        .map((question) => question.topic)
-        .toSet();
-    expect(topics.length, greaterThanOrEqualTo(4));
-    expect(
-      mixedPack.questions.every(
-        (question) => question.solutionSteps['zh-Hant']!.length >= 2,
-      ),
-      isTrue,
-    );
+      final Set<String> topics = mixedPack.questions
+          .map((question) => question.topic)
+          .toSet();
+      expect(topics.length, greaterThanOrEqualTo(4));
+      expect(
+        mixedPack.questions.every(
+          (question) => question.solutionSteps['zh-Hant']!.length >= 2,
+        ),
+        isTrue,
+      );
+    }
   });
 
   test('phase 1 ships a single foundation tier (no difficulty layering)', () async {
@@ -674,7 +678,8 @@ void main() {
       'assets/questions/arithmetic/grade6_foundation.arithmetic.v1.json',
       'assets/questions/geometry/grade6_foundation.geometry.v1.json',
       'assets/questions/logic/grade6_foundation.logic.v1.json',
-      'assets/questions/mixed/kangaroo56_foundation.mixed.v1.json',
+      'assets/questions/mixed/grade5_foundation.mixed.v1.json',
+      'assets/questions/mixed/grade6_foundation.mixed.v1.json',
     ]) {
       final QuestionBank pack = await repository.loadPack(path);
       // Grade is the only difficulty axis in phase 1; every question is foundation.
