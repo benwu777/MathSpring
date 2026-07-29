@@ -63,12 +63,20 @@ void main() {
       questionCount: 10,
     ),
     BundledQuestionPackInfo(
-      path: 'assets/questions/mixed/kangaroo56_foundation.mixed.v1.json',
+      path: 'assets/questions/mixed/grade5_foundation.mixed.v1.json',
+      topic: 'Mixed',
+      topicCode: 'mixed',
+      levelStage: 'grade5',
+      challengeTier: 'foundation',
+      questionCount: 7,
+    ),
+    BundledQuestionPackInfo(
+      path: 'assets/questions/mixed/grade6_foundation.mixed.v1.json',
       topic: 'Mixed',
       topicCode: 'mixed',
       levelStage: 'grade6',
       challengeTier: 'foundation',
-      questionCount: 10,
+      questionCount: 5,
     ),
   ];
 
@@ -130,7 +138,7 @@ void main() {
     expect(launchPack.questionCount, 20);
   });
 
-  test('prefers dedicated mixed pack for kangaroo 5-6 launches', () {
+  test('builds 5-6 mixed launches from existing grade 5 and grade 6 packs', () {
     const LearnerProfile learner = LearnerProfile(
       id: 'learner_3',
       displayName: 'Kai',
@@ -146,9 +154,17 @@ void main() {
       topicCode: null,
     );
 
-    expect(selected, hasLength(1));
-    expect(selected.single.topicCode, 'mixed');
-    expect(selected.single.path, 'assets/questions/mixed/kangaroo56_foundation.mixed.v1.json');
+    expect(selected, hasLength(4));
+    expect(selected.map((pack) => pack.topicCode).toSet(), equals(<String>{
+      'geometry',
+      'logic',
+      'mixed',
+    }));
+    expect(selected.map((pack) => pack.levelStage).toSet(), equals(<String>{
+      'grade5',
+      'grade6',
+    }));
+    expect(selected.where((pack) => pack.topicCode == 'mixed'), hasLength(2));
   });
 
   test('randomizes question order once per launched session', () {

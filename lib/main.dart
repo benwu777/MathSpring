@@ -1980,8 +1980,11 @@ class SessionDetailPage extends StatelessWidget {
                           style: Theme.of(context).textTheme.titleLarge,
                         ),
                         const SizedBox(height: 8),
-                        Text(
-                          record.isCorrect ? strings.correctLabel : strings.incorrectLabel,
+                        _ResultStatusBadge(
+                          label: record.isCorrect
+                              ? strings.correctLabel
+                              : strings.incorrectLabel,
+                          isCorrect: record.isCorrect,
                         ),
                         const SizedBox(height: 8),
                         Text(
@@ -2004,6 +2007,10 @@ class SessionDetailPage extends StatelessWidget {
                             _QuestionSourceText(
                               text: question.source!.displayLabel!,
                             ),
+                          ],
+                          if (question.figure.kind != 'none') ...[
+                            const SizedBox(height: 16),
+                            _QuestionFigureView(question: question),
                           ],
                           const SizedBox(height: 8),
                           Text(question.localizedAnswer(_localeCode(context))),
@@ -2294,7 +2301,7 @@ class _PracticeSessionPageState extends State<PracticeSessionPage> {
                   _SectionCard(
                     title: _displayTopicCode(widget.pack.topicCode, strings),
                     subtitle:
-                        '${_displayLevelStage(widget.pack.levelStage, strings)} · ${_displayTier(widget.pack.challengeTier, strings)}',
+                        '${_displayLevelStage(question.levelStage, strings)} · ${_displayTier(question.challengeTier, strings)}',
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -2604,10 +2611,14 @@ class _PracticeReviewCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            record.isCorrect ? strings.correctLabel : strings.incorrectLabel,
-            style: Theme.of(context).textTheme.titleLarge,
+          _ResultStatusBadge(
+            label: record.isCorrect ? strings.correctLabel : strings.incorrectLabel,
+            isCorrect: record.isCorrect,
           ),
+          if (record.question.figure.kind != 'none') ...[
+            const SizedBox(height: 14),
+            _QuestionFigureView(question: record.question),
+          ],
           const SizedBox(height: 8),
           _QuestionBodyText(
             text: record.question.localizedAnswer(localeCode),
@@ -2793,7 +2804,7 @@ class _QuizSessionPageState extends State<QuizSessionPage> {
                 _SectionCard(
                   title: _displayTopicCode(widget.pack.topicCode, strings),
                   subtitle:
-                      '${_displayLevelStage(widget.pack.levelStage, strings)} · ${_displayTier(widget.pack.challengeTier, strings)}',
+                      '${_displayLevelStage(question.levelStage, strings)} · ${_displayTier(question.challengeTier, strings)}',
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -3094,8 +3105,11 @@ class QuizResultPage extends StatelessWidget {
                       text: record.question.localizedPrompt(_localeCode(context)),
                       localeCode: _localeCode(context),
                     ),
-                    subtitle: Text(
-                      record.isCorrect ? strings.correctLabel : strings.incorrectLabel,
+                    subtitle: _ResultStatusBadge(
+                      label: record.isCorrect
+                          ? strings.correctLabel
+                          : strings.incorrectLabel,
+                      isCorrect: record.isCorrect,
                     ),
                     childrenPadding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
                     children: [
@@ -3107,6 +3121,10 @@ class QuizResultPage extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(height: 10),
+                      ],
+                      if (record.question.figure.kind != 'none') ...[
+                        _QuestionFigureView(question: record.question),
+                        const SizedBox(height: 14),
                       ],
                       Align(
                         alignment: Alignment.centerLeft,
@@ -4239,6 +4257,41 @@ class _QuestionFigureView extends StatelessWidget {
   }
 }
 
+class _ResultStatusBadge extends StatelessWidget {
+  const _ResultStatusBadge({
+    required this.label,
+    required this.isCorrect,
+  });
+
+  final String label;
+  final bool isCorrect;
+
+  @override
+  Widget build(BuildContext context) {
+    final Color textColor = isCorrect
+        ? const Color(0xFF166534)
+        : const Color(0xFFB91C1C);
+    final Color backgroundColor = isCorrect
+        ? const Color(0xFFDCFCE7)
+        : const Color(0xFFFEE2E2);
+
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+      decoration: BoxDecoration(
+        color: backgroundColor,
+        borderRadius: BorderRadius.circular(999),
+      ),
+      child: Text(
+        label,
+        style: Theme.of(context).textTheme.labelLarge?.copyWith(
+              color: textColor,
+              fontWeight: FontWeight.w700,
+            ),
+      ),
+    );
+  }
+}
+
 Future<String?> _showTopicPicker({
   required BuildContext context,
   required AppStrings strings,
@@ -4738,6 +4791,29 @@ class ShapeDiagramPainter extends CustomPainter {
     );
 
     switch (shape) {
+      case 'compass':
+        final Offset center = Offset(size.width / 2, size.height / 2);
+        final Paint linePaint = Paint()
+          ..color = const Color(0xFF111827)
+          ..strokeWidth = 3
+          ..style = PaintingStyle.stroke;
+        final double arm = math.min(size.width, size.height) * 0.24;
+        canvas.drawLine(
+          Offset(center.dx, center.dy - arm),
+          Offset(center.dx, center.dy + arm),
+          linePaint,
+        );
+        canvas.drawLine(
+          Offset(center.dx - arm, center.dy),
+          Offset(center.dx + arm, center.dy),
+          linePaint,
+        );
+        _paintText(canvas, labels['top'] ?? 'N', Offset(center.dx, center.dy - arm - 22));
+        _paintText(canvas, labels['right'] ?? 'E', Offset(center.dx + arm + 22, center.dy));
+        _paintText(canvas, labels['bottom'] ?? 'S', Offset(center.dx, center.dy + arm + 22));
+        _paintText(canvas, labels['left'] ?? 'W', Offset(center.dx - arm - 22, center.dy));
+        _paintText(canvas, labels['center'], center);
+        break;
       case 'square':
         final double side = math.min(rect.width, rect.height);
         final Rect square = Rect.fromCenter(
@@ -4762,6 +4838,69 @@ class ShapeDiagramPainter extends CustomPainter {
         _paintText(canvas, labels['right'], Offset(size.width * 0.82, size.height * 0.48));
         _paintText(canvas, labels['bottom'], Offset(size.width * 0.5, size.height * 0.76));
         break;
+      case 'trapezoid':
+        final Path trapezoid = Path()
+          ..moveTo(size.width * 0.34, size.height * 0.22)
+          ..lineTo(size.width * 0.66, size.height * 0.22)
+          ..lineTo(size.width * 0.8, size.height * 0.7)
+          ..lineTo(size.width * 0.2, size.height * 0.7)
+          ..close();
+        canvas.drawPath(trapezoid, fillPaint);
+        canvas.drawPath(trapezoid, outlinePaint);
+        _paintText(canvas, labels['top'], Offset(size.width * 0.5, size.height * 0.14));
+        _paintText(canvas, labels['bottom'], Offset(size.width * 0.5, size.height * 0.78));
+        _paintText(canvas, labels['left'], Offset(size.width * 0.16, size.height * 0.46));
+        _paintText(canvas, labels['right'], Offset(size.width * 0.84, size.height * 0.46));
+        _paintText(canvas, labels['center'], Offset(size.width * 0.5, size.height * 0.48));
+        break;
+      case 'parallelogram':
+        final Path parallelogram = Path()
+          ..moveTo(size.width * 0.3, size.height * 0.22)
+          ..lineTo(size.width * 0.76, size.height * 0.22)
+          ..lineTo(size.width * 0.64, size.height * 0.7)
+          ..lineTo(size.width * 0.18, size.height * 0.7)
+          ..close();
+        canvas.drawPath(parallelogram, fillPaint);
+        canvas.drawPath(parallelogram, outlinePaint);
+        _paintText(canvas, labels['top'], Offset(size.width * 0.53, size.height * 0.14));
+        _paintText(canvas, labels['bottom'], Offset(size.width * 0.41, size.height * 0.78));
+        _paintText(canvas, labels['left'], Offset(size.width * 0.14, size.height * 0.48));
+        _paintText(canvas, labels['right'], Offset(size.width * 0.8, size.height * 0.48));
+        _paintText(canvas, labels['center'], Offset(size.width * 0.47, size.height * 0.46));
+        break;
+      case 'pentagon':
+        final Path pentagon = Path()
+          ..moveTo(size.width * 0.5, size.height * 0.14)
+          ..lineTo(size.width * 0.78, size.height * 0.34)
+          ..lineTo(size.width * 0.68, size.height * 0.7)
+          ..lineTo(size.width * 0.32, size.height * 0.7)
+          ..lineTo(size.width * 0.22, size.height * 0.34)
+          ..close();
+        canvas.drawPath(pentagon, fillPaint);
+        canvas.drawPath(pentagon, outlinePaint);
+        _paintText(canvas, labels['top'], Offset(size.width * 0.5, size.height * 0.08));
+        _paintText(canvas, labels['left'], Offset(size.width * 0.16, size.height * 0.44));
+        _paintText(canvas, labels['right'], Offset(size.width * 0.84, size.height * 0.44));
+        _paintText(canvas, labels['bottom'], Offset(size.width * 0.5, size.height * 0.78));
+        _paintText(canvas, labels['center'], Offset(size.width * 0.5, size.height * 0.46));
+        break;
+      case 'hexagon':
+        final Path hexagon = Path()
+          ..moveTo(size.width * 0.34, size.height * 0.18)
+          ..lineTo(size.width * 0.66, size.height * 0.18)
+          ..lineTo(size.width * 0.82, size.height * 0.44)
+          ..lineTo(size.width * 0.66, size.height * 0.7)
+          ..lineTo(size.width * 0.34, size.height * 0.7)
+          ..lineTo(size.width * 0.18, size.height * 0.44)
+          ..close();
+        canvas.drawPath(hexagon, fillPaint);
+        canvas.drawPath(hexagon, outlinePaint);
+        _paintText(canvas, labels['top'], Offset(size.width * 0.5, size.height * 0.1));
+        _paintText(canvas, labels['left'], Offset(size.width * 0.14, size.height * 0.44));
+        _paintText(canvas, labels['right'], Offset(size.width * 0.86, size.height * 0.44));
+        _paintText(canvas, labels['bottom'], Offset(size.width * 0.5, size.height * 0.78));
+        _paintText(canvas, labels['center'], Offset(size.width * 0.5, size.height * 0.44));
+        break;
       case 'circle':
         final Offset center = Offset(size.width / 2, size.height / 2);
         final double radius = math.min(size.width, size.height) * 0.24;
@@ -4770,6 +4909,16 @@ class ShapeDiagramPainter extends CustomPainter {
         _paintText(canvas, labels['center'], center);
         _paintText(canvas, labels['top'], Offset(center.dx, center.dy - radius - 18));
         _paintText(canvas, labels['right'], Offset(center.dx + radius + 18, center.dy));
+        break;
+      case 'oval':
+        final Rect oval = Rect.fromCenter(
+          center: rect.center,
+          width: rect.width * 0.92,
+          height: rect.height * 0.86,
+        );
+        canvas.drawOval(oval, fillPaint);
+        canvas.drawOval(oval, outlinePaint);
+        _paintShapeLabels(canvas, oval);
         break;
       case 'rectangle':
       default:

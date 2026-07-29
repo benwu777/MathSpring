@@ -11,14 +11,6 @@ class SessionLaunchPlanBuilder {
     LearnerProfile? learner, {
     String? topicCode,
   }) {
-    if (topicCode == null) {
-      final BundledQuestionPackInfo? dedicatedMixedPack =
-          _findDedicatedMixedPack(packs, learner);
-      if (dedicatedMixedPack != null) {
-        return <BundledQuestionPackInfo>[dedicatedMixedPack];
-      }
-    }
-
     if (learner == null) {
       return packs.where((pack) {
         if (topicCode != null && pack.topicCode != topicCode) {
@@ -36,26 +28,6 @@ class SessionLaunchPlanBuilder {
       topicCode: topicCode,
       challengeTier: 'foundation',
     );
-  }
-
-  static BundledQuestionPackInfo? _findDedicatedMixedPack(
-    List<BundledQuestionPackInfo> packs,
-    LearnerProfile? learner,
-  ) {
-    final String targetLevelStage = learner == null
-        ? packs.first.levelStage
-        : representativeLevelStageForCompetitionProfile(
-            competitionProfileIdForLevelStage(learner.levelStage),
-          );
-
-    for (final BundledQuestionPackInfo pack in packs) {
-      if (pack.topicCode == 'mixed' &&
-          pack.levelStage == targetLevelStage &&
-          pack.challengeTier == 'foundation') {
-        return pack;
-      }
-    }
-    return null;
   }
 
   static BundledQuestionPackInfo buildLaunchPack({

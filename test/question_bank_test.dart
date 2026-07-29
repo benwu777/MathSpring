@@ -761,6 +761,130 @@ void main() {
     );
   });
 
+  test('geometry packs include the 2026-07-28 second mixed expansion batch',
+      () async {
+    TestWidgetsFlutterBinding.ensureInitialized();
+
+    final BundledQuestionBankRepository repository = BundledQuestionBankRepository();
+    final QuestionBank grade1Pack = await repository.loadPack(
+      'assets/questions/geometry/grade1_foundation.geometry.v1.json',
+    );
+    final QuestionBank grade2Pack = await repository.loadPack(
+      'assets/questions/geometry/grade2_foundation.geometry.v1.json',
+    );
+    final QuestionBank grade3Pack = await repository.loadPack(
+      'assets/questions/geometry/grade3_foundation.geometry.v1.json',
+    );
+    final QuestionBank grade4Pack = await repository.loadPack(
+      'assets/questions/geometry/grade4_foundation.geometry.v1.json',
+    );
+    final QuestionBank grade5Pack = await repository.loadPack(
+      'assets/questions/geometry/grade5_foundation.geometry.v1.json',
+    );
+    final QuestionBank grade6Pack = await repository.loadPack(
+      'assets/questions/geometry/grade6_foundation.geometry.v1.json',
+    );
+
+    expect(
+      grade1Pack.questions.any(
+        (question) => question.id == 'geometry_grade1_foundation_043',
+      ),
+      isTrue,
+    );
+    expect(
+      grade2Pack.questions.any(
+        (question) => question.id == 'geometry_grade2_foundation_043',
+      ),
+      isTrue,
+    );
+    expect(
+      grade3Pack.questions.any(
+        (question) => question.id == 'geometry_grade3_foundation_045',
+      ),
+      isTrue,
+    );
+    expect(
+      grade4Pack.questions.any(
+        (question) => question.id == 'geometry_grade4_foundation_043',
+      ),
+      isTrue,
+    );
+    expect(
+      grade5Pack.questions.any(
+        (question) => question.id == 'geometry_grade5_foundation_043',
+      ),
+      isTrue,
+    );
+    expect(
+      grade6Pack.questions.any(
+        (question) => question.id == 'geometry_grade6_foundation_045',
+      ),
+      isTrue,
+    );
+  });
+
+  test('geometry packs include the 2026-07-28 third mixed expansion batch',
+      () async {
+    TestWidgetsFlutterBinding.ensureInitialized();
+
+    final BundledQuestionBankRepository repository = BundledQuestionBankRepository();
+    final QuestionBank grade1Pack = await repository.loadPack(
+      'assets/questions/geometry/grade1_foundation.geometry.v1.json',
+    );
+    final QuestionBank grade2Pack = await repository.loadPack(
+      'assets/questions/geometry/grade2_foundation.geometry.v1.json',
+    );
+    final QuestionBank grade3Pack = await repository.loadPack(
+      'assets/questions/geometry/grade3_foundation.geometry.v1.json',
+    );
+    final QuestionBank grade4Pack = await repository.loadPack(
+      'assets/questions/geometry/grade4_foundation.geometry.v1.json',
+    );
+    final QuestionBank grade5Pack = await repository.loadPack(
+      'assets/questions/geometry/grade5_foundation.geometry.v1.json',
+    );
+    final QuestionBank grade6Pack = await repository.loadPack(
+      'assets/questions/geometry/grade6_foundation.geometry.v1.json',
+    );
+
+    expect(
+      grade1Pack.questions.any(
+        (question) => question.id == 'geometry_grade1_foundation_044',
+      ),
+      isTrue,
+    );
+    expect(
+      grade2Pack.questions.any(
+        (question) => question.id == 'geometry_grade2_foundation_044',
+      ),
+      isTrue,
+    );
+    expect(
+      grade3Pack.questions.any(
+        (question) => question.id == 'geometry_grade3_foundation_046',
+      ),
+      isTrue,
+    );
+    expect(
+      grade4Pack.questions.any(
+        (question) => question.id == 'geometry_grade4_foundation_044',
+      ),
+      isTrue,
+    );
+    expect(
+      grade5Pack.questions.any(
+        (question) => question.id == 'geometry_grade5_foundation_044',
+      ),
+      isTrue,
+    );
+    expect(
+      grade6Pack.questions.any(
+        (question) => question.id == 'geometry_grade6_foundation_046',
+      ),
+      isTrue,
+    );
+  });
+
   test('grade4 arithmetic pack includes multiple four-language olympiad-style questions',
       () async {
     TestWidgetsFlutterBinding.ensureInitialized();
@@ -990,5 +1114,336 @@ void main() {
         reason: '${entry.key} should contain at least ${entry.value} arithmetic questions',
       );
     }
+  });
+
+  test('grade1 packs include the first official IMC 2015 preliminary batch',
+      () async {
+    TestWidgetsFlutterBinding.ensureInitialized();
+
+    final BundledQuestionBankRepository repository = BundledQuestionBankRepository();
+    final QuestionBank arithmeticPack = await repository.loadPack(
+      'assets/questions/arithmetic/grade1_foundation.arithmetic.v1.json',
+    );
+    final QuestionBank logicPack = await repository.loadPack(
+      'assets/questions/logic/grade1_foundation.logic.v1.json',
+    );
+
+    Question findQuestion(QuestionBank pack, String id) =>
+        pack.questions.firstWhere((Question question) => question.id == id);
+
+    final Question arithmeticQuestion = findQuestion(
+      arithmeticPack,
+      'arithmetic_grade1_foundation_051',
+    );
+    final Question logicQuestion = findQuestion(
+      logicPack,
+      'logic_grade1_foundation_041',
+    );
+
+    expect(arithmeticQuestion.source?.type, 'official_reference');
+    expect(
+      arithmeticQuestion.source?.contest,
+      '第16屆IMC國際數學競賽台灣區初賽',
+    );
+    expect(arithmeticQuestion.source?.year, '2015');
+    expect(arithmeticQuestion.source?.problemNumber, '選擇 3');
+    expect(logicQuestion.source?.type, 'official_reference');
+    expect(logicQuestion.source?.division, '國小一年級');
+    expect(
+      logicQuestion.source?.sourceUrl,
+      'https://www.imcct.net/UserFiles/files/%E4%B8%80%E5%B9%B4%E7%B4%9A%E8%A9%A6%E9%A1%8C+%E8%A7%A3%E7%AD%94%E5%8D%B7.pdf',
+    );
+  });
+
+  test('grade1 packs include the second official IMC 2015 preliminary batch',
+      () async {
+    TestWidgetsFlutterBinding.ensureInitialized();
+
+    final BundledQuestionBankRepository repository = BundledQuestionBankRepository();
+    final QuestionBank arithmeticPack = await repository.loadPack(
+      'assets/questions/arithmetic/grade1_foundation.arithmetic.v1.json',
+    );
+    final QuestionBank logicPack = await repository.loadPack(
+      'assets/questions/logic/grade1_foundation.logic.v1.json',
+    );
+
+    Question findQuestion(QuestionBank pack, String id) =>
+        pack.questions.firstWhere((Question question) => question.id == id);
+
+    final Question arithmeticQuestion = findQuestion(
+      arithmeticPack,
+      'arithmetic_grade1_foundation_058',
+    );
+    final Question logicQuestion = findQuestion(
+      logicPack,
+      'logic_grade1_foundation_044',
+    );
+
+    expect(arithmeticQuestion.source?.type, 'official_reference');
+    expect(arithmeticQuestion.source?.problemNumber, '計算 2');
+    expect(logicQuestion.source?.type, 'official_reference');
+    expect(logicQuestion.source?.problemNumber, '計算 4');
+    expect(logicQuestion.source?.year, '2015');
+  });
+
+  test('grade1 packs include the third official IMC 2015 preliminary batch',
+      () async {
+    TestWidgetsFlutterBinding.ensureInitialized();
+
+    final BundledQuestionBankRepository repository = BundledQuestionBankRepository();
+    final QuestionBank arithmeticPack = await repository.loadPack(
+      'assets/questions/arithmetic/grade1_foundation.arithmetic.v1.json',
+    );
+    final QuestionBank logicPack = await repository.loadPack(
+      'assets/questions/logic/grade1_foundation.logic.v1.json',
+    );
+
+    Question findQuestion(QuestionBank pack, String id) =>
+        pack.questions.firstWhere((Question question) => question.id == id);
+
+    final Question arithmeticQuestion = findQuestion(
+      arithmeticPack,
+      'arithmetic_grade1_foundation_062',
+    );
+    final Question logicQuestion = findQuestion(
+      logicPack,
+      'logic_grade1_foundation_047',
+    );
+
+    expect(arithmeticQuestion.source?.type, 'official_reference');
+    expect(arithmeticQuestion.source?.problemNumber, '挑戰 3');
+    expect(logicQuestion.source?.type, 'official_reference');
+    expect(logicQuestion.source?.problemNumber, '計算 8(2)');
+  });
+
+  test('grade2 packs include the first official IMC 2015 preliminary batch',
+      () async {
+    TestWidgetsFlutterBinding.ensureInitialized();
+
+    final BundledQuestionBankRepository repository = BundledQuestionBankRepository();
+    final QuestionBank arithmeticPack = await repository.loadPack(
+      'assets/questions/arithmetic/grade2_foundation.arithmetic.v1.json',
+    );
+    final QuestionBank logicPack = await repository.loadPack(
+      'assets/questions/logic/grade2_foundation.logic.v1.json',
+    );
+
+    Question findQuestion(QuestionBank pack, String id) =>
+        pack.questions.firstWhere((Question question) => question.id == id);
+
+    final Question arithmeticQuestion = findQuestion(
+      arithmeticPack,
+      'arithmetic_grade2_foundation_051',
+    );
+    final Question arithmeticQuestion2 = findQuestion(
+      arithmeticPack,
+      'arithmetic_grade2_foundation_068',
+    );
+    final Question logicQuestion = findQuestion(
+      logicPack,
+      'logic_grade2_foundation_041',
+    );
+
+    expect(arithmeticQuestion.source?.type, 'official_reference');
+    expect(arithmeticQuestion.source?.problemNumber, '選擇 1');
+    expect(arithmeticQuestion2.source?.problemNumber, '選擇 25');
+    expect(logicQuestion.source?.type, 'official_reference');
+    expect(logicQuestion.source?.problemNumber, '計算 2');
+    expect(logicQuestion.source?.year, '2015');
+  });
+
+  test('grade3 packs include the first official IMC 2015 preliminary batch',
+      () async {
+    TestWidgetsFlutterBinding.ensureInitialized();
+
+    final BundledQuestionBankRepository repository = BundledQuestionBankRepository();
+    final QuestionBank arithmeticPack = await repository.loadPack(
+      'assets/questions/arithmetic/grade3_foundation.arithmetic.v1.json',
+    );
+    final QuestionBank logicPack = await repository.loadPack(
+      'assets/questions/logic/grade3_foundation.logic.v1.json',
+    );
+
+    Question findQuestion(QuestionBank pack, String id) =>
+        pack.questions.firstWhere((Question question) => question.id == id);
+
+    final Question arithmeticQuestion = findQuestion(
+      arithmeticPack,
+      'arithmetic_grade3_foundation_054',
+    );
+    final Question arithmeticQuestion2 = findQuestion(
+      arithmeticPack,
+      'arithmetic_grade3_foundation_072',
+    );
+    final Question logicQuestion = findQuestion(
+      logicPack,
+      'logic_grade3_foundation_043',
+    );
+
+    expect(arithmeticQuestion.source?.type, 'official_reference');
+    expect(arithmeticQuestion.source?.problemNumber, '選擇 1');
+    expect(arithmeticQuestion2.source?.problemNumber, '計算 3');
+    expect(logicQuestion.source?.type, 'official_reference');
+    expect(logicQuestion.source?.problemNumber, '選擇 23');
+    expect(logicQuestion.source?.year, '2015');
+  });
+
+  test('grade4 packs include the first official IMC 2015 preliminary batch',
+      () async {
+    TestWidgetsFlutterBinding.ensureInitialized();
+
+    final BundledQuestionBankRepository repository = BundledQuestionBankRepository();
+    final QuestionBank arithmeticPack = await repository.loadPack(
+      'assets/questions/arithmetic/grade4_foundation.arithmetic.v1.json',
+    );
+
+    Question findQuestion(QuestionBank pack, String id) =>
+        pack.questions.firstWhere((Question question) => question.id == id);
+
+    final Question arithmeticQuestion = findQuestion(
+      arithmeticPack,
+      'arithmetic_grade4_foundation_051',
+    );
+    final Question arithmeticQuestion2 = findQuestion(
+      arithmeticPack,
+      'arithmetic_grade4_foundation_071',
+    );
+
+    expect(arithmeticQuestion.source?.type, 'official_reference');
+    expect(arithmeticQuestion.source?.problemNumber, '選擇 1');
+    expect(arithmeticQuestion2.source?.problemNumber, '選擇 25');
+    expect(arithmeticQuestion.source?.year, '2015');
+  });
+
+  test('grade5 packs include the first official IMC 2015 preliminary batch',
+      () async {
+    TestWidgetsFlutterBinding.ensureInitialized();
+
+    final BundledQuestionBankRepository repository = BundledQuestionBankRepository();
+    final QuestionBank arithmeticPack = await repository.loadPack(
+      'assets/questions/arithmetic/grade5_foundation.arithmetic.v1.json',
+    );
+    final QuestionBank logicPack = await repository.loadPack(
+      'assets/questions/logic/grade5_foundation.logic.v1.json',
+    );
+
+    Question findQuestion(QuestionBank pack, String id) =>
+        pack.questions.firstWhere((Question question) => question.id == id);
+
+    final Question arithmeticQuestion = findQuestion(
+      arithmeticPack,
+      'arithmetic_grade5_foundation_051',
+    );
+    final Question arithmeticQuestion2 = findQuestion(
+      arithmeticPack,
+      'arithmetic_grade5_foundation_062',
+    );
+    final Question logicQuestion = findQuestion(
+      logicPack,
+      'logic_grade5_foundation_041',
+    );
+
+    expect(arithmeticQuestion.source?.type, 'official_reference');
+    expect(arithmeticQuestion.source?.problemNumber, '選擇 1');
+    expect(arithmeticQuestion2.source?.problemNumber, '選擇 21');
+    expect(logicQuestion.source?.type, 'official_reference');
+    expect(logicQuestion.source?.problemNumber, '選擇 24');
+    expect(logicQuestion.source?.year, '2015');
+  });
+
+  test('grade6 packs include the next official IMC 2015 preliminary batch',
+      () async {
+    TestWidgetsFlutterBinding.ensureInitialized();
+
+    final BundledQuestionBankRepository repository = BundledQuestionBankRepository();
+    final QuestionBank arithmeticPack = await repository.loadPack(
+      'assets/questions/arithmetic/grade6_foundation.arithmetic.v1.json',
+    );
+    final QuestionBank logicPack = await repository.loadPack(
+      'assets/questions/logic/grade6_foundation.logic.v1.json',
+    );
+
+    Question findQuestion(QuestionBank pack, String id) =>
+        pack.questions.firstWhere((Question question) => question.id == id);
+
+    final Question arithmeticQuestion = findQuestion(
+      arithmeticPack,
+      'arithmetic_grade6_foundation_055',
+    );
+    final Question arithmeticQuestion2 = findQuestion(
+      arithmeticPack,
+      'arithmetic_grade6_foundation_061',
+    );
+    final Question logicQuestion = findQuestion(
+      logicPack,
+      'logic_grade6_foundation_045',
+    );
+
+    expect(arithmeticQuestion.source?.type, 'official_reference');
+    expect(arithmeticQuestion.source?.problemNumber, '選擇 5');
+    expect(arithmeticQuestion2.source?.problemNumber, '選擇 20');
+    expect(logicQuestion.source?.type, 'official_reference');
+    expect(logicQuestion.source?.problemNumber, '選擇 3');
+    expect(logicQuestion.source?.year, '2015');
+  });
+
+  test('grade6 packs include the follow-up official IMC 2015 preliminary batch',
+      () async {
+    TestWidgetsFlutterBinding.ensureInitialized();
+
+    final BundledQuestionBankRepository repository = BundledQuestionBankRepository();
+    final QuestionBank arithmeticPack = await repository.loadPack(
+      'assets/questions/arithmetic/grade6_foundation.arithmetic.v1.json',
+    );
+    final QuestionBank logicPack = await repository.loadPack(
+      'assets/questions/logic/grade6_foundation.logic.v1.json',
+    );
+
+    Question findQuestion(QuestionBank pack, String id) =>
+        pack.questions.firstWhere((Question question) => question.id == id);
+
+    final Question arithmeticQuestion = findQuestion(
+      arithmeticPack,
+      'arithmetic_grade6_foundation_062',
+    );
+    final Question arithmeticQuestion2 = findQuestion(
+      arithmeticPack,
+      'arithmetic_grade6_foundation_063',
+    );
+    final Question logicQuestion = findQuestion(
+      logicPack,
+      'logic_grade6_foundation_047',
+    );
+    final Question logicQuestion2 = findQuestion(
+      logicPack,
+      'logic_grade6_foundation_048',
+    );
+
+    expect(arithmeticQuestion.source?.type, 'official_reference');
+    expect(arithmeticQuestion.source?.problemNumber, '選擇 1');
+    expect(arithmeticQuestion2.source?.problemNumber, '選擇 22');
+    expect(logicQuestion.source?.problemNumber, '選擇 21');
+    expect(logicQuestion2.source?.problemNumber, '選擇 24');
+    expect(logicQuestion2.source?.year, '2015');
+  });
+
+  test('grade6 arithmetic pack includes official IMC 2015 calculation input question',
+      () async {
+    TestWidgetsFlutterBinding.ensureInitialized();
+
+    final BundledQuestionBankRepository repository = BundledQuestionBankRepository();
+    final QuestionBank arithmeticPack = await repository.loadPack(
+      'assets/questions/arithmetic/grade6_foundation.arithmetic.v1.json',
+    );
+
+    final Question question = arithmeticPack.questions.firstWhere(
+      (Question item) => item.id == 'arithmetic_grade6_foundation_064',
+    );
+
+    expect(question.source?.type, 'official_reference');
+    expect(question.source?.problemNumber, '計算 1');
+    expect(question.answerMode, AnswerMode.integerInput);
+    expect(question.correctAnswer.type, 'integer');
+    expect(question.correctAnswer.value, '145');
   });
 }

@@ -126,7 +126,8 @@ assets/questions/
   logic/
     grade4_foundation.logic.v1.json
   mixed/
-    kangaroo56_foundation.mixed.v1.json
+    grade5_foundation.mixed.v1.json
+    grade6_foundation.mixed.v1.json
 ```
 
 Only the four shipped topic folders exist (`arithmetic`, `geometry`, `logic`,
