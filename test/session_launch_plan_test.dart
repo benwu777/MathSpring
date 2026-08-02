@@ -101,32 +101,27 @@ void main() {
     expect(selected.every((pack) => pack.topicCode == 'geometry'), isTrue);
   });
 
-  test('anonymous launch ignores unsupported grade7+ packs before range UI ships',
+  test('learner launch supports grade7+ packs inside the selected range',
       () {
+    const LearnerProfile learner = LearnerProfile(
+      id: 'learner_senior',
+      displayName: 'Senior',
+      levelStage: 'grade12',
+      minLevelStage: 'grade7',
+      maxLevelStage: 'grade12',
+      challengeTier: 'foundation',
+      createdAtIso: '2026-08-02T00:00:00Z',
+    );
+
     final List<BundledQuestionPackInfo> selected =
         SessionLaunchPlanBuilder.pickEligiblePacks(
       packs,
-      null,
-      topicCode: null,
+      learner,
+      topicCode: 'algebra',
     );
 
-    expect(
-      selected.every(
-        (pack) => <String>{
-          'grade1',
-          'grade2',
-          'grade3',
-          'grade4',
-          'grade5',
-          'grade6',
-        }.contains(pack.levelStage),
-      ),
-      isTrue,
-    );
-    expect(
-      selected.any((pack) => pack.levelStage == 'grade7'),
-      isFalse,
-    );
+    expect(selected, hasLength(1));
+    expect(selected.first.levelStage, 'grade7');
   });
 
   test('selects competition-profile-matched packs for learner launch', () {
@@ -155,7 +150,9 @@ void main() {
     const LearnerProfile learner = LearnerProfile(
       id: 'learner_2',
       displayName: 'Mia',
-      levelStage: 'grade1',
+      levelStage: 'grade2',
+      minLevelStage: 'grade1',
+      maxLevelStage: 'grade2',
       challengeTier: 'foundation',
       createdAtIso: '2026-07-19T00:00:00Z',
     );
@@ -226,6 +223,7 @@ void main() {
           'type': 'integer',
           'value': '1',
         },
+        'reviewStatus': 'ok',
       });
     }
 
@@ -254,5 +252,72 @@ void main() {
       randomized.map((question) => question.id).toSet(),
       equals(<String>{'q1', 'q2', 'q3', 'q4', 'q5'}),
     );
+  });
+
+  test('launch question filtering keeps only review-approved questions', () {
+    Question buildQuestion(String id, String reviewStatus) {
+      return Question.fromJson({
+        'id': id,
+        'topic': 'geometry',
+        'difficulty': 'foundation',
+        'levelStage': 'grade7',
+        'challengeTier': 'foundation',
+        'prompt': {'en': 'Prompt $id'},
+        'answer': {'en': 'Answer $id'},
+        'solutionSteps': {
+          'en': ['Step $id'],
+        },
+        'figure': {
+          'type': 'custom',
+          'kind': 'none',
+          'params': <String, dynamic>{},
+        },
+        'answerMode': 'integer_input',
+        'correctAnswer': {
+          'type': 'integer',
+          'value': '1',
+        },
+        'reviewStatus': reviewStatus,
+      });
+    }
+
+    final List<Question> filtered =
+        SessionLaunchPlanBuilder.filterApprovedQuestionsForLaunch(<Question>[
+      buildQuestion('q_ok_1', 'ok'),
+      buildQuestion('q_pending', 'pending'),
+      buildQuestion('q_fix', 'needs_fix'),
+      buildQuestion('q_ok_2', 'ok'),
+    ]);
+
+    expect(filtered.map((item) => item.id), <String>['q_ok_1', 'q_ok_2']);
+  });
+
+  test('question parser preserves review status', () {
+    final Question question = Question.fromJson({
+      'id': 'geometry_grade7_foundation_approved',
+      'topic': 'geometry',
+      'difficulty': 'foundation',
+      'levelStage': 'grade7',
+      'challengeTier': 'foundation',
+      'prompt': {'en': 'Prompt'},
+      'answer': {'en': 'Answer'},
+      'solutionSteps': {
+        'en': ['Step'],
+      },
+      'figure': {
+        'type': 'custom',
+        'kind': 'none',
+        'params': <String, dynamic>{},
+      },
+      'answerMode': 'integer_input',
+      'correctAnswer': {
+        'type': 'integer',
+        'value': '1',
+      },
+      'reviewStatus': 'ok',
+    });
+
+    expect(question.reviewStatus, 'ok');
+    expect(question.isReviewApproved, isTrue);
   });
 }

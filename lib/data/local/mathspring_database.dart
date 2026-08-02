@@ -3,7 +3,7 @@ import 'package:sqflite/sqflite.dart';
 
 class MathSpringDatabase {
   static const String databaseName = 'mathspring.db';
-  static const int schemaVersion = 2;
+  static const int schemaVersion = 3;
 
   static Future<Database> openDefault() async {
     final String databasesPath = await getDatabasesPath();
@@ -42,6 +42,36 @@ class MathSpringDatabase {
       await _createAnswerSessionsTable(db);
       await _createSessionAnswerRecordsTable(db);
     }
+    if (oldVersion < 3) {
+      await db.execute(
+        'ALTER TABLE learner_profiles ADD COLUMN min_level_stage TEXT',
+      );
+      await db.execute(
+        'ALTER TABLE learner_profiles ADD COLUMN max_level_stage TEXT',
+      );
+      await db.execute('''
+        UPDATE learner_profiles
+        SET
+          min_level_stage = COALESCE(
+            min_level_stage,
+            CASE level_stage
+              WHEN 'grade2' THEN 'grade1'
+              WHEN 'grade4' THEN 'grade3'
+              WHEN 'grade6' THEN 'grade5'
+              ELSE level_stage
+            END
+          ),
+          max_level_stage = COALESCE(
+            max_level_stage,
+            CASE level_stage
+              WHEN 'grade2' THEN 'grade2'
+              WHEN 'grade4' THEN 'grade4'
+              WHEN 'grade6' THEN 'grade6'
+              ELSE level_stage
+            END
+          )
+      ''');
+    }
   }
 
   static Future<void> _createLearnerProfilesTable(Database db) async {
@@ -50,6 +80,8 @@ class MathSpringDatabase {
         id TEXT PRIMARY KEY,
         display_name TEXT NOT NULL,
         level_stage TEXT NOT NULL,
+        min_level_stage TEXT NOT NULL,
+        max_level_stage TEXT NOT NULL,
         challenge_tier TEXT NOT NULL,
         created_at TEXT NOT NULL
       )

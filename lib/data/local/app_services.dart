@@ -97,6 +97,8 @@ class AppServices {
           id: 'learner_allen',
           displayName: 'Allen',
           levelStage: 'grade4',
+          minLevelStage: 'grade3',
+          maxLevelStage: 'grade4',
           challengeTier: 'advanced',
           createdAtIso: '2026-07-16T00:00:00Z',
         ),
@@ -106,6 +108,8 @@ class AppServices {
           id: 'learner_mia',
           displayName: 'Mia',
           levelStage: 'grade2',
+          minLevelStage: 'grade1',
+          maxLevelStage: 'grade2',
           challengeTier: 'foundation',
           createdAtIso: '2026-07-16T00:01:00Z',
         ),
@@ -171,13 +175,16 @@ class AppServices {
 
   Future<LearnerProfile> createLearner({
     required String displayName,
-    required String levelStage,
+    required String minLevelStage,
+    required String maxLevelStage,
     required String challengeTier,
   }) async {
     final LearnerProfile profile = LearnerProfile(
       id: 'learner_${DateTime.now().toUtc().microsecondsSinceEpoch}',
       displayName: displayName,
-      levelStage: levelStage,
+      levelStage: maxLevelStage,
+      minLevelStage: minLevelStage,
+      maxLevelStage: maxLevelStage,
       challengeTier: challengeTier,
       createdAtIso: DateTime.now().toUtc().toIso8601String(),
     );

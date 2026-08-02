@@ -196,6 +196,7 @@ class Question {
     this.inputConstraints,
     this.source,
     this.olympiadTaxonomy,
+    this.reviewStatus,
   });
 
   final String id;
@@ -213,6 +214,14 @@ class Question {
   final InputConstraints? inputConstraints;
   final QuestionSource? source;
   final QuestionOlympiadTaxonomy? olympiadTaxonomy;
+  final String? reviewStatus;
+
+  bool get isReviewApproved {
+    if (reviewStatus == null || reviewStatus!.trim().isEmpty) {
+      return true;
+    }
+    return reviewStatus == 'ok';
+  }
 
   factory Question.fromJson(Map<String, dynamic> json) {
     return Question(
@@ -255,6 +264,7 @@ class Question {
                 json['olympiadTaxonomy'] as Map<String, dynamic>,
               ),
             ),
+      reviewStatus: json['reviewStatus'] as String?,
     );
   }
 

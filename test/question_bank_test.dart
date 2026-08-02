@@ -184,22 +184,34 @@ void main() {
     expect(question.localizedSolutionSteps('ja-JP'), ['日本語の手順']);
   });
 
-  test('competition profile groups grade ranges and filters matching packs', () async {
+  test('grade range helpers expand and filter matching packs', () async {
     TestWidgetsFlutterBinding.ensureInitialized();
 
-    expect(competitionProfileIdForLevelStage('grade1'), kangaroo12ProfileId);
-    expect(competitionProfileIdForLevelStage('grade4'), kangaroo34ProfileId);
-    expect(competitionProfileIdForLevelStage('grade6'), kangaroo56ProfileId);
+    expect(levelStagesInRange(minLevelStage: 'grade1', maxLevelStage: 'grade2'), [
+      'grade1',
+      'grade2',
+    ]);
+    expect(levelStagesInRange(minLevelStage: 'grade3', maxLevelStage: 'grade4'), [
+      'grade3',
+      'grade4',
+    ]);
+    expect(isLevelStageWithinRange('grade4', minLevelStage: 'grade3', maxLevelStage: 'grade6'), isTrue);
+    expect(isLevelStageWithinRange('grade7', minLevelStage: 'grade3', maxLevelStage: 'grade6'), isFalse);
 
     final BundledQuestionBankRepository repository = BundledQuestionBankRepository();
     final BundledQuestionManifest manifest = await repository.loadManifest();
-    final List<BundledQuestionPackInfo> groupedPacks =
-        filterPacksForCompetitionProfile(
-      manifest.packs,
-      competitionProfileId: kangaroo34ProfileId,
-      topicCode: 'geometry',
-      challengeTier: 'foundation',
-    );
+    final List<BundledQuestionPackInfo> groupedPacks = manifest.packs
+        .where(
+          (pack) =>
+              pack.topicCode == 'geometry' &&
+              pack.challengeTier == 'foundation' &&
+              isLevelStageWithinRange(
+                pack.levelStage,
+                minLevelStage: 'grade3',
+                maxLevelStage: 'grade4',
+              ),
+        )
+        .toList();
 
     expect(groupedPacks, hasLength(2));
     expect(

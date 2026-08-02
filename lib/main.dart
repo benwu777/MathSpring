@@ -164,9 +164,9 @@ class _MathSpringAppState extends State<MathSpringApp> {
         scaffoldBackgroundColor: Colors.white,
         textTheme: const TextTheme(
           displaySmall: TextStyle(
-            fontSize: 36,
+            fontSize: 34,
             fontWeight: FontWeight.w700,
-            letterSpacing: -1.2,
+            letterSpacing: -1.0,
             color: Color(0xFF0F172A),
           ),
           headlineSmall: TextStyle(
@@ -175,19 +175,82 @@ class _MathSpringAppState extends State<MathSpringApp> {
             color: Color(0xFF0F172A),
           ),
           titleLarge: TextStyle(
-            fontSize: 18,
+            fontSize: 19,
+            fontWeight: FontWeight.w600,
+            color: Color(0xFF0F172A),
+          ),
+          titleMedium: TextStyle(
+            fontSize: 16,
             fontWeight: FontWeight.w600,
             color: Color(0xFF0F172A),
           ),
           bodyLarge: TextStyle(
             fontSize: 16,
-            height: 1.6,
+            height: 1.55,
             color: Color(0xFF334155),
           ),
           bodyMedium: TextStyle(
             fontSize: 14,
-            height: 1.5,
+            height: 1.45,
             color: Color(0xFF475569),
+          ),
+          bodySmall: TextStyle(
+            fontSize: 12,
+            height: 1.4,
+            color: Color(0xFF64748B),
+          ),
+        ),
+        inputDecorationTheme: InputDecorationTheme(
+          filled: true,
+          fillColor: const Color(0xFFF8FAFC),
+          contentPadding: const EdgeInsets.symmetric(
+            horizontal: 16,
+            vertical: 18,
+          ),
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(14),
+            borderSide: const BorderSide(color: Color(0xFFD1D5DB)),
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(14),
+            borderSide: const BorderSide(color: Color(0xFFD1D5DB)),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(14),
+            borderSide: const BorderSide(color: Color(0xFF163D7A), width: 1.2),
+          ),
+        ),
+        filledButtonTheme: FilledButtonThemeData(
+          style: FilledButton.styleFrom(
+            minimumSize: const Size.fromHeight(54),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(14),
+            ),
+            textStyle: const TextStyle(
+              fontSize: 15,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+        ),
+        outlinedButtonTheme: OutlinedButtonThemeData(
+          style: OutlinedButton.styleFrom(
+            minimumSize: const Size.fromHeight(54),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(14),
+            ),
+            textStyle: const TextStyle(
+              fontSize: 15,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+        ),
+        textButtonTheme: TextButtonThemeData(
+          style: TextButton.styleFrom(
+            minimumSize: const Size(0, 44),
+            textStyle: const TextStyle(
+              fontSize: 14,
+              fontWeight: FontWeight.w600,
+            ),
           ),
         ),
         cardTheme: CardTheme(
@@ -392,7 +455,7 @@ class _PracticeTabState extends State<_PracticeTab> {
               _LearnerSummaryBanner(
                 learner: widget.learner,
                 primaryLabel: strings.currentLearnerLabel,
-                secondaryLabel: strings.competitionProfileLabel,
+                secondaryLabel: strings.gradeRangeLabel,
               ),
               const SizedBox(height: 18),
               OutlinedButton(
@@ -505,7 +568,7 @@ class _QuizTab extends StatelessWidget {
               _LearnerSummaryBanner(
                 learner: learner,
                 primaryLabel: strings.currentLearnerLabel,
-                secondaryLabel: strings.competitionProfileLabel,
+                secondaryLabel: strings.gradeRangeLabel,
               ),
               const SizedBox(height: 18),
               Text(
@@ -737,12 +800,13 @@ class _LearnerSummaryBanner extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final AppStrings strings = AppStrings.of(context);
+    final TextTheme textTheme = Theme.of(context).textTheme;
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.all(18),
+      padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
         color: const Color(0xFFFAFAFA),
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(16),
         border: Border.all(color: const Color(0xFFE5E7EB)),
       ),
       child: Column(
@@ -750,22 +814,32 @@ class _LearnerSummaryBanner extends StatelessWidget {
         children: [
           Text(
             primaryLabel,
-            style: Theme.of(context).textTheme.bodyMedium,
+            style: textTheme.bodySmall?.copyWith(
+              fontWeight: FontWeight.w600,
+              letterSpacing: 0.1,
+            ),
           ),
-          const SizedBox(height: 6),
+          const SizedBox(height: 4),
           Text(
             learner?.displayName ?? strings.noLearnerSelected,
-            style: Theme.of(context).textTheme.titleLarge,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: textTheme.headlineSmall?.copyWith(fontSize: 22),
           ),
-          const SizedBox(height: 12),
+          const SizedBox(height: 14),
           Text(
             secondaryLabel,
-            style: Theme.of(context).textTheme.bodyMedium,
+            style: textTheme.bodySmall?.copyWith(
+              fontWeight: FontWeight.w600,
+              letterSpacing: 0.1,
+            ),
           ),
-          const SizedBox(height: 6),
+          const SizedBox(height: 4),
           Text(
-            learner == null ? '-' : _competitionProfileLabel(learner!, strings),
-            style: Theme.of(context).textTheme.titleLarge,
+            learner == null ? '-' : _learnerGradeRangeLabel(learner!, strings),
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: textTheme.titleLarge?.copyWith(fontSize: 20),
           ),
         ],
       ),
@@ -1081,9 +1155,8 @@ class _LearnerProfilesSectionState extends State<_LearnerProfilesSection> {
 
     final LearnerProfile profile = await widget.services.createLearner(
       displayName: draft.displayName,
-      levelStage: representativeLevelStageForCompetitionProfile(
-        draft.competitionProfileId,
-      ),
+      minLevelStage: draft.minLevelStage,
+      maxLevelStage: draft.maxLevelStage,
       challengeTier: 'foundation',
     );
     await widget.services.setCurrentLearner(profile.id);
@@ -1142,7 +1215,19 @@ class _LearnerProfilesSectionState extends State<_LearnerProfilesSection> {
         ),
       ),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          _LearnerSummaryBanner(
+            learner: profiles.isEmpty
+                ? null
+                : profiles.firstWhere(
+                    (profile) => profile.id == widget.services.currentLearnerId,
+                    orElse: () => profiles.first,
+                  ),
+            primaryLabel: strings.currentLearnerLabel,
+            secondaryLabel: strings.gradeRangeLabel,
+          ),
+          const SizedBox(height: 16),
           for (int index = 0; index < profiles.length; index++) ...[
             _ProfileTile(
               onTap: () async {
@@ -1153,7 +1238,7 @@ class _LearnerProfilesSectionState extends State<_LearnerProfilesSection> {
                 }
               },
               name: profiles[index].displayName,
-              level: _competitionProfileLabel(profiles[index], strings),
+              level: _learnerGradeRangeLabel(profiles[index], strings),
               accent: index.isEven
                   ? const Color(0xFF163D7A)
                   : const Color(0xFF3B82F6),
@@ -1209,14 +1294,15 @@ class _ProfileTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final TextTheme textTheme = Theme.of(context).textTheme;
     return InkWell(
       onTap: onTap,
-      borderRadius: BorderRadius.circular(10),
+      borderRadius: BorderRadius.circular(16),
       child: Container(
-        padding: const EdgeInsets.all(18),
+        padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 16),
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(16),
           border: Border.all(
             color: isCurrent
                 ? const Color(0xFF111827)
@@ -1240,17 +1326,17 @@ class _ProfileTile extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Expanded(
                         child: Text(
                           name,
-                          style: const TextStyle(
-                            fontSize: 17,
-                            fontWeight: FontWeight.w600,
-                            color: Color(0xFF0F172A),
-                          ),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: textTheme.titleLarge?.copyWith(fontSize: 20),
                         ),
                       ),
+                      const SizedBox(width: 8),
                       if (isCurrent)
                         Container(
                           padding: const EdgeInsets.symmetric(
@@ -1264,17 +1350,25 @@ class _ProfileTile extends StatelessWidget {
                           ),
                           child: Text(
                             currentLabel,
-                            style: const TextStyle(
+                            style: textTheme.bodySmall?.copyWith(
                               fontSize: 11,
-                              fontWeight: FontWeight.w600,
-                              color: Color(0xFF374151),
+                              fontWeight: FontWeight.w700,
+                              color: const Color(0xFF374151),
                             ),
                           ),
                         ),
                     ],
                   ),
-                  const SizedBox(height: 4),
-                  Text(level),
+                  const SizedBox(height: 6),
+                  Text(
+                    level,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: textTheme.bodyMedium?.copyWith(
+                      fontSize: 15,
+                      color: const Color(0xFF475569),
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -1349,11 +1443,13 @@ class _ProgressSection extends StatelessWidget {
 class _LearnerDraft {
   const _LearnerDraft({
     required this.displayName,
-    required this.competitionProfileId,
+    required this.minLevelStage,
+    required this.maxLevelStage,
   });
 
   final String displayName;
-  final String competitionProfileId;
+  final String minLevelStage;
+  final String maxLevelStage;
 }
 
 class _CreateLearnerDialog extends StatefulWidget {
@@ -1367,7 +1463,7 @@ class _CreateLearnerDialog extends StatefulWidget {
 
 class _CreateLearnerDialogState extends State<_CreateLearnerDialog> {
   final TextEditingController _nameController = TextEditingController();
-  String _competitionProfileId = 'kangaroo_1_2';
+  RangeValues _gradeRange = const RangeValues(1, 2);
 
   @override
   void dispose() {
@@ -1390,16 +1486,15 @@ class _CreateLearnerDialogState extends State<_CreateLearnerDialog> {
               controller: _nameController,
               decoration: InputDecoration(
                 labelText: widget.strings.learnerName,
-                border: const OutlineInputBorder(),
               ),
             ),
             const SizedBox(height: 16),
-            _CompetitionProfileSelector(
+            _LearnerGradeRangeSelector(
               strings: widget.strings,
-              selectedProfileId: _competitionProfileId,
+              values: _gradeRange,
               onChanged: (value) {
                 setState(() {
-                  _competitionProfileId = value;
+                  _gradeRange = value;
                 });
               },
             ),
@@ -1421,7 +1516,8 @@ class _CreateLearnerDialogState extends State<_CreateLearnerDialog> {
             Navigator.of(context).pop(
               _LearnerDraft(
                 displayName: name,
-                competitionProfileId: _competitionProfileId,
+                minLevelStage: levelStageFromNumber(_gradeRange.start.round()),
+                maxLevelStage: levelStageFromNumber(_gradeRange.end.round()),
               ),
             );
           },
@@ -1451,14 +1547,15 @@ class LearnerEditPage extends StatefulWidget {
 
 class _LearnerEditPageState extends State<LearnerEditPage> {
   late final TextEditingController _nameController;
-  late String _competitionProfileId;
+  late RangeValues _gradeRange;
 
   @override
   void initState() {
     super.initState();
     _nameController = TextEditingController(text: widget.learner.displayName);
-    _competitionProfileId = competitionProfileIdForLevelStage(
-      widget.learner.levelStage,
+    _gradeRange = RangeValues(
+      levelStageNumber(widget.learner.effectiveMinLevelStage).toDouble(),
+      levelStageNumber(widget.learner.effectiveMaxLevelStage).toDouble(),
     );
   }
 
@@ -1477,9 +1574,9 @@ class _LearnerEditPageState extends State<LearnerEditPage> {
       LearnerProfile(
         id: widget.learner.id,
         displayName: name,
-        levelStage: representativeLevelStageForCompetitionProfile(
-          _competitionProfileId,
-        ),
+        levelStage: levelStageFromNumber(_gradeRange.end.round()),
+        minLevelStage: levelStageFromNumber(_gradeRange.start.round()),
+        maxLevelStage: levelStageFromNumber(_gradeRange.end.round()),
         challengeTier: widget.learner.challengeTier,
         createdAtIso: widget.learner.createdAtIso,
       ),
@@ -1507,16 +1604,15 @@ class _LearnerEditPageState extends State<LearnerEditPage> {
             controller: _nameController,
             decoration: InputDecoration(
               labelText: strings.learnerName,
-              border: const OutlineInputBorder(),
             ),
           ),
           const SizedBox(height: 20),
-          _CompetitionProfileSelector(
+          _LearnerGradeRangeSelector(
             strings: strings,
-            selectedProfileId: _competitionProfileId,
+            values: _gradeRange,
             onChanged: (value) {
               setState(() {
-                _competitionProfileId = value;
+                _gradeRange = value;
               });
             },
           ),
@@ -1536,45 +1632,69 @@ class _LearnerEditPageState extends State<LearnerEditPage> {
   }
 }
 
-class _CompetitionProfileSelector extends StatelessWidget {
-  const _CompetitionProfileSelector({
+class _LearnerGradeRangeSelector extends StatelessWidget {
+  const _LearnerGradeRangeSelector({
     required this.strings,
-    required this.selectedProfileId,
+    required this.values,
     required this.onChanged,
   });
 
   final AppStrings strings;
-  final String selectedProfileId;
-  final ValueChanged<String> onChanged;
+  final RangeValues values;
+  final ValueChanged<RangeValues> onChanged;
 
   @override
   Widget build(BuildContext context) {
-    final List<_CompetitionProfileOption> options = _competitionProfileOptions(
-      strings,
-    );
+    final int startGrade = values.start.round();
+    final int endGrade = values.end.round();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          strings.competitionProfileLabel,
-          style: Theme.of(context).textTheme.titleLarge,
+          strings.gradeRangeLabel,
+          style: Theme.of(context).textTheme.titleMedium,
         ),
-        const SizedBox(height: 12),
-        for (final _CompetitionProfileOption option in options) ...[
-          RadioListTile<String>(
-            key: ValueKey<String>('competition_profile_${option.id}'),
-            value: option.id,
-            groupValue: selectedProfileId,
-            onChanged: (value) {
-              if (value != null) {
-                onChanged(value);
-              }
-            },
-            title: Text(option.label),
-            subtitle: Text(option.hint),
-            contentPadding: EdgeInsets.zero,
+        const SizedBox(height: 8),
+        Text(
+          strings.gradeRangeHint,
+          style: Theme.of(context).textTheme.bodySmall,
+        ),
+        const SizedBox(height: 14),
+        Container(
+          width: double.infinity,
+          padding: const EdgeInsets.fromLTRB(16, 16, 16, 12),
+          decoration: BoxDecoration(
+            color: const Color(0xFFF8FAFC),
+            borderRadius: BorderRadius.circular(16),
+            border: Border.all(color: const Color(0xFFE2E8F0)),
           ),
-        ],
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                strings.gradeRangeDisplay(startGrade, endGrade),
+                style: Theme.of(context).textTheme.titleLarge,
+              ),
+              const SizedBox(height: 12),
+              RangeSlider(
+                key: const ValueKey<String>('learner_grade_range_slider'),
+                min: 1,
+                max: 12,
+                divisions: 11,
+                values: values,
+                labels: RangeLabels('$startGrade', '$endGrade'),
+                onChanged: onChanged,
+              ),
+              Row(
+                children: [
+                  Text('1', style: Theme.of(context).textTheme.bodySmall),
+                  const Spacer(),
+                  Text('12', style: Theme.of(context).textTheme.bodySmall),
+                ],
+              ),
+            ],
+          ),
+        ),
       ],
     );
   }
@@ -3417,49 +3537,19 @@ class AppStrings {
     en: 'Current learner',
     ja: '現在の学習者',
   );
-  String get competitionProfileLabel => _text(
-    zhHant: '競賽級別',
-    zhHans: '竞赛级别',
-    en: 'Competition profile',
-    ja: '競技レベル',
-  );
-  String get kangaroo12Label => _text(
-    zhHant: '袋鼠競賽 1-2 級',
-    zhHans: '袋鼠竞赛 1-2 级',
-    en: 'Kangaroo 1-2',
-    ja: 'カンガルー 1-2 級',
-  );
-  String get kangaroo34Label => _text(
-    zhHant: '袋鼠競賽 3-4 級',
-    zhHans: '袋鼠竞赛 3-4 级',
-    en: 'Kangaroo 3-4',
-    ja: 'カンガルー 3-4 級',
-  );
-  String get kangaroo56Label => _text(
-    zhHant: '袋鼠競賽 5-6 級',
-    zhHans: '袋鼠竞赛 5-6 级',
-    en: 'Kangaroo 5-6',
-    ja: 'カンガルー 5-6 級',
+  String get gradeRangeLabel => _text(
+    zhHant: '年級範圍',
+    zhHans: '年级范围',
+    en: 'Grade range',
+    ja: '学年範囲',
   );
   String get editLearner =>
       _text(zhHant: '編輯角色', zhHans: '编辑角色', en: 'Edit learner', ja: '学習者を編集');
-  String get kangaroo12Hint => _text(
-    zhHant: '約對應小一到小二',
-    zhHans: '约对应小学一年级到二年级',
-    en: 'Approx. Grades 1 to 2',
-    ja: 'およそ小学 1 年から 2 年相当',
-  );
-  String get kangaroo34Hint => _text(
-    zhHant: '約對應小三到小四',
-    zhHans: '约对应小学三年级到四年级',
-    en: 'Approx. Grades 3 to 4',
-    ja: 'およそ小学 3 年から 4 年相当',
-  );
-  String get kangaroo56Hint => _text(
-    zhHant: '約對應小五到小六',
-    zhHans: '约对应小学五年级到六年级',
-    en: 'Approx. Grades 5 to 6',
-    ja: 'およそ小学 5 年から 6 年相当',
+  String get gradeRangeHint => _text(
+    zhHant: '拖曳左右兩端，設定這個角色可抽到的題目年級範圍。',
+    zhHans: '拖动左右两端，设置这个角色可抽到的题目年级范围。',
+    en: 'Drag both ends to choose the grades this learner can receive.',
+    ja: '左右のつまみを動かして、この学習者に出題する学年範囲を設定します。',
   );
   String get learnerName =>
       _text(zhHant: '名稱', zhHans: '名称', en: 'Name', ja: '名前');
@@ -3489,7 +3579,12 @@ class AppStrings {
   );
   String get dashboardPathTitle =>
       _text(zhHant: '目前路徑', zhHans: '当前路径', en: 'Level Path', ja: '現在のルート');
-  String get dashboardPathValue => 'Kangaroo 3-4';
+  String get dashboardPathValue => _text(
+    zhHant: '年級範圍',
+    zhHans: '年级范围',
+    en: 'Grade range',
+    ja: '学年範囲',
+  );
   String get navPractice =>
       _text(zhHant: '練習', zhHans: '练习', en: 'Practice', ja: '練習');
   String get navQuiz =>
@@ -3505,18 +3600,18 @@ class AppStrings {
   String get practiceEntryTitle =>
       _text(zhHant: '開始練習', zhHans: '开始练习', en: 'Practice', ja: '練習開始');
   String get practiceEntrySubtitle => _text(
-    zhHant: '直接開始目前競賽級別的練習，或指定主題。',
-    zhHans: '直接开始当前竞赛级别的练习，或指定主题。',
-    en: 'Start a session for the current competition profile or choose a topic.',
-    ja: '現在の競技レベルで練習を始めるか、分野を指定します。',
+    zhHant: '直接開始目前年級範圍的練習，或指定主題。',
+    zhHans: '直接开始当前年级范围的练习，或指定主题。',
+    en: 'Start a session for the current grade range or choose a topic.',
+    ja: '現在の学年範囲で練習を始めるか、分野を指定します。',
   );
   String get quizEntryTitle =>
       _text(zhHant: '開始測驗', zhHans: '开始测验', en: 'Quiz', ja: 'テスト開始');
   String get quizEntrySubtitle => _text(
-    zhHant: '用目前競賽級別出一組測驗，完成後再看詳解。',
-    zhHans: '按当前竞赛级别生成一组测验，完成后再看详解。',
-    en: 'Generate a quiz for the current competition profile and review solutions after submission.',
-    ja: '現在の競技レベルに合わせて出題し、提出後に解説を確認します。',
+    zhHant: '用目前年級範圍出一組測驗，完成後再看詳解。',
+    zhHans: '按当前年级范围生成一组测验，完成后再看详解。',
+    en: 'Generate a quiz for the current grade range and review solutions after submission.',
+    ja: '現在の学年範囲に合わせて出題し、提出後に解説を確認します。',
   );
   String get reviewTitle =>
       _text(zhHant: '學習回顧', zhHans: '学习回顾', en: 'Review', ja: '学習ふり返り');
@@ -3533,10 +3628,10 @@ class AppStrings {
     ja: 'プロフィールと設定',
   );
   String get settingsSubtitle => _text(
-    zhHant: '在這裡管理角色、程度與目前使用者。',
-    zhHans: '在这里管理角色、程度与当前使用者。',
-    en: 'Manage learners, levels, and the active profile here.',
-    ja: 'ここで学習者、レベル、現在の利用者を管理します。',
+    zhHant: '在這裡管理角色、出題年級範圍與目前使用者。',
+    zhHans: '在这里管理角色、出题年级范围与当前使用者。',
+    en: 'Manage learners, grade ranges, and the active profile here.',
+    ja: 'ここで学習者、出題学年範囲、現在の利用者を管理します。',
   );
   String get topicPracticeTitle => _text(
     zhHant: '指定主題練習',
@@ -3545,10 +3640,10 @@ class AppStrings {
     ja: '分野別練習',
   );
   String get topicPracticeSubtitle => _text(
-    zhHant: '依目前競賽級別，選擇想加強的主題。',
-    zhHans: '按当前竞赛级别，选择想加强的主题。',
-    en: 'Choose a topic to practice within the current competition profile.',
-    ja: '現在の競技レベルに合わせて、強化したい分野を選びます。',
+    zhHant: '依目前年級範圍，選擇想加強的主題。',
+    zhHans: '按当前年级范围，选择想加强的主题。',
+    en: 'Choose a topic to practice within the current grade range.',
+    ja: '現在の学年範囲に合わせて、強化したい分野を選びます。',
   );
   String get chooseTopic =>
       _text(zhHant: '指定主題', zhHans: '指定主题', en: 'Choose topic', ja: '分野を選ぶ');
@@ -3627,10 +3722,16 @@ class AppStrings {
   String get startQuiz =>
       _text(zhHant: '開始測驗', zhHans: '开始测验', en: 'Start quiz', ja: 'テスト開始');
   String get quizStartHint => _text(
-    zhHant: '測驗會依目前競賽級別自動抽題，完成整份後再統一看分數與詳解。',
-    zhHans: '测验会按当前竞赛级别自动抽题，完成整份后再统一看分数与详解。',
-    en: 'Quiz questions are selected automatically for the current competition profile. Review score and solutions after submission.',
-    ja: 'テスト問題は現在の競技レベルに合わせて自動選定され、提出後に得点と解説をまとめて確認します。',
+    zhHant: '測驗會依目前年級範圍自動抽題，完成整份後再統一看分數與詳解。',
+    zhHans: '测验会按当前年级范围自动抽题，完成整份后再统一看分数与详解。',
+    en: 'Quiz questions are selected automatically for the current grade range. Review score and solutions after submission.',
+    ja: 'テスト問題は現在の学年範囲に合わせて自動選定され、提出後に得点と解説をまとめて確認します。',
+  );
+  String get noApprovedQuestionsInRange => _text(
+    zhHant: '這個年級範圍目前還沒有通過審查的題目。',
+    zhHans: '这个年级范围目前还没有通过审查的题目。',
+    en: 'There are no approved questions in this grade range yet.',
+    ja: 'この学年範囲には、まだ審査済みの問題がありません。',
   );
   String get languageSettingsTitle => _text(
     zhHant: '語言',
@@ -3794,17 +3895,73 @@ class AppStrings {
   }
 
   String levelStageDisplay(String levelStage) {
-    final String suffix = levelStage.replaceFirst('grade', '');
+    return singleGradeDisplay(int.parse(levelStage.replaceFirst('grade', '')));
+  }
+
+  String singleGradeDisplay(int grade) {
     if (isTraditionalChinese) {
-      return '約小$suffix';
+      if (grade <= 6) {
+        return '小${_chineseGradeNumeral(grade)}';
+      }
+      if (grade <= 9) {
+        return '國${_chineseGradeNumeral(grade - 6)}';
+      }
+      return '高${_chineseGradeNumeral(grade - 9)}';
     }
     if (isSimplifiedChinese) {
-      return '约小学$suffix年级';
+      if (grade <= 6) {
+        return '小学${_chineseGradeNumeral(grade)}年级';
+      }
+      if (grade <= 9) {
+        return '初${_chineseGradeNumeral(grade - 6)}';
+      }
+      return '高${_chineseGradeNumeral(grade - 9)}';
     }
     if (isJapanese) {
-      return '小学 $suffix 年相当';
+      if (grade <= 6) {
+        return '小学 $grade 年';
+      }
+      if (grade <= 9) {
+        return '中学 ${grade - 6} 年';
+      }
+      return '高校 ${grade - 9} 年';
     }
-    return 'Grade $suffix';
+    return 'Grade $grade';
+  }
+
+  String gradeRangeDisplay(int startGrade, int endGrade) {
+    if (startGrade == endGrade) {
+      return singleGradeDisplay(startGrade);
+    }
+    if (isTraditionalChinese) {
+      return '${singleGradeDisplay(startGrade)}到${singleGradeDisplay(endGrade)}';
+    }
+    if (isSimplifiedChinese) {
+      return '${singleGradeDisplay(startGrade)}到${singleGradeDisplay(endGrade)}';
+    }
+    if (isJapanese) {
+      return '${singleGradeDisplay(startGrade)}から${singleGradeDisplay(endGrade)}';
+    }
+    return 'Grades $startGrade-$endGrade';
+  }
+
+  String _chineseGradeNumeral(int grade) {
+    const List<String> numerals = <String>[
+      '零',
+      '一',
+      '二',
+      '三',
+      '四',
+      '五',
+      '六',
+      '七',
+      '八',
+      '九',
+      '十',
+      '十一',
+      '十二',
+    ];
+    return numerals[grade];
   }
 
   String tierDisplay(String tier) {
@@ -3819,18 +3976,6 @@ class AppStrings {
         return tier;
     }
   }
-}
-
-class _CompetitionProfileOption {
-  const _CompetitionProfileOption({
-    required this.id,
-    required this.label,
-    required this.hint,
-  });
-
-  final String id;
-  final String label;
-  final String hint;
 }
 
 class TrigGraphDemoPage extends StatelessWidget {
@@ -4341,19 +4486,26 @@ Future<void> _openFirstEligiblePack({
     final QuestionBank questionBank = await repository.loadPack(pack.path);
     mergedQuestions.addAll(questionBank.questions);
   }
-  if (mergedQuestions.isEmpty) {
+  final List<Question> approvedQuestions =
+      SessionLaunchPlanBuilder.filterApprovedQuestionsForLaunch(mergedQuestions);
+  if (!context.mounted || approvedQuestions.isEmpty) {
+    if (context.mounted) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(AppStrings.of(context).noApprovedQuestionsInRange)),
+      );
+    }
     return;
   }
   final List<Question> sessionQuestions =
       SessionLaunchPlanBuilder.randomizeQuestionOrderForSession(
-    mergedQuestions,
+    approvedQuestions,
   );
 
   final bundled.BundledQuestionPackInfo launchPack =
       SessionLaunchPlanBuilder.buildLaunchPack(
     selectedPacks: selectedPacks,
-    learner: learner,
-    mergedQuestionCount: mergedQuestions.length,
+        learner: learner,
+    mergedQuestionCount: approvedQuestions.length,
     topicCode: topicCode,
   );
 
@@ -4375,16 +4527,11 @@ Future<void> _openFirstEligiblePack({
   );
 }
 
-String _competitionProfileLabel(LearnerProfile learner, AppStrings strings) {
-  switch (competitionProfileIdForLevelStage(learner.levelStage)) {
-    case kangaroo12ProfileId:
-      return strings.kangaroo12Label;
-    case kangaroo34ProfileId:
-      return strings.kangaroo34Label;
-    case kangaroo56ProfileId:
-    default:
-      return strings.kangaroo56Label;
-  }
+String _learnerGradeRangeLabel(LearnerProfile learner, AppStrings strings) {
+  return strings.gradeRangeDisplay(
+    levelStageNumber(learner.effectiveMinLevelStage),
+    levelStageNumber(learner.effectiveMaxLevelStage),
+  );
 }
 
 String _answerModeSubtitle(AppStrings strings, AnswerMode answerMode) {
@@ -4491,26 +4638,6 @@ String _displaySubmittedAnswer(
     case AnswerMode.selfCheck:
       return submittedAnswer;
   }
-}
-
-List<_CompetitionProfileOption> _competitionProfileOptions(AppStrings strings) {
-  return [
-    _CompetitionProfileOption(
-      id: 'kangaroo_1_2',
-      label: strings.kangaroo12Label,
-      hint: strings.kangaroo12Hint,
-    ),
-    _CompetitionProfileOption(
-      id: 'kangaroo_3_4',
-      label: strings.kangaroo34Label,
-      hint: strings.kangaroo34Hint,
-    ),
-    _CompetitionProfileOption(
-      id: 'kangaroo_5_6',
-      label: strings.kangaroo56Label,
-      hint: strings.kangaroo56Hint,
-    ),
-  ];
 }
 
 class _LegendTile extends StatelessWidget {
