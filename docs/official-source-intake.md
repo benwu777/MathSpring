@@ -9,6 +9,29 @@ into the app.
 
 Current date reference for this review: July 19, 2026.
 
+## Grade 7-12 First Batch Policy
+
+For the first `grade7` to `grade12` expansion batch, MathSpring uses this
+content policy:
+
+- source scope: official or publicly available competition problems only
+- shipping wording: rewritten for app use, not copied verbatim
+- first-batch size: exactly 3 questions per `grade × olympiad topic` pack
+- first-batch difficulty mix:
+  - 1 easier entry question
+  - 1 medium standard competition question
+  - 1 harder question
+- required source fields:
+  - `contest`
+  - `year`
+  - `division`
+  - `problemNumber`
+  - `displayText`
+  - `sourceUrl`
+  - `rightsStatus`
+
+This first batch is a quality-controlled seed, not a placeholder or demo set.
+
 ## Core Rule
 
 MathSpring should not treat "publicly viewable PDF" as equivalent to "safe to
@@ -107,6 +130,27 @@ If MathSpring moves toward official-only content, the safest practical order is:
 1. Build metadata-only records for all candidate official sources
 2. Import full text only from sources with confirmed reuse permission
 3. Keep all other official sources as references until rights are cleared
+
+## Public-Competition Rewrite Policy
+
+MathSpring may use public competition problems as the structural basis for
+shipping content, but the bundled question text must still be rewritten into an
+app-safe version unless reuse rights are explicitly cleared.
+
+Allowed first-batch workflow:
+
+1. verify the problem is on an official or clearly public archive
+2. record exact source metadata
+3. rewrite the prompt, solution steps, and answer text
+4. preserve the mathematical structure and difficulty band
+5. avoid figure-heavy items unless the figure can already be rendered cleanly
+
+Not allowed:
+
+- bundling raw copied contest PDFs into the app
+- storing verbatim official solution text when reuse rights are unclear
+- downgrading the source to `rewritten_olympiad_style` after using a real public
+  contest item as the basis
 
 ## Immediate Project Policy
 

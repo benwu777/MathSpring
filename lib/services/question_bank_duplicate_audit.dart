@@ -534,6 +534,8 @@ class QuestionBankDuplicateAudit {
       case 'matching':
         addIf(prompt.contains('而且每人') || prompt.contains('都不同'), 'matching_all_distinct');
         addIf(prompt.contains('同時也各喜歡一種'), 'matching_two_dimensions');
+        addIf(prompt.contains('顏色') || prompt.contains('喜歡紅色') || prompt.contains('喜歡藍色'),
+            'matching_colors');
         addIf(prompt.contains('帽子'), 'matching_hats');
         addIf(prompt.contains('書包'), 'matching_bags');
         addIf(prompt.contains('飲料'), 'matching_drinks');
@@ -541,6 +543,12 @@ class QuestionBankDuplicateAudit {
         addIf(prompt.contains('水果'), 'matching_fruits');
         addIf(prompt.contains('社團') || prompt.contains('活動'), 'matching_activities');
         addIf(prompt.contains('襪子'), 'matching_pair_existence');
+        break;
+      case 'elimination':
+        addIf(prompt.contains('帽子'), 'elimination_hats');
+        addIf(prompt.contains('盒子') || prompt.contains('標籤'), 'elimination_boxes');
+        addIf(prompt.contains('標籤全都貼錯') || prompt.contains('標籤全都錯'), 'elimination_wrong_labels');
+        addIf(prompt.contains('只抽一次') || prompt.contains('抽一次一顆球'), 'elimination_single_draw');
         break;
       case 'case_reasoning':
         addIf(prompt.contains('不是茶就是水') || prompt.contains('只有一盞是亮的'), 'binary_elimination');
@@ -588,6 +596,13 @@ class QuestionBankDuplicateAudit {
         addIf(prompt.contains('1 到 12'), 'digit_count_to_12');
         addIf(prompt.contains('1 到 20'), 'digit_count_to_20');
         break;
+      case 'equation_reasoning':
+        addIf(prompt.contains('都是 1 到 9 的數字') || prompt.contains('A 和 B'), 'equation_digit_relation');
+        addIf(prompt.contains('÷') || prompt.contains('除以'), 'equation_division_relation');
+        addIf(prompt.contains('★') || prompt.contains('△') || prompt.contains('◎'), 'equation_symbol_placeholder');
+        addIf(prompt.contains('.'), 'equation_decimal_balance');
+        addIf(prompt.contains('不可能'), 'equation_impossible_choice');
+        break;
       case 'direction':
         addIf(prompt.contains('左邊') && prompt.contains('右邊'), 'direction_basic_left_right');
         addIf(prompt.contains('正北方') || prompt.contains('正東方'), 'direction_compass');
@@ -620,10 +635,23 @@ class QuestionBankDuplicateAudit {
         addIf(prompt.contains('袋子'), 'piece_value_bags');
         addIf(prompt.contains('一共是'), 'piece_value_total');
         break;
+      case 'multi_step':
+        addIf(prompt.contains('一共要付') || prompt.contains('一共要花'), 'multi_step_total_cost');
+        addIf(prompt.contains('還剩') || prompt.contains('剩下'), 'multi_step_remaining_money');
+        addIf(prompt.contains('每枝') || prompt.contains('每本') || prompt.contains('每個'), 'multi_step_unit_price');
+        addIf(prompt.contains('帶了'), 'multi_step_starting_budget');
+        break;
       case 'pigeonhole':
         addIf(prompt.contains('星期一到星期日') || prompt.contains('星期幾'), 'pigeonhole_weekday');
         addIf(prompt.contains('生日月份') || prompt.contains('月份'), 'pigeonhole_month');
         addIf(prompt.contains('餘數相同') || prompt.contains('除以'), 'pigeonhole_remainder');
+        break;
+      case 'grid_elimination':
+        addIf(prompt.contains('從左到右') || prompt.contains('排成一列'), 'grid_linear_order');
+        addIf(prompt.contains('各養一種') || prompt.contains('各喜歡一種') || prompt.contains('各自選一種'),
+            'grid_multi_attribute_matching');
+        addIf(prompt.contains('寵物') || prompt.contains('水果') || prompt.contains('運動') || prompt.contains('顏色'),
+            'grid_category_assignment');
         break;
       case 'position':
         addIf(prompt.contains('座位不同') || prompt.contains('坐在'), 'position_seating_assignment');

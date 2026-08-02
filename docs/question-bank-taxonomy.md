@@ -14,13 +14,18 @@ recommendation, filtering, and learner progress analysis.
 
 Primary level rules:
 
-- Main stage is elementary school only in phase 1: `grade1` to `grade6`
-- **Grade (`levelStage`) is the only difficulty axis in phase 1** — there is no
-  difficulty layering. `challengeTier` (and per-question `difficulty`) is fixed
-  at `foundation` as a schema placeholder and does not differentiate difficulty.
-- The schema should remain extensible for later junior-high expansion
+- Current shipped elementary packs remain `grade1` to `grade6`
+- New expansion stage adds `grade7` to `grade12`
+- **Grade (`levelStage`) is the only difficulty axis** in the current model
+- `challengeTier` (and per-question `difficulty`) stays fixed at `foundation`
+  as a schema placeholder
+- `grade1` to `grade6` keep the legacy top-level topic folders for app
+  compatibility
+- `grade7` to `grade12` use canonical olympiad topic folders directly
 
 ## Major Topics
+
+### Legacy shipped top-level topics (`grade1` to `grade6`)
 
 Phase 1 ships **four** top-level topics (these are the only `topicCode` values and
 the only pack folders):
@@ -43,6 +48,21 @@ topics — they are NOT separate topics or folders:
 
 The canonical allowed `subtopic` list per shipped topic is maintained in
 `docs/question-bank-subtopic-registry.md`.
+
+### Canonical olympiad topics (`grade7` to `grade12`)
+
+Starting with `grade7`, the canonical topic system becomes first-class:
+
+| `topicCode`       | display |
+| ----------------- | ------- |
+| `algebra`         | 代數    |
+| `geometry`        | 幾何    |
+| `number_theory`   | 數論    |
+| `combinatorics`   | 組合    |
+| `logic`           | 邏輯    |
+
+For `grade1` to `grade6`, these canonical topics are stored as compatibility
+metadata on each question through `olympiadTaxonomy`.
 
 ## Subtopic Skill Families (classification layer)
 
@@ -128,12 +148,24 @@ assets/questions/
   mixed/
     grade5_foundation.mixed.v1.json
     grade6_foundation.mixed.v1.json
+  algebra/
+    grade7_foundation.algebra.v1.json
+  number_theory/
+    grade8_foundation.number_theory.v1.json
+  combinatorics/
+    grade10_foundation.combinatorics.v1.json
 ```
 
-Only the four shipped topic folders exist (`arithmetic`, `geometry`, `logic`,
-`mixed`). Do not create `number_theory/`, `algebra/`, or `combinatorics/`
-folders in phase 1 — those skill families live as subtopics under the four
-topics above.
+`grade1` to `grade6` continue to use the four legacy topic folders
+(`arithmetic`, `geometry`, `logic`, `mixed`).
+
+`grade7` to `grade12` may use canonical olympiad folders directly:
+
+- `algebra/`
+- `geometry/`
+- `number_theory/`
+- `combinatorics/`
+- `logic/`
 
 ## File Naming Rule
 
@@ -148,6 +180,8 @@ Examples:
 - `grade4_foundation.geometry.v1.json`
 - `grade5_foundation.arithmetic.v1.json`
 - `grade6_foundation.logic.v1.json`
+- `grade7_foundation.algebra.v1.json`
+- `grade12_foundation.number_theory.v1.json`
 
 ## Question ID Rule
 
@@ -162,6 +196,8 @@ Examples:
 - `geometry_grade4_foundation_001`
 - `arithmetic_grade5_foundation_012`
 - `logic_grade6_foundation_004`
+- `algebra_grade7_foundation_001`
+- `combinatorics_grade12_foundation_003`
 
 If AI and human-edited content need to be separated later, an optional source
 prefix can be added:
@@ -206,12 +242,17 @@ questions.
   "version": 1,
   "topic": "幾何",
   "topicCode": "geometry",
+  "olympiadTopic": "幾何",
+  "olympiadTopicCode": "geometry",
   "levelStage": "grade4",
   "challengeTier": "foundation",
   "languages": ["zh-Hant", "en", "zh-Hans", "ja"],
   "questions": []
 }
 ```
+
+Legacy packs may keep `topic` / `topicCode` as-is and store canonical mapping in
+question-level `olympiadTaxonomy`.
 
 ## Question Source Shape
 

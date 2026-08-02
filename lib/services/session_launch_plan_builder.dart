@@ -6,6 +6,15 @@ import 'package:mathspring/models/learner_profile.dart';
 import 'package:mathspring/models/question.dart';
 
 class SessionLaunchPlanBuilder {
+  static const Set<String> _currentlySupportedLaunchLevels = <String>{
+    'grade1',
+    'grade2',
+    'grade3',
+    'grade4',
+    'grade5',
+    'grade6',
+  };
+
   static List<BundledQuestionPackInfo> pickEligiblePacks(
     List<BundledQuestionPackInfo> packs,
     LearnerProfile? learner, {
@@ -13,6 +22,9 @@ class SessionLaunchPlanBuilder {
   }) {
     if (learner == null) {
       return packs.where((pack) {
+        if (!_currentlySupportedLaunchLevels.contains(pack.levelStage)) {
+          return false;
+        }
         if (topicCode != null && pack.topicCode != topicCode) {
           return false;
         }

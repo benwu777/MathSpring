@@ -78,6 +78,14 @@ void main() {
       challengeTier: 'foundation',
       questionCount: 5,
     ),
+    BundledQuestionPackInfo(
+      path: 'assets/questions/algebra/grade7_foundation.algebra.v1.json',
+      topic: 'Algebra',
+      topicCode: 'algebra',
+      levelStage: 'grade7',
+      challengeTier: 'foundation',
+      questionCount: 4,
+    ),
   ];
 
   test('selects only foundation packs for anonymous launch', () {
@@ -91,6 +99,34 @@ void main() {
     expect(selected, hasLength(4));
     expect(selected.every((pack) => pack.challengeTier == 'foundation'), isTrue);
     expect(selected.every((pack) => pack.topicCode == 'geometry'), isTrue);
+  });
+
+  test('anonymous launch ignores unsupported grade7+ packs before range UI ships',
+      () {
+    final List<BundledQuestionPackInfo> selected =
+        SessionLaunchPlanBuilder.pickEligiblePacks(
+      packs,
+      null,
+      topicCode: null,
+    );
+
+    expect(
+      selected.every(
+        (pack) => <String>{
+          'grade1',
+          'grade2',
+          'grade3',
+          'grade4',
+          'grade5',
+          'grade6',
+        }.contains(pack.levelStage),
+      ),
+      isTrue,
+    );
+    expect(
+      selected.any((pack) => pack.levelStage == 'grade7'),
+      isFalse,
+    );
   });
 
   test('selects competition-profile-matched packs for learner launch', () {

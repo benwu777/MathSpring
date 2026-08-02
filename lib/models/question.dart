@@ -2,12 +2,36 @@ enum AnswerMode { multipleChoice, integerInput, selfCheck }
 
 enum FigureType { custom, svg }
 
+class QuestionOlympiadTaxonomy {
+  const QuestionOlympiadTaxonomy({
+    required this.topic,
+    required this.topicCode,
+    this.subtopic,
+    this.subtopicCode,
+  });
+
+  final String topic;
+  final String topicCode;
+  final String? subtopic;
+  final String? subtopicCode;
+
+  factory QuestionOlympiadTaxonomy.fromJson(Map<String, dynamic> json) {
+    return QuestionOlympiadTaxonomy(
+      topic: json['topic'] as String? ?? '',
+      topicCode: json['topicCode'] as String? ?? '',
+      subtopic: json['subtopic'] as String?,
+      subtopicCode: json['subtopicCode'] as String?,
+    );
+  }
+}
+
 class QuestionSource {
   const QuestionSource({
     required this.type,
     this.name,
     this.contest,
     this.year,
+    this.round,
     this.division,
     this.problemNumber,
     this.reference,
@@ -21,6 +45,7 @@ class QuestionSource {
   final String? name;
   final String? contest;
   final String? year;
+  final String? round;
   final String? division;
   final String? problemNumber;
   final String? reference;
@@ -40,9 +65,10 @@ class QuestionSource {
     final List<String> officialParts = <String>[
       if (contest != null && contest!.trim().isNotEmpty) contest!,
       if (year != null && year!.trim().isNotEmpty) year!,
+      if (round != null && round!.trim().isNotEmpty) round!,
       if (division != null && division!.trim().isNotEmpty) division!,
       if (problemNumber != null && problemNumber!.trim().isNotEmpty)
-        'Problem $problemNumber',
+        problemNumber!,
     ];
     if (officialParts.isNotEmpty) {
       return officialParts.join(', ');
@@ -64,6 +90,7 @@ class QuestionSource {
       name: json['name'] as String?,
       contest: json['contest'] as String?,
       year: json['year'] as String?,
+      round: json['round'] as String?,
       division: json['division'] as String?,
       problemNumber: json['problemNumber'] as String?,
       reference: json['reference'] as String?,
@@ -168,6 +195,7 @@ class Question {
     this.options,
     this.inputConstraints,
     this.source,
+    this.olympiadTaxonomy,
   });
 
   final String id;
@@ -184,6 +212,7 @@ class Question {
   final Map<String, QuestionOption>? options;
   final InputConstraints? inputConstraints;
   final QuestionSource? source;
+  final QuestionOlympiadTaxonomy? olympiadTaxonomy;
 
   factory Question.fromJson(Map<String, dynamic> json) {
     return Question(
@@ -217,6 +246,13 @@ class Question {
           : QuestionSource.fromJson(
               Map<String, dynamic>.from(
                 json['source'] as Map<String, dynamic>,
+              ),
+            ),
+      olympiadTaxonomy: json['olympiadTaxonomy'] == null
+          ? null
+          : QuestionOlympiadTaxonomy.fromJson(
+              Map<String, dynamic>.from(
+                json['olympiadTaxonomy'] as Map<String, dynamic>,
               ),
             ),
     );
