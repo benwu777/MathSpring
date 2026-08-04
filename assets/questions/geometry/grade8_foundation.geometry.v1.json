@@ -52,14 +52,8 @@
       },
       "figure": {
         "type": "custom",
-        "kind": "shape_diagram",
-        "params": {
-          "shape": "trapezoid",
-          "labels": {
-            "center": "中線=4",
-            "right": "高=8"
-          }
-        }
+        "kind": "none",
+        "params": {}
       },
       "answerMode": "multiple_choice",
       "options": {
@@ -112,7 +106,7 @@
         "subtopic": "梯形面積",
         "subtopicCode": "trapezoid_midline"
       },
-      "reviewStatus": "pending"
+      "reviewStatus": "ok"
     },
     {
       "id": "geometry_grade8_foundation_002",
@@ -161,15 +155,8 @@
       },
       "figure": {
         "type": "custom",
-        "kind": "shape_diagram",
-        "params": {
-          "shape": "rectangle",
-          "labels": {
-            "top": "AB=2",
-            "right": "BC=1",
-            "center": "沿 AE 對折"
-          }
-        }
+        "kind": "none",
+        "params": {}
       },
       "answerMode": "multiple_choice",
       "options": {
@@ -222,7 +209,7 @@
         "subtopic": "摺紙角度",
         "subtopicCode": "folding_angle"
       },
-      "reviewStatus": "pending"
+      "reviewStatus": "ok"
     },
     {
       "id": "geometry_grade8_foundation_003",
@@ -267,15 +254,25 @@
       },
       "figure": {
         "type": "custom",
-        "kind": "shape_diagram",
+        "kind": "geometry_scene",
         "params": {
-          "shape": "triangle",
-          "labels": {
-            "left": "6",
-            "right": "8",
-            "bottom": "10",
-            "center": "r=?"
-          }
+          "bounds": { "minX": 0, "minY": 0, "maxX": 8, "maxY": 6 },
+          "points": [
+            { "name": "C", "x": 0, "y": 0, "pos": "bl" },
+            { "name": "B", "x": 8, "y": 0, "pos": "br" },
+            { "name": "A", "x": 0, "y": 6, "pos": "tl" }
+          ],
+          "segments": [
+            { "from": "A", "to": "B", "style": "solid" },
+            { "from": "B", "to": "C", "style": "solid" },
+            { "from": "C", "to": "A", "style": "solid" }
+          ],
+          "arcs": [
+            { "cx": 2, "cy": 2, "r": 2, "from": 0, "to": 360 }
+          ],
+          "rightAngles": [
+            { "at": "C", "from": "A", "to": "B" }
+          ]
         }
       },
       "answerMode": "integer_input",
@@ -307,7 +304,7 @@
         "subtopic": "內切圓半徑",
         "subtopicCode": "inradius_triangle"
       },
-      "reviewStatus": "pending"
+      "reviewStatus": "ok"
     },
     {
       "id": "geometry_grade8_foundation_004",
@@ -330,36 +327,46 @@
       },
       "solutionSteps": {
         "zh-Hant": [
-          "由畢氏定理，AB = √(6^2 + 8^2) = 10。",
+          "由畢氏定理，AB = √(6² + 8²) = 10。",
           "直角三角形斜邊中點到三個頂點距離相等。",
           "因此 CM = AB ÷ 2 = 5。"
         ],
         "zh-Hans": [
-          "由勾股定理，AB = √(6^2 + 8^2) = 10。",
+          "由勾股定理，AB = √(6² + 8²) = 10。",
           "直角三角形斜边中点到三个顶点距离相等。",
           "因此 CM = AB ÷ 2 = 5。"
         ],
         "en": [
-          "By the Pythagorean theorem, AB = √(6^2 + 8^2) = 10.",
+          "By the Pythagorean theorem, AB = √(6² + 8²) = 10.",
           "In a right triangle, the midpoint of the hypotenuse is equidistant from all three vertices.",
           "Therefore CM = AB/2 = 5."
         ],
         "ja": [
-          "三平方の定理より AB = √(6^2 + 8^2) = 10。",
+          "三平方の定理より AB = √(6² + 8²) = 10。",
           "直角三角形では、斜辺の中点は 3 頂点から等距離です。",
           "したがって CM = AB ÷ 2 = 5 です。"
         ]
       },
       "figure": {
         "type": "custom",
-        "kind": "shape_diagram",
+        "kind": "geometry_scene",
         "params": {
-          "shape": "triangle",
-          "labels": {
-            "left": "6",
-            "right": "8",
-            "bottom": "M 中點"
-          }
+          "bounds": { "minX": 0, "minY": 0, "maxX": 8, "maxY": 6 },
+          "points": [
+            { "name": "C", "x": 0, "y": 0, "pos": "bl" },
+            { "name": "A", "x": 0, "y": 6, "pos": "tl" },
+            { "name": "B", "x": 8, "y": 0, "pos": "br" },
+            { "name": "M", "x": 4, "y": 3, "pos": "tr" }
+          ],
+          "segments": [
+            { "from": "A", "to": "B", "style": "solid" },
+            { "from": "B", "to": "C", "style": "solid" },
+            { "from": "C", "to": "A", "style": "solid" },
+            { "from": "C", "to": "M", "style": "construction" }
+          ],
+          "rightAngles": [
+            { "at": "C", "from": "A", "to": "B" }
+          ]
         }
       },
       "answerMode": "integer_input",
@@ -372,10 +379,11 @@
         "maxDigits": 1
       },
       "source": {
-        "type": "editorial_original",
-        "name": "MathSpring Editorial",
-        "reference": "Upper geometry expansion set G2",
-        "displayText": "MathSpring Editorial Original"
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "直角三角形斜邊中點到頂點等距的題型",
+        "notes": "設計依據：由畢氏求斜邊，再用「斜邊中點到三頂點等距」得 CM = 斜邊/2；屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（斜邊中點）"
       },
       "olympiadTaxonomy": {
         "topic": "幾何",
@@ -383,7 +391,7 @@
         "subtopic": "直角三角形中點",
         "subtopicCode": "right_triangle_midpoint"
       },
-      "reviewStatus": "pending"
+      "reviewStatus": "ok"
     },
     {
       "id": "geometry_grade8_foundation_005",
@@ -407,39 +415,51 @@
       "solutionSteps": {
         "zh-Hant": [
           "圓心到弦的垂線會平分這條弦。",
-          "設半弦長是 x，則 x^2 + 6^2 = 10^2。",
-          "所以 x^2 = 64，x = 8。",
+          "設半弦長是 x，則 x² + 6² = 10²。",
+          "所以 x² = 64，x = 8。",
           "弦長是 2x = 16。"
         ],
         "zh-Hans": [
           "圆心到弦的垂线会平分这条弦。",
-          "设半弦长是 x，则 x^2 + 6^2 = 10^2。",
-          "所以 x^2 = 64，x = 8。",
+          "设半弦长是 x，则 x² + 6² = 10²。",
+          "所以 x² = 64，x = 8。",
           "弦长是 2x = 16。"
         ],
         "en": [
           "The perpendicular from the center to a chord bisects the chord.",
-          "Let half the chord length be x. Then x^2 + 6^2 = 10^2.",
-          "So x^2 = 64 and x = 8.",
+          "Let half the chord length be x. Then x² + 6² = 10².",
+          "So x² = 64 and x = 8.",
           "Hence the full chord length is 16."
         ],
         "ja": [
           "中心から弦に下ろした垂線は弦を二等分します。",
-          "半分の長さを x とすると、x^2 + 6^2 = 10^2。",
-          "よって x^2 = 64、x = 8。",
+          "半分の長さを x とすると、x² + 6² = 10²。",
+          "よって x² = 64、x = 8。",
           "したがって弦の長さは 16 です。"
         ]
       },
       "figure": {
         "type": "custom",
-        "kind": "shape_diagram",
+        "kind": "geometry_scene",
         "params": {
-          "shape": "circle",
-          "labels": {
-            "center": "O",
-            "top": "r=10",
-            "bottom": "距離 6"
-          }
+          "bounds": { "minX": -10, "minY": -10, "maxX": 10, "maxY": 10 },
+          "points": [
+            { "name": "O", "x": 0, "y": 0, "pos": "t" },
+            { "name": "P", "x": -8, "y": -6, "pos": "l" },
+            { "name": "Q", "x": 8, "y": -6, "pos": "r" },
+            { "name": "F", "x": 0, "y": -6, "pos": "b" }
+          ],
+          "segments": [
+            { "from": "P", "to": "Q", "style": "solid" },
+            { "from": "O", "to": "F", "style": "construction" },
+            { "from": "O", "to": "P", "style": "construction" }
+          ],
+          "arcs": [
+            { "cx": 0, "cy": 0, "r": 10, "from": 0, "to": 360 }
+          ],
+          "rightAngles": [
+            { "at": "F", "from": "O", "to": "P" }
+          ]
         }
       },
       "answerMode": "integer_input",
@@ -452,10 +472,11 @@
         "maxDigits": 2
       },
       "source": {
-        "type": "editorial_original",
-        "name": "MathSpring Editorial",
-        "reference": "Upper geometry expansion set G7",
-        "displayText": "MathSpring Editorial Original"
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "由圓心到弦距離求弦長的題型",
+        "notes": "設計依據：中心到弦的垂線平分弦，以半弦² + 距離² = 半徑² 求半弦；屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（圓弦與距離）"
       },
       "olympiadTaxonomy": {
         "topic": "幾何",
@@ -463,7 +484,7 @@
         "subtopic": "圓弦與距離",
         "subtopicCode": "circle_chord_distance"
       },
-      "reviewStatus": "pending"
+      "reviewStatus": "ok"
     },
     {
       "id": "geometry_grade8_foundation_006",
@@ -488,37 +509,51 @@
         "zh-Hant": [
           "菱形的對角線互相垂直平分。",
           "所以每條邊是直角三角形的斜邊，兩股長分別是 5 和 12。",
-          "邊長 = √(5^2 + 12^2) = 13。",
+          "邊長 = √(5² + 12²) = 13。",
           "周長 = 4 × 13 = 52。"
         ],
         "zh-Hans": [
           "菱形的对角线互相垂直平分。",
           "所以每条边是直角三角形的斜边，两股长分别是 5 和 12。",
-          "边长 = √(5^2 + 12^2) = 13。",
+          "边长 = √(5² + 12²) = 13。",
           "周长 = 4 × 13 = 52。"
         ],
         "en": [
           "The diagonals of a rhombus bisect each other at right angles.",
           "So each side is the hypotenuse of a right triangle with legs 5 and 12.",
-          "Thus the side length is √(5^2 + 12^2) = 13.",
+          "Thus the side length is √(5² + 12²) = 13.",
           "Therefore the perimeter is 4 × 13 = 52."
         ],
         "ja": [
           "ひし形の対角線は互いに垂直に二等分します。",
           "したがって各辺は、辺の長さ 5 と 12 をもつ直角三角形の斜辺です。",
-          "辺の長さは √(5^2 + 12^2) = 13。",
+          "辺の長さは √(5² + 12²) = 13。",
           "よって周の長さは 52 です。"
         ]
       },
       "figure": {
         "type": "custom",
-        "kind": "shape_diagram",
+        "kind": "geometry_scene",
         "params": {
-          "shape": "diamond",
-          "labels": {
-            "vertical": "10",
-            "horizontal": "24"
-          }
+          "bounds": { "minX": -12, "minY": -5, "maxX": 12, "maxY": 5 },
+          "points": [
+            { "name": "A", "x": 12, "y": 0, "pos": "r" },
+            { "name": "B", "x": 0, "y": 5, "pos": "t" },
+            { "name": "C", "x": -12, "y": 0, "pos": "l" },
+            { "name": "D", "x": 0, "y": -5, "pos": "b" },
+            { "name": "O", "x": 0, "y": 0, "pos": "tr" }
+          ],
+          "segments": [
+            { "from": "A", "to": "B", "style": "solid" },
+            { "from": "B", "to": "C", "style": "solid" },
+            { "from": "C", "to": "D", "style": "solid" },
+            { "from": "D", "to": "A", "style": "solid" },
+            { "from": "A", "to": "C", "style": "construction" },
+            { "from": "B", "to": "D", "style": "construction" }
+          ],
+          "rightAngles": [
+            { "at": "O", "from": "A", "to": "B" }
+          ]
         }
       },
       "answerMode": "integer_input",
@@ -531,10 +566,11 @@
         "maxDigits": 2
       },
       "source": {
-        "type": "editorial_original",
-        "name": "MathSpring Editorial",
-        "reference": "Upper geometry expansion set G8",
-        "displayText": "MathSpring Editorial Original"
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "由菱形對角線求邊長與周長的題型",
+        "notes": "設計依據：對角線互相垂直平分，邊長為半對角線 5、12 的直角三角形斜邊 13；屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（菱形對角線）"
       },
       "olympiadTaxonomy": {
         "topic": "幾何",
@@ -542,7 +578,7 @@
         "subtopic": "菱形對角線",
         "subtopicCode": "rhombus_diagonals"
       },
-      "reviewStatus": "pending"
+      "reviewStatus": "ok"
     },
     {
       "id": "geometry_grade8_foundation_007",
@@ -552,10 +588,10 @@
       "levelStage": "grade8",
       "challengeTier": "foundation",
       "prompt": {
-        "zh-Hant": "梯形 ABCD 的面積是 164 平方公分，高是 8 公分，其中一腰長 10 公分，另一個底邊長 17 公分。求剩下那個底邊 BC 的長度。",
-        "zh-Hans": "梯形 ABCD 的面积是 164 平方公分，高是 8 公分，其中一腰长 10 公分，另一个底边长 17 公分。求剩下那个底边 BC 的长度。",
-        "en": "Trapezoid ABCD has area 164, height 8, one leg of length 10, and one base of length 17. Find the length of the other base BC.",
-        "ja": "台形 ABCD の面積は 164、高さは 8、一方の脚の長さは 10、もう一方の底辺の長さは 17 です。残りの底辺 BC の長さを求めなさい。"
+        "zh-Hant": "梯形 ABCD 的面積是 164 平方公分，高是 8 公分，兩條腰的長分別是 10 公分與 17 公分。求較短的底邊 BC 的長度。",
+        "zh-Hans": "梯形 ABCD 的面积是 164 平方公分，高是 8 公分，两条腰的长分别是 10 公分与 17 公分。求较短的底边 BC 的长度。",
+        "en": "Trapezoid ABCD has area 164, height 8, and legs of length 10 and 17. Find the length of the shorter base BC.",
+        "ja": "台形 ABCD の面積は 164、高さは 8、2 本の脚の長さはそれぞれ 10 と 17 です。短い方の底辺 BC の長さを求めなさい。"
       },
       "answer": {
         "zh-Hant": "答案是 10。",
@@ -565,54 +601,42 @@
       },
       "solutionSteps": {
         "zh-Hant": [
-          "由梯形面積公式可知兩底和是 41。",
-          "長 10 的腰和高 8 形成直角三角形，所以水平差是 6。",
-          "另一側依題圖可得水平差是 15。",
-          "因此較長底邊比較短底邊多 21。",
-          "設較短底邊是 BC，則另一底邊是 BC + 21。",
-          "所以 BC + (BC + 21) = 41，解得 2BC = 20。",
-          "因此 BC = 10。"
+          "由梯形面積公式，兩底和 = 2 × 164 ÷ 8 = 41。",
+          "長 10 的腰與高 8 形成直角三角形，水平差 = √(10² − 8²) = 6。",
+          "長 17 的腰與高 8 形成直角三角形，水平差 = √(17² − 8²) = 15。",
+          "所以較長底邊比較短底邊多 6 + 15 = 21。",
+          "設較短底邊為 BC，則另一底邊為 BC + 21，且 BC + (BC + 21) = 41。",
+          "解得 2BC = 20，因此 BC = 10。"
         ],
         "zh-Hans": [
-          "由梯形面积公式可知两底和是 41。",
-          "长 10 的腰和高 8 形成直角三角形，所以水平差是 6。",
-          "另一侧依题图可得水平差是 15。",
-          "因此较长底边比较短底边多 21。",
-          "设较短底边是 BC，则另一底边是 BC + 21。",
-          "所以 BC + (BC + 21) = 41，解得 2BC = 20。",
-          "因此 BC = 10。"
+          "由梯形面积公式，两底和 = 2 × 164 ÷ 8 = 41。",
+          "长 10 的腰与高 8 形成直角三角形，水平差 = √(10² − 8²) = 6。",
+          "长 17 的腰与高 8 形成直角三角形，水平差 = √(17² − 8²) = 15。",
+          "所以较长底边比较短底边多 6 + 15 = 21。",
+          "设较短底边为 BC，则另一底边为 BC + 21，且 BC + (BC + 21) = 41。",
+          "解得 2BC = 20，因此 BC = 10。"
         ],
         "en": [
-          "The trapezoid area formula shows that the sum of the two bases is 41.",
-          "The leg of length 10 and height 8 form a right triangle, so the horizontal offset is 6.",
-          "From the other side of the diagram, the second offset is 15.",
-          "So the longer base exceeds the shorter base by 21.",
-          "Let the shorter base be BC. Then the other base is BC + 21.",
-          "Hence BC + (BC + 21) = 41, so 2BC = 20.",
-          "Therefore BC = 10."
+          "By the trapezoid area formula, the sum of the two bases is 2 × 164 ÷ 8 = 41.",
+          "The leg of length 10 with height 8 gives a horizontal offset of √(10² − 8²) = 6.",
+          "The leg of length 17 with height 8 gives a horizontal offset of √(17² − 8²) = 15.",
+          "So the longer base exceeds the shorter base by 6 + 15 = 21.",
+          "Let the shorter base be BC. Then BC + (BC + 21) = 41.",
+          "Solving gives 2BC = 20, so BC = 10."
         ],
         "ja": [
-          "台形の面積公式から 2 つの底辺の和は 41 です。",
-          "長さ 10 の脚と高さ 8 から、直角三角形の水平差は 6。",
-          "もう一方の側の水平差は 15。",
-          "したがって長い底辺は短い底辺より 21 長いです。",
-          "短い底辺を BC とすると、もう一方は BC + 21。",
-          "よって BC + (BC + 21) = 41 なので 2BC = 20。",
-          "したがって BC = 10。"
+          "台形の面積公式より、2 つの底辺の和は 2 × 164 ÷ 8 = 41。",
+          "長さ 10 の脚と高さ 8 で、水平差は √(10² − 8²) = 6。",
+          "長さ 17 の脚と高さ 8 で、水平差は √(17² − 8²) = 15。",
+          "したがって長い底辺は短い底辺より 6 + 15 = 21 長いです。",
+          "短い底辺を BC とすると、BC + (BC + 21) = 41。",
+          "解くと 2BC = 20、したがって BC = 10。"
         ]
       },
       "figure": {
         "type": "custom",
-        "kind": "shape_diagram",
-        "params": {
-          "shape": "trapezoid",
-          "labels": {
-            "left": "10",
-            "right": "17",
-            "center": "高=8",
-            "bottom": "面積=164"
-          }
-        }
+        "kind": "none",
+        "params": {}
       },
       "answerMode": "multiple_choice",
       "options": {
@@ -671,7 +695,7 @@
         "subtopic": "梯形面積與邊長",
         "subtopicCode": "trapezoid_side_from_area"
       },
-      "reviewStatus": "pending"
+      "reviewStatus": "ok"
     },
     {
       "id": "geometry_grade8_foundation_008",
@@ -681,105 +705,98 @@
       "levelStage": "grade8",
       "challengeTier": "foundation",
       "prompt": {
-        "zh-Hant": "三角形 XYZ 的面積是 8。A、B 分別是 XY 與 XZ 的中點，XC 是高，且 C 是 YZ 的中點。求圖中陰影部分的面積。",
-        "zh-Hans": "三角形 XYZ 的面积是 8。A、B 分别是 XY 与 XZ 的中点，XC 是高，且 C 是 YZ 的中点。求图中阴影部分的面积。",
-        "en": "Triangle XYZ has area 8. Points A and B are the midpoints of XY and XZ, and XC is an altitude with C the midpoint of YZ. Find the area of the shaded region.",
-        "ja": "三角形 XYZ の面積は 8 です。A、B はそれぞれ XY、XZ の中点で、XC は高さ、C は YZ の中点です。図の影部分の面積を求めなさい。"
+        "zh-Hant": "三角形 ABC 中，D 是邊 BC 上一點，且 BD : DC = 1 : 2。若三角形 ABC 的面積是 18，求圖中陰影三角形 ABD 的面積。",
+        "zh-Hans": "三角形 ABC 中，D 是边 BC 上一点，且 BD : DC = 1 : 2。若三角形 ABC 的面积是 18，求图中阴影三角形 ABD 的面积。",
+        "en": "In triangle ABC, point D lies on BC with BD : DC = 1 : 2. If the area of triangle ABC is 18, find the area of the shaded triangle ABD.",
+        "ja": "三角形 ABC で、D は BC 上の点で BD : DC = 1 : 2 です。三角形 ABC の面積が 18 のとき、図の影の三角形 ABD の面積を求めなさい。"
       },
       "answer": {
-        "zh-Hant": "答案是 3。",
-        "zh-Hans": "答案是 3。",
-        "en": "The answer is 3.",
-        "ja": "答えは 3 です。"
+        "zh-Hant": "答案是 6。",
+        "zh-Hans": "答案是 6。",
+        "en": "The answer is 6.",
+        "ja": "答えは 6 です。"
       },
       "solutionSteps": {
         "zh-Hant": [
-          "因為 XC 平分底邊 YZ，所以三角形 XCY 的面積是 8 的一半，也就是 4。",
-          "A 與 B 是中點，所以 AB 平行 YZ，且位在高度的一半。",
-          "令 D 為 AB 與 XC 的交點，則 XD 是 XC 的一半，而 AD 是 YZ 的四分之一。",
-          "因此小三角形 XAD 的面積是整個大三角形的 1/8，也就是 1。",
-          "陰影部分面積是 4 - 1 = 3。"
+          "三角形 ABD 與 ABC 共用頂點 A，兩底 BD、BC 在同一直線上，高相同。",
+          "所以面積比等於底邊比：BD : BC = 1 : 3。",
+          "因此 ABD 面積 = 18 × (1/3) = 6。"
         ],
         "zh-Hans": [
-          "因为 XC 平分底边 YZ，所以三角形 XCY 的面积是 8 的一半，也就是 4。",
-          "A 与 B 是中点，所以 AB 平行 YZ，且位在高度的一半。",
-          "令 D 为 AB 与 XC 的交点，则 XD 是 XC 的一半，而 AD 是 YZ 的四分之一。",
-          "因此小三角形 XAD 的面积是整个大三角形的 1/8，也就是 1。",
-          "阴影部分面积是 4 - 1 = 3。"
+          "三角形 ABD 与 ABC 共用顶点 A，两底 BD、BC 在同一直线上，高相同。",
+          "所以面积比等于底边比：BD : BC = 1 : 3。",
+          "因此 ABD 面积 = 18 × (1/3) = 6。"
         ],
         "en": [
-          "Since XC bisects YZ, triangle XCY has half the total area, so its area is 4.",
-          "Because A and B are midpoints, AB is parallel to YZ and lies halfway up the triangle.",
-          "If D is the intersection of AB and XC, then XD is half of XC and AD is one-fourth of YZ.",
-          "So triangle XAD has 1/8 of the total area, namely 1.",
-          "The shaded area is 4 - 1 = 3."
+          "Triangles ABD and ABC share vertex A, and their bases BD and BC lie on the same line, so they have the same height.",
+          "Thus the ratio of their areas equals the ratio of the bases: BD : BC = 1 : 3.",
+          "Therefore the area of ABD = 18 × (1/3) = 6."
         ],
         "ja": [
-          "XC は底辺 YZ を二等分するので、三角形 XCY の面積は全体の半分で 4 です。",
-          "A、B は中点なので AB は YZ に平行で、高さの半分の位置にあります。",
-          "D を AB と XC の交点とすると、XD は XC の半分、AD は YZ の 1/4 です。",
-          "したがって三角形 XAD の面積は全体の 1/8、つまり 1。",
-          "よって影部分の面積は 4 - 1 = 3 です。"
+          "三角形 ABD と ABC は頂点 A を共有し、底辺 BD、BC は同じ直線上にあるので高さが等しいです。",
+          "したがって面積比は底辺比に等しく、BD : BC = 1 : 3。",
+          "よって ABD の面積 = 18 × (1/3) = 6。"
         ]
       },
       "figure": {
         "type": "custom",
-        "kind": "shape_diagram",
+        "kind": "geometry_scene",
         "params": {
-          "shape": "triangle",
-          "labels": {
-            "top": "X",
-            "left": "Y, A",
-            "right": "Z, B",
-            "bottom": "C",
-            "center": "陰影"
-          }
+          "bounds": { "minX": 0, "minY": 0, "maxX": 6, "maxY": 5 },
+          "points": [
+            { "name": "A", "x": 2, "y": 5, "pos": "t" },
+            { "name": "B", "x": 0, "y": 0, "pos": "bl" },
+            { "name": "C", "x": 6, "y": 0, "pos": "br" },
+            { "name": "D", "x": 2, "y": 0, "pos": "b" }
+          ],
+          "segments": [
+            { "from": "A", "to": "B", "style": "solid" },
+            { "from": "B", "to": "C", "style": "solid" },
+            { "from": "C", "to": "A", "style": "solid" },
+            { "from": "A", "to": "D", "style": "construction" }
+          ],
+          "polygons": [
+            { "vertices": ["A", "B", "D"], "fill": "shaded" }
+          ]
         }
       },
       "answerMode": "multiple_choice",
       "options": {
         "A": {
-          "zh-Hant": "2",
-          "zh-Hans": "2",
-          "en": "2",
-          "ja": "2"
+          "zh-Hant": "4",
+          "zh-Hans": "4",
+          "en": "4",
+          "ja": "4"
         },
         "B": {
-          "zh-Hant": "2.5",
-          "zh-Hans": "2.5",
-          "en": "2.5",
-          "ja": "2.5"
+          "zh-Hant": "6",
+          "zh-Hans": "6",
+          "en": "6",
+          "ja": "6"
         },
         "C": {
-          "zh-Hant": "3",
-          "zh-Hans": "3",
-          "en": "3",
-          "ja": "3"
+          "zh-Hant": "9",
+          "zh-Hans": "9",
+          "en": "9",
+          "ja": "9"
         },
         "D": {
-          "zh-Hant": "3.5",
-          "zh-Hans": "3.5",
-          "en": "3.5",
-          "ja": "3.5"
+          "zh-Hant": "12",
+          "zh-Hans": "12",
+          "en": "12",
+          "ja": "12"
         }
       },
       "correctAnswer": {
         "type": "choice",
-        "value": "C"
+        "value": "B"
       },
       "source": {
-        "type": "official_reference",
-        "name": "AMC 8",
-        "contest": "AMC 8",
-        "year": "2002",
-        "round": "",
-        "division": "Middle School",
-        "problemNumber": "Problem 20",
-        "reference": "2002 AMC 8 Problem 20",
-        "displayText": "AMC 8 2002 Problem 20",
-        "sourceUrl": "https://artofproblemsolving.com/wiki/index.php?title=2002_AMC_8_Problems%2FProblem_20",
-        "rightsStatus": "needs_review",
-        "notes": "Rewritten from a publicly archived competition statement."
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "同高三角形面積比等於底邊比的題型",
+        "notes": "設計依據：ABD 與 ABC 同高，面積比 = BD:BC = 1:3；屬同水準原創改寫。原 AMC 8 2002 P20（與 grade7 幾何 007 重複）於此改寫去重。",
+        "displayText": "改寫題（面積比）"
       },
       "olympiadTaxonomy": {
         "topic": "幾何",
@@ -787,7 +804,7 @@
         "subtopic": "三角形陰影面積",
         "subtopicCode": "triangle_shaded_area"
       },
-      "reviewStatus": "pending"
+      "reviewStatus": "ok"
     },
     {
       "id": "geometry_grade8_foundation_009",
@@ -812,40 +829,56 @@
         "zh-Hant": [
           "由正方形面積可得 AB = √225 = 15，BC = √144 = 12。",
           "因為 ∠ACB = 90°，所以 AB 是斜邊。",
-          "由畢氏定理，AC = √(15^2 - 12^2) = √81 = 9。",
+          "由畢氏定理，AC = √(15² - 12²) = √81 = 9。",
           "因此周長是 15 + 12 + 9 = 36。"
         ],
         "zh-Hans": [
           "由正方形面积可得 AB = √225 = 15，BC = √144 = 12。",
           "因为 ∠ACB = 90°，所以 AB 是斜边。",
-          "由勾股定理，AC = √(15^2 - 12^2) = √81 = 9。",
+          "由勾股定理，AC = √(15² - 12²) = √81 = 9。",
           "因此周长是 15 + 12 + 9 = 36。"
         ],
         "en": [
           "From the square areas, AB = √225 = 15 and BC = √144 = 12.",
           "Since ∠ACB = 90°, AB is the hypotenuse.",
-          "By the Pythagorean Theorem, AC = √(15^2 - 12^2) = √81 = 9.",
+          "By the Pythagorean Theorem, AC = √(15² - 12²) = √81 = 9.",
           "So the perimeter is 15 + 12 + 9 = 36."
         ],
         "ja": [
           "正方形の面積より AB = √225 = 15、BC = √144 = 12。",
           "∠ACB = 90° なので AB は斜辺です。",
-          "三平方の定理より AC = √(15^2 - 12^2) = √81 = 9。",
+          "三平方の定理より AC = √(15² - 12²) = √81 = 9。",
           "したがって周長は 15 + 12 + 9 = 36 です。"
         ]
       },
       "figure": {
         "type": "custom",
-        "kind": "shape_diagram",
+        "kind": "geometry_scene",
         "params": {
-          "shape": "triangle",
-          "labels": {
-            "left": "A",
-            "right": "B",
-            "bottom": "C",
-            "top": "ABDE=225",
-            "side": "BCFG=144"
-          }
+          "bounds": { "minX": 0, "minY": -12, "maxX": 21, "maxY": 21 },
+          "points": [
+            { "name": "A", "x": 0, "y": 9, "pos": "l" },
+            { "name": "B", "x": 12, "y": 0, "pos": "br" },
+            { "name": "C", "x": 0, "y": 0, "pos": "bl" },
+            { "name": "F", "x": 0, "y": -12, "pos": "l" },
+            { "name": "G", "x": 12, "y": -12, "pos": "r" },
+            { "name": "D", "x": 21, "y": 12, "pos": "r" },
+            { "name": "E", "x": 9, "y": 21, "pos": "t" }
+          ],
+          "segments": [
+            { "from": "A", "to": "B", "style": "solid" },
+            { "from": "B", "to": "C", "style": "solid" },
+            { "from": "C", "to": "A", "style": "solid" },
+            { "from": "C", "to": "F", "style": "solid" },
+            { "from": "F", "to": "G", "style": "solid" },
+            { "from": "G", "to": "B", "style": "solid" },
+            { "from": "B", "to": "D", "style": "solid" },
+            { "from": "D", "to": "E", "style": "solid" },
+            { "from": "E", "to": "A", "style": "solid" }
+          ],
+          "rightAngles": [
+            { "at": "C", "from": "A", "to": "B" }
+          ]
         }
       },
       "answerMode": "multiple_choice",
@@ -899,7 +932,7 @@
         "subtopic": "直角三角形與正方形",
         "subtopicCode": "right_triangle_with_squares"
       },
-      "reviewStatus": "pending"
+      "reviewStatus": "ok"
     },
     {
       "id": "geometry_grade8_foundation_010",
@@ -952,15 +985,8 @@
       },
       "figure": {
         "type": "custom",
-        "kind": "shape_diagram",
-        "params": {
-          "shape": "circle_in_square",
-          "labels": {
-            "center": "r = 1",
-            "outer": "大正方形",
-            "inner": "小正方形"
-          }
-        }
+        "kind": "none",
+        "params": {}
       },
       "answerMode": "multiple_choice",
       "options": {
@@ -1019,7 +1045,7 @@
         "subtopic": "圓與雙正方形面積比",
         "subtopicCode": "circle_between_two_squares_ratio"
       },
-      "reviewStatus": "pending"
+      "reviewStatus": "ok"
     }
   ]
 }

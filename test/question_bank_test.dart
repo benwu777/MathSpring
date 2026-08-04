@@ -1711,8 +1711,10 @@ void main() {
       'assets/questions/algebra/grade12_foundation.algebra.v1.json',
     );
 
+    // 002 為官方 IMC 填充 3；原本此處指向 009，但 009 與 002 完全重複，
+    // 複審時已將 009 去重改寫為原創（rewritten_olympiad_style），故改用 002 驗證官方題源。
     final Question grade7Question = grade7Pack.questions.firstWhere(
-      (Question item) => item.id == 'algebra_grade7_foundation_009',
+      (Question item) => item.id == 'algebra_grade7_foundation_002',
     );
     final Question grade10Question = grade10Pack.questions.firstWhere(
       (Question item) => item.id == 'algebra_grade10_foundation_009',
@@ -1766,7 +1768,8 @@ void main() {
 
     expect(grade7Question.source?.type, 'official_reference');
     expect(grade7Question.source?.contest, contains('AMC 8'));
-    expect(grade7Question.figure.kind, 'shape_diagram');
+    // Q009 已把舊的 shape_diagram（形狀＋貼字）換成宣告式 geometry_scene 向量圖。
+    expect(grade7Question.figure.kind, 'geometry_scene');
     expect(grade7Question.source?.year, '2018');
     expect(grade7Question.source?.problemNumber, 'Problem 22');
 
