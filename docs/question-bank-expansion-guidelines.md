@@ -393,6 +393,8 @@ phase 1 **只允許**兩種 `answerMode`，不得新增其他型別：
 
 ## 圖形題規則
 
+> 需要畫出構造（中點、中線、角平分線、交點、陰影區、圓弧）的幾何題，一律用宣告式規格 `geometry_scene`，由 AI 補精確座標、renderer 畫向量圖。完整規格見 [geometry-figure-spec.md](geometry-figure-spec.md)。舊的「基本形狀＋文字標籤」不得再用於需要構造的題。
+
 若題目需要圖形，優先順序如下：
 
 1. 現有 `CustomPainter` 可直接支援
