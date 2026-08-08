@@ -13,6 +13,7 @@ import 'package:mathspring/models/question_bank.dart';
 import 'package:mathspring/models/question_progress.dart';
 import 'package:mathspring/models/learner_profile.dart';
 import 'package:mathspring/models/session_answer_record.dart';
+import 'package:mathspring/services/math_text_formatter.dart';
 import 'package:mathspring/services/session_launch_plan_builder.dart';
 
 void main() {
@@ -2682,6 +2683,7 @@ class _PracticeAnswerSectionState extends State<_PracticeAnswerSection> {
             ),
             const SizedBox(height: 12),
             FilledButton(
+              key: ValueKey<String>('submit_answer_${widget.question.id}'),
               onPressed: widget.isLocked
                   ? null
                   : () {
@@ -3352,7 +3354,7 @@ class _QuestionPromptText extends StatelessWidget {
     final double width = MediaQuery.sizeOf(context).width;
     final double fontSize = width >= 900 ? 20 : 18;
     return Text(
-      text,
+      normalizeMathText(text),
       softWrap: true,
       style: Theme.of(context).textTheme.bodyLarge?.copyWith(
             fontSize: fontSize,
@@ -3378,7 +3380,7 @@ class _QuestionBodyText extends StatelessWidget {
   Widget build(BuildContext context) {
     final bool denseScript = _isDenseScriptLocale(localeCode);
     return Text(
-      text,
+      normalizeMathText(text),
       softWrap: true,
       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
             fontSize: 15,
@@ -3425,7 +3427,7 @@ class _QuestionOptionText extends StatelessWidget {
   Widget build(BuildContext context) {
     final bool denseScript = _isDenseScriptLocale(localeCode);
     return Text(
-      text,
+      normalizeMathText(text),
       softWrap: true,
       textAlign: TextAlign.left,
       style: Theme.of(context).textTheme.bodyLarge?.copyWith(
@@ -3832,6 +3834,8 @@ class AppStrings {
       _text(zhHant: '輸入整數', zhHans: '输入整数', en: 'Enter an integer', ja: '整数を入力');
   String get submitAnswer =>
       _text(zhHant: '提交答案', zhHans: '提交答案', en: 'Submit Answer', ja: '解答を送信');
+  String get viewFigure =>
+      _text(zhHant: '查看圖形', zhHans: '查看图形', en: 'View figure', ja: '図を表示');
   String get questionLabel =>
       _text(zhHant: '第', zhHans: '第', en: 'Question', ja: '問題');
   String get solvedLabel =>
@@ -4285,6 +4289,7 @@ class _IntegerAnswerFieldState extends State<_IntegerAnswerField> {
         Text(widget.strings.enterIntegerAnswer),
         const SizedBox(height: 14),
         TextField(
+          key: ValueKey<String>('practice_integer_input_${widget.question.id}'),
           controller: _controller,
           keyboardType: TextInputType.number,
           decoration: InputDecoration(
@@ -4303,6 +4308,7 @@ class _IntegerAnswerFieldState extends State<_IntegerAnswerField> {
         ),
         const SizedBox(height: 12),
         FilledButton(
+          key: ValueKey<String>('submit_answer_${widget.question.id}'),
           onPressed: _submit,
           style: FilledButton.styleFrom(
             backgroundColor: const Color(0xFF111827),
@@ -4325,86 +4331,193 @@ class _QuestionFigureView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final String kind = question.figure.kind;
-    final Widget? figureChild = switch (kind) {
-      'trig_plane' => CustomPaint(
-          painter: TrigGraphPainter(),
-          child: const SizedBox.expand(),
-        ),
-      'shape_diagram' => CustomPaint(
-          painter: ShapeDiagramPainter(
-            shape: question.figure.params['shape'] as String? ?? 'rectangle',
-            labels: _stringMapFromDynamic(question.figure.params['labels']),
-          ),
-          child: const SizedBox.expand(),
-        ),
-      'coordinate_plane' => CustomPaint(
-          painter: CoordinatePlanePainter(
-            maxX: _intFromDynamic(question.figure.params['maxX'], fallback: 6),
-            maxY: _intFromDynamic(question.figure.params['maxY'], fallback: 6),
-            showGrid: question.figure.params['showGrid'] as bool? ?? true,
-            points: _pointListFromDynamic(question.figure.params['points']),
-            pathPoints: _pointListFromDynamic(question.figure.params['path']),
-            highlightPoint: _pointFromDynamic(
-              question.figure.params['highlightPoint'],
-            ),
-          ),
-          child: const SizedBox.expand(),
-        ),
-      'geometry_scene' => CustomPaint(
-          painter: GeometryScenePainter(
-            scene: GeometryScene.fromParams(question.figure.params),
-          ),
-          child: const SizedBox.expand(),
-        ),
-      'composite_grid_shape' => CustomPaint(
-          painter: CompositeGridShapePainter(
-            rows: _intFromDynamic(question.figure.params['rows'], fallback: 3),
-            cols: _intFromDynamic(question.figure.params['cols'], fallback: 3),
-            filledCells: _cellListFromDynamic(question.figure.params['filledCells']),
-            cellLabels: _stringMapFromDynamic(question.figure.params['cellLabels']),
-          ),
-          child: const SizedBox.expand(),
-        ),
-      'circle_quadrants_point' => CustomPaint(
-          painter: CircleQuadrantsPointPainter(
-            regionLabels: _stringMapFromDynamic(
-              question.figure.params['regionLabels'],
-            ),
-            pointLabel:
-                question.figure.params['pointLabel'] as String? ?? 'P',
-            shadedRegion:
-                question.figure.params['shadedRegion'] as String? ?? 'topRight',
-          ),
-          child: const SizedBox.expand(),
-        ),
-      _ => null,
-    };
-
-    if (figureChild == null) {
+    final _FigureRenderSpec? spec = _buildFigureRenderSpec(question);
+    if (spec == null) {
       return const SizedBox.shrink();
     }
 
-    final double aspectRatio = switch (kind) {
-      'shape_diagram' => 1.25,
-      'coordinate_plane' => 1.35,
-      'composite_grid_shape' => 1.1,
-      'circle_quadrants_point' => 1.15,
-      'geometry_scene' => _geometrySceneAspectRatio(question.figure.params),
-      _ => 1.55,
-    };
-
     return AspectRatio(
-      aspectRatio: aspectRatio,
-      child: Container(
-        key: ValueKey<String>('figure_$kind'),
-        decoration: BoxDecoration(
-          color: Colors.white,
+      aspectRatio: spec.aspectRatio,
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          key: ValueKey<String>('figure_${question.figure.kind}'),
           borderRadius: BorderRadius.circular(12),
-          border: Border.all(color: const Color(0xFFE5E7EB)),
+          onTap: () {
+            showDialog<void>(
+              context: context,
+              barrierColor: const Color(0xE6111827),
+              builder: (_) => _FigurePreviewDialog(
+                question: question,
+                spec: spec,
+              ),
+            );
+          },
+          child: Ink(
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(12),
+              border: Border.all(color: const Color(0xFFE5E7EB)),
+            ),
+            padding: const EdgeInsets.all(16),
+            child: spec.child,
+          ),
         ),
-        padding: const EdgeInsets.all(16),
-        child: figureChild,
+      ),
+    );
+  }
+}
+
+class _FigureRenderSpec {
+  const _FigureRenderSpec({
+    required this.child,
+    required this.aspectRatio,
+  });
+
+  final Widget child;
+  final double aspectRatio;
+}
+
+_FigureRenderSpec? _buildFigureRenderSpec(Question question) {
+  final String kind = question.figure.kind;
+  final Widget? figureChild = switch (kind) {
+    'trig_plane' => CustomPaint(
+        painter: TrigGraphPainter(),
+        child: const SizedBox.expand(),
+      ),
+    'shape_diagram' => CustomPaint(
+        painter: ShapeDiagramPainter(
+          shape: question.figure.params['shape'] as String? ?? 'rectangle',
+          labels: _stringMapFromDynamic(question.figure.params['labels']),
+        ),
+        child: const SizedBox.expand(),
+      ),
+    'coordinate_plane' => CustomPaint(
+        painter: CoordinatePlanePainter(
+          maxX: _intFromDynamic(question.figure.params['maxX'], fallback: 6),
+          maxY: _intFromDynamic(question.figure.params['maxY'], fallback: 6),
+          showGrid: question.figure.params['showGrid'] as bool? ?? true,
+          points: _pointListFromDynamic(question.figure.params['points']),
+          pathPoints: _pointListFromDynamic(question.figure.params['path']),
+          highlightPoint: _pointFromDynamic(
+            question.figure.params['highlightPoint'],
+          ),
+        ),
+        child: const SizedBox.expand(),
+      ),
+    'geometry_scene' => CustomPaint(
+        painter: GeometryScenePainter(
+          scene: GeometryScene.fromParams(question.figure.params),
+        ),
+        child: const SizedBox.expand(),
+      ),
+    'composite_grid_shape' => CustomPaint(
+        painter: CompositeGridShapePainter(
+          rows: _intFromDynamic(question.figure.params['rows'], fallback: 3),
+          cols: _intFromDynamic(question.figure.params['cols'], fallback: 3),
+          filledCells: _cellListFromDynamic(question.figure.params['filledCells']),
+          cellLabels: _stringMapFromDynamic(question.figure.params['cellLabels']),
+        ),
+        child: const SizedBox.expand(),
+      ),
+    'circle_quadrants_point' => CustomPaint(
+        painter: CircleQuadrantsPointPainter(
+          regionLabels: _stringMapFromDynamic(
+            question.figure.params['regionLabels'],
+          ),
+          pointLabel: question.figure.params['pointLabel'] as String? ?? 'P',
+          shadedRegion:
+              question.figure.params['shadedRegion'] as String? ?? 'topRight',
+        ),
+        child: const SizedBox.expand(),
+      ),
+    _ => null,
+  };
+
+  if (figureChild == null) {
+    return null;
+  }
+
+  final double aspectRatio = switch (kind) {
+    'shape_diagram' => 1.25,
+    'coordinate_plane' => 1.35,
+    'composite_grid_shape' => 1.1,
+    'circle_quadrants_point' => 1.15,
+    'geometry_scene' => _geometrySceneAspectRatio(question.figure.params),
+    _ => 1.55,
+  };
+
+  return _FigureRenderSpec(
+    child: figureChild,
+    aspectRatio: aspectRatio,
+  );
+}
+
+class _FigurePreviewDialog extends StatelessWidget {
+  const _FigurePreviewDialog({
+    required this.question,
+    required this.spec,
+  });
+
+  final Question question;
+  final _FigureRenderSpec spec;
+
+  @override
+  Widget build(BuildContext context) {
+    return Dialog.fullscreen(
+      key: const ValueKey<String>('figure_preview_dialog'),
+      backgroundColor: const Color(0xFFF8FAFC),
+      child: SafeArea(
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.fromLTRB(12, 8, 12, 8),
+              child: Row(
+                children: [
+                  IconButton(
+                    key: const ValueKey<String>('figure_preview_close'),
+                    onPressed: () => Navigator.of(context).pop(),
+                    icon: const Icon(Icons.close),
+                  ),
+                  const SizedBox(width: 4),
+                  Expanded(
+                    child: Text(
+                      AppStrings.of(context).viewFigure,
+                      style: Theme.of(context).textTheme.titleMedium,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Expanded(
+              child: InteractiveViewer(
+                minScale: 1,
+                maxScale: 4,
+                panEnabled: true,
+                child: Center(
+                  child: Padding(
+                    padding: const EdgeInsets.all(20),
+                    child: AspectRatio(
+                      aspectRatio: spec.aspectRatio,
+                      child: Container(
+                        key: ValueKey<String>(
+                          'figure_preview_canvas_${question.figure.kind}',
+                        ),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(16),
+                          border: Border.all(color: const Color(0xFFE5E7EB)),
+                        ),
+                        padding: const EdgeInsets.all(20),
+                        child: _buildFigureRenderSpec(question)!.child,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -4548,7 +4661,7 @@ class GeometryScenePainter extends CustomPainter {
         final double midA = a1 + sweep / 2;
         final Offset lblAt =
             v + Offset(math.cos(midA), math.sin(midA)) * (r + 12);
-        _text(canvas, am.label!, lblAt, color: _accent, size: 13);
+        _text(canvas, am.label!, lblAt, size, color: _accent, sizePx: 13);
       }
     }
 
@@ -4582,7 +4695,15 @@ class GeometryScenePainter extends CustomPainter {
       canvas.drawCircle(o, 4.5, ptFill);
       canvas.drawCircle(o, 4.5, ptStroke);
       final Offset dir = _labelDir(scene.pointLabelPos[name] ?? 'r');
-      _text(canvas, name, o + dir * 15, color: _ink, size: 14, bold: true);
+      _text(
+        canvas,
+        name,
+        o + dir * 15,
+        size,
+        color: _ink,
+        sizePx: 14,
+        bold: true,
+      );
     });
   }
 
@@ -4617,14 +4738,21 @@ class GeometryScenePainter extends CustomPainter {
         _ => const Offset(1, 0),
       };
 
-  void _text(Canvas canvas, String text, Offset center,
-      {required Color color, double size = 13, bool bold = false}) {
+  void _text(
+    Canvas canvas,
+    String text,
+    Offset center,
+    Size bounds, {
+    required Color color,
+    double sizePx = 13,
+    bool bold = false,
+  }) {
     final TextPainter tp = TextPainter(
       text: TextSpan(
-        text: text,
+        text: normalizeMathText(text),
         style: TextStyle(
           color: color,
-          fontSize: size,
+          fontSize: sizePx,
           fontFamily: labelFontFamily,
           fontWeight: bold ? FontWeight.w700 : FontWeight.w500,
           fontFeatures: const <FontFeature>[FontFeature.tabularFigures()],
@@ -4632,7 +4760,18 @@ class GeometryScenePainter extends CustomPainter {
       ),
       textDirection: TextDirection.ltr,
     )..layout();
-    tp.paint(canvas, center - Offset(tp.width / 2, tp.height / 2));
+    const double edgePadding = 4;
+    final double halfWidth = tp.width / 2;
+    final double halfHeight = tp.height / 2;
+    final double clampedX = center.dx.clamp(
+      halfWidth + edgePadding,
+      bounds.width - halfWidth - edgePadding,
+    );
+    final double clampedY = center.dy.clamp(
+      halfHeight + edgePadding,
+      bounds.height - halfHeight - edgePadding,
+    );
+    tp.paint(canvas, Offset(clampedX - halfWidth, clampedY - halfHeight));
   }
 
   @override

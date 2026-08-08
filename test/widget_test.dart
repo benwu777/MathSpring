@@ -168,6 +168,48 @@ void main() {
     });
   }
 
+  Question createFormulaQuestion() {
+    return Question.fromJson({
+      'id': 'algebra_grade10_foundation_formula_001',
+      'topic': 'algebra',
+      'difficulty': 'foundation',
+      'levelStage': 'grade10',
+      'challengeTier': 'foundation',
+      'prompt': {
+        'zh-Hant': '設 f(x) = x^2 - 4x + 7，且定義域為 -1 <= x <= a。',
+        'en': 'Let f(x) = x^2 - 4x + 7 on the interval -1 <= x <= a.',
+      },
+      'answer': {
+        'zh-Hant': '先把 f(x) 改寫成 (x-2)^2 + 3。',
+        'en': 'Rewrite f(x) as (x-2)^2 + 3 first.',
+      },
+      'solutionSteps': {
+        'zh-Hant': [
+          '因為 x^2 - 4x + 7 = (x-2)^2 + 3。',
+          '再判斷區間端點與頂點的位置。',
+        ],
+        'en': [
+          'Because x^2 - 4x + 7 = (x-2)^2 + 3.',
+          'Then compare the interval endpoints with the vertex.',
+        ],
+      },
+      'figure': {
+        'type': 'custom',
+        'kind': 'none',
+        'params': <String, dynamic>{},
+      },
+      'answerMode': 'integer_input',
+      'correctAnswer': {
+        'type': 'integer',
+        'value': '3',
+      },
+      'inputConstraints': {
+        'allowNegative': false,
+        'maxDigits': 1,
+      },
+    });
+  }
+
   Question createShapeDiagramQuestion() {
     return Question.fromJson({
       'id': 'geometry_grade2_foundation_001',
@@ -767,6 +809,58 @@ void main() {
     expect(find.byKey(const ValueKey<String>('figure_shape_diagram')), findsOneWidget);
   });
 
+  testWidgets('question figures can open in fullscreen preview',
+      (WidgetTester tester) async {
+    final TestWidgetsFlutterBinding binding =
+        TestWidgetsFlutterBinding.ensureInitialized();
+    binding.platformDispatcher.localeTestValue = const Locale('en');
+
+    final AppServices services = createTestServices();
+
+    await tester.binding.setSurfaceSize(const Size(430, 932));
+    await tester.pumpWidget(
+      MaterialApp(
+        locale: const Locale('en'),
+        supportedLocales: AppStrings.supportedLocales,
+        localizationsDelegates: const [
+          GlobalMaterialLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+        ],
+        home: PracticeSessionPage(
+          services: services,
+          pack: const BundledQuestionPackInfo(
+            path: 'assets/questions/geometry/grade2_foundation.geometry.v1.json',
+            topic: '幾何',
+            topicCode: 'geometry',
+            levelStage: 'grade2',
+            challengeTier: 'foundation',
+            questionCount: 1,
+          ),
+          initialQuestions: [createShapeDiagramQuestion()],
+        ),
+      ),
+    );
+    await tester.runAsync(() async {
+      await Future<void>.delayed(const Duration(milliseconds: 50));
+    });
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 300));
+
+    await tester.tap(
+      find.byKey(const ValueKey<String>('figure_shape_diagram')).last,
+    );
+    await tester.pumpAndSettle();
+
+    expect(find.byKey(const ValueKey<String>('figure_preview_dialog')), findsOneWidget);
+    expect(find.byKey(const ValueKey<String>('figure_preview_canvas_shape_diagram')), findsOneWidget);
+
+    await tester.tap(find.byKey(const ValueKey<String>('figure_preview_close')));
+    await tester.pumpAndSettle();
+
+    expect(find.byKey(const ValueKey<String>('figure_preview_dialog')), findsNothing);
+  });
+
   testWidgets('quiz session renders a coordinate plane figure',
       (WidgetTester tester) async {
     final TestWidgetsFlutterBinding binding =
@@ -853,6 +947,62 @@ void main() {
       find.byKey(const ValueKey<String>('figure_circle_quadrants_point')),
       findsOneWidget,
     );
+  });
+
+  testWidgets('review figures can also open in fullscreen preview',
+      (WidgetTester tester) async {
+    final TestWidgetsFlutterBinding binding =
+        TestWidgetsFlutterBinding.ensureInitialized();
+    binding.platformDispatcher.localeTestValue = const Locale('en');
+
+    final AppServices services = createTestServices();
+
+    await tester.binding.setSurfaceSize(const Size(430, 932));
+    await tester.pumpWidget(
+      MaterialApp(
+        locale: const Locale('en'),
+        supportedLocales: AppStrings.supportedLocales,
+        localizationsDelegates: const [
+          GlobalMaterialLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+        ],
+        home: PracticeSessionPage(
+          services: services,
+          pack: const BundledQuestionPackInfo(
+            path: 'assets/questions/geometry/grade2_foundation.geometry.v1.json',
+            topic: '幾何',
+            topicCode: 'geometry',
+            levelStage: 'grade2',
+            challengeTier: 'foundation',
+            questionCount: 1,
+          ),
+          initialQuestions: [createShapeDiagramQuestion()],
+        ),
+      ),
+    );
+    await tester.runAsync(() async {
+      await Future<void>.delayed(const Duration(milliseconds: 50));
+    });
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 300));
+
+    await tester.enterText(
+      find.byKey(const ValueKey<String>('practice_integer_input_geometry_grade2_foundation_001')),
+      '16',
+    );
+    await tester.tap(
+      find.byKey(const ValueKey<String>('submit_answer_geometry_grade2_foundation_001')),
+    );
+    await tester.pumpAndSettle();
+
+    await tester.tap(
+      find.byKey(const ValueKey<String>('figure_shape_diagram')).last,
+    );
+    await tester.pumpAndSettle();
+
+    expect(find.byKey(const ValueKey<String>('figure_preview_dialog')), findsOneWidget);
+    expect(find.byKey(const ValueKey<String>('figure_preview_canvas_shape_diagram')), findsOneWidget);
   });
 
   testWidgets('practice session renders a composite grid shape figure',
@@ -1616,6 +1766,50 @@ void main() {
     expect(find.text('mixed'), findsNothing);
     expect(find.textContaining('Source:'), findsNothing);
     expect(find.textContaining('MathSpring Editorial'), findsNothing);
+  });
+
+  testWidgets('practice session renders normalized math notation for formula questions',
+      (WidgetTester tester) async {
+    final TestWidgetsFlutterBinding binding =
+        TestWidgetsFlutterBinding.ensureInitialized();
+    binding.platformDispatcher.localeTestValue = const Locale('zh', 'TW');
+
+    final AppServices services = createTestServices();
+
+    await tester.binding.setSurfaceSize(const Size(1200, 1600));
+    await tester.pumpWidget(
+      MaterialApp(
+        locale: const Locale('zh', 'TW'),
+        supportedLocales: AppStrings.supportedLocales,
+        localizationsDelegates: const [
+          GlobalMaterialLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+        ],
+        home: PracticeSessionPage(
+          services: services,
+          pack: const BundledQuestionPackInfo(
+            path: 'assets/questions/algebra/grade10_foundation.algebra.v1.json',
+            topic: '代數',
+            topicCode: 'algebra',
+            levelStage: 'grade10',
+            challengeTier: 'foundation',
+            questionCount: 1,
+          ),
+          initialQuestions: [createFormulaQuestion()],
+        ),
+      ),
+    );
+    await tester.runAsync(() async {
+      await Future<void>.delayed(const Duration(milliseconds: 50));
+    });
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 300));
+
+    expect(find.textContaining('x² - 4x + 7'), findsOneWidget);
+    expect(find.textContaining('-1 ≤ x ≤ a'), findsOneWidget);
+    expect(find.textContaining('x^2 - 4x + 7'), findsNothing);
+    expect(find.textContaining('-1 <= x <= a'), findsNothing);
   });
 
   testWidgets('practice session exit shows summary with accuracy',

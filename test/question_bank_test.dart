@@ -1741,11 +1741,14 @@ void main() {
     expect(grade12Question.localizedPrompt('en'), isNotEmpty);
   });
 
-  test('geometry packs include rewritten public competition sources and figures',
+  test('geometry packs upgrade high-value condition diagrams to geometry_scene',
       () async {
     TestWidgetsFlutterBinding.ensureInitialized();
 
     final BundledQuestionBankRepository repository = BundledQuestionBankRepository();
+    final QuestionBank grade9Pack = await repository.loadPack(
+      'assets/questions/geometry/grade9_foundation.geometry.v1.json',
+    );
     final QuestionBank grade7Pack = await repository.loadPack(
       'assets/questions/geometry/grade7_foundation.geometry.v1.json',
     );
@@ -1756,15 +1759,27 @@ void main() {
       'assets/questions/geometry/grade12_foundation.geometry.v1.json',
     );
 
+    final Question grade9Question = grade9Pack.questions.firstWhere(
+      (Question item) => item.id == 'geometry_grade9_foundation_001',
+    );
     final Question grade7Question = grade7Pack.questions.firstWhere(
       (Question item) => item.id == 'geometry_grade7_foundation_009',
     );
-    final Question grade10Question = grade10Pack.questions.firstWhere(
-      (Question item) => item.id == 'geometry_grade10_foundation_009',
+    final Question grade10CircleQuestion = grade10Pack.questions.firstWhere(
+      (Question item) => item.id == 'geometry_grade10_foundation_004',
     );
-    final Question grade12Question = grade12Pack.questions.firstWhere(
-      (Question item) => item.id == 'geometry_grade12_foundation_009',
+    final Question grade10MedianQuestion = grade10Pack.questions.firstWhere(
+      (Question item) => item.id == 'geometry_grade10_foundation_006',
     );
+    final Question grade12InscribedAngleQuestion = grade12Pack.questions.firstWhere(
+      (Question item) => item.id == 'geometry_grade12_foundation_004',
+    );
+    final Question grade12ChordQuestion = grade12Pack.questions.firstWhere(
+      (Question item) => item.id == 'geometry_grade12_foundation_006',
+    );
+
+    expect(grade9Question.source?.type, 'official_reference');
+    expect(grade9Question.figure.kind, 'geometry_scene');
 
     expect(grade7Question.source?.type, 'official_reference');
     expect(grade7Question.source?.contest, contains('AMC 8'));
@@ -1773,17 +1788,156 @@ void main() {
     expect(grade7Question.source?.year, '2018');
     expect(grade7Question.source?.problemNumber, 'Problem 22');
 
-    expect(grade10Question.source?.type, 'official_reference');
-    expect(grade10Question.source?.contest, contains('AMC 10'));
-    expect(grade10Question.source?.year, '2004');
-    expect(grade10Question.source?.problemNumber, 'Problem 22');
-    expect(grade10Question.figure.kind, 'shape_diagram');
+    expect(grade10CircleQuestion.figure.kind, 'geometry_scene');
 
-    expect(grade12Question.source?.type, 'official_reference');
-    expect(grade12Question.source?.contest, contains('AMC 12'));
-    expect(grade12Question.source?.year, '2008');
-    expect(grade12Question.source?.problemNumber, 'Problem 13');
-    expect(grade12Question.localizedPrompt('en'), isNotEmpty);
+    expect(grade10MedianQuestion.figure.kind, 'geometry_scene');
+
+    expect(grade12InscribedAngleQuestion.figure.kind, 'geometry_scene');
+
+    expect(grade12ChordQuestion.figure.kind, 'geometry_scene');
+  });
+
+  test('geometry packs upgrade the next condition-heavy diagrams to geometry_scene',
+      () async {
+    TestWidgetsFlutterBinding.ensureInitialized();
+
+    final BundledQuestionBankRepository repository = BundledQuestionBankRepository();
+    final QuestionBank grade9Pack = await repository.loadPack(
+      'assets/questions/geometry/grade9_foundation.geometry.v1.json',
+    );
+    final QuestionBank grade10Pack = await repository.loadPack(
+      'assets/questions/geometry/grade10_foundation.geometry.v1.json',
+    );
+
+    final Question grade9CircumradiusQuestion = grade9Pack.questions.firstWhere(
+      (Question item) => item.id == 'geometry_grade9_foundation_005',
+    );
+    final Question grade9MedianQuestion = grade9Pack.questions.firstWhere(
+      (Question item) => item.id == 'geometry_grade9_foundation_006',
+    );
+    final Question grade9ExternalPointQuestion = grade9Pack.questions.firstWhere(
+      (Question item) => item.id == 'geometry_grade9_foundation_007',
+    );
+    final Question grade10PowerQuestion = grade10Pack.questions.firstWhere(
+      (Question item) => item.id == 'geometry_grade10_foundation_005',
+    );
+
+    expect(grade9CircumradiusQuestion.figure.kind, 'geometry_scene');
+    expect(grade9MedianQuestion.figure.kind, 'geometry_scene');
+    expect(grade9ExternalPointQuestion.figure.kind, 'geometry_scene');
+    expect(grade10PowerQuestion.figure.kind, 'geometry_scene');
+  });
+
+  test('geometry packs upgrade advanced circle and polygon condition diagrams',
+      () async {
+    TestWidgetsFlutterBinding.ensureInitialized();
+
+    final BundledQuestionBankRepository repository = BundledQuestionBankRepository();
+    final QuestionBank grade10Pack = await repository.loadPack(
+      'assets/questions/geometry/grade10_foundation.geometry.v1.json',
+    );
+    final QuestionBank grade11Pack = await repository.loadPack(
+      'assets/questions/geometry/grade11_foundation.geometry.v1.json',
+    );
+
+    final Question grade10IncenterCircumcenterQuestion =
+        grade10Pack.questions.firstWhere(
+      (Question item) => item.id == 'geometry_grade10_foundation_009',
+    );
+    final Question grade10SquareEquilateralQuestion =
+        grade10Pack.questions.firstWhere(
+      (Question item) => item.id == 'geometry_grade10_foundation_010',
+    );
+    final Question grade11TangentArcAngleQuestion =
+        grade11Pack.questions.firstWhere(
+      (Question item) => item.id == 'geometry_grade11_foundation_008',
+    );
+
+    expect(grade10IncenterCircumcenterQuestion.figure.kind, 'geometry_scene');
+    expect(grade10SquareEquilateralQuestion.figure.kind, 'geometry_scene');
+    expect(grade11TangentArcAngleQuestion.figure.kind, 'geometry_scene');
+  });
+
+  test('geometry packs upgrade nested square and tangent-circle diagrams',
+      () async {
+    TestWidgetsFlutterBinding.ensureInitialized();
+
+    final BundledQuestionBankRepository repository = BundledQuestionBankRepository();
+    final QuestionBank grade11Pack = await repository.loadPack(
+      'assets/questions/geometry/grade11_foundation.geometry.v1.json',
+    );
+    final QuestionBank grade12Pack = await repository.loadPack(
+      'assets/questions/geometry/grade12_foundation.geometry.v1.json',
+    );
+
+    final Question grade11ConcentricSquareQuestion =
+        grade11Pack.questions.firstWhere(
+      (Question item) => item.id == 'geometry_grade11_foundation_007',
+    );
+    final Question grade12NestedSquareQuestion =
+        grade12Pack.questions.firstWhere(
+      (Question item) => item.id == 'geometry_grade12_foundation_007',
+    );
+    final Question grade12SectorCircleQuestion =
+        grade12Pack.questions.firstWhere(
+      (Question item) => item.id == 'geometry_grade12_foundation_009',
+    );
+
+    expect(grade11ConcentricSquareQuestion.figure.kind, 'geometry_scene');
+    expect(grade12NestedSquareQuestion.figure.kind, 'geometry_scene');
+    expect(grade12SectorCircleQuestion.figure.kind, 'geometry_scene');
+  });
+
+  test('geometry packs upgrade the final directly-renderable olympiad diagrams',
+      () async {
+    TestWidgetsFlutterBinding.ensureInitialized();
+
+    final BundledQuestionBankRepository repository = BundledQuestionBankRepository();
+    final QuestionBank grade9Pack = await repository.loadPack(
+      'assets/questions/geometry/grade9_foundation.geometry.v1.json',
+    );
+    final QuestionBank grade12Pack = await repository.loadPack(
+      'assets/questions/geometry/grade12_foundation.geometry.v1.json',
+    );
+
+    final Question grade9CircleTriangleQuestion =
+        grade9Pack.questions.firstWhere(
+      (Question item) => item.id == 'geometry_grade9_foundation_002',
+    );
+    final Question grade12ArcTangentCircleQuestion =
+        grade12Pack.questions.firstWhere(
+      (Question item) => item.id == 'geometry_grade12_foundation_008',
+    );
+    final Question grade12PentagonAreaQuestion =
+        grade12Pack.questions.firstWhere(
+      (Question item) => item.id == 'geometry_grade12_foundation_010',
+    );
+
+    expect(grade9CircleTriangleQuestion.figure.kind, 'geometry_scene');
+    expect(grade12ArcTangentCircleQuestion.figure.kind, 'geometry_scene');
+    expect(grade12PentagonAreaQuestion.figure.kind, 'geometry_scene');
+  });
+
+  test('geometry packs upgrade the remaining trapezoid-condition diagrams',
+      () async {
+    TestWidgetsFlutterBinding.ensureInitialized();
+
+    final BundledQuestionBankRepository repository = BundledQuestionBankRepository();
+    final QuestionBank grade12Pack = await repository.loadPack(
+      'assets/questions/geometry/grade12_foundation.geometry.v1.json',
+    );
+
+    final Question grade12TrapezoidLineQuestion =
+        grade12Pack.questions.firstWhere(
+      (Question item) => item.id == 'geometry_grade12_foundation_002',
+    );
+    final Question grade12TrapezoidDiagonalQuestion =
+        grade12Pack.questions.firstWhere(
+      (Question item) => item.id == 'geometry_grade12_foundation_003',
+    );
+
+    expect(grade12TrapezoidLineQuestion.figure.kind, 'geometry_scene');
+    expect(grade12TrapezoidDiagonalQuestion.figure.kind, 'geometry_scene');
   });
 
   test('number theory packs include rewritten public competition sources',

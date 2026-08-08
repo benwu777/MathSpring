@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:mathspring/services/math_text_formatter.dart';
+
 class DuplicateAuditQuestion {
   DuplicateAuditQuestion({
     required this.id,
@@ -296,7 +298,7 @@ class QuestionBankDuplicateAudit {
   static String buildFingerprint(DuplicateAuditQuestion question) {
     final String normalizedPrompt = _normalizePrompt(question.promptZhHant);
     final List<String> keywords = _extractKeywords(normalizedPrompt);
-    final int numberCount = _numberPattern.allMatches(question.promptZhHant).length;
+    final int numberCount = _numberPattern.allMatches(normalizedPrompt).length;
     final List<String> structureTags = _extractStructureTags(question);
     return [
       'n=$numberCount',
@@ -314,7 +316,7 @@ class QuestionBankDuplicateAudit {
   }
 
   static String _normalizePrompt(String prompt) {
-    String normalized = prompt;
+    String normalized = normalizeMathText(prompt);
     normalized = normalized.replaceAll(_numberPattern, '<n>');
     normalized = normalized.replaceAll(_personNamePattern, '<person>');
     normalized = normalized.replaceAll(_classicNamePattern, '<person>');
