@@ -582,6 +582,45 @@ void main() {
     expect(find.text('Logic'), findsNothing);
   });
 
+  testWidgets('app theme uses slightly tighter typography scale',
+      (WidgetTester tester) async {
+    final TestWidgetsFlutterBinding binding =
+        TestWidgetsFlutterBinding.ensureInitialized();
+    binding.platformDispatcher.localeTestValue = const Locale('en');
+
+    final AppServices services = createTestServices();
+
+    await pumpApp(tester, services);
+
+    final BuildContext context = tester.element(find.byType(Scaffold).first);
+    final ThemeData theme = Theme.of(context);
+    final TextTheme textTheme = theme.textTheme;
+
+    expect(textTheme.displaySmall?.fontSize, 32);
+    expect(textTheme.headlineSmall?.fontSize, 22);
+    expect(textTheme.titleLarge?.fontSize, 18);
+    expect(textTheme.bodyLarge?.fontSize, 15);
+    expect(textTheme.bodyLarge?.height, 1.5);
+    expect(textTheme.bodyMedium?.fontSize, 13);
+    expect(textTheme.bodyMedium?.height, 1.4);
+    expect(textTheme.bodySmall?.fontSize, 11);
+    expect(textTheme.bodySmall?.height, 1.35);
+    expect(
+      theme.filledButtonTheme.style
+          ?.textStyle
+          ?.resolve(const <WidgetState>{})
+          ?.fontSize,
+      14,
+    );
+    expect(
+      theme.outlinedButtonTheme.style
+          ?.textStyle
+          ?.resolve(const <WidgetState>{})
+          ?.fontSize,
+      14,
+    );
+  });
+
   testWidgets('app shell shows bottom navigation and defaults to Practice',
       (WidgetTester tester) async {
     final TestWidgetsFlutterBinding binding =

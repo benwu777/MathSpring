@@ -30,15 +30,15 @@
 | `algebra_grade8_foundation_007` | `grade8` | `algebra` | `平方恆等式` | `none` | `multiple_choice` | IMC Taiwan 2026 複賽 8年級 選擇 6 | `ok` | notation | (a-2b)²=0→a/b=2 正確；`^`→上標 |
 | `algebra_grade8_foundation_008` | `grade8` | `algebra` | `方程解的個數` | `none` | `multiple_choice` | AMC 8 2019 Problem 20 | `ok` | notation | (x²-5)²=16 有 4 實解，正確；`^`→上標 |
 | `algebra_grade8_foundation_009` | `grade8` | `algebra` | `等比數列總和` | `none` | `multiple_choice` | IMC Taiwan 2026 複賽 8年級 選擇 8 | `ok` | notation | 11 項等比總和 2047 正確（保留為官方 IMC）；`^`→上標 |
-| `algebra_grade9_foundation_001` | `grade9` | `algebra` | `二次函數` | `none` | `multiple_choice` | IMC Taiwan 2026 複賽 9年級 選擇 2 | `pending` |  |  |
-| `algebra_grade9_foundation_002` | `grade9` | `algebra` | `連乘化簡` | `none` | `multiple_choice` | IMC Taiwan 2026 複賽 9年級 填充 2 | `pending` |  |  |
-| `algebra_grade9_foundation_003` | `grade9` | `algebra` | `配方法` | `none` | `multiple_choice` | IMC Taiwan 2026 複賽 9年級 填充 4 | `pending` |  |  |
-| `algebra_grade9_foundation_004` | `grade9` | `algebra` | `和與積關係` | `none` | `integer_input` | MathSpring Editorial Original | `pending` |  |  |
-| `algebra_grade9_foundation_005` | `grade9` | `algebra` | `二次方程根和` | `none` | `integer_input` | MathSpring Editorial Original | `pending` |  |  |
-| `algebra_grade9_foundation_006` | `grade9` | `algebra` | `恆等式代入` | `none` | `integer_input` | MathSpring Editorial Original | `pending` |  |  |
-| `algebra_grade9_foundation_007` | `grade9` | `algebra` | `二次函數交點距離` | `none` | `multiple_choice` | IMC Taiwan 2026 複賽 9年級 選擇 2 | `pending` |  |  |
-| `algebra_grade9_foundation_008` | `grade9` | `algebra` | `一次方程應用` | `none` | `multiple_choice` | AMC 10A 2023 Problem 2 | `pending` |  |  |
-| `algebra_grade9_foundation_009` | `grade9` | `algebra` | `拋物線與 x 軸` | `none` | `multiple_choice` | IMC Taiwan 2026 複賽 9年級 選擇 2 | `pending` |  |  |
+| `algebra_grade9_foundation_001` | `grade9` | `algebra` | `二次函數` | `none` | `multiple_choice` | IMC Taiwan 2026 複賽 9年級 選擇 2 | `ok` | duplication | 拋物線與 x 軸交點距離題本身成立，保留這一題作正式版本；007、009 視為重複題 |
+| `algebra_grade9_foundation_002` | `grade9` | `algebra` | `連乘化簡` | `none` | `multiple_choice` | IMC Taiwan 2026 複賽 9年級 填充 2 | `needs_fix` | duplication, topic | 與 number_theory 002/010 為同題；且更適合放在 number_theory，不應在 algebra 重複收錄 |
+| `algebra_grade9_foundation_003` | `grade9` | `algebra` | `配方法` | `none` | `multiple_choice` | IMC Taiwan 2026 複賽 9年級 填充 4 | `ok` |  | 配方後得 (x+1)²+4(y-1/2)²=0，故 x=-1,y=1/2，x+y=-1/2，答案成立 |
+| `algebra_grade9_foundation_004` | `grade9` | `algebra` | `和與積關係` | `none` | `integer_input` | MathSpring Editorial Original | `needs_fix` | source, olympiadness | 來源仍是 Editorial Original，且題型偏一般恆等式代入，未達正式上架標準 |
+| `algebra_grade9_foundation_005` | `grade9` | `algebra` | `二次方程根和` | `none` | `integer_input` | MathSpring Editorial Original | `needs_fix` | source, olympiadness | 題目過裸，只是韋達基本值；需改寫成較完整 olympiad-style 題後再審 |
+| `algebra_grade9_foundation_006` | `grade9` | `algebra` | `恆等式代入` | `none` | `integer_input` | MathSpring Editorial Original | `needs_fix` | source, correctness | prompt 與詳解給出 (a+b)²=58，但 correctAnswer 寫成 100，存在明顯錯誤 |
+| `algebra_grade9_foundation_007` | `grade9` | `algebra` | `二次函數交點距離` | `none` | `multiple_choice` | IMC Taiwan 2026 複賽 9年級 選擇 2 | `needs_fix` | duplication | 與 001 同題同來源，只是選項 key 不同，應刪除或改寫 |
+| `algebra_grade9_foundation_008` | `grade9` | `algebra` | `一次方程應用` | `none` | `multiple_choice` | AMC 10A 2023 Problem 2 | `ok` |  | 由 1/3P+3.5C=3/4P+0.5C、C=1/4 磅解得 P=9/5 磅，題型與答案成立 |
+| `algebra_grade9_foundation_009` | `grade9` | `algebra` | `拋物線與 x 軸` | `none` | `multiple_choice` | IMC Taiwan 2026 複賽 9年級 選擇 2 | `needs_fix` | duplication | 與 001 同題、與 007 同題，屬弱變形重複收錄 |
 | `combinatorics_grade7_foundation_001` | `grade7` | `combinatorics` | `排列限制` | `none` | `integer_input` | 改寫題（相對順序排列） | `ok` | rewritten, duplication | 原與 009 同為「不相鄰補集法」重複，改寫為相對順序（甲在乙左邊）5!/2=60 |
 | `combinatorics_grade7_foundation_002` | `grade7` | `combinatorics` | `格點路徑` | `none` | `integer_input` | IMC Taiwan 2026 複賽 7年級 填充 4 | `ok` |  | C(5,2)=10，路徑↔選上步 對應正確 |
 | `combinatorics_grade7_foundation_003` | `grade7` | `combinatorics` | `配對計數` | `none` | `integer_input` | IMC Taiwan 2026 複賽 7年級 選擇 7 | `ok` |  | 握手 C(6,2)=15，配對觀點正確 |
@@ -57,15 +57,15 @@
 | `combinatorics_grade8_foundation_007` | `grade8` | `combinatorics` | `整數解計數` | `none` | `integer_input` | IMC Taiwan 2026 複賽 8年級 填充 7 | `ok` | notation | 硬幣組合＝前11奇數和 11²=121，正確；`^`→上標 |
 | `combinatorics_grade8_foundation_008` | `grade8` | `combinatorics` | `受限排列計數` | `none` | `integer_input` | AMC 8 2026 Problem 20 | `ok` |  | 硬幣堆高 g+3s=8，1+6+6=13，正確 |
 | `combinatorics_grade8_foundation_009` | `grade8` | `combinatorics` | `機率與座位` | `none` | `multiple_choice` | AMC 8 2011 Problem 12 | `ok` |  | 對面機率 1/3，正確 |
-| `combinatorics_grade9_foundation_001` | `grade9` | `combinatorics` | `環狀排列` | `none` | `integer_input` | IMC Taiwan 2026 複賽 9年級 選擇 4 | `pending` |  |  |
-| `combinatorics_grade9_foundation_002` | `grade9` | `combinatorics` | `二元字串` | `none` | `integer_input` | IMC Taiwan 2026 複賽 9年級 填充 3 | `pending` |  |  |
-| `combinatorics_grade9_foundation_003` | `grade9` | `combinatorics` | `插板法` | `none` | `integer_input` | IMC Taiwan 2026 複賽 9年級 選擇 6 | `pending` |  |  |
-| `combinatorics_grade9_foundation_004` | `grade9` | `combinatorics` | `不相鄰選取` | `none` | `integer_input` | MathSpring Editorial Original | `pending` |  |  |
-| `combinatorics_grade9_foundation_005` | `grade9` | `combinatorics` | `避點路徑` | `none` | `integer_input` | MathSpring Editorial Original | `pending` |  |  |
-| `combinatorics_grade9_foundation_006` | `grade9` | `combinatorics` | `奇偶選取` | `none` | `integer_input` | MathSpring Editorial Original | `pending` |  |  |
-| `combinatorics_grade9_foundation_007` | `grade9` | `combinatorics` | `整數三角形計數` | `none` | `integer_input` | IMC Taiwan 2026 複賽 9年級 填充 5 | `pending` |  |  |
-| `combinatorics_grade9_foundation_008` | `grade9` | `combinatorics` | `不相鄰安排` | `none` | `integer_input` | AMC 10A 2018 Problem 4 | `pending` |  |  |
-| `combinatorics_grade9_foundation_009` | `grade9` | `combinatorics` | `整數拆分` | `none` | `integer_input` | AMC 10A 2016 Problem 14 | `pending` |  |  |
+| `combinatorics_grade9_foundation_001` | `grade9` | `combinatorics` | `環狀排列` | `none` | `integer_input` | IMC Taiwan 2026 複賽 9年級 選擇 4 | `ok` |  | 6 人環排，旋轉同一，(6-1)!=120，答案成立 |
+| `combinatorics_grade9_foundation_002` | `grade9` | `combinatorics` | `二元字串` | `none` | `integer_input` | IMC Taiwan 2026 複賽 9年級 填充 3 | `ok` |  | 長度 6 恰兩個 1，即 C(6,2)=15，成立 |
+| `combinatorics_grade9_foundation_003` | `grade9` | `combinatorics` | `插板法` | `none` | `integer_input` | IMC Taiwan 2026 複賽 9年級 選擇 6 | `ok` |  | 8 顆糖分給 3 人且每人至少 1 顆，C(7,2)=21，成立 |
+| `combinatorics_grade9_foundation_004` | `grade9` | `combinatorics` | `不相鄰選取` | `none` | `integer_input` | MathSpring Editorial Original | `needs_fix` | source | 題目結構可用，但來源仍是 Editorial Original，需改寫來源或重做再審 |
+| `combinatorics_grade9_foundation_005` | `grade9` | `combinatorics` | `避點路徑` | `none` | `integer_input` | MathSpring Editorial Original | `needs_fix` | source | 題型可成立，但來源未達標；需改為 rewritten_olympiad_style 並補設計依據 |
+| `combinatorics_grade9_foundation_006` | `grade9` | `combinatorics` | `奇偶選取` | `none` | `integer_input` | MathSpring Editorial Original | `needs_fix` | source, olympiadness | 題目偏簡單集合計數，來源又不合格，不宜直接上架 |
+| `combinatorics_grade9_foundation_007` | `grade9` | `combinatorics` | `整數三角形計數` | `none` | `integer_input` | IMC Taiwan 2026 複賽 9年級 填充 5 | `ok` | cross_pack_conflict | 周長 24 的整數三角形共有 12 種，已用程式枚舉核對；number_theory 001 的 15 為錯 |
+| `combinatorics_grade9_foundation_008` | `grade9` | `combinatorics` | `不相鄰安排` | `none` | `integer_input` | AMC 10A 2018 Problem 4 | `ok` |  | 先選 3 個不相鄰節次再排 3 科，答案 24 成立 |
+| `combinatorics_grade9_foundation_009` | `grade9` | `combinatorics` | `整數拆分` | `none` | `integer_input` | AMC 10A 2016 Problem 14 | `ok` |  | 2016=2a+3b，b 需為偶數且 0≤b≤672，共 337 種，成立 |
 | `geometry_grade7_foundation_001` | `grade7` | `geometry` | `正多邊形角度` | `none` | `multiple_choice` | IMC Taiwan 2026 複賽 7年級 選擇 4 | `ok` | figure | 純角度代數（n=18 正確）；原裝飾六邊形圖改 kind:none |
 | `geometry_grade7_foundation_002` | `grade7` | `geometry` | `平面座標距離` | `none` | `integer_input` | IMC Taiwan 2026 複賽 7年級 填充 5 | `ok` | figure | 答案 7 正確；原座標圖把 P(7,-9) 畫出＝洩題，改 kind:none |
 | `geometry_grade7_foundation_003` | `grade7` | `geometry` | `圖形切割` | `geometry_scene` | `integer_input` | IMC Taiwan 2026 複賽 7年級 計算 1-(1) | `ok` | solution, figure | 詳解原寫「依官方解法」偷懶，改為完整推導（周長差=2(x−y)=12→6）；補真圖（切割＋陰影三角＋直角＋等長股） |
@@ -86,16 +86,16 @@
 | `geometry_grade8_foundation_008` | `grade8` | `geometry` | `三角形陰影面積` | `geometry_scene` | `multiple_choice` | 改寫題（面積比） | `ok` | source, duplication, figure | **原與 grade7 幾何 007 完全重複**（AMC 8 2002 P20），改寫為面積比 BD:BC=1:3→6；補真圖 |
 | `geometry_grade8_foundation_009` | `grade8` | `geometry` | `直角三角形與正方形` | `geometry_scene` | `multiple_choice` | IMC Taiwan 2026 複賽 8年級 選擇 5 | `ok` | notation, figure | 9-12-15 周長 36 正確；`^`→上標；補真圖（三角形＋兩正方形） |
 | `geometry_grade8_foundation_010` | `grade8` | `geometry` | `圓與雙正方形面積比` | `none` | `multiple_choice` | AMC 8 2011 Problem 25 | `ok` | figure | (π-2)/2≈0.57 最接近 1/2，正確；角點多、詳解自足，改 kind:none |
-| `geometry_grade9_foundation_001` | `grade9` | `geometry` | `摺疊相似` | `shape_diagram` | `integer_input` | IMC Taiwan 2026 複賽 9年級 填充 1 | `pending` |  |  |
-| `geometry_grade9_foundation_002` | `grade9` | `geometry` | `圓與等腰直角三角形` | `shape_diagram` | `multiple_choice` | IMC Taiwan 2026 複賽 9年級 填充 4 | `pending` |  |  |
-| `geometry_grade9_foundation_003` | `grade9` | `geometry` | `對稱與座標` | `coordinate_plane` | `multiple_choice` | IMC Taiwan 2026 複賽 9年級 選擇 8 | `pending` |  |  |
-| `geometry_grade9_foundation_004` | `grade9` | `geometry` | `座標面積` | `coordinate_plane` | `integer_input` | MathSpring Editorial Original | `pending` |  |  |
-| `geometry_grade9_foundation_005` | `grade9` | `geometry` | `直角三角形外接圓` | `shape_diagram` | `integer_input` | MathSpring Editorial Original | `pending` |  |  |
-| `geometry_grade9_foundation_006` | `grade9` | `geometry` | `斜邊中點` | `shape_diagram` | `integer_input` | MathSpring Editorial Original | `pending` |  |  |
-| `geometry_grade9_foundation_007` | `grade9` | `geometry` | `圓外點距離` | `shape_diagram` | `multiple_choice` | IMC Taiwan 2026 複賽 9年級 選擇 5 | `pending` |  |  |
-| `geometry_grade9_foundation_008` | `grade9` | `geometry` | `圓錐與圓柱體積` | `shape_diagram` | `multiple_choice` | AMC 10B 2021 Problem 10 | `pending` |  |  |
-| `geometry_grade9_foundation_009` | `grade9` | `geometry` | `拋物線水面` | `coordinate_plane` | `multiple_choice` | IMC Taiwan 2026 複賽 9年級 選擇 7 | `pending` |  |  |
-| `geometry_grade9_foundation_010` | `grade9` | `geometry` | `直線圍成三角形面積` | `coordinate_plane` | `multiple_choice` | AMC 8 2019 Problem 21 | `pending` |  |  |
+| `geometry_grade9_foundation_001` | `grade9` | `geometry` | `摺疊相似` | `shape_diagram` | `integer_input` | IMC Taiwan 2026 複賽 9年級 填充 1 | `needs_fix` | figure | 題意可成立，但目前圖上 D 與虛線重疊、A 頂點標籤與圓點擠在一起，未通過圖形品質檢查 |
+| `geometry_grade9_foundation_002` | `grade9` | `geometry` | `圓與等腰直角三角形` | `shape_diagram` | `multiple_choice` | IMC Taiwan 2026 複賽 9年級 填充 4 | `ok` | figure | 已升級為 geometry_scene；圖形條件與答案可讀性達標 |
+| `geometry_grade9_foundation_003` | `grade9` | `geometry` | `對稱與座標` | `coordinate_plane` | `multiple_choice` | IMC Taiwan 2026 複賽 9年級 選擇 8 | `ok` |  | 關於 y=2x+1 的對稱點為 (-4/5, 2/5)，題型與答案成立 |
+| `geometry_grade9_foundation_004` | `grade9` | `geometry` | `座標面積` | `coordinate_plane` | `integer_input` | MathSpring Editorial Original | `needs_fix` | source, olympiadness | 題目過於直接，且來源仍是 Editorial Original，不宜直接上架 |
+| `geometry_grade9_foundation_005` | `grade9` | `geometry` | `直角三角形外接圓` | `shape_diagram` | `integer_input` | MathSpring Editorial Original | `needs_fix` | source, olympiadness | 12-16-20 直角三角形外接圓半徑=10 過裸，需改寫成較完整競賽題 |
+| `geometry_grade9_foundation_006` | `grade9` | `geometry` | `斜邊中點` | `shape_diagram` | `integer_input` | MathSpring Editorial Original | `needs_fix` | source, olympiadness | 斜邊中點到三頂點等距屬基本性質題，來源與難度都不夠正式 |
+| `geometry_grade9_foundation_007` | `grade9` | `geometry` | `圓外點距離` | `shape_diagram` | `multiple_choice` | IMC Taiwan 2026 複賽 9年級 選擇 5 | `ok` | figure | 已升級為 geometry_scene；由最遠=OP+r、最近=OP-r 解得 r=3，成立 |
+| `geometry_grade9_foundation_008` | `grade9` | `geometry` | `圓錐與圓柱體積` | `shape_diagram` | `multiple_choice` | AMC 10B 2021 Problem 10 | `ok` | figure | 屬情境提示圖，暫時保留簡圖可接受；體積換算得高 1.5 公分，答案成立 |
+| `geometry_grade9_foundation_009` | `grade9` | `geometry` | `拋物線水面` | `coordinate_plane` | `multiple_choice` | IMC Taiwan 2026 複賽 9年級 選擇 7 | `ok` |  | 拋物線弦長與頂點距離成平方根關係，10:2=√10:√PN，得 PN=2/5，成立 |
+| `geometry_grade9_foundation_010` | `grade9` | `geometry` | `直線圍成三角形面積` | `coordinate_plane` | `multiple_choice` | AMC 8 2019 Problem 21 | `ok` |  | 三線交點為 (-4,5),(4,5),(0,1)，面積 1/2×8×4=16，成立 |
 | `logic_grade7_foundation_001` | `grade7` | `logic` | `真假判定` | `none` | `multiple_choice` | IMC Taiwan 2026 複賽 7年級 選擇 2 | `ok` | correctness | **原答案錯誤（標丙，正解甲）＋詳解推理錯**，已修正為甲並重寫三情形分析 |
 | `logic_grade7_foundation_002` | `grade7` | `logic` | `排除法` | `none` | `multiple_choice` | IMC Taiwan 2026 複賽 7年級 填充 2 | `ok` |  | 錯標盒經典，抽『混裝』盒，正確 |
 | `logic_grade7_foundation_003` | `grade7` | `logic` | `規律判斷` | `none` | `integer_input` | IMC Taiwan 2026 複賽 7年級 選擇 5 | `ok` |  | 差分 1,2,3,4→+5=17，正確 |
@@ -114,15 +114,15 @@
 | `logic_grade8_foundation_007` | `grade8` | `logic` | `模運算移動` | `none` | `integer_input` | AMC 8 2023 Problem 18 | `ok` |  | 5x-3y=2023 最少跳 411，正確 |
 | `logic_grade8_foundation_008` | `grade8` | `logic` | `座位推理` | `none` | `multiple_choice` | AJHSME 1987 Problem 17 | `ok` |  | 兩句皆假＋Bret=3→座位2=Dana，正確 |
 | `logic_grade8_foundation_009` | `grade8` | `logic` | `真假數字判定` | `none` | `multiple_choice` | AMC 8 2017 Problem 8 | `ok` |  | 恰3句真→98，個位 8，正確 |
-| `logic_grade9_foundation_001` | `grade9` | `logic` | `編碼規則` | `none` | `integer_input` | IMC Taiwan 2026 複賽 9年級 選擇 3 | `pending` |  |  |
-| `logic_grade9_foundation_002` | `grade9` | `logic` | `切換規律` | `none` | `integer_input` | IMC Taiwan 2026 複賽 9年級 填充 6 | `pending` |  |  |
-| `logic_grade9_foundation_003` | `grade9` | `logic` | `真假排除` | `none` | `multiple_choice` | IMC Taiwan 2026 複賽 9年級 選擇 7 | `pending` |  |  |
-| `logic_grade9_foundation_004` | `grade9` | `logic` | `取石博弈` | `none` | `integer_input` | MathSpring Editorial Original | `pending` |  |  |
-| `logic_grade9_foundation_005` | `grade9` | `logic` | `條件篩選` | `none` | `integer_input` | MathSpring Editorial Original | `pending` |  |  |
-| `logic_grade9_foundation_006` | `grade9` | `logic` | `不變量判斷` | `none` | `multiple_choice` | MathSpring Editorial Original | `pending` |  |  |
-| `logic_grade9_foundation_007` | `grade9` | `logic` | `輪替序列` | `none` | `integer_input` | AMC 10A 2019 Problem 23 | `pending` |  |  |
-| `logic_grade9_foundation_008` | `grade9` | `logic` | `真假區間判定` | `none` | `multiple_choice` | AMC 10A 2018 Problem 5 | `pending` |  |  |
-| `logic_grade9_foundation_009` | `grade9` | `logic` | `自指真假` | `none` | `multiple_choice` | AMC 10A 2025 Problem 8 | `pending` |  |  |
+| `logic_grade9_foundation_001` | `grade9` | `logic` | `編碼規則` | `none` | `integer_input` | IMC Taiwan 2026 複賽 9年級 選擇 3 | `ok` |  | DOG 對應 4,15,7，拼成 4157，成立 |
+| `logic_grade9_foundation_002` | `grade9` | `logic` | `切換規律` | `none` | `integer_input` | IMC Taiwan 2026 複賽 9年級 填充 6 | `ok` |  | 最後亮燈數等於完全平方數個數，1²~10² 共 10 盞，成立 |
+| `logic_grade9_foundation_003` | `grade9` | `logic` | `真假排除` | `none` | `multiple_choice` | IMC Taiwan 2026 複賽 9年級 選擇 7 | `ok` |  | 枚舉唯一真話，可得第 3 條路通往學校，成立 |
+| `logic_grade9_foundation_004` | `grade9` | `logic` | `取石博弈` | `none` | `integer_input` | MathSpring Editorial Original | `needs_fix` | source | 博弈結構可成立，但來源仍是 Editorial Original，需重做來源與複審 |
+| `logic_grade9_foundation_005` | `grade9` | `logic` | `條件篩選` | `none` | `integer_input` | MathSpring Editorial Original | `needs_fix` | source, classification | 題目更像排列/組合篩選，不適合留在 logic；且來源不合格 |
+| `logic_grade9_foundation_006` | `grade9` | `logic` | `不變量判斷` | `none` | `multiple_choice` | MathSpring Editorial Original | `needs_fix` | source | 題型可用，但需改成合格來源後再上架 |
+| `logic_grade9_foundation_007` | `grade9` | `logic` | `輪替序列` | `none` | `integer_input` | AMC 10A 2019 Problem 23 | `ok` |  | 依三人輪替與區塊長累計，可得 Tadd 的第 2019 個數為 5979，成立 |
+| `logic_grade9_foundation_008` | `grade9` | `logic` | `真假區間判定` | `none` | `multiple_choice` | AMC 10A 2018 Problem 5 | `ok` |  | 三句全錯推出 d<6、d>5、d>4，因此 d∈(5,6)，成立 |
+| `logic_grade9_foundation_009` | `grade9` | `logic` | `自指真假` | `none` | `multiple_choice` | AMC 10A 2025 Problem 8 | `ok` |  | 四句中僅第 2 句為假，其餘為真，因此假話 1 句，成立 |
 | `number_theory_grade7_foundation_001` | `grade7` | `number_theory` | `進位制` | `none` | `integer_input` | IMC Taiwan 2026 複賽 7年級 填充 6 | `ok` | correctness, notation | **原答案錯（標 5，正解 2）＋詳解自相矛盾**，已修正 a=2；`_(7)`→`₇` 下標 |
 | `number_theory_grade7_foundation_002` | `grade7` | `number_theory` | `數字計數` | `none` | `integer_input` | IMC Taiwan 2026 複賽 7年級 填充 7 | `ok` |  | 恰一個數字 7，3×9×9=243，正確 |
 | `number_theory_grade7_foundation_003` | `grade7` | `number_theory` | `包除與倍數` | `none` | `integer_input` | 改寫題（容斥計數） | `ok` | source, duplication | **原與 010 完全重複**，改寫為「1~100 非 2/3/5 倍數」＝26；來源改 rewritten（IMC 選擇8 由 010 保留） |
@@ -143,13 +143,13 @@
 | `number_theory_grade8_foundation_008` | `grade8` | `number_theory` | `位值方程` | `none` | `integer_input` | AMC 8 2014 Problem 22 | `ok` |  | 位值方程 a(b+1)=10a→b=9，正確 |
 | `number_theory_grade8_foundation_009` | `grade8` | `number_theory` | `整除排列計數` | `none` | `integer_input` | AMC 8 2016 Problem 24 | `ok` |  | 1-5 排列被 4 整除，末兩位 4 種×3!=24，正確 |
 | `number_theory_grade8_foundation_010` | `grade8` | `number_theory` | `整數因數配對` | `none` | `multiple_choice` | IMC Taiwan 2026 複賽 8年級 選擇 1 | `ok` | notation | x²+ax+48 因式分解，a 有 10 種（保留官方 IMC）；`^`→上標 |
-| `number_theory_grade9_foundation_001` | `grade9` | `number_theory` | `整數三角形` | `none` | `integer_input` | IMC Taiwan 2026 複賽 9年級 填充 5 | `pending` |  |  |
-| `number_theory_grade9_foundation_002` | `grade9` | `number_theory` | `連乘積` | `none` | `multiple_choice` | IMC Taiwan 2026 複賽 9年級 填充 2 | `pending` |  |  |
-| `number_theory_grade9_foundation_003` | `grade9` | `number_theory` | `數位和` | `none` | `integer_input` | IMC Taiwan 2026 複賽 9年級 選擇 1 | `pending` |  |  |
-| `number_theory_grade9_foundation_004` | `grade9` | `number_theory` | `最大公因數與最小公倍數` | `none` | `integer_input` | MathSpring Editorial Original | `pending` |  |  |
-| `number_theory_grade9_foundation_005` | `grade9` | `number_theory` | `完全平方數` | `none` | `integer_input` | MathSpring Editorial Original | `pending` |  |  |
-| `number_theory_grade9_foundation_006` | `grade9` | `number_theory` | `模幂` | `none` | `integer_input` | MathSpring Editorial Original | `pending` |  |  |
-| `number_theory_grade9_foundation_007` | `grade9` | `number_theory` | `數字倒序整除` | `none` | `integer_input` | AMC 10A 2023 Problem 12 | `pending` |  |  |
-| `number_theory_grade9_foundation_008` | `grade9` | `number_theory` | `七進位數字和` | `none` | `integer_input` | AMC 10B 2019 Problem 12 | `pending` |  |  |
-| `number_theory_grade9_foundation_009` | `grade9` | `number_theory` | `整除比例` | `none` | `multiple_choice` | AMC 8 2026 Problem 16 | `pending` |  |  |
-| `number_theory_grade9_foundation_010` | `grade9` | `number_theory` | `望遠鏡乘積` | `none` | `integer_input` | IMC Taiwan 2026 複賽 9年級 填充 2 | `pending` |  |  |
+| `number_theory_grade9_foundation_001` | `grade9` | `number_theory` | `整數三角形` | `none` | `integer_input` | IMC Taiwan 2026 複賽 9年級 填充 5 | `needs_fix` | correctness, duplication, classification | 與 combinatorics 007 同題但此處答案寫成 15；實際程式枚舉為 12，且更適合留在 combinatorics |
+| `number_theory_grade9_foundation_002` | `grade9` | `number_theory` | `連乘積` | `none` | `multiple_choice` | IMC Taiwan 2026 複賽 9年級 填充 2 | `needs_fix` | duplication | 與 algebra 002、number_theory 010 同題重複收錄，需合併成單一正式版本 |
+| `number_theory_grade9_foundation_003` | `grade9` | `number_theory` | `數位和` | `none` | `integer_input` | IMC Taiwan 2026 複賽 9年級 選擇 1 | `ok` |  | 每段 123456789 的數位和為 45，重複 2026 次得 91170，成立 |
+| `number_theory_grade9_foundation_004` | `grade9` | `number_theory` | `最大公因數與最小公倍數` | `none` | `integer_input` | MathSpring Editorial Original | `needs_fix` | source | 題目可算，但來源仍是 Editorial Original，不可直接上架 |
+| `number_theory_grade9_foundation_005` | `grade9` | `number_theory` | `完全平方數` | `none` | `integer_input` | MathSpring Editorial Original | `needs_fix` | source | 題目過裸且來源不合格，需改寫成正式可追溯版本 |
+| `number_theory_grade9_foundation_006` | `grade9` | `number_theory` | `模幂` | `none` | `integer_input` | MathSpring Editorial Original | `needs_fix` | source, olympiadness | 3¹⁵ mod 8 過於直接，需重寫來源並提升題面品質 |
+| `number_theory_grade9_foundation_007` | `grade9` | `number_theory` | `數字倒序整除` | `none` | `integer_input` | AMC 10A 2023 Problem 12 | `ok` |  | 倒序數須末位 0 或 5，但三位且可被 7 整除，枚舉/同餘可得 14，成立 |
+| `number_theory_grade9_foundation_008` | `grade9` | `number_theory` | `七進位數字和` | `none` | `integer_input` | AMC 10B 2019 Problem 12 | `ok` |  | 最大數位和在接近 2019 的七進位表達達成，答案 22 成立 |
+| `number_theory_grade9_foundation_009` | `grade9` | `number_theory` | `整除比例` | `none` | `multiple_choice` | AMC 8 2026 Problem 16 | `ok` |  | 四位數各位皆偶數時，被 4 整除只看末兩位，比例 3/5 可成立 |
+| `number_theory_grade9_foundation_010` | `grade9` | `number_theory` | `望遠鏡乘積` | `none` | `integer_input` | IMC Taiwan 2026 複賽 9年級 填充 2 | `needs_fix` | duplication | 與 number_theory 002、algebra 002 同題，應合併成單一版本後再審 |

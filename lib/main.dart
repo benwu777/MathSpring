@@ -166,39 +166,39 @@ class _MathSpringAppState extends State<MathSpringApp> {
         scaffoldBackgroundColor: Colors.white,
         textTheme: const TextTheme(
           displaySmall: TextStyle(
-            fontSize: 34,
+            fontSize: 32,
             fontWeight: FontWeight.w700,
             letterSpacing: -1.0,
             color: Color(0xFF0F172A),
           ),
           headlineSmall: TextStyle(
-            fontSize: 24,
+            fontSize: 22,
             fontWeight: FontWeight.w700,
             color: Color(0xFF0F172A),
           ),
           titleLarge: TextStyle(
-            fontSize: 19,
+            fontSize: 18,
             fontWeight: FontWeight.w600,
             color: Color(0xFF0F172A),
           ),
           titleMedium: TextStyle(
-            fontSize: 16,
+            fontSize: 15,
             fontWeight: FontWeight.w600,
             color: Color(0xFF0F172A),
           ),
           bodyLarge: TextStyle(
-            fontSize: 16,
-            height: 1.55,
+            fontSize: 15,
+            height: 1.5,
             color: Color(0xFF334155),
           ),
           bodyMedium: TextStyle(
-            fontSize: 14,
-            height: 1.45,
+            fontSize: 13,
+            height: 1.4,
             color: Color(0xFF475569),
           ),
           bodySmall: TextStyle(
-            fontSize: 12,
-            height: 1.4,
+            fontSize: 11,
+            height: 1.35,
             color: Color(0xFF64748B),
           ),
         ),
@@ -229,7 +229,7 @@ class _MathSpringAppState extends State<MathSpringApp> {
               borderRadius: BorderRadius.circular(14),
             ),
             textStyle: const TextStyle(
-              fontSize: 15,
+              fontSize: 14,
               fontWeight: FontWeight.w600,
             ),
           ),
@@ -241,7 +241,7 @@ class _MathSpringAppState extends State<MathSpringApp> {
               borderRadius: BorderRadius.circular(14),
             ),
             textStyle: const TextStyle(
-              fontSize: 15,
+              fontSize: 14,
               fontWeight: FontWeight.w600,
             ),
           ),
@@ -250,7 +250,7 @@ class _MathSpringAppState extends State<MathSpringApp> {
           style: TextButton.styleFrom(
             minimumSize: const Size(0, 44),
             textStyle: const TextStyle(
-              fontSize: 14,
+              fontSize: 13,
               fontWeight: FontWeight.w600,
             ),
           ),
