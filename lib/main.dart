@@ -163,7 +163,7 @@ class _MathSpringAppState extends State<MathSpringApp> {
           brightness: Brightness.light,
           surface: Colors.white,
         ),
-        scaffoldBackgroundColor: Colors.white,
+        scaffoldBackgroundColor: const Color(0xFFF5F7FB),
         textTheme: const TextTheme(
           displaySmall: TextStyle(
             fontSize: 32,
@@ -202,9 +202,21 @@ class _MathSpringAppState extends State<MathSpringApp> {
             color: Color(0xFF64748B),
           ),
         ),
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Color(0xFFF5F7FB),
+          foregroundColor: Color(0xFF0F172A),
+          surfaceTintColor: Colors.transparent,
+          elevation: 0,
+          titleTextStyle: TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.w700,
+            color: Color(0xFF0F172A),
+            letterSpacing: -0.3,
+          ),
+        ),
         inputDecorationTheme: InputDecorationTheme(
           filled: true,
-          fillColor: const Color(0xFFF8FAFC),
+          fillColor: Colors.white,
           contentPadding: const EdgeInsets.symmetric(
             horizontal: 16,
             vertical: 18,
@@ -255,13 +267,28 @@ class _MathSpringAppState extends State<MathSpringApp> {
             ),
           ),
         ),
+        navigationBarTheme: const NavigationBarThemeData(
+          backgroundColor: Color(0xFFFDFDFE),
+          indicatorColor: Color(0xFFE7EEF9),
+          surfaceTintColor: Colors.transparent,
+          elevation: 0,
+          labelTextStyle: WidgetStatePropertyAll<TextStyle>(
+            TextStyle(
+              fontSize: 12,
+              fontWeight: FontWeight.w700,
+              color: Color(0xFF334155),
+            ),
+          ),
+        ),
         cardTheme: CardTheme(
           elevation: 0,
           color: Colors.white,
+          shadowColor: const Color(0x140F172A),
+          surfaceTintColor: Colors.transparent,
           margin: EdgeInsets.zero,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
-            side: const BorderSide(color: Color(0xFFE5E7EB)),
+            borderRadius: BorderRadius.circular(24),
+            side: const BorderSide(color: Color(0xFFE7EBF2)),
           ),
         ),
       ),
@@ -359,35 +386,55 @@ class _MathSpringHomePageState extends State<MathSpringHomePage> {
           },
         ),
       ),
-      bottomNavigationBar: NavigationBar(
-        selectedIndex: _currentTab.index,
-        onDestinationSelected: (index) {
-          setState(() {
-            _currentTab = _HomeTab.values[index];
-          });
-        },
-        destinations: [
-          NavigationDestination(
-            icon: const Icon(Icons.play_circle_outline),
-            selectedIcon: const Icon(Icons.play_circle_fill),
-            label: strings.navPractice,
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.fromLTRB(16, 0, 16, 14),
+        child: DecoratedBox(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(26),
+            boxShadow: const [
+              BoxShadow(
+                color: Color(0x120F172A),
+                blurRadius: 24,
+                offset: Offset(0, 10),
+              ),
+            ],
           ),
-          NavigationDestination(
-            icon: const Icon(Icons.fact_check_outlined),
-            selectedIcon: const Icon(Icons.fact_check),
-            label: strings.navQuiz,
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(26),
+            child: NavigationBar(
+              backgroundColor: const Color(0xFFFDFDFE),
+              indicatorColor: const Color(0xFFE7EEF9),
+              selectedIndex: _currentTab.index,
+              onDestinationSelected: (index) {
+                setState(() {
+                  _currentTab = _HomeTab.values[index];
+                });
+              },
+              destinations: [
+                NavigationDestination(
+                  icon: const Icon(Icons.play_circle_outline),
+                  selectedIcon: const Icon(Icons.play_circle_fill),
+                  label: strings.navPractice,
+                ),
+                NavigationDestination(
+                  icon: const Icon(Icons.fact_check_outlined),
+                  selectedIcon: const Icon(Icons.fact_check),
+                  label: strings.navQuiz,
+                ),
+                NavigationDestination(
+                  icon: const Icon(Icons.history_edu_outlined),
+                  selectedIcon: const Icon(Icons.history_edu),
+                  label: strings.navReview,
+                ),
+                NavigationDestination(
+                  icon: const Icon(Icons.settings_outlined),
+                  selectedIcon: const Icon(Icons.settings),
+                  label: strings.navSettings,
+                ),
+              ],
+            ),
           ),
-          NavigationDestination(
-            icon: const Icon(Icons.history_edu_outlined),
-            selectedIcon: const Icon(Icons.history_edu),
-            label: strings.navReview,
-          ),
-          NavigationDestination(
-            icon: const Icon(Icons.settings_outlined),
-            selectedIcon: const Icon(Icons.settings),
-            label: strings.navSettings,
-          ),
-        ],
+        ),
       ),
     );
   }
@@ -403,24 +450,68 @@ class _HomeShellFrame extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.white,
-      child: Center(
-        child: ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 1180),
-          child: SingleChildScrollView(
-            padding: const EdgeInsets.fromLTRB(20, 16, 20, 24),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                _TopBar(
-                  title: 'MathSpring',
+      key: const ValueKey<String>('home_shell_frame'),
+      color: const Color(0xFFF6F8FC),
+      child: Stack(
+        children: [
+          Positioned(
+            top: -80,
+            right: -40,
+            child: IgnorePointer(
+              child: Container(
+                key: const ValueKey<String>('home_background_glow'),
+                width: 260,
+                height: 260,
+                decoration: const BoxDecoration(
+                  shape: BoxShape.circle,
+                  gradient: RadialGradient(
+                    colors: [
+                      Color(0x55C9D9F6),
+                      Color(0x00C9D9F6),
+                    ],
+                  ),
                 ),
-                const SizedBox(height: 18),
-                child,
-              ],
+              ),
             ),
           ),
-        ),
+          Positioned(
+            top: 120,
+            left: -70,
+            child: IgnorePointer(
+              child: Container(
+                width: 220,
+                height: 220,
+                decoration: const BoxDecoration(
+                  shape: BoxShape.circle,
+                  gradient: RadialGradient(
+                    colors: [
+                      Color(0x35E3ECFA),
+                      Color(0x00E3ECFA),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ),
+          Center(
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 1180),
+              child: SingleChildScrollView(
+                padding: const EdgeInsets.fromLTRB(20, 20, 20, 28),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    _TopBar(
+                      title: 'MathSpring',
+                    ),
+                    const SizedBox(height: 18),
+                    child,
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -448,6 +539,17 @@ class _PracticeTabState extends State<_PracticeTab> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        _HeroCard(
+          strings: strings,
+          onOpenDemo: () {
+            Navigator.of(context).push(
+              MaterialPageRoute<void>(
+                builder: (_) => TrigGraphDemoPage(services: widget.services),
+              ),
+            );
+          },
+        ),
+        const SizedBox(height: 18),
         _SectionCard(
           title: strings.practiceEntryTitle,
           subtitle: strings.practiceEntrySubtitle,
@@ -527,17 +629,6 @@ class _PracticeTabState extends State<_PracticeTab> {
                       : strings.startSelectedTopicPractice,
                 ),
               ),
-              const SizedBox(height: 12),
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute<void>(
-                      builder: (_) => TrigGraphDemoPage(services: widget.services),
-                    ),
-                  );
-                },
-                child: Text(strings.openDemoCta),
-              ),
             ],
           ),
         ),
@@ -561,6 +652,12 @@ class _QuizTab extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        _CompactHeroBanner(
+          title: strings.quizEntryTitle,
+          subtitle: strings.quizEntrySubtitle,
+          icon: Icons.fact_check_rounded,
+        ),
+        const SizedBox(height: 18),
         _SectionCard(
           title: strings.quizEntryTitle,
           subtitle: strings.quizEntrySubtitle,
@@ -611,6 +708,12 @@ class _ReviewTab extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        _CompactHeroBanner(
+          title: strings.reviewTitle,
+          subtitle: strings.reviewSubtitle,
+          icon: Icons.history_edu_rounded,
+        ),
+        const SizedBox(height: 18),
         _SectionCard(
           title: strings.reviewTitle,
           subtitle: strings.reviewSubtitle,
@@ -652,6 +755,12 @@ class _SettingsTab extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        _CompactHeroBanner(
+          title: strings.settingsTitle,
+          subtitle: strings.settingsSubtitle,
+          icon: Icons.tune_rounded,
+        ),
+        const SizedBox(height: 18),
         _LearnerProfilesSection(
           title: strings.settingsTitle,
           subtitle: strings.settingsSubtitle,
@@ -684,28 +793,59 @@ class _TopBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              title,
-              style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                    fontSize: 18,
-                    letterSpacing: -0.4,
-                    fontWeight: FontWeight.w700,
-                  ),
-            ),
-            const SizedBox(height: 4),
-            Text(
-              AppStrings.of(context).appSubtitle,
-              style: TextStyle(
-                fontSize: 12,
-                color: Color(0xFF6B7280),
-                fontWeight: FontWeight.w500,
+        Container(
+          key: const ValueKey<String>('top_bar_brand_chip'),
+          padding: const EdgeInsets.symmetric(horizontal: 13, vertical: 8),
+          decoration: BoxDecoration(
+            color: const Color(0xFFFDFEFF),
+            borderRadius: BorderRadius.circular(999),
+            border: Border.all(color: const Color(0xFFE6EBF2)),
+            boxShadow: const [
+              BoxShadow(
+                color: Color(0x0A0F172A),
+                blurRadius: 12,
+                offset: Offset(0, 4),
               ),
+            ],
+          ),
+          child: Text(
+            AppStrings.of(context).appSubtitle,
+            style: const TextStyle(
+              fontSize: 11,
+              color: Color(0xFF64748B),
+              fontWeight: FontWeight.w700,
+              letterSpacing: 0.3,
             ),
-          ],
+          ),
+        ),
+        const SizedBox(width: 12),
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                title,
+                style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                      fontSize: 20,
+                      letterSpacing: -0.6,
+                      fontWeight: FontWeight.w700,
+                    ),
+              ),
+              const SizedBox(height: 2),
+              Text(
+                AppStrings.of(context).heroSubtitle,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+                style: const TextStyle(
+                  fontSize: 11,
+                  color: Color(0xFF94A3B8),
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ],
+          ),
         ),
       ],
     );
@@ -804,12 +944,13 @@ class _LearnerSummaryBanner extends StatelessWidget {
     final AppStrings strings = AppStrings.of(context);
     final TextTheme textTheme = Theme.of(context).textTheme;
     return Container(
+      key: const ValueKey<String>('learner_summary_banner'),
       width: double.infinity,
-      padding: const EdgeInsets.all(20),
+      padding: const EdgeInsets.fromLTRB(22, 20, 22, 20),
       decoration: BoxDecoration(
-        color: const Color(0xFFFAFAFA),
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: const Color(0xFFE5E7EB)),
+        color: const Color(0xFFF8FBFF),
+        borderRadius: BorderRadius.circular(22),
+        border: Border.all(color: const Color(0xFFE2E8F0)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -818,7 +959,8 @@ class _LearnerSummaryBanner extends StatelessWidget {
             primaryLabel,
             style: textTheme.bodySmall?.copyWith(
               fontWeight: FontWeight.w600,
-              letterSpacing: 0.1,
+              letterSpacing: 0.3,
+              color: const Color(0xFF64748B),
             ),
           ),
           const SizedBox(height: 4),
@@ -826,14 +968,18 @@ class _LearnerSummaryBanner extends StatelessWidget {
             learner?.displayName ?? strings.noLearnerSelected,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
-            style: textTheme.headlineSmall?.copyWith(fontSize: 22),
+            style: textTheme.headlineSmall?.copyWith(
+              fontSize: 24,
+              letterSpacing: -0.5,
+            ),
           ),
-          const SizedBox(height: 14),
+          const SizedBox(height: 16),
           Text(
             secondaryLabel,
             style: textTheme.bodySmall?.copyWith(
               fontWeight: FontWeight.w600,
-              letterSpacing: 0.1,
+              letterSpacing: 0.3,
+              color: const Color(0xFF64748B),
             ),
           ),
           const SizedBox(height: 4),
@@ -841,7 +987,10 @@ class _LearnerSummaryBanner extends StatelessWidget {
             learner == null ? '-' : _learnerGradeRangeLabel(learner!, strings),
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
-            style: textTheme.titleLarge?.copyWith(fontSize: 20),
+            style: textTheme.titleLarge?.copyWith(
+              fontSize: 19,
+              color: const Color(0xFF1E293B),
+            ),
           ),
         ],
       ),
@@ -926,7 +1075,28 @@ class _HeroCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final bool isWideLayout = MediaQuery.sizeOf(context).width >= 900;
 
-    return Card(
+    return Container(
+      key: const ValueKey<String>('home_hero_surface'),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(30),
+        gradient: const LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [
+            Color(0xFFFDFEFF),
+            Color(0xFFF3F7FD),
+            Color(0xFFEFF4FB),
+          ],
+        ),
+        border: Border.all(color: const Color(0xFFE1E8F4)),
+        boxShadow: const [
+          BoxShadow(
+            color: Color(0x120F172A),
+            blurRadius: 32,
+            offset: Offset(0, 16),
+          ),
+        ],
+      ),
       child: Padding(
         padding: const EdgeInsets.fromLTRB(24, 24, 24, 22),
         child: isWideLayout
@@ -971,22 +1141,33 @@ class _HeroCopy extends StatelessWidget {
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
           decoration: BoxDecoration(
-            color: const Color(0xFFF3F4F6),
-            borderRadius: BorderRadius.circular(8),
+            color: const Color(0xFFEAF1FC),
+            borderRadius: BorderRadius.circular(999),
           ),
           child: Text(
             strings.heroBadge,
             style: const TextStyle(
-              color: Color(0xFF374151),
-              fontWeight: FontWeight.w600,
+              color: Color(0xFF163D7A),
+              fontWeight: FontWeight.w700,
               fontSize: 12,
             ),
           ),
         ),
         const SizedBox(height: 14),
-        Text(strings.heroTitle, style: textTheme.displaySmall),
+        Text(
+          strings.heroTitle,
+          style: textTheme.displaySmall?.copyWith(
+            fontSize: 34,
+            height: 1.05,
+          ),
+        ),
         const SizedBox(height: 12),
-        Text(strings.heroSubtitle, style: textTheme.bodyLarge),
+        Text(
+          strings.heroSubtitle,
+          style: textTheme.bodyLarge?.copyWith(
+            color: const Color(0xFF52637A),
+          ),
+        ),
         const SizedBox(height: 18),
         Wrap(
           spacing: 8,
@@ -999,13 +1180,14 @@ class _HeroCopy extends StatelessWidget {
         ),
         const SizedBox(height: 18),
         FilledButton(
+          key: const ValueKey<String>('hero_primary_cta'),
           onPressed: onOpenDemo,
           style: FilledButton.styleFrom(
-            backgroundColor: const Color(0xFF111827),
+            backgroundColor: const Color(0xFF163D7A),
             foregroundColor: Colors.white,
-            padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 14),
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10),
+              borderRadius: BorderRadius.circular(16),
             ),
           ),
           child: Text(strings.openDemoCta),
@@ -1024,9 +1206,15 @@ class _HeroPanel extends StatelessWidget {
     return Container(
       constraints: const BoxConstraints(minHeight: 220),
       decoration: BoxDecoration(
-        color: const Color(0xFFFAFAFA),
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: const Color(0xFFE5E7EB)),
+        color: const Color(0xFF163D7A),
+        borderRadius: BorderRadius.circular(26),
+        boxShadow: const [
+          BoxShadow(
+            color: Color(0x1E163D7A),
+            blurRadius: 24,
+            offset: Offset(0, 12),
+          ),
+        ],
       ),
       padding: const EdgeInsets.all(24),
       child: Column(
@@ -1034,8 +1222,8 @@ class _HeroPanel extends StatelessWidget {
         children: [
           Text(
             strings.dashboardFocusTitle,
-            style: TextStyle(
-              color: Color(0xFF6B7280),
+            style: const TextStyle(
+              color: Color(0xB3FFFFFF),
               fontSize: 12,
               fontWeight: FontWeight.w600,
             ),
@@ -1043,8 +1231,8 @@ class _HeroPanel extends StatelessWidget {
           const SizedBox(height: 14),
           Text(
             strings.dashboardFocusBody,
-            style: TextStyle(
-              color: Color(0xFF111827),
+            style: const TextStyle(
+              color: Colors.white,
               fontSize: 22,
               height: 1.4,
               fontWeight: FontWeight.w600,
@@ -1054,23 +1242,92 @@ class _HeroPanel extends StatelessWidget {
           Container(
             padding: const EdgeInsets.all(14),
             decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(10),
-              border: Border.all(color: const Color(0xFFE5E7EB)),
+              color: const Color(0x1FFFFFFF),
+              borderRadius: BorderRadius.circular(18),
+              border: Border.all(color: const Color(0x2FFFFFFF)),
             ),
             child: Row(
               children: [
                 Expanded(
                   child: Text(
                     '${strings.dashboardPathTitle}\n${strings.dashboardPathValue}',
-                    style: TextStyle(
-                      color: Color(0xFF374151),
+                    style: const TextStyle(
+                      color: Colors.white,
                       fontSize: 13,
                       height: 1.5,
                     ),
                   ),
                 ),
-                Icon(Icons.arrow_outward, color: Color(0xFF111827), size: 18),
+                const Icon(Icons.arrow_outward, color: Colors.white, size: 18),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _CompactHeroBanner extends StatelessWidget {
+  const _CompactHeroBanner({
+    required this.title,
+    required this.subtitle,
+    required this.icon,
+  });
+
+  final String title;
+  final String subtitle;
+  final IconData icon;
+
+  @override
+  Widget build(BuildContext context) {
+    final TextTheme textTheme = Theme.of(context).textTheme;
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.fromLTRB(20, 18, 20, 18),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(26),
+        gradient: const LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [
+            Color(0xFFFDFEFF),
+            Color(0xFFF2F6FC),
+          ],
+        ),
+        border: Border.all(color: const Color(0xFFE1E8F4)),
+      ),
+      child: Row(
+        children: [
+          Container(
+            width: 46,
+            height: 46,
+            decoration: BoxDecoration(
+              color: const Color(0xFFEAF1FC),
+              borderRadius: BorderRadius.circular(16),
+            ),
+            child: Icon(icon, color: const Color(0xFF163D7A)),
+          ),
+          const SizedBox(width: 14),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  title,
+                  style: textTheme.titleLarge?.copyWith(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w700,
+                    letterSpacing: -0.4,
+                  ),
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  subtitle,
+                  style: textTheme.bodyMedium?.copyWith(
+                    color: const Color(0xFF64748B),
+                  ),
+                ),
               ],
             ),
           ),
@@ -1086,18 +1343,21 @@ class _SectionCard extends StatelessWidget {
     required this.subtitle,
     required this.child,
     this.trailing,
+    this.cardKey,
   });
 
   final String title;
   final String subtitle;
   final Widget child;
   final Widget? trailing;
+  final Key? cardKey;
 
   @override
   Widget build(BuildContext context) {
     return Card(
+      key: cardKey ?? ValueKey<String>('section_card_$title'),
       child: Padding(
-        padding: const EdgeInsets.all(20),
+        padding: const EdgeInsets.fromLTRB(22, 22, 22, 20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -1107,7 +1367,10 @@ class _SectionCard extends StatelessWidget {
                 Expanded(
                   child: Text(
                     title,
-                    style: Theme.of(context).textTheme.headlineSmall,
+                    style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                      fontSize: 18,
+                      letterSpacing: -0.3,
+                    ),
                   ),
                 ),
                 if (trailing != null) ...[
@@ -1116,9 +1379,15 @@ class _SectionCard extends StatelessWidget {
                 ],
               ],
             ),
-            const SizedBox(height: 6),
-            Text(subtitle, style: Theme.of(context).textTheme.bodyMedium),
-            const SizedBox(height: 18),
+            const SizedBox(height: 8),
+            Text(
+              subtitle,
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                color: const Color(0xFF64748B),
+                height: 1.45,
+              ),
+            ),
+            const SizedBox(height: 20),
             child,
           ],
         ),
@@ -1232,6 +1501,7 @@ class _LearnerProfilesSectionState extends State<_LearnerProfilesSection> {
           const SizedBox(height: 16),
           for (int index = 0; index < profiles.length; index++) ...[
             _ProfileTile(
+              tileKey: ValueKey<String>('profile_tile_${profiles[index].id}'),
               onTap: () async {
                 await widget.services.setCurrentLearner(profiles[index].id);
                 widget.onChanged();
@@ -1267,6 +1537,7 @@ class _LearnerProfilesSectionState extends State<_LearnerProfilesSection> {
 
 class _ProfileTile extends StatelessWidget {
   const _ProfileTile({
+    this.tileKey,
     required this.onTap,
     required this.name,
     required this.level,
@@ -1281,6 +1552,7 @@ class _ProfileTile extends StatelessWidget {
     this.deleteKey,
   });
 
+  final Key? tileKey;
   final Future<void> Function() onTap;
   final String name;
   final String level;
@@ -1298,24 +1570,32 @@ class _ProfileTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final TextTheme textTheme = Theme.of(context).textTheme;
     return InkWell(
+      key: tileKey,
       onTap: onTap,
-      borderRadius: BorderRadius.circular(16),
+      borderRadius: BorderRadius.circular(20),
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 16),
+        padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 18),
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: BorderRadius.circular(20),
           border: Border.all(
             color: isCurrent
-                ? const Color(0xFF111827)
-                : const Color(0xFFE5E7EB),
+                ? const Color(0xFF163D7A)
+                : const Color(0xFFE2E8F0),
           ),
+          boxShadow: const [
+            BoxShadow(
+              color: Color(0x0A0F172A),
+              blurRadius: 18,
+              offset: Offset(0, 8),
+            ),
+          ],
         ),
         child: Row(
           children: [
             Container(
-              width: 44,
-              height: 44,
+              width: 46,
+              height: 46,
               decoration: BoxDecoration(
                 color: accent.withOpacity(0.12),
                 shape: BoxShape.circle,
@@ -1335,7 +1615,11 @@ class _ProfileTile extends StatelessWidget {
                           name,
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
-                          style: textTheme.titleLarge?.copyWith(fontSize: 20),
+                          style: textTheme.titleLarge?.copyWith(
+                            fontSize: 18,
+                            letterSpacing: -0.2,
+                            color: const Color(0xFF0F172A),
+                          ),
                         ),
                       ),
                       const SizedBox(width: 8),
@@ -1346,16 +1630,16 @@ class _ProfileTile extends StatelessWidget {
                             vertical: 4,
                           ),
                           decoration: BoxDecoration(
-                            color: const Color(0xFFF3F4F6),
-                            borderRadius: BorderRadius.circular(6),
-                            border: Border.all(color: const Color(0xFFE5E7EB)),
+                            color: const Color(0xFFEAF2FF),
+                            borderRadius: BorderRadius.circular(999),
+                            border: Border.all(color: const Color(0xFFCFE0FF)),
                           ),
                           child: Text(
                             currentLabel,
                             style: textTheme.bodySmall?.copyWith(
                               fontSize: 11,
                               fontWeight: FontWeight.w700,
-                              color: const Color(0xFF374151),
+                              color: const Color(0xFF163D7A),
                             ),
                           ),
                         ),
@@ -1367,7 +1651,7 @@ class _ProfileTile extends StatelessWidget {
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: textTheme.bodyMedium?.copyWith(
-                      fontSize: 15,
+                      fontSize: 14,
                       color: const Color(0xFF475569),
                     ),
                   ),
@@ -2397,7 +2681,7 @@ class _PracticeSessionPageState extends State<PracticeSessionPage> {
         ),
         title: Text(strings.practiceMode),
         surfaceTintColor: Colors.transparent,
-        backgroundColor: Colors.white,
+        backgroundColor: const Color(0xFFF5F7FB),
       ),
       body: FutureBuilder<QuestionBank>(
         future: _packFuture,
@@ -2410,17 +2694,56 @@ class _PracticeSessionPageState extends State<PracticeSessionPage> {
           final Question question = questions[_currentIndex % questions.length];
           return ListView(
             controller: _scrollController,
-            padding: const EdgeInsets.all(24),
+            padding: const EdgeInsets.fromLTRB(20, 16, 20, 28),
             children: [
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    '${strings.questionLabel} ${_records.length + 1}',
-                    style: Theme.of(context).textTheme.headlineSmall,
+                  Container(
+                    key: const ValueKey<String>('practice_question_header'),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 14,
+                    ),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(18),
+                      border: Border.all(color: const Color(0xFFE7EBF2)),
+                    ),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: Text(
+                            '${strings.questionLabel} ${_records.length + 1}',
+                            style: Theme.of(context).textTheme.headlineSmall
+                                ?.copyWith(fontSize: 18),
+                          ),
+                        ),
+                        Container(
+                          key: const ValueKey<String>('question_meta_badge'),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 10,
+                            vertical: 6,
+                          ),
+                          decoration: BoxDecoration(
+                            color: const Color(0xFFEAF2FF),
+                            borderRadius: BorderRadius.circular(999),
+                          ),
+                          child: Text(
+                            _displayLevelStage(question.levelStage, strings),
+                            style: Theme.of(context).textTheme.bodySmall
+                                ?.copyWith(
+                                  fontWeight: FontWeight.w700,
+                                  color: const Color(0xFF163D7A),
+                                ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                  const SizedBox(height: 18),
+                  const SizedBox(height: 16),
                   _SectionCard(
+                    cardKey: const ValueKey<String>('study_surface_card'),
                     title: _displayTopicCode(widget.pack.topicCode, strings),
                     subtitle:
                         '${_displayLevelStage(question.levelStage, strings)} · ${_displayTier(question.challengeTier, strings)}',
@@ -2738,11 +3061,11 @@ class _PracticeReviewCard extends StatelessWidget {
             label: record.isCorrect ? strings.correctLabel : strings.incorrectLabel,
             isCorrect: record.isCorrect,
           ),
+          const SizedBox(height: 12),
           if (record.question.figure.kind != 'none') ...[
-            const SizedBox(height: 14),
             _QuestionFigureView(question: record.question),
+            const SizedBox(height: 16),
           ],
-          const SizedBox(height: 8),
           _QuestionBodyText(
             text: record.question.localizedAnswer(localeCode),
             localeCode: localeCode,
@@ -2897,7 +3220,7 @@ class _QuizSessionPageState extends State<QuizSessionPage> {
       appBar: AppBar(
         title: Text(strings.quizMode),
         surfaceTintColor: Colors.transparent,
-        backgroundColor: Colors.white,
+        backgroundColor: const Color(0xFFF5F7FB),
       ),
       body: FutureBuilder<QuestionBank>(
         future: _packFuture,
@@ -2910,20 +3233,61 @@ class _QuizSessionPageState extends State<QuizSessionPage> {
           final Question question = questions[_currentIndex];
           final String? selectedAnswer = _answers[question.id];
           return SingleChildScrollView(
-            padding: const EdgeInsets.all(24),
+            padding: const EdgeInsets.fromLTRB(20, 16, 20, 28),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  strings.questionCounter(_currentIndex + 1, questions.length),
-                  style: Theme.of(context).textTheme.headlineSmall,
+                Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 16,
+                    vertical: 14,
+                  ),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(18),
+                    border: Border.all(color: const Color(0xFFE7EBF2)),
+                  ),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Text(
+                          strings.questionCounter(
+                            _currentIndex + 1,
+                            questions.length,
+                          ),
+                          style: Theme.of(context).textTheme.headlineSmall
+                              ?.copyWith(fontSize: 18),
+                        ),
+                      ),
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 10,
+                          vertical: 6,
+                        ),
+                        decoration: BoxDecoration(
+                          color: const Color(0xFFEAF2FF),
+                          borderRadius: BorderRadius.circular(999),
+                        ),
+                        child: Text(
+                          _displayLevelStage(question.levelStage, strings),
+                          style: Theme.of(context).textTheme.bodySmall
+                              ?.copyWith(
+                                fontWeight: FontWeight.w700,
+                                color: const Color(0xFF163D7A),
+                              ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
                 const SizedBox(height: 8),
                 Text(
                   '${strings.elapsedLabel} ${_formatElapsed(Duration(seconds: DateTime.now().difference(_startedAt).inSeconds))}',
-                  style: Theme.of(context).textTheme.bodyMedium,
+                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                    color: const Color(0xFF64748B),
+                  ),
                 ),
-                const SizedBox(height: 18),
+                const SizedBox(height: 16),
                 _SectionCard(
                   title: _displayTopicCode(widget.pack.topicCode, strings),
                   subtitle:

@@ -621,6 +621,103 @@ void main() {
     );
   });
 
+  testWidgets('core surfaces use refreshed visual tokens',
+      (WidgetTester tester) async {
+    final TestWidgetsFlutterBinding binding =
+        TestWidgetsFlutterBinding.ensureInitialized();
+    binding.platformDispatcher.localeTestValue = const Locale('en');
+
+    final AppServices services = createTestServices();
+
+    await pumpApp(tester, services);
+
+    final BuildContext context = tester.element(find.byType(Scaffold).first);
+    final ThemeData theme = Theme.of(context);
+    final CardTheme cardTheme = theme.cardTheme;
+    final NavigationBar navigationBar =
+        tester.widget<NavigationBar>(find.byType(NavigationBar));
+
+    expect(theme.scaffoldBackgroundColor, const Color(0xFFF5F7FB));
+    expect(cardTheme.color, Colors.white);
+    expect(cardTheme.shadowColor, const Color(0x140F172A));
+    expect(cardTheme.surfaceTintColor, Colors.transparent);
+    expect((cardTheme.shape as RoundedRectangleBorder).borderRadius,
+        BorderRadius.circular(24));
+    expect(navigationBar.backgroundColor, const Color(0xFFFDFDFE));
+    expect(navigationBar.indicatorColor, const Color(0xFFE7EEF9));
+  });
+
+  testWidgets('home shell applies refreshed cards and profile styling',
+      (WidgetTester tester) async {
+    final TestWidgetsFlutterBinding binding =
+        TestWidgetsFlutterBinding.ensureInitialized();
+    binding.platformDispatcher.localeTestValue = const Locale('en');
+
+    final AppServices services = createTestServices();
+
+    await pumpApp(tester, services);
+
+    expect(find.byKey(const ValueKey<String>('home_hero_surface')), findsOneWidget);
+    expect(find.byKey(const ValueKey<String>('home_background_glow')), findsOneWidget);
+    expect(find.byKey(const ValueKey<String>('hero_primary_cta')), findsOneWidget);
+
+    await tester.tap(find.text('Settings').first);
+    await tester.pumpAndSettle();
+
+    expect(find.byKey(const ValueKey<String>('home_shell_frame')), findsOneWidget);
+    expect(find.byKey(const ValueKey<String>('top_bar_brand_chip')), findsOneWidget);
+    expect(find.byKey(const ValueKey<String>('section_card_Profiles & Settings')),
+        findsOneWidget);
+    expect(find.byKey(const ValueKey<String>('learner_summary_banner')),
+        findsOneWidget);
+    expect(find.byKey(const ValueKey<String>('profile_tile_learner_allen')),
+        findsOneWidget);
+  });
+
+  testWidgets('question pages use refreshed study card styling',
+      (WidgetTester tester) async {
+    final TestWidgetsFlutterBinding binding =
+        TestWidgetsFlutterBinding.ensureInitialized();
+    binding.platformDispatcher.localeTestValue = const Locale('en');
+
+    final AppServices services = createTestServices();
+
+    await tester.binding.setSurfaceSize(const Size(430, 932));
+    await tester.pumpWidget(
+      MaterialApp(
+        locale: const Locale('en'),
+        supportedLocales: AppStrings.supportedLocales,
+        localizationsDelegates: const [
+          GlobalMaterialLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+        ],
+        home: PracticeSessionPage(
+          services: services,
+          pack: const BundledQuestionPackInfo(
+            path: 'assets/questions/geometry/grade2_foundation.geometry.v1.json',
+            topic: '幾何',
+            topicCode: 'geometry',
+            levelStage: 'grade2',
+            challengeTier: 'foundation',
+            questionCount: 1,
+          ),
+          initialQuestions: [createShapeDiagramQuestion()],
+        ),
+      ),
+    );
+    await tester.runAsync(() async {
+      await Future<void>.delayed(const Duration(milliseconds: 50));
+    });
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 300));
+
+    expect(find.byKey(const ValueKey<String>('practice_question_header')),
+        findsOneWidget);
+    expect(find.byKey(const ValueKey<String>('study_surface_card')), findsOneWidget);
+    expect(find.byKey(const ValueKey<String>('question_meta_badge')), findsOneWidget);
+  });
+
   testWidgets('app shell shows bottom navigation and defaults to Practice',
       (WidgetTester tester) async {
     final TestWidgetsFlutterBinding binding =
