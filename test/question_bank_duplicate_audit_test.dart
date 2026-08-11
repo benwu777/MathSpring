@@ -451,6 +451,246 @@ void main() {
     expect(payload['candidateGroups'], isEmpty);
   });
 
+  test('duplicate audit tool separates simple elimination from mislabeled-box logic',
+      () async {
+    final Directory tempDir =
+        await Directory.systemTemp.createTemp('mathspring-duplicate-elimination-');
+    addTearDown(() => tempDir.delete(recursive: true));
+
+    final File fixture = File('${tempDir.path}/sample_questions.json');
+    await fixture.writeAsString(jsonEncode({
+      'questions': [
+        {
+          'id': 'e1',
+          'topic': 'logic',
+          'subtopic': 'elimination',
+          'levelStage': 'grade1',
+          'prompt': {
+            'zh-Hant': '三頂帽子分別是紅、藍、黃。小花不戴紅帽，也不戴黃帽。小花戴哪一頂帽子？',
+          },
+        },
+        {
+          'id': 'e2',
+          'topic': 'logic',
+          'subtopic': 'elimination',
+          'levelStage': 'grade7',
+          'prompt': {
+            'zh-Hant': '三個盒子上分別貼著「紅球」、「藍球」、「紅藍各一球」，但三張標籤全都貼錯。只抽一次一顆球，最少從哪個盒子抽，才能確定三個盒子的內容？',
+          },
+        },
+      ],
+    }));
+
+    final ProcessResult result = await Process.run(
+      'dart',
+      [
+        'run',
+        'tool/question_bank_duplicate_audit.dart',
+        '--input',
+        fixture.path,
+      ],
+      workingDirectory: Directory.current.path,
+    );
+
+    expect(result.exitCode, 0, reason: result.stderr.toString());
+
+    final Map<String, dynamic> payload =
+        jsonDecode(result.stdout.toString()) as Map<String, dynamic>;
+    expect(payload['candidateGroups'], isEmpty);
+  });
+
+  test('duplicate audit tool separates pet matching from color preference matching',
+      () async {
+    final Directory tempDir =
+        await Directory.systemTemp.createTemp('mathspring-duplicate-matching-');
+    addTearDown(() => tempDir.delete(recursive: true));
+
+    final File fixture = File('${tempDir.path}/sample_questions.json');
+    await fixture.writeAsString(jsonEncode({
+      'questions': [
+        {
+          'id': 'm1',
+          'topic': 'logic',
+          'subtopic': 'matching',
+          'levelStage': 'grade3',
+          'prompt': {
+            'zh-Hant': '安安、波波、晨晨養貓、狗、魚各一種。波波養狗，安安不養貓。晨晨養什麼？',
+          },
+        },
+        {
+          'id': 'm2',
+          'topic': 'logic',
+          'subtopic': 'matching',
+          'levelStage': 'grade8',
+          'prompt': {
+            'zh-Hant': '甲、乙、丙三人分別喜歡不同的顏色：紅、藍、綠。已知甲不喜歡紅色，乙不喜歡藍色，丙喜歡綠色。問乙喜歡什麼顏色？',
+          },
+        },
+      ],
+    }));
+
+    final ProcessResult result = await Process.run(
+      'dart',
+      [
+        'run',
+        'tool/question_bank_duplicate_audit.dart',
+        '--input',
+        fixture.path,
+      ],
+      workingDirectory: Directory.current.path,
+    );
+
+    expect(result.exitCode, 0, reason: result.stderr.toString());
+
+    final Map<String, dynamic> payload =
+        jsonDecode(result.stdout.toString()) as Map<String, dynamic>;
+    expect(payload['candidateGroups'], isEmpty);
+  });
+
+  test('duplicate audit tool separates divisibility relation from decimal balancing',
+      () async {
+    final Directory tempDir =
+        await Directory.systemTemp.createTemp('mathspring-duplicate-equation-reasoning-');
+    addTearDown(() => tempDir.delete(recursive: true));
+
+    final File fixture = File('${tempDir.path}/sample_questions.json');
+    await fixture.writeAsString(jsonEncode({
+      'questions': [
+        {
+          'id': 'eq1',
+          'topic': 'arithmetic',
+          'subtopic': 'equation_reasoning',
+          'levelStage': 'grade3',
+          'prompt': {
+            'zh-Hant': 'A 和 B 都是 1 到 9 的數字，且滿足 (A+B)÷B = 4。請問 A×B 不可能是哪一個？',
+          },
+        },
+        {
+          'id': 'eq2',
+          'topic': 'arithmetic',
+          'subtopic': 'equation_reasoning',
+          'levelStage': 'grade4',
+          'prompt': {
+            'zh-Hant': '12.8 + ★ - 0.4 = 15.2 - ★，求 ★ = ?',
+          },
+        },
+      ],
+    }));
+
+    final ProcessResult result = await Process.run(
+      'dart',
+      [
+        'run',
+        'tool/question_bank_duplicate_audit.dart',
+        '--input',
+        fixture.path,
+      ],
+      workingDirectory: Directory.current.path,
+    );
+
+    expect(result.exitCode, 0, reason: result.stderr.toString());
+
+    final Map<String, dynamic> payload =
+        jsonDecode(result.stdout.toString()) as Map<String, dynamic>;
+    expect(payload['candidateGroups'], isEmpty);
+  });
+
+  test('duplicate audit tool separates total-cost from change-after-purchase stories',
+      () async {
+    final Directory tempDir =
+        await Directory.systemTemp.createTemp('mathspring-duplicate-multi-step-');
+    addTearDown(() => tempDir.delete(recursive: true));
+
+    final File fixture = File('${tempDir.path}/sample_questions.json');
+    await fixture.writeAsString(jsonEncode({
+      'questions': [
+        {
+          'id': 'ms1',
+          'topic': 'arithmetic',
+          'subtopic': 'multi_step',
+          'levelStage': 'grade2',
+          'prompt': {
+            'zh-Hant': '鉛筆一枝 6 元，原子筆一枝 9 元。小明買了 4 枝鉛筆和 2 枝原子筆，一共要付多少元？',
+          },
+        },
+        {
+          'id': 'ms2',
+          'topic': 'arithmetic',
+          'subtopic': 'multi_step',
+          'levelStage': 'grade3',
+          'prompt': {
+            'zh-Hant': '小華帶了 100 元去買文具。他買了 3 枝筆，每枝 18 元，又買了一本 25 元的筆記本。他還剩多少元？',
+          },
+        },
+      ],
+    }));
+
+    final ProcessResult result = await Process.run(
+      'dart',
+      [
+        'run',
+        'tool/question_bank_duplicate_audit.dart',
+        '--input',
+        fixture.path,
+      ],
+      workingDirectory: Directory.current.path,
+    );
+
+    expect(result.exitCode, 0, reason: result.stderr.toString());
+
+    final Map<String, dynamic> payload =
+        jsonDecode(result.stdout.toString()) as Map<String, dynamic>;
+    expect(payload['candidateGroups'], isEmpty);
+  });
+
+  test('duplicate audit tool separates linear box elimination from multi-attribute matching',
+      () async {
+    final Directory tempDir =
+        await Directory.systemTemp.createTemp('mathspring-duplicate-grid-elimination-');
+    addTearDown(() => tempDir.delete(recursive: true));
+
+    final File fixture = File('${tempDir.path}/sample_questions.json');
+    await fixture.writeAsString(jsonEncode({
+      'questions': [
+        {
+          'id': 'ge1',
+          'topic': 'logic',
+          'subtopic': 'grid_elimination',
+          'levelStage': 'grade2',
+          'prompt': {
+            'zh-Hant': '四個盒子排成一列，從左到右是 A、B、C、D。球在 B 的右邊，也在 D 的左邊。球在哪個盒子？',
+          },
+        },
+        {
+          'id': 'ge2',
+          'topic': 'logic',
+          'subtopic': 'grid_elimination',
+          'levelStage': 'grade5',
+          'prompt': {
+            'zh-Hant': '佩佩、阿凱、小雨三人各養一種寵物（貓、狗、魚，各不相同），也各喜歡一種顏色（紅、藍、綠，各不相同）。已知：養貓的人喜歡紅色；阿凱不養狗；小雨喜歡藍色；佩佩不喜歡紅色；佩佩不養魚。誰養狗？',
+          },
+        },
+      ],
+    }));
+
+    final ProcessResult result = await Process.run(
+      'dart',
+      [
+        'run',
+        'tool/question_bank_duplicate_audit.dart',
+        '--input',
+        fixture.path,
+      ],
+      workingDirectory: Directory.current.path,
+    );
+
+    expect(result.exitCode, 0, reason: result.stderr.toString());
+
+    final Map<String, dynamic> payload =
+        jsonDecode(result.stdout.toString()) as Map<String, dynamic>;
+    expect(payload['candidateGroups'], isEmpty);
+  });
+
   test('duplicate audit tool separates different shape-property reasoning structures', () async {
     final Directory tempDir =
         await Directory.systemTemp.createTemp('mathspring-duplicate-shapes-properties-');
@@ -637,5 +877,281 @@ void main() {
     final Map<String, dynamic> payload =
         jsonDecode(result.stdout.toString()) as Map<String, dynamic>;
     expect(payload['candidateGroups'], isEmpty);
+  });
+
+  test('duplicate audit no longer flags selected same-pack rewritten duplicates',
+      () async {
+    final ProcessResult result = await Process.run(
+      'dart',
+      [
+        'run',
+        'tool/question_bank_duplicate_audit.dart',
+      ],
+      workingDirectory: Directory.current.path,
+    );
+
+    expect(result.exitCode, 0, reason: result.stderr.toString());
+
+    final Map<String, dynamic> payload =
+        jsonDecode(result.stdout.toString()) as Map<String, dynamic>;
+    final List<dynamic> groups = payload['candidateGroups'] as List<dynamic>;
+
+    bool containsExactIds(List<String> ids) {
+      final List<String> expected = List<String>.from(ids)..sort();
+      return groups.any((dynamic rawGroup) {
+        final Map<String, dynamic> group = rawGroup as Map<String, dynamic>;
+        final List<String> actual = List<String>.from(
+          group['questionIds'] as List<dynamic>,
+        )..sort();
+        return actual.length == expected.length &&
+            actual.join('|') == expected.join('|');
+      });
+    }
+
+    expect(
+      containsExactIds(<String>[
+        'logic_grade1_foundation_002',
+        'logic_grade1_foundation_020',
+      ]),
+      isFalse,
+    );
+    expect(
+      containsExactIds(<String>[
+        'geometry_grade2_foundation_002',
+        'geometry_grade2_foundation_021',
+      ]),
+      isFalse,
+    );
+    expect(
+      containsExactIds(<String>[
+        'geometry_grade5_foundation_003',
+        'geometry_grade5_foundation_019',
+      ]),
+      isFalse,
+    );
+    expect(
+      containsExactIds(<String>[
+        'geometry_grade6_foundation_003',
+        'geometry_grade6_foundation_012',
+      ]),
+      isFalse,
+    );
+    expect(
+      containsExactIds(<String>[
+        'logic_grade1_foundation_023',
+        'logic_grade5_foundation_029',
+      ]),
+      isFalse,
+    );
+    expect(
+      containsExactIds(<String>[
+        'logic_grade5_foundation_023',
+        'logic_grade5_foundation_034',
+      ]),
+      isFalse,
+    );
+    expect(
+      containsExactIds(<String>[
+        'logic_grade5_foundation_025',
+        'logic_grade5_foundation_027',
+      ]),
+      isFalse,
+    );
+    expect(
+      containsExactIds(<String>[
+        'logic_grade5_foundation_025',
+        'logic_grade5_foundation_027',
+        'logic_grade5_foundation_029',
+      ]),
+      isFalse,
+    );
+    expect(
+      containsExactIds(<String>[
+        'logic_grade5_foundation_026',
+        'logic_grade5_foundation_033',
+      ]),
+      isFalse,
+    );
+    expect(
+      containsExactIds(<String>[
+        'logic_grade6_foundation_027',
+        'logic_grade6_foundation_031',
+      ]),
+      isFalse,
+    );
+    expect(
+      containsExactIds(<String>[
+        'logic_grade6_foundation_006',
+        'logic_grade6_foundation_012',
+      ]),
+      isFalse,
+    );
+    expect(
+      containsExactIds(<String>[
+        'logic_grade2_foundation_024',
+        'logic_grade3_foundation_010',
+      ]),
+      isFalse,
+    );
+    expect(
+      containsExactIds(<String>[
+        'arithmetic_grade5_foundation_017',
+        'arithmetic_grade6_foundation_021',
+      ]),
+      isFalse,
+    );
+    expect(
+      containsExactIds(<String>[
+        'arithmetic_grade4_foundation_003',
+        'arithmetic_grade5_foundation_026',
+      ]),
+      isFalse,
+    );
+    expect(
+      containsExactIds(<String>[
+        'arithmetic_grade3_foundation_067',
+        'arithmetic_grade4_foundation_063',
+      ]),
+      isFalse,
+    );
+    expect(
+      containsExactIds(<String>[
+        'arithmetic_grade3_foundation_063',
+        'arithmetic_grade4_foundation_062',
+      ]),
+      isFalse,
+    );
+    expect(
+      containsExactIds(<String>[
+        'arithmetic_grade3_foundation_043',
+        'arithmetic_grade4_foundation_050',
+      ]),
+      isFalse,
+    );
+    expect(
+      containsExactIds(<String>[
+        'arithmetic_grade3_foundation_062',
+        'arithmetic_grade4_foundation_061',
+      ]),
+      isFalse,
+    );
+    expect(
+      containsExactIds(<String>[
+        'arithmetic_grade2_foundation_013',
+        'arithmetic_grade2_foundation_034',
+        'arithmetic_grade3_foundation_006',
+      ]),
+      isFalse,
+    );
+    expect(
+      containsExactIds(<String>[
+        'arithmetic_grade2_foundation_013',
+        'arithmetic_grade3_foundation_006',
+      ]),
+      isFalse,
+    );
+    expect(
+      containsExactIds(<String>[
+        'arithmetic_grade1_foundation_019',
+        'arithmetic_grade2_foundation_001',
+      ]),
+      isFalse,
+    );
+    expect(
+      containsExactIds(<String>[
+        'arithmetic_grade3_foundation_006',
+        'arithmetic_grade3_foundation_007',
+      ]),
+      isFalse,
+    );
+    expect(
+      containsExactIds(<String>[
+        'arithmetic_grade3_foundation_001',
+        'arithmetic_grade5_foundation_012',
+        'arithmetic_grade6_foundation_012',
+        'arithmetic_grade6_foundation_029',
+      ]),
+      isFalse,
+    );
+    expect(
+      containsExactIds(<String>[
+        'arithmetic_grade1_foundation_028',
+        'arithmetic_grade2_foundation_031',
+        'arithmetic_grade3_foundation_025',
+        'arithmetic_grade4_foundation_030',
+      ]),
+      isFalse,
+    );
+    expect(
+      containsExactIds(<String>[
+        'arithmetic_grade1_foundation_003',
+        'arithmetic_grade2_foundation_022',
+        'arithmetic_grade3_foundation_012',
+        'arithmetic_grade4_foundation_023',
+      ]),
+      isFalse,
+    );
+    expect(
+      containsExactIds(<String>[
+        'arithmetic_grade1_foundation_009',
+        'arithmetic_grade1_foundation_015',
+        'arithmetic_grade2_foundation_011',
+        'arithmetic_grade2_foundation_015',
+        'arithmetic_grade3_foundation_027',
+        'arithmetic_grade3_foundation_030',
+      ]),
+      isFalse,
+    );
+    expect(
+      containsExactIds(<String>[
+        'logic_grade1_foundation_012',
+        'logic_grade2_foundation_012',
+        'logic_grade2_foundation_027',
+      ]),
+      isFalse,
+    );
+    expect(
+      containsExactIds(<String>[
+        'geometry_grade1_foundation_019',
+        'geometry_grade2_foundation_022',
+      ]),
+      isFalse,
+    );
+    expect(
+      containsExactIds(<String>[
+        'geometry_grade3_foundation_008',
+        'geometry_grade4_foundation_036',
+      ]),
+      isFalse,
+    );
+    expect(
+      containsExactIds(<String>[
+        'geometry_grade3_foundation_018',
+        'geometry_grade4_foundation_014',
+        'mixed_grade5_foundation_008',
+      ]),
+      isFalse,
+    );
+    expect(
+      containsExactIds(<String>[
+        'geometry_grade4_foundation_024',
+        'geometry_grade4_foundation_026',
+      ]),
+      isFalse,
+    );
+    expect(
+      containsExactIds(<String>[
+        'arithmetic_grade5_foundation_019',
+        'arithmetic_grade6_foundation_036',
+      ]),
+      isFalse,
+    );
+    expect(
+      containsExactIds(<String>[
+        'arithmetic_grade5_foundation_025',
+        'arithmetic_grade5_foundation_045',
+      ]),
+      isFalse,
+    );
   });
 }

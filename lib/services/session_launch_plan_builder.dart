@@ -6,6 +6,21 @@ import 'package:mathspring/models/learner_profile.dart';
 import 'package:mathspring/models/question.dart';
 
 class SessionLaunchPlanBuilder {
+  static const Set<String> _currentlySupportedLaunchLevels = <String>{
+    'grade1',
+    'grade2',
+    'grade3',
+    'grade4',
+    'grade5',
+    'grade6',
+    'grade7',
+    'grade8',
+    'grade9',
+    'grade10',
+    'grade11',
+    'grade12',
+  };
+
   static List<BundledQuestionPackInfo> pickEligiblePacks(
     List<BundledQuestionPackInfo> packs,
     LearnerProfile? learner, {
@@ -13,6 +28,9 @@ class SessionLaunchPlanBuilder {
   }) {
     if (learner == null) {
       return packs.where((pack) {
+        if (!_currentlySupportedLaunchLevels.contains(pack.levelStage)) {
+          return false;
+        }
         if (topicCode != null && pack.topicCode != topicCode) {
           return false;
         }
@@ -20,14 +38,22 @@ class SessionLaunchPlanBuilder {
       }).toList();
     }
 
-    return filterPacksForCompetitionProfile(
-      packs,
-      competitionProfileId: competitionProfileIdForLevelStage(
-        learner.levelStage,
-      ),
-      topicCode: topicCode,
-      challengeTier: 'foundation',
-    );
+    return packs.where((pack) {
+      if (!_currentlySupportedLaunchLevels.contains(pack.levelStage)) {
+        return false;
+      }
+      if (!isLevelStageWithinRange(
+        pack.levelStage,
+        minLevelStage: learner.effectiveMinLevelStage,
+        maxLevelStage: learner.effectiveMaxLevelStage,
+      )) {
+        return false;
+      }
+      if (topicCode != null && pack.topicCode != topicCode) {
+        return false;
+      }
+      return pack.challengeTier == 'foundation';
+    }).toList();
   }
 
   static BundledQuestionPackInfo buildLaunchPack({
@@ -44,9 +70,7 @@ class SessionLaunchPlanBuilder {
       topicCode: topicCode ?? 'mixed',
       levelStage: learner == null
           ? firstPack.levelStage
-          : representativeLevelStageForCompetitionProfile(
-              competitionProfileIdForLevelStage(learner.levelStage),
-            ),
+          : learner.effectiveMaxLevelStage,
       challengeTier: 'foundation',
       questionCount: mergedQuestionCount,
     );
@@ -63,5 +87,13 @@ class SessionLaunchPlanBuilder {
     final List<Question> shuffled = List<Question>.from(questions);
     shuffled.shuffle(seed == null ? math.Random() : math.Random(seed));
     return shuffled;
+  }
+
+  static List<Question> filterApprovedQuestionsForLaunch(
+    List<Question> questions,
+  ) {
+    return questions
+        .where((question) => question.isReviewApproved)
+        .toList(growable: false);
   }
 }

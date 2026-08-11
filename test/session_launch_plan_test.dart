@@ -78,6 +78,14 @@ void main() {
       challengeTier: 'foundation',
       questionCount: 5,
     ),
+    BundledQuestionPackInfo(
+      path: 'assets/questions/algebra/grade7_foundation.algebra.v1.json',
+      topic: 'Algebra',
+      topicCode: 'algebra',
+      levelStage: 'grade7',
+      challengeTier: 'foundation',
+      questionCount: 4,
+    ),
   ];
 
   test('selects only foundation packs for anonymous launch', () {
@@ -91,6 +99,29 @@ void main() {
     expect(selected, hasLength(4));
     expect(selected.every((pack) => pack.challengeTier == 'foundation'), isTrue);
     expect(selected.every((pack) => pack.topicCode == 'geometry'), isTrue);
+  });
+
+  test('learner launch supports grade7+ packs inside the selected range',
+      () {
+    const LearnerProfile learner = LearnerProfile(
+      id: 'learner_senior',
+      displayName: 'Senior',
+      levelStage: 'grade12',
+      minLevelStage: 'grade7',
+      maxLevelStage: 'grade12',
+      challengeTier: 'foundation',
+      createdAtIso: '2026-08-02T00:00:00Z',
+    );
+
+    final List<BundledQuestionPackInfo> selected =
+        SessionLaunchPlanBuilder.pickEligiblePacks(
+      packs,
+      learner,
+      topicCode: 'algebra',
+    );
+
+    expect(selected, hasLength(1));
+    expect(selected.first.levelStage, 'grade7');
   });
 
   test('selects competition-profile-matched packs for learner launch', () {
@@ -119,7 +150,9 @@ void main() {
     const LearnerProfile learner = LearnerProfile(
       id: 'learner_2',
       displayName: 'Mia',
-      levelStage: 'grade1',
+      levelStage: 'grade2',
+      minLevelStage: 'grade1',
+      maxLevelStage: 'grade2',
       challengeTier: 'foundation',
       createdAtIso: '2026-07-19T00:00:00Z',
     );
@@ -190,6 +223,7 @@ void main() {
           'type': 'integer',
           'value': '1',
         },
+        'reviewStatus': 'ok',
       });
     }
 
@@ -218,5 +252,72 @@ void main() {
       randomized.map((question) => question.id).toSet(),
       equals(<String>{'q1', 'q2', 'q3', 'q4', 'q5'}),
     );
+  });
+
+  test('launch question filtering keeps only review-approved questions', () {
+    Question buildQuestion(String id, String reviewStatus) {
+      return Question.fromJson({
+        'id': id,
+        'topic': 'geometry',
+        'difficulty': 'foundation',
+        'levelStage': 'grade7',
+        'challengeTier': 'foundation',
+        'prompt': {'en': 'Prompt $id'},
+        'answer': {'en': 'Answer $id'},
+        'solutionSteps': {
+          'en': ['Step $id'],
+        },
+        'figure': {
+          'type': 'custom',
+          'kind': 'none',
+          'params': <String, dynamic>{},
+        },
+        'answerMode': 'integer_input',
+        'correctAnswer': {
+          'type': 'integer',
+          'value': '1',
+        },
+        'reviewStatus': reviewStatus,
+      });
+    }
+
+    final List<Question> filtered =
+        SessionLaunchPlanBuilder.filterApprovedQuestionsForLaunch(<Question>[
+      buildQuestion('q_ok_1', 'ok'),
+      buildQuestion('q_pending', 'pending'),
+      buildQuestion('q_fix', 'needs_fix'),
+      buildQuestion('q_ok_2', 'ok'),
+    ]);
+
+    expect(filtered.map((item) => item.id), <String>['q_ok_1', 'q_ok_2']);
+  });
+
+  test('question parser preserves review status', () {
+    final Question question = Question.fromJson({
+      'id': 'geometry_grade7_foundation_approved',
+      'topic': 'geometry',
+      'difficulty': 'foundation',
+      'levelStage': 'grade7',
+      'challengeTier': 'foundation',
+      'prompt': {'en': 'Prompt'},
+      'answer': {'en': 'Answer'},
+      'solutionSteps': {
+        'en': ['Step'],
+      },
+      'figure': {
+        'type': 'custom',
+        'kind': 'none',
+        'params': <String, dynamic>{},
+      },
+      'answerMode': 'integer_input',
+      'correctAnswer': {
+        'type': 'integer',
+        'value': '1',
+      },
+      'reviewStatus': 'ok',
+    });
+
+    expect(question.reviewStatus, 'ok');
+    expect(question.isReviewApproved, isTrue);
   });
 }

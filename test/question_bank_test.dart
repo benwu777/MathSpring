@@ -122,6 +122,7 @@ void main() {
       'name': 'Math Kangaroo USA',
       'contest': 'Math Kangaroo USA',
       'year': '2025',
+      'round': 'Final Round',
       'division': 'Grades 3-4',
       'problemNumber': '12',
       'reference': '2025 Grades 3-4 Problem 12',
@@ -133,6 +134,7 @@ void main() {
     expect(source.type, 'official_reference');
     expect(source.contest, 'Math Kangaroo USA');
     expect(source.year, '2025');
+    expect(source.round, 'Final Round');
     expect(source.division, 'Grades 3-4');
     expect(source.problemNumber, '12');
     expect(source.sourceUrl, 'https://mathkangaroo.org/mks/practice/pdf-exams/');
@@ -182,22 +184,34 @@ void main() {
     expect(question.localizedSolutionSteps('ja-JP'), ['日本語の手順']);
   });
 
-  test('competition profile groups grade ranges and filters matching packs', () async {
+  test('grade range helpers expand and filter matching packs', () async {
     TestWidgetsFlutterBinding.ensureInitialized();
 
-    expect(competitionProfileIdForLevelStage('grade1'), kangaroo12ProfileId);
-    expect(competitionProfileIdForLevelStage('grade4'), kangaroo34ProfileId);
-    expect(competitionProfileIdForLevelStage('grade6'), kangaroo56ProfileId);
+    expect(levelStagesInRange(minLevelStage: 'grade1', maxLevelStage: 'grade2'), [
+      'grade1',
+      'grade2',
+    ]);
+    expect(levelStagesInRange(minLevelStage: 'grade3', maxLevelStage: 'grade4'), [
+      'grade3',
+      'grade4',
+    ]);
+    expect(isLevelStageWithinRange('grade4', minLevelStage: 'grade3', maxLevelStage: 'grade6'), isTrue);
+    expect(isLevelStageWithinRange('grade7', minLevelStage: 'grade3', maxLevelStage: 'grade6'), isFalse);
 
     final BundledQuestionBankRepository repository = BundledQuestionBankRepository();
     final BundledQuestionManifest manifest = await repository.loadManifest();
-    final List<BundledQuestionPackInfo> groupedPacks =
-        filterPacksForCompetitionProfile(
-      manifest.packs,
-      competitionProfileId: kangaroo34ProfileId,
-      topicCode: 'geometry',
-      challengeTier: 'foundation',
-    );
+    final List<BundledQuestionPackInfo> groupedPacks = manifest.packs
+        .where(
+          (pack) =>
+              pack.topicCode == 'geometry' &&
+              pack.challengeTier == 'foundation' &&
+              isLevelStageWithinRange(
+                pack.levelStage,
+                minLevelStage: 'grade3',
+                maxLevelStage: 'grade4',
+              ),
+        )
+        .toList();
 
     expect(groupedPacks, hasLength(2));
     expect(
@@ -216,14 +230,137 @@ void main() {
     final BundledQuestionManifest manifest = BundledQuestionManifest.fromJson(decoded);
 
     expect(manifest.version, 1);
-    expect(manifest.packs, hasLength(20));
+    expect(manifest.packs, hasLength(50));
     expect(manifest.packs.first.topicCode, 'geometry');
     expect(manifest.packs.first.levelStage, 'grade4');
     expect(manifest.packs.first.questionCount, greaterThanOrEqualTo(10));
+    final List<BundledQuestionPackInfo> upperAlgebraPacks = manifest.packs
+        .where((pack) => pack.topicCode == 'algebra')
+        .toList();
+    final List<BundledQuestionPackInfo> upperGeometryPacks = manifest.packs
+        .where(
+          (pack) => pack.topicCode == 'geometry' &&
+              pack.levelStage.startsWith('grade') &&
+              {'grade7', 'grade8', 'grade9', 'grade10', 'grade11', 'grade12'}
+                  .contains(pack.levelStage),
+        )
+        .toList();
+    final List<BundledQuestionPackInfo> upperNumberTheoryPacks = manifest.packs
+        .where(
+          (pack) => pack.topicCode == 'number_theory' &&
+              {'grade7', 'grade8', 'grade9', 'grade10', 'grade11', 'grade12'}
+                  .contains(pack.levelStage),
+        )
+        .toList();
+    final List<BundledQuestionPackInfo> upperCombinatoricsPacks = manifest.packs
+        .where(
+          (pack) => pack.topicCode == 'combinatorics' &&
+              {'grade7', 'grade8', 'grade9', 'grade10', 'grade11', 'grade12'}
+                  .contains(pack.levelStage),
+        )
+        .toList();
+    final List<BundledQuestionPackInfo> upperLogicPacks = manifest.packs
+        .where(
+          (pack) => pack.topicCode == 'logic' &&
+              {'grade7', 'grade8', 'grade9', 'grade10', 'grade11', 'grade12'}
+                  .contains(pack.levelStage),
+        )
+        .toList();
+    expect(upperAlgebraPacks, hasLength(6));
+    expect(upperGeometryPacks, hasLength(6));
+    expect(upperNumberTheoryPacks, hasLength(6));
+    expect(upperCombinatoricsPacks, hasLength(6));
+    expect(upperLogicPacks, hasLength(6));
     expect(
-      manifest.packs.every((pack) => pack.questionCount >= 10),
+      upperAlgebraPacks.map((pack) => pack.levelStage).toSet(),
+      {'grade7', 'grade8', 'grade9', 'grade10', 'grade11', 'grade12'},
+    );
+    expect(
+      upperGeometryPacks.map((pack) => pack.levelStage).toSet(),
+      {'grade7', 'grade8', 'grade9', 'grade10', 'grade11', 'grade12'},
+    );
+    expect(
+      upperAlgebraPacks.every((pack) => pack.questionCount == 9),
       isTrue,
     );
+    expect(
+      upperGeometryPacks.every((pack) => pack.questionCount == 10),
+      isTrue,
+    );
+    expect(
+      upperNumberTheoryPacks.every((pack) => pack.questionCount == 10),
+      isTrue,
+    );
+    expect(
+      upperCombinatoricsPacks.every((pack) => pack.questionCount == 9),
+      isTrue,
+    );
+    expect(
+      upperLogicPacks.every((pack) => pack.questionCount == 9),
+      isTrue,
+    );
+    expect(
+      manifest.packs
+          .where(
+            (pack) =>
+                pack.topicCode != 'algebra' &&
+                pack.topicCode != 'geometry' &&
+                pack.topicCode != 'number_theory' &&
+                pack.topicCode != 'combinatorics' &&
+                !({'grade7', 'grade8', 'grade9', 'grade10', 'grade11', 'grade12'}
+                        .contains(pack.levelStage) &&
+                    pack.topicCode == 'logic'),
+          )
+          .every((pack) => pack.questionCount >= 10),
+      isTrue,
+    );
+  });
+
+  test('question bank does not contain draft placeholder content', () async {
+    final Directory questionRoot = Directory('assets/questions');
+    final List<FileSystemEntity> files = questionRoot
+        .listSync(recursive: true)
+        .where(
+          (entity) =>
+              entity is File &&
+              entity.path.endsWith('.json') &&
+              !entity.path.endsWith('manifest.json'),
+        )
+        .toList();
+    final List<String> violations = <String>[];
+    final List<String> bannedMarkers = <String>[
+      'This draft',
+      'should not be used',
+      '此題不採用',
+      '使うべきではありません',
+    ];
+
+    for (final FileSystemEntity entity in files) {
+      final File file = entity as File;
+      final Map<String, dynamic> payload =
+          jsonDecode(await file.readAsString()) as Map<String, dynamic>;
+      final List<dynamic> questions = payload['questions'] as List<dynamic>? ?? <dynamic>[];
+
+      for (final dynamic question in questions) {
+        final Map<String, dynamic> record = question as Map<String, dynamic>;
+        final Map<String, dynamic> solutionSteps =
+            record['solutionSteps'] as Map<String, dynamic>? ?? <String, dynamic>{};
+        final List<String> texts = <String>[
+          jsonEncode(record['prompt']),
+          jsonEncode(record['answer']),
+          jsonEncode(solutionSteps),
+        ];
+
+        final bool hasDraftMarker = bannedMarkers.any(
+          (marker) => texts.any((text) => text.contains(marker)),
+        );
+        if (hasDraftMarker) {
+          violations.add(record['id'] as String);
+        }
+      }
+    }
+
+    expect(violations, isEmpty);
   });
 
   test('olympiad template registry documents 36 core templates', () async {
@@ -397,7 +534,7 @@ void main() {
         .map((pack) => pack.questionCount)
         .fold(0, (sum, count) => sum + count);
 
-    expect(packs, hasLength(20));
+    expect(packs, hasLength(50));
     expect(packs.first.questions, isNotEmpty);
     expect(packs.last.questions, isNotEmpty);
     final int totalQuestions = packs
@@ -405,7 +542,77 @@ void main() {
         .fold(0, (sum, count) => sum + count);
     expect(totalQuestions, expectedTotalQuestions);
     expect(
-      packs.every((pack) => pack.questions.length >= 10),
+      packs.every(
+        (pack) {
+          final bool isUpperOlympiadPack = pack.questions.isNotEmpty &&
+              {'algebra', 'geometry'}.contains(pack.questions.first.topic) &&
+              {
+                'grade7',
+                'grade8',
+                'grade9',
+                'grade10',
+                'grade11',
+                'grade12',
+              }.contains(pack.questions.first.levelStage) ||
+              (pack.questions.isNotEmpty &&
+                  pack.questions.first.topic == 'number_theory' &&
+                  {
+                    'grade7',
+                    'grade8',
+                    'grade9',
+                    'grade10',
+                    'grade11',
+                    'grade12',
+                  }.contains(pack.questions.first.levelStage)) ||
+              (pack.questions.isNotEmpty &&
+                  pack.questions.first.topic == 'combinatorics' &&
+                  {
+                    'grade7',
+                    'grade8',
+                    'grade9',
+                    'grade10',
+                    'grade11',
+                    'grade12',
+                  }.contains(pack.questions.first.levelStage)) ||
+              (pack.questions.isNotEmpty &&
+                  pack.questions.first.topic == 'logic' &&
+                  {
+                    'grade7',
+                    'grade8',
+                    'grade9',
+                    'grade10',
+                    'grade11',
+                    'grade12',
+                  }.contains(pack.questions.first.levelStage)) &&
+              {
+                'grade7',
+                'grade8',
+                'grade9',
+                'grade10',
+                'grade11',
+                'grade12',
+              }.contains(pack.questions.first.levelStage);
+          if (!isUpperOlympiadPack) {
+            return pack.questions.length >= 10;
+          }
+          if (pack.questions.first.topic == 'logic') {
+            return pack.questions.length == 9;
+          }
+          if (pack.questions.first.topic == 'combinatorics') {
+            return pack.questions.length == 9;
+          }
+          if (pack.questions.first.topic == 'geometry') {
+            return pack.questions.length == 10;
+          }
+          if (pack.questions.first.topic == 'number_theory') {
+            return pack.questions.length == 10;
+          }
+          if (pack.questions.first.topic == 'algebra') {
+            return pack.questions.length == 9;
+          }
+          return pack.questions.length == 3;
+        },
+      ),
       isTrue,
     );
     final List<QuestionBank> geometryPacks = packs
@@ -414,9 +621,20 @@ void main() {
               pack.questions.every((question) => question.topic == 'geometry'),
         )
         .toList();
-    expect(geometryPacks, hasLength(6));
+    expect(geometryPacks, hasLength(12));
     expect(
-      geometryPacks.every((pack) => pack.questions.length >= 10),
+      geometryPacks.every(
+        (pack) => {
+          'grade7',
+          'grade8',
+          'grade9',
+          'grade10',
+          'grade11',
+          'grade12',
+        }.contains(pack.questions.first.levelStage)
+            ? pack.questions.length == 10
+            : pack.questions.length >= 10,
+      ),
       isTrue,
     );
     final int totalGeometryQuestions = geometryPacks
@@ -1445,5 +1663,460 @@ void main() {
     expect(question.answerMode, AnswerMode.integerInput);
     expect(question.correctAnswer.type, 'integer');
     expect(question.correctAnswer.value, '145');
+  });
+
+  test('grade7 packs load with olympiad taxonomy metadata', () async {
+    TestWidgetsFlutterBinding.ensureInitialized();
+
+    final BundledQuestionBankRepository repository = BundledQuestionBankRepository();
+    final BundledQuestionManifest manifest = await repository.loadManifest();
+
+    final BundledQuestionPackInfo grade7AlgebraPack = manifest.packs.firstWhere(
+      (BundledQuestionPackInfo pack) =>
+          pack.path == 'assets/questions/algebra/grade7_foundation.algebra.v1.json',
+    );
+
+    final String rawGrade7Pack = await rootBundle.loadString(
+      grade7AlgebraPack.path,
+    );
+    final Map<String, dynamic> decodedGrade7Pack =
+        jsonDecode(rawGrade7Pack) as Map<String, dynamic>;
+    final String rawLegacyPack = await rootBundle.loadString(
+      'assets/questions/arithmetic/grade1_foundation.arithmetic.v1.json',
+    );
+    final Map<String, dynamic> decodedLegacyPack =
+        jsonDecode(rawLegacyPack) as Map<String, dynamic>;
+    final Map<String, dynamic> legacyQuestion = Map<String, dynamic>.from(
+      (decodedLegacyPack['questions'] as List<dynamic>).first as Map,
+    );
+
+    expect(grade7AlgebraPack.levelStage, 'grade7');
+    expect(decodedGrade7Pack['topicCode'], 'algebra');
+    expect(decodedGrade7Pack['olympiadTopicCode'], 'algebra');
+    expect(decodedGrade7Pack['olympiadTopic'], '代數');
+    expect(legacyQuestion['olympiadTaxonomy'], isA<Map<String, dynamic>>());
+  });
+
+  test('algebra packs include rewritten public competition sources', () async {
+    TestWidgetsFlutterBinding.ensureInitialized();
+
+    final BundledQuestionBankRepository repository = BundledQuestionBankRepository();
+    final QuestionBank grade7Pack = await repository.loadPack(
+      'assets/questions/algebra/grade7_foundation.algebra.v1.json',
+    );
+    final QuestionBank grade10Pack = await repository.loadPack(
+      'assets/questions/algebra/grade10_foundation.algebra.v1.json',
+    );
+    final QuestionBank grade12Pack = await repository.loadPack(
+      'assets/questions/algebra/grade12_foundation.algebra.v1.json',
+    );
+
+    // 002 為官方 IMC 填充 3；原本此處指向 009，但 009 與 002 完全重複，
+    // 複審時已將 009 去重改寫為原創（rewritten_olympiad_style），故改用 002 驗證官方題源。
+    final Question grade7Question = grade7Pack.questions.firstWhere(
+      (Question item) => item.id == 'algebra_grade7_foundation_002',
+    );
+    final Question grade10Question = grade10Pack.questions.firstWhere(
+      (Question item) => item.id == 'algebra_grade10_foundation_009',
+    );
+    final Question grade12Question = grade12Pack.questions.firstWhere(
+      (Question item) => item.id == 'algebra_grade12_foundation_009',
+    );
+
+    expect(grade7Question.source?.type, 'official_reference');
+    expect(grade7Question.source?.contest, contains('IMC Taiwan'));
+    expect(grade7Question.source?.year, '2026');
+    expect(grade7Question.source?.problemNumber, '填充 3');
+    expect(grade7Question.localizedPrompt('zh-Hant'), isNotEmpty);
+
+    expect(grade10Question.source?.type, 'official_reference');
+    expect(grade10Question.source?.contest, contains('IMC Taiwan'));
+    expect(grade10Question.source?.year, '2026');
+    expect(grade10Question.source?.problemNumber, '選擇 6');
+
+    expect(grade12Question.source?.type, 'official_reference');
+    expect(grade12Question.source?.contest, contains('AMC 12'));
+    expect(grade12Question.source?.year, '2000');
+    expect(grade12Question.source?.problemNumber, 'Problem 12');
+    expect(grade12Question.localizedPrompt('en'), isNotEmpty);
+  });
+
+  test('geometry packs upgrade high-value condition diagrams to geometry_scene',
+      () async {
+    TestWidgetsFlutterBinding.ensureInitialized();
+
+    final BundledQuestionBankRepository repository = BundledQuestionBankRepository();
+    final QuestionBank grade9Pack = await repository.loadPack(
+      'assets/questions/geometry/grade9_foundation.geometry.v1.json',
+    );
+    final QuestionBank grade7Pack = await repository.loadPack(
+      'assets/questions/geometry/grade7_foundation.geometry.v1.json',
+    );
+    final QuestionBank grade10Pack = await repository.loadPack(
+      'assets/questions/geometry/grade10_foundation.geometry.v1.json',
+    );
+    final QuestionBank grade12Pack = await repository.loadPack(
+      'assets/questions/geometry/grade12_foundation.geometry.v1.json',
+    );
+
+    final Question grade9Question = grade9Pack.questions.firstWhere(
+      (Question item) => item.id == 'geometry_grade9_foundation_001',
+    );
+    final Question grade7Question = grade7Pack.questions.firstWhere(
+      (Question item) => item.id == 'geometry_grade7_foundation_009',
+    );
+    final Question grade10CircleQuestion = grade10Pack.questions.firstWhere(
+      (Question item) => item.id == 'geometry_grade10_foundation_004',
+    );
+    final Question grade10MedianQuestion = grade10Pack.questions.firstWhere(
+      (Question item) => item.id == 'geometry_grade10_foundation_006',
+    );
+    final Question grade12InscribedAngleQuestion = grade12Pack.questions.firstWhere(
+      (Question item) => item.id == 'geometry_grade12_foundation_004',
+    );
+    final Question grade12ChordQuestion = grade12Pack.questions.firstWhere(
+      (Question item) => item.id == 'geometry_grade12_foundation_006',
+    );
+
+    expect(grade9Question.source?.type, 'official_reference');
+    expect(grade9Question.figure.kind, 'geometry_scene');
+
+    expect(grade7Question.source?.type, 'official_reference');
+    expect(grade7Question.source?.contest, contains('AMC 8'));
+    // Q009 已把舊的 shape_diagram（形狀＋貼字）換成宣告式 geometry_scene 向量圖。
+    expect(grade7Question.figure.kind, 'geometry_scene');
+    expect(grade7Question.source?.year, '2018');
+    expect(grade7Question.source?.problemNumber, 'Problem 22');
+
+    expect(grade10CircleQuestion.figure.kind, 'geometry_scene');
+
+    expect(grade10MedianQuestion.figure.kind, 'geometry_scene');
+
+    expect(grade12InscribedAngleQuestion.figure.kind, 'geometry_scene');
+
+    expect(grade12ChordQuestion.figure.kind, 'geometry_scene');
+  });
+
+  test('geometry packs upgrade the next condition-heavy diagrams to geometry_scene',
+      () async {
+    TestWidgetsFlutterBinding.ensureInitialized();
+
+    final BundledQuestionBankRepository repository = BundledQuestionBankRepository();
+    final QuestionBank grade9Pack = await repository.loadPack(
+      'assets/questions/geometry/grade9_foundation.geometry.v1.json',
+    );
+    final QuestionBank grade10Pack = await repository.loadPack(
+      'assets/questions/geometry/grade10_foundation.geometry.v1.json',
+    );
+
+    final Question grade9CircumradiusQuestion = grade9Pack.questions.firstWhere(
+      (Question item) => item.id == 'geometry_grade9_foundation_005',
+    );
+    final Question grade9MedianQuestion = grade9Pack.questions.firstWhere(
+      (Question item) => item.id == 'geometry_grade9_foundation_006',
+    );
+    final Question grade9ExternalPointQuestion = grade9Pack.questions.firstWhere(
+      (Question item) => item.id == 'geometry_grade9_foundation_007',
+    );
+    final Question grade10PowerQuestion = grade10Pack.questions.firstWhere(
+      (Question item) => item.id == 'geometry_grade10_foundation_005',
+    );
+
+    expect(grade9CircumradiusQuestion.figure.kind, 'geometry_scene');
+    expect(grade9MedianQuestion.figure.kind, 'geometry_scene');
+    expect(grade9ExternalPointQuestion.figure.kind, 'geometry_scene');
+    expect(grade10PowerQuestion.figure.kind, 'geometry_scene');
+  });
+
+  test('geometry packs upgrade advanced circle and polygon condition diagrams',
+      () async {
+    TestWidgetsFlutterBinding.ensureInitialized();
+
+    final BundledQuestionBankRepository repository = BundledQuestionBankRepository();
+    final QuestionBank grade10Pack = await repository.loadPack(
+      'assets/questions/geometry/grade10_foundation.geometry.v1.json',
+    );
+    final QuestionBank grade11Pack = await repository.loadPack(
+      'assets/questions/geometry/grade11_foundation.geometry.v1.json',
+    );
+
+    final Question grade10IncenterCircumcenterQuestion =
+        grade10Pack.questions.firstWhere(
+      (Question item) => item.id == 'geometry_grade10_foundation_009',
+    );
+    final Question grade10SquareEquilateralQuestion =
+        grade10Pack.questions.firstWhere(
+      (Question item) => item.id == 'geometry_grade10_foundation_010',
+    );
+    final Question grade11TangentArcAngleQuestion =
+        grade11Pack.questions.firstWhere(
+      (Question item) => item.id == 'geometry_grade11_foundation_008',
+    );
+
+    expect(grade10IncenterCircumcenterQuestion.figure.kind, 'geometry_scene');
+    expect(grade10SquareEquilateralQuestion.figure.kind, 'geometry_scene');
+    expect(grade11TangentArcAngleQuestion.figure.kind, 'geometry_scene');
+  });
+
+  test('geometry packs upgrade nested square and tangent-circle diagrams',
+      () async {
+    TestWidgetsFlutterBinding.ensureInitialized();
+
+    final BundledQuestionBankRepository repository = BundledQuestionBankRepository();
+    final QuestionBank grade11Pack = await repository.loadPack(
+      'assets/questions/geometry/grade11_foundation.geometry.v1.json',
+    );
+    final QuestionBank grade12Pack = await repository.loadPack(
+      'assets/questions/geometry/grade12_foundation.geometry.v1.json',
+    );
+
+    final Question grade11ConcentricSquareQuestion =
+        grade11Pack.questions.firstWhere(
+      (Question item) => item.id == 'geometry_grade11_foundation_007',
+    );
+    final Question grade12NestedSquareQuestion =
+        grade12Pack.questions.firstWhere(
+      (Question item) => item.id == 'geometry_grade12_foundation_007',
+    );
+    final Question grade12SectorCircleQuestion =
+        grade12Pack.questions.firstWhere(
+      (Question item) => item.id == 'geometry_grade12_foundation_009',
+    );
+
+    expect(grade11ConcentricSquareQuestion.figure.kind, 'geometry_scene');
+    expect(grade12NestedSquareQuestion.figure.kind, 'geometry_scene');
+    expect(grade12SectorCircleQuestion.figure.kind, 'geometry_scene');
+  });
+
+  test('geometry packs upgrade the final directly-renderable olympiad diagrams',
+      () async {
+    TestWidgetsFlutterBinding.ensureInitialized();
+
+    final BundledQuestionBankRepository repository = BundledQuestionBankRepository();
+    final QuestionBank grade9Pack = await repository.loadPack(
+      'assets/questions/geometry/grade9_foundation.geometry.v1.json',
+    );
+    final QuestionBank grade12Pack = await repository.loadPack(
+      'assets/questions/geometry/grade12_foundation.geometry.v1.json',
+    );
+
+    final Question grade9CircleTriangleQuestion =
+        grade9Pack.questions.firstWhere(
+      (Question item) => item.id == 'geometry_grade9_foundation_002',
+    );
+    final Question grade12ArcTangentCircleQuestion =
+        grade12Pack.questions.firstWhere(
+      (Question item) => item.id == 'geometry_grade12_foundation_008',
+    );
+    final Question grade12PentagonAreaQuestion =
+        grade12Pack.questions.firstWhere(
+      (Question item) => item.id == 'geometry_grade12_foundation_010',
+    );
+
+    expect(grade9CircleTriangleQuestion.figure.kind, 'geometry_scene');
+    expect(grade12ArcTangentCircleQuestion.figure.kind, 'geometry_scene');
+    expect(grade12PentagonAreaQuestion.figure.kind, 'geometry_scene');
+  });
+
+  test('geometry packs upgrade the remaining trapezoid-condition diagrams',
+      () async {
+    TestWidgetsFlutterBinding.ensureInitialized();
+
+    final BundledQuestionBankRepository repository = BundledQuestionBankRepository();
+    final QuestionBank grade12Pack = await repository.loadPack(
+      'assets/questions/geometry/grade12_foundation.geometry.v1.json',
+    );
+
+    final Question grade12TrapezoidLineQuestion =
+        grade12Pack.questions.firstWhere(
+      (Question item) => item.id == 'geometry_grade12_foundation_002',
+    );
+    final Question grade12TrapezoidDiagonalQuestion =
+        grade12Pack.questions.firstWhere(
+      (Question item) => item.id == 'geometry_grade12_foundation_003',
+    );
+
+    expect(grade12TrapezoidLineQuestion.figure.kind, 'geometry_scene');
+    expect(grade12TrapezoidDiagonalQuestion.figure.kind, 'geometry_scene');
+  });
+
+  test('number theory packs include rewritten public competition sources',
+      () async {
+    TestWidgetsFlutterBinding.ensureInitialized();
+
+    final BundledQuestionBankRepository repository = BundledQuestionBankRepository();
+    final QuestionBank grade7Pack = await repository.loadPack(
+      'assets/questions/number_theory/grade7_foundation.number_theory.v1.json',
+    );
+    final QuestionBank grade10Pack = await repository.loadPack(
+      'assets/questions/number_theory/grade10_foundation.number_theory.v1.json',
+    );
+    final QuestionBank grade12Pack = await repository.loadPack(
+      'assets/questions/number_theory/grade12_foundation.number_theory.v1.json',
+    );
+
+    final Question grade7Question = grade7Pack.questions.firstWhere(
+      (Question item) => item.id == 'number_theory_grade7_foundation_010',
+    );
+    final Question grade10Question = grade10Pack.questions.firstWhere(
+      (Question item) => item.id == 'number_theory_grade10_foundation_010',
+    );
+    final Question grade12Question = grade12Pack.questions.firstWhere(
+      (Question item) => item.id == 'number_theory_grade12_foundation_010',
+    );
+
+    expect(grade7Question.source?.type, 'official_reference');
+    expect(grade7Question.source?.contest, contains('IMC'));
+    expect(grade7Question.source?.year, '2026');
+    expect(grade7Question.source?.problemNumber, '選擇 8');
+
+    expect(grade10Question.source?.type, 'official_reference');
+    expect(grade10Question.source?.contest, contains('AMC 10'));
+    expect(grade10Question.source?.year, '2014');
+    expect(grade10Question.source?.problemNumber, 'Problem 20');
+
+    expect(grade12Question.source?.type, 'official_reference');
+    expect(grade12Question.source?.contest, contains('AMC 12'));
+    expect(grade12Question.source?.year, '2021');
+    expect(grade12Question.source?.problemNumber, 'Problem 25');
+    expect(grade12Question.localizedPrompt('en'), isNotEmpty);
+  });
+
+  test('combinatorics packs include rewritten public competition sources',
+      () async {
+    TestWidgetsFlutterBinding.ensureInitialized();
+
+    final BundledQuestionBankRepository repository = BundledQuestionBankRepository();
+    final QuestionBank grade7Pack = await repository.loadPack(
+      'assets/questions/combinatorics/grade7_foundation.combinatorics.v1.json',
+    );
+    final QuestionBank grade10Pack = await repository.loadPack(
+      'assets/questions/combinatorics/grade10_foundation.combinatorics.v1.json',
+    );
+    final QuestionBank grade12Pack = await repository.loadPack(
+      'assets/questions/combinatorics/grade12_foundation.combinatorics.v1.json',
+    );
+
+    final Question grade7Question = grade7Pack.questions.firstWhere(
+      (Question item) => item.id == 'combinatorics_grade7_foundation_009',
+    );
+    final Question grade10Question = grade10Pack.questions.firstWhere(
+      (Question item) => item.id == 'combinatorics_grade10_foundation_009',
+    );
+    final Question grade12Question = grade12Pack.questions.firstWhere(
+      (Question item) => item.id == 'combinatorics_grade12_foundation_009',
+    );
+
+    expect(grade7Question.source?.type, 'official_reference');
+    expect(grade7Question.source?.contest, contains('AMC 8'));
+    expect(grade7Question.source?.year, '2020');
+    expect(grade7Question.source?.problemNumber, 'Problem 10');
+
+    expect(grade10Question.source?.type, 'official_reference');
+    expect(grade10Question.source?.contest, contains('AMC 10'));
+    expect(grade10Question.source?.year, '2021');
+    expect(grade10Question.source?.problemNumber, 'Problem 21');
+
+    expect(grade12Question.source?.type, 'official_reference');
+    expect(grade12Question.source?.contest, contains('AMC 12'));
+    expect(grade12Question.source?.year, '2008');
+    expect(grade12Question.source?.problemNumber, 'Problem 21');
+    expect(grade12Question.localizedPrompt('en'), isNotEmpty);
+  });
+
+  test('logic packs include rewritten public competition sources', () async {
+    TestWidgetsFlutterBinding.ensureInitialized();
+
+    final BundledQuestionBankRepository repository = BundledQuestionBankRepository();
+    final QuestionBank grade7Pack = await repository.loadPack(
+      'assets/questions/logic/grade7_foundation.logic.v1.json',
+    );
+    final QuestionBank grade10Pack = await repository.loadPack(
+      'assets/questions/logic/grade10_foundation.logic.v1.json',
+    );
+    final QuestionBank grade12Pack = await repository.loadPack(
+      'assets/questions/logic/grade12_foundation.logic.v1.json',
+    );
+
+    final Question grade7Question = grade7Pack.questions.firstWhere(
+      (Question item) => item.id == 'logic_grade7_foundation_009',
+    );
+    final Question grade10Question = grade10Pack.questions.firstWhere(
+      (Question item) => item.id == 'logic_grade10_foundation_009',
+    );
+    final Question grade12Question = grade12Pack.questions.firstWhere(
+      (Question item) => item.id == 'logic_grade12_foundation_009',
+    );
+
+    expect(grade7Question.source?.type, 'official_reference');
+    expect(grade7Question.source?.contest, contains('AMC 8'));
+    expect(grade7Question.source?.year, '2004');
+    expect(grade7Question.source?.problemNumber, 'Problem 13');
+
+    expect(grade10Question.source?.type, 'official_reference');
+    expect(grade10Question.source?.contest, contains('AMC 10'));
+    expect(grade10Question.source?.year, '2010');
+    expect(grade10Question.source?.problemNumber, 'Problem 15');
+
+    expect(grade12Question.source?.type, 'official_reference');
+    expect(grade12Question.source?.contest, contains('AMC 12'));
+    expect(grade12Question.source?.year, '2021');
+    expect(grade12Question.source?.problemNumber, 'Problem 22');
+    expect(grade12Question.localizedPrompt('en'), isNotEmpty);
+  });
+
+  test('parses olympiad taxonomy metadata on packs and questions', () {
+    final BundledQuestionPackInfo packInfo = BundledQuestionPackInfo.fromJson({
+      'path': 'assets/questions/algebra/grade7_foundation.algebra.v1.json',
+      'topic': '代數',
+      'topicCode': 'algebra',
+      'olympiadTopic': '代數',
+      'olympiadTopicCode': 'algebra',
+      'levelStage': 'grade7',
+      'challengeTier': 'foundation',
+      'questionCount': 5,
+    });
+
+    final Question question = Question.fromJson({
+      'id': 'algebra_grade7_foundation_001',
+      'topic': 'algebra',
+      'difficulty': 'foundation',
+      'levelStage': 'grade7',
+      'challengeTier': 'foundation',
+      'prompt': {
+        'zh-Hant': '若 2x + 3 = 11，求 x。',
+        'en': 'If 2x + 3 = 11, find x.',
+      },
+      'answer': {
+        'zh-Hant': '答案是 4。',
+        'en': 'The answer is 4.',
+      },
+      'solutionSteps': {
+        'zh-Hant': ['先移項得到 2x = 8。', '再除以 2，所以 x = 4。'],
+        'en': ['Move terms to get 2x = 8.', 'Divide by 2, so x = 4.'],
+      },
+      'figure': {
+        'type': 'custom',
+        'kind': 'none',
+        'params': <String, dynamic>{},
+      },
+      'answerMode': 'integer_input',
+      'correctAnswer': {
+        'type': 'integer',
+        'value': '4',
+      },
+      'olympiadTaxonomy': {
+        'topic': '代數',
+        'topicCode': 'algebra',
+        'subtopic': '一元一次方程',
+        'subtopicCode': 'linear_equation',
+      },
+    });
+
+    expect(packInfo.olympiadTopic, '代數');
+    expect(packInfo.olympiadTopicCode, 'algebra');
+    expect(question.olympiadTaxonomy?.topic, '代數');
+    expect(question.olympiadTaxonomy?.topicCode, 'algebra');
+    expect(question.olympiadTaxonomy?.subtopicCode, 'linear_equation');
   });
 }

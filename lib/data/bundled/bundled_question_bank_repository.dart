@@ -9,6 +9,8 @@ class BundledQuestionPackInfo {
     required this.path,
     required this.topic,
     required this.topicCode,
+    this.olympiadTopic,
+    this.olympiadTopicCode,
     required this.levelStage,
     required this.challengeTier,
     required this.questionCount,
@@ -17,6 +19,8 @@ class BundledQuestionPackInfo {
   final String path;
   final String topic;
   final String topicCode;
+  final String? olympiadTopic;
+  final String? olympiadTopicCode;
   final String levelStage;
   final String challengeTier;
   final int questionCount;
@@ -26,6 +30,8 @@ class BundledQuestionPackInfo {
       path: json['path'] as String,
       topic: json['topic'] as String,
       topicCode: json['topicCode'] as String,
+      olympiadTopic: json['olympiadTopic'] as String?,
+      olympiadTopicCode: json['olympiadTopicCode'] as String?,
       levelStage: json['levelStage'] as String,
       challengeTier: json['challengeTier'] as String,
       questionCount: json['questionCount'] as int,

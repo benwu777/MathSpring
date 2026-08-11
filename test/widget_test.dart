@@ -11,6 +11,7 @@ import 'package:mathspring/models/learner_profile.dart';
 import 'package:mathspring/models/question.dart';
 import 'package:mathspring/models/question_progress.dart';
 import 'package:mathspring/models/session_answer_record.dart';
+import 'package:mathspring/services/session_launch_plan_builder.dart';
 
 void main() {
   tearDown(() {
@@ -163,6 +164,48 @@ void main() {
       'correctAnswer': {
         'type': 'integer',
         'value': '45',
+      },
+    });
+  }
+
+  Question createFormulaQuestion() {
+    return Question.fromJson({
+      'id': 'algebra_grade10_foundation_formula_001',
+      'topic': 'algebra',
+      'difficulty': 'foundation',
+      'levelStage': 'grade10',
+      'challengeTier': 'foundation',
+      'prompt': {
+        'zh-Hant': '設 f(x) = x^2 - 4x + 7，且定義域為 -1 <= x <= a。',
+        'en': 'Let f(x) = x^2 - 4x + 7 on the interval -1 <= x <= a.',
+      },
+      'answer': {
+        'zh-Hant': '先把 f(x) 改寫成 (x-2)^2 + 3。',
+        'en': 'Rewrite f(x) as (x-2)^2 + 3 first.',
+      },
+      'solutionSteps': {
+        'zh-Hant': [
+          '因為 x^2 - 4x + 7 = (x-2)^2 + 3。',
+          '再判斷區間端點與頂點的位置。',
+        ],
+        'en': [
+          'Because x^2 - 4x + 7 = (x-2)^2 + 3.',
+          'Then compare the interval endpoints with the vertex.',
+        ],
+      },
+      'figure': {
+        'type': 'custom',
+        'kind': 'none',
+        'params': <String, dynamic>{},
+      },
+      'answerMode': 'integer_input',
+      'correctAnswer': {
+        'type': 'integer',
+        'value': '3',
+      },
+      'inputConstraints': {
+        'allowNegative': false,
+        'maxDigits': 1,
       },
     });
   }
@@ -539,6 +582,142 @@ void main() {
     expect(find.text('Logic'), findsNothing);
   });
 
+  testWidgets('app theme uses slightly tighter typography scale',
+      (WidgetTester tester) async {
+    final TestWidgetsFlutterBinding binding =
+        TestWidgetsFlutterBinding.ensureInitialized();
+    binding.platformDispatcher.localeTestValue = const Locale('en');
+
+    final AppServices services = createTestServices();
+
+    await pumpApp(tester, services);
+
+    final BuildContext context = tester.element(find.byType(Scaffold).first);
+    final ThemeData theme = Theme.of(context);
+    final TextTheme textTheme = theme.textTheme;
+
+    expect(textTheme.displaySmall?.fontSize, 32);
+    expect(textTheme.headlineSmall?.fontSize, 22);
+    expect(textTheme.titleLarge?.fontSize, 18);
+    expect(textTheme.bodyLarge?.fontSize, 15);
+    expect(textTheme.bodyLarge?.height, 1.5);
+    expect(textTheme.bodyMedium?.fontSize, 13);
+    expect(textTheme.bodyMedium?.height, 1.4);
+    expect(textTheme.bodySmall?.fontSize, 11);
+    expect(textTheme.bodySmall?.height, 1.35);
+    expect(
+      theme.filledButtonTheme.style
+          ?.textStyle
+          ?.resolve(const <WidgetState>{})
+          ?.fontSize,
+      14,
+    );
+    expect(
+      theme.outlinedButtonTheme.style
+          ?.textStyle
+          ?.resolve(const <WidgetState>{})
+          ?.fontSize,
+      14,
+    );
+  });
+
+  testWidgets('core surfaces use refreshed visual tokens',
+      (WidgetTester tester) async {
+    final TestWidgetsFlutterBinding binding =
+        TestWidgetsFlutterBinding.ensureInitialized();
+    binding.platformDispatcher.localeTestValue = const Locale('en');
+
+    final AppServices services = createTestServices();
+
+    await pumpApp(tester, services);
+
+    final BuildContext context = tester.element(find.byType(Scaffold).first);
+    final ThemeData theme = Theme.of(context);
+    final CardTheme cardTheme = theme.cardTheme;
+    final NavigationBar navigationBar =
+        tester.widget<NavigationBar>(find.byType(NavigationBar));
+
+    expect(theme.scaffoldBackgroundColor, const Color(0xFFF5F7FB));
+    expect(cardTheme.color, Colors.white);
+    expect(cardTheme.shadowColor, const Color(0x140F172A));
+    expect(cardTheme.surfaceTintColor, Colors.transparent);
+    expect((cardTheme.shape as RoundedRectangleBorder).borderRadius,
+        BorderRadius.circular(24));
+    expect(navigationBar.backgroundColor, const Color(0xFFFDFDFE));
+    expect(navigationBar.indicatorColor, const Color(0xFFE7EEF9));
+  });
+
+  testWidgets('home shell applies refreshed cards and profile styling',
+      (WidgetTester tester) async {
+    final TestWidgetsFlutterBinding binding =
+        TestWidgetsFlutterBinding.ensureInitialized();
+    binding.platformDispatcher.localeTestValue = const Locale('en');
+
+    final AppServices services = createTestServices();
+
+    await pumpApp(tester, services);
+
+    expect(find.byKey(const ValueKey<String>('home_hero_surface')), findsOneWidget);
+    expect(find.byKey(const ValueKey<String>('home_background_glow')), findsOneWidget);
+    expect(find.byKey(const ValueKey<String>('hero_primary_cta')), findsOneWidget);
+
+    await tester.tap(find.text('Settings').first);
+    await tester.pumpAndSettle();
+
+    expect(find.byKey(const ValueKey<String>('home_shell_frame')), findsOneWidget);
+    expect(find.byKey(const ValueKey<String>('top_bar_brand_chip')), findsOneWidget);
+    expect(find.byKey(const ValueKey<String>('section_card_Profiles & Settings')),
+        findsOneWidget);
+    expect(find.byKey(const ValueKey<String>('learner_summary_banner')),
+        findsOneWidget);
+    expect(find.byKey(const ValueKey<String>('profile_tile_learner_allen')),
+        findsOneWidget);
+  });
+
+  testWidgets('question pages use refreshed study card styling',
+      (WidgetTester tester) async {
+    final TestWidgetsFlutterBinding binding =
+        TestWidgetsFlutterBinding.ensureInitialized();
+    binding.platformDispatcher.localeTestValue = const Locale('en');
+
+    final AppServices services = createTestServices();
+
+    await tester.binding.setSurfaceSize(const Size(430, 932));
+    await tester.pumpWidget(
+      MaterialApp(
+        locale: const Locale('en'),
+        supportedLocales: AppStrings.supportedLocales,
+        localizationsDelegates: const [
+          GlobalMaterialLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+        ],
+        home: PracticeSessionPage(
+          services: services,
+          pack: const BundledQuestionPackInfo(
+            path: 'assets/questions/geometry/grade2_foundation.geometry.v1.json',
+            topic: '幾何',
+            topicCode: 'geometry',
+            levelStage: 'grade2',
+            challengeTier: 'foundation',
+            questionCount: 1,
+          ),
+          initialQuestions: [createShapeDiagramQuestion()],
+        ),
+      ),
+    );
+    await tester.runAsync(() async {
+      await Future<void>.delayed(const Duration(milliseconds: 50));
+    });
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 300));
+
+    expect(find.byKey(const ValueKey<String>('practice_question_header')),
+        findsOneWidget);
+    expect(find.byKey(const ValueKey<String>('study_surface_card')), findsOneWidget);
+    expect(find.byKey(const ValueKey<String>('question_meta_badge')), findsOneWidget);
+  });
+
   testWidgets('app shell shows bottom navigation and defaults to Practice',
       (WidgetTester tester) async {
     final TestWidgetsFlutterBinding binding =
@@ -766,6 +945,58 @@ void main() {
     expect(find.byKey(const ValueKey<String>('figure_shape_diagram')), findsOneWidget);
   });
 
+  testWidgets('question figures can open in fullscreen preview',
+      (WidgetTester tester) async {
+    final TestWidgetsFlutterBinding binding =
+        TestWidgetsFlutterBinding.ensureInitialized();
+    binding.platformDispatcher.localeTestValue = const Locale('en');
+
+    final AppServices services = createTestServices();
+
+    await tester.binding.setSurfaceSize(const Size(430, 932));
+    await tester.pumpWidget(
+      MaterialApp(
+        locale: const Locale('en'),
+        supportedLocales: AppStrings.supportedLocales,
+        localizationsDelegates: const [
+          GlobalMaterialLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+        ],
+        home: PracticeSessionPage(
+          services: services,
+          pack: const BundledQuestionPackInfo(
+            path: 'assets/questions/geometry/grade2_foundation.geometry.v1.json',
+            topic: '幾何',
+            topicCode: 'geometry',
+            levelStage: 'grade2',
+            challengeTier: 'foundation',
+            questionCount: 1,
+          ),
+          initialQuestions: [createShapeDiagramQuestion()],
+        ),
+      ),
+    );
+    await tester.runAsync(() async {
+      await Future<void>.delayed(const Duration(milliseconds: 50));
+    });
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 300));
+
+    await tester.tap(
+      find.byKey(const ValueKey<String>('figure_shape_diagram')).last,
+    );
+    await tester.pumpAndSettle();
+
+    expect(find.byKey(const ValueKey<String>('figure_preview_dialog')), findsOneWidget);
+    expect(find.byKey(const ValueKey<String>('figure_preview_canvas_shape_diagram')), findsOneWidget);
+
+    await tester.tap(find.byKey(const ValueKey<String>('figure_preview_close')));
+    await tester.pumpAndSettle();
+
+    expect(find.byKey(const ValueKey<String>('figure_preview_dialog')), findsNothing);
+  });
+
   testWidgets('quiz session renders a coordinate plane figure',
       (WidgetTester tester) async {
     final TestWidgetsFlutterBinding binding =
@@ -852,6 +1083,62 @@ void main() {
       find.byKey(const ValueKey<String>('figure_circle_quadrants_point')),
       findsOneWidget,
     );
+  });
+
+  testWidgets('review figures can also open in fullscreen preview',
+      (WidgetTester tester) async {
+    final TestWidgetsFlutterBinding binding =
+        TestWidgetsFlutterBinding.ensureInitialized();
+    binding.platformDispatcher.localeTestValue = const Locale('en');
+
+    final AppServices services = createTestServices();
+
+    await tester.binding.setSurfaceSize(const Size(430, 932));
+    await tester.pumpWidget(
+      MaterialApp(
+        locale: const Locale('en'),
+        supportedLocales: AppStrings.supportedLocales,
+        localizationsDelegates: const [
+          GlobalMaterialLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+        ],
+        home: PracticeSessionPage(
+          services: services,
+          pack: const BundledQuestionPackInfo(
+            path: 'assets/questions/geometry/grade2_foundation.geometry.v1.json',
+            topic: '幾何',
+            topicCode: 'geometry',
+            levelStage: 'grade2',
+            challengeTier: 'foundation',
+            questionCount: 1,
+          ),
+          initialQuestions: [createShapeDiagramQuestion()],
+        ),
+      ),
+    );
+    await tester.runAsync(() async {
+      await Future<void>.delayed(const Duration(milliseconds: 50));
+    });
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 300));
+
+    await tester.enterText(
+      find.byKey(const ValueKey<String>('practice_integer_input_geometry_grade2_foundation_001')),
+      '16',
+    );
+    await tester.tap(
+      find.byKey(const ValueKey<String>('submit_answer_geometry_grade2_foundation_001')),
+    );
+    await tester.pumpAndSettle();
+
+    await tester.tap(
+      find.byKey(const ValueKey<String>('figure_shape_diagram')).last,
+    );
+    await tester.pumpAndSettle();
+
+    expect(find.byKey(const ValueKey<String>('figure_preview_dialog')), findsOneWidget);
+    expect(find.byKey(const ValueKey<String>('figure_preview_canvas_shape_diagram')), findsOneWidget);
   });
 
   testWidgets('practice session renders a composite grid shape figure',
@@ -1071,7 +1358,7 @@ void main() {
     expect(savedProgress!.learnerId, 'learner_mia');
   });
 
-  testWidgets('settings shows olympiad competition profiles instead of grade and tier',
+  testWidgets('settings shows learner grade ranges instead of competition profiles',
       (WidgetTester tester) async {
     final TestWidgetsFlutterBinding binding =
         TestWidgetsFlutterBinding.ensureInitialized();
@@ -1083,13 +1370,13 @@ void main() {
     await tester.tap(find.text('Settings'));
     await tester.pumpAndSettle();
 
-    expect(find.text('Kangaroo 3-4'), findsOneWidget);
-    expect(find.text('Kangaroo 1-2'), findsOneWidget);
-    expect(find.textContaining('Grade 4'), findsNothing);
+    expect(find.text('Grades 3-4'), findsWidgets);
+    expect(find.text('Grades 1-2'), findsOneWidget);
+    expect(find.textContaining('Kangaroo'), findsNothing);
     expect(find.textContaining('Advanced'), findsNothing);
   });
 
-  testWidgets('settings current learner card localizes competition profile label',
+  testWidgets('settings current learner card localizes grade range label',
       (WidgetTester tester) async {
     final TestWidgetsFlutterBinding binding =
         TestWidgetsFlutterBinding.ensureInitialized();
@@ -1101,11 +1388,12 @@ void main() {
     await tester.tap(find.text('設定'));
     await tester.pumpAndSettle();
 
-    expect(find.text('袋鼠競賽 3-4 級'), findsOneWidget);
-    expect(find.text('Kangaroo 3-4'), findsNothing);
+    expect(find.text('年級範圍'), findsWidgets);
+    expect(find.text('小三到小四'), findsWidgets);
+    expect(find.textContaining('袋鼠競賽'), findsNothing);
   });
 
-  testWidgets('learner edit page shows bilingual competition level options with helper text',
+  testWidgets('learner edit page shows range slider and live range summary',
       (WidgetTester tester) async {
     final TestWidgetsFlutterBinding binding =
         TestWidgetsFlutterBinding.ensureInitialized();
@@ -1119,15 +1407,61 @@ void main() {
     await tester.tap(find.byKey(const ValueKey<String>('edit_learner_learner_allen')));
     await tester.pumpAndSettle();
 
-    expect(find.text('競賽級別'), findsWidgets);
-    expect(find.text('袋鼠競賽 1-2 級'), findsOneWidget);
-    expect(find.text('袋鼠競賽 3-4 級'), findsOneWidget);
-    expect(find.text('袋鼠競賽 5-6 級'), findsOneWidget);
-    expect(find.text('約對應小一到小二'), findsOneWidget);
-    expect(find.text('約對應小三到小四'), findsOneWidget);
-    expect(find.text('約對應小五到小六'), findsOneWidget);
+    expect(find.text('年級範圍'), findsWidgets);
+    expect(find.byType(RangeSlider), findsOneWidget);
+    expect(find.text('小三到小四'), findsWidgets);
     expect(find.text('程度'), findsNothing);
     expect(find.text('挑戰層級'), findsNothing);
+  });
+
+  testWidgets('settings profile card uses smaller labels and larger values',
+      (WidgetTester tester) async {
+    final TestWidgetsFlutterBinding binding =
+        TestWidgetsFlutterBinding.ensureInitialized();
+    binding.platformDispatcher.localeTestValue = const Locale('zh', 'TW');
+
+    final AppServices services = createTestServices();
+
+    await pumpApp(tester, services);
+    await tester.tap(find.text('設定'));
+    await tester.pumpAndSettle();
+
+    final Text currentRoleLabel = tester.widget<Text>(find.text('目前角色').first);
+    final Text allenValue = tester.widget<Text>(find.text('Allen').first);
+
+    expect(currentRoleLabel.style, isNotNull);
+    expect(allenValue.style, isNotNull);
+    expect(allenValue.style!.fontSize, greaterThan(currentRoleLabel.style!.fontSize!));
+  });
+
+  testWidgets('secondary and high school ranges do not use primary-school labels',
+      (WidgetTester tester) async {
+    final TestWidgetsFlutterBinding binding =
+        TestWidgetsFlutterBinding.ensureInitialized();
+    binding.platformDispatcher.localeTestValue = const Locale('zh', 'TW');
+
+    final AppServices services = AppServices.forTesting(
+      learnerProfiles: const [
+        LearnerProfile(
+          id: 'learner_senior',
+          displayName: 'Allen',
+          levelStage: 'grade12',
+          minLevelStage: 'grade7',
+          maxLevelStage: 'grade12',
+          challengeTier: 'foundation',
+          createdAtIso: '2026-08-02T00:00:00Z',
+        ),
+      ],
+      currentLearnerId: 'learner_senior',
+    );
+
+    await pumpApp(tester, services);
+    await tester.tap(find.text('設定'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('國一到高三'), findsWidgets);
+    expect(find.textContaining('小十'), findsNothing);
+    expect(find.textContaining('小12'), findsNothing);
   });
 
   testWidgets('adds a learner from the profiles section',
@@ -1152,7 +1486,7 @@ void main() {
     await tester.tap(find.byKey(const ValueKey<String>('save_learner_button')));
     await tester.pumpAndSettle();
 
-    expect(find.text('Noah'), findsOneWidget);
+    expect(find.text('Noah'), findsWidgets);
     expect(
       services.learnerProfiles.any((profile) => profile.displayName == 'Noah'),
       isTrue,
@@ -1177,7 +1511,7 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.text('Allen'), findsNothing);
-    expect(find.text('Mia'), findsOneWidget);
+    expect(find.text('Mia'), findsWidgets);
     expect(services.currentLearnerId, 'learner_mia');
     expect(find.text('Current'), findsOneWidget);
   });
@@ -1358,46 +1692,60 @@ void main() {
     );
   });
 
-  testWidgets('quiz launch uses the full competition profile pack range',
-      (WidgetTester tester) async {
-    final TestWidgetsFlutterBinding binding =
-        TestWidgetsFlutterBinding.ensureInitialized();
-    binding.platformDispatcher.localeTestValue = const Locale('en');
-
-    final AppServices services = createTestServices();
-    final List<Question> mergedQuestions = List<Question>.generate(
-      20,
-      (index) => index.isEven ? createDemoQuestion() : createSecondDemoQuestion(),
-    );
-    const BundledQuestionPackInfo launchPack = BundledQuestionPackInfo(
-      path: 'assets/questions/geometry/grade4_foundation.geometry.v1.json',
-      topic: '幾何',
-      topicCode: 'geometry',
+  test('session launch picks packs from the learner grade range only', () {
+    const LearnerProfile learner = LearnerProfile(
+      id: 'learner_allen',
+      displayName: 'Allen',
       levelStage: 'grade4',
+      minLevelStage: 'grade3',
+      maxLevelStage: 'grade6',
       challengeTier: 'foundation',
-      questionCount: 20,
+      createdAtIso: '2026-07-16T00:00:00Z',
     );
 
-    await tester.pumpWidget(
-      MaterialApp(
-        locale: const Locale('en'),
-        supportedLocales: AppStrings.supportedLocales,
-        localizationsDelegates: const [
-          GlobalMaterialLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-        ],
-        home: QuizSessionPage(
-          services: services,
-          pack: launchPack,
-          initialQuestions: mergedQuestions,
-        ),
+    const List<BundledQuestionPackInfo> packs = [
+      BundledQuestionPackInfo(
+        path: 'g2.json',
+        topic: '幾何',
+        topicCode: 'geometry',
+        levelStage: 'grade2',
+        challengeTier: 'foundation',
+        questionCount: 10,
       ),
-    );
-    await tester.pump();
-    await tester.pump(const Duration(milliseconds: 300));
+      BundledQuestionPackInfo(
+        path: 'g3.json',
+        topic: '幾何',
+        topicCode: 'geometry',
+        levelStage: 'grade3',
+        challengeTier: 'foundation',
+        questionCount: 10,
+      ),
+      BundledQuestionPackInfo(
+        path: 'g5.json',
+        topic: '幾何',
+        topicCode: 'geometry',
+        levelStage: 'grade5',
+        challengeTier: 'foundation',
+        questionCount: 10,
+      ),
+      BundledQuestionPackInfo(
+        path: 'g7.json',
+        topic: '幾何',
+        topicCode: 'geometry',
+        levelStage: 'grade7',
+        challengeTier: 'foundation',
+        questionCount: 10,
+      ),
+    ];
 
-    expect(find.text('Question 1 / 20'), findsOneWidget);
+    final List<BundledQuestionPackInfo> eligible =
+        SessionLaunchPlanBuilder.pickEligiblePacks(
+      packs,
+      learner,
+      topicCode: 'geometry',
+    );
+
+    expect(eligible.map((pack) => pack.levelStage), ['grade3', 'grade5']);
   });
 
   testWidgets('practice session stays on current question until next is tapped',
@@ -1554,6 +1902,50 @@ void main() {
     expect(find.text('mixed'), findsNothing);
     expect(find.textContaining('Source:'), findsNothing);
     expect(find.textContaining('MathSpring Editorial'), findsNothing);
+  });
+
+  testWidgets('practice session renders normalized math notation for formula questions',
+      (WidgetTester tester) async {
+    final TestWidgetsFlutterBinding binding =
+        TestWidgetsFlutterBinding.ensureInitialized();
+    binding.platformDispatcher.localeTestValue = const Locale('zh', 'TW');
+
+    final AppServices services = createTestServices();
+
+    await tester.binding.setSurfaceSize(const Size(1200, 1600));
+    await tester.pumpWidget(
+      MaterialApp(
+        locale: const Locale('zh', 'TW'),
+        supportedLocales: AppStrings.supportedLocales,
+        localizationsDelegates: const [
+          GlobalMaterialLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+        ],
+        home: PracticeSessionPage(
+          services: services,
+          pack: const BundledQuestionPackInfo(
+            path: 'assets/questions/algebra/grade10_foundation.algebra.v1.json',
+            topic: '代數',
+            topicCode: 'algebra',
+            levelStage: 'grade10',
+            challengeTier: 'foundation',
+            questionCount: 1,
+          ),
+          initialQuestions: [createFormulaQuestion()],
+        ),
+      ),
+    );
+    await tester.runAsync(() async {
+      await Future<void>.delayed(const Duration(milliseconds: 50));
+    });
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 300));
+
+    expect(find.textContaining('x² - 4x + 7'), findsOneWidget);
+    expect(find.textContaining('-1 ≤ x ≤ a'), findsOneWidget);
+    expect(find.textContaining('x^2 - 4x + 7'), findsNothing);
+    expect(find.textContaining('-1 <= x <= a'), findsNothing);
   });
 
   testWidgets('practice session exit shows summary with accuracy',
