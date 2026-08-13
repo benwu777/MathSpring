@@ -449,58 +449,66 @@
     {
       "id": "logic_grade9_foundation_006",
       "topic": "logic",
-      "subtopic": "weighing_information_bound",
+      "subtopic": "jug_state_search",
       "difficulty": "foundation",
       "levelStage": "grade9",
       "challengeTier": "foundation",
       "prompt": {
-        "zh-Hant": "有 12 枚外觀完全相同的硬幣，其中恰有 1 枚是假幣，它的重量與真幣不同，但不知道比較重還是比較輕。使用一台沒有砝碼的天平，最少要秤幾次，才能保證一定找出假幣，並且判斷出它比真幣重還是輕？",
-        "zh-Hans": "有 12 枚外观完全相同的硬币，其中恰有 1 枚是假币，它的重量与真币不同，但不知道比较重还是比较轻。使用一台没有砝码的天平，最少要称几次，才能保证一定找出假币，并且判断出它比真币重还是轻？",
-        "en": "There are 12 identical-looking coins, exactly one of which is counterfeit and differs in weight from a genuine coin, though it is unknown whether it is heavier or lighter. Using a balance scale with no weights, what is the smallest number of weighings that guarantees identifying the counterfeit coin and determining whether it is heavier or lighter?",
-        "ja": "見た目がまったく同じ 12 枚の硬貨があり、そのうちちょうど 1 枚が偽物で、本物と重さが違いますが、重いのか軽いのかは分かりません。分銅のない天秤を使うとき、偽物を必ず特定し、さらに本物より重いか軽いかまで判定するには、最低何回はかればよいですか。"
+        "zh-Hant": "有一個 3 公升和一個 5 公升的水壺，兩個壺上都沒有刻度，旁邊有取用不完的水。每一次操作只能是下列三種之一：把某個壺裝滿、把某個壺倒空、或把某個壺的水倒進另一個壺（倒到原壺空了或另一壺滿了為止）。最少要幾次操作，才能量出恰好 4 公升的水？",
+        "zh-Hans": "有一个 3 升和一个 5 升的水壶，两个壶上都没有刻度，旁边有取用不完的水。每一次操作只能是下列三种之一：把某个壶装满、把某个壶倒空、或把某个壶的水倒进另一个壶（倒到原壶空了或另一壶满了为止）。最少要几次操作，才能量出恰好 4 升的水？",
+        "en": "You have a 3-litre jug and a 5-litre jug, neither with any markings, and an unlimited supply of water. Each move must be one of three kinds: fill a jug completely, empty a jug completely, or pour from one jug into the other until the source is empty or the destination is full. What is the minimum number of moves needed to measure out exactly 4 litres?",
+        "ja": "目盛りのない 3 リットルと 5 リットルの水差しがあり、水はいくらでも使えます。1 回の操作は次の 3 種類のいずれかだけです：どちらかの水差しを満たす、どちらかを空にする、一方の水を他方へ移す（移し元が空になるか移し先が満杯になるまで）。ちょうど 4 リットルを量るには、最少で何回の操作が必要ですか。"
       },
       "answer": {
-        "zh-Hant": "答案是 3 次。",
-        "zh-Hans": "答案是 3 次。",
-        "en": "The answer is 3 weighings.",
-        "ja": "答えは 3 回です。"
+        "zh-Hant": "答案是 6 次。",
+        "zh-Hans": "答案是 6 次。",
+        "en": "The answer is 6.",
+        "ja": "答えは 6 回です。"
       },
       "solutionSteps": {
         "zh-Hant": [
-          "先算出總共要分辨多少種可能情形：假幣可能是 12 枚中的任何一枚，而且每一枚又分成偏重與偏輕兩種，所以共有 12 × 2 = 24 種情形。",
-          "再看一次秤重能提供多少資訊：天平只有左重、右重、平衡三種結果。",
-          "因此秤 k 次最多只能區分 3ᵏ 種不同的情形。",
-          "秤 2 次最多只能區分 3² = 9 種，遠少於 24 種，所以 2 次一定不夠。",
-          "秤 3 次最多可區分 3³ = 27 種，而 27 ≥ 24，在資訊量上是有可能的。",
-          "而且確實存在做法：第一次把硬幣分成 4、4、4 三堆，取兩堆比較；不論平衡與否，都能把 24 種情形縮到不超過 8 種，剩下兩次每次再切成三份即可分辨完。",
-          "所以答案是 3 次。"
+          "先想清楚 4 公升最後會在哪個壺裡：3 公升壺根本裝不下 4 公升，所以 4 公升一定在 5 公升壺中。",
+          "5 公升壺要剩下 4 公升，代表它被裝滿之後又被倒掉恰好 1 公升。裝滿、倒空、整壺倒過去這些動作都不會剛好留下 4，唯一的可能是把滿的 5 公升壺往 3 公升壺倒，而 3 公升壺只能再吃下 1 公升。",
+          "3 公升壺只能再吃下 1 公升，表示它裡面已經有 2 公升。",
+          "3 公升壺要恰好有 2 公升，只能是先把滿的 5 公升壺倒進空的 3 公升壺（3 壺滿、5 壺剩 2），再把 3 公升壺倒空，然後把 5 公升壺裡的 2 公升整個倒過去。",
+          "把上面推出來的每一步照順序寫下來：第 1 次裝滿 5 公升壺，得到 (3公升壺, 5公升壺) = (0, 5)。",
+          "第 2 次把 5 倒進 3，得到 (3, 2)；第 3 次倒空 3 公升壺，得到 (0, 2)。",
+          "第 4 次把 5 公升壺剩下的 2 公升倒進 3 公升壺，得到 (2, 0)；第 5 次再把 5 公升壺裝滿，得到 (2, 5)。",
+          "第 6 次把 5 倒進 3，因為 3 公升壺只剩 1 公升的空間，所以只倒出 1 公升，得到 (3, 4)——5 公升壺裡正好是 4 公升。",
+          "上面每一步都是前面推理逼出來的，沒有可以省略的動作，所以最少就是 6 次。"
         ],
         "zh-Hans": [
-          "先算出总共要分辨多少种可能情形：假币可能是 12 枚中的任何一枚，而且每一枚又分成偏重与偏轻两种，所以共有 12 × 2 = 24 种情形。",
-          "再看一次称重能提供多少信息：天平只有左重、右重、平衡三种结果。",
-          "因此称 k 次最多只能区分 3ᵏ 种不同的情形。",
-          "称 2 次最多只能区分 3² = 9 种，远少于 24 种，所以 2 次一定不够。",
-          "称 3 次最多可区分 3³ = 27 种，而 27 ≥ 24，在信息量上是有可能的。",
-          "而且确实存在做法：第一次把硬币分成 4、4、4 三堆，取两堆比较；不论平衡与否，都能把 24 种情形缩到不超过 8 种，剩下两次每次再切成三份即可分辨完。",
-          "所以答案是 3 次。"
+          "先想清楚 4 升最后会在哪个壶里：3 升壶根本装不下 4 升，所以 4 升一定在 5 升壶中。",
+          "5 升壶要剩下 4 升，代表它被装满之后又被倒掉恰好 1 升。装满、倒空、整壶倒过去这些动作都不会刚好留下 4，唯一的可能是把满的 5 升壶往 3 升壶倒，而 3 升壶只能再吃下 1 升。",
+          "3 升壶只能再吃下 1 升，表示它里面已经有 2 升。",
+          "3 升壶要恰好有 2 升，只能是先把满的 5 升壶倒进空的 3 升壶（3 壶满、5 壶剩 2），再把 3 升壶倒空，然后把 5 升壶里的 2 升整个倒过去。",
+          "把上面推出来的每一步照顺序写下来：第 1 次装满 5 升壶，得到 (3升壶, 5升壶) = (0, 5)。",
+          "第 2 次把 5 倒进 3，得到 (3, 2)；第 3 次倒空 3 升壶，得到 (0, 2)。",
+          "第 4 次把 5 升壶剩下的 2 升倒进 3 升壶，得到 (2, 0)；第 5 次再把 5 升壶装满，得到 (2, 5)。",
+          "第 6 次把 5 倒进 3，因为 3 升壶只剩 1 升的空间，所以只倒出 1 升，得到 (3, 4)——5 升壶里正好是 4 升。",
+          "上面每一步都是前面推理逼出来的，没有可以省略的动作，所以最少就是 6 次。"
         ],
         "en": [
-          "First count how many cases must be distinguished: the counterfeit can be any of the 12 coins, and for each it may be heavy or light, giving 12 × 2 = 24 cases.",
-          "Next see how much information one weighing gives: a balance has only three outcomes — left heavier, right heavier, or balanced.",
-          "So k weighings can distinguish at most 3ᵏ different cases.",
-          "Two weighings distinguish at most 3² = 9 cases, far fewer than 24, so two are certainly not enough.",
-          "Three weighings distinguish at most 3³ = 27 cases, and 27 ≥ 24, so three are not ruled out by the counting argument.",
-          "A concrete method also exists: first split the coins into three groups of 4 and compare two of them; whether or not they balance, the 24 cases shrink to at most 8, and two further three-way splits finish the job.",
-          "The answer is therefore 3 weighings."
+          "First decide where the 4 litres must end up: the 3-litre jug cannot hold 4 litres at all, so the 4 litres must be in the 5-litre jug.",
+          "For the 5-litre jug to hold 4, it must have been filled and then had exactly 1 litre removed. Filling, emptying, and pouring a jug out completely never leave exactly 4, so the only possibility is pouring from the full 5-litre jug into the 3-litre jug when the latter has room for just 1 litre.",
+          "Room for exactly 1 litre in the 3-litre jug means it already contains 2 litres.",
+          "The only way to get exactly 2 litres into the 3-litre jug is to pour a full 5-litre jug into an empty 3-litre jug (filling it and leaving 2 behind), then empty the 3-litre jug and transfer those 2 litres across.",
+          "Writing the forced steps in order: move 1 fills the 5-litre jug, giving (3-litre, 5-litre) = (0, 5).",
+          "Move 2 pours 5 into 3, giving (3, 2); move 3 empties the 3-litre jug, giving (0, 2).",
+          "Move 4 pours the remaining 2 litres into the 3-litre jug, giving (2, 0); move 5 fills the 5-litre jug again, giving (2, 5).",
+          "Move 6 pours 5 into 3, but the 3-litre jug has room for only 1 more litre, so exactly 1 litre leaves, giving (3, 4) — the 5-litre jug now holds exactly 4 litres.",
+          "Every step above was forced by the preceding reasoning, so none can be skipped and the minimum is 6 moves."
         ],
         "ja": [
-          "まず区別すべき場合の数を数えます。偽物は 12 枚のどれでもあり得て、さらに重い場合と軽い場合があるので、12 × 2 = 24 通りです。",
-          "次に 1 回の計量が与える情報を見ます。天秤の結果は左が重い・右が重い・つり合うの 3 通りだけです。",
-          "したがって k 回の計量で区別できるのは高々 3ᵏ 通りです。",
-          "2 回では高々 3² = 9 通りしか区別できず 24 通りに遠く及ばないので、2 回では不可能です。",
-          "3 回なら高々 3³ = 27 通りを区別でき、27 ≥ 24 なので情報量の上では可能性があります。",
-          "実際に方法も存在します。最初に 4 枚ずつ 3 組に分けて 2 組を比べると、つり合うかどうかにかかわらず 24 通りが 8 通り以下に絞られ、残り 2 回で 3 分割を繰り返せば判別できます。",
-          "よって答えは 3 回です。"
+          "まず 4 リットルが最後にどちらの水差しに入るかを考えます。3 リットルの水差しには 4 リットルは入らないので、4 リットルは必ず 5 リットルの水差しの中です。",
+          "5 リットルの水差しに 4 リットル残るのは、満杯にしてからちょうど 1 リットルだけ減った場合です。満たす・空にする・全部移すのいずれも 4 は残さないので、唯一の可能性は満杯の 5 リットルから、あと 1 リットルしか入らない 3 リットルの水差しへ移すことです。",
+          "3 リットルの水差しにあと 1 リットルしか入らないということは、すでに 2 リットル入っているということです。",
+          "3 リットルの水差しにちょうど 2 リットル入れるには、満杯の 5 リットルを空の 3 リットルへ移し（3 が満杯、5 に 2 が残る）、3 を空にしてからその 2 リットルを移すしかありません。",
+          "導かれた手順を順に書きます：1 回目は 5 リットルを満たし、(3 リットル, 5 リットル) = (0, 5)。",
+          "2 回目は 5 から 3 へ移して (3, 2)、3 回目は 3 リットルを空にして (0, 2)。",
+          "4 回目は残った 2 リットルを 3 リットルへ移して (2, 0)、5 回目は再び 5 リットルを満たして (2, 5)。",
+          "6 回目に 5 から 3 へ移すと、3 リットルにはあと 1 リットルしか入らないのでちょうど 1 リットルだけ移り、(3, 4) となって 5 リットルの水差しにちょうど 4 リットルが残ります。",
+          "以上の各手順はすべて前の推論から必然的に決まっており省略できないので、最少は 6 回です。"
         ]
       },
       "figure": {
@@ -508,49 +516,27 @@
         "kind": "none",
         "params": {}
       },
-      "answerMode": "multiple_choice",
-      "options": {
-        "A": {
-          "zh-Hant": "2 次",
-          "zh-Hans": "2 次",
-          "en": "2 weighings",
-          "ja": "2 回"
-        },
-        "B": {
-          "zh-Hant": "3 次",
-          "zh-Hans": "3 次",
-          "en": "3 weighings",
-          "ja": "3 回"
-        },
-        "C": {
-          "zh-Hant": "4 次",
-          "zh-Hans": "4 次",
-          "en": "4 weighings",
-          "ja": "4 回"
-        },
-        "D": {
-          "zh-Hant": "5 次",
-          "zh-Hans": "5 次",
-          "en": "5 weighings",
-          "ja": "5 回"
-        }
-      },
+      "answerMode": "integer_input",
       "correctAnswer": {
-        "type": "choice",
-        "value": "B"
+        "type": "integer",
+        "value": "6"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
       },
       "source": {
         "type": "rewritten_olympiad_style",
         "name": "MathSpring 改寫題",
-        "reference": "以三分結果的資訊量下界配合構造上界，判定不知輕重假幣所需最少稱重次數的競賽題型",
-        "notes": "設計依據：完整解需同時給出下界（24 種情形 > 3² = 9，故 2 次不可能）與上界（存在 4-4-4 三分的具體方案），單靠其中一邊都不足以確定答案。誘答項 2 次對應只算 12 枚而漏掉輕重兩種可能（12 ≤ 9 亦不成立），4 次與 5 次對應未意識到天平有三種結果而誤用二分。屬同水準原創改寫，非抄錄特定官方題。原 006 的 answer 文字寫「不可能」但 correctAnswer 指向選項「可能」，且 solutionSteps 直接寫入了自我推翻的思考過程，整題不可上架。",
-        "displayText": "改寫題（天平稱重資訊下界）"
+        "reference": "無刻度雙水壺量出指定容量的最少操作數：以「目標值必然落在哪個壺、上一步必然是什麼」逆推的競賽題型",
+        "notes": "設計依據：主解法不是盲目嘗試，而是從「4 公升只能在 5 公升壺」逆推出每一步都是被逼出來的，因此同時給出了流程與最小性。答案 6 已用對所有 (3公升壺, 5公升壺) 狀態的廣度優先搜尋驗證為最短路徑長度。屬同水準原創改寫，非抄錄特定官方題。前一版把本題改成「12 枚硬幣含 1 枚不知輕重假幣最少稱幾次」，與 `logic_grade10_foundation_001`（9 顆球 1 顆較重）同屬天平稱重家族且難度倒掛（grade9 反而比 grade10 難），grade10 那題是官方題應保留，故本題改為與稱重無關的題型。",
+        "displayText": "改寫題（雙水壺最少操作）"
       },
       "olympiadTaxonomy": {
         "topic": "邏輯",
         "topicCode": "logic",
-        "subtopic": "天平稱重下界",
-        "subtopicCode": "weighing_information_bound"
+        "subtopic": "水壺量水最少操作",
+        "subtopicCode": "jug_state_search"
       },
       "reviewStatus": "ok"
     },
