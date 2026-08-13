@@ -23,6 +23,20 @@ Primary level rules:
   compatibility
 - `grade7` to `grade12` use canonical olympiad topic folders directly
 
+Each `levelStage` is anchored to a public competition tier, which is the
+reference used when judging whether a question is on-level. The full table with
+the accept/reject rules lives in
+[question-bank-expansion-guidelines.md](question-bank-expansion-guidelines.md)
+under 年級與競賽級別規則:
+
+| `levelStage` | anchor |
+| --- | --- |
+| `grade7` / `grade8` | IMC Taiwan semifinal grade 7-8, AMC 8 |
+| `grade9` | IMC Taiwan semifinal grade 9, AMC 10A |
+| `grade10` | AMC 10 |
+| `grade11` | AMC 12 |
+| `grade12` | AIME entry level |
+
 ## Major Topics
 
 ### Legacy shipped top-level topics (`grade1` to `grade6`)

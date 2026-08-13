@@ -65,5 +65,11 @@
 
 ## Renderer 支援狀態
 
-- [ ] `ShapeDiagramPainter` 支援 `geometry_scene`（points / segments / polygons / arcs / angleMarks / rightAngles / equalTicks）——待實作。
-- 實作完成前，需要構造圖的幾何題先維持 `reviewStatus = pending`，不標 ok。
+- [x] `GeometryScenePainter`（`lib/main.dart`）已支援 `geometry_scene` 全部原語：points（含標籤方位）/ segments（solid 與 construction 虛線）/ polygons（shaded）/ arcs / angleMarks / rightAngles / equalTicks。解析在 `lib/models/geometry_scene.dart`。
+- 因此需要構造圖的幾何題可以正常標 `ok`。
+
+### 上架前必查
+
+- **所有點與圓弧都必須完全落在 `bounds` 內**。`bounds` 只是縮放框，超出的部分會被裁掉。實例：`geometry_grade9_foundation_002` 的圓心 (0,0)、半徑 1 配上 `minX = minY = -0.3`，整圓左下角被截掉，複審時才發現。圓弧要檢查的是 `cx ± r` 與 `cy ± r`，不是圓心。
+- **每個 `points` 元素都會被畫出標籤**，沒有「只放點不標字」的選項。因此不要為了畫線而塞入大量輔助點，否則圖面會被標籤淹沒；點多的構造圖請改以文字描述題幹，或先不上圖。
+- 舊的 `shape_diagram` 若只有 `{"shape": ..., "labels": {...}}`（畫一個基本形狀再貼文字），一律視為紅線 7 違規，須改為 `geometry_scene` 或 `kind:none`。
