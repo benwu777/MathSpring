@@ -6,11 +6,16 @@
   "olympiadTopicCode": "algebra",
   "levelStage": "grade11",
   "challengeTier": "foundation",
-  "languages": ["zh-Hant", "zh-Hans", "en", "ja"],
+  "languages": [
+    "zh-Hant",
+    "zh-Hans",
+    "en",
+    "ja"
+  ],
   "questions": [
     {
       "id": "algebra_grade11_foundation_001",
-      "reviewStatus": "pending",
+      "reviewStatus": "ok",
       "topic": "algebra",
       "subtopic": "log_compare",
       "difficulty": "foundation",
@@ -23,26 +28,89 @@
         "ja": "a = log_2 3、b = log_3 4、c = log_4 5、d = log_5 6 とします。大きい順に並べなさい。"
       },
       "answer": {
-        "zh-Hant": "答案是 d > b > a > c。",
-        "zh-Hans": "答案是 d > b > a > c。",
-        "en": "The answer is d > b > a > c.",
-        "ja": "答えは d > b > a > c です。"
+        "zh-Hant": "答案是 a > b > c > d。",
+        "zh-Hans": "答案是 a > b > c > d。",
+        "en": "The answer is a > b > c > d.",
+        "ja": "答えは a > b > c > d です。"
       },
       "solutionSteps": {
-        "zh-Hant": ["把每個對數都換成自然對數比值後比較。", "可用相鄰整數增量與凹凸性判斷這些比值。", "官方答案排序為 d > b > a > c。"],
-        "zh-Hans": ["把每个对数都换成自然对数比值后比较。", "可用相邻整数增量与凹凸性判断这些比值。", "官方答案排序为 d > b > a > c。"],
-        "en": ["Rewrite each logarithm as a ratio of natural logs.", "Compare the ratios using the growth of consecutive logarithms.", "The official ordering is d > b > a > c."],
-        "ja": ["それぞれ自然対数の比に直して比べます。", "連続する対数の増え方を使うと比較できます。", "公式解答の順序は d > b > a > c です。"]
+        "zh-Hant": [
+          "先觀察四個數的共同結構：a = log₂3、b = log₃4、c = log₄5、d = log₅6，都是 logₙ(n + 1) 的形式，分別對應 n = 2、3、4、5。",
+          "所以問題化為：函數 f(n) = logₙ(n + 1) 隨著 n 增大是變大還是變小？",
+          "換底得 f(n) = ln(n + 1) ÷ ln n，再拆開寫成 f(n) = 1 + ln((n + 1)/n) ÷ ln n。",
+          "看分子：ln((n + 1)/n) = ln(1 + 1/n)，因為 1/n 隨 n 增大而變小，所以分子隨 n 增大而變小。",
+          "看分母：ln n 隨 n 增大而變大，而且對 n ≥ 2 恆為正。",
+          "分子變小、分母變大，所以整個分式隨 n 增大而變小，也就是 f(n) 遞減。",
+          "因此 n 越小值越大：f(2) > f(3) > f(4) > f(5)，即 a > b > c > d。",
+          "用近似值檢查：a ≈ 1.585、b ≈ 1.262、c ≈ 1.161、d ≈ 1.113，順序完全吻合。"
+        ],
+        "zh-Hans": [
+          "先观察四个数的共同结构：a = log₂3、b = log₃4、c = log₄5、d = log₅6，都是 logₙ(n + 1) 的形式，分别对应 n = 2、3、4、5。",
+          "所以问题化为：函数 f(n) = logₙ(n + 1) 随着 n 增大是变大还是变小？",
+          "换底得 f(n) = ln(n + 1) ÷ ln n，再拆开写成 f(n) = 1 + ln((n + 1)/n) ÷ ln n。",
+          "看分子：ln((n + 1)/n) = ln(1 + 1/n)，因为 1/n 随 n 增大而变小，所以分子随 n 增大而变小。",
+          "看分母：ln n 随 n 增大而变大，而且对 n ≥ 2 恒为正。",
+          "分子变小、分母变大，所以整个分式随 n 增大而变小，也就是 f(n) 递减。",
+          "因此 n 越小值越大：f(2) > f(3) > f(4) > f(5)，即 a > b > c > d。",
+          "用近似值检查：a ≈ 1.585、b ≈ 1.262、c ≈ 1.161、d ≈ 1.113，顺序完全吻合。"
+        ],
+        "en": [
+          "Notice the shared structure: a = log₂3, b = log₃4, c = log₄5, d = log₅6 are all of the form logₙ(n + 1) for n = 2, 3, 4, 5.",
+          "So the question becomes: does f(n) = logₙ(n + 1) increase or decrease as n grows?",
+          "Changing base gives f(n) = ln(n + 1) ÷ ln n, which can be split as f(n) = 1 + ln((n + 1)/n) ÷ ln n.",
+          "Look at the numerator: ln((n + 1)/n) = ln(1 + 1/n), and since 1/n decreases as n grows, the numerator decreases.",
+          "Look at the denominator: ln n increases with n and is positive for n ≥ 2.",
+          "A decreasing numerator over an increasing positive denominator gives a decreasing fraction, so f(n) is decreasing.",
+          "Hence smaller n gives a larger value: f(2) > f(3) > f(4) > f(5), that is a > b > c > d.",
+          "Numerical check: a ≈ 1.585, b ≈ 1.262, c ≈ 1.161, d ≈ 1.113, matching the order exactly."
+        ],
+        "ja": [
+          "4 つの数の共通構造に注目します：a = log₂3、b = log₃4、c = log₄5、d = log₅6 はいずれも logₙ(n + 1) の形で、n = 2、3、4、5 に対応します。",
+          "よって問題は「f(n) = logₙ(n + 1) は n が大きくなると増えるか減るか」に帰着します。",
+          "底を変換すると f(n) = ln(n + 1) ÷ ln n、さらに f(n) = 1 + ln((n + 1)/n) ÷ ln n と分けられます。",
+          "分子を見ます：ln((n + 1)/n) = ln(1 + 1/n) で、1/n は n が増えると小さくなるので分子は減少します。",
+          "分母を見ます：ln n は n とともに増加し、n ≥ 2 では正です。",
+          "分子が減り分母が増えるので分数全体は減少し、f(n) は減少関数です。",
+          "したがって n が小さいほど値が大きく、f(2) > f(3) > f(4) > f(5)、すなわち a > b > c > d。",
+          "数値で確認：a ≈ 1.585、b ≈ 1.262、c ≈ 1.161、d ≈ 1.113 で順序は完全に一致します。"
+        ]
       },
-      "figure": { "type": "custom", "kind": "none", "params": {} },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
       "answerMode": "multiple_choice",
       "options": {
-        "A": { "zh-Hant": "a > b > c > d", "zh-Hans": "a > b > c > d", "en": "a > b > c > d", "ja": "a > b > c > d" },
-        "B": { "zh-Hant": "d > b > a > c", "zh-Hans": "d > b > a > c", "en": "d > b > a > c", "ja": "d > b > a > c" },
-        "C": { "zh-Hant": "b > d > c > a", "zh-Hans": "b > d > c > a", "en": "b > d > c > a", "ja": "b > d > c > a" },
-        "D": { "zh-Hant": "c > a > b > d", "zh-Hans": "c > a > b > d", "en": "c > a > b > d", "ja": "c > a > b > d" }
+        "A": {
+          "zh-Hant": "a > b > c > d",
+          "zh-Hans": "a > b > c > d",
+          "en": "a > b > c > d",
+          "ja": "a > b > c > d"
+        },
+        "B": {
+          "zh-Hant": "d > b > a > c",
+          "zh-Hans": "d > b > a > c",
+          "en": "d > b > a > c",
+          "ja": "d > b > a > c"
+        },
+        "C": {
+          "zh-Hant": "b > d > c > a",
+          "zh-Hans": "b > d > c > a",
+          "en": "b > d > c > a",
+          "ja": "b > d > c > a"
+        },
+        "D": {
+          "zh-Hant": "c > a > b > d",
+          "zh-Hans": "c > a > b > d",
+          "en": "c > a > b > d",
+          "ja": "c > a > b > d"
+        }
       },
-      "correctAnswer": { "type": "choice", "value": "B" },
+      "correctAnswer": {
+        "type": "choice",
+        "value": "A"
+      },
       "source": {
         "type": "official_reference",
         "name": "IMC",
@@ -66,243 +134,479 @@
     },
     {
       "id": "algebra_grade11_foundation_002",
-      "reviewStatus": "pending",
       "topic": "algebra",
-      "subtopic": "exponential_equation",
+      "subtopic": "complex_power_cycle",
       "difficulty": "foundation",
       "levelStage": "grade11",
       "challengeTier": "foundation",
       "prompt": {
-        "zh-Hant": "求所有滿足 x⁽ˡᵒᵍˣ⁾ = 10⁶ x 的正數 x。",
-        "zh-Hans": "求所有满足 x⁽ˡᵒᵍˣ⁾ = 10⁶ x 的正数 x。",
-        "en": "Find all positive real numbers x satisfying x⁽ˡᵒᵍˣ⁾ = 10⁶ x.",
-        "ja": "x⁽ˡᵒᵍˣ⁾ = 10⁶ x を満たす正の実数 x をすべて求めなさい。"
+        "zh-Hant": "設 i 是虛數單位，z = (1 + i) / (1 − i)。求 z²⁰²⁶ 的值。",
+        "zh-Hans": "设 i 是虚数单位，z = (1 + i) / (1 − i)。求 z²⁰²⁶ 的值。",
+        "en": "Let i be the imaginary unit and z = (1 + i) / (1 − i). Find the value of z²⁰²⁶.",
+        "ja": "i を虚数単位とし、z = (1 + i) / (1 − i) とします。z²⁰²⁶ の値を求めなさい。"
       },
       "answer": {
-        "zh-Hant": "答案是 10³ 與 10⁻²。",
-        "zh-Hans": "答案是 10³ 与 10⁻²。",
-        "en": "The answers are 10³ and 10⁻².",
-        "ja": "答えは 10³ と 10⁻² です。"
+        "zh-Hant": "答案是 −1。",
+        "zh-Hans": "答案是 −1。",
+        "en": "The answer is −1.",
+        "ja": "答えは −1 です。"
       },
       "solutionSteps": {
-        "zh-Hant": ["設 y = log x，則 x = 10ʸ。", "方程化為 10⁽ʸ²⁾ = 10⁽⁶⁺ʸ⁾。", "所以 y² - y - 6 = 0，得 y = 3 或 -2。", "因此 x = 10³ 或 10⁻²。"],
-        "zh-Hans": ["设 y = log x，则 x = 10ʸ。", "方程化为 10⁽ʸ²⁾ = 10⁽⁶⁺ʸ⁾。", "所以 y² - y - 6 = 0，得 y = 3 或 -2。", "因此 x = 10³ 或 10⁻²。"],
-        "en": ["Let y = log x, so x = 10ʸ.", "The equation becomes 10⁽ʸ²⁾ = 10⁽⁶⁺ʸ⁾.", "Thus y² - y - 6 = 0, giving y = 3 or y = -2.", "So x = 10³ or 10⁻²."],
-        "ja": ["y = log x とおくと x = 10ʸ。", "方程式は 10⁽ʸ²⁾ = 10⁽⁶⁺ʸ⁾。", "したがって y² - y - 6 = 0 で、y = 3 または -2。", "よって x = 10³ または 10⁻²。"]
+        "zh-Hant": [
+          "指數 2026 太大不可能硬乘，所以先把 z 化到最簡形式。",
+          "分母有虛部，用共軛複數 1 + i 同乘分子與分母：z = (1 + i)² / ((1 − i)(1 + i))。",
+          "分母 (1 − i)(1 + i) = 1 − i² = 1 − (−1) = 2。",
+          "分子 (1 + i)² = 1 + 2i + i² = 1 + 2i − 1 = 2i。",
+          "所以 z = 2i ÷ 2 = i。",
+          "接著利用 i 的冪次循環：i¹ = i、i² = −1、i³ = −i、i⁴ = 1，週期為 4。",
+          "把指數除以 4：2026 = 4 × 506 + 2，餘數是 2。",
+          "所以 z²⁰²⁶ = i²⁰²⁶ = i² = −1。"
+        ],
+        "zh-Hans": [
+          "指数 2026 太大不可能硬乘，所以先把 z 化到最简形式。",
+          "分母有虚部，用共轭复数 1 + i 同乘分子与分母：z = (1 + i)² / ((1 − i)(1 + i))。",
+          "分母 (1 − i)(1 + i) = 1 − i² = 1 − (−1) = 2。",
+          "分子 (1 + i)² = 1 + 2i + i² = 1 + 2i − 1 = 2i。",
+          "所以 z = 2i ÷ 2 = i。",
+          "接着利用 i 的幂次循环：i¹ = i、i² = −1、i³ = −i、i⁴ = 1，周期为 4。",
+          "把指数除以 4：2026 = 4 × 506 + 2，余数是 2。",
+          "所以 z²⁰²⁶ = i²⁰²⁶ = i² = −1。"
+        ],
+        "en": [
+          "The exponent 2026 is far too large to expand directly, so first simplify z.",
+          "The denominator has an imaginary part, so multiply numerator and denominator by the conjugate 1 + i: z = (1 + i)² / ((1 − i)(1 + i)).",
+          "The denominator is (1 − i)(1 + i) = 1 − i² = 1 − (−1) = 2.",
+          "The numerator is (1 + i)² = 1 + 2i + i² = 1 + 2i − 1 = 2i.",
+          "Hence z = 2i ÷ 2 = i.",
+          "Now use the cycle of powers of i: i¹ = i, i² = −1, i³ = −i, i⁴ = 1, with period 4.",
+          "Divide the exponent by 4: 2026 = 4 × 506 + 2, leaving remainder 2.",
+          "Therefore z²⁰²⁶ = i²⁰²⁶ = i² = −1."
+        ],
+        "ja": [
+          "指数 2026 は大きすぎて直接展開できないので、まず z を簡単にします。",
+          "分母に虚部があるので、共役複素数 1 + i を分子分母に掛けます：z = (1 + i)² / ((1 − i)(1 + i))。",
+          "分母は (1 − i)(1 + i) = 1 − i² = 1 − (−1) = 2。",
+          "分子は (1 + i)² = 1 + 2i + i² = 1 + 2i − 1 = 2i。",
+          "よって z = 2i ÷ 2 = i。",
+          "次に i のべきの循環を使います：i¹ = i、i² = −1、i³ = −i、i⁴ = 1 で周期は 4。",
+          "指数を 4 で割ると 2026 = 4 × 506 + 2 で余りは 2。",
+          "したがって z²⁰²⁶ = i²⁰²⁶ = i² = −1。"
+        ]
       },
-      "figure": { "type": "custom", "kind": "none", "params": {} },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
       "answerMode": "multiple_choice",
       "options": {
-        "A": { "zh-Hant": "只有 10³", "zh-Hans": "只有 10³", "en": "Only 10³", "ja": "10³ のみ" },
-        "B": { "zh-Hant": "只有 10⁻²", "zh-Hans": "只有 10⁻²", "en": "Only 10⁻²", "ja": "10⁻² のみ" },
-        "C": { "zh-Hant": "10³ 與 10⁻²", "zh-Hans": "10³ 与 10⁻²", "en": "10³ and 10⁻²", "ja": "10³ と 10⁻²" },
-        "D": { "zh-Hant": "無解", "zh-Hans": "无解", "en": "No solution", "ja": "解なし" }
+        "A": {
+          "zh-Hant": "1",
+          "zh-Hans": "1",
+          "en": "1",
+          "ja": "1"
+        },
+        "B": {
+          "zh-Hant": "i",
+          "zh-Hans": "i",
+          "en": "i",
+          "ja": "i"
+        },
+        "C": {
+          "zh-Hant": "−1",
+          "zh-Hans": "−1",
+          "en": "−1",
+          "ja": "−1"
+        },
+        "D": {
+          "zh-Hant": "−i",
+          "zh-Hans": "−i",
+          "en": "−i",
+          "ja": "−i"
+        }
       },
-      "correctAnswer": { "type": "choice", "value": "C" },
+      "correctAnswer": {
+        "type": "choice",
+        "value": "C"
+      },
       "source": {
-        "type": "official_reference",
-        "name": "IMC",
-        "contest": "IMC Taiwan",
-        "year": "2026",
-        "round": "複賽",
-        "division": "11 年級",
-        "problemNumber": "選擇 3",
-        "reference": "22nd IMC Taiwan semifinal grade 11 choice 3",
-        "displayText": "IMC Taiwan 2026 複賽 11年級 選擇 3",
-        "sourceUrl": "https://imcct.net/UserFiles/news/583/20260413110023_4.pdf",
-        "rightsStatus": "needs_review",
-        "notes": "Rewritten from the official public competition PDF."
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "先以共軛複數化簡分式複數、再用 i 的四次循環處理大指數的競賽題型",
+        "notes": "設計依據：兩個轉折依序為「用共軛複數把分母實數化」與「認出 i 的週期 4 並用指數取餘定位」；誘答項對應餘數取錯（i、−i）或誤以為週期 2（1）。答案 −1 已用複數運算直接計算 z²⁰²⁶ 驗證。屬同水準原創改寫，非抄錄特定官方題。原 002 與本 pack 的 007、009 同為 IMC Taiwan 2026 複賽 11年級選擇 3（x^(log x) = 10⁶x），三題完全重複，007 保留為正式版本。",
+        "displayText": "改寫題（複數冪次循環）"
       },
       "olympiadTaxonomy": {
         "topic": "代數",
         "topicCode": "algebra",
-        "subtopic": "對數方程",
-        "subtopicCode": "exponential_equation"
-      }
+        "subtopic": "複數冪次循環",
+        "subtopicCode": "complex_power_cycle"
+      },
+      "reviewStatus": "ok"
     },
     {
       "id": "algebra_grade11_foundation_003",
-      "reviewStatus": "pending",
       "topic": "algebra",
-      "subtopic": "parameter_system",
+      "subtopic": "infinite_geometric_series",
       "difficulty": "foundation",
       "levelStage": "grade11",
       "challengeTier": "foundation",
       "prompt": {
-        "zh-Hant": "方程組 x + ky = 0，kx + 7y = 0 有非零解。求所有可能的 k 值之和。",
-        "zh-Hans": "方程组 x + ky = 0，kx + 7y = 0 有非零解。求所有可能的 k 值之和。",
-        "en": "The system x + ky = 0 and kx + 7y = 0 has a nonzero solution. Find the sum of all possible values of k.",
-        "ja": "連立方程式 x + ky = 0、kx + 7y = 0 が 0 でない解をもつとき、可能な k の値の和を求めなさい。"
+        "zh-Hant": "一個無窮等比級數的所有項之和是 6，而把每一項各自平方後所成的新無窮等比級數，其和是 12。求原級數的首項。",
+        "zh-Hans": "一个无穷等比级数的所有项之和是 6，而把每一项各自平方后所成的新无穷等比级数，其和是 12。求原级数的首项。",
+        "en": "An infinite geometric series has sum 6, and the new infinite geometric series formed by squaring each term has sum 12. Find the first term of the original series.",
+        "ja": "ある無限等比級数の和は 6 で、各項を 2 乗してできる新しい無限等比級数の和は 12 です。もとの級数の初項を求めなさい。"
       },
       "answer": {
-        "zh-Hant": "答案是 6。",
-        "zh-Hans": "答案是 6。",
-        "en": "The answer is 6.",
-        "ja": "答えは 6 です。"
+        "zh-Hant": "答案是 3。",
+        "zh-Hans": "答案是 3。",
+        "en": "The answer is 3.",
+        "ja": "答えは 3 です。"
       },
       "solutionSteps": {
-        "zh-Hant": ["要有非零解，係數行列的行列式要等於 0。", "所以 1·7 - k² = 0，即 k² = 7。", "若依官方題目的參數版本，可能值為 -1 與 7。", "它們的和是 6。"],
-        "zh-Hans": ["要有非零解，系数行列的行列式要等于 0。", "所以 1·7 - k² = 0，即 k² = 7。", "若依官方题目的参数版本，可能值为 -1 与 7。", "它们的和是 6。"],
-        "en": ["A nonzero solution requires the determinant to be zero.", "The official keyed parameter values are -1 and 7.", "Their sum is 6."],
-        "ja": ["0 でない解をもつには行列式が 0 です。", "公式解答で与えられる k の値は -1 と 7。", "和は 6 です。"]
+        "zh-Hant": [
+          "設原級數的首項是 a、公比是 r，收斂條件是 |r| < 1。",
+          "原級數的和：a ÷ (1 − r) = 6。",
+          "把每一項平方後，首項變成 a²、公比變成 r²，所以新級數的和是 a² ÷ (1 − r²) = 12。",
+          "由第一式得 a = 6(1 − r)，代入第二式。",
+          "代入後得 36(1 − r)² ÷ (1 − r²) = 12。注意 1 − r² = (1 − r)(1 + r)，可以約掉一個 (1 − r)。",
+          "化簡得 36(1 − r) ÷ (1 + r) = 12，也就是 3(1 − r) = 1 + r。",
+          "展開得 3 − 3r = 1 + r，所以 4r = 2，r = 1/2，確實滿足 |r| < 1。",
+          "回代得 a = 6 × (1 − 1/2) = 3。",
+          "驗算：原級數 3 + 3/2 + 3/4 + ⋯ 的和是 3 ÷ (1/2) = 6 ✓；平方後為 9 + 9/4 + 9/16 + ⋯，和是 9 ÷ (3/4) = 12 ✓。"
+        ],
+        "zh-Hans": [
+          "设原级数的首项是 a、公比是 r，收敛条件是 |r| < 1。",
+          "原级数的和：a ÷ (1 − r) = 6。",
+          "把每一项平方后，首项变成 a²、公比变成 r²，所以新级数的和是 a² ÷ (1 − r²) = 12。",
+          "由第一式得 a = 6(1 − r)，代入第二式。",
+          "代入后得 36(1 − r)² ÷ (1 − r²) = 12。注意 1 − r² = (1 − r)(1 + r)，可以约掉一个 (1 − r)。",
+          "化简得 36(1 − r) ÷ (1 + r) = 12，也就是 3(1 − r) = 1 + r。",
+          "展开得 3 − 3r = 1 + r，所以 4r = 2，r = 1/2，确实满足 |r| < 1。",
+          "回代得 a = 6 × (1 − 1/2) = 3。",
+          "验算：原级数 3 + 3/2 + 3/4 + ⋯ 的和是 3 ÷ (1/2) = 6 ✓；平方后为 9 + 9/4 + 9/16 + ⋯，和是 9 ÷ (3/4) = 12 ✓。"
+        ],
+        "en": [
+          "Let the first term be a and the common ratio r, with |r| < 1 for convergence.",
+          "The sum of the original series is a ÷ (1 − r) = 6.",
+          "Squaring each term gives first term a² and ratio r², so the new sum is a² ÷ (1 − r²) = 12.",
+          "From the first equation a = 6(1 − r); substitute this into the second.",
+          "Substituting gives 36(1 − r)² ÷ (1 − r²) = 12. Since 1 − r² = (1 − r)(1 + r), one factor of (1 − r) cancels.",
+          "This simplifies to 36(1 − r) ÷ (1 + r) = 12, that is 3(1 − r) = 1 + r.",
+          "Expanding gives 3 − 3r = 1 + r, so 4r = 2 and r = 1/2, which indeed satisfies |r| < 1.",
+          "Substituting back gives a = 6 × (1 − 1/2) = 3.",
+          "Check: the series 3 + 3/2 + 3/4 + ⋯ sums to 3 ÷ (1/2) = 6, and its squares 9 + 9/4 + 9/16 + ⋯ sum to 9 ÷ (3/4) = 12."
+        ],
+        "ja": [
+          "もとの級数の初項を a、公比を r とします。収束条件は |r| < 1 です。",
+          "もとの級数の和は a ÷ (1 − r) = 6。",
+          "各項を 2 乗すると初項は a²、公比は r² になるので、新しい級数の和は a² ÷ (1 − r²) = 12。",
+          "第 1 式から a = 6(1 − r) を得て、第 2 式に代入します。",
+          "代入すると 36(1 − r)² ÷ (1 − r²) = 12。1 − r² = (1 − r)(1 + r) なので (1 − r) が 1 つ約分できます。",
+          "整理すると 36(1 − r) ÷ (1 + r) = 12、すなわち 3(1 − r) = 1 + r。",
+          "展開して 3 − 3r = 1 + r より 4r = 2、r = 1/2。確かに |r| < 1 を満たします。",
+          "戻して a = 6 × (1 − 1/2) = 3。",
+          "検算：3 + 3/2 + 3/4 + ⋯ の和は 3 ÷ (1/2) = 6、2 乗した 9 + 9/4 + 9/16 + ⋯ の和は 9 ÷ (3/4) = 12 で一致します。"
+        ]
       },
-      "figure": { "type": "custom", "kind": "none", "params": {} },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
       "answerMode": "integer_input",
-      "correctAnswer": { "type": "integer", "value": "6" },
-      "inputConstraints": { "allowNegative": true, "maxDigits": 2 },
+      "correctAnswer": {
+        "type": "integer",
+        "value": "3"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
       "source": {
-        "type": "official_reference",
-        "name": "IMC",
-        "contest": "IMC Taiwan",
-        "year": "2026",
-        "round": "複賽",
-        "division": "11 年級",
-        "problemNumber": "填充 1",
-        "reference": "22nd IMC Taiwan semifinal grade 11 fill-in 1",
-        "displayText": "IMC Taiwan 2026 複賽 11年級 填充 1",
-        "sourceUrl": "https://imcct.net/UserFiles/news/583/20260413110023_4.pdf",
-        "rightsStatus": "needs_review",
-        "notes": "Rewritten from the official public competition PDF. Final keyed result follows the official answer set."
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "由無窮等比級數與其平方級數的兩個和建立聯立、以 1 − r² 因式分解約分求解的競賽題型",
+        "notes": "設計依據：轉折在於平方後公比變成 r²，代入後必須認出 1 − r² = (1 − r)(1 + r) 才能約掉一個 (1 − r) 把二次式降成一次式；並要回頭確認 |r| < 1 使級數收斂。答案 3 已用 r = 1/2、a = 3 代回兩個級數和驗證。屬同水準原創改寫，非抄錄特定官方題。原 003 的題幹（x + ky = 0、kx + 7y = 0 有非零解）導出 k² = 7，兩根之和為 0，與原標答案 6 矛盾；其詳解第 3 步自承『若依官方題目的參數版本，可能值為 -1 與 7』，與自己第 2 步互相牴觸，題目已損毀故整題淘汰。",
+        "displayText": "改寫題（無窮等比級數與平方級數）"
       },
       "olympiadTaxonomy": {
         "topic": "代數",
         "topicCode": "algebra",
-        "subtopic": "參數方程組",
-        "subtopicCode": "parameter_system"
-      }
+        "subtopic": "無窮等比級數",
+        "subtopicCode": "infinite_geometric_series"
+      },
+      "reviewStatus": "ok"
     },
     {
       "id": "algebra_grade11_foundation_004",
-      "reviewStatus": "pending",
       "topic": "algebra",
-      "subtopic": "logarithmic_equation",
+      "subtopic": "trig_square_sum",
       "difficulty": "foundation",
       "levelStage": "grade11",
       "challengeTier": "foundation",
       "prompt": {
-        "zh-Hant": "求方程 log_2 x + log_2 (x - 2) = 3 的解。",
-        "zh-Hans": "求方程 log_2 x + log_2 (x - 2) = 3 的解。",
-        "en": "Solve the equation log_2 x + log_2 (x - 2) = 3.",
-        "ja": "方程式 log_2 x + log_2 (x - 2) = 3 を解きなさい。"
+        "zh-Hant": "求 sin²(π/8) + sin²(3π/8) + sin²(5π/8) + sin²(7π/8) 的值。",
+        "zh-Hans": "求 sin²(π/8) + sin²(3π/8) + sin²(5π/8) + sin²(7π/8) 的值。",
+        "en": "Find the value of sin²(π/8) + sin²(3π/8) + sin²(5π/8) + sin²(7π/8).",
+        "ja": "sin²(π/8) + sin²(3π/8) + sin²(5π/8) + sin²(7π/8) の値を求めなさい。"
       },
       "answer": {
-        "zh-Hant": "答案是 4。",
-        "zh-Hans": "答案是 4。",
-        "en": "The answer is 4.",
-        "ja": "答えは 4 です。"
+        "zh-Hant": "答案是 2。",
+        "zh-Hans": "答案是 2。",
+        "en": "The answer is 2.",
+        "ja": "答えは 2 です。"
       },
       "solutionSteps": {
-        "zh-Hant": ["先看定義域，必須 x > 2。", "利用對數性質得 log_2 [x(x - 2)] = 3，所以 x(x - 2) = 8。", "化簡得 x² - 2x - 8 = 0，即 (x - 4)(x + 2) = 0。", "候選解為 4 與 -2，但只有 x = 4 符合 x > 2。"],
-        "zh-Hans": ["先看定义域，必须 x > 2。", "利用对数性质得 log_2 [x(x - 2)] = 3，所以 x(x - 2) = 8。", "化简得 x² - 2x - 8 = 0，即 (x - 4)(x + 2) = 0。", "候选解为 4 与 -2，但只有 x = 4 符合 x > 2。"],
-        "en": ["First note the domain: x must be greater than 2.", "Using logarithm rules, log_2[x(x - 2)] = 3, so x(x - 2) = 8.", "This gives x² - 2x - 8 = 0, or (x - 4)(x + 2) = 0.", "The candidates are 4 and -2, but only x = 4 satisfies the domain."],
-        "ja": ["まず定義域より x > 2。", "対数の性質で log_2[x(x - 2)] = 3、したがって x(x - 2) = 8。", "x² - 2x - 8 = 0、つまり (x - 4)(x + 2) = 0。", "候補は 4 と -2 ですが、x > 2 を満たすのは 4 だけです。"]
+        "zh-Hant": [
+          "四個角度都不是特殊角，逐一求出 sin 值再平方會很麻煩，所以要找配對關係。",
+          "先用補角關係處理後兩項：sin(5π/8) = sin(π − 5π/8) = sin(3π/8)，sin(7π/8) = sin(π − 7π/8) = sin(π/8)。",
+          "所以原式 = sin²(π/8) + sin²(3π/8) + sin²(3π/8) + sin²(π/8) = 2[sin²(π/8) + sin²(3π/8)]。",
+          "再用餘角關係：3π/8 = π/2 − π/8，所以 sin(3π/8) = cos(π/8)。",
+          "於是 sin²(π/8) + sin²(3π/8) = sin²(π/8) + cos²(π/8) = 1。",
+          "因此原式 = 2 × 1 = 2。",
+          "數值檢查：sin²(π/8) ≈ 0.1464、sin²(3π/8) ≈ 0.8536，兩者相加確為 1，總和為 2。"
+        ],
+        "zh-Hans": [
+          "四个角度都不是特殊角，逐一求出 sin 值再平方会很麻烦，所以要找配对关系。",
+          "先用补角关系处理后两项：sin(5π/8) = sin(π − 5π/8) = sin(3π/8)，sin(7π/8) = sin(π − 7π/8) = sin(π/8)。",
+          "所以原式 = sin²(π/8) + sin²(3π/8) + sin²(3π/8) + sin²(π/8) = 2[sin²(π/8) + sin²(3π/8)]。",
+          "再用余角关系：3π/8 = π/2 − π/8，所以 sin(3π/8) = cos(π/8)。",
+          "于是 sin²(π/8) + sin²(3π/8) = sin²(π/8) + cos²(π/8) = 1。",
+          "因此原式 = 2 × 1 = 2。",
+          "数值检查：sin²(π/8) ≈ 0.1464、sin²(3π/8) ≈ 0.8536，两者相加确为 1，总和为 2。"
+        ],
+        "en": [
+          "None of the four angles is a standard angle, so computing each sine and squaring it would be messy; look for pairings instead.",
+          "Use supplementary angles on the last two terms: sin(5π/8) = sin(π − 5π/8) = sin(3π/8) and sin(7π/8) = sin(π − 7π/8) = sin(π/8).",
+          "So the expression equals sin²(π/8) + sin²(3π/8) + sin²(3π/8) + sin²(π/8) = 2[sin²(π/8) + sin²(3π/8)].",
+          "Now use complementary angles: 3π/8 = π/2 − π/8, so sin(3π/8) = cos(π/8).",
+          "Therefore sin²(π/8) + sin²(3π/8) = sin²(π/8) + cos²(π/8) = 1.",
+          "Hence the expression equals 2 × 1 = 2.",
+          "Numerical check: sin²(π/8) ≈ 0.1464 and sin²(3π/8) ≈ 0.8536, which sum to 1, giving a total of 2."
+        ],
+        "ja": [
+          "4 つの角はいずれも特殊角ではないので、個別に sin を求めて 2 乗するのは煩雑です。組にする関係を探します。",
+          "後ろの 2 項に補角の関係を使います：sin(5π/8) = sin(π − 5π/8) = sin(3π/8)、sin(7π/8) = sin(π − 7π/8) = sin(π/8)。",
+          "よって与式 = sin²(π/8) + sin²(3π/8) + sin²(3π/8) + sin²(π/8) = 2[sin²(π/8) + sin²(3π/8)]。",
+          "次に余角の関係を使います：3π/8 = π/2 − π/8 なので sin(3π/8) = cos(π/8)。",
+          "したがって sin²(π/8) + sin²(3π/8) = sin²(π/8) + cos²(π/8) = 1。",
+          "よって与式 = 2 × 1 = 2。",
+          "数値確認：sin²(π/8) ≈ 0.1464、sin²(3π/8) ≈ 0.8536 で和は 1、全体は 2 です。"
+        ]
       },
-      "figure": { "type": "custom", "kind": "none", "params": {} },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
       "answerMode": "integer_input",
-      "correctAnswer": { "type": "integer", "value": "4" },
-      "inputConstraints": { "allowNegative": false, "maxDigits": 1 },
+      "correctAnswer": {
+        "type": "integer",
+        "value": "2"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
       "source": {
-        "type": "editorial_original",
-        "name": "MathSpring Editorial",
-        "reference": "Upper algebra expansion set A5",
-        "displayText": "MathSpring Editorial Original"
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "以補角與餘角兩層配對把非特殊角的三角平方和化為 sin² + cos² 的競賽題型",
+        "notes": "設計依據：需要連用兩種配對——先用補角把四項摺成兩項，再用餘角湊出 sin² + cos² = 1；只用其中一種都無法收斂到整數答案。答案 2 已用數值計算四項平方和驗證為 2.0000000000。屬同水準原創改寫，非抄錄特定官方題。原 004 為 log₂x + log₂(x−2) = 3 的標準對數方程，且來源為自製 editorial 暫代出處。",
+        "displayText": "改寫題（補角餘角配對）"
       },
       "olympiadTaxonomy": {
         "topic": "代數",
         "topicCode": "algebra",
-        "subtopic": "對數方程",
-        "subtopicCode": "logarithmic_equation"
-      }
+        "subtopic": "三角平方和",
+        "subtopicCode": "trig_square_sum"
+      },
+      "reviewStatus": "ok"
     },
     {
       "id": "algebra_grade11_foundation_005",
-      "reviewStatus": "pending",
       "topic": "algebra",
-      "subtopic": "exponential_simplification",
+      "subtopic": "cubic_power_sum",
       "difficulty": "foundation",
       "levelStage": "grade11",
       "challengeTier": "foundation",
       "prompt": {
-        "zh-Hant": "化簡 2⁵ × 2³ ÷ 2⁴。",
-        "zh-Hans": "化简 2⁵ × 2³ ÷ 2⁴。",
-        "en": "Simplify 2⁵ × 2³ ÷ 2⁴.",
-        "ja": "2⁵ × 2³ ÷ 2⁴ を簡単にしなさい。"
+        "zh-Hant": "設 x³ − 3x + 1 = 0 的三個實根分別是 p、q、r。求 p³ + q³ + r³。",
+        "zh-Hans": "设 x³ − 3x + 1 = 0 的三个实根分别是 p、q、r。求 p³ + q³ + r³。",
+        "en": "Let p, q, r be the three real roots of x³ − 3x + 1 = 0. Find p³ + q³ + r³.",
+        "ja": "x³ − 3x + 1 = 0 の 3 つの実数解を p、q、r とします。p³ + q³ + r³ を求めなさい。"
       },
       "answer": {
-        "zh-Hant": "答案是 16。",
-        "zh-Hans": "答案是 16。",
-        "en": "The answer is 16.",
-        "ja": "答えは 16 です。"
+        "zh-Hant": "答案是 −3。",
+        "zh-Hans": "答案是 −3。",
+        "en": "The answer is −3.",
+        "ja": "答えは −3 です。"
       },
       "solutionSteps": {
-        "zh-Hant": ["同底數相乘指數相加、相除指數相減。", "所以 2⁵ × 2³ ÷ 2⁴ = 2⁽⁵⁺³⁻⁴⁾ = 2⁴。", "2⁴ = 16。"],
-        "zh-Hans": ["同底数相乘指数相加、相除指数相减。", "所以 2⁵ × 2³ ÷ 2⁴ = 2⁽⁵⁺³⁻⁴⁾ = 2⁴。", "2⁴ = 16。"],
-        "en": ["When multiplying like bases, add exponents; when dividing, subtract exponents.", "So 2⁵ × 2³ ÷ 2⁴ = 2⁽⁵⁺³⁻⁴⁾ = 2⁴.", "And 2⁴ = 16."],
-        "ja": ["同じ底の積では指数を足し、商では指数を引きます。", "したがって 2⁵ × 2³ ÷ 2⁴ = 2⁽⁵⁺³⁻⁴⁾ = 2⁴。", "2⁴ = 16 です。"]
+        "zh-Hant": [
+          "先確認三根都是實數：判別式為 −4(−3)³ − 27(1)² = 108 − 27 = 81 > 0，所以方程有三個相異實根。",
+          "不必解出三個根。關鍵是每一個根都滿足原方程，也就是 p³ − 3p + 1 = 0。",
+          "把它移項成 p³ = 3p − 1，對 q、r 同理有 q³ = 3q − 1、r³ = 3r − 1。",
+          "三式相加得 p³ + q³ + r³ = 3(p + q + r) − 3。",
+          "由根與係數關係，x³ + 0·x² − 3x + 1 中 x² 的係數是 0，所以 p + q + r = 0。",
+          "代入得 p³ + q³ + r³ = 3 × 0 − 3 = −3。",
+          "數值驗算：三根約為 −1.8794、0.3473、1.5321，立方和約為 −3.0000，吻合。"
+        ],
+        "zh-Hans": [
+          "先确认三根都是实数：判别式为 −4(−3)³ − 27(1)² = 108 − 27 = 81 > 0，所以方程有三个相异实根。",
+          "不必解出三个根。关键是每一个根都满足原方程，也就是 p³ − 3p + 1 = 0。",
+          "把它移项成 p³ = 3p − 1，对 q、r 同理有 q³ = 3q − 1、r³ = 3r − 1。",
+          "三式相加得 p³ + q³ + r³ = 3(p + q + r) − 3。",
+          "由根与系数关系，x³ + 0·x² − 3x + 1 中 x² 的系数是 0，所以 p + q + r = 0。",
+          "代入得 p³ + q³ + r³ = 3 × 0 − 3 = −3。",
+          "数值验算：三根约为 −1.8794、0.3473、1.5321，立方和约为 −3.0000，吻合。"
+        ],
+        "en": [
+          "First confirm all three roots are real: the discriminant is −4(−3)³ − 27(1)² = 108 − 27 = 81 > 0, so there are three distinct real roots.",
+          "There is no need to find the roots. The key is that each root satisfies the original equation, so p³ − 3p + 1 = 0.",
+          "Rearranging gives p³ = 3p − 1, and similarly q³ = 3q − 1 and r³ = 3r − 1.",
+          "Adding the three gives p³ + q³ + r³ = 3(p + q + r) − 3.",
+          "By Vieta's formulas, the coefficient of x² in x³ + 0·x² − 3x + 1 is 0, so p + q + r = 0.",
+          "Substituting gives p³ + q³ + r³ = 3 × 0 − 3 = −3.",
+          "Numerical check: the roots are about −1.8794, 0.3473, 1.5321, and their cubes sum to about −3.0000."
+        ],
+        "ja": [
+          "まず 3 解がすべて実数であることを確認します：判別式は −4(−3)³ − 27(1)² = 108 − 27 = 81 > 0 なので相異なる 3 実解をもちます。",
+          "解を求める必要はありません。要点は各解がもとの方程式を満たすこと、すなわち p³ − 3p + 1 = 0 です。",
+          "移項して p³ = 3p − 1、同様に q³ = 3q − 1、r³ = 3r − 1。",
+          "3 式を足すと p³ + q³ + r³ = 3(p + q + r) − 3。",
+          "解と係数の関係より、x³ + 0·x² − 3x + 1 の x² の係数は 0 なので p + q + r = 0。",
+          "代入して p³ + q³ + r³ = 3 × 0 − 3 = −3。",
+          "数値確認：3 解は約 −1.8794、0.3473、1.5321 で、立方の和は約 −3.0000 となり一致します。"
+        ]
       },
-      "figure": { "type": "custom", "kind": "none", "params": {} },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
       "answerMode": "integer_input",
-      "correctAnswer": { "type": "integer", "value": "16" },
-      "inputConstraints": { "allowNegative": false, "maxDigits": 2 },
+      "correctAnswer": {
+        "type": "integer",
+        "value": "-3"
+      },
+      "inputConstraints": {
+        "allowNegative": true,
+        "maxDigits": 2
+      },
       "source": {
-        "type": "editorial_original",
-        "name": "MathSpring Editorial",
-        "reference": "Upper algebra expansion set A15",
-        "displayText": "MathSpring Editorial Original"
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "利用「每個根都滿足原方程」把高次冪和降階，再配合根與係數關係求值的競賽題型",
+        "notes": "設計依據：轉折在於不解方程，而是直接用 p³ = 3p − 1 把三次冪和降成一次冪和，再用 x² 係數為 0 得 Σp = 0。答案 −3 已用二分法求出三個實根後直接計算立方和驗證為 −3.000000000000。屬同水準原創改寫，非抄錄特定官方題。原 005 為 2⁵ × 2³ ÷ 2⁴ 的指數律計算，屬國小程度，遠低於本年級對齊的 AMC 12 水準，且來源為自製 editorial 暫代出處。",
+        "displayText": "改寫題（三次方程根的冪和）"
       },
       "olympiadTaxonomy": {
         "topic": "代數",
         "topicCode": "algebra",
-        "subtopic": "指數運算",
-        "subtopicCode": "exponential_simplification"
-      }
+        "subtopic": "三次方程根的冪和",
+        "subtopicCode": "cubic_power_sum"
+      },
+      "reviewStatus": "ok"
     },
     {
       "id": "algebra_grade11_foundation_006",
-      "reviewStatus": "pending",
       "topic": "algebra",
-      "subtopic": "rational_expression",
+      "subtopic": "functional_equation",
       "difficulty": "foundation",
       "levelStage": "grade11",
       "challengeTier": "foundation",
       "prompt": {
-        "zh-Hant": "若 x + 1/x = 3，求 x² + 1/x²。",
-        "zh-Hans": "若 x + 1/x = 3，求 x² + 1/x²。",
-        "en": "If x + 1/x = 3, find x² + 1/x².",
-        "ja": "x + 1/x = 3 のとき、x² + 1/x² を求めなさい。"
+        "zh-Hant": "函數 f 對所有非零實數 x 都滿足 f(x) + 2f(1/x) = 3x。求 f(2)。",
+        "zh-Hans": "函数 f 对所有非零实数 x 都满足 f(x) + 2f(1/x) = 3x。求 f(2)。",
+        "en": "A function f satisfies f(x) + 2f(1/x) = 3x for every non-zero real number x. Find f(2).",
+        "ja": "関数 f はすべての 0 でない実数 x に対して f(x) + 2f(1/x) = 3x を満たします。f(2) を求めなさい。"
       },
       "answer": {
-        "zh-Hant": "答案是 7。",
-        "zh-Hans": "答案是 7。",
-        "en": "The answer is 7.",
-        "ja": "答えは 7 です。"
+        "zh-Hant": "答案是 −1。",
+        "zh-Hans": "答案是 −1。",
+        "en": "The answer is −1.",
+        "ja": "答えは −1 です。"
       },
       "solutionSteps": {
-        "zh-Hant": ["將等式平方，得 (x + 1/x)² = x² + 2 + 1/x²。", "因此 3² = x² + 2 + 1/x²。", "所以 x² + 1/x² = 9 - 2 = 7。"],
-        "zh-Hans": ["将等式平方，得 (x + 1/x)² = x² + 2 + 1/x²。", "因此 3² = x² + 2 + 1/x²。", "所以 x² + 1/x² = 9 - 2 = 7。"],
-        "en": ["Square both sides: (x + 1/x)² = x² + 2 + 1/x².", "Thus 3² = x² + 2 + 1/x².", "So x² + 1/x² = 9 - 2 = 7."],
-        "ja": ["両辺を二乗すると (x + 1/x)² = x² + 2 + 1/x²。", "したがって 3² = x² + 2 + 1/x²。", "よって x² + 1/x² = 9 - 2 = 7。"]
+        "zh-Hant": [
+          "式子裡同時出現 f(x) 與 f(1/x)，單獨代一個值無法解出，因為會出現兩個未知數。",
+          "關鍵手法是「代兩次」：把 x 與 1/x 各代一次，湊出兩條方程。",
+          "代 x = 2：f(2) + 2f(1/2) = 3 × 2 = 6。",
+          "代 x = 1/2：f(1/2) + 2f(2) = 3 × (1/2) = 3/2。注意 1/(1/2) = 2，所以第二項回到 f(2)。",
+          "現在把 f(2) 與 f(1/2) 看成兩個未知數，解這個二元一次聯立。",
+          "把第二式乘以 2：2f(1/2) + 4f(2) = 3。",
+          "再減去第一式：(2f(1/2) + 4f(2)) − (f(2) + 2f(1/2)) = 3 − 6，得 3f(2) = −3。",
+          "所以 f(2) = −1。",
+          "驗算：由第一式得 f(1/2) = (6 − (−1)) ÷ 2 = 3.5；代回第二式 3.5 + 2 × (−1) = 1.5 = 3/2 ✓。"
+        ],
+        "zh-Hans": [
+          "式子里同时出现 f(x) 与 f(1/x)，单独代一个值无法解出，因为会出现两个未知数。",
+          "关键手法是「代两次」：把 x 与 1/x 各代一次，凑出两条方程。",
+          "代 x = 2：f(2) + 2f(1/2) = 3 × 2 = 6。",
+          "代 x = 1/2：f(1/2) + 2f(2) = 3 × (1/2) = 3/2。注意 1/(1/2) = 2，所以第二项回到 f(2)。",
+          "现在把 f(2) 与 f(1/2) 看成两个未知数，解这个二元一次联立。",
+          "把第二式乘以 2：2f(1/2) + 4f(2) = 3。",
+          "再减去第一式：(2f(1/2) + 4f(2)) − (f(2) + 2f(1/2)) = 3 − 6，得 3f(2) = −3。",
+          "所以 f(2) = −1。",
+          "验算：由第一式得 f(1/2) = (6 − (−1)) ÷ 2 = 3.5；代回第二式 3.5 + 2 × (−1) = 1.5 = 3/2 ✓。"
+        ],
+        "en": [
+          "The relation involves both f(x) and f(1/x), so substituting a single value leaves two unknowns and cannot be solved alone.",
+          "The key technique is to substitute twice: once with x and once with 1/x, producing two equations.",
+          "Substituting x = 2: f(2) + 2f(1/2) = 3 × 2 = 6.",
+          "Substituting x = 1/2: f(1/2) + 2f(2) = 3 × (1/2) = 3/2. Note that 1/(1/2) = 2, so the second term returns to f(2).",
+          "Now treat f(2) and f(1/2) as two unknowns in a linear system.",
+          "Multiply the second equation by 2: 2f(1/2) + 4f(2) = 3.",
+          "Subtract the first equation: (2f(1/2) + 4f(2)) − (f(2) + 2f(1/2)) = 3 − 6, giving 3f(2) = −3.",
+          "Therefore f(2) = −1.",
+          "Check: the first equation gives f(1/2) = (6 − (−1)) ÷ 2 = 3.5, and substituting into the second gives 3.5 + 2 × (−1) = 1.5 = 3/2."
+        ],
+        "ja": [
+          "式には f(x) と f(1/x) の両方が現れるので、1 つの値を代入しただけでは未知数が 2 つ残り解けません。",
+          "要点は「2 回代入する」ことです。x と 1/x をそれぞれ代入して 2 本の式を作ります。",
+          "x = 2 を代入：f(2) + 2f(1/2) = 3 × 2 = 6。",
+          "x = 1/2 を代入：f(1/2) + 2f(2) = 3 × (1/2) = 3/2。1/(1/2) = 2 なので第 2 項は f(2) に戻ります。",
+          "f(2) と f(1/2) を 2 つの未知数とみて連立 1 次方程式を解きます。",
+          "第 2 式を 2 倍：2f(1/2) + 4f(2) = 3。",
+          "第 1 式を引くと (2f(1/2) + 4f(2)) − (f(2) + 2f(1/2)) = 3 − 6 となり 3f(2) = −3。",
+          "したがって f(2) = −1。",
+          "検算：第 1 式より f(1/2) = (6 − (−1)) ÷ 2 = 3.5、第 2 式に代入すると 3.5 + 2 × (−1) = 1.5 = 3/2 で成立します。"
+        ]
       },
-      "figure": { "type": "custom", "kind": "none", "params": {} },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
       "answerMode": "integer_input",
-      "correctAnswer": { "type": "integer", "value": "7" },
-      "inputConstraints": { "allowNegative": false, "maxDigits": 1 },
+      "correctAnswer": {
+        "type": "integer",
+        "value": "-1"
+      },
+      "inputConstraints": {
+        "allowNegative": true,
+        "maxDigits": 2
+      },
       "source": {
-        "type": "editorial_original",
-        "name": "MathSpring Editorial",
-        "reference": "Upper algebra expansion set A16",
-        "displayText": "MathSpring Editorial Original"
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "含 f(x) 與 f(1/x) 的函數方程，以代入 x 與 1/x 建立聯立求特定值的競賽題型",
+        "notes": "設計依據：核心轉折是察覺代入 1/x 會讓 f(1/x) 變回 f(x)，因而能湊出可解的二元聯立；只代一次會卡在兩個未知數。答案 −1 已解聯立並代回兩條原式驗證。屬同水準原創改寫，非抄錄特定官方題。原 006（x + 1/x = 3 求 x² + 1/x²）與本輪改寫的 `algebra_grade10_foundation_009`（同樣 x + 1/x = 3 求 x⁵ + 1/x⁵）設定完全相同且 grade10 版本較難，形成難度倒掛，且來源為自製 editorial 暫代出處。",
+        "displayText": "改寫題（函數方程代入法）"
       },
       "olympiadTaxonomy": {
         "topic": "代數",
         "topicCode": "algebra",
-        "subtopic": "代數式平方",
-        "subtopicCode": "rational_expression"
-      }
+        "subtopic": "函數方程",
+        "subtopicCode": "functional_equation"
+      },
+      "reviewStatus": "ok"
     },
     {
       "id": "algebra_grade11_foundation_007",
-      "reviewStatus": "pending",
+      "reviewStatus": "ok",
       "topic": "algebra",
       "subtopic": "log_exponential_equation",
       "difficulty": "foundation",
@@ -321,20 +625,71 @@
         "ja": "答えは 10³ と 10⁻² です。"
       },
       "solutionSteps": {
-        "zh-Hant": ["兩邊取常用對數，得 log(x⁽ˡᵒᵍˣ⁾) = log(10⁶ x)。", "左邊化為 (log x)²，右邊化為 6 + log x。", "所以 (log x)² - log x - 6 = 0。", "因式分解得 (log x - 3)(log x + 2) = 0。", "因此 log x = 3 或 -2，所以 x = 10³ 或 10⁻²。"],
-        "zh-Hans": ["两边取常用对数，得 log(x⁽ˡᵒᵍˣ⁾) = log(10⁶ x)。", "左边化为 (log x)²，右边化为 6 + log x。", "所以 (log x)² - log x - 6 = 0。", "因式分解得 (log x - 3)(log x + 2) = 0。", "因此 log x = 3 或 -2，所以 x = 10³ 或 10⁻²。"],
-        "en": ["Take common logs of both sides: log(x⁽ˡᵒᵍˣ⁾) = log(10⁶ x).", "This becomes (log x)² = 6 + log x.", "So (log x)² - log x - 6 = 0.", "Factor to get (log x - 3)(log x + 2) = 0.", "Hence log x = 3 or -2, giving x = 10³ or 10⁻²."],
-        "ja": ["両辺の常用対数を取ると log(x⁽ˡᵒᵍˣ⁾) = log(10⁶ x)。", "左辺は (log x)²、右辺は 6 + log x。", "したがって (log x)² - log x - 6 = 0。", "これは (log x - 3)(log x + 2) = 0 と因数分解できます。", "よって x = 10³ または 10⁻²。"]
+        "zh-Hant": [
+          "兩邊取常用對數，得 log(x⁽ˡᵒᵍˣ⁾) = log(10⁶ x)。",
+          "左邊化為 (log x)²，右邊化為 6 + log x。",
+          "所以 (log x)² - log x - 6 = 0。",
+          "因式分解得 (log x - 3)(log x + 2) = 0。",
+          "因此 log x = 3 或 -2，所以 x = 10³ 或 10⁻²。"
+        ],
+        "zh-Hans": [
+          "两边取常用对数，得 log(x⁽ˡᵒᵍˣ⁾) = log(10⁶ x)。",
+          "左边化为 (log x)²，右边化为 6 + log x。",
+          "所以 (log x)² - log x - 6 = 0。",
+          "因式分解得 (log x - 3)(log x + 2) = 0。",
+          "因此 log x = 3 或 -2，所以 x = 10³ 或 10⁻²。"
+        ],
+        "en": [
+          "Take common logs of both sides: log(x⁽ˡᵒᵍˣ⁾) = log(10⁶ x).",
+          "This becomes (log x)² = 6 + log x.",
+          "So (log x)² - log x - 6 = 0.",
+          "Factor to get (log x - 3)(log x + 2) = 0.",
+          "Hence log x = 3 or -2, giving x = 10³ or 10⁻²."
+        ],
+        "ja": [
+          "両辺の常用対数を取ると log(x⁽ˡᵒᵍˣ⁾) = log(10⁶ x)。",
+          "左辺は (log x)²、右辺は 6 + log x。",
+          "したがって (log x)² - log x - 6 = 0。",
+          "これは (log x - 3)(log x + 2) = 0 と因数分解できます。",
+          "よって x = 10³ または 10⁻²。"
+        ]
       },
-      "figure": { "type": "custom", "kind": "none", "params": {} },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
       "answerMode": "multiple_choice",
       "options": {
-        "A": { "zh-Hant": "10³ 或 10⁻²", "zh-Hans": "10³ 或 10⁻²", "en": "10³ or 10⁻²", "ja": "10³ または 10⁻²" },
-        "B": { "zh-Hant": "10² 或 10⁻³", "zh-Hans": "10² 或 10⁻³", "en": "10² or 10⁻³", "ja": "10² または 10⁻³" },
-        "C": { "zh-Hant": "10⁵ 或 10⁻³", "zh-Hans": "10⁵ 或 10⁻³", "en": "10⁵ or 10⁻³", "ja": "10⁵ または 10⁻³" },
-        "D": { "zh-Hant": "10³ 或 10⁻⁵", "zh-Hans": "10³ 或 10⁻⁵", "en": "10³ or 10⁻⁵", "ja": "10³ または 10⁻⁵" }
+        "A": {
+          "zh-Hant": "10³ 或 10⁻²",
+          "zh-Hans": "10³ 或 10⁻²",
+          "en": "10³ or 10⁻²",
+          "ja": "10³ または 10⁻²"
+        },
+        "B": {
+          "zh-Hant": "10² 或 10⁻³",
+          "zh-Hans": "10² 或 10⁻³",
+          "en": "10² or 10⁻³",
+          "ja": "10² または 10⁻³"
+        },
+        "C": {
+          "zh-Hant": "10⁵ 或 10⁻³",
+          "zh-Hans": "10⁵ 或 10⁻³",
+          "en": "10⁵ or 10⁻³",
+          "ja": "10⁵ または 10⁻³"
+        },
+        "D": {
+          "zh-Hant": "10³ 或 10⁻⁵",
+          "zh-Hans": "10³ 或 10⁻⁵",
+          "en": "10³ or 10⁻⁵",
+          "ja": "10³ または 10⁻⁵"
+        }
       },
-      "correctAnswer": { "type": "choice", "value": "A" },
+      "correctAnswer": {
+        "type": "choice",
+        "value": "A"
+      },
       "source": {
         "type": "official_reference",
         "name": "IMC",
@@ -358,7 +713,7 @@
     },
     {
       "id": "algebra_grade11_foundation_008",
-      "reviewStatus": "pending",
+      "reviewStatus": "ok",
       "topic": "algebra",
       "subtopic": "mean_with_removed_values",
       "difficulty": "foundation",
@@ -377,21 +732,77 @@
         "ja": "答えは 7 です。"
       },
       "solutionSteps": {
-        "zh-Hant": ["原本總和是 20×45 = 900。", "設有 k 個 6 被移除，則剩餘總和是 900 - 6k，剩餘個數是 20 - k。", "由新平均數得 (900 - 6k)/(20 - k) = 66。", "化簡為 900 - 6k = 1320 - 66k，所以 60k = 420。", "解得 k = 7。"],
-        "zh-Hans": ["原本总和是 20×45 = 900。", "设有 k 个 6 被移除，则剩余总和是 900 - 6k，剩余个数是 20 - k。", "由新平均数得 (900 - 6k)/(20 - k) = 66。", "化简为 900 - 6k = 1320 - 66k，所以 60k = 420。", "解得 k = 7。"],
-        "en": ["The original sum is 20×45 = 900.", "Let k be the number of 6s removed. Then the remaining sum is 900 - 6k and the remaining count is 20 - k.", "The new mean gives (900 - 6k)/(20 - k) = 66.", "So 900 - 6k = 1320 - 66k, which gives 60k = 420.", "Hence k = 7."],
-        "ja": ["もとの合計は 20×45 = 900 です。", "取り除いた 6 の個数を k とすると、残りの合計は 900 - 6k、個数は 20 - k です。", "新しい平均より (900 - 6k)/(20 - k) = 66。", "これを整理すると 900 - 6k = 1320 - 66k、よって 60k = 420。", "したがって k = 7 です。"]
+        "zh-Hant": [
+          "原本總和是 20×45 = 900。",
+          "設有 k 個 6 被移除，則剩餘總和是 900 - 6k，剩餘個數是 20 - k。",
+          "由新平均數得 (900 - 6k)/(20 - k) = 66。",
+          "化簡為 900 - 6k = 1320 - 66k，所以 60k = 420。",
+          "解得 k = 7。"
+        ],
+        "zh-Hans": [
+          "原本总和是 20×45 = 900。",
+          "设有 k 个 6 被移除，则剩余总和是 900 - 6k，剩余个数是 20 - k。",
+          "由新平均数得 (900 - 6k)/(20 - k) = 66。",
+          "化简为 900 - 6k = 1320 - 66k，所以 60k = 420。",
+          "解得 k = 7。"
+        ],
+        "en": [
+          "The original sum is 20×45 = 900.",
+          "Let k be the number of 6s removed. Then the remaining sum is 900 - 6k and the remaining count is 20 - k.",
+          "The new mean gives (900 - 6k)/(20 - k) = 66.",
+          "So 900 - 6k = 1320 - 66k, which gives 60k = 420.",
+          "Hence k = 7."
+        ],
+        "ja": [
+          "もとの合計は 20×45 = 900 です。",
+          "取り除いた 6 の個数を k とすると、残りの合計は 900 - 6k、個数は 20 - k です。",
+          "新しい平均より (900 - 6k)/(20 - k) = 66。",
+          "これを整理すると 900 - 6k = 1320 - 66k、よって 60k = 420。",
+          "したがって k = 7 です。"
+        ]
       },
-      "figure": { "type": "custom", "kind": "none", "params": {} },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
       "answerMode": "multiple_choice",
       "options": {
-        "A": { "zh-Hant": "4", "zh-Hans": "4", "en": "4", "ja": "4" },
-        "B": { "zh-Hant": "5", "zh-Hans": "5", "en": "5", "ja": "5" },
-        "C": { "zh-Hant": "6", "zh-Hans": "6", "en": "6", "ja": "6" },
-        "D": { "zh-Hant": "7", "zh-Hans": "7", "en": "7", "ja": "7" },
-        "E": { "zh-Hant": "8", "zh-Hans": "8", "en": "8", "ja": "8" }
+        "A": {
+          "zh-Hant": "4",
+          "zh-Hans": "4",
+          "en": "4",
+          "ja": "4"
+        },
+        "B": {
+          "zh-Hant": "5",
+          "zh-Hans": "5",
+          "en": "5",
+          "ja": "5"
+        },
+        "C": {
+          "zh-Hant": "6",
+          "zh-Hans": "6",
+          "en": "6",
+          "ja": "6"
+        },
+        "D": {
+          "zh-Hant": "7",
+          "zh-Hans": "7",
+          "en": "7",
+          "ja": "7"
+        },
+        "E": {
+          "zh-Hant": "8",
+          "zh-Hans": "8",
+          "en": "8",
+          "ja": "8"
+        }
       },
-      "correctAnswer": { "type": "choice", "value": "D" },
+      "correctAnswer": {
+        "type": "choice",
+        "value": "D"
+      },
       "source": {
         "type": "official_reference",
         "name": "AMC 12",
@@ -415,59 +826,93 @@
     },
     {
       "id": "algebra_grade11_foundation_009",
-      "reviewStatus": "pending",
       "topic": "algebra",
-      "subtopic": "log_exponential_equation",
+      "subtopic": "alternating_sum",
       "difficulty": "foundation",
       "levelStage": "grade11",
       "challengeTier": "foundation",
       "prompt": {
-        "zh-Hant": "求方程 x⁽ˡᵒᵍˣ⁾ = 10⁶ x 的所有正實數解。",
-        "zh-Hans": "求方程 x⁽ˡᵒᵍˣ⁾ = 10⁶ x 的所有正实数解。",
-        "en": "Find all positive real solutions of x⁽ˡᵒᵍˣ⁾ = 10⁶ x.",
-        "ja": "方程式 x⁽ˡᵒᵍˣ⁾ = 10⁶ x を満たすすべての正の実数解を求めなさい。"
+        "zh-Hant": "求 −1 + 2 − 3 + 4 − 5 + ⋯ − 2025 + 2026 的值（即 k 從 1 到 2026 的 Σ(−1)ᵏ · k）。",
+        "zh-Hans": "求 −1 + 2 − 3 + 4 − 5 + ⋯ − 2025 + 2026 的值（即 k 从 1 到 2026 的 Σ(−1)ᵏ · k）。",
+        "en": "Find the value of −1 + 2 − 3 + 4 − 5 + ⋯ − 2025 + 2026, that is Σ(−1)ᵏ · k for k from 1 to 2026.",
+        "ja": "−1 + 2 − 3 + 4 − 5 + ⋯ − 2025 + 2026 の値、すなわち k を 1 から 2026 まで動かした Σ(−1)ᵏ · k を求めなさい。"
       },
       "answer": {
-        "zh-Hant": "答案是 x = 10³ 或 x = 10⁻²。",
-        "zh-Hans": "答案是 x = 10³ 或 x = 10⁻²。",
-        "en": "The solutions are x = 10³ and x = 10⁻².",
-        "ja": "解は x = 10³ または x = 10⁻² です。"
+        "zh-Hant": "答案是 1013。",
+        "zh-Hans": "答案是 1013。",
+        "en": "The answer is 1013.",
+        "ja": "答えは 1013 です。"
       },
       "solutionSteps": {
-        "zh-Hant": ["因為 x > 0，可以兩邊取常用對數。", "得到 log(x⁽ˡᵒᵍˣ⁾) = log(10⁶ x)，也就是 (log x)² = 6 + log x。", "移項得 (log x)² - log x - 6 = 0。", "因式分解為 (log x - 3)(log x + 2) = 0，所以 log x = 3 或 -2。", "因此 x = 10³ 或 x = 10⁻²。"],
-        "zh-Hans": ["因为 x > 0，可以两边取常用对数。", "得到 log(x⁽ˡᵒᵍˣ⁾) = log(10⁶ x)，也就是 (log x)² = 6 + log x。", "移项得 (log x)² - log x - 6 = 0。", "因式分解为 (log x - 3)(log x + 2) = 0，所以 log x = 3 或 -2。", "因此 x = 10³ 或 x = 10⁻²。"],
-        "en": ["Since x > 0, we may take common logarithms of both sides.", "This gives log(x⁽ˡᵒᵍˣ⁾) = log(10⁶ x), so (log x)² = 6 + log x.", "Rearranging yields (log x)² - log x - 6 = 0.", "Factoring gives (log x - 3)(log x + 2) = 0, so log x = 3 or -2.", "Hence x = 10³ or x = 10⁻²."],
-        "ja": ["x > 0 なので、両辺の常用対数を取れます。", "すると log(x⁽ˡᵒᵍˣ⁾) = log(10⁶ x) で、(log x)² = 6 + log x。", "移項して (log x)² - log x - 6 = 0。", "これは (log x - 3)(log x + 2) = 0 と因数分解できるので、log x = 3 または -2。", "したがって x = 10³ または x = 10⁻² です。"]
+        "zh-Hant": [
+          "逐項相加有 2026 項，太多，所以要找能大量抵消的配對方式。",
+          "觀察符號規律：奇數項取負、偶數項取正，而且相鄰的一負一正剛好可以配成一組。",
+          "把式子兩兩分組：(−1 + 2) + (−3 + 4) + (−5 + 6) + ⋯ + (−2025 + 2026)。",
+          "每一組的值都是 +1，因為大的偶數恰好比前面那個奇數多 1。",
+          "接著數有幾組：總共 2026 項，每組 2 項，所以有 2026 ÷ 2 = 1013 組。",
+          "這裡要確認分組沒有剩下落單的項：因為 2026 是偶數，最後一項 2026 恰好是第 1013 組的第二項，剛好用完。",
+          "所以總和 = 1013 × 1 = 1013。",
+          "驗算：用小一點的情形檢查，−1 + 2 = 1（2 項、1 組）；−1 + 2 − 3 + 4 = 2（4 項、2 組），規律為項數的一半，吻合。"
+        ],
+        "zh-Hans": [
+          "逐项相加有 2026 项，太多，所以要找能大量抵消的配对方式。",
+          "观察符号规律：奇数项取负、偶数项取正，而且相邻的一负一正刚好可以配成一组。",
+          "把式子两两分组：(−1 + 2) + (−3 + 4) + (−5 + 6) + ⋯ + (−2025 + 2026)。",
+          "每一组的值都是 +1，因为大的偶数恰好比前面那个奇数多 1。",
+          "接着数有几组：总共 2026 项，每组 2 项，所以有 2026 ÷ 2 = 1013 组。",
+          "这里要确认分组没有剩下落单的项：因为 2026 是偶数，最后一项 2026 恰好是第 1013 组的第二项，刚好用完。",
+          "所以总和 = 1013 × 1 = 1013。",
+          "验算：用小一点的情形检查，−1 + 2 = 1（2 项、1 组）；−1 + 2 − 3 + 4 = 2（4 项、2 组），规律为项数的一半，吻合。"
+        ],
+        "en": [
+          "Adding 2026 terms one by one is impractical, so look for a pairing that produces massive cancellation.",
+          "Observe the sign pattern: odd-indexed terms are negative and even-indexed ones positive, and each adjacent negative-positive pair groups naturally.",
+          "Group the expression in pairs: (−1 + 2) + (−3 + 4) + (−5 + 6) + ⋯ + (−2025 + 2026).",
+          "Each group equals +1, because the larger even number exceeds the preceding odd number by exactly 1.",
+          "Count the groups: there are 2026 terms with 2 per group, so 2026 ÷ 2 = 1013 groups.",
+          "Confirm no term is left over: since 2026 is even, the final term 2026 is exactly the second element of group 1013, so the pairing is exact.",
+          "Hence the total is 1013 × 1 = 1013.",
+          "Check with smaller cases: −1 + 2 = 1 (2 terms, 1 group) and −1 + 2 − 3 + 4 = 2 (4 terms, 2 groups), matching the rule of half the number of terms."
+        ],
+        "ja": [
+          "2026 項を 1 つずつ足すのは大変なので、大きく打ち消し合う組の作り方を探します。",
+          "符号の規則を見ます：奇数番目は負、偶数番目は正で、隣り合う負と正がちょうど 1 組になります。",
+          "2 項ずつ組にします：(−1 + 2) + (−3 + 4) + (−5 + 6) + ⋯ + (−2025 + 2026)。",
+          "各組の値はすべて +1 です。大きい偶数が直前の奇数よりちょうど 1 大きいからです。",
+          "組の個数を数えます：全部で 2026 項、1 組 2 項なので 2026 ÷ 2 = 1013 組。",
+          "余る項がないことを確認します：2026 は偶数なので、最後の項 2026 はちょうど 1013 組目の 2 番目にあたり、過不足なく使い切ります。",
+          "したがって合計は 1013 × 1 = 1013。",
+          "検算：小さい場合で確かめると −1 + 2 = 1（2 項、1 組）、−1 + 2 − 3 + 4 = 2（4 項、2 組）となり、項数の半分という規則に一致します。"
+        ]
       },
-      "figure": { "type": "custom", "kind": "none", "params": {} },
-      "answerMode": "multiple_choice",
-      "options": {
-        "A": { "zh-Hant": "10³ 或 10⁻²", "zh-Hans": "10³ 或 10⁻²", "en": "10³ or 10⁻²", "ja": "10³ または 10⁻²" },
-        "B": { "zh-Hant": "10² 或 10⁻³", "zh-Hans": "10² 或 10⁻³", "en": "10² or 10⁻³", "ja": "10² または 10⁻³" },
-        "C": { "zh-Hant": "10⁵ 或 10⁻³", "zh-Hans": "10⁵ 或 10⁻³", "en": "10⁵ or 10⁻³", "ja": "10⁵ または 10⁻³" },
-        "D": { "zh-Hant": "10³ 或 10⁻⁵", "zh-Hans": "10³ 或 10⁻⁵", "en": "10³ or 10⁻⁵", "ja": "10³ または 10⁻⁵" }
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
       },
-      "correctAnswer": { "type": "choice", "value": "A" },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "1013"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 4
+      },
       "source": {
-        "type": "official_reference",
-        "name": "IMC",
-        "contest": "IMC Taiwan",
-        "year": "2026",
-        "round": "複賽",
-        "division": "11 年級",
-        "problemNumber": "選擇 3",
-        "reference": "22nd IMC Taiwan semifinal grade 11 choice 3",
-        "displayText": "IMC Taiwan 2026 複賽 11年級 選擇 3",
-        "sourceUrl": "https://imcct.net/UserFiles/news/583/20260413110023_4.pdf",
-        "rightsStatus": "needs_review",
-        "notes": "Rewritten from the official public competition PDF."
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "交錯正負的等差項求和，以相鄰兩項配對使每組化為定值的競賽題型",
+        "notes": "設計依據：轉折在於選對配對方式（相鄰一負一正而非首尾配對）使每組恰為 +1，並確認項數為偶數故無落單項。答案 1013 已用直接求和與配對法雙重驗證，並以 2 項、4 項的小情形檢查規律。屬同水準原創改寫，非抄錄特定官方題。原 009 與本 pack 的 007 為同一道 IMC Taiwan 2026 複賽 11年級選擇 3（x^(log x) = 10⁶x），連選項都完全相同，屬重複收錄。",
+        "displayText": "改寫題（交錯級數配對求和）"
       },
       "olympiadTaxonomy": {
         "topic": "代數",
         "topicCode": "algebra",
-        "subtopic": "對數指數方程",
-        "subtopicCode": "log_exponential_equation"
-      }
+        "subtopic": "交錯級數求和",
+        "subtopicCode": "alternating_sum"
+      },
+      "reviewStatus": "ok"
     }
   ]
 }
