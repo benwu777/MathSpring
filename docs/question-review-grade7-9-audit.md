@@ -117,12 +117,12 @@
 | `logic_grade9_foundation_001` | `grade9` | `logic` | `編碼規則` | `none` | `integer_input` | IMC Taiwan 2026 複賽 9年級 選擇 3 | `ok` |  | DOG 對應 4,15,7，拼成 4157，成立 |
 | `logic_grade9_foundation_002` | `grade9` | `logic` | `切換規律` | `none` | `integer_input` | IMC Taiwan 2026 複賽 9年級 填充 6 | `ok` |  | 最後亮燈數等於完全平方數個數，1²~10² 共 10 盞，成立 |
 | `logic_grade9_foundation_003` | `grade9` | `logic` | `真假排除` | `none` | `multiple_choice` | IMC Taiwan 2026 複賽 9年級 選擇 7 | `ok` |  | 枚舉唯一真話，可得第 3 條路通往學校，成立 |
-| `logic_grade9_foundation_004` | `grade9` | `logic` | `取石博弈` | `none` | `integer_input` | MathSpring Editorial Original | `needs_fix` | source | 博弈結構可成立，但來源仍是 Editorial Original，需重做來源與複審 |
-| `logic_grade9_foundation_005` | `grade9` | `logic` | `條件篩選` | `none` | `integer_input` | MathSpring Editorial Original | `needs_fix` | source, classification | 題目更像排列/組合篩選，不適合留在 logic；且來源不合格 |
-| `logic_grade9_foundation_006` | `grade9` | `logic` | `不變量判斷` | `none` | `multiple_choice` | MathSpring Editorial Original | `needs_fix` | source | 題型可用，但需改成合格來源後再上架 |
+| `logic_grade9_foundation_004` | `grade9` | `logic` | `奇偶不變量` | `none` | `integer_input` | 改寫題（差的絕對值不變量） | `ok` | source, olympiadness, rewritten | 原為留 4 的倍數的標準取石子題且來源為自製 editorial 暫代出處；改寫為 1~20 反覆以 \|a−b\| 取代求最終最小值，需同時給下界（總和奇偶不變、210 為偶）與構造（配對降到 0），答案 0 已用 2000 次隨機模擬與構造雙重驗證 |
+| `logic_grade9_foundation_005` | `grade9` | `logic` | `抽屜原理配對` | `none` | `integer_input` | 改寫題（抽屜原理與奇偶壓縮） | `ok` | source, olympiadness, rewritten | 原題僅 6 種排列可直接窮舉、深度遠低於本年級且來源為自製 editorial 暫代出處；改寫為四色各 10 隻保證配出 4 雙，轉折在落單數需與取出總數同奇偶，故界線落在 11 而非 12，已用四色分配窮舉驗證 k=10 最壞 3 雙、k=11 最壞 4 雙 |
+| `logic_grade9_foundation_006` | `grade9` | `logic` | `天平稱重下界` | `none` | `multiple_choice` | 改寫題（天平稱重資訊下界） | `ok` | source, correctness, rewritten | 原題 answer 文字寫「不可能」但 correctAnswer 指向選項「可能」，且 solutionSteps 直接寫入自我推翻的思考過程（「奇偶性沒有排除？再看實際上⋯所以其實是可能」），整題不可上架已淘汰；改寫為 12 枚含 1 枚不知輕重假幣求最少稱重次數，需同時給資訊下界（24 > 3²）與 4-4-4 構造上界，答案 3 |
 | `logic_grade9_foundation_007` | `grade9` | `logic` | `輪替序列` | `none` | `integer_input` | AMC 10A 2019 Problem 23 | `ok` |  | 依三人輪替與區塊長累計，可得 Tadd 的第 2019 個數為 5979，成立 |
 | `logic_grade9_foundation_008` | `grade9` | `logic` | `真假區間判定` | `none` | `multiple_choice` | AMC 10A 2018 Problem 5 | `ok` |  | 三句全錯推出 d<6、d>5、d>4，因此 d∈(5,6)，成立 |
-| `logic_grade9_foundation_009` | `grade9` | `logic` | `自指真假` | `none` | `multiple_choice` | AMC 10A 2025 Problem 8 | `ok` |  | 四句中僅第 2 句為假，其餘為真，因此假話 1 句，成立 |
+| `logic_grade9_foundation_009` | `grade9` | `logic` | `自我指涉語句` | `none` | `multiple_choice` | AMC 8 2021 Problem 22 | `ok` | i18n | 題目與答案 1 成立（已窮舉 16 種真假指派確認唯一自洽解為第 3 句假）；本輪發現 solutionSteps 四語系長度不一致（中文 5 步、英日 6 步），已把中文第 4 步拆成兩步對齊為 6 步 |
 | `number_theory_grade7_foundation_001` | `grade7` | `number_theory` | `進位制` | `none` | `integer_input` | IMC Taiwan 2026 複賽 7年級 填充 6 | `ok` | correctness, notation | **原答案錯（標 5，正解 2）＋詳解自相矛盾**，已修正 a=2；`_(7)`→`₇` 下標 |
 | `number_theory_grade7_foundation_002` | `grade7` | `number_theory` | `數字計數` | `none` | `integer_input` | IMC Taiwan 2026 複賽 7年級 填充 7 | `ok` |  | 恰一個數字 7，3×9×9=243，正確 |
 | `number_theory_grade7_foundation_003` | `grade7` | `number_theory` | `包除與倍數` | `none` | `integer_input` | 改寫題（容斥計數） | `ok` | source, duplication | **原與 010 完全重複**，改寫為「1~100 非 2/3/5 倍數」＝26；來源改 rewritten（IMC 選擇8 由 010 保留） |

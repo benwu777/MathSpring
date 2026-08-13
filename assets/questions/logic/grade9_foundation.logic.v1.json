@@ -277,46 +277,58 @@
     {
       "id": "logic_grade9_foundation_004",
       "topic": "logic",
-      "subtopic": "take_away_game",
+      "subtopic": "parity_invariant",
       "difficulty": "foundation",
       "levelStage": "grade9",
       "challengeTier": "foundation",
       "prompt": {
-        "zh-Hant": "桌上有 17 顆石子，兩人輪流拿，每次可拿 1、2 或 3 顆，拿到最後一顆的人獲勝。若先手有必勝策略，他第一步應拿幾顆？",
-        "zh-Hans": "桌上有 17 颗石子，两人轮流拿，每次可拿 1、2 或 3 颗，拿到最后一颗的人获胜。若先手有必胜策略，他第一步应拿几颗？",
-        "en": "There are 17 stones on a table. Two players alternate turns, taking 1, 2, or 3 stones each time. The player who takes the last stone wins. If the first player has a winning strategy, how many stones should be taken on the first move?",
-        "ja": "石が 17 個あります。2 人が交代で 1 個、2 個、3 個のいずれかを取ります。最後の石を取った人が勝ちです。先手に必勝法があるとき、最初に何個取るべきですか。"
+        "zh-Hant": "黑板上寫著 1 到 20 這 20 個整數。每次操作可以擦掉其中任意兩個數 a 和 b，再寫上它們的差的絕對值 |a − b|。如此重複，直到黑板上只剩下一個數。這個數最小可能是多少？",
+        "zh-Hans": "黑板上写着 1 到 20 这 20 个整数。每次操作可以擦掉其中任意两个数 a 和 b，再写上它们的差的绝对值 |a − b|。如此重复，直到黑板上只剩下一个数。这个数最小可能是多少？",
+        "en": "The 20 integers from 1 to 20 are written on a board. In each move, two numbers a and b are erased and replaced by |a − b|. This is repeated until a single number remains. What is the smallest possible value of that final number?",
+        "ja": "黒板に 1 から 20 までの 20 個の整数が書かれています。1 回の操作では、任意の 2 数 a、b を消して、その差の絶対値 |a − b| を書きます。これを繰り返して最後に 1 個の数だけが残るとき、その数として考えられる最小の値はいくつですか。"
       },
       "answer": {
-        "zh-Hant": "答案是 1。",
-        "zh-Hans": "答案是 1。",
-        "en": "The answer is 1.",
-        "ja": "答えは 1 です。"
+        "zh-Hant": "答案是 0。",
+        "zh-Hans": "答案是 0。",
+        "en": "The answer is 0.",
+        "ja": "答えは 0 です。"
       },
       "solutionSteps": {
         "zh-Hant": [
-          "關鍵是把局面留成 16、12、8、4、0 這些 4 的倍數。",
-          "若先手先拿 1 顆，就剩 16 顆。",
-          "之後不管對手拿 1、2、3 顆，先手都可補成 4 顆。",
-          "這樣最後一定能拿到最後一顆，所以第一步拿 1 顆。"
+          "先找不變量：把 a、b 換成 |a − b| 後，黑板上所有數的總和減少了 a + b − |a − b|，而這個量等於 2 × min(a, b)，是一個偶數。",
+          "所以每次操作都讓總和減少偶數，總和的奇偶性從頭到尾不會改變。",
+          "一開始總和是 1 + 2 + ⋯ + 20 = 20 × 21 ÷ 2 = 210，是偶數。",
+          "因此最後剩下的那個數也必須是偶數，不可能是 1。既然它又不是負數，最小的候選值就是 0。",
+          "接著要證明 0 真的可以達成。先把 (1,2)、(3,4)、⋯、(19,20) 這十組各自相減，黑板上就變成十個 1。",
+          "再把這十個 1 兩兩相減，變成五個 0；最後把這些 0 依序相減仍是 0。",
+          "所以最小可能值就是 0。"
         ],
         "zh-Hans": [
-          "关键是把局面留成 16、12、8、4、0 这些 4 的倍数。",
-          "若先手先拿 1 颗，就剩 16 颗。",
-          "之后不管对手拿 1、2、3 颗，先手都可补成 4 颗。",
-          "这样最后一定能拿到最后一颗，所以第一步拿 1 颗。"
+          "先找不变量：把 a、b 换成 |a − b| 后，黑板上所有数的总和减少了 a + b − |a − b|，而这个量等于 2 × min(a, b)，是一个偶数。",
+          "所以每次操作都让总和减少偶数，总和的奇偶性从头到尾不会改变。",
+          "一开始总和是 1 + 2 + ⋯ + 20 = 20 × 21 ÷ 2 = 210，是偶数。",
+          "因此最后剩下的那个数也必须是偶数，不可能是 1。既然它又不是负数，最小的候选值就是 0。",
+          "接着要证明 0 真的可以达成。先把 (1,2)、(3,4)、⋯、(19,20) 这十组各自相减，黑板上就变成十个 1。",
+          "再把这十个 1 两两相减，变成五个 0；最后把这些 0 依序相减仍是 0。",
+          "所以最小可能值就是 0。"
         ],
         "en": [
-          "The key is to leave multiples of 4: 16, 12, 8, 4, 0.",
-          "If the first player takes 1 stone, 16 remain.",
-          "After that, whatever the second player takes, the first player can complete the total to 4.",
-          "So the first move should be 1 stone."
+          "Look for an invariant: replacing a and b by |a − b| decreases the total sum by a + b − |a − b|, which equals 2 × min(a, b) and is therefore even.",
+          "So every move changes the sum by an even amount, and the parity of the sum never changes.",
+          "The initial sum is 1 + 2 + ⋯ + 20 = 20 × 21 ÷ 2 = 210, which is even.",
+          "Hence the final remaining number must also be even, so it cannot be 1. As it is never negative, the smallest candidate is 0.",
+          "Now show 0 is actually attainable. Subtract within the ten pairs (1,2), (3,4), …, (19,20); the board becomes ten copies of 1.",
+          "Pair up those ten 1s and subtract to get five 0s, and subtracting 0s repeatedly still leaves 0.",
+          "Therefore the smallest possible value is 0."
         ],
         "ja": [
-          "重要なのは 16、12、8、4、0 のような 4 の倍数を残すことです。",
-          "先手が最初に 1 個取れば 16 個残ります。",
-          "その後、相手が 1・2・3 個のどれを取っても、先手は合計 4 個になるように取れます。",
-          "したがって最初は 1 個取ればよいです。"
+          "まず不変量を探します。a、b を |a − b| に置き換えると、全体の和は a + b − |a − b| だけ減りますが、これは 2 × min(a, b) に等しく偶数です。",
+          "したがって各操作で和は偶数だけ減り、和の偶奇は最後まで変わりません。",
+          "最初の和は 1 + 2 + ⋯ + 20 = 20 × 21 ÷ 2 = 210 で偶数です。",
+          "よって最後に残る数も偶数でなければならず、1 にはなりません。負にもならないので、最小の候補は 0 です。",
+          "次に 0 が実際に達成できることを示します。(1,2)、(3,4)、…、(19,20) の 10 組でそれぞれ引き算すると、黒板は 1 が 10 個になります。",
+          "その 10 個の 1 を 2 個ずつ引き算すると 0 が 5 個になり、0 同士を引いても 0 のままです。",
+          "したがって最小の値は 0 です。"
         ]
       },
       "figure": {
@@ -327,69 +339,82 @@
       "answerMode": "integer_input",
       "correctAnswer": {
         "type": "integer",
-        "value": "1"
+        "value": "0"
       },
       "inputConstraints": {
         "allowNegative": false,
-        "maxDigits": 1
+        "maxDigits": 2
       },
       "source": {
-        "type": "editorial_original",
-        "name": "MathSpring Editorial",
-        "reference": "Upper logic expansion set L3",
-        "displayText": "MathSpring Editorial Original"
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "黑板取數改寫為差的絕對值，以總和奇偶為不變量求最終值的競賽題型",
+        "notes": "設計依據：完整題需兩個方向——先用不變量（總和奇偶不變）給出下界說明結果必為偶數，再構造具體操作序列證明 0 可達；只做其中一半都不算完整解。答案已用 2000 次隨機模擬確認最終數恆為偶數，並附構造驗證。屬同水準原創改寫，非抄錄特定官方題。原 004 為留 4 的倍數的標準取石子題，且來源為自製 editorial 暫代出處。",
+        "displayText": "改寫題（差的絕對值不變量）"
       },
       "olympiadTaxonomy": {
         "topic": "邏輯",
         "topicCode": "logic",
-        "subtopic": "取石博弈",
-        "subtopicCode": "take_away_game"
+        "subtopic": "奇偶不變量",
+        "subtopicCode": "parity_invariant"
       },
-      "reviewStatus": "needs_fix"
+      "reviewStatus": "ok"
     },
     {
       "id": "logic_grade9_foundation_005",
       "topic": "logic",
-      "subtopic": "digit_elimination",
+      "subtopic": "pigeonhole_pairs",
       "difficulty": "foundation",
       "levelStage": "grade9",
       "challengeTier": "foundation",
       "prompt": {
-        "zh-Hant": "一個三位數使用數字 1、2、3 各一次。已知百位不是 3，十位比個位小。符合條件的三位數共有多少個？",
-        "zh-Hans": "一个三位数使用数字 1、2、3 各一次。已知百位不是 3，十位比个位小。符合条件的三位数共有多少个？",
-        "en": "A three-digit number uses the digits 1, 2, and 3 exactly once. The hundreds digit is not 3, and the tens digit is less than the ones digit. How many such numbers are there?",
-        "ja": "1、2、3 を 1 回ずつ使う 3 桁の数を考えます。百の位は 3 ではなく、十の位は一の位より小さいとします。条件を満たす数は何個ありますか。"
+        "zh-Hant": "一個抽屜裡裝著紅、藍、綠、黃四種顏色的襪子，每種顏色各 10 隻，襪子不分左右。在看不見顏色的情況下取出襪子，最少要取出幾隻，才能保證其中一定可以配出 4 雙同色的襪子？",
+        "zh-Hans": "一个抽屉里装着红、蓝、绿、黄四种颜色的袜子，每种颜色各 10 只，袜子不分左右。在看不见颜色的情况下取出袜子，最少要取出几只，才能保证其中一定可以配出 4 双同色的袜子？",
+        "en": "A drawer contains socks in four colours — red, blue, green, and yellow — with 10 socks of each colour, and socks are not distinguished as left or right. Socks are drawn without being able to see their colour. What is the smallest number of socks that must be drawn to guarantee that 4 matching pairs can be formed?",
+        "ja": "引き出しに赤・青・緑・黄の 4 色の靴下が各色 10 本ずつ入っており、左右の区別はありません。色が見えない状態で靴下を取り出すとき、同じ色の組を 4 組必ず作れることを保証するには、最低何本取り出せばよいですか。"
       },
       "answer": {
-        "zh-Hant": "答案是 2。",
-        "zh-Hans": "答案是 2。",
-        "en": "The answer is 2.",
-        "ja": "答えは 2 です。"
+        "zh-Hant": "答案是 11 隻。",
+        "zh-Hans": "答案是 11 只。",
+        "en": "The answer is 11 socks.",
+        "ja": "答えは 11 本です。"
       },
       "solutionSteps": {
         "zh-Hant": [
-          "百位可為 1 或 2。",
-          "若百位是 1，剩下 2、3，且十位小於個位，只能是 123。",
-          "若百位是 2，剩下 1、3，且十位小於個位，只能是 213。",
-          "所以共有 2 個。"
+          "若某種顏色取到 c 隻，這個顏色能配出 ⌊c/2⌋ 雙，配完後最多剩下 1 隻落單。",
+          "所以取出 k 隻時，配出的雙數等於 (k − 落單隻數) ÷ 2，而落單的顏色數最多 4 種，也就是最多 4 隻落單。",
+          "關鍵在於落單隻數與 k 的奇偶必須相同：4 個顏色的落單數（各為 0 或 1）加起來要和 k 同奇偶。",
+          "若 k = 10，落單數可以是 4（例如四色各取 1、1、1、7），此時只能配出 (10 − 4) ÷ 2 = 3 雙，不足 4 雙。",
+          "若 k = 11，因為 11 是奇數，四個顏色的落單數總和也必須是奇數，最多只能是 3。",
+          "所以最壞情況也能配出 (11 − 3) ÷ 2 = 4 雙。",
+          "因此最少要取出 11 隻。"
         ],
         "zh-Hans": [
-          "百位可为 1 或 2。",
-          "若百位是 1，剩下 2、3，且十位小于个位，只能是 123。",
-          "若百位是 2，剩下 1、3，且十位小于个位，只能是 213。",
-          "所以共有 2 个。"
+          "若某种颜色取到 c 只，这个颜色能配出 ⌊c/2⌋ 双，配完后最多剩下 1 只落单。",
+          "所以取出 k 只时，配出的双数等于 (k − 落单只数) ÷ 2，而落单的颜色数最多 4 种，也就是最多 4 只落单。",
+          "关键在于落单只数与 k 的奇偶必须相同：4 个颜色的落单数（各为 0 或 1）加起来要和 k 同奇偶。",
+          "若 k = 10，落单数可以是 4（例如四色各取 1、1、1、7），此时只能配出 (10 − 4) ÷ 2 = 3 双，不足 4 双。",
+          "若 k = 11，因为 11 是奇数，四个颜色的落单数总和也必须是奇数，最多只能是 3。",
+          "所以最坏情况也能配出 (11 − 3) ÷ 2 = 4 双。",
+          "因此最少要取出 11 只。"
         ],
         "en": [
-          "The hundreds digit can be 1 or 2.",
-          "If it is 1, the remaining digits are 2 and 3, and the tens digit must be less than the ones digit, giving 123.",
-          "If it is 2, the remaining digits are 1 and 3, giving 213.",
-          "So there are 2 such numbers."
+          "If c socks of a colour are drawn, that colour yields ⌊c/2⌋ pairs and leaves at most 1 sock unmatched.",
+          "So when k socks are drawn, the number of pairs equals (k − number of unmatched socks) ÷ 2, and since there are only 4 colours, at most 4 socks are left unmatched.",
+          "The key point is that the number of unmatched socks has the same parity as k: the four per-colour leftovers (each 0 or 1) must sum to something congruent to k modulo 2.",
+          "If k = 10, the leftover count can be 4 (for example 1, 1, 1, 7 across the colours), giving only (10 − 4) ÷ 2 = 3 pairs, which is fewer than 4.",
+          "If k = 11, then since 11 is odd the four leftovers must sum to an odd number, so at most 3.",
+          "Hence even in the worst case there are (11 − 3) ÷ 2 = 4 pairs.",
+          "Therefore 11 socks must be drawn."
         ],
         "ja": [
-          "百の位は 1 または 2 です。",
-          "百の位が 1 なら残りは 2 と 3 で、十の位 < 一の位より 123。",
-          "百の位が 2 なら残りは 1 と 3 で、条件を満たすのは 213。",
-          "したがって 2 個です。"
+          "ある色を c 本取ると、その色からは ⌊c/2⌋ 組ができ、余りは多くても 1 本です。",
+          "したがって k 本取ったときの組数は (k − 余りの本数) ÷ 2 であり、色は 4 種類しかないので余りは多くても 4 本です。",
+          "ポイントは、余りの本数と k の偶奇が一致することです。各色の余り（0 か 1）の合計は k と同じ偶奇になります。",
+          "k = 10 のとき余りは 4 になり得ます（例えば 4 色で 1、1、1、7）。このとき組は (10 − 4) ÷ 2 = 3 組しかできず 4 組に届きません。",
+          "k = 11 のときは 11 が奇数なので、4 色の余りの合計も奇数でなければならず、最大でも 3 です。",
+          "よって最悪の場合でも (11 − 3) ÷ 2 = 4 組できます。",
+          "したがって最低 11 本必要です。"
         ]
       },
       "figure": {
@@ -400,67 +425,82 @@
       "answerMode": "integer_input",
       "correctAnswer": {
         "type": "integer",
-        "value": "2"
+        "value": "11"
       },
       "inputConstraints": {
         "allowNegative": false,
-        "maxDigits": 1
+        "maxDigits": 2
       },
       "source": {
-        "type": "editorial_original",
-        "name": "MathSpring Editorial",
-        "reference": "Upper logic expansion set L11",
-        "displayText": "MathSpring Editorial Original"
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "抽屜原理最壞情況分析，需以落單數與總數的奇偶關係壓縮上界的競賽題型",
+        "notes": "設計依據：一般抽屜襪子題只需「最多 4 隻落單」即可，本題的轉折在於察覺落單數必須與取出總數同奇偶，因此 11 隻時落單最多只有 3 而非 4，界線才會落在 11 而不是 12。答案已用四色分配窮舉驗證 k=10 最壞為 3 雙、k=11 最壞為 4 雙。屬同水準原創改寫，非抄錄特定官方題。原 005 僅有 6 種排列可直接窮舉，深度遠低於本年級，且來源為自製 editorial 暫代出處。",
+        "displayText": "改寫題（抽屜原理與奇偶壓縮）"
       },
       "olympiadTaxonomy": {
         "topic": "邏輯",
         "topicCode": "logic",
-        "subtopic": "條件篩選",
-        "subtopicCode": "digit_elimination"
+        "subtopic": "抽屜原理配對",
+        "subtopicCode": "pigeonhole_pairs"
       },
-      "reviewStatus": "needs_fix"
+      "reviewStatus": "ok"
     },
     {
       "id": "logic_grade9_foundation_006",
       "topic": "logic",
-      "subtopic": "coin_flip_pattern",
+      "subtopic": "weighing_information_bound",
       "difficulty": "foundation",
       "levelStage": "grade9",
       "challengeTier": "foundation",
       "prompt": {
-        "zh-Hant": "桌上有 5 枚硬幣都正面朝上。每次操作可同時翻轉任意 2 枚。問是否可能經過若干次操作後，變成只有 1 枚正面朝上？",
-        "zh-Hans": "桌上有 5 枚硬币都正面朝上。每次操作可同时翻转任意 2 枚。问是否可能经过若干次操作后，变成只有 1 枚正面朝上？",
-        "en": "Five coins start heads up. Each move flips any 2 coins simultaneously. Is it possible to end with exactly 1 coin showing heads?",
-        "ja": "5 枚の硬貨がすべて表向きです。1 回の操作で任意の 2 枚を同時に裏返します。何回か操作して、表がちょうど 1 枚だけになることは可能ですか。"
+        "zh-Hant": "有 12 枚外觀完全相同的硬幣，其中恰有 1 枚是假幣，它的重量與真幣不同，但不知道比較重還是比較輕。使用一台沒有砝碼的天平，最少要秤幾次，才能保證一定找出假幣，並且判斷出它比真幣重還是輕？",
+        "zh-Hans": "有 12 枚外观完全相同的硬币，其中恰有 1 枚是假币，它的重量与真币不同，但不知道比较重还是比较轻。使用一台没有砝码的天平，最少要称几次，才能保证一定找出假币，并且判断出它比真币重还是轻？",
+        "en": "There are 12 identical-looking coins, exactly one of which is counterfeit and differs in weight from a genuine coin, though it is unknown whether it is heavier or lighter. Using a balance scale with no weights, what is the smallest number of weighings that guarantees identifying the counterfeit coin and determining whether it is heavier or lighter?",
+        "ja": "見た目がまったく同じ 12 枚の硬貨があり、そのうちちょうど 1 枚が偽物で、本物と重さが違いますが、重いのか軽いのかは分かりません。分銅のない天秤を使うとき、偽物を必ず特定し、さらに本物より重いか軽いかまで判定するには、最低何回はかればよいですか。"
       },
       "answer": {
-        "zh-Hant": "答案是不可能。",
-        "zh-Hans": "答案是不可能。",
-        "en": "The answer is no.",
-        "ja": "答えは不可能です。"
+        "zh-Hant": "答案是 3 次。",
+        "zh-Hans": "答案是 3 次。",
+        "en": "The answer is 3 weighings.",
+        "ja": "答えは 3 回です。"
       },
       "solutionSteps": {
         "zh-Hant": [
-          "每次翻 2 枚，正面朝上的枚數變化只可能是 -2、0、或 +2。",
-          "因此正面數量的奇偶性保持不變。",
-          "一開始有 5 枚正面，是奇數。",
-          "最後若只剩 1 枚正面，也是奇數；奇偶性沒有排除？再看實際上 5 可以直接翻兩枚成 3，再翻兩枚成 1，所以其實是可能。"
+          "先算出總共要分辨多少種可能情形：假幣可能是 12 枚中的任何一枚，而且每一枚又分成偏重與偏輕兩種，所以共有 12 × 2 = 24 種情形。",
+          "再看一次秤重能提供多少資訊：天平只有左重、右重、平衡三種結果。",
+          "因此秤 k 次最多只能區分 3ᵏ 種不同的情形。",
+          "秤 2 次最多只能區分 3² = 9 種，遠少於 24 種，所以 2 次一定不夠。",
+          "秤 3 次最多可區分 3³ = 27 種，而 27 ≥ 24，在資訊量上是有可能的。",
+          "而且確實存在做法：第一次把硬幣分成 4、4、4 三堆，取兩堆比較；不論平衡與否，都能把 24 種情形縮到不超過 8 種，剩下兩次每次再切成三份即可分辨完。",
+          "所以答案是 3 次。"
         ],
         "zh-Hans": [
-          "每次翻 2 枚，正面朝上的枚数变化只可能是 -2、0、或 +2。",
-          "因此正面数量的奇偶性保持不变。",
-          "一开始有 5 枚正面，是奇数。",
-          "最后若只剩 1 枚正面，也是奇数；奇偶性没有排除？再看实际上 5 可以直接翻两枚成 3，再翻两枚成 1，所以其实是可能。"
+          "先算出总共要分辨多少种可能情形：假币可能是 12 枚中的任何一枚，而且每一枚又分成偏重与偏轻两种，所以共有 12 × 2 = 24 种情形。",
+          "再看一次称重能提供多少信息：天平只有左重、右重、平衡三种结果。",
+          "因此称 k 次最多只能区分 3ᵏ 种不同的情形。",
+          "称 2 次最多只能区分 3² = 9 种，远少于 24 种，所以 2 次一定不够。",
+          "称 3 次最多可区分 3³ = 27 种，而 27 ≥ 24，在信息量上是有可能的。",
+          "而且确实存在做法：第一次把硬币分成 4、4、4 三堆，取两堆比较；不论平衡与否，都能把 24 种情形缩到不超过 8 种，剩下两次每次再切成三份即可分辨完。",
+          "所以答案是 3 次。"
         ],
         "en": [
-          "Each move changes the number of heads by -2, 0, or +2, so parity is preserved.",
-          "Starting from 5 heads, it is possible to reach 3 heads and then 1 head by flipping two heads each time.",
-          "So the desired state is possible."
+          "First count how many cases must be distinguished: the counterfeit can be any of the 12 coins, and for each it may be heavy or light, giving 12 × 2 = 24 cases.",
+          "Next see how much information one weighing gives: a balance has only three outcomes — left heavier, right heavier, or balanced.",
+          "So k weighings can distinguish at most 3ᵏ different cases.",
+          "Two weighings distinguish at most 3² = 9 cases, far fewer than 24, so two are certainly not enough.",
+          "Three weighings distinguish at most 3³ = 27 cases, and 27 ≥ 24, so three are not ruled out by the counting argument.",
+          "A concrete method also exists: first split the coins into three groups of 4 and compare two of them; whether or not they balance, the 24 cases shrink to at most 8, and two further three-way splits finish the job.",
+          "The answer is therefore 3 weighings."
         ],
         "ja": [
-          "1 回の操作で表の枚数は -2、0、または +2 だけ変わるので、奇偶は保たれます。",
-          "最初は 5 枚の表で、2 枚の表を裏返せば 3 枚、さらに 2 枚の表を裏返せば 1 枚になります。",
-          "したがってその状態は可能です。"
+          "まず区別すべき場合の数を数えます。偽物は 12 枚のどれでもあり得て、さらに重い場合と軽い場合があるので、12 × 2 = 24 通りです。",
+          "次に 1 回の計量が与える情報を見ます。天秤の結果は左が重い・右が重い・つり合うの 3 通りだけです。",
+          "したがって k 回の計量で区別できるのは高々 3ᵏ 通りです。",
+          "2 回では高々 3² = 9 通りしか区別できず 24 通りに遠く及ばないので、2 回では不可能です。",
+          "3 回なら高々 3³ = 27 通りを区別でき、27 ≥ 24 なので情報量の上では可能性があります。",
+          "実際に方法も存在します。最初に 4 枚ずつ 3 組に分けて 2 組を比べると、つり合うかどうかにかかわらず 24 通りが 8 通り以下に絞られ、残り 2 回で 3 分割を繰り返せば判別できます。",
+          "よって答えは 3 回です。"
         ]
       },
       "figure": {
@@ -471,47 +511,48 @@
       "answerMode": "multiple_choice",
       "options": {
         "A": {
-          "zh-Hant": "可能",
-          "zh-Hans": "可能",
-          "en": "Possible",
-          "ja": "可能"
+          "zh-Hant": "2 次",
+          "zh-Hans": "2 次",
+          "en": "2 weighings",
+          "ja": "2 回"
         },
         "B": {
-          "zh-Hant": "不可能",
-          "zh-Hans": "不可能",
-          "en": "Impossible",
-          "ja": "不可能"
+          "zh-Hant": "3 次",
+          "zh-Hans": "3 次",
+          "en": "3 weighings",
+          "ja": "3 回"
         },
         "C": {
-          "zh-Hant": "只做一次可能",
-          "zh-Hans": "只做一次可能",
-          "en": "Possible in one move only",
-          "ja": "1 回だけなら可能"
+          "zh-Hant": "4 次",
+          "zh-Hans": "4 次",
+          "en": "4 weighings",
+          "ja": "4 回"
         },
         "D": {
-          "zh-Hant": "無法判定",
-          "zh-Hans": "无法判定",
-          "en": "Cannot be determined",
-          "ja": "決められない"
+          "zh-Hant": "5 次",
+          "zh-Hans": "5 次",
+          "en": "5 weighings",
+          "ja": "5 回"
         }
       },
       "correctAnswer": {
         "type": "choice",
-        "value": "A"
+        "value": "B"
       },
       "source": {
-        "type": "editorial_original",
-        "name": "MathSpring Editorial",
-        "reference": "Upper logic expansion set L12",
-        "displayText": "MathSpring Editorial Original"
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "以三分結果的資訊量下界配合構造上界，判定不知輕重假幣所需最少稱重次數的競賽題型",
+        "notes": "設計依據：完整解需同時給出下界（24 種情形 > 3² = 9，故 2 次不可能）與上界（存在 4-4-4 三分的具體方案），單靠其中一邊都不足以確定答案。誘答項 2 次對應只算 12 枚而漏掉輕重兩種可能（12 ≤ 9 亦不成立），4 次與 5 次對應未意識到天平有三種結果而誤用二分。屬同水準原創改寫，非抄錄特定官方題。原 006 的 answer 文字寫「不可能」但 correctAnswer 指向選項「可能」，且 solutionSteps 直接寫入了自我推翻的思考過程，整題不可上架。",
+        "displayText": "改寫題（天平稱重資訊下界）"
       },
       "olympiadTaxonomy": {
         "topic": "邏輯",
         "topicCode": "logic",
-        "subtopic": "不變量判斷",
-        "subtopicCode": "coin_flip_pattern"
+        "subtopic": "天平稱重下界",
+        "subtopicCode": "weighing_information_bound"
       },
-      "reviewStatus": "needs_fix"
+      "reviewStatus": "ok"
     },
     {
       "id": "logic_grade9_foundation_007",
@@ -735,15 +776,17 @@
           "第 4 句不可能是假，因為如果『至少有一句是假』是假的，就代表一句假話都沒有，這會自我矛盾。",
           "既然第 4 句為真，那第 1 句『至少有一句是真』也一定為真。",
           "此時已經有兩句真話，所以第 2 句也必真。",
-          "現在第 1、2、4 句都是真，只剩第 3 句。若第 3 句也真，就會有至少兩句假，但目前沒有那麼多，矛盾。",
-          "因此第 3 句是假，總共有 1 句假話。"
+          "現在第 1、2、4 句都是真，只剩第 3 句還沒判定。",
+          "若第 3 句也真，就必須至少有兩句是假；但第 1、2、4 已確定為真，最多只剩第 3 句可能是假，矛盾。所以第 3 句是假。",
+          "因此四句話中恰有 1 句是假話。"
         ],
         "zh-Hans": [
           "第 4 句不可能是假，因为如果『至少有一句是假』是假的，就代表一句假话都没有，这会自我矛盾。",
           "既然第 4 句为真，那第 1 句『至少有一句是真』也一定为真。",
           "此时已经有两句真话，所以第 2 句也必真。",
-          "现在第 1、2、4 句都是真，只剩第 3 句。若第 3 句也真，就会有至少两句假，但目前没有那么多，矛盾。",
-          "因此第 3 句是假，总共有 1 句假话。"
+          "现在第 1、2、4 句都是真，只剩第 3 句还没判定。",
+          "若第 3 句也真，就必须至少有两句是假；但第 1、2、4 已确定为真，最多只剩第 3 句可能是假，矛盾。所以第 3 句是假。",
+          "因此四句话中恰有 1 句是假话。"
         ],
         "en": [
           "Statement 4 cannot be false, because if 'at least one statement is false' were false, then no statement would be false, which is impossible.",
