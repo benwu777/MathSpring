@@ -2344,6 +2344,456 @@
         "subtopicCode": "key_lock_worst_case"
       },
       "reviewStatus": "ok"
+    },
+    {
+      "id": "logic_grade7_foundation_026",
+      "topic": "logic",
+      "subtopic": "snail_well_boundary",
+      "difficulty": "foundation",
+      "levelStage": "grade7",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一口井深 10 公尺。一隻蝸牛從井底開始往上爬，白天可以爬 3 公尺，但夜裡會滑下 2 公尺。若蝸牛從第 1 天的白天開始爬，牠在第幾天爬出井口？",
+        "zh-Hans": "一口井深 10 米。一只蜗牛从井底开始往上爬，白天可以爬 3 米，但夜里会滑下 2 米。若蜗牛从第 1 天的白天开始爬，它在第几天爬出井口？",
+        "en": "A well is 10 metres deep. A snail starts climbing from the bottom, rising 3 metres during the day but sliding down 2 metres at night. If it starts climbing on the daytime of day 1, on which day does it get out of the well?",
+        "ja": "深さ 10 m の井戸があります。カタツムリが底から登り始め、昼は 3 m 登りますが、夜は 2 m 滑り落ちます。1 日目の昼から登り始めるとき、井戸から出るのは何日目ですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是第 8 天。",
+        "zh-Hans": "答案是第 8 天。",
+        "en": "The answer is day 8.",
+        "ja": "答えは 8 日目です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "最容易犯的錯是這樣算：一天淨爬 3 − 2 = 1 公尺，井深 10 公尺，所以要 10 天。**這是錯的**，因為它假設蝸牛每一天都會滑下來。",
+          "關鍵在於：一旦蝸牛在白天爬到井口，牠就出去了，**當天晚上不會再滑下來**。所以最後一天必須另外處理，不能套用「淨爬 1 公尺」的規律。",
+          "正確的想法是：先問「哪一天的白天，蝸牛能一口氣爬到 10 公尺？」白天能爬 3 公尺，所以只要白天開始時的高度達到 10 − 3 = 7 公尺就夠了。",
+          "接著算什麼時候能到 7 公尺。在還沒爬出去的那些日子裡，每一天結束時確實淨爬 1 公尺。",
+          "所以第 1 天結束時在 1 公尺、第 2 天結束時在 2 公尺、⋯ 第 7 天結束時在 7 公尺。",
+          "到了第 8 天白天，蝸牛從 7 公尺往上爬 3 公尺，正好到達 10 公尺——爬出井口了。",
+          "所以答案是第 8 天，而不是第 10 天。",
+          "驗算：程式逐日模擬（白天 +3，若未達 10 則夜裡 −2），得到第 1 到第 7 天結束時高度依序為 1、2、3、4、5、6、7 公尺，第 8 天白天爬到 10 公尺離開 ✓。這類「最後一步不再回退」的邊界效應，是週期性過程最常被忽略的地方。"
+        ],
+        "zh-Hans": [
+          "最容易犯的错是这样算：一天净爬 3 − 2 = 1 米，井深 10 米，所以要 10 天。**这是错的**，因为它假设蜗牛每一天都会滑下来。",
+          "关键在于：一旦蜗牛在白天爬到井口，它就出去了，**当天晚上不会再滑下来**。所以最后一天必须另外处理，不能套用「净爬 1 米」的规律。",
+          "正确的想法是：先问「哪一天的白天，蜗牛能一口气爬到 10 米？」白天能爬 3 米，所以只要白天开始时的高度达到 10 − 3 = 7 米就够了。",
+          "接着算什么时候能到 7 米。在还没爬出去的那些日子里，每一天结束时确实净爬 1 米。",
+          "所以第 1 天结束时在 1 米、第 2 天结束时在 2 米、⋯ 第 7 天结束时在 7 米。",
+          "到了第 8 天白天，蜗牛从 7 米往上爬 3 米，正好到达 10 米——爬出井口了。",
+          "所以答案是第 8 天，而不是第 10 天。",
+          "验算：程序逐日模拟（白天 +3，若未达 10 则夜里 −2），得到第 1 到第 7 天结束时高度依序为 1、2、3、4、5、6、7 米，第 8 天白天爬到 10 米离开 ✓。这类「最后一步不再回退」的边界效应，是周期性过程最常被忽略的地方。"
+        ],
+        "en": [
+          "The easiest mistake is to reason that the snail nets 3 − 2 = 1 metre per day, so a 10-metre well takes 10 days. That is wrong, because it assumes the snail slides back every single day.",
+          "The key point is that once the snail reaches the top during the day it is out, and it does not slide back that night. So the final day must be handled separately and cannot follow the net-1-metre rule.",
+          "The right approach is to ask which day's climb can carry the snail all the way to 10 metres. Since it climbs 3 metres by day, starting that day at a height of 10 − 3 = 7 metres suffices.",
+          "Now find when it reaches 7 metres. On every day before it escapes, the net gain really is 1 metre.",
+          "So it ends day 1 at 1 metre, day 2 at 2 metres, and so on, ending day 7 at 7 metres.",
+          "On the daytime of day 8 it climbs from 7 metres up by 3 metres, reaching exactly 10 metres and leaving the well.",
+          "So the answer is day 8, not day 10.",
+          "Check: simulating day by day — climb 3, and if 10 is not reached, slide 2 — gives end-of-day heights 1, 2, 3, 4, 5, 6 and 7 metres for days 1 to 7, with escape during day 8. This kind of boundary effect, where the last step no longer reverses, is the most commonly overlooked feature of repeating processes."
+        ],
+        "ja": [
+          "最も陥りやすい誤りはこうです：1 日で正味 3 − 2 = 1 m 登るから、深さ 10 m なら 10 日かかる。**これは誤り**で、カタツムリが毎日必ず滑り落ちると仮定しているからです。",
+          "要点は、昼のうちに井戸の口に達すれば外に出てしまい、**その夜はもう滑り落ちない**ことです。したがって最終日は別扱いとし、「正味 1 m」の規則を当てはめてはいけません。",
+          "正しい考え方は、「どの日の昼に一気に 10 m まで登れるか」を問うことです。昼は 3 m 登れるので、その日の朝の高さが 10 − 3 = 7 m に達していれば十分です。",
+          "次に 7 m に到達する時期を求めます。まだ脱出していない日々では、確かに 1 日あたり正味 1 m 上がります。",
+          "したがって 1 日目の終わりに 1 m、2 日目の終わりに 2 m、⋯、7 日目の終わりに 7 m となります。",
+          "8 日目の昼、7 m から 3 m 登ってちょうど 10 m に達し、井戸から出ます。",
+          "よって答えは 10 日目ではなく 8 日目です。",
+          "検算：1 日ずつ模擬（昼に +3、10 に達しなければ夜に −2）すると、1〜7 日目の終わりの高さは 1、2、3、4、5、6、7 m となり、8 日目の昼に 10 m に達して脱出します ✓。この「最後の一歩では戻らない」という境界の効果は、繰り返し過程で最も見落とされやすい点です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "8"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "週期過程的邊界效應：淨變化量只適用於未達成目標的日子，達成的那一天不再回退",
+        "notes": "設計依據：井深 10 與日爬 3、夜滑 2 使錯誤答案 10 天與正解 8 天差距明顯，且正解不等於任何簡單除法的結果；詳解以「哪一天的白天能一口氣到頂」反推門檻高度 7，而非逐日硬算。答案 8 已用逐日模擬獨立驗證並列出每日高度。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（邊界效應）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "邏輯",
+        "topicCode": "logic",
+        "subtopic": "邊界效應",
+        "subtopicCode": "snail_well_boundary"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "logic_grade7_foundation_027",
+      "topic": "logic",
+      "subtopic": "three_switches_one_bulb",
+      "difficulty": "foundation",
+      "levelStage": "grade7",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "樓下有三個外觀相同的開關，其中恰有一個能控制樓上房間裡的一顆白熾燈泡，另外兩個不接任何東西。在樓下時看不到樓上的燈亮不亮，而且上樓看過之後就不能再下樓改開關。若可以隨意撥動開關並等待任意時間，最少上樓幾次就一定能確定是哪一個開關控制那顆燈泡？",
+        "zh-Hans": "楼下有三个外观相同的开关，其中恰有一个能控制楼上房间里的一颗白炽灯泡，另外两个不接任何东西。在楼下时看不到楼上的灯亮不亮，而且上楼看过之后就不能再下楼改开关。若可以随意拨动开关并等待任意时间，最少上楼几次就一定能确定是哪一个开关控制那颗灯泡？",
+        "en": "Downstairs there are three identical switches, exactly one of which controls an incandescent bulb in a room upstairs; the other two are connected to nothing. From downstairs you cannot see whether the bulb is lit, and once you go upstairs to look you may not come back down to change the switches. If you may flip the switches freely and wait as long as you like beforehand, what is the minimum number of trips upstairs that guarantees identifying the switch?",
+        "ja": "階下に見た目の同じスイッチが 3 つあり、そのうちちょうど 1 つが階上の部屋にある白熱電球を制御し、残りの 2 つは何にもつながっていません。階下からは電球が点いているか見えず、階上へ見に行った後は階下に戻ってスイッチを変えることはできません。スイッチは自由に操作でき、好きなだけ待てるとき、どのスイッチが電球を制御しているかを必ず特定するには、最低何回階上へ行けばよいですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 1 次。",
+        "zh-Hans": "答案是 1 次。",
+        "en": "The answer is 1.",
+        "ja": "答えは 1 回です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "先想清楚困難在哪裡：上樓一次只能看到燈「亮」或「不亮」兩種狀態，但要區分的開關有三個。**兩種狀態不夠分辨三種可能**，所以直覺會認為至少要上樓兩次。",
+          "但題目特別點明燈泡是**白熾燈泡**——這種燈泡通電後會發熱，關掉之後燈罩仍會保持一段時間的溫熱。",
+          "這代表除了「亮或不亮」之外，還有第二個可以觀察的訊號：燈泡是「熱的」還是「冷的」。",
+          "把兩個訊號合起來，一次上樓就能分辨出 2 × 2 = 4 種情況，已經超過需要區分的 3 種，所以理論上一次就夠。",
+          "具體做法是：先打開第一個開關，等待夠久讓燈泡發熱（例如 10 分鐘）；接著關掉第一個開關，立刻打開第二個開關；然後馬上上樓。",
+          "上樓後判斷：若燈是亮的，那就是第二個開關（它現在通著電）。",
+          "若燈不亮但摸起來是溫熱的，那就是第一個開關（它剛剛通過電，還沒冷卻）；若燈既不亮又是冷的，那就是完全沒被打開過的第三個開關。",
+          "三種情況都被唯一區分開來，所以最少上樓 1 次。這題的重點是：**當可觀察的狀態不夠時，先找出題目裡還沒被利用的物理訊息**，而不是急著增加嘗試次數。"
+        ],
+        "zh-Hans": [
+          "先想清楚困难在哪里：上楼一次只能看到灯「亮」或「不亮」两种状态，但要区分的开关有三个。**两种状态不够分辨三种可能**，所以直觉会认为至少要上楼两次。",
+          "但题目特别点明灯泡是**白炽灯泡**——这种灯泡通电后会发热，关掉之后灯罩仍会保持一段时间的温热。",
+          "这代表除了「亮或不亮」之外，还有第二个可以观察的信号：灯泡是「热的」还是「冷的」。",
+          "把两个信号合起来，一次上楼就能分辨出 2 × 2 = 4 种情况，已经超过需要区分的 3 种，所以理论上一次就够。",
+          "具体做法是：先打开第一个开关，等待够久让灯泡发热（例如 10 分钟）；接着关掉第一个开关，立刻打开第二个开关；然后马上上楼。",
+          "上楼后判断：若灯是亮的，那就是第二个开关（它现在通着电）。",
+          "若灯不亮但摸起来是温热的，那就是第一个开关（它刚刚通过电，还没冷却）；若灯既不亮又是冷的，那就是完全没被打开过的第三个开关。",
+          "三种情况都被唯一区分开来，所以最少上楼 1 次。这题的重点是：**当可观察的状态不够时，先找出题目里还没被利用的物理信息**，而不是急着增加尝试次数。"
+        ],
+        "en": [
+          "First see where the difficulty lies: one trip upstairs reveals only whether the bulb is on or off, two states, while three switches must be distinguished. Two states cannot separate three possibilities, so intuition suggests at least two trips.",
+          "But the problem specifically says the bulb is incandescent, and such a bulb heats up while powered and stays warm for a while after being switched off.",
+          "That means there is a second observable signal besides on-or-off, namely whether the bulb is warm or cold.",
+          "Combining the two signals, a single trip can distinguish 2 × 2 = 4 cases, more than the 3 that need separating, so one trip should suffice.",
+          "Concretely: turn on the first switch and wait long enough for the bulb to heat up, say ten minutes; then turn the first switch off and immediately turn the second one on; then go straight upstairs.",
+          "On arriving, if the bulb is lit, the second switch controls it, since that is the one currently powered.",
+          "If the bulb is dark but warm to the touch, the first switch controls it, having been powered until moments ago; and if the bulb is both dark and cold, it must be the third switch, which was never turned on.",
+          "All three cases are uniquely separated, so the minimum is 1 trip. The lesson is that when the observable states are too few, look for physical information in the problem that has not yet been used, rather than reaching for more attempts."
+        ],
+        "ja": [
+          "まず難しさの所在を整理します。階上へ 1 回行っても分かるのは電球が「点いている」か「点いていない」かの 2 状態だけですが、区別すべきスイッチは 3 つあります。**2 状態では 3 通りを区別できない**ため、直感的には 2 回必要に思えます。",
+          "しかし問題文はわざわざ**白熱電球**と述べています。この種の電球は通電すると発熱し、消した後もしばらく温かいままです。",
+          "つまり「点灯・消灯」以外に、電球が「熱い」か「冷たい」かという第 2 の観測可能な信号があるのです。",
+          "2 つの信号を合わせると、1 回の訪問で 2 × 2 = 4 通りを区別でき、必要な 3 通りを上回るので、理論上 1 回で足ります。",
+          "具体的な手順：まず 1 番目のスイッチを入れ、電球が十分熱くなるまで待ちます（たとえば 10 分）。次に 1 番目を切り、ただちに 2 番目を入れ、すぐ階上へ行きます。",
+          "到着後の判断：点いていれば 2 番目のスイッチです（今まさに通電しているため）。",
+          "消えていて触ると温かければ 1 番目のスイッチ（直前まで通電しており、まだ冷めていない）。消えていて冷たければ、一度も入れていない 3 番目のスイッチです。",
+          "3 通りすべてが一意に区別されるので、最低 1 回です。本問の要点は、**観測できる状態が足りないときは、まだ使っていない物理的な情報を問題文から探す**ことであり、試行回数を増やすことではありません。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "1"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "資訊量的比較：可觀察狀態數必須不少於待區分的可能數，燈泡的餘溫提供了第二個獨立訊號",
+        "notes": "設計依據：三個開關對上「亮／不亮」兩種狀態，使資訊量不足成為題目的核心矛盾，答案 1 之所以不顯然正是因為直覺答案是 2；詳解先做狀態數的比較（2 × 2 = 4 ≥ 3）再給操作步驟，讓做法有理由而不是憑巧思。題幹刻意寫明「白熾燈泡」，餘溫這個關鍵條件在題目中已明示而非額外假設。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（資訊量與判斷）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "邏輯",
+        "topicCode": "logic",
+        "subtopic": "資訊量與判斷",
+        "subtopicCode": "three_switches_one_bulb"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "logic_grade7_foundation_028",
+      "topic": "logic",
+      "subtopic": "race_heats_minimum",
+      "difficulty": "foundation",
+      "levelStage": "grade7",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "有 9 匹馬，跑步速度兩兩不同且每匹馬每次跑出的成績都一樣。跑道只有 3 條，所以每一場比賽最多只能有 3 匹馬同時跑，而且只能看到名次、量不到時間（不同場次之間的成績無法互相比較）。若只要找出最快的那一匹馬，最少需要比幾場？",
+        "zh-Hans": "有 9 匹马，跑步速度两两不同且每匹马每次跑出的成绩都一样。跑道只有 3 条，所以每一场比赛最多只能有 3 匹马同时跑，而且只能看到名次、量不到时间（不同场次之间的成绩无法互相比较）。若只要找出最快的那一匹马，最少需要比几场？",
+        "en": "There are 9 horses, all of different speeds, each running consistently. There are only 3 lanes, so each race holds at most 3 horses, and only finishing order is visible with no timing, so results from different races cannot be compared directly. To identify only the single fastest horse, what is the minimum number of races needed?",
+        "ja": "9 頭の馬がいて、速さはすべて異なり、どの馬も毎回同じ走りをします。コースは 3 本しかないので 1 レースに出られるのは最大 3 頭で、順位しか分からずタイムは計れません（異なるレースの結果は直接比較できません）。最も速い 1 頭だけを見つけるには、最低何レース必要ですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 4 場。",
+        "zh-Hans": "答案是 4 场。",
+        "en": "The answer is 4.",
+        "ja": "答えは 4 レースです。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "因為量不到時間，所以**唯一能得到的資訊就是同一場比賽內的名次**。要比較兩匹馬的快慢，牠們必須同場跑過，或者透過一連串的比較間接連起來。",
+          "先確認最快的那匹馬有什麼特徵：牠在自己參加的每一場比賽裡都會拿第一名。反過來說，**任何一場比賽的非第一名，都不可能是全場最快的**，因為已經有一匹馬比牠快。",
+          "所以策略是：先讓每匹馬都至少跑一場，藉此淘汰掉大量的馬。",
+          "第一步，把 9 匹馬分成 3 組，每組 3 匹，各跑一場，共 3 場。",
+          "這 3 場結束後，每一場的第 2、3 名都被淘汰（共 6 匹），只剩下 3 位小組優勝者仍有可能是最快的。",
+          "第二步，讓這 3 位優勝者跑第 4 場。這一場的第一名，贏過了同組的另外 2 匹，也贏過了其餘兩位優勝者——而那兩位優勝者又各自贏過自己組裡的 2 匹。",
+          "所以牠間接勝過全部其他 8 匹馬，確定是最快的。總共 3 + 1 = 4 場。",
+          "還要說明 3 場為什麼不夠：每場最多 3 匹馬，3 場最多只能讓 9 匹馬各跑一次，此時會留下 3 位優勝者，而牠們彼此從未同場競爭過，沒有任何資訊可以分出高下。所以 4 場是最少的。"
+        ],
+        "zh-Hans": [
+          "因为量不到时间，所以**唯一能得到的信息就是同一场比赛内的名次**。要比较两匹马的快慢，它们必须同场跑过，或者透过一连串的比较间接连起来。",
+          "先确认最快的那匹马有什么特征：它在自己参加的每一场比赛里都会拿第一名。反过来说，**任何一场比赛的非第一名，都不可能是全场最快的**，因为已经有一匹马比它快。",
+          "所以策略是：先让每匹马都至少跑一场，藉此淘汰掉大量的马。",
+          "第一步，把 9 匹马分成 3 组，每组 3 匹，各跑一场，共 3 场。",
+          "这 3 场结束后，每一场的第 2、3 名都被淘汰（共 6 匹），只剩下 3 位小组优胜者仍有可能是最快的。",
+          "第二步，让这 3 位优胜者跑第 4 场。这一场的第一名，赢过了同组的另外 2 匹，也赢过了其余两位优胜者——而那两位优胜者又各自赢过自己组里的 2 匹。",
+          "所以它间接胜过全部其他 8 匹马，确定是最快的。总共 3 + 1 = 4 场。",
+          "还要说明 3 场为什么不够：每场最多 3 匹马，3 场最多只能让 9 匹马各跑一次，此时会留下 3 位优胜者，而它们彼此从未同场竞争过，没有任何信息可以分出高下。所以 4 场是最少的。"
+        ],
+        "en": [
+          "Since there is no timing, the only information available is the finishing order within a single race. To compare two horses they must either race together or be linked through a chain of comparisons.",
+          "First identify what characterises the fastest horse: it wins every race it enters. Conversely, any horse that fails to win some race cannot be the overall fastest, since some horse has already beaten it.",
+          "So the strategy is to let every horse race at least once, eliminating many of them at a stroke.",
+          "Step one, split the 9 horses into 3 groups of 3 and run one race per group, that is 3 races.",
+          "After those races the second and third placers of each — six horses in all — are eliminated, leaving only the 3 group winners as possible candidates.",
+          "Step two, run those 3 winners in a fourth race. Its winner has beaten the other 2 in its own group and also the other two group winners, each of whom had beaten 2 horses in their own groups.",
+          "So it indirectly beats all 8 other horses and is confirmed fastest. That makes 3 + 1 = 4 races.",
+          "It remains to explain why 3 races cannot suffice: with at most 3 horses per race, 3 races can at best give every horse one run, leaving 3 group winners who have never raced against one another, so no information separates them. Hence 4 is the minimum."
+        ],
+        "ja": [
+          "タイムが計れないため、**得られる情報は同じレース内の順位だけ**です。2 頭の速さを比べるには、同じレースを走るか、比較の連鎖で間接的につながっている必要があります。",
+          "まず最速の馬の特徴を確認します：出場したどのレースでも 1 着になります。逆にいえば、**あるレースで 1 着でなかった馬は全体最速ではありえません**。すでにその馬より速い馬が存在するからです。",
+          "したがって方針は、まず全頭を最低 1 レース走らせ、多くの馬をまとめて除外することです。",
+          "第 1 段階、9 頭を 3 頭ずつ 3 組に分け、各組 1 レースずつ、計 3 レースを行います。",
+          "この 3 レースの後、各レースの 2 着と 3 着（計 6 頭）は除外され、候補として残るのは 3 頭の組優勝馬だけです。",
+          "第 2 段階、この 3 頭で 4 レース目を行います。その 1 着は、自分の組の 2 頭に勝ち、他の 2 頭の組優勝馬にも勝っています。そしてその 2 頭はそれぞれ自分の組の 2 頭に勝っています。",
+          "よってこの馬は他の 8 頭すべてに間接的に勝っており、最速と確定します。合計 3 + 1 = 4 レースです。",
+          "3 レースでは足りない理由も説明します：1 レース最大 3 頭なので、3 レースでは全 9 頭を 1 回ずつ走らせるのが精一杯で、3 頭の組優勝馬が残ります。彼らは互いに一度も対戦しておらず、優劣をつける情報がありません。したがって 4 レースが最小です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "4"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "淘汰策略與下界論證：非第一名者必不是最快，先分組淘汰再讓優勝者對決，並說明 3 場不足",
+        "notes": "設計依據：9 匹馬配 3 條跑道使分組恰好整除，讓淘汰結構清楚；本題要求同時給出「4 場可行」與「3 場不可能」兩半，只給做法不算完整解答，詳解以「三位優勝者從未同場」封住下界。答案 4 已用場次結構的獨立推算驗證（3 場預賽 + 1 場決賽）。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（分組賽的場次）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "邏輯",
+        "topicCode": "logic",
+        "subtopic": "分組賽的場次",
+        "subtopicCode": "race_heats_minimum"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "logic_grade7_foundation_029",
+      "topic": "logic",
+      "subtopic": "ambiguous_clue_deduction",
+      "difficulty": "foundation",
+      "levelStage": "grade7",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "小明問鄰居三個女兒的年齡（都是正整數歲）。鄰居說：「她們年齡的乘積是 36，年齡的總和剛好等於我家門牌號碼。」小明看得到門牌號碼，但想了一會兒說：「資訊還不夠。」鄰居補充：「最大的女兒在學鋼琴。」小明立刻就答對了。求最大的女兒幾歲。",
+        "zh-Hans": "小明问邻居三个女儿的年龄（都是正整数岁）。邻居说：「她们年龄的乘积是 36，年龄的总和刚好等于我家门牌号码。」小明看得到门牌号码，但想了一会儿说：「信息还不够。」邻居补充：「最大的女儿在学钢琴。」小明立刻就答对了。求最大的女儿几岁。",
+        "en": "Ming asks a neighbour the ages of their three daughters, all whole numbers of years. The neighbour says the product of the ages is 36 and their sum equals the house number. Ming can see the house number but after some thought says there is not enough information. The neighbour adds that the eldest daughter is learning piano, and Ming immediately answers correctly. How old is the eldest daughter?",
+        "ja": "明さんが隣人に 3 人の娘の年齢（いずれも正の整数）を尋ねました。隣人は「3 人の年齢の積は 36 で、和はちょうどうちの表札の番地に等しい」と答えました。明さんは番地を見られますが、少し考えて「情報が足りません」と言いました。隣人が「いちばん上の娘はピアノを習っています」と付け加えると、明さんはすぐに正解しました。いちばん上の娘は何歳ですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 9 歲。",
+        "zh-Hans": "答案是 9 岁。",
+        "en": "The answer is 9.",
+        "ja": "答えは 9 歳です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "這題的關鍵不在算術，而在於**「小明說資訊不夠」這句話本身就是一條線索**。",
+          "先列出乘積是 36 的所有三個正整數組合（不計順序），並算出每組的和：(1,1,36) 和 38、(1,2,18) 和 21、(1,3,12) 和 16、(1,4,9) 和 14、(1,6,6) 和 13、(2,2,9) 和 13、(2,3,6) 和 11、(3,3,4) 和 10。",
+          "小明看得到門牌號碼，也就是知道了那個「和」。如果這個和在上面的清單中**只出現一次**，他當場就能確定答案。",
+          "但他說資訊不夠，這代表他看到的那個和**在清單中出現了不只一次**——否則他不會卡住。",
+          "檢查所有的和：38、21、16、14、13、13、11、10。其中只有 13 出現了兩次，分別對應 (1, 6, 6) 與 (2, 2, 9)。",
+          "所以門牌號碼是 13，而答案就在這兩組之中。",
+          "接著看最後一句線索：「**最大的**女兒在學鋼琴」。這句話預設了「最大的女兒」是唯一一個人。",
+          "在 (1, 6, 6) 中，最大的是兩個 6 歲的女兒並列，沒有唯一的「最大的女兒」；在 (2, 2, 9) 中，9 歲的女兒是唯一最大的。所以正確的組合是 (2, 2, 9)，最大的女兒 9 歲。驗算：程式列出全部 8 組並統計各組的和，確認只有 13 重複，且兩組中只有 (2, 2, 9) 存在唯一最大值 ✓。"
+        ],
+        "zh-Hans": [
+          "这题的关键不在算术，而在于**「小明说信息不够」这句话本身就是一条线索**。",
+          "先列出乘积是 36 的所有三个正整数组合（不计顺序），并算出每组的和：(1,1,36) 和 38、(1,2,18) 和 21、(1,3,12) 和 16、(1,4,9) 和 14、(1,6,6) 和 13、(2,2,9) 和 13、(2,3,6) 和 11、(3,3,4) 和 10。",
+          "小明看得到门牌号码，也就是知道了那个「和」。如果这个和在上面的清单中**只出现一次**，他当场就能确定答案。",
+          "但他说信息不够，这代表他看到的那个和**在清单中出现了不只一次**——否则他不会卡住。",
+          "检查所有的和：38、21、16、14、13、13、11、10。其中只有 13 出现了两次，分别对应 (1, 6, 6) 与 (2, 2, 9)。",
+          "所以门牌号码是 13，而答案就在这两组之中。",
+          "接着看最后一句线索：「**最大的**女儿在学钢琴」。这句话预设了「最大的女儿」是唯一一个人。",
+          "在 (1, 6, 6) 中，最大的是两个 6 岁的女儿并列，没有唯一的「最大的女儿」；在 (2, 2, 9) 中，9 岁的女儿是唯一最大的。所以正确的组合是 (2, 2, 9)，最大的女儿 9 岁。验算：程序列出全部 8 组并统计各组的和，确认只有 13 重复，且两组中只有 (2, 2, 9) 存在唯一最大值 ✓。"
+        ],
+        "en": [
+          "The key to this problem is not the arithmetic but the fact that Ming's statement of insufficiency is itself a clue.",
+          "First list all unordered triples of positive integers with product 36, together with their sums: (1,1,36) sums to 38, (1,2,18) to 21, (1,3,12) to 16, (1,4,9) to 14, (1,6,6) to 13, (2,2,9) to 13, (2,3,6) to 11, and (3,3,4) to 10.",
+          "Ming can see the house number, so he knows the sum. If that sum appeared only once in the list, he could have answered immediately.",
+          "But he says the information is insufficient, which means the sum he sees appears more than once in the list — otherwise he would not be stuck.",
+          "Checking the sums 38, 21, 16, 14, 13, 13, 11 and 10, only 13 occurs twice, for the triples (1, 6, 6) and (2, 2, 9).",
+          "So the house number is 13 and the answer is one of those two triples.",
+          "Now the final clue, that the eldest daughter is learning piano, presupposes that there is a unique eldest daughter.",
+          "In (1, 6, 6) the two six-year-olds tie for eldest, so no unique eldest exists, while in (2, 2, 9) the nine-year-old is uniquely eldest. So the triple is (2, 2, 9) and the eldest is 9. Check: listing all 8 triples and tallying their sums confirms that only 13 repeats, and that of the two candidates only (2, 2, 9) has a unique maximum."
+        ],
+        "ja": [
+          "本問の鍵は計算ではなく、**「情報が足りない」という明さんの発言そのものが手がかりである**という点にあります。",
+          "まず積が 36 になる正の整数 3 つの組（順序は問わない）をすべて挙げ、和も求めます：(1,1,36) は和 38、(1,2,18) は 21、(1,3,12) は 16、(1,4,9) は 14、(1,6,6) は 13、(2,2,9) は 13、(2,3,6) は 11、(3,3,4) は 10。",
+          "明さんは番地が見えるので「和」を知っています。もしその和が上の一覧に**1 回しか現れない**なら、その場で答えが確定したはずです。",
+          "しかし情報が足りないと言ったので、見えている和は一覧に**2 回以上現れている**ことになります。そうでなければ行き詰まらないからです。",
+          "和を確認すると 38、21、16、14、13、13、11、10 で、2 回現れるのは 13 だけであり、(1, 6, 6) と (2, 2, 9) に対応します。",
+          "したがって番地は 13 で、答えはこの 2 組のどちらかです。",
+          "最後の手がかり「**いちばん上の**娘はピアノを習っている」は、「いちばん上の娘」が 1 人に定まることを前提としています。",
+          "(1, 6, 6) では 6 歳が 2 人で最年長が並び、唯一の「いちばん上の娘」が存在しません。(2, 2, 9) では 9 歳が唯一の最年長です。よって組は (2, 2, 9) で、いちばん上の娘は 9 歳です。検算：8 組すべてを列挙して和を集計すると、重複するのは 13 のみであり、2 つの候補のうち唯一の最大値をもつのは (2, 2, 9) だけであることが確認できます ✓。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "9"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "把「對方無法判斷」當成資訊：和若唯一則可立即定案，故無法判斷即表示和有重複；再以「唯一最大者」排除並列的情形",
+        "notes": "設計依據：乘積 36 是少數能讓「和」恰好只有一個重複值（13）的數，使兩階段推理都成立；第二條線索刻意不給年齡數值，而是靠「最大的女兒」這個單數說法排除 (1, 6, 6) 的並列，讓語意本身承擔推理功能。答案 9 已用列出全部 8 組並統計和的程式獨立驗證重複值與唯一最大值的判定。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（由「無法判斷」推理）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "邏輯",
+        "topicCode": "logic",
+        "subtopic": "由「無法判斷」推理",
+        "subtopicCode": "ambiguous_clue_deduction"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "logic_grade7_foundation_030",
+      "topic": "logic",
+      "subtopic": "stacked_dice_hidden_faces",
+      "difficulty": "foundation",
+      "levelStage": "grade7",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一般骰子相對兩面的點數和都是 7。現在把 3 顆這樣的骰子疊成一個直柱放在桌面上，最上面那一面的點數是 2。除了最上面這一面之外，其餘的水平面都看不見（也就是骰子與骰子互相接觸的 4 個面，以及最下面貼著桌面的 1 面，共 5 個面）。求這 5 個看不見的面的點數總和。",
+        "zh-Hans": "一般骰子相对两面的点数和都是 7。现在把 3 颗这样的骰子叠成一个直柱放在桌面上，最上面那一面的点数是 2。除了最上面这一面之外，其余的水平面都看不见（也就是骰子与骰子互相接触的 4 个面，以及最下面贴着桌面的 1 面，共 5 个面）。求这 5 个看不见的面的点数总和。",
+        "en": "On a standard die, opposite faces always sum to 7. Three such dice are stacked into a vertical column on a table, and the number on the very top face is 2. Apart from that top face, none of the other horizontal faces can be seen — the 4 faces where dice touch each other, plus the 1 face resting on the table, making 5 faces. Find the total of the numbers on those 5 hidden faces.",
+        "ja": "普通のさいころは向かい合う 2 面の目の和が必ず 7 です。このさいころを 3 個、机の上に縦に積み上げたところ、いちばん上の面の目は 2 でした。この上面以外の水平な面はすべて見えません（さいころどうしが接する 4 面と、机に接するいちばん下の 1 面の計 5 面）。この見えない 5 面の目の合計を求めなさい。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 19。",
+        "zh-Hans": "答案是 19。",
+        "en": "The answer is 19.",
+        "ja": "答えは 19 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "看不見的面有 5 個，而題目只告訴我們一個數字（最上面的 2）。乍看資訊不足，但**相對面和為 7 這個不變量**足以補上其餘。",
+          "關鍵觀察是：對每一顆骰子而言，它的上面與下面正好是一組相對面，所以**每一顆骰子的「上面 + 下面」都固定是 7**，不管骰子怎麼擺、其他面朝哪裡。",
+          "把三顆骰子由上而下記為甲、乙、丙。要求的 5 個面分別是：甲的下面、乙的上面、乙的下面、丙的上面、丙的下面。",
+          "先看甲。甲的上面是 2（唯一看得見的），所以甲的下面是 7 − 2 = 5。",
+          "再看乙。乙的上面與下面是一組相對面，兩者相加就是 7，不需要分別知道各是多少。",
+          "同理，丙的上面與下面相加也是 7。",
+          "把三部分加起來：5 + 7 + 7 = 19。",
+          "驗算：換個角度核對——三顆骰子六個水平面的總和是 7 × 3 = 21，而看得見的只有最上面的 2，所以看不見的是 21 − 2 = 19 ✓，兩種算法一致。這題的重點是：**當個別的值無法確定時，先找出恆定不變的組合量**，往往就能繞過缺少的資訊。"
+        ],
+        "zh-Hans": [
+          "看不见的面有 5 个，而题目只告诉我们一个数字（最上面的 2）。乍看信息不足，但**相对面和为 7 这个不变量**足以补上其余。",
+          "关键观察是：对每一颗骰子而言，它的上面与下面正好是一组相对面，所以**每一颗骰子的「上面 + 下面」都固定是 7**，不管骰子怎么摆、其他面朝哪里。",
+          "把三颗骰子由上而下记为甲、乙、丙。要求的 5 个面分别是：甲的下面、乙的上面、乙的下面、丙的上面、丙的下面。",
+          "先看甲。甲的上面是 2（唯一看得见的），所以甲的下面是 7 − 2 = 5。",
+          "再看乙。乙的上面与下面是一组相对面，两者相加就是 7，不需要分别知道各是多少。",
+          "同理，丙的上面与下面相加也是 7。",
+          "把三部分加起来：5 + 7 + 7 = 19。",
+          "验算：换个角度核对——三颗骰子六个水平面的总和是 7 × 3 = 21，而看得见的只有最上面的 2，所以看不见的是 21 − 2 = 19 ✓，两种算法一致。这题的重点是：**当个别的值无法确定时，先找出恒定不变的组合量**，往往就能绕过缺少的信息。"
+        ],
+        "en": [
+          "Five faces are hidden, yet the problem supplies only one number, the 2 on top. At first this looks insufficient, but the invariant that opposite faces sum to 7 supplies the rest.",
+          "The key observation is that for each die, its top and bottom are a pair of opposite faces, so the sum of top and bottom is always 7, no matter how the die is oriented or which numbers face sideways.",
+          "Label the three dice from top to bottom as A, B and C. The five faces in question are A's bottom, B's top, B's bottom, C's top and C's bottom.",
+          "Take A first. Its top is 2, the only visible face, so its bottom is 7 − 2 = 5.",
+          "Now B. Its top and bottom form an opposite pair, so together they contribute 7, without needing to know either individually.",
+          "Likewise C's top and bottom contribute 7.",
+          "Adding the three parts: 5 + 7 + 7 = 19.",
+          "Check: from another angle, the six horizontal faces across the three dice total 7 × 3 = 21, and the only visible one is the 2 on top, so the hidden ones total 21 − 2 = 19, agreeing with the first method. The lesson is that when individual values cannot be pinned down, look for a combination that stays constant — it often bypasses the missing information."
+        ],
+        "ja": [
+          "見えない面は 5 つあるのに、問題が与える数字は上面の 2 だけです。一見すると情報不足ですが、**向かい合う面の和が 7 という不変量**が残りを補ってくれます。",
+          "鍵となる観察は、どのさいころでも上面と下面はちょうど向かい合う 1 組なので、**各さいころの「上面 + 下面」は必ず 7** になるということです。さいころの向きや側面の目に関係なく成り立ちます。",
+          "3 個のさいころを上から順に甲・乙・丙とします。求める 5 面は、甲の下面、乙の上面、乙の下面、丙の上面、丙の下面です。",
+          "まず甲。上面は 2（唯一見える面）なので、下面は 7 − 2 = 5。",
+          "次に乙。上面と下面は向かい合う 1 組なので、合わせて 7 になります。個別の値を知る必要はありません。",
+          "同様に丙の上面と下面の和も 7 です。",
+          "3 つを足すと 5 + 7 + 7 = 19。",
+          "検算：別の角度から確認すると、3 個のさいころの水平な 6 面の合計は 7 × 3 = 21 で、見えるのは上面の 2 だけなので、見えない面の合計は 21 − 2 = 19 ✓ となり、2 つの方法が一致します。本問の要点は、**個々の値が定まらないときは、変化しない組み合わせ量を探す**ことで、欠けた情報を回避できるという点です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "19"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "以不變量補足資訊：每顆骰子的上下兩面必和為 7，故只需知道最上面的一個數字",
+        "notes": "設計依據：疊三顆使中間兩顆的上下面完全未知，只有靠「上下和恆為 7」才能求出，讓不變量成為唯一可行的路徑而非捷徑；詳解另給「水平面總和 21 減去可見的 2」的整體算法作為獨立交叉驗證。答案 19 已用逐顆分解與總和相減兩種算法驗證一致。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（不變量與看不見的面）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "邏輯",
+        "topicCode": "logic",
+        "subtopic": "不變量與看不見的面",
+        "subtopicCode": "stacked_dice_hidden_faces"
+      },
+      "reviewStatus": "ok"
     }
   ]
 }
