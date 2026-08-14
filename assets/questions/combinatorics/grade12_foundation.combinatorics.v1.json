@@ -6,11 +6,16 @@
   "olympiadTopicCode": "combinatorics",
   "levelStage": "grade12",
   "challengeTier": "foundation",
-  "languages": ["zh-Hant", "zh-Hans", "en", "ja"],
+  "languages": [
+    "zh-Hant",
+    "zh-Hans",
+    "en",
+    "ja"
+  ],
   "questions": [
     {
       "id": "combinatorics_grade12_foundation_001",
-      "reviewStatus": "pending",
+      "reviewStatus": "ok",
       "topic": "combinatorics",
       "subtopic": "choosing_cards",
       "difficulty": "foundation",
@@ -22,17 +27,64 @@
         "en": "Choose 3 cards from cards labeled 1 through 10 so that the sum of the chosen numbers is even. How many choices are there?",
         "ja": "1 から 10 までの数が書かれた 10 枚のカードから 3 枚を選びます。選んだ 3 数の和が偶数になる選び方は何通りありますか。"
       },
-      "answer": { "zh-Hant": "答案是 60。", "zh-Hans": "答案是 60。", "en": "The answer is 60.", "ja": "答えは 60 です。" },
-      "solutionSteps": {
-        "zh-Hant": ["1 到 10 中有 5 個奇數、5 個偶數。", "和為偶數時，要嘛選 3 個偶數，要嘛選 2 個奇數加 1 個偶數。", "所以共有 C(5,3)+C(5,2)C(5,1)=10+50=60 種。"],
-        "zh-Hans": ["1 到 10 中有 5 个奇数、5 个偶数。", "和为偶数时，要么选 3 个偶数，要么选 2 个奇数加 1 个偶数。", "所以共有 C(5,3)+C(5,2)C(5,1)=10+50=60 种。"],
-        "en": ["Among 1 through 10 there are 5 odd and 5 even numbers.", "A sum of three numbers is even if we choose 3 evens or 2 odds and 1 even.", "So the count is C(5,3)+C(5,2)C(5,1)=10+50=60."],
-        "ja": ["1 から 10 には奇数が 5 個、偶数が 5 個あります。", "和が偶数になるのは、偶数 3 個か、奇数 2 個と偶数 1 個です。", "したがって C(5,3)+C(5,2)C(5,1)=10+50=60 通りです。"]
+      "answer": {
+        "zh-Hant": "答案是 60。",
+        "zh-Hans": "答案是 60。",
+        "en": "The answer is 60.",
+        "ja": "答えは 60 です。"
       },
-      "figure": { "type": "custom", "kind": "none", "params": {} },
+      "solutionSteps": {
+        "zh-Hant": [
+          "三個數相加為偶數，要看的是其中奇數的個數：奇數個奇數相加是奇數，偶數個奇數相加是偶數。",
+          "三個數中奇數的個數可能是 0、1、2、3。其中和為偶數的情形是「0 個奇數」與「2 個奇數」。",
+          "1 到 10 之中，奇數有 1、3、5、7、9 共 5 個，偶數有 2、4、6、8、10 也是 5 個。",
+          "情形一：三個都是偶數。從 5 個偶數選 3 個，有 C(5, 3) = 10 種。",
+          "情形二：兩個奇數加一個偶數。選兩個奇數有 C(5, 2) = 10 種，再選一個偶數有 C(5, 1) = 5 種，相乘得 50 種。",
+          "兩種情形互不重疊（奇數個數不同），所以直接相加。",
+          "總數 = 10 + 50 = 60 種。（已用窮舉 C(10,3) = 120 組逐一檢查和的奇偶驗證。）"
+        ],
+        "zh-Hans": [
+          "三个数相加为偶数，要看的是其中奇数的个数：奇数个奇数相加是奇数，偶数个奇数相加是偶数。",
+          "三个数中奇数的个数可能是 0、1、2、3。其中和为偶数的情形是「0 个奇数」与「2 个奇数」。",
+          "1 到 10 之中，奇数有 1、3、5、7、9 共 5 个，偶数有 2、4、6、8、10 也是 5 个。",
+          "情形一：三个都是偶数。从 5 个偶数选 3 个，有 C(5, 3) = 10 种。",
+          "情形二：两个奇数加一个偶数。选两个奇数有 C(5, 2) = 10 种，再选一个偶数有 C(5, 1) = 5 种，相乘得 50 种。",
+          "两种情形互不重叠（奇数个数不同），所以直接相加。",
+          "总数 = 10 + 50 = 60 种。（已用穷举 C(10,3) = 120 组逐一检查和的奇偶验证。）"
+        ],
+        "en": [
+          "For three numbers to sum to an even value, what matters is how many of them are odd: an odd count of odd numbers gives an odd sum, an even count gives an even sum.",
+          "Among three numbers the count of odd ones can be 0, 1, 2 or 3, and the even-sum cases are exactly 0 odd numbers and 2 odd numbers.",
+          "From 1 to 10 there are five odd numbers 1, 3, 5, 7, 9 and five even numbers 2, 4, 6, 8, 10.",
+          "Case one: all three even. Choosing 3 from the 5 evens gives C(5, 3) = 10 ways.",
+          "Case two: two odd and one even. Choosing the odds gives C(5, 2) = 10 and choosing the even gives C(5, 1) = 5, so 50 ways.",
+          "The two cases do not overlap since they have different odd counts, so simply add them.",
+          "The total is 10 + 50 = 60. (Verified by enumerating all C(10,3) = 120 triples and checking the parity of each sum.)"
+        ],
+        "ja": [
+          "3 数の和が偶数になるかは、その中の奇数の個数で決まります。奇数が奇数個なら和は奇数、偶数個なら和は偶数です。",
+          "3 数のうち奇数の個数は 0、1、2、3 のいずれかで、和が偶数になるのは「奇数 0 個」と「奇数 2 個」の場合です。",
+          "1 から 10 のうち奇数は 1、3、5、7、9 の 5 個、偶数は 2、4、6、8、10 の 5 個です。",
+          "場合 1：3 つとも偶数。5 個の偶数から 3 個選ぶので C(5, 3) = 10 通り。",
+          "場合 2：奇数 2 個と偶数 1 個。奇数の選び方が C(5, 2) = 10、偶数が C(5, 1) = 5 で、掛けて 50 通り。",
+          "2 つの場合は奇数の個数が違うので重ならず、そのまま足せます。",
+          "合計は 10 + 50 = 60 通り。（C(10,3) = 120 組をすべて調べる全数検査でも確認済み。）"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
       "answerMode": "integer_input",
-      "correctAnswer": { "type": "integer", "value": "60" },
-      "inputConstraints": { "allowNegative": false, "maxDigits": 2 },
+      "correctAnswer": {
+        "type": "integer",
+        "value": "60"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
       "source": {
         "type": "official_reference",
         "name": "AMC 12",
@@ -47,11 +99,16 @@
         "rightsStatus": "needs_review",
         "notes": "Rewritten from a publicly archived competition statement."
       },
-      "olympiadTaxonomy": { "topic": "組合", "topicCode": "combinatorics", "subtopic": "奇偶分類", "subtopicCode": "choosing_cards" }
+      "olympiadTaxonomy": {
+        "topic": "組合",
+        "topicCode": "combinatorics",
+        "subtopic": "奇偶分類",
+        "subtopicCode": "choosing_cards"
+      }
     },
     {
       "id": "combinatorics_grade12_foundation_002",
-      "reviewStatus": "pending",
+      "reviewStatus": "ok",
       "topic": "combinatorics",
       "subtopic": "binary_paths",
       "difficulty": "foundation",
@@ -63,17 +120,64 @@
         "en": "How many binary strings of length 8 have no equal adjacent digits?",
         "ja": "長さ 8 の 0-1 列で、隣り合う 2 文字がすべて異なるものは何個ありますか。"
       },
-      "answer": { "zh-Hant": "答案是 2。", "zh-Hans": "答案是 2。", "en": "The answer is 2.", "ja": "答えは 2 です。" },
-      "solutionSteps": {
-        "zh-Hant": ["第一位可選 0 或 1。", "一旦第一位決定，後面每一位都被唯一決定。", "所以只有 01010101 與 10101010 兩個。"],
-        "zh-Hans": ["第一位可选 0 或 1。", "一旦第一位决定，后面每一位都被唯一决定。", "所以只有 01010101 与 10101010 两个。"],
-        "en": ["The first digit can be 0 or 1.", "Once the first digit is chosen, each subsequent digit is forced.", "So the only strings are 01010101 and 10101010."],
-        "ja": ["最初の文字は 0 か 1 の 2 通りです。", "最初が決まると、その後はすべて一意に決まります。", "したがって 01010101 と 10101010 の 2 個だけです。"]
+      "answer": {
+        "zh-Hant": "答案是 2。",
+        "zh-Hans": "答案是 2。",
+        "en": "The answer is 2.",
+        "ja": "答えは 2 です。"
       },
-      "figure": { "type": "custom", "kind": "none", "params": {} },
+      "solutionSteps": {
+        "zh-Hant": [
+          "條件是「相鄰兩位都不同」，而每一位只能是 0 或 1，只有兩種選擇。",
+          "所以只要前一位確定了，下一位就必須是另一個值，完全沒有選擇餘地。",
+          "換句話說，整個字串被第一位完全決定。",
+          "第一位是 0 時，後面依序被迫是 1、0、1、0、1、0、1，得到 01010101。",
+          "第一位是 1 時，同理得到 10101010。",
+          "這兩個字串都確實滿足相鄰兩位不同，而且沒有其他可能。",
+          "所以符合條件的長度 8 的 0-1 字串恰好有 2 個。"
+        ],
+        "zh-Hans": [
+          "条件是「相邻两位都不同」，而每一位只能是 0 或 1，只有两种选择。",
+          "所以只要前一位确定了，下一位就必须是另一个值，完全没有选择余地。",
+          "换句话说，整个字符串被第一位完全决定。",
+          "第一位是 0 时，后面依序被迫是 1、0、1、0、1、0、1，得到 01010101。",
+          "第一位是 1 时，同理得到 10101010。",
+          "这两个字符串都确实满足相邻两位不同，而且没有其他可能。",
+          "所以符合条件的长度 8 的 0-1 字符串恰好有 2 个。"
+        ],
+        "en": [
+          "The condition is that adjacent digits differ, and each digit can only be 0 or 1, giving just two choices.",
+          "So once one digit is fixed, the next is forced to be the other value with no freedom at all.",
+          "In other words, the entire string is completely determined by its first digit.",
+          "If the first digit is 0, the rest are forced to be 1, 0, 1, 0, 1, 0, 1, giving 01010101.",
+          "If the first digit is 1, the same reasoning gives 10101010.",
+          "Both strings do satisfy the adjacency condition, and no other string can.",
+          "So there are exactly 2 such binary strings of length 8."
+        ],
+        "ja": [
+          "条件は「隣り合う 2 桁が異なる」ことで、各桁は 0 か 1 の 2 通りしかありません。",
+          "したがって前の桁が決まれば次の桁はもう一方に強制され、選ぶ余地はまったくありません。",
+          "つまり文字列全体が最初の 1 桁だけで完全に決まります。",
+          "最初が 0 なら以降は 1、0、1、0、1、0、1 と強制され 01010101 になります。",
+          "最初が 1 なら同様に 10101010 になります。",
+          "どちらも条件を満たし、それ以外の文字列はあり得ません。",
+          "よって長さ 8 の条件を満たす 0-1 文字列はちょうど 2 個です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
       "answerMode": "integer_input",
-      "correctAnswer": { "type": "integer", "value": "2" },
-      "inputConstraints": { "allowNegative": false, "maxDigits": 1 },
+      "correctAnswer": {
+        "type": "integer",
+        "value": "2"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
       "source": {
         "type": "official_reference",
         "name": "AMC 12",
@@ -88,11 +192,16 @@
         "rightsStatus": "needs_review",
         "notes": "Rewritten from a publicly archived competition statement."
       },
-      "olympiadTaxonomy": { "topic": "組合", "topicCode": "combinatorics", "subtopic": "限制字串", "subtopicCode": "binary_paths" }
+      "olympiadTaxonomy": {
+        "topic": "組合",
+        "topicCode": "combinatorics",
+        "subtopic": "限制字串",
+        "subtopicCode": "binary_paths"
+      }
     },
     {
       "id": "combinatorics_grade12_foundation_003",
-      "reviewStatus": "pending",
+      "reviewStatus": "ok",
       "topic": "combinatorics",
       "subtopic": "choose_points",
       "difficulty": "foundation",
@@ -104,17 +213,149 @@
         "en": "Choose 3 vertices of a regular hexagon to form a triangle. How many of these triangles are obtuse?",
         "ja": "正六角形の 6 頂点から 3 点を選んで三角形を作ります。そのうち鈍角三角形はいくつありますか。"
       },
-      "answer": { "zh-Hant": "答案是 12。", "zh-Hans": "答案是 12。", "en": "The answer is 12.", "ja": "答えは 12 です。" },
-      "solutionSteps": {
-        "zh-Hant": ["總共有 C(6,3)=20 個三角形。", "其中有 2 個正三角形，6 個直角三角形。", "剩下的 12 個就是鈍角三角形。"],
-        "zh-Hans": ["总共有 C(6,3)=20 个三角形。", "其中有 2 个正三角形，6 个直角三角形。", "剩下的 12 个就是钝角三角形。"],
-        "en": ["There are C(6,3)=20 triangles total.", "Among them are 2 equilateral triangles and 6 right triangles.", "The remaining 12 are obtuse triangles."],
-        "ja": ["三角形は全部で C(6,3)=20 個です。", "このうち正三角形が 2 個、直角三角形が 6 個あります。", "残りの 12 個が鈍角三角形です。"]
+      "answer": {
+        "zh-Hant": "答案是 6 個。",
+        "zh-Hans": "答案是 6 个。",
+        "en": "The answer is 6.",
+        "ja": "答えは 6 個です。"
       },
-      "figure": { "type": "custom", "kind": "shape_diagram", "params": { "shape": "hexagon", "labels": { "center": "6 點選 3 點" } } },
+      "solutionSteps": {
+        "zh-Hant": [
+          "正六邊形的六個頂點都在同一個外接圓上，所以可以用「圓內接三角形」的性質來分類。",
+          "從 6 個頂點取 3 個，總共有 C(6, 3) = 20 個三角形。",
+          "先數正三角形：取相間隔的三個頂點，有 {1,3,5} 與 {2,4,6} 兩種，共 2 個，它們都是銳角三角形。",
+          "再數直角三角形。圓內接三角形是直角三角形的充要條件，是它有一邊為直徑。",
+          "正六邊形的直徑就是連接相對頂點的線段，共有 3 條（1-4、2-5、3-6）。",
+          "每一條直徑配上剩下 4 個頂點中的任何一個當第三頂點，都會得到一個直角三角形，所以直角三角形有 3 × 4 = 12 個。",
+          "這 12 個彼此不重複，因為一個三角形最多只能有一個直角，也就最多只含一條直徑。",
+          "所以鈍角三角形個數 = 20 − 2（正三角形）− 12（直角）= 6 個。",
+          "驗算：把六個頂點放在單位圓上逐一計算 20 個三角形的邊長平方並比較，得到銳角 2 個、直角 12 個、鈍角 6 個，與推理一致。"
+        ],
+        "zh-Hans": [
+          "正六边形的六个顶点都在同一个外接圆上，所以可以用「圆内接三角形」的性质来分类。",
+          "从 6 个顶点取 3 个，总共有 C(6, 3) = 20 个三角形。",
+          "先数正三角形：取相间隔的三个顶点，有 {1,3,5} 与 {2,4,6} 两种，共 2 个，它们都是锐角三角形。",
+          "再数直角三角形。圆内接三角形是直角三角形的充要条件，是它有一边为直径。",
+          "正六边形的直径就是连接相对顶点的线段，共有 3 条（1-4、2-5、3-6）。",
+          "每一条直径配上剩下 4 个顶点中的任何一个当第三顶点，都会得到一个直角三角形，所以直角三角形有 3 × 4 = 12 个。",
+          "这 12 个彼此不重复，因为一个三角形最多只能有一个直角，也就最多只含一条直径。",
+          "所以钝角三角形个数 = 20 − 2（正三角形）− 12（直角）= 6 个。",
+          "验算：把六个顶点放在单位圆上逐一计算 20 个三角形的边长平方并比较，得到锐角 2 个、直角 12 个、钝角 6 个，与推理一致。"
+        ],
+        "en": [
+          "The six vertices of a regular hexagon lie on a common circumcircle, so the triangles can be classified using inscribed-triangle properties.",
+          "Choosing 3 of the 6 vertices gives C(6, 3) = 20 triangles in total.",
+          "First count the equilateral ones: taking alternate vertices gives {1,3,5} and {2,4,6}, so 2 of them, and both are acute.",
+          "Next count the right triangles. An inscribed triangle is right exactly when one of its sides is a diameter.",
+          "The diameters of a regular hexagon are the segments joining opposite vertices, and there are 3 of them (1-4, 2-5, 3-6).",
+          "Each diameter combined with any of the remaining 4 vertices as the third point gives a right triangle, so there are 3 × 4 = 12 right triangles.",
+          "These 12 are all distinct, because a triangle can have at most one right angle and hence contains at most one diameter.",
+          "Therefore the number of obtuse triangles is 20 − 2 (equilateral) − 12 (right) = 6.",
+          "Check: placing the six vertices on a unit circle and comparing squared side lengths for all 20 triangles gives 2 acute, 12 right and 6 obtuse, matching the reasoning."
+        ],
+        "ja": [
+          "正六角形の 6 頂点は同一の外接円上にあるので、円に内接する三角形の性質で分類できます。",
+          "6 頂点から 3 点を選ぶ方法は C(6, 3) = 20 通りです。",
+          "まず正三角形を数えます。1 つおきに頂点を取ると {1,3,5} と {2,4,6} の 2 個で、どちらも鋭角三角形です。",
+          "次に直角三角形を数えます。円に内接する三角形が直角三角形であることは、1 辺が直径であることと同値です。",
+          "正六角形の直径は向かい合う頂点を結ぶ線分で、1-4、2-5、3-6 の 3 本あります。",
+          "各直径に対し残り 4 頂点のどれを第 3 頂点にしても直角三角形になるので、直角三角形は 3 × 4 = 12 個です。",
+          "この 12 個は重複しません。三角形の直角は高々 1 つなので、直径も高々 1 本しか含まないからです。",
+          "したがって鈍角三角形は 20 − 2（正三角形）− 12（直角）= 6 個。",
+          "検算：6 頂点を単位円上に置いて 20 個の三角形の辺の 2 乗を比較すると、鋭角 2 個・直角 12 個・鈍角 6 個となり推論と一致します。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "geometry_scene",
+        "params": {
+          "bounds": {
+            "minX": -2.7,
+            "minY": -2.7,
+            "maxX": 2.7,
+            "maxY": 2.7
+          },
+          "points": [
+            {
+              "name": "A",
+              "x": 2.0,
+              "y": 0.0,
+              "pos": "r"
+            },
+            {
+              "name": "B",
+              "x": 1.0,
+              "y": 1.7321,
+              "pos": "tr"
+            },
+            {
+              "name": "C",
+              "x": -1.0,
+              "y": 1.7321,
+              "pos": "tl"
+            },
+            {
+              "name": "D",
+              "x": -2.0,
+              "y": 0.0,
+              "pos": "l"
+            },
+            {
+              "name": "E",
+              "x": -1.0,
+              "y": -1.7321,
+              "pos": "bl"
+            },
+            {
+              "name": "F",
+              "x": 1.0,
+              "y": -1.7321,
+              "pos": "br"
+            }
+          ],
+          "segments": [
+            {
+              "from": "A",
+              "to": "B",
+              "style": "solid"
+            },
+            {
+              "from": "B",
+              "to": "C",
+              "style": "solid"
+            },
+            {
+              "from": "C",
+              "to": "D",
+              "style": "solid"
+            },
+            {
+              "from": "D",
+              "to": "E",
+              "style": "solid"
+            },
+            {
+              "from": "E",
+              "to": "F",
+              "style": "solid"
+            },
+            {
+              "from": "F",
+              "to": "A",
+              "style": "solid"
+            }
+          ]
+        }
+      },
       "answerMode": "integer_input",
-      "correctAnswer": { "type": "integer", "value": "12" },
-      "inputConstraints": { "allowNegative": false, "maxDigits": 2 },
+      "correctAnswer": {
+        "type": "integer",
+        "value": "6"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
       "source": {
         "type": "official_reference",
         "name": "AMC 12",
@@ -129,110 +370,298 @@
         "rightsStatus": "needs_review",
         "notes": "Rewritten from a publicly archived competition statement."
       },
-      "olympiadTaxonomy": { "topic": "組合", "topicCode": "combinatorics", "subtopic": "多邊形選點", "subtopicCode": "choose_points" }
+      "olympiadTaxonomy": {
+        "topic": "組合",
+        "topicCode": "combinatorics",
+        "subtopic": "多邊形選點",
+        "subtopicCode": "choose_points"
+      }
     },
     {
       "id": "combinatorics_grade12_foundation_004",
-      "reviewStatus": "pending",
       "topic": "combinatorics",
-      "subtopic": "circular_permutation",
+      "subtopic": "parity_constrained_strings",
       "difficulty": "foundation",
       "levelStage": "grade12",
       "challengeTier": "foundation",
       "prompt": {
-        "zh-Hant": "6 個不同的人圍著圓桌入座。若只把旋轉後視為相同，則共有多少種不同坐法？",
-        "zh-Hans": "6 个不同的人围着圆桌入座。若只把旋转后视为相同，则共有多少种不同坐法？",
-        "en": "Six different people sit around a round table. If rotations are considered the same, how many distinct seatings are there?",
-        "ja": "6 人の異なる人が円卓に座ります。回転による一致を同じとみなすとき、異なる座り方は何通りありますか。"
+        "zh-Hant": "用數字 1、2、3 排成一個長度為 10 的數列（每一位都可以是 1、2 或 3，允許重複）。求其中數字 1 出現偶數次（含 0 次）的數列共有多少個。",
+        "zh-Hans": "用数字 1、2、3 排成一个长度为 10 的数列（每一位都可以是 1、2 或 3，允许重复）。求其中数字 1 出现偶数次（含 0 次）的数列共有多少个。",
+        "en": "Sequences of length 10 are formed from the digits 1, 2 and 3, with repetition allowed. How many of them contain the digit 1 an even number of times, counting zero as even?",
+        "ja": "1、2、3 の数字を使って長さ 10 の数列を作ります（各位は 1、2、3 のいずれでもよく、重複可）。数字 1 がちょうど偶数回（0 回も含む）現れる数列は何個ありますか。"
       },
-      "answer": { "zh-Hant": "答案是 120。", "zh-Hans": "答案是 120。", "en": "The answer is 120.", "ja": "答えは 120 です。" },
+      "answer": {
+        "zh-Hant": "答案是 29525 個。",
+        "zh-Hans": "答案是 29525 个。",
+        "en": "The answer is 29525.",
+        "ja": "答えは 29525 個です。"
+      },
       "solutionSteps": {
-        "zh-Hant": ["圓排列中，可固定其中 1 人的位置。", "剩下 5 人排成一列即可。", "因此不同坐法是 5! = 120。"],
-        "zh-Hans": ["圆排列中，可固定其中 1 人的位置。", "剩下 5 人排成一列即可。", "因此不同坐法是 5! = 120。"],
-        "en": ["For circular permutations, fix one person to remove rotational symmetry.", "Then arrange the remaining 5 people in order.", "So the number of distinct seatings is 5! = 120."],
-        "ja": ["円順列では、回転の重複を除くため 1 人を固定します。", "残りの 5 人を並べればよいです。", "したがって 5! = 120 通りです。"]
+        "zh-Hant": [
+          "全部的數列有 3¹⁰ 個，因為每一位都有 3 種選擇。",
+          "逐一算「1 出現 0 次、2 次、4 次、⋯」再相加會很繁瑣，改用一個對稱技巧。",
+          "設 E 是 1 出現偶數次的數列個數，O 是 1 出現奇數次的個數，則 E + O = 3¹⁰。",
+          "接著要算 E − O。考慮把每個數列對應到一個值：若 1 出現 k 次就記為 (−1)ᵏ，那麼所有數列的這個值加總起來恰好等於 E − O。",
+          "把它按位拆開：每一位若填 1 貢獻因子 (−1)，若填 2 或 3 各貢獻因子 (+1)，所以每一位的貢獻總和是 (−1) + 1 + 1 = 1。",
+          "十位互相獨立，所以 E − O = 1¹⁰ = 1。",
+          "把兩式相加：2E = 3¹⁰ + 1，所以 E = (3¹⁰ + 1) ÷ 2。",
+          "3¹⁰ = 59049，因此 E = (59049 + 1) ÷ 2 = 29525。",
+          "驗算：以程式窮舉全部 3¹⁰ = 59049 個數列並統計，1 出現偶數次的恰好是 29525 個。"
+        ],
+        "zh-Hans": [
+          "全部的数列有 3¹⁰ 个，因为每一位都有 3 种选择。",
+          "逐一算「1 出现 0 次、2 次、4 次、⋯」再相加会很繁琐，改用一个对称技巧。",
+          "设 E 是 1 出现偶数次的数列个数，O 是 1 出现奇数次的个数，则 E + O = 3¹⁰。",
+          "接着要算 E − O。考虑把每个数列对应到一个值：若 1 出现 k 次就记为 (−1)ᵏ，那么所有数列的这个值加总起来恰好等于 E − O。",
+          "把它按位拆开：每一位若填 1 贡献因子 (−1)，若填 2 或 3 各贡献因子 (+1)，所以每一位的贡献总和是 (−1) + 1 + 1 = 1。",
+          "十位互相独立，所以 E − O = 1¹⁰ = 1。",
+          "把两式相加：2E = 3¹⁰ + 1，所以 E = (3¹⁰ + 1) ÷ 2。",
+          "3¹⁰ = 59049，因此 E = (59049 + 1) ÷ 2 = 29525。",
+          "验算：以程序穷举全部 3¹⁰ = 59049 个数列并统计，1 出现偶数次的恰好是 29525 个。"
+        ],
+        "en": [
+          "There are 3¹⁰ sequences in total, since each of the ten positions has 3 choices.",
+          "Adding up the counts for 0, 2, 4, … occurrences of the digit 1 one by one would be tedious, so use a symmetry trick instead.",
+          "Let E be the number of sequences with an even count of 1s and O the number with an odd count, so E + O = 3¹⁰.",
+          "Now compute E − O. Assign to each sequence the value (−1)ᵏ where k is the number of 1s; summing this value over all sequences gives exactly E − O.",
+          "Split the sum position by position: a position holding 1 contributes a factor of (−1), while 2 and 3 each contribute (+1), so each position contributes (−1) + 1 + 1 = 1.",
+          "The ten positions are independent, so E − O = 1¹⁰ = 1.",
+          "Adding the two relations gives 2E = 3¹⁰ + 1, so E = (3¹⁰ + 1) ÷ 2.",
+          "Since 3¹⁰ = 59049, we get E = (59049 + 1) ÷ 2 = 29525.",
+          "Check: enumerating all 3¹⁰ = 59049 sequences by program gives exactly 29525 with an even number of 1s."
+        ],
+        "ja": [
+          "各位に 3 通りの選択があるので、数列は全部で 3¹⁰ 個です。",
+          "1 が 0 回、2 回、4 回、… の場合を個別に足すのは煩雑なので、対称性を使う技法を用います。",
+          "1 が偶数回現れる数列の個数を E、奇数回の個数を O とすると E + O = 3¹⁰。",
+          "次に E − O を求めます。各数列に、1 が k 回現れるとき (−1)ᵏ という値を対応させると、その総和がちょうど E − O になります。",
+          "位ごとに分解します。ある位が 1 なら因子 (−1)、2 か 3 ならそれぞれ因子 (+1) なので、1 つの位の寄与の和は (−1) + 1 + 1 = 1。",
+          "10 個の位は独立なので E − O = 1¹⁰ = 1。",
+          "2 式を足すと 2E = 3¹⁰ + 1、よって E = (3¹⁰ + 1) ÷ 2。",
+          "3¹⁰ = 59049 なので E = (59049 + 1) ÷ 2 = 29525。",
+          "検算：3¹⁰ = 59049 個の数列をすべて列挙して数えると、1 が偶数回のものはちょうど 29525 個です。"
+        ]
       },
-      "figure": { "type": "custom", "kind": "none", "params": {} },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
       "answerMode": "integer_input",
-      "correctAnswer": { "type": "integer", "value": "120" },
-      "inputConstraints": { "allowNegative": false, "maxDigits": 3 },
-      "source": {
-        "type": "editorial_original",
-        "name": "MathSpring Editorial",
-        "reference": "Upper combinatorics expansion set C6",
-        "displayText": "MathSpring Editorial Original"
+      "correctAnswer": {
+        "type": "integer",
+        "value": "29525"
       },
-      "olympiadTaxonomy": { "topic": "組合", "topicCode": "combinatorics", "subtopic": "圓排列", "subtopicCode": "circular_permutation" }
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 5
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "以「偶數個減奇數個」的符號配對技巧計算受奇偶限制的字串數的競賽題型",
+        "notes": "設計依據：核心轉折是引入 (−1)ᵏ 的權重，把 E − O 拆成每一位獨立的因子和 (−1)+1+1 = 1，再與 E + O = 3¹⁰ 聯立；直接對 k = 0,2,4,…,10 逐項用 C(10,k)2^(10−k) 求和雖然也可行但繁瑣得多。答案 29525 已窮舉全部 59049 個數列驗證。屬同水準原創改寫，非抄錄特定官方題。原 004（6 人圓桌旋轉視為相同）與 `combinatorics_grade9_foundation_001` **完全相同**（同樣 6 人、同樣條件、同樣答案 120），且來源為自製 editorial 暫代出處。",
+        "displayText": "改寫題（奇偶限制的字串計數）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "組合",
+        "topicCode": "combinatorics",
+        "subtopic": "指定字元出現偶數次",
+        "subtopicCode": "parity_constrained_strings"
+      },
+      "reviewStatus": "ok"
     },
     {
       "id": "combinatorics_grade12_foundation_005",
-      "reviewStatus": "pending",
       "topic": "combinatorics",
-      "subtopic": "derangement_four",
+      "subtopic": "diagonal_lattice_paths",
       "difficulty": "foundation",
       "levelStage": "grade12",
       "challengeTier": "foundation",
       "prompt": {
-        "zh-Hant": "4 封不同的信裝入 4 個對應地址不同的信封，且沒有任何一封信放進正確信封。共有多少種裝法？",
-        "zh-Hans": "4 封不同的信装入 4 个对应地址不同的信封，且没有任何一封信放进正确信封。共有多少种装法？",
-        "en": "Four distinct letters are placed into four addressed envelopes, with no letter in its correct envelope. How many such placements are there?",
-        "ja": "4 通の異なる手紙を 4 つの異なる宛先の封筒に入れます。どの手紙も正しい封筒に入らないとき、何通りありますか。"
+        "zh-Hant": "在座標平面上從 (0, 0) 走到 (4, 4)，每一步只能是下列三種之一：向右一格、向上一格、或向右上斜走一格（即同時右一格且上一格）。求不同路徑共有多少條。",
+        "zh-Hans": "在坐标平面上从 (0, 0) 走到 (4, 4)，每一步只能是下列三种之一：向右一格、向上一格、或向右上斜走一格（即同时右一格且上一格）。求不同路径共有多少条。",
+        "en": "A path goes from (0, 0) to (4, 4) in the coordinate plane, where each step is one of three kinds: one unit right, one unit up, or one unit diagonally up-right (right and up at the same time). How many different paths are there?",
+        "ja": "座標平面上で (0, 0) から (4, 4) まで進みます。1 歩は「右に 1」「上に 1」「右上に斜めに 1（右と上を同時に 1）」の 3 種類のいずれかです。異なる経路は何本ありますか。"
       },
-      "answer": { "zh-Hant": "答案是 9。", "zh-Hans": "答案是 9。", "en": "The answer is 9.", "ja": "答えは 9 です。" },
+      "answer": {
+        "zh-Hant": "答案是 321 條。",
+        "zh-Hans": "答案是 321 条。",
+        "en": "The answer is 321.",
+        "ja": "答えは 321 本です。"
+      },
       "solutionSteps": {
-        "zh-Hant": ["這是 4 個元素的錯排數。", "可直接用已知結果 !4 = 9，或用容斥計數。", "因此共有 9 種。"],
-        "zh-Hans": ["这是 4 个元素的错排数。", "可直接用已知结果 !4 = 9，或用容斥计数。", "因此共有 9 种。"],
-        "en": ["This is the derangement number for 4 objects.", "The known value is !4 = 9, which also follows from inclusion-exclusion.", "So there are 9 such placements."],
-        "ja": ["これは 4 個の錯置の数です。", "既知の値 !4 = 9 を使うか、包除原理でも求められます。", "したがって 9 通りです。"]
+        "zh-Hant": [
+          "因為多了斜步，路徑的總步數不再固定，所以不能像只有右／上兩種步伐時那樣直接用組合數 C(8,4)。",
+          "改用逐格遞推：設 f(x, y) 是從 (0, 0) 走到 (x, y) 的路徑數。",
+          "要到達 (x, y)，最後一步只可能來自左邊的 (x−1, y)、下面的 (x, y−1)、或左下的 (x−1, y−1)。",
+          "所以遞推式是 f(x, y) = f(x−1, y) + f(x, y−1) + f(x−1, y−1)，起始值 f(0, 0) = 1。",
+          "先算最下面一列與最左邊一行：只能一路直走，所以 f(x, 0) = 1、f(0, y) = 1。",
+          "接著逐格往右上填：f(1,1) = 1 + 1 + 1 = 3；f(2,1) = f(1,1) + f(2,0) + f(1,0) = 3 + 1 + 1 = 5；同理 f(1,2) = 5。",
+          "繼續填第二列與第二行：f(2,2) = f(1,2) + f(2,1) + f(1,1) = 5 + 5 + 3 = 13。",
+          "依同樣方式填到 (4, 4)，得 f(3,3) = 63、f(4,4) = 321。",
+          "所以路徑共有 321 條。（已用程式建表逐格遞推驗證；此數列即 Delannoy 數。）"
+        ],
+        "zh-Hans": [
+          "因为多了斜步，路径的总步数不再固定，所以不能像只有右／上两种步伐时那样直接用组合数 C(8,4)。",
+          "改用逐格递推：设 f(x, y) 是从 (0, 0) 走到 (x, y) 的路径数。",
+          "要到达 (x, y)，最后一步只可能来自左边的 (x−1, y)、下面的 (x, y−1)、或左下的 (x−1, y−1)。",
+          "所以递推式是 f(x, y) = f(x−1, y) + f(x, y−1) + f(x−1, y−1)，起始值 f(0, 0) = 1。",
+          "先算最下面一行与最左边一列：只能一路直走，所以 f(x, 0) = 1、f(0, y) = 1。",
+          "接着逐格往右上填：f(1,1) = 1 + 1 + 1 = 3；f(2,1) = f(1,1) + f(2,0) + f(1,0) = 3 + 1 + 1 = 5；同理 f(1,2) = 5。",
+          "继续填：f(2,2) = f(1,2) + f(2,1) + f(1,1) = 5 + 5 + 3 = 13。",
+          "依同样方式填到 (4, 4)，得 f(3,3) = 63、f(4,4) = 321。",
+          "所以路径共有 321 条。（已用程序建表逐格递推验证；此数列即 Delannoy 数。）"
+        ],
+        "en": [
+          "Because diagonal steps are allowed, the total number of steps is no longer fixed, so the binomial shortcut C(8,4) used for right/up-only paths does not apply.",
+          "Use a cell-by-cell recursion instead: let f(x, y) be the number of paths from (0, 0) to (x, y).",
+          "To reach (x, y) the last step must come from (x−1, y) on the left, (x, y−1) below, or (x−1, y−1) diagonally below-left.",
+          "So the recursion is f(x, y) = f(x−1, y) + f(x, y−1) + f(x−1, y−1), with f(0, 0) = 1.",
+          "The bottom row and left column allow only straight travel, so f(x, 0) = 1 and f(0, y) = 1.",
+          "Now fill in upward and rightward: f(1,1) = 1 + 1 + 1 = 3; f(2,1) = f(1,1) + f(2,0) + f(1,0) = 3 + 1 + 1 = 5; similarly f(1,2) = 5.",
+          "Continuing: f(2,2) = f(1,2) + f(2,1) + f(1,1) = 5 + 5 + 3 = 13.",
+          "Filling in the same way up to (4, 4) gives f(3,3) = 63 and f(4,4) = 321.",
+          "So there are 321 paths. (Verified by building the table programmatically; these are the Delannoy numbers.)"
+        ],
+        "ja": [
+          "斜め歩が加わることで総歩数が一定でなくなるため、右と上だけのときの二項係数 C(8,4) は使えません。",
+          "そこでマスごとの漸化式を使います。(0, 0) から (x, y) までの経路数を f(x, y) とします。",
+          "(x, y) に到達する最後の 1 歩は、左の (x−1, y)、下の (x, y−1)、左下の (x−1, y−1) のいずれかから来ます。",
+          "よって漸化式は f(x, y) = f(x−1, y) + f(x, y−1) + f(x−1, y−1)、初期値は f(0, 0) = 1。",
+          "最下行と最左列はまっすぐ進むしかないので f(x, 0) = 1、f(0, y) = 1。",
+          "順に埋めます：f(1,1) = 1 + 1 + 1 = 3、f(2,1) = f(1,1) + f(2,0) + f(1,0) = 3 + 1 + 1 = 5、同様に f(1,2) = 5。",
+          "続けて f(2,2) = f(1,2) + f(2,1) + f(1,1) = 5 + 5 + 3 = 13。",
+          "同じ要領で (4, 4) まで埋めると f(3,3) = 63、f(4,4) = 321。",
+          "よって経路は 321 本です。（プログラムで表を作って検証済み。この数列はドロネー数（Delannoy 数）です。）"
+        ]
       },
-      "figure": { "type": "custom", "kind": "none", "params": {} },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
       "answerMode": "integer_input",
-      "correctAnswer": { "type": "integer", "value": "9" },
-      "inputConstraints": { "allowNegative": false, "maxDigits": 1 },
-      "source": {
-        "type": "editorial_original",
-        "name": "MathSpring Editorial",
-        "reference": "Upper combinatorics expansion set C15",
-        "displayText": "MathSpring Editorial Original"
+      "correctAnswer": {
+        "type": "integer",
+        "value": "321"
       },
-      "olympiadTaxonomy": { "topic": "組合", "topicCode": "combinatorics", "subtopic": "錯排", "subtopicCode": "derangement_four" }
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 4
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "允許斜步的格點路徑計數：步數不固定故改用二維遞推填表的競賽題型",
+        "notes": "設計依據：轉折在於察覺加入斜步後總步數不再固定，組合數公式失效，必須改用 f(x,y) = f(x−1,y) + f(x,y−1) + f(x−1,y−1) 的二維遞推。答案 321 已用動態規劃建表驗證。屬同水準原創改寫，非抄錄特定官方題。原 005（4 封信的錯排）與 `combinatorics_grade11_foundation_002` **完全相同**（同樣 4 封信、同樣條件、同樣答案 9），且來源為自製 editorial 暫代出處。",
+        "displayText": "改寫題（含斜步的格點路徑）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "組合",
+        "topicCode": "combinatorics",
+        "subtopic": "含斜步的格點路徑",
+        "subtopicCode": "diagonal_lattice_paths"
+      },
+      "reviewStatus": "ok"
     },
     {
       "id": "combinatorics_grade12_foundation_006",
-      "reviewStatus": "pending",
       "topic": "combinatorics",
-      "subtopic": "subset_count_condition",
+      "subtopic": "dice_square_product",
       "difficulty": "foundation",
       "levelStage": "grade12",
       "challengeTier": "foundation",
       "prompt": {
-        "zh-Hant": "集合 {1,2,3,4,5,6} 有多少個 3 元子集合包含數字 1？",
-        "zh-Hans": "集合 {1,2,3,4,5,6} 有多少个 3 元子集合包含数字 1？",
-        "en": "How many 3-element subsets of {1,2,3,4,5,6} contain the number 1?",
-        "ja": "集合 {1,2,3,4,5,6} の 3 要素部分集合のうち、数字 1 を含むものは何個ありますか。"
+        "zh-Hant": "同時擲兩顆公正的六面骰子。兩個點數的乘積是完全平方數的機率可以寫成最簡分數 a/b，求 a + b。",
+        "zh-Hans": "同时掷两颗公正的六面骰子。两个点数的乘积是完全平方数的概率可以写成最简分数 a/b，求 a + b。",
+        "en": "Two fair six-sided dice are rolled at the same time. The probability that the product of the two numbers is a perfect square can be written as a fraction a/b in lowest terms. Find a + b.",
+        "ja": "公正な 6 面のさいころを 2 個同時に振ります。出た目の積が平方数になる確率を既約分数 a/b で表すとき、a + b を求めなさい。"
       },
-      "answer": { "zh-Hant": "答案是 10。", "zh-Hans": "答案是 10。", "en": "The answer is 10.", "ja": "答えは 10 です。" },
+      "answer": {
+        "zh-Hant": "答案是 11。",
+        "zh-Hans": "答案是 11。",
+        "en": "The answer is 11.",
+        "ja": "答えは 11 です。"
+      },
       "solutionSteps": {
-        "zh-Hant": ["先固定一定要選到 1。", "其餘 2 個元素從 {2,3,4,5,6} 的 5 個數中選。", "所以共有 C(5,2)=10 個。"],
-        "zh-Hans": ["先固定一定要选到 1。", "其余 2 个元素从 {2,3,4,5,6} 的 5 个数中选。", "所以共有 C(5,2)=10 个。"],
-        "en": ["Fix 1 as one of the chosen elements.", "Choose the remaining 2 elements from the other 5 numbers.", "So the count is C(5,2)=10."],
-        "ja": ["まず 1 を必ず選びます。", "残り 2 つを {2,3,4,5,6} の 5 個から選びます。", "したがって C(5,2)=10 個です。"]
+        "zh-Hant": [
+          "兩顆骰子分辨先後，所以樣本空間有 6 × 6 = 36 種等可能的結果。",
+          "乘積最小是 1 × 1 = 1，最大是 6 × 6 = 36，所以要找的完全平方數只可能是 1、4、9、16、25、36。",
+          "乘積 = 1：只有 (1,1)。",
+          "乘積 = 4：(1,4)、(4,1)、(2,2)，共 3 種。",
+          "乘積 = 9：需要 9 = 1×9 或 3×3，但骰子沒有 9，所以只有 (3,3)。",
+          "乘積 = 16：16 = 4×4 可行；16 = 2×8 與 1×16 都超出骰面，所以只有 (4,4)。",
+          "乘積 = 25：25 = 5×5，只有 (5,5)；乘積 = 36：36 = 6×6，只有 (6,6)（36 = 4×9 因沒有 9 而不可行）。",
+          "合計符合的結果有 1 + 3 + 1 + 1 + 1 + 1 = 8 種。",
+          "機率 = 8/36 = 2/9，而 2 與 9 互質已是最簡分數，所以 a = 2、b = 9，a + b = 11。"
+        ],
+        "zh-Hans": [
+          "两颗骰子分辨先后，所以样本空间有 6 × 6 = 36 种等可能的结果。",
+          "乘积最小是 1 × 1 = 1，最大是 6 × 6 = 36，所以要找的完全平方数只可能是 1、4、9、16、25、36。",
+          "乘积 = 1：只有 (1,1)。",
+          "乘积 = 4：(1,4)、(4,1)、(2,2)，共 3 种。",
+          "乘积 = 9：需要 9 = 1×9 或 3×3，但骰子没有 9，所以只有 (3,3)。",
+          "乘积 = 16：16 = 4×4 可行；16 = 2×8 与 1×16 都超出骰面，所以只有 (4,4)。",
+          "乘积 = 25：25 = 5×5，只有 (5,5)；乘积 = 36：36 = 6×6，只有 (6,6)（36 = 4×9 因没有 9 而不可行）。",
+          "合计符合的结果有 1 + 3 + 1 + 1 + 1 + 1 = 8 种。",
+          "概率 = 8/36 = 2/9，而 2 与 9 互质已是最简分数，所以 a = 2、b = 9，a + b = 11。"
+        ],
+        "en": [
+          "The two dice are distinguishable, so the sample space has 6 × 6 = 36 equally likely outcomes.",
+          "The product ranges from 1 × 1 = 1 to 6 × 6 = 36, so the only possible perfect squares are 1, 4, 9, 16, 25 and 36.",
+          "Product 1: only (1,1).",
+          "Product 4: (1,4), (4,1) and (2,2) — three outcomes.",
+          "Product 9: this needs 1×9 or 3×3, but a die has no 9, so only (3,3).",
+          "Product 16: 16 = 4×4 works, while 2×8 and 1×16 exceed the faces, so only (4,4).",
+          "Product 25: only (5,5); product 36: only (6,6), since 36 = 4×9 is impossible without a 9.",
+          "Altogether there are 1 + 3 + 1 + 1 + 1 + 1 = 8 favourable outcomes.",
+          "The probability is 8/36 = 2/9, and since 2 and 9 are coprime this is in lowest terms, so a = 2, b = 9 and a + b = 11."
+        ],
+        "ja": [
+          "2 個のさいころは区別されるので、標本空間は 6 × 6 = 36 通りの同様に確からしい結果です。",
+          "積は最小 1 × 1 = 1、最大 6 × 6 = 36 なので、候補となる平方数は 1、4、9、16、25、36 だけです。",
+          "積が 1：(1,1) のみ。",
+          "積が 4：(1,4)、(4,1)、(2,2) の 3 通り。",
+          "積が 9：9 = 1×9 か 3×3 ですが、さいころに 9 の目はないので (3,3) のみ。",
+          "積が 16：16 = 4×4 は可能、2×8 や 1×16 は目の範囲外なので (4,4) のみ。",
+          "積が 25：(5,5) のみ。積が 36：(6,6) のみ（36 = 4×9 は 9 の目がなく不可）。",
+          "合計で 1 + 3 + 1 + 1 + 1 + 1 = 8 通りが該当します。",
+          "確率は 8/36 = 2/9 で、2 と 9 は互いに素なので既約分数です。よって a = 2、b = 9、a + b = 11。"
+        ]
       },
-      "figure": { "type": "custom", "kind": "none", "params": {} },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
       "answerMode": "integer_input",
-      "correctAnswer": { "type": "integer", "value": "10" },
-      "inputConstraints": { "allowNegative": false, "maxDigits": 2 },
-      "source": {
-        "type": "editorial_original",
-        "name": "MathSpring Editorial",
-        "reference": "Upper combinatorics expansion set C16",
-        "displayText": "MathSpring Editorial Original"
+      "correctAnswer": {
+        "type": "integer",
+        "value": "11"
       },
-      "olympiadTaxonomy": { "topic": "組合", "topicCode": "combinatorics", "subtopic": "條件子集合", "subtopicCode": "subset_count_condition" }
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "有限樣本空間下依乘積分類的機率計數，並要求化為最簡分數後回報分子分母之和的競賽題型",
+        "notes": "設計依據：關鍵在於逐一檢查每個候選平方數時，要排除需要骰面以外數字的分解（如 9 = 1×9、16 = 2×8、36 = 4×9），這是最容易多算的地方；問 a + b 可避免分數作答。答案 11 已窮舉全部 36 種結果驗證符合者為 8 種。屬同水準原創改寫，非抄錄特定官方題。原 006（{1,…,6} 含 1 的 3 元子集個數 = C(5,2)）僅兩步，屬裸題，且來源為自製 editorial 暫代出處。",
+        "displayText": "改寫題（骰子乘積為平方數）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "組合",
+        "topicCode": "combinatorics",
+        "subtopic": "骰子乘積為平方數",
+        "subtopicCode": "dice_square_product"
+      },
+      "reviewStatus": "ok"
     },
     {
       "id": "combinatorics_grade12_foundation_007",
-      "reviewStatus": "pending",
+      "reviewStatus": "ok",
       "topic": "combinatorics",
       "subtopic": "distinct_dice_products",
       "difficulty": "foundation",
@@ -251,15 +680,49 @@
         "ja": "答えは 11 です。"
       },
       "solutionSteps": {
-        "zh-Hant": ["每個乘積都可以寫成 2ʰ×3ⁱ×5ʲ，因為骰面 1 到 6 的質因數只涉及 2、3、5。", "固定 i、j 後，2 的指數 h 可以從 0 一直到最大值 2n-i-2j，因此對每組 (i,j) 共有 2n+1-i-2j 種 h。", "把所有滿足 i+j≤n 的情況加總，可得不同乘積總數是 ((n+1)²(n+2))/2。", "令 ((n+1)²(n+2))/2 = 936，可得 (n+1)²(n+2)=1872。", "分解 1872 = 12²×13，所以 n+1=12、n+2=13，得到 n=11。"],
-        "zh-Hans": ["每个乘积都可以写成 2ʰ×3ⁱ×5ʲ，因为骰面 1 到 6 的质因数只涉及 2、3、5。", "固定 i、j 后，2 的指数 h 可以从 0 一直到最大值 2n-i-2j，因此对每组 (i,j) 共有 2n+1-i-2j 种 h。", "把所有满足 i+j≤n 的情况加总，可得不同乘积总数是 ((n+1)²(n+2))/2。", "令 ((n+1)²(n+2))/2 = 936，可得 (n+1)²(n+2)=1872。", "分解 1872 = 12²×13，所以 n+1=12、n+2=13，得到 n=11。"],
-        "en": ["Any possible product can be written as 2ʰ·3ⁱ·5ʲ, since the faces 1 through 6 only involve the primes 2, 3, and 5.", "For fixed i and j, the exponent h of 2 can range from 0 up to 2n-i-2j, giving 2n+1-i-2j possibilities.", "Summing over all pairs (i,j) with i+j≤n gives the total number of distinct products as ((n+1)²(n+2))/2.", "Setting this equal to 936 gives (n+1)²(n+2)=1872.", "Since 1872 = 12²×13, we get n+1=12 and n+2=13, so n=11."],
-        "ja": ["どの積も、サイコロの目 1 から 6 の素因数が 2、3、5 だけなので 2ʰ·3ⁱ·5ʲ の形に書けます。", "i と j を固定すると、2 の指数 h は 0 から最大 2n-i-2j まで取りうるので、2n+1-i-2j 通りあります。", "i+j≤n を満たすすべての組について足し合わせると、異なる積の個数は ((n+1)²(n+2))/2 になります。", "これを 936 に等しいとすると (n+1)²(n+2)=1872。", "1872 = 12²×13 だから n+1=12、n+2=13 となり、n=11 です。"]
+        "zh-Hant": [
+          "每個乘積都可以寫成 2ʰ×3ⁱ×5ʲ，因為骰面 1 到 6 的質因數只涉及 2、3、5。",
+          "固定 i、j 後，2 的指數 h 可以從 0 一直到最大值 2n-i-2j，因此對每組 (i,j) 共有 2n+1-i-2j 種 h。",
+          "把所有滿足 i+j≤n 的情況加總，可得不同乘積總數是 ((n+1)²(n+2))/2。",
+          "令 ((n+1)²(n+2))/2 = 936，可得 (n+1)²(n+2)=1872。",
+          "分解 1872 = 12²×13，所以 n+1=12、n+2=13，得到 n=11。"
+        ],
+        "zh-Hans": [
+          "每个乘积都可以写成 2ʰ×3ⁱ×5ʲ，因为骰面 1 到 6 的质因数只涉及 2、3、5。",
+          "固定 i、j 后，2 的指数 h 可以从 0 一直到最大值 2n-i-2j，因此对每组 (i,j) 共有 2n+1-i-2j 种 h。",
+          "把所有满足 i+j≤n 的情况加总，可得不同乘积总数是 ((n+1)²(n+2))/2。",
+          "令 ((n+1)²(n+2))/2 = 936，可得 (n+1)²(n+2)=1872。",
+          "分解 1872 = 12²×13，所以 n+1=12、n+2=13，得到 n=11。"
+        ],
+        "en": [
+          "Any possible product can be written as 2ʰ·3ⁱ·5ʲ, since the faces 1 through 6 only involve the primes 2, 3, and 5.",
+          "For fixed i and j, the exponent h of 2 can range from 0 up to 2n-i-2j, giving 2n+1-i-2j possibilities.",
+          "Summing over all pairs (i,j) with i+j≤n gives the total number of distinct products as ((n+1)²(n+2))/2.",
+          "Setting this equal to 936 gives (n+1)²(n+2)=1872.",
+          "Since 1872 = 12²×13, we get n+1=12 and n+2=13, so n=11."
+        ],
+        "ja": [
+          "どの積も、サイコロの目 1 から 6 の素因数が 2、3、5 だけなので 2ʰ·3ⁱ·5ʲ の形に書けます。",
+          "i と j を固定すると、2 の指数 h は 0 から最大 2n-i-2j まで取りうるので、2n+1-i-2j 通りあります。",
+          "i+j≤n を満たすすべての組について足し合わせると、異なる積の個数は ((n+1)²(n+2))/2 になります。",
+          "これを 936 に等しいとすると (n+1)²(n+2)=1872。",
+          "1872 = 12²×13 だから n+1=12、n+2=13 となり、n=11 です。"
+        ]
       },
-      "figure": { "type": "custom", "kind": "none", "params": {} },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
       "answerMode": "integer_input",
-      "correctAnswer": { "type": "integer", "value": "11" },
-      "inputConstraints": { "allowNegative": false, "maxDigits": 2 },
+      "correctAnswer": {
+        "type": "integer",
+        "value": "11"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
       "source": {
         "type": "official_reference",
         "name": "AMC 12",
@@ -274,11 +737,16 @@
         "rightsStatus": "needs_review",
         "notes": "Rewritten from a publicly archived competition statement."
       },
-      "olympiadTaxonomy": { "topic": "組合", "topicCode": "combinatorics", "subtopic": "骰子乘積計數", "subtopicCode": "distinct_dice_products" }
+      "olympiadTaxonomy": {
+        "topic": "組合",
+        "topicCode": "combinatorics",
+        "subtopic": "骰子乘積計數",
+        "subtopicCode": "distinct_dice_products"
+      }
     },
     {
       "id": "combinatorics_grade12_foundation_008",
-      "reviewStatus": "pending",
+      "reviewStatus": "ok",
       "topic": "combinatorics",
       "subtopic": "digit_arrangement_count",
       "difficulty": "foundation",
@@ -297,15 +765,49 @@
         "ja": "答えは 9841 です。"
       },
       "solutionSteps": {
-        "zh-Hant": ["先固定要用哪 n 個不同數字，從 1 到 9 中選，所以有 C(9,n) 種。", "接著把這 n 個數字由大到小依序放入。最大的數先放好；之後每加入一個較小數字，只能放在目前串列的最左端或最右端，否則它會成為局部最小。", "因此對固定的 n 個數字，合法排法有 2⁽ⁿ⁻¹⁾ 種。", "總數是 Σ[C(9,n)·2⁽ⁿ⁻¹⁾]，n 從 1 到 9。", "利用二項式定理可得這個和等於 ((1+2)⁹ - 1)/2 = (3⁹ - 1)/2 = 9841。"],
-        "zh-Hans": ["先固定要用哪 n 个不同数字，从 1 到 9 中选，所以有 C(9,n) 种。", "接着把这 n 个数字由大到小依次放入。最大的数先放好；之后每加入一个较小数字，只能放在目前串列的最左端或最右端，否则它会成为局部最小。", "因此对固定的 n 个数字，合法排法有 2⁽ⁿ⁻¹⁾ 种。", "总数是 Σ[C(9,n)·2⁽ⁿ⁻¹⁾]，n 从 1 到 9。", "利用二项式定理可得这个和等于 ((1+2)⁹ - 1)/2 = (3⁹ - 1)/2 = 9841。"],
-        "en": ["First choose which n distinct digits from 1 through 9 will be used, giving C(9,n) choices.", "Now insert these chosen digits from largest to smallest. The largest digit is placed first. Each smaller digit must be added either at the far left or the far right; otherwise it would become a local minimum.", "So for any fixed set of n digits, there are 2⁽ⁿ⁻¹⁾ valid arrangements.", "Summing over n=1 to 9 gives Σ[C(9,n)·2⁽ⁿ⁻¹⁾].", "By the binomial theorem this equals ((1+2)⁹ - 1)/2 = (3⁹ - 1)/2 = 9841."],
-        "ja": ["まず、使う異なる n 個の数字を 1 から 9 の中から選ぶので C(9,n) 通りあります。", "次にそれらの数字を大きい方から順に入れていきます。最大の数字を最初に置いたあと、次に小さい数字は列のいちばん左端か右端にしか置けません。そうでないと局所的な最小になります。", "したがって、固定した n 個の数字に対して有効な並べ方は 2⁽ⁿ⁻¹⁾ 通りです。", "これを n=1 から 9 まで足すと Σ[C(9,n)·2⁽ⁿ⁻¹⁾] になります。", "二項定理よりこれは ((1+2)⁹ - 1)/2 = (3⁹ - 1)/2 = 9841 です。"]
+        "zh-Hant": [
+          "先固定要用哪 n 個不同數字，從 1 到 9 中選，所以有 C(9,n) 種。",
+          "接著把這 n 個數字由大到小依序放入。最大的數先放好；之後每加入一個較小數字，只能放在目前串列的最左端或最右端，否則它會成為局部最小。",
+          "因此對固定的 n 個數字，合法排法有 2⁽ⁿ⁻¹⁾ 種。",
+          "總數是 Σ[C(9,n)·2⁽ⁿ⁻¹⁾]，n 從 1 到 9。",
+          "利用二項式定理可得這個和等於 ((1+2)⁹ - 1)/2 = (3⁹ - 1)/2 = 9841。"
+        ],
+        "zh-Hans": [
+          "先固定要用哪 n 个不同数字，从 1 到 9 中选，所以有 C(9,n) 种。",
+          "接着把这 n 个数字由大到小依次放入。最大的数先放好；之后每加入一个较小数字，只能放在目前串列的最左端或最右端，否则它会成为局部最小。",
+          "因此对固定的 n 个数字，合法排法有 2⁽ⁿ⁻¹⁾ 种。",
+          "总数是 Σ[C(9,n)·2⁽ⁿ⁻¹⁾]，n 从 1 到 9。",
+          "利用二项式定理可得这个和等于 ((1+2)⁹ - 1)/2 = (3⁹ - 1)/2 = 9841。"
+        ],
+        "en": [
+          "First choose which n distinct digits from 1 through 9 will be used, giving C(9,n) choices.",
+          "Now insert these chosen digits from largest to smallest. The largest digit is placed first. Each smaller digit must be added either at the far left or the far right; otherwise it would become a local minimum.",
+          "So for any fixed set of n digits, there are 2⁽ⁿ⁻¹⁾ valid arrangements.",
+          "Summing over n=1 to 9 gives Σ[C(9,n)·2⁽ⁿ⁻¹⁾].",
+          "By the binomial theorem this equals ((1+2)⁹ - 1)/2 = (3⁹ - 1)/2 = 9841."
+        ],
+        "ja": [
+          "まず、使う異なる n 個の数字を 1 から 9 の中から選ぶので C(9,n) 通りあります。",
+          "次にそれらの数字を大きい方から順に入れていきます。最大の数字を最初に置いたあと、次に小さい数字は列のいちばん左端か右端にしか置けません。そうでないと局所的な最小になります。",
+          "したがって、固定した n 個の数字に対して有効な並べ方は 2⁽ⁿ⁻¹⁾ 通りです。",
+          "これを n=1 から 9 まで足すと Σ[C(9,n)·2⁽ⁿ⁻¹⁾] になります。",
+          "二項定理よりこれは ((1+2)⁹ - 1)/2 = (3⁹ - 1)/2 = 9841 です。"
+        ]
       },
-      "figure": { "type": "custom", "kind": "none", "params": {} },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
       "answerMode": "integer_input",
-      "correctAnswer": { "type": "integer", "value": "9841" },
-      "inputConstraints": { "allowNegative": false, "maxDigits": 4 },
+      "correctAnswer": {
+        "type": "integer",
+        "value": "9841"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 4
+      },
       "source": {
         "type": "official_reference",
         "name": "AMC 12",
@@ -320,11 +822,16 @@
         "rightsStatus": "needs_review",
         "notes": "Rewritten from a publicly archived competition statement."
       },
-      "olympiadTaxonomy": { "topic": "組合", "topicCode": "combinatorics", "subtopic": "數位排列計數", "subtopicCode": "digit_arrangement_count" }
+      "olympiadTaxonomy": {
+        "topic": "組合",
+        "topicCode": "combinatorics",
+        "subtopic": "數位排列計數",
+        "subtopicCode": "digit_arrangement_count"
+      }
     },
     {
       "id": "combinatorics_grade12_foundation_009",
-      "reviewStatus": "pending",
+      "reviewStatus": "ok",
       "topic": "combinatorics",
       "subtopic": "heavy_tailed_permutation",
       "difficulty": "foundation",
@@ -343,15 +850,53 @@
         "ja": "答えは 48 です。"
       },
       "solutionSteps": {
-        "zh-Hant": ["總共有 5!=120 個排列。", "若把一個排列的前兩項與後兩項交換，則不等式 a1+a2<a4+a5 會變成相反方向，這建立了小於與大於兩類的一一對應。", "所以只要算出等號情形的個數，再從 120 中扣掉後平分即可。", "滿足 a1+a2=a4+a5 的兩組數字只有 {1,4} 對 {2,3}、{1,5} 對 {2,4}、{2,5} 對 {3,4}，共有 3 種。", "每一種可決定哪一組放左邊、哪一組放右邊，共 2 種；左右兩組內部分別可交換，故共有 2×2×2=8 種。", "因此等號情形有 3×8=24 種，故 heavy-tailed 排列數是 (120-24)/2=48。"],
-        "zh-Hans": ["总共有 5!=120 个排列。", "若把一个排列的前两项与后两项交换，则不等式 a1+a2<a4+a5 会变成相反方向，这建立了小于与大于两类的一一对应。", "所以只要算出等号情形的个数，再从 120 中扣掉后平分即可。", "满足 a1+a2=a4+a5 的两组数字只有 {1,4} 对 {2,3}、{1,5} 对 {2,4}、{2,5} 对 {3,4}，共有 3 种。", "每一种可决定哪一组放左边、哪一组放右边，共 2 种；左右两组内部分别可交换，故共有 2×2×2=8 种。", "因此等号情形有 3×8=24 种，故 heavy-tailed 排列数是 (120-24)/2=48。"],
-        "en": ["There are 5!=120 permutations in total.", "If we swap the first two positions with the last two positions, then any permutation with a1+a2<a4+a5 pairs with one having a1+a2>a4+a5.", "So it is enough to count the equality cases and then split the rest equally.", "The only equal-sum pairs are {1,4} with {2,3}, {1,5} with {2,4}, and {2,5} with {3,4}.", "For each case, we can choose which pair goes on the left and which on the right in 2 ways, and arrange each pair internally in 2 ways, giving 2×2×2=8 permutations.", "Thus there are 3×8=24 equality cases, so the number of heavy-tailed permutations is (120-24)/2=48."],
-        "ja": ["順列は全部で 5!=120 個あります。", "前 2 項と後ろ 2 項を入れ替えると、a1+a2<a4+a5 の順列は a1+a2>a4+a5 の順列と 1 対 1 に対応します。", "したがって等号の場合だけ数えれば、残りはちょうど半分ずつです。", "a1+a2=a4+a5 となる数字の組は {1,4} と {2,3}、{1,5} と {2,4}、{2,5} と {3,4} の 3 通りだけです。", "各場合でどちらの組を左に置くかが 2 通り、さらに左右それぞれの組内の並べ方が 2 通りずつあるので 2×2×2=8 通りです。", "よって等号の場合は 3×8=24 通りで、heavy-tailed な順列は (120-24)/2=48 通りです。"]
+        "zh-Hant": [
+          "總共有 5!=120 個排列。",
+          "若把一個排列的前兩項與後兩項交換，則不等式 a1+a2<a4+a5 會變成相反方向，這建立了小於與大於兩類的一一對應。",
+          "所以只要算出等號情形的個數，再從 120 中扣掉後平分即可。",
+          "滿足 a1+a2=a4+a5 的兩組數字只有 {1,4} 對 {2,3}、{1,5} 對 {2,4}、{2,5} 對 {3,4}，共有 3 種。",
+          "每一種可決定哪一組放左邊、哪一組放右邊，共 2 種；左右兩組內部分別可交換，故共有 2×2×2=8 種。",
+          "因此等號情形有 3×8=24 種，故 heavy-tailed 排列數是 (120-24)/2=48。"
+        ],
+        "zh-Hans": [
+          "总共有 5!=120 个排列。",
+          "若把一个排列的前两项与后两项交换，则不等式 a1+a2<a4+a5 会变成相反方向，这建立了小于与大于两类的一一对应。",
+          "所以只要算出等号情形的个数，再从 120 中扣掉后平分即可。",
+          "满足 a1+a2=a4+a5 的两组数字只有 {1,4} 对 {2,3}、{1,5} 对 {2,4}、{2,5} 对 {3,4}，共有 3 种。",
+          "每一种可决定哪一组放左边、哪一组放右边，共 2 种；左右两组内部分别可交换，故共有 2×2×2=8 种。",
+          "因此等号情形有 3×8=24 种，故 heavy-tailed 排列数是 (120-24)/2=48。"
+        ],
+        "en": [
+          "There are 5!=120 permutations in total.",
+          "If we swap the first two positions with the last two positions, then any permutation with a1+a2<a4+a5 pairs with one having a1+a2>a4+a5.",
+          "So it is enough to count the equality cases and then split the rest equally.",
+          "The only equal-sum pairs are {1,4} with {2,3}, {1,5} with {2,4}, and {2,5} with {3,4}.",
+          "For each case, we can choose which pair goes on the left and which on the right in 2 ways, and arrange each pair internally in 2 ways, giving 2×2×2=8 permutations.",
+          "Thus there are 3×8=24 equality cases, so the number of heavy-tailed permutations is (120-24)/2=48."
+        ],
+        "ja": [
+          "順列は全部で 5!=120 個あります。",
+          "前 2 項と後ろ 2 項を入れ替えると、a1+a2<a4+a5 の順列は a1+a2>a4+a5 の順列と 1 対 1 に対応します。",
+          "したがって等号の場合だけ数えれば、残りはちょうど半分ずつです。",
+          "a1+a2=a4+a5 となる数字の組は {1,4} と {2,3}、{1,5} と {2,4}、{2,5} と {3,4} の 3 通りだけです。",
+          "各場合でどちらの組を左に置くかが 2 通り、さらに左右それぞれの組内の並べ方が 2 通りずつあるので 2×2×2=8 通りです。",
+          "よって等号の場合は 3×8=24 通りで、heavy-tailed な順列は (120-24)/2=48 通りです。"
+        ]
       },
-      "figure": { "type": "custom", "kind": "none", "params": {} },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
       "answerMode": "integer_input",
-      "correctAnswer": { "type": "integer", "value": "48" },
-      "inputConstraints": { "allowNegative": false, "maxDigits": 2 },
+      "correctAnswer": {
+        "type": "integer",
+        "value": "48"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
       "source": {
         "type": "official_reference",
         "name": "AMC 12",
@@ -366,7 +911,12 @@
         "rightsStatus": "needs_review",
         "notes": "Rewritten from a publicly archived competition statement."
       },
-      "olympiadTaxonomy": { "topic": "組合", "topicCode": "combinatorics", "subtopic": "排列對稱計數", "subtopicCode": "heavy_tailed_permutation" }
+      "olympiadTaxonomy": {
+        "topic": "組合",
+        "topicCode": "combinatorics",
+        "subtopic": "排列對稱計數",
+        "subtopicCode": "heavy_tailed_permutation"
+      }
     }
   ]
 }

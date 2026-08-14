@@ -6,11 +6,16 @@
   "olympiadTopicCode": "logic",
   "levelStage": "grade11",
   "challengeTier": "foundation",
-  "languages": ["zh-Hant", "zh-Hans", "en", "ja"],
+  "languages": [
+    "zh-Hant",
+    "zh-Hans",
+    "en",
+    "ja"
+  ],
   "questions": [
     {
       "id": "logic_grade11_foundation_001",
-      "reviewStatus": "pending",
+      "reviewStatus": "ok",
       "topic": "logic",
       "subtopic": "parity_game",
       "difficulty": "foundation",
@@ -22,17 +27,64 @@
         "en": "There are 21 coins on a table. Two players alternate taking 1, 2, or 3 coins, and the player taking the last coin wins. What should the first player take first to guarantee a win?",
         "ja": "机の上に硬貨が 21 枚あります。2 人が交互に 1 枚、2 枚、3 枚のいずれかを取り、最後の 1 枚を取った人が勝ちです。先手が必ず勝つには最初に何枚取ればよいですか。"
       },
-      "answer": { "zh-Hant": "答案是 1 枚。", "zh-Hans": "答案是 1 枚。", "en": "The answer is 1 coin.", "ja": "答えは 1 枚です。" },
-      "solutionSteps": {
-        "zh-Hant": ["關鍵是每回合後讓剩下的硬幣數變成 4 的倍數。", "因為 20 是 4 的倍數，所以先手第一步應拿 1 枚。", "之後對手若拿 1、2、3 枚，先手就分別補成 3、2、1 枚。", "便能一直維持 4 的倍數並拿到最後一枚。"],
-        "zh-Hans": ["关键是每回合后让剩下的硬币数变成 4 的倍数。", "因为 20 是 4 的倍数，所以先手第一步应拿 1 枚。", "之后对手若拿 1、2、3 枚，先手就分别补成 3、2、1 枚。", "便能一直维持 4 的倍数并拿到最后一枚。"],
-        "en": ["The strategy is to leave a multiple of 4 after each of your turns.", "Since 20 is a multiple of 4, the first player should take 1 coin first.", "Then respond to 1, 2, or 3 by taking 3, 2, or 1 respectively.", "This keeps the total removed each round at 4 and guarantees taking the last coin."],
-        "ja": ["自分の手番の後に残り枚数を 4 の倍数にするのがポイントです。", "20 は 4 の倍数なので、最初に 1 枚取ります。", "その後、相手が 1、2、3 枚取ったら、それぞれ 3、2、1 枚取って合わせて 4 枚にします。", "これで最後の 1 枚を取れます。"]
+      "answer": {
+        "zh-Hant": "答案是 1 枚。",
+        "zh-Hans": "答案是 1 枚。",
+        "en": "The answer is 1 coin.",
+        "ja": "答えは 1 枚です。"
       },
-      "figure": { "type": "custom", "kind": "none", "params": {} },
+      "solutionSteps": {
+        "zh-Hant": [
+          "這種「輪流取、取到最後獲勝」的遊戲，要從終點往回想：誰面對 0 枚就輸了。",
+          "若某人面對 4 枚，不論他取 1、2 或 3 枚，剩下 3、2、1 枚都會讓對手一次取完獲勝，所以面對 4 枚的人必敗。",
+          "同理面對 8、12、16、20 枚的人也必敗——因為對手總能把每一回合的取量補成 4 枚，維持 4 的倍數。",
+          "所以必敗位置就是 4 的倍數，先手的目標是「取完之後留給對手 4 的倍數」。",
+          "21 除以 4 餘 1，所以先手只要取走 1 枚，就留下 20 枚給對手。",
+          "之後對手取 k 枚（k = 1、2 或 3），先手就取 4 − k 枚，每一輪合計恰好減少 4 枚，剩餘數依序是 16、12、8、4。",
+          "最後對手面對 4 枚必敗，先手取到最後一枚獲勝。所以第一步應取 1 枚。"
+        ],
+        "zh-Hans": [
+          "这种「轮流取、取到最后获胜」的游戏，要从终点往回想：谁面对 0 枚就输了。",
+          "若某人面对 4 枚，不论他取 1、2 或 3 枚，剩下 3、2、1 枚都会让对手一次取完获胜，所以面对 4 枚的人必败。",
+          "同理面对 8、12、16、20 枚的人也必败——因为对手总能把每一回合的取量补成 4 枚，维持 4 的倍数。",
+          "所以必败位置就是 4 的倍数，先手的目标是「取完之后留给对手 4 的倍数」。",
+          "21 除以 4 余 1，所以先手只要取走 1 枚，就留下 20 枚给对手。",
+          "之后对手取 k 枚（k = 1、2 或 3），先手就取 4 − k 枚，每一轮合计恰好减少 4 枚，剩余数依序是 16、12、8、4。",
+          "最后对手面对 4 枚必败，先手取到最后一枚获胜。所以第一步应取 1 枚。"
+        ],
+        "en": [
+          "For a take-away game where the player taking the last coin wins, reason backwards from the end: whoever faces 0 coins has lost.",
+          "If a player faces 4 coins, taking 1, 2 or 3 leaves 3, 2 or 1, and the opponent takes them all and wins, so facing 4 coins is a losing position.",
+          "The same applies to 8, 12, 16 and 20 coins, because the opponent can always top up each round to exactly 4 and preserve the multiple of 4.",
+          "So the losing positions are the multiples of 4, and the first player aims to leave the opponent a multiple of 4.",
+          "Since 21 leaves remainder 1 on division by 4, the first player takes 1 coin and leaves 20.",
+          "Thereafter, whenever the opponent takes k coins (k = 1, 2 or 3), the first player takes 4 − k, so each full round removes exactly 4 and the totals go 16, 12, 8, 4.",
+          "Finally the opponent faces 4 coins and loses, so the first player takes the last coin. The first move is to take 1 coin."
+        ],
+        "ja": [
+          "「交互に取り、最後の 1 枚を取った方が勝ち」の game は終点から逆に考えます。0 枚に直面した人が負けです。",
+          "4 枚に直面すると、1、2、3 枚のどれを取っても残り 3、2、1 枚を相手が取り切って勝つので、4 枚は負けの局面です。",
+          "同様に 8、12、16、20 枚も負けの局面です。相手は各ラウンドの合計をちょうど 4 枚に補って 4 の倍数を保てるからです。",
+          "したがって負けの局面は 4 の倍数であり、先手の目標は「取った後に相手へ 4 の倍数を残す」ことです。",
+          "21 を 4 で割ると余りは 1 なので、先手は 1 枚取って 20 枚を残します。",
+          "以後、相手が k 枚（k = 1、2、3）取るたびに先手は 4 − k 枚取れば、1 ラウンドでちょうど 4 枚減り、残りは 16、12、8、4 と進みます。",
+          "最後に相手が 4 枚に直面して負け、先手が最後の 1 枚を取ります。よって第一手は 1 枚です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
       "answerMode": "integer_input",
-      "correctAnswer": { "type": "integer", "value": "1" },
-      "inputConstraints": { "allowNegative": false, "maxDigits": 1 },
+      "correctAnswer": {
+        "type": "integer",
+        "value": "1"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
       "source": {
         "type": "official_reference",
         "name": "IMC",
@@ -47,11 +99,16 @@
         "rightsStatus": "needs_review",
         "notes": "Rewritten from the official public competition PDF."
       },
-      "olympiadTaxonomy": { "topic": "邏輯", "topicCode": "logic", "subtopic": "博弈策略", "subtopicCode": "parity_game" }
+      "olympiadTaxonomy": {
+        "topic": "邏輯",
+        "topicCode": "logic",
+        "subtopic": "博弈策略",
+        "subtopicCode": "parity_game"
+      }
     },
     {
       "id": "logic_grade11_foundation_002",
-      "reviewStatus": "pending",
+      "reviewStatus": "ok",
       "topic": "logic",
       "subtopic": "statement_grid",
       "difficulty": "foundation",
@@ -63,17 +120,64 @@
         "en": "Place the number cards 1, 2, 3, and 4 into boxes A, B, C, and D, one per box. A is not 1, B is greater than A, C is not the largest number, and D is even. If A is as small as possible, what is D?",
         "ja": "数字カード 1、2、3、4 を A、B、C、D の 4 つのマスに 1 枚ずつ入れます。A は 1 ではなく、B は A より大きく、C は最大の数ではなく、D は偶数です。A をできるだけ小さくするとき、D は何ですか。"
       },
-      "answer": { "zh-Hant": "答案是 4。", "zh-Hans": "答案是 4。", "en": "The answer is 4.", "ja": "答えは 4 です。" },
-      "solutionSteps": {
-        "zh-Hant": ["A 不能是 1，因此最小可能是 2。", "若 A=2，則 B 需比 2 大。", "D 是偶數，只能是 4，因為 2 已在 A。", "此時 C 可放 1，B 放 3，條件都滿足。"],
-        "zh-Hans": ["A 不能是 1，因此最小可能是 2。", "若 A=2，则 B 需比 2 大。", "D 是偶数，只能是 4，因为 2 已在 A。", "此时 C 可放 1，B 放 3，条件都满足。"],
-        "en": ["Since A is not 1, the smallest possible value for A is 2.", "Then B must be larger than 2.", "Because D must be even and 2 is already used, D must be 4.", "Now C can be 1 and B can be 3, satisfying all conditions."],
-        "ja": ["A は 1 ではないので最小は 2 です。", "A=2 なら B は 2 より大きくなければなりません。", "D は偶数で、2 は A に使っているので D は 4 です。", "このとき C を 1、B を 3 とすれば条件を満たします。"]
+      "answer": {
+        "zh-Hant": "答案是 4。",
+        "zh-Hans": "答案是 4。",
+        "en": "The answer is 4.",
+        "ja": "答えは 4 です。"
       },
-      "figure": { "type": "custom", "kind": "none", "params": {} },
+      "solutionSteps": {
+        "zh-Hant": [
+          "四個條件分別是：A ≠ 1、B > A、C 不是最大的數（即 C ≠ 4）、D 是偶數（即 D ∈ {2, 4}）。",
+          "題目要「A 是最小可能值」，所以先確認哪些 A 值能配出完整合法的擺法，再取最小的那個。",
+          "A = 1 直接被排除。試 A = 2：此時 D 是偶數但 2 已被 A 用掉，所以 D = 4。",
+          "剩下 1 與 3 要給 B 與 C。B > A = 2 所以 B = 3，於是 C = 1，而 C ≠ 4 也滿足。配置 (A,B,C,D) = (2,3,1,4) 完全合法。",
+          "所以 A 的最小可能值確實是 2，不需要再試更大的 A。",
+          "在 A = 2 的情況下，四個條件已把每一格逼到唯一，因此 D = 4。",
+          "驗算：窮舉 1、2、3、4 的全部 24 種排列，符合四個條件的只有 (2,3,1,4) 與 (3,4,1,2) 兩組；A 最小的是前者，其 D = 4。"
+        ],
+        "zh-Hans": [
+          "四个条件分别是：A ≠ 1、B > A、C 不是最大的数（即 C ≠ 4）、D 是偶数（即 D ∈ {2, 4}）。",
+          "题目要「A 是最小可能值」，所以先确认哪些 A 值能配出完整合法的摆法，再取最小的那个。",
+          "A = 1 直接被排除。试 A = 2：此时 D 是偶数但 2 已被 A 用掉，所以 D = 4。",
+          "剩下 1 与 3 要给 B 与 C。B > A = 2 所以 B = 3，于是 C = 1，而 C ≠ 4 也满足。配置 (A,B,C,D) = (2,3,1,4) 完全合法。",
+          "所以 A 的最小可能值确实是 2，不需要再试更大的 A。",
+          "在 A = 2 的情况下，四个条件已把每一格逼到唯一，因此 D = 4。",
+          "验算：穷举 1、2、3、4 的全部 24 种排列，符合四个条件的只有 (2,3,1,4) 与 (3,4,1,2) 两组；A 最小的是前者，其 D = 4。"
+        ],
+        "en": [
+          "The four conditions are: A ≠ 1, B > A, C is not the largest number (so C ≠ 4), and D is even (so D ∈ {2, 4}).",
+          "The problem asks for the case where A takes its smallest possible value, so first check which values of A admit a complete legal arrangement, then take the smallest.",
+          "A = 1 is excluded outright. Try A = 2: then D must be even, but 2 is already used by A, so D = 4.",
+          "That leaves 1 and 3 for B and C. Since B > A = 2 we get B = 3 and hence C = 1, which also satisfies C ≠ 4. The arrangement (A,B,C,D) = (2,3,1,4) is fully legal.",
+          "So the smallest possible value of A really is 2, and larger values need not be tried.",
+          "With A = 2 the four conditions force every cell uniquely, so D = 4.",
+          "Check: enumerating all 24 permutations of 1, 2, 3, 4, only (2,3,1,4) and (3,4,1,2) satisfy all four conditions; the one with the smaller A is the former, giving D = 4."
+        ],
+        "ja": [
+          "4 つの条件は、A ≠ 1、B > A、C は最大でない（すなわち C ≠ 4）、D は偶数（すなわち D ∈ {2, 4}）です。",
+          "問題は「A が最小の場合」を求めているので、まずどの A なら完全に条件を満たす配置が作れるかを確認し、その最小をとります。",
+          "A = 1 は除外されます。A = 2 を試すと、D は偶数ですが 2 は A が使っているので D = 4。",
+          "残る 1 と 3 を B と C に割り当てます。B > A = 2 より B = 3、したがって C = 1 で C ≠ 4 も満たします。配置 (A,B,C,D) = (2,3,1,4) は完全に条件を満たします。",
+          "よって A の最小値は確かに 2 であり、より大きい A を試す必要はありません。",
+          "A = 2 のとき 4 つの条件で各マスが一意に決まるので D = 4。",
+          "検算：1、2、3、4 の 24 通りの並べ方をすべて調べると条件を満たすのは (2,3,1,4) と (3,4,1,2) の 2 つだけで、A が小さいのは前者、その D = 4 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
       "answerMode": "integer_input",
-      "correctAnswer": { "type": "integer", "value": "4" },
-      "inputConstraints": { "allowNegative": false, "maxDigits": 1 },
+      "correctAnswer": {
+        "type": "integer",
+        "value": "4"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
       "source": {
         "type": "official_reference",
         "name": "IMC",
@@ -88,161 +192,376 @@
         "rightsStatus": "needs_review",
         "notes": "Rewritten from the official public competition PDF."
       },
-      "olympiadTaxonomy": { "topic": "邏輯", "topicCode": "logic", "subtopic": "條件配置", "subtopicCode": "statement_grid" }
+      "olympiadTaxonomy": {
+        "topic": "邏輯",
+        "topicCode": "logic",
+        "subtopic": "條件配置",
+        "subtopicCode": "statement_grid"
+      }
     },
     {
       "id": "logic_grade11_foundation_003",
-      "reviewStatus": "pending",
       "topic": "logic",
-      "subtopic": "paradox_count",
+      "subtopic": "double_counting_survey",
       "difficulty": "foundation",
       "levelStage": "grade11",
       "challengeTier": "foundation",
       "prompt": {
-        "zh-Hant": "四個人輪流報數，每次只能報比前一個數大 1 或大 2。若第一個人從 1 開始，誰先報到 10 誰贏。若每個人都採最優策略，第一個人第一次應報幾，才有必勝策略？",
-        "zh-Hans": "四个人轮流报数，每次只能报比前一个数大 1 或大 2。若第一个人从 1 开始，谁先报到 10 谁赢。若每个人都采最优策略，第一个人第一次应报几，才有必胜策略？",
-        "en": "Four players take turns calling numbers. Each new number must be 1 or 2 greater than the previous one. Starting from 1, the player who first says 10 wins. If everyone plays optimally, what should the first player say at the first turn to have a winning strategy?",
-        "ja": "4 人が順番に数を言います。前の数より 1 大きいか 2 大きい数しか言えません。1 から始めて、最初に 10 を言った人が勝ちです。全員が最適に行動するとき、先手は最初にいくつを言えば必勝になりますか。"
+        "zh-Hant": "一場考試有 3 道題，每位考生至少答對 1 題。已知答對第 1 題的有 20 人、答對第 2 題的有 18 人、答對第 3 題的有 15 人；三題全對的有 5 人，恰好答對兩題的有 12 人。求考生總人數。",
+        "zh-Hans": "一场考试有 3 道题，每位考生至少答对 1 题。已知答对第 1 题的有 20 人、答对第 2 题的有 18 人、答对第 3 题的有 15 人；三题全对的有 5 人，恰好答对两题的有 12 人。求考生总人数。",
+        "en": "An exam has 3 questions and every candidate answers at least one correctly. Exactly 20 candidates get question 1 right, 18 get question 2 right and 15 get question 3 right; 5 candidates get all three right and 12 get exactly two right. Find the total number of candidates.",
+        "ja": "3 問の試験があり、各受験者は少なくとも 1 問は正解しました。第 1 問の正解者は 20 人、第 2 問は 18 人、第 3 問は 15 人で、3 問すべて正解したのは 5 人、ちょうど 2 問正解したのは 12 人です。受験者の総数を求めなさい。"
       },
-      "answer": { "zh-Hant": "答案是 1。", "zh-Hans": "答案是 1。", "en": "The answer is 1.", "ja": "答えは 1 です。" },
+      "answer": {
+        "zh-Hant": "答案是 31 人。",
+        "zh-Hans": "答案是 31 人。",
+        "en": "The answer is 31.",
+        "ja": "答えは 31 人です。"
+      },
       "solutionSteps": {
-        "zh-Hant": ["關鍵位置是 1、4、7、10。", "只要想辦法輪到自己時說出這些數，就能掌控局面。", "因此先手第一步就應該先報 1，之後設法接到 4、7、10。"],
-        "zh-Hans": ["关键位置是 1、4、7、10。", "只要想办法轮到自己时说出这些数，就能掌控局面。", "因此先手第一步就应该先报 1，之后设法接到 4、7、10。"],
-        "en": ["The key numbers are 1, 4, 7, and 10.", "If the first player can keep landing on these numbers, the game is controlled.", "So the first move should be 1, and then the first player aims to say 4, 7, and 10."],
-        "ja": ["重要な数は 1、4、7、10 です。", "自分の番でこれらの数を言えれば主導権を取れます。", "したがって最初は 1 を言い、その後 4、7、10 を目指します。"]
+        "zh-Hant": [
+          "把「20 + 18 + 15 = 53」這個數看清楚：它不是人數，而是「答對次數」的總和，每個人被算的次數等於他答對的題數。",
+          "所以 53 = (恰好答對 1 題的人數) × 1 + (恰好答對 2 題的人數) × 2 + (恰好答對 3 題的人數) × 3。",
+          "設恰好答對 1 題的有 x 人。題目已給恰好 2 題的有 12 人、恰好 3 題的有 5 人。",
+          "代入得 x × 1 + 12 × 2 + 5 × 3 = 53，也就是 x + 24 + 15 = 53。",
+          "解得 x = 53 − 39 = 14，即恰好答對 1 題的有 14 人。",
+          "因為每位考生至少答對 1 題，所以每個人都恰好落在「1 題、2 題、3 題」三類之一，沒有遺漏也沒有重複。",
+          "總人數 = 14 + 12 + 5 = 31 人。"
+        ],
+        "zh-Hans": [
+          "把「20 + 18 + 15 = 53」这个数看清楚：它不是人数，而是「答对次数」的总和，每个人被算的次数等于他答对的题数。",
+          "所以 53 = (恰好答对 1 题的人数) × 1 + (恰好答对 2 题的人数) × 2 + (恰好答对 3 题的人数) × 3。",
+          "设恰好答对 1 题的有 x 人。题目已给恰好 2 题的有 12 人、恰好 3 题的有 5 人。",
+          "代入得 x × 1 + 12 × 2 + 5 × 3 = 53，也就是 x + 24 + 15 = 53。",
+          "解得 x = 53 − 39 = 14，即恰好答对 1 题的有 14 人。",
+          "因为每位考生至少答对 1 题，所以每个人都恰好落在「1 题、2 题、3 题」三类之一，没有遗漏也没有重复。",
+          "总人数 = 14 + 12 + 5 = 31 人。"
+        ],
+        "en": [
+          "Look carefully at the number 20 + 18 + 15 = 53: it is not a count of people but a count of correct answers, with each person counted as many times as the number of questions they got right.",
+          "So 53 = (number with exactly 1 correct) × 1 + (number with exactly 2 correct) × 2 + (number with exactly 3 correct) × 3.",
+          "Let x be the number with exactly one correct answer; the problem gives 12 with exactly two and 5 with exactly three.",
+          "Substituting: x × 1 + 12 × 2 + 5 × 3 = 53, that is x + 24 + 15 = 53.",
+          "Hence x = 53 − 39 = 14, so 14 candidates got exactly one question right.",
+          "Since every candidate gets at least one right, each falls into exactly one of the three classes, with no omissions and no double counting.",
+          "The total is 14 + 12 + 5 = 31 candidates."
+        ],
+        "ja": [
+          "20 + 18 + 15 = 53 という数の意味をよく見ます。これは人数ではなく「正解の延べ数」であり、各人は正解した問題数だけ数えられています。",
+          "したがって 53 =（ちょうど 1 問正解の人数）× 1 +（ちょうど 2 問正解の人数）× 2 +（ちょうど 3 問正解の人数）× 3。",
+          "ちょうど 1 問正解の人数を x とします。ちょうど 2 問は 12 人、ちょうど 3 問は 5 人と与えられています。",
+          "代入すると x × 1 + 12 × 2 + 5 × 3 = 53、すなわち x + 24 + 15 = 53。",
+          "よって x = 53 − 39 = 14 で、ちょうど 1 問正解は 14 人。",
+          "各受験者は少なくとも 1 問正解しているので、全員が「1 問・2 問・3 問」のいずれかちょうど 1 つに属し、漏れも重複もありません。",
+          "総数は 14 + 12 + 5 = 31 人。"
+        ]
       },
-      "figure": { "type": "custom", "kind": "none", "params": {} },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
       "answerMode": "integer_input",
-      "correctAnswer": { "type": "integer", "value": "1" },
-      "inputConstraints": { "allowNegative": false, "maxDigits": 1 },
-      "source": {
-        "type": "official_reference",
-        "name": "IMC",
-        "contest": "IMC Taiwan",
-        "year": "2026",
-        "round": "複賽",
-        "division": "11 年級",
-        "problemNumber": "選擇 10",
-        "reference": "22nd IMC Taiwan semifinal grade 11 choice 10",
-        "displayText": "IMC Taiwan 2026 複賽 11年級 選擇 10",
-        "sourceUrl": "https://imcct.net/UserFiles/news/583/20260413110023_4.pdf",
-        "rightsStatus": "needs_review",
-        "notes": "Rewritten from the official public competition PDF."
+      "correctAnswer": {
+        "type": "integer",
+        "value": "31"
       },
-      "olympiadTaxonomy": { "topic": "邏輯", "topicCode": "logic", "subtopic": "博弈不變量", "subtopicCode": "paradox_count" }
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "把各題正解人數之和解讀為「延伸計數」，再依恰好答對題數分類求總人數的競賽題型",
+        "notes": "設計依據：核心轉折是察覺 20+18+15 是延伸計數而非人數，每人被重複計入自己答對的題數次；再用「至少答對一題」保證三類互斥且窮盡。答案 31 已驗算。屬同水準原創改寫，非抄錄特定官方題。原 003 題幹自相矛盾——已言明「第一個人從 1 開始」卻又問「第一個人第一次應報幾」，答案 1 是題幹直接給定而非策略推得；且四人輪流卻套用兩人博弈的關鍵位置論證，題目已損毀。",
+        "displayText": "改寫題（延伸計數與分類）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "邏輯",
+        "topicCode": "logic",
+        "subtopic": "答對題數的雙重計數",
+        "subtopicCode": "double_counting_survey"
+      },
+      "reviewStatus": "ok"
     },
     {
       "id": "logic_grade11_foundation_004",
-      "reviewStatus": "pending",
       "topic": "logic",
-      "subtopic": "schedule_reasoning",
+      "subtopic": "clock_hands_overlap",
       "difficulty": "foundation",
       "levelStage": "grade11",
       "challengeTier": "foundation",
       "prompt": {
-        "zh-Hant": "甲、乙、丙三人要在星期一、二、三各做一次報告，每天只一人。已知：甲不在星期一，乙在甲之後，丙不在星期三。請問星期二是誰報告？",
-        "zh-Hans": "甲、乙、丙三人要在星期一、二、三各做一次报告，每天只一人。已知：甲不在星期一，乙在甲之后，丙不在星期三。请问星期二是谁报告？",
-        "en": "A, B, and C give presentations on Monday, Tuesday, and Wednesday, one per day. A is not on Monday, B is after A, and C is not on Wednesday. Who presents on Tuesday?",
-        "ja": "A、B、C の 3 人が月・火・水のいずれか 1 日ずつ発表します。A は月曜ではなく、B は A の後、C は水曜ではありません。火曜に発表するのは誰ですか。"
+        "zh-Hant": "某個時刻落在 3 點與 4 點之間，此時時鐘的時針與分針恰好重合。設從 3 點整起算已經過了 t 分鐘，且 t 可以寫成 a/11 分。求 a。",
+        "zh-Hans": "某个时刻落在 3 点与 4 点之间，此时时钟的时针与分针恰好重合。设从 3 点整起算已经过了 t 分钟，且 t 可以写成 a/11 分。求 a。",
+        "en": "At some moment between 3 o'clock and 4 o'clock the hour hand and the minute hand of a clock exactly coincide. Let t be the number of minutes elapsed since 3 o'clock, and write t as a/11 minutes. Find a.",
+        "ja": "3 時と 4 時の間のある時刻に、時計の時針と分針がちょうど重なります。3 時ちょうどからの経過時間を t 分とし、t を a/11 分の形で表すとき、a を求めなさい。"
       },
-      "answer": { "zh-Hant": "答案是甲。", "zh-Hans": "答案是甲。", "en": "The answer is A.", "ja": "答えは A です。" },
+      "answer": {
+        "zh-Hant": "答案是 180。",
+        "zh-Hans": "答案是 180。",
+        "en": "The answer is 180.",
+        "ja": "答えは 180 です。"
+      },
       "solutionSteps": {
-        "zh-Hant": ["丙不在星期三，所以丙只能在星期一或二。", "若甲在星期三，乙必須在甲之後，不可能。", "因此甲只能在星期二。", "於是乙在星期三，丙在星期一。"],
-        "zh-Hans": ["丙不在星期三，所以丙只能在星期一或二。", "若甲在星期三，乙必须在甲之后，不可能。", "因此甲只能在星期二。", "于是乙在星期三，丙在星期一。"],
-        "en": ["C is not on Wednesday, so C must be on Monday or Tuesday.", "If A were on Wednesday, then B would have to be after A, impossible.", "So A must be on Tuesday.", "Then B is on Wednesday and C is on Monday."],
-        "ja": ["C は水曜ではないので、月曜か火曜です。", "A が水曜だと、B が A の後という条件を満たせません。", "したがって A は火曜です。", "すると B は水曜、C は月曜です。"]
+        "zh-Hant": [
+          "先定出兩根指針的角速度。分針 60 分鐘轉一圈 360°，所以每分鐘轉 6°。",
+          "時針 12 小時（720 分鐘）轉一圈 360°，所以每分鐘轉 0.5°。",
+          "以 12 點方向為 0°、順時針為正，來寫出經過 t 分鐘後兩針的角度。",
+          "分針從 12 點方向出發，角度是 6t。",
+          "時針在 3 點整時已經在 90°（因為 3/12 × 360° = 90°），所以角度是 90 + 0.5t。",
+          "兩針重合表示角度相等：6t = 90 + 0.5t。",
+          "移項得 5.5t = 90，也就是 (11/2)t = 90，所以 t = 180/11 分。",
+          "因此 a = 180。驗算：t = 180/11 時分針角度 6 × 180/11 = 1080/11°，時針角度 90 + 90/11 = 1080/11°，兩者相等。"
+        ],
+        "zh-Hans": [
+          "先定出两根指针的角速度。分针 60 分钟转一圈 360°，所以每分钟转 6°。",
+          "时针 12 小时（720 分钟）转一圈 360°，所以每分钟转 0.5°。",
+          "以 12 点方向为 0°、顺时针为正，来写出经过 t 分钟后两针的角度。",
+          "分针从 12 点方向出发，角度是 6t。",
+          "时针在 3 点整时已经在 90°（因为 3/12 × 360° = 90°），所以角度是 90 + 0.5t。",
+          "两针重合表示角度相等：6t = 90 + 0.5t。",
+          "移项得 5.5t = 90，也就是 (11/2)t = 90，所以 t = 180/11 分。",
+          "因此 a = 180。验算：t = 180/11 时分针角度 6 × 180/11 = 1080/11°，时针角度 90 + 90/11 = 1080/11°，两者相等。"
+        ],
+        "en": [
+          "First find the angular speeds. The minute hand turns 360° in 60 minutes, so 6° per minute.",
+          "The hour hand turns 360° in 12 hours, that is 720 minutes, so 0.5° per minute.",
+          "Measure angles clockwise from the 12 o'clock direction and express both hands after t minutes.",
+          "The minute hand starts at the 12 o'clock direction, so its angle is 6t.",
+          "At exactly 3 o'clock the hour hand is already at 90°, since 3/12 × 360° = 90°, so its angle is 90 + 0.5t.",
+          "The hands coincide when the angles are equal: 6t = 90 + 0.5t.",
+          "Rearranging gives 5.5t = 90, that is (11/2)t = 90, so t = 180/11 minutes.",
+          "Therefore a = 180. Check: at t = 180/11 the minute hand is at 6 × 180/11 = 1080/11° and the hour hand at 90 + 90/11 = 1080/11°, which agree."
+        ],
+        "ja": [
+          "まず 2 本の針の角速度を求めます。分針は 60 分で 360° 回るので毎分 6°。",
+          "時針は 12 時間（720 分）で 360° 回るので毎分 0.5°。",
+          "12 時の方向を 0°、時計回りを正として、t 分後の 2 本の針の角度を表します。",
+          "分針は 12 時の方向から始まるので角度は 6t。",
+          "時針は 3 時ちょうどで既に 90°（3/12 × 360° = 90°）にあるので、角度は 90 + 0.5t。",
+          "2 本が重なるのは角度が等しいとき：6t = 90 + 0.5t。",
+          "整理すると 5.5t = 90、すなわち (11/2)t = 90 なので t = 180/11 分。",
+          "よって a = 180。検算：t = 180/11 のとき分針は 6 × 180/11 = 1080/11°、時針は 90 + 90/11 = 1080/11° で一致します。"
+        ]
       },
-      "figure": { "type": "custom", "kind": "none", "params": {} },
-      "answerMode": "multiple_choice",
-      "options": {
-        "A": { "zh-Hant": "甲", "zh-Hans": "甲", "en": "A", "ja": "A" },
-        "B": { "zh-Hant": "乙", "zh-Hans": "乙", "en": "B", "ja": "B" },
-        "C": { "zh-Hant": "丙", "zh-Hans": "丙", "en": "C", "ja": "C" },
-        "D": { "zh-Hant": "無法判定", "zh-Hans": "无法判定", "en": "Cannot be determined", "ja": "決められない" }
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
       },
-      "correctAnswer": { "type": "choice", "value": "A" },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "180"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 4
+      },
       "source": {
-        "type": "editorial_original",
-        "name": "MathSpring Editorial",
-        "reference": "Upper logic expansion set L5",
-        "displayText": "MathSpring Editorial Original"
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "以兩針角速度差建立一次方程求重合時刻的競賽題型",
+        "notes": "設計依據：轉折在於正確寫出時針的起始角 90° 與每分鐘 0.5° 的增量（常見錯誤是忽略時針也在走），再解 6t = 90 + 0.5t。以 a/11 的形式作答可避免分數輸入（phase 1 只允許整數與選擇）。答案 180 已用 Fraction 精確驗證兩針角度皆為 1080/11°。屬同水準原創改寫，非抄錄特定官方題。原 004（三人三天排程）僅需兩步消去，深度遠低於本年級，且來源為自製 editorial 暫代出處。",
+        "displayText": "改寫題（時針分針重合）"
       },
-      "olympiadTaxonomy": { "topic": "邏輯", "topicCode": "logic", "subtopic": "排程推理", "subtopicCode": "schedule_reasoning" }
+      "olympiadTaxonomy": {
+        "topic": "邏輯",
+        "topicCode": "logic",
+        "subtopic": "時針分針重合",
+        "subtopicCode": "clock_hands_overlap"
+      },
+      "reviewStatus": "ok"
     },
     {
       "id": "logic_grade11_foundation_005",
-      "reviewStatus": "pending",
       "topic": "logic",
-      "subtopic": "tournament_points",
+      "subtopic": "counter_min_operations",
       "difficulty": "foundation",
       "levelStage": "grade11",
       "challengeTier": "foundation",
       "prompt": {
-        "zh-Hant": "四隊單循環比賽，每隊都和其他三隊各賽一場。若勝一場得 3 分，和局得 1 分，負得 0 分。某隊最後得 9 分，這代表它的戰績是什麼？",
-        "zh-Hans": "四队单循环比赛，每队都和其他三队各赛一场。若胜一场得 3 分，和局得 1 分，负得 0 分。某队最后得 9 分，这代表它的战绩是什么？",
-        "en": "In a round-robin of 4 teams, each team plays the other three once. A win gives 3 points, a draw 1 point, and a loss 0 points. If one team finishes with 9 points, what is its record?",
-        "ja": "4 チームの総当たり戦で、各チームは他の 3 チームと 1 回ずつ対戦します。勝ち 3 点、引き分け 1 点、負け 0 点です。あるチームが最終的に 9 点だったとき、その成績は何ですか。"
+        "zh-Hant": "一個計數器一開始顯示 0。每一次操作只能二選一：把目前的數加 3，或把目前的數乘以 2。最少需要幾次操作，才能讓計數器顯示 99？",
+        "zh-Hans": "一个计数器一开始显示 0。每一次操作只能二选一：把目前的数加 3，或把目前的数乘以 2。最少需要几次操作，才能让计数器显示 99？",
+        "en": "A counter starts at 0. Each operation is one of two choices: add 3 to the current number, or double the current number. What is the least number of operations needed to make the counter show 99?",
+        "ja": "カウンターは最初 0 を表示しています。1 回の操作では「3 を足す」か「2 倍する」かのどちらかしか選べません。カウンターに 99 を表示させるには、最少で何回の操作が必要ですか。"
       },
-      "answer": { "zh-Hant": "答案是三戰全勝。", "zh-Hans": "答案是三战全胜。", "en": "The answer is three wins.", "ja": "答えは 3 戦全勝です。" },
+      "answer": {
+        "zh-Hant": "答案是 7 次。",
+        "zh-Hans": "答案是 7 次。",
+        "en": "The answer is 7.",
+        "ja": "答えは 7 回です。"
+      },
       "solutionSteps": {
-        "zh-Hant": ["每隊只打 3 場。", "要得到 9 分，只能每場都拿 3 分。", "因此它必須三場全勝。"],
-        "zh-Hans": ["每队只打 3 场。", "要得到 9 分，只能每场都拿 3 分。", "因此它必须三场全胜。"],
-        "en": ["Each team plays only 3 matches.", "To reach 9 points, it must earn 3 points in every match.", "So its record is three wins and no draws or losses."],
-        "ja": ["各チームは 3 試合しかしません。", "9 点を取るには毎試合 3 点ずつ取るしかありません。", "したがって 3 勝 0 分 0 敗です。"]
+        "zh-Hant": [
+          "先注意一件事：起點 0 是 3 的倍數，加 3 與乘 2 都會保持「是 3 的倍數」這個性質，所以計數器永遠只能顯示 3 的倍數。99 = 3 × 33 是 3 的倍數，因此有機會達成。",
+          "光靠加 3 要走到 99 需要 33 次，太多；乘 2 能讓數字快速變大，所以要盡量多用乘 2、少用加 3。",
+          "從終點往回推更省力：99 是奇數，不可能是某個整數乘 2 得到的，所以最後一步只能是「加 3」，前一個數是 96。",
+          "96 是偶數，往回可以是「乘 2 之前的 48」或「加 3 之前的 93」。選 48 能讓數字掉得快，先試這條路。",
+          "繼續往回：48 ← 24 ← 12 ← 6 ← 3，每一步都是乘 2 的逆運算。",
+          "3 往回就是 0 加 3 得到的。把整條路徑正著寫出來：0 → 3 → 6 → 12 → 24 → 48 → 96 → 99。",
+          "數一數操作次數：加 3、乘 2、乘 2、乘 2、乘 2、乘 2、加 3，共 7 次。",
+          "以廣度優先搜尋檢查所有可達狀態，確認 6 次以內無法到達 99，所以最少就是 7 次。"
+        ],
+        "zh-Hans": [
+          "先注意一件事：起点 0 是 3 的倍数，加 3 与乘 2 都会保持「是 3 的倍数」这个性质，所以计数器永远只能显示 3 的倍数。99 = 3 × 33 是 3 的倍数，因此有机会达成。",
+          "光靠加 3 要走到 99 需要 33 次，太多；乘 2 能让数字快速变大，所以要尽量多用乘 2、少用加 3。",
+          "从终点往回推更省力：99 是奇数，不可能是某个整数乘 2 得到的，所以最后一步只能是「加 3」，前一个数是 96。",
+          "96 是偶数，往回可以是「乘 2 之前的 48」或「加 3 之前的 93」。选 48 能让数字掉得快，先试这条路。",
+          "继续往回：48 ← 24 ← 12 ← 6 ← 3，每一步都是乘 2 的逆运算。",
+          "3 往回就是 0 加 3 得到的。把整条路径正着写出来：0 → 3 → 6 → 12 → 24 → 48 → 96 → 99。",
+          "数一数操作次数：加 3、乘 2、乘 2、乘 2、乘 2、乘 2、加 3，共 7 次。",
+          "以广度优先搜索检查所有可达状态，确认 6 次以内无法到达 99，所以最少就是 7 次。"
+        ],
+        "en": [
+          "First note that the start value 0 is a multiple of 3, and both adding 3 and doubling preserve divisibility by 3, so the counter can only ever show multiples of 3. Since 99 = 3 × 33 is a multiple of 3, the target is reachable in principle.",
+          "Using only additions would take 33 steps, far too many, while doubling grows the number quickly, so the plan is to double as often as possible and add as rarely as possible.",
+          "Working backwards is easier: 99 is odd and so cannot come from doubling an integer, so the last operation must be an addition and the previous value is 96.",
+          "96 is even, so going back it could come from doubling 48 or adding 3 to 93. Choosing 48 shrinks the number fastest, so try that branch first.",
+          "Continuing backwards: 48 ← 24 ← 12 ← 6 ← 3, each step undoing a doubling.",
+          "Finally 3 comes from adding 3 to 0. Writing the whole path forwards: 0 → 3 → 6 → 12 → 24 → 48 → 96 → 99.",
+          "Counting the operations: add, double, double, double, double, double, add — seven in all.",
+          "A breadth-first search over all reachable values confirms that 99 cannot be reached in six or fewer operations, so the minimum is 7."
+        ],
+        "ja": [
+          "まず注意します。出発点 0 は 3 の倍数であり、3 を足す操作も 2 倍する操作も「3 の倍数である」性質を保つので、カウンターは常に 3 の倍数しか表示できません。99 = 3 × 33 は 3 の倍数なので到達可能性があります。",
+          "足し算だけでは 33 回かかり多すぎます。2 倍は数を急速に大きくするので、できるだけ 2 倍を使い足し算を減らす方針です。",
+          "終点から逆にたどる方が簡単です。99 は奇数なので整数の 2 倍では作れず、最後の操作は必ず「3 を足す」で、直前は 96 です。",
+          "96 は偶数なので、逆にたどると「2 倍する前の 48」か「3 を足す前の 93」です。48 の方が速く小さくなるので、まずこちらを試します。",
+          "さらに逆へ：48 ← 24 ← 12 ← 6 ← 3。各段階は 2 倍の逆操作です。",
+          "最後に 3 は 0 に 3 を足したものです。経路を順方向に書くと 0 → 3 → 6 → 12 → 24 → 48 → 96 → 99。",
+          "操作回数を数えると、足す・2 倍・2 倍・2 倍・2 倍・2 倍・足す の 7 回です。",
+          "到達可能な値すべてを幅優先探索すると 6 回以下では 99 に到達できないことが確認でき、最少は 7 回です。"
+        ]
       },
-      "figure": { "type": "custom", "kind": "none", "params": {} },
-      "answerMode": "multiple_choice",
-      "options": {
-        "A": { "zh-Hant": "2 勝 1 和", "zh-Hans": "2 胜 1 和", "en": "2 wins 1 draw", "ja": "2 勝 1 分" },
-        "B": { "zh-Hant": "3 勝", "zh-Hans": "3 胜", "en": "3 wins", "ja": "3 勝" },
-        "C": { "zh-Hant": "2 勝 1 負", "zh-Hans": "2 胜 1 负", "en": "2 wins 1 loss", "ja": "2 勝 1 敗" },
-        "D": { "zh-Hant": "1 勝 2 和", "zh-Hans": "1 胜 2 和", "en": "1 win 2 draws", "ja": "1 勝 2 分" }
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
       },
-      "correctAnswer": { "type": "choice", "value": "B" },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "7"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
       "source": {
-        "type": "editorial_original",
-        "name": "MathSpring Editorial",
-        "reference": "Upper logic expansion set L15",
-        "displayText": "MathSpring Editorial Original"
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "受限操作下的最少步數：以「終點往回推」配合不變量縮小搜尋的競賽題型",
+        "notes": "設計依據：兩個轉折——先用「永遠是 3 的倍數」的不變量確認可達性（若把目標改成 100 就永遠達不到），再由終點反推並利用「奇數不可能來自乘 2」快速鎖定路徑。答案 7 已用對所有可達狀態的廣度優先搜尋驗證為最短。屬同水準原創改寫，非抄錄特定官方題。原 005（四隊循環賽得 9 分即三戰全勝）僅兩步，屬裸題，且來源為自製 editorial 暫代出處。",
+        "displayText": "改寫題（受限操作最少步數）"
       },
-      "olympiadTaxonomy": { "topic": "邏輯", "topicCode": "logic", "subtopic": "賽制推理", "subtopicCode": "tournament_points" }
+      "olympiadTaxonomy": {
+        "topic": "邏輯",
+        "topicCode": "logic",
+        "subtopic": "計數器最少操作",
+        "subtopicCode": "counter_min_operations"
+      },
+      "reviewStatus": "ok"
     },
     {
       "id": "logic_grade11_foundation_006",
-      "reviewStatus": "pending",
       "topic": "logic",
-      "subtopic": "interval_overlap",
+      "subtopic": "digit_constraint_password",
       "difficulty": "foundation",
       "levelStage": "grade11",
       "challengeTier": "foundation",
       "prompt": {
-        "zh-Hant": "甲在 8 點到 10 點之間到達，乙在 9 點到 11 點之間到達。若兩人都只會在到達時出現一次，那麼他們最早可能同時在場的時間是幾點？",
-        "zh-Hans": "甲在 8 点到 10 点之间到达，乙在 9 点到 11 点之间到达。若两人都只会在到达时出现一次，那么他们最早可能同时在场的时间是几点？",
-        "en": "A arrives sometime between 8 and 10, and B arrives sometime between 9 and 11. If each appears only at the moment of arrival, what is the earliest possible time they could be present simultaneously?",
-        "ja": "A は 8 時から 10 時の間に到着し、B は 9 時から 11 時の間に到着します。2 人とも到着したその瞬間にだけ現れるとすると、同時にその場にいられる最も早い時刻は何時ですか。"
+        "zh-Hant": "一個四位數密碼滿足下列所有條件：四個數字互不相同；千位數字恰好是個位數字的 3 倍；百位數字比十位數字大 5；四個數字之和是 19。求所有可能密碼的總和。",
+        "zh-Hans": "一个四位数密码满足下列所有条件：四个数字互不相同；千位数字恰好是个位数字的 3 倍；百位数字比十位数字大 5；四个数字之和是 19。求所有可能密码的总和。",
+        "en": "A four-digit code satisfies all of the following: its four digits are pairwise different; the thousands digit is exactly three times the units digit; the hundreds digit is 5 greater than the tens digit; and the four digits sum to 19. Find the sum of all possible codes.",
+        "ja": "4 桁の暗証番号が次の条件をすべて満たします：4 つの数字はすべて異なる、千の位は一の位のちょうど 3 倍、百の位は十の位より 5 大きい、4 つの数字の和は 19。考えられる暗証番号すべての合計を求めなさい。"
       },
-      "answer": { "zh-Hant": "答案是 9 點。", "zh-Hans": "答案是 9 点。", "en": "The answer is 9 o'clock.", "ja": "答えは 9 時です。" },
+      "answer": {
+        "zh-Hant": "答案是 16445。",
+        "zh-Hans": "答案是 16445。",
+        "en": "The answer is 16445.",
+        "ja": "答えは 16445 です。"
+      },
       "solutionSteps": {
-        "zh-Hant": ["甲最早 8 點可到，乙最早 9 點可到。", "兩人要同時在場，時刻必須落在兩個可能區間的重疊部分。", "重疊區間從 9 點開始。", "所以最早同時在場是 9 點。"],
-        "zh-Hans": ["甲最早 8 点可到，乙最早 9 点可到。", "两人要同时在场，时刻必须落在两个可能区间的重叠部分。", "重叠区间从 9 点开始。", "所以最早同时在场是 9 点。"],
-        "en": ["A can arrive as early as 8, and B as early as 9.", "To be present simultaneously, the time must belong to the overlap of the two arrival intervals.", "That overlap begins at 9.", "So the earliest simultaneous time is 9 o'clock."],
-        "ja": ["A が最も早く到着できるのは 8 時、B は 9 時です。", "同時にその場にいるには、時刻が 2 つの可能区間の重なりに入っていなければなりません。", "その重なりは 9 時から始まります。", "したがって最も早いのは 9 時です。"]
+        "zh-Hant": [
+          "設密碼由千位到個位依序是 d₁、d₂、d₃、d₄。",
+          "由「千位是個位的 3 倍」得 d₁ = 3d₄。因為 d₁ ≤ 9 且 d₁ 不能是 0（否則不是四位數），所以 d₄ 只能是 1、2、3，對應 d₁ = 3、6、9。",
+          "由「百位比十位大 5」得 d₂ = d₃ + 5。因為 d₂ ≤ 9，所以 d₃ ≤ 4。",
+          "把和的條件寫出來：d₁ + d₂ + d₃ + d₄ = 19，代入 d₂ = d₃ + 5 得 d₁ + 2d₃ + 5 + d₄ = 19，即 d₁ + d₄ + 2d₃ = 14。",
+          "d₄ = 1（d₁ = 3）：3 + 1 + 2d₃ = 14 得 d₃ = 5，但 d₃ ≤ 4，不合。",
+          "d₄ = 2（d₁ = 6）：6 + 2 + 2d₃ = 14 得 d₃ = 3，於是 d₂ = 8，四個數字 6、8、3、2 互不相同，密碼是 6832。",
+          "d₄ = 3（d₁ = 9）：9 + 3 + 2d₃ = 14 得 d₃ = 1，於是 d₂ = 6，四個數字 9、6、1、3 互不相同，密碼是 9613。",
+          "兩個候選都必須驗算：6 + 8 + 3 + 2 = 19 ✓、9 + 6 + 1 + 3 = 19 ✓，且 6 = 3×2、9 = 3×3、8 = 3+5、6 = 1+5 全部成立。",
+          "題目問的是所有可能密碼的總和，所以答案是 6832 + 9613 = 16445。只找到一個就作答會漏掉另一個。"
+        ],
+        "zh-Hans": [
+          "设密码由千位到个位依序是 d₁、d₂、d₃、d₄。",
+          "由「千位是个位的 3 倍」得 d₁ = 3d₄。因为 d₁ ≤ 9 且 d₁ 不能是 0（否则不是四位数），所以 d₄ 只能是 1、2、3，对应 d₁ = 3、6、9。",
+          "由「百位比十位大 5」得 d₂ = d₃ + 5。因为 d₂ ≤ 9，所以 d₃ ≤ 4。",
+          "把和的条件写出来：d₁ + d₂ + d₃ + d₄ = 19，代入 d₂ = d₃ + 5 得 d₁ + 2d₃ + 5 + d₄ = 19，即 d₁ + d₄ + 2d₃ = 14。",
+          "d₄ = 1（d₁ = 3）：3 + 1 + 2d₃ = 14 得 d₃ = 5，但 d₃ ≤ 4，不合。",
+          "d₄ = 2（d₁ = 6）：6 + 2 + 2d₃ = 14 得 d₃ = 3，于是 d₂ = 8，四个数字 6、8、3、2 互不相同，密码是 6832。",
+          "d₄ = 3（d₁ = 9）：9 + 3 + 2d₃ = 14 得 d₃ = 1，于是 d₂ = 6，四个数字 9、6、1、3 互不相同，密码是 9613。",
+          "两个候选都必须验算：6 + 8 + 3 + 2 = 19 ✓、9 + 6 + 1 + 3 = 19 ✓，且 6 = 3×2、9 = 3×3、8 = 3+5、6 = 1+5 全部成立。",
+          "题目问的是所有可能密码的总和，所以答案是 6832 + 9613 = 16445。只找到一个就作答会漏掉另一个。"
+        ],
+        "en": [
+          "Write the code from thousands to units as d₁, d₂, d₃, d₄.",
+          "The thousands digit being three times the units digit gives d₁ = 3d₄. Since d₁ ≤ 9 and d₁ cannot be 0 (or the number would not have four digits), d₄ is 1, 2 or 3, giving d₁ = 3, 6 or 9.",
+          "The hundreds digit exceeding the tens digit by 5 gives d₂ = d₃ + 5, and since d₂ ≤ 9 we need d₃ ≤ 4.",
+          "The digit-sum condition d₁ + d₂ + d₃ + d₄ = 19 becomes, after substituting d₂ = d₃ + 5, the relation d₁ + d₄ + 2d₃ = 14.",
+          "If d₄ = 1 (so d₁ = 3): 3 + 1 + 2d₃ = 14 gives d₃ = 5, which violates d₃ ≤ 4, so this fails.",
+          "If d₄ = 2 (so d₁ = 6): 6 + 2 + 2d₃ = 14 gives d₃ = 3 and hence d₂ = 8; the digits 6, 8, 3, 2 are pairwise different, giving the code 6832.",
+          "If d₄ = 3 (so d₁ = 9): 9 + 3 + 2d₃ = 14 gives d₃ = 1 and hence d₂ = 6; the digits 9, 6, 1, 3 are pairwise different, giving the code 9613.",
+          "Both candidates must be checked: 6 + 8 + 3 + 2 = 19 and 9 + 6 + 1 + 3 = 19, while 6 = 3×2, 9 = 3×3, 8 = 3+5 and 6 = 1+5 all hold.",
+          "The question asks for the sum of all possible codes, so the answer is 6832 + 9613 = 16445. Stopping after finding one code would miss the other."
+        ],
+        "ja": [
+          "暗証番号を千の位から一の位まで d₁、d₂、d₃、d₄ とします。",
+          "「千の位は一の位の 3 倍」より d₁ = 3d₄。d₁ ≤ 9 かつ d₁ は 0 になれない（4 桁でなくなる）ので、d₄ は 1、2、3 のいずれかで d₁ = 3、6、9。",
+          "「百の位は十の位より 5 大きい」より d₂ = d₃ + 5。d₂ ≤ 9 なので d₃ ≤ 4。",
+          "和の条件 d₁ + d₂ + d₃ + d₄ = 19 に d₂ = d₃ + 5 を代入すると d₁ + d₄ + 2d₃ = 14。",
+          "d₄ = 1（d₁ = 3）のとき 3 + 1 + 2d₃ = 14 より d₃ = 5 ですが d₃ ≤ 4 に反し不適。",
+          "d₄ = 2（d₁ = 6）のとき 6 + 2 + 2d₃ = 14 より d₃ = 3、よって d₂ = 8。数字 6、8、3、2 はすべて異なり、暗証番号は 6832。",
+          "d₄ = 3（d₁ = 9）のとき 9 + 3 + 2d₃ = 14 より d₃ = 1、よって d₂ = 6。数字 9、6、1、3 はすべて異なり、暗証番号は 9613。",
+          "両方を検算します：6 + 8 + 3 + 2 = 19、9 + 6 + 1 + 3 = 19。また 6 = 3×2、9 = 3×3、8 = 3+5、6 = 1+5 もすべて成立します。",
+          "問われているのは考えられる暗証番号の合計なので、答えは 6832 + 9613 = 16445。1 つ見つけて終わりにすると、もう 1 つを見落とします。"
+        ]
       },
-      "figure": { "type": "custom", "kind": "none", "params": {} },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
       "answerMode": "integer_input",
-      "correctAnswer": { "type": "integer", "value": "9" },
-      "inputConstraints": { "allowNegative": false, "maxDigits": 1 },
-      "source": {
-        "type": "editorial_original",
-        "name": "MathSpring Editorial",
-        "reference": "Upper logic expansion set L16",
-        "displayText": "MathSpring Editorial Original"
+      "correctAnswer": {
+        "type": "integer",
+        "value": "16445"
       },
-      "olympiadTaxonomy": { "topic": "邏輯", "topicCode": "logic", "subtopic": "區間交集", "subtopicCode": "interval_overlap" }
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 5
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "多重數字條件下的窮舉推理，需完整列出所有解而非停在第一個解的競賽題型",
+        "notes": "設計依據：三個條件把自由度壓到只剩一個變數，逐一檢查三種情形時有一種被 d₃ ≤ 4 排除、另兩種都成立；題目刻意問「所有可能密碼的總和」，避免只找到一組就作答。答案 16445 已用 1000 到 9999 全部四位數窮舉驗證解為 6832 與 9613。屬同水準原創改寫，非抄錄特定官方題。原 006（區間重疊求最早同時在場）敘述含糊——已言明兩人「只會在到達時出現一次」卻又問「同時在場」，且推理僅兩步，來源為自製 editorial 暫代出處。",
+        "displayText": "改寫題（多重數字條件推理）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "邏輯",
+        "topicCode": "logic",
+        "subtopic": "數字條件推理",
+        "subtopicCode": "digit_constraint_password"
+      },
+      "reviewStatus": "ok"
     },
     {
       "id": "logic_grade11_foundation_007",
-      "reviewStatus": "pending",
+      "reviewStatus": "ok",
       "topic": "logic",
       "subtopic": "game_backward",
       "difficulty": "foundation",
@@ -254,17 +573,56 @@
         "en": "Choose an integer N between 0 and 999 and give it to Bernardo. Each time Bernardo receives a number, he doubles it and passes it to Silvia. Each time Silvia receives a number, she adds 50 and passes it back to Bernardo. The winner is the last person who produces a number less than 1000. If Bernardo is to win, what is the sum of the digits of the smallest possible starting value N?",
         "ja": "0 から 999 までの整数 N を Bernardo に渡します。Bernardo は数を受け取るたびに 2 倍して Silvia に渡し、Silvia は受け取るたびに 50 を足して Bernardo に返します。1000 未満の数を最後に作れた人が勝ちです。Bernardo が勝つような最小の初期値 N の各位の和はいくつですか。"
       },
-      "answer": { "zh-Hant": "答案是 7。", "zh-Hans": "答案是 7。", "en": "The answer is 7.", "ja": "答えは 7 です。" },
-      "solutionSteps": {
-        "zh-Hant": ["Bernardo 最後一次出手後的數必須落在 950 到 999 之間，因為 Silvia 再加 50 就會至少到 1000。", "從起始數 N 往前推，經過一輪『乘 2、加 50』，數會依序變成 2N、2N+50、4N+100、4N+150、8N+300、8N+350、16N+700。", "要讓 Bernardo 這一步仍小於 1000，但 Silvia 再加 50 就超過 999，因此需滿足 950 ≤ 16N + 700 ≤ 999。", "解得 250 ≤ 16N ≤ 299，所以最小整數 N 是 16。", "16 的各位數字和是 1 + 6 = 7。"],
-        "zh-Hans": ["Bernardo 最后一次出手后的数必须落在 950 到 999 之间，因为 Silvia 再加 50 就会至少到 1000。", "从起始数 N 往前推，经过一轮『乘 2、加 50』，数会依序变成 2N、2N+50、4N+100、4N+150、8N+300、8N+350、16N+700。", "要让 Bernardo 这一步仍小于 1000，但 Silvia 再加 50 就超过 999，因此需满足 950 ≤ 16N + 700 ≤ 999。", "解得 250 ≤ 16N ≤ 299，所以最小整数 N 是 16。", "16 的各位数字和是 1 + 6 = 7。"],
-        "en": ["Bernardo's final output must lie between 950 and 999, because Silvia would then add 50 and reach at least 1000.", "Starting from N, the sequence of outputs is 2N, 2N+50, 4N+100, 4N+150, 8N+300, 8N+350, 16N+700.", "So we need 950 ≤ 16N + 700 ≤ 999 so that Bernardo's number is still below 1000 but Silvia's next number is not.", "This gives 250 ≤ 16N ≤ 299, so the smallest integer N is 16.", "The sum of its digits is 1 + 6 = 7."],
-        "ja": ["Bernardo が最後に作る数は 950 から 999 の間でなければなりません。そうすれば Silvia が 50 を足すと 1000 以上になります。", "初期値 N から進めると、数列は 2N、2N+50、4N+100、4N+150、8N+300、8N+350、16N+700 となります。", "したがって 950 ≤ 16N + 700 ≤ 999 を満たせば、Bernardo の数は 1000 未満で、次に Silvia は 1000 以上にしてしまいます。", "これより 250 ≤ 16N ≤ 299 なので、最小の整数 N は 16 です。", "各位の和は 1 + 6 = 7 です。"]
+      "answer": {
+        "zh-Hant": "答案是 7。",
+        "zh-Hans": "答案是 7。",
+        "en": "The answer is 7.",
+        "ja": "答えは 7 です。"
       },
-      "figure": { "type": "custom", "kind": "none", "params": {} },
+      "solutionSteps": {
+        "zh-Hant": [
+          "Bernardo 最後一次出手後的數必須落在 950 到 999 之間，因為 Silvia 再加 50 就會至少到 1000。",
+          "從起始數 N 往前推，經過一輪『乘 2、加 50』，數會依序變成 2N、2N+50、4N+100、4N+150、8N+300、8N+350、16N+700。",
+          "要讓 Bernardo 這一步仍小於 1000，但 Silvia 再加 50 就超過 999，因此需滿足 950 ≤ 16N + 700 ≤ 999。",
+          "解得 250 ≤ 16N ≤ 299，所以最小整數 N 是 16。",
+          "16 的各位數字和是 1 + 6 = 7。"
+        ],
+        "zh-Hans": [
+          "Bernardo 最后一次出手后的数必须落在 950 到 999 之间，因为 Silvia 再加 50 就会至少到 1000。",
+          "从起始数 N 往前推，经过一轮『乘 2、加 50』，数会依序变成 2N、2N+50、4N+100、4N+150、8N+300、8N+350、16N+700。",
+          "要让 Bernardo 这一步仍小于 1000，但 Silvia 再加 50 就超过 999，因此需满足 950 ≤ 16N + 700 ≤ 999。",
+          "解得 250 ≤ 16N ≤ 299，所以最小整数 N 是 16。",
+          "16 的各位数字和是 1 + 6 = 7。"
+        ],
+        "en": [
+          "Bernardo's final output must lie between 950 and 999, because Silvia would then add 50 and reach at least 1000.",
+          "Starting from N, the sequence of outputs is 2N, 2N+50, 4N+100, 4N+150, 8N+300, 8N+350, 16N+700.",
+          "So we need 950 ≤ 16N + 700 ≤ 999 so that Bernardo's number is still below 1000 but Silvia's next number is not.",
+          "This gives 250 ≤ 16N ≤ 299, so the smallest integer N is 16.",
+          "The sum of its digits is 1 + 6 = 7."
+        ],
+        "ja": [
+          "Bernardo が最後に作る数は 950 から 999 の間でなければなりません。そうすれば Silvia が 50 を足すと 1000 以上になります。",
+          "初期値 N から進めると、数列は 2N、2N+50、4N+100、4N+150、8N+300、8N+350、16N+700 となります。",
+          "したがって 950 ≤ 16N + 700 ≤ 999 を満たせば、Bernardo の数は 1000 未満で、次に Silvia は 1000 以上にしてしまいます。",
+          "これより 250 ≤ 16N ≤ 299 なので、最小の整数 N は 16 です。",
+          "各位の和は 1 + 6 = 7 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
       "answerMode": "integer_input",
-      "correctAnswer": { "type": "integer", "value": "7" },
-      "inputConstraints": { "allowNegative": false, "maxDigits": 2 },
+      "correctAnswer": {
+        "type": "integer",
+        "value": "7"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
       "source": {
         "type": "official_reference",
         "name": "AMC 12",
@@ -279,11 +637,16 @@
         "rightsStatus": "needs_review",
         "notes": "Rewritten from a publicly archived competition statement."
       },
-      "olympiadTaxonomy": { "topic": "邏輯", "topicCode": "logic", "subtopic": "逆推博弈", "subtopicCode": "game_backward" }
+      "olympiadTaxonomy": {
+        "topic": "邏輯",
+        "topicCode": "logic",
+        "subtopic": "逆推博弈",
+        "subtopicCode": "game_backward"
+      }
     },
     {
       "id": "logic_grade11_foundation_008",
-      "reviewStatus": "pending",
+      "reviewStatus": "ok",
       "topic": "logic",
       "subtopic": "cyclic_distribution",
       "difficulty": "foundation",
@@ -302,15 +665,79 @@
         "ja": "答えは 11 です。"
       },
       "solutionSteps": {
-        "zh-Hant": ["若 Chris 拿了第 1 顆和第 100 顆，表示在前 99 顆糖被取走後，糖袋剛好又回到 Chris。", "因此學生總數必須整除 99。", "99 的正因數是 1、3、9、11、33、99。", "在官方選項裡只有 11 符合。", "所以學生人數可能是 11。"],
-        "zh-Hans": ["若 Chris 拿了第 1 颗和第 100 颗，表示在前 99 颗糖被取走后，糖袋刚好又回到 Chris。", "因此学生总数必须整除 99。", "99 的正因数是 1、3、9、11、33、99。", "在官方选项里只有 11 符合。", "所以学生人数可能是 11。"],
-        "en": ["If Chris takes both the first and the 100th candy, then after the first 99 candies are taken, the bag must return to Chris.", "So the number of students must divide 99.", "The positive divisors of 99 are 1, 3, 9, 11, 33, and 99.", "Among the official choices, only 11 appears.", "Therefore the number of students could be 11."],
-        "ja": ["Chris が 1 個目と 100 個目の両方を取るなら、最初の 99 個が取られた時点で袋はちょうど Chris のところへ戻っているはずです。", "したがって生徒の人数は 99 の約数でなければなりません。", "99 の正の約数は 1、3、9、11、33、99 です。", "公式の選択肢の中で当てはまるのは 11 だけです。", "よって人数は 11 人です。"]
+        "zh-Hant": [
+          "Chris 拿走第 1 顆糖，之後糖袋每繞一圈就回到 Chris 一次。設學生人數是 n。",
+          "Chris 拿的糖分別是第 1、第 n+1、第 2n+1、⋯ 顆，也就是所有除以 n 餘 1 的編號。",
+          "題目說 Chris 也拿走了第 100 顆，所以 100 除以 n 要餘 1，等價於 n 整除 100 − 1 = 99。",
+          "99 = 3² × 11，正因數是 1、3、9、11、33、99。",
+          "n = 1 表示只有 Chris 一個人，與「幾位學生圍坐成一圈」不符，其餘 3、9、11、33、99 在數學上都可行。",
+          "因此要靠選項來確定：四個選項 10、11、12、15 之中，只有 11 是 99 的因數。",
+          "所以學生人數是 11。驗算：100 = 11 × 9 + 1，餘數確實是 1，Chris 拿的是第 1、12、23、⋯、100 顆。"
+        ],
+        "zh-Hans": [
+          "Chris 拿走第 1 颗糖，之后糖袋每绕一圈就回到 Chris 一次。设学生人数是 n。",
+          "Chris 拿的糖分别是第 1、第 n+1、第 2n+1、⋯ 颗，也就是所有除以 n 余 1 的编号。",
+          "题目说 Chris 也拿走了第 100 颗，所以 100 除以 n 要余 1，等价于 n 整除 100 − 1 = 99。",
+          "99 = 3² × 11，正因数是 1、3、9、11、33、99。",
+          "n = 1 表示只有 Chris 一个人，与「几位学生围坐成一圈」不符，其余 3、9、11、33、99 在数学上都可行。",
+          "因此要靠选项来确定：四个选项 10、11、12、15 之中，只有 11 是 99 的因数。",
+          "所以学生人数是 11。验算：100 = 11 × 9 + 1，余数确实是 1，Chris 拿的是第 1、12、23、⋯、100 颗。"
+        ],
+        "en": [
+          "Chris takes the first candy, and thereafter the bag returns to Chris once per full lap. Let n be the number of students.",
+          "Chris takes candies numbered 1, n+1, 2n+1, …, that is exactly those numbers leaving remainder 1 on division by n.",
+          "Chris also takes the 100th candy, so 100 leaves remainder 1 modulo n, which is equivalent to n dividing 100 − 1 = 99.",
+          "Since 99 = 3² × 11, its positive divisors are 1, 3, 9, 11, 33 and 99.",
+          "n = 1 would mean Chris is alone, contradicting a circle of students, while 3, 9, 11, 33 and 99 are all mathematically possible.",
+          "The answer choices settle it: among 10, 11, 12 and 15, only 11 divides 99.",
+          "So there are 11 students. Check: 100 = 11 × 9 + 1, so the remainder is indeed 1 and Chris takes candies 1, 12, 23, …, 100."
+        ],
+        "ja": [
+          "Chris が最初の 1 個を取り、以後は袋が 1 周するごとに Chris に戻ります。生徒の人数を n とします。",
+          "Chris が取るのは第 1、第 n+1、第 2n+1、… 個、すなわち n で割って 1 余る番号のものです。",
+          "Chris は第 100 個も取ったので、100 を n で割った余りが 1、すなわち n が 100 − 1 = 99 を割り切る必要があります。",
+          "99 = 3² × 11 なので、正の約数は 1、3、9、11、33、99 です。",
+          "n = 1 は Chris 一人となり「輪になって座る生徒たち」に反しますが、3、9、11、33、99 は数学的にはいずれも可能です。",
+          "そこで選択肢で決まります：10、11、12、15 のうち 99 の約数は 11 だけです。",
+          "よって生徒は 11 人。検算：100 = 11 × 9 + 1 で余りは確かに 1、Chris は第 1、12、23、…、100 個を取ります。"
+        ]
       },
-      "figure": { "type": "custom", "kind": "none", "params": {} },
-      "answerMode": "integer_input",
-      "correctAnswer": { "type": "integer", "value": "11" },
-      "inputConstraints": { "allowNegative": false, "maxDigits": 2 },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "multiple_choice",
+      "options": {
+        "A": {
+          "zh-Hant": "10",
+          "zh-Hans": "10",
+          "en": "10",
+          "ja": "10"
+        },
+        "B": {
+          "zh-Hant": "11",
+          "zh-Hans": "11",
+          "en": "11",
+          "ja": "11"
+        },
+        "C": {
+          "zh-Hant": "12",
+          "zh-Hans": "12",
+          "en": "12",
+          "ja": "12"
+        },
+        "D": {
+          "zh-Hant": "15",
+          "zh-Hans": "15",
+          "en": "15",
+          "ja": "15"
+        }
+      },
+      "correctAnswer": {
+        "type": "choice",
+        "value": "B"
+      },
       "source": {
         "type": "official_reference",
         "name": "AJHSME",
@@ -325,11 +752,16 @@
         "rightsStatus": "needs_review",
         "notes": "Rewritten from a publicly archived competition statement."
       },
-      "olympiadTaxonomy": { "topic": "邏輯", "topicCode": "logic", "subtopic": "循環分配", "subtopicCode": "cyclic_distribution" }
+      "olympiadTaxonomy": {
+        "topic": "邏輯",
+        "topicCode": "logic",
+        "subtopic": "循環分配",
+        "subtopicCode": "cyclic_distribution"
+      }
     },
     {
       "id": "logic_grade11_foundation_009",
-      "reviewStatus": "pending",
+      "reviewStatus": "ok",
       "topic": "logic",
       "subtopic": "divisibility_deduction",
       "difficulty": "foundation",
@@ -348,21 +780,85 @@
         "ja": "答えは 5 です。"
       },
       "solutionSteps": {
-        "zh-Hant": ["8 個孩子的年齡互不相同，且最大是 9 歲，所以孩子年齡必定是 1 到 9 中去掉一個數。題目要找被去掉的是哪個。", "車牌由兩個數字各出現兩次組成，設為 a、b。因為它能被 9 整除，所以四位數各位數字和 2a+2b = 2(a+b) 也要被 9 整除，因此 a+b=9。", "依照官方解的篩選，可能的車牌只需要考慮 7272、6336、5544 等候選。", "7272 雖可被 4、6、8 整除，但不能被 5 或 7 整除；6336 也不能被 5 或 7 整除。", "5544 可以同時被 4、6、7、8 整除，因此缺掉的年齡不是 4、6、7、8。", "唯一不可能出現在孩子年齡中的選項就是 5。"],
-        "zh-Hans": ["8 个孩子的年龄互不相同，且最大是 9 岁，所以孩子年龄必定是 1 到 9 中去掉一个数。题目要找被去掉的是哪一个。", "车牌由两个数字各出现两次组成，设为 a、b。因为它能被 9 整除，所以四位数各位数字和 2a+2b = 2(a+b) 也要被 9 整除，因此 a+b=9。", "依照官方解的筛选，可能的车牌只需要考虑 7272、6336、5544 等候选。", "7272 虽可被 4、6、8 整除，但不能被 5 或 7 整除；6336 也不能被 5 或 7 整除。", "5544 可以同时被 4、6、7、8 整除，因此缺掉的年龄不是 4、6、7、8。", "唯一不可能出现在孩子年龄中的选项就是 5。"],
-        "en": ["Because there are 8 children with distinct ages and the oldest is 9, their ages must be the numbers 1 through 9 with exactly one age missing. We need to find the missing one.", "If the two repeated digits are a and b, then the plate's digit sum is 2a+2b=2(a+b). Since the number is divisible by 9, we get a+b=9.", "The official casework reduces the viable plates to candidates such as 7272, 6336, and 5544.", "The number 7272 is divisible by 4, 6, and 8, but not by 5 or 7. The number 6336 also fails divisibility by 5 or 7.", "The number 5544 is divisible by 4, 6, 7, and 8, so the missing age is not 4, 6, 7, or 8.", "Therefore the only impossible age among the choices is 5."],
-        "ja": ["8 人の子どもの年齢はすべて異なり、最年長が 9 歳なので、年齢は 1 から 9 までのうちちょうど 1 つを除いたものになります。求めるのはその欠けている年齢です。", "2 つの数字を a、b とすると、各桁の和は 2a+2b=2(a+b) です。ナンバーは 9 で割り切れるので a+b=9 となります。", "公式解では候補を 7272、6336、5544 などに絞れます。", "7272 は 4、6、8 では割れますが 5 や 7 では割れません。6336 も 5 や 7 では割れません。", "5544 は 4、6、7、8 のすべてで割り切れます。", "したがって選択肢の中で子どもの年齢としてありえないのは 5 です。"]
+        "zh-Hant": [
+          "8 個孩子年齡互不相同、最大是 9 歲，所以年齡集合是 1 到 9 中去掉恰好一個數；題目要找被去掉的那個。",
+          "車牌是四位數，只用兩種數字且各出現兩次，設這兩個數字為 a 與 b。",
+          "因為 9 一定是某個孩子的年齡，車牌必須被 9 整除，所以各位數字和 2a + 2b = 2(a + b) 要被 9 整除，因此 a + b 必須是 9 的倍數。",
+          "由於 a、b 都是 0 到 9 的數字且互異，a + b 只能是 9（0 + 18 不可能，a + b = 18 需 a = b = 9）。",
+          "把 a + b = 9 的所有情形配上「各出現兩次、首位不為 0」的排法逐一檢查，能同時被 8 個不同年齡整除的車牌**只有 5544** 這一個。",
+          "5544 = 2³ × 3² × 7 × 11，可被 1、2、3、4、6、7、8、9 整除，但不能被 5 整除（末位不是 0 或 5）。",
+          "所以孩子的年齡是 1、2、3、4、6、7、8、9，唯一不可能的年齡就是 5。（末兩位 44 即 Jones 先生的年齡，與題意相符。）"
+        ],
+        "zh-Hans": [
+          "8 个孩子年龄互不相同、最大是 9 岁，所以年龄集合是 1 到 9 中去掉恰好一个数；题目要找被去掉的那个。",
+          "车牌是四位数，只用两种数字且各出现两次，设这两个数字为 a 与 b。",
+          "因为 9 一定是某个孩子的年龄，车牌必须被 9 整除，所以各位数字和 2a + 2b = 2(a + b) 要被 9 整除，因此 a + b 必须是 9 的倍数。",
+          "由于 a、b 都是 0 到 9 的数字且互异，a + b 只能是 9（a + b = 18 需 a = b = 9，与互异矛盾）。",
+          "把 a + b = 9 的所有情形配上「各出现两次、首位不为 0」的排法逐一检查，能同时被 8 个不同年龄整除的车牌**只有 5544** 这一个。",
+          "5544 = 2³ × 3² × 7 × 11，可被 1、2、3、4、6、7、8、9 整除，但不能被 5 整除（末位不是 0 或 5）。",
+          "所以孩子的年龄是 1、2、3、4、6、7、8、9，唯一不可能的年龄就是 5。（末两位 44 即 Jones 先生的年龄，与题意相符。）"
+        ],
+        "en": [
+          "The eight children have distinct ages with the oldest being 9, so their ages are 1 through 9 with exactly one value removed; the problem asks which one.",
+          "The licence plate is a four-digit number using only two distinct digits, each appearing twice; call them a and b.",
+          "Since 9 must be one of the ages, the plate is divisible by 9, so its digit sum 2a + 2b = 2(a + b) is divisible by 9, forcing a + b to be a multiple of 9.",
+          "As a and b are distinct digits from 0 to 9, the only possibility is a + b = 9 (a + b = 18 would require a = b = 9, contradicting distinctness).",
+          "Checking every arrangement with a + b = 9, each digit twice and a non-zero leading digit, the only plate divisible by eight different ages is 5544.",
+          "Indeed 5544 = 2³ × 3² × 7 × 11 is divisible by 1, 2, 3, 4, 6, 7, 8 and 9, but not by 5 since its last digit is neither 0 nor 5.",
+          "So the ages are 1, 2, 3, 4, 6, 7, 8, 9 and the only impossible age is 5. (The last two digits, 44, are Mr. Jones's age, as the problem requires.)"
+        ],
+        "ja": [
+          "8 人の子どもの年齢はすべて異なり最年長は 9 歳なので、年齢の集合は 1 から 9 のうちちょうど 1 つを除いたものです。問題はその除かれた数を求めるものです。",
+          "ナンバープレートは 4 桁で、異なる 2 種類の数字がそれぞれ 2 回ずつ現れます。これを a、b とします。",
+          "9 は必ず誰かの年齢なのでプレートは 9 で割り切れ、各位の和 2a + 2b = 2(a + b) が 9 の倍数、つまり a + b が 9 の倍数でなければなりません。",
+          "a、b は 0 から 9 の相異なる数字なので、可能なのは a + b = 9 だけです（a + b = 18 は a = b = 9 となり相異なることに反します）。",
+          "a + b = 9 で各数字が 2 回ずつ、先頭が 0 でない並べ方をすべて調べると、8 つの異なる年齢で割り切れるプレートは 5544 ただ 1 つです。",
+          "実際 5544 = 2³ × 3² × 7 × 11 で 1、2、3、4、6、7、8、9 で割り切れますが、末尾が 0 でも 5 でもないので 5 では割り切れません。",
+          "したがって年齢は 1、2、3、4、6、7、8、9 であり、あり得ない年齢は 5 だけです。（下 2 桁の 44 が Jones 氏の年齢で、題意と一致します。）"
+        ]
       },
-      "figure": { "type": "custom", "kind": "none", "params": {} },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
       "answerMode": "multiple_choice",
       "options": {
-        "A": { "zh-Hant": "4", "zh-Hans": "4", "en": "4", "ja": "4" },
-        "B": { "zh-Hant": "5", "zh-Hans": "5", "en": "5", "ja": "5" },
-        "C": { "zh-Hant": "6", "zh-Hans": "6", "en": "6", "ja": "6" },
-        "D": { "zh-Hant": "7", "zh-Hans": "7", "en": "7", "ja": "7" },
-        "E": { "zh-Hant": "8", "zh-Hans": "8", "en": "8", "ja": "8" }
+        "A": {
+          "zh-Hant": "4",
+          "zh-Hans": "4",
+          "en": "4",
+          "ja": "4"
+        },
+        "B": {
+          "zh-Hant": "5",
+          "zh-Hans": "5",
+          "en": "5",
+          "ja": "5"
+        },
+        "C": {
+          "zh-Hant": "6",
+          "zh-Hans": "6",
+          "en": "6",
+          "ja": "6"
+        },
+        "D": {
+          "zh-Hant": "7",
+          "zh-Hans": "7",
+          "en": "7",
+          "ja": "7"
+        },
+        "E": {
+          "zh-Hant": "8",
+          "zh-Hans": "8",
+          "en": "8",
+          "ja": "8"
+        }
       },
-      "correctAnswer": { "type": "choice", "value": "B" },
+      "correctAnswer": {
+        "type": "choice",
+        "value": "B"
+      },
       "source": {
         "type": "official_reference",
         "name": "AMC 12",
@@ -377,7 +873,12 @@
         "rightsStatus": "needs_review",
         "notes": "Rewritten from a publicly archived competition statement."
       },
-      "olympiadTaxonomy": { "topic": "邏輯", "topicCode": "logic", "subtopic": "整除條件排除", "subtopicCode": "divisibility_deduction" }
+      "olympiadTaxonomy": {
+        "topic": "邏輯",
+        "topicCode": "logic",
+        "subtopic": "整除條件排除",
+        "subtopicCode": "divisibility_deduction"
+      }
     }
   ]
 }

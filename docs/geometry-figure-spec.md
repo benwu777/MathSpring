@@ -63,7 +63,34 @@
 4. 陰影區頂點要按邊界順序，且都在 `points` 內。
 5. 上架前對照「幾何圖複審四問」：只看圖能否辨識要用的點線區域、關係有無真的畫出、位置會不會誤導、拿掉題幹圖是否仍有用。
 
+## 圖不得洩題
+
+圖是解題資訊，不是答案。以下兩種情形一律不可上架，寧可 `kind:none`：
+
+- **把答案畫出來**。實例：`geometry_grade2_foundation_009` 問「下面哪個圖形最適合拿來做車輪」，選項是圓形／三角形／正方形／五邊形，圖卻直接畫了一個圓。
+- **畫成與題目不符的形狀**。實例：`geometry_grade6_foundation_024` 的正多邊形每個外角 24°，實際是 15 邊形，圖卻畫五邊形。renderer 畫不出正確形狀時就不要上圖。
+
 ## Renderer 支援狀態
 
-- [ ] `ShapeDiagramPainter` 支援 `geometry_scene`（points / segments / polygons / arcs / angleMarks / rightAngles / equalTicks）——待實作。
-- 實作完成前，需要構造圖的幾何題先維持 `reviewStatus = pending`，不標 ok。
+- [x] `GeometryScenePainter`（`lib/main.dart`）已支援 `geometry_scene` 全部原語：points（含標籤方位）/ segments（solid 與 construction 虛線）/ polygons（shaded）/ arcs / angleMarks / rightAngles / equalTicks。解析在 `lib/models/geometry_scene.dart`。
+- renderer 目前實際支援的 `figure.kind` 共五種：`geometry_scene`、`shape_diagram`、`coordinate_plane`、`composite_grid_shape`、`circle_quadrants_point`（見 `lib/main.dart` 的 figure 分派）。後兩種主要用於 grade1-6，本文件先前未列出。
+- `shape_diagram` 支援的 `shape` 值包含 `circle`、`oval`、`rectangle`、`triangle`、`trapezoid`、`parallelogram`、`pentagon`、`compass` 等；**沒有**任意邊數的正多邊形，也沒有任何立體形狀。
+- 因此需要構造圖的幾何題可以正常標 `ok`。
+
+### 上架前必查
+
+- **所有點與圓弧都必須完全落在 `bounds` 內**。`bounds` 只是縮放框，超出的部分會被裁掉。實例：`geometry_grade9_foundation_002` 的圓心 (0,0)、半徑 1 配上 `minX = minY = -0.3`，整圓左下角被截掉，複審時才發現。圓弧要檢查的是 `cx ± r` 與 `cy ± r`，不是圓心。
+- **每個 `points` 元素都會被畫出標籤**，沒有「只放點不標字」的選項。因此不要為了畫線而塞入大量輔助點，否則圖面會被標籤淹沒；點多的構造圖請改以文字描述題幹，或先不上圖。
+- 舊的 `shape_diagram` 若只有 `{"shape": ..., "labels": {...}}`（畫一個基本形狀再貼文字），一律視為紅線 7 違規，須改為 `geometry_scene` 或 `kind:none`。
+
+### 座標與標記的自洽檢查（最容易漏掉的一類錯誤）
+
+圖上的標記本身就是可驗證的斷言，必須和座標對得起來。這類錯誤肉眼幾乎看不出來，一定要用算的：
+
+- **`equalTicks` 標了等長，兩段就必須真的等長。** 實例：`geometry_grade9_foundation_001` 原本在 BC 與 BE 上畫了等長記號，但座標算出來是 16 與 15，摺疊題的核心條件根本沒被畫對。
+- **`rightAngles` 標了直角，該處夾角就必須是 90°。**
+- **`angleMarks` 的標籤若寫「60°」，實際夾角就必須是 60°。**
+- **`polygons` 的頂點不得共線**（面積為 0 表示圖畫錯了）。
+- **衍生點（切點、交點、垂足、內心）必須用算的，不要目測。** 實例：`geometry_grade12_foundation_009` 的小圓圓心原本畫在 (2, 0)，但依題目條件（同時與兩半徑相切且與大圓內切）應在 OP = 2r = R − r = 10/3。
+
+建議在複審流程中對每個 pack 跑一次自動檢查：把上述四項與「所有點和圓弧實際繪出範圍都落在 `bounds` 內」一起驗，可在不看圖的情況下攔下絕大多數座標錯誤。注意圓弧要看 `from`/`to` 實際畫出的那一段，不要當成整圓（`geometry_grade12_foundation_008` 的 0°–60° 弧就會被誤判為超界）。

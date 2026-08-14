@@ -1716,8 +1716,10 @@ void main() {
     final Question grade7Question = grade7Pack.questions.firstWhere(
       (Question item) => item.id == 'algebra_grade7_foundation_002',
     );
+    // 007 為官方 IMC 選擇 6；原本此處指向 009，但 009 與 007 為同一題（只是答題方式不同），
+    // 複審時已將 009 去重改寫為原創（rewritten_olympiad_style），故改用 007 驗證官方題源。
     final Question grade10Question = grade10Pack.questions.firstWhere(
-      (Question item) => item.id == 'algebra_grade10_foundation_009',
+      (Question item) => item.id == 'algebra_grade10_foundation_007',
     );
     final Question grade12Question = grade12Pack.questions.firstWhere(
       (Question item) => item.id == 'algebra_grade12_foundation_009',

@@ -243,43 +243,58 @@
     {
       "id": "combinatorics_grade9_foundation_004",
       "topic": "combinatorics",
-      "subtopic": "nonadjacent_selection",
+      "subtopic": "recursive_counting",
       "difficulty": "foundation",
       "levelStage": "grade9",
       "challengeTier": "foundation",
       "prompt": {
-        "zh-Hant": "從數字 1 到 8 中選 3 個數，使得任兩個被選數都不相鄰。共有多少種選法？",
-        "zh-Hans": "从数字 1 到 8 中选 3 个数，使得任两个被选数都不相邻。共有多少种选法？",
-        "en": "Choose 3 numbers from 1 through 8 so that no two chosen numbers are consecutive. How many choices are possible?",
-        "ja": "1 から 8 までの数から 3 個選び、どの 2 つも連続しないようにします。選び方は何通りありますか。"
+        "zh-Hant": "一段樓梯共有 10 階。每次可以往上走 1 階或 2 階，但不可以連續兩次都走 2 階。從地面走到第 10 階，共有多少種走法？",
+        "zh-Hans": "一段楼梯共有 10 阶。每次可以往上走 1 阶或 2 阶，但不可以连续两次都走 2 阶。从地面走到第 10 阶，共有多少种走法？",
+        "en": "A staircase has 10 steps. Each move goes up either 1 step or 2 steps, but two 2-step moves may never be made in a row. In how many ways can one go from the ground to step 10?",
+        "ja": "階段が全部で 10 段あります。1 回に 1 段または 2 段のぼれますが、2 段のぼる動作を 2 回続けることはできません。地面から 10 段目まで上がる方法は何通りですか。"
       },
       "answer": {
-        "zh-Hant": "答案是 20。",
-        "zh-Hans": "答案是 20。",
-        "en": "The answer is 20.",
-        "ja": "答えは 20 です。"
+        "zh-Hant": "答案是 41 種。",
+        "zh-Hans": "答案是 41 种。",
+        "en": "The answer is 41.",
+        "ja": "答えは 41 通りです。"
       },
       "solutionSteps": {
         "zh-Hant": [
-          "設選出的數為 a<b<c，且彼此不相鄰。",
-          "令 a'=a，b'=b-1，c'=c-2，則 a',b',c' 是從 1 到 6 中任選 3 個互異數。",
-          "這樣建立了一一對應，所以答案是 C(6,3)=20。"
+          "因為限制和「上一步走了幾階」有關，只記總走法數不夠，必須分成兩種狀態來遞推。",
+          "設 aₙ 為走到第 n 階且最後一步是 1 階的走法數，bₙ 為走到第 n 階且最後一步是 2 階的走法數。",
+          "最後一步走 1 階時，前一步沒有限制，所以 aₙ = aₙ₋₁ + bₙ₋₁；最後一步走 2 階時，前一步必須是 1 階，所以 bₙ = aₙ₋₂。",
+          "起始值：a₁ = 1、b₁ = 0、a₂ = 1、b₂ = 1（直接一次跨 2 階）。",
+          "依序推出（aₙ, bₙ）：n=3 為 (2,1)、n=4 為 (3,1)、n=5 為 (4,2)、n=6 為 (6,3)、n=7 為 (9,4)、n=8 為 (13,6)、n=9 為 (19,9)、n=10 為 (28,13)。",
+          "所以走到第 10 階的走法共 28 + 13 = 41 種。",
+          "另一種驗算：若走了 k 次 2 階，就有 10 − 2k 次 1 階，把 k 個 2 階插進 1 階排出的 11 − 2k 個空隙且不重複，得 C(11−2k, k)。k = 0,1,2,3 分別為 1、9、21、10，合計 41，一致。"
         ],
         "zh-Hans": [
-          "设选出的数为 a<b<c，且彼此不相邻。",
-          "令 a'=a，b'=b-1，c'=c-2，则 a',b',c' 是从 1 到 6 中任选 3 个互异数。",
-          "这样建立了一一对应，所以答案是 C(6,3)=20。"
+          "因为限制和「上一步走了几阶」有关，只记总走法数不够，必须分成两种状态来递推。",
+          "设 aₙ 为走到第 n 阶且最后一步是 1 阶的走法数，bₙ 为走到第 n 阶且最后一步是 2 阶的走法数。",
+          "最后一步走 1 阶时，前一步没有限制，所以 aₙ = aₙ₋₁ + bₙ₋₁；最后一步走 2 阶时，前一步必须是 1 阶，所以 bₙ = aₙ₋₂。",
+          "起始值：a₁ = 1、b₁ = 0、a₂ = 1、b₂ = 1（直接一次跨 2 阶）。",
+          "依序推出（aₙ, bₙ）：n=3 为 (2,1)、n=4 为 (3,1)、n=5 为 (4,2)、n=6 为 (6,3)、n=7 为 (9,4)、n=8 为 (13,6)、n=9 为 (19,9)、n=10 为 (28,13)。",
+          "所以走到第 10 阶的走法共 28 + 13 = 41 种。",
+          "另一种验算：若走了 k 次 2 阶，就有 10 − 2k 次 1 阶，把 k 个 2 阶插进 1 阶排出的 11 − 2k 个空隙且不重复，得 C(11−2k, k)。k = 0,1,2,3 分别为 1、9、21、10，合计 41，一致。"
         ],
         "en": [
-          "Let the chosen numbers be a<b<c with no adjacency.",
-          "Shift them to a, b-1, c-2; these become 3 distinct choices from 1 through 6.",
-          "This gives a one-to-one correspondence.",
-          "Therefore the count is C(6,3)=20."
+          "The restriction depends on how large the previous move was, so a single running total is not enough; the recursion needs two states.",
+          "Let aₙ be the number of ways to reach step n with a final move of 1 step, and bₙ the number with a final move of 2 steps.",
+          "If the last move is 1 step, the move before it is unrestricted, so aₙ = aₙ₋₁ + bₙ₋₁. If the last move is 2 steps, the previous move must be 1 step, so bₙ = aₙ₋₂.",
+          "Initial values: a₁ = 1, b₁ = 0, a₂ = 1, b₂ = 1 (a single 2-step move).",
+          "Computing (aₙ, bₙ) in order: n=3 gives (2,1), n=4 gives (3,1), n=5 gives (4,2), n=6 gives (6,3), n=7 gives (9,4), n=8 gives (13,6), n=9 gives (19,9), n=10 gives (28,13).",
+          "So the number of ways to reach step 10 is 28 + 13 = 41.",
+          "Check by another route: with k moves of 2 steps there are 10 − 2k moves of 1 step, and placing the k double moves into the 11 − 2k gaps between single moves, at most one per gap, gives C(11−2k, k). For k = 0,1,2,3 this is 1, 9, 21, 10, totalling 41, which agrees."
         ],
         "ja": [
-          "選んだ数を a<b<c とし、互いに連続しないとします。",
-          "a, b-1, c-2 とずらすと、1 から 6 までの異なる 3 数の選び方に対応します。",
-          "1 対 1 対応なので個数は C(6,3)=20。"
+          "制限が「直前に何段のぼったか」に依存するため、総数だけでは足りず、2 つの状態に分けて漸化式を立てます。",
+          "aₙ を「n 段目に到達し最後の一手が 1 段」である方法の数、bₙ を「n 段目に到達し最後の一手が 2 段」である方法の数とします。",
+          "最後が 1 段なら直前に制限はないので aₙ = aₙ₋₁ + bₙ₋₁。最後が 2 段なら直前は必ず 1 段なので bₙ = aₙ₋₂。",
+          "初期値は a₁ = 1、b₁ = 0、a₂ = 1、b₂ = 1（いきなり 2 段のぼる場合）。",
+          "順に (aₙ, bₙ) を求めると、n=3 で (2,1)、n=4 で (3,1)、n=5 で (4,2)、n=6 で (6,3)、n=7 で (9,4)、n=8 で (13,6)、n=9 で (19,9)、n=10 で (28,13)。",
+          "よって 10 段目に到達する方法は 28 + 13 = 41 通り。",
+          "別解による検算：2 段を k 回使うと 1 段は 10 − 2k 回で、1 段の並びが作る 11 − 2k 個の隙間に 2 段を重複なく入れて C(11−2k, k)。k = 0,1,2,3 でそれぞれ 1、9、21、10 となり合計 41 で一致します。"
         ]
       },
       "figure": {
@@ -290,73 +305,82 @@
       "answerMode": "integer_input",
       "correctAnswer": {
         "type": "integer",
-        "value": "20"
+        "value": "41"
       },
       "inputConstraints": {
         "allowNegative": false,
         "maxDigits": 2
       },
       "source": {
-        "type": "editorial_original",
-        "name": "MathSpring Editorial",
-        "reference": "Upper combinatorics expansion set C3",
-        "displayText": "MathSpring Editorial Original"
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "帶「不可連續使用同一動作」限制的爬樓梯計數，需以雙狀態遞推處理的競賽題型",
+        "notes": "設計依據：轉折在於察覺單一遞推式不足以描述限制，必須依「最後一步大小」拆成兩個狀態；詳解另附以隔空插入法 C(11−2k, k) 的獨立驗算路徑。屬同水準原創改寫，非抄錄特定官方題。原 004 與本 pack 008 同為「不相鄰選取一一對應」骨架且來源為自製 editorial 暫代出處。",
+        "displayText": "改寫題（雙狀態遞推爬樓梯）"
       },
       "olympiadTaxonomy": {
         "topic": "組合",
         "topicCode": "combinatorics",
-        "subtopic": "不相鄰選取",
-        "subtopicCode": "nonadjacent_selection"
+        "subtopic": "帶限制的遞推計數",
+        "subtopicCode": "recursive_counting"
       },
-      "reviewStatus": "needs_fix"
+      "reviewStatus": "ok"
     },
     {
       "id": "combinatorics_grade9_foundation_005",
       "topic": "combinatorics",
-      "subtopic": "lattice_path_forbidden",
+      "subtopic": "lattice_path_inclusion_exclusion",
       "difficulty": "foundation",
       "levelStage": "grade9",
       "challengeTier": "foundation",
       "prompt": {
-        "zh-Hant": "在 4×4 方格中，從左下角走到右上角，每步只能向右或向上，且不能經過中央格點 (2,2)。共有多少條最短路徑？",
-        "zh-Hans": "在 4×4 方格中，从左下角走到右上角，每步只能向右或向上，且不能经过中央格点 (2,2)。共有多少条最短路径？",
-        "en": "In a 4×4 grid, move from the lower-left corner to the upper-right corner using only right or up steps, and do not pass through the center lattice point (2,2). How many shortest paths are there?",
-        "ja": "4×4 の方眼で、左下から右上へ右または上にだけ進みます。ただし中央の格子点 (2,2) は通れません。最短経路は何通りありますか。"
+        "zh-Hant": "在座標平面上，從 (0, 0) 走到 (5, 5)，每步只能向右一單位或向上一單位。若規定路徑不可以經過 (2, 2)，也不可以經過 (3, 3)，則這樣的最短路徑共有多少條？",
+        "zh-Hans": "在坐标平面上，从 (0, 0) 走到 (5, 5)，每步只能向右一单位或向上一单位。若规定路径不可以经过 (2, 2)，也不可以经过 (3, 3)，则这样的最短路径共有多少条？",
+        "en": "On the coordinate plane a path goes from (0, 0) to (5, 5), each move being one unit right or one unit up. If the path may not pass through (2, 2) and may not pass through (3, 3), how many such shortest paths are there?",
+        "ja": "座標平面上で (0, 0) から (5, 5) まで、1 回の移動で右か上に 1 単位だけ進みます。経路が (2, 2) を通ってはならず、(3, 3) も通ってはならないとき、そのような最短経路は何本ありますか。"
       },
       "answer": {
-        "zh-Hant": "答案是 34。",
-        "zh-Hans": "答案是 34。",
-        "en": "The answer is 34.",
-        "ja": "答えは 34 です。"
+        "zh-Hant": "答案是 84 條。",
+        "zh-Hans": "答案是 84 条。",
+        "en": "The answer is 84.",
+        "ja": "答えは 84 本です。"
       },
       "solutionSteps": {
         "zh-Hant": [
-          "從左下到右上共要走 4 步向右與 4 步向上，所以全部最短路徑共有 C(8,4)=70 條。",
-          "若經過 (2,2)，則先從起點到 (2,2)，有 C(4,2)=6 條。",
-          "再從 (2,2) 到終點，也有 C(4,2)=6 條。",
-          "因此經過 (2,2) 的路徑共有 6×6=36 條。",
-          "所求是不經過中央格點的最短路徑，所以為 70-36=34 條。"
+          "從 (0, 0) 到 (5, 5) 要走 5 步向右與 5 步向上，共 10 步，全部最短路徑有 C(10, 5) = 252 條。",
+          "兩個禁點不能各自扣掉就算完，因為有些路徑同時經過兩點會被扣兩次，必須用排容原理。",
+          "設 A 為經過 (2, 2) 的路徑，B 為經過 (3, 3) 的路徑。",
+          "|A| = C(4, 2) × C(6, 3) = 6 × 20 = 120；|B| = C(6, 3) × C(4, 2) = 20 × 6 = 120。",
+          "同時經過兩點的路徑要依序走 (0,0)→(2,2)→(3,3)→(5,5)，所以 |A ∩ B| = C(4, 2) × C(2, 1) × C(4, 2) = 6 × 2 × 6 = 72。",
+          "由排容原理，|A ∪ B| = 120 + 120 − 72 = 168。",
+          "所求為 252 − 168 = 84 條。"
         ],
         "zh-Hans": [
-          "从左下到右上共要走 4 步向右与 4 步向上，所以全部最短路径共有 C(8,4)=70 条。",
-          "若经过 (2,2)，则先从起点到 (2,2)，有 C(4,2)=6 条。",
-          "再从 (2,2) 到终点，也有 C(4,2)=6 条。",
-          "因此经过 (2,2) 的路径共有 6×6=36 条。",
-          "所求是不经过中央格点的最短路径，所以为 70-36=34 条。"
+          "从 (0, 0) 到 (5, 5) 要走 5 步向右与 5 步向上，共 10 步，全部最短路径有 C(10, 5) = 252 条。",
+          "两个禁点不能各自扣掉就算完，因为有些路径同时经过两点会被扣两次，必须用容斥原理。",
+          "设 A 为经过 (2, 2) 的路径，B 为经过 (3, 3) 的路径。",
+          "|A| = C(4, 2) × C(6, 3) = 6 × 20 = 120；|B| = C(6, 3) × C(4, 2) = 20 × 6 = 120。",
+          "同时经过两点的路径要依序走 (0,0)→(2,2)→(3,3)→(5,5)，所以 |A ∩ B| = C(4, 2) × C(2, 1) × C(4, 2) = 6 × 2 × 6 = 72。",
+          "由容斥原理，|A ∪ B| = 120 + 120 − 72 = 168。",
+          "所求为 252 − 168 = 84 条。"
         ],
         "en": [
-          "A shortest path uses 4 right steps and 4 up steps, so there are C(8,4)=70 shortest paths in total.",
-          "Paths through (2,2) split into two parts.",
-          "From the start to (2,2), there are C(4,2)=6 paths.",
-          "From (2,2) to the end, there are also C(4,2)=6 paths.",
-          "So 36 paths go through (2,2), and the required count is 70-36=34."
+          "Going from (0, 0) to (5, 5) takes 5 right moves and 5 up moves, ten moves in all, so there are C(10, 5) = 252 shortest paths in total.",
+          "The two forbidden points cannot simply be subtracted separately, because paths through both would be removed twice; inclusion–exclusion is needed.",
+          "Let A be the set of paths through (2, 2) and B the set of paths through (3, 3).",
+          "|A| = C(4, 2) × C(6, 3) = 6 × 20 = 120 and |B| = C(6, 3) × C(4, 2) = 20 × 6 = 120.",
+          "A path through both must run (0,0)→(2,2)→(3,3)→(5,5), so |A ∩ B| = C(4, 2) × C(2, 1) × C(4, 2) = 6 × 2 × 6 = 72.",
+          "By inclusion–exclusion, |A ∪ B| = 120 + 120 − 72 = 168.",
+          "The answer is therefore 252 − 168 = 84."
         ],
         "ja": [
-          "最短経路では右に 4 回、上に 4 回進むので、全体では C(8,4)=70 通りです。",
-          "点 (2,2) を通る経路は 2 つの部分に分けて数えます。",
-          "始点から (2,2) までは C(4,2)=6 通り。",
-          "そこから終点までも C(4,2)=6 通りです。",
-          "したがって (2,2) を通る経路は 36 通りで、求める数は 70-36=34 通りです。"
+          "(0, 0) から (5, 5) までは右に 5 歩、上に 5 歩の計 10 歩なので、最短経路は全部で C(10, 5) = 252 本です。",
+          "2 つの禁止点は別々に引くだけでは不十分で、両方を通る経路を二重に引いてしまうため包除原理が必要です。",
+          "A を (2, 2) を通る経路の集合、B を (3, 3) を通る経路の集合とします。",
+          "|A| = C(4, 2) × C(6, 3) = 6 × 20 = 120、|B| = C(6, 3) × C(4, 2) = 20 × 6 = 120。",
+          "両方を通る経路は (0,0)→(2,2)→(3,3)→(5,5) の順に進むので |A ∩ B| = C(4, 2) × C(2, 1) × C(4, 2) = 6 × 2 × 6 = 72。",
+          "包除原理より |A ∪ B| = 120 + 120 − 72 = 168。",
+          "よって求める本数は 252 − 168 = 84。"
         ]
       },
       "figure": {
@@ -367,69 +391,82 @@
       "answerMode": "integer_input",
       "correctAnswer": {
         "type": "integer",
-        "value": "34"
+        "value": "84"
       },
       "inputConstraints": {
         "allowNegative": false,
-        "maxDigits": 1
+        "maxDigits": 3
       },
       "source": {
-        "type": "editorial_original",
-        "name": "MathSpring Editorial",
-        "reference": "Upper combinatorics expansion set C9",
-        "displayText": "MathSpring Editorial Original"
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "含兩個禁止通過點的格點最短路徑計數，需以排容原理處理重疊的競賽題型",
+        "notes": "設計依據：由單一禁點（可直接補集）升級為兩個禁點，強迫使用排容原理並正確計算同時經過兩點的路徑數；關鍵轉折是察覺兩禁點在同一條上升鏈上而可依序連乘。屬同水準原創改寫，非抄錄特定官方題。原 005 為單一禁點的標準題且來源為自製 editorial 暫代出處。",
+        "displayText": "改寫題（雙禁點格點路徑容斥）"
       },
       "olympiadTaxonomy": {
         "topic": "組合",
         "topicCode": "combinatorics",
-        "subtopic": "避點路徑",
-        "subtopicCode": "lattice_path_forbidden"
+        "subtopic": "格點路徑容斥",
+        "subtopicCode": "lattice_path_inclusion_exclusion"
       },
-      "reviewStatus": "needs_fix"
+      "reviewStatus": "ok"
     },
     {
       "id": "combinatorics_grade9_foundation_006",
       "topic": "combinatorics",
-      "subtopic": "subset_sum_even",
+      "subtopic": "cycle_coloring",
       "difficulty": "foundation",
       "levelStage": "grade9",
       "challengeTier": "foundation",
       "prompt": {
-        "zh-Hant": "從集合 {1,2,3,4,5} 中選 2 個不同數字，它們的和是偶數。共有多少種選法？",
-        "zh-Hans": "从集合 {1,2,3,4,5} 中选 2 个不同数字，它们的和是偶数。共有多少种选法？",
-        "en": "Choose 2 distinct numbers from {1,2,3,4,5} so that their sum is even. How many choices are there?",
-        "ja": "集合 {1,2,3,4,5} から異なる 2 つの数を選び、その和が偶数になるようにします。何通りありますか。"
+        "zh-Hant": "把 5 個相同大小的扇形排成一個圓環，依序編號為 1 到 5，其中第 5 格與第 1 格也相鄰。現在用紅、藍、綠三種顏色為每一格著色，要求任意兩個相鄰的格子顏色不同。共有多少種著色方式？",
+        "zh-Hans": "把 5 个相同大小的扇形排成一个圆环，依序编号为 1 到 5，其中第 5 格与第 1 格也相邻。现在用红、蓝、绿三种颜色为每一格着色，要求任意两个相邻的格子颜色不同。共有多少种着色方式？",
+        "en": "Five equal sectors are arranged in a ring and numbered 1 to 5 in order, so that sector 5 is also adjacent to sector 1. Each sector is coloured red, blue, or green so that no two adjacent sectors share a colour. How many colourings are there?",
+        "ja": "同じ大きさの扇形 5 個を輪の形に並べ、順に 1 から 5 まで番号をつけます。5 番目と 1 番目も隣り合っています。赤・青・緑の 3 色で各区画を塗り、隣り合う区画は必ず異なる色にするとき、塗り方は何通りありますか。"
       },
       "answer": {
-        "zh-Hant": "答案是 4。",
-        "zh-Hans": "答案是 4。",
-        "en": "The answer is 4.",
-        "ja": "答えは 4 です。"
+        "zh-Hant": "答案是 30 種。",
+        "zh-Hans": "答案是 30 种。",
+        "en": "The answer is 30.",
+        "ja": "答えは 30 通りです。"
       },
       "solutionSteps": {
         "zh-Hant": [
-          "和是偶數，代表兩數同為奇數或同為偶數。",
-          "奇數有 1、3、5，共 C(3,2)=3 種。",
-          "偶數有 2、4，共 C(2,2)=1 種。",
-          "因此共有 3+1=4 種。"
+          "先假裝把圓環剪開成一列：第 1 格有 3 種選擇，之後每一格只要和左邊那格不同，各有 2 種，得 3 × 2⁴ = 48 種。",
+          "但這 48 種只保證第 1 與第 2、第 2 與第 3、⋯、第 4 與第 5 相鄰不同色，並沒有管住第 5 格與第 1 格。",
+          "被多算的正是「第 5 格與第 1 格同色」的情形。把這兩格黏起來看成同一格，就等於在 4 格的圓環上做同樣的合法著色。",
+          "所以若記 aₙ 為 n 格圓環的合法著色數，就有 aₙ + aₙ₋₁ = 3 × 2ⁿ⁻¹。",
+          "從 3 格圓環開始：三格兩兩相鄰，必須三色互異，a₃ = 3 × 2 × 1 = 6。",
+          "由遞推得 a₄ = 3 × 2³ − a₃ = 24 − 6 = 18，再得 a₅ = 3 × 2⁴ − a₄ = 48 − 18 = 30。",
+          "所以共有 30 種著色方式。"
         ],
         "zh-Hans": [
-          "和是偶数，代表两数同为奇数或同为偶数。",
-          "奇数有 1、3、5，共 C(3,2)=3 种。",
-          "偶数有 2、4，共 C(2,2)=1 种。",
-          "因此共有 3+1=4 种。"
+          "先假装把圆环剪开成一列：第 1 格有 3 种选择，之后每一格只要和左边那格不同，各有 2 种，得 3 × 2⁴ = 48 种。",
+          "但这 48 种只保证第 1 与第 2、第 2 与第 3、⋯、第 4 与第 5 相邻不同色，并没有管住第 5 格与第 1 格。",
+          "被多算的正是「第 5 格与第 1 格同色」的情形。把这两格黏起来看成同一格，就等于在 4 格的圆环上做同样的合法着色。",
+          "所以若记 aₙ 为 n 格圆环的合法着色数，就有 aₙ + aₙ₋₁ = 3 × 2ⁿ⁻¹。",
+          "从 3 格圆环开始：三格两两相邻，必须三色互异，a₃ = 3 × 2 × 1 = 6。",
+          "由递推得 a₄ = 3 × 2³ − a₃ = 24 − 6 = 18，再得 a₅ = 3 × 2⁴ − a₄ = 48 − 18 = 30。",
+          "所以共有 30 种着色方式。"
         ],
         "en": [
-          "An even sum comes from two odd numbers or two even numbers.",
-          "There are C(3,2)=3 ways to choose two odds from {1,3,5}.",
-          "There is C(2,2)=1 way to choose both evens 2 and 4.",
-          "So the total is 4."
+          "First pretend the ring is cut open into a row: sector 1 has 3 choices, and each later sector only has to differ from the one on its left, giving 3 × 2⁴ = 48 colourings.",
+          "Those 48 only guarantee that sectors 1–2, 2–3, …, 4–5 differ; they say nothing about sectors 5 and 1.",
+          "The overcount is exactly the case where sectors 5 and 1 have the same colour. Gluing those two into a single sector turns the situation into the same kind of legal colouring on a ring of 4 sectors.",
+          "So writing aₙ for the number of legal colourings of a ring of n sectors, we get aₙ + aₙ₋₁ = 3 × 2ⁿ⁻¹.",
+          "Start from a ring of 3: all three are mutually adjacent, so all three colours must differ and a₃ = 3 × 2 × 1 = 6.",
+          "The recursion gives a₄ = 3 × 2³ − a₃ = 24 − 6 = 18, and then a₅ = 3 × 2⁴ − a₄ = 48 − 18 = 30.",
+          "Hence there are 30 colourings."
         ],
         "ja": [
-          "和が偶数になるのは、2 つとも奇数か、2 つとも偶数の場合です。",
-          "奇数 {1,3,5} から 2 つ選ぶ方法は C(3,2)=3。",
-          "偶数 {2,4} を 2 つとも選ぶ方法は 1 通り。",
-          "したがって合計 4 通りです。"
+          "まず輪を切り開いて一列と見なします。1 番目は 3 通り、以降は左隣と違えばよいのでそれぞれ 2 通りとなり、3 × 2⁴ = 48 通りです。",
+          "この 48 通りは 1–2、2–3、…、4–5 が異なることしか保証しておらず、5 番目と 1 番目については何も言っていません。",
+          "余分に数えているのはちょうど「5 番目と 1 番目が同色」の場合です。その 2 つを貼り合わせて 1 区画とみなすと、4 区画の輪における同じ条件の塗り方に一致します。",
+          "そこで n 区画の輪の正しい塗り方の数を aₙ とすると、aₙ + aₙ₋₁ = 3 × 2ⁿ⁻¹ が成り立ちます。",
+          "3 区画の輪から始めます。3 つは互いに隣接するので 3 色すべてが異なり、a₃ = 3 × 2 × 1 = 6。",
+          "漸化式より a₄ = 3 × 2³ − a₃ = 24 − 6 = 18、続いて a₅ = 3 × 2⁴ − a₄ = 48 − 18 = 30。",
+          "よって塗り方は 30 通りです。"
         ]
       },
       "figure": {
@@ -440,25 +477,26 @@
       "answerMode": "integer_input",
       "correctAnswer": {
         "type": "integer",
-        "value": "4"
+        "value": "30"
       },
       "inputConstraints": {
         "allowNegative": false,
-        "maxDigits": 1
+        "maxDigits": 2
       },
       "source": {
-        "type": "editorial_original",
-        "name": "MathSpring Editorial",
-        "reference": "Upper combinatorics expansion set C10",
-        "displayText": "MathSpring Editorial Original"
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "環狀相鄰異色著色計數：以「剪開成鏈再扣掉首尾同色」建立環長遞推的競賽題型",
+        "notes": "設計依據：轉折在於察覺剪開後的 3×2⁴ 會多算首尾同色的情形，而該情形恰好對應長度少 1 的環，於是得到 aₙ + aₙ₋₁ = 3×2ⁿ⁻¹ 並由 a₃ = 6 逐步推到 a₅ = 30。屬同水準原創改寫，非抄錄特定官方題。原 006 為單步奇偶配對計數（答案 4），深度明顯低於本年級且來源為自製 editorial 暫代出處。",
+        "displayText": "改寫題（環狀著色遞推）"
       },
       "olympiadTaxonomy": {
         "topic": "組合",
         "topicCode": "combinatorics",
-        "subtopic": "奇偶選取",
-        "subtopicCode": "subset_sum_even"
+        "subtopic": "環狀著色計數",
+        "subtopicCode": "cycle_coloring"
       },
-      "reviewStatus": "needs_fix"
+      "reviewStatus": "ok"
     },
     {
       "id": "combinatorics_grade9_foundation_007",

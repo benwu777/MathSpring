@@ -16,42 +16,58 @@
     {
       "id": "number_theory_grade9_foundation_001",
       "topic": "number_theory",
-      "subtopic": "integer_triangles",
+      "subtopic": "simultaneous_congruence",
       "difficulty": "foundation",
       "levelStage": "grade9",
       "challengeTier": "foundation",
       "prompt": {
-        "zh-Hant": "周長是 24 的整數邊三角形共有多少種？",
-        "zh-Hans": "周长是 24 的整数边三角形共有多少种？",
-        "en": "How many integer-sided triangles have perimeter 24?",
-        "ja": "周の長さが 24 の整数辺三角形は何種類ありますか。"
+        "zh-Hant": "求最小的正整數 n，使得 n 除以 5 的餘數是 3，除以 7 的餘數是 4，除以 9 的餘數是 2。",
+        "zh-Hans": "求最小的正整数 n，使得 n 除以 5 的余数是 3，除以 7 的余数是 4，除以 9 的余数是 2。",
+        "en": "Find the smallest positive integer n that leaves remainder 3 when divided by 5, remainder 4 when divided by 7, and remainder 2 when divided by 9.",
+        "ja": "5 で割ると 3 余り、7 で割ると 4 余り、9 で割ると 2 余るような最小の正の整数 n を求めなさい。"
       },
       "answer": {
-        "zh-Hant": "答案是 15。",
-        "zh-Hans": "答案是 15。",
-        "en": "The answer is 15.",
-        "ja": "答えは 15 です。"
+        "zh-Hant": "答案是 263。",
+        "zh-Hans": "答案是 263。",
+        "en": "The answer is 263.",
+        "ja": "答えは 263 です。"
       },
       "solutionSteps": {
         "zh-Hant": [
-          "設 a ≤ b ≤ c，且 a + b + c = 24。",
-          "由三角形不等式得 a + b > c，所以 c < 12。",
-          "逐一枚舉可得共有 15 組。"
+          "由「除以 5 餘 3」可寫成 n = 5k + 3。",
+          "代入第二個條件：5k + 3 除以 7 餘 4，即 5k 除以 7 餘 1。逐一試 k = 0,1,2,3 得 5×3 = 15 除以 7 餘 1，所以 k 除以 7 餘 3。",
+          "於是 k = 7m + 3，代回得 n = 5(7m + 3) + 3 = 35m + 18。",
+          "再代入第三個條件：35m + 18 除以 9 餘 2。因為 35 除以 9 餘 8、18 是 9 的倍數，所以條件變成 8m 除以 9 餘 2。",
+          "由於 8m 除以 9 的餘數等於 −m 的餘數，條件即 −m ≡ 2 (mod 9)，也就是 m 除以 9 餘 7。",
+          "取最小的 m = 7，得 n = 35 × 7 + 18 = 245 + 18 = 263。",
+          "驗算：263 = 5 × 52 + 3、263 = 7 × 37 + 4、263 = 9 × 29 + 2，三個條件都成立；由於 5、7、9 兩兩互質，所有解每隔 315 出現一次，263 確實是最小的正整數解。"
         ],
         "zh-Hans": [
-          "设 a ≤ b ≤ c，且 a + b + c = 24。",
-          "由三角形不等式得 a + b > c，所以 c < 12。",
-          "逐一枚举可得共有 15 组。"
+          "由「除以 5 余 3」可写成 n = 5k + 3。",
+          "代入第二个条件：5k + 3 除以 7 余 4，即 5k 除以 7 余 1。逐一试 k = 0,1,2,3 得 5×3 = 15 除以 7 余 1，所以 k 除以 7 余 3。",
+          "于是 k = 7m + 3，代回得 n = 5(7m + 3) + 3 = 35m + 18。",
+          "再代入第三个条件：35m + 18 除以 9 余 2。因为 35 除以 9 余 8、18 是 9 的倍数，所以条件变成 8m 除以 9 余 2。",
+          "由于 8m 除以 9 的余数等于 −m 的余数，条件即 −m ≡ 2 (mod 9)，也就是 m 除以 9 余 7。",
+          "取最小的 m = 7，得 n = 35 × 7 + 18 = 245 + 18 = 263。",
+          "验算：263 = 5 × 52 + 3、263 = 7 × 37 + 4、263 = 9 × 29 + 2，三个条件都成立；由于 5、7、9 两两互质，所有解每隔 315 出现一次，263 确实是最小的正整数解。"
         ],
         "en": [
-          "Let a ≤ b ≤ c with a + b + c = 24.",
-          "The triangle inequality gives c < 12.",
-          "Enumerating the possible ordered triples gives 15 triangles."
+          "From the first condition, write n = 5k + 3.",
+          "Substituting into the second condition, 5k + 3 leaves remainder 4 mod 7, so 5k leaves remainder 1 mod 7. Testing k = 0, 1, 2, 3 gives 5 × 3 = 15 ≡ 1 (mod 7), so k ≡ 3 (mod 7).",
+          "Hence k = 7m + 3, and substituting back gives n = 5(7m + 3) + 3 = 35m + 18.",
+          "Now use the third condition: 35m + 18 leaves remainder 2 mod 9. Since 35 ≡ 8 (mod 9) and 18 is a multiple of 9, this becomes 8m ≡ 2 (mod 9).",
+          "Because 8m ≡ −m (mod 9), the condition is −m ≡ 2 (mod 9), that is m ≡ 7 (mod 9).",
+          "Taking the smallest value m = 7 gives n = 35 × 7 + 18 = 245 + 18 = 263.",
+          "Check: 263 = 5 × 52 + 3, 263 = 7 × 37 + 4, and 263 = 9 × 29 + 2, so all three conditions hold. Since 5, 7, and 9 are pairwise coprime, solutions repeat every 315, so 263 is indeed the smallest positive one."
         ],
         "ja": [
-          "a ≤ b ≤ c、a + b + c = 24 とします。",
-          "三角不等式から c < 12。",
-          "場合を調べると 15 組あります。"
+          "1 つ目の条件から n = 5k + 3 と書けます。",
+          "2 つ目の条件に代入すると、5k + 3 を 7 で割った余りが 4、すなわち 5k を 7 で割った余りが 1。k = 0, 1, 2, 3 を試すと 5 × 3 = 15 ≡ 1 (mod 7) なので k ≡ 3 (mod 7)。",
+          "よって k = 7m + 3 となり、戻すと n = 5(7m + 3) + 3 = 35m + 18。",
+          "3 つ目の条件を使うと、35m + 18 を 9 で割った余りが 2。35 ≡ 8 (mod 9) で 18 は 9 の倍数なので、条件は 8m ≡ 2 (mod 9) になります。",
+          "8m ≡ −m (mod 9) なので条件は −m ≡ 2 (mod 9)、つまり m ≡ 7 (mod 9)。",
+          "最小の m = 7 を取ると n = 35 × 7 + 18 = 245 + 18 = 263。",
+          "検算：263 = 5 × 52 + 3、263 = 7 × 37 + 4、263 = 9 × 29 + 2 ですべての条件を満たします。5、7、9 は互いに素なので解は 315 ごとに現れ、263 が最小の正の解です。"
         ]
       },
       "figure": {
@@ -62,33 +78,26 @@
       "answerMode": "integer_input",
       "correctAnswer": {
         "type": "integer",
-        "value": "15"
+        "value": "263"
       },
       "inputConstraints": {
         "allowNegative": false,
-        "maxDigits": 2
+        "maxDigits": 4
       },
       "source": {
-        "type": "official_reference",
-        "name": "IMC",
-        "contest": "IMC Taiwan",
-        "year": "2026",
-        "round": "複賽",
-        "division": "9 年級",
-        "problemNumber": "填充 5",
-        "reference": "22nd IMC Taiwan semifinal grade 9 fill-in 5",
-        "displayText": "IMC Taiwan 2026 複賽 9年級 填充 5",
-        "sourceUrl": "https://imcct.net/UserFiles/news/583/20260413110023_2.pdf",
-        "rightsStatus": "needs_review",
-        "notes": "Rewritten from the official public competition PDF."
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "三個模數兩兩互質的同餘聯立，以逐步代入消元求最小正整數解的競賽題型",
+        "notes": "設計依據：不使用中國剩餘定理公式，而以「設 n = 5k+3 → 解出 k 的同餘 → 再代入下一條件」的逐步代入法推進，最後說明模數互質故週期為 315 以確認最小性。答案 263 已用窮舉確認。屬同水準原創改寫，非抄錄特定官方題。原 001「周長 24 的整數邊三角形種數」標記答案 15 但窮舉實際只有 12 種，且與 combinatorics_grade9_foundation_007 為同一題（該題答案 12 正確），整題淘汰。",
+        "displayText": "改寫題（同餘聯立求最小解）"
       },
       "olympiadTaxonomy": {
         "topic": "數論",
         "topicCode": "number_theory",
-        "subtopic": "整數三角形",
-        "subtopicCode": "integer_triangles"
+        "subtopic": "同餘聯立",
+        "subtopicCode": "simultaneous_congruence"
       },
-      "reviewStatus": "needs_fix"
+      "reviewStatus": "ok"
     },
     {
       "id": "number_theory_grade9_foundation_002",
@@ -111,24 +120,32 @@
       },
       "solutionSteps": {
         "zh-Hant": [
-          "每項都可寫成 (n-1)(n+1)/n²。",
-          "拆成兩個連乘積後會大量約掉。",
-          "最後得到 2027/4052。"
+          "先把每一項拆開：1 − 1/n² = (n² − 1)/n² = ((n − 1)(n + 1))/n² = ((n − 1)/n) × ((n + 1)/n)。",
+          "因此整個乘積等於 (1/2 × 2/3 × 3/4 × ⋯ × 2025/2026) × (3/2 × 4/3 × 5/4 × ⋯ × 2027/2026)。",
+          "第一串是相鄰項互相約分的伸縮積，前一項的分母恰好是後一項的分子，約完只剩 1/2026。",
+          "第二串同理，約完只剩 2027/2。",
+          "所以乘積為 (1/2026) × (2027/2) = 2027/4052。"
         ],
         "zh-Hans": [
-          "每项都可写成 (n-1)(n+1)/n²。",
-          "拆成两个连乘积后会大量约掉。",
-          "最后得到 2027/4052。"
+          "先把每一项拆开：1 − 1/n² = (n² − 1)/n² = ((n − 1)(n + 1))/n² = ((n − 1)/n) × ((n + 1)/n)。",
+          "因此整个乘积等于 (1/2 × 2/3 × 3/4 × ⋯ × 2025/2026) × (3/2 × 4/3 × 5/4 × ⋯ × 2027/2026)。",
+          "第一串是相邻项互相约分的伸缩积，前一项的分母恰好是后一项的分子，约完只剩 1/2026。",
+          "第二串同理，约完只剩 2027/2。",
+          "所以乘积为 (1/2026) × (2027/2) = 2027/4052。"
         ],
         "en": [
-          "Rewrite each factor as (n-1)(n+1)/n².",
-          "After splitting the product, most terms cancel.",
-          "The final value is 2027/4052."
+          "Split each factor: 1 − 1/n² = (n² − 1)/n² = ((n − 1)(n + 1))/n² = ((n − 1)/n) × ((n + 1)/n).",
+          "So the whole product equals (1/2 × 2/3 × 3/4 × ⋯ × 2025/2026) × (3/2 × 4/3 × 5/4 × ⋯ × 2027/2026).",
+          "The first chain telescopes: the denominator of each factor is the numerator of the next, so everything cancels except 1/2026.",
+          "The second chain telescopes in the same way, leaving only 2027/2.",
+          "Hence the product is (1/2026) × (2027/2) = 2027/4052."
         ],
         "ja": [
-          "各項は (n-1)(n+1)/n² と書けます。",
-          "積を分けると多くの項が消えます。",
-          "最後は 2027/4052 です。"
+          "各因子を分解します：1 − 1/n² = (n² − 1)/n² = ((n − 1)(n + 1))/n² = ((n − 1)/n) × ((n + 1)/n)。",
+          "したがって積全体は (1/2 × 2/3 × 3/4 × ⋯ × 2025/2026) × (3/2 × 4/3 × 5/4 × ⋯ × 2027/2026) になります。",
+          "第 1 の列は各因子の分母が次の因子の分子になっており、次々に約分されて 1/2026 だけが残ります。",
+          "第 2 の列も同様に約分され、2027/2 だけが残ります。",
+          "よって積は (1/2026) × (2027/2) = 2027/4052。"
         ]
       },
       "figure": {
@@ -187,7 +204,7 @@
         "subtopic": "連乘積",
         "subtopicCode": "telescoping_product"
       },
-      "reviewStatus": "needs_fix"
+      "reviewStatus": "ok"
     },
     {
       "id": "number_theory_grade9_foundation_003",
@@ -269,42 +286,58 @@
     {
       "id": "number_theory_grade9_foundation_004",
       "topic": "number_theory",
-      "subtopic": "gcd_lcm_relation",
+      "subtopic": "gcd_lcm_pair_count",
       "difficulty": "foundation",
       "levelStage": "grade9",
       "challengeTier": "foundation",
       "prompt": {
-        "zh-Hant": "兩個正整數的最大公因數是 6，最小公倍數是 126。其中一個數是 18，另一個數是多少？",
-        "zh-Hans": "两个正整数的最大公因数是 6，最小公倍数是 126。其中一个数是 18，另一个数是多少？",
-        "en": "Two positive integers have greatest common divisor 6 and least common multiple 126. One of the numbers is 18. What is the other number?",
-        "ja": "2 つの正の整数の最大公約数は 6、最小公倍数は 126 です。一方が 18 のとき、もう一方を求めなさい。"
+        "zh-Hant": "兩個正整數的最大公因數是 12，最小公倍數是 720。若不計順序，這樣的數對共有多少組？",
+        "zh-Hans": "两个正整数的最大公因数是 12，最小公倍数是 720。若不计顺序，这样的数对共有多少组？",
+        "en": "Two positive integers have greatest common divisor 12 and least common multiple 720. How many such unordered pairs are there?",
+        "ja": "2 つの正の整数の最大公約数が 12、最小公倍数が 720 です。順序を区別しないとき、このような組はいくつありますか。"
       },
       "answer": {
-        "zh-Hant": "答案是 42。",
-        "zh-Hans": "答案是 42。",
-        "en": "The answer is 42.",
-        "ja": "答えは 42 です。"
+        "zh-Hant": "答案是 4 組。",
+        "zh-Hans": "答案是 4 组。",
+        "en": "The answer is 4 pairs.",
+        "ja": "答えは 4 組です。"
       },
       "solutionSteps": {
         "zh-Hant": [
-          "兩數乘積 = 最大公因數 × 最小公倍數。",
-          "所以兩數乘積是 6 × 126 = 756。",
-          "已知其中一個數是 18，另一個數是 756 ÷ 18 = 42。"
+          "因為最大公因數是 12，可設兩數為 a = 12x、b = 12y，其中 x 與 y 是互質的正整數。",
+          "兩數的最小公倍數為 12xy，由題意 12xy = 720，所以 xy = 60。",
+          "問題轉化為：把 60 寫成兩個互質正整數的乘積，有幾種（不計順序）？",
+          "把 60 分解成 2² × 3 × 5。互質的意思是同一個質數的所有次方必須整個落在同一邊，不能拆開。",
+          "所以每個質數（2、3、5 共 3 個）各自選擇歸給 x 或 y，有 2³ = 8 種分法；因為不計順序，要除以 2，得 4 組。",
+          "實際列出為 (x, y) = (1, 60)、(3, 20)、(4, 15)、(5, 12)，對應兩數 (12, 720)、(36, 240)、(48, 180)、(60, 144)。",
+          "因此共有 4 組。"
         ],
         "zh-Hans": [
-          "两数乘积 = 最大公因数 × 最小公倍数。",
-          "所以两数乘积是 6 × 126 = 756。",
-          "已知其中一个数是 18，另一个数是 756 ÷ 18 = 42。"
+          "因为最大公因数是 12，可设两数为 a = 12x、b = 12y，其中 x 与 y 是互质的正整数。",
+          "两数的最小公倍数为 12xy，由题意 12xy = 720，所以 xy = 60。",
+          "问题转化为：把 60 写成两个互质正整数的乘积，有几种（不计顺序）？",
+          "把 60 分解成 2² × 3 × 5。互质的意思是同一个质数的所有次方必须整个落在同一边，不能拆开。",
+          "所以每个质数（2、3、5 共 3 个）各自选择归给 x 或 y，有 2³ = 8 种分法；因为不计顺序，要除以 2，得 4 组。",
+          "实际列出为 (x, y) = (1, 60)、(3, 20)、(4, 15)、(5, 12)，对应两数 (12, 720)、(36, 240)、(48, 180)、(60, 144)。",
+          "因此共有 4 组。"
         ],
         "en": [
-          "The product of two positive integers equals their gcd times their lcm.",
-          "So the product is 6 × 126 = 756.",
-          "Since one number is 18, the other is 756 ÷ 18 = 42."
+          "Since the gcd is 12, write the numbers as a = 12x and b = 12y where x and y are coprime positive integers.",
+          "Their least common multiple is 12xy, and the problem gives 12xy = 720, so xy = 60.",
+          "The question becomes: in how many unordered ways can 60 be written as a product of two coprime positive integers?",
+          "Factor 60 as 2² × 3 × 5. Coprimality means all powers of a given prime must go entirely to one side and cannot be split.",
+          "So each of the 3 primes (2, 3, 5) is assigned to x or to y, giving 2³ = 8 assignments; dividing by 2 because order does not matter leaves 4 pairs.",
+          "Explicitly, (x, y) = (1, 60), (3, 20), (4, 15), (5, 12), corresponding to the pairs (12, 720), (36, 240), (48, 180), (60, 144).",
+          "Hence there are 4 pairs."
         ],
         "ja": [
-          "2 つの正整数の積は、最大公約数と最小公倍数の積に等しいです。",
-          "したがって積は 6 × 126 = 756。",
-          "一方が 18 なので、もう一方は 756 ÷ 18 = 42 です。"
+          "最大公約数が 12 なので、2 数を a = 12x、b = 12y（x と y は互いに素な正の整数）とおきます。",
+          "最小公倍数は 12xy であり、題意より 12xy = 720 なので xy = 60。",
+          "問題は「60 を互いに素な 2 つの正の整数の積として書く方法は（順序を区別せず）何通りか」に帰着します。",
+          "60 = 2² × 3 × 5 と分解します。互いに素とは、同じ素数のべきはすべて片側にまとまる必要があり、分割できないという意味です。",
+          "よって 3 個の素数（2、3、5）をそれぞれ x か y に割り当てる 2³ = 8 通りがあり、順序を区別しないので 2 で割って 4 組。",
+          "具体的には (x, y) = (1, 60)、(3, 20)、(4, 15)、(5, 12) で、2 数は (12, 720)、(36, 240)、(48, 180)、(60, 144)。",
+          "したがって 4 組です。"
         ]
       },
       "figure": {
@@ -315,69 +348,74 @@
       "answerMode": "integer_input",
       "correctAnswer": {
         "type": "integer",
-        "value": "42"
+        "value": "4"
       },
       "inputConstraints": {
         "allowNegative": false,
         "maxDigits": 2
       },
       "source": {
-        "type": "editorial_original",
-        "name": "MathSpring Editorial",
-        "reference": "Upper number theory expansion set N3",
-        "displayText": "MathSpring Editorial Original"
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "由 gcd 與 lcm 反推互質分解、以相異質因數個數計數數對的競賽題型",
+        "notes": "設計依據：轉折在於把問題化為「60 拆成兩個互質因數」，再認出互質條件等價於每個質數整包分配，因此答案是 2^(相異質因數個數) 再除以 2。答案 4 已用 720 以內的雙重迴圈窮舉驗證。屬同水準原創改寫，非抄錄特定官方題。原 004 只需套一次「兩數乘積 = gcd × lcm」即得答案，屬單一公式裸題，且來源為自製 editorial 暫代出處。",
+        "displayText": "改寫題（gcd/lcm 互質分解計數）"
       },
       "olympiadTaxonomy": {
         "topic": "數論",
         "topicCode": "number_theory",
-        "subtopic": "最大公因數與最小公倍數",
-        "subtopicCode": "gcd_lcm_relation"
+        "subtopic": "最大公因數與最小公倍數數對",
+        "subtopicCode": "gcd_lcm_pair_count"
       },
-      "reviewStatus": "needs_fix"
+      "reviewStatus": "ok"
     },
     {
       "id": "number_theory_grade9_foundation_005",
       "topic": "number_theory",
-      "subtopic": "perfect_square_divisor",
+      "subtopic": "square_divisor_count",
       "difficulty": "foundation",
       "levelStage": "grade9",
       "challengeTier": "foundation",
       "prompt": {
-        "zh-Hant": "最小的正整數 n，使得 72n 成為完全平方數，求 n。",
-        "zh-Hans": "最小的正整数 n，使得 72n 成为完全平方数，求 n。",
-        "en": "Find the smallest positive integer n such that 72n is a perfect square.",
-        "ja": "72n が完全平方数になるような最小の正の整数 n を求めなさい。"
+        "zh-Hant": "設 N = 2⁴ × 3⁶ × 5³。在 N 的所有正因數中，有多少個是完全平方數？",
+        "zh-Hans": "设 N = 2⁴ × 3⁶ × 5³。在 N 的所有正因数中，有多少个是完全平方数？",
+        "en": "Let N = 2⁴ × 3⁶ × 5³. How many of the positive divisors of N are perfect squares?",
+        "ja": "N = 2⁴ × 3⁶ × 5³ とします。N の正の約数のうち、平方数はいくつありますか。"
       },
       "answer": {
-        "zh-Hant": "答案是 2。",
-        "zh-Hans": "答案是 2。",
-        "en": "The answer is 2.",
-        "ja": "答えは 2 です。"
+        "zh-Hant": "答案是 24 個。",
+        "zh-Hans": "答案是 24 个。",
+        "en": "The answer is 24.",
+        "ja": "答えは 24 個です。"
       },
       "solutionSteps": {
         "zh-Hant": [
-          "72 = 2³ × 3²。",
-          "完全平方數的質因數指數都要是偶數。",
-          "目前只有 2 的指數是奇數，所以再乘一個 2 即可。",
-          "因此最小的 n 是 2。"
+          "N 的任一正因數都可寫成 2ᵃ × 3ᵇ × 5ᶜ，其中 0 ≤ a ≤ 4、0 ≤ b ≤ 6、0 ≤ c ≤ 3。",
+          "一個數是完全平方數，等價於它的每個質因數指數都是偶數。",
+          "所以要求 a、b、c 同時都是偶數。",
+          "a 可取 0、2、4，共 3 種；b 可取 0、2、4、6，共 4 種；c 可取 0、2，共 2 種（因為 c ≤ 3，4 已超出）。",
+          "三個指數互相獨立，所以完全平方因數共有 3 × 4 × 2 = 24 個。"
         ],
         "zh-Hans": [
-          "72 = 2³ × 3²。",
-          "完全平方数的质因数指数都要是偶数。",
-          "目前只有 2 的指数是奇数，所以再乘一个 2 即可。",
-          "因此最小的 n 是 2。"
+          "N 的任一正因数都可写成 2ᵃ × 3ᵇ × 5ᶜ，其中 0 ≤ a ≤ 4、0 ≤ b ≤ 6、0 ≤ c ≤ 3。",
+          "一个数是完全平方数，等价于它的每个质因数指数都是偶数。",
+          "所以要求 a、b、c 同时都是偶数。",
+          "a 可取 0、2、4，共 3 种；b 可取 0、2、4、6，共 4 种；c 可取 0、2，共 2 种（因为 c ≤ 3，4 已超出）。",
+          "三个指数互相独立，所以完全平方因数共有 3 × 4 × 2 = 24 个。"
         ],
         "en": [
-          "Factor 72 as 2³ × 3².",
-          "In a perfect square, every prime exponent must be even.",
-          "Only the exponent of 2 is odd, so multiply by one more 2.",
-          "Thus the smallest n is 2."
+          "Every positive divisor of N has the form 2ᵃ × 3ᵇ × 5ᶜ with 0 ≤ a ≤ 4, 0 ≤ b ≤ 6, and 0 ≤ c ≤ 3.",
+          "A number is a perfect square exactly when every exponent in its prime factorisation is even.",
+          "So we need a, b, and c all even.",
+          "For a the choices are 0, 2, 4 — three of them; for b they are 0, 2, 4, 6 — four; for c they are 0 and 2 — two, since c ≤ 3 rules out 4.",
+          "The three exponents are chosen independently, so there are 3 × 4 × 2 = 24 square divisors."
         ],
         "ja": [
-          "72 = 2³ × 3² と素因数分解します。",
-          "完全平方数では各素因数の指数が偶数でなければなりません。",
-          "2 の指数だけが奇数なので、さらに 2 を 1 つ掛ければよいです。",
-          "したがって最小の n は 2 です。"
+          "N の正の約数はすべて 2ᵃ × 3ᵇ × 5ᶜ（0 ≤ a ≤ 4、0 ≤ b ≤ 6、0 ≤ c ≤ 3）の形に書けます。",
+          "数が平方数であることは、素因数分解の各指数がすべて偶数であることと同値です。",
+          "したがって a、b、c がすべて偶数である必要があります。",
+          "a は 0、2、4 の 3 通り、b は 0、2、4、6 の 4 通り、c は c ≤ 3 より 0、2 の 2 通りです。",
+          "3 つの指数は独立に選べるので、平方数である約数は 3 × 4 × 2 = 24 個です。"
         ]
       },
       "figure": {
@@ -388,64 +426,78 @@
       "answerMode": "integer_input",
       "correctAnswer": {
         "type": "integer",
-        "value": "2"
+        "value": "24"
       },
       "inputConstraints": {
         "allowNegative": false,
-        "maxDigits": 1
+        "maxDigits": 3
       },
       "source": {
-        "type": "editorial_original",
-        "name": "MathSpring Editorial",
-        "reference": "Upper number theory expansion set N11",
-        "displayText": "MathSpring Editorial Original"
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "由質因數分解的指數上界計算符合條件（完全平方）因數個數的競賽題型",
+        "notes": "設計依據：需同時掌握「因數對應指數向量」與「完全平方等價於指數全偶」兩件事，並注意 5 的指數上界 3 會讓可選偶數只剩 0 與 2（常見誤答是誤算成 3 種而得 36）。答案 24 已用全部 5×7×4 個因數逐一開方驗證。屬同水準原創改寫，非抄錄特定官方題。原 005 只需觀察 72 = 2³×3² 中一個奇指數，屬單步裸題，且來源為自製 editorial 暫代出處。",
+        "displayText": "改寫題（完全平方因數計數）"
       },
       "olympiadTaxonomy": {
         "topic": "數論",
         "topicCode": "number_theory",
-        "subtopic": "完全平方數",
-        "subtopicCode": "perfect_square_divisor"
+        "subtopic": "完全平方因數計數",
+        "subtopicCode": "square_divisor_count"
       },
-      "reviewStatus": "needs_fix"
+      "reviewStatus": "ok"
     },
     {
       "id": "number_theory_grade9_foundation_006",
       "topic": "number_theory",
-      "subtopic": "modular_power",
+      "subtopic": "last_two_digits_cycle",
       "difficulty": "foundation",
       "levelStage": "grade9",
       "challengeTier": "foundation",
       "prompt": {
-        "zh-Hant": "求 3¹⁵ 除以 8 的餘數。",
-        "zh-Hans": "求 3¹⁵ 除以 8 的余数。",
-        "en": "Find the remainder when 3¹⁵ is divided by 8.",
-        "ja": "3¹⁵ を 8 で割った余りを求めなさい。"
+        "zh-Hant": "求 7²⁰²⁶ 的末兩位數字。",
+        "zh-Hans": "求 7²⁰²⁶ 的末两位数字。",
+        "en": "Find the last two digits of 7²⁰²⁶.",
+        "ja": "7²⁰²⁶ の下 2 桁を求めなさい。"
       },
       "answer": {
-        "zh-Hant": "答案是 3。",
-        "zh-Hans": "答案是 3。",
-        "en": "The answer is 3.",
-        "ja": "答えは 3 です。"
+        "zh-Hant": "答案是 49。",
+        "zh-Hans": "答案是 49。",
+        "en": "The answer is 49.",
+        "ja": "答えは 49 です。"
       },
       "solutionSteps": {
         "zh-Hant": [
-          "3² = 9，除以 8 餘 1。",
-          "所以 3¹⁴ = (3²)⁷ 除以 8 也餘 1。",
-          "再乘一個 3，得 3¹⁵ 除以 8 餘 3。"
+          "求末兩位數字，就是求這個數除以 100 的餘數。",
+          "先算 7 的次方除以 100 的餘數：7¹ 餘 7、7² = 49 餘 49、7³ = 343 餘 43、7⁴ = 2401 餘 1。",
+          "因為 7⁴ 除以 100 餘 1，之後每四個次方就會重複一次，所以餘數以 4 為週期循環：7、49、43、1、7、49、43、1、⋯。",
+          "把指數 2026 除以 4：2026 = 4 × 506 + 2，餘數是 2。",
+          "餘數 2 對應循環中的第 2 項，也就是 49。",
+          "所以 7²⁰²⁶ 的末兩位是 49。"
         ],
         "zh-Hans": [
-          "3² = 9，除以 8 余 1。",
-          "所以 3¹⁴ = (3²)⁷ 除以 8 也余 1。",
-          "再乘一个 3，得 3¹⁵ 除以 8 余 3。"
+          "求末两位数字，就是求这个数除以 100 的余数。",
+          "先算 7 的次方除以 100 的余数：7¹ 余 7、7² = 49 余 49、7³ = 343 余 43、7⁴ = 2401 余 1。",
+          "因为 7⁴ 除以 100 余 1，之后每四个次方就会重复一次，所以余数以 4 为周期循环：7、49、43、1、7、49、43、1、⋯。",
+          "把指数 2026 除以 4：2026 = 4 × 506 + 2，余数是 2。",
+          "余数 2 对应循环中的第 2 项，也就是 49。",
+          "所以 7²⁰²⁶ 的末两位是 49。"
         ],
         "en": [
-          "Since 3² = 9 leaves remainder 1 modulo 8, 3¹⁴ = (3²)⁷ also leaves remainder 1.",
-          "Multiplying by another 3 gives remainder 3 for 3¹⁵."
+          "Finding the last two digits means finding the remainder when the number is divided by 100.",
+          "Compute the first few powers of 7 modulo 100: 7¹ ≡ 7, 7² = 49 ≡ 49, 7³ = 343 ≡ 43, 7⁴ = 2401 ≡ 1.",
+          "Since 7⁴ ≡ 1 (mod 100), the remainders repeat every four powers: 7, 49, 43, 1, 7, 49, 43, 1, ….",
+          "Divide the exponent by 4: 2026 = 4 × 506 + 2, so the remainder is 2.",
+          "A remainder of 2 corresponds to the second entry of the cycle, which is 49.",
+          "Therefore the last two digits of 7²⁰²⁶ are 49."
         ],
         "ja": [
-          "3² = 9 は 8 で割ると余り 1 です。",
-          "したがって 3¹⁴ = (3²)⁷ も余り 1。",
-          "さらに 3 を掛けるので 3¹⁵ の余りは 3 です。"
+          "下 2 桁を求めることは、その数を 100 で割った余りを求めることです。",
+          "まず 7 のべきを 100 で割った余りを計算します：7¹ ≡ 7、7² = 49 ≡ 49、7³ = 343 ≡ 43、7⁴ = 2401 ≡ 1。",
+          "7⁴ ≡ 1 (mod 100) なので、以降は 4 つごとに繰り返し、余りは 7、49、43、1、7、49、43、1、… と周期 4 で循環します。",
+          "指数を 4 で割ると 2026 = 4 × 506 + 2 で、余りは 2 です。",
+          "余り 2 は循環の 2 番目に対応し、それは 49 です。",
+          "したがって 7²⁰²⁶ の下 2 桁は 49 です。"
         ]
       },
       "figure": {
@@ -456,25 +508,26 @@
       "answerMode": "integer_input",
       "correctAnswer": {
         "type": "integer",
-        "value": "3"
+        "value": "49"
       },
       "inputConstraints": {
         "allowNegative": false,
-        "maxDigits": 1
+        "maxDigits": 2
       },
       "source": {
-        "type": "editorial_original",
-        "name": "MathSpring Editorial",
-        "reference": "Upper number theory expansion set N12",
-        "displayText": "MathSpring Editorial Original"
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "以模 100 的次方循環週期求大指數冪末兩位的競賽題型",
+        "notes": "設計依據：由末位升級為末兩位，必須自行找出 7 在模 100 下的週期為 4（而非套用模 10 的直覺），再用指數除以週期的餘數定位。答案 49 已用 pow(7, 2026, 100) 直接驗證。屬同水準原創改寫，非抄錄特定官方題。原 006 只需 3² ≡ 1 (mod 8) 一步降冪，屬單步裸題，且來源為自製 editorial 暫代出處。",
+        "displayText": "改寫題（末兩位循環）"
       },
       "olympiadTaxonomy": {
         "topic": "數論",
         "topicCode": "number_theory",
-        "subtopic": "模幂",
-        "subtopicCode": "modular_power"
+        "subtopic": "末兩位循環",
+        "subtopicCode": "last_two_digits_cycle"
       },
-      "reviewStatus": "needs_fix"
+      "reviewStatus": "ok"
     },
     {
       "id": "number_theory_grade9_foundation_007",
@@ -750,50 +803,58 @@
     {
       "id": "number_theory_grade9_foundation_010",
       "topic": "number_theory",
-      "subtopic": "telescoping_product",
+      "subtopic": "smallest_with_divisor_count",
       "difficulty": "foundation",
       "levelStage": "grade9",
       "challengeTier": "foundation",
       "prompt": {
-        "zh-Hant": "計算乘積\n(1-1/2²)(1-1/3²)(1-1/4²)⋯(1-1/2026²)。",
-        "zh-Hans": "计算乘积\n(1-1/2²)(1-1/3²)(1-1/4²)⋯(1-1/2026²)。",
-        "en": "Compute the product\n(1-1/2²)(1-1/3²)(1-1/4²)⋯(1-1/2026²).",
-        "ja": "積\n(1-1/2²)(1-1/3²)(1-1/4²)⋯(1-1/2026²)\nを求めなさい。"
+        "zh-Hant": "求恰好有 15 個正因數的最小正整數。",
+        "zh-Hans": "求恰好有 15 个正因数的最小正整数。",
+        "en": "Find the smallest positive integer that has exactly 15 positive divisors.",
+        "ja": "正の約数がちょうど 15 個である最小の正の整数を求めなさい。"
       },
       "answer": {
-        "zh-Hant": "答案是 2027/4052。",
-        "zh-Hans": "答案是 2027/4052。",
-        "en": "The answer is 2027/4052.",
-        "ja": "答えは 2027/4052 です。"
+        "zh-Hant": "答案是 144。",
+        "zh-Hans": "答案是 144。",
+        "en": "The answer is 144.",
+        "ja": "答えは 144 です。"
       },
       "solutionSteps": {
         "zh-Hant": [
-          "先把每一項拆開：1-1/n² = ((n-1)(n+1))/n² = ((n-1)/n)·((n+1)/n)。",
-          "因此整個乘積變成 (1/2·2/3·3/4···2025/2026) × (3/2·4/3·5/4···2027/2026)。",
-          "兩串大量約分後，第一串只剩 1/2026，第二串只剩 2027/2。",
-          "所以乘積是 (1/2026)×(2027/2)。",
-          "答案為 2027/4052。"
+          "若 n 的質因數分解是 p₁^e₁ × p₂^e₂ × ⋯，則 n 的正因數個數是 (e₁ + 1)(e₂ + 1)⋯。",
+          "所以要把 15 拆成若干個大於 1 的整數相乘：15 = 15，或 15 = 3 × 5。",
+          "情形一：只有一個質因數，指數為 15 − 1 = 14，最小值是 2¹⁴ = 16384。",
+          "情形二：兩個質因數，指數為 (3 − 1, 5 − 1) = (2, 4)。要讓數字最小，應把較大的指數配給較小的質數，也可以兩種都算出來比較。",
+          "把指數 4 配給 2、指數 2 配給 3：2⁴ × 3² = 16 × 9 = 144。",
+          "把指數 2 配給 2、指數 4 配給 3：2² × 3⁴ = 4 × 81 = 324。",
+          "三個候選 16384、144、324 中最小的是 144，且 144 = 2⁴ × 3² 的因數個數為 (4 + 1)(2 + 1) = 15，符合條件。"
         ],
         "zh-Hans": [
-          "先把每一项拆开：1-1/n² = ((n-1)(n+1))/n² = ((n-1)/n)·((n+1)/n)。",
-          "因此整个乘积变成 (1/2·2/3·3/4···2025/2026) × (3/2·4/3·5/4···2027/2026)。",
-          "两串大量约分后，第一串只剩 1/2026，第二串只剩 2027/2。",
-          "所以乘积是 (1/2026)×(2027/2)。",
-          "答案为 2027/4052。"
+          "若 n 的质因数分解是 p₁^e₁ × p₂^e₂ × ⋯，则 n 的正因数个数是 (e₁ + 1)(e₂ + 1)⋯。",
+          "所以要把 15 拆成若干个大于 1 的整数相乘：15 = 15，或 15 = 3 × 5。",
+          "情形一：只有一个质因数，指数为 15 − 1 = 14，最小值是 2¹⁴ = 16384。",
+          "情形二：两个质因数，指数为 (3 − 1, 5 − 1) = (2, 4)。要让数字最小，应把较大的指数配给较小的质数，也可以两种都算出来比较。",
+          "把指数 4 配给 2、指数 2 配给 3：2⁴ × 3² = 16 × 9 = 144。",
+          "把指数 2 配给 2、指数 4 配给 3：2² × 3⁴ = 4 × 81 = 324。",
+          "三个候选 16384、144、324 中最小的是 144，且 144 = 2⁴ × 3² 的因数个数为 (4 + 1)(2 + 1) = 15，符合条件。"
         ],
         "en": [
-          "Rewrite each factor as 1-1/n² = ((n-1)(n+1))/n² = ((n-1)/n)((n+1)/n).",
-          "So the whole product becomes (1/2·2/3·3/4·...·2025/2026) times (3/2·4/3·5/4·...·2027/2026).",
-          "After telescoping, the first product becomes 1/2026 and the second becomes 2027/2.",
-          "Multiplying gives (1/2026)(2027/2).",
-          "Thus the value is 2027/4052."
+          "If n factors as p₁^e₁ × p₂^e₂ × ⋯, then the number of positive divisors of n is (e₁ + 1)(e₂ + 1)⋯.",
+          "So 15 must be written as a product of integers greater than 1: either 15 = 15 or 15 = 3 × 5.",
+          "Case 1: a single prime with exponent 15 − 1 = 14, whose smallest value is 2¹⁴ = 16384.",
+          "Case 2: two primes with exponents (3 − 1, 5 − 1) = (2, 4). To make the number small the larger exponent should go with the smaller prime, but both assignments can simply be computed and compared.",
+          "Exponent 4 on 2 and exponent 2 on 3: 2⁴ × 3² = 16 × 9 = 144.",
+          "Exponent 2 on 2 and exponent 4 on 3: 2² × 3⁴ = 4 × 81 = 324.",
+          "Among the candidates 16384, 144, and 324 the smallest is 144, and 144 = 2⁴ × 3² indeed has (4 + 1)(2 + 1) = 15 divisors."
         ],
         "ja": [
-          "各項を 1-1/n² = ((n-1)(n+1))/n² = ((n-1)/n)((n+1)/n) と変形します。",
-          "すると全体は (1/2·2/3·3/4·...·2025/2026) と (3/2·4/3·5/4·...·2027/2026) の積になります。",
-          "どちらも大きく約分され、前者は 1/2026、後者は 2027/2 になります。",
-          "したがって積は (1/2026)(2027/2)。",
-          "答えは 2027/4052 です。"
+          "n の素因数分解が p₁^e₁ × p₂^e₂ × ⋯ のとき、n の正の約数の個数は (e₁ + 1)(e₂ + 1)⋯ です。",
+          "したがって 15 を 1 より大きい整数の積に分けます：15 = 15、または 15 = 3 × 5。",
+          "場合 1：素因数が 1 個で指数は 15 − 1 = 14。最小値は 2¹⁴ = 16384。",
+          "場合 2：素因数が 2 個で指数は (3 − 1, 5 − 1) = (2, 4)。小さくするには大きい指数を小さい素数に割り当てますが、両方計算して比べてもかまいません。",
+          "指数 4 を 2 に、指数 2 を 3 に：2⁴ × 3² = 16 × 9 = 144。",
+          "指数 2 を 2 に、指数 4 を 3 に：2² × 3⁴ = 4 × 81 = 324。",
+          "候補 16384、144、324 のうち最小は 144 であり、144 = 2⁴ × 3² の約数の個数は (4 + 1)(2 + 1) = 15 で条件を満たします。"
         ]
       },
       "figure": {
@@ -803,35 +864,27 @@
       },
       "answerMode": "integer_input",
       "correctAnswer": {
-        "type": "fraction",
-        "value": "2027/4052"
+        "type": "integer",
+        "value": "144"
       },
       "inputConstraints": {
         "allowNegative": false,
-        "maxDigits": 8,
-        "allowFraction": true
+        "maxDigits": 4
       },
       "source": {
-        "type": "official_reference",
-        "name": "IMC",
-        "contest": "IMC Taiwan",
-        "year": "2026",
-        "round": "複賽",
-        "division": "9 年級",
-        "problemNumber": "填充 2",
-        "reference": "22nd IMC Taiwan semifinal grade 9 fill-in 2",
-        "displayText": "IMC Taiwan 2026 複賽 9年級 填充 2",
-        "sourceUrl": "https://imcct.net/UserFiles/news/583/20260413110023_2.pdf",
-        "rightsStatus": "needs_review",
-        "notes": "Rewritten from the official public competition PDF."
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "由因數個數公式反推指數組合、再比較各配置大小求最小值的競賽題型",
+        "notes": "設計依據：需先把 15 的所有乘法分解列全（15 與 3×5），再對每種分解決定質數與指數的配對並比較大小；關鍵轉折是把大指數配給小質數。答案 144 已用逐一計算因數個數的窮舉驗證。屬同水準原創改寫，非抄錄特定官方題。原 010 與本 pack 002 為完全相同的連乘積題，且其 correctAnswer.type 寫成 \"fraction\"，違反 phase-1 只允許 choice 與 integer 的硬規則，整題淘汰。",
+        "displayText": "改寫題（指定因數個數的最小數）"
       },
       "olympiadTaxonomy": {
         "topic": "數論",
         "topicCode": "number_theory",
-        "subtopic": "望遠鏡乘積",
-        "subtopicCode": "telescoping_product"
+        "subtopic": "指定因數個數的最小數",
+        "subtopicCode": "smallest_with_divisor_count"
       },
-      "reviewStatus": "needs_fix"
+      "reviewStatus": "ok"
     }
   ]
 }

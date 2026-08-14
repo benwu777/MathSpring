@@ -6,11 +6,16 @@
   "olympiadTopicCode": "combinatorics",
   "levelStage": "grade11",
   "challengeTier": "foundation",
-  "languages": ["zh-Hant", "zh-Hans", "en", "ja"],
+  "languages": [
+    "zh-Hant",
+    "zh-Hans",
+    "en",
+    "ja"
+  ],
   "questions": [
     {
       "id": "combinatorics_grade11_foundation_001",
-      "reviewStatus": "pending",
+      "reviewStatus": "ok",
       "topic": "combinatorics",
       "subtopic": "arrangements_with_repetition",
       "difficulty": "foundation",
@@ -22,17 +27,64 @@
         "en": "How many distinct five-letter strings can be formed from the letters AABBC?",
         "ja": "文字 AABBC から作れる異なる 5 文字列は何個ありますか。"
       },
-      "answer": { "zh-Hant": "答案是 30。", "zh-Hans": "答案是 30。", "en": "The answer is 30.", "ja": "答えは 30 です。" },
-      "solutionSteps": {
-        "zh-Hant": ["若全部不同共有 5! 種。", "但 A 重複 2 次，B 也重複 2 次。", "所以要除以 2!2!。", "共有 5!/(2!2!) = 30 種。"],
-        "zh-Hans": ["若全部不同共有 5! 种。", "但 A 重复 2 次，B 也重复 2 次。", "所以要除以 2!2!。", "共有 5!/(2!2!) = 30 种。"],
-        "en": ["If all letters were distinct there would be 5! arrangements.", "But A is repeated twice and B is repeated twice.", "So divide by 2!2!.", "The total is 5!/(2!2!) = 30."],
-        "ja": ["全部違う文字なら 5! 通りです。", "しかし A が 2 個、B も 2 個あります。", "したがって 2!2! で割ります。", "答えは 5!/(2!2!) = 30 通りです。"]
+      "answer": {
+        "zh-Hant": "答案是 30。",
+        "zh-Hans": "答案是 30。",
+        "en": "The answer is 30.",
+        "ja": "答えは 30 です。"
       },
-      "figure": { "type": "custom", "kind": "none", "params": {} },
+      "solutionSteps": {
+        "zh-Hant": [
+          "先假裝五個字母全都不一樣，例如把它們標成 A₁、A₂、B₁、B₂、C，那麼排法有 5! = 120 種。",
+          "但實際上兩個 A 是完全一樣的，把 A₁ 與 A₂ 對調並不會產生新的字串。",
+          "也就是說每一個真正不同的字串，在上面的 120 種裡被重複數了 2! = 2 次（來自兩個 A 的互換）。",
+          "同理兩個 B 也一樣，又會再重複 2! = 2 次。",
+          "兩種重複互相獨立，所以每個字串總共被數了 2! × 2! = 4 次。",
+          "因此不同字串數 = 120 ÷ 4 = 30。",
+          "驗算：字母 C 只有 1 個不需除，公式 5! ÷ (2! × 2! × 1!) = 30，與逐一列舉的結果一致。"
+        ],
+        "zh-Hans": [
+          "先假装五个字母全都不一样，例如把它们标成 A₁、A₂、B₁、B₂、C，那么排法有 5! = 120 种。",
+          "但实际上两个 A 是完全一样的，把 A₁ 与 A₂ 对调并不会产生新的字符串。",
+          "也就是说每一个真正不同的字符串，在上面的 120 种里被重复数了 2! = 2 次（来自两个 A 的互换）。",
+          "同理两个 B 也一样，又会再重复 2! = 2 次。",
+          "两种重复互相独立，所以每个字符串总共被数了 2! × 2! = 4 次。",
+          "因此不同字符串数 = 120 ÷ 4 = 30。",
+          "验算：字母 C 只有 1 个不需除，公式 5! ÷ (2! × 2! × 1!) = 30，与逐一列举的结果一致。"
+        ],
+        "en": [
+          "First pretend all five letters are distinct, labelling them A₁, A₂, B₁, B₂, C; then there are 5! = 120 arrangements.",
+          "In reality the two A's are identical, so swapping A₁ and A₂ does not produce a new string.",
+          "That means each genuinely different string was counted 2! = 2 times among those 120, from the swap of the two A's.",
+          "The same applies to the two B's, giving another factor of 2! = 2.",
+          "The two kinds of repetition are independent, so each string was counted 2! × 2! = 4 times.",
+          "Hence the number of distinct strings is 120 ÷ 4 = 30.",
+          "Check: the single C needs no division, and the formula 5! ÷ (2! × 2! × 1!) = 30 agrees with direct enumeration."
+        ],
+        "ja": [
+          "まず 5 文字がすべて異なると仮定し、A₁、A₂、B₁、B₂、C とラベルを付けると、並べ方は 5! = 120 通りです。",
+          "しかし実際には 2 つの A は同一で、A₁ と A₂ を入れ替えても新しい文字列にはなりません。",
+          "つまり本当に異なる各文字列は、この 120 通りの中で 2 つの A の入れ替えにより 2! = 2 回ずつ重複して数えられています。",
+          "2 つの B についても同様で、さらに 2! = 2 回の重複が生じます。",
+          "2 種類の重複は独立なので、各文字列は合計 2! × 2! = 4 回数えられています。",
+          "よって異なる文字列の個数は 120 ÷ 4 = 30。",
+          "検算：C は 1 個なので割る必要がなく、公式 5! ÷ (2! × 2! × 1!) = 30 は直接の列挙とも一致します。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
       "answerMode": "integer_input",
-      "correctAnswer": { "type": "integer", "value": "30" },
-      "inputConstraints": { "allowNegative": false, "maxDigits": 2 },
+      "correctAnswer": {
+        "type": "integer",
+        "value": "30"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
       "source": {
         "type": "official_reference",
         "name": "IMC",
@@ -47,11 +99,16 @@
         "rightsStatus": "needs_review",
         "notes": "Rewritten from the official public competition PDF."
       },
-      "olympiadTaxonomy": { "topic": "組合", "topicCode": "combinatorics", "subtopic": "重複排列", "subtopicCode": "arrangements_with_repetition" }
+      "olympiadTaxonomy": {
+        "topic": "組合",
+        "topicCode": "combinatorics",
+        "subtopic": "重複排列",
+        "subtopicCode": "arrangements_with_repetition"
+      }
     },
     {
       "id": "combinatorics_grade11_foundation_002",
-      "reviewStatus": "pending",
+      "reviewStatus": "ok",
       "topic": "combinatorics",
       "subtopic": "derangement_small",
       "difficulty": "foundation",
@@ -63,17 +120,64 @@
         "en": "Four different letters are placed into four addressed envelopes, with no letter going into its matching envelope. How many placements are possible?",
         "ja": "4 通の異なる手紙を 4 つの宛名付き封筒に入れます。どの手紙も対応する封筒に入らないとき、入れ方は何通りありますか。"
       },
-      "answer": { "zh-Hant": "答案是 9。", "zh-Hans": "答案是 9。", "en": "The answer is 9.", "ja": "答えは 9 です。" },
-      "solutionSteps": {
-        "zh-Hant": ["這是 4 個元素的錯排數。", "可用包除原理或直接列舉。", "結果是 !4 = 9。"],
-        "zh-Hans": ["这是 4 个元素的错排数。", "可用包除原理或直接列举。", "结果是 !4 = 9。"],
-        "en": ["This is the derangement number for 4 objects.", "Use inclusion-exclusion or list the cases.", "The result is !4 = 9."],
-        "ja": ["これは 4 個の要素の錯置の数です。", "包除原理または場合分けで求められます。", "結果は !4 = 9 です。"]
+      "answer": {
+        "zh-Hant": "答案是 9。",
+        "zh-Hans": "答案是 9。",
+        "en": "The answer is 9.",
+        "ja": "答えは 9 です。"
       },
-      "figure": { "type": "custom", "kind": "none", "params": {} },
+      "solutionSteps": {
+        "zh-Hant": [
+          "設 Aᵢ 表示「第 i 封信剛好放進第 i 個信封」這個事件所對應的放法集合，i = 1, 2, 3, 4。",
+          "我們要算的是四個事件都不發生的放法數，用排容原理從全部 4! = 24 種放法扣起。",
+          "只固定 1 封信正確：選哪一封有 C(4,1) = 4 種，其餘 3 封任意排有 3! = 6 種，所以 Σ|Aᵢ| = 4 × 6 = 24。",
+          "固定 2 封正確：C(4,2) = 6 種選法，其餘 2! = 2 種，所以 Σ|Aᵢ ∩ Aⱼ| = 6 × 2 = 12。",
+          "固定 3 封正確：C(4,3) = 4 種，其餘 1! = 1 種，總共 4；固定 4 封正確只有 1 種。",
+          "由排容原理，錯排數 = 24 − 24 + 12 − 4 + 1 = 9。",
+          "驗算：以程式窮舉 4! = 24 種排列，沒有任何位置固定的恰好有 9 種，與計算相符。"
+        ],
+        "zh-Hans": [
+          "设 Aᵢ 表示「第 i 封信刚好放进第 i 个信封」这个事件所对应的放法集合，i = 1, 2, 3, 4。",
+          "我们要算的是四个事件都不发生的放法数，用容斥原理从全部 4! = 24 种放法扣起。",
+          "只固定 1 封信正确：选哪一封有 C(4,1) = 4 种，其余 3 封任意排有 3! = 6 种，所以 Σ|Aᵢ| = 4 × 6 = 24。",
+          "固定 2 封正确：C(4,2) = 6 种选法，其余 2! = 2 种，所以 Σ|Aᵢ ∩ Aⱼ| = 6 × 2 = 12。",
+          "固定 3 封正确：C(4,3) = 4 种，其余 1! = 1 种，总共 4；固定 4 封正确只有 1 种。",
+          "由容斥原理，错排数 = 24 − 24 + 12 − 4 + 1 = 9。",
+          "验算：以程序穷举 4! = 24 种排列，没有任何位置固定的恰好有 9 种，与计算相符。"
+        ],
+        "en": [
+          "Let Aᵢ be the set of placements in which letter i goes into envelope i, for i = 1, 2, 3, 4.",
+          "We want the number of placements in which none of these events occurs, so apply inclusion–exclusion starting from all 4! = 24 placements.",
+          "Fixing exactly one letter: C(4,1) = 4 choices and 3! = 6 arrangements for the rest, so Σ|Aᵢ| = 4 × 6 = 24.",
+          "Fixing two letters: C(4,2) = 6 choices and 2! = 2 for the rest, so Σ|Aᵢ ∩ Aⱼ| = 6 × 2 = 12.",
+          "Fixing three letters: C(4,3) = 4 choices and 1! = 1 for the rest, giving 4; fixing all four gives 1.",
+          "By inclusion–exclusion the number of derangements is 24 − 24 + 12 − 4 + 1 = 9.",
+          "Check: enumerating all 4! = 24 permutations, exactly 9 have no fixed point, matching the calculation."
+        ],
+        "ja": [
+          "Aᵢ を「i 番目の手紙が i 番目の封筒に入る」入れ方の集合とします（i = 1, 2, 3, 4）。",
+          "求めるのはこれらがどれも起きない入れ方の数なので、全部の 4! = 24 通りから包除原理で引いていきます。",
+          "1 通だけ固定する場合：どれを固定するかが C(4,1) = 4 通り、残り 3 通は 3! = 6 通りなので Σ|Aᵢ| = 4 × 6 = 24。",
+          "2 通固定する場合：C(4,2) = 6 通り、残りは 2! = 2 通りなので Σ|Aᵢ ∩ Aⱼ| = 6 × 2 = 12。",
+          "3 通固定する場合：C(4,3) = 4 通り、残りは 1! = 1 通りで計 4。4 通すべて固定は 1 通り。",
+          "包除原理より、完全順列の数は 24 − 24 + 12 − 4 + 1 = 9。",
+          "検算：4! = 24 通りの順列をすべて調べると、不動点をもたないものはちょうど 9 通りで計算と一致します。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
       "answerMode": "integer_input",
-      "correctAnswer": { "type": "integer", "value": "9" },
-      "inputConstraints": { "allowNegative": false, "maxDigits": 1 },
+      "correctAnswer": {
+        "type": "integer",
+        "value": "9"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
       "source": {
         "type": "official_reference",
         "name": "IMC",
@@ -88,151 +192,392 @@
         "rightsStatus": "needs_review",
         "notes": "Rewritten from the official public competition PDF."
       },
-      "olympiadTaxonomy": { "topic": "組合", "topicCode": "combinatorics", "subtopic": "錯排", "subtopicCode": "derangement_small" }
+      "olympiadTaxonomy": {
+        "topic": "組合",
+        "topicCode": "combinatorics",
+        "subtopic": "錯排",
+        "subtopicCode": "derangement_small"
+      }
     },
     {
       "id": "combinatorics_grade11_foundation_003",
-      "reviewStatus": "pending",
       "topic": "combinatorics",
-      "subtopic": "committee_balance",
+      "subtopic": "probability_parity_sum",
       "difficulty": "foundation",
       "levelStage": "grade11",
       "challengeTier": "foundation",
       "prompt": {
-        "zh-Hant": "從 5 位男生與 4 位女生中選出 3 人委員會，且至少有 1 位女生。共有多少種選法？",
-        "zh-Hans": "从 5 位男生与 4 位女生中选出 3 人委员会，且至少有 1 位女生。共有多少种选法？",
-        "en": "Choose a 3-person committee from 5 boys and 4 girls, with at least one girl. How many committees are possible?",
-        "ja": "男子 5 人、女子 4 人から 3 人の委員会を作ります。少なくとも 1 人女子を含むとき、何通りありますか。"
+        "zh-Hant": "從 1 到 20 的整數中隨機取出兩個不同的數。它們的和是偶數的機率可以寫成最簡分數 a/b，求 a + b。",
+        "zh-Hans": "从 1 到 20 的整数中随机取出两个不同的数。它们的和是偶数的概率可以写成最简分数 a/b，求 a + b。",
+        "en": "Two different integers are chosen at random from 1 to 20. The probability that their sum is even can be written as a fraction a/b in lowest terms. Find a + b.",
+        "ja": "1 から 20 までの整数から異なる 2 つを無作為に選びます。その和が偶数になる確率を既約分数 a/b で表すとき、a + b を求めなさい。"
       },
-      "answer": { "zh-Hant": "答案是 74。", "zh-Hans": "答案是 74。", "en": "The answer is 74.", "ja": "答えは 74 です。" },
+      "answer": {
+        "zh-Hant": "答案是 28。",
+        "zh-Hans": "答案是 28。",
+        "en": "The answer is 28.",
+        "ja": "答えは 28 です。"
+      },
       "solutionSteps": {
-        "zh-Hant": ["先算全部的 3 人委員會數：C(9,3)=84。", "再扣掉全是男生的情況：C(5,3)=10。", "所以共有 84-10=74 種。"],
-        "zh-Hans": ["先算全部的 3 人委员会数：C(9,3)=84。", "再扣掉全是男生的情况：C(5,3)=10。", "所以共有 84-10=74 种。"],
-        "en": ["First count all 3-person committees: C(9,3)=84.", "Subtract committees with all boys: C(5,3)=10.", "So the total is 84-10=74."],
-        "ja": ["まず 3 人委員会全体は C(9,3)=84 通りです。", "全員男子の委員会 C(5,3)=10 通りを引きます。", "したがって 84-10=74 通りです。"]
+        "zh-Hant": [
+          "兩個整數的和是偶數，只可能是「兩個都是奇數」或「兩個都是偶數」，不可能一奇一偶。",
+          "1 到 20 之中，奇數有 1、3、⋯、19 共 10 個，偶數有 2、4、⋯、20 也是 10 個。",
+          "兩個都取奇數的取法有 C(10, 2) = 45 種。",
+          "兩個都取偶數的取法同樣有 C(10, 2) = 45 種。",
+          "這兩類互不重疊，所以和為偶數的取法共 45 + 45 = 90 種。",
+          "全部的取法是 C(20, 2) = 190 種。",
+          "所以機率是 90/190。分子分母同除以 10 得 9/19，而 9 與 19 互質，已是最簡分數。",
+          "因此 a = 9、b = 19，a + b = 28。"
+        ],
+        "zh-Hans": [
+          "两个整数的和是偶数，只可能是「两个都是奇数」或「两个都是偶数」，不可能一奇一偶。",
+          "1 到 20 之中，奇数有 1、3、⋯、19 共 10 个，偶数有 2、4、⋯、20 也是 10 个。",
+          "两个都取奇数的取法有 C(10, 2) = 45 种。",
+          "两个都取偶数的取法同样有 C(10, 2) = 45 种。",
+          "这两类互不重叠，所以和为偶数的取法共 45 + 45 = 90 种。",
+          "全部的取法是 C(20, 2) = 190 种。",
+          "所以概率是 90/190。分子分母同除以 10 得 9/19，而 9 与 19 互质，已是最简分数。",
+          "因此 a = 9、b = 19，a + b = 28。"
+        ],
+        "en": [
+          "The sum of two integers is even only when both are odd or both are even; one of each always gives an odd sum.",
+          "Among 1 to 20 there are ten odd numbers 1, 3, …, 19 and ten even numbers 2, 4, …, 20.",
+          "Choosing two odd numbers can be done in C(10, 2) = 45 ways.",
+          "Choosing two even numbers can likewise be done in C(10, 2) = 45 ways.",
+          "These two cases do not overlap, so there are 45 + 45 = 90 favourable choices.",
+          "The total number of choices is C(20, 2) = 190.",
+          "So the probability is 90/190; dividing numerator and denominator by 10 gives 9/19, and since 9 and 19 are coprime this is in lowest terms.",
+          "Therefore a = 9, b = 19, and a + b = 28."
+        ],
+        "ja": [
+          "2 つの整数の和が偶数になるのは「両方とも奇数」か「両方とも偶数」の場合だけで、片方ずつでは必ず奇数になります。",
+          "1 から 20 のうち奇数は 1、3、…、19 の 10 個、偶数は 2、4、…、20 の 10 個です。",
+          "奇数を 2 つ選ぶ選び方は C(10, 2) = 45 通り。",
+          "偶数を 2 つ選ぶ選び方も同様に C(10, 2) = 45 通り。",
+          "この 2 つの場合は重ならないので、和が偶数になる選び方は 45 + 45 = 90 通り。",
+          "全体の選び方は C(20, 2) = 190 通り。",
+          "よって確率は 90/190。分子分母を 10 で割ると 9/19 となり、9 と 19 は互いに素なので既約分数です。",
+          "したがって a = 9、b = 19 で a + b = 28。"
+        ]
       },
-      "figure": { "type": "custom", "kind": "none", "params": {} },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
       "answerMode": "integer_input",
-      "correctAnswer": { "type": "integer", "value": "74" },
-      "inputConstraints": { "allowNegative": false, "maxDigits": 2 },
-      "source": {
-        "type": "official_reference",
-        "name": "IMC",
-        "contest": "IMC Taiwan",
-        "year": "2026",
-        "round": "複賽",
-        "division": "11 年級",
-        "problemNumber": "選擇 8",
-        "reference": "22nd IMC Taiwan semifinal grade 11 choice 8",
-        "displayText": "IMC Taiwan 2026 複賽 11年級 選擇 8",
-        "sourceUrl": "https://imcct.net/UserFiles/news/583/20260413110023_4.pdf",
-        "rightsStatus": "needs_review",
-        "notes": "Rewritten from the official public competition PDF."
+      "correctAnswer": {
+        "type": "integer",
+        "value": "28"
       },
-      "olympiadTaxonomy": { "topic": "組合", "topicCode": "combinatorics", "subtopic": "補集計數", "subtopicCode": "committee_balance" }
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "以奇偶分類計算取數和的機率，並要求化為最簡分數後回報分子分母之和的競賽題型",
+        "notes": "設計依據：轉折在於認出「和為偶數」等價於「同奇或同偶」而不是逐一列舉，並在最後要求約分到最簡；問 a + b 可避免分數作答（phase 1 只允許整數與選擇）。答案 28 已用窮舉 C(20,2) 全部取法驗證favourable 為 90。屬同水準原創改寫，非抄錄特定官方題。原 003（5 男 4 女選 3 人至少 1 女，答案 74）與 `combinatorics_grade7_foundation_005` 完全相同，且屬 grade7 難度，遠低於本年級對齊的 AMC 12。",
+        "displayText": "改寫題（奇偶分類與機率化簡）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "組合",
+        "topicCode": "combinatorics",
+        "subtopic": "取數和的奇偶機率",
+        "subtopicCode": "probability_parity_sum"
+      },
+      "reviewStatus": "ok"
     },
     {
       "id": "combinatorics_grade11_foundation_004",
-      "reviewStatus": "pending",
       "topic": "combinatorics",
-      "subtopic": "grid_path_avoidance",
+      "subtopic": "identical_boxes_partition",
       "difficulty": "foundation",
       "levelStage": "grade11",
       "challengeTier": "foundation",
       "prompt": {
-        "zh-Hant": "在方格上，從 (0,0) 走到 (4,4)，每步只能向右或向上。若路徑不能經過點 (2,2)，則共有多少條最短路徑？",
-        "zh-Hans": "在方格上，从 (0,0) 走到 (4,4)，每步只能向右或向上。若路径不能经过点 (2,2)，则共有多少条最短路径？",
-        "en": "On a grid, move from (0,0) to (4,4) using only right or up steps. If the path may not pass through (2,2), how many shortest paths are there?",
-        "ja": "格子点 (0,0) から (4,4) まで、右または上にだけ進みます。点 (2,2) を通らない最短経路は何通りありますか。"
+        "zh-Hant": "把 5 個互不相同的球放進 3 個完全相同的盒子，且每個盒子至少放 1 個球。共有多少種放法？",
+        "zh-Hans": "把 5 个互不相同的球放进 3 个完全相同的盒子，且每个盒子至少放 1 个球。共有多少种放法？",
+        "en": "Five distinct balls are placed into three identical boxes so that no box is empty. How many ways are there?",
+        "ja": "互いに異なる 5 個のボールを、区別のつかない 3 個の箱に、どの箱も空にならないように入れます。入れ方は何通りですか。"
       },
-      "answer": { "zh-Hant": "答案是 34。", "zh-Hans": "答案是 34。", "en": "The answer is 34.", "ja": "答えは 34 です。" },
+      "answer": {
+        "zh-Hant": "答案是 25 種。",
+        "zh-Hans": "答案是 25 种。",
+        "en": "The answer is 25.",
+        "ja": "答えは 25 通りです。"
+      },
       "solutionSteps": {
-        "zh-Hant": ["從 (0,0) 到 (4,4) 的最短路徑總數是 C(8,4)=70。", "經過 (2,2) 的路徑數 = 從 (0,0) 到 (2,2) 的路徑數乘上從 (2,2) 到 (4,4) 的路徑數。", "這兩段各有 C(4,2)=6 條，所以經過 (2,2) 的共有 6×6=36 條。", "因此不經過 (2,2) 的路徑數是 70-36=34。"],
-        "zh-Hans": ["从 (0,0) 到 (4,4) 的最短路径总数是 C(8,4)=70。", "经过 (2,2) 的路径数 = 从 (0,0) 到 (2,2) 的路径数乘上从 (2,2) 到 (4,4) 的路径数。", "这两段各有 C(4,2)=6 条，所以经过 (2,2) 的共有 6×6=36 条。", "因此不经过 (2,2) 的路径数是 70-36=34。"],
-        "en": ["The total number of shortest paths from (0,0) to (4,4) is C(8,4)=70.", "Paths through (2,2) equal the number from (0,0) to (2,2) times the number from (2,2) to (4,4).", "Each part has C(4,2)=6 paths, so 36 paths pass through (2,2).", "Thus the number avoiding (2,2) is 70-36=34."],
-        "ja": ["(0,0) から (4,4) までの最短経路は C(8,4)=70 通りです。", "点 (2,2) を通る経路数は、(0,0)→(2,2) と (2,2)→(4,4) の経路数の積です。", "各区間は C(4,2)=6 通りなので、通る経路は 36 通り。", "したがって通らない経路は 70-36=34 通りです。"]
+        "zh-Hant": [
+          "盒子完全相同，所以真正要數的是「把 5 個球分成 3 個非空群組」的分法，群組本身沒有先後之分。",
+          "先看每個盒子的球數怎麼分配：5 = 3 + 1 + 1 或 5 = 2 + 2 + 1，沒有其他寫法（每盒至少 1 個且不計順序）。",
+          "情況一 3 + 1 + 1：先選出那 3 個球放同一盒，有 C(5, 3) = 10 種；剩下 2 個球各自單獨一盒，而這兩盒完全相同，不需再區分。",
+          "所以情況一有 10 種。",
+          "情況二 2 + 2 + 1：先選出單獨一球，有 C(5, 1) = 5 種；剩下 4 球要分成兩組各 2 個。",
+          "把 4 球分成兩組各 2 個：先選 2 個有 C(4, 2) = 6 種，但兩組大小相同且盒子不可區分，每種分法被算了 2 次，所以是 6 ÷ 2 = 3 種。",
+          "所以情況二有 5 × 3 = 15 種。",
+          "兩種情況互斥，總數 = 10 + 15 = 25 種。",
+          "驗算：用程式列出所有把 5 球分成 3 個非空群組的分割，恰好 25 種，也等於第二類 Stirling 數 S(5, 3)。"
+        ],
+        "zh-Hans": [
+          "盒子完全相同，所以真正要数的是「把 5 个球分成 3 个非空群组」的分法，群组本身没有先后之分。",
+          "先看每个盒子的球数怎么分配：5 = 3 + 1 + 1 或 5 = 2 + 2 + 1，没有其他写法（每盒至少 1 个且不计顺序）。",
+          "情况一 3 + 1 + 1：先选出那 3 个球放同一盒，有 C(5, 3) = 10 种；剩下 2 个球各自单独一盒，而这两盒完全相同，不需再区分。",
+          "所以情况一有 10 种。",
+          "情况二 2 + 2 + 1：先选出单独一球，有 C(5, 1) = 5 种；剩下 4 球要分成两组各 2 个。",
+          "把 4 球分成两组各 2 个：先选 2 个有 C(4, 2) = 6 种，但两组大小相同且盒子不可区分，每种分法被算了 2 次，所以是 6 ÷ 2 = 3 种。",
+          "所以情况二有 5 × 3 = 15 种。",
+          "两种情况互斥，总数 = 10 + 15 = 25 种。",
+          "验算：用程序列出所有把 5 球分成 3 个非空群组的分割，恰好 25 种，也等于第二类 Stirling 数 S(5, 3)。"
+        ],
+        "en": [
+          "The boxes are identical, so what we really count is the number of ways to split 5 balls into 3 non-empty groups, with no order among the groups.",
+          "First consider the possible group sizes: 5 = 3 + 1 + 1 or 5 = 2 + 2 + 1, and no others, since every box is non-empty and order does not matter.",
+          "Case 3 + 1 + 1: choose the three balls that share a box in C(5, 3) = 10 ways; the remaining two balls each sit alone, and those two boxes are identical so need no further distinction.",
+          "So this case gives 10 ways.",
+          "Case 2 + 2 + 1: choose the lone ball in C(5, 1) = 5 ways, leaving 4 balls to be split into two groups of 2.",
+          "Splitting 4 balls into two pairs: choosing 2 of them gives C(4, 2) = 6, but since the two groups have equal size and the boxes are indistinguishable each split is counted twice, giving 6 ÷ 2 = 3.",
+          "So this case gives 5 × 3 = 15 ways.",
+          "The two cases are disjoint, so the total is 10 + 15 = 25.",
+          "Check: enumerating by program all partitions of 5 balls into 3 non-empty groups gives exactly 25, which is the Stirling number of the second kind S(5, 3)."
+        ],
+        "ja": [
+          "箱は区別できないので、実際に数えるのは「5 個のボールを空でない 3 つのグループに分ける」分け方で、グループ間に順序はありません。",
+          "まず各箱の個数の分け方を考えます：5 = 3 + 1 + 1 または 5 = 2 + 2 + 1 の 2 通りだけです（各箱 1 個以上、順序は無視）。",
+          "場合 3 + 1 + 1：同じ箱に入る 3 個を選ぶのが C(5, 3) = 10 通り。残り 2 個はそれぞれ単独で、その 2 箱は同一なので区別は不要です。",
+          "よってこの場合は 10 通り。",
+          "場合 2 + 2 + 1：単独の 1 個を選ぶのが C(5, 1) = 5 通り。残り 4 個を 2 個ずつ 2 組に分けます。",
+          "4 個を 2 組に分けるには、まず 2 個を選ぶ C(4, 2) = 6 通りですが、2 組は同じ大きさで箱も区別できないため各分け方が 2 回数えられ、6 ÷ 2 = 3 通り。",
+          "よってこの場合は 5 × 3 = 15 通り。",
+          "2 つの場合は互いに排反なので、合計は 10 + 15 = 25 通り。",
+          "検算：5 個を空でない 3 グループに分ける分割をプログラムで列挙するとちょうど 25 通りで、第 2 種スターリング数 S(5, 3) に一致します。"
+        ]
       },
-      "figure": { "type": "custom", "kind": "none", "params": {} },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
       "answerMode": "integer_input",
-      "correctAnswer": { "type": "integer", "value": "34" },
-      "inputConstraints": { "allowNegative": false, "maxDigits": 2 },
-      "source": {
-        "type": "editorial_original",
-        "name": "MathSpring Editorial",
-        "reference": "Upper combinatorics expansion set C5",
-        "displayText": "MathSpring Editorial Original"
+      "correctAnswer": {
+        "type": "integer",
+        "value": "25"
       },
-      "olympiadTaxonomy": { "topic": "組合", "topicCode": "combinatorics", "subtopic": "避點路徑", "subtopicCode": "grid_path_avoidance" }
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "相同容器的分堆計數：依群組大小分情況，並對同大小群組除以重複計數的競賽題型",
+        "notes": "設計依據：核心轉折是「盒子相同」帶來的除以重複——在 2+2+1 的情況必須把 C(4,2) 除以 2，而在 3+1+1 的情況兩個單球盒雖然也相同卻不需要再除（因為選出 3 球後其餘已唯一決定）。這個不對稱正是最容易出錯的地方。答案 25 已用程式列舉全部分割並與 S(5,3) 公式雙重驗證。屬同水準原創改寫，非抄錄特定官方題。原 004（(0,0)→(4,4) 避開 (2,2)，答案 34）與 `combinatorics_grade9_foundation_005` 的原題完全相同，而 grade9 該題本輪已升級為雙禁點版本，形成難度倒掛，且來源為自製 editorial 暫代出處。",
+        "displayText": "改寫題（相同盒子的分堆）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "組合",
+        "topicCode": "combinatorics",
+        "subtopic": "相同盒子的分堆",
+        "subtopicCode": "identical_boxes_partition"
+      },
+      "reviewStatus": "ok"
     },
     {
       "id": "combinatorics_grade11_foundation_005",
-      "reviewStatus": "pending",
       "topic": "combinatorics",
-      "subtopic": "onto_functions_small",
+      "subtopic": "grid_cover_coloring",
       "difficulty": "foundation",
       "levelStage": "grade11",
       "challengeTier": "foundation",
       "prompt": {
-        "zh-Hant": "從 3 個不同元素映到 2 個不同元素的函數中，有多少個是滿射？",
-        "zh-Hans": "从 3 个不同元素映到 2 个不同元素的函数中，有多少个是满射？",
-        "en": "How many surjective functions are there from a 3-element set to a 2-element set?",
-        "ja": "3 要素集合から 2 要素集合への関数のうち、全射はいくつありますか。"
+        "zh-Hant": "一個 2 列 3 行的方格表，每一格都要塗成紅色或藍色。要求每一列都至少有一個紅格，而且每一行也都至少有一個紅格。共有多少種塗法？",
+        "zh-Hans": "一个 2 行 3 列的方格表，每一格都要涂成红色或蓝色。要求每一行都至少有一个红格，而且每一列也都至少有一个红格。共有多少种涂法？",
+        "en": "Each cell of a 2-by-3 grid is coloured red or blue. Every row must contain at least one red cell and every column must also contain at least one red cell. How many colourings are there?",
+        "ja": "2 行 3 列のマス目の各マスを赤または青に塗ります。どの行にも赤が少なくとも 1 つ、どの列にも赤が少なくとも 1 つ必要です。塗り方は何通りですか。"
       },
-      "answer": { "zh-Hant": "答案是 6。", "zh-Hans": "答案是 6。", "en": "The answer is 6.", "ja": "答えは 6 です。" },
+      "answer": {
+        "zh-Hant": "答案是 25 種。",
+        "zh-Hans": "答案是 25 种。",
+        "en": "The answer is 25.",
+        "ja": "答えは 25 通りです。"
+      },
       "solutionSteps": {
-        "zh-Hant": ["全部函數共有 2³ = 8 個。", "不是滿射的情況是都映到同一個值，共 2 個。", "因此滿射共有 8 - 2 = 6 個。"],
-        "zh-Hans": ["全部函数共有 2³ = 8 个。", "不是满射的情况是都映到同一个值，共 2 个。", "因此满射共有 8 - 2 = 6 个。"],
-        "en": ["There are 2³ = 8 total functions from a 3-element set to a 2-element set.", "The non-surjective functions send all elements to the same image, giving 2 such functions.", "So the number of surjective functions is 8 - 2 = 6."],
-        "ja": ["関数全体は 2³ = 8 個です。", "全射でないのは、すべてが同じ値に写る 2 個だけです。", "したがって全射は 8 - 2 = 6 個です。"]
+        "zh-Hant": [
+          "全部塗法有 2⁶ = 64 種。直接數合格的很麻煩，改用排容原理扣掉「有某一行全藍」與「有某一列全藍」的情形。",
+          "先只看行（3 行，每行 2 格）：某一指定行全藍的塗法有 2⁴ = 16 種；三行中至少一行全藍，由排容得 3 × 16 − 3 × 2² + 1 × 2⁰ = 48 − 12 + 1 = 37。",
+          "但這樣還沒處理列的條件，兩種條件交纏，逐項展開容易出錯，所以改從「哪些格是紅色」的結構直接數。",
+          "換個角度：設紅格構成的集合為 R，條件是 R 至少碰到每一列一次、也至少碰到每一行一次。",
+          "先處理列：每一行只有 2 格（上、下各一），每一行的紅格情形只有三種可能——只有上、只有下、上下都紅（不能兩格皆藍，否則該行沒有紅格）。",
+          "所以三行各有 3 種選擇，共 3³ = 27 種能滿足「每一行都有紅格」。",
+          "再扣掉不滿足「每一列都有紅格」的：上列全無紅表示三行都選「只有下」，只有 1 種；下列全無紅同理也是 1 種；兩者不可能同時發生。",
+          "所以合格塗法 = 27 − 1 − 1 = 25 種。",
+          "驗算：以程式窮舉全部 64 種塗法逐一檢查兩個條件，符合者恰好 25 種。"
+        ],
+        "zh-Hans": [
+          "全部涂法有 2⁶ = 64 种。直接数合格的很麻烦，改用容斥原理扣掉「有某一列全蓝」与「有某一行全蓝」的情形。",
+          "先只看列（3 列，每列 2 格）：某一指定列全蓝的涂法有 2⁴ = 16 种；三列中至少一列全蓝，由容斥得 3 × 16 − 3 × 2² + 1 × 2⁰ = 48 − 12 + 1 = 37。",
+          "但这样还没处理行的条件，两种条件交缠，逐项展开容易出错，所以改从「哪些格是红色」的结构直接数。",
+          "换个角度：设红格构成的集合为 R，条件是 R 至少碰到每一行一次、也至少碰到每一列一次。",
+          "先处理列：每一列只有 2 格（上、下各一），每一列的红格情形只有三种可能——只有上、只有下、上下都红（不能两格皆蓝，否则该列没有红格）。",
+          "所以三列各有 3 种选择，共 3³ = 27 种能满足「每一列都有红格」。",
+          "再扣掉不满足「每一行都有红格」的：上行全无红表示三列都选「只有下」，只有 1 种；下行全无红同理也是 1 种；两者不可能同时发生。",
+          "所以合格涂法 = 27 − 1 − 1 = 25 种。",
+          "验算：以程序穷举全部 64 种涂法逐一检查两个条件，符合者恰好 25 种。"
+        ],
+        "en": [
+          "There are 2⁶ = 64 colourings in total. Counting the valid ones directly is awkward, so think about excluding all-blue rows and all-blue columns.",
+          "Looking only at columns (3 columns of 2 cells each): a specified column being all blue allows 2⁴ = 16 colourings, and inclusion–exclusion over the three columns gives 3 × 16 − 3 × 2² + 1 × 2⁰ = 48 − 12 + 1 = 37 with at least one all-blue column.",
+          "That still leaves the row condition entangled, and expanding both together is error-prone, so instead count directly by the structure of the red cells.",
+          "Change viewpoint: let R be the set of red cells; the condition is that R meets every row and every column at least once.",
+          "Handle columns first: each column has only 2 cells (top and bottom), so its red pattern has exactly three possibilities — top only, bottom only, or both (never neither, or that column would have no red).",
+          "So each of the three columns has 3 choices, giving 3³ = 27 colourings that satisfy the column condition.",
+          "Now remove those failing the row condition: the top row has no red exactly when all three columns choose bottom only, which is 1 colouring; the bottom row has no red in 1 colouring likewise; both cannot happen at once.",
+          "Hence the number of valid colourings is 27 − 1 − 1 = 25.",
+          "Check: enumerating all 64 colourings by program and testing both conditions gives exactly 25."
+        ],
+        "ja": [
+          "塗り方は全部で 2⁶ = 64 通りです。条件を満たすものを直接数えるのは面倒なので、全青の行や列を除く方針を考えます。",
+          "列だけを見ると（3 列、各列 2 マス）、指定した 1 列が全青となる塗り方は 2⁴ = 16 通りで、3 列に包除原理を使うと少なくとも 1 列が全青となるのは 3 × 16 − 3 × 2² + 1 × 2⁰ = 48 − 12 + 1 = 37 通りです。",
+          "しかしこれでは行の条件が絡んだままで、両方を同時に展開すると誤りやすいので、赤マスの構造から直接数えます。",
+          "視点を変えます：赤マスの集合を R とすると、条件は R がどの行にもどの列にも 1 つ以上含まれることです。",
+          "まず列を処理します。各列は 2 マス（上と下）だけなので、その列の赤の入り方は「上だけ」「下だけ」「両方」の 3 通りです（両方青は不可、その列に赤がなくなるため）。",
+          "よって 3 列それぞれ 3 通りで、列の条件を満たすのは 3³ = 27 通り。",
+          "次に行の条件を満たさないものを除きます。上の行に赤がないのは 3 列すべてが「下だけ」を選ぶ 1 通り、下の行に赤がないのも同様に 1 通りで、両方が同時に起こることはありません。",
+          "したがって条件を満たす塗り方は 27 − 1 − 1 = 25 通り。",
+          "検算：64 通りをプログラムで全数列挙し両条件を確認すると、ちょうど 25 通りになります。"
+        ]
       },
-      "figure": { "type": "custom", "kind": "none", "params": {} },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
       "answerMode": "integer_input",
-      "correctAnswer": { "type": "integer", "value": "6" },
-      "inputConstraints": { "allowNegative": false, "maxDigits": 1 },
-      "source": {
-        "type": "editorial_original",
-        "name": "MathSpring Editorial",
-        "reference": "Upper combinatorics expansion set C13",
-        "displayText": "MathSpring Editorial Original"
+      "correctAnswer": {
+        "type": "integer",
+        "value": "25"
       },
-      "olympiadTaxonomy": { "topic": "組合", "topicCode": "combinatorics", "subtopic": "滿射計數", "subtopicCode": "onto_functions_small" }
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "行與列雙重覆蓋條件下的方格著色計數，以逐列枚舉再扣除失敗行的競賽題型",
+        "notes": "設計依據：兩個條件交纏時直接排容容易出錯，本題示範改由「每列只有 3 種合法紅格型態」把列條件內建掉，再單獨處理行條件；詳解刻意先展示排容路線遇到的困難，再切換視角。答案 25 已用全部 2⁶ = 64 種塗法窮舉驗證。屬同水準原創改寫，非抄錄特定官方題。原 005（3 個元素映到 2 個元素的滿射個數 = 2³ − 2）僅兩步，屬裸題，且來源為自製 editorial 暫代出處。",
+        "displayText": "改寫題（行列雙重覆蓋著色）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "組合",
+        "topicCode": "combinatorics",
+        "subtopic": "方格覆蓋著色",
+        "subtopicCode": "grid_cover_coloring"
+      },
+      "reviewStatus": "ok"
     },
     {
       "id": "combinatorics_grade11_foundation_006",
-      "reviewStatus": "pending",
       "topic": "combinatorics",
-      "subtopic": "binomial_identity",
+      "subtopic": "lattice_triangle_count",
       "difficulty": "foundation",
       "levelStage": "grade11",
       "challengeTier": "foundation",
       "prompt": {
-        "zh-Hant": "求 C(6,0)+C(6,1)+C(6,2)+⋯+C(6,6) 的值。",
-        "zh-Hans": "求 C(6,0)+C(6,1)+C(6,2)+⋯+C(6,6) 的值。",
-        "en": "Find the value of C(6,0)+C(6,1)+C(6,2)+⋯+C(6,6).",
-        "ja": "C(6,0)+C(6,1)+C(6,2)+⋯+C(6,6) の値を求めなさい。"
+        "zh-Hant": "在一個 4 × 4 的格點陣列（共 16 個點，橫向與縱向相鄰點的距離都是 1）中任取 3 個點。求這 3 點能構成三角形（即三點不共線）的取法共有多少種？",
+        "zh-Hans": "在一个 4 × 4 的格点阵列（共 16 个点，横向与纵向相邻点的距离都是 1）中任取 3 个点。求这 3 点能构成三角形（即三点不共线）的取法共有多少种？",
+        "en": "Three points are chosen from a 4-by-4 array of lattice points (16 points in all, with adjacent points one unit apart horizontally and vertically). In how many ways can the three chosen points form a triangle, that is, not be collinear?",
+        "ja": "4 × 4 の格子点（全部で 16 点、隣り合う点の間隔は縦横とも 1）から 3 点を選びます。その 3 点が三角形をつくる（すなわち一直線上にない）選び方は何通りですか。"
       },
-      "answer": { "zh-Hant": "答案是 64。", "zh-Hans": "答案是 64。", "en": "The answer is 64.", "ja": "答えは 64 です。" },
+      "answer": {
+        "zh-Hant": "答案是 516 種。",
+        "zh-Hans": "答案是 516 种。",
+        "en": "The answer is 516.",
+        "ja": "答えは 516 通りです。"
+      },
       "solutionSteps": {
-        "zh-Hant": ["由二項式定理，(1+1)⁶ = ΣC(6,k)。", "所以總和是 2⁶ = 64。"],
-        "zh-Hans": ["由二项式定理，(1+1)⁶ = ΣC(6,k)。", "所以总和是 2⁶ = 64。"],
-        "en": ["By the binomial theorem, (1+1)⁶ equals the sum of all C(6,k).", "Therefore the value is 2⁶ = 64."],
-        "ja": ["二項定理より、(1+1)⁶ はすべての C(6,k) の和に等しいです。", "したがって値は 2⁶ = 64 です。"]
+        "zh-Hant": [
+          "直接數「能構成三角形」的取法很難，改用補集：先算全部取法，再扣掉三點共線的取法。",
+          "全部取法是 C(16, 3) = 560 種。",
+          "接著要仔細數三點共線的組數，關鍵是不能只想到橫、直線，還要把各種斜率的斜線都算進去。",
+          "橫線：共 4 條，每條 4 個點，各有 C(4, 3) = 4 組，小計 4 × 4 = 16 組。",
+          "直線：同樣 4 條，小計 16 組。",
+          "斜率為 1 的方向：各條對角線上的點數依序是 2、3、4、3、2，只有點數 ≥ 3 的才產生共線組——含 4 點的那條有 C(4, 3) = 4 組，兩條含 3 點的各有 1 組，合計 6 組；斜率 −1 的方向同理也是 6 組。",
+          "還要問：有沒有其他斜率的三點共線？若斜率是 2，三個共線格點會是 (x, y)、(x+1, y+2)、(x+2, y+4)，但縱座標只能取 0 到 3，y + 4 必定超出範圍，所以不存在；斜率 1/2、−2、−1/2 同理也都不存在。",
+          "這是 4 × 4 這個尺寸的特性：格子再大一點（例如 5 × 5）就會出現斜率 ±2、±1/2 的三點共線，所以這一步必須實際檢查而不能想當然。",
+          "把共線組數加總：16 + 16 + 6 + 6 = 44 組。",
+          "所以能構成三角形的取法 = 560 − 44 = 516 種。（已用程式對全部 560 組逐一以面積行列式判定，共線組確為 44。）"
+        ],
+        "zh-Hans": [
+          "直接数「能构成三角形」的取法很难，改用补集：先算全部取法，再扣掉三点共线的取法。",
+          "全部取法是 C(16, 3) = 560 种。",
+          "接着要仔细数三点共线的组数，关键是不能只想到横、直线，还要把各种斜率的斜线都算进去。",
+          "横线：共 4 条，每条 4 个点，各有 C(4, 3) = 4 组，小计 4 × 4 = 16 组。",
+          "竖线：同样 4 条，小计 16 组。",
+          "斜率为 1 的方向：各条对角线上的点数依序是 2、3、4、3、2，只有点数 ≥ 3 的才产生共线组——含 4 点的那条有 C(4, 3) = 4 组，两条含 3 点的各有 1 组，合计 6 组；斜率 −1 的方向同理也是 6 组。",
+          "还要问：有没有其他斜率的三点共线？若斜率是 2，三个共线格点会是 (x, y)、(x+1, y+2)、(x+2, y+4)，但纵坐标只能取 0 到 3，y + 4 必定超出范围，所以不存在；斜率 1/2、−2、−1/2 同理也都不存在。",
+          "这是 4 × 4 这个尺寸的特性：格子再大一点（例如 5 × 5）就会出现斜率 ±2、±1/2 的三点共线，所以这一步必须实际检查而不能想当然。",
+          "把共线组数加总：16 + 16 + 6 + 6 = 44 组。",
+          "所以能构成三角形的取法 = 560 − 44 = 516 种。（已用程序对全部 560 组逐一以面积行列式判定，共线组确为 44。）"
+        ],
+        "en": [
+          "Counting the triangle-forming selections directly is hard, so use the complement: count all selections and subtract the collinear ones.",
+          "The total number of selections is C(16, 3) = 560.",
+          "Now count the collinear triples carefully; the key point is that horizontal and vertical lines are not enough — slanted lines of several slopes also matter.",
+          "Horizontal lines: 4 of them with 4 points each, giving C(4, 3) = 4 triples per line, so 4 × 4 = 16.",
+          "Vertical lines: likewise 4 lines, giving 16.",
+          "Direction of slope 1: the diagonals contain 2, 3, 4, 3, 2 points, and only those with at least 3 points give triples — the 4-point diagonal gives C(4, 3) = 4 and the two 3-point diagonals give 1 each, so 6 in all; slope −1 gives another 6.",
+          "Are there collinear triples of any other slope? For slope 2 the three points would be (x, y), (x+1, y+2), (x+2, y+4), but the y-coordinate only ranges over 0 to 3, so y + 4 is always out of range and no such triple exists; slopes 1/2, −2 and −1/2 fail for the same reason.",
+          "This is specific to the 4-by-4 size: in a slightly larger grid such as 5-by-5, triples of slope ±2 and ±1/2 do appear, so this step must actually be checked rather than assumed.",
+          "Adding up the collinear triples: 16 + 16 + 6 + 6 = 44.",
+          "Hence the number of selections forming a triangle is 560 − 44 = 516. (Testing all 560 triples by program with an area determinant also gives 44 collinear ones.)"
+        ],
+        "ja": [
+          "三角形になる選び方を直接数えるのは難しいので、補集合を使います。全体から一直線上にある 3 点の組を引きます。",
+          "全体の選び方は C(16, 3) = 560 通り。",
+          "次に共線となる 3 点組を丁寧に数えます。要点は縦横だけでなく、さまざまな傾きの斜line も数えることです。",
+          "横の直線：4 本あり各 4 点なので C(4, 3) = 4 組ずつ、計 4 × 4 = 16 組。",
+          "縦の直線：同様に 4 本で計 16 組。",
+          "傾き 1 の方向：対角線上の点数は順に 2、3、4、3、2 で、3 点以上のものだけが組を生みます。4 点の線は C(4, 3) = 4 組、3 点の線 2 本は各 1 組で合計 6 組。傾き −1 も同様に 6 組。",
+          "他の傾きの共線はあるでしょうか。傾き 2 なら 3 点は (x, y)、(x+1, y+2)、(x+2, y+4) となりますが、y 座標は 0 から 3 までなので y + 4 は必ず範囲外となり存在しません。傾き 1/2、−2、−1/2 も同じ理由で存在しません。",
+          "これは 4 × 4 という大きさに固有の事情です。5 × 5 など少し大きくすると傾き ±2、±1/2 の共線が現れるので、この段階は思い込まず実際に確認する必要があります。",
+          "共線の組を合計すると 16 + 16 + 6 + 6 = 44 組。",
+          "よって三角形をつくる選び方は 560 − 44 = 516 通りです。（560 組すべてを面積の行列式で判定するプログラムでも共線は 44 組になります。）"
+        ]
       },
-      "figure": { "type": "custom", "kind": "none", "params": {} },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
       "answerMode": "integer_input",
-      "correctAnswer": { "type": "integer", "value": "64" },
-      "inputConstraints": { "allowNegative": false, "maxDigits": 2 },
-      "source": {
-        "type": "editorial_original",
-        "name": "MathSpring Editorial",
-        "reference": "Upper combinatorics expansion set C14",
-        "displayText": "MathSpring Editorial Original"
+      "correctAnswer": {
+        "type": "integer",
+        "value": "516"
       },
-      "olympiadTaxonomy": { "topic": "組合", "topicCode": "combinatorics", "subtopic": "二項係數和", "subtopicCode": "binomial_identity" }
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 4
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "格點中取三點構成三角形的計數：以補集扣除共線組，需窮盡各種斜率方向的競賽題型",
+        "notes": "設計依據：主要陷阱是共線組容易只數橫、直與主對角線而漏掉斜率 ±2、±1/2 的線；詳解刻意點出這個落差。答案 516 已用對全部 C(16,3) = 560 組逐一以面積行列式判定共線的程式驗證（共線組為 44）。屬同水準原創改寫，非抄錄特定官方題。原 006（求 ΣC(6,k) = 2⁶）僅兩步，屬裸題，且來源為自製 editorial 暫代出處。",
+        "displayText": "改寫題（格點三角形計數）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "組合",
+        "topicCode": "combinatorics",
+        "subtopic": "格點三角形計數",
+        "subtopicCode": "lattice_triangle_count"
+      },
+      "reviewStatus": "ok"
     },
     {
       "id": "combinatorics_grade11_foundation_007",
-      "reviewStatus": "pending",
+      "reviewStatus": "ok",
       "topic": "combinatorics",
       "subtopic": "pair_matching_constraints",
       "difficulty": "foundation",
@@ -245,21 +590,67 @@
         "ja": "1 から 14 までの整数を 7 組のペアに分けます。ただし各ペアでは大きい数が小さい数の少なくとも 2 倍であるとします。何通りの分け方がありますか。"
       },
       "answer": {
-        "zh-Hant": "答案是 126。",
-        "zh-Hans": "答案是 126。",
-        "en": "The answer is 126.",
-        "ja": "答えは 126 です。"
+        "zh-Hant": "答案是 144。",
+        "zh-Hans": "答案是 144。",
+        "en": "The answer is 144.",
+        "ja": "答えは 144 です。"
       },
       "solutionSteps": {
-        "zh-Hant": ["8 到 14 一定要分別和 1 到 7 配對，因為若兩個都在 8 到 14，中較小者的 2 倍已超過 14。", "特別地，7 只能和 14 配對。", "6 可和 12 或 13 配對，有 2 種。", "5 可和剩下的 10、11、12、13 中符合條件者配對，有 3 種。", "其餘 1、2、3、4 與剩下的 4 個大數一一配對，共有 4! 種。", "總數是 2×3×4! = 126。"],
-        "zh-Hans": ["8 到 14 一定要分别和 1 到 7 配对，因为若两个都在 8 到 14，中较小者的 2 倍已超过 14。", "特别地，7 只能和 14 配对。", "6 可和 12 或 13 配对，有 2 种。", "5 可和剩下的 10、11、12、13 中符合条件者配对，有 3 种。", "其余 1、2、3、4 与剩下的 4 个大数一一配对，共有 4! 种。", "总数是 2×3×4! = 126。"],
-        "en": ["Each of 8 through 14 must be paired with one of 1 through 7, since pairing two numbers both at least 8 would violate the doubling condition.", "In particular, 7 must pair with 14.", "Then 6 can pair with 12 or 13, giving 2 choices.", "Next 5 can pair with one of the 3 valid remaining large numbers.", "The remaining 1,2,3,4 can be matched to the remaining 4 large numbers in 4! ways.", "So the total is 2×3×4! = 126."],
-        "ja": ["8 から 14 はそれぞれ 1 から 7 のどれかと組むしかありません。8 以上同士を組にすると、大きい方が小さい方の 2 倍以上になれないからです。", "特に 7 は 14 としか組めません。", "6 は 12 または 13 と組めるので 2 通りです。", "次に 5 は残った適切な大きい数 3 つのどれかと組めます。", "残る 1,2,3,4 は残り 4 つの大きい数と自由に対応できるので 4! 通りです。", "したがって合計は 2×3×4! = 126 通りです。"]
+        "zh-Hant": [
+          "先確認一件事：8 到 14 這 7 個數不可能兩兩配在一起。因為若兩個都取自 8 到 14，較小者至少是 8，它的 2 倍至少是 16，已超過 14。",
+          "所以 8 到 14 必須各自和 1 到 7 中的某個數配對，形成 7 組一大一小的配對。",
+          "接著從限制最緊的數開始排。7 的 2 倍是 14，所以 7 只能配 14，只有 1 種。",
+          "再看 6：需要配 12 以上，候選是 12、13、14，但 14 已被 7 佔走，所以有 12、13 兩種。",
+          "再看 5：需要配 10 以上，候選是 10、11、12、13、14。扣掉 14（給 7）與 6 佔走的那一個，還剩 3 種。",
+          "最後看 1、2、3、4：它們需要配的下限分別是 2、4、6、8，而剩下的 4 個大數全都在 8 到 14 之間，一定都 ≥ 8，所以任何配法都合法，共 4! = 24 種。",
+          "把各步相乘：1 × 2 × 3 × 24 = 144。",
+          "所以共有 144 種分組方式。（已用程式窮舉全部配對方式驗證為 144。）"
+        ],
+        "zh-Hans": [
+          "先确认一件事：8 到 14 这 7 个数不可能两两配在一起。因为若两个都取自 8 到 14，较小者至少是 8，它的 2 倍至少是 16，已超过 14。",
+          "所以 8 到 14 必须各自和 1 到 7 中的某个数配对，形成 7 组一大一小的配对。",
+          "接着从限制最紧的数开始排。7 的 2 倍是 14，所以 7 只能配 14，只有 1 种。",
+          "再看 6：需要配 12 以上，候选是 12、13、14，但 14 已被 7 占走，所以有 12、13 两种。",
+          "再看 5：需要配 10 以上，候选是 10、11、12、13、14。扣掉 14（给 7）与 6 占走的那一个，还剩 3 种。",
+          "最后看 1、2、3、4：它们需要配的下限分别是 2、4、6、8，而剩下的 4 个大数全都在 8 到 14 之间，一定都 ≥ 8，所以任何配法都合法，共 4! = 24 种。",
+          "把各步相乘：1 × 2 × 3 × 24 = 144。",
+          "所以共有 144 种分组方式。（已用程序穷举全部配对方式验证为 144。）"
+        ],
+        "en": [
+          "First note that no two of the numbers 8 through 14 can be paired together: if both came from 8 to 14, the smaller is at least 8 and twice it is at least 16, which exceeds 14.",
+          "So each of 8 through 14 must pair with one of 1 through 7, giving seven pairs each consisting of one small and one large number.",
+          "Now assign starting from the most constrained number. Twice 7 is 14, so 7 can only pair with 14 — exactly 1 way.",
+          "Next consider 6: it needs a partner of at least 12, so the candidates are 12, 13, 14; but 14 is taken by 7, leaving 12 and 13 — 2 ways.",
+          "Next consider 5: it needs at least 10, so candidates are 10, 11, 12, 13, 14. Removing 14 (taken by 7) and whichever 6 took leaves 3 ways.",
+          "Finally 1, 2, 3, 4 need partners of at least 2, 4, 6, 8 respectively, and the four remaining large numbers all lie in 8 to 14 and so are at least 8. Every assignment is therefore legal, giving 4! = 24 ways.",
+          "Multiplying the steps: 1 × 2 × 3 × 24 = 144.",
+          "So there are 144 groupings. (An exhaustive program enumeration of all pairings also gives 144.)"
+        ],
+        "ja": [
+          "まず 8 から 14 の 7 個は互いに組めないことを確認します。両方が 8 以上だと小さい方が 8 以上で、その 2 倍は 16 以上となり 14 を超えるからです。",
+          "したがって 8 から 14 はそれぞれ 1 から 7 のいずれかと組み、大小 1 個ずつの 7 組ができます。",
+          "次に制約の厳しい数から決めます。7 の 2 倍は 14 なので、7 は 14 としか組めず 1 通りです。",
+          "次に 6：12 以上と組む必要があり候補は 12、13、14 ですが、14 は 7 が取っているので 12 と 13 の 2 通り。",
+          "次に 5：10 以上と組む必要があり候補は 10、11、12、13、14。14（7 が使用）と 6 が取った 1 つを除いて 3 通り。",
+          "最後に 1、2、3、4 はそれぞれ 2、4、6、8 以上と組めばよく、残る 4 個の大きい数はすべて 8 以上なのでどう組んでも条件を満たし、4! = 24 通り。",
+          "各段階を掛けて 1 × 2 × 3 × 24 = 144。",
+          "よって分け方は 144 通りです。（すべての組分けをプログラムで全数探索しても 144 になります。）"
+        ]
       },
-      "figure": { "type": "custom", "kind": "none", "params": {} },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
       "answerMode": "integer_input",
-      "correctAnswer": { "type": "integer", "value": "126" },
-      "inputConstraints": { "allowNegative": false, "maxDigits": 3 },
+      "correctAnswer": {
+        "type": "integer",
+        "value": "144"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
       "source": {
         "type": "official_reference",
         "name": "AMC 12",
@@ -274,11 +665,16 @@
         "rightsStatus": "needs_review",
         "notes": "The public AoPS archive notes this is the same problem as 2022 AMC 12A Problem 10; wording rewritten for app use."
       },
-      "olympiadTaxonomy": { "topic": "組合", "topicCode": "combinatorics", "subtopic": "配對計數", "subtopicCode": "pair_matching_constraints" }
+      "olympiadTaxonomy": {
+        "topic": "組合",
+        "topicCode": "combinatorics",
+        "subtopic": "配對計數",
+        "subtopicCode": "pair_matching_constraints"
+      }
     },
     {
       "id": "combinatorics_grade11_foundation_008",
-      "reviewStatus": "pending",
+      "reviewStatus": "ok",
       "topic": "combinatorics",
       "subtopic": "parking_function_count",
       "difficulty": "foundation",
@@ -297,15 +693,61 @@
         "ja": "答えは 1296 です。"
       },
       "solutionSteps": {
-        "zh-Hant": ["這類字串可對應到長度為 5 的 parking function。", "已知長度 n 的 parking function 個數是 (n+1)⁽ⁿ⁻¹⁾。", "這裡 n=5，所以個數是 6⁴。", "6⁴ = 1296，因此答案是 1296。"],
-        "zh-Hans": ["这类字串可对应到长度为 5 的 parking function。", "已知长度 n 的 parking function 个数是 (n+1)⁽ⁿ⁻¹⁾。", "这里 n=5，所以个数是 6⁴。", "6⁴ = 1296，因此答案是 1296。"],
-        "en": ["These strings are exactly the parking functions of length 5.", "A standard result says the number of parking functions of length n is (n+1)⁽ⁿ⁻¹⁾.", "Here n=5, so the count is 6⁴.", "Since 6⁴ = 1296, the answer is 1296."],
-        "ja": ["この条件を満たす文字列は、長さ 5 の parking function とちょうど一致します。", "長さ n の parking function の個数は (n+1)⁽ⁿ⁻¹⁾ であることが知られています。", "ここでは n=5 なので個数は 6⁴ です。", "6⁴ = 1296 より答えは 1296 です。"]
+        "zh-Hant": [
+          "先把條件讀清楚：對 j = 1, 2, 3, 4，字串中小於 j 的位置至少要有 j 個。",
+          "j = 1 時：至少 1 個位置的數字小於 1，也就是至少要有一個 0。",
+          "j = 2 時：至少 2 個位置的數字小於 2，也就是 0 與 1 合起來至少 2 個。",
+          "同理 j = 3 要求 0、1、2 合起來至少 3 個，j = 4 要求 0、1、2、3 合起來至少 4 個。",
+          "把字串的五個數字由小到大排序成 b₁ ≤ b₂ ≤ ⋯ ≤ b₅，上述條件恰好等價於 bⱼ ≤ j − 1 對 j = 1, 2, 3, 4 成立（b₅ 沒有限制，因為值域上限就是 4）。",
+          "這正是長度 5 的 parking function 的定義（把 0 到 4 平移成 1 到 5 即為標準形式）。",
+          "長度 n 的 parking function 個數是 (n + 1)ⁿ⁻¹，代入 n = 5 得 6⁴。",
+          "6⁴ = 1296。（已用程式對全部 5⁵ = 3125 個字串逐一檢查條件，符合者恰為 1296 個。）"
+        ],
+        "zh-Hans": [
+          "先把条件读清楚：对 j = 1, 2, 3, 4，字符串中小于 j 的位置至少要有 j 个。",
+          "j = 1 时：至少 1 个位置的数字小于 1，也就是至少要有一个 0。",
+          "j = 2 时：至少 2 个位置的数字小于 2，也就是 0 与 1 合起来至少 2 个。",
+          "同理 j = 3 要求 0、1、2 合起来至少 3 个，j = 4 要求 0、1、2、3 合起来至少 4 个。",
+          "把字符串的五个数字由小到大排序成 b₁ ≤ b₂ ≤ ⋯ ≤ b₅，上述条件恰好等价于 bⱼ ≤ j − 1 对 j = 1, 2, 3, 4 成立（b₅ 没有限制，因为值域上限就是 4）。",
+          "这正是长度 5 的 parking function 的定义（把 0 到 4 平移成 1 到 5 即为标准形式）。",
+          "长度 n 的 parking function 个数是 (n + 1)ⁿ⁻¹，代入 n = 5 得 6⁴。",
+          "6⁴ = 1296。（已用程序对全部 5⁵ = 3125 个字符串逐一检查条件，符合者恰为 1296 个。）"
+        ],
+        "en": [
+          "First read the condition carefully: for j = 1, 2, 3, 4, at least j positions must hold a digit smaller than j.",
+          "For j = 1: at least one position holds a digit below 1, that is at least one 0.",
+          "For j = 2: at least two positions hold digits below 2, so the 0s and 1s together number at least 2.",
+          "Similarly j = 3 requires at least three digits among 0, 1, 2, and j = 4 requires at least four among 0, 1, 2, 3.",
+          "Sorting the five digits as b₁ ≤ b₂ ≤ ⋯ ≤ b₅, these conditions are exactly bⱼ ≤ j − 1 for j = 1, 2, 3, 4 (there is no condition on b₅ since 4 is already the largest allowed value).",
+          "This is precisely the definition of a parking function of length 5, after shifting the range 0–4 to the standard 1–5.",
+          "The number of parking functions of length n is (n + 1)ⁿ⁻¹, so with n = 5 we get 6⁴.",
+          "6⁴ = 1296. (Checking all 5⁵ = 3125 strings against the condition by program also yields exactly 1296.)"
+        ],
+        "ja": [
+          "まず条件を正確に読みます：j = 1, 2, 3, 4 について、j より小さい数字が置かれた位置が少なくとも j 個必要です。",
+          "j = 1：1 より小さい数字が 1 箇所以上、すなわち 0 が少なくとも 1 個。",
+          "j = 2：2 より小さい数字が 2 箇所以上、つまり 0 と 1 を合わせて 2 個以上。",
+          "同様に j = 3 は 0、1、2 を合わせて 3 個以上、j = 4 は 0、1、2、3 を合わせて 4 個以上を要求します。",
+          "5 個の数字を小さい順に b₁ ≤ b₂ ≤ ⋯ ≤ b₅ と並べると、これらの条件は j = 1, 2, 3, 4 に対する bⱼ ≤ j − 1 とちょうど同値です（値域の上限が 4 なので b₅ には条件がありません）。",
+          "これは長さ 5 の parking function の定義そのものです（0〜4 を 1〜5 に平行移動すると標準形になります）。",
+          "長さ n の parking function の個数は (n + 1)ⁿ⁻¹ なので、n = 5 で 6⁴。",
+          "6⁴ = 1296。（5⁵ = 3125 個の文字列をすべて条件で確認するプログラムでもちょうど 1296 個になります。）"
+        ]
       },
-      "figure": { "type": "custom", "kind": "none", "params": {} },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
       "answerMode": "integer_input",
-      "correctAnswer": { "type": "integer", "value": "1296" },
-      "inputConstraints": { "allowNegative": false, "maxDigits": 4 },
+      "correctAnswer": {
+        "type": "integer",
+        "value": "1296"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 4
+      },
       "source": {
         "type": "official_reference",
         "name": "AMC 12",
@@ -320,11 +762,16 @@
         "rightsStatus": "needs_review",
         "notes": "The public AoPS archive notes this is the same problem as 2022 AMC 10A Problem 24; wording rewritten for app use."
       },
-      "olympiadTaxonomy": { "topic": "組合", "topicCode": "combinatorics", "subtopic": "停車函數計數", "subtopicCode": "parking_function_count" }
+      "olympiadTaxonomy": {
+        "topic": "組合",
+        "topicCode": "combinatorics",
+        "subtopic": "停車函數計數",
+        "subtopicCode": "parking_function_count"
+      }
     },
     {
       "id": "combinatorics_grade11_foundation_009",
-      "reviewStatus": "pending",
+      "reviewStatus": "ok",
       "topic": "combinatorics",
       "subtopic": "digit_average_count",
       "difficulty": "foundation",
@@ -343,15 +790,53 @@
         "ja": "答えは 112 です。"
       },
       "solutionSteps": {
-        "zh-Hant": ["這三個數字必須形成長度為 3 的等差數列。", "從 0 到 9 可形成的遞增等差三元組共有 8+6+4+2=20 組。", "每組數字可排列成 3!=6 個三位數，所以先得到 20×6=120 個。", "但若數字組含 0，則有些排列不能作為三位數。含 0 的等差三元組是 012、024、036、048，共 4 組。", "每一組中，以 0 開頭的排列有 2!=2 個，所以要扣掉 4×2=8 個。", "因此總數是 120-8=112。"],
-        "zh-Hans": ["这三个数字必须形成长度为 3 的等差数列。", "从 0 到 9 可形成的递增等差三元组共有 8+6+4+2=20 组。", "每组数字可排列成 3!=6 个三位数，所以先得到 20×6=120 个。", "但若数字组含 0，则有些排列不能作为三位数。含 0 的等差三元组是 012、024、036、048，共 4 组。", "每一组中，以 0 开头的排列有 2!=2 个，所以要扣掉 4×2=8 个。", "因此总数是 120-8=112。"],
-        "en": ["The three digits must form a three-term arithmetic progression.", "From 0 through 9, the increasing three-term arithmetic progressions are 20 in number.", "Each set of three digits can be permuted in 3!=6 ways, giving 20×6=120 candidates.", "But any arrangement starting with 0 is not a three-digit number. The progressions containing 0 are 012, 024, 036, and 048, four in total.", "Each of these contributes 2 invalid arrangements starting with 0, so we subtract 4×2=8.", "Thus the total is 120-8=112."],
-        "ja": ["この 3 つの数字は長さ 3 の等差数列を作る必要があります。", "0 から 9 までで作れる増加する 3 項等差数列は全部で 20 組あります。", "各組の数字は 3!=6 通りに並べられるので、まず 20×6=120 個あります。", "ただし 0 を含む組では、0 で始まる並びは 3 桁の数になりません。0 を含む等差数列は 012、024、036、048 の 4 組です。", "各組につき 0 で始まる並びは 2 通りあるので、4×2=8 を引きます。", "したがって合計は 120-8=112 です。"]
+        "zh-Hant": [
+          "這三個數字必須形成長度為 3 的等差數列。",
+          "從 0 到 9 可形成的遞增等差三元組共有 8+6+4+2=20 組。",
+          "每組數字可排列成 3!=6 個三位數，所以先得到 20×6=120 個。",
+          "但若數字組含 0，則有些排列不能作為三位數。含 0 的等差三元組是 012、024、036、048，共 4 組。",
+          "每一組中，以 0 開頭的排列有 2!=2 個，所以要扣掉 4×2=8 個。",
+          "因此總數是 120-8=112。"
+        ],
+        "zh-Hans": [
+          "这三个数字必须形成长度为 3 的等差数列。",
+          "从 0 到 9 可形成的递增等差三元组共有 8+6+4+2=20 组。",
+          "每组数字可排列成 3!=6 个三位数，所以先得到 20×6=120 个。",
+          "但若数字组含 0，则有些排列不能作为三位数。含 0 的等差三元组是 012、024、036、048，共 4 组。",
+          "每一组中，以 0 开头的排列有 2!=2 个，所以要扣掉 4×2=8 个。",
+          "因此总数是 120-8=112。"
+        ],
+        "en": [
+          "The three digits must form a three-term arithmetic progression.",
+          "From 0 through 9, the increasing three-term arithmetic progressions are 20 in number.",
+          "Each set of three digits can be permuted in 3!=6 ways, giving 20×6=120 candidates.",
+          "But any arrangement starting with 0 is not a three-digit number. The progressions containing 0 are 012, 024, 036, and 048, four in total.",
+          "Each of these contributes 2 invalid arrangements starting with 0, so we subtract 4×2=8.",
+          "Thus the total is 120-8=112."
+        ],
+        "ja": [
+          "この 3 つの数字は長さ 3 の等差数列を作る必要があります。",
+          "0 から 9 までで作れる増加する 3 項等差数列は全部で 20 組あります。",
+          "各組の数字は 3!=6 通りに並べられるので、まず 20×6=120 個あります。",
+          "ただし 0 を含む組では、0 で始まる並びは 3 桁の数になりません。0 を含む等差数列は 012、024、036、048 の 4 組です。",
+          "各組につき 0 で始まる並びは 2 通りあるので、4×2=8 を引きます。",
+          "したがって合計は 120-8=112 です。"
+        ]
       },
-      "figure": { "type": "custom", "kind": "none", "params": {} },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
       "answerMode": "integer_input",
-      "correctAnswer": { "type": "integer", "value": "112" },
-      "inputConstraints": { "allowNegative": false, "maxDigits": 3 },
+      "correctAnswer": {
+        "type": "integer",
+        "value": "112"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
       "source": {
         "type": "official_reference",
         "name": "AMC 12",
@@ -366,7 +851,12 @@
         "rightsStatus": "needs_review",
         "notes": "Rewritten from a publicly archived competition statement."
       },
-      "olympiadTaxonomy": { "topic": "組合", "topicCode": "combinatorics", "subtopic": "等差數位計數", "subtopicCode": "digit_average_count" }
+      "olympiadTaxonomy": {
+        "topic": "組合",
+        "topicCode": "combinatorics",
+        "subtopic": "等差數位計數",
+        "subtopicCode": "digit_average_count"
+      }
     }
   ]
 }

@@ -6,11 +6,16 @@
   "olympiadTopicCode": "geometry",
   "levelStage": "grade12",
   "challengeTier": "foundation",
-  "languages": ["zh-Hant", "zh-Hans", "en", "ja"],
+  "languages": [
+    "zh-Hant",
+    "zh-Hans",
+    "en",
+    "ja"
+  ],
   "questions": [
     {
       "id": "geometry_grade12_foundation_001",
-      "reviewStatus": "pending",
+      "reviewStatus": "ok",
       "topic": "geometry",
       "subtopic": "rotation_reflection",
       "difficulty": "foundation",
@@ -23,16 +28,52 @@
         "ja": "点 P(a, b) を点 (1, 5) を中心に反時計回り 90° 回転し、その後直線 y = -x について対称移動すると (-6, 3) になります。b - a を求めなさい。"
       },
       "answer": {
-        "zh-Hant": "答案是 5。",
-        "zh-Hans": "答案是 5。",
-        "en": "The answer is 5.",
-        "ja": "答えは 5 です。"
+        "zh-Hant": "答案是 7。",
+        "zh-Hans": "答案是 7。",
+        "en": "The answer is 7.",
+        "ja": "答えは 7 です。"
       },
       "solutionSteps": {
-        "zh-Hant": ["先把最後一步反射倒推回去，可得旋轉後的點。", "再把 90° 旋轉逆向還原，得到原點 P(a, b)。", "依官方答案可得 b - a = 5。"],
-        "zh-Hans": ["先把最后一步反射倒推回去，可得旋转后的点。", "再把 90° 旋转逆向还原，得到原点 P(a, b)。", "依官方答案可得 b - a = 5。"],
-        "en": ["Undo the reflection first to recover the rotated point.", "Then undo the 90-degree rotation about (1, 5) to recover P(a, b).", "The official answer gives b - a = 5."],
-        "ja": ["最後の対称移動を先に戻して、回転後の点を求めます。", "次に (1, 5) を中心とする 90° 回転を逆に戻して P(a, b) を求めます。", "公式解答では b - a = 5 です。"]
+        "zh-Hant": [
+          "與其正向嘗試，不如從結果倒推回去，因為兩個變換都容易求逆。",
+          "先還原最後一步的反射。對直線 y = −x 的反射把 (u, v) 送到 (−v, −u)，而這個變換做兩次會回到原處，所以再作一次就是逆變換。",
+          "把終點 (−6, 3) 反射回去：(−6, 3) → (−3, 6)。這就是旋轉之後、反射之前的點。",
+          "再還原旋轉。繞 (1, 5) 逆時針 90° 的逆變換，就是繞 (1, 5) 順時針 90°。",
+          "順時針 90° 繞 (h, k) 的公式是 (x, y) → (h + (y − k), k − (x − h))。代入 (h, k) = (1, 5) 與點 (−3, 6)。",
+          "得到 (1 + (6 − 5), 5 − (−3 − 1)) = (1 + 1, 5 + 4) = (2, 9)，所以 P = (2, 9)，即 a = 2、b = 9。",
+          "正向驗算：P(2, 9) 繞 (1, 5) 逆時針 90° 得 (1 − (9 − 5), 5 + (2 − 1)) = (−3, 6)；再對 y = −x 反射得 (−6, 3)，與題目相符。",
+          "所以 b − a = 9 − 2 = 7。"
+        ],
+        "zh-Hans": [
+          "与其正向尝试，不如从结果倒推回去，因为两个变换都容易求逆。",
+          "先还原最后一步的反射。对直线 y = −x 的反射把 (u, v) 送到 (−v, −u)，而这个变换做两次会回到原处，所以再作一次就是逆变换。",
+          "把终点 (−6, 3) 反射回去：(−6, 3) → (−3, 6)。这就是旋转之后、反射之前的点。",
+          "再还原旋转。绕 (1, 5) 逆时针 90° 的逆变换，就是绕 (1, 5) 顺时针 90°。",
+          "顺时针 90° 绕 (h, k) 的公式是 (x, y) → (h + (y − k), k − (x − h))。代入 (h, k) = (1, 5) 与点 (−3, 6)。",
+          "得到 (1 + (6 − 5), 5 − (−3 − 1)) = (1 + 1, 5 + 4) = (2, 9)，所以 P = (2, 9)，即 a = 2、b = 9。",
+          "正向验算：P(2, 9) 绕 (1, 5) 逆时针 90° 得 (1 − (9 − 5), 5 + (2 − 1)) = (−3, 6)；再对 y = −x 反射得 (−6, 3)，与题目相符。",
+          "所以 b − a = 9 − 2 = 7。"
+        ],
+        "en": [
+          "Rather than guessing forwards, work backwards from the image, since both transformations are easy to invert.",
+          "First undo the reflection. Reflection in the line y = −x sends (u, v) to (−v, −u), and applying it twice returns to the start, so applying it once more is its own inverse.",
+          "Reflecting the image (−6, 3) gives (−3, 6), which is the point after rotation but before reflection.",
+          "Next undo the rotation. The inverse of a 90° counterclockwise rotation about (1, 5) is a 90° clockwise rotation about the same centre.",
+          "A 90° clockwise rotation about (h, k) sends (x, y) to (h + (y − k), k − (x − h)). Substitute (h, k) = (1, 5) and the point (−3, 6).",
+          "This gives (1 + (6 − 5), 5 − (−3 − 1)) = (2, 9), so P = (2, 9), that is a = 2 and b = 9.",
+          "Forward check: rotating P(2, 9) by 90° counterclockwise about (1, 5) gives (1 − (9 − 5), 5 + (2 − 1)) = (−3, 6), and reflecting in y = −x gives (−6, 3), matching the problem.",
+          "Therefore b − a = 9 − 2 = 7."
+        ],
+        "ja": [
+          "順方向に試すより、2 つの変換はどちらも逆が求めやすいので、結果から逆にたどります。",
+          "まず反射を戻します。直線 y = −x に関する反射は (u, v) を (−v, −u) に写し、2 回行うと元に戻るので、もう一度行えば逆変換になります。",
+          "終点 (−6, 3) を反射すると (−3, 6)。これが回転後・反射前の点です。",
+          "次に回転を戻します。(1, 5) を中心とする 90° 反時計回りの逆は、同じ中心の 90° 時計回りです。",
+          "(h, k) を中心とする 90° 時計回りは (x, y) → (h + (y − k), k − (x − h))。(h, k) = (1, 5)、点 (−3, 6) を代入します。",
+          "すると (1 + (6 − 5), 5 − (−3 − 1)) = (2, 9) となり P = (2, 9)、すなわち a = 2、b = 9。",
+          "順方向の検算：P(2, 9) を (1, 5) 中心に 90° 反時計回りすると (1 − (9 − 5), 5 + (2 − 1)) = (−3, 6)、y = −x で反射すると (−6, 3) となり題意と一致します。",
+          "したがって b − a = 9 − 2 = 7。"
+        ]
       },
       "figure": {
         "type": "custom",
@@ -42,24 +83,67 @@
           "maxY": 8,
           "showGrid": true,
           "points": [
-            { "x": 1, "y": 5, "label": "C" },
-            { "x": -6, "y": 3, "label": "Q" }
+            {
+              "x": 1,
+              "y": 5,
+              "label": "C"
+            },
+            {
+              "x": -6,
+              "y": 3,
+              "label": "Q"
+            }
           ],
           "path": [
-            { "x": -8, "y": 8, "label": "" },
-            { "x": 8, "y": -8, "label": "" }
+            {
+              "x": -8,
+              "y": 8,
+              "label": ""
+            },
+            {
+              "x": 8,
+              "y": -8,
+              "label": ""
+            }
           ],
-          "highlightPoint": { "x": -6, "y": 3, "label": "Q" }
+          "highlightPoint": {
+            "x": -6,
+            "y": 3,
+            "label": "Q"
+          }
         }
       },
       "answerMode": "multiple_choice",
       "options": {
-        "A": { "zh-Hant": "1", "zh-Hans": "1", "en": "1", "ja": "1" },
-        "B": { "zh-Hant": "3", "zh-Hans": "3", "en": "3", "ja": "3" },
-        "C": { "zh-Hant": "5", "zh-Hans": "5", "en": "5", "ja": "5" },
-        "D": { "zh-Hant": "7", "zh-Hans": "7", "en": "7", "ja": "7" }
+        "A": {
+          "zh-Hant": "1",
+          "zh-Hans": "1",
+          "en": "1",
+          "ja": "1"
+        },
+        "B": {
+          "zh-Hant": "3",
+          "zh-Hans": "3",
+          "en": "3",
+          "ja": "3"
+        },
+        "C": {
+          "zh-Hant": "5",
+          "zh-Hans": "5",
+          "en": "5",
+          "ja": "5"
+        },
+        "D": {
+          "zh-Hant": "7",
+          "zh-Hans": "7",
+          "en": "7",
+          "ja": "7"
+        }
       },
-      "correctAnswer": { "type": "choice", "value": "C" },
+      "correctAnswer": {
+        "type": "choice",
+        "value": "D"
+      },
       "source": {
         "type": "official_reference",
         "name": "AMC 12",
@@ -83,7 +167,7 @@
     },
     {
       "id": "geometry_grade12_foundation_002",
-      "reviewStatus": "pending",
+      "reviewStatus": "ok",
       "topic": "geometry",
       "subtopic": "trapezoid_on_line",
       "difficulty": "foundation",
@@ -96,16 +180,56 @@
         "ja": "三角形 ABC の辺の長さは AB = 13、BC = 14、AC = 15 です。点 P は AC 上にあり、PC = 10。直線 BP 上に 2 点 D、E があり、四角形 ABCD と ABCE がともに台形になります。DE を求めなさい。"
       },
       "answer": {
-        "zh-Hant": "答案是 84/5。",
-        "zh-Hans": "答案是 84/5。",
-        "en": "The answer is 84/5.",
-        "ja": "答えは 84/5 です。"
+        "zh-Hant": "答案是 12√2。",
+        "zh-Hans": "答案是 12√2。",
+        "en": "The answer is 12√2.",
+        "ja": "答えは 12√2 です。"
       },
       "solutionSteps": {
-        "zh-Hant": ["這題可用座標法把三角形放在平面上。", "依 AC = 15 且 PC = 10，可先定出 P 的位置。", "再利用梯形條件建立平行關係，求出 D 與 E 在 BP 上的位置。", "依官方解答可得 DE = 84/5。"],
-        "zh-Hans": ["这题可用坐标法把三角形放在平面上。", "依 AC = 15 且 PC = 10，可先定出 P 的位置。", "再利用梯形条件建立平行关系，求出 D 与 E 在 BP 上的位置。", "依官方解答可得 DE = 84/5。"],
-        "en": ["Use coordinates for the 13-14-15 triangle.", "Locate point P using PC = 10 on AC.", "The trapezoid conditions give parallel-line constraints that determine D and E on line BP.", "The official answer is DE = 84/5."],
-        "ja": ["13-14-15 の三角形を座標平面に置きます。", "PC = 10 を使って P を定めます。", "台形になる条件から平行関係を立てて、BP 上の D と E を求めます。", "公式解答より DE = 84/5 です。"]
+        "zh-Hant": [
+          "把三角形放到座標平面上。取 A(0, 0)、C(15, 0)，再由 AB = 13、BC = 14 定出 B。",
+          "設 B = (x, y)，則 x² + y² = 169 且 (x − 15)² + y² = 196，相減得 30x = 198，所以 x = 6.6、y = 11.2，即 B(6.6, 11.2)。",
+          "P 在 AC 上且 PC = 10，所以 AP = 5，得 P(5, 0)。直線 BP 就是通過這兩點的直線。",
+          "四邊形 ABCD 要是梯形，必須有一組對邊平行。頂點依序是 A、B、C、D，所以可能是 CD ∥ AB，或是 DA ∥ BC。",
+          "情形一 CD ∥ AB：過 C 作平行 AB 的直線，與直線 BP 相交，得 D = (1.8, −22.4)。",
+          "情形二 DA ∥ BC：過 A 作平行 BC 的直線，與直線 BP 相交，得 E = (4.2, −5.6)。",
+          "這兩點就是題目所說的 D 與 E（兩者都在直線 BP 上，且各自讓四邊形成為梯形）。",
+          "計算距離：DE = √((4.2 − 1.8)² + (−5.6 + 22.4)²) = √(2.4² + 16.8²) = √(5.76 + 282.24) = √288。",
+          "√288 = √(144 × 2) = 12√2 ≈ 16.9706。所以 DE = 12√2。"
+        ],
+        "zh-Hans": [
+          "把三角形放到坐标平面上。取 A(0, 0)、C(15, 0)，再由 AB = 13、BC = 14 定出 B。",
+          "设 B = (x, y)，则 x² + y² = 169 且 (x − 15)² + y² = 196，相减得 30x = 198，所以 x = 6.6、y = 11.2，即 B(6.6, 11.2)。",
+          "P 在 AC 上且 PC = 10，所以 AP = 5，得 P(5, 0)。直线 BP 就是通过这两点的直线。",
+          "四边形 ABCD 要是梯形，必须有一组对边平行。顶点依序是 A、B、C、D，所以可能是 CD ∥ AB，或是 DA ∥ BC。",
+          "情形一 CD ∥ AB：过 C 作平行 AB 的直线，与直线 BP 相交，得 D = (1.8, −22.4)。",
+          "情形二 DA ∥ BC：过 A 作平行 BC 的直线，与直线 BP 相交，得 E = (4.2, −5.6)。",
+          "这两点就是题目所说的 D 与 E（两者都在直线 BP 上，且各自让四边形成为梯形）。",
+          "计算距离：DE = √((4.2 − 1.8)² + (−5.6 + 22.4)²) = √(2.4² + 16.8²) = √(5.76 + 282.24) = √288。",
+          "√288 = √(144 × 2) = 12√2 ≈ 16.9706。所以 DE = 12√2。"
+        ],
+        "en": [
+          "Place the triangle in the coordinate plane: take A(0, 0) and C(15, 0), then locate B from AB = 13 and BC = 14.",
+          "Writing B = (x, y), we need x² + y² = 169 and (x − 15)² + y² = 196; subtracting gives 30x = 198, so x = 6.6 and y = 11.2, that is B(6.6, 11.2).",
+          "Since P lies on AC with PC = 10, we get AP = 5 and P(5, 0), and line BP passes through these two points.",
+          "For ABCD to be a trapezoid one pair of opposite sides must be parallel. With vertices in the order A, B, C, D the options are CD ∥ AB or DA ∥ BC.",
+          "Case one, CD ∥ AB: the line through C parallel to AB meets line BP at D = (1.8, −22.4).",
+          "Case two, DA ∥ BC: the line through A parallel to BC meets line BP at E = (4.2, −5.6).",
+          "These are exactly the two points D and E described in the problem, both on line BP and each making the quadrilateral a trapezoid.",
+          "Computing the distance: DE = √((4.2 − 1.8)² + (−5.6 + 22.4)²) = √(2.4² + 16.8²) = √(5.76 + 282.24) = √288.",
+          "Since √288 = √(144 × 2) = 12√2 ≈ 16.9706, we get DE = 12√2."
+        ],
+        "ja": [
+          "三角形を座標平面に置きます。A(0, 0)、C(15, 0) とし、AB = 13、BC = 14 から B を定めます。",
+          "B = (x, y) とすると x² + y² = 169、(x − 15)² + y² = 196。辺々引くと 30x = 198 なので x = 6.6、y = 11.2、すなわち B(6.6, 11.2)。",
+          "P は AC 上で PC = 10 なので AP = 5、よって P(5, 0)。直線 BP はこの 2 点を通ります。",
+          "四角形 ABCD が台形になるには 1 組の対辺が平行である必要があります。頂点の順が A、B、C、D なので、CD ∥ AB か DA ∥ BC のいずれかです。",
+          "場合 1（CD ∥ AB）：C を通り AB に平行な直線と直線 BP の交点が D = (1.8, −22.4)。",
+          "場合 2（DA ∥ BC）：A を通り BC に平行な直線と直線 BP の交点が E = (4.2, −5.6)。",
+          "この 2 点が題意の D と E であり、どちらも直線 BP 上にあって四角形を台形にします。",
+          "距離を計算すると DE = √((4.2 − 1.8)² + (−5.6 + 22.4)²) = √(2.4² + 16.8²) = √(5.76 + 282.24) = √288。",
+          "√288 = √(144 × 2) = 12√2 ≈ 16.9706 なので DE = 12√2。"
+        ]
       },
       "figure": {
         "type": "custom",
@@ -118,31 +242,108 @@
             "maxY": 13
           },
           "points": [
-            { "name": "A", "x": 0, "y": 0, "pos": "bl" },
-            { "name": "C", "x": 0, "y": 12, "pos": "tl" },
-            { "name": "B", "x": 9, "y": 5, "pos": "r" },
-            { "name": "P", "x": 0, "y": 4, "pos": "l" },
-            { "name": "E", "x": 4.5, "y": 4.5, "pos": "tr" },
-            { "name": "D", "x": 18, "y": 6, "pos": "r" }
+            {
+              "name": "A",
+              "x": 0,
+              "y": 0,
+              "pos": "bl"
+            },
+            {
+              "name": "C",
+              "x": 0,
+              "y": 12,
+              "pos": "tl"
+            },
+            {
+              "name": "B",
+              "x": 9,
+              "y": 5,
+              "pos": "r"
+            },
+            {
+              "name": "P",
+              "x": 0,
+              "y": 4,
+              "pos": "l"
+            },
+            {
+              "name": "E",
+              "x": 4.5,
+              "y": 4.5,
+              "pos": "tr"
+            },
+            {
+              "name": "D",
+              "x": 18,
+              "y": 6,
+              "pos": "r"
+            }
           ],
           "segments": [
-            { "from": "A", "to": "B", "style": "solid" },
-            { "from": "B", "to": "C", "style": "solid" },
-            { "from": "C", "to": "A", "style": "solid" },
-            { "from": "B", "to": "D", "style": "construction" },
-            { "from": "A", "to": "E", "style": "construction" },
-            { "from": "C", "to": "D", "style": "construction" }
+            {
+              "from": "A",
+              "to": "B",
+              "style": "solid"
+            },
+            {
+              "from": "B",
+              "to": "C",
+              "style": "solid"
+            },
+            {
+              "from": "C",
+              "to": "A",
+              "style": "solid"
+            },
+            {
+              "from": "B",
+              "to": "D",
+              "style": "construction"
+            },
+            {
+              "from": "A",
+              "to": "E",
+              "style": "construction"
+            },
+            {
+              "from": "C",
+              "to": "D",
+              "style": "construction"
+            }
           ]
         }
       },
       "answerMode": "multiple_choice",
       "options": {
-        "A": { "zh-Hant": "42/5", "zh-Hans": "42/5", "en": "42/5", "ja": "42/5" },
-        "B": { "zh-Hant": "6√2", "zh-Hans": "6√2", "en": "6√2", "ja": "6√2" },
-        "C": { "zh-Hant": "84/5", "zh-Hans": "84/5", "en": "84/5", "ja": "84/5" },
-        "D": { "zh-Hant": "12√2", "zh-Hans": "12√2", "en": "12√2", "ja": "12√2" }
+        "A": {
+          "zh-Hant": "42/5",
+          "zh-Hans": "42/5",
+          "en": "42/5",
+          "ja": "42/5"
+        },
+        "B": {
+          "zh-Hant": "6√2",
+          "zh-Hans": "6√2",
+          "en": "6√2",
+          "ja": "6√2"
+        },
+        "C": {
+          "zh-Hant": "84/5",
+          "zh-Hans": "84/5",
+          "en": "84/5",
+          "ja": "84/5"
+        },
+        "D": {
+          "zh-Hant": "12√2",
+          "zh-Hans": "12√2",
+          "en": "12√2",
+          "ja": "12√2"
+        }
       },
-      "correctAnswer": { "type": "choice", "value": "C" },
+      "correctAnswer": {
+        "type": "choice",
+        "value": "D"
+      },
       "source": {
         "type": "official_reference",
         "name": "AMC 12",
@@ -166,7 +367,7 @@
     },
     {
       "id": "geometry_grade12_foundation_003",
-      "reviewStatus": "pending",
+      "reviewStatus": "ok",
       "topic": "geometry",
       "subtopic": "trapezoid_diagonals",
       "difficulty": "foundation",
@@ -185,10 +386,54 @@
         "ja": "答えは 194 です。"
       },
       "solutionSteps": {
-        "zh-Hant": ["可用座標或面積比例處理這題。", "利用 P 是 BD 中點與 OP = 11，可逐步求出對角線相關比例。", "再結合 BC = CD = 43 與垂直條件，解出 AD = 4√190。", "所以 m + n = 4 + 190 = 194。"],
-        "zh-Hans": ["可用坐标或面积比例处理这题。", "利用 P 是 BD 中点与 OP = 11，可逐步求出对角线相关比例。", "再结合 BC = CD = 43 与垂直条件，解出 AD = 4√190。", "所以 m + n = 4 + 190 = 194。"],
-        "en": ["This can be solved with coordinates or area ratios.", "Use that P is the midpoint of BD and OP = 11 to determine the relevant diagonal ratios.", "Combining BC = CD = 43 with the perpendicular condition yields AD = 4√190.", "Hence m + n = 194."],
-        "ja": ["座標法または面積比で解けます。", "P が BD の中点で OP = 11 であることから対角線の比を求めます。", "BC = CD = 43 と垂直条件を合わせると AD = 4√190。", "したがって m + n = 194 です。"]
+        "zh-Hant": [
+          "先用 BC = CD 這個條件。因為 AB ∥ CD，∠ABD 與 ∠BDC 是內錯角，所以相等；又 CB = CD 使三角形 BCD 為等腰，故 ∠DBC = ∠BDC。",
+          "把座標放好會更直接：因為 AD ⊥ BD，取 D 為原點、BD 沿 x 軸，則 A 在 y 軸上。設 B = (d, 0)、A = (0, h)。",
+          "AB ∥ CD 表示 C 落在過 D 且平行 AB 的直線上，所以 C = t(d, −h) 對某個 t > 0。",
+          "由 CD = 43 得 t·√(d² + h²) = 43。記 L = √(d² + h²) = AB，則 t = 43/L。",
+          "由 BC = 43 得 (td − d)² + (th)² = 43²。代入 t = 43/L 並乘以 L²，得 d²(43 − L)² + 43²h² = 43²(d² + h²)。",
+          "右邊展開後與左邊的 43²h² 相消，剩下 d²(43 − L)² = 43²d²，因為 d ≠ 0 得 (43 − L)² = 43²，取 L > 0 的解得 L = 86。也就是 AB = 86 = 2 × CD。",
+          "因為 AB ∥ CD，三角形 AOB 與 COD 相似，相似比為 AB : CD = 2 : 1，所以 O 把 BD 分成 BO : OD = 2 : 1，即 OD = BD/3。",
+          "P 是 BD 中點，所以 OP = |BD/2 − BD/3| = BD/6。由 OP = 11 得 BD = 66。",
+          "最後在直角三角形 ABD 中（∠ADB = 90°）用畢氏定理：AD² = AB² − BD² = 86² − 66² = 7396 − 4356 = 3040。",
+          "3040 = 16 × 190，所以 AD = 4√190，故 m = 4、n = 190，m + n = 194。"
+        ],
+        "zh-Hans": [
+          "先用 BC = CD 这个条件。因为 AB ∥ CD，∠ABD 与 ∠BDC 是内错角，所以相等；又 CB = CD 使三角形 BCD 为等腰，故 ∠DBC = ∠BDC。",
+          "把坐标放好会更直接：因为 AD ⊥ BD，取 D 为原点、BD 沿 x 轴，则 A 在 y 轴上。设 B = (d, 0)、A = (0, h)。",
+          "AB ∥ CD 表示 C 落在过 D 且平行 AB 的直线上，所以 C = t(d, −h) 对某个 t > 0。",
+          "由 CD = 43 得 t·√(d² + h²) = 43。记 L = √(d² + h²) = AB，则 t = 43/L。",
+          "由 BC = 43 得 (td − d)² + (th)² = 43²。代入 t = 43/L 并乘以 L²，得 d²(43 − L)² + 43²h² = 43²(d² + h²)。",
+          "右边展开后与左边的 43²h² 相消，剩下 d²(43 − L)² = 43²d²，因为 d ≠ 0 得 (43 − L)² = 43²，取 L > 0 的解得 L = 86。也就是 AB = 86 = 2 × CD。",
+          "因为 AB ∥ CD，三角形 AOB 与 COD 相似，相似比为 AB : CD = 2 : 1，所以 O 把 BD 分成 BO : OD = 2 : 1，即 OD = BD/3。",
+          "P 是 BD 中点，所以 OP = |BD/2 − BD/3| = BD/6。由 OP = 11 得 BD = 66。",
+          "最后在直角三角形 ABD 中（∠ADB = 90°）用勾股定理：AD² = AB² − BD² = 86² − 66² = 7396 − 4356 = 3040。",
+          "3040 = 16 × 190，所以 AD = 4√190，故 m = 4、n = 190，m + n = 194。"
+        ],
+        "en": [
+          "Start from BC = CD. Since AB ∥ CD, the angles ∠ABD and ∠BDC are alternate and hence equal, while CB = CD makes triangle BCD isosceles so ∠DBC = ∠BDC.",
+          "Coordinates make this more direct: since AD ⊥ BD, put D at the origin with BD along the x-axis, so A lies on the y-axis. Write B = (d, 0) and A = (0, h).",
+          "AB ∥ CD means C lies on the line through D parallel to AB, so C = t(d, −h) for some t > 0.",
+          "From CD = 43 we get t·√(d² + h²) = 43. Writing L = √(d² + h²) = AB gives t = 43/L.",
+          "From BC = 43 we get (td − d)² + (th)² = 43². Substituting t = 43/L and multiplying by L² gives d²(43 − L)² + 43²h² = 43²(d² + h²).",
+          "Expanding the right side cancels the 43²h² term, leaving d²(43 − L)² = 43²d². Since d ≠ 0 we get (43 − L)² = 43², and taking L > 0 gives L = 86, that is AB = 86 = 2 × CD.",
+          "Because AB ∥ CD, triangles AOB and COD are similar with ratio AB : CD = 2 : 1, so O divides BD with BO : OD = 2 : 1, giving OD = BD/3.",
+          "Since P is the midpoint of BD, OP = |BD/2 − BD/3| = BD/6, and OP = 11 gives BD = 66.",
+          "Finally, in right triangle ABD with ∠ADB = 90°, the Pythagorean theorem gives AD² = AB² − BD² = 86² − 66² = 7396 − 4356 = 3040.",
+          "Since 3040 = 16 × 190, we get AD = 4√190, so m = 4, n = 190 and m + n = 194."
+        ],
+        "ja": [
+          "まず BC = CD を使います。AB ∥ CD より ∠ABD と ∠BDC は錯角で等しく、CB = CD より三角形 BCD は二等辺なので ∠DBC = ∠BDC です。",
+          "座標を置くとより直接的です。AD ⊥ BD なので D を原点、BD を x 軸にとると A は y 軸上にあります。B = (d, 0)、A = (0, h) とします。",
+          "AB ∥ CD より C は D を通り AB に平行な直線上にあるので、ある t > 0 について C = t(d, −h)。",
+          "CD = 43 より t·√(d² + h²) = 43。L = √(d² + h²) = AB とおくと t = 43/L。",
+          "BC = 43 より (td − d)² + (th)² = 43²。t = 43/L を代入し L² を掛けると d²(43 − L)² + 43²h² = 43²(d² + h²)。",
+          "右辺を展開すると 43²h² が相殺し d²(43 − L)² = 43²d² が残ります。d ≠ 0 より (43 − L)² = 43²、L > 0 をとって L = 86、すなわち AB = 86 = 2 × CD。",
+          "AB ∥ CD より三角形 AOB と COD は相似で比は AB : CD = 2 : 1、よって O は BD を BO : OD = 2 : 1 に分け、OD = BD/3。",
+          "P は BD の中点なので OP = |BD/2 − BD/3| = BD/6。OP = 11 より BD = 66。",
+          "最後に ∠ADB = 90° の直角三角形 ABD で三平方の定理より AD² = AB² − BD² = 86² − 66² = 7396 − 4356 = 3040。",
+          "3040 = 16 × 190 なので AD = 4√190、よって m = 4、n = 190、m + n = 194。"
+        ]
       },
       "figure": {
         "type": "custom",
@@ -201,34 +446,115 @@
             "maxY": 5
           },
           "points": [
-            { "name": "A", "x": 0, "y": 4, "pos": "tl" },
-            { "name": "B", "x": 8, "y": 4, "pos": "tr" },
-            { "name": "C", "x": 10, "y": 0, "pos": "br" },
-            { "name": "D", "x": 4, "y": 0, "pos": "bl" },
-            { "name": "O", "x": 5.714, "y": 1.714, "pos": "l" },
-            { "name": "P", "x": 6, "y": 2, "pos": "r" }
+            {
+              "name": "A",
+              "x": 0,
+              "y": 4,
+              "pos": "tl"
+            },
+            {
+              "name": "B",
+              "x": 8,
+              "y": 4,
+              "pos": "tr"
+            },
+            {
+              "name": "C",
+              "x": 10,
+              "y": 0,
+              "pos": "br"
+            },
+            {
+              "name": "D",
+              "x": 4,
+              "y": 0,
+              "pos": "bl"
+            },
+            {
+              "name": "O",
+              "x": 5.714,
+              "y": 1.714,
+              "pos": "l"
+            },
+            {
+              "name": "P",
+              "x": 6,
+              "y": 2,
+              "pos": "r"
+            }
           ],
           "segments": [
-            { "from": "A", "to": "B", "style": "solid" },
-            { "from": "B", "to": "C", "style": "solid" },
-            { "from": "C", "to": "D", "style": "solid" },
-            { "from": "D", "to": "A", "style": "solid" },
-            { "from": "A", "to": "C", "style": "construction" },
-            { "from": "B", "to": "D", "style": "construction" }
+            {
+              "from": "A",
+              "to": "B",
+              "style": "solid"
+            },
+            {
+              "from": "B",
+              "to": "C",
+              "style": "solid"
+            },
+            {
+              "from": "C",
+              "to": "D",
+              "style": "solid"
+            },
+            {
+              "from": "D",
+              "to": "A",
+              "style": "solid"
+            },
+            {
+              "from": "A",
+              "to": "C",
+              "style": "construction"
+            },
+            {
+              "from": "B",
+              "to": "D",
+              "style": "construction"
+            }
           ],
           "rightAngles": [
-            { "at": "D", "from": "A", "to": "B" }
+            {
+              "at": "D",
+              "from": "A",
+              "to": "B"
+            }
           ]
         }
       },
       "answerMode": "multiple_choice",
       "options": {
-        "A": { "zh-Hant": "157", "zh-Hans": "157", "en": "157", "ja": "157" },
-        "B": { "zh-Hant": "194", "zh-Hans": "194", "en": "194", "ja": "194" },
-        "C": { "zh-Hant": "215", "zh-Hans": "215", "en": "215", "ja": "215" },
-        "D": { "zh-Hant": "132", "zh-Hans": "132", "en": "132", "ja": "132" }
+        "A": {
+          "zh-Hant": "157",
+          "zh-Hans": "157",
+          "en": "157",
+          "ja": "157"
+        },
+        "B": {
+          "zh-Hant": "194",
+          "zh-Hans": "194",
+          "en": "194",
+          "ja": "194"
+        },
+        "C": {
+          "zh-Hant": "215",
+          "zh-Hans": "215",
+          "en": "215",
+          "ja": "215"
+        },
+        "D": {
+          "zh-Hant": "132",
+          "zh-Hans": "132",
+          "en": "132",
+          "ja": "132"
+        }
       },
-      "correctAnswer": { "type": "choice", "value": "B" },
+      "correctAnswer": {
+        "type": "choice",
+        "value": "B"
+      },
       "source": {
         "type": "official_reference",
         "name": "AMC 12",
@@ -252,208 +578,541 @@
     },
     {
       "id": "geometry_grade12_foundation_004",
-      "reviewStatus": "pending",
       "topic": "geometry",
-      "subtopic": "inscribed_angle",
+      "subtopic": "ptolemy_theorem",
       "difficulty": "foundation",
       "levelStage": "grade12",
       "challengeTier": "foundation",
       "prompt": {
-        "zh-Hant": "在圓 O 上，弧 AB 所對的圓心角 ∠AOB = 100°。點 C 在圓上且不在小弧 AB 上，求圓周角 ∠ACB。",
-        "zh-Hans": "在圆 O 上，弧 AB 所对的圆心角 ∠AOB = 100°。点 C 在圆上且不在小弧 AB 上，求圆周角 ∠ACB。",
-        "en": "On circle O, the central angle ∠AOB subtending arc AB is 100°. Point C lies on the circle but not on the minor arc AB. Find the inscribed angle ∠ACB.",
-        "ja": "円 O において、弧 AB に対する中心角 ∠AOB = 100° です。点 C は円周上にあり、小弧 AB 上にはありません。円周角 ∠ACB を求めなさい。"
+        "zh-Hant": "圓內接四邊形 ABCD 的四邊長依序是 AB = 3、BC = 4、CD = 5、DA = 6。求兩條對角線長度的乘積 AC × BD。",
+        "zh-Hans": "圆内接四边形 ABCD 的四边长依序是 AB = 3、BC = 4、CD = 5、DA = 6。求两条对角线长度的乘积 AC × BD。",
+        "en": "A cyclic quadrilateral ABCD has sides AB = 3, BC = 4, CD = 5 and DA = 6. Find the product AC × BD of its diagonals.",
+        "ja": "円に内接する四角形 ABCD の辺の長さが AB = 3、BC = 4、CD = 5、DA = 6 です。対角線の長さの積 AC × BD を求めなさい。"
       },
       "answer": {
-        "zh-Hant": "答案是 50°。",
-        "zh-Hans": "答案是 50°。",
-        "en": "The answer is 50°.",
-        "ja": "答えは 50° です。"
+        "zh-Hant": "答案是 39。",
+        "zh-Hans": "答案是 39。",
+        "en": "The answer is 39.",
+        "ja": "答えは 39 です。"
       },
       "solutionSteps": {
-        "zh-Hant": ["圓周角所對的是同一條弧 AB。", "同弧所對的圓周角等於圓心角的一半。", "因此 ∠ACB = 100° ÷ 2 = 50°。"],
-        "zh-Hans": ["圆周角所对的是同一条弧 AB。", "同弧所对的圆周角等于圆心角的一半。", "因此 ∠ACB = 100° ÷ 2 = 50°。"],
-        "en": ["The inscribed angle ∠ACB subtends the same arc AB as central angle ∠AOB.", "An inscribed angle is half the corresponding central angle.", "So ∠ACB = 100°/2 = 50°."],
-        "ja": ["円周角 ∠ACB は中心角 ∠AOB と同じ弧 AB を見ています。", "同じ弧に対する円周角は中心角の半分です。", "したがって ∠ACB = 100° ÷ 2 = 50° です。"]
+        "zh-Hant": [
+          "題目只給四個邊長就要求兩條對角線的乘積，這正是托勒密定理適用的形式。",
+          "托勒密定理說：圓內接四邊形中，兩條對角線的乘積等於兩組對邊乘積之和。",
+          "寫成式子就是 AC × BD = AB × CD + BC × DA。",
+          "注意配對方式：AB 要配對邊 CD、BC 要配對邊 DA，配錯就會得到錯誤答案。",
+          "代入數值：AB × CD = 3 × 5 = 15。",
+          "BC × DA = 4 × 6 = 24。",
+          "所以 AC × BD = 15 + 24 = 39。",
+          "驗算：由 Brahmagupta 公式可得此四邊形面積為 6√10、外接圓半徑約 3.2873；依此在圓上排出四個頂點後直接量得 AC ≈ 5.9402、BD ≈ 6.5655，乘積為 39.000000，與定理結果一致。"
+        ],
+        "zh-Hans": [
+          "题目只给四个边长就要求两条对角线的乘积，这正是托勒密定理适用的形式。",
+          "托勒密定理说：圆内接四边形中，两条对角线的乘积等于两组对边乘积之和。",
+          "写成式子就是 AC × BD = AB × CD + BC × DA。",
+          "注意配对方式：AB 要配对边 CD、BC 要配对边 DA，配错就会得到错误答案。",
+          "代入数值：AB × CD = 3 × 5 = 15。",
+          "BC × DA = 4 × 6 = 24。",
+          "所以 AC × BD = 15 + 24 = 39。",
+          "验算：由 Brahmagupta 公式可得此四边形面积为 6√10、外接圆半径约 3.2873；依此在圆上排出四个顶点后直接量得 AC ≈ 5.9402、BD ≈ 6.5655，乘积为 39.000000，与定理结果一致。"
+        ],
+        "en": [
+          "The problem gives only the four side lengths and asks for the product of the diagonals, which is exactly the setting for Ptolemy's theorem.",
+          "Ptolemy's theorem states that in a cyclic quadrilateral the product of the diagonals equals the sum of the products of the two pairs of opposite sides.",
+          "In symbols, AC × BD = AB × CD + BC × DA.",
+          "Note the pairing: AB pairs with the opposite side CD and BC with the opposite side DA; pairing them wrongly gives a wrong answer.",
+          "Substituting: AB × CD = 3 × 5 = 15.",
+          "And BC × DA = 4 × 6 = 24.",
+          "Therefore AC × BD = 15 + 24 = 39.",
+          "Check: Brahmagupta's formula gives area 6√10 and circumradius about 3.2873; placing the four vertices on that circle and measuring directly gives AC ≈ 5.9402 and BD ≈ 6.5655, whose product is 39.000000, matching the theorem."
+        ],
+        "ja": [
+          "4 辺の長さだけから対角線の積を求める形は、まさにトレミーの定理が使える設定です。",
+          "トレミーの定理：円に内接する四角形では、対角線の積が 2 組の対辺の積の和に等しくなります。",
+          "式で書くと AC × BD = AB × CD + BC × DA。",
+          "組み合わせに注意します。AB は対辺 CD と、BC は対辺 DA と組みます。誤って組むと答えが変わります。",
+          "代入すると AB × CD = 3 × 5 = 15。",
+          "また BC × DA = 4 × 6 = 24。",
+          "よって AC × BD = 15 + 24 = 39。",
+          "検算：ブラーマグプタの公式より面積は 6√10、外接円の半径は約 3.2873。その円上に 4 頂点を並べて直接測ると AC ≈ 5.9402、BD ≈ 6.5655 で積は 39.000000 となり定理と一致します。"
+        ]
       },
       "figure": {
         "type": "custom",
         "kind": "geometry_scene",
         "params": {
           "bounds": {
-            "minX": -6,
-            "minY": -6,
-            "maxX": 6,
-            "maxY": 6
+            "minX": -3.9,
+            "minY": -3.9,
+            "maxX": 3.9,
+            "maxY": 3.9
           },
           "points": [
-            { "name": "O", "x": 0, "y": 0, "pos": "tr" },
-            { "name": "A", "x": -3.83, "y": 3.214, "pos": "tl" },
-            { "name": "B", "x": 3.83, "y": 3.214, "pos": "tr" },
-            { "name": "C", "x": -0.868, "y": -4.924, "pos": "b" }
+            {
+              "name": "A",
+              "x": 3.2873,
+              "y": 0,
+              "pos": "r"
+            },
+            {
+              "name": "B",
+              "x": 1.9184,
+              "y": 2.6695,
+              "pos": "tr"
+            },
+            {
+              "name": "C",
+              "x": -2.0797,
+              "y": 2.5458,
+              "pos": "tl"
+            },
+            {
+              "name": "D",
+              "x": -2.1884,
+              "y": -2.453,
+              "pos": "bl"
+            }
           ],
           "segments": [
-            { "from": "O", "to": "A", "style": "construction" },
-            { "from": "O", "to": "B", "style": "construction" },
-            { "from": "C", "to": "A", "style": "solid" },
-            { "from": "C", "to": "B", "style": "solid" }
+            {
+              "from": "A",
+              "to": "B",
+              "style": "solid"
+            },
+            {
+              "from": "B",
+              "to": "C",
+              "style": "solid"
+            },
+            {
+              "from": "C",
+              "to": "D",
+              "style": "solid"
+            },
+            {
+              "from": "D",
+              "to": "A",
+              "style": "solid"
+            },
+            {
+              "from": "A",
+              "to": "C",
+              "style": "construction"
+            },
+            {
+              "from": "B",
+              "to": "D",
+              "style": "construction"
+            }
           ],
           "arcs": [
-            { "cx": 0, "cy": 0, "r": 5, "from": 0, "to": 360 }
-          ],
-          "angleMarks": [
-            { "at": "O", "from": "A", "to": "B", "label": "100°" }
-          ]
-        }
-      },
-      "answerMode": "integer_input",
-      "correctAnswer": { "type": "integer", "value": "50" },
-      "inputConstraints": { "allowNegative": false, "maxDigits": 2 },
-      "source": {
-        "type": "editorial_original",
-        "name": "MathSpring Editorial",
-        "reference": "Upper geometry expansion set G6",
-        "displayText": "MathSpring Editorial Original"
-      },
-      "olympiadTaxonomy": {
-        "topic": "幾何",
-        "topicCode": "geometry",
-        "subtopic": "圓周角",
-        "subtopicCode": "inscribed_angle"
-      }
-    },
-    {
-      "id": "geometry_grade12_foundation_005",
-      "reviewStatus": "pending",
-      "topic": "geometry",
-      "subtopic": "triangle_inradius",
-      "difficulty": "foundation",
-      "levelStage": "grade12",
-      "challengeTier": "foundation",
-      "prompt": {
-        "zh-Hant": "三角形三邊長分別是 13、14、15。求它的內切圓半徑。",
-        "zh-Hans": "三角形三边长分别是 13、14、15。求它的内切圆半径。",
-        "en": "A triangle has side lengths 13, 14, and 15. Find its inradius.",
-        "ja": "三角形の 3 辺の長さが 13、14、15 です。内接円の半径を求めなさい。"
-      },
-      "answer": {
-        "zh-Hant": "答案是 4。",
-        "zh-Hans": "答案是 4。",
-        "en": "The answer is 4.",
-        "ja": "答えは 4 です。"
-      },
-      "solutionSteps": {
-        "zh-Hant": ["半周長 s = (13 + 14 + 15) ÷ 2 = 21。", "由海龍公式，面積 = √(21×8×7×6) = 84。", "內切圓半徑 r = 面積 ÷ 半周長 = 84 ÷ 21 = 4。"],
-        "zh-Hans": ["半周长 s = (13 + 14 + 15) ÷ 2 = 21。", "由海龙公式，面积 = √(21×8×7×6) = 84。", "内切圆半径 r = 面积 ÷ 半周长 = 84 ÷ 21 = 4。"],
-        "en": ["The semiperimeter is s = (13 + 14 + 15) / 2 = 21.", "By Heron's formula, the area is √(21 × 8 × 7 × 6) = 84.", "So the inradius is area / semiperimeter = 84 / 21 = 4."],
-        "ja": ["半周長は s = (13 + 14 + 15) ÷ 2 = 21。", "ヘロンの公式より面積は √(21×8×7×6) = 84。", "したがって内接円の半径は 84 ÷ 21 = 4 です。"]
-      },
-      "figure": {
-        "type": "custom",
-        "kind": "shape_diagram",
-        "params": {
-          "shape": "triangle",
-          "labels": {
-            "left": "13",
-            "right": "14",
-            "bottom": "15"
-          }
-        }
-      },
-      "answerMode": "integer_input",
-      "correctAnswer": { "type": "integer", "value": "4" },
-      "inputConstraints": { "allowNegative": false, "maxDigits": 1 },
-      "source": {
-        "type": "editorial_original",
-        "name": "MathSpring Editorial",
-        "reference": "Upper geometry expansion set G15",
-        "displayText": "MathSpring Editorial Original"
-      },
-      "olympiadTaxonomy": {
-        "topic": "幾何",
-        "topicCode": "geometry",
-        "subtopic": "內切圓半徑",
-        "subtopicCode": "triangle_inradius"
-      }
-    },
-    {
-      "id": "geometry_grade12_foundation_006",
-      "reviewStatus": "pending",
-      "topic": "geometry",
-      "subtopic": "central_angle_chord",
-      "difficulty": "foundation",
-      "levelStage": "grade12",
-      "challengeTier": "foundation",
-      "prompt": {
-        "zh-Hant": "在半徑為 6 的圓中，一條弦所對的圓心角是 120°。求這條弦的長度。",
-        "zh-Hans": "在半径为 6 的圆中，一条弦所对的圆心角是 120°。求这条弦的长度。",
-        "en": "In a circle of radius 6, a chord subtends a central angle of 120°. Find the length of the chord.",
-        "ja": "半径 6 の円で、ある弦に対する中心角が 120° です。この弦の長さを求めなさい。"
-      },
-      "answer": {
-        "zh-Hant": "答案是 6√3。",
-        "zh-Hans": "答案是 6√3。",
-        "en": "The answer is 6√3.",
-        "ja": "答えは 6√3 です。"
-      },
-      "solutionSteps": {
-        "zh-Hant": ["把圓心與弦兩端連接，得到等腰三角形。", "弦長 = 2r·sin(120°/2) = 2×6×sin60°。", "所以弦長 = 12×(√3/2) = 6√3。"],
-        "zh-Hans": ["把圆心与弦两端连接，得到等腰三角形。", "弦长 = 2r·sin(120°/2) = 2×6×sin60°。", "所以弦长 = 12×(√3/2) = 6√3。"],
-        "en": ["Join the center to the endpoints of the chord to form an isosceles triangle.", "The chord length is 2r sin(120°/2) = 2 × 6 × sin 60°.", "So the chord length is 12 × (√3/2) = 6√3."],
-        "ja": ["中心と弦の両端を結ぶと二等辺三角形になります。", "弦の長さは 2r sin(120°/2) = 2 × 6 × sin 60°。", "したがって 12 × (√3/2) = 6√3 です。"]
-      },
-      "figure": {
-        "type": "custom",
-        "kind": "geometry_scene",
-        "params": {
-          "bounds": {
-            "minX": -7,
-            "minY": -7,
-            "maxX": 7,
-            "maxY": 7
-          },
-          "points": [
-            { "name": "O", "x": 0, "y": 0, "pos": "tr" },
-            { "name": "A", "x": -5.196, "y": 3, "pos": "tl" },
-            { "name": "B", "x": 5.196, "y": 3, "pos": "tr" }
-          ],
-          "segments": [
-            { "from": "O", "to": "A", "style": "solid" },
-            { "from": "O", "to": "B", "style": "solid" },
-            { "from": "A", "to": "B", "style": "solid" }
-          ],
-          "arcs": [
-            { "cx": 0, "cy": 0, "r": 6, "from": 0, "to": 360 }
-          ],
-          "angleMarks": [
-            { "at": "O", "from": "A", "to": "B", "label": "120°" }
+            {
+              "cx": 0,
+              "cy": 0,
+              "r": 3.2873,
+              "from": 0,
+              "to": 360
+            }
           ]
         }
       },
       "answerMode": "multiple_choice",
       "options": {
-        "A": { "zh-Hant": "3√3", "zh-Hans": "3√3", "en": "3√3", "ja": "3√3" },
-        "B": { "zh-Hant": "6√2", "zh-Hans": "6√2", "en": "6√2", "ja": "6√2" },
-        "C": { "zh-Hant": "6√3", "zh-Hans": "6√3", "en": "6√3", "ja": "6√3" },
-        "D": { "zh-Hant": "12", "zh-Hans": "12", "en": "12", "ja": "12" }
+        "A": {
+          "zh-Hant": "27",
+          "zh-Hans": "27",
+          "en": "27",
+          "ja": "27"
+        },
+        "B": {
+          "zh-Hant": "35",
+          "zh-Hans": "35",
+          "en": "35",
+          "ja": "35"
+        },
+        "C": {
+          "zh-Hant": "39",
+          "zh-Hans": "39",
+          "en": "39",
+          "ja": "39"
+        },
+        "D": {
+          "zh-Hant": "45",
+          "zh-Hans": "45",
+          "en": "45",
+          "ja": "45"
+        }
       },
-      "correctAnswer": { "type": "choice", "value": "C" },
+      "correctAnswer": {
+        "type": "choice",
+        "value": "C"
+      },
       "source": {
-        "type": "editorial_original",
-        "name": "MathSpring Editorial",
-        "reference": "Upper geometry expansion set G16",
-        "displayText": "MathSpring Editorial Original"
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "由圓內接四邊形的四邊長求對角線乘積的托勒密定理應用題型",
+        "notes": "設計依據：關鍵在正確辨認對邊配對（AB↔CD、BC↔DA），配錯即得錯誤答案；誘答項 27 對應誤配成 AB×BC + CD×DA、35 對應 AB×DA + BC×CD。圖中四頂點座標已由 Brahmagupta 面積與外接圓半徑反算，並驗證四邊長恰為 3、4、5、6 且圓心角總和為 360°。屬同水準原創改寫，非抄錄特定官方題。原 004（圓心角 100° 求圓周角）只需除以 2，屬兩步裸題，且來源為自製 editorial 暫代出處。",
+        "displayText": "改寫題（托勒密定理）"
       },
       "olympiadTaxonomy": {
         "topic": "幾何",
         "topicCode": "geometry",
-        "subtopic": "圓心角與弦長",
-        "subtopicCode": "central_angle_chord"
-      }
+        "subtopic": "托勒密定理",
+        "subtopicCode": "ptolemy_theorem"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "geometry_grade12_foundation_005",
+      "topic": "geometry",
+      "subtopic": "incenter_coordinate",
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "座標平面上的三角形，三個頂點是 O(0, 0)、B(8, 0)、A(0, 6)。設它的內切圓圓心為 I，求 OI²（即 I 到原點距離的平方）。",
+        "zh-Hans": "坐标平面上的三角形，三个顶点是 O(0, 0)、B(8, 0)、A(0, 6)。设它的内切圆圆心为 I，求 OI²（即 I 到原点距离的平方）。",
+        "en": "A triangle in the coordinate plane has vertices O(0, 0), B(8, 0) and A(0, 6). Let I be the centre of its inscribed circle. Find OI², the square of the distance from I to the origin.",
+        "ja": "座標平面上の三角形の頂点が O(0, 0)、B(8, 0)、A(0, 6) です。内接円の中心を I とするとき、OI²（I と原点の距離の 2 乗）を求めなさい。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 8。",
+        "zh-Hans": "答案是 8。",
+        "en": "The answer is 8.",
+        "ja": "答えは 8 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "先看三角形的形狀：兩股分別沿 x 軸與 y 軸，所以 ∠O = 90°，這是一個直角三角形。",
+          "兩股長分別是 OB = 8 與 OA = 6，由畢氏定理得斜邊 AB = √(64 + 36) = √100 = 10。",
+          "直角三角形的內切圓半徑公式是 r = (兩股和 − 斜邊) ÷ 2。",
+          "代入得 r = (6 + 8 − 10) ÷ 2 = 4 ÷ 2 = 2。",
+          "接著定內心的位置。內切圓同時與兩股相切，而兩股就落在兩條座標軸上，所以圓心到 x 軸與 y 軸的距離都等於 r。",
+          "因為三角形在第一象限，內心座標就是 (r, r) = (2, 2)。",
+          "所以 OI² = 2² + 2² = 4 + 4 = 8。",
+          "驗算：內心 (2, 2) 到斜邊 3x + 4y = 24（由 x/8 + y/6 = 1 化簡）的距離是 |6 + 8 − 24| ÷ 5 = 10 ÷ 5 = 2 = r，與到兩軸的距離一致。"
+        ],
+        "zh-Hans": [
+          "先看三角形的形状：两股分别沿 x 轴与 y 轴，所以 ∠O = 90°，这是一个直角三角形。",
+          "两股长分别是 OB = 8 与 OA = 6，由勾股定理得斜边 AB = √(64 + 36) = √100 = 10。",
+          "直角三角形的内切圆半径公式是 r = (两股和 − 斜边) ÷ 2。",
+          "代入得 r = (6 + 8 − 10) ÷ 2 = 4 ÷ 2 = 2。",
+          "接着定内心的位置。内切圆同时与两股相切，而两股就落在两条坐标轴上，所以圆心到 x 轴与 y 轴的距离都等于 r。",
+          "因为三角形在第一象限，内心坐标就是 (r, r) = (2, 2)。",
+          "所以 OI² = 2² + 2² = 4 + 4 = 8。",
+          "验算：内心 (2, 2) 到斜边 3x + 4y = 24（由 x/8 + y/6 = 1 化简）的距离是 |6 + 8 − 24| ÷ 5 = 10 ÷ 5 = 2 = r，与到两轴的距离一致。"
+        ],
+        "en": [
+          "First look at the shape: the two legs lie along the x-axis and the y-axis, so ∠O = 90° and this is a right triangle.",
+          "The legs are OB = 8 and OA = 6, so the Pythagorean theorem gives the hypotenuse AB = √(64 + 36) = √100 = 10.",
+          "For a right triangle the inradius is r = (sum of the legs − hypotenuse) ÷ 2.",
+          "Substituting gives r = (6 + 8 − 10) ÷ 2 = 4 ÷ 2 = 2.",
+          "Now locate the incentre. The incircle touches both legs, and those legs lie on the coordinate axes, so the centre is at distance r from both the x-axis and the y-axis.",
+          "Since the triangle lies in the first quadrant, the incentre is at (r, r) = (2, 2).",
+          "Therefore OI² = 2² + 2² = 4 + 4 = 8.",
+          "Check: the distance from (2, 2) to the hypotenuse 3x + 4y = 24 (from x/8 + y/6 = 1) is |6 + 8 − 24| ÷ 5 = 10 ÷ 5 = 2 = r, matching the distances to the axes."
+        ],
+        "ja": [
+          "まず形を確認します。2 辺が x 軸と y 軸に沿っているので ∠O = 90°、直角三角形です。",
+          "2 辺は OB = 8、OA = 6 なので、三平方の定理より斜辺は AB = √(64 + 36) = √100 = 10。",
+          "直角三角形の内接円の半径は r = (2 辺の和 − 斜辺) ÷ 2 で求まります。",
+          "代入すると r = (6 + 8 − 10) ÷ 2 = 4 ÷ 2 = 2。",
+          "次に内心の位置を決めます。内接円は 2 辺に接し、その 2 辺は座標軸上にあるので、中心は x 軸からも y 軸からも距離 r です。",
+          "三角形は第 1 象限にあるので、内心の座標は (r, r) = (2, 2)。",
+          "よって OI² = 2² + 2² = 4 + 4 = 8。",
+          "検算：(2, 2) から斜辺 3x + 4y = 24（x/8 + y/6 = 1 より）までの距離は |6 + 8 − 24| ÷ 5 = 10 ÷ 5 = 2 = r で、両軸までの距離と一致します。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "geometry_scene",
+        "params": {
+          "bounds": {
+            "minX": -1.4,
+            "minY": -1.4,
+            "maxX": 9.4,
+            "maxY": 7.4
+          },
+          "points": [
+            {
+              "name": "O",
+              "x": 0,
+              "y": 0,
+              "pos": "bl"
+            },
+            {
+              "name": "B",
+              "x": 8,
+              "y": 0,
+              "pos": "br"
+            },
+            {
+              "name": "A",
+              "x": 0,
+              "y": 6,
+              "pos": "tl"
+            },
+            {
+              "name": "I",
+              "x": 2,
+              "y": 2,
+              "pos": "r"
+            }
+          ],
+          "segments": [
+            {
+              "from": "O",
+              "to": "B",
+              "style": "solid"
+            },
+            {
+              "from": "B",
+              "to": "A",
+              "style": "solid"
+            },
+            {
+              "from": "A",
+              "to": "O",
+              "style": "solid"
+            }
+          ],
+          "arcs": [
+            {
+              "cx": 2,
+              "cy": 2,
+              "r": 2,
+              "from": 0,
+              "to": 360
+            }
+          ],
+          "rightAngles": [
+            {
+              "at": "O",
+              "from": "B",
+              "to": "A"
+            }
+          ]
+        }
+      },
+      "answerMode": "multiple_choice",
+      "options": {
+        "A": {
+          "zh-Hant": "4",
+          "zh-Hans": "4",
+          "en": "4",
+          "ja": "4"
+        },
+        "B": {
+          "zh-Hant": "8",
+          "zh-Hans": "8",
+          "en": "8",
+          "ja": "8"
+        },
+        "C": {
+          "zh-Hant": "10",
+          "zh-Hans": "10",
+          "en": "10",
+          "ja": "10"
+        },
+        "D": {
+          "zh-Hant": "16",
+          "zh-Hans": "16",
+          "en": "16",
+          "ja": "16"
+        }
+      },
+      "correctAnswer": {
+        "type": "choice",
+        "value": "B"
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "座標中的直角三角形內切圓：由內切圓與兩軸相切定出內心座標的競賽題型",
+        "notes": "設計依據：轉折在於察覺兩股恰好落在座標軸上，因此內心座標直接就是 (r, r)，不必套一般的內心加權公式；詳解另以點到斜邊距離做獨立驗算。誘答項 4 對應誤答 r²、16 對應誤把內心當成 (r+r, ...) 之類。圖中內切圓 (2,2) 半徑 2 已驗證與三邊皆相切。屬同水準原創改寫，非抄錄特定官方題。原 005（13-14-15 三角形求內切圓半徑）只需套海龍公式再除，屬三步裸題；且其 figure 為 `shape_diagram` 貼字圖，違反紅線 7，來源為自製 editorial 暫代出處。",
+        "displayText": "改寫題（座標三角形的內心）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "幾何",
+        "topicCode": "geometry",
+        "subtopic": "座標三角形的內心",
+        "subtopicCode": "incenter_coordinate"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "geometry_grade12_foundation_006",
+      "topic": "geometry",
+      "subtopic": "law_of_sines",
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "三角形 ABC 中，∠A = 45°、∠B = 60°，且 ∠A 的對邊 a = 6。設 ∠B 的對邊為 b，求 b²。",
+        "zh-Hans": "三角形 ABC 中，∠A = 45°、∠B = 60°，且 ∠A 的对边 a = 6。设 ∠B 的对边为 b，求 b²。",
+        "en": "In triangle ABC, ∠A = 45° and ∠B = 60°, and the side a opposite ∠A has length 6. If b is the side opposite ∠B, find b².",
+        "ja": "三角形 ABC で ∠A = 45°、∠B = 60°、∠A の対辺 a = 6 です。∠B の対辺を b とするとき、b² を求めなさい。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 54。",
+        "zh-Hans": "答案是 54。",
+        "en": "The answer is 54.",
+        "ja": "答えは 54 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "已知兩個角與其中一個角的對邊，這正是正弦定理的標準用法。",
+          "正弦定理說：在任意三角形中 a ÷ sin A = b ÷ sin B = c ÷ sin C。",
+          "所以 b = a × sin B ÷ sin A。",
+          "代入 a = 6、∠A = 45°、∠B = 60°：b = 6 × sin 60° ÷ sin 45°。",
+          "sin 60° = √3/2、sin 45° = √2/2，所以 b = 6 × (√3/2) ÷ (√2/2) = 6 × √3 ÷ √2。",
+          "有理化得 b = 6√3 ÷ √2 = 6√3 × √2 ÷ 2 = 3√6。",
+          "因此 b² = (3√6)² = 9 × 6 = 54。",
+          "驗算：數值上 b = 3√6 ≈ 7.348469，而 6 × sin60° ÷ sin45° ≈ 7.348469，兩者一致；又 b² ≈ 54.000000。"
+        ],
+        "zh-Hans": [
+          "已知两个角与其中一个角的对边，这正是正弦定理的标准用法。",
+          "正弦定理说：在任意三角形中 a ÷ sin A = b ÷ sin B = c ÷ sin C。",
+          "所以 b = a × sin B ÷ sin A。",
+          "代入 a = 6、∠A = 45°、∠B = 60°：b = 6 × sin 60° ÷ sin 45°。",
+          "sin 60° = √3/2、sin 45° = √2/2，所以 b = 6 × (√3/2) ÷ (√2/2) = 6 × √3 ÷ √2。",
+          "有理化得 b = 6√3 ÷ √2 = 6√3 × √2 ÷ 2 = 3√6。",
+          "因此 b² = (3√6)² = 9 × 6 = 54。",
+          "验算：数值上 b = 3√6 ≈ 7.348469，而 6 × sin60° ÷ sin45° ≈ 7.348469，两者一致；又 b² ≈ 54.000000。"
+        ],
+        "en": [
+          "Two angles and the side opposite one of them are given, which is exactly the standard setting for the law of sines.",
+          "The law of sines states that in any triangle a ÷ sin A = b ÷ sin B = c ÷ sin C.",
+          "Hence b = a × sin B ÷ sin A.",
+          "Substituting a = 6, ∠A = 45° and ∠B = 60° gives b = 6 × sin 60° ÷ sin 45°.",
+          "Since sin 60° = √3/2 and sin 45° = √2/2, we get b = 6 × (√3/2) ÷ (√2/2) = 6√3 ÷ √2.",
+          "Rationalising: b = 6√3 ÷ √2 = 6√3 × √2 ÷ 2 = 3√6.",
+          "Therefore b² = (3√6)² = 9 × 6 = 54.",
+          "Check: numerically b = 3√6 ≈ 7.348469 and 6 × sin 60° ÷ sin 45° ≈ 7.348469 agree, and b² ≈ 54.000000."
+        ],
+        "ja": [
+          "2 つの角と、そのうち 1 つの対辺が与えられており、これはまさに正弦定理の標準的な使い方です。",
+          "正弦定理：任意の三角形で a ÷ sin A = b ÷ sin B = c ÷ sin C。",
+          "よって b = a × sin B ÷ sin A。",
+          "a = 6、∠A = 45°、∠B = 60° を代入すると b = 6 × sin 60° ÷ sin 45°。",
+          "sin 60° = √3/2、sin 45° = √2/2 なので b = 6 × (√3/2) ÷ (√2/2) = 6√3 ÷ √2。",
+          "有理化すると b = 6√3 ÷ √2 = 6√3 × √2 ÷ 2 = 3√6。",
+          "したがって b² = (3√6)² = 9 × 6 = 54。",
+          "検算：数値では b = 3√6 ≈ 7.348469、6 × sin60° ÷ sin45° ≈ 7.348469 で一致し、b² ≈ 54.000000 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "geometry_scene",
+        "params": {
+          "bounds": {
+            "minX": -1.2,
+            "minY": -1.2,
+            "maxX": 9.4,
+            "maxY": 6.6
+          },
+          "points": [
+            {
+              "name": "A",
+              "x": 0,
+              "y": 0,
+              "pos": "bl"
+            },
+            {
+              "name": "B",
+              "x": 8.1962,
+              "y": 0,
+              "pos": "br"
+            },
+            {
+              "name": "C",
+              "x": 5.1962,
+              "y": 5.1962,
+              "pos": "t"
+            }
+          ],
+          "segments": [
+            {
+              "from": "A",
+              "to": "B",
+              "style": "solid"
+            },
+            {
+              "from": "B",
+              "to": "C",
+              "style": "solid"
+            },
+            {
+              "from": "C",
+              "to": "A",
+              "style": "solid"
+            }
+          ],
+          "angleMarks": [
+            {
+              "at": "A",
+              "from": "B",
+              "to": "C",
+              "label": "45°"
+            },
+            {
+              "at": "B",
+              "from": "C",
+              "to": "A",
+              "label": "60°"
+            }
+          ]
+        }
+      },
+      "answerMode": "multiple_choice",
+      "options": {
+        "A": {
+          "zh-Hant": "36",
+          "zh-Hans": "36",
+          "en": "36",
+          "ja": "36"
+        },
+        "B": {
+          "zh-Hant": "48",
+          "zh-Hans": "48",
+          "en": "48",
+          "ja": "48"
+        },
+        "C": {
+          "zh-Hant": "54",
+          "zh-Hans": "54",
+          "en": "54",
+          "ja": "54"
+        },
+        "D": {
+          "zh-Hant": "72",
+          "zh-Hans": "72",
+          "en": "72",
+          "ja": "72"
+        }
+      },
+      "correctAnswer": {
+        "type": "choice",
+        "value": "C"
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "已知兩角與一對邊，用正弦定理求另一對邊並化為有理形式的競賽題型",
+        "notes": "設計依據：問 b² 而非 b，可避免無理數作答（phase 1 只允許整數與選擇），同時仍需完成 6√3 ÷ √2 的有理化。誘答項 72 對應把 sin60/sin45 誤算成 √3、36 對應誤以為 b = a。圖中座標已驗證 BC = 6 且兩角分別為 45° 與 60°。屬同水準原創改寫，非抄錄特定官方題。原 006（半徑 6、圓心角 120° 求弦長）只需套一次弦長公式，屬三步裸題，且來源為自製 editorial 暫代出處。",
+        "displayText": "改寫題（正弦定理）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "幾何",
+        "topicCode": "geometry",
+        "subtopic": "正弦定理",
+        "subtopicCode": "law_of_sines"
+      },
+      "reviewStatus": "ok"
     },
     {
       "id": "geometry_grade12_foundation_007",
-      "reviewStatus": "pending",
+      "reviewStatus": "ok",
       "topic": "geometry",
       "subtopic": "inscribed_square_triangle_ratio",
       "difficulty": "foundation",
@@ -472,10 +1131,46 @@
         "ja": "答えは 2 - √3 です。"
       },
       "solutionSteps": {
-        "zh-Hant": ["設陰影直角三角形的兩股為 x、y，且 x ≤ y。", "外正方形邊長是 √3，所以 x + y = √3。", "內正方形邊長是 √2，因此三角形斜邊長是 √2，所以 x² + y² = 2。", "外減內的面積是 1，平均分成四個全等三角形，所以每個三角形面積是 1/4。", "因此 xy/2 = 1/4，得到 xy = 1/2。", "由 (y - x)² = (x + y)² - 4xy = 3 - 2 = 1，可得 y - x = 1。", "解聯立後 x = (√3 - 1)/2，y = (√3 + 1)/2。", "所以 x/y = (√3 - 1)/(√3 + 1) = 2 - √3。"],
-        "zh-Hans": ["设阴影直角三角形的两股为 x、y，且 x ≤ y。", "外正方形边长是 √3，所以 x + y = √3。", "内正方形边长是 √2，因此三角形斜边长是 √2，所以 x² + y² = 2。", "外减内的面积是 1，平均分成四个全等三角形，所以每个三角形面积是 1/4。", "因此 xy/2 = 1/4，得到 xy = 1/2。", "由 (y - x)² = (x + y)² - 4xy = 3 - 2 = 1，可得 y - x = 1。", "解联立后 x = (√3 - 1)/2，y = (√3 + 1)/2。", "所以 x/y = (√3 - 1)/(√3 + 1) = 2 - √3。"],
-        "en": ["Let the legs of the right triangle be x and y with x ≤ y.", "The outer square has side length √3, so x + y = √3.", "The inner square has side length √2, which is the hypotenuse, so x² + y² = 2.", "The area difference between the two squares is 1, split equally among four congruent triangles, so each triangle has area 1/4.", "Hence xy/2 = 1/4, so xy = 1/2.", "Then (y - x)² = (x + y)² - 4xy = 3 - 2 = 1, so y - x = 1.", "Solving gives x = (√3 - 1)/2 and y = (√3 + 1)/2.", "Therefore x/y = (√3 - 1)/(√3 + 1) = 2 - √3."],
-        "ja": ["直角三角形の 2 つの脚を x, y（x ≤ y）とします。", "外側の正方形の一辺は √3 なので x + y = √3。", "内側の正方形の一辺は √2 で、これは斜辺に当たるので x² + y² = 2。", "面積差は 1 で、それが 4 つの合同三角形に等分されるから、各三角形の面積は 1/4。", "したがって xy/2 = 1/4、つまり xy = 1/2。", "すると (y - x)² = (x + y)² - 4xy = 3 - 2 = 1 なので y - x = 1。", "これを解くと x = (√3 - 1)/2、y = (√3 + 1)/2。", "よって x/y = (√3 - 1)/(√3 + 1) = 2 - √3。"]
+        "zh-Hant": [
+          "設陰影直角三角形的兩股為 x、y，且 x ≤ y。",
+          "外正方形邊長是 √3，所以 x + y = √3。",
+          "內正方形邊長是 √2，因此三角形斜邊長是 √2，所以 x² + y² = 2。",
+          "外減內的面積是 1，平均分成四個全等三角形，所以每個三角形面積是 1/4。",
+          "因此 xy/2 = 1/4，得到 xy = 1/2。",
+          "由 (y - x)² = (x + y)² - 4xy = 3 - 2 = 1，可得 y - x = 1。",
+          "解聯立後 x = (√3 - 1)/2，y = (√3 + 1)/2。",
+          "所以 x/y = (√3 - 1)/(√3 + 1) = 2 - √3。"
+        ],
+        "zh-Hans": [
+          "设阴影直角三角形的两股为 x、y，且 x ≤ y。",
+          "外正方形边长是 √3，所以 x + y = √3。",
+          "内正方形边长是 √2，因此三角形斜边长是 √2，所以 x² + y² = 2。",
+          "外减内的面积是 1，平均分成四个全等三角形，所以每个三角形面积是 1/4。",
+          "因此 xy/2 = 1/4，得到 xy = 1/2。",
+          "由 (y - x)² = (x + y)² - 4xy = 3 - 2 = 1，可得 y - x = 1。",
+          "解联立后 x = (√3 - 1)/2，y = (√3 + 1)/2。",
+          "所以 x/y = (√3 - 1)/(√3 + 1) = 2 - √3。"
+        ],
+        "en": [
+          "Let the legs of the right triangle be x and y with x ≤ y.",
+          "The outer square has side length √3, so x + y = √3.",
+          "The inner square has side length √2, which is the hypotenuse, so x² + y² = 2.",
+          "The area difference between the two squares is 1, split equally among four congruent triangles, so each triangle has area 1/4.",
+          "Hence xy/2 = 1/4, so xy = 1/2.",
+          "Then (y - x)² = (x + y)² - 4xy = 3 - 2 = 1, so y - x = 1.",
+          "Solving gives x = (√3 - 1)/2 and y = (√3 + 1)/2.",
+          "Therefore x/y = (√3 - 1)/(√3 + 1) = 2 - √3."
+        ],
+        "ja": [
+          "直角三角形の 2 つの脚を x, y（x ≤ y）とします。",
+          "外側の正方形の一辺は √3 なので x + y = √3。",
+          "内側の正方形の一辺は √2 で、これは斜辺に当たるので x² + y² = 2。",
+          "面積差は 1 で、それが 4 つの合同三角形に等分されるから、各三角形の面積は 1/4。",
+          "したがって xy/2 = 1/4、つまり xy = 1/2。",
+          "すると (y - x)² = (x + y)² - 4xy = 3 - 2 = 1 なので y - x = 1。",
+          "これを解くと x = (√3 - 1)/2、y = (√3 + 1)/2。",
+          "よって x/y = (√3 - 1)/(√3 + 1) = 2 - √3。"
+        ]
       },
       "figure": {
         "type": "custom",
@@ -488,39 +1183,146 @@
             "maxY": 3.5
           },
           "points": [
-            { "name": "A", "x": 0, "y": 0, "pos": "bl" },
-            { "name": "B", "x": 3, "y": 0, "pos": "br" },
-            { "name": "C", "x": 3, "y": 3, "pos": "tr" },
-            { "name": "D", "x": 0, "y": 3, "pos": "tl" },
-            { "name": "E", "x": 1.5, "y": 2.914, "pos": "t" },
-            { "name": "F", "x": 2.914, "y": 1.5, "pos": "r" },
-            { "name": "G", "x": 1.5, "y": 0.086, "pos": "b" },
-            { "name": "H", "x": 0.086, "y": 1.5, "pos": "l" }
+            {
+              "name": "A",
+              "x": 0,
+              "y": 0,
+              "pos": "bl"
+            },
+            {
+              "name": "B",
+              "x": 3,
+              "y": 0,
+              "pos": "br"
+            },
+            {
+              "name": "C",
+              "x": 3,
+              "y": 3,
+              "pos": "tr"
+            },
+            {
+              "name": "D",
+              "x": 0,
+              "y": 3,
+              "pos": "tl"
+            },
+            {
+              "name": "E",
+              "x": 1.5,
+              "y": 2.914,
+              "pos": "t"
+            },
+            {
+              "name": "F",
+              "x": 2.914,
+              "y": 1.5,
+              "pos": "r"
+            },
+            {
+              "name": "G",
+              "x": 1.5,
+              "y": 0.086,
+              "pos": "b"
+            },
+            {
+              "name": "H",
+              "x": 0.086,
+              "y": 1.5,
+              "pos": "l"
+            }
           ],
           "segments": [
-            { "from": "A", "to": "B", "style": "solid" },
-            { "from": "B", "to": "C", "style": "solid" },
-            { "from": "C", "to": "D", "style": "solid" },
-            { "from": "D", "to": "A", "style": "solid" },
-            { "from": "E", "to": "F", "style": "solid" },
-            { "from": "F", "to": "G", "style": "solid" },
-            { "from": "G", "to": "H", "style": "solid" },
-            { "from": "H", "to": "E", "style": "solid" }
+            {
+              "from": "A",
+              "to": "B",
+              "style": "solid"
+            },
+            {
+              "from": "B",
+              "to": "C",
+              "style": "solid"
+            },
+            {
+              "from": "C",
+              "to": "D",
+              "style": "solid"
+            },
+            {
+              "from": "D",
+              "to": "A",
+              "style": "solid"
+            },
+            {
+              "from": "E",
+              "to": "F",
+              "style": "solid"
+            },
+            {
+              "from": "F",
+              "to": "G",
+              "style": "solid"
+            },
+            {
+              "from": "G",
+              "to": "H",
+              "style": "solid"
+            },
+            {
+              "from": "H",
+              "to": "E",
+              "style": "solid"
+            }
           ],
           "polygons": [
-            { "vertices": ["D", "E", "H"], "fill": "shaded" }
+            {
+              "vertices": [
+                "D",
+                "E",
+                "H"
+              ],
+              "fill": "shaded"
+            }
           ]
         }
       },
       "answerMode": "multiple_choice",
       "options": {
-        "A": { "zh-Hant": "1/5", "zh-Hans": "1/5", "en": "1/5", "ja": "1/5" },
-        "B": { "zh-Hant": "1/4", "zh-Hans": "1/4", "en": "1/4", "ja": "1/4" },
-        "C": { "zh-Hant": "2 - √3", "zh-Hans": "2 - √3", "en": "2 - √3", "ja": "2 - √3" },
-        "D": { "zh-Hant": "√3 - √2", "zh-Hans": "√3 - √2", "en": "√3 - √2", "ja": "√3 - √2" },
-        "E": { "zh-Hant": "√2 - 1", "zh-Hans": "√2 - 1", "en": "√2 - 1", "ja": "√2 - 1" }
+        "A": {
+          "zh-Hant": "1/5",
+          "zh-Hans": "1/5",
+          "en": "1/5",
+          "ja": "1/5"
+        },
+        "B": {
+          "zh-Hant": "1/4",
+          "zh-Hans": "1/4",
+          "en": "1/4",
+          "ja": "1/4"
+        },
+        "C": {
+          "zh-Hant": "2 - √3",
+          "zh-Hans": "2 - √3",
+          "en": "2 - √3",
+          "ja": "2 - √3"
+        },
+        "D": {
+          "zh-Hant": "√3 - √2",
+          "zh-Hans": "√3 - √2",
+          "en": "√3 - √2",
+          "ja": "√3 - √2"
+        },
+        "E": {
+          "zh-Hant": "√2 - 1",
+          "zh-Hans": "√2 - 1",
+          "en": "√2 - 1",
+          "ja": "√2 - 1"
+        }
       },
-      "correctAnswer": { "type": "choice", "value": "C" },
+      "correctAnswer": {
+        "type": "choice",
+        "value": "C"
+      },
       "source": {
         "type": "official_reference",
         "name": "AMC 12",
@@ -544,7 +1346,7 @@
     },
     {
       "id": "geometry_grade12_foundation_008",
-      "reviewStatus": "pending",
+      "reviewStatus": "ok",
       "topic": "geometry",
       "subtopic": "equilateral_arc_tangent_circle",
       "difficulty": "foundation",
@@ -563,10 +1365,42 @@
         "ja": "答えは 27 です。"
       },
       "solutionSteps": {
-        "zh-Hant": ["由對稱性，三角形 ABC 是正三角形，所以 ∠BAC = 60°。", "弧 BC 是以 A 為圓心、半徑 AB 畫出的 60° 扇形，因此 12 = (60°/360°)×2πAB = (π/3)AB。", "解得 AB = 36/π。", "設小圓半徑為 r。由對稱性，小圓圓心在 AB 的垂直平分線上，且到底邊 AB 的距離是 r。", "圓心到 A 的距離一方面是 AB - r，另一方面也等於 sqrt((AB/2)² + r²)。", "所以 (AB/2)² + r² = (AB - r)²，解得 r = 3AB/8。", "代入 AB = 36/π，得 r = 27/(2π)，故周長 2πr = 27。"],
-        "zh-Hans": ["由对称性，三角形 ABC 是正三角形，所以 ∠BAC = 60°。", "弧 BC 是以 A 为圆心、半径 AB 画出的 60° 扇形，因此 12 = (60°/360°)×2πAB = (π/3)AB。", "解得 AB = 36/π。", "设小圆半径为 r。由对称性，小圆圆心在 AB 的垂直平分线上，且到底边 AB 的距离是 r。", "圆心到 A 的距离一方面是 AB - r，另一方面也等于 sqrt((AB/2)² + r²)。", "所以 (AB/2)² + r² = (AB - r)²，解得 r = 3AB/8。", "代入 AB = 36/π，得 r = 27/(2π)，故周长 2πr = 27。"],
-        "en": ["By symmetry, triangle ABC is equilateral, so ∠BAC = 60°.", "Arc BC is a 60° arc of a circle centered at A with radius AB, so 12 = (60/360)·2πAB = (π/3)AB.", "Thus AB = 36/π.", "Let the small circle have radius r. By symmetry its center lies on the perpendicular bisector of AB and is distance r above AB.", "Its distance to A is both AB - r, from internal tangency, and sqrt((AB/2)² + r²), from coordinates.", "So (AB/2)² + r² = (AB - r)², which gives r = 3AB/8.", "Substituting AB = 36/π gives r = 27/(2π), so the circumference is 2πr = 27."],
-        "ja": ["対称性から三角形 ABC は正三角形で、∠BAC = 60° です。", "弧 BC は A を中心、半径 AB の 60° の弧なので、12 = (60°/360°)×2πAB = (π/3)AB。", "よって AB = 36/π。", "小円の半径を r とすると、対称性よりその中心は AB の垂直二等分線上にあり、AB からの距離は r です。", "中心から A までの距離は、内接条件から AB - r であり、座標的には sqrt((AB/2)² + r²) にも等しいです。", "したがって (AB/2)² + r² = (AB - r)² で、r = 3AB/8。", "AB = 36/π を代入すると r = 27/(2π)、よって円周は 2πr = 27 です。"]
+        "zh-Hant": [
+          "由對稱性，三角形 ABC 是正三角形，所以 ∠BAC = 60°。",
+          "弧 BC 是以 A 為圓心、半徑 AB 畫出的 60° 扇形，因此 12 = (60°/360°)×2πAB = (π/3)AB。",
+          "解得 AB = 36/π。",
+          "設小圓半徑為 r。由對稱性，小圓圓心在 AB 的垂直平分線上，且到底邊 AB 的距離是 r。",
+          "圓心到 A 的距離一方面是 AB - r，另一方面也等於 sqrt((AB/2)² + r²)。",
+          "所以 (AB/2)² + r² = (AB - r)²，解得 r = 3AB/8。",
+          "代入 AB = 36/π，得 r = 27/(2π)，故周長 2πr = 27。"
+        ],
+        "zh-Hans": [
+          "由对称性，三角形 ABC 是正三角形，所以 ∠BAC = 60°。",
+          "弧 BC 是以 A 为圆心、半径 AB 画出的 60° 扇形，因此 12 = (60°/360°)×2πAB = (π/3)AB。",
+          "解得 AB = 36/π。",
+          "设小圆半径为 r。由对称性，小圆圆心在 AB 的垂直平分线上，且到底边 AB 的距离是 r。",
+          "圆心到 A 的距离一方面是 AB - r，另一方面也等于 sqrt((AB/2)² + r²)。",
+          "所以 (AB/2)² + r² = (AB - r)²，解得 r = 3AB/8。",
+          "代入 AB = 36/π，得 r = 27/(2π)，故周长 2πr = 27。"
+        ],
+        "en": [
+          "By symmetry, triangle ABC is equilateral, so ∠BAC = 60°.",
+          "Arc BC is a 60° arc of a circle centered at A with radius AB, so 12 = (60/360)·2πAB = (π/3)AB.",
+          "Thus AB = 36/π.",
+          "Let the small circle have radius r. By symmetry its center lies on the perpendicular bisector of AB and is distance r above AB.",
+          "Its distance to A is both AB - r, from internal tangency, and sqrt((AB/2)² + r²), from coordinates.",
+          "So (AB/2)² + r² = (AB - r)², which gives r = 3AB/8.",
+          "Substituting AB = 36/π gives r = 27/(2π), so the circumference is 2πr = 27."
+        ],
+        "ja": [
+          "対称性から三角形 ABC は正三角形で、∠BAC = 60° です。",
+          "弧 BC は A を中心、半径 AB の 60° の弧なので、12 = (60°/360°)×2πAB = (π/3)AB。",
+          "よって AB = 36/π。",
+          "小円の半径を r とすると、対称性よりその中心は AB の垂直二等分線上にあり、AB からの距離は r です。",
+          "中心から A までの距離は、内接条件から AB - r であり、座標的には sqrt((AB/2)² + r²) にも等しいです。",
+          "したがって (AB/2)² + r² = (AB - r)² で、r = 3AB/8。",
+          "AB = 36/π を代入すると r = 27/(2π)、よって円周は 2πr = 27 です。"
+        ]
       },
       "figure": {
         "type": "custom",
@@ -579,30 +1413,100 @@
             "maxY": 6
           },
           "points": [
-            { "name": "A", "x": -3, "y": 0, "pos": "l" },
-            { "name": "B", "x": 3, "y": 0, "pos": "r" },
-            { "name": "C", "x": 0, "y": 5.196, "pos": "t" },
-            { "name": "P", "x": 0, "y": 2.25, "pos": "r" }
+            {
+              "name": "A",
+              "x": -3,
+              "y": 0,
+              "pos": "l"
+            },
+            {
+              "name": "B",
+              "x": 3,
+              "y": 0,
+              "pos": "r"
+            },
+            {
+              "name": "C",
+              "x": 0,
+              "y": 5.196,
+              "pos": "t"
+            },
+            {
+              "name": "P",
+              "x": 0,
+              "y": 2.25,
+              "pos": "r"
+            }
           ],
           "segments": [
-            { "from": "A", "to": "B", "style": "solid" }
+            {
+              "from": "A",
+              "to": "B",
+              "style": "solid"
+            }
           ],
           "arcs": [
-            { "cx": -3, "cy": 0, "r": 6, "from": 0, "to": 60 },
-            { "cx": 3, "cy": 0, "r": 6, "from": 120, "to": 180 },
-            { "cx": 0, "cy": 2.25, "r": 2.25, "from": 0, "to": 360 }
+            {
+              "cx": -3,
+              "cy": 0,
+              "r": 6,
+              "from": 0,
+              "to": 60
+            },
+            {
+              "cx": 3,
+              "cy": 0,
+              "r": 6,
+              "from": 120,
+              "to": 180
+            },
+            {
+              "cx": 0,
+              "cy": 2.25,
+              "r": 2.25,
+              "from": 0,
+              "to": 360
+            }
           ]
         }
       },
       "answerMode": "multiple_choice",
       "options": {
-        "A": { "zh-Hant": "24", "zh-Hans": "24", "en": "24", "ja": "24" },
-        "B": { "zh-Hant": "25", "zh-Hans": "25", "en": "25", "ja": "25" },
-        "C": { "zh-Hant": "26", "zh-Hans": "26", "en": "26", "ja": "26" },
-        "D": { "zh-Hant": "27", "zh-Hans": "27", "en": "27", "ja": "27" },
-        "E": { "zh-Hant": "28", "zh-Hans": "28", "en": "28", "ja": "28" }
+        "A": {
+          "zh-Hant": "24",
+          "zh-Hans": "24",
+          "en": "24",
+          "ja": "24"
+        },
+        "B": {
+          "zh-Hant": "25",
+          "zh-Hans": "25",
+          "en": "25",
+          "ja": "25"
+        },
+        "C": {
+          "zh-Hant": "26",
+          "zh-Hans": "26",
+          "en": "26",
+          "ja": "26"
+        },
+        "D": {
+          "zh-Hant": "27",
+          "zh-Hans": "27",
+          "en": "27",
+          "ja": "27"
+        },
+        "E": {
+          "zh-Hant": "28",
+          "zh-Hans": "28",
+          "en": "28",
+          "ja": "28"
+        }
       },
-      "correctAnswer": { "type": "choice", "value": "D" },
+      "correctAnswer": {
+        "type": "choice",
+        "value": "D"
+      },
       "source": {
         "type": "official_reference",
         "name": "AMC 12",
@@ -626,7 +1530,7 @@
     },
     {
       "id": "geometry_grade12_foundation_009",
-      "reviewStatus": "pending",
+      "reviewStatus": "ok",
       "topic": "geometry",
       "subtopic": "sector_tangent_circle_ratio",
       "difficulty": "foundation",
@@ -645,50 +1549,155 @@
         "ja": "答えは 1/9 です。"
       },
       "solutionSteps": {
-        "zh-Hant": ["設大圓半徑是 R，小圓半徑是 r，小圓圓心為 P。因為小圓同時與 OA、OB 相切，所以 P 在 ∠AOB 的角平分線上。", "從 P 向 OA 作垂線，得到一個 30-60-90 三角形，其中 OP 是斜邊，垂直距離等於 r。", "因此 OP = 2r。", "另一方面，小圓與大圓內切，所以 OP = R - r。", "聯立 R - r = 2r，得 R = 3r，所以 r/R = 1/3。", "面積比等於半徑比的平方，因此小圓面積與大圓面積的比是 (1/3)² = 1/9。"],
-        "zh-Hans": ["设大圆半径是 R，小圆半径是 r，小圆圆心为 P。因为小圆同时与 OA、OB 相切，所以 P 在 ∠AOB 的角平分线上。", "从 P 向 OA 作垂线，得到一个 30-60-90 三角形，其中 OP 是斜边，垂直距离等于 r。", "因此 OP = 2r。", "另一方面，小圆与大圆内切，所以 OP = R - r。", "联立 R - r = 2r，得 R = 3r，所以 r/R = 1/3。", "面积比等于半径比的平方，因此小圆面积与大圆面积的比是 (1/3)² = 1/9。"],
-        "en": ["Let the large radius be R and the small radius be r, with small-circle center P. Since the small circle is tangent to OA and OB, point P lies on the angle bisector of ∠AOB.", "Dropping a perpendicular from P to OA forms a 30-60-90 triangle in which OP is the hypotenuse and the perpendicular distance is r.", "So OP = 2r.", "Because the circles are internally tangent, OP = R - r.", "Thus R - r = 2r, so R = 3r and r/R = 1/3.", "Therefore the area ratio is (r/R)² = (1/3)² = 1/9."],
-        "ja": ["大円の半径を R、小円の半径を r、小円の中心を P とします。小円は OA、OB の両方に接するので、P は ∠AOB の二等分線上にあります。", "P から OA に垂線を下ろすと、OP を斜辺とする 30-60-90 三角形ができ、垂直距離は r です。", "したがって OP = 2r。", "また小円は大円に内接するので OP = R - r。", "よって R - r = 2r から R = 3r、したがって r/R = 1/3。", "面積比は半径比の二乗なので、(1/3)² = 1/9 です。"]
+        "zh-Hant": [
+          "設大圓半徑是 R，小圓半徑是 r，小圓圓心為 P。因為小圓同時與 OA、OB 相切，所以 P 在 ∠AOB 的角平分線上。",
+          "從 P 向 OA 作垂線，得到一個 30-60-90 三角形，其中 OP 是斜邊，垂直距離等於 r。",
+          "因此 OP = 2r。",
+          "另一方面，小圓與大圓內切，所以 OP = R - r。",
+          "聯立 R - r = 2r，得 R = 3r，所以 r/R = 1/3。",
+          "面積比等於半徑比的平方，因此小圓面積與大圓面積的比是 (1/3)² = 1/9。"
+        ],
+        "zh-Hans": [
+          "设大圆半径是 R，小圆半径是 r，小圆圆心为 P。因为小圆同时与 OA、OB 相切，所以 P 在 ∠AOB 的角平分线上。",
+          "从 P 向 OA 作垂线，得到一个 30-60-90 三角形，其中 OP 是斜边，垂直距离等于 r。",
+          "因此 OP = 2r。",
+          "另一方面，小圆与大圆内切，所以 OP = R - r。",
+          "联立 R - r = 2r，得 R = 3r，所以 r/R = 1/3。",
+          "面积比等于半径比的平方，因此小圆面积与大圆面积的比是 (1/3)² = 1/9。"
+        ],
+        "en": [
+          "Let the large radius be R and the small radius be r, with small-circle center P. Since the small circle is tangent to OA and OB, point P lies on the angle bisector of ∠AOB.",
+          "Dropping a perpendicular from P to OA forms a 30-60-90 triangle in which OP is the hypotenuse and the perpendicular distance is r.",
+          "So OP = 2r.",
+          "Because the circles are internally tangent, OP = R - r.",
+          "Thus R - r = 2r, so R = 3r and r/R = 1/3.",
+          "Therefore the area ratio is (r/R)² = (1/3)² = 1/9."
+        ],
+        "ja": [
+          "大円の半径を R、小円の半径を r、小円の中心を P とします。小円は OA、OB の両方に接するので、P は ∠AOB の二等分線上にあります。",
+          "P から OA に垂線を下ろすと、OP を斜辺とする 30-60-90 三角形ができ、垂直距離は r です。",
+          "したがって OP = 2r。",
+          "また小円は大円に内接するので OP = R - r。",
+          "よって R - r = 2r から R = 3r、したがって r/R = 1/3。",
+          "面積比は半径比の二乗なので、(1/3)² = 1/9 です。"
+        ]
       },
       "figure": {
         "type": "custom",
         "kind": "geometry_scene",
         "params": {
           "bounds": {
-            "minX": -6,
-            "minY": -1,
-            "maxX": 6,
-            "maxY": 6
+            "minX": -5.7,
+            "minY": -5.7,
+            "maxX": 5.7,
+            "maxY": 5.7
           },
           "points": [
-            { "name": "O", "x": 0, "y": 0, "pos": "bl" },
-            { "name": "A", "x": 4.33, "y": 2.5, "pos": "r" },
-            { "name": "B", "x": 4.33, "y": -2.5, "pos": "r" },
-            { "name": "P", "x": 2, "y": 0, "pos": "t" }
+            {
+              "name": "O",
+              "x": 0,
+              "y": 0,
+              "pos": "bl"
+            },
+            {
+              "name": "A",
+              "x": 4.3301,
+              "y": 2.5,
+              "pos": "tr"
+            },
+            {
+              "name": "B",
+              "x": 4.3301,
+              "y": -2.5,
+              "pos": "br"
+            },
+            {
+              "name": "P",
+              "x": 3.3333,
+              "y": 0,
+              "pos": "t"
+            }
           ],
           "segments": [
-            { "from": "O", "to": "A", "style": "solid" },
-            { "from": "O", "to": "B", "style": "solid" },
-            { "from": "O", "to": "P", "style": "construction" }
+            {
+              "from": "O",
+              "to": "A",
+              "style": "solid"
+            },
+            {
+              "from": "O",
+              "to": "B",
+              "style": "solid"
+            },
+            {
+              "from": "O",
+              "to": "P",
+              "style": "construction"
+            }
           ],
           "arcs": [
-            { "cx": 0, "cy": 0, "r": 5, "from": 0, "to": 360 },
-            { "cx": 2, "cy": 0, "r": 1.667, "from": 0, "to": 360 }
+            {
+              "cx": 0,
+              "cy": 0,
+              "r": 5.0,
+              "from": 0,
+              "to": 360
+            },
+            {
+              "cx": 3.3333,
+              "cy": 0,
+              "r": 1.6667,
+              "from": 0,
+              "to": 360
+            }
           ],
           "angleMarks": [
-            { "at": "O", "from": "A", "to": "B", "label": "60°" }
+            {
+              "at": "O",
+              "from": "A",
+              "to": "B",
+              "label": "60°"
+            }
           ]
         }
       },
       "answerMode": "multiple_choice",
       "options": {
-        "A": { "zh-Hant": "1/16", "zh-Hans": "1/16", "en": "1/16", "ja": "1/16" },
-        "B": { "zh-Hant": "1/9", "zh-Hans": "1/9", "en": "1/9", "ja": "1/9" },
-        "C": { "zh-Hant": "1/8", "zh-Hans": "1/8", "en": "1/8", "ja": "1/8" },
-        "D": { "zh-Hant": "1/6", "zh-Hans": "1/6", "en": "1/6", "ja": "1/6" },
-        "E": { "zh-Hant": "1/4", "zh-Hans": "1/4", "en": "1/4", "ja": "1/4" }
+        "A": {
+          "zh-Hant": "1/16",
+          "zh-Hans": "1/16",
+          "en": "1/16",
+          "ja": "1/16"
+        },
+        "B": {
+          "zh-Hant": "1/9",
+          "zh-Hans": "1/9",
+          "en": "1/9",
+          "ja": "1/9"
+        },
+        "C": {
+          "zh-Hant": "1/8",
+          "zh-Hans": "1/8",
+          "en": "1/8",
+          "ja": "1/8"
+        },
+        "D": {
+          "zh-Hant": "1/6",
+          "zh-Hans": "1/6",
+          "en": "1/6",
+          "ja": "1/6"
+        },
+        "E": {
+          "zh-Hant": "1/4",
+          "zh-Hans": "1/4",
+          "en": "1/4",
+          "ja": "1/4"
+        }
       },
-      "correctAnswer": { "type": "choice", "value": "B" },
+      "correctAnswer": {
+        "type": "choice",
+        "value": "B"
+      },
       "source": {
         "type": "official_reference",
         "name": "AMC 12",
@@ -712,7 +1721,7 @@
     },
     {
       "id": "geometry_grade12_foundation_010",
-      "reviewStatus": "pending",
+      "reviewStatus": "ok",
       "topic": "geometry",
       "subtopic": "right_triangle_pentagon_area",
       "difficulty": "foundation",
@@ -731,10 +1740,38 @@
         "ja": "答えは 240/13 です。"
       },
       "solutionSteps": {
-        "zh-Hant": ["因為 5² + 12² = 13²，所以三角形 ABC 是直角三角形，面積是 (1/2)×5×12 = 30。", "取座標 C=(0,0)、A=(0,5)、B=(12,0)，則 M=(0,4)、N=(4,0)。", "直線 AB 的方程可寫成 5x + 12y = 60。", "把 M、N 投影到 AB 上，可得 J、K 分別是從 M、N 向 AB 作垂線的垂足。", "用座標幾何或鞋帶公式計算五邊形 C-M-J-K-N 的面積，可得 18.4615…", "化成分數正好是 240/13。"],
-        "zh-Hans": ["因为 5² + 12² = 13²，所以三角形 ABC 是直角三角形，面积是 (1/2)×5×12 = 30。", "取坐标 C=(0,0)、A=(0,5)、B=(12,0)，则 M=(0,4)、N=(4,0)。", "直线 AB 的方程可写成 5x + 12y = 60。", "把 M、N 投影到 AB 上，可得 J、K 分别是从 M、N 向 AB 作垂线的垂足。", "用坐标几何或鞋带公式计算五边形 C-M-J-K-N 的面积，可得 18.4615…", "化成分数正好是 240/13。"],
-        "en": ["Since 5² + 12² = 13², triangle ABC is right, with area (1/2)·5·12 = 30.", "Use coordinates C=(0,0), A=(0,5), and B=(12,0), so M=(0,4) and N=(4,0).", "Line AB has equation 5x + 12y = 60.", "Project M and N perpendicularly onto AB to obtain J and K.", "Using coordinates and the shoelace formula, the area of pentagon C-M-J-K-N is 18.4615....", "In exact form this is 240/13."],
-        "ja": ["5² + 12² = 13² なので、三角形 ABC は直角三角形で、面積は (1/2)×5×12 = 30 です。", "座標を C=(0,0)、A=(0,5)、B=(12,0) とすると、M=(0,4)、N=(4,0) です。", "直線 AB の方程式は 5x + 12y = 60。", "M、N から AB に垂線を下ろした足がそれぞれ J、K です。", "座標幾何と靴紐公式で五角形 C-M-J-K-N の面積を計算すると 18.4615... になります。", "これを分数で表すと 240/13 です。"]
+        "zh-Hant": [
+          "因為 5² + 12² = 13²，所以三角形 ABC 是直角三角形，面積是 (1/2)×5×12 = 30。",
+          "取座標 C=(0,0)、A=(0,5)、B=(12,0)，則 M=(0,4)、N=(4,0)。",
+          "直線 AB 的方程可寫成 5x + 12y = 60。",
+          "把 M、N 投影到 AB 上，可得 J、K 分別是從 M、N 向 AB 作垂線的垂足。",
+          "用座標幾何或鞋帶公式計算五邊形 C-M-J-K-N 的面積，可得 18.4615…",
+          "化成分數正好是 240/13。"
+        ],
+        "zh-Hans": [
+          "因为 5² + 12² = 13²，所以三角形 ABC 是直角三角形，面积是 (1/2)×5×12 = 30。",
+          "取坐标 C=(0,0)、A=(0,5)、B=(12,0)，则 M=(0,4)、N=(4,0)。",
+          "直线 AB 的方程可写成 5x + 12y = 60。",
+          "把 M、N 投影到 AB 上，可得 J、K 分别是从 M、N 向 AB 作垂线的垂足。",
+          "用坐标几何或鞋带公式计算五边形 C-M-J-K-N 的面积，可得 18.4615…",
+          "化成分数正好是 240/13。"
+        ],
+        "en": [
+          "Since 5² + 12² = 13², triangle ABC is right, with area (1/2)·5·12 = 30.",
+          "Use coordinates C=(0,0), A=(0,5), and B=(12,0), so M=(0,4) and N=(4,0).",
+          "Line AB has equation 5x + 12y = 60.",
+          "Project M and N perpendicularly onto AB to obtain J and K.",
+          "Using coordinates and the shoelace formula, the area of pentagon C-M-J-K-N is 18.4615....",
+          "In exact form this is 240/13."
+        ],
+        "ja": [
+          "5² + 12² = 13² なので、三角形 ABC は直角三角形で、面積は (1/2)×5×12 = 30 です。",
+          "座標を C=(0,0)、A=(0,5)、B=(12,0) とすると、M=(0,4)、N=(4,0) です。",
+          "直線 AB の方程式は 5x + 12y = 60。",
+          "M、N から AB に垂線を下ろした足がそれぞれ J、K です。",
+          "座標幾何と靴紐公式で五角形 C-M-J-K-N の面積を計算すると 18.4615... になります。",
+          "これを分数で表すと 240/13 です。"
+        ]
       },
       "figure": {
         "type": "custom",
@@ -747,39 +1784,139 @@
             "maxY": 6
           },
           "points": [
-            { "name": "C", "x": 0, "y": 0, "pos": "bl" },
-            { "name": "A", "x": 0, "y": 5, "pos": "tl" },
-            { "name": "B", "x": 12, "y": 0, "pos": "br" },
-            { "name": "M", "x": 0, "y": 4, "pos": "l" },
-            { "name": "N", "x": 4, "y": 0, "pos": "b" },
-            { "name": "J", "x": 0.355, "y": 4.852, "pos": "tr" },
-            { "name": "K", "x": 5.183, "y": 2.84, "pos": "tr" }
+            {
+              "name": "C",
+              "x": 0,
+              "y": 0,
+              "pos": "bl"
+            },
+            {
+              "name": "A",
+              "x": 0,
+              "y": 5,
+              "pos": "tl"
+            },
+            {
+              "name": "B",
+              "x": 12,
+              "y": 0,
+              "pos": "br"
+            },
+            {
+              "name": "M",
+              "x": 0,
+              "y": 4,
+              "pos": "l"
+            },
+            {
+              "name": "N",
+              "x": 4,
+              "y": 0,
+              "pos": "b"
+            },
+            {
+              "name": "J",
+              "x": 0.355,
+              "y": 4.852,
+              "pos": "tr"
+            },
+            {
+              "name": "K",
+              "x": 5.183,
+              "y": 2.84,
+              "pos": "tr"
+            }
           ],
           "segments": [
-            { "from": "A", "to": "B", "style": "solid" },
-            { "from": "B", "to": "C", "style": "solid" },
-            { "from": "C", "to": "A", "style": "solid" },
-            { "from": "M", "to": "J", "style": "construction" },
-            { "from": "N", "to": "K", "style": "construction" }
+            {
+              "from": "A",
+              "to": "B",
+              "style": "solid"
+            },
+            {
+              "from": "B",
+              "to": "C",
+              "style": "solid"
+            },
+            {
+              "from": "C",
+              "to": "A",
+              "style": "solid"
+            },
+            {
+              "from": "M",
+              "to": "J",
+              "style": "construction"
+            },
+            {
+              "from": "N",
+              "to": "K",
+              "style": "construction"
+            }
           ],
           "polygons": [
-            { "vertices": ["C", "M", "J", "K", "N"], "fill": "shaded" }
+            {
+              "vertices": [
+                "C",
+                "M",
+                "J",
+                "K",
+                "N"
+              ],
+              "fill": "shaded"
+            }
           ],
           "rightAngles": [
-            { "at": "J", "from": "M", "to": "B" },
-            { "at": "K", "from": "N", "to": "A" }
+            {
+              "at": "J",
+              "from": "M",
+              "to": "B"
+            },
+            {
+              "at": "K",
+              "from": "N",
+              "to": "A"
+            }
           ]
         }
       },
       "answerMode": "multiple_choice",
       "options": {
-        "A": { "zh-Hant": "15", "zh-Hans": "15", "en": "15", "ja": "15" },
-        "B": { "zh-Hant": "81/5", "zh-Hans": "81/5", "en": "81/5", "ja": "81/5" },
-        "C": { "zh-Hant": "205/12", "zh-Hans": "205/12", "en": "205/12", "ja": "205/12" },
-        "D": { "zh-Hant": "240/13", "zh-Hans": "240/13", "en": "240/13", "ja": "240/13" },
-        "E": { "zh-Hant": "20", "zh-Hans": "20", "en": "20", "ja": "20" }
+        "A": {
+          "zh-Hant": "15",
+          "zh-Hans": "15",
+          "en": "15",
+          "ja": "15"
+        },
+        "B": {
+          "zh-Hant": "81/5",
+          "zh-Hans": "81/5",
+          "en": "81/5",
+          "ja": "81/5"
+        },
+        "C": {
+          "zh-Hant": "205/12",
+          "zh-Hans": "205/12",
+          "en": "205/12",
+          "ja": "205/12"
+        },
+        "D": {
+          "zh-Hant": "240/13",
+          "zh-Hans": "240/13",
+          "en": "240/13",
+          "ja": "240/13"
+        },
+        "E": {
+          "zh-Hant": "20",
+          "zh-Hans": "20",
+          "en": "20",
+          "ja": "20"
+        }
       },
-      "correctAnswer": { "type": "choice", "value": "D" },
+      "correctAnswer": {
+        "type": "choice",
+        "value": "D"
+      },
       "source": {
         "type": "official_reference",
         "name": "AMC 12",

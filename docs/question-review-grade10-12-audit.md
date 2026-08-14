@@ -1,0 +1,234 @@
+# Grade 10-12 Question Review Audit
+
+這份文件是 10-12 年級題目的逐題審核入口。只有 `reviewStatus = ok` 的題，才允許進入實際練習/測驗出題池。
+
+格式沿用 [question-review-grade7-9-audit.md](question-review-grade7-9-audit.md)。
+
+## 難度基準
+
+本輪確立的年級對應競賽級別（同步寫入 `question-bank-expansion-guidelines.md`）：
+
+| 年級 | 對齊競賽 | 說明 |
+| --- | --- | --- |
+| `grade10` | AMC 10 | 高中前段，代數／幾何／數論基本技巧的組合運用 |
+| `grade11` | AMC 12 | 含三角、對數、複數、進階函數 |
+| `grade12` | AIME 入門層 | 需多步推理，答案為 0-999 整數的題型體感 |
+
+## 欄位說明
+
+- `status`: `pending / needs_fix / fixed / ok / blocked`
+- `risk`: 高風險項，例如 `source`, `correctness`, `duplication`, `figure`, `math_notation`, `bare`, `schema`
+- `note`: 本題實際修正或阻塞原因
+
+## 複審起始狀態
+
+grade10-12 共 141 題，進入本輪時全部為 `pending`（從未複審）。機械化篩檢結果：
+
+| 問題類型 | grade10 | grade11 | grade12 | 合計 |
+| --- | --- | --- | --- | --- |
+| 自製 editorial 暫代來源 | 15 | 15 | 15 | 45 |
+| 詳解僅 2-3 步（裸題嫌疑） | 14 | 15 | 19 | 48 |
+| 四語系步數不一致 | 0 | 2 | 4 | 6 |
+| 同 pack subtopic 重複 | 0 | 2 | 0 | 2 |
+
+每個 pack 的第 004、005、006 題固定為自製 editorial 來源，與 grade7-9 同一模式。
+
+另有跨 pack / 跨年級重複（由 `tool/question_bank_duplicate_audit.dart` 與人工比對發現）：
+
+- `algebra_grade10_007` ↔ `algebra_grade10_009`（同一 IMC 題，subtopic 命名不同而躲過機械篩檢）
+- `number_theory_grade10_007` ↔ `number_theory_grade11_001`（factorial_remainder）
+- `algebra_grade11_007` ↔ `algebra_grade11_009`（log_exponential_equation）
+- `number_theory_grade12_003` ↔ `number_theory_grade8_004`（divisor_count）
+
+## 複審結果總覽（2026-08-14 完成）
+
+grade10-12 全部 141 題已複審完畢，全部標為 `ok`。連同 grade9 的 47 題，本輪共處理 188 題。
+
+改動統計：
+
+| 年級 | 改寫 | 修正答案 | 補／修詳解 | 修圖 |
+| --- | --- | --- | --- | --- |
+| `grade10` | 17 | 3 | 12 | 4 |
+| `grade11` | 20 | 4 | 11 | 4 |
+| `grade12` | 19 | 6 | 8 | 3 |
+
+**本輪找出的答案或題目本身的錯誤（共 21 處）**，全部都不是機械篩檢能發現的：
+
+| 題 | 問題 |
+| --- | --- |
+| `number_theory_grade9_001` | 答案標 15，實際 12；且與 `combinatorics_grade9_007` 同題 |
+| `logic_grade9_006` | answer 文字與 correctAnswer 互相矛盾，詳解寫入自我推翻的思考過程 |
+| `number_theory_grade9_010` | `correctAnswer.type` 為 `fraction`，違反 phase-1 硬規則 |
+| `algebra_grade10_002` | 選項裡沒有正確答案（正解含端點 2 ≤ a ≤ 5） |
+| `combinatorics_grade10_007` | 題幹沒定義 5 個區域的相鄰結構，答案無法確定 |
+| `combinatorics_grade10_009` | 答案標 20，實際 16；詳解宣稱 3!5! = 4!4!（720 ≠ 576） |
+| `number_theory_grade10_003` | 答案標 12，實際 11 |
+| `logic_grade10_006` | 有兩組解（獎品在 A 或 B 都恰一句真話） |
+| `logic_grade10_007` | 題幹漏掉「每答一次是得一顆糖」，問題無法回答 |
+| `algebra_grade11_001` | 答案標 B，實際 A（logₙ(n+1) 對 n 遞減） |
+| `algebra_grade11_003` | 題幹導出 k² = 7 而兩根和為 0，與答案 6 矛盾 |
+| `combinatorics_grade11_007` | 答案標 126，實際 144；詳解自己的算式就是 144 |
+| `number_theory_grade11_002` | 答案標 0，實際 −2；詳解自己算出 −2 卻寫「依官方答案記為 0」 |
+| `number_theory_grade11_003` | 答案標 3，實際 2 |
+| `logic_grade11_003` | 題幹自相矛盾（已說第一人從 1 開始又問他第一次報幾） |
+| `logic_grade11_008` | 改成 integer_input 後答案不唯一（99 的因數有 6 個） |
+| `algebra_grade12_003` | 答案不唯一（34 個兩位數都成立） |
+| `combinatorics_grade12_003` | 答案標 12，實際 6（直角三角形有 12 個而非 6 個） |
+| `geometry_grade12_001` | 答案標 5，實際 7 |
+| `geometry_grade12_002` | 答案標 84/5，實際 12√2 |
+| `logic_grade12_001` | 答案標 A，實際 B（A 騎士的情形在 B 那句話上矛盾） |
+| `logic_grade12_002` | 答案不唯一（1 到 15 的每個第一步都必勝） |
+| `logic_grade12_003` | 無解（差必為 1111 − 10k，不可能是 2222） |
+| `logic_grade12_005` | 四個選項全都「一定正確」 |
+| `number_theory_grade12_002` | 題目前提不成立（不存在那樣的正整數三根） |
+| `number_theory_grade12_003` | 答案標 2，實際 1（p²⁰²⁰ 只需一個質因數） |
+
+**最值得記住的模式**：多數錯誤的詳解「自己算出了正確答案卻標了別的數字」（`number_theory_grade11_002`、`number_theory_grade11_003`、`combinatorics_grade11_007` 都是），所以逐題複審時務必比對詳解最後一步與 `correctAnswer`。
+
+圖形方面，grade10-12 原有 11 個 `shape_diagram` 都是紅線 7 的「外框貼字」（其中兩個把立體畫成平面、一個標籤混入日文），已全部改為 `geometry_scene` 或 `kind:none`；另修正 3 個 `geometry_scene` 的 bounds 或座標錯誤（`geometry_grade9_002` 的圓被截、`geometry_grade12_009` 的小圓位置錯誤與 bounds 過窄）。
+
+## 題目清單
+
+| id | level | topic | subtopic | figure | answerMode | source | status | risk | note |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| `algebra_grade10_foundation_001` | `grade10` | `algebra` | `指數與對數` | `none` | `integer_input` | IMC Taiwan 2026 複賽 10年級 選擇 4 | `ok` | bare | 答案 2 正確（1/x − 1/y = log₃(7.2÷0.8) = log₃9）；原詳解僅 3 步且跳過取對數過程，已補為 6 步完整推導 |
+| `algebra_grade10_foundation_002` | `grade10` | `algebra` | `二次函數值域` | `none` | `multiple_choice` | IMC Taiwan 2026 複賽 10年級 選擇 5 | `ok` | correctness | **原選項錯誤**：a = 2 與 a = 5 都成立（已驗證兩端點的 max/min 皆為 12 與 3），正確範圍是 2 ≤ a ≤ 5，但原選項只有 `2 < a < 5`；已改選項為 `2 ≤ a ≤ 5` 並保留 `2 < a < 5` 作為漏端點的誘答項，詳解補上端點逐一檢查 |
+| `algebra_grade10_foundation_003` | `grade10` | `algebra` | `等比數列` | `none` | `integer_input` | IMC Taiwan 2026 複賽 10年級 選擇 7 | `ok` | solution | 答案 60 正確（數值掃描確認唯一解 a = 15、r = 3）；原詳解第 3 步寫「依官方解法可化成 a(1+r) = 60」屬空轉，已補為分組因式 → 消元 → 驗證 r = 3 的 9 步完整推導 |
+| `algebra_grade10_foundation_004` | `grade10` | `algebra` | `含參數二次不等式` | `none` | `integer_input` | 改寫題（含參數二次不等式整數解） | `ok` | source, bare, rewritten | 原題為機械求解 \|2x−5\|<9 再數整數，無推理轉折且來源為自製 editorial 暫代出處；改寫為 (x−1)(x−a)<0 整數解恰 3 個求 a 之和，需依 a>1 / a<1 分兩支討論，答案 2 已窮舉 a ∈ [−20,20] 驗證 |
+| `algebra_grade10_foundation_005` | `grade10` | `algebra` | `分式遞推週期` | `none` | `integer_input` | 改寫題（分式遞推週期） | `ok` | source, bare, rewritten | 原題為因式分解求較大根的裸題且來源為自製 editorial 暫代出處；改寫為 a₁=2、aₙ₊₁=(1+aₙ)/(1−aₙ) 求 a₂₀₂₆，需發現週期 4，答案 −3 已用 Fraction 精確計算前九項驗證 |
+| `algebra_grade10_foundation_006` | `grade10` | `algebra` | `根式方程與增根` | `none` | `integer_input` | 改寫題（雙根式方程與增根） | `ok` | source, bare, rewritten | 原題為兩步移項的分式方程裸題且來源為自製 editorial 暫代出處；改寫為 √(2x+3)+√(x−2)=4，需在兩次平方間記下 11−x ≥ 0 才能排除增根 x=83，答案 3 已用判別式與代回雙重驗算 |
+| `algebra_grade10_foundation_007` | `grade10` | `algebra` | `參數整數根` | `none` | `integer_input` | IMC Taiwan 2026 複賽 10年級 選擇 6 | `ok` | duplication | 答案 8 正確（(x−a)(x−8)=1 且 x 為整數 → x−8 = ±1 → a = 8）；保留本題為此 IMC 題的唯一版本，原 009 的重複收錄已改寫 |
+| `algebra_grade10_foundation_008` | `grade10` | `algebra` | `循環小數差` | `none` | `multiple_choice` | AMC 10A 2021 Problem 8 | `ok` |  | 答案 75 正確（66×ab×(1/99 − 1/100) = ab/150 = 0.5）；四語系與詳解完整 |
+| `algebra_grade10_foundation_009` | `grade10` | `algebra` | `對稱冪和遞推` | `none` | `multiple_choice` | 改寫題（對稱冪和遞推） | `ok` | duplication, rewritten | 原與本 pack 007 為同一 IMC 題（(x−a)(x−8)−1=0 求 a），只是答題方式不同，屬重複收錄已淘汰；改寫為 x+1/x=3 求 x⁵+1/x⁵，需建立遞推 pₙ₊₁=3pₙ−pₙ₋₁，答案 123 已用遞推與數值代入雙重驗證 |
+| `combinatorics_grade10_foundation_001` | `grade10` | `combinatorics` | `配對選取` | `none` | `integer_input` | IMC Taiwan 2026 複賽 10年級 選擇 3 | `ok` |  | 答案 210 正確（C(8,2)×C(6,2)÷2，已用集合窮舉 8 人所有無序雙隊配對驗證） |
+| `combinatorics_grade10_foundation_002` | `grade10` | `combinatorics` | `受限分配` | `none` | `integer_input` | IMC Taiwan 2026 複賽 10年級 填充 3 | `ok` | bare | 答案 84 正確（先每盒發 1 球後插板 C(9,3)，已窮舉驗證）；原詳解僅 3 步，已補為 7 步含插板法的位置對應說明 |
+| `combinatorics_grade10_foundation_003` | `grade10` | `combinatorics` | `三維格點路徑` | `none` | `integer_input` | IMC Taiwan 2026 複賽 10年級 選擇 8 | `ok` | bare | 答案 30 正確（多重集排列 5!/(2!2!1!)，已窮舉驗證）；原詳解僅 3 步，已補為 7 步含路徑與字串的一一對應說明 |
+| `combinatorics_grade10_foundation_004` | `grade10` | `combinatorics` | `部分錯排` | `none` | `integer_input` | 改寫題（部分錯排） | `ok` | source, rewritten | 原題為 BANANA 多重集排列的教科書例題且來源為自製 editorial 暫代出處；改寫為「5 封信恰好 2 封放對」，需察覺剩下 3 封必須全錯而非隨便排，C(5,2)×D₃=10×2=20，已用 5! 全排列按固定點個數窮舉驗證 |
+| `combinatorics_grade10_foundation_005` | `grade10` | `combinatorics` | `有上界的整數解計數` | `none` | `integer_input` | 改寫題（有上界的整數解計數） | `ok` | source, duplication, rewritten | 原題為「至少一位女生」補集法，與 `combinatorics_grade7_foundation_005` 同一骨架，且來源為自製 editorial 暫代出處；改寫為 x+y+z=15 且各 ≤6 的解數，主解用 a=6−x 補集代換得 C(5,2)=10，詳解另附排容驗算，已三重迴圈窮舉確認 |
+| `combinatorics_grade10_foundation_006` | `grade10` | `combinatorics` | `前綴限制排列` | `none` | `integer_input` | 改寫題（反射原理與前綴限制） | `ok` | source, bare, rewritten | 原題為「個位必須是 5、其餘 4! 排列」的兩步裸題且來源為自製 editorial 暫代出處；改寫為 5 紅 3 藍排列且每個前綴紅 ≥ 藍，用反射原理把壞排法對應到 6 紅 2 藍得 56−28=28，已窮舉全部 56 種排法驗證 |
+| `combinatorics_grade10_foundation_007` | `grade10` | `combinatorics` | `區域著色` | `none` | `integer_input` | AMC 12A 2022 Problem 7 | `ok` | correctness | **原題幹未定義**：只說「長方形被分成 5 個區域」卻沒有圖也沒描述相鄰結構，答案無法確定（詳解卻假設了特定配置）；已改題幹明確標示 A–E 五區並列出全部相鄰配對 A–B、A–C、A–D、B–D、B–E、C–D、D–E，答案 540 已用 5⁵ 全塗法窮舉該相鄰結構驗證 |
+| `combinatorics_grade10_foundation_008` | `grade10` | `combinatorics` | `賽程計數` | `none` | `integer_input` | AMC 10A 2013 Problem 24 | `ok` |  | 答案 900 正確（已用 6⁶ 種輪次組合窮舉，篩出每個對戰組合恰出現 2 次者，得 900） |
+| `combinatorics_grade10_foundation_009` | `grade10` | `combinatorics` | `多項式係數比` | `none` | `integer_input` | AMC 10A Fall 2021 Problem 21 | `ok` | correctness | **原答案錯誤**：原標 20，正確為 16。原詳解第 4 步宣稱「3!5! = 4!4!」，但 3!×5! = 720 而 4!×4! = 576，並不相等；正確計算為 p/q = 20 × (4!)²/(3!5!) = 20 × 576/720 = 16，已用實際多項式係數計算驗證 |
+| `geometry_grade10_foundation_001` | `grade10` | `geometry` | `直線與圓相交` | `none` | `multiple_choice` | IMC Taiwan 2026 複賽 10年級 選擇 2 | `ok` | figure | 答案 −28 < k < 22 正確（圓心 (1,0)、半徑 5，\|k+3\|/5 < 5）；原 figure 為 `shape_diagram` 只畫一個圓再貼「C(1,0)／r=5／L」文字，直線 L 根本沒畫出來，屬紅線 7 的「畫外框貼字」，依紅線 8 改為 `kind:none`（k 是變動參數，畫任一條具體直線都會誤導） |
+| `geometry_grade10_foundation_002` | `grade10` | `geometry` | `投影與垂直` | `coordinate_plane` | `multiple_choice` | IMC Taiwan 2026 複賽 10年級 填充 2 | `ok` |  | 答案 2x − 3y = 17 正確（AA₀ 斜率 −3/2 → L 斜率 2/3，過 A₀(7,−1)）；圖為 coordinate_plane 且點位正確 |
+| `geometry_grade10_foundation_003` | `grade10` | `geometry` | `圓上最大三角形面積` | `coordinate_plane` | `multiple_choice` | IMC Taiwan 2026 複賽 10年級 選擇 9 | `ok` |  | 答案 (6,9) 或 (6,−9) 正確（圓心 (6,±4)，已驗 \|OA\| = 5，最遠點距 AB 為 9） |
+| `geometry_grade10_foundation_004` | `grade10` | `geometry` | `兩圓外公切線長` | `geometry_scene` | `integer_input` | 改寫題（兩圓外公切線長） | `ok` | source, bare, rewritten | 原題為「半徑垂直切線再套畢氏」的四步裸題且來源為自製 editorial 暫代出處；改寫為兩圓外切（半徑 4、9）求外公切線切點距離，需平移半徑差建直角三角形，答案 12 已驗證圓心距 13、兩圓皆與切線相切 |
+| `geometry_grade10_foundation_005` | `grade10` | `geometry` | `平行弦距離` | `geometry_scene` | `integer_input` | 改寫題（平行弦距離） | `ok` | source, bare, rewritten | 原題為切割線定理一步代入的裸題且來源為自製 editorial 暫代出處；改寫為半徑 10 圓中兩平行弦長 12、16 分居圓心兩側求弦距，關鍵在同側／異側決定加減（同側為 2、異側為 14），答案 14；圖中四個弦端點已驗證皆在圓上且弦長與平行關係吻合 |
+| `geometry_grade10_foundation_006` | `grade10` | `geometry` | `正方形中點三角形面積` | `geometry_scene` | `integer_input` | 改寫題（正方形中點三角形面積） | `ok` | source, bare, rewritten | 原題為重心 2:1 一步代入的裸題且來源為自製 editorial 暫代出處；改寫為邊長 8 正方形中兩邊中點構成的三角形面積，用補集法扣三個角落得 64−40=24，已另以鞋帶公式驗算；圖以等長記號畫出中點並將 AMN 標為陰影區 |
+| `geometry_grade10_foundation_007` | `grade10` | `geometry` | `長方形切角` | `none` | `multiple_choice` | AMC 10B 2021 Problem 9 | `ok` | figure | 答案 18 正確（a+b = 10、a²+b² = 64 → ab = 18，已驗 (a−2)²+(b−2)² = 32）；原 figure 為 `shape_diagram` 只畫一個長方形再貼「對角線=8／切去 1×1／最近距離=4√2」文字，缺角完全沒畫，屬紅線 7 違規，依紅線 8 改為 `kind:none`（題幹已描述完整；後續可補正式 geometry_scene 八邊形） |
+| `geometry_grade10_foundation_008` | `grade10` | `geometry` | `四邊形邊長上界` | `none` | `multiple_choice` | AMC 10A 2015 Problem 10 | `ok` | figure | 答案 12 正確（最長邊 a < 26 − a → a ≤ 12，且 12、4、5、5 可行）；原 figure 為 `shape_diagram` 只畫一個四邊形再貼「周長 26／其中一邊 4／最長邊？」文字，對解題零幫助且屬紅線 7 違規，已改為 `kind:none` |
+| `geometry_grade10_foundation_009` | `grade10` | `geometry` | `內心外心距離` | `geometry_scene` | `multiple_choice` | AMC 12B 2011 Problem 16 | `ok` |  | 答案 √65/2 正確（r = 30/15 = 2、R = 13/2，Euler 關係 OI² = R(R−2r) = 65/4，已驗算） |
+| `geometry_grade10_foundation_010` | `grade10` | `geometry` | `正方形內正三角形面積比` | `geometry_scene` | `multiple_choice` | AMC 10B 2016 Problem 20 | `ok` |  | 答案 2 正確（x²+2x−2 = 0 → x = √3−1，已驗 EF² = BE²，面積比 x²/(1−x) = 2） |
+| `logic_grade10_foundation_001` | `grade10` | `logic` | `天平稱重` | `none` | `integer_input` | IMC Taiwan 2026 複賽 10年級 選擇 1 | `ok` |  | 答案 2 正確（9 顆分三組、三分法兩次）。註：本題保留為天平稱重家族的正式版本；`logic_grade9_foundation_006` 先前被改寫成 12 枚硬幣稱重題與本題撞型且難度倒掛，已同批改為雙水壺題 |
+| `logic_grade10_foundation_002` | `grade10` | `logic` | `整除條件` | `none` | `integer_input` | IMC Taiwan 2026 複賽 10年級 填充 1 | `ok` | bare, topic | 答案 13 正確（n−1 為 lcm(2,3,4)=12 的倍數）；原詳解僅 3 步已補為 7 步。分類偏差：本題核心能力其實是數論而非邏輯，因調整 pack 會牽動題數與 manifest，暫留在 logic 並記錄 |
+| `logic_grade10_foundation_003` | `grade10` | `logic` | `兩位數計數` | `none` | `integer_input` | IMC Taiwan 2026 複賽 10年級 選擇 2 | `ok` | bare, topic | 答案 6 正確（每組兩張卡恰對應 1 個合格數，C(4,2)=6，已列出 21/31/32/41/42/43）；原詳解僅 3 步已補為 7 步。分類偏差同 002，核心能力偏組合 |
+| `logic_grade10_foundation_004` | `grade10` | `logic` | `名次真假話推理` | `none` | `multiple_choice` | 改寫題（名次真假話推理） | `ok` | source, olympiadness, rewritten | 原題為三人三水果且已直接給定丙的答案，僅需兩步消去，深度遠低於本年級，且來源為自製 editorial 暫代出處；改寫為四人名次、恰好一句假話，四種候選分別產生 3/2/1/2 句假話故答案唯一為 C，已窮舉驗證 |
+| `logic_grade10_foundation_005` | `grade10` | `logic` | `多重限制排列計數` | `none` | `integer_input` | 改寫題（多重限制排列計數） | `ok` | source, bare, rewritten | 原題為「切換 10 次、偶數次故回到原狀」的單步奇偶裸題且來源為自製 editorial 暫代出處；改寫為五人排隊同時受綁塊、相對順序、端點排除三種限制，答案 12 已用 5! 全排列逐條件檢查窮舉驗證 |
+| `logic_grade10_foundation_006` | `grade10` | `logic` | `翻杯子最少次數` | `none` | `integer_input` | 改寫題（翻杯子最少次數） | `ok` | correctness, source, rewritten | **原題有兩組解**：獎品在 B（原標答案）與獎品在 A 都恰好只有一句真話，已窮舉四種情況確認；原詳解宣稱「若獎品在 A 會變成零句真話」是錯的。不符唯一明確答案且來源為自製 editorial 暫代出處，整題淘汰；改寫為 8 杯每次翻 3 個的最少次數，需用奇偶不變量把樸素下界 3 提升到 4 再給構造 {1,7,8}{2,7,8}{3,7,8}{4,5,6}，答案 4 已用 BFS 與構造雙重驗證 |
+| `logic_grade10_foundation_007` | `grade10` | `logic` | `真假話型態統計` | `none` | `integer_input` | AMC 10B 2013 Problem 23 | `ok` | correctness | 答案 7 正確（A₁=9、L=6、T=7、A₂=9，總數 31 與三題「是」的人數 22/15/9 全部吻合）；但**原題幹缺少關鍵條件**——全文從未提到糖果卻問「一共拿到了幾顆糖」，已補回「每當一個孩子回答『是』就得到一顆糖」 |
+| `logic_grade10_foundation_008` | `grade10` | `logic` | `分段遞迴數列` | `none` | `integer_input` | 改寫題（分段遞迴數列） | `ok` | duplication, rewritten | **原題與 `logic_grade9_foundation_007` 完全相同**（同樣的 Tadd/Todd/Tucker 報數規則、同樣問 Tadd 說出的第 2019 個數、同樣答案 5979），因 subtopic 命名不同（turn_sequence vs rotating_count_sequence）而未被去重稽核抓到；grade9 那題保留為正式版本，本題改寫為奇偶分段遞迴數列求第 20 項，答案 1 已逐項計算驗證 |
+| `logic_grade10_foundation_009` | `grade10` | `logic` | `真假話種族推理` | `none` | `multiple_choice` | AMC 8 2010 Problem 22 | `ok` |  | 答案 3 正確；已窮舉 2⁴ 種真假指派，自洽解有兩組（Chris 與 LeRoy 誰是蟾蜍不唯一），但兩組的青蛙數都是 3，所求答案唯一 |
+| `number_theory_grade10_foundation_001` | `grade10` | `number_theory` | `湊因式的整數方程` | `none` | `integer_input` | 改寫題（湊因式的整數方程） | `ok` | bare, duplication, rewritten | 原題只需套一次「兩數乘積 = gcd × lcm」得 36，屬兩步裸題；且與本輪改寫的 `number_theory_grade9_foundation_004`（同樣給定 gcd 與 lcm）設定重疊而 grade9 版本反而較難，形成難度倒掛，整題淘汰；改寫為 xy = x+y+13 求 x+y 最大值，需補 1 湊出 (x−1)(y−1)=14，答案 17 已窮舉驗證解為 (2,15) 與 (3,8) |
+| `number_theory_grade10_foundation_002` | `grade10` | `number_theory` | `一次不定方程` | `none` | `integer_input` | IMC Taiwan 2026 複賽 10年級 計算 2 | `ok` | bare | 答案 58 正確（y ≡ 3 mod 5 且 0 ≤ y ≤ 289，已窮舉驗證）；原詳解僅 4 步，已補為 8 步含範圍界定、同餘求解與最大項驗算 |
+| `number_theory_grade10_foundation_003` | `grade10` | `number_theory` | `整除條件` | `none` | `integer_input` | IMC Taiwan 2026 複賽 10年級 選擇 6 | `ok` | correctness | **原答案錯誤**：原標 a+b = 12。窮舉全部 100 組 (a,b) 後，形如 2a5b 且被 36 整除的四位數只有 2052（a+b=2）、2556（a+b=11）、2952（a+b=11），最大值為 **11** 而非 12。已更正答案並改寫詳解，補上 a+b ≤ 9+6 = 15 的上界論證與兩組達成 11 的實例 |
+| `number_theory_grade10_foundation_004` | `grade10` | `number_theory` | `階乘末尾零的個數` | `none` | `integer_input` | 改寫題（階乘末尾零反推） | `ok` | source, duplication, rewritten | 原題（7²⁰²⁶ 的個位數）與本輪改寫的 `number_theory_grade9_foundation_006`（7²⁰²⁶ 的末兩位）同底同指數，屬重複收錄，且來源為自製 editorial 暫代出處；改寫為求 n! 末尾恰好 25 個 0 的最小 n，刻意選在 n=99→22、n=100→24 的跳號處（23 個 0 不存在），答案 105 已用 Legendre 公式逐一計算驗證 |
+| `number_theory_grade10_foundation_005` | `grade10` | `number_theory` | `相鄰二次式的最大公因數` | `none` | `integer_input` | 改寫題（相鄰二次式的最大公因數） | `ok` | source, bare, rewritten | 原題直接套 Legendre 公式相加求 100! 中 2 的指數，屬三步裸題且來源為自製 editorial 暫代出處；改寫為 gcd(n²+5, (n+1)²+5) 的最大值，需先相減得 d | 2n+1、論證 d 為奇數後乘 4 湊出 4n²+20 = (2n+1)(2n−1)+21 壓到 d | 21，再解 n ≡ 10 (mod 21) 證明可達，答案 21 已用 n=1..4999 實際 gcd 掃描驗證 |
+| `number_theory_grade10_foundation_006` | `grade10` | `number_theory` | `數字對調條件` | `none` | `integer_input` | 改寫題（三位數對調條件） | `ok` | source, bare, rewritten | 原題為「依次試小的正整數」求 3x ≡ 1 (mod 10)，無推理成分且來源為自製 editorial 暫代出處；改寫為三位數首尾對調小 297 且數字和 15 的個數，需察覺差恆為 99(a−c) 並同時檢查 a≤9、c≥1、0≤b≤9 三組限制（b≤9 導出的 c≥2 最易漏），答案 5 已用全部三位數窮舉驗證為 582、663、744、825、906 |
+| `number_theory_grade10_foundation_007` | `grade10` | `number_theory` | `階乘和的餘數` | `none` | `integer_input` | IMC Taiwan 2026 複賽 10年級 選擇 1 | `ok` | duplication | 答案 25 正確（已用實際計算 S = 1!+…+100! 驗證 S² mod 28 = 25）。**待處理**：與 `number_theory_grade11_foundation_001` 被去重稽核標為同群（factorial_remainder），本題保留為正式版本，grade11 那題待複審時改寫 |
+| `number_theory_grade10_foundation_008` | `grade10` | `number_theory` | `最大公因數連鎖` | `none` | `integer_input` | AMC 10A 2018 Problem 22 | `ok` |  | 答案 13 正確（推得 gcd(a,d) = 6k 且 70 < 6k < 100，候選 72/78/84/90/96 中只有 78 = 6×13 的額外因數不含 2、3，已逐一驗證） |
+| `number_theory_grade10_foundation_009` | `grade10` | `number_theory` | `十六進位數字` | `none` | `integer_input` | AMC 10A 2015 Problem 18 | `ok` | notation | 答案 21 正確（已窮舉 1~1000 得 n = 399，數字和 21）；原詳解出現錯字「百六進位位」，已更正為「十六進位的百位」並補上 3 9 9₁₆ = 921 ≤ 1000 的上界確認 |
+| `number_theory_grade10_foundation_010` | `grade10` | `number_theory` | `數字和規律` | `none` | `multiple_choice` | AMC 10A 2014 Problem 20 | `ok` |  | 答案 991 正確（乘積規律為 7、(k−2) 個 1、0、4，數字和 = k+9；已對 k=1..5 驗證規律，並直接計算 k=991 的乘積確認數字和為 1000） |
+| `algebra_grade11_foundation_001` | `grade11` | `algebra` | `對數大小比較` | `none` | `multiple_choice` | IMC Taiwan 2026 複賽 11年級 選擇 1 | `ok` | correctness, solution | **原答案錯誤**：原標選項 B『d > b > a > c』。四個數都是 logₙ(n+1) 的形式（n = 2,3,4,5），而該函數對 n 遞減，故正確排序為 a > b > c > d（選項 A）；數值為 a≈1.585、b≈1.262、c≈1.161、d≈1.113。原詳解第 3 步僅寫「官方答案排序為 d > b > a > c」屬訴諸權威且結論錯誤，已改為 8 步含遞減性證明的完整推導 |
+| `algebra_grade11_foundation_002` | `grade11` | `algebra` | `複數冪次循環` | `none` | `multiple_choice` | 改寫題（複數冪次循環） | `ok` | duplication, rewritten | 原題與本 pack 的 007、009 同為 IMC Taiwan 2026 複賽 11年級選擇 3（x^(log x) = 10⁶x），**三題完全重複**，007 保留為正式版本；本題改寫為 z = (1+i)/(1−i) 求 z²⁰²⁶，需先用共軛複數化簡得 z = i 再用週期 4 定位，答案 −1 已用複數運算驗證 |
+| `algebra_grade11_foundation_003` | `grade11` | `algebra` | `無窮等比級數` | `none` | `integer_input` | 改寫題（無窮等比級數與平方級數） | `ok` | correctness, rewritten | **原題已損毀**：題幹「x + ky = 0、kx + 7y = 0 有非零解」導出 7 − k² = 0，兩根之和為 0，與原標答案 6 矛盾；原詳解第 3 步自承『若依官方題目的參數版本，可能值為 -1 與 7』，與自己第 2 步的 k² = 7 互相牴觸。無法還原官方原文故整題淘汰；改寫為級數和 6、平方級數和 12 求首項，需用 1 − r² = (1−r)(1+r) 約分降次，答案 3 已代回兩級數驗證 |
+| `algebra_grade11_foundation_004` | `grade11` | `algebra` | `三角平方和` | `none` | `integer_input` | 改寫題（補角餘角配對） | `ok` | source, rewritten | 原題為 log₂x + log₂(x−2) = 3 的標準對數方程且來源為自製 editorial 暫代出處；改寫為 sin²(π/8)+sin²(3π/8)+sin²(5π/8)+sin²(7π/8)，需連用補角與餘角兩層配對化為 sin²+cos²，答案 2 已用數值計算驗證 |
+| `algebra_grade11_foundation_005` | `grade11` | `algebra` | `三次方程根的冪和` | `none` | `integer_input` | 改寫題（三次方程根的冪和） | `ok` | source, olympiadness, rewritten | 原題為 2⁵ × 2³ ÷ 2⁴ 的指數律計算，屬國小程度、遠低於本年級對齊的 AMC 12，且來源為自製 editorial 暫代出處；改寫為 x³−3x+1=0 三實根的立方和，用 p³ = 3p−1 降階配合 Σp = 0，答案 −3 已用二分法求根後直接計算驗證 |
+| `algebra_grade11_foundation_006` | `grade11` | `algebra` | `函數方程` | `none` | `integer_input` | 改寫題（函數方程代入法） | `ok` | source, duplication, rewritten | 原題（x + 1/x = 3 求 x² + 1/x²）與本輪改寫的 `algebra_grade10_foundation_009`（同樣 x + 1/x = 3 求 x⁵ + 1/x⁵）設定完全相同且 grade10 版本較難，形成難度倒掛，且來源為自製 editorial 暫代出處；改寫為 f(x) + 2f(1/x) = 3x 求 f(2)，需代入 x 與 1/x 湊聯立，答案 −1 已代回兩式驗證 |
+| `algebra_grade11_foundation_007` | `grade11` | `algebra` | `對數指數方程` | `none` | `multiple_choice` | IMC Taiwan 2026 複賽 11年級 選擇 3 | `ok` | duplication | 答案 10³ 與 10⁻² 正確（已代回原式驗證兩解皆成立）；保留本題為此 IMC 題的唯一版本，原 002 與 009 的重複收錄已分別改寫 |
+| `algebra_grade11_foundation_008` | `grade11` | `algebra` | `移除特定值後的平均` | `none` | `multiple_choice` | AMC 12A 2024 Problem 5 | `ok` |  | 答案 7 正確（900 − 6k = 66(20 − k) → 60k = 420，已驗算 k=7 時剩餘總和 858、個數 13、平均 66） |
+| `algebra_grade11_foundation_009` | `grade11` | `algebra` | `交錯級數求和` | `none` | `integer_input` | 改寫題（交錯級數配對求和） | `ok` | duplication, rewritten | 原題與本 pack 的 007 為同一道 IMC 11年級選擇 3，連四個選項都完全相同，屬重複收錄已淘汰；改寫為 −1+2−3+4−⋯+2026 的交錯和，需選對相鄰配對並確認項數為偶數無落單項，答案 1013 已用直接求和與配對法雙重驗證 |
+| `combinatorics_grade11_foundation_001` | `grade11` | `combinatorics` | `重複排列` | `none` | `integer_input` | IMC Taiwan 2026 複賽 11年級 選擇 7 | `ok` | bare | 答案 30 正確（5!/(2!2!)，已窮舉驗證）；原詳解僅 4 步，已補為 7 步含「為何要除以 2!2!」的重複計數說明。註：本題難度偏低於 AMC 12 基準，保留為官方題但記錄此偏差 |
+| `combinatorics_grade11_foundation_002` | `grade11` | `combinatorics` | `錯排` | `none` | `integer_input` | IMC Taiwan 2026 複賽 11年級 填充 3 | `ok` | solution | 答案 9 正確（已窮舉 4! = 24 種排列，無固定點者恰 9 種）；原詳解僅寫「可用包除原理或直接列舉，結果是 !4 = 9」屬空轉，已補為完整排容推導 24 − 24 + 12 − 4 + 1 = 9 |
+| `combinatorics_grade11_foundation_003` | `grade11` | `combinatorics` | `取數和的奇偶機率` | `none` | `integer_input` | 改寫題（奇偶分類與機率化簡） | `ok` | duplication, olympiadness, rewritten | 原題（5 男 4 女選 3 人至少 1 女，C(9,3)−C(5,3)=74）與 `combinatorics_grade7_foundation_005` **完全相同**，且屬 grade7 難度遠低於 AMC 12 基準，整題淘汰；改寫為 1~20 取兩數和為偶數的機率，化簡為 9/19 後求 a+b，答案 28 已窮舉驗證 |
+| `combinatorics_grade11_foundation_004` | `grade11` | `combinatorics` | `相同盒子的分堆` | `none` | `integer_input` | 改寫題（相同盒子的分堆） | `ok` | source, duplication, rewritten | 原題（(0,0)→(4,4) 避開 (2,2)，答案 34）與 `combinatorics_grade9_foundation_005` 的原題完全相同，而 grade9 該題本輪已升級為雙禁點版本，形成難度倒掛，且來源為自製 editorial 暫代出處；改寫為 5 相異球放 3 相同盒每盒至少 1 個，關鍵在 2+2+1 情況需除以 2 而 3+1+1 不需，答案 25 已用列舉與 S(5,3) 公式雙重驗證 |
+| `combinatorics_grade11_foundation_005` | `grade11` | `combinatorics` | `方格覆蓋著色` | `none` | `integer_input` | 改寫題（行列雙重覆蓋著色） | `ok` | source, bare, rewritten | 原題（3 個元素映到 2 個元素的滿射 = 2³−2）僅兩步屬裸題且來源為自製 editorial 暫代出處；改寫為 2×3 方格每行每列至少一紅格，以「每列只有 3 種合法型態」內建列條件再扣失敗行得 27−1−1=25，答案 25 已用 2⁶ = 64 種塗法窮舉驗證 |
+| `combinatorics_grade11_foundation_006` | `grade11` | `combinatorics` | `格點三角形計數` | `none` | `integer_input` | 改寫題（格點三角形計數） | `ok` | source, bare, rewritten | 原題（求 ΣC(6,k) = 2⁶）僅兩步屬裸題且來源為自製 editorial 暫代出處；改寫為 4×4 格點取 3 點構成三角形的取法，用補集 C(16,3) − 共線組；共線組為橫 16 + 直 16 + 斜率 1 的 6 + 斜率 −1 的 6 = 44（4×4 尺寸容不下斜率 ±2、±1/2 的三點共線，詳解已說明此點），答案 516 已用全部 560 組面積行列式判定驗證 |
+| `combinatorics_grade11_foundation_007` | `grade11` | `combinatorics` | `配對限制` | `none` | `integer_input` | AMC 12A 2022 Problem 10 | `ok` | correctness | **原答案錯誤**：原標 126，但窮舉全部配對方式得 **144**；且原詳解自己的算式「2 × 3 × 4!」算出來就是 144，與所標答案自相矛盾。已更正答案並改寫詳解為 1 × 2 × 3 × 24 = 144 的完整推理 |
+| `combinatorics_grade11_foundation_008` | `grade11` | `combinatorics` | `parking function` | `none` | `integer_input` | AMC 12A 2022 Problem 24 | `ok` | solution | 答案 1296 正確（已對全部 5⁵ = 3125 個字串逐一檢查條件，符合者恰 1296）；原詳解直接引用「parking function 個數是 (n+1)ⁿ⁻¹」而未說明題幹條件為何等價於該定義，已補上排序後 bⱼ ≤ j−1 的對應說明 |
+| `combinatorics_grade11_foundation_009` | `grade11` | `combinatorics` | `數字平均計數` | `none` | `integer_input` | AMC 12A 2007 Problem 16 | `ok` |  | 答案 112 正確（已窮舉 100~999 全部三位數驗證）；詳解含等差三元組計數與含 0 情形的扣除，推理完整 |
+| `geometry_grade11_foundation_001` | `grade11` | `geometry` | `三角函數極值` | `none` | `multiple_choice` | IMC Taiwan 2026 複賽 11年級 選擇 4 | `ok` | bare | 答案 1 正確（已用 20 萬點數值掃描確認 max = 2、min = −1）；原詳解僅 3 步，已補為 8 步並點明「最小值不是 −2，因為 3π/2 超出 7π/6 的範圍」這個關鍵陷阱 |
+| `geometry_grade11_foundation_002` | `grade11` | `geometry` | `平行平面距離` | `none` | `multiple_choice` | IMC Taiwan 2026 複賽 11年級 選擇 5 | `ok` | bare | 答案 7/6 正確（已驗算）；原詳解僅 3 步，已補為 8 步並強調必須先把第二式除以 2 使法向量係數一致才能套公式 |
+| `geometry_grade11_foundation_003` | `grade11` | `geometry` | `正四角錐二面角` | `none` | `multiple_choice` | IMC Taiwan 2026 複賽 11年級 計算 1-(3) | `ok` | figure | 答案 1/2 正確（a = 4√3、h = 6、MH = 2√3、OM = 4√3，已驗算）；原 figure 為 `shape_diagram` 且用「square」代表正四角錐——把立體畫成平面且只貼「正四角錐／4√6／V=96」文字，屬紅線 7 違規。renderer 不支援立體圖，依紅線 8 改為 `kind:none` |
+| `geometry_grade11_foundation_004` | `grade11` | `geometry` | `弦與弧的最大距離` | `geometry_scene` | `multiple_choice` | 改寫題（劣弧上到弦的最大距離） | `ok` | source, bare, figure, rewritten | 原題（正方體邊長 4 求體對角線）為套公式裸題，figure 又用「square」代表正方體，來源為自製 editorial 暫代出處，整題淘汰；改寫為半徑 5、弦長 8，求劣弧上一點到弦的最大距離，關鍵在分辨劣弧（r−d = 2）與優弧（r+d = 8），答案 2；圖中 A(−4,3)、B(4,3) 已驗證在圓上且弦長為 8 |
+| `geometry_grade11_foundation_005` | `grade11` | `geometry` | `直角三角形斜邊上的高` | `geometry_scene` | `multiple_choice` | 改寫題（斜邊高的幾何平均） | `ok` | source, bare, figure, rewritten | 原題（正四面體棱長 6 求高）為套公式裸題，figure 為 pyramid 加文字標籤，來源為自製 editorial 暫代出處；改寫為 AD=9、DB=16 求面積，用 CD² = AD·DB 得 CD = 12、AB = 25，答案 150，並以 AC=15、BC=20 的畢氏與兩股面積雙重驗算；圖座標已驗證 ∠C 為直角 |
+| `geometry_grade11_foundation_006` | `grade11` | `geometry` | `過原點的圓上最遠點` | `geometry_scene` | `multiple_choice` | 改寫題（過原點的圓上最遠點） | `ok` | source, bare, figure, i18n, rewritten | 原題（正六邊形邊長 4 求面積）為套公式裸題，figure 為 hexagon 加文字標籤且**標籤混入日文「6 個の正三角形」**（跨語系共用圖卻寫死日文），來源為自製 editorial 暫代出處；改寫為圓 (x−3)²+(y−4)²=25 上距原點最遠的距離，關鍵在發現原點恰在圓上故連線為直徑，答案 10 已驗證最遠點 (6,8) 在圓上 |
+| `geometry_grade11_foundation_007` | `grade11` | `geometry` | `同心圓間的正方形` | `geometry_scene` | `multiple_choice` | AMC 12A 2012 Problem 12 | `ok` |  | 答案 (2√19−4)/5 正確（5s²+8s−12 = 0 的正根，已數值代回 (s/2)²+(s+1)² = 4.000000 驗證） |
+| `geometry_grade11_foundation_008` | `grade11` | `geometry` | `切線與弧的夾角` | `geometry_scene` | `multiple_choice` | AMC 12B 2011 Problem 6 | `ok` |  | 答案 36° 正確（弧為 144° 與 216°，兩切線夾角 = 弧度差的一半 = 36°）；推理完整 |
+| `geometry_grade11_foundation_009` | `grade11` | `geometry` | `空間角平分線向量` | `none` | `multiple_choice` | IMC Taiwan 2026 複賽 11年級 選擇 6 | `ok` | figure | 答案 3/2 正確（|AB| = 3、|AC| = 6，AD = (2/3)AB + (1/3)AC，已用單位向量和與 AD 的外積為零向量驗證方向正確，再由 2k/3 = 3 得 p = 3/2）；原 figure 用平面 `triangle` 代表空間三角形並貼座標文字，屬紅線 7 違規，renderer 不支援立體圖故改為 `kind:none` |
+| `geometry_grade11_foundation_010` | `grade11` | `geometry` | `正八邊形三角形面積` | `geometry_scene` | `multiple_choice` | AMC 10B 2002 Problem 17 | `ok` | figure | 答案 4+3√2 正確（已建立邊長 2 的精確八邊形座標，驗證八邊皆為 2、DG = 2+2√2、面積 = 8.242641 = 4+3√2）；原 figure 為 `shape_diagram` 且以方位關鍵字擺放 A/D/E/G 標籤（與實際頂點無關，且標了與題目無關的 E），屬紅線 7 違規，已重繪為精確的 `geometry_scene`：八個頂點依序連邊，並把三角形 ADG 以虛線與陰影標出 |
+| `logic_grade11_foundation_001` | `grade11` | `logic` | `取物博弈` | `none` | `integer_input` | IMC Taiwan 2026 複賽 11年級 選擇 9 | `ok` | bare | 答案 1 正確（21 mod 4 = 1，留 20 給對手）；原詳解僅 4 步，已補為 7 步含「為何 4 的倍數是必敗位置」的逆推論證 |
+| `logic_grade11_foundation_002` | `grade11` | `logic` | `格子條件推理` | `none` | `integer_input` | IMC Taiwan 2026 複賽 11年級 填充 5 | `ok` | bare | 答案 4 正確（已窮舉 24 種排列，合法者只有 (2,3,1,4) 與 (3,4,1,2)，A 最小為 2 時 D = 4）；原詳解僅 4 步，已補為 7 步含窮舉驗證 |
+| `logic_grade11_foundation_003` | `grade11` | `logic` | `答對題數的雙重計數` | `none` | `integer_input` | 改寫題（延伸計數與分類） | `ok` | correctness, rewritten | **原題幹自相矛盾**：已言明「第一個人從 1 開始」卻又問「第一個人第一次應報幾」，答案 1 是題幹直接給定而非策略推得；且題目說四人輪流卻用兩人博弈的關鍵位置（1、4、7、10）論證，題目已損毀故淘汰；改寫為三題考試的延伸計數，答案 31 已驗算 |
+| `logic_grade11_foundation_004` | `grade11` | `logic` | `時針分針重合` | `none` | `integer_input` | 改寫題（時針分針重合） | `ok` | source, olympiadness, rewritten | 原題（三人三天排程）僅需兩步消去，深度遠低於本年級，且來源為自製 editorial 暫代出處；改寫為 3~4 點間時針分針重合求 t = a/11 的 a，需正確處理時針起始角 90° 與每分鐘 0.5° 的增量，答案 180 已用 Fraction 精確驗證兩針角度皆為 1080/11° |
+| `logic_grade11_foundation_005` | `grade11` | `logic` | `計數器最少操作` | `none` | `integer_input` | 改寫題（受限操作最少步數） | `ok` | source, bare, rewritten | 原題（四隊循環賽得 9 分即三戰全勝）僅兩步屬裸題且來源為自製 editorial 暫代出處；改寫為計數器從 0 每次 +3 或 ×2 到 99 的最少操作，需先用「永遠是 3 的倍數」確認可達性再由終點反推，答案 7 已用 BFS 驗證為最短。註：設計時原本把目標訂為 100，BFS 發現 100 永遠達不到（不是 3 的倍數），已改為 99 |
+| `logic_grade11_foundation_006` | `grade11` | `logic` | `數字條件推理` | `none` | `integer_input` | 改寫題（多重數字條件推理） | `ok` | source, rewritten | 原題（區間重疊求最早同時在場）敘述含糊——已言明兩人「只會在到達時出現一次」卻又問「同時在場」，推理僅兩步，來源為自製 editorial 暫代出處；改寫為四位數密碼的多重數字條件，三種情形中一種被 d₃ ≤ 4 排除、兩種成立，問總和以避免只找到一組就作答，答案 16445 已窮舉全部四位數驗證解為 6832 與 9613 |
+| `logic_grade11_foundation_007` | `grade11` | `logic` | `逆推博弈` | `none` | `integer_input` | AMC 12B 2012 Problem 14 | `ok` |  | 答案 7 正確（已模擬 N = 1..39 找出最小獲勝 N = 16，數字和 7）；詳解含 16N + 700 的逐輪推導，推理完整 |
+| `logic_grade11_foundation_008` | `grade11` | `logic` | `循環分配` | `none` | `multiple_choice` | AJHSME 1990 Problem 22 | `ok` | correctness, schema | **原題答案不唯一**：人數只需整除 99，而 99 的正因數有 1、3、9、11、33、99，作為 `integer_input` 時 3、9、33、99 同樣成立；原詳解還寫「在官方選項裡只有 11 符合」，但本題庫版本並沒有選項。已改回 `multiple_choice`（選項 10／11／12／15，其中只有 11 整除 99）恢復唯一解，並改寫詳解說明選項的作用 |
+| `logic_grade11_foundation_009` | `grade11` | `logic` | `整除推理` | `none` | `multiple_choice` | AMC 12B 2006 Problem 19 | `ok` | solution | 答案 5 正確；原詳解寫「依照官方解的篩選，可能的車牌只需要考慮 7272、6336、5544 等候選」屬訴諸權威，且 7272 與 6336 其實根本不合格——窮舉所有「兩種數字各兩次」的四位數後，能整除 8 個不同年齡的**唯一**車牌就是 5544（= 2³×3²×7×11，整除 1,2,3,4,6,7,8,9，末兩位 44）。已改為由 a+b = 9 出發的完整推導 |
+| `number_theory_grade11_foundation_001` | `grade11` | `number_theory` | `特定倍數的因數計數` | `none` | `integer_input` | 改寫題（特定倍數的因數計數） | `ok` | duplication, rewritten | 原題（1!+…+11! 除以 12 的餘數）與本 pack 的 007（1!+…+2026! 除以 144 的餘數）**來源都標為「IMC Taiwan 2026 複賽 11年級 選擇 2」**，是同一道官方題的兩種變體且答案同為 9；007 的模數 144 需檢查到 6! 較有深度故保留，本題改寫為 2100 的因數中 6 的倍數個數，用 d = 6k 代換化為 350 的因數計數，答案 12 已窮舉驗證 |
+| `number_theory_grade11_foundation_002` | `grade11` | `number_theory` | `整除條件` | `none` | `integer_input` | IMC Taiwan 2026 複賽 11年級 填充 2 | `ok` | correctness | **原答案錯誤**：原標 0。(n²+n+1)/(n+1) = n + 1/(n+1) 為整數需 (n+1) | 1，故 n = 0 或 −2，兩者之和為 **−2**；已窮舉 n ∈ [−200, 200] 確認解只有這兩個。原詳解自己算出「它們的和是 −2」，卻在同一步接著寫「依官方答案本題記為 0」，前後矛盾。已更正答案並改寫詳解 |
+| `number_theory_grade11_foundation_003` | `grade11` | `number_theory` | `數字和整除` | `none` | `integer_input` | IMC Taiwan 2026 複賽 11年級 選擇 6 | `ok` | correctness | **原答案錯誤**：原標 3。數字依次連續且被 9 整除的三位數只有 **234 與 567 共 2 個**（a = 8 會讓個位變成 10，不是一位數字）。原詳解自己寫「可行的是 a = 2, 5, 8，但 a = 8 不行」，扣掉後應剩 2 個卻標 3。已更正答案並補上 a ≤ 7 的範圍論證 |
+| `number_theory_grade11_foundation_004` | `grade11` | `number_theory` | `進位制互換` | `none` | `integer_input` | 改寫題（兩種進位制的數字反轉） | `ok` | source, duplication, rewritten | 原題（同餘聯立求最小 n = 23）與本輪改寫的 `number_theory_grade9_foundation_001` 同型且較簡單，且來源為自製 editorial 暫代出處；改寫為「五進位 abc = 七進位 cba」，關鍵在由 b = 12(a−2c) 與 b ≤ 4 壓出 b = 0，答案 153（解為 51 與 102）已窮舉驗證 |
+| `number_theory_grade11_foundation_005` | `grade11` | `number_theory` | `費馬小定理` | `none` | `integer_input` | 改寫題（費馬小定理與冪次週期） | `ok` | source, bare, rewritten | 原題（求 φ(84)）只是直接代入歐拉函數公式，屬三步裸題且來源為自製 editorial 暫代出處；改寫為 7²²² 除以 11 的餘數，需先確認互質才能用費馬小定理得 7¹⁰ ≡ 1，再由 222 mod 10 = 2 得 7² ≡ 5，答案 5 已用 pow(7,222,11) 驗證 |
+| `number_theory_grade11_foundation_006` | `grade11` | `number_theory` | `恰有三個因數的數` | `none` | `integer_input` | 改寫題（恰有三個因數的數） | `ok` | source, bare, schema, rewritten | 原題（1²+…+5² 除以 7 的餘數）僅三步屬裸計算，四語系步數還不一致，來源為自製 editorial 暫代出處；改寫為 1~200 中恰有 3 個正因數的整數個數，需由「3 是質數」推出 n 必為質數平方，答案 6（4、9、25、49、121、169）已窮舉驗證 |
+| `number_theory_grade11_foundation_007` | `grade11` | `number_theory` | `階乘和的餘數` | `none` | `integer_input` | IMC Taiwan 2026 複賽 11年級 選擇 2 | `ok` | duplication | 答案 9 正確（144 = 2⁴×3²，從 6! 起皆可整除，前五項和 153，153 mod 144 = 9，已驗算）；保留本題為此 IMC 題的正式版本，原 001 的重複收錄已改寫 |
+| `number_theory_grade11_foundation_008` | `grade11` | `number_theory` | `最小因數個數時刻` | `none` | `integer_input` | AMC 12A 2017 Problem 12 | `ok` |  | 答案 3 正確（最小 t = 12，其在 1~10 中的因數為 1、2、3、4、6 共 5 個，已窮舉確認 t < 12 皆不足；12 的數字和為 3） |
+| `number_theory_grade11_foundation_009` | `grade11` | `number_theory` | `個位數循環` | `none` | `multiple_choice` | AMC 12A 2008 Problem 15 | `ok` |  | 答案 6 正確（2008² 個位 4、2²⁰⁸ 個位 6 → k 個位 0 → k² 個位 0；k ≡ 0 mod 4 → 2ᵏ 個位 6；合計個位 6，已逐項驗算） |
+| `number_theory_grade11_foundation_010` | `grade11` | `number_theory` | `下一個因數的下界` | `none` | `multiple_choice` | AMC 10B 2018 Problem 21 | `ok` |  | 答案 340 正確（323 = 17×19；若下一個因數與 323 互質則 n ≥ 323d > 10000 矛盾，故必為 17 或 19 的倍數，最小者為 17×20 = 340）；推理完整 |
+| `algebra_grade12_foundation_001` | `grade12` | `algebra` | `指數運算` | `none` | `integer_input` | AMC 12A 2021 Problem 1 | `ok` | bare | 答案 50 正確（2⁶ − 14）；原詳解僅 3 步，已補為 6 步並點明 2^(a+b+c) 與 2ᵃ+2ᵇ+2ᶜ 的差別。註：本題是 AMC 12 的第 1 題，難度明顯低於 grade12 對齊的 AIME 入門層，保留為官方題但記錄此偏差 |
+| `algebra_grade12_foundation_002` | `grade12` | `algebra` | `數字關係` | `none` | `integer_input` | AMC 12A 2021 Problem 3 | `ok` | bare | 答案 14238 正確（11n = 17402 → n = 1582，已驗算 1582 + 15820 = 17402）；原詳解僅 3 步，已補為 7 步含「去掉末位 0 等於除以 10」的翻譯與驗算 |
+| `algebra_grade12_foundation_003` | `grade12` | `algebra` | `巢狀對數方程` | `none` | `integer_input` | 改寫題（巢狀對數方程） | `ok` | correctness, duplication, rewritten | **原題答案不唯一**：題幹只要求 66 × ab/99 為整數，等價於 3 \| ab，共 **34 個**兩位數都成立（已窮舉）；原詳解寫「在官方題目的條件下可得 ab = 75」但該條件並不在題幹中。原始 AMC 題（66×1.ababab 比 66×1.ab 多 0.5）已收在 `algebra_grade10_foundation_008`。整題淘汰，改寫為 log₂(log₈x) = log₈(log₂x) 求 (log₂x)²，答案 27 已數值代回驗證 |
+| `algebra_grade12_foundation_004` | `grade12` | `algebra` | `雙除式的餘式` | `none` | `integer_input` | 改寫題（雙除式的餘式） | `ok` | source, bare, rewritten | 原題（P(x) = x³+ax²+bx+2 有因式 x−1 與 x+2 求 a+b）第一步 P(1) = 0 就直接得答案，第二個條件完全用不到，屬單步題且來源為自製 editorial 暫代出處；改寫為由兩個一次除式的餘數反推對 (x−1)(x−2) 的餘式，需先論證餘式為一次式再建聯立，答案 4 已用具體多項式驗證 |
+| `algebra_grade12_foundation_005` | `grade12` | `algebra` | `遞推數列閉式` | `none` | `integer_input` | 改寫題（遞推數列閉式） | `ok` | source, bare, rewritten | 原題（x²+3x+5 除以 x−2 的餘數）只需代一次值，屬兩步裸題且來源為自製 editorial 暫代出處；改寫為 a₁=1、aₙ₊₁=aₙ+2n+1 求 a₃₀，需察覺增量正是相鄰平方數之差而得 aₙ = n²，答案 900 已用逐項遞推與累加求和雙重驗證 |
+| `algebra_grade12_foundation_006` | `grade12` | `algebra` | `由立方和反求乘積` | `none` | `integer_input` | 改寫題（由立方和反求乘積） | `ok` | source, bare, rewritten | 原題（x²−4x+k=0 有重根求 k）只需令判別式為零，屬兩步裸題且來源為自製 editorial 暫代出處；改寫為 x+y=5、x³+y³=35 求 xy，需用 (x+y)³ = x³+y³+3xy(x+y) 反向操作，答案 6 已用韋達反解出 x、y = 2、3 驗算 |
+| `algebra_grade12_foundation_007` | `grade12` | `algebra` | `冪次關係方程組` | `none` | `multiple_choice` | AMC 12A 2023 Problem 10 | `ok` |  | 答案 36 正確（(y−x)² = 4y² 的兩支中只有 x = 3y 與正實數相容，代入 y³ = x² 得 y = 9、x = 27，已驗證 y³ = x² = 729 且 (y−x)² = 4y² = 324） |
+| `algebra_grade12_foundation_008` | `grade12` | `algebra` | `整數等比數列` | `none` | `multiple_choice` | AMC 12A 2024 Problem 12 | `ok` |  | 答案 21 正確（已窮舉 720 的所有因數對，最小可行公比為 16/15，b = 768、a = 675，數字和 7+6+8 = 21） |
+| `algebra_grade12_foundation_009` | `grade12` | `algebra` | `對稱式最大值` | `none` | `multiple_choice` | AMC 12 2000 Problem 12 | `ok` |  | 答案 112 正確（已窮舉 A+M+C = 12 的所有非負整數解，最大值為 112，在 A=M=C=4 取得）；詳解含 (A+1)(M+1)(C+1) 的配湊，推理完整 |
+| `combinatorics_grade12_foundation_001` | `grade12` | `combinatorics` | `奇偶分類選取` | `none` | `integer_input` | AMC 12A 2021 Problem 7 | `ok` | bare | 答案 60 正確（C(5,3) + C(5,2)C(5,1)，已窮舉 C(10,3) = 120 組驗證）；原詳解僅 3 步，已補為 7 步含奇數個數的奇偶論證 |
+| `combinatorics_grade12_foundation_002` | `grade12` | `combinatorics` | `相鄰相異字串` | `none` | `integer_input` | AMC 12B 2021 Problem 10 | `ok` | bare | 答案 2 正確（字串被第一位完全決定）；原詳解僅 3 步已補為 7 步。註：本題答案僅為 2、推理僅一步，難度遠低於 grade12 對齊的 AIME 入門層，來源標註可能有誤植，保留但記錄此偏差 |
+| `combinatorics_grade12_foundation_003` | `grade12` | `combinatorics` | `六邊形三角形分類` | `none` | `integer_input` | AMC 12A 2021 Problem 23 | `ok` | correctness | **原答案錯誤**：原標 12。正六邊形內接於圓，直角三角形的充要條件是有一邊為直徑，而直徑有 3 條、每條配 4 個第三頂點，故直角三角形有 **12** 個（原詳解誤算成 6 個）；正三角形 2 個，因此鈍角只有 20 − 2 − 12 = **6** 個。已用單位圓座標對 20 個三角形逐一以邊長平方判定，得銳角 2、直角 12、鈍角 6，確認答案應為 6 |
+| `combinatorics_grade12_foundation_004` | `grade12` | `combinatorics` | `指定字元出現偶數次` | `none` | `integer_input` | 改寫題（奇偶限制的字串計數） | `ok` | source, duplication, rewritten | 原題（6 人圓桌、旋轉視為相同、答案 120）與 `combinatorics_grade9_foundation_001` **完全相同**，且來源為自製 editorial 暫代出處；改寫為長度 10 的 1/2/3 數列中 1 出現偶數次的個數，用 (−1)ᵏ 權重把 E−O 拆成每位獨立因子，答案 29525 已窮舉 59049 個數列驗證 |
+| `combinatorics_grade12_foundation_005` | `grade12` | `combinatorics` | `含斜步的格點路徑` | `none` | `integer_input` | 改寫題（含斜步的格點路徑） | `ok` | source, duplication, rewritten | 原題（4 封信的錯排、答案 9）與 `combinatorics_grade11_foundation_002` **完全相同**，且來源為自製 editorial 暫代出處；改寫為允許右／上／右上斜三種步伐的 (0,0)→(4,4) 路徑數，因步數不固定故組合數公式失效需改用二維遞推，答案 321 已用動態規劃建表驗證 |
+| `combinatorics_grade12_foundation_006` | `grade12` | `combinatorics` | `骰子乘積為平方數` | `none` | `integer_input` | 改寫題（骰子乘積為平方數） | `ok` | source, bare, rewritten | 原題（{1,…,6} 含 1 的 3 元子集個數 = C(5,2)）僅兩步屬裸題且來源為自製 editorial 暫代出處；改寫為兩骰乘積為平方數的機率化簡後求 a+b，關鍵在排除需要骰面外數字的分解（9 = 1×9、16 = 2×8、36 = 4×9），答案 11 已窮舉 36 種結果驗證符合者為 8 種 |
+| `combinatorics_grade12_foundation_007` | `grade12` | `combinatorics` | `骰子乘積種數` | `none` | `integer_input` | AMC 12B 2023 Problem 23 | `ok` |  | 答案 11 正確（不同乘積數為 ((n+1)²(n+2))/2，代 n = 11 得 144 × 13 ÷ 2 = 936，與題目給的 936 吻合）；詳解含質因數 2、3、5 的指數計數，推理完整 |
+| `combinatorics_grade12_foundation_008` | `grade12` | `combinatorics` | `數字排列計數` | `none` | `integer_input` | AMC 12A 2025 Problem 23 | `ok` |  | 答案 9841 正確（Σ C(9,n)·2^(n−1) = (3⁹−1)/2 = 9841，已直接計算驗證）；詳解含「由大到小插入只能放兩端」的關鍵論證 |
+| `combinatorics_grade12_foundation_009` | `grade12` | `combinatorics` | `對稱配對排列` | `none` | `integer_input` | AMC 12A 2008 Problem 21 | `ok` |  | 答案 48 正確（已窮舉 5! = 120 個排列，滿足 a₁+a₂ < a₄+a₅ 的恰為 48 個，等號情形 24 個）；詳解含前後兩段交換建立的一一對應 |
+| `geometry_grade12_foundation_001` | `grade12` | `geometry` | `旋轉與反射` | `coordinate_plane` | `multiple_choice` | AMC 12B 2021 Problem 5 | `ok` | correctness, solution | **原答案錯誤**：原標選項 C（5）。逆推得 P = (2, 9)，故 b − a = **7**（選項 D）。已用正向驗算確認：P(2,9) 繞 (1,5) 逆時針 90° 得 (−3,6)，再對 y = −x 反射得 (−6,3)，與題目相符。原詳解僅寫「依官方答案可得 b − a = 5」屬訴諸權威且結論錯誤，已改為 8 步逆推推導 |
+| `geometry_grade12_foundation_002` | `grade12` | `geometry` | `直線上的梯形` | `geometry_scene` | `multiple_choice` | AMC 12B 2021 Problem 11 | `ok` | correctness, solution | **原答案錯誤**：原標選項 C（84/5 = 16.8）。用座標法求得 D = (1.8, −22.4)、E = (4.2, −5.6)，DE = √288 = **12√2** ≈ 16.9706（選項 D）。原詳解僅寫「依官方解答可得 DE = 84/5」屬訴諸權威，已改為 9 步完整座標推導 |
+| `geometry_grade12_foundation_003` | `grade12` | `geometry` | `梯形對角線` | `geometry_scene` | `multiple_choice` | AMC 12A 2021 Problem 17 | `ok` | solution | 答案 194 正確；原詳解寫「可用座標或面積比例處理這題⋯依官方解答可得 AD = 4√190」屬空轉，已改為完整推導：由 BC = CD = 43 解出 AB = 86 = 2×CD，再由相似得 OD = BD/3、OP = BD/6 = 11 → BD = 66，最後 AD² = 86² − 66² = 3040 = 16×190 |
+| `geometry_grade12_foundation_004` | `grade12` | `geometry` | `托勒密定理` | `geometry_scene` | `multiple_choice` | 改寫題（托勒密定理） | `ok` | source, bare, rewritten | 原題（圓心角 100° 求圓周角）只需除以 2，屬兩步裸題且來源為自製 editorial 暫代出處；改寫為圓內接四邊形 3-4-5-6 求對角線乘積，關鍵在正確配對對邊，答案 39 已由 Brahmagupta 面積反算外接圓半徑後在圓上排出四頂點直接量測驗證 |
+| `geometry_grade12_foundation_005` | `grade12` | `geometry` | `座標三角形的內心` | `geometry_scene` | `multiple_choice` | 改寫題（座標三角形的內心） | `ok` | source, bare, figure, rewritten | 原題（13-14-15 三角形求內切圓半徑）只需套海龍公式再除，屬三步裸題；其 figure 為 `shape_diagram` 貼字圖違反紅線 7；來源為自製 editorial 暫代出處。改寫為頂點 (0,0)、(8,0)、(0,6) 的三角形求內心到原點距離平方，關鍵在兩股落在座標軸上故內心即 (r, r)，答案 8 已用點到斜邊距離獨立驗算 |
+| `geometry_grade12_foundation_006` | `grade12` | `geometry` | `正弦定理` | `geometry_scene` | `multiple_choice` | 改寫題（正弦定理） | `ok` | source, bare, rewritten | 原題（半徑 6、圓心角 120° 求弦長）只需套一次弦長公式，屬三步裸題且來源為自製 editorial 暫代出處；改寫為已知 ∠A=45°、∠B=60°、a=6 求 b²，問平方可避免無理數作答但仍需完成有理化，答案 54 已數值驗證 |
+| `geometry_grade12_foundation_007` | `grade12` | `geometry` | `內接正方形比值` | `geometry_scene` | `multiple_choice` | AMC 12A 2023 Problem 9 | `ok` |  | 答案 2−√3 正確（x+y = √3、x²+y² = 2 → xy = 1/2、y−x = 1，得 x/y = (√3−1)/(√3+1) = 2−√3）；詳解推理完整 |
+| `geometry_grade12_foundation_008` | `grade12` | `geometry` | `圓弧內切圓` | `geometry_scene` | `multiple_choice` | AMC 12 2000 Problem 24 | `ok` |  | 答案 27 正確（AB = 36/π，由 (AB/2)² + r² = (AB−r)² 得 r = 3AB/8 = 27/(2π)，周長 2πr = 27，已驗算）；圖中兩段圓弧為部分弧（0°–60° 與 120°–180°），實際繪出範圍在 bounds 內 |
+| `geometry_grade12_foundation_009` | `grade12` | `geometry` | `扇形內切圓比值` | `geometry_scene` | `multiple_choice` | AMC 12A 2008 Problem 13 | `ok` | figure | 答案 1/9 正確（OP = 2r 且 OP = R − r → R = 3r，面積比 1/9）；但**原圖有兩處錯誤**：bounds 的 minY = −1 使大圓下半部與頂點 B(4.33, −2.5) 都被截掉；且小圓圓心畫在 (2, 0)，與題目條件要求的 OP = 2r = R − r = 10/3 不符。已把 bounds 改為 ±5.7 並將小圓圓心移到 (3.3333, 0)、半徑 5/3，並驗證其到半徑 OA 的距離恰為 r |
+| `geometry_grade12_foundation_010` | `grade12` | `geometry` | `五邊形面積` | `geometry_scene` | `multiple_choice` | AMC 12B 2004 Problem 14 | `ok` |  | 答案 240/13 正確（已用座標 C(0,0)、A(0,5)、B(12,0)，求出 J、K 為 M、N 到 AB 的垂足後以鞋帶公式得面積 18.461538 = 240/13） |
+| `logic_grade12_foundation_001` | `grade12` | `logic` | `騎士與騙子` | `none` | `multiple_choice` | AMC 12B 2021 Problem 8 | `ok` | correctness | **原答案錯誤**：原標選項 A（A 騎士、B 騙子），但該情形下 B 說「兩人不同類」是真話，騙子卻說真話，矛盾。窮舉四種身分組合後唯一自洽的是「A 騙子、B 騎士」（選項 B）。原詳解的推理也錯（宣稱 A 是騙子會導致矛盾）。已改答案並改寫為四情形逐一檢驗的推導 |
+| `logic_grade12_foundation_002` | `grade12` | `logic` | `受限電梯最少次數` | `none` | `integer_input` | 改寫題（受限電梯最少次數） | `ok` | correctness, rewritten | **原題答案不唯一**：以記憶化窮舉整個博弈樹後，1 到 15 的**每一個**第一步都是必勝步，因此選項 B（先擦 1）與 D（先擦 10）和原標的 C（先擦 15）同樣正確；原詳解還寫「若題目要求達成特定模數結構⋯依官方答案」屬空轉。整題淘汰，改寫為電梯每次上 2 下 1 且限 1~10 樓的最少次數，答案 6 已用代數下界與 BFS 雙重驗證 |
+| `logic_grade12_foundation_003` | `grade12` | `logic` | `數字謎` | `none` | `integer_input` | 改寫題（字母算式） | `ok` | correctness, rewritten | **原題無解**：每位加 1 使數增加 1111，每有一位 9 變 0 就少 10，故差必為 1111 − 10k，永遠不可能等於 2222；窮舉 1000~9999 得 **0** 個符合，原標答案 5 不可能成立。整題淘汰，改寫為 AB × 3 = CAB 求兩位數，關鍵在察覺 CAB = 100C + AB，答案 50 已窮舉驗證解唯一 |
+| `logic_grade12_foundation_004` | `grade12` | `logic` | `月曆星期推理` | `none` | `integer_input` | 改寫題（月曆星期推理） | `ok` | source, bare, rewritten | 原題（四人圍圈、固定 A 後求坐法數）僅兩步且答案為 1，深度過低，來源為自製 editorial 暫代出處；改寫為 3 月有 5 個星期五與 5 個星期六且 1 日非星期五，求 1 日星期幾，核心是 31 = 4×7+3 的餘數結構，答案 4 已對七種起始星期逐一統計驗證 |
+| `logic_grade12_foundation_005` | `grade12` | `logic` | `名次約束計數` | `none` | `integer_input` | 改寫題（名次約束計數） | `ok` | correctness, source, rewritten | **原題四個選項全部成立**：某數同時被 2、3、5 整除時，「能被 10 整除」「能被 15 整除」「能被 30 整除」「一定是偶數」都一定正確，不符合唯一答案的要求；來源亦為自製 editorial 暫代出處。整題淘汰，改寫為五人名次的多重約束計數，答案 3（ABEDC、ADEBC、DAEBC）已用 5! = 120 種排列窮舉驗證 |
+| `logic_grade12_foundation_006` | `grade12` | `logic` | `取球奇偶不變量` | `none` | `integer_input` | 改寫題（取球奇偶不變量） | `ok` | source, bare, rewritten | 原題（3 個孩子的性別排列 = 2³）僅兩步屬裸題且來源為自製 editorial 暫代出處；改寫為 15 白 12 黑的取球置換，三種操作對白球數的影響為 −2、0、0 故奇偶為不變量，起始 15 為奇數決定最後一顆是白球（黑球的 12 顆為干擾資訊），答案 1 已用 3000 次隨機模擬驗證 |
+| `logic_grade12_foundation_007` | `grade12` | `logic` | `棋盤局面計數` | `none` | `integer_input` | AMC 12A Fall 2021 Problem 22 | `ok` |  | 答案 148 正確（O 走橫／直線 6 種各扣掉 2 種會讓 X 提前成線的情形得 6×18 = 108，O 走對角線 2 種各 20 得 40，合計 148）；詳解推理完整 |
+| `logic_grade12_foundation_008` | `grade12` | `logic` | `三段論` | `none` | `multiple_choice` | AMC 10 2000 Problem 21 | `ok` |  | 答案「只有 II」正確；詳解逐一說明 I 與 III 為何不必然成立，推理完整 |
+| `logic_grade12_foundation_009` | `grade12` | `logic` | `公平博弈策略` | `none` | `multiple_choice` | AMC 12B 2021 Problem 22 | `ok` | solution | 答案 (6,2,1) 正確；原詳解寫「唯一沒有這種立即對稱拆法、而且官方解證明是後手必勝的位置」屬訴諸權威，已改為 Sprague–Grundy 推導：本遊戲即 Kayles，G(1..6) = 1,2,3,1,4,3，五個選項的 XOR 分別為 3、0、3、1、2，只有 (6,2,1) 為 0 故後手必勝 |
+| `number_theory_grade12_foundation_001` | `grade12` | `number_theory` | `絕對值不等式計數` | `none` | `integer_input` | AMC 12B 2021 Problem 1 | `ok` | bare | 答案 19 正確（3π ≈ 9.42，x 從 −9 到 9）；原詳解僅 3 步已補為 7 步並強調計數要含 0。註：本題是 AMC 12 的第 1 題，難度明顯低於 grade12 對齊的 AIME 入門層，已記錄此偏差 |
+| `number_theory_grade12_foundation_002` | `grade12` | `number_theory` | `整數根與係數` | `none` | `integer_input` | 改寫題（整數根與係數） | `ok` | correctness, rewritten | **原題前提不成立**：x³ − 8x² + 16x − 16 在 1..19 內沒有整數根，且不存在同時滿足和 8、兩兩積和 16、積 16 的正整數三元組（已窮舉為空集合），故「三個根都是正整數」是假前提，題目已損毀。改寫為 a = −8、c = −18 求 b，由和 8、積 18 定出唯一三元組 (2,3,3)，答案 21 已驗證 x³−8x²+21x−18 = (x−2)(x−3)² |
+| `number_theory_grade12_foundation_003` | `grade12` | `number_theory` | `由因數個數反求最少質因數` | `none` | `integer_input` | AMC 12B Fall 2021 Problem 25 | `ok` | correctness, duplication | **原答案錯誤**：原標 2。2021 = 43 × 47 可拆成一個因子 2021，對應 n = p²⁰²⁰，因數個數 2020 + 1 = 2021，只需 **1** 個質因數。已更正答案並補上兩種拆法的完整比較。另：subtopic 原為 `divisor_count`，與 `number_theory_grade8_foundation_004`（「360 有多少個正因數？」）標籤相同而被去重稽核誤判為同群，已改為 `min_prime_factors_given_divisor_count`，稽核群組隨之消除。註：本題 source 與同 pack 的 010 標成同一題號，010 的引用才是對的 |
+| `number_theory_grade12_foundation_004` | `grade12` | `number_theory` | `模逆元` | `none` | `integer_input` | 改寫題（模逆元） | `ok` | source, bare, rewritten | 原題（1~120 中與 120 互質的個數）只是直接代入歐拉函數公式，屬四步裸題且來源為自製 editorial 暫代出處；改寫為求 7x ≡ 1 (mod 30) 的最小正整數解，需先確認互質保證存在性再化為線性同餘，答案 13 已驗算 7×13 = 91 = 30×3 + 1 |
+| `number_theory_grade12_foundation_005` | `grade12` | `number_theory` | `平方差表示法` | `none` | `integer_input` | 改寫題（平方差表示法計數） | `ok` | source, bare, rewritten | 原題（求 2³×5² 的因數和）只需套一次公式，屬四步裸題且來源為自製 editorial 暫代出處；改寫為 1~100 中可寫成兩正整數平方差者的個數，核心是 (a−b)(a+b) 需同奇偶故 n ≡ 2 (mod 4) 不可表示，且要排除 n = 1 與 n = 4 的邊界，答案 73 已用窮舉與分類計數雙重驗證 |
+| `number_theory_grade12_foundation_006` | `grade12` | `number_theory` | `等比和的餘數` | `none` | `integer_input` | 改寫題（等比和的餘數） | `ok` | source, duplication, rewritten | 原題（同餘聯立求最小 n = 21）與本輪改寫的 `number_theory_grade9_foundation_001` 同型且較簡單，來源為自製 editorial 暫代出處；改寫為 2⁰+2¹+⋯+2¹⁰⁰ 除以 7 的餘數，先化為 2¹⁰¹ − 1 再用週期 3 定位，答案 3 已用直接計算與「每三項一組」分組法雙重驗算 |
+| `number_theory_grade12_foundation_007` | `grade12` | `number_theory` | `費波那契比值和` | `none` | `integer_input` | AMC 12B 2024 Problem 18 | `ok` | solution | 答案 319 正確（十項為 1、3、4、7、11、18、29、47、76、123，已逐項計算驗證）；原詳解列出的 Fibonacci 清單漏了 F7 = 13 與 F9 = 34，而這兩項正是計算 F14/F7 與 F18/F9 所必需的，已補齊並附上 F(k) 整除 F(2k) 的說明 |
+| `number_theory_grade12_foundation_008` | `grade12` | `number_theory` | `數字和倍數` | `none` | `integer_input` | AMC 12A 2009 Problem 12 | `ok` |  | 答案 1 正確（已窮舉 1~999，唯一符合者為 54 = 6 × 9）；詳解含上界 6×27 = 162 與 3 的倍數篩選，推理完整 |
+| `number_theory_grade12_foundation_009` | `grade12` | `number_theory` | `整除性判斷` | `none` | `multiple_choice` | AMC 12A 2008 Problem 5 | `ok` |  | 答案 B 正確（(2x/3) − (x/6) = x/2 為整數 → x 必為偶數，但不必是 3 的倍數，x = 2 即為反例）；詳解推理完整 |
+| `number_theory_grade12_foundation_010` | `grade12` | `number_theory` | `餘數和相等` | `none` | `multiple_choice` | AMC 12B Fall 2021 Problem 25 | `ok` |  | 答案 2 正確（已窮舉兩位數 n，符合 R(n) = R(n+1) 者為 13 與 97）；詳解含「n+1 在 2~10 的因數和需為 9」的關鍵論證 |
