@@ -950,6 +950,456 @@
         "subtopic": "數位和規律",
         "subtopicCode": "digit_sum_pattern_product"
       }
+    },
+    {
+      "id": "number_theory_grade10_foundation_011",
+      "topic": "number_theory",
+      "subtopic": "sum_of_two_squares",
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "求滿足 a² + b² = 65 的正整數對 (a, b) 共有多少組。（只調換 a 與 b 視為同一組）",
+        "zh-Hans": "求满足 a² + b² = 65 的正整数对 (a, b) 共有多少组。（只调换 a 与 b 视为同一组）",
+        "en": "How many pairs of positive integers (a, b) satisfy a² + b² = 65? Pairs that differ only by swapping a and b count as the same.",
+        "ja": "a² + b² = 65 を満たす正の整数の組 (a, b) は何組ありますか。（a と b を入れ替えただけのものは同じ組とみなします）"
+      },
+      "answer": {
+        "zh-Hant": "答案是 2 組。",
+        "zh-Hans": "答案是 2 组。",
+        "en": "The answer is 2.",
+        "ja": "答えは 2 組です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "和的形式無法像平方差那樣因式分解，所以這題只能靠有系統的枚舉，重點是**把搜尋範圍先收斂**。",
+          "因為不計順序，可以假設 a ≤ b。此時 a² ≤ 65 ÷ 2 = 32.5，所以 a ≤ 5。",
+          "又因為 b² < 65，所以 b ≤ 8。範圍縮得很小，逐一檢查即可。",
+          "a = 1：65 − 1 = 64 = 8²，是完全平方數 ✓，得到 (1, 8)。",
+          "a = 2：65 − 4 = 61，不是完全平方數 ✗。a = 3：65 − 9 = 56 ✗。",
+          "a = 4：65 − 16 = 49 = 7²，是完全平方數 ✓，得到 (4, 7)。",
+          "a = 5：65 − 25 = 40，不是完全平方數 ✗。到此 a ≤ 5 已檢查完畢。",
+          "所以只有 (1, 8) 與 (4, 7) 兩組。驗算：程式對 a = 1 到 8 逐一檢查 65 − a² 是否為完全平方，得到的解正是這 2 組（若不限 a ≤ b 則會多出 (7, 4) 與 (8, 1) 兩個重複）✓。"
+        ],
+        "zh-Hans": [
+          "和的形式无法像平方差那样因式分解，所以这题只能靠有系统的枚举，重点是**把搜索范围先收敛**。",
+          "因为不计顺序，可以假设 a ≤ b。此时 a² ≤ 65 ÷ 2 = 32.5，所以 a ≤ 5。",
+          "又因为 b² < 65，所以 b ≤ 8。范围缩得很小，逐一检查即可。",
+          "a = 1：65 − 1 = 64 = 8²，是完全平方数 ✓，得到 (1, 8)。",
+          "a = 2：65 − 4 = 61，不是完全平方数 ✗。a = 3：65 − 9 = 56 ✗。",
+          "a = 4：65 − 16 = 49 = 7²，是完全平方数 ✓，得到 (4, 7)。",
+          "a = 5：65 − 25 = 40，不是完全平方数 ✗。到此 a ≤ 5 已检查完毕。",
+          "所以只有 (1, 8) 与 (4, 7) 两组。验算：程序对 a = 1 到 8 逐一检查 65 − a² 是否为完全平方，得到的解正是这 2 组（若不限 a ≤ b 则会多出 (7, 4) 与 (8, 1) 两个重复）✓。"
+        ],
+        "en": [
+          "A sum of squares cannot be factored the way a difference of squares can, so systematic enumeration is the route — and the key is to narrow the search range first.",
+          "Since order does not matter, assume a ≤ b. Then a² ≤ 65 ÷ 2 = 32.5, so a ≤ 5.",
+          "Also b² < 65 gives b ≤ 8. The range is now small enough to check case by case.",
+          "a = 1: 65 − 1 = 64 = 8², a perfect square, giving (1, 8).",
+          "a = 2: 65 − 4 = 61, not a square. a = 3: 65 − 9 = 56, not a square.",
+          "a = 4: 65 − 16 = 49 = 7², a perfect square, giving (4, 7).",
+          "a = 5: 65 − 25 = 40, not a square. That exhausts a ≤ 5.",
+          "So only (1, 8) and (4, 7) work. Check: testing a from 1 to 8 for 65 − a² being a perfect square reproduces exactly these 2 pairs, with (7, 4) and (8, 1) appearing as duplicates if the a ≤ b restriction is dropped."
+        ],
+        "ja": [
+          "和の形は平方差のように因数分解できないので、この問題は体系的な列挙で解きます。要点は**まず探索範囲を絞る**ことです。",
+          "順序を問わないので a ≤ b と仮定できます。すると a² ≤ 65 ÷ 2 = 32.5 より a ≤ 5。",
+          "また b² < 65 より b ≤ 8。範囲が十分狭くなったので 1 つずつ確かめます。",
+          "a = 1：65 − 1 = 64 = 8² で平方数 ✓、(1, 8) が得られます。",
+          "a = 2：65 − 4 = 61 は平方数でない ✗。a = 3：65 − 9 = 56 ✗。",
+          "a = 4：65 − 16 = 49 = 7² で平方数 ✓、(4, 7) が得られます。",
+          "a = 5：65 − 25 = 40 は平方数でない ✗。これで a ≤ 5 をすべて確認しました。",
+          "よって (1, 8) と (4, 7) の 2 組だけです。検算：a = 1 から 8 まで 65 − a² が平方数かを調べると、ちょうどこの 2 組が得られます（a ≤ b の制限を外すと (7, 4) と (8, 1) が重複して現れます）✓。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "2"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "兩平方數之和的枚舉：以 a ≤ b 收斂搜尋範圍，再逐一檢驗 65 − a² 是否為完全平方",
+        "notes": "設計依據：與平方差可因式分解不同，平方和只能枚舉，因此重點在於用 a ≤ b 把範圍從 8 收到 5 以保證窮盡且不重複；不設此限會把 (1,8) 與 (8,1) 重複計入而答成 4。答案 2 已用 a = 1..8 的逐一完全平方檢驗窮舉驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（兩平方數之和）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "數論",
+        "topicCode": "number_theory",
+        "subtopic": "兩平方數之和",
+        "subtopicCode": "sum_of_two_squares"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "number_theory_grade10_foundation_012",
+      "topic": "number_theory",
+      "subtopic": "digital_root_power",
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "把一個正整數的各位數字相加，若結果不是一位數就再相加，如此重複直到剩下一位數為止，這個一位數稱為該數的數位根。求 2023 的 2023 次方的數位根。",
+        "zh-Hans": "把一个正整数的各位数字相加，若结果不是一位数就再相加，如此重复直到剩下一位数为止，这个一位数称为该数的数位根。求 2023 的 2023 次方的数位根。",
+        "en": "Add the digits of a positive integer, and if the result has more than one digit repeat the process until a single digit remains; that digit is called the digital root. Find the digital root of 2023 raised to the power 2023.",
+        "ja": "正の整数の各位の数字を足し、1 桁でなければさらに足す、という操作を 1 桁になるまで繰り返します。この 1 桁の数をその数の数字根といいます。2023 の 2023 乗の数字根を求めなさい。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 7。",
+        "zh-Hans": "答案是 7。",
+        "en": "The answer is 7.",
+        "ja": "答えは 7 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "這個數大到無法真的算出來，所以必須找出數位根的代數性質。",
+          "關鍵事實是：**一個數與它的各位數字和，除以 9 的餘數相同**（因為 10 ≡ 1 mod 9，每個位值都同餘於 1）。",
+          "反覆取數字和不會改變模 9 的餘數，所以數位根就是該數除以 9 的餘數；只有一個例外——餘數為 0 時數位根是 9 而不是 0。",
+          "先求底數的餘數：2023 的數字和是 2 + 0 + 2 + 3 = 7，所以 2023 ≡ 7 (mod 9)。",
+          "問題化為求 7 的 2023 次方除以 9 的餘數。列出 7 的次方模 9 的循環：7¹ ≡ 7、7² ≡ 49 ≡ 4、7³ ≡ 28 ≡ 1，之後開始重複，週期是 3。",
+          "把指數對週期取餘數：2023 ÷ 3 的餘數是 1，所以 7²⁰²³ ≡ 7¹ ≡ 7 (mod 9)。",
+          "餘數是 7 而不是 0，所以數位根就是 7。",
+          "驗算：直接以模冪運算計算 2023^2023 mod 9 得到 7 ✓。另外抽查數位根規則本身：2023 的數位根是 7、4096 是 1、99999 是 9、123456 是 3，與各自除以 9 的餘數（0 視為 9）完全一致。"
+        ],
+        "zh-Hans": [
+          "这个数大到无法真的算出来，所以必须找出数位根的代数性质。",
+          "关键事实是：**一个数与它的各位数字和，除以 9 的余数相同**（因为 10 ≡ 1 mod 9，每个位值都同余于 1）。",
+          "反复取数字和不会改变模 9 的余数，所以数位根就是该数除以 9 的余数；只有一个例外——余数为 0 时数位根是 9 而不是 0。",
+          "先求底数的余数：2023 的数字和是 2 + 0 + 2 + 3 = 7，所以 2023 ≡ 7 (mod 9)。",
+          "问题化为求 7 的 2023 次方除以 9 的余数。列出 7 的次方模 9 的循环：7¹ ≡ 7、7² ≡ 49 ≡ 4、7³ ≡ 28 ≡ 1，之后开始重复，周期是 3。",
+          "把指数对周期取余数：2023 ÷ 3 的余数是 1，所以 7²⁰²³ ≡ 7¹ ≡ 7 (mod 9)。",
+          "余数是 7 而不是 0，所以数位根就是 7。",
+          "验算：直接以模幂运算计算 2023^2023 mod 9 得到 7 ✓。另外抽查数位根规则本身：2023 的数位根是 7、4096 是 1、99999 是 9、123456 是 3，与各自除以 9 的余数（0 视为 9）完全一致。"
+        ],
+        "en": [
+          "The number is far too large to compute directly, so an algebraic property of the digital root is needed.",
+          "The key fact is that a number and its digit sum leave the same remainder modulo 9, because 10 ≡ 1 mod 9 and so every place value is congruent to 1.",
+          "Repeatedly taking digit sums never changes the remainder modulo 9, so the digital root is that remainder — with one exception: when the remainder is 0 the digital root is 9, not 0.",
+          "First reduce the base: the digit sum of 2023 is 2 + 0 + 2 + 3 = 7, so 2023 ≡ 7 (mod 9).",
+          "The problem becomes finding 7 to the power 2023 modulo 9. The powers of 7 mod 9 cycle: 7¹ ≡ 7, 7² ≡ 49 ≡ 4, 7³ ≡ 28 ≡ 1, and then repeat with period 3.",
+          "Reduce the exponent modulo the period: 2023 leaves remainder 1 on division by 3, so 7²⁰²³ ≡ 7¹ ≡ 7 (mod 9).",
+          "The remainder is 7 rather than 0, so the digital root is exactly 7.",
+          "Check: modular exponentiation gives 2023^2023 mod 9 = 7 directly. The rule itself also checks out on samples: the digital roots of 2023, 4096, 99999 and 123456 are 7, 1, 9 and 3, matching their remainders mod 9 with 0 read as 9."
+        ],
+        "ja": [
+          "この数は実際に計算できないほど大きいので、数字根の代数的性質を使う必要があります。",
+          "鍵となる事実は、**ある数とその各位の数字和は 9 で割った余りが等しい**ことです（10 ≡ 1 mod 9 なので、どの位の重みも 1 と合同です）。",
+          "数字和を繰り返しても 9 での余りは変わらないので、数字根はその余りに等しくなります。ただし例外が 1 つあり、余りが 0 のときの数字根は 0 ではなく 9 です。",
+          "まず底の余りを求めます：2023 の数字和は 2 + 0 + 2 + 3 = 7 なので 2023 ≡ 7 (mod 9)。",
+          "問題は 7 の 2023 乗を 9 で割った余りを求めることになります。7 の累乗を 9 で割った余りは 7¹ ≡ 7、7² ≡ 49 ≡ 4、7³ ≡ 28 ≡ 1 と続き、周期 3 で繰り返します。",
+          "指数を周期で割った余りをとると 2023 ÷ 3 の余りは 1 なので、7²⁰²³ ≡ 7¹ ≡ 7 (mod 9)。",
+          "余りは 0 ではなく 7 なので、数字根はそのまま 7 です。",
+          "検算：べき剰余で 2023^2023 mod 9 を計算すると 7 ✓。規則自体も確認すると、2023、4096、99999、123456 の数字根は 7、1、9、3 で、それぞれの 9 での余り（0 は 9 と読む）と完全に一致します。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "7"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "數位根等於模 9 的餘數：先化簡底數再用次方的循環週期處理巨大指數",
+        "notes": "設計依據：三個環節——建立「數位根 = 模 9 餘數」的等價（含餘 0 時為 9 的例外）、化簡底數 2023 ≡ 7、以及用週期 3 處理指數；缺任一環都無法處理這個無法直接展開的數。答案 7 已用模冪運算直接計算並抽查四個數的數位根規則驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（冪的數位根）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "數論",
+        "topicCode": "number_theory",
+        "subtopic": "冪的數位根",
+        "subtopicCode": "digital_root_power"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "number_theory_grade10_foundation_013",
+      "topic": "number_theory",
+      "subtopic": "square_and_cube_condition",
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "求最小的正整數 n，使得 n 除以 2 的商是一個完全平方數，而且 n 除以 3 的商是一個完全立方數。",
+        "zh-Hans": "求最小的正整数 n，使得 n 除以 2 的商是一个完全平方数，而且 n 除以 3 的商是一个完全立方数。",
+        "en": "Find the smallest positive integer n such that n divided by 2 is a perfect square and n divided by 3 is a perfect cube.",
+        "ja": "n を 2 で割った商が平方数であり、かつ n を 3 で割った商が立方数となるような最小の正の整数 n を求めなさい。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 648。",
+        "zh-Hans": "答案是 648。",
+        "en": "The answer is 648.",
+        "ja": "答えは 648 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "n 必須同時被 2 和 3 整除，而且除完之後的商還要有很嚴格的形式，所以 n 的質因數只可能是 2 和 3——多出任何其他質因數都會讓兩個商同時失去平方或立方的性質。",
+          "設 n = 2^a × 3^b，接著把兩個條件翻譯成指數的條件。",
+          "條件一：n ÷ 2 = 2^(a−1) × 3^b 是完全平方數，表示每個指數都是偶數，也就是 a − 1 為偶數（即 a 為奇數）且 b 為偶數。",
+          "條件二：n ÷ 3 = 2^a × 3^(b−1) 是完全立方數，表示每個指數都是 3 的倍數，也就是 a 為 3 的倍數，且 b − 1 為 3 的倍數（即 b ≡ 1 mod 3）。",
+          "把關於 a 的兩個條件合起來：a 是奇數且是 3 的倍數。滿足的最小正整數是 a = 3（6 是 3 的倍數但為偶數，不合）。",
+          "再看 b：b 是偶數且除以 3 餘 1。逐一試 b = 2（2 mod 3 = 2 ✗）、b = 4（4 mod 3 = 1 ✓），所以最小的 b = 4。",
+          "因此 n = 2³ × 3⁴ = 8 × 81 = 648。",
+          "驗算：648 ÷ 2 = 324 = 18² 是完全平方數 ✓；648 ÷ 3 = 216 = 6³ 是完全立方數 ✓。程式從 1 逐一往上搜尋，第一個同時滿足兩個條件的正整數正是 648 ✓。"
+        ],
+        "zh-Hans": [
+          "n 必须同时被 2 和 3 整除，而且除完之后的商还要有很严格的形式，所以 n 的质因数只可能是 2 和 3——多出任何其他质因数都会让两个商同时失去平方或立方的性质。",
+          "设 n = 2^a × 3^b，接着把两个条件翻译成指数的条件。",
+          "条件一：n ÷ 2 = 2^(a−1) × 3^b 是完全平方数，表示每个指数都是偶数，也就是 a − 1 为偶数（即 a 为奇数）且 b 为偶数。",
+          "条件二：n ÷ 3 = 2^a × 3^(b−1) 是完全立方数，表示每个指数都是 3 的倍数，也就是 a 为 3 的倍数，且 b − 1 为 3 的倍数（即 b ≡ 1 mod 3）。",
+          "把关于 a 的两个条件合起来：a 是奇数且是 3 的倍数。满足的最小正整数是 a = 3（6 是 3 的倍数但为偶数，不合）。",
+          "再看 b：b 是偶数且除以 3 余 1。逐一试 b = 2（2 mod 3 = 2 ✗）、b = 4（4 mod 3 = 1 ✓），所以最小的 b = 4。",
+          "因此 n = 2³ × 3⁴ = 8 × 81 = 648。",
+          "验算：648 ÷ 2 = 324 = 18² 是完全平方数 ✓；648 ÷ 3 = 216 = 6³ 是完全立方数 ✓。程序从 1 逐一往上搜索，第一个同时满足两个条件的正整数正是 648 ✓。"
+        ],
+        "en": [
+          "Since n must be divisible by both 2 and 3 and the quotients must have very rigid forms, the only primes dividing n can be 2 and 3 — any extra prime would spoil both the square and the cube condition at once.",
+          "Write n = 2^a × 3^b and translate the two conditions into conditions on the exponents.",
+          "First condition: n ÷ 2 = 2^(a−1) × 3^b is a perfect square, so every exponent is even, meaning a − 1 is even (that is, a is odd) and b is even.",
+          "Second condition: n ÷ 3 = 2^a × 3^(b−1) is a perfect cube, so every exponent is a multiple of 3, meaning a is a multiple of 3 and b − 1 is a multiple of 3 (that is, b ≡ 1 mod 3).",
+          "Combining the conditions on a: it must be odd and a multiple of 3, so the smallest is a = 3, since 6 is a multiple of 3 but even.",
+          "Now b: it must be even and leave remainder 1 modulo 3. Testing b = 2 gives 2 mod 3 = 2, which fails, while b = 4 gives 4 mod 3 = 1, which works, so the smallest is b = 4.",
+          "Therefore n = 2³ × 3⁴ = 8 × 81 = 648.",
+          "Check: 648 ÷ 2 = 324 = 18², a perfect square, and 648 ÷ 3 = 216 = 6³, a perfect cube. A direct search upward from 1 finds 648 as the first integer meeting both conditions."
+        ],
+        "ja": [
+          "n は 2 でも 3 でも割り切れ、しかも商が非常に厳しい形をとる必要があるので、n の素因数は 2 と 3 だけに限られます。他の素因数があると平方・立方の条件が同時に壊れるからです。",
+          "n = 2^a × 3^b とおき、2 つの条件を指数の条件に翻訳します。",
+          "条件 1：n ÷ 2 = 2^(a−1) × 3^b が平方数 ⟺ 指数がすべて偶数、すなわち a − 1 が偶数（a が奇数）かつ b が偶数。",
+          "条件 2：n ÷ 3 = 2^a × 3^(b−1) が立方数 ⟺ 指数がすべて 3 の倍数、すなわち a が 3 の倍数かつ b − 1 が 3 の倍数（b ≡ 1 mod 3）。",
+          "a についての 2 条件を合わせると、a は奇数かつ 3 の倍数。最小は a = 3 です（6 は 3 の倍数ですが偶数なので不適）。",
+          "次に b：偶数かつ 3 で割って 1 余る数。b = 2 は 2 mod 3 = 2 で不適、b = 4 は 4 mod 3 = 1 で適合するので最小は b = 4。",
+          "したがって n = 2³ × 3⁴ = 8 × 81 = 648。",
+          "検算：648 ÷ 2 = 324 = 18² で平方数 ✓、648 ÷ 3 = 216 = 6³ で立方数 ✓。1 から順に探索しても、両条件を最初に満たすのはまさに 648 です ✓。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "648"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "把平方與立方條件轉成指數的同餘限制：a 須奇且為 3 的倍數、b 須偶且模 3 餘 1",
+        "notes": "設計依據：關鍵是先論證 n 只能有 2、3 兩個質因數，再把兩個條件各自拆成對 a 與 b 的同餘限制並取交集；直接試乘或猜測幾乎不可能命中 648。兩個限制刻意互相牽制（a 要同時奇與被 3 整除、b 要同時偶與模 3 餘 1），使最小解不落在顯然的位置。答案 648 已用從 1 起的逐一搜尋獨立驗證為首個符合者。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（指數的同餘條件）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "數論",
+        "topicCode": "number_theory",
+        "subtopic": "指數的同餘條件",
+        "subtopicCode": "square_and_cube_condition"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "number_theory_grade10_foundation_014",
+      "topic": "number_theory",
+      "subtopic": "binary_weight",
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "把 2025 寫成二進位表示。求這個二進位表示中數字 1 出現的次數。",
+        "zh-Hans": "把 2025 写成二进位表示。求这个二进位表示中数字 1 出现的次数。",
+        "en": "Write 2025 in binary. How many times does the digit 1 appear in that representation?",
+        "ja": "2025 を 2 進法で表したとき、数字 1 は何回現れますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 8 次。",
+        "zh-Hans": "答案是 8 次。",
+        "en": "The answer is 8.",
+        "ja": "答えは 8 回です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "二進位表示中的每個 1，都對應到一個 2 的次方，所以問題等於：**2025 最少要用幾個相異的 2 的次方相加才能湊出來**。",
+          "用「反覆減去不超過原數的最大 2 次方」的貪心作法，一步步拆解。",
+          "小於等於 2025 的最大 2 次方是 1024，減去後剩 2025 − 1024 = 1001。",
+          "接著：1001 − 512 = 489；489 − 256 = 233；233 − 128 = 105。",
+          "再繼續：105 − 64 = 41；41 − 32 = 9；9 − 8 = 1；最後剩下 1 = 2⁰，減完歸零。",
+          "所以 2025 = 1024 + 512 + 256 + 128 + 64 + 32 + 8 + 1。",
+          "數一數用到的項數：1024、512、256、128、64、32、8、1 共 8 項，所以二進位表示中有 8 個 1。",
+          "驗算：把上列八項相加得 1024 + 512 + 256 + 128 + 64 + 32 + 8 + 1 = 2025 ✓。程式轉出的二進位表示是 11111101001，其中 1 的個數確實是 8 ✓（注意中間的 0 對應到未被使用的 16 與 4、2）。"
+        ],
+        "zh-Hans": [
+          "二进位表示中的每个 1，都对应到一个 2 的次方，所以问题等于：**2025 最少要用几个相异的 2 的次方相加才能凑出来**。",
+          "用「反复减去不超过原数的最大 2 次方」的贪心做法，一步步拆解。",
+          "小于等于 2025 的最大 2 次方是 1024，减去后剩 2025 − 1024 = 1001。",
+          "接着：1001 − 512 = 489；489 − 256 = 233；233 − 128 = 105。",
+          "再继续：105 − 64 = 41；41 − 32 = 9；9 − 8 = 1；最后剩下 1 = 2⁰，减完归零。",
+          "所以 2025 = 1024 + 512 + 256 + 128 + 64 + 32 + 8 + 1。",
+          "数一数用到的项数：1024、512、256、128、64、32、8、1 共 8 项，所以二进位表示中有 8 个 1。",
+          "验算：把上列八项相加得 1024 + 512 + 256 + 128 + 64 + 32 + 8 + 1 = 2025 ✓。程序转出的二进位表示是 11111101001，其中 1 的个数确实是 8 ✓（注意中间的 0 对应到未被使用的 16 与 4、2）。"
+        ],
+        "en": [
+          "Each 1 in a binary representation corresponds to a power of 2, so the question is how many distinct powers of 2 are needed to add up to 2025.",
+          "Use the greedy method of repeatedly subtracting the largest power of 2 not exceeding what remains.",
+          "The largest power of 2 at most 2025 is 1024, leaving 2025 − 1024 = 1001.",
+          "Continuing: 1001 − 512 = 489, then 489 − 256 = 233, then 233 − 128 = 105.",
+          "Further: 105 − 64 = 41, then 41 − 32 = 9, then 9 − 8 = 1, and finally 1 = 2⁰ brings the remainder to zero.",
+          "So 2025 = 1024 + 512 + 256 + 128 + 64 + 32 + 8 + 1.",
+          "Counting the terms used — 1024, 512, 256, 128, 64, 32, 8 and 1 — there are 8, so the binary representation contains 8 ones.",
+          "Check: those eight terms sum to 1024 + 512 + 256 + 128 + 64 + 32 + 8 + 1 = 2025. Converting by computer gives 11111101001, which indeed contains 8 ones, with the interior zeros marking the unused 16, 4 and 2."
+        ],
+        "ja": [
+          "2 進法表記の各 1 は 2 の累乗に対応するので、この問題は「2025 を相異なる 2 の累乗の和で表すのに何個必要か」と同じです。",
+          "「残りを超えない最大の 2 の累乗を繰り返し引く」貪欲法で分解します。",
+          "2025 以下で最大の 2 の累乗は 1024 で、引くと 2025 − 1024 = 1001。",
+          "続けて 1001 − 512 = 489、489 − 256 = 233、233 − 128 = 105。",
+          "さらに 105 − 64 = 41、41 − 32 = 9、9 − 8 = 1、最後の 1 = 2⁰ で 0 になります。",
+          "よって 2025 = 1024 + 512 + 256 + 128 + 64 + 32 + 8 + 1。",
+          "使った項を数えると 1024、512、256、128、64、32、8、1 の 8 個なので、2 進法表記の 1 は 8 個です。",
+          "検算：8 項の和は 1024 + 512 + 256 + 128 + 64 + 32 + 8 + 1 = 2025 ✓。計算機で変換すると 11111101001 となり 1 の個数は確かに 8 ✓（途中の 0 は使わなかった 16、4、2 に対応します）。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "8"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "二進位表示的 1 的個數：等價於把該數拆成相異 2 次方之和所需的項數",
+        "notes": "設計依據：關鍵是把「二進位有幾個 1」重新理解成「拆成幾個 2 的次方」，使貪心減法成為可靠且可自我驗算的手算流程；最後把八項加回 2025 是天然的檢查。答案 8 已用貪心分解與程式轉換 11111101001 雙向驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（二進位中 1 的個數）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "數論",
+        "topicCode": "number_theory",
+        "subtopic": "二進位中 1 的個數",
+        "subtopicCode": "binary_weight"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "number_theory_grade10_foundation_015",
+      "topic": "number_theory",
+      "subtopic": "bezout_smallest",
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "設 x、y 是整數（可以是負數）。求 12x + 20y 所能表示的最小正整數。",
+        "zh-Hans": "设 x、y 是整数（可以是负数）。求 12x + 20y 所能表示的最小正整数。",
+        "en": "Let x and y be integers, possibly negative. Find the smallest positive integer expressible as 12x + 20y.",
+        "ja": "x、y を整数（負でもよい）とします。12x + 20y の形で表せる最小の正の整数を求めなさい。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 4。",
+        "zh-Hans": "答案是 4。",
+        "en": "The answer is 4.",
+        "ja": "答えは 4 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "這題要做兩件事：證明某個值取得到，並證明比它小的正整數都取不到。",
+          "先證明取不到更小的。12 和 20 都是 4 的倍數，所以不論 x、y 是什麼整數，12x + 20y 都是 4 的倍數。",
+          "因此可能的正整數值只能是 4、8、12、⋯，1、2、3 這些都不可能出現。",
+          "接著證明 4 真的取得到，只要找出一組具體的 x、y 即可。",
+          "試 x = 2、y = −1：12 × 2 + 20 × (−1) = 24 − 20 = 4 ✓。注意這裡用到了負數，這正是題目允許 x、y 為負的原因。",
+          "所以最小正整數是 4。",
+          "這個 4 其實就是 gcd(12, 20)——一般而言，ax + by 能表示的最小正整數恰好是 a 與 b 的最大公因數。",
+          "驗算：程式對 x、y 在 −50 到 50 之間窮舉，得到的正整數值依序是 4、8、12、16、20、⋯，最小的正是 4 ✓，且全部都是 4 的倍數，與推理一致。"
+        ],
+        "zh-Hans": [
+          "这题要做两件事：证明某个值取得到，并证明比它小的正整数都取不到。",
+          "先证明取不到更小的。12 和 20 都是 4 的倍数，所以不论 x、y 是什么整数，12x + 20y 都是 4 的倍数。",
+          "因此可能的正整数值只能是 4、8、12、⋯，1、2、3 这些都不可能出现。",
+          "接着证明 4 真的取得到，只要找出一组具体的 x、y 即可。",
+          "试 x = 2、y = −1：12 × 2 + 20 × (−1) = 24 − 20 = 4 ✓。注意这里用到了负数，这正是题目允许 x、y 为负的原因。",
+          "所以最小正整数是 4。",
+          "这个 4 其实就是 gcd(12, 20)——一般而言，ax + by 能表示的最小正整数恰好是 a 与 b 的最大公因数。",
+          "验算：程序对 x、y 在 −50 到 50 之间穷举，得到的正整数值依序是 4、8、12、16、20、⋯，最小的正是 4 ✓，且全部都是 4 的倍数，与推理一致。"
+        ],
+        "en": [
+          "Two things are needed: showing some value is attainable, and showing no smaller positive integer is.",
+          "First the impossibility. Both 12 and 20 are multiples of 4, so whatever integers x and y are, 12x + 20y is a multiple of 4.",
+          "Hence the possible positive values are only 4, 8, 12 and so on; 1, 2 and 3 can never occur.",
+          "Now show 4 really is attainable by exhibiting explicit x and y.",
+          "Try x = 2 and y = −1: 12 × 2 + 20 × (−1) = 24 − 20 = 4. Note the use of a negative value, which is exactly why the problem allows x and y to be negative.",
+          "So the smallest positive integer is 4.",
+          "That 4 is precisely gcd(12, 20) — in general the smallest positive integer expressible as ax + by is the greatest common divisor of a and b.",
+          "Check: enumerating x and y from −50 to 50 produces the positive values 4, 8, 12, 16, 20 and so on, with 4 the smallest and every value a multiple of 4, matching the reasoning."
+        ],
+        "ja": [
+          "この問題では 2 つのことを示す必要があります：ある値が実現できること、そしてそれより小さい正の整数は実現できないことです。",
+          "まず不可能性から。12 も 20 も 4 の倍数なので、x、y がどんな整数でも 12x + 20y は 4 の倍数になります。",
+          "したがって現れうる正の値は 4、8、12、⋯ に限られ、1、2、3 は決して現れません。",
+          "次に 4 が実際に実現できることを、具体的な x、y を示して確かめます。",
+          "x = 2、y = −1 とすると 12 × 2 + 20 × (−1) = 24 − 20 = 4 ✓。ここで負の数を使っている点が、問題が x、y に負を許している理由です。",
+          "よって最小の正の整数は 4 です。",
+          "この 4 はまさに gcd(12, 20) です。一般に ax + by の形で表せる最小の正の整数は a と b の最大公約数に一致します。",
+          "検算：x、y を −50 から 50 まで動かして列挙すると、正の値は 4、8、12、16、20、⋯ となり最小は 4 ✓、しかもすべて 4 の倍数で推論と一致します。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "4"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "線性組合的最小正值等於最大公因數：以「同為 4 的倍數」給下界，再構造 x = 2、y = −1 達成",
+        "notes": "設計依據：本題要求同時給出下界（所有值皆為 4 的倍數）與可達性（具體的 x = 2、y = −1），只答 gcd 而不說明兩半不算完整；允許負整數是達成最小值的必要條件，詳解特別點出。答案 4 已用 x、y 在 −50..50 的窮舉驗證值域恰為 4 的倍數且最小為 4。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（線性組合最小正值）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "數論",
+        "topicCode": "number_theory",
+        "subtopic": "線性組合最小正值",
+        "subtopicCode": "bezout_smallest"
+      },
+      "reviewStatus": "ok"
     }
   ]
 }
