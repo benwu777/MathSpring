@@ -744,6 +744,546 @@
         "subtopicCode": "sum_of_twos_and_threes"
       },
       "reviewStatus": "ok"
+    },
+    {
+      "id": "combinatorics_grade9_foundation_010",
+      "topic": "combinatorics",
+      "subtopic": "inclusion_exclusion_three_sets",
+      "difficulty": "foundation",
+      "levelStage": "grade9",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "某公司有 100 位員工。會英文的有 60 人，會日文的有 45 人，會法文的有 30 人；同時會英文和日文的有 25 人，同時會日文和法文的有 15 人，同時會英文和法文的有 20 人；三種語言都會的有 8 人。求三種語言都不會的有幾人。",
+        "zh-Hans": "某公司有 100 位员工。会英文的有 60 人，会日文的有 45 人，会法文的有 30 人；同时会英文和日文的有 25 人，同时会日文和法文的有 15 人，同时会英文和法文的有 20 人；三种语言都会的有 8 人。求三种语言都不会的有几人。",
+        "en": "A company has 100 employees. 60 speak English, 45 speak Japanese and 30 speak French; 25 speak both English and Japanese, 15 both Japanese and French, and 20 both English and French; 8 speak all three. How many speak none of the three languages?",
+        "ja": "ある会社に従業員が 100 人います。英語ができるのが 60 人、日本語ができるのが 45 人、フランス語ができるのが 30 人。英語と日本語の両方ができるのが 25 人、日本語とフランス語の両方が 15 人、英語とフランス語の両方が 20 人。3 か国語すべてができるのが 8 人です。3 つとも できない人は何人ですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 17 人。",
+        "zh-Hans": "答案是 17 人。",
+        "en": "The answer is 17.",
+        "ja": "答えは 17 人です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "先算「至少會一種語言」的人數，再用總人數扣掉，就是三種都不會的人數。",
+          "三個集合的容斥原理是：先把三個單獨的人數相加，再減掉三組兩兩重疊的人數，最後把三種都會的人數**加回來**。",
+          "為什麼最後要加回來？因為三種都會的那 8 人，在前面三個單項中各被算了 1 次（共 3 次），在三組兩兩重疊中又各被減了 1 次（共減 3 次），加減相抵後變成 0 次，等於被漏掉了，所以要補加 1 次。",
+          "代入計算：60 + 45 + 30 − 25 − 15 − 20 + 8。",
+          "先算加項：60 + 45 + 30 = 135；再算減項：25 + 15 + 20 = 60。",
+          "所以至少會一種的人數 = 135 − 60 + 8 = 83 人。",
+          "三種都不會的人數 = 100 − 83 = 17 人。",
+          "驗算：把 100 人分成八個互不重疊的區塊——只英 23、只日 13、只法 3、英日不法 17、日法不英 7、英法不日 12、三種都會 8、都不會 17，八塊相加恰為 100 ✓，且每一塊都是非負數，資料自洽。"
+        ],
+        "zh-Hans": [
+          "先算「至少会一种语言」的人数，再用总人数扣掉，就是三种都不会的人数。",
+          "三个集合的容斥原理是：先把三个单独的人数相加，再减掉三组两两重叠的人数，最后把三种都会的人数**加回来**。",
+          "为什么最后要加回来？因为三种都会的那 8 人，在前面三个单项中各被算了 1 次（共 3 次），在三组两两重叠中又各被减了 1 次（共减 3 次），加减相抵后变成 0 次，等于被漏掉了，所以要补加 1 次。",
+          "代入计算：60 + 45 + 30 − 25 − 15 − 20 + 8。",
+          "先算加项：60 + 45 + 30 = 135；再算减项：25 + 15 + 20 = 60。",
+          "所以至少会一种的人数 = 135 − 60 + 8 = 83 人。",
+          "三种都不会的人数 = 100 − 83 = 17 人。",
+          "验算：把 100 人分成八个互不重叠的区块——只英 23、只日 13、只法 3、英日不法 17、日法不英 7、英法不日 12、三种都会 8、都不会 17，八块相加恰为 100 ✓，且每一块都是非负数，数据自洽。"
+        ],
+        "en": [
+          "First count those who speak at least one language, then subtract from the total to get those who speak none.",
+          "Inclusion-exclusion for three sets says: add the three individual counts, subtract the three pairwise overlaps, then add back those in all three.",
+          "Why add back at the end? The 8 who speak all three were counted once in each of the three individual counts (3 times) and subtracted once in each of the three pairwise overlaps (3 times), netting to zero — effectively omitted — so one copy must be restored.",
+          "Substituting: 60 + 45 + 30 − 25 − 15 − 20 + 8.",
+          "The additions give 60 + 45 + 30 = 135 and the subtractions give 25 + 15 + 20 = 60.",
+          "So the number speaking at least one language is 135 − 60 + 8 = 83.",
+          "Therefore those speaking none number 100 − 83 = 17.",
+          "Check: splitting the 100 into eight disjoint blocks — English only 23, Japanese only 13, French only 3, English and Japanese but not French 17, Japanese and French but not English 7, English and French but not Japanese 12, all three 8, and none 17 — the blocks total exactly 100 and every block is non-negative, so the data is consistent."
+        ],
+        "ja": [
+          "まず「少なくとも 1 か国語ができる」人数を求め、全体から引けば 3 つともできない人数になります。",
+          "3 つの集合の包除原理は、まず 3 つの個別の人数を足し、次に 3 組の 2 つ重なりを引き、最後に 3 つすべてできる人数を**足し戻す**というものです。",
+          "なぜ最後に足し戻すのでしょうか。3 つすべてできる 8 人は、個別の 3 項でそれぞれ 1 回ずつ（計 3 回）数えられ、2 つ重なりの 3 項でそれぞれ 1 回ずつ（計 3 回）引かれ、差し引き 0 回になって抜け落ちるからです。",
+          "代入します：60 + 45 + 30 − 25 − 15 − 20 + 8。",
+          "足す項は 60 + 45 + 30 = 135、引く項は 25 + 15 + 20 = 60。",
+          "よって少なくとも 1 か国語ができるのは 135 − 60 + 8 = 83 人。",
+          "3 つともできないのは 100 − 83 = 17 人です。",
+          "検算：100 人を重ならない 8 区画に分けると、英語だけ 23、日本語だけ 13、フランス語だけ 3、英日でフランス語なし 17、日仏で英語なし 7、英仏で日本語なし 12、3 つとも 8、どれもできない 17 となり、合計はちょうど 100 ✓。どの区画も非負で、データは整合的です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "17"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "三集合容斥原理：加單項、減兩兩交集、再加回三重交集，並以八個互斥區塊驗算自洽",
+        "notes": "設計依據：關鍵是說明「為何最後要加回三重交集」——用計數次數（+3 −3 = 0）解釋而非死記公式；詳解另把 100 人拆成八個互斥區塊並確認全為非負，同時驗證答案與題目資料的自洽性。答案 17 已用容斥公式與八區塊加總兩種方式交叉驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（三集合容斥）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "組合",
+        "topicCode": "combinatorics",
+        "subtopic": "三集合容斥",
+        "subtopicCode": "inclusion_exclusion_three_sets"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "combinatorics_grade9_foundation_011",
+      "topic": "combinatorics",
+      "subtopic": "diagonal_intersection_count",
+      "difficulty": "foundation",
+      "levelStage": "grade9",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一個凸六邊形的所有對角線都畫出來。若沒有任何三條對角線交於同一點，求這些對角線在六邊形內部的交點共有多少個。",
+        "zh-Hans": "一个凸六边形的所有对角线都画出来。若没有任何三条对角线交于同一点，求这些对角线在六边形内部的交点共有多少个。",
+        "en": "All diagonals of a convex hexagon are drawn. If no three diagonals meet at a single point, how many interior intersection points do the diagonals have?",
+        "ja": "凸六角形の対角線をすべて引きます。3 本の対角線が 1 点で交わることはないものとするとき、対角線どうしの内部の交点は全部でいくつありますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 15 個。",
+        "zh-Hans": "答案是 15 个。",
+        "en": "The answer is 15.",
+        "ja": "答えは 15 個です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "直接把對角線兩兩配對再數交點會很麻煩，因為有些配對的對角線在內部根本不相交（例如從同一個頂點出發的兩條）。",
+          "換個角度：不要從對角線出發，而是**從頂點出發**。",
+          "任取六邊形的 4 個頂點，它們會構成一個凸四邊形。這個四邊形恰好有兩條對角線，而這兩條對角線一定在內部相交，交出**恰好一個**點。",
+          "反過來看，內部的每一個交點，都是由兩條相交的對角線決定，而這兩條對角線的四個端點互不相同，剛好還原出唯一的 4 個頂點。",
+          "所以「內部交點」與「4 個頂點的選法」之間是一一對應的關係，數其中一邊就等於數另一邊。",
+          "因此交點數 = C(6, 4) = (6 × 5 × 4 × 3) ÷ (4 × 3 × 2 × 1) = 15 個。",
+          "題目強調「沒有任何三條對角線交於同一點」正是為了保證這個一一對應成立——若三線共點，三個交點會重合成一個，總數就會變少（例如正六邊形的三條主對角線就共點於中心，交點只有 13 個）。",
+          "驗算：取一個頂點位置隨機擾動過的凸六邊形（確保無三線共點），程式實際求出所有對角線的內部交點並去重，得到 15 個 ✓。"
+        ],
+        "zh-Hans": [
+          "直接把对角线两两配对再数交点会很麻烦，因为有些配对的对角线在内部根本不相交（例如从同一个顶点出发的两条）。",
+          "换个角度：不要从对角线出发，而是**从顶点出发**。",
+          "任取六边形的 4 个顶点，它们会构成一个凸四边形。这个四边形恰好有两条对角线，而这两条对角线一定在内部相交，交出**恰好一个**点。",
+          "反过来看，内部的每一个交点，都是由两条相交的对角线决定，而这两条对角线的四个端点互不相同，刚好还原出唯一的 4 个顶点。",
+          "所以「内部交点」与「4 个顶点的选法」之间是一一对应的关系，数其中一边就等于数另一边。",
+          "因此交点数 = C(6, 4) = (6 × 5 × 4 × 3) ÷ (4 × 3 × 2 × 1) = 15 个。",
+          "题目强调「没有任何三条对角线交于同一点」正是为了保证这个一一对应成立——若三线共点，三个交点会重合成一个，总数就会变少（例如正六边形的三条主对角线就共点于中心，交点只有 13 个）。",
+          "验算：取一个顶点位置随机扰动过的凸六边形（确保无三线共点），程序实际求出所有对角线的内部交点并去重，得到 15 个 ✓。"
+        ],
+        "en": [
+          "Pairing up diagonals and counting crossings directly is awkward, because some pairs do not meet inside at all — for instance two diagonals from the same vertex.",
+          "Change viewpoint: count from the vertices rather than from the diagonals.",
+          "Any 4 vertices of the hexagon form a convex quadrilateral, which has exactly two diagonals, and those two always cross inside, producing exactly one interior point.",
+          "Conversely, every interior intersection is determined by two crossing diagonals whose four endpoints are all distinct, recovering a unique set of 4 vertices.",
+          "So interior intersections and choices of 4 vertices are in one-to-one correspondence, and counting one counts the other.",
+          "Hence the number of intersections is C(6, 4) = (6 × 5 × 4 × 3) ÷ (4 × 3 × 2 × 1) = 15.",
+          "The stipulation that no three diagonals are concurrent is exactly what makes the correspondence valid; if three diagonals met at a point, three intersections would collapse into one and the total would drop — in a regular hexagon the three main diagonals do meet at the centre, leaving only 13 intersections.",
+          "Check: taking a convex hexagon with randomly perturbed vertices to avoid concurrency, computing all interior diagonal intersections and removing duplicates gives 15."
+        ],
+        "ja": [
+          "対角線を 2 本ずつ組み合わせて交点を数えるのは面倒です。同じ頂点から出る 2 本のように、内部で交わらない組もあるからです。",
+          "視点を変えて、対角線からではなく**頂点から**数えます。",
+          "六角形の頂点を任意に 4 つ選ぶと凸四角形ができます。その四角形には対角線がちょうど 2 本あり、それらは必ず内部で交わって**ちょうど 1 つ**の点を生みます。",
+          "逆に、内部の各交点は交わる 2 本の対角線で決まり、その 4 つの端点は互いに異なるので、ただ 1 通りの 4 頂点が復元されます。",
+          "つまり「内部の交点」と「4 頂点の選び方」は 1 対 1 に対応し、一方を数えれば他方を数えたことになります。",
+          "したがって交点の個数は C(6, 4) = (6 × 5 × 4 × 3) ÷ (4 × 3 × 2 × 1) = 15 個です。",
+          "「3 本の対角線が 1 点で交わらない」という条件は、まさにこの 1 対 1 対応を保証するためのものです。3 本が共点だと 3 つの交点が 1 つに重なり総数が減ります（正六角形では 3 本の主対角線が中心で交わり、交点は 13 個になります）。",
+          "検算：頂点をわずかにずらした凸六角形（共点を避ける）で、対角線の内部交点をすべて求めて重複を除くと 15 個になります ✓。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "15"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "以一一對應計數對角線交點：每 4 個頂點恰決定一個內部交點，故交點數為 C(n,4)",
+        "notes": "設計依據：核心是建立「內部交點 ↔ 4 個頂點」的雙向對應，並說明「無三線共點」這個條件為何不可省略（正六邊形因三主對角線共點只有 13 個交點，恰是反例）；從對角線兩兩配對出發則會被不相交的組別困住。答案 15 已用頂點擾動後的一般位置六邊形實際求交點去重驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（對角線交點）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "組合",
+        "topicCode": "combinatorics",
+        "subtopic": "對角線交點",
+        "subtopicCode": "diagonal_intersection_count"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "combinatorics_grade9_foundation_012",
+      "topic": "combinatorics",
+      "subtopic": "binomial_even_sum",
+      "difficulty": "foundation",
+      "levelStage": "grade9",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "求 C(10,0) + C(10,2) + C(10,4) + C(10,6) + C(10,8) + C(10,10) 的值，其中 C(n,k) 表示從 n 個相異物件中取出 k 個的組合數。",
+        "zh-Hans": "求 C(10,0) + C(10,2) + C(10,4) + C(10,6) + C(10,8) + C(10,10) 的值，其中 C(n,k) 表示从 n 个相异物件中取出 k 个的组合数。",
+        "en": "Find the value of C(10,0) + C(10,2) + C(10,4) + C(10,6) + C(10,8) + C(10,10), where C(n,k) denotes the number of ways to choose k objects from n distinct objects.",
+        "ja": "C(10,0) + C(10,2) + C(10,4) + C(10,6) + C(10,8) + C(10,10) の値を求めなさい。ここで C(n,k) は異なる n 個から k 個を選ぶ組合せの数を表します。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 512。",
+        "zh-Hans": "答案是 512。",
+        "en": "The answer is 512.",
+        "ja": "答えは 512 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "逐項算出 1、45、210、210、45、1 再相加當然可以，但有一個更漂亮的理由說明答案必定是 2⁹。",
+          "把 C(10, k) 想成「從 10 個相異物件中選出 k 個」的方法數，那麼題目要的就是**所有偶數大小的子集的總數**。",
+          "全部子集共有 2¹⁰ = 1024 個。接下來要證明偶數大小的子集恰好佔一半。",
+          "作法是造一個一一對應：任取一個子集，把第 1 號物件的狀態反轉（原本在裡面就拿掉，原本不在就放進去）。",
+          "這個操作會讓子集的大小改變 1，所以偶數大小的子集會變成奇數大小、奇數大小的會變成偶數大小；而且做兩次就回到原狀，是一一對應。",
+          "既然偶數子集與奇數子集能一一配對，兩者數量相等，各佔全部的一半。",
+          "所以答案 = 2¹⁰ ÷ 2 = 2⁹ = 512。",
+          "驗算：逐項相加 1 + 45 + 210 + 210 + 45 + 1 = 512 ✓，與 2⁹ = 512 完全一致。"
+        ],
+        "zh-Hans": [
+          "逐项算出 1、45、210、210、45、1 再相加当然可以，但有一个更漂亮的理由说明答案必定是 2⁹。",
+          "把 C(10, k) 想成「从 10 个相异物件中选出 k 个」的方法数，那么题目要的就是**所有偶数大小的子集的总数**。",
+          "全部子集共有 2¹⁰ = 1024 个。接下来要证明偶数大小的子集恰好占一半。",
+          "做法是造一个一一对应：任取一个子集，把第 1 号物件的状态反转（原本在里面就拿掉，原本不在就放进去）。",
+          "这个操作会让子集的大小改变 1，所以偶数大小的子集会变成奇数大小、奇数大小的会变成偶数大小；而且做两次就回到原状，是一一对应。",
+          "既然偶数子集与奇数子集能一一配对，两者数量相等，各占全部的一半。",
+          "所以答案 = 2¹⁰ ÷ 2 = 2⁹ = 512。",
+          "验算：逐项相加 1 + 45 + 210 + 210 + 45 + 1 = 512 ✓，与 2⁹ = 512 完全一致。"
+        ],
+        "en": [
+          "Computing the terms as 1, 45, 210, 210, 45, 1 and adding certainly works, but there is a prettier reason the answer must be 2⁹.",
+          "Read C(10, k) as the number of ways to choose k objects from 10 distinct ones; then the question asks for the total number of subsets of even size.",
+          "There are 2¹⁰ = 1024 subsets altogether, so it remains to show that exactly half have even size.",
+          "Build a one-to-one correspondence: given any subset, flip the membership of object number 1, removing it if present and adding it if absent.",
+          "This changes the subset size by 1, turning even-sized subsets into odd-sized ones and vice versa, and applying it twice returns the original, so it is a genuine bijection.",
+          "Since even and odd subsets pair up exactly, their counts are equal and each is half the total.",
+          "So the answer is 2¹⁰ ÷ 2 = 2⁹ = 512.",
+          "Check: adding the terms directly, 1 + 45 + 210 + 210 + 45 + 1 = 512, agreeing exactly with 2⁹ = 512."
+        ],
+        "ja": [
+          "各項を 1、45、210、210、45、1 と計算して足してもよいのですが、答えが必ず 2⁹ になるもっと美しい理由があります。",
+          "C(10, k) を「異なる 10 個から k 個を選ぶ方法の数」と読むと、問われているのは**サイズが偶数の部分集合の総数**です。",
+          "部分集合は全部で 2¹⁰ = 1024 個あるので、あとは偶数サイズがちょうど半分であることを示せば十分です。",
+          "1 対 1 対応をつくります：任意の部分集合について、1 番の要素の所属を反転させます（入っていれば取り除き、入っていなければ加える）。",
+          "この操作でサイズが 1 だけ変わるので、偶数サイズは奇数サイズに、奇数サイズは偶数サイズに移ります。しかも 2 回行うともとに戻るので、正真正銘の 1 対 1 対応です。",
+          "偶数サイズと奇数サイズがぴったり対応づけられる以上、両者の個数は等しく、それぞれ全体の半分です。",
+          "よって答えは 2¹⁰ ÷ 2 = 2⁹ = 512。",
+          "検算：各項を足すと 1 + 45 + 210 + 210 + 45 + 1 = 512 ✓ で、2⁹ = 512 と完全に一致します。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "512"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "偶數大小子集恰佔一半：以「反轉某一元素的歸屬」建立偶奇子集之間的一一對應",
+        "notes": "設計依據：本題可硬算，但價值在於用對合（做兩次回到原狀）建立偶奇子集的雙射，說明結果必為 2ⁿ⁻¹ 而非巧合；n = 10 使逐項驗算仍可行，能與結構性論證互相印證。答案 512 已用逐項組合數求和與 2⁹ 兩種方式交叉驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（偶數項係數和）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "組合",
+        "topicCode": "combinatorics",
+        "subtopic": "偶數項係數和",
+        "subtopicCode": "binomial_even_sum"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "combinatorics_grade9_foundation_013",
+      "topic": "combinatorics",
+      "subtopic": "couples_adjacent_arrangement",
+      "difficulty": "foundation",
+      "levelStage": "grade9",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "三對夫妻共 6 個人排成一列拍照。若每一對夫妻都必須相鄰站在一起，共有多少種不同的排法？",
+        "zh-Hans": "三对夫妻共 6 个人排成一列拍照。若每一对夫妻都必须相邻站在一起，共有多少种不同的排法？",
+        "en": "Three married couples, six people in all, line up for a photograph. If each couple must stand next to each other, how many different arrangements are there?",
+        "ja": "3 組の夫婦、合計 6 人が一列に並んで写真を撮ります。どの夫婦も隣り合って立たなければならないとき、並び方は何通りありますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 48 種。",
+        "zh-Hans": "答案是 48 种。",
+        "en": "The answer is 48.",
+        "ja": "答えは 48 通りです。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "「必須相鄰」的標準處理方式是**綁定法**：把必須相鄰的人先用一條想像的繩子綁成一整塊，當作一個單位來排。",
+          "三對夫妻各綁成一塊，於是要排的東西從 6 個人變成 3 塊。",
+          "第一步：決定三塊的先後順序，方法數是 3! = 3 × 2 × 1 = 6 種。",
+          "第二步：每一塊內部的兩個人還可以互換左右。",
+          "每塊各有 2 種內部排法，三塊互相獨立，所以內部總共有 2 × 2 × 2 = 2³ = 8 種。",
+          "兩步相乘：6 × 8 = 48 種。",
+          "常見錯誤是只算了塊與塊之間的順序 3! = 6，忘記每塊內部還能對調；也有人誤把 6 個人全排列 6! = 720 當成答案。",
+          "驗算：程式窮舉 6 個人的全部 720 種排列，逐一檢查三對夫妻是否都相鄰，符合的恰好 48 種 ✓。"
+        ],
+        "zh-Hans": [
+          "「必须相邻」的标准处理方式是**捆绑法**：把必须相邻的人先用一条想象的绳子绑成一整块，当作一个单位来排。",
+          "三对夫妻各绑成一块，于是要排的东西从 6 个人变成 3 块。",
+          "第一步：决定三块的先后顺序，方法数是 3! = 3 × 2 × 1 = 6 种。",
+          "第二步：每一块内部的两个人还可以互换左右。",
+          "每块各有 2 种内部排法，三块互相独立，所以内部总共有 2 × 2 × 2 = 2³ = 8 种。",
+          "两步相乘：6 × 8 = 48 种。",
+          "常见错误是只算了块与块之间的顺序 3! = 6，忘记每块内部还能对调；也有人误把 6 个人全排列 6! = 720 当成答案。",
+          "验算：程序穷举 6 个人的全部 720 种排列，逐一检查三对夫妻是否都相邻，符合的恰好 48 种 ✓。"
+        ],
+        "en": [
+          "The standard way to handle \"must be adjacent\" is bundling: tie the people who must stay together into a single block and arrange the blocks.",
+          "Each couple becomes one block, so instead of arranging 6 people we arrange 3 blocks.",
+          "Step one: order the three blocks, which can be done in 3! = 3 × 2 × 1 = 6 ways.",
+          "Step two: within each block the two people can still swap places.",
+          "Each block has 2 internal arrangements and the blocks are independent, giving 2 × 2 × 2 = 2³ = 8 internal possibilities.",
+          "Multiplying the two steps: 6 × 8 = 48 arrangements.",
+          "A common error is to count only the block order 3! = 6, forgetting the internal swaps; another is to answer 6! = 720, ignoring the adjacency requirement entirely.",
+          "Check: enumerating all 720 permutations of the six people and testing whether all three couples are adjacent leaves exactly 48."
+        ],
+        "ja": [
+          "「隣り合わなければならない」ときの定石は**ひとまとめにする方法**です。隣接すべき人を 1 つの塊とみなして並べます。",
+          "3 組の夫婦をそれぞれ 1 塊にすると、並べる対象は 6 人から 3 塊になります。",
+          "第 1 段階：3 つの塊の順序を決めます。3! = 3 × 2 × 1 = 6 通りです。",
+          "第 2 段階：各塊の中で 2 人の左右を入れ替えられます。",
+          "各塊に 2 通りあり、塊どうしは独立なので、内部は 2 × 2 × 2 = 2³ = 8 通りです。",
+          "2 段階を掛けて 6 × 8 = 48 通り。",
+          "よくある誤りは塊の順序 3! = 6 だけを数えて内部の入れ替えを忘れることです。隣接条件を無視して 6! = 720 と答える誤りもあります。",
+          "検算：6 人の 720 通りの並びをすべて調べ、3 組とも隣り合うものを数えると、ちょうど 48 通りです ✓。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "48"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "綁定法處理多組相鄰限制：先排塊、再乘上每塊內部的順序數",
+        "notes": "設計依據：兩層結構缺一不可——塊間順序 3! 與塊內對調 2³；只算其中一層分別得到 6 或 8，都是常見誤答。三對而非一對，使「內部乘 2 要做三次」必須被明確意識到。答案 48 已用 720 種全排列窮舉逐一檢查三對相鄰驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（綁定相鄰排列）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "組合",
+        "topicCode": "combinatorics",
+        "subtopic": "綁定相鄰排列",
+        "subtopicCode": "couples_adjacent_arrangement"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "combinatorics_grade9_foundation_014",
+      "topic": "combinatorics",
+      "subtopic": "elimination_tournament_games",
+      "difficulty": "foundation",
+      "levelStage": "grade9",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "有 64 支隊伍參加單淘汰制比賽：每一場比賽淘汰一支隊伍，輸的隊伍立即出局，最後剩下一支冠軍隊伍。整個比賽總共要進行幾場？",
+        "zh-Hans": "有 64 支队伍参加单淘汰制比赛：每一场比赛淘汰一支队伍，输的队伍立即出局，最后剩下一支冠军队伍。整个比赛总共要进行几场？",
+        "en": "64 teams enter a single-elimination tournament: each game eliminates one team, the loser is out immediately, and one champion remains at the end. How many games are played in total?",
+        "ja": "64 チームがトーナメント（勝ち抜き戦）に参加します。1 試合ごとに 1 チームが敗退し、最後に優勝チームが 1 つ残ります。試合は全部で何回行われますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 63 場。",
+        "zh-Hans": "答案是 63 场。",
+        "en": "The answer is 63.",
+        "ja": "答えは 63 試合です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "逐輪相加當然可以：32 + 16 + 8 + 4 + 2 + 1，但這只在隊伍數恰好是 2 的次方時才好算。",
+          "有一個更漂亮也更通用的想法：**盯著「被淘汰的隊伍」而不是「比賽的輪次」**。",
+          "每一場比賽恰好淘汰一支隊伍，不多也不少——這是單淘汰制的定義。",
+          "反過來說，每一支被淘汰的隊伍，也恰好是在某一場比賽中被淘汰的，不會被淘汰兩次。",
+          "所以「比賽場數」與「被淘汰的隊伍數」是一一對應的，兩者必定相等。",
+          "最後只剩冠軍一支隊伍沒被淘汰，所以被淘汰的隊伍共有 64 − 1 = 63 支。",
+          "因此總場次是 63 場。",
+          "驗算：逐輪計算 32 + 16 + 8 + 4 + 2 + 1 = 63 ✓，兩種方法一致。這個對應法的好處是即使隊伍數不是 2 的次方（例如 50 隊需要輪空），答案依然是隊伍數減一。"
+        ],
+        "zh-Hans": [
+          "逐轮相加当然可以：32 + 16 + 8 + 4 + 2 + 1，但这只在队伍数恰好是 2 的次方时才好算。",
+          "有一个更漂亮也更通用的想法：**盯着「被淘汰的队伍」而不是「比赛的轮次」**。",
+          "每一场比赛恰好淘汰一支队伍，不多也不少——这是单淘汰制的定义。",
+          "反过来说，每一支被淘汰的队伍，也恰好是在某一场比赛中被淘汰的，不会被淘汰两次。",
+          "所以「比赛场数」与「被淘汰的队伍数」是一一对应的，两者必定相等。",
+          "最后只剩冠军一支队伍没被淘汰，所以被淘汰的队伍共有 64 − 1 = 63 支。",
+          "因此总场次是 63 场。",
+          "验算：逐轮计算 32 + 16 + 8 + 4 + 2 + 1 = 63 ✓，两种方法一致。这个对应法的好处是即使队伍数不是 2 的次方（例如 50 队需要轮空），答案依然是队伍数减一。"
+        ],
+        "en": [
+          "Adding up the rounds works: 32 + 16 + 8 + 4 + 2 + 1, but that is only convenient when the number of teams is a power of two.",
+          "There is a prettier and more general idea: watch the eliminated teams rather than the rounds.",
+          "Each game eliminates exactly one team, no more and no fewer — that is what single elimination means.",
+          "Conversely, each eliminated team was eliminated in exactly one game and is never eliminated twice.",
+          "So games and eliminated teams are in one-to-one correspondence, and their counts must be equal.",
+          "At the end only the champion is left unbeaten, so 64 − 1 = 63 teams were eliminated.",
+          "Therefore 63 games are played.",
+          "Check: the round-by-round total 32 + 16 + 8 + 4 + 2 + 1 = 63 agrees. The advantage of the correspondence is that it still gives \"teams minus one\" even when the number of teams is not a power of two, such as 50 teams needing byes."
+        ],
+        "ja": [
+          "ラウンドごとに足す方法もあります：32 + 16 + 8 + 4 + 2 + 1。ただしこれはチーム数がちょうど 2 の累乗のときにしか楽になりません。",
+          "より美しく、より一般的な考え方があります：**ラウンドではなく「敗退したチーム」に注目する**のです。",
+          "1 試合につきちょうど 1 チームが敗退します。多くも少なくもありません。それが勝ち抜き戦の定義です。",
+          "逆に、敗退した各チームはちょうど 1 試合で敗退しており、2 度敗退することはありません。",
+          "したがって「試合数」と「敗退チーム数」は 1 対 1 に対応し、両者は必ず等しくなります。",
+          "最後に残るのは優勝チーム 1 つだけなので、敗退したのは 64 − 1 = 63 チームです。",
+          "よって総試合数は 63 試合です。",
+          "検算：ラウンドごとの合計 32 + 16 + 8 + 4 + 2 + 1 = 63 ✓ で一致します。この対応の利点は、チーム数が 2 の累乗でない場合（たとえば 50 チームで不戦勝が生じる場合）でも「チーム数 − 1」が成り立つことです。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "63"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "淘汰賽場次的雙重計數：每場比賽與每支被淘汰隊伍一一對應，故場次 = 隊伍數 − 1",
+        "notes": "設計依據：本題可用逐輪相加，但真正的價值在於建立「場次 ↔ 被淘汰隊伍」的對應，使結論不依賴隊伍數是否為 2 的次方；詳解明確指出這個推廣性。答案 63 已用逐輪模擬與對應法兩種方式交叉驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（淘汰賽場次）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "組合",
+        "topicCode": "combinatorics",
+        "subtopic": "淘汰賽場次",
+        "subtopicCode": "elimination_tournament_games"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "combinatorics_grade9_foundation_015",
+      "topic": "combinatorics",
+      "subtopic": "complement_digit_count",
+      "difficulty": "foundation",
+      "levelStage": "grade9",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "在所有三位正整數中，至少含有一個數字 3 的共有多少個？",
+        "zh-Hans": "在所有三位正整数中，至少含有一个数字 3 的共有多少个？",
+        "en": "Among all three-digit positive integers, how many contain at least one digit 3?",
+        "ja": "3 桁の正の整数のうち、数字 3 を少なくとも 1 つ含むものはいくつありますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 252 個。",
+        "zh-Hans": "答案是 252 个。",
+        "en": "The answer is 252.",
+        "ja": "答えは 252 個です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "「至少含有一個」直接數會很麻煩，因為含一個 3、兩個 3、三個 3 的情形要分開算還要處理重疊。",
+          "遇到「至少」時，標準策略是改算它的**反面**：完全不含數字 3 的有幾個，再從總數扣掉。",
+          "先算總數：三位數從 100 到 999，共有 900 個。",
+          "再算完全不含 3 的三位數，逐位決定：百位不能是 0（否則不是三位數），也不能是 3，所以可選 1、2、4、5、6、7、8、9 共 8 種。",
+          "十位可以是 0 到 9 但不能是 3，共 9 種；個位同理也是 9 種。",
+          "所以完全不含 3 的三位數有 8 × 9 × 9 = 648 個。",
+          "至少含一個 3 的個數 = 900 − 648 = 252 個。",
+          "驗算：程式列出 100 到 999 中字串含有 '3' 的整數並計數，結果正是 252 ✓。注意百位的可選數是 8 而非 9——漏掉「百位不能是 0」這個限制會算成 9 × 9 × 9 = 729，得到錯誤答案 171。"
+        ],
+        "zh-Hans": [
+          "「至少含有一个」直接数会很麻烦，因为含一个 3、两个 3、三个 3 的情形要分开算还要处理重叠。",
+          "遇到「至少」时，标准策略是改算它的**反面**：完全不含数字 3 的有几个，再从总数扣掉。",
+          "先算总数：三位数从 100 到 999，共有 900 个。",
+          "再算完全不含 3 的三位数，逐位决定：百位不能是 0（否则不是三位数），也不能是 3，所以可选 1、2、4、5、6、7、8、9 共 8 种。",
+          "十位可以是 0 到 9 但不能是 3，共 9 种；个位同理也是 9 种。",
+          "所以完全不含 3 的三位数有 8 × 9 × 9 = 648 个。",
+          "至少含一个 3 的个数 = 900 − 648 = 252 个。",
+          "验算：程序列出 100 到 999 中字符串含有 '3' 的整数并计数，结果正是 252 ✓。注意百位的可选数是 8 而非 9——漏掉「百位不能是 0」这个限制会算成 9 × 9 × 9 = 729，得到错误答案 171。"
+        ],
+        "en": [
+          "Counting \"at least one\" directly is awkward, since numbers with one, two or three 3s must be handled separately with overlaps.",
+          "For \"at least\" problems the standard strategy is to count the opposite instead: how many contain no 3 at all, then subtract from the total.",
+          "First the total: three-digit numbers run from 100 to 999, giving 900 of them.",
+          "Now count those with no 3, deciding digit by digit. The hundreds digit cannot be 0 (or it would not be a three-digit number) and cannot be 3, leaving 1, 2, 4, 5, 6, 7, 8, 9 — 8 choices.",
+          "The tens digit may be 0 to 9 but not 3, giving 9 choices, and likewise 9 for the units digit.",
+          "So 8 × 9 × 9 = 648 three-digit numbers contain no 3.",
+          "The count with at least one 3 is 900 − 648 = 252.",
+          "Check: listing the integers from 100 to 999 whose decimal string contains '3' gives exactly 252. Note the hundreds digit has 8 choices, not 9 — forgetting that it cannot be 0 gives 9 × 9 × 9 = 729 and the wrong answer 171."
+        ],
+        "ja": [
+          "「少なくとも 1 つ含む」を直接数えるのは面倒です。3 を 1 個・2 個・3 個含む場合を分けたうえ、重複も処理しなければなりません。",
+          "「少なくとも」の問題では、**その反対**を数えるのが定石です。3 をまったく含まないものを数え、全体から引きます。",
+          "まず全体：3 桁の数は 100 から 999 までで 900 個です。",
+          "次に 3 を含まない 3 桁の数を位ごとに決めます。百の位は 0 では 3 桁になりませんし 3 も不可なので、1、2、4、5、6、7、8、9 の 8 通り。",
+          "十の位は 0〜9 のうち 3 を除いて 9 通り、一の位も同様に 9 通りです。",
+          "よって 3 を含まない 3 桁の数は 8 × 9 × 9 = 648 個。",
+          "少なくとも 1 つ 3 を含むのは 900 − 648 = 252 個です。",
+          "検算：100 から 999 のうち文字列に '3' を含む整数を数えると、ちょうど 252 になります ✓。百の位が 9 通りではなく 8 通りである点に注意します。0 が使えないことを忘れると 9 × 9 × 9 = 729 となり、誤答 171 が出ます。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "252"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "以補集法處理「至少一個」的位數計數，並正確處理首位不得為 0 的限制",
+        "notes": "設計依據：兩個環節——「至少」轉補集避開重疊討論，以及首位同時受「不為 0」與「不為 3」兩個限制而只有 8 種選擇；漏掉前者要做三重容斥，漏掉後者會得到誤答 171。答案 252 已用 100 到 999 全窮舉驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（補集法計數）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "組合",
+        "topicCode": "combinatorics",
+        "subtopic": "補集法計數",
+        "subtopicCode": "complement_digit_count"
+      },
+      "reviewStatus": "ok"
     }
   ]
 }
