@@ -63,9 +63,18 @@
 4. 陰影區頂點要按邊界順序，且都在 `points` 內。
 5. 上架前對照「幾何圖複審四問」：只看圖能否辨識要用的點線區域、關係有無真的畫出、位置會不會誤導、拿掉題幹圖是否仍有用。
 
+## 圖不得洩題
+
+圖是解題資訊，不是答案。以下兩種情形一律不可上架，寧可 `kind:none`：
+
+- **把答案畫出來**。實例：`geometry_grade2_foundation_009` 問「下面哪個圖形最適合拿來做車輪」，選項是圓形／三角形／正方形／五邊形，圖卻直接畫了一個圓。
+- **畫成與題目不符的形狀**。實例：`geometry_grade6_foundation_024` 的正多邊形每個外角 24°，實際是 15 邊形，圖卻畫五邊形。renderer 畫不出正確形狀時就不要上圖。
+
 ## Renderer 支援狀態
 
 - [x] `GeometryScenePainter`（`lib/main.dart`）已支援 `geometry_scene` 全部原語：points（含標籤方位）/ segments（solid 與 construction 虛線）/ polygons（shaded）/ arcs / angleMarks / rightAngles / equalTicks。解析在 `lib/models/geometry_scene.dart`。
+- renderer 目前實際支援的 `figure.kind` 共五種：`geometry_scene`、`shape_diagram`、`coordinate_plane`、`composite_grid_shape`、`circle_quadrants_point`（見 `lib/main.dart` 的 figure 分派）。後兩種主要用於 grade1-6，本文件先前未列出。
+- `shape_diagram` 支援的 `shape` 值包含 `circle`、`oval`、`rectangle`、`triangle`、`trapezoid`、`parallelogram`、`pentagon`、`compass` 等；**沒有**任意邊數的正多邊形，也沒有任何立體形狀。
 - 因此需要構造圖的幾何題可以正常標 `ok`。
 
 ### 上架前必查
