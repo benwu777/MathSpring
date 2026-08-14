@@ -928,6 +928,546 @@
         "subtopic": "對稱博弈",
         "subtopicCode": "impartial_game_strategy"
       }
+    },
+    {
+      "id": "logic_grade12_foundation_010",
+      "topic": "logic",
+      "subtopic": "hat_guessing_line",
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "100 個人排成一直排，每人頭上戴一頂黑帽或白帽。每個人只看得到排在自己前面所有人的帽子，看不到自己與後面的人。從最後面的人開始，依序每人說出一個顏色（只能說「黑」或「白」，其他人都聽得見），猜自己的帽色。若事前可以商量策略，求無論帽子怎麼分配都能保證猜對的最多人數。",
+        "zh-Hans": "100 个人排成一直排，每人头上戴一顶黑帽或白帽。每个人只看得到排在自己前面所有人的帽子，看不到自己与后面的人。从最后面的人开始，依序每人说出一个颜色（只能说「黑」或「白」，其他人都听得见），猜自己的帽色。若事前可以商量策略，求无论帽子怎么分配都能保证猜对的最多人数。",
+        "en": "One hundred people stand in a line, each wearing a black or white hat. Each person sees only the hats of everyone ahead of them, not their own nor those behind. Starting from the back, each person in turn says one colour aloud — only \"black\" or \"white\", audible to all — guessing their own hat. If they may agree on a strategy beforehand, what is the largest number guaranteed to guess correctly, whatever the hats are?",
+        "ja": "100 人が一列に並び、それぞれ黒か白の帽子をかぶっています。各自は自分より前の人の帽子だけが見え、自分と後ろの人の帽子は見えません。最後尾の人から順に、色を 1 つ（「黒」か「白」だけ、全員に聞こえる）言って自分の帽子の色を当てます。事前に作戦を相談できるとき、帽子の配り方によらず必ず当てられる人数の最大値を求めなさい。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 99 人。",
+        "zh-Hans": "答案是 99 人。",
+        "en": "The answer is 99.",
+        "ja": "答えは 99 人です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "先看上界：**最後面那個人必定無法保證猜對**。他看得到前面所有人的帽子，但完全沒有關於自己帽色的資訊，無論說什麼都可能錯，所以答案最多是 99。",
+          "接著要設計一個保證另外 99 人全對的策略。關鍵是讓第一個發言的人**把資訊傳出去**，而不是試圖猜對自己。",
+          "策略：最後面的人數一數他看到的 99 頂帽子中黑帽的數量。若是偶數就說「黑」，若是奇數就說「白」。這句話等於公告了「前面 99 頂帽子中黑帽數的奇偶」。",
+          "接下來輪到第 99 位（倒數第二人）。他聽到了那個奇偶資訊，又親眼看到前面 98 頂帽子。",
+          "他把看到的 98 頂中的黑帽數一數，與公告的奇偶比對：若兩者奇偶相同，表示自己的帽子不是黑的，就說「白」；若不同，就說「黑」。這樣他必定猜對。",
+          "再往前的每個人都能做同樣的事：他聽得到後面所有人已經說出的答案（因而知道那些人的真實帽色），也看得到前面所有人的帽子。",
+          "把「公告的奇偶」扣掉已知的後面那些帽子、再扣掉看到的前面那些帽子，剩下的奇偶就唯一決定了自己的帽色。所以第 99 位到第 1 位全部猜對。",
+          "因此保證猜對的人數是 99。最後面那人有一半的機會猜對，但**無法保證**，這正是上界與策略剛好吻合的地方。"
+        ],
+        "zh-Hans": [
+          "先看上界：**最后面那个人必定无法保证猜对**。他看得到前面所有人的帽子，但完全没有关于自己帽色的信息，无论说什么都可能错，所以答案最多是 99。",
+          "接着要设计一个保证另外 99 人全对的策略。关键是让第一个发言的人**把信息传出去**，而不是试图猜对自己。",
+          "策略：最后面的人数一数他看到的 99 顶帽子中黑帽的数量。若是偶数就说「黑」，若是奇数就说「白」。这句话等于公告了「前面 99 顶帽子中黑帽数的奇偶」。",
+          "接下来轮到第 99 位（倒数第二人）。他听到了那个奇偶信息，又亲眼看到前面 98 顶帽子。",
+          "他把看到的 98 顶中的黑帽数一数，与公告的奇偶比对：若两者奇偶相同，表示自己的帽子不是黑的，就说「白」；若不同，就说「黑」。这样他必定猜对。",
+          "再往前的每个人都能做同样的事：他听得到后面所有人已经说出的答案（因而知道那些人的真实帽色），也看得到前面所有人的帽子。",
+          "把「公告的奇偶」扣掉已知的后面那些帽子、再扣掉看到的前面那些帽子，剩下的奇偶就唯一决定了自己的帽色。所以第 99 位到第 1 位全部猜对。",
+          "因此保证猜对的人数是 99。最后面那人有一半的机会猜对，但**无法保证**，这正是上界与策略刚好吻合的地方。"
+        ],
+        "en": [
+          "First the upper bound: the person at the very back cannot be guaranteed to be right. They see every hat ahead but have no information at all about their own, so whatever they say might be wrong, capping the answer at 99.",
+          "Now design a strategy that guarantees the other 99. The key is that the first speaker should transmit information rather than try to be right themselves.",
+          "The strategy: the person at the back counts the black hats among the 99 they can see. If that count is even they say \"black\", and if it is odd they say \"white\". This announcement effectively broadcasts the parity of the black hats ahead of them.",
+          "Next comes person 99, second from the back. They have heard the parity and can see the 98 hats ahead of them.",
+          "Counting the black hats among those 98 and comparing with the announced parity: if the parities agree their own hat is not black, so they say \"white\"; if they disagree they say \"black\". Either way they are certainly right.",
+          "Everyone further forward can do the same: they hear all the answers already given behind them, and therefore know those hats, and they see all the hats ahead.",
+          "Removing the known hats behind and the visible hats ahead from the announced parity leaves a parity that determines their own hat uniquely. So persons 99 down to 1 all guess correctly.",
+          "Hence 99 are guaranteed. The person at the back has an even chance of being right but no guarantee, which is exactly where the upper bound and the strategy meet."
+        ],
+        "ja": [
+          "まず上界です：**最後尾の人は必ず当てられるとは限りません**。前の全員の帽子は見えますが自分の色については何の情報もなく、何を言っても外れうるので、答えは最大でも 99 です。",
+          "次に他の 99 人全員が当たる作戦を設計します。要点は、最初に話す人が自分を当てようとするのではなく**情報を伝える**ことです。",
+          "作戦：最後尾の人は見えている 99 個のうち黒い帽子の数を数えます。偶数なら「黒」、奇数なら「白」と言います。この発言は「前方 99 個の黒帽子の数の偶奇」を公表することにあたります。",
+          "次は 99 番目（後ろから 2 番目）の人です。偶奇の情報を聞いており、前方 98 個の帽子が見えています。",
+          "見えている 98 個の黒帽子を数え、公表された偶奇と比べます。一致すれば自分は黒ではないので「白」、一致しなければ「黒」と言います。こうすれば必ず当たります。",
+          "さらに前の人も同じことができます。後ろの人たちの発言をすべて聞いており（つまり彼らの実際の帽子の色を知っており）、前の人の帽子はすべて見えています。",
+          "公表された偶奇から、既知の後方の帽子と見えている前方の帽子を差し引くと、残る偶奇が自分の色を一意に定めます。よって 99 番目から 1 番目まで全員が当たります。",
+          "したがって保証できるのは 99 人です。最後尾の人は半々で当たりますが**保証はできず**、ここで上界と作戦がちょうど一致します。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "99"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "帽色接力的奇偶編碼：首位發言者以奇偶傳遞資訊而非猜自己，其餘每人皆可推出自己的帽色",
+        "notes": "設計依據：核心是「犧牲一人傳遞一位元資訊」的策略設計，並同時給出上界（最後一人無資訊，最多 99）與可達性（奇偶編碼保證其餘全對）；只答 50 或只描述策略而不論證上界都不完整。詳解逐步說明第 99 位與更前面的人如何各自扣除已知資訊。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（帽色接力）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "邏輯",
+        "topicCode": "logic",
+        "subtopic": "帽色接力",
+        "subtopicCode": "hat_guessing_line"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "logic_grade12_foundation_011",
+      "topic": "logic",
+      "subtopic": "min_comparisons_max_min",
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "有 10 個兩兩相異的數。每次操作只能比較其中兩個數的大小。若要同時找出最大的數與最小的數，最少需要比較幾次？",
+        "zh-Hans": "有 10 个两两相异的数。每次操作只能比较其中两个数的大小。若要同时找出最大的数与最小的数，最少需要比较几次？",
+        "en": "There are 10 pairwise distinct numbers, and each operation compares two of them. What is the fewest number of comparisons needed to find both the largest and the smallest?",
+        "ja": "互いに異なる 10 個の数があります。1 回の操作では 2 つの数の大小を比べられます。最大の数と最小の数の両方を見つけるには、最少で何回の比較が必要ですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 13 次。",
+        "zh-Hans": "答案是 13 次。",
+        "en": "The answer is 13.",
+        "ja": "答えは 13 回です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "先看一個直覺但不夠好的作法：先找最大（需要 9 次，因為每次比較最多淘汰一個候選），再從剩下 9 個中找最小（8 次），合計 17 次。",
+          "改進的關鍵是**讓每一次比較同時為兩個目標服務**——樸素作法中，找最大時的比較資訊在找最小時完全被浪費了。",
+          "改良策略分三階段。第一階段：把 10 個數兩兩配對，比較 5 次。",
+          "每次比較後，較大的那個進入「大組」、較小的進入「小組」。此時可以確定：**最大的數一定在大組**（它從未輸過），**最小的數一定在小組**。",
+          "第二階段：在大組的 5 個數中找最大，需要 5 − 1 = 4 次比較。",
+          "第三階段：在小組的 5 個數中找最小，同樣需要 5 − 1 = 4 次比較。",
+          "三階段相加：5 + 4 + 4 = 13 次，比樸素作法的 17 次省下 4 次。",
+          "驗算：通式為 ⌈3n/2⌉ − 2，代 n = 10 得 15 − 2 = 13 ✓。抽查其他偶數：n = 2 給 1、n = 4 給 4、n = 6 給 7、n = 8 給 10、n = 12 給 16，都與「先配對再分組」的計數一致。"
+        ],
+        "zh-Hans": [
+          "先看一个直觉但不够好的做法：先找最大（需要 9 次，因为每次比较最多淘汰一个候选），再从剩下 9 个中找最小（8 次），合计 17 次。",
+          "改进的关键是**让每一次比较同时为两个目标服务**——朴素做法中，找最大时的比较信息在找最小时完全被浪费了。",
+          "改良策略分三阶段。第一阶段：把 10 个数两两配对，比较 5 次。",
+          "每次比较后，较大的那个进入「大组」、较小的进入「小组」。此时可以确定：**最大的数一定在大组**（它从未输过），**最小的数一定在小组**。",
+          "第二阶段：在大组的 5 个数中找最大，需要 5 − 1 = 4 次比较。",
+          "第三阶段：在小组的 5 个数中找最小，同样需要 5 − 1 = 4 次比较。",
+          "三阶段相加：5 + 4 + 4 = 13 次，比朴素做法的 17 次省下 4 次。",
+          "验算：通式为 ⌈3n/2⌉ − 2，代 n = 10 得 15 − 2 = 13 ✓。抽查其他偶数：n = 2 给 1、n = 4 给 4、n = 6 给 7、n = 8 给 10、n = 12 给 16，都与「先配对再分组」的计数一致。"
+        ],
+        "en": [
+          "Start with an intuitive but suboptimal approach: find the maximum first, needing 9 comparisons since each comparison eliminates at most one candidate, then find the minimum among the remaining 9 in 8 more, for 17 in total.",
+          "The key improvement is to make every comparison serve both goals at once — in the naive method, the information gathered while finding the maximum is entirely wasted when finding the minimum.",
+          "The improved strategy has three stages. Stage one: pair up the 10 numbers and make 5 comparisons.",
+          "After each comparison the larger goes into a \"winners\" group and the smaller into a \"losers\" group. Now it is certain that the overall maximum is in the winners group, having never lost, and the overall minimum is in the losers group.",
+          "Stage two: find the maximum among the 5 winners, requiring 5 − 1 = 4 comparisons.",
+          "Stage three: find the minimum among the 5 losers, likewise requiring 5 − 1 = 4 comparisons.",
+          "Adding the stages: 5 + 4 + 4 = 13 comparisons, saving 4 over the naive 17.",
+          "Check: the general formula is ⌈3n/2⌉ − 2, which for n = 10 gives 15 − 2 = 13. Spot-checking other even sizes: n = 2 gives 1, n = 4 gives 4, n = 6 gives 7, n = 8 gives 10 and n = 12 gives 16, all matching the pair-then-split count."
+        ],
+        "ja": [
+          "まず直感的だが最善でない方法を見ます：先に最大を求め（各比較で候補は最大 1 つしか消えないので 9 回）、残り 9 個から最小を求める（8 回）で合計 17 回です。",
+          "改善の要点は、**1 回の比較を 2 つの目的に同時に役立てる**ことです。素朴な方法では、最大を求める際の比較情報が最小探しでは完全に無駄になっています。",
+          "改良した作戦は 3 段階です。第 1 段階：10 個を 2 つずつ組にして 5 回比較します。",
+          "各比較で大きいほうを「勝ち組」、小さいほうを「負け組」に入れます。ここで、**全体の最大は必ず勝ち組にあり**（一度も負けていないため）、**全体の最小は必ず負け組にある**と確定します。",
+          "第 2 段階：勝ち組 5 個の中から最大を求めます。5 − 1 = 4 回の比較が必要です。",
+          "第 3 段階：負け組 5 個の中から最小を求めます。同様に 5 − 1 = 4 回です。",
+          "3 段階を足すと 5 + 4 + 4 = 13 回で、素朴な 17 回より 4 回少なくなります。",
+          "検算：一般式は ⌈3n/2⌉ − 2 で、n = 10 では 15 − 2 = 13 ✓。他の偶数でも n = 2 で 1、n = 4 で 4、n = 6 で 7、n = 8 で 10、n = 12 で 16 となり、「組にしてから分ける」数え方と一致します。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "13"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "同時求極大與極小的比較次數：先兩兩配對讓每次比較同時縮小兩個搜尋範圍",
+        "notes": "設計依據：核心是察覺樸素作法浪費了資訊，改用配對把兩個目標的候選同時砍半；樸素解 17 是明確的對照。詳解另以通式 ⌈3n/2⌉ − 2 對多個 n 抽查，確認策略的計數一般成立。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（同時求最大與最小）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "邏輯",
+        "topicCode": "logic",
+        "subtopic": "同時求最大與最小",
+        "subtopicCode": "min_comparisons_max_min"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "logic_grade12_foundation_012",
+      "topic": "logic",
+      "subtopic": "mantel_max_edges",
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一個圖有 5 個頂點，每兩個頂點之間最多連一條邊。若要求圖中不存在三個頂點兩兩相連（也就是沒有三角形），求邊數最多可以是多少。",
+        "zh-Hans": "一个图有 5 个顶点，每两个顶点之间最多连一条边。若要求图中不存在三个顶点两两相连（也就是没有三角形），求边数最多可以是多少。",
+        "en": "A graph has 5 vertices with at most one edge between any two. If no three vertices are mutually joined, that is the graph contains no triangle, what is the greatest possible number of edges?",
+        "ja": "5 個の頂点をもつグラフがあり、どの 2 頂点の間にも辺は高々 1 本です。3 頂点が互いに結ばれること（三角形）がないとき、辺の数は最大でいくつになりますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 6 條。",
+        "zh-Hans": "答案是 6 条。",
+        "en": "The answer is 6.",
+        "ja": "答えは 6 本です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "5 個頂點之間最多可以連 C(5, 2) = 10 條邊，但那樣會出現大量三角形，所以必須大幅削減。",
+          "要同時做兩件事：造出一個有 6 條邊且無三角形的例子，並說明 7 條邊必定會產生三角形。",
+          "先看構造。把 5 個頂點分成兩組，一組 2 個、另一組 3 個，然後**只連接跨組的邊**，同組之間完全不連。",
+          "這樣的圖有 2 × 3 = 6 條邊。它為什麼沒有三角形？因為三角形需要三個頂點兩兩相連，但三個頂點中必有兩個落在同一組（只有兩組），而同組之間沒有邊，所以三角形無法形成。",
+          "再看為什麼不能到 7 條。若某個頂點連出 k 條邊，它的 k 個鄰居彼此之間就不能有任何邊（否則該邊加上這個頂點就構成三角形）。",
+          "把這個限制推到極致可以證明：n 個頂點的無三角形圖最多有 ⌊n² ÷ 4⌋ 條邊。代 n = 5 得 ⌊25 ÷ 4⌋ = 6，恰好由上面的兩組構造達成。",
+          "所以答案是 6 條。",
+          "驗算：程式窮舉 5 個頂點的全部 2¹⁰ = 1024 種圖，逐一檢查是否含三角形，無三角形的圖中最多的邊數確實是 6 ✓，找到的例子正是把頂點分成 {0, 1} 與 {2, 3, 4} 兩組的跨組連法。再抽查 n = 4 得 4、n = 6 得 9，都與 ⌊n²/4⌋ 相符。"
+        ],
+        "zh-Hans": [
+          "5 个顶点之间最多可以连 C(5, 2) = 10 条边，但那样会出现大量三角形，所以必须大幅削减。",
+          "要同时做两件事：造出一个有 6 条边且无三角形的例子，并说明 7 条边必定会产生三角形。",
+          "先看构造。把 5 个顶点分成两组，一组 2 个、另一组 3 个，然后**只连接跨组的边**，同组之间完全不连。",
+          "这样的图有 2 × 3 = 6 条边。它为什么没有三角形？因为三角形需要三个顶点两两相连，但三个顶点中必有两个落在同一组（只有两组），而同组之间没有边，所以三角形无法形成。",
+          "再看为什么不能到 7 条。若某个顶点连出 k 条边，它的 k 个邻居彼此之间就不能有任何边（否则该边加上这个顶点就构成三角形）。",
+          "把这个限制推到极致可以证明：n 个顶点的无三角形图最多有 ⌊n² ÷ 4⌋ 条边。代 n = 5 得 ⌊25 ÷ 4⌋ = 6，恰好由上面的两组构造达成。",
+          "所以答案是 6 条。",
+          "验算：程序穷举 5 个顶点的全部 2¹⁰ = 1024 种图，逐一检查是否含三角形，无三角形的图中最多的边数确实是 6 ✓，找到的例子正是把顶点分成 {0, 1} 与 {2, 3, 4} 两组的跨组连法。再抽查 n = 4 得 4、n = 6 得 9，都与 ⌊n²/4⌋ 相符。"
+        ],
+        "en": [
+          "Five vertices admit at most C(5, 2) = 10 edges, but that would create many triangles, so a substantial reduction is needed.",
+          "Two things must be done: exhibit a triangle-free graph with 6 edges, and explain why 7 edges force a triangle.",
+          "First the construction. Split the 5 vertices into two groups, one of 2 and one of 3, and join only pairs from different groups, with no edges inside a group.",
+          "Such a graph has 2 × 3 = 6 edges. Why is it triangle-free? A triangle needs three mutually joined vertices, but among any three vertices two must lie in the same group, since there are only two groups, and vertices in the same group are never joined.",
+          "Now why 7 edges are impossible. If a vertex has k edges, none of its k neighbours may be joined to each other, since such an edge together with that vertex would form a triangle.",
+          "Pushing this constraint to its limit proves that a triangle-free graph on n vertices has at most ⌊n² ÷ 4⌋ edges. For n = 5 this gives ⌊25 ÷ 4⌋ = 6, exactly achieved by the two-group construction above.",
+          "So the answer is 6.",
+          "Check: enumerating all 2¹⁰ = 1024 graphs on 5 vertices and testing each for triangles gives a maximum of 6 edges among the triangle-free ones, realised precisely by the split into {0, 1} and {2, 3, 4}. Spot-checks give 4 for n = 4 and 9 for n = 6, both matching ⌊n²/4⌋."
+        ],
+        "ja": [
+          "5 頂点には最大で C(5, 2) = 10 本の辺を引けますが、それでは三角形が多数生じるので大幅に減らす必要があります。",
+          "行うべきことは 2 つ：辺が 6 本で三角形をもたない例をつくること、そして 7 本では必ず三角形ができると示すことです。",
+          "まず構成です。5 頂点を 2 個と 3 個の 2 グループに分け、**グループをまたぐ辺だけ**を引き、同じグループ内は一切結びません。",
+          "このグラフの辺は 2 × 3 = 6 本です。なぜ三角形がないのでしょうか。三角形には互いに結ばれた 3 頂点が必要ですが、グループは 2 つしかないので 3 頂点のうち 2 つは必ず同じグループに入り、同グループ内には辺がないため三角形はできません。",
+          "次に 7 本が不可能な理由です。ある頂点から k 本の辺が出ていると、その k 個の隣接点どうしは結べません（結ぶとその辺とこの頂点で三角形になるため）。",
+          "この制約を突き詰めると、n 頂点の三角形をもたないグラフの辺は最大 ⌊n² ÷ 4⌋ 本であることが示せます。n = 5 では ⌊25 ÷ 4⌋ = 6 で、上の 2 グループの構成でちょうど達成されます。",
+          "したがって答えは 6 本です。",
+          "検算：5 頂点のグラフ 2¹⁰ = 1024 通りをすべて調べ三角形の有無を確認すると、三角形をもたないものの最大辺数は確かに 6 ✓。見つかった例はまさに {0, 1} と {2, 3, 4} に分けた場合です。n = 4 で 4、n = 6 で 9 という抽査も ⌊n²/4⌋ と一致します。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "6"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "無三角形圖的最多邊數（Mantel 定理）：兩組跨連的構造達成 ⌊n²/4⌋",
+        "notes": "設計依據：本題要求同時給出構造（2 + 3 分組的跨組連法，6 條邊）與上界（⌊n²/4⌋），缺一則無法斷定最大值；「同組不連 ⟹ 任三點必有兩點同組 ⟹ 無三角形」是構造正確性的完整理由。答案 6 已用 5 頂點全部 1024 種圖的窮舉驗證，並以 n = 4、6 抽查公式。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（無三角形圖的最多邊）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "邏輯",
+        "topicCode": "logic",
+        "subtopic": "無三角形圖的最多邊",
+        "subtopicCode": "mantel_max_edges"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "logic_grade12_foundation_013",
+      "topic": "logic",
+      "subtopic": "twelve_coin_weighing",
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "有 12 枚外觀完全相同的硬幣，其中恰有 1 枚是假幣，重量與其他 11 枚不同，但**不知道假幣是偏重還是偏輕**。現在有一個沒有砝碼的天平（每次可以把任意兩堆硬幣放上兩端比較輕重）。要保證找出假幣（不必判斷輕重），最少需要稱幾次？",
+        "zh-Hans": "有 12 枚外观完全相同的硬币，其中恰有 1 枚是假币，重量与其他 11 枚不同，但**不知道假币是偏重还是偏轻**。现在有一个没有砝码的天平（每次可以把任意两堆硬币放上两端比较轻重）。要保证找出假币（不必判断轻重），最少需要称几次？",
+        "en": "Twelve identical-looking coins include exactly one counterfeit whose weight differs from the other eleven, but it is not known whether it is heavier or lighter. A balance scale with no weights is available, comparing any two groups of coins. What is the fewest number of weighings that guarantees identifying the counterfeit, without needing to say whether it is heavy or light?",
+        "ja": "見た目がまったく同じ 12 枚の硬貨のうち、ちょうど 1 枚が偽物で他の 11 枚と重さが違いますが、**重いか軽いかは分かりません**。分銅のない天びん（任意の 2 組の硬貨を両側に載せて比べられる）があります。偽物を必ず特定する（重い軽いの判定は不要）には、最少で何回量ればよいですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 3 次。",
+        "zh-Hans": "答案是 3 次。",
+        "en": "The answer is 3.",
+        "ja": "答えは 3 回です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "先算下界，也就是用「資訊量」估計至少需要幾次。",
+          "把所有可能的情況數一數：假幣可能是 12 枚中的任何一枚，而且對每一枚而言又有「偏重」與「偏輕」兩種可能，所以總共有 12 × 2 = 24 種不同的狀況。",
+          "接著看每一次稱重能提供多少資訊。天平的結果只有三種：左邊重、右邊重、兩邊平衡。",
+          "所以 k 次稱重最多只能區分出 3ᵏ 種不同的結果序列。",
+          "逐一比較：1 次只能分辨 3 種、2 次只能分辨 3² = 9 種，都遠少於 24，所以 2 次絕對不夠。",
+          "3 次可以分辨 3³ = 27 種，27 ≥ 24，在資訊量上恰好足夠——注意這只說明「不被排除」，還必須真的設計得出方案。",
+          "3 次的方案確實存在：把 12 枚分成三組各 4 枚，第一次比較其中兩組。若平衡，假幣在未稱的那 4 枚中；若不平衡，假幣在稱過的 8 枚中且已知該組偏重或偏輕的方向。無論哪種情形，剩下的兩次都足以定位。",
+          "所以答案是 3 次。注意「不知輕重」讓可能情況從 12 種變成 24 種，這正是本題比「已知假幣較輕」的版本困難的地方——若已知方向，24 會降為 12，下界仍是 3 次但方案簡單得多。"
+        ],
+        "zh-Hans": [
+          "先算下界，也就是用「信息量」估计至少需要几次。",
+          "把所有可能的情况数一数：假币可能是 12 枚中的任何一枚，而且对每一枚而言又有「偏重」与「偏轻」两种可能，所以总共有 12 × 2 = 24 种不同的状况。",
+          "接着看每一次称重能提供多少信息。天平的结果只有三种：左边重、右边重、两边平衡。",
+          "所以 k 次称重最多只能区分出 3ᵏ 种不同的结果序列。",
+          "逐一比较：1 次只能分辨 3 种、2 次只能分辨 3² = 9 种，都远少于 24，所以 2 次绝对不够。",
+          "3 次可以分辨 3³ = 27 种，27 ≥ 24，在信息量上恰好足够——注意这只说明「不被排除」，还必须真的设计得出方案。",
+          "3 次的方案确实存在：把 12 枚分成三组各 4 枚，第一次比较其中两组。若平衡，假币在未称的那 4 枚中；若不平衡，假币在称过的 8 枚中且已知该组偏重或偏轻的方向。无论哪种情形，剩下的两次都足以定位。",
+          "所以答案是 3 次。注意「不知轻重」让可能情况从 12 种变成 24 种，这正是本题比「已知假币较轻」的版本困难的地方——若已知方向，24 会降为 12，下界仍是 3 次但方案简单得多。"
+        ],
+        "en": [
+          "Start with a lower bound, estimating the requirement from the amount of information involved.",
+          "Count the possible situations: the counterfeit could be any of the 12 coins, and for each there are two possibilities, heavy or light, giving 12 × 2 = 24 distinct situations.",
+          "Now consider how much information one weighing provides. A balance has only three outcomes: left heavier, right heavier, or balanced.",
+          "So k weighings distinguish at most 3ᵏ different outcome sequences.",
+          "Comparing: one weighing distinguishes 3 cases and two distinguish 3² = 9, both far short of 24, so two weighings are definitely insufficient.",
+          "Three weighings distinguish 3³ = 27, and 27 ≥ 24, so three are enough on information grounds — though this only shows three are not ruled out; an actual scheme must still be exhibited.",
+          "Such a scheme does exist: divide the 12 coins into three groups of 4 and compare two of them. If they balance, the counterfeit is among the untouched 4; if not, it is among the 8 weighed and the direction of imbalance is known. In either case the remaining two weighings suffice to pinpoint it.",
+          "So the answer is 3. Note that not knowing heavy from light raises the number of situations from 12 to 24, which is what makes this harder than the version where the counterfeit is known to be lighter; with a known direction the count drops to 12, the bound is still 3, but the scheme is far simpler."
+        ],
+        "ja": [
+          "まず下界を、情報量の観点から見積もります。",
+          "起こりうる状況を数えます：偽物は 12 枚のどれでもよく、各々について「重い」「軽い」の 2 通りがあるので、全部で 12 × 2 = 24 通りです。",
+          "次に 1 回の計量が与える情報を見ます。天びんの結果は「左が重い」「右が重い」「つり合う」の 3 通りだけです。",
+          "したがって k 回では最大 3ᵏ 通りの結果列しか区別できません。",
+          "比べると、1 回では 3 通り、2 回でも 3² = 9 通りで 24 にはるかに届かず、2 回では絶対に足りません。",
+          "3 回なら 3³ = 27 通りを区別でき、27 ≥ 24 なので情報量の上では十分です。ただしこれは「除外されない」ことを示すだけで、実際の手順を示す必要があります。",
+          "3 回の手順は実在します：12 枚を 4 枚ずつ 3 組に分け、まず 2 組を比べます。つり合えば偽物は載せなかった 4 枚の中、つり合わなければ載せた 8 枚の中で、しかも傾いた向きも分かります。いずれの場合も残り 2 回で特定できます。",
+          "よって答えは 3 回です。「重いか軽いか不明」であることで状況が 12 通りから 24 通りに増える点が、「軽いと分かっている」版より難しい理由です。方向が既知なら 24 は 12 に減り、下界は同じ 3 回でも手順ははるかに簡単になります。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "3"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "以三進位資訊量估下界：24 種狀況需 3ᵏ ≥ 24，故至少 3 次，並須確認方案存在",
+        "notes": "設計依據：核心是把「不知輕重」轉成 12 × 2 = 24 種狀況，再用天平三種結果得出 3ᵏ ≥ 24 的下界；2 次的 9 種明顯不足使下界嚴格。詳解特別強調資訊量只給下界、仍須給出可行方案，並對比「已知較輕」版本只有 12 種狀況。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（十二枚硬幣）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "邏輯",
+        "topicCode": "logic",
+        "subtopic": "十二枚硬幣",
+        "subtopicCode": "twelve_coin_weighing"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "logic_grade12_foundation_014",
+      "topic": "logic",
+      "subtopic": "egg_drop_two",
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一棟大樓有 100 層。已知存在一個臨界樓層 F，使得從第 F 層以上（含 F 層）往下丟蛋一定會破，從 F 層以下丟則一定不破。現在手上只有 2 顆完全相同的蛋，蛋沒破就可以重複使用，破了就不能再用。求在最壞情況下，最少需要丟幾次才能保證確定臨界樓層。",
+        "zh-Hans": "一栋大楼有 100 层。已知存在一个临界楼层 F，使得从第 F 层以上（含 F 层）往下丢蛋一定会破，从 F 层以下丢则一定不破。现在手上只有 2 颗完全相同的蛋，蛋没破就可以重复使用，破了就不能再用。求在最坏情况下，最少需要丢几次才能保证确定临界楼层。",
+        "en": "A building has 100 floors and there is a critical floor F such that an egg dropped from floor F or above always breaks, while one dropped from below F never breaks. Only 2 identical eggs are available; an unbroken egg can be reused, a broken one cannot. In the worst case, what is the fewest number of drops that guarantees determining F?",
+        "ja": "100 階建てのビルがあります。ある臨界階 F が存在し、F 階以上から落とすと卵は必ず割れ、F 階未満から落とすと割れません。手元には同じ卵が 2 個だけあり、割れなければ再利用でき、割れたら使えません。最悪の場合でも臨界階を必ず特定するには、最少で何回落とせばよいですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 14 次。",
+        "zh-Hans": "答案是 14 次。",
+        "en": "The answer is 14.",
+        "ja": "答えは 14 回です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "先看兩顆蛋各自的角色。**第一顆蛋用來大跨步地縮小範圍**，一旦它破了，**第二顆蛋就只能從已知的安全樓層往上逐層試**——因為再破就沒有蛋可用了。",
+          "所以每次用第一顆蛋往上跳的步幅，決定了萬一破掉之後第二顆蛋要逐層試多少次，兩者必須互相配合。",
+          "設最壞情況下總共丟 k 次。第一次應該從第 k 層丟：若破了，剩下的 k − 1 次剛好夠用第二顆蛋從第 1 層逐層試到第 k − 1 層。",
+          "若第一次沒破，就只剩 k − 1 次可用，所以下一次往上跳的步幅要縮小 1，從第 k + (k − 1) 層丟。",
+          "依此類推，每次步幅遞減 1：k、k − 1、k − 2、⋯、1。",
+          "所以 k 次總共能覆蓋的樓層數是 k + (k − 1) + ⋯ + 1 = k(k + 1) ÷ 2。",
+          "要覆蓋 100 層就需要 k(k + 1) ÷ 2 ≥ 100。試算：k = 13 只能覆蓋 91 層，不足；k = 14 能覆蓋 105 層，足夠。",
+          "所以最少需要 14 次。驗算：程式逐一計算 k(k+1)/2，k = 10 到 13 分別是 55、66、78、91 都不足 100，k = 14 起才達到 105 ✓，最小的 k 確實是 14。"
+        ],
+        "zh-Hans": [
+          "先看两颗蛋各自的角色。**第一颗蛋用来大跨步地缩小范围**，一旦它破了，**第二颗蛋就只能从已知的安全楼层往上逐层试**——因为再破就没有蛋可用了。",
+          "所以每次用第一颗蛋往上跳的步幅，决定了万一破掉之后第二颗蛋要逐层试多少次，两者必须互相配合。",
+          "设最坏情况下总共丢 k 次。第一次应该从第 k 层丢：若破了，剩下的 k − 1 次刚好够用第二颗蛋从第 1 层逐层试到第 k − 1 层。",
+          "若第一次没破，就只剩 k − 1 次可用，所以下一次往上跳的步幅要缩小 1，从第 k + (k − 1) 层丢。",
+          "依此类推，每次步幅递减 1：k、k − 1、k − 2、⋯、1。",
+          "所以 k 次总共能覆盖的楼层数是 k + (k − 1) + ⋯ + 1 = k(k + 1) ÷ 2。",
+          "要覆盖 100 层就需要 k(k + 1) ÷ 2 ≥ 100。试算：k = 13 只能覆盖 91 层，不足；k = 14 能覆盖 105 层，足够。",
+          "所以最少需要 14 次。验算：程序逐一计算 k(k+1)/2，k = 10 到 13 分别是 55、66、78、91 都不足 100，k = 14 起才达到 105 ✓，最小的 k 确实是 14。"
+        ],
+        "en": [
+          "Consider the roles of the two eggs. The first egg makes large jumps to narrow the range, but once it breaks the second egg must be tested floor by floor upward from the last known safe floor, since breaking it too would leave nothing.",
+          "So each jump size for the first egg determines how many floor-by-floor tests the second egg would need afterwards, and the two must be balanced against each other.",
+          "Suppose the worst case takes k drops in total. The first drop should be from floor k: if it breaks, the remaining k − 1 drops are exactly enough for the second egg to test floors 1 up to k − 1 one at a time.",
+          "If it does not break, only k − 1 drops remain, so the next jump must be one smaller, dropping from floor k + (k − 1).",
+          "Continuing this way, the jumps shrink by one each time: k, k − 1, k − 2, …, 1.",
+          "So k drops cover a total of k + (k − 1) + ⋯ + 1 = k(k + 1) ÷ 2 floors.",
+          "Covering 100 floors requires k(k + 1) ÷ 2 ≥ 100. Testing values: k = 13 covers only 91 floors, which is not enough, while k = 14 covers 105, which is.",
+          "So 14 drops are needed. Check: computing k(k+1)/2 gives 55, 66, 78 and 91 for k = 10 to 13, all short of 100, with k = 14 first reaching 105, so the smallest k is indeed 14."
+        ],
+        "ja": [
+          "まず 2 個の卵の役割を整理します。**1 個目は大きく跳んで範囲を絞るため**に使い、割れてしまったら**2 個目は既知の安全な階から 1 階ずつ上げて試すしかありません**。もう 1 個割れたら卵がなくなるからです。",
+          "したがって 1 個目で上る幅は、割れた場合に 2 個目が何回逐次試すかを決めるので、両者を釣り合わせる必要があります。",
+          "最悪の場合の総回数を k とします。1 回目は k 階から落とします：割れれば残り k − 1 回でちょうど 1 階から k − 1 階まで 1 階ずつ試せます。",
+          "割れなければ残りは k − 1 回なので、次の跳ぶ幅は 1 小さくし、k + (k − 1) 階から落とします。",
+          "以下同様に幅は 1 ずつ減っていきます：k、k − 1、k − 2、⋯、1。",
+          "よって k 回で覆える階数は k + (k − 1) + ⋯ + 1 = k(k + 1) ÷ 2 です。",
+          "100 階を覆うには k(k + 1) ÷ 2 ≥ 100 が必要です。計算すると k = 13 では 91 階で不足、k = 14 では 105 階で十分です。",
+          "したがって最少 14 回です。検算：k(k+1)/2 は k = 10 から 13 で 55、66、78、91 といずれも 100 に届かず、k = 14 で初めて 105 に達します ✓。最小の k は確かに 14 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "14"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "兩顆蛋的最壞情況測試次數：步幅遞減使總覆蓋為 k(k+1)/2，解 k(k+1)/2 ≥ 100",
+        "notes": "設計依據：核心是察覺「第一顆蛋的跳幅必須遞減」——因為每跳一次，萬一破掉後留給第二顆蛋的逐層試驗次數就少一次；固定跳幅（例如每 10 層）會得到較差的 19 次。100 層使 k = 13 的 91 不足、k = 14 的 105 足夠，邊界明確。答案 14 已用 k(k+1)/2 的逐一計算驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（兩顆蛋的測試）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "邏輯",
+        "topicCode": "logic",
+        "subtopic": "兩顆蛋的測試",
+        "subtopicCode": "egg_drop_two"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "logic_grade12_foundation_015",
+      "topic": "logic",
+      "subtopic": "square_dissection_min",
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "把一個正方形分割成若干個較小的正方形（這些小正方形大小可以不同，必須恰好鋪滿且互不重疊）。若分割出的個數要大於 1，求這個個數最少可能是多少。",
+        "zh-Hans": "把一个正方形分割成若干个较小的正方形（这些小正方形大小可以不同，必须恰好铺满且互不重叠）。若分割出的个数要大于 1，求这个个数最少可能是多少。",
+        "en": "A square is cut into several smaller squares, which may differ in size but must tile it exactly without overlapping. If the number of pieces must be greater than 1, what is the smallest possible number?",
+        "ja": "1 つの正方形をいくつかの小さい正方形に分割します（大きさは異なってもよいが、重なりなくちょうど敷き詰める必要があります）。個数が 1 より大きいとき、考えられる最少の個数を求めなさい。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 4 個。",
+        "zh-Hans": "答案是 4 个。",
+        "en": "The answer is 4.",
+        "ja": "答えは 4 個です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "要回答「最少幾個」，必須逐一排除比答案小的個數，再給出一個確實可行的分割。",
+          "**2 個不可能。** 兩個正方形要拼成一個正方形，它們必須各佔一部分。但原正方形的任一條邊上，兩個小正方形只能並排或其中一個獨佔；並排時兩者高度相同而寬度和等於邊長，會留下上方或下方的空隙，無法恰好鋪滿。",
+          "**3 個不可能。** 原正方形有四個角，每個角都必須被某個小正方形的角佔住。三個小正方形最多只能佔住三個角（一個小正方形不可能同時佔兩個角，除非它就是整個正方形），必定留下一個角空著。",
+          "**4 個可以。** 把邊長從中間對半分，橫豎各切一刀，就得到 2 × 2 共四個全等的小正方形，恰好鋪滿且不重疊。",
+          "所以最少是 4 個。",
+          "面積檢查：設原正方形邊長 1，四個小正方形邊長各為 1/2，總面積 = 4 × (1/2)² = 4 × 1/4 = 1，與原正方形面積相符 ✓。",
+          "附註：這題的分割**不要求小正方形大小相同**，所以還可以問更細的問題——事實上 5 個也是不可能的，而 6 個以上（除了 5）都做得到。",
+          "例如 6 個的作法：把正方形切成 3 × 3 的九小格，再把左上角相鄰的 2 × 2 四格合併成一個大正方形，就得到 1 個大的加上 5 個小的，恰好 6 個。"
+        ],
+        "zh-Hans": [
+          "要回答「最少几个」，必须逐一排除比答案小的个数，再给出一个确实可行的分割。",
+          "**2 个不可能。** 两个正方形要拼成一个正方形，它们必须各占一部分。但原正方形的任一条边上，两个小正方形只能并排或其中一个独占；并排时两者高度相同而宽度和等于边长，会留下上方或下方的空隙，无法恰好铺满。",
+          "**3 个不可能。** 原正方形有四个角，每个角都必须被某个小正方形的角占住。三个小正方形最多只能占住三个角（一个小正方形不可能同时占两个角，除非它就是整个正方形），必定留下一个角空着。",
+          "**4 个可以。** 把边长从中间对半分，横竖各切一刀，就得到 2 × 2 共四个全等的小正方形，恰好铺满且不重叠。",
+          "所以最少是 4 个。",
+          "面积检查：设原正方形边长 1，四个小正方形边长各为 1/2，总面积 = 4 × (1/2)² = 4 × 1/4 = 1，与原正方形面积相符 ✓。",
+          "附注：这题的分割**不要求小正方形大小相同**，所以还可以问更细的问题——事实上 5 个也是不可能的，而 6 个以上（除了 5）都做得到。",
+          "例如 6 个的做法：把正方形切成 3 × 3 的九小格，再把左上角相邻的 2 × 2 四格合并成一个大正方形，就得到 1 个大的加上 5 个小的，恰好 6 个。"
+        ],
+        "en": [
+          "Answering \"how few\" requires ruling out every smaller count and then exhibiting a dissection that works.",
+          "Two is impossible. Two squares tiling a square would each occupy part of it, but along any side of the original they could only sit side by side or one alone; side by side they have equal heights and widths summing to the side length, leaving a gap above or below, so the tiling cannot be exact.",
+          "Three is impossible. The original square has four corners, each of which must be occupied by a corner of some small square. Three small squares can cover at most three corners, since one small square cannot occupy two corners unless it is the whole square, so a corner is inevitably left uncovered.",
+          "Four is possible: halve the side length with one horizontal and one vertical cut, giving a 2 by 2 array of four congruent squares that tile it exactly without overlap.",
+          "So the smallest number is 4.",
+          "Area check: with the original side length 1, each small square has side 1/2 and the total area is 4 × (1/2)² = 4 × 1/4 = 1, matching the original.",
+          "Remark: the small squares are not required to be equal in size, so finer questions can be asked — in fact 5 is also impossible, while every number from 6 upward is achievable.",
+          "For example, six can be done like this: cut the square into a 3 by 3 array of nine cells, then merge the four cells of the top-left 2 by 2 block into one larger square, giving 1 large plus 5 small squares — exactly 6."
+        ],
+        "ja": [
+          "「最少いくつか」に答えるには、それより小さい個数を 1 つずつ排除し、実際に可能な分割を示す必要があります。",
+          "**2 個は不可能です。** 2 つの正方形で正方形を敷き詰めるには各々が一部を占めますが、もとの正方形のどの辺でも 2 つは横並びか一方が独占するしかなく、横並びでは高さが等しく幅の和が辺長になるため上下に隙間が残り、ちょうど敷き詰められません。",
+          "**3 個も不可能です。** もとの正方形には 4 つの角があり、各角はいずれかの小正方形の角で覆われなければなりません。3 つの小正方形では最大 3 つの角しか覆えず（1 つの小正方形が 2 つの角を同時に占めるのは全体そのものの場合だけ）、必ず 1 つの角が残ります。",
+          "**4 個は可能です。** 辺を半分に分けて縦横 1 本ずつ切ると 2 × 2 の合同な 4 つの正方形になり、重なりなくちょうど敷き詰められます。",
+          "したがって最少は 4 個です。",
+          "面積の確認：もとの辺長を 1 とすると小正方形の辺は各 1/2 で、面積の合計は 4 × (1/2)² = 4 × 1/4 = 1 となり、もとの面積と一致します ✓。",
+          "補足：この分割では**小正方形の大きさが等しい必要はない**ので、さらに細かい問いも立てられます。実は 5 個も不可能で、6 個以上（5 を除く）はすべて可能です。",
+          "たとえば 6 個は次のようにできます：正方形を 3 × 3 の 9 マスに切り、左上の 2 × 2 の 4 マスを 1 つの大きな正方形にまとめると、大 1 個と小 5 個でちょうど 6 個になります。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "4"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "正方形的最少正方形分割：以「四個角需被四個不同小正方形佔住」排除 3，並由 2 × 2 構造達成 4",
+        "notes": "設計依據：核心是逐一排除 2 與 3（後者用四個角的論證），再給出 2 × 2 的具體構造；只給構造而未排除更小的個數不算完整。詳解另補充 5 亦不可能、6 以上皆可，說明題目允許大小不同時的完整圖像。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（正方形的最少分割）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "邏輯",
+        "topicCode": "logic",
+        "subtopic": "正方形的最少分割",
+        "subtopicCode": "square_dissection_min"
+      },
+      "reviewStatus": "ok"
     }
   ]
 }
