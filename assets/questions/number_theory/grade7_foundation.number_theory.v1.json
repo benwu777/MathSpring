@@ -938,62 +938,62 @@
     {
       "id": "number_theory_grade7_foundation_012",
       "topic": "number_theory",
-      "subtopic": "consecutive_integer_sum",
+      "subtopic": "gcd_tiling_application",
       "difficulty": "foundation",
       "levelStage": "grade7",
       "challengeTier": "foundation",
       "prompt": {
-        "zh-Hant": "2025 可以寫成至少兩個連續正整數之和，例如 1012 + 1013 = 2025。這樣的寫法一共有多少種？（只調換加數順序視為同一種）",
-        "zh-Hans": "2025 可以写成至少两个连续正整数之和，例如 1012 + 1013 = 2025。这样的写法一共有多少种？（只调换加数顺序视为同一种）",
-        "en": "The number 2025 can be written as a sum of two or more consecutive positive integers, for example 1012 + 1013 = 2025. How many such representations are there in total? (Reordering the summands does not give a new representation.)",
-        "ja": "2025 は 2 個以上の連続する正の整数の和として表せます（例：1012 + 1013 = 2025）。このような表し方は全部で何通りありますか。（加える順序を入れ替えただけのものは同じとみなします。）"
+        "zh-Hant": "有一張長 84 公分、寬 60 公分的長方形紙，要把它剪成大小完全相同的正方形，不能有剩餘也不能重疊。若希望剪出的正方形個數越少越好，則會剪出幾個正方形？",
+        "zh-Hans": "有一张长 84 厘米、宽 60 厘米的长方形纸，要把它剪成大小完全相同的正方形，不能有剩余也不能重叠。若希望剪出的正方形个数越少越好，则会剪出几个正方形？",
+        "en": "A rectangular sheet of paper measures 84 cm by 60 cm and is to be cut into identical squares with nothing left over and no overlaps. If the number of squares is to be as small as possible, how many squares are cut?",
+        "ja": "縦 60 cm・横 84 cm の長方形の紙を、余りも重なりもないように、大きさのまったく同じ正方形に切り分けます。正方形の個数をできるだけ少なくするとき、正方形は何個できますか。"
       },
       "answer": {
-        "zh-Hant": "答案是 14 種。",
-        "zh-Hans": "答案是 14 种。",
-        "en": "The answer is 14.",
-        "ja": "答えは 14 通りです。"
+        "zh-Hant": "答案是 35 個。",
+        "zh-Hans": "答案是 35 个。",
+        "en": "The answer is 35.",
+        "ja": "答えは 35 個です。"
       },
       "solutionSteps": {
         "zh-Hant": [
-          "設這個和是從 a 開始的連續 m 個正整數，其中 a ≥ 1、m ≥ 2。",
-          "用等差數列求和：a + (a+1) + ⋯ + (a+m−1) = m × (2a + m − 1) ÷ 2 = 2025。",
-          "兩邊乘 2 消去分母：m × (2a + m − 1) = 4050。所以問題變成把 4050 拆成兩個因數相乘。",
-          "設另一個因數是 M = 2a + m − 1。注意 M − m = 2a − 1 是**奇數**，所以 m 和 M 一奇一偶，必定一個奇數一個偶數。",
-          "而 4050 = 2 × 3⁴ × 5² 只含一個因數 2，所以偶的那一個恰好是「2 × 某個奇因數」，奇的那一個就是剩下的部分。",
-          "因此每一組拆法都對應到 2025 的一個奇因數（2025 是奇數，它的因數全是奇數，共有 (4+1) × (2+1) = 15 個）。",
-          "15 組拆法中，有一組會得到 m = 1（就是 2025 自己一項，不合「至少兩個」），要扣掉，剩下 15 − 1 = 14 種。",
-          "驗算：程式對 m 從 2 逐一檢查 4050 ÷ m 是否給出正整數 a，找到的寫法恰好 14 種（例如從 11 起連續 54 項、從 403 起連續 5 項），與奇因數個數減一完全吻合。"
+          "紙的面積是固定的，所以**正方形越大，需要的個數就越少**。要讓個數最少，就是要讓正方形的邊長最大。",
+          "設正方形的邊長是 d 公分。要剛好剪完不留餘料，長邊 84 必須被 d 整除，寬邊 60 也必須被 d 整除。",
+          "換句話說，d 必須同時是 84 和 60 的因數，也就是它們的公因數；要邊長最大，就取最大公因數。",
+          "分解質因數：84 = 2² × 3 × 7，60 = 2² × 3 × 5。",
+          "取兩者共有的質因數並各取較低的次方：最大公因數 = 2² × 3 = 12，所以正方形邊長是 12 公分。",
+          "接著算個數：長邊可以排 84 ÷ 12 = 7 個，寬邊可以排 60 ÷ 12 = 5 個。",
+          "所以總共剪出 7 × 5 = 35 個正方形。",
+          "驗算：用面積核對，84 × 60 = 5040 平方公分，每個正方形 12 × 12 = 144 平方公分，5040 ÷ 144 = 35 ✓。若改用次大的公因數 6，則會剪出 14 × 10 = 140 個，確實比 35 多。"
         ],
         "zh-Hans": [
-          "设这个和是从 a 开始的连续 m 个正整数，其中 a ≥ 1、m ≥ 2。",
-          "用等差数列求和：a + (a+1) + ⋯ + (a+m−1) = m × (2a + m − 1) ÷ 2 = 2025。",
-          "两边乘 2 消去分母：m × (2a + m − 1) = 4050。所以问题变成把 4050 拆成两个因数相乘。",
-          "设另一个因数是 M = 2a + m − 1。注意 M − m = 2a − 1 是**奇数**，所以 m 和 M 一奇一偶，必定一个奇数一个偶数。",
-          "而 4050 = 2 × 3⁴ × 5² 只含一个因数 2，所以偶的那一个恰好是「2 × 某个奇因数」，奇的那一个就是剩下的部分。",
-          "因此每一组拆法都对应到 2025 的一个奇因数（2025 是奇数，它的因数全是奇数，共有 (4+1) × (2+1) = 15 个）。",
-          "15 组拆法中，有一组会得到 m = 1（就是 2025 自己一项，不合「至少两个」），要扣掉，剩下 15 − 1 = 14 种。",
-          "验算：程序对 m 从 2 逐一检查 4050 ÷ m 是否给出正整数 a，找到的写法恰好 14 种（例如从 11 起连续 54 项、从 403 起连续 5 项），与奇因数个数减一完全吻合。"
+          "纸的面积是固定的，所以**正方形越大，需要的个数就越少**。要让个数最少，就是要让正方形的边长最大。",
+          "设正方形的边长是 d 厘米。要刚好剪完不留余料，长边 84 必须被 d 整除，宽边 60 也必须被 d 整除。",
+          "换句话说，d 必须同时是 84 和 60 的因数，也就是它们的公因数；要边长最大，就取最大公因数。",
+          "分解质因数：84 = 2² × 3 × 7，60 = 2² × 3 × 5。",
+          "取两者共有的质因数并各取较低的次方：最大公因数 = 2² × 3 = 12，所以正方形边长是 12 厘米。",
+          "接着算个数：长边可以排 84 ÷ 12 = 7 个，宽边可以排 60 ÷ 12 = 5 个。",
+          "所以总共剪出 7 × 5 = 35 个正方形。",
+          "验算：用面积核对，84 × 60 = 5040 平方厘米，每个正方形 12 × 12 = 144 平方厘米，5040 ÷ 144 = 35 ✓。若改用次大的公因数 6，则会剪出 14 × 10 = 140 个，确实比 35 多。"
         ],
         "en": [
-          "Suppose the sum runs over m consecutive positive integers starting at a, with a ≥ 1 and m ≥ 2.",
-          "By the formula for an arithmetic series: a + (a+1) + ⋯ + (a+m−1) = m × (2a + m − 1) ÷ 2 = 2025.",
-          "Multiplying by 2 clears the fraction: m × (2a + m − 1) = 4050, so the task becomes splitting 4050 into two factors.",
-          "Write the other factor as M = 2a + m − 1. Note that M − m = 2a − 1 is odd, so m and M have opposite parity: one is odd and the other even.",
-          "Now 4050 = 2 × 3⁴ × 5² contains only a single factor of 2, so the even one is exactly 2 times an odd divisor and the odd one is what remains.",
-          "Hence each splitting corresponds to one odd divisor of 2025, and since 2025 is odd all of its divisors are odd, numbering (4+1) × (2+1) = 15.",
-          "Of those 15 splittings one gives m = 1, which is just 2025 by itself and violates the \"two or more\" condition, so subtract it: 15 − 1 = 14.",
-          "Check: testing each m from 2 upward to see whether 4050 ÷ m yields an integer a finds exactly 14 representations (for instance 54 terms starting at 11, or 5 terms starting at 403), matching the odd-divisor count minus one."
+          "The area of the sheet is fixed, so larger squares mean fewer of them; minimising the count is the same as maximising the side length.",
+          "Let the side length be d centimetres. To finish with nothing left over, d must divide the length 84 and also divide the width 60.",
+          "In other words d must be a common divisor of 84 and 60, and to make it as large as possible we take the greatest common divisor.",
+          "Factorise: 84 = 2² × 3 × 7 and 60 = 2² × 3 × 5.",
+          "Taking the shared primes to the lower power gives a greatest common divisor of 2² × 3 = 12, so the squares have side 12 cm.",
+          "Now count them: the long side fits 84 ÷ 12 = 7 squares and the short side fits 60 ÷ 12 = 5.",
+          "So the total is 7 × 5 = 35 squares.",
+          "Check by area: 84 × 60 = 5040 cm² and each square is 12 × 12 = 144 cm², and 5040 ÷ 144 = 35. Using the next largest common divisor, 6, would give 14 × 10 = 140 squares, which is indeed more than 35."
         ],
         "ja": [
-          "和が a から始まる連続 m 個の正の整数からなるとします（a ≥ 1、m ≥ 2）。",
-          "等差数列の和より a + (a+1) + ⋯ + (a+m−1) = m × (2a + m − 1) ÷ 2 = 2025。",
-          "両辺を 2 倍して分母を払うと m × (2a + m − 1) = 4050。つまり 4050 を 2 つの因数の積に分ける問題になります。",
-          "もう一方の因数を M = 2a + m − 1 とします。M − m = 2a − 1 は**奇数**なので、m と M は一方が奇数、他方が偶数です。",
-          "ここで 4050 = 2 × 3⁴ × 5² は因数 2 を 1 つしか含まないので、偶数のほうはちょうど「2 × ある奇因数」、奇数のほうは残りとなります。",
-          "したがって各分け方は 2025 の奇因数 1 つに対応します。2025 は奇数なので約数はすべて奇数で、その個数は (4+1) × (2+1) = 15 個です。",
-          "15 通りのうち 1 つは m = 1（2025 そのもの 1 項）となり「2 個以上」に反するので除き、15 − 1 = 14 通りです。",
-          "検算：m を 2 から順に調べ 4050 ÷ m が正の整数 a を与えるかを確認すると、ちょうど 14 通り（例：11 から 54 項、403 から 5 項）見つかり、奇因数の個数から 1 を引いた値と一致します。"
+          "紙の面積は決まっているので、**正方形が大きいほど個数は少なくなります**。個数を最小にすることは、1 辺を最大にすることと同じです。",
+          "正方形の 1 辺を d cm とします。余りなく切り分けるには、84 も 60 も d で割り切れなければなりません。",
+          "つまり d は 84 と 60 の公約数であり、1 辺を最大にするには最大公約数をとります。",
+          "素因数分解すると 84 = 2² × 3 × 7、60 = 2² × 3 × 5。",
+          "共通の素因数を低いほうの指数でとると最大公約数は 2² × 3 = 12 なので、正方形の 1 辺は 12 cm です。",
+          "個数を数えます：長い辺には 84 ÷ 12 = 7 個、短い辺には 60 ÷ 12 = 5 個並びます。",
+          "したがって全部で 7 × 5 = 35 個です。",
+          "検算：面積で確かめると 84 × 60 = 5040 cm²、正方形 1 個が 12 × 12 = 144 cm² で、5040 ÷ 144 = 35 ✓。次に大きい公約数 6 を使うと 14 × 10 = 140 個となり、確かに 35 より多くなります。"
         ]
       },
       "figure": {
@@ -1004,7 +1004,7 @@
       "answerMode": "integer_input",
       "correctAnswer": {
         "type": "integer",
-        "value": "14"
+        "value": "35"
       },
       "inputConstraints": {
         "allowNegative": false,
@@ -1013,15 +1013,15 @@
       "source": {
         "type": "rewritten_olympiad_style",
         "name": "MathSpring 改寫題",
-        "reference": "連續整數和的表示法計數：化為因數分解後由奇偶性導出「奇因數個數減一」",
-        "notes": "設計依據：2025 有 14 種寫法，多到無法靠列舉找齊，必須走「化成 m(2a+m−1) = 2N 後用奇偶性配對因數」這條路；奇偶性論證是本題唯一的難點。答案 14 已用逐一檢查 m 的窮舉求出全部 14 種寫法，並與奇因數個數 15 減一交叉驗證。屬同水準原創改寫，非抄錄特定官方題。",
-        "displayText": "改寫題（連續整數和）"
+        "reference": "以最大公因數決定無剩餘分割的最大方塊邊長，再由兩邊的個數相乘得總數",
+        "notes": "設計依據：關鍵在於察覺「個數最少」等價於「邊長最大」，再把「不留餘料」翻譯成整除條件而得到最大公因數；直接把 gcd = 12 當成答案是常見誤答，還需要多走一步算出 7 × 5。詳解另以面積 5040 ÷ 144 做獨立驗算。原先此位置寫的是「把 2025 寫成連續正整數之和」，與既有的 algebra_grade7_foundation_006（把 45 寫成連續正整數之和）僅數字不同、解法骨架完全相同，違反擴充準則故淘汰。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（最大公因數應用）"
       },
       "olympiadTaxonomy": {
         "topic": "數論",
         "topicCode": "number_theory",
-        "subtopic": "連續整數和",
-        "subtopicCode": "consecutive_integer_sum"
+        "subtopic": "最大公因數應用",
+        "subtopicCode": "gcd_tiling_application"
       },
       "reviewStatus": "ok"
     },
