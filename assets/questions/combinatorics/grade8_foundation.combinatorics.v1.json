@@ -736,6 +736,546 @@
         "subtopicCode": "opposite_probability"
       },
       "reviewStatus": "ok"
+    },
+    {
+      "id": "combinatorics_grade8_foundation_010",
+      "topic": "combinatorics",
+      "subtopic": "dice_sum_count",
+      "difficulty": "foundation",
+      "levelStage": "grade8",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "同時擲三顆可以區分的公正六面骰子。求三顆骰子的點數和恰好是 10 的情形共有多少種。",
+        "zh-Hans": "同时掷三颗可以区分的公正六面骰子。求三颗骰子的点数和恰好是 10 的情形共有多少种。",
+        "en": "Three distinguishable fair six-sided dice are rolled at once. In how many ways can the three numbers shown sum to exactly 10?",
+        "ja": "区別できる公正な 6 面のさいころ 3 個を同時に投げます。3 つの目の和がちょうど 10 になる場合は何通りありますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 27 種。",
+        "zh-Hans": "答案是 27 种。",
+        "en": "The answer is 27.",
+        "ja": "答えは 27 通りです。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "三顆骰子可以區分，所以 (1, 3, 6) 和 (3, 1, 6) 要算成不同的情形。",
+          "先把「每顆至少 1 點」的限制去掉：令每顆的點數各減 1，設 x、y、z 是減 1 之後的值，則 x、y、z 都在 0 到 5 之間。",
+          "原本的條件變成 x + y + z = 10 − 3 = 7。",
+          "先不管上限，用隔板法算非負整數解的個數：把 7 個相同的球分到 3 個有序的位置，共有 C(7 + 2, 2) = C(9, 2) = 36 種。",
+          "但這 36 種裡包含了不合法的情形——某一顆的 x 超過 5（也就是點數超過 6）。",
+          "若某一個變數 ≥ 6，把它先扣掉 6，剩下 7 − 6 = 1 要分給三個位置，有 C(1 + 2, 2) = C(3, 2) = 3 種；三個變數各有可能，共 3 × 3 = 9 種。",
+          "兩個變數同時 ≥ 6 是不可能的（那樣至少要 12 > 7），所以不必再加回來。合法情形 = 36 − 9 = 27 種。",
+          "驗算：程式窮舉 6³ = 216 種擲法，點數和為 10 的恰好 27 種，依點數組合分類是 {1,3,6}、{1,4,5}、{2,3,5} 各 6 種，{2,2,6}、{2,4,4}、{3,3,4} 各 3 種，合計 18 + 9 = 27 ✓。"
+        ],
+        "zh-Hans": [
+          "三颗骰子可以区分，所以 (1, 3, 6) 和 (3, 1, 6) 要算成不同的情形。",
+          "先把「每颗至少 1 点」的限制去掉：令每颗的点数各减 1，设 x、y、z 是减 1 之后的值，则 x、y、z 都在 0 到 5 之间。",
+          "原本的条件变成 x + y + z = 10 − 3 = 7。",
+          "先不管上限，用隔板法算非负整数解的个数：把 7 个相同的球分到 3 个有序的位置，共有 C(7 + 2, 2) = C(9, 2) = 36 种。",
+          "但这 36 种里包含了不合法的情形——某一颗的 x 超过 5（也就是点数超过 6）。",
+          "若某一个变量 ≥ 6，把它先扣掉 6，剩下 7 − 6 = 1 要分给三个位置，有 C(1 + 2, 2) = C(3, 2) = 3 种；三个变量各有可能，共 3 × 3 = 9 种。",
+          "两个变量同时 ≥ 6 是不可能的（那样至少要 12 > 7），所以不必再加回来。合法情形 = 36 − 9 = 27 种。",
+          "验算：程序穷举 6³ = 216 种掷法，点数和为 10 的恰好 27 种，依点数组合分类是 {1,3,6}、{1,4,5}、{2,3,5} 各 6 种，{2,2,6}、{2,4,4}、{3,3,4} 各 3 种，合计 18 + 9 = 27 ✓。"
+        ],
+        "en": [
+          "The dice are distinguishable, so (1, 3, 6) and (3, 1, 6) count as different outcomes.",
+          "First remove the \"at least 1\" floor: subtract 1 from each die and call the results x, y and z, each between 0 and 5.",
+          "The condition becomes x + y + z = 10 − 3 = 7.",
+          "Ignoring the upper limits for a moment, stars and bars counts the non-negative solutions: distributing 7 identical balls into 3 ordered slots gives C(7 + 2, 2) = C(9, 2) = 36.",
+          "But those 36 include illegal cases where some x exceeds 5, meaning a die showing more than 6.",
+          "If one variable is at least 6, subtract 6 from it first, leaving 7 − 6 = 1 to distribute, which gives C(1 + 2, 2) = C(3, 2) = 3 ways; any of the three variables could be the offender, for 3 × 3 = 9.",
+          "Two variables cannot both reach 6 (that would need at least 12 > 7), so nothing needs adding back. The count is 36 − 9 = 27.",
+          "Check: enumerating all 6³ = 216 rolls finds exactly 27 with sum 10, grouped as {1,3,6}, {1,4,5} and {2,3,5} with 6 orderings each, plus {2,2,6}, {2,4,4} and {3,3,4} with 3 each, totalling 18 + 9 = 27."
+        ],
+        "ja": [
+          "3 個のさいころは区別できるので、(1, 3, 6) と (3, 1, 6) は別の場合として数えます。",
+          "まず「各さいころは 1 以上」という制約を外します。各目から 1 を引いた値を x、y、z とすると、いずれも 0 以上 5 以下になります。",
+          "条件は x + y + z = 10 − 3 = 7 となります。",
+          "上限をいったん無視して重複組合せ（仕切り法）で非負整数解を数えると、7 個の球を 3 か所に分ける C(7 + 2, 2) = C(9, 2) = 36 通りです。",
+          "しかしこの 36 通りには、ある x が 5 を超える（目が 6 を超える）不正な場合が含まれます。",
+          "ある変数が 6 以上のとき、先に 6 を引くと残り 7 − 6 = 1 を 3 か所に分けるので C(1 + 2, 2) = C(3, 2) = 3 通り。どの変数かで 3 通りあり、計 3 × 3 = 9 通りです。",
+          "2 つの変数が同時に 6 以上になることはありえない（合計 12 > 7 となるため）ので、足し戻しは不要です。よって 36 − 9 = 27 通り。",
+          "検算：6³ = 216 通りをすべて調べると和が 10 になるのはちょうど 27 通りで、{1,3,6}、{1,4,5}、{2,3,5} が各 6 通り、{2,2,6}、{2,4,4}、{3,3,4} が各 3 通りで合計 18 + 9 = 27 ✓。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "27"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "有上下界的整數解計數：先平移去掉下界，再用容斥扣掉超過上界的情形",
+        "notes": "設計依據：點數和刻意選在 10——若和太小則上界不會被觸發、太大則需雙重扣除，10 恰好只需扣一次而不必加回，讓容斥的每一步都有明確理由。答案 27 已用 216 種擲法全窮舉並依點數組合分類驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（骰子點數和）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "組合",
+        "topicCode": "combinatorics",
+        "subtopic": "骰子點數和",
+        "subtopicCode": "dice_sum_count"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "combinatorics_grade8_foundation_011",
+      "topic": "combinatorics",
+      "subtopic": "permutation_forbidden_positions",
+      "difficulty": "foundation",
+      "levelStage": "grade8",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "甲、乙、丙、丁、戊五個人排成一列。若甲不可以排在最前面，而且乙不可以排在最後面，則共有多少種不同的排法？",
+        "zh-Hans": "甲、乙、丙、丁、戊五个人排成一列。若甲不可以排在最前面，而且乙不可以排在最后面，则共有多少种不同的排法？",
+        "en": "Five people A, B, C, D and E stand in a line. If A may not be first and B may not be last, how many different arrangements are there?",
+        "ja": "5 人（甲・乙・丙・丁・戊）が一列に並びます。甲 が先頭に立てず、乙 が最後尾に立てないとき、並び方は何通りありますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 78 種。",
+        "zh-Hans": "答案是 78 种。",
+        "en": "The answer is 78.",
+        "ja": "答えは 78 通りです。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "有兩個「不可以」的限制時，直接正面數很容易漏掉或重複，改用**補集法**：先算全部，再扣掉違規的。",
+          "五個人全排列共有 5! = 120 種。",
+          "違規情形一：甲排在最前面。這時甲的位置固定，其餘四人任意排，有 4! = 24 種。",
+          "違規情形二：乙排在最後面。同理有 4! = 24 種。",
+          "如果直接算 120 − 24 − 24 = 72，就錯了——因為「甲在最前面**且**乙在最後面」的排法被扣了兩次。",
+          "算出重複扣掉的部分：甲固定在最前、乙固定在最後，剩下三人任意排，有 3! = 6 種。",
+          "把多扣的加回來：120 − 24 − 24 + 6 = 78 種。",
+          "驗算：程式窮舉全部 120 種排列並逐一檢查兩個條件，符合的恰好 78 種，與容斥計算完全一致。"
+        ],
+        "zh-Hans": [
+          "有两个「不可以」的限制时，直接正面数很容易漏掉或重复，改用**补集法**：先算全部，再扣掉违规的。",
+          "五个人全排列共有 5! = 120 种。",
+          "违规情形一：甲排在最前面。这时甲的位置固定，其余四人任意排，有 4! = 24 种。",
+          "违规情形二：乙排在最后面。同理有 4! = 24 种。",
+          "如果直接算 120 − 24 − 24 = 72，就错了——因为「甲在最前面**且**乙在最后面」的排法被扣了两次。",
+          "算出重复扣掉的部分：甲固定在最前、乙固定在最后，剩下三人任意排，有 3! = 6 种。",
+          "把多扣的加回来：120 − 24 − 24 + 6 = 78 种。",
+          "验算：程序穷举全部 120 种排列并逐一检查两个条件，符合的恰好 78 种，与容斥计算完全一致。"
+        ],
+        "en": [
+          "With two forbidden placements, counting directly invites omissions and double counting, so use the complement: count everything, then remove the violations.",
+          "All five people can be arranged in 5! = 120 ways.",
+          "Violation one: A is first. With A fixed, the other four are free, giving 4! = 24 arrangements.",
+          "Violation two: B is last. By the same reasoning, 4! = 24 arrangements.",
+          "Computing 120 − 24 − 24 = 72 would be wrong, because arrangements with A first and B last have been subtracted twice.",
+          "Count that overlap: with A fixed first and B fixed last, the remaining three are free, giving 3! = 6.",
+          "Add the over-subtracted part back: 120 − 24 − 24 + 6 = 78.",
+          "Check: enumerating all 120 permutations and testing both conditions leaves exactly 78, matching the inclusion-exclusion count."
+        ],
+        "ja": [
+          "「〜してはいけない」という制約が 2 つあるときは、正面から数えると漏れや重複が生じやすいので、**補集合**で考えます。全体から違反する場合を引きます。",
+          "5 人の並べ方は全部で 5! = 120 通りです。",
+          "違反 1：甲 が先頭の場合。甲 の位置が固定され、残り 4 人は自由なので 4! = 24 通り。",
+          "違反 2：乙 が最後尾の場合。同様に 4! = 24 通り。",
+          "ここで 120 − 24 − 24 = 72 とするのは誤りです。「甲 が先頭**かつ** 乙 が最後尾」の並びを 2 回引いてしまっているからです。",
+          "その重なりを数えます：甲 を先頭、乙 を最後尾に固定すると残り 3 人は自由で 3! = 6 通り。",
+          "引きすぎた分を戻して 120 − 24 − 24 + 6 = 78 通り。",
+          "検算：120 通りの並びをすべて列挙して 2 つの条件を確認すると、ちょうど 78 通りとなり、包除原理の計算と一致します。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "78"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "兩個禁位限制下的排列計數：以補集法搭配容斥，避免重複扣除交集",
+        "notes": "設計依據：兩個限制的交集非空（甲在最前且乙在最後是可能的），使「加回 3!」成為必要步驟；漏掉這一步會得到 72 這個常見誤答。答案 78 已用 120 種排列全窮舉逐一檢查兩條件驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（禁位排列）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "組合",
+        "topicCode": "combinatorics",
+        "subtopic": "禁位排列",
+        "subtopicCode": "permutation_forbidden_positions"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "combinatorics_grade8_foundation_012",
+      "topic": "combinatorics",
+      "subtopic": "chair_selection_double_count",
+      "difficulty": "foundation",
+      "levelStage": "grade8",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "從 10 個人中選出 3 個人組成一個委員會，並且要從這 3 人之中指定 1 人擔任主席。求不同的選法共有多少種。",
+        "zh-Hans": "从 10 个人中选出 3 个人组成一个委员会，并且要从这 3 人之中指定 1 人担任主席。求不同的选法共有多少种。",
+        "en": "From 10 people, choose 3 to form a committee and then designate one of those 3 as chairperson. How many different outcomes are there?",
+        "ja": "10 人の中から 3 人を選んで委員会をつくり、その 3 人のうち 1 人を委員長に指名します。選び方は全部で何通りありますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 360 種。",
+        "zh-Hans": "答案是 360 种。",
+        "en": "The answer is 360.",
+        "ja": "答えは 360 通りです。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "這種題目有兩條不同的計數路徑，兩條都能走通，而且互相可以驗算。",
+          "路徑一：先選委員會，再指定主席。從 10 人中選 3 人的方法有 C(10, 3) = (10 × 9 × 8) ÷ (3 × 2 × 1) = 120 種。",
+          "選定這 3 人之後，主席可以是其中任何一位，有 3 種選擇。",
+          "所以總數是 120 × 3 = 360 種。",
+          "路徑二：先指定主席，再補齊其他委員。主席可以是 10 人中的任何一位，有 10 種選擇。",
+          "主席選定後，還要從剩下的 9 人中選 2 人當一般委員，有 C(9, 2) = (9 × 8) ÷ (2 × 1) = 36 種。",
+          "所以總數是 10 × 36 = 360 種，與路徑一完全一致。",
+          "驗算：程式對所有 C(10, 3) 個委員會與其中每一個主席人選逐一計數，得到 360，與兩條路徑都吻合。注意不可以算成 C(10,3) × 10 —— 主席必須從委員會**內部**產生，不是從全部 10 人中另外選。"
+        ],
+        "zh-Hans": [
+          "这种题目有两条不同的计数路径，两条都能走通，而且互相可以验算。",
+          "路径一：先选委员会，再指定主席。从 10 人中选 3 人的方法有 C(10, 3) = (10 × 9 × 8) ÷ (3 × 2 × 1) = 120 种。",
+          "选定这 3 人之后，主席可以是其中任何一位，有 3 种选择。",
+          "所以总数是 120 × 3 = 360 种。",
+          "路径二：先指定主席，再补齐其他委员。主席可以是 10 人中的任何一位，有 10 种选择。",
+          "主席选定后，还要从剩下的 9 人中选 2 人当一般委员，有 C(9, 2) = (9 × 8) ÷ (2 × 1) = 36 种。",
+          "所以总数是 10 × 36 = 360 种，与路径一完全一致。",
+          "验算：程序对所有 C(10, 3) 个委员会与其中每一个主席人选逐一计数，得到 360，与两条路径都吻合。注意不可以算成 C(10,3) × 10 —— 主席必须从委员会**内部**产生，不是从全部 10 人中另外选。"
+        ],
+        "en": [
+          "This kind of problem has two different counting routes, both valid, and each checks the other.",
+          "Route one: choose the committee first, then the chair. Choosing 3 from 10 gives C(10, 3) = (10 × 9 × 8) ÷ (3 × 2 × 1) = 120.",
+          "Once those 3 are fixed, the chair can be any of them, giving 3 choices.",
+          "So the total is 120 × 3 = 360.",
+          "Route two: pick the chair first, then fill the rest of the committee. The chair can be any of the 10 people, giving 10 choices.",
+          "With the chair fixed, 2 ordinary members must be chosen from the remaining 9, giving C(9, 2) = (9 × 8) ÷ (2 × 1) = 36.",
+          "So the total is 10 × 36 = 360, exactly matching route one.",
+          "Check: enumerating every committee of 3 together with each possible chair inside it gives 360, agreeing with both routes. Note that C(10,3) × 10 would be wrong — the chair must come from inside the committee, not be chosen separately from all 10."
+        ],
+        "ja": [
+          "この種の問題には 2 通りの数え方があり、どちらでも解けて互いの検算にもなります。",
+          "方法 1：先に委員会を選び、次に委員長を指名する。10 人から 3 人を選ぶ方法は C(10, 3) = (10 × 9 × 8) ÷ (3 × 2 × 1) = 120 通り。",
+          "その 3 人が決まれば、委員長はその中の誰でもよいので 3 通り。",
+          "したがって合計 120 × 3 = 360 通り。",
+          "方法 2：先に委員長を決め、残りの委員を補う。委員長は 10 人の誰でもよいので 10 通り。",
+          "委員長が決まったら、残り 9 人から 2 人を選ぶので C(9, 2) = (9 × 8) ÷ (2 × 1) = 36 通り。",
+          "したがって合計 10 × 36 = 360 通りとなり、方法 1 と完全に一致します。",
+          "検算：3 人の委員会すべてと、その中の各委員長を列挙して数えると 360 となり、両方の方法と一致します。なお C(10,3) × 10 は誤りです。委員長は委員会の**中から**選ぶのであり、10 人から別に選ぶのではありません。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "360"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "同一組合物件的雙重計數：先選群體再指定角色，或先定角色再補群體，兩路徑互為驗算",
+        "notes": "設計依據：本題的教學價值在於兩條計數路徑都自然且結果必須相同，形成內建的驗算；常見誤答 C(10,3)×10 = 1200 正是把「主席須來自委員會內部」這個限制忽略掉。答案 360 已用委員會與主席的巢狀窮舉獨立計數驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（雙重計數選人）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "組合",
+        "topicCode": "combinatorics",
+        "subtopic": "雙重計數選人",
+        "subtopicCode": "chair_selection_double_count"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "combinatorics_grade8_foundation_013",
+      "topic": "combinatorics",
+      "subtopic": "triangles_from_points_collinear",
+      "difficulty": "foundation",
+      "levelStage": "grade8",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "平面上有 10 個相異的點，其中恰有 4 個點在同一條直線上，除此之外沒有任何三點共線。從這 10 個點中任取 3 點當作頂點，可以組成多少個三角形？",
+        "zh-Hans": "平面上有 10 个相异的点，其中恰有 4 个点在同一条直线上，除此之外没有任何三点共线。从这 10 个点中任取 3 点当作顶点，可以组成多少个三角形？",
+        "en": "Ten distinct points lie in a plane, exactly 4 of them on one straight line, and no other three of the points are collinear. Choosing 3 of the points as vertices, how many triangles can be formed?",
+        "ja": "平面上に相異なる 10 個の点があり、そのうちちょうど 4 個が一直線上にあります。それ以外に 3 点が同一直線上にあることはありません。この 10 点から 3 点を頂点として選ぶとき、三角形は何個できますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 116 個。",
+        "zh-Hans": "答案是 116 个。",
+        "en": "The answer is 116.",
+        "ja": "答えは 116 個です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "三個點能組成三角形的條件是**它們不共線**——如果三點在同一條直線上，就會退化成一條線段，不算三角形。",
+          "所以作法是：先算出所有取 3 點的方法，再扣掉那些會共線的取法。",
+          "從 10 個點中任取 3 點，共有 C(10, 3) = (10 × 9 × 8) ÷ (3 × 2 × 1) = 120 種取法。",
+          "接著找出會共線的取法。題目說只有那 4 個點在同一條直線上，其餘任何三點都不共線。",
+          "所以共線的三點組只能全部來自那 4 個點，共有 C(4, 3) = 4 組。",
+          "扣掉之後得到 120 − 4 = 116 個三角形。",
+          "驗算：程式把 4 個共線點標記出來，窮舉全部 120 個三點組並排除完全落在共線集合內的那些，結果恰好是 116 ✓。",
+          "附註：若共線的點更多，扣掉的部分會迅速變大——例如 5 點共線就要扣 C(5, 3) = 10 組。"
+        ],
+        "zh-Hans": [
+          "三个点能组成三角形的条件是**它们不共线**——如果三点在同一条直线上，就会退化成一条线段，不算三角形。",
+          "所以做法是：先算出所有取 3 点的方法，再扣掉那些会共线的取法。",
+          "从 10 个点中任取 3 点，共有 C(10, 3) = (10 × 9 × 8) ÷ (3 × 2 × 1) = 120 种取法。",
+          "接着找出会共线的取法。题目说只有那 4 个点在同一条直线上，其余任何三点都不共线。",
+          "所以共线的三点组只能全部来自那 4 个点，共有 C(4, 3) = 4 组。",
+          "扣掉之后得到 120 − 4 = 116 个三角形。",
+          "验算：程序把 4 个共线点标记出来，穷举全部 120 个三点组并排除完全落在共线集合内的那些，结果恰好是 116 ✓。",
+          "附注：若共线的点更多，扣掉的部分会迅速变大——例如 5 点共线就要扣 C(5, 3) = 10 组。"
+        ],
+        "en": [
+          "Three points form a triangle exactly when they are not collinear; three points on one line degenerate into a segment and do not count.",
+          "So the method is to count all ways of choosing 3 points and then subtract the collinear choices.",
+          "Choosing 3 points from 10 gives C(10, 3) = (10 × 9 × 8) ÷ (3 × 2 × 1) = 120 selections.",
+          "Next find the collinear selections. The problem states that only those 4 points lie on a common line and no other three points are collinear.",
+          "So a collinear triple must come entirely from those 4 points, and there are C(4, 3) = 4 of them.",
+          "Subtracting gives 120 − 4 = 116 triangles.",
+          "Check: marking the 4 collinear points and enumerating all 120 triples while discarding those lying entirely inside the collinear set gives exactly 116.",
+          "Remark: with more collinear points the subtraction grows quickly — 5 collinear points would remove C(5, 3) = 10 triples."
+        ],
+        "ja": [
+          "3 点が三角形をつくる条件は**同一直線上にない**ことです。3 点が一直線上にあると線分に退化し、三角形になりません。",
+          "そこで、まず 3 点の選び方をすべて数え、同一直線上になる選び方を引きます。",
+          "10 点から 3 点を選ぶ方法は C(10, 3) = (10 × 9 × 8) ÷ (3 × 2 × 1) = 120 通りです。",
+          "次に同一直線上になる選び方を探します。問題文より、一直線上にあるのはその 4 点だけで、他に 3 点が共線になることはありません。",
+          "したがって共線の 3 点組はその 4 点の中からのみ生じ、C(4, 3) = 4 組です。",
+          "引くと 120 − 4 = 116 個の三角形が得られます。",
+          "検算：4 つの共線点に印をつけ、120 通りの 3 点組をすべて調べて共線集合に完全に含まれるものを除くと、ちょうど 116 になります ✓。",
+          "補足：共線の点が増えると引く量は急速に増えます。5 点が共線なら C(5, 3) = 10 組を引くことになります。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "116"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "點集合中的三角形計數：以總取法扣掉共線三點組，需正確辨識共線來源只有一處",
+        "notes": "設計依據：陷阱在於誤以為要扣掉的是 4（點數）而非 C(4,3)（三點組數），或忘記扣除而直接答 120；題目明確聲明「除此之外沒有任何三點共線」以確保扣除來源唯一、答案良好定義。答案 116 已用 120 個三點組全窮舉驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（共線點與三角形）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "組合",
+        "topicCode": "combinatorics",
+        "subtopic": "共線點與三角形",
+        "subtopicCode": "triangles_from_points_collinear"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "combinatorics_grade8_foundation_014",
+      "topic": "combinatorics",
+      "subtopic": "digit_sum_count_three_digit",
+      "difficulty": "foundation",
+      "levelStage": "grade8",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "各位數字之和恰好等於 5 的三位正整數共有多少個？",
+        "zh-Hans": "各位数字之和恰好等于 5 的三位正整数共有多少个？",
+        "en": "How many three-digit positive integers have digits summing to exactly 5?",
+        "ja": "各位の数字の和がちょうど 5 になる 3 桁の正の整数はいくつありますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 15 個。",
+        "zh-Hans": "答案是 15 个。",
+        "en": "The answer is 15.",
+        "ja": "答えは 15 個です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "設這個三位數的百位、十位、個位數字分別是 a、b、c，條件是 a + b + c = 5。",
+          "注意兩個限制：a ≥ 1（否則就不是三位數了），而 b、c ≥ 0，且三者都不超過 9。",
+          "先處理 a ≥ 1 這個下界：令 a′ = a − 1，則 a′ ≥ 0，方程式變成 a′ + b + c = 5 − 1 = 4。",
+          "現在三個變數都是非負整數，可以直接用隔板法：把 4 個相同的球分到 3 個有序的位置。",
+          "方法數是 C(4 + 2, 2) = C(6, 2) = (6 × 5) ÷ (2 × 1) = 15 種。",
+          "還要檢查上界有沒有被違反：三個數字的和只有 5，任何一個都不可能超過 9，所以上界自動成立，不必扣除。",
+          "所以符合條件的三位數共有 15 個。",
+          "驗算：程式列出 100 到 999 中數字和為 5 的數，得到 104、113、122、131、140、203、212、221、230、302、311、320、401、410、500，恰好 15 個 ✓。"
+        ],
+        "zh-Hans": [
+          "设这个三位数的百位、十位、个位数字分别是 a、b、c，条件是 a + b + c = 5。",
+          "注意两个限制：a ≥ 1（否则就不是三位数了），而 b、c ≥ 0，且三者都不超过 9。",
+          "先处理 a ≥ 1 这个下界：令 a′ = a − 1，则 a′ ≥ 0，方程式变成 a′ + b + c = 5 − 1 = 4。",
+          "现在三个变量都是非负整数，可以直接用隔板法：把 4 个相同的球分到 3 个有序的位置。",
+          "方法数是 C(4 + 2, 2) = C(6, 2) = (6 × 5) ÷ (2 × 1) = 15 种。",
+          "还要检查上界有没有被违反：三个数字的和只有 5，任何一个都不可能超过 9，所以上界自动成立，不必扣除。",
+          "所以符合条件的三位数共有 15 个。",
+          "验算：程序列出 100 到 999 中数字和为 5 的数，得到 104、113、122、131、140、203、212、221、230、302、311、320、401、410、500，恰好 15 个 ✓。"
+        ],
+        "en": [
+          "Let the hundreds, tens and units digits be a, b and c, with the condition a + b + c = 5.",
+          "Note two constraints: a ≥ 1 (otherwise it is not a three-digit number), while b and c are at least 0, and all three are at most 9.",
+          "Handle the lower bound on a first: set a′ = a − 1 so that a′ ≥ 0, turning the equation into a′ + b + c = 5 − 1 = 4.",
+          "All three variables are now non-negative integers, so stars and bars applies directly: distribute 4 identical balls into 3 ordered slots.",
+          "The count is C(4 + 2, 2) = C(6, 2) = (6 × 5) ÷ (2 × 1) = 15.",
+          "Check that the upper bounds are not violated: the digits sum to only 5, so none can exceed 9, and no subtraction is needed.",
+          "So there are 15 such three-digit numbers.",
+          "Check: listing the numbers from 100 to 999 with digit sum 5 gives 104, 113, 122, 131, 140, 203, 212, 221, 230, 302, 311, 320, 401, 410 and 500 — exactly 15."
+        ],
+        "ja": [
+          "3 桁の数の百の位、十の位、一の位を a、b、c とすると、条件は a + b + c = 5 です。",
+          "制約が 2 つあります：a ≥ 1（そうでないと 3 桁になりません）、b、c ≥ 0、そしていずれも 9 以下です。",
+          "まず a ≥ 1 という下限を処理します。a′ = a − 1 とおくと a′ ≥ 0 となり、式は a′ + b + c = 5 − 1 = 4 になります。",
+          "これで 3 変数とも非負整数なので、仕切り法がそのまま使えます：4 個の球を 3 か所に分けます。",
+          "その方法数は C(4 + 2, 2) = C(6, 2) = (6 × 5) ÷ (2 × 1) = 15 通りです。",
+          "上限も確認します：数字の和が 5 しかないので、どれも 9 を超えることはなく、引き算は不要です。",
+          "したがって条件を満たす 3 桁の数は 15 個です。",
+          "検算：100 から 999 のうち数字の和が 5 のものを列挙すると 104、113、122、131、140、203、212、221、230、302、311、320、401、410、500 で、ちょうど 15 個です ✓。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "15"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "數字和固定的位數計數：先平移處理首位的下界，再以隔板法計數並確認上界未被觸發",
+        "notes": "設計依據：兩個容易漏的環節——首位不得為 0 需先平移（忘記會多算成 C(7,2) = 21），以及必須確認數字上界 9 未被觸發才可省略容斥步驟；和取 5 正是為了讓上界自動成立而使推理乾淨。答案 15 已用 100 到 999 全窮舉列出完整清單驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（數字和計數）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "組合",
+        "topicCode": "combinatorics",
+        "subtopic": "數字和計數",
+        "subtopicCode": "digit_sum_count_three_digit"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "combinatorics_grade8_foundation_015",
+      "topic": "combinatorics",
+      "subtopic": "subset_sum_total",
+      "difficulty": "foundation",
+      "levelStage": "grade8",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "集合 {1, 2, 3, 4, 5} 一共有 32 個子集（包含空集合）。把每一個子集裡的元素相加得到該子集的和（空集合的和算作 0），再把這 32 個和全部加起來。求這個總和。",
+        "zh-Hans": "集合 {1, 2, 3, 4, 5} 一共有 32 个子集（包含空集合）。把每一个子集里的元素相加得到该子集的和（空集合的和算作 0），再把这 32 个和全部加起来。求这个总和。",
+        "en": "The set {1, 2, 3, 4, 5} has 32 subsets, including the empty set. For each subset add up its elements to get its sum (the empty set has sum 0), then add all 32 of those sums together. Find this grand total.",
+        "ja": "集合 {1, 2, 3, 4, 5} には空集合を含めて 32 個の部分集合があります。各部分集合の要素の和（空集合は 0）を求め、その 32 個の和をすべて足し合わせます。この総和を求めなさい。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 240。",
+        "zh-Hans": "答案是 240。",
+        "en": "The answer is 240.",
+        "ja": "答えは 240 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "逐一列出 32 個子集再相加太費時也容易出錯，換個角度：**不要一個子集一個子集地算，而是一個元素一個元素地算**。",
+          "問自己：在最後的總和裡，數字 1 總共被加了幾次？",
+          "答案是：包含 1 的子集有幾個，1 就被加了幾次。",
+          "包含 1 的子集，可以這樣數：1 一定要進去，其餘四個元素 2、3、4、5 每一個都可以自由選擇放或不放。",
+          "所以包含 1 的子集有 2⁴ = 16 個，也就是說 1 在總和裡被加了 16 次。",
+          "同樣的道理對每一個元素都成立——2、3、4、5 各自也都被加了 16 次，因為它們的地位完全對稱。",
+          "所以總和 = (1 + 2 + 3 + 4 + 5) × 16 = 15 × 16 = 240。",
+          "驗算：程式列出全部 32 個子集、求出各自的和再相加，結果正是 240 ✓。"
+        ],
+        "zh-Hans": [
+          "逐一列出 32 个子集再相加太费时也容易出错，换个角度：**不要一个子集一个子集地算，而是一个元素一个元素地算**。",
+          "问自己：在最后的总和里，数字 1 总共被加了几次？",
+          "答案是：包含 1 的子集有几个，1 就被加了几次。",
+          "包含 1 的子集，可以这样数：1 一定要进去，其余四个元素 2、3、4、5 每一个都可以自由选择放或不放。",
+          "所以包含 1 的子集有 2⁴ = 16 个，也就是说 1 在总和里被加了 16 次。",
+          "同样的道理对每一个元素都成立——2、3、4、5 各自也都被加了 16 次，因为它们的地位完全对称。",
+          "所以总和 = (1 + 2 + 3 + 4 + 5) × 16 = 15 × 16 = 240。",
+          "验算：程序列出全部 32 个子集、求出各自的和再相加，结果正是 240 ✓。"
+        ],
+        "en": [
+          "Listing all 32 subsets and adding is slow and error-prone, so change viewpoint: count element by element rather than subset by subset.",
+          "Ask instead: how many times does the number 1 get added into the grand total?",
+          "The answer is: exactly as many times as there are subsets containing 1.",
+          "Count those subsets like this: 1 must be included, while each of the other four elements 2, 3, 4 and 5 is independently in or out.",
+          "So 16 = 2⁴ subsets contain 1, meaning 1 contributes to the total 16 times.",
+          "The same reasoning applies to every element — 2, 3, 4 and 5 are each counted 16 times too, since their roles are perfectly symmetric.",
+          "Hence the total is (1 + 2 + 3 + 4 + 5) × 16 = 15 × 16 = 240.",
+          "Check: enumerating all 32 subsets, summing each and adding the results gives exactly 240."
+        ],
+        "ja": [
+          "32 個の部分集合を列挙して足すのは時間がかかり間違えやすいので、視点を変えます：**部分集合ごとではなく、要素ごとに数える**のです。",
+          "こう自問します：最終的な総和の中で、数字 1 は何回足されているでしょうか。",
+          "答えは、1 を含む部分集合の個数だけ足されている、です。",
+          "1 を含む部分集合はこう数えます：1 は必ず入れ、残りの 4 要素 2、3、4、5 はそれぞれ入れる・入れないを自由に選べます。",
+          "よって 1 を含む部分集合は 2⁴ = 16 個あり、1 は総和に 16 回寄与します。",
+          "同じ理屈がどの要素にも当てはまります。2、3、4、5 も立場が完全に対称なので、それぞれ 16 回ずつ数えられます。",
+          "したがって総和は (1 + 2 + 3 + 4 + 5) × 16 = 15 × 16 = 240 です。",
+          "検算：32 個の部分集合をすべて列挙し、各和を求めて足し合わせると、ちょうど 240 になります ✓。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "240"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "以貢獻度換序求和：把「逐子集加總」改為「逐元素統計出現次數」的雙重計數",
+        "notes": "設計依據：核心是交換求和次序這個視角轉換——逐子集列舉在元素稍多時就不可行，而逐元素統計則與集合大小無關；「每個元素出現在一半的子集中」是需要自己導出的關鍵。答案 240 已用 32 個子集全窮舉求和驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（子集和總計）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "組合",
+        "topicCode": "combinatorics",
+        "subtopic": "子集和總計",
+        "subtopicCode": "subset_sum_total"
+      },
+      "reviewStatus": "ok"
     }
   ]
 }
