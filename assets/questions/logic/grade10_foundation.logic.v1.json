@@ -871,6 +871,546 @@
         "subtopic": "真話假話推理",
         "subtopicCode": "frog_toad_logic"
       }
+    },
+    {
+      "id": "logic_grade10_foundation_010",
+      "topic": "logic",
+      "subtopic": "divisor_chain_pigeonhole",
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "從 1 到 100 這 100 個整數中任意取出若干個數。最少要取出幾個數，才能保證其中一定有兩個數，使得其中一個是另一個的倍數？",
+        "zh-Hans": "从 1 到 100 这 100 个整数中任意取出若干个数。最少要取出几个数，才能保证其中一定有两个数，使得其中一个是另一个的倍数？",
+        "en": "Some numbers are chosen from the integers 1 to 100. What is the fewest number that must be chosen to guarantee that two of them have one a multiple of the other?",
+        "ja": "1 から 100 までの 100 個の整数からいくつか選びます。選んだ中に必ず「一方が他方の倍数」となる 2 数が含まれるようにするには、最少で何個選べばよいですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 51 個。",
+        "zh-Hans": "答案是 51 个。",
+        "en": "The answer is 51.",
+        "ja": "答えは 51 個です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "「保證」型的題目要做兩件事：先找出一個取了很多數卻仍然失敗的例子，再證明多取一個就一定成功。",
+          "先看反例。取 51 到 100 這 50 個數：其中任兩個數，較大的不到較小的兩倍（因為最小是 51，兩倍已經超過 100），所以誰也不是誰的倍數。",
+          "這說明取 50 個數是有可能失敗的，答案至少是 51。",
+          "接著證明 51 個一定成功。關鍵是把每個數寫成「2 的次方 × 奇數」的形式，那個奇數稱為它的**奇數核心**。",
+          "1 到 100 之間的奇數只有 1、3、5、⋯、99 共 50 個，所以奇數核心只有 50 種。",
+          "取 51 個數卻只有 50 種核心，由鴿籠原理必有兩個數的核心相同，設為 2ᵃ × m 與 2ᵇ × m，其中 a ≠ b。",
+          "這兩個數中指數較大的那個，恰好是另一個乘上 2 的若干次方，所以一定是倍數關係。因此 51 個必定成功。",
+          "驗算：程式檢查 51 到 100 這 50 個數的全部配對，互為倍數的配對數是 0，確認 50 個的反例成立 ✓；而奇數核心恰有 50 種，鴿籠的門檻正是 51。"
+        ],
+        "zh-Hans": [
+          "「保证」型的题目要做两件事：先找出一个取了很多数却仍然失败的例子，再证明多取一个就一定成功。",
+          "先看反例。取 51 到 100 这 50 个数：其中任两个数，较大的不到较小的两倍（因为最小是 51，两倍已经超过 100），所以谁也不是谁的倍数。",
+          "这说明取 50 个数是有可能失败的，答案至少是 51。",
+          "接着证明 51 个一定成功。关键是把每个数写成「2 的次方 × 奇数」的形式，那个奇数称为它的**奇数核心**。",
+          "1 到 100 之间的奇数只有 1、3、5、⋯、99 共 50 个，所以奇数核心只有 50 种。",
+          "取 51 个数却只有 50 种核心，由鸽笼原理必有两个数的核心相同，设为 2ᵃ × m 与 2ᵇ × m，其中 a ≠ b。",
+          "这两个数中指数较大的那个，恰好是另一个乘上 2 的若干次方，所以一定是倍数关系。因此 51 个必定成功。",
+          "验算：程序检查 51 到 100 这 50 个数的全部配对，互为倍数的配对数是 0，确认 50 个的反例成立 ✓；而奇数核心恰有 50 种，鸽笼的门槛正是 51。"
+        ],
+        "en": [
+          "A \"guarantee\" problem needs two things: an example where many numbers are chosen yet the property still fails, and a proof that one more forces success.",
+          "First the counterexample. Take the 50 numbers from 51 to 100: for any two of them the larger is less than twice the smaller, since the smallest is 51 and doubling it already exceeds 100, so neither is a multiple of the other.",
+          "So 50 numbers can fail, and the answer is at least 51.",
+          "Now prove that 51 always succeeds. The key is to write each number as a power of 2 times an odd number, calling that odd number its odd core.",
+          "The odd numbers between 1 and 100 are 1, 3, 5, …, 99 — exactly 50 of them — so there are only 50 possible odd cores.",
+          "Choosing 51 numbers with only 50 available cores, the pigeonhole principle forces two of them to share a core, say 2ᵃ × m and 2ᵇ × m with a ≠ b.",
+          "Whichever has the larger exponent is the other multiplied by a power of 2, so one is a multiple of the other. Hence 51 always works.",
+          "Check: testing all pairs among the 50 numbers from 51 to 100 finds zero multiple pairs, confirming the counterexample, while the odd cores number exactly 50, putting the pigeonhole threshold at 51."
+        ],
+        "ja": [
+          "「必ず」を問う問題では 2 つのことが必要です：多く選んでもなお成り立たない例と、あと 1 個増やせば必ず成り立つことの証明です。",
+          "まず反例です。51 から 100 までの 50 個を選ぶと、どの 2 数でも大きいほうは小さいほうの 2 倍未満です（最小が 51 で 2 倍すると 100 を超えるため）。よってどちらも他方の倍数になりません。",
+          "したがって 50 個では失敗しうるので、答えは 51 以上です。",
+          "次に 51 個なら必ず成り立つことを示します。鍵は各数を「2 の累乗 × 奇数」の形に書き、その奇数を**奇数核**と呼ぶことです。",
+          "1 から 100 までの奇数は 1、3、5、⋯、99 のちょうど 50 個なので、奇数核は 50 種類しかありません。",
+          "51 個を選ぶのに核が 50 種類しかないので、鳩の巣原理より核が同じ 2 数が存在します。これを 2ᵃ × m と 2ᵇ × m（a ≠ b）とします。",
+          "指数の大きいほうは他方に 2 の累乗を掛けたものなので、必ず倍数の関係になります。よって 51 個なら必ず成功します。",
+          "検算：51 から 100 の 50 個について全ペアを調べると倍数の関係にある組は 0 で反例が確認できます ✓。奇数核はちょうど 50 種類なので鳩の巣の閾値は 51 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "51"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "以「奇數核心」建立鴿籠分類：50 個核心使第 51 個數必與某數同核心而成倍數關係",
+        "notes": "設計依據：關鍵是想出「2 的次方 × 奇數」這個非顯然的分類方式，並同時給出 50 個數的具體反例（51 到 100）與 51 個必成立的證明；只給其中一半都不算完整。答案 51 已用 51 到 100 的全配對檢查（0 對互為倍數）與奇數核心計數（50 種）雙向驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（倍數鴿籠）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "邏輯",
+        "topicCode": "logic",
+        "subtopic": "倍數鴿籠",
+        "subtopicCode": "divisor_chain_pigeonhole"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "logic_grade10_foundation_011",
+      "topic": "logic",
+      "subtopic": "chain_cutting_payment",
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一條金鏈由 23 個環扣連成一直排。旅客要住 23 天，每天結束時必須讓老闆手上的金環總數恰好等於已住的天數（可以把之前給出的環拿回來找零）。若剪開一個環會讓它變成單獨的一個環，同時把原本的鏈子斷成兩段，求最少要剪開幾個環。",
+        "zh-Hans": "一条金链由 23 个环扣连成一直排。旅客要住 23 天，每天结束时必须让老板手上的金环总数恰好等于已住的天数（可以把之前给出的环拿回来找零）。若剪开一个环会让它变成单独的一个环，同时把原本的链子断成两段，求最少要剪开几个环。",
+        "en": "A gold chain consists of 23 links in a row. A traveller stays 23 nights and at the end of each day the innkeeper must hold exactly as many links as nights stayed, with earlier payments allowed to be taken back as change. Cutting a link turns it into a single loose link and splits the chain there into two pieces. What is the fewest number of links that must be cut?",
+        "ja": "23 個の輪がつながった金の鎖があります。旅人は 23 泊し、毎日の終わりに宿の主人の手元の輪の数が泊まった日数とちょうど等しくなければなりません（以前渡した分をおつりとして受け取ってもかまいません）。輪を 1 つ切ると、その輪は単独の輪になり、鎖はそこで 2 つに分かれます。最少で何個の輪を切ればよいですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 2 個。",
+        "zh-Hans": "答案是 2 个。",
+        "en": "The answer is 2.",
+        "ja": "答えは 2 個です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "先想清楚剪開一個環會得到什麼：那個環本身變成 1 節的單環，而原本的鏈子在該處斷成兩段。",
+          "所以剪開 k 個環之後，手上會有 k 個單環，加上最多 k + 1 段完整的鏈段。",
+          "由於可以拿回之前給出的環來找零，實際上只要**任何一天所需的天數，都能用手上的片段湊出來**即可。",
+          "換句話說，這些片段的各種子集和必須涵蓋 1 到 23 的每一個整數。",
+          "先試剪 1 個環：會得到 1 個單環和最多 2 段，總共 3 個片段。3 個片段最多只能湊出 2³ − 1 = 7 種非零總和，不足以涵蓋 23 個數字，所以 1 個不夠。",
+          "再試剪 2 個環：會得到 2 個單環和最多 3 段，共 5 個片段。取片段大小 1、1、3、6、12（總和恰為 23），就能湊出 1 到 23 的每一個數。",
+          "例如第 1 天給 1；第 2 天再給 1；第 3 天收回兩個單環、給出 3；第 4 天再給 1，依此類推，每天都湊得出來。",
+          "驗算：程式對剪 0、1、2 個環的所有可能片段組合檢查子集和是否覆蓋 1 到 23，結果 0 與 1 都不可行，2 可行（例如 1、1、3、6、12）✓，與公式「剪 k 個環最多可處理 (k+1) × 2^(k+1) − 1 節」相符：k = 1 時上限 7，k = 2 時上限恰為 23。"
+        ],
+        "zh-Hans": [
+          "先想清楚剪开一个环会得到什么：那个环本身变成 1 节的单环，而原本的链子在该处断成两段。",
+          "所以剪开 k 个环之后，手上会有 k 个单环，加上最多 k + 1 段完整的链段。",
+          "由于可以拿回之前给出的环来找零，实际上只要**任何一天所需的天数，都能用手上的片段凑出来**即可。",
+          "换句话说，这些片段的各种子集和必须涵盖 1 到 23 的每一个整数。",
+          "先试剪 1 个环：会得到 1 个单环和最多 2 段，总共 3 个片段。3 个片段最多只能凑出 2³ − 1 = 7 种非零总和，不足以涵盖 23 个数字，所以 1 个不够。",
+          "再试剪 2 个环：会得到 2 个单环和最多 3 段，共 5 个片段。取片段大小 1、1、3、6、12（总和恰为 23），就能凑出 1 到 23 的每一个数。",
+          "例如第 1 天给 1；第 2 天再给 1；第 3 天收回两个单环、给出 3；第 4 天再给 1，依此类推，每天都凑得出来。",
+          "验算：程序对剪 0、1、2 个环的所有可能片段组合检查子集和是否覆盖 1 到 23，结果 0 与 1 都不可行，2 可行（例如 1、1、3、6、12）✓，与公式「剪 k 个环最多可处理 (k+1) × 2^(k+1) − 1 节」相符：k = 1 时上限 7，k = 2 时上限恰为 23。"
+        ],
+        "en": [
+          "First be clear what cutting one link produces: that link becomes a loose single link, and the chain breaks there into two pieces.",
+          "So after cutting k links there are k single links plus at most k + 1 intact chain segments.",
+          "Since earlier payments can be taken back as change, all that is really needed is that the number of days can be assembled from the pieces on hand each day.",
+          "In other words, the subset sums of the pieces must cover every integer from 1 to 23.",
+          "Try cutting 1 link: that gives 1 loose link and at most 2 segments, so 3 pieces in all. Three pieces produce at most 2³ − 1 = 7 non-zero subset sums, far short of 23, so one cut is not enough.",
+          "Try cutting 2 links: that gives 2 loose links and at most 3 segments, so 5 pieces. Taking sizes 1, 1, 3, 6 and 12, which total exactly 23, every value from 1 to 23 can be assembled.",
+          "For instance day 1 hand over 1, day 2 hand over another 1, day 3 take back both singles and hand over the 3, day 4 add a 1, and so on — every day works out.",
+          "Check: testing all possible piece sets for 0, 1 and 2 cuts to see whether the subset sums cover 1 to 23 shows 0 and 1 fail while 2 succeeds, for example with 1, 1, 3, 6, 12. This matches the bound that k cuts handle at most (k+1) × 2^(k+1) − 1 links: 7 for k = 1 and exactly 23 for k = 2."
+        ],
+        "ja": [
+          "まず輪を 1 つ切ると何が得られるかを整理します。その輪自体が 1 個の単独の輪になり、鎖はその箇所で 2 つに分かれます。",
+          "したがって k 個切ると、単独の輪が k 個と、最大 k + 1 本のつながった鎖が手元に残ります。",
+          "以前渡した分をおつりとして戻せるので、実際には**その日の日数を手元の断片で組み立てられればよい**ということになります。",
+          "言い換えると、断片の部分和が 1 から 23 のすべての整数を覆う必要があります。",
+          "1 個切る場合：単独の輪 1 個と最大 2 本の鎖、合わせて 3 断片です。3 断片の 0 以外の部分和は最大 2³ − 1 = 7 通りで 23 に届かず、1 個では不足です。",
+          "2 個切る場合：単独の輪 2 個と最大 3 本の鎖、合わせて 5 断片です。大きさ 1、1、3、6、12（合計ちょうど 23）を取れば 1 から 23 のすべてを作れます。",
+          "たとえば 1 日目に 1、2 日目にもう 1 つの 1、3 日目に単独の輪 2 個を返して 3 を渡す、4 日目に 1 を足す、というように毎日成立します。",
+          "検算：0、1、2 個切る場合の断片の組をすべて調べ、部分和が 1〜23 を覆うか確認すると、0 と 1 は不可、2 は可能（例：1、1、3、6、12）✓。「k 個切ると最大 (k+1) × 2^(k+1) − 1 節まで対応できる」という式とも一致し、k = 1 で 7、k = 2 でちょうど 23 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "2"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "剪鏈付租的最少剪開數：剪 k 個環得到 k 個單環與 k+1 段，需其子集和覆蓋 1 到 n",
+        "notes": "設計依據：鏈長 23 恰為 k = 2 的上限 (2+1) × 2³ − 1 = 23，使「為何不是 1 也不是 3」有嚴格理由；「可以找零」這個條件是把問題從「逐日累加」轉成「子集和覆蓋」的關鍵。答案 2 已用子集和覆蓋檢查對 k = 0、1、2 逐一窮舉驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（剪金鏈付租）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "邏輯",
+        "topicCode": "logic",
+        "subtopic": "剪金鏈付租",
+        "subtopicCode": "chain_cutting_payment"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "logic_grade10_foundation_012",
+      "topic": "logic",
+      "subtopic": "four_queens_count",
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "在 4 × 4 的棋盤上放 4 個皇后，使得任兩個皇后都不在同一行、同一列，也不在同一條對角線上。求這樣的擺法共有多少種。",
+        "zh-Hans": "在 4 × 4 的棋盘上放 4 个皇后，使得任两个皇后都不在同一行、同一列，也不在同一条对角线上。求这样的摆法共有多少种。",
+        "en": "Four queens are placed on a 4 by 4 board so that no two share a row, a column or a diagonal. How many such placements are there?",
+        "ja": "4 × 4 の盤に 4 個のクイーンを、どの 2 個も同じ行・同じ列・同じ対角線上に来ないように置きます。そのような置き方は何通りありますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 2 種。",
+        "zh-Hans": "答案是 2 种。",
+        "en": "The answer is 2.",
+        "ja": "答えは 2 通りです。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "先把限制轉成好處理的形式。「任兩個皇后不同行也不同列」表示每一列恰好有一個皇后，每一行也恰好有一個。",
+          "所以整個擺法可以記成一個排列：第 1 列的皇后放在第 p₁ 行、第 2 列放第 p₂ 行、⋯，其中 p₁ 到 p₄ 是 1、2、3、4 的一個排列。",
+          "這樣一來，行與列的限制自動滿足，只剩下對角線要檢查。共有 4! = 24 個排列要篩。",
+          "對角線條件是：任兩個皇后的列號差與行號差的絕對值不能相等，也就是對每一組 i ≠ j，都要有 |pᵢ − pⱼ| ≠ |i − j|。",
+          "逐一檢查 24 個排列。多數會很快出局，例如 (1, 2, 3, 4) 的四個皇后全部落在同一條對角線上。",
+          "篩完之後只剩兩個排列：(2, 4, 1, 3) 與 (3, 1, 4, 2)。",
+          "這兩種擺法互為鏡射（左右翻轉），所以本質上只有一種形狀，但題目問的是擺法數，兩種都要算。答案是 2 種。",
+          "驗算：程式窮舉全部 4! = 24 個排列並逐組檢查對角線條件，符合的恰好是上述 2 個 ✓。附帶一提，同樣的檢查對 3 × 3 棋盤放 3 個皇后會得到 0 種，可見小棋盤未必有解。"
+        ],
+        "zh-Hans": [
+          "先把限制转成好处理的形式。「任两个皇后不同行也不同列」表示每一列恰好有一个皇后，每一行也恰好有一个。",
+          "所以整个摆法可以记成一个排列：第 1 列的皇后放在第 p₁ 行、第 2 列放第 p₂ 行、⋯，其中 p₁ 到 p₄ 是 1、2、3、4 的一个排列。",
+          "这样一来，行与列的限制自动满足，只剩下对角线要检查。共有 4! = 24 个排列要筛。",
+          "对角线条件是：任两个皇后的列号差与行号差的绝对值不能相等，也就是对每一组 i ≠ j，都要有 |pᵢ − pⱼ| ≠ |i − j|。",
+          "逐一检查 24 个排列。多数会很快出局，例如 (1, 2, 3, 4) 的四个皇后全部落在同一条对角线上。",
+          "筛完之后只剩两个排列：(2, 4, 1, 3) 与 (3, 1, 4, 2)。",
+          "这两种摆法互为镜射（左右翻转），所以本质上只有一种形状，但题目问的是摆法数，两种都要算。答案是 2 种。",
+          "验算：程序穷举全部 4! = 24 个排列并逐组检查对角线条件，符合的恰好是上述 2 个 ✓。附带一提，同样的检查对 3 × 3 棋盘放 3 个皇后会得到 0 种，可见小棋盘未必有解。"
+        ],
+        "en": [
+          "First recast the constraints into a workable form. \"No two queens share a row or column\" means each column holds exactly one queen and each row holds exactly one.",
+          "So a placement can be recorded as a permutation: the queen in column 1 sits in row p₁, the one in column 2 in row p₂, and so on, where p₁ through p₄ is a permutation of 1, 2, 3, 4.",
+          "This makes the row and column conditions automatic, leaving only the diagonals to check, with 4! = 24 permutations to sift through.",
+          "The diagonal condition is that no two queens have equal differences in row and column, that is |pᵢ − pⱼ| ≠ |i − j| for every i ≠ j.",
+          "Checking the 24 permutations, most fail quickly — for instance (1, 2, 3, 4) puts all four queens on one diagonal.",
+          "Only two permutations survive: (2, 4, 1, 3) and (3, 1, 4, 2).",
+          "These two are mirror images of one another, so there is essentially one shape, but the question counts placements and both must be included. The answer is 2.",
+          "Check: enumerating all 4! = 24 permutations and testing every pair against the diagonal condition leaves exactly those 2. Incidentally, the same test on a 3 by 3 board with 3 queens gives 0 placements, so small boards need not admit a solution at all."
+        ],
+        "ja": [
+          "まず条件を扱いやすい形に言い換えます。「どの 2 個も同じ行・同じ列にない」とは、各列にちょうど 1 個、各行にもちょうど 1 個のクイーンがあるということです。",
+          "したがって配置は順列で表せます：第 1 列のクイーンが第 p₁ 行、第 2 列が第 p₂ 行、⋯ とし、p₁ から p₄ は 1、2、3、4 の順列です。",
+          "こうすると行と列の条件は自動的に満たされ、あとは対角線だけを調べればよく、候補は 4! = 24 通りです。",
+          "対角線の条件は、どの 2 個についても行の差と列の差の絶対値が等しくならないこと、すなわち i ≠ j のすべてで |pᵢ − pⱼ| ≠ |i − j| です。",
+          "24 通りを順に調べます。多くはすぐ脱落し、たとえば (1, 2, 3, 4) は 4 個すべてが同じ対角線上に並びます。",
+          "ふるいにかけて残るのは 2 つだけです：(2, 4, 1, 3) と (3, 1, 4, 2)。",
+          "この 2 つは互いに鏡像なので本質的には 1 つの形ですが、問われているのは置き方の数なので両方数えます。答えは 2 通りです。",
+          "検算：4! = 24 通りの順列をすべて列挙し各ペアで対角線条件を確認すると、残るのはちょうどこの 2 つです ✓。なお同じ検査を 3 × 3 の盤に 3 個のクイーンで行うと 0 通りとなり、小さい盤では解が存在するとは限りません。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "2"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "N 皇后的排列建模：行列限制化為排列，僅需再檢查對角線條件 |pᵢ − pⱼ| ≠ |i − j|",
+        "notes": "設計依據：關鍵是把「不同行不同列」轉成排列以把搜尋空間從 C(16,4) = 1820 壓到 4! = 24，再只檢查對角線；詳解另附 3 × 3 無解的對照，說明小棋盤未必可解。答案 2 已用 24 個排列的全窮舉逐組檢查對角線驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（四皇后擺法）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "邏輯",
+        "topicCode": "logic",
+        "subtopic": "四皇后擺法",
+        "subtopicCode": "four_queens_count"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "logic_grade10_foundation_013",
+      "topic": "logic",
+      "subtopic": "clock_perpendicular_count",
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一個標準時鐘的時針與分針都連續平穩地轉動。在一天（24 小時）之內，時針與分針恰好成 90 度角的時刻共出現多少次？",
+        "zh-Hans": "一个标准时钟的时针与分针都连续平稳地转动。在一天（24 小时）之内，时针与分针恰好成 90 度角的时刻共出现多少次？",
+        "en": "On a standard clock both hands move continuously and smoothly. In one day of 24 hours, how many moments are there at which the hour and minute hands are exactly 90 degrees apart?",
+        "ja": "標準的な時計では時針と分針がなめらかに連続して動きます。1 日（24 時間）のうち、時針と分針がちょうど 90 度をなす瞬間は何回ありますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 44 次。",
+        "zh-Hans": "答案是 44 次。",
+        "en": "The answer is 44.",
+        "ja": "答えは 44 回です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "直接逐小時檢查很容易漏算，改從**兩針的相對運動**下手。",
+          "分針每小時轉 360°，時針每小時轉 30°（12 小時轉一圈）。",
+          "所以分針相對於時針每小時多轉 360° − 30° = 330°。",
+          "24 小時內，分針相對時針總共多轉 330° × 24 = 7920°，也就是 7920 ÷ 360 = 22 圈。",
+          "接著問：相對位置每繞一圈，兩針的夾角會經過 90° 幾次？",
+          "把「分針相對時針的角度」想成一個從 0° 均勻增加到 360° 的量，夾角為 90° 對應到相對角度等於 90° 或 270° 這兩個位置，所以每一圈恰好發生 2 次。",
+          "因此總次數 = 22 圈 × 2 次 = 44 次。",
+          "驗算：程式以每 0.1 秒為步長模擬 24 小時內兩針的夾角，統計夾角通過 90° 的次數，得到 44 次 ✓，前四次發生在第 16.365、49.092、81.818、114.547 分鐘。常見錯誤是以為每小時 2 次而答成 48 次——那忽略了時針也在移動。"
+        ],
+        "zh-Hans": [
+          "直接逐小时检查很容易漏算，改从**两针的相对运动**下手。",
+          "分针每小时转 360°，时针每小时转 30°（12 小时转一圈）。",
+          "所以分针相对于时针每小时多转 360° − 30° = 330°。",
+          "24 小时内，分针相对时针总共多转 330° × 24 = 7920°，也就是 7920 ÷ 360 = 22 圈。",
+          "接着问：相对位置每绕一圈，两针的夹角会经过 90° 几次？",
+          "把「分针相对时针的角度」想成一个从 0° 均匀增加到 360° 的量，夹角为 90° 对应到相对角度等于 90° 或 270° 这两个位置，所以每一圈恰好发生 2 次。",
+          "因此总次数 = 22 圈 × 2 次 = 44 次。",
+          "验算：程序以每 0.1 秒为步长模拟 24 小时内两针的夹角，统计夹角通过 90° 的次数，得到 44 次 ✓，前四次发生在第 16.365、49.092、81.818、114.547 分钟。常见错误是以为每小时 2 次而答成 48 次——那忽略了时针也在移动。"
+        ],
+        "en": [
+          "Checking hour by hour invites miscounting, so work from the relative motion of the two hands instead.",
+          "The minute hand turns 360° per hour and the hour hand turns 30° per hour, completing a circle in 12 hours.",
+          "So the minute hand gains 360° − 30° = 330° on the hour hand every hour.",
+          "Over 24 hours it gains 330° × 24 = 7920°, which is 7920 ÷ 360 = 22 full revolutions relative to the hour hand.",
+          "Now ask: during each relative revolution, how often does the angle between the hands pass through 90°?",
+          "Think of the minute hand's angle relative to the hour hand as increasing steadily from 0° to 360°; an angle of 90° between the hands corresponds to relative positions of 90° and 270°, so it happens exactly twice per revolution.",
+          "Hence the total is 22 revolutions × 2 = 44 times.",
+          "Check: simulating the angle between the hands over 24 hours in steps of 0.1 seconds and counting crossings of 90° gives 44, with the first four at minutes 16.365, 49.092, 81.818 and 114.547. A common error is to assume twice per hour and answer 48, which ignores the movement of the hour hand."
+        ],
+        "ja": [
+          "1 時間ずつ確認すると数え落としが起きやすいので、**2 針の相対運動**から考えます。",
+          "分針は 1 時間に 360°、時針は 1 時間に 30°（12 時間で 1 周）回ります。",
+          "したがって分針は時針に対して 1 時間あたり 360° − 30° = 330° 多く回ります。",
+          "24 時間では 330° × 24 = 7920°、すなわち 7920 ÷ 360 = 22 周ぶん多く回ります。",
+          "次に問います：相対位置が 1 周するあいだに、2 針のなす角が 90° になるのは何回でしょうか。",
+          "「分針の時針に対する角度」が 0° から 360° へ一様に増える量だと考えると、なす角 90° は相対角度 90° と 270° の 2 か所に対応するので、1 周につきちょうど 2 回です。",
+          "したがって合計は 22 周 × 2 回 = 44 回です。",
+          "検算：0.1 秒刻みで 24 時間の 2 針のなす角を模擬し 90° を通過する回数を数えると 44 回 ✓。最初の 4 回は 16.365、49.092、81.818、114.547 分に起こります。「1 時間に 2 回」と考えて 48 回と答えるのがよくある誤りで、時針も動いていることを見落としています。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "44"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "時鐘兩針的相對運動：相對角速度 330°/小時，24 小時繞 22 圈，每圈成直角 2 次",
+        "notes": "設計依據：核心是改用相對運動並算出 22 圈（而非直覺的 24 圈），這正是「每小時 2 次 → 48 次」誤答的來源；每圈 2 次則需察覺 90° 與 270° 兩個位置都對應夾角 90°。答案 44 已用 0.1 秒步長的 24 小時模擬統計夾角過 90° 的次數驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（指針成直角次數）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "邏輯",
+        "topicCode": "logic",
+        "subtopic": "指針成直角次數",
+        "subtopicCode": "clock_perpendicular_count"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "logic_grade10_foundation_014",
+      "topic": "logic",
+      "subtopic": "hamiltonian_grid_max",
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "在 4 × 4 的方格中，從左上角的格子出發走到右下角的格子。每一步只能移動到上下左右相鄰的格子，而且每個格子最多只能經過一次（起點與終點都算經過）。求這條路徑最多能經過幾個格子。",
+        "zh-Hans": "在 4 × 4 的方格中，从左上角的格子出发走到右下角的格子。每一步只能移动到上下左右相邻的格子，而且每个格子最多只能经过一次（起点与终点都算经过）。求这条路径最多能经过几个格子。",
+        "en": "On a 4 by 4 grid of cells, travel from the top-left cell to the bottom-right cell. Each step moves to a cell sharing an edge, and no cell may be visited more than once, counting the start and end. What is the greatest number of cells such a path can visit?",
+        "ja": "4 × 4 のマス目で、左上のマスから右下のマスまで移動します。各ステップでは辺を共有する隣のマスにしか移れず、どのマスも 2 回以上通れません（始点と終点も通ったと数えます）。この経路が通れるマスは最大で何マスですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 15 格。",
+        "zh-Hans": "答案是 15 格。",
+        "en": "The answer is 15.",
+        "ja": "答えは 15 マスです。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "全部有 16 個格子，所以第一個念頭會是「能不能走遍全部 16 格」。答案是不行，關鍵在染色。",
+          "把方格像西洋棋盤一樣黑白相間染色，4 × 4 共有 8 個黑格、8 個白格。",
+          "每走一步都是移到相鄰格子，而相鄰格子必定異色，所以路徑上的格子顏色會**嚴格交替**：黑、白、黑、白、⋯。",
+          "由此可知：若路徑經過偶數個格子，起點與終點顏色相異；若經過奇數個格子，起點與終點同色。",
+          "接著看左上角與右下角的顏色。用座標 (列, 行) 從 0 開始編號，左上角是 (0, 0)、右下角是 (3, 3)，兩者的座標和分別是 0 與 6，同為偶數，所以**兩個角同色**。",
+          "既然起點與終點同色，路徑經過的格數必須是奇數。而 16 是偶數，所以走遍 16 格不可能。",
+          "次大的奇數是 15，只要能實際走出經過 15 格的路徑就確定是答案。",
+          "驗算：程式以深度優先搜尋窮舉所有從左上角出發、右下角結束且不重複經過的路徑，最大長度確實是 15 格 ✓，恰好剩下一格未走到，與染色論證完全吻合。"
+        ],
+        "zh-Hans": [
+          "全部有 16 个格子，所以第一个念头会是「能不能走遍全部 16 格」。答案是不行，关键在染色。",
+          "把方格像国际象棋盘一样黑白相间染色，4 × 4 共有 8 个黑格、8 个白格。",
+          "每走一步都是移到相邻格子，而相邻格子必定异色，所以路径上的格子颜色会**严格交替**：黑、白、黑、白、⋯。",
+          "由此可知：若路径经过偶数个格子，起点与终点颜色相异；若经过奇数个格子，起点与终点同色。",
+          "接着看左上角与右下角的颜色。用坐标 (列, 行) 从 0 开始编号，左上角是 (0, 0)、右下角是 (3, 3)，两者的坐标和分别是 0 与 6，同为偶数，所以**两个角同色**。",
+          "既然起点与终点同色，路径经过的格数必须是奇数。而 16 是偶数，所以走遍 16 格不可能。",
+          "次大的奇数是 15，只要能实际走出经过 15 格的路径就确定是答案。",
+          "验算：程序以深度优先搜索穷举所有从左上角出发、右下角结束且不重复经过的路径，最大长度确实是 15 格 ✓，恰好剩下一格未走到，与染色论证完全吻合。"
+        ],
+        "en": [
+          "There are 16 cells in all, so the first thought is whether all 16 can be visited. They cannot, and the reason is a colouring argument.",
+          "Colour the grid like a chessboard in alternating black and white; a 4 by 4 grid has 8 of each colour.",
+          "Every step moves to an edge-adjacent cell, and adjacent cells always differ in colour, so the colours along the path strictly alternate: black, white, black, white, and so on.",
+          "It follows that a path visiting an even number of cells has endpoints of different colours, while one visiting an odd number has endpoints of the same colour.",
+          "Now check the two corners. Numbering coordinates (row, column) from 0, the top-left is (0, 0) and the bottom-right is (3, 3), with coordinate sums 0 and 6, both even, so the two corners share a colour.",
+          "Since the endpoints share a colour, the number of cells visited must be odd. But 16 is even, so visiting all 16 is impossible.",
+          "The next largest odd number is 15, and exhibiting an actual path through 15 cells settles the answer.",
+          "Check: a depth-first search over all self-avoiding paths from the top-left to the bottom-right gives a maximum length of exactly 15 cells, leaving precisely one cell unvisited, in full agreement with the colouring argument."
+        ],
+        "ja": [
+          "マスは全部で 16 個なので、まず「16 マスすべてを通れるか」と考えます。答えは不可能で、鍵は彩色にあります。",
+          "マス目をチェス盤のように白黒交互に塗ると、4 × 4 では黒 8 マス・白 8 マスになります。",
+          "各ステップは辺を共有する隣のマスへの移動であり、隣接マスは必ず異色なので、経路上の色は**厳密に交互**になります：黒、白、黒、白、⋯。",
+          "ここから、経路が偶数マスを通るなら始点と終点は異色、奇数マスなら同色だと分かります。",
+          "次に左上と右下の色を調べます。座標 (行, 列) を 0 から数えると左上は (0, 0)、右下は (3, 3) で、座標の和はそれぞれ 0 と 6 でともに偶数なので、**2 つの角は同色**です。",
+          "始点と終点が同色である以上、通るマス数は奇数でなければなりません。16 は偶数なので 16 マスすべてを通ることは不可能です。",
+          "次に大きい奇数は 15 で、実際に 15 マスを通る経路が存在すれば答えが確定します。",
+          "検算：左上から右下まで同じマスを 2 度通らない経路を深さ優先探索で全列挙すると、最大の長さはちょうど 15 マス ✓。ちょうど 1 マスだけ通れずに残り、彩色による議論と完全に一致します。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "15"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "格點路徑的染色上界：路徑顏色嚴格交替，兩端同色迫使格數為奇數，故 16 格不可能",
+        "notes": "設計依據：關鍵在於察覺兩個對角同色而路徑顏色交替，導致偶數格不可能；只試著畫路徑而找不到 16 格並不能證明不存在。詳解同時給出上界（染色）與可達性（實際存在 15 格路徑）。答案 15 已用深度優先搜尋窮舉全部自避路徑驗證最大長度。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（格點路徑最多格數）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "邏輯",
+        "topicCode": "logic",
+        "subtopic": "格點路徑最多格數",
+        "subtopicCode": "hamiltonian_grid_max"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "logic_grade10_foundation_015",
+      "topic": "logic",
+      "subtopic": "round_robin_wins_deduction",
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "5 支球隊進行單循環賽，每兩隊之間恰好比賽一場，每場都分出勝負沒有平手。賽後統計發現其中四隊的勝場數分別是 4、3、2、1。求第五隊的勝場數。",
+        "zh-Hans": "5 支球队进行单循环赛，每两队之间恰好比赛一场，每场都分出胜负没有平手。赛后统计发现其中四队的胜场数分别是 4、3、2、1。求第五队的胜场数。",
+        "en": "Five teams play a round robin in which every two teams meet exactly once and every game has a winner, with no draws. Afterwards four of the teams are found to have 4, 3, 2 and 1 wins. How many wins does the fifth team have?",
+        "ja": "5 チームが総当たり戦を行い、どの 2 チームもちょうど 1 回対戦し、引き分けはなくすべての試合で勝敗がつきます。試合後、4 チームの勝ち数がそれぞれ 4、3、2、1 でした。5 番目のチームの勝ち数を求めなさい。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 0 場。",
+        "zh-Hans": "答案是 0 场。",
+        "en": "The answer is 0.",
+        "ja": "答えは 0 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "不需要推敲誰贏了誰，只要抓住一個總量關係就能直接算出來。",
+          "先算總場次：5 支球隊兩兩各比一場，場次是 C(5, 2) = (5 × 4) ÷ 2 = 10 場。",
+          "接著是關鍵觀察：**每一場比賽恰好產生一勝**（沒有平手），所以五支球隊的勝場數加起來，必定等於總場次 10。",
+          "已知四隊的勝場是 4、3、2、1，相加得 4 + 3 + 2 + 1 = 10。",
+          "所以第五隊的勝場數 = 10 − 10 = 0 場。",
+          "檢查合理性：每隊各打 4 場，所以勝場數只能是 0 到 4 之間的整數，0 是合法的。",
+          "而且 0、1、2、3、4 恰好用掉了所有可能的勝場數，每個值各出現一次——這樣的賽果確實存在（把五隊排成強弱順序，強的一律贏弱的即可）。",
+          "驗算：總場次 C(5, 2) = 10 與勝場總和相符 ✓，且四隊已佔去 4、3、2、1，第五隊只能是 0。"
+        ],
+        "zh-Hans": [
+          "不需要推敲谁赢了谁，只要抓住一个总量关系就能直接算出来。",
+          "先算总场次：5 支球队两两各比一场，场次是 C(5, 2) = (5 × 4) ÷ 2 = 10 场。",
+          "接着是关键观察：**每一场比赛恰好产生一胜**（没有平手），所以五支球队的胜场数加起来，必定等于总场次 10。",
+          "已知四队的胜场是 4、3、2、1，相加得 4 + 3 + 2 + 1 = 10。",
+          "所以第五队的胜场数 = 10 − 10 = 0 场。",
+          "检查合理性：每队各打 4 场，所以胜场数只能是 0 到 4 之间的整数，0 是合法的。",
+          "而且 0、1、2、3、4 恰好用掉了所有可能的胜场数，每个值各出现一次——这样的赛果确实存在（把五队排成强弱顺序，强的一律赢弱的即可）。",
+          "验算：总场次 C(5, 2) = 10 与胜场总和相符 ✓，且四队已占去 4、3、2、1，第五队只能是 0。"
+        ],
+        "en": [
+          "There is no need to work out who beat whom; a single total relationship gives the answer directly.",
+          "First count the games: five teams meeting pairwise gives C(5, 2) = (5 × 4) ÷ 2 = 10 games.",
+          "Now the key observation: each game produces exactly one win, since there are no draws, so the five teams' win totals must add up to the number of games, 10.",
+          "The four known totals are 4, 3, 2 and 1, summing to 4 + 3 + 2 + 1 = 10.",
+          "Therefore the fifth team has 10 − 10 = 0 wins.",
+          "Sanity check: each team plays 4 games, so a win total must be an integer from 0 to 4, and 0 is allowed.",
+          "Moreover 0, 1, 2, 3 and 4 use up every possible win total exactly once, and such a result really can occur — rank the teams and let every stronger team beat every weaker one.",
+          "Check: the game count C(5, 2) = 10 matches the total of the wins, and with 4, 3, 2 and 1 already taken the fifth team can only have 0."
+        ],
+        "ja": [
+          "誰が誰に勝ったかを推理する必要はなく、総量の関係 1 つで直ちに求まります。",
+          "まず試合数を数えます：5 チームが総当たりで戦うので C(5, 2) = (5 × 4) ÷ 2 = 10 試合です。",
+          "次が要点です：**1 試合ごとにちょうど 1 勝が生まれる**（引き分けなし）ので、5 チームの勝ち数の合計は必ず試合数 10 に等しくなります。",
+          "既知の 4 チームの勝ち数は 4、3、2、1 で、合計は 4 + 3 + 2 + 1 = 10。",
+          "したがって 5 番目のチームの勝ち数は 10 − 10 = 0 です。",
+          "妥当性の確認：各チームは 4 試合戦うので勝ち数は 0 以上 4 以下の整数であり、0 は許されます。",
+          "さらに 0、1、2、3、4 はありうる勝ち数をちょうど 1 回ずつ使い切っており、そのような結果は実際に起こりえます（強さの順に並べ、強いチームが必ず勝てばよい）。",
+          "検算：試合数 C(5, 2) = 10 が勝ち数の合計と一致し ✓、4、3、2、1 が既に使われている以上、5 番目は 0 しかありえません。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "0"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "循環賽的總量守恆：每場恰產生一勝，故全部勝場之和等於總場次 C(n,2)",
+        "notes": "設計依據：核心是用「勝場總和 = 總場次」這個守恆量直接求出未知值，完全不必推敲對戰結果；四隊的勝場刻意設為 4、3、2、1 使總和恰為 10，逼出第五隊必為 0 這個容易被排除的答案。詳解另確認 0、1、2、3、4 的賽果確實存在（強弱全序），避免答案僅是算術巧合。答案 0 已用 C(5,2) = 10 與勝場上限檢查驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（循環賽勝場）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "邏輯",
+        "topicCode": "logic",
+        "subtopic": "循環賽勝場",
+        "subtopicCode": "round_robin_wins_deduction"
+      },
+      "reviewStatus": "ok"
     }
   ]
 }
