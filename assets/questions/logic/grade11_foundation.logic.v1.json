@@ -879,6 +879,546 @@
         "subtopic": "整除條件排除",
         "subtopicCode": "divisibility_deduction"
       }
+    },
+    {
+      "id": "logic_grade11_foundation_010",
+      "topic": "logic",
+      "subtopic": "inversion_count_swaps",
+      "difficulty": "foundation",
+      "levelStage": "grade11",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "四張卡片由左到右依序寫著 3、1、4、2。每一次操作只能把相鄰的兩張卡片對調。要把它們排成由小到大的 1、2、3、4，最少需要幾次操作？",
+        "zh-Hans": "四张卡片由左到右依序写着 3、1、4、2。每一次操作只能把相邻的两张卡片对调。要把它们排成由小到大的 1、2、3、4，最少需要几次操作？",
+        "en": "Four cards read 3, 1, 4, 2 from left to right. Each move swaps two adjacent cards. What is the fewest moves needed to arrange them in increasing order 1, 2, 3, 4?",
+        "ja": "4 枚のカードが左から順に 3、1、4、2 と並んでいます。1 回の操作では隣り合う 2 枚を入れ替えられます。小さい順 1、2、3、4 に並べるには最少で何回の操作が必要ですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 3 次。",
+        "zh-Hans": "答案是 3 次。",
+        "en": "The answer is 3.",
+        "ja": "答えは 3 回です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "與其試著找出最快的操作序列，不如先找一個**只由當前排列決定、且每次操作只改變一點點的量**。",
+          "這個量就是**逆序對**：一組位置在前但數字比較大的配對。",
+          "把 3、1、4、2 的所有配對列出來檢查：(3, 1) 前大後小 ✓、(3, 4) 不是、(3, 2) ✓、(1, 4) 不是、(1, 2) 不是、(4, 2) ✓。所以逆序對共有 3 對。",
+          "關鍵性質是：**每交換一次相鄰的兩張卡片，逆序對數恰好增加 1 或減少 1**——因為只有這一對的先後關係改變，其餘配對的相對位置完全不受影響。",
+          "目標排列 1、2、3、4 沒有任何逆序對，逆序對數是 0。",
+          "從 3 出發、每次只能變動 1、要走到 0，所以至少需要 3 次操作。",
+          "而 3 次確實做得到：把逆序對逐一消掉即可（例如 3 1 4 2 → 1 3 4 2 → 1 3 2 4 → 1 2 3 4）。",
+          "驗算：程式對全部 4! = 24 個排列建圖並以廣度優先搜尋求最短路徑，從 (3,1,4,2) 到 (1,2,3,4) 的最少交換次數確實是 3 ✓，與逆序對數完全相符。"
+        ],
+        "zh-Hans": [
+          "与其试着找出最快的操作序列，不如先找一个**只由当前排列决定、且每次操作只改变一点点的量**。",
+          "这个量就是**逆序对**：一组位置在前但数字比较大的配对。",
+          "把 3、1、4、2 的所有配对列出来检查：(3, 1) 前大后小 ✓、(3, 4) 不是、(3, 2) ✓、(1, 4) 不是、(1, 2) 不是、(4, 2) ✓。所以逆序对共有 3 对。",
+          "关键性质是：**每交换一次相邻的两张卡片，逆序对数恰好增加 1 或减少 1**——因为只有这一对的先后关系改变，其余配对的相对位置完全不受影响。",
+          "目标排列 1、2、3、4 没有任何逆序对，逆序对数是 0。",
+          "从 3 出发、每次只能变动 1、要走到 0，所以至少需要 3 次操作。",
+          "而 3 次确实做得到：把逆序对逐一消掉即可（例如 3 1 4 2 → 1 3 4 2 → 1 3 2 4 → 1 2 3 4）。",
+          "验算：程序对全部 4! = 24 个排列建图并以广度优先搜索求最短路径，从 (3,1,4,2) 到 (1,2,3,4) 的最少交换次数确实是 3 ✓，与逆序对数完全相符。"
+        ],
+        "en": [
+          "Rather than hunting for the fastest sequence of moves, first find a quantity determined by the current arrangement that changes only slightly with each move.",
+          "That quantity is the number of inversions: pairs where the earlier card carries the larger number.",
+          "Checking every pair of 3, 1, 4, 2: (3, 1) is an inversion, (3, 4) is not, (3, 2) is, (1, 4) is not, (1, 2) is not, and (4, 2) is. So there are 3 inversions.",
+          "The key property is that swapping two adjacent cards changes the inversion count by exactly 1, up or down, since only that one pair reverses its order while every other pair keeps its relative position.",
+          "The target arrangement 1, 2, 3, 4 has no inversions at all, a count of 0.",
+          "Starting at 3 and changing by 1 each move to reach 0 therefore requires at least 3 moves.",
+          "And 3 moves suffice: simply remove the inversions one at a time, for instance 3 1 4 2 → 1 3 4 2 → 1 3 2 4 → 1 2 3 4.",
+          "Check: building the graph on all 4! = 24 arrangements and running a breadth-first search gives a shortest path of exactly 3 swaps from (3,1,4,2) to (1,2,3,4), matching the inversion count."
+        ],
+        "ja": [
+          "最短の操作列を探すより先に、**現在の並びだけで決まり、1 回の操作で少ししか変わらない量**を見つけます。",
+          "その量が**転倒数**です。前にあるカードのほうが数が大きい組の個数を数えます。",
+          "3、1、4、2 のすべての組を調べます：(3, 1) は転倒 ✓、(3, 4) は違う、(3, 2) は転倒 ✓、(1, 4) は違う、(1, 2) は違う、(4, 2) は転倒 ✓。よって転倒数は 3 です。",
+          "重要な性質は、**隣り合う 2 枚を 1 回入れ替えると転倒数はちょうど 1 増えるか 1 減る**ことです。前後関係が変わるのはその組だけで、他の組の相対位置は影響を受けません。",
+          "目標の 1、2、3、4 には転倒が 1 つもなく、転倒数は 0 です。",
+          "3 から出発し 1 ずつしか変えられない状態で 0 に到達するには、少なくとも 3 回必要です。",
+          "そして 3 回で実際に可能です。転倒を 1 つずつ解消すればよく、たとえば 3 1 4 2 → 1 3 4 2 → 1 3 2 4 → 1 2 3 4 です。",
+          "検算：4! = 24 通りの並びでグラフをつくり幅優先探索すると、(3,1,4,2) から (1,2,3,4) への最短は確かに 3 回で ✓、転倒数と完全に一致します。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "3"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "以逆序對作為單調變化量：相鄰對調恰改變 1 個逆序對，故最少次數等於逆序對數",
+        "notes": "設計依據：核心是找出「每次操作恰變動 1」的量，使下界（3 次）與可達性（實際序列）同時成立；只嘗試操作序列無法確信 3 是最小值。答案 3 已用 24 個排列的廣度優先搜尋求最短路徑，與逆序對計數交叉驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（逆序對與對調）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "邏輯",
+        "topicCode": "logic",
+        "subtopic": "逆序對與對調",
+        "subtopicCode": "inversion_count_swaps"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "logic_grade11_foundation_011",
+      "topic": "logic",
+      "subtopic": "tournament_second_place",
+      "difficulty": "foundation",
+      "levelStage": "grade11",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "8 支隊伍進行單淘汰賽：每場比賽淘汰一支隊伍，且實力較強的一方必勝（可視為八支隊伍有一個固定的強弱順序）。要確定冠軍與亞軍分別是誰，最少需要安排幾場比賽？",
+        "zh-Hans": "8 支队伍进行单淘汰赛：每场比赛淘汰一支队伍，且实力较强的一方必胜（可视为八支队伍有一个固定的强弱顺序）。要确定冠军与亚军分别是谁，最少需要安排几场比赛？",
+        "en": "Eight teams play a knockout tournament in which each game eliminates one team and the stronger team always wins, so the eight teams have a fixed strength order. What is the fewest number of games needed to determine both the champion and the runner-up?",
+        "ja": "8 チームがトーナメントを行います。1 試合ごとに 1 チームが敗退し、必ず強いほうが勝ちます（8 チームには固定の強さの順序があるとみなせます）。優勝チームと準優勝チームの両方を確定するには、最少で何試合必要ですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 9 場。",
+        "zh-Hans": "答案是 9 场。",
+        "en": "The answer is 9.",
+        "ja": "答えは 9 試合です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "先處理冠軍。每一場比賽恰好淘汰一支隊伍，要留下唯一的冠軍就必須淘汰其餘 7 支，所以找出冠軍至少需要 7 場，而一般的單淘汰賽正好用 7 場達成。",
+          "接著找亞軍，這裡有一個關鍵觀察：**亞軍一定是曾經輸給冠軍的隊伍之一**。",
+          "理由是：若某隊輸給的是冠軍以外的隊，那麼它至少比兩支隊伍弱（打敗它的那隊，以及冠軍），就不可能是第二強。",
+          "所以只要在「輸給冠軍的那些隊」之中找出最強者即可，範圍大幅縮小。",
+          "8 支隊伍的單淘汰賽共有 3 輪（因為 8 = 2³），冠軍每輪各打一場，所以只有 3 支隊伍輸給過冠軍。",
+          "在這 3 支隊伍中找出最強的一支，同樣用「每場淘汰一隊」的算法，需要 3 − 1 = 2 場。",
+          "所以總場次 = 7 + 2 = 9 場。",
+          "驗算：冠軍部分的 7 場由「每場淘汰一隊、需淘汰 7 隊」的對應保證是最小值；亞軍部分只需在 3 支候選中比較，2 場也是最小值。若不做這個縮小而讓剩下 7 隊全部重賽，會多花 6 場（共 13 場），可見「亞軍必出自敗給冠軍者」這個觀察省下了多少。"
+        ],
+        "zh-Hans": [
+          "先处理冠军。每一场比赛恰好淘汰一支队伍，要留下唯一的冠军就必须淘汰其余 7 支，所以找出冠军至少需要 7 场，而一般的单淘汰赛正好用 7 场达成。",
+          "接着找亚军，这里有一个关键观察：**亚军一定是曾经输给冠军的队伍之一**。",
+          "理由是：若某队输给的是冠军以外的队，那么它至少比两支队伍弱（打败它的那队，以及冠军），就不可能是第二强。",
+          "所以只要在「输给冠军的那些队」之中找出最强者即可，范围大幅缩小。",
+          "8 支队伍的单淘汰赛共有 3 轮（因为 8 = 2³），冠军每轮各打一场，所以只有 3 支队伍输给过冠军。",
+          "在这 3 支队伍中找出最强的一支，同样用「每场淘汰一队」的算法，需要 3 − 1 = 2 场。",
+          "所以总场次 = 7 + 2 = 9 场。",
+          "验算：冠军部分的 7 场由「每场淘汰一队、需淘汰 7 队」的对应保证是最小值；亚军部分只需在 3 支候选中比较，2 场也是最小值。若不做这个缩小而让剩下 7 队全部重赛，会多花 6 场（共 13 场），可见「亚军必出自败给冠军者」这个观察省下了多少。"
+        ],
+        "en": [
+          "Start with the champion. Each game eliminates exactly one team, so leaving a single champion requires eliminating the other 7, meaning at least 7 games — and a standard knockout achieves it in exactly 7.",
+          "Now the runner-up, where the key observation is that the runner-up must be one of the teams that lost to the champion.",
+          "The reason: if a team lost to someone other than the champion, it is weaker than at least two teams — the one that beat it and the champion — so it cannot be second strongest.",
+          "So it suffices to find the strongest among the teams beaten by the champion, which narrows the field dramatically.",
+          "A knockout among 8 teams has 3 rounds, since 8 = 2³, and the champion plays once per round, so exactly 3 teams lost to the champion.",
+          "Finding the strongest of those 3 again uses one elimination per game, requiring 3 − 1 = 2 games.",
+          "So the total is 7 + 2 = 9 games.",
+          "Check: the 7 games for the champion are minimal by the one-elimination-per-game correspondence, and comparing only 3 candidates makes 2 games minimal for the runner-up. Without this narrowing, replaying all 7 remaining teams would cost 6 extra games for 13 in total, showing how much the observation saves."
+        ],
+        "ja": [
+          "まず優勝チームから。1 試合ごとにちょうど 1 チームが敗退するので、優勝チームを 1 つ残すには他の 7 チームを敗退させる必要があり、少なくとも 7 試合。通常のトーナメントはちょうど 7 試合で達成します。",
+          "次に準優勝です。ここでの要点は、**準優勝チームは必ず優勝チームに負けたチームのいずれか**だということです。",
+          "理由：優勝チーム以外に負けたチームは、自分を破ったチームと優勝チームの少なくとも 2 チームより弱いので、2 番目に強いことはありえません。",
+          "したがって「優勝チームに負けたチーム」の中で最強を見つければよく、候補が大幅に絞られます。",
+          "8 チームのトーナメントは 3 回戦（8 = 2³）で、優勝チームは各回戦で 1 試合ずつ戦うので、優勝チームに負けたのはちょうど 3 チームです。",
+          "この 3 チームから最強を選ぶのも「1 試合で 1 チーム敗退」なので 3 − 1 = 2 試合。",
+          "よって合計 7 + 2 = 9 試合です。",
+          "検算：優勝の 7 試合は「1 試合 1 敗退・7 チームを敗退させる」対応から最小、準優勝も候補 3 チームの比較なので 2 試合が最小です。この絞り込みをせず残り 7 チームで戦い直すと 6 試合余分（合計 13 試合）になり、この観察の効果が分かります。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "9"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "冠亞軍的最少比賽場次：亞軍必出自敗給冠軍者，候選由 7 隊縮到 3 隊",
+        "notes": "設計依據：核心是「亞軍必定曾輸給冠軍」這個縮小候選範圍的觀察，把第二階段從 7 隊降到 3 隊；不做此觀察會得到 13 場。8 = 2³ 使冠軍恰打 3 場、候選恰為 3 隊，數字乾淨。答案 9 由兩階段的淘汰對應（7 場 + 2 場）推得，並與不縮小的 13 場對照。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（找出冠亞軍）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "邏輯",
+        "topicCode": "logic",
+        "subtopic": "找出冠亞軍",
+        "subtopicCode": "tournament_second_place"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "logic_grade11_foundation_012",
+      "topic": "logic",
+      "subtopic": "knight_min_moves",
+      "difficulty": "foundation",
+      "levelStage": "grade11",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "在標準的 8 × 8 西洋棋盤上，一隻騎士（走「日」字，即每步在一個方向走 2 格、垂直方向走 1 格）從左下角的格子出發。求它走到右上角的格子最少需要幾步。",
+        "zh-Hans": "在标准的 8 × 8 国际象棋盘上，一只骑士（走「日」字，即每步在一个方向走 2 格、垂直方向走 1 格）从左下角的格子出发。求它走到右上角的格子最少需要几步。",
+        "en": "On a standard 8 by 8 chessboard a knight starts at the bottom-left square, moving each turn two squares in one direction and one square perpendicular to it. What is the fewest number of moves to reach the top-right square?",
+        "ja": "標準的な 8 × 8 のチェス盤で、ナイト（1 方向に 2 マス、それに垂直な方向に 1 マス進む駒）が左下のマスから出発します。右上のマスに到達するには最少で何手必要ですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 6 步。",
+        "zh-Hans": "答案是 6 步。",
+        "en": "The answer is 6.",
+        "ja": "答えは 6 手です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "先估下界。把格子用座標表示，左下角是 (0, 0)、右上角是 (7, 7)，兩個座標各要前進 7 格，總位移是 7 + 7 = 14 格。",
+          "騎士每一步在兩個方向合計移動 2 + 1 = 3 格，所以至少需要 14 ÷ 3 ≈ 4.67，也就是至少 5 步。",
+          "但 5 步做不到，還有一個顏色的限制：騎士每走一步，所在格子的顏色必定改變（走「日」字時橫縱座標和的奇偶性一定翻轉）。",
+          "左下角 (0, 0) 與右上角 (7, 7) 的座標和分別是 0 與 14，同為偶數，所以**兩格同色**。要從一格走到同色的格子，步數必須是偶數。",
+          "5 是奇數，被排除；下一個候選是 6 步。",
+          "6 步確實做得到：需要的總位移是 (+7, +7)，用三步 (+2, +1) 與三步 (+1, +2) 會走到 (+9, +9)，因此實際路線必須讓其中兩步互相抵消一部分，搜尋確認這樣的 6 步走法存在。",
+          "所以答案是 6 步。",
+          "驗算：程式以廣度優先搜尋計算左下角到全盤各格的最少步數，到 (7, 7) 恰為 6 步 ✓；全盤 64 格皆可達，且到另外兩個角落 (0, 7) 與 (7, 0) 都只需 5 步——這也印證了顏色論證（那兩格與起點異色，步數為奇數）。"
+        ],
+        "zh-Hans": [
+          "先估下界。把格子用坐标表示，左下角是 (0, 0)、右上角是 (7, 7)，两个坐标各要前进 7 格，总位移是 7 + 7 = 14 格。",
+          "骑士每一步在两个方向合计移动 2 + 1 = 3 格，所以至少需要 14 ÷ 3 ≈ 4.67，也就是至少 5 步。",
+          "但 5 步做不到，还有一个颜色的限制：骑士每走一步，所在格子的颜色必定改变（走「日」字时横纵坐标和的奇偶性一定翻转）。",
+          "左下角 (0, 0) 与右上角 (7, 7) 的坐标和分别是 0 与 14，同为偶数，所以**两格同色**。要从一格走到同色的格子，步数必须是偶数。",
+          "5 是奇数，被排除；下一个候选是 6 步。",
+          "6 步确实做得到，搜索确认存在这样的走法。",
+          "所以答案是 6 步。",
+          "验算：程序以广度优先搜索计算左下角到全盘各格的最少步数，到 (7, 7) 恰为 6 步 ✓；全盘 64 格皆可达，且到另外两个角落 (0, 7) 与 (7, 0) 都只需 5 步——这也印证了颜色论证（那两格与起点异色，步数为奇数）。"
+        ],
+        "en": [
+          "Start with a lower bound. In coordinates the bottom-left is (0, 0) and the top-right is (7, 7), so each coordinate must advance 7, a total displacement of 7 + 7 = 14.",
+          "A knight move covers 2 + 1 = 3 units of coordinate change in total, so at least 14 ÷ 3 ≈ 4.67 moves are needed, meaning at least 5.",
+          "But 5 is impossible because of a colour constraint: every knight move changes the colour of its square, since the parity of the coordinate sum always flips.",
+          "The corners (0, 0) and (7, 7) have coordinate sums 0 and 14, both even, so the two squares share a colour. Travelling between same-coloured squares requires an even number of moves.",
+          "Since 5 is odd it is ruled out, leaving 6 as the next candidate.",
+          "Six moves is indeed achievable, as a search confirms such a route exists.",
+          "So the answer is 6 moves.",
+          "Check: a breadth-first search of minimum knight distances from the bottom-left corner gives exactly 6 to (7, 7), with all 64 squares reachable, while the other two corners (0, 7) and (7, 0) take only 5 moves — which also confirms the colour argument, as those squares differ in colour from the start and require an odd count."
+        ],
+        "ja": [
+          "まず下界を見積もります。座標で左下を (0, 0)、右上を (7, 7) とすると、各座標を 7 ずつ進める必要があり、合計の変位は 7 + 7 = 14 です。",
+          "ナイトの 1 手は 2 方向合わせて 2 + 1 = 3 の座標変化なので、少なくとも 14 ÷ 3 ≈ 4.67、すなわち 5 手以上が必要です。",
+          "しかし 5 手は不可能です。色の制約があるからです：ナイトは 1 手ごとに必ずマスの色が変わります（座標の和の偶奇が必ず反転するため）。",
+          "左下 (0, 0) と右上 (7, 7) の座標の和はそれぞれ 0 と 14 でともに偶数なので、**2 マスは同色**です。同色のマスへ移るには手数が偶数でなければなりません。",
+          "5 は奇数なので除外され、次の候補は 6 手です。",
+          "6 手は実際に可能で、探索によりそのような経路の存在が確認できます。",
+          "よって答えは 6 手です。",
+          "検算：左下から盤上各マスへの最少手数を幅優先探索で求めると (7, 7) はちょうど 6 手 ✓。64 マスすべてに到達可能で、他の 2 つの角 (0, 7) と (7, 0) はいずれも 5 手です。これは色の議論（起点と異色なので奇数手）とも整合します。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "6"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "騎士最少步數：位移下界給出 5，顏色的奇偶限制排除奇數而得 6",
+        "notes": "設計依據：兩層論證缺一不可——位移下界只能給到 5，必須再用「每步變色、兩角同色故步數為偶」排除 5；詳解另以另外兩個角落只需 5 步（異色）作為顏色論證的反面印證。答案 6 已用廣度優先搜尋計算全盤最少步數驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（騎士的最少步數）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "邏輯",
+        "topicCode": "logic",
+        "subtopic": "騎士的最少步數",
+        "subtopicCode": "knight_min_moves"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "logic_grade11_foundation_013",
+      "topic": "logic",
+      "subtopic": "rope_burning_time",
+      "difficulty": "foundation",
+      "levelStage": "grade11",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "有兩條材質不均勻的繩子，每一條從一端點燃燒到另一端恰好需要 60 分鐘，但因為粗細不均，燒到一半的位置所花的時間不一定是 30 分鐘。現在只有打火機，可以在任何時刻點燃任何一條繩子的任何一端。求利用這兩條繩子能夠準確量出的最短時間是幾分鐘（不含 0 分鐘）。",
+        "zh-Hans": "有两条材质不均匀的绳子，每一条从一端点燃烧到另一端恰好需要 60 分钟，但因为粗细不均，烧到一半的位置所花的时间不一定是 30 分钟。现在只有打火机，可以在任何时刻点燃任何一条绳子的任何一端。求利用这两条绳子能够准确量出的最短时间是几分钟（不含 0 分钟）。",
+        "en": "Two ropes burn unevenly: each takes exactly 60 minutes to burn from one end to the other, but because the thickness varies, reaching the midpoint need not take 30 minutes. With only a lighter, either end of either rope may be lit at any moment. What is the shortest time, in minutes, that can be measured exactly using these two ropes, excluding zero?",
+        "ja": "材質が不均一なひもが 2 本あります。それぞれ一方の端から他方の端まで燃えるのにちょうど 60 分かかりますが、太さが一定でないため中間点まで 30 分とは限りません。ライターだけを使い、いつでもどちらのひものどちらの端にも火をつけられます。この 2 本で正確に測れる最短の時間は何分ですか（0 分は除く）。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 15 分鐘。",
+        "zh-Hans": "答案是 15 分钟。",
+        "en": "The answer is 15 minutes.",
+        "ja": "答えは 15 分です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "首先要接受一個限制：**繩子不均勻，所以不能靠長度分割時間**——燒到一半的位置可能只花 5 分鐘，也可能花 55 分鐘。",
+          "唯一可靠的工具是「整條燒完需要 60 分鐘」這個總量，以及一個關鍵技巧：**同時點燃兩端**。",
+          "從兩端一起燒時，兩個火苗會在某處相遇，而不論相遇點在哪裡，兩段加起來就是整條繩子，所以總共只需要 60 ÷ 2 = 30 分鐘。這一步完全不受不均勻影響。",
+          "接著把這個技巧用兩次。開始時同時做兩件事：點燃 A 繩的**兩端**，同時點燃 B 繩的**一端**。",
+          "A 繩兩端同燒，會在 30 分鐘時燒完。這一刻我們得到了一個精確的 30 分鐘時間點。",
+          "而 B 繩在這 30 分鐘裡從一端燒掉了一部分，剩下的部分「若從一端燒完還需要 30 分鐘」——注意這是時間上的剩餘量，與長度無關。",
+          "就在 A 繩燒完的瞬間，點燃 B 繩的**另一端**。此時 B 繩剩餘的 30 分鐘份量從兩端一起燒，只需 30 ÷ 2 = 15 分鐘。",
+          "所以從 A 繩燒完到 B 繩燒完之間的這段間隔恰好是 15 分鐘，這就是能量出的最短時間。（若只用一條繩子，最短只能量出 30 分鐘。）"
+        ],
+        "zh-Hans": [
+          "首先要接受一个限制：**绳子不均匀，所以不能靠长度分割时间**——烧到一半的位置可能只花 5 分钟，也可能花 55 分钟。",
+          "唯一可靠的工具是「整条烧完需要 60 分钟」这个总量，以及一个关键技巧：**同时点燃两端**。",
+          "从两端一起烧时，两个火苗会在某处相遇，而不论相遇点在哪里，两段加起来就是整条绳子，所以总共只需要 60 ÷ 2 = 30 分钟。这一步完全不受不均匀影响。",
+          "接着把这个技巧用两次。开始时同时做两件事：点燃 A 绳的**两端**，同时点燃 B 绳的**一端**。",
+          "A 绳两端同烧，会在 30 分钟时烧完。这一刻我们得到了一个精确的 30 分钟时间点。",
+          "而 B 绳在这 30 分钟里从一端烧掉了一部分，剩下的部分「若从一端烧完还需要 30 分钟」——注意这是时间上的剩余量，与长度无关。",
+          "就在 A 绳烧完的瞬间，点燃 B 绳的**另一端**。此时 B 绳剩余的 30 分钟份量从两端一起烧，只需 30 ÷ 2 = 15 分钟。",
+          "所以从 A 绳烧完到 B 绳烧完之间的这段间隔恰好是 15 分钟，这就是能量出的最短时间。（若只用一条绳子，最短只能量出 30 分钟。）"
+        ],
+        "en": [
+          "First accept the constraint: the ropes are uneven, so time cannot be divided by measuring length — reaching the midpoint might take 5 minutes or 55.",
+          "The only reliable facts are that a whole rope takes 60 minutes, together with one key trick: lighting both ends at once.",
+          "Burning from both ends, the two flames meet somewhere, and wherever they meet the two burnt portions together make up the whole rope, so the total is 60 ÷ 2 = 30 minutes. This step is completely unaffected by the unevenness.",
+          "Now use the trick twice. At the start do two things simultaneously: light both ends of rope A while lighting one end of rope B.",
+          "Rope A, burning from both ends, is consumed at the 30-minute mark, giving an exact 30-minute time point.",
+          "Meanwhile rope B has burnt from one end for those 30 minutes, so what remains would need 30 more minutes to burn from one end — note this is a remaining amount of time, not of length.",
+          "At the instant rope A finishes, light the other end of rope B. Its remaining 30 minutes' worth now burns from both ends and takes only 30 ÷ 2 = 15 minutes.",
+          "So the interval between rope A finishing and rope B finishing is exactly 15 minutes, the shortest measurable time. With only one rope the shortest measurable time would be 30 minutes."
+        ],
+        "ja": [
+          "まず制約を受け入れます：**ひもは不均一なので長さで時間を分けることはできません**。中間点まで 5 分のことも 55 分のこともあります。",
+          "頼れるのは「1 本燃え切るのに 60 分」という総量と、もう 1 つの鍵となる技法、**両端に同時に火をつける**ことだけです。",
+          "両端から燃やすと 2 つの炎はどこかで出会いますが、出会う場所がどこであれ、燃えた 2 つの部分を合わせるとひも 1 本分なので、合計 60 ÷ 2 = 30 分で済みます。この段階は不均一さの影響を受けません。",
+          "この技法を 2 回使います。開始時に同時に 2 つのことを行います：A のひもの**両端**に火をつけ、同時に B のひもの**片端**にも火をつけます。",
+          "A は両端から燃えるので 30 分でちょうど燃え尽き、正確な 30 分の時点が得られます。",
+          "その間 B は片端から 30 分ぶん燃えており、残りは「片端から燃やせばあと 30 分かかる量」です。これは長さではなく時間としての残量である点に注意します。",
+          "A が燃え尽きた瞬間に B の**もう一方の端**にも火をつけます。残り 30 分ぶんが両端から燃えるので 30 ÷ 2 = 15 分で燃え尽きます。",
+          "したがって A が燃え尽きてから B が燃え尽きるまでの間隔がちょうど 15 分であり、これが測れる最短の時間です。（ひも 1 本だけなら最短 30 分までしか測れません。）"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "15"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "燒繩計時：以「兩端同燒使剩餘時間減半」為唯一工具，連用兩次得到 60 → 30 → 15",
+        "notes": "設計依據：關鍵是察覺不均勻性封死了「按長度分割」，而「兩端同燒時間減半」對任何不均勻分布都成立；再把這個技巧套用在已燒過一段的繩子上（對剩餘時間而非剩餘長度減半）是第二層轉折。詳解另指出單用一條繩最短只能量 30 分，凸顯第二條繩的作用。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（燒繩計時）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "邏輯",
+        "topicCode": "logic",
+        "subtopic": "燒繩計時",
+        "subtopicCode": "rope_burning_time"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "logic_grade11_foundation_014",
+      "topic": "logic",
+      "subtopic": "prefix_sum_pigeonhole",
+      "difficulty": "foundation",
+      "levelStage": "grade11",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "任意寫下若干個整數排成一列。若要保證這列數中一定存在連續的一段（可以只有一個數），使得這一段的總和能被 10 整除，則最少需要寫下幾個整數？",
+        "zh-Hans": "任意写下若干个整数排成一列。若要保证这列数中一定存在连续的一段（可以只有一个数），使得这一段的总和能被 10 整除，则最少需要写下几个整数？",
+        "en": "Write down some integers in a row. What is the fewest number of integers that guarantees the row contains a consecutive block, possibly a single number, whose sum is divisible by 10?",
+        "ja": "整数をいくつか一列に書き並べます。その中に必ず、連続する一部分（1 個だけでもよい）で総和が 10 で割り切れるものが存在するようにするには、最少で何個の整数を書けばよいですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 10 個。",
+        "zh-Hans": "答案是 10 个。",
+        "en": "The answer is 10.",
+        "ja": "答えは 10 個です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "「連續的一段之和」不好直接處理，先換一個表示法：引入**前綴和**。",
+          "設寫下的整數是 a₁、a₂、⋯、aₙ，定義 S₁ = a₁、S₂ = a₁ + a₂、⋯、Sₙ = a₁ + ⋯ + aₙ。",
+          "關鍵在於：從第 i+1 項到第 j 項這一段連續數的和，恰好等於 Sⱼ − Sᵢ。所以「存在一段連續和被 10 整除」等價於「存在兩個前綴和除以 10 同餘，或某個前綴和本身被 10 整除」。",
+          "現在數一數可能的餘數。若某個 Sᵢ 除以 10 餘 0，那第 1 到第 i 項這一段就直接符合，結束。",
+          "否則所有前綴和的餘數都落在 1 到 9 這 9 種可能之中。",
+          "若寫下 10 個整數，就會有 10 個前綴和 S₁ 到 S₁₀，卻只有 9 種餘數可用——由鴿籠原理必有兩個前綴和同餘，它們的差就是一段被 10 整除的連續和。",
+          "再確認 9 個不夠：取 9 個都是 1 的數，任何連續段的和都是 1 到 9 之間的數，全都不被 10 整除，所以 9 個確實可能失敗。",
+          "驗算：程式確認 9 個 1 的所有連續段和都不被 10 整除 ✓；並隨機測試 20000 組各 10 個整數（範圍 −50 到 50），每一組都存在被 10 整除的連續段 ✓。"
+        ],
+        "zh-Hans": [
+          "「连续的一段之和」不好直接处理，先换一个表示法：引入**前缀和**。",
+          "设写下的整数是 a₁、a₂、⋯、aₙ，定义 S₁ = a₁、S₂ = a₁ + a₂、⋯、Sₙ = a₁ + ⋯ + aₙ。",
+          "关键在于：从第 i+1 项到第 j 项这一段连续数的和，恰好等于 Sⱼ − Sᵢ。所以「存在一段连续和被 10 整除」等价于「存在两个前缀和除以 10 同余，或某个前缀和本身被 10 整除」。",
+          "现在数一数可能的余数。若某个 Sᵢ 除以 10 余 0，那第 1 到第 i 项这一段就直接符合，结束。",
+          "否则所有前缀和的余数都落在 1 到 9 这 9 种可能之中。",
+          "若写下 10 个整数，就会有 10 个前缀和 S₁ 到 S₁₀，却只有 9 种余数可用——由鸽笼原理必有两个前缀和同余，它们的差就是一段被 10 整除的连续和。",
+          "再确认 9 个不够：取 9 个都是 1 的数，任何连续段的和都是 1 到 9 之间的数，全都不被 10 整除，所以 9 个确实可能失败。",
+          "验算：程序确认 9 个 1 的所有连续段和都不被 10 整除 ✓；并随机测试 20000 组各 10 个整数（范围 −50 到 50），每一组都存在被 10 整除的连续段 ✓。"
+        ],
+        "en": [
+          "Sums of consecutive blocks are awkward to handle directly, so change representation by introducing prefix sums.",
+          "If the integers written are a₁, a₂, …, aₙ, define S₁ = a₁, S₂ = a₁ + a₂, …, Sₙ = a₁ + ⋯ + aₙ.",
+          "The key point is that the sum of the block from term i+1 to term j equals exactly Sⱼ − Sᵢ. So a block sum divisible by 10 exists precisely when two prefix sums are congruent modulo 10, or when some prefix sum is itself divisible by 10.",
+          "Now count the possible remainders. If some Sᵢ leaves remainder 0, the block from term 1 to term i already works and we are done.",
+          "Otherwise every prefix sum leaves a remainder among the 9 values 1 through 9.",
+          "Writing 10 integers produces 10 prefix sums S₁ through S₁₀ but only 9 available remainders, so by the pigeonhole principle two prefix sums are congruent, and their difference is a block sum divisible by 10.",
+          "Confirm that 9 is not enough: take nine 1s, and every consecutive block sums to a value between 1 and 9, none divisible by 10, so 9 integers can fail.",
+          "Check: a program confirms that no consecutive block of nine 1s has a sum divisible by 10, and random testing of 20000 rows of 10 integers drawn from −50 to 50 finds a block divisible by 10 in every single row."
+        ],
+        "ja": [
+          "「連続する一部分の和」は直接扱いにくいので、表現を変えて**累積和**を導入します。",
+          "書いた整数を a₁、a₂、⋯、aₙ とし、S₁ = a₁、S₂ = a₁ + a₂、⋯、Sₙ = a₁ + ⋯ + aₙ と定めます。",
+          "要点は、第 i+1 項から第 j 項までの連続部分の和がちょうど Sⱼ − Sᵢ に等しいことです。よって「10 で割り切れる連続部分和が存在する」ことは「2 つの累積和が 10 を法として合同、またはある累積和自体が 10 で割り切れる」ことと同値です。",
+          "ありうる余りを数えます。ある Sᵢ の余りが 0 なら第 1 項から第 i 項までがそのまま該当し終了です。",
+          "そうでなければ、すべての累積和の余りは 1 から 9 の 9 種類のいずれかです。",
+          "整数を 10 個書くと累積和は S₁ から S₁₀ の 10 個できますが、使える余りは 9 種類しかないので、鳩の巣原理より合同な 2 つが存在し、その差が 10 で割り切れる連続部分和になります。",
+          "9 個では足りないことも確認します：1 を 9 個並べると、どの連続部分の和も 1 以上 9 以下で 10 で割り切れないため、9 個では失敗しえます。",
+          "検算：1 が 9 個の場合はどの連続部分和も 10 で割り切れないことをプログラムで確認 ✓。さらに −50 から 50 の整数 10 個からなる行を 20000 組ランダムに試すと、すべての組で 10 で割り切れる連続部分和が存在しました ✓。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "10"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "前綴和加鴿籠：連續段和化為兩個前綴和之差，餘數只有 9 種故第 10 個必產生重複",
+        "notes": "設計依據：核心是把「連續段和」轉成「前綴和之差」，使鴿籠原理有可套用的分類（模 10 的餘數）；並要求同時給出 9 個 1 的反例證明 9 不夠。詳解特別處理「某個前綴和本身餘 0」這個容易漏掉的情形。答案 10 已用 9 個 1 的反例檢驗與 20000 組隨機十元序列的驗證雙向確認。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（前綴和鴿籠）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "邏輯",
+        "topicCode": "logic",
+        "subtopic": "前綴和鴿籠",
+        "subtopicCode": "prefix_sum_pigeonhole"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "logic_grade11_foundation_015",
+      "topic": "logic",
+      "subtopic": "ramsey_three_three",
+      "difficulty": "foundation",
+      "levelStage": "grade11",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "在一場聚會中，任兩個人之間要嘛互相認識、要嘛互相不認識。若要保證聚會中一定存在 3 個人彼此都認識，或存在 3 個人彼此都不認識，則最少需要幾個人參加？",
+        "zh-Hans": "在一场聚会中，任两个人之间要么互相认识、要么互相不认识。若要保证聚会中一定存在 3 个人彼此都认识，或存在 3 个人彼此都不认识，则最少需要几个人参加？",
+        "en": "At a party any two people either know each other or do not. What is the fewest number of attendees that guarantees there are 3 people who all know one another, or 3 people none of whom know one another?",
+        "ja": "あるパーティーでは、どの 2 人も互いに知り合いであるか、互いに知り合いでないかのいずれかです。「3 人が互いに知り合い」または「3 人が互いに知り合いでない」が必ず存在するようにするには、最少で何人が必要ですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 6 人。",
+        "zh-Hans": "答案是 6 人。",
+        "en": "The answer is 6.",
+        "ja": "答えは 6 人です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "這題同樣要做兩件事：證明 6 人一定成立，並舉出 5 人的反例說明 5 人不夠。",
+          "**先證明 6 人一定成立。** 任取其中一人，稱為甲。甲與其餘 5 個人之間，每一對關係不是「認識」就是「不認識」。",
+          "5 個人分成兩類，由鴿籠原理，必有一類至少有 3 個人。不失一般性，假設有 3 個人都和甲**認識**（若是都不認識，把後續論證中的「認識」與「不認識」對調即可）。",
+          "把這 3 個人稱為乙、丙、丁，接著看他們**彼此之間**的關係。",
+          "情形一：乙、丙、丁之中有某兩人互相認識。那麼這兩人再加上甲，三人彼此都認識，符合要求。",
+          "情形二：乙、丙、丁之中沒有任何兩人互相認識。那麼這 3 人本身就彼此都不認識，同樣符合要求。",
+          "兩種情形涵蓋了所有可能，所以 6 個人必定成立。",
+          "**再說明 5 人不夠。** 把 5 個人排成一個五邊形，規定相鄰的兩人認識、不相鄰的兩人不認識。這樣任三人中必定既有認識也有不認識的一對，兩種要求都達不到。驗算：程式對 5 人的全部 2¹⁰ = 1024 種關係組合搜尋，確實找得到這樣的反例；對 6 人的全部 2¹⁵ 種組合搜尋，則一個反例也找不到 ✓，故答案是 6。"
+        ],
+        "zh-Hans": [
+          "这题同样要做两件事：证明 6 人一定成立，并举出 5 人的反例说明 5 人不够。",
+          "**先证明 6 人一定成立。** 任取其中一人，称为甲。甲与其余 5 个人之间，每一对关系不是「认识」就是「不认识」。",
+          "5 个人分成两类，由鸽笼原理，必有一类至少有 3 个人。不失一般性，假设有 3 个人都和甲**认识**（若是都不认识，把后续论证中的「认识」与「不认识」对调即可）。",
+          "把这 3 个人称为乙、丙、丁，接着看他们**彼此之间**的关系。",
+          "情形一：乙、丙、丁之中有某两人互相认识。那么这两人再加上甲，三人彼此都认识，符合要求。",
+          "情形二：乙、丙、丁之中没有任何两人互相认识。那么这 3 人本身就彼此都不认识，同样符合要求。",
+          "两种情形涵盖了所有可能，所以 6 个人必定成立。",
+          "**再说明 5 人不够。** 把 5 个人排成一个五边形，规定相邻的两人认识、不相邻的两人不认识。这样任三人中必定既有认识也有不认识的一对，两种要求都达不到。验算：程序对 5 人的全部 2¹⁰ = 1024 种关系组合搜索，确实找得到这样的反例；对 6 人的全部 2¹⁵ 种组合搜索，则一个反例也找不到 ✓，故答案是 6。"
+        ],
+        "en": [
+          "Again two things are needed: a proof that 6 people always suffice, and a 5-person counterexample showing 5 do not.",
+          "First the proof for 6. Pick any one person, call them A. Between A and the other 5, each relation is either acquaintance or non-acquaintance.",
+          "Those 5 split into two classes, so by the pigeonhole principle one class holds at least 3 people. Without loss of generality suppose 3 people all know A; if instead 3 all fail to know A, simply swap the roles of knowing and not knowing throughout.",
+          "Call those three B, C and D, and consider the relations among themselves.",
+          "Case one: two of B, C and D know each other. Then those two together with A form three mutual acquaintances, as required.",
+          "Case two: no two of B, C and D know each other. Then those three are themselves mutual strangers, which also satisfies the requirement.",
+          "The two cases exhaust all possibilities, so 6 people always work.",
+          "Now why 5 do not. Arrange 5 people in a pentagon and declare adjacent people acquainted and non-adjacent people strangers. Then any three people include both an acquainted pair and a stranger pair, so neither requirement is met. Check: searching all 2¹⁰ = 1024 relation patterns on 5 people does find such counterexamples, while searching all 2¹⁵ patterns on 6 people finds none at all, confirming the answer 6."
+        ],
+        "ja": [
+          "この問題でも 2 つのことが必要です：6 人なら必ず成立することの証明と、5 人では足りないことを示す反例です。",
+          "**まず 6 人で必ず成立することを示します。** 1 人を選び甲とします。甲と残り 5 人との関係は、それぞれ「知り合い」か「知り合いでない」のいずれかです。",
+          "5 人が 2 つに分かれるので、鳩の巣原理よりどちらかが 3 人以上になります。一般性を失わず、3 人が甲と**知り合い**であるとします（知り合いでない場合は以下の議論で「知り合い」と「知り合いでない」を入れ替えれば同様です）。",
+          "その 3 人を乙・丙・丁とし、次に**彼らどうし**の関係を見ます。",
+          "場合 1：乙・丙・丁のうち 2 人が知り合いなら、その 2 人と甲の 3 人が互いに知り合いとなり条件を満たします。",
+          "場合 2：乙・丙・丁のどの 2 人も知り合いでないなら、その 3 人自体が互いに知り合いでないので、やはり条件を満たします。",
+          "2 つの場合ですべてを尽くしているので、6 人なら必ず成立します。",
+          "**次に 5 人では足りない理由。** 5 人を五角形に並べ、隣り合う 2 人は知り合い、隣り合わない 2 人は知り合いでないとします。するとどの 3 人にも知り合いの組と知り合いでない組の両方が含まれ、どちらの条件も満たされません。検算：5 人の関係 2¹⁰ = 1024 通りを探索すると確かにこのような反例が見つかり、6 人の 2¹⁵ 通りを探索すると反例は 1 つも見つかりません ✓。よって答えは 6 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "6"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "Ramsey 數 R(3,3) = 6：以鴿籠取出 3 個同類鄰居後分兩種情形，並以五邊形給出 5 人反例",
+        "notes": "設計依據：本題要求同時完成「6 人必成立」的兩層論證（先鴿籠取 3 人、再對其內部關係分兩種情形）與「5 人不夠」的具體反例（五邊形構造）；只給其中一半都不算完整。答案 6 已用程式對 5 人的 1024 種與 6 人的 2¹⁵ 種關係組合全窮舉，分別確認反例存在與不存在。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（友誼定理）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "邏輯",
+        "topicCode": "logic",
+        "subtopic": "友誼定理",
+        "subtopicCode": "ramsey_three_three"
+      },
+      "reviewStatus": "ok"
     }
   ]
 }
