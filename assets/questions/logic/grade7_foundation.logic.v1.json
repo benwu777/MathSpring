@@ -1444,6 +1444,906 @@
         "subtopicCode": "domino_coloring_bound"
       },
       "reviewStatus": "ok"
+    },
+    {
+      "id": "logic_grade7_foundation_016",
+      "topic": "logic",
+      "subtopic": "sign_filling_count",
+      "difficulty": "foundation",
+      "levelStage": "grade7",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "在算式 1 □ 2 □ 3 □ 4 □ 5 的四個方格中，各填入一個「＋」或「－」（第一個 1 前面不放符號）。若要使算式的結果等於 5，共有多少種填法？",
+        "zh-Hans": "在算式 1 □ 2 □ 3 □ 4 □ 5 的四个方格中，各填入一个「＋」或「－」（第一个 1 前面不放符号）。若要使算式的结果等于 5，共有多少种填法？",
+        "en": "In the expression 1 □ 2 □ 3 □ 4 □ 5, each of the four boxes is filled with a plus or a minus sign, with no sign before the leading 1. How many fillings make the expression equal 5?",
+        "ja": "式 1 □ 2 □ 3 □ 4 □ 5 の 4 つの □ にそれぞれ「＋」か「－」を入れます（先頭の 1 の前には符号を置きません）。式の値が 5 になる入れ方は何通りありますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 2 種。",
+        "zh-Hans": "答案是 2 种。",
+        "en": "The answer is 2.",
+        "ja": "答えは 2 通りです。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "四個方格各有 2 種選擇，所以總共 2⁴ = 16 種填法。逐一算 16 次雖然可行，但有一個更有結構的看法。",
+          "先看全部都填「＋」的情形：1 + 2 + 3 + 4 + 5 = 15。把這個 15 當作起點。",
+          "現在觀察改一個符號的影響：若把某個數 k 前面的「＋」改成「－」，總和會**減少 2k**（因為 k 從加變成減，一來一往差了兩個 k）。",
+          "所以設被改成「－」的那些數的和是 S，則算式的結果就是 15 − 2S。注意 1 前面沒有符號，所以 S 只能由 2、3、4、5 中的一些數組成。",
+          "要讓結果等於 5：15 − 2S = 5，解得 S = 5。",
+          "問題於是變成：**從 {2, 3, 4, 5} 中選出一些數，使它們的和恰好是 5，有幾種選法？**",
+          "逐一檢查：{5} 的和是 5 ✓；{2, 3} 的和是 5 ✓；其餘任何組合（如 {2}、{3}、{4}、{2,4}、{3,4} ⋯）的和都不是 5。所以有 2 種。",
+          "驗算：程式窮舉全部 16 種填法，結果為 5 的恰好是 1+2+3+4−5 與 1−2−3+4+5 兩種 ✓，與上述的 {5} 和 {2,3} 一一對應。順帶可知所有可能的結果都是奇數（因為 15 是奇數，減去偶數 2S 仍是奇數），所以結果永遠不可能是偶數。"
+        ],
+        "zh-Hans": [
+          "四个方格各有 2 种选择，所以总共 2⁴ = 16 种填法。逐一算 16 次虽然可行，但有一个更有结构的看法。",
+          "先看全部都填「＋」的情形：1 + 2 + 3 + 4 + 5 = 15。把这个 15 当作起点。",
+          "现在观察改一个符号的影响：若把某个数 k 前面的「＋」改成「－」，总和会**减少 2k**（因为 k 从加变成减，一来一往差了两个 k）。",
+          "所以设被改成「－」的那些数的和是 S，则算式的结果就是 15 − 2S。注意 1 前面没有符号，所以 S 只能由 2、3、4、5 中的一些数组成。",
+          "要让结果等于 5：15 − 2S = 5，解得 S = 5。",
+          "问题于是变成：**从 {2, 3, 4, 5} 中选出一些数，使它们的和恰好是 5，有几种选法？**",
+          "逐一检查：{5} 的和是 5 ✓；{2, 3} 的和是 5 ✓；其余任何组合（如 {2}、{3}、{4}、{2,4}、{3,4} ⋯）的和都不是 5。所以有 2 种。",
+          "验算：程序穷举全部 16 种填法，结果为 5 的恰好是 1+2+3+4−5 与 1−2−3+4+5 两种 ✓，与上述的 {5} 和 {2,3} 一一对应。顺带可知所有可能的结果都是奇数（因为 15 是奇数，减去偶数 2S 仍是奇数），所以结果永远不可能是偶数。"
+        ],
+        "en": [
+          "Each of the four boxes has 2 options, so there are 2⁴ = 16 fillings in all. Checking all 16 works, but there is a more structural view.",
+          "Start from the all-plus case: 1 + 2 + 3 + 4 + 5 = 15, and treat 15 as the baseline.",
+          "Now consider the effect of flipping one sign: changing the plus before a number k to a minus lowers the total by 2k, since k switches from being added to being subtracted, a swing of two k's.",
+          "So if S denotes the sum of the numbers given minus signs, the value of the expression is 15 − 2S. Note the leading 1 has no sign, so S can only be built from 2, 3, 4 and 5.",
+          "Requiring the value to be 5: 15 − 2S = 5, which gives S = 5.",
+          "The problem becomes: in how many ways can some of the numbers 2, 3, 4, 5 be chosen so that their sum is exactly 5?",
+          "Checking: {5} sums to 5, and {2, 3} sums to 5, while every other combination such as {2}, {3}, {4}, {2,4} or {3,4} does not. So there are 2 ways.",
+          "Check: enumerating all 16 fillings finds exactly 1+2+3+4−5 and 1−2−3+4+5, corresponding precisely to {5} and {2,3}. Incidentally every attainable value is odd, since 15 is odd and 2S is even, so an even result is impossible."
+        ],
+        "ja": [
+          "4 つの □ にそれぞれ 2 通りなので全部で 2⁴ = 16 通りです。16 通り計算してもよいのですが、より構造的な見方があります。",
+          "まずすべて「＋」の場合を見ます：1 + 2 + 3 + 4 + 5 = 15。この 15 を出発点とします。",
+          "次に符号を 1 つ変える影響を考えます。ある数 k の前の「＋」を「－」に変えると、合計は **2k 減ります**（k が加算から減算になり、差が k の 2 つ分になるため）。",
+          "そこで「－」にした数の和を S とすると、式の値は 15 − 2S になります。先頭の 1 には符号がないので、S は 2、3、4、5 の一部からのみ作られます。",
+          "値を 5 にするには 15 − 2S = 5、すなわち S = 5。",
+          "問題は「**{2, 3, 4, 5} からいくつか選んで和をちょうど 5 にする選び方は何通りか**」に変わります。",
+          "調べると {5} の和は 5 ✓、{2, 3} の和も 5 ✓。他の組（{2}、{3}、{4}、{2,4}、{3,4} など）はどれも 5 になりません。よって 2 通りです。",
+          "検算：16 通りをすべて調べると 1+2+3+4−5 と 1−2−3+4+5 のちょうど 2 通りで ✓、上の {5} と {2,3} に対応します。なお値は常に奇数になります（15 が奇数で 2S は偶数のため）ので、偶数になることはありません。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "2"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "填符號問題的結構化：以全加為基準，改一個符號使總和減少 2k，化為子集和問題",
+        "notes": "設計依據：核心是把 16 種枚舉轉成「從 {2,3,4,5} 中選出和為 5 的子集」這個小得多的問題；「改符號減少 2k 而非 k」是最容易算錯的一步。詳解另附「結果恆為奇數」的推論，說明目標值不能任選。答案 2 已用 16 種填法的全窮舉驗證，並列出各目標值的填法數分布。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（填符號計數）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "邏輯",
+        "topicCode": "logic",
+        "subtopic": "填符號計數",
+        "subtopicCode": "sign_filling_count"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "logic_grade7_foundation_017",
+      "topic": "logic",
+      "subtopic": "latin_square_cell",
+      "difficulty": "foundation",
+      "levelStage": "grade7",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "在 3 × 3 的方格中填入 1、2、3，要求每一橫列與每一直行都恰好各出現 1、2、3 一次。已知第一橫列由左到右是 1、2、3，且第二橫列最左邊的格子是 2。求第二橫列最右邊的格子填的是什麼數字。",
+        "zh-Hans": "在 3 × 3 的方格中填入 1、2、3，要求每一横列与每一直行都恰好各出现 1、2、3 一次。已知第一横列由左到右是 1、2、3，且第二横列最左边的格子是 2。求第二横列最右边的格子填的是什么数字。",
+        "en": "A 3 by 3 grid is filled with 1, 2 and 3 so that every row and every column contains each of 1, 2, 3 exactly once. The first row reads 1, 2, 3 from left to right, and the leftmost cell of the second row is 2. What number is in the rightmost cell of the second row?",
+        "ja": "3 × 3 のマスに 1、2、3 を入れ、どの行にもどの列にも 1、2、3 がちょうど 1 回ずつ現れるようにします。1 行目は左から 1、2、3 で、2 行目の左端は 2 です。2 行目の右端のマスに入る数字は何ですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 1。",
+        "zh-Hans": "答案是 1。",
+        "en": "The answer is 1.",
+        "ja": "答えは 1 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "這種每行每列都不重複的方格稱為拉丁方格。解題時要**同時盯住橫列與直行兩個方向**的限制。",
+          "先把已知填上：第一橫列是 1、2、3；第二橫列的左端是 2。",
+          "看第二橫列還缺什麼。這一列已經有 2，所以剩下兩格要填 1 和 3，只是還不知道哪個在中間、哪個在右邊。",
+          "改看直行的限制。最右邊那一行的第一格是 3（第一橫列的最後一個數），所以**這一行不能再出現 3**。",
+          "而第二橫列剩下的兩個候選是 1 和 3，其中 3 被右行的限制排除掉，所以第二橫列最右邊只能是 1。",
+          "中間那格自動就是 3。所以第二橫列由左到右是 2、3、1。",
+          "順帶把第三橫列補完：每一行都各缺一個數，得到 3、1、2，可以檢查每行每列確實都是 1、2、3 各一次。",
+          "驗算：程式窮舉所有滿足條件的填法，符合「第一列 1、2、3 且第二列首格為 2」的完整拉丁方格只有一個，第二列是 (2, 3, 1)，右端確實是 1 ✓，解唯一。"
+        ],
+        "zh-Hans": [
+          "这种每行每列都不重复的方格称为拉丁方格。解题时要**同时盯住横列与直行两个方向**的限制。",
+          "先把已知填上：第一横列是 1、2、3；第二横列的左端是 2。",
+          "看第二横列还缺什么。这一列已经有 2，所以剩下两格要填 1 和 3，只是还不知道哪个在中间、哪个在右边。",
+          "改看直行的限制。最右边那一行的第一格是 3（第一横列的最后一个数），所以**这一行不能再出现 3**。",
+          "而第二横列剩下的两个候选是 1 和 3，其中 3 被右行的限制排除掉，所以第二横列最右边只能是 1。",
+          "中间那格自动就是 3。所以第二横列由左到右是 2、3、1。",
+          "顺带把第三横列补完：每一行都各缺一个数，得到 3、1、2，可以检查每行每列确实都是 1、2、3 各一次。",
+          "验算：程序穷举所有满足条件的填法，符合「第一列 1、2、3 且第二列首格为 2」的完整拉丁方格只有一个，第二列是 (2, 3, 1)，右端确实是 1 ✓，解唯一。"
+        ],
+        "en": [
+          "A grid with no repeats in any row or column is called a Latin square, and solving one means watching the row and column constraints at the same time.",
+          "Fill in what is given: the first row is 1, 2, 3, and the leftmost cell of the second row is 2.",
+          "See what the second row still needs. It already contains 2, so the remaining two cells must hold 1 and 3, though which goes where is not yet clear.",
+          "Now switch to the column constraint. The rightmost column has 3 in its first cell, the last entry of the first row, so that column cannot contain another 3.",
+          "The two candidates for the second row are 1 and 3, and 3 is ruled out by the column, so the rightmost cell of the second row must be 1.",
+          "The middle cell is then forced to be 3, making the second row 2, 3, 1 from left to right.",
+          "Completing the third row, each column is missing exactly one value, giving 3, 1, 2, and every row and column can be checked to contain 1, 2, 3 once each.",
+          "Check: enumerating all valid fillings shows exactly one Latin square with first row 1, 2, 3 and second row starting with 2; its second row is (2, 3, 1), so the rightmost entry is indeed 1 and the solution is unique."
+        ],
+        "ja": [
+          "どの行にもどの列にも重複がないこの種のマスをラテン方陣といいます。解くときは**行と列の両方向の制約を同時に見る**必要があります。",
+          "まず与えられた情報を書き込みます：1 行目は 1、2、3、2 行目の左端は 2。",
+          "2 行目に何が足りないか見ます。この行には既に 2 があるので、残り 2 マスには 1 と 3 が入りますが、どちらが中央でどちらが右端かはまだ分かりません。",
+          "そこで列の制約に目を移します。右端の列は 1 マス目が 3（1 行目の最後の数）なので、**この列にはもう 3 は入りません**。",
+          "2 行目の残りの候補は 1 と 3 ですが、3 は列の制約で除外されるので、2 行目の右端は 1 に決まります。",
+          "中央のマスは自動的に 3 となり、2 行目は左から 2、3、1 です。",
+          "ついでに 3 行目を埋めると、各列に足りない数はそれぞれ 1 つなので 3、1、2 となり、どの行も列も 1、2、3 が 1 回ずつであることを確認できます。",
+          "検算：条件を満たす埋め方をすべて列挙すると、1 行目が 1、2、3 で 2 行目の左端が 2 のラテン方陣はただ 1 つで、2 行目は (2, 3, 1)、右端は確かに 1 です ✓。解は一意です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "1"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "拉丁方格的行列雙向排除：由橫列縮到兩個候選，再用直行的限制定出唯一解",
+        "notes": "設計依據：關鍵是察覺單看橫列只能縮到兩個候選、必須再引入直行的限制才能定案；只看一個方向會停在「1 或 3」而無法作答。給定條件恰好使整個方格唯一確定，可完整驗算。答案 1 已用全部填法的窮舉驗證解唯一。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（拉丁方格）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "邏輯",
+        "topicCode": "logic",
+        "subtopic": "拉丁方格",
+        "subtopicCode": "latin_square_cell"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "logic_grade7_foundation_018",
+      "topic": "logic",
+      "subtopic": "phone_tree_doubling",
+      "difficulty": "foundation",
+      "levelStage": "grade7",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一則消息要從班長傳給班上其他 15 位同學。每通電話需要 1 分鐘，同一時間每個人只能講一通電話（一對一）；只要知道消息的人，就可以在下一分鐘打電話通知一位還不知道的人。求全部 15 位同學都收到消息，最少需要幾分鐘。",
+        "zh-Hans": "一则消息要从班长传给班上其他 15 位同学。每通电话需要 1 分钟，同一时间每个人只能讲一通电话（一对一）；只要知道消息的人，就可以在下一分钟打电话通知一位还不知道的人。求全部 15 位同学都收到消息，最少需要几分钟。",
+        "en": "A message must reach the other 15 students in a class, starting from the class leader. Each call takes 1 minute, each person can be on only one call at a time, and anyone who already knows can call one person who does not during the next minute. What is the fewest number of minutes for all 15 students to receive it?",
+        "ja": "学級委員から他の 15 人の生徒へ連絡を回します。1 回の電話に 1 分かかり、同時に 1 人が話せるのは 1 通話だけ（1 対 1）です。すでに知っている人は次の 1 分で、まだ知らない人 1 人に電話できます。15 人全員に伝わるまで最少で何分かかりますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 4 分鐘。",
+        "zh-Hans": "答案是 4 分钟。",
+        "en": "The answer is 4 minutes.",
+        "ja": "答えは 4 分です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "最直覺的作法是班長一個一個打，那要 15 分鐘。但題目允許**已經知道消息的人也去打電話**，這才是關鍵。",
+          "所以每一分鐘，每個已知道的人都可以各通知一位新的人——換句話說，**知道消息的人數每分鐘會加倍**。",
+          "一開始只有班長 1 個人知道。",
+          "第 1 分鐘後：1 個人各通知 1 人，知道的人數變成 2。",
+          "第 2 分鐘後：這 2 人各通知 1 人，變成 4；第 3 分鐘後變成 8。",
+          "第 4 分鐘後：這 8 人各通知 1 人，變成 16。",
+          "全班連班長共 1 + 15 = 16 人，所以第 4 分鐘結束時剛好全部通知完畢，答案是 4 分鐘。",
+          "驗算：人數依序是 1 → 2 → 4 → 8 → 16，第 3 分鐘結束時只有 8 人知道，還差 8 人，確實不夠；第 4 分鐘才達到 16 ✓。附註：因為人數是 2 的次方倍增，通知 n 個人所需時間大約是 log₂n，即使班上有 1000 人也只需 10 分鐘——這正是「所有人一起幫忙傳」的威力。"
+        ],
+        "zh-Hans": [
+          "最直觉的做法是班长一个一个打，那要 15 分钟。但题目允许**已经知道消息的人也去打电话**，这才是关键。",
+          "所以每一分钟，每个已知道的人都可以各通知一位新的人——换句话说，**知道消息的人数每分钟会加倍**。",
+          "一开始只有班长 1 个人知道。",
+          "第 1 分钟后：1 个人各通知 1 人，知道的人数变成 2。",
+          "第 2 分钟后：这 2 人各通知 1 人，变成 4；第 3 分钟后变成 8。",
+          "第 4 分钟后：这 8 人各通知 1 人，变成 16。",
+          "全班连班长共 1 + 15 = 16 人，所以第 4 分钟结束时刚好全部通知完毕，答案是 4 分钟。",
+          "验算：人数依序是 1 → 2 → 4 → 8 → 16，第 3 分钟结束时只有 8 人知道，还差 8 人，确实不够；第 4 分钟才达到 16 ✓。附注：因为人数是 2 的次方倍增，通知 n 个人所需时间大约是 log₂n，即使班上有 1000 人也只需 10 分钟——这正是「所有人一起帮忙传」的威力。"
+        ],
+        "en": [
+          "The obvious approach has the leader call everyone one by one, taking 15 minutes. But the problem allows anyone who already knows to make calls too, and that is the key.",
+          "So during each minute every person who already knows can inform one new person — in other words, the number who know doubles every minute.",
+          "At the start only the leader knows, so the count is 1.",
+          "After minute 1: that one person informs one other, and the count becomes 2.",
+          "After minute 2: those 2 each inform one more, giving 4; after minute 3 the count is 8.",
+          "After minute 4: those 8 each inform one more, giving 16.",
+          "The class including the leader numbers 1 + 15 = 16, so everyone is informed exactly at the end of minute 4, making the answer 4 minutes.",
+          "Check: the counts run 1 → 2 → 4 → 8 → 16, so at the end of minute 3 only 8 know and 8 remain, which is not enough, while minute 4 reaches 16. Remark: because the count doubles, informing n people takes about log₂n minutes, so even a class of 1000 would need only 10 — that is the power of letting everyone help pass the message on."
+        ],
+        "ja": [
+          "最も素朴なのは学級委員が 1 人ずつ電話する方法で、15 分かかります。しかしこの問題では**すでに知っている人も電話できる**点が鍵です。",
+          "つまり毎分、知っている人がそれぞれ 1 人ずつ新しい人に伝えられるので、**知っている人数は毎分 2 倍になります**。",
+          "最初は学級委員 1 人だけが知っています。",
+          "1 分後：1 人が 1 人に伝え、知っている人は 2 人。",
+          "2 分後：その 2 人がそれぞれ伝えて 4 人、3 分後は 8 人。",
+          "4 分後：その 8 人がそれぞれ伝えて 16 人。",
+          "学級委員を含めてクラスは 1 + 15 = 16 人なので、4 分の終わりでちょうど全員に伝わり、答えは 4 分です。",
+          "検算：人数は 1 → 2 → 4 → 8 → 16 と進み、3 分の終わりでは 8 人しか知らず 8 人足りないので不十分、4 分で 16 に達します ✓。補足：人数が 2 倍ずつ増えるので n 人に伝えるのに必要な時間はおよそ log₂n 分であり、1000 人のクラスでも 10 分で済みます。全員で伝達を手伝うことの威力です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "4"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "訊息傳播的倍增：已知者皆可再通知一人，故知情人數每分鐘加倍，所需時間為對數級",
+        "notes": "設計依據：核心是察覺「已知道的人也能幫忙打電話」，把線性的 15 分鐘壓成對數的 4 分鐘；人數取 15（加上發起者恰為 16 = 2⁴）使邊界剛好卡滿，第 3 分鐘的 8 人明確不足。答案 4 已用逐分鐘的人數倍增計算驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（電話通知樹）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "邏輯",
+        "topicCode": "logic",
+        "subtopic": "電話通知樹",
+        "subtopicCode": "phone_tree_doubling"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "logic_grade7_foundation_019",
+      "topic": "logic",
+      "subtopic": "sawing_cuts",
+      "difficulty": "foundation",
+      "levelStage": "grade7",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "要把一根長木棍鋸成 8 段。每鋸一次需要 3 分鐘，而且每次只能鋸斷一處。求全部鋸完總共需要幾分鐘。",
+        "zh-Hans": "要把一根长木棍锯成 8 段。每锯一次需要 3 分钟，而且每次只能锯断一处。求全部锯完总共需要几分钟。",
+        "en": "A long stick is to be sawn into 8 pieces. Each cut takes 3 minutes and only one cut can be made at a time. How many minutes does the whole job take?",
+        "ja": "1 本の長い棒を 8 本に切り分けます。1 回切るのに 3 分かかり、一度に 1 か所しか切れません。全部切り終えるのに何分かかりますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 21 分鐘。",
+        "zh-Hans": "答案是 21 分钟。",
+        "en": "The answer is 21 minutes.",
+        "ja": "答えは 21 分です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "這題的陷阱在於**鋸的次數不等於段數**，必須先把兩者的關係弄清楚。",
+          "從小的情形觀察：鋸 1 次會把 1 根木棍變成 2 段；鋸 2 次變成 3 段；鋸 3 次變成 4 段。",
+          "看出規律了——每鋸一次，段數就增加 1。所以鋸 k 次會得到 k + 1 段。",
+          "反過來，要得到 8 段，需要鋸的次數是 8 − 1 = 7 次。",
+          "每次鋸 3 分鐘，所以總時間 = 7 × 3 = 21 分鐘。",
+          "常見錯誤是直接算 8 × 3 = 24 分鐘，那等於多鋸了一次——第 8 段是「剩下來的」，不需要再鋸一刀把它切出來。",
+          "另一種理解方式：把木棍想成一條線，8 段之間有 7 個接縫，每個接縫鋸一次，正好 7 次。",
+          "驗算：鋸 7 次得 7 + 1 = 8 段 ✓；時間 7 × 3 = 21 分鐘。這類「段數與間隔數差一」的問題也常出現在種樹、爬樓梯、敲鐘等情境中。"
+        ],
+        "zh-Hans": [
+          "这题的陷阱在于**锯的次数不等于段数**，必须先把两者的关系弄清楚。",
+          "从小的情形观察：锯 1 次会把 1 根木棍变成 2 段；锯 2 次变成 3 段；锯 3 次变成 4 段。",
+          "看出规律了——每锯一次，段数就增加 1。所以锯 k 次会得到 k + 1 段。",
+          "反过来，要得到 8 段，需要锯的次数是 8 − 1 = 7 次。",
+          "每次锯 3 分钟，所以总时间 = 7 × 3 = 21 分钟。",
+          "常见错误是直接算 8 × 3 = 24 分钟，那等于多锯了一次——第 8 段是「剩下来的」，不需要再锯一刀把它切出来。",
+          "另一种理解方式：把木棍想成一条线，8 段之间有 7 个接缝，每个接缝锯一次，正好 7 次。",
+          "验算：锯 7 次得 7 + 1 = 8 段 ✓；时间 7 × 3 = 21 分钟。这类「段数与间隔数差一」的问题也常出现在种树、爬楼梯、敲钟等情境中。"
+        ],
+        "en": [
+          "The trap here is that the number of cuts is not the number of pieces, so the relationship must be established first.",
+          "Look at small cases: 1 cut turns one stick into 2 pieces, 2 cuts give 3 pieces, and 3 cuts give 4 pieces.",
+          "The pattern is clear — each cut increases the piece count by 1, so k cuts produce k + 1 pieces.",
+          "Conversely, producing 8 pieces requires 8 − 1 = 7 cuts.",
+          "Each cut takes 3 minutes, so the total time is 7 × 3 = 21 minutes.",
+          "A common error is to compute 8 × 3 = 24 minutes, which counts one cut too many — the eighth piece is simply what remains and needs no cut of its own.",
+          "Another way to see it: think of the stick as a line, and between 8 pieces there are 7 joins, each requiring one cut, so 7 cuts exactly.",
+          "Check: 7 cuts give 7 + 1 = 8 pieces, and the time is 7 × 3 = 21 minutes. This off-by-one between pieces and gaps also appears in problems about planting trees along a road, climbing stairs and striking a clock."
+        ],
+        "ja": [
+          "この問題の落とし穴は**切る回数と本数が同じではない**ことで、まずその関係をはっきりさせる必要があります。",
+          "小さい場合で観察します：1 回切ると 1 本が 2 本に、2 回で 3 本、3 回で 4 本になります。",
+          "規則が見えます。1 回切るごとに本数が 1 増えるので、k 回切ると k + 1 本になります。",
+          "逆に 8 本にするには 8 − 1 = 7 回切る必要があります。",
+          "1 回 3 分なので、総時間は 7 × 3 = 21 分。",
+          "よくある誤りは 8 × 3 = 24 分とすることで、これは 1 回多く切っています。8 本目は「残り」であって、切り出すための追加の 1 回は不要です。",
+          "別の見方：棒を 1 本の線と考えると、8 本の間には 7 か所のつなぎ目があり、各つなぎ目を 1 回ずつ切るのでちょうど 7 回です。",
+          "検算：7 回切ると 7 + 1 = 8 本 ✓、時間は 7 × 3 = 21 分。この「本数と間隔の数が 1 違う」型は植木算・階段・時計の鐘などにも現れます。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "21"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "段數與切割次數差一：k 次切割得 k + 1 段，故 8 段只需 7 次",
+        "notes": "設計依據：核心是「段數 = 次數 + 1」這個差一關係——直接用 8 × 3 = 24 是最典型的誤答；詳解另以「8 段之間有 7 個接縫」提供第二種理解，並點出這類差一問題的其他常見情境。答案 21 已由段數與次數的關係推得並回頭驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（鋸木頭的次數）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "邏輯",
+        "topicCode": "logic",
+        "subtopic": "鋸木頭的次數",
+        "subtopicCode": "sawing_cuts"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "logic_grade7_foundation_020",
+      "topic": "logic",
+      "subtopic": "parallel_task_scheduling",
+      "difficulty": "foundation",
+      "levelStage": "grade7",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "泡一壺茶要做以下幾件事：洗水壺 1 分鐘、燒開水 15 分鐘、洗茶杯 2 分鐘、拿出茶葉 1 分鐘、泡茶 1 分鐘。規定必須先洗好水壺才能燒水，也必須等水燒開後才能泡茶；燒水的時候人是空閒的，可以同時做別的事。求泡好一壺茶最少需要幾分鐘。",
+        "zh-Hans": "泡一壶茶要做以下几件事：洗水壶 1 分钟、烧开水 15 分钟、洗茶杯 2 分钟、拿出茶叶 1 分钟、泡茶 1 分钟。规定必须先洗好水壶才能烧水，也必须等水烧开后才能泡茶；烧水的时候人是空闲的，可以同时做别的事。求泡好一壶茶最少需要几分钟。",
+        "en": "Making a pot of tea involves: washing the kettle, 1 minute; boiling the water, 15 minutes; washing the cups, 2 minutes; fetching the tea leaves, 1 minute; and brewing, 1 minute. The kettle must be washed before boiling, and the water must boil before brewing; while the water boils the person is free to do other tasks. What is the least total time to make the tea?",
+        "ja": "お茶を入れるには次の作業が必要です：やかんを洗う 1 分、湯を沸かす 15 分、湯のみを洗う 2 分、茶葉を出す 1 分、お茶を入れる 1 分。やかんを洗ってからでないと湯は沸かせず、湯が沸いてからでないとお茶は入れられません。湯を沸かしている間、人は手が空いていて別の作業ができます。お茶を入れ終えるまで最少で何分かかりますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 17 分鐘。",
+        "zh-Hans": "答案是 17 分钟。",
+        "en": "The answer is 17 minutes.",
+        "ja": "答えは 17 分です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "若把五件事一件一件做完，總時間是 1 + 15 + 2 + 1 + 1 = 20 分鐘。但題目明說燒水時人是空閒的，所以有壓縮的空間。",
+          "先釐清哪些事有**先後順序**、哪些可以**同時進行**。",
+          "有順序限制的是三件：洗水壺 → 燒開水 → 泡茶。這條鏈是無法壓縮的，必須依序完成。",
+          "而洗茶杯（2 分鐘）與拿茶葉（1 分鐘）都不依賴水，也不需要用到爐子，所以可以在燒水的 15 分鐘裡順便做掉。",
+          "檢查時間夠不夠：這兩件事合計只要 2 + 1 = 3 分鐘，遠小於燒水的 15 分鐘，所以完全塞得進去，不會拖到總時間。",
+          "於是總時間就等於那條順序鏈的長度：洗水壺 1 + 燒水 15 + 泡茶 1 = 17 分鐘。",
+          "與逐件完成的 20 分鐘相比省下 3 分鐘，省下的恰好就是被塞進燒水期間的那 3 分鐘。",
+          "驗算：時間軸為第 0–1 分洗水壺、第 1–16 分燒水（其中第 1–3 分洗茶杯、第 3–4 分拿茶葉）、第 16–17 分泡茶，所有先後條件都滿足 ✓，總長 17 分鐘。關鍵觀念是：**總時間由最長的那條順序鏈決定**，能並行的事只要塞得下就不影響總長。"
+        ],
+        "zh-Hans": [
+          "若把五件事一件一件做完，总时间是 1 + 15 + 2 + 1 + 1 = 20 分钟。但题目明说烧水时人是空闲的，所以有压缩的空间。",
+          "先厘清哪些事有**先后顺序**、哪些可以**同时进行**。",
+          "有顺序限制的是三件：洗水壶 → 烧开水 → 泡茶。这条链是无法压缩的，必须依序完成。",
+          "而洗茶杯（2 分钟）与拿茶叶（1 分钟）都不依赖水，也不需要用到炉子，所以可以在烧水的 15 分钟里顺便做掉。",
+          "检查时间够不够：这两件事合计只要 2 + 1 = 3 分钟，远小于烧水的 15 分钟，所以完全塞得进去，不会拖到总时间。",
+          "于是总时间就等于那条顺序链的长度：洗水壶 1 + 烧水 15 + 泡茶 1 = 17 分钟。",
+          "与逐件完成的 20 分钟相比省下 3 分钟，省下的恰好就是被塞进烧水期间的那 3 分钟。",
+          "验算：时间轴为第 0–1 分洗水壶、第 1–16 分烧水（其中第 1–3 分洗茶杯、第 3–4 分拿茶叶）、第 16–17 分泡茶，所有先后条件都满足 ✓，总长 17 分钟。关键观念是：**总时间由最长的那条顺序链决定**，能并行的事只要塞得下就不影响总长。"
+        ],
+        "en": [
+          "Doing all five tasks one after another takes 1 + 15 + 2 + 1 + 1 = 20 minutes, but the problem states the person is free while the water boils, so there is room to compress.",
+          "First separate the tasks with an ordering requirement from those that can run in parallel.",
+          "Three tasks are ordered: wash the kettle, then boil, then brew. This chain cannot be compressed and must be done in sequence.",
+          "Washing the cups, 2 minutes, and fetching the leaves, 1 minute, depend neither on the water nor on the stove, so both can be done during the 15 minutes of boiling.",
+          "Check they fit: together they need only 2 + 1 = 3 minutes, far less than the 15 minutes of boiling, so they slot in without extending the total.",
+          "The total time is therefore just the length of the ordered chain: 1 + 15 + 1 = 17 minutes.",
+          "Compared with 20 minutes done sequentially, this saves 3 minutes — exactly the 3 minutes absorbed into the boiling period.",
+          "Check: the timeline is minutes 0–1 washing the kettle, 1–16 boiling with cups washed during 1–3 and leaves fetched during 3–4, then 16–17 brewing; every ordering condition holds and the total is 17 minutes. The key idea is that the total is set by the longest chain of ordered tasks, while parallel tasks cost nothing as long as they fit."
+        ],
+        "ja": [
+          "5 つの作業を 1 つずつ行うと合計 1 + 15 + 2 + 1 + 1 = 20 分ですが、湯を沸かす間は手が空いていると明記されているので短縮の余地があります。",
+          "まず**順序の制約がある作業**と**同時に行える作業**を分けます。",
+          "順序があるのは 3 つ：やかんを洗う → 湯を沸かす → お茶を入れる。この鎖は短縮できず、順に行うしかありません。",
+          "湯のみを洗う（2 分）と茶葉を出す（1 分）は水にもコンロにも依存しないので、湯を沸かす 15 分の間に済ませられます。",
+          "収まるか確認します：この 2 つは合わせて 2 + 1 = 3 分で、沸かす 15 分よりはるかに短いので完全に収まり、総時間を延ばしません。",
+          "したがって総時間は順序の鎖の長さそのもの：1 + 15 + 1 = 17 分です。",
+          "順に行った場合の 20 分より 3 分短く、その 3 分がまさに沸かす時間に吸収された分です。",
+          "検算：0–1 分でやかんを洗い、1–16 分で沸かし（その間 1–3 分で湯のみを洗い、3–4 分で茶葉を出す）、16–17 分でお茶を入れると、すべての順序条件を満たし ✓ 合計 17 分です。要点は、**総時間は最も長い順序の鎖で決まり**、並行できる作業は収まる限り総時間に影響しないことです。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "17"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "並行排程：總時間由最長的順序鏈決定，可並行的工作只要塞得進去就不增加總長",
+        "notes": "設計依據：核心是分辨順序鏈與可並行工作，並確認並行工作（3 分鐘）確實塞得進燒水的 15 分鐘——若並行工作總長超過燒水時間，答案就會不同，這個檢查不可省略。逐件完成的 20 分鐘是明確的對照。答案 17 已用完整時間軸排程驗證所有先後條件。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（並行排程）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "邏輯",
+        "topicCode": "logic",
+        "subtopic": "並行排程",
+        "subtopicCode": "parallel_task_scheduling"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "logic_grade7_foundation_021",
+      "topic": "logic",
+      "subtopic": "coin_greedy_minimum",
+      "difficulty": "foundation",
+      "levelStage": "grade7",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "有面額 1 元、5 元、10 元、50 元的硬幣各若干枚（數量不限）。要恰好湊出 87 元，最少需要幾枚硬幣？",
+        "zh-Hans": "有面额 1 元、5 元、10 元、50 元的硬币各若干枚（数量不限）。要恰好凑出 87 元，最少需要几枚硬币？",
+        "en": "Coins of denominations 1, 5, 10 and 50 are available in unlimited supply. What is the fewest number of coins needed to make exactly 87?",
+        "ja": "1 円、5 円、10 円、50 円の硬貨が好きなだけあります。ちょうど 87 円をつくるには、最少で何枚必要ですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 7 枚。",
+        "zh-Hans": "答案是 7 枚。",
+        "en": "The answer is 7.",
+        "ja": "答えは 7 枚です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "要讓硬幣數最少，直覺是**盡量多用大面額**，因為一枚大的可以抵掉很多枚小的。這種「每一步都先取最大」的作法稱為貪心法。",
+          "從最大的 50 元開始：87 元裡最多能放 1 枚 50 元（2 枚就是 100 元，超過了），用掉 1 枚後還剩 87 − 50 = 37 元。",
+          "接著是 10 元：37 元裡最多能放 3 枚（4 枚就是 40 元，超過），用掉 3 枚後還剩 37 − 30 = 7 元。",
+          "接著是 5 元：7 元裡最多能放 1 枚，用掉後還剩 7 − 5 = 2 元。",
+          "最後用 1 元補足：需要 2 枚。",
+          "把枚數加起來：1 + 3 + 1 + 2 = 7 枚。",
+          "驗算：50 × 1 + 10 × 3 + 5 × 1 + 1 × 2 = 50 + 30 + 5 + 2 = 87 元 ✓，金額正確。",
+          "程式對所有可能的組合窮舉，最少枚數確實是 7 枚，組成正是 (50, 10, 10, 10, 5, 1, 1) ✓。附註：貪心法在 1、5、10、50 這種面額下剛好一定最優，但並非所有面額系統都如此——例如面額若是 1、3、4，湊 6 元時貪心會取 4 + 1 + 1 共 3 枚，其實 3 + 3 只要 2 枚。"
+        ],
+        "zh-Hans": [
+          "要让硬币数最少，直觉是**尽量多用大面额**，因为一枚大的可以抵掉很多枚小的。这种「每一步都先取最大」的做法称为贪心法。",
+          "从最大的 50 元开始：87 元里最多能放 1 枚 50 元（2 枚就是 100 元，超过了），用掉 1 枚后还剩 87 − 50 = 37 元。",
+          "接着是 10 元：37 元里最多能放 3 枚（4 枚就是 40 元，超过），用掉 3 枚后还剩 37 − 30 = 7 元。",
+          "接着是 5 元：7 元里最多能放 1 枚，用掉后还剩 7 − 5 = 2 元。",
+          "最后用 1 元补足：需要 2 枚。",
+          "把枚数加起来：1 + 3 + 1 + 2 = 7 枚。",
+          "验算：50 × 1 + 10 × 3 + 5 × 1 + 1 × 2 = 50 + 30 + 5 + 2 = 87 元 ✓，金额正确。",
+          "程序对所有可能的组合穷举，最少枚数确实是 7 枚，组成正是 (50, 10, 10, 10, 5, 1, 1) ✓。附注：贪心法在 1、5、10、50 这种面额下刚好一定最优，但并非所有面额系统都如此——例如面额若是 1、3、4，凑 6 元时贪心会取 4 + 1 + 1 共 3 枚，其实 3 + 3 只要 2 枚。"
+        ],
+        "en": [
+          "To minimise the number of coins the instinct is to use as many large denominations as possible, since one large coin replaces many small ones. Always taking the largest first is called the greedy method.",
+          "Start with the 50: at most one fits into 87, since two would make 100 and overshoot, leaving 87 − 50 = 37.",
+          "Next the 10s: at most three fit into 37, since four would make 40 and overshoot, leaving 37 − 30 = 7.",
+          "Next the 5: one fits into 7, leaving 7 − 5 = 2.",
+          "Finally make up the remainder with 1s: two are needed.",
+          "Adding the counts: 1 + 3 + 1 + 2 = 7 coins.",
+          "Check: 50 × 1 + 10 × 3 + 5 × 1 + 1 × 2 = 50 + 30 + 5 + 2 = 87, the correct amount.",
+          "An exhaustive search over all combinations confirms the minimum is 7 coins, namely (50, 10, 10, 10, 5, 1, 1). Remark: the greedy method happens to be optimal for the denominations 1, 5, 10, 50, but not for every system — with denominations 1, 3, 4, making 6 greedily gives 4 + 1 + 1, three coins, whereas 3 + 3 needs only two."
+        ],
+        "ja": [
+          "枚数を最少にするには**大きい額面をできるだけ使う**のが直感的です。1 枚の大きい硬貨が多数の小さい硬貨の代わりになるからです。毎回最大を取るこの方法を貪欲法といいます。",
+          "最大の 50 円から：87 円には 50 円が最大 1 枚入ります（2 枚では 100 円で超過）。1 枚使うと残り 87 − 50 = 37 円。",
+          "次に 10 円：37 円には最大 3 枚（4 枚では 40 円で超過）。3 枚使うと残り 37 − 30 = 7 円。",
+          "次に 5 円：7 円には 1 枚入り、残り 7 − 5 = 2 円。",
+          "最後に 1 円で埋めます：2 枚必要です。",
+          "枚数を足すと 1 + 3 + 1 + 2 = 7 枚。",
+          "検算：50 × 1 + 10 × 3 + 5 × 1 + 1 × 2 = 50 + 30 + 5 + 2 = 87 円 ✓ で金額は正しくなっています。",
+          "すべての組み合わせを全探索しても最少は 7 枚で、内訳は (50, 10, 10, 10, 5, 1, 1) ✓。補足：1、5、10、50 という額面では貪欲法がたまたま常に最適ですが、どの額面体系でもそうとは限りません。額面が 1、3、4 なら 6 円を貪欲に作ると 4 + 1 + 1 の 3 枚ですが、3 + 3 なら 2 枚で済みます。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "7"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "湊零錢的最少枚數：由大面額往下貪心取用，並確認該面額系統下貪心確為最優",
+        "notes": "設計依據：核心是貪心策略的執行，但詳解不止於套用——另舉面額 1、3、4 的反例說明貪心並非普遍最優，避免學生把它當成無條件正確的規則。答案 7 已用四重迴圈的全窮舉驗證最少枚數與組成。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（最少硬幣數）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "邏輯",
+        "topicCode": "logic",
+        "subtopic": "最少硬幣數",
+        "subtopicCode": "coin_greedy_minimum"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "logic_grade7_foundation_022",
+      "topic": "logic",
+      "subtopic": "vacuous_truth_line",
+      "difficulty": "foundation",
+      "levelStage": "grade7",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "5 個人由左到右排成一列。每個人都說了同一句話：「站在我左邊的人全都在說謊。」已知每個人要嘛總是說真話、要嘛總是說謊話。求這 5 人中說真話的有幾人。",
+        "zh-Hans": "5 个人由左到右排成一列。每个人都说了同一句话：「站在我左边的人全都在说谎。」已知每个人要么总是说真话、要么总是说谎话。求这 5 人中说真话的有几人。",
+        "en": "Five people stand in a row from left to right. Each says the same sentence: \"Everyone standing to my left is lying.\" Each person either always tells the truth or always lies. How many of the five are telling the truth?",
+        "ja": "5 人が左から右へ一列に並んでいます。各自が同じことを言いました：「私の左に立っている人はみな嘘をついている。」各人は常に本当のことを言うか、常に嘘をつくかのどちらかです。5 人のうち本当のことを言っているのは何人ですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 1 人。",
+        "zh-Hans": "答案是 1 人。",
+        "en": "The answer is 1.",
+        "ja": "答えは 1 人です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "從最左邊那個人開始判斷，因為他的情況最特殊——**他的左邊根本沒有人**。",
+          "他說「站在我左邊的人全都在說謊」。當左邊一個人也沒有時，這句話沒有任何反例，所以它是成立的，這種情形稱為「空泛為真」。",
+          "確認一下不可能相反：若第 1 人在說謊，表示他的話是假的，也就是「左邊至少有一個人沒在說謊」——但他左邊根本沒有人，不可能有這樣的人，矛盾。所以**第 1 人一定說真話**。",
+          "接著看第 2 人。他說「我左邊的人全都在說謊」，而他左邊正是第 1 人，第 1 人說的是真話。",
+          "所以第 2 人的陳述是假的，他在說謊。",
+          "再看第 3 人。他左邊有第 1、2 兩人，其中第 1 人說真話，所以「全都在說謊」同樣不成立，第 3 人也在說謊。",
+          "同樣的理由對第 4、5 人都成立——只要左邊出現過第 1 人這個誠實者，他們的陳述就必定為假。所以第 2 到第 5 人全都說謊，只有第 1 人說真話，答案是 1 人。",
+          "驗算：程式窮舉全部 2⁵ = 32 種「誰誠實誰說謊」的指派，檢查每個人的陳述是否與自己的身分相符，自洽的指派只有一種，就是只有第 1 人誠實 ✓。再抽查 3、4、6、10 人的情形，說真話的人數也都恆為 1，與推理一致。"
+        ],
+        "zh-Hans": [
+          "从最左边那个人开始判断，因为他的情况最特殊——**他的左边根本没有人**。",
+          "他说「站在我左边的人全都在说谎」。当左边一个人也没有时，这句话没有任何反例，所以它是成立的，这种情形称为「空泛为真」。",
+          "确认一下不可能相反：若第 1 人在说谎，表示他的话是假的，也就是「左边至少有一个人没在说谎」——但他左边根本没有人，不可能有这样的人，矛盾。所以**第 1 人一定说真话**。",
+          "接着看第 2 人。他说「我左边的人全都在说谎」，而他左边正是第 1 人，第 1 人说的是真话。",
+          "所以第 2 人的陈述是假的，他在说谎。",
+          "再看第 3 人。他左边有第 1、2 两人，其中第 1 人说真话，所以「全都在说谎」同样不成立，第 3 人也在说谎。",
+          "同样的理由对第 4、5 人都成立——只要左边出现过第 1 人这个诚实者，他们的陈述就必定为假。所以第 2 到第 5 人全都说谎，只有第 1 人说真话，答案是 1 人。",
+          "验算：程序穷举全部 2⁵ = 32 种「谁诚实谁说谎」的指派，检查每个人的陈述是否与自己的身分相符，自洽的指派只有一种，就是只有第 1 人诚实 ✓。再抽查 3、4、6、10 人的情形，说真话的人数也都恒为 1，与推理一致。"
+        ],
+        "en": [
+          "Begin with the leftmost person, whose situation is special: there is nobody at all to their left.",
+          "They say \"everyone standing to my left is lying\". With no one to the left there is no counterexample, so the statement holds — a situation called vacuously true.",
+          "Confirm the opposite is impossible: if person 1 were lying, their statement would be false, meaning at least one person to their left is not lying. But there is nobody to their left, so no such person can exist, a contradiction. Hence person 1 must be telling the truth.",
+          "Now person 2. They claim everyone to their left is lying, and to their left stands person 1, who tells the truth.",
+          "So person 2's statement is false, and person 2 is lying.",
+          "Next person 3. To their left are persons 1 and 2, and since person 1 tells the truth the claim \"everyone is lying\" again fails, so person 3 is lying too.",
+          "The same reasoning covers persons 4 and 5: once the honest person 1 lies to their left, their claims are necessarily false. So persons 2 through 5 all lie and only person 1 tells the truth, giving the answer 1.",
+          "Check: enumerating all 2⁵ = 32 assignments of honest and lying and testing each person's statement against their own status leaves exactly one consistent assignment, with only person 1 honest. Spot-checking rows of 3, 4, 6 and 10 people also gives exactly 1 truth-teller each time, matching the reasoning."
+        ],
+        "ja": [
+          "まず一番左の人から考えます。その人の状況が特殊だからです——**左には誰もいません**。",
+          "その人は「私の左にいる人はみな嘘をついている」と言います。左に誰もいなければ反例が 1 つもないので、この文は成り立ちます。これを「空虚に真」といいます。",
+          "逆が不可能なことも確かめます：もし 1 人目が嘘をついているなら発言は偽、つまり「左に嘘をついていない人が少なくとも 1 人いる」ことになりますが、左には誰もいないので矛盾します。よって**1 人目は必ず本当のことを言っています**。",
+          "次に 2 人目。「私の左の人はみな嘘をついている」と言いますが、左にいるのは 1 人目で、その人は本当のことを言っています。",
+          "したがって 2 人目の発言は偽であり、2 人目は嘘をついています。",
+          "3 人目も同様です。左には 1 人目と 2 人目がいて、1 人目は正直なので「みな嘘」は成り立たず、3 人目も嘘をついています。",
+          "同じ理由が 4 人目、5 人目にも当てはまります。左に正直な 1 人目がいる限り、彼らの発言は必ず偽です。よって 2 人目から 5 人目まではすべて嘘をつき、本当のことを言うのは 1 人目だけ、答えは 1 人です。",
+          "検算：誰が正直で誰が嘘つきかの割り当て 2⁵ = 32 通りをすべて調べ、各人の発言が自身の立場と矛盾しないか確認すると、整合する割り当てはただ 1 つ、1 人目だけが正直な場合です ✓。3、4、6、10 人の場合も本当のことを言う人数は常に 1 で、推論と一致します。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "1"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "空泛為真：最左邊的人因左側無人而陳述自動成立，其誠實身分再迫使其餘所有人說謊",
+        "notes": "設計依據：核心是「全稱陳述在對象為空時自動成立」這個空泛為真的概念——它讓最左邊的人的身分被唯一確定，再沿著隊伍推倒所有人。原先此位置寫的是「黑板上 1 到 10，每次擦兩數寫上其和」，與既有的 logic_grade9_004（擦兩數寫上差的絕對值）句型相似度 0.38，屬同一模板故淘汰。答案 1 已用 32 種身分指派的全窮舉驗證自洽解唯一，並以 3、4、6、10 人的情形抽查結論的普遍性。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（空泛為真）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "邏輯",
+        "topicCode": "logic",
+        "subtopic": "空泛為真",
+        "subtopicCode": "vacuous_truth_line"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "logic_grade7_foundation_023",
+      "topic": "logic",
+      "subtopic": "backward_halving",
+      "difficulty": "foundation",
+      "levelStage": "grade7",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一筐蘋果，第一天賣掉全部的一半再多 1 個；第二天賣掉剩下的一半再多 1 個，此時筐裡還剩 5 個蘋果。求這筐蘋果原本有幾個。",
+        "zh-Hans": "一筐苹果，第一天卖掉全部的一半再多 1 个；第二天卖掉剩下的一半再多 1 个，此时筐里还剩 5 个苹果。求这筐苹果原本有几个。",
+        "en": "A basket of apples: on the first day half of them plus one more are sold, and on the second day half of what remained plus one more are sold, leaving 5 apples. How many apples were there originally?",
+        "ja": "かごに入ったりんごを、1 日目に全体の半分よりさらに 1 個多く売り、2 日目に残りの半分よりさらに 1 個多く売ったところ、5 個残りました。もとは何個ありましたか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 26 個。",
+        "zh-Hans": "答案是 26 个。",
+        "en": "The answer is 26.",
+        "ja": "答えは 26 個です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "從最初往後推需要設未知數並解含分數的方程；但題目已經給了**最後的結果**，所以從結果往回推會簡單得多。",
+          "回推的要領是把每一步的操作**反過來做**：原本是「先減半、再減 1」，倒過來就是「先加 1、再乘 2」。注意順序也要顛倒。",
+          "先回推第二天。第二天結束時剩 5 個，而第二天賣掉的是「一半再多 1 個」。",
+          "把多賣的那 1 個加回去：5 + 1 = 6，這 6 個就是第二天開始時的「一半」。所以第二天開始時有 6 × 2 = 12 個。",
+          "再用同樣的方式回推第一天。第一天結束時有 12 個，加回多賣的 1 個得 12 + 1 = 13，這是原本的一半。",
+          "所以原本有 13 × 2 = 26 個。",
+          "正向驗算：原有 26 個 → 第一天賣掉 26 ÷ 2 + 1 = 14 個，剩 26 − 14 = 12 個 ✓ → 第二天賣掉 12 ÷ 2 + 1 = 7 個，剩 12 − 7 = 5 個 ✓，與題目完全相符。",
+          "常見錯誤是回推時順序弄反，先乘 2 再加 1（得到 5 × 2 + 1 = 11 而非 12）——逆運算不只要把加減乘除反過來，**執行的先後也要顛倒**。"
+        ],
+        "zh-Hans": [
+          "从最初往后推需要设未知数并解含分数的方程；但题目已经给了**最后的结果**，所以从结果往回推会简单得多。",
+          "回推的要领是把每一步的操作**反过来做**：原本是「先减半、再减 1」，倒过来就是「先加 1、再乘 2」。注意顺序也要颠倒。",
+          "先回推第二天。第二天结束时剩 5 个，而第二天卖掉的是「一半再多 1 个」。",
+          "把多卖的那 1 个加回去：5 + 1 = 6，这 6 个就是第二天开始时的「一半」。所以第二天开始时有 6 × 2 = 12 个。",
+          "再用同样的方式回推第一天。第一天结束时有 12 个，加回多卖的 1 个得 12 + 1 = 13，这是原本的一半。",
+          "所以原本有 13 × 2 = 26 个。",
+          "正向验算：原有 26 个 → 第一天卖掉 26 ÷ 2 + 1 = 14 个，剩 26 − 14 = 12 个 ✓ → 第二天卖掉 12 ÷ 2 + 1 = 7 个，剩 12 − 7 = 5 个 ✓，与题目完全相符。",
+          "常见错误是回推时顺序弄反，先乘 2 再加 1（得到 5 × 2 + 1 = 11 而非 12）——逆运算不只要把加减乘除反过来，**执行的先后也要颠倒**。"
+        ],
+        "en": [
+          "Working forwards would require an unknown and an equation with fractions, but the problem supplies the final result, so working backwards is far simpler.",
+          "The technique is to undo each step: the original operation is \"halve, then subtract one\", so its inverse is \"add one, then double\" — and the order reverses too.",
+          "Undo the second day first. At its end 5 apples remain, and what was sold that day was half plus one more.",
+          "Add back the extra one: 5 + 1 = 6, and those 6 are the half that remained at the start of the second day. So the second day began with 6 × 2 = 12 apples.",
+          "Undo the first day the same way. It ended with 12, and adding back the extra one gives 12 + 1 = 13, which is half the original amount.",
+          "So the basket originally held 13 × 2 = 26 apples.",
+          "Forward check: starting from 26, the first day sells 26 ÷ 2 + 1 = 14, leaving 26 − 14 = 12; the second day sells 12 ÷ 2 + 1 = 7, leaving 12 − 7 = 5 — exactly as stated.",
+          "A common error is to reverse the operations without reversing their order, doubling before adding one and getting 5 × 2 + 1 = 11 instead of 12. Undoing a process means inverting each operation and also running them in the opposite order."
+        ],
+        "ja": [
+          "最初から順に追うと未知数を置いて分数を含む方程式を解くことになりますが、問題は**最後の結果**を与えているので、逆から戻すほうがずっと簡単です。",
+          "逆算の要領は各操作を**逆向きに行う**ことです。もとは「半分にしてから 1 引く」なので、逆は「1 足してから 2 倍する」。順序も逆になる点に注意します。",
+          "まず 2 日目を戻します。2 日目の終わりに 5 個残り、その日売れたのは「半分よりさらに 1 個」でした。",
+          "多く売った 1 個を戻すと 5 + 1 = 6 で、この 6 個が 2 日目開始時の「半分」です。よって 2 日目の開始時は 6 × 2 = 12 個。",
+          "同じ要領で 1 日目を戻します。1 日目の終わりは 12 個で、多く売った 1 個を戻すと 12 + 1 = 13、これがもとの半分です。",
+          "したがってもとは 13 × 2 = 26 個。",
+          "順方向の検算：26 個 → 1 日目に 26 ÷ 2 + 1 = 14 個売れて残り 26 − 14 = 12 個 ✓ → 2 日目に 12 ÷ 2 + 1 = 7 個売れて残り 12 − 7 = 5 個 ✓ で条件に一致します。",
+          "よくある誤りは逆算の順序を取り違え、先に 2 倍してから 1 を足して 5 × 2 + 1 = 11（正しくは 12）としてしまうことです。逆算では演算を逆にするだけでなく、**実行の順序も逆にする**必要があります。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "26"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "還原問題的逆推：逆運算不只要把加減乘除反過來，執行順序也必須顛倒",
+        "notes": "設計依據：核心是逆推時「順序也要顛倒」——先乘 2 再加 1 會得到 11 這個典型誤答；詳解逐步展示兩天的回推並附完整的正向驗算。答案 26 已用逆推求得並以正向模擬驗證兩天的售出與剩餘。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（還原問題）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "邏輯",
+        "topicCode": "logic",
+        "subtopic": "還原問題",
+        "subtopicCode": "backward_halving"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "logic_grade7_foundation_024",
+      "topic": "logic",
+      "subtopic": "map_four_colors",
+      "difficulty": "foundation",
+      "levelStage": "grade7",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一張地圖上有 4 個國家，其中任意兩個國家都有共同的邊界（也就是每個國家都與其他三個國家相鄰）。若要求相鄰的國家不能塗相同的顏色，最少需要幾種顏色？",
+        "zh-Hans": "一张地图上有 4 个国家，其中任意两个国家都有共同的边界（也就是每个国家都与其他三个国家相邻）。若要求相邻的国家不能涂相同的颜色，最少需要几种颜色？",
+        "en": "A map shows 4 countries, every two of which share a border, so each country is adjacent to all three others. If adjacent countries must not share a colour, what is the fewest number of colours needed?",
+        "ja": "地図に 4 つの国があり、どの 2 国も国境を接しています（つまり各国は他の 3 国すべてと隣接）。隣接する国を同じ色で塗れないとき、最少で何色必要ですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 4 種。",
+        "zh-Hans": "答案是 4 种。",
+        "en": "The answer is 4.",
+        "ja": "答えは 4 色です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "回答「最少幾種」要做兩件事：說明更少的顏色為何不夠，並給出一個真的可行的塗法。",
+          "先看關鍵條件：**任意兩個國家都相鄰**。這表示任何兩個國家的顏色都必須不同——沒有任何一對可以共用顏色。",
+          "換句話說，四個國家的顏色必須**兩兩互不相同**。",
+          "既然四個顏色兩兩不同，那就至少需要 4 種不同的顏色，3 種以下必定會有兩個國家撞色。",
+          "更具體地說：若只有 3 種顏色而有 4 個國家，由鴿籠原理必有兩個國家分到同一種顏色，而它們又相鄰，違反規定。",
+          "另一方面，4 種顏色顯然可行——每個國家各塗一種不同的顏色即可。",
+          "所以最少需要 4 種顏色。",
+          "驗算：程式對 k = 1 到 5 逐一嘗試，檢查是否存在讓四個兩兩相鄰的國家都不撞色的塗法，結果 1、2、3 種都不可行，4 種起才可行 ✓。附註：著名的四色定理說任何平面地圖最多 4 種顏色就夠——本題正好是需要用滿 4 種的情形。"
+        ],
+        "zh-Hans": [
+          "回答「最少几种」要做两件事：说明更少的颜色为何不够，并给出一个真的可行的涂法。",
+          "先看关键条件：**任意两个国家都相邻**。这表示任何两个国家的颜色都必须不同——没有任何一对可以共用颜色。",
+          "换句话说，四个国家的颜色必须**两两互不相同**。",
+          "既然四个颜色两两不同，那就至少需要 4 种不同的颜色，3 种以下必定会有两个国家撞色。",
+          "更具体地说：若只有 3 种颜色而有 4 个国家，由鸽笼原理必有两个国家分到同一种颜色，而它们又相邻，违反规定。",
+          "另一方面，4 种颜色显然可行——每个国家各涂一种不同的颜色即可。",
+          "所以最少需要 4 种颜色。",
+          "验算：程序对 k = 1 到 5 逐一尝试，检查是否存在让四个两两相邻的国家都不撞色的涂法，结果 1、2、3 种都不可行，4 种起才可行 ✓。附注：著名的四色定理说任何平面地图最多 4 种颜色就够——本题正好是需要用满 4 种的情形。"
+        ],
+        "en": [
+          "Answering \"how few\" requires two things: showing why fewer colours fail, and exhibiting a colouring that works.",
+          "Start from the key condition: every two countries are adjacent, which means every two countries must receive different colours — no pair may share.",
+          "In other words, the four countries' colours must be pairwise distinct.",
+          "Since four colours are pairwise distinct, at least 4 different colours are needed, and any fewer forces a clash.",
+          "More concretely: with only 3 colours for 4 countries the pigeonhole principle forces two countries to share a colour, and since they are adjacent this breaks the rule.",
+          "On the other hand 4 colours clearly work — simply give each country its own colour.",
+          "So the minimum is 4 colours.",
+          "Check: testing k = 1 to 5 for whether a valid colouring exists shows that 1, 2 and 3 all fail while 4 succeeds. Remark: the famous four colour theorem says every planar map needs at most 4 colours, and this problem is exactly a case where all 4 are required."
+        ],
+        "ja": [
+          "「最少何色か」に答えるには 2 つのことが必要です：それより少ない色では足りない理由と、実際に成立する塗り方です。",
+          "鍵となる条件を見ます：**どの 2 国も隣接している**。つまりどの 2 国の色も異なっていなければならず、色を共有できるペアは 1 つもありません。",
+          "言い換えると、4 国の色は**互いにすべて異なる**必要があります。",
+          "4 色が互いに異なる以上、少なくとも 4 色必要であり、3 色以下では必ずどこかで色がぶつかります。",
+          "より具体的には、4 国に 3 色しかなければ鳩の巣原理より 2 国が同じ色になり、しかもそれらは隣接しているので規則に反します。",
+          "一方 4 色なら明らかに可能で、各国に別々の色を塗ればよいだけです。",
+          "したがって最少は 4 色です。",
+          "検算：k = 1 から 5 まで、4 国が互いに隣接する状況で色がぶつからない塗り方が存在するか調べると、1、2、3 色は不可能で 4 色から可能になります ✓。補足：有名な四色定理はどんな平面地図も最大 4 色で塗れると述べますが、本問はその 4 色を使い切る必要がある例です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "4"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "兩兩相鄰的著色數：所有顏色必須互不相同，故最少色數等於國家數",
+        "notes": "設計依據：核心是「兩兩相鄰 ⟹ 顏色兩兩不同」這個推論，並用鴿籠原理說明 3 色為何必定失敗；同時給出可行的塗法完成上下界。詳解另連結四色定理，說明本題正是需要用滿 4 色的極端情形。答案 4 已用 k = 1..5 的著色存在性窮舉驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（地圖著色）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "邏輯",
+        "topicCode": "logic",
+        "subtopic": "地圖著色",
+        "subtopicCode": "map_four_colors"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "logic_grade7_foundation_025",
+      "topic": "logic",
+      "subtopic": "key_lock_worst_case",
+      "difficulty": "foundation",
+      "levelStage": "grade7",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "有 5 把外觀相同的鑰匙和 5 個鎖，每把鑰匙恰好對應一個鎖，但不知道哪把配哪個。每次可以拿一把鑰匙去試一個鎖，試過後就知道是否配對。求在最壞的情況下，最少要試幾次才能確定全部的配對。",
+        "zh-Hans": "有 5 把外观相同的钥匙和 5 个锁，每把钥匙恰好对应一个锁，但不知道哪把配哪个。每次可以拿一把钥匙去试一个锁，试过后就知道是否配对。求在最坏的情况下，最少要试几次才能确定全部的配对。",
+        "en": "There are 5 identical-looking keys and 5 locks, each key fitting exactly one lock, but which fits which is unknown. Each trial tries one key in one lock and reveals whether it fits. In the worst case, what is the fewest number of trials needed to determine all the pairings?",
+        "ja": "見た目が同じ鍵が 5 本と錠が 5 個あり、各鍵はちょうど 1 つの錠に対応しますが、どれがどれかは分かりません。1 回の試行で 1 本の鍵を 1 つの錠に試すと、合うかどうかが分かります。最悪の場合、すべての対応を確定するには最少で何回の試行が必要ですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 10 次。",
+        "zh-Hans": "答案是 10 次。",
+        "en": "The answer is 10.",
+        "ja": "答えは 10 回です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "「最壞情況」表示要假設運氣最差，所以要算的是**保證能完成所需的次數**，不是運氣好時的次數。",
+          "策略是一個鎖一個鎖地處理：先為第一個鎖找到鑰匙，再處理第二個，依此類推。",
+          "第一個鎖：手上有 5 把鑰匙。最壞情況是前 4 把都不對——但這時**不必再試第 5 把**，因為既然其餘四把都被排除，剩下的那把必定是它。所以最多試 4 次。",
+          "第二個鎖：已經用掉一把鑰匙，剩 4 把。同樣的道理，最壞情況下試 3 次就能確定（前 3 把都不對時，第 4 把不用試）。",
+          "第三個鎖：剩 3 把鑰匙，最多試 2 次。",
+          "第四個鎖：剩 2 把鑰匙，最多試 1 次。",
+          "第五個鎖：只剩 1 把鑰匙，不必試就知道是它，0 次。",
+          "把各階段相加：4 + 3 + 2 + 1 + 0 = 10 次。驗算：這正是 1 到 4 的連加和。關鍵的省略是每一階段的**最後一把不用試**——若每把都試，會多花 5 次而得到 15，那是不必要的浪費。"
+        ],
+        "zh-Hans": [
+          "「最坏情况」表示要假设运气最差，所以要算的是**保证能完成所需的次数**，不是运气好时的次数。",
+          "策略是一个锁一个锁地处理：先为第一个锁找到钥匙，再处理第二个，依此类推。",
+          "第一个锁：手上有 5 把钥匙。最坏情况是前 4 把都不对——但这时**不必再试第 5 把**，因为既然其余四把都被排除，剩下的那把必定是它。所以最多试 4 次。",
+          "第二个锁：已经用掉一把钥匙，剩 4 把。同样的道理，最坏情况下试 3 次就能确定（前 3 把都不对时，第 4 把不用试）。",
+          "第三个锁：剩 3 把钥匙，最多试 2 次。",
+          "第四个锁：剩 2 把钥匙，最多试 1 次。",
+          "第五个锁：只剩 1 把钥匙，不必试就知道是它，0 次。",
+          "把各阶段相加：4 + 3 + 2 + 1 + 0 = 10 次。验算：这正是 1 到 4 的连加和。关键的省略是每一阶段的**最后一把不用试**——若每把都试，会多花 5 次而得到 15，那是不必要的浪费。"
+        ],
+        "en": [
+          "\"Worst case\" means assuming the worst luck, so what is counted is the number of trials that guarantees completion, not the number a lucky run might take.",
+          "The strategy handles one lock at a time: find the key for the first lock, then the second, and so on.",
+          "First lock: 5 keys are available. In the worst case the first 4 all fail — but then the fifth need not be tried, since with the other four ruled out the remaining key must fit. So at most 4 trials.",
+          "Second lock: one key has been used, leaving 4. By the same reasoning the worst case takes 3 trials, since if the first 3 fail the fourth needs no test.",
+          "Third lock: 3 keys remain, so at most 2 trials.",
+          "Fourth lock: 2 keys remain, so at most 1 trial.",
+          "Fifth lock: only 1 key remains, which must fit without any trial — 0 trials.",
+          "Adding the stages: 4 + 3 + 2 + 1 + 0 = 10 trials. Check: this is exactly the sum 1 + 2 + 3 + 4. The crucial saving is that the last key at each stage need not be tested; testing every key would cost 5 extra trials and give 15, which is unnecessary."
+        ],
+        "ja": [
+          "「最悪の場合」とは運が最も悪い場合を想定するということなので、求めるのは**必ず完了できる回数**であり、運がよいときの回数ではありません。",
+          "方針は錠を 1 つずつ処理することです。まず 1 つ目の錠に合う鍵を見つけ、次に 2 つ目、と進めます。",
+          "1 つ目の錠：鍵は 5 本あります。最悪の場合、最初の 4 本が合いませんが、そのとき**5 本目を試す必要はありません**。他の 4 本が除外された以上、残る 1 本が必ず合うからです。よって最大 4 回。",
+          "2 つ目の錠：鍵を 1 本使ったので残り 4 本。同じ理由で最悪 3 回で確定します（最初の 3 本が外れれば 4 本目は試すまでもありません）。",
+          "3 つ目の錠：残り 3 本なので最大 2 回。",
+          "4 つ目の錠：残り 2 本なので最大 1 回。",
+          "5 つ目の錠：残り 1 本なので試さずとも確定、0 回。",
+          "各段階を足すと 4 + 3 + 2 + 1 + 0 = 10 回。検算：これはちょうど 1 から 4 までの和です。要点は各段階で**最後の 1 本を試さなくてよい**ことで、すべて試すと 5 回余分にかかり 15 回になってしまいます。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "10"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "最壞情況的配對試驗次數：每階段最後一把可由排除法省略，總次數為 4 + 3 + 2 + 1",
+        "notes": "設計依據：核心是「每個階段的最後一把鑰匙不必試」——由排除法直接確定，忽略此點會得到 15；「最壞情況」的語意也要求算保證值而非期望值。答案 10 已由逐階段的最壞次數相加推得，並與 1 到 4 的連加和對照。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（鑰匙配鎖）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "邏輯",
+        "topicCode": "logic",
+        "subtopic": "鑰匙配鎖",
+        "subtopicCode": "key_lock_worst_case"
+      },
+      "reviewStatus": "ok"
     }
   ]
 }
