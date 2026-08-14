@@ -904,6 +904,546 @@
         "subtopicCode": "exactly_one_true_ordering"
       },
       "reviewStatus": "ok"
+    },
+    {
+      "id": "logic_grade7_foundation_010",
+      "topic": "logic",
+      "subtopic": "river_crossing_min",
+      "difficulty": "foundation",
+      "levelStage": "grade7",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "農夫要把一隻狼、一隻羊和一顆白菜帶到河對岸。小船每次只能載農夫和其中一樣東西。若農夫不在旁邊，狼會吃掉羊，羊會吃掉白菜。求農夫最少要划船渡河幾次才能把三樣東西全部安全送到對岸（從一岸划到另一岸算一次）。",
+        "zh-Hans": "农夫要把一只狼、一只羊和一颗白菜带到河对岸。小船每次只能载农夫和其中一样东西。若农夫不在旁边，狼会吃掉羊，羊会吃掉白菜。求农夫最少要划船渡河几次才能把三样东西全部安全送到对岸（从一岸划到另一岸算一次）。",
+        "en": "A farmer must take a wolf, a goat and a cabbage across a river. The boat carries the farmer plus at most one item. Left without the farmer, the wolf eats the goat and the goat eats the cabbage. What is the fewest number of river crossings needed to get all three safely across, counting each trip from one bank to the other as one crossing?",
+        "ja": "農夫がオオカミ・ヤギ・キャベツを川の向こう岸へ運びます。舟には農夫のほかに 1 つしか乗せられません。農夫がそばにいないと、オオカミはヤギを、ヤギはキャベツを食べてしまいます。3 つすべてを無事に運ぶには、最少で何回川を渡ればよいですか（片道 1 回と数えます）。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 7 次。",
+        "zh-Hans": "答案是 7 次。",
+        "en": "The answer is 7.",
+        "ja": "答えは 7 回です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "先看清楚危險組合：狼和羊不能單獨相處，羊和白菜也不能單獨相處，但**狼和白菜放在一起是安全的**。",
+          "羊同時出現在兩個危險組合裡，所以第一趟一定要先載羊過河，否則留在原岸的狼和羊、或羊和白菜就會出事。",
+          "第 1 次：載羊過河。第 2 次：空船返回（原岸剩狼和白菜，安全）。",
+          "第 3 次：載狼過河。這時對岸有狼和羊，不能就這樣離開。",
+          "第 4 次：**把羊載回原岸**——這是整題的關鍵一步，很多人卡在這裡，因為直覺上不會想把已經送到的東西再帶回來。",
+          "第 5 次：載白菜過河（對岸剩狼和白菜，安全；原岸只剩羊）。第 6 次：空船返回。",
+          "第 7 次：載羊過河，三樣東西全部到齊，共 7 次。",
+          "驗算：把所有安全狀態建成圖並用廣度優先搜尋求最短路徑，得到最少 7 次，且可達的安全狀態只有 10 個，已全部搜完，因此 7 確實是最小值。"
+        ],
+        "zh-Hans": [
+          "先看清楚危险组合：狼和羊不能单独相处，羊和白菜也不能单独相处，但**狼和白菜放在一起是安全的**。",
+          "羊同时出现在两个危险组合里，所以第一趟一定要先载羊过河，否则留在原岸的狼和羊、或羊和白菜就会出事。",
+          "第 1 次：载羊过河。第 2 次：空船返回（原岸剩狼和白菜，安全）。",
+          "第 3 次：载狼过河。这时对岸有狼和羊，不能就这样离开。",
+          "第 4 次：**把羊载回原岸**——这是整题的关键一步，很多人卡在这里，因为直觉上不会想把已经送到的东西再带回来。",
+          "第 5 次：载白菜过河（对岸剩狼和白菜，安全；原岸只剩羊）。第 6 次：空船返回。",
+          "第 7 次：载羊过河，三样东西全部到齐，共 7 次。",
+          "验算：把所有安全状态建成图并用广度优先搜索求最短路径，得到最少 7 次，且可达的安全状态只有 10 个，已全部搜完，因此 7 确实是最小值。"
+        ],
+        "en": [
+          "First identify the dangerous pairs: wolf with goat is unsafe and goat with cabbage is unsafe, but wolf with cabbage is perfectly safe.",
+          "The goat appears in both dangerous pairs, so the first trip must carry the goat; otherwise the wolf and goat, or the goat and cabbage, would be left alone.",
+          "Crossing 1: take the goat over. Crossing 2: return empty, leaving wolf and cabbage together on the near bank, which is safe.",
+          "Crossing 3: take the wolf over. Now the far bank holds the wolf and the goat, so the farmer cannot simply leave.",
+          "Crossing 4: bring the goat back. This is the crucial move and where most people get stuck, because taking something back after delivering it feels like going backwards.",
+          "Crossing 5: take the cabbage over, leaving wolf and cabbage on the far bank and only the goat on the near bank. Crossing 6: return empty.",
+          "Crossing 7: take the goat over, and all three are across, for 7 crossings in total.",
+          "Check: building the graph of all safe states and running a breadth-first search gives a shortest path of 7 crossings, and only 10 safe states are reachable in total, all of which were explored, so 7 really is minimal."
+        ],
+        "ja": [
+          "まず危険な組み合わせを確かめます：オオカミとヤギ、ヤギとキャベツは一緒に残せませんが、**オオカミとキャベツは一緒でも安全**です。",
+          "ヤギは 2 つの危険な組み合わせの両方に現れるので、最初は必ずヤギを運びます。そうしないと元の岸に危険な組が残ります。",
+          "1 回目：ヤギを運ぶ。2 回目：空舟で戻る（元の岸にはオオカミとキャベツが残り安全）。",
+          "3 回目：オオカミを運ぶ。すると向こう岸にオオカミとヤギがそろうので、このままでは離れられません。",
+          "4 回目：**ヤギを連れ戻す**。ここが本問の要で、いったん運んだものを戻すのは直感に反するため、多くの人がつまずきます。",
+          "5 回目：キャベツを運ぶ（向こう岸はオオカミとキャベツで安全、元の岸はヤギだけ）。6 回目：空舟で戻る。",
+          "7 回目：ヤギを運んで 3 つすべてがそろい、合計 7 回です。",
+          "検算：安全な状態をすべて頂点としたグラフで幅優先探索を行うと最短 7 回となり、到達可能な安全状態は 10 個のみですべて探索済みなので、7 が最小値です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "7"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "狀態搜尋型渡河問題：需要察覺「把已送達的物品載回」這一步反直覺的回退",
+        "notes": "設計依據：核心轉折是第 4 次「把羊載回」——單調前進的貪心策略在此必然失敗，這正是本題想教的「有時要後退才能前進」。答案 7 已用廣度優先搜尋窮盡全部 10 個安全狀態驗證為最小值。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（渡河問題）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "邏輯",
+        "topicCode": "logic",
+        "subtopic": "渡河最少次數",
+        "subtopicCode": "river_crossing_min"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "logic_grade7_foundation_011",
+      "topic": "logic",
+      "subtopic": "bridge_crossing_time",
+      "difficulty": "foundation",
+      "levelStage": "grade7",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "四個人要在夜裡過一座橋，只有一支手電筒，而且過橋時必須有手電筒照明。橋一次最多只能承載兩個人。四人單獨過橋分別需要 1、2、5、10 分鐘；兩人同行時，所需時間以走得較慢的那個人為準。求四人全部過橋所需的最短總時間是幾分鐘。",
+        "zh-Hans": "四个人要在夜里过一座桥，只有一支手电筒，而且过桥时必须有手电筒照明。桥一次最多只能承载两个人。四人单独过桥分别需要 1、2、5、10 分钟；两人同行时，所需时间以走得较慢的那个人为准。求四人全部过桥所需的最短总时间是几分钟。",
+        "en": "Four people must cross a bridge at night with a single torch, and the torch must be carried whenever anyone crosses. At most two people may be on the bridge at a time. Alone they need 1, 2, 5 and 10 minutes; when two cross together they move at the slower person's pace. What is the shortest total time for all four to get across?",
+        "ja": "4 人が夜に橋を渡ります。懐中電灯は 1 本しかなく、渡るときは必ず懐中電灯が必要です。橋は一度に 2 人までしか渡れません。単独で渡ると 1、2、5、10 分かかり、2 人で渡るときは遅いほうの時間がかかります。4 人全員が渡り終えるまでの最短の合計時間は何分ですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 17 分鐘。",
+        "zh-Hans": "答案是 17 分钟。",
+        "en": "The answer is 17 minutes.",
+        "ja": "答えは 17 分です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "因為只有一支手電筒，每送兩個人過去之後，都必須有人拿著手電筒走回來，所以總時間是「過去」與「回來」的所有時間相加。",
+          "最直覺的策略是讓走得最快的人（1 分）每次都負責陪同與送手電筒回來。",
+          "算一下這個策略：1 和 2 過去（2 分），1 回來（1 分），1 和 10 過去（10 分），1 回來（1 分），1 和 5 過去（5 分），合計 2 + 1 + 10 + 1 + 5 = 19 分鐘。",
+          "問題出在 5 分和 10 分的人各自單獨佔用了一次過橋，兩個大數字被分開計算了兩次。",
+          "關鍵想法是：**讓最慢的兩個人一起過橋**，這樣 10 分的行程會把 5 分「吃掉」，兩個大數字只算一次。",
+          "為了做到這件事，要先把兩個快的人送過去當作接應：1 和 2 過去（2 分），然後由 1 拿手電筒回來（1 分）。",
+          "接著 5 和 10 一起過去（10 分），再由已經在對岸的 2 拿手電筒回來（2 分），最後 1 和 2 一起過去（2 分）。",
+          "合計 2 + 1 + 10 + 2 + 2 = 17 分鐘。驗算：把所有狀態用 Dijkstra 窮盡搜尋（共 26 個狀態），最短總時間確實是 17 分鐘，比直覺策略的 19 分鐘更快。"
+        ],
+        "zh-Hans": [
+          "因为只有一支手电筒，每送两个人过去之后，都必须有人拿着手电筒走回来，所以总时间是「过去」与「回来」的所有时间相加。",
+          "最直觉的策略是让走得最快的人（1 分）每次都负责陪同与送手电筒回来。",
+          "算一下这个策略：1 和 2 过去（2 分），1 回来（1 分），1 和 10 过去（10 分），1 回来（1 分），1 和 5 过去（5 分），合计 2 + 1 + 10 + 1 + 5 = 19 分钟。",
+          "问题出在 5 分和 10 分的人各自单独占用了一次过桥，两个大数字被分开计算了两次。",
+          "关键想法是：**让最慢的两个人一起过桥**，这样 10 分的行程会把 5 分「吃掉」，两个大数字只算一次。",
+          "为了做到这件事，要先把两个快的人送过去当作接应：1 和 2 过去（2 分），然后由 1 拿手电筒回来（1 分）。",
+          "接着 5 和 10 一起过去（10 分），再由已经在对岸的 2 拿手电筒回来（2 分），最后 1 和 2 一起过去（2 分）。",
+          "合计 2 + 1 + 10 + 2 + 2 = 17 分钟。验算：把所有状态用 Dijkstra 穷尽搜索（共 26 个状态），最短总时间确实是 17 分钟，比直觉策略的 19 分钟更快。"
+        ],
+        "en": [
+          "With only one torch, after every pair crosses somebody must walk back carrying it, so the total is the sum of all forward and return trips.",
+          "The most intuitive strategy is to let the fastest person (1 minute) escort everyone and ferry the torch back each time.",
+          "Working that out: 1 and 2 cross (2), 1 returns (1), 1 and 10 cross (10), 1 returns (1), 1 and 5 cross (5), for a total of 2 + 1 + 10 + 1 + 5 = 19 minutes.",
+          "The flaw is that the 5-minute and 10-minute walkers each occupy a crossing of their own, so both large numbers are paid separately.",
+          "The key idea is to send the two slowest across together, so that the 10-minute trip absorbs the 5-minute one and only one large number is ever paid.",
+          "To arrange that, first put the two fast walkers on the far side as a relay: 1 and 2 cross (2), then 1 brings the torch back (1).",
+          "Next 5 and 10 cross together (10), then 2 — already on the far bank — brings the torch back (2), and finally 1 and 2 cross together (2).",
+          "The total is 2 + 1 + 10 + 2 + 2 = 17 minutes. Check: an exhaustive Dijkstra search over all 26 states confirms 17 minutes as the true minimum, beating the intuitive 19."
+        ],
+        "ja": [
+          "懐中電灯が 1 本しかないため、2 人渡るたびに誰かが電灯を持って戻る必要があり、合計時間は往路と復路すべての和になります。",
+          "最も直感的な作戦は、最も速い人（1 分）が毎回付き添って電灯を持ち帰ることです。",
+          "計算すると：1 と 2 が渡る（2 分）、1 が戻る（1 分）、1 と 10 が渡る（10 分）、1 が戻る（1 分）、1 と 5 が渡る（5 分）で合計 2 + 1 + 10 + 1 + 5 = 19 分。",
+          "問題は、5 分の人と 10 分の人がそれぞれ別々に 1 回ずつ渡っており、大きい数を 2 回払っていることです。",
+          "鍵となる発想は、**最も遅い 2 人を一緒に渡らせる**ことです。そうすれば 10 分の中に 5 分が吸収され、大きい数は 1 回で済みます。",
+          "そのためにまず速い 2 人を向こう岸へ送って中継役にします：1 と 2 が渡り（2 分）、1 が電灯を持って戻ります（1 分）。",
+          "次に 5 と 10 が一緒に渡り（10 分）、向こう岸にいる 2 が電灯を持って戻り（2 分）、最後に 1 と 2 が渡ります（2 分）。",
+          "合計 2 + 1 + 10 + 2 + 2 = 17 分。検算：全 26 状態を Dijkstra で網羅探索すると最短は確かに 17 分で、直感的な 19 分より速いことが確認できます。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "17"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "過橋問題：貪心策略（最快者恆陪同）並非最優，需讓兩個最慢者同行以合併大數",
+        "notes": "設計依據：本題的價值全在於「直覺解 19 分不是最佳解」——先讓學生算出 19，再揭示 17，對比出貪心失效的原因。答案 17 已用 Dijkstra 窮盡 26 個狀態驗證為真正最小值（早期用記憶化遞迴會因『送過去再接回來』成環而失敗，已改用最短路徑演算法）。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（過橋問題）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "邏輯",
+        "topicCode": "logic",
+        "subtopic": "過橋最短時間",
+        "subtopicCode": "bridge_crossing_time"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "logic_grade7_foundation_012",
+      "topic": "logic",
+      "subtopic": "reverse_process_deduction",
+      "difficulty": "foundation",
+      "levelStage": "grade7",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "甲、乙、丙三人各有一些錢，玩了三輪遊戲。第一輪甲拿錢給乙和丙，使乙和丙的錢都變成原來的兩倍；第二輪乙拿錢給甲和丙，使甲和丙的錢都變成當時的兩倍；第三輪丙拿錢給甲和乙，使甲和乙的錢都變成當時的兩倍。三輪結束後，三人的錢都恰好是 8 元。請問甲最初有多少元？",
+        "zh-Hans": "甲、乙、丙三人各有一些钱，玩了三轮游戏。第一轮甲拿钱给乙和丙，使乙和丙的钱都变成原来的两倍；第二轮乙拿钱给甲和丙，使甲和丙的钱都变成当时的两倍；第三轮丙拿钱给甲和乙，使甲和乙的钱都变成当时的两倍。三轮结束后，三人的钱都恰好是 8 元。请问甲最初有多少元？",
+        "en": "Three people A, B and C each start with some money and play three rounds. In round one A gives money to B and C so that each of their amounts doubles; in round two B gives money to A and C so that each of their current amounts doubles; in round three C gives money to A and B so that each of their current amounts doubles. After the three rounds each person has exactly 8 dollars. How much did A start with?",
+        "ja": "甲・乙・丙の 3 人がそれぞれお金を持っていて、3 回の受け渡しを行います。1 回目は甲が乙と丙に渡して 2 人の所持金をそれぞれ 2 倍にし、2 回目は乙が甲と丙に渡して 2 人の所持金をそれぞれ 2 倍にし、3 回目は丙が甲と乙に渡して 2 人の所持金をそれぞれ 2 倍にします。3 回終わったあと 3 人の所持金はちょうど 8 円ずつでした。甲は最初に何円持っていましたか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 13 元。",
+        "zh-Hans": "答案是 13 元。",
+        "en": "The answer is 13 dollars.",
+        "ja": "答えは 13 円です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "從最初往後推會有三個未知數纏在一起，非常麻煩；已知的是**結束時的狀態**，所以應該從結果往回推。",
+          "先確認總額不變：錢只是在三人之間轉移，沒有增減，所以全程總額都是 8 + 8 + 8 = 24 元。",
+          "回推第三輪：丙讓甲和乙翻倍，所以這一輪之前甲有 8 ÷ 2 = 4 元、乙有 8 ÷ 2 = 4 元，丙則要補回他付出的部分，有 24 − 4 − 4 = 16 元。狀態是 (4, 4, 16)。",
+          "回推第二輪：乙讓甲和丙翻倍，所以之前甲有 4 ÷ 2 = 2 元、丙有 16 ÷ 2 = 8 元，乙有 24 − 2 − 8 = 14 元。狀態是 (2, 14, 8)。",
+          "回推第一輪：甲讓乙和丙翻倍，所以最初乙有 14 ÷ 2 = 7 元、丙有 8 ÷ 2 = 4 元，甲有 24 − 7 − 4 = 13 元。",
+          "所以最初三人分別有 13、7、4 元，甲最初有 13 元。",
+          "正向驗算：(13, 7, 4) → 甲付出 7 + 4 = 11 元後為 (2, 14, 8) → 乙付出 2 + 8 = 10 元後為 (4, 4, 16) → 丙付出 4 + 4 = 8 元後為 (8, 8, 8) ✓。",
+          "附註：每一步「翻倍」的逆運算是「除以 2」，而付出者的金額則用總額不變這個性質補回來，這兩件事配合起來才能一路回推。"
+        ],
+        "zh-Hans": [
+          "从最初往后推会有三个未知数缠在一起，非常麻烦；已知的是**结束时的状态**，所以应该从结果往回推。",
+          "先确认总额不变：钱只是在三人之间转移，没有增减，所以全程总额都是 8 + 8 + 8 = 24 元。",
+          "回推第三轮：丙让甲和乙翻倍，所以这一轮之前甲有 8 ÷ 2 = 4 元、乙有 8 ÷ 2 = 4 元，丙则要补回他付出的部分，有 24 − 4 − 4 = 16 元。状态是 (4, 4, 16)。",
+          "回推第二轮：乙让甲和丙翻倍，所以之前甲有 4 ÷ 2 = 2 元、丙有 16 ÷ 2 = 8 元，乙有 24 − 2 − 8 = 14 元。状态是 (2, 14, 8)。",
+          "回推第一轮：甲让乙和丙翻倍，所以最初乙有 14 ÷ 2 = 7 元、丙有 8 ÷ 2 = 4 元，甲有 24 − 7 − 4 = 13 元。",
+          "所以最初三人分别有 13、7、4 元，甲最初有 13 元。",
+          "正向验算：(13, 7, 4) → 甲付出 7 + 4 = 11 元后为 (2, 14, 8) → 乙付出 2 + 8 = 10 元后为 (4, 4, 16) → 丙付出 4 + 4 = 8 元后为 (8, 8, 8) ✓。",
+          "附注：每一步「翻倍」的逆运算是「除以 2」，而付出者的金额则用总额不变这个性质补回来，这两件事配合起来才能一路回推。"
+        ],
+        "en": [
+          "Working forwards tangles three unknowns together, which is painful; what is actually known is the final state, so work backwards from the end.",
+          "First note the total never changes: money only moves between the three, so throughout it is 8 + 8 + 8 = 24 dollars.",
+          "Undo round three: C doubled A and B, so before it A had 8 ÷ 2 = 4 and B had 8 ÷ 2 = 4, while C gets back what was paid out and had 24 − 4 − 4 = 16. The state was (4, 4, 16).",
+          "Undo round two: B doubled A and C, so before it A had 4 ÷ 2 = 2 and C had 16 ÷ 2 = 8, while B had 24 − 2 − 8 = 14. The state was (2, 14, 8).",
+          "Undo round one: A doubled B and C, so at the start B had 14 ÷ 2 = 7 and C had 8 ÷ 2 = 4, while A had 24 − 7 − 4 = 13.",
+          "So the starting amounts were 13, 7 and 4 dollars, and A began with 13.",
+          "Forward check: (13, 7, 4) → A pays 7 + 4 = 11 giving (2, 14, 8) → B pays 2 + 8 = 10 giving (4, 4, 16) → C pays 4 + 4 = 8 giving (8, 8, 8).",
+          "Remark: undoing a doubling is halving, while the payer's amount is recovered from the fact that the total is constant; both facts together make the backward pass possible."
+        ],
+        "ja": [
+          "最初から順に追うと 3 つの未知数が絡み合って厄介です。分かっているのは**最後の状態**なので、結果から逆にたどります。",
+          "まず合計が変わらないことを確認します。お金は 3 人の間を移動するだけなので、常に 8 + 8 + 8 = 24 円です。",
+          "3 回目を逆算：丙が甲と乙を 2 倍にしたので、直前は甲が 8 ÷ 2 = 4 円、乙が 8 ÷ 2 = 4 円、丙は払った分が戻り 24 − 4 − 4 = 16 円。状態は (4, 4, 16)。",
+          "2 回目を逆算：乙が甲と丙を 2 倍にしたので、直前は甲が 4 ÷ 2 = 2 円、丙が 16 ÷ 2 = 8 円、乙は 24 − 2 − 8 = 14 円。状態は (2, 14, 8)。",
+          "1 回目を逆算：甲が乙と丙を 2 倍にしたので、最初は乙が 14 ÷ 2 = 7 円、丙が 8 ÷ 2 = 4 円、甲は 24 − 7 − 4 = 13 円。",
+          "よって最初の所持金は 13、7、4 円で、甲は 13 円です。",
+          "順方向の検算：(13, 7, 4) → 甲が 7 + 4 = 11 円払って (2, 14, 8) → 乙が 2 + 8 = 10 円払って (4, 4, 16) → 丙が 4 + 4 = 8 円払って (8, 8, 8) ✓。",
+          "補足：「2 倍」の逆は「2 で割る」ことであり、払った人の額は合計不変から復元します。この 2 つを組み合わせて初めて逆算できます。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "13"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "多輪轉移的逆推還原：以「總額不變」為不變量，逐輪把翻倍逆轉回去",
+        "notes": "設計依據：正向設三個未知數會得到糾纏的方程組，逆推則每一步都是除以 2 加上總額補差，難度天差地別——這個「該從哪一端下手」的判斷就是本題的核心。答案 13 已用窮舉全部初始分配獨立求解，並附正向逐輪驗算。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（逆推還原）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "邏輯",
+        "topicCode": "logic",
+        "subtopic": "逆推還原",
+        "subtopicCode": "reverse_process_deduction"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "logic_grade7_foundation_013",
+      "topic": "logic",
+      "subtopic": "magic_square_center",
+      "difficulty": "foundation",
+      "levelStage": "grade7",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "把 1 到 9 這九個數字分別填入 3×3 方格中，每格一個且每個數字恰用一次，使得每一行、每一列以及兩條對角線上的三個數之和都相等。求正中央那一格填的數字。",
+        "zh-Hans": "把 1 到 9 这九个数字分别填入 3×3 方格中，每格一个且每个数字恰用一次，使得每一行、每一列以及两条对角线上的三个数之和都相等。求正中央那一格填的数字。",
+        "en": "The digits 1 to 9 are placed one per cell in a 3×3 grid, each used exactly once, so that every row, every column and both diagonals have the same sum. Find the number in the centre cell.",
+        "ja": "1 から 9 までの数字を 3×3 のマスに 1 つずつ、それぞれちょうど 1 回使って入れ、どの行・どの列・2 本の対角線の 3 数の和も等しくなるようにします。中央のマスに入る数字を求めなさい。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 5。",
+        "zh-Hans": "答案是 5。",
+        "en": "The answer is 5.",
+        "ja": "答えは 5 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "先求出每一條線的共同和。九個數字的總和是 1 + 2 + ⋯ + 9 = 45。",
+          "三個橫列剛好把九格分完、互不重疊，所以三列的和加起來就是 45，每列的和是 45 ÷ 3 = 15。",
+          "接下來的關鍵是：**只挑出通過中央那一格的四條線**——中間的橫列、中間的直行，以及兩條對角線。",
+          "這四條線的數字和加起來是 4 × 15 = 60。",
+          "現在數一數這四條線總共蓋到哪些格子：中央格被四條線各蓋一次，共四次；其餘八格各恰好被蓋一次。",
+          "所以 60 = (九格的總和) + (中央格多算的三次) = 45 + 3 × 中央格。",
+          "解得 3 × 中央格 = 15，中央格 = 5。",
+          "驗算：程式窮舉 1 到 9 的全部排列，找到 8 個合法幻方（彼此為旋轉或鏡射），中央格全部都是 5，沒有例外。"
+        ],
+        "zh-Hans": [
+          "先求出每一条线的共同和。九个数字的总和是 1 + 2 + ⋯ + 9 = 45。",
+          "三个横列刚好把九格分完、互不重叠，所以三列的和加起来就是 45，每列的和是 45 ÷ 3 = 15。",
+          "接下来的关键是：**只挑出通过中央那一格的四条线**——中间的横列、中间的直行，以及两条对角线。",
+          "这四条线的数字和加起来是 4 × 15 = 60。",
+          "现在数一数这四条线总共盖到哪些格子：中央格被四条线各盖一次，共四次；其余八格各恰好被盖一次。",
+          "所以 60 = (九格的总和) + (中央格多算的三次) = 45 + 3 × 中央格。",
+          "解得 3 × 中央格 = 15，中央格 = 5。",
+          "验算：程序穷举 1 到 9 的全部排列，找到 8 个合法幻方（彼此为旋转或镜射），中央格全部都是 5，没有例外。"
+        ],
+        "en": [
+          "First find the common line sum. The nine digits total 1 + 2 + ⋯ + 9 = 45.",
+          "The three rows partition the nine cells without overlap, so their sums add to 45 and each row must sum to 45 ÷ 3 = 15.",
+          "The key step is to look only at the four lines through the centre cell: the middle row, the middle column and the two diagonals.",
+          "Those four lines have sums adding to 4 × 15 = 60.",
+          "Now count which cells they cover: the centre is covered once by each of the four lines, so four times, while each of the other eight cells is covered exactly once.",
+          "Hence 60 = (sum of all nine cells) + (three extra copies of the centre) = 45 + 3 × centre.",
+          "Solving gives 3 × centre = 15, so the centre is 5.",
+          "Check: enumerating all permutations of 1 to 9 by computer finds 8 valid magic squares (rotations and reflections of one another), and every single one has 5 in the centre."
+        ],
+        "ja": [
+          "まず各線に共通する和を求めます。9 個の数字の合計は 1 + 2 + ⋯ + 9 = 45 です。",
+          "3 つの行は 9 マスを重なりなく分けるので、その和の合計は 45 となり、1 行の和は 45 ÷ 3 = 15 です。",
+          "次が要点です：**中央のマスを通る 4 本の線だけ**、すなわち中央の行・中央の列・2 本の対角線に注目します。",
+          "この 4 本の線の和の合計は 4 × 15 = 60 です。",
+          "この 4 本がどのマスを覆うか数えます。中央のマスは 4 本すべてに含まれるので 4 回、他の 8 マスはちょうど 1 回ずつです。",
+          "したがって 60 = (9 マスの合計) + (中央を余分に数えた 3 回分) = 45 + 3 × 中央。",
+          "これを解いて 3 × 中央 = 15、中央 = 5 となります。",
+          "検算：1 から 9 の全順列を計算機で調べると有効な魔方陣は 8 個（互いに回転・鏡映）見つかり、いずれも中央は 5 でした。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "5"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "三階幻方中心格的重複計數論證：以通過中心的四條線加總，中心被多算三次",
+        "notes": "設計依據：轉折在於「只選通過中心的四條線」這個非顯然的取法，並用重複計數把中心解出來；不知道這招的人只能硬湊幻方。詳解刻意不預先給出標準幻方，避免把答案當成背下來的常識。答案 5 已用 9! 全排列窮舉出 8 個合法幻方驗證中心恆為 5。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（幻方中心格）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "邏輯",
+        "topicCode": "logic",
+        "subtopic": "幻方中心格",
+        "subtopicCode": "magic_square_center"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "logic_grade7_foundation_014",
+      "topic": "logic",
+      "subtopic": "binary_search_guess",
+      "difficulty": "foundation",
+      "levelStage": "grade7",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "小明心裡想著一個 1 到 100 之間的整數。小華每次可以猜一個數，小明會回答「猜中了」、「太大了」或「太小了」。小華最少要猜幾次，才能保證一定猜中？",
+        "zh-Hans": "小明心里想着一个 1 到 100 之间的整数。小华每次可以猜一个数，小明会回答「猜中了」、「太大了」或「太小了」。小华最少要猜几次，才能保证一定猜中？",
+        "en": "One player thinks of an integer from 1 to 100. The other player guesses a number each turn and is told \"correct\", \"too high\" or \"too low\". What is the fewest number of guesses that guarantees finding the number?",
+        "ja": "ある人が 1 から 100 までの整数を 1 つ思い浮かべます。もう 1 人は毎回 1 つの数を言い、「正解」「大きすぎる」「小さすぎる」のいずれかを教えてもらいます。必ず当てるには最少で何回の推測が必要ですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 7 次。",
+        "zh-Hans": "答案是 7 次。",
+        "en": "The answer is 7.",
+        "ja": "答えは 7 回です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "「保證猜中」表示要應付最壞情況，所以要同時做兩件事：證明某個次數不夠用，再給出一個真的做得到的猜法。",
+          "先看次數的下界。每猜一次只會得到「太大」或「太小」兩種有用的回覆（猜中就結束了），所以 k 次猜測最多只能區分出 2 的 k 次方種不同結果。",
+          "6 次最多區分 2⁶ = 64 種情形，少於 100，因此 6 次不可能保證找出正確答案，至少需要 7 次。",
+          "再看上界，也就是提出一個保證 7 次成功的方法：每次都猜當前可能範圍的中間值，把範圍對半砍。",
+          "一開始有 100 個可能；猜一次後剩下至多 50 個，接著是 25、13、7、4、2、1。",
+          "數一數對半砍的次數：100 → 50 → 25 → 13 → 7 → 4 → 2 → 1，共 7 步就縮到只剩一個數。",
+          "下界說「至少 7 次」，上界說「7 次一定夠」，兩邊夾起來，答案就是 7 次。",
+          "驗算：程式對 1 到 100 的每一個目標數模擬二分搜尋，最壞情況恰好是 7 次；同時 2⁶ = 64 < 100 ≤ 128 = 2⁷ 也印證了這個結果。"
+        ],
+        "zh-Hans": [
+          "「保证猜中」表示要应付最坏情况，所以要同时做两件事：证明某个次数不够用，再给出一个真的做得到的猜法。",
+          "先看次数的下界。每猜一次只会得到「太大」或「太小」两种有用的回复（猜中就结束了），所以 k 次猜测最多只能区分出 2 的 k 次方种不同结果。",
+          "6 次最多区分 2⁶ = 64 种情形，少于 100，因此 6 次不可能保证找出正确答案，至少需要 7 次。",
+          "再看上界，也就是提出一个保证 7 次成功的方法：每次都猜当前可能范围的中间值，把范围对半砍。",
+          "一开始有 100 个可能；猜一次后剩下至多 50 个，接着是 25、13、7、4、2、1。",
+          "数一数对半砍的次数：100 → 50 → 25 → 13 → 7 → 4 → 2 → 1，共 7 步就缩到只剩一个数。",
+          "下界说「至少 7 次」，上界说「7 次一定够」，两边夹起来，答案就是 7 次。",
+          "验算：程序对 1 到 100 的每一个目标数模拟二分搜索，最坏情况恰好是 7 次；同时 2⁶ = 64 < 100 ≤ 128 = 2⁷ 也印证了这个结果。"
+        ],
+        "en": [
+          "\"Guaranteed\" means coping with the worst case, so two things are needed: a proof that some number of guesses is not enough, and an actual method that always works.",
+          "Start with the lower bound. Each guess yields only two useful replies, too high or too low (a correct guess ends the game), so k guesses can distinguish at most 2 to the power k outcomes.",
+          "Six guesses distinguish at most 2⁶ = 64 cases, fewer than 100, so six cannot be enough and at least seven are needed.",
+          "Now the upper bound: a method that always succeeds in seven. Always guess the middle of the range still possible, halving it each time.",
+          "There are 100 possibilities at the start; after one guess at most 50 remain, then 25, 13, 7, 4, 2 and 1.",
+          "Counting the halvings: 100 → 50 → 25 → 13 → 7 → 4 → 2 → 1 takes 7 steps to narrow down to a single number.",
+          "The lower bound says at least seven and the upper bound says seven always suffices, so the answer is exactly 7.",
+          "Check: simulating binary search against every target from 1 to 100 gives a worst case of exactly 7 guesses, and 2⁶ = 64 < 100 ≤ 128 = 2⁷ confirms the same bound."
+        ],
+        "ja": [
+          "「必ず当てる」とは最悪の場合にも対応するということなので、2 つのことが必要です：ある回数では足りないことの証明と、実際に成功する方法の提示です。",
+          "まず下界です。1 回の推測で得られる有用な返答は「大きすぎる」「小さすぎる」の 2 通りだけ（正解なら終了）なので、k 回では最大 2 の k 乗通りしか区別できません。",
+          "6 回では最大 2⁶ = 64 通りで 100 に足りず、6 回で必ず当てることは不可能です。よって少なくとも 7 回必要です。",
+          "次に上界、つまり 7 回で必ず成功する方法を示します：毎回、残っている範囲の中央を言って範囲を半分に切ります。",
+          "最初の候補は 100 個。1 回で最大 50 個に減り、続いて 25、13、7、4、2、1 となります。",
+          "半分に切った回数を数えると 100 → 50 → 25 → 13 → 7 → 4 → 2 → 1 で、7 手で 1 つに絞れます。",
+          "下界が「7 回以上」、上界が「7 回で十分」なので、答えはちょうど 7 回です。",
+          "検算：1 から 100 のすべての目標について二分探索を模擬すると最悪ちょうど 7 回となり、2⁶ = 64 < 100 ≤ 128 = 2⁷ もこれを裏づけます。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "7"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "最壞情況下的最少詢問次數：以資訊量給下界、以二分策略給上界，兩邊夾出答案",
+        "notes": "設計依據：本題要求同時完成下界與上界兩半——只給二分搜尋策略無法說明 6 次為何不夠，只算 2⁶ < 100 也不算證明可行。這種「夾擠」結構是最少次數型問題的標準要求。答案 7 已用二分搜尋對 1 到 100 全部目標模擬得最壞值 7，並以 2⁶ < 100 ≤ 2⁷ 交叉驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（最少猜測次數）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "邏輯",
+        "topicCode": "logic",
+        "subtopic": "最少猜測次數",
+        "subtopicCode": "binary_search_guess"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "logic_grade7_foundation_015",
+      "topic": "logic",
+      "subtopic": "domino_coloring_bound",
+      "difficulty": "foundation",
+      "levelStage": "grade7",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一個 8×8 的西洋棋盤被拿掉了左下角與右上角這兩格，剩下 62 格。現在要用 1×2 的骨牌鋪在棋盤上，每塊骨牌恰好蓋住相鄰的兩格，骨牌之間不能重疊也不能超出棋盤。求最多能鋪下幾塊骨牌。",
+        "zh-Hans": "一个 8×8 的国际象棋盘被拿掉了左下角与右上角这两格，剩下 62 格。现在要用 1×2 的骨牌铺在棋盘上，每块骨牌恰好盖住相邻的两格，骨牌之间不能重叠也不能超出棋盘。求最多能铺下几块骨牌。",
+        "en": "An 8×8 chessboard has the bottom-left and top-right squares removed, leaving 62 squares. Dominoes of size 1×2 are placed on the board, each covering exactly two adjacent squares, with no overlaps and nothing hanging off the board. What is the maximum number of dominoes that can be placed?",
+        "ja": "8×8 のチェス盤から左下と右上の 2 マスを取り除き、62 マスが残っています。1×2 のドミノを、隣り合う 2 マスをちょうど覆うように、重ならず盤からはみ出さないように置きます。最大で何枚のドミノを置けますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 30 塊。",
+        "zh-Hans": "答案是 30 块。",
+        "en": "The answer is 30.",
+        "ja": "答えは 30 枚です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "62 格除以 2 等於 31，所以看起來好像可以鋪 31 塊剛好鋪滿。但這個答案是錯的，需要更細的分析。",
+          "把棋盤照西洋棋的方式黑白相間染色，兩種顏色各 32 格。",
+          "關鍵觀察是：**每塊 1×2 骨牌一定蓋住相鄰的兩格，而相鄰兩格必為一黑一白**，所以每塊骨牌恰好用掉一個黑格和一個白格。",
+          "接著看被拿掉的兩格。左下角和右上角在棋盤上位於同一條對角線的兩端，它們是**同一種顏色**。",
+          "所以拿掉之後，剩下的 62 格是 30 格一色、32 格另一色，兩色不再一樣多。",
+          "由於骨牌必須成對消耗兩色，能鋪的塊數不會超過較少的那一色，也就是最多 30 塊。",
+          "30 塊確實鋪得出來：鋪滿 30 塊後會剩下 2 格未覆蓋，而且這 2 格必然同色，因此不可能再放進第 31 塊。",
+          "驗算：把棋盤化成二分圖並求最大匹配，實際得到的最大鋪法就是 30 塊、剩 2 格未覆蓋，與染色論證給出的上界完全一致。"
+        ],
+        "zh-Hans": [
+          "62 格除以 2 等于 31，所以看起来好像可以铺 31 块刚好铺满。但这个答案是错的，需要更细的分析。",
+          "把棋盘照国际象棋的方式黑白相间染色，两种颜色各 32 格。",
+          "关键观察是：**每块 1×2 骨牌一定盖住相邻的两格，而相邻两格必为一黑一白**，所以每块骨牌恰好用掉一个黑格和一个白格。",
+          "接着看被拿掉的两格。左下角和右上角在棋盘上位于同一条对角线的两端，它们是**同一种颜色**。",
+          "所以拿掉之后，剩下的 62 格是 30 格一色、32 格另一色，两色不再一样多。",
+          "由于骨牌必须成对消耗两色，能铺的块数不会超过较少的那一色，也就是最多 30 块。",
+          "30 块确实铺得出来：铺满 30 块后会剩下 2 格未覆盖，而且这 2 格必然同色，因此不可能再放进第 31 块。",
+          "验算：把棋盘化成二分图并求最大匹配，实际得到的最大铺法就是 30 块、剩 2 格未覆盖，与染色论证给出的上界完全一致。"
+        ],
+        "en": [
+          "Dividing 62 by 2 gives 31, so it looks as though 31 dominoes might tile the board exactly. That answer is wrong, and a finer argument is needed.",
+          "Colour the board black and white in the usual chessboard pattern, giving 32 squares of each colour.",
+          "The key observation is that a 1×2 domino always covers two adjacent squares, and adjacent squares always have opposite colours, so every domino uses exactly one black and one white square.",
+          "Now look at the two removed squares. The bottom-left and top-right corners lie at opposite ends of the same diagonal, so they share the same colour.",
+          "After removing them, the remaining 62 squares split as 30 of one colour and 32 of the other, no longer balanced.",
+          "Since each domino consumes one square of each colour, the number of dominoes cannot exceed the smaller colour count, so at most 30.",
+          "And 30 is achievable: after placing 30 dominoes exactly 2 squares remain uncovered, and those two necessarily share a colour, so no 31st domino can ever fit.",
+          "Check: modelling the board as a bipartite graph and computing a maximum matching gives exactly 30 dominoes with 2 squares left over, matching the bound from the colouring argument."
+        ],
+        "ja": [
+          "62 を 2 で割ると 31 なので、31 枚でちょうど敷き詰められそうに見えます。しかしこれは誤りで、もう一歩踏み込んだ考察が必要です。",
+          "盤をチェス盤のように白黒交互に塗ると、各色 32 マスずつになります。",
+          "要点は、**1×2 のドミノは必ず隣り合う 2 マスを覆い、隣り合うマスは必ず異なる色**であることです。つまり 1 枚のドミノは黒 1 マスと白 1 マスをちょうど 1 つずつ使います。",
+          "次に取り除かれた 2 マスを見ます。左下と右上は同じ対角線の両端にあり、**同じ色**です。",
+          "したがって取り除いた後、残る 62 マスは一方の色が 30 マス、もう一方が 32 マスとなり、色のバランスが崩れます。",
+          "ドミノは両色を 1 つずつ消費するので、置ける枚数は少ないほうの色数を超えられず、最大 30 枚です。",
+          "30 枚は実際に達成できます。30 枚置くと 2 マスが残りますが、その 2 マスは必ず同色なので 31 枚目は決して入りません。",
+          "検算：盤を二部グラフとみて最大マッチングを求めると、実際に最大 30 枚・残り 2 マスとなり、彩色による上界と完全に一致します。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "30"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "骨牌覆蓋的染色上界：對角兩格同色使兩色數量失衡，上界由較少的一色決定",
+        "notes": "設計依據：陷阱在於 62 ÷ 2 = 31 這個看似顯然的答案——真正的上界由染色後失衡的 30 決定，這正是本題想建立的「面積夠不等於鋪得下」。詳解同時給出上界（染色）與可達性（實際鋪法），兩邊都交代。答案 30 已用二分圖最大匹配實算驗證上界可達。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（骨牌染色上界）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "邏輯",
+        "topicCode": "logic",
+        "subtopic": "骨牌染色上界",
+        "subtopicCode": "domino_coloring_bound"
+      },
+      "reviewStatus": "ok"
     }
   ]
 }
