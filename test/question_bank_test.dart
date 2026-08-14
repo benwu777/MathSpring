@@ -279,12 +279,14 @@ void main() {
       upperGeometryPacks.map((pack) => pack.levelStage).toSet(),
       {'grade7', 'grade8', 'grade9', 'grade10', 'grade11', 'grade12'},
     );
+    // grade7-12 各 pack 的題數只設下限：擴充題庫時會往上加題，
+    // 這裡守的是「不得低於當初上架的基準量」，不是固定值。
     expect(
-      upperAlgebraPacks.every((pack) => pack.questionCount == 9),
+      upperAlgebraPacks.every((pack) => pack.questionCount >= 9),
       isTrue,
     );
     expect(
-      upperGeometryPacks.every((pack) => pack.questionCount == 10),
+      upperGeometryPacks.every((pack) => pack.questionCount >= 10),
       isTrue,
     );
     expect(
@@ -595,20 +597,21 @@ void main() {
           if (!isUpperOlympiadPack) {
             return pack.questions.length >= 10;
           }
+          // 同上：擴充題庫只會讓題數變多，各主題守住上架時的基準下限即可。
           if (pack.questions.first.topic == 'logic') {
-            return pack.questions.length == 9;
+            return pack.questions.length >= 9;
           }
           if (pack.questions.first.topic == 'combinatorics') {
-            return pack.questions.length == 9;
+            return pack.questions.length >= 9;
           }
           if (pack.questions.first.topic == 'geometry') {
-            return pack.questions.length == 10;
+            return pack.questions.length >= 10;
           }
           if (pack.questions.first.topic == 'number_theory') {
-            return pack.questions.length == 10;
+            return pack.questions.length >= 10;
           }
           if (pack.questions.first.topic == 'algebra') {
-            return pack.questions.length == 9;
+            return pack.questions.length >= 9;
           }
           return pack.questions.length == 3;
         },
@@ -2120,5 +2123,45 @@ void main() {
     expect(question.olympiadTaxonomy?.topic, '代數');
     expect(question.olympiadTaxonomy?.topicCode, 'algebra');
     expect(question.olympiadTaxonomy?.subtopicCode, 'linear_equation');
+  });
+
+  test('grade 4 reviewed figures match their mathematical intent', () async {
+    final file = File('assets/questions/geometry/grade4_foundation.geometry.v1.json');
+    final pack = QuestionBank.fromJson(
+      jsonDecode(await file.readAsString()) as Map<String, dynamic>,
+    );
+    Question byId(String id) =>
+        pack.questions.firstWhere((question) => question.id == id);
+
+    expect(byId('geometry_grade4_foundation_001').figure.kind, 'none');
+    expect(byId('geometry_grade4_foundation_002').figure.params['filledCells'],
+        equals([
+          for (final row in [0, 1])
+            for (final col in [0, 1, 2, 3]) [row, col],
+          for (final row in [2, 3, 4])
+            for (final col in [0, 1, 2, 3, 4, 5]) [row, col],
+        ]));
+    expect(byId('geometry_grade4_foundation_003').figure.kind, 'geometry_scene');
+    expect(byId('geometry_grade4_foundation_005').figure.kind, 'geometry_scene');
+    expect(
+      byId('geometry_grade4_foundation_005').figure.params['segments'],
+      contains(predicate((dynamic segment) =>
+          segment['from'] == '上中' &&
+          segment['to'] == '下中' &&
+          segment['style'] == 'construction')),
+    );
+    final symmetryPoints =
+        byId('geometry_grade4_foundation_005').figure.params['points'] as List;
+    expect(
+      symmetryPoints,
+      contains(predicate((dynamic point) =>
+          point['name'] == '上中' && point['x'] == 3 && point['y'] == 6)),
+    );
+    expect(
+      symmetryPoints,
+      contains(predicate((dynamic point) =>
+          point['name'] == '下中' && point['x'] == 3 && point['y'] == 0)),
+    );
+    expect(byId('geometry_grade4_foundation_008').figure.params['minX'], -6);
   });
 }
