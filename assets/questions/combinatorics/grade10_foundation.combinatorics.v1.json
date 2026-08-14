@@ -816,6 +816,546 @@
         "subtopic": "多項係數比值",
         "subtopicCode": "multinomial_ratio"
       }
+    },
+    {
+      "id": "combinatorics_grade10_foundation_010",
+      "topic": "combinatorics",
+      "subtopic": "string_with_fixed_letter_count",
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "用字母 A、B、C 組成長度為 5 的字串（同一個字母可以重複使用）。若要求字母 A 恰好出現 2 次，這樣的字串共有多少個？",
+        "zh-Hans": "用字母 A、B、C 组成长度为 5 的字符串（同一个字母可以重复使用）。若要求字母 A 恰好出现 2 次，这样的字符串共有多少个？",
+        "en": "Strings of length 5 are formed from the letters A, B and C, with repetition allowed. How many such strings contain the letter A exactly twice?",
+        "ja": "文字 A、B、C を使って長さ 5 の文字列をつくります（同じ文字を繰り返し使えます）。文字 A がちょうど 2 回現れる文字列は何個ありますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 80 個。",
+        "zh-Hans": "答案是 80 个。",
+        "en": "The answer is 80.",
+        "ja": "答えは 80 個です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "把「排出一個合格字串」拆成兩個互相獨立的步驟，再把方法數相乘。",
+          "第一步：決定 A 出現在哪兩個位置。從 5 個位置中選 2 個，方法數是 C(5, 2) = (5 × 4) ÷ (2 × 1) = 10 種。",
+          "第二步：剩下的 3 個位置要填什麼？關鍵是**它們不可以是 A**（否則 A 就超過 2 次了），所以每個位置只能填 B 或 C。",
+          "每個位置有 2 種選擇，三個位置互相獨立，所以有 2³ = 8 種填法。",
+          "兩步相乘：10 × 8 = 80 個。",
+          "常見錯誤有兩種：一是忘記限制剩下的位置不能是 A，算成 10 × 3³ = 270；二是漏掉第二步，只答 C(5, 2) = 10。",
+          "另一種算法可以互相驗證：把字串看成 A、A 與另外三個字母的排列，也會得到相同結果。",
+          "驗算：程式窮舉全部 3⁵ = 243 個長度 5 的字串，逐一數 A 的出現次數，恰好出現 2 次的有 80 個 ✓。"
+        ],
+        "zh-Hans": [
+          "把「排出一个合格字符串」拆成两个互相独立的步骤，再把方法数相乘。",
+          "第一步：决定 A 出现在哪两个位置。从 5 个位置中选 2 个，方法数是 C(5, 2) = (5 × 4) ÷ (2 × 1) = 10 种。",
+          "第二步：剩下的 3 个位置要填什么？关键是**它们不可以是 A**（否则 A 就超过 2 次了），所以每个位置只能填 B 或 C。",
+          "每个位置有 2 种选择，三个位置互相独立，所以有 2³ = 8 种填法。",
+          "两步相乘：10 × 8 = 80 个。",
+          "常见错误有两种：一是忘记限制剩下的位置不能是 A，算成 10 × 3³ = 270；二是漏掉第二步，只答 C(5, 2) = 10。",
+          "另一种算法可以互相验证：把字符串看成 A、A 与另外三个字母的排列，也会得到相同结果。",
+          "验算：程序穷举全部 3⁵ = 243 个长度 5 的字符串，逐一数 A 的出现次数，恰好出现 2 次的有 80 个 ✓。"
+        ],
+        "en": [
+          "Split the construction of a valid string into two independent steps and multiply the counts.",
+          "Step one: choose which two positions hold the letter A. Selecting 2 of the 5 positions gives C(5, 2) = (5 × 4) ÷ (2 × 1) = 10 ways.",
+          "Step two: what goes in the remaining 3 positions? The crucial point is that they must not be A, or A would appear more than twice, so each must be B or C.",
+          "Each of those positions has 2 choices and they are independent, giving 2³ = 8 ways.",
+          "Multiplying the steps: 10 × 8 = 80 strings.",
+          "Two common errors: forgetting that the remaining positions cannot be A, giving 10 × 3³ = 270; and omitting step two entirely, answering just C(5, 2) = 10.",
+          "An alternative route treats the string as an arrangement of A, A and three other letters, giving the same result as a cross-check.",
+          "Check: enumerating all 3⁵ = 243 strings of length 5 and counting occurrences of A finds exactly 80 with A appearing twice."
+        ],
+        "ja": [
+          "「条件を満たす文字列をつくる」作業を独立な 2 段階に分け、それぞれの場合の数を掛けます。",
+          "第 1 段階：A が入る 2 か所を決めます。5 か所から 2 か所を選ぶので C(5, 2) = (5 × 4) ÷ (2 × 1) = 10 通り。",
+          "第 2 段階：残りの 3 か所には何を入れるか。要点は**そこに A を入れてはいけない**ことです（A が 2 回を超えてしまうため）。したがって各位置は B か C のみです。",
+          "各位置に 2 通り、3 か所は独立なので 2³ = 8 通り。",
+          "掛け合わせて 10 × 8 = 80 個です。",
+          "よくある誤りは 2 つ：残りの位置に A を許して 10 × 3³ = 270 とすること、第 2 段階を忘れて C(5, 2) = 10 と答えることです。",
+          "別解として、文字列を A、A と他の 3 文字の並べ方とみても同じ結果が得られ、相互検証になります。",
+          "検算：長さ 5 の文字列 3⁵ = 243 個をすべて調べ A の出現回数を数えると、ちょうど 2 回のものが 80 個あります ✓。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "80"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "分步計數：先選定指定字母的位置，再限制其餘位置不得使用該字母",
+        "notes": "設計依據：第二步的限制（其餘位置不得為 A）是本題唯一但關鍵的轉折——忽略它會得到 270，漏掉整步會得到 10。答案 80 已用 243 個字串的全窮舉逐一計數驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（指定字母次數）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "組合",
+        "topicCode": "combinatorics",
+        "subtopic": "指定字母次數",
+        "subtopicCode": "string_with_fixed_letter_count"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "combinatorics_grade10_foundation_011",
+      "topic": "combinatorics",
+      "subtopic": "surjection_count",
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "設集合 A 有 4 個相異元素，集合 B 有 3 個相異元素。求從 A 到 B 的函數中，使得 B 的每一個元素都至少被對應到一次的函數共有多少個。",
+        "zh-Hans": "设集合 A 有 4 个相异元素，集合 B 有 3 个相异元素。求从 A 到 B 的函数中，使得 B 的每一个元素都至少被对应到一次的函数共有多少个。",
+        "en": "Set A has 4 distinct elements and set B has 3 distinct elements. How many functions from A to B are such that every element of B is hit at least once?",
+        "ja": "集合 A は相異なる 4 個の要素、集合 B は相異なる 3 個の要素をもちます。A から B への関数のうち、B のどの要素も少なくとも 1 回は対応づけられるものは何個ありますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 36 個。",
+        "zh-Hans": "答案是 36 个。",
+        "en": "The answer is 36.",
+        "ja": "答えは 36 個です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "「每一個元素都至少被對應到一次」是個「至少」型條件，直接數會很麻煩，改用**補集加容斥**。",
+          "先算沒有任何限制的函數總數：A 的 4 個元素各自可以對應到 B 的 3 個元素之一，所以有 3⁴ = 81 個函數。",
+          "接著扣掉「漏掉某個元素」的情形。若指定 B 中的某一個元素不被用到，剩下只能用 2 個元素，這樣的函數有 2⁴ = 16 個。",
+          "B 中有 3 個元素可以被漏掉，所以要扣掉 C(3, 1) × 2⁴ = 3 × 16 = 48 個。",
+          "但這樣扣過頭了：**同時漏掉兩個元素**的函數在上一步被扣了兩次，必須加回來一次。",
+          "指定兩個元素都不被用到時，只剩 1 個元素可用，這樣的函數有 1⁴ = 1 個；選兩個元素的方法有 C(3, 2) = 3 種，所以加回 3 × 1 = 3 個。",
+          "同時漏掉三個元素是不可能的（那就沒有函數值可用了），不必再處理。所以答案 = 81 − 48 + 3 = 36 個。",
+          "驗算：程式窮舉全部 3⁴ = 81 個函數，逐一檢查像集是否恰為 B 的全部 3 個元素，符合的有 36 個 ✓。"
+        ],
+        "zh-Hans": [
+          "「每一个元素都至少被对应到一次」是个「至少」型条件，直接数会很麻烦，改用**补集加容斥**。",
+          "先算没有任何限制的函数总数：A 的 4 个元素各自可以对应到 B 的 3 个元素之一，所以有 3⁴ = 81 个函数。",
+          "接着扣掉「漏掉某个元素」的情形。若指定 B 中的某一个元素不被用到，剩下只能用 2 个元素，这样的函数有 2⁴ = 16 个。",
+          "B 中有 3 个元素可以被漏掉，所以要扣掉 C(3, 1) × 2⁴ = 3 × 16 = 48 个。",
+          "但这样扣过头了：**同时漏掉两个元素**的函数在上一步被扣了两次，必须加回来一次。",
+          "指定两个元素都不被用到时，只剩 1 个元素可用，这样的函数有 1⁴ = 1 个；选两个元素的方法有 C(3, 2) = 3 种，所以加回 3 × 1 = 3 个。",
+          "同时漏掉三个元素是不可能的（那就没有函数值可用了），不必再处理。所以答案 = 81 − 48 + 3 = 36 个。",
+          "验算：程序穷举全部 3⁴ = 81 个函数，逐一检查像集是否恰为 B 的全部 3 个元素，符合的有 36 个 ✓。"
+        ],
+        "en": [
+          "\"Every element is hit at least once\" is an \"at least\" condition, awkward to count directly, so use the complement together with inclusion-exclusion.",
+          "First count all functions with no restriction: each of the 4 elements of A maps to one of the 3 elements of B, giving 3⁴ = 81 functions.",
+          "Now subtract those that miss some element. If one specified element of B is never used, only 2 targets remain, giving 2⁴ = 16 functions.",
+          "There are 3 choices of which element to miss, so subtract C(3, 1) × 2⁴ = 3 × 16 = 48.",
+          "But that oversubtracts: functions missing two elements at once were removed twice and must be added back once.",
+          "With two specified elements unused only 1 target remains, giving 1⁴ = 1 function, and there are C(3, 2) = 3 choices of the pair, so add back 3 × 1 = 3.",
+          "Missing all three elements is impossible, since no values would remain, so nothing further is needed. The answer is 81 − 48 + 3 = 36.",
+          "Check: enumerating all 3⁴ = 81 functions and testing whether the image is all of B gives exactly 36."
+        ],
+        "ja": [
+          "「どの要素も少なくとも 1 回は対応づけられる」は「少なくとも」型の条件で直接数えるのは面倒なので、**補集合と包除原理**を使います。",
+          "まず制限なしの関数の総数を数えます。A の 4 要素がそれぞれ B の 3 要素のどれかに対応するので 3⁴ = 81 個です。",
+          "次に「ある要素が使われない」場合を引きます。B のある 1 要素が使われないとすると残り 2 要素しか使えず、そのような関数は 2⁴ = 16 個。",
+          "どの要素が漏れるかで 3 通りあるので、C(3, 1) × 2⁴ = 3 × 16 = 48 個を引きます。",
+          "しかしこれは引きすぎです。**2 要素が同時に漏れる**関数は 2 回引かれているので、1 回足し戻さなければなりません。",
+          "2 要素が使われないとき残るのは 1 要素だけで、そのような関数は 1⁴ = 1 個。2 要素の選び方は C(3, 2) = 3 通りなので 3 × 1 = 3 個を足し戻します。",
+          "3 要素すべてが漏れることは（対応先がなくなるので）ありえず、これ以上の処理は不要です。よって 81 − 48 + 3 = 36 個。",
+          "検算：3⁴ = 81 個の関数をすべて調べ、像が B 全体になるものを数えると、ちょうど 36 個です ✓。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "36"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "滿射函數的容斥計數：從全部函數扣掉漏掉元素的情形，再加回被重複扣除的部分",
+        "notes": "設計依據：關鍵在於容斥的第二層——漏掉兩個元素的情形被扣了兩次必須加回，忽略會得到 33；同時要察覺漏掉三個元素不可能而無須第三層。集合大小取 4 與 3 使窮舉驗算仍可行，能與容斥結果互相印證。答案 36 已用 81 個函數的全窮舉檢查像集驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（滿射函數計數）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "組合",
+        "topicCode": "combinatorics",
+        "subtopic": "滿射函數計數",
+        "subtopicCode": "surjection_count"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "combinatorics_grade10_foundation_012",
+      "topic": "combinatorics",
+      "subtopic": "circular_alternating",
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "4 位男生和 4 位女生要圍著一張圓桌就座，且必須男女相間（每位男生的左右都是女生，反之亦然）。若把整體旋轉後相同的坐法視為同一種，共有多少種不同的坐法？",
+        "zh-Hans": "4 位男生和 4 位女生要围着一张圆桌就座，且必须男女相间（每位男生的左右都是女生，反之亦然）。若把整体旋转后相同的坐法视为同一种，共有多少种不同的坐法？",
+        "en": "Four boys and four girls are to sit around a round table so that boys and girls alternate, meaning each boy has girls on both sides and vice versa. Counting seatings that differ by a rotation as the same, how many different seatings are there?",
+        "ja": "男子 4 人と女子 4 人が円卓に座ります。男女が交互（どの男子の両隣も女子、その逆も同様）になるように座るとき、全体を回転して一致する座り方を同じとみなすと、座り方は何通りありますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 144 種。",
+        "zh-Hans": "答案是 144 种。",
+        "en": "The answer is 144.",
+        "ja": "答えは 144 通りです。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "圓桌問題的第一個關鍵是處理旋轉：因為旋轉後視為相同，必須先**固定一個人的位置**當作參考點，才不會重複計算。",
+          "作法是先安排男生，再把女生插進男生之間的空隙。",
+          "第一步：4 位男生圍圓桌就座。固定其中一位當參考點，剩下 3 位排在其餘位置，方法數是 (4 − 1)! = 3! = 6 種。",
+          "第二步：4 位男生坐定後，他們之間恰好形成 4 個空隙，而男女相間的要求正是每個空隙各坐一位女生。",
+          "這 4 個空隙的位置已經被男生固定住了，彼此可以區分，所以 4 位女生排進去的方法數是 4! = 24 種。",
+          "兩步相乘：6 × 24 = 144 種。",
+          "常見錯誤是女生也除以旋轉，算成 3! × 3! = 36——但男生坐定之後旋轉自由度已經用掉了，空隙不再是可旋轉的，女生必須用完整的 4!。",
+          "驗算：程式固定一位男生後窮舉其餘 3 位男生與 4 位女生的所有排法，並逐一檢查相鄰兩人性別不同，符合的恰好 144 種 ✓。"
+        ],
+        "zh-Hans": [
+          "圆桌问题的第一个关键是处理旋转：因为旋转后视为相同，必须先**固定一个人的位置**当作参考点，才不会重复计算。",
+          "做法是先安排男生，再把女生插进男生之间的空隙。",
+          "第一步：4 位男生围圆桌就座。固定其中一位当参考点，剩下 3 位排在其余位置，方法数是 (4 − 1)! = 3! = 6 种。",
+          "第二步：4 位男生坐定后，他们之间恰好形成 4 个空隙，而男女相间的要求正是每个空隙各坐一位女生。",
+          "这 4 个空隙的位置已经被男生固定住了，彼此可以区分，所以 4 位女生排进去的方法数是 4! = 24 种。",
+          "两步相乘：6 × 24 = 144 种。",
+          "常见错误是女生也除以旋转，算成 3! × 3! = 36——但男生坐定之后旋转自由度已经用掉了，空隙不再是可旋转的，女生必须用完整的 4!。",
+          "验算：程序固定一位男生后穷举其余 3 位男生与 4 位女生的所有排法，并逐一检查相邻两人性别不同，符合的恰好 144 种 ✓。"
+        ],
+        "en": [
+          "The first key point in a round-table problem is handling rotations: since rotations count as the same, one person's position must be fixed as a reference to avoid overcounting.",
+          "The method is to seat the boys first and then slot the girls into the gaps between them.",
+          "Step one: seat the 4 boys around the table. Fixing one of them as reference and arranging the other 3 gives (4 − 1)! = 3! = 6 ways.",
+          "Step two: once the boys are seated they create exactly 4 gaps, and the alternating requirement means each gap holds exactly one girl.",
+          "Those 4 gaps are now pinned down by the boys and are distinguishable from one another, so the girls can be placed in 4! = 24 ways.",
+          "Multiplying the steps: 6 × 24 = 144.",
+          "A common error is to divide out rotations for the girls as well, giving 3! × 3! = 36 — but the rotational freedom was already used up when the boys sat down, so the gaps are no longer rotatable and the girls need the full 4!.",
+          "Check: fixing one boy and enumerating all arrangements of the remaining 3 boys and 4 girls, then testing that adjacent seats differ in gender, gives exactly 144."
+        ],
+        "ja": [
+          "円卓問題でまず重要なのは回転の扱いです。回転して一致するものを同じとみなすので、重複を避けるために**1 人の位置を固定**して基準にします。",
+          "手順としては、まず男子を座らせ、次に男子の間のすきまに女子を入れます。",
+          "第 1 段階：男子 4 人が円卓に座ります。1 人を基準として固定し残り 3 人を並べるので (4 − 1)! = 3! = 6 通り。",
+          "第 2 段階：男子が座るとちょうど 4 つのすきまができ、男女交互という条件は各すきまに女子が 1 人ずつ入ることを意味します。",
+          "これら 4 つのすきまは男子によって位置が確定し互いに区別できるので、女子の入れ方は 4! = 24 通りです。",
+          "掛け合わせて 6 × 24 = 144 通り。",
+          "よくある誤りは女子についても回転で割って 3! × 3! = 36 とすることです。男子が座った時点で回転の自由度は使い切られており、すきまはもう回転できないので、女子には 4! をそのまま使います。",
+          "検算：男子 1 人を固定して残り 3 人の男子と 4 人の女子の並べ方をすべて列挙し、隣り合う 2 人の性別が異なるか確認すると、ちょうど 144 通りです ✓。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "144"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "圓桌交錯排列：先以 (n−1)! 排定一組消除旋轉，另一組再用完整的 n! 插入固定好的空隙",
+        "notes": "設計依據：核心是「旋轉自由度只能扣一次」——第一組用 (4−1)! 消除旋轉後，空隙已被固定，第二組必須用完整的 4!；把兩組都除以旋轉會得到 36 這個常見誤答。答案 144 已用固定一位男生後的全窮舉並檢查相鄰性別驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（圓桌交錯就座）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "組合",
+        "topicCode": "combinatorics",
+        "subtopic": "圓桌交錯就座",
+        "subtopicCode": "circular_alternating"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "combinatorics_grade10_foundation_013",
+      "topic": "combinatorics",
+      "subtopic": "dice_multiset_count",
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "同時擲 3 顆完全相同、無法區分的六面骰子。若兩次擲出的結果只要點數的組合相同就視為同一種（例如 1、2、3 與 3、1、2 算同一種），求可能出現的不同結果共有多少種。",
+        "zh-Hans": "同时掷 3 颗完全相同、无法区分的六面骰子。若两次掷出的结果只要点数的组合相同就视为同一种（例如 1、2、3 与 3、1、2 算同一种），求可能出现的不同结果共有多少种。",
+        "en": "Three identical, indistinguishable six-sided dice are rolled at once. Two outcomes count as the same whenever they show the same multiset of numbers, for example 1, 2, 3 and 3, 1, 2. How many different outcomes are possible?",
+        "ja": "区別のつかない同じ 6 面のさいころ 3 個を同時に投げます。出た目の組合せが同じなら同一の結果とみなすとき（たとえば 1、2、3 と 3、1、2 は同じ）、起こりうる結果は何通りありますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 56 種。",
+        "zh-Hans": "答案是 56 种。",
+        "en": "The answer is 56.",
+        "ja": "答えは 56 通りです。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "骰子無法區分，所以順序不重要，重要的只有「哪些點數各出現幾次」——這是一個可重複的組合問題，不是排列問題。",
+          "為了避免重複計算，統一約定把三個點數**由小到大排列**，也就是只數滿足 a ≤ b ≤ c 的三元組 (a, b, c)，其中每個都在 1 到 6 之間。",
+          "注意這裡允許相等（例如 2、2、5），所以不能用 C(6, 3) —— 那是要求三個點數互不相同的算法。",
+          "把它轉成隔板法：要從 6 種點數中選出 3 個，可以重複，這就是重複組合。",
+          "重複組合的公式是 C(n + k − 1, k)，其中 n = 6 種點數、k = 3 顆骰子。",
+          "代入得 C(6 + 3 − 1, 3) = C(8, 3) = (8 × 7 × 6) ÷ (3 × 2 × 1) = 56 種。",
+          "對照一下常見誤答：若骰子可以區分則是 6³ = 216 種；若要求三個點數互不相同則是 C(6, 3) = 20 種，兩者都不是本題所問。",
+          "驗算：程式窮舉 6³ = 216 種有序結果，把每組點數排序後去除重複，剩下 56 種 ✓。"
+        ],
+        "zh-Hans": [
+          "骰子无法区分，所以顺序不重要，重要的只有「哪些点数各出现几次」——这是一个可重复的组合问题，不是排列问题。",
+          "为了避免重复计算，统一约定把三个点数**由小到大排列**，也就是只数满足 a ≤ b ≤ c 的三元组 (a, b, c)，其中每个都在 1 到 6 之间。",
+          "注意这里允许相等（例如 2、2、5），所以不能用 C(6, 3) —— 那是要求三个点数互不相同的算法。",
+          "把它转成隔板法：要从 6 种点数中选出 3 个，可以重复，这就是重复组合。",
+          "重复组合的公式是 C(n + k − 1, k)，其中 n = 6 种点数、k = 3 颗骰子。",
+          "代入得 C(6 + 3 − 1, 3) = C(8, 3) = (8 × 7 × 6) ÷ (3 × 2 × 1) = 56 种。",
+          "对照一下常见误答：若骰子可以区分则是 6³ = 216 种；若要求三个点数互不相同则是 C(6, 3) = 20 种，两者都不是本题所问。",
+          "验算：程序穷举 6³ = 216 种有序结果，把每组点数排序后去除重复，剩下 56 种 ✓。"
+        ],
+        "en": [
+          "The dice are indistinguishable, so order does not matter and only the multiset of values counts — this is a combination with repetition, not a permutation.",
+          "To avoid double counting, agree to list the three values in non-decreasing order, counting triples (a, b, c) with a ≤ b ≤ c and each value from 1 to 6.",
+          "Note that equal values are allowed, such as 2, 2, 5, so C(6, 3) is not applicable — that formula requires all three to be different.",
+          "Convert to stars and bars: choose 3 values from 6 possible faces with repetition allowed, which is exactly a combination with repetition.",
+          "The formula is C(n + k − 1, k) with n = 6 faces and k = 3 dice.",
+          "Substituting: C(6 + 3 − 1, 3) = C(8, 3) = (8 × 7 × 6) ÷ (3 × 2 × 1) = 56.",
+          "Compare the common wrong answers: distinguishable dice would give 6³ = 216, and requiring all values different would give C(6, 3) = 20; neither is what this problem asks.",
+          "Check: enumerating all 6³ = 216 ordered outcomes, sorting each and removing duplicates leaves exactly 56."
+        ],
+        "ja": [
+          "さいころは区別できないので順序は関係なく、重要なのは「どの目が何回出たか」だけです。これは重複を許す組合せであり、順列ではありません。",
+          "重複して数えないために、3 つの目を**小さい順に並べる**と約束します。つまり 1 以上 6 以下で a ≤ b ≤ c を満たす組 (a, b, c) を数えます。",
+          "ここでは等しい値も許される（例：2、2、5）ので C(6, 3) は使えません。あれは 3 つの目がすべて異なる場合の数え方です。",
+          "仕切り法に読み替えます：6 種類の目から重複を許して 3 個選ぶ、すなわち重複組合せです。",
+          "重複組合せの公式は C(n + k − 1, k) で、n = 6 種類、k = 3 個です。",
+          "代入すると C(6 + 3 − 1, 3) = C(8, 3) = (8 × 7 × 6) ÷ (3 × 2 × 1) = 56 通り。",
+          "よくある誤答と比べます：さいころを区別すれば 6³ = 216 通り、3 つの目がすべて異なるとすれば C(6, 3) = 20 通りで、いずれも本問の答えではありません。",
+          "検算：6³ = 216 通りの順序つき結果をすべて列挙し、各組をソートして重複を除くと 56 通り残ります ✓。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "56"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "重複組合的計數：不可區分的骰子對應多重集合，方法數為 C(n + k − 1, k)",
+        "notes": "設計依據：本題要求正確辨別三種相近的計數模型——可區分（6³ = 216）、不可區分且相異（C(6,3) = 20）、不可區分且可重複（C(8,3) = 56）；詳解把三者並列對照，使選錯模型的後果明確。答案 56 已用 216 種有序結果排序去重的窮舉驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（相同骰子的結果數）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "組合",
+        "topicCode": "combinatorics",
+        "subtopic": "相同骰子的結果數",
+        "subtopicCode": "dice_multiset_count"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "combinatorics_grade10_foundation_014",
+      "topic": "combinatorics",
+      "subtopic": "arithmetic_triple_count",
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "從 1 到 20 這 20 個整數中選出 3 個相異的數，使它們（適當排序後）成為一個等差數列。求這樣的選法共有多少種。",
+        "zh-Hans": "从 1 到 20 这 20 个整数中选出 3 个相异的数，使它们（适当排序后）成为一个等差数列。求这样的选法共有多少种。",
+        "en": "Three distinct integers are chosen from 1 to 20 so that, when suitably ordered, they form an arithmetic progression. How many such choices are there?",
+        "ja": "1 から 20 までの 20 個の整数から相異なる 3 個を選び、適当に並べ替えると等差数列になるようにします。そのような選び方は何通りありますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 90 種。",
+        "zh-Hans": "答案是 90 種。",
+        "en": "The answer is 90.",
+        "ja": "答えは 90 通りです。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "等差數列由「首項」和「公差」兩個量決定，所以**依公差分類**來數是最有系統的作法。",
+          "設三個數由小到大是 a、a + d、a + 2d，其中公差 d 是正整數（d 必須為正，因為三個數相異且已排序）。",
+          "限制條件是最大的數不能超過 20，也就是 a + 2d ≤ 20，同時最小的數 a ≥ 1。",
+          "對固定的 d，a 的範圍是 1 ≤ a ≤ 20 − 2d，所以有 20 − 2d 種選擇。",
+          "d 的範圍：需要 20 − 2d ≥ 1，也就是 d ≤ 9.5，因此 d 只能是 1 到 9。",
+          "把各個 d 的個數列出來：d = 1 有 18 種、d = 2 有 16 種、d = 3 有 14 種，⋯、d = 9 有 2 種。",
+          "這是一個公差為 −2 的等差數列，相加得 18 + 16 + 14 + 12 + 10 + 8 + 6 + 4 + 2 = 90 種。",
+          "驗算：程式窮舉全部 C(20, 3) 個三元組並檢查是否成等差，符合的有 90 個 ✓，且依公差分類的個數恰為 18、16、14、12、10、8、6、4、2，與推導完全一致。"
+        ],
+        "zh-Hans": [
+          "等差数列由「首项」和「公差」两个量决定，所以**依公差分类**来数是最有系统的做法。",
+          "设三个数由小到大是 a、a + d、a + 2d，其中公差 d 是正整数（d 必须为正，因为三个数相异且已排序）。",
+          "限制条件是最大的数不能超过 20，也就是 a + 2d ≤ 20，同时最小的数 a ≥ 1。",
+          "对固定的 d，a 的范围是 1 ≤ a ≤ 20 − 2d，所以有 20 − 2d 种选择。",
+          "d 的范围：需要 20 − 2d ≥ 1，也就是 d ≤ 9.5，因此 d 只能是 1 到 9。",
+          "把各个 d 的个数列出来：d = 1 有 18 种、d = 2 有 16 种、d = 3 有 14 种，⋯、d = 9 有 2 种。",
+          "这是一个公差为 −2 的等差数列，相加得 18 + 16 + 14 + 12 + 10 + 8 + 6 + 4 + 2 = 90 种。",
+          "验算：程序穷举全部 C(20, 3) 个三元组并检查是否成等差，符合的有 90 个 ✓，且依公差分类的个数恰为 18、16、14、12、10、8、6、4、2，与推导完全一致。"
+        ],
+        "en": [
+          "An arithmetic progression is determined by its first term and its common difference, so classifying by the common difference is the systematic way to count.",
+          "Write the three numbers in increasing order as a, a + d and a + 2d, where the common difference d is a positive integer, since the numbers are distinct and already ordered.",
+          "The constraints are that the largest number cannot exceed 20, that is a + 2d ≤ 20, while the smallest satisfies a ≥ 1.",
+          "For a fixed d the range is 1 ≤ a ≤ 20 − 2d, giving 20 − 2d choices.",
+          "For d itself: 20 − 2d ≥ 1 requires d ≤ 9.5, so d runs from 1 to 9.",
+          "Listing the counts: d = 1 gives 18, d = 2 gives 16, d = 3 gives 14, and so on down to d = 9 giving 2.",
+          "These form an arithmetic sequence with difference −2, summing to 18 + 16 + 14 + 12 + 10 + 8 + 6 + 4 + 2 = 90.",
+          "Check: enumerating all C(20, 3) triples and testing for arithmetic progression finds 90, with the per-difference counts exactly 18, 16, 14, 12, 10, 8, 6, 4 and 2, matching the derivation."
+        ],
+        "ja": [
+          "等差数列は「初項」と「公差」で決まるので、**公差ごとに分類**して数えるのが最も体系的です。",
+          "3 数を小さい順に a、a + d、a + 2d とします。3 数は相異なり順序づけ済みなので、公差 d は正の整数です。",
+          "条件は最大の数が 20 を超えないこと、すなわち a + 2d ≤ 20 で、最小の数は a ≥ 1 です。",
+          "d を固定すると a の範囲は 1 ≤ a ≤ 20 − 2d なので、選び方は 20 − 2d 通りです。",
+          "d の範囲は 20 − 2d ≥ 1 より d ≤ 9.5、したがって d は 1 から 9 までです。",
+          "各 d の個数を並べると d = 1 で 18、d = 2 で 16、d = 3 で 14、⋯、d = 9 で 2 通りです。",
+          "これは公差 −2 の等差数列なので、和は 18 + 16 + 14 + 12 + 10 + 8 + 6 + 4 + 2 = 90 通り。",
+          "検算：C(20, 3) 通りの 3 数組をすべて調べて等差かどうか確認すると 90 個で ✓、公差別の個数も 18、16、14、12、10、8、6、4、2 とちょうど一致します。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "90"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "等差三元組計數：以公差分類，每個公差 d 對應 20 − 2d 個首項，再求和",
+        "notes": "設計依據：關鍵是選對分類變數——依公差分類使每一類的個數有簡潔的一次式，再用等差級數求和；直接枚舉 C(20,3) = 1140 個三元組雖可行但不可能手算。d 的上界 9.5 需正確取整。答案 90 已用 C(20,3) 全窮舉並依公差分類驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（等差三元組）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "組合",
+        "topicCode": "combinatorics",
+        "subtopic": "等差三元組",
+        "subtopicCode": "arithmetic_triple_count"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "combinatorics_grade10_foundation_015",
+      "topic": "combinatorics",
+      "subtopic": "distinct_parts_partition",
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "求滿足 x + y + z = 10 且 0 < x < y < z 的整數解 (x, y, z) 共有多少組。",
+        "zh-Hans": "求满足 x + y + z = 10 且 0 < x < y < z 的整数解 (x, y, z) 共有多少组。",
+        "en": "How many integer solutions (x, y, z) satisfy x + y + z = 10 with 0 < x < y < z?",
+        "ja": "x + y + z = 10 かつ 0 < x < y < z を満たす整数の組 (x, y, z) は何組ありますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 4 組。",
+        "zh-Hans": "答案是 4 组。",
+        "en": "The answer is 4.",
+        "ja": "答えは 4 組です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "嚴格遞增的條件 x < y < z 表示三個數互不相同，而且順序已經被固定，所以每一組解只會被算一次。",
+          "既然順序固定，這題其實就是「把 10 拆成三個相異正整數之和」的拆分問題，用有系統的枚舉最穩當。",
+          "系統性作法是**依最小的 x 由小到大枚舉**，每次再枚舉 y，z 就由 z = 10 − x − y 自動決定。",
+          "x = 1 時，y 必須滿足 1 < y < z = 9 − y，也就是 y < 4.5，所以 y 可以是 2、3、4，得到 (1,2,7)、(1,3,6)、(1,4,5)。",
+          "x = 2 時，y 必須滿足 2 < y < z = 8 − y，也就是 y < 4，所以 y 只能是 3，得到 (2,3,5)。（y = 4 會使 z = 4，與 y < z 牴觸）",
+          "x = 3 時，最小的可能是 3 + 4 + 5 = 12 > 10，已經超過總和，所以 x 不可能再大。",
+          "因此全部解是 (1,2,7)、(1,3,6)、(1,4,5)、(2,3,5)，共 4 組。",
+          "驗算：程式窮舉全部滿足 0 < x < y < z 的三元組並檢查和是否為 10，找到的正是這 4 組 ✓。若把條件放寬成 x ≤ y ≤ z，答案會變成 8 組；若允許任意順序（只要求正整數）則是 C(9,2) = 36 組，可見「相異且遞增」這個條件影響很大。"
+        ],
+        "zh-Hans": [
+          "严格递增的条件 x < y < z 表示三个数互不相同，而且顺序已经被固定，所以每一组解只会被算一次。",
+          "既然顺序固定，这题其实就是「把 10 拆成三个相异正整数之和」的拆分问题，用有系统的枚举最稳当。",
+          "系统性做法是**依最小的 x 由小到大枚举**，每次再枚举 y，z 就由 z = 10 − x − y 自动决定。",
+          "x = 1 时，y 必须满足 1 < y < z = 9 − y，也就是 y < 4.5，所以 y 可以是 2、3、4，得到 (1,2,7)、(1,3,6)、(1,4,5)。",
+          "x = 2 时，y 必须满足 2 < y < z = 8 − y，也就是 y < 4，所以 y 只能是 3，得到 (2,3,5)。（y = 4 会使 z = 4，与 y < z 抵触）",
+          "x = 3 时，最小的可能是 3 + 4 + 5 = 12 > 10，已经超过总和，所以 x 不可能再大。",
+          "因此全部解是 (1,2,7)、(1,3,6)、(1,4,5)、(2,3,5)，共 4 组。",
+          "验算：程序穷举全部满足 0 < x < y < z 的三元组并检查和是否为 10，找到的正是这 4 组 ✓。若把条件放宽成 x ≤ y ≤ z，答案会变成 8 组；若允许任意顺序（只要求正整数）则是 C(9,2) = 36 组，可见「相异且递增」这个条件影响很大。"
+        ],
+        "en": [
+          "The strict inequalities x < y < z force the three numbers to be distinct and fix their order, so each solution is counted exactly once.",
+          "With the order fixed, this is really a partition problem — writing 10 as a sum of three distinct positive integers — and systematic enumeration is the safest route.",
+          "The systematic method is to enumerate the smallest value x upward, then y, letting z = 10 − x − y follow automatically.",
+          "For x = 1, y must satisfy 1 < y < z = 9 − y, that is y < 4.5, so y can be 2, 3 or 4, giving (1,2,7), (1,3,6) and (1,4,5).",
+          "For x = 2, y must satisfy 2 < y < z = 8 − y, that is y < 4, so y can only be 3, giving (2,3,5). Taking y = 4 would make z = 4, contradicting y < z.",
+          "For x = 3, the smallest possible total is 3 + 4 + 5 = 12 > 10, already exceeding the sum, so x cannot grow further.",
+          "The complete solution set is therefore (1,2,7), (1,3,6), (1,4,5) and (2,3,5) — 4 solutions.",
+          "Check: enumerating all triples with 0 < x < y < z and testing the sum finds exactly those 4. Relaxing to x ≤ y ≤ z would give 8, and allowing any order with only positivity required would give C(9,2) = 36, showing how much the distinct-and-increasing condition matters."
+        ],
+        "ja": [
+          "厳密な不等式 x < y < z は 3 数が相異なり順序も固定されることを意味するので、各解はちょうど 1 回だけ数えられます。",
+          "順序が固定されている以上、これは「10 を相異なる 3 つの正整数の和に分ける」分割問題であり、体系的な列挙が最も確実です。",
+          "体系的な方法は、**最小の x を小さい順に列挙**し、次に y を動かし、z = 10 − x − y を自動的に決めることです。",
+          "x = 1 のとき、y は 1 < y < z = 9 − y すなわち y < 4.5 を満たす必要があり、y は 2、3、4 で (1,2,7)、(1,3,6)、(1,4,5) が得られます。",
+          "x = 2 のとき、y は 2 < y < z = 8 − y すなわち y < 4 を満たす必要があり、y は 3 のみで (2,3,5) が得られます（y = 4 だと z = 4 となり y < z に反します）。",
+          "x = 3 のとき、最小でも 3 + 4 + 5 = 12 > 10 で総和を超えるため、x はこれ以上大きくできません。",
+          "したがって解は (1,2,7)、(1,3,6)、(1,4,5)、(2,3,5) の 4 組です。",
+          "検算：0 < x < y < z を満たす 3 数組をすべて列挙して和を確認すると、ちょうどこの 4 組です ✓。条件を x ≤ y ≤ z に緩めると 8 組、順序を問わず正整数だけを要求すると C(9,2) = 36 組となり、「相異かつ増加」という条件の影響が大きいことが分かります。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "4"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "相異部分的拆分計數：嚴格遞增條件使順序固定，改以最小值分層系統枚舉",
+        "notes": "設計依據：本題的重點是辨識條件的強度——嚴格遞增（4 組）、允許相等（8 組）、任意順序（36 組）三種答案差距極大；詳解把三者並列，並示範以最小值分層枚舉來保證窮盡而不重複。答案 4 已用滿足 0 < x < y < z 的三元組全窮舉驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（相異部分拆分）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "組合",
+        "topicCode": "combinatorics",
+        "subtopic": "相異部分拆分",
+        "subtopicCode": "distinct_parts_partition"
+      },
+      "reviewStatus": "ok"
     }
   ]
 }
