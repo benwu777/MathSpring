@@ -1394,6 +1394,1420 @@
         "subtopicCode": "frog_jump_swap"
       },
       "reviewStatus": "ok"
+    },
+    {
+      "id": "logic_grade9_foundation_016",
+      "topic": "logic",
+      "subtopic": "conflict_scheduling",
+      "difficulty": "foundation",
+      "levelStage": "grade9",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "學校要安排 A、B、C、D、E 五場考試。若某兩場有同一位學生要參加，這兩場就不能排在同一個時段。已知有衝突的配對是：A 與 B、A 與 C、B 與 C、B 與 D、C 與 E。求最少需要幾個時段才能把五場考試全部排完。",
+        "zh-Hans": "学校要安排 A、B、C、D、E 五场考试。若某两场有同一位学生要参加，这两场就不能排在同一个时段。已知有冲突的配对是：A 与 B、A 与 C、B 与 C、B 与 D、C 与 E。求最少需要几个时段才能把五场考试全部排完。",
+        "en": "A school must schedule five exams A, B, C, D and E. Two exams cannot share a time slot if some student takes both. The conflicting pairs are A with B, A with C, B with C, B with D, and C with E. What is the minimum number of time slots needed to schedule all five?",
+        "ja": "学校が A、B、C、D、E の 5 つの試験を組みます。同じ生徒が受ける 2 つの試験は同じ時間帯に置けません。衝突する組は A と B、A と C、B と C、B と D、C と E です。5 つすべてを組むには最低何時間帯必要ですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 3 個時段。",
+        "zh-Hans": "答案是 3 个时段。",
+        "en": "The answer is 3.",
+        "ja": "答えは 3 時間帯です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "這類「最少需要幾個」的題目要回答兩半：先證明**不可能更少**，再給出**確實排得出來**的安排。",
+          "先找下界。注意 A 與 B 衝突、A 與 C 衝突、B 與 C 也衝突——**A、B、C 三場彼此兩兩衝突**。",
+          "三場兩兩衝突表示它們必須落在三個互不相同的時段（任兩場都不能同時），所以**至少需要 3 個時段**。",
+          "接著要說明 3 個時段真的排得出來。把時段編號為 1、2、3，先把互相衝突的 A、B、C 分開：A 排時段 1、B 排時段 2、C 排時段 3。",
+          "再排 D。D 只與 B（時段 2）衝突，所以 D 不能排時段 2，但可以排時段 1 或 3。就排時段 1。",
+          "最後排 E。E 只與 C（時段 3）衝突，所以不能排時段 3，可以排時段 1 或 2。就排時段 1。",
+          "檢查這個安排：時段 1 有 A、D、E——A 與 D 不衝突 ✓、A 與 E 不衝突 ✓、D 與 E 也不衝突 ✓；時段 2 只有 B ✓；時段 3 只有 C ✓。全部五對衝突都被分開了。",
+          "所以 3 個時段可行，加上前面的下界論證，答案就是 3。",
+          "驗算：程式對 1、2、3 個時段逐一窮舉所有可能的安排，1 與 2 個時段都找不到合法安排，3 個時段找得到 ✓。附註：**下界來自「兩兩衝突的一組」**——若題目再多一條 D 與 E 的衝突，A、B、C、D 就不再兩兩衝突，但 A、B、C 這一組仍在，下界仍是 3。"
+        ],
+        "zh-Hans": [
+          "这类「最少需要几个」的题目要回答两半：先证明**不可能更少**，再给出**确实排得出来**的安排。",
+          "先找下界。注意 A 与 B 冲突、A 与 C 冲突、B 与 C 也冲突——**A、B、C 三场彼此两两冲突**。",
+          "三场两两冲突表示它们必须落在三个互不相同的时段（任两场都不能同时），所以**至少需要 3 个时段**。",
+          "接着要说明 3 个时段真的排得出来。把时段编号为 1、2、3，先把互相冲突的 A、B、C 分开：A 排时段 1、B 排时段 2、C 排时段 3。",
+          "再排 D。D 只与 B（时段 2）冲突，所以 D 不能排时段 2，但可以排时段 1 或 3。就排时段 1。",
+          "最后排 E。E 只与 C（时段 3）冲突，所以不能排时段 3，可以排时段 1 或 2。就排时段 1。",
+          "检查这个安排：时段 1 有 A、D、E——A 与 D 不冲突 ✓、A 与 E 不冲突 ✓、D 与 E 也不冲突 ✓；时段 2 只有 B ✓；时段 3 只有 C ✓。全部五对冲突都被分开了。",
+          "所以 3 个时段可行，加上前面的下界论证，答案就是 3。",
+          "验算：程序对 1、2、3 个时段逐一穷举所有可能的安排，1 与 2 个时段都找不到合法安排，3 个时段找得到 ✓。附注：**下界来自「两两冲突的一组」**——若题目再多一条 D 与 E 的冲突，A、B、C、D 就不再两两冲突，但 A、B、C 这一组仍在，下界仍是 3。"
+        ],
+        "en": [
+          "Such minimum questions need two halves: a proof that fewer is impossible, and a schedule showing the number is achievable.",
+          "First the lower bound. Note that A conflicts with B, A with C, and B with C as well — so A, B and C conflict pairwise.",
+          "Three mutually conflicting exams must occupy three different slots, since no two of them may share one, so at least 3 slots are needed.",
+          "Now show 3 slots suffice. Numbering the slots 1, 2 and 3, first separate the mutually conflicting A, B and C: put A in slot 1, B in slot 2 and C in slot 3.",
+          "Next place D. It conflicts only with B in slot 2, so it cannot go there but may take slot 1 or 3. Put it in slot 1.",
+          "Finally place E. It conflicts only with C in slot 3, so it may take slot 1 or 2. Put it in slot 1.",
+          "Check the schedule: slot 1 holds A, D and E, and A with D, A with E and D with E are all non-conflicting; slot 2 holds only B; slot 3 holds only C. All five conflicting pairs are separated.",
+          "So 3 slots work, and with the lower bound the answer is 3.",
+          "Check: exhaustively testing all assignments with 1, 2 and 3 slots finds none valid for 1 or 2 and a valid one for 3. Remark: the lower bound comes from a mutually conflicting group — adding a conflict between D and E would not make A, B, C, D mutually conflicting, but the group A, B, C would remain and the bound would still be 3."
+        ],
+        "ja": [
+          "この種の「最低いくつ必要か」という問題には 2 つの半分があります：**それより少なくできない**ことの証明と、**実際に組める**スケジュールの提示です。",
+          "まず下界を求めます。A と B、A と C、そして B と C も衝突する——つまり **A・B・C の 3 つは互いに衝突**しています。",
+          "3 つが互いに衝突するなら、それらは互いに異なる 3 つの時間帯に入らねばならず、**少なくとも 3 時間帯必要**です。",
+          "次に 3 時間帯で実際に組めることを示します。時間帯を 1、2、3 とし、互いに衝突する A・B・C をまず分けます：A を 1、B を 2、C を 3 に。",
+          "次に D。D は B（時間帯 2）とだけ衝突するので 2 には置けませんが、1 か 3 なら可能です。1 に置きます。",
+          "最後に E。E は C（時間帯 3）とだけ衝突するので 3 には置けず、1 か 2 が可能です。1 に置きます。",
+          "この配置を確認します：時間帯 1 は A・D・E で、A と D、A と E、D と E はいずれも衝突しません ✓。時間帯 2 は B のみ ✓、時間帯 3 は C のみ ✓。5 組の衝突がすべて分離されています。",
+          "したがって 3 時間帯で可能であり、先の下界と合わせて答えは 3 です。",
+          "検算：1、2、3 時間帯それぞれについて全配置を列挙すると、1 と 2 では有効な配置が存在せず、3 では存在します ✓。補足：**下界は「互いに衝突する組」から来ます**。D と E の衝突を追加しても A・B・C・D が互いに衝突するわけではありませんが、A・B・C の組は残るので下界は 3 のままです。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "3"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "衝突排程：互相衝突的一組決定時段數的下界，再以具體排法證明下界可達成",
+        "notes": "設計依據：A、B、C 形成兩兩衝突的三元組使下界恰為 3，而 D、E 各只有一個衝突對象故可與 A 共用時段，讓「下界」與「構造」都非平凡；詳解說明下界的來源是兩兩衝突的一組而非衝突總數。答案 3 已用 1 到 3 個時段的窮舉搜尋獨立驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（衝突排程）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "邏輯",
+        "topicCode": "logic",
+        "subtopic": "衝突排程",
+        "subtopicCode": "conflict_scheduling"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "logic_grade9_foundation_017",
+      "topic": "logic",
+      "subtopic": "critical_path",
+      "difficulty": "foundation",
+      "levelStage": "grade9",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一項工程有五道工序 A、B、C、D、E，各自需要的天數是：A 要 3 天、B 要 2 天、C 要 4 天、D 要 1 天、E 要 2 天。工序之間的先後限制是：A 完成後才能開始 B 和 C；B 與 C **都**完成後才能開始 D；D 完成後才能開始 E。若人手充足，沒有先後限制的工序可以同時進行，求完成整項工程最少需要幾天。",
+        "zh-Hans": "一项工程有五道工序 A、B、C、D、E，各自需要的天数是：A 要 3 天、B 要 2 天、C 要 4 天、D 要 1 天、E 要 2 天。工序之间的先后限制是：A 完成后才能开始 B 和 C；B 与 C **都**完成后才能开始 D；D 完成后才能开始 E。若人手充足，没有先后限制的工序可以同时进行，求完成整项工程最少需要几天。",
+        "en": "A project has five tasks A, B, C, D and E taking 3, 2, 4, 1 and 2 days respectively. The precedence constraints are: B and C may start only after A finishes; D may start only after both B and C finish; and E may start only after D finishes. With ample workers, tasks not constrained relative to each other may run simultaneously. What is the minimum number of days to complete the project?",
+        "ja": "ある工事には A、B、C、D、E の 5 工程があり、所要日数はそれぞれ A が 3 日、B が 2 日、C が 4 日、D が 1 日、E が 2 日です。前後関係は、A の完了後に B と C を開始でき、B と C の**両方**が完了した後に D を開始でき、D の完了後に E を開始できます。人手は十分で、前後関係のない工程は同時に進められるとき、完成に最低何日必要ですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 10 天。",
+        "zh-Hans": "答案是 10 天。",
+        "en": "The answer is 10.",
+        "ja": "答えは 10 日です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "**不能把五道工序的天數直接相加**（那會得到 3 + 2 + 4 + 1 + 2 = 12 天），因為 B 與 C 可以同時進行，不必一前一後。",
+          "正確的做法是**追蹤每道工序最早能完成的時刻**，從最前面的工序開始往後推。",
+          "A 沒有前置工序，第 0 天開工，需要 3 天，所以 A 最早在**第 3 天**完成。",
+          "B 與 C 都要等 A 完成，所以兩者都從第 3 天開始，而且可以同時做。B 需 2 天，第 5 天完成；C 需 4 天，第 7 天完成。",
+          "D 要等 **B 與 C 都**完成才能開始。B 在第 5 天就好了，但 C 要到第 7 天，所以 D 必須等到第 7 天才能開工——**取兩者中較晚的那個**。",
+          "D 需要 1 天，所以第 8 天完成。",
+          "E 要等 D，從第 8 天開始，需要 2 天，第 10 天完成。整項工程完工。",
+          "所以最少需要 10 天。也可以直接看：**決定工期的是最長的那條路徑** A → C → D → E，長度是 3 + 4 + 1 + 2 = 10 天 ✓。",
+          "另一條路徑 A → B → D → E 只要 3 + 2 + 1 + 2 = 8 天，比較短，所以 B 有 7 − 5 = 2 天的空檔可以慢慢做而不影響總工期。**只有縮短最長路徑上的工序才能提早完工**——例如把 B 從 2 天縮成 1 天完全沒用，但把 C 從 4 天縮成 3 天就能讓整項工程提早 1 天。"
+        ],
+        "zh-Hans": [
+          "**不能把五道工序的天数直接相加**（那会得到 3 + 2 + 4 + 1 + 2 = 12 天），因为 B 与 C 可以同时进行，不必一前一后。",
+          "正确的做法是**追踪每道工序最早能完成的时刻**，从最前面的工序开始往后推。",
+          "A 没有前置工序，第 0 天开工，需要 3 天，所以 A 最早在**第 3 天**完成。",
+          "B 与 C 都要等 A 完成，所以两者都从第 3 天开始，而且可以同时做。B 需 2 天，第 5 天完成；C 需 4 天，第 7 天完成。",
+          "D 要等 **B 与 C 都**完成才能开始。B 在第 5 天就好了，但 C 要到第 7 天，所以 D 必须等到第 7 天才能开工——**取两者中较晚的那个**。",
+          "D 需要 1 天，所以第 8 天完成。",
+          "E 要等 D，从第 8 天开始，需要 2 天，第 10 天完成。整项工程完工。",
+          "所以最少需要 10 天。也可以直接看：**决定工期的是最长的那条路径** A → C → D → E，长度是 3 + 4 + 1 + 2 = 10 天 ✓。",
+          "另一条路径 A → B → D → E 只要 3 + 2 + 1 + 2 = 8 天，比较短，所以 B 有 7 − 5 = 2 天的空档可以慢慢做而不影响总工期。**只有缩短最长路径上的工序才能提早完工**——例如把 B 从 2 天缩成 1 天完全没用，但把 C 从 4 天缩成 3 天就能让整项工程提早 1 天。"
+        ],
+        "en": [
+          "The five durations must not simply be added, which would give 3 + 2 + 4 + 1 + 2 = 12 days, because B and C may run at the same time rather than one after the other.",
+          "The correct approach tracks the earliest finishing time of each task, working forward from the first.",
+          "A has no predecessor, starts on day 0 and takes 3 days, so it finishes earliest on day 3.",
+          "Both B and C wait for A, so both start on day 3 and may run concurrently. B takes 2 days and finishes on day 5, while C takes 4 days and finishes on day 7.",
+          "D waits for both B and C. B is ready by day 5 but C only by day 7, so D cannot start before day 7 — the later of the two governs.",
+          "D takes 1 day, finishing on day 8.",
+          "E waits for D, starting on day 8 and taking 2 days, finishing on day 10, completing the project.",
+          "So the minimum is 10 days. Equivalently, the schedule is governed by the longest path A → C → D → E, of length 3 + 4 + 1 + 2 = 10 days.",
+          "The other path A → B → D → E takes only 3 + 2 + 1 + 2 = 8 days, so B has 7 − 5 = 2 days of slack and may proceed leisurely without delaying the project. Only shortening tasks on the longest path can finish the project sooner — cutting B from 2 days to 1 achieves nothing, whereas cutting C from 4 days to 3 saves a whole day."
+        ],
+        "ja": [
+          "**5 工程の日数をそのまま足してはいけません**（それでは 3 + 2 + 4 + 1 + 2 = 12 日）。B と C は同時に進められ、前後に並べる必要がないからです。",
+          "正しい方法は**各工程の最早完了時刻を追う**ことで、先頭の工程から前へ進めていきます。",
+          "A には先行工程がなく 0 日目に着手して 3 日かかるので、最早**3 日目**に完了します。",
+          "B と C はどちらも A の完了を待つので、ともに 3 日目に開始でき、同時進行も可能です。B は 2 日で 5 日目に、C は 4 日で 7 日目に完了します。",
+          "D は **B と C の両方**の完了を待ちます。B は 5 日目に終わりますが C は 7 日目なので、D は 7 日目まで着手できません——**遅いほうが効きます**。",
+          "D は 1 日なので 8 日目に完了します。",
+          "E は D を待って 8 日目に開始し、2 日で 10 日目に完了、工事全体が終わります。",
+          "したがって最低 10 日です。別の見方をすれば、**工期を決めるのは最長の経路** A → C → D → E で、長さは 3 + 4 + 1 + 2 = 10 日 ✓。",
+          "もう一方の経路 A → B → D → E は 3 + 2 + 1 + 2 = 8 日で短いので、B には 7 − 5 = 2 日の余裕があり、全体の工期に影響せずゆっくり進められます。**工期を縮められるのは最長経路上の工程だけ**です。B を 2 日から 1 日にしても効果はありませんが、C を 4 日から 3 日にすれば全体が 1 日早まります。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "10"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "最短工期由最長路徑決定：並行工序取較晚的完成時刻，非最長路徑上的工序有空檔",
+        "notes": "設計依據：B 與 C 並行且時長不同（2 與 4），使「取較晚者」成為必經判斷；詳解量化直接相加會得到的 12 天、指出 B 有 2 天空檔，並說明只有縮短最長路徑上的工序才有效，讓「關鍵路徑」的意義具體化。答案 10 已用逐工序推算最早完成時刻與最長路徑求和兩種方式交叉驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（工序的最短工期）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "邏輯",
+        "topicCode": "logic",
+        "subtopic": "工序的最短工期",
+        "subtopicCode": "critical_path"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "logic_grade9_foundation_018",
+      "topic": "logic",
+      "subtopic": "code_deduction",
+      "difficulty": "foundation",
+      "levelStage": "grade9",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一個三位數密碼的三個數字互不相同，而且都不是 0。已知四條線索：(1) 猜 456 時，這三個數字完全沒有出現在密碼中；(2) 猜 789 時，恰有 2 個數字出現在密碼中，但位置都不對；(3) 猜 123 時，恰有 1 個數字出現在密碼中，而且它的位置正確；(4) 密碼的三個數字之和是 20。求這個密碼。",
+        "zh-Hans": "一个三位数密码的三个数字互不相同，而且都不是 0。已知四条线索：(1) 猜 456 时，这三个数字完全没有出现在密码中；(2) 猜 789 时，恰有 2 个数字出现在密码中，但位置都不对；(3) 猜 123 时，恰有 1 个数字出现在密码中，而且它的位置正确；(4) 密码的三个数字之和是 20。求这个密码。",
+        "en": "A three-digit code has three distinct non-zero digits. Four clues are known: guessing 456 shows none of those digits appear in the code; guessing 789 shows exactly 2 of those digits appear but all in wrong positions; guessing 123 shows exactly 1 of those digits appears and it is in the correct position; and the three digits of the code sum to 20. Find the code.",
+        "ja": "3 桁の暗証番号は 3 つの数字がすべて異なり、いずれも 0 ではありません。手がかりは 4 つ：(1) 456 と入力すると、この 3 つの数字はどれも暗証番号に含まれない。(2) 789 と入力すると、ちょうど 2 つの数字が含まれるが位置はすべて誤り。(3) 123 と入力すると、ちょうど 1 つの数字が含まれ、しかも位置は正しい。(4) 3 つの数字の和は 20。この暗証番号を求めなさい。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 893。",
+        "zh-Hans": "答案是 893。",
+        "en": "The answer is 893.",
+        "ja": "答えは 893 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "**先用線索 (1) 縮小可用的數字**。既然 4、5、6 都沒出現，密碼的三個數字只能取自 {1, 2, 3, 7, 8, 9}。",
+          "接著看線索 (2) 與 (3) 能提供多少個數字。線索 (2) 說 {7, 8, 9} 中恰有 2 個入選，線索 (3) 說 {1, 2, 3} 中恰有 1 個入選。",
+          "**2 + 1 = 3，恰好就是密碼的位數**——所以密碼確實由「{7,8,9} 中的兩個」加上「{1,2,3} 中的一個」組成，沒有其他可能。",
+          "現在用線索 (4) 的總和 20 來確定是哪三個。{7,8,9} 中取兩個的和只有三種：7 + 8 = 15、7 + 9 = 16、8 + 9 = 17。",
+          "對應地，來自 {1,2,3} 的那個數字必須是 20 − 15 = 5、20 − 16 = 4 或 20 − 17 = 3。**前兩個都不在 {1,2,3} 裡，只有 3 可行**。",
+          "所以三個數字確定是 8、9、3。接著要決定它們的位置。",
+          "由線索 (3)：入選的那個數字是 3，而且**位置正確**。在猜測 123 中，3 位於第三位，所以密碼的第三位就是 3。",
+          "由線索 (2)：8 與 9 的位置都不對。在猜測 789 中，8 在第二位、9 在第三位。第三位已被 3 佔走，所以 9 自動不在第三位 ✓；而 8 不能在第二位，只能排第一位。剩下的第二位就給 9。",
+          "所以密碼是 893。驗算：程式窮舉 1 到 9 中取三個相異數字的全部排列，同時滿足四條線索的只有 (8, 9, 3) 這一組 ✓，解唯一。附註：**只用前三條線索會有 9 組解**（如 178、197、827 等），線索 (4) 的總和條件正是把答案鎖定為唯一的關鍵。"
+        ],
+        "zh-Hans": [
+          "**先用线索 (1) 缩小可用的数字**。既然 4、5、6 都没出现，密码的三个数字只能取自 {1, 2, 3, 7, 8, 9}。",
+          "接着看线索 (2) 与 (3) 能提供多少个数字。线索 (2) 说 {7, 8, 9} 中恰有 2 个入选，线索 (3) 说 {1, 2, 3} 中恰有 1 个入选。",
+          "**2 + 1 = 3，恰好就是密码的位数**——所以密码确实由「{7,8,9} 中的两个」加上「{1,2,3} 中的一个」组成，没有其他可能。",
+          "现在用线索 (4) 的总和 20 来确定是哪三个。{7,8,9} 中取两个的和只有三种：7 + 8 = 15、7 + 9 = 16、8 + 9 = 17。",
+          "对应地，来自 {1,2,3} 的那个数字必须是 20 − 15 = 5、20 − 16 = 4 或 20 − 17 = 3。**前两个都不在 {1,2,3} 里，只有 3 可行**。",
+          "所以三个数字确定是 8、9、3。接着要决定它们的位置。",
+          "由线索 (3)：入选的那个数字是 3，而且**位置正确**。在猜测 123 中，3 位于第三位，所以密码的第三位就是 3。",
+          "由线索 (2)：8 与 9 的位置都不对。在猜测 789 中，8 在第二位、9 在第三位。第三位已被 3 占走，所以 9 自动不在第三位 ✓；而 8 不能在第二位，只能排第一位。剩下的第二位就给 9。",
+          "所以密码是 893。验算：程序穷举 1 到 9 中取三个相异数字的全部排列，同时满足四条线索的只有 (8, 9, 3) 这一组 ✓，解唯一。附注：**只用前三条线索会有 9 组解**（如 178、197、827 等），线索 (4) 的总和条件正是把答案锁定为唯一的关键。"
+        ],
+        "en": [
+          "Start with clue one to narrow the available digits: since 4, 5 and 6 do not appear, the code's digits come from {1, 2, 3, 7, 8, 9}.",
+          "Next see how many digits clues two and three supply. Clue two says exactly 2 of {7, 8, 9} are used, and clue three says exactly 1 of {1, 2, 3} is used.",
+          "Since 2 + 1 = 3, exactly the number of digits in the code, it consists of two digits from {7, 8, 9} and one from {1, 2, 3}, with no other possibility.",
+          "Now use clue four, the sum of 20, to pin down which three. Two digits from {7, 8, 9} sum to only 7 + 8 = 15, 7 + 9 = 16 or 8 + 9 = 17.",
+          "Correspondingly, the digit from {1, 2, 3} must be 20 − 15 = 5, 20 − 16 = 4 or 20 − 17 = 3. The first two are not in {1, 2, 3}, so only 3 works.",
+          "So the digits are 8, 9 and 3, and their positions remain to be settled.",
+          "From clue three: the chosen digit is 3 and it is in the correct position. In the guess 123 the digit 3 sits third, so the code's third digit is 3.",
+          "From clue two: 8 and 9 are both misplaced. In the guess 789, 8 sits second and 9 sits third. The third place is already taken by 3, so 9 is automatically not third; and 8 cannot be second, so it must be first, leaving the second place for 9.",
+          "So the code is 893. Check: enumerating all arrangements of three distinct digits from 1 to 9, only (8, 9, 3) satisfies all four clues, so the solution is unique. Remark: the first three clues alone admit 9 solutions, such as 178, 197 and 827, and the sum condition in clue four is what pins the answer down."
+        ],
+        "ja": [
+          "**まず手がかり (1) で使える数字を絞ります**。4、5、6 が現れないので、暗証番号の 3 数字は {1, 2, 3, 7, 8, 9} から取られます。",
+          "次に手がかり (2)(3) が何個の数字を与えるかを見ます。(2) は {7, 8, 9} からちょうど 2 個、(3) は {1, 2, 3} からちょうど 1 個が使われると言っています。",
+          "**2 + 1 = 3 でちょうど桁数と一致**するので、暗証番号は「{7,8,9} から 2 個」と「{1,2,3} から 1 個」で構成され、それ以外の可能性はありません。",
+          "手がかり (4) の和 20 でどの 3 つかを確定します。{7,8,9} から 2 個の和は 7 + 8 = 15、7 + 9 = 16、8 + 9 = 17 の 3 通りだけです。",
+          "対応して {1,2,3} からの数字は 20 − 15 = 5、20 − 16 = 4、20 − 17 = 3 のいずれか。**前 2 つは {1,2,3} になく、3 だけが可能**です。",
+          "したがって 3 数字は 8、9、3 に確定します。次に位置を決めます。",
+          "手がかり (3) より：選ばれた数字は 3 で、しかも**位置は正しい**。123 では 3 が 3 桁目にあるので、暗証番号の 3 桁目は 3 です。",
+          "手がかり (2) より：8 と 9 はどちらも位置が誤り。789 では 8 が 2 桁目、9 が 3 桁目です。3 桁目はすでに 3 が占めているので 9 は自動的に 3 桁目ではなく ✓、8 は 2 桁目になれないので 1 桁目に決まり、残る 2 桁目が 9 になります。",
+          "したがって暗証番号は 893 です。検算：1〜9 から異なる 3 数字を選ぶ全順列を列挙すると、4 つの手がかりをすべて満たすのは (8, 9, 3) だけ ✓ で解は一意です。補足：**前 3 つの手がかりだけでは 9 通りの解**（178、197、827 など）があり、和の条件 (4) こそが答えを一意に絞る鍵です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "893"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "由線索逐步縮小：先定出可用數字集合，再由總和鎖定三個數字，最後用位置線索排出順序",
+        "notes": "設計依據：前三條線索留下 9 組解，第四條（總和 20）才鎖定唯一答案，詳解明確指出這一點以說明每條線索的作用；決定位置時 9 的限制自動滿足而 8 的限制才是關鍵，需要逐一檢查而非套用。答案 893 已用三個相異數字的全部排列窮舉確認滿足四條線索者唯一。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（由線索推出密碼）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "邏輯",
+        "topicCode": "logic",
+        "subtopic": "由線索推出密碼",
+        "subtopicCode": "code_deduction"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "logic_grade9_foundation_019",
+      "topic": "logic",
+      "subtopic": "domination_lower_bound",
+      "difficulty": "foundation",
+      "levelStage": "grade9",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "戲院裡有一排 20 個連續的座位，已經坐了一些觀眾。現在發現：不論新來的人坐在哪一個空位上，都一定會與某位已入座的觀眾相鄰。求原本至少坐了幾位觀眾。",
+        "zh-Hans": "戏院里有一排 20 个连续的座位，已经坐了一些观众。现在发现：不论新来的人坐在哪一个空位上，都一定会与某位已入座的观众相邻。求原本至少坐了几位观众。",
+        "en": "A theatre has a row of 20 consecutive seats with some people already seated. It turns out that wherever a newcomer sits among the empty seats, they will always be next to someone already seated. What is the minimum number of people already seated?",
+        "ja": "劇場に 20 席の連続した列があり、すでに何人かが座っています。新しく来た人がどの空席に座っても、必ずすでに座っている誰かの隣になることが分かりました。すでに座っている人数は最低何人ですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 7 位。",
+        "zh-Hans": "答案是 7 位。",
+        "en": "The answer is 7.",
+        "ja": "答えは 7 人です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "先把條件翻譯成幾何的說法：**每一個空位，左右至少有一邊坐著人**。換句話說，已入座的人必須「照顧」到所有空位。",
+          "先求下界。想想一位觀眾能「照顧」到哪些座位——他自己那一個，加上左右各一個，**最多 3 個座位**。",
+          "所以 k 位觀眾最多能照顧 3k 個座位。要照顧完全部 20 個座位，必須 3k ≥ 20，也就是 k ≥ 6.67…。",
+          "座位數是整數，所以**至少要 7 位**。（6 位最多照顧 18 個座位，一定會有座位沒被照顧到。）",
+          "接著要說明 7 位真的做得到。把座位編號 1 到 20，讓觀眾坐在第 1、4、7、10、13、16、19 號座位——**每隔兩個空位坐一位**。",
+          "檢查每個空位：第 2、3 號的鄰居有第 1 或第 4 號有人 ✓；第 5、6 號旁邊有第 4 或第 7 號 ✓；⋯ 依此類推。",
+          "最後檢查尾端：第 20 號是空位，它的鄰居第 19 號有人 ✓。全部空位都被照顧到了。",
+          "所以 7 位可行，加上前面的下界論證，答案是 7 位。",
+          "驗算：程式對 k = 1 到 8 逐一窮舉所有可能的入座方式，檢查是否每個空位都與人相鄰。k = 6 以下都找不到可行的安排，k = 7 找得到（例如第 1、4、7、10、13、16、19 號）✓。附註：**這個「每 3 個座位放 1 人」的間隔並非湊巧**——它正好用滿每位觀眾的照顧範圍，一格都不浪費。"
+        ],
+        "zh-Hans": [
+          "先把条件翻译成几何的说法：**每一个空位，左右至少有一边坐着人**。换句话说，已入座的人必须「照顾」到所有空位。",
+          "先求下界。想想一位观众能「照顾」到哪些座位——他自己那一个，加上左右各一个，**最多 3 个座位**。",
+          "所以 k 位观众最多能照顾 3k 个座位。要照顾完全部 20 个座位，必须 3k ≥ 20，也就是 k ≥ 6.67…。",
+          "座位数是整数，所以**至少要 7 位**。（6 位最多照顾 18 个座位，一定会有座位没被照顾到。）",
+          "接着要说明 7 位真的做得到。把座位编号 1 到 20，让观众坐在第 1、4、7、10、13、16、19 号座位——**每隔两个空位坐一位**。",
+          "检查每个空位：第 2、3 号的邻居有第 1 或第 4 号有人 ✓；第 5、6 号旁边有第 4 或第 7 号 ✓；⋯ 依此类推。",
+          "最后检查尾端：第 20 号是空位，它的邻居第 19 号有人 ✓。全部空位都被照顾到了。",
+          "所以 7 位可行，加上前面的下界论证，答案是 7 位。",
+          "验算：程序对 k = 1 到 8 逐一穷举所有可能的入座方式，检查是否每个空位都与人相邻。k = 6 以下都找不到可行的安排，k = 7 找得到（例如第 1、4、7、10、13、16、19 号）✓。附注：**这个「每 3 个座位放 1 人」的间隔并非凑巧**——它正好用满每位观众的照顾范围，一格都不浪费。"
+        ],
+        "en": [
+          "First translate the condition geometrically: every empty seat has someone seated immediately to its left or right. In other words, the seated people must cover all the empty seats.",
+          "For the lower bound, consider how many seats one person can cover — their own plus one on each side, at most 3 seats.",
+          "So k people cover at most 3k seats. Covering all 20 requires 3k ≥ 20, that is k ≥ 6.67….",
+          "Since the count is a whole number, at least 7 people are needed. Six could cover at most 18 seats, leaving some seat uncovered.",
+          "Now show 7 suffices. Number the seats 1 to 20 and seat people at 1, 4, 7, 10, 13, 16 and 19 — one person every three seats.",
+          "Check the empty seats: 2 and 3 have neighbours at 1 or 4; 5 and 6 have neighbours at 4 or 7; and so on.",
+          "Check the end: seat 20 is empty and its neighbour, seat 19, is occupied. Every empty seat is covered.",
+          "So 7 works, and with the lower bound the answer is 7.",
+          "Check: exhaustively testing all seatings for k = 1 to 8 finds none valid up to k = 6 and a valid one at k = 7, such as seats 1, 4, 7, 10, 13, 16 and 19. Remark: the spacing of one person every three seats is no accident — it uses each person's coverage range fully, wasting nothing."
+        ],
+        "ja": [
+          "まず条件を幾何的に言い換えます：**どの空席も左右のいずれかに人が座っている**。つまり着席済みの人がすべての空席を「カバー」しなければなりません。",
+          "下界を求めます。1 人がカバーできる席は、自分の席と左右の 1 席ずつで**最大 3 席**です。",
+          "したがって k 人で最大 3k 席をカバーできます。20 席すべてをカバーするには 3k ≥ 20、すなわち k ≥ 6.67… が必要です。",
+          "人数は整数なので**最低 7 人**です。（6 人では最大 18 席しかカバーできず、必ずカバーされない席が残ります。）",
+          "次に 7 人で実際にできることを示します。席に 1 から 20 の番号をつけ、1、4、7、10、13、16、19 番に座らせます——**3 席ごとに 1 人**です。",
+          "各空席を確認します：2 番・3 番は 1 番か 4 番が隣で ✓、5 番・6 番は 4 番か 7 番が隣で ✓、以下同様です。",
+          "端も確認します：20 番は空席ですが隣の 19 番に人がいます ✓。すべての空席がカバーされています。",
+          "したがって 7 人で可能であり、先の下界と合わせて答えは 7 人です。",
+          "検算：k = 1 から 8 まで全配置を列挙し、どの空席も人と隣り合うかを調べると、k = 6 以下では有効な配置がなく、k = 7 で見つかります（例：1、4、7、10、13、16、19 番）✓。補足：**「3 席ごとに 1 人」という間隔は偶然ではなく**、各人のカバー範囲をちょうど使い切り、1 席も無駄にしていません。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "7"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "覆蓋型的最少人數：每人最多覆蓋自己與左右共 3 個座位故 3k ≥ 20，再以每三席一人的配置達成下界",
+        "notes": "設計依據：20 不是 3 的倍數使下界 6.67 需向上取整，且 6 人的 18 席覆蓋上限與 20 的落差明確；詳解特別檢查末端第 20 號座位，因為端點是這類配置最容易漏掉的地方。答案 7 已用 k = 1 到 8 的完整窮舉搜尋獨立驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（座位的覆蓋）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "邏輯",
+        "topicCode": "logic",
+        "subtopic": "座位的覆蓋",
+        "subtopicCode": "domination_lower_bound"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "logic_grade9_foundation_020",
+      "topic": "logic",
+      "subtopic": "adjacent_flip_parity",
+      "difficulty": "foundation",
+      "levelStage": "grade9",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "桌上排著 8 枚硬幣，一開始全部正面朝上。每一次操作必須選擇**相鄰的兩枚**硬幣，把它們同時翻面。若要讓 8 枚硬幣全部變成反面朝上，求最少需要操作幾次。",
+        "zh-Hans": "桌上排着 8 枚硬币，一开始全部正面朝上。每一次操作必须选择**相邻的两枚**硬币，把它们同时翻面。若要让 8 枚硬币全部变成反面朝上，求最少需要操作几次。",
+        "en": "Eight coins lie in a row, all heads up. Each move must choose two adjacent coins and flip both. To turn all eight coins tails up, what is the minimum number of moves?",
+        "ja": "8 枚のコインが一列に並び、最初はすべて表を向いています。1 回の操作では**隣り合う 2 枚**を選び、同時に裏返します。8 枚すべてを裏向きにするには、最低何回の操作が必要ですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 4 次。",
+        "zh-Hans": "答案是 4 次。",
+        "en": "The answer is 4.",
+        "ja": "答えは 4 回です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "先看下界。**每一枚硬幣都要從正面變成反面，所以每一枚被翻的次數必須是奇數**（翻偶數次會回到正面）。",
+          "奇數至少是 1，所以八枚硬幣合計被翻的次數至少是 8 次。",
+          "而**每一次操作恰好翻動 2 枚硬幣**，也就是為「總翻動次數」貢獻 2。",
+          "設操作了 n 次，則總翻動次數是 2n，而這個數必須至少是 8，所以 2n ≥ 8，得 n ≥ 4。**至少要 4 次**。",
+          "接著要說明 4 次真的做得到。把硬幣編號 1 到 8，依序操作 (1,2)、(3,4)、(5,6)、(7,8) 這四對相鄰硬幣。",
+          "這四對**不重疊且涵蓋全部八枚**，所以每一枚都恰好被翻了 1 次（奇數次 ✓），全部從正面變成反面。",
+          "所以 4 次可行，加上前面的下界論證，答案是 4 次。",
+          "驗算：追蹤過程——初始 8 枚全正；第 1 次後第 1、2 枚變反；第 2 次後第 3、4 枚也變反；第 3 次後第 5、6 枚變反；第 4 次後第 7、8 枚變反，此時 8 枚全反 ✓。",
+          "附註：**硬幣數是偶數才有解**。若改成 7 枚，總翻動次數要是 7 個奇數之和，那必定是奇數；但每次操作貢獻 2，總數必定是偶數——奇數不可能等於偶數，所以 7 枚**無論操作幾次都做不到**。"
+        ],
+        "zh-Hans": [
+          "先看下界。**每一枚硬币都要从正面变成反面，所以每一枚被翻的次数必须是奇数**（翻偶数次会回到正面）。",
+          "奇数至少是 1，所以八枚硬币合计被翻的次数至少是 8 次。",
+          "而**每一次操作恰好翻动 2 枚硬币**，也就是为「总翻动次数」贡献 2。",
+          "设操作了 n 次，则总翻动次数是 2n，而这个数必须至少是 8，所以 2n ≥ 8，得 n ≥ 4。**至少要 4 次**。",
+          "接着要说明 4 次真的做得到。把硬币编号 1 到 8，依序操作 (1,2)、(3,4)、(5,6)、(7,8) 这四对相邻硬币。",
+          "这四对**不重叠且涵盖全部八枚**，所以每一枚都恰好被翻了 1 次（奇数次 ✓），全部从正面变成反面。",
+          "所以 4 次可行，加上前面的下界论证，答案是 4 次。",
+          "验算：追踪过程——初始 8 枚全正；第 1 次后第 1、2 枚变反；第 2 次后第 3、4 枚也变反；第 3 次后第 5、6 枚变反；第 4 次后第 7、8 枚变反，此时 8 枚全反 ✓。",
+          "附注：**硬币数是偶数才有解**。若改成 7 枚，总翻动次数要是 7 个奇数之和，那必定是奇数；但每次操作贡献 2，总数必定是偶数——奇数不可能等于偶数，所以 7 枚**无论操作几次都做不到**。"
+        ],
+        "en": [
+          "First the lower bound. Every coin must go from heads to tails, so each must be flipped an odd number of times, since an even number would return it to heads.",
+          "An odd number is at least 1, so the eight coins together must be flipped at least 8 times in total.",
+          "Each move flips exactly 2 coins, contributing 2 to that total count of flips.",
+          "With n moves the total is 2n, which must be at least 8, so 2n ≥ 8 and n ≥ 4. At least 4 moves are needed.",
+          "Now show 4 moves suffice. Numbering the coins 1 to 8, perform the moves (1,2), (3,4), (5,6) and (7,8).",
+          "These four pairs are disjoint and cover all eight coins, so each coin is flipped exactly once, an odd number, turning every coin from heads to tails.",
+          "So 4 works, and with the lower bound the answer is 4.",
+          "Check by tracing: all eight start heads; after move one, coins 1 and 2 are tails; after move two, 3 and 4 as well; after move three, 5 and 6; and after move four, 7 and 8, leaving all eight tails.",
+          "Remark: a solution exists only because the number of coins is even. With 7 coins the total number of flips would be a sum of 7 odd numbers, hence odd, while each move contributes 2 making the total even — an odd number cannot equal an even one, so 7 coins could never be turned over, however many moves are made."
+        ],
+        "ja": [
+          "まず下界です。**どのコインも表から裏へ変わるので、各コインが裏返される回数は奇数**でなければなりません（偶数回では表に戻ります）。",
+          "奇数は最小で 1 なので、8 枚合計の裏返し回数は少なくとも 8 回です。",
+          "そして**1 回の操作でちょうど 2 枚が裏返る**、すなわち「総裏返し回数」に 2 を寄与します。",
+          "操作を n 回とすると総裏返し回数は 2n で、これが 8 以上でなければならないので 2n ≥ 8、n ≥ 4。**最低 4 回**です。",
+          "次に 4 回で実際にできることを示します。コインに 1 から 8 の番号をつけ、(1,2)、(3,4)、(5,6)、(7,8) の 4 組を順に操作します。",
+          "この 4 組は**重ならず 8 枚すべてを覆う**ので、各コインはちょうど 1 回（奇数回 ✓）裏返り、すべて表から裏になります。",
+          "したがって 4 回で可能であり、先の下界と合わせて答えは 4 回です。",
+          "検算：過程を追います——最初は 8 枚とも表。1 回目で 1・2 枚目が裏、2 回目で 3・4 枚目も裏、3 回目で 5・6 枚目、4 回目で 7・8 枚目が裏となり、8 枚すべてが裏になります ✓。",
+          "補足：**コインの枚数が偶数だからこそ解があります**。7 枚なら総裏返し回数は 7 個の奇数の和で必ず奇数ですが、各操作の寄与は 2 なので総数は必ず偶数——奇数が偶数に等しくなることはなく、7 枚では**何回操作しても不可能**です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "4"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "翻轉問題的計數下界：每枚須被翻奇數次故總翻動數至少為枚數，而每次操作貢獻 2，得次數下界",
+        "notes": "設計依據：詳解以「總翻動次數」這個可計數的量同時得出下界與可行性；末尾以 7 枚的奇偶矛盾說明偶數枚才有解，把本題的計數論證延伸為可行性的判準。答案 4 已用下界推導與四次操作的逐步追蹤驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（翻轉相鄰兩枚）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "邏輯",
+        "topicCode": "logic",
+        "subtopic": "翻轉相鄰兩枚",
+        "subtopicCode": "adjacent_flip_parity"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "logic_grade9_foundation_021",
+      "topic": "logic",
+      "subtopic": "backward_doubling",
+      "difficulty": "foundation",
+      "levelStage": "grade9",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "池塘裡有一種水草，它覆蓋的面積每天都會變成前一天的 2 倍。已知第 30 天時水草恰好長滿整個池塘。求水草覆蓋池塘面積一半的那一天是第幾天。",
+        "zh-Hans": "池塘里有一种水草，它覆盖的面积每天都会变成前一天的 2 倍。已知第 30 天时水草恰好长满整个池塘。求水草覆盖池塘面积一半的那一天是第几天。",
+        "en": "A pond contains a weed whose covered area doubles every day. On day 30 the weed exactly fills the whole pond. On which day did the weed cover half of the pond?",
+        "ja": "池にある水草は、覆う面積が毎日前日の 2 倍になります。30 日目にちょうど池全体を覆いました。池の半分を覆っていたのは何日目ですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是第 29 天。",
+        "zh-Hans": "答案是第 29 天。",
+        "en": "The answer is 29.",
+        "ja": "答えは 29 日目です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "直覺很容易答成第 15 天（因為 30 的一半是 15），**但那個直覺把「加倍成長」誤當成了「等速成長」**。",
+          "正確的想法是**從結果往回推一天**，而不是把天數對半分。",
+          "已知面積每天變成前一天的 2 倍。反過來說，**前一天的面積就是後一天的一半**。",
+          "第 30 天長滿整個池塘，所以第 29 天的面積是第 30 天的一半，也就是恰好半個池塘。",
+          "所以答案是第 29 天。",
+          "**為什麼第 15 天差得那麼遠？**因為第 15 天的面積只有第 30 天的 1/2¹⁵，也就是三萬多分之一——那時水草幾乎看不見。",
+          "驗算：反過來往前推幾天核對——第 30 天是 1（整個池塘）、第 29 天是 1/2、第 28 天是 1/4、第 27 天是 1/8。可以看出**越往前面積縮得越快**，這正是加倍成長的特徵 ✓。",
+          "附註：這個結構也可以用來理解另一個問題——若池塘裡放的是**兩株**同樣的水草（總面積一開始就是兩倍），那麼長滿只需要 29 天，剛好提早一天，而不是提早一半的時間。",
+          "**加倍成長的關鍵性質是：面積翻倍所需的時間固定（這裡是 1 天），與目前的面積大小無關**——不論從很小長到兩倍，或從半滿長到全滿，都同樣只要 1 天。"
+        ],
+        "zh-Hans": [
+          "直觉很容易答成第 15 天（因为 30 的一半是 15），**但那个直觉把「加倍成长」误当成了「等速成长」**。",
+          "正确的想法是**从结果往回推一天**，而不是把天数对半分。",
+          "已知面积每天变成前一天的 2 倍。反过来说，**前一天的面积就是后一天的一半**。",
+          "第 30 天长满整个池塘，所以第 29 天的面积是第 30 天的一半，也就是恰好半个池塘。",
+          "所以答案是第 29 天。",
+          "**为什么第 15 天差得那么远？**因为第 15 天的面积只有第 30 天的 1/2¹⁵，也就是三万多分之一——那时水草几乎看不见。",
+          "验算：反过来往前推几天核对——第 30 天是 1（整个池塘）、第 29 天是 1/2、第 28 天是 1/4、第 27 天是 1/8。可以看出**越往前面积缩得越快**，这正是加倍成长的特征 ✓。",
+          "附注：这个结构也可以用来理解另一个问题——若池塘里放的是**两株**同样的水草（总面积一开始就是两倍），那么长满只需要 29 天，刚好提早一天，而不是提早一半的时间。",
+          "**加倍成长的关键性质是：面积翻倍所需的时间固定（这里是 1 天），与目前的面积大小无关**——不论从很小长到两倍，或从半满长到全满，都同样只要 1 天。"
+        ],
+        "en": [
+          "Intuition readily suggests day 15, since half of 30 is 15, but that intuition mistakes doubling growth for steady growth.",
+          "The right approach steps back one day from the result rather than halving the number of days.",
+          "The area doubles each day, so conversely the previous day's area is half the next day's.",
+          "Since day 30 fills the whole pond, day 29 held half of day 30's area, that is exactly half the pond.",
+          "So the answer is day 29.",
+          "Why is day 15 so far off? Because day 15's area is only 1/2¹⁵ of day 30's, roughly one part in thirty thousand — the weed would then be barely visible.",
+          "Check by stepping further back: day 30 is 1, the whole pond, day 29 is 1/2, day 28 is 1/4 and day 27 is 1/8. The area shrinks ever faster going backwards, which is exactly the signature of doubling growth.",
+          "Remark: the same structure explains a related question — starting with two identical weeds, so twice the initial area, the pond would fill in 29 days, just one day sooner rather than in half the time.",
+          "The key property of doubling growth is that the time to double is fixed, here one day, regardless of the current size — growing from tiny to twice as tiny takes the same one day as growing from half full to full."
+        ],
+        "ja": [
+          "直感では 15 日目と答えたくなります（30 の半分は 15 なので）。**しかしその直感は「倍々の成長」を「一定の速さの成長」と取り違えています**。",
+          "正しい考え方は日数を半分にすることではなく、**結果から 1 日さかのぼる**ことです。",
+          "面積は毎日 2 倍になります。逆にいえば、**前日の面積は翌日の半分**です。",
+          "30 日目に池全体を覆ったので、29 日目の面積はその半分、すなわちちょうど池の半分です。",
+          "したがって答えは 29 日目です。",
+          "**なぜ 15 日目はこれほど外れるのか。**15 日目の面積は 30 日目の 1/2¹⁵、つまり 3 万分の 1 ほどしかなく、そのころ水草はほとんど見えません。",
+          "検算：さらにさかのぼって確認します——30 日目は 1（池全体）、29 日目は 1/2、28 日目は 1/4、27 日目は 1/8。さかのぼるほど面積が急速に小さくなり ✓、これがまさに倍々成長の特徴です。",
+          "補足：同じ構造で別の問いも理解できます——最初に**同じ水草を 2 株**（初期面積が 2 倍）入れると、池を覆うのは 29 日で、半分の時間ではなくちょうど 1 日早くなるだけです。",
+          "**倍々成長の要点は、面積が 2 倍になるのに要する時間が一定（ここでは 1 日）で、現在の大きさに依らない**ことです。ごく小さい状態から 2 倍になるのも、半分から満杯になるのも、同じ 1 日です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "29"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "指數成長的倒推：面積每天加倍故前一天恰為後一天的一半，不可把天數對半分",
+        "notes": "設計依據：詳解量化第 15 天的面積僅為 1/2¹⁵ 以說明直覺錯得多遠，並用往前推四天的 1、1/2、1/4、1/8 呈現倒推的加速收縮；末尾以「初始兩株只提早一天」進一步鞏固「加倍時間固定」的核心性質。答案 29 已用倒推一天的關係與往前多推數日的數列驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（倒推的加倍）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "邏輯",
+        "topicCode": "logic",
+        "subtopic": "倒推的加倍",
+        "subtopicCode": "backward_doubling"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "logic_grade9_foundation_022",
+      "topic": "logic",
+      "subtopic": "conditions_narrow_number",
+      "difficulty": "foundation",
+      "levelStage": "grade9",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "有一個兩位數同時滿足下列四個條件：(1) 十位數字比個位數字大 3；(2) 這個數是 3 的倍數；(3) 這個數大於 50；(4) 個位數字是奇數。求這個兩位數。",
+        "zh-Hans": "有一个两位数同时满足下列四个条件：(1) 十位数字比个位数字大 3；(2) 这个数是 3 的倍数；(3) 这个数大于 50；(4) 个位数字是奇数。求这个两位数。",
+        "en": "A two-digit number satisfies all four conditions: its tens digit exceeds its units digit by 3; it is a multiple of 3; it is greater than 50; and its units digit is odd. Find the number.",
+        "ja": "ある 2 桁の数が次の 4 条件をすべて満たします：(1) 十の位が一の位より 3 大きい。(2) 3 の倍数である。(3) 50 より大きい。(4) 一の位が奇数である。この 2 桁の数を求めなさい。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 63。",
+        "zh-Hans": "答案是 63。",
+        "en": "The answer is 63.",
+        "ja": "答えは 63 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "**條件愈嚴格的先用**，可以最快把候選縮小。這裡條件 (1) 直接決定了數的結構，先從它下手。",
+          "設個位數字是 b，則十位數字是 b + 3。因為十位數字最大是 9，所以 b ≤ 6；又因為十位數字不能是 0（否則不是兩位數），這裡 b + 3 ≥ 3 自動滿足。",
+          "所以 b 可以是 0 到 6，對應的兩位數依序是 30、41、52、63、74、85、96。**候選一下子就只剩 7 個**。",
+          "接著用條件 (3)「大於 50」篩選：30 與 41 出局，剩下 52、63、74、85、96。",
+          "再用條件 (2)「是 3 的倍數」。用數字和判別：52 的數字和是 7 ✗；63 的是 9 ✓；74 的是 11 ✗；85 的是 13 ✗；96 的是 15 ✓。",
+          "所以剩下 63 與 96 兩個候選。**到這裡還沒有唯一解，所以第四個條件是必要的**。",
+          "最後用條件 (4)「個位數字是奇數」：63 的個位是 3，是奇數 ✓；96 的個位是 6，是偶數 ✗。",
+          "所以答案是 63。",
+          "驗算：把 63 代回四個條件逐一檢查——十位 6 減個位 3 等於 3 ✓；63 ÷ 3 = 21 是 3 的倍數 ✓；63 > 50 ✓；個位 3 是奇數 ✓。四個條件全部滿足。程式對 10 到 99 的每個兩位數逐一檢查四個條件，符合的只有 63 ✓，解唯一。"
+        ],
+        "zh-Hans": [
+          "**条件愈严格的先用**，可以最快把候选缩小。这里条件 (1) 直接决定了数的结构，先从它下手。",
+          "设个位数字是 b，则十位数字是 b + 3。因为十位数字最大是 9，所以 b ≤ 6；又因为十位数字不能是 0（否则不是两位数），这里 b + 3 ≥ 3 自动满足。",
+          "所以 b 可以是 0 到 6，对应的两位数依序是 30、41、52、63、74、85、96。**候选一下子就只剩 7 个**。",
+          "接着用条件 (3)「大于 50」筛选：30 与 41 出局，剩下 52、63、74、85、96。",
+          "再用条件 (2)「是 3 的倍数」。用数字和判别：52 的数字和是 7 ✗；63 的是 9 ✓；74 的是 11 ✗；85 的是 13 ✗；96 的是 15 ✓。",
+          "所以剩下 63 与 96 两个候选。**到这里还没有唯一解，所以第四个条件是必要的**。",
+          "最后用条件 (4)「个位数字是奇数」：63 的个位是 3，是奇数 ✓；96 的个位是 6，是偶数 ✗。",
+          "所以答案是 63。",
+          "验算：把 63 代回四个条件逐一检查——十位 6 减个位 3 等于 3 ✓；63 ÷ 3 = 21 是 3 的倍数 ✓；63 > 50 ✓；个位 3 是奇数 ✓。四个条件全部满足。程序对 10 到 99 的每个两位数逐一检查四个条件，符合的只有 63 ✓，解唯一。"
+        ],
+        "en": [
+          "Apply the most restrictive condition first to narrow the candidates fastest. Here condition one determines the number's structure, so start there.",
+          "Let the units digit be b, so the tens digit is b + 3. Since the tens digit is at most 9, b ≤ 6; and the tens digit cannot be 0 for a two-digit number, which b + 3 ≥ 3 satisfies automatically.",
+          "So b runs from 0 to 6, giving the candidates 30, 41, 52, 63, 74, 85 and 96 — just seven possibilities at once.",
+          "Next apply condition three, greater than 50: 30 and 41 are eliminated, leaving 52, 63, 74, 85 and 96.",
+          "Then condition two, a multiple of 3, tested by digit sums: 52 gives 7, no; 63 gives 9, yes; 74 gives 11, no; 85 gives 13, no; and 96 gives 15, yes.",
+          "So 63 and 96 remain. The answer is not yet unique, which is why the fourth condition is needed.",
+          "Finally condition four, an odd units digit: 63 ends in 3, odd, while 96 ends in 6, even.",
+          "So the answer is 63.",
+          "Check by substituting 63 into all four conditions: the tens digit 6 minus the units digit 3 is 3; 63 ÷ 3 = 21 so it is a multiple of 3; 63 > 50; and the units digit 3 is odd. All four hold. Testing every two-digit number from 10 to 99 against all four conditions leaves only 63, so the solution is unique."
+        ],
+        "ja": [
+          "**制約の強い条件から使う**と候補を最も速く絞れます。ここでは条件 (1) が数の構造を直接決めるので、そこから始めます。",
+          "一の位を b とすると十の位は b + 3。十の位は最大 9 なので b ≤ 6、また十の位は 0 にできませんが（2 桁でなくなる）b + 3 ≥ 3 なので自動的に満たされます。",
+          "したがって b は 0 から 6 まで、対応する 2 桁の数は 30、41、52、63、74、85、96。**候補は一気に 7 個まで絞れます**。",
+          "次に条件 (3)「50 より大きい」で絞ります：30 と 41 が脱落し、52、63、74、85、96 が残ります。",
+          "さらに条件 (2)「3 の倍数」を数字和で判定します：52 は和 7 ✗、63 は 9 ✓、74 は 11 ✗、85 は 13 ✗、96 は 15 ✓。",
+          "残るのは 63 と 96 の 2 つです。**この時点でまだ一意ではないので、4 つ目の条件が必要**になります。",
+          "最後に条件 (4)「一の位が奇数」：63 の一の位は 3 で奇数 ✓、96 の一の位は 6 で偶数 ✗。",
+          "したがって答えは 63 です。",
+          "検算：63 を 4 条件に戻して確認します——十の位 6 − 一の位 3 = 3 ✓、63 ÷ 3 = 21 で 3 の倍数 ✓、63 > 50 ✓、一の位 3 は奇数 ✓。4 条件すべてを満たします。10 から 99 までの各 2 桁の数を 4 条件で調べると、該当するのは 63 のみ ✓ で解は一意です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "63"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "多條件的逐步篩選：先用結構性最強的條件產生候選，再依序用其餘條件排除，並確認條件恰好足以定出唯一解",
+        "notes": "設計依據：前三個條件留下 63 與 96 兩個候選，第四個條件才鎖定唯一答案，詳解明確指出這一點以說明每個條件都不多餘；篩選順序刻意從結構性條件開始，示範「先用最嚴格的條件」的策略。答案 63 已用 10 到 99 的完整窮舉確認解唯一。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（由條件鎖定數字）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "邏輯",
+        "topicCode": "logic",
+        "subtopic": "由條件鎖定數字",
+        "subtopicCode": "conditions_narrow_number"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "logic_grade9_foundation_023",
+      "topic": "logic",
+      "subtopic": "floating_reference_frame",
+      "difficulty": "foundation",
+      "levelStage": "grade9",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一艘船停在海面上，船邊垂下一道繩梯，梯級之間的間隔是 20 公分。現在退潮已經結束，海水開始上漲，每小時上升 15 公分。若此刻水面上方剛好露出 5 級梯級，求 3 小時後水面上方會露出幾級梯級。（船身完好且可以自由浮動）",
+        "zh-Hans": "一艘船停在海面上，船边垂下一道绳梯，梯级之间的间隔是 20 厘米。现在退潮已经结束，海水开始上涨，每小时上升 15 厘米。若此刻水面上方刚好露出 5 级梯级，求 3 小时后水面上方会露出几级梯级。（船身完好且可以自由浮动）",
+        "en": "A ship floats at sea with a rope ladder hanging over its side, the rungs spaced 20 cm apart. The tide has turned and the water is now rising 15 cm per hour. If exactly 5 rungs are above the water now, how many rungs will be above the water 3 hours later? The ship is sound and free to float.",
+        "ja": "船が海に浮かんでおり、船べりから縄ばしごが垂れ下がっています。段の間隔は 20 cm です。潮が満ち始め、海面は毎時 15 cm 上昇します。今ちょうど 5 段が水面より上に出ているとき、3 時間後には何段が水面より上に出ていますか。（船体は無傷で自由に浮きます）"
+      },
+      "answer": {
+        "zh-Hant": "答案是 5 級。",
+        "zh-Hans": "答案是 5 级。",
+        "en": "The answer is 5.",
+        "ja": "答えは 5 段です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "先算算看水面上升了多少：每小時 15 公分，3 小時就是 15 × 3 = 45 公分。",
+          "**如果繩梯是固定在岸上不動的**，那麼水面上升 45 公分會淹掉 45 ÷ 20 = 2.25，也就是 2 級梯級，剩下 5 − 2 = 3 級。很多人會這樣算。",
+          "**但這個算法忽略了一件關鍵的事：繩梯是掛在船上的，而船會浮在水面上。**",
+          "船是自由浮動的，海水上漲時**船會跟著一起浮起來**，船身相對於水面的位置完全不變。",
+          "既然船不變，掛在船邊的繩梯也跟著一起上升，**繩梯與水面之間的相對位置就不會改變**。",
+          "所以不論水面上升多少公分、經過多少小時，露出水面的梯級數都維持原樣。",
+          "答案是 5 級。",
+          "**題目給的 20 公分與 15 公分都是刻意放入的干擾資訊**——它們看起來可以算出「淹掉幾級」，但因為參考點會一起移動，這些數字對答案毫無影響。",
+          "附註：什麼情況下答案才會改變？**若船擱淺在海底、或被纜繩牢牢固定住不能上浮**，那麼船身相對水面就會下沉，這時才需要真的去算 45 ÷ 20。**先確認參考點會不會動，是這類題目最該先做的判斷**。"
+        ],
+        "zh-Hans": [
+          "先算算看水面上升了多少：每小时 15 厘米，3 小时就是 15 × 3 = 45 厘米。",
+          "**如果绳梯是固定在岸上不动的**，那么水面上升 45 厘米会淹掉 45 ÷ 20 = 2.25，也就是 2 级梯级，剩下 5 − 2 = 3 级。很多人会这样算。",
+          "**但这个算法忽略了一件关键的事：绳梯是挂在船上的，而船会浮在水面上。**",
+          "船是自由浮动的，海水上涨时**船会跟着一起浮起来**，船身相对于水面的位置完全不变。",
+          "既然船不变，挂在船边的绳梯也跟着一起上升，**绳梯与水面之间的相对位置就不会改变**。",
+          "所以不论水面上升多少厘米、经过多少小时，露出水面的梯级数都维持原样。",
+          "答案是 5 级。",
+          "**题目给的 20 厘米与 15 厘米都是刻意放入的干扰信息**——它们看起来可以算出「淹掉几级」，但因为参考点会一起移动，这些数字对答案毫无影响。",
+          "附注：什么情况下答案才会改变？**若船搁浅在海底、或被缆绳牢牢固定住不能上浮**，那么船身相对水面就会下沉，这时才需要真的去算 45 ÷ 20。**先确认参考点会不会动，是这类题目最该先做的判断**。"
+        ],
+        "en": [
+          "First see how much the water rises: at 15 cm per hour for 3 hours, that is 15 × 3 = 45 cm.",
+          "If the ladder were fixed to the shore and could not move, a 45 cm rise would submerge 45 ÷ 20 = 2.25, that is 2 rungs, leaving 5 − 2 = 3. Many people compute exactly this.",
+          "But that calculation overlooks something crucial: the ladder hangs from the ship, and the ship floats on the water.",
+          "The ship floats freely, so as the tide rises the ship rises with it, and its position relative to the water surface does not change at all.",
+          "Since the ship does not change, the ladder hanging from it rises too, so the ladder's position relative to the water surface is unchanged.",
+          "So however far the water rises and however many hours pass, the number of rungs above the water stays the same.",
+          "The answer is 5 rungs.",
+          "The 20 cm and the 15 cm are both deliberate distractions — they look as though they could yield the number of submerged rungs, but since the reference point moves along with the water, these numbers have no bearing on the answer.",
+          "Remark: when would the answer change? If the ship were aground on the seabed, or held down firmly by a mooring line so that it could not rise, the hull would sink relative to the water and 45 ÷ 20 would genuinely need computing. Checking whether the reference point moves is the first judgement such problems demand."
+        ],
+        "ja": [
+          "まず海面がどれだけ上がるかを計算します：毎時 15 cm で 3 時間なら 15 × 3 = 45 cm。",
+          "**もし縄ばしごが陸に固定されて動かないなら**、45 cm の上昇で 45 ÷ 20 = 2.25、すなわち 2 段が沈み、残りは 5 − 2 = 3 段です。多くの人はこう計算します。",
+          "**しかしこの計算は重要な点を見落としています：縄ばしごは船に掛かっており、船は水に浮いている**のです。",
+          "船は自由に浮いているので、潮が満ちれば**船も一緒に浮き上がり**、水面に対する船体の位置はまったく変わりません。",
+          "船が変わらない以上、船べりに掛かった縄ばしごも一緒に上がり、**縄ばしごと水面の相対位置は変わりません**。",
+          "したがって海面が何 cm 上がろうと、何時間経とうと、水面より上に出ている段の数はそのままです。",
+          "答えは 5 段です。",
+          "**与えられた 20 cm と 15 cm はどちらも意図的な撹乱情報**です。「何段沈むか」を計算できそうに見えますが、基準点が一緒に動くため、これらの数値は答えにまったく影響しません。",
+          "補足：答えが変わるのはどんな場合か。**船が海底に座礁している、あるいは係留索で固定されて浮き上がれない場合**は、船体が水面に対して沈むので、そのときこそ 45 ÷ 20 を実際に計算する必要があります。**基準点が動くかどうかを先に確認すること**が、この種の問題で最初にすべき判断です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "5"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "參考點是否移動：繩梯掛在會浮起的船上，與水面的相對位置不變，故題目給的數值皆為干擾",
+        "notes": "設計依據：漲潮速率與梯級間距都是可算出「淹掉 2 級」的完整資料，使干擾具有真實的誘導力；詳解先完整走過那條錯誤的算法再指出漏洞，並說明船若擱淺或被固定時答案才會改變，讓判準（參考點是否隨之移動）可遷移到其他題目。答案 5 由「船與水面相對位置不變」的物理推理得出。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（浮起的參考點）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "邏輯",
+        "topicCode": "logic",
+        "subtopic": "浮起的參考點",
+        "subtopicCode": "floating_reference_frame"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "logic_grade9_foundation_024",
+      "topic": "logic",
+      "subtopic": "rates_with_drain",
+      "difficulty": "foundation",
+      "levelStage": "grade9",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一個水池有兩個進水管與一個排水管。單獨開甲管，6 小時可以注滿空池；單獨開乙管，4 小時可以注滿空池；而單獨開排水管，可以把滿池的水在 12 小時內排空。若從空池開始，三個管子同時打開，求幾小時後水池會注滿。",
+        "zh-Hans": "一个水池有两个进水管与一个排水管。单独开甲管，6 小时可以注满空池；单独开乙管，4 小时可以注满空池；而单独开排水管，可以把满池的水在 12 小时内排空。若从空池开始，三个管子同时打开，求几小时后水池会注满。",
+        "en": "A tank has two inlet pipes and one drain. Pipe A alone fills the empty tank in 6 hours, pipe B alone fills it in 4 hours, and the drain alone empties a full tank in 12 hours. Starting from empty with all three open, after how many hours is the tank full?",
+        "ja": "水槽に給水管が 2 本と排水管が 1 本あります。A 管だけなら空の水槽を 6 時間で満たし、B 管だけなら 4 時間で満たし、排水管だけなら満水を 12 時間で空にします。空の状態から 3 本すべてを同時に開くと、何時間で満水になりますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 3 小時。",
+        "zh-Hans": "答案是 3 小时。",
+        "en": "The answer is 3.",
+        "ja": "答えは 3 時間です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "這類問題的關鍵是**把「所需時間」轉成「每小時的工作量」**，因為速率可以直接相加減，時間卻不行。",
+          "把整個水池的容量看成 1。甲管 6 小時注滿，所以它每小時注入 1/6 池。",
+          "乙管 4 小時注滿，所以每小時注入 1/4 池。",
+          "排水管 12 小時排空，所以每小時排出 1/12 池。**排水是反方向的，要用減的**。",
+          "三管齊開時，每小時的淨變化 = 1/6 + 1/4 − 1/12。",
+          "通分（分母取 12）：1/6 = 2/12、1/4 = 3/12、1/12 = 1/12。所以淨變化 = (2 + 3 − 1)/12 = 4/12 = 1/3 池。",
+          "**淨變化是正的，表示水位確實會上升**（若排水太快而算出負數或零，水池就永遠注不滿了）。",
+          "每小時注入 1/3 池，要注滿 1 池需要 1 ÷ (1/3) = 3 小時。",
+          "驗算：3 小時內，甲管注入 3 × 1/6 = 1/2 池、乙管注入 3 × 1/4 = 3/4 池、排水管排出 3 × 1/12 = 1/4 池。淨得 1/2 + 3/4 − 1/4 = 1 池 ✓，恰好注滿。",
+          "**注意不能把時間直接相加減**——若寫成 6 + 4 − 12 = −2 小時，那是沒有意義的。時間與速率互為倒數，只有速率才能相加減。"
+        ],
+        "zh-Hans": [
+          "这类问题的关键是**把「所需时间」转成「每小时的工作量」**，因为速率可以直接相加减，时间却不行。",
+          "把整个水池的容量看成 1。甲管 6 小时注满，所以它每小时注入 1/6 池。",
+          "乙管 4 小时注满，所以每小时注入 1/4 池。",
+          "排水管 12 小时排空，所以每小时排出 1/12 池。**排水是反方向的，要用减的**。",
+          "三管齐开时，每小时的净变化 = 1/6 + 1/4 − 1/12。",
+          "通分（分母取 12）：1/6 = 2/12、1/4 = 3/12、1/12 = 1/12。所以净变化 = (2 + 3 − 1)/12 = 4/12 = 1/3 池。",
+          "**净变化是正的，表示水位确实会上升**（若排水太快而算出负数或零，水池就永远注不满了）。",
+          "每小时注入 1/3 池，要注满 1 池需要 1 ÷ (1/3) = 3 小时。",
+          "验算：3 小时内，甲管注入 3 × 1/6 = 1/2 池、乙管注入 3 × 1/4 = 3/4 池、排水管排出 3 × 1/12 = 1/4 池。净得 1/2 + 3/4 − 1/4 = 1 池 ✓，恰好注满。",
+          "**注意不能把时间直接相加减**——若写成 6 + 4 − 12 = −2 小时，那是没有意义的。时间与速率互为倒数，只有速率才能相加减。"
+        ],
+        "en": [
+          "The key to such problems is converting each stated time into an amount of work per hour, since rates may be added and subtracted while times may not.",
+          "Take the tank's capacity as 1. Pipe A fills it in 6 hours, so it delivers 1/6 of the tank per hour.",
+          "Pipe B fills it in 4 hours, delivering 1/4 per hour.",
+          "The drain empties it in 12 hours, removing 1/12 per hour, and since draining works in the opposite direction it is subtracted.",
+          "With all three open, the net change per hour is 1/6 + 1/4 − 1/12.",
+          "Over a common denominator of 12: 1/6 = 2/12, 1/4 = 3/12 and 1/12 = 1/12, so the net change is (2 + 3 − 1)/12 = 4/12 = 1/3 of the tank.",
+          "The net change is positive, so the level really does rise; had the drain been fast enough to make it zero or negative, the tank would never fill.",
+          "At 1/3 of the tank per hour, filling one whole tank takes 1 ÷ (1/3) = 3 hours.",
+          "Check: over 3 hours pipe A delivers 3 × 1/6 = 1/2, pipe B delivers 3 × 1/4 = 3/4 and the drain removes 3 × 1/12 = 1/4, netting 1/2 + 3/4 − 1/4 = 1 tank exactly.",
+          "Note that the times themselves must not be combined — writing 6 + 4 − 12 = −2 hours is meaningless. Time and rate are reciprocals, and only rates may be added or subtracted."
+        ],
+        "ja": [
+          "この種の問題の鍵は、**「所要時間」を「1 時間あたりの仕事量」に直す**ことです。速さは足し引きできますが、時間はできません。",
+          "水槽の容量を 1 とします。A 管は 6 時間で満たすので、1 時間あたり 1/6 を注ぎます。",
+          "B 管は 4 時間で満たすので、1 時間あたり 1/4 を注ぎます。",
+          "排水管は 12 時間で空にするので、1 時間あたり 1/12 を出します。**排水は逆向きなので引き算**です。",
+          "3 本同時に開くと、1 時間あたりの正味の変化 = 1/6 + 1/4 − 1/12。",
+          "分母を 12 に通分すると 1/6 = 2/12、1/4 = 3/12、1/12 = 1/12 なので、正味の変化 = (2 + 3 − 1)/12 = 4/12 = 1/3。",
+          "**正味の変化が正であることは水位が確かに上がることを意味します**（排水が速すぎて 0 以下になれば、水槽は永遠に満水になりません）。",
+          "1 時間あたり 1/3 なので、1 杯を満たすには 1 ÷ (1/3) = 3 時間かかります。",
+          "検算：3 時間で A は 3 × 1/6 = 1/2、B は 3 × 1/4 = 3/4 を注ぎ、排水管は 3 × 1/12 = 1/4 を出します。正味 1/2 + 3/4 − 1/4 = 1 ✓ でちょうど満水です。",
+          "**時間そのものを足し引きしてはいけません**。6 + 4 − 12 = −2 時間と書いても意味がありません。時間と速さは逆数の関係にあり、足し引きできるのは速さだけです。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "3"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "含反向作用的工作量：把時間化為每小時的速率後相加減，排水取負值，再由淨速率求所需時間",
+        "notes": "設計依據：加入排水管使速率必須有正有負，並讓「淨速率為正」成為需要確認的前提（否則永遠注不滿）；三個時間 6、4、12 的通分結果恰為 1/3 使答案為整數，便於代回逐管核算。答案 3 已用速率相加減與 3 小時各管進出量的分數精確核對雙向驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（含排水的工作量）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "邏輯",
+        "topicCode": "logic",
+        "subtopic": "含排水的工作量",
+        "subtopicCode": "rates_with_drain"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "logic_grade9_foundation_025",
+      "topic": "logic",
+      "subtopic": "clock_drift",
+      "difficulty": "foundation",
+      "levelStage": "grade9",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "有兩個時鐘：甲鐘每天會快 2 分鐘，乙鐘每天會慢 3 分鐘。今天中午，兩個鐘都被調整成與標準時間完全一致。求至少要經過幾天，兩個鐘所顯示的時間會相差 1 小時。",
+        "zh-Hans": "有两个时钟：甲钟每天会快 2 分钟，乙钟每天会慢 3 分钟。今天中午，两个钟都被调整成与标准时间完全一致。求至少要经过几天，两个钟所显示的时间会相差 1 小时。",
+        "en": "Two clocks are set exactly to standard time at noon today. One gains 2 minutes per day and the other loses 3 minutes per day. After how many days will the two clocks differ by 1 hour?",
+        "ja": "2 つの時計があり、A は 1 日に 2 分進み、B は 1 日に 3 分遅れます。今日の正午に両方とも標準時刻ちょうどに合わせました。2 つの時計の表示が 1 時間ずれるのは、少なくとも何日後ですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 12 天。",
+        "zh-Hans": "答案是 12 天。",
+        "en": "The answer is 12.",
+        "ja": "答えは 12 日です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "**要看的是兩個鐘之間的差距，不是各自與標準時間的差距**。這是本題最關鍵的一點。",
+          "甲鐘每天往前偏離標準時間 2 分鐘，乙鐘每天往後偏離 3 分鐘——**兩者偏離的方向相反**。",
+          "所以每過一天，甲鐘顯示的時間與乙鐘顯示的時間之間的差距，會增加 2 + 3 = 5 分鐘。**方向相反時要相加，不是相減**。",
+          "接著把目標換成同樣的單位。1 小時 = 60 分鐘。",
+          "設經過 n 天，則兩鐘的差距是 5n 分鐘。令 5n = 60，得 n = 60 ÷ 5 = 12 天。",
+          "所以 12 天後兩鐘相差 1 小時。",
+          "驗算：12 天後，甲鐘比標準時間快 2 × 12 = 24 分鐘，乙鐘比標準時間慢 3 × 12 = 36 分鐘。",
+          "兩者的差距 = 24 + 36 = 60 分鐘 = 1 小時 ✓，與計算相符。",
+          "**若誤把兩者相減**，會算成每天差 3 − 2 = 1 分鐘，得到 60 天——那是把兩個鐘都當成往同一個方向偏離了。附註：若改成兩個鐘都變快（例如一個快 2 分、一個快 3 分），那時才要用相減，每天差距 1 分鐘，需要 60 天。"
+        ],
+        "zh-Hans": [
+          "**要看的是两个钟之间的差距，不是各自与标准时间的差距**。这是本题最关键的一点。",
+          "甲钟每天往前偏离标准时间 2 分钟，乙钟每天往后偏离 3 分钟——**两者偏离的方向相反**。",
+          "所以每过一天，甲钟显示的时间与乙钟显示的时间之间的差距，会增加 2 + 3 = 5 分钟。**方向相反时要相加，不是相减**。",
+          "接着把目标换成同样的单位。1 小时 = 60 分钟。",
+          "设经过 n 天，则两钟的差距是 5n 分钟。令 5n = 60，得 n = 60 ÷ 5 = 12 天。",
+          "所以 12 天后两钟相差 1 小时。",
+          "验算：12 天后，甲钟比标准时间快 2 × 12 = 24 分钟，乙钟比标准时间慢 3 × 12 = 36 分钟。",
+          "两者的差距 = 24 + 36 = 60 分钟 = 1 小时 ✓，与计算相符。",
+          "**若误把两者相减**，会算成每天差 3 − 2 = 1 分钟，得到 60 天——那是把两个钟都当成往同一个方向偏离了。附注：若改成两个钟都变快（例如一个快 2 分、一个快 3 分），那时才要用相减，每天差距 1 分钟，需要 60 天。"
+        ],
+        "en": [
+          "What matters is the gap between the two clocks, not each one's gap from standard time. That is the crucial point here.",
+          "One clock drifts forward from standard time by 2 minutes a day while the other drifts backward by 3 minutes a day — the two drift in opposite directions.",
+          "So each day the gap between what the two clocks show grows by 2 + 3 = 5 minutes. Opposite directions call for addition, not subtraction.",
+          "Next convert the target to the same units: 1 hour = 60 minutes.",
+          "After n days the gap is 5n minutes, so setting 5n = 60 gives n = 60 ÷ 5 = 12 days.",
+          "So after 12 days the two clocks differ by 1 hour.",
+          "Check: after 12 days one clock is 2 × 12 = 24 minutes ahead of standard time and the other is 3 × 12 = 36 minutes behind.",
+          "The gap between them is 24 + 36 = 60 minutes, that is 1 hour, matching the calculation.",
+          "Subtracting instead would give a daily gap of 3 − 2 = 1 minute and an answer of 60 days — which would treat both clocks as drifting the same way. Remark: if both clocks ran fast, say by 2 and 3 minutes, subtraction would then be correct, giving a 1-minute daily gap and 60 days."
+        ],
+        "ja": [
+          "**見るべきは 2 つの時計の間のずれであって、それぞれと標準時刻とのずれではありません**。これが本問で最も重要な点です。",
+          "A は毎日 2 分ずつ標準時刻より進む方向へ、B は毎日 3 分ずつ遅れる方向へずれます——**ずれの向きが互いに逆**です。",
+          "したがって 1 日経つごとに、A の表示と B の表示の差は 2 + 3 = 5 分ずつ広がります。**向きが逆のときは足すのであって引くのではありません**。",
+          "次に目標を同じ単位に直します。1 時間 = 60 分。",
+          "n 日経つとすると 2 つの時計の差は 5n 分。5n = 60 とおくと n = 60 ÷ 5 = 12 日。",
+          "したがって 12 日後に 2 つの時計は 1 時間ずれます。",
+          "検算：12 日後、A は標準時刻より 2 × 12 = 24 分進み、B は 3 × 12 = 36 分遅れています。",
+          "両者の差 = 24 + 36 = 60 分 = 1 時間 ✓ で計算と一致します。",
+          "**誤って引いてしまうと** 1 日あたりの差を 3 − 2 = 1 分として 60 日という答えになります——これは 2 つの時計が同じ向きにずれていると見なしたことになります。補足：もし両方とも進む時計なら（たとえば 2 分進むものと 3 分進むもの）、そのときこそ引き算が正しく、1 日あたりの差は 1 分で 60 日必要になります。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "12"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "相對誤差的累積：兩鐘偏離方向相反故差距每天增加兩者之和，須與「同向偏離時相減」區分",
+        "notes": "設計依據：一快一慢使每日差距為 2 + 3 = 5 分鐘而非 1 分鐘，誤用相減會得到 60 天這個相差五倍的答案；詳解另指出兩鐘同向時才該相減，讓相加與相減的適用條件對照清楚。答案 12 已用差距累積式與 12 天後各鐘偏離量（+24 與 −36）相加為 60 分鐘的核對雙向驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（兩鐘的誤差）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "邏輯",
+        "topicCode": "logic",
+        "subtopic": "兩鐘的誤差",
+        "subtopicCode": "clock_drift"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "logic_grade9_foundation_026",
+      "topic": "logic",
+      "subtopic": "coin_triangle_inversion",
+      "difficulty": "foundation",
+      "levelStage": "grade9",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "有 10 枚相同的硬幣排成一個三角形：第一列 1 枚、第二列 2 枚、第三列 3 枚、第四列 4 枚，尖端朝上。現在要把它變成尖端朝下的三角形（同樣是 1、2、3、4 枚由上往下排列，但方向相反）。每次操作可以移動一枚硬幣到新的位置。求最少需要移動幾枚硬幣。",
+        "zh-Hans": "有 10 枚相同的硬币排成一个三角形：第一行 1 枚、第二行 2 枚、第三行 3 枚、第四行 4 枚，尖端朝上。现在要把它变成尖端朝下的三角形（同样是 1、2、3、4 枚由上往下排列，但方向相反）。每次操作可以移动一枚硬币到新的位置。求最少需要移动几枚硬币。",
+        "en": "Ten identical coins form a triangle pointing up: 1 coin in the first row, 2 in the second, 3 in the third and 4 in the fourth. The triangle is to be turned into one pointing down, again with rows of 1, 2, 3 and 4 but in the opposite orientation. Each move relocates one coin. What is the minimum number of coins that must be moved?",
+        "ja": "同じコイン 10 枚が上向きの三角形に並んでいます：1 行目 1 枚、2 行目 2 枚、3 行目 3 枚、4 行目 4 枚です。これを下向きの三角形（同じく 1・2・3・4 枚だが向きが逆）に変えます。1 回の操作でコイン 1 枚を別の位置へ動かせるとき、最低何枚動かせばよいですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 3 枚。",
+        "zh-Hans": "答案是 3 枚。",
+        "en": "The answer is 3.",
+        "ja": "答えは 3 枚です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "**要移動的枚數，等於「原本有硬幣但新位置沒有」的格子數**。所以關鍵是先看清楚兩個三角形重疊之後，哪些位置是共用的。",
+          "把原三角形（尖端朝上）由上而下想成四列：第 1 列 1 枚、第 2 列 2 枚、第 3 列 3 枚、第 4 列 4 枚。",
+          "目標三角形（尖端朝下）由上而下則是：第 1 列 4 枚、第 2 列 3 枚、第 3 列 2 枚、第 4 列 1 枚。",
+          "把兩者對齊疊在一起後可以看出：**中間的部分是共用的，只有三個角落不一樣**。",
+          "具體地說，原三角形最頂端的那 1 枚，在倒轉後的圖形中沒有對應位置；而原三角形最底下那一列的**兩個端點**，在倒轉後也落在圖形之外。",
+          "所以共有 1 + 2 = 3 枚硬幣「無處可待」，必須移走；而倒轉後的圖形也恰好有 3 個位置是空的（倒三角形最底下那 1 個，以及最上面那列的兩個端點），剛好可以放進這 3 枚。",
+          "所以最少移動 3 枚。**下界也在此**：這 3 枚原本所在的位置在新圖形中不存在，無論如何都非移不可，所以不可能少於 3 枚。",
+          "驗算：核對總數——原本 10 枚，其中 7 枚留在原地不動、3 枚移走；新圖形也是 10 個位置，其中 7 個由原地的硬幣填滿、3 個由移來的硬幣填滿 ✓，數目吻合。",
+          "附註：**共用的 7 枚形成一個六邊形**（把上下兩個尖角與底列兩端去掉後剩下的形狀）。這也解釋了為什麼答案這麼小——兩個三角形的重疊部分相當大，真正需要搬動的只有三個角。"
+        ],
+        "zh-Hans": [
+          "**要移动的枚数，等于「原本有硬币但新位置没有」的格子数**。所以关键是先看清楚两个三角形重叠之后，哪些位置是共用的。",
+          "把原三角形（尖端朝上）由上而下想成四行：第 1 行 1 枚、第 2 行 2 枚、第 3 行 3 枚、第 4 行 4 枚。",
+          "目标三角形（尖端朝下）由上而下则是：第 1 行 4 枚、第 2 行 3 枚、第 3 行 2 枚、第 4 行 1 枚。",
+          "把两者对齐叠在一起后可以看出：**中间的部分是共用的，只有三个角落不一样**。",
+          "具体地说，原三角形最顶端的那 1 枚，在倒转后的图形中没有对应位置；而原三角形最底下那一行的**两个端点**，在倒转后也落在图形之外。",
+          "所以共有 1 + 2 = 3 枚硬币「无处可待」，必须移走；而倒转后的图形也恰好有 3 个位置是空的（倒三角形最底下那 1 个，以及最上面那行的两个端点），刚好可以放进这 3 枚。",
+          "所以最少移动 3 枚。**下界也在此**：这 3 枚原本所在的位置在新图形中不存在，无论如何都非移不可，所以不可能少于 3 枚。",
+          "验算：核对总数——原本 10 枚，其中 7 枚留在原地不动、3 枚移走；新图形也是 10 个位置，其中 7 个由原地的硬币填满、3 个由移来的硬币填满 ✓，数目吻合。",
+          "附注：**共用的 7 枚形成一个六边形**（把上下两个尖角与底行两端去掉后剩下的形状）。这也解释了为什么答案这么小——两个三角形的重叠部分相当大，真正需要搬动的只有三个角。"
+        ],
+        "en": [
+          "The number of coins that must move equals the number of positions occupied now but absent from the target. So the key is to see which positions the two triangles share when overlaid.",
+          "Read the original upward triangle as four rows from the top: 1 coin, then 2, then 3, then 4.",
+          "The target downward triangle read from the top is: 4 coins, then 3, then 2, then 1.",
+          "Overlaying them aligned shows that the middle portion is shared and only three corners differ.",
+          "Specifically, the single coin at the apex of the original has no counterpart in the inverted figure, and the two end coins of the original's bottom row also fall outside it.",
+          "So 1 + 2 = 3 coins have nowhere to stay and must be relocated; and the inverted figure has exactly 3 vacant positions — the single coin at its bottom point and the two ends of its top row — which those 3 coins fill exactly.",
+          "So the minimum is 3. That also supplies the lower bound: those 3 positions do not exist in the new figure, so those coins must move no matter what, and fewer than 3 is impossible.",
+          "Check the totals: of the original 10 coins, 7 stay put and 3 move; the new figure also has 10 positions, 7 filled by coins that never moved and 3 by the relocated ones, so the counts match.",
+          "Remark: the 7 shared coins form a hexagon, the shape left after removing the two apexes and the two ends of the bottom row. That explains why the answer is so small — the two triangles overlap substantially, and only the three corners genuinely need moving."
+        ],
+        "ja": [
+          "**動かすべき枚数は、「今はコインがあるが新しい配置にはない」位置の数**に等しくなります。したがって 2 つの三角形を重ねたときどの位置が共通かを見極めるのが鍵です。",
+          "元の上向き三角形を上から 4 行と見ます：1 行目 1 枚、2 行目 2 枚、3 行目 3 枚、4 行目 4 枚。",
+          "目標の下向き三角形を上から見ると：1 行目 4 枚、2 行目 3 枚、3 行目 2 枚、4 行目 1 枚。",
+          "そろえて重ねると分かります：**中央部分は共通で、異なるのは 3 つの角だけ**です。",
+          "具体的には、元の三角形の頂点にある 1 枚は反転後の図形に対応する位置がなく、元の最下行の**両端**も反転後の図形の外に出ます。",
+          "したがって 1 + 2 = 3 枚が「居場所を失い」動かす必要があります。一方、反転後の図形にもちょうど 3 か所の空きがあり（下向き三角形の最下点と最上行の両端）、この 3 枚がぴったり収まります。",
+          "したがって最低 3 枚です。**下界もここから得られます**：この 3 枚の位置は新しい図形に存在しないので何をしても動かさざるをえず、3 枚未満は不可能です。",
+          "検算：総数を確認します——元は 10 枚で、7 枚はその場に残り 3 枚が動きます。新しい図形も 10 か所で、7 か所は動かなかったコイン、3 か所は移動したコインで埋まります ✓ と数が合います。",
+          "補足：**共通の 7 枚は六角形をなします**（上下の頂点と最下行の両端を除いた形）。答えがこれほど小さい理由もここにあります——2 つの三角形の重なりが大きく、実際に動かすのは 3 つの角だけです。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "3"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "重疊部分的計數：需移動的枚數等於「原有而新位置沒有」的格子數，此數同時給出下界",
+        "notes": "設計依據：解法把「最少移動幾枚」化為兩個圖形的重疊比對，使下界（那些位置在新圖形中不存在）與構造（空位數恰好相等）同時成立；詳解另指出共用的 7 枚構成六邊形，解釋答案為何遠小於總數。答案 3 已用移出與移入的位置數各為 3、且留守 7 枚使總數吻合的核對驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（硬幣三角形的倒轉）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "邏輯",
+        "topicCode": "logic",
+        "subtopic": "硬幣三角形的倒轉",
+        "subtopicCode": "coin_triangle_inversion"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "logic_grade9_foundation_027",
+      "topic": "logic",
+      "subtopic": "average_removed_value",
+      "difficulty": "foundation",
+      "levelStage": "grade9",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "有五個數，它們的平均是 12。現在從中拿掉一個數，剩下四個數的平均變成 11。求被拿掉的那個數。",
+        "zh-Hans": "有五个数，它们的平均是 12。现在从中拿掉一个数，剩下四个数的平均变成 11。求被拿掉的那个数。",
+        "en": "Five numbers have an average of 12. One number is removed and the remaining four have an average of 11. Find the number that was removed.",
+        "ja": "5 つの数の平均は 12 です。そこから 1 つ取り除くと、残る 4 つの平均は 11 になりました。取り除いた数を求めなさい。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 16。",
+        "zh-Hans": "答案是 16。",
+        "en": "The answer is 16.",
+        "ja": "答えは 16 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "平均本身不能直接相加減，**要先換算成「總和」才能比較**——這是處理平均變化問題的通則。",
+          "五個數的平均是 12，所以它們的總和 = 12 × 5 = 60。",
+          "拿掉一個數後剩下四個，平均是 11，所以這四個數的總和 = 11 × 4 = 44。",
+          "**被拿掉的那個數，就是兩個總和的差**：60 − 44 = 16。",
+          "所以被拿掉的數是 16。",
+          "驗算：假設原本的五個數是 16、11、11、11、11。總和 = 16 + 11 × 4 = 16 + 44 = 60，平均 60 ÷ 5 = 12 ✓；拿掉 16 後剩下四個 11，平均 11 ✓，兩個條件都符合。",
+          "**注意平均下降了 1，不代表拿掉的數是 12 − 1 = 11**。事實上拿掉的是 16，比原本的平均 12 還大——正因為拿掉了一個比平均大的數，剩下的平均才會下降。",
+          "換個角度看：拿掉的 16 比平均 12 多出 4，這多出來的 4 原本是「分攤」給五個數的；拿掉後這 4 就不見了，而剩下的四個數要吸收這個變化，所以平均下降 4 ÷ 4 = 1 ✓，與題目相符。",
+          "附註：若拿掉的數恰好等於原平均 12，剩下四個數的總和是 60 − 12 = 48，平均仍是 48 ÷ 4 = 12，完全不變——**只有拿掉的數不等於平均時，平均才會改變**。"
+        ],
+        "zh-Hans": [
+          "平均本身不能直接相加减，**要先换算成「总和」才能比较**——这是处理平均变化问题的通则。",
+          "五个数的平均是 12，所以它们的总和 = 12 × 5 = 60。",
+          "拿掉一个数后剩下四个，平均是 11，所以这四个数的总和 = 11 × 4 = 44。",
+          "**被拿掉的那个数，就是两个总和的差**：60 − 44 = 16。",
+          "所以被拿掉的数是 16。",
+          "验算：假设原本的五个数是 16、11、11、11、11。总和 = 16 + 11 × 4 = 16 + 44 = 60，平均 60 ÷ 5 = 12 ✓；拿掉 16 后剩下四个 11，平均 11 ✓，两个条件都符合。",
+          "**注意平均下降了 1，不代表拿掉的数是 12 − 1 = 11**。事实上拿掉的是 16，比原本的平均 12 还大——正因为拿掉了一个比平均大的数，剩下的平均才会下降。",
+          "换个角度看：拿掉的 16 比平均 12 多出 4，这多出来的 4 原本是「分摊」给五个数的；拿掉后这 4 就不见了，而剩下的四个数要吸收这个变化，所以平均下降 4 ÷ 4 = 1 ✓，与题目相符。",
+          "附注：若拿掉的数恰好等于原平均 12，剩下四个数的总和是 60 − 12 = 48，平均仍是 48 ÷ 4 = 12，完全不变——**只有拿掉的数不等于平均时，平均才会改变**。"
+        ],
+        "en": [
+          "Averages cannot be added or subtracted directly; they must first be converted into totals — the general rule for problems about changing averages.",
+          "Five numbers averaging 12 have total 12 × 5 = 60.",
+          "After one is removed, the remaining four average 11, so their total is 11 × 4 = 44.",
+          "The removed number is the difference of the two totals: 60 − 44 = 16.",
+          "So the number removed is 16.",
+          "Check: suppose the five numbers were 16, 11, 11, 11 and 11. Their total is 16 + 11 × 4 = 16 + 44 = 60 with average 60 ÷ 5 = 12, and removing 16 leaves four 11s averaging 11, satisfying both conditions.",
+          "Note that the average dropping by 1 does not mean the removed number was 12 − 1 = 11. In fact 16 was removed, larger than the original average of 12 — and it is precisely because a larger-than-average number left that the remaining average fell.",
+          "Another view: the removed 16 exceeded the average of 12 by 4, and that surplus of 4 had been shared among five numbers. Once it left, the remaining four absorb the change, so the average drops by 4 ÷ 4 = 1, matching the problem.",
+          "Remark: had the removed number equalled the original average of 12, the remaining total would be 60 − 12 = 48 with average 48 ÷ 4 = 12, entirely unchanged — the average shifts only when the removed number differs from it."
+        ],
+        "ja": [
+          "平均そのものは足し引きできません。**まず「合計」に直してから比べる**——これが平均の変化を扱うときの通則です。",
+          "5 つの数の平均が 12 なので、合計 = 12 × 5 = 60。",
+          "1 つ取り除いた残り 4 つの平均が 11 なので、その合計 = 11 × 4 = 44。",
+          "**取り除いた数は 2 つの合計の差**です：60 − 44 = 16。",
+          "したがって取り除いた数は 16 です。",
+          "検算：元の 5 数を 16、11、11、11、11 としてみます。合計 = 16 + 11 × 4 = 16 + 44 = 60、平均 60 ÷ 5 = 12 ✓。16 を取り除くと 11 が 4 つ残り平均 11 ✓ で、両方の条件を満たします。",
+          "**平均が 1 下がったからといって、取り除いた数が 12 − 1 = 11 だとは限りません**。実際に取り除いたのは 16 で、元の平均 12 より大きい——平均より大きい数が抜けたからこそ、残りの平均が下がったのです。",
+          "別の見方：取り除いた 16 は平均 12 より 4 大きく、この 4 はもともと 5 つの数に「分け合われて」いました。抜けた後は残る 4 つがこの変化を吸収するので、平均は 4 ÷ 4 = 1 下がります ✓ で題意と一致します。",
+          "補足：取り除いた数がちょうど元の平均 12 なら、残りの合計は 60 − 12 = 48、平均は 48 ÷ 4 = 12 でまったく変わりません——**平均が動くのは取り除いた数が平均と異なるときだけ**です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "16"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "平均變化的反推：先把平均換算成總和，被移除的數即為兩個總和之差",
+        "notes": "設計依據：被拿掉的數 16 大於原平均 12 而平均卻下降，這個看似矛盾的關係正是本題要辨明的重點，詳解另以「超出平均 4 由剩下四人吸收」解釋下降幅度恰為 1；末尾指出拿掉恰為平均的數時平均不變，使變化的成因清楚。答案 16 已用總和相減與具體數列 16、11、11、11、11 的兩個條件核對驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（平均變化的反推）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "邏輯",
+        "topicCode": "logic",
+        "subtopic": "平均變化的反推",
+        "subtopicCode": "average_removed_value"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "logic_grade9_foundation_028",
+      "topic": "logic",
+      "subtopic": "equal_sum_grouping",
+      "difficulty": "foundation",
+      "levelStage": "grade9",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "把鐘面上的 1 到 12 這十二個數分成若干組，要求每一組的數字之和都相等，而且每一組至少要有 2 個數。求最多可以分成幾組。",
+        "zh-Hans": "把钟面上的 1 到 12 这十二个数分成若干组，要求每一组的数字之和都相等，而且每一组至少要有 2 个数。求最多可以分成几组。",
+        "en": "The twelve numbers 1 to 12 on a clock face are to be split into groups so that every group has the same sum and every group contains at least 2 numbers. What is the greatest possible number of groups?",
+        "ja": "時計の文字盤の 1 から 12 までの 12 個の数を、各グループの数の和がすべて等しく、かつ各グループに少なくとも 2 個の数が入るように分けます。最大でいくつのグループに分けられますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 6 組。",
+        "zh-Hans": "答案是 6 组。",
+        "en": "The answer is 6.",
+        "ja": "答えは 6 グループです。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "先算總和：1 + 2 + ⋯ + 12 = (1 + 12) × 12 ÷ 2 = 13 × 6 = 78。",
+          "若分成 g 組且每組的和相等，那麼**每組的和必定是 78 ÷ g**，所以 g 必須是 78 的因數。",
+          "接著看組數的上限。**每組至少要有 2 個數，而總共只有 12 個數**，所以組數最多是 12 ÷ 2 = 6 組。",
+          "78 的因數中不超過 6 的有 1、2、3、6。要讓組數最多，先試最大的 g = 6。",
+          "g = 6 時每組的和是 78 ÷ 6 = 13，而且每組恰好 2 個數（因為 12 個數分成 6 組，每組至少 2 個，只能剛好各 2 個）。",
+          "所以要找出把 1 到 12 配成 6 對、每對的和都是 13 的方法。**用「最大配最小」的方式**：(1, 12)、(2, 11)、(3, 10)、(4, 9)、(5, 8)、(6, 7)。",
+          "檢查每一對的和：1 + 12 = 13 ✓、2 + 11 = 13 ✓、3 + 10 = 13 ✓、4 + 9 = 13 ✓、5 + 8 = 13 ✓、6 + 7 = 13 ✓。六對全部成立，而且十二個數不重不漏地用完 ✓。",
+          "所以 6 組可行，加上前面「至多 6 組」的上限論證，答案就是 6 組。",
+          "驗算：6 組 × 每組和 13 = 78 ✓，與總和相符。附註：**這個配對方式並非湊巧**——1 到 12 是連續整數，把最小的配最大的、次小的配次大的，每一對的和自然都相等，這與等差數列求和時「首尾配對」用的是同一個想法。"
+        ],
+        "zh-Hans": [
+          "先算总和：1 + 2 + ⋯ + 12 = (1 + 12) × 12 ÷ 2 = 13 × 6 = 78。",
+          "若分成 g 组且每组的和相等，那么**每组的和必定是 78 ÷ g**，所以 g 必须是 78 的因数。",
+          "接着看组数的上限。**每组至少要有 2 个数，而总共只有 12 个数**，所以组数最多是 12 ÷ 2 = 6 组。",
+          "78 的因数中不超过 6 的有 1、2、3、6。要让组数最多，先试最大的 g = 6。",
+          "g = 6 时每组的和是 78 ÷ 6 = 13，而且每组恰好 2 个数（因为 12 个数分成 6 组，每组至少 2 个，只能刚好各 2 个）。",
+          "所以要找出把 1 到 12 配成 6 对、每对的和都是 13 的方法。**用「最大配最小」的方式**：(1, 12)、(2, 11)、(3, 10)、(4, 9)、(5, 8)、(6, 7)。",
+          "检查每一对的和：1 + 12 = 13 ✓、2 + 11 = 13 ✓、3 + 10 = 13 ✓、4 + 9 = 13 ✓、5 + 8 = 13 ✓、6 + 7 = 13 ✓。六对全部成立，而且十二个数不重不漏地用完 ✓。",
+          "所以 6 组可行，加上前面「至多 6 组」的上限论证，答案就是 6 组。",
+          "验算：6 组 × 每组和 13 = 78 ✓，与总和相符。附注：**这个配对方式并非凑巧**——1 到 12 是连续整数，把最小的配最大的、次小的配次大的，每一对的和自然都相等，这与等差数列求和时「首尾配对」用的是同一个想法。"
+        ],
+        "en": [
+          "First the total: 1 + 2 + ⋯ + 12 = (1 + 12) × 12 ÷ 2 = 13 × 6 = 78.",
+          "If there are g groups all with the same sum, each group sums to 78 ÷ g, so g must divide 78.",
+          "Next the upper bound on the number of groups. Each group needs at least 2 numbers and there are only 12 numbers, so there can be at most 12 ÷ 2 = 6 groups.",
+          "The divisors of 78 not exceeding 6 are 1, 2, 3 and 6. To maximise the count, try the largest, g = 6.",
+          "With g = 6 each group sums to 78 ÷ 6 = 13, and each group holds exactly 2 numbers, since 12 numbers in 6 groups with at least 2 each leaves no other option.",
+          "So 1 to 12 must be paired into 6 pairs each summing to 13. Pairing largest with smallest gives (1, 12), (2, 11), (3, 10), (4, 9), (5, 8) and (6, 7).",
+          "Checking the sums: 1 + 12 = 13, 2 + 11 = 13, 3 + 10 = 13, 4 + 9 = 13, 5 + 8 = 13 and 6 + 7 = 13. All six work, and the twelve numbers are used exactly once each.",
+          "So 6 groups are achievable, and with the earlier bound of at most 6 the answer is 6.",
+          "Check: 6 groups times a sum of 13 gives 78, matching the total. Remark: the pairing is no accident — 1 to 12 are consecutive integers, so pairing smallest with largest, next-smallest with next-largest, automatically equalises the sums, the same idea used when summing an arithmetic series by pairing the ends."
+        ],
+        "ja": [
+          "まず合計を求めます：1 + 2 + ⋯ + 12 = (1 + 12) × 12 ÷ 2 = 13 × 6 = 78。",
+          "g 個のグループに分けて和がすべて等しいなら、**各グループの和は必ず 78 ÷ g** なので、g は 78 の約数でなければなりません。",
+          "次にグループ数の上限です。**各グループに最低 2 個必要で、数は全部で 12 個**なので、グループ数は最大 12 ÷ 2 = 6 です。",
+          "78 の約数で 6 以下のものは 1、2、3、6。最大にするため g = 6 から試します。",
+          "g = 6 のとき各グループの和は 78 ÷ 6 = 13 で、各グループはちょうど 2 個です（12 個を 6 グループに、各最低 2 個なら 2 個ずつしかありえません）。",
+          "したがって 1 から 12 を和が 13 の 6 組に分ける必要があります。**「最小と最大を組む」方式**で：(1, 12)、(2, 11)、(3, 10)、(4, 9)、(5, 8)、(6, 7)。",
+          "各組の和を確認します：1 + 12 = 13 ✓、2 + 11 = 13 ✓、3 + 10 = 13 ✓、4 + 9 = 13 ✓、5 + 8 = 13 ✓、6 + 7 = 13 ✓。6 組すべて成立し、12 個の数を重複も漏れもなく使い切っています ✓。",
+          "したがって 6 グループが可能であり、先の「最大 6」という上限と合わせて答えは 6 です。",
+          "検算：6 グループ × 各和 13 = 78 ✓ で総和と一致します。補足：**この組み方は偶然ではありません**。1 から 12 は連続する整数なので、最小と最大、次に小さいものと次に大きいものを組めば各組の和は自然に等しくなります。等差数列の和を求めるときの「両端をペアにする」考え方と同じです。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "6"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "等和分組：組數必為總和的因數且受「每組至少 2 個」的上限限制，再以首尾配對達成上限",
+        "notes": "設計依據：上限來自兩個獨立的限制（組數整除總和、每組至少 2 個），須同時滿足；1 到 12 為連續整數使首尾配對自然給出等和，詳解點出這與等差求和的配對是同一個想法。答案 6 已用總和 78 的因數篩選與六對配對的逐一驗和獨立驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（等和分組）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "邏輯",
+        "topicCode": "logic",
+        "subtopic": "等和分組",
+        "subtopicCode": "equal_sum_grouping"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "logic_grade9_foundation_029",
+      "topic": "logic",
+      "subtopic": "binary_weight_set",
+      "difficulty": "foundation",
+      "levelStage": "grade9",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "有四個砝碼，重量分別是 1、2、4、8 公克，每種各一個。使用一個天平，砝碼**只能放在同一邊**（待秤物放在另一邊）。若每次可以任選若干個砝碼（至少一個）一起使用，求總共可以秤出多少種不同的整數重量。",
+        "zh-Hans": "有四个砝码，重量分别是 1、2、4、8 克，每种各一个。使用一个天平，砝码**只能放在同一边**（待称物放在另一边）。若每次可以任选若干个砝码（至少一个）一起使用，求总共可以称出多少种不同的整数重量。",
+        "en": "Four weights of 1, 2, 4 and 8 grams are available, one of each. On a balance, the weights may be placed only on one pan, with the object on the other. Choosing any non-empty selection of weights each time, how many different whole-number weights can be measured?",
+        "ja": "1、2、4、8 g の分銅が 1 個ずつ、計 4 個あります。てんびんでは分銅を**片側だけ**に載せ（測る物は反対側）ます。毎回いくつか（1 個以上）の分銅を選んで使うとき、量れる異なる整数の重さは全部で何種類ありますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 15 種。",
+        "zh-Hans": "答案是 15 种。",
+        "en": "The answer is 15.",
+        "ja": "答えは 15 種類です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "每個砝碼都只有「用」與「不用」兩種選擇，而且只能放同一邊，所以**能秤出的重量就是所選砝碼的重量總和**。",
+          "四個砝碼各有兩種選擇，所以選法共有 2 × 2 × 2 × 2 = 16 種。但其中「一個都不選」不算（總和為 0，秤不出東西），所以有效的選法是 16 − 1 = 15 種。",
+          "**但選法有 15 種，不代表能秤出 15 種不同的重量**——如果有兩種不同的選法湊出同樣的總和，那就只算一種重量。所以必須確認會不會重複。",
+          "關鍵在於砝碼的重量是 1、2、4、8，**每一個都恰好是前面所有砝碼總和再加 1**（1 = 0 + 1、2 = 1 + 1、4 = 1 + 2 + 1、8 = 1 + 2 + 4 + 1）。",
+          "這個性質保證了不會重複：**任何一種選法所得的總和，都唯一對應一組選擇**——這正是二進位表示法的唯一性。",
+          "所以 15 種選法給出 15 個互不相同的重量。實際列出來是：1、2、3、4、5、6、7、8、9、10、11、12、13、14、15。",
+          "**這 15 個數恰好是 1 到 15 的所有整數，中間一個都不缺**：例如 5 = 1 + 4、11 = 1 + 2 + 8、13 = 1 + 4 + 8。",
+          "驗算：程式列出四個砝碼的全部非空子集並計算各自的總和，去重後得到的集合正是 {1, 2, ⋯, 15}，共 15 種 ✓，沒有任何重複。",
+          "附註：**若允許砝碼放在待秤物那一邊（也就是可以做減法），能秤的範圍會大得多**。那時 1、3、9、27 這組砝碼可以秤出 1 到 40 的所有整數，是另一套設計。"
+        ],
+        "zh-Hans": [
+          "每个砝码都只有「用」与「不用」两种选择，而且只能放同一边，所以**能称出的重量就是所选砝码的重量总和**。",
+          "四个砝码各有两种选择，所以选法共有 2 × 2 × 2 × 2 = 16 种。但其中「一个都不选」不算（总和为 0，称不出东西），所以有效的选法是 16 − 1 = 15 种。",
+          "**但选法有 15 种，不代表能称出 15 种不同的重量**——如果有两种不同的选法凑出同样的总和，那就只算一种重量。所以必须确认会不会重复。",
+          "关键在于砝码的重量是 1、2、4、8，**每一个都恰好是前面所有砝码总和再加 1**（1 = 0 + 1、2 = 1 + 1、4 = 1 + 2 + 1、8 = 1 + 2 + 4 + 1）。",
+          "这个性质保证了不会重复：**任何一种选法所得的总和，都唯一对应一组选择**——这正是二进位表示法的唯一性。",
+          "所以 15 种选法给出 15 个互不相同的重量。实际列出来是：1、2、3、4、5、6、7、8、9、10、11、12、13、14、15。",
+          "**这 15 个数恰好是 1 到 15 的所有整数，中间一个都不缺**：例如 5 = 1 + 4、11 = 1 + 2 + 8、13 = 1 + 4 + 8。",
+          "验算：程序列出四个砝码的全部非空子集并计算各自的总和，去重后得到的集合正是 {1, 2, ⋯, 15}，共 15 种 ✓，没有任何重复。",
+          "附注：**若允许砝码放在待称物那一边（也就是可以做减法），能称的范围会大得多**。那时 1、3、9、27 这组砝码可以称出 1 到 40 的所有整数，是另一套设计。"
+        ],
+        "en": [
+          "Each weight is either used or not, and since all go on one pan, the measurable weight is simply the total of the chosen weights.",
+          "Four weights with two options each give 2 × 2 × 2 × 2 = 16 selections, but choosing none is not a measurement, so 16 − 1 = 15 selections are usable.",
+          "However, 15 selections need not mean 15 different weights — if two different selections had the same total, they would count as one weight. So possible repetitions must be ruled out.",
+          "The key is that the weights are 1, 2, 4 and 8, each exactly one more than the total of all the smaller ones: 1 = 0 + 1, 2 = 1 + 1, 4 = 1 + 2 + 1 and 8 = 1 + 2 + 4 + 1.",
+          "This property guarantees no repetition: every achievable total corresponds to exactly one selection — precisely the uniqueness of binary representation.",
+          "So the 15 selections give 15 distinct weights, namely 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14 and 15.",
+          "Those 15 values are exactly every integer from 1 to 15 with none missing: for instance 5 = 1 + 4, 11 = 1 + 2 + 8 and 13 = 1 + 4 + 8.",
+          "Check: enumerating all non-empty subsets of the four weights and collecting their totals gives exactly the set {1, 2, …, 15}, fifteen values with no duplicates.",
+          "Remark: allowing weights on the object's pan as well, so that subtraction becomes possible, extends the range far further. With that freedom the weights 1, 3, 9 and 27 measure every integer from 1 to 40, a different design altogether."
+        ],
+        "ja": [
+          "各分銅は「使う」「使わない」の 2 通りしかなく、しかも片側にしか載せられないので、**量れる重さは選んだ分銅の合計**そのものです。",
+          "4 個それぞれ 2 通りなので選び方は 2 × 2 × 2 × 2 = 16 通り。ただし「1 個も選ばない」は測定になりません（合計 0）ので、有効なのは 16 − 1 = 15 通りです。",
+          "**しかし選び方が 15 通りでも、量れる重さが 15 種類とは限りません**。異なる 2 つの選び方が同じ合計になれば 1 種類と数えるからです。重複の有無を確認する必要があります。",
+          "鍵は分銅が 1、2、4、8 であり、**どれもそれより小さいものすべての合計にちょうど 1 を足した値**であることです（1 = 0 + 1、2 = 1 + 1、4 = 1 + 2 + 1、8 = 1 + 2 + 4 + 1）。",
+          "この性質が重複しないことを保証します：**得られるどの合計もただ 1 組の選び方に対応する**——これはまさに 2 進表示の一意性です。",
+          "したがって 15 通りの選び方が 15 個の異なる重さを与えます。実際に並べると 1、2、3、4、5、6、7、8、9、10、11、12、13、14、15。",
+          "**この 15 個はちょうど 1 から 15 のすべての整数で、間に欠けがありません**：たとえば 5 = 1 + 4、11 = 1 + 2 + 8、13 = 1 + 4 + 8。",
+          "検算：4 個の分銅の空でない部分集合をすべて列挙して合計を求め、重複を除くと集合はちょうど {1, 2, ⋯, 15} の 15 種類 ✓ で重複はありません。",
+          "補足：**分銅を測る物と同じ側にも載せられる（引き算ができる）なら、量れる範囲ははるかに広がります**。そのときは 1、3、9、27 の分銅で 1 から 40 のすべての整数が量れ、まったく別の設計になります。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "15"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "二進位砝碼：每個砝碼恰為前面所有砝碼之和加一，保證各種組合的總和互不相同，故 15 種選法給出 15 個相異重量",
+        "notes": "設計依據：詳解不把「選法數」直接當成「重量種數」，而是先指出兩者可能不同、再以砝碼重量的遞增性質論證不會重複，這一步常被略過；末尾以可放兩邊時的 1、3、9、27 對照，說明條件改變會導向完全不同的設計。答案 15 已用全部非空子集的總和去重窮舉獨立驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（砝碼能秤的重量）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "邏輯",
+        "topicCode": "logic",
+        "subtopic": "砝碼能秤的重量",
+        "subtopicCode": "binary_weight_set"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "logic_grade9_foundation_030",
+      "topic": "logic",
+      "subtopic": "worst_case_all_colors",
+      "difficulty": "foundation",
+      "levelStage": "grade9",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一個不透明的袋子裡有紅球 5 顆、藍球 4 顆、綠球 3 顆，除了顏色以外完全相同。閉著眼睛從袋中一顆一顆地取球（取出後不放回）。若要**保證**取出的球當中三種顏色都出現，求最少必須取出幾顆球。",
+        "zh-Hans": "一个不透明的袋子里有红球 5 颗、蓝球 4 颗、绿球 3 颗，除了颜色以外完全相同。闭着眼睛从袋中一颗一颗地取球（取出后不放回）。若要**保证**取出的球当中三种颜色都出现，求最少必须取出几颗球。",
+        "en": "An opaque bag holds 5 red balls, 4 blue and 3 green, identical apart from colour. Balls are drawn one at a time with eyes closed and not replaced. To guarantee that all three colours appear among the drawn balls, what is the minimum number that must be drawn?",
+        "ja": "不透明な袋に赤 5 個、青 4 個、緑 3 個のボールが入っており、色以外は同じです。目を閉じて 1 個ずつ取り出し、戻しません。取り出したボールに 3 色すべてが現れることを**保証**するには、最低何個取り出せばよいですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 10 顆。",
+        "zh-Hans": "答案是 10 颗。",
+        "en": "The answer is 10.",
+        "ja": "答えは 10 個です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "「保證」的意思是**在最壞的情況下也一定成立**，所以要先想清楚：什麼樣的取法最不利？",
+          "最不利的情況，就是**盡可能長時間地避開某一種顏色**。要避開的當然是數量最少的那一種，因為其他兩種可以先被取完。",
+          "數量最少的是綠球（3 顆）。最壞的情況是：先把紅球與藍球全部取完，一顆綠球都沒碰到。",
+          "紅球 5 顆加藍球 4 顆共 9 顆。**取到第 9 顆時，手上可能只有紅、藍兩種顏色，綠色一顆都沒有**——所以取 9 顆是無法保證的。",
+          "但袋中此時只剩綠球了，所以**第 10 顆不論怎麼取都必定是綠球**，三種顏色就都齊了。",
+          "所以最少必須取 10 顆。",
+          "驗算：從兩個方向確認。**9 顆不夠**：存在一種取法（紅 5 藍 4）使得只有兩種顏色 ✓；**10 顆一定夠**：任取 10 顆時，最多只能漏掉 2 顆，而數量最少的綠球有 3 顆，不可能全部被漏掉，所以綠球必定出現；同理紅球（5 顆）與藍球（4 顆）也不可能全被漏掉 ✓。",
+          "**注意要避開的是數量最少的顏色，而不是最多的**。若誤以為最壞情況是先取完紅球與綠球（5 + 3 = 8 顆），會答成 9 顆——但那沒有窮盡最壞的可能，因為先取完紅、藍兩色可以拖得更久。",
+          "附註：一般規律是「**總數減去最少那一種的數量，再加 1**」：12 − 3 + 1 = 10 ✓。"
+        ],
+        "zh-Hans": [
+          "「保证」的意思是**在最坏的情况下也一定成立**，所以要先想清楚：什么样的取法最不利？",
+          "最不利的情况，就是**尽可能长时间地避开某一种颜色**。要避开的当然是数量最少的那一种，因为其他两种可以先被取完。",
+          "数量最少的是绿球（3 颗）。最坏的情况是：先把红球与蓝球全部取完，一颗绿球都没碰到。",
+          "红球 5 颗加蓝球 4 颗共 9 颗。**取到第 9 颗时，手上可能只有红、蓝两种颜色，绿色一颗都没有**——所以取 9 颗是无法保证的。",
+          "但袋中此时只剩绿球了，所以**第 10 颗不论怎么取都必定是绿球**，三种颜色就都齐了。",
+          "所以最少必须取 10 颗。",
+          "验算：从两个方向确认。**9 颗不够**：存在一种取法（红 5 蓝 4）使得只有两种颜色 ✓；**10 颗一定够**：任取 10 颗时，最多只能漏掉 2 颗，而数量最少的绿球有 3 颗，不可能全部被漏掉，所以绿球必定出现；同理红球（5 颗）与蓝球（4 颗）也不可能全被漏掉 ✓。",
+          "**注意要避开的是数量最少的颜色，而不是最多的**。若误以为最坏情况是先取完红球与绿球（5 + 3 = 8 颗），会答成 9 颗——但那没有穷尽最坏的可能，因为先取完红、蓝两色可以拖得更久。",
+          "附注：一般规律是「**总数减去最少那一种的数量，再加 1**」：12 − 3 + 1 = 10 ✓。"
+        ],
+        "en": [
+          "A guarantee must hold even in the worst case, so first work out which sequence of draws is least favourable.",
+          "The least favourable case avoids one colour for as long as possible, and the colour to avoid is naturally the least numerous, since the other two can be exhausted first.",
+          "The least numerous is green, with 3 balls. The worst case draws all the red and blue balls first, touching no green at all.",
+          "That is 5 red plus 4 blue, nine balls. After nine draws the hand might hold only red and blue with no green, so nine draws do not guarantee anything.",
+          "But by then only green balls remain in the bag, so the tenth draw must be green, and all three colours are present.",
+          "So at least 10 balls must be drawn.",
+          "Check from both directions. Nine is insufficient: a draw of 5 red and 4 blue yields only two colours. Ten always suffices: drawing 10 leaves at most 2 behind, and since the scarcest colour has 3 balls they cannot all be left behind, so green must appear, and likewise red with 5 and blue with 4 cannot be entirely missed.",
+          "Note that the colour to avoid is the least numerous, not the most. Assuming the worst case were to exhaust red and green first, 5 + 3 = 8 balls, would give an answer of 9 — but that does not exhaust the worst possibility, since exhausting red and blue holds out longer.",
+          "Remark: the general rule is the total minus the smallest colour count, plus 1: 12 − 3 + 1 = 10."
+        ],
+        "ja": [
+          "「保証する」とは**最悪の場合でも必ず成り立つ**ことなので、まずどの引き方が最も不利かを考えます。",
+          "最も不利なのは**ある 1 色をできるだけ長く避け続ける**ことです。避けるべきは当然いちばん少ない色で、他の 2 色を先に取り尽くせるからです。",
+          "いちばん少ないのは緑（3 個）です。最悪の場合は、赤と青をすべて取り尽くし、緑に一度も触れないことです。",
+          "赤 5 個と青 4 個で計 9 個。**9 個目まで取った時点で手元は赤と青の 2 色だけで緑が 0 個**ということがありえます——したがって 9 個では保証できません。",
+          "しかしこのとき袋には緑しか残っていないので、**10 個目は何を取っても必ず緑**となり、3 色がそろいます。",
+          "したがって最低 10 個必要です。",
+          "検算：両方向から確認します。**9 個では不足**：赤 5・青 4 という引き方があり 2 色しか出ません ✓。**10 個なら必ず十分**：10 個取れば残るのは最大 2 個で、最少の緑は 3 個あるのですべてが残ることはなく、緑は必ず現れます。同様に赤（5 個）も青（4 個）もすべて漏れることはありません ✓。",
+          "**避けるべきは最も少ない色であって最も多い色ではない**点に注意します。最悪の場合が赤と緑を先に取り尽くすこと（5 + 3 = 8 個）だと誤解すると答えは 9 になりますが、赤と青を取り尽くすほうが長く持ちこたえるので、それでは最悪を尽くしていません。",
+          "補足：一般則は「**総数から最少の色の個数を引き、1 を足す**」：12 − 3 + 1 = 10 ✓。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "10"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "最壞情況的計數：避開數量最少的顏色最久，故取到「其餘顏色的總數 + 1」顆才保證三色齊備",
+        "notes": "設計依據：三種顏色數量各異（5、4、3）使「該避開哪一種」成為必須判斷的一步，誤選成避開紅與綠會得到 9；詳解從「9 不夠」與「10 一定夠」兩個方向驗證緊性，並歸納出總數減最少者加 1 的通則。答案 10 已用最壞取法的構造與剩餘球數的論證雙向驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（取到所有顏色）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "邏輯",
+        "topicCode": "logic",
+        "subtopic": "取到所有顏色",
+        "subtopicCode": "worst_case_all_colors"
+      },
+      "reviewStatus": "ok"
     }
   ]
 }
