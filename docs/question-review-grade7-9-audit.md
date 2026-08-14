@@ -99,7 +99,7 @@
 | `logic_grade7_foundation_001` | `grade7` | `logic` | `真假判定` | `none` | `multiple_choice` | IMC Taiwan 2026 複賽 7年級 選擇 2 | `ok` | correctness | **原答案錯誤（標丙，正解甲）＋詳解推理錯**，已修正為甲並重寫三情形分析 |
 | `logic_grade7_foundation_002` | `grade7` | `logic` | `排除法` | `none` | `multiple_choice` | IMC Taiwan 2026 複賽 7年級 填充 2 | `ok` |  | 錯標盒經典，抽『混裝』盒，正確 |
 | `logic_grade7_foundation_003` | `grade7` | `logic` | `規律判斷` | `none` | `integer_input` | IMC Taiwan 2026 複賽 7年級 選擇 5 | `ok` |  | 差分 1,2,3,4→+5=17，正確 |
-| `logic_grade7_foundation_004` | `grade7` | `logic` | `真假推理` | `none` | `multiple_choice` | 改寫題（真假推理） | `ok` | source | 答案丙正確；Editorial→rewritten |
+| `logic_grade7_foundation_004` | `grade7` | `logic` | `指認說真話者` | `none` | `multiple_choice` | 改寫題（真假推理） | `ok` | duplication | 答案 C（丙）正確，已窮舉 2³ 種真假指派確認唯一自洽解為「只有丙說真話」。本題原 subtopic 為 `truth_deduction`，與 `logic_grade2_foundation_006`（問「哪件事一定正確」）、`logic_grade5_foundation_013`（問「獎品在哪個盒子」）標籤相同而被去重稽核歸為同群；三題所問的東西不同且答案各自驗算正確，屬標籤誤判。已把本題 subtopic 改為 `identify_truth_teller`，稽核中牽涉 grade7-12 的群組隨之歸零 |
 | `logic_grade7_foundation_005` | `grade7` | `logic` | `順序線索` | `none` | `multiple_choice` | 改寫題（名次推理） | `ok` | source | 賽跑排序第一名=乙，正確；Editorial→rewritten |
 | `logic_grade7_foundation_006` | `grade7` | `logic` | `數字順序` | `none` | `integer_input` | 改寫題（數字排序） | `ok` | source | A=3 正確；Editorial→rewritten |
 | `logic_grade7_foundation_007` | `grade7` | `logic` | `表格一致性` | `none` | `multiple_choice` | AMC 8 2023 Problem 8 | `ok` |  | 循環賽紀錄，每欄兩勝→000101，正確 |
