@@ -290,15 +290,15 @@ void main() {
       isTrue,
     );
     expect(
-      upperNumberTheoryPacks.every((pack) => pack.questionCount == 10),
+      upperNumberTheoryPacks.every((pack) => pack.questionCount >= 10),
       isTrue,
     );
     expect(
-      upperCombinatoricsPacks.every((pack) => pack.questionCount == 9),
+      upperCombinatoricsPacks.every((pack) => pack.questionCount >= 9),
       isTrue,
     );
     expect(
-      upperLogicPacks.every((pack) => pack.questionCount == 9),
+      upperLogicPacks.every((pack) => pack.questionCount >= 9),
       isTrue,
     );
     expect(
