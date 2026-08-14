@@ -6,11 +6,16 @@
   "olympiadTopicCode": "logic",
   "levelStage": "grade12",
   "challengeTier": "foundation",
-  "languages": ["zh-Hant", "zh-Hans", "en", "ja"],
+  "languages": [
+    "zh-Hant",
+    "zh-Hans",
+    "en",
+    "ja"
+  ],
   "questions": [
     {
       "id": "logic_grade12_foundation_001",
-      "reviewStatus": "pending",
+      "reviewStatus": "ok",
       "topic": "logic",
       "subtopic": "knights_knaves",
       "difficulty": "foundation",
@@ -22,22 +27,90 @@
         "en": "On an island, knights always tell the truth and knaves always lie. A says, “B is a knave.” B says, “We are of different types.” What are A and B?",
         "ja": "ある島では、騎士は常に真実を言い、うそつきは常にうそを言います。A は「B はうそつきだ」と言い、B は「私たちは異なる種類だ」と言います。A と B はそれぞれ何ですか。"
       },
-      "answer": { "zh-Hant": "答案是 A 是騎士，B 是騙子。", "zh-Hans": "答案是 A 是骑士，B 是骗子。", "en": "The answer is A is a knight and B is a knave.", "ja": "答えは A が騎士、B がうそつきです。" },
-      "solutionSteps": {
-        "zh-Hant": ["若 A 是騙子，則 B 不是騙子，也就是 B 是騎士。", "此時 B 說兩人不同類會是真話，但這又會讓 A 的話也成真，矛盾。", "因此 A 必是騎士。", "那麼 A 說 B 是騙子為真，所以 B 是騙子。"],
-        "zh-Hans": ["若 A 是骗子，则 B 不是骗子，也就是 B 是骑士。", "此时 B 说两人不同类会是真话，但这又会让 A 的话也成真，矛盾。", "因此 A 必是骑士。", "那么 A 说 B 是骗子为真，所以 B 是骗子。"],
-        "en": ["If A were a knave, then B would not be a knave, so B would be a knight.", "Then B’s statement that they are different types would be true, which would also make A’s statement true, impossible.", "So A must be a knight.", "Then A's statement is true, so B is a knave."],
-        "ja": ["A がうそつきだとすると、B はうそつきではないので騎士です。", "すると B の『私たちは異なる種類だ』は真となり、A の発言も真になって矛盾します。", "したがって A は騎士です。", "A の発言が真なので B はうそつきです。"]
+      "answer": {
+        "zh-Hant": "答案是 A 是騙子，B 是騎士。",
+        "zh-Hans": "答案是 A 是骗子，B 是骑士。",
+        "en": "The answer is that A is a liar and B is a knight.",
+        "ja": "答えは A が嘘つき、B が騎士です。"
       },
-      "figure": { "type": "custom", "kind": "none", "params": {} },
+      "solutionSteps": {
+        "zh-Hant": [
+          "只有兩個人、每人兩種身分，所以總共 4 種可能，逐一檢查哪一種能讓兩句話都符合各自的身分。",
+          "情形一，兩人都是騎士：A 說「B 是騙子」是假的，但騎士必須說真話，矛盾。",
+          "情形二，兩人都是騙子：A 說「B 是騙子」是真的，但騙子必須說假話，矛盾。",
+          "情形三，A 是騎士、B 是騙子：A 的話「B 是騙子」為真，符合騎士；但 B 說「我們兩人不同類」，而騎士與騙子確實不同類，所以這句話是真的——騙子卻說了真話，矛盾。",
+          "情形四，A 是騙子、B 是騎士：A 說「B 是騙子」，實際上 B 是騎士，所以這句話是假的，符合騙子必須說假話。",
+          "同一情形下 B 說「我們兩人不同類」，而 A 是騙子、B 是騎士確實不同類，所以這句話為真，符合騎士必須說真話。",
+          "四種情形中只有第四種完全自洽，所以 A 是騙子、B 是騎士。",
+          "注意常見的誤判：看到 A 指控 B 就直覺認為 A 是騎士，但情形三會在 B 那一句話上出矛盾。"
+        ],
+        "zh-Hans": [
+          "只有两个人、每人两种身分，所以总共 4 种可能，逐一检查哪一种能让两句话都符合各自的身分。",
+          "情形一，两人都是骑士：A 说「B 是骗子」是假的，但骑士必须说真话，矛盾。",
+          "情形二，两人都是骗子：A 说「B 是骗子」是真的，但骗子必须说假话，矛盾。",
+          "情形三，A 是骑士、B 是骗子：A 的话「B 是骗子」为真，符合骑士；但 B 说「我们两人不同类」，而骑士与骗子确实不同类，所以这句话是真的——骗子却说了真话，矛盾。",
+          "情形四，A 是骗子、B 是骑士：A 说「B 是骗子」，实际上 B 是骑士，所以这句话是假的，符合骗子必须说假话。",
+          "同一情形下 B 说「我们两人不同类」，而 A 是骗子、B 是骑士确实不同类，所以这句话为真，符合骑士必须说真话。",
+          "四种情形中只有第四种完全自洽，所以 A 是骗子、B 是骑士。",
+          "注意常见的误判：看到 A 指控 B 就直觉认为 A 是骑士，但情形三会在 B 那一句话上出矛盾。"
+        ],
+        "en": [
+          "There are only two people with two possible identities each, so check all four combinations and see which makes both statements consistent with the speakers' identities.",
+          "Case 1, both knights: A's statement that B is a liar would be false, but a knight must tell the truth — contradiction.",
+          "Case 2, both liars: A's statement that B is a liar would be true, but a liar must lie — contradiction.",
+          "Case 3, A a knight and B a liar: A's statement is true, which fits a knight; but B says they are of different types, and a knight and a liar really are different, so B's statement is true — yet a liar must lie, a contradiction.",
+          "Case 4, A a liar and B a knight: A says B is a liar, but B is actually a knight, so the statement is false, exactly as a liar requires.",
+          "In the same case B says they are of different types, and since A is a liar and B a knight they really are different, so B's statement is true, exactly as a knight requires.",
+          "Only case 4 is fully consistent, so A is a liar and B is a knight.",
+          "A common trap: seeing A accuse B, one may assume A is the knight, but case 3 breaks down on B's statement."
+        ],
+        "ja": [
+          "登場人物は 2 人、各自の身分は 2 通りなので全部で 4 通り。どれなら 2 つの発言が各自の身分と矛盾しないかを順に調べます。",
+          "場合 1、2 人とも騎士：A の「B は嘘つき」は偽になりますが、騎士は真実を言うので矛盾。",
+          "場合 2、2 人とも嘘つき：A の「B は嘘つき」は真になりますが、嘘つきは嘘を言うので矛盾。",
+          "場合 3、A が騎士で B が嘘つき：A の発言は真で騎士に合いますが、B の「2 人は違う種類」は騎士と嘘つきで実際に異なるため真となり、嘘つきが真実を言うことになり矛盾。",
+          "場合 4、A が嘘つきで B が騎士：A は「B は嘘つき」と言いますが実際 B は騎士なので偽であり、嘘つきの条件に合います。",
+          "同じ場合で B の「2 人は違う種類」は、A が嘘つき・B が騎士なので実際に異なり真であり、騎士の条件に合います。",
+          "4 通りのうち完全に整合するのは場合 4 だけなので、A は嘘つき、B は騎士です。",
+          "よくある誤り：A が B を告発しているのを見て A を騎士と思い込むことですが、場合 3 は B の発言で破綻します。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
       "answerMode": "multiple_choice",
       "options": {
-        "A": { "zh-Hant": "A 騎士，B 騙子", "zh-Hans": "A 骑士，B 骗子", "en": "A knight, B knave", "ja": "A 騎士、B うそつき" },
-        "B": { "zh-Hant": "A 騙子，B 騎士", "zh-Hans": "A 骗子，B 骑士", "en": "A knave, B knight", "ja": "A うそつき、B 騎士" },
-        "C": { "zh-Hant": "兩人都是騎士", "zh-Hans": "两人都是骑士", "en": "Both knights", "ja": "2 人とも騎士" },
-        "D": { "zh-Hant": "兩人都是騙子", "zh-Hans": "两人都是骗子", "en": "Both knaves", "ja": "2 人とも うそつき" }
+        "A": {
+          "zh-Hant": "A 騎士，B 騙子",
+          "zh-Hans": "A 骑士，B 骗子",
+          "en": "A knight, B knave",
+          "ja": "A 騎士、B うそつき"
+        },
+        "B": {
+          "zh-Hant": "A 騙子，B 騎士",
+          "zh-Hans": "A 骗子，B 骑士",
+          "en": "A knave, B knight",
+          "ja": "A うそつき、B 騎士"
+        },
+        "C": {
+          "zh-Hant": "兩人都是騎士",
+          "zh-Hans": "两人都是骑士",
+          "en": "Both knights",
+          "ja": "2 人とも騎士"
+        },
+        "D": {
+          "zh-Hant": "兩人都是騙子",
+          "zh-Hans": "两人都是骗子",
+          "en": "Both knaves",
+          "ja": "2 人とも うそつき"
+        }
       },
-      "correctAnswer": { "type": "choice", "value": "A" },
+      "correctAnswer": {
+        "type": "choice",
+        "value": "B"
+      },
       "source": {
         "type": "official_reference",
         "name": "AMC 12",
@@ -52,202 +125,478 @@
         "rightsStatus": "needs_review",
         "notes": "Rewritten from a publicly archived competition statement."
       },
-      "olympiadTaxonomy": { "topic": "邏輯", "topicCode": "logic", "subtopic": "真假島", "subtopicCode": "knights_knaves" }
+      "olympiadTaxonomy": {
+        "topic": "邏輯",
+        "topicCode": "logic",
+        "subtopic": "真假島",
+        "subtopicCode": "knights_knaves"
+      }
     },
     {
       "id": "logic_grade12_foundation_002",
-      "reviewStatus": "pending",
       "topic": "logic",
-      "subtopic": "game_strategy",
+      "subtopic": "elevator_min_moves",
       "difficulty": "foundation",
       "levelStage": "grade12",
       "challengeTier": "foundation",
       "prompt": {
-        "zh-Hant": "黑板上寫著 1 到 15。兩人輪流擦掉一個數，若某人擦掉後，黑板上剩下的數字總和變成 30 的倍數，則該人獲勝。先手有沒有必勝策略？",
-        "zh-Hans": "黑板上写着 1 到 15。两人轮流擦掉一个数，若某人擦掉后，黑板上剩下的数字总和变成 30 的倍数，则该人获胜。先手有没有必胜策略？",
-        "en": "The numbers 1 through 15 are written on a board. Players alternate erasing one number. A player wins if, after erasing a number, the sum of the numbers left on the board is a multiple of 30. Does the first player have a winning strategy?",
-        "ja": "黒板に 1 から 15 までの数が書かれています。2 人が交互に 1 つずつ消します。ある人が消したあと、残った数の和が 30 の倍数になればその人の勝ちです。先手に必勝法はありますか。"
+        "zh-Hant": "一棟大樓有 1 到 10 樓。一部特製電梯每次操作只能往上 2 層或往下 1 層，而且任何時候都不能離開 1 到 10 樓的範圍。從 1 樓出發到 10 樓，最少需要幾次操作？",
+        "zh-Hans": "一栋大楼有 1 到 10 楼。一部特制电梯每次操作只能往上 2 层或往下 1 层，而且任何时候都不能离开 1 到 10 楼的范围。从 1 楼出发到 10 楼，最少需要几次操作？",
+        "en": "A building has floors 1 through 10. A special lift can only move up 2 floors or down 1 floor per operation, and must never leave the range from floor 1 to floor 10. Starting at floor 1, what is the least number of operations needed to reach floor 10?",
+        "ja": "1 階から 10 階まである建物があります。特別なエレベーターは 1 回の操作で 2 階上がるか 1 階下がるかしかできず、常に 1 階から 10 階の範囲を出てはいけません。1 階から 10 階へ行くには最少で何回の操作が必要ですか。"
       },
-      "answer": { "zh-Hant": "答案是有，先擦 15。", "zh-Hans": "答案是有，先擦 15。", "en": "Yes. The first player should erase 15.", "ja": "あります。最初に 15 を消します。" },
+      "answer": {
+        "zh-Hant": "答案是 6 次。",
+        "zh-Hans": "答案是 6 次。",
+        "en": "The answer is 6.",
+        "ja": "答えは 6 回です。"
+      },
       "solutionSteps": {
-        "zh-Hant": ["1 到 15 的和是 120，本來就是 30 的倍數。", "因此若先手擦掉 15，剩下的和是 105，不是 30 倍數。", "但若題目要求達成特定模數結構，先手可藉由擦去 15 把局面帶入對稱控制。", "依官方答案，先手有必勝策略，第一步是擦掉 15。"],
-        "zh-Hans": ["1 到 15 的和是 120，本来就是 30 的倍数。", "因此若先手擦掉 15，剩下的和是 105，不是 30 倍数。", "但若题目要求达成特定模数结构，先手可借由擦去 15 把局面带入对称控制。", "依官方答案，先手有必胜策略，第一步是擦掉 15。"],
-        "en": ["The sum 1+2+⋯+15 is 120, already a multiple of 30.", "The official strategy begins by erasing 15.", "This move sends the game into a controlled modular pattern.", "According to the official solution, the first player can force a win by starting with 15."],
-        "ja": ["1 から 15 までの和は 120 で、もともと 30 の倍数です。", "公式の戦略では最初に 15 を消します。", "この手で局面を管理できる合同条件に持ち込みます。", "公開解答では、先手は 15 を最初に消すことで必勝になります。"]
+        "zh-Hant": [
+          "先求一個不管樓層限制的下界。設往上 a 次、往下 b 次，總樓層變化是 2a − b = 10 − 1 = 9。",
+          "操作次數是 a + b。由 b = 2a − 9 代入得 a + b = 3a − 9。",
+          "因為 b ≥ 0，需要 2a − 9 ≥ 0，即 a ≥ 4.5，而 a 是整數所以 a ≥ 5。",
+          "取 a = 5 時 b = 1，次數 = 6，這是不考慮樓層限制時的下界。",
+          "接著要確認在 1 到 10 的限制下，6 次真的做得到——直接連上五次會到 1 + 10 = 11 樓，已超出範圍，所以順序不能亂排。",
+          "把那一次下樓插在中間：1 → 3 → 5 → 7 → 9 → 8 → 10。",
+          "檢查每一步都在範圍內：3、5、7、9、8、10 全部落在 1 到 10 之間，且恰好是 5 次上樓與 1 次下樓。",
+          "所以最少需要 6 次操作。（已用廣度優先搜尋對全部 10 個樓層狀態驗證 6 次為最短。）"
+        ],
+        "zh-Hans": [
+          "先求一个不管楼层限制的下界。设往上 a 次、往下 b 次，总楼层变化是 2a − b = 10 − 1 = 9。",
+          "操作次数是 a + b。由 b = 2a − 9 代入得 a + b = 3a − 9。",
+          "因为 b ≥ 0，需要 2a − 9 ≥ 0，即 a ≥ 4.5，而 a 是整数所以 a ≥ 5。",
+          "取 a = 5 时 b = 1，次数 = 6，这是不考虑楼层限制时的下界。",
+          "接着要确认在 1 到 10 的限制下，6 次真的做得到——直接连上五次会到 1 + 10 = 11 楼，已超出范围，所以顺序不能乱排。",
+          "把那一次下楼插在中间：1 → 3 → 5 → 7 → 9 → 8 → 10。",
+          "检查每一步都在范围内：3、5、7、9、8、10 全部落在 1 到 10 之间，且恰好是 5 次上楼与 1 次下楼。",
+          "所以最少需要 6 次操作。（已用广度优先搜索对全部 10 个楼层状态验证 6 次为最短。）"
+        ],
+        "en": [
+          "First find a lower bound ignoring the floor limits. If there are a upward moves and b downward moves, the net change is 2a − b = 10 − 1 = 9.",
+          "The number of operations is a + b, and substituting b = 2a − 9 gives a + b = 3a − 9.",
+          "Since b ≥ 0 we need 2a − 9 ≥ 0, that is a ≥ 4.5, and as a is an integer, a ≥ 5.",
+          "Taking a = 5 gives b = 1 and 6 operations, which is the lower bound without the floor restriction.",
+          "Now check that 6 is actually achievable within floors 1 to 10 — going up five times in a row would reach 1 + 10 = 11, outside the range, so the order matters.",
+          "Insert the single downward move in the middle: 1 → 3 → 5 → 7 → 9 → 8 → 10.",
+          "Every intermediate floor 3, 5, 7, 9, 8, 10 lies within 1 to 10, and the path uses exactly five upward and one downward move.",
+          "So the minimum is 6 operations. (A breadth-first search over all ten floor states confirms 6 is shortest.)"
+        ],
+        "ja": [
+          "まず階数制限を無視した下界を求めます。上りを a 回、下りを b 回とすると、正味の変化は 2a − b = 10 − 1 = 9。",
+          "操作回数は a + b で、b = 2a − 9 を代入すると a + b = 3a − 9。",
+          "b ≥ 0 より 2a − 9 ≥ 0、すなわち a ≥ 4.5。a は整数なので a ≥ 5。",
+          "a = 5 のとき b = 1 で回数は 6。これが制限を無視した場合の下界です。",
+          "次に 1〜10 の制限下で本当に 6 回で可能かを確認します。上りを 5 回続けると 1 + 10 = 11 階となり範囲外なので、順序が重要です。",
+          "下りの 1 回を途中に入れます：1 → 3 → 5 → 7 → 9 → 8 → 10。",
+          "途中の階 3、5、7、9、8、10 はすべて 1〜10 に収まり、上り 5 回・下り 1 回でちょうどです。",
+          "したがって最少は 6 回です。（10 階分の状態すべてを幅優先探索しても 6 回が最短と確認できます。）"
+        ]
       },
-      "figure": { "type": "custom", "kind": "none", "params": {} },
-      "answerMode": "multiple_choice",
-      "options": {
-        "A": { "zh-Hant": "沒有必勝策略", "zh-Hans": "没有必胜策略", "en": "No winning strategy", "ja": "必勝法はない" },
-        "B": { "zh-Hant": "有，先擦 1", "zh-Hans": "有，先擦 1", "en": "Yes, erase 1 first", "ja": "ある。最初に 1 を消す" },
-        "C": { "zh-Hant": "有，先擦 15", "zh-Hans": "有，先擦 15", "en": "Yes, erase 15 first", "ja": "ある。最初に 15 を消す" },
-        "D": { "zh-Hant": "有，先擦 10", "zh-Hans": "有，先擦 10", "en": "Yes, erase 10 first", "ja": "ある。最初に 10 を消す" }
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
       },
-      "correctAnswer": { "type": "choice", "value": "C" },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "6"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
       "source": {
-        "type": "official_reference",
-        "name": "AMC 12",
-        "contest": "AMC 12",
-        "year": "2021",
-        "round": "A",
-        "division": "High School",
-        "problemNumber": "Problem 16",
-        "reference": "2021 AMC 12A Problem 16",
-        "displayText": "AMC 12A 2021 Problem 16",
-        "sourceUrl": "https://artofproblemsolving.com/wiki/index.php/2021_AMC_12A_Problems",
-        "rightsStatus": "needs_review",
-        "notes": "Rewritten from a publicly archived competition statement."
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "帶範圍限制的受限移動最少步數：先用線性方程求下界、再構造合法順序達成的競賽題型",
+        "notes": "設計依據：兩段論證——先由 2a − b = 9 與 b ≥ 0 得次數 = 3a − 9 ≥ 6 的下界，再處理「連續上樓會超出 10 樓」這個限制而必須把下樓插在中間。答案 6 已用 BFS 驗證為最短。屬同水準原創改寫，非抄錄特定官方題。原 002 **答案不唯一**：窮舉整個博弈樹後 1 到 15 的每一個第一步都是必勝步，選項 B（先擦 1）與 D（先擦 10）和原標的 C（先擦 15）同樣正確；原詳解還寫「若題目要求達成特定模數結構⋯依官方答案」屬空轉。",
+        "displayText": "改寫題（受限電梯最少次數）"
       },
-      "olympiadTaxonomy": { "topic": "邏輯", "topicCode": "logic", "subtopic": "博弈策略", "subtopicCode": "game_strategy" }
+      "olympiadTaxonomy": {
+        "topic": "邏輯",
+        "topicCode": "logic",
+        "subtopic": "受限電梯最少次數",
+        "subtopicCode": "elevator_min_moves"
+      },
+      "reviewStatus": "ok"
     },
     {
       "id": "logic_grade12_foundation_003",
-      "reviewStatus": "pending",
       "topic": "logic",
-      "subtopic": "sequential_reasoning",
+      "subtopic": "digit_multiplication_puzzle",
       "difficulty": "foundation",
       "levelStage": "grade12",
       "challengeTier": "foundation",
       "prompt": {
-        "zh-Hant": "若一個正整數 n 滿足：把它的每個位數都加 1（9 變成 0）後得到的新數，比原數大 2222。求所有這樣的四位數 n 的個數。",
-        "zh-Hans": "若一个正整数 n 满足：把它的每个位数都加 1（9 变成 0）后得到的新数，比原数大 2222。求所有这样的四位数 n 的个数。",
-        "en": "A four-digit positive integer n has the property that if each digit is increased by 1, with 9 becoming 0, then the new number is 2222 greater than n. How many such four-digit numbers n are there?",
-        "ja": "4 桁の正整数 n について、各桁に 1 を足し、9 は 0 になるとします。できた新しい数が n より 2222 大きいとき、そのような n は何個ありますか。"
+        "zh-Hant": "在算式 AB × 3 = CAB 中，A、B、C 都是數字，AB 表示一個兩位數（十位是 A、個位是 B），CAB 表示一個三位數（百位是 C、十位是 A、個位是 B）。求這個兩位數 AB。",
+        "zh-Hans": "在算式 AB × 3 = CAB 中，A、B、C 都是数字，AB 表示一个两位数（十位是 A、个位是 B），CAB 表示一个三位数（百位是 C、十位是 A、个位是 B）。求这个两位数 AB。",
+        "en": "In the equation AB × 3 = CAB, the letters A, B, C are digits, AB denotes a two-digit number with tens digit A and units digit B, and CAB denotes a three-digit number with hundreds digit C, tens digit A and units digit B. Find the two-digit number AB.",
+        "ja": "式 AB × 3 = CAB において、A、B、C は数字で、AB は十の位が A・一の位が B の 2 桁の数、CAB は百の位が C・十の位が A・一の位が B の 3 桁の数を表します。この 2 桁の数 AB を求めなさい。"
       },
-      "answer": { "zh-Hant": "答案是 5。", "zh-Hans": "答案是 5。", "en": "The answer is 5.", "ja": "答えは 5 です。" },
+      "answer": {
+        "zh-Hant": "答案是 50。",
+        "zh-Hans": "答案是 50。",
+        "en": "The answer is 50.",
+        "ja": "答えは 50 です。"
+      },
       "solutionSteps": {
-        "zh-Hant": ["不進位時，每一位增加 1 會讓整體增加 1111。", "題目要求總共增加 2222，表示另外還要有一個從 9 變 0 造成的結構補償。", "逐位分析可得符合條件的四位數共有 5 個。"],
-        "zh-Hans": ["不进位时，每一位增加 1 会让整体增加 1111。", "题目要求总共增加 2222，表示另外还要有一个从 9 变 0 造成的结构补偿。", "逐位分析可得符合条件的四位数共有 5 个。"],
-        "en": ["If no digit wrapped around, the increase would be 1111.", "To get an increase of 2222, the wrap-around structure caused by digits 9→0 must contribute in a precise way.", "A digit-by-digit case analysis shows there are 5 such four-digit integers."],
-        "ja": ["繰り上がりがなければ、各桁に 1 を足すと全体では 1111 増えます。", "2222 増えるためには、9→0 の折り返しが特定の形で起こる必要があります。", "各桁を場合分けして調べると、そのような 4 桁の数は 5 個です。"]
+        "zh-Hant": [
+          "先把字母算式翻成數值算式。設兩位數 AB 的值是 N，也就是 N = 10A + B。",
+          "三位數 CAB 的百位是 C、十位是 A、個位是 B，所以它的值是 100C + 10A + B = 100C + N。",
+          "關鍵觀察在這裡：CAB 的後兩位剛好就是原來的 AB，所以 CAB 只是在 AB 前面加上一個百位數字。",
+          "題目給的等式是 3N = 100C + N。",
+          "移項得 2N = 100C，也就是 N = 50C。",
+          "因為 N 是兩位數，10 ≤ N ≤ 99，而 N = 50C，所以 C 只能是 1（C = 2 會得到 100，已不是兩位數）。",
+          "於是 N = 50，即 A = 5、B = 0、C = 1。",
+          "驗算：50 × 3 = 150，而 CAB = 1、5、0 組成的三位數正是 150，完全吻合。所以 AB = 50。"
+        ],
+        "zh-Hans": [
+          "先把字母算式翻成数值算式。设两位数 AB 的值是 N，也就是 N = 10A + B。",
+          "三位数 CAB 的百位是 C、十位是 A、个位是 B，所以它的值是 100C + 10A + B = 100C + N。",
+          "关键观察在这里：CAB 的后两位刚好就是原来的 AB，所以 CAB 只是在 AB 前面加上一个百位数字。",
+          "题目给的等式是 3N = 100C + N。",
+          "移项得 2N = 100C，也就是 N = 50C。",
+          "因为 N 是两位数，10 ≤ N ≤ 99，而 N = 50C，所以 C 只能是 1（C = 2 会得到 100，已不是两位数）。",
+          "于是 N = 50，即 A = 5、B = 0、C = 1。",
+          "验算：50 × 3 = 150，而 CAB = 1、5、0 组成的三位数正是 150，完全吻合。所以 AB = 50。"
+        ],
+        "en": [
+          "First translate the letter equation into numbers. Let N be the value of the two-digit number AB, so N = 10A + B.",
+          "The three-digit number CAB has hundreds digit C, tens digit A and units digit B, so its value is 100C + 10A + B = 100C + N.",
+          "Here is the key observation: the last two digits of CAB are exactly the original AB, so CAB is just AB with a hundreds digit prepended.",
+          "The given equation is therefore 3N = 100C + N.",
+          "Rearranging gives 2N = 100C, that is N = 50C.",
+          "Since N is a two-digit number with 10 ≤ N ≤ 99 and N = 50C, the only possibility is C = 1 (C = 2 would give 100, no longer two digits).",
+          "Hence N = 50, so A = 5, B = 0 and C = 1.",
+          "Check: 50 × 3 = 150, and the three-digit number formed by C, A, B is 1, 5, 0 — exactly 150. So AB = 50."
+        ],
+        "ja": [
+          "まず文字式を数値の式に直します。2 桁の数 AB の値を N とすると N = 10A + B。",
+          "3 桁の数 CAB は百の位が C、十の位が A、一の位が B なので、値は 100C + 10A + B = 100C + N。",
+          "ここが要点です：CAB の下 2 桁はちょうどもとの AB なので、CAB は AB の前に百の位を付け足しただけです。",
+          "与えられた等式は 3N = 100C + N。",
+          "整理すると 2N = 100C、すなわち N = 50C。",
+          "N は 2 桁で 10 ≤ N ≤ 99、かつ N = 50C なので C = 1 しかありえません（C = 2 なら 100 となり 2 桁でなくなります）。",
+          "よって N = 50、すなわち A = 5、B = 0、C = 1。",
+          "検算：50 × 3 = 150 で、C、A、B の作る 3 桁の数は 1、5、0 すなわち 150。完全に一致します。よって AB = 50。"
+        ]
       },
-      "figure": { "type": "custom", "kind": "none", "params": {} },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
       "answerMode": "integer_input",
-      "correctAnswer": { "type": "integer", "value": "5" },
-      "inputConstraints": { "allowNegative": false, "maxDigits": 1 },
-      "source": {
-        "type": "official_reference",
-        "name": "AMC 12",
-        "contest": "AMC 12",
-        "year": "2021",
-        "round": "A",
-        "division": "High School",
-        "problemNumber": "Problem 21",
-        "reference": "2021 AMC 12A Problem 21",
-        "displayText": "AMC 12A 2021 Problem 21",
-        "sourceUrl": "https://artofproblemsolving.com/wiki/index.php/2021_AMC_12A_Problems/Problem_21",
-        "rightsStatus": "needs_review",
-        "notes": "Rewritten from a publicly archived competition statement."
+      "correctAnswer": {
+        "type": "integer",
+        "value": "50"
       },
-      "olympiadTaxonomy": { "topic": "邏輯", "topicCode": "logic", "subtopic": "逐位推理", "subtopicCode": "sequential_reasoning" }
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "字母算式（verbal arithmetic）：把位值展開後發現兩邊共用同一段數字而消去的競賽題型",
+        "notes": "設計依據：核心轉折是察覺 CAB 的後兩位就是 AB，因而 CAB = 100C + AB，等式直接化簡成 2N = 100C；接著用「N 必須是兩位數」把 C 壓到唯一值。答案 50 已窮舉全部 (A,B,C) 驗證解唯一。屬同水準原創改寫，非抄錄特定官方題。原 003 **無解**：每位加 1 使數增加 1111，每有一位 9 變 0 就少 10，差必為 1111 − 10k，永遠不可能等於 2222；窮舉 1000~9999 得 0 個符合，原標答案 5 不可能成立。",
+        "displayText": "改寫題（字母算式）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "邏輯",
+        "topicCode": "logic",
+        "subtopic": "數字謎",
+        "subtopicCode": "digit_multiplication_puzzle"
+      },
+      "reviewStatus": "ok"
     },
     {
       "id": "logic_grade12_foundation_004",
-      "reviewStatus": "pending",
       "topic": "logic",
-      "subtopic": "cyclic_seating",
+      "subtopic": "calendar_weekday",
       "difficulty": "foundation",
       "levelStage": "grade12",
       "challengeTier": "foundation",
       "prompt": {
-        "zh-Hant": "A、B、C、D 四人圍成一圈坐，已知 A 不和 B 相鄰，C 坐在 D 的右邊。若固定 A 的位置，則符合條件的坐法有多少種？",
-        "zh-Hans": "A、B、C、D 四人围成一圈坐，已知 A 不和 B 相邻，C 坐在 D 的右边。若固定 A 的位置，则符合条件的坐法有多少种？",
-        "en": "A, B, C, and D sit around a circle. A is not adjacent to B, and C sits immediately to the right of D. If A's position is fixed, how many seatings satisfy the conditions?",
-        "ja": "A、B、C、D の 4 人が円形に座ります。A は B と隣り合わず、C は D の右隣に座ります。A の位置を固定したとき、条件を満たす座り方は何通りありますか。"
+        "zh-Hant": "某一年的 3 月裡，星期五出現了 5 次，星期六也出現了 5 次，而且 3 月 1 日不是星期五。問 3 月 1 日是星期幾？（以 1 表示星期一、2 表示星期二、⋯、7 表示星期日）",
+        "zh-Hans": "某一年的 3 月里，星期五出现了 5 次，星期六也出现了 5 次，而且 3 月 1 日不是星期五。问 3 月 1 日是星期几？（以 1 表示星期一、2 表示星期二、⋯、7 表示星期日）",
+        "en": "In a certain year, the month of March contains five Fridays and five Saturdays, and March 1 is not a Friday. What day of the week is March 1? (Answer with 1 for Monday, 2 for Tuesday, …, 7 for Sunday.)",
+        "ja": "ある年の 3 月には金曜日が 5 回、土曜日も 5 回あり、3 月 1 日は金曜日ではありません。3 月 1 日は何曜日ですか。（月曜を 1、火曜を 2、…、日曜を 7 として答えなさい。）"
       },
-      "answer": { "zh-Hant": "答案是 1。", "zh-Hans": "答案是 1。", "en": "The answer is 1.", "ja": "答えは 1 です。" },
+      "answer": {
+        "zh-Hant": "答案是 4（星期四）。",
+        "zh-Hans": "答案是 4（星期四）。",
+        "en": "The answer is 4 (Thursday).",
+        "ja": "答えは 4（木曜日）です。"
+      },
       "solutionSteps": {
-        "zh-Hant": ["固定 A 後，剩下 3 個位置。", "因為 C 必須在 D 的右邊，所以 C、D 只能作為相鄰的一對出現。", "又 A 不和 B 相鄰，B 只能坐在與 A 對面的那個位置。", "這時 C、D 的位置也唯一決定，所以只有 1 種。"],
-        "zh-Hans": ["固定 A 后，剩下 3 个位置。", "因为 C 必须在 D 的右边，所以 C、D 只能作为相邻的一对出现。", "又 A 不和 B 相邻，B 只能坐在与 A 对面的那个位置。", "这时 C、D 的位置也唯一决定，所以只有 1 种。"],
-        "en": ["Fix A first, leaving three positions.", "Since C must be immediately to the right of D, C and D must occupy an adjacent ordered pair.", "Because A cannot be next to B, B must sit opposite A.", "That uniquely determines the positions of C and D, so there is only 1 seating."],
-        "ja": ["A を固定すると残りは 3 つの席です。", "C は D の右隣なので、C と D は順序つきの隣り合う 2 席を占めます。", "A と B は隣り合えないので、B は A の向かい側に座るしかありません。", "すると C と D の位置も一意に決まり、座り方は 1 通りです。"]
+        "zh-Hant": [
+          "3 月有 31 天，而 31 = 4 × 7 + 3，也就是完整的 4 個星期再加上 3 天。",
+          "因此每一種星期至少出現 4 次，只有「多出來的那 3 天」所對應的星期會出現第 5 次。",
+          "這多出來的 3 天，正是 3 月 1 日、2 日、3 日所在的那三種星期。",
+          "題目說星期五出現 5 次，所以 3 月 1、2、3 日之中必有一天是星期五；同理其中也必有一天是星期六。",
+          "星期五與星期六是相鄰的兩天，而 1、2、3 日也是連續三天，所以這兩天必須落在這三天之內且相鄰。",
+          "可能的排法只有兩種：(1日, 2日) = (五, 六)，或 (2日, 3日) = (五, 六)。",
+          "第一種表示 3 月 1 日是星期五，但題目明確排除了這種情況。",
+          "所以是第二種：3 月 2 日星期五、3 月 3 日星期六，因此 3 月 1 日是星期四。",
+          "驗算：若 3 月 1 日是星期四，則 1、2、3 日依序是四、五、六，星期五（2、9、16、23、30 日）與星期六（3、10、17、24、31 日）各出現 5 次，完全符合。答案為 4。"
+        ],
+        "zh-Hans": [
+          "3 月有 31 天，而 31 = 4 × 7 + 3，也就是完整的 4 个星期再加上 3 天。",
+          "因此每一种星期至少出现 4 次，只有「多出来的那 3 天」所对应的星期会出现第 5 次。",
+          "这多出来的 3 天，正是 3 月 1 日、2 日、3 日所在的那三种星期。",
+          "题目说星期五出现 5 次，所以 3 月 1、2、3 日之中必有一天是星期五；同理其中也必有一天是星期六。",
+          "星期五与星期六是相邻的两天，而 1、2、3 日也是连续三天，所以这两天必须落在这三天之内且相邻。",
+          "可能的排法只有两种：(1日, 2日) = (五, 六)，或 (2日, 3日) = (五, 六)。",
+          "第一种表示 3 月 1 日是星期五，但题目明确排除了这种情况。",
+          "所以是第二种：3 月 2 日星期五、3 月 3 日星期六，因此 3 月 1 日是星期四。",
+          "验算：若 3 月 1 日是星期四，则 1、2、3 日依序是四、五、六，星期五（2、9、16、23、30 日）与星期六（3、10、17、24、31 日）各出现 5 次，完全符合。答案为 4。"
+        ],
+        "en": [
+          "March has 31 days and 31 = 4 × 7 + 3, that is four complete weeks plus three extra days.",
+          "So every weekday occurs at least four times, and only the weekdays of those three extra days occur a fifth time.",
+          "Those three extra days are exactly the weekdays of March 1, 2 and 3.",
+          "Since Friday occurs five times, one of March 1, 2, 3 must be a Friday, and likewise one of them must be a Saturday.",
+          "Friday and Saturday are consecutive days, and 1, 2, 3 are three consecutive dates, so the two must sit adjacently within those three dates.",
+          "There are only two possibilities: (March 1, March 2) = (Friday, Saturday), or (March 2, March 3) = (Friday, Saturday).",
+          "The first would make March 1 a Friday, which the problem explicitly rules out.",
+          "So the second holds: March 2 is Friday and March 3 is Saturday, making March 1 a Thursday.",
+          "Check: if March 1 is Thursday, then 1, 2, 3 are Thursday, Friday, Saturday, and the Fridays (2, 9, 16, 23, 30) and Saturdays (3, 10, 17, 24, 31) each occur five times, exactly as required. The answer is 4."
+        ],
+        "ja": [
+          "3 月は 31 日あり、31 = 4 × 7 + 3、つまり完全な 4 週間に 3 日が加わった形です。",
+          "したがってどの曜日も少なくとも 4 回現れ、5 回目が現れるのは「はみ出した 3 日」の曜日だけです。",
+          "そのはみ出した 3 日とは、ちょうど 3 月 1 日・2 日・3 日の曜日です。",
+          "金曜が 5 回あるので 1・2・3 日のいずれかが金曜、同様にいずれかが土曜でなければなりません。",
+          "金曜と土曜は連続する 2 日で、1・2・3 日も連続する 3 日なので、この 2 日はその中で隣り合って収まる必要があります。",
+          "可能なのは 2 通りだけです：(1 日, 2 日) = (金, 土)、または (2 日, 3 日) = (金, 土)。",
+          "前者は 3 月 1 日が金曜となりますが、問題文で明確に除外されています。",
+          "よって後者：3 月 2 日が金曜、3 日が土曜となり、3 月 1 日は木曜です。",
+          "検算：3 月 1 日が木曜なら 1・2・3 日は木・金・土で、金曜（2、9、16、23、30 日）と土曜（3、10、17、24、31 日）はそれぞれ 5 回。条件を完全に満たします。答えは 4。"
+        ]
       },
-      "figure": { "type": "custom", "kind": "none", "params": {} },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
       "answerMode": "integer_input",
-      "correctAnswer": { "type": "integer", "value": "1" },
-      "inputConstraints": { "allowNegative": false, "maxDigits": 1 },
-      "source": {
-        "type": "editorial_original",
-        "name": "MathSpring Editorial",
-        "reference": "Upper logic expansion set L6",
-        "displayText": "MathSpring Editorial Original"
+      "correctAnswer": {
+        "type": "integer",
+        "value": "4"
       },
-      "olympiadTaxonomy": { "topic": "邏輯", "topicCode": "logic", "subtopic": "圓桌推理", "subtopicCode": "cyclic_seating" }
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "由月份天數對 7 的餘數推出哪些星期會多出一次，再用相鄰條件鎖定起始星期的競賽題型",
+        "notes": "設計依據：核心是 31 = 4×7 + 3 這個餘數結構——只有月初三天的星期會出現第 5 次；接著用「五、六相鄰」把兩種排法壓到兩個候選，再由題目排除其中一個。答案 4 已對七種起始星期逐一統計驗證。屬同水準原創改寫，非抄錄特定官方題。原 004（四人圍圈、固定 A 後求坐法數）僅兩步且答案為 1，深度過低，來源為自製 editorial 暫代出處。",
+        "displayText": "改寫題（月曆星期推理）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "邏輯",
+        "topicCode": "logic",
+        "subtopic": "月曆星期推理",
+        "subtopicCode": "calendar_weekday"
+      },
+      "reviewStatus": "ok"
     },
     {
       "id": "logic_grade12_foundation_005",
-      "reviewStatus": "pending",
       "topic": "logic",
-      "subtopic": "divisibility_logic",
+      "subtopic": "ranking_constraints",
       "difficulty": "foundation",
       "levelStage": "grade12",
       "challengeTier": "foundation",
       "prompt": {
-        "zh-Hant": "某正整數同時能被 2、3、5 整除。下列哪一個結論一定正確？",
-        "zh-Hans": "某正整数同时能被 2、3、5 整除。下列哪一个结论一定正确？",
-        "en": "A positive integer is divisible by 2, 3, and 5 at the same time. Which conclusion must be true?",
-        "ja": "ある正の整数が 2、3、5 のすべてで割り切れます。必ず正しい結論はどれですか。"
+        "zh-Hant": "A、B、C、D、E 五人比賽，名次互不相同（第 1 名到第 5 名）。已知：A 的名次在 B 之前；C 的名次在 D 之後；E 恰好是第 3 名；B 不是最後一名。求符合條件的名次排列共有多少種。",
+        "zh-Hans": "A、B、C、D、E 五人比赛，名次互不相同（第 1 名到第 5 名）。已知：A 的名次在 B 之前；C 的名次在 D 之后；E 恰好是第 3 名；B 不是最后一名。求符合条件的名次排列共有多少种。",
+        "en": "Five contestants A, B, C, D, E finish in distinct places from first to fifth. It is known that A finishes ahead of B, C finishes behind D, E is exactly third, and B is not last. How many orderings satisfy all these conditions?",
+        "ja": "A、B、C、D、E の 5 人が 1 位から 5 位まで異なる順位で並びます。A は B より上位、C は D より下位、E はちょうど 3 位、B は最下位ではない、とわかっています。条件を満たす順位の並びは何通りありますか。"
       },
-      "answer": { "zh-Hant": "答案是它能被 30 整除。", "zh-Hans": "答案是它能被 30 整除。", "en": "The answer is that it is divisible by 30.", "ja": "答えは 30 で割り切れるということです。" },
+      "answer": {
+        "zh-Hant": "答案是 3 種。",
+        "zh-Hans": "答案是 3 种。",
+        "en": "The answer is 3.",
+        "ja": "答えは 3 通りです。"
+      },
       "solutionSteps": {
-        "zh-Hant": ["2、3、5 兩兩互質。", "因此同時被 2、3、5 整除，就等同被它們的乘積 30 整除。"],
-        "zh-Hans": ["2、3、5 两两互质。", "因此同时被 2、3、5 整除，就等同被它们的乘积 30 整除。"],
-        "en": ["The numbers 2, 3, and 5 are pairwise coprime.", "So divisibility by all three implies divisibility by their product, 30."],
-        "ja": ["2、3、5 は互いに素です。", "したがって 3 つすべてで割り切れるなら、その積 30 でも割り切れます。"]
+        "zh-Hant": [
+          "先用最硬的條件把問題縮小：E 恰好是第 3 名，位置完全確定，剩下 A、B、C、D 要填第 1、2、4、5 名。",
+          "四個人填四個位置本來有 4! = 24 種，接著用其餘三個條件篩選。",
+          "條件「B 不是最後一名」表示 B 不能排第 5 名，所以 B 只能在第 1、2 或 4 名。",
+          "條件「A 在 B 之前」表示 A 的名次數字比 B 小；由於 A 也不能是第 3 名（E 佔了），A 只能在第 1、2 或 4 名。",
+          "把 B 的三種可能逐一檢查：若 B 是第 1 名，則 A 必須更前面，不可能。",
+          "若 B 是第 2 名，則 A 只能是第 1 名，剩下第 4、5 名給 C、D，而條件「C 在 D 之後」要求 D 在前，所以 D 第 4、C 第 5，得到排列 A、B、E、D、C。",
+          "若 B 是第 4 名，則 A 可以是第 1 或第 2 名，剩下的兩個位置給 C、D 且 D 必須在 C 前面。",
+          "A 第 1 名時，剩第 2、5 名給 C、D，D 在前得 D 第 2、C 第 5，排列為 A、D、E、B、C；A 第 2 名時，剩第 1、5 名，同理得 D 第 1、C 第 5，排列為 D、A、E、B、C。",
+          "所以符合的排列是 ABEDC、ADEBC、DAEBC 三種。（已用 5! = 120 種排列逐一檢查四個條件窮舉驗證。）"
+        ],
+        "zh-Hans": [
+          "先用最硬的条件把问题缩小：E 恰好是第 3 名，位置完全确定，剩下 A、B、C、D 要填第 1、2、4、5 名。",
+          "四个人填四个位置本来有 4! = 24 种，接着用其余三个条件筛选。",
+          "条件「B 不是最后一名」表示 B 不能排第 5 名，所以 B 只能在第 1、2 或 4 名。",
+          "条件「A 在 B 之前」表示 A 的名次数字比 B 小；由于 A 也不能是第 3 名（E 占了），A 只能在第 1、2 或 4 名。",
+          "把 B 的三种可能逐一检查：若 B 是第 1 名，则 A 必须更前面，不可能。",
+          "若 B 是第 2 名，则 A 只能是第 1 名，剩下第 4、5 名给 C、D，而条件「C 在 D 之后」要求 D 在前，所以 D 第 4、C 第 5，得到排列 A、B、E、D、C。",
+          "若 B 是第 4 名，则 A 可以是第 1 或第 2 名，剩下的两个位置给 C、D 且 D 必须在 C 前面。",
+          "A 第 1 名时，剩第 2、5 名给 C、D，D 在前得 D 第 2、C 第 5，排列为 A、D、E、B、C；A 第 2 名时，剩第 1、5 名，同理得 D 第 1、C 第 5，排列为 D、A、E、B、C。",
+          "所以符合的排列是 ABEDC、ADEBC、DAEBC 三种。（已用 5! = 120 种排列逐一检查四个条件穷举验证。）"
+        ],
+        "en": [
+          "Start with the hardest constraint: E is exactly third, which fixes one position, leaving A, B, C, D for places 1, 2, 4 and 5.",
+          "Four people in four places gives 4! = 24 arrangements, which the remaining three conditions then filter.",
+          "The condition that B is not last means B cannot take place 5, so B is in place 1, 2 or 4.",
+          "The condition that A finishes ahead of B means A's place number is smaller than B's, and since A cannot be third either, A is in place 1, 2 or 4.",
+          "Check B's three possibilities. If B is first, then A would have to be ahead of first, which is impossible.",
+          "If B is second, A must be first, leaving places 4 and 5 for C and D; since C finishes behind D, D takes 4 and C takes 5, giving A, B, E, D, C.",
+          "If B is fourth, A can be first or second, and the two remaining places go to C and D with D ahead of C.",
+          "With A first, places 2 and 5 remain, so D is second and C fifth, giving A, D, E, B, C; with A second, places 1 and 5 remain, so D is first and C fifth, giving D, A, E, B, C.",
+          "So the valid orderings are ABEDC, ADEBC and DAEBC — three in all. (Verified by checking all 5! = 120 permutations against the four conditions.)"
+        ],
+        "ja": [
+          "最も強い条件から絞ります。E はちょうど 3 位で位置が確定するので、残る A、B、C、D が 1、2、4、5 位に入ります。",
+          "4 人を 4 か所に並べると 4! = 24 通りで、残る 3 条件で絞り込みます。",
+          "「B は最下位でない」より B は 5 位になれず、1、2、4 位のいずれかです。",
+          "「A は B より上位」より A の順位の数字は B より小さく、A も 3 位にはなれないので 1、2、4 位のいずれかです。",
+          "B の 3 通りを順に調べます。B が 1 位なら A はさらに上位でなければならず不可能。",
+          "B が 2 位なら A は 1 位に決まり、残る 4、5 位が C と D。「C は D より下位」より D が 4 位、C が 5 位で、並びは A、B、E、D、C。",
+          "B が 4 位なら A は 1 位か 2 位で、残る 2 か所が C と D、D が C より上位です。",
+          "A が 1 位なら残るのは 2 位と 5 位で D が 2 位・C が 5 位、並びは A、D、E、B、C。A が 2 位なら残るのは 1 位と 5 位で D が 1 位・C が 5 位、並びは D、A、E、B、C。",
+          "よって条件を満たす並びは ABEDC、ADEBC、DAEBC の 3 通りです。（5! = 120 通りをすべて 4 条件で確認する全数検査でも一致します。）"
+        ]
       },
-      "figure": { "type": "custom", "kind": "none", "params": {} },
-      "answerMode": "multiple_choice",
-      "options": {
-        "A": { "zh-Hant": "它能被 10 整除", "zh-Hans": "它能被 10 整除", "en": "It is divisible by 10", "ja": "10 で割り切れる" },
-        "B": { "zh-Hant": "它能被 15 整除", "zh-Hans": "它能被 15 整除", "en": "It is divisible by 15", "ja": "15 で割り切れる" },
-        "C": { "zh-Hant": "它能被 30 整除", "zh-Hans": "它能被 30 整除", "en": "It is divisible by 30", "ja": "30 で割り切れる" },
-        "D": { "zh-Hant": "它一定是偶數", "zh-Hans": "它一定是偶数", "en": "It must be even", "ja": "必ず偶数である" }
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
       },
-      "correctAnswer": { "type": "choice", "value": "C" },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "3"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
       "source": {
-        "type": "editorial_original",
-        "name": "MathSpring Editorial",
-        "reference": "Upper logic expansion set L17",
-        "displayText": "MathSpring Editorial Original"
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "多重順序約束下的排列計數：先用最強條件定位、再依剩餘條件分支枚舉的競賽題型",
+        "notes": "設計依據：解法示範「先用把位置完全鎖死的條件（E 為第 3 名）縮小問題，再依約束最緊的變數（B）分支」的順序，避免盲目枚舉 24 種。答案 3 已用 5! = 120 種排列逐條件檢查窮舉驗證。屬同水準原創改寫，非抄錄特定官方題。原 005 的四個選項（能被 10、15、30 整除、是偶數）在題目條件下**全部都一定正確**，不符合唯一答案的要求，且來源為自製 editorial 暫代出處。",
+        "displayText": "改寫題（名次約束計數）"
       },
-      "olympiadTaxonomy": { "topic": "邏輯", "topicCode": "logic", "subtopic": "整除判斷", "subtopicCode": "divisibility_logic" }
+      "olympiadTaxonomy": {
+        "topic": "邏輯",
+        "topicCode": "logic",
+        "subtopic": "名次約束計數",
+        "subtopicCode": "ranking_constraints"
+      },
+      "reviewStatus": "ok"
     },
     {
       "id": "logic_grade12_foundation_006",
-      "reviewStatus": "pending",
       "topic": "logic",
-      "subtopic": "family_count",
+      "subtopic": "ball_parity_invariant",
       "difficulty": "foundation",
       "levelStage": "grade12",
       "challengeTier": "foundation",
       "prompt": {
-        "zh-Hant": "一個家庭有 3 個孩子。若每個孩子不是男就是女，且只看性別排列，則共有多少種可能？",
-        "zh-Hans": "一个家庭有 3 个孩子。若每个孩子不是男就是女，且只看性别排列，则共有多少种可能？",
-        "en": "A family has 3 children. If each child is either a boy or a girl, and birth order matters, how many possible gender patterns are there?",
-        "ja": "ある家庭に 3 人の子どもがいます。各子どもは男か女のどちらかで、生まれた順序も区別すると、性別の並び方は何通りありますか。"
+        "zh-Hant": "一個袋子裡有 15 顆白球與 12 顆黑球。每次操作從袋中任取兩球，並依下列規則放回一顆球：若取出的兩球同色，就放回一顆黑球；若兩球異色，就放回一顆白球。取出的球不再放回。如此重複到袋中只剩一顆球為止。求最後剩下那顆球的顏色（白球填 1，黑球填 2）。",
+        "zh-Hans": "一个袋子里有 15 颗白球与 12 颗黑球。每次操作从袋中任取两球，并依下列规则放回一颗球：若取出的两球同色，就放回一颗黑球；若两球异色，就放回一颗白球。取出的球不再放回。如此重复到袋中只剩一颗球为止。求最后剩下那颗球的颜色（白球填 1，黑球填 2）。",
+        "en": "A bag contains 15 white balls and 12 black balls. In each operation two balls are drawn and one ball is returned according to this rule: if the two drawn balls have the same colour, a black ball is returned; if they have different colours, a white ball is returned. The drawn balls are not put back. This repeats until a single ball remains. What colour is the final ball? (Answer 1 for white, 2 for black.)",
+        "ja": "袋の中に白球 15 個と黒球 12 個があります。1 回の操作では 2 個を取り出し、次の規則で 1 個だけ戻します：取り出した 2 個が同色なら黒球を 1 個戻し、異色なら白球を 1 個戻します。取り出した球は戻しません。袋に 1 個だけ残るまでこれを繰り返します。最後に残る球の色を答えなさい（白なら 1、黒なら 2）。"
       },
-      "answer": { "zh-Hant": "答案是 8。", "zh-Hans": "答案是 8。", "en": "The answer is 8.", "ja": "答えは 8 です。" },
+      "answer": {
+        "zh-Hant": "答案是 1（白球）。",
+        "zh-Hans": "答案是 1（白球）。",
+        "en": "The answer is 1 (white).",
+        "ja": "答えは 1（白球）です。"
+      },
       "solutionSteps": {
-        "zh-Hant": ["每個孩子都有 2 種可能：男或女。", "3 個孩子彼此獨立，所以總可能數是 2×2×2 = 2³ = 8。"],
-        "zh-Hans": ["每个孩子都有 2 种可能：男或女。", "3 个孩子彼此独立，所以总可能数是 2×2×2 = 2³ = 8。"],
-        "en": ["Each child has 2 possibilities: boy or girl.", "With 3 independent children, the total number of patterns is 2×2×2 = 2³ = 8."],
-        "ja": ["各子どもには男か女の 2 通りがあります。", "3 人が独立なので、全部で 2×2×2 = 2³ = 8 通りです。"]
+        "zh-Hant": [
+          "每次操作球數都減少 1，從 27 顆開始，經過 26 次操作後恰好剩 1 顆，所以過程一定會結束。",
+          "要判斷最後那顆球的顏色，關鍵是找出一個在每次操作中都不改變的量，也就是不變量。",
+          "檢查白球數量在三種情況下的變化。情況一：取出兩顆白球，放回一顆黑球，白球少 2 顆。",
+          "情況二：取出兩顆黑球，放回一顆黑球，白球數量完全沒變。",
+          "情況三：取出一白一黑，放回一顆白球，白球先少 1 再多 1，數量也沒變。",
+          "所以白球數量每次要嘛減少 2、要嘛不變，換句話說白球數量的奇偶性永遠不會改變。",
+          "一開始白球有 15 顆，是奇數，因此在整個過程中白球數量始終保持奇數。",
+          "最後只剩一顆球時，白球數量只可能是 0 或 1；因為必須是奇數，所以是 1。",
+          "也就是說最後剩下的那顆球是白球，答案填 1。（已用 3000 次隨機模擬驗證，最後一顆永遠是白球；注意黑球的 12 顆是無關的干擾資訊。）"
+        ],
+        "zh-Hans": [
+          "每次操作球数都减少 1，从 27 颗开始，经过 26 次操作后恰好剩 1 颗，所以过程一定会结束。",
+          "要判断最后那颗球的颜色，关键是找出一个在每次操作中都不改变的量，也就是不变量。",
+          "检查白球数量在三种情况下的变化。情况一：取出两颗白球，放回一颗黑球，白球少 2 颗。",
+          "情况二：取出两颗黑球，放回一颗黑球，白球数量完全没变。",
+          "情况三：取出一白一黑，放回一颗白球，白球先少 1 再多 1，数量也没变。",
+          "所以白球数量每次要么减少 2、要么不变，换句话说白球数量的奇偶性永远不会改变。",
+          "一开始白球有 15 颗，是奇数，因此在整个过程中白球数量始终保持奇数。",
+          "最后只剩一颗球时，白球数量只可能是 0 或 1；因为必须是奇数，所以是 1。",
+          "也就是说最后剩下的那颗球是白球，答案填 1。（已用 3000 次随机模拟验证，最后一颗永远是白球；注意黑球的 12 颗是无关的干扰信息。）"
+        ],
+        "en": [
+          "Each operation reduces the number of balls by one, so starting from 27 balls exactly 26 operations leave a single ball and the process always terminates.",
+          "To determine the final colour, the key is to find a quantity that never changes under any operation — an invariant.",
+          "Examine how the number of white balls changes in the three cases. Case one: two white balls are drawn and a black returned, so the white count drops by 2.",
+          "Case two: two black balls are drawn and a black returned, so the white count is unchanged.",
+          "Case three: one white and one black are drawn and a white returned, so the white count drops by 1 then rises by 1 and is unchanged.",
+          "So the white count either decreases by 2 or stays the same, which means its parity never changes.",
+          "Initially there are 15 white balls, an odd number, so the white count stays odd throughout the whole process.",
+          "When a single ball remains the white count is either 0 or 1, and since it must be odd it is 1.",
+          "So the final ball is white and the answer is 1. (Verified with 3000 random simulations, all ending in a white ball; note that the 12 black balls are irrelevant to the conclusion.)"
+        ],
+        "ja": [
+          "1 回の操作で球は 1 個ずつ減るので、27 個から始めて 26 回でちょうど 1 個になり、過程は必ず終わります。",
+          "最後の球の色を決めるには、どの操作でも変わらない量、すなわち不変量を見つけるのが鍵です。",
+          "白球の個数が 3 つの場合にどう変わるかを調べます。場合 1：白 2 個を取り黒を 1 個戻すので、白は 2 個減ります。",
+          "場合 2：黒 2 個を取り黒を 1 個戻すので、白の個数は変わりません。",
+          "場合 3：白 1 個と黒 1 個を取り白を 1 個戻すので、白は 1 個減って 1 個増え、結局変わりません。",
+          "つまり白の個数は 2 減るか変わらないかのどちらかで、白の個数の偶奇は決して変わりません。",
+          "最初の白球は 15 個で奇数なので、過程を通じて白の個数は常に奇数のままです。",
+          "最後に 1 個だけ残るとき白の個数は 0 か 1 ですが、奇数でなければならないので 1 です。",
+          "したがって最後に残るのは白球で、答えは 1 です。（3000 回のランダム模擬でも最後は必ず白球でした。なお黒球の 12 個は結論に無関係な情報です。）"
+        ]
       },
-      "figure": { "type": "custom", "kind": "none", "params": {} },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
       "answerMode": "integer_input",
-      "correctAnswer": { "type": "integer", "value": "8" },
-      "inputConstraints": { "allowNegative": false, "maxDigits": 1 },
-      "source": {
-        "type": "editorial_original",
-        "name": "MathSpring Editorial",
-        "reference": "Upper logic expansion set L18",
-        "displayText": "MathSpring Editorial Original"
+      "correctAnswer": {
+        "type": "integer",
+        "value": "1"
       },
-      "olympiadTaxonomy": { "topic": "邏輯", "topicCode": "logic", "subtopic": "情況總數", "subtopicCode": "family_count" }
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "取球置換操作中以「白球數奇偶」為不變量判定最終狀態的競賽題型",
+        "notes": "設計依據：三種操作對白球數的影響分別是 −2、0、0，因此奇偶性為不變量；起始 15 為奇數即決定結局，而黑球的 12 顆完全是干擾資訊。答案已用 3000 次隨機模擬驗證最後一顆恆為白球。屬同水準原創改寫，非抄錄特定官方題。原 006（3 個孩子的性別排列 = 2³）僅兩步，屬裸題，且來源為自製 editorial 暫代出處。",
+        "displayText": "改寫題（取球奇偶不變量）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "邏輯",
+        "topicCode": "logic",
+        "subtopic": "取球奇偶不變量",
+        "subtopicCode": "ball_parity_invariant"
+      },
+      "reviewStatus": "ok"
     },
     {
       "id": "logic_grade12_foundation_007",
-      "reviewStatus": "pending",
+      "reviewStatus": "ok",
       "topic": "logic",
       "subtopic": "board_states",
       "difficulty": "foundation",
@@ -259,17 +608,60 @@
         "en": "Azar and Carl play tic-tac-toe on a 3 by 3 board. Azar places X first, Carl places O second, and they alternate until someone first gets three in a row, at which point the game ends immediately. Suppose Carl wins exactly when he places his third O. How many different final board positions are possible?",
         "ja": "Azar と Carl が 3×3 の三目並べをします。Azar が先に X、Carl が次に O を置き、どちらかが 3 つ並べた時点でゲームはただちに終了します。Carl がちょうど 3 個目の O を置いた手で勝つとき、終了時の盤面は何通りありますか。"
       },
-      "answer": { "zh-Hant": "答案是 148。", "zh-Hans": "答案是 148。", "en": "The answer is 148.", "ja": "答えは 148 です。" },
-      "solutionSteps": {
-        "zh-Hant": ["Carl 在第 3 個 O 落下時獲勝，所以最終盤面一定有 3 個 O 與 3 個 X。", "先分成兩類：O 的連線是橫線或直線，共有 6 種；或是對角線，共有 2 種。", "若 O 在橫線或直線上，剩下 6 格中放 3 個 X 的方法有 C(6,3)=20 種，但其中有 2 種會讓 X 也形成連線，不合法，所以是 18 種。", "這一類共有 6×18 = 108 種。", "若 O 在對角線上，剩下 6 格中任選 3 格放 X 都不會提前讓 X 成線，所以有 2×20 = 40 種。", "合計 108 + 40 = 148 種。"],
-        "zh-Hans": ["Carl 在第 3 个 O 落下时获胜，所以最终盘面一定有 3 个 O 与 3 个 X。", "先分成两类：O 的连线是横线或直线，共有 6 种；或是对角线，共有 2 种。", "若 O 在横线或直线上，剩下 6 格中放 3 个 X 的方法有 C(6,3)=20 种，但其中有 2 种会让 X 也形成连线，不合法，所以是 18 种。", "这一类共有 6×18 = 108 种。", "若 O 在对角线上，剩下 6 格中任选 3 格放 X 都不会提前让 X 成线，所以有 2×20 = 40 种。", "合计 108 + 40 = 148 种。"],
-        "en": ["Since Carl wins when placing his third O, the final board must contain exactly 3 Os and 3 Xs.", "Split into two cases: O forms a horizontal or vertical line, or O forms a diagonal line.", "There are 6 horizontal/vertical winning lines. For each, X can occupy any 3 of the remaining 6 cells, except for 2 choices that would make X already have a line, leaving 18 valid boards.", "That contributes 6×18 = 108 boards.", "There are 2 diagonal winning lines. In each case, any 3 of the remaining 6 cells may hold X, giving 20 boards each.", "That contributes 2×20 = 40 boards, so the total is 108 + 40 = 148."],
-        "ja": ["Carl が 3 個目の O を置いたときに勝つので、最終盤面には O が 3 個、X が 3 個あります。", "O の 3 連が横または縦の場合と、対角線の場合に分けます。", "横または縦の勝ち筋は 6 本あります。残り 6 マスから X を 3 マス選ぶ方法は C(6,3)=20 通りですが、そのうち 2 通りは X も一直線になってしまうので不適切で、18 通りです。", "この場合は 6×18 = 108 通りです。", "対角線の勝ち筋は 2 本あり、このときは残り 6 マスからどの 3 マスに X を置いてもよいので 20 通りずつです。", "したがって 2×20 = 40 通りで、合計は 108 + 40 = 148 通りです。"]
+      "answer": {
+        "zh-Hant": "答案是 148。",
+        "zh-Hans": "答案是 148。",
+        "en": "The answer is 148.",
+        "ja": "答えは 148 です。"
       },
-      "figure": { "type": "custom", "kind": "none", "params": {} },
+      "solutionSteps": {
+        "zh-Hant": [
+          "Carl 在第 3 個 O 落下時獲勝，所以最終盤面一定有 3 個 O 與 3 個 X。",
+          "先分成兩類：O 的連線是橫線或直線，共有 6 種；或是對角線，共有 2 種。",
+          "若 O 在橫線或直線上，剩下 6 格中放 3 個 X 的方法有 C(6,3)=20 種，但其中有 2 種會讓 X 也形成連線，不合法，所以是 18 種。",
+          "這一類共有 6×18 = 108 種。",
+          "若 O 在對角線上，剩下 6 格中任選 3 格放 X 都不會提前讓 X 成線，所以有 2×20 = 40 種。",
+          "合計 108 + 40 = 148 種。"
+        ],
+        "zh-Hans": [
+          "Carl 在第 3 个 O 落下时获胜，所以最终盘面一定有 3 个 O 与 3 个 X。",
+          "先分成两类：O 的连线是横线或直线，共有 6 种；或是对角线，共有 2 种。",
+          "若 O 在横线或直线上，剩下 6 格中放 3 个 X 的方法有 C(6,3)=20 种，但其中有 2 种会让 X 也形成连线，不合法，所以是 18 种。",
+          "这一类共有 6×18 = 108 种。",
+          "若 O 在对角线上，剩下 6 格中任选 3 格放 X 都不会提前让 X 成线，所以有 2×20 = 40 种。",
+          "合计 108 + 40 = 148 种。"
+        ],
+        "en": [
+          "Since Carl wins when placing his third O, the final board must contain exactly 3 Os and 3 Xs.",
+          "Split into two cases: O forms a horizontal or vertical line, or O forms a diagonal line.",
+          "There are 6 horizontal/vertical winning lines. For each, X can occupy any 3 of the remaining 6 cells, except for 2 choices that would make X already have a line, leaving 18 valid boards.",
+          "That contributes 6×18 = 108 boards.",
+          "There are 2 diagonal winning lines. In each case, any 3 of the remaining 6 cells may hold X, giving 20 boards each.",
+          "That contributes 2×20 = 40 boards, so the total is 108 + 40 = 148."
+        ],
+        "ja": [
+          "Carl が 3 個目の O を置いたときに勝つので、最終盤面には O が 3 個、X が 3 個あります。",
+          "O の 3 連が横または縦の場合と、対角線の場合に分けます。",
+          "横または縦の勝ち筋は 6 本あります。残り 6 マスから X を 3 マス選ぶ方法は C(6,3)=20 通りですが、そのうち 2 通りは X も一直線になってしまうので不適切で、18 通りです。",
+          "この場合は 6×18 = 108 通りです。",
+          "対角線の勝ち筋は 2 本あり、このときは残り 6 マスからどの 3 マスに X を置いてもよいので 20 通りずつです。",
+          "したがって 2×20 = 40 通りで、合計は 108 + 40 = 148 通りです。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
       "answerMode": "integer_input",
-      "correctAnswer": { "type": "integer", "value": "148" },
-      "inputConstraints": { "allowNegative": false, "maxDigits": 3 },
+      "correctAnswer": {
+        "type": "integer",
+        "value": "148"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
       "source": {
         "type": "official_reference",
         "name": "AMC 12",
@@ -284,11 +676,16 @@
         "rightsStatus": "needs_review",
         "notes": "Rewritten from a publicly archived competition statement."
       },
-      "olympiadTaxonomy": { "topic": "邏輯", "topicCode": "logic", "subtopic": "棋盤狀態", "subtopicCode": "board_states" }
+      "olympiadTaxonomy": {
+        "topic": "邏輯",
+        "topicCode": "logic",
+        "subtopic": "棋盤狀態",
+        "subtopicCode": "board_states"
+      }
     },
     {
       "id": "logic_grade12_foundation_008",
-      "reviewStatus": "pending",
+      "reviewStatus": "ok",
       "topic": "logic",
       "subtopic": "syllogism_must_be_true",
       "difficulty": "foundation",
@@ -307,21 +704,81 @@
         "ja": "答えは II のみです。"
       },
       "solutionSteps": {
-        "zh-Hant": ["已知有些令人毛骨悚然的爬行物是短吻鱷，所以至少存在一隻同時屬於這兩類的短吻鱷。", "又因為所有短吻鱷都是兇猛生物，所以這隻短吻鱷也一定是兇猛生物。", "因此『有些兇猛生物是令人毛骨悚然的爬行物』一定成立，也就是 II 為真。", "I 不一定真，因為題目只說『有些』令人毛骨悚然的爬行物是短吻鱷，沒有說全部短吻鱷都屬於這類。", "III 也不一定真，題目完全沒有保證存在不屬於令人毛骨悚然爬行物的短吻鱷。", "所以只有 II 一定為真。"],
-        "zh-Hans": ["已知有些令人毛骨悚然的爬行物是短吻鳄，所以至少存在一只同时属于这两类的短吻鳄。", "又因为所有短吻鳄都是凶猛生物，所以这只短吻鳄也一定是凶猛生物。", "因此『有些凶猛生物是令人毛骨悚然的爬行物』一定成立，也就是 II 为真。", "I 不一定真，因为题目只说『有些』令人毛骨悚然的爬行物是短吻鳄，没有说全部短吻鳄都属于这类。", "III 也不一定真，题目完全没有保证存在不属于令人毛骨悚然爬行物的短吻鳄。", "所以只有 II 一定为真。"],
-        "en": ["We are told that some creepy crawlers are alligators, so at least one object is both a creepy crawler and an alligator.", "Since all alligators are ferocious creatures, that same object is also a ferocious creature.", "Therefore some ferocious creatures are creepy crawlers, so statement II must be true.", "Statement I need not be true, because the premise says only that some creepy crawlers are alligators, not that all alligators are creepy crawlers.", "Statement III also need not be true, because nothing guarantees an alligator that is not a creepy crawler.", "So the only statement that must be true is II."],
-        "ja": ["『気味の悪いはうものの中にはワニがいる』ので、少なくとも 1 つは両方に属するものが存在します。", "しかもすべてのワニは獰猛な生き物なので、その同じものは獰猛な生き物でもあります。", "したがって『獰猛な生き物の中には気味の悪いはうものがある』が必ず成り立ち、II は真です。", "I は必ずしも真ではありません。前提は『あるものが』そうだと言っているだけで、『すべて』とは言っていないからです。", "III も必ずしも真ではありません。そのようなワニが存在する保証はありません。", "よって必ず真なのは II のみです。"]
+        "zh-Hant": [
+          "已知有些令人毛骨悚然的爬行物是短吻鱷，所以至少存在一隻同時屬於這兩類的短吻鱷。",
+          "又因為所有短吻鱷都是兇猛生物，所以這隻短吻鱷也一定是兇猛生物。",
+          "因此『有些兇猛生物是令人毛骨悚然的爬行物』一定成立，也就是 II 為真。",
+          "I 不一定真，因為題目只說『有些』令人毛骨悚然的爬行物是短吻鱷，沒有說全部短吻鱷都屬於這類。",
+          "III 也不一定真，題目完全沒有保證存在不屬於令人毛骨悚然爬行物的短吻鱷。",
+          "所以只有 II 一定為真。"
+        ],
+        "zh-Hans": [
+          "已知有些令人毛骨悚然的爬行物是短吻鳄，所以至少存在一只同时属于这两类的短吻鳄。",
+          "又因为所有短吻鳄都是凶猛生物，所以这只短吻鳄也一定是凶猛生物。",
+          "因此『有些凶猛生物是令人毛骨悚然的爬行物』一定成立，也就是 II 为真。",
+          "I 不一定真，因为题目只说『有些』令人毛骨悚然的爬行物是短吻鳄，没有说全部短吻鳄都属于这类。",
+          "III 也不一定真，题目完全没有保证存在不属于令人毛骨悚然爬行物的短吻鳄。",
+          "所以只有 II 一定为真。"
+        ],
+        "en": [
+          "We are told that some creepy crawlers are alligators, so at least one object is both a creepy crawler and an alligator.",
+          "Since all alligators are ferocious creatures, that same object is also a ferocious creature.",
+          "Therefore some ferocious creatures are creepy crawlers, so statement II must be true.",
+          "Statement I need not be true, because the premise says only that some creepy crawlers are alligators, not that all alligators are creepy crawlers.",
+          "Statement III also need not be true, because nothing guarantees an alligator that is not a creepy crawler.",
+          "So the only statement that must be true is II."
+        ],
+        "ja": [
+          "『気味の悪いはうものの中にはワニがいる』ので、少なくとも 1 つは両方に属するものが存在します。",
+          "しかもすべてのワニは獰猛な生き物なので、その同じものは獰猛な生き物でもあります。",
+          "したがって『獰猛な生き物の中には気味の悪いはうものがある』が必ず成り立ち、II は真です。",
+          "I は必ずしも真ではありません。前提は『あるものが』そうだと言っているだけで、『すべて』とは言っていないからです。",
+          "III も必ずしも真ではありません。そのようなワニが存在する保証はありません。",
+          "よって必ず真なのは II のみです。"
+        ]
       },
-      "figure": { "type": "custom", "kind": "none", "params": {} },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
       "answerMode": "multiple_choice",
       "options": {
-        "A": { "zh-Hant": "只有 I", "zh-Hans": "只有 I", "en": "I only", "ja": "I のみ" },
-        "B": { "zh-Hant": "只有 II", "zh-Hans": "只有 II", "en": "II only", "ja": "II のみ" },
-        "C": { "zh-Hant": "只有 III", "zh-Hans": "只有 III", "en": "III only", "ja": "III のみ" },
-        "D": { "zh-Hant": "II 和 III", "zh-Hans": "II 和 III", "en": "II and III only", "ja": "II と III のみ" },
-        "E": { "zh-Hant": "都不一定", "zh-Hans": "都不一定", "en": "None must be true", "ja": "どれも必ずしも真ではない" }
+        "A": {
+          "zh-Hant": "只有 I",
+          "zh-Hans": "只有 I",
+          "en": "I only",
+          "ja": "I のみ"
+        },
+        "B": {
+          "zh-Hant": "只有 II",
+          "zh-Hans": "只有 II",
+          "en": "II only",
+          "ja": "II のみ"
+        },
+        "C": {
+          "zh-Hant": "只有 III",
+          "zh-Hans": "只有 III",
+          "en": "III only",
+          "ja": "III のみ"
+        },
+        "D": {
+          "zh-Hant": "II 和 III",
+          "zh-Hans": "II 和 III",
+          "en": "II and III only",
+          "ja": "II と III のみ"
+        },
+        "E": {
+          "zh-Hant": "都不一定",
+          "zh-Hans": "都不一定",
+          "en": "None must be true",
+          "ja": "どれも必ずしも真ではない"
+        }
       },
-      "correctAnswer": { "type": "choice", "value": "B" },
+      "correctAnswer": {
+        "type": "choice",
+        "value": "B"
+      },
       "source": {
         "type": "official_reference",
         "name": "AMC 10",
@@ -336,11 +793,16 @@
         "rightsStatus": "needs_review",
         "notes": "Rewritten from a publicly archived competition statement."
       },
-      "olympiadTaxonomy": { "topic": "邏輯", "topicCode": "logic", "subtopic": "三段論推理", "subtopicCode": "syllogism_must_be_true" }
+      "olympiadTaxonomy": {
+        "topic": "邏輯",
+        "topicCode": "logic",
+        "subtopic": "三段論推理",
+        "subtopicCode": "syllogism_must_be_true"
+      }
     },
     {
       "id": "logic_grade12_foundation_009",
-      "reviewStatus": "pending",
+      "reviewStatus": "ok",
       "topic": "logic",
       "subtopic": "impartial_game_strategy",
       "difficulty": "foundation",
@@ -359,21 +821,93 @@
         "ja": "答えは `(6,2,1)` です。"
       },
       "solutionSteps": {
-        "zh-Hant": ["這題的核心是『對稱局面』：如果先手能把局面切成左右對稱，後手做什麼，先手就能鏡像模仿，最後一定由先手拿走最後一塊。", "對於 `(6,1,1)`，Arjun 可以先把長度 6 的牆切成 `(2,2,1,1)`；對於 `(6,2,2)`，他可以切成 `(2,2,2,2)`；對於 `(6,3,1)`，可切成 `(3,1,3,1)`；對於 `(6,3,2)`，可切成 `(3,2,3,2)`。這些都是對稱必勝局。", "因此 A、C、D、E 都能被先手直接做成鏡像局面，Beth 不會有必勝策略。", "唯一沒有這種立即對稱拆法、而且官方解證明是後手必勝的位置，就是 `(6,2,1)`。", "所以答案是 `(6,2,1)`。"],
-        "zh-Hans": ["这题的核心是『对称局面』：如果先手能把局面切成左右对称，后手做什么，先手就能镜像模仿，最后一定由先手拿走最后一块。", "对于 `(6,1,1)`，Arjun 可以先把长度 6 的墙切成 `(2,2,1,1)`；对于 `(6,2,2)`，他可以切成 `(2,2,2,2)`；对于 `(6,3,1)`，可切成 `(3,1,3,1)`；对于 `(6,3,2)`，可切成 `(3,2,3,2)`。这些都是对称必胜局。", "因此 A、C、D、E 都能被先手直接做成镜像局面，Beth 不会有必胜策略。", "唯一没有这种立即对称拆法、而且官方解证明是后手必胜的位置，就是 `(6,2,1)`。", "所以答案是 `(6,2,1)`。"],
-        "en": ["The key idea is symmetry. If the first player can split the position into two matching parts, then whatever the second player does on one side can be mirrored on the other side, so the first player will take the last brick.", "From `(6,1,1)`, Arjun can move to `(2,2,1,1)`. From `(6,2,2)`, he can move to `(2,2,2,2)`. From `(6,3,1)`, he can move to `(3,1,3,1)`. From `(6,3,2)`, he can move to `(3,2,3,2)`.", "So choices A, C, D, and E can all be turned immediately into symmetric winning positions for the first player.", "The only choice that does not allow such an immediate symmetry move, and is proved in the official solution to be winning for the second player, is `(6,2,1)`.", "Therefore the correct answer is `(6,2,1)`."],
-        "ja": ["この問題の要点は『対称形』です。先手が局面を左右対称にできれば、後手の手をもう一方でまねすることで先手が最後のレンガを取れます。", "`(6,1,1)` は `(2,2,1,1)` に、`(6,2,2)` は `(2,2,2,2)` に、`(6,3,1)` は `(3,1,3,1)` に、`(6,3,2)` は `(3,2,3,2)` に先手ができます。", "したがって A、C、D、E はどれも先手が対称形に持ち込めます。", "この即時対称化ができず、公式解で後手必勝と示されるのが `(6,2,1)` です。", "よって答えは `(6,2,1)` です。"]
+        "zh-Hant": [
+          "這個遊戲每次從某一段牆移走 1 塊或相鄰 2 塊，牆可能因此分裂成兩段，這正是組合賽局中的 Kayles。",
+          "多段牆彼此獨立，可用 Sprague–Grundy 定理：整個局面的 Grundy 值等於各段 Grundy 值的 XOR，而 Grundy 值為 0 表示「輪到走的人必敗」，也就是後手必勝。",
+          "先算單段長度 n 的 Grundy 值 G(n)。G(0) = 0；一般而言 G(n) 是所有後繼局面 Grundy 值集合的 mex（最小未出現的非負整數）。",
+          "移走 1 塊時，牆分成長度 i 與 n−1−i 兩段，後繼值為 G(i) ⊕ G(n−1−i)；移走相鄰 2 塊時分成 i 與 n−2−i，後繼值為 G(i) ⊕ G(n−2−i)。",
+          "依此逐步計算得 G(0)=0、G(1)=1、G(2)=2、G(3)=3、G(4)=1、G(5)=4、G(6)=3。",
+          "接著對五個選項各算 XOR：(6,1,1) → 3⊕1⊕1 = 3；(6,2,1) → 3⊕2⊕1 = 0；(6,2,2) → 3⊕2⊕2 = 3。",
+          "(6,3,1) → 3⊕3⊕1 = 1；(6,3,2) → 3⊕3⊕2 = 2。",
+          "只有 (6,2,1) 的 Grundy 值是 0，代表先手 Arjun 無論怎麼走都會把非零值交給對手，因此後手 Beth 必勝。",
+          "所以答案是 (6,2,1)。"
+        ],
+        "zh-Hans": [
+          "这个游戏每次从某一段墙移走 1 块或相邻 2 块，墙可能因此分裂成两段，这正是组合博弈中的 Kayles。",
+          "多段墙彼此独立，可用 Sprague–Grundy 定理：整个局面的 Grundy 值等于各段 Grundy 值的 XOR，而 Grundy 值为 0 表示「轮到走的人必败」，也就是后手必胜。",
+          "先算单段长度 n 的 Grundy 值 G(n)。G(0) = 0；一般而言 G(n) 是所有后继局面 Grundy 值集合的 mex（最小未出现的非负整数）。",
+          "移走 1 块时，墙分成长度 i 与 n−1−i 两段，后继值为 G(i) ⊕ G(n−1−i)；移走相邻 2 块时分成 i 与 n−2−i，后继值为 G(i) ⊕ G(n−2−i)。",
+          "依此逐步计算得 G(0)=0、G(1)=1、G(2)=2、G(3)=3、G(4)=1、G(5)=4、G(6)=3。",
+          "接着对五个选项各算 XOR：(6,1,1) → 3⊕1⊕1 = 3；(6,2,1) → 3⊕2⊕1 = 0；(6,2,2) → 3⊕2⊕2 = 3。",
+          "(6,3,1) → 3⊕3⊕1 = 1；(6,3,2) → 3⊕3⊕2 = 2。",
+          "只有 (6,2,1) 的 Grundy 值是 0，代表先手 Arjun 无论怎么走都会把非零值交给对手，因此后手 Beth 必胜。",
+          "所以答案是 (6,2,1)。"
+        ],
+        "en": [
+          "Each move removes one brick or two adjacent bricks from a wall, possibly splitting it in two — this is exactly the combinatorial game Kayles.",
+          "The walls are independent, so the Sprague–Grundy theorem applies: the Grundy value of the whole position is the XOR of the walls' values, and a value of 0 means the player to move loses, that is the second player wins.",
+          "First compute G(n) for a single wall of length n. We have G(0) = 0, and in general G(n) is the mex (least non-negative integer not present) of the Grundy values of all successor positions.",
+          "Removing one brick splits the wall into lengths i and n−1−i with value G(i) ⊕ G(n−1−i); removing two adjacent bricks gives i and n−2−i with value G(i) ⊕ G(n−2−i).",
+          "Computing step by step gives G(0)=0, G(1)=1, G(2)=2, G(3)=3, G(4)=1, G(5)=4, G(6)=3.",
+          "Now XOR the values for each option: (6,1,1) gives 3⊕1⊕1 = 3; (6,2,1) gives 3⊕2⊕1 = 0; (6,2,2) gives 3⊕2⊕2 = 3.",
+          "Also (6,3,1) gives 3⊕3⊕1 = 1 and (6,3,2) gives 3⊕3⊕2 = 2.",
+          "Only (6,2,1) has Grundy value 0, meaning that whatever Arjun does he hands his opponent a non-zero value, so Beth as second player wins.",
+          "The answer is therefore (6,2,1)."
+        ],
+        "ja": [
+          "この game は各手で 1 つの壁から 1 個または隣り合う 2 個のレンガを取り、壁が 2 つに分裂することもあります。これはまさに組合せ game の Kayles です。",
+          "複数の壁は独立なので Sprague–Grundy の定理が使えます。全体の Grundy 値は各壁の値の XOR であり、値が 0 なら手番の側が負け、すなわち後手必勝です。",
+          "まず長さ n の 1 つの壁の Grundy 値 G(n) を求めます。G(0) = 0 で、一般に G(n) は後続局面の Grundy 値の集合の mex（含まれない最小の非負整数）です。",
+          "1 個取ると壁は長さ i と n−1−i に分かれ値は G(i) ⊕ G(n−1−i)、隣り合う 2 個を取ると i と n−2−i に分かれ値は G(i) ⊕ G(n−2−i) です。",
+          "順に計算すると G(0)=0、G(1)=1、G(2)=2、G(3)=3、G(4)=1、G(5)=4、G(6)=3。",
+          "各選択肢の XOR を求めます：(6,1,1) は 3⊕1⊕1 = 3、(6,2,1) は 3⊕2⊕1 = 0、(6,2,2) は 3⊕2⊕2 = 3。",
+          "さらに (6,3,1) は 3⊕3⊕1 = 1、(6,3,2) は 3⊕3⊕2 = 2。",
+          "Grundy 値が 0 なのは (6,2,1) だけで、Arjun がどう動いても相手に非ゼロの値を渡すことになり、後手の Beth が必勝です。",
+          "したがって答えは (6,2,1) です。"
+        ]
       },
-      "figure": { "type": "custom", "kind": "none", "params": {} },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
       "answerMode": "multiple_choice",
       "options": {
-        "A": { "zh-Hant": "(6,1,1)", "zh-Hans": "(6,1,1)", "en": "(6,1,1)", "ja": "(6,1,1)" },
-        "B": { "zh-Hant": "(6,2,1)", "zh-Hans": "(6,2,1)", "en": "(6,2,1)", "ja": "(6,2,1)" },
-        "C": { "zh-Hant": "(6,2,2)", "zh-Hans": "(6,2,2)", "en": "(6,2,2)", "ja": "(6,2,2)" },
-        "D": { "zh-Hant": "(6,3,1)", "zh-Hans": "(6,3,1)", "en": "(6,3,1)", "ja": "(6,3,1)" },
-        "E": { "zh-Hant": "(6,3,2)", "zh-Hans": "(6,3,2)", "en": "(6,3,2)", "ja": "(6,3,2)" }
+        "A": {
+          "zh-Hant": "(6,1,1)",
+          "zh-Hans": "(6,1,1)",
+          "en": "(6,1,1)",
+          "ja": "(6,1,1)"
+        },
+        "B": {
+          "zh-Hant": "(6,2,1)",
+          "zh-Hans": "(6,2,1)",
+          "en": "(6,2,1)",
+          "ja": "(6,2,1)"
+        },
+        "C": {
+          "zh-Hant": "(6,2,2)",
+          "zh-Hans": "(6,2,2)",
+          "en": "(6,2,2)",
+          "ja": "(6,2,2)"
+        },
+        "D": {
+          "zh-Hant": "(6,3,1)",
+          "zh-Hans": "(6,3,1)",
+          "en": "(6,3,1)",
+          "ja": "(6,3,1)"
+        },
+        "E": {
+          "zh-Hant": "(6,3,2)",
+          "zh-Hans": "(6,3,2)",
+          "en": "(6,3,2)",
+          "ja": "(6,3,2)"
+        }
       },
-      "correctAnswer": { "type": "choice", "value": "B" },
+      "correctAnswer": {
+        "type": "choice",
+        "value": "B"
+      },
       "source": {
         "type": "official_reference",
         "name": "AMC 12",
@@ -388,7 +922,12 @@
         "rightsStatus": "needs_review",
         "notes": "Rewritten from a publicly archived competition statement shared with AMC 10B 2021 Problem 24."
       },
-      "olympiadTaxonomy": { "topic": "邏輯", "topicCode": "logic", "subtopic": "對稱博弈", "subtopicCode": "impartial_game_strategy" }
+      "olympiadTaxonomy": {
+        "topic": "邏輯",
+        "topicCode": "logic",
+        "subtopic": "對稱博弈",
+        "subtopicCode": "impartial_game_strategy"
+      }
     }
   ]
 }
