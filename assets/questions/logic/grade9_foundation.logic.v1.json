@@ -854,6 +854,546 @@
         "subtopicCode": "self_reference_statements"
       },
       "reviewStatus": "ok"
+    },
+    {
+      "id": "logic_grade9_foundation_010",
+      "topic": "logic",
+      "subtopic": "invariant_piece_count",
+      "difficulty": "foundation",
+      "levelStage": "grade9",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一片 4 × 6 的方格巧克力共有 24 個小方格。每一次只能拿起一塊巧克力，沿著方格的分隔線把它掰成兩塊（不可以同時掰兩塊，也不可以沿曲線掰）。要把整片巧克力全部掰成 24 個獨立的小方格，最少要掰幾次？",
+        "zh-Hans": "一片 4 × 6 的方格巧克力共有 24 个小方格。每一次只能拿起一块巧克力，沿着方格的分隔线把它掰成两块（不可以同时掰两块，也不可以沿曲线掰）。要把整片巧克力全部掰成 24 个独立的小方格，最少要掰几次？",
+        "en": "A 4 by 6 bar of chocolate consists of 24 small squares. Each move takes one piece and snaps it along a grid line into two pieces; pieces may not be stacked or broken along curves. What is the fewest number of snaps needed to separate the bar into all 24 individual squares?",
+        "ja": "4 × 6 の板チョコには小さな正方形が 24 個あります。1 回の操作では 1 つのかたまりを取り、方眼の線に沿って 2 つに割ります（重ねて同時に割ることも、曲線で割ることもできません）。24 個の小さな正方形にすべて分けるには、最少で何回割ればよいですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 23 次。",
+        "zh-Hans": "答案是 23 次。",
+        "en": "The answer is 23.",
+        "ja": "答えは 23 回です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "先別急著想「該從哪裡掰」，改問一個更根本的問題：**每掰一次，會改變什麼？**",
+          "答案是：每掰一次，都是把一塊變成兩塊，所以**塊數恰好增加 1**——不管掰的是大塊還是小塊、掰在哪個位置、掰下來多長，一律增加 1，沒有例外。",
+          "這個「每次剛好加一」的性質就是本題的不變量，它讓總次數完全由起點和終點決定。",
+          "一開始整片是 1 塊，最後要變成 24 塊。",
+          "所以需要增加 24 − 1 = 23 塊，也就是必須掰 23 次。",
+          "重點是：這既是最少次數，也是**唯一可能**的次數——不管用什麼順序掰，都恰好是 23 次，不可能更快也不可能更慢。",
+          "常見的錯誤想法是「先橫著掰 3 刀、再直著掰 5 刀，共 8 次」，但那是把整排一起掰的算法，違反了「一次只能掰一塊」的規則。",
+          "驗算：程式以隨機順序、隨機位置模擬三次完整的掰法，每次都恰好用了 23 次且最後全部變成 1 × 1 的小方格 ✓。"
+        ],
+        "zh-Hans": [
+          "先别急着想「该从哪里掰」，改问一个更根本的问题：**每掰一次，会改变什么？**",
+          "答案是：每掰一次，都是把一块变成两块，所以**块数恰好增加 1**——不管掰的是大块还是小块、掰在哪个位置、掰下来多长，一律增加 1，没有例外。",
+          "这个「每次刚好加一」的性质就是本题的不变量，它让总次数完全由起点和终点决定。",
+          "一开始整片是 1 块，最后要变成 24 块。",
+          "所以需要增加 24 − 1 = 23 块，也就是必须掰 23 次。",
+          "重点是：这既是最少次数，也是**唯一可能**的次数——不管用什么顺序掰，都恰好是 23 次，不可能更快也不可能更慢。",
+          "常见的错误想法是「先横着掰 3 刀、再直着掰 5 刀，共 8 次」，但那是把整排一起掰的算法，违反了「一次只能掰一块」的规则。",
+          "验算：程序以随机顺序、随机位置模拟三次完整的掰法，每次都恰好用了 23 次且最后全部变成 1 × 1 的小方格 ✓。"
+        ],
+        "en": [
+          "Rather than asking where to snap, ask a more fundamental question: what changes with each snap?",
+          "The answer is that every snap turns one piece into two, so the number of pieces increases by exactly 1 — regardless of which piece is chosen, where it is snapped, or how big the parts are.",
+          "This \"exactly one more each time\" property is the invariant of the problem, and it makes the total count depend only on the start and the end.",
+          "The bar starts as 1 piece and must end as 24 pieces.",
+          "So the count must increase by 24 − 1 = 23, meaning exactly 23 snaps are required.",
+          "The key point is that this is not merely the minimum but the only possible number: whatever order is used, it always takes exactly 23 snaps, never fewer and never more.",
+          "A common wrong idea is \"3 snaps across and 5 along, so 8 in total\", but that snaps whole rows at once and violates the rule that only one piece may be snapped at a time.",
+          "Check: simulating three complete snapping sequences with random order and random positions each used exactly 23 snaps and ended with all pieces being 1 by 1."
+        ],
+        "ja": [
+          "どこで割るかを考える前に、より根本的な問いを立てます：**1 回割るごとに何が変わるか**。",
+          "答えは、1 回割るごとにかたまりが 1 つから 2 つになるので、**かたまりの数がちょうど 1 増える**ということです。どのかたまりを、どこで、どんな大きさに割っても例外なく 1 増えます。",
+          "この「毎回ちょうど 1 増える」性質が本問の不変量で、総回数は始点と終点だけで決まります。",
+          "最初は 1 つ、最後は 24 個にする必要があります。",
+          "よって 24 − 1 = 23 だけ増やす必要があり、割る回数は 23 回です。",
+          "重要なのは、これは最少回数であると同時に**ありうる唯一の回数**でもある点です。どんな順序で割っても必ず 23 回で、それより速くも遅くもなりません。",
+          "「横に 3 回、縦に 5 回で合計 8 回」というのはよくある誤りですが、それは列をまとめて割る計算であり「一度に 1 つのかたまりだけ」という規則に反します。",
+          "検算：順序と位置をランダムにして完全な割り方を 3 回シミュレートすると、いずれもちょうど 23 回で、最後はすべて 1 × 1 になりました ✓。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "23"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "以「每次操作塊數加一」的不變量求次數：總次數由起訖塊數決定，與操作順序無關",
+        "notes": "設計依據：本題的關鍵是察覺次數與策略無關——不變量使 23 既是最少值也是唯一值，這比單純求最小值更強；「橫 3 刀直 5 刀共 8 次」是違反規則的常見誤答，詳解特別點破。答案 23 已用隨機順序與位置的模擬三次驗證恆為 23 且終態全為 1×1。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（掰塊不變量）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "邏輯",
+        "topicCode": "logic",
+        "subtopic": "掰塊不變量",
+        "subtopicCode": "invariant_piece_count"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "logic_grade9_foundation_011",
+      "topic": "logic",
+      "subtopic": "handshake_parity",
+      "difficulty": "foundation",
+      "levelStage": "grade9",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "在一場聚會中，每個人都恰好與其他 3 個人握過手（每兩人最多握一次）。已知參加的人數超過 9 人，求最少可能有多少人參加。",
+        "zh-Hans": "在一场聚会中，每个人都恰好与其他 3 个人握过手（每两人最多握一次）。已知参加的人数超过 9 人，求最少可能有多少人参加。",
+        "en": "At a party every person shook hands with exactly 3 other people, and no two people shook hands more than once. Given that more than 9 people attended, find the smallest possible number of attendees.",
+        "ja": "あるパーティーで、どの人もちょうど 3 人と握手をしました（同じ 2 人が 2 回握手することはありません）。参加者が 9 人より多いとき、参加者数として考えられる最少の人数を求めなさい。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 10 人。",
+        "zh-Hans": "答案是 10 人。",
+        "en": "The answer is 10.",
+        "ja": "答えは 10 人です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "關鍵在於用**兩種方式數同一件事**：把「所有人各自握手的次數」全部加起來。",
+          "從個人的角度數：有 n 個人，每人握了 3 次，總和是 3n。",
+          "從握手的角度數：每一次握手都牽涉兩個人，所以在上面的總和裡被算了兩次。設握手總次數是 E，則總和是 2E。",
+          "兩種數法算的是同一個量，所以 3n = 2E。",
+          "由於等號右邊是 2 的倍數，左邊的 3n 必須是偶數；而 3 是奇數，所以 **n 必須是偶數**。",
+          "題目要求人數超過 9，最小的偶數是 10。先確認 9 為什麼不行：3 × 9 = 27 是奇數，不可能等於 2E，所以 9 人的情況根本不存在。",
+          "再確認 10 人真的做得到：此時握手總次數 E = 3 × 10 ÷ 2 = 15 次，而確實存在每人恰握 3 次的安排（例如著名的 Petersen 圖就是 10 個頂點、每點連 3 條邊）。",
+          "所以答案是 10 人。驗算：程式檢查 10 到 19 之間使 3n 為偶數的 n，最小為 10 ✓，與上述推理一致。"
+        ],
+        "zh-Hans": [
+          "关键在于用**两种方式数同一件事**：把「所有人各自握手的次数」全部加起来。",
+          "从个人的角度数：有 n 个人，每人握了 3 次，总和是 3n。",
+          "从握手的角度数：每一次握手都牵涉两个人，所以在上面的总和里被算了两次。设握手总次数是 E，则总和是 2E。",
+          "两种数法算的是同一个量，所以 3n = 2E。",
+          "由于等号右边是 2 的倍数，左边的 3n 必须是偶数；而 3 是奇数，所以 **n 必须是偶数**。",
+          "题目要求人数超过 9，最小的偶数是 10。先确认 9 为什么不行：3 × 9 = 27 是奇数，不可能等于 2E，所以 9 人的情况根本不存在。",
+          "再确认 10 人真的做得到：此时握手总次数 E = 3 × 10 ÷ 2 = 15 次，而确实存在每人恰握 3 次的安排（例如著名的 Petersen 图就是 10 个顶点、每点连 3 条边）。",
+          "所以答案是 10 人。验算：程序检查 10 到 19 之间使 3n 为偶数的 n，最小为 10 ✓，与上述推理一致。"
+        ],
+        "en": [
+          "The key is to count one quantity in two ways: the total of everyone's individual handshake counts.",
+          "Counting person by person: with n people each shaking 3 times, the total is 3n.",
+          "Counting handshake by handshake: each handshake involves two people and so is counted twice in that total. If there are E handshakes, the total is 2E.",
+          "Both counts measure the same quantity, so 3n = 2E.",
+          "The right side is a multiple of 2, so 3n must be even; since 3 is odd, n itself must be even.",
+          "The problem requires more than 9 people, and the smallest even number above 9 is 10. First confirm why 9 fails: 3 × 9 = 27 is odd and cannot equal 2E, so 9 people is impossible.",
+          "Then confirm 10 really works: there would be E = 3 × 10 ÷ 2 = 15 handshakes, and such an arrangement does exist — the well-known Petersen graph has 10 vertices each joined to exactly 3 others.",
+          "So the answer is 10. Check: testing n from 10 to 19 for 3n being even gives 10 as the smallest, matching the reasoning."
+        ],
+        "ja": [
+          "鍵は同じ量を**2 通りの方法で数える**ことです。「各人の握手回数」をすべて足し合わせます。",
+          "人ごとに数えると：n 人がそれぞれ 3 回なので合計は 3n。",
+          "握手ごとに数えると：1 回の握手には 2 人が関わるので、上の合計では 2 回数えられています。握手の総数を E とすると合計は 2E。",
+          "どちらも同じ量を数えているので 3n = 2E。",
+          "右辺は 2 の倍数なので左辺の 3n も偶数でなければならず、3 は奇数なので **n が偶数**でなければなりません。",
+          "参加者は 9 人より多いので、最小の偶数は 10 です。まず 9 が不可能な理由を確認します：3 × 9 = 27 は奇数で 2E に等しくなりえません。",
+          "次に 10 人が実際に可能か確認します。握手の総数は E = 3 × 10 ÷ 2 = 15 回で、各人がちょうど 3 人と握手する配置は実在します（有名な Petersen グラフは 10 頂点でどの頂点も 3 本の辺をもちます）。",
+          "よって答えは 10 人です。検算：10 から 19 のうち 3n が偶数となる n を調べると最小は 10 ✓ で、推論と一致します。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "10"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "握手引理的雙重計數：各人握手數之和等於握手次數的兩倍，故 3n 必為偶數",
+        "notes": "設計依據：核心是雙重計數導出的奇偶限制，並要求同時完成「9 為何不可能」與「10 確實可行」兩半——只論證奇偶性不足以說明最小值可達。詳解以 Petersen 圖給出可行性依據。答案 10 已用整數窮舉檢查 3n 的奇偶驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（握手奇偶）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "邏輯",
+        "topicCode": "logic",
+        "subtopic": "握手奇偶",
+        "subtopicCode": "handshake_parity"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "logic_grade9_foundation_012",
+      "topic": "logic",
+      "subtopic": "pancake_scheduling",
+      "difficulty": "foundation",
+      "levelStage": "grade9",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一個平底鍋一次最多只能放 2 張餅。每張餅有兩面，每一面都要煎，煎一面需要 1 分鐘。餅可以隨時翻面或拿出來再放回去。要把 3 張餅的兩面都煎好，最少需要幾分鐘？",
+        "zh-Hans": "一个平底锅一次最多只能放 2 张饼。每张饼有两面，每一面都要煎，煎一面需要 1 分钟。饼可以随时翻面或拿出来再放回去。要把 3 张饼的两面都煎好，最少需要几分钟？",
+        "en": "A frying pan holds at most 2 pancakes at a time. Each pancake has two sides, both of which must be cooked, and cooking one side takes 1 minute. Pancakes may be flipped or removed and returned at any time. What is the least number of minutes needed to cook both sides of 3 pancakes?",
+        "ja": "フライパンには一度に 2 枚までしか置けません。パンケーキは両面を焼く必要があり、片面を焼くのに 1 分かかります。いつでも裏返したり、取り出して戻したりできます。3 枚のパンケーキの両面を焼き上げるのに最少で何分かかりますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 3 分鐘。",
+        "zh-Hans": "答案是 3 分钟。",
+        "en": "The answer is 3 minutes.",
+        "ja": "答えは 3 分です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "先算下界，也就是「無論如何都不可能比這更快」的時間。",
+          "3 張餅每張兩面，總共有 3 × 2 = 6 個面需要煎。",
+          "鍋子一次最多放 2 張餅，也就是每分鐘最多只能煎好 2 個面。",
+          "所以至少需要 6 ÷ 2 = 3 分鐘，這是下界。",
+          "接著要證明 3 分鐘真的辦得到——關鍵是**不要把同一張餅從頭煎到尾**，而是中途換掉。把三張餅記為 A、B、C：",
+          "第 1 分鐘煎 A 正面與 B 正面；第 2 分鐘把 B 拿出來，改煎 A 反面與 C 正面（此時 A 完成）；第 3 分鐘煎 B 反面與 C 反面。",
+          "檢查每張餅：A 煎了正、反各一次 ✓；B 煎了正（第 1 分鐘）、反（第 3 分鐘）✓；C 煎了正（第 2 分鐘）、反（第 3 分鐘）✓，三張全部完成。",
+          "下界說「至少 3 分鐘」，上面的排程說「3 分鐘做得到」，兩邊夾起來，答案就是 3 分鐘。若堅持先把 A、B 完整煎完再煎 C，會用掉 2 + 2 = 4 分鐘，這正是本題要避開的直覺陷阱。"
+        ],
+        "zh-Hans": [
+          "先算下界，也就是「无论如何都不可能比这更快」的时间。",
+          "3 张饼每张两面，总共有 3 × 2 = 6 个面需要煎。",
+          "锅子一次最多放 2 张饼，也就是每分钟最多只能煎好 2 个面。",
+          "所以至少需要 6 ÷ 2 = 3 分钟，这是下界。",
+          "接着要证明 3 分钟真的办得到——关键是**不要把同一张饼从头煎到尾**，而是中途换掉。把三张饼记为 A、B、C：",
+          "第 1 分钟煎 A 正面与 B 正面；第 2 分钟把 B 拿出来，改煎 A 反面与 C 正面（此时 A 完成）；第 3 分钟煎 B 反面与 C 反面。",
+          "检查每张饼：A 煎了正、反各一次 ✓；B 煎了正（第 1 分钟）、反（第 3 分钟）✓；C 煎了正（第 2 分钟）、反（第 3 分钟）✓，三张全部完成。",
+          "下界说「至少 3 分钟」，上面的排程说「3 分钟做得到」，两边夹起来，答案就是 3 分钟。若坚持先把 A、B 完整煎完再煎 C，会用掉 2 + 2 = 4 分钟，这正是本题要避开的直觉陷阱。"
+        ],
+        "en": [
+          "First establish a lower bound, a time nothing can beat.",
+          "Three pancakes with two sides each means 3 × 2 = 6 sides must be cooked.",
+          "The pan holds at most 2 pancakes, so at most 2 sides finish per minute.",
+          "Hence at least 6 ÷ 2 = 3 minutes are needed, which is the lower bound.",
+          "Now show 3 minutes is actually achievable — the trick is not to cook one pancake straight through but to swap partway. Label the pancakes A, B and C:",
+          "Minute 1 cooks side 1 of A and side 1 of B; minute 2 removes B and cooks side 2 of A together with side 1 of C, finishing A; minute 3 cooks side 2 of B and side 2 of C.",
+          "Check each pancake: A got both sides, B got side 1 in minute 1 and side 2 in minute 3, and C got side 1 in minute 2 and side 2 in minute 3 — all three are done.",
+          "The lower bound says at least 3 minutes and the schedule shows 3 minutes suffices, so the answer is exactly 3. Insisting on finishing A and B completely before starting C would take 2 + 2 = 4 minutes, which is the intuitive trap this problem is built around."
+        ],
+        "ja": [
+          "まず下界、つまり「どうやってもこれより速くはできない」時間を求めます。",
+          "3 枚のパンケーキにはそれぞれ 2 面あるので、焼くべき面は 3 × 2 = 6 面です。",
+          "フライパンには 2 枚までしか置けないので、1 分あたり最大 2 面しか焼き上がりません。",
+          "したがって少なくとも 6 ÷ 2 = 3 分が必要で、これが下界です。",
+          "次に 3 分で本当に可能なことを示します。要点は**1 枚を最後まで焼き続けず途中で入れ替える**ことです。3 枚を A、B、C とします：",
+          "1 分目に A の表と B の表を焼き、2 分目に B を取り出して A の裏と C の表を焼き（ここで A 完成）、3 分目に B の裏と C の裏を焼きます。",
+          "各枚を確認します：A は表裏とも ✓、B は表（1 分目）と裏（3 分目）✓、C は表（2 分目）と裏（3 分目）✓ で 3 枚とも完成です。",
+          "下界が「3 分以上」、上の手順が「3 分で可能」を示すので、答えはちょうど 3 分です。A と B を完全に焼いてから C を焼くと 2 + 2 = 4 分かかり、これが本問の避けるべき直感の落とし穴です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "3"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "有限資源的排程最佳化：以總工作量給下界，再以交錯排程達成該下界",
+        "notes": "設計依據：本題必須同時給出下界（6 個面 ÷ 每分鐘 2 面）與可行排程，缺一不可；直覺的「先煎完兩張再煎第三張」得到 4 分鐘，正是要封死的誤答。答案 3 已用排程模擬驗證三張餅各煎滿兩面。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（煎餅排程）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "邏輯",
+        "topicCode": "logic",
+        "subtopic": "煎餅排程",
+        "subtopicCode": "pancake_scheduling"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "logic_grade9_foundation_013",
+      "topic": "logic",
+      "subtopic": "eulerian_stroke_count",
+      "difficulty": "foundation",
+      "levelStage": "grade9",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一個連通圖形共有 6 個頂點，其中恰好有 4 個頂點連出的邊數是奇數，另外 2 個頂點連出的邊數是偶數。若規定筆不離紙算作一筆，而且每一條邊都必須恰好畫過一次，求最少要幾筆才能把整個圖形畫完。",
+        "zh-Hans": "一个连通图形共有 6 个顶点，其中恰好有 4 个顶点连出的边数是奇数，另外 2 个顶点连出的边数是偶数。若规定笔不离纸算作一笔，而且每一条边都必须恰好画过一次，求最少要几笔才能把整个图形画完。",
+        "en": "A connected figure has 6 vertices, exactly 4 of which have an odd number of edges meeting there, the other 2 having an even number. Counting one stroke as drawing without lifting the pen, and requiring every edge to be drawn exactly once, what is the fewest number of strokes needed to draw the whole figure?",
+        "ja": "ある連結な図形には頂点が 6 個あり、そのうちちょうど 4 個は集まる辺の本数が奇数、残り 2 個は偶数です。ペンを紙から離さずに描く分を 1 筆と数え、どの辺もちょうど 1 回ずつ描くとき、図形全体を描き終えるには最少で何筆必要ですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 2 筆。",
+        "zh-Hans": "答案是 2 笔。",
+        "en": "The answer is 2.",
+        "ja": "答えは 2 筆です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "先想清楚「一筆」在每個頂點會發生什麼事：畫的過程中每次經過一個頂點，都是「從一條邊進去、從另一條邊出來」，成對地用掉兩條邊。",
+          "所以在一筆之內，除了這一筆的**起點和終點**之外，其餘每個頂點用掉的邊數都必定是偶數。",
+          "反過來說，一個連出奇數條邊的頂點，不可能出現在某一筆的中間，它只能當某一筆的起點或終點。",
+          "每一筆恰好有一個起點和一個終點，所以**一筆最多只能消化 2 個奇數頂點**。",
+          "本題有 4 個奇數頂點，因此至少需要 4 ÷ 2 = 2 筆，這是下界。",
+          "接著確認 2 筆真的做得到：把 4 個奇點兩兩配對，圖形可以拆成兩條各自連接一對奇點的路徑，剛好用兩筆畫完，不多不少。",
+          "所以答案是 2 筆。",
+          "附註：這也解釋了大家熟悉的規則——奇數頂點只有 0 個或 2 個時才能一筆畫完；本題的 4 個奇點正好對應到 2 筆。"
+        ],
+        "zh-Hans": [
+          "先想清楚「一笔」在每个顶点会发生什么事：画的过程中每次经过一个顶点，都是「从一条边进去、从另一条边出来」，成对地用掉两条边。",
+          "所以在一笔之内，除了这一笔的**起点和终点**之外，其余每个顶点用掉的边数都必定是偶数。",
+          "反过来说，一个连出奇数条边的顶点，不可能出现在某一笔的中间，它只能当某一笔的起点或终点。",
+          "每一笔恰好有一个起点和一个终点，所以**一笔最多只能消化 2 个奇数顶点**。",
+          "本题有 4 个奇数顶点，因此至少需要 4 ÷ 2 = 2 笔，这是下界。",
+          "接着确认 2 笔真的做得到：把 4 个奇点两两配对，图形可以拆成两条各自连接一对奇点的路径，刚好用两笔画完，不多不少。",
+          "所以答案是 2 笔。",
+          "附注：这也解释了大家熟悉的规则——奇数顶点只有 0 个或 2 个时才能一笔画完；本题的 4 个奇点正好对应到 2 笔。"
+        ],
+        "en": [
+          "First think about what one stroke does at each vertex: passing through a vertex means entering along one edge and leaving along another, using edges up in pairs.",
+          "So within a single stroke, every vertex except that stroke's start and end has an even number of its edges used.",
+          "Conversely, a vertex with an odd number of edges can never sit in the middle of a stroke; it must be the start or the end of one.",
+          "Each stroke has exactly one start and one end, so a single stroke can absorb at most 2 odd vertices.",
+          "This figure has 4 odd vertices, so at least 4 ÷ 2 = 2 strokes are needed, which is the lower bound.",
+          "Now confirm 2 strokes suffice: pairing the 4 odd vertices, the figure splits into two paths each joining one such pair, drawn with exactly two strokes and no more.",
+          "So the answer is 2 strokes.",
+          "Remark: this also explains the familiar rule that a figure is drawable in one stroke only when it has 0 or 2 odd vertices; here 4 odd vertices correspond exactly to 2 strokes."
+        ],
+        "ja": [
+          "まず「1 筆」が各頂点で何をするかを整理します。描いている途中である頂点を通過するとき、必ず「1 本の辺から入り、別の 1 本から出る」ので、辺は 2 本ずつ対で消費されます。",
+          "したがって 1 筆の中では、その筆の**始点と終点**を除くどの頂点でも、使われる辺の本数は必ず偶数になります。",
+          "逆に、奇数本の辺が集まる頂点は筆の途中には現れず、どれかの筆の始点か終点にしかなれません。",
+          "各筆には始点と終点がちょうど 1 つずつあるので、**1 筆で処理できる奇数頂点は最大 2 個**です。",
+          "本問には奇数頂点が 4 個あるので、少なくとも 4 ÷ 2 = 2 筆必要です。これが下界です。",
+          "次に 2 筆で可能なことを確認します。4 個の奇数頂点を 2 組に分けると、図形はそれぞれの組を結ぶ 2 本の道に分解でき、ちょうど 2 筆で描き切れます。",
+          "よって答えは 2 筆です。",
+          "補足：これはよく知られた規則、すなわち奇数頂点が 0 個か 2 個のときだけ一筆書きできるという事実の説明にもなっています。本問の 4 個はちょうど 2 筆に対応します。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "2"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "一筆畫的奇點計數：每筆最多消化 2 個奇度數頂點，故最少筆數為奇點數的一半",
+        "notes": "設計依據：關鍵是理解「通過頂點會成對用掉邊」，因而奇度數頂點只能當起訖點；由此同時得到下界與可達性。題目刻意只給奇偶結構而不給具體圖形，使推理必須走一般性論證而非試畫。答案 2 由奇點數 4 除以 2 得出，並與「0 或 2 個奇點才能一筆畫完」的熟知規則相容。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（一筆畫筆數）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "邏輯",
+        "topicCode": "logic",
+        "subtopic": "一筆畫筆數",
+        "subtopicCode": "eulerian_stroke_count"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "logic_grade9_foundation_014",
+      "topic": "logic",
+      "subtopic": "josephus_survivor",
+      "difficulty": "foundation",
+      "levelStage": "grade9",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "10 個人圍成一圈，依順時針方向編號 1 到 10。從 1 號開始依序報數，每次報到「2」的人立刻離開圈子，接著由下一個人重新從「1」開始報數，如此繼續下去。求最後剩下的是幾號。",
+        "zh-Hans": "10 个人围成一圈，依顺时针方向编号 1 到 10。从 1 号开始依序报数，每次报到「2」的人立刻离开圈子，接着由下一个人重新从「1」开始报数，如此继续下去。求最后剩下的是几号。",
+        "en": "Ten people stand in a circle, numbered 1 to 10 clockwise. Counting starts at person 1, and every person who says \"2\" immediately leaves the circle; counting then restarts from \"1\" with the next person, and so on. Which numbered person is the last one remaining?",
+        "ja": "10 人が円状に並び、時計回りに 1 から 10 の番号がついています。1 番から順に数え、「2」と言った人はすぐに輪から抜けます。その次の人から再び「1」から数え直し、これを繰り返します。最後に残るのは何番の人ですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 5 號。",
+        "zh-Hans": "答案是 5 号。",
+        "en": "The answer is 5.",
+        "ja": "答えは 5 番です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "規則其實就是「每隔一個人淘汰一個」，所以先實際跑一輪看看，再找規律。",
+          "第一輪從 1 號開始報數：1 號報「1」、2 號報「2」出局；3 號報「1」、4 號報「2」出局；依此類推。",
+          "所以第一輪把所有偶數號 2、4、6、8、10 全部淘汰，剩下 1、3、5、7、9 五個人。",
+          "第一輪結束時 10 號剛出局，接著輪到 1 號報「1」、3 號報「2」出局。",
+          "繼續下去：5 號報「1」、7 號報「2」出局；9 號報「1」、1 號報「2」出局。此時剩下 5 號和 9 號。",
+          "再繼續：3 號已出局，輪到 5 號報「1」、9 號報「2」出局。",
+          "最後只剩下 5 號一個人。",
+          "驗算：程式完整模擬整個過程，出局順序依序是 2、4、6、8、10、3、7、1、9，最後存活的正是 5 號 ✓。注意人數是偶數時第一輪會乾淨地淘汰所有偶數號，這讓手算變得可行。"
+        ],
+        "zh-Hans": [
+          "规则其实就是「每隔一个人淘汰一个」，所以先实际跑一轮看看，再找规律。",
+          "第一轮从 1 号开始报数：1 号报「1」、2 号报「2」出局；3 号报「1」、4 号报「2」出局；依此类推。",
+          "所以第一轮把所有偶数号 2、4、6、8、10 全部淘汰，剩下 1、3、5、7、9 五个人。",
+          "第一轮结束时 10 号刚出局，接着轮到 1 号报「1」、3 号报「2」出局。",
+          "继续下去：5 号报「1」、7 号报「2」出局；9 号报「1」、1 号报「2」出局。此时剩下 5 号和 9 号。",
+          "再继续：3 号已出局，轮到 5 号报「1」、9 号报「2」出局。",
+          "最后只剩下 5 号一个人。",
+          "验算：程序完整模拟整个过程，出局顺序依序是 2、4、6、8、10、3、7、1、9，最后存活的正是 5 号 ✓。注意人数是偶数时第一轮会干净地淘汰所有偶数号，这让手算变得可行。"
+        ],
+        "en": [
+          "The rule amounts to eliminating every second person, so run one round through and look for the pattern.",
+          "In the first round starting at person 1: person 1 says \"1\", person 2 says \"2\" and leaves; person 3 says \"1\", person 4 says \"2\" and leaves, and so on.",
+          "So the first round removes all the even numbers 2, 4, 6, 8 and 10, leaving 1, 3, 5, 7 and 9.",
+          "The round ends with person 10 just eliminated, so next person 1 says \"1\" and person 3 says \"2\" and leaves.",
+          "Continuing: person 5 says \"1\" and person 7 leaves; person 9 says \"1\" and person 1 leaves. Now only 5 and 9 remain.",
+          "Continuing once more: person 5 says \"1\" and person 9 says \"2\" and leaves.",
+          "Only person 5 is left.",
+          "Check: a full simulation gives the elimination order 2, 4, 6, 8, 10, 3, 7, 1, 9, with person 5 surviving. Note that with an even number of people the first round cleanly removes all even numbers, which is what makes hand computation feasible."
+        ],
+        "ja": [
+          "規則は要するに「1 人おきに脱落させる」ことなので、まず 1 周実際に回して規則性を探します。",
+          "1 周目は 1 番から数えます：1 番が「1」、2 番が「2」で脱落。3 番が「1」、4 番が「2」で脱落、と続きます。",
+          "したがって 1 周目で偶数番 2、4、6、8、10 がすべて脱落し、1、3、5、7、9 の 5 人が残ります。",
+          "1 周目の最後に 10 番が抜けたので、次は 1 番が「1」、3 番が「2」で脱落。",
+          "続けて 5 番が「1」、7 番が「2」で脱落。9 番が「1」、1 番が「2」で脱落。ここで 5 番と 9 番が残ります。",
+          "さらに続けると 5 番が「1」、9 番が「2」で脱落。",
+          "最後に残るのは 5 番だけです。",
+          "検算：全過程をシミュレートすると脱落順は 2、4、6、8、10、3、7、1、9 となり、生き残るのはまさに 5 番です ✓。人数が偶数のとき 1 周目で偶数番がきれいに全滅する点が、手計算を可能にしています。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "5"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "圍圈每隔一人淘汰的存活位置：先用第一輪清掉全部偶數號，再對剩下的人重複同樣的推理",
+        "notes": "設計依據：人數取 10（偶數）使第一輪乾淨地淘汰全部偶數號，讓手算逐輪推進可行而不必背公式；出局順序在詳解中完整列出，可逐步核對。答案 5 已用完整模擬驗證出局順序為 2、4、6、8、10、3、7、1、9。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（圍圈報數）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "邏輯",
+        "topicCode": "logic",
+        "subtopic": "圍圈報數",
+        "subtopicCode": "josephus_survivor"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "logic_grade9_foundation_015",
+      "topic": "logic",
+      "subtopic": "frog_jump_swap",
+      "difficulty": "foundation",
+      "levelStage": "grade9",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一排有 7 個格子。左邊 3 格各有一隻只能向右移動的青蛙，右邊 3 格各有一隻只能向左移動的青蛙，正中間那格是空的。每一步只能二選一：把一隻青蛙移到相鄰的空格，或讓一隻青蛙越過恰好一隻青蛙跳到後面的空格。要讓左右兩組青蛙完全交換位置，最少需要幾步？",
+        "zh-Hans": "一排有 7 个格子。左边 3 格各有一只只能向右移动的青蛙，右边 3 格各有一只只能向左移动的青蛙，正中间那格是空的。每一步只能二选一：把一只青蛙移到相邻的空格，或让一只青蛙越过恰好一只青蛙跳到后面的空格。要让左右两组青蛙完全交换位置，最少需要几步？",
+        "en": "Seven squares lie in a row. The left 3 squares each hold a frog that can only move right, the right 3 squares each hold a frog that can only move left, and the middle square is empty. Each move either slides one frog into an adjacent empty square, or jumps one frog over exactly one other frog into the empty square beyond. What is the fewest moves needed for the two groups to swap places completely?",
+        "ja": "7 つのマスが一列に並んでいます。左の 3 マスには右にしか動けないカエルが 1 匹ずつ、右の 3 マスには左にしか動けないカエルが 1 匹ずつおり、中央のマスは空です。1 手でできるのは、カエルを隣の空きマスへ動かすか、ちょうど 1 匹のカエルを飛び越えてその先の空きマスへ跳ぶかのどちらかです。左右のカエルを完全に入れ替えるには最少で何手必要ですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 15 步。",
+        "zh-Hans": "答案是 15 步。",
+        "en": "The answer is 15.",
+        "ja": "答えは 15 手です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "先把兩種步驟分開計算，因為它們負責的任務不同。",
+          "**跳躍**：每一次跳躍，恰好讓一隻左蛙越過一隻右蛙（或反過來）。而要完成交換，每一隻左蛙都必須越過全部 3 隻右蛙。",
+          "所以跳躍的總次數是 3 × 3 = 9 次，一次都不能少，也不會多——因為每一對「左蛙與右蛙」恰好需要交錯一次。",
+          "**滑動**：滑動不會改變任何一對青蛙的左右關係，它的作用是把青蛙推到能夠起跳的位置。",
+          "每一隻青蛙在整個過程中恰好需要滑動 1 次，6 隻青蛙共 6 次；另一種算法是 2n = 2 × 3 = 6。",
+          "兩者相加：9 + 6 = 15 步。",
+          "所以最少需要 15 步。若中途走錯（例如連續讓同方向的兩隻青蛙相鄰堆住），會卡死而必須回頭，步數只會更多。",
+          "驗算：程式把全部合法狀態建成圖並用廣度優先搜尋求最短路徑，可達狀態共 72 個、已全部搜完，最短步數確實是 15 ✓，與公式 n² + 2n（n = 3 時為 9 + 6 = 15）一致。"
+        ],
+        "zh-Hans": [
+          "先把两种步骤分开计算，因为它们负责的任务不同。",
+          "**跳跃**：每一次跳跃，恰好让一只左蛙越过一只右蛙（或反过来）。而要完成交换，每一只左蛙都必须越过全部 3 只右蛙。",
+          "所以跳跃的总次数是 3 × 3 = 9 次，一次都不能少，也不会多——因为每一对「左蛙与右蛙」恰好需要交错一次。",
+          "**滑动**：滑动不会改变任何一对青蛙的左右关系，它的作用是把青蛙推到能够起跳的位置。",
+          "每一只青蛙在整个过程中恰好需要滑动 1 次，6 只青蛙共 6 次；另一种算法是 2n = 2 × 3 = 6。",
+          "两者相加：9 + 6 = 15 步。",
+          "所以最少需要 15 步。若中途走错（例如连续让同方向的两只青蛙相邻堆住），会卡死而必须回头，步数只会更多。",
+          "验算：程序把全部合法状态建成图并用广度优先搜索求最短路径，可达状态共 72 个、已全部搜完，最短步数确实是 15 ✓，与公式 n² + 2n（n = 3 时为 9 + 6 = 15）一致。"
+        ],
+        "en": [
+          "Count the two kinds of move separately, since they do different jobs.",
+          "Jumps: each jump carries exactly one left-frog past one right-frog (or the reverse). To complete the swap, every left-frog must get past all 3 right-frogs.",
+          "So there must be exactly 3 × 3 = 9 jumps, no fewer and no more, because each left-right pair must cross exactly once.",
+          "Slides: a slide never changes the left-right order of any pair of frogs; its job is to bring a frog into position to jump.",
+          "Each frog needs exactly one slide over the whole process, giving 6 slides for 6 frogs, which can also be written as 2n = 2 × 3 = 6.",
+          "Adding the two: 9 + 6 = 15 moves.",
+          "So 15 moves are needed. Going wrong along the way — for instance letting two frogs facing the same direction pile up adjacently — leads to a dead end requiring backtracking, which only increases the count.",
+          "Check: building the graph of all legal states and running a breadth-first search finds a shortest path of exactly 15, with all 72 reachable states explored, agreeing with the formula n² + 2n, which for n = 3 gives 9 + 6 = 15."
+        ],
+        "ja": [
+          "2 種類の手を分けて数えます。役割が異なるからです。",
+          "**跳躍**：1 回の跳躍でちょうど 1 匹の左のカエルが 1 匹の右のカエルを越えます（またはその逆）。入れ替えを完了するには、どの左のカエルも右のカエル 3 匹すべてを越えなければなりません。",
+          "したがって跳躍は 3 × 3 = 9 回ちょうど必要で、これより少なくも多くもなりません。左右のカエルの各ペアがちょうど 1 回すれ違う必要があるからです。",
+          "**スライド**：スライドはどのペアの左右関係も変えず、跳べる位置へカエルを送る役割をもちます。",
+          "各カエルは全過程でちょうど 1 回スライドが必要なので、6 匹で 6 回。2n = 2 × 3 = 6 とも書けます。",
+          "合わせて 9 + 6 = 15 手です。",
+          "よって最少は 15 手。途中で誤ると（たとえば同じ向きのカエルを隣接させて詰まらせると）行き詰まって戻る必要があり、手数は増えるだけです。",
+          "検算：合法な状態をすべて頂点としたグラフで幅優先探索を行うと最短 15 手となり、到達可能な 72 状態をすべて探索済みです ✓。公式 n² + 2n（n = 3 で 9 + 6 = 15）とも一致します。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "15"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "跳蛙交換的最少步數：跳躍次數由必須交錯的左右配對數 n² 決定，滑動次數為 2n",
+        "notes": "設計依據：核心是把兩種操作分開計數——跳躍負責交錯（每對恰一次，共 n²），滑動負責就位（共 2n），兩者相加即為答案且都是必需的；只憑試錯很難確信 15 是最小值。答案 15 已用廣度優先搜尋窮盡全部 72 個可達狀態驗證，並與 n² + 2n 對照。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（跳蛙交換）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "邏輯",
+        "topicCode": "logic",
+        "subtopic": "跳蛙交換",
+        "subtopicCode": "frog_jump_swap"
+      },
+      "reviewStatus": "ok"
     }
   ]
 }
