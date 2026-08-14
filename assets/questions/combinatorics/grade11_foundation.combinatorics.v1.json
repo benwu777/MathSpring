@@ -857,6 +857,550 @@
         "subtopic": "等差數位計數",
         "subtopicCode": "digit_average_count"
       }
+    },
+    {
+      "id": "combinatorics_grade11_foundation_010",
+      "topic": "combinatorics",
+      "subtopic": "partition_number",
+      "difficulty": "foundation",
+      "levelStage": "grade11",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "把正整數 6 寫成若干個正整數之和（項數可以是 1，也就是 6 本身算一種）。若只調換加數的順序視為同一種寫法，例如 4 + 1 + 1、1 + 4 + 1、1 + 1 + 4 都算同一種，求不同的寫法共有多少種。",
+        "zh-Hans": "把正整数 6 写成若干个正整数之和（项数可以是 1，也就是 6 本身算一种）。若只调换加数的顺序视为同一种写法，例如 4 + 1 + 1、1 + 4 + 1、1 + 1 + 4 都算同一种，求不同的写法共有多少种。",
+        "en": "Write the positive integer 6 as a sum of positive integers, where a single term is allowed so that 6 by itself counts. Sums differing only in the order of the addends count as the same, so 4 + 1 + 1, 1 + 4 + 1 and 1 + 1 + 4 are all one way. How many different ways are there?",
+        "ja": "正の整数 6 をいくつかの正の整数の和として表します（項が 1 つでもよく、6 そのものも 1 通りと数えます）。加える数の順序を入れ替えただけのものは同じとみなす（4 + 1 + 1、1 + 4 + 1、1 + 1 + 4 は同じ）とき、異なる表し方は何通りありますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 11 種。",
+        "zh-Hans": "答案是 11 种。",
+        "en": "The answer is 11.",
+        "ja": "答えは 11 通りです。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "因為順序不重要，為了不重不漏，先訂一個統一的書寫規則：**把每一種寫法的加數由大到小排列**，然後依最大的那個加數分類枚舉。",
+          "最大加數是 6：只有 6 這一種。",
+          "最大加數是 5：剩下 1 要用不超過 5 的數湊出來，只有 5 + 1。",
+          "最大加數是 4：剩下 2 要用不超過 4 的數湊，有 4 + 2 與 4 + 1 + 1，共 2 種。",
+          "最大加數是 3：剩下 3 要用不超過 3 的數湊，有 3 + 3、3 + 2 + 1、3 + 1 + 1 + 1，共 3 種。",
+          "最大加數是 2：剩下 4 只能用 2 和 1 湊，有 2 + 2 + 2、2 + 2 + 1 + 1、2 + 1 + 1 + 1 + 1，共 3 種。",
+          "最大加數是 1：只能全部用 1，即 1 + 1 + 1 + 1 + 1 + 1，共 1 種。",
+          "各類相加：1 + 1 + 2 + 3 + 3 + 1 = 11 種。這種「限定最大加數」的分類法保證了每一種寫法只會在恰好一類中被數到。",
+          "驗算：程式以遞迴枚舉全部由大到小排列的分割，得到 11 種 ✓；並列出 n = 1 到 8 的分割數依序是 1、2、3、5、7、11、15、22，n = 6 對應的正是 11。"
+        ],
+        "zh-Hans": [
+          "因为顺序不重要，为了不重不漏，先订一个统一的书写规则：**把每一种写法的加数由大到小排列**，然后依最大的那个加数分类枚举。",
+          "最大加数是 6：只有 6 这一种。",
+          "最大加数是 5：剩下 1 要用不超过 5 的数凑出来，只有 5 + 1。",
+          "最大加数是 4：剩下 2 要用不超过 4 的数凑，有 4 + 2 与 4 + 1 + 1，共 2 种。",
+          "最大加数是 3：剩下 3 要用不超过 3 的数凑，有 3 + 3、3 + 2 + 1、3 + 1 + 1 + 1，共 3 种。",
+          "最大加数是 2：剩下 4 只能用 2 和 1 凑，有 2 + 2 + 2、2 + 2 + 1 + 1、2 + 1 + 1 + 1 + 1，共 3 种。",
+          "最大加数是 1：只能全部用 1，即 1 + 1 + 1 + 1 + 1 + 1，共 1 种。",
+          "各类相加：1 + 1 + 2 + 3 + 3 + 1 = 11 种。这种「限定最大加数」的分类法保证了每一种写法只会在恰好一类中被数到。",
+          "验算：程序以递归枚举全部由大到小排列的分割，得到 11 种 ✓；并列出 n = 1 到 8 的分割数依序是 1、2、3、5、7、11、15、22，n = 6 对应的正是 11。"
+        ],
+        "en": [
+          "Since order does not matter, fix a uniform way of writing each sum so that nothing is missed or repeated: list the addends in decreasing order, then classify by the largest addend.",
+          "Largest addend 6: only 6 itself.",
+          "Largest addend 5: the remaining 1 must be made from parts at most 5, giving only 5 + 1.",
+          "Largest addend 4: the remaining 2 must use parts at most 4, giving 4 + 2 and 4 + 1 + 1 — 2 ways.",
+          "Largest addend 3: the remaining 3 must use parts at most 3, giving 3 + 3, 3 + 2 + 1 and 3 + 1 + 1 + 1 — 3 ways.",
+          "Largest addend 2: the remaining 4 must use 2s and 1s, giving 2 + 2 + 2, 2 + 2 + 1 + 1 and 2 + 1 + 1 + 1 + 1 — 3 ways.",
+          "Largest addend 1: everything must be 1, giving 1 + 1 + 1 + 1 + 1 + 1 — 1 way.",
+          "Adding the classes: 1 + 1 + 2 + 3 + 3 + 1 = 11. Classifying by the largest part guarantees each way is counted in exactly one class.",
+          "Check: recursively enumerating all decreasing partitions gives 11, and listing the partition counts for n = 1 to 8 as 1, 2, 3, 5, 7, 11, 15, 22 puts 11 at n = 6 as expected."
+        ],
+        "ja": [
+          "順序を問わないので、漏れも重複もないように書き方を統一します：**各表し方の加数を大きい順に並べ**、最大の加数で分類して数えます。",
+          "最大の加数が 6：6 そのものの 1 通りだけ。",
+          "最大の加数が 5：残り 1 を 5 以下の数で作るので 5 + 1 のみ。",
+          "最大の加数が 4：残り 2 を 4 以下で作るので 4 + 2 と 4 + 1 + 1 の 2 通り。",
+          "最大の加数が 3：残り 3 を 3 以下で作るので 3 + 3、3 + 2 + 1、3 + 1 + 1 + 1 の 3 通り。",
+          "最大の加数が 2：残り 4 を 2 と 1 で作るので 2 + 2 + 2、2 + 2 + 1 + 1、2 + 1 + 1 + 1 + 1 の 3 通り。",
+          "最大の加数が 1：すべて 1 で 1 + 1 + 1 + 1 + 1 + 1 の 1 通り。",
+          "各分類を足すと 1 + 1 + 2 + 3 + 3 + 1 = 11 通り。最大の加数で分類することで、どの表し方もちょうど 1 つの分類でのみ数えられます。",
+          "検算：大きい順に並べた分割を再帰的に全列挙すると 11 通り ✓。n = 1 から 8 の分割数は 1、2、3、5、7、11、15、22 で、n = 6 はまさに 11 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "11"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "整數分割的系統枚舉：依最大加數分類並要求加數遞減，保證不重不漏",
+        "notes": "設計依據：分割數沒有簡單的封閉公式，本題的價值在於示範「依最大加數分類 + 加數遞減書寫」這套保證窮盡且互斥的枚舉紀律；隨意列舉極易漏掉 3 + 1 + 1 + 1 或 2 + 2 + 1 + 1 之類的項。原先此位置寫的是 Σ k·C(10,k)，與本輪新增的 combinatorics_grade9_foundation_012（C(10,0)+C(10,2)+⋯）表面高度相似（比對相似度 0.87），屬弱變形故淘汰。答案 11 已用遞迴枚舉全部分割驗證，並與 n = 1..8 的分割數列對照。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（整數分割）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "組合",
+        "topicCode": "combinatorics",
+        "subtopic": "整數分割",
+        "subtopicCode": "partition_number"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "combinatorics_grade11_foundation_011",
+      "topic": "combinatorics",
+      "subtopic": "multinomial_coefficient",
+      "difficulty": "foundation",
+      "levelStage": "grade11",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "把 (x + y + z)⁶ 完全展開後，x²y²z² 這一項的係數是多少？",
+        "zh-Hans": "把 (x + y + z)⁶ 完全展开后，x²y²z² 这一项的系数是多少？",
+        "en": "When (x + y + z)⁶ is fully expanded, what is the coefficient of x²y²z²?",
+        "ja": "(x + y + z)⁶ を完全に展開したとき、x²y²z² の項の係数はいくつですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 90。",
+        "zh-Hans": "答案是 90。",
+        "en": "The answer is 90.",
+        "ja": "答えは 90 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "展開 (x + y + z)⁶ 時，是把六個括號各挑一項相乘。所以每一個乘積都對應到一個長度 6 的選擇序列。",
+          "要得到 x²y²z²，就必須在這六個括號中，恰好有 2 個挑 x、2 個挑 y、2 個挑 z。",
+          "所以係數等於：**六個括號中，哪兩個挑 x、哪兩個挑 y、哪兩個挑 z 的分配方法數**。",
+          "一步一步選：先從 6 個括號中選 2 個挑 x，有 C(6, 2) = 15 種。",
+          "再從剩下的 4 個括號中選 2 個挑 y，有 C(4, 2) = 6 種；最後剩下的 2 個括號自動都挑 z，只有 1 種。",
+          "相乘得 15 × 6 × 1 = 90。",
+          "也可以直接用多項式係數公式：6! ÷ (2! × 2! × 2!) = 720 ÷ 8 = 90，兩種算法一致。",
+          "驗算：程式窮舉六個括號的全部 3⁶ = 729 種選法，統計其中 x、y、z 各恰好被選 2 次的情形，得到 90 種 ✓。"
+        ],
+        "zh-Hans": [
+          "展开 (x + y + z)⁶ 时，是把六个括号各挑一项相乘。所以每一个乘积都对应到一个长度 6 的选择序列。",
+          "要得到 x²y²z²，就必须在这六个括号中，恰好有 2 个挑 x、2 个挑 y、2 个挑 z。",
+          "所以系数等于：**六个括号中，哪两个挑 x、哪两个挑 y、哪两个挑 z 的分配方法数**。",
+          "一步一步选：先从 6 个括号中选 2 个挑 x，有 C(6, 2) = 15 种。",
+          "再从剩下的 4 个括号中选 2 个挑 y，有 C(4, 2) = 6 种；最后剩下的 2 个括号自动都挑 z，只有 1 种。",
+          "相乘得 15 × 6 × 1 = 90。",
+          "也可以直接用多项式系数公式：6! ÷ (2! × 2! × 2!) = 720 ÷ 8 = 90，两种算法一致。",
+          "验算：程序穷举六个括号的全部 3⁶ = 729 种选法，统计其中 x、y、z 各恰好被选 2 次的情形，得到 90 种 ✓。"
+        ],
+        "en": [
+          "Expanding (x + y + z)⁶ means choosing one term from each of six brackets and multiplying, so every product corresponds to a choice sequence of length 6.",
+          "To obtain x²y²z², exactly 2 of the six brackets must contribute x, exactly 2 must contribute y and exactly 2 must contribute z.",
+          "So the coefficient counts the ways to assign which two brackets give x, which two give y and which two give z.",
+          "Choosing step by step: pick 2 of the 6 brackets for x, which can be done in C(6, 2) = 15 ways.",
+          "Then pick 2 of the remaining 4 for y, in C(4, 2) = 6 ways, and the last 2 automatically give z, in 1 way.",
+          "Multiplying: 15 × 6 × 1 = 90.",
+          "The multinomial coefficient formula gives the same thing directly: 6! ÷ (2! × 2! × 2!) = 720 ÷ 8 = 90.",
+          "Check: enumerating all 3⁶ = 729 choice sequences over the six brackets and counting those with x, y and z each selected exactly twice gives 90."
+        ],
+        "ja": [
+          "(x + y + z)⁶ の展開は、6 つの括弧から 1 項ずつ選んで掛けることなので、各項は長さ 6 の選択列に対応します。",
+          "x²y²z² を得るには、6 つの括弧のうちちょうど 2 つが x、2 つが y、2 つが z を出す必要があります。",
+          "したがって係数は、**どの 2 つが x、どの 2 つが y、どの 2 つが z を出すかの割り当て方の数**に等しくなります。",
+          "順に選びます：6 つの括弧から x 用に 2 つ選ぶのが C(6, 2) = 15 通り。",
+          "残り 4 つから y 用に 2 つ選ぶのが C(4, 2) = 6 通り、最後の 2 つは自動的に z となり 1 通りです。",
+          "掛け合わせて 15 × 6 × 1 = 90。",
+          "多項係数の公式でも同じで、6! ÷ (2! × 2! × 2!) = 720 ÷ 8 = 90 となります。",
+          "検算：6 つの括弧の選び方 3⁶ = 729 通りをすべて調べ、x、y、z がちょうど 2 回ずつ選ばれるものを数えると 90 通りです ✓。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "90"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "多項式係數：把展開視為對六個括號的分配，係數為 6!/(2!2!2!)",
+        "notes": "設計依據：關鍵是把展開式係數重新理解成「分配問題」，使多項式係數公式有可解釋的來源而非死記；分步選取（C(6,2)×C(4,2)×1）與公式兩條路互為驗算。答案 90 已用 3⁶ = 729 種選法的全窮舉驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（多項式係數）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "組合",
+        "topicCode": "combinatorics",
+        "subtopic": "多項式係數",
+        "subtopicCode": "multinomial_coefficient"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "combinatorics_grade11_foundation_012",
+      "topic": "combinatorics",
+      "subtopic": "subset_pair_count",
+      "difficulty": "foundation",
+      "levelStage": "grade11",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "設 S = {1, 2, 3, ⋯, 10}。求有序的子集對 (A, B) 的個數，其中 A、B 都是 S 的子集（可以是空集合）且滿足 A 是 B 的子集。",
+        "zh-Hans": "设 S = {1, 2, 3, ⋯, 10}。求有序的子集对 (A, B) 的个数，其中 A、B 都是 S 的子集（可以是空集合）且满足 A 是 B 的子集。",
+        "en": "Let S = {1, 2, 3, …, 10}. Count the ordered pairs (A, B) of subsets of S, possibly empty, such that A is a subset of B.",
+        "ja": "S = {1, 2, 3, ⋯, 10} とします。A、B がともに S の部分集合（空集合でもよい）で A が B の部分集合となるような順序対 (A, B) の個数を求めなさい。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 59049。",
+        "zh-Hans": "答案是 59049。",
+        "en": "The answer is 59049.",
+        "ja": "答えは 59049 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "直接對每個可能的 B 去數它有幾個子集 A，會得到 Σ C(10,k) × 2^k 這種和式，還要另外求和；換個角度會簡單得多。",
+          "關鍵想法是：**不要先決定 A 和 B 是什麼集合，而是逐一決定每個元素的去向**。",
+          "對 S 中的任何一個元素，考慮它相對於 A 與 B 的位置，只有以下幾種可能：既不在 A 也不在 B、只在 B 而不在 A、同時在 A 和 B 裡面。",
+          "還有第四種可能「只在 A 而不在 B」，但這會直接違反 A ⊆ B，所以被排除掉。",
+          "因此每個元素恰有 3 種合法去向，而 10 個元素彼此獨立。",
+          "所以總數 = 3¹⁰ = 59049。",
+          "這個作法的好處是完全不必展開求和——條件 A ⊆ B 被轉化成「排除掉每個元素的一種選項」，非常乾淨。",
+          "驗算：把集合縮小到 n = 3 做窮舉，符合 A ⊆ B 的有序對共 27 個，恰好等於 3³ = 27 ✓，證實每個元素三種選擇的推理正確。"
+        ],
+        "zh-Hans": [
+          "直接对每个可能的 B 去数它有几个子集 A，会得到 Σ C(10,k) × 2^k 这种和式，还要另外求和；换个角度会简单得多。",
+          "关键想法是：**不要先决定 A 和 B 是什么集合，而是逐一决定每个元素的去向**。",
+          "对 S 中的任何一个元素，考虑它相对于 A 与 B 的位置，只有以下几种可能：既不在 A 也不在 B、只在 B 而不在 A、同时在 A 和 B 里面。",
+          "还有第四种可能「只在 A 而不在 B」，但这会直接违反 A ⊆ B，所以被排除掉。",
+          "因此每个元素恰有 3 种合法去向，而 10 个元素彼此独立。",
+          "所以总数 = 3¹⁰ = 59049。",
+          "这个做法的好处是完全不必展开求和——条件 A ⊆ B 被转化成「排除掉每个元素的一种选项」，非常干净。",
+          "验算：把集合缩小到 n = 3 做穷举，符合 A ⊆ B 的有序对共 27 个，恰好等于 3³ = 27 ✓，证实每个元素三种选择的推理正确。"
+        ],
+        "en": [
+          "Counting, for each possible B, how many subsets A it contains leads to a sum like Σ C(10,k) × 2^k that then has to be evaluated; a change of viewpoint is far simpler.",
+          "The key idea is not to decide what the sets A and B are, but to decide the fate of each element one at a time.",
+          "For any element of S, consider its position relative to A and B. The possibilities are: in neither, in B only, or in both A and B.",
+          "There is a fourth conceivable case, in A but not in B, but that directly violates A ⊆ B and is therefore excluded.",
+          "So each element has exactly 3 legal fates, and the 10 elements are independent of one another.",
+          "Hence the total is 3¹⁰ = 59049.",
+          "The advantage of this route is that no summation is needed at all — the condition A ⊆ B simply removes one option per element, which is very clean.",
+          "Check: shrinking the set to n = 3 and enumerating gives 27 ordered pairs with A ⊆ B, exactly 3³ = 27, confirming the three-choices-per-element reasoning."
+        ],
+        "ja": [
+          "各 B について部分集合 A の個数を数えると Σ C(10,k) × 2^k のような和になり、さらに和を求める必要があります。視点を変えるとずっと簡単です。",
+          "鍵となる発想は、**A と B が何かを先に決めるのではなく、各要素の行き先を 1 つずつ決める**ことです。",
+          "S のどの要素についても、A と B に対する位置は次のいずれかです：どちらにも入らない、B だけに入る、A と B の両方に入る。",
+          "「A だけに入る」という 4 つ目も考えられますが、これは A ⊆ B に直接反するので除外されます。",
+          "したがって各要素の行き先はちょうど 3 通りで、10 個の要素は互いに独立です。",
+          "よって総数は 3¹⁰ = 59049。",
+          "この方法の利点は和を計算する必要がまったくないことです。条件 A ⊆ B が「各要素の選択肢を 1 つ減らす」ことに翻訳され、非常に見通しがよくなります。",
+          "検算：集合を n = 3 に縮めて列挙すると A ⊆ B を満たす順序対は 27 個で、ちょうど 3³ = 27 ✓。各要素 3 通りという推論の正しさが確認できます。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "59049"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 5
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "以逐元素決定取代逐集合枚舉：A ⊆ B 使每個元素只有 3 種歸屬，總數為 3ⁿ",
+        "notes": "設計依據：核心是把「先決定集合」換成「逐元素決定歸屬」，讓包含條件變成排除一個選項；正面枚舉會得到需要另行求和的 Σ C(10,k)·2^k。詳解特別點出被排除的第四種情形，說明為何是 3 而非 4。答案 59049 已用 n = 3 的縮小窮舉（27 = 3³）驗證推理，並以 3¹⁰ 計算。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（子集包含對）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "組合",
+        "topicCode": "combinatorics",
+        "subtopic": "子集包含對",
+        "subtopicCode": "subset_pair_count"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "combinatorics_grade11_foundation_013",
+      "topic": "combinatorics",
+      "subtopic": "circular_nonadjacent",
+      "difficulty": "foundation",
+      "levelStage": "grade11",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一張圓桌周圍有 10 個座位，依順時針方向排成一圈。要從中選出 3 個座位，使得任兩個被選中的座位都不相鄰。求選法共有多少種。",
+        "zh-Hans": "一张圆桌周围有 10 个座位，依顺时针方向排成一圈。要从中选出 3 个座位，使得任两个被选中的座位都不相邻。求选法共有多少种。",
+        "en": "Ten seats are arranged in a circle around a round table. Choose 3 of them so that no two chosen seats are adjacent. How many such choices are there?",
+        "ja": "円卓のまわりに 10 個の席が輪状に並んでいます。どの 2 席も隣り合わないように 3 席を選ぶとき、選び方は何通りありますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 50 種。",
+        "zh-Hans": "答案是 50 种。",
+        "en": "The answer is 50.",
+        "ja": "答えは 50 通りです。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "先算不加限制的總選法：從 10 個座位中選 3 個，有 C(10, 3) = 120 種。接著要把含有相鄰座位的情形排除掉。",
+          "直線排列的「不相鄰選取」有現成的間隔法，但**圓桌的頭尾也相鄰**，不能直接套用，這是本題的難點。",
+          "處理圓形的標準技巧是**固定一個座位的狀態，把圓拆開成直線**。",
+          "分兩種情形討論。情形一：第 1 號座位被選中。那麼與它相鄰的第 2 號和第 10 號都不能選，剩下第 3 到第 9 號共 7 個座位排成一直線，要從中選 2 個不相鄰的。",
+          "直線上從 m 個位置選 k 個不相鄰的方法數是 C(m − k + 1, k)，代入 m = 7、k = 2 得 C(6, 2) = 15 種。",
+          "情形二：第 1 號座位沒被選中。那麼剩下第 2 到第 10 號共 9 個座位排成一直線（第 2 號與第 10 號因為第 1 號隔開而不再相鄰），要選 3 個不相鄰的。",
+          "代入公式 m = 9、k = 3 得 C(7, 3) = 35 種。兩種情形互斥，相加得 15 + 35 = 50 種。",
+          "驗算：程式窮舉全部 C(10, 3) = 120 組並逐一檢查是否有相鄰（含第 10 號與第 1 號相鄰），符合的恰好 50 組 ✓，與圓形公式 n/(n−k) × C(n−k, k) = 10/7 × C(7,3) = 10/7 × 35 = 50 完全一致。"
+        ],
+        "zh-Hans": [
+          "先算不加限制的总选法：从 10 个座位中选 3 个，有 C(10, 3) = 120 种。接着要把含有相邻座位的情形排除掉。",
+          "直线排列的「不相邻选取」有现成的间隔法，但**圆桌的头尾也相邻**，不能直接套用，这是本题的难点。",
+          "处理圆形的标准技巧是**固定一个座位的状态，把圆拆开成直线**。",
+          "分两种情形讨论。情形一：第 1 号座位被选中。那么与它相邻的第 2 号和第 10 号都不能选，剩下第 3 到第 9 号共 7 个座位排成一直线，要从中选 2 个不相邻的。",
+          "直线上从 m 个位置选 k 个不相邻的方法数是 C(m − k + 1, k)，代入 m = 7、k = 2 得 C(6, 2) = 15 种。",
+          "情形二：第 1 号座位没被选中。那么剩下第 2 到第 10 号共 9 个座位排成一直线（第 2 号与第 10 号因为第 1 号隔开而不再相邻），要选 3 个不相邻的。",
+          "代入公式 m = 9、k = 3 得 C(7, 3) = 35 种。两种情形互斥，相加得 15 + 35 = 50 种。",
+          "验算：程序穷举全部 C(10, 3) = 120 组并逐一检查是否有相邻（含第 10 号与第 1 号相邻），符合的恰好 50 组 ✓，与圆形公式 n/(n−k) × C(n−k, k) = 10/7 × C(7,3) = 10/7 × 35 = 50 完全一致。"
+        ],
+        "en": [
+          "First the unrestricted count: choosing 3 seats from 10 gives C(10, 3) = 120, from which the adjacent cases must be removed.",
+          "For seats in a line there is a ready gap method, but around a round table the first and last seats are also adjacent, so it cannot be applied directly — that is the difficulty here.",
+          "The standard trick for circular arrangements is to fix the status of one seat, cutting the circle open into a line.",
+          "Case one: seat 1 is chosen. Then its neighbours, seats 2 and 10, are excluded, leaving seats 3 through 9 — seven seats in a line — from which 2 non-adjacent seats must be chosen.",
+          "The number of ways to choose k non-adjacent positions from m in a line is C(m − k + 1, k), which for m = 7 and k = 2 gives C(6, 2) = 15.",
+          "Case two: seat 1 is not chosen. Then seats 2 through 10 — nine seats — form a line, since seats 2 and 10 are no longer adjacent once seat 1 separates them, and 3 non-adjacent seats must be chosen.",
+          "With m = 9 and k = 3 the formula gives C(7, 3) = 35. The cases are disjoint, so the total is 15 + 35 = 50.",
+          "Check: enumerating all C(10, 3) = 120 triples and testing adjacency, including seat 10 next to seat 1, leaves exactly 50, agreeing with the circular formula n/(n−k) × C(n−k, k) = 10/7 × C(7,3) = 10/7 × 35 = 50."
+        ],
+        "ja": [
+          "まず制限なしの総数：10 席から 3 席を選ぶので C(10, 3) = 120 通り。ここから隣り合う場合を除きます。",
+          "一列に並んだ席なら「隣り合わない選び方」に既成のすき間法がありますが、**円卓では先頭と末尾も隣り合う**ためそのままでは使えません。ここが本問の難所です。",
+          "円を扱う定石は、**1 つの席の状態を固定して円を切り開き一列にする**ことです。",
+          "2 つの場合に分けます。場合 1：1 番の席を選ぶ。すると隣の 2 番と 10 番は選べず、残る 3 番から 9 番までの 7 席が一列に並び、そこから隣り合わない 2 席を選びます。",
+          "一列の m 席から隣り合わない k 席を選ぶ方法は C(m − k + 1, k) 通りで、m = 7、k = 2 より C(6, 2) = 15 通り。",
+          "場合 2：1 番の席を選ばない。すると 2 番から 10 番までの 9 席が一列になり（1 番が挟まるので 2 番と 10 番はもう隣り合いません）、そこから隣り合わない 3 席を選びます。",
+          "m = 9、k = 3 を代入して C(7, 3) = 35 通り。2 つの場合は排反なので合計 15 + 35 = 50 通り。",
+          "検算：C(10, 3) = 120 組をすべて調べ、隣接（10 番と 1 番の隣接も含む）を確認すると、ちょうど 50 組が残ります ✓。円の公式 n/(n−k) × C(n−k, k) = 10/7 × C(7,3) = 10/7 × 35 = 50 とも一致します。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "50"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "圓形的不相鄰選取：依「特定座位是否被選」拆成兩個直線問題，避開頭尾相鄰的困難",
+        "notes": "設計依據：核心是察覺圓形不能直接套直線的間隔法（頭尾也相鄰），並用「固定一個座位的狀態」把圓切開成兩個互斥的直線問題；直接套直線公式會得到 C(8,3) = 56 這個誤答。答案 50 已用 120 組的全窮舉檢查環狀相鄰驗證，並與圓形封閉公式對照。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（圓桌不相鄰選取）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "組合",
+        "topicCode": "combinatorics",
+        "subtopic": "圓桌不相鄰選取",
+        "subtopicCode": "circular_nonadjacent"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "combinatorics_grade11_foundation_014",
+      "topic": "combinatorics",
+      "subtopic": "increasing_function_count",
+      "difficulty": "foundation",
+      "levelStage": "grade11",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "設 A = {1, 2, 3, 4, 5}、B = {1, 2, 3, 4, 5, 6, 7, 8}。求從 A 到 B 的嚴格遞增函數共有多少個（也就是滿足「若 a < a′ 則 f(a) < f(a′)」的函數 f）。",
+        "zh-Hans": "设 A = {1, 2, 3, 4, 5}、B = {1, 2, 3, 4, 5, 6, 7, 8}。求从 A 到 B 的严格递增函数共有多少个（也就是满足「若 a < a′ 则 f(a) < f(a′)」的函数 f）。",
+        "en": "Let A = {1, 2, 3, 4, 5} and B = {1, 2, 3, 4, 5, 6, 7, 8}. How many strictly increasing functions are there from A to B, that is functions f with f(a) < f(a′) whenever a < a′?",
+        "ja": "A = {1, 2, 3, 4, 5}、B = {1, 2, 3, 4, 5, 6, 7, 8} とします。A から B への狭義単調増加関数（a < a′ ならば f(a) < f(a′) となる関数 f）は何個ありますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 56 個。",
+        "zh-Hans": "答案是 56 個。",
+        "en": "The answer is 56.",
+        "ja": "答えは 56 個です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "先看嚴格遞增這個條件帶來什麼結果：若 a < a′ 就必須 f(a) < f(a′)，所以五個函數值必定**兩兩相異**，而且大小順序已經被完全決定。",
+          "這是關鍵：一旦選定了要用哪 5 個值，它們的排列方式就只有一種——由小到大依序指派給 1、2、3、4、5。",
+          "反過來說，每一個嚴格遞增函數也唯一決定了它用到的那 5 個值所成的集合。",
+          "所以「嚴格遞增函數」與「B 的 5 元子集」之間是一一對應的關係，數其中一邊就等於數另一邊。",
+          "因此個數 = C(8, 5) = C(8, 3) = (8 × 7 × 6) ÷ (3 × 2 × 1) = 56 個。",
+          "舉例說明對應關係：若選中的 5 個值是 {2, 3, 5, 7, 8}，對應的函數就是 f(1) = 2、f(2) = 3、f(3) = 5、f(4) = 7、f(5) = 8，沒有第二種排法。",
+          "常見錯誤是額外乘上 5!（以為選出值之後還要排列），那會得到 6720——但遞增的要求已經把順序鎖死了。",
+          "驗算：程式窮舉從 A 到 B 的全部 8⁵ = 32768 個函數，逐一檢查是否嚴格遞增，符合的恰好 56 個 ✓。"
+        ],
+        "zh-Hans": [
+          "先看严格递增这个条件带来什么结果：若 a < a′ 就必须 f(a) < f(a′)，所以五个函数值必定**两两相异**，而且大小顺序已经被完全决定。",
+          "这是关键：一旦选定了要用哪 5 个值，它们的排列方式就只有一种——由小到大依序指派给 1、2、3、4、5。",
+          "反过来说，每一个严格递增函数也唯一决定了它用到的那 5 个值所成的集合。",
+          "所以「严格递增函数」与「B 的 5 元子集」之间是一一对应的关系，数其中一边就等于数另一边。",
+          "因此个数 = C(8, 5) = C(8, 3) = (8 × 7 × 6) ÷ (3 × 2 × 1) = 56 个。",
+          "举例说明对应关系：若选中的 5 个值是 {2, 3, 5, 7, 8}，对应的函数就是 f(1) = 2、f(2) = 3、f(3) = 5、f(4) = 7、f(5) = 8，没有第二种排法。",
+          "常见错误是额外乘上 5!（以为选出值之后还要排列），那会得到 6720——但递增的要求已经把顺序锁死了。",
+          "验算：程序穷举从 A 到 B 的全部 8⁵ = 32768 个函数，逐一检查是否严格递增，符合的恰好 56 个 ✓。"
+        ],
+        "en": [
+          "Start from what strict increase forces: whenever a < a′ we need f(a) < f(a′), so the five function values must be pairwise distinct and their order is completely determined.",
+          "That is the key: once the set of 5 values is chosen, there is only one way to arrange them — assign them in increasing order to 1, 2, 3, 4, 5.",
+          "Conversely, every strictly increasing function determines uniquely the 5-element set of values it uses.",
+          "So strictly increasing functions correspond one-to-one with 5-element subsets of B, and counting one counts the other.",
+          "Hence the count is C(8, 5) = C(8, 3) = (8 × 7 × 6) ÷ (3 × 2 × 1) = 56.",
+          "An example of the correspondence: if the chosen values are {2, 3, 5, 7, 8}, the function must be f(1) = 2, f(2) = 3, f(3) = 5, f(4) = 7, f(5) = 8, with no alternative arrangement.",
+          "A common error is to multiply by 5! as though the chosen values still had to be ordered, giving 6720 — but the increasing requirement has already locked the order.",
+          "Check: enumerating all 8⁵ = 32768 functions from A to B and testing strict increase leaves exactly 56."
+        ],
+        "ja": [
+          "まず狭義単調増加という条件が何を強制するか見ます。a < a′ なら f(a) < f(a′) なので、5 つの値は互いに異なり、しかも大小の順序が完全に決まります。",
+          "ここが要点です：使う 5 つの値を決めた時点で、並べ方は 1 通りしかありません。小さい順に 1、2、3、4、5 へ割り当てるだけです。",
+          "逆に、どの狭義単調増加関数も、使う 5 つの値からなる集合をただ 1 つ定めます。",
+          "したがって「狭義単調増加関数」と「B の 5 元部分集合」は 1 対 1 に対応し、一方を数えれば他方を数えたことになります。",
+          "よって個数は C(8, 5) = C(8, 3) = (8 × 7 × 6) ÷ (3 × 2 × 1) = 56 個です。",
+          "対応の例：選んだ 5 値が {2, 3, 5, 7, 8} なら、関数は f(1) = 2、f(2) = 3、f(3) = 5、f(4) = 7、f(5) = 8 の 1 通りに定まります。",
+          "よくある誤りは、値を選んだ後さらに並べると考えて 5! を掛け 6720 とすることです。増加の条件が既に順序を固定しています。",
+          "検算：A から B への関数 8⁵ = 32768 個をすべて調べ、狭義単調増加のものを数えると、ちょうど 56 個です ✓。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "56"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "嚴格遞增函數與值域子集的一一對應：選定值集後排列方式唯一，故個數為 C(8,5)",
+        "notes": "設計依據：核心是察覺遞增條件把「選值」與「排序」合而為一，因此不必再乘排列數；誤乘 5! 會得到 6720，是可預期的誤答。詳解以具體的值集 {2,3,5,7,8} 示範對應唯一。答案 56 已用 8⁵ = 32768 個函數的全窮舉驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（嚴格遞增函數）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "組合",
+        "topicCode": "combinatorics",
+        "subtopic": "嚴格遞增函數",
+        "subtopicCode": "increasing_function_count"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "combinatorics_grade11_foundation_015",
+      "topic": "combinatorics",
+      "subtopic": "bracelet_two_colors",
+      "difficulty": "foundation",
+      "levelStage": "grade11",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "用黑色和白色兩種珠子串成一條有 4 顆珠子的手環。手環可以自由旋轉，也可以翻面，因此經由旋轉或翻面能重合的兩條手環視為同一種。求本質上不同的手環共有多少種。",
+        "zh-Hans": "用黑色和白色两种珠子串成一条有 4 颗珠子的手环。手环可以自由旋转，也可以翻面，因此经由旋转或翻面能重合的两条手环视为同一种。求本质上不同的手环共有多少种。",
+        "en": "A bracelet is made from 4 beads, each black or white. The bracelet may be rotated freely and also flipped over, so two bracelets that coincide after a rotation or a flip count as the same. How many essentially different bracelets are there?",
+        "ja": "黒と白の 2 種類のビーズ 4 個でブレスレットを作ります。ブレスレットは自由に回転でき、裏返すこともできるので、回転や裏返しで一致するものは同じとみなします。本質的に異なるブレスレットは何種類ありますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 6 種。",
+        "zh-Hans": "答案是 6 种。",
+        "en": "The answer is 6.",
+        "ja": "答えは 6 種類です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "四顆珠子每顆有黑白兩種選擇，所以不考慮對稱時共有 2⁴ = 16 種排法。但旋轉與翻面會讓其中許多變成同一種，不能直接除以某個固定的數。",
+          "穩妥的作法是**依黑珠的數量分類**，因為旋轉與翻面都不會改變黑珠的顆數。",
+          "黑珠 0 顆：只有全白一種。黑珠 4 顆：只有全黑一種。",
+          "黑珠 1 顆：不管黑珠放在哪個位置，都可以旋轉到同一處，所以只有 1 種。",
+          "黑珠 3 顆：與 1 顆的情形對稱（把黑白對調），同樣只有 1 種。",
+          "黑珠 2 顆：這裡才真正需要判斷。兩顆黑珠可能**相鄰**，也可能**相對**（隔一顆），這兩種無論怎麼旋轉或翻面都無法互相變成對方，所以有 2 種。",
+          "把各類相加：1 + 1 + 2 + 1 + 1 = 6 種。",
+          "驗算：程式對全部 16 種排法逐一計算其在旋轉與翻面下的標準代表元，去重後得到 6 個等價類，代表元是 WWWW、BWWW、BBWW、BWBW、BBBW、BBBB ✓；依黑珠數統計為 0 顆 1 種、1 顆 1 種、2 顆 2 種、3 顆 1 種、4 顆 1 種，與上述分類完全一致。"
+        ],
+        "zh-Hans": [
+          "四颗珠子每颗有黑白两种选择，所以不考虑对称时共有 2⁴ = 16 种排法。但旋转与翻面会让其中许多变成同一种，不能直接除以某个固定的数。",
+          "稳妥的做法是**依黑珠的数量分类**，因为旋转与翻面都不会改变黑珠的颗数。",
+          "黑珠 0 颗：只有全白一种。黑珠 4 颗：只有全黑一种。",
+          "黑珠 1 颗：不管黑珠放在哪个位置，都可以旋转到同一处，所以只有 1 种。",
+          "黑珠 3 颗：与 1 颗的情形对称（把黑白对调），同样只有 1 种。",
+          "黑珠 2 颗：这里才真正需要判断。两颗黑珠可能**相邻**，也可能**相对**（隔一颗），这两种无论怎么旋转或翻面都无法互相变成对方，所以有 2 种。",
+          "把各类相加：1 + 1 + 2 + 1 + 1 = 6 种。",
+          "验算：程序对全部 16 种排法逐一计算其在旋转与翻面下的标准代表元，去重后得到 6 个等价类，代表元是 WWWW、BWWW、BBWW、BWBW、BBBW、BBBB ✓；依黑珠数统计为 0 颗 1 种、1 颗 1 种、2 颗 2 种、3 颗 1 种、4 颗 1 种，与上述分类完全一致。"
+        ],
+        "en": [
+          "Each of the four beads is black or white, so ignoring symmetry there are 2⁴ = 16 arrangements. Rotations and flips merge many of these, and one cannot simply divide by a fixed number.",
+          "The reliable approach is to classify by the number of black beads, since neither rotation nor flipping changes that count.",
+          "Zero black beads: only the all-white bracelet. Four black beads: only the all-black one.",
+          "One black bead: wherever it sits, a rotation brings it to the same place, so there is just 1 bracelet.",
+          "Three black beads: symmetric to the one-bead case by swapping colours, so again just 1.",
+          "Two black beads: here a real decision is needed. The two black beads may be adjacent or opposite, and no rotation or flip turns one configuration into the other, so there are 2.",
+          "Adding the classes: 1 + 1 + 2 + 1 + 1 = 6.",
+          "Check: computing a canonical representative under rotations and flips for all 16 arrangements and removing duplicates gives 6 classes, with representatives WWWW, BWWW, BBWW, BWBW, BBBW and BBBB. Grouping by black-bead count gives 1, 1, 2, 1, 1, exactly matching the classification above."
+        ],
+        "ja": [
+          "4 個のビーズはそれぞれ黒か白なので、対称性を考えなければ 2⁴ = 16 通りです。しかし回転や裏返しで多くが同一視されるため、単純に何かで割ることはできません。",
+          "確実な方法は**黒いビーズの個数で分類する**ことです。回転も裏返しも黒の個数を変えないからです。",
+          "黒 0 個：全部白の 1 種類のみ。黒 4 個：全部黒の 1 種類のみ。",
+          "黒 1 個：どの位置にあっても回転で同じ位置に移せるので 1 種類だけです。",
+          "黒 3 個：白黒を入れ替えれば 1 個の場合と対称なので、やはり 1 種類。",
+          "黒 2 個：ここで初めて判断が必要です。2 個の黒は**隣り合う**場合と**向かい合う**場合があり、回転しても裏返してもこの 2 つは互いに移り合えないので 2 種類です。",
+          "各分類を足すと 1 + 1 + 2 + 1 + 1 = 6 種類。",
+          "検算：16 通りすべてについて回転・裏返しのもとでの標準代表元を計算し重複を除くと 6 つの同値類が得られ、代表元は WWWW、BWWW、BBWW、BWBW、BBBW、BBBB ✓。黒の個数別では 0 個 1 種、1 個 1 種、2 個 2 種、3 個 1 種、4 個 1 種で、上の分類と完全に一致します。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "6"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "對稱下的等價類計數：依旋轉與翻面的不變量（黑珠數）分類，僅 2 顆黑珠時需再分相鄰與相對",
+        "notes": "設計依據：關鍵是找到在對稱作用下不變的量（黑珠數）來分類，避免「16 除以 8」這種錯誤的平均化；只有黑珠 2 顆的類需要再細分成相鄰與相對，是唯一的判斷點。答案 6 已用 16 種排法逐一取旋轉與翻面下的標準代表元去重驗證，並與分類結果逐項比對。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（手環的等價類）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "組合",
+        "topicCode": "combinatorics",
+        "subtopic": "手環的等價類",
+        "subtopicCode": "bracelet_two_colors"
+      },
+      "reviewStatus": "ok"
     }
   ]
 }
