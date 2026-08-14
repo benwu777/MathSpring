@@ -635,7 +635,8 @@ void main() {
           'grade11',
           'grade12',
         }.contains(pack.questions.first.levelStage)
-            ? pack.questions.length == 10
+            // grade7-12 擴充題庫後題數只增不減，同樣改用下限
+            ? pack.questions.length >= 10
             : pack.questions.length >= 10,
       ),
       isTrue,
