@@ -2129,6 +2129,456 @@
         "subtopicCode": "bounded_sum_pairs"
       },
       "reviewStatus": "ok"
+    },
+    {
+      "id": "combinatorics_grade7_foundation_026",
+      "topic": "combinatorics",
+      "subtopic": "nonadjacent_pair_arrangement",
+      "difficulty": "foundation",
+      "levelStage": "grade7",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "甲、乙、丙、丁、戊五個人排成一列拍照。若甲和乙不可以站在一起（也就是兩人不相鄰），共有多少種不同的排法？",
+        "zh-Hans": "甲、乙、丙、丁、戊五个人排成一列拍照。若甲和乙不可以站在一起（也就是两人不相邻），共有多少种不同的排法？",
+        "en": "Five people — A, B, C, D and E — line up for a photo. If A and B must not stand next to each other, how many different arrangements are there?",
+        "ja": "甲、乙、丙、丁、戊の 5 人が一列に並んで写真を撮ります。甲と乙が隣り合ってはいけないとき、並び方は何通りありますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 72 種。",
+        "zh-Hans": "答案是 72 种。",
+        "en": "The answer is 72.",
+        "ja": "答えは 72 通りです。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "直接數「不相鄰」的排法很麻煩，因為要考慮甲乙各自站在哪些位置。**改成用扣的**會簡單很多：先算全部排法，再扣掉相鄰的排法。",
+          "第一步，算全部的排法。五個人排成一列，第一個位置有 5 種選擇、第二個有 4 種、以此類推，共 5 × 4 × 3 × 2 × 1 = 120 種。",
+          "第二步，算「甲乙相鄰」的排法。這裡用**捆綁法**：把甲和乙看成綁在一起的一個大團塊。",
+          "這樣一來要排的東西剩下 4 個：（甲乙）團塊、丙、丁、戊。它們的排法有 4 × 3 × 2 × 1 = 24 種。",
+          "但團塊內部還有順序——可以是「甲乙」也可以是「乙甲」，所以每一種排法都要再乘 2。",
+          "所以甲乙相鄰的排法共有 24 × 2 = 48 種。",
+          "第三步，相減：120 − 48 = 72 種。",
+          "驗算：程式列出五個人的全部 120 種排列，逐一檢查甲與乙的位置是否相差 1，得到相鄰 48 種、不相鄰 72 種 ✓。附註：捆綁後別忘了乘團塊內部的 2——漏掉會算成相鄰只有 24 種，答案就會多算成 96。"
+        ],
+        "zh-Hans": [
+          "直接数「不相邻」的排法很麻烦，因为要考虑甲乙各自站在哪些位置。**改成用扣的**会简单很多：先算全部排法，再扣掉相邻的排法。",
+          "第一步，算全部的排法。五个人排成一列，第一个位置有 5 种选择、第二个有 4 种、以此类推，共 5 × 4 × 3 × 2 × 1 = 120 种。",
+          "第二步，算「甲乙相邻」的排法。这里用**捆绑法**：把甲和乙看成绑在一起的一个大团块。",
+          "这样一来要排的东西剩下 4 个：（甲乙）团块、丙、丁、戊。它们的排法有 4 × 3 × 2 × 1 = 24 种。",
+          "但团块内部还有顺序——可以是「甲乙」也可以是「乙甲」，所以每一种排法都要再乘 2。",
+          "所以甲乙相邻的排法共有 24 × 2 = 48 种。",
+          "第三步，相减：120 − 48 = 72 种。",
+          "验算：程序列出五个人的全部 120 种排列，逐一检查甲与乙的位置是否相差 1，得到相邻 48 种、不相邻 72 种 ✓。附注：捆绑后别忘了乘团块内部的 2——漏掉会算成相邻只有 24 种，答案就会多算成 96。"
+        ],
+        "en": [
+          "Counting the non-adjacent arrangements directly is awkward, since it means tracking where A and B each stand. Subtracting is far easier: count all arrangements, then remove the adjacent ones.",
+          "Step one, count all arrangements. With five people in a row there are 5 choices for the first position, 4 for the second and so on, giving 5 × 4 × 3 × 2 × 1 = 120.",
+          "Step two, count the arrangements where A and B are adjacent, using the block method: treat A and B as tied together into a single block.",
+          "That leaves 4 objects to arrange — the (AB) block, C, D and E — which can be ordered in 4 × 3 × 2 × 1 = 24 ways.",
+          "But the block has an internal order too, since it may be AB or BA, so each arrangement must be doubled.",
+          "So the adjacent arrangements number 24 × 2 = 48.",
+          "Step three, subtract: 120 − 48 = 72.",
+          "Check: listing all 120 permutations of the five people and testing whether the positions of A and B differ by 1 gives 48 adjacent and 72 non-adjacent. Remark: do not forget the factor 2 for the block's internal order — omitting it would give 24 adjacent arrangements and inflate the answer to 96."
+        ],
+        "ja": [
+          "「隣り合わない」並び方を直接数えるのは、甲と乙がそれぞれどこに立つかを追う必要があり面倒です。**引き算に変える**ほうがずっと簡単で、全体から隣り合う場合を除きます。",
+          "第 1 段階、全体の並び方を数えます。5 人を一列に並べると、1 番目は 5 通り、2 番目は 4 通り、⋯ となり、5 × 4 × 3 × 2 × 1 = 120 通りです。",
+          "第 2 段階、「甲と乙が隣り合う」並び方を数えます。ここでは**ひとまとめ法**を使い、甲と乙を結び付けて 1 つの塊とみなします。",
+          "すると並べる対象は（甲乙）の塊、丙、丁、戊の 4 つになり、その並べ方は 4 × 3 × 2 × 1 = 24 通りです。",
+          "ただし塊の中にも順序があり、「甲乙」でも「乙甲」でもよいので、各並べ方を 2 倍します。",
+          "したがって甲と乙が隣り合う並び方は 24 × 2 = 48 通りです。",
+          "第 3 段階、引き算します：120 − 48 = 72 通り。",
+          "検算：5 人の 120 通りの順列をすべて列挙し、甲と乙の位置の差が 1 かを調べると、隣り合うのが 48 通り、隣り合わないのが 72 通りでした ✓。補足：塊の内部の 2 通りを掛け忘れないこと。忘れると隣り合う場合が 24 通りとなり、答えが 96 に膨らみます。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "72"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "不相鄰的計數用補集：全部排法減去相鄰排法，而相鄰用捆綁法並乘上團塊內部的順序",
+        "notes": "設計依據：只有兩個人受限制，使「補集＋捆綁」成為最短路徑；捆綁後乘 2 是最常漏掉的一步，漏掉會得到 96，與正解 72 明顯可分辨。答案 72 已用五人全部 120 種排列的窮舉檢查獨立驗證（相鄰 48、不相鄰 72）。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（不相鄰的排法）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "組合",
+        "topicCode": "combinatorics",
+        "subtopic": "不相鄰的排法",
+        "subtopicCode": "nonadjacent_pair_arrangement"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "combinatorics_grade7_foundation_027",
+      "topic": "combinatorics",
+      "subtopic": "polygon_diagonals",
+      "difficulty": "foundation",
+      "levelStage": "grade7",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一個凸八邊形共有多少條對角線？（對角線是指連接兩個不相鄰頂點的線段，八邊形的邊本身不算對角線）",
+        "zh-Hans": "一个凸八边形共有多少条对角线？（对角线是指连接两个不相邻顶点的线段，八边形的边本身不算对角线）",
+        "en": "How many diagonals does a convex octagon have? A diagonal is a segment joining two non-adjacent vertices, and the sides of the octagon do not count as diagonals.",
+        "ja": "凸八角形の対角線は全部で何本ありますか。（対角線とは隣り合わない 2 頂点を結ぶ線分のことで、八角形の辺自体は対角線に含めません）"
+      },
+      "answer": {
+        "zh-Hant": "答案是 20 條。",
+        "zh-Hans": "答案是 20 条。",
+        "en": "The answer is 20.",
+        "ja": "答えは 20 本です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "對角線與邊都是「連接兩個頂點的線段」，差別只在於**兩端點是不是相鄰**。所以可以先數出所有連接兩頂點的線段，再把邊扣掉。",
+          "先數所有的線段：從 8 個頂點中任選 2 個，每一組決定一條線段。",
+          "選法有 8 × 7 ÷ 2 = 28 種。除以 2 是因為先選 A 再選 B 與先選 B 再選 A 是同一條線段，不能重複計算。",
+          "接著數邊：八邊形有 8 條邊，每一條邊都連接兩個相鄰的頂點。",
+          "所以對角線的條數 = 28 − 8 = 20 條。",
+          "另一種算法是從單一頂點出發思考：每個頂點可以連到其他 7 個頂點，其中有 2 個是它的鄰居（連過去就是邊），所以只有 5 條是對角線。",
+          "8 個頂點各有 5 條，得 8 × 5 = 40，但每條對角線的兩端都被數了一次，所以要除以 2：40 ÷ 2 = 20 條，與前一種算法一致。",
+          "驗算：程式列出 8 個頂點的所有 28 組配對，扣掉編號相差 1（含頭尾相接的那一對）的 8 組邊，剩下 20 條 ✓。附註：忘記除以 2 會得到 40，是這類「每條線被兩端各數一次」的題目最常見的錯誤。"
+        ],
+        "zh-Hans": [
+          "对角线与边都是「连接两个顶点的线段」，差别只在于**两端点是不是相邻**。所以可以先数出所有连接两顶点的线段，再把边扣掉。",
+          "先数所有的线段：从 8 个顶点中任选 2 个，每一组决定一条线段。",
+          "选法有 8 × 7 ÷ 2 = 28 种。除以 2 是因为先选 A 再选 B 与先选 B 再选 A 是同一条线段，不能重复计算。",
+          "接着数边：八边形有 8 条边，每一条边都连接两个相邻的顶点。",
+          "所以对角线的条数 = 28 − 8 = 20 条。",
+          "另一种算法是从单一顶点出发思考：每个顶点可以连到其他 7 个顶点，其中有 2 个是它的邻居（连过去就是边），所以只有 5 条是对角线。",
+          "8 个顶点各有 5 条，得 8 × 5 = 40，但每条对角线的两端都被数了一次，所以要除以 2：40 ÷ 2 = 20 条，与前一种算法一致。",
+          "验算：程序列出 8 个顶点的所有 28 组配对，扣掉编号相差 1（含头尾相接的那一对）的 8 组边，剩下 20 条 ✓。附注：忘记除以 2 会得到 40，是这类「每条线被两端各数一次」的题目最常见的错误。"
+        ],
+        "en": [
+          "Diagonals and sides are both segments joining two vertices; the only difference is whether the endpoints are adjacent. So count every segment joining two vertices, then subtract the sides.",
+          "First count all such segments: choosing any 2 of the 8 vertices determines one segment.",
+          "There are 8 × 7 ÷ 2 = 28 choices. The division by 2 is needed because picking A then B gives the same segment as picking B then A, and must not be counted twice.",
+          "Next count the sides: an octagon has 8 sides, each joining two adjacent vertices.",
+          "So the number of diagonals is 28 − 8 = 20.",
+          "An alternative is to reason from one vertex: each vertex joins to the other 7, of which 2 are its neighbours and give sides, leaving 5 diagonals.",
+          "With 8 vertices contributing 5 each, that is 8 × 5 = 40, but each diagonal is counted once from each of its two ends, so dividing by 2 gives 40 ÷ 2 = 20, agreeing with the first method.",
+          "Check: listing all 28 pairs of the 8 vertices and removing the 8 pairs whose labels differ by 1 (including the wrap-around pair) leaves 20. Remark: forgetting to divide by 2 gives 40, the most common error whenever each object is counted once from each end."
+        ],
+        "ja": [
+          "対角線も辺も「2 頂点を結ぶ線分」であり、違いは**両端が隣り合っているかどうか**だけです。そこで 2 頂点を結ぶ線分をすべて数えてから、辺を引きます。",
+          "まずすべての線分を数えます：8 頂点から 2 つ選ぶごとに線分が 1 本決まります。",
+          "選び方は 8 × 7 ÷ 2 = 28 通りです。2 で割るのは、A を先に選んでも B を先に選んでも同じ線分であり、重複して数えてはいけないからです。",
+          "次に辺を数えます：八角形の辺は 8 本で、いずれも隣り合う 2 頂点を結んでいます。",
+          "したがって対角線の本数は 28 − 8 = 20 本です。",
+          "別の数え方として、1 つの頂点から考えることもできます。各頂点は他の 7 頂点と結べますが、そのうち 2 つは隣の頂点で結ぶと辺になるため、対角線は 5 本です。",
+          "8 頂点それぞれに 5 本で 8 × 5 = 40 ですが、各対角線は両端から 1 回ずつ数えられているので 2 で割り、40 ÷ 2 = 20 本。先の方法と一致します。",
+          "検算：8 頂点の 28 組の組み合わせをすべて列挙し、番号差が 1 の組（端どうしがつながる組を含む）8 組を除くと 20 本が残ります ✓。補足：2 で割り忘れて 40 とするのが、「各線分が両端から 1 回ずつ数えられる」型の問題で最もよくある誤りです。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "20"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "多邊形對角線條數：從所有頂點配對數 C(8,2) 扣掉邊數 8，或每頂點 5 條再除以重複計數的 2",
+        "notes": "設計依據：詳解刻意給出兩條互相獨立的算路（先數全部再扣邊、以及逐頂點計數再除以 2），兩者都必須處理「每條線被兩端各數一次」的重複計數，讓除以 2 的理由出現兩次。答案 20 已用 8 頂點全部 28 組配對並排除相鄰組的窮舉獨立驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（多邊形的對角線）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "組合",
+        "topicCode": "combinatorics",
+        "subtopic": "多邊形的對角線",
+        "subtopicCode": "polygon_diagonals"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "combinatorics_grade7_foundation_028",
+      "topic": "combinatorics",
+      "subtopic": "equal_split_two_groups",
+      "difficulty": "foundation",
+      "levelStage": "grade7",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "要把 6 位同學平均分成兩組，每組 3 人。兩組之間沒有任何區別（沒有組別名稱，只看誰和誰同一組）。共有多少種不同的分法？",
+        "zh-Hans": "要把 6 位同学平均分成两组，每组 3 人。两组之间没有任何区别（没有组别名称，只看谁和谁同一组）。共有多少种不同的分法？",
+        "en": "Six students are to be split into two groups of 3. The groups are indistinguishable — there are no group names, and only who is with whom matters. How many different splits are there?",
+        "ja": "6 人の生徒を 3 人ずつ 2 つのグループに分けます。グループには区別がなく（名前もなく、誰と誰が同じグループかだけを見ます）、分け方は何通りありますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 10 種。",
+        "zh-Hans": "答案是 10 种。",
+        "en": "The answer is 10.",
+        "ja": "答えは 10 通りです。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "先用一個比較好算的方式下手：**假裝兩組是有區別的**（例如叫作第一組和第二組），算完再修正。",
+          "如果兩組有區別，那麼只要決定「第一組是哪 3 個人」，剩下的 3 人自動成為第二組。",
+          "從 6 人中選 3 人的方法有 (6 × 5 × 4) ÷ (3 × 2 × 1) = 120 ÷ 6 = 20 種。分母的 3 × 2 × 1 是因為同一組的三個人不分先後。",
+          "所以在「兩組有區別」的假設下，共有 20 種。",
+          "但題目說兩組**沒有區別**。以 6 人記為 A、B、C、D、E、F 為例：「第一組是 ABC、第二組是 DEF」與「第一組是 DEF、第二組是 ABC」，在題目眼中是同一種分法，卻在上面被算了兩次。",
+          "而且每一種分法都恰好被算了兩次（互補的兩組各當一次第一組），沒有例外。",
+          "所以要把 20 除以 2：20 ÷ 2 = 10 種。",
+          "驗算：程式列出從 6 人中選 3 人的全部 20 種，把每一種與它的互補組視為同一組後去重，剩下恰好 10 種 ✓。附註：這個「除以 2」只有在兩組人數相同時才需要——如果是分成 2 人一組與 4 人一組，兩組本來就分得出來，就不必除。"
+        ],
+        "zh-Hans": [
+          "先用一个比较好算的方式下手：**假装两组是有区别的**（例如叫作第一组和第二组），算完再修正。",
+          "如果两组有区别，那么只要决定「第一组是哪 3 个人」，剩下的 3 人自动成为第二组。",
+          "从 6 人中选 3 人的方法有 (6 × 5 × 4) ÷ (3 × 2 × 1) = 120 ÷ 6 = 20 种。分母的 3 × 2 × 1 是因为同一组的三个人不分先后。",
+          "所以在「两组有区别」的假设下，共有 20 种。",
+          "但题目说两组**没有区别**。以 6 人记为 A、B、C、D、E、F 为例：「第一组是 ABC、第二组是 DEF」与「第一组是 DEF、第二组是 ABC」，在题目眼中是同一种分法，却在上面被算了两次。",
+          "而且每一种分法都恰好被算了两次（互补的两组各当一次第一组），没有例外。",
+          "所以要把 20 除以 2：20 ÷ 2 = 10 种。",
+          "验算：程序列出从 6 人中选 3 人的全部 20 种，把每一种与它的互补组视为同一组后去重，剩下恰好 10 种 ✓。附注：这个「除以 2」只有在两组人数相同时才需要——如果是分成 2 人一组与 4 人一组，两组本来就分得出来，就不必除。"
+        ],
+        "en": [
+          "Start with an easier version: pretend the two groups are distinguishable, calling them Group 1 and Group 2, then correct afterwards.",
+          "If the groups were distinguishable, it would be enough to decide which 3 people form Group 1, since the remaining 3 automatically form Group 2.",
+          "Choosing 3 from 6 can be done in (6 × 5 × 4) ÷ (3 × 2 × 1) = 120 ÷ 6 = 20 ways, the denominator 3 × 2 × 1 reflecting that order within a group does not matter.",
+          "So under the assumption of distinguishable groups there are 20 ways.",
+          "But the problem says the groups are indistinguishable. Labelling the students A to F, the split with Group 1 = ABC and Group 2 = DEF is the same split as Group 1 = DEF and Group 2 = ABC, yet it was counted twice above.",
+          "Moreover every split is counted exactly twice, once for each of the complementary halves serving as Group 1, with no exceptions.",
+          "So divide by 2: 20 ÷ 2 = 10.",
+          "Check: listing all 20 ways to choose 3 from 6 and identifying each with its complement leaves exactly 10 distinct splits. Remark: this division by 2 is needed only when the groups have equal size — splitting into a group of 2 and a group of 4 needs no correction, since those groups are already distinguishable by size."
+        ],
+        "ja": [
+          "まず計算しやすい形から始めます：**2 つのグループに区別があるふりをして**（第 1 組・第 2 組と呼ぶ）計算し、後で補正します。",
+          "区別があるなら、「第 1 組が誰の 3 人か」を決めるだけでよく、残りの 3 人が自動的に第 2 組になります。",
+          "6 人から 3 人を選ぶ方法は (6 × 5 × 4) ÷ (3 × 2 × 1) = 120 ÷ 6 = 20 通りです。分母の 3 × 2 × 1 は、同じ組の 3 人に順序がないためです。",
+          "したがって「区別がある」という仮定のもとでは 20 通りです。",
+          "しかし問題では 2 つの組に**区別がありません**。6 人を A〜F とすると、「第 1 組 ABC・第 2 組 DEF」と「第 1 組 DEF・第 2 組 ABC」は問題の見方では同じ分け方なのに、上では 2 回数えられています。",
+          "しかもどの分け方もちょうど 2 回ずつ数えられており（補集合の 2 組が交互に第 1 組になる）、例外はありません。",
+          "よって 20 を 2 で割ります：20 ÷ 2 = 10 通り。",
+          "検算：6 人から 3 人を選ぶ 20 通りをすべて列挙し、各組をその補集合と同一視して重複を除くと、ちょうど 10 通りが残ります ✓。補足：この「2 で割る」は 2 組の人数が等しいときだけ必要です。2 人組と 4 人組に分けるなら人数で区別がつくため、割る必要はありません。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "10"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "無區別分組的重複計數：先假設兩組有別算出 C(6,3) = 20，因每種分法被互補地數了兩次而除以 2",
+        "notes": "設計依據：兩組人數相同是「必須除以 2」的前提，詳解末尾以「2 人組配 4 人組不必除」點明這個條件，避免學生把除以 2 當成通則；先假設有別再修正的策略也在此完整示範。答案 10 已用 20 組選法與其互補組去重的窮舉獨立驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（平均分成兩組）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "組合",
+        "topicCode": "combinatorics",
+        "subtopic": "平均分成兩組",
+        "subtopicCode": "equal_split_two_groups"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "combinatorics_grade7_foundation_029",
+      "topic": "combinatorics",
+      "subtopic": "coin_flip_majority",
+      "difficulty": "foundation",
+      "levelStage": "grade7",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "連續擲一枚公正的硬幣 4 次，並依序記下每次的正反面。在所有可能的結果中，正面出現的次數比反面多的結果共有多少種？",
+        "zh-Hans": "连续掷一枚公正的硬币 4 次，并依序记下每次的正反面。在所有可能的结果中，正面出现的次数比反面多的结果共有多少种？",
+        "en": "A fair coin is tossed 4 times and the outcomes are recorded in order. Among all possible outcomes, how many have more heads than tails?",
+        "ja": "公正なコインを 4 回続けて投げ、毎回の表裏を順に記録します。起こりうる結果のうち、表の回数が裏の回数より多いものは何通りありますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 5 種。",
+        "zh-Hans": "答案是 5 种。",
+        "en": "The answer is 5.",
+        "ja": "答えは 5 通りです。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "先弄清楚「正面比反面多」在擲 4 次時代表什麼。正面次數加反面次數一定是 4。",
+          "若正面 0 次則反面 4 次，正面較少；正面 1 次則反面 3 次，仍較少；正面 2 次則反面 2 次，一樣多不算多。",
+          "正面 3 次時反面 1 次，正面較多 ✓；正面 4 次時反面 0 次，也較多 ✓。",
+          "所以「正面比反面多」只有兩種情形：**恰好 3 次正面**或**恰好 4 次正面**，把這兩種分開數再相加。",
+          "恰好 4 次正面：四次都必須是正面，只有「正正正正」這 1 種。",
+          "恰好 3 次正面：等於在四次之中挑出「哪一次是反面」，有 4 個位置可挑，所以有 4 種——分別是反正正正、正反正正、正正反正、正正正反。",
+          "兩種情形不會重疊（正面次數不同），所以相加：4 + 1 = 5 種。",
+          "驗算：程式列出四次擲幣的全部 2⁴ = 16 種結果，逐一比較正反次數，符合的恰為 HHHH、HHHT、HHTH、HTHH、THHH 共 5 種 ✓。附註：擲的次數是偶數時會有「一樣多」的情形（這裡是正反各 2 次的 6 種），它既不算多也不算少，是最容易被誤併進來的一類。"
+        ],
+        "zh-Hans": [
+          "先弄清楚「正面比反面多」在掷 4 次时代表什么。正面次数加反面次数一定是 4。",
+          "若正面 0 次则反面 4 次，正面较少；正面 1 次则反面 3 次，仍较少；正面 2 次则反面 2 次，一样多不算多。",
+          "正面 3 次时反面 1 次，正面较多 ✓；正面 4 次时反面 0 次，也较多 ✓。",
+          "所以「正面比反面多」只有两种情形：**恰好 3 次正面**或**恰好 4 次正面**，把这两种分开数再相加。",
+          "恰好 4 次正面：四次都必须是正面，只有「正正正正」这 1 种。",
+          "恰好 3 次正面：等于在四次之中挑出「哪一次是反面」，有 4 个位置可挑，所以有 4 种——分别是反正正正、正反正正、正正反正、正正正反。",
+          "两种情形不会重叠（正面次数不同），所以相加：4 + 1 = 5 种。",
+          "验算：程序列出四次掷币的全部 2⁴ = 16 种结果，逐一比较正反次数，符合的恰为 HHHH、HHHT、HHTH、HTHH、THHH 共 5 种 ✓。附注：掷的次数是偶数时会有「一样多」的情形（这里是正反各 2 次的 6 种），它既不算多也不算少，是最容易被误并进来的一类。"
+        ],
+        "en": [
+          "First pin down what \"more heads than tails\" means over 4 tosses, given that the head count and tail count always add to 4.",
+          "With 0 heads there are 4 tails, so heads are fewer; with 1 head there are 3 tails, still fewer; with 2 heads there are 2 tails, which is equal and does not count as more.",
+          "With 3 heads there is 1 tail, so heads are more; with 4 heads there are 0 tails, also more.",
+          "So \"more heads\" happens in exactly two cases — exactly 3 heads or exactly 4 heads — and these are counted separately then added.",
+          "Exactly 4 heads: all four tosses must be heads, giving just the single outcome HHHH.",
+          "Exactly 3 heads: this amounts to choosing which one toss is the tail, and there are 4 positions to choose, giving 4 outcomes — THHH, HTHH, HHTH and HHHT.",
+          "The two cases cannot overlap, since the head counts differ, so they add: 4 + 1 = 5.",
+          "Check: listing all 2⁴ = 16 outcomes of four tosses and comparing counts gives exactly HHHH, HHHT, HHTH, HTHH and THHH — five outcomes. Remark: an even number of tosses allows a tie (here the 6 outcomes with 2 heads and 2 tails), which counts as neither more nor fewer and is the group most often wrongly included."
+        ],
+        "ja": [
+          "まず 4 回投げるとき「表が裏より多い」とは何かを整理します。表の回数と裏の回数の和は必ず 4 です。",
+          "表 0 回なら裏 4 回で表が少なく、表 1 回なら裏 3 回でやはり少なく、表 2 回なら裏 2 回で同数なので「多い」には入りません。",
+          "表 3 回なら裏 1 回で表が多く ✓、表 4 回なら裏 0 回でこれも多いです ✓。",
+          "したがって「表が多い」のは **表がちょうど 3 回**か**ちょうど 4 回**の 2 つの場合だけで、別々に数えて足します。",
+          "表がちょうど 4 回：4 回とも表でなければならず、「表表表表」の 1 通りだけです。",
+          "表がちょうど 3 回：4 回のうち「どの回が裏か」を選ぶことと同じで、位置は 4 か所あるので 4 通り——裏表表表、表裏表表、表表裏表、表表表裏です。",
+          "2 つの場合は表の回数が異なるため重なりません。よって足して 4 + 1 = 5 通り。",
+          "検算：4 回投げの全 2⁴ = 16 通りを列挙して表裏の回数を比べると、該当するのは HHHH、HHHT、HHTH、HTHH、THHH のちょうど 5 通りでした ✓。補足：投げる回数が偶数だと「同数」の場合（ここでは表裏 2 回ずつの 6 通り）が生じます。これは多くも少なくもなく、誤って含めてしまいやすい一群です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "5"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "分情形加法原理：把「正面較多」拆成恰好 3 次與恰好 4 次兩個互斥情形，並排除次數相等的情形",
+        "notes": "設計依據：擲偶數次使「一樣多」的情形真實存在（正反各 2 次的 6 種），把「多於」與「不少於」的區別放進必經判斷；恰好 3 次的計數以「挑出哪一次是反面」轉成位置選擇，避免直接套公式。答案 5 已用 16 種結果的完整窮舉獨立驗證並列出明細。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（硬幣的多數情形）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "組合",
+        "topicCode": "combinatorics",
+        "subtopic": "硬幣的多數情形",
+        "subtopicCode": "coin_flip_majority"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "combinatorics_grade7_foundation_030",
+      "topic": "combinatorics",
+      "subtopic": "block_arrangement_by_subject",
+      "difficulty": "foundation",
+      "levelStage": "grade7",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "書架上要排 3 本不同的數學書和 2 本不同的英文書，共 5 本排成一列。若要求同一科目的書必須全部排在一起（3 本數學書相鄰，2 本英文書也相鄰），共有多少種不同的排法？",
+        "zh-Hans": "书架上要排 3 本不同的数学书和 2 本不同的英文书，共 5 本排成一列。若要求同一科目的书必须全部排在一起（3 本数学书相邻，2 本英文书也相邻），共有多少种不同的排法？",
+        "en": "Three different maths books and two different English books — five in total — are to be arranged in a row on a shelf. If books of the same subject must all stand together, so the three maths books are adjacent and the two English books are adjacent, how many arrangements are there?",
+        "ja": "本棚に、異なる数学の本 3 冊と異なる英語の本 2 冊の計 5 冊を一列に並べます。同じ科目の本はすべてまとめて並べる（数学 3 冊が隣り合い、英語 2 冊も隣り合う）とき、並べ方は何通りありますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 24 種。",
+        "zh-Hans": "答案是 24 种。",
+        "en": "The answer is 24.",
+        "ja": "答えは 24 通りです。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "「同科目必須相鄰」的題型要用**捆綁法**：先把每一群綁成一個團塊，排完團塊之後，再處理團塊內部的順序。",
+          "第一層，排團塊。現在有兩個團塊：數學團塊與英文團塊。兩個團塊排成一列有 2 × 1 = 2 種（數學在前或英文在前）。",
+          "第二層，排數學團塊的內部。3 本數學書互不相同，內部順序有 3 × 2 × 1 = 6 種。",
+          "第三層，排英文團塊的內部。2 本英文書互不相同，內部順序有 2 × 1 = 2 種。",
+          "這三層的選擇彼此獨立——不論團塊怎麼排，內部都還是可以自由排——所以用乘法把它們相乘。",
+          "總排法 = 2 × 6 × 2 = 24 種。",
+          "**三層都不能漏**：只算團塊順序會得到 2，只算內部會得到 12，都不是答案。",
+          "驗算：程式列出 5 本書的全部 120 種排列，逐一檢查 3 本數學書的位置是否連續、2 本英文書的位置是否也連續，符合的恰好是 24 種 ✓。附註：若題目改成「只要求數學書相鄰」，英文書就可以被拆開，答案會不同，捆綁法必須對照題目要求逐一確認哪些群要綁。"
+        ],
+        "zh-Hans": [
+          "「同科目必须相邻」的题型要用**捆绑法**：先把每一群绑成一个团块，排完团块之后，再处理团块内部的顺序。",
+          "第一层，排团块。现在有两个团块：数学团块与英文团块。两个团块排成一列有 2 × 1 = 2 种（数学在前或英文在前）。",
+          "第二层，排数学团块的内部。3 本数学书互不相同，内部顺序有 3 × 2 × 1 = 6 种。",
+          "第三层，排英文团块的内部。2 本英文书互不相同，内部顺序有 2 × 1 = 2 种。",
+          "这三层的选择彼此独立——不论团块怎么排，内部都还是可以自由排——所以用乘法把它们相乘。",
+          "总排法 = 2 × 6 × 2 = 24 种。",
+          "**三层都不能漏**：只算团块顺序会得到 2，只算内部会得到 12，都不是答案。",
+          "验算：程序列出 5 本书的全部 120 种排列，逐一检查 3 本数学书的位置是否连续、2 本英文书的位置是否也连续，符合的恰好是 24 种 ✓。附注：若题目改成「只要求数学书相邻」，英文书就可以被拆开，答案会不同，捆绑法必须对照题目要求逐一确认哪些群要绑。"
+        ],
+        "en": [
+          "Problems requiring same-subject books to be adjacent call for the block method: tie each group into a single block, arrange the blocks, then handle the order inside each block.",
+          "First level, arrange the blocks. There are two blocks, maths and English, and two blocks in a row can be ordered in 2 × 1 = 2 ways, with maths first or English first.",
+          "Second level, arrange inside the maths block. The 3 maths books are all different, so their internal order has 3 × 2 × 1 = 6 possibilities.",
+          "Third level, arrange inside the English block. The 2 English books are different, giving 2 × 1 = 2 possibilities.",
+          "These three levels are independent — however the blocks are placed, the internal orders remain free — so they multiply.",
+          "The total is 2 × 6 × 2 = 24 arrangements.",
+          "All three levels are needed: counting only the block order gives 2, and counting only the internal orders gives 12, neither of which is the answer.",
+          "Check: listing all 120 permutations of the five books and testing whether the three maths positions are consecutive and the two English positions are consecutive gives exactly 24. Remark: if the problem required only the maths books to be adjacent, the English books could be separated and the answer would differ, so the block method needs the problem re-read to see which groups must be tied."
+        ],
+        "ja": [
+          "「同じ科目は隣り合う」型の問題では**ひとまとめ法**を使います。まず各グループを 1 つの塊に結び、塊を並べてから、塊の内部の順序を扱います。",
+          "第 1 段：塊を並べます。塊は数学と英語の 2 つで、2 つを一列に並べる方法は 2 × 1 = 2 通り（数学が前か英語が前か）です。",
+          "第 2 段：数学の塊の内部を並べます。3 冊はすべて異なるので、内部の順序は 3 × 2 × 1 = 6 通りです。",
+          "第 3 段：英語の塊の内部を並べます。2 冊は異なるので 2 × 1 = 2 通りです。",
+          "この 3 段の選択は互いに独立で、塊をどう並べても内部は自由に並べられるため、掛け合わせます。",
+          "総数 = 2 × 6 × 2 = 24 通り。",
+          "**3 段すべてが必要**です。塊の順序だけなら 2、内部だけなら 12 となり、どちらも答えではありません。",
+          "検算：5 冊の 120 通りの並べ方をすべて列挙し、数学 3 冊の位置が連続しているか、英語 2 冊の位置も連続しているかを調べると、ちょうど 24 通りでした ✓。補足：もし「数学の本だけ隣り合えばよい」という条件なら英語の本は離れてよく、答えが変わります。ひとまとめ法では、どのグループを結ぶのかを問題文に照らして確認する必要があります。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "24"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "捆綁法的三層結構：團塊之間的順序、以及每個團塊內部的順序，三者相乘缺一不可",
+        "notes": "設計依據：兩個團塊大小不同（3 本與 2 本）且兩群都要求相鄰，使三層乘法都非平凡；詳解明列「只算團塊得 2、只算內部得 12」兩種漏算結果，讓缺層的錯誤可辨識。答案 24 已用 5 本書全部 120 種排列並檢查兩群位置是否各自連續的窮舉獨立驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（同類相鄰的排法）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "組合",
+        "topicCode": "combinatorics",
+        "subtopic": "同類相鄰的排法",
+        "subtopicCode": "block_arrangement_by_subject"
+      },
+      "reviewStatus": "ok"
     }
   ]
 }
