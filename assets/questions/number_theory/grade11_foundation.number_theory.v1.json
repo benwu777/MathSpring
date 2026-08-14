@@ -970,6 +970,456 @@
         "subtopic": "相鄰因數下界",
         "subtopicCode": "next_divisor_bound"
       }
+    },
+    {
+      "id": "number_theory_grade11_foundation_011",
+      "topic": "number_theory",
+      "subtopic": "quadratic_congruence_count",
+      "difficulty": "foundation",
+      "levelStage": "grade11",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "在 0 ≤ x < 24 的整數中，滿足 x² 除以 24 的餘數是 1 的 x 共有多少個？",
+        "zh-Hans": "在 0 ≤ x < 24 的整数中，满足 x² 除以 24 的余数是 1 的 x 共有多少个？",
+        "en": "Among the integers with 0 ≤ x < 24, how many satisfy that x² leaves remainder 1 when divided by 24?",
+        "ja": "0 ≤ x < 24 の整数のうち、x² を 24 で割った余りが 1 になるものはいくつありますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 8 個。",
+        "zh-Hans": "答案是 8 个。",
+        "en": "The answer is 8.",
+        "ja": "答えは 8 個です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "直接把 0 到 23 全部平方再取餘數當然可行，但先做質因數分解會看出結構。",
+          "24 = 8 × 3，而 8 與 3 互質，所以「x² ≡ 1 (mod 24)」等價於**同時**滿足 x² ≡ 1 (mod 8) 與 x² ≡ 1 (mod 3)。",
+          "先解 mod 8：把 x = 0 到 7 逐一平方取餘數，發現滿足 x² ≡ 1 (mod 8) 的是 x ≡ 1、3、5、7，共 4 個——也就是所有奇數。",
+          "再解 mod 3：x = 0、1、2 的平方餘數是 0、1、1，所以滿足的是 x ≡ 1、2，共 2 個——也就是所有不被 3 整除的數。",
+          "由中國剩餘定理，模 8 的每一個解與模 3 的每一個解都能組合出模 24 的唯一一個解，而且不同組合給出不同的解。",
+          "所以總解數 = 4 × 2 = 8 個。",
+          "換句話說，條件等價於「x 是奇數且不被 3 整除」，也就是 x 與 24 互質。",
+          "驗算：程式對 x = 0 到 23 逐一計算 x² mod 24，餘數為 1 的是 1、5、7、11、13、17、19、23，恰好 8 個 ✓，而這正是 0 到 23 中與 24 互質的所有數。"
+        ],
+        "zh-Hans": [
+          "直接把 0 到 23 全部平方再取余数当然可行，但先做质因数分解会看出结构。",
+          "24 = 8 × 3，而 8 与 3 互质，所以「x² ≡ 1 (mod 24)」等价于**同时**满足 x² ≡ 1 (mod 8) 与 x² ≡ 1 (mod 3)。",
+          "先解 mod 8：把 x = 0 到 7 逐一平方取余数，发现满足 x² ≡ 1 (mod 8) 的是 x ≡ 1、3、5、7，共 4 个——也就是所有奇数。",
+          "再解 mod 3：x = 0、1、2 的平方余数是 0、1、1，所以满足的是 x ≡ 1、2，共 2 个——也就是所有不被 3 整除的数。",
+          "由中国剩余定理，模 8 的每一个解与模 3 的每一个解都能组合出模 24 的唯一一个解，而且不同组合给出不同的解。",
+          "所以总解数 = 4 × 2 = 8 个。",
+          "换句话说，条件等价于「x 是奇数且不被 3 整除」，也就是 x 与 24 互质。",
+          "验算：程序对 x = 0 到 23 逐一计算 x² mod 24，余数为 1 的是 1、5、7、11、13、17、19、23，恰好 8 个 ✓，而这正是 0 到 23 中与 24 互质的所有数。"
+        ],
+        "en": [
+          "Squaring all of 0 to 23 and reducing certainly works, but factoring the modulus first reveals the structure.",
+          "Since 24 = 8 × 3 with 8 and 3 coprime, the condition x² ≡ 1 (mod 24) is equivalent to satisfying both x² ≡ 1 (mod 8) and x² ≡ 1 (mod 3).",
+          "Modulo 8: squaring x = 0 through 7 shows that x² ≡ 1 (mod 8) holds for x ≡ 1, 3, 5, 7 — four residues, namely all the odd ones.",
+          "Modulo 3: the squares of 0, 1 and 2 leave remainders 0, 1 and 1, so the condition holds for x ≡ 1, 2 — two residues, namely those not divisible by 3.",
+          "By the Chinese remainder theorem, each solution mod 8 pairs with each solution mod 3 to give exactly one solution mod 24, and different pairs give different solutions.",
+          "So the total is 4 × 2 = 8 solutions.",
+          "Equivalently, the condition says x is odd and not divisible by 3, that is x is coprime to 24.",
+          "Check: computing x² mod 24 for x = 0 to 23 gives remainder 1 exactly for 1, 5, 7, 11, 13, 17, 19 and 23 — eight values, precisely those coprime to 24."
+        ],
+        "ja": [
+          "0 から 23 まで全部 2 乗して余りを見てもよいのですが、法を素因数分解すると構造が見えます。",
+          "24 = 8 × 3 で 8 と 3 は互いに素なので、x² ≡ 1 (mod 24) は x² ≡ 1 (mod 8) と x² ≡ 1 (mod 3) を**同時に**満たすことと同値です。",
+          "mod 8 では：x = 0 から 7 を 2 乗すると、x² ≡ 1 (mod 8) を満たすのは x ≡ 1、3、5、7 の 4 個、すなわちすべての奇数です。",
+          "mod 3 では：0、1、2 の 2 乗の余りは 0、1、1 なので、満たすのは x ≡ 1、2 の 2 個、すなわち 3 で割り切れない数です。",
+          "中国剰余定理より、mod 8 の各解と mod 3 の各解の組み合わせが mod 24 のただ 1 つの解を与え、異なる組み合わせは異なる解を与えます。",
+          "よって解の総数は 4 × 2 = 8 個です。",
+          "言い換えると、条件は「x が奇数かつ 3 で割り切れない」、すなわち x が 24 と互いに素であることと同値です。",
+          "検算：x = 0 から 23 まで x² mod 24 を計算すると、余りが 1 になるのは 1、5、7、11、13、17、19、23 のちょうど 8 個 ✓ で、これは 24 と互いに素な数と一致します。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "8"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "以中國剩餘定理拆解合成數模：x² ≡ 1 (mod 24) 拆成 mod 8 與 mod 3 兩個條件後相乘",
+        "notes": "設計依據：關鍵是把模 24 拆成互質的 8 與 3，解數相乘而非逐一平方；模 8 有 4 個解（多於直覺的 2 個）是本題最容易低估的一步。詳解另指出解集恰為與 24 互質的數，給出第二層理解。答案 8 已用 x = 0..23 的全窮舉驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（平方同餘解數）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "數論",
+        "topicCode": "number_theory",
+        "subtopic": "平方同餘解數",
+        "subtopicCode": "quadratic_congruence_count"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "number_theory_grade11_foundation_012",
+      "topic": "number_theory",
+      "subtopic": "gcd_mersenne",
+      "difficulty": "foundation",
+      "levelStage": "grade11",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "求 2¹² − 1 與 2¹⁸ − 1 的最大公因數。",
+        "zh-Hans": "求 2¹² − 1 与 2¹⁸ − 1 的最大公因数。",
+        "en": "Find the greatest common divisor of 2¹² − 1 and 2¹⁸ − 1.",
+        "ja": "2¹² − 1 と 2¹⁸ − 1 の最大公約数を求めなさい。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 63。",
+        "zh-Hans": "答案是 63。",
+        "en": "The answer is 63.",
+        "ja": "答えは 63 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "兩個數分別是 4095 與 262143，直接分解也做得到，但有一個更漂亮的性質可以用。",
+          "關鍵事實是：**gcd(2ᵐ − 1, 2ⁿ − 1) = 2^gcd(m, n) − 1**，也就是指數的最大公因數會「傳遞」到整個式子上。",
+          "先看為什麼合理：若 d 是 m 的因數，則 2ᵈ − 1 整除 2ᵐ − 1（因為 2ᵐ − 1 = (2ᵈ − 1)(2^(m−d) + 2^(m−2d) + ⋯ + 1)）。",
+          "所以 2^gcd(m,n) − 1 同時整除兩個數，是公因數；而輾轉相除法可以證明它就是最大的那一個。",
+          "回到本題：先求指數的最大公因數 gcd(12, 18)。12 = 2² × 3、18 = 2 × 3²，所以 gcd(12, 18) = 2 × 3 = 6。",
+          "代入性質得 gcd(2¹² − 1, 2¹⁸ − 1) = 2⁶ − 1 = 64 − 1 = 63。",
+          "驗算：直接計算 2¹² − 1 = 4095、2¹⁸ − 1 = 262143，兩者的最大公因數確實是 63 ✓（4095 = 63 × 65、262143 = 63 × 4161）。",
+          "再抽查性質本身：gcd(2⁶ − 1, 2⁹ − 1) = 7 = 2³ − 1、gcd(2¹⁰ − 1, 2¹⁵ − 1) = 31 = 2⁵ − 1、gcd(2⁸ − 1, 2¹² − 1) = 15 = 2⁴ − 1，全部符合 ✓。"
+        ],
+        "zh-Hans": [
+          "两个数分别是 4095 与 262143，直接分解也做得到，但有一个更漂亮的性质可以用。",
+          "关键事实是：**gcd(2ᵐ − 1, 2ⁿ − 1) = 2^gcd(m, n) − 1**，也就是指数的最大公因数会「传递」到整个式子上。",
+          "先看为什么合理：若 d 是 m 的因数，则 2ᵈ − 1 整除 2ᵐ − 1（因为 2ᵐ − 1 = (2ᵈ − 1)(2^(m−d) + 2^(m−2d) + ⋯ + 1)）。",
+          "所以 2^gcd(m,n) − 1 同时整除两个数，是公因数；而辗转相除法可以证明它就是最大的那一个。",
+          "回到本题：先求指数的最大公因数 gcd(12, 18)。12 = 2² × 3、18 = 2 × 3²，所以 gcd(12, 18) = 2 × 3 = 6。",
+          "代入性质得 gcd(2¹² − 1, 2¹⁸ − 1) = 2⁶ − 1 = 64 − 1 = 63。",
+          "验算：直接计算 2¹² − 1 = 4095、2¹⁸ − 1 = 262143，两者的最大公因数确实是 63 ✓（4095 = 63 × 65、262143 = 63 × 4161）。",
+          "再抽查性质本身：gcd(2⁶ − 1, 2⁹ − 1) = 7 = 2³ − 1、gcd(2¹⁰ − 1, 2¹⁵ − 1) = 31 = 2⁵ − 1、gcd(2⁸ − 1, 2¹² − 1) = 15 = 2⁴ − 1，全部符合 ✓。"
+        ],
+        "en": [
+          "The two numbers are 4095 and 262143, and factoring them directly would work, but there is a prettier property available.",
+          "The key fact is that gcd(2ᵐ − 1, 2ⁿ − 1) = 2^gcd(m, n) − 1: the greatest common divisor of the exponents carries over to the whole expression.",
+          "Why this is plausible: if d divides m then 2ᵈ − 1 divides 2ᵐ − 1, because 2ᵐ − 1 = (2ᵈ − 1)(2^(m−d) + 2^(m−2d) + ⋯ + 1).",
+          "So 2^gcd(m,n) − 1 divides both numbers and is a common divisor; the Euclidean algorithm shows it is the greatest one.",
+          "Back to the problem: first compute gcd(12, 18). Since 12 = 2² × 3 and 18 = 2 × 3², the gcd is 2 × 3 = 6.",
+          "Applying the property: gcd(2¹² − 1, 2¹⁸ − 1) = 2⁶ − 1 = 64 − 1 = 63.",
+          "Check: computing directly, 2¹² − 1 = 4095 and 2¹⁸ − 1 = 262143, whose greatest common divisor is indeed 63, since 4095 = 63 × 65 and 262143 = 63 × 4161.",
+          "Spot-checking the property itself: gcd(2⁶ − 1, 2⁹ − 1) = 7 = 2³ − 1, gcd(2¹⁰ − 1, 2¹⁵ − 1) = 31 = 2⁵ − 1 and gcd(2⁸ − 1, 2¹² − 1) = 15 = 2⁴ − 1, all consistent."
+        ],
+        "ja": [
+          "2 つの数はそれぞれ 4095 と 262143 で、直接素因数分解しても解けますが、より美しい性質が使えます。",
+          "鍵となる事実は **gcd(2ᵐ − 1, 2ⁿ − 1) = 2^gcd(m, n) − 1**、つまり指数の最大公約数が式全体に「引き継がれる」ことです。",
+          "もっともらしさの確認：d が m の約数なら 2ᵈ − 1 は 2ᵐ − 1 を割り切ります（2ᵐ − 1 = (2ᵈ − 1)(2^(m−d) + 2^(m−2d) + ⋯ + 1) だからです）。",
+          "したがって 2^gcd(m,n) − 1 は両方を割り切る公約数であり、互除法によりそれが最大であることが示せます。",
+          "本問に戻ります。まず指数の最大公約数 gcd(12, 18) を求めます。12 = 2² × 3、18 = 2 × 3² なので gcd = 2 × 3 = 6。",
+          "性質に代入して gcd(2¹² − 1, 2¹⁸ − 1) = 2⁶ − 1 = 64 − 1 = 63。",
+          "検算：直接計算すると 2¹² − 1 = 4095、2¹⁸ − 1 = 262143 で、最大公約数は確かに 63 ✓（4095 = 63 × 65、262143 = 63 × 4161）。",
+          "性質そのものも確認します：gcd(2⁶ − 1, 2⁹ − 1) = 7 = 2³ − 1、gcd(2¹⁰ − 1, 2¹⁵ − 1) = 31 = 2⁵ − 1、gcd(2⁸ − 1, 2¹² − 1) = 15 = 2⁴ − 1 とすべて整合します ✓。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "63"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "梅森數的最大公因數：gcd(2ᵐ−1, 2ⁿ−1) = 2^gcd(m,n) − 1，把問題轉到指數上",
+        "notes": "設計依據：核心是察覺最大公因數的運算可以「下降到指數」，避開兩個大數的分解；詳解先說明 d | m 時 2ᵈ−1 整除 2ᵐ−1 的因式分解依據，再以三組不同的 (m, n) 抽查性質本身。答案 63 已用直接計算 gcd(4095, 262143) 驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（梅森數的最大公因數）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "數論",
+        "topicCode": "number_theory",
+        "subtopic": "梅森數的最大公因數",
+        "subtopicCode": "gcd_mersenne"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "number_theory_grade11_foundation_013",
+      "topic": "number_theory",
+      "subtopic": "decimal_period_length",
+      "difficulty": "foundation",
+      "levelStage": "grade11",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "把分數 1/17 化成十進位小數後會得到一個純循環小數。求它的循環節長度（也就是最短的重複區段包含幾位數字）。",
+        "zh-Hans": "把分数 1/17 化成十进位小数后会得到一个纯循环小数。求它的循环节长度（也就是最短的重复区段包含几位数字）。",
+        "en": "Written as a decimal, the fraction 1/17 is purely repeating. Find the length of its repeating block, that is how many digits the shortest repeating segment contains.",
+        "ja": "分数 1/17 を十進小数で表すと純循環小数になります。その循環節の長さ（最短の繰り返し部分が何桁か）を求めなさい。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 16。",
+        "zh-Hans": "答案是 16。",
+        "en": "The answer is 16.",
+        "ja": "答えは 16 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "先把「循環節長度」翻譯成同餘的語言，這是解這類題的關鍵一步。",
+          "做長除法時，每一步的餘數決定了後續所有的商，所以**餘數一旦重複，小數就開始循環**。",
+          "1/17 的長除法中，第 k 步的餘數是 10ᵏ 除以 17 的餘數。所以循環節長度就是使 10ᵏ ≡ 1 (mod 17) 成立的**最小正整數 k**。",
+          "17 是質數且不整除 10，由費馬小定理，10¹⁶ ≡ 1 (mod 17)，所以這個最小的 k 一定存在，而且必定整除 16。",
+          "16 的正因數只有 1、2、4、8、16 這五個，所以只需檢查這幾個候選，不必逐一試到 16。",
+          "逐一計算：10¹ ≡ 10、10² ≡ 15、10⁴ ≡ 4、10⁸ ≡ 16（都不是 1），所以前四個候選全部排除。",
+          "剩下唯一的可能是 k = 16，因此循環節長度是 16。",
+          "驗算：實際做長除法得 1/17 = 0.05882352941176470588…，前 20 位中可以看到「0588」在第 17 位重新出現，確認週期為 16 ✓。程式也確認 10¹⁶ mod 17 = 1 而 k = 1 到 15 都不為 1。附帶對照：1/7 的循環節長度是 6、1/13 也是 6。"
+        ],
+        "zh-Hans": [
+          "先把「循环节长度」翻译成同余的语言，这是解这类题的关键一步。",
+          "做长除法时，每一步的余数决定了后续所有的商，所以**余数一旦重复，小数就开始循环**。",
+          "1/17 的长除法中，第 k 步的余数是 10ᵏ 除以 17 的余数。所以循环节长度就是使 10ᵏ ≡ 1 (mod 17) 成立的**最小正整数 k**。",
+          "17 是质数且不整除 10，由费马小定理，10¹⁶ ≡ 1 (mod 17)，所以这个最小的 k 一定存在，而且必定整除 16。",
+          "16 的正因数只有 1、2、4、8、16 这五个，所以只需检查这几个候选，不必逐一试到 16。",
+          "逐一计算：10¹ ≡ 10、10² ≡ 15、10⁴ ≡ 4、10⁸ ≡ 16（都不是 1），所以前四个候选全部排除。",
+          "剩下唯一的可能是 k = 16，因此循环节长度是 16。",
+          "验算：实际做长除法得 1/17 = 0.05882352941176470588…，前 20 位中可以看到「0588」在第 17 位重新出现，确认周期为 16 ✓。程序也确认 10¹⁶ mod 17 = 1 而 k = 1 到 15 都不为 1。附带对照：1/7 的循环节长度是 6、1/13 也是 6。"
+        ],
+        "en": [
+          "First translate \"period length\" into the language of congruences, which is the key step for this kind of problem.",
+          "In long division each step's remainder determines all subsequent digits, so the decimal begins repeating exactly when a remainder recurs.",
+          "In the long division of 1/17 the remainder at step k is 10ᵏ reduced modulo 17, so the period is the smallest positive integer k with 10ᵏ ≡ 1 (mod 17).",
+          "Since 17 is prime and does not divide 10, Fermat's little theorem gives 10¹⁶ ≡ 1 (mod 17), so such a smallest k exists and must divide 16.",
+          "The positive divisors of 16 are just 1, 2, 4, 8 and 16, so only these candidates need testing rather than every value up to 16.",
+          "Computing them: 10¹ ≡ 10, 10² ≡ 15, 10⁴ ≡ 4 and 10⁸ ≡ 16, none of which is 1, so the first four candidates are eliminated.",
+          "The only remaining possibility is k = 16, so the period length is 16.",
+          "Check: long division gives 1/17 = 0.05882352941176470588…, where the block \"0588\" reappears at the 17th digit, confirming a period of 16. A program also confirms 10¹⁶ mod 17 = 1 while k = 1 through 15 all fail. For comparison, 1/7 and 1/13 both have period 6."
+        ],
+        "ja": [
+          "まず「循環節の長さ」を合同式の言葉に翻訳します。これがこの種の問題の要です。",
+          "筆算による割り算では、各段階の余りがその後の商をすべて決めるので、**余りが繰り返された時点で小数は循環を始めます**。",
+          "1/17 の筆算では第 k 段階の余りが 10ᵏ を 17 で割った余りになります。したがって循環節の長さは 10ᵏ ≡ 1 (mod 17) を満たす**最小の正の整数 k** です。",
+          "17 は素数で 10 を割り切らないので、フェルマーの小定理より 10¹⁶ ≡ 1 (mod 17)。よってそのような最小の k は存在し、しかも 16 を割り切ります。",
+          "16 の正の約数は 1、2、4、8、16 の 5 つだけなので、16 まで順に試す必要はなくこの候補だけ調べれば十分です。",
+          "計算すると 10¹ ≡ 10、10² ≡ 15、10⁴ ≡ 4、10⁸ ≡ 16 でいずれも 1 ではないため、最初の 4 候補は除外されます。",
+          "残る可能性は k = 16 だけなので、循環節の長さは 16 です。",
+          "検算：筆算すると 1/17 = 0.05882352941176470588… となり、「0588」が 17 桁目で再び現れることから周期 16 が確認できます ✓。プログラムでも 10¹⁶ mod 17 = 1 かつ k = 1〜15 では 1 にならないことを確認しました。参考までに 1/7 と 1/13 の循環節はどちらも 6 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "16"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "循環小數的週期等於 10 模分母的乘法階：由費馬小定理限定候選為 16 的因數再逐一排除",
+        "notes": "設計依據：核心是把週期翻譯成「使 10ᵏ ≡ 1 的最小 k」，並用費馬小定理把候選壓到 16 的五個因數，避免逐一試到 16；1/17 恰為週期達到最大值 p−1 的情形，使排除過程完整可見。答案 16 已用長除法展開與 10ᵏ mod 17 的逐一計算雙向驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（循環小數週期）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "數論",
+        "topicCode": "number_theory",
+        "subtopic": "循環小數週期",
+        "subtopicCode": "decimal_period_length"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "number_theory_grade11_foundation_014",
+      "topic": "number_theory",
+      "subtopic": "lcm_range",
+      "difficulty": "foundation",
+      "levelStage": "grade11",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "求 1、2、3、⋯、10 這十個正整數的最小公倍數。",
+        "zh-Hans": "求 1、2、3、⋯、10 这十个正整数的最小公倍数。",
+        "en": "Find the least common multiple of the ten positive integers 1, 2, 3, …, 10.",
+        "ja": "1、2、3、⋯、10 の 10 個の正の整数の最小公倍数を求めなさい。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 2520。",
+        "zh-Hans": "答案是 2520。",
+        "en": "The answer is 2520.",
+        "ja": "答えは 2520 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "把十個數逐一取最小公倍數當然可行，但用質因數分解一次看完會更快也更不容易錯。",
+          "最小公倍數的規則是：**對每一個出現過的質因數，取它在這些數中出現過的最高次方，再全部相乘**。",
+          "先找出 1 到 10 中出現的質數：2、3、5、7。",
+          "質因數 2：在 1 到 10 中，2 的最高次方是 8 = 2³（因為 16 = 2⁴ 已經超過 10），所以取 2³ = 8。",
+          "質因數 3：最高次方是 9 = 3²（27 已超過 10），所以取 3² = 9。",
+          "質因數 5 與 7：它們的平方 25、49 都超過 10，所以各自只取一次方，即 5 和 7。",
+          "把它們相乘：8 × 9 × 5 × 7 = 72 × 35 = 2520。",
+          "驗算：2520 確實能被 1 到 10 的每一個數整除 ✓。而且不能更小——例如把答案減半得 1260，它已經不能被 8 整除（1260 ÷ 8 = 157.5），程式檢查也確認 1260 無法被 1 到 10 全部整除。逐步取最小公倍數的作法同樣得到 2520。"
+        ],
+        "zh-Hans": [
+          "把十个数逐一取最小公倍数当然可行，但用质因数分解一次看完会更快也更不容易错。",
+          "最小公倍数的规则是：**对每一个出现过的质因数，取它在这些数中出现过的最高次方，再全部相乘**。",
+          "先找出 1 到 10 中出现的质数：2、3、5、7。",
+          "质因数 2：在 1 到 10 中，2 的最高次方是 8 = 2³（因为 16 = 2⁴ 已经超过 10），所以取 2³ = 8。",
+          "质因数 3：最高次方是 9 = 3²（27 已超过 10），所以取 3² = 9。",
+          "质因数 5 与 7：它们的平方 25、49 都超过 10，所以各自只取一次方，即 5 和 7。",
+          "把它们相乘：8 × 9 × 5 × 7 = 72 × 35 = 2520。",
+          "验算：2520 确实能被 1 到 10 的每一个数整除 ✓。而且不能更小——例如把答案减半得 1260，它已经不能被 8 整除（1260 ÷ 8 = 157.5），程序检查也确认 1260 无法被 1 到 10 全部整除。逐步取最小公倍数的做法同样得到 2520。"
+        ],
+        "en": [
+          "Taking least common multiples one number at a time works, but a single pass through the prime factorisations is faster and less error-prone.",
+          "The rule for a least common multiple is: for each prime that appears, take the highest power of it occurring among the numbers, then multiply everything together.",
+          "The primes appearing among 1 to 10 are 2, 3, 5 and 7.",
+          "For the prime 2: the highest power of 2 at most 10 is 8 = 2³, since 16 = 2⁴ exceeds 10, so take 2³ = 8.",
+          "For the prime 3: the highest power is 9 = 3², since 27 exceeds 10, so take 3² = 9.",
+          "For 5 and 7: their squares 25 and 49 both exceed 10, so each is taken to the first power, giving 5 and 7.",
+          "Multiplying: 8 × 9 × 5 × 7 = 72 × 35 = 2520.",
+          "Check: 2520 is divisible by every number from 1 to 10. And nothing smaller works — halving to 1260 already fails divisibility by 8, since 1260 ÷ 8 = 157.5, and a program confirms 1260 is not divisible by all of 1 to 10. Taking least common multiples step by step also yields 2520."
+        ],
+        "ja": [
+          "10 個の数について順に最小公倍数をとってもよいのですが、素因数分解でまとめて見るほうが速く間違いも少なくなります。",
+          "最小公倍数の規則は、**現れる各素因数について、その中での最大の指数をとり、すべて掛け合わせる**ことです。",
+          "1 から 10 に現れる素数は 2、3、5、7 です。",
+          "素因数 2：10 以下で最大の 2 の累乗は 8 = 2³ です（16 = 2⁴ は 10 を超えます）。よって 2³ = 8。",
+          "素因数 3：最大の累乗は 9 = 3² です（27 は 10 を超えます）。よって 3² = 9。",
+          "素因数 5 と 7：それぞれの平方 25、49 は 10 を超えるので 1 乗のみ、すなわち 5 と 7 をとります。",
+          "掛け合わせると 8 × 9 × 5 × 7 = 72 × 35 = 2520。",
+          "検算：2520 は 1 から 10 のすべてで割り切れます ✓。これより小さくはできず、たとえば半分の 1260 は 8 で割り切れません（1260 ÷ 8 = 157.5）。プログラムでも 1260 が 1〜10 すべてでは割り切れないことを確認しました。順に最小公倍数をとる方法でも 2520 が得られます。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "2520"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 4
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "連續整數的最小公倍數：對每個質數取範圍內的最高次方再相乘",
+        "notes": "設計依據：關鍵是理解 lcm 取的是「每個質數的最高次方」而非把所有數相乘（後者會得到 3628800）；2 與 3 各有超過一次方的情形（8 = 2³、9 = 3²），使規則的作用明確可見。詳解另以「減半後不再被 8 整除」說明答案的最小性。答案 2520 已用逐步 lcm 與質因數觀點兩種方式交叉驗證，並檢查 1..10 的整除性。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（連續整數的最小公倍數）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "數論",
+        "topicCode": "number_theory",
+        "subtopic": "連續整數的最小公倍數",
+        "subtopicCode": "lcm_range"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "number_theory_grade11_foundation_015",
+      "topic": "number_theory",
+      "subtopic": "pythagorean_perimeter",
+      "difficulty": "foundation",
+      "levelStage": "grade11",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "三邊長都是正整數的直角三角形中，周長恰好等於 60 的共有多少個？（全等的三角形視為同一個）",
+        "zh-Hans": "三边长都是正整数的直角三角形中，周长恰好等于 60 的共有多少个？（全等的三角形视为同一个）",
+        "en": "How many right triangles with integer side lengths have perimeter exactly 60? Congruent triangles count as the same.",
+        "ja": "3 辺の長さがすべて正の整数である直角三角形のうち、周の長さがちょうど 60 になるものは何個ありますか。（合同なものは同じとみなします）"
+      },
+      "answer": {
+        "zh-Hant": "答案是 2 個。",
+        "zh-Hans": "答案是 2 个。",
+        "en": "The answer is 2.",
+        "ja": "答えは 2 個です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "設三邊為 a ≤ b < c，其中 c 是斜邊。條件有兩個：a + b + c = 60（周長）與 a² + b² = c²（畢氏定理）。",
+          "先縮小搜尋範圍。因為 c 是最長邊，c 必定大於周長的三分之一，也就是 c > 20。",
+          "另一方面，三角形不等式要求 a + b > c，而 a + b = 60 − c，所以 60 − c > c，得 c < 30。",
+          "所以斜邊 c 只能在 21 到 29 之間，只有 9 種可能，可以逐一檢查。",
+          "對每個 c，由周長得 a + b = 60 − c；再由 a² + b² = c² 與 (a + b)² = a² + 2ab + b²，得 2ab = (60 − c)² − c² = 3600 − 120c。",
+          "所以 ab = 1800 − 60c。有了 a + b 與 ab，a 和 b 就是二次方程的兩根，只要判別式是完全平方且根為正整數即可。",
+          "逐一檢查後只有兩組成立：(10, 24, 26) 與 (15, 20, 25)。",
+          "驗算：10² + 24² = 100 + 576 = 676 = 26² ✓ 且 10 + 24 + 26 = 60 ✓；15² + 20² = 225 + 400 = 625 = 25² ✓ 且 15 + 20 + 25 = 60 ✓。程式對所有 a ≤ b ≤ c 且和為 60 的三元組窮舉，找到的正是這 2 組 ✓。"
+        ],
+        "zh-Hans": [
+          "设三边为 a ≤ b < c，其中 c 是斜边。条件有两个：a + b + c = 60（周长）与 a² + b² = c²（勾股定理）。",
+          "先缩小搜索范围。因为 c 是最长边，c 必定大于周长的三分之一，也就是 c > 20。",
+          "另一方面，三角形不等式要求 a + b > c，而 a + b = 60 − c，所以 60 − c > c，得 c < 30。",
+          "所以斜边 c 只能在 21 到 29 之间，只有 9 种可能，可以逐一检查。",
+          "对每个 c，由周长得 a + b = 60 − c；再由 a² + b² = c² 与 (a + b)² = a² + 2ab + b²，得 2ab = (60 − c)² − c² = 3600 − 120c。",
+          "所以 ab = 1800 − 60c。有了 a + b 与 ab，a 和 b 就是二次方程的两根，只要判别式是完全平方且根为正整数即可。",
+          "逐一检查后只有两组成立：(10, 24, 26) 与 (15, 20, 25)。",
+          "验算：10² + 24² = 100 + 576 = 676 = 26² ✓ 且 10 + 24 + 26 = 60 ✓；15² + 20² = 225 + 400 = 625 = 25² ✓ 且 15 + 20 + 25 = 60 ✓。程序对所有 a ≤ b ≤ c 且和为 60 的三元组穷举，找到的正是这 2 组 ✓。"
+        ],
+        "en": [
+          "Let the sides be a ≤ b < c with c the hypotenuse. There are two conditions: a + b + c = 60 for the perimeter and a² + b² = c² by Pythagoras.",
+          "First narrow the search. Since c is the longest side it must exceed a third of the perimeter, so c > 20.",
+          "On the other hand the triangle inequality requires a + b > c, and a + b = 60 − c, so 60 − c > c and therefore c < 30.",
+          "So the hypotenuse lies between 21 and 29, only nine possibilities, which can be checked one by one.",
+          "For each c the perimeter gives a + b = 60 − c, and combining a² + b² = c² with (a + b)² = a² + 2ab + b² gives 2ab = (60 − c)² − c² = 3600 − 120c.",
+          "So ab = 1800 − 60c. Knowing a + b and ab makes a and b the roots of a quadratic, and it remains to check when the discriminant is a perfect square with positive integer roots.",
+          "Checking through, only two triples work: (10, 24, 26) and (15, 20, 25).",
+          "Check: 10² + 24² = 100 + 576 = 676 = 26² with 10 + 24 + 26 = 60, and 15² + 20² = 225 + 400 = 625 = 25² with 15 + 20 + 25 = 60. A brute-force search over all triples a ≤ b ≤ c summing to 60 finds exactly these 2."
+        ],
+        "ja": [
+          "3 辺を a ≤ b < c（c は斜辺）とします。条件は a + b + c = 60（周の長さ）と a² + b² = c²（三平方の定理）の 2 つです。",
+          "まず探索範囲を絞ります。c は最長辺なので周の 3 分の 1 より大きく、c > 20。",
+          "一方、三角不等式より a + b > c であり a + b = 60 − c なので 60 − c > c、すなわち c < 30。",
+          "したがって斜辺 c は 21 から 29 までの 9 通りに限られ、1 つずつ調べられます。",
+          "各 c について、周の条件から a + b = 60 − c。さらに a² + b² = c² と (a + b)² = a² + 2ab + b² から 2ab = (60 − c)² − c² = 3600 − 120c。",
+          "よって ab = 1800 − 60c。a + b と ab が分かれば a、b は 2 次方程式の 2 解なので、判別式が平方数で解が正の整数になるかを調べます。",
+          "順に調べると成立するのは 2 組だけです：(10, 24, 26) と (15, 20, 25)。",
+          "検算：10² + 24² = 100 + 576 = 676 = 26² ✓ かつ 10 + 24 + 26 = 60 ✓、15² + 20² = 225 + 400 = 625 = 25² ✓ かつ 15 + 20 + 25 = 60 ✓。a ≤ b ≤ c で和が 60 の 3 数組を全探索すると、ちょうどこの 2 組が見つかります ✓。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "2"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "指定周長的整數直角三角形：以 c > 周長/3 與三角形不等式把斜邊夾在 21 到 29 之間",
+        "notes": "設計依據：關鍵是先把斜邊的範圍夾出來（下界由最長邊、上界由三角形不等式），再用 a + b 與 ab 化為二次方程，使九個候選可逐一判定；不縮範圍則需在整個 60 以內盲目搜尋。答案 2 已用滿足 a ≤ b ≤ c 且和為 60 的三元組全窮舉驗證，並逐一代回畢氏定理與周長。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（指定周長的畢氏三角形）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "數論",
+        "topicCode": "number_theory",
+        "subtopic": "指定周長的畢氏三角形",
+        "subtopicCode": "pythagorean_perimeter"
+      },
+      "reviewStatus": "ok"
     }
   ]
 }
