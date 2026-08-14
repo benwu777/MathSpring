@@ -917,6 +917,550 @@
         "subtopic": "排列對稱計數",
         "subtopicCode": "heavy_tailed_permutation"
       }
+    },
+    {
+      "id": "combinatorics_grade12_foundation_010",
+      "topic": "combinatorics",
+      "subtopic": "catalan_bracket",
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "用 4 個左括號與 4 個右括號排成一列，共 8 個符號。若要求從左邊數起的任何時刻，已出現的右括號數量都不超過左括號的數量（也就是括號能正確配對），這樣的排法共有多少種？",
+        "zh-Hans": "用 4 个左括号与 4 个右括号排成一列，共 8 个符号。若要求从左边数起的任何时刻，已出现的右括号数量都不超过左括号的数量（也就是括号能正确配对），这样的排法共有多少种？",
+        "en": "Arrange 4 left brackets and 4 right brackets in a row of 8 symbols. Reading from the left, at every point the number of right brackets so far must not exceed the number of left brackets, so that the brackets match correctly. How many such arrangements are there?",
+        "ja": "左括弧 4 個と右括弧 4 個を並べて 8 個の記号の列をつくります。左から読んでいくどの時点でも、それまでに現れた右括弧の個数が左括弧の個数を超えないようにする（つまり括弧が正しく対応する）とき、そのような並べ方は何通りありますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 14 種。",
+        "zh-Hans": "答案是 14 种。",
+        "en": "The answer is 14.",
+        "ja": "答えは 14 通りです。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "先算不加限制的總數：8 個位置中選 4 個放左括號，有 C(8, 4) = 70 種。接著要扣掉「中途右括號超過左括號」的不合法排法。",
+          "計算不合法排法的標準技巧是**反射法**。若一個排法不合法，就存在一個最早的時刻，右括號的數量首次超過左括號。",
+          "把這個時刻**之後**的所有符號全部左右互換（左變右、右變左）。",
+          "在那個最早的時刻，前面部分恰好是「右括號比左括號多 1 個」；互換後面之後，整串的左右括號數量會從 4 比 4 變成 3 比 5。",
+          "這個對應是可逆的：任何一個「3 個左括號、5 個右括號」的排列都必定在某處首次出現右超過左，把該處之後互換回去就還原成原來的不合法排法。",
+          "所以不合法的排法數，恰好等於「3 個左括號、5 個右括號」的排列數，也就是 C(8, 3) = 56 種。",
+          "因此合法排法 = 70 − 56 = 14 種。（這正是第 4 個卡塔蘭數。）",
+          "驗算：程式窮舉全部 2⁸ = 256 個由左右括號組成的長度 8 字串，逐一模擬檢查括號是否始終配對得上，合法的恰好 14 個 ✓；且與卡塔蘭數列 1、1、2、5、14、42 的第 4 項相符。"
+        ],
+        "zh-Hans": [
+          "先算不加限制的总数：8 个位置中选 4 个放左括号，有 C(8, 4) = 70 种。接着要扣掉「中途右括号超过左括号」的不合法排法。",
+          "计算不合法排法的标准技巧是**反射法**。若一个排法不合法，就存在一个最早的时刻，右括号的数量首次超过左括号。",
+          "把这个时刻**之后**的所有符号全部左右互换（左变右、右变左）。",
+          "在那个最早的时刻，前面部分恰好是「右括号比左括号多 1 个」；互换后面之后，整串的左右括号数量会从 4 比 4 变成 3 比 5。",
+          "这个对应是可逆的：任何一个「3 个左括号、5 个右括号」的排列都必定在某处首次出现右超过左，把该处之后互换回去就还原成原来的不合法排法。",
+          "所以不合法的排法数，恰好等于「3 个左括号、5 个右括号」的排列数，也就是 C(8, 3) = 56 种。",
+          "因此合法排法 = 70 − 56 = 14 种。（这正是第 4 个卡塔兰数。）",
+          "验算：程序穷举全部 2⁸ = 256 个由左右括号组成的长度 8 字符串，逐一模拟检查括号是否始终配对得上，合法的恰好 14 个 ✓；且与卡塔兰数列 1、1、2、5、14、42 的第 4 项相符。"
+        ],
+        "en": [
+          "First count without restriction: choosing 4 of the 8 positions for left brackets gives C(8, 4) = 70. Then subtract the illegal arrangements where right brackets get ahead partway through.",
+          "The standard technique for counting the illegal ones is the reflection method. If an arrangement is illegal, there is an earliest moment at which right brackets first outnumber left ones.",
+          "Flip every symbol after that moment, turning each left bracket into a right one and vice versa.",
+          "At that earliest moment the prefix has exactly one more right bracket than left; after flipping the rest, the whole string changes from 4 and 4 to 3 left and 5 right.",
+          "The correspondence is reversible: any arrangement of 3 left and 5 right brackets must somewhere first have right brackets outnumber left, and flipping after that point restores the original illegal arrangement.",
+          "So the number of illegal arrangements equals the number of strings with 3 left and 5 right brackets, namely C(8, 3) = 56.",
+          "Therefore the legal count is 70 − 56 = 14, which is the fourth Catalan number.",
+          "Check: enumerating all 2⁸ = 256 strings of length 8 over the two bracket symbols and simulating the matching condition leaves exactly 14, agreeing with the Catalan sequence 1, 1, 2, 5, 14, 42 at its fourth term."
+        ],
+        "ja": [
+          "まず制限なしの総数を数えます：8 か所から 4 か所を左括弧に選ぶので C(8, 4) = 70 通り。ここから途中で右括弧が左括弧を上回る不正な並びを引きます。",
+          "不正な並びを数える定石が**鏡像法（反射法）**です。不正な並びには、右括弧が左括弧を初めて上回る最も早い時点が存在します。",
+          "その時点**より後ろ**の記号をすべて左右反転させます（左は右に、右は左に）。",
+          "その最早時点で前半は「右括弧が左括弧より 1 個多い」状態であり、後ろを反転すると全体の個数は 4 対 4 から左 3・右 5 に変わります。",
+          "この対応は可逆です：左 3・右 5 の任意の並びは必ずどこかで初めて右が左を上回るので、その後ろを反転し直せばもとの不正な並びに戻ります。",
+          "したがって不正な並びの数は左 3・右 5 の並びの数に等しく、C(8, 3) = 56 通りです。",
+          "よって正しい並びは 70 − 56 = 14 通り。（これが 4 番目のカタラン数です。）",
+          "検算：長さ 8 の括弧列 2⁸ = 256 通りをすべて列挙し対応が保たれるか順に確認すると、ちょうど 14 通り ✓。カタラン数列 1、1、2、5、14、42 の第 4 項とも一致します。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "14"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "括號配對計數的反射法：把首次違規之後的符號互換，與 3 左 5 右的排列一一對應",
+        "notes": "設計依據：核心是反射法建立的雙射，把難以直接數的不合法情形轉成一個乾淨的組合數 C(8,3)；直接分類討論違規位置會相當繁瑣。詳解特別說明對應的可逆性，這是雙射論證不可省的一半。答案 14 已用 256 個字串的全窮舉模擬配對驗證，並與卡塔蘭數列對照。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（括號配對）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "組合",
+        "topicCode": "combinatorics",
+        "subtopic": "括號配對",
+        "subtopicCode": "catalan_bracket"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "combinatorics_grade12_foundation_011",
+      "topic": "combinatorics",
+      "subtopic": "bell_number",
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "把 4 個相異的球分成若干堆，每一堆都不可以是空的，而且堆與堆之間不分先後（只看哪些球被分在一起）。求不同的分法共有多少種。",
+        "zh-Hans": "把 4 个相异的球分成若干堆，每一堆都不可以是空的，而且堆与堆之间不分先后（只看哪些球被分在一起）。求不同的分法共有多少种。",
+        "en": "Four distinct balls are separated into some number of non-empty groups, where the groups are unordered so only the partition into groups matters. How many different ways are there?",
+        "ja": "相異なる 4 個のボールをいくつかの空でないグループに分けます。グループの間に順序はなく、どのボールが同じグループかだけが問題です。分け方は何通りありますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 15 種。",
+        "zh-Hans": "答案是 15 种。",
+        "en": "The answer is 15.",
+        "ja": "答えは 15 通りです。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "題目沒有指定要分成幾堆，所以要**依堆數分類**，把各種情況分別數完再相加。",
+          "分成 1 堆：四個球全部在一起，只有 1 種。",
+          "分成 4 堆：每個球自成一堆，也只有 1 種。",
+          "分成 2 堆：可能是「3 個 + 1 個」或「2 個 + 2 個」。",
+          "「3 + 1」型：只要決定哪個球單獨一堆，有 4 種。「2 + 2」型：先選出兩個球配成一堆有 C(4, 2) = 6 種，但因為兩堆不分先後，每種分法被算了兩次，所以是 6 ÷ 2 = 3 種。合計 4 + 3 = 7 種。",
+          "分成 3 堆：只可能是「2 個 + 1 個 + 1 個」。只要決定哪兩個球配在一起，有 C(4, 2) = 6 種，其餘兩球各自成堆，所以是 6 種。",
+          "把各類相加：1 + 7 + 6 + 1 = 15 種。",
+          "常見錯誤是在「2 + 2」型忘記除以 2（會多算 3 種而答成 18），或漏掉只分成 1 堆的情形。",
+          "驗算：程式遞迴枚舉 {1, 2, 3, 4} 的全部集合分割，得到 15 種 ✓，依堆數統計為 1 堆 1 種、2 堆 7 種、3 堆 6 種、4 堆 1 種，與上述分類逐項相符。"
+        ],
+        "zh-Hans": [
+          "题目没有指定要分成几堆，所以要**依堆数分类**，把各种情况分别数完再相加。",
+          "分成 1 堆：四个球全部在一起，只有 1 种。",
+          "分成 4 堆：每个球自成一堆，也只有 1 种。",
+          "分成 2 堆：可能是「3 个 + 1 个」或「2 个 + 2 个」。",
+          "「3 + 1」型：只要决定哪个球单独一堆，有 4 种。「2 + 2」型：先选出两个球配成一堆有 C(4, 2) = 6 种，但因为两堆不分先后，每种分法被算了两次，所以是 6 ÷ 2 = 3 种。合计 4 + 3 = 7 种。",
+          "分成 3 堆：只可能是「2 个 + 1 个 + 1 个」。只要决定哪两个球配在一起，有 C(4, 2) = 6 种，其余两球各自成堆，所以是 6 种。",
+          "把各类相加：1 + 7 + 6 + 1 = 15 种。",
+          "常见错误是在「2 + 2」型忘记除以 2（会多算 3 种而答成 18），或漏掉只分成 1 堆的情形。",
+          "验算：程序递归枚举 {1, 2, 3, 4} 的全部集合分割，得到 15 种 ✓，依堆数统计为 1 堆 1 种、2 堆 7 种、3 堆 6 种、4 堆 1 种，与上述分类逐项相符。"
+        ],
+        "en": [
+          "The number of groups is not specified, so classify by how many groups there are and add the cases.",
+          "Into 1 group: all four balls together, just 1 way.",
+          "Into 4 groups: each ball alone, again just 1 way.",
+          "Into 2 groups: the shapes are either 3 + 1 or 2 + 2.",
+          "For 3 + 1, simply choose which ball is alone, giving 4 ways. For 2 + 2, choosing two balls to pair gives C(4, 2) = 6, but since the two groups are unordered each split is counted twice, giving 6 ÷ 2 = 3. Together that is 4 + 3 = 7.",
+          "Into 3 groups: the only shape is 2 + 1 + 1. Choose which two balls share a group, C(4, 2) = 6, and the other two stand alone, so 6 ways.",
+          "Adding the cases: 1 + 7 + 6 + 1 = 15.",
+          "Common errors are forgetting to divide by 2 in the 2 + 2 case, overcounting by 3 and answering 18, or omitting the single-group case entirely.",
+          "Check: recursively enumerating all set partitions of {1, 2, 3, 4} gives 15, with counts by number of groups of 1, 7, 6 and 1, matching the classification term by term."
+        ],
+        "ja": [
+          "グループの個数は指定されていないので、**グループ数で場合分け**して数え上げ、最後に足します。",
+          "1 グループ：4 個すべてが一緒で 1 通りだけ。",
+          "4 グループ：各ボールが単独で、やはり 1 通りだけ。",
+          "2 グループ：形は「3 個 + 1 個」か「2 個 + 2 個」です。",
+          "「3 + 1」型：単独になるボールを選ぶだけなので 4 通り。「2 + 2」型：組にする 2 個を選ぶと C(4, 2) = 6 通りですが、2 つのグループに順序がないため各分け方が 2 回数えられ、6 ÷ 2 = 3 通り。合わせて 4 + 3 = 7 通り。",
+          "3 グループ：形は「2 個 + 1 個 + 1 個」のみ。組にする 2 個を選べば残りは単独なので C(4, 2) = 6 通り。",
+          "各分類を足すと 1 + 7 + 6 + 1 = 15 通り。",
+          "よくある誤りは「2 + 2」型で 2 で割り忘れて 3 通り多く数え 18 と答えること、あるいは 1 グループの場合を落とすことです。",
+          "検算：{1, 2, 3, 4} の集合分割を再帰的に全列挙すると 15 通り ✓。グループ数別では 1 個 1 通り、2 個 7 通り、3 個 6 通り、4 個 1 通りとなり、上の分類と項ごとに一致します。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "15"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "集合分割的分類計數：依堆數與堆的形狀分類，並在對稱的「2 + 2」型除以 2",
+        "notes": "設計依據：兩個容易失分處——「2 + 2」型因兩堆不分先後需除以 2（漏掉會答 18），以及不可遺漏「全部一堆」與「各自一堆」兩個極端情形。答案 15 已用集合分割的遞迴全枚舉驗證，並依堆數逐項比對分類結果。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（集合的分割數）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "組合",
+        "topicCode": "combinatorics",
+        "subtopic": "集合的分割數",
+        "subtopicCode": "bell_number"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "combinatorics_grade12_foundation_012",
+      "topic": "combinatorics",
+      "subtopic": "exactly_one_fixed_point",
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "5 封不同的信要放進 5 個各自對應的信封，每個信封恰放一封信。求恰好只有 1 封信放進正確信封的放法共有多少種。",
+        "zh-Hans": "5 封不同的信要放进 5 个各自对应的信封，每个信封恰放一封信。求恰好只有 1 封信放进正确信封的放法共有多少种。",
+        "en": "Five different letters are placed into their five corresponding envelopes, one letter per envelope. In how many ways is exactly one letter placed in its correct envelope?",
+        "ja": "5 通の異なる手紙を、それぞれ対応する 5 つの封筒に 1 通ずつ入れます。ちょうど 1 通だけが正しい封筒に入る入れ方は何通りありますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 45 種。",
+        "zh-Hans": "答案是 45 种。",
+        "en": "The answer is 45.",
+        "ja": "答えは 45 通りです。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "把問題拆成兩個獨立的步驟：先決定「哪一封信放對」，再處理其餘四封「全部放錯」。",
+          "第一步：從 5 封信中選出恰好放對的那一封，有 C(5, 1) = 5 種選擇。",
+          "第二步：剩下的 4 封信必須**全部都放錯**（若還有任何一封放對，放對的總數就會超過 1，不符合「恰好 1 封」）。這種「全部錯位」的排法稱為錯排。",
+          "計算 4 個元素的錯排數 D(4)。用容斥原理：D(4) = 4! − C(4,1)×3! + C(4,2)×2! − C(4,3)×1! + C(4,4)×0!。",
+          "逐項計算：24 − 4 × 6 + 6 × 2 − 4 × 1 + 1 × 1 = 24 − 24 + 12 − 4 + 1 = 9。",
+          "所以 D(4) = 9，也就是四封信全部放錯的方法有 9 種。",
+          "兩步相乘：5 × 9 = 45 種。",
+          "驗算：程式窮舉 5! = 120 個排列，統計固定點（放對的信）個數的分布為：0 個有 44 種、1 個有 45 種、2 個有 20 種、3 個有 10 種、5 個有 1 種，總和 44 + 45 + 20 + 10 + 1 = 120 ✓。恰有 1 個固定點的確實是 45 ✓。（注意不可能恰有 4 個放對——若四封都對，第五封別無選擇也必定對。）"
+        ],
+        "zh-Hans": [
+          "把问题拆成两个独立的步骤：先决定「哪一封信放对」，再处理其余四封「全部放错」。",
+          "第一步：从 5 封信中选出恰好放对的那一封，有 C(5, 1) = 5 种选择。",
+          "第二步：剩下的 4 封信必须**全部都放错**（若还有任何一封放对，放对的总数就会超过 1，不符合「恰好 1 封」）。这种「全部错位」的排法称为错排。",
+          "计算 4 个元素的错排数 D(4)。用容斥原理：D(4) = 4! − C(4,1)×3! + C(4,2)×2! − C(4,3)×1! + C(4,4)×0!。",
+          "逐项计算：24 − 4 × 6 + 6 × 2 − 4 × 1 + 1 × 1 = 24 − 24 + 12 − 4 + 1 = 9。",
+          "所以 D(4) = 9，也就是四封信全部放错的方法有 9 种。",
+          "两步相乘：5 × 9 = 45 种。",
+          "验算：程序穷举 5! = 120 个排列，统计固定点（放对的信）个数的分布为：0 个有 44 种、1 个有 45 种、2 个有 20 种、3 个有 10 种、5 个有 1 种，总和 44 + 45 + 20 + 10 + 1 = 120 ✓。恰有 1 个固定点的确实是 45 ✓。（注意不可能恰有 4 个放对——若四封都对，第五封别无选择也必定对。）"
+        ],
+        "en": [
+          "Split the problem into two independent steps: choose which letter is correct, then arrange the other four so that none is correct.",
+          "Step one: choose the single correctly placed letter from the 5, giving C(5, 1) = 5 choices.",
+          "Step two: the remaining 4 letters must all be misplaced, since any further correct placement would push the total above one, violating \"exactly one\". Such completely deranged arrangements are called derangements.",
+          "Compute the derangement number D(4) by inclusion-exclusion: D(4) = 4! − C(4,1)×3! + C(4,2)×2! − C(4,3)×1! + C(4,4)×0!.",
+          "Term by term: 24 − 4 × 6 + 6 × 2 − 4 × 1 + 1 × 1 = 24 − 24 + 12 − 4 + 1 = 9.",
+          "So D(4) = 9, meaning there are 9 ways for four letters all to go wrong.",
+          "Multiplying the steps: 5 × 9 = 45.",
+          "Check: enumerating all 5! = 120 permutations, the distribution of fixed points is 44 with none, 45 with exactly one, 20 with two, 10 with three and 1 with five, totalling 44 + 45 + 20 + 10 + 1 = 120. Exactly one fixed point indeed gives 45. Note that exactly four correct is impossible, since if four letters are right the fifth has no choice but to be right too."
+        ],
+        "ja": [
+          "問題を独立な 2 段階に分けます：まず「どの手紙が正しく入るか」を決め、次に残り 4 通が「すべて誤って入る」場合を扱います。",
+          "第 1 段階：正しく入る 1 通を 5 通から選ぶので C(5, 1) = 5 通り。",
+          "第 2 段階：残り 4 通は**すべて誤って**入らなければなりません（もう 1 通でも正しく入ると「ちょうど 1 通」に反します）。このような完全な入れ違いを完全順列（撹乱順列）といいます。",
+          "4 個の完全順列の数 D(4) を包除原理で求めます：D(4) = 4! − C(4,1)×3! + C(4,2)×2! − C(4,3)×1! + C(4,4)×0!。",
+          "順に計算すると 24 − 4 × 6 + 6 × 2 − 4 × 1 + 1 × 1 = 24 − 24 + 12 − 4 + 1 = 9。",
+          "よって D(4) = 9、すなわち 4 通すべてが誤って入る入れ方は 9 通りです。",
+          "2 段階を掛けて 5 × 9 = 45 通り。",
+          "検算：5! = 120 通りの順列をすべて調べると、正しく入る通数の分布は 0 通が 44、1 通が 45、2 通が 20、3 通が 10、5 通が 1 で、合計 44 + 45 + 20 + 10 + 1 = 120 ✓。ちょうど 1 通は確かに 45 通りです ✓。（ちょうど 4 通が正しいことはありえません。4 通が正しければ 5 通目も自動的に正しくなるからです。）"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "45"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "恰有 k 個固定點的排列數：選出固定點後其餘元素必須構成錯排，兩步相乘",
+        "notes": "設計依據：核心是察覺「其餘四封必須全錯」而非「隨意排列」——後者會得到 5 × 4! = 120（超過總排列數，本身即為矛盾）；並以容斥計算 D(4) = 9。詳解另列出固定點個數的完整分布，順帶說明為何不可能恰有 4 個固定點。答案 45 已用 120 個排列的全窮舉統計驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（恰一封放對）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "組合",
+        "topicCode": "combinatorics",
+        "subtopic": "恰一封放對",
+        "subtopicCode": "exactly_one_fixed_point"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "combinatorics_grade12_foundation_013",
+      "topic": "combinatorics",
+      "subtopic": "multiset_nonadjacent",
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "把 A、A、A、B、B、C 這六個字母排成一列。若要求三個 A 兩兩都不相鄰，這樣的排法共有多少種？（相同字母之間不做區分）",
+        "zh-Hans": "把 A、A、A、B、B、C 这六个字母排成一列。若要求三个 A 两两都不相邻，这样的排法共有多少种？（相同字母之间不做区分）",
+        "en": "Arrange the six letters A, A, A, B, B, C in a row so that no two of the three A's are adjacent. Identical letters are not distinguished. How many such arrangements are there?",
+        "ja": "A、A、A、B、B、C の 6 文字を一列に並べます。3 つの A がどの 2 つも隣り合わないようにするとき、並べ方は何通りありますか。（同じ文字どうしは区別しません）"
+      },
+      "answer": {
+        "zh-Hant": "答案是 12 種。",
+        "zh-Hans": "答案是 12 种。",
+        "en": "The answer is 12.",
+        "ja": "答えは 12 通りです。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "處理「某些元素不可相鄰」的標準方法是**間隔法**：先把其他元素排好，再把要分開的元素插進它們之間的空隙。",
+          "第一步：先排除了 A 以外的三個字母 B、B、C。因為兩個 B 完全相同，排法數是 3! ÷ 2! = 6 ÷ 2 = 3 種。",
+          "第二步：這三個字母排成一列後，會產生 4 個可以插入的位置——最左邊 1 個、三個字母之間 2 個、最右邊 1 個。",
+          "第三步：把三個 A 放進這些空隙。關鍵是**每個空隙最多只能放一個 A**，因為同一個空隙放兩個 A 就會讓它們相鄰。",
+          "所以要從 4 個空隙中選出 3 個各放一個 A，方法數是 C(4, 3) = 4 種。（三個 A 完全相同，選定空隙後就沒有其他排法。）",
+          "兩步相乘：3 × 4 = 12 種。",
+          "常見錯誤是忘記 B、B 相同而把第一步算成 3! = 6（會得到 24），或允許同一空隙放多個 A。",
+          "驗算：程式列出 A、A、A、B、B、C 的全部 60 個相異排列，逐一檢查字串中是否出現連續兩個 A，不含「AA」的恰好 12 個 ✓，例如 ABABAC、ABABCA、ABACAB 等。"
+        ],
+        "zh-Hans": [
+          "处理「某些元素不可相邻」的标准方法是**间隔法**：先把其他元素排好，再把要分开的元素插进它们之间的空隙。",
+          "第一步：先排除了 A 以外的三个字母 B、B、C。因为两个 B 完全相同，排法数是 3! ÷ 2! = 6 ÷ 2 = 3 种。",
+          "第二步：这三个字母排成一列后，会产生 4 个可以插入的位置——最左边 1 个、三个字母之间 2 个、最右边 1 个。",
+          "第三步：把三个 A 放进这些空隙。关键是**每个空隙最多只能放一个 A**，因为同一个空隙放两个 A 就会让它们相邻。",
+          "所以要从 4 个空隙中选出 3 个各放一个 A，方法数是 C(4, 3) = 4 种。（三个 A 完全相同，选定空隙后就没有其他排法。）",
+          "两步相乘：3 × 4 = 12 种。",
+          "常见错误是忘记 B、B 相同而把第一步算成 3! = 6（会得到 24），或允许同一空隙放多个 A。",
+          "验算：程序列出 A、A、A、B、B、C 的全部 60 个相异排列，逐一检查字符串中是否出现连续两个 A，不含「AA」的恰好 12 个 ✓，例如 ABABAC、ABABCA、ABACAB 等。"
+        ],
+        "en": [
+          "The standard method for keeping certain elements apart is the gap method: arrange the other elements first, then slot the separated ones into the gaps between them.",
+          "Step one: arrange the three non-A letters B, B and C. Since the two B's are identical, the count is 3! ÷ 2! = 6 ÷ 2 = 3.",
+          "Step two: those three letters in a row create 4 insertion positions — one at the far left, two between the letters and one at the far right.",
+          "Step three: place the three A's into those gaps. The key point is that each gap may hold at most one A, since two A's in the same gap would be adjacent.",
+          "So choose 3 of the 4 gaps to receive one A each, which can be done in C(4, 3) = 4 ways. The A's are identical, so once the gaps are chosen nothing further varies.",
+          "Multiplying the steps: 3 × 4 = 12.",
+          "Common errors are forgetting that the two B's are identical and using 3! = 6 in step one, giving 24, or allowing several A's in one gap.",
+          "Check: listing all 60 distinct arrangements of A, A, A, B, B, C and testing each for two consecutive A's leaves exactly 12 without \"AA\", such as ABABAC, ABABCA and ABACAB."
+        ],
+        "ja": [
+          "「特定の要素を隣り合わせない」ときの定石は**すき間法**です。まず他の要素を並べ、分けたい要素をその間のすき間に入れます。",
+          "第 1 段階：A 以外の 3 文字 B、B、C を並べます。2 つの B は同じなので並べ方は 3! ÷ 2! = 6 ÷ 2 = 3 通り。",
+          "第 2 段階：この 3 文字が並ぶと挿入できる位置が 4 か所できます——左端 1 か所、文字の間 2 か所、右端 1 か所です。",
+          "第 3 段階：3 つの A をすき間に入れます。要点は**各すき間に入れられる A は 1 つまで**ということです。同じすき間に 2 つ入れると隣り合ってしまいます。",
+          "したがって 4 か所から 3 か所を選んで 1 つずつ入れるので C(4, 3) = 4 通り。（A は同じなので、すき間を決めればそれ以上の違いはありません。）",
+          "2 段階を掛けて 3 × 4 = 12 通り。",
+          "よくある誤りは、B が 2 つとも同じであることを忘れて第 1 段階を 3! = 6 として 24 とすること、あるいは同じすき間に複数の A を許すことです。",
+          "検算：A、A、A、B、B、C の相異なる並べ方 60 通りをすべて列挙し「AA」が現れるか調べると、含まないものはちょうど 12 通り ✓。たとえば ABABAC、ABABCA、ABACAB などです。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "12"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "重複元素的間隔法：先排其餘字母（相同者需除以階乘），再由空隙選位放入不可相鄰的元素",
+        "notes": "設計依據：兩個環節——第一步需處理兩個相同的 B（除以 2!，否則答 24），第三步需限制每個空隙至多一個 A；兩者都漏掉會嚴重高估。空隙數 4 恰比 A 的個數 3 多一個，使選法唯一地由 C(4,3) 給出。答案 12 已用 60 個相異排列的全窮舉檢查驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（重複字母不相鄰）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "組合",
+        "topicCode": "combinatorics",
+        "subtopic": "重複字母不相鄰",
+        "subtopicCode": "multiset_nonadjacent"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "combinatorics_grade12_foundation_014",
+      "topic": "combinatorics",
+      "subtopic": "vandermonde_identity",
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "求 C(4,0)×C(6,3) + C(4,1)×C(6,2) + C(4,2)×C(6,1) + C(4,3)×C(6,0) 的值，其中 C(n,k) 表示從 n 個相異物件中取出 k 個的組合數。",
+        "zh-Hans": "求 C(4,0)×C(6,3) + C(4,1)×C(6,2) + C(4,2)×C(6,1) + C(4,3)×C(6,0) 的值，其中 C(n,k) 表示从 n 个相异物件中取出 k 个的组合数。",
+        "en": "Find the value of C(4,0)×C(6,3) + C(4,1)×C(6,2) + C(4,2)×C(6,1) + C(4,3)×C(6,0), where C(n,k) is the number of ways to choose k objects from n distinct ones.",
+        "ja": "C(4,0)×C(6,3) + C(4,1)×C(6,2) + C(4,2)×C(6,1) + C(4,3)×C(6,0) の値を求めなさい。ここで C(n,k) は異なる n 個から k 個を選ぶ組合せの数です。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 120。",
+        "zh-Hans": "答案是 120。",
+        "en": "The answer is 120.",
+        "ja": "答えは 120 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "逐項算出來再相加可以，但用組合意義來看，整個和式其實在數同一件事。",
+          "想像有 4 個紅球和 6 個藍球，總共 10 個相異的球，現在要從中取出 3 個。",
+          "把取法依「紅球取了幾個」分類：若取了 k 個紅球，就必須取 3 − k 個藍球，方法數是 C(4, k) × C(6, 3 − k)。",
+          "k 可以是 0、1、2、3（紅球只有 4 個，而且取的總數是 3，所以 k 不超過 3）。把各類相加，正好就是題目給的四項之和。",
+          "但這個和數的是「從 10 個球中取 3 個」的所有方法，不分紅藍——因為每一種取法都恰好被歸入某一個 k 類，不重不漏。",
+          "所以總和 = C(10, 3) = (10 × 9 × 8) ÷ (3 × 2 × 1) = 120。",
+          "這正是范德蒙恆等式 Σ C(m,k) × C(n, r−k) = C(m+n, r) 的組合證明。",
+          "驗算：逐項計算得 C(4,0)C(6,3) = 1 × 20 = 20、C(4,1)C(6,2) = 4 × 15 = 60、C(4,2)C(6,1) = 6 × 6 = 36、C(4,3)C(6,0) = 4 × 1 = 4，相加得 20 + 60 + 36 + 4 = 120 ✓，與 C(10,3) 完全一致。"
+        ],
+        "zh-Hans": [
+          "逐项算出来再相加可以，但用组合意义来看，整个和式其实在数同一件事。",
+          "想象有 4 个红球和 6 个蓝球，总共 10 个相异的球，现在要从中取出 3 个。",
+          "把取法依「红球取了几个」分类：若取了 k 个红球，就必须取 3 − k 个蓝球，方法数是 C(4, k) × C(6, 3 − k)。",
+          "k 可以是 0、1、2、3（红球只有 4 个，而且取的总数是 3，所以 k 不超过 3）。把各类相加，正好就是题目给的四项之和。",
+          "但这个和数的是「从 10 个球中取 3 个」的所有方法，不分红蓝——因为每一种取法都恰好被归入某一个 k 类，不重不漏。",
+          "所以总和 = C(10, 3) = (10 × 9 × 8) ÷ (3 × 2 × 1) = 120。",
+          "这正是范德蒙恒等式 Σ C(m,k) × C(n, r−k) = C(m+n, r) 的组合证明。",
+          "验算：逐项计算得 C(4,0)C(6,3) = 1 × 20 = 20、C(4,1)C(6,2) = 4 × 15 = 60、C(4,2)C(6,1) = 6 × 6 = 36、C(4,3)C(6,0) = 4 × 1 = 4，相加得 20 + 60 + 36 + 4 = 120 ✓，与 C(10,3) 完全一致。"
+        ],
+        "en": [
+          "Computing each term and adding works, but read combinatorially the whole sum is counting a single thing.",
+          "Imagine 4 red balls and 6 blue balls, 10 distinct balls in all, from which 3 are to be chosen.",
+          "Classify the choices by how many red balls are taken: taking k red balls forces 3 − k blue ones, and the count for that class is C(4, k) × C(6, 3 − k).",
+          "Here k can be 0, 1, 2 or 3, since there are only 4 red balls and only 3 balls are taken in total. Summing the classes gives exactly the four terms in the problem.",
+          "But that sum counts every way of choosing 3 balls from the 10 regardless of colour, since each selection falls into exactly one class, with nothing missed or repeated.",
+          "So the total is C(10, 3) = (10 × 9 × 8) ÷ (3 × 2 × 1) = 120.",
+          "This is precisely the combinatorial proof of Vandermonde's identity, Σ C(m,k) × C(n, r−k) = C(m+n, r).",
+          "Check: the terms are C(4,0)C(6,3) = 1 × 20 = 20, C(4,1)C(6,2) = 4 × 15 = 60, C(4,2)C(6,1) = 6 × 6 = 36 and C(4,3)C(6,0) = 4 × 1 = 4, summing to 20 + 60 + 36 + 4 = 120, exactly C(10,3)."
+        ],
+        "ja": [
+          "各項を計算して足してもよいのですが、組合せ的に読むと、この和は 1 つのものを数えていることが分かります。",
+          "赤いボール 4 個と青いボール 6 個、合わせて 10 個の異なるボールから 3 個を選ぶ場面を考えます。",
+          "選び方を「赤を何個取るか」で分類します。赤を k 個取れば青は 3 − k 個で、その場合の数は C(4, k) × C(6, 3 − k) です。",
+          "k は 0、1、2、3 のいずれか（赤は 4 個しかなく、取るのは合計 3 個なので）。各分類を足すと、まさに問題の 4 項の和になります。",
+          "しかしこの和は「10 個から 3 個を選ぶ」すべての方法を色に関係なく数えています。どの選び方もちょうど 1 つの分類に属し、漏れも重複もないからです。",
+          "したがって総和は C(10, 3) = (10 × 9 × 8) ÷ (3 × 2 × 1) = 120。",
+          "これがヴァンデルモンドの恒等式 Σ C(m,k) × C(n, r−k) = C(m+n, r) の組合せ的証明です。",
+          "検算：各項は C(4,0)C(6,3) = 1 × 20 = 20、C(4,1)C(6,2) = 4 × 15 = 60、C(4,2)C(6,1) = 6 × 6 = 36、C(4,3)C(6,0) = 4 × 1 = 4 で、和は 20 + 60 + 36 + 4 = 120 ✓、C(10,3) と完全に一致します。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "120"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "范德蒙恆等式的組合證明：把和式讀成依紅球數分類地從 10 球中取 3 球",
+        "notes": "設計依據：核心是給和式一個組合詮釋（兩色球的分類計數），使結果直接等於 C(10,3) 而不必逐項計算；紅球只有 4 個使 k 的上界自然由 3 給出，分類乾淨。答案 120 已用逐項計算與 C(10,3) 兩種方式交叉驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（范德蒙恆等式）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "組合",
+        "topicCode": "combinatorics",
+        "subtopic": "范德蒙恆等式",
+        "subtopicCode": "vandermonde_identity"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "combinatorics_grade12_foundation_015",
+      "topic": "combinatorics",
+      "subtopic": "squares_in_grid",
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一個 4 × 4 的方格表由 16 個相同的小正方形組成。在這個圖形中，由格線圍成的正方形（各種大小都算）總共有多少個？",
+        "zh-Hans": "一个 4 × 4 的方格表由 16 个相同的小正方形组成。在这个图形中，由格线围成的正方形（各种大小都算）总共有多少个？",
+        "en": "A 4 by 4 grid is made of 16 identical unit squares. Counting squares of every size formed by the grid lines, how many squares are there in total?",
+        "ja": "4 × 4 の方眼は 16 個の同じ大きさの正方形からできています。この図形の中で格子線がつくる正方形は、大きさを問わず全部でいくつありますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 30 個。",
+        "zh-Hans": "答案是 30 个。",
+        "en": "The answer is 30.",
+        "ja": "答えは 30 個です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "不能只數最小的 16 個小正方形——由格線圍成的較大正方形也要算。所以**依邊長分類**逐一計算。",
+          "先看邊長 1 的正方形：就是那 16 個小方格，橫向有 4 個位置、縱向有 4 個位置，共 4 × 4 = 16 個。",
+          "邊長 2 的正方形：它的左上角只能落在橫向前 3 個、縱向前 3 個位置（再往右或往下就超出邊界），所以有 3 × 3 = 9 個。",
+          "邊長 3 的正方形：同理左上角有 2 × 2 = 4 個可能位置，共 4 個。",
+          "邊長 4 的正方形：只有整個方格表本身，1 × 1 = 1 個。",
+          "看出規律：邊長 k 的正方形有 (4 − k + 1)² 個。",
+          "把各類相加：16 + 9 + 4 + 1 = 30 個。",
+          "驗算：程式對每個邊長逐一枚舉所有可能的左上角位置，總數為 30 ✓。順帶對照：若問的是**長方形**總數（含正方形），則是從 5 條橫線中選 2 條、5 條縱線中選 2 條，即 C(5,2)² = 10² = 100 個，遠多於 30——可見「正方形」與「長方形」的差別。"
+        ],
+        "zh-Hans": [
+          "不能只数最小的 16 个小正方形——由格线围成的较大正方形也要算。所以**依边长分类**逐一计算。",
+          "先看边长 1 的正方形：就是那 16 个小方格，横向有 4 个位置、纵向有 4 个位置，共 4 × 4 = 16 个。",
+          "边长 2 的正方形：它的左上角只能落在横向前 3 个、纵向前 3 个位置（再往右或往下就超出边界），所以有 3 × 3 = 9 个。",
+          "边长 3 的正方形：同理左上角有 2 × 2 = 4 个可能位置，共 4 个。",
+          "边长 4 的正方形：只有整个方格表本身，1 × 1 = 1 个。",
+          "看出规律：边长 k 的正方形有 (4 − k + 1)² 个。",
+          "把各类相加：16 + 9 + 4 + 1 = 30 个。",
+          "验算：程序对每个边长逐一枚举所有可能的左上角位置，总数为 30 ✓。顺带对照：若问的是**长方形**总数（含正方形），则是从 5 条横线中选 2 条、5 条纵线中选 2 条，即 C(5,2)² = 10² = 100 个，远多于 30——可见「正方形」与「长方形」的差别。"
+        ],
+        "en": [
+          "Counting only the 16 unit squares is not enough — larger squares formed by the grid lines count too. So classify by side length and count each size.",
+          "Side length 1: these are the 16 unit cells, with 4 horizontal and 4 vertical positions, giving 4 × 4 = 16.",
+          "Side length 2: the top-left corner can only sit in the first 3 horizontal and first 3 vertical positions, since further right or down would overrun the boundary, giving 3 × 3 = 9.",
+          "Side length 3: similarly the top-left corner has 2 × 2 = 4 possible positions, so 4 squares.",
+          "Side length 4: only the whole grid itself, 1 × 1 = 1.",
+          "The pattern is clear: squares of side k number (4 − k + 1)².",
+          "Adding the classes: 16 + 9 + 4 + 1 = 30.",
+          "Check: enumerating every possible top-left position for each side length gives 30. For comparison, the number of rectangles including squares would be C(5,2)² = 10² = 100, choosing 2 of the 5 horizontal lines and 2 of the 5 vertical lines — far more than 30, showing how different the two counts are."
+        ],
+        "ja": [
+          "最小の 16 個だけを数えては足りません。格子線がつくるより大きな正方形も含まれます。そこで**辺の長さで分類**して数えます。",
+          "辺の長さ 1：16 個の単位マスそのもので、横に 4 か所・縦に 4 か所なので 4 × 4 = 16 個。",
+          "辺の長さ 2：左上の頂点は横は前 3 か所、縦も前 3 か所にしか置けません（それ以上右や下だと外に出ます）。よって 3 × 3 = 9 個。",
+          "辺の長さ 3：同様に左上の頂点の位置は 2 × 2 = 4 通りで 4 個。",
+          "辺の長さ 4：方眼全体そのものだけで 1 × 1 = 1 個。",
+          "規則が見えます：辺の長さ k の正方形は (4 − k + 1)² 個です。",
+          "各分類を足すと 16 + 9 + 4 + 1 = 30 個。",
+          "検算：各辺長について左上の頂点の位置をすべて列挙すると合計 30 ✓。参考までに、**長方形**の総数（正方形を含む）は横 5 本から 2 本、縦 5 本から 2 本を選ぶので C(5,2)² = 10² = 100 個となり、30 よりはるかに多く、両者の違いが分かります。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "30"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "方格中的正方形計數：依邊長分類，邊長 k 的正方形有 (n−k+1)² 個",
+        "notes": "設計依據：關鍵是察覺較大的正方形也要計入（只答 16 是最常見的誤答），並由左上角的可放位置導出 (n−k+1)² 這個計數；詳解另以長方形總數 100 作對照，凸顯「正方形」限制的效果。答案 30 已用逐邊長枚舉左上角位置的窮舉驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（方格中的正方形）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "組合",
+        "topicCode": "combinatorics",
+        "subtopic": "方格中的正方形",
+        "subtopicCode": "squares_in_grid"
+      },
+      "reviewStatus": "ok"
     }
   ]
 }
