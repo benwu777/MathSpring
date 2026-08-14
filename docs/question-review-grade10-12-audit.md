@@ -40,6 +40,53 @@ grade10-12 共 141 題，進入本輪時全部為 `pending`（從未複審）。
 - `algebra_grade11_007` ↔ `algebra_grade11_009`（log_exponential_equation）
 - `number_theory_grade12_003` ↔ `number_theory_grade8_004`（divisor_count）
 
+## 複審結果總覽（2026-08-14 完成）
+
+grade10-12 全部 141 題已複審完畢，全部標為 `ok`。連同 grade9 的 47 題，本輪共處理 188 題。
+
+改動統計：
+
+| 年級 | 改寫 | 修正答案 | 補／修詳解 | 修圖 |
+| --- | --- | --- | --- | --- |
+| `grade10` | 17 | 3 | 12 | 4 |
+| `grade11` | 20 | 4 | 11 | 4 |
+| `grade12` | 19 | 6 | 8 | 3 |
+
+**本輪找出的答案或題目本身的錯誤（共 21 處）**，全部都不是機械篩檢能發現的：
+
+| 題 | 問題 |
+| --- | --- |
+| `number_theory_grade9_001` | 答案標 15，實際 12；且與 `combinatorics_grade9_007` 同題 |
+| `logic_grade9_006` | answer 文字與 correctAnswer 互相矛盾，詳解寫入自我推翻的思考過程 |
+| `number_theory_grade9_010` | `correctAnswer.type` 為 `fraction`，違反 phase-1 硬規則 |
+| `algebra_grade10_002` | 選項裡沒有正確答案（正解含端點 2 ≤ a ≤ 5） |
+| `combinatorics_grade10_007` | 題幹沒定義 5 個區域的相鄰結構，答案無法確定 |
+| `combinatorics_grade10_009` | 答案標 20，實際 16；詳解宣稱 3!5! = 4!4!（720 ≠ 576） |
+| `number_theory_grade10_003` | 答案標 12，實際 11 |
+| `logic_grade10_006` | 有兩組解（獎品在 A 或 B 都恰一句真話） |
+| `logic_grade10_007` | 題幹漏掉「每答一次是得一顆糖」，問題無法回答 |
+| `algebra_grade11_001` | 答案標 B，實際 A（logₙ(n+1) 對 n 遞減） |
+| `algebra_grade11_003` | 題幹導出 k² = 7 而兩根和為 0，與答案 6 矛盾 |
+| `combinatorics_grade11_007` | 答案標 126，實際 144；詳解自己的算式就是 144 |
+| `number_theory_grade11_002` | 答案標 0，實際 −2；詳解自己算出 −2 卻寫「依官方答案記為 0」 |
+| `number_theory_grade11_003` | 答案標 3，實際 2 |
+| `logic_grade11_003` | 題幹自相矛盾（已說第一人從 1 開始又問他第一次報幾） |
+| `logic_grade11_008` | 改成 integer_input 後答案不唯一（99 的因數有 6 個） |
+| `algebra_grade12_003` | 答案不唯一（34 個兩位數都成立） |
+| `combinatorics_grade12_003` | 答案標 12，實際 6（直角三角形有 12 個而非 6 個） |
+| `geometry_grade12_001` | 答案標 5，實際 7 |
+| `geometry_grade12_002` | 答案標 84/5，實際 12√2 |
+| `logic_grade12_001` | 答案標 A，實際 B（A 騎士的情形在 B 那句話上矛盾） |
+| `logic_grade12_002` | 答案不唯一（1 到 15 的每個第一步都必勝） |
+| `logic_grade12_003` | 無解（差必為 1111 − 10k，不可能是 2222） |
+| `logic_grade12_005` | 四個選項全都「一定正確」 |
+| `number_theory_grade12_002` | 題目前提不成立（不存在那樣的正整數三根） |
+| `number_theory_grade12_003` | 答案標 2，實際 1（p²⁰²⁰ 只需一個質因數） |
+
+**最值得記住的模式**：多數錯誤的詳解「自己算出了正確答案卻標了別的數字」（`number_theory_grade11_002`、`number_theory_grade11_003`、`combinatorics_grade11_007` 都是），所以逐題複審時務必比對詳解最後一步與 `correctAnswer`。
+
+圖形方面，grade10-12 原有 11 個 `shape_diagram` 都是紅線 7 的「外框貼字」（其中兩個把立體畫成平面、一個標籤混入日文），已全部改為 `geometry_scene` 或 `kind:none`；另修正 3 個 `geometry_scene` 的 bounds 或座標錯誤（`geometry_grade9_002` 的圓被截、`geometry_grade12_009` 的小圓位置錯誤與 bounds 過窄）。
+
 ## 題目清單
 
 | id | level | topic | subtopic | figure | answerMode | source | status | risk | note |
