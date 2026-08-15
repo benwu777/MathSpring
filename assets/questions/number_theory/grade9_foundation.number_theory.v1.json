@@ -1335,6 +1335,1416 @@
         "subtopicCode": "gcd_linear_forms"
       },
       "reviewStatus": "ok"
+    },
+    {
+      "id": "number_theory_grade9_foundation_016",
+      "topic": "number_theory",
+      "subtopic": "euler_phi_formula",
+      "difficulty": "foundation",
+      "levelStage": "grade9",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一個班級把 1 到 100 號的座位排成一列。老師要挑出所有座號與 100 沒有共同質因數的座位。符合條件的座位共有幾個？",
+        "zh-Hans": "一个班级把 1 到 100 号的座位排成一列。老师要挑出所有座号与 100 没有共同质因数的座位。符合条件的座位共有几个？",
+        "en": "A classroom has seats numbered 1 to 100 in a row. The teacher picks out every seat whose number shares no prime factor with 100. How many seats qualify?",
+        "ja": "教室に 1 から 100 番までの座席が並んでいます。先生は座席番号が 100 と共通の素因数をもたない席をすべて選びます。条件に合う席はいくつありますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 40 個。",
+        "zh-Hans": "答案是 40 个。",
+        "en": "The answer is 40.",
+        "ja": "答えは 40 個です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "逐一檢查 100 個數太慢，**應該從 100 的質因數下手**。分解得 100 = 2² × 5²，所以質因數只有 2 與 5。",
+          "一個數與 100 互質，就表示它**既不是 2 的倍數、也不是 5 的倍數**。",
+          "先用扣除的方式思考。1 到 100 中，2 的倍數有 100 ÷ 2 = 50 個，5 的倍數有 100 ÷ 5 = 20 個。",
+          "但直接扣掉 50 + 20 = 70 會扣過頭——**同時是 2 與 5 的倍數（也就是 10 的倍數）被扣了兩次**。10 的倍數有 100 ÷ 10 = 10 個，要補回來。",
+          "所以互質的個數 = 100 − 50 − 20 + 10 = 40 個。",
+          "**也可以用乘法的形式一次算完**：在 1 到 100 中，不是 2 的倍數的比例是 1 − 1/2 = 1/2；在這些數之中，不是 5 的倍數的比例是 1 − 1/5 = 4/5。",
+          "兩個條件彼此獨立（因為 2 與 5 互質），所以互質的個數 = 100 × 1/2 × 4/5 = 50 × 4/5 = 40 ✓，與扣除法一致。",
+          "驗算：程式對 k = 1 到 100 逐一計算 gcd(k, 100)，等於 1 的恰好有 40 個 ✓。",
+          "附註：**乘法形式只需看「有哪些相異的質因數」，與各質因數的次方無關**——100 = 2²×5² 與 10 = 2×5 用的是同一組因子 1/2 與 4/5，所以 1 到 10 中與 10 互質的有 10 × 1/2 × 4/5 = 4 個（即 1、3、7、9）✓。"
+        ],
+        "zh-Hans": [
+          "逐一检查 100 个数太慢，**应该从 100 的质因数下手**。分解得 100 = 2² × 5²，所以质因数只有 2 与 5。",
+          "一个数与 100 互质，就表示它**既不是 2 的倍数、也不是 5 的倍数**。",
+          "先用扣除的方式思考。1 到 100 中，2 的倍数有 100 ÷ 2 = 50 个，5 的倍数有 100 ÷ 5 = 20 个。",
+          "但直接扣掉 50 + 20 = 70 会扣过头——**同时是 2 与 5 的倍数（也就是 10 的倍数）被扣了两次**。10 的倍数有 100 ÷ 10 = 10 个，要补回来。",
+          "所以互质的个数 = 100 − 50 − 20 + 10 = 40 个。",
+          "**也可以用乘法的形式一次算完**：在 1 到 100 中，不是 2 的倍数的比例是 1 − 1/2 = 1/2；在这些数之中，不是 5 的倍数的比例是 1 − 1/5 = 4/5。",
+          "两个条件彼此独立（因为 2 与 5 互质），所以互质的个数 = 100 × 1/2 × 4/5 = 50 × 4/5 = 40 ✓，与扣除法一致。",
+          "验算：程序对 k = 1 到 100 逐一计算 gcd(k, 100)，等于 1 的恰好有 40 个 ✓。",
+          "附注：**乘法形式只需看「有哪些相异的质因数」，与各质因数的次方无关**——100 = 2²×5² 与 10 = 2×5 用的是同一组因子 1/2 与 4/5，所以 1 到 10 中与 10 互质的有 10 × 1/2 × 4/5 = 4 个（即 1、3、7、9）✓。"
+        ],
+        "en": [
+          "Checking all 100 numbers is slow; work from the prime factors of 100 instead. Factorising gives 100 = 2² × 5², so the only primes involved are 2 and 5.",
+          "A number is coprime to 100 exactly when it is neither a multiple of 2 nor a multiple of 5.",
+          "Consider subtraction first. From 1 to 100 there are 100 ÷ 2 = 50 multiples of 2 and 100 ÷ 5 = 20 multiples of 5.",
+          "But subtracting 50 + 20 = 70 removes too much, since numbers that are multiples of both 2 and 5, that is multiples of 10, have been removed twice. There are 100 ÷ 10 = 10 of those, and they must be added back.",
+          "So the count of coprime numbers is 100 − 50 − 20 + 10 = 40.",
+          "A multiplicative form does it in one line: among 1 to 100 the fraction that are not multiples of 2 is 1 − 1/2 = 1/2, and among those the fraction that are not multiples of 5 is 1 − 1/5 = 4/5.",
+          "The two conditions are independent, since 2 and 5 are coprime, so the count is 100 × 1/2 × 4/5 = 50 × 4/5 = 40, agreeing with the subtraction method.",
+          "Check: computing gcd(k, 100) for every k from 1 to 100 gives 1 exactly 40 times.",
+          "Remark: the multiplicative form depends only on which distinct primes occur, not on their exponents — 100 = 2²×5² and 10 = 2×5 use the same factors 1/2 and 4/5, so among 1 to 10 the numbers coprime to 10 number 10 × 1/2 × 4/5 = 4, namely 1, 3, 7 and 9."
+        ],
+        "ja": [
+          "100 個の数を 1 つずつ調べるのは遅いので、**100 の素因数に着目します**。分解すると 100 = 2² × 5² なので、素因数は 2 と 5 だけです。",
+          "ある数が 100 と互いに素であるとは、**2 の倍数でも 5 の倍数でもない**ということです。",
+          "まず引き算で考えます。1 から 100 のうち 2 の倍数は 100 ÷ 2 = 50 個、5 の倍数は 100 ÷ 5 = 20 個です。",
+          "しかし 50 + 20 = 70 をそのまま引くと引きすぎです——**2 と 5 の両方の倍数（すなわち 10 の倍数）が 2 回引かれて**います。10 の倍数は 100 ÷ 10 = 10 個あるので戻します。",
+          "したがって互いに素な個数 = 100 − 50 − 20 + 10 = 40 個。",
+          "**掛け算の形で一気に求めることもできます**：1 から 100 のうち 2 の倍数でない割合は 1 − 1/2 = 1/2、そのうち 5 の倍数でない割合は 1 − 1/5 = 4/5。",
+          "2 と 5 が互いに素なので 2 つの条件は独立であり、個数 = 100 × 1/2 × 4/5 = 50 × 4/5 = 40 ✓ で引き算の結果と一致します。",
+          "検算：k = 1 から 100 まで gcd(k, 100) を計算すると、1 になるのはちょうど 40 個 ✓。",
+          "補足：**掛け算の形は「どの相異なる素因数があるか」だけで決まり、指数には依りません**。100 = 2²×5² と 10 = 2×5 は同じ因子 1/2 と 4/5 を使うので、1 から 10 で 10 と互いに素なのは 10 × 1/2 × 4/5 = 4 個（1、3、7、9）✓ です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "40"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "互質個數：由質因數以排容原理扣除，或等價地乘上各質因數的 (1 − 1/p)，只取決於相異質因數",
+        "notes": "設計依據：100 = 2² × 5² 使指數大於 1，凸顯「乘法形式與指數無關」這個容易誤解的性質，詳解並以 10 的情形對照驗證；同時給出排容與乘法兩條路徑互相印證，其中排容需處理 10 的倍數被重複扣除。答案 40 已用 k = 1..100 的 gcd 窮舉獨立驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（互質個數的公式）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "數論",
+        "topicCode": "number_theory",
+        "subtopic": "互質個數的公式",
+        "subtopicCode": "euler_phi_formula"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "number_theory_grade9_foundation_017",
+      "topic": "number_theory",
+      "subtopic": "sum_of_divisors_multiplicative",
+      "difficulty": "foundation",
+      "levelStage": "grade9",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "求 72 的所有正因數之和。（包含 1 與 72 本身）",
+        "zh-Hans": "求 72 的所有正因数之和。（包含 1 与 72 本身）",
+        "en": "Find the sum of all positive divisors of 72, including 1 and 72 themselves.",
+        "ja": "72 のすべての正の約数の和を求めなさい。（1 と 72 自身も含みます）"
+      },
+      "answer": {
+        "zh-Hant": "答案是 195。",
+        "zh-Hans": "答案是 195。",
+        "en": "The answer is 195.",
+        "ja": "答えは 195 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "把因數一個個找出來再相加做得到，但**從質因數分解出發會更有結構、也更不容易漏**。",
+          "先分解：72 = 8 × 9 = 2³ × 3²。",
+          "關鍵觀察是：**72 的每一個因數都形如 2ᵃ × 3ᵇ**，其中 a 可以取 0、1、2、3，b 可以取 0、1、2。",
+          "所以把所有因數加起來，就等於把「所有可能的 2ᵃ」與「所有可能的 3ᵇ」兩兩相乘後全部加總。",
+          "而這正好可以寫成兩個括號的乘積：(2⁰ + 2¹ + 2² + 2³) × (3⁰ + 3¹ + 3²)。展開這個乘積時，每一項恰好對應一個因數，不重不漏。",
+          "計算第一個括號：1 + 2 + 4 + 8 = 15。計算第二個括號：1 + 3 + 9 = 13。",
+          "相乘得因數和 = 15 × 13 = 195。",
+          "驗算：直接列出 72 的全部因數——1、2、3、4、6、8、9、12、18、24、36、72，共 12 個。累加：1 + 2 = 3，+3 = 6，+4 = 10，+6 = 16，+8 = 24，+9 = 33，+12 = 45，+18 = 63，+24 = 87，+36 = 123，+72 = 195 ✓，與公式相符。",
+          "附註：**因數個數也能從同一個分解直接讀出**——指數各加 1 再相乘，(3 + 1) × (2 + 1) = 12，正是上面列出的 12 個因數 ✓。兩個公式共用同一組指數，可以一併記住。"
+        ],
+        "zh-Hans": [
+          "把因数一个个找出来再相加做得到，但**从质因数分解出发会更有结构、也更不容易漏**。",
+          "先分解：72 = 8 × 9 = 2³ × 3²。",
+          "关键观察是：**72 的每一个因数都形如 2ᵃ × 3ᵇ**，其中 a 可以取 0、1、2、3，b 可以取 0、1、2。",
+          "所以把所有因数加起来，就等于把「所有可能的 2ᵃ」与「所有可能的 3ᵇ」两两相乘后全部加总。",
+          "而这正好可以写成两个括号的乘积：(2⁰ + 2¹ + 2² + 2³) × (3⁰ + 3¹ + 3²)。展开这个乘积时，每一项恰好对应一个因数，不重不漏。",
+          "计算第一个括号：1 + 2 + 4 + 8 = 15。计算第二个括号：1 + 3 + 9 = 13。",
+          "相乘得因数和 = 15 × 13 = 195。",
+          "验算：直接列出 72 的全部因数——1、2、3、4、6、8、9、12、18、24、36、72，共 12 个。累加：1 + 2 = 3，+3 = 6，+4 = 10，+6 = 16，+8 = 24，+9 = 33，+12 = 45，+18 = 63，+24 = 87，+36 = 123，+72 = 195 ✓，与公式相符。",
+          "附注：**因数个数也能从同一个分解直接读出**——指数各加 1 再相乘，(3 + 1) × (2 + 1) = 12，正是上面列出的 12 个因数 ✓。两个公式共用同一组指数，可以一并记住。"
+        ],
+        "en": [
+          "Listing the divisors and adding them works, but starting from the prime factorisation is more structured and less prone to omissions.",
+          "Factorising: 72 = 8 × 9 = 2³ × 3².",
+          "The key observation is that every divisor of 72 has the form 2ᵃ × 3ᵇ, with a from 0 to 3 and b from 0 to 2.",
+          "So summing all divisors amounts to multiplying every possible 2ᵃ by every possible 3ᵇ and adding all the products.",
+          "That is exactly the product of two brackets: (2⁰ + 2¹ + 2² + 2³) × (3⁰ + 3¹ + 3²). Expanding it produces each divisor exactly once, with no gaps or repeats.",
+          "The first bracket gives 1 + 2 + 4 + 8 = 15 and the second gives 1 + 3 + 9 = 13.",
+          "Multiplying, the divisor sum is 15 × 13 = 195.",
+          "Check by listing all divisors of 72: 1, 2, 3, 4, 6, 8, 9, 12, 18, 24, 36 and 72, twelve of them. Accumulating gives 3, 6, 10, 16, 24, 33, 45, 63, 87, 123 and finally 195, matching the formula.",
+          "Remark: the number of divisors reads off from the same factorisation — add 1 to each exponent and multiply, giving (3 + 1) × (2 + 1) = 12, exactly the twelve divisors listed. Both formulas use the same exponents and can be remembered together."
+        ],
+        "ja": [
+          "約数を 1 つずつ挙げて足してもよいのですが、**素因数分解から出発するほうが構造的で漏れにくい**です。",
+          "分解します：72 = 8 × 9 = 2³ × 3²。",
+          "鍵となる観察は、**72 のどの約数も 2ᵃ × 3ᵇ の形**をとり、a は 0〜3、b は 0〜2 をとりうるということです。",
+          "したがって全約数の和は、「ありうるすべての 2ᵃ」と「ありうるすべての 3ᵇ」を掛け合わせて全部足したものに等しくなります。",
+          "それはちょうど 2 つの括弧の積として書けます：(2⁰ + 2¹ + 2² + 2³) × (3⁰ + 3¹ + 3²)。展開すると各項がちょうど 1 つの約数に対応し、重複も漏れもありません。",
+          "第 1 の括弧は 1 + 2 + 4 + 8 = 15、第 2 の括弧は 1 + 3 + 9 = 13。",
+          "掛けて約数の和 = 15 × 13 = 195。",
+          "検算：72 の約数をすべて挙げると 1、2、3、4、6、8、9、12、18、24、36、72 の 12 個。順に足すと 3、6、10、16、24、33、45、63、87、123、そして 195 ✓ で公式と一致します。",
+          "補足：**約数の個数も同じ分解から読み取れます**——各指数に 1 を足して掛け、(3 + 1) × (2 + 1) = 12 で、上に挙げた 12 個と一致します ✓。2 つの公式は同じ指数を使うので、まとめて覚えられます。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "195"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "因數和的乘積形式：由 2ᵃ × 3ᵇ 的結構得 (1+2+4+8)(1+3+9)，展開後每一項恰對應一個因數",
+        "notes": "設計依據：詳解不直接給公式，而是論證展開式的每一項與每個因數一一對應，說明乘積形式為何成立；並與因數個數公式對照，指出兩者共用同一組指數。答案 195 已用 12 個因數的逐一累加獨立驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（因數和的公式）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "數論",
+        "topicCode": "number_theory",
+        "subtopic": "因數和的公式",
+        "subtopicCode": "sum_of_divisors_multiplicative"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "number_theory_grade9_foundation_018",
+      "topic": "number_theory",
+      "subtopic": "base_five_digit_sum",
+      "difficulty": "foundation",
+      "levelStage": "grade9",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "把十進位的 100 換算成五進位表示後，求它各位數字之和。",
+        "zh-Hans": "把十进位的 100 换算成五进位表示后，求它各位数字之和。",
+        "en": "Convert the decimal number 100 into base five, then find the sum of its digits.",
+        "ja": "10 進法の 100 を 5 進法に直したとき、その各位の数字の和を求めなさい。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 4。",
+        "zh-Hans": "答案是 4。",
+        "en": "The answer is 4.",
+        "ja": "答えは 4 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "換算進位制的標準做法是**反覆除以基底並記下餘數**，最後把餘數由下往上讀。",
+          "100 ÷ 5 = 20 餘 0。",
+          "20 ÷ 5 = 4 餘 0。",
+          "4 ÷ 5 = 0 餘 4。商變成 0，停止。",
+          "把餘數由**最後一個往回讀**：4、0、0，所以 100 在五進位下寫成 400₅。**方向不能弄反**——若由上往下讀成 004 就錯了。",
+          "驗算這個表示是否正確：400₅ 的位值由右往左是 5⁰ = 1、5¹ = 5、5² = 25，所以它代表 4 × 25 + 0 × 5 + 0 × 1 = 100 ✓，與原數相符。",
+          "最後求各位數字之和：4 + 0 + 0 = 4。",
+          "附註：也可以用「湊位值」的方式直接看出來——五進位的位值是 1、5、25、125。125 已超過 100，所以最高位是 25 那一位；100 ÷ 25 = 4 恰好整除，所以 25 位上是 4，而 5 位與 1 位都是 0，得 400₅ ✓。",
+          "**注意五進位的每一位數字只能是 0 到 4**。若某次除法算出餘數 5 或更大，就表示計算出錯了；本題的三個餘數 0、0、4 都在範圍內 ✓。"
+        ],
+        "zh-Hans": [
+          "换算进位制的标准做法是**反复除以基底并记下余数**，最后把余数由下往上读。",
+          "100 ÷ 5 = 20 余 0。",
+          "20 ÷ 5 = 4 余 0。",
+          "4 ÷ 5 = 0 余 4。商变成 0，停止。",
+          "把余数由**最后一个往回读**：4、0、0，所以 100 在五进位下写成 400₅。**方向不能弄反**——若由上往下读成 004 就错了。",
+          "验算这个表示是否正确：400₅ 的位值由右往左是 5⁰ = 1、5¹ = 5、5² = 25，所以它代表 4 × 25 + 0 × 5 + 0 × 1 = 100 ✓，与原数相符。",
+          "最后求各位数字之和：4 + 0 + 0 = 4。",
+          "附注：也可以用「凑位值」的方式直接看出来——五进位的位值是 1、5、25、125。125 已超过 100，所以最高位是 25 那一位；100 ÷ 25 = 4 恰好整除，所以 25 位上是 4，而 5 位与 1 位都是 0，得 400₅ ✓。",
+          "**注意五进位的每一位数字只能是 0 到 4**。若某次除法算出余数 5 或更大，就表示计算出错了；本题的三个余数 0、0、4 都在范围内 ✓。"
+        ],
+        "en": [
+          "The standard conversion divides repeatedly by the base and records the remainders, then reads them from the last back to the first.",
+          "100 ÷ 5 = 20 remainder 0.",
+          "20 ÷ 5 = 4 remainder 0.",
+          "4 ÷ 5 = 0 remainder 4. The quotient has reached 0, so the process stops.",
+          "Reading the remainders from the last backwards gives 4, 0, 0, so 100 in base five is 400₅. The direction must not be reversed — reading them forwards as 004 would be wrong.",
+          "Check the representation: the place values of 400₅ from the right are 5⁰ = 1, 5¹ = 5 and 5² = 25, so it represents 4 × 25 + 0 × 5 + 0 × 1 = 100, matching the original.",
+          "Finally the digit sum is 4 + 0 + 0 = 4.",
+          "Remark: fitting place values directly also works — the base-five place values are 1, 5, 25 and 125. Since 125 exceeds 100, the leading place is the 25s; and 100 ÷ 25 = 4 exactly, so the 25s digit is 4 while the 5s and 1s digits are 0, giving 400₅.",
+          "Note that every base-five digit must lie between 0 and 4. A remainder of 5 or more would signal an arithmetic slip; here the three remainders 0, 0 and 4 are all in range."
+        ],
+        "ja": [
+          "進法の変換の定石は、**基数で繰り返し割って余りを記録し**、最後に余りを下から順に読むことです。",
+          "100 ÷ 5 = 20 余り 0。",
+          "20 ÷ 5 = 4 余り 0。",
+          "4 ÷ 5 = 0 余り 4。商が 0 になったのでここで止めます。",
+          "余りを**最後のものから逆に**読むと 4、0、0 なので、100 は 5 進法で 400₅ と書けます。**向きを逆にしてはいけません**——上から読んで 004 とするのは誤りです。",
+          "この表示が正しいか確認します：400₅ の位の重みは右から 5⁰ = 1、5¹ = 5、5² = 25 なので、4 × 25 + 0 × 5 + 0 × 1 = 100 ✓ で元の数と一致します。",
+          "最後に各位の数字の和を求めます：4 + 0 + 0 = 4。",
+          "補足：位の重みを当てはめる方法でも直接分かります——5 進法の位の重みは 1、5、25、125。125 は 100 を超えるので最上位は 25 の位。100 ÷ 25 = 4 でちょうど割り切れるので 25 の位が 4、5 の位と 1 の位は 0 となり 400₅ ✓。",
+          "**5 進法の各位の数字は 0 から 4 まで**である点に注意します。余りが 5 以上になったら計算間違いの合図です。本問の余り 0、0、4 はいずれも範囲内 ✓ です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "4"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "進位制轉換：反覆除以基底並把餘數由後往前讀，且各位數字必在 0 到基底減一之間",
+        "notes": "設計依據：100 = 4 × 25 使五進位表示中出現兩個 0，讓「餘數方向讀反」的錯誤（004）與正確答案在位數上明顯不同；詳解另給「湊位值」的第二條路徑，並指出各位數字須小於基底可作為即時檢查。答案 4 已用連除法與位值展開回推 100 兩種方式交叉驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（五進位的數字和）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "數論",
+        "topicCode": "number_theory",
+        "subtopic": "五進位的數字和",
+        "subtopicCode": "base_five_digit_sum"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "number_theory_grade9_foundation_019",
+      "topic": "number_theory",
+      "subtopic": "divisors_above_threshold",
+      "difficulty": "foundation",
+      "levelStage": "grade9",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "在 360 的所有正因數中，大於 20 的共有多少個？",
+        "zh-Hans": "在 360 的所有正因数中，大于 20 的共有多少个？",
+        "en": "Among all positive divisors of 360, how many are greater than 20?",
+        "ja": "360 のすべての正の約数のうち、20 より大きいものはいくつありますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 11 個。",
+        "zh-Hans": "答案是 11 个。",
+        "en": "The answer is 11.",
+        "ja": "答えは 11 個です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "逐一把 360 的因數全部列出來再數，可行但容易漏。**利用因數成對出現的性質，可以把「數大的」轉換成「數小的」**，會輕鬆得多。",
+          "先求因數總數。分解 360 = 2³ × 3² × 5，指數各加 1 相乘得 (3 + 1)(2 + 1)(1 + 1) = 4 × 3 × 2 = 24 個因數。",
+          "接著利用配對：**每個因數 d 都與 360 ÷ d 配成一對**，兩者的乘積是 360。",
+          "**關鍵轉換**：d > 20 等價於 360 ÷ d < 360 ÷ 20 = 18。所以「大於 20 的因數」與「小於 18 的因數」是一一對應的，兩者個數相同。",
+          "小的因數比較容易列齊：1、2、3、4、5、6、8、9、10、12、15——這些都小於 18，共 11 個。（下一個因數是 18，不小於 18，停止。）",
+          "所以大於 20 的因數也有 11 個。",
+          "驗算：直接列出全部 24 個因數——1、2、3、4、5、6、8、9、10、12、15、18、20、24、30、36、40、45、60、72、90、120、180、360。其中大於 20 的是 24、30、36、40、45、60、72、90、120、180、360，數一數確實是 11 個 ✓。",
+          "**再核對總數是否吻合**：小於 18 的有 11 個、大於 20 的有 11 個，剩下的是 18 與 20 這兩個（它們恰好互相配對，18 × 20 = 360）。11 + 11 + 2 = 24 ✓，與因數總數相符，沒有遺漏。",
+          "附註：**門檻 20 的選擇讓配對很乾淨**——因為 20 本身是因數，而它的配對 18 也是因數，兩者都不列入計數，所以剩下的恰好對半分。若門檻換成非因數（例如 25），則須改看 360 ÷ 25 = 14.4，轉成「小於 14.4 的因數」來數。"
+        ],
+        "zh-Hans": [
+          "逐一把 360 的因数全部列出来再数，可行但容易漏。**利用因数成对出现的性质，可以把「数大的」转换成「数小的」**，会轻松得多。",
+          "先求因数总数。分解 360 = 2³ × 3² × 5，指数各加 1 相乘得 (3 + 1)(2 + 1)(1 + 1) = 4 × 3 × 2 = 24 个因数。",
+          "接着利用配对：**每个因数 d 都与 360 ÷ d 配成一对**，两者的乘积是 360。",
+          "**关键转换**：d > 20 等价于 360 ÷ d < 360 ÷ 20 = 18。所以「大于 20 的因数」与「小于 18 的因数」是一一对应的，两者个数相同。",
+          "小的因数比较容易列齐：1、2、3、4、5、6、8、9、10、12、15——这些都小于 18，共 11 个。（下一个因数是 18，不小于 18，停止。）",
+          "所以大于 20 的因数也有 11 个。",
+          "验算：直接列出全部 24 个因数——1、2、3、4、5、6、8、9、10、12、15、18、20、24、30、36、40、45、60、72、90、120、180、360。其中大于 20 的是 24、30、36、40、45、60、72、90、120、180、360，数一数确实是 11 个 ✓。",
+          "**再核对总数是否吻合**：小于 18 的有 11 个、大于 20 的有 11 个，剩下的是 18 与 20 这两个（它们恰好互相配对，18 × 20 = 360）。11 + 11 + 2 = 24 ✓，与因数总数相符，没有遗漏。",
+          "附注：**门槛 20 的选择让配对很干净**——因为 20 本身是因数，而它的配对 18 也是因数，两者都不列入计数，所以剩下的恰好对半分。若门槛换成非因数（例如 25），则须改看 360 ÷ 25 = 14.4，转成「小于 14.4 的因数」来数。"
+        ],
+        "en": [
+          "Listing all divisors of 360 and counting works but invites omissions. Using the fact that divisors come in pairs converts counting the large ones into counting the small ones, which is far easier.",
+          "First the total count. Factorising 360 = 2³ × 3² × 5 and adding 1 to each exponent gives (3 + 1)(2 + 1)(1 + 1) = 4 × 3 × 2 = 24 divisors.",
+          "Now use the pairing: every divisor d pairs with 360 ÷ d, their product being 360.",
+          "The key conversion: d > 20 is equivalent to 360 ÷ d < 360 ÷ 20 = 18. So the divisors greater than 20 correspond one to one with the divisors less than 18, and the two counts are equal.",
+          "The small divisors are easier to list completely: 1, 2, 3, 4, 5, 6, 8, 9, 10, 12 and 15, all below 18, eleven of them. The next divisor is 18, not below 18, so the list stops.",
+          "So there are also 11 divisors greater than 20.",
+          "Check by listing all 24 divisors: 1, 2, 3, 4, 5, 6, 8, 9, 10, 12, 15, 18, 20, 24, 30, 36, 40, 45, 60, 72, 90, 120, 180 and 360. Those above 20 are 24, 30, 36, 40, 45, 60, 72, 90, 120, 180 and 360 — eleven of them.",
+          "Confirm the totals tally: 11 below 18, 11 above 20, and the remaining two are 18 and 20, which pair with each other since 18 × 20 = 360. And 11 + 11 + 2 = 24 matches the divisor count, so nothing is missing.",
+          "Remark: the threshold 20 makes the pairing clean, since 20 is itself a divisor and its partner 18 is too, and neither is counted, leaving the rest split evenly. A non-divisor threshold such as 25 would require examining 360 ÷ 25 = 14.4 and counting the divisors below 14.4 instead."
+        ],
+        "ja": [
+          "360 の約数をすべて書き出して数えることもできますが、漏れやすいです。**約数がペアで現れる性質を使って「大きいものを数える」を「小さいものを数える」に変換する**ほうがずっと楽です。",
+          "まず約数の総数を求めます。360 = 2³ × 3² × 5 と分解し、各指数に 1 を足して掛けると (3 + 1)(2 + 1)(1 + 1) = 4 × 3 × 2 = 24 個。",
+          "次にペアを使います：**どの約数 d も 360 ÷ d と組**になり、積は 360 です。",
+          "**鍵となる変換**：d > 20 は 360 ÷ d < 360 ÷ 20 = 18 と同値です。したがって「20 より大きい約数」と「18 より小さい約数」は 1 対 1 に対応し、個数は等しくなります。",
+          "小さい約数のほうが挙げやすいです：1、2、3、4、5、6、8、9、10、12、15——いずれも 18 未満で 11 個です。（次の約数は 18 で 18 未満ではないので、ここで止めます。）",
+          "したがって 20 より大きい約数も 11 個です。",
+          "検算：24 個の約数をすべて挙げます——1、2、3、4、5、6、8、9、10、12、15、18、20、24、30、36、40、45、60、72、90、120、180、360。20 より大きいのは 24、30、36、40、45、60、72、90、120、180、360 で、数えると確かに 11 個 ✓。",
+          "**総数の整合も確認します**：18 未満が 11 個、20 より大きいのが 11 個、残るのは 18 と 20 の 2 個（この 2 つは互いに組で 18 × 20 = 360）。11 + 11 + 2 = 24 ✓ で約数の総数と一致し、漏れはありません。",
+          "補足：**門檻を 20 にしたことでペアがきれいに分かれます**。20 自身が約数で、その相方 18 も約数であり、どちらも数に入らないため残りがちょうど半分ずつになります。約数でない値（たとえば 25）を門檻にすると 360 ÷ 25 = 14.4 を見て「14.4 未満の約数」を数えることになります。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "11"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "因數的配對計數：由 d > 20 等價於 360/d < 18，把大因數的計數轉為小因數的計數",
+        "notes": "設計依據：門檻 20 恰為 360 的因數且其配對 18 也是因數，使兩者都不列入計數而剩餘部分對半分，詳解以 11 + 11 + 2 = 24 核對總數確認無遺漏；並說明門檻若非因數時該如何調整。答案 11 已用全部 24 個因數的列舉與配對轉換兩種方式交叉驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（超過門檻的因數個數）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "數論",
+        "topicCode": "number_theory",
+        "subtopic": "超過門檻的因數個數",
+        "subtopicCode": "divisors_above_threshold"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "number_theory_grade9_foundation_020",
+      "topic": "number_theory",
+      "subtopic": "odd_divisor_count",
+      "difficulty": "foundation",
+      "levelStage": "grade9",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "在 1 到 100 的正整數中，**正因數個數為奇數**的數共有多少個？",
+        "zh-Hans": "在 1 到 100 的正整数中，**正因数个数为奇数**的数共有多少个？",
+        "en": "Among the integers from 1 to 100, how many have an odd number of positive divisors?",
+        "ja": "1 から 100 までの整数のうち、**正の約数の個数が奇数**であるものはいくつありますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 10 個。",
+        "zh-Hans": "答案是 10 个。",
+        "en": "The answer is 10.",
+        "ja": "答えは 10 個です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "逐一數 100 個數各有幾個因數太慢，**應該先看清楚「因數個數為奇數」代表什麼**。",
+          "回想因數是**成對出現**的：若 d 是 n 的因數，則 n ÷ d 也是，兩者配成一對，乘積是 n。",
+          "既然因數兩兩成對，因數個數照理說應該是偶數。**唯一的例外是某個因數與它的配對是同一個數**，也就是 d = n ÷ d。",
+          "由 d = n ÷ d 得 d² = n，也就是 **n 必須是完全平方數**，而那個「自己配自己」的因數就是 √n。",
+          "所以：**因數個數為奇數的數，恰好就是完全平方數**。以 36 為例，它的因數 1、2、3、4、6、9、12、18、36 共 9 個（奇數），配對是 (1,36)、(2,18)、(3,12)、(4,9)，而 6 落單 ✓。",
+          "現在問題化簡成：1 到 100 中有幾個完全平方數？",
+          "它們是 1²、2²、⋯，最大的是 10² = 100（恰好不超過 100），而 11² = 121 已超過。所以共有 10 個。",
+          "驗算：程式對 1 到 100 逐一數出因數個數並檢查奇偶，符合的恰好是 1、4、9、16、25、36、49、64、81、100 這 10 個 ✓，全部都是完全平方數。",
+          "附註：這個性質有一個有名的應用——**一排 100 盞燈，第 k 輪把編號為 k 的倍數的燈全部切換**，做完 100 輪後仍亮著的燈，正是被切換了奇數次的那些，也就是編號為完全平方數的 10 盞燈。"
+        ],
+        "zh-Hans": [
+          "逐一数 100 个数各有几个因数太慢，**应该先看清楚「因数个数为奇数」代表什么**。",
+          "回想因数是**成对出现**的：若 d 是 n 的因数，则 n ÷ d 也是，两者配成一对，乘积是 n。",
+          "既然因数两两成对，因数个数照理说应该是偶数。**唯一的例外是某个因数与它的配对是同一个数**，也就是 d = n ÷ d。",
+          "由 d = n ÷ d 得 d² = n，也就是 **n 必须是完全平方数**，而那个「自己配自己」的因数就是 √n。",
+          "所以：**因数个数为奇数的数，恰好就是完全平方数**。以 36 为例，它的因数 1、2、3、4、6、9、12、18、36 共 9 个（奇数），配对是 (1,36)、(2,18)、(3,12)、(4,9)，而 6 落单 ✓。",
+          "现在问题化简成：1 到 100 中有几个完全平方数？",
+          "它们是 1²、2²、⋯，最大的是 10² = 100（恰好不超过 100），而 11² = 121 已超过。所以共有 10 个。",
+          "验算：程序对 1 到 100 逐一数出因数个数并检查奇偶，符合的恰好是 1、4、9、16、25、36、49、64、81、100 这 10 个 ✓，全部都是完全平方数。",
+          "附注：这个性质有一个有名的应用——**一排 100 盏灯，第 k 轮把编号为 k 的倍数的灯全部切换**，做完 100 轮后仍亮着的灯，正是被切换了奇数次的那些，也就是编号为完全平方数的 10 盏灯。"
+        ],
+        "en": [
+          "Counting divisors for all 100 numbers is slow; first understand what an odd divisor count means.",
+          "Recall that divisors come in pairs: if d divides n then so does n ÷ d, and the two pair up with product n.",
+          "Since divisors pair up, the count should be even. The only exception arises when a divisor coincides with its partner, that is when d = n ÷ d.",
+          "From d = n ÷ d comes d² = n, so n must be a perfect square, and the self-paired divisor is √n.",
+          "So the numbers with an odd divisor count are exactly the perfect squares. Take 36: its divisors 1, 2, 3, 4, 6, 9, 12, 18 and 36 number nine, an odd count, with pairs (1,36), (2,18), (3,12) and (4,9) while 6 stands alone.",
+          "The question thus reduces to how many perfect squares lie between 1 and 100.",
+          "They are 1², 2², … up to 10² = 100, which just reaches the limit, while 11² = 121 exceeds it. So there are 10.",
+          "Check: counting divisors for every number from 1 to 100 and testing parity gives exactly 1, 4, 9, 16, 25, 36, 49, 64, 81 and 100 — ten numbers, all perfect squares.",
+          "Remark: this property has a famous application — with 100 lamps in a row, where round k toggles every lamp whose number is a multiple of k, the lamps still lit after 100 rounds are those toggled an odd number of times, namely the 10 lamps with perfect-square numbers."
+        ],
+        "ja": [
+          "100 個の数それぞれの約数を数えるのは遅いので、**まず「約数の個数が奇数」とは何かを見極めます**。",
+          "約数は**ペアで現れる**ことを思い出します：d が n の約数なら n ÷ d も約数で、2 つは積が n の組になります。",
+          "約数がペアになる以上、個数は偶数のはずです。**唯一の例外は、ある約数とその相方が同じ数になる場合**、すなわち d = n ÷ d のときです。",
+          "d = n ÷ d より d² = n、つまり **n は平方数でなければならず**、自分自身と組む約数が √n です。",
+          "したがって、**約数の個数が奇数の数はちょうど平方数**です。36 を例にとると、約数 1、2、3、4、6、9、12、18、36 は 9 個（奇数）で、(1,36)、(2,18)、(3,12)、(4,9) が組をなし 6 だけが余ります ✓。",
+          "問題は「1 から 100 に平方数はいくつあるか」に帰着します。",
+          "1²、2²、⋯ と続き、最大は 10² = 100（ちょうど上限）で、11² = 121 は超えます。したがって 10 個です。",
+          "検算：1 から 100 まで約数の個数を数えて偶奇を調べると、該当するのはちょうど 1、4、9、16、25、36、49、64、81、100 の 10 個 ✓ で、すべて平方数です。",
+          "補足：この性質には有名な応用があります——**100 個のランプが並び、第 k 回で番号が k の倍数のランプをすべて切り替える**とき、100 回後に点いているのは奇数回切り替えられたもの、すなわち番号が平方数の 10 個です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "10"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "因數個數的奇偶：因數成對出現故個數為偶數，唯完全平方數因 √n 自我配對而為奇數",
+        "notes": "設計依據：詳解由「因數成對」推出例外條件 d² = n，讓「奇數個因數即完全平方數」有推理依據而非背誦；並以 36 的九個因數實際展示落單的 6，末尾連結到 100 盞燈的經典問題說明同一性質的應用。答案 10 已用 1 到 100 逐一計數因數並檢查奇偶的窮舉獨立驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（因數個數為奇數）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "數論",
+        "topicCode": "number_theory",
+        "subtopic": "因數個數為奇數",
+        "subtopicCode": "odd_divisor_count"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "number_theory_grade9_foundation_021",
+      "topic": "number_theory",
+      "subtopic": "factorial_divisibility_condition",
+      "difficulty": "foundation",
+      "levelStage": "grade9",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "小美從 1! 開始依序計算 1!、2!、3!、⋯，想找出第一個能被 1000 整除的階乘。求她會停在 n! 的哪一個 n。（n! 表示 1 × 2 × 3 × ⋯ × n）",
+        "zh-Hans": "小美从 1! 开始依序计算 1!、2!、3!、⋯，想找出第一个能被 1000 整除的阶乘。求她会停在 n! 的哪一个 n。（n! 表示 1 × 2 × 3 × ⋯ × n）",
+        "en": "Mei computes 1!, 2!, 3! and so on in turn, looking for the first factorial divisible by 1000. At which n does she stop? Here n! means 1 × 2 × 3 × ⋯ × n.",
+        "ja": "美さんは 1!、2!、3!、⋯ と順に計算し、1000 で割り切れる最初の階乗を探しています。どの n の n! で止まりますか。（n! は 1 × 2 × 3 × ⋯ × n を表します）"
+      },
+      "answer": {
+        "zh-Hant": "答案是 15。",
+        "zh-Hans": "答案是 15。",
+        "en": "The answer is 15.",
+        "ja": "答えは 15 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "**先把 1000 做質因數分解**，才知道 n! 裡面需要湊出哪些質因數：1000 = 10³ = (2 × 5)³ = 2³ × 5³。",
+          "所以問題變成：n! 的質因數分解中，**至少要有三個 2 與三個 5**。",
+          "接著比較這兩個條件哪一個比較難滿足。**2 是每隔一個數就出現一次，而 5 要每隔五個數才出現一次**，所以 5 明顯稀少得多，是真正的瓶頸。",
+          "先看 5 的個數。在 1 × 2 × ⋯ × n 中，能貢獻因數 5 的是 5 的倍數：5、10、15、⋯",
+          "5 貢獻一個 5、10 貢獻一個 5、15 也貢獻一個 5，所以**到 15 為止累積了 3 個 5**，恰好達標；而只到 14 的話只有 5 與 10 兩個，不夠。",
+          "再確認 2 的條件在 n = 15 時是否也滿足。1 到 15 中，2 的倍數有 2、4、6、8、10、12、14 共 7 個（其中 4 與 8 還額外多貢獻），至少有 7 個因數 2，**遠超過需要的 3 個** ✓。",
+          "所以 n = 15 時兩個條件都滿足，而 n = 14 時 5 的個數不足。答案是 15。",
+          "驗算：程式從 n = 1 開始逐一計算 n! 除以 1000 的餘數。14! ÷ 1000 的餘數是 200（不整除 ✗），15! ÷ 1000 的餘數是 0（整除 ✓），所以最小的 n 確實是 15。",
+          "附註：**判斷瓶頸在哪一個質因數是關鍵**。若題目改成「n! 被 128 = 2⁷ 整除」，瓶頸就換成 2，只需 n = 8（因為 2、4、6、8 分別貢獻 1、2、1、3 個因數 2，合計 7 個）。"
+        ],
+        "zh-Hans": [
+          "**先把 1000 做质因数分解**，才知道 n! 里面需要凑出哪些质因数：1000 = 10³ = (2 × 5)³ = 2³ × 5³。",
+          "所以问题变成：n! 的质因数分解中，**至少要有三个 2 与三个 5**。",
+          "接着比较这两个条件哪一个比较难满足。**2 是每隔一个数就出现一次，而 5 要每隔五个数才出现一次**，所以 5 明显稀少得多，是真正的瓶颈。",
+          "先看 5 的个数。在 1 × 2 × ⋯ × n 中，能贡献因数 5 的是 5 的倍数：5、10、15、⋯",
+          "5 贡献一个 5、10 贡献一个 5、15 也贡献一个 5，所以**到 15 为止累积了 3 个 5**，恰好达标；而只到 14 的话只有 5 与 10 两个，不够。",
+          "再确认 2 的条件在 n = 15 时是否也满足。1 到 15 中，2 的倍数有 2、4、6、8、10、12、14 共 7 个（其中 4 与 8 还额外多贡献），至少有 7 个因数 2，**远超过需要的 3 个** ✓。",
+          "所以 n = 15 时两个条件都满足，而 n = 14 时 5 的个数不足。答案是 15。",
+          "验算：程序从 n = 1 开始逐一计算 n! 除以 1000 的余数。14! ÷ 1000 的余数是 200（不整除 ✗），15! ÷ 1000 的余数是 0（整除 ✓），所以最小的 n 确实是 15。",
+          "附注：**判断瓶颈在哪一个质因数是关键**。若题目改成「n! 被 128 = 2⁷ 整除」，瓶颈就换成 2，只需 n = 8（因为 2、4、6、8 分别贡献 1、2、1、3 个因数 2，合计 7 个）。"
+        ],
+        "en": [
+          "First factorise 1000 to see which primes n! must supply: 1000 = 10³ = (2 × 5)³ = 2³ × 5³.",
+          "So the question becomes: the prime factorisation of n! must contain at least three 2s and three 5s.",
+          "Compare which condition is harder. Factors of 2 appear every other number, while factors of 5 appear only every fifth, so 5 is far scarcer and is the genuine bottleneck.",
+          "Count the 5s. In 1 × 2 × ⋯ × n, the multiples of 5 supply them: 5, 10, 15 and so on.",
+          "Each of 5, 10 and 15 supplies one factor 5, so by 15 the total reaches 3, exactly what is needed; stopping at 14 leaves only 5 and 10, just two, which is insufficient.",
+          "Now confirm the condition on 2 at n = 15. Among 1 to 15 the multiples of 2 are 2, 4, 6, 8, 10, 12 and 14, seven of them, with 4 and 8 contributing extra, so there are at least 7 factors of 2, far more than the 3 required.",
+          "So both conditions hold at n = 15 while n = 14 falls short on 5s. The answer is 15.",
+          "Check: computing n! modulo 1000 from n = 1 upwards gives remainder 200 at n = 14, not divisible, and remainder 0 at n = 15, divisible, so 15 is indeed the smallest.",
+          "Remark: identifying which prime is the bottleneck is the key. Changing the problem to divisibility by 128 = 2⁷ would make 2 the bottleneck, needing only n = 8, since 2, 4, 6 and 8 contribute 1, 2, 1 and 3 factors of 2, seven in all."
+        ],
+        "ja": [
+          "**まず 1000 を素因数分解**して、n! にどの素因数がいくつ必要かを見ます：1000 = 10³ = (2 × 5)³ = 2³ × 5³。",
+          "したがって問題は「n! の素因数分解に **2 が 3 個以上、5 が 3 個以上**含まれること」になります。",
+          "次にどちらの条件が満たしにくいかを比べます。**2 は 1 つおきに現れますが、5 は 5 つおきにしか現れません**。5 のほうが明らかに希少で、これが真のボトルネックです。",
+          "5 の個数を数えます。1 × 2 × ⋯ × n の中で因数 5 を供給するのは 5 の倍数、すなわち 5、10、15、⋯ です。",
+          "5、10、15 がそれぞれ 5 を 1 つずつ供給するので、**15 までで 3 個たまり**ちょうど条件を満たします。14 までなら 5 と 10 の 2 個しかなく不足です。",
+          "n = 15 で 2 の条件も満たされるか確認します。1 から 15 の中で 2 の倍数は 2、4、6、8、10、12、14 の 7 個（4 と 8 はさらに余分に供給）なので因数 2 は少なくとも 7 個あり、**必要な 3 個をはるかに上回ります** ✓。",
+          "したがって n = 15 で両方の条件が満たされ、n = 14 では 5 が不足します。答えは 15 です。",
+          "検算：n = 1 から n! を 1000 で割った余りを計算すると、n = 14 では余り 200（割り切れず ✗）、n = 15 では余り 0（割り切れる ✓）で、最小の n は確かに 15 です。",
+          "補足：**どの素因数がボトルネックかを見極めるのが鍵**です。「n! が 128 = 2⁷ で割り切れる」に変えればボトルネックは 2 になり、n = 8 で足ります（2、4、6、8 がそれぞれ 1、2、1、3 個の因数 2 を供給し計 7 個）。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "15"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "階乘的整除條件：把除數質因數分解後找出最稀少的質因數作為瓶頸，再累積該質因數的個數",
+        "notes": "設計依據：1000 = 2³ × 5³ 使兩個質因數的需求量相同，但供給速率差五倍，讓「誰是瓶頸」成為必須判斷的一步而非顯然；詳解另舉 128 = 2⁷ 的情形說明瓶頸會隨除數改變。答案 15 已用 n! 對 1000 取餘的逐一計算獨立驗證（14! 餘 200、15! 餘 0）。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（階乘的整除條件）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "數論",
+        "topicCode": "number_theory",
+        "subtopic": "階乘的整除條件",
+        "subtopicCode": "factorial_divisibility_condition"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "number_theory_grade9_foundation_022",
+      "topic": "number_theory",
+      "subtopic": "fraction_not_reduced",
+      "difficulty": "foundation",
+      "levelStage": "grade9",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "求最小的正整數 n，使得分數 (n + 3)/(2n + 1) **不是**最簡分數（也就是分子與分母有大於 1 的公因數）。",
+        "zh-Hans": "求最小的正整数 n，使得分数 (n + 3)/(2n + 1) **不是**最简分数（也就是分子与分母有大于 1 的公因数）。",
+        "en": "Find the smallest positive integer n for which the fraction (n + 3)/(2n + 1) is not in lowest terms, that is, its numerator and denominator share a factor greater than 1.",
+        "ja": "分数 (n + 3)/(2n + 1) が既約分数**でなくなる**（分子と分母が 1 より大きい公約数をもつ）ような最小の正の整数 n を求めなさい。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 2。",
+        "zh-Hans": "答案是 2。",
+        "en": "The answer is 2.",
+        "ja": "答えは 2 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "不要一個一個代入試——**先找出分子與分母的公因數可能是什麼**，範圍會小得驚人。",
+          "設 d 是 n + 3 與 2n + 1 的公因數。那麼 d 也必定整除它們的任何整數組合。",
+          "**關鍵的一步是消去 n**：把 n + 3 乘以 2 得 2n + 6，再減去 2n + 1，得 (2n + 6) − (2n + 1) = 5。",
+          "既然 d 同時整除 2n + 6 與 2n + 1，它就必定整除兩者的差 5。",
+          "而 5 是質數，所以 **d 只可能是 1 或 5**。要讓分數不是最簡分數，就必須 d = 5。",
+          "所以條件變成：5 必須整除 n + 3，也就是 n + 3 是 5 的倍數，即 n = 2、7、12、17、⋯",
+          "最小的正整數是 n = 2。",
+          "驗算：n = 2 時，分子是 2 + 3 = 5，分母是 2 × 2 + 1 = 5，分數是 5/5，兩者的公因數是 5 > 1 ✓，確實不是最簡分數（可以約成 1）。",
+          "再檢查更小的 n = 1：分子 4、分母 3，gcd(4, 3) = 1 ✓ 是最簡分數，所以 2 確實是最小的。程式對 n = 1 到 30 逐一計算 gcd(n + 3, 2n + 1)，大於 1 的 n 是 2、7、12、17、22、27——**恰好每隔 5 個出現一次** ✓，與推論相符。"
+        ],
+        "zh-Hans": [
+          "不要一个一个代入试——**先找出分子与分母的公因数可能是什么**，范围会小得惊人。",
+          "设 d 是 n + 3 与 2n + 1 的公因数。那么 d 也必定整除它们的任何整数组合。",
+          "**关键的一步是消去 n**：把 n + 3 乘以 2 得 2n + 6，再减去 2n + 1，得 (2n + 6) − (2n + 1) = 5。",
+          "既然 d 同时整除 2n + 6 与 2n + 1，它就必定整除两者的差 5。",
+          "而 5 是质数，所以 **d 只可能是 1 或 5**。要让分数不是最简分数，就必须 d = 5。",
+          "所以条件变成：5 必须整除 n + 3，也就是 n + 3 是 5 的倍数，即 n = 2、7、12、17、⋯",
+          "最小的正整数是 n = 2。",
+          "验算：n = 2 时，分子是 2 + 3 = 5，分母是 2 × 2 + 1 = 5，分数是 5/5，两者的公因数是 5 > 1 ✓，确实不是最简分数（可以约成 1）。",
+          "再检查更小的 n = 1：分子 4、分母 3，gcd(4, 3) = 1 ✓ 是最简分数，所以 2 确实是最小的。程序对 n = 1 到 30 逐一计算 gcd(n + 3, 2n + 1)，大于 1 的 n 是 2、7、12、17、22、27——**恰好每隔 5 个出现一次** ✓，与推论相符。"
+        ],
+        "en": [
+          "Do not substitute values one by one — first work out what the common factor could possibly be, and the range shrinks dramatically.",
+          "Let d be a common divisor of n + 3 and 2n + 1. Then d divides any integer combination of them.",
+          "The key step eliminates n: doubling n + 3 gives 2n + 6, and subtracting 2n + 1 gives (2n + 6) − (2n + 1) = 5.",
+          "Since d divides both 2n + 6 and 2n + 1, it must divide their difference, 5.",
+          "As 5 is prime, d can only be 1 or 5. For the fraction not to be in lowest terms, d must be 5.",
+          "So the condition becomes: 5 divides n + 3, that is n + 3 is a multiple of 5, giving n = 2, 7, 12, 17 and so on.",
+          "The smallest positive integer is n = 2.",
+          "Check: at n = 2 the numerator is 2 + 3 = 5 and the denominator is 2 × 2 + 1 = 5, so the fraction is 5/5 whose common factor 5 exceeds 1 — indeed not in lowest terms, reducing to 1.",
+          "Check the smaller n = 1: numerator 4, denominator 3, and gcd(4, 3) = 1, so it is in lowest terms and 2 is indeed smallest. Computing gcd(n + 3, 2n + 1) for n = 1 to 30 gives values above 1 at n = 2, 7, 12, 17, 22 and 27 — exactly every fifth value, matching the reasoning."
+        ],
+        "ja": [
+          "1 つずつ代入して試すのではなく——**まず分子と分母の公約数が何でありうるかを求めます**。範囲が驚くほど狭まります。",
+          "d を n + 3 と 2n + 1 の公約数とします。すると d は両者の任意の整数結合も割り切ります。",
+          "**鍵となる一手は n を消すこと**です：n + 3 を 2 倍して 2n + 6、そこから 2n + 1 を引くと (2n + 6) − (2n + 1) = 5。",
+          "d は 2n + 6 と 2n + 1 の両方を割り切るので、その差 5 も割り切らねばなりません。",
+          "5 は素数なので **d は 1 か 5 に限られます**。既約でなくするには d = 5 でなければなりません。",
+          "したがって条件は「5 が n + 3 を割り切る」、すなわち n + 3 が 5 の倍数、つまり n = 2、7、12、17、⋯ となります。",
+          "最小の正の整数は n = 2 です。",
+          "検算：n = 2 のとき分子は 2 + 3 = 5、分母は 2 × 2 + 1 = 5 で、分数は 5/5。公約数 5 > 1 ✓ で確かに既約ではありません（1 に約分できます）。",
+          "より小さい n = 1 も確認します：分子 4、分母 3 で gcd(4, 3) = 1 ✓ と既約なので、2 が最小です。n = 1 から 30 まで gcd(n + 3, 2n + 1) を計算すると 1 より大きくなるのは n = 2、7、12、17、22、27——**ちょうど 5 個おき** ✓ で推論と一致します。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "2"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "分數可約的條件：公因數必整除分子分母的整數組合，消去 n 後得公因數只能是 5 的因數",
+        "notes": "設計依據：以「2 × 分子 − 分母」消去 n 得到常數 5，把無窮多個 n 的檢查化為單一質數的判斷，這正是輾轉相除法背後的想法；詳解另檢查 n = 1 以確認最小性，並指出解每隔 5 個出現一次。答案 2 已用 n = 1 到 30 的 gcd 逐一計算獨立驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（分數何時可約）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "數論",
+        "topicCode": "number_theory",
+        "subtopic": "分數何時可約",
+        "subtopicCode": "fraction_not_reduced"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "number_theory_grade9_foundation_023",
+      "topic": "number_theory",
+      "subtopic": "factorial_sum_units_digit",
+      "difficulty": "foundation",
+      "levelStage": "grade9",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "求 1! + 2! + 3! + 4! + ⋯ + 100! 這個和的個位數字。（n! 表示 1 × 2 × ⋯ × n）",
+        "zh-Hans": "求 1! + 2! + 3! + 4! + ⋯ + 100! 这个和的个位数字。（n! 表示 1 × 2 × ⋯ × n）",
+        "en": "Find the units digit of the sum 1! + 2! + 3! + 4! + ⋯ + 100!, where n! means 1 × 2 × ⋯ × n.",
+        "ja": "1! + 2! + 3! + 4! + ⋯ + 100! の和の一の位の数字を求めなさい。（n! は 1 × 2 × ⋯ × n を表します）"
+      },
+      "answer": {
+        "zh-Hant": "答案是 3。",
+        "zh-Hans": "答案是 3。",
+        "en": "The answer is 3.",
+        "ja": "答えは 3 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "100! 是一個天文數字，不可能真的算出來。但**求個位數字時，只需要每一項的個位數字**。",
+          "先逐項算出前幾個階乘：1! = 1、2! = 2、3! = 6、4! = 24、5! = 120、6! = 720。",
+          "**注意 5! = 120 的個位已經變成 0**。原因是 5! 中同時含有因數 2 與 5，相乘得 10，所以它必定是 10 的倍數。",
+          "而 6! = 6 × 5!、7! = 7 × 6!、⋯ **每一個更大的階乘都以 5! 為因數**，所以從 5! 開始，之後所有階乘的個位數字都是 0。",
+          "既然個位是 0 的項對總和的個位毫無貢獻，**整個問題就縮減成只看前四項**。",
+          "計算前四項的和：1 + 2 + 6 + 24 = 33。",
+          "所以整個和的個位數字，就是 33 的個位數字，也就是 3。",
+          "驗算：程式精確計算 1! + 2! + ⋯ + 100! 這個巨大的整數並取其個位，結果正是 3 ✓，與只看前四項的推論一致。",
+          "附註：**同樣的想法可以推廣**。若改問這個和除以 100 的餘數，就要看末兩位——10! = 3628800 起才保證末兩位是 00（因為含有兩組 2 × 5），所以要累加到 9! 為止；若問除以 1000 的餘數，則要累加到 14! 為止。**關鍵都是找出「從哪一項起不再有貢獻」**。"
+        ],
+        "zh-Hans": [
+          "100! 是一个天文数字，不可能真的算出来。但**求个位数字时，只需要每一项的个位数字**。",
+          "先逐项算出前几个阶乘：1! = 1、2! = 2、3! = 6、4! = 24、5! = 120、6! = 720。",
+          "**注意 5! = 120 的个位已经变成 0**。原因是 5! 中同时含有因数 2 与 5，相乘得 10，所以它必定是 10 的倍数。",
+          "而 6! = 6 × 5!、7! = 7 × 6!、⋯ **每一个更大的阶乘都以 5! 为因数**，所以从 5! 开始，之后所有阶乘的个位数字都是 0。",
+          "既然个位是 0 的项对总和的个位毫无贡献，**整个问题就缩减成只看前四项**。",
+          "计算前四项的和：1 + 2 + 6 + 24 = 33。",
+          "所以整个和的个位数字，就是 33 的个位数字，也就是 3。",
+          "验算：程序精确计算 1! + 2! + ⋯ + 100! 这个巨大的整数并取其个位，结果正是 3 ✓，与只看前四项的推论一致。",
+          "附注：**同样的想法可以推广**。若改问这个和除以 100 的余数，就要看末两位——10! = 3628800 起才保证末两位是 00（因为含有两组 2 × 5），所以要累加到 9! 为止；若问除以 1000 的余数，则要累加到 14! 为止。**关键都是找出「从哪一项起不再有贡献」**。"
+        ],
+        "en": [
+          "100! is astronomically large and cannot be computed directly. But for a units digit, only each term's units digit matters.",
+          "Compute the first few factorials: 1! = 1, 2! = 2, 3! = 6, 4! = 24, 5! = 120 and 6! = 720.",
+          "Note that 5! = 120 already ends in 0, because it contains both a factor 2 and a factor 5, whose product 10 makes it a multiple of 10.",
+          "And 6! = 6 × 5!, 7! = 7 × 6!, and so on — every larger factorial has 5! as a factor, so from 5! onwards every factorial ends in 0.",
+          "Since terms ending in 0 contribute nothing to the units digit of the sum, the whole problem reduces to the first four terms.",
+          "Their sum is 1 + 2 + 6 + 24 = 33.",
+          "So the units digit of the entire sum is the units digit of 33, namely 3.",
+          "Check: computing the enormous integer 1! + 2! + ⋯ + 100! exactly and taking its units digit gives 3, agreeing with the four-term argument.",
+          "Remark: the same idea generalises. Asking for the sum modulo 100 would require the last two digits, and only from 10! = 3628800 onwards are they guaranteed to be 00, since two pairs of 2 × 5 are then present, so terms up to 9! would need adding; asking modulo 1000 would require terms up to 14!. The key each time is finding where the terms stop contributing."
+        ],
+        "ja": [
+          "100! は天文学的な数で、実際に計算することはできません。しかし**一の位を求めるには各項の一の位だけが必要**です。",
+          "最初のいくつかの階乗を求めます：1! = 1、2! = 2、3! = 6、4! = 24、5! = 120、6! = 720。",
+          "**5! = 120 の一の位がすでに 0 になっている**ことに注目します。5! は因数 2 と 5 を同時に含み、その積 10 により 10 の倍数になるからです。",
+          "そして 6! = 6 × 5!、7! = 7 × 6!、⋯ と、**より大きい階乗はすべて 5! を因数にもつ**ので、5! 以降のすべての階乗の一の位は 0 です。",
+          "一の位が 0 の項は和の一の位に何も寄与しないので、**問題は最初の 4 項だけを見ることに帰着します**。",
+          "最初の 4 項の和：1 + 2 + 6 + 24 = 33。",
+          "したがって和全体の一の位は 33 の一の位、すなわち 3 です。",
+          "検算：1! + 2! + ⋯ + 100! という巨大な整数を厳密に計算して一の位をとると、ちょうど 3 ✓ で、4 項だけを見た推論と一致します。",
+          "補足：**同じ考え方は一般化できます**。この和を 100 で割った余りを問うなら末尾 2 桁が必要で、2 × 5 の組が 2 つそろう 10! = 3628800 以降で 00 が保証されるため 9! までを足します。1000 で割った余りなら 14! までです。**要点は毎回「どの項から寄与がなくなるか」を見つけること**です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "3"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "階乘和的個位：5! 起因含 2 × 5 而個位為 0，故只需累加前四項",
+        "notes": "設計依據：詳解說明 5! 之後個位為 0 的原因（含因數 2 與 5）而非僅陳述現象，並把方法推廣到末兩位（需到 9!）與末三位（需到 14!），使「找出從哪一項起不再貢獻」成為可遷移的判準。答案 3 已用精確計算完整的階乘和並取個位獨立驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（階乘和的個位）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "數論",
+        "topicCode": "number_theory",
+        "subtopic": "階乘和的個位",
+        "subtopicCode": "factorial_sum_units_digit"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "number_theory_grade9_foundation_024",
+      "topic": "number_theory",
+      "subtopic": "count_without_digit",
+      "difficulty": "foundation",
+      "levelStage": "grade9",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "在 1 到 1000 的正整數中，十進位表示裡**完全不出現數字 7** 的數共有多少個？",
+        "zh-Hans": "在 1 到 1000 的正整数中，十进位表示里**完全不出现数字 7** 的数共有多少个？",
+        "en": "Among the integers from 1 to 1000, how many contain no digit 7 in their decimal representation?",
+        "ja": "1 から 1000 までの整数のうち、10 進表記に**数字 7 がまったく現れない**ものはいくつありますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 729 個。",
+        "zh-Hans": "答案是 729 个。",
+        "en": "The answer is 729.",
+        "ja": "答えは 729 個です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "位數不一樣的數（一位、兩位、三位）分開數會很麻煩。**有一個統一的技巧：把所有數都補成三位**。",
+          "把 1 到 999 的每個數都寫成三位，位數不足的前面補 0——例如 5 寫成 005、42 寫成 042。**這樣不會改變數字的內容，只是統一了長度**。",
+          "在這個寫法下，「不出現數字 7」就等價於：三個位置上的數字都不是 7。",
+          "每個位置可以填 0 到 9 共 10 個數字，扣掉 7 之後剩下 9 種選擇（0、1、2、3、4、5、6、8、9）。",
+          "三個位置彼此獨立，所以合格的三位字串共有 9 × 9 × 9 = 729 個。",
+          "**但這 729 個當中包含了 000**，而 000 對應的是 0，不在 1 到 1000 的範圍內，要扣掉，剩下 728 個。",
+          "最後別忘了 1000 本身。1000 的數字是 1、0、0、0，沒有 7 ✓ 符合條件，要加回來：728 + 1 = 729 個。",
+          "驗算：程式對 1 到 1000 的每個數逐一檢查其十進位表示中是否含有字元「7」，不含的恰好是 729 個 ✓。",
+          "**巧合的是扣掉 000 與加上 1000 剛好抵消**，所以答案與 9³ 相同——但這只是數值上的巧合，兩個調整必須各自交代清楚，不能省略。"
+        ],
+        "zh-Hans": [
+          "位数不一样的数（一位、两位、三位）分开数会很麻烦。**有一个统一的技巧：把所有数都补成三位**。",
+          "把 1 到 999 的每个数都写成三位，位数不足的前面补 0——例如 5 写成 005、42 写成 042。**这样不会改变数字的内容，只是统一了长度**。",
+          "在这个写法下，「不出现数字 7」就等价于：三个位置上的数字都不是 7。",
+          "每个位置可以填 0 到 9 共 10 个数字，扣掉 7 之后剩下 9 种选择（0、1、2、3、4、5、6、8、9）。",
+          "三个位置彼此独立，所以合格的三位字串共有 9 × 9 × 9 = 729 个。",
+          "**但这 729 个当中包含了 000**，而 000 对应的是 0，不在 1 到 1000 的范围内，要扣掉，剩下 728 个。",
+          "最后别忘了 1000 本身。1000 的数字是 1、0、0、0，没有 7 ✓ 符合条件，要加回来：728 + 1 = 729 个。",
+          "验算：程序对 1 到 1000 的每个数逐一检查其十进位表示中是否含有字元「7」，不含的恰好是 729 个 ✓。",
+          "**巧合的是扣掉 000 与加上 1000 刚好抵消**，所以答案与 9³ 相同——但这只是数值上的巧合，两个调整必须各自交代清楚，不能省略。"
+        ],
+        "en": [
+          "Counting one-digit, two-digit and three-digit numbers separately is awkward. A unifying trick is to pad every number to three digits.",
+          "Write each number from 1 to 999 with three digits, padding with leading zeros — 5 becomes 005 and 42 becomes 042. This does not change the digits present, only standardises the length.",
+          "Under this convention, containing no 7 is equivalent to none of the three positions holding a 7.",
+          "Each position may hold any of the 10 digits 0 to 9, and removing 7 leaves 9 choices: 0, 1, 2, 3, 4, 5, 6, 8 and 9.",
+          "The three positions are independent, so there are 9 × 9 × 9 = 729 qualifying three-digit strings.",
+          "But those 729 include 000, which represents 0 and lies outside the range 1 to 1000, so it must be removed, leaving 728.",
+          "Finally do not forget 1000 itself. Its digits are 1, 0, 0 and 0, containing no 7, so it qualifies and must be added back: 728 + 1 = 729.",
+          "Check: testing every number from 1 to 1000 for the character 7 in its decimal representation finds exactly 729 without it.",
+          "It is a coincidence that removing 000 and adding 1000 exactly cancel, leaving the answer equal to 9³ — but that is a numerical accident, and both adjustments must still be stated explicitly rather than skipped."
+        ],
+        "ja": [
+          "桁数の異なる数（1 桁・2 桁・3 桁）を別々に数えるのは面倒です。**すべての数を 3 桁にそろえる**という統一的な工夫があります。",
+          "1 から 999 までの各数を 3 桁で書き、足りない桁は先頭に 0 を補います——5 は 005、42 は 042 のように。**数字の中身は変わらず、長さがそろうだけ**です。",
+          "この書き方のもとでは、「数字 7 が現れない」とは 3 か所のどこにも 7 がないことと同値です。",
+          "各位には 0 から 9 の 10 個の数字が入りますが、7 を除くと 9 通り（0、1、2、3、4、5、6、8、9）です。",
+          "3 か所は互いに独立なので、条件を満たす 3 桁の文字列は 9 × 9 × 9 = 729 個です。",
+          "**ただしこの 729 個には 000 が含まれます**。000 は 0 を表し 1〜1000 の範囲外なので除き、728 個になります。",
+          "最後に 1000 自身を忘れないこと。1000 の数字は 1、0、0、0 で 7 を含まず ✓ 条件を満たすので戻します：728 + 1 = 729 個。",
+          "検算：1 から 1000 までの各数について 10 進表記に文字「7」が含まれるか調べると、含まないものはちょうど 729 個 ✓。",
+          "**000 を除くことと 1000 を加えることがちょうど相殺する**ため答えは 9³ と一致しますが、これは数値上の偶然にすぎず、2 つの調整はそれぞれ明示する必要があり省略できません。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "729"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "不含某數字的計數：補零統一為三位後每位有 9 種選擇，再扣掉 000 並補上 1000 兩個邊界",
+        "notes": "設計依據：補零技巧把三種位數統一處理，避免分情形；上下兩個邊界（000 不在範圍、1000 需另計）恰好抵消，詳解特別指出這是巧合而非可省略的步驟，防止學生誤以為直接寫 9³ 即可。答案 729 已用 1 到 1000 的逐一字串檢查窮舉獨立驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（不含某個數字的計數）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "數論",
+        "topicCode": "number_theory",
+        "subtopic": "不含某個數字的計數",
+        "subtopicCode": "count_without_digit"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "number_theory_grade9_foundation_025",
+      "topic": "number_theory",
+      "subtopic": "sum_of_odd_divisors",
+      "difficulty": "foundation",
+      "levelStage": "grade9",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "求 90 的所有**奇數**正因數之和。",
+        "zh-Hans": "求 90 的所有**奇数**正因数之和。",
+        "en": "Find the sum of all odd positive divisors of 90.",
+        "ja": "90 のすべての**奇数**の正の約数の和を求めなさい。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 78。",
+        "zh-Hans": "答案是 78。",
+        "en": "The answer is 78.",
+        "ja": "答えは 78 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "先把 90 做質因數分解：90 = 2 × 45 = 2 × 3² × 5。",
+          "**一個因數是奇數，等價於它的分解中完全不含因數 2**。所以要找的因數形如 3ᵃ × 5ᵇ，其中 2 的指數被固定為 0。",
+          "換句話說，90 的奇因數，就是把 2 這個部分整個丟掉後剩下的 **3² × 5 = 45** 的所有因數。",
+          "所以問題化簡成：求 45 的所有正因數之和。",
+          "用因數和的乘積形式：45 = 3² × 5，所以因數和 = (3⁰ + 3¹ + 3²) × (5⁰ + 5¹) = (1 + 3 + 9) × (1 + 5)。",
+          "計算：13 × 6 = 78。",
+          "驗算：直接列出 90 的奇因數——1、3、5、9、15、45，共 6 個。累加：1 + 3 = 4，+5 = 9，+9 = 18，+15 = 33，+45 = 78 ✓，與公式相符。",
+          "**也可以順帶核對總因數和**：90 = 2 × 3² × 5，全部因數之和 = (1 + 2) × (1 + 3 + 9) × (1 + 5) = 3 × 13 × 6 = 234。而奇因數和是 78，所以偶因數和是 234 − 78 = 156 = 2 × 78 ✓——**偶因數恰好是每個奇因數乘以 2，所以總和正好是奇因數和的 2 倍**，這個關係可以當作檢查。",
+          "附註：這個 2 倍關係成立是因為 90 的分解中 2 只出現一次。若 2 出現兩次（例如 180 = 2² × 45），偶因數就分成「乘 2」與「乘 4」兩類，偶因數和會是奇因數和的 2 + 4 = 6 倍。"
+        ],
+        "zh-Hans": [
+          "先把 90 做质因数分解：90 = 2 × 45 = 2 × 3² × 5。",
+          "**一个因数是奇数，等价于它的分解中完全不含因数 2**。所以要找的因数形如 3ᵃ × 5ᵇ，其中 2 的指数被固定为 0。",
+          "换句话说，90 的奇因数，就是把 2 这个部分整个丢掉后剩下的 **3² × 5 = 45** 的所有因数。",
+          "所以问题化简成：求 45 的所有正因数之和。",
+          "用因数和的乘积形式：45 = 3² × 5，所以因数和 = (3⁰ + 3¹ + 3²) × (5⁰ + 5¹) = (1 + 3 + 9) × (1 + 5)。",
+          "计算：13 × 6 = 78。",
+          "验算：直接列出 90 的奇因数——1、3、5、9、15、45，共 6 个。累加：1 + 3 = 4，+5 = 9，+9 = 18，+15 = 33，+45 = 78 ✓，与公式相符。",
+          "**也可以顺带核对总因数和**：90 = 2 × 3² × 5，全部因数之和 = (1 + 2) × (1 + 3 + 9) × (1 + 5) = 3 × 13 × 6 = 234。而奇因数和是 78，所以偶因数和是 234 − 78 = 156 = 2 × 78 ✓——**偶因数恰好是每个奇因数乘以 2，所以总和正好是奇因数和的 2 倍**，这个关系可以当作检查。",
+          "附注：这个 2 倍关系成立是因为 90 的分解中 2 只出现一次。若 2 出现两次（例如 180 = 2² × 45），偶因数就分成「乘 2」与「乘 4」两类，偶因数和会是奇因数和的 2 + 4 = 6 倍。"
+        ],
+        "en": [
+          "First factorise: 90 = 2 × 45 = 2 × 3² × 5.",
+          "A divisor is odd exactly when its own factorisation contains no factor 2. So the divisors sought have the form 3ᵃ × 5ᵇ, with the exponent of 2 fixed at 0.",
+          "In other words, the odd divisors of 90 are precisely the divisors of 3² × 5 = 45, obtained by discarding the factor 2 entirely.",
+          "So the problem reduces to summing all positive divisors of 45.",
+          "Using the product form for divisor sums: 45 = 3² × 5, so the sum is (3⁰ + 3¹ + 3²) × (5⁰ + 5¹) = (1 + 3 + 9) × (1 + 5).",
+          "That gives 13 × 6 = 78.",
+          "Check by listing the odd divisors of 90: 1, 3, 5, 9, 15 and 45, six of them, accumulating to 4, 9, 18, 33 and finally 78, matching the formula.",
+          "The total divisor sum offers another check: with 90 = 2 × 3² × 5 it is (1 + 2) × (1 + 3 + 9) × (1 + 5) = 3 × 13 × 6 = 234. Since the odd divisors sum to 78, the even ones sum to 234 − 78 = 156 = 2 × 78 — each even divisor is an odd divisor times 2, so their total is exactly twice the odd total, which serves as a check.",
+          "Remark: that factor of 2 holds because 2 appears just once in the factorisation of 90. Were it to appear twice, as in 180 = 2² × 45, the even divisors would split into those with a factor 2 and those with a factor 4, and their sum would be 2 + 4 = 6 times the odd sum."
+        ],
+        "ja": [
+          "まず 90 を素因数分解します：90 = 2 × 45 = 2 × 3² × 5。",
+          "**約数が奇数であることは、その分解に因数 2 をまったく含まないことと同値**です。したがって求める約数は 3ᵃ × 5ᵇ の形で、2 の指数は 0 に固定されます。",
+          "言い換えれば、90 の奇数の約数とは、2 の部分を丸ごと捨てて残る **3² × 5 = 45** のすべての約数です。",
+          "したがって問題は「45 のすべての正の約数の和を求めよ」に帰着します。",
+          "約数の和の積の形を使います：45 = 3² × 5 なので、和 = (3⁰ + 3¹ + 3²) × (5⁰ + 5¹) = (1 + 3 + 9) × (1 + 5)。",
+          "計算すると 13 × 6 = 78。",
+          "検算：90 の奇数の約数を挙げると 1、3、5、9、15、45 の 6 個。順に足すと 4、9、18、33、そして 78 ✓ で公式と一致します。",
+          "**総約数和でも確認できます**：90 = 2 × 3² × 5 より全約数の和 = (1 + 2) × (1 + 3 + 9) × (1 + 5) = 3 × 13 × 6 = 234。奇数の約数の和が 78 なので偶数の約数の和は 234 − 78 = 156 = 2 × 78 ✓——**偶数の約数は各奇数の約数を 2 倍したものなので、和はちょうど 2 倍**になります。この関係が検算に使えます。",
+          "補足：この 2 倍の関係が成り立つのは 90 の分解に 2 が 1 回しか現れないからです。2 が 2 回現れる場合（たとえば 180 = 2² × 45）、偶数の約数は「2 倍」と「4 倍」の 2 類に分かれ、和は奇数の約数の和の 2 + 4 = 6 倍になります。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "78"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "奇因數之和：奇因數即為去掉因數 2 後所餘部分的全部因數，故化為求 45 的因數和",
+        "notes": "設計依據：90 的分解中 2 恰好出現一次，使「偶因數和為奇因數和的 2 倍」成立並可作為檢查；詳解另指出若 2 出現兩次則倍數變為 6，說明該關係的成立條件而非當作通則。答案 78 已用六個奇因數的逐一累加與總因數和 234 的分解核對交叉驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（奇因數之和）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "數論",
+        "topicCode": "number_theory",
+        "subtopic": "奇因數之和",
+        "subtopicCode": "sum_of_odd_divisors"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "number_theory_grade9_foundation_026",
+      "topic": "number_theory",
+      "subtopic": "repeating_decimal_digit",
+      "difficulty": "foundation",
+      "levelStage": "grade9",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "用長除法計算 1 ÷ 7，小數部分會無止境地重複下去。求小數點後第 100 位的數字。",
+        "zh-Hans": "用长除法计算 1 ÷ 7，小数部分会无止境地重复下去。求小数点后第 100 位的数字。",
+        "en": "Dividing 1 by 7 by long division produces a decimal part that repeats endlessly. Find the digit in the 100th place after the decimal point.",
+        "ja": "1 ÷ 7 を筆算で計算すると、小数部分が限りなく繰り返します。小数第 100 位の数字を求めなさい。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 8。",
+        "zh-Hans": "答案是 8。",
+        "en": "The answer is 8.",
+        "ja": "答えは 8 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "先用長除法求出 1/7 的小數表示。1 ÷ 7 = 0.142857142857⋯",
+          "可以看出小數部分**以 142857 這六個數字為一組不斷重複**，所以循環節是 142857，長度是 6。",
+          "既然每 6 位重複一次，**小數點後第 n 位的數字，只由 n 除以 6 的餘數決定**。",
+          "計算 100 ÷ 6：6 × 16 = 96，所以商是 16、餘數是 4。",
+          "餘數 4 表示第 100 位走完了 16 個完整的循環之後，再往前數 4 位，也就是**對應循環節中的第 4 個數字**。",
+          "循環節 142857 的第 4 個數字是 8（依序是 1、4、2、8、5、7）。",
+          "所以小數點後第 100 位是 8。",
+          "驗算：用較小的位數核對這個對應規則——第 4 位應該是循環節第 4 位 8，而 0.142857⋯ 的第 4 位確實是 8 ✓；第 6 位餘數為 0，對應循環節的**最後一位** 7，而實際第 6 位正是 7 ✓。",
+          "**餘數為 0 時要對到最後一位而不是第一位**，這是最容易出錯的地方。程式取 1/7 小數展開的第 100 位，結果為 8 ✓，與推論一致。"
+        ],
+        "zh-Hans": [
+          "先用长除法求出 1/7 的小数表示。1 ÷ 7 = 0.142857142857⋯",
+          "可以看出小数部分**以 142857 这六个数字为一组不断重复**，所以循环节是 142857，长度是 6。",
+          "既然每 6 位重复一次，**小数点后第 n 位的数字，只由 n 除以 6 的余数决定**。",
+          "计算 100 ÷ 6：6 × 16 = 96，所以商是 16、余数是 4。",
+          "余数 4 表示第 100 位走完了 16 个完整的循环之后，再往前数 4 位，也就是**对应循环节中的第 4 个数字**。",
+          "循环节 142857 的第 4 个数字是 8（依序是 1、4、2、8、5、7）。",
+          "所以小数点后第 100 位是 8。",
+          "验算：用较小的位数核对这个对应规则——第 4 位应该是循环节第 4 位 8，而 0.142857⋯ 的第 4 位确实是 8 ✓；第 6 位余数为 0，对应循环节的**最后一位** 7，而实际第 6 位正是 7 ✓。",
+          "**余数为 0 时要对到最后一位而不是第一位**，这是最容易出错的地方。程序取 1/7 小数展开的第 100 位，结果为 8 ✓，与推论一致。"
+        ],
+        "en": [
+          "First find the decimal expansion by long division: 1 ÷ 7 = 0.142857142857….",
+          "The decimal part repeats the six digits 142857 over and over, so the repeating block is 142857 with length 6.",
+          "Since the pattern repeats every 6 places, the digit in the nth place depends only on the remainder of n on division by 6.",
+          "Computing 100 ÷ 6: since 6 × 16 = 96, the quotient is 16 and the remainder is 4.",
+          "A remainder of 4 means the 100th place comes 4 positions into a block after 16 complete repetitions, so it corresponds to the 4th digit of the block.",
+          "The 4th digit of 142857 is 8, the digits being 1, 4, 2, 8, 5 and 7 in order.",
+          "So the 100th digit after the decimal point is 8.",
+          "Check the correspondence on small cases: the 4th place should be the block's 4th digit, 8, and 0.142857… indeed has 8 there; the 6th place gives remainder 0 and corresponds to the block's last digit, 7, and the 6th place is indeed 7.",
+          "A remainder of 0 must map to the last digit rather than the first, which is where errors most often arise. Extracting the 100th decimal digit of 1/7 by computation gives 8, agreeing with the reasoning."
+        ],
+        "ja": [
+          "まず筆算で 1/7 の小数表示を求めます：1 ÷ 7 = 0.142857142857⋯。",
+          "小数部分は **142857 という 6 桁を 1 組として繰り返している**ことが分かるので、循環節は 142857、長さは 6 です。",
+          "6 桁ごとに繰り返すので、**小数第 n 位の数字は n を 6 で割った余りだけで決まります**。",
+          "100 ÷ 6 を計算します：6 × 16 = 96 なので商は 16、余りは 4。",
+          "余り 4 は、第 100 位が 16 回の完全な循環の後さらに 4 桁進んだ位置、すなわち**循環節の 4 番目の数字**に対応することを意味します。",
+          "循環節 142857 の 4 番目は 8 です（順に 1、4、2、8、5、7）。",
+          "したがって小数第 100 位は 8 です。",
+          "検算：小さい位で対応規則を確認します——第 4 位は循環節の 4 番目 8 のはずで、0.142857⋯ の第 4 位は確かに 8 ✓。第 6 位は余り 0 で循環節の**最後の桁** 7 に対応し、実際の第 6 位も 7 ✓。",
+          "**余りが 0 のときは最初ではなく最後の桁に対応させる**点が最も間違えやすいところです。1/7 の小数展開の第 100 位を計算すると 8 ✓ で推論と一致します。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "8"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "循環小數的指定位：由循環節長度 6 取 n 除以 6 的餘數定位，餘 0 時對應循環節的最後一位",
+        "notes": "設計依據：100 除以 6 餘 4 為非零餘數，而詳解另以第 6 位（餘 0）示範餘數為零時該對到最後一位，把這個最常見的偏移錯誤明確排除；並以第 4 位的實際數字驗證對應規則。答案 8 已用循環節定位與 1/7 小數展開取第 100 位兩種方式交叉驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（循環小數的指定位）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "數論",
+        "topicCode": "number_theory",
+        "subtopic": "循環小數的指定位",
+        "subtopicCode": "repeating_decimal_digit"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "number_theory_grade9_foundation_027",
+      "topic": "number_theory",
+      "subtopic": "sum_of_cubes",
+      "difficulty": "foundation",
+      "levelStage": "grade9",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "計算 1³ + 2³ + 3³ + 4³ + 5³ + 6³ 的值。",
+        "zh-Hans": "计算 1³ + 2³ + 3³ + 4³ + 5³ + 6³ 的值。",
+        "en": "Compute 1³ + 2³ + 3³ + 4³ + 5³ + 6³.",
+        "ja": "1³ + 2³ + 3³ + 4³ + 5³ + 6³ を計算しなさい。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 441。",
+        "zh-Hans": "答案是 441。",
+        "en": "The answer is 441.",
+        "ja": "答えは 441 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "只有六項，逐項相加做得到，但**這串數有一個很漂亮的規律值得先看一眼**。",
+          "先逐項算出立方：1³ = 1、2³ = 8、3³ = 27、4³ = 64、5³ = 125、6³ = 216。",
+          "累加：1 + 8 = 9，+27 = 36，+64 = 100，+125 = 225，+216 = 441。",
+          "所以答案是 441。",
+          "**注意剛才每一步的部分和：9、36、100、225、441**——它們全都是完全平方數！分別是 3²、6²、10²、15²、21²。",
+          "而 3、6、10、15、21 又正是 1 + 2、1 + 2 + 3、1 + 2 + 3 + 4、⋯ 的結果。",
+          "所以規律是：**前 n 個正整數的立方和，等於前 n 個正整數之和的平方**。",
+          "用這條規律驗算：1 + 2 + 3 + 4 + 5 + 6 = 21，而 21² = 441 ✓，與逐項相加的結果完全相同。",
+          "驗算：程式逐項計算 1³ 到 6³ 並累加得 441，同時計算 (1 + ⋯ + 6)² = 21² = 441 ✓，兩者相符。附註：**這條規律讓大範圍的計算變得輕鬆**——例如 1³ + 2³ + ⋯ + 10³ 不必算十個立方，直接用 (1 + ⋯ + 10)² = 55² = 3025 即可。"
+        ],
+        "zh-Hans": [
+          "只有六项，逐项相加做得到，但**这串数有一个很漂亮的规律值得先看一眼**。",
+          "先逐项算出立方：1³ = 1、2³ = 8、3³ = 27、4³ = 64、5³ = 125、6³ = 216。",
+          "累加：1 + 8 = 9，+27 = 36，+64 = 100，+125 = 225，+216 = 441。",
+          "所以答案是 441。",
+          "**注意刚才每一步的部分和：9、36、100、225、441**——它们全都是完全平方数！分别是 3²、6²、10²、15²、21²。",
+          "而 3、6、10、15、21 又正是 1 + 2、1 + 2 + 3、1 + 2 + 3 + 4、⋯ 的结果。",
+          "所以规律是：**前 n 个正整数的立方和，等于前 n 个正整数之和的平方**。",
+          "用这条规律验算：1 + 2 + 3 + 4 + 5 + 6 = 21，而 21² = 441 ✓，与逐项相加的结果完全相同。",
+          "验算：程序逐项计算 1³ 到 6³ 并累加得 441，同时计算 (1 + ⋯ + 6)² = 21² = 441 ✓，两者相符。附注：**这条规律让大范围的计算变得轻松**——例如 1³ + 2³ + ⋯ + 10³ 不必算十个立方，直接用 (1 + ⋯ + 10)² = 55² = 3025 即可。"
+        ],
+        "en": [
+          "With only six terms, adding them one by one works, but the sequence hides an elegant pattern worth noticing first.",
+          "Compute the cubes: 1³ = 1, 2³ = 8, 3³ = 27, 4³ = 64, 5³ = 125 and 6³ = 216.",
+          "Accumulating: 1 + 8 = 9, then 36, then 100, then 225, then 441.",
+          "So the answer is 441.",
+          "Look at those partial sums — 9, 36, 100, 225 and 441 — every one is a perfect square, namely 3², 6², 10², 15² and 21².",
+          "And 3, 6, 10, 15 and 21 are exactly 1 + 2, 1 + 2 + 3, 1 + 2 + 3 + 4 and so on.",
+          "So the pattern is that the sum of the first n cubes equals the square of the sum of the first n positive integers.",
+          "Using the pattern as a check: 1 + 2 + 3 + 4 + 5 + 6 = 21, and 21² = 441, exactly matching the term-by-term total.",
+          "Check: computing the six cubes and accumulating gives 441, and computing (1 + ⋯ + 6)² = 21² = 441 agrees. Remark: the pattern makes larger ranges easy — for 1³ + 2³ + ⋯ + 10³ there is no need to compute ten cubes, since (1 + ⋯ + 10)² = 55² = 3025 gives it directly."
+        ],
+        "ja": [
+          "項が 6 つだけなので順に足してもよいのですが、**この数列には先に一目見る価値のある美しい規則**があります。",
+          "まず立方を求めます：1³ = 1、2³ = 8、3³ = 27、4³ = 64、5³ = 125、6³ = 216。",
+          "順に足します：1 + 8 = 9、+27 = 36、+64 = 100、+125 = 225、+216 = 441。",
+          "したがって答えは 441 です。",
+          "**先ほどの各段階の部分和 9、36、100、225、441** に注目してください——すべて平方数です！ それぞれ 3²、6²、10²、15²、21² です。",
+          "そして 3、6、10、15、21 はまさに 1 + 2、1 + 2 + 3、1 + 2 + 3 + 4、⋯ の結果です。",
+          "つまり規則は、**最初の n 個の正の整数の立方和は、最初の n 個の正の整数の和の平方に等しい**というものです。",
+          "この規則で検算します：1 + 2 + 3 + 4 + 5 + 6 = 21、21² = 441 ✓ で、順に足した結果と完全に一致します。",
+          "検算：1³ から 6³ を順に足すと 441、(1 + ⋯ + 6)² = 21² = 441 ✓ で両者が一致します。補足：**この規則により広い範囲の計算が容易になります**——1³ + 2³ + ⋯ + 10³ は 10 個の立方を計算せずとも (1 + ⋯ + 10)² = 55² = 3025 で直ちに求まります。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "441"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "立方和等於和的平方：前 n 個立方之和為 (1 + 2 + ⋯ + n)²，可由部分和皆為完全平方數觀察出",
+        "notes": "設計依據：詳解不直接給公式，而是從逐項累加的部分和 9、36、100、225、441 全為完全平方數觀察出規律，再連結到三角形數，讓公式由資料浮現；末尾以 1³ + ⋯ + 10³ = 3025 說明規律在大範圍時的價值。答案 441 已用逐項累加與 21² 兩種方式交叉驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（立方數之和）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "數論",
+        "topicCode": "number_theory",
+        "subtopic": "立方數之和",
+        "subtopicCode": "sum_of_cubes"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "number_theory_grade9_foundation_028",
+      "topic": "number_theory",
+      "subtopic": "integer_part_of_root",
+      "difficulty": "foundation",
+      "levelStage": "grade9",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "求 √2026 的整數部分（也就是不超過 √2026 的最大整數）。",
+        "zh-Hans": "求 √2026 的整数部分（也就是不超过 √2026 的最大整数）。",
+        "en": "Find the integer part of √2026, that is the largest integer not exceeding √2026.",
+        "ja": "√2026 の整数部分（√2026 を超えない最大の整数）を求めなさい。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 45。",
+        "zh-Hans": "答案是 45。",
+        "en": "The answer is 45.",
+        "ja": "答えは 45 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "求平方根的整數部分，**不需要真的把根號開出來**，只要找出它夾在哪兩個連續整數之間。",
+          "設整數部分是 n，則條件是 n² ≤ 2026 < (n + 1)²。**要找的就是滿足這個夾擠關係的 n**。",
+          "先粗略估算範圍。40² = 1600 太小，50² = 2500 太大，所以 n 落在 40 與 50 之間。",
+          "再縮小：45² = 2025。這個數非常接近 2026，值得仔細看。",
+          "檢查左邊：45² = 2025 ≤ 2026 ✓ 成立。",
+          "檢查右邊：46² = 2116，而 2026 < 2116 ✓ 也成立。",
+          "兩邊都符合，所以整數部分是 45。",
+          "**注意 2026 只比 45² 大 1**，所以 √2026 略大於 45（約 45.0111），但仍然不到 46——整數部分取的是**不超過它的最大整數**，所以是 45 而不是四捨五入後的數。",
+          "驗算：程式計算 2026 的整數平方根，結果為 45 ✓；並確認 45² = 2025 ≤ 2026 且 46² = 2116 > 2026 ✓。附註：**若題目改成 2025**，則 √2025 = 45 恰好是整數，整數部分同樣是 45；而若改成 2116，√2116 = 46，整數部分就變成 46 了。"
+        ],
+        "zh-Hans": [
+          "求平方根的整数部分，**不需要真的把根号开出来**，只要找出它夹在哪两个连续整数之间。",
+          "设整数部分是 n，则条件是 n² ≤ 2026 < (n + 1)²。**要找的就是满足这个夹挤关系的 n**。",
+          "先粗略估算范围。40² = 1600 太小，50² = 2500 太大，所以 n 落在 40 与 50 之间。",
+          "再缩小：45² = 2025。这个数非常接近 2026，值得仔细看。",
+          "检查左边：45² = 2025 ≤ 2026 ✓ 成立。",
+          "检查右边：46² = 2116，而 2026 < 2116 ✓ 也成立。",
+          "两边都符合，所以整数部分是 45。",
+          "**注意 2026 只比 45² 大 1**，所以 √2026 略大于 45（约 45.0111），但仍然不到 46——整数部分取的是**不超过它的最大整数**，所以是 45 而不是四舍五入后的数。",
+          "验算：程序计算 2026 的整数平方根，结果为 45 ✓；并确认 45² = 2025 ≤ 2026 且 46² = 2116 > 2026 ✓。附注：**若题目改成 2025**，则 √2025 = 45 恰好是整数，整数部分同样是 45；而若改成 2116，√2116 = 46，整数部分就变成 46 了。"
+        ],
+        "en": [
+          "Finding the integer part of a square root needs no actual root extraction; it suffices to locate it between two consecutive integers.",
+          "Let the integer part be n, so the condition is n² ≤ 2026 < (n + 1)². Finding the n satisfying this squeeze is the whole task.",
+          "Estimate roughly first: 40² = 1600 is too small and 50² = 2500 too large, so n lies between 40 and 50.",
+          "Narrow further: 45² = 2025, remarkably close to 2026 and worth examining carefully.",
+          "Check the left inequality: 45² = 2025 ≤ 2026 holds.",
+          "Check the right: 46² = 2116, and 2026 < 2116 holds too.",
+          "Both hold, so the integer part is 45.",
+          "Note that 2026 exceeds 45² by only 1, so √2026 is just above 45, about 45.0111, yet still short of 46 — the integer part is the largest integer not exceeding the value, hence 45 rather than any rounded figure.",
+          "Check: computing the integer square root of 2026 gives 45, and confirming 45² = 2025 ≤ 2026 while 46² = 2116 > 2026. Remark: had the problem used 2025, then √2025 = 45 exactly and the integer part would still be 45; with 2116, √2116 = 46 and the integer part would become 46."
+        ],
+        "ja": [
+          "平方根の整数部分を求めるのに**実際に根号を外す必要はありません**。連続する 2 つの整数のどこに挟まれるかを見つければ十分です。",
+          "整数部分を n とすると条件は n² ≤ 2026 < (n + 1)²。**この挟み込みを満たす n を探す**のが課題です。",
+          "まず大まかに範囲を見積もります。40² = 1600 は小さすぎ、50² = 2500 は大きすぎるので、n は 40 と 50 の間です。",
+          "さらに絞ります：45² = 2025。この数は 2026 に非常に近く、注意して見る価値があります。",
+          "左側を確認：45² = 2025 ≤ 2026 ✓ 成立。",
+          "右側を確認：46² = 2116 であり 2026 < 2116 ✓ こちらも成立。",
+          "両方が成り立つので整数部分は 45 です。",
+          "**2026 は 45² よりわずか 1 大きいだけ**なので √2026 は 45 をわずかに超える程度（約 45.0111）ですが、46 には届きません——整数部分は**その値を超えない最大の整数**をとるので、四捨五入した値ではなく 45 です。",
+          "検算：2026 の整数平方根を計算すると 45 ✓、45² = 2025 ≤ 2026 かつ 46² = 2116 > 2026 ✓ も確認できます。補足：**問題が 2025 なら** √2025 = 45 でちょうど整数となり整数部分も 45、2116 なら √2116 = 46 で整数部分は 46 になります。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "45"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "平方根的整數部分：由 n² ≤ N < (n+1)² 的夾擠關係定出 n，不必實際開方",
+        "notes": "設計依據：2026 僅比 45² 大 1，使 √2026 極接近整數但仍需嚴格判斷落在 45 與 46 之間；詳解區辨「整數部分」與「四捨五入」的差別，並以 2025 與 2116 兩個鄰近值說明邊界的變化。答案 45 已用整數平方根計算與兩側平方值的夾擠檢查交叉驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（平方根的整數部分）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "數論",
+        "topicCode": "number_theory",
+        "subtopic": "平方根的整數部分",
+        "subtopicCode": "integer_part_of_root"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "number_theory_grade9_foundation_029",
+      "topic": "number_theory",
+      "subtopic": "lcm_pair_count",
+      "difficulty": "foundation",
+      "levelStage": "grade9",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "求滿足 lcm(a, b) = 12 的正整數**有序**數對 (a, b) 共有多少組。（lcm 表示最小公倍數；(2, 12) 與 (12, 2) 視為不同的兩組）",
+        "zh-Hans": "求满足 lcm(a, b) = 12 的正整数**有序**数对 (a, b) 共有多少组。（lcm 表示最小公倍数；(2, 12) 与 (12, 2) 视为不同的两组）",
+        "en": "How many ordered pairs of positive integers (a, b) satisfy lcm(a, b) = 12? Here lcm denotes the least common multiple, and (2, 12) and (12, 2) count as two different pairs.",
+        "ja": "lcm(a, b) = 12 を満たす正の整数の**順序つき**の組 (a, b) はいくつありますか。（lcm は最小公倍数を表し、(2, 12) と (12, 2) は異なる 2 組と数えます）"
+      },
+      "answer": {
+        "zh-Hant": "答案是 15 組。",
+        "zh-Hans": "答案是 15 组。",
+        "en": "The answer is 15.",
+        "ja": "答えは 15 組です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "**先確定 a 與 b 的可能範圍**：既然 12 是它們的公倍數，a 與 b 都必須是 12 的因數。",
+          "分解 12 = 2² × 3，所以 a 與 b 都形如 2ˣ × 3ʸ，其中 x 可取 0、1、2，y 可取 0、1。",
+          "**關鍵性質是：最小公倍數在每個質因數上取的是兩者指數的較大值**。所以 lcm(a, b) = 2² × 3 這個條件，可以拆成兩個獨立的條件分別處理。",
+          "**條件一（關於 2）**：設 a 的 2 的指數是 x₁、b 的是 x₂，則需要 max(x₁, x₂) = 2。",
+          "x₁ 與 x₂ 各可取 0、1、2 共 3 種，兩者的組合有 3 × 3 = 9 種；其中最大值**不是** 2 的（也就是兩者都在 0、1 之中）有 2 × 2 = 4 種。所以最大值為 2 的有 9 − 4 = 5 種。",
+          "**條件二（關於 3）**：設指數是 y₁、y₂，各可取 0、1，需要 max(y₁, y₂) = 1。",
+          "組合共 2 × 2 = 4 種，其中最大值不是 1 的只有 (0, 0) 這 1 種，所以符合的有 4 − 1 = 3 種。",
+          "兩個質因數的指數選擇彼此獨立，所以總數 = 5 × 3 = 15 組。",
+          "驗算：程式對 1 ≤ a, b ≤ 12 逐一計算 lcm(a, b)，等於 12 的恰好有 15 組 ✓，分別是 (1,12)、(2,12)、(3,4)、(3,12)、(4,3)、(4,6)、(4,12)、(6,4)、(6,12)、(12,1)、(12,2)、(12,3)、(12,4)、(12,6)、(12,12)。附註：**若改為不計順序**，則除了 (12, 12) 這組自我對稱之外，其餘 14 組兩兩配對，答案會是 (15 − 1) ÷ 2 + 1 = 8 組。"
+        ],
+        "zh-Hans": [
+          "**先确定 a 与 b 的可能范围**：既然 12 是它们的公倍数，a 与 b 都必须是 12 的因数。",
+          "分解 12 = 2² × 3，所以 a 与 b 都形如 2ˣ × 3ʸ，其中 x 可取 0、1、2，y 可取 0、1。",
+          "**关键性质是：最小公倍数在每个质因数上取的是两者指数的较大值**。所以 lcm(a, b) = 2² × 3 这个条件，可以拆成两个独立的条件分别处理。",
+          "**条件一（关于 2）**：设 a 的 2 的指数是 x₁、b 的是 x₂，则需要 max(x₁, x₂) = 2。",
+          "x₁ 与 x₂ 各可取 0、1、2 共 3 种，两者的组合有 3 × 3 = 9 种；其中最大值**不是** 2 的（也就是两者都在 0、1 之中）有 2 × 2 = 4 种。所以最大值为 2 的有 9 − 4 = 5 种。",
+          "**条件二（关于 3）**：设指数是 y₁、y₂，各可取 0、1，需要 max(y₁, y₂) = 1。",
+          "组合共 2 × 2 = 4 种，其中最大值不是 1 的只有 (0, 0) 这 1 种，所以符合的有 4 − 1 = 3 种。",
+          "两个质因数的指数选择彼此独立，所以总数 = 5 × 3 = 15 组。",
+          "验算：程序对 1 ≤ a, b ≤ 12 逐一计算 lcm(a, b)，等于 12 的恰好有 15 组 ✓，分别是 (1,12)、(2,12)、(3,4)、(3,12)、(4,3)、(4,6)、(4,12)、(6,4)、(6,12)、(12,1)、(12,2)、(12,3)、(12,4)、(12,6)、(12,12)。附注：**若改为不计顺序**，则除了 (12, 12) 这组自我对称之外，其余 14 组两两配对，答案会是 (15 − 1) ÷ 2 + 1 = 8 组。"
+        ],
+        "en": [
+          "First fix the possible values: since 12 is a common multiple of a and b, both must be divisors of 12.",
+          "Factorising 12 = 2² × 3, both a and b have the form 2ˣ × 3ʸ with x from 0 to 2 and y from 0 to 1.",
+          "The key property is that a least common multiple takes, for each prime, the larger of the two exponents. So the condition lcm(a, b) = 2² × 3 splits into two independent conditions.",
+          "First condition, on the prime 2: writing the exponents as x₁ and x₂, we need max(x₁, x₂) = 2.",
+          "Each of x₁ and x₂ has 3 options, giving 3 × 3 = 9 combinations, of which those whose maximum is not 2, meaning both lie in {0, 1}, number 2 × 2 = 4. So 9 − 4 = 5 combinations have maximum 2.",
+          "Second condition, on the prime 3: with exponents y₁ and y₂ each in {0, 1}, we need max(y₁, y₂) = 1.",
+          "There are 2 × 2 = 4 combinations, of which only (0, 0) fails, so 4 − 1 = 3 qualify.",
+          "The choices for the two primes are independent, so the total is 5 × 3 = 15 pairs.",
+          "Check: computing lcm(a, b) for all 1 ≤ a, b ≤ 12 gives 12 for exactly 15 pairs — (1,12), (2,12), (3,4), (3,12), (4,3), (4,6), (4,12), (6,4), (6,12), (12,1), (12,2), (12,3), (12,4), (12,6) and (12,12). Remark: ignoring order, all but the self-symmetric (12, 12) pair up, giving (15 − 1) ÷ 2 + 1 = 8 unordered pairs."
+        ],
+        "ja": [
+          "**まず a と b のとりうる範囲を確定します**：12 が両者の公倍数である以上、a も b も 12 の約数でなければなりません。",
+          "12 = 2² × 3 と分解すると、a も b も 2ˣ × 3ʸ の形で、x は 0〜2、y は 0〜1 をとります。",
+          "**鍵となる性質は、最小公倍数が各素因数について 2 つの指数の大きいほうをとる**ことです。したがって lcm(a, b) = 2² × 3 という条件は、独立な 2 つの条件に分けられます。",
+          "**条件 1（素因数 2 について）**：a の 2 の指数を x₁、b のそれを x₂ とすると max(x₁, x₂) = 2 が必要です。",
+          "x₁、x₂ はそれぞれ 3 通りなので組み合わせは 3 × 3 = 9 通り。そのうち最大が 2 **でない**もの（両方が 0、1 にある）は 2 × 2 = 4 通り。よって最大が 2 になるのは 9 − 4 = 5 通りです。",
+          "**条件 2（素因数 3 について）**：指数を y₁、y₂ とすると各 2 通りで、max(y₁, y₂) = 1 が必要です。",
+          "組み合わせは 2 × 2 = 4 通り、そのうち最大が 1 でないのは (0, 0) の 1 通りだけなので、条件を満たすのは 4 − 1 = 3 通りです。",
+          "2 つの素因数の指数の選択は互いに独立なので、総数 = 5 × 3 = 15 組。",
+          "検算：1 ≤ a, b ≤ 12 について lcm(a, b) を計算すると、12 になるのはちょうど 15 組 ✓ で、(1,12)、(2,12)、(3,4)、(3,12)、(4,3)、(4,6)、(4,12)、(6,4)、(6,12)、(12,1)、(12,2)、(12,3)、(12,4)、(12,6)、(12,12) です。補足：**順序を区別しない**場合、自己対称な (12, 12) を除く 14 組が 2 つずつ対になるので、答えは (15 − 1) ÷ 2 + 1 = 8 組になります。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "15"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "指定最小公倍數的數對：lcm 在各質因數取指數的較大者，故對每個質因數用「全部減去最大值不足」計數後相乘",
+        "notes": "設計依據：12 = 2² × 3 使兩個質因數的指數上限不同（2 與 1），須分別計數而不能套用同一個數字；每個質因數的計數以補集（減去 max 不足的情形）進行，比正面分類更簡潔。答案 15 已用 1 ≤ a, b ≤ 12 的全部數對計算 lcm 窮舉獨立驗證並列出全部 15 組。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（指定最小公倍數的數對）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "數論",
+        "topicCode": "number_theory",
+        "subtopic": "指定最小公倍數的數對",
+        "subtopicCode": "lcm_pair_count"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "number_theory_grade9_foundation_030",
+      "topic": "number_theory",
+      "subtopic": "divisor_condition_sum",
+      "difficulty": "foundation",
+      "levelStage": "grade9",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "求所有使 (n + 6)/n 為正整數的正整數 n 之和。",
+        "zh-Hans": "求所有使 (n + 6)/n 为正整数的正整数 n 之和。",
+        "en": "Find the sum of all positive integers n for which (n + 6)/n is a positive integer.",
+        "ja": "(n + 6)/n が正の整数となるような正の整数 n をすべて求め、その和を答えなさい。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 12。",
+        "zh-Hans": "答案是 12。",
+        "en": "The answer is 12.",
+        "ja": "答えは 12 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "直接試 n = 1、2、3、⋯ 可以找到一些解，但**不知道什麼時候可以停**。應該先把式子拆開，看清楚條件的本質。",
+          "把分式拆成兩項：(n + 6)/n = n/n + 6/n = **1 + 6/n**。",
+          "既然 1 已經是整數，**整個式子是整數，就等價於 6/n 是整數**。",
+          "而 6/n 是整數，表示 **n 必須是 6 的因數**。這一步把「無窮多個 n 要檢查」化成了「找出 6 的因數」這個有限的問題。",
+          "6 的正因數是 1、2、3、6，共四個。",
+          "所以符合條件的 n 就是這四個，它們的和 = 1 + 2 + 3 + 6 = 12。",
+          "驗算：把四個 n 逐一代回原式——n = 1 時 (1 + 6)/1 = 7 ✓；n = 2 時 8/2 = 4 ✓；n = 3 時 9/3 = 3 ✓；n = 6 時 12/6 = 2 ✓，四個都是正整數。",
+          "再檢查一個不是 6 的因數的值，例如 n = 4：(4 + 6)/4 = 10/4 = 2.5 ✗ 不是整數，符合預期。程式對 n = 1 到 19 逐一檢查，符合的恰好是 1、2、3、6 這四個 ✓。",
+          "附註：**拆項是這類題目的關鍵手法**。若題目改成 (n + 12)/n，同樣拆成 1 + 12/n，條件就變成 n 是 12 的因數，共 1、2、3、4、6、12 這六個，和為 28。"
+        ],
+        "zh-Hans": [
+          "直接试 n = 1、2、3、⋯ 可以找到一些解，但**不知道什么时候可以停**。应该先把式子拆开，看清楚条件的本质。",
+          "把分式拆成两项：(n + 6)/n = n/n + 6/n = **1 + 6/n**。",
+          "既然 1 已经是整数，**整个式子是整数，就等价于 6/n 是整数**。",
+          "而 6/n 是整数，表示 **n 必须是 6 的因数**。这一步把「无穷多个 n 要检查」化成了「找出 6 的因数」这个有限的问题。",
+          "6 的正因数是 1、2、3、6，共四个。",
+          "所以符合条件的 n 就是这四个，它们的和 = 1 + 2 + 3 + 6 = 12。",
+          "验算：把四个 n 逐一代回原式——n = 1 时 (1 + 6)/1 = 7 ✓；n = 2 时 8/2 = 4 ✓；n = 3 时 9/3 = 3 ✓；n = 6 时 12/6 = 2 ✓，四个都是正整数。",
+          "再检查一个不是 6 的因数的值，例如 n = 4：(4 + 6)/4 = 10/4 = 2.5 ✗ 不是整数，符合预期。程序对 n = 1 到 19 逐一检查，符合的恰好是 1、2、3、6 这四个 ✓。",
+          "附注：**拆项是这类题目的关键手法**。若题目改成 (n + 12)/n，同样拆成 1 + 12/n，条件就变成 n 是 12 的因数，共 1、2、3、4、6、12 这六个，和为 28。"
+        ],
+        "en": [
+          "Testing n = 1, 2, 3 and so on finds some solutions, but gives no indication of when to stop. Split the expression first to see what the condition really requires.",
+          "Split the fraction into two terms: (n + 6)/n = n/n + 6/n = 1 + 6/n.",
+          "Since 1 is already an integer, the whole expression is an integer exactly when 6/n is an integer.",
+          "And 6/n being an integer means n must be a divisor of 6. This step converts an infinite search into the finite task of listing the divisors of 6.",
+          "The positive divisors of 6 are 1, 2, 3 and 6, four of them.",
+          "So those four values are the solutions, and their sum is 1 + 2 + 3 + 6 = 12.",
+          "Check by substituting each back: n = 1 gives (1 + 6)/1 = 7; n = 2 gives 8/2 = 4; n = 3 gives 9/3 = 3; and n = 6 gives 12/6 = 2, all positive integers.",
+          "Test a non-divisor too, say n = 4: (4 + 6)/4 = 10/4 = 2.5, not an integer, as expected. Testing n = 1 to 19 by computation finds exactly 1, 2, 3 and 6.",
+          "Remark: splitting the term is the key technique here. Changing the problem to (n + 12)/n splits likewise into 1 + 12/n, making the condition that n divides 12, giving 1, 2, 3, 4, 6 and 12 with sum 28."
+        ],
+        "ja": [
+          "n = 1、2、3、⋯ と試せばいくつか解は見つかりますが、**どこで止めてよいか分かりません**。まず式を分けて条件の本質を見ます。",
+          "分数を 2 項に分けます：(n + 6)/n = n/n + 6/n = **1 + 6/n**。",
+          "1 はすでに整数なので、**式全体が整数であることは 6/n が整数であることと同値**です。",
+          "6/n が整数であるとは **n が 6 の約数**であるということです。この一手で「無限個の n を調べる」問題が「6 の約数を挙げる」という有限の問題になります。",
+          "6 の正の約数は 1、2、3、6 の 4 個です。",
+          "したがって条件を満たす n はこの 4 個で、和 = 1 + 2 + 3 + 6 = 12。",
+          "検算：4 つの n を元の式に代入します——n = 1 で (1 + 6)/1 = 7 ✓、n = 2 で 8/2 = 4 ✓、n = 3 で 9/3 = 3 ✓、n = 6 で 12/6 = 2 ✓ といずれも正の整数です。",
+          "6 の約数でない値も確認します。n = 4 では (4 + 6)/4 = 10/4 = 2.5 ✗ で整数ではなく、予想どおりです。n = 1 から 19 まで調べると、該当するのはちょうど 1、2、3、6 の 4 個 ✓。",
+          "補足：**項を分けることがこの種の問題の要**です。(n + 12)/n に変えても同様に 1 + 12/n と分かれ、条件は n が 12 の約数となり、1、2、3、4、6、12 の 6 個で和は 28 になります。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "12"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "使商為整數的條件：把 (n + 6)/n 拆成 1 + 6/n，條件化為 n 整除 6，從而把無窮搜尋變成有限列舉",
+        "notes": "設計依據：拆項把「不知何時停止」的試誤化為有限的因數列舉，這正是本題要傳達的手法；驗算除了代回四個解，另檢查非因數的 n = 4 以確認條件的必要性，並以 (n + 12)/n 說明手法可遷移。答案 12 已用 n = 1 到 19 的逐一檢查窮舉獨立驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（使商為整數的條件）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "數論",
+        "topicCode": "number_theory",
+        "subtopic": "使商為整數的條件",
+        "subtopicCode": "divisor_condition_sum"
+      },
+      "reviewStatus": "ok"
     }
   ]
 }
