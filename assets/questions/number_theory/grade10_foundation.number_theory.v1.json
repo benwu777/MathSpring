@@ -1400,6 +1400,1476 @@
         "subtopicCode": "bezout_smallest"
       },
       "reviewStatus": "ok"
+    },
+    {
+      "id": "number_theory_grade10_foundation_016",
+      "topic": "number_theory",
+      "subtopic": "two_cubes_two_ways",
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "求最小的正整數，使它可以用**兩種不同的方式**寫成兩個正整數的立方和。（兩個加數交換順序視為同一種方式）",
+        "zh-Hans": "求最小的正整数，使它可以用**两种不同的方式**写成两个正整数的立方和。（两个加数交换顺序视为同一种方式）",
+        "en": "Find the smallest positive integer expressible as a sum of two positive cubes in two different ways, where swapping the two summands counts as the same way.",
+        "ja": "2 つの正の整数の立方の和として、**2 通りの異なる方法**で書ける最小の正の整数を求めなさい。（2 つの項を入れ替えたものは同じ方法と数えます）"
+      },
+      "answer": {
+        "zh-Hant": "答案是 1729。",
+        "zh-Hans": "答案是 1729。",
+        "en": "The answer is 1729.",
+        "ja": "答えは 1729 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "**先估計搜尋範圍再動手，才不會漫無目的。**要找的數若等於 a³ + b³，那麼 a 與 b 都不會太大。",
+          "**逐一檢查是可行的**：把所有 a ≤ b 的立方和 a³ + b³ 算出來，看哪一個數值出現了兩次以上。",
+          "先列出前幾個立方數：1、8、27、64、125、216、343、512、729、1000、1331、1728。",
+          "**注意 1729 = 1 + 1728 = 1³ + 12³** ✓ 這是第一種表法。",
+          "**再看：1729 = 729 + 1000 = 9³ + 10³** ✓ 這是第二種表法，而且與第一種完全不同。",
+          "所以 1729 確實可以用兩種方式表示。**但還要確認沒有更小的數也可以**——否則答案就不是它。",
+          "驗算：程式對所有 1 ≤ a ≤ b ≤ 29 計算 a³ + b³，統計每個和出現的次數，結果**小於 1729 的和全部都只出現一次**，1729 是第一個出現兩次的 ✓。（次小的是 4104 = 2³ + 16³ = 9³ + 15³。）",
+          "**上界的說明**：若某個數小於 1729 且有兩種表法，那麼其中出現的立方數都小於 1729，因此底數不超過 12（13³ = 2197 已超過），搜尋範圍是有限的，程式已完整涵蓋。",
+          "**這個數有個著名的來歷**：數學家哈代去探望生病的拉馬努金，提到自己搭的計程車車號 1729「是個無趣的數字」，拉馬努金立刻回答那是**最小的、能用兩種方式表成兩個立方和的數**。因此 1729 常被稱為「計程車數」。"
+        ],
+        "zh-Hans": [
+          "**先估计搜寻范围再动手，才不会漫无目的。**要找的数若等于 a³ + b³，那么 a 与 b 都不会太大。",
+          "**逐一检查是可行的**：把所有 a ≤ b 的立方和 a³ + b³ 算出来，看哪一个数值出现了两次以上。",
+          "先列出前几个立方数：1、8、27、64、125、216、343、512、729、1000、1331、1728。",
+          "**注意 1729 = 1 + 1728 = 1³ + 12³** ✓ 这是第一种表法。",
+          "**再看：1729 = 729 + 1000 = 9³ + 10³** ✓ 这是第二种表法，而且与第一种完全不同。",
+          "所以 1729 确实可以用两种方式表示。**但还要确认没有更小的数也可以**——否则答案就不是它。",
+          "验算：程序对所有 1 ≤ a ≤ b ≤ 29 计算 a³ + b³，统计每个和出现的次数，结果**小于 1729 的和全部都只出现一次**，1729 是第一个出现两次的 ✓。（次小的是 4104 = 2³ + 16³ = 9³ + 15³。）",
+          "**上界的说明**：若某个数小于 1729 且有两种表法，那么其中出现的立方数都小于 1729，因此底数不超过 12（13³ = 2197 已超过），搜寻范围是有限的，程序已完整涵盖。",
+          "**这个数有个著名的来历**：数学家哈代去探望生病的拉马努金，提到自己搭的计程车车号 1729「是个无趣的数字」，拉马努金立刻回答那是**最小的、能用两种方式表成两个立方和的数**。因此 1729 常被称为「计程车数」。"
+        ],
+        "en": [
+          "Estimate the search range before starting, so the work stays purposeful. If the number equals a³ + b³, then neither a nor b can be large.",
+          "Checking exhaustively is feasible: compute a³ + b³ for all a ≤ b and see which value occurs more than once.",
+          "List the first few cubes: 1, 8, 27, 64, 125, 216, 343, 512, 729, 1000, 1331 and 1728.",
+          "Observe that 1729 = 1 + 1728 = 1³ + 12³, the first representation.",
+          "And also 1729 = 729 + 1000 = 9³ + 10³, a second representation entirely different from the first.",
+          "So 1729 does admit two representations. But it must also be confirmed that no smaller number does, or it would not be the answer.",
+          "Check: computing a³ + b³ for all 1 ≤ a ≤ b ≤ 29 and tallying how often each sum occurs shows that every sum below 1729 occurs exactly once, and 1729 is the first to occur twice. The next such number is 4104 = 2³ + 16³ = 9³ + 15³.",
+          "On the bound: any number below 1729 with two representations uses cubes below 1729, so the bases are at most 12, since 13³ = 2197 already exceeds it. The search range is finite and the program covers it completely.",
+          "The number has a famous origin. The mathematician Hardy, visiting Ramanujan in hospital, remarked that his taxi's number 1729 seemed rather dull; Ramanujan replied at once that it is the smallest number expressible as a sum of two cubes in two different ways. Hence 1729 is often called the taxicab number."
+        ],
+        "ja": [
+          "**やみくもにならないよう、まず探索範囲を見積もります。**求める数が a³ + b³ なら、a も b も大きくはなりません。",
+          "**しらみつぶしに調べるのは現実的です**：a ≤ b であるすべての a³ + b³ を計算し、2 回以上現れる値を探します。",
+          "まず小さい立方数を挙げます：1、8、27、64、125、216、343、512、729、1000、1331、1728。",
+          "**1729 = 1 + 1728 = 1³ + 12³** ✓ が 1 つ目の表し方です。",
+          "**さらに 1729 = 729 + 1000 = 9³ + 10³** ✓ が 2 つ目で、1 つ目とはまったく異なります。",
+          "したがって 1729 は確かに 2 通りに表せます。**ただしより小さい数が同様に表せないことも確認**しなければ、答えとは言えません。",
+          "検算：1 ≤ a ≤ b ≤ 29 のすべてについて a³ + b³ を計算し、各和の出現回数を数えると、**1729 未満の和はすべて 1 回だけ**で、1729 が最初に 2 回現れます ✓。（次に小さいのは 4104 = 2³ + 16³ = 9³ + 15³ です。）",
+          "**上界について**：1729 未満の数が 2 通りに表せるなら、使われる立方数も 1729 未満なので底は 12 以下（13³ = 2197 はすでに超過）となり、探索範囲は有限でプログラムが完全に覆っています。",
+          "**この数には有名な由来があります**：数学者ハーディが入院中のラマヌジャンを見舞い、乗ってきたタクシーの番号 1729 は「つまらない数だ」と言ったところ、ラマヌジャンは即座に、それは**2 通りの立方和で表せる最小の数**だと答えました。そのため 1729 はしばしば「タクシー数」と呼ばれます。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "1729"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 4
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "兩種立方和的表法：以立方數表列出候選並確認 1729 以下的和皆唯一，同時說明底數上界使搜尋有限",
+        "notes": "設計依據：詳解不只驗證 1729 有兩種表法，還論證底數上界（13³ 已超過）使窮舉範圍有限，從而確認最小性；並給出次小的 4104 作為對照。答案 1729 已用 a ≤ b ≤ 29 的完整窮舉與出現次數統計獨立驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（兩種立方和的表法）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "數論",
+        "topicCode": "number_theory",
+        "subtopic": "兩種立方和的表法",
+        "subtopicCode": "two_cubes_two_ways"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "number_theory_grade10_foundation_017",
+      "topic": "number_theory",
+      "subtopic": "repunit_divisibility",
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "考慮 1、11、111、1111、⋯ 這樣「每一位數字都是 1」的正整數。求其中最小的、能被 7 整除的數共有幾位數。",
+        "zh-Hans": "考虑 1、11、111、1111、⋯ 这样「每一位数字都是 1」的正整数。求其中最小的、能被 7 整除的数共有几位数。",
+        "en": "Consider the integers 1, 11, 111, 1111, and so on, whose every digit is 1. How many digits does the smallest such number divisible by 7 have?",
+        "ja": "1、11、111、1111、⋯ のように、すべての位の数字が 1 である正の整数を考えます。そのうち 7 で割り切れる最小のものは何桁ですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 6 位數。",
+        "zh-Hans": "答案是 6 位数。",
+        "en": "The answer is 6.",
+        "ja": "答えは 6 桁です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "**這些數會迅速變得很大，不能一個一個算出來再除。**但**只需要追蹤餘數**，因為能否被 7 整除只取決於餘數是不是 0。",
+          "**關鍵是找出「從一項到下一項」的遞推關係**：把 n 位的數乘以 10 再加 1，就得到 n + 1 位的數。例如 11 × 10 + 1 = 111 ✓。",
+          "**餘數也遵守同樣的規則**：若某一項除以 7 的餘數是 r，則下一項的餘數是 (r × 10 + 1) 除以 7 的餘數。",
+          "從第 1 項開始逐項推：1 位數是 1，餘數 1。",
+          "2 位：(1 × 10 + 1) = 11，11 ÷ 7 餘 **4**。3 位：(4 × 10 + 1) = 41，41 ÷ 7 餘 **6**。",
+          "4 位：(6 × 10 + 1) = 61，61 ÷ 7 餘 **5**。5 位：(5 × 10 + 1) = 51，51 ÷ 7 餘 **2**。",
+          "6 位：(2 × 10 + 1) = 21，21 ÷ 7 餘 **0** ✓ 找到了。",
+          "所以最小的是 6 位數的 111111。驗算：111111 ÷ 7 = 15873，餘數為 0 ✓ 整除。",
+          "**餘數序列是 1、4、6、5、2、0**，前五項都不是 0，確認 6 位是最小的 ✓。**注意這個做法完全不必算出 111111 這個數本身**——每一步處理的都是小於 7 的餘數，即使問的是 100 位的情形也一樣好算。",
+          "附註：111111 也可以直接因式分解看出來——111111 = 111 × 1001，而 **1001 = 7 × 11 × 13**，所以它必被 7 整除 ✓，與餘數推算一致。"
+        ],
+        "zh-Hans": [
+          "**这些数会迅速变得很大，不能一个一个算出来再除。**但**只需要追踪余数**，因为能否被 7 整除只取决于余数是不是 0。",
+          "**关键是找出「从一项到下一项」的递推关系**：把 n 位的数乘以 10 再加 1，就得到 n + 1 位的数。例如 11 × 10 + 1 = 111 ✓。",
+          "**余数也遵守同样的规则**：若某一项除以 7 的余数是 r，则下一项的余数是 (r × 10 + 1) 除以 7 的余数。",
+          "从第 1 项开始逐项推：1 位数是 1，余数 1。",
+          "2 位：(1 × 10 + 1) = 11，11 ÷ 7 余 **4**。3 位：(4 × 10 + 1) = 41，41 ÷ 7 余 **6**。",
+          "4 位：(6 × 10 + 1) = 61，61 ÷ 7 余 **5**。5 位：(5 × 10 + 1) = 51，51 ÷ 7 余 **2**。",
+          "6 位：(2 × 10 + 1) = 21，21 ÷ 7 余 **0** ✓ 找到了。",
+          "所以最小的是 6 位数的 111111。验算：111111 ÷ 7 = 15873，余数为 0 ✓ 整除。",
+          "**余数序列是 1、4、6、5、2、0**，前五项都不是 0，确认 6 位是最小的 ✓。**注意这个做法完全不必算出 111111 这个数本身**——每一步处理的都是小于 7 的余数，即使问的是 100 位的情形也一样好算。",
+          "附注：111111 也可以直接因式分解看出来——111111 = 111 × 1001，而 **1001 = 7 × 11 × 13**，所以它必被 7 整除 ✓，与余数推算一致。"
+        ],
+        "en": [
+          "These numbers grow quickly, so computing each one and dividing is impractical. Tracking only the remainders suffices, since divisibility by 7 depends solely on whether the remainder is 0.",
+          "The key is a recurrence from one term to the next: multiplying an n-digit term by 10 and adding 1 gives the term with n + 1 digits, as 11 × 10 + 1 = 111 illustrates.",
+          "Remainders obey the same rule: if one term leaves remainder r on division by 7, the next leaves the remainder of r × 10 + 1.",
+          "Start from the first term: one digit gives 1, remainder 1.",
+          "Two digits: 1 × 10 + 1 = 11, and 11 ÷ 7 leaves 4. Three digits: 4 × 10 + 1 = 41, leaving 6.",
+          "Four digits: 6 × 10 + 1 = 61, leaving 5. Five digits: 5 × 10 + 1 = 51, leaving 2.",
+          "Six digits: 2 × 10 + 1 = 21, leaving 0 — found.",
+          "So the smallest is the six-digit 111111. Check: 111111 ÷ 7 = 15873 with remainder 0.",
+          "The remainder sequence is 1, 4, 6, 5, 2, 0, and since none of the first five is 0, six digits is indeed the smallest. Note this method never computes 111111 itself — every step handles a remainder below 7, so a question about 100 digits would be just as easy.",
+          "Remark: factoring confirms it, since 111111 = 111 × 1001 and 1001 = 7 × 11 × 13, so divisibility by 7 follows, agreeing with the remainder computation."
+        ],
+        "ja": [
+          "**これらの数は急速に大きくなるので、1 つずつ計算して割るのは現実的ではありません。**しかし **7 で割り切れるかは余りが 0 かどうかだけで決まる**ので、余りだけを追えば十分です。",
+          "**鍵は「次の項へ移る」漸化式**です：n 桁の数を 10 倍して 1 を足すと n + 1 桁の数になります。たとえば 11 × 10 + 1 = 111 ✓。",
+          "**余りも同じ規則に従います**：ある項の 7 で割った余りが r なら、次の項の余りは r × 10 + 1 を 7 で割った余りです。",
+          "第 1 項から順に進めます：1 桁は 1 で余り 1。",
+          "2 桁：1 × 10 + 1 = 11、11 ÷ 7 の余りは **4**。3 桁：4 × 10 + 1 = 41、余りは **6**。",
+          "4 桁：6 × 10 + 1 = 61、余りは **5**。5 桁：5 × 10 + 1 = 51、余りは **2**。",
+          "6 桁：2 × 10 + 1 = 21、余りは **0** ✓ 見つかりました。",
+          "したがって最小は 6 桁の 111111 です。検算：111111 ÷ 7 = 15873 で余り 0 ✓ 割り切れます。",
+          "**余りの列は 1、4、6、5、2、0** で、最初の 5 項はいずれも 0 でないので 6 桁が最小と確認できます ✓。**この方法では 111111 自体を計算する必要がまったくありません**——各段階で扱うのは 7 未満の余りだけなので、100 桁が問われても同じように計算できます。",
+          "補足：因数分解でも確認できます——111111 = 111 × 1001 で、**1001 = 7 × 11 × 13** なので 7 で割り切れ ✓、余りの計算と一致します。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "6"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "全為 1 的數：以「乘 10 加 1」的遞推只追蹤餘數，避免計算龐大的數本身",
+        "notes": "設計依據：詳解強調只追蹤模 7 餘數即可，並列出完整餘數序列 1、4、6、5、2、0 以確認 6 為最小；另以 111111 = 111 × 1001 且 1001 = 7 × 11 × 13 的因式分解交叉印證。答案 6 已用餘數遞推與直接整除檢查雙向驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（全是 1 的數）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "數論",
+        "topicCode": "number_theory",
+        "subtopic": "全是 1 的數",
+        "subtopicCode": "repunit_divisibility"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "number_theory_grade10_foundation_018",
+      "topic": "number_theory",
+      "subtopic": "squarefree_count",
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "若一個正整數不能被任何大於 1 的完全平方數整除（也就是不含 4、9、16、25、⋯ 這類因數），就稱它是「無平方因數的數」。求 1 到 30 之間（含兩端）的無平方因數的數共有幾個。",
+        "zh-Hans": "若一个正整数不能被任何大于 1 的完全平方数整除（也就是不含 4、9、16、25、⋯ 这类因数），就称它是「无平方因数的数」。求 1 到 30 之间（含两端）的无平方因数的数共有几个。",
+        "en": "A positive integer is called squarefree if no perfect square greater than 1 divides it, that is it has no factor among 4, 9, 16, 25 and so on. How many squarefree integers are there from 1 to 30 inclusive?",
+        "ja": "1 より大きい平方数で割り切れない正の整数（すなわち 4、9、16、25、⋯ を約数にもたない数）を「平方因子をもたない数」といいます。1 から 30 まで（両端を含む）に平方因子をもたない数は何個ありますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 19 個。",
+        "zh-Hans": "答案是 19 个。",
+        "en": "The answer is 19.",
+        "ja": "答えは 19 個です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "**正面逐一檢查 30 個數會很瑣碎，用補集比較快**：先數出「有平方因數」的，再從 30 扣掉。",
+          "**先確定只需要檢查哪些平方數**。若 n ≤ 30 被某個平方數整除，那個平方數也不超過 30，所以只有 4、9、16、25 需要考慮（36 已超過 30）。",
+          "**而 16 是 4 的倍數**——凡是被 16 整除的數必定也被 4 整除，所以檢查 4 就已經涵蓋 16，不必另外處理。**同理若有 36 也會被 4 涵蓋**。所以**實際上只需要檢查質數的平方：4、9、25**。",
+          "數 4 的倍數：4、8、12、16、20、24、28，共 **7 個**（30 ÷ 4 取整數部分）。",
+          "數 9 的倍數：9、18、27，共 **3 個**（30 ÷ 9 取整數部分）。",
+          "數 25 的倍數：25，共 **1 個**。",
+          "**直接相加是 7 + 3 + 1 = 11，但要檢查有沒有重複計算**——被 4 與 9 同時整除的數要被 36 整除，30 以內沒有；被 4 與 25 同時整除要被 100 整除，也沒有；9 與 25 同理。**所以三組完全不重疊，不必做容斥修正** ✓。",
+          "所以有平方因數的共 11 個，無平方因數的有 30 − 11 = **19 個**。",
+          "驗算：程式列出 1 到 30 逐一檢查，**被排除的 11 個是 4、8、9、12、16、18、20、24、25、27、28** ✓ 恰好與上面數的一致；剩下的 19 個是 1、2、3、5、6、7、10、11、13、14、15、17、19、21、22、23、26、29、30 ✓。",
+          "**注意 1 算是無平方因數的數**（它不被任何大於 1 的平方數整除），這一點容易漏掉；若把 1 排除，答案會少 1 變成 18。"
+        ],
+        "zh-Hans": [
+          "**正面逐一检查 30 个数会很琐碎，用补集比较快**：先数出「有平方因数」的，再从 30 扣掉。",
+          "**先确定只需要检查哪些平方数**。若 n ≤ 30 被某个平方数整除，那个平方数也不超过 30，所以只有 4、9、16、25 需要考虑（36 已超过 30）。",
+          "**而 16 是 4 的倍数**——凡是被 16 整除的数必定也被 4 整除，所以检查 4 就已经涵盖 16，不必另外处理。**同理若有 36 也会被 4 涵盖**。所以**实际上只需要检查质数的平方：4、9、25**。",
+          "数 4 的倍数：4、8、12、16、20、24、28，共 **7 个**（30 ÷ 4 取整数部分）。",
+          "数 9 的倍数：9、18、27，共 **3 个**（30 ÷ 9 取整数部分）。",
+          "数 25 的倍数：25，共 **1 个**。",
+          "**直接相加是 7 + 3 + 1 = 11，但要检查有没有重复计算**——被 4 与 9 同时整除的数要被 36 整除，30 以内没有；被 4 与 25 同时整除要被 100 整除，也没有；9 与 25 同理。**所以三组完全不重叠，不必做容斥修正** ✓。",
+          "所以有平方因数的共 11 个，无平方因数的有 30 − 11 = **19 个**。",
+          "验算：程序列出 1 到 30 逐一检查，**被排除的 11 个是 4、8、9、12、16、18、20、24、25、27、28** ✓ 恰好与上面数的一致；剩下的 19 个是 1、2、3、5、6、7、10、11、13、14、15、17、19、21、22、23、26、29、30 ✓。",
+          "**注意 1 算是无平方因数的数**（它不被任何大于 1 的平方数整除），这一点容易漏掉；若把 1 排除，答案会少 1 变成 18。"
+        ],
+        "en": [
+          "Checking all 30 numbers directly is tedious, so use the complement: count those with a square factor and subtract from 30.",
+          "First settle which squares need checking. If n ≤ 30 is divisible by a square, that square is also at most 30, so only 4, 9, 16 and 25 matter, since 36 already exceeds 30.",
+          "But 16 is a multiple of 4 — anything divisible by 16 is divisible by 4 — so checking 4 already covers 16, and likewise 36 would be covered by 4. In effect only the squares of primes need checking: 4, 9 and 25.",
+          "Multiples of 4: 4, 8, 12, 16, 20, 24 and 28, giving 7, the integer part of 30 ÷ 4.",
+          "Multiples of 9: 9, 18 and 27, giving 3, the integer part of 30 ÷ 9.",
+          "Multiples of 25: just 25, giving 1.",
+          "Adding gives 7 + 3 + 1 = 11, but overlaps must be checked. A number divisible by both 4 and 9 would be divisible by 36, and none exists below 30; divisibility by both 4 and 25 needs 100, and by both 9 and 25 needs 225, neither occurring. So the three sets are disjoint and no inclusion-exclusion correction is needed.",
+          "So 11 numbers have a square factor and 30 − 11 = 19 are squarefree.",
+          "Check: testing 1 to 30 individually excludes exactly 4, 8, 9, 12, 16, 18, 20, 24, 25, 27 and 28, matching the count, and leaves 1, 2, 3, 5, 6, 7, 10, 11, 13, 14, 15, 17, 19, 21, 22, 23, 26, 29 and 30.",
+          "Note that 1 counts as squarefree, since no square above 1 divides it — a point easily overlooked, and excluding it would give 18 instead."
+        ],
+        "ja": [
+          "**30 個を正面から 1 つずつ調べるのは煩雑なので、補集合が速い**です：平方因子をもつ数を数え、30 から引きます。",
+          "**まずどの平方数を調べればよいかを定めます。**n ≤ 30 がある平方数で割り切れるなら、その平方数も 30 以下なので、4、9、16、25 だけが対象です（36 はすでに 30 を超えます）。",
+          "**ところが 16 は 4 の倍数**です——16 で割り切れる数は必ず 4 でも割り切れるので、4 を調べれば 16 は自動的に覆われます。**36 も同様に 4 が覆います**。したがって**実際に必要なのは素数の平方 4、9、25 だけ**です。",
+          "4 の倍数：4、8、12、16、20、24、28 の **7 個**（30 ÷ 4 の整数部分）。",
+          "9 の倍数：9、18、27 の **3 個**（30 ÷ 9 の整数部分）。",
+          "25 の倍数：25 の **1 個**。",
+          "**単純に足すと 7 + 3 + 1 = 11 ですが、重複がないか確認します**——4 と 9 の両方で割り切れるには 36 が必要で 30 以下には存在せず、4 と 25 なら 100、9 と 25 なら 225 が必要でいずれも存在しません。**3 つの集合は互いに素で、包除の補正は不要です** ✓。",
+          "したがって平方因子をもつのは 11 個、もたないのは 30 − 11 = **19 個**です。",
+          "検算：1 から 30 を 1 つずつ調べると、**除外されるのは 4、8、9、12、16、18、20、24、25、27、28 の 11 個** ✓ で上の数え上げと一致し、残る 19 個は 1、2、3、5、6、7、10、11、13、14、15、17、19、21、22、23、26、29、30 ✓ です。",
+          "**1 は平方因子をもたない数に数えます**（1 より大きいどの平方数でも割り切れないため）。ここは見落としやすく、1 を除くと 18 になってしまいます。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "19"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "無平方因數的計數：以補集扣除有平方因數者，只需檢查質數的平方，並確認各組在範圍內不重疊",
+        "notes": "設計依據：詳解說明只需檢查 4、9、25 而不必檢查 16（因被 4 涵蓋），並逐一驗證三組在 30 以內互不重疊故無須容斥；末尾提醒 1 應計入，否則會少算成 18。答案 19 已用 1 到 30 的逐一檢查窮舉獨立驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（不含平方因數的數）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "數論",
+        "topicCode": "number_theory",
+        "subtopic": "不含平方因數的數",
+        "subtopicCode": "squarefree_count"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "number_theory_grade10_foundation_019",
+      "topic": "number_theory",
+      "subtopic": "amicable_pair",
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一個正整數的「真因數」是指它所有小於本身的正因數（例如 6 的真因數是 1、2、3）。已知 220 的真因數之和恰好等於 284。求 284 的真因數之和。",
+        "zh-Hans": "一个正整数的「真因数」是指它所有小于本身的正因数（例如 6 的真因数是 1、2、3）。已知 220 的真因数之和恰好等于 284。求 284 的真因数之和。",
+        "en": "The proper divisors of a positive integer are its positive divisors smaller than itself, so the proper divisors of 6 are 1, 2 and 3. Given that the proper divisors of 220 sum to exactly 284, find the sum of the proper divisors of 284.",
+        "ja": "正の整数の「真の約数」とは、それ自身より小さい正の約数のことです（6 の真の約数は 1、2、3）。220 の真の約数の和がちょうど 284 であるとき、284 の真の約数の和を求めなさい。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 220。",
+        "zh-Hans": "答案是 220。",
+        "en": "The answer is 220.",
+        "ja": "答えは 220 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "**要求真因數之和，先把 284 分解質因數，才能有系統地列出所有因數。**",
+          "284 是偶數，284 ÷ 2 = 142；142 也是偶數，142 ÷ 2 = 71。而 **71 是質數**（它不能被 2、3、5、7 整除，而 11² = 121 已大於 71，所以檢查到 7 就足夠）。",
+          "所以 **284 = 2² × 71**。",
+          "**由質因數分解可以有系統地列出全部因數**：2 的指數可取 0、1、2 三種，71 的指數可取 0、1 兩種，共 3 × 2 = 6 個因數。",
+          "它們是：1、2、4、71、142、284。**檢查一下：71 = 71 × 1、142 = 2 × 71、284 = 4 × 71** ✓ 六個都對。",
+          "**真因數要排除 284 自己**，所以是 1、2、4、71、142。",
+          "相加：1 + 2 + 4 = 7，71 + 142 = 213，總和 = 7 + 213 = **220**。",
+          "驗算：程式對 284 逐一試除 1 到 283，找出所有真因數並求和，結果正是 220 ✓；同時也確認 220 的真因數（1、2、4、5、10、11、20、22、44、55、110）之和為 284 ✓，與題目給的條件相符。",
+          "**這一對數 220 與 284 稱為「相親數」**——**各自的真因數之和恰好等於對方**，形成一個互相指向的循環。這是已知最小的一對相親數。",
+          "**要注意相親數與完全數不同**：完全數的真因數之和等於**它自己**（例如 6 = 1 + 2 + 3、28 = 1 + 2 + 4 + 7 + 14），而相親數是**兩個數互指**。若本題的答案算出 284，那就變成 284 是完全數了，與實際不符。"
+        ],
+        "zh-Hans": [
+          "**要求真因数之和，先把 284 分解质因数，才能有系统地列出所有因数。**",
+          "284 是偶数，284 ÷ 2 = 142；142 也是偶数，142 ÷ 2 = 71。而 **71 是质数**（它不能被 2、3、5、7 整除，而 11² = 121 已大于 71，所以检查到 7 就足够）。",
+          "所以 **284 = 2² × 71**。",
+          "**由质因数分解可以有系统地列出全部因数**：2 的指数可取 0、1、2 三种，71 的指数可取 0、1 两种，共 3 × 2 = 6 个因数。",
+          "它们是：1、2、4、71、142、284。**检查一下：71 = 71 × 1、142 = 2 × 71、284 = 4 × 71** ✓ 六个都对。",
+          "**真因数要排除 284 自己**，所以是 1、2、4、71、142。",
+          "相加：1 + 2 + 4 = 7，71 + 142 = 213，总和 = 7 + 213 = **220**。",
+          "验算：程序对 284 逐一试除 1 到 283，找出所有真因数并求和，结果正是 220 ✓；同时也确认 220 的真因数（1、2、4、5、10、11、20、22、44、55、110）之和为 284 ✓，与题目给的条件相符。",
+          "**这一对数 220 与 284 称为「相亲数」**——**各自的真因数之和恰好等于对方**，形成一个互相指向的循环。这是已知最小的一对相亲数。",
+          "**要注意相亲数与完全数不同**：完全数的真因数之和等于**它自己**（例如 6 = 1 + 2 + 3、28 = 1 + 2 + 4 + 7 + 14），而相亲数是**两个数互指**。若本题的答案算出 284，那就变成 284 是完全数了，与实际不符。"
+        ],
+        "en": [
+          "To sum the proper divisors, factor 284 into primes first, so that all divisors can be listed systematically.",
+          "284 is even, and 284 ÷ 2 = 142, which is also even, giving 142 ÷ 2 = 71. And 71 is prime, since it is divisible by none of 2, 3, 5 or 7, and 11² = 121 already exceeds it, so checking up to 7 suffices.",
+          "So 284 = 2² × 71.",
+          "The factorisation lists every divisor systematically: the exponent of 2 may be 0, 1 or 2 and that of 71 may be 0 or 1, giving 3 × 2 = 6 divisors.",
+          "They are 1, 2, 4, 71, 142 and 284, and checking confirms 71 = 71 × 1, 142 = 2 × 71 and 284 = 4 × 71.",
+          "The proper divisors exclude 284 itself, leaving 1, 2, 4, 71 and 142.",
+          "Adding: 1 + 2 + 4 = 7 and 71 + 142 = 213, so the total is 7 + 213 = 220.",
+          "Check: trial division of 284 by every integer from 1 to 283 finds the proper divisors and sums them to exactly 220. It also confirms that the proper divisors of 220, namely 1, 2, 4, 5, 10, 11, 20, 22, 44, 55 and 110, sum to 284, matching the given condition.",
+          "The pair 220 and 284 is called an amicable pair — each one's proper divisors sum to the other, forming a mutual cycle. This is the smallest known such pair.",
+          "Amicable numbers differ from perfect numbers: a perfect number's proper divisors sum to itself, as with 6 = 1 + 2 + 3 and 28 = 1 + 2 + 4 + 7 + 14, whereas amicable numbers point at each other. An answer of 284 here would make 284 perfect, which it is not."
+        ],
+        "ja": [
+          "**真の約数の和を求めるには、まず 284 を素因数分解して約数を体系的に列挙します。**",
+          "284 は偶数で 284 ÷ 2 = 142、142 も偶数で 142 ÷ 2 = 71。そして **71 は素数**です（2、3、5、7 のいずれでも割り切れず、11² = 121 はすでに 71 を超えるので 7 まで調べれば十分です）。",
+          "したがって **284 = 2² × 71**。",
+          "**素因数分解から約数を体系的に列挙できます**：2 の指数は 0、1、2 の 3 通り、71 の指数は 0、1 の 2 通りで、計 3 × 2 = 6 個です。",
+          "それらは 1、2、4、71、142、284。**確認すると 71 = 71 × 1、142 = 2 × 71、284 = 4 × 71** ✓ で 6 個とも正しいです。",
+          "**真の約数は 284 自身を除く**ので、1、2、4、71、142 です。",
+          "足すと 1 + 2 + 4 = 7、71 + 142 = 213、合計 = 7 + 213 = **220**。",
+          "検算：284 を 1 から 283 まで試し割りして真の約数を求め和をとると、ちょうど 220 ✓。同時に 220 の真の約数（1、2、4、5、10、11、20、22、44、55、110）の和が 284 ✓ であることも確認でき、問題の条件と一致します。",
+          "**この 220 と 284 の組を「友愛数」といいます**——**それぞれの真の約数の和が相手に等しく**、互いを指し合う循環をなします。これは知られている最小の友愛数の組です。",
+          "**友愛数は完全数とは異なります**：完全数は真の約数の和が**自分自身**に等しく（6 = 1 + 2 + 3、28 = 1 + 2 + 4 + 7 + 14 など）、友愛数は**2 数が互いを指します**。本問の答えが 284 なら 284 が完全数ということになり、事実に反します。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "220"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "相親數：由質因數分解 284 = 2² × 71 系統列出全部因數並求真因數和，結果指回 220",
+        "notes": "設計依據：詳解由質因數分解系統地列舉因數而非逐一試除，並同時核對 220 的真因數和為 284 以確認互指關係；末尾區辨相親數與完全數，指出誤答 284 等同於宣稱 284 是完全數。答案 220 已用 1 到 283 的逐一試除窮舉獨立驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（相親數）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "數論",
+        "topicCode": "number_theory",
+        "subtopic": "相親數",
+        "subtopicCode": "amicable_pair"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "number_theory_grade10_foundation_020",
+      "topic": "number_theory",
+      "subtopic": "last_nonzero_digit_factorial",
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "求 10!（即 1 × 2 × 3 × ⋯ × 10）的最後一個非零數字。（例如 3200 的最後一個非零數字是 2）",
+        "zh-Hans": "求 10!（即 1 × 2 × 3 × ⋯ × 10）的最后一个非零数字。（例如 3200 的最后一个非零数字是 2）",
+        "en": "Find the last non-zero digit of 10!, that is of 1 × 2 × 3 × ⋯ × 10. For instance the last non-zero digit of 3200 is 2.",
+        "ja": "10!（すなわち 1 × 2 × 3 × ⋯ × 10）の末尾の 0 でない数字を求めなさい。（たとえば 3200 の末尾の 0 でない数字は 2 です）"
+      },
+      "answer": {
+        "zh-Hant": "答案是 8。",
+        "zh-Hans": "答案是 8。",
+        "en": "The answer is 8.",
+        "ja": "答えは 8 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "**問題的難點在於末尾的那些 0**——它們是乘積中 10 的因數造成的，必須先把它們清掉。",
+          "**每一個末尾的 0 都對應一組 2 × 5**。所以先數 10! 裡有幾個 5、幾個 2。",
+          "1 到 10 中含有因數 5 的是 5 與 10，各貢獻一個 5，所以共有 **2 個 5**。",
+          "含有因數 2 的是 2、4、6、8、10。其中 4 = 2² 貢獻兩個、8 = 2³ 貢獻三個，其餘各一個，所以共有 1 + 2 + 1 + 3 + 1 = **8 個 2**。",
+          "**5 的個數比較少（2 個），所以能配成的 10 只有 2 組**，也就是末尾恰有 2 個 0。",
+          "把 2 個 5 與 2 個 2 都抽掉（也就是除以 100），剩下的部分是：**8 − 2 = 6 個 2**，以及所有不含 2 與 5 的部分。",
+          "**直接算出來核對比較快**：10! = 3628800。**去掉末尾的兩個 0 得 36288**，它的個位數是 **8**。",
+          "所以 10! 的最後一個非零數字是 8。",
+          "驗算：把 10! 逐步算出來——1×2=2、×3=6、×4=24、×5=120、×6=720、×7=5040、×8=40320、×9=362880、×10=3628800 ✓。程式去掉尾部的 0 後得 36288，末位為 8 ✓ 相符。",
+          "**常見的錯誤是直接把各數的個位數相乘再取個位**：2×3×4×5×6×7×8×9 的個位會一路被 5 與偶數相乘變成 0，得不到答案。**關鍵就在於必須先把成對的 2 與 5 抽離**，之後再看剩下部分的個位數。"
+        ],
+        "zh-Hans": [
+          "**问题的难点在于末尾的那些 0**——它们是乘积中 10 的因数造成的，必须先把它们清掉。",
+          "**每一个末尾的 0 都对应一组 2 × 5**。所以先数 10! 里有几个 5、几个 2。",
+          "1 到 10 中含有因数 5 的是 5 与 10，各贡献一个 5，所以共有 **2 个 5**。",
+          "含有因数 2 的是 2、4、6、8、10。其中 4 = 2² 贡献两个、8 = 2³ 贡献三个，其余各一个，所以共有 1 + 2 + 1 + 3 + 1 = **8 个 2**。",
+          "**5 的个数比较少（2 个），所以能配成的 10 只有 2 组**，也就是末尾恰有 2 个 0。",
+          "把 2 个 5 与 2 个 2 都抽掉（也就是除以 100），剩下的部分是：**8 − 2 = 6 个 2**，以及所有不含 2 与 5 的部分。",
+          "**直接算出来核对比较快**：10! = 3628800。**去掉末尾的两个 0 得 36288**，它的个位数是 **8**。",
+          "所以 10! 的最后一个非零数字是 8。",
+          "验算：把 10! 逐步算出来——1×2=2、×3=6、×4=24、×5=120、×6=720、×7=5040、×8=40320、×9=362880、×10=3628800 ✓。程序去掉尾部的 0 后得 36288，末位为 8 ✓ 相符。",
+          "**常见的错误是直接把各数的个位数相乘再取个位**：2×3×4×5×6×7×8×9 的个位会一路被 5 与偶数相乘变成 0，得不到答案。**关键就在于必须先把成对的 2 与 5 抽离**，之后再看剩下部分的个位数。"
+        ],
+        "en": [
+          "The difficulty lies in the trailing zeros, which come from factors of 10 in the product and must be cleared away first.",
+          "Each trailing zero corresponds to a pair 2 × 5, so count how many 5s and how many 2s occur in 10!.",
+          "Among 1 to 10, the numbers containing a factor 5 are 5 and 10, each contributing one, giving 2 fives in all.",
+          "Those containing a factor 2 are 2, 4, 6, 8 and 10. Since 4 = 2² contributes two and 8 = 2³ contributes three, with the others contributing one each, the total is 1 + 2 + 1 + 3 + 1 = 8 twos.",
+          "The fives are scarcer, only 2 of them, so only 2 tens can be formed and there are exactly 2 trailing zeros.",
+          "Removing the 2 fives and 2 of the twos, that is dividing by 100, leaves 8 − 2 = 6 twos together with everything free of 2 and 5.",
+          "Computing directly is quicker for confirmation: 10! = 3628800, and stripping the two trailing zeros gives 36288, whose units digit is 8.",
+          "So the last non-zero digit of 10! is 8.",
+          "Check by building up 10!: 1×2=2, ×3=6, ×4=24, ×5=120, ×6=720, ×7=5040, ×8=40320, ×9=362880, ×10=3628800. Stripping the trailing zeros gives 36288 with last digit 8, as found.",
+          "A common error multiplies the units digits and takes the units digit of the result, but 2×3×4×5×6×7×8×9 collapses to 0 once a 5 meets an even number, yielding nothing. The essential step is removing the paired 2s and 5s first, then examining the units digit of what remains."
+        ],
+        "ja": [
+          "**難しさは末尾の 0 にあります**——これは積に含まれる 10 の因数によるもので、まず取り除く必要があります。",
+          "**末尾の 0 は 1 つずつ 2 × 5 の組に対応します。**そこで 10! に 5 と 2 がいくつ含まれるかを数えます。",
+          "1 から 10 のうち因数 5 をもつのは 5 と 10 で、それぞれ 1 つずつ寄与するので **5 は 2 個**です。",
+          "因数 2 をもつのは 2、4、6、8、10 です。4 = 2² は 2 つ、8 = 2³ は 3 つ、他は 1 つずつ寄与するので、計 1 + 2 + 1 + 3 + 1 = **2 は 8 個**です。",
+          "**5 のほうが少なく（2 個）、作れる 10 は 2 組だけ**——すなわち末尾の 0 はちょうど 2 個です。",
+          "5 を 2 個、2 を 2 個取り除く（100 で割る）と、残るのは **8 − 2 = 6 個の 2** と、2 と 5 を含まない部分です。",
+          "**確認には直接計算するのが速いです**：10! = 3628800。**末尾の 0 を 2 つ取ると 36288** で、その一の位は **8** です。",
+          "したがって 10! の末尾の 0 でない数字は 8 です。",
+          "検算：10! を順に計算します——1×2=2、×3=6、×4=24、×5=120、×6=720、×7=5040、×8=40320、×9=362880、×10=3628800 ✓。末尾の 0 を除くと 36288、末位は 8 ✓ で一致します。",
+          "**よくある誤りは各数の一の位を掛けて一の位をとること**です。2×3×4×5×6×7×8×9 は 5 と偶数が掛かった時点で一の位が 0 になり、答えが得られません。**要点は先に対になる 2 と 5 を取り除くこと**で、その後で残りの一の位を見ます。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "8"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "階乘的最後非零數字：末尾 0 的個數由 2 與 5 的配對決定（受限於較少的 5），須先除去這些因數再取個位",
+        "notes": "設計依據：詳解分別數出 8 個 2 與 2 個 5 以確定尾零個數為 2，說明必須先抽離配對的 2 與 5；並指出「直接相乘取個位」會因 5 與偶數相乘而歸零的失效原因。答案 8 已用 10! 的逐步展開與去除尾零後取末位獨立驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（階乘的最後一個非零數字）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "數論",
+        "topicCode": "number_theory",
+        "subtopic": "階乘的最後一個非零數字",
+        "subtopicCode": "last_nonzero_digit_factorial"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "number_theory_grade10_foundation_021",
+      "topic": "number_theory",
+      "subtopic": "prime_triplet_mod3",
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "求滿足「n、n + 2、n + 4 三個數都是質數」的正整數 n 共有幾個。",
+        "zh-Hans": "求满足「n、n + 2、n + 4 三个数都是质数」的正整数 n 共有几个。",
+        "en": "How many positive integers n are there for which n, n + 2 and n + 4 are all prime?",
+        "ja": "n、n + 2、n + 4 の 3 つがすべて素数となる正の整数 n は何個ありますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 1 個。",
+        "zh-Hans": "答案是 1 个。",
+        "en": "The answer is 1.",
+        "ja": "答えは 1 個です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "**先試幾個小的數，看看情況。**n = 3：3、5、7 全是質數 ✓ 找到一個。",
+          "n = 5：5、7、9，但 **9 = 3 × 3 不是質數** ✗。n = 7：7、9、11，9 又不是質數 ✗。n = 11：11、13、15，**15 = 3 × 5** ✗。",
+          "**看起來每次都是被 3 的倍數擋住**。這不是巧合，可以證明除了 n = 3 以外不可能有別的解。",
+          "**關鍵是看這三個數除以 3 的餘數。**任何整數除以 3 的餘數只有 0、1、2 三種。",
+          "**若 n 除以 3 餘 0**：那麼 n 本身就是 3 的倍數。要它是質數，就只能 n = 3（3 的倍數中只有 3 是質數）。",
+          "**若 n 除以 3 餘 1**：那麼 n + 2 除以 3 的餘數是 1 + 2 = 3，也就是餘 0——**n + 2 是 3 的倍數**。要它是質數只能等於 3，但 n ≥ 1 使 n + 2 ≥ 3，只有 n = 1 時 n + 2 = 3；然而 n = 1 不是質數 ✗，所以無解。",
+          "**若 n 除以 3 餘 2**：那麼 n + 4 除以 3 的餘數是 2 + 4 = 6，也就是餘 0——**n + 4 是 3 的倍數**，要它是質數只能 n + 4 = 3，但 n 為正整數使 n + 4 ≥ 5 ✗，無解。",
+          "**三種情況窮盡了所有可能**，只有第一種能給出解，且必須 n = 3。驗證 n = 3：3、5、7 全為質數 ✓。",
+          "所以符合條件的 n 只有 1 個。驗算：程式檢查 n 從 1 到 1999，符合條件的**只有 n = 3** ✓ 與推理一致。",
+          "**這個論證的核心是：三個數 n、n + 2、n + 4 的餘數（模 3）必定各不相同**，因此其中必有一個是 3 的倍數。**這與孿生質數的情形不同**——n 與 n + 2 只有兩個數，餘數不必涵蓋 0，所以孿生質數可以有無窮多對（如 5、7 與 11、13 與 17、19）。"
+        ],
+        "zh-Hans": [
+          "**先试几个小的数，看看情况。**n = 3：3、5、7 全是质数 ✓ 找到一个。",
+          "n = 5：5、7、9，但 **9 = 3 × 3 不是质数** ✗。n = 7：7、9、11，9 又不是质数 ✗。n = 11：11、13、15，**15 = 3 × 5** ✗。",
+          "**看起来每次都是被 3 的倍数挡住**。这不是巧合，可以证明除了 n = 3 以外不可能有别的解。",
+          "**关键是看这三个数除以 3 的余数。**任何整数除以 3 的余数只有 0、1、2 三种。",
+          "**若 n 除以 3 余 0**：那么 n 本身就是 3 的倍数。要它是质数，就只能 n = 3（3 的倍数中只有 3 是质数）。",
+          "**若 n 除以 3 余 1**：那么 n + 2 除以 3 的余数是 1 + 2 = 3，也就是余 0——**n + 2 是 3 的倍数**。要它是质数只能等于 3，但 n ≥ 1 使 n + 2 ≥ 3，只有 n = 1 时 n + 2 = 3；然而 n = 1 不是质数 ✗，所以无解。",
+          "**若 n 除以 3 余 2**：那么 n + 4 除以 3 的余数是 2 + 4 = 6，也就是余 0——**n + 4 是 3 的倍数**，要它是质数只能 n + 4 = 3，但 n 为正整数使 n + 4 ≥ 5 ✗，无解。",
+          "**三种情况穷尽了所有可能**，只有第一种能给出解，且必须 n = 3。验证 n = 3：3、5、7 全为质数 ✓。",
+          "所以符合条件的 n 只有 1 个。验算：程序检查 n 从 1 到 1999，符合条件的**只有 n = 3** ✓ 与推理一致。",
+          "**这个论证的核心是：三个数 n、n + 2、n + 4 的余数（模 3）必定各不相同**，因此其中必有一个是 3 的倍数。**这与孪生质数的情形不同**——n 与 n + 2 只有两个数，余数不必涵盖 0，所以孪生质数可以有无穷多对（如 5、7 与 11、13 与 17、19）。"
+        ],
+        "en": [
+          "Try a few small values first. For n = 3, the numbers 3, 5 and 7 are all prime, so one solution exists.",
+          "For n = 5 the numbers are 5, 7 and 9, but 9 = 3 × 3 is not prime. For n = 7 they are 7, 9 and 11, again blocked by 9. For n = 11 they are 11, 13 and 15, and 15 = 3 × 5.",
+          "A multiple of 3 seems to intervene every time. This is no accident, and it can be proved that no solution other than n = 3 exists.",
+          "The key is the remainders of the three numbers on division by 3, which can only be 0, 1 or 2.",
+          "If n leaves remainder 0, then n itself is a multiple of 3, and for it to be prime it must equal 3, since 3 is the only prime multiple of 3.",
+          "If n leaves remainder 1, then n + 2 leaves remainder 1 + 2 = 3, that is 0, so n + 2 is a multiple of 3. For it to be prime it would have to equal 3, requiring n = 1, which is not prime. No solution.",
+          "If n leaves remainder 2, then n + 4 leaves remainder 2 + 4 = 6, that is 0, so n + 4 is a multiple of 3. For it to be prime it would have to equal 3, but n positive forces n + 4 ≥ 5. No solution.",
+          "The three cases exhaust every possibility, only the first yields a solution, and it forces n = 3. Verifying: 3, 5 and 7 are all prime.",
+          "So exactly 1 value of n works. Check: testing n from 1 to 1999 finds only n = 3, matching the reasoning.",
+          "The heart of the argument is that n, n + 2 and n + 4 must leave three different remainders modulo 3, so one of them is a multiple of 3. Twin primes behave differently — with only n and n + 2 the remainders need not include 0, which is why twin pairs such as 5 and 7, 11 and 13, or 17 and 19 keep appearing."
+        ],
+        "ja": [
+          "**まず小さい値を試します。**n = 3 のとき 3、5、7 はすべて素数 ✓ で 1 つ見つかります。",
+          "n = 5 では 5、7、9 ですが **9 = 3 × 3 は素数ではありません** ✗。n = 7 では 7、9、11 で再び 9 が阻みます ✗。n = 11 では 11、13、15 で **15 = 3 × 5** ✗。",
+          "**毎回 3 の倍数に阻まれているように見えます。**これは偶然ではなく、n = 3 以外に解がないことを証明できます。",
+          "**鍵は 3 つの数を 3 で割った余りです。**整数を 3 で割った余りは 0、1、2 の 3 通りしかありません。",
+          "**n の余りが 0 なら**、n 自身が 3 の倍数です。素数であるためには n = 3 しかありません（3 の倍数で素数なのは 3 だけ）。",
+          "**n の余りが 1 なら**、n + 2 の余りは 1 + 2 = 3、すなわち 0 で——**n + 2 は 3 の倍数**です。素数であるには 3 に等しい必要があり n = 1 となりますが、1 は素数ではありません ✗。解なしです。",
+          "**n の余りが 2 なら**、n + 4 の余りは 2 + 4 = 6、すなわち 0 で——**n + 4 は 3 の倍数**です。素数であるには n + 4 = 3 が必要ですが、n は正なので n + 4 ≥ 5 ✗。解なしです。",
+          "**3 つの場合がすべてを尽くし**、解を与えるのは最初の場合だけで、n = 3 に限られます。確認：3、5、7 はすべて素数 ✓。",
+          "したがって条件を満たす n は 1 個です。検算：n を 1 から 1999 まで調べると、該当するのは **n = 3 のみ** ✓ で推論と一致します。",
+          "**議論の核心は、n、n + 2、n + 4 の 3 で割った余りが必ず互いに異なる**ため、いずれかが 3 の倍数になることです。**双子素数とは事情が異なります**——n と n + 2 の 2 つだけでは余りが 0 を含むとは限らず、5 と 7、11 と 13、17 と 19 のような組が現れ続けます。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "1"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "模 3 的餘數分類：n、n + 2、n + 4 的餘數必兩兩相異，故必有一個是 3 的倍數，只有 n = 3 能例外",
+        "notes": "設計依據：詳解先以小數值試探發現「總被 3 的倍數擋住」，再以模 3 的三種餘數分類完整證明，並逐一排除；末尾對照孿生質數說明為何兩項時此論證失效。答案 1 已用 n 從 1 到 1999 的窮舉檢查獨立驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（三個等差的質數）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "數論",
+        "topicCode": "number_theory",
+        "subtopic": "三個等差的質數",
+        "subtopicCode": "prime_triplet_mod3"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "number_theory_grade10_foundation_022",
+      "topic": "number_theory",
+      "subtopic": "square_ending_444",
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一個正整數的平方寫出來之後，末三位數字依序是 4、4、4。在所有具有這個性質的正整數當中，最小的是多少？",
+        "zh-Hans": "一个正整数的平方写出来之后，末三位数字依序是 4、4、4。在所有具有这个性质的正整数当中，最小的是多少？",
+        "en": "When a certain positive integer is squared, the last three digits of the result read 4, 4, 4. Of all positive integers with this property, which is the smallest?",
+        "ja": "ある正の整数を 2 乗すると、下 3 桁が順に 4、4、4 となりました。この性質をもつ正の整数のうち、最も小さいものはいくつですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 38。",
+        "zh-Hans": "答案是 38。",
+        "en": "The answer is 38.",
+        "ja": "答えは 38 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "**不必從 1 開始逐一平方——先用末位數字大幅縮小範圍。**",
+          "**先看個位。**n² 的個位是 4，而一個數的平方的個位只由該數的個位決定。逐一檢查 0 到 9 的平方：0、1、4、9、16、25、36、49、64、81，個位分別是 0、1、4、9、6、5、6、9、4、1。",
+          "**個位為 4 的只有兩種：n 的個位是 2 或 8**。這一步就把候選從 10 種減到 2 種。",
+          "**再看十位。**要讓 n² 的末兩位是 44。把個位為 2 或 8 的兩位數逐一平方檢查：12² = 144 ✓ 末兩位 44；38² = 1444 ✓；62² = 3844 ✓；88² = 7744 ✓。而 2² = 4、8² = 64、22² = 484、28² = 784、32² = 1024、42² = 1764、48² = 2304、52² = 2704、58² = 3364、68² = 4624、72² = 5184、78² = 6084、82² = 6724、92² = 8464、98² = 9604 都不是。",
+          "**由小到大檢查末三位。**最小的候選是 12：12² = 144，末三位是 **144** ✗（不是 444）。",
+          "下一個候選是 38：**38² = 1444**，末三位是 **444** ✓ 找到了。",
+          "**還要確認 38 之前沒有更小的解。**小於 38 且個位是 2 或 8 的數有：2、8、12、18、22、28、32。它們的平方是 4、64、144、324、484、784、1024，**末三位分別是 004、064、144、324、484、784，沒有一個是 444** ✓。",
+          "所以最小的 n 是 38。",
+          "驗算：程式對 n 從 1 到 99999 逐一檢查 n² 的末三位，符合的最小者正是 38 ✓，接下來幾個是 462、538、962、1038。",
+          "**注意末三位是 444 的平方數確實存在，但末三位是 444 以外的某些組合則完全不可能**——例如沒有任何平方數的末兩位是 23，因為平方數除以 4 的餘數只能是 0 或 1，而 23 除以 4 餘 3。先做這類篩選可以避免徒勞的搜尋。"
+        ],
+        "zh-Hans": [
+          "**不必从 1 开始逐一平方——先用末位数字大幅缩小范围。**",
+          "**先看个位。**n² 的个位是 4，而一个数的平方的个位只由该数的个位决定。逐一检查 0 到 9 的平方：0、1、4、9、16、25、36、49、64、81，个位分别是 0、1、4、9、6、5、6、9、4、1。",
+          "**个位为 4 的只有两种：n 的个位是 2 或 8**。这一步就把候选从 10 种减到 2 种。",
+          "**再看十位。**要让 n² 的末两位是 44。把个位为 2 或 8 的两位数逐一平方检查：12² = 144 ✓ 末两位 44；38² = 1444 ✓；62² = 3844 ✓；88² = 7744 ✓。而 2² = 4、8² = 64、22² = 484、28² = 784、32² = 1024、42² = 1764、48² = 2304、52² = 2704、58² = 3364、68² = 4624、72² = 5184、78² = 6084、82² = 6724、92² = 8464、98² = 9604 都不是。",
+          "**由小到大检查末三位。**最小的候选是 12：12² = 144，末三位是 **144** ✗（不是 444）。",
+          "下一个候选是 38：**38² = 1444**，末三位是 **444** ✓ 找到了。",
+          "**还要确认 38 之前没有更小的解。**小于 38 且个位是 2 或 8 的数有：2、8、12、18、22、28、32。它们的平方是 4、64、144、324、484、784、1024，**末三位分别是 004、064、144、324、484、784，没有一个是 444** ✓。",
+          "所以最小的 n 是 38。",
+          "验算：程序对 n 从 1 到 99999 逐一检查 n² 的末三位，符合的最小者正是 38 ✓，接下来几个是 462、538、962、1038。",
+          "**注意末三位是 444 的平方数确实存在，但末三位是 444 以外的某些组合则完全不可能**——例如没有任何平方数的末两位是 23，因为平方数除以 4 的余数只能是 0 或 1，而 23 除以 4 余 3。先做这类筛选可以避免徒劳的搜寻。"
+        ],
+        "en": [
+          "There is no need to square every integer from 1 — the final digits narrow the range dramatically.",
+          "Start with the units digit. Since n² ends in 4, and the units digit of a square depends only on the units digit of the number, check the squares of 0 through 9: 0, 1, 4, 9, 16, 25, 36, 49, 64 and 81, whose units digits are 0, 1, 4, 9, 6, 5, 6, 9, 4 and 1.",
+          "Only two cases give a units digit of 4: n must end in 2 or in 8. That alone cuts the candidates from ten to two.",
+          "Now the tens digit, requiring n² to end in 44. Squaring the two-digit numbers ending in 2 or 8: 12² = 144, 38² = 1444, 62² = 3844 and 88² = 7744 all end in 44, whereas 2² = 4, 8² = 64, 22² = 484, 28² = 784, 32² = 1024, 42² = 1764, 48² = 2304, 52² = 2704, 58² = 3364, 68² = 4624, 72² = 5184, 78² = 6084, 82² = 6724, 92² = 8464 and 98² = 9604 do not.",
+          "Check the last three digits in increasing order. The smallest candidate is 12, and 12² = 144 ends in 144, not 444.",
+          "The next candidate is 38, and 38² = 1444 ends in 444 — found.",
+          "Confirm no smaller solution exists. The numbers below 38 ending in 2 or 8 are 2, 8, 12, 18, 22, 28 and 32, with squares 4, 64, 144, 324, 484, 784 and 1024, ending in 004, 064, 144, 324, 484 and 784, none of them 444.",
+          "So the smallest n is 38.",
+          "Check: testing n from 1 to 99999 for squares ending in 444 gives 38 as the smallest, followed by 462, 538, 962 and 1038.",
+          "Note that squares ending in 444 do exist, while some other endings are outright impossible — no square ends in 23, since squares leave remainder 0 or 1 on division by 4 while 23 leaves 3. Screening this way avoids fruitless searching."
+        ],
+        "ja": [
+          "**1 から順に 2 乗する必要はありません**——末尾の数字で範囲を大きく絞れます。",
+          "**まず一の位です。**n² の一の位が 4 であり、平方の一の位は元の数の一の位だけで決まります。0〜9 の平方 0、1、4、9、16、25、36、49、64、81 の一の位は 0、1、4、9、6、5、6、9、4、1 です。",
+          "**一の位が 4 になるのは 2 通りだけ：n の一の位は 2 か 8** です。この一手で候補が 10 通りから 2 通りに減ります。",
+          "**次に十の位です。**n² の下 2 桁を 44 にします。一の位が 2 か 8 の 2 桁の数を 2 乗すると、12² = 144、38² = 1444、62² = 3844、88² = 7744 が下 2 桁 44 となり、2² = 4、8² = 64、22² = 484、28² = 784、32² = 1024、42² = 1764、48² = 2304、52² = 2704、58² = 3364、68² = 4624、72² = 5184、78² = 6084、82² = 6724、92² = 8464、98² = 9604 は該当しません。",
+          "**下 3 桁を小さい順に確認します。**最小の候補は 12 で、12² = 144 の下 3 桁は **144** ✗（444 ではありません）。",
+          "次の候補は 38 で、**38² = 1444**、下 3 桁は **444** ✓ 見つかりました。",
+          "**38 より小さい解がないことも確認します。**38 未満で一の位が 2 か 8 の数は 2、8、12、18、22、28、32 で、平方は 4、64、144、324、484、784、1024、**下 3 桁は 004、064、144、324、484、784 で 444 は 1 つもありません** ✓。",
+          "したがって最小の n は 38 です。",
+          "検算：n を 1 から 99999 まで調べて n² の下 3 桁を確認すると、最小は 38 ✓、続いて 462、538、962、1038 です。",
+          "**下 3 桁が 444 の平方数は存在しますが、末尾によっては全く不可能な場合もあります**——たとえば下 2 桁が 23 の平方数は存在しません。平方数を 4 で割った余りは 0 か 1 に限られる一方、23 は 4 で割ると 3 余るからです。こうした篩い分けを先に行えば無駄な探索を避けられます。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "38"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "平方數的末三位：由個位限定 n 的個位為 2 或 8，再逐級檢查末兩位與末三位以縮小搜尋",
+        "notes": "設計依據：詳解以「平方的個位只由原數個位決定」把候選從 10 種減到 2 種，再逐級檢查並確認 38 以下無解；末尾以「末兩位不可能是 23」的模 4 論證說明同類篩選的用途。答案 38 已用 n 從 1 到 99999 的窮舉檢查獨立驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（平方數的末三位）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "數論",
+        "topicCode": "number_theory",
+        "subtopic": "平方數的末三位",
+        "subtopicCode": "square_ending_444"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "number_theory_grade10_foundation_023",
+      "topic": "number_theory",
+      "subtopic": "armstrong_three_digit",
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "求所有滿足「等於自己各位數字的立方和」的三位數共有幾個。（例如 407 的各位立方和是 4³ + 0³ + 7³ = 64 + 0 + 343 = 407，恰好等於自己）",
+        "zh-Hans": "求所有满足「等于自己各位数字的立方和」的三位数共有几个。（例如 407 的各位立方和是 4³ + 0³ + 7³ = 64 + 0 + 343 = 407，恰好等于自己）",
+        "en": "How many three-digit numbers equal the sum of the cubes of their own digits? For instance 407 gives 4³ + 0³ + 7³ = 64 + 0 + 343 = 407, equal to itself.",
+        "ja": "各位の数字の立方の和が自分自身に等しい 3 桁の数は何個ありますか。（たとえば 407 は 4³ + 0³ + 7³ = 64 + 0 + 343 = 407 で自分自身に等しくなります）"
+      },
+      "answer": {
+        "zh-Hant": "答案是 4 個。",
+        "zh-Hans": "答案是 4 个。",
+        "en": "The answer is 4.",
+        "ja": "答えは 4 個です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "**先確認搜尋範圍是有限的、而且不必真的檢查全部 900 個三位數。**",
+          "設三位數是 100a + 10b + c，其中 a 是 1 到 9、b 與 c 是 0 到 9。條件是 **100a + 10b + c = a³ + b³ + c³**。",
+          "**先看上界**：每一位的立方最大是 9³ = 729，三位相加最大是 3 × 729 = 2187，遠大於三位數的上限，所以上界不構成限制——真正有效的縮減來自逐位的分析。",
+          "**先確定百位 a。**式子左邊至少是 100a，而右邊的 b³ + c³ 最多是 2 × 729 = 1458。所以 100a ≤ a³ + 1458，這對 a ≤ 9 都成立，無法排除。**但可以反過來用**：右邊的 a³ 若太大會超出三位數，例如 a = 9 時 a³ = 729，加上 b³ + c³ 若也大就會超過 999。",
+          "**實務上最快的做法是直接檢查每個三位數。**900 個數用程式一瞬間可以掃完，關鍵是要有系統，不遺漏。",
+          "檢查的結果是：**153**（1 + 125 + 27 = 153 ✓）、**370**（27 + 343 + 0 = 370 ✓）、**371**（27 + 343 + 1 = 371 ✓）、**407**（64 + 0 + 343 = 407 ✓）。",
+          "逐一驗算：153 → 1³ + 5³ + 3³ = 1 + 125 + 27 = 153 ✓；370 → 3³ + 7³ + 0³ = 27 + 343 + 0 = 370 ✓；371 → 3³ + 7³ + 1³ = 27 + 343 + 1 = 371 ✓；407 → 4³ + 0³ + 7³ = 64 + 0 + 343 = 407 ✓。四個全部成立。",
+          "所以答案是 4 個。驗算：程式對 100 到 999 逐一計算各位立方和並比對，符合的**恰好是這 4 個** ✓，沒有遺漏也沒有多餘。",
+          "**附註：370 與 371 相鄰**，因為兩者只差末位的 0 與 1，而 0³ = 0、1³ = 1 恰好也差 1，所以兩式同時成立——這是一個漂亮的巧合。**這類數稱為「水仙花數」或「阿姆斯壯數」**；若把位數改成 4 位並取四次方，符合的數也存在（例如 1634），但個數同樣很少。"
+        ],
+        "zh-Hans": [
+          "**先确认搜寻范围是有限的、而且不必真的检查全部 900 个三位数。**",
+          "设三位数是 100a + 10b + c，其中 a 是 1 到 9、b 与 c 是 0 到 9。条件是 **100a + 10b + c = a³ + b³ + c³**。",
+          "**先看上界**：每一位的立方最大是 9³ = 729，三位相加最大是 3 × 729 = 2187，远大于三位数的上限，所以上界不构成限制——真正有效的缩减来自逐位的分析。",
+          "**先确定百位 a。**式子左边至少是 100a，而右边的 b³ + c³ 最多是 2 × 729 = 1458。所以 100a ≤ a³ + 1458，这对 a ≤ 9 都成立，无法排除。**但可以反过来用**：右边的 a³ 若太大会超出三位数，例如 a = 9 时 a³ = 729，加上 b³ + c³ 若也大就会超过 999。",
+          "**实务上最快的做法是直接检查每个三位数。**900 个数用程序一瞬间可以扫完，关键是要有系统，不遗漏。",
+          "检查的结果是：**153**（1 + 125 + 27 = 153 ✓）、**370**（27 + 343 + 0 = 370 ✓）、**371**（27 + 343 + 1 = 371 ✓）、**407**（64 + 0 + 343 = 407 ✓）。",
+          "逐一验算：153 → 1³ + 5³ + 3³ = 1 + 125 + 27 = 153 ✓；370 → 3³ + 7³ + 0³ = 27 + 343 + 0 = 370 ✓；371 → 3³ + 7³ + 1³ = 27 + 343 + 1 = 371 ✓；407 → 4³ + 0³ + 7³ = 64 + 0 + 343 = 407 ✓。四个全部成立。",
+          "所以答案是 4 个。验算：程序对 100 到 999 逐一计算各位立方和并比对，符合的**恰好是这 4 个** ✓，没有遗漏也没有多余。",
+          "**附注：370 与 371 相邻**，因为两者只差末位的 0 与 1，而 0³ = 0、1³ = 1 恰好也差 1，所以两式同时成立——这是一个漂亮的巧合。**这类数称为「水仙花数」或「阿姆斯壮数」**；若把位数改成 4 位并取四次方，符合的数也存在（例如 1634），但个数同样很少。"
+        ],
+        "en": [
+          "First confirm the search is finite, and see how far analysis can trim it.",
+          "Write the three-digit number as 100a + 10b + c, with a from 1 to 9 and b and c from 0 to 9. The condition is 100a + 10b + c = a³ + b³ + c³.",
+          "On upper bounds: each digit cubed is at most 9³ = 729, so three of them total at most 3 × 729 = 2187, well above the largest three-digit number, meaning the bound alone excludes nothing and any real reduction must come from digit-by-digit analysis.",
+          "Consider the hundreds digit a. The left side is at least 100a, while b³ + c³ on the right is at most 2 × 729 = 1458, so 100a ≤ a³ + 1458 holds for every a ≤ 9 and excludes nothing. Used the other way it does bite: a large a³ pushes the right side up, and with a = 9 giving 729, sizeable b³ + c³ would exceed 999.",
+          "In practice the fastest route is to test every three-digit number. All 900 can be swept instantly, and what matters is being systematic so nothing is missed.",
+          "The search yields 153, since 1 + 125 + 27 = 153; 370, since 27 + 343 + 0 = 370; 371, since 27 + 343 + 1 = 371; and 407, since 64 + 0 + 343 = 407.",
+          "Verifying each: 153 gives 1³ + 5³ + 3³ = 1 + 125 + 27 = 153; 370 gives 3³ + 7³ + 0³ = 370; 371 gives 3³ + 7³ + 1³ = 371; and 407 gives 4³ + 0³ + 7³ = 407. All four hold.",
+          "So the answer is 4. Check: computing the digit-cube sum for every number from 100 to 999 and comparing gives exactly these four, with nothing missed or spurious.",
+          "Remark: 370 and 371 are consecutive because they differ only in the last digit, 0 against 1, and 0³ = 0 differs from 1³ = 1 by exactly 1, so both equations hold at once — a pleasing coincidence. Such numbers are called narcissistic or Armstrong numbers; with four digits and fourth powers examples also exist, such as 1634, though again very few."
+        ],
+        "ja": [
+          "**まず探索範囲が有限であることと、解析でどこまで絞れるかを確認します。**",
+          "3 桁の数を 100a + 10b + c（a は 1〜9、b と c は 0〜9）とします。条件は **100a + 10b + c = a³ + b³ + c³** です。",
+          "**上界について**：各位の立方は最大 9³ = 729 なので 3 つの和は最大 3 × 729 = 2187 で 3 桁の上限をはるかに超え、上界だけでは何も除外できません——実質的な絞り込みは位ごとの解析から来ます。",
+          "**百の位 a を見ます。**左辺は少なくとも 100a、右辺の b³ + c³ は最大 2 × 729 = 1458 なので 100a ≤ a³ + 1458 は a ≤ 9 のすべてで成り立ち除外できません。**逆向きには効きます**：a³ が大きいと右辺が膨らみ、a = 9 なら a³ = 729 で b³ + c³ も大きければ 999 を超えてしまいます。",
+          "**実務上は 3 桁の数をすべて調べるのが最速です。**900 個はプログラムで一瞬に走査でき、要は漏れなく体系的に行うことです。",
+          "結果は **153**（1 + 125 + 27 = 153 ✓）、**370**（27 + 343 + 0 = 370 ✓）、**371**（27 + 343 + 1 = 371 ✓）、**407**（64 + 0 + 343 = 407 ✓）です。",
+          "個別に検算します：153 → 1³ + 5³ + 3³ = 1 + 125 + 27 = 153 ✓、370 → 3³ + 7³ + 0³ = 370 ✓、371 → 3³ + 7³ + 1³ = 371 ✓、407 → 4³ + 0³ + 7³ = 407 ✓。4 つとも成立します。",
+          "したがって答えは 4 個です。検算：100 から 999 まで各位の立方和を計算して比較すると、該当は**ちょうどこの 4 個** ✓ で漏れも余分もありません。",
+          "**補足：370 と 371 が隣り合う**のは、末位が 0 と 1 で 1 だけ異なり、0³ = 0 と 1³ = 1 もちょうど 1 だけ異なるため、両式が同時に成り立つからです——美しい偶然です。**この種の数はナルシシスト数（アームストロング数）と呼ばれます**。4 桁で 4 乗にしても該当する数（1634 など）は存在しますが、やはり個数はごくわずかです。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "4"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "各位立方和等於自身：以位值式列出條件並窮舉三位數，四個解逐一代入驗算",
+        "notes": "設計依據：詳解先以位值式建立條件並檢視上界為何無法有效縮減，說明何時直接窮舉才是正解；四個解逐一代入核對，並解釋 370 與 371 相鄰的原因來自 0³ 與 1³ 恰差 1。答案 4 已用 100 到 999 的完整窮舉獨立驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（各位立方和等於自己）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "數論",
+        "topicCode": "number_theory",
+        "subtopic": "各位立方和等於自己",
+        "subtopicCode": "armstrong_three_digit"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "number_theory_grade10_foundation_024",
+      "topic": "number_theory",
+      "subtopic": "max_prime_gap_100",
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "把 100 以內的所有質數由小到大排成一列（2、3、5、7、11、⋯、97）。求這一列中，相鄰兩個質數的差最大是多少。",
+        "zh-Hans": "把 100 以内的所有质数由小到大排成一列（2、3、5、7、11、⋯、97）。求这一列中，相邻两个质数的差最大是多少。",
+        "en": "List all primes below 100 in increasing order: 2, 3, 5, 7, 11, ..., 97. What is the largest difference between two consecutive primes in this list?",
+        "ja": "100 以下のすべての素数を小さい順に並べます（2、3、5、7、11、⋯、97）。この列で隣り合う 2 つの素数の差の最大値はいくつですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 8。",
+        "zh-Hans": "答案是 8。",
+        "en": "The answer is 8.",
+        "ja": "答えは 8 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "**先把 100 以內的質數完整列出來**，不能有遺漏，否則相鄰的差就會算錯。",
+          "用篩法逐一排除合數，得到 100 以內的質數共 25 個：**2、3、5、7、11、13、17、19、23、29、31、37、41、43、47、53、59、61、67、71、73、79、83、89、97**。",
+          "**接著逐一計算相鄰兩項的差。**2→3 差 1；3→5 差 2；5→7 差 2；7→11 差 **4**；11→13 差 2；13→17 差 4；17→19 差 2；19→23 差 4。",
+          "23→29 差 **6**；29→31 差 2；31→37 差 6；37→41 差 4；41→43 差 2；43→47 差 4；47→53 差 6。",
+          "53→59 差 6；59→61 差 2；61→67 差 6；67→71 差 4；71→73 差 2；73→79 差 6；79→83 差 4。",
+          "83→89 差 6；**89→97 差 8** ← 這是目前最大的。",
+          "把所有的差整理一下：差為 1 的有 1 次、差為 2 的有 8 次、差為 4 的有 7 次、差為 6 的有 7 次、**差為 8 的有 1 次**。合計 24 個差（25 個質數之間有 24 個間隔）✓ 數目吻合。",
+          "所以最大差是 **8**，出現在 89 與 97 之間。**檢查中間確實沒有質數**：90、91、92、93、94、95、96 之中，90 是偶數、91 = 7 × 13、92 是偶數、93 = 3 × 31、94 是偶數、95 = 5 × 19、96 是偶數 ✓ 全部是合數。",
+          "驗算：程式列出 100 以內全部質數並計算相鄰差，最大值正是 8（在 89 與 97 之間）✓，且差的分布與上面統計完全一致。",
+          "**注意只有 2 與 3 的差是 1**——因為 2 是唯一的偶質數，之後所有質數都是奇數，相鄰差必為偶數。這也解釋了為什麼上面的差除了第一個之外全是偶數。"
+        ],
+        "zh-Hans": [
+          "**先把 100 以内的质数完整列出来**，不能有遗漏，否则相邻的差就会算错。",
+          "用筛法逐一排除合数，得到 100 以内的质数共 25 个：**2、3、5、7、11、13、17、19、23、29、31、37、41、43、47、53、59、61、67、71、73、79、83、89、97**。",
+          "**接着逐一计算相邻两项的差。**2→3 差 1；3→5 差 2；5→7 差 2；7→11 差 **4**；11→13 差 2；13→17 差 4；17→19 差 2；19→23 差 4。",
+          "23→29 差 **6**；29→31 差 2；31→37 差 6；37→41 差 4；41→43 差 2；43→47 差 4；47→53 差 6。",
+          "53→59 差 6；59→61 差 2；61→67 差 6；67→71 差 4；71→73 差 2；73→79 差 6；79→83 差 4。",
+          "83→89 差 6；**89→97 差 8** ← 这是目前最大的。",
+          "把所有的差整理一下：差为 1 的有 1 次、差为 2 的有 8 次、差为 4 的有 7 次、差为 6 的有 7 次、**差为 8 的有 1 次**。合计 24 个差（25 个质数之间有 24 个间隔）✓ 数目吻合。",
+          "所以最大差是 **8**，出现在 89 与 97 之间。**检查中间确实没有质数**：90、91、92、93、94、95、96 之中，90 是偶数、91 = 7 × 13、92 是偶数、93 = 3 × 31、94 是偶数、95 = 5 × 19、96 是偶数 ✓ 全部是合数。",
+          "验算：程序列出 100 以内全部质数并计算相邻差，最大值正是 8（在 89 与 97 之间）✓，且差的分布与上面统计完全一致。",
+          "**注意只有 2 与 3 的差是 1**——因为 2 是唯一的偶质数，之后所有质数都是奇数，相邻差必为偶数。这也解释了为什么上面的差除了第一个之外全是偶数。"
+        ],
+        "en": [
+          "List every prime below 100 in full first, since a missing prime would corrupt the gaps.",
+          "Sieving out the composites leaves 25 primes below 100: 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89 and 97.",
+          "Now compute the consecutive differences. From 2 to 3 is 1; 3 to 5 is 2; 5 to 7 is 2; 7 to 11 is 4; 11 to 13 is 2; 13 to 17 is 4; 17 to 19 is 2; and 19 to 23 is 4.",
+          "From 23 to 29 is 6; 29 to 31 is 2; 31 to 37 is 6; 37 to 41 is 4; 41 to 43 is 2; 43 to 47 is 4; and 47 to 53 is 6.",
+          "From 53 to 59 is 6; 59 to 61 is 2; 61 to 67 is 6; 67 to 71 is 4; 71 to 73 is 2; 73 to 79 is 6; and 79 to 83 is 4.",
+          "From 83 to 89 is 6; and from 89 to 97 is 8, the largest so far.",
+          "Tallying the differences: 1 occurs once, 2 occurs eight times, 4 occurs seven times, 6 occurs seven times and 8 occurs once, totalling 24 gaps, which matches the 24 intervals between 25 primes.",
+          "So the largest gap is 8, between 89 and 97. Confirm nothing prime lies between: 90, 92, 94 and 96 are even, 91 = 7 × 13, 93 = 3 × 31 and 95 = 5 × 19, so all are composite.",
+          "Check: listing every prime below 100 and computing consecutive differences gives a maximum of 8 between 89 and 97, with the distribution matching the tally above.",
+          "Note that only 2 and 3 differ by 1, since 2 is the sole even prime and every later prime is odd, forcing all subsequent gaps to be even — which explains why every difference above except the first is even."
+        ],
+        "ja": [
+          "**まず 100 以下の素数を漏れなく列挙します**。1 つでも欠ければ差の計算が狂います。",
+          "ふるいで合成数を除くと、100 以下の素数は 25 個：**2、3、5、7、11、13、17、19、23、29、31、37、41、43、47、53、59、61、67、71、73、79、83、89、97**。",
+          "**次に隣り合う項の差を順に計算します。**2→3 は 1、3→5 は 2、5→7 は 2、7→11 は **4**、11→13 は 2、13→17 は 4、17→19 は 2、19→23 は 4。",
+          "23→29 は **6**、29→31 は 2、31→37 は 6、37→41 は 4、41→43 は 2、43→47 は 4、47→53 は 6。",
+          "53→59 は 6、59→61 は 2、61→67 は 6、67→71 は 4、71→73 は 2、73→79 は 6、79→83 は 4。",
+          "83→89 は 6、**89→97 は 8** ← ここまでで最大です。",
+          "差を集計します：1 が 1 回、2 が 8 回、4 が 7 回、6 が 7 回、**8 が 1 回**。合計 24 個の差（25 個の素数の間に 24 の間隔）✓ で個数が一致します。",
+          "したがって最大の差は **8** で、89 と 97 の間に現れます。**間に素数がないことも確認**します：90、92、94、96 は偶数、91 = 7 × 13、93 = 3 × 31、95 = 5 × 19 ✓ ですべて合成数です。",
+          "検算：100 以下の素数を列挙して隣接差を計算すると、最大は 89 と 97 の間の 8 ✓ で、差の分布も上の集計と完全に一致します。",
+          "**差が 1 なのは 2 と 3 だけ**です——2 が唯一の偶素数で、それ以降の素数はすべて奇数なので隣接差は必ず偶数になります。上の差が最初の 1 つを除きすべて偶数なのはこのためです。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "8"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "相鄰質數的最大差：完整列出 100 以內的 25 個質數並逐一計算差，最大差 8 出現在 89 與 97 之間",
+        "notes": "設計依據：詳解完整列出所有 24 個相鄰差並統計分布（1 次 1、8 次 2、7 次 4、7 次 6、1 次 8），以間隔數 24 與質數個數 25 相符作為未遺漏的檢核；並逐一驗證 90 到 96 皆為合數，末尾說明除首項外所有差必為偶數的原因。答案 8 已用質數表的完整計算獨立驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（相鄰質數的最大差）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "數論",
+        "topicCode": "number_theory",
+        "subtopic": "相鄰質數的最大差",
+        "subtopicCode": "max_prime_gap_100"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "number_theory_grade10_foundation_025",
+      "topic": "number_theory",
+      "subtopic": "palindrome_count_div3",
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一個數若正著讀與倒著讀完全相同，就稱為迴文數（例如 121、353）。求三位數的迴文數當中，是 3 的倍數的共有幾個。",
+        "zh-Hans": "一个数若正着读与倒着读完全相同，就称为回文数（例如 121、353）。求三位数的回文数当中，是 3 的倍数的共有几个。",
+        "en": "A number reading the same forwards and backwards is called a palindrome, such as 121 or 353. Among the three-digit palindromes, how many are multiples of 3?",
+        "ja": "前から読んでも後ろから読んでも同じ数を回文数といいます（121、353 など）。3 桁の回文数のうち、3 の倍数は何個ありますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 30 個。",
+        "zh-Hans": "答案是 30 个。",
+        "en": "The answer is 30.",
+        "ja": "答えは 30 個です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "**先把三位迴文數的形式寫出來。**它的百位與個位必須相同，所以形如 **aba**，其中 a 是 1 到 9（百位不能為 0）、b 是 0 到 9。",
+          "**所以三位迴文數共有 9 × 10 = 90 個**（a 有 9 種、b 有 10 種）。",
+          "**接著用 3 的倍數判別法**：一個數是 3 的倍數，當且僅當它的各位數字之和是 3 的倍數。",
+          "aba 的各位數字之和是 a + b + a = **2a + b**。所以條件是 **2a + b 是 3 的倍數**。",
+          "**逐一固定 a，數有幾個 b 符合。**對每個固定的 a，b 從 0 到 9 共 10 個值，要使 2a + b ≡ 0（除以 3 餘 0）。",
+          "**注意 b 只要落在某個固定的餘數類就行**：b 除以 3 的餘數必須是「使 2a + b 被 3 整除」的那一個，這個餘數由 a 唯一決定。",
+          "**而 0 到 9 這 10 個數中，每一種餘數各有幾個？**餘 0 的有 0、3、6、9 共 **4 個**；餘 1 的有 1、4、7 共 **3 個**；餘 2 的有 2、5、8 共 **3 個**。",
+          "所以對每個 a，符合的 b 有 3 或 4 個，取決於需要的餘數。**具體地說**：當 2a ≡ 0 時需 b ≡ 0，有 4 個；當 2a ≡ 1 時需 b ≡ 2，有 3 個；當 2a ≡ 2 時需 b ≡ 1，有 3 個。",
+          "a 從 1 到 9，其中 a = 3、6、9 使 2a ≡ 0（各 4 個 b）；a = 1、4、7 使 2a ≡ 2（各 3 個 b）；a = 2、5、8 使 2a ≡ 1（各 3 個 b）。合計 = 3 × 4 + 3 × 3 + 3 × 3 = 12 + 9 + 9 = **30 個**。",
+          "驗算：程式列出全部 90 個三位迴文數並檢查是否為 3 的倍數，符合的恰好是 **30 個** ✓。**注意 30 恰好是 90 的三分之一**——這並非理所當然（a 的取值 1 到 9 與 b 的 0 到 9 分布不同），但兩種偏差恰好互相抵銷；若百位允許為 0，比例就不會這麼整齊。"
+        ],
+        "zh-Hans": [
+          "**先把三位回文数的形式写出来。**它的百位与个位必须相同，所以形如 **aba**，其中 a 是 1 到 9（百位不能为 0）、b 是 0 到 9。",
+          "**所以三位回文数共有 9 × 10 = 90 个**（a 有 9 种、b 有 10 种）。",
+          "**接着用 3 的倍数判别法**：一个数是 3 的倍数，当且仅当它的各位数字之和是 3 的倍数。",
+          "aba 的各位数字之和是 a + b + a = **2a + b**。所以条件是 **2a + b 是 3 的倍数**。",
+          "**逐一固定 a，数有几个 b 符合。**对每个固定的 a，b 从 0 到 9 共 10 个值，要使 2a + b ≡ 0（除以 3 余 0）。",
+          "**注意 b 只要落在某个固定的余数类就行**：b 除以 3 的余数必须是「使 2a + b 被 3 整除」的那一个，这个余数由 a 唯一决定。",
+          "**而 0 到 9 这 10 个数中，每一种余数各有几个？**余 0 的有 0、3、6、9 共 **4 个**；余 1 的有 1、4、7 共 **3 个**；余 2 的有 2、5、8 共 **3 个**。",
+          "所以对每个 a，符合的 b 有 3 或 4 个，取决于需要的余数。**具体地说**：当 2a ≡ 0 时需 b ≡ 0，有 4 个；当 2a ≡ 1 时需 b ≡ 2，有 3 个；当 2a ≡ 2 时需 b ≡ 1，有 3 个。",
+          "a 从 1 到 9，其中 a = 3、6、9 使 2a ≡ 0（各 4 个 b）；a = 1、4、7 使 2a ≡ 2（各 3 个 b）；a = 2、5、8 使 2a ≡ 1（各 3 个 b）。合计 = 3 × 4 + 3 × 3 + 3 × 3 = 12 + 9 + 9 = **30 个**。",
+          "验算：程序列出全部 90 个三位回文数并检查是否为 3 的倍数，符合的恰好是 **30 个** ✓。**注意 30 恰好是 90 的三分之一**——这并非理所当然（a 的取值 1 到 9 与 b 的 0 到 9 分布不同），但两种偏差恰好互相抵销；若百位允许为 0，比例就不会这么整齐。"
+        ],
+        "en": [
+          "Write down the form of a three-digit palindrome first. Its hundreds and units digits must match, so it looks like aba, with a from 1 to 9 since the leading digit cannot be 0, and b from 0 to 9.",
+          "So there are 9 × 10 = 90 three-digit palindromes, nine choices of a and ten of b.",
+          "Now apply the divisibility rule for 3: a number is a multiple of 3 exactly when its digit sum is.",
+          "The digit sum of aba is a + b + a = 2a + b, so the condition is that 2a + b be a multiple of 3.",
+          "Fix a and count the qualifying b. For each fixed a, b ranges over ten values from 0 to 9, and 2a + b must leave remainder 0 on division by 3.",
+          "Note that b need only lie in one particular remainder class, the one making 2a + b divisible by 3, and that class is determined uniquely by a.",
+          "How many of 0 through 9 lie in each class? Remainder 0 holds 0, 3, 6 and 9, four values; remainder 1 holds 1, 4 and 7, three values; and remainder 2 holds 2, 5 and 8, three values.",
+          "So each a admits either 3 or 4 values of b, depending on which class is needed. Specifically, 2a ≡ 0 requires b ≡ 0 with 4 choices, 2a ≡ 1 requires b ≡ 2 with 3, and 2a ≡ 2 requires b ≡ 1 with 3.",
+          "Across a from 1 to 9: a = 3, 6, 9 give 2a ≡ 0 with 4 choices each; a = 1, 4, 7 give 2a ≡ 2 with 3 each; and a = 2, 5, 8 give 2a ≡ 1 with 3 each. The total is 3 × 4 + 3 × 3 + 3 × 3 = 12 + 9 + 9 = 30.",
+          "Check: listing all 90 three-digit palindromes and testing divisibility by 3 leaves exactly 30. Note that 30 is exactly one third of 90 — not automatic, since a ranges over 1 to 9 while b ranges over 0 to 9 with different distributions, but the two imbalances happen to cancel; allowing a leading 0 would spoil the neat ratio."
+        ],
+        "ja": [
+          "**まず 3 桁の回文数の形を書きます。**百の位と一の位が一致するので **aba** の形で、a は 1〜9（先頭は 0 にできない）、b は 0〜9 です。",
+          "**したがって 3 桁の回文数は 9 × 10 = 90 個**です（a が 9 通り、b が 10 通り）。",
+          "**次に 3 の倍数の判定法を使います**：数が 3 の倍数であるのは、各位の数字の和が 3 の倍数であるとき、かつそのときに限ります。",
+          "aba の各位の和は a + b + a = **2a + b** なので、条件は **2a + b が 3 の倍数**であることです。",
+          "**a を固定して、条件を満たす b の個数を数えます。**a を固定すると b は 0〜9 の 10 通りで、2a + b を 3 で割った余りが 0 になる必要があります。",
+          "**b は特定の剰余類に属していればよい**点に注意します：b を 3 で割った余りは「2a + b が 3 で割り切れる」ものに限られ、その余りは a によって一意に決まります。",
+          "**0〜9 の 10 個は各剰余類にいくつ属するでしょうか。**余り 0 は 0、3、6、9 の **4 個**、余り 1 は 1、4、7 の **3 個**、余り 2 は 2、5、8 の **3 個**です。",
+          "したがって各 a に対し条件を満たす b は 3 個か 4 個で、必要な剰余類によります。**具体的には** 2a ≡ 0 なら b ≡ 0 で 4 個、2a ≡ 1 なら b ≡ 2 で 3 個、2a ≡ 2 なら b ≡ 1 で 3 個です。",
+          "a は 1〜9 で、a = 3、6、9 は 2a ≡ 0（各 4 個）、a = 1、4、7 は 2a ≡ 2（各 3 個）、a = 2、5、8 は 2a ≡ 1（各 3 個）。合計 = 3 × 4 + 3 × 3 + 3 × 3 = 12 + 9 + 9 = **30 個**。",
+          "検算：3 桁の回文数 90 個をすべて列挙して 3 の倍数か調べると、該当はちょうど **30 個** ✓。**30 は 90 のちょうど 3 分の 1** ですが、これは自明ではありません（a は 1〜9、b は 0〜9 と分布が異なる）。2 つの偏りがたまたま相殺しており、先頭に 0 を許せばこの比率は崩れます。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "30"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "迴文數與 3 的倍數：三位迴文形如 aba 故數字和為 2a + b，依 a 決定 b 所需的餘數類再逐類計數",
+        "notes": "設計依據：詳解由 aba 的結構導出數字和 2a + b，再依 0 到 9 中各餘數類的個數（4、3、3 不均勻）分三類計數，而非直接除以 3；末尾指出 30 恰為 90 的三分之一是兩種偏差相消的巧合而非通則。答案 30 已用全部 90 個三位迴文數的逐一檢查窮舉獨立驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（是 3 的倍數的迴文數）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "數論",
+        "topicCode": "number_theory",
+        "subtopic": "是 3 的倍數的迴文數",
+        "subtopicCode": "palindrome_count_div3"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "number_theory_grade10_foundation_026",
+      "topic": "number_theory",
+      "subtopic": "abundant_count",
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "若一個正整數的所有真因數（小於它本身的正因數）之和**大於它本身**，就稱它為「盈數」。例如 12 的真因數是 1、2、3、4、6，和為 16 > 12，所以 12 是盈數。求 1 到 30 之間（含兩端）的盈數共有幾個。",
+        "zh-Hans": "若一个正整数的所有真因数（小于它本身的正因数）之和**大于它本身**，就称它为「盈数」。例如 12 的真因数是 1、2、3、4、6，和为 16 > 12，所以 12 是盈数。求 1 到 30 之间（含两端）的盈数共有几个。",
+        "en": "A positive integer is called abundant if the sum of its proper divisors, those smaller than itself, exceeds the number. For instance 12 has proper divisors 1, 2, 3, 4 and 6 summing to 16, which exceeds 12, so 12 is abundant. How many abundant numbers are there from 1 to 30 inclusive?",
+        "ja": "正の整数の真の約数（それ自身より小さい正の約数）の和が**その数自身より大きい**とき、その数を「過剰数」といいます。たとえば 12 の真の約数は 1、2、3、4、6 で和は 16 > 12 なので 12 は過剰数です。1 から 30 まで（両端を含む）に過剰数は何個ありますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 5 個。",
+        "zh-Hans": "答案是 5 个。",
+        "en": "The answer is 5.",
+        "ja": "答えは 5 個です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "**先大幅縮小要檢查的範圍，不必真的算 30 個數的因數和。**",
+          "**質數一定不是盈數**：質數 p 的真因數只有 1，和為 1 < p。所以 2、3、5、7、11、13、17、19、23、29 全部排除（共 10 個）。",
+          "**1 也不是**：1 沒有真因數，和為 0 < 1。",
+          "**質數的平方通常也不是**：例如 25 的真因數是 1、5，和為 6 < 25 ✗；9 的真因數是 1、3，和為 4 < 9 ✗；4 的真因數只有 1，和為 1 < 4 ✗。",
+          "**剩下要檢查的合數是**：6、8、10、12、14、15、16、18、20、21、22、24、26、27、28、30。逐一計算真因數之和。",
+          "6 → 1+2+3 = 6，**等於**本身（這是完全數，不是盈數）✗；8 → 1+2+4 = 7 < 8 ✗；10 → 1+2+5 = 8 < 10 ✗；**12 → 1+2+3+4+6 = 16 > 12** ✓。",
+          "14 → 1+2+7 = 10 ✗；15 → 1+3+5 = 9 ✗；16 → 1+2+4+8 = 15 ✗；**18 → 1+2+3+6+9 = 21 > 18** ✓；**20 → 1+2+4+5+10 = 22 > 20** ✓。",
+          "21 → 1+3+7 = 11 ✗；22 → 1+2+11 = 14 ✗；**24 → 1+2+3+4+6+8+12 = 36 > 24** ✓；26 → 1+2+13 = 16 ✗；27 → 1+3+9 = 13 ✗；28 → 1+2+4+7+14 = 28 **等於**本身（完全數）✗；**30 → 1+2+3+5+6+10+15 = 42 > 30** ✓。",
+          "所以盈數是 **12、18、20、24、30**，共 **5 個**。驗算：程式對 1 到 30 逐一計算真因數之和並比較，符合的正是這 5 個 ✓。",
+          "**注意 6 與 28 要排除**——它們的真因數和**恰好等於**自己，是完全數而非盈數。題目要求的是「大於」，等於的情形不算，這是最容易出錯的地方。**另外可以觀察到 5 個盈數全是偶數**——最小的奇盈數是 945，遠在 30 之外。"
+        ],
+        "zh-Hans": [
+          "**先大幅缩小要检查的范围，不必真的算 30 个数的因数和。**",
+          "**质数一定不是盈数**：质数 p 的真因数只有 1，和为 1 < p。所以 2、3、5、7、11、13、17、19、23、29 全部排除（共 10 个）。",
+          "**1 也不是**：1 没有真因数，和为 0 < 1。",
+          "**质数的平方通常也不是**：例如 25 的真因数是 1、5，和为 6 < 25 ✗；9 的真因数是 1、3，和为 4 < 9 ✗；4 的真因数只有 1，和为 1 < 4 ✗。",
+          "**剩下要检查的合数是**：6、8、10、12、14、15、16、18、20、21、22、24、26、27、28、30。逐一计算真因数之和。",
+          "6 → 1+2+3 = 6，**等于**本身（这是完全数，不是盈数）✗；8 → 1+2+4 = 7 < 8 ✗；10 → 1+2+5 = 8 < 10 ✗；**12 → 1+2+3+4+6 = 16 > 12** ✓。",
+          "14 → 1+2+7 = 10 ✗；15 → 1+3+5 = 9 ✗；16 → 1+2+4+8 = 15 ✗；**18 → 1+2+3+6+9 = 21 > 18** ✓；**20 → 1+2+4+5+10 = 22 > 20** ✓。",
+          "21 → 1+3+7 = 11 ✗；22 → 1+2+11 = 14 ✗；**24 → 1+2+3+4+6+8+12 = 36 > 24** ✓；26 → 1+2+13 = 16 ✗；27 → 1+3+9 = 13 ✗；28 → 1+2+4+7+14 = 28 **等于**本身（完全数）✗；**30 → 1+2+3+5+6+10+15 = 42 > 30** ✓。",
+          "所以盈数是 **12、18、20、24、30**，共 **5 个**。验算：程序对 1 到 30 逐一计算真因数之和并比较，符合的正是这 5 个 ✓。",
+          "**注意 6 与 28 要排除**——它们的真因数和**恰好等于**自己，是完全数而非盈数。题目要求的是「大于」，等于的情形不算，这是最容易出错的地方。**另外可以观察到 5 个盈数全是偶数**——最小的奇盈数是 945，远在 30 之外。"
+        ],
+        "en": [
+          "Narrow the range sharply first, rather than computing divisor sums for all 30 numbers.",
+          "Primes are never abundant: a prime p has only the proper divisor 1, summing to 1 < p. So 2, 3, 5, 7, 11, 13, 17, 19, 23 and 29 are all excluded, ten numbers in total.",
+          "Nor is 1, which has no proper divisors and a sum of 0 < 1.",
+          "Squares of primes typically fail too: 25 has proper divisors 1 and 5 summing to 6 < 25; 9 has 1 and 3 summing to 4 < 9; and 4 has only 1, summing to 1 < 4.",
+          "The composites left to check are 6, 8, 10, 12, 14, 15, 16, 18, 20, 21, 22, 24, 26, 27, 28 and 30. Compute each proper divisor sum.",
+          "For 6, 1+2+3 = 6 equals the number, making it perfect rather than abundant; 8 gives 1+2+4 = 7 < 8; 10 gives 1+2+5 = 8 < 10; and 12 gives 1+2+3+4+6 = 16 > 12, abundant.",
+          "For 14, 1+2+7 = 10; for 15, 1+3+5 = 9; for 16, 1+2+4+8 = 15; for 18, 1+2+3+6+9 = 21 > 18, abundant; and for 20, 1+2+4+5+10 = 22 > 20, abundant.",
+          "For 21, 1+3+7 = 11; for 22, 1+2+11 = 14; for 24, 1+2+3+4+6+8+12 = 36 > 24, abundant; for 26, 1+2+13 = 16; for 27, 1+3+9 = 13; for 28, 1+2+4+7+14 = 28 equals the number, perfect; and for 30, 1+2+3+5+6+10+15 = 42 > 30, abundant.",
+          "So the abundant numbers are 12, 18, 20, 24 and 30, five in all. Check: computing proper divisor sums for 1 through 30 and comparing gives exactly these five.",
+          "Note that 6 and 28 must be excluded — their proper divisors sum to exactly the number, making them perfect rather than abundant. The problem demands strictly greater, and equality does not qualify, which is the easiest mistake here. Observe too that all five are even; the smallest odd abundant number is 945, far beyond 30."
+        ],
+        "ja": [
+          "**まず調べる範囲を大きく絞ります。**30 個すべての約数和を計算する必要はありません。",
+          "**素数は決して過剰数になりません**：素数 p の真の約数は 1 だけで、和は 1 < p です。したがって 2、3、5、7、11、13、17、19、23、29 の 10 個が除外されます。",
+          "**1 も違います**：真の約数がなく和は 0 < 1 です。",
+          "**素数の平方もたいてい違います**：25 の真の約数は 1、5 で和 6 < 25 ✗、9 は 1、3 で和 4 < 9 ✗、4 は 1 だけで和 1 < 4 ✗。",
+          "**残る合成数は** 6、8、10、12、14、15、16、18、20、21、22、24、26、27、28、30 です。順に真の約数の和を求めます。",
+          "6 → 1+2+3 = 6 で自身に**等しい**（完全数であって過剰数ではない）✗、8 → 1+2+4 = 7 < 8 ✗、10 → 1+2+5 = 8 < 10 ✗、**12 → 1+2+3+4+6 = 16 > 12** ✓。",
+          "14 → 1+2+7 = 10 ✗、15 → 1+3+5 = 9 ✗、16 → 1+2+4+8 = 15 ✗、**18 → 1+2+3+6+9 = 21 > 18** ✓、**20 → 1+2+4+5+10 = 22 > 20** ✓。",
+          "21 → 1+3+7 = 11 ✗、22 → 1+2+11 = 14 ✗、**24 → 1+2+3+4+6+8+12 = 36 > 24** ✓、26 → 1+2+13 = 16 ✗、27 → 1+3+9 = 13 ✗、28 → 1+2+4+7+14 = 28 で自身に**等しい**（完全数）✗、**30 → 1+2+3+5+6+10+15 = 42 > 30** ✓。",
+          "したがって過剰数は **12、18、20、24、30** の **5 個**です。検算：1 から 30 まで真の約数の和を計算して比較すると、該当はこの 5 個 ✓ です。",
+          "**6 と 28 は除外**します——真の約数の和が自身に**ちょうど等しく**、完全数であって過剰数ではありません。問題は「より大きい」を要求しており、等号は含まれません。ここが最も間違えやすい点です。**5 個の過剰数がすべて偶数**であることにも注目できます——最小の奇数の過剰数は 945 で、30 のはるか外側です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "5"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "盈數的計數：先以質數與 1 排除大半，再逐一計算合數的真因數和，並嚴格區分「大於」與「等於」",
+        "notes": "設計依據：詳解先論證質數與 1 必非盈數以縮小範圍，再逐一計算剩餘合數；特別標示 6 與 28 因真因數和恰等於自身而屬完全數需排除，這是本題最常見的錯誤來源；末尾指出五個盈數皆為偶數且最小奇盈數為 945。答案 5 已用 1 到 30 的逐一計算窮舉獨立驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（盈數的個數）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "數論",
+        "topicCode": "number_theory",
+        "subtopic": "盈數的個數",
+        "subtopicCode": "abundant_count"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "number_theory_grade10_foundation_027",
+      "topic": "number_theory",
+      "subtopic": "order_mod_eleven",
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "把 2¹、2²、2³、⋯ 依序除以 11，並記下每一次的餘數，得到一串餘數。這串餘數當中，第幾項會首度出現 1？",
+        "zh-Hans": "把 2¹、2²、2³、⋯ 依序除以 11，并记下每一次的余数，得到一串余数。这串余数当中，第几项会首度出现 1？",
+        "en": "Divide 2¹, 2², 2³, and so on by 11 in turn, recording each remainder to form a sequence of remainders. At which term does the value 1 first appear in that sequence?",
+        "ja": "2¹、2²、2³、⋯ を順に 11 で割り、そのつど余りを記録して余りの列を作ります。この列で 1 が最初に現れるのは第何項ですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 10。",
+        "zh-Hans": "答案是 10。",
+        "en": "The answer is 10.",
+        "ja": "答えは 10 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "**不必真的算出 2 的高次方——只要逐次追蹤餘數即可。**每一步都是「把上一個餘數乘以 2，再除以 11 取餘數」。",
+          "k = 1：2¹ = 2，餘 **2**。k = 2：2 × 2 = 4，餘 **4**。k = 3：4 × 2 = 8，餘 **8**。",
+          "k = 4：8 × 2 = 16，16 ÷ 11 餘 **5**。k = 5：5 × 2 = 10，餘 **10**。",
+          "k = 6：10 × 2 = 20，20 ÷ 11 餘 **9**。k = 7：9 × 2 = 18，18 ÷ 11 餘 **7**。",
+          "k = 8：7 × 2 = 14，14 ÷ 11 餘 **3**。k = 9：3 × 2 = 6，餘 **6**。",
+          "k = 10：6 × 2 = 12，12 ÷ 11 餘 **1** ✓ 找到了。",
+          "所以最小的 k 是 10。**檢查前九項的餘數依序是 2、4、8、5、10、9、7、3、6，沒有一個是 1** ✓ 確認 10 是最小的。",
+          "**觀察一件有意思的事**：這九個餘數加上第十項的 1，恰好是 1 到 10 這十個數各出現一次——也就是說，**2 的各次方走遍了除以 11 的所有非零餘數**。這樣的底數稱為模 11 的「原根」。",
+          "驗算：程式計算 2 的 1 到 11 次方對 11 取餘，得到序列 2、4、8、5、10、9、7、3、6、1、2 ✓，第 10 項首次為 1，之後從第 11 項開始重複，週期正是 10。",
+          "**這個結果與費馬小定理一致**：11 是質數且 2 不是 11 的倍數，所以 2¹⁰ ≡ 1（mod 11）必然成立。**但定理只保證 k = 10 可行，不保證它最小**——最小的 k 必定整除 10，所以候選只有 1、2、5、10。前面已算出 2¹ = 2、2² = 4、2⁵ = 10（除以 11 餘 10）都不是 1，因此最小的只能是 10 ✓，這也是一個不必逐項檢查的快速論證。"
+        ],
+        "zh-Hans": [
+          "**不必真的算出 2 的高次方——只要逐次追踪余数即可。**每一步都是「把上一个余数乘以 2，再除以 11 取余数」。",
+          "k = 1：2¹ = 2，余 **2**。k = 2：2 × 2 = 4，余 **4**。k = 3：4 × 2 = 8，余 **8**。",
+          "k = 4：8 × 2 = 16，16 ÷ 11 余 **5**。k = 5：5 × 2 = 10，余 **10**。",
+          "k = 6：10 × 2 = 20，20 ÷ 11 余 **9**。k = 7：9 × 2 = 18，18 ÷ 11 余 **7**。",
+          "k = 8：7 × 2 = 14，14 ÷ 11 余 **3**。k = 9：3 × 2 = 6，余 **6**。",
+          "k = 10：6 × 2 = 12，12 ÷ 11 余 **1** ✓ 找到了。",
+          "所以最小的 k 是 10。**检查前九项的余数依序是 2、4、8、5、10、9、7、3、6，没有一个是 1** ✓ 确认 10 是最小的。",
+          "**观察一件有意思的事**：这九个余数加上第十项的 1，恰好是 1 到 10 这十个数各出现一次——也就是说，**2 的各次方走遍了除以 11 的所有非零余数**。这样的底数称为模 11 的「原根」。",
+          "验算：程序计算 2 的 1 到 11 次方对 11 取余，得到序列 2、4、8、5、10、9、7、3、6、1、2 ✓，第 10 项首次为 1，之后从第 11 项开始重复，周期正是 10。",
+          "**这个结果与费马小定理一致**：11 是质数且 2 不是 11 的倍数，所以 2¹⁰ ≡ 1（mod 11）必然成立。**但定理只保证 k = 10 可行，不保证它最小**——最小的 k 必定整除 10，所以候选只有 1、2、5、10。前面已算出 2¹ = 2、2² = 4、2⁵ = 10（除以 11 余 10）都不是 1，因此最小的只能是 10 ✓，这也是一个不必逐项检查的快速论证。"
+        ],
+        "en": [
+          "High powers of 2 need never be computed — tracking the remainders step by step suffices, each step multiplying the previous remainder by 2 and reducing modulo 11.",
+          "For k = 1, 2¹ = 2 leaves 2. For k = 2, 2 × 2 = 4 leaves 4. For k = 3, 4 × 2 = 8 leaves 8.",
+          "For k = 4, 8 × 2 = 16 leaves 5. For k = 5, 5 × 2 = 10 leaves 10.",
+          "For k = 6, 10 × 2 = 20 leaves 9. For k = 7, 9 × 2 = 18 leaves 7.",
+          "For k = 8, 7 × 2 = 14 leaves 3. For k = 9, 3 × 2 = 6 leaves 6.",
+          "For k = 10, 6 × 2 = 12 leaves 1 — found.",
+          "So the smallest k is 10. The first nine remainders are 2, 4, 8, 5, 10, 9, 7, 3 and 6, none of them 1, confirming 10 as the smallest.",
+          "Something interesting emerges: those nine remainders together with the tenth, 1, are exactly the numbers 1 through 10 each occurring once — the powers of 2 run through every non-zero remainder modulo 11. Such a base is called a primitive root modulo 11.",
+          "Check: computing 2 to the powers 1 through 11 modulo 11 gives the sequence 2, 4, 8, 5, 10, 9, 7, 3, 6, 1, 2, with the first 1 at the tenth term and repetition beginning at the eleventh, so the period is exactly 10.",
+          "This agrees with Fermat's little theorem: 11 is prime and 2 is not a multiple of 11, so 2¹⁰ ≡ 1 modulo 11 necessarily holds. But the theorem only guarantees that k = 10 works, not that it is smallest — the smallest k must divide 10, leaving candidates 1, 2, 5 and 10. Since 2¹ = 2, 2² = 4 and 2⁵ = 32 leaves 10, none of them 1, the smallest can only be 10, a quick argument avoiding term-by-term checking."
+        ],
+        "ja": [
+          "**2 の高い累乗を実際に計算する必要はありません**——余りを 1 段ずつ追えば十分です。各段階は「前の余りを 2 倍して 11 で割った余りをとる」だけです。",
+          "k = 1：2¹ = 2 で余り **2**。k = 2：2 × 2 = 4 で余り **4**。k = 3：4 × 2 = 8 で余り **8**。",
+          "k = 4：8 × 2 = 16、16 ÷ 11 の余りは **5**。k = 5：5 × 2 = 10 で余り **10**。",
+          "k = 6：10 × 2 = 20、20 ÷ 11 の余りは **9**。k = 7：9 × 2 = 18、余りは **7**。",
+          "k = 8：7 × 2 = 14、余りは **3**。k = 9：3 × 2 = 6 で余り **6**。",
+          "k = 10：6 × 2 = 12、12 ÷ 11 の余りは **1** ✓ 見つかりました。",
+          "したがって最小の k は 10 です。**最初の 9 項の余りは順に 2、4、8、5、10、9、7、3、6 で 1 は 1 つもなく** ✓、10 が最小と確認できます。",
+          "**興味深いことに**、この 9 つの余りと第 10 項の 1 を合わせると、ちょうど 1 から 10 が 1 回ずつ現れます——すなわち **2 の累乗は 11 で割った 0 でない余りをすべて巡ります**。このような底を 11 を法とする「原始根」といいます。",
+          "検算：2 の 1〜11 乗を 11 で割った余りを計算すると 2、4、8、5、10、9、7、3、6、1、2 ✓ となり、第 10 項で初めて 1 となり第 11 項から繰り返すので、周期はちょうど 10 です。",
+          "**この結果はフェルマーの小定理と整合します**：11 は素数で 2 は 11 の倍数でないので 2¹⁰ ≡ 1（mod 11）が必ず成り立ちます。**ただし定理は k = 10 が成り立つことを保証するだけで、最小であることは保証しません**——最小の k は 10 を割り切るので候補は 1、2、5、10 だけです。2¹ = 2、2² = 4、2⁵ = 32 の余りは 10 でいずれも 1 ではないため、最小は 10 に限られます ✓。これは 1 項ずつ調べずに済む速い議論でもあります。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "10"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "2 的冪次模 11：逐次乘 2 取餘追蹤循環；由費馬小定理知最小的 k 必整除 10，故只需檢查 1、2、5、10",
+        "notes": "設計依據：詳解同時給出逐項追蹤與「最小 k 必整除 10」兩條路徑，並指出費馬小定理只保證 k = 10 可行而不保證最小，需另行排除 1、2、5；另指出 2 的冪走遍全部非零餘數使 2 為模 11 的原根。答案 10 已用餘數序列的逐項計算獨立驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（2 的冪次的循環）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "數論",
+        "topicCode": "number_theory",
+        "subtopic": "2 的冪次的循環",
+        "subtopicCode": "order_mod_eleven"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "number_theory_grade10_foundation_028",
+      "topic": "number_theory",
+      "subtopic": "reciprocal_divisor_sum",
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "求 28 的所有正因數的倒數之和。（例如 6 的正因數是 1、2、3、6，倒數和是 1 + 1/2 + 1/3 + 1/6 = 2）",
+        "zh-Hans": "求 28 的所有正因数的倒数之和。（例如 6 的正因数是 1、2、3、6，倒数和是 1 + 1/2 + 1/3 + 1/6 = 2）",
+        "en": "Find the sum of the reciprocals of all positive divisors of 28. For instance the divisors of 6 are 1, 2, 3 and 6, whose reciprocals sum to 1 + 1/2 + 1/3 + 1/6 = 2.",
+        "ja": "28 のすべての正の約数の逆数の和を求めなさい。（たとえば 6 の正の約数は 1、2、3、6 で、逆数の和は 1 + 1/2 + 1/3 + 1/6 = 2 です）"
+      },
+      "answer": {
+        "zh-Hant": "答案是 2。",
+        "zh-Hans": "答案是 2。",
+        "en": "The answer is 2.",
+        "ja": "答えは 2 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "**先列出 28 的所有正因數。**28 = 2² × 7，所以因數是 **1、2、4、7、14、28**，共 6 個。",
+          "**直接通分相加是可行的，但有一個更漂亮的做法。**先看那個關鍵的觀察。",
+          "**因數成對出現**：若 d 是 28 的因數，則 28 ÷ d 也是。所以每一個倒數 1/d 都可以寫成 **(28 ÷ d) ÷ 28**。",
+          "換句話說，**把每個因數的倒數乘以 28，得到的就是它的配對因數**。例如 1/2 × 28 = 14 ✓、1/7 × 28 = 4 ✓。",
+          "**所以「所有因數倒數的和」乘以 28，就等於「所有因數的和」**——因為乘以 28 之後，每一項都變成另一個因數，而且六個因數恰好各出現一次。",
+          "先算因數之和：1 + 2 + 4 + 7 + 14 + 28 = 56。",
+          "所以倒數和 = 56 ÷ 28 = **2**。",
+          "驗算：直接通分核對。以 28 為分母：1 = 28/28、1/2 = 14/28、1/4 = 7/28、1/7 = 4/28、1/14 = 2/28、1/28 = 1/28。相加得 (28 + 14 + 7 + 4 + 2 + 1)/28 = 56/28 = **2** ✓ 兩種方法一致。",
+          "**倒數和恰好等於 2 有特別的意義**：由上面的關係，倒數和 = (因數總和) ÷ 28，所以倒數和為 2 等價於**因數總和是 28 的兩倍**，也就是**真因數之和恰好等於 28 自己**——這正是 28 是「完全數」的定義。",
+          "**所以任何完全數的因數倒數和都是 2**。題目給的例子 6 也是完全數，倒數和同樣是 2 ✓ 印證了這一點。若換成非完全數，例如 12（因數和 28，28 ÷ 12 = 7/3），倒數和就不是 2 了。"
+        ],
+        "zh-Hans": [
+          "**先列出 28 的所有正因数。**28 = 2² × 7，所以因数是 **1、2、4、7、14、28**，共 6 个。",
+          "**直接通分相加是可行的，但有一个更漂亮的做法。**先看那个关键的观察。",
+          "**因数成对出现**：若 d 是 28 的因数，则 28 ÷ d 也是。所以每一个倒数 1/d 都可以写成 **(28 ÷ d) ÷ 28**。",
+          "换句话说，**把每个因数的倒数乘以 28，得到的就是它的配对因数**。例如 1/2 × 28 = 14 ✓、1/7 × 28 = 4 ✓。",
+          "**所以「所有因数倒数的和」乘以 28，就等于「所有因数的和」**——因为乘以 28 之后，每一项都变成另一个因数，而且六个因数恰好各出现一次。",
+          "先算因数之和：1 + 2 + 4 + 7 + 14 + 28 = 56。",
+          "所以倒数和 = 56 ÷ 28 = **2**。",
+          "验算：直接通分核对。以 28 为分母：1 = 28/28、1/2 = 14/28、1/4 = 7/28、1/7 = 4/28、1/14 = 2/28、1/28 = 1/28。相加得 (28 + 14 + 7 + 4 + 2 + 1)/28 = 56/28 = **2** ✓ 两种方法一致。",
+          "**倒数和恰好等于 2 有特别的意义**：由上面的关系，倒数和 = (因数总和) ÷ 28，所以倒数和为 2 等价于**因数总和是 28 的两倍**，也就是**真因数之和恰好等于 28 自己**——这正是 28 是「完全数」的定义。",
+          "**所以任何完全数的因数倒数和都是 2**。题目给的例子 6 也是完全数，倒数和同样是 2 ✓ 印证了这一点。若换成非完全数，例如 12（因数和 28，28 ÷ 12 = 7/3），倒数和就不是 2 了。"
+        ],
+        "en": [
+          "List the positive divisors of 28 first. Since 28 = 2² × 7, they are 1, 2, 4, 7, 14 and 28, six in all.",
+          "Adding the reciprocals over a common denominator works, but a neater route exists. Consider the key observation.",
+          "Divisors come in pairs: if d divides 28 then so does 28 ÷ d. So each reciprocal 1/d can be written as (28 ÷ d) ÷ 28.",
+          "In other words, multiplying each reciprocal by 28 yields its partner divisor, as 1/2 × 28 = 14 and 1/7 × 28 = 4 illustrate.",
+          "So the sum of the reciprocals times 28 equals the sum of the divisors — because multiplying by 28 turns every term into another divisor, with all six occurring exactly once.",
+          "The divisor sum is 1 + 2 + 4 + 7 + 14 + 28 = 56.",
+          "So the reciprocal sum is 56 ÷ 28 = 2.",
+          "Check by common denominator: over 28, the reciprocals are 28/28, 14/28, 7/28, 4/28, 2/28 and 1/28, summing to (28 + 14 + 7 + 4 + 2 + 1)/28 = 56/28 = 2, agreeing with the first method.",
+          "A reciprocal sum of exactly 2 carries meaning. From the relation above, the reciprocal sum equals the divisor sum divided by 28, so a value of 2 means the divisor sum is twice 28, that is the proper divisors sum to 28 itself — precisely the definition of 28 being a perfect number.",
+          "So every perfect number has reciprocal divisor sum 2. The example given, 6, is also perfect and likewise sums to 2, confirming the pattern. A non-perfect number such as 12, whose divisors sum to 28, gives 28 ÷ 12 = 7/3 instead."
+        ],
+        "ja": [
+          "**まず 28 の正の約数を挙げます。**28 = 2² × 7 なので約数は **1、2、4、7、14、28** の 6 個です。",
+          "**通分して足してもよいのですが、もっと美しい方法があります。**鍵となる観察を見ます。",
+          "**約数は対をなします**：d が 28 の約数なら 28 ÷ d も約数です。したがって各逆数 1/d は **(28 ÷ d) ÷ 28** と書けます。",
+          "言い換えれば、**各逆数を 28 倍すると相方の約数になります**。1/2 × 28 = 14 ✓、1/7 × 28 = 4 ✓ のとおりです。",
+          "**したがって「約数の逆数の和」を 28 倍すると「約数の和」に等しくなります**——28 倍すると各項が別の約数になり、6 つの約数がちょうど 1 回ずつ現れるからです。",
+          "約数の和を求めます：1 + 2 + 4 + 7 + 14 + 28 = 56。",
+          "したがって逆数の和 = 56 ÷ 28 = **2**。",
+          "検算：通分して確認します。分母を 28 とすると 1 = 28/28、1/2 = 14/28、1/4 = 7/28、1/7 = 4/28、1/14 = 2/28、1/28 = 1/28。足すと (28 + 14 + 7 + 4 + 2 + 1)/28 = 56/28 = **2** ✓ で 2 つの方法が一致します。",
+          "**逆数の和がちょうど 2 であることには意味があります**：上の関係から逆数の和 = (約数の和) ÷ 28 なので、2 になるのは**約数の和が 28 の 2 倍**、すなわち**真の約数の和が 28 自身に等しい**ことと同値です——これはまさに 28 が「完全数」であることの定義です。",
+          "**したがって完全数はどれも約数の逆数の和が 2 になります**。例に挙げた 6 も完全数で、同じく 2 ✓ となりこれを裏づけます。完全数でない 12（約数の和 28）なら 28 ÷ 12 = 7/3 となり 2 にはなりません。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "2"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "因數倒數之和：因數成對使倒數和乘以 n 等於因數總和，故其值為 2 等價於 n 是完全數",
+        "notes": "設計依據：詳解以「因數成對」的觀察把倒數和轉為因數總和除以 n，並以直接通分交叉驗證；末尾說明倒數和為 2 等價於完全數的定義，並以非完全數 12 的 7/3 作為對照。答案 2 已用因數配對法與通分相加兩種方式驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（因數倒數的和）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "數論",
+        "topicCode": "number_theory",
+        "subtopic": "因數倒數的和",
+        "subtopicCode": "reciprocal_divisor_sum"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "number_theory_grade10_foundation_029",
+      "topic": "number_theory",
+      "subtopic": "square_plus_one_div5",
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "求 1 到 100 之間（含兩端）的正整數 n 當中，使 n² + 1 能被 5 整除的 n 共有幾個。",
+        "zh-Hans": "求 1 到 100 之间（含两端）的正整数 n 当中，使 n² + 1 能被 5 整除的 n 共有几个。",
+        "en": "Among the integers n from 1 to 100 inclusive, how many make n² + 1 divisible by 5?",
+        "ja": "1 から 100 まで（両端を含む）の整数 n のうち、n² + 1 が 5 で割り切れるものは何個ありますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 40 個。",
+        "zh-Hans": "答案是 40 个。",
+        "en": "The answer is 40.",
+        "ja": "答えは 40 個です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "**不必逐一檢查 100 個數——n² 除以 5 的餘數只由 n 除以 5 的餘數決定，所以只要檢查 5 種情況。**",
+          "條件「n² + 1 被 5 整除」等於說「**n² 除以 5 餘 4**」（因為餘 4 時再加 1 就變成 5 的倍數）。",
+          "**逐一檢查 n 除以 5 的五種餘數。**餘 0：n² 餘 0² = 0 ✗。餘 1：n² 餘 1² = 1 ✗。",
+          "餘 2：n² 餘 2² = 4 ✓ **符合**。餘 3：n² 餘 3² = 9，9 ÷ 5 餘 **4** ✓ **符合**。",
+          "餘 4：n² 餘 4² = 16，16 ÷ 5 餘 **1** ✗。",
+          "所以條件成立**當且僅當 n 除以 5 的餘數是 2 或 3**，恰好兩種餘數符合。",
+          "**現在數 1 到 100 中有幾個這樣的 n。**餘數為 2 的是 2、7、12、⋯、97，這是首項 2、公差 5 的等差數列，末項 97，項數 = (97 − 2) ÷ 5 + 1 = 95 ÷ 5 + 1 = **20 個**。",
+          "餘數為 3 的是 3、8、13、⋯、98，同樣是 (98 − 3) ÷ 5 + 1 = 95 ÷ 5 + 1 = **20 個**。",
+          "兩類互不重疊（一個數不可能同時餘 2 又餘 3），所以合計 20 + 20 = **40 個**。",
+          "驗算：程式對 n 從 1 到 100 逐一計算 (n² + 1) 除以 5 的餘數，符合的恰好有 40 個 ✓，且它們除以 5 的餘數確實只有 2 與 3 兩種 ✓。",
+          "**另一個快速的核對方式**：1 到 100 恰好是 20 個完整的「五連號」區塊（1-5、6-10、⋯、96-100），每個區塊中五種餘數各出現一次，其中符合的有 2 種，所以共 20 × 2 = 40 ✓。**注意這個整齊的算法之所以成立，是因為 100 恰好是 5 的倍數**；若範圍改成 1 到 102，就要額外檢查多出來的 101、102 兩個數（101 餘 1 ✗、102 餘 2 ✓），答案會是 41。"
+        ],
+        "zh-Hans": [
+          "**不必逐一检查 100 个数——n² 除以 5 的余数只由 n 除以 5 的余数决定，所以只要检查 5 种情况。**",
+          "条件「n² + 1 被 5 整除」等于说「**n² 除以 5 余 4**」（因为余 4 时再加 1 就变成 5 的倍数）。",
+          "**逐一检查 n 除以 5 的五种余数。**余 0：n² 余 0² = 0 ✗。余 1：n² 余 1² = 1 ✗。",
+          "余 2：n² 余 2² = 4 ✓ **符合**。余 3：n² 余 3² = 9，9 ÷ 5 余 **4** ✓ **符合**。",
+          "余 4：n² 余 4² = 16，16 ÷ 5 余 **1** ✗。",
+          "所以条件成立**当且仅当 n 除以 5 的余数是 2 或 3**，恰好两种余数符合。",
+          "**现在数 1 到 100 中有几个这样的 n。**余数为 2 的是 2、7、12、⋯、97，这是首项 2、公差 5 的等差数列，末项 97，项数 = (97 − 2) ÷ 5 + 1 = 95 ÷ 5 + 1 = **20 个**。",
+          "余数为 3 的是 3、8、13、⋯、98，同样是 (98 − 3) ÷ 5 + 1 = 95 ÷ 5 + 1 = **20 个**。",
+          "两类互不重叠（一个数不可能同时余 2 又余 3），所以合计 20 + 20 = **40 个**。",
+          "验算：程序对 n 从 1 到 100 逐一计算 (n² + 1) 除以 5 的余数，符合的恰好有 40 个 ✓，且它们除以 5 的余数确实只有 2 与 3 两种 ✓。",
+          "**另一个快速的核对方式**：1 到 100 恰好是 20 个完整的「五连号」区块（1-5、6-10、⋯、96-100），每个区块中五种余数各出现一次，其中符合的有 2 种，所以共 20 × 2 = 40 ✓。**注意这个整齐的算法之所以成立，是因为 100 恰好是 5 的倍数**；若范围改成 1 到 102，就要额外检查多出来的 101、102 两个数（101 余 1 ✗、102 余 2 ✓），答案会是 41。"
+        ],
+        "en": [
+          "There is no need to test all 100 numbers — the remainder of n² modulo 5 depends only on the remainder of n, so five cases suffice.",
+          "The condition that 5 divides n² + 1 says that n² leaves remainder 4 on division by 5, since adding 1 to such a remainder gives a multiple of 5.",
+          "Check the five possible remainders of n. Remainder 0 gives n² leaving 0² = 0, which fails. Remainder 1 gives 1² = 1, which fails.",
+          "Remainder 2 gives 2² = 4, which works. Remainder 3 gives 3² = 9, leaving 4 on division by 5, which works.",
+          "Remainder 4 gives 4² = 16, leaving 1, which fails.",
+          "So the condition holds exactly when n leaves remainder 2 or 3 on division by 5, two of the five classes.",
+          "Now count such n from 1 to 100. Those leaving 2 are 2, 7, 12, ..., 97, an arithmetic sequence with first term 2, common difference 5 and last term 97, giving (97 − 2) ÷ 5 + 1 = 95 ÷ 5 + 1 = 20 terms.",
+          "Those leaving 3 are 3, 8, 13, ..., 98, likewise giving (98 − 3) ÷ 5 + 1 = 20 terms.",
+          "The two classes do not overlap, since no number leaves both 2 and 3, so the total is 20 + 20 = 40.",
+          "Check: computing the remainder of n² + 1 modulo 5 for every n from 1 to 100 gives exactly 40 successes, and their remainders modulo 5 are indeed only 2 and 3.",
+          "A quicker cross-check: 1 to 100 comprises exactly 20 complete blocks of five consecutive integers, and each block contains each remainder once, of which 2 qualify, giving 20 × 2 = 40. This tidy count works because 100 is a multiple of 5; extending the range to 102 would require checking the extra 101 and 102, whose remainders are 1 and 2, and the answer would become 41."
+        ],
+        "ja": [
+          "**100 個すべてを調べる必要はありません**——n² を 5 で割った余りは n を 5 で割った余りだけで決まるので、5 通りを調べれば十分です。",
+          "条件「n² + 1 が 5 で割り切れる」は「**n² を 5 で割った余りが 4**」ということです（余り 4 に 1 を足すと 5 の倍数になるため）。",
+          "**n を 5 で割った 5 通りの余りを順に調べます。**余り 0：n² の余りは 0² = 0 ✗。余り 1：1² = 1 ✗。",
+          "余り 2：2² = 4 ✓ **適合**。余り 3：3² = 9、9 ÷ 5 の余りは **4** ✓ **適合**。",
+          "余り 4：4² = 16、16 ÷ 5 の余りは **1** ✗。",
+          "したがって条件が成り立つのは **n を 5 で割った余りが 2 か 3 のとき、かつそのときに限ります**。5 通りのうち 2 通りです。",
+          "**次に 1 から 100 でそのような n を数えます。**余り 2 は 2、7、12、⋯、97 で、初項 2・公差 5・末項 97 の等差数列、項数 = (97 − 2) ÷ 5 + 1 = 95 ÷ 5 + 1 = **20 個**。",
+          "余り 3 は 3、8、13、⋯、98 で、同様に (98 − 3) ÷ 5 + 1 = **20 個**。",
+          "2 つの類は重ならない（余り 2 かつ 3 の数は存在しない）ので、合計 20 + 20 = **40 個**。",
+          "検算：n を 1 から 100 まで (n² + 1) ÷ 5 の余りを計算すると、該当はちょうど 40 個 ✓、それらの 5 で割った余りも確かに 2 と 3 の 2 種類だけです ✓。",
+          "**もう 1 つの速い確認法**：1 から 100 は連続 5 個の塊がちょうど 20 個（1-5、6-10、⋯、96-100）で、各塊に 5 通りの余りが 1 回ずつ現れ、そのうち 2 通りが適合するので 20 × 2 = 40 ✓。**この整った数え方が成り立つのは 100 が 5 の倍数だから**で、範囲を 1〜102 にすると余分な 101（余り 1 ✗）と 102（余り 2 ✓）を別途調べる必要があり、答えは 41 になります。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "40"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "n² + 1 被 5 整除：n² 的餘數只由 n 的餘數決定，檢查五種餘數後只有 2 與 3 符合，再以等差數列計數",
+        "notes": "設計依據：詳解先把問題化為「n² 除以 5 餘 4」再逐一檢查五種餘數，避免逐一檢查 100 個數；並以「20 個完整五連號區塊」交叉驗證，同時指出該整齊算法依賴 100 為 5 的倍數，以範圍 1 到 102 的情形說明例外。答案 40 已用 n 從 1 到 100 的逐一計算窮舉獨立驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（n² + 1 被 5 整除）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "數論",
+        "topicCode": "number_theory",
+        "subtopic": "n² + 1 被 5 整除",
+        "subtopicCode": "square_plus_one_div5"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "number_theory_grade10_foundation_030",
+      "topic": "number_theory",
+      "subtopic": "kaprekar_constant",
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "取一個四位數（各位數字不全相同，允許有 0），把它的四個數字重排成最大的四位數與最小的四位數（重排後若有前導 0 仍視為四位數，例如 1000 的最小排法是 0001），再用最大的減去最小的，得到一個新的四位數。對新得到的數重複同樣的操作。不論一開始取哪一個數，這個過程最後都會停在同一個數上不再變化。求這個數。",
+        "zh-Hans": "取一个四位数（各位数字不全相同，允许有 0），把它的四个数字重排成最大的四位数与最小的四位数（重排后若有前导 0 仍视为四位数，例如 1000 的最小排法是 0001），再用最大的减去最小的，得到一个新的四位数。对新得到的数重复同样的操作。不论一开始取哪一个数，这个过程最后都会停在同一个数上不再变化。求这个数。",
+        "en": "Take a four-digit number whose digits are not all the same, zeros allowed. Rearrange its four digits into the largest and the smallest four-digit strings, keeping leading zeros so that 1000 gives 0001 as its smallest, and subtract the smaller from the larger to get a new four-digit number. Repeat the operation on the result. Whatever number you start from, the process eventually settles on one fixed number. Find it.",
+        "ja": "4 桁の数（各位の数字がすべて同じではない、0 を含んでよい）を 1 つとり、その 4 つの数字を並べ替えて最大の 4 桁と最小の 4 桁を作り（先頭の 0 も残し、1000 の最小は 0001）、大きいほうから小さいほうを引いて新しい 4 桁の数を得ます。得られた数に同じ操作を繰り返します。どの数から始めても、この過程は最後に同じ 1 つの数で止まります。その数を求めなさい。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 6174。",
+        "zh-Hans": "答案是 6174。",
+        "en": "The answer is 6174.",
+        "ja": "答えは 6174 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "**先實際操作幾次，觀察會發生什麼。**取一個數試試，例如 3524。",
+          "3524 的數字是 3、5、2、4。最大排法是 **5432**，最小排法是 **2345**。相減：5432 − 2345 = **3087**。",
+          "對 3087 重複：最大 **8730**，最小 **0378**。相減：8730 − 378 = **8352**。",
+          "對 8352 重複：最大 **8532**，最小 **2358**。相減：8532 − 2358 = **6174**。",
+          "對 6174 重複：最大 **7641**，最小 **1467**。相減：7641 − 1467 = **6174** ✓ **回到自己，不再變化**。",
+          "**再換一個起點驗證。**取 1000：最大 1000、最小 0001，相減得 999，即 **0999**。",
+          "對 0999：最大 9990、最小 0999，相減得 **8991**。對 8991：最大 9981、最小 1899，相減得 **8082**。",
+          "對 8082：最大 8820、最小 0288，相減得 **8532**。對 8532：如前所算得 **6174** ✓ **同樣停在 6174**。",
+          "**為什麼 6174 是唯一的終點？**因為它是這個運算唯一的「不動點」——代入後得到自己。而其餘的四位數都會在有限步之後掉進來。",
+          "驗算：程式對全部 **8991 個**「各位不全相同」的四位數逐一執行這個運算直到重複，結果**每一個都停在 6174**，沒有任何例外，也沒有出現其他的循環 ✓。",
+          "**注意「各位數字不全相同」這個條件不可省略**——若取 1111，最大與最小都是 1111，相減得 0000，之後永遠是 0，不會到達 6174。**這個 6174 稱為卡布列克常數**；三位數也有類似的常數 495，但位數更多時就未必只有單一終點了。"
+        ],
+        "zh-Hans": [
+          "**先实际操作几次，观察会发生什么。**取一个数试试，例如 3524。",
+          "3524 的数字是 3、5、2、4。最大排法是 **5432**，最小排法是 **2345**。相减：5432 − 2345 = **3087**。",
+          "对 3087 重复：最大 **8730**，最小 **0378**。相减：8730 − 378 = **8352**。",
+          "对 8352 重复：最大 **8532**，最小 **2358**。相减：8532 − 2358 = **6174**。",
+          "对 6174 重复：最大 **7641**，最小 **1467**。相减：7641 − 1467 = **6174** ✓ **回到自己，不再变化**。",
+          "**再换一个起点验证。**取 1000：最大 1000、最小 0001，相减得 999，即 **0999**。",
+          "对 0999：最大 9990、最小 0999，相减得 **8991**。对 8991：最大 9981、最小 1899，相减得 **8082**。",
+          "对 8082：最大 8820、最小 0288，相减得 **8532**。对 8532：如前所算得 **6174** ✓ **同样停在 6174**。",
+          "**为什么 6174 是唯一的终点？**因为它是这个运算唯一的「不动点」——代入后得到自己。而其余的四位数都会在有限步之后掉进来。",
+          "验算：程序对全部 **8991 个**「各位不全相同」的四位数逐一执行这个运算直到重复，结果**每一个都停在 6174**，没有任何例外，也没有出现其他的循环 ✓。",
+          "**注意「各位数字不全相同」这个条件不可省略**——若取 1111，最大与最小都是 1111，相减得 0000，之后永远是 0，不会到达 6174。**这个 6174 称为卡布列克常数**；三位数也有类似的常数 495，但位数更多时就未必只有单一终点了。"
+        ],
+        "en": [
+          "Try the operation a few times and see what happens. Start with 3524, say.",
+          "The digits of 3524 are 3, 5, 2 and 4. The largest arrangement is 5432 and the smallest is 2345, and 5432 − 2345 = 3087.",
+          "Repeating on 3087: the largest is 8730 and the smallest is 0378, and 8730 − 378 = 8352.",
+          "Repeating on 8352: the largest is 8532 and the smallest is 2358, and 8532 − 2358 = 6174.",
+          "Repeating on 6174: the largest is 7641 and the smallest is 1467, and 7641 − 1467 = 6174 — it returns to itself and stops changing.",
+          "Try another starting point. From 1000, the largest is 1000 and the smallest is 0001, giving 999, that is 0999.",
+          "From 0999: the largest is 9990 and the smallest is 0999, giving 8991. From 8991: 9981 − 1899 = 8082.",
+          "From 8082: 8820 − 0288 = 8532. And 8532 gives 6174 as computed above — again settling on 6174.",
+          "Why is 6174 the only endpoint? Because it is the operation's sole fixed point, returning itself when fed in, while every other four-digit number falls into it after finitely many steps.",
+          "Check: running the operation to repetition on all 8991 four-digit numbers whose digits are not all equal shows that every single one settles on 6174, with no exception and no other cycle appearing.",
+          "The condition that the digits not all be equal cannot be dropped — starting from 1111 makes the largest and smallest both 1111, giving 0000, which stays 0 forever and never reaches 6174. The number 6174 is known as Kaprekar's constant; three-digit numbers have an analogous constant 495, though with more digits a single endpoint is not guaranteed."
+        ],
+        "ja": [
+          "**まず実際に何度か操作して何が起こるか見ます。**たとえば 3524 から始めます。",
+          "3524 の数字は 3、5、2、4。最大の並べ方は **5432**、最小は **2345** で、5432 − 2345 = **3087**。",
+          "3087 に繰り返します：最大 **8730**、最小 **0378** で、8730 − 378 = **8352**。",
+          "8352 に繰り返します：最大 **8532**、最小 **2358** で、8532 − 2358 = **6174**。",
+          "6174 に繰り返します：最大 **7641**、最小 **1467** で、7641 − 1467 = **6174** ✓ **自分自身に戻り、以後変化しません**。",
+          "**別の出発点でも確かめます。**1000 なら最大 1000、最小 0001 で差は 999、すなわち **0999**。",
+          "0999 なら最大 9990、最小 0999 で **8991**。8991 なら 9981 − 1899 = **8082**。",
+          "8082 なら 8820 − 0288 = **8532**。8532 は先に計算したとおり **6174** ✓ で、**やはり 6174 で止まります**。",
+          "**なぜ 6174 が唯一の終点なのか。**それがこの操作の唯一の「不動点」——入れると自分自身が返る——であり、他のすべての 4 桁の数は有限回の操作でそこへ落ち込むからです。",
+          "検算：「各位が全て同じではない」4 桁の数 **8991 個**すべてについて、繰り返しが現れるまで操作を実行すると、**どれも 6174 で止まり**、例外も他の循環もありません ✓。",
+          "**「各位の数字がすべて同じではない」という条件は省けません**——1111 から始めると最大も最小も 1111 で差は 0000、以後ずっと 0 のままで 6174 には至りません。**この 6174 をカプレカ定数といいます**。3 桁にも同様の定数 495 がありますが、桁数が増えると終点が 1 つとは限らなくなります。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "6174"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 4
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "卡布列克常數：重排相減的運算以 6174 為唯一不動點，所有各位不全相同的四位數都會收斂到它",
+        "notes": "設計依據：詳解以兩個差異很大的起點（3524 與含 0 的 1000）各自完整追蹤到 6174，示範前導 0 的處理；並說明 6174 是唯一不動點，以及為何必須排除各位全同的數（否則收斂到 0000）。答案 6174 已用全部 8991 個各位不全相同的四位數的完整迭代窮舉獨立驗證，確認無例外且無其他循環。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（四位數的重排運算）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "數論",
+        "topicCode": "number_theory",
+        "subtopic": "四位數的重排運算",
+        "subtopicCode": "kaprekar_constant"
+      },
+      "reviewStatus": "ok"
     }
   ]
 }
