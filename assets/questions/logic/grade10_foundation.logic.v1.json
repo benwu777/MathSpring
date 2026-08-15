@@ -1411,6 +1411,1440 @@
         "subtopicCode": "round_robin_wins_deduction"
       },
       "reviewStatus": "ok"
+    },
+    {
+      "id": "logic_grade10_foundation_016",
+      "topic": "logic",
+      "subtopic": "locker_toggle_squares",
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "走廊上有編號 1 到 100 的一百個櫃子，一開始全部關著。第 1 輪，把所有編號是 1 的倍數的櫃子切換狀態（關的打開、開的關上）；第 2 輪切換所有編號是 2 的倍數的櫃子；⋯ 一直到第 100 輪切換編號是 100 的倍數的櫃子。全部一百輪結束後，求開著的櫃子共有幾個。",
+        "zh-Hans": "走廊上有编号 1 到 100 的一百个柜子，一开始全部关着。第 1 轮，把所有编号是 1 的倍数的柜子切换状态（关的打开、开的关上）；第 2 轮切换所有编号是 2 的倍数的柜子；⋯ 一直到第 100 轮切换编号是 100 的倍数的柜子。全部一百轮结束后，求开着的柜子共有几个。",
+        "en": "A corridor has 100 lockers numbered 1 to 100, all closed at first. On round 1 every locker whose number is a multiple of 1 is toggled, opening the closed and closing the open; on round 2 every multiple of 2 is toggled; and so on through round 100, which toggles the multiples of 100. After all 100 rounds, how many lockers stand open?",
+        "ja": "廊下に 1 から 100 までの番号がついたロッカーが 100 個あり、最初はすべて閉まっています。第 1 巡では番号が 1 の倍数のロッカーの状態を切り替え（閉→開、開→閉）、第 2 巡では 2 の倍数を切り替え、⋯ 第 100 巡では 100 の倍数を切り替えます。100 巡すべてが終わったとき、開いているロッカーは何個ですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 10 個。",
+        "zh-Hans": "答案是 10 个。",
+        "en": "The answer is 10.",
+        "ja": "答えは 10 個です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "**先問一個更小的問題：某一個櫃子總共被切換了幾次？**只要知道次數，就能知道它最後是開是關。",
+          "編號 n 的櫃子在第 k 輪被切換，**當且僅當 k 是 n 的因數**。所以它被切換的次數，就等於 **n 的因數個數**。",
+          "櫃子一開始是關著的，每切換一次就換一種狀態。所以**切換奇數次最後是開著，切換偶數次最後是關著**。",
+          "於是問題變成：**1 到 100 中，哪些數的因數個數是奇數？**",
+          "因數通常**成對出現**：若 d 是 n 的因數，則 n ÷ d 也是。例如 12 的因數配成 (1, 12)、(2, 6)、(3, 4)，共 6 個，是偶數。",
+          "**唯一的例外是 d 與 n ÷ d 相等的時候**——這表示 d × d = n，也就是 n 是完全平方數。這時那一對會重合成一個，使因數總數變成奇數。",
+          "例如 16 的因數是 1、2、4、8、16，其中 4 × 4 = 16 自己配自己，所以共 5 個，是奇數 ✓。",
+          "所以開著的櫃子恰好是編號為完全平方數的那些：1、4、9、16、25、36、49、64、81、100。",
+          "驗算：程式實際模擬 100 輪切換，最後開著的櫃子正是這 10 個 ✓。**注意 100 以內的完全平方數個數等於 √100 = 10**，這也提供了快速的計數方式——若換成 1000 個櫃子，答案就是 √1000 取整數部分，即 31 個。"
+        ],
+        "zh-Hans": [
+          "**先问一个更小的问题：某一个柜子总共被切换了几次？**只要知道次数，就能知道它最后是开是关。",
+          "编号 n 的柜子在第 k 轮被切换，**当且仅当 k 是 n 的因数**。所以它被切换的次数，就等于 **n 的因数个数**。",
+          "柜子一开始是关着的，每切换一次就换一种状态。所以**切换奇数次最后是开着，切换偶数次最后是关着**。",
+          "于是问题变成：**1 到 100 中，哪些数的因数个数是奇数？**",
+          "因数通常**成对出现**：若 d 是 n 的因数，则 n ÷ d 也是。例如 12 的因数配成 (1, 12)、(2, 6)、(3, 4)，共 6 个，是偶数。",
+          "**唯一的例外是 d 与 n ÷ d 相等的时候**——这表示 d × d = n，也就是 n 是完全平方数。这时那一对会重合成一个，使因数总数变成奇数。",
+          "例如 16 的因数是 1、2、4、8、16，其中 4 × 4 = 16 自己配自己，所以共 5 个，是奇数 ✓。",
+          "所以开着的柜子恰好是编号为完全平方数的那些：1、4、9、16、25、36、49、64、81、100。",
+          "验算：程序实际模拟 100 轮切换，最后开着的柜子正是这 10 个 ✓。**注意 100 以内的完全平方数个数等于 √100 = 10**，这也提供了快速的计数方式——若换成 1000 个柜子，答案就是 √1000 取整数部分，即 31 个。"
+        ],
+        "en": [
+          "Ask a smaller question first: how many times is a given locker toggled? Knowing that count settles whether it ends open or closed.",
+          "Locker n is toggled on round k precisely when k divides n, so the number of toggles equals the number of divisors of n.",
+          "Each locker starts closed and changes state on every toggle, so an odd number of toggles leaves it open and an even number leaves it closed.",
+          "The question thus becomes: which numbers from 1 to 100 have an odd number of divisors?",
+          "Divisors normally come in pairs, since d dividing n means n ÷ d does too. For instance 12 pairs up as (1, 12), (2, 6) and (3, 4), giving 6 divisors, an even count.",
+          "The sole exception arises when d equals n ÷ d, which means d × d = n, that is n is a perfect square. Then that pair collapses to a single divisor and the total becomes odd.",
+          "For example 16 has divisors 1, 2, 4, 8 and 16, with 4 × 4 = 16 pairing with itself, giving 5 divisors, an odd count.",
+          "So the open lockers are exactly those with perfect-square numbers: 1, 4, 9, 16, 25, 36, 49, 64, 81 and 100.",
+          "Check: simulating all 100 rounds leaves exactly those 10 lockers open. Note that the count of perfect squares up to 100 is √100 = 10, which also gives a quick route — with 1000 lockers the answer would be the integer part of √1000, namely 31."
+        ],
+        "ja": [
+          "**まず小さい問いを立てます：あるロッカーは合計何回切り替えられるか。**回数が分かれば最終状態も分かります。",
+          "番号 n のロッカーが第 k 巡で切り替えられるのは、**k が n の約数であるとき、かつそのときに限ります**。したがって切り替え回数は **n の約数の個数**に等しくなります。",
+          "ロッカーは最初閉じており、切り替えのたびに状態が変わります。よって**奇数回なら最後は開、偶数回なら閉**です。",
+          "問題は次のように変わります：**1 から 100 のうち、約数の個数が奇数なのはどれか。**",
+          "約数はふつう**対をなします**：d が n の約数なら n ÷ d も約数です。たとえば 12 は (1, 12)、(2, 6)、(3, 4) と対になり計 6 個で偶数です。",
+          "**唯一の例外は d と n ÷ d が等しいとき**——つまり d × d = n、すなわち n が平方数のときです。このとき対が 1 つに重なり、約数の総数が奇数になります。",
+          "たとえば 16 の約数は 1、2、4、8、16 で、4 × 4 = 16 は自分自身と対になるため計 5 個の奇数です ✓。",
+          "したがって開いているのは番号が平方数のロッカー、すなわち 1、4、9、16、25、36、49、64、81、100 です。",
+          "検算：100 巡を実際にシミュレートすると、開いているのはこの 10 個 ✓。**100 以下の平方数の個数は √100 = 10** であり、これは素早い数え方も与えます——1000 個なら答えは √1000 の整数部分、すなわち 31 個です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "10"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "櫃門切換問題：切換次數等於因數個數，而因數成對出現，僅完全平方數的因數個數為奇數",
+        "notes": "設計依據：詳解由「因數成對」推導出只有完全平方數例外，並以 12 與 16 兩個具體例子對照偶數與奇數的因數個數；末尾指出答案等於 √100，並以 1000 個櫃子的情形說明這個關係的一般性。答案 10 已用 100 輪切換的完整模擬窮舉獨立驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（櫃門的開關輪次）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "邏輯推理",
+        "topicCode": "logic",
+        "subtopic": "櫃門的開關輪次",
+        "subtopicCode": "locker_toggle_squares"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "logic_grade10_foundation_017",
+      "topic": "logic",
+      "subtopic": "ants_on_rod",
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一根長 100 公分的木棍上有若干隻螞蟻，每隻都以每秒 1 公分的速度沿著木棍爬行，方向可能向左也可能向右。當兩隻螞蟻迎面相遇時，兩隻都會立刻掉頭往反方向繼續爬；爬到木棍的端點就掉下去。不論螞蟻有幾隻、起始位置與方向如何，求「所有螞蟻都掉下木棍」所需的時間最多是幾秒。",
+        "zh-Hans": "一根长 100 厘米的木棍上有若干只蚂蚁，每只都以每秒 1 厘米的速度沿着木棍爬行，方向可能向左也可能向右。当两只蚂蚁迎面相遇时，两只都会立刻掉头往反方向继续爬；爬到木棍的端点就掉下去。不论蚂蚁有几只、起始位置与方向如何，求「所有蚂蚁都掉下木棍」所需的时间最多是几秒。",
+        "en": "Several ants sit on a rod 100 cm long, each crawling along it at 1 cm per second, some leftward and some rightward. When two ants meet head-on, both immediately reverse direction and continue; an ant reaching an end of the rod falls off. Whatever the number of ants and their starting positions and directions, what is the greatest possible time until every ant has fallen off?",
+        "ja": "長さ 100 cm の棒の上に何匹かのアリがいて、それぞれ毎秒 1 cm の速さで棒に沿って左または右へ進みます。2 匹が正面から出会うと、どちらもただちに向きを変えて進み続けます。棒の端に達したアリは落ちます。アリの数・初期位置・向きがどうであれ、すべてのアリが落ちるまでにかかる時間は最大で何秒ですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 100 秒。",
+        "zh-Hans": "答案是 100 秒。",
+        "en": "The answer is 100.",
+        "ja": "答えは 100 秒です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "**直接追蹤每一隻螞蟻會非常複雜**——碰撞會不斷改變方向，隻數多的時候幾乎無法計算。需要換一個看法。",
+          "**關鍵的觀察是：兩隻螞蟻相遇後各自掉頭，和「兩隻螞蟻直接穿過對方繼續前進」在整體上是完全一樣的。**",
+          "為什麼一樣？因為所有螞蟻的速度都相同。兩隻相遇後掉頭，結果就是「原本往左的那個位置繼續有一隻往左的螞蟻，原本往右的位置繼續有一隻往右的螞蟻」——**只是換了個名字，畫面完全相同**。",
+          "既然只是名字互換，**所有螞蟻的位置組成的整體畫面**在兩種看法下完全一致，因此「最後一隻掉下去的時刻」也一致。",
+          "所以可以假裝螞蟻會互相穿過。這樣一來，**每一隻螞蟻都只是沿著原方向直直走到底**，永不改變方向。",
+          "一隻直直走的螞蟻，走到端點需要多久？最壞的情況是它從木棍的一端出發，朝另一端走，要走完全長 100 公分。",
+          "速度是每秒 1 公分，所以需要 100 ÷ 1 = 100 秒。",
+          "任何一隻螞蟻在木棍上的位置到它前進方向那一端的距離都不超過 100 公分，所以**沒有螞蟻能撐過 100 秒**；而把一隻螞蟻放在最左端讓它往右走，就恰好需要 100 秒。因此最多是 100 秒。",
+          "**注意這個答案與螞蟻的隻數完全無關**——放 2 隻或放 1000 隻，上界都是 100 秒。這正是「穿透觀點」帶來的洞察：碰撞看似讓事情變複雜，實際上完全不影響最後一隻掉落的時間。"
+        ],
+        "zh-Hans": [
+          "**直接追踪每一只蚂蚁会非常复杂**——碰撞会不断改变方向，只数多的时候几乎无法计算。需要换一个看法。",
+          "**关键的观察是：两只蚂蚁相遇后各自掉头，和「两只蚂蚁直接穿过对方继续前进」在整体上是完全一样的。**",
+          "为什么一样？因为所有蚂蚁的速度都相同。两只相遇后掉头，结果就是「原本往左的那个位置继续有一只往左的蚂蚁，原本往右的位置继续有一只往右的蚂蚁」——**只是换了个名字，画面完全相同**。",
+          "既然只是名字互换，**所有蚂蚁的位置组成的整体画面**在两种看法下完全一致，因此「最后一只掉下去的时刻」也一致。",
+          "所以可以假装蚂蚁会互相穿过。这样一来，**每一只蚂蚁都只是沿着原方向直直走到底**，永不改变方向。",
+          "一只直直走的蚂蚁，走到端点需要多久？最坏的情况是它从木棍的一端出发，朝另一端走，要走完全长 100 厘米。",
+          "速度是每秒 1 厘米，所以需要 100 ÷ 1 = 100 秒。",
+          "任何一只蚂蚁在木棍上的位置到它前进方向那一端的距离都不超过 100 厘米，所以**没有蚂蚁能撑过 100 秒**；而把一只蚂蚁放在最左端让它往右走，就恰好需要 100 秒。因此最多是 100 秒。",
+          "**注意这个答案与蚂蚁的只数完全无关**——放 2 只或放 1000 只，上界都是 100 秒。这正是「穿透观点」带来的洞察：碰撞看似让事情变复杂，实际上完全不影响最后一只掉落的时间。"
+        ],
+        "en": [
+          "Tracking each ant directly would be hopeless, since collisions keep reversing directions and the bookkeeping explodes with many ants. A different viewpoint is needed.",
+          "The key observation is that two ants meeting and reversing is, taken as a whole, indistinguishable from the two ants passing straight through each other.",
+          "Why the same? Because every ant moves at the same speed. After a meeting and reversal, there is still an ant heading left where the leftward ant was and an ant heading right where the rightward one was — only the labels have swapped, and the picture is identical.",
+          "Since only labels swap, the overall configuration of ant positions is the same under either view, and so is the moment the last ant falls off.",
+          "So one may pretend the ants pass through one another. Then every ant simply walks straight in its original direction and never turns.",
+          "How long does such an ant take to reach an end? The worst case starts at one end of the rod heading for the other, covering the full 100 cm.",
+          "At 1 cm per second that takes 100 ÷ 1 = 100 seconds.",
+          "Every ant is within 100 cm of the end it faces, so no ant can survive past 100 seconds; and placing one ant at the far left heading right takes exactly 100 seconds. Hence the maximum is 100 seconds.",
+          "Note the answer is entirely independent of how many ants there are — with 2 or with 1000, the bound is 100 seconds. That is the insight the pass-through view delivers: collisions look like a complication but have no effect at all on when the last ant falls."
+        ],
+        "ja": [
+          "**1 匹ずつ追跡するのは非常に大変**です——衝突のたびに向きが変わり、匹数が多いとほぼ計算不能になります。見方を変える必要があります。",
+          "**鍵となる観察は、2 匹が出会って向きを変えることと、2 匹がそのまま互いを通り抜けることが、全体としてまったく同じだ**ということです。",
+          "なぜ同じか。すべてのアリの速さが等しいからです。出会って反転した結果は、「左へ向かっていた位置に左向きのアリが、右へ向かっていた位置に右向きのアリが引き続きいる」ことであり——**名前が入れ替わっただけで、画面はまったく同じ**です。",
+          "名前が入れ替わるだけなので、**アリの位置全体がつくる画面**はどちらの見方でも一致し、したがって「最後の 1 匹が落ちる時刻」も一致します。",
+          "そこでアリが互いを通り抜けると考えてよいことになります。すると**各アリは元の向きにまっすぐ進むだけ**で、決して向きを変えません。",
+          "まっすぐ進むアリが端に達するまでどれだけかかるか。最悪の場合は棒の一端から出発して他端へ向かい、全長 100 cm を進みます。",
+          "速さは毎秒 1 cm なので 100 ÷ 1 = 100 秒かかります。",
+          "どのアリも進行方向の端まで 100 cm 以内にいるので、**100 秒を超えて残るアリはいません**。また 1 匹を左端に置いて右向きに進ませれば、ちょうど 100 秒かかります。したがって最大は 100 秒です。",
+          "**この答えはアリの匹数とまったく無関係**です——2 匹でも 1000 匹でも上界は 100 秒です。これこそ「通り抜け」の見方がもたらす洞察で、衝突は複雑に見えて、最後の 1 匹が落ちる時刻にはまったく影響しません。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "100"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "碰撞等價於穿透：因所有螞蟻速度相同，掉頭與互穿的整體畫面一致，故最長時間即為走完全長的時間",
+        "notes": "設計依據：詳解著重論證「掉頭與穿透等價」的理由（速度相同故僅是標籤互換），而非直接引用結論；並同時給出上界（任一螞蟻距端點不超過全長）與可達的實例，說明 100 秒是確切的最大值。答案 100 已由等價論證與上下界推導驗證，且說明結果與螞蟻隻數無關。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（木棍上的螞蟻）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "邏輯推理",
+        "topicCode": "logic",
+        "subtopic": "木棍上的螞蟻",
+        "subtopicCode": "ants_on_rod"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "logic_grade10_foundation_018",
+      "topic": "logic",
+      "subtopic": "knockout_tournament_matches",
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一場單淘汰制的比賽有 64 支隊伍參加。每一場比賽都恰好淘汰一支隊伍，輸的隊伍立刻出局，贏的隊伍晉級，直到只剩下一支冠軍隊伍為止。求整場賽事總共要進行幾場比賽。",
+        "zh-Hans": "一场单淘汰制的比赛有 64 支队伍参加。每一场比赛都恰好淘汰一支队伍，输的队伍立刻出局，赢的队伍晋级，直到只剩下一支冠军队伍为止。求整场赛事总共要进行几场比赛。",
+        "en": "A single-elimination tournament has 64 teams. Every match eliminates exactly one team, the loser departing at once and the winner advancing, until a single champion remains. How many matches are played in all?",
+        "ja": "勝ち抜き戦に 64 チームが参加します。各試合はちょうど 1 チームを敗退させ、負けたチームは即座に去り、勝ったチームが勝ち進み、優勝チーム 1 つが残るまで続きます。試合は全部で何試合行われますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 63 場。",
+        "zh-Hans": "答案是 63 场。",
+        "en": "The answer is 63.",
+        "ja": "答えは 63 試合です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "**可以逐輪相加，但有更漂亮的做法**。先看逐輪的算法，再看那個一步到位的想法。",
+          "逐輪計算：64 隊比 32 場剩 32 隊；32 隊比 16 場剩 16 隊；16 隊比 8 場；8 隊比 4 場；4 隊比 2 場；2 隊比 1 場決出冠軍。",
+          "相加：32 + 16 + 8 + 4 + 2 + 1 = 63 場。",
+          "**現在看那個更漂亮的想法：把焦點從「比賽」轉移到「被淘汰的隊伍」。**",
+          "題目說每一場比賽恰好淘汰一支隊伍，所以**比賽場數與被淘汰的隊伍數是一一對應的**——有幾隊被淘汰，就打了幾場。",
+          "最後只剩一支冠軍隊，表示其餘的隊伍全部被淘汰了。被淘汰的隊數 = 64 − 1 = 63。",
+          "所以總場次 = 63 場，與逐輪相加的結果一致 ✓。",
+          "驗算：程式逐輪模擬 64 → 32 → 16 → 8 → 4 → 2 → 1，累計場次正是 63 ✓。",
+          "**這個「一場對應一個淘汰者」的想法威力在於它不依賴隊數是不是 2 的次方**。若改成 100 支隊伍，逐輪相加會很麻煩（有些輪次要輪空），但用淘汰的觀點立刻知道是 100 − 1 = 99 場。相對地，逐輪相加 32 + 16 + ⋯ + 1 之所以好算，只是因為 64 恰好是 2 的 6 次方這個特例。"
+        ],
+        "zh-Hans": [
+          "**可以逐轮相加，但有更漂亮的做法**。先看逐轮的算法，再看那个一步到位的想法。",
+          "逐轮计算：64 队比 32 场剩 32 队；32 队比 16 场剩 16 队；16 队比 8 场；8 队比 4 场；4 队比 2 场；2 队比 1 场决出冠军。",
+          "相加：32 + 16 + 8 + 4 + 2 + 1 = 63 场。",
+          "**现在看那个更漂亮的想法：把焦点从「比赛」转移到「被淘汰的队伍」。**",
+          "题目说每一场比赛恰好淘汰一支队伍，所以**比赛场数与被淘汰的队伍数是一一对应的**——有几队被淘汰，就打了几场。",
+          "最后只剩一支冠军队，表示其余的队伍全部被淘汰了。被淘汰的队数 = 64 − 1 = 63。",
+          "所以总场次 = 63 场，与逐轮相加的结果一致 ✓。",
+          "验算：程序逐轮模拟 64 → 32 → 16 → 8 → 4 → 2 → 1，累计场次正是 63 ✓。",
+          "**这个「一场对应一个淘汰者」的想法威力在于它不依赖队数是不是 2 的次方**。若改成 100 支队伍，逐轮相加会很麻烦（有些轮次要轮空），但用淘汰的观点立刻知道是 100 − 1 = 99 场。相对地，逐轮相加 32 + 16 + ⋯ + 1 之所以好算，只是因为 64 恰好是 2 的 6 次方这个特例。"
+        ],
+        "en": [
+          "Adding up round by round works, but a neater idea exists. Consider the round-by-round count first, then the one-step insight.",
+          "Round by round: 64 teams play 32 matches leaving 32; those play 16 matches leaving 16; then 8 matches, then 4, then 2, then 1 final match crowning the champion.",
+          "Adding: 32 + 16 + 8 + 4 + 2 + 1 = 63 matches.",
+          "Now the neater idea: shift attention from the matches to the eliminated teams.",
+          "Each match eliminates exactly one team, so matches and eliminated teams correspond one to one — as many matches are played as teams are eliminated.",
+          "Exactly one champion remains at the end, meaning every other team was eliminated, so the number eliminated is 64 − 1 = 63.",
+          "So the total is 63 matches, agreeing with the round-by-round sum.",
+          "Check: simulating 64 → 32 → 16 → 8 → 4 → 2 → 1 accumulates exactly 63 matches.",
+          "The strength of the one-match-per-elimination view is that it never assumes the number of teams is a power of two. With 100 teams the round-by-round sum becomes awkward, since some rounds need byes, but the elimination view gives 100 − 1 = 99 immediately. By contrast, the sum 32 + 16 + ⋯ + 1 is easy only because 64 happens to be 2 to the sixth power."
+        ],
+        "ja": [
+          "**1 回戦ずつ足していってもよいのですが、もっと美しい方法があります**。まず回戦ごとの計算を見て、次に一手で済む考え方を見ます。",
+          "回戦ごと：64 チームが 32 試合を行い 32 チームが残る、32 チームが 16 試合、16 チームが 8 試合、8 チームが 4 試合、4 チームが 2 試合、2 チームが 1 試合で優勝が決まります。",
+          "足すと 32 + 16 + 8 + 4 + 2 + 1 = 63 試合。",
+          "**では美しい考え方です：着目点を「試合」から「敗退したチーム」へ移します。**",
+          "各試合はちょうど 1 チームを敗退させるので、**試合数と敗退チーム数は 1 対 1 に対応**します——何チームが敗退したかが、そのまま試合数です。",
+          "最後に残るのは優勝の 1 チームだけなので、他はすべて敗退しています。敗退数は 64 − 1 = 63。",
+          "したがって総試合数は 63 で、回戦ごとの合計と一致します ✓。",
+          "検算：64 → 32 → 16 → 8 → 4 → 2 → 1 とシミュレートすると累計はちょうど 63 ✓。",
+          "**「1 試合に 1 敗退」という見方の強みは、チーム数が 2 の累乗かどうかに依らない点**です。100 チームなら回戦ごとの合計は不戦勝が出て面倒ですが、敗退の見方なら直ちに 100 − 1 = 99 と分かります。逆に 32 + 16 + ⋯ + 1 が簡単なのは、64 がちょうど 2 の 6 乗だという特殊事情によります。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "63"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "單淘汰賽總場次：每場恰淘汰一隊，故場次等於被淘汰的隊數，即總隊數減一",
+        "notes": "設計依據：詳解同時給出逐輪相加與「一場對應一個淘汰者」兩條路徑並互相印證，並指出後者不依賴隊數為 2 的次方，以 100 隊的情形說明前者在一般情況下的困難。答案 63 已用逐輪模擬與不變量論證交叉驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（單淘汰賽的總場次）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "邏輯推理",
+        "topicCode": "logic",
+        "subtopic": "單淘汰賽的總場次",
+        "subtopicCode": "knockout_tournament_matches"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "logic_grade10_foundation_019",
+      "topic": "logic",
+      "subtopic": "chameleon_mod3_invariant",
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "島上有三種顏色的變色龍：紅色 12 隻、綠色 15 隻、藍色 17 隻。當兩隻不同顏色的變色龍相遇時，牠們會同時變成第三種顏色（例如一隻紅色與一隻綠色相遇，兩隻都變成藍色）。經過若干次這樣的相遇後，有可能全島的變色龍都是同一種顏色。求在紅、綠、藍三種顏色中，有幾種顏色是「全島都變成該顏色」有可能達成的。",
+        "zh-Hans": "岛上有三种颜色的变色龙：红色 12 只、绿色 15 只、蓝色 17 只。当两只不同颜色的变色龙相遇时，它们会同时变成第三种颜色（例如一只红色与一只绿色相遇，两只都变成蓝色）。经过若干次这样的相遇后，有可能全岛的变色龙都是同一种颜色。求在红、绿、蓝三种颜色中，有几种颜色是「全岛都变成该颜色」有可能达成的。",
+        "en": "An island has chameleons of three colours: 12 red, 15 green and 17 blue. When two chameleons of different colours meet, both change to the third colour, so a red meeting a green leaves two blues. After some number of such meetings, all the chameleons might become one colour. Among red, green and blue, for how many colours is it possible that the whole island becomes that colour?",
+        "ja": "島には 3 色のカメレオンがいます：赤 12 匹、緑 15 匹、青 17 匹。異なる色の 2 匹が出会うと、どちらも第 3 の色に変わります（赤と緑が出会えば 2 匹とも青になります）。こうした出会いを何度か繰り返すと、島じゅうが 1 色になることがありえます。赤・緑・青のうち、「島全体がその色になる」ことが可能な色は何種類ありますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 1 種。",
+        "zh-Hans": "答案是 1 种。",
+        "en": "The answer is 1.",
+        "ja": "答えは 1 種類です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "**這類「能不能達成」的問題，通常靠找出一個不會改變的量（不變量）來判斷**。先看一次相遇會使數量怎麼變。",
+          "設紅、綠、藍的隻數是 (r, g, b)。若一隻紅與一隻綠相遇，變化是 r 減 1、g 減 1、b 加 2。其他兩種相遇同理。",
+          "**觀察任兩種顏色的隻數差**。以 r − g 為例：紅綠相遇時 r 與 g 同減 1，差不變；紅藍相遇時 r 減 1、g 加 2，差變化 −3；綠藍相遇時 r 加 2、g 減 1，差變化 +3。",
+          "所以 **r − g 每次要嘛不變、要嘛改變 3**——也就是說，**r − g 除以 3 的餘數永遠不變**。這就是我們要的不變量。同理 g − b、r − b 也是如此。",
+          "換句話說：**三種顏色的隻數對 3 取餘數，這三個餘數的相對關係永遠不變**。",
+          "現在算初始的餘數：12 ÷ 3 餘 0（紅），15 ÷ 3 餘 0（綠），17 ÷ 3 餘 2（藍）。",
+          "**若最後全部變成某一種顏色，另外兩種顏色的隻數都會是 0，兩者相等，所以它們的餘數必須相同。**由於餘數差不變，這要求它們**一開始的餘數就相同**。",
+          "逐一檢查：全變紅色需要綠與藍的餘數相同（0 與 2，不同，不可能）；全變綠色需要紅與藍的餘數相同（0 與 2，不同，不可能）；**全變藍色需要紅與綠的餘數相同（0 與 0，相同，有機會）**。",
+          "驗算：程式從 (12, 15, 17) 出發，用廣度優先搜尋窮舉所有可到達的狀態，確認 (0, 0, 44) 可以達到，而 (44, 0, 0) 與 (0, 44, 0) 都到不了 ✓。所以答案是 1 種。**附帶一提，若初始改成 13、15、17，三個餘數是 1、0、2 兩兩不同，那就一種顏色都達不成了。**"
+        ],
+        "zh-Hans": [
+          "**这类「能不能达成」的问题，通常靠找出一个不会改变的量（不变量）来判断**。先看一次相遇会使数量怎么变。",
+          "设红、绿、蓝的只数是 (r, g, b)。若一只红与一只绿相遇，变化是 r 减 1、g 减 1、b 加 2。其他两种相遇同理。",
+          "**观察任两种颜色的只数差**。以 r − g 为例：红绿相遇时 r 与 g 同减 1，差不变；红蓝相遇时 r 减 1、g 加 2，差变化 −3；绿蓝相遇时 r 加 2、g 减 1，差变化 +3。",
+          "所以 **r − g 每次要么不变、要么改变 3**——也就是说，**r − g 除以 3 的余数永远不变**。这就是我们要的不变量。同理 g − b、r − b 也是如此。",
+          "换句话说：**三种颜色的只数对 3 取余数，这三个余数的相对关系永远不变**。",
+          "现在算初始的余数：12 ÷ 3 余 0（红），15 ÷ 3 余 0（绿），17 ÷ 3 余 2（蓝）。",
+          "**若最后全部变成某一种颜色，另外两种颜色的只数都会是 0，两者相等，所以它们的余数必须相同。**由于余数差不变，这要求它们**一开始的余数就相同**。",
+          "逐一检查：全变红色需要绿与蓝的余数相同（0 与 2，不同，不可能）；全变绿色需要红与蓝的余数相同（0 与 2，不同，不可能）；**全变蓝色需要红与绿的余数相同（0 与 0，相同，有机会）**。",
+          "验算：程序从 (12, 15, 17) 出发，用广度优先搜索穷举所有可到达的状态，确认 (0, 0, 44) 可以达到，而 (44, 0, 0) 与 (0, 44, 0) 都到不了 ✓。所以答案是 1 种。**附带一提，若初始改成 13、15、17，三个余数是 1、0、2 两两不同，那就一种颜色都达不成了。**"
+        ],
+        "en": [
+          "Questions of the form can this be reached are usually settled by finding a quantity that never changes, an invariant. Start by seeing how one meeting changes the counts.",
+          "Write the counts as (r, g, b). A red meeting a green decreases r by 1, decreases g by 1 and increases b by 2, and the other meetings behave similarly.",
+          "Look at the difference between two counts, say r − g. A red-green meeting decreases both by 1, leaving the difference unchanged; a red-blue meeting decreases r by 1 and increases g by 2, changing the difference by −3; a green-blue meeting changes it by +3.",
+          "So r − g either stays the same or changes by 3, which means the remainder of r − g on division by 3 never changes. That is the invariant. The same holds for g − b and r − b.",
+          "In other words, the counts taken modulo 3 keep their relative pattern forever.",
+          "The initial remainders: 12 leaves 0, 15 leaves 0 and 17 leaves 2.",
+          "If all chameleons end up one colour, the other two counts are both 0 and hence equal, so their remainders must agree. Since differences of remainders never change, the two must have agreed from the start.",
+          "Checking each: all red would need green and blue to agree, but 0 and 2 differ, so it is impossible; all green would need red and blue to agree, again 0 against 2, impossible; all blue needs red and green to agree, and 0 against 0 does agree, so it is possible.",
+          "Check: a breadth-first search from (12, 15, 17) over all reachable states confirms that (0, 0, 44) is reachable while (44, 0, 0) and (0, 44, 0) are not. So the answer is 1. Incidentally, starting from 13, 15 and 17 the remainders would be 1, 0 and 2, pairwise different, and then no colour at all could be achieved."
+        ],
+        "ja": [
+          "**この種の「達成可能か」を問う問題は、変わらない量（不変量）を見つけて判定するのが定石**です。まず 1 回の出会いで数がどう変わるかを見ます。",
+          "赤・緑・青の匹数を (r, g, b) とします。赤と緑が出会うと r が 1 減り、g が 1 減り、b が 2 増えます。他の出会いも同様です。",
+          "**2 色の匹数の差**を見ます。r − g では、赤緑の出会いで両方 1 減るので差は不変、赤青では r が 1 減り g が 2 増えるので差は −3、緑青では +3 変化します。",
+          "つまり **r − g は不変か 3 だけ変わるか**——言い換えれば **r − g を 3 で割った余りは永遠に変わりません**。これが求める不変量です。g − b、r − b も同様です。",
+          "すなわち、**3 色の匹数を 3 で割った余りの相対関係は永久に変わりません**。",
+          "初期の余りを求めます：12 は 0（赤）、15 は 0（緑）、17 は 2（青）。",
+          "**最後に 1 色になるなら、他の 2 色の匹数はどちらも 0 で等しく、余りも一致します。**余りの差は変わらないので、**最初から余りが一致していた**必要があります。",
+          "順に確認します：全部赤には緑と青の余りの一致（0 と 2、不一致で不可能）、全部緑には赤と青の一致（0 と 2、不可能）、**全部青には赤と緑の一致（0 と 0、一致するので可能）**。",
+          "検算：(12, 15, 17) から幅優先探索で到達可能な状態をすべて調べると、(0, 0, 44) には到達でき、(44, 0, 0) と (0, 44, 0) には到達できないことが確認できます ✓。よって答えは 1 種類です。**なお初期値を 13、15、17 にすると余りは 1、0、2 と互いに異なり、どの色も達成できなくなります。**"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "1"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "模 3 不變量：任兩色隻數之差除以 3 的餘數恆不變，故僅當兩色初始餘數相同時才可能全變成第三色",
+        "notes": "設計依據：詳解逐一計算三種相遇對 r − g 的影響以推導出模 3 不變量，而非直接宣告；起始值 12、15、17 使恰好一組餘數相同，答案為 1 而非 0 或 3，並在末尾以 13、15、17 說明餘數兩兩相異時答案會變成 0。答案 1 已用廣度優先搜尋窮舉全部可達狀態獨立驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（變色龍的顏色）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "邏輯推理",
+        "topicCode": "logic",
+        "subtopic": "變色龍的顏色",
+        "subtopicCode": "chameleon_mod3_invariant"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "logic_grade10_foundation_020",
+      "topic": "logic",
+      "subtopic": "wason_card_selection",
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "桌上有四張卡片，每張卡片一面印著一個英文字母、另一面印著一個數字。目前看得到的四面依序是：A、K、4、7。有人主張一條規則：「凡是一面印著母音的卡片，它的另一面一定是偶數」（A 是母音，K 不是）。若要判斷這條規則是否被違反，且翻開的張數要盡可能少，求最少必須翻開幾張卡片。",
+        "zh-Hans": "桌上有四张卡片，每张卡片一面印着一个英文字母、另一面印着一个数字。目前看得到的四面依序是：A、K、4、7。有人主张一条规则：「凡是一面印着母音的卡片，它的另一面一定是偶数」（A 是母音，K 不是）。若要判断这条规则是否被违反，且翻开的张数要尽可能少，求最少必须翻开几张卡片。",
+        "en": "Four cards lie on a table, each with a letter on one face and a number on the other. The visible faces read A, K, 4 and 7. Someone claims the rule: every card showing a vowel on one face has an even number on the other, A being a vowel and K not. To decide whether the rule is violated, turning over as few cards as possible, how many cards must be turned?",
+        "ja": "テーブルに 4 枚のカードがあり、各カードは片面に英字、もう片面に数字が印刷されています。見えている面は順に A、K、4、7 です。ある人が「母音が印刷された面をもつカードは、その裏が必ず偶数である」という規則を主張しています（A は母音、K は母音ではありません）。この規則が破られていないかを判定するために、めくる枚数をできるだけ少なくするとき、最少で何枚めくる必要がありますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 2 張。",
+        "zh-Hans": "答案是 2 张。",
+        "en": "The answer is 2.",
+        "ja": "答えは 2 枚です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "**先把規則寫成「若⋯則⋯」的形式**：若一面是母音，則另一面是偶數。",
+          "**一條「若 P 則 Q」的規則，只有在「P 成立但 Q 不成立」時才會被推翻。**所以要找的是「一面是母音、另一面卻是奇數」的卡片。只有可能出現這種組合的卡片才需要翻。",
+          "**逐張檢查。卡片 A（看得見母音）**：另一面若是奇數，規則就被推翻了。**必須翻** ✓。",
+          "**卡片 K（看得見的是子音）**：規則只管母音，對子音沒有任何要求，所以另一面是什麼都不違反規則。**不必翻**。",
+          "**卡片 4（看得見偶數）**：另一面若是母音，符合規則；若是子音，規則管不到。**兩種情況都不違反，所以不必翻**。這張最容易被誤翻——**規則說的是「母音 ⇒ 偶數」，並沒有說「偶數 ⇒ 母音」**，兩者不是同一回事。",
+          "**卡片 7（看得見奇數）**：另一面若是母音，那就出現了「母音配奇數」，規則被推翻。**必須翻** ✓。",
+          "所以必須翻的是 A 與 7 這兩張，其餘兩張翻了也得不到任何有用的資訊。",
+          "答案是 2 張。",
+          "**檢查這 2 張確實足夠且必要**：足夠——任何違反規則的卡片，其可見面必定是母音或奇數（因為違反者兩面分別是母音與奇數），所以一定是 A 或 7 這兩張之一，翻開它們就能發現。必要——若不翻 A，A 的背面可能是奇數而漏掉違規；若不翻 7，7 的背面可能是母音而漏掉違規。因此 2 張是最少的。",
+          "**卡片 7 是最常被漏掉的一張**。直覺上會想去驗證「規則成立的例子」（於是去翻 4），但**推翻一條規則靠的是找反例，而反例的可見面正是奇數 7**。這就是為什麼要翻 7 而不翻 4。"
+        ],
+        "zh-Hans": [
+          "**先把规则写成「若⋯则⋯」的形式**：若一面是母音，则另一面是偶数。",
+          "**一条「若 P 则 Q」的规则，只有在「P 成立但 Q 不成立」时才会被推翻。**所以要找的是「一面是母音、另一面却是奇数」的卡片。只有可能出现这种组合的卡片才需要翻。",
+          "**逐张检查。卡片 A（看得见母音）**：另一面若是奇数，规则就被推翻了。**必须翻** ✓。",
+          "**卡片 K（看得见的是子音）**：规则只管母音，对子音没有任何要求，所以另一面是什么都不违反规则。**不必翻**。",
+          "**卡片 4（看得见偶数）**：另一面若是母音，符合规则；若是子音，规则管不到。**两种情况都不违反，所以不必翻**。这张最容易被误翻——**规则说的是「母音 ⇒ 偶数」，并没有说「偶数 ⇒ 母音」**，两者不是同一回事。",
+          "**卡片 7（看得见奇数）**：另一面若是母音，那就出现了「母音配奇数」，规则被推翻。**必须翻** ✓。",
+          "所以必须翻的是 A 与 7 这两张，其余两张翻了也得不到任何有用的信息。",
+          "答案是 2 张。",
+          "**检查这 2 张确实足够且必要**：足够——任何违反规则的卡片，其可见面必定是母音或奇数（因为违反者两面分别是母音与奇数），所以一定是 A 或 7 这两张之一，翻开它们就能发现。必要——若不翻 A，A 的背面可能是奇数而漏掉违规；若不翻 7，7 的背面可能是母音而漏掉违规。因此 2 张是最少的。",
+          "**卡片 7 是最常被漏掉的一张**。直觉上会想去验证「规则成立的例子」（于是去翻 4），但**推翻一条规则靠的是找反例，而反例的可见面正是奇数 7**。这就是为什么要翻 7 而不翻 4。"
+        ],
+        "en": [
+          "Write the rule in if-then form: if one face is a vowel, then the other is even.",
+          "A rule of the form if P then Q is refuted only when P holds and Q fails, so the search is for a card with a vowel on one face and an odd number on the other. Only cards that could show that combination need turning.",
+          "Card A, showing a vowel: if its other face is odd, the rule is refuted, so it must be turned.",
+          "Card K, showing a consonant: the rule constrains only vowels and says nothing about consonants, so whatever is on the back cannot violate it. No need to turn.",
+          "Card 4, showing an even number: a vowel on the back would satisfy the rule and a consonant would fall outside it. Neither violates, so no need to turn. This is the card most often turned by mistake — the rule says vowel implies even, not even implies vowel, and the two are not the same claim.",
+          "Card 7, showing an odd number: a vowel on the back would give a vowel paired with an odd number, refuting the rule. It must be turned.",
+          "So A and 7 must be turned, while turning either of the others yields no useful information.",
+          "The answer is 2 cards.",
+          "Confirm these 2 are both sufficient and necessary. Sufficient: any violating card has a vowel on one face and an odd number on the other, so its visible face is a vowel or an odd number, making it A or 7, and turning those would reveal it. Necessary: leaving A unturned could hide an odd number behind a vowel, and leaving 7 unturned could hide a vowel behind an odd number. So 2 is the minimum.",
+          "Card 7 is the one most often overlooked. The instinct is to confirm instances where the rule holds, which prompts turning 4; but a rule is refuted by finding a counterexample, and a counterexample's visible face is precisely the odd number 7. That is why 7 is turned and 4 is not."
+        ],
+        "ja": [
+          "**まず規則を「もし〜ならば〜」の形に書きます**：片面が母音ならば、もう片面は偶数である。",
+          "**「もし P ならば Q」という規則は、「P が成り立つのに Q が成り立たない」ときにのみ覆されます。**したがって探すのは「片面が母音で、もう片面が奇数」のカードです。この組み合わせが起こりうるカードだけをめくればよいことになります。",
+          "**1 枚ずつ確認します。カード A（母音が見えている）**：裏が奇数なら規則は覆されます。**めくる必要があります** ✓。",
+          "**カード K（見えているのは子音）**：規則は母音についてのみ述べており子音には何も要求しないので、裏が何であれ違反にはなりません。**めくる必要はありません**。",
+          "**カード 4（偶数が見えている）**：裏が母音なら規則に適合し、子音なら規則の対象外です。**どちらも違反しないのでめくる必要はありません**。これが最も誤ってめくられる 1 枚です——**規則は「母音 ⇒ 偶数」であって「偶数 ⇒ 母音」ではなく**、両者は別の主張です。",
+          "**カード 7（奇数が見えている）**：裏が母音なら「母音と奇数」の組が現れ、規則は覆されます。**めくる必要があります** ✓。",
+          "したがってめくるべきは A と 7 の 2 枚で、他の 2 枚をめくっても有用な情報は得られません。",
+          "答えは 2 枚です。",
+          "**この 2 枚が十分かつ必要であることを確認します**。十分：違反するカードは片面が母音でもう片面が奇数なので、見えている面は母音か奇数であり、すなわち A か 7 のいずれかです。よってその 2 枚をめくれば発見できます。必要：A をめくらなければ母音の裏の奇数を見逃し、7 をめくらなければ奇数の裏の母音を見逃します。したがって 2 枚が最少です。",
+          "**カード 7 は最も見落とされやすい 1 枚**です。直感的には規則が成り立つ例を確かめたくなり 4 をめくってしまいますが、**規則を覆すのは反例であり、反例の見えている面はまさに奇数の 7** です。これが 4 ではなく 7 をめくる理由です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "2"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "條件句的檢驗：「若 P 則 Q」只被「P 成立而 Q 不成立」推翻，故須檢查 P 為真與 Q 為假的兩張卡",
+        "notes": "設計依據：詳解逐張說明翻與不翻的理由，特別指出卡片 4 的誤翻源於把「母音 ⇒ 偶數」誤讀為逆命題，以及卡片 7 因「找反例」而必翻；並分別論證 2 張的充分性與必要性，而非只給出答案。答案 2 已用四張卡片的逐一情形分析窮舉驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（該翻開哪幾張卡片）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "邏輯推理",
+        "topicCode": "logic",
+        "subtopic": "該翻開哪幾張卡片",
+        "subtopicCode": "wason_card_selection"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "logic_grade10_foundation_021",
+      "topic": "logic",
+      "subtopic": "lights_out_min_presses",
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "有一個 3 × 3 的燈陣，一開始九盞燈全部是暗的。按下任何一盞燈，會使「這盞燈本身」以及「與它上下左右直接相鄰的燈」同時切換狀態（暗變亮、亮變暗）。若要讓九盞燈全部變亮，求最少需要按幾盞燈。",
+        "zh-Hans": "有一个 3 × 3 的灯阵，一开始九盏灯全部是暗的。按下任何一盏灯，会使「这盏灯本身」以及「与它上下左右直接相邻的灯」同时切换状态（暗变亮、亮变暗）。若要让九盏灯全部变亮，求最少需要按几盏灯。",
+        "en": "A 3 × 3 grid of lamps starts with all nine lamps off. Pressing any lamp toggles that lamp together with the lamps directly above, below, left and right of it, turning off lamps on and on lamps off. To turn all nine lamps on, what is the least number of lamps that must be pressed?",
+        "ja": "3 × 3 のランプ盤があり、最初は 9 個すべて消えています。どれか 1 個を押すと、そのランプ自身と、上下左右に隣接するランプが同時に切り替わります（消→点、点→消）。9 個すべてを点灯させるには、最少で何個押す必要がありますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 5 盞。",
+        "zh-Hans": "答案是 5 盏。",
+        "en": "The answer is 5.",
+        "ja": "答えは 5 個です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "**先確立兩件事，可以大幅縮小搜尋範圍。**",
+          "第一，**同一盞燈按兩次等於沒按**——因為每次切換都是反向操作，按兩次就抵銷了。所以每盞燈只需要考慮「按 0 次」或「按 1 次」。",
+          "第二，**按的先後順序不影響結果**——每盞燈最後的狀態，只取決於它被切換的總次數是奇數還是偶數，與順序無關。",
+          "有了這兩點，一個方案就完全由「按了哪些燈」這個集合決定，總共只有 2⁹ = 512 種可能，可以有系統地檢查。",
+          "**現在觀察每盞燈被切換幾次**。一盞燈被切換，來自按它自己、或按它的上下左右鄰居。所以**它被切換的次數 = 它自己與四個鄰居之中被按下的個數**。要讓它從暗變亮，這個個數必須是奇數。",
+          "試著找解：**按下四個角落與正中央這 5 盞**。檢查中央那盞：它自己被按（1 次），四個鄰居（四個邊的中點）都沒被按，所以共 1 次，是奇數 ✓ 會亮。",
+          "檢查左上角那盞：它自己被按（1 次），它的鄰居是上邊中點與左邊中點，都沒被按，共 1 次 ✓ 亮。四個角落同理。",
+          "檢查上邊中點那盞：它自己沒被按，它的鄰居是左上角、右上角（都被按）與正中央（被按），共 3 次，是奇數 ✓ 亮。四個邊的中點同理。九盞全亮 ✓。",
+          "驗算：程式窮舉全部 512 種按法，**能讓九盞全亮的方案只有這一組，而且恰好按 5 盞**——既然唯一解就是它，5 盞當然是最少的，也不可能有 4 盞以下的解 ✓。"
+        ],
+        "zh-Hans": [
+          "**先确立两件事，可以大幅缩小搜寻范围。**",
+          "第一，**同一盏灯按两次等于没按**——因为每次切换都是反向操作，按两次就抵销了。所以每盏灯只需要考虑「按 0 次」或「按 1 次」。",
+          "第二，**按的先后顺序不影响结果**——每盏灯最后的状态，只取决于它被切换的总次数是奇数还是偶数，与顺序无关。",
+          "有了这两点，一个方案就完全由「按了哪些灯」这个集合决定，总共只有 2⁹ = 512 种可能，可以有系统地检查。",
+          "**现在观察每盏灯被切换几次**。一盏灯被切换，来自按它自己、或按它的上下左右邻居。所以**它被切换的次数 = 它自己与四个邻居之中被按下的个数**。要让它从暗变亮，这个个数必须是奇数。",
+          "试着找解：**按下四个角落与正中央这 5 盏**。检查中央那盏：它自己被按（1 次），四个邻居（四个边的中点）都没被按，所以共 1 次，是奇数 ✓ 会亮。",
+          "检查左上角那盏：它自己被按（1 次），它的邻居是上边中点与左边中点，都没被按，共 1 次 ✓ 亮。四个角落同理。",
+          "检查上边中点那盏：它自己没被按，它的邻居是左上角、右上角（都被按）与正中央（被按），共 3 次，是奇数 ✓ 亮。四个边的中点同理。九盏全亮 ✓。",
+          "验算：程序穷举全部 512 种按法，**能让九盏全亮的方案只有这一组，而且恰好按 5 盏**——既然唯一解就是它，5 盏当然是最少的，也不可能有 4 盏以下的解 ✓。"
+        ],
+        "en": [
+          "Establish two facts first, as they shrink the search dramatically.",
+          "First, pressing the same lamp twice is the same as not pressing it, since each toggle undoes the previous one. So every lamp need only be pressed 0 or 1 times.",
+          "Second, the order of presses does not matter, since each lamp's final state depends only on whether its total number of toggles is odd or even.",
+          "With those two facts a plan is determined entirely by which set of lamps is pressed, leaving only 2⁹ = 512 possibilities, which can be checked systematically.",
+          "Now count how often each lamp is toggled. A lamp toggles when it is pressed itself or when one of its four neighbours is pressed, so its toggle count is the number of presses among itself and its four neighbours. Turning it from off to on requires that count to be odd.",
+          "Try pressing the four corners and the centre, five lamps in all. Check the centre: it is pressed itself, once, while its four neighbours, the edge midpoints, are not, giving 1 toggle, odd, so it lights.",
+          "Check the top-left corner: pressed itself, once, while its neighbours are the top and left midpoints, neither pressed, giving 1 toggle, so it lights. The other corners follow identically.",
+          "Check the top edge midpoint: not pressed itself, but its neighbours are the top-left corner, the top-right corner and the centre, all three pressed, giving 3 toggles, odd, so it lights. The other midpoints follow identically, and all nine lamps are on.",
+          "Check: enumerating all 512 press-sets shows this is the only one that lights all nine, and it uses exactly 5 presses — being the unique solution, 5 is necessarily the minimum and no solution with 4 or fewer can exist."
+        ],
+        "ja": [
+          "**まず 2 つの事実を確立します**。探索範囲が大幅に狭まります。",
+          "第 1 に、**同じランプを 2 回押すのは押さないのと同じ**です。切り替えは逆操作なので 2 回で打ち消されます。したがって各ランプは「0 回」か「1 回」だけ考えれば十分です。",
+          "第 2 に、**押す順序は結果に影響しません**。各ランプの最終状態は切り替え回数が奇数か偶数かだけで決まり、順序には依りません。",
+          "この 2 点により、方針は「どのランプを押したか」という集合だけで決まり、可能性は 2⁹ = 512 通りだけとなって系統的に調べられます。",
+          "**次に各ランプが何回切り替わるかを見ます**。ランプが切り替わるのは、それ自身を押したときか、上下左右の隣を押したときです。したがって**切り替え回数 = 自身と 4 つの隣のうち押されたものの個数**であり、消から点にするにはこれが奇数でなければなりません。",
+          "**四隅と中央の 5 個を押す**案を試します。中央を確認：自身が押され（1 回）、4 つの隣（各辺の中点）は押されていないので計 1 回、奇数 ✓ で点灯します。",
+          "左上隅を確認：自身が押され（1 回）、隣は上辺と左辺の中点でどちらも押されていないので計 1 回 ✓ 点灯。他の隅も同様です。",
+          "上辺の中点を確認：自身は押されず、隣は左上隅・右上隅（押された）と中央（押された）で計 3 回、奇数 ✓ 点灯。他の中点も同様で、9 個すべてが点灯します ✓。",
+          "検算：512 通りの押し方をすべて列挙すると、**9 個すべてを点灯できるのはこの 1 組だけで、しかもちょうど 5 個**です——唯一解である以上 5 個が最少であり、4 個以下の解は存在しえません ✓。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "5"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "燈陣切換：每盞按兩次等於沒按且順序無關，故方案為子集問題；每盞燈亮的條件是自身與四鄰被按的次數為奇數",
+        "notes": "設計依據：詳解先論證「按兩次抵銷」與「順序無關」兩點以把問題化為 512 種子集，再逐類（中央、角、邊中點）驗證解的正確性；並指出窮舉顯示解唯一，故 5 同時是可達值與下界。答案 5 已用全部 512 種按法的窮舉獨立驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（燈陣的最少按壓次數）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "邏輯推理",
+        "topicCode": "logic",
+        "subtopic": "燈陣的最少按壓次數",
+        "subtopicCode": "lights_out_min_presses"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "logic_grade10_foundation_022",
+      "topic": "logic",
+      "subtopic": "age_product_puzzle",
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "甲問乙三個女兒的年齡（都是正整數）。乙說：「三人年齡的乘積是 36。」甲說資訊不足。乙又說：「三人年齡的和，正好等於對面那棟房子的門牌號碼。」甲看了門牌號碼之後說：「還是不夠。」乙最後說：「我最大的女兒喜歡彈鋼琴。」甲就答出來了。求最大的女兒幾歲。",
+        "zh-Hans": "甲问乙三个女儿的年龄（都是正整数）。乙说：「三人年龄的乘积是 36。」甲说资讯不足。乙又说：「三人年龄的和，正好等于对面那栋房子的门牌号码。」甲看了门牌号码之后说：「还是不够。」乙最后说：「我最大的女儿喜欢弹钢琴。」甲就答出来了。求最大的女儿几岁。",
+        "en": "A asks B the ages of B's three daughters, all positive integers. B says the product of the three ages is 36. A says that is not enough. B adds that the sum of the ages equals the house number across the street. A looks at the number and says it is still not enough. B finally says that the eldest daughter likes playing the piano. A then answers correctly. How old is the eldest daughter?",
+        "ja": "甲が乙に、3 人の娘の年齢（すべて正の整数）を尋ねます。乙は「3 人の年齢の積は 36 です」と言い、甲は情報が足りないと答えます。乙は「3 人の年齢の和は、向かいの家の番地とちょうど同じです」と付け加えます。甲は番地を見てから「それでもまだ足りません」と言います。最後に乙が「いちばん上の娘はピアノが好きです」と言うと、甲は答えられました。いちばん上の娘は何歳ですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 9 歲。",
+        "zh-Hans": "答案是 9 岁。",
+        "en": "The answer is 9.",
+        "ja": "答えは 9 歳です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "**每一句對話都是一條線索，連「說資訊不足」也是線索。**先列出所有乘積為 36 的正整數三元組（不計順序）。",
+          "全部組合是：(1,1,36)、(1,2,18)、(1,3,12)、(1,4,9)、(1,6,6)、(2,2,9)、(2,3,6)、(3,3,4)。共 8 組。",
+          "算出每一組的和：37、21、16、14、13、13、11、10。",
+          "**現在用第二條線索。**甲看到了門牌號碼（也就是知道了確切的和），卻仍然說不夠——這表示**那個和對應到不只一組年齡**，否則甲早就能確定了。",
+          "檢查上面的和：只有 **13 出現了兩次**，分別對應 (1, 6, 6) 與 (2, 2, 9)。其餘的和都只出現一次。",
+          "所以門牌號碼一定是 13，年齡組合是 (1, 6, 6) 或 (2, 2, 9) 之一。**這正是「甲說還是不夠」這句話透露的資訊**——若和是別的數，甲當場就能回答了。",
+          "**最後一條線索：「我最大的女兒⋯」**。這句話的關鍵不在鋼琴，而在**「最大的女兒」是唯一的一個人**——存在一個年齡嚴格大於其他兩人的女兒。",
+          "檢查兩個候選：(1, 6, 6) 的最大年齡是 6，但**有兩個女兒都是 6 歲，沒有唯一的「最大的」**，與這句話矛盾；(2, 2, 9) 的最大年齡是 9，只有一個人，**「最大的女兒」指涉明確** ✓。",
+          "所以年齡是 2、2、9，最大的女兒 9 歲。驗算：程式列出全部 8 組並統計和的重複情形，確認只有和為 13 的兩組會造成歧義，且其中僅 (2, 2, 9) 有唯一的最大者 ✓，與推理一致。"
+        ],
+        "zh-Hans": [
+          "**每一句对话都是一条线索，连「说资讯不足」也是线索。**先列出所有乘积为 36 的正整数三元组（不计顺序）。",
+          "全部组合是：(1,1,36)、(1,2,18)、(1,3,12)、(1,4,9)、(1,6,6)、(2,2,9)、(2,3,6)、(3,3,4)。共 8 组。",
+          "算出每一组的和：37、21、16、14、13、13、11、10。",
+          "**现在用第二条线索。**甲看到了门牌号码（也就是知道了确切的和），却仍然说不够——这表示**那个和对应到不只一组年龄**，否则甲早就能确定了。",
+          "检查上面的和：只有 **13 出现了两次**，分别对应 (1, 6, 6) 与 (2, 2, 9)。其余的和都只出现一次。",
+          "所以门牌号码一定是 13，年龄组合是 (1, 6, 6) 或 (2, 2, 9) 之一。**这正是「甲说还是不够」这句话透露的资讯**——若和是别的数，甲当场就能回答了。",
+          "**最后一条线索：「我最大的女儿⋯」**。这句话的关键不在钢琴，而在**「最大的女儿」是唯一的一个人**——存在一个年龄严格大于其他两人的女儿。",
+          "检查两个候选：(1, 6, 6) 的最大年龄是 6，但**有两个女儿都是 6 岁，没有唯一的「最大的」**，与这句话矛盾；(2, 2, 9) 的最大年龄是 9，只有一个人，**「最大的女儿」指涉明确** ✓。",
+          "所以年龄是 2、2、9，最大的女儿 9 岁。验算：程序列出全部 8 组并统计和的重复情形，确认只有和为 13 的两组会造成歧义，且其中仅 (2, 2, 9) 有唯一的最大者 ✓，与推理一致。"
+        ],
+        "en": [
+          "Every line of the conversation is a clue, including the admissions that the information is insufficient. First list all unordered triples of positive integers with product 36.",
+          "They are (1,1,36), (1,2,18), (1,3,12), (1,4,9), (1,6,6), (2,2,9), (2,3,6) and (3,3,4), eight in all.",
+          "Their sums are 37, 21, 16, 14, 13, 13, 11 and 10.",
+          "Now use the second clue. A has seen the house number, hence knows the exact sum, yet still says it is not enough — which means that sum corresponds to more than one triple, or A could already have answered.",
+          "Among the sums, only 13 occurs twice, for (1, 6, 6) and (2, 2, 9). Every other sum occurs once.",
+          "So the house number must be 13 and the ages are either (1, 6, 6) or (2, 2, 9). That is exactly what A's second admission reveals — with any other sum, A would have answered on the spot.",
+          "The last clue mentions the eldest daughter. What matters is not the piano but that there is an eldest, a single daughter strictly older than the other two.",
+          "Checking the candidates: in (1, 6, 6) the greatest age is 6, but two daughters are 6 and there is no unique eldest, contradicting the phrasing; in (2, 2, 9) the greatest age is 9, held by one daughter, so the eldest is well defined.",
+          "So the ages are 2, 2 and 9, and the eldest is 9. Check: enumerating all eight triples and tallying repeated sums confirms that only the sum 13 is ambiguous and that of its two triples only (2, 2, 9) has a unique greatest age, matching the reasoning."
+        ],
+        "ja": [
+          "**会話の一言一言が手がかりであり、「情報が足りない」という発言さえ手がかりです。**まず積が 36 になる正の整数の三つ組（順序を問わない）をすべて挙げます。",
+          "(1,1,36)、(1,2,18)、(1,3,12)、(1,4,9)、(1,6,6)、(2,2,9)、(2,3,6)、(3,3,4) の計 8 組です。",
+          "それぞれの和を求めます：37、21、16、14、13、13、11、10。",
+          "**次に 2 つ目の手がかりです。**甲は番地を見て和を正確に知ったのに、まだ足りないと言いました——つまり**その和に対応する組が 2 つ以上ある**ということです。そうでなければ甲はその場で答えられたはずです。",
+          "和を確認すると、**13 だけが 2 回現れ**、(1, 6, 6) と (2, 2, 9) に対応します。他の和はすべて 1 回だけです。",
+          "したがって番地は 13、年齢は (1, 6, 6) か (2, 2, 9) のいずれかです。**これこそ「まだ足りない」という発言が伝える情報**で、和が他の数なら甲は即答できたはずです。",
+          "**最後の手がかり「いちばん上の娘は⋯」**。重要なのはピアノではなく、**「いちばん上の娘」がただ 1 人存在する**こと、すなわち他の 2 人より厳密に年上の娘がいることです。",
+          "2 つの候補を確認します：(1, 6, 6) の最大は 6 ですが、**6 歳が 2 人いて「いちばん上」が一意に定まらず**、この言い方と矛盾します。(2, 2, 9) の最大は 9 で 1 人だけなので、**「いちばん上の娘」が明確に指せます** ✓。",
+          "したがって年齢は 2、2、9 で、いちばん上の娘は 9 歳です。検算：8 組を列挙して和の重複を数えると、曖昧になるのは和 13 の 2 組だけで、そのうち最大が一意なのは (2, 2, 9) のみであることが確認できます ✓。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "9"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "以「資訊不足」為線索：和有歧義才會說不夠，故和必為唯一重複的 13；「最大的女兒」蘊涵最大值唯一",
+        "notes": "設計依據：本題的兩個關鍵推論都來自看似無資訊的話語——「還是不夠」鎖定和為 13，「最大的女兒」排除有兩個並列最大值的 (1, 6, 6)，詳解分別說明兩者的推理機制。答案 9 已用全部 8 組因數分解與和的重複統計窮舉獨立驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（三個女兒的年齡）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "邏輯推理",
+        "topicCode": "logic",
+        "subtopic": "三個女兒的年齡",
+        "subtopicCode": "age_product_puzzle"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "logic_grade10_foundation_023",
+      "topic": "logic",
+      "subtopic": "chocolate_bar_breaks",
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一塊長方形的巧克力上有格線，共分成 6 × 8 = 48 個小方塊。每一次操作，只能拿起「其中一塊」沿著某一條格線把它掰成兩塊（不可以疊起來一起掰）。若要把整塊巧克力分成 48 個獨立的小方塊，求最少需要掰幾次。",
+        "zh-Hans": "一块长方形的巧克力上有格线，共分成 6 × 8 = 48 个小方块。每一次操作，只能拿起「其中一块」沿着某一条格线把它掰成两块（不可以叠起来一起掰）。若要把整块巧克力分成 48 个独立的小方块，求最少需要掰几次。",
+        "en": "A rectangular chocolate bar is scored into 6 × 8 = 48 small squares. Each move takes one piece and snaps it along a single scored line into two pieces, and pieces may not be stacked and snapped together. To separate the bar into all 48 individual squares, what is the least number of snaps needed?",
+        "ja": "長方形の板チョコに溝があり、6 × 8 = 48 個の小さな正方形に区切られています。1 回の操作では「1 つのかたまり」を取り、溝に沿って 2 つに割ることしかできません（重ねてまとめて割ることはできません）。板全体を 48 個の正方形に分けるには、最少で何回割る必要がありますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 47 次。",
+        "zh-Hans": "答案是 47 次。",
+        "en": "The answer is 47.",
+        "ja": "答えは 47 回です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "直覺上會想「先橫著掰幾刀、再直著掰幾刀」，然後計算刀數——但**因為不能疊起來一起掰，橫掰之後每一條都要各自再掰**，這樣算會很繁瑣，而且不同的掰法看起來次數可能不同。",
+          "**改用一個不變量：注意「塊數」怎麼變化。**",
+          "**每一次操作，都是把一塊掰成兩塊，所以總塊數恰好增加 1**——不論掰的是大塊還是小塊，也不論沿哪一條格線掰，增加量永遠是 1。",
+          "一開始整塊巧克力是 1 塊，最後要變成 48 塊。",
+          "所以塊數必須從 1 增加到 48，總共增加了 48 − 1 = 47。",
+          "**既然每次操作恰好增加 1 塊，需要的操作次數就恰好是 47 次**。",
+          "**注意這個論證同時給出了上界與下界。**下界：無論怎麼掰，每次最多增加 1 塊，所以少於 47 次不可能達到 48 塊。上界：任何一種把它完全掰開的方式都會恰好用 47 次。",
+          "所以答案是 47 次，而且**任何掰法的次數都一樣**——先橫後直、先直後橫、隨機亂掰，全都是 47 次，完全沒有「最佳策略」可言。",
+          "驗算：用小例子核對。2 × 2 = 4 塊的巧克力：先掰成兩條（1 次），再各自掰開（2 次），共 3 次 = 4 − 1 ✓。1 × 3 的巧克力：掰 2 次得 3 塊 = 3 − 1 ✓。**注意答案只跟小方塊的總數有關，與 6 × 8 這個形狀無關**——3 × 16 也是 48 塊，同樣需要 47 次。"
+        ],
+        "zh-Hans": [
+          "直觉上会想「先横着掰几刀、再直着掰几刀」，然后计算刀数——但**因为不能叠起来一起掰，横掰之后每一条都要各自再掰**，这样算会很繁琐，而且不同的掰法看起来次数可能不同。",
+          "**改用一个不变量：注意「块数」怎么变化。**",
+          "**每一次操作，都是把一块掰成两块，所以总块数恰好增加 1**——不论掰的是大块还是小块，也不论沿哪一条格线掰，增加量永远是 1。",
+          "一开始整块巧克力是 1 块，最后要变成 48 块。",
+          "所以块数必须从 1 增加到 48，总共增加了 48 − 1 = 47。",
+          "**既然每次操作恰好增加 1 块，需要的操作次数就恰好是 47 次**。",
+          "**注意这个论证同时给出了上界与下界。**下界：无论怎么掰，每次最多增加 1 块，所以少于 47 次不可能达到 48 块。上界：任何一种把它完全掰开的方式都会恰好用 47 次。",
+          "所以答案是 47 次，而且**任何掰法的次数都一样**——先横后直、先直后横、随机乱掰，全都是 47 次，完全没有「最佳策略」可言。",
+          "验算：用小例子核对。2 × 2 = 4 块的巧克力：先掰成两条（1 次），再各自掰开（2 次），共 3 次 = 4 − 1 ✓。1 × 3 的巧克力：掰 2 次得 3 块 = 3 − 1 ✓。**注意答案只跟小方块的总数有关，与 6 × 8 这个形状无关**——3 × 16 也是 48 块，同样需要 47 次。"
+        ],
+        "en": [
+          "The instinct is to snap along all the horizontal lines, then all the vertical ones, and count. But since pieces may not be stacked, each strip must be snapped separately afterwards, making the bookkeeping messy and suggesting different methods might take different totals.",
+          "Use an invariant instead: watch how the number of pieces changes.",
+          "Every move splits one piece into two, so the total piece count rises by exactly 1 — whatever the size of the piece and whichever line is used, the increase is always 1.",
+          "The bar begins as 1 piece and must end as 48.",
+          "So the count must climb from 1 to 48, an increase of 48 − 1 = 47.",
+          "Since each move adds exactly 1 piece, exactly 47 moves are required.",
+          "This argument supplies both bounds at once. Lower bound: no move adds more than 1 piece, so fewer than 47 moves cannot reach 48 pieces. Upper bound: any way of fully separating the bar uses exactly 47 moves.",
+          "So the answer is 47, and every method takes the same number — rows first, columns first, or entirely at random, all take 47, so there is no optimal strategy to find.",
+          "Check on small cases: a 2 × 2 bar of 4 squares snaps into two strips in 1 move and then each strip in 1 more, 3 moves in total, equal to 4 − 1. A 1 × 3 bar takes 2 snaps for 3 pieces, equal to 3 − 1. Note the answer depends only on the total number of squares and not on the 6 × 8 shape — a 3 × 16 bar also has 48 squares and likewise needs 47 snaps."
+        ],
+        "ja": [
+          "直感的には「まず横に何回か、次に縦に何回か割る」と数えたくなりますが、**重ねて割れないため横に割った後は各帯を個別に割る必要があり**、計算が煩雑になるうえ、割り方によって回数が違うようにも見えます。",
+          "**そこで不変量を使います：「かたまりの個数」の変化に注目します。**",
+          "**1 回の操作は 1 つのかたまりを 2 つにするので、総数はちょうど 1 増えます**——大きいかたまりでも小さいかたまりでも、どの溝で割っても、増加は常に 1 です。",
+          "最初は板全体で 1 個、最後は 48 個にする必要があります。",
+          "したがって個数は 1 から 48 へ、合計 48 − 1 = 47 だけ増えなければなりません。",
+          "**1 回で必ず 1 個増えるので、必要な操作回数はちょうど 47 回**です。",
+          "**この議論は上界と下界を同時に与えます。**下界：どう割っても 1 回に増えるのは高々 1 個なので、47 回未満で 48 個には届きません。上界：完全に分ける任意の方法がちょうど 47 回を使います。",
+          "したがって答えは 47 回であり、**どんな割り方でも回数は同じ**です——横が先でも縦が先でも、でたらめに割っても 47 回で、「最適戦略」というものは存在しません。",
+          "検算：小さい例で確認します。2 × 2 = 4 個の板：まず 2 本の帯に割り（1 回）、各帯を割る（2 回）で計 3 回 = 4 − 1 ✓。1 × 3 の板：2 回で 3 個 = 3 − 1 ✓。**答えは正方形の総数だけで決まり、6 × 8 という形には依りません**——3 × 16 も 48 個なので同じく 47 回です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "47"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "掰巧克力的不變量：每次操作使塊數恰好加一，故次數固定為總塊數減一，與掰法無關",
+        "notes": "設計依據：詳解以「每次恰增一塊」的不變量同時建立上界與下界，說明不存在最佳策略；並以 2 × 2 與 1 × 3 兩個小例子核對，指出答案只依總塊數而與 6 × 8 的形狀無關（3 × 16 亦為 47）。答案 47 已由不變量論證與小例子驗算獨立確認。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（巧克力的掰法）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "邏輯推理",
+        "topicCode": "logic",
+        "subtopic": "巧克力的掰法",
+        "subtopicCode": "chocolate_bar_breaks"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "logic_grade10_foundation_024",
+      "topic": "logic",
+      "subtopic": "blindfold_coin_split",
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "桌上有 100 枚硬幣，其中恰好有 20 枚是正面朝上、80 枚是反面朝上，但你被蒙住眼睛，摸不出任何一枚硬幣的正反。你要把這 100 枚硬幣分成兩堆，並且可以任意翻轉其中任何一枚硬幣，目標是使兩堆的「正面朝上的硬幣數」相同。若你的做法是「任取其中一堆共 n 枚，並把這 n 枚全部翻面」，求 n 應該是多少才能保證成功。",
+        "zh-Hans": "桌上有 100 枚硬币，其中恰好有 20 枚是正面朝上、80 枚是反面朝上，但你被蒙住眼睛，摸不出任何一枚硬币的正反。你要把这 100 枚硬币分成两堆，并且可以任意翻转其中任何一枚硬币，目标是使两堆的「正面朝上的硬币数」相同。若你的做法是「任取其中一堆共 n 枚，并把这 n 枚全部翻面」，求 n 应该是多少才能保证成功。",
+        "en": "On a table lie 100 coins, exactly 20 showing heads and 80 showing tails, but you are blindfolded and cannot tell any coin's face. You must divide the coins into two piles, and you may flip any coins you like, aiming to make both piles show the same number of heads. If your method is to take one pile of n coins and flip every coin in it, what must n be to guarantee success?",
+        "ja": "テーブルに 100 枚の硬貨があり、ちょうど 20 枚が表、80 枚が裏を向いていますが、あなたは目隠しをされていて、どの硬貨の表裏も判別できません。硬貨を 2 つの山に分け、好きな硬貨を裏返してよく、両方の山の「表を向いた硬貨の枚数」を等しくすることが目標です。方法が「一方の山として n 枚を任意に取り、その n 枚をすべて裏返す」であるとき、成功を保証するには n をいくつにすべきですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 20 枚。",
+        "zh-Hans": "答案是 20 枚。",
+        "en": "The answer is 20.",
+        "ja": "答えは 20 枚です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "**蒙眼表示不能依賴任何觀察，必須找出一個「不論怎麼分都成立」的做法。**先設一個未知數把情況寫下來。",
+          "假設取出的那一堆有 n 枚，其中**恰好有 k 枚是正面**。因為看不見，k 是多少完全不受控制，可能是 0 到 n 之間的任何值。",
+          "另一堆的正面數就是 20 − k（因為總共 20 枚正面）。",
+          "**現在把取出的那 n 枚全部翻面。**原本正面的 k 枚變成反面，原本反面的 n − k 枚變成正面。",
+          "所以翻面後，這一堆的正面數變成 **n − k**。",
+          "要讓兩堆的正面數相同，需要 n − k = 20 − k。",
+          "**注意 k 在等式兩邊會直接消掉**，剩下 n = 20。**這正是關鍵——只要 n 取 20，等式就與 k 無關，不論摸到幾枚正面都必定成立。**",
+          "所以做法是：任意取 20 枚成一堆，把這 20 枚全部翻面，兩堆的正面數就必定相同。答案是 n = 20。",
+          "驗算：舉幾個 k 的例子核對。若 20 枚中摸到 k = 0 枚正面：翻面後這堆有 20 − 0 = 20 枚正面，另一堆有 20 − 0 = 20 枚 ✓ 相同。若 k = 7：翻面後這堆有 20 − 7 = 13 枚，另一堆有 20 − 7 = 13 枚 ✓。若 k = 20（全是正面）：翻面後這堆有 0 枚，另一堆有 0 枚 ✓。",
+          "程式另以 2000 次隨機排列測試，每次都任取 20 枚並全部翻面，**兩堆正面數全部相同，沒有任何反例** ✓。**注意 n 要取的是「正面的總數 20」而不是「硬幣總數的一半 50」**——後者完全不能保證成功。"
+        ],
+        "zh-Hans": [
+          "**蒙眼表示不能依赖任何观察，必须找出一个「不论怎么分都成立」的做法。**先设一个未知数把情况写下来。",
+          "假设取出的那一堆有 n 枚，其中**恰好有 k 枚是正面**。因为看不见，k 是多少完全不受控制，可能是 0 到 n 之间的任何值。",
+          "另一堆的正面数就是 20 − k（因为总共 20 枚正面）。",
+          "**现在把取出的那 n 枚全部翻面。**原本正面的 k 枚变成反面，原本反面的 n − k 枚变成正面。",
+          "所以翻面后，这一堆的正面数变成 **n − k**。",
+          "要让两堆的正面数相同，需要 n − k = 20 − k。",
+          "**注意 k 在等式两边会直接消掉**，剩下 n = 20。**这正是关键——只要 n 取 20，等式就与 k 无关，不论摸到几枚正面都必定成立。**",
+          "所以做法是：任意取 20 枚成一堆，把这 20 枚全部翻面，两堆的正面数就必定相同。答案是 n = 20。",
+          "验算：举几个 k 的例子核对。若 20 枚中摸到 k = 0 枚正面：翻面后这堆有 20 − 0 = 20 枚正面，另一堆有 20 − 0 = 20 枚 ✓ 相同。若 k = 7：翻面后这堆有 20 − 7 = 13 枚，另一堆有 20 − 7 = 13 枚 ✓。若 k = 20（全是正面）：翻面后这堆有 0 枚，另一堆有 0 枚 ✓。",
+          "程序另以 2000 次随机排列测试，每次都任取 20 枚并全部翻面，**两堆正面数全部相同，没有任何反例** ✓。**注意 n 要取的是「正面的总数 20」而不是「硬币总数的一半 50」**——后者完全不能保证成功。"
+        ],
+        "en": [
+          "Being blindfolded means no observation can be relied on, so a method is needed that works no matter how the coins fall. Set up an unknown and write the situation down.",
+          "Suppose the pile taken has n coins, of which exactly k show heads. Since nothing can be seen, k is entirely beyond control and may be anything from 0 to n.",
+          "The other pile then shows 20 − k heads, since 20 heads exist altogether.",
+          "Now flip every coin in the pile of n. The k heads become tails and the n − k tails become heads.",
+          "So after flipping, that pile shows n − k heads.",
+          "Equal head counts require n − k = 20 − k.",
+          "Note that k cancels from both sides, leaving n = 20. That is the crux — with n equal to 20 the equation no longer involves k, so it holds however many heads happened to be picked up.",
+          "So the method is to take any 20 coins as one pile and flip all of them, whereupon the two piles must show equal numbers of heads. The answer is n = 20.",
+          "Check with sample values of k. With k = 0 heads among the 20, flipping gives that pile 20 − 0 = 20 heads and the other 20 − 0 = 20, equal. With k = 7, flipping gives 20 − 7 = 13 against 20 − 7 = 13, equal. With k = 20, all heads, flipping gives 0 against 0, equal.",
+          "A program also ran 2000 random arrangements, each time taking 20 coins and flipping them all, and the two piles matched every time with no counterexample. Note that n must be the total number of heads, 20, not half the coins, 50 — the latter guarantees nothing."
+        ],
+        "ja": [
+          "**目隠しとは、いかなる観察にも頼れないということです。**どう分かれても成り立つ方法を見つける必要があります。まず未知数を置いて状況を書き下します。",
+          "取り出した山が n 枚で、そのうち**ちょうど k 枚が表**だとします。見えないので k はまったく制御できず、0 から n までのどの値にもなりえます。",
+          "もう一方の山の表の枚数は 20 − k です（表は全部で 20 枚だから）。",
+          "**次に取り出した n 枚をすべて裏返します。**表だった k 枚は裏になり、裏だった n − k 枚は表になります。",
+          "したがって裏返した後、この山の表は **n − k** 枚になります。",
+          "両方の山の表を等しくするには n − k = 20 − k が必要です。",
+          "**k は両辺で打ち消し合い**、n = 20 が残ります。**これが要点です——n を 20 にすれば等式は k を含まなくなり、表を何枚つかんでいようと必ず成り立ちます。**",
+          "したがって方法は「任意に 20 枚を取って 1 つの山とし、その 20 枚をすべて裏返す」ことで、両方の山の表の枚数は必ず等しくなります。答えは n = 20 です。",
+          "検算：k のいくつかの値で確認します。20 枚中 k = 0 枚が表なら、裏返し後この山は 20 − 0 = 20 枚、他方は 20 − 0 = 20 枚 ✓。k = 7 なら 20 − 7 = 13 枚と 13 枚 ✓。k = 20（すべて表）なら 0 枚と 0 枚 ✓。",
+          "プログラムでも 2000 通りのランダムな配置を試し、毎回 20 枚を取って裏返したところ、**両方の山の表の枚数は常に一致し、反例はありませんでした** ✓。**n は「表の総数 20」であって「硬貨の半分の 50」ではない**点に注意します。後者では成功を保証できません。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "20"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "蒙眼分硬幣：取出的堆數取為正面總數，翻面後未知數 k 從等式兩邊消去，使結果與實際摸到的正面數無關",
+        "notes": "設計依據：詳解以未知數 k 列式並展示 k 如何消去，說明為何 n 必須等於正面總數 20 而非硬幣半數 50；另以 k = 0、7、20 三個極端值代入核對。答案 20 已用代數推導與 2000 次隨機排列模擬獨立驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（蒙眼分硬幣）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "邏輯推理",
+        "topicCode": "logic",
+        "subtopic": "蒙眼分硬幣",
+        "subtopicCode": "blindfold_coin_split"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "logic_grade10_foundation_025",
+      "topic": "logic",
+      "subtopic": "toasting_min_time",
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一個平底鍋一次最多只能放兩片吐司。每一片吐司有兩面，每一面都需要煎滿 1 分鐘才算煎好。吐司可以隨時取出、翻面或放回。若要把 3 片吐司的兩面都煎好，求最短需要幾分鐘。",
+        "zh-Hans": "一个平底锅一次最多只能放两片吐司。每一片吐司有两面，每一面都需要煎满 1 分钟才算煎好。吐司可以随时取出、翻面或放回。若要把 3 片吐司的两面都煎好，求最短需要几分钟。",
+        "en": "A pan holds at most two slices of bread at a time. Each slice has two sides and each side needs a full minute in the pan to be done. Slices may be removed, turned or returned at any moment. What is the least time needed to toast both sides of 3 slices?",
+        "ja": "フライパンには一度に最大 2 枚のパンしか置けません。各パンには 2 つの面があり、それぞれ 1 分間焼く必要があります。パンはいつでも取り出す・裏返す・戻すことができます。3 枚のパンの両面を焼き上げるのに最短で何分かかりますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 3 分鐘。",
+        "zh-Hans": "答案是 3 分钟。",
+        "en": "The answer is 3.",
+        "ja": "答えは 3 分です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "直覺的做法是「先煎兩片（正反各 1 分鐘，共 2 分鐘），再煎第三片（又 2 分鐘）」，合計 4 分鐘。**但這樣煎第三片時鍋子有一半是空的，很浪費。**",
+          "**先算一個下界，看看理論上最快可能是多少。**",
+          "3 片吐司共有 3 × 2 = **6 個面**需要煎，每個面各需 1 分鐘。",
+          "而鍋子一次最多放 2 片，**所以每一分鐘最多只能煎好 2 個面**。",
+          "6 個面 ÷ 每分鐘 2 個面 = **3 分鐘**。所以無論如何都不可能少於 3 分鐘。",
+          "**接著要找出真的能在 3 分鐘完成的排程**——下界能不能達到並不是理所當然的，必須實際給出方法。把三片標成 A、B、C，兩面各標為正、反。",
+          "**第 1 分鐘**：煎 A 正、B 正。**第 2 分鐘**：把 B 取出（B 正已好、反面待煎），放入 C 正，同時把 A 翻面煎 A 反——這一分鐘煎的是 A 反、C 正。",
+          "**第 3 分鐘**：A 已完成兩面，取出；放入 B 煎它的反面，並把 C 翻面煎 C 反——這一分鐘煎的是 B 反、C 反。",
+          "清點：A 正、A 反、B 正、B 反、C 正、C 反，六個面全部各煎滿 1 分鐘 ✓，而且每一分鐘鍋子都放滿 2 片，沒有浪費。",
+          "**下界 3 分鐘可以達到，所以答案就是 3 分鐘。**關鍵的一步是**第 2 分鐘把只煎好一面的 B 先取出**——一般人會直覺地把一片煎完再換下一片，但那會讓第三片落單、鍋子空一半。**允許「煎到一半先取出」才是省下那 1 分鐘的原因。**"
+        ],
+        "zh-Hans": [
+          "直觉的做法是「先煎两片（正反各 1 分钟，共 2 分钟），再煎第三片（又 2 分钟）」，合计 4 分钟。**但这样煎第三片时锅子有一半是空的，很浪费。**",
+          "**先算一个下界，看看理论上最快可能是多少。**",
+          "3 片吐司共有 3 × 2 = **6 个面**需要煎，每个面各需 1 分钟。",
+          "而锅子一次最多放 2 片，**所以每一分钟最多只能煎好 2 个面**。",
+          "6 个面 ÷ 每分钟 2 个面 = **3 分钟**。所以无论如何都不可能少于 3 分钟。",
+          "**接着要找出真的能在 3 分钟完成的排程**——下界能不能达到并不是理所当然的，必须实际给出方法。把三片标成 A、B、C，两面各标为正、反。",
+          "**第 1 分钟**：煎 A 正、B 正。**第 2 分钟**：把 B 取出（B 正已好、反面待煎），放入 C 正，同时把 A 翻面煎 A 反——这一分钟煎的是 A 反、C 正。",
+          "**第 3 分钟**：A 已完成两面，取出；放入 B 煎它的反面，并把 C 翻面煎 C 反——这一分钟煎的是 B 反、C 反。",
+          "清点：A 正、A 反、B 正、B 反、C 正、C 反，六个面全部各煎满 1 分钟 ✓，而且每一分钟锅子都放满 2 片，没有浪费。",
+          "**下界 3 分钟可以达到，所以答案就是 3 分钟。**关键的一步是**第 2 分钟把只煎好一面的 B 先取出**——一般人会直觉地把一片煎完再换下一片，但那会让第三片落单、锅子空一半。**允许「煎到一半先取出」才是省下那 1 分钟的原因。**"
+        ],
+        "en": [
+          "The instinctive method toasts two slices fully, one minute per side for two minutes, then the third slice for another two, totalling four minutes. But that leaves the pan half empty while the third slice cooks, which is wasteful.",
+          "Compute a lower bound first, to see what is theoretically possible.",
+          "Three slices have 3 × 2 = 6 sides to toast, each needing one minute.",
+          "The pan holds at most 2 slices, so at most 2 sides can be toasted per minute.",
+          "Six sides divided by two per minute gives 3 minutes, so nothing can finish sooner.",
+          "Now a schedule achieving 3 minutes must actually be found — a lower bound need not be attainable, so a concrete method is required. Label the slices A, B and C, with sides called front and back.",
+          "Minute 1: toast A-front and B-front. Minute 2: remove B, whose front is done and back is not, insert C-front, and turn A to toast A-back — so this minute toasts A-back and C-front.",
+          "Minute 3: A is finished on both sides and comes out; B returns to toast its back, and C is turned for C-back — so this minute toasts B-back and C-back.",
+          "Tallying: A-front, A-back, B-front, B-back, C-front and C-back have each had their full minute, and the pan held two slices every minute with nothing wasted.",
+          "The lower bound of 3 minutes is achieved, so the answer is 3. The pivotal move is removing B in minute 2 while only one of its sides is done — the instinct is to finish one slice before starting the next, but that strands the third slice and leaves the pan half empty. Allowing a half-done slice to come out early is exactly what saves the minute."
+        ],
+        "ja": [
+          "直感的な方法は「まず 2 枚を焼き（表裏 1 分ずつで 2 分）、次に 3 枚目を焼く（さらに 2 分）」で計 4 分です。**しかしこれでは 3 枚目を焼く間フライパンが半分空いており無駄があります。**",
+          "**まず下界を求め、理論上どこまで速くできるかを見ます。**",
+          "3 枚のパンには 3 × 2 = **6 つの面**があり、各面に 1 分ずつ必要です。",
+          "フライパンには一度に 2 枚までなので、**1 分間に焼き上がる面は最大 2 つ**です。",
+          "6 面 ÷ 毎分 2 面 = **3 分**。したがってどうやっても 3 分未満にはなりません。",
+          "**次に本当に 3 分で終わる段取りを見つけます**——下界が達成できるとは限らないので、実際に方法を示す必要があります。3 枚を A、B、C とし、両面を表・裏と呼びます。",
+          "**1 分目**：A の表と B の表を焼きます。**2 分目**：B を取り出し（表は完了、裏は未着手）、C の表を入れ、同時に A を裏返して A の裏を焼きます——この 1 分で焼くのは A の裏と C の表です。",
+          "**3 分目**：A は両面完了なので取り出し、B を戻してその裏を焼き、C を裏返して C の裏を焼きます——この 1 分で焼くのは B の裏と C の裏です。",
+          "数え上げると A 表・A 裏・B 表・B 裏・C 表・C 裏の 6 面すべてが 1 分ずつ焼けており ✓、しかも毎分フライパンには 2 枚が入っていて無駄がありません。",
+          "**下界の 3 分が達成できるので答えは 3 分です。**要となる一手は **2 分目で片面しか焼けていない B を先に取り出す**ことです——1 枚を焼き終えてから次へ、と考えるのが自然ですが、それでは 3 枚目が余ってフライパンが半分空きます。**途中で取り出すことを許すこと**が、その 1 分を節約する理由です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "3"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "煎吐司排程：以「面數 ÷ 每分鐘可煎面數」得下界 3 分鐘，再具體給出達成該下界的排程",
+        "notes": "設計依據：詳解先建立下界再構造可達的排程，說明下界未必可達故兩步缺一不可；並指出關鍵在允許「只煎好一面就先取出」，對照直覺做法的 4 分鐘。答案 3 已由下界論證與具體排程的逐分鐘清點驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（煎吐司的最短時間）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "邏輯推理",
+        "topicCode": "logic",
+        "subtopic": "煎吐司的最短時間",
+        "subtopicCode": "toasting_min_time"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "logic_grade10_foundation_026",
+      "topic": "logic",
+      "subtopic": "handshake_hostess_deduction",
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "五對夫妻（含主人夫婦，共 10 人）參加一場宴會。任兩人至多握手一次，而且沒有人與自己的配偶握手。宴會結束時，主人向在場的其他 9 個人（包含自己的配偶）詢問各握了幾次手，得到的 9 個答案彼此都不相同。求主人的配偶握了幾次手。",
+        "zh-Hans": "五对夫妻（含主人夫妇，共 10 人）参加一场宴会。任两人至多握手一次，而且没有人与自己的配偶握手。宴会结束时，主人向在场的其他 9 个人（包含自己的配偶）询问各握了几次手，得到的 9 个答案彼此都不相同。求主人的配偶握了几次手。",
+        "en": "Five couples, ten people including the host and the host's spouse, attend a party. Any two people shake hands at most once, and nobody shakes hands with their own spouse. At the end the host asks the other 9 people, including their own spouse, how many hands each shook, and the 9 answers are all different. How many hands did the host's spouse shake?",
+        "ja": "5 組の夫婦（主催者夫妻を含む計 10 人）がパーティーに出席します。どの 2 人も握手は多くとも 1 回で、誰も自分の配偶者とは握手しません。終わりに主催者が他の 9 人（自分の配偶者を含む）に何回握手したかを尋ねると、9 つの答えはすべて異なっていました。主催者の配偶者は何回握手しましたか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 4 次。",
+        "zh-Hans": "答案是 4 次。",
+        "en": "The answer is 4.",
+        "ja": "答えは 4 回です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "**先確定答案的可能範圍。**一個人最多能與 8 個人握手（10 人扣掉自己與配偶），最少 0 次，所以每個答案都落在 0 到 8 之間。",
+          "主人得到 9 個**互不相同**的答案，而 0 到 8 恰好也是 9 個數——**所以這 9 個答案必定就是 0、1、2、⋯、8 各出現一次**，一個不多一個不少。",
+          "**現在從最極端的兩個人下手。**設答案 8 的人是甲。甲與所有非配偶的 8 人都握了手。",
+          "設答案 0 的人是乙，乙沒和任何人握手。既然甲和所有非配偶的人都握了手，而乙沒和任何人握手，**甲與乙必定是夫妻**——否則甲會和乙握手，與乙的 0 矛盾。所以甲、乙是一對，配成 (8, 0)。",
+          "**把這對夫妻拿掉，對剩下的人重複同樣的推理。**扣掉甲、乙後，其餘每個人的握手數都要減 1（因為都和甲握過手、都沒和乙握過手）。",
+          "於是剩下的 8 人中，原本答案 7 的人現在相當於最高、原本答案 1 的人現在相當於 0——**同樣的推理給出 (7, 1) 也是一對夫妻**。",
+          "繼續這個過程：**(6, 2) 是一對、(5, 3) 是一對**。到此已配出四對夫妻：(8,0)、(7,1)、(6,2)、(5,3)。",
+          "**剩下的答案只有 4，而剩下沒被配對的人只有主人與主人的配偶。**主人沒有回答（他是提問的人），所以答案 4 必定屬於主人的配偶。",
+          "驗算：程式依這個結構實際建構出一組握手情形——各人握手數為主人 4、配偶 4，其餘八人分別是 8、0、7、1、6、2、5、3。檢查主人以外 9 人的答案集合恰是 {0,1,2,3,4,5,6,7,8} ✓ 互不相同，且沒有人與配偶握手 ✓。**附帶一提，主人自己也握了 4 次**，與配偶相同——但題目問的是配偶，答案是 4。"
+        ],
+        "zh-Hans": [
+          "**先确定答案的可能范围。**一个人最多能与 8 个人握手（10 人扣掉自己与配偶），最少 0 次，所以每个答案都落在 0 到 8 之间。",
+          "主人得到 9 个**互不相同**的答案，而 0 到 8 恰好也是 9 个数——**所以这 9 个答案必定就是 0、1、2、⋯、8 各出现一次**，一个不多一个不少。",
+          "**现在从最极端的两个人下手。**设答案 8 的人是甲。甲与所有非配偶的 8 人都握了手。",
+          "设答案 0 的人是乙，乙没和任何人握手。既然甲和所有非配偶的人都握了手，而乙没和任何人握手，**甲与乙必定是夫妻**——否则甲会和乙握手，与乙的 0 矛盾。所以甲、乙是一对，配成 (8, 0)。",
+          "**把这对夫妻拿掉，对剩下的人重复同样的推理。**扣掉甲、乙后，其余每个人的握手数都要减 1（因为都和甲握过手、都没和乙握过手）。",
+          "于是剩下的 8 人中，原本答案 7 的人现在相当于最高、原本答案 1 的人现在相当于 0——**同样的推理给出 (7, 1) 也是一对夫妻**。",
+          "继续这个过程：**(6, 2) 是一对、(5, 3) 是一对**。到此已配出四对夫妻：(8,0)、(7,1)、(6,2)、(5,3)。",
+          "**剩下的答案只有 4，而剩下没被配对的人只有主人与主人的配偶。**主人没有回答（他是提问的人），所以答案 4 必定属于主人的配偶。",
+          "验算：程序依这个结构实际建构出一组握手情形——各人握手数为主人 4、配偶 4，其余八人分别是 8、0、7、1、6、2、5、3。检查主人以外 9 人的答案集合恰是 {0,1,2,3,4,5,6,7,8} ✓ 互不相同，且没有人与配偶握手 ✓。**附带一提，主人自己也握了 4 次**，与配偶相同——但题目问的是配偶，答案是 4。"
+        ],
+        "en": [
+          "Fix the possible range first. A person can shake at most 8 hands, the 10 people less themselves and their spouse, and at least 0, so every answer lies between 0 and 8.",
+          "The host receives 9 different answers, and 0 through 8 is exactly 9 numbers — so the answers must be 0, 1, 2, ..., 8, each occurring once, with none missing or repeated.",
+          "Start from the two extremes. Let the person answering 8 be P, who shook hands with all 8 non-spouses.",
+          "Let the person answering 0 be Q, who shook nobody's hand. Since P shook every non-spouse's hand while Q shook none, P and Q must be married — otherwise P would have shaken Q's hand, contradicting Q's zero. So they pair as (8, 0).",
+          "Remove that couple and repeat the reasoning on the rest. With P and Q gone, everyone else's count drops by 1, since all shook P's hand and none shook Q's.",
+          "Among the remaining 8, the person who answered 7 now stands highest and the one who answered 1 now stands at zero — so the same argument makes (7, 1) a couple.",
+          "Continuing, (6, 2) is a couple and (5, 3) is a couple, giving four couples: (8,0), (7,1), (6,2) and (5,3).",
+          "The only answer left is 4, and the only unpaired people are the host and the host's spouse. The host gave no answer, being the one asking, so the 4 must belong to the host's spouse.",
+          "Check: constructing such a party explicitly gives counts of 4 for the host, 4 for the spouse, and 8, 0, 7, 1, 6, 2, 5, 3 for the others. The 9 answers other than the host's form exactly {0,1,2,3,4,5,6,7,8}, all different, and nobody shook their spouse's hand. Incidentally the host also shook 4 hands, the same as the spouse — but the question asks about the spouse, and the answer is 4."
+        ],
+        "ja": [
+          "**まず答えの範囲を確定します。**1 人が握手できるのは最大 8 人（10 人から自分と配偶者を除く）、最小 0 回なので、答えはすべて 0 から 8 の間です。",
+          "主催者は**互いに異なる** 9 つの答えを得ており、0 から 8 もちょうど 9 個の数です——**したがって 9 つの答えは 0、1、2、⋯、8 が 1 回ずつ**であり、過不足はありません。",
+          "**両極端の 2 人から始めます。**8 と答えた人を P とすると、P は配偶者以外の 8 人全員と握手しています。",
+          "0 と答えた人を Q とすると、Q は誰とも握手していません。P が配偶者以外の全員と握手し、Q が誰とも握手していない以上、**P と Q は夫婦でなければなりません**——さもなければ P は Q と握手し、Q の 0 と矛盾します。よって (8, 0) が 1 組です。",
+          "**この夫婦を除き、残りに同じ推論を繰り返します。**P と Q を除くと、他の全員の回数は 1 ずつ減ります（全員 P と握手し、誰も Q とは握手していないため）。",
+          "すると残る 8 人のうち、7 と答えた人が今度は最大、1 と答えた人が今度は 0 に相当し——**同じ推論から (7, 1) も夫婦**と分かります。",
+          "続けると **(6, 2) が 1 組、(5, 3) が 1 組**。ここまでで 4 組の夫婦 (8,0)、(7,1)、(6,2)、(5,3) が定まります。",
+          "**残る答えは 4 だけで、組にされていないのは主催者とその配偶者だけ**です。主催者は尋ねる側で答えていないので、4 は主催者の配偶者のものです。",
+          "検算：この構造に沿って実際にパーティーを構成すると、握手数は主催者 4、配偶者 4、他の 8 人が 8、0、7、1、6、2、5、3 となります。主催者以外の 9 人の答えの集合はちょうど {0,1,2,3,4,5,6,7,8} ✓ ですべて異なり、配偶者どうしの握手もありません ✓。**なお主催者自身も 4 回**で配偶者と同じですが、問われているのは配偶者なので答えは 4 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "4"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "宴會握手推理：9 個相異答案必為 0 到 8，由最大與最小配成夫妻並遞迴剝除，最後剩下的數屬於主人的配偶",
+        "notes": "設計依據：詳解先論證 9 個相異答案必然是 0 到 8 的全部，再說明「握 8 次者與握 0 次者必為夫妻」的理由，並以剝除後全體減一的觀察建立遞迴；最後以實際建構出的握手情形核對答案集合與無配偶握手兩項條件。答案 4 已用符合條件的具體建構獨立驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（宴會上的握手）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "邏輯推理",
+        "topicCode": "logic",
+        "subtopic": "宴會上的握手",
+        "subtopicCode": "handshake_hostess_deduction"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "logic_grade10_foundation_027",
+      "topic": "logic",
+      "subtopic": "ferry_meeting_count",
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "兩個港口之間有渡輪對開。每天每個整點，兩個港口都各有一艘渡輪同時出發駛向對方，單程航行時間固定是 7 小時。今天正午 12 點你從甲港搭上一艘渡輪前往乙港。求在整段航行途中（不含在甲港出發時與在乙港靠岸時各遇到的那一艘），你會在海上與幾艘對向的渡輪相遇。",
+        "zh-Hans": "两个港口之间有渡轮对开。每天每个整点，两个港口都各有一艘渡轮同时出发驶向对方，单程航行时间固定是 7 小时。今天正午 12 点你从甲港搭上一艘渡轮前往乙港。求在整段航行途中（不含在甲港出发时与在乙港靠岸时各遇到的那一艘），你会在海上与几艘对向的渡轮相遇。",
+        "en": "Ferries run between two ports. On every hour, each port sends out one ferry towards the other, and a one-way crossing always takes 7 hours. Today at noon you board a ferry at port A bound for port B. During the crossing itself, excluding the one ferry met at departure in port A and the one met on arrival at port B, how many oncoming ferries do you meet at sea?",
+        "ja": "2 つの港の間をフェリーが行き来しています。毎日の毎正時に、どちらの港からも 1 隻ずつ相手の港へ向けて同時に出航し、片道の所要時間は常に 7 時間です。今日の正午 12 時、あなたは甲港でフェリーに乗り乙港へ向かいます。航海の途中（甲港の出航時と乙港の入港時に出会う各 1 隻は除く）、海上で何隻の対向フェリーと出会いますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 13 艘。",
+        "zh-Hans": "答案是 13 艘。",
+        "en": "The answer is 13.",
+        "ja": "答えは 13 隻です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "**最容易犯的錯是只想「航行 7 小時，所以遇到 7 艘」——這忽略了在你出發之前就已經在海上的那些船。**要把在海上的時間區間畫出來。",
+          "把你出發的正午 12 點記為時刻 0，你的航程是從時刻 0 到時刻 7。",
+          "**現在看對向的船。**從乙港在時刻 t 出發的船，會在海上待到 t + 7，也就是它在海上的時間區間是從 t 到 t + 7。",
+          "**你會與某艘船在海上相遇，當且僅當你們兩個的「在海上的時間區間」有重疊。**你的區間是 0 到 7，對方是 t 到 t + 7。",
+          "兩個區間有重疊的條件是：對方出發時你還沒到岸（t < 7），而且你出發時對方還沒到岸（t + 7 > 0，即 t > −7）。",
+          "所以條件是 **−7 < t < 7**。由於船每個整點出發，t 是整數，符合的 t 是 −6、−5、−4、−3、−2、−1、0、1、2、3、4、5、6。",
+          "數一數：從 −6 到 6 共有 6 + 6 + 1 = **13 個**整數。所以在海上會遇到 13 艘。",
+          "**至於 t = −7 與 t = 7 這兩艘**：t = −7 的船恰在你出發的那一刻抵達甲港，t = 7 的船恰在你靠岸的那一刻從乙港出發——它們都只在港口與你「相遇」，題目已明確排除，所以不計入。若把這兩艘也算進去，答案會是 15 艘。",
+          "驗算：程式列出所有出發時刻 t，逐一檢查區間 (t, t+7) 與 (0, 7) 是否有交集，符合的正是 −6 到 6 這 13 個 ✓。",
+          "**這題的關鍵是意識到「你出發時，海上已經有 6 艘對向的船正在航行」**——它們分別在 −6 到 −1 出發，都還沒抵達甲港。加上你航行期間出發的 7 艘（t = 0 到 6），6 + 7 = 13 ✓，與區間算法一致。"
+        ],
+        "zh-Hans": [
+          "**最容易犯的错是只想「航行 7 小时，所以遇到 7 艘」——这忽略了在你出发之前就已经在海上的那些船。**要把在海上的时间区间画出来。",
+          "把你出发的正午 12 点记为时刻 0，你的航程是从时刻 0 到时刻 7。",
+          "**现在看对向的船。**从乙港在时刻 t 出发的船，会在海上待到 t + 7，也就是它在海上的时间区间是从 t 到 t + 7。",
+          "**你会与某艘船在海上相遇，当且仅当你们两个的「在海上的时间区间」有重叠。**你的区间是 0 到 7，对方是 t 到 t + 7。",
+          "两个区间有重叠的条件是：对方出发时你还没到岸（t < 7），而且你出发时对方还没到岸（t + 7 > 0，即 t > −7）。",
+          "所以条件是 **−7 < t < 7**。由于船每个整点出发，t 是整数，符合的 t 是 −6、−5、−4、−3、−2、−1、0、1、2、3、4、5、6。",
+          "数一数：从 −6 到 6 共有 6 + 6 + 1 = **13 个**整数。所以在海上会遇到 13 艘。",
+          "**至于 t = −7 与 t = 7 这两艘**：t = −7 的船恰在你出发的那一刻抵达甲港，t = 7 的船恰在你靠岸的那一刻从乙港出发——它们都只在港口与你「相遇」，题目已明确排除，所以不计入。若把这两艘也算进去，答案会是 15 艘。",
+          "验算：程序列出所有出发时刻 t，逐一检查区间 (t, t+7) 与 (0, 7) 是否有交集，符合的正是 −6 到 6 这 13 个 ✓。",
+          "**这题的关键是意识到「你出发时，海上已经有 6 艘对向的船正在航行」**——它们分别在 −6 到 −1 出发，都还没抵达甲港。加上你航行期间出发的 7 艘（t = 0 到 6），6 + 7 = 13 ✓，与区间算法一致。"
+        ],
+        "en": [
+          "The easiest mistake is to reason that a 7-hour crossing meets 7 ferries, which ignores the ferries already at sea before departure. Draw the time intervals spent at sea.",
+          "Call your noon departure time 0, so your crossing runs from time 0 to time 7.",
+          "Now the oncoming ferries. One leaving port B at time t stays at sea until t + 7, so its interval at sea runs from t to t + 7.",
+          "You meet a ferry at sea exactly when your intervals at sea overlap. Yours is 0 to 7 and theirs is t to t + 7.",
+          "Overlap requires that they depart before you land, so t < 7, and that they have not landed before you depart, so t + 7 > 0, that is t > −7.",
+          "The condition is therefore −7 < t < 7. Since ferries leave on the hour, t is an integer, and the qualifying values are −6, −5, −4, −3, −2, −1, 0, 1, 2, 3, 4, 5 and 6.",
+          "Counting: from −6 to 6 there are 6 + 6 + 1 = 13 integers, so 13 ferries are met at sea.",
+          "As for t = −7 and t = 7: the first arrives at port A at the very moment you depart and the second leaves port B at the very moment you land, so both meet you only in harbour and the problem excludes them. Counting them too would give 15.",
+          "Check: testing every departure time t for overlap between (t, t+7) and (0, 7) yields exactly the 13 values from −6 to 6.",
+          "The key realisation is that 6 oncoming ferries are already at sea when you depart, having left at times −6 through −1 without yet reaching port A. Adding the 7 that leave during your crossing, at times 0 through 6, gives 6 + 7 = 13, matching the interval computation."
+        ],
+        "ja": [
+          "**最も陥りやすい誤りは「7 時間の航海だから 7 隻」と考えることで——出航前からすでに海上にいる船を見落としています。**海上にいる時間の区間を描きます。",
+          "正午 12 時の出航を時刻 0 とすると、あなたの航海は時刻 0 から 7 までです。",
+          "**次に対向の船を見ます。**乙港を時刻 t に出た船は t + 7 まで海上にいるので、海上にいる区間は t から t + 7 です。",
+          "**海上で出会うのは、互いの「海上にいる区間」が重なるとき、かつそのときに限ります。**あなたは 0 から 7、相手は t から t + 7 です。",
+          "重なる条件は、相手が出航するのがあなたの入港前であること（t < 7）、そしてあなたの出航時に相手がまだ入港していないこと（t + 7 > 0、すなわち t > −7）です。",
+          "したがって条件は **−7 < t < 7**。船は毎正時に出るので t は整数で、該当するのは −6、−5、−4、−3、−2、−1、0、1、2、3、4、5、6 です。",
+          "数えると −6 から 6 まで 6 + 6 + 1 = **13 個**。よって海上で 13 隻と出会います。",
+          "**t = −7 と t = 7 の 2 隻について**：前者はあなたの出航の瞬間に甲港へ到着し、後者はあなたの入港の瞬間に乙港を出ます——いずれも港でしか「出会わない」ため問題文が明示的に除いています。これらも数えれば答えは 15 隻になります。",
+          "検算：すべての出航時刻 t について区間 (t, t+7) と (0, 7) の交わりを調べると、該当するのは −6 から 6 の 13 個ちょうどです ✓。",
+          "**要点は「出航時にすでに 6 隻の対向船が海上にいる」と気づくこと**です——時刻 −6 から −1 に出航し、まだ甲港に着いていない船です。航海中に出航する 7 隻（t = 0〜6）を加えると 6 + 7 = 13 ✓ で区間による計算と一致します。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "13"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "渡輪相遇：以「在海上的時間區間是否重疊」判定，需計入出發前已在海上的船而非只算航行時數",
+        "notes": "設計依據：直覺答案 7 忽略了出發時已在海上的船，詳解以時間區間重疊的條件精確導出 −7 < t < 7，並拆解為「已在海上的 6 艘 + 航行期間出發的 7 艘」交叉驗證；題幹明確排除港口相遇的兩艘以消除歧義，詳解並說明含入時為 15。答案 13 已用所有出發時刻的區間交集檢查窮舉獨立驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（海上相遇的船）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "邏輯推理",
+        "topicCode": "logic",
+        "subtopic": "海上相遇的船",
+        "subtopicCode": "ferry_meeting_count"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "logic_grade10_foundation_028",
+      "topic": "logic",
+      "subtopic": "circles_max_regions",
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "在一張很大的紙上畫 4 個圓（半徑可以不同、位置可以任意）。求這 4 個圓最多能把紙面分成幾個區域。",
+        "zh-Hans": "在一张很大的纸上画 4 个圆（半径可以不同、位置可以任意）。求这 4 个圆最多能把纸面分成几个区域。",
+        "en": "Four circles of any radii and positions are drawn on a very large sheet of paper. What is the greatest number of regions into which they can divide the sheet?",
+        "ja": "とても大きな紙に 4 つの円（半径も位置も自由）を描きます。この 4 つの円は紙面を最多でいくつの領域に分けられますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 14 個。",
+        "zh-Hans": "答案是 14 个。",
+        "en": "The answer is 14.",
+        "ja": "答えは 14 個です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "**一個一個加上去，觀察每加一個圓會多出幾個區域。**",
+          "沒有圓時，紙面是 1 個區域。畫第 1 個圓，把紙面分成圓內與圓外，變成 2 個區域（**增加了 1 個**）。",
+          "**現在看關鍵的規律：新畫的圓每與已有的圖形交會一次，就會多切出一塊。**精確地說，若新圓與先前的圓總共有 m 個交點，這 m 個交點會把新圓的圓周切成 m 段弧，而**每一段弧都會把它經過的那個區域一分為二，因此增加 m 個區域**。",
+          "**兩個圓最多相交於 2 點**（超過 2 點就會重合）。所以畫第 n 個圓時，它與前面 n − 1 個圓最多各有 2 個交點，總共最多 2(n − 1) 個交點。",
+          "因此第 n 個圓最多增加 **2(n − 1)** 個區域。",
+          "逐個累加：第 1 個圓增加 1（特例，因為它沒有與任何圓相交，但它自己閉合成一圈，仍切出 1 塊）；第 2 個圓增加 2 × 1 = 2；第 3 個增加 2 × 2 = 4；第 4 個增加 2 × 3 = 6。",
+          "所以總區域數 = 1（原本的紙面）+ 1 + 2 + 4 + 6 = 14 個。",
+          "驗算：把每一步的區域數列出來核對——0 個圓：1；1 個圓：2；2 個圓：4；3 個圓：8；4 個圓：14 ✓。也可以用通式檢驗：n 個圓最多分出 **n² − n + 2** 個區域，代入 n = 4 得 16 − 4 + 2 = 14 ✓ 相符。",
+          "**注意 1、2、4、8 這個開頭很像 2 的次方，但下一項是 14 而不是 16**——這正是本題最容易被直覺誤導的地方。從第 4 個圓起就偏離了倍增的模式，因為新圓與舊圓的交點數受限於「兩圓至多交於 2 點」，增加量只能線性成長。"
+        ],
+        "zh-Hans": [
+          "**一个一个加上去，观察每加一个圆会多出几个区域。**",
+          "没有圆时，纸面是 1 个区域。画第 1 个圆，把纸面分成圆内与圆外，变成 2 个区域（**增加了 1 个**）。",
+          "**现在看关键的规律：新画的圆每与已有的图形交会一次，就会多切出一块。**精确地说，若新圆与先前的圆总共有 m 个交点，这 m 个交点会把新圆的圆周切成 m 段弧，而**每一段弧都会把它经过的那个区域一分为二，因此增加 m 个区域**。",
+          "**两个圆最多相交于 2 点**（超过 2 点就会重合）。所以画第 n 个圆时，它与前面 n − 1 个圆最多各有 2 个交点，总共最多 2(n − 1) 个交点。",
+          "因此第 n 个圆最多增加 **2(n − 1)** 个区域。",
+          "逐个累加：第 1 个圆增加 1（特例，因为它没有与任何圆相交，但它自己闭合成一圈，仍切出 1 块）；第 2 个圆增加 2 × 1 = 2；第 3 个增加 2 × 2 = 4；第 4 个增加 2 × 3 = 6。",
+          "所以总区域数 = 1（原本的纸面）+ 1 + 2 + 4 + 6 = 14 个。",
+          "验算：把每一步的区域数列出来核对——0 个圆：1；1 个圆：2；2 个圆：4；3 个圆：8；4 个圆：14 ✓。也可以用通式检验：n 个圆最多分出 **n² − n + 2** 个区域，代入 n = 4 得 16 − 4 + 2 = 14 ✓ 相符。",
+          "**注意 1、2、4、8 这个开头很像 2 的次方，但下一项是 14 而不是 16**——这正是本题最容易被直觉误导的地方。从第 4 个圆起就偏离了倍增的模式，因为新圆与旧圆的交点数受限于「两圆至多交于 2 点」，增加量只能线性成长。"
+        ],
+        "en": [
+          "Add the circles one at a time and watch how many regions each new circle creates.",
+          "With no circles the sheet is 1 region. The first circle separates inside from outside, giving 2 regions, an increase of 1.",
+          "Now the key pattern: each crossing of the new circle with the existing figure carves off another piece. Precisely, if the new circle meets the earlier ones in m points, those m points cut its circumference into m arcs, and each arc divides the region it passes through into two, adding m regions.",
+          "Two circles meet in at most 2 points, since more would force them to coincide. So the nth circle meets each of the previous n − 1 circles in at most 2 points, giving at most 2(n − 1) intersections.",
+          "Hence the nth circle adds at most 2(n − 1) regions.",
+          "Accumulating: the first circle adds 1, a special case since it meets nothing yet still closes a loop and carves off one piece; the second adds 2 × 1 = 2; the third adds 2 × 2 = 4; the fourth adds 2 × 3 = 6.",
+          "So the total is 1 for the original sheet plus 1 + 2 + 4 + 6, giving 14 regions.",
+          "Check by listing the counts: 0 circles gives 1, one gives 2, two gives 4, three gives 8 and four gives 14. A closed form confirms it: n circles give at most n² − n + 2 regions, and n = 4 yields 16 − 4 + 2 = 14.",
+          "Note that 1, 2, 4, 8 looks like powers of two, yet the next term is 14 rather than 16 — precisely where intuition misleads. The doubling pattern breaks at the fourth circle because intersections are capped by the rule that two circles meet in at most 2 points, so the increments can only grow linearly."
+        ],
+        "ja": [
+          "**1 つずつ描き加え、円を 1 つ増やすごとに領域がいくつ増えるかを見ます。**",
+          "円が 0 個のとき紙面は 1 領域です。1 つ目の円を描くと内側と外側に分かれて 2 領域になります（**1 増加**）。",
+          "**ここで鍵となる規則です：新しい円が既存の図形と交わるたびに、1 つ多く切り分けられます。**正確には、新しい円が既存の円と合計 m 点で交わるなら、その m 点は新しい円の円周を m 本の弧に分け、**各弧が通過する領域を 2 つに分けるので m 個の領域が増えます**。",
+          "**2 つの円が交わるのは最大 2 点**です（それ以上なら重なってしまいます）。したがって n 個目の円は先行する n − 1 個とそれぞれ最大 2 点、合計最大 2(n − 1) 点で交わります。",
+          "よって n 個目の円が増やす領域は最大 **2(n − 1)** 個です。",
+          "順に足します：1 個目は 1 増（特例で、何とも交わりませんが自ら閉じた輪をなすので 1 つ切り出します）、2 個目は 2 × 1 = 2 増、3 個目は 2 × 2 = 4 増、4 個目は 2 × 3 = 6 増。",
+          "したがって総領域数 = 1（もとの紙面）+ 1 + 2 + 4 + 6 = 14 個。",
+          "検算：各段階を並べて確認します——0 個：1、1 個：2、2 個：4、3 個：8、4 個：14 ✓。一般式でも確認できます：n 個の円は最大 **n² − n + 2** 領域に分け、n = 4 で 16 − 4 + 2 = 14 ✓ と一致します。",
+          "**1、2、4、8 という出だしは 2 の累乗に見えますが、次は 16 ではなく 14** です——ここが直感に最も惑わされる点です。4 個目から倍増の型を外れるのは、交点数が「2 円は高々 2 点で交わる」に縛られ、増分が線形にしか伸びないからです。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "14"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "圓分割平面：新圓與舊圓的交點把其圓周切成同數的弧，每段弧增加一個區域，故第 n 個圓最多增加 2(n − 1) 個",
+        "notes": "設計依據：詳解由「m 個交點切出 m 段弧、每段弧增加一個區域」推導出增量公式，而非直接給通式；並指出前四項 1、2、4、8 貌似 2 的次方而第五項為 14 不是 16，說明直覺失效的原因在於兩圓至多交於 2 點的限制。答案 14 已用逐個累加與通式 n² − n + 2 交叉驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（圓分割平面）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "邏輯推理",
+        "topicCode": "logic",
+        "subtopic": "圓分割平面",
+        "subtopicCode": "circles_max_regions"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "logic_grade10_foundation_029",
+      "topic": "logic",
+      "subtopic": "circle_liars_alternating",
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "10 個人圍成一個圓圈，每個人不是永遠說真話就是永遠說謊。每個人都說了同一句話：「站在我左邊的那個人在說謊。」（每個人的左邊都恰好有一個人，且 10 個人首尾相接。）求說謊的人共有幾個。",
+        "zh-Hans": "10 个人围成一个圆圈，每个人不是永远说真话就是永远说谎。每个人都说了同一句话：「站在我左边的那个人在说谎。」（每个人的左边都恰好有一个人，且 10 个人首尾相接。）求说谎的人共有几个。",
+        "en": "Ten people stand in a circle, each either always truthful or always lying. Every one of them says the same sentence: the person on my left is lying. Each person has exactly one person on their left, and the ten form a closed circle. How many of them are liars?",
+        "ja": "10 人が輪になって立っており、各人は常に真実を語るか、常に嘘をつくかのいずれかです。全員が同じことを言いました：「私の左にいる人は嘘をついている。」（各人の左には必ず 1 人がおり、10 人は輪をなしています。）嘘つきは何人ですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 5 個。",
+        "zh-Hans": "答案是 5 个。",
+        "en": "The answer is 5.",
+        "ja": "答えは 5 人です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "**先弄清楚一個人的身分與他左邊那個人的身分之間有什麼關係。**",
+          "**情況一：若某人說真話**，那麼他說的內容成立，也就是他左邊的人在說謊。",
+          "**情況二：若某人說謊**，那麼他說的內容不成立，也就是他左邊的人**不是**在說謊——換句話說，他左邊的人說真話。",
+          "把兩種情況合起來看：**不論是哪一種，一個人與他左邊的人身分必定相反**。說真話的人左邊是說謊者，說謊者的左邊是說真話的人。",
+          "**所以沿著圓圈走一圈，身分必定是真、假、真、假⋯⋯交替出現。**",
+          "**現在檢查這樣的交替在圓圈上能不能自洽。**從某人出發沿著左邊走 10 步會回到原點，而每走一步身分翻轉一次，走 10 步就翻轉 10 次。",
+          "**10 是偶數，翻轉偶數次會回到原本的身分** ✓ 沒有矛盾，所以這種交替安排確實成立。（若人數是奇數，例如 9 人，走一圈翻轉 9 次會得出「某人與自己身分相反」的矛盾，那就無解。）",
+          "既然身分嚴格交替，10 個人中說真話與說謊的各佔一半，所以說謊的有 10 ÷ 2 = 5 個。",
+          "驗算：程式窮舉全部 2¹⁰ = 1024 種真假分配，逐一檢查每個人的陳述是否與其身分一致，**符合條件的分配恰好有 2 種**（兩種交替方式，差別只在起點是真是假），而**兩種的說謊者人數都是 5** ✓。",
+          "**注意雖然有兩種可能的安排，但問的是說謊者的人數，兩種都給出 5，所以答案是確定的。**"
+        ],
+        "zh-Hans": [
+          "**先弄清楚一个人的身分与他左边那个人的身分之间有什么关系。**",
+          "**情况一：若某人说真话**，那么他说的内容成立，也就是他左边的人在说谎。",
+          "**情况二：若某人说谎**，那么他说的内容不成立，也就是他左边的人**不是**在说谎——换句话说，他左边的人说真话。",
+          "把两种情况合起来看：**不论是哪一种，一个人与他左边的人身分必定相反**。说真话的人左边是说谎者，说谎者的左边是说真话的人。",
+          "**所以沿着圆圈走一圈，身分必定是真、假、真、假⋯⋯交替出现。**",
+          "**现在检查这样的交替在圆圈上能不能自洽。**从某人出发沿着左边走 10 步会回到原点，而每走一步身分翻转一次，走 10 步就翻转 10 次。",
+          "**10 是偶数，翻转偶数次会回到原本的身分** ✓ 没有矛盾，所以这种交替安排确实成立。（若人数是奇数，例如 9 人，走一圈翻转 9 次会得出「某人与自己身分相反」的矛盾，那就无解。）",
+          "既然身分严格交替，10 个人中说真话与说谎的各占一半，所以说谎的有 10 ÷ 2 = 5 个。",
+          "验算：程序穷举全部 2¹⁰ = 1024 种真假分配，逐一检查每个人的陈述是否与其身分一致，**符合条件的分配恰好有 2 种**（两种交替方式，差别只在起点是真是假），而**两种的说谎者人数都是 5** ✓。",
+          "**注意虽然有两种可能的安排，但问的是说谎者的人数，两种都给出 5，所以答案是确定的。**"
+        ],
+        "en": [
+          "First work out the relation between a person's type and the type of the person on their left.",
+          "Case one: if someone is truthful, their statement holds, so the person on their left is lying.",
+          "Case two: if someone is lying, their statement fails, so the person on their left is not lying — that is, the person on their left is truthful.",
+          "Combining: in either case a person and the person on their left are of opposite types. A truthful person has a liar on their left, and a liar has a truthful person on their left.",
+          "So walking around the circle, the types must alternate: truthful, liar, truthful, liar, and so on.",
+          "Now check whether such alternation is consistent around a circle. Walking 10 steps to the left returns to the starting person, and each step flips the type, so 10 steps flip it 10 times.",
+          "Since 10 is even, an even number of flips restores the original type, so there is no contradiction and the alternating arrangement genuinely works. With an odd number of people, say 9, one circuit would flip 9 times and force someone to be their own opposite, leaving no solution at all.",
+          "With types strictly alternating, half of the 10 are truthful and half are liars, so the liars number 10 ÷ 2 = 5.",
+          "Check: enumerating all 2¹⁰ = 1024 assignments of types and testing each person's statement against their type leaves exactly 2 valid assignments, the two alternating patterns differing only in where the truthful ones start — and both have exactly 5 liars.",
+          "Note that although two arrangements are possible, the question asks for the number of liars, and both give 5, so the answer is determined."
+        ],
+        "ja": [
+          "**まず、ある人の種別と、その左にいる人の種別の関係を明らかにします。**",
+          "**場合 1：正直者なら**、その発言は成り立ち、左の人は嘘をついています。",
+          "**場合 2：嘘つきなら**、その発言は成り立たず、左の人は嘘をついて**いない**——すなわち左の人は正直者です。",
+          "両方を合わせると：**いずれの場合も、ある人とその左の人の種別は必ず逆**です。正直者の左は嘘つき、嘘つきの左は正直者です。",
+          "**したがって輪をたどると、種別は正直・嘘・正直・嘘⋯と交互に現れます。**",
+          "**この交互配置が輪の上で無矛盾かを確認します。**ある人から左へ 10 歩進むと出発点に戻り、1 歩ごとに種別が反転するので 10 歩で 10 回反転します。",
+          "**10 は偶数で、偶数回の反転は元の種別に戻ります** ✓ 矛盾はなく、交互配置は実際に成立します。（人数が奇数、たとえば 9 人なら 1 周で 9 回反転し「ある人が自分自身と逆」という矛盾が生じ、解は存在しません。）",
+          "種別が厳密に交互なので、10 人の半分が正直者、半分が嘘つきであり、嘘つきは 10 ÷ 2 = 5 人です。",
+          "検算：2¹⁰ = 1024 通りの種別の割り当てをすべて列挙し、各人の発言が種別と整合するか調べると、**条件を満たす割り当てはちょうど 2 通り**（起点が正直か嘘かだけが異なる 2 つの交互配置）で、**どちらも嘘つきは 5 人** ✓ です。",
+          "**可能な配置は 2 通りありますが、問われているのは嘘つきの人数で、どちらも 5 を与えるため答えは一意に定まります。**"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "5"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "圓圈上的交替：陳述使每人與左鄰身分必相反，故沿圈交替；人數為偶數時交替可自洽，說謊者恰佔一半",
+        "notes": "設計依據：詳解分「說真話」與「說謊」兩種情況推導出「與左鄰身分必相反」，再檢驗交替在圓圈上的自洽性（偶數人數才無矛盾），並指出奇數人數時無解；末尾說明雖有兩組解但說謊者人數皆為 5 故答案唯一。答案 5 已用 1024 種真假分配的完整窮舉獨立驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（圍成一圈的說謊者）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "邏輯推理",
+        "topicCode": "logic",
+        "subtopic": "圍成一圈的說謊者",
+        "subtopicCode": "circle_liars_alternating"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "logic_grade10_foundation_030",
+      "topic": "logic",
+      "subtopic": "seventeen_horses_division",
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一位老人留下 17 匹馬，遺囑寫著：長子分得全部的二分之一，次子分得三分之一，么子分得九分之一，而且不可以把任何一匹馬分割。三兄弟算不出來，鄰居於是牽來自己的 1 匹馬湊成 18 匹，依比例分完之後，剛好還剩下 1 匹馬還給鄰居。求依這個方法，次子分得幾匹馬。",
+        "zh-Hans": "一位老人留下 17 匹马，遗嘱写着：长子分得全部的二分之一，次子分得三分之一，幺子分得九分之一，而且不可以把任何一匹马分割。三兄弟算不出来，邻居于是牵来自己的 1 匹马凑成 18 匹，依比例分完之后，刚好还剩下 1 匹马还给邻居。求依这个方法，次子分得几匹马。",
+        "en": "An old man left 17 horses, willing one half of them to his eldest son, one third to his second son and one ninth to his youngest, with no horse to be divided. The brothers could not work it out, so a neighbour brought over one horse of their own to make 18. After dividing by the stated shares, exactly one horse remained and was returned to the neighbour. Under this method, how many horses does the second son receive?",
+        "ja": "老人が 17 頭の馬を遺し、遺言には長男に全体の 2 分の 1、次男に 3 分の 1、末子に 9 分の 1 を与え、どの馬も分割してはならないとありました。3 兄弟が困っていると、隣人が自分の馬を 1 頭連れてきて 18 頭にし、割合どおりに分けたところ、ちょうど 1 頭余って隣人に返せました。この方法で次男は何頭を受け取りますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 6 匹。",
+        "zh-Hans": "答案是 6 匹。",
+        "en": "The answer is 6.",
+        "ja": "答えは 6 頭です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "**先照著鄰居的方法算，再回頭看它為什麼行得通。**",
+          "加入鄰居的 1 匹後共有 18 匹。18 恰好能被 2、3、9 整除，所以三個比例都能分成整數。",
+          "長子分得 18 × (1/2) = 9 匹；**次子分得 18 × (1/3) = 6 匹**；么子分得 18 × (1/9) = 2 匹。",
+          "三人合計：9 + 6 + 2 = 17 匹。恰好剩下 1 匹，可以還給鄰居 ✓ 與題目描述吻合。",
+          "所以次子分得 6 匹。",
+          "**現在看關鍵：為什麼多借一匹反而剛好？**因為 **1/2 + 1/3 + 1/9 並不等於 1**。通分計算：1/2 = 9/18、1/3 = 6/18、1/9 = 2/18，相加得 (9 + 6 + 2)/18 = **17/18**。",
+          "**遺囑本身只分掉了全部的 17/18，留了 1/18 沒有分配。**而 18 匹的 1/18 恰好是 1 匹——這就是鄰居那匹馬能原封不動拿回去的原因。",
+          "**這也解釋了為什麼原本的 17 匹分不了**：17 除以 2、3、9 都不是整數，非得分割馬匹不可；而借一匹湊成 18（2、3、9 的公倍數）之後，每個比例都落在整數上。",
+          "驗算：換個角度核對——若直接按遺囑分 17 匹，長子應得 17/2 = 8.5、次子 17/3 ≈ 5.67、么子 17/9 ≈ 1.89，都不是整數。而 9、6、2 分別比它們略多一些，因為原本沒分配的 1/18 被三人依比例吸收了。三人所得的比例 9 : 6 : 2 也確實等於 1/2 : 1/3 : 1/9 ✓（同乘 18 即得）。",
+          "**注意這個巧妙做法能成立的條件是「三個分數之和恰好是 17/18」**——若遺囑改成 1/2、1/3、1/6（三者之和恰為 1），借來的馬就會被分掉而還不回去了。"
+        ],
+        "zh-Hans": [
+          "**先照着邻居的方法算，再回头看它为什么行得通。**",
+          "加入邻居的 1 匹后共有 18 匹。18 恰好能被 2、3、9 整除，所以三个比例都能分成整数。",
+          "长子分得 18 × (1/2) = 9 匹；**次子分得 18 × (1/3) = 6 匹**；幺子分得 18 × (1/9) = 2 匹。",
+          "三人合计：9 + 6 + 2 = 17 匹。恰好剩下 1 匹，可以还给邻居 ✓ 与题目描述吻合。",
+          "所以次子分得 6 匹。",
+          "**现在看关键：为什么多借一匹反而刚好？**因为 **1/2 + 1/3 + 1/9 并不等于 1**。通分计算：1/2 = 9/18、1/3 = 6/18、1/9 = 2/18，相加得 (9 + 6 + 2)/18 = **17/18**。",
+          "**遗嘱本身只分掉了全部的 17/18，留了 1/18 没有分配。**而 18 匹的 1/18 恰好是 1 匹——这就是邻居那匹马能原封不动拿回去的原因。",
+          "**这也解释了为什么原本的 17 匹分不了**：17 除以 2、3、9 都不是整数，非得分割马匹不可；而借一匹凑成 18（2、3、9 的公倍数）之后，每个比例都落在整数上。",
+          "验算：换个角度核对——若直接按遗嘱分 17 匹，长子应得 17/2 = 8.5、次子 17/3 ≈ 5.67、幺子 17/9 ≈ 1.89，都不是整数。而 9、6、2 分别比它们略多一些，因为原本没分配的 1/18 被三人依比例吸收了。三人所得的比例 9 : 6 : 2 也确实等于 1/2 : 1/3 : 1/9 ✓（同乘 18 即得）。",
+          "**注意这个巧妙做法能成立的条件是「三个分数之和恰好是 17/18」**——若遗嘱改成 1/2、1/3、1/6（三者之和恰为 1），借来的马就会被分掉而还不回去了。"
+        ],
+        "en": [
+          "Follow the neighbour's method first, then look back at why it works.",
+          "Adding the neighbour's horse gives 18. Since 18 is divisible by 2, 3 and 9, all three shares come out as whole numbers.",
+          "The eldest receives 18 × (1/2) = 9 horses, the second receives 18 × (1/3) = 6, and the youngest receives 18 × (1/9) = 2.",
+          "Together that is 9 + 6 + 2 = 17 horses, leaving exactly one to return to the neighbour, matching the story.",
+          "So the second son receives 6 horses.",
+          "Now the crux: why does borrowing a horse work out exactly? Because 1/2 + 1/3 + 1/9 does not equal 1. Over a common denominator, 1/2 = 9/18, 1/3 = 6/18 and 1/9 = 2/18, summing to (9 + 6 + 2)/18 = 17/18.",
+          "The will distributes only 17/18 of the estate, leaving 1/18 unallocated — and one eighteenth of 18 horses is exactly 1 horse, which is why the neighbour's horse comes back untouched.",
+          "This also explains why the original 17 could not be divided: 17 is not divisible by 2, 3 or 9, so horses would have to be cut up; borrowing one to reach 18, a common multiple of 2, 3 and 9, makes every share a whole number.",
+          "Check from another angle: dividing 17 directly by the will gives 17/2 = 8.5, 17/3 ≈ 5.67 and 17/9 ≈ 1.89, none of them whole. The values 9, 6 and 2 each slightly exceed these, because the unallocated 1/18 was absorbed proportionally. And the ratio 9 : 6 : 2 does equal 1/2 : 1/3 : 1/9, as multiplying through by 18 confirms.",
+          "Note that the trick works only because the three fractions sum to exactly 17/18 — had the will said 1/2, 1/3 and 1/6, which sum to 1, the borrowed horse would have been divided away and could not be returned."
+        ],
+        "ja": [
+          "**まず隣人の方法どおりに計算し、次になぜうまくいくのかを振り返ります。**",
+          "隣人の 1 頭を加えると 18 頭になります。18 は 2、3、9 で割り切れるので、3 つの割合すべてが整数になります。",
+          "長男は 18 × (1/2) = 9 頭、**次男は 18 × (1/3) = 6 頭**、末子は 18 × (1/9) = 2 頭を受け取ります。",
+          "合計は 9 + 6 + 2 = 17 頭。ちょうど 1 頭残り、隣人に返せます ✓ 問題の記述と一致します。",
+          "したがって次男は 6 頭です。",
+          "**では要点です：なぜ 1 頭借りるとちょうど合うのか。**それは **1/2 + 1/3 + 1/9 が 1 に等しくない**からです。通分すると 1/2 = 9/18、1/3 = 6/18、1/9 = 2/18 で、和は (9 + 6 + 2)/18 = **17/18** です。",
+          "**遺言は全体の 17/18 しか配分しておらず、1/18 が未配分のまま残ります。**そして 18 頭の 1/18 はちょうど 1 頭——これが隣人の馬がそのまま戻る理由です。",
+          "**もとの 17 頭が分けられなかった理由も同じです**：17 は 2、3、9 のいずれでも割り切れず馬を切り分けるほかありませんが、1 頭借りて 18（2、3、9 の公倍数）にすると、どの割合も整数になります。",
+          "検算：別の角度から確認します——17 頭を遺言どおりに割ると長男 17/2 = 8.5、次男 17/3 ≈ 5.67、末子 17/9 ≈ 1.89 でいずれも整数ではありません。9、6、2 はそれぞれこれらより少し多く、未配分の 1/18 が比例配分で吸収されたためです。取り分の比 9 : 6 : 2 も確かに 1/2 : 1/3 : 1/9 に等しく ✓（18 倍すれば分かります）。",
+          "**この巧妙な方法が成り立つ条件は「3 つの分数の和がちょうど 17/18」であること**です——遺言が 1/2、1/3、1/6（和がちょうど 1）なら、借りた馬は分け尽くされて返せなくなります。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "6"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "十七匹馬：遺囑的三個分數之和為 17/18 而非 1，借一匹湊成 2、3、9 的公倍數後未分配的 1/18 恰為借來的那一匹",
+        "notes": "設計依據：詳解不止給出算法，還算出 1/2 + 1/3 + 1/9 = 17/18 以解釋借馬為何能原數歸還，並說明 18 為 2、3、9 的公倍數才使各份為整數；末尾以三數和恰為 1 的反例（1/2、1/3、1/6）說明此法成立的條件。答案 6 已用分數通分與比例核對交叉驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（十七匹馬的分法）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "邏輯推理",
+        "topicCode": "logic",
+        "subtopic": "十七匹馬的分法",
+        "subtopicCode": "seventeen_horses_division"
+      },
+      "reviewStatus": "ok"
     }
   ]
 }
