@@ -1437,6 +1437,1632 @@
         "subtopicCode": "factorial_telescoping_sum"
       },
       "reviewStatus": "ok"
+    },
+    {
+      "id": "algebra_grade12_foundation_016",
+      "topic": "algebra",
+      "subtopic": "infinite_power_product",
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "求無窮乘積 2^(1/2) × 4^(1/4) × 8^(1/8) × 16^(1/16) × ⋯ 的值（第 n 個因數是 (2ⁿ) 的 1/2ⁿ 次方）。",
+        "zh-Hans": "求无穷乘积 2^(1/2) × 4^(1/4) × 8^(1/8) × 16^(1/16) × ⋯ 的值（第 n 个因数是 (2ⁿ) 的 1/2ⁿ 次方）。",
+        "en": "Find the value of the infinite product 2^(1/2) × 4^(1/4) × 8^(1/8) × 16^(1/16) × ⋯, whose nth factor is (2ⁿ) raised to the power 1/2ⁿ.",
+        "ja": "無限積 2^(1/2) × 4^(1/4) × 8^(1/8) × 16^(1/16) × ⋯（第 n 因数は (2ⁿ) の 1/2ⁿ 乗）の値を求めなさい。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 4。",
+        "zh-Hans": "答案是 4。",
+        "en": "The answer is 4.",
+        "ja": "答えは 4 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "**每個因數的底數都是 2 的冪次，所以整個乘積可以合併成 2 的某個次方——問題就變成求那個指數。**",
+          "**第 n 個因數是 (2ⁿ)^(1/2ⁿ)。**由指數律 (a^m)^k = a^(mk)，它等於 **2^(n/2ⁿ)**。",
+          "**乘積中所有因數的底數都是 2，相乘時指數相加**，所以整個乘積 = **2^(1/2 + 2/4 + 3/8 + 4/16 + ⋯)** = 2^S，其中 **S = Σ n/2ⁿ**。",
+          "**現在求 S = 1/2 + 2/4 + 3/8 + 4/16 + ⋯**。這是「等差乘等比」型的級數，用**錯位相減**處理。",
+          "**把 S 乘以 1/2**：S/2 = 1/4 + 2/8 + 3/16 + 4/32 + ⋯（每一項都往後移了一位）。",
+          "**兩式相減**：S − S/2 = 1/2 + (2/4 − 1/4) + (3/8 − 2/8) + (4/16 − 3/16) + ⋯",
+          "**每一組括號的分子都恰好差 1**，所以右邊 = 1/2 + 1/4 + 1/8 + 1/16 + ⋯，這是**首項 1/2、公比 1/2 的無窮等比級數**。",
+          "由無窮等比級數的和公式（|公比| < 1 時和為 首項/(1 − 公比)）：右邊 = (1/2)/(1 − 1/2) = (1/2)/(1/2) = **1**。",
+          "所以 **S/2 = 1**，得 **S = 2**。",
+          "**代回**：乘積 = 2^S = 2² = **4**。",
+          "驗算：**部分乘積逐步逼近。**前 1 項：2^0.5 ≈ 1.414；前 2 項：× 4^0.25 ≈ 1.414 × 1.414 = 2.000；前 3 項：× 8^0.125 ≈ 2.000 × 1.297 = 2.594；前 4 項 ≈ 2.594 × 1.189 = 3.084⋯ 持續增大。",
+          "程式連乘前 40 項得 **3.9999999998** ✓ 確實逼近 4，與答案相符。",
+          "**注意這裡 S 收斂是關鍵。**若換成 Σ n/1.5ⁿ 之類收斂較慢的級數，做法相同但值不同；**而若指數的分母不是等比遞增（例如 Σ n/n² = Σ 1/n），級數會發散，乘積就沒有有限的值**。**先確認級數收斂，再談它的和。**"
+        ],
+        "zh-Hans": [
+          "**每个因数的底数都是 2 的幂次，所以整个乘积可以合并成 2 的某个次方——问题就变成求那个指数。**",
+          "**第 n 个因数是 (2ⁿ)^(1/2ⁿ)。**由指数律 (a^m)^k = a^(mk)，它等于 **2^(n/2ⁿ)**。",
+          "**乘积中所有因数的底数都是 2，相乘时指数相加**，所以整个乘积 = **2^(1/2 + 2/4 + 3/8 + 4/16 + ⋯)** = 2^S，其中 **S = Σ n/2ⁿ**。",
+          "**现在求 S = 1/2 + 2/4 + 3/8 + 4/16 + ⋯**。这是「等差乘等比」型的级数，用**错位相减**处理。",
+          "**把 S 乘以 1/2**：S/2 = 1/4 + 2/8 + 3/16 + 4/32 + ⋯（每一项都往后移了一位）。",
+          "**两式相减**：S − S/2 = 1/2 + (2/4 − 1/4) + (3/8 − 2/8) + (4/16 − 3/16) + ⋯",
+          "**每一组括号的分子都恰好差 1**，所以右边 = 1/2 + 1/4 + 1/8 + 1/16 + ⋯，这是**首项 1/2、公比 1/2 的无穷等比级数**。",
+          "由无穷等比级数的和公式（|公比| < 1 时和为 首项/(1 − 公比)）：右边 = (1/2)/(1 − 1/2) = **1**。",
+          "所以 **S/2 = 1**，得 **S = 2**。",
+          "**代回**：乘积 = 2^S = 2² = **4**。",
+          "验算：**部分乘积逐步逼近。**前 1 项：2^0.5 ≈ 1.414；前 2 项：× 4^0.25 ≈ 1.414 × 1.414 = 2.000；前 3 项：× 8^0.125 ≈ 2.000 × 1.297 = 2.594；前 4 项 ≈ 2.594 × 1.189 = 3.084⋯ 持续增大。",
+          "程序连乘前 40 项得 **3.9999999998** ✓ 确实逼近 4，与答案相符。",
+          "**注意这里 S 收敛是关键。**若换成 Σ n/1.5ⁿ 之类收敛较慢的级数，做法相同但值不同；**而若指数的分母不是等比递增（例如 Σ n/n² = Σ 1/n），级数会发散，乘积就没有有限的值**。**先确认级数收敛，再谈它的和。**"
+        ],
+        "en": [
+          "Every factor has a base that is a power of 2, so the whole product collapses to a single power of 2 — the problem becomes finding that exponent.",
+          "The nth factor is (2ⁿ)^(1/2ⁿ), and by the exponent law (a^m)^k = a^(mk) this equals 2^(n/2ⁿ).",
+          "All factors share the base 2, and multiplying adds exponents, so the product equals 2^(1/2 + 2/4 + 3/8 + 4/16 + ⋯) = 2^S with S = Σ n/2ⁿ.",
+          "Now evaluate S = 1/2 + 2/4 + 3/8 + 4/16 + ⋯, an arithmetic-times-geometric series, handled by the shift-and-subtract method.",
+          "Multiply S by 1/2: S/2 = 1/4 + 2/8 + 3/16 + 4/32 + ⋯, each term shifted one place along.",
+          "Subtract: S − S/2 = 1/2 + (2/4 − 1/4) + (3/8 − 2/8) + (4/16 − 3/16) + ⋯",
+          "Each bracket has numerators differing by exactly 1, so the right side is 1/2 + 1/4 + 1/8 + 1/16 + ⋯, an infinite geometric series with first term 1/2 and ratio 1/2.",
+          "By the sum formula for |ratio| < 1, first term divided by one minus the ratio: the right side equals (1/2)/(1 − 1/2) = 1.",
+          "So S/2 = 1 and S = 2.",
+          "Substituting back: the product is 2^S = 2² = 4.",
+          "Check by partial products: one factor gives 2^0.5 ≈ 1.414; two give ≈ 1.414 × 1.414 = 2.000; three give ≈ 2.000 × 1.297 = 2.594; four give ≈ 3.084, steadily increasing.",
+          "Multiplying the first 40 factors numerically gives 3.9999999998, confirming convergence to 4.",
+          "Convergence of S is essential here. A slower series such as Σ n/1.5ⁿ would use the same method with a different value; but if the denominators did not grow geometrically — Σ n/n² = Σ 1/n, say — the series would diverge and the product would have no finite value. Establish convergence before discussing the sum."
+        ],
+        "ja": [
+          "**各因数の底はいずれも 2 の累乗なので、積全体は 2 の何乗かにまとまります**——問題はその指数を求めることになります。",
+          "**第 n 因数は (2ⁿ)^(1/2ⁿ)** で、指数法則 (a^m)^k = a^(mk) より **2^(n/2ⁿ)** に等しくなります。",
+          "**すべての因数の底が 2 で、掛けると指数が足される**ので、積全体は **2^(1/2 + 2/4 + 3/8 + 4/16 + ⋯)** = 2^S（S = Σ n/2ⁿ）です。",
+          "**S = 1/2 + 2/4 + 3/8 + 4/16 + ⋯ を求めます。**等差 × 等比の級数なので**ずらして引く**方法を使います。",
+          "**S を 1/2 倍**します：S/2 = 1/4 + 2/8 + 3/16 + 4/32 + ⋯（各項が 1 つずつ後ろへずれます）。",
+          "**辺々引きます**：S − S/2 = 1/2 + (2/4 − 1/4) + (3/8 − 2/8) + (4/16 − 3/16) + ⋯",
+          "**各括弧の分子はちょうど 1 ずつ違う**ので、右辺は 1/2 + 1/4 + 1/8 + 1/16 + ⋯、**初項 1/2・公比 1/2 の無限等比級数**です。",
+          "|公比| < 1 のときの和の公式（初項 ÷ (1 − 公比)）より、右辺 = (1/2)/(1 − 1/2) = **1**。",
+          "したがって **S/2 = 1**、**S = 2**。",
+          "**戻すと**、積 = 2^S = 2² = **4**。",
+          "検算：**部分積が徐々に近づきます。**1 項：2^0.5 ≈ 1.414、2 項：≈ 1.414 × 1.414 = 2.000、3 項：≈ 2.000 × 1.297 = 2.594、4 項：≈ 3.084 と増加していきます。",
+          "前 40 項の積を数値計算すると **3.9999999998** ✓ で確かに 4 に近づき、答えと一致します。",
+          "**S の収束が要**です。Σ n/1.5ⁿ のような収束の遅い級数なら方法は同じで値が異なります。**分母が等比的に増えない（Σ n/n² = Σ 1/n など）と級数は発散し、積は有限の値をもちません**。**まず収束を確認してから和を論じます。**"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "4"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "無窮乘積：底數同為 2 使乘積化為 2^S，再以錯位相減求出 S = Σ n/2ⁿ = 2",
+        "notes": "設計依據：詳解把無窮乘積化為單一指數後以錯位相減求「等差乘等比」級數，並說明相減後恰好得到等比級數的原因；驗算列出部分乘積的逼近過程與 40 項的數值。末尾指出級數收斂是前提，並以 Σ 1/n 發散的情形作對照。答案 4 已用級數推導與 40 項連乘的數值計算雙向驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（無窮乘積）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "代數",
+        "topicCode": "algebra",
+        "subtopic": "無窮乘積",
+        "subtopicCode": "infinite_power_product"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "algebra_grade12_foundation_017",
+      "topic": "algebra",
+      "subtopic": "log_exponent_equation_product",
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "求方程式 x^(log₁₀ x) = 100x 的所有正實數解之乘積。",
+        "zh-Hans": "求方程式 x^(log₁₀ x) = 100x 的所有正实数解之乘积。",
+        "en": "Find the product of all positive real solutions of the equation x^(log₁₀ x) = 100x.",
+        "ja": "方程式 x^(log₁₀ x) = 100x のすべての正の実数解の積を求めなさい。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 10。",
+        "zh-Hans": "答案是 10。",
+        "en": "The answer is 10.",
+        "ja": "答えは 10 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "**指數上有對數，直接解很困難——兩邊同取對數可以把指數拉下來。**",
+          "**兩邊取以 10 為底的對數**：log(x^(log x)) = log(100x)。",
+          "**左邊用「指數可以移到前面」的性質**：log(x^(log x)) = (log x) × (log x) = **(log x)²**。",
+          "**右邊用「乘積的對數等於對數之和」**：log(100x) = log 100 + log x = **2 + log x**。",
+          "**令 t = log₁₀ x**，方程式變成 **t² = 2 + t**，即 **t² − t − 2 = 0**。",
+          "**因式分解**：(t − 2)(t + 1) = 0，所以 **t = 2** 或 **t = −1**。",
+          "**換回 x**：t = log x = 2 給出 x = 10² = **100**；t = −1 給出 x = 10⁻¹ = **0.1**。",
+          "**兩解之乘積** = 100 × 0.1 = **10**。",
+          "驗算：**逐一代回原式檢查。**x = 100 時，log x = 2，左邊 = 100² = **10000**；右邊 = 100 × 100 = **10000** ✓ 相等。",
+          "x = 0.1 時，log x = −1，左邊 = 0.1⁻¹ = **10**；右邊 = 100 × 0.1 = **10** ✓ 也相等。**兩個解都是真解，沒有增根**。",
+          "**其實乘積可以不必解出兩根就得到。**兩根滿足 log x₁ = 2、log x₂ = −1，所以 **log(x₁x₂) = log x₁ + log x₂ = 2 + (−1) = 1**，因此 x₁x₂ = 10¹ = **10** ✓——**這正好對應二次方程 t² − t − 2 = 0 的兩根之和為 1**（由係數直接讀出，不必解方程）。",
+          "**注意定義域**：原式的底數 x 必須為正（否則對數無定義），兩個解 100 與 0.1 都是正數 ✓ 都保留。**若某個解算出來是負數或 0，就必須捨去**。"
+        ],
+        "zh-Hans": [
+          "**指数上有对数，直接解很困难——两边同取对数可以把指数拉下来。**",
+          "**两边取以 10 为底的对数**：log(x^(log x)) = log(100x)。",
+          "**左边用「指数可以移到前面」的性质**：log(x^(log x)) = (log x) × (log x) = **(log x)²**。",
+          "**右边用「乘积的对数等于对数之和」**：log(100x) = log 100 + log x = **2 + log x**。",
+          "**令 t = log₁₀ x**，方程式变成 **t² = 2 + t**，即 **t² − t − 2 = 0**。",
+          "**因式分解**：(t − 2)(t + 1) = 0，所以 **t = 2** 或 **t = −1**。",
+          "**换回 x**：t = log x = 2 给出 x = 10² = **100**；t = −1 给出 x = 10⁻¹ = **0.1**。",
+          "**两解之乘积** = 100 × 0.1 = **10**。",
+          "验算：**逐一代回原式检查。**x = 100 时，log x = 2，左边 = 100² = **10000**；右边 = 100 × 100 = **10000** ✓ 相等。",
+          "x = 0.1 时，log x = −1，左边 = 0.1⁻¹ = **10**；右边 = 100 × 0.1 = **10** ✓ 也相等。**两个解都是真解，没有增根**。",
+          "**其实乘积可以不必解出两根就得到。**两根满足 log x₁ = 2、log x₂ = −1，所以 **log(x₁x₂) = log x₁ + log x₂ = 2 + (−1) = 1**，因此 x₁x₂ = 10¹ = **10** ✓——**这正好对应二次方程 t² − t − 2 = 0 的两根之和为 1**（由系数直接读出，不必解方程）。",
+          "**注意定义域**：原式的底数 x 必须为正（否则对数无定义），两个解 100 与 0.1 都是正数 ✓ 都保留。**若某个解算出来是负数或 0，就必须舍去**。"
+        ],
+        "en": [
+          "With a logarithm in the exponent, direct solution is hard — taking logarithms of both sides brings the exponent down.",
+          "Take base-10 logarithms: log(x^(log x)) = log(100x).",
+          "On the left, an exponent moves to the front: log(x^(log x)) = (log x) × (log x) = (log x)².",
+          "On the right, the logarithm of a product is a sum: log(100x) = log 100 + log x = 2 + log x.",
+          "Setting t = log₁₀ x turns the equation into t² = 2 + t, that is t² − t − 2 = 0.",
+          "Factoring: (t − 2)(t + 1) = 0, so t = 2 or t = −1.",
+          "Converting back: t = 2 gives x = 10² = 100, and t = −1 gives x = 10⁻¹ = 0.1.",
+          "Their product is 100 × 0.1 = 10.",
+          "Check by substituting into the original. For x = 100, log x = 2, the left side is 100² = 10000 and the right is 100 × 100 = 10000, equal.",
+          "For x = 0.1, log x = −1, the left side is 0.1⁻¹ = 10 and the right is 100 × 0.1 = 10, also equal. Both are genuine solutions with no extraneous roots.",
+          "The product can in fact be found without solving for the roots. Since log x₁ = 2 and log x₂ = −1, we get log(x₁x₂) = 2 + (−1) = 1, so x₁x₂ = 10¹ = 10 — corresponding exactly to the sum of roots of t² − t − 2 = 0 being 1, read straight off the coefficients without solving.",
+          "Mind the domain: the base x must be positive or the logarithm is undefined, and both solutions 100 and 0.1 are positive, so both stand. A solution turning out negative or zero would have to be discarded."
+        ],
+        "ja": [
+          "**指数に対数があるため直接解くのは困難です**——両辺の対数をとれば指数を下ろせます。",
+          "**両辺の常用対数をとります**：log(x^(log x)) = log(100x)。",
+          "**左辺は「指数を前に出せる」性質**より log(x^(log x)) = (log x) × (log x) = **(log x)²**。",
+          "**右辺は「積の対数は和」**より log(100x) = log 100 + log x = **2 + log x**。",
+          "**t = log₁₀ x とおく**と方程式は **t² = 2 + t**、すなわち **t² − t − 2 = 0** になります。",
+          "**因数分解**すると (t − 2)(t + 1) = 0 で **t = 2** または **t = −1**。",
+          "**x に戻します**：t = 2 で x = 10² = **100**、t = −1 で x = 10⁻¹ = **0.1**。",
+          "**2 解の積** = 100 × 0.1 = **10**。",
+          "検算：**元の式に代入して確認します。**x = 100 なら log x = 2、左辺 = 100² = **10000**、右辺 = 100 × 100 = **10000** ✓ で一致。",
+          "x = 0.1 なら log x = −1、左辺 = 0.1⁻¹ = **10**、右辺 = 100 × 0.1 = **10** ✓ でやはり一致。**2 つとも真の解で、無縁解はありません**。",
+          "**実は 2 根を求めずに積を得られます。**log x₁ = 2、log x₂ = −1 なので **log(x₁x₂) = 2 + (−1) = 1**、よって x₁x₂ = 10¹ = **10** ✓——**これは 2 次方程式 t² − t − 2 = 0 の 2 根の和が 1 であること**（係数から直接読める）にちょうど対応します。",
+          "**定義域に注意**します：底 x は正でなければならず（さもないと対数が定義されない）、2 解 100 と 0.1 はともに正 ✓ なので残ります。**負や 0 になる解は捨てる必要があります**。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "10"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "指數含對數的方程式：兩邊取對數並令 t = log x 化為二次方程；兩根之積可由 t 的兩根之和直接得出",
+        "notes": "設計依據：詳解在解出兩根之後另指出可由「log 之和等於根之和」直接得到乘積而不必解方程，呼應根與係數的關係；並逐一代回原式確認無增根，說明定義域的檢查。答案 10 已用代回原式與對數關係雙向驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（指數含對數的方程式）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "代數",
+        "topicCode": "algebra",
+        "subtopic": "指數含對數的方程式",
+        "subtopicCode": "log_exponent_equation_product"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "algebra_grade12_foundation_018",
+      "topic": "algebra",
+      "subtopic": "polynomial_remainder_quadratic",
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "多項式 x¹⁰⁰ 除以 x² − 1 之後，餘式可以寫成 ax + b（a、b 為常數）。求 a + b 的值。",
+        "zh-Hans": "多项式 x¹⁰⁰ 除以 x² − 1 之后，余式可以写成 ax + b（a、b 为常数）。求 a + b 的值。",
+        "en": "When the polynomial x¹⁰⁰ is divided by x² − 1, the remainder can be written as ax + b for constants a and b. Find a + b.",
+        "ja": "多項式 x¹⁰⁰ を x² − 1 で割ったときの余りが ax + b（a、b は定数）と書けます。a + b の値を求めなさい。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 1。",
+        "zh-Hans": "答案是 1。",
+        "en": "The answer is 1.",
+        "ja": "答えは 1 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "**除以二次式時，餘式的次數必定低於 2**，所以餘式最多是一次式，可以寫成 ax + b ✓ 題目的設定是合理的。",
+          "**寫出除法的恆等式**：x¹⁰⁰ = (x² − 1) × Q(x) + ax + b，其中 Q(x) 是商式。**這個等式對每一個 x 都成立**。",
+          "**關鍵技巧：代入使 (x² − 1) 變成 0 的 x 值**，這樣商式 Q(x) 就會被消掉，不必知道它是什麼。",
+          "**x² − 1 = (x − 1)(x + 1)，所以要代入 x = 1 與 x = −1。**",
+          "**代 x = 1**：左邊 1¹⁰⁰ = **1**；右邊 (1 − 1) × Q(1) + a × 1 + b = 0 + a + b。所以 **a + b = 1** ⋯（第一式）",
+          "**代 x = −1**：左邊 (−1)¹⁰⁰ = **1**（因為 100 是偶數）；右邊 ((−1)² − 1) × Q(−1) + a × (−1) + b = 0 − a + b。所以 **−a + b = 1** ⋯（第二式）",
+          "**題目問的正是 a + b，而第一式已經直接給出答案 a + b = 1** ✓ 不必再解出 a 與 b。",
+          "**不過還是把它們解出來以確認一致。**兩式相加：2b = 2，得 **b = 1**；兩式相減：2a = 0，得 **a = 0**。",
+          "所以餘式是 0 × x + 1 = **1**（一個常數），而 a + b = 0 + 1 = **1** ✓ 與第一式相符。",
+          "驗算：**直接檢查餘式為 1 是否合理。**x¹⁰⁰ − 1 應該要能被 x² − 1 整除。確實如此——x¹⁰⁰ − 1 = (x²)⁵⁰ − 1，而 **a^n − 1 恆可被 a − 1 整除**，取 a = x²、n = 50 即得 (x²)⁵⁰ − 1 能被 x² − 1 整除 ✓。所以 x¹⁰⁰ 除以 x² − 1 的餘式確實是 1。",
+          "**注意指數 100 是偶數這件事很關鍵。**若改成 x⁹⁹ 除以 x² − 1：代 x = 1 得 a + b = 1，代 x = −1 得 −a + b = **−1**，解得 a = 1、b = 0，**餘式變成 x 而不是 1**，a + b 仍是 1 但意義完全不同。**代入 x = −1 時 (−1) 的奇偶次方會給出相反的值，務必看清指數的奇偶。**"
+        ],
+        "zh-Hans": [
+          "**除以二次式时，余式的次数必定低于 2**，所以余式最多是一次式，可以写成 ax + b ✓ 题目的设定是合理的。",
+          "**写出除法的恒等式**：x¹⁰⁰ = (x² − 1) × Q(x) + ax + b，其中 Q(x) 是商式。**这个等式对每一个 x 都成立**。",
+          "**关键技巧：代入使 (x² − 1) 变成 0 的 x 值**，这样商式 Q(x) 就会被消掉，不必知道它是什么。",
+          "**x² − 1 = (x − 1)(x + 1)，所以要代入 x = 1 与 x = −1。**",
+          "**代 x = 1**：左边 1¹⁰⁰ = **1**；右边 (1 − 1) × Q(1) + a × 1 + b = 0 + a + b。所以 **a + b = 1** ⋯（第一式）",
+          "**代 x = −1**：左边 (−1)¹⁰⁰ = **1**（因为 100 是偶数）；右边 ((−1)² − 1) × Q(−1) + a × (−1) + b = 0 − a + b。所以 **−a + b = 1** ⋯（第二式）",
+          "**题目问的正是 a + b，而第一式已经直接给出答案 a + b = 1** ✓ 不必再解出 a 与 b。",
+          "**不过还是把它们解出来以确认一致。**两式相加：2b = 2，得 **b = 1**；两式相减：2a = 0，得 **a = 0**。",
+          "所以余式是 0 × x + 1 = **1**（一个常数），而 a + b = 0 + 1 = **1** ✓ 与第一式相符。",
+          "验算：**直接检查余式为 1 是否合理。**x¹⁰⁰ − 1 应该要能被 x² − 1 整除。确实如此——x¹⁰⁰ − 1 = (x²)⁵⁰ − 1，而 **a^n − 1 恒可被 a − 1 整除**，取 a = x²、n = 50 即得 (x²)⁵⁰ − 1 能被 x² − 1 整除 ✓。所以 x¹⁰⁰ 除以 x² − 1 的余式确实是 1。",
+          "**注意指数 100 是偶数这件事很关键。**若改成 x⁹⁹ 除以 x² − 1：代 x = 1 得 a + b = 1，代 x = −1 得 −a + b = **−1**，解得 a = 1、b = 0，**余式变成 x 而不是 1**，a + b 仍是 1 但意义完全不同。**代入 x = −1 时 (−1) 的奇偶次方会给出相反的值，务必看清指数的奇偶。**"
+        ],
+        "en": [
+          "Dividing by a quadratic leaves a remainder of degree below 2, so the remainder is at most linear and can indeed be written as ax + b, as the problem states.",
+          "Write the division identity: x¹⁰⁰ = (x² − 1) × Q(x) + ax + b, with Q(x) the quotient. This holds for every value of x.",
+          "The key technique is to substitute values making x² − 1 vanish, which eliminates the quotient without needing to know it.",
+          "Since x² − 1 = (x − 1)(x + 1), substitute x = 1 and x = −1.",
+          "With x = 1: the left side is 1¹⁰⁰ = 1, and the right side is (1 − 1) × Q(1) + a + b = a + b. So a + b = 1, the first equation.",
+          "With x = −1: the left side is (−1)¹⁰⁰ = 1, since 100 is even, and the right side is 0 − a + b. So −a + b = 1, the second equation.",
+          "The question asks precisely for a + b, and the first equation already answers it: a + b = 1, with no need to find a and b separately.",
+          "Still, solve for them to confirm consistency. Adding the equations gives 2b = 2 and b = 1; subtracting gives 2a = 0 and a = 0.",
+          "So the remainder is 0 × x + 1 = 1, a constant, and a + b = 0 + 1 = 1, agreeing with the first equation.",
+          "Check that a remainder of 1 is plausible: x¹⁰⁰ − 1 ought to be divisible by x² − 1. And it is — x¹⁰⁰ − 1 = (x²)⁵⁰ − 1, and a^n − 1 is always divisible by a − 1, so taking a = x² and n = 50 shows (x²)⁵⁰ − 1 is divisible by x² − 1. Hence the remainder really is 1.",
+          "The evenness of the exponent 100 matters. For x⁹⁹ divided by x² − 1, substituting x = 1 gives a + b = 1 while x = −1 gives −a + b = −1, so a = 1 and b = 0 and the remainder becomes x rather than 1 — a + b is still 1 but means something quite different. Substituting x = −1 flips sign according to the parity of the exponent, so check it carefully."
+        ],
+        "ja": [
+          "**2 次式で割ると余りの次数は 2 未満**なので、余りは高々 1 次式であり ax + b と書けます ✓。問題の設定は妥当です。",
+          "**除法の恒等式を書きます**：x¹⁰⁰ = (x² − 1) × Q(x) + ax + b（Q(x) は商）。**この等式はすべての x で成り立ちます**。",
+          "**要となる技法は x² − 1 を 0 にする x を代入すること**で、商 Q(x) が消え、その正体を知る必要がなくなります。",
+          "**x² − 1 = (x − 1)(x + 1) なので x = 1 と x = −1 を代入します。**",
+          "**x = 1**：左辺は 1¹⁰⁰ = **1**、右辺は (1 − 1) × Q(1) + a + b = a + b。よって **a + b = 1** ⋯（第 1 式）",
+          "**x = −1**：左辺は (−1)¹⁰⁰ = **1**（100 は偶数）、右辺は 0 − a + b。よって **−a + b = 1** ⋯（第 2 式）",
+          "**問われているのはまさに a + b であり、第 1 式が直接答え a + b = 1 を与えます** ✓。a と b を個別に求める必要はありません。",
+          "**とはいえ整合性の確認のため解いておきます。**辺々足すと 2b = 2 で **b = 1**、辺々引くと 2a = 0 で **a = 0**。",
+          "したがって余りは 0 × x + 1 = **1**（定数）で、a + b = 0 + 1 = **1** ✓ と第 1 式に一致します。",
+          "検算：**余りが 1 で妥当か確認します。**x¹⁰⁰ − 1 が x² − 1 で割り切れるはずです。実際そうで——x¹⁰⁰ − 1 = (x²)⁵⁰ − 1 であり、**a^n − 1 は常に a − 1 で割り切れる**ので、a = x²、n = 50 として (x²)⁵⁰ − 1 は x² − 1 で割り切れます ✓。よって余りは確かに 1 です。",
+          "**指数 100 が偶数であることが重要**です。x⁹⁹ を x² − 1 で割ると、x = 1 で a + b = 1、x = −1 で −a + b = **−1** となり a = 1、b = 0、**余りは 1 ではなく x** になります。a + b は同じく 1 ですが意味はまったく異なります。**x = −1 の代入では指数の偶奇で符号が反転する**ので必ず確認します。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "1"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "除以二次式的餘式：代入使除式為零的根消去商式，因餘式次數低於除式故形如 ax + b",
+        "notes": "設計依據：詳解說明代入除式的根可消去未知的商式，並指出題目所問的 a + b 恰由 x = 1 那一式直接得出；另以「a^n − 1 必被 a − 1 整除」獨立驗證餘式為 1，末尾以奇次方 x⁹⁹ 的情形說明指數奇偶如何改變餘式。答案 1 已用代入法與整除性論證雙向驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（除以二次式的餘式）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "代數",
+        "topicCode": "algebra",
+        "subtopic": "除以二次式的餘式",
+        "subtopicCode": "polynomial_remainder_quadratic"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "algebra_grade12_foundation_019",
+      "topic": "algebra",
+      "subtopic": "cubic_roots_cube_sum",
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "三次方程式 x³ − 3x + 1 = 0 有三個相異的實數根。把這三個根各自立方之後相加，求所得的值。",
+        "zh-Hans": "三次方程式 x³ − 3x + 1 = 0 有三个相异的实数根。把这三个根各自立方之后相加，求所得的值。",
+        "en": "The cubic equation x³ − 3x + 1 = 0 has three distinct real roots. Cubing each root and adding the results, what value is obtained?",
+        "ja": "3 次方程式 x³ − 3x + 1 = 0 は相異なる 3 つの実数解をもちます。それぞれの解を 3 乗して足し合わせた値を求めなさい。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 −3。",
+        "zh-Hans": "答案是 −3。",
+        "en": "The answer is −3.",
+        "ja": "答えは −3 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "**有一個特別簡潔的做法：直接用「每個根都滿足方程式」這件事。**",
+          "**因為 α 是根，所以 α³ − 3α + 1 = 0，移項得 α³ = 3α − 1。**同理 β³ = 3β − 1、γ³ = 3γ − 1。",
+          "**三式相加**：α³ + β³ + γ³ = 3(α + β + γ) − 3。",
+          "**所以只要知道三根之和。**由根與係數的關係（Vieta），三次方程 x³ + px² + qx + r = 0 的三根之和是 **−p**。",
+          "本題的方程式是 x³ + 0·x² − 3x + 1 = 0，**x² 的係數是 0**，所以 α + β + γ = **0**。",
+          "代入：α³ + β³ + γ³ = 3 × 0 − 3 = **−3**。",
+          "**用另一種方法核對：Newton 恆等式。**設 e₁ = α+β+γ = 0、e₂ = αβ+βγ+γα = −3、e₃ = αβγ = −1（由係數讀出，注意 e₃ = −常數項）。",
+          "冪和的公式是 **p₃ = e₁³ − 3e₁e₂ + 3e₃**。代入：p₃ = 0³ − 3 × 0 × (−3) + 3 × (−1) = 0 − 0 − 3 = **−3** ✓ 與第一種方法一致。",
+          "驗算：**用數值解核對。**以牛頓法求出三個實根約為 **−1.879385、0.347296、1.532089**。",
+          "檢查根之和：(−1.879385) + 0.347296 + 1.532089 ≈ **0.000000** ✓ 符合 e₁ = 0。",
+          "計算立方和：(−1.879385)³ + 0.347296³ + 1.532089³ ≈ −6.638 + 0.042 + 3.596 = **−3.000** ✓ 與答案完全相符。",
+          "**第一種方法的優勢在於完全不需要 Newton 恆等式。**只要方程式給出了 α³ 與 α 的關係，就能把三次的冪和降到一次，**而一次的冪和正是根與係數關係直接給出的量**。**這個技巧對任何「用根所滿足的方程式降次」的題目都適用**，比死記冪和公式可靠得多。"
+        ],
+        "zh-Hans": [
+          "**有一个特别简洁的做法：直接用「每个根都满足方程式」这件事。**",
+          "**因为 α 是根，所以 α³ − 3α + 1 = 0，移项得 α³ = 3α − 1。**同理 β³ = 3β − 1、γ³ = 3γ − 1。",
+          "**三式相加**：α³ + β³ + γ³ = 3(α + β + γ) − 3。",
+          "**所以只要知道三根之和。**由根与系数的关系（韦达），三次方程 x³ + px² + qx + r = 0 的三根之和是 **−p**。",
+          "本题的方程式是 x³ + 0·x² − 3x + 1 = 0，**x² 的系数是 0**，所以 α + β + γ = **0**。",
+          "代入：α³ + β³ + γ³ = 3 × 0 − 3 = **−3**。",
+          "**用另一种方法核对：牛顿恒等式。**设 e₁ = α+β+γ = 0、e₂ = αβ+βγ+γα = −3、e₃ = αβγ = −1（由系数读出，注意 e₃ = −常数项）。",
+          "幂和的公式是 **p₃ = e₁³ − 3e₁e₂ + 3e₃**。代入：p₃ = 0³ − 3 × 0 × (−3) + 3 × (−1) = 0 − 0 − 3 = **−3** ✓ 与第一种方法一致。",
+          "验算：**用数值解核对。**以牛顿法求出三个实根约为 **−1.879385、0.347296、1.532089**。",
+          "检查根之和：(−1.879385) + 0.347296 + 1.532089 ≈ **0.000000** ✓ 符合 e₁ = 0。",
+          "计算立方和：(−1.879385)³ + 0.347296³ + 1.532089³ ≈ −6.638 + 0.042 + 3.596 = **−3.000** ✓ 与答案完全相符。",
+          "**第一种方法的优势在于完全不需要牛顿恒等式。**只要方程式给出了 α³ 与 α 的关系，就能把三次的幂和降到一次，**而一次的幂和正是根与系数关系直接给出的量**。**这个技巧对任何「用根所满足的方程式降次」的题目都适用**，比死记幂和公式可靠得多。"
+        ],
+        "en": [
+          "A particularly neat approach uses directly the fact that every root satisfies the equation.",
+          "Since α is a root, α³ − 3α + 1 = 0, so α³ = 3α − 1. Likewise β³ = 3β − 1 and γ³ = 3γ − 1.",
+          "Adding the three: α³ + β³ + γ³ = 3(α + β + γ) − 3.",
+          "So only the sum of the roots is needed. By Vieta's relations, a cubic x³ + px² + qx + r = 0 has roots summing to −p.",
+          "Here the equation is x³ + 0·x² − 3x + 1 = 0, whose x² coefficient is 0, so α + β + γ = 0.",
+          "Substituting: α³ + β³ + γ³ = 3 × 0 − 3 = −3.",
+          "Cross-check with Newton's identities. Set e₁ = α+β+γ = 0, e₂ = αβ+βγ+γα = −3 and e₃ = αβγ = −1, read from the coefficients, noting that e₃ is minus the constant term.",
+          "The power-sum formula is p₃ = e₁³ − 3e₁e₂ + 3e₃, giving p₃ = 0³ − 3 × 0 × (−3) + 3 × (−1) = −3, agreeing with the first method.",
+          "Check numerically: Newton's method gives the three real roots as approximately −1.879385, 0.347296 and 1.532089.",
+          "Their sum is (−1.879385) + 0.347296 + 1.532089 ≈ 0.000000, consistent with e₁ = 0.",
+          "Their cubes sum to (−1.879385)³ + 0.347296³ + 1.532089³ ≈ −6.638 + 0.042 + 3.596 = −3.000, matching the answer exactly.",
+          "The first method's advantage is needing no Newton identity at all. The equation itself relates α³ to α, reducing a third-power sum to a first-power one — and the first-power sum is exactly what Vieta's relations supply. This reduction technique applies whenever roots satisfy a known equation and is far more reliable than memorising power-sum formulas."
+        ],
+        "ja": [
+          "**特に簡潔な方法があります：「各根が方程式を満たす」ことを直接使います。**",
+          "**α は根なので α³ − 3α + 1 = 0、移項して α³ = 3α − 1。**同様に β³ = 3β − 1、γ³ = 3γ − 1。",
+          "**3 式を足します**：α³ + β³ + γ³ = 3(α + β + γ) − 3。",
+          "**したがって必要なのは根の和だけ**です。解と係数の関係（ヴィエタ）より、3 次方程式 x³ + px² + qx + r = 0 の根の和は **−p** です。",
+          "本問は x³ + 0·x² − 3x + 1 = 0 で **x² の係数が 0** なので α + β + γ = **0**。",
+          "代入して α³ + β³ + γ³ = 3 × 0 − 3 = **−3**。",
+          "**別の方法で確認：ニュートンの恒等式。**e₁ = α+β+γ = 0、e₂ = αβ+βγ+γα = −3、e₃ = αβγ = −1（係数から読む。e₃ は定数項の符号を変えたもの）とします。",
+          "べき和の公式は **p₃ = e₁³ − 3e₁e₂ + 3e₃** で、p₃ = 0³ − 3 × 0 × (−3) + 3 × (−1) = **−3** ✓ と最初の方法に一致します。",
+          "検算：**数値解で確認します。**ニュートン法で 3 つの実根は約 **−1.879385、0.347296、1.532089**。",
+          "根の和は (−1.879385) + 0.347296 + 1.532089 ≈ **0.000000** ✓ で e₁ = 0 と整合します。",
+          "立方の和は (−1.879385)³ + 0.347296³ + 1.532089³ ≈ −6.638 + 0.042 + 3.596 = **−3.000** ✓ と答えに完全に一致します。",
+          "**最初の方法の利点はニュートンの恒等式が不要なこと**です。方程式自体が α³ と α の関係を与えるので 3 次のべき和を 1 次に下げられ、**1 次のべき和は解と係数の関係が直接与えます**。**この「根の満たす方程式で次数を下げる」技法は広く使え**、べき和の公式を暗記するよりずっと確実です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "-3"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "三次方程三根的立方和：以根滿足的方程式把 α³ 降為一次式，再用根與係數的關係求和",
+        "notes": "設計依據：詳解以「根滿足方程式故可降次」的技巧為主線，說明它免去記憶冪和公式；並以 Newton 恆等式與三個實根的數值計算兩重交叉驗證。方程式的 x² 係數為 0 使根之和恰為 0，讓降次後的計算特別乾淨。答案 −3 已用三種方式驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（三次方程三根的立方和）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "代數",
+        "topicCode": "algebra",
+        "subtopic": "三次方程三根的立方和",
+        "subtopicCode": "cubic_roots_cube_sum"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "algebra_grade12_foundation_020",
+      "topic": "algebra",
+      "subtopic": "unit_root_power_sum",
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "複數 z 滿足 z + 1/z = 1。求 z²⁰²⁴ + 1/z²⁰²⁴ 的值。",
+        "zh-Hans": "复数 z 满足 z + 1/z = 1。求 z²⁰²⁴ + 1/z²⁰²⁴ 的值。",
+        "en": "A complex number z satisfies z + 1/z = 1. Find the value of z²⁰²⁴ + 1/z²⁰²⁴.",
+        "ja": "複素数 z が z + 1/z = 1 を満たします。z²⁰²⁴ + 1/z²⁰²⁴ の値を求めなさい。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 −1。",
+        "zh-Hans": "答案是 −1。",
+        "en": "The answer is −1.",
+        "ja": "答えは −1 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "**直接算 2024 次方不可行，關鍵是找出 z 的冪次的循環週期。**",
+          "**先把條件化成 z 的方程式。**兩邊乘以 z：z² + 1 = z，即 **z² − z + 1 = 0**。",
+          "**這個式子可以看出 z 的階數。**把它兩邊乘以 (z + 1)：(z + 1)(z² − z + 1) = **z³ + 1** = 0，所以 **z³ = −1**。",
+          "**（這一步用的是立方和公式 a³ + b³ = (a + b)(a² − ab + b²)，取 a = z、b = 1。）**",
+          "**由 z³ = −1 可得 z⁶ = (z³)² = (−1)² = 1** ✓ **所以 z 的冪次以 6 為週期循環**。",
+          "**現在把 2024 對 6 取餘數。**2024 ÷ 6 = 337 餘 **2**（因為 6 × 337 = 2022，2024 − 2022 = 2）。",
+          "所以 **z²⁰²⁴ = z^(6×337+2) = (z⁶)³³⁷ × z² = 1³³⁷ × z² = z²**。同理 **1/z²⁰²⁴ = 1/z²**。",
+          "**問題化為求 z² + 1/z²。**用平方的技巧：(z + 1/z)² = z² + 2 + 1/z²，所以 **z² + 1/z² = (z + 1/z)² − 2**。",
+          "代入 z + 1/z = 1：z² + 1/z² = 1² − 2 = **−1**。",
+          "驗算：**求出 z 的具體值核對。**由 z² − z + 1 = 0 得 z = (1 ± √(1 − 4))/2 = (1 ± i√3)/2。取 **z = 0.5 + (√3/2)i**。",
+          "檢查條件：|z| = √(0.25 + 0.75) = 1，所以 1/z 是 z 的共軛 0.5 − (√3/2)i，兩者相加 = **1** ✓ 符合。",
+          "計算 z²⁰²⁴ + 1/z²⁰²⁴ 的數值：程式算得 **−1.000000** ✓ 與推導完全一致。",
+          "**注意 z³ = −1 而不是 z³ = 1。**z 是 −1 的立方根中的一個（非實數的那兩個），**它的階數是 6 而不是 3**——若誤以為週期是 3，會取 2024 mod 3 = 2 恰好也得到 z²，答案碰巧相同；**但若指數換成 2023，週期 6 給出 2023 mod 6 = 1 得 z + 1/z = 1，而誤用週期 3 會得到 2023 mod 3 = 1 也是 1**⋯ 這兩個例子都巧合相符，**真正會分歧的是指數為 3 的倍數時**：z³ + 1/z³ = −1 + (−1) = −2，而若誤以為 z³ = 1 會算出 1 + 1 = 2。**務必確認是 −1 而非 1。**"
+        ],
+        "zh-Hans": [
+          "**直接算 2024 次方不可行，关键是找出 z 的幂次的循环周期。**",
+          "**先把条件化成 z 的方程式。**两边乘以 z：z² + 1 = z，即 **z² − z + 1 = 0**。",
+          "**这个式子可以看出 z 的阶数。**把它两边乘以 (z + 1)：(z + 1)(z² − z + 1) = **z³ + 1** = 0，所以 **z³ = −1**。",
+          "**（这一步用的是立方和公式 a³ + b³ = (a + b)(a² − ab + b²)，取 a = z、b = 1。）**",
+          "**由 z³ = −1 可得 z⁶ = (z³)² = (−1)² = 1** ✓ **所以 z 的幂次以 6 为周期循环**。",
+          "**现在把 2024 对 6 取余数。**2024 ÷ 6 = 337 余 **2**（因为 6 × 337 = 2022，2024 − 2022 = 2）。",
+          "所以 **z²⁰²⁴ = z^(6×337+2) = (z⁶)³³⁷ × z² = 1³³⁷ × z² = z²**。同理 **1/z²⁰²⁴ = 1/z²**。",
+          "**问题化为求 z² + 1/z²。**用平方的技巧：(z + 1/z)² = z² + 2 + 1/z²，所以 **z² + 1/z² = (z + 1/z)² − 2**。",
+          "代入 z + 1/z = 1：z² + 1/z² = 1² − 2 = **−1**。",
+          "验算：**求出 z 的具体值核对。**由 z² − z + 1 = 0 得 z = (1 ± √(1 − 4))/2 = (1 ± i√3)/2。取 **z = 0.5 + (√3/2)i**。",
+          "检查条件：|z| = √(0.25 + 0.75) = 1，所以 1/z 是 z 的共轭 0.5 − (√3/2)i，两者相加 = **1** ✓ 符合。",
+          "计算 z²⁰²⁴ + 1/z²⁰²⁴ 的数值：程序算得 **−1.000000** ✓ 与推导完全一致。",
+          "**注意 z³ = −1 而不是 z³ = 1。**z 是 −1 的立方根中的一个（非实数的那两个），**它的阶数是 6 而不是 3**。**真正会分歧的是指数为 3 的倍数时**：z³ + 1/z³ = −1 + (−1) = −2，而若误以为 z³ = 1 会算出 1 + 1 = 2。**务必确认是 −1 而非 1。**"
+        ],
+        "en": [
+          "Computing a 2024th power directly is impossible; the key is to find the period of the powers of z.",
+          "Turn the condition into an equation. Multiplying by z gives z² + 1 = z, that is z² − z + 1 = 0.",
+          "This reveals the order of z. Multiplying by (z + 1): (z + 1)(z² − z + 1) = z³ + 1 = 0, so z³ = −1.",
+          "That step uses the sum-of-cubes identity a³ + b³ = (a + b)(a² − ab + b²) with a = z and b = 1.",
+          "From z³ = −1 comes z⁶ = (z³)² = (−1)² = 1, so the powers of z repeat with period 6.",
+          "Reduce 2024 modulo 6: 2024 ÷ 6 = 337 with remainder 2, since 6 × 337 = 2022 and 2024 − 2022 = 2.",
+          "So z²⁰²⁴ = z^(6×337+2) = (z⁶)³³⁷ × z² = z², and likewise 1/z²⁰²⁴ = 1/z².",
+          "The problem reduces to z² + 1/z². Squaring gives (z + 1/z)² = z² + 2 + 1/z², so z² + 1/z² = (z + 1/z)² − 2.",
+          "Substituting z + 1/z = 1: z² + 1/z² = 1² − 2 = −1.",
+          "Check by finding z explicitly. From z² − z + 1 = 0 comes z = (1 ± √(1 − 4))/2 = (1 ± i√3)/2; take z = 0.5 + (√3/2)i.",
+          "Verify the condition: |z| = √(0.25 + 0.75) = 1, so 1/z is the conjugate 0.5 − (√3/2)i and their sum is 1, as required.",
+          "Computing z²⁰²⁴ + 1/z²⁰²⁴ numerically gives −1.000000, exactly as derived.",
+          "Note that z³ = −1, not 1. Here z is one of the two non-real cube roots of −1, and its order is 6 rather than 3. The distinction genuinely bites when the exponent is a multiple of 3: z³ + 1/z³ = −1 + (−1) = −2, whereas assuming z³ = 1 would give 1 + 1 = 2. Confirm the sign carefully."
+        ],
+        "ja": [
+          "**2024 乗を直接計算するのは不可能で、鍵は z の累乗の周期を見つけることです。**",
+          "**条件を z の方程式にします。**両辺に z を掛けて z² + 1 = z、すなわち **z² − z + 1 = 0**。",
+          "**ここから z の位数が分かります。**両辺に (z + 1) を掛けると (z + 1)(z² − z + 1) = **z³ + 1** = 0、よって **z³ = −1**。",
+          "**（立方和の公式 a³ + b³ = (a + b)(a² − ab + b²) で a = z、b = 1 としたものです。）**",
+          "**z³ = −1 より z⁶ = (z³)² = (−1)² = 1** ✓ なので **z の累乗は周期 6 で循環**します。",
+          "**2024 を 6 で割ります。**2024 ÷ 6 = 337 余り **2**（6 × 337 = 2022、2024 − 2022 = 2）。",
+          "したがって **z²⁰²⁴ = (z⁶)³³⁷ × z² = z²**、同様に **1/z²⁰²⁴ = 1/z²**。",
+          "**問題は z² + 1/z² に帰着します。**2 乗すると (z + 1/z)² = z² + 2 + 1/z² なので **z² + 1/z² = (z + 1/z)² − 2**。",
+          "z + 1/z = 1 を代入して z² + 1/z² = 1² − 2 = **−1**。",
+          "検算：**z を具体的に求めて確認します。**z² − z + 1 = 0 より z = (1 ± i√3)/2、**z = 0.5 + (√3/2)i** をとります。",
+          "条件を確認：|z| = √(0.25 + 0.75) = 1 なので 1/z は共役 0.5 − (√3/2)i、和は **1** ✓ で条件を満たします。",
+          "z²⁰²⁴ + 1/z²⁰²⁴ を数値計算すると **−1.000000** ✓ で導出と完全に一致します。",
+          "**z³ = −1 であって 1 ではない**点に注意します。z は −1 の非実数の立方根の 1 つで、**位数は 3 ではなく 6** です。**違いが実際に効くのは指数が 3 の倍数のとき**で、z³ + 1/z³ = −1 + (−1) = −2 ですが、z³ = 1 と誤ると 1 + 1 = 2 になります。**符号を必ず確認してください。**"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "-1"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "複數的高次冪和：由 z + 1/z = 1 得 z³ = −1 故週期為 6，再以 (z + 1/z)² − 2 求 z² + 1/z²",
+        "notes": "設計依據：詳解由條件推出 z³ = −1（而非 1）並強調位數為 6，再以 2024 mod 6 化簡；並以 z³ + 1/z³ 為例說明誤認 z³ = 1 會導致 −2 與 2 的分歧。答案 −1 已用代數推導與 z = 0.5 + (√3/2)i 的數值計算雙向驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（複數的高次冪和）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "代數",
+        "topicCode": "algebra",
+        "subtopic": "複數的高次冪和",
+        "subtopicCode": "unit_root_power_sum"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "algebra_grade12_foundation_021",
+      "topic": "algebra",
+      "subtopic": "trinomial_coefficient_sum",
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "小明把 (1 + x + x²)⁵ 完全展開，得到一個關於 x 的多項式。求這個多項式所有項的係數加起來是多少。",
+        "zh-Hans": "小明把 (1 + x + x²)⁵ 完全展开，得到一个关于 x 的多项式。求这个多项式所有项的系数加起来是多少。",
+        "en": "Expanding (1 + x + x²)⁵ completely yields a polynomial in x. What do all of that polynomial's coefficients add up to?",
+        "ja": "(1 + x + x²)⁵ を完全に展開すると x の多項式が得られます。その多項式のすべての項の係数を足すといくつになりますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 243。",
+        "zh-Hans": "答案是 243。",
+        "en": "The answer is 243.",
+        "ja": "答えは 243 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "**實際展開會得到 11 項（次數 0 到 10），逐一算係數再相加太費事。**有一個一步到位的做法。",
+          "**設展開後是 a₀ + a₁x + a₂x² + ⋯ + a₁₀x¹⁰**，我們要求的是 a₀ + a₁ + ⋯ + a₁₀。",
+          "**關鍵觀察：把 x = 1 代入展開式，每一項的 x 的冪次都變成 1，所以整個式子就等於所有係數之和。**",
+          "也就是 **a₀ + a₁ + ⋯ + a₁₀ = a₀·1⁰ + a₁·1¹ + ⋯ + a₁₀·1¹⁰ = 展開式在 x = 1 的值**。",
+          "**而展開式與原式恆等**，所以只要把 x = 1 代入**原式**即可。",
+          "代入：(1 + 1 + 1²)⁵ = (1 + 1 + 1)⁵ = **3⁵**。",
+          "計算 3⁵：3² = 9，3⁴ = 81，3⁵ = 81 × 3 = **243**。",
+          "所以所有係數之和是 **243**。",
+          "驗算：**用小一點的次方核對這個方法。**(1 + x + x²)¹ 的係數是 1、1、1，和為 3 = 3¹ ✓。",
+          "(1 + x + x²)² = 1 + 2x + 3x² + 2x³ + x⁴，係數是 1、2、3、2、1，和為 **9 = 3²** ✓ 方法成立。",
+          "程式展開 (1 + x + x²)⁵ 並把 11 個係數相加，結果正是 **243** ✓（係數依序是 1、5、15、30、45、51、45、30、15、5、1，相加確為 243）。",
+          "**注意這個技巧要求的是「所有係數之和」，而不是別的。**若題目改問**偶數次項的係數之和**，就要同時用 x = 1 與 x = −1：代 x = −1 得 (1 − 1 + 1)⁵ = 1，而「x = 1 的值加上 x = −1 的值再除以 2」才是偶數次項的係數和，即 (243 + 1) ÷ 2 = **122**。**兩者差很多，讀題時要看清問的是哪一種。**"
+        ],
+        "zh-Hans": [
+          "**实际展开会得到 11 项（次数 0 到 10），逐一算系数再相加太费事。**有一个一步到位的做法。",
+          "**设展开后是 a₀ + a₁x + a₂x² + ⋯ + a₁₀x¹⁰**，我们要求的是 a₀ + a₁ + ⋯ + a₁₀。",
+          "**关键观察：把 x = 1 代入展开式，每一项的 x 的幂次都变成 1，所以整个式子就等于所有系数之和。**",
+          "也就是 **a₀ + a₁ + ⋯ + a₁₀ = a₀·1⁰ + a₁·1¹ + ⋯ + a₁₀·1¹⁰ = 展开式在 x = 1 的值**。",
+          "**而展开式与原式恒等**，所以只要把 x = 1 代入**原式**即可。",
+          "代入：(1 + 1 + 1²)⁵ = (1 + 1 + 1)⁵ = **3⁵**。",
+          "计算 3⁵：3² = 9，3⁴ = 81，3⁵ = 81 × 3 = **243**。",
+          "所以所有系数之和是 **243**。",
+          "验算：**用小一点的次方核对这个方法。**(1 + x + x²)¹ 的系数是 1、1、1，和为 3 = 3¹ ✓。",
+          "(1 + x + x²)² = 1 + 2x + 3x² + 2x³ + x⁴，系数是 1、2、3、2、1，和为 **9 = 3²** ✓ 方法成立。",
+          "程序展开 (1 + x + x²)⁵ 并把 11 个系数相加，结果正是 **243** ✓（系数依序是 1、5、15、30、45、51、45、30、15、5、1，相加确为 243）。",
+          "**注意这个技巧要求的是「所有系数之和」，而不是别的。**若题目改问**偶数次项的系数之和**，就要同时用 x = 1 与 x = −1：代 x = −1 得 (1 − 1 + 1)⁵ = 1，而「x = 1 的值加上 x = −1 的值再除以 2」才是偶数次项的系数和，即 (243 + 1) ÷ 2 = **122**。**两者差很多，读题时要看清问的是哪一种。**"
+        ],
+        "en": [
+          "Expanding fully would give 11 terms of degrees 0 through 10, and computing each coefficient then adding is laborious. A one-step method exists.",
+          "Write the expansion as a₀ + a₁x + a₂x² + ⋯ + a₁₀x¹⁰; the sum a₀ + a₁ + ⋯ + a₁₀ is wanted.",
+          "The key observation: substituting x = 1 turns every power of x into 1, so the whole expression equals the sum of the coefficients.",
+          "That is, a₀ + a₁ + ⋯ + a₁₀ = a₀·1⁰ + a₁·1¹ + ⋯ + a₁₀·1¹⁰, the value of the expansion at x = 1.",
+          "And the expansion is identical to the original expression, so substitute x = 1 into the original.",
+          "That gives (1 + 1 + 1²)⁵ = (1 + 1 + 1)⁵ = 3⁵.",
+          "Computing 3⁵: 3² = 9, 3⁴ = 81 and 3⁵ = 81 × 3 = 243.",
+          "So the coefficients sum to 243.",
+          "Check the method on smaller powers. For (1 + x + x²)¹ the coefficients are 1, 1, 1 summing to 3 = 3¹.",
+          "For (1 + x + x²)² = 1 + 2x + 3x² + 2x³ + x⁴ the coefficients are 1, 2, 3, 2, 1 summing to 9 = 3², so the method holds.",
+          "Expanding (1 + x + x²)⁵ and adding the 11 coefficients gives exactly 243 — they run 1, 5, 15, 30, 45, 51, 45, 30, 15, 5, 1, and indeed sum to 243.",
+          "Note the technique answers the sum of all coefficients and nothing else. Asking instead for the sum of the even-degree coefficients would require both x = 1 and x = −1: substituting x = −1 gives (1 − 1 + 1)⁵ = 1, and half the sum of the two values gives the even-degree total, (243 + 1) ÷ 2 = 122. The two differ greatly, so read the question carefully."
+        ],
+        "ja": [
+          "**実際に展開すると 11 項（次数 0〜10）になり、係数を 1 つずつ求めて足すのは手間**です。一手で済む方法があります。",
+          "**展開を a₀ + a₁x + a₂x² + ⋯ + a₁₀x¹⁰ とおく**と、求めるのは a₀ + a₁ + ⋯ + a₁₀ です。",
+          "**鍵となる観察：x = 1 を代入すると x のどの累乗も 1 になり、式全体が係数の総和に等しくなります。**",
+          "すなわち **a₀ + a₁ + ⋯ + a₁₀ = 展開式の x = 1 における値**です。",
+          "**展開式は元の式と恒等**なので、**元の式**に x = 1 を代入すれば十分です。",
+          "代入すると (1 + 1 + 1²)⁵ = (1 + 1 + 1)⁵ = **3⁵**。",
+          "3⁵ を計算します：3² = 9、3⁴ = 81、3⁵ = 81 × 3 = **243**。",
+          "したがって係数の総和は **243** です。",
+          "検算：**小さい指数でこの方法を確認します。**(1 + x + x²)¹ の係数は 1、1、1 で和は 3 = 3¹ ✓。",
+          "(1 + x + x²)² = 1 + 2x + 3x² + 2x³ + x⁴ の係数は 1、2、3、2、1 で和は **9 = 3²** ✓ 方法は正しいです。",
+          "(1 + x + x²)⁵ を展開して 11 個の係数を足すと、ちょうど **243** ✓（係数は順に 1、5、15、30、45、51、45、30、15、5、1 で和は確かに 243）。",
+          "**この技法が答えるのは「すべての係数の和」であって他ではありません。****偶数次の項の係数の和**を問われたら x = 1 と x = −1 の両方が必要で、x = −1 では (1 − 1 + 1)⁵ = 1、両者の和の半分が偶数次の和で (243 + 1) ÷ 2 = **122** です。**大きく異なるので何が問われているかを読み取ることが大切です。**"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "243"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "三項式展開的係數和：代入 x = 1 使每項的冪次化為 1，展開式的值即為所有係數之和",
+        "notes": "設計依據：詳解說明代 x = 1 之所以給出係數和的理由，並以指數 1 與 2 的小例子驗證方法；末尾指出若改問偶數次項的係數和則需同時用 x = ±1，答案為 122，量化兩者的差別。答案 243 已用代入法與實際展開後 11 個係數相加雙向驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（三項式展開的係數和）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "代數",
+        "topicCode": "algebra",
+        "subtopic": "三項式展開的係數和",
+        "subtopicCode": "trinomial_coefficient_sum"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "algebra_grade12_foundation_022",
+      "topic": "algebra",
+      "subtopic": "radical_equation_two_roots",
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "求方程式 √(x + 7) + √x = 7 的實數解。",
+        "zh-Hans": "求方程式 √(x + 7) + √x = 7 的实数解。",
+        "en": "Solve the equation √(x + 7) + √x = 7 for real x.",
+        "ja": "方程式 √(x + 7) + √x = 7 の実数解を求めなさい。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 9。",
+        "zh-Hans": "答案是 9。",
+        "en": "The answer is 9.",
+        "ja": "答えは 9 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "**先確定定義域。**兩個根號都要有意義：x + 7 ≥ 0 且 x ≥ 0，兩者合起來就是 **x ≥ 0**。",
+          "**直接兩邊平方會留下一個根號，比較麻煩。先移項再平方。**把式子改寫成 **√(x + 7) = 7 − √x**。",
+          "**注意右邊必須非負**（因為左邊是根號，恆非負），所以 7 − √x ≥ 0，即 √x ≤ 7，也就是 **x ≤ 49**。這是一個額外的限制。",
+          "**兩邊平方**：x + 7 = (7 − √x)² = 49 − 14√x + x。",
+          "**兩邊的 x 消去**：7 = 49 − 14√x。",
+          "移項：14√x = 49 − 7 = **42**，所以 **√x = 3**。",
+          "兩邊再平方：**x = 9**。",
+          "**檢查它落在定義域內**：0 ≤ 9 ≤ 49 ✓ 通過。",
+          "驗算：**代回原式檢查（平方過的方程式必須驗根）。**√(9 + 7) + √9 = √16 + 3 = 4 + 3 = **7** ✓ 完全符合。",
+          "**還要確認沒有其他解。**上面的推導每一步都是等價變形或在已知非負的前提下平方，最後解出 √x = 3 只有唯一一個非負解 x = 9 ✓ 所以解是唯一的。",
+          "**也可以從函數的單調性看出唯一性**：√(x + 7) 與 √x 都是遞增函數，所以它們的和也是遞增的，**遞增函數與水平線 y = 7 至多只有一個交點** ✓ 解必唯一。程式在 0 到 100 之間密集掃描，符合的 x 也只有 **9** ✓。",
+          "**平方是可能產生增根的操作，所以驗根不可省略。**本題若不驗根，仍然只會得到 x = 9；但若把等號右邊改成一個較小的數（例如 √(x+7) + √x = 1），移項後 7 − √x 這類條件就會排除某些形式上的解，**驗根就是在把這些不合的解濾掉**。"
+        ],
+        "zh-Hans": [
+          "**先确定定义域。**两个根号都要有意义：x + 7 ≥ 0 且 x ≥ 0，两者合起来就是 **x ≥ 0**。",
+          "**直接两边平方会留下一个根号，比较麻烦。先移项再平方。**把式子改写成 **√(x + 7) = 7 − √x**。",
+          "**注意右边必须非负**（因为左边是根号，恒非负），所以 7 − √x ≥ 0，即 √x ≤ 7，也就是 **x ≤ 49**。这是一个额外的限制。",
+          "**两边平方**：x + 7 = (7 − √x)² = 49 − 14√x + x。",
+          "**两边的 x 消去**：7 = 49 − 14√x。",
+          "移项：14√x = 49 − 7 = **42**，所以 **√x = 3**。",
+          "两边再平方：**x = 9**。",
+          "**检查它落在定义域内**：0 ≤ 9 ≤ 49 ✓ 通过。",
+          "验算：**代回原式检查（平方过的方程式必须验根）。**√(9 + 7) + √9 = √16 + 3 = 4 + 3 = **7** ✓ 完全符合。",
+          "**还要确认没有其他解。**上面的推导每一步都是等价变形或在已知非负的前提下平方，最后解出 √x = 3 只有唯一一个非负解 x = 9 ✓ 所以解是唯一的。",
+          "**也可以从函数的单调性看出唯一性**：√(x + 7) 与 √x 都是递增函数，所以它们的和也是递增的，**递增函数与水平线 y = 7 至多只有一个交点** ✓ 解必唯一。程序在 0 到 100 之间密集扫描，符合的 x 也只有 **9** ✓。",
+          "**平方是可能产生增根的操作，所以验根不可省略。**本题若不验根，仍然只会得到 x = 9；但若把等号右边改成一个较小的数（例如 √(x+7) + √x = 1），移项后 7 − √x 这类条件就会排除某些形式上的解，**验根就是在把这些不合的解滤掉**。"
+        ],
+        "en": [
+          "Fix the domain first. Both radicals must be defined: x + 7 ≥ 0 and x ≥ 0, which together give x ≥ 0.",
+          "Squaring immediately would leave one radical behind, which is awkward. Rearrange first: √(x + 7) = 7 − √x.",
+          "The right side must be non-negative, since the left is a square root, so 7 − √x ≥ 0, that is √x ≤ 7 and x ≤ 49 — an additional restriction.",
+          "Squaring both sides: x + 7 = (7 − √x)² = 49 − 14√x + x.",
+          "The x on each side cancels: 7 = 49 − 14√x.",
+          "Rearranging: 14√x = 49 − 7 = 42, so √x = 3.",
+          "Squaring again: x = 9.",
+          "Check it lies in the domain: 0 ≤ 9 ≤ 49, which it does.",
+          "Verify in the original equation, as squaring demands: √(9 + 7) + √9 = √16 + 3 = 4 + 3 = 7, exactly right.",
+          "Confirm there are no others. Every step above was an equivalent transformation or a squaring under a known non-negativity condition, and √x = 3 has the single non-negative solution x = 9, so the solution is unique.",
+          "Monotonicity confirms uniqueness independently: √(x + 7) and √x both increase, so their sum increases too, and an increasing function meets the horizontal line y = 7 at most once. Scanning densely from 0 to 100 also finds only x = 9.",
+          "Squaring can introduce extraneous roots, so verification cannot be skipped. Here nothing spurious arises, but with a smaller right-hand side, say √(x+7) + √x = 1, conditions such as the non-negativity of 7 − √x would exclude certain formal solutions — and checking roots is exactly what filters those out."
+        ],
+        "ja": [
+          "**まず定義域を定めます。**両方の根号が意味をもつには x + 7 ≥ 0 かつ x ≥ 0、合わせて **x ≥ 0** です。",
+          "**そのまま 2 乗すると根号が 1 つ残り面倒**です。移項してから 2 乗します：**√(x + 7) = 7 − √x**。",
+          "**右辺は非負でなければなりません**（左辺が根号で非負のため）。7 − √x ≥ 0 より √x ≤ 7、すなわち **x ≤ 49** という追加の制約が生じます。",
+          "**両辺を 2 乗**：x + 7 = (7 − √x)² = 49 − 14√x + x。",
+          "**両辺の x が消えます**：7 = 49 − 14√x。",
+          "移項して 14√x = 49 − 7 = **42**、よって **√x = 3**。",
+          "再び 2 乗して **x = 9**。",
+          "**定義域内か確認**：0 ≤ 9 ≤ 49 ✓ 適合します。",
+          "検算：**元の式に代入します（2 乗した方程式は検算が必須）。**√(9 + 7) + √9 = √16 + 3 = 4 + 3 = **7** ✓ 完全に一致します。",
+          "**他に解がないことも確認します。**上の各段階は同値変形か、非負が保証された下での 2 乗であり、√x = 3 の非負解は x = 9 のみ ✓ なので解は一意です。",
+          "**単調性からも一意性が分かります**：√(x + 7) も √x も増加関数なので和も増加し、**増加関数と水平線 y = 7 の交点は高々 1 つ** ✓。0〜100 を密に走査しても該当は **9** のみ ✓ です。",
+          "**2 乗は無縁解を生みうる操作なので検算は省けません。**本問では無縁解は生じませんが、右辺をより小さい数（√(x+7) + √x = 1 など）にすると 7 − √x の非負性のような条件が形式上の解を排除します。**検算はまさにそれを濾し取る作業**です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "9"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "兩個根號的方程式：移項後平方以避免留下根號，須檢查移項後右邊的非負條件並驗根",
+        "notes": "設計依據：詳解先移項再平方以避免殘留根號，並明確導出 x ≤ 49 這個由非負性帶來的額外限制；驗根之外另以函數遞增性論證解的唯一性，並說明平方為何必須驗根。答案 9 已用代回原式與 0 到 100 的密集掃描雙向驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（兩個根號的方程式）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "代數",
+        "topicCode": "algebra",
+        "subtopic": "兩個根號的方程式",
+        "subtopicCode": "radical_equation_two_roots"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "algebra_grade12_foundation_023",
+      "topic": "algebra",
+      "subtopic": "fourth_power_sum",
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "實數 a、b、c 滿足 a + b + c = 0 且 a² + b² + c² = 6。求 a⁴ + b⁴ + c⁴ 的值。",
+        "zh-Hans": "实数 a、b、c 满足 a + b + c = 0 且 a² + b² + c² = 6。求 a⁴ + b⁴ + c⁴ 的值。",
+        "en": "Real numbers a, b and c satisfy a + b + c = 0 and a² + b² + c² = 6. Find a⁴ + b⁴ + c⁴.",
+        "ja": "実数 a、b、c が a + b + c = 0 かつ a² + b² + c² = 6 を満たします。a⁴ + b⁴ + c⁴ の値を求めなさい。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 18。",
+        "zh-Hans": "答案是 18。",
+        "en": "The answer is 18.",
+        "ja": "答えは 18 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "**只有兩個條件卻要求四次冪和，關鍵是用「平方展開」把高次降下來。**",
+          "**先由前兩個條件求出 ab + bc + ca。**把 a + b + c = 0 兩邊平方：",
+          "(a + b + c)² = a² + b² + c² + 2(ab + bc + ca) = **0**。",
+          "代入 a² + b² + c² = 6：6 + 2(ab + bc + ca) = 0，得 **ab + bc + ca = −3**。",
+          "**接著把 a² + b² + c² 平方**：(a² + b² + c²)² = a⁴ + b⁴ + c⁴ + 2(a²b² + b²c² + c²a²) = 6² = **36**。",
+          "**所以只要再求出 a²b² + b²c² + c²a²。**",
+          "**這個量可以由 ab + bc + ca 平方得到**：(ab + bc + ca)² = a²b² + b²c² + c²a² + 2abc(a + b + c)。",
+          "**而 a + b + c = 0，所以最後那一項整個消失** ✓ 得 a²b² + b²c² + c²a² = (ab + bc + ca)² = (−3)² = **9**。",
+          "**代回**：36 = a⁴ + b⁴ + c⁴ + 2 × 9 = a⁴ + b⁴ + c⁴ + 18。",
+          "所以 **a⁴ + b⁴ + c⁴ = 36 − 18 = 18**。",
+          "驗算：**找一組具體的數核對。**取 a = 2、b = −1、c = −1：和為 2 − 1 − 1 = **0** ✓；平方和為 4 + 1 + 1 = **6** ✓ 兩個條件都滿足。",
+          "四次冪和：2⁴ + (−1)⁴ + (−1)⁴ = 16 + 1 + 1 = **18** ✓ 相符。",
+          "**再取一組不同的數**：程式解出以 −3 為 e₂、以 1 為 e₃ 的三次方程的根約為 −1.5321、−0.3473、1.8794。檢查：和 ≈ 0 ✓、平方和 ≈ 6 ✓、四次冪和 ≈ **18.0000** ✓ **與第一組完全相同**——**這印證了答案只由那兩個條件決定，與 abc 的值無關**。",
+          "**注意這裡 a + b + c = 0 這個條件用了兩次**：一次用來求 ab + bc + ca，一次用來消掉 2abc(a+b+c) 那一項。**若和不為 0，就會多出一個含 abc 的未知量，兩個條件便不足以定出答案。**"
+        ],
+        "zh-Hans": [
+          "**只有两个条件却要求四次幂和，关键是用「平方展开」把高次降下来。**",
+          "**先由前两个条件求出 ab + bc + ca。**把 a + b + c = 0 两边平方：",
+          "(a + b + c)² = a² + b² + c² + 2(ab + bc + ca) = **0**。",
+          "代入 a² + b² + c² = 6：6 + 2(ab + bc + ca) = 0，得 **ab + bc + ca = −3**。",
+          "**接着把 a² + b² + c² 平方**：(a² + b² + c²)² = a⁴ + b⁴ + c⁴ + 2(a²b² + b²c² + c²a²) = 6² = **36**。",
+          "**所以只要再求出 a²b² + b²c² + c²a²。**",
+          "**这个量可以由 ab + bc + ca 平方得到**：(ab + bc + ca)² = a²b² + b²c² + c²a² + 2abc(a + b + c)。",
+          "**而 a + b + c = 0，所以最后那一项整个消失** ✓ 得 a²b² + b²c² + c²a² = (ab + bc + ca)² = (−3)² = **9**。",
+          "**代回**：36 = a⁴ + b⁴ + c⁴ + 2 × 9 = a⁴ + b⁴ + c⁴ + 18。",
+          "所以 **a⁴ + b⁴ + c⁴ = 36 − 18 = 18**。",
+          "验算：**找一组具体的数核对。**取 a = 2、b = −1、c = −1：和为 2 − 1 − 1 = **0** ✓；平方和为 4 + 1 + 1 = **6** ✓ 两个条件都满足。",
+          "四次幂和：2⁴ + (−1)⁴ + (−1)⁴ = 16 + 1 + 1 = **18** ✓ 相符。",
+          "**再取一组不同的数**：程序解出以 −3 为 e₂、以 1 为 e₃ 的三次方程的根约为 −1.5321、−0.3473、1.8794。检查：和 ≈ 0 ✓、平方和 ≈ 6 ✓、四次幂和 ≈ **18.0000** ✓ **与第一组完全相同**——**这印证了答案只由那两个条件决定，与 abc 的值无关**。",
+          "**注意这里 a + b + c = 0 这个条件用了两次**：一次用来求 ab + bc + ca，一次用来消掉 2abc(a+b+c) 那一项。**若和不为 0，就会多出一个含 abc 的未知量，两个条件便不足以定出答案。**"
+        ],
+        "en": [
+          "Two conditions must yield a fourth-power sum, and the key is to lower the degree by squaring.",
+          "First find ab + bc + ca from the given conditions. Squaring a + b + c = 0:",
+          "(a + b + c)² = a² + b² + c² + 2(ab + bc + ca) = 0.",
+          "Substituting a² + b² + c² = 6 gives 6 + 2(ab + bc + ca) = 0, so ab + bc + ca = −3.",
+          "Now square a² + b² + c²: (a² + b² + c²)² = a⁴ + b⁴ + c⁴ + 2(a²b² + b²c² + c²a²) = 6² = 36.",
+          "So only a²b² + b²c² + c²a² remains to be found.",
+          "That comes from squaring ab + bc + ca: (ab + bc + ca)² = a²b² + b²c² + c²a² + 2abc(a + b + c).",
+          "And since a + b + c = 0 the final term vanishes entirely, giving a²b² + b²c² + c²a² = (−3)² = 9.",
+          "Substituting back: 36 = a⁴ + b⁴ + c⁴ + 2 × 9 = a⁴ + b⁴ + c⁴ + 18.",
+          "So a⁴ + b⁴ + c⁴ = 36 − 18 = 18.",
+          "Check with concrete values. Take a = 2, b = −1 and c = −1: the sum is 2 − 1 − 1 = 0 and the sum of squares is 4 + 1 + 1 = 6, satisfying both conditions.",
+          "The fourth powers give 2⁴ + (−1)⁴ + (−1)⁴ = 16 + 1 + 1 = 18, as claimed.",
+          "Try a different triple: solving the cubic with e₂ = −3 and e₃ = 1 gives roots about −1.5321, −0.3473 and 1.8794, whose sum is ≈ 0, whose squares sum to ≈ 6, and whose fourth powers sum to ≈ 18.0000 — identical to the first triple, confirming that the answer depends only on the two given conditions and not on the value of abc.",
+          "Note that a + b + c = 0 was used twice: once to find ab + bc + ca and once to eliminate the term 2abc(a+b+c). With a non-zero sum an extra unknown involving abc would survive, and two conditions would no longer suffice."
+        ],
+        "ja": [
+          "**条件が 2 つだけで 4 次のべき和を求めるので、鍵は 2 乗による次数下げ**です。",
+          "**まず与えられた条件から ab + bc + ca を求めます。**a + b + c = 0 の両辺を 2 乗すると：",
+          "(a + b + c)² = a² + b² + c² + 2(ab + bc + ca) = **0**。",
+          "a² + b² + c² = 6 を代入して 6 + 2(ab + bc + ca) = 0、よって **ab + bc + ca = −3**。",
+          "**次に a² + b² + c² を 2 乗**します：(a² + b² + c²)² = a⁴ + b⁴ + c⁴ + 2(a²b² + b²c² + c²a²) = 6² = **36**。",
+          "**あとは a²b² + b²c² + c²a² が分かればよい**ことになります。",
+          "**これは ab + bc + ca の 2 乗から得られます**：(ab + bc + ca)² = a²b² + b²c² + c²a² + 2abc(a + b + c)。",
+          "**a + b + c = 0 なので最後の項がまるごと消え** ✓、a²b² + b²c² + c²a² = (−3)² = **9**。",
+          "**戻します**：36 = a⁴ + b⁴ + c⁴ + 2 × 9 = a⁴ + b⁴ + c⁴ + 18。",
+          "したがって **a⁴ + b⁴ + c⁴ = 36 − 18 = 18**。",
+          "検算：**具体的な値で確認します。**a = 2、b = −1、c = −1 とすると和は 2 − 1 − 1 = **0** ✓、平方和は 4 + 1 + 1 = **6** ✓ で両条件を満たします。",
+          "4 乗の和は 2⁴ + (−1)⁴ + (−1)⁴ = 16 + 1 + 1 = **18** ✓ で一致します。",
+          "**別の組でも確認**：e₂ = −3、e₃ = 1 の 3 次方程式の根は約 −1.5321、−0.3473、1.8794 で、和 ≈ 0 ✓、平方和 ≈ 6 ✓、4 乗の和 ≈ **18.0000** ✓ と**最初の組とまったく同じ**——**答えが 2 つの条件だけで決まり、abc の値に依らない**ことが裏づけられます。",
+          "**a + b + c = 0 は 2 回使われています**：ab + bc + ca を求める際と、2abc(a+b+c) の項を消す際です。**和が 0 でなければ abc を含む未知量が残り、条件 2 つでは答えを定められません。**"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "18"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "四次冪和：由 (a+b+c)² 求出 ab+bc+ca，再由 (a²+b²+c²)² 與 (ab+bc+ca)² 逐步降次",
+        "notes": "設計依據：詳解指出 a + b + c = 0 這個條件被用了兩次（求二次對稱式與消去含 abc 的項），並說明若和不為 0 則兩個條件不足以定出答案；驗算取 (2, −1, −1) 與一組無理數根兩組值，確認結果與 abc 無關。答案 18 已用代數推導與兩組具體數值交叉驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（四次冪和）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "代數",
+        "topicCode": "algebra",
+        "subtopic": "四次冪和",
+        "subtopicCode": "fourth_power_sum"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "algebra_grade12_foundation_024",
+      "topic": "algebra",
+      "subtopic": "nested_cube_roots",
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "求 ∛(2 + √5) + ∛(2 − √5) 的值。（注意 √5 ≈ 2.236，所以 2 − √5 是負數，其立方根仍為實數）",
+        "zh-Hans": "求 ∛(2 + √5) + ∛(2 − √5) 的值。（注意 √5 ≈ 2.236，所以 2 − √5 是负数，其立方根仍为实数）",
+        "en": "Find the value of ∛(2 + √5) + ∛(2 − √5). Note that √5 ≈ 2.236, so 2 − √5 is negative, though its cube root is still real.",
+        "ja": "∛(2 + √5) + ∛(2 − √5) の値を求めなさい。（√5 ≈ 2.236 なので 2 − √5 は負ですが、その立方根は実数です）"
+      },
+      "answer": {
+        "zh-Hant": "答案是 1。",
+        "zh-Hans": "答案是 1。",
+        "en": "The answer is 1.",
+        "ja": "答えは 1 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "**直接開立方根算不出漂亮的值，改用「設它為 t，再造出 t 的方程式」的手法。**",
+          "**設 t = ∛(2 + √5) + ∛(2 − √5)**，並記 p = ∛(2 + √5)、q = ∛(2 − √5)，所以 **t = p + q**。",
+          "**先算兩個有用的量。**p³ + q³ = (2 + √5) + (2 − √5) = **4**（根號互相抵銷）。",
+          "**pq = ∛((2 + √5)(2 − √5))** = ∛(4 − 5) = ∛(−1) = **−1**。",
+          "**現在用立方和的展開式**：(p + q)³ = p³ + q³ + 3pq(p + q)。",
+          "**代入已知**：t³ = 4 + 3 × (−1) × t = 4 − 3t。",
+          "移項得 **t³ + 3t − 4 = 0**。",
+          "**解這個三次方程。**觀察 t = 1：1 + 3 − 4 = **0** ✓ 所以 t = 1 是一個根。",
+          "**因式分解**：t³ + 3t − 4 = (t − 1)(t² + t + 4)。**檢查二次因式的判別式**：1² − 4 × 1 × 4 = 1 − 16 = **−15 < 0**，所以它沒有實根 ✗。",
+          "**因此 t = 1 是唯一的實數解。**由於 t 本身是兩個實數立方根之和，必定是實數，所以 **t = 1**。",
+          "驗算：**用小數核對。**∛(2 + 2.236) = ∛4.236 ≈ **1.6180**；2 − √5 ≈ −0.236，其立方根 ≈ **−0.6180**。",
+          "兩者相加：1.6180 + (−0.6180) = **1.0000** ✓ 與答案完全相符。程式以高精度計算也得到 **1.0000000000** ✓。",
+          "**注意 q = ∛(2 − √5) 是負數，這一點不可忽略。**若誤把它當成正數（例如寫成 ∛(√5 − 2)），兩者相加會得到約 1.618 + 0.618 = 2.236 = √5，**答案就完全不同了**。**負數的立方根是實數且為負，這與平方根不同**——立方根對負數有定義，這正是本題能有實數答案的原因。"
+        ],
+        "zh-Hans": [
+          "**直接开立方根算不出漂亮的值，改用「设它为 t，再造出 t 的方程式」的手法。**",
+          "**设 t = ∛(2 + √5) + ∛(2 − √5)**，并记 p = ∛(2 + √5)、q = ∛(2 − √5)，所以 **t = p + q**。",
+          "**先算两个有用的量。**p³ + q³ = (2 + √5) + (2 − √5) = **4**（根号互相抵销）。",
+          "**pq = ∛((2 + √5)(2 − √5))** = ∛(4 − 5) = ∛(−1) = **−1**。",
+          "**现在用立方和的展开式**：(p + q)³ = p³ + q³ + 3pq(p + q)。",
+          "**代入已知**：t³ = 4 + 3 × (−1) × t = 4 − 3t。",
+          "移项得 **t³ + 3t − 4 = 0**。",
+          "**解这个三次方程。**观察 t = 1：1 + 3 − 4 = **0** ✓ 所以 t = 1 是一个根。",
+          "**因式分解**：t³ + 3t − 4 = (t − 1)(t² + t + 4)。**检查二次因式的判别式**：1² − 4 × 1 × 4 = 1 − 16 = **−15 < 0**，所以它没有实根 ✗。",
+          "**因此 t = 1 是唯一的实数解。**由于 t 本身是两个实数立方根之和，必定是实数，所以 **t = 1**。",
+          "验算：**用小数核对。**∛(2 + 2.236) = ∛4.236 ≈ **1.6180**；2 − √5 ≈ −0.236，其立方根 ≈ **−0.6180**。",
+          "两者相加：1.6180 + (−0.6180) = **1.0000** ✓ 与答案完全相符。程序以高精度计算也得到 **1.0000000000** ✓。",
+          "**注意 q = ∛(2 − √5) 是负数，这一点不可忽略。**若误把它当成正数（例如写成 ∛(√5 − 2)），两者相加会得到约 1.618 + 0.618 = 2.236 = √5，**答案就完全不同了**。**负数的立方根是实数且为负，这与平方根不同**——立方根对负数有定义，这正是本题能有实数答案的原因。"
+        ],
+        "en": [
+          "Extracting the cube roots directly yields nothing tidy; instead set the expression equal to t and construct an equation for t.",
+          "Let t = ∛(2 + √5) + ∛(2 − √5), writing p = ∛(2 + √5) and q = ∛(2 − √5), so t = p + q.",
+          "Compute two useful quantities. First p³ + q³ = (2 + √5) + (2 − √5) = 4, the radicals cancelling.",
+          "And pq = ∛((2 + √5)(2 − √5)) = ∛(4 − 5) = ∛(−1) = −1.",
+          "Now use the expansion (p + q)³ = p³ + q³ + 3pq(p + q).",
+          "Substituting: t³ = 4 + 3 × (−1) × t = 4 − 3t.",
+          "Rearranging: t³ + 3t − 4 = 0.",
+          "Solve this cubic. Trying t = 1 gives 1 + 3 − 4 = 0, so t = 1 is a root.",
+          "Factoring: t³ + 3t − 4 = (t − 1)(t² + t + 4). The quadratic factor has discriminant 1² − 4 × 1 × 4 = −15 < 0, so it has no real roots.",
+          "Hence t = 1 is the only real solution, and since t is a sum of two real cube roots it must be real, giving t = 1.",
+          "Check numerically: ∛(2 + 2.236) = ∛4.236 ≈ 1.6180, while 2 − √5 ≈ −0.236 has cube root ≈ −0.6180.",
+          "Adding: 1.6180 + (−0.6180) = 1.0000, exactly as claimed. High-precision computation also gives 1.0000000000.",
+          "Note that q = ∛(2 − √5) is negative and this must not be overlooked. Treating it as positive, writing ∛(√5 − 2) instead, would give roughly 1.618 + 0.618 = 2.236 = √5, an entirely different answer. Cube roots of negative numbers are real and negative, unlike square roots — cube roots are defined for negatives, which is exactly why this expression has a real value."
+        ],
+        "ja": [
+          "**立方根を直接開いても綺麗な値にならない**ので、「t とおいて t の方程式を作る」手法を使います。",
+          "**t = ∛(2 + √5) + ∛(2 − √5)** とおき、p = ∛(2 + √5)、q = ∛(2 − √5) と記すと **t = p + q** です。",
+          "**有用な量を 2 つ求めます。**p³ + q³ = (2 + √5) + (2 − √5) = **4**（根号が打ち消し合う）。",
+          "**pq = ∛((2 + √5)(2 − √5))** = ∛(4 − 5) = ∛(−1) = **−1**。",
+          "**立方和の展開式**を使います：(p + q)³ = p³ + q³ + 3pq(p + q)。",
+          "**代入すると** t³ = 4 + 3 × (−1) × t = 4 − 3t。",
+          "移項して **t³ + 3t − 4 = 0**。",
+          "**この 3 次方程式を解きます。**t = 1 を試すと 1 + 3 − 4 = **0** ✓ なので t = 1 は根です。",
+          "**因数分解**：t³ + 3t − 4 = (t − 1)(t² + t + 4)。**2 次因子の判別式**は 1² − 4 × 1 × 4 = **−15 < 0** で実根をもちません ✗。",
+          "**したがって t = 1 が唯一の実数解**です。t は 2 つの実数の立方根の和なので実数であり、**t = 1** です。",
+          "検算：**小数で確認します。**∛(2 + 2.236) = ∛4.236 ≈ **1.6180**、2 − √5 ≈ −0.236 の立方根は ≈ **−0.6180**。",
+          "足すと 1.6180 + (−0.6180) = **1.0000** ✓ で答えに完全に一致し、高精度計算でも **1.0000000000** ✓ です。",
+          "**q = ∛(2 − √5) が負であることを見落としてはいけません。**正と誤って ∛(√5 − 2) と書くと約 1.618 + 0.618 = 2.236 = √5 となり、**まったく別の答え**になります。**負数の立方根は実数で負**であり、平方根とは異なります——立方根は負数に対して定義され、それこそが本問が実数の値をもつ理由です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "1"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "兩個立方根之和：設其為 t 並由 (p+q)³ 的展開造出三次方程，再確認只有一個實根",
+        "notes": "設計依據：詳解以立方展開造出 t³ + 3t − 4 = 0，並以判別式確認二次因式無實根故實數解唯一；特別強調 ∛(2 − √5) 為負數，量化誤當成正數會得到 √5 這個完全不同的答案。答案 1 已用代數推導與高精度數值計算雙向驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（兩個立方根之和）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "代數",
+        "topicCode": "algebra",
+        "subtopic": "兩個立方根之和",
+        "subtopicCode": "nested_cube_roots"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "algebra_grade12_foundation_025",
+      "topic": "algebra",
+      "subtopic": "term_from_partial_sum",
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "數列 {aₙ} 的前 n 項和是 Sₙ = 2ⁿ − 1。求第 8 項 a₈ 的值。",
+        "zh-Hans": "数列 {aₙ} 的前 n 项和是 Sₙ = 2ⁿ − 1。求第 8 项 a₈ 的值。",
+        "en": "The sum of the first n terms of a sequence is Sₙ = 2ⁿ − 1. Find the eighth term a₈.",
+        "ja": "数列 {aₙ} の初項から第 n 項までの和が Sₙ = 2ⁿ − 1 です。第 8 項 a₈ の値を求めなさい。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 128。",
+        "zh-Hans": "答案是 128。",
+        "en": "The answer is 128.",
+        "ja": "答えは 128 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "**題目給的是「和」而不是「項」，兩者的關係是關鍵。**",
+          "**Sₙ 是前 n 項的總和，Sₙ₋₁ 是前 n − 1 項的總和**——**兩者相減，中間的項全部抵銷，只剩下第 n 項**。",
+          "所以對 n ≥ 2 有 **aₙ = Sₙ − Sₙ₋₁**。",
+          "**代入 n = 8**：a₈ = S₈ − S₇。",
+          "**計算 S₈**：2⁸ − 1 = 256 − 1 = **255**。",
+          "**計算 S₇**：2⁷ − 1 = 128 − 1 = **127**。",
+          "**相減**：a₈ = 255 − 127 = **128**。",
+          "驗算：**求出通項再核對。**對 n ≥ 2，aₙ = (2ⁿ − 1) − (2ⁿ⁻¹ − 1) = 2ⁿ − 2ⁿ⁻¹ = **2ⁿ⁻¹**（因為 2ⁿ = 2 × 2ⁿ⁻¹，相減剩一個 2ⁿ⁻¹）。",
+          "代 n = 8：a₈ = 2⁷ = **128** ✓ 相符。",
+          "**還要檢查第一項是否也符合這個通項。**a₁ 不能用相減求（沒有 S₀），要直接由 S₁ 得到：a₁ = S₁ = 2¹ − 1 = **1**。",
+          "而通項 2ⁿ⁻¹ 在 n = 1 時給出 2⁰ = **1** ✓ **恰好也吻合**，所以 aₙ = 2ⁿ⁻¹ 對所有 n ≥ 1 都成立。",
+          "**逐項核對**：a₁ 到 a₈ 依序是 1、2、4、8、16、32、64、**128** ✓，它們的總和 1+2+4+⋯+128 = **255** = S₈ ✓ 完全吻合。",
+          "**注意 a₁ 必須單獨檢查，不能想當然。**本題恰好吻合，但**這並非總是如此**——例如若 Sₙ = 2ⁿ + 3，則對 n ≥ 2 有 aₙ = 2ⁿ⁻¹，但 a₁ = S₁ = 5 ≠ 2⁰ = 1，**通項在 n = 1 就不成立了**，必須分開寫。**求出通項後回頭驗證 a₁ 是這類題目不可省略的一步。**"
+        ],
+        "zh-Hans": [
+          "**题目给的是「和」而不是「项」，两者的关系是关键。**",
+          "**Sₙ 是前 n 项的总和，Sₙ₋₁ 是前 n − 1 项的总和**——**两者相减，中间的项全部抵销，只剩下第 n 项**。",
+          "所以对 n ≥ 2 有 **aₙ = Sₙ − Sₙ₋₁**。",
+          "**代入 n = 8**：a₈ = S₈ − S₇。",
+          "**计算 S₈**：2⁸ − 1 = 256 − 1 = **255**。",
+          "**计算 S₇**：2⁷ − 1 = 128 − 1 = **127**。",
+          "**相减**：a₈ = 255 − 127 = **128**。",
+          "验算：**求出通项再核对。**对 n ≥ 2，aₙ = (2ⁿ − 1) − (2ⁿ⁻¹ − 1) = 2ⁿ − 2ⁿ⁻¹ = **2ⁿ⁻¹**（因为 2ⁿ = 2 × 2ⁿ⁻¹，相减剩一个 2ⁿ⁻¹）。",
+          "代 n = 8：a₈ = 2⁷ = **128** ✓ 相符。",
+          "**还要检查第一项是否也符合这个通项。**a₁ 不能用相减求（没有 S₀），要直接由 S₁ 得到：a₁ = S₁ = 2¹ − 1 = **1**。",
+          "而通项 2ⁿ⁻¹ 在 n = 1 时给出 2⁰ = **1** ✓ **恰好也吻合**，所以 aₙ = 2ⁿ⁻¹ 对所有 n ≥ 1 都成立。",
+          "**逐项核对**：a₁ 到 a₈ 依序是 1、2、4、8、16、32、64、**128** ✓，它们的总和 1+2+4+⋯+128 = **255** = S₈ ✓ 完全吻合。",
+          "**注意 a₁ 必须单独检查，不能想当然。**本题恰好吻合，但**这并非总是如此**——例如若 Sₙ = 2ⁿ + 3，则对 n ≥ 2 有 aₙ = 2ⁿ⁻¹，但 a₁ = S₁ = 5 ≠ 2⁰ = 1，**通项在 n = 1 就不成立了**，必须分开写。**求出通项后回头验证 a₁ 是这类题目不可省略的一步。**"
+        ],
+        "en": [
+          "The problem gives sums rather than terms, and the relation between them is the key.",
+          "Since Sₙ is the total of the first n terms and Sₙ₋₁ that of the first n − 1, subtracting cancels everything but the nth term.",
+          "So for n ≥ 2, aₙ = Sₙ − Sₙ₋₁.",
+          "With n = 8: a₈ = S₈ − S₇.",
+          "Compute S₈ = 2⁸ − 1 = 256 − 1 = 255.",
+          "Compute S₇ = 2⁷ − 1 = 128 − 1 = 127.",
+          "Subtracting: a₈ = 255 − 127 = 128.",
+          "Check by finding the general term. For n ≥ 2, aₙ = (2ⁿ − 1) − (2ⁿ⁻¹ − 1) = 2ⁿ − 2ⁿ⁻¹ = 2ⁿ⁻¹, since 2ⁿ = 2 × 2ⁿ⁻¹ and subtracting leaves one 2ⁿ⁻¹.",
+          "With n = 8: a₈ = 2⁷ = 128, as found.",
+          "The first term must also be checked. It cannot come from subtraction, since S₀ does not exist, so take it directly: a₁ = S₁ = 2¹ − 1 = 1.",
+          "And the general term 2ⁿ⁻¹ gives 2⁰ = 1 at n = 1, which happens to agree, so aₙ = 2ⁿ⁻¹ holds for all n ≥ 1.",
+          "Verify term by term: a₁ through a₈ are 1, 2, 4, 8, 16, 32, 64 and 128, summing to 1+2+4+⋯+128 = 255 = S₈, exactly right.",
+          "Note that a₁ must be checked separately and never assumed. Here it agrees, but that is not always so — with Sₙ = 2ⁿ + 3, for instance, n ≥ 2 still gives aₙ = 2ⁿ⁻¹, yet a₁ = S₁ = 5 ≠ 2⁰ = 1, so the general term fails at n = 1 and must be stated separately. Verifying a₁ after deriving the general term is an indispensable step in such problems."
+        ],
+        "ja": [
+          "**与えられているのは「和」であって「項」ではなく**、その関係が鍵です。",
+          "**Sₙ は初項から第 n 項までの和、Sₙ₋₁ は第 n − 1 項までの和**なので——**辺々引くと途中の項がすべて打ち消し、第 n 項だけが残ります**。",
+          "したがって n ≥ 2 について **aₙ = Sₙ − Sₙ₋₁**。",
+          "**n = 8 を代入**：a₈ = S₈ − S₇。",
+          "**S₈ を計算**：2⁸ − 1 = 256 − 1 = **255**。",
+          "**S₇ を計算**：2⁷ − 1 = 128 − 1 = **127**。",
+          "**引くと** a₈ = 255 − 127 = **128**。",
+          "検算：**一般項を求めて確認します。**n ≥ 2 について aₙ = (2ⁿ − 1) − (2ⁿ⁻¹ − 1) = 2ⁿ − 2ⁿ⁻¹ = **2ⁿ⁻¹**（2ⁿ = 2 × 2ⁿ⁻¹ なので引くと 2ⁿ⁻¹ が 1 つ残る）。",
+          "n = 8 で a₈ = 2⁷ = **128** ✓ 一致します。",
+          "**初項も確認が必要**です。a₁ は引き算では求められない（S₀ がない）ので S₁ から直接：a₁ = S₁ = 2¹ − 1 = **1**。",
+          "一般項 2ⁿ⁻¹ は n = 1 で 2⁰ = **1** ✓ と**たまたま一致**するので、aₙ = 2ⁿ⁻¹ はすべての n ≥ 1 で成り立ちます。",
+          "**各項で確認**：a₁ から a₈ は 1、2、4、8、16、32、64、**128** ✓、和は 1+2+4+⋯+128 = **255** = S₈ ✓ と完全に一致します。",
+          "**a₁ は必ず個別に確認し、当然とみなしてはいけません。**本問では一致しますが、**常にそうとは限りません**——Sₙ = 2ⁿ + 3 なら n ≥ 2 で aₙ = 2ⁿ⁻¹ ですが a₁ = S₁ = 5 ≠ 2⁰ = 1 で、**一般項は n = 1 で成り立たず**、場合分けが必要です。**一般項を求めた後に a₁ を検証するのは、この種の問題で省けない一手です。**"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "128"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "由前 n 項和求某一項：aₙ = Sₙ − Sₙ₋₁ 僅對 n ≥ 2 成立，求得通項後須回頭檢驗 a₁",
+        "notes": "設計依據：詳解說明相減之所以只剩第 n 項的理由，並強調該式僅對 n ≥ 2 成立、a₁ 須由 S₁ 直接得出；本題通項恰好在 n = 1 也成立，詳解另以 Sₙ = 2ⁿ + 3 的反例說明並非總是如此。答案 128 已用直接相減、通項代入與八項總和等於 S₈ 三重驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（由前 n 項和求某一項）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "代數",
+        "topicCode": "algebra",
+        "subtopic": "由前 n 項和求某一項",
+        "subtopicCode": "term_from_partial_sum"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "algebra_grade12_foundation_026",
+      "topic": "algebra",
+      "subtopic": "min_of_radical_quadratic",
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "函數 g(x) = √(x² + 4x + 13) 的圖形是一條開口向上的曲線，有唯一的最低點。求該最低點的 y 座標。",
+        "zh-Hans": "函数 g(x) = √(x² + 4x + 13) 的图形是一条开口向上的曲线，有唯一的最低点。求该最低点的 y 坐标。",
+        "en": "The graph of g(x) = √(x² + 4x + 13) is an upward-opening curve with a single lowest point. Find the y-coordinate of that point.",
+        "ja": "関数 g(x) = √(x² + 4x + 13) のグラフは上に開いた曲線で、最も低い点がただ 1 つあります。その点の y 座標を求めなさい。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 3。",
+        "zh-Hans": "答案是 3。",
+        "en": "The answer is 3.",
+        "ja": "答えは 3 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "**根號是遞增函數**——被開方數越小，整個式子的值也越小。**所以只要讓根號裡面的二次式最小即可。**",
+          "**先確認根號內恆為正，式子才有意義。**對 x² + 4x + 13 配方（下一步會做），可以看出它恆為正 ✓ 定義域是全體實數。",
+          "**對根號內的式子配方。**x² + 4x + 13 = (x² + 4x) + 13。",
+          "**取一次項係數 4 的一半得 2，平方得 4**，所以 x² + 4x = (x + 2)² − 4。",
+          "代回：x² + 4x + 13 = (x + 2)² − 4 + 13 = **(x + 2)² + 9**。",
+          "**平方項恆非負**，所以 (x + 2)² ≥ 0，因此 (x + 2)² + 9 ≥ **9**，**最小值 9 在 x + 2 = 0 即 x = −2 時取到** ✓（也順帶確認了根號內恆為正，最小都有 9）。",
+          "所以根號內的最小值是 9，整個式子的最小值 = √9 = **3**。",
+          "驗算：**代 x = −2 檢查。**(−2)² + 4 × (−2) + 13 = 4 − 8 + 13 = **9**，√9 = **3** ✓ 相符。",
+          "**再取幾個點確認它確實是最小。**x = 0：√(0 + 0 + 13) = √13 ≈ **3.606** > 3 ✓；x = −4：√(16 − 16 + 13) = √13 ≈ **3.606** > 3 ✓ **（注意 x = 0 與 x = −4 對稱於 x = −2，值相同）**；x = −1：√(1 − 4 + 13) = √10 ≈ **3.162** > 3 ✓。",
+          "程式在 −10 到 10 之間密集取樣，最小值正是 **3.000000** ✓。",
+          "**這個式子也有幾何意義**：√((x + 2)² + 3²) 正是點 (x, 0) 到點 (−2, 3) 的距離。**最小值就是點 (−2, 3) 到 x 軸的距離，也就是 3** ✓ 與代數結果一致——**幾何的看法讓答案幾乎不必計算就能看出來**。",
+          "**注意不能把最小值誤認為 √13 或 13。**前者是 x = 0 時的值（不是最小），後者是根號內的常數項（沒有取到最小的位置）。**配方之後的常數 9 才是根號內的最小值。**"
+        ],
+        "zh-Hans": [
+          "**根号是递增函数**——被开方数越小，整个式子的值也越小。**所以只要让根号里面的二次式最小即可。**",
+          "**先确认根号内恒为正，式子才有意义。**对 x² + 4x + 13 配方（下一步会做），可以看出它恒为正 ✓ 定义域是全体实数。",
+          "**对根号内的式子配方。**x² + 4x + 13 = (x² + 4x) + 13。",
+          "**取一次项系数 4 的一半得 2，平方得 4**，所以 x² + 4x = (x + 2)² − 4。",
+          "代回：x² + 4x + 13 = (x + 2)² − 4 + 13 = **(x + 2)² + 9**。",
+          "**平方项恒非负**，所以 (x + 2)² ≥ 0，因此 (x + 2)² + 9 ≥ **9**，**最小值 9 在 x + 2 = 0 即 x = −2 时取到** ✓（也顺带确认了根号内恒为正，最小都有 9）。",
+          "所以根号内的最小值是 9，整个式子的最小值 = √9 = **3**。",
+          "验算：**代 x = −2 检查。**(−2)² + 4 × (−2) + 13 = 4 − 8 + 13 = **9**，√9 = **3** ✓ 相符。",
+          "**再取几个点确认它确实是最小。**x = 0：√(0 + 0 + 13) = √13 ≈ **3.606** > 3 ✓；x = −4：√(16 − 16 + 13) = √13 ≈ **3.606** > 3 ✓ **（注意 x = 0 与 x = −4 对称于 x = −2，值相同）**；x = −1：√(1 − 4 + 13) = √10 ≈ **3.162** > 3 ✓。",
+          "程序在 −10 到 10 之间密集取样，最小值正是 **3.000000** ✓。",
+          "**这个式子也有几何意义**：√((x + 2)² + 3²) 正是点 (x, 0) 到点 (−2, 3) 的距离。**最小值就是点 (−2, 3) 到 x 轴的距离，也就是 3** ✓ 与代数结果一致——**几何的看法让答案几乎不必计算就能看出来**。",
+          "**注意不能把最小值误认为 √13 或 13。**前者是 x = 0 时的值（不是最小），后者是根号内的常数项（没有取到最小的位置）。**配方之后的常数 9 才是根号内的最小值。**"
+        ],
+        "en": [
+          "The square root is an increasing function, so the smaller the radicand the smaller the whole expression. It therefore suffices to minimise the quadratic inside.",
+          "Confirm first that the radicand is always positive, so the expression is defined. Completing the square, done next, shows it is, and the domain is all real numbers.",
+          "Complete the square inside: x² + 4x + 13 = (x² + 4x) + 13.",
+          "Half of the coefficient 4 is 2, whose square is 4, so x² + 4x = (x + 2)² − 4.",
+          "Substituting: x² + 4x + 13 = (x + 2)² − 4 + 13 = (x + 2)² + 9.",
+          "A square is never negative, so (x + 2)² ≥ 0 and hence (x + 2)² + 9 ≥ 9, the minimum 9 occurring when x + 2 = 0, that is x = −2 — which also confirms the radicand is always positive, never falling below 9.",
+          "So the radicand's minimum is 9 and the whole expression's minimum is √9 = 3.",
+          "Check at x = −2: (−2)² + 4 × (−2) + 13 = 4 − 8 + 13 = 9, and √9 = 3.",
+          "Test other points to confirm the minimum. At x = 0: √13 ≈ 3.606 > 3. At x = −4: √13 ≈ 3.606 > 3 — note that 0 and −4 are symmetric about −2 and give equal values. At x = −1: √10 ≈ 3.162 > 3.",
+          "Dense sampling from −10 to 10 gives a minimum of exactly 3.000000.",
+          "The expression has a geometric meaning too: √((x + 2)² + 3²) is the distance from (x, 0) to (−2, 3). The minimum is the distance from (−2, 3) to the x-axis, namely 3, agreeing with the algebra — the geometric view makes the answer visible almost without calculation.",
+          "Do not mistake the minimum for √13 or 13. The former is the value at x = 0, not the minimum, and the latter is the constant term of the radicand, taken at no particular point. The constant 9 after completing the square is what gives the radicand's minimum."
+        ],
+        "ja": [
+          "**平方根は増加関数**なので、根号の中が小さいほど式全体も小さくなります。**したがって中の 2 次式を最小にすれば十分**です。",
+          "**まず根号の中が常に正であることを確認**します（式が定義されるため）。次の平方完成でそれが分かり ✓、定義域は実数全体です。",
+          "**根号の中を平方完成します。**x² + 4x + 13 = (x² + 4x) + 13。",
+          "**1 次の係数 4 の半分は 2、2 乗して 4** なので x² + 4x = (x + 2)² − 4。",
+          "代入すると x² + 4x + 13 = (x + 2)² − 4 + 13 = **(x + 2)² + 9**。",
+          "**平方は非負**なので (x + 2)² ≥ 0、したがって (x + 2)² + 9 ≥ **9** で、**最小値 9 は x + 2 = 0 すなわち x = −2 でとります** ✓（根号の中が常に正で 9 を下回らないことも同時に分かります）。",
+          "よって根号の中の最小値は 9、式全体の最小値は √9 = **3**。",
+          "検算：**x = −2 を代入**すると (−2)² + 4 × (−2) + 13 = 4 − 8 + 13 = **9**、√9 = **3** ✓ 一致します。",
+          "**他の点でも最小であることを確認します。**x = 0：√13 ≈ **3.606** > 3 ✓、x = −4：√13 ≈ **3.606** > 3 ✓ **（0 と −4 は −2 について対称で値が等しい）**、x = −1：√10 ≈ **3.162** > 3 ✓。",
+          "−10 から 10 を密にサンプリングしても最小値はちょうど **3.000000** ✓ です。",
+          "**この式には幾何的な意味もあります**：√((x + 2)² + 3²) は点 (x, 0) から点 (−2, 3) までの距離です。**最小値は (−2, 3) から x 軸までの距離、すなわち 3** ✓ で代数の結果と一致します——**幾何的に見ればほぼ計算なしで答えが見えます**。",
+          "**最小値を √13 や 13 と誤らないこと。**前者は x = 0 での値（最小ではない）、後者は根号内の定数項（特定の点での値ではない）です。**平方完成後の定数 9 こそが根号内の最小値**です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "3"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "根號內二次式的最小值：根號遞增故只需最小化被開方數，配方後得 (x + 2)² + 9，最小值為 √9",
+        "notes": "設計依據：詳解以配方求出被開方數的最小值並同時確認其恆為正；另給出幾何解釋（點到 x 軸的距離）作為幾乎不必計算的第二視角，並以對稱的兩點 x = 0 與 x = −4 值相同佐證頂點位置。末尾指出誤答 √13 或 13 的來源。答案 3 已用配方、代入檢查與密集取樣三重驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（根號內二次式的最小值）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "代數",
+        "topicCode": "algebra",
+        "subtopic": "根號內二次式的最小值",
+        "subtopicCode": "min_of_radical_quadratic"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "algebra_grade12_foundation_027",
+      "topic": "algebra",
+      "subtopic": "common_value_exponents",
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "正實數 x、y、z 滿足 3^x = 4^y = 12^z，且三者都大於 1。求 1/x + 1/y − 1/z 的值。",
+        "zh-Hans": "正实数 x、y、z 满足 3^x = 4^y = 12^z，且三者都大于 1。求 1/x + 1/y − 1/z 的值。",
+        "en": "Positive real numbers x, y and z, all greater than 1, satisfy 3^x = 4^y = 12^z. Find the value of 1/x + 1/y − 1/z.",
+        "ja": "1 より大きい正の実数 x、y、z が 3^x = 4^y = 12^z を満たします。1/x + 1/y − 1/z の値を求めなさい。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 0。",
+        "zh-Hans": "答案是 0。",
+        "en": "The answer is 0.",
+        "ja": "答えは 0 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "**三個式子相等，設它們的共同值為 k**（由於 x、y、z 都大於 1 且底數都大於 1，k > 1）。",
+          "**所以 3^x = k、4^y = k、12^z = k。**",
+          "**把每一式取對數，就能把指數解出來。**由 3^x = k 得 x log 3 = log k，所以 **x = log k / log 3**。",
+          "**取倒數**：1/x = **log 3 / log k**。",
+          "同理由 4^y = k 得 **1/y = log 4 / log k**；由 12^z = k 得 **1/z = log 12 / log k**。",
+          "**代入所求的式子**：1/x + 1/y − 1/z = (log 3 + log 4 − log 12) / log k。",
+          "**現在只要看分子。**用「對數之和等於乘積的對數」：log 3 + log 4 = log(3 × 4) = **log 12**。",
+          "所以分子 = log 12 − log 12 = **0**。",
+          "**而分母 log k ≠ 0**（因為 k > 1），所以整個式子 = 0 ÷ log k = **0**。",
+          "驗算：**取一個具體的 k 核對。**令 k = 100：x = log 100 / log 3 ≈ 4.1918；y = log 100 / log 4 ≈ 3.3219；z = log 100 / log 12 ≈ 1.8533。",
+          "計算：1/4.1918 + 1/3.3219 − 1/1.8533 ≈ 0.23856 + 0.30103 − 0.53959 = **0.00000** ✓ 程式以高精度計算得 **0.000000000000** ✓ 完全相符。",
+          "**注意答案與 k 的取值無關**——因為 log k 只出現在分母且被 0 消掉了。**這正是題目沒有指定共同值卻仍有唯一答案的原因。**",
+          "**關鍵在於 12 = 3 × 4 這個關係。**若把 12 換成別的數（例如 3^x = 4^y = 10^z），分子會變成 log 3 + log 4 − log 10 = log(12/10) = log 1.2 ≠ 0，**答案就不是 0 了**。**所以要先檢查底數之間是否有乘積關係，那才是這類題目的核心。**"
+        ],
+        "zh-Hans": [
+          "**三个式子相等，设它们的共同值为 k**（由于 x、y、z 都大于 1 且底数都大于 1，k > 1）。",
+          "**所以 3^x = k、4^y = k、12^z = k。**",
+          "**把每一式取对数，就能把指数解出来。**由 3^x = k 得 x log 3 = log k，所以 **x = log k / log 3**。",
+          "**取倒数**：1/x = **log 3 / log k**。",
+          "同理由 4^y = k 得 **1/y = log 4 / log k**；由 12^z = k 得 **1/z = log 12 / log k**。",
+          "**代入所求的式子**：1/x + 1/y − 1/z = (log 3 + log 4 − log 12) / log k。",
+          "**现在只要看分子。**用「对数之和等于乘积的对数」：log 3 + log 4 = log(3 × 4) = **log 12**。",
+          "所以分子 = log 12 − log 12 = **0**。",
+          "**而分母 log k ≠ 0**（因为 k > 1），所以整个式子 = 0 ÷ log k = **0**。",
+          "验算：**取一个具体的 k 核对。**令 k = 100：x = log 100 / log 3 ≈ 4.1918；y = log 100 / log 4 ≈ 3.3219；z = log 100 / log 12 ≈ 1.8533。",
+          "计算：1/4.1918 + 1/3.3219 − 1/1.8533 ≈ 0.23856 + 0.30103 − 0.53959 = **0.00000** ✓ 程序以高精度计算得 **0.000000000000** ✓ 完全相符。",
+          "**注意答案与 k 的取值无关**——因为 log k 只出现在分母且被 0 消掉了。**这正是题目没有指定共同值却仍有唯一答案的原因。**",
+          "**关键在于 12 = 3 × 4 这个关系。**若把 12 换成别的数（例如 3^x = 4^y = 10^z），分子会变成 log 3 + log 4 − log 10 = log(12/10) = log 1.2 ≠ 0，**答案就不是 0 了**。**所以要先检查底数之间是否有乘积关系，那才是这类题目的核心。**"
+        ],
+        "en": [
+          "The three expressions are equal, so let their common value be k; since x, y and z all exceed 1 and the bases exceed 1, we have k > 1.",
+          "So 3^x = k, 4^y = k and 12^z = k.",
+          "Taking logarithms of each isolates the exponent. From 3^x = k comes x log 3 = log k, so x = log k / log 3.",
+          "Taking reciprocals: 1/x = log 3 / log k.",
+          "Likewise 4^y = k gives 1/y = log 4 / log k, and 12^z = k gives 1/z = log 12 / log k.",
+          "Substituting into the required expression: 1/x + 1/y − 1/z = (log 3 + log 4 − log 12) / log k.",
+          "Only the numerator matters now. Since a sum of logarithms is the logarithm of a product, log 3 + log 4 = log(3 × 4) = log 12.",
+          "So the numerator is log 12 − log 12 = 0.",
+          "And log k ≠ 0, since k > 1, so the whole expression is 0 ÷ log k = 0.",
+          "Check with a concrete k. Taking k = 100: x = log 100 / log 3 ≈ 4.1918, y = log 100 / log 4 ≈ 3.3219 and z = log 100 / log 12 ≈ 1.8533.",
+          "Then 1/4.1918 + 1/3.3219 − 1/1.8533 ≈ 0.23856 + 0.30103 − 0.53959 = 0.00000, and high-precision computation gives 0.000000000000, exactly as derived.",
+          "Note the answer does not depend on k, since log k appears only in the denominator and is annihilated by the zero numerator. That is why the problem has a unique answer despite never specifying the common value.",
+          "Everything hinges on 12 = 3 × 4. Replacing 12 by another base, say 3^x = 4^y = 10^z, would make the numerator log 3 + log 4 − log 10 = log 1.2 ≠ 0 and the answer would not be 0. So checking whether the bases are related multiplicatively is the heart of such problems."
+        ],
+        "ja": [
+          "**3 つの式が等しいので共通の値を k とおきます**（x、y、z が 1 より大きく底も 1 より大きいので k > 1）。",
+          "**すなわち 3^x = k、4^y = k、12^z = k。**",
+          "**各式の対数をとると指数が求まります。**3^x = k より x log 3 = log k、よって **x = log k / log 3**。",
+          "**逆数をとります**：1/x = **log 3 / log k**。",
+          "同様に 4^y = k より **1/y = log 4 / log k**、12^z = k より **1/z = log 12 / log k**。",
+          "**求める式に代入**：1/x + 1/y − 1/z = (log 3 + log 4 − log 12) / log k。",
+          "**あとは分子だけ**です。「対数の和は積の対数」より log 3 + log 4 = log(3 × 4) = **log 12**。",
+          "したがって分子 = log 12 − log 12 = **0**。",
+          "**分母 log k ≠ 0**（k > 1 より）なので、式全体は 0 ÷ log k = **0** です。",
+          "検算：**具体的な k で確認します。**k = 100 とすると x = log 100 / log 3 ≈ 4.1918、y ≈ 3.3219、z ≈ 1.8533。",
+          "1/4.1918 + 1/3.3219 − 1/1.8533 ≈ 0.23856 + 0.30103 − 0.53959 = **0.00000** ✓、高精度計算でも **0.000000000000** ✓ と完全に一致します。",
+          "**答えは k の値に依りません**——log k は分母にしか現れず、分子の 0 に打ち消されるからです。**共通の値が指定されていなくても答えが一意なのはこのため**です。",
+          "**要は 12 = 3 × 4 という関係**です。12 を別の底に変える（3^x = 4^y = 10^z など）と分子は log 3 + log 4 − log 10 = log 1.2 ≠ 0 となり、**答えは 0 ではなくなります**。**底どうしに積の関係があるかを先に確かめることが、この種の問題の核心です。**"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "0"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "三個指數式相等：設共同值取對數後倒數化為底數的對數之比，因 12 = 3 × 4 而分子恰為零",
+        "notes": "設計依據：詳解說明答案與共同值 k 無關的原因（log k 只在分母且被零分子消去），這也解釋了題目為何不必指定共同值；末尾以底數改為 10 的情形說明答案為 0 完全依賴 12 = 3 × 4 的乘積關係。答案 0 已用對數推導與 k = 100 的高精度數值計算雙向驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（三個指數式相等）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "代數",
+        "topicCode": "algebra",
+        "subtopic": "三個指數式相等",
+        "subtopicCode": "common_value_exponents"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "algebra_grade12_foundation_028",
+      "topic": "algebra",
+      "subtopic": "max_rational_function",
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "設 f(x) = x / (x² + 1)，其中 x 為正實數。已知 f(x) 有最大值，求該最大值的倒數。",
+        "zh-Hans": "设 f(x) = x / (x² + 1)，其中 x 为正实数。已知 f(x) 有最大值，求该最大值的倒数。",
+        "en": "Let f(x) = x / (x² + 1) for positive real x. Given that f has a maximum value, find the reciprocal of that maximum.",
+        "ja": "正の実数 x について f(x) = x / (x² + 1) とします。f(x) が最大値をもつとき、その最大値の逆数を求めなさい。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 2。",
+        "zh-Hans": "答案是 2。",
+        "en": "The answer is 2.",
+        "ja": "答えは 2 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "**求分式的最大值不必微分——取倒數之後會變成容易處理的形式。**",
+          "**由於 x > 0，f(x) = x/(x² + 1) 也恆為正**，所以**求 f(x) 的最大值，等價於求 1/f(x) 的最小值**（正數取倒數會顛倒大小關係）。",
+          "**計算倒數**：1/f(x) = (x² + 1)/x = x²/x + 1/x = **x + 1/x**。",
+          "**所以問題變成：求 x + 1/x 在 x > 0 時的最小值。**",
+          "**用算術平均與幾何平均的不等式（AM–GM）**：對正數 a、b 有 (a + b)/2 ≥ √(ab)，即 **a + b ≥ 2√(ab)**。",
+          "取 a = x、b = 1/x：**x + 1/x ≥ 2√(x × 1/x) = 2√1 = 2**。",
+          "**等號在 a = b 時成立**，即 x = 1/x，得 x² = 1，由 x > 0 得 **x = 1**。",
+          "所以 1/f(x) 的最小值是 **2**，這正是題目所求的「最大值的倒數」。",
+          "**（順帶得知 f(x) 的最大值是 1/2，在 x = 1 時取到。）**",
+          "驗算：**代 x = 1 檢查。**f(1) = 1/(1 + 1) = **1/2** ✓，其倒數是 **2** ✓ 相符。",
+          "**再取幾個點確認。**x = 2：f(2) = 2/5 = 0.4 < 0.5 ✓；x = 0.5：f(0.5) = 0.5/1.25 = 0.4 < 0.5 ✓ **（注意 x = 2 與 x = 0.5 互為倒數，函數值相同——這是因為 f(1/x) = (1/x)/((1/x²) + 1) = x/(1 + x²) = f(x)）**；x = 10：f(10) = 10/101 ≈ 0.099 ✓ 遠小於 0.5。",
+          "程式在 0 到 10 之間密集取樣，f 的最大值正是 **0.5**（在 x = 1）✓，倒數為 **2** ✓。",
+          "**注意題目問的是「最大值的倒數」而不是最大值本身。**最大值是 1/2，倒數才是 2——**這樣設計是為了讓答案是整數**。若誤答 1/2 或把倒數再取一次，就會偏離題意。"
+        ],
+        "zh-Hans": [
+          "**求分式的最大值不必微分——取倒数之后会变成容易处理的形式。**",
+          "**由于 x > 0，f(x) = x/(x² + 1) 也恒为正**，所以**求 f(x) 的最大值，等价于求 1/f(x) 的最小值**（正数取倒数会颠倒大小关系）。",
+          "**计算倒数**：1/f(x) = (x² + 1)/x = x²/x + 1/x = **x + 1/x**。",
+          "**所以问题变成：求 x + 1/x 在 x > 0 时的最小值。**",
+          "**用算术平均与几何平均的不等式（AM–GM）**：对正数 a、b 有 (a + b)/2 ≥ √(ab)，即 **a + b ≥ 2√(ab)**。",
+          "取 a = x、b = 1/x：**x + 1/x ≥ 2√(x × 1/x) = 2√1 = 2**。",
+          "**等号在 a = b 时成立**，即 x = 1/x，得 x² = 1，由 x > 0 得 **x = 1**。",
+          "所以 1/f(x) 的最小值是 **2**，这正是题目所求的「最大值的倒数」。",
+          "**（顺带得知 f(x) 的最大值是 1/2，在 x = 1 时取到。）**",
+          "验算：**代 x = 1 检查。**f(1) = 1/(1 + 1) = **1/2** ✓，其倒数是 **2** ✓ 相符。",
+          "**再取几个点确认。**x = 2：f(2) = 2/5 = 0.4 < 0.5 ✓；x = 0.5：f(0.5) = 0.5/1.25 = 0.4 < 0.5 ✓ **（注意 x = 2 与 x = 0.5 互为倒数，函数值相同——这是因为 f(1/x) = (1/x)/((1/x²) + 1) = x/(1 + x²) = f(x)）**；x = 10：f(10) = 10/101 ≈ 0.099 ✓ 远小于 0.5。",
+          "程序在 0 到 10 之间密集取样，f 的最大值正是 **0.5**（在 x = 1）✓，倒数为 **2** ✓。",
+          "**注意题目问的是「最大值的倒数」而不是最大值本身。**最大值是 1/2，倒数才是 2——**这样设计是为了让答案是整数**。若误答 1/2 或把倒数再取一次，就会偏离题意。"
+        ],
+        "en": [
+          "Maximising a fraction needs no calculus — taking reciprocals turns it into something manageable.",
+          "Since x > 0, the value f(x) = x/(x² + 1) is also positive, so maximising f(x) is equivalent to minimising 1/f(x), reciprocals of positive numbers reversing order.",
+          "Compute the reciprocal: 1/f(x) = (x² + 1)/x = x + 1/x.",
+          "So the problem becomes minimising x + 1/x for x > 0.",
+          "Apply the arithmetic-geometric mean inequality: for positive a and b, (a + b)/2 ≥ √(ab), that is a + b ≥ 2√(ab).",
+          "With a = x and b = 1/x: x + 1/x ≥ 2√(x × 1/x) = 2√1 = 2.",
+          "Equality holds when a = b, that is x = 1/x, so x² = 1 and, since x > 0, x = 1.",
+          "So the minimum of 1/f(x) is 2, precisely the reciprocal of the maximum that the question asks for.",
+          "Incidentally the maximum of f is 1/2, attained at x = 1.",
+          "Check at x = 1: f(1) = 1/(1 + 1) = 1/2, whose reciprocal is 2.",
+          "Test other points. At x = 2: f(2) = 2/5 = 0.4 < 0.5. At x = 0.5: f(0.5) = 0.5/1.25 = 0.4 < 0.5 — note that 2 and 0.5 are reciprocals and give equal values, because f(1/x) = (1/x)/((1/x²) + 1) = x/(1 + x²) = f(x). At x = 10: f(10) = 10/101 ≈ 0.099, far below 0.5.",
+          "Dense sampling from 0 to 10 gives a maximum of exactly 0.5 at x = 1, with reciprocal 2.",
+          "Note the question asks for the reciprocal of the maximum, not the maximum itself. The maximum is 1/2 and its reciprocal is 2 — phrased this way so the answer is an integer. Answering 1/2, or taking the reciprocal twice, would miss the point."
+        ],
+        "ja": [
+          "**分数式の最大値を求めるのに微分は不要**です——逆数をとると扱いやすい形になります。",
+          "**x > 0 なので f(x) = x/(x² + 1) も常に正**であり、**f(x) の最大化は 1/f(x) の最小化と同値**です（正数の逆数は大小を逆転させます）。",
+          "**逆数を計算します**：1/f(x) = (x² + 1)/x = **x + 1/x**。",
+          "**したがって問題は x > 0 における x + 1/x の最小値**になります。",
+          "**相加相乗平均の不等式**を使います：正数 a、b について (a + b)/2 ≥ √(ab)、すなわち **a + b ≥ 2√(ab)**。",
+          "a = x、b = 1/x とすると **x + 1/x ≥ 2√(x × 1/x) = 2√1 = 2**。",
+          "**等号は a = b のとき**、すなわち x = 1/x で x² = 1、x > 0 より **x = 1** です。",
+          "したがって 1/f(x) の最小値は **2** で、これがまさに問われている「最大値の逆数」です。",
+          "**（ついでに f の最大値は 1/2 で x = 1 でとることも分かります。）**",
+          "検算：**x = 1 を代入**すると f(1) = 1/(1 + 1) = **1/2** ✓、その逆数は **2** ✓ で一致します。",
+          "**他の点でも確認します。**x = 2：f(2) = 2/5 = 0.4 < 0.5 ✓、x = 0.5：f(0.5) = 0.5/1.25 = 0.4 < 0.5 ✓ **（2 と 0.5 は互いに逆数で値が等しく、これは f(1/x) = x/(1 + x²) = f(x) だからです）**、x = 10：f(10) = 10/101 ≈ 0.099 ✓ で 0.5 をはるかに下回ります。",
+          "0 から 10 を密にサンプリングすると f の最大値はちょうど **0.5**（x = 1）✓、逆数は **2** ✓ です。",
+          "**問われているのは「最大値の逆数」であって最大値そのものではありません。**最大値は 1/2 でその逆数が 2——**答えを整数にするための設計**です。1/2 と答えたり逆数をもう一度とったりすると題意から外れます。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "2"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "分式函數的最大值：取倒數化為 x + 1/x 再用算幾不等式，等號成立於 x = 1",
+        "notes": "設計依據：詳解以「正數取倒數顛倒大小」把最大值問題轉為最小值問題，避免微分；並指出 f(1/x) = f(x) 這個對稱性解釋了 x = 2 與 x = 0.5 函數值相同的現象。題目刻意問最大值的倒數以使答案為整數，詳解明確說明這一點。答案 2 已用算幾不等式與密集取樣雙向驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（分式函數的最大值）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "代數",
+        "topicCode": "algebra",
+        "subtopic": "分式函數的最大值",
+        "subtopicCode": "max_rational_function"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "algebra_grade12_foundation_029",
+      "topic": "algebra",
+      "subtopic": "complex_quotient_power",
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "求複數 ((1 + i) / (1 − i))¹⁰⁰ 的值（其中 i 是虛數單位，滿足 i² = −1）。",
+        "zh-Hans": "求复数 ((1 + i) / (1 − i))¹⁰⁰ 的值（其中 i 是虚数单位，满足 i² = −1）。",
+        "en": "Find the value of ((1 + i) / (1 − i))¹⁰⁰, where i is the imaginary unit with i² = −1.",
+        "ja": "複素数 ((1 + i) / (1 − i))¹⁰⁰ の値を求めなさい（i は虚数単位で i² = −1）。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 1。",
+        "zh-Hans": "答案是 1。",
+        "en": "The answer is 1.",
+        "ja": "答えは 1 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "**直接把 100 次方展開不可行，關鍵是先把括號裡的複數化簡。**",
+          "**分母有虛數時，把分子分母同乘以分母的共軛複數。**分母 1 − i 的共軛是 **1 + i**。",
+          "**分子**：(1 + i)(1 + i) = (1 + i)² = 1 + 2i + i² = 1 + 2i − 1 = **2i**（用了 i² = −1）。",
+          "**分母**：(1 − i)(1 + i) = 1² − i² = 1 − (−1) = **2**（平方差公式，結果是實數 ✓ 這正是乘共軛的目的）。",
+          "**所以 (1 + i)/(1 − i) = 2i / 2 = i** ✓ 括號裡的複數就是虛數單位 i 本身。",
+          "**問題化為求 i¹⁰⁰。**",
+          "**i 的冪次以 4 為週期循環**：i¹ = i、i² = **−1**、i³ = i² × i = −i、i⁴ = (i²)² = (−1)² = **1**，然後 i⁵ = i 又回到開頭。",
+          "**把 100 對 4 取餘數**：100 ÷ 4 = 25 餘 **0**。",
+          "**餘數為 0 表示落在週期的最後一個位置**，即 i¹⁰⁰ = (i⁴)²⁵ = 1²⁵ = **1**。",
+          "所以答案是 **1**。",
+          "驗算：**用絕對值與輻角核對。**|1 + i| = |1 − i| = √2，所以商的絕對值是 1 ✓ 落在單位圓上，100 次方的絕對值仍是 1 ✓ 與答案 1 相符。",
+          "輻角方面：1 + i 的輻角是 45°、1 − i 是 −45°，商的輻角是 45° − (−45°) = **90°**，正是 i 的輻角 ✓。100 次方後輻角變成 90° × 100 = 9000°，而 9000 ÷ 360 = 25 整除，**餘 0°** ✓ 對應複數 1。",
+          "程式直接計算 ((1+i)/(1−i))¹⁰⁰ 得到 **1 + 0i** ✓ 完全相符。",
+          "**注意餘數為 0 時對應的是 i⁴ = 1 而不是 i⁰**（雖然 i⁰ 也是 1，結果相同）。**但若指數改成 102，餘數為 2，答案是 i² = −1**；若改成 101，餘數 1，答案是 i。**取餘數之後要對應到正確的冪次，這是最容易出錯的一步。**"
+        ],
+        "zh-Hans": [
+          "**直接把 100 次方展开不可行，关键是先把括号里的复数化简。**",
+          "**分母有虚数时，把分子分母同乘以分母的共轭复数。**分母 1 − i 的共轭是 **1 + i**。",
+          "**分子**：(1 + i)(1 + i) = (1 + i)² = 1 + 2i + i² = 1 + 2i − 1 = **2i**（用了 i² = −1）。",
+          "**分母**：(1 − i)(1 + i) = 1² − i² = 1 − (−1) = **2**（平方差公式，结果是实数 ✓ 这正是乘共轭的目的）。",
+          "**所以 (1 + i)/(1 − i) = 2i / 2 = i** ✓ 括号里的复数就是虚数单位 i 本身。",
+          "**问题化为求 i¹⁰⁰。**",
+          "**i 的幂次以 4 为周期循环**：i¹ = i、i² = **−1**、i³ = i² × i = −i、i⁴ = (i²)² = (−1)² = **1**，然后 i⁵ = i 又回到开头。",
+          "**把 100 对 4 取余数**：100 ÷ 4 = 25 余 **0**。",
+          "**余数为 0 表示落在周期的最后一个位置**，即 i¹⁰⁰ = (i⁴)²⁵ = 1²⁵ = **1**。",
+          "所以答案是 **1**。",
+          "验算：**用绝对值与辐角核对。**|1 + i| = |1 − i| = √2，所以商的绝对值是 1 ✓ 落在单位圆上，100 次方的绝对值仍是 1 ✓ 与答案 1 相符。",
+          "辐角方面：1 + i 的辐角是 45°、1 − i 是 −45°，商的辐角是 45° − (−45°) = **90°**，正是 i 的辐角 ✓。100 次方后辐角变成 90° × 100 = 9000°，而 9000 ÷ 360 = 25 整除，**余 0°** ✓ 对应复数 1。",
+          "程序直接计算 ((1+i)/(1−i))¹⁰⁰ 得到 **1 + 0i** ✓ 完全相符。",
+          "**注意余数为 0 时对应的是 i⁴ = 1 而不是 i⁰**（虽然 i⁰ 也是 1，结果相同）。**但若指数改成 102，余数为 2，答案是 i² = −1**；若改成 101，余数 1，答案是 i。**取余数之后要对应到正确的幂次，这是最容易出错的一步。**"
+        ],
+        "en": [
+          "Expanding a 100th power directly is impossible; the key is to simplify the complex number inside the brackets first.",
+          "When the denominator is complex, multiply numerator and denominator by the denominator's conjugate. The conjugate of 1 − i is 1 + i.",
+          "Numerator: (1 + i)(1 + i) = (1 + i)² = 1 + 2i + i² = 1 + 2i − 1 = 2i, using i² = −1.",
+          "Denominator: (1 − i)(1 + i) = 1² − i² = 1 − (−1) = 2, by the difference of squares, giving a real result — exactly the purpose of multiplying by the conjugate.",
+          "So (1 + i)/(1 − i) = 2i / 2 = i: the bracket is simply the imaginary unit.",
+          "The problem reduces to computing i¹⁰⁰.",
+          "Powers of i repeat with period 4: i¹ = i, i² = −1, i³ = −i and i⁴ = (i²)² = 1, after which i⁵ = i begins the cycle again.",
+          "Reduce 100 modulo 4: 100 ÷ 4 = 25 with remainder 0.",
+          "A remainder of 0 corresponds to the last position of the cycle, so i¹⁰⁰ = (i⁴)²⁵ = 1²⁵ = 1.",
+          "So the answer is 1.",
+          "Check with modulus and argument. Since |1 + i| = |1 − i| = √2, the quotient has modulus 1 and lies on the unit circle, so its 100th power also has modulus 1, consistent with the answer.",
+          "As for arguments: 1 + i has argument 45° and 1 − i has −45°, so the quotient has argument 45° − (−45°) = 90°, precisely the argument of i. Raising to the 100th power gives 90° × 100 = 9000°, and 9000 ÷ 360 = 25 exactly, leaving 0°, which corresponds to the complex number 1.",
+          "Direct computation of ((1+i)/(1−i))¹⁰⁰ gives 1 + 0i, exactly as derived.",
+          "Note that a remainder of 0 corresponds to i⁴ = 1 rather than i⁰, though both equal 1. With exponent 102 the remainder would be 2 and the answer i² = −1; with 101 the remainder would be 1 and the answer i. Matching the remainder to the right power is the step most easily botched."
+        ],
+        "ja": [
+          "**100 乗を直接展開するのは不可能**なので、まず括弧の中の複素数を簡単にします。",
+          "**分母が複素数のときは、分子分母に分母の共役複素数を掛けます。**1 − i の共役は **1 + i** です。",
+          "**分子**：(1 + i)(1 + i) = (1 + i)² = 1 + 2i + i² = 1 + 2i − 1 = **2i**（i² = −1 を使用）。",
+          "**分母**：(1 − i)(1 + i) = 1² − i² = 1 − (−1) = **2**（和と差の積、結果は実数 ✓ これが共役を掛ける目的です）。",
+          "**したがって (1 + i)/(1 − i) = 2i / 2 = i** ✓、括弧の中は虚数単位そのものです。",
+          "**問題は i¹⁰⁰ の計算に帰着します。**",
+          "**i の累乗は周期 4 で循環**します：i¹ = i、i² = **−1**、i³ = −i、i⁴ = (i²)² = **1**、そして i⁵ = i で先頭に戻ります。",
+          "**100 を 4 で割ります**：100 ÷ 4 = 25 余り **0**。",
+          "**余り 0 は周期の最後の位置**に対応し、i¹⁰⁰ = (i⁴)²⁵ = 1²⁵ = **1**。",
+          "したがって答えは **1** です。",
+          "検算：**絶対値と偏角で確認します。**|1 + i| = |1 − i| = √2 なので商の絶対値は 1 ✓ で単位円上にあり、100 乗しても絶対値は 1 ✓ で答え 1 と整合します。",
+          "偏角では 1 + i が 45°、1 − i が −45° なので商の偏角は 45° − (−45°) = **90°**、まさに i の偏角です ✓。100 乗すると 90° × 100 = 9000°、9000 ÷ 360 = 25 で割り切れ **余り 0°** ✓、複素数 1 に対応します。",
+          "((1+i)/(1−i))¹⁰⁰ を直接計算すると **1 + 0i** ✓ で完全に一致します。",
+          "**余り 0 は i⁰ ではなく i⁴ = 1 に対応**します（どちらも 1 で結果は同じですが）。**指数を 102 にすれば余り 2 で答えは i² = −1**、101 なら余り 1 で答えは i です。**余りを正しい累乗に対応させるのが最も間違えやすい一手**です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "1"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "複數商的高次方：乘以共軛化簡商為 i，再由 i 的冪次以 4 為週期取餘數",
+        "notes": "設計依據：詳解先以共軛化簡分母（說明其目的是使分母為實數），再以 i 的四週期取餘；並以絕對值與輻角作完全獨立的第二種驗證（模為 1、輻角 9000° 恰為 360° 的整數倍）。末尾以指數 101、102 的情形說明餘數對應冪次是最易出錯之處。答案 1 已用代數化簡、極式與程式直接計算三重驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（複數商的高次方）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "代數",
+        "topicCode": "algebra",
+        "subtopic": "複數商的高次方",
+        "subtopicCode": "complex_quotient_power"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "algebra_grade12_foundation_030",
+      "topic": "algebra",
+      "subtopic": "even_index_coefficient_sum",
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "把 (1 + x)¹⁰ 完全展開後，求其中所有**偶數次項**（包含常數項）的係數之總和。",
+        "zh-Hans": "把 (1 + x)¹⁰ 完全展开后，求其中所有**偶数次项**（包含常数项）的系数之总和。",
+        "en": "Expand (1 + x)¹⁰ completely and find the sum of the coefficients of all the even-degree terms, the constant term included.",
+        "ja": "(1 + x)¹⁰ を完全に展開したとき、**偶数次の項**（定数項を含む）の係数の総和を求めなさい。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 512。",
+        "zh-Hans": "答案是 512。",
+        "en": "The answer is 512.",
+        "ja": "答えは 512 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "**逐一算出 C(10,0)、C(10,2)、⋯、C(10,10) 再相加是可行的，但有一個更漂亮的做法：同時利用 x = 1 與 x = −1。**",
+          "**設展開式為 a₀ + a₁x + a₂x² + ⋯ + a₁₀x¹⁰**，其中 aₖ = C(10, k)。",
+          "**代 x = 1**：所有項的 x 冪次都變成 1，得 **a₀ + a₁ + a₂ + ⋯ + a₁₀ = (1 + 1)¹⁰ = 2¹⁰ = 1024** ⋯（第一式）",
+          "**代 x = −1**：奇數次項的 (−1)^奇 = −1、偶數次項的 (−1)^偶 = +1，得 **a₀ − a₁ + a₂ − a₃ + ⋯ + a₁₀ = (1 − 1)¹⁰ = 0¹⁰ = 0** ⋯（第二式）",
+          "**兩式相加**：奇數次項的係數（a₁、a₃、⋯）在相加時一正一負，**互相抵銷**；偶數次項的係數則各被加了兩次。",
+          "所以 **2(a₀ + a₂ + a₄ + a₆ + a₈ + a₁₀) = 1024 + 0 = 1024**。",
+          "兩邊除以 2：**偶數次項的係數和 = 1024 ÷ 2 = 512**。",
+          "驗算：**直接把六個組合數算出來相加。**C(10,0) = 1；C(10,2) = 45；C(10,4) = 210；C(10,6) = 210；C(10,8) = 45；C(10,10) = 1。",
+          "相加：1 + 45 + 210 + 210 + 45 + 1 = **512** ✓ 與公式完全相符。",
+          "**核對奇數次項**：C(10,1) = 10、C(10,3) = 120、C(10,5) = 252、C(10,7) = 120、C(10,9) = 10，相加 = **512** ✓ **也是 512**——奇偶兩部分恰好各佔一半，合計 512 + 512 = **1024 = 2¹⁰** ✓ 與第一式吻合。",
+          "**為什麼奇偶各佔一半？**因為第二式的右邊是 0，代表奇數次項的和與偶數次項的和相等。**這是 (1 + x)ⁿ 的特性**——若換成 (1 + 2x)¹⁰，代 x = −1 得 (1 − 2)¹⁰ = 1 ≠ 0，兩部分就不再相等了。",
+          "**注意「偶數次項」包含常數項（0 次），這一點不可漏。**若漏掉 C(10,0) = 1，答案會變成 511，就錯了。"
+        ],
+        "zh-Hans": [
+          "**逐一算出 C(10,0)、C(10,2)、⋯、C(10,10) 再相加是可行的，但有一个更漂亮的做法：同时利用 x = 1 与 x = −1。**",
+          "**设展开式为 a₀ + a₁x + a₂x² + ⋯ + a₁₀x¹⁰**，其中 aₖ = C(10, k)。",
+          "**代 x = 1**：所有项的 x 幂次都变成 1，得 **a₀ + a₁ + a₂ + ⋯ + a₁₀ = (1 + 1)¹⁰ = 2¹⁰ = 1024** ⋯（第一式）",
+          "**代 x = −1**：奇数次项的 (−1)^奇 = −1、偶数次项的 (−1)^偶 = +1，得 **a₀ − a₁ + a₂ − a₃ + ⋯ + a₁₀ = (1 − 1)¹⁰ = 0¹⁰ = 0** ⋯（第二式）",
+          "**两式相加**：奇数次项的系数（a₁、a₃、⋯）在相加时一正一负，**互相抵销**；偶数次项的系数则各被加了两次。",
+          "所以 **2(a₀ + a₂ + a₄ + a₆ + a₈ + a₁₀) = 1024 + 0 = 1024**。",
+          "两边除以 2：**偶数次项的系数和 = 1024 ÷ 2 = 512**。",
+          "验算：**直接把六个组合数算出来相加。**C(10,0) = 1；C(10,2) = 45；C(10,4) = 210；C(10,6) = 210；C(10,8) = 45；C(10,10) = 1。",
+          "相加：1 + 45 + 210 + 210 + 45 + 1 = **512** ✓ 与公式完全相符。",
+          "**核对奇数次项**：C(10,1) = 10、C(10,3) = 120、C(10,5) = 252、C(10,7) = 120、C(10,9) = 10，相加 = **512** ✓ **也是 512**——奇偶两部分恰好各占一半，合计 512 + 512 = **1024 = 2¹⁰** ✓ 与第一式吻合。",
+          "**为什么奇偶各占一半？**因为第二式的右边是 0，代表奇数次项的和与偶数次项的和相等。**这是 (1 + x)ⁿ 的特性**——若换成 (1 + 2x)¹⁰，代 x = −1 得 (1 − 2)¹⁰ = 1 ≠ 0，两部分就不再相等了。",
+          "**注意「偶数次项」包含常数项（0 次），这一点不可漏。**若漏掉 C(10,0) = 1，答案会变成 511，就错了。"
+        ],
+        "en": [
+          "Computing C(10,0), C(10,2), ..., C(10,10) and adding them works, but a neater route uses x = 1 and x = −1 together.",
+          "Write the expansion as a₀ + a₁x + a₂x² + ⋯ + a₁₀x¹⁰, with aₖ = C(10, k).",
+          "Substituting x = 1 turns every power of x into 1, giving a₀ + a₁ + a₂ + ⋯ + a₁₀ = (1 + 1)¹⁰ = 2¹⁰ = 1024, the first equation.",
+          "Substituting x = −1 makes odd powers of −1 equal −1 and even powers +1, giving a₀ − a₁ + a₂ − a₃ + ⋯ + a₁₀ = (1 − 1)¹⁰ = 0, the second equation.",
+          "Adding the two: the odd-degree coefficients appear with opposite signs and cancel, while the even-degree ones are counted twice.",
+          "So 2(a₀ + a₂ + a₄ + a₆ + a₈ + a₁₀) = 1024 + 0 = 1024.",
+          "Dividing by 2: the even-degree coefficients sum to 1024 ÷ 2 = 512.",
+          "Check by computing the six binomial coefficients directly: C(10,0) = 1, C(10,2) = 45, C(10,4) = 210, C(10,6) = 210, C(10,8) = 45 and C(10,10) = 1.",
+          "Adding: 1 + 45 + 210 + 210 + 45 + 1 = 512, exactly matching.",
+          "Check the odd-degree ones too: C(10,1) = 10, C(10,3) = 120, C(10,5) = 252, C(10,7) = 120 and C(10,9) = 10, summing to 512 as well — the two halves are equal, together giving 512 + 512 = 1024 = 2¹⁰, consistent with the first equation.",
+          "Why are the halves equal? Because the second equation's right side is 0, meaning the odd and even sums coincide. This is special to (1 + x)ⁿ — for (1 + 2x)¹⁰, substituting x = −1 gives (1 − 2)¹⁰ = 1 ≠ 0 and the halves would no longer match.",
+          "Note that the even-degree terms include the constant term of degree 0. Omitting C(10,0) = 1 would give 511, a wrong answer."
+        ],
+        "ja": [
+          "**C(10,0)、C(10,2)、⋯、C(10,10) を計算して足してもよい**のですが、**x = 1 と x = −1 を同時に使う**もっと美しい方法があります。",
+          "**展開を a₀ + a₁x + a₂x² + ⋯ + a₁₀x¹⁰ とおく**と aₖ = C(10, k) です。",
+          "**x = 1 を代入**すると x の累乗がすべて 1 になり、**a₀ + a₁ + ⋯ + a₁₀ = (1 + 1)¹⁰ = 2¹⁰ = 1024** ⋯（第 1 式）",
+          "**x = −1 を代入**すると奇数次は (−1) の奇数乗で −1、偶数次は +1 となり、**a₀ − a₁ + a₂ − a₃ + ⋯ + a₁₀ = (1 − 1)¹⁰ = 0** ⋯（第 2 式）",
+          "**2 式を足す**と、奇数次の係数は符号が逆で**打ち消し合い**、偶数次の係数は 2 回ずつ数えられます。",
+          "したがって **2(a₀ + a₂ + a₄ + a₆ + a₈ + a₁₀) = 1024 + 0 = 1024**。",
+          "2 で割って **偶数次の係数の和 = 1024 ÷ 2 = 512**。",
+          "検算：**6 つの組合せを直接計算して足します。**C(10,0) = 1、C(10,2) = 45、C(10,4) = 210、C(10,6) = 210、C(10,8) = 45、C(10,10) = 1。",
+          "足すと 1 + 45 + 210 + 210 + 45 + 1 = **512** ✓ で式と完全に一致します。",
+          "**奇数次も確認**：C(10,1) = 10、C(10,3) = 120、C(10,5) = 252、C(10,7) = 120、C(10,9) = 10 で和は **512** ✓ と**やはり 512**——偶奇がちょうど半々で、合計 512 + 512 = **1024 = 2¹⁰** ✓ と第 1 式に合致します。",
+          "**なぜ半々になるのか。**第 2 式の右辺が 0 であり、奇数次の和と偶数次の和が等しいことを意味するからです。**これは (1 + x)ⁿ に特有**で、(1 + 2x)¹⁰ なら x = −1 で (1 − 2)¹⁰ = 1 ≠ 0 となり半々ではなくなります。",
+          "**「偶数次の項」には 0 次の定数項が含まれる**点に注意します。C(10,0) = 1 を落とすと 511 となり誤答になります。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "512"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "偶數次項的係數和：代入 x = 1 與 x = −1 後相加使奇數次項抵銷，再除以 2",
+        "notes": "設計依據：詳解以 x = ±1 兩次代入相加消去奇數次項，並實際列出六個二項式係數相加驗證；另核對奇數次項的和亦為 512 並解釋兩者相等的原因（第二式右邊為 0），以 (1 + 2x)¹⁰ 說明此性質不具普遍性。末尾提醒偶數次含常數項，漏算會得 511。答案 512 已用代入法與逐項相加雙向驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（偶數次項的係數和）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "代數",
+        "topicCode": "algebra",
+        "subtopic": "偶數次項的係數和",
+        "subtopicCode": "even_index_coefficient_sum"
+      },
+      "reviewStatus": "ok"
     }
   ]
 }
