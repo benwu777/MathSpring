@@ -1419,6 +1419,1556 @@
         "subtopicCode": "ramsey_three_three"
       },
       "reviewStatus": "ok"
+    },
+    {
+      "id": "logic_grade11_foundation_016",
+      "topic": "logic",
+      "subtopic": "coin_row_game",
+      "difficulty": "foundation",
+      "levelStage": "grade11",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "桌上排著一列硬幣，面額由左到右依序是 3、9、1、2。甲、乙兩人輪流取走硬幣，由甲先取，每次只能從**最左端或最右端**取走一枚。兩人都採取讓自己總額最大的最佳策略。求甲最後能拿到的總額。",
+        "zh-Hans": "桌上排着一列硬币，面额由左到右依序是 3、9、1、2。甲、乙两人轮流取走硬币，由甲先取，每次只能从**最左端或最右端**取走一枚。两人都采取让自己总额最大的最佳策略。求甲最后能拿到的总额。",
+        "en": "A row of coins on a table has values 3, 9, 1, 2 from left to right. Two players take turns removing coins, the first player starting, and each turn a player may take only the leftmost or the rightmost coin. Both play optimally to maximise their own total. What total does the first player end up with?",
+        "ja": "机の上に硬貨が一列に並び、左から順に 3、9、1、2 の額です。甲と乙が交互に硬貨を取り、甲が先手で、毎回**左端か右端**の 1 枚しか取れません。二人とも自分の合計を最大にする最善手を打ちます。甲が最後に得る合計を求めなさい。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 11。",
+        "zh-Hans": "答案是 11。",
+        "en": "The answer is 11.",
+        "ja": "答えは 11 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "**先試最直覺的貪心法，看看它行不行。**貪心法是「每次都取兩端較大的那一枚」。",
+          "甲面對 3、9、1、2，兩端是 3 與 2，取較大的 **3**。剩下 9、1、2，兩端是 9 與 2，乙取 **9**。",
+          "剩下 1、2，兩端是 1 與 2，甲取 **2**。最後剩 1，乙取走。**甲共得 3 + 2 = 5**。",
+          "**但貪心法在這裡是錯的**——它只看眼前，沒有考慮「這一步會讓對手拿到什麼」。取走 3 之後，9 就暴露在端點，白白送給對手。",
+          "**正確的做法是從最後往前推**。設 f(i, j) 表示「面對第 i 到第 j 枚硬幣時，先取的人能拿到的最大總額」。",
+          "**關鍵的關係式**：先取的人取走一端後，對手會在剩下的區間裡拿到 f(剩下區間)，所以先取的人拿到的是 **(區間總和) − f(剩下區間)**；他會在兩種取法中選讓自己較大的。",
+          "**先算長度 2 的情形**：f(3,9) = 9（取大的）、f(9,1) = 9、f(1,2) = 2。",
+          "**再算長度 3**：面對 3、9、1（總和 13）——取 3 則對手面對 9、1 得 9，自己得 13 − 9 = 4；取 1 則對手面對 3、9 得 9，自己得 4。所以 f = **4**。面對 9、1、2（總和 12）——取 9 則對手面對 1、2 得 2，自己得 10；取 2 則對手面對 9、1 得 9，自己得 3。所以 f = **10**。",
+          "**最後算長度 4**：總和 = 3 + 9 + 1 + 2 = 15。取左端 3 則對手面對 9、1、2 得 10，甲得 15 − 10 = **5**；取右端 2 則對手面對 3、9、1 得 4，甲得 15 − 4 = **11**。取較大者，**甲得 11**。",
+          "驗算：程式以動態規劃計算，先手最優所得正是 **11**、後手得 4，合計 15 ✓ 等於總額。**而貪心法只拿到 5** ✓ 與上面的手算相符，證實貪心確實會失敗。",
+          "**最佳走法是甲先取右端的 2**（放棄眼前較大的 3），迫使對手面對 3、9、1 這個對他不利的局面——**這正是本題的重點：要看的不是這一步拿多少，而是留給對手什麼**。"
+        ],
+        "zh-Hans": [
+          "**先试最直觉的贪心法，看看它行不行。**贪心法是「每次都取两端较大的那一枚」。",
+          "甲面对 3、9、1、2，两端是 3 与 2，取较大的 **3**。剩下 9、1、2，两端是 9 与 2，乙取 **9**。",
+          "剩下 1、2，两端是 1 与 2，甲取 **2**。最后剩 1，乙取走。**甲共得 3 + 2 = 5**。",
+          "**但贪心法在这里是错的**——它只看眼前，没有考虑「这一步会让对手拿到什么」。取走 3 之后，9 就暴露在端点，白白送给对手。",
+          "**正确的做法是从最后往前推**。设 f(i, j) 表示「面对第 i 到第 j 枚硬币时，先取的人能拿到的最大总额」。",
+          "**关键的关系式**：先取的人取走一端后，对手会在剩下的区间里拿到 f(剩下区间)，所以先取的人拿到的是 **(区间总和) − f(剩下区间)**；他会在两种取法中选让自己较大的。",
+          "**先算长度 2 的情形**：f(3,9) = 9（取大的）、f(9,1) = 9、f(1,2) = 2。",
+          "**再算长度 3**：面对 3、9、1（总和 13）——取 3 则对手面对 9、1 得 9，自己得 13 − 9 = 4；取 1 则对手面对 3、9 得 9，自己得 4。所以 f = **4**。面对 9、1、2（总和 12）——取 9 则对手面对 1、2 得 2，自己得 10；取 2 则对手面对 9、1 得 9，自己得 3。所以 f = **10**。",
+          "**最后算长度 4**：总和 = 3 + 9 + 1 + 2 = 15。取左端 3 则对手面对 9、1、2 得 10，甲得 15 − 10 = **5**；取右端 2 则对手面对 3、9、1 得 4，甲得 15 − 4 = **11**。取较大者，**甲得 11**。",
+          "验算：程序以动态规划计算，先手最优所得正是 **11**、后手得 4，合计 15 ✓ 等于总额。**而贪心法只拿到 5** ✓ 与上面的手算相符，证实贪心确实会失败。",
+          "**最佳走法是甲先取右端的 2**（放弃眼前较大的 3），迫使对手面对 3、9、1 这个对他不利的局面——**这正是本题的重点：要看的不是这一步拿多少，而是留给对手什么**。"
+        ],
+        "en": [
+          "Try the obvious greedy strategy first and see whether it works: always take the larger of the two ends.",
+          "Facing 3, 9, 1, 2, the ends are 3 and 2, so the first player takes 3. Facing 9, 1, 2, the ends are 9 and 2, so the opponent takes 9.",
+          "Facing 1, 2, the first player takes 2, and the opponent takes the last coin, 1. The first player collects 3 + 2 = 5.",
+          "But greedy fails here — it looks only at the immediate gain and ignores what the move leaves for the opponent. Taking the 3 exposes the 9 at an end and hands it over.",
+          "The correct approach works backwards. Let f(i, j) be the most the player to move can collect when facing coins i through j.",
+          "The key relation: after taking one end, the opponent collects f of the remaining interval, so the player to move collects the interval's total minus f of what remains, and chooses whichever of the two options is larger.",
+          "Length 2 first: f(3,9) = 9, taking the larger; f(9,1) = 9; and f(1,2) = 2.",
+          "Length 3 next: facing 3, 9, 1 with total 13 — taking 3 leaves the opponent facing 9, 1 for 9, giving 13 − 9 = 4; taking 1 leaves 3, 9 for 9, again giving 4. So f = 4. Facing 9, 1, 2 with total 12 — taking 9 leaves 1, 2 for 2, giving 10; taking 2 leaves 9, 1 for 9, giving 3. So f = 10.",
+          "Length 4 finally: the total is 3 + 9 + 1 + 2 = 15. Taking the left 3 leaves the opponent facing 9, 1, 2 for 10, giving 15 − 10 = 5; taking the right 2 leaves 3, 9, 1 for 4, giving 15 − 4 = 11. Choosing the larger, the first player gets 11.",
+          "Check: dynamic programming gives the first player 11 and the second 4, totalling 15, the full amount. Greedy yields only 5, matching the hand computation and confirming that greedy genuinely fails.",
+          "The winning move is to take the right-hand 2 first, giving up the larger 3, and force the opponent into the unfavourable 3, 9, 1 — the whole point of the problem being that what matters is not what this move gains but what it leaves behind."
+        ],
+        "ja": [
+          "**まず直感的な貪欲法を試し、通用するか見ます。**貪欲法とは「毎回、両端の大きいほうを取る」ことです。",
+          "甲は 3、9、1、2 に対し両端 3 と 2 のうち大きい **3** を取ります。残る 9、1、2 の両端は 9 と 2 で、乙が **9** を取ります。",
+          "残る 1、2 の両端から甲が **2** を取り、最後の 1 は乙が取ります。**甲の合計は 3 + 2 = 5**。",
+          "**しかしここでは貪欲法は誤り**です——目先しか見ておらず、「その一手が相手に何を残すか」を考えていません。3 を取ると 9 が端に現れ、そのまま相手に渡ってしまいます。",
+          "**正しい方法は後ろから遡ることです。**f(i, j) を「i 番目から j 番目までに直面したとき、先に取る人が得られる最大額」とします。",
+          "**鍵となる関係式**：一端を取ると相手が残りの区間で f(残り) を得るので、先に取る人は **(区間の総和) − f(残り)** を得ます。2 通りのうち自分が大きくなるほうを選びます。",
+          "**まず長さ 2**：f(3,9) = 9（大きいほう）、f(9,1) = 9、f(1,2) = 2。",
+          "**次に長さ 3**：3、9、1（総和 13）——3 を取ると相手は 9、1 で 9 を得て自分は 13 − 9 = 4、1 を取ると相手は 3、9 で 9 を得て自分は 4。よって f = **4**。9、1、2（総和 12）——9 を取ると相手は 1、2 で 2 を得て自分は 10、2 を取ると相手は 9、1 で 9 を得て自分は 3。よって f = **10**。",
+          "**最後に長さ 4**：総和 = 3 + 9 + 1 + 2 = 15。左端 3 を取ると相手は 9、1、2 で 10 を得て甲は 15 − 10 = **5**、右端 2 を取ると相手は 3、9、1 で 4 を得て甲は 15 − 4 = **11**。大きいほうを選び **甲は 11**。",
+          "検算：動的計画法で計算すると先手の最適値はちょうど **11**、後手は 4 で合計 15 ✓ と総額に一致します。**貪欲法では 5 しか得られず** ✓ 手計算と合い、貪欲が確かに失敗することが確認できます。",
+          "**最善手は甲がまず右端の 2 を取ること**（目先の大きい 3 を捨てる）で、相手を 3、9、1 という不利な局面に追い込みます——**本問の要点はまさに、その一手でいくら取るかではなく、相手に何を残すかを見ることです**。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "11"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "從兩端取硬幣的賽局：以「區間總和減去對手在剩餘區間的最優值」由小區間往大區間遞推，貪心法會失效",
+        "notes": "設計依據：硬幣序列刻意設計成貪心法只得 5 而最優為 11，詳解先完整走一遍貪心並指出它失敗的原因（暴露 9 給對手），再逐層建立遞推；最佳首步是捨棄較大的端點，凸顯「看留給對手什麼」的核心。答案 11 已用動態規劃與先後手合計等於總額 15 的檢查驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（從兩端取硬幣的賽局）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "邏輯推理",
+        "topicCode": "logic",
+        "subtopic": "從兩端取硬幣的賽局",
+        "subtopicCode": "coin_row_game"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "logic_grade11_foundation_017",
+      "topic": "logic",
+      "subtopic": "election_votes_needed",
+      "difficulty": "foundation",
+      "levelStage": "grade11",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一場選舉有甲、乙、丙三位候選人，共 100 張票，每張票只投給一人且全部有效。目前已開出 30 張票，其中甲得 12 票、乙得 10 票、丙得 8 票。求甲在剩下的票當中**至少還要再得幾票**，才能保證自己的最終得票數比另外兩人都多（不論剩下的票怎麼分配）。",
+        "zh-Hans": "一场选举有甲、乙、丙三位候选人，共 100 张票，每张票只投给一人且全部有效。目前已开出 30 张票，其中甲得 12 票、乙得 10 票、丙得 8 票。求甲在剩下的票当中**至少还要再得几票**，才能保证自己的最终得票数比另外两人都多（不论剩下的票怎么分配）。",
+        "en": "An election has three candidates A, B and C and 100 valid votes, each for exactly one candidate. Of the 30 votes counted so far, A has 12, B has 10 and C has 8. At least how many of the remaining votes must A receive to guarantee finishing with more votes than either rival, whatever happens to the rest?",
+        "ja": "甲・乙・丙の 3 候補による選挙で、有効票は全部で 100 票、各票は 1 人にのみ投じられます。すでに 30 票が開票され、甲が 12 票、乙が 10 票、丙が 8 票を得ています。残りの票のうち甲が**最低あと何票**得れば、残りがどう分かれても最終得票数が他の 2 人より多いことを保証できますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 35 票。",
+        "zh-Hans": "答案是 35 票。",
+        "en": "The answer is 35.",
+        "ja": "答えは 35 票です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "**「保證」表示要在最壞的情況下也成立**——不能假設對手拿得少，必須假設對手拿到他們可能拿到的最多票。",
+          "**先算還剩多少票**：100 − 30 = **70 張**。",
+          "**設甲在剩下的票中再得 x 張**，則甲的最終票數是 **12 + x**。",
+          "**最壞情況是什麼？**剩下的 70 張裡，甲拿走 x 張，其餘 70 − x 張可能**全部**集中到某一個對手身上。",
+          "乙目前 10 票，最壞情況下他的最終票數是 **10 + (70 − x)**；丙目前 8 票，最壞是 **8 + (70 − x)**。",
+          "**乙的基礎票比丙多，所以乙是威脅較大的那一個**——只要甲能勝過乙的最壞情況，也必定勝過丙。",
+          "所以條件是 **12 + x > 10 + (70 − x)**，即 12 + x > 80 − x。",
+          "移項：2x > 68，得 **x > 34**。由於 x 是整數，最小的 x 是 **35**。",
+          "驗算：**檢查 x = 35 確實足夠。**甲最終得 12 + 35 = **47** 票；剩下的 70 − 35 = 35 票即使全給乙，乙也只有 10 + 35 = **45** 票 ✓ 少於 47；全給丙則丙有 8 + 35 = **43** 票 ✓ 也少於 47。所以甲必定勝出。",
+          "**再檢查 x = 34 不夠。**甲得 12 + 34 = **46** 票；剩下 36 票若全給乙，乙得 10 + 36 = **46** 票——**與甲平手，沒有比甲少** ✗ 所以不能「保證」勝出。",
+          "**因此 35 是確切的最小值。**注意這裡的關鍵是**要比對手多，平手不算贏**；若題目只要求「不落後」（可以平手），那麼 x = 34 就夠了，答案會少 1。**另外要用乙而不是丙來列式**——用票數較少的丙會算出 x > 33、答案 34，那個票數擋不住乙。"
+        ],
+        "zh-Hans": [
+          "**「保证」表示要在最坏的情况下也成立**——不能假设对手拿得少，必须假设对手拿到他们可能拿到的最多票。",
+          "**先算还剩多少票**：100 − 30 = **70 张**。",
+          "**设甲在剩下的票中再得 x 张**，则甲的最终票数是 **12 + x**。",
+          "**最坏情况是什么？**剩下的 70 张里，甲拿走 x 张，其余 70 − x 张可能**全部**集中到某一个对手身上。",
+          "乙目前 10 票，最坏情况下他的最终票数是 **10 + (70 − x)**；丙目前 8 票，最坏是 **8 + (70 − x)**。",
+          "**乙的基础票比丙多，所以乙是威胁较大的那一个**——只要甲能胜过乙的最坏情况，也必定胜过丙。",
+          "所以条件是 **12 + x > 10 + (70 − x)**，即 12 + x > 80 − x。",
+          "移项：2x > 68，得 **x > 34**。由于 x 是整数，最小的 x 是 **35**。",
+          "验算：**检查 x = 35 确实足够。**甲最终得 12 + 35 = **47** 票；剩下的 70 − 35 = 35 票即使全给乙，乙也只有 10 + 35 = **45** 票 ✓ 少于 47；全给丙则丙有 8 + 35 = **43** 票 ✓ 也少于 47。所以甲必定胜出。",
+          "**再检查 x = 34 不够。**甲得 12 + 34 = **46** 票；剩下 36 票若全给乙，乙得 10 + 36 = **46** 票——**与甲平手，没有比甲少** ✗ 所以不能「保证」胜出。",
+          "**因此 35 是确切的最小值。**注意这里的关键是**要比对手多，平手不算赢**；若题目只要求「不落后」（可以平手），那么 x = 34 就够了，答案会少 1。**另外要用乙而不是丙来列式**——用票数较少的丙会算出 x > 33、答案 34，那个票数挡不住乙。"
+        ],
+        "en": [
+          "A guarantee must hold in the worst case — one may not assume rivals do poorly, and must instead assume they take as much as they possibly could.",
+          "Votes remaining: 100 − 30 = 70.",
+          "Let A receive x of the remaining votes, so A finishes with 12 + x.",
+          "What is the worst case? Of the 70 remaining, A takes x and the other 70 − x could all go to a single rival.",
+          "B currently has 10, so at worst B finishes with 10 + (70 − x); C has 8, so at worst C finishes with 8 + (70 − x).",
+          "B has the larger base, so B is the greater threat — beating B's worst case automatically beats C's.",
+          "The condition is 12 + x > 10 + (70 − x), that is 12 + x > 80 − x.",
+          "Rearranging: 2x > 68, so x > 34. Since x is an integer, the least value is 35.",
+          "Check that x = 35 suffices. A finishes with 12 + 35 = 47; the remaining 70 − 35 = 35 votes give B at most 10 + 35 = 45, less than 47, and C at most 8 + 35 = 43, also less. So A wins for certain.",
+          "Check that x = 34 does not. A finishes with 12 + 34 = 46, and the remaining 36 votes could give B 10 + 36 = 46 — a tie, not fewer than A, so victory is not guaranteed.",
+          "Hence 35 is exactly the minimum. The crucial point is that A must have more, a tie not counting as a win; requiring only that A not fall behind, allowing ties, would make x = 34 enough and lower the answer by one. And the inequality must use B, not C — using the lower-polling C would give x > 33 and an answer of 34, which would not hold off B."
+        ],
+        "ja": [
+          "**「保証」とは最悪の場合でも成り立つこと**です——相手が少なく取ると仮定してはならず、相手が取りうる最大を仮定しなければなりません。",
+          "**残りの票数**：100 − 30 = **70 票**。",
+          "**甲が残りのうち x 票を得る**とすると、甲の最終得票は **12 + x** です。",
+          "**最悪の場合とは何か。**残り 70 票のうち甲が x 票を取り、残る 70 − x 票が**すべて**どちらか一方の相手に集まる可能性があります。",
+          "乙は現在 10 票なので最悪 **10 + (70 − x)**、丙は 8 票なので最悪 **8 + (70 − x)** です。",
+          "**乙のほうが基礎票が多く脅威が大きい**——乙の最悪の場合に勝てれば、丙にも必ず勝てます。",
+          "したがって条件は **12 + x > 10 + (70 − x)**、すなわち 12 + x > 80 − x。",
+          "移項して 2x > 68、**x > 34**。x は整数なので最小は **35**。",
+          "検算：**x = 35 で十分か確認します。**甲は 12 + 35 = **47** 票。残る 70 − 35 = 35 票が全部乙に行っても乙は 10 + 35 = **45** 票 ✓ で 47 未満、全部丙なら 8 + 35 = **43** 票 ✓ でやはり未満。よって甲は必ず勝ちます。",
+          "**x = 34 では不十分**です。甲は 12 + 34 = **46** 票。残る 36 票が全部乙なら乙は 10 + 36 = **46** 票——**甲と同数で、甲より少なくありません** ✗。したがって勝利を「保証」できません。",
+          "**よって 35 が厳密な最小値**です。要点は**相手より多くなければならず、同数は勝ちではない**ことで、「負けなければよい」（同数可）なら x = 34 で足り、答えは 1 少なくなります。**また不等式は丙ではなく乙で立てます**——得票の少ない丙で立てると x > 33、答え 34 となりますが、それでは乙を抑えられません。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "35"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "確保當選的票數：以最壞情況（剩票全歸單一對手）列不等式，且須取基礎票較高的對手來列式",
+        "notes": "設計依據：詳解明確以「最壞情況」建立不等式並說明應取威脅較大的乙而非丙（用丙會誤得 34）；並分別驗證 x = 35 足夠與 x = 34 因平手而不足，指出「平手不算贏」對答案的影響。答案 35 已用最壞情況枚舉獨立驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（確保當選的票數）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "邏輯推理",
+        "topicCode": "logic",
+        "subtopic": "確保當選的票數",
+        "subtopicCode": "election_votes_needed"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "logic_grade11_foundation_018",
+      "topic": "logic",
+      "subtopic": "no_three_collinear_grid",
+      "difficulty": "foundation",
+      "levelStage": "grade11",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "在一個 3 × 3 的格點陣列中（共 9 個點，橫向與縱向相鄰點的距離都是 1），要選出盡可能多的點，使得**其中任意三個點都不在同一條直線上**。求最多能選出幾個點。",
+        "zh-Hans": "在一个 3 × 3 的格点阵列中（共 9 个点，横向与纵向相邻点的距离都是 1），要选出尽可能多的点，使得**其中任意三个点都不在同一条直线上**。求最多能选出几个点。",
+        "en": "In a 3 × 3 array of lattice points, nine points with unit spacing horizontally and vertically, choose as many points as possible so that no three of them are collinear. What is the largest number that can be chosen?",
+        "ja": "3 × 3 の格子点（9 点、縦横に隣り合う点の距離は 1）から、**どの 3 点も同一直線上にない**ようにできるだけ多くの点を選びます。最大で何点選べますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 6 個。",
+        "zh-Hans": "答案是 6 个。",
+        "en": "The answer is 6.",
+        "ja": "答えは 6 個です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "**要同時做兩件事：找出一個能達成的方案（下界），並證明不可能更多（上界）。**先看上界。",
+          "**上界的論證：3 × 3 的陣列有 3 列，每一列上有 3 個點，而這 3 個點是共線的。**",
+          "所以**每一列最多只能選 2 個點**——選滿 3 個就會出現三點共線 ✗。",
+          "三列各最多 2 個，所以總數**最多 3 × 2 = 6 個**。這就是上界。",
+          "**接著要找出真的能選到 6 個的方案**——上界能不能達到並不是理所當然的。",
+          "把 9 個點的座標記為 (0,0) 到 (2,2)。試著每列選 2 個，並避開行與對角線上的三點共線。",
+          "**取這 6 個點**：(0,0)、(0,1)、(1,0)、(1,2)、(2,1)、(2,2)。逐列檢查：第 0 列選了 2 個 ✓、第 1 列 2 個 ✓、第 2 列 2 個 ✓。",
+          "**逐行檢查**：y = 0 的有 (0,0)、(1,0) 共 2 個 ✓；y = 1 的有 (0,1)、(2,1) 共 2 個 ✓；y = 2 的有 (1,2)、(2,2) 共 2 個 ✓ 都沒有滿 3 個。",
+          "**還要檢查兩條主對角線與其他斜線**：主對角線 (0,0)、(1,1)、(2,2) 中只選了 (0,0) 與 (2,2)，缺 (1,1) ✓；反對角線 (0,2)、(1,1)、(2,0) 一個都沒選 ✓。其餘任三點的斜率也都不相同。",
+          "**所以 6 個確實可以達成，而上界也是 6，因此答案就是 6。**",
+          "驗算：程式窮舉 9 個點的所有子集，對每個子集檢查是否存在三點共線（用「向量叉積為 0」判定），**無三點共線的最大子集大小正是 6，而且這樣的方案恰好有 2 種**（互為對稱）✓。",
+          "**注意上界的論證只用到「列」這一個方向就已經夠了**——不必再用行或對角線去壓低上界。而下界必須實際構造出方案，**兩者都做完才算解完這類「最多能幾個」的問題**。"
+        ],
+        "zh-Hans": [
+          "**要同时做两件事：找出一个能达成的方案（下界），并证明不可能更多（上界）。**先看上界。",
+          "**上界的论证：3 × 3 的阵列有 3 列，每一列上有 3 个点，而这 3 个点是共线的。**",
+          "所以**每一列最多只能选 2 个点**——选满 3 个就会出现三点共线 ✗。",
+          "三列各最多 2 个，所以总数**最多 3 × 2 = 6 个**。这就是上界。",
+          "**接着要找出真的能选到 6 个的方案**——上界能不能达到并不是理所当然的。",
+          "把 9 个点的坐标记为 (0,0) 到 (2,2)。试着每列选 2 个，并避开行与对角线上的三点共线。",
+          "**取这 6 个点**：(0,0)、(0,1)、(1,0)、(1,2)、(2,1)、(2,2)。逐列检查：第 0 列选了 2 个 ✓、第 1 列 2 个 ✓、第 2 列 2 个 ✓。",
+          "**逐行检查**：y = 0 的有 (0,0)、(1,0) 共 2 个 ✓；y = 1 的有 (0,1)、(2,1) 共 2 个 ✓；y = 2 的有 (1,2)、(2,2) 共 2 个 ✓ 都没有满 3 个。",
+          "**还要检查两条主对角线与其他斜线**：主对角线 (0,0)、(1,1)、(2,2) 中只选了 (0,0) 与 (2,2)，缺 (1,1) ✓；反对角线 (0,2)、(1,1)、(2,0) 一个都没选 ✓。其余任三点的斜率也都不相同。",
+          "**所以 6 个确实可以达成，而上界也是 6，因此答案就是 6。**",
+          "验算：程序穷举 9 个点的所有子集，对每个子集检查是否存在三点共线（用「向量叉积为 0」判定），**无三点共线的最大子集大小正是 6，而且这样的方案恰好有 2 种**（互为对称）✓。",
+          "**注意上界的论证只用到「列」这一个方向就已经够了**——不必再用行或对角线去压低上界。而下界必须实际构造出方案，**两者都做完才算解完这类「最多能几个」的问题**。"
+        ],
+        "en": [
+          "Two things are needed: a construction achieving some number, giving a lower bound, and a proof that no more is possible, giving an upper bound. Take the upper bound first.",
+          "The upper bound argument: the 3 × 3 array has 3 columns, each containing 3 points, and those 3 are collinear.",
+          "So at most 2 points may be chosen from each column — taking all 3 would create three collinear points.",
+          "With three columns each contributing at most 2, the total is at most 3 × 2 = 6. That is the upper bound.",
+          "Now a construction actually achieving 6 must be found, since an upper bound need not be attainable.",
+          "Label the nine points from (0,0) to (2,2). Try choosing 2 per column while avoiding collinearity along rows and diagonals.",
+          "Take these six: (0,0), (0,1), (1,0), (1,2), (2,1), (2,2). By column: column 0 has 2, column 1 has 2, column 2 has 2.",
+          "By row: y = 0 holds (0,0) and (1,0), two points; y = 1 holds (0,1) and (2,1), two; y = 2 holds (1,2) and (2,2), two. None reaches three.",
+          "Check the diagonals too: the main diagonal (0,0), (1,1), (2,2) has only (0,0) and (2,2), missing (1,1); the anti-diagonal (0,2), (1,1), (2,0) has none selected. No other three chosen points share a slope either.",
+          "So 6 is achievable and 6 is the upper bound, making 6 the answer.",
+          "Check: enumerating every subset of the nine points and testing for three collinear points, via a zero cross product, shows the largest subset with none is of size 6, and exactly 2 such subsets exist, mirror images of each other.",
+          "Note the upper-bound argument needed only the columns — rows and diagonals were not required to push it lower. But the lower bound demands an explicit construction, and a question of this kind is only fully solved once both halves are done."
+        ],
+        "ja": [
+          "**2 つのことを同時に行う必要があります**：達成できる配置を示す（下界）ことと、それ以上は不可能だと示す（上界）ことです。まず上界から。",
+          "**上界の議論：3 × 3 の格子には 3 つの列があり、各列の 3 点は同一直線上にあります。**",
+          "したがって**各列から選べるのは高々 2 点**です——3 点すべてを選ぶと同一直線上の 3 点ができてしまいます ✗。",
+          "3 列がそれぞれ高々 2 点なので、総数は**高々 3 × 2 = 6 点**。これが上界です。",
+          "**次に実際に 6 点選べる配置を見つけます**——上界が達成できるとは限らないからです。",
+          "9 点の座標を (0,0) から (2,2) とします。各列 2 点を選びつつ、行と対角線上の 3 点共線を避けます。",
+          "**次の 6 点をとります**：(0,0)、(0,1)、(1,0)、(1,2)、(2,1)、(2,2)。列ごと：第 0 列 2 点 ✓、第 1 列 2 点 ✓、第 2 列 2 点 ✓。",
+          "**行ごと**：y = 0 は (0,0)、(1,0) の 2 点 ✓、y = 1 は (0,1)、(2,1) の 2 点 ✓、y = 2 は (1,2)、(2,2) の 2 点 ✓ でいずれも 3 点に達しません。",
+          "**対角線なども確認**：主対角線 (0,0)、(1,1)、(2,2) は (0,0) と (2,2) だけで (1,1) を欠き ✓、反対角線 (0,2)、(1,1)、(2,0) は 1 点も選ばれていません ✓。他のどの 3 点も傾きが一致しません。",
+          "**したがって 6 点は達成でき、上界も 6 なので答えは 6 です。**",
+          "検算：9 点のすべての部分集合を列挙し、3 点共線があるか（ベクトルの外積が 0 かで判定）を調べると、**3 点共線をもたない最大の部分集合の大きさはちょうど 6 で、そのような配置は 2 通り**（互いに対称）✓ です。",
+          "**上界の議論は「列」だけで十分**でした——行や対角線を持ち出して上界を下げる必要はありません。一方、下界には具体的な構成が要り、**この種の「最大で何個」という問題は両方を示して初めて解けたことになります**。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "6"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "無三點共線的選點：每列至多 2 點給出上界 6，再實際構造出達成 6 的配置",
+        "notes": "設計依據：詳解分別建立上界（每列至多 2 點）與下界（具體給出 6 點並逐列、逐行、逐對角線檢查），並說明兩者缺一不可；窮舉確認最大值為 6 且方案恰有 2 種。答案 6 已用 9 個點全部子集的共線檢查窮舉獨立驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（無三點共線的選點）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "邏輯推理",
+        "topicCode": "logic",
+        "subtopic": "無三點共線的選點",
+        "subtopicCode": "no_three_collinear_grid"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "logic_grade11_foundation_019",
+      "topic": "logic",
+      "subtopic": "sum_free_subset",
+      "difficulty": "foundation",
+      "levelStage": "grade11",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "從 1 到 10 這十個整數中選出一個子集合 S，要求**S 中任兩個相異元素的和都不屬於 S**。求 S 最多可以有幾個元素。",
+        "zh-Hans": "从 1 到 10 这十个整数中选出一个子集合 S，要求**S 中任两个相异元素的和都不属于 S**。求 S 最多可以有几个元素。",
+        "en": "A subset S is chosen from the integers 1 to 10 so that the sum of any two distinct elements of S never lies in S. What is the largest possible size of S?",
+        "ja": "1 から 10 までの整数から部分集合 S を選び、**S の相異なる 2 元の和が S に属さない**ようにします。S の要素数は最大でいくつですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 6 個。",
+        "zh-Hans": "答案是 6 个。",
+        "en": "The answer is 6.",
+        "ja": "答えは 6 個です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "**先想一個能達成的方案，再論證不可能更多。**",
+          "**關鍵的觀察：如果所有元素都夠大，兩個之和就會超出 1 到 10 的範圍，自然不可能落在 S 裡。**",
+          "**取 S = {5, 6, 7, 8, 9, 10}**（六個元素）。任兩個相異元素的最小和是 5 + 6 = **11**，已經大於 10 ✓ 所以**沒有任何一個和落在 1 到 10 之內**，更不可能屬於 S。",
+          "所以 6 個是可以達成的。**接著要說明 7 個不行。**",
+          "**若 S 有 7 個元素**，那麼從 1 到 10 中只排除了 3 個數。設 S 中最小的元素是 m。",
+          "**因為只排除 3 個數，所以 m ≤ 4**（若 m ≥ 5，S 就只能從 5 到 10 這 6 個數中選，最多 6 個，不可能有 7 個）。",
+          "**現在利用最小元素 m 造出矛盾。**把 S 中其餘的元素兩兩與 m 相加：對 S 中每個大於 m 的元素 a，若 a + m ≤ 10，則 a + m 必須不在 S 中。",
+          "S 中除了 m 還有 6 個元素，它們都在 m+1 到 10 之間。**其中滿足 a + m ≤ 10 的（也就是 a ≤ 10 − m）每一個，都會「禁止」一個數 a + m 進入 S**，而這些被禁止的數彼此相異（因為 a 相異）。",
+          "以 m = 4 為例：S 還有 6 個元素落在 5 到 10 之間——但 5 到 10 只有 6 個數，所以 S = {4,5,6,7,8,9,10} 共 7 個。此時 4 + 5 = 9 ∈ S ✗ 矛盾。m 更小時可用的數更多，但被禁止的數也更多，同樣無法湊滿 7 個。",
+          "驗算：程式窮舉 1 到 10 的**全部 1024 個子集**，逐一檢查是否存在兩個相異元素之和落在該子集中，**符合條件的最大子集大小正是 6，而且大小為 6 的方案恰好只有一種：{5, 6, 7, 8, 9, 10}** ✓ 與上面的構造完全相同。",
+          "**注意條件說的是「相異元素」的和**——所以 a + a 這種情形不算。若把它也算進去（即要求 2a 也不在 S 中），{5,...,10} 仍然成立（最小的 2a 是 10，而 10 ∈ S ✗ 就會失敗），答案會變小，可見這個細節會影響結果。"
+        ],
+        "zh-Hans": [
+          "**先想一个能达成的方案，再论证不可能更多。**",
+          "**关键的观察：如果所有元素都够大，两个之和就会超出 1 到 10 的范围，自然不可能落在 S 里。**",
+          "**取 S = {5, 6, 7, 8, 9, 10}**（六个元素）。任两个相异元素的最小和是 5 + 6 = **11**，已经大于 10 ✓ 所以**没有任何一个和落在 1 到 10 之内**，更不可能属于 S。",
+          "所以 6 个是可以达成的。**接着要说明 7 个不行。**",
+          "**若 S 有 7 个元素**，那么从 1 到 10 中只排除了 3 个数。设 S 中最小的元素是 m。",
+          "**因为只排除 3 个数，所以 m ≤ 4**（若 m ≥ 5，S 就只能从 5 到 10 这 6 个数中选，最多 6 个，不可能有 7 个）。",
+          "**现在利用最小元素 m 造出矛盾。**把 S 中其余的元素两两与 m 相加：对 S 中每个大于 m 的元素 a，若 a + m ≤ 10，则 a + m 必须不在 S 中。",
+          "S 中除了 m 还有 6 个元素，它们都在 m+1 到 10 之间。**其中满足 a + m ≤ 10 的（也就是 a ≤ 10 − m）每一个，都会「禁止」一个数 a + m 进入 S**，而这些被禁止的数彼此相异（因为 a 相异）。",
+          "以 m = 4 为例：S 还有 6 个元素落在 5 到 10 之间——但 5 到 10 只有 6 个数，所以 S = {4,5,6,7,8,9,10} 共 7 个。此时 4 + 5 = 9 ∈ S ✗ 矛盾。m 更小时可用的数更多，但被禁止的数也更多，同样无法凑满 7 个。",
+          "验算：程序穷举 1 到 10 的**全部 1024 个子集**，逐一检查是否存在两个相异元素之和落在该子集中，**符合条件的最大子集大小正是 6，而且大小为 6 的方案恰好只有一种：{5, 6, 7, 8, 9, 10}** ✓ 与上面的构造完全相同。",
+          "**注意条件说的是「相异元素」的和**——所以 a + a 这种情形不算。若把它也算进去（即要求 2a 也不在 S 中），{5,...,10} 仍然成立（最小的 2a 是 10，而 10 ∈ S ✗ 就会失败），答案会变小，可见这个细节会影响结果。"
+        ],
+        "en": [
+          "Find an achievable construction first, then argue that more is impossible.",
+          "The key observation: if every element is large enough, any two of them sum beyond 10 and cannot possibly land back in the set.",
+          "Take S = {5, 6, 7, 8, 9, 10}, six elements. The smallest sum of two distinct elements is 5 + 6 = 11, already exceeding 10, so no sum falls within 1 to 10 at all, let alone inside S.",
+          "So 6 is achievable. Now show that 7 is not.",
+          "If S had 7 elements, only 3 of the numbers 1 to 10 would be excluded. Let m be the smallest element of S.",
+          "Since only 3 numbers are excluded, m ≤ 4 — for m ≥ 5 would confine S to the six numbers 5 through 10, at most 6 elements, never 7.",
+          "Now derive a contradiction from the smallest element. For each element a of S exceeding m, if a + m ≤ 10 then a + m must not lie in S.",
+          "Besides m, S has 6 more elements, all between m+1 and 10. Each of those with a ≤ 10 − m forbids a distinct number a + m from belonging to S, and these forbidden numbers are all different, since the values of a are.",
+          "Take m = 4: the other 6 elements must lie between 5 and 10 — but that range holds exactly 6 numbers, forcing S = {4,5,6,7,8,9,10}. Then 4 + 5 = 9 lies in S, a contradiction. Smaller m leaves more numbers available but forbids more of them, and 7 still cannot be reached.",
+          "Check: enumerating all 1024 subsets of 1 to 10 and testing whether any two distinct elements sum to a member shows the largest valid subset has size 6, and exactly one subset of that size works: {5, 6, 7, 8, 9, 10}, precisely the construction above.",
+          "Note the condition concerns sums of distinct elements, so a + a does not count. Including it, by also forbidding 2a in S, would break {5,...,10}, since the smallest such doubling gives 10, which is in S, and the answer would drop — so this detail genuinely affects the result."
+        ],
+        "ja": [
+          "**まず達成できる配置を考え、次にそれ以上が不可能であることを論じます。**",
+          "**鍵となる観察：要素がすべて十分大きければ、2 つの和は 1〜10 の範囲を超え、S に落ちようがありません。**",
+          "**S = {5, 6, 7, 8, 9, 10}**（6 要素）をとります。相異なる 2 元の和の最小は 5 + 6 = **11** ですでに 10 を超えており ✓、**どの和も 1〜10 に入らず**、まして S には属しません。",
+          "したがって 6 は達成できます。**次に 7 が不可能であることを示します。**",
+          "**S が 7 要素なら**、1〜10 のうち除外されるのは 3 個だけです。S の最小の要素を m とします。",
+          "**除外が 3 個だけなので m ≤ 4** です（m ≥ 5 なら S は 5〜10 の 6 個からしか選べず、高々 6 要素で 7 にはなりません）。",
+          "**最小の要素 m から矛盾を導きます。**S の m より大きい各要素 a について、a + m ≤ 10 ならば a + m は S に属してはいけません。",
+          "m のほかに S には 6 要素があり、いずれも m+1 から 10 の間にあります。**そのうち a ≤ 10 − m を満たす各要素が、それぞれ相異なる数 a + m を S から締め出します**（a が相異なるため）。",
+          "m = 4 の場合：他の 6 要素は 5〜10 に入りますが、その範囲はちょうど 6 個なので S = {4,5,6,7,8,9,10} に定まります。すると 4 + 5 = 9 ∈ S ✗ で矛盾します。m がより小さければ使える数は増えますが締め出される数も増え、やはり 7 には届きません。",
+          "検算：1〜10 の**全 1024 個の部分集合**を列挙し、相異なる 2 元の和がその集合に属するかを調べると、**条件を満たす最大の大きさはちょうど 6 で、大きさ 6 の配置は {5, 6, 7, 8, 9, 10} のただ 1 通り** ✓ で上の構成と完全に一致します。",
+          "**条件は「相異なる」2 元の和**である点に注意します——a + a は数えません。これも含める（2a も S に属さないと要求する）と {5,...,10} は成り立たなくなり（最小の 2a は 10 で、10 ∈ S ✗）、答えは小さくなります。この細部が結果を左右します。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "6"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "和不落在集合內：取足夠大的六個數使任兩和皆超出範圍達成 6，再由最小元素導出 7 個必然矛盾",
+        "notes": "設計依據：詳解以「元素夠大則和必超界」給出構造，再由最小元素 m 的可能範圍逐一導出 7 個元素的矛盾，兼顧下界與上界；窮舉確認大小 6 的方案唯一。末尾指出條件限於相異元素，若含 a + a 則答案會改變。答案 6 已用 1024 個子集的完整窮舉獨立驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（和不落在集合內）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "邏輯推理",
+        "topicCode": "logic",
+        "subtopic": "和不落在集合內",
+        "subtopicCode": "sum_free_subset"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "logic_grade11_foundation_020",
+      "topic": "logic",
+      "subtopic": "nonattacking_knights",
+      "difficulty": "foundation",
+      "levelStage": "grade11",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "在一個 4 × 4 的棋盤上放置若干個騎士（西洋棋中的 knight，走「日」字：一個方向走 2 格、垂直方向再走 1 格）。若要求任兩個騎士都不會互相攻擊，求最多能放幾個騎士。",
+        "zh-Hans": "在一个 4 × 4 的棋盘上放置若干个骑士（西洋棋中的 knight，走「日」字：一个方向走 2 格、垂直方向再走 1 格）。若要求任两个骑士都不会互相攻击，求最多能放几个骑士。",
+        "en": "Knights are placed on a 4 × 4 chessboard, a knight moving two squares in one direction and one square perpendicular to it. If no two knights may attack each other, how many knights can be placed at most?",
+        "ja": "4 × 4 の盤にナイト（一方向に 2 マス、それと垂直に 1 マス動く駒）を何個か置きます。どの 2 つも互いに攻撃しないようにするとき、最大で何個置けますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 8 個。",
+        "zh-Hans": "答案是 8 個。",
+        "en": "The answer is 8.",
+        "ja": "答えは 8 個です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "**先看騎士的一個關鍵性質：它每一步都會改變所在格子的顏色。**",
+          "把棋盤照國際象棋的方式黑白相間著色。騎士走「日」字時，橫向與縱向的位移是 2 與 1，**總位移是奇數**，所以**落點的顏色必定與起點相反**。",
+          "**這給了一個立刻可用的方案：把騎士全部放在同一種顏色的格子上。**同色的兩格之間，騎士一步走不到（因為一步必定變色），所以它們必定互不攻擊 ✓。",
+          "4 × 4 的棋盤有 16 格，黑白各 **8 格**。所以**放滿 8 個是可行的**，這是下界。",
+          "**接著要說明不能放 9 個或更多。**",
+          "**把 16 格依騎士的攻擊關係配成互相攻擊的對。**在 4 × 4 盤上，可以把 16 格分成 **8 對**，使每一對的兩格互相攻擊（例如 (0,0) 與 (1,2)、(0,1) 與 (2,0)、⋯ 依此類推可完整配對）。",
+          "**每一對中最多只能放 1 個騎士**（放 2 個就互相攻擊了 ✗）。",
+          "8 對各最多 1 個，所以**最多 8 個**——這就是上界。",
+          "**下界 8 與上界 8 一致，所以答案就是 8。**",
+          "驗算：程式窮舉 4 × 4 共 16 格的所有子集，逐一檢查是否存在兩格構成騎士的攻擊關係（判定條件是兩格的橫縱距離組成 {1, 2}），**互不攻擊的最大放法正是 8 個，而且達成 8 個的方案恰有 6 種** ✓。",
+          "**注意方案不只「全放同色」那兩種**——窮舉顯示有 6 種，表示還有一些混色但仍合法的擺法。**但這不影響最大值 8**，因為上界的配對論證與顏色無關。**若誤以為只能同色而答「黑白各 8 格，取一色得 8」，答案雖然對，但論證是不完整的**——那只給了下界，沒有排除 9 個的可能。"
+        ],
+        "zh-Hans": [
+          "**先看骑士的一个关键性质：它每一步都会改变所在格子的颜色。**",
+          "把棋盘照国际象棋的方式黑白相间着色。骑士走「日」字时，横向与纵向的位移是 2 与 1，**总位移是奇数**，所以**落点的颜色必定与起点相反**。",
+          "**这给了一个立刻可用的方案：把骑士全部放在同一种颜色的格子上。**同色的两格之间，骑士一步走不到（因为一步必定变色），所以它们必定互不攻击 ✓。",
+          "4 × 4 的棋盘有 16 格，黑白各 **8 格**。所以**放满 8 个是可行的**，这是下界。",
+          "**接着要说明不能放 9 个或更多。**",
+          "**把 16 格依骑士的攻击关系配成互相攻击的对。**在 4 × 4 盘上，可以把 16 格分成 **8 对**，使每一对的两格互相攻击（例如 (0,0) 与 (1,2)、(0,1) 与 (2,0)、⋯ 依此类推可完整配对）。",
+          "**每一对中最多只能放 1 个骑士**（放 2 个就互相攻击了 ✗）。",
+          "8 对各最多 1 个，所以**最多 8 个**——这就是上界。",
+          "**下界 8 与上界 8 一致，所以答案就是 8。**",
+          "验算：程序穷举 4 × 4 共 16 格的所有子集，逐一检查是否存在两格构成骑士的攻击关系（判定条件是两格的横纵距离组成 {1, 2}），**互不攻击的最大放法正是 8 个，而且达成 8 个的方案恰有 6 种** ✓。",
+          "**注意方案不只「全放同色」那两种**——穷举显示有 6 种，表示还有一些混色但仍合法的摆法。**但这不影响最大值 8**，因为上界的配对论证与颜色无关。**若误以为只能同色而答「黑白各 8 格，取一色得 8」，答案虽然对，但论证是不完整的**——那只给了下界，没有排除 9 个的可能。"
+        ],
+        "en": [
+          "Start from a key property of the knight: every move changes the colour of the square it stands on.",
+          "Colour the board in the usual alternating black and white. A knight's move shifts 2 squares one way and 1 the other, an odd total displacement, so the destination always has the opposite colour to the origin.",
+          "This immediately suggests a construction: place all knights on squares of a single colour. A knight can never reach a same-coloured square in one move, since every move changes colour, so such knights never attack each other.",
+          "A 4 × 4 board has 16 squares, 8 of each colour, so placing 8 is feasible — a lower bound.",
+          "Now show that 9 or more is impossible.",
+          "Pair up the 16 squares according to the knight's attack relation. On a 4 × 4 board the squares can be split into 8 pairs, each pair mutually attacking — for instance (0,0) with (1,2), (0,1) with (2,0), and so on, covering every square.",
+          "At most 1 knight fits in each pair, since two would attack each other.",
+          "With 8 pairs each holding at most one, the maximum is 8 — the upper bound.",
+          "The bounds agree at 8, so the answer is 8.",
+          "Check: enumerating every subset of the 16 squares and testing for a knight-attack relation, where the horizontal and vertical distances form the set {1, 2}, gives a maximum of 8 non-attacking knights, achieved in exactly 6 ways.",
+          "Note the solutions are not only the two single-colour placements — the enumeration finds 6, so some mixed-colour arrangements also work. That does not affect the maximum of 8, since the pairing argument for the upper bound makes no reference to colour. Answering 8 by observing only that each colour class has 8 squares would give the right number but an incomplete argument, supplying the lower bound while never ruling out 9."
+        ],
+        "ja": [
+          "**まずナイトの重要な性質から：1 手ごとに乗るマスの色が変わります。**",
+          "盤をチェスの流儀で黒白交互に塗ります。ナイトは一方向に 2、垂直に 1 動くので**総移動量は奇数**であり、**到達点の色は必ず出発点と逆**になります。",
+          "**ここから直ちに構成が得られます：ナイトをすべて同じ色のマスに置く。**同色の 2 マス間はナイトの 1 手では到達できない（1 手で必ず色が変わる）ので、互いに攻撃しません ✓。",
+          "4 × 4 の盤は 16 マス、各色 **8 マス**です。したがって **8 個は配置可能**で、これが下界です。",
+          "**次に 9 個以上が不可能であることを示します。**",
+          "**16 マスをナイトの攻撃関係に従って対にします。**4 × 4 盤では 16 マスを **8 組**に分け、各組の 2 マスが互いに攻撃するようにできます（(0,0) と (1,2)、(0,1) と (2,0)、⋯ と全マスを覆えます）。",
+          "**各組に置けるナイトは高々 1 個**です（2 個置けば互いに攻撃 ✗）。",
+          "8 組が各々高々 1 個なので **最大 8 個**——これが上界です。",
+          "**下界 8 と上界 8 が一致するので答えは 8 です。**",
+          "検算：16 マスのすべての部分集合を列挙し、2 マスがナイトの攻撃関係（縦横の距離が {1, 2} をなす）にあるか調べると、**互いに攻撃しない最大配置はちょうど 8 個で、8 個を達成する配置は 6 通り** ✓ です。",
+          "**配置は「同色に全部置く」2 通りだけではありません**——列挙では 6 通り見つかり、色が混ざっていても成立する置き方があることを意味します。**ただし最大値 8 には影響しません**。上界の対による議論は色に依らないからです。**「各色 8 マスだから 8」とだけ答えると数は合っていても議論が不完全**で、下界を示しただけで 9 個の可能性を排除していません。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "8"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "互不攻擊的騎士：同色格互不可達給出下界 8，把 16 格配成 8 對互相攻擊的格子給出上界 8",
+        "notes": "設計依據：詳解由「騎士每步變色」導出同色配置的下界，再以互相攻擊的配對建立與顏色無關的上界，兩者合起來才確立最大值；並指出窮舉找到 6 種方案（不只同色的兩種），說明僅憑顏色論證只給下界而未排除 9 個。答案 8 已用 16 格全部子集的攻擊關係檢查窮舉獨立驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（互不攻擊的騎士）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "邏輯推理",
+        "topicCode": "logic",
+        "subtopic": "互不攻擊的騎士",
+        "subtopicCode": "nonattacking_knights"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "logic_grade11_foundation_021",
+      "topic": "logic",
+      "subtopic": "seats_blocking_placement",
+      "difficulty": "foundation",
+      "levelStage": "grade11",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一排長椅上有 8 個座位，排成一列且一開始全空。已入座的人希望**任何後來的人都無法找到一個左右兩側都空著的座位**（後來的人只願意坐在兩側都沒有人的位子）。求最少需要幾個人先入座，才能達到這個目的。",
+        "zh-Hans": "一排长椅上有 8 个座位，排成一列且一开始全空。已入座的人希望**任何后来的人都无法找到一个左右两侧都空着的座位**（后来的人只愿意坐在两侧都没有人的位子）。求最少需要几个人先入座，才能达到这个目的。",
+        "en": "A bench has 8 seats in a row, all empty at first. Those already seated want to ensure that no newcomer can find a seat with both neighbouring seats empty, a newcomer being willing to sit only where nobody is adjacent. What is the least number of people who must sit down first to achieve this?",
+        "ja": "ベンチに 8 席が一列に並び、最初はすべて空いています。先に座った人たちは、**後から来た人が左右とも空いている席を見つけられない**ようにしたいと考えます（後から来る人は両隣に誰もいない席にしか座りません）。この目的を達するには、最少で何人が先に座ればよいですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 3 人。",
+        "zh-Hans": "答案是 3 人。",
+        "en": "The answer is 3.",
+        "ja": "答えは 3 人です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "**先把條件翻譯清楚**：要達成目的，就是要讓**每一個空位的左右至少有一側坐了人**（若某個空位兩側都空，後來的人就能坐進去 ✗）。",
+          "**先估下界：一個人最多能「照顧」幾個座位？**",
+          "**一個坐在某位置的人，能使自己的座位被佔用，並讓左右兩個相鄰的空位都不再符合「兩側皆空」。**所以一個人最多影響**自己與左右共 3 個座位**。",
+          "8 個座位要全部被照顧到，**至少需要 8 ÷ 3 = 2.67，取整數即 3 人** ✓ 這就是下界。",
+          "**接著要找出真的用 3 人就辦得到的坐法。**",
+          "**把座位由左到右編號 0 到 7。取 0、3、6 三個位置入座。**",
+          "**逐一檢查每個空位。**座位 1：左邊是 0（有人）✓ 不符合兩側皆空。座位 2：右邊是 3（有人）✓。",
+          "座位 4：左邊是 3（有人）✓。座位 5：右邊是 6（有人）✓。座位 7：左邊是 6（有人）✓。**五個空位全部至少有一側有人**，後來的人無處可坐 ✓ 方案成立。",
+          "**下界 3 與可行方案 3 一致，所以答案是 3 人。**",
+          "驗算：程式窮舉 8 個座位的所有入座方式——**2 人的方案一個都不可行**（8 個座位最多只能照顧 2 × 3 = 6 個，必定有空位漏掉）✗，而 **3 人的可行方案有 4 種** ✓，例如 (0, 3, 6)。",
+          "**注意坐的位置有講究，不是隨便 3 個人都行。**例如坐 0、1、2 三個位置，座位 4、5 就會兩側皆空 ✗ 失敗。**要讓 3 個人發揮最大效果，彼此的間隔必須拉開**——0、3、6 恰好每隔兩個空位放一人，把 8 個座位切得剛剛好。",
+          "**若座位數增加到 9 個**，下界變成 9 ÷ 3 = 3，而 0、3、6 的坐法會讓座位 8 兩側⋯ 座位 8 的左邊是 7（空）、右邊沒有座位，**所以座位 8 兩側都沒人，仍可入座** ✗ 需要調整成 1、4、7 才行——**可見這類問題的答案對「總數除以 3 的餘數」很敏感**。"
+        ],
+        "zh-Hans": [
+          "**先把条件翻译清楚**：要达成目的，就是要让**每一个空位的左右至少有一侧坐了人**（若某个空位两侧都空，后来的人就能坐进去 ✗）。",
+          "**先估下界：一个人最多能「照顾」几个座位？**",
+          "**一个坐在某位置的人，能使自己的座位被占用，并让左右两个相邻的空位都不再符合「两侧皆空」。**所以一个人最多影响**自己与左右共 3 个座位**。",
+          "8 个座位要全部被照顾到，**至少需要 8 ÷ 3 = 2.67，取整数即 3 人** ✓ 这就是下界。",
+          "**接着要找出真的用 3 人就办得到的坐法。**",
+          "**把座位由左到右编号 0 到 7。取 0、3、6 三个位置入座。**",
+          "**逐一检查每个空位。**座位 1：左边是 0（有人）✓ 不符合两侧皆空。座位 2：右边是 3（有人）✓。",
+          "座位 4：左边是 3（有人）✓。座位 5：右边是 6（有人）✓。座位 7：左边是 6（有人）✓。**五个空位全部至少有一侧有人**，后来的人无处可坐 ✓ 方案成立。",
+          "**下界 3 与可行方案 3 一致，所以答案是 3 人。**",
+          "验算：程序穷举 8 个座位的所有入座方式——**2 人的方案一个都不可行**（8 个座位最多只能照顾 2 × 3 = 6 个，必定有空位漏掉）✗，而 **3 人的可行方案有 4 种** ✓，例如 (0, 3, 6)。",
+          "**注意坐的位置有讲究，不是随便 3 个人都行。**例如坐 0、1、2 三个位置，座位 4、5 就会两侧皆空 ✗ 失败。**要让 3 个人发挥最大效果，彼此的间隔必须拉开**——0、3、6 恰好每隔两个空位放一人，把 8 个座位切得刚刚好。",
+          "**若座位数增加到 9 个**，下界变成 9 ÷ 3 = 3，而 0、3、6 的坐法会让座位 8 的左边是 7（空）、右边没有座位，**所以座位 8 两侧都没人，仍可入座** ✗ 需要调整成 1、4、7 才行——**可见这类问题的答案对「总数除以 3 的余数」很敏感**。"
+        ],
+        "en": [
+          "First translate the condition: the goal is that every empty seat has someone on at least one side, since an empty seat with both neighbours empty would let a newcomer sit down.",
+          "Estimate a lower bound: how many seats can one person cover?",
+          "A seated person occupies their own seat and stops each adjacent empty seat from having both sides empty. So one person affects at most 3 seats: their own and the two beside it.",
+          "Covering all 8 seats therefore needs at least 8 ÷ 3 = 2.67, that is 3 people — the lower bound.",
+          "Now find a seating with 3 people that actually works.",
+          "Number the seats 0 to 7 from the left and seat people at 0, 3 and 6.",
+          "Check each empty seat. Seat 1 has someone at 0 on its left. Seat 2 has someone at 3 on its right.",
+          "Seat 4 has someone at 3 on its left. Seat 5 has someone at 6 on its right. Seat 7 has someone at 6 on its left. All five empty seats have a neighbour occupied, so no newcomer can sit, and the arrangement works.",
+          "The lower bound of 3 and a working arrangement of 3 agree, so the answer is 3.",
+          "Check: enumerating all seatings shows no arrangement of 2 people works, since 2 people cover at most 2 × 3 = 6 of the 8 seats and something must be missed, while 4 arrangements of 3 people succeed, including (0, 3, 6).",
+          "Note the positions matter and not any 3 people will do. Seating them at 0, 1 and 2 leaves seats 4 and 5 with both sides empty, and the plan fails. To make 3 people count, they must be spread apart — 0, 3, 6 places one person every third seat, dividing the 8 seats just right.",
+          "With 9 seats the bound would still be 9 ÷ 3 = 3, but the arrangement 0, 3, 6 would leave seat 8 with an empty seat 7 on its left and no seat on its right, so both sides are unoccupied and a newcomer could still sit; shifting to 1, 4, 7 would be required. Answers to such problems are sensitive to the remainder of the total on division by 3."
+        ],
+        "ja": [
+          "**まず条件を言い換えます**：目的の達成とは、**どの空席も左右の少なくとも一方に人が座っている**状態にすることです（両隣とも空の席があれば後から来た人が座れてしまいます ✗）。",
+          "**下界を見積もります：1 人が「面倒を見られる」席は最大いくつか。**",
+          "**座った人は自分の席を占め、左右の隣の空席が「両隣とも空」でなくなるようにします。**したがって 1 人が影響するのは**自分と左右の計 3 席**までです。",
+          "8 席すべてを覆うには**少なくとも 8 ÷ 3 = 2.67、整数にして 3 人** ✓ が必要で、これが下界です。",
+          "**次に 3 人で本当に達成できる座り方を探します。**",
+          "**席を左から 0〜7 と番号づけ、0、3、6 に座ります。**",
+          "**空席を 1 つずつ確認します。**席 1：左の 0 に人 ✓ で両隣とも空ではありません。席 2：右の 3 に人 ✓。",
+          "席 4：左の 3 に人 ✓。席 5：右の 6 に人 ✓。席 7：左の 6 に人 ✓。**5 つの空席すべてに片側は人がおり**、後から来た人は座れません ✓ 配置は成立します。",
+          "**下界 3 と実現可能な 3 が一致するので答えは 3 人です。**",
+          "検算：8 席のすべての座り方を列挙すると——**2 人の配置は 1 つも成立せず**（2 人では最大 2 × 3 = 6 席しか覆えず必ず漏れる）✗、**3 人の成立する配置は 4 通り** ✓、たとえば (0, 3, 6) です。",
+          "**座る位置には工夫が要り、3 人ならどこでもよいわけではありません。**0、1、2 に座ると席 4、5 が両隣とも空になり ✗ 失敗します。**3 人の効果を最大にするには互いの間隔を空ける**必要があり、0、3、6 は 2 席おきに 1 人ずつで 8 席をちょうどよく分けています。",
+          "**席が 9 に増えると**下界は 9 ÷ 3 = 3 のままですが、0、3、6 では席 8 の左が 7（空）、右には席がなく、**両側に人がおらず座れてしまい** ✗、1、4、7 に変える必要があります——**この種の問題の答えは「総数を 3 で割った余り」に敏感**だと分かります。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "3"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "讓後來者無位可坐：每個空位須至少一側有人；一人最多覆蓋三席故下界為 3，再構造出 0、3、6 的坐法",
+        "notes": "設計依據：詳解先把敘述翻譯成「每個空位至少一側有人」的精確條件，再以「一人覆蓋至多三席」建立下界並構造達成的坐法；並以 0、1、2 的失敗例說明位置需拉開，末尾以 9 個座位的情形指出答案對總數除以 3 的餘數敏感。答案 3 已用 8 個座位全部入座方式的窮舉獨立驗證（2 人無解、3 人有 4 解）。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（讓後來者無位可坐）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "邏輯推理",
+        "topicCode": "logic",
+        "subtopic": "讓後來者無位可坐",
+        "subtopicCode": "seats_blocking_placement"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "logic_grade11_foundation_022",
+      "topic": "logic",
+      "subtopic": "grid_two_by_two_limit",
+      "difficulty": "foundation",
+      "levelStage": "grade11",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "在一個 4 × 4 的方格表中放置棋子，每格至多放一枚。要求**任意一個由相鄰四格構成的 2 × 2 正方形區域內，至多只能有一枚棋子**。求最多能放幾枚棋子。",
+        "zh-Hans": "在一个 4 × 4 的方格表中放置棋子，每格至多放一枚。要求**任意一个由相邻四格构成的 2 × 2 正方形区域内，至多只能有一枚棋子**。求最多能放几枚棋子。",
+        "en": "Counters are placed on a 4 × 4 grid, at most one per cell, so that every 2 × 2 square of four adjacent cells contains at most one counter. What is the greatest number of counters that can be placed?",
+        "ja": "4 × 4 のマス目に、各マス高々 1 個の駒を置きます。**隣接する 4 マスからなるどの 2 × 2 の正方形にも駒が高々 1 個**となるようにします。最大で何個置けますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 4 枚。",
+        "zh-Hans": "答案是 4 枚。",
+        "en": "The answer is 4.",
+        "ja": "答えは 4 個です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "**先找上界。關鍵是把棋盤切成互不重疊的 2 × 2 區塊。**",
+          "4 × 4 的方格表可以**恰好切成 4 個互不重疊的 2 × 2 區塊**：左上、右上、左下、右下。",
+          "**這 4 個區塊涵蓋全部 16 格，而且彼此不重疊** ✓ 所以每一格都恰好屬於其中一個區塊。",
+          "**每個區塊本身就是一個 2 × 2 正方形，依題意至多放 1 枚棋子。**",
+          "所以總數**最多 4 × 1 = 4 枚**——這就是上界。",
+          "**接著要找出真能放 4 枚的方案。**注意題目的限制不只針對這 4 個切分出的區塊，**盤面上任何一個 2 × 2 正方形都要滿足**（4 × 4 中這樣的正方形共有 3 × 3 = 9 個），所以不能隨便在每個區塊放一枚。",
+          "**把格子座標記為 (列, 行)，皆從 0 到 3。取這 4 格**：(0,0)、(0,2)、(2,0)、(2,2)——也就是**每隔一列、每隔一行**放一枚。",
+          "**檢查是否合法**：任兩枚棋子的列座標差與行座標差都是 0 或 2。而一個 2 × 2 區域內的兩格，列差與行差都不超過 1。",
+          "**所以任兩枚棋子不可能同時落在同一個 2 × 2 區域裡** ✓（因為它們至少有一個方向相差 2，超出 2 × 2 的範圍）。方案成立。",
+          "**上界 4 與下界 4 一致，所以答案是 4 枚。**",
+          "驗算：程式窮舉 16 格的所有子集，對每個子集檢查全部 9 個 2 × 2 區域是否都至多含 1 枚，**符合條件的最大枚數正是 4，而且達成 4 枚的方案有 79 種** ✓ 遠不只上面那一種。",
+          "**注意上界的論證用的是「切成不重疊的 4 塊」，而不是全部 9 個 2 × 2 區域。**用不重疊的區塊才能把「每塊至多 1 枚」直接加總；若用會重疊的 9 個區域，同一枚棋子會被算進多個區域，無法直接相加得到上界。"
+        ],
+        "zh-Hans": [
+          "**先找上界。关键是把棋盘切成互不重叠的 2 × 2 区块。**",
+          "4 × 4 的方格表可以**恰好切成 4 个互不重叠的 2 × 2 区块**：左上、右上、左下、右下。",
+          "**这 4 个区块涵盖全部 16 格，而且彼此不重叠** ✓ 所以每一格都恰好属于其中一个区块。",
+          "**每个区块本身就是一个 2 × 2 正方形，依题意至多放 1 枚棋子。**",
+          "所以总数**最多 4 × 1 = 4 枚**——这就是上界。",
+          "**接着要找出真能放 4 枚的方案。**注意题目的限制不只针对这 4 个切分出的区块，**盘面上任何一个 2 × 2 正方形都要满足**（4 × 4 中这样的正方形共有 3 × 3 = 9 个），所以不能随便在每个区块放一枚。",
+          "**把格子坐标记为 (列, 行)，皆从 0 到 3。取这 4 格**：(0,0)、(0,2)、(2,0)、(2,2)——也就是**每隔一列、每隔一行**放一枚。",
+          "**检查是否合法**：任两枚棋子的列坐标差与行坐标差都是 0 或 2。而一个 2 × 2 区域内的两格，列差与行差都不超过 1。",
+          "**所以任两枚棋子不可能同时落在同一个 2 × 2 区域里** ✓（因为它们至少有一个方向相差 2，超出 2 × 2 的范围）。方案成立。",
+          "**上界 4 与下界 4 一致，所以答案是 4 枚。**",
+          "验算：程序穷举 16 格的所有子集，对每个子集检查全部 9 个 2 × 2 区域是否都至多含 1 枚，**符合条件的最大枚数正是 4，而且达成 4 枚的方案有 79 种** ✓ 远不只上面那一种。",
+          "**注意上界的论证用的是「切成不重叠的 4 块」，而不是全部 9 个 2 × 2 区域。**用不重叠的区块才能把「每块至多 1 枚」直接加总；若用会重叠的 9 个区域，同一枚棋子会被算进多个区域，无法直接相加得到上界。"
+        ],
+        "en": [
+          "Find the upper bound first, the key being to cut the board into non-overlapping 2 × 2 blocks.",
+          "A 4 × 4 grid divides exactly into 4 non-overlapping 2 × 2 blocks: top-left, top-right, bottom-left and bottom-right.",
+          "These 4 blocks cover all 16 cells without overlapping, so every cell belongs to exactly one block.",
+          "Each block is itself a 2 × 2 square and by the condition holds at most 1 counter.",
+          "So the total is at most 4 × 1 = 4 — the upper bound.",
+          "Now find a placement actually achieving 4. Note that the condition applies not only to those 4 blocks but to every 2 × 2 square on the board, of which a 4 × 4 grid contains 3 × 3 = 9, so one cannot simply drop a counter anywhere in each block.",
+          "Label cells by (row, column) from 0 to 3 and take these four: (0,0), (0,2), (2,0) and (2,2) — one counter every other row and every other column.",
+          "Check legality: any two counters differ by 0 or 2 in row and by 0 or 2 in column, whereas two cells within one 2 × 2 square differ by at most 1 in each direction.",
+          "So no two counters can lie in the same 2 × 2 square, since they differ by 2 in at least one direction, beyond a 2 × 2 span. The placement works.",
+          "The bounds agree at 4, so the answer is 4.",
+          "Check: enumerating every subset of the 16 cells and testing all 9 of the 2 × 2 squares confirms a maximum of 4 counters, achieved in 79 different ways, far more than the single arrangement above.",
+          "Note the upper-bound argument uses the 4 non-overlapping blocks, not all 9 squares. Only non-overlapping blocks allow the per-block limits to be added directly; with the 9 overlapping squares a single counter would be counted in several of them and no bound would follow from summing."
+        ],
+        "ja": [
+          "**まず上界を求めます。要は盤を重ならない 2 × 2 の区画に切ることです。**",
+          "4 × 4 のマス目は**重ならない 2 × 2 の区画 4 つにちょうど分割**できます：左上・右上・左下・右下です。",
+          "**この 4 区画は 16 マスすべてを覆い、互いに重なりません** ✓ ので、各マスはちょうど 1 つの区画に属します。",
+          "**各区画はそれ自体が 2 × 2 の正方形であり、条件より駒は高々 1 個**です。",
+          "したがって総数は**高々 4 × 1 = 4 個**——これが上界です。",
+          "**次に実際に 4 個置ける配置を探します。**条件はこの 4 区画だけでなく、**盤上のあらゆる 2 × 2 の正方形**（4 × 4 には 3 × 3 = 9 個ある）に課される点に注意します。各区画に適当に 1 個ずつ置けばよいわけではありません。",
+          "**マスを (行, 列) で 0〜3 と表し、次の 4 マスをとります**：(0,0)、(0,2)、(2,0)、(2,2)——**1 行おき・1 列おき**に置きます。",
+          "**適法性を確認します**：どの 2 個の駒も行の差・列の差がいずれも 0 か 2 です。一方、1 つの 2 × 2 内の 2 マスは行差も列差も 1 以下です。",
+          "**したがってどの 2 個の駒も同じ 2 × 2 に入りえません** ✓（少なくとも一方向に 2 離れており 2 × 2 の範囲を超えるため）。配置は成立します。",
+          "**上界 4 と下界 4 が一致するので答えは 4 個です。**",
+          "検算：16 マスのすべての部分集合について 9 個の 2 × 2 をすべて調べると、**条件を満たす最大は 4 個で、達成する配置は 79 通り** ✓ と上の 1 つだけではありません。",
+          "**上界の議論に使ったのは「重ならない 4 区画」であって 9 個すべてではありません。**重ならない区画だからこそ「各区画高々 1 個」をそのまま足し合わせられます。重なる 9 個を使うと 1 個の駒が複数の区画に数えられ、足し合わせても上界は得られません。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "4"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "每個 2×2 至多一枚：以不重疊的四個 2×2 區塊求上界，再構造隔行隔列的配置達成該上界",
+        "notes": "設計依據：詳解特別說明上界必須用不重疊的四個區塊而非全部九個 2×2 區域（重疊會使同一枚被重複計入而無法相加），這是本題論證的關鍵；並以座標差的論證驗證構造的合法性。答案 4 已用 16 格全部子集對九個 2×2 區域的檢查窮舉獨立驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（每個 2×2 區域至多一枚）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "邏輯推理",
+        "topicCode": "logic",
+        "subtopic": "每個 2×2 區域至多一枚",
+        "subtopicCode": "grid_two_by_two_limit"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "logic_grade11_foundation_023",
+      "topic": "logic",
+      "subtopic": "antichain_no_multiple",
+      "difficulty": "foundation",
+      "levelStage": "grade11",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "從 1 到 20 這二十個整數中選出一些數，要求**其中任何一個數都不是另一個數的倍數**。求最多能選出幾個數。",
+        "zh-Hans": "从 1 到 20 这二十个整数中选出一些数，要求**其中任何一个数都不是另一个数的倍数**。求最多能选出几个数。",
+        "en": "Some of the integers from 1 to 20 are chosen so that none of them is a multiple of another. What is the largest number that can be chosen?",
+        "ja": "1 から 20 までの整数からいくつかを選び、**どの数も他の数の倍数にならない**ようにします。最大で何個選べますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 10 個。",
+        "zh-Hans": "答案是 10 个。",
+        "en": "The answer is 10.",
+        "ja": "答えは 10 個です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "**先找一個能達成的方案。關鍵的觀察是：如果所有數都大於 10，那麼任一個數的 2 倍都超過 20，不可能也在集合裡。**",
+          "**取 S = {11, 12, 13, 14, 15, 16, 17, 18, 19, 20}**，共 10 個數。",
+          "**檢查**：集合中最小的數是 11，它的 2 倍是 22 > 20 ✓ 所以任何一個數的倍數（除了它自己）都已超出 20，不可能落在集合中。條件成立，**10 個是可以達成的**。",
+          "**接著要證明不可能選到 11 個。**用一個很漂亮的分組方法。",
+          "**把 1 到 20 的每個數寫成「2 的冪次 × 奇數」的形式**（每個正整數都能唯一這樣拆），然後**依那個奇數分組**。",
+          "1 到 20 中的奇數有 1、3、5、7、9、11、13、15、17、19，共 **10 個**，所以恰好分成 **10 組**：",
+          "{1, 2, 4, 8, 16}、{3, 6, 12}、{5, 10, 20}、{7, 14}、{9, 18}、{11}、{13}、{15}、{17}、{19}。**這 10 組涵蓋了 1 到 20 全部二十個數** ✓。",
+          "**每一組內的任兩個數，其中一個必定是另一個的倍數**（因為它們的奇數部分相同，只差 2 的冪次，例如 3 與 12 差 4 倍）。所以**每組至多只能選 1 個數**。",
+          "10 組各至多 1 個，所以**最多 10 個**——這就是上界。**上界與下界都是 10，答案確定。**",
+          "驗算：程式對 k 由 20 遞減，逐一檢查是否存在大小為 k 且任兩數不互為倍數的子集，**最大的 k 正是 10** ✓，程式找到的一個例子是 {4, 6, 7, 9, 10, 11, 13, 15, 17, 19}——**與 {11,⋯,20} 不同**，可見達成 10 個的方案不只一種。",
+          "**注意分組的依據是「奇數部分」而不是別的。**這樣分才能保證**同組必成倍數關係、不同組必不成倍數關係**——例如 6 與 10 的奇數部分分別是 3 與 5，不同組，而 6 確實不是 10 的倍數也不被 10 整除 ✓。"
+        ],
+        "zh-Hans": [
+          "**先找一个能达成的方案。关键的观察是：如果所有数都大于 10，那么任一个数的 2 倍都超过 20，不可能也在集合里。**",
+          "**取 S = {11, 12, 13, 14, 15, 16, 17, 18, 19, 20}**，共 10 个数。",
+          "**检查**：集合中最小的数是 11，它的 2 倍是 22 > 20 ✓ 所以任何一个数的倍数（除了它自己）都已超出 20，不可能落在集合中。条件成立，**10 个是可以达成的**。",
+          "**接着要证明不可能选到 11 个。**用一个很漂亮的分组方法。",
+          "**把 1 到 20 的每个数写成「2 的幂次 × 奇数」的形式**（每个正整数都能唯一这样拆），然后**依那个奇数分组**。",
+          "1 到 20 中的奇数有 1、3、5、7、9、11、13、15、17、19，共 **10 个**，所以恰好分成 **10 组**：",
+          "{1, 2, 4, 8, 16}、{3, 6, 12}、{5, 10, 20}、{7, 14}、{9, 18}、{11}、{13}、{15}、{17}、{19}。**这 10 组涵盖了 1 到 20 全部二十个数** ✓。",
+          "**每一组内的任两个数，其中一个必定是另一个的倍数**（因为它们的奇数部分相同，只差 2 的幂次，例如 3 与 12 差 4 倍）。所以**每组至多只能选 1 个数**。",
+          "10 组各至多 1 个，所以**最多 10 个**——这就是上界。**上界与下界都是 10，答案确定。**",
+          "验算：程序对 k 由 20 递减，逐一检查是否存在大小为 k 且任两数不互为倍数的子集，**最大的 k 正是 10** ✓，程序找到的一个例子是 {4, 6, 7, 9, 10, 11, 13, 15, 17, 19}——**与 {11,⋯,20} 不同**，可见达成 10 个的方案不只一种。",
+          "**注意分组的依据是「奇数部分」而不是别的。**这样分才能保证**同组必成倍数关系、不同组必不成倍数关系**——例如 6 与 10 的奇数部分分别是 3 与 5，不同组，而 6 确实不是 10 的倍数也不被 10 整除 ✓。"
+        ],
+        "en": [
+          "Find an achievable construction first. The key observation is that if every number exceeds 10, then twice any of them exceeds 20 and cannot also belong to the set.",
+          "Take S = {11, 12, 13, 14, 15, 16, 17, 18, 19, 20}, ten numbers.",
+          "Check: the smallest is 11, whose double is 22 > 20, so every multiple of any member beyond itself lies outside 20 and cannot be in the set. The condition holds and 10 is achievable.",
+          "Now prove that 11 is impossible, using an elegant grouping.",
+          "Write each number from 1 to 20 as a power of 2 times an odd number, which every positive integer admits uniquely, and group by that odd part.",
+          "The odd numbers from 1 to 20 are 1, 3, 5, 7, 9, 11, 13, 15, 17 and 19, ten of them, giving exactly 10 groups:",
+          "{1, 2, 4, 8, 16}, {3, 6, 12}, {5, 10, 20}, {7, 14}, {9, 18}, {11}, {13}, {15}, {17} and {19}. These 10 groups cover all twenty numbers.",
+          "Within a group, one of any two numbers is a multiple of the other, since they share an odd part and differ only by a power of 2 — 3 and 12 differ by a factor of 4, for instance. So at most 1 number may be chosen from each group.",
+          "With 10 groups each contributing at most 1, the maximum is 10 — the upper bound. Both bounds equal 10, settling the answer.",
+          "Check: searching downward from k = 20 for a subset of size k with no member a multiple of another finds the largest such k to be 10, and one example found is {4, 6, 7, 9, 10, 11, 13, 15, 17, 19} — different from {11,...,20}, showing that more than one arrangement achieves 10.",
+          "Note the grouping is by odd part and nothing else. Only that guarantees members of the same group are related by divisibility while members of different groups are not — 6 and 10 have odd parts 3 and 5, hence different groups, and indeed neither divides the other."
+        ],
+        "ja": [
+          "**まず達成できる構成を探します。鍵となる観察は、すべての数が 10 より大きければ、どの数の 2 倍も 20 を超え、集合に入りえないことです。**",
+          "**S = {11, 12, 13, 14, 15, 16, 17, 18, 19, 20}** の 10 個をとります。",
+          "**確認**：最小の数は 11 でその 2 倍は 22 > 20 ✓ なので、どの数の（自分以外の）倍数も 20 を超え集合に入りません。条件は満たされ、**10 個は達成できます**。",
+          "**次に 11 個は不可能であることを示します。**とても美しい分類法を使います。",
+          "**1〜20 の各数を「2 の累乗 × 奇数」の形に書き**（正の整数はこの形に一意に書けます）、**その奇数で分類**します。",
+          "1〜20 の奇数は 1、3、5、7、9、11、13、15、17、19 の **10 個**なので、ちょうど **10 組**に分かれます：",
+          "{1, 2, 4, 8, 16}、{3, 6, 12}、{5, 10, 20}、{7, 14}、{9, 18}、{11}、{13}、{15}、{17}、{19}。**この 10 組が 1〜20 の 20 個すべてを覆います** ✓。",
+          "**同じ組の 2 数はいずれか一方が他方の倍数**です（奇数部分が同じで 2 の累乗だけ異なるため。3 と 12 は 4 倍違い）。したがって**各組から選べるのは高々 1 個**です。",
+          "10 組が各々高々 1 個なので **最大 10 個**——これが上界です。**上界も下界も 10 で答えが確定します。**",
+          "検算：k を 20 から下げながら、大きさ k で互いに倍数関係にない部分集合の有無を調べると、**最大の k はちょうど 10** ✓。見つかった例の 1 つは {4, 6, 7, 9, 10, 11, 13, 15, 17, 19} で——**{11,⋯,20} とは異なり**、10 個を達成する配置が 1 通りでないことが分かります。",
+          "**分類の基準は「奇数部分」であって他ではありません。**こう分けてこそ**同じ組は必ず倍数関係、異なる組は必ず倍数関係でない**ことが保証されます——6 と 10 の奇数部分は 3 と 5 で別の組、実際どちらも他方を割りません ✓。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "10"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "沒有一個是另一個的倍數：以「大於 10 的十個數」達成下界，再依奇數部分分成十組給出上界",
+        "notes": "設計依據：詳解以「奇數部分」的分組建立上界，並說明該分組為何恰好使同組必成倍數關係、不同組必不成；下界則以大於半數的十個數構造。程式另找到與構造不同的達成方案，說明最佳解不唯一。答案 10 已用由大到小的子集搜尋窮舉獨立驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（沒有一個是另一個的倍數）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "邏輯推理",
+        "topicCode": "logic",
+        "subtopic": "沒有一個是另一個的倍數",
+        "subtopicCode": "antichain_no_multiple"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "logic_grade11_foundation_024",
+      "topic": "logic",
+      "subtopic": "latin_square_count",
+      "difficulty": "foundation",
+      "levelStage": "grade11",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "在一個 3 × 3 的方格中填入 1、2、3 三個數字（可重複使用），要求**每一行的三個數字互不相同，每一列的三個數字也互不相同**。求不同的填法共有多少種。",
+        "zh-Hans": "在一个 3 × 3 的方格中填入 1、2、3 三个数字（可重复使用），要求**每一行的三个数字互不相同，每一列的三个数字也互不相同**。求不同的填法共有多少种。",
+        "en": "The cells of a 3 × 3 grid are filled with the digits 1, 2 and 3, repetitions allowed, so that the three digits in each row are all different and the three in each column are all different. How many different fillings are there?",
+        "ja": "3 × 3 のマス目に 1、2、3 の数字を（重複を許して）書き入れ、**各行の 3 数がすべて異なり、各列の 3 数もすべて異なる**ようにします。異なる書き入れ方は何通りありますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 12 種。",
+        "zh-Hans": "答案是 12 种。",
+        "en": "The answer is 12.",
+        "ja": "答えは 12 通りです。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "**條件「每行三數互不相同」加上「只有 1、2、3 三個數字可用」，表示每一行都是 1、2、3 的一個排列。**列也一樣。",
+          "**所以可以逐行決定。**第一行是 1、2、3 的排列，有 3! = **6** 種。",
+          "**接著決定第二行。**它也必須是 1、2、3 的排列，而且**每一列都不能與第一行重複**——也就是第二行的每個位置都要與第一行同位置的數字不同。",
+          "**這正是「錯位排列」的條件**（每個位置都不留在原本的數字上）。3 個元素的錯位排列有 **2** 種。",
+          "**具體看**：若第一行是 1 2 3，第二行只能是 **2 3 1** 或 **3 1 2**（其餘四種排列都至少有一個位置與第一行相同）。",
+          "**最後決定第三行。**每一列已經用掉兩個不同的數字，**剩下的那一個是唯一確定的**，所以第三行完全沒有選擇的餘地，只有 **1** 種。",
+          "**還要確認第三行自動滿足「該行三數互不相同」。**因為前兩行都是排列，三列各缺的數字合起來恰好也是 1、2、3 各一個 ✓ 所以第三行必定也是一個排列，不會出現重複。",
+          "**三步相乘**：總數 = 6 × 2 × 1 = **12 種**。",
+          "驗算：程式窮舉三行各自為 1、2、3 排列的全部 6 × 6 × 6 = 216 種組合，逐一檢查三列是否也都互不相同，**符合的恰好是 12 種** ✓ 與逐步計算完全一致。",
+          "**注意第二行為什麼是 2 而不是別的數。**3 個元素的排列有 6 種，其中與原排列**至少有一個位置相同**的有 4 種（3 種恰好固定一個位置，1 種是原排列本身固定三個），所以完全錯開的只有 6 − 4 = 2 種 ✓。",
+          "**若方格改成 4 × 4、數字改成 1 到 4，答案會大得多**（是 576 種），因為第二行的錯位排列有 9 種、第三行也不再唯一確定——**3 × 3 的情形之所以這麼乾淨，正是因為第三行完全沒有自由度**。"
+        ],
+        "zh-Hans": [
+          "**条件「每行三数互不相同」加上「只有 1、2、3 三个数字可用」，表示每一行都是 1、2、3 的一个排列。**列也一样。",
+          "**所以可以逐行决定。**第一行是 1、2、3 的排列，有 3! = **6** 种。",
+          "**接着决定第二行。**它也必须是 1、2、3 的排列，而且**每一列都不能与第一行重复**——也就是第二行的每个位置都要与第一行同位置的数字不同。",
+          "**这正是「错位排列」的条件**（每个位置都不留在原本的数字上）。3 个元素的错位排列有 **2** 种。",
+          "**具体看**：若第一行是 1 2 3，第二行只能是 **2 3 1** 或 **3 1 2**（其余四种排列都至少有一个位置与第一行相同）。",
+          "**最后决定第三行。**每一列已经用掉两个不同的数字，**剩下的那一个是唯一确定的**，所以第三行完全没有选择的余地，只有 **1** 种。",
+          "**还要确认第三行自动满足「该行三数互不相同」。**因为前两行都是排列，三列各缺的数字合起来恰好也是 1、2、3 各一个 ✓ 所以第三行必定也是一个排列，不会出现重复。",
+          "**三步相乘**：总数 = 6 × 2 × 1 = **12 种**。",
+          "验算：程序穷举三行各自为 1、2、3 排列的全部 6 × 6 × 6 = 216 种组合，逐一检查三列是否也都互不相同，**符合的恰好是 12 种** ✓ 与逐步计算完全一致。",
+          "**注意第二行为什么是 2 而不是别的数。**3 个元素的排列有 6 种，其中与原排列**至少有一个位置相同**的有 4 种（3 种恰好固定一个位置，1 种是原排列本身固定三个），所以完全错开的只有 6 − 4 = 2 种 ✓。",
+          "**若方格改成 4 × 4、数字改成 1 到 4，答案会大得多**（是 576 种），因为第二行的错位排列有 9 种、第三行也不再唯一确定——**3 × 3 的情形之所以这么干净，正是因为第三行完全没有自由度**。"
+        ],
+        "en": [
+          "The requirement that each row's three digits differ, combined with only 1, 2 and 3 being available, means every row is a permutation of 1, 2, 3. The same holds for columns.",
+          "So decide row by row. The first row is a permutation of 1, 2, 3, giving 3! = 6 choices.",
+          "Now the second row. It too must be a permutation, and no column may repeat — each position must differ from the digit above it.",
+          "That is precisely the condition for a derangement, no position keeping its original entry. Three elements admit 2 derangements.",
+          "Concretely, if the first row is 1 2 3, the second can only be 2 3 1 or 3 1 2; the other four permutations each agree with the first row in at least one position.",
+          "Finally the third row. Each column has already used two distinct digits, so the remaining one is forced, leaving no freedom and exactly 1 choice.",
+          "Confirm that the third row automatically has three distinct digits. Since the first two rows are permutations, the digits missing from the three columns together form exactly one each of 1, 2 and 3, so the third row is itself a permutation and contains no repeat.",
+          "Multiplying the three steps: 6 × 2 × 1 = 12.",
+          "Check: enumerating all 6 × 6 × 6 = 216 combinations of three permutations and testing whether the columns are also all distinct leaves exactly 12, matching the step-by-step count.",
+          "Note why the second row contributes 2. Of the 6 permutations of three elements, 4 agree with the original in at least one position — 3 fixing exactly one and 1 being the original itself, fixing all three — so completely displaced permutations number 6 − 4 = 2.",
+          "Enlarging to a 4 × 4 grid with digits 1 to 4 gives a far larger answer, 576, since the second row then admits 9 derangements and the third row is no longer forced. The 3 × 3 case comes out so cleanly precisely because its third row has no freedom at all."
+        ],
+        "ja": [
+          "**「各行の 3 数がすべて異なる」ことと「使えるのが 1、2、3 だけ」であることから、各行は 1、2、3 の並べ替えになります。**列も同様です。",
+          "**そこで行ごとに決めます。**1 行目は 1、2、3 の並べ替えで 3! = **6** 通り。",
+          "**次に 2 行目。**これも並べ替えで、かつ**どの列も 1 行目と重複してはいけません**——すなわち各位置で真上の数字と異なる必要があります。",
+          "**これはまさに「完全順列」の条件**（どの位置も元の数字のままにならない）です。3 要素の完全順列は **2** 通りです。",
+          "**具体的には**、1 行目が 1 2 3 なら 2 行目は **2 3 1** か **3 1 2** に限られます（他の 4 通りはいずれかの位置が 1 行目と一致します）。",
+          "**最後に 3 行目。**各列ではすでに異なる 2 数が使われており、**残る 1 つは一意に定まる**ので、3 行目に選択の余地はなく **1** 通りです。",
+          "**3 行目が「行内の 3 数が異なる」を自動的に満たすことも確認します。**上 2 行が並べ替えなので、3 列それぞれで欠けている数字を合わせるとちょうど 1、2、3 が 1 つずつ ✓ となり、3 行目も並べ替えで重複は生じません。",
+          "**3 段階を掛けて**、総数 = 6 × 2 × 1 = **12 通り**。",
+          "検算：3 行がそれぞれ 1、2、3 の並べ替えである全 6 × 6 × 6 = 216 通りを列挙し、3 列も互いに異なるか調べると、**該当はちょうど 12 通り** ✓ で段階的な計算と完全に一致します。",
+          "**2 行目が 2 通りである理由**も見ておきます。3 要素の並べ替え 6 通りのうち、元と**少なくとも 1 か所一致する**ものが 4 通り（ちょうど 1 か所固定が 3 通り、元の並びそのもので 3 か所固定が 1 通り）なので、完全にずれるのは 6 − 4 = 2 通り ✓ です。",
+          "**4 × 4 で 1〜4 にすると答えははるかに大きく**（576 通り）なります。2 行目の完全順列が 9 通りになり、3 行目も一意に定まらなくなるからです——**3 × 3 がこれほど簡潔なのは、3 行目に自由度がまったくないため**です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "12"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "3 × 3 的填數方陣：各行皆為排列，第二行須為第一行的錯位排列，第三行則被完全決定",
+        "notes": "設計依據：詳解逐行分析並指出第二行對應錯位排列（以 6 − 4 = 2 說明其個數），第三行因每列只剩一個數而無自由度，並額外確認第三行自動滿足行內相異；末尾以 4 × 4 的 576 種對照，說明 3 × 3 的簡潔源於第三行被完全決定。答案 12 已用 216 種組合的完整窮舉獨立驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（3 × 3 的填數方陣）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "邏輯推理",
+        "topicCode": "logic",
+        "subtopic": "3 × 3 的填數方陣",
+        "subtopicCode": "latin_square_count"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "logic_grade11_foundation_025",
+      "topic": "logic",
+      "subtopic": "handshake_double_counting",
+      "difficulty": "foundation",
+      "levelStage": "grade11",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一場聚會有 8 個人，每個人都恰好與另外 3 個人握過手（同兩人之間至多握一次）。求這場聚會總共發生了幾次握手。",
+        "zh-Hans": "一场聚会有 8 个人，每个人都恰好与另外 3 个人握过手（同两人之间至多握一次）。求这场聚会总共发生了几次握手。",
+        "en": "At a gathering of 8 people, each person shook hands with exactly 3 others, and no pair shook hands more than once. How many handshakes took place in total?",
+        "ja": "8 人の集まりで、各人がちょうど 3 人と握手しました（同じ 2 人の間の握手は多くとも 1 回）。握手は全部で何回行われましたか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 12 次。",
+        "zh-Hans": "答案是 12 次。",
+        "en": "The answer is 12.",
+        "ja": "答えは 12 回です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "**直接去追蹤誰跟誰握手會很麻煩，而且握手的具體安排可能有很多種。**但總次數其實與具體安排無關，用**同一件事數兩次**的技巧就能算出來。",
+          "**要數的東西是「(人, 該人參與的一次握手)」這樣的配對。**同一個量用兩種方式去數，答案必須相同。",
+          "**第一種數法：以人為主。**每個人都恰好參與 3 次握手，8 個人共有 8 × 3 = **24** 個這樣的配對。",
+          "**第二種數法：以握手為主。**每一次握手都**恰好牽涉 2 個人**，所以每一次握手貢獻 2 個配對。設總握手次數是 H，則配對總數是 **2H**。",
+          "**兩種數法算的是同一件事，所以必須相等**：2H = 24。",
+          "解得 **H = 12 次**。",
+          "**這個推理有一個常見的名字叫「握手引理」**：把每個人參與的握手次數全部加起來，結果一定是總握手次數的兩倍，因為**每次握手都被它的兩位當事人各算了一次**。",
+          "驗算：**檢查這樣的聚會確實可能存在。**8 個人各握 3 次，總次數 8 × 3 = 24 是偶數 ✓——這是必要條件，因為 2H 必為偶數。若改成「7 個人各握 3 次」，總和是 21 為奇數，2H = 21 無整數解，**那樣的聚會根本不可能存在**。",
+          "**具體構造一個**：把 8 個人排成一圈，每個人與左右兩位鄰居握手（這樣每人有 2 次），再讓每個人與正對面的那一位握手（每人再加 1 次）——這樣每人恰好 3 次 ✓。數一數：圓圈上的相鄰握手有 8 次，對面的握手有 8 ÷ 2 = 4 次，合計 8 + 4 = **12** 次 ✓ 與公式一致。",
+          "**注意不能把 8 × 3 = 24 直接當成答案。**那樣會把每一次握手算兩次——A 與 B 握手這件事，在 A 的 3 次裡算了一次，在 B 的 3 次裡又算了一次。**必須除以 2**。"
+        ],
+        "zh-Hans": [
+          "**直接去追踪谁跟谁握手会很麻烦，而且握手的具体安排可能有很多种。**但总次数其实与具体安排无关，用**同一件事数两次**的技巧就能算出来。",
+          "**要数的东西是「(人, 该人参与的一次握手)」这样的配对。**同一个量用两种方式去数，答案必须相同。",
+          "**第一种数法：以人为主。**每个人都恰好参与 3 次握手，8 个人共有 8 × 3 = **24** 个这样的配对。",
+          "**第二种数法：以握手为主。**每一次握手都**恰好牵涉 2 个人**，所以每一次握手贡献 2 个配对。设总握手次数是 H，则配对总数是 **2H**。",
+          "**两种数法算的是同一件事，所以必须相等**：2H = 24。",
+          "解得 **H = 12 次**。",
+          "**这个推理有一个常见的名字叫「握手引理」**：把每个人参与的握手次数全部加起来，结果一定是总握手次数的两倍，因为**每次握手都被它的两位当事人各算了一次**。",
+          "验算：**检查这样的聚会确实可能存在。**8 个人各握 3 次，总次数 8 × 3 = 24 是偶数 ✓——这是必要条件，因为 2H 必为偶数。若改成「7 个人各握 3 次」，总和是 21 为奇数，2H = 21 无整数解，**那样的聚会根本不可能存在**。",
+          "**具体构造一个**：把 8 个人排成一圈，每个人与左右两位邻居握手（这样每人有 2 次），再让每个人与正对面的那一位握手（每人再加 1 次）——这样每人恰好 3 次 ✓。数一数：圆圈上的相邻握手有 8 次，对面的握手有 8 ÷ 2 = 4 次，合计 8 + 4 = **12** 次 ✓ 与公式一致。",
+          "**注意不能把 8 × 3 = 24 直接当成答案。**那样会把每一次握手算两次——A 与 B 握手这件事，在 A 的 3 次里算了一次，在 B 的 3 次里又算了一次。**必须除以 2**。"
+        ],
+        "en": [
+          "Tracking who shook whose hand would be laborious, and many different arrangements are possible. But the total does not depend on the arrangement, and counting one thing two ways settles it.",
+          "The thing to count is the set of pairs consisting of a person together with one handshake they took part in. Counting the same quantity two ways must give the same answer.",
+          "First count, by person: each of the 8 people took part in exactly 3 handshakes, giving 8 × 3 = 24 such pairs.",
+          "Second count, by handshake: every handshake involves exactly 2 people and so contributes 2 pairs. Writing H for the number of handshakes, the pairs number 2H.",
+          "Both counts describe the same collection, so they must be equal: 2H = 24.",
+          "Hence H = 12.",
+          "This reasoning is known as the handshaking lemma: adding up how many handshakes each person took part in always gives twice the number of handshakes, because each handshake is counted once by each of its two participants.",
+          "Check that such a gathering can exist. With 8 people each shaking 3 hands, the total 8 × 3 = 24 is even — a necessary condition, since 2H must be even. Changing it to 7 people each shaking 3 hands would give 21, an odd total, and 2H = 21 has no integer solution, so such a gathering could not exist at all.",
+          "Construct one explicitly: seat the 8 people in a circle and have each shake hands with both neighbours, giving 2 apiece, then with the person directly opposite, adding 1 more, for exactly 3 each. Counting: the neighbour handshakes number 8 and the opposite ones 8 ÷ 2 = 4, totalling 8 + 4 = 12, as the formula gives.",
+          "Note that 8 × 3 = 24 must not be taken as the answer directly. That counts every handshake twice — A shaking hands with B is counted once among A's three and again among B's three. Division by 2 is essential."
+        ],
+        "ja": [
+          "**誰と誰が握手したかを直接追うのは面倒**で、具体的な組み合わせも多数ありえます。しかし総回数は具体的な配置に依らず、**同じものを 2 通りに数える**技法で求められます。",
+          "**数える対象は「(人, その人が参加した握手 1 回)」という組**です。同じ量を 2 通りに数えれば結果は一致しなければなりません。",
+          "**数え方 1：人を主体に。**各人がちょうど 3 回参加するので、8 人で 8 × 3 = **24** 個の組ができます。",
+          "**数え方 2：握手を主体に。**各握手には**ちょうど 2 人**が関わるので、1 回の握手が 2 個の組を生みます。総回数を H とすると組の総数は **2H** です。",
+          "**両者は同じものを数えているので等しくなければなりません**：2H = 24。",
+          "したがって **H = 12 回**。",
+          "**この推論は「握手補題」と呼ばれます**：各人の握手回数を全部足すと必ず総回数の 2 倍になります。**各握手が当事者 2 人によって 1 回ずつ数えられる**からです。",
+          "検算：**そのような集まりが実在しうるか確認します。**8 人が各 3 回で合計 8 × 3 = 24 は偶数 ✓——2H は必ず偶数なのでこれは必要条件です。「7 人が各 3 回」なら合計 21 は奇数で 2H = 21 に整数解はなく、**そのような集まりは存在しえません**。",
+          "**具体的に構成します**：8 人を円状に並べ、各人が左右の隣と握手し（各 2 回）、さらに真向かいの人と握手します（各 1 回追加）——これで各人ちょうど 3 回 ✓。数えると、隣どうしの握手が 8 回、向かい合う握手が 8 ÷ 2 = 4 回で、合計 8 + 4 = **12** 回 ✓ と式に一致します。",
+          "**8 × 3 = 24 をそのまま答えにしてはいけません。**各握手が 2 回数えられており、A と B の握手は A の 3 回にも B の 3 回にも入っています。**2 で割る必要があります。**"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "12"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "每人握三次手：以「人與其握手」的配對做雙重計數，每次握手被兩位當事人各算一次故須除以 2",
+        "notes": "設計依據：詳解以雙重計數建立 2H = 24 的等式並說明除以 2 的理由；驗算檢查總和為偶數這一必要條件（並以 7 人各握 3 次的不可能情形對照），另實際構造出一種握手安排以確認可實現。答案 12 已用雙重計數與具體構造的計數雙向驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（每人握三次手）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "邏輯推理",
+        "topicCode": "logic",
+        "subtopic": "每人握三次手",
+        "subtopicCode": "handshake_double_counting"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "logic_grade11_foundation_026",
+      "topic": "logic",
+      "subtopic": "coprime_pigeonhole",
+      "difficulty": "foundation",
+      "levelStage": "grade11",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "從 1 到 30 這三十個整數中任意取出 n 個數。若要**保證**取出的數當中必定存在兩個互質的數（最大公因數為 1），求 n 最小是多少。",
+        "zh-Hans": "从 1 到 30 这三十个整数中任意取出 n 个数。若要**保证**取出的数当中必定存在两个互质的数（最大公因数为 1），求 n 最小是多少。",
+        "en": "Any n of the integers from 1 to 30 are taken. To guarantee that two of the chosen numbers are coprime, having greatest common divisor 1, what is the smallest possible n?",
+        "ja": "1 から 30 までの整数から任意に n 個を取り出します。取り出した数の中に必ず互いに素な 2 数（最大公約数が 1）が存在することを**保証**するには、n は最小でいくつですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 16。",
+        "zh-Hans": "答案是 16。",
+        "en": "The answer is 16.",
+        "ja": "答えは 16 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "**「保證」表示要在最壞的情況下也成立**——所以要先找出「能撐最久而仍然沒有兩數互質」的取法，也就是**最大的反例**。",
+          "**要讓任兩數都不互質，最簡單的做法是讓它們有共同的質因數。**",
+          "**取全部的偶數**：2、4、6、⋯、30，共 **15 個**。任兩個偶數的最大公因數至少是 2 ✓ **沒有任何一對互質**。",
+          "**所以取 15 個是可能沒有互質對的**——這表示 n = 15 不足以保證。",
+          "**接著要說明取 16 個必定會出現互質的一對。**",
+          "**把 1 到 30 依「相鄰兩數」配成 15 對**：{1,2}、{3,4}、{5,6}、⋯、{29,30}。**這 15 對涵蓋全部三十個數且互不重疊** ✓。",
+          "**每一對中的兩個數是相鄰的整數，而相鄰整數必定互質**（若有公因數 d > 1，則 d 也要整除它們的差 1，不可能）。",
+          "**現在用鴿籠原理。**取 16 個數放進 15 個「籠子」（配對），**必有至少一個配對被取滿兩個** ✓——而那一對就是互質的兩個數。",
+          "**所以 16 個必定成功，15 個可能失敗，最小的 n 是 16。**",
+          "驗算：程式檢查「1 到 30 中兩兩都不互質的最大集合」——全部偶數共 **15 個**確實是最大的（**任何 16 個數的集合都不可能兩兩不互質**，因為若含有奇數，它與某些數的關係就會出現互質）✓ 所以答案 15 + 1 = **16** ✓。",
+          "**注意配對的方式必須是「相鄰整數」而不是別的分法。**若隨便把 30 個數分成 15 組，同組的兩數未必互質，鴿籠原理就推不出結論。**選相鄰整數正是因為它們必定互質**——這是整個論證的關鍵。"
+        ],
+        "zh-Hans": [
+          "**「保证」表示要在最坏的情况下也成立**——所以要先找出「能撑最久而仍然没有两数互质」的取法，也就是**最大的反例**。",
+          "**要让任两数都不互质，最简单的做法是让它们有共同的质因数。**",
+          "**取全部的偶数**：2、4、6、⋯、30，共 **15 个**。任两个偶数的最大公因数至少是 2 ✓ **没有任何一对互质**。",
+          "**所以取 15 个是可能没有互质对的**——这表示 n = 15 不足以保证。",
+          "**接着要说明取 16 个必定会出现互质的一对。**",
+          "**把 1 到 30 依「相邻两数」配成 15 对**：{1,2}、{3,4}、{5,6}、⋯、{29,30}。**这 15 对涵盖全部三十个数且互不重叠** ✓。",
+          "**每一对中的两个数是相邻的整数，而相邻整数必定互质**（若有公因数 d > 1，则 d 也要整除它们的差 1，不可能）。",
+          "**现在用鸽笼原理。**取 16 个数放进 15 个「笼子」（配对），**必有至少一个配对被取满两个** ✓——而那一对就是互质的两个数。",
+          "**所以 16 个必定成功，15 个可能失败，最小的 n 是 16。**",
+          "验算：程序检查「1 到 30 中两两都不互质的最大集合」——全部偶数共 **15 个**确实是最大的（**任何 16 个数的集合都不可能两两不互质**，因为若含有奇数，它与某些数的关系就会出现互质）✓ 所以答案 15 + 1 = **16** ✓。",
+          "**注意配对的方式必须是「相邻整数」而不是别的分法。**若随便把 30 个数分成 15 组，同组的两数未必互质，鸽笼原理就推不出结论。**选相邻整数正是因为它们必定互质**——这是整个论证的关键。"
+        ],
+        "en": [
+          "A guarantee must survive the worst case, so first find the largest selection that still contains no coprime pair — the biggest counterexample.",
+          "The simplest way to keep every pair from being coprime is to give them a common prime factor.",
+          "Take all the even numbers: 2, 4, 6, ..., 30, fifteen of them. Any two even numbers share a factor of at least 2, so no pair among them is coprime.",
+          "So 15 numbers can be chosen with no coprime pair, meaning n = 15 does not guarantee anything.",
+          "Now show that 16 numbers must contain a coprime pair.",
+          "Split 1 to 30 into 15 pairs of consecutive integers: {1,2}, {3,4}, {5,6}, ..., {29,30}. These 15 pairs cover all thirty numbers without overlapping.",
+          "The two members of each pair are consecutive integers, and consecutive integers are always coprime — a common factor d > 1 would have to divide their difference 1, which is impossible.",
+          "Now apply the pigeonhole principle. Placing 16 chosen numbers into 15 pigeonholes, at least one pair must be filled completely — and that pair consists of two coprime numbers.",
+          "So 16 always succeeds while 15 may fail, and the smallest n is 16.",
+          "Check: the largest subset of 1 to 30 with no two coprime is the set of all even numbers, of size 15; no set of 16 can have all pairs non-coprime. Hence the answer is 15 + 1 = 16.",
+          "Note the pairing must be into consecutive integers and not some arbitrary grouping. Splitting the thirty numbers into 15 arbitrary groups would not make same-group members coprime, and the pigeonhole principle would yield nothing. Consecutive integers are chosen precisely because they are guaranteed coprime — the crux of the whole argument."
+        ],
+        "ja": [
+          "**「保証」とは最悪の場合でも成り立つこと**なので、まず「互いに素な 2 数を含まないまま最も多く取れる取り方」、すなわち**最大の反例**を探します。",
+          "**どの 2 数も互いに素でないようにする最も簡単な方法は、共通の素因数をもたせること**です。",
+          "**偶数をすべて取ります**：2、4、6、⋯、30 の **15 個**。どの 2 つの偶数も最大公約数が 2 以上 ✓ で、**互いに素な組は 1 つもありません**。",
+          "**したがって 15 個では互いに素な組がない場合がありえ**、n = 15 では保証になりません。",
+          "**次に 16 個なら必ず互いに素な組が現れることを示します。**",
+          "**1〜30 を「連続する 2 数」で 15 組に分けます**：{1,2}、{3,4}、{5,6}、⋯、{29,30}。**この 15 組は 30 個すべてを覆い、重なりません** ✓。",
+          "**各組の 2 数は連続する整数であり、連続する整数は必ず互いに素**です（公約数 d > 1 があれば d は差の 1 も割り切らねばならず不可能）。",
+          "**ここで鳩の巣原理を使います。**16 個を 15 個の「巣」に入れると、**少なくとも 1 組が 2 つとも埋まります** ✓——その組が互いに素な 2 数です。",
+          "**したがって 16 個なら必ず成功し、15 個では失敗しうるので、最小の n は 16 です。**",
+          "検算：1〜30 で「どの 2 数も互いに素でない」最大の集合は偶数全体の **15 個**であり、16 個の集合ではそれが不可能であることが確認できます ✓。よって答えは 15 + 1 = **16** ✓。",
+          "**組の作り方は「連続する整数」でなければなりません。**30 個を任意に 15 組に分けても同じ組の 2 数が互いに素とは限らず、鳩の巣原理から結論は導けません。**連続する整数を選ぶのは、それが必ず互いに素だから**であり、これが議論全体の要です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "16"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "保證有兩數互質：最大反例是十五個偶數，再把 1 到 30 配成十五對相鄰整數並用鴿籠原理",
+        "notes": "設計依據：詳解分兩半論證——以全體偶數給出 15 個的反例說明 n = 15 不足，再以「相鄰整數必互質」的配對配合鴿籠原理證明 16 必成立；並指出配對必須用相鄰整數而非任意分組，否則論證失效。答案 16 已用最大不互質集合的檢查獨立驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（保證有兩數互質）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "邏輯推理",
+        "topicCode": "logic",
+        "subtopic": "保證有兩數互質",
+        "subtopicCode": "coprime_pigeonhole"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "logic_grade11_foundation_027",
+      "topic": "logic",
+      "subtopic": "lights_circle_five",
+      "difficulty": "foundation",
+      "levelStage": "grade11",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "公園裡有 5 盞路燈環繞著一座圓形花圃，燈旁各有一個對應的開關。每個開關並非只管自己那一盞——撥動任何一個開關，會讓它自己那一盞以及圓圈上緊鄰兩側的那兩盞路燈同時改變明滅。目前五盞燈全部是熄的。管理員想讓它們全部亮起，求他最少要撥動幾個開關。",
+        "zh-Hans": "公园里有 5 盏路灯环绕着一座圆形花圃，灯旁各有一个对应的开关。每个开关并非只管自己那一盏——拨动任何一个开关，会让它自己那一盏以及圆圈上紧邻两侧的那两盏路灯同时改变明灭。目前五盏灯全部是熄的。管理员想让它们全部亮起，求他最少要拨动几个开关。",
+        "en": "Five street lamps stand around a circular flowerbed in a park, each with its own switch beside it. A switch does not govern only its own lamp — flipping any switch changes the state of that lamp together with the two lamps immediately beside it around the circle. All five lamps are currently off. The keeper wants them all lit; what is the least number of switches he must flip?",
+        "ja": "公園の円形の花壇を囲んで街灯が 5 基あり、それぞれの脇に対応するスイッチがあります。各スイッチは自分の街灯だけを制御するのではなく——どれか 1 つを操作すると、その街灯と、円周上で両隣にある 2 基の街灯が同時に点滅を切り替えます。現在 5 基とも消えています。管理人がすべてを点灯させたいとき、最少で何個のスイッチを操作すればよいですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 5 盞。",
+        "zh-Hans": "答案是 5 盏。",
+        "en": "The answer is 5.",
+        "ja": "答えは 5 個です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "**先確立：同一盞按兩次等於沒按，且按的順序不影響結果。**所以方案完全由「按了哪些燈」決定，共 2⁵ = 32 種。",
+          "**注意這裡與「排成一列」的情形不同**：圓圈上**每一盞燈都恰好有兩個鄰居**，沒有端點，這個對稱性會大幅限制可行的方案。",
+          "**先算按下的總影響。**每按一盞燈，會切換 **3 盞**燈（自己與兩個鄰居）。若總共按了 k 盞，則全部切換動作的總次數是 **3k**。",
+          "**另一方面**，要讓五盞燈從全暗變成全亮，每一盞都必須被切換**奇數次**。五個奇數相加仍是奇數 ⋯ 更精確地說，**五盞燈各自的切換次數相加，就等於 3k**。",
+          "**由於五個切換次數都是奇數，它們的和必為奇數（五個奇數之和是奇數）**，所以 **3k 必須是奇數**，因此 **k 必須是奇數** ✓——這排除了按 2 盞或 4 盞的可能。",
+          "**所以候選只剩 k = 1、3、5。**逐一檢查：按 1 盞只能點亮 3 盞，其餘 2 盞仍暗 ✗。",
+          "**按 3 盞呢？**五盞燈圍成圓圈，按 3 盞時被按的燈之中必有兩盞相鄰（因為圓圈上 5 個位置選 3 個，不可能兩兩都不相鄰）。實際檢查所有 C(5,3) = 10 種選法，**沒有一種能讓五盞全亮** ✗。",
+          "**按 5 盞（全部都按）呢？**每一盞燈會被切換 3 次——自己一次，加上兩個鄰居各一次，共 **3 次**，是奇數 ✓ 所以每一盞都由暗變亮，**五盞全亮** ✓ 成功。",
+          "所以最少需要按 **5 盞**，也就是全部都按一次。",
+          "驗算：程式窮舉全部 32 種按法，能讓五盞全亮的方案**只有「五盞全按」這一種**，需按 5 盞 ✓ 與推理完全一致。",
+          "**對照排成一列的情形**：一列 5 盞燈只需按 2 盞（例如第 1 與第 4 盞）就能全亮。**差別完全來自兩端**——一列的端點燈只有一個鄰居，打破了圓圈的對稱性，反而讓問題變得容易。"
+        ],
+        "zh-Hans": [
+          "**先确立：同一盏按两次等于没按，且按的顺序不影响结果。**所以方案完全由「按了哪些灯」决定，共 2⁵ = 32 种。",
+          "**注意这里与「排成一列」的情形不同**：圆圈上**每一盏灯都恰好有两个邻居**，没有端点，这个对称性会大幅限制可行的方案。",
+          "**先算按下的总影响。**每按一盏灯，会切换 **3 盏**灯（自己与两个邻居）。若总共按了 k 盏，则全部切换动作的总次数是 **3k**。",
+          "**另一方面**，要让五盏灯从全暗变成全亮，每一盏都必须被切换**奇数次**。**五盏灯各自的切换次数相加，就等于 3k**。",
+          "**由于五个切换次数都是奇数，它们的和必为奇数（五个奇数之和是奇数）**，所以 **3k 必须是奇数**，因此 **k 必须是奇数** ✓——这排除了按 2 盏或 4 盏的可能。",
+          "**所以候选只剩 k = 1、3、5。**逐一检查：按 1 盏只能点亮 3 盏，其余 2 盏仍暗 ✗。",
+          "**按 3 盏呢？**五盏灯围成圆圈，按 3 盏时被按的灯之中必有两盏相邻（因为圆圈上 5 个位置选 3 个，不可能两两都不相邻）。实际检查所有 C(5,3) = 10 种选法，**没有一种能让五盏全亮** ✗。",
+          "**按 5 盏（全部都按）呢？**每一盏灯会被切换 3 次——自己一次，加上两个邻居各一次，共 **3 次**，是奇数 ✓ 所以每一盏都由暗变亮，**五盏全亮** ✓ 成功。",
+          "所以最少需要按 **5 盏**，也就是全部都按一次。",
+          "验算：程序穷举全部 32 种按法，能让五盏全亮的方案**只有「五盏全按」这一种**，需按 5 盏 ✓ 与推理完全一致。",
+          "**对照排成一列的情形**：一列 5 盏灯只需按 2 盏（例如第 1 与第 4 盏）就能全亮。**差别完全来自两端**——一列的端点灯只有一个邻居，打破了圆圈的对称性，反而让问题变得容易。"
+        ],
+        "en": [
+          "Establish first that pressing a lamp twice is the same as not pressing it and that the order does not matter, so a plan is fixed by which set of lamps is pressed, giving 2⁵ = 32 possibilities.",
+          "Note the contrast with lamps in a row: on a circle every lamp has exactly two neighbours and there are no ends, and this symmetry sharply restricts what is possible.",
+          "Count the total effect of the presses. Each press toggles 3 lamps, itself and its two neighbours, so pressing k lamps produces 3k toggles altogether.",
+          "On the other hand, turning all five from off to on requires each lamp to be toggled an odd number of times, and the five individual toggle counts sum to exactly 3k.",
+          "Since all five counts are odd, their sum is odd, five odd numbers summing to an odd number. So 3k must be odd and therefore k must be odd — ruling out pressing 2 or 4 lamps.",
+          "That leaves k = 1, 3 or 5. Pressing 1 lamp lights only 3, leaving 2 dark.",
+          "What about 3? On a circle of five, any three chosen lamps must include two adjacent ones, since five positions cannot supply three pairwise non-adjacent choices. Checking all C(5,3) = 10 selections, none lights every lamp.",
+          "And 5, pressing them all? Each lamp is then toggled 3 times — once by itself and once by each of its two neighbours — an odd count, so every lamp turns on and all five light up.",
+          "So the minimum is 5, pressing every lamp once.",
+          "Check: enumerating all 32 press-sets shows the only one lighting all five is pressing every lamp, requiring 5 presses, exactly as reasoned.",
+          "Compare with the row: five lamps in a row need only 2 presses, such as the first and fourth. The difference comes entirely from the ends — a row's end lamps have only one neighbour, breaking the circle's symmetry and, paradoxically, making the problem easier."
+        ],
+        "ja": [
+          "**まず確立します**：同じランプを 2 回押すのは押さないのと同じで、押す順序も結果に影響しません。したがって方針は「どのランプを押したか」で決まり、2⁵ = 32 通りです。",
+          "**「一列」の場合との違い**に注意します：円周上では**どのランプにもちょうど 2 つの隣**があり端がありません。この対称性が可能な方針を大きく制限します。",
+          "**押した効果の総量を数えます。**1 回押すごとに **3 個**（自身と両隣）が切り替わるので、k 個押すと切り替えの総回数は **3k** です。",
+          "**一方**、5 個すべてを消から点にするには、各ランプが**奇数回**切り替わる必要があり、**5 個の切り替え回数の和がちょうど 3k** に等しくなります。",
+          "**5 つの回数がすべて奇数なので和は奇数（奇数 5 個の和は奇数）**、よって **3k は奇数**でなければならず、**k は奇数** ✓——2 個や 4 個は排除されます。",
+          "**残る候補は k = 1、3、5** です。1 個では点灯するのは 3 個だけで 2 個が消えたまま ✗。",
+          "**3 個ではどうか。**円周上の 5 個から 3 個を選ぶと必ずどこかで隣り合います（5 か所から互いに隣接しない 3 個は選べません）。C(5,3) = 10 通りをすべて調べても、**全点灯するものはありません** ✗。",
+          "**5 個（全部）ではどうか。**各ランプは自身で 1 回、両隣から 1 回ずつで計 **3 回**切り替わり、奇数 ✓ なのですべて消から点になり、**5 個全点灯** ✓ 成功します。",
+          "したがって最少は **5 個**、すなわち全部を 1 回ずつ押すことです。",
+          "検算：32 通りをすべて列挙すると、全点灯できるのは**「全部押す」1 通りだけ**で 5 個必要 ✓ と推論に完全に一致します。",
+          "**一列の場合と対照**すると、一列の 5 個は 2 個（1 番目と 4 番目など）押すだけで全点灯できます。**違いはすべて端に由来**します——一列の端のランプには隣が 1 つしかなく、円の対称性が破れることで、かえって問題が易しくなります。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "5"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "圍成圓圈的燈：由「總切換次數 3k 必為奇數」推得 k 為奇數，逐一檢查後只有全按可行",
+        "notes": "設計依據：詳解以奇偶論證先排除 k 為偶數的所有情形再逐一檢查剩餘候選，而非直接窮舉；並與同批的一列版本（只需 2 盞）對照，指出差異完全來自端點打破對稱性。答案 5 已用 32 種按法的完整窮舉獨立驗證，且解唯一。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（圍成圓圈的燈）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "邏輯推理",
+        "topicCode": "logic",
+        "subtopic": "圍成圓圈的燈",
+        "subtopicCode": "lights_circle_five"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "logic_grade11_foundation_028",
+      "topic": "logic",
+      "subtopic": "absolute_difference_sequence",
+      "difficulty": "foundation",
+      "levelStage": "grade11",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "數列 {aₙ} 的前兩項是 a₁ = 1、a₂ = 5，之後每一項都等於前兩項之差的絕對值，也就是 aₙ₊₂ = |aₙ₊₁ − aₙ|。求 a₂₀₂₆ 的值。",
+        "zh-Hans": "数列 {aₙ} 的前两项是 a₁ = 1、a₂ = 5，之后每一项都等于前两项之差的绝对值，也就是 aₙ₊₂ = |aₙ₊₁ − aₙ|。求 a₂₀₂₆ 的值。",
+        "en": "A sequence has a₁ = 1 and a₂ = 5, and every later term is the absolute difference of the two before it, so aₙ₊₂ = |aₙ₊₁ − aₙ|. Find a₂₀₂₆.",
+        "ja": "数列 {aₙ} は a₁ = 1、a₂ = 5 で、以降の各項は直前 2 項の差の絶対値、すなわち aₙ₊₂ = |aₙ₊₁ − aₙ| です。a₂₀₂₆ の値を求めなさい。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 1。",
+        "zh-Hans": "答案是 1。",
+        "en": "The answer is 1.",
+        "ja": "答えは 1 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "**這種數列不可能有簡單的通項公式，但取絕對差會讓數字迅速變小，最後必定落入循環。**所以做法是**逐項算下去，找出週期**。",
+          "依序計算：a₁ = 1、a₂ = 5。",
+          "a₃ = |5 − 1| = **4**；a₄ = |4 − 5| = **1**；a₅ = |1 − 4| = **3**；a₆ = |3 − 1| = **2**。",
+          "a₇ = |2 − 3| = **1**；a₈ = |1 − 2| = **1**；a₉ = |1 − 1| = **0**。",
+          "a₁₀ = |0 − 1| = **1**；a₁₁ = |1 − 0| = **1**；a₁₂ = |1 − 1| = **0**。",
+          "**看出來了**：從 a₇ 開始，數列變成 **1、1、0、1、1、0、⋯** 不斷重複，**週期是 3**。",
+          "**為什麼會鎖死在這個循環？**因為一旦出現連續兩項 (1, 1)，下一項必是 0，再下一項是 |0 − 1| = 1、再下一項是 |1 − 0| = 1，**又回到 (1, 1)** ✓ 所以 1、1、0 會永遠重複下去。",
+          "**現在定位 a₂₀₂₆。**循環從第 7 項開始，所以要看 2026 與 7 相差幾項：**2026 − 7 = 2019**。",
+          "2019 ÷ 3 = 673 餘 **0**，表示 a₂₀₂₆ 與 a₇ 在循環中的位置相同。",
+          "而 a₇ = **1**，所以 **a₂₀₂₆ = 1**。",
+          "驗算：程式實際遞推出前 60 項並取第 2026 項的位置核對——循環確認從第 7 項起、週期為 3，一個週期是 (1, 1, 0)；由 2026 ≡ 7（除以 3 同餘，因為 2026 與 7 除以 3 都餘 1）可知 a₂₀₂₆ = a₇ = **1** ✓。",
+          "**核對相鄰的兩項以確認沒有錯位**：a₂₀₂₅ 對應 a₉ 的位置（2025 − 7 = 2018，2018 ÷ 3 餘 2），值為 0；a₂₀₂₇ 對應 a₈ 的位置，值為 1。所以 a₂₀₂₅、a₂₀₂₆、a₂₀₂₇ 依序是 **0、1、1** ✓ 符合 1、1、0 的循環樣式（從 0 開始看就是 0、1、1）。**定位循環時最容易出錯的就是差一項，務必用相鄰項交叉核對。**"
+        ],
+        "zh-Hans": [
+          "**这种数列不可能有简单的通项公式，但取绝对差会让数字迅速变小，最后必定落入循环。**所以做法是**逐项算下去，找出周期**。",
+          "依序计算：a₁ = 1、a₂ = 5。",
+          "a₃ = |5 − 1| = **4**；a₄ = |4 − 5| = **1**；a₅ = |1 − 4| = **3**；a₆ = |3 − 1| = **2**。",
+          "a₇ = |2 − 3| = **1**；a₈ = |1 − 2| = **1**；a₉ = |1 − 1| = **0**。",
+          "a₁₀ = |0 − 1| = **1**；a₁₁ = |1 − 0| = **1**；a₁₂ = |1 − 1| = **0**。",
+          "**看出来了**：从 a₇ 开始，数列变成 **1、1、0、1、1、0、⋯** 不断重复，**周期是 3**。",
+          "**为什么会锁死在这个循环？**因为一旦出现连续两项 (1, 1)，下一项必是 0，再下一项是 |0 − 1| = 1、再下一项是 |1 − 0| = 1，**又回到 (1, 1)** ✓ 所以 1、1、0 会永远重复下去。",
+          "**现在定位 a₂₀₂₆。**循环从第 7 项开始，所以要看 2026 与 7 相差几项：**2026 − 7 = 2019**。",
+          "2019 ÷ 3 = 673 余 **0**，表示 a₂₀₂₆ 与 a₇ 在循环中的位置相同。",
+          "而 a₇ = **1**，所以 **a₂₀₂₆ = 1**。",
+          "验算：程序实际递推出前 60 项并取第 2026 项的位置核对——循环确认从第 7 项起、周期为 3，一个周期是 (1, 1, 0)；由 2026 与 7 除以 3 都余 1 可知 a₂₀₂₆ = a₇ = **1** ✓。",
+          "**核对相邻的两项以确认没有错位**：a₂₀₂₅ 对应 a₉ 的位置（2025 − 7 = 2018，2018 ÷ 3 余 2），值为 0；a₂₀₂₇ 对应 a₈ 的位置，值为 1。所以 a₂₀₂₅、a₂₀₂₆、a₂₀₂₇ 依序是 **0、1、1** ✓ 符合 1、1、0 的循环样式（从 0 开始看就是 0、1、1）。**定位循环时最容易出错的就是差一项，务必用相邻项交叉核对。**"
+        ],
+        "en": [
+          "Such a sequence admits no simple closed formula, but taking absolute differences shrinks the numbers rapidly and must eventually fall into a cycle. So compute term by term and find the period.",
+          "In order: a₁ = 1 and a₂ = 5.",
+          "a₃ = |5 − 1| = 4, a₄ = |4 − 5| = 1, a₅ = |1 − 4| = 3, and a₆ = |3 − 1| = 2.",
+          "a₇ = |2 − 3| = 1, a₈ = |1 − 2| = 1, and a₉ = |1 − 1| = 0.",
+          "a₁₀ = |0 − 1| = 1, a₁₁ = |1 − 0| = 1, and a₁₂ = |1 − 1| = 0.",
+          "The pattern is clear: from a₇ onwards the sequence repeats 1, 1, 0, 1, 1, 0, and so on, with period 3.",
+          "Why is it locked into this cycle? Once two consecutive terms are 1 and 1, the next is 0, then |0 − 1| = 1, then |1 − 0| = 1, returning to a pair of 1s. So 1, 1, 0 repeats forever.",
+          "Now locate a₂₀₂₆. The cycle starts at term 7, so measure how far 2026 lies beyond 7: 2026 − 7 = 2019.",
+          "Since 2019 ÷ 3 = 673 with remainder 0, a₂₀₂₆ occupies the same position in the cycle as a₇.",
+          "And a₇ = 1, so a₂₀₂₆ = 1.",
+          "Check: computing the first 60 terms confirms the cycle begins at term 7 with period 3 and pattern (1, 1, 0); since 2026 and 7 leave the same remainder on division by 3, a₂₀₂₆ = a₇ = 1.",
+          "Verify the neighbouring terms to rule out an off-by-one error: a₂₀₂₅ matches the position of a₉, since 2025 − 7 = 2018 leaves remainder 2, giving 0; and a₂₀₂₇ matches a₈, giving 1. So a₂₀₂₅, a₂₀₂₆ and a₂₀₂₇ are 0, 1, 1, consistent with the repeating 1, 1, 0. Being off by one is the commonest error when locating a position within a cycle, so cross-checking neighbours is essential."
+        ],
+        "ja": [
+          "**この種の数列に簡単な一般項はありませんが、差の絶対値をとると数は急速に小さくなり、必ず循環に入ります。**そこで**順に計算して周期を見つけます**。",
+          "順に計算します：a₁ = 1、a₂ = 5。",
+          "a₃ = |5 − 1| = **4**、a₄ = |4 − 5| = **1**、a₅ = |1 − 4| = **3**、a₆ = |3 − 1| = **2**。",
+          "a₇ = |2 − 3| = **1**、a₈ = |1 − 2| = **1**、a₉ = |1 − 1| = **0**。",
+          "a₁₀ = |0 − 1| = **1**、a₁₁ = |1 − 0| = **1**、a₁₂ = |1 − 1| = **0**。",
+          "**見えてきました**：a₇ から数列は **1、1、0、1、1、0、⋯** を繰り返し、**周期は 3** です。",
+          "**なぜこの循環に固定されるのか。**連続する 2 項が (1, 1) になると次は 0、その次は |0 − 1| = 1、さらに次は |1 − 0| = 1 で**再び (1, 1)** ✓ に戻るため、1、1、0 が永遠に繰り返されます。",
+          "**a₂₀₂₆ の位置を求めます。**循環は第 7 項から始まるので、2026 が 7 からいくつ先かを見ます：**2026 − 7 = 2019**。",
+          "2019 ÷ 3 = 673 余り **0** なので、a₂₀₂₆ は循環内で a₇ と同じ位置です。",
+          "そして a₇ = **1** なので **a₂₀₂₆ = 1**。",
+          "検算：前 60 項を実際に計算すると、循環が第 7 項から始まり周期 3、1 周期が (1, 1, 0) であることが確認できます。2026 と 7 は 3 で割った余りが等しいので a₂₀₂₆ = a₇ = **1** ✓。",
+          "**ずれがないか隣接項でも確認します**：a₂₀₂₅ は a₉ の位置（2025 − 7 = 2018、3 で割って余り 2）で値 0、a₂₀₂₇ は a₈ の位置で値 1。よって a₂₀₂₅、a₂₀₂₆、a₂₀₂₇ は順に **0、1、1** ✓ で 1、1、0 の繰り返しと整合します。**循環内の位置決めでは 1 つずれる誤りが最も多い**ので、隣接項での交差確認が欠かせません。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "1"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "取絕對差的數列：逐項計算找出從第 7 項起週期為 3 的循環，再以餘數定位並用相鄰項核對",
+        "notes": "設計依據：詳解逐項算出前十二項以找出循環，並論證 (1, 1) 出現後為何會永久鎖在 1、1、0；定位時特別以相鄰的 a₂₀₂₅ 與 a₂₀₂₇ 交叉核對，防止最常見的差一項錯誤。答案 1 已用實際遞推與餘數定位雙向驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（取絕對差的數列）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "邏輯推理",
+        "topicCode": "logic",
+        "subtopic": "取絕對差的數列",
+        "subtopicCode": "absolute_difference_sequence"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "logic_grade11_foundation_029",
+      "topic": "logic",
+      "subtopic": "weights_one_side",
+      "difficulty": "foundation",
+      "levelStage": "grade11",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "有一組砝碼要用來秤重，秤重時**砝碼只能放在天平的一側**（物品放另一側），可以同時使用多個砝碼。若要能秤出 1 到 15 公克之間的**每一個整數公克數**，求最少需要幾個砝碼。",
+        "zh-Hans": "有一组砝码要用来称重，称重时**砝码只能放在天平的一侧**（物品放另一侧），可以同时使用多个砝码。若要能称出 1 到 15 克之间的**每一个整数克数**，求最少需要几个砝码。",
+        "en": "A set of weights is used on a balance, with the weights allowed only on one pan and the object on the other, several weights being usable together. To weigh every whole number of grams from 1 to 15, what is the least number of weights needed?",
+        "ja": "分銅を使って重さを量ります。**分銅は天秤の片側にしか置けず**（品物は反対側）、複数を同時に使えます。1 グラムから 15 グラムまでの**すべての整数グラム**を量れるようにするには、分銅は最少で何個必要ですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 4 個。",
+        "zh-Hans": "答案是 4 个。",
+        "en": "The answer is 4.",
+        "ja": "答えは 4 個です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "**先算下界：k 個砝碼最多能秤出多少種重量？**",
+          "**每個砝碼只有「用」與「不用」兩種狀態**（因為只能放同一側，不能減）。所以 k 個砝碼共有 2ᵏ 種組合。",
+          "**扣掉「一個都不用」這種組合（重量為 0，不能用來秤東西），最多能得到 2ᵏ − 1 種正的重量。**",
+          "要秤出 1 到 15 共 **15 種**重量，所以需要 **2ᵏ − 1 ≥ 15**，即 2ᵏ ≥ 16，得 **k ≥ 4**。",
+          "**所以至少要 4 個砝碼。**接著要找出真的用 4 個就辦得到的一組。",
+          "**取 1、2、4、8 這四個砝碼**（二的冪次）。**這正好對應二進位表示法**——每個 1 到 15 的整數都能唯一寫成這四個數中若干個的和。",
+          "**逐一驗證**：1 = 1；2 = 2；3 = 1 + 2；4 = 4；5 = 1 + 4；6 = 2 + 4；7 = 1 + 2 + 4。",
+          "8 = 8；9 = 1 + 8；10 = 2 + 8；11 = 1 + 2 + 8；12 = 4 + 8；13 = 1 + 4 + 8；14 = 2 + 4 + 8；15 = 1 + 2 + 4 + 8 ✓ **十五種重量全部湊得出來**。",
+          "**下界 4 與可行方案 4 一致，所以答案是 4 個。**",
+          "驗算：程式對 k 由 1 遞增，窮舉所有 k 個砝碼的組合（每個重量在 1 到 15 之間），檢查其所有子集和能否涵蓋 1 到 15，**最小的 k 正是 4，且找到的一組是 (1, 2, 4, 8)** ✓。",
+          "**注意 2ᵏ − 1 = 15 恰好等於所需的種數，一點餘裕都沒有**——這表示 4 個砝碼的方案中，**每一種「用哪些砝碼」的組合都必須對應到一個不同的重量，不能有任何重複**。這正是二的冪次那組能成功的原因（二進位表示是唯一的），也說明了為什麼像 1、2、3、8 那樣的組合會失敗（1 + 2 與 3 重複，浪費了一種組合）。",
+          "**若改成砝碼可以放在天平的兩側**（也就是可以相減），情況會完全不同——那時 3 個砝碼 1、3、9 就能秤出 1 到 13，效率高得多。"
+        ],
+        "zh-Hans": [
+          "**先算下界：k 个砝码最多能称出多少种重量？**",
+          "**每个砝码只有「用」与「不用」两种状态**（因为只能放同一侧，不能减）。所以 k 个砝码共有 2ᵏ 种组合。",
+          "**扣掉「一个都不用」这种组合（重量为 0，不能用来称东西），最多能得到 2ᵏ − 1 种正的重量。**",
+          "要称出 1 到 15 共 **15 种**重量，所以需要 **2ᵏ − 1 ≥ 15**，即 2ᵏ ≥ 16，得 **k ≥ 4**。",
+          "**所以至少要 4 个砝码。**接着要找出真的用 4 个就办得到的一组。",
+          "**取 1、2、4、8 这四个砝码**（二的幂次）。**这正好对应二进位表示法**——每个 1 到 15 的整数都能唯一写成这四个数中若干个的和。",
+          "**逐一验证**：1 = 1；2 = 2；3 = 1 + 2；4 = 4；5 = 1 + 4；6 = 2 + 4；7 = 1 + 2 + 4。",
+          "8 = 8；9 = 1 + 8；10 = 2 + 8；11 = 1 + 2 + 8；12 = 4 + 8；13 = 1 + 4 + 8；14 = 2 + 4 + 8；15 = 1 + 2 + 4 + 8 ✓ **十五种重量全部凑得出来**。",
+          "**下界 4 与可行方案 4 一致，所以答案是 4 个。**",
+          "验算：程序对 k 由 1 递增，穷举所有 k 个砝码的组合（每个重量在 1 到 15 之间），检查其所有子集和能否涵盖 1 到 15，**最小的 k 正是 4，且找到的一组是 (1, 2, 4, 8)** ✓。",
+          "**注意 2ᵏ − 1 = 15 恰好等于所需的种数，一点余裕都没有**——这表示 4 个砝码的方案中，**每一种「用哪些砝码」的组合都必须对应到一个不同的重量，不能有任何重复**。这正是二的幂次那组能成功的原因（二进位表示是唯一的），也说明了为什么像 1、2、3、8 那样的组合会失败（1 + 2 与 3 重复，浪费了一种组合）。",
+          "**若改成砝码可以放在天平的两侧**（也就是可以相减），情况会完全不同——那时 3 个砝码 1、3、9 就能称出 1 到 13，效率高得多。"
+        ],
+        "en": [
+          "Find the lower bound first: how many weights can k pieces produce?",
+          "Each weight is either used or not, since all must go on the same pan and none can be subtracted. So k weights admit 2ᵏ combinations.",
+          "Discarding the empty combination, which weighs 0 and measures nothing, at most 2ᵏ − 1 positive weights are obtainable.",
+          "Measuring every gram from 1 to 15 means 15 values, so 2ᵏ − 1 ≥ 15, that is 2ᵏ ≥ 16, giving k ≥ 4.",
+          "So at least 4 weights are needed. Now find a set of 4 that actually works.",
+          "Take the weights 1, 2, 4 and 8, the powers of two. These correspond exactly to binary representation — every integer from 1 to 15 is uniquely a sum of some of them.",
+          "Verifying: 1 = 1, 2 = 2, 3 = 1 + 2, 4 = 4, 5 = 1 + 4, 6 = 2 + 4 and 7 = 1 + 2 + 4.",
+          "Then 8 = 8, 9 = 1 + 8, 10 = 2 + 8, 11 = 1 + 2 + 8, 12 = 4 + 8, 13 = 1 + 4 + 8, 14 = 2 + 4 + 8 and 15 = 1 + 2 + 4 + 8. All fifteen values are obtainable.",
+          "The lower bound of 4 and a working set of 4 agree, so the answer is 4.",
+          "Check: searching upward from k = 1 over all sets of k weights between 1 and 15 and testing whether their subset sums cover 1 to 15 gives a minimum of 4, with (1, 2, 4, 8) among the solutions.",
+          "Note that 2ᵏ − 1 = 15 exactly matches the number of values required, with nothing to spare — so in any four-weight solution every combination of weights must produce a different total, with no repetition allowed. That is precisely why the powers of two succeed, binary representations being unique, and why a set such as 1, 2, 3, 8 fails, since 1 + 2 duplicates 3 and wastes a combination.",
+          "Allowing weights on both pans, so that subtraction becomes possible, changes matters entirely — then just three weights of 1, 3 and 9 measure everything from 1 to 13, far more efficiently."
+        ],
+        "ja": [
+          "**まず下界を求めます：k 個の分銅で量れる重さは最大何種類か。**",
+          "**各分銅は「使う」か「使わない」かの 2 状態だけ**です（片側にしか置けず引き算ができないため）。したがって k 個で 2ᵏ 通りの組み合わせがあります。",
+          "**「1 つも使わない」（重さ 0 で量れない）を除くと、得られる正の重さは最大 2ᵏ − 1 種類**です。",
+          "1〜15 の **15 種類**を量る必要があるので **2ᵏ − 1 ≥ 15**、すなわち 2ᵏ ≥ 16 より **k ≥ 4**。",
+          "**したがって最低 4 個必要です。**次に実際に 4 個で足りる組を探します。",
+          "**1、2、4、8 の 4 個**（2 の累乗）をとります。**これはまさに 2 進法の表現に対応**し、1〜15 の各整数はこれらのいくつかの和として一意に書けます。",
+          "**順に確認します**：1 = 1、2 = 2、3 = 1 + 2、4 = 4、5 = 1 + 4、6 = 2 + 4、7 = 1 + 2 + 4。",
+          "8 = 8、9 = 1 + 8、10 = 2 + 8、11 = 1 + 2 + 8、12 = 4 + 8、13 = 1 + 4 + 8、14 = 2 + 4 + 8、15 = 1 + 2 + 4 + 8 ✓ **15 種類すべてが作れます**。",
+          "**下界 4 と実現可能な 4 が一致するので答えは 4 個です。**",
+          "検算：k を 1 から増やしながら、1〜15 の重さの分銅 k 個のあらゆる組について部分和が 1〜15 を覆うか調べると、**最小の k はちょうど 4 で、見つかった組は (1, 2, 4, 8)** ✓ です。",
+          "**2ᵏ − 1 = 15 が必要な種類数とちょうど一致し、余裕がまったくない**点に注目します——つまり 4 個の解では**「どの分銅を使うか」の各組み合わせが異なる重さに対応せねばならず、重複が一切許されません**。2 の累乗が成功する理由（2 進表現の一意性）も、1、2、3、8 のような組が失敗する理由（1 + 2 と 3 が重複し 1 通り無駄になる）もここにあります。",
+          "**分銅を天秤の両側に置ける**（引き算ができる）場合は事情がまったく異なり、1、3、9 の 3 個だけで 1〜13 を量れてはるかに効率的になります。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "4"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "只能放單側的砝碼：k 個砝碼最多給出 2ᵏ − 1 種重量故 k ≥ 4，再以 1、2、4、8 對應二進位達成",
+        "notes": "設計依據：詳解由「每個砝碼只有用或不用」導出 2ᵏ − 1 的下界，並指出 15 恰好用盡全部組合而無重複餘裕，這正是二的冪次成功而 1、2、3、8 失敗的原因；末尾以可放兩側時 1、3、9 的三個砝碼作對照。答案 4 已用砝碼組合的窮舉搜尋獨立驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（只能放單側的砝碼）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "邏輯推理",
+        "topicCode": "logic",
+        "subtopic": "只能放單側的砝碼",
+        "subtopicCode": "weights_one_side"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "logic_grade11_foundation_030",
+      "topic": "logic",
+      "subtopic": "password_worst_case",
+      "difficulty": "foundation",
+      "levelStage": "grade11",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一個密碼鎖需要輸入一個三位數的密碼，每一位都是 0 到 9 的數字。已知這個密碼的**三個數字互不相同，而且三個數字之和恰好是 6**。若每次只能試一組密碼、試錯後可以排除該組，求在最壞的情況下最多需要試幾次才能打開。",
+        "zh-Hans": "一个密码锁需要输入一个三位数的密码，每一位都是 0 到 9 的数字。已知这个密码的**三个数字互不相同，而且三个数字之和恰好是 6**。若每次只能试一组密码、试错后可以排除该组，求在最坏的情况下最多需要试几次才能打开。",
+        "en": "A lock takes a three-digit code, each digit from 0 to 9. It is known that the three digits are all different and sum to exactly 6. Trying one code at a time and eliminating each failure, how many attempts are needed at most in the worst case?",
+        "ja": "この錠は 3 桁の暗証番号を入力します（各桁は 0〜9）。暗証番号の **3 つの数字はすべて異なり、和はちょうど 6** であると分かっています。1 回に 1 組ずつ試し、外れたその組は除外できるとき、最悪の場合に最大で何回試せば開きますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 18 次。",
+        "zh-Hans": "答案是 18 次。",
+        "en": "The answer is 18.",
+        "ja": "答えは 18 回です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "**最壞情況下需要的次數，就等於「符合條件的密碼總數」**——因為每試一次可以排除一組，最不幸的情形是正確答案排在最後一個才被試到。",
+          "**所以問題變成：三個數字互不相同、和為 6 的三位數密碼共有幾組？**（注意這是密碼而不是三位數，**首位可以是 0**。）",
+          "**第一步：先找出所有可能的數字組合（不計順序）。**要三個相異的數字，和為 6。",
+          "**由小到大枚舉最小的數字。**最小是 0 時：另外兩個相異且和為 6，可以是 **{0,1,5}**、**{0,2,4}**——{0,3,3} 因為兩個 3 重複 ✗ 不合。",
+          "最小是 1 時：另外兩個相異、都大於 1 且和為 5，只有 **{1,2,3}**——{1,4,1} 重複 ✗。",
+          "最小是 2 時：另外兩個相異、都大於 2 且和為 4，最小的可能是 3 + 4 = 7 > 4 ✗ 不可能。**最小值再大更不可能**（三個相異且最小為 2 時，總和至少 2 + 3 + 4 = 9 > 6）。",
+          "**所以數字組合恰好有 3 組**：{0,1,5}、{0,2,4}、{1,2,3}。",
+          "**第二步：每一組能排出幾個密碼？**由於三個數字互不相同，把它們排進三個位置就是全排列，有 3! = **6** 種。",
+          "**這裡不必排除首位為 0 的情形**——題目說的是密碼而非三位數，開頭是 0 的密碼（如 015）完全合法 ✓。",
+          "所以總數 = 3 × 6 = **18 組**，最壞情況需要試 **18 次**。",
+          "驗算：程式列出全部 1000 種三位密碼，逐一檢查三個數字是否互異且和為 6，**符合的恰好是 18 組** ✓，且不計順序的組合正是 {0,1,5}、{0,2,4}、{1,2,3} 三種 ✓ 與手算完全一致。",
+          "**若題目改成「三位數」而非「密碼」**，首位就不能是 0——含 0 的兩組各要扣掉首位為 0 的 2 種排法（0 在首位時另外兩數有 2 種排法），變成 6 − 2 = 4 種，總數會是 4 + 4 + 6 = **14 組**。**「密碼」與「三位數」這個用詞差異直接改變答案，讀題時務必看清。**"
+        ],
+        "zh-Hans": [
+          "**最坏情况下需要的次数，就等于「符合条件的密码总数」**——因为每试一次可以排除一组，最不幸的情形是正确答案排在最后一个才被试到。",
+          "**所以问题变成：三个数字互不相同、和为 6 的三位密码共有几组？**（注意这是密码而不是三位数，**首位可以是 0**。）",
+          "**第一步：先找出所有可能的数字组合（不计顺序）。**要三个相异的数字，和为 6。",
+          "**由小到大枚举最小的数字。**最小是 0 时：另外两个相异且和为 6，可以是 **{0,1,5}**、**{0,2,4}**——{0,3,3} 因为两个 3 重复 ✗ 不合。",
+          "最小是 1 时：另外两个相异、都大于 1 且和为 5，只有 **{1,2,3}**——{1,4,1} 重复 ✗。",
+          "最小是 2 时：另外两个相异、都大于 2 且和为 4，最小的可能是 3 + 4 = 7 > 4 ✗ 不可能。**最小值再大更不可能**（三个相异且最小为 2 时，总和至少 2 + 3 + 4 = 9 > 6）。",
+          "**所以数字组合恰好有 3 组**：{0,1,5}、{0,2,4}、{1,2,3}。",
+          "**第二步：每一组能排出几个密码？**由于三个数字互不相同，把它们排进三个位置就是全排列，有 3! = **6** 种。",
+          "**这里不必排除首位为 0 的情形**——题目说的是密码而非三位数，开头是 0 的密码（如 015）完全合法 ✓。",
+          "所以总数 = 3 × 6 = **18 组**，最坏情况需要试 **18 次**。",
+          "验算：程序列出全部 1000 种三位密码，逐一检查三个数字是否互异且和为 6，**符合的恰好是 18 组** ✓，且不计顺序的组合正是 {0,1,5}、{0,2,4}、{1,2,3} 三种 ✓ 与手算完全一致。",
+          "**若题目改成「三位数」而非「密码」**，首位就不能是 0——含 0 的两组各要扣掉首位为 0 的 2 种排法（0 在首位时另外两数有 2 种排法），变成 6 − 2 = 4 种，总数会是 4 + 4 + 6 = **14 组**。**「密码」与「三位数」这个用词差异直接改变答案，读题时务必看清。**"
+        ],
+        "en": [
+          "The worst-case number of attempts equals the total number of codes satisfying the conditions, since each failure eliminates one and the unluckiest case leaves the correct one until last.",
+          "So the question becomes: how many three-digit codes have all digits different and summing to 6? Note this is a code, not a three-digit number, so the leading digit may be 0.",
+          "First step: find all possible sets of digits, ignoring order — three distinct digits summing to 6.",
+          "Enumerate by the smallest digit. With 0 smallest: the other two must be distinct and sum to 6, giving {0,1,5} and {0,2,4}, while {0,3,3} repeats a 3 and fails.",
+          "With 1 smallest: the other two must be distinct, exceed 1 and sum to 5, giving only {1,2,3}, since {1,4,1} repeats.",
+          "With 2 smallest: the other two must be distinct, exceed 2 and sum to 4, but the smallest possibility is 3 + 4 = 7 > 4, impossible. Larger smallest values fail all the more, since three distinct digits with least value 2 sum to at least 2 + 3 + 4 = 9 > 6.",
+          "So exactly 3 sets exist: {0,1,5}, {0,2,4} and {1,2,3}.",
+          "Second step: how many codes does each set give? The digits being distinct, arranging them in three positions is a permutation, giving 3! = 6.",
+          "No leading-zero exclusion is needed here — the problem concerns a code rather than a number, so a code beginning with 0, such as 015, is perfectly valid.",
+          "So the total is 3 × 6 = 18, and the worst case requires 18 attempts.",
+          "Check: enumerating all 1000 three-digit codes and testing for distinct digits summing to 6 gives exactly 18, whose unordered forms are precisely {0,1,5}, {0,2,4} and {1,2,3}, matching the hand computation.",
+          "Had the problem said three-digit number instead of code, the leading digit could not be 0 — each set containing 0 would lose the 2 arrangements with 0 in front, dropping to 6 − 2 = 4, and the total would be 4 + 4 + 6 = 14. The wording difference between code and number changes the answer outright, so read carefully."
+        ],
+        "ja": [
+          "**最悪の場合に必要な回数は「条件を満たす暗証番号の総数」に等しく**なります。1 回試すごとに 1 組を除外でき、最も不運なのは正解が最後に残る場合だからです。",
+          "**したがって問題は：3 つの数字がすべて異なり和が 6 の 3 桁の暗証番号は何組あるか**、となります。（これは 3 桁の数ではなく暗証番号なので、**先頭が 0 でもかまいません**。）",
+          "**第 1 段階：可能な数字の組（順序を問わない）をすべて求めます。**相異なる 3 数で和が 6 です。",
+          "**最小の数字で場合分けします。**最小が 0：他の 2 数は相異なり和が 6 で、**{0,1,5}**、**{0,2,4}**——{0,3,3} は 3 が重複 ✗ で不適。",
+          "最小が 1：他の 2 数は相異なり 1 より大きく和が 5 で、**{1,2,3}** のみ——{1,4,1} は重複 ✗。",
+          "最小が 2：他の 2 数は相異なり 2 より大きく和が 4 ですが、最小でも 3 + 4 = 7 > 4 ✗ で不可能。**最小値がこれより大きければなお不可能**です（相異なる 3 数の最小が 2 なら和は少なくとも 2 + 3 + 4 = 9 > 6）。",
+          "**したがって数字の組はちょうど 3 つ**：{0,1,5}、{0,2,4}、{1,2,3}。",
+          "**第 2 段階：各組から何通りの暗証番号ができるか。**3 数が相異なるので 3 か所への並べ方は順列で 3! = **6** 通りです。",
+          "**先頭が 0 の場合を除く必要はありません**——問われているのは数ではなく暗証番号なので、015 のように 0 で始まるものも有効です ✓。",
+          "したがって総数 = 3 × 6 = **18 組**、最悪の場合 **18 回** 試す必要があります。",
+          "検算：3 桁の暗証番号 1000 通りをすべて列挙し、3 数が互いに異なり和が 6 かを調べると、**該当はちょうど 18 組** ✓、順序を無視した組は {0,1,5}、{0,2,4}、{1,2,3} の 3 つ ✓ で手計算と完全に一致します。",
+          "**問題が「暗証番号」ではなく「3 桁の数」なら**、先頭は 0 にできません——0 を含む 2 組はそれぞれ 0 が先頭の 2 通りを除いて 6 − 2 = 4 通りとなり、総数は 4 + 4 + 6 = **14 組**になります。**「暗証番号」と「3 桁の数」という語の違いが答えを直接変える**ので、読み取りには注意が必要です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "18"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "最壞情況的試誤次數：等於符合條件的密碼總數；先枚舉數字組合再各乘以全排列，密碼允許前導 0",
+        "notes": "設計依據：詳解說明最壞情況次數等於候選總數的理由，並以最小值枚舉窮盡三組數字（含論證最小值 ≥ 2 時和必超過 6）；特別指出題目說的是「密碼」而非「三位數」故允許前導 0，並量化若改為三位數答案會變成 14。答案 18 已用 1000 種密碼的完整窮舉獨立驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（最壞情況的試誤次數）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "邏輯推理",
+        "topicCode": "logic",
+        "subtopic": "最壞情況的試誤次數",
+        "subtopicCode": "password_worst_case"
+      },
+      "reviewStatus": "ok"
     }
   ]
 }
