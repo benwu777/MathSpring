@@ -1444,6 +1444,1716 @@
         "subtopicCode": "unit_fraction_equation"
       },
       "reviewStatus": "ok"
+    },
+    {
+      "id": "number_theory_grade12_foundation_016",
+      "topic": "number_theory",
+      "subtopic": "pascal_odd_entries",
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "把楊輝三角（帕斯卡三角形）的第 0 列到第 15 列全部寫出來，其中第 n 列有 n + 1 個數。求這 16 列中，數值為奇數的項共有多少個。",
+        "zh-Hans": "把杨辉三角（帕斯卡三角形）的第 0 列到第 15 列全部写出来，其中第 n 列有 n + 1 个数。求这 16 列中，数值为奇数的项共有多少个。",
+        "en": "Write out rows 0 through 15 of Pascal's triangle, row n having n + 1 entries. How many of the entries in these 16 rows are odd?",
+        "ja": "パスカルの三角形の第 0 行から第 15 行までを書き出します（第 n 行は n + 1 個の数からなります）。この 16 行のうち、奇数である項は全部でいくつありますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 81 個。",
+        "zh-Hans": "答案是 81 个。",
+        "en": "The answer is 81.",
+        "ja": "答えは 81 個です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "**逐項算出所有數字再判斷奇偶會很費力，先找出每一列裡奇數個數的規律。**",
+          "**動手寫出前幾列的奇偶情形**（用 1 代表奇數、0 代表偶數）：",
+          "第 0 列：1 → **1 個奇數**。第 1 列：1, 1 → **2 個**。第 2 列：1, 2, 1 → **2 個**。第 3 列：1, 3, 3, 1 → **4 個**。",
+          "第 4 列：1, 4, 6, 4, 1 → **2 個**。第 5 列：1, 5, 10, 10, 5, 1 → **4 個**。第 6 列：1, 6, 15, 20, 15, 6, 1 → **4 個**。第 7 列：全部都是奇數 → **8 個**。",
+          "**把這些個數與列號的二進位並排看**：第 0 列（二進位 0）有 1 個、第 1 列（1）有 2 個、第 2 列（10）有 2 個、第 3 列（11）有 4 個、第 7 列（111）有 8 個。",
+          "**規律浮現了：第 n 列的奇數個數 = 2 的（n 的二進位中 1 的個數）次方。**例如 n = 7 = 111₂ 有三個 1，所以有 2³ = 8 個 ✓ 與上面吻合。",
+          "**接著把第 0 列到第 15 列全部加起來。**這 16 個列號恰好是二進位的 4 位數 0000 到 1111，**每一位都獨立地取 0 或 1**。",
+          "**分組計算**：二進位有 0 個 1 的列號有 1 個（即 0），各貢獻 2⁰ = 1，小計 **1**。",
+          "有 1 個 1 的列號有 4 個（1、2、4、8），各貢獻 2¹ = 2，小計 4 × 2 = **8**。有 2 個 1 的有 6 個，各貢獻 2² = 4，小計 6 × 4 = **24**。",
+          "有 3 個 1 的有 4 個，各貢獻 2³ = 8，小計 4 × 8 = **32**。有 4 個 1 的有 1 個（15），貢獻 2⁴ = **16**。",
+          "**總計** = 1 + 8 + 24 + 32 + 16 = **81**。",
+          "驗算：**用另一種方式重算。**上面的和其實是 (1 + 2)⁴ 的二項式展開——每一位二進位獨立地貢獻「1（該位為 0）」或「2（該位為 1）」，所以總和 = **3⁴ = 81** ✓ 完全相符。",
+          "程式實際建出 16 列楊輝三角並逐項檢查奇偶，**奇數項恰好 81 個** ✓ 與推理一致。",
+          "**注意這個總和不是「項數的一半」左右。**16 列共有 1 + 2 + ⋯ + 16 = **136** 項，而奇數只有 81 個，**偶數有 55 個**——**奇數明顯偏多**，因為每一列的兩端恆為 1（奇數），而且愈往下偶數才愈密集。"
+        ],
+        "zh-Hans": [
+          "**逐项算出所有数字再判断奇偶会很费力，先找出每一列里奇数个数的规律。**",
+          "**动手写出前几列的奇偶情形**（用 1 代表奇数、0 代表偶数）：",
+          "第 0 列：1 → **1 个奇数**。第 1 列：1, 1 → **2 个**。第 2 列：1, 2, 1 → **2 个**。第 3 列：1, 3, 3, 1 → **4 个**。",
+          "第 4 列：1, 4, 6, 4, 1 → **2 个**。第 5 列：1, 5, 10, 10, 5, 1 → **4 个**。第 6 列：1, 6, 15, 20, 15, 6, 1 → **4 个**。第 7 列：全部都是奇数 → **8 个**。",
+          "**把这些个数与列号的二进位并排看**：第 0 列（二进位 0）有 1 个、第 1 列（1）有 2 个、第 2 列（10）有 2 个、第 3 列（11）有 4 个、第 7 列（111）有 8 个。",
+          "**规律浮现了：第 n 列的奇数个数 = 2 的（n 的二进位中 1 的个数）次方。**例如 n = 7 = 111₂ 有三个 1，所以有 2³ = 8 个 ✓ 与上面吻合。",
+          "**接着把第 0 列到第 15 列全部加起来。**这 16 个列号恰好是二进位的 4 位数 0000 到 1111，**每一位都独立地取 0 或 1**。",
+          "**分组计算**：二进位有 0 个 1 的列号有 1 个（即 0），各贡献 2⁰ = 1，小计 **1**。",
+          "有 1 个 1 的列号有 4 个（1、2、4、8），各贡献 2¹ = 2，小计 4 × 2 = **8**。有 2 个 1 的有 6 个，各贡献 2² = 4，小计 6 × 4 = **24**。",
+          "有 3 个 1 的有 4 个，各贡献 2³ = 8，小计 4 × 8 = **32**。有 4 个 1 的有 1 个（15），贡献 2⁴ = **16**。",
+          "**总计** = 1 + 8 + 24 + 32 + 16 = **81**。",
+          "验算：**用另一种方式重算。**上面的和其实是 (1 + 2)⁴ 的二项式展开——每一位二进位独立地贡献「1（该位为 0）」或「2（该位为 1）」，所以总和 = **3⁴ = 81** ✓ 完全相符。",
+          "程序实际建出 16 列杨辉三角并逐项检查奇偶，**奇数项恰好 81 个** ✓ 与推理一致。",
+          "**注意这个总和不是「项数的一半」左右。**16 列共有 1 + 2 + ⋯ + 16 = **136** 项，而奇数只有 81 个，**偶数有 55 个**——**奇数明显偏多**，因为每一列的两端恒为 1（奇数），而且愈往下偶数才愈密集。"
+        ],
+        "en": [
+          "Computing every entry and testing its parity would be laborious; find the pattern in each row's count of odd entries first.",
+          "Write out the parities of the first few rows, using 1 for odd and 0 for even.",
+          "Row 0 is 1, giving 1 odd entry. Row 1 is 1, 1, giving 2. Row 2 is 1, 2, 1, giving 2. Row 3 is 1, 3, 3, 1, giving 4.",
+          "Row 4 is 1, 4, 6, 4, 1, giving 2. Row 5 is 1, 5, 10, 10, 5, 1, giving 4. Row 6 is 1, 6, 15, 20, 15, 6, 1, giving 4. Row 7 is odd throughout, giving 8.",
+          "Set these counts beside the binary form of the row number: row 0, binary 0, gives 1; row 1, binary 1, gives 2; row 2, binary 10, gives 2; row 3, binary 11, gives 4; row 7, binary 111, gives 8.",
+          "The pattern emerges: row n has 2 raised to the number of 1s in the binary form of n. For n = 7 = 111 in binary, three 1s give 2³ = 8, matching the count above.",
+          "Now sum over rows 0 to 15. These sixteen row numbers are exactly the 4-bit binary strings 0000 to 1111, each bit independently 0 or 1.",
+          "Group them: one row number has no 1s, namely 0, contributing 2⁰ = 1, for a subtotal of 1.",
+          "Four have a single 1, namely 1, 2, 4 and 8, each contributing 2¹ = 2, for 4 × 2 = 8. Six have two 1s, each contributing 2² = 4, for 6 × 4 = 24.",
+          "Four have three 1s, each contributing 2³ = 8, for 4 × 8 = 32. One has four 1s, namely 15, contributing 2⁴ = 16.",
+          "The total is 1 + 8 + 24 + 32 + 16 = 81.",
+          "Check another way: that sum is the binomial expansion of (1 + 2)⁴, since each binary digit independently contributes 1 when it is 0 and 2 when it is 1, giving 3⁴ = 81 exactly.",
+          "Building all 16 rows and testing each entry's parity gives exactly 81 odd entries, matching the reasoning.",
+          "Note the total is nowhere near half the entries. The 16 rows hold 1 + 2 + ⋯ + 16 = 136 entries, of which 81 are odd and 55 even — odd entries clearly predominate, since both ends of every row are 1, and even entries only grow dense further down."
+        ],
+        "ja": [
+          "**全項を計算して偶奇を調べるのは手間**なので、まず各行の奇数の個数の規則を探します。",
+          "**最初の数行の偶奇を書き出します**（奇数を 1、偶数を 0 で表す）：",
+          "第 0 行：1 → **奇数 1 個**。第 1 行：1, 1 → **2 個**。第 2 行：1, 2, 1 → **2 個**。第 3 行：1, 3, 3, 1 → **4 個**。",
+          "第 4 行：1, 4, 6, 4, 1 → **2 個**。第 5 行：1, 5, 10, 10, 5, 1 → **4 個**。第 6 行：1, 6, 15, 20, 15, 6, 1 → **4 個**。第 7 行：すべて奇数 → **8 個**。",
+          "**個数を行番号の 2 進表記と並べます**：第 0 行（2 進 0）は 1 個、第 1 行（1）は 2 個、第 2 行（10）は 2 個、第 3 行（11）は 4 個、第 7 行（111）は 8 個。",
+          "**規則が見えます：第 n 行の奇数の個数 = 2 の（n の 2 進表記における 1 の個数）乗。**n = 7 = 111₂ は 1 が 3 つなので 2³ = 8 個 ✓ と一致します。",
+          "**次に第 0 行から第 15 行までを合計**します。この 16 個の行番号は 2 進 4 桁の 0000〜1111 にちょうど対応し、**各桁が独立に 0 か 1** をとります。",
+          "**分類して計算**します：1 が 0 個の行番号は 1 個（0）で各 2⁰ = 1、小計 **1**。",
+          "1 が 1 個の行番号は 4 個（1、2、4、8）で各 2¹ = 2、小計 4 × 2 = **8**。1 が 2 個は 6 個で各 2² = 4、小計 6 × 4 = **24**。",
+          "1 が 3 個は 4 個で各 2³ = 8、小計 4 × 8 = **32**。1 が 4 個は 1 個（15）で 2⁴ = **16**。",
+          "**合計** = 1 + 8 + 24 + 32 + 16 = **81**。",
+          "検算：**別の方法で計算**します。この和は (1 + 2)⁴ の二項展開そのもので——各 2 進桁が独立に「1（その桁が 0）」か「2（その桁が 1）」を寄与するので、合計 = **3⁴ = 81** ✓ と完全に一致します。",
+          "実際に 16 行を構成して各項の偶奇を調べると、**奇数はちょうど 81 個** ✓ で推論と一致します。",
+          "**この合計は項数の半分程度ではありません。**16 行の項数は 1 + 2 + ⋯ + 16 = **136** で、奇数が 81、**偶数は 55**——**奇数が明らかに多い**のです。各行の両端が常に 1（奇数）であり、偶数が密になるのは下のほうだからです。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "81"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "楊輝三角中的奇數：第 n 列的奇數個數為 2 的（n 的二進位中 1 的個數）次方，前 16 列合計為 3⁴",
+        "notes": "設計依據：詳解由前八列的實際偶奇歸納出「與列號二進位中 1 的個數有關」的規律，再依 1 的個數分組累加；驗算指出該和恰為 (1+2)⁴ 的二項展開，並以程式實建三角形逐項檢查。末尾對照總項數 136 說明奇數偏多的原因。答案 81 已用分組累加、3⁴ 與程式窮舉三重驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（楊輝三角中的奇數）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "數論",
+        "topicCode": "number_theory",
+        "subtopic": "楊輝三角中的奇數",
+        "subtopicCode": "pascal_odd_entries"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "number_theory_grade12_foundation_017",
+      "topic": "number_theory",
+      "subtopic": "fibonacci_gcd_property",
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "費氏數列定義為 F₁ = 1、F₂ = 1，且從第三項起每一項都是前兩項之和（1, 1, 2, 3, 5, 8, 13, ⋯）。求 F₁₂ 與 F₁₈ 的最大公因數。",
+        "zh-Hans": "斐波那契数列定义为 F₁ = 1、F₂ = 1，且从第三项起每一项都是前两项之和（1, 1, 2, 3, 5, 8, 13, ⋯）。求 F₁₂ 与 F₁₈ 的最大公因数。",
+        "en": "The Fibonacci sequence is defined by F₁ = 1, F₂ = 1, with each later term the sum of the previous two: 1, 1, 2, 3, 5, 8, 13, and so on. Find the greatest common divisor of F₁₂ and F₁₈.",
+        "ja": "フィボナッチ数列を F₁ = 1、F₂ = 1、第 3 項以降は直前の 2 項の和と定めます（1, 1, 2, 3, 5, 8, 13, ⋯）。F₁₂ と F₁₈ の最大公約数を求めなさい。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 8。",
+        "zh-Hans": "答案是 8。",
+        "en": "The answer is 8.",
+        "ja": "答えは 8 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "**費氏數列有一條漂亮的性質：兩項的最大公因數，等於「項號的最大公因數」那一項。**",
+          "**寫成式子**：**gcd(Fₘ, Fₙ) = F₍gcd(m, n)₎**。",
+          "**先求項號的最大公因數。**12 = 2² × 3，18 = 2 × 3²，**共同的部分是 2 × 3 = 6**，所以 gcd(12, 18) = **6**。",
+          "**所以 gcd(F₁₂, F₁₈) = F₆。**",
+          "**列出費氏數列到第 6 項**：F₁ = 1、F₂ = 1、F₃ = 2、F₄ = 3、F₅ = 5、F₆ = **8**。",
+          "所以答案是 **8**。",
+          "驗算：**直接把兩個費氏數算出來核對。**繼續往下列：F₇ = 13、F₈ = 21、F₉ = 34、F₁₀ = 55、F₁₁ = 89、F₁₂ = **144**。",
+          "再往下：F₁₃ = 233、F₁₄ = 377、F₁₅ = 610、F₁₆ = 987、F₁₇ = 1597、F₁₈ = **2584**。",
+          "**用輾轉相除法求 gcd(144, 2584)**：2584 ÷ 144 = 17 餘 **136**；144 ÷ 136 = 1 餘 **8**；136 ÷ 8 = 17 餘 **0**。",
+          "**所以 gcd = 8** ✓ 與性質給出的答案完全相符。",
+          "**再用另一組數字檢驗這條性質。**gcd(F₆, F₉) 應該等於 F₍gcd(6,9)₎ = F₃ = **2**。實際上 F₆ = 8、F₉ = 34，而 gcd(8, 34) = **2** ✓ 相符。",
+          "**這條性質有一個好記的推論：Fₘ 整除 Fₙ 的充要條件是 m 整除 n。**例如 F₆ = 8 整除 F₁₂ = 144（144 ÷ 8 = 18 ✓），因為 6 整除 12。",
+          "**注意不要把性質誤記成「gcd(Fₘ, Fₙ) = gcd(m, n)」。**若那樣算會得到 gcd(12, 18) = 6，**但正確答案是 F₆ = 8 而不是 6** ✗——**最大公因數要再取一次費氏數，不是項號本身。**"
+        ],
+        "zh-Hans": [
+          "**斐波那契数列有一条漂亮的性质：两项的最大公约数，等于「项号的最大公约数」那一项。**",
+          "**写成式子**：**gcd(Fₘ, Fₙ) = F₍gcd(m, n)₎**。",
+          "**先求项号的最大公约数。**12 = 2² × 3，18 = 2 × 3²，**共同的部分是 2 × 3 = 6**，所以 gcd(12, 18) = **6**。",
+          "**所以 gcd(F₁₂, F₁₈) = F₆。**",
+          "**列出斐波那契数列到第 6 项**：F₁ = 1、F₂ = 1、F₃ = 2、F₄ = 3、F₅ = 5、F₆ = **8**。",
+          "所以答案是 **8**。",
+          "验算：**直接把两个斐波那契数算出来核对。**继续往下列：F₇ = 13、F₈ = 21、F₉ = 34、F₁₀ = 55、F₁₁ = 89、F₁₂ = **144**。",
+          "再往下：F₁₃ = 233、F₁₄ = 377、F₁₅ = 610、F₁₆ = 987、F₁₇ = 1597、F₁₈ = **2584**。",
+          "**用辗转相除法求 gcd(144, 2584)**：2584 ÷ 144 = 17 余 **136**；144 ÷ 136 = 1 余 **8**；136 ÷ 8 = 17 余 **0**。",
+          "**所以 gcd = 8** ✓ 与性质给出的答案完全相符。",
+          "**再用另一组数字检验这条性质。**gcd(F₆, F₉) 应该等于 F₍gcd(6,9)₎ = F₃ = **2**。实际上 F₆ = 8、F₉ = 34，而 gcd(8, 34) = **2** ✓ 相符。",
+          "**这条性质有一个好记的推论：Fₘ 整除 Fₙ 的充要条件是 m 整除 n。**例如 F₆ = 8 整除 F₁₂ = 144（144 ÷ 8 = 18 ✓），因为 6 整除 12。",
+          "**注意不要把性质误记成「gcd(Fₘ, Fₙ) = gcd(m, n)」。**若那样算会得到 gcd(12, 18) = 6，**但正确答案是 F₆ = 8 而不是 6** ✗——**最大公约数要再取一次斐波那契数，不是项号本身。**"
+        ],
+        "en": [
+          "The Fibonacci sequence has an elegant property: the greatest common divisor of two terms is the term indexed by the greatest common divisor of their indices.",
+          "In symbols: gcd(Fₘ, Fₙ) = F₍gcd(m, n)₎.",
+          "Find the gcd of the indices first. Since 12 = 2² × 3 and 18 = 2 × 3², their common part is 2 × 3 = 6, so gcd(12, 18) = 6.",
+          "So gcd(F₁₂, F₁₈) = F₆.",
+          "List the sequence to the sixth term: F₁ = 1, F₂ = 1, F₃ = 2, F₄ = 3, F₅ = 5 and F₆ = 8.",
+          "So the answer is 8.",
+          "Check by computing both Fibonacci numbers directly. Continuing: F₇ = 13, F₈ = 21, F₉ = 34, F₁₀ = 55, F₁₁ = 89 and F₁₂ = 144.",
+          "Further: F₁₃ = 233, F₁₄ = 377, F₁₅ = 610, F₁₆ = 987, F₁₇ = 1597 and F₁₈ = 2584.",
+          "By the Euclidean algorithm on 144 and 2584: 2584 ÷ 144 leaves remainder 136; 144 ÷ 136 leaves remainder 8; and 136 ÷ 8 leaves remainder 0.",
+          "So the gcd is 8, exactly as the property predicts.",
+          "Test the property on another pair: gcd(F₆, F₉) should equal F₍gcd(6,9)₎ = F₃ = 2. Indeed F₆ = 8 and F₉ = 34, whose gcd is 2.",
+          "The property has a memorable corollary: Fₘ divides Fₙ precisely when m divides n. For instance F₆ = 8 divides F₁₂ = 144, as 144 ÷ 8 = 18, because 6 divides 12.",
+          "Do not misremember the property as gcd(Fₘ, Fₙ) = gcd(m, n). That would give gcd(12, 18) = 6, whereas the correct answer is F₆ = 8, not 6 — one more Fibonacci step is required, the index itself is not the answer."
+        ],
+        "ja": [
+          "**フィボナッチ数列には美しい性質**があります：2 項の最大公約数は、**添字の最大公約数を添字にもつ項**に等しくなります。",
+          "**式で書くと**：**gcd(Fₘ, Fₙ) = F₍gcd(m, n)₎**。",
+          "**まず添字の最大公約数**を求めます。12 = 2² × 3、18 = 2 × 3² で**共通部分は 2 × 3 = 6**、よって gcd(12, 18) = **6**。",
+          "**したがって gcd(F₁₂, F₁₈) = F₆** です。",
+          "**第 6 項まで並べます**：F₁ = 1、F₂ = 1、F₃ = 2、F₄ = 3、F₅ = 5、F₆ = **8**。",
+          "したがって答えは **8** です。",
+          "検算：**2 つのフィボナッチ数を直接求めて確認**します。続けると F₇ = 13、F₈ = 21、F₉ = 34、F₁₀ = 55、F₁₁ = 89、F₁₂ = **144**。",
+          "さらに F₁₃ = 233、F₁₄ = 377、F₁₅ = 610、F₁₆ = 987、F₁₇ = 1597、F₁₈ = **2584**。",
+          "**互除法で gcd(144, 2584)**：2584 ÷ 144 は余り **136**、144 ÷ 136 は余り **8**、136 ÷ 8 は余り **0**。",
+          "**したがって gcd = 8** ✓ で性質による答えと完全に一致します。",
+          "**別の組でも性質を検証**します。gcd(F₆, F₉) は F₍gcd(6,9)₎ = F₃ = **2** のはず。実際 F₆ = 8、F₉ = 34 で gcd(8, 34) = **2** ✓ 一致します。",
+          "**覚えやすい系**があります：**Fₘ が Fₙ を割り切るのは m が n を割り切るときに限ります。**たとえば F₆ = 8 は F₁₂ = 144 を割り切り（144 ÷ 8 = 18 ✓）、これは 6 が 12 を割り切るからです。",
+          "**性質を「gcd(Fₘ, Fₙ) = gcd(m, n)」と誤記しないこと。**それでは gcd(12, 18) = 6 となりますが、**正解は F₆ = 8 であって 6 ではありません** ✗——**もう一度フィボナッチ数をとる必要があり、添字そのものではありません。**"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "8"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "費氏數的最大公因數：gcd(Fₘ, Fₙ) = F₍gcd(m,n)₎，故答案為 F₆ 而非 gcd(12, 18) 本身",
+        "notes": "設計依據：詳解先套用性質求得 F₆，再把 F₁₂ = 144 與 F₁₈ = 2584 實際算出並用輾轉相除法獨立驗證；另以 gcd(F₆, F₉) = F₃ = 2 再次檢驗該性質，並給出「Fₘ | Fₙ 若且唯若 m | n」的推論。末尾明確指出誤記成 gcd(m, n) 會得到 6 而非 8。答案 8 已用性質與輾轉相除法雙向驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（費氏數的最大公因數）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "數論",
+        "topicCode": "number_theory",
+        "subtopic": "費氏數的最大公因數",
+        "subtopicCode": "fibonacci_gcd_property"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "number_theory_grade12_foundation_018",
+      "topic": "number_theory",
+      "subtopic": "pell_equation_smallest",
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "求方程式 x² − 2y² = 1 的最小正整數解（也就是 x 與 y 都是正整數，且 x 盡可能小的那一組）。設該解為 (x, y)，求 x + y 的值。",
+        "zh-Hans": "求方程式 x² − 2y² = 1 的最小正整数解（也就是 x 与 y 都是正整数，且 x 尽可能小的那一组）。设该解为 (x, y)，求 x + y 的值。",
+        "en": "Find the smallest positive integer solution of x² − 2y² = 1, that is the solution in positive integers with x as small as possible. If it is (x, y), find x + y.",
+        "ja": "方程式 x² − 2y² = 1 の最小の正整数解（x、y がともに正の整数で x が最小のもの）を求めます。その解を (x, y) とするとき、x + y の値を求めなさい。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 5。",
+        "zh-Hans": "答案是 5。",
+        "en": "The answer is 5.",
+        "ja": "答えは 5 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "**這是一個二元二次的不定方程，變數有兩個而式子只有一條，所以要靠整數的限制來求解。**",
+          "**把式子整理成便於搜尋的形式**：x² = 2y² + 1。**所以只要逐一代入 y = 1, 2, 3, ⋯，檢查 2y² + 1 是不是完全平方數即可。**",
+          "**y = 1**：2 × 1 + 1 = **3**。3 不是完全平方數（1² = 1、2² = 4）✗。",
+          "**y = 2**：2 × 4 + 1 = **9** = 3² ✓ **是完全平方數！**所以 x = **3**。",
+          "**找到解 (x, y) = (3, 2)。**由於 y 是從 1 開始逐一檢查的，而 y = 1 已排除，**這就是最小的正整數解**。",
+          "**求和**：x + y = 3 + 2 = **5**。",
+          "驗算：**代回原式檢查。**3² − 2 × 2² = 9 − 2 × 4 = 9 − 8 = **1** ✓ 確實滿足方程式。",
+          "**再確認沒有更小的解。**正整數解要求 y ≥ 1，而 y = 1 時 x² = 3 無整數解 ✗，**所以 (3, 2) 確實是最小的** ✓。",
+          "**繼續往下找幾組解，看看結構。**y = 3：2 × 9 + 1 = 19 ✗。y = 4：33 ✗。y = 5：51 ✗。y = 6：73 ✗。**y = 12**：2 × 144 + 1 = **289** = 17² ✓ 得到第二組解 (17, 12)。",
+          "**注意解不是零星出現的，而是有規律的。**由 (3, 2) 可以生成下一組：**新的 x = 3 × 3 + 2 × 2 × 2 = 17、新的 y = 3 × 2 + 2 × 3 = 12** ✓ 恰好就是上面找到的 (17, 12)。",
+          "**這類方程（x² − Dy² = 1，D 為非平方的正整數）稱為佩爾方程，永遠有無窮多組正整數解**，而且全部都可以由最小的那一組反覆生成。",
+          "**注意方程式右邊是 1 而不是 −1。**若改成 x² − 2y² = **−1**，最小正整數解是 (1, 1)（1 − 2 = −1 ✓），x + y = 2，**答案完全不同**——**這兩個方程的解集互不相同，不可混為一談。**"
+        ],
+        "zh-Hans": [
+          "**这是一个二元二次的不定方程，变数有两个而式子只有一条，所以要靠整数的限制来求解。**",
+          "**把式子整理成便于搜寻的形式**：x² = 2y² + 1。**所以只要逐一代入 y = 1, 2, 3, ⋯，检查 2y² + 1 是不是完全平方数即可。**",
+          "**y = 1**：2 × 1 + 1 = **3**。3 不是完全平方数（1² = 1、2² = 4）✗。",
+          "**y = 2**：2 × 4 + 1 = **9** = 3² ✓ **是完全平方数！**所以 x = **3**。",
+          "**找到解 (x, y) = (3, 2)。**由于 y 是从 1 开始逐一检查的，而 y = 1 已排除，**这就是最小的正整数解**。",
+          "**求和**：x + y = 3 + 2 = **5**。",
+          "验算：**代回原式检查。**3² − 2 × 2² = 9 − 2 × 4 = 9 − 8 = **1** ✓ 确实满足方程式。",
+          "**再确认没有更小的解。**正整数解要求 y ≥ 1，而 y = 1 时 x² = 3 无整数解 ✗，**所以 (3, 2) 确实是最小的** ✓。",
+          "**继续往下找几组解，看看结构。**y = 3：2 × 9 + 1 = 19 ✗。y = 4：33 ✗。y = 5：51 ✗。y = 6：73 ✗。**y = 12**：2 × 144 + 1 = **289** = 17² ✓ 得到第二组解 (17, 12)。",
+          "**注意解不是零星出现的，而是有规律的。**由 (3, 2) 可以生成下一组：**新的 x = 3 × 3 + 2 × 2 × 2 = 17、新的 y = 3 × 2 + 2 × 3 = 12** ✓ 恰好就是上面找到的 (17, 12)。",
+          "**这类方程（x² − Dy² = 1，D 为非平方的正整数）称为佩尔方程，永远有无穷多组正整数解**，而且全部都可以由最小的那一组反覆生成。",
+          "**注意方程式右边是 1 而不是 −1。**若改成 x² − 2y² = **−1**，最小正整数解是 (1, 1)（1 − 2 = −1 ✓），x + y = 2，**答案完全不同**——**这两个方程的解集互不相同，不可混为一谈。**"
+        ],
+        "en": [
+          "This is a quadratic equation in two unknowns with only one equation, so integrality must do the work.",
+          "Rearrange into a searchable form: x² = 2y² + 1. It suffices to try y = 1, 2, 3 and so on, testing whether 2y² + 1 is a perfect square.",
+          "For y = 1: 2 × 1 + 1 = 3, which is not a perfect square, lying between 1² = 1 and 2² = 4.",
+          "For y = 2: 2 × 4 + 1 = 9 = 3², a perfect square. So x = 3.",
+          "The solution (x, y) = (3, 2) is found. Since y was tested upward from 1 and y = 1 failed, this is the smallest positive solution.",
+          "Their sum is x + y = 3 + 2 = 5.",
+          "Check by substituting: 3² − 2 × 2² = 9 − 8 = 1, satisfying the equation.",
+          "Confirm nothing smaller exists: positive solutions need y ≥ 1, and y = 1 gives x² = 3 with no integer solution, so (3, 2) is indeed minimal.",
+          "Continue a little to see the structure. For y = 3: 19, not square. For y = 4: 33. For y = 5: 51. For y = 6: 73. But for y = 12: 2 × 144 + 1 = 289 = 17², giving a second solution (17, 12).",
+          "The solutions are not scattered but generated systematically. From (3, 2) the next follows: a new x of 3 × 3 + 2 × 2 × 2 = 17 and a new y of 3 × 2 + 2 × 3 = 12 — exactly the pair just found.",
+          "Equations of this form, x² − Dy² = 1 with D a non-square positive integer, are called Pell equations; they always have infinitely many positive solutions, all generated repeatedly from the smallest.",
+          "Note the right side is 1, not −1. Changing it to x² − 2y² = −1 gives smallest solution (1, 1), since 1 − 2 = −1, and a sum of 2 — a different answer entirely. The two equations have distinct solution sets and must not be conflated."
+        ],
+        "ja": [
+          "**2 変数の 2 次不定方程式**で、式が 1 本しかないため、整数であるという条件で解きます。",
+          "**探索しやすい形に整理**します：x² = 2y² + 1。**y = 1, 2, 3, ⋯ と代入し、2y² + 1 が平方数かを調べれば十分**です。",
+          "**y = 1**：2 × 1 + 1 = **3**。3 は平方数ではありません（1² = 1、2² = 4）✗。",
+          "**y = 2**：2 × 4 + 1 = **9** = 3² ✓ **平方数です！**よって x = **3**。",
+          "**解 (x, y) = (3, 2) が得られました。**y を 1 から順に調べ y = 1 は除外されたので、**これが最小の正整数解**です。",
+          "**和**は x + y = 3 + 2 = **5**。",
+          "検算：**もとの式に戻します。**3² − 2 × 2² = 9 − 8 = **1** ✓ 確かに満たします。",
+          "**より小さい解がないことも確認**します。正整数解には y ≥ 1 が必要で、y = 1 では x² = 3 に整数解がなく ✗、**(3, 2) が最小** ✓ です。",
+          "**構造を見るためもう少し先も調べます。**y = 3 は 19 ✗、y = 4 は 33 ✗、y = 5 は 51 ✗、y = 6 は 73 ✗。**y = 12** では 2 × 144 + 1 = **289** = 17² ✓ で第 2 の解 (17, 12) が得られます。",
+          "**解は散発的ではなく規則的**です。(3, 2) から次が生成できます：**新しい x = 3 × 3 + 2 × 2 × 2 = 17、新しい y = 3 × 2 + 2 × 3 = 12** ✓ とちょうど上で見つけた組になります。",
+          "**この形の方程式（x² − Dy² = 1、D は平方でない正整数）はペル方程式と呼ばれ、正整数解が常に無限に存在**し、そのすべてが最小解から繰り返し生成できます。",
+          "**右辺が 1 であって −1 でないことに注意**します。x² − 2y² = **−1** なら最小正整数解は (1, 1)（1 − 2 = −1 ✓）で和は 2 となり、**答えがまったく異なります**——**2 つの方程式の解集合は別物であり、混同できません。**"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "5"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "佩爾方程的最小解：逐一檢查 2y² + 1 是否為完全平方，y = 2 時得 x = 3",
+        "notes": "設計依據：詳解以「x² = 2y² + 1 是否為完全平方」逐一檢查求得最小解並確認 y = 1 不可行，再代回驗證；另找出第二組解 (17, 12) 並示範由最小解生成下一組的遞推，說明佩爾方程解的無窮性。末尾以右邊改為 −1 的情形（最小解 (1,1)）說明兩者解集不同。答案 5 已用逐一搜尋與代回檢查驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（佩爾方程的最小解）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "數論",
+        "topicCode": "number_theory",
+        "subtopic": "佩爾方程的最小解",
+        "subtopicCode": "pell_equation_smallest"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "number_theory_grade12_foundation_019",
+      "topic": "number_theory",
+      "subtopic": "fermat_pseudoprime",
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "費馬小定理說：若 p 是質數，則對所有不被 p 整除的整數 a 都有 a^(p−1) ≡ 1 (mod p)。有人想用它的逆向來檢驗質數，但這個檢驗會被某些合數騙過。求最小的合數 n，使得對**所有**與 n 互質的正整數 a 都滿足 a^(n−1) ≡ 1 (mod n)。",
+        "zh-Hans": "费马小定理说：若 p 是质数，则对所有不被 p 整除的整数 a 都有 a^(p−1) ≡ 1 (mod p)。有人想用它的逆向来检验质数，但这个检验会被某些合数骗过。求最小的合数 n，使得对**所有**与 n 互质的正整数 a 都满足 a^(n−1) ≡ 1 (mod n)。",
+        "en": "Fermat's little theorem states that if p is prime then a^(p−1) ≡ 1 (mod p) for every integer a not divisible by p. Using its converse as a primality test fails, because certain composites pass it. Find the smallest composite n such that a^(n−1) ≡ 1 (mod n) for every positive integer a coprime to n.",
+        "ja": "フェルマーの小定理は、p が素数なら p で割り切れないすべての整数 a について a^(p−1) ≡ 1 (mod p) が成り立つと述べます。その逆を素数判定に使うと、ある種の合成数に欺かれます。n と互いに素な**すべて**の正の整数 a について a^(n−1) ≡ 1 (mod n) が成り立つような、最小の合成数 n を求めなさい。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 561。",
+        "zh-Hans": "答案是 561。",
+        "en": "The answer is 561.",
+        "ja": "答えは 561 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "**要找的是「對所有互質的底數都通過費馬檢驗」的合數——注意是所有，不是某一個。**",
+          "**先看幾個小合數會不會通過。**n = 4：與 4 互質的有 1、3。3³ = 27 = 6 × 4 + **3** ≢ 1 (mod 4) ✗ **被 a = 3 揭穿**。",
+          "**n = 15**：與 15 互質的有 1、2、4、7、8、11、13、14。取 a = 2：2¹⁴ = 16384 = 1092 × 15 + **4** ≢ 1 ✗ **被揭穿**。",
+          "**這說明大多數合數很容易被抓到**——隨便找個底數就露餡了。**要通過檢驗，n 必須有非常特別的結構。**",
+          "**關鍵的判準**：合數 n 會通過檢驗，**若且唯若 n 是相異質數的乘積（沒有平方因子），而且對它的每一個質因數 p，(p − 1) 都整除 (n − 1)**。",
+          "**依這個判準來找。**先試三個相異質數的乘積，因為兩個質數的情形可以證明不可能。",
+          "**試 n = 561。先分解**：561 = 3 × 187 = 3 × 11 × 17 ✓ **三個相異質數，沒有重複**，第一個條件成立。",
+          "**再檢查第二個條件。**n − 1 = 561 − 1 = **560**。",
+          "**質因數 3**：p − 1 = 2，而 560 ÷ 2 = **280** ✓ 整除。",
+          "**質因數 11**：p − 1 = 10，而 560 ÷ 10 = **56** ✓ 整除。",
+          "**質因數 17**：p − 1 = 16，而 560 ÷ 16 = **35** ✓ 整除。",
+          "**三個條件全部成立，所以 561 會通過檢驗** ✓ 而它是合數。",
+          "驗算：程式對 561 檢查每一個與它互質的 a（共 φ(561) = 2 × 10 × 16 = 320 個），**逐一計算 a⁵⁶⁰ mod 561，結果全部等於 1** ✓ 確認 561 確實騙過了檢驗。",
+          "**再確認 561 之下沒有更小的。**程式對 3 到 559 之間的每個奇合數做同樣的全底數檢查，**沒有任何一個通過** ✗ **所以 561 是最小的** ✓。接下來的兩個是 **1105 與 1729**。",
+          "**注意「對所有 a 通過」與「對某個 a 通過」差別極大。**例如 341 = 11 × 31 在 a = 2 時通過（2³⁴⁰ ≡ 1 mod 341），但取 a = 3 就失敗 ✗ **所以 341 不算**——**本題要求的是無一例外，這正是它稀有的原因。**"
+        ],
+        "zh-Hans": [
+          "**要找的是「对所有互质的底数都通过费马检验」的合数——注意是所有，不是某一个。**",
+          "**先看几个小合数会不会通过。**n = 4：与 4 互质的有 1、3。3³ = 27 = 6 × 4 + **3** ≢ 1 (mod 4) ✗ **被 a = 3 揭穿**。",
+          "**n = 15**：与 15 互质的有 1、2、4、7、8、11、13、14。取 a = 2：2¹⁴ = 16384 = 1092 × 15 + **4** ≢ 1 ✗ **被揭穿**。",
+          "**这说明大多数合数很容易被抓到**——随便找个底数就露馅了。**要通过检验，n 必须有非常特别的结构。**",
+          "**关键的判准**：合数 n 会通过检验，**当且仅当 n 是相异质数的乘积（没有平方因子），而且对它的每一个质因数 p，(p − 1) 都整除 (n − 1)**。",
+          "**依这个判准来找。**先试三个相异质数的乘积，因为两个质数的情形可以证明不可能。",
+          "**试 n = 561。先分解**：561 = 3 × 187 = 3 × 11 × 17 ✓ **三个相异质数，没有重复**，第一个条件成立。",
+          "**再检查第二个条件。**n − 1 = 561 − 1 = **560**。",
+          "**质因数 3**：p − 1 = 2，而 560 ÷ 2 = **280** ✓ 整除。",
+          "**质因数 11**：p − 1 = 10，而 560 ÷ 10 = **56** ✓ 整除。",
+          "**质因数 17**：p − 1 = 16，而 560 ÷ 16 = **35** ✓ 整除。",
+          "**三个条件全部成立，所以 561 会通过检验** ✓ 而它是合数。",
+          "验算：程序对 561 检查每一个与它互质的 a（共 φ(561) = 2 × 10 × 16 = 320 个），**逐一计算 a⁵⁶⁰ mod 561，结果全部等于 1** ✓ 确认 561 确实骗过了检验。",
+          "**再确认 561 之下没有更小的。**程序对 3 到 559 之间的每个奇合数做同样的全底数检查，**没有任何一个通过** ✗ **所以 561 是最小的** ✓。接下来的两个是 **1105 与 1729**。",
+          "**注意「对所有 a 通过」与「对某个 a 通过」差别极大。**例如 341 = 11 × 31 在 a = 2 时通过（2³⁴⁰ ≡ 1 mod 341），但取 a = 3 就失败 ✗ **所以 341 不算**——**本题要求的是无一例外，这正是它稀有的原因。**"
+        ],
+        "en": [
+          "The target is a composite passing Fermat's test for every coprime base — every one, not merely some.",
+          "Test a few small composites. For n = 4, the coprime residues are 1 and 3, and 3³ = 27 = 6 × 4 + 3, which is not 1 modulo 4, so a = 3 exposes it.",
+          "For n = 15, the coprime residues are 1, 2, 4, 7, 8, 11, 13 and 14. Taking a = 2, we get 2¹⁴ = 16384 = 1092 × 15 + 4, not 1, so it is exposed.",
+          "Most composites are caught easily — almost any base betrays them. To pass, n must have a very special structure.",
+          "The key criterion: a composite n passes precisely when n is a product of distinct primes, with no square factor, and (p − 1) divides (n − 1) for every prime factor p of n.",
+          "Search by that criterion, starting with products of three distinct primes, since two primes can be shown impossible.",
+          "Try n = 561, factoring it first: 561 = 3 × 187 = 3 × 11 × 17, three distinct primes with no repetition, so the first condition holds.",
+          "Check the second condition, with n − 1 = 561 − 1 = 560.",
+          "For the prime factor 3: p − 1 = 2, and 560 ÷ 2 = 280, so it divides.",
+          "For 11: p − 1 = 10, and 560 ÷ 10 = 56, so it divides.",
+          "For 17: p − 1 = 16, and 560 ÷ 16 = 35, so it divides.",
+          "All three conditions hold, so 561 passes the test — while being composite.",
+          "Check: testing every a coprime to 561, all φ(561) = 2 × 10 × 16 = 320 of them, and computing a⁵⁶⁰ modulo 561 gives 1 in every case, confirming that 561 does fool the test.",
+          "Confirm nothing smaller works: running the same all-bases check on every odd composite from 3 to 559 finds none that passes, so 561 is the smallest. The next two are 1105 and 1729.",
+          "Note the vast difference between passing for all a and passing for some a. For instance 341 = 11 × 31 passes at a = 2, since 2³⁴⁰ ≡ 1 modulo 341, but fails at a = 3, so 341 does not qualify — this problem demands no exceptions at all, which is exactly why such numbers are rare."
+        ],
+        "ja": [
+          "**求めるのは「互いに素なすべての底でフェルマー検定を通る」合成数**です——ある 1 つではなく、すべてです。",
+          "**小さい合成数を試します。**n = 4：4 と互いに素なのは 1、3。3³ = 27 = 6 × 4 + **3** ≢ 1 (mod 4) ✗ で **a = 3 に見破られます**。",
+          "**n = 15**：互いに素なのは 1、2、4、7、8、11、13、14。a = 2 では 2¹⁴ = 16384 = 1092 × 15 + **4** ≢ 1 ✗ で**見破られます**。",
+          "**大半の合成数は容易に捕まります**——適当な底ですぐ露見します。**検定を通るには、n は非常に特別な構造をもつ必要**があります。",
+          "**鍵となる判定条件**：合成数 n が検定を通るのは、**n が相異なる素数の積（平方因子をもたない）であり、かつ n のどの素因数 p についても (p − 1) が (n − 1) を割り切る**とき、かつそのときに限ります。",
+          "**この条件で探します。**素数 2 個の場合は不可能と示せるので、相異なる素数 3 個の積から試します。",
+          "**n = 561 を試します。まず分解**：561 = 3 × 187 = 3 × 11 × 17 ✓ **相異なる素数 3 個で重複なし**、第 1 条件を満たします。",
+          "**第 2 条件を確認**します。n − 1 = 561 − 1 = **560**。",
+          "**素因数 3**：p − 1 = 2 で 560 ÷ 2 = **280** ✓ 割り切れます。",
+          "**素因数 11**：p − 1 = 10 で 560 ÷ 10 = **56** ✓ 割り切れます。",
+          "**素因数 17**：p − 1 = 16 で 560 ÷ 16 = **35** ✓ 割り切れます。",
+          "**3 条件すべてが成立するので 561 は検定を通り** ✓、しかも合成数です。",
+          "検算：561 と互いに素なすべての a（φ(561) = 2 × 10 × 16 = 320 個）について a⁵⁶⁰ mod 561 を計算すると、**すべて 1** ✓ となり、561 が確かに検定を欺くと確認できます。",
+          "**561 未満にないことも確認**します。3〜559 の各奇合成数に同じ全底検査を行うと、**通るものは 1 つもなく** ✗、**561 が最小** ✓ です。次の 2 つは **1105 と 1729** です。",
+          "**「すべての a で通る」と「ある a で通る」は大きく異なります。**たとえば 341 = 11 × 31 は a = 2 で通りますが（2³⁴⁰ ≡ 1 mod 341）、a = 3 では失敗 ✗ し **341 は該当しません**——**例外が 1 つもないことを要求するからこそ、この種の数は稀なのです。**"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "561"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "騙過質數檢驗的合數：須為無平方因子的相異質數乘積且每個 p − 1 皆整除 n − 1，最小者為 3 × 11 × 17",
+        "notes": "設計依據：詳解先以 n = 4、15 示範一般合數如何被單一底數揭穿，凸顯「對所有底數皆通過」的稀有性；再給出判準並逐一驗證 561 的三個質因數皆滿足 p − 1 | 560。驗算對全部 320 個互質底數計算冪次，並確認 559 以下無解。末尾以 341（僅在 a = 2 通過）說明「某個 a」與「所有 a」的差別。答案 561 已用判準與全底數窮舉雙向驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（騙過質數檢驗的合數）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "數論",
+        "topicCode": "number_theory",
+        "subtopic": "騙過質數檢驗的合數",
+        "subtopicCode": "fermat_pseudoprime"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "number_theory_grade12_foundation_020",
+      "topic": "number_theory",
+      "subtopic": "totient_divisor_sum",
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "對正整數 n，用 φ(n) 表示 1 到 n 之中與 n 互質的正整數個數（例如 φ(6) = 2，因為只有 1 與 5 與 6 互質）。求 36 的所有正因數 d 所對應的 φ(d) 之總和。",
+        "zh-Hans": "对正整数 n，用 φ(n) 表示 1 到 n 之中与 n 互质的正整数个数（例如 φ(6) = 2，因为只有 1 与 5 与 6 互质）。求 36 的所有正因数 d 所对应的 φ(d) 之总和。",
+        "en": "For a positive integer n, let φ(n) be the count of integers from 1 to n coprime to n — so φ(6) = 2, only 1 and 5 being coprime to 6. Find the sum of φ(d) over all positive divisors d of 36.",
+        "ja": "正の整数 n に対し、φ(n) を 1 以上 n 以下で n と互いに素な整数の個数とします（たとえば φ(6) = 2、6 と互いに素なのは 1 と 5 だけ）。36 のすべての正の約数 d について φ(d) を足し合わせた値を求めなさい。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 36。",
+        "zh-Hans": "答案是 36。",
+        "en": "The answer is 36.",
+        "ja": "答えは 36 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "**先把 36 的所有正因數列出來。**36 = 2² × 3²，**因數個數 = (2 + 1) × (2 + 1) = 9 個**。",
+          "**九個因數是**：1、2、3、4、6、9、12、18、36。",
+          "**接著逐一算出每個因數的 φ 值。**",
+          "**φ(1) = 1**（規定 1 與自己互質）。**φ(2) = 1**（只有 1）。**φ(3) = 2**（1 與 2）。**φ(4) = 2**（1 與 3）。",
+          "**φ(6) = 2**（1 與 5）。**φ(9) = 6**（1、2、4、5、7、8——排除 3 的倍數 3、6、9）。",
+          "**φ(12) = 4**（1、5、7、11——與 12 = 2² × 3 互質者需既非偶數也非 3 的倍數）。",
+          "**φ(18) = 6**（1、5、7、11、13、17）。**φ(36) = 12**（用公式：36 × (1 − 1/2) × (1 − 1/3) = 36 × (1/2) × (2/3) = **12**）。",
+          "**把九個值加起來**：1 + 1 + 2 + 2 + 2 + 6 + 4 + 6 + 12。",
+          "**逐步累加**：1 + 1 = 2；+2 = 4；+2 = 6；+2 = 8；+6 = 14；+4 = 18；+6 = 24；+12 = **36**。",
+          "所以總和是 **36**。",
+          "驗算：**這個結果不是巧合——總和恰好等於 n 本身。**理由如下：把 1 到 36 的每個數 k，依 gcd(k, 36) 的值分類。",
+          "**若 gcd(k, 36) = 36/d，則 k 是 (36/d) 的倍數且 k/(36/d) 與 d 互質**，這樣的 k 恰有 **φ(d)** 個。**每個 k 恰好落入一類**，所以 Σφ(d) 把 1 到 36 全部數了一遍 = **36** ✓。",
+          "**再用另一個數核對這條恆等式。**取 n = 12，因數為 1、2、3、4、6、12，φ 值依序是 1、1、2、2、2、4，總和 = 1 + 1 + 2 + 2 + 2 + 4 = **12** ✓ 同樣等於 n。",
+          "**注意這條恆等式對每一個正整數都成立，與 n 是否為質數、是否為平方數都無關。**所以只要看到「Σ_{d|n} φ(d)」，答案立刻就是 n 本身——**本題若不知道這條恆等式，就得老實算九個 φ 值；知道了則可以一步寫出 36。**"
+        ],
+        "zh-Hans": [
+          "**先把 36 的所有正因数列出来。**36 = 2² × 3²，**因数个数 = (2 + 1) × (2 + 1) = 9 个**。",
+          "**九个因数是**：1、2、3、4、6、9、12、18、36。",
+          "**接着逐一算出每个因数的 φ 值。**",
+          "**φ(1) = 1**（规定 1 与自己互质）。**φ(2) = 1**（只有 1）。**φ(3) = 2**（1 与 2）。**φ(4) = 2**（1 与 3）。",
+          "**φ(6) = 2**（1 与 5）。**φ(9) = 6**（1、2、4、5、7、8——排除 3 的倍数 3、6、9）。",
+          "**φ(12) = 4**（1、5、7、11——与 12 = 2² × 3 互质者需既非偶数也非 3 的倍数）。",
+          "**φ(18) = 6**（1、5、7、11、13、17）。**φ(36) = 12**（用公式：36 × (1 − 1/2) × (1 − 1/3) = 36 × (1/2) × (2/3) = **12**）。",
+          "**把九个值加起来**：1 + 1 + 2 + 2 + 2 + 6 + 4 + 6 + 12。",
+          "**逐步累加**：1 + 1 = 2；+2 = 4；+2 = 6；+2 = 8；+6 = 14；+4 = 18；+6 = 24；+12 = **36**。",
+          "所以总和是 **36**。",
+          "验算：**这个结果不是巧合——总和恰好等于 n 本身。**理由如下：把 1 到 36 的每个数 k，依 gcd(k, 36) 的值分类。",
+          "**若 gcd(k, 36) = 36/d，则 k 是 (36/d) 的倍数且 k/(36/d) 与 d 互质**，这样的 k 恰有 **φ(d)** 个。**每个 k 恰好落入一类**，所以 Σφ(d) 把 1 到 36 全部数了一遍 = **36** ✓。",
+          "**再用另一个数核对这条恒等式。**取 n = 12，因数为 1、2、3、4、6、12，φ 值依序是 1、1、2、2、2、4，总和 = 1 + 1 + 2 + 2 + 2 + 4 = **12** ✓ 同样等于 n。",
+          "**注意这条恒等式对每一个正整数都成立，与 n 是否为质数、是否为平方数都无关。**所以只要看到「Σ_{d|n} φ(d)」，答案立刻就是 n 本身——**本题若不知道这条恒等式，就得老实算九个 φ 值；知道了则可以一步写出 36。**"
+        ],
+        "en": [
+          "List all positive divisors of 36 first. Since 36 = 2² × 3², the number of divisors is (2 + 1) × (2 + 1) = 9.",
+          "The nine divisors are 1, 2, 3, 4, 6, 9, 12, 18 and 36.",
+          "Now compute φ for each.",
+          "φ(1) = 1, by the convention that 1 is coprime to itself. φ(2) = 1, only 1 qualifying. φ(3) = 2, namely 1 and 2. φ(4) = 2, namely 1 and 3.",
+          "φ(6) = 2, namely 1 and 5. φ(9) = 6, namely 1, 2, 4, 5, 7 and 8, excluding the multiples of 3.",
+          "φ(12) = 4, namely 1, 5, 7 and 11, since coprimality to 12 = 2² × 3 forbids both even numbers and multiples of 3.",
+          "φ(18) = 6, namely 1, 5, 7, 11, 13 and 17. And φ(36) = 12, by the formula 36 × (1 − 1/2) × (1 − 1/3) = 36 × (1/2) × (2/3) = 12.",
+          "Add the nine values: 1 + 1 + 2 + 2 + 2 + 6 + 4 + 6 + 12.",
+          "Accumulating: 1 + 1 = 2; +2 = 4; +2 = 6; +2 = 8; +6 = 14; +4 = 18; +6 = 24; +12 = 36.",
+          "So the sum is 36.",
+          "Check: this is no coincidence — the sum always equals n itself. Here is why. Classify each k from 1 to 36 by the value of gcd(k, 36).",
+          "If gcd(k, 36) = 36/d, then k is a multiple of 36/d with k/(36/d) coprime to d, and there are exactly φ(d) such k. Every k falls into exactly one class, so the sum of φ(d) counts 1 through 36 once each, giving 36.",
+          "Test the identity on another number: for n = 12 the divisors are 1, 2, 3, 4, 6 and 12 with φ values 1, 1, 2, 2, 2 and 4, summing to 12 — again equal to n.",
+          "The identity holds for every positive integer, regardless of whether n is prime or a perfect square. So seeing a sum of φ(d) over the divisors of n, the answer is immediately n. Without knowing the identity this problem requires computing nine φ values honestly; with it, 36 follows in one step."
+        ],
+        "ja": [
+          "**まず 36 の正の約数を列挙**します。36 = 2² × 3² なので**約数の個数 = (2 + 1) × (2 + 1) = 9 個**です。",
+          "**9 個の約数**は 1、2、3、4、6、9、12、18、36。",
+          "**次に各約数の φ の値**を求めます。",
+          "**φ(1) = 1**（1 は自分自身と互いに素と約束）。**φ(2) = 1**（1 のみ）。**φ(3) = 2**（1 と 2）。**φ(4) = 2**（1 と 3）。",
+          "**φ(6) = 2**（1 と 5）。**φ(9) = 6**（1、2、4、5、7、8——3 の倍数を除く）。",
+          "**φ(12) = 4**（1、5、7、11——12 = 2² × 3 と互いに素には偶数でも 3 の倍数でもないことが必要）。",
+          "**φ(18) = 6**（1、5、7、11、13、17）。**φ(36) = 12**（公式より 36 × (1 − 1/2) × (1 − 1/3) = **12**）。",
+          "**9 個を足します**：1 + 1 + 2 + 2 + 2 + 6 + 4 + 6 + 12。",
+          "**順に累加**：1 + 1 = 2、+2 = 4、+2 = 6、+2 = 8、+6 = 14、+4 = 18、+6 = 24、+12 = **36**。",
+          "したがって総和は **36** です。",
+          "検算：**偶然ではなく、総和は常に n 自身に等しくなります。**理由は次のとおり。1 から 36 までの各 k を gcd(k, 36) の値で分類します。",
+          "**gcd(k, 36) = 36/d なら k は 36/d の倍数で k/(36/d) が d と互いに素**であり、そのような k はちょうど **φ(d)** 個です。**各 k はちょうど 1 つの類に入る**ので、Σφ(d) は 1 から 36 を 1 回ずつ数えたことになり = **36** ✓。",
+          "**別の数でも恒等式を確認**します。n = 12 では約数 1、2、3、4、6、12 の φ が 1、1、2、2、2、4 で総和 = **12** ✓ とやはり n に等しくなります。",
+          "**この恒等式はすべての正整数で成り立ち**、n が素数か平方数かに依りません。したがって「Σ_{d|n} φ(d)」を見たら答えは直ちに n です——**恒等式を知らなければ 9 個の φ を地道に計算し、知っていれば一気に 36 と書けます。**"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "36"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "歐拉函數在因數上的和：Σ_{d|n} φ(d) = n，本題直接得 36",
+        "notes": "設計依據：詳解先老實算出九個因數的 φ 值累加得 36，再以「依 gcd(k, n) 分類，每類恰有 φ(d) 個」證明總和恆等於 n，說明這不是巧合；另以 n = 12 再驗證一次恆等式。答案 36 已用逐項累加與恆等式雙向驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（歐拉函數在因數上的和）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "數論",
+        "topicCode": "number_theory",
+        "subtopic": "歐拉函數在因數上的和",
+        "subtopicCode": "totient_divisor_sum"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "number_theory_grade12_foundation_021",
+      "topic": "number_theory",
+      "subtopic": "smallest_with_digit_product",
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "求最小的正整數，使得它的各位數字相乘的結果恰好等於 24。",
+        "zh-Hans": "求最小的正整数，使得它的各位数字相乘的结果恰好等于 24。",
+        "en": "Find the smallest positive integer whose digits multiply to exactly 24.",
+        "ja": "各位の数字を掛け合わせるとちょうど 24 になる最小の正の整数を求めなさい。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 38。",
+        "zh-Hans": "答案是 38。",
+        "en": "The answer is 38.",
+        "ja": "答えは 38 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "**要讓數字最小，首先位數要盡量少；位數相同時，再讓高位的數字盡量小。**",
+          "**先看能不能只用一位數。**一位數最大是 9，而 24 > 9 ✗ **不可能**。",
+          "**再看兩位數。**需要兩個 1 到 9 的數字相乘等於 24。",
+          "**把 24 拆成兩個一位數的乘積**：24 = 3 × 8 ✓、24 = 4 × 6 ✓。（24 = 2 × 12 ✗ 因為 12 不是一位數；24 = 1 × 24 ✗ 同理。）",
+          "**所以兩位數是可行的，共有四個候選**：38、83、46、64。",
+          "**在候選中挑最小的。**比較十位數字：3 < 4 < 6 < 8，**所以十位是 3 的最小** ✓ 即 **38**。",
+          "**驗證 38**：3 × 8 = **24** ✓ 符合要求。",
+          "**確認沒有更小的兩位數。**比 38 小的兩位數是 10 到 37。其中十位只能是 1、2、3。",
+          "**十位是 1**：1 × 個位 = 24 需要個位 = 24 ✗ 不是一位數。**十位是 2**：個位 = 12 ✗ 同樣不行。",
+          "**十位是 3**：個位 = 24 ÷ 3 = **8**，即 38 本身 ✓ 而 30 到 37 的個位都小於 8，乘積都小於 24 ✗。",
+          "**所以 38 確實是最小的。**",
+          "驗算：程式由 1 開始逐一往上檢查每個正整數的各位數字乘積，**第一個乘積為 24 的正是 38** ✓ 與推理一致。",
+          "**注意「位數少」優先於「首位小」。**三位數 138 的數字乘積也是 1 × 3 × 8 = 24 ✓，但它是三位數，**比兩位數的 38 大得多**——所以要先確定最少位數，再在該位數內比大小。",
+          "**也要注意數字 1 的作用。**在數字中插入 1 不改變乘積，但會**增加位數**，所以求最小值時**永遠不該用 1**（除非乘積本身就是 1）。"
+        ],
+        "zh-Hans": [
+          "**要让数字最小，首先位数要尽量少；位数相同时，再让高位的数字尽量小。**",
+          "**先看能不能只用一位数。**一位数最大是 9，而 24 > 9 ✗ **不可能**。",
+          "**再看两位数。**需要两个 1 到 9 的数字相乘等于 24。",
+          "**把 24 拆成两个一位数的乘积**：24 = 3 × 8 ✓、24 = 4 × 6 ✓。（24 = 2 × 12 ✗ 因为 12 不是一位数；24 = 1 × 24 ✗ 同理。）",
+          "**所以两位数是可行的，共有四个候选**：38、83、46、64。",
+          "**在候选中挑最小的。**比较十位数字：3 < 4 < 6 < 8，**所以十位是 3 的最小** ✓ 即 **38**。",
+          "**验证 38**：3 × 8 = **24** ✓ 符合要求。",
+          "**确认没有更小的两位数。**比 38 小的两位数是 10 到 37。其中十位只能是 1、2、3。",
+          "**十位是 1**：1 × 个位 = 24 需要个位 = 24 ✗ 不是一位数。**十位是 2**：个位 = 12 ✗ 同样不行。",
+          "**十位是 3**：个位 = 24 ÷ 3 = **8**，即 38 本身 ✓ 而 30 到 37 的个位都小于 8，乘积都小于 24 ✗。",
+          "**所以 38 确实是最小的。**",
+          "验算：程序由 1 开始逐一往上检查每个正整数的各位数字乘积，**第一个乘积为 24 的正是 38** ✓ 与推理一致。",
+          "**注意「位数少」优先于「首位小」。**三位数 138 的数字乘积也是 1 × 3 × 8 = 24 ✓，但它是三位数，**比两位数的 38 大得多**——所以要先确定最少位数，再在该位数内比大小。",
+          "**也要注意数字 1 的作用。**在数字中插入 1 不改变乘积，但会**增加位数**，所以求最小值时**永远不该用 1**（除非乘积本身就是 1）。"
+        ],
+        "en": [
+          "To make the number smallest, first minimise the number of digits; among numbers of equal length, make the leading digits as small as possible.",
+          "Can one digit suffice? The largest single digit is 9 and 24 > 9, so no.",
+          "Try two digits: two digits from 1 to 9 must multiply to 24.",
+          "Factor 24 into two single digits: 24 = 3 × 8 and 24 = 4 × 6. Writing 24 = 2 × 12 or 1 × 24 fails, since 12 and 24 are not single digits.",
+          "So two digits work, giving four candidates: 38, 83, 46 and 64.",
+          "Pick the smallest. Comparing tens digits, 3 < 4 < 6 < 8, so the one with tens digit 3 is least, namely 38.",
+          "Verify: 3 × 8 = 24, as required.",
+          "Confirm nothing smaller works. The two-digit numbers below 38 run from 10 to 37, with tens digit 1, 2 or 3.",
+          "With tens digit 1, the units digit would need to be 24, not a digit. With tens digit 2, it would need to be 12, likewise impossible.",
+          "With tens digit 3, the units digit is 24 ÷ 3 = 8, giving 38 itself; and 30 through 37 have units digits below 8, so their products fall short of 24.",
+          "So 38 really is the smallest.",
+          "Check: scanning the positive integers upward from 1 and computing each one's digit product, the first with product 24 is indeed 38, matching the reasoning.",
+          "Note that fewer digits outranks a smaller leading digit. The three-digit 138 also has digit product 1 × 3 × 8 = 24, but being three digits it far exceeds the two-digit 38 — so fix the minimum length first, then compare within that length.",
+          "Note also the role of the digit 1. Inserting a 1 leaves the product unchanged but lengthens the number, so a 1 should never appear when minimising, unless the product is itself 1."
+        ],
+        "ja": [
+          "**最小にするには、まず桁数を少なく**し、桁数が同じなら**上位の数字を小さく**します。",
+          "**1 桁で足りるか**を見ます。1 桁の最大は 9 で 24 > 9 ✗ なので**不可能**です。",
+          "**2 桁を試します。**1〜9 の数字 2 つの積が 24 になればよいのです。",
+          "**24 を 1 桁 2 つの積に分解**：24 = 3 × 8 ✓、24 = 4 × 6 ✓。（24 = 2 × 12 や 1 × 24 は 12、24 が 1 桁でないため ✗。）",
+          "**2 桁が可能で候補は 4 つ**：38、83、46、64。",
+          "**最小を選びます。**十の位を比べると 3 < 4 < 6 < 8 なので、**十の位が 3 のものが最小** ✓ すなわち **38**。",
+          "**検証**：3 × 8 = **24** ✓ 条件を満たします。",
+          "**より小さい 2 桁がないことを確認**します。38 未満の 2 桁は 10〜37 で、十の位は 1、2、3 のいずれかです。",
+          "**十の位が 1** なら一の位は 24 ✗ で 1 桁になりません。**十の位が 2** なら 12 ✗ で同様に不可。",
+          "**十の位が 3** なら一の位は 24 ÷ 3 = **8** で 38 そのもの ✓。30〜37 は一の位が 8 未満で積が 24 に届きません ✗。",
+          "**したがって 38 が最小**です。",
+          "検算：1 から順に各正整数の数字の積を調べると、**積が 24 になる最初の数はまさに 38** ✓ で推論と一致します。",
+          "**「桁数が少ない」ことが「上位が小さい」ことより優先**します。3 桁の 138 も積は 1 × 3 × 8 = 24 ✓ ですが 3 桁であり、**2 桁の 38 よりずっと大きい**のです——まず最小の桁数を決め、その中で比較します。",
+          "**数字 1 の役割**にも注意します。1 を挿入しても積は変わりませんが**桁数が増える**ので、最小を求めるときに **1 を使うべきではありません**（積が 1 自身の場合を除く）。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "38"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "各位數字乘積為定值：先確定最少位數再在該位數內取最小，24 拆成兩個一位數只有 3×8 與 4×6",
+        "notes": "設計依據：詳解先排除一位數再窮盡 24 的兩個一位數分解，列出四個候選並取最小；另逐一檢查十位為 1、2、3 的情形確認 38 以下皆不可行。末尾說明「位數少優先於首位小」（138 也符合但更大）以及數字 1 只會增加位數的道理。答案 38 已用分解枚舉與由 1 起的程式逐一掃描雙向驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（各位數字乘積為定值）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "數論",
+        "topicCode": "number_theory",
+        "subtopic": "各位數字乘積為定值",
+        "subtopicCode": "smallest_with_digit_product"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "number_theory_grade12_foundation_022",
+      "topic": "number_theory",
+      "subtopic": "prime_generating_polynomial",
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "考慮式子 n² + n + 41。當 n = 0 時它的值是 41，是質數；n = 1 時是 43，也是質數。求最小的非負整數 n，使得 n² + n + 41 不是質數。",
+        "zh-Hans": "考虑式子 n² + n + 41。当 n = 0 时它的值是 41，是质数；n = 1 时是 43，也是质数。求最小的非负整数 n，使得 n² + n + 41 不是质数。",
+        "en": "Consider the expression n² + n + 41. At n = 0 its value is 41, a prime; at n = 1 it is 43, also prime. Find the smallest non-negative integer n for which n² + n + 41 is not prime.",
+        "ja": "式 n² + n + 41 を考えます。n = 0 のとき値は 41 で素数、n = 1 のとき 43 でやはり素数です。n² + n + 41 が素数でなくなる最小の非負整数 n を求めなさい。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 40。",
+        "zh-Hans": "答案是 40。",
+        "en": "The answer is 40.",
+        "ja": "答えは 40 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "**這個式子以「連續產生很多質數」聞名，所以答案不會是很小的 n——要先想清楚它什麼時候會失效。**",
+          "**先觀察式子的結構。**n² + n + 41 = **n(n + 1) + 41**。",
+          "**注意 n(n + 1) 是兩個連續整數的乘積，必定是偶數**，所以整個式子恆為「偶數 + 奇數」= **奇數** ✓ **永遠不會被 2 整除**。",
+          "**再看小質數。**若要被 3 整除，需 n(n+1) + 41 ≡ 0 (mod 3)。由於 41 ≡ 2 (mod 3)，需 n(n+1) ≡ 1 (mod 3)；**但兩個連續整數的乘積模 3 只會是 0 或 2**（n ≡ 0,1,2 分別給出 0、2、0）✗ **所以永遠不被 3 整除**。",
+          "**這解釋了為什麼它能連續產生這麼多質數**——小的質因數都被結構性地排除了。",
+          "**那什麼時候會失效？直接找出讓 41 成為因數的 n。**",
+          "**若 n 是 41 的倍數，例如 n = 41k**，則 n² + n = n(n + 1) 含有因數 41，**整個式子就能被 41 整除** ✓。",
+          "**但更小的 n 就會失效。**取 **n = 40**：40² + 40 + 41 = 1600 + 40 + 41 = **1681**。",
+          "**分解 1681**：注意 40 × 41 + 41 = 41 × (40 + 1) = 41 × 41 = **1681** ✓ **所以 1681 = 41²，不是質數**。",
+          "**所以 n = 40 時失效。**接著要確認 n = 0 到 39 全都是質數。",
+          "驗算：程式對 n = 0 到 39 逐一計算 n² + n + 41 並做質數判定，**四十個值全部都是質數** ✓（41、43、47、53、61、71、83、97、113、131、⋯、1601），**第一個非質數出現在 n = 40** ✓ 與推理一致。",
+          "**注意 n = 41 也會失效**（41² + 41 + 41 = 41 × 43），**但題目要的是最小的 n**，而 40 < 41 ✓ **所以答案是 40 而不是 41**。**這是本題最容易答錯的地方**——直覺會先想到「n 等於常數項時失效」。",
+          "**這個例子也說明：驗證前幾十個情形都成立，並不能證明一般結論。**若只試到 n = 39 就宣稱「此式恆產生質數」，在 n = 40 就會被推翻——**數論中的規律必須證明，不能只靠列舉。**"
+        ],
+        "zh-Hans": [
+          "**这个式子以「连续产生很多质数」闻名，所以答案不会是很小的 n——要先想清楚它什么时候会失效。**",
+          "**先观察式子的结构。**n² + n + 41 = **n(n + 1) + 41**。",
+          "**注意 n(n + 1) 是两个连续整数的乘积，必定是偶数**，所以整个式子恒为「偶数 + 奇数」= **奇数** ✓ **永远不会被 2 整除**。",
+          "**再看小质数。**若要被 3 整除，需 n(n+1) + 41 ≡ 0 (mod 3)。由于 41 ≡ 2 (mod 3)，需 n(n+1) ≡ 1 (mod 3)；**但两个连续整数的乘积模 3 只会是 0 或 2**（n ≡ 0,1,2 分别给出 0、2、0）✗ **所以永远不被 3 整除**。",
+          "**这解释了为什么它能连续产生这么多质数**——小的质因数都被结构性地排除了。",
+          "**那什么时候会失效？直接找出让 41 成为因数的 n。**",
+          "**若 n 是 41 的倍数，例如 n = 41k**，则 n² + n = n(n + 1) 含有因数 41，**整个式子就能被 41 整除** ✓。",
+          "**但更小的 n 就会失效。**取 **n = 40**：40² + 40 + 41 = 1600 + 40 + 41 = **1681**。",
+          "**分解 1681**：注意 40 × 41 + 41 = 41 × (40 + 1) = 41 × 41 = **1681** ✓ **所以 1681 = 41²，不是质数**。",
+          "**所以 n = 40 时失效。**接着要确认 n = 0 到 39 全都是质数。",
+          "验算：程序对 n = 0 到 39 逐一计算 n² + n + 41 并做质数判定，**四十个值全部都是质数** ✓（41、43、47、53、61、71、83、97、113、131、⋯、1601），**第一个非质数出现在 n = 40** ✓ 与推理一致。",
+          "**注意 n = 41 也会失效**（41² + 41 + 41 = 41 × 43），**但题目要的是最小的 n**，而 40 < 41 ✓ **所以答案是 40 而不是 41**。**这是本题最容易答错的地方**——直觉会先想到「n 等于常数项时失效」。",
+          "**这个例子也说明：验证前几十个情形都成立，并不能证明一般结论。**若只试到 n = 39 就宣称「此式恒产生质数」，在 n = 40 就会被推翻——**数论中的规律必须证明，不能只靠列举。**"
+        ],
+        "en": [
+          "This expression is famous for producing long runs of primes, so the answer will not be a small n — first work out when it can fail.",
+          "Observe the structure: n² + n + 41 = n(n + 1) + 41.",
+          "Since n(n + 1) is a product of consecutive integers it is always even, so the whole expression is even plus odd, hence odd, and never divisible by 2.",
+          "Consider small primes. Divisibility by 3 would need n(n+1) + 41 ≡ 0 (mod 3), and since 41 ≡ 2 (mod 3) it would need n(n+1) ≡ 1 (mod 3). But a product of consecutive integers is 0 or 2 modulo 3, as n ≡ 0, 1, 2 give 0, 2, 0. So it is never divisible by 3 either.",
+          "This explains the long run of primes — the small prime factors are structurally excluded.",
+          "So when does it fail? Look for an n making 41 a factor.",
+          "If n is a multiple of 41, say n = 41k, then n² + n = n(n + 1) contains the factor 41 and the whole expression is divisible by 41.",
+          "But a smaller n fails first. Take n = 40: 40² + 40 + 41 = 1600 + 40 + 41 = 1681.",
+          "Factor it: 40 × 41 + 41 = 41 × (40 + 1) = 41 × 41 = 1681. So 1681 = 41², not prime.",
+          "So n = 40 fails. It remains to confirm that n from 0 to 39 all give primes.",
+          "Check: computing n² + n + 41 for n from 0 to 39 and testing primality shows all forty values prime — 41, 43, 47, 53, 61, 71, 83, 97, 113, 131 and so on up to 1601 — with the first composite at n = 40, matching the reasoning.",
+          "Note n = 41 also fails, since 41² + 41 + 41 = 41 × 43, but the problem asks for the smallest, and 40 < 41. So the answer is 40, not 41 — the easiest slip here, intuition reaching first for the case where n equals the constant term.",
+          "The example also shows that verifying dozens of cases proves nothing in general. Stopping at n = 39 and declaring the expression always prime would be refuted at n = 40 — patterns in number theory must be proved, not merely enumerated."
+        ],
+        "ja": [
+          "**この式は「素数を長く生み出す」ことで有名**なので、答えは小さい n ではありません——まずいつ破綻するかを考えます。",
+          "**式の構造を観察**します：n² + n + 41 = **n(n + 1) + 41**。",
+          "**n(n + 1) は連続 2 整数の積で必ず偶数**なので、全体は「偶数 + 奇数」= **奇数** ✓ で **2 では決して割り切れません**。",
+          "**小さい素数も見ます。**3 で割り切れるには n(n+1) + 41 ≡ 0 (mod 3)、41 ≡ 2 (mod 3) より n(n+1) ≡ 1 (mod 3) が必要ですが、**連続 2 整数の積は 3 を法として 0 か 2 のみ**（n ≡ 0,1,2 でそれぞれ 0、2、0）✗ なので **3 でも割り切れません**。",
+          "**これが素数を長く生み出す理由**です——小さい素因数が構造的に排除されています。",
+          "**では，いつ破綻するか。41 が因数になる n を探します。**",
+          "**n が 41 の倍数（n = 41k）なら** n² + n = n(n + 1) が因数 41 をもち、**全体が 41 で割り切れます** ✓。",
+          "**しかしより小さい n で先に破綻**します。**n = 40** では 40² + 40 + 41 = 1600 + 40 + 41 = **1681**。",
+          "**1681 を分解**します：40 × 41 + 41 = 41 × (40 + 1) = 41 × 41 = **1681** ✓ すなわち **1681 = 41² で素数ではありません**。",
+          "**したがって n = 40 で破綻**します。あとは n = 0〜39 がすべて素数であることの確認です。",
+          "検算：n = 0〜39 について n² + n + 41 を計算し素数判定すると、**40 個すべてが素数** ✓（41、43、47、53、61、71、83、97、113、131、⋯、1601）で、**最初の合成数は n = 40** ✓ と推論に一致します。",
+          "**n = 41 でも破綻します**（41² + 41 + 41 = 41 × 43）が、**問われているのは最小の n** であり 40 < 41 ✓ なので **答えは 41 ではなく 40** です。**本問で最も間違えやすい点**で、直感は「n が定数項に等しいとき」を先に思いつきます。",
+          "**この例は、数十例の検証が一般的結論の証明にならないことも示します。**n = 39 まで試して「常に素数」と宣言すれば n = 40 で覆されます——**数論の規則は証明が必要で、列挙だけでは足りません。**"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "40"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "產生質數的多項式：n² + n + 41 在 n = 40 時等於 41² 而首次成為合數，早於直覺的 n = 41",
+        "notes": "設計依據：詳解先由 n(n+1) 為偶數與模 3 的分析說明小質因數被結構性排除（故能連續產生質數），再直接找出 n = 40 使式子等於 41²；並確認 n = 0 到 39 四十個值全為質數。末尾指出誤答 41 的直覺來源，並藉此說明列舉不能取代證明。答案 40 已用因式分解與 n = 0 到 40 的逐一質數判定驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（產生質數的多項式）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "數論",
+        "topicCode": "number_theory",
+        "subtopic": "產生質數的多項式",
+        "subtopicCode": "prime_generating_polynomial"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "number_theory_grade12_foundation_023",
+      "topic": "number_theory",
+      "subtopic": "sophie_germain_count",
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "若一個質數 p 滿足「2p + 1 也是質數」，就把 p 稱為「安全配對質數」。例如 p = 5 是（因為 2 × 5 + 1 = 11 是質數），而 p = 7 不是（因為 2 × 7 + 1 = 15 = 3 × 5 不是質數）。求小於 100 的安全配對質數共有幾個。",
+        "zh-Hans": "若一个质数 p 满足「2p + 1 也是质数」，就把 p 称为「安全配对质数」。例如 p = 5 是（因为 2 × 5 + 1 = 11 是质数），而 p = 7 不是（因为 2 × 7 + 1 = 15 = 3 × 5 不是质数）。求小于 100 的安全配对质数共有几个。",
+        "en": "Call a prime p a paired prime if 2p + 1 is also prime. For instance p = 5 qualifies, since 2 × 5 + 1 = 11 is prime, while p = 7 does not, since 2 × 7 + 1 = 15 = 3 × 5 is not. How many paired primes are less than 100?",
+        "ja": "素数 p が「2p + 1 も素数」を満たすとき、p を「対をなす素数」と呼びます。たとえば p = 5 は該当し（2 × 5 + 1 = 11 が素数）、p = 7 は該当しません（2 × 7 + 1 = 15 = 3 × 5 は素数でない）。100 未満の「対をなす素数」はいくつありますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 10 個。",
+        "zh-Hans": "答案是 10 个。",
+        "en": "The answer is 10.",
+        "ja": "答えは 10 個です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "**先列出 100 以內的全部質數，再逐一檢查 2p + 1 是否也是質數。**",
+          "**100 以內的質數共 25 個**：2、3、5、7、11、13、17、19、23、29、31、37、41、43、47、53、59、61、67、71、73、79、83、89、97。",
+          "**先用一個小技巧縮小範圍。**若 p 的個位是 **7**，則 2p + 1 的個位是 5（例如 7 → 15、17 → 35、37 → 75）；**個位是 5 且大於 5 的數必定被 5 整除** ✗ **所以個位為 7 的質數全部排除**（7、17、37、47、67、97 共 6 個）。",
+          "**逐一檢查其餘的質數。**p = 2 → 2 × 2 + 1 = **5** ✓ 質數。p = 3 → **7** ✓。p = 5 → **11** ✓。",
+          "p = 11 → **23** ✓。p = 13 → 27 = 3³ ✗。p = 19 → 39 = 3 × 13 ✗。p = 23 → **47** ✓。",
+          "p = 29 → **59** ✓。p = 31 → 63 = 7 × 9 ✗。p = 41 → **83** ✓。p = 43 → 87 = 3 × 29 ✗。",
+          "p = 53 → **107** ✓ 質數。p = 59 → 119 = 7 × 17 ✗。p = 61 → 123 = 3 × 41 ✗。p = 71 → 143 = 11 × 13 ✗。",
+          "p = 73 → 147 = 3 × 49 ✗。p = 79 → 159 = 3 × 53 ✗。p = 83 → **167** ✓ 質數。p = 89 → **179** ✓ 質數。",
+          "**把打勾的收集起來**：2、3、5、11、23、29、41、53、83、89。",
+          "**數一數共有 10 個。**",
+          "驗算：程式列出 100 以內全部質數，逐一判定 2p + 1 是否為質數，**符合的恰好是這 10 個** ✓ 與手算完全一致。",
+          "**注意 119 與 143 這兩個容易看走眼的數。**119 = 7 × 17 而 143 = 11 × 13，**兩者都沒有小於 10 的質因數**，乍看很像質數 ✗ **判定時必須試除到平方根為止**（119 要試到 10、143 要試到 11），只檢查 2、3、5 會誤判。",
+          "**這類質數在密碼學中有實際用途**——因為 2p + 1 這樣的質數具有便於使用的結構。**不過至今仍不知道這樣的質數是否有無窮多個，這是一個未解決的問題。**"
+        ],
+        "zh-Hans": [
+          "**先列出 100 以内的全部质数，再逐一检查 2p + 1 是否也是质数。**",
+          "**100 以内的质数共 25 个**：2、3、5、7、11、13、17、19、23、29、31、37、41、43、47、53、59、61、67、71、73、79、83、89、97。",
+          "**先用一个小技巧缩小范围。**若 p 的个位是 **7**，则 2p + 1 的个位是 5（例如 7 → 15、17 → 35、37 → 75）；**个位是 5 且大于 5 的数必定被 5 整除** ✗ **所以个位为 7 的质数全部排除**（7、17、37、47、67、97 共 6 个）。",
+          "**逐一检查其余的质数。**p = 2 → 2 × 2 + 1 = **5** ✓ 质数。p = 3 → **7** ✓。p = 5 → **11** ✓。",
+          "p = 11 → **23** ✓。p = 13 → 27 = 3³ ✗。p = 19 → 39 = 3 × 13 ✗。p = 23 → **47** ✓。",
+          "p = 29 → **59** ✓。p = 31 → 63 = 7 × 9 ✗。p = 41 → **83** ✓。p = 43 → 87 = 3 × 29 ✗。",
+          "p = 53 → **107** ✓ 质数。p = 59 → 119 = 7 × 17 ✗。p = 61 → 123 = 3 × 41 ✗。p = 71 → 143 = 11 × 13 ✗。",
+          "p = 73 → 147 = 3 × 49 ✗。p = 79 → 159 = 3 × 53 ✗。p = 83 → **167** ✓ 质数。p = 89 → **179** ✓ 质数。",
+          "**把打勾的收集起来**：2、3、5、11、23、29、41、53、83、89。",
+          "**数一数共有 10 个。**",
+          "验算：程序列出 100 以内全部质数，逐一判定 2p + 1 是否为质数，**符合的恰好是这 10 个** ✓ 与手算完全一致。",
+          "**注意 119 与 143 这两个容易看走眼的数。**119 = 7 × 17 而 143 = 11 × 13，**两者都没有小于 10 的质因数**，乍看很像质数 ✗ **判定时必须试除到平方根为止**（119 要试到 10、143 要试到 11），只检查 2、3、5 会误判。",
+          "**这类质数在密码学中有实际用途**——因为 2p + 1 这样的质数具有便于使用的结构。**不过至今仍不知道这样的质数是否有无穷多个，这是一个未解决的问题。**"
+        ],
+        "en": [
+          "List all primes below 100 and test whether 2p + 1 is prime for each.",
+          "There are 25 primes below 100: 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89 and 97.",
+          "A shortcut narrows the field. If p ends in 7 then 2p + 1 ends in 5, as with 7 → 15, 17 → 35 and 37 → 75; and any number ending in 5 above 5 itself is divisible by 5. So every prime ending in 7 is excluded — 7, 17, 37, 47, 67 and 97, six in all.",
+          "Check the rest. For p = 2, 2 × 2 + 1 = 5, prime. For p = 3, 7, prime. For p = 5, 11, prime.",
+          "For p = 11, 23, prime. For p = 13, 27 = 3³, not prime. For p = 19, 39 = 3 × 13, not. For p = 23, 47, prime.",
+          "For p = 29, 59, prime. For p = 31, 63 = 7 × 9, not. For p = 41, 83, prime. For p = 43, 87 = 3 × 29, not.",
+          "For p = 53, 107, prime. For p = 59, 119 = 7 × 17, not. For p = 61, 123 = 3 × 41, not. For p = 71, 143 = 11 × 13, not.",
+          "For p = 73, 147 = 3 × 49, not. For p = 79, 159 = 3 × 53, not. For p = 83, 167, prime. For p = 89, 179, prime.",
+          "Collecting those that qualify: 2, 3, 5, 11, 23, 29, 41, 53, 83 and 89.",
+          "Counting them gives 10.",
+          "Check: listing all primes below 100 and testing 2p + 1 for primality yields exactly these 10, matching the hand computation.",
+          "Watch out for 119 and 143, both easily misjudged. Since 119 = 7 × 17 and 143 = 11 × 13, neither has a prime factor below 10 and both look prime at a glance. Primality testing must divide up to the square root — to 10 for 119 and to 11 for 143 — and checking only 2, 3 and 5 would misclassify them.",
+          "Primes of this kind have practical uses in cryptography, since a prime of the form 2p + 1 has a convenient structure. Whether infinitely many exist remains unknown — an open problem."
+        ],
+        "ja": [
+          "**100 未満のすべての素数を列挙**し、各々について 2p + 1 が素数かを調べます。",
+          "**100 未満の素数は 25 個**：2、3、5、7、11、13、17、19、23、29、31、37、41、43、47、53、59、61、67、71、73、79、83、89、97。",
+          "**まず範囲を狭めます。**p の一の位が **7** なら 2p + 1 の一の位は 5（7 → 15、17 → 35、37 → 75）で、**5 より大きい末尾 5 の数は必ず 5 で割り切れます** ✗。**一の位が 7 の素数はすべて除外**（7、17、37、47、67、97 の 6 個）。",
+          "**残りを順に調べます。**p = 2 → **5** ✓ 素数。p = 3 → **7** ✓。p = 5 → **11** ✓。",
+          "p = 11 → **23** ✓。p = 13 → 27 = 3³ ✗。p = 19 → 39 = 3 × 13 ✗。p = 23 → **47** ✓。",
+          "p = 29 → **59** ✓。p = 31 → 63 = 7 × 9 ✗。p = 41 → **83** ✓。p = 43 → 87 = 3 × 29 ✗。",
+          "p = 53 → **107** ✓ 素数。p = 59 → 119 = 7 × 17 ✗。p = 61 → 123 = 3 × 41 ✗。p = 71 → 143 = 11 × 13 ✗。",
+          "p = 73 → 147 = 3 × 49 ✗。p = 79 → 159 = 3 × 53 ✗。p = 83 → **167** ✓ 素数。p = 89 → **179** ✓ 素数。",
+          "**該当するものを集めます**：2、3、5、11、23、29、41、53、83、89。",
+          "**数えると 10 個**です。",
+          "検算：100 未満の全素数について 2p + 1 の素数判定を行うと、**該当はちょうどこの 10 個** ✓ で手計算と完全に一致します。",
+          "**119 と 143 は見誤りやすい数**です。119 = 7 × 17、143 = 11 × 13 で、**どちらも 10 未満の素因数をもたず**一見素数に見えます ✗。**判定は平方根まで試し割りする必要**があり（119 は 10 まで、143 は 11 まで）、2、3、5 だけでは誤判定します。",
+          "**この種の素数は暗号で実用されます**——2p + 1 の形の素数は扱いやすい構造をもつためです。**ただし無限に存在するかは今なお未解決の問題**です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "10"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "配對的質數：檢查 100 以內每個質數 p 是否使 2p + 1 也是質數，個位為 7 者可整批排除",
+        "notes": "設計依據：詳解先以「個位為 7 則 2p+1 個位為 5」整批排除六個質數以縮小範圍，再逐一檢查其餘者並列出結果；驗算以程式對 25 個質數完整判定。末尾特別提醒 119 = 7×17 與 143 = 11×13 這兩個無小質因數的合數，說明試除必須做到平方根。答案 10 已用手算逐項與程式窮舉雙向驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（配對的質數）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "數論",
+        "topicCode": "number_theory",
+        "subtopic": "配對的質數",
+        "subtopicCode": "sophie_germain_count"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "number_theory_grade12_foundation_024",
+      "topic": "number_theory",
+      "subtopic": "pentagonal_number",
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "五邊形數的定義是：第 n 個五邊形數等於 n(3n − 1)/2。前幾個五邊形數是 1、5、12、22、35。求第 10 個五邊形數。",
+        "zh-Hans": "五边形数的定义是：第 n 个五边形数等于 n(3n − 1)/2。前几个五边形数是 1、5、12、22、35。求第 10 个五边形数。",
+        "en": "The nth pentagonal number is defined as n(3n − 1)/2, the first few being 1, 5, 12, 22 and 35. Find the tenth pentagonal number.",
+        "ja": "第 n 五角数は n(3n − 1)/2 と定義され、最初のいくつかは 1、5、12、22、35 です。第 10 五角数を求めなさい。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 145。",
+        "zh-Hans": "答案是 145。",
+        "en": "The answer is 145.",
+        "ja": "答えは 145 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "**直接把 n = 10 代入公式即可。**",
+          "**先算括號裡的部分**：3n − 1 = 3 × 10 − 1 = 30 − 1 = **29**。",
+          "**再乘以 n**：n(3n − 1) = 10 × 29 = **290**。",
+          "**最後除以 2**：290 ÷ 2 = **145**。",
+          "所以第 10 個五邊形數是 **145**。",
+          "驗算：**用題目給的前幾項確認公式沒代錯。**n = 1：1 × (3 − 1)/2 = 2/2 = **1** ✓。n = 2：2 × 5/2 = **5** ✓。",
+          "n = 3：3 × 8/2 = **12** ✓。n = 4：4 × 11/2 = **22** ✓。n = 5：5 × 14/2 = **35** ✓ **五項全部吻合**，確認公式與代入方式正確。",
+          "**再用逐項遞推的方式獨立算到第 10 項。**觀察相鄰兩項的差：5 − 1 = 4、12 − 5 = 7、22 − 12 = 10、35 − 22 = 13。",
+          "**差依序是 4、7、10、13，每次增加 3** ✓ 這是一個等差數列。",
+          "**接著往下推**：第 6 項 = 35 + 16 = **51**；第 7 項 = 51 + 19 = **70**；第 8 項 = 70 + 22 = **92**。",
+          "第 9 項 = 92 + 25 = **117**；**第 10 項 = 117 + 28 = 145** ✓ **與公式算出的完全一致**。",
+          "**兩種方法互相印證，答案確定是 145。**",
+          "**注意除以 2 這一步不可省略。**若只算到 n(3n − 1) = 290 就作答，會得到 **290**，恰好是正確答案的兩倍 ✗——**公式中的分母 2 存在的理由，正是因為 n 與 3n − 1 之中必有一個是偶數**（n 為偶數時取 n，n 為奇數時 3n − 1 為偶數），**所以結果保證是整數**。",
+          "**順帶一提，五邊形數與三角形數不同。**第 n 個三角形數是 n(n + 1)/2，第 10 個是 55；**兩者的公式形狀相似但係數不同，不可混用**。"
+        ],
+        "zh-Hans": [
+          "**直接把 n = 10 代入公式即可。**",
+          "**先算括号里的部分**：3n − 1 = 3 × 10 − 1 = 30 − 1 = **29**。",
+          "**再乘以 n**：n(3n − 1) = 10 × 29 = **290**。",
+          "**最后除以 2**：290 ÷ 2 = **145**。",
+          "所以第 10 个五边形数是 **145**。",
+          "验算：**用题目给的前几项确认公式没代错。**n = 1：1 × (3 − 1)/2 = 2/2 = **1** ✓。n = 2：2 × 5/2 = **5** ✓。",
+          "n = 3：3 × 8/2 = **12** ✓。n = 4：4 × 11/2 = **22** ✓。n = 5：5 × 14/2 = **35** ✓ **五项全部吻合**，确认公式与代入方式正确。",
+          "**再用逐项递推的方式独立算到第 10 项。**观察相邻两项的差：5 − 1 = 4、12 − 5 = 7、22 − 12 = 10、35 − 22 = 13。",
+          "**差依序是 4、7、10、13，每次增加 3** ✓ 这是一个等差数列。",
+          "**接着往下推**：第 6 项 = 35 + 16 = **51**；第 7 项 = 51 + 19 = **70**；第 8 项 = 70 + 22 = **92**。",
+          "第 9 项 = 92 + 25 = **117**；**第 10 项 = 117 + 28 = 145** ✓ **与公式算出的完全一致**。",
+          "**两种方法互相印证，答案确定是 145。**",
+          "**注意除以 2 这一步不可省略。**若只算到 n(3n − 1) = 290 就作答，会得到 **290**，恰好是正确答案的两倍 ✗——**公式中的分母 2 存在的理由，正是因为 n 与 3n − 1 之中必有一个是偶数**（n 为偶数时取 n，n 为奇数时 3n − 1 为偶数），**所以结果保证是整数**。",
+          "**顺带一提，五边形数与三角形数不同。**第 n 个三角形数是 n(n + 1)/2，第 10 个是 55；**两者的公式形状相似但系数不同，不可混用**。"
+        ],
+        "en": [
+          "Substitute n = 10 directly into the formula.",
+          "Compute the bracket first: 3n − 1 = 3 × 10 − 1 = 30 − 1 = 29.",
+          "Multiply by n: n(3n − 1) = 10 × 29 = 290.",
+          "Divide by 2: 290 ÷ 2 = 145.",
+          "So the tenth pentagonal number is 145.",
+          "Check the formula against the given terms. For n = 1: 1 × (3 − 1)/2 = 2/2 = 1. For n = 2: 2 × 5/2 = 5.",
+          "For n = 3: 3 × 8/2 = 12. For n = 4: 4 × 11/2 = 22. For n = 5: 5 × 14/2 = 35. All five match, confirming the formula and the substitution.",
+          "Now compute the tenth term independently by recursion. The differences between consecutive terms are 5 − 1 = 4, 12 − 5 = 7, 22 − 12 = 10 and 35 − 22 = 13.",
+          "The differences run 4, 7, 10, 13, increasing by 3 each time — an arithmetic sequence.",
+          "Continue: the sixth term is 35 + 16 = 51; the seventh is 51 + 19 = 70; the eighth is 70 + 22 = 92.",
+          "The ninth is 92 + 25 = 117, and the tenth is 117 + 28 = 145 — exactly as the formula gave.",
+          "The two methods confirm each other, so the answer is certainly 145.",
+          "Note the division by 2 must not be skipped. Stopping at n(3n − 1) = 290 would give twice the correct answer. The denominator exists precisely because one of n and 3n − 1 is always even — n itself when n is even, and 3n − 1 when n is odd — guaranteeing an integer result.",
+          "Incidentally, pentagonal numbers differ from triangular ones. The nth triangular number is n(n + 1)/2, the tenth being 55; the formulas resemble each other but their coefficients differ and must not be confused."
+        ],
+        "ja": [
+          "**n = 10 を公式にそのまま代入**します。",
+          "**まず括弧の中**：3n − 1 = 3 × 10 − 1 = **29**。",
+          "**n を掛けて**：n(3n − 1) = 10 × 29 = **290**。",
+          "**2 で割って**：290 ÷ 2 = **145**。",
+          "したがって第 10 五角数は **145** です。",
+          "検算：**与えられた最初の数項で公式を確認**します。n = 1：1 × (3 − 1)/2 = **1** ✓。n = 2：2 × 5/2 = **5** ✓。",
+          "n = 3：3 × 8/2 = **12** ✓。n = 4：4 × 11/2 = **22** ✓。n = 5：5 × 14/2 = **35** ✓ と**5 項すべて一致**し、公式と代入が正しいと確認できます。",
+          "**次に漸化的に第 10 項まで独立に計算**します。隣接項の差は 5 − 1 = 4、12 − 5 = 7、22 − 12 = 10、35 − 22 = 13。",
+          "**差は 4、7、10、13 と毎回 3 ずつ増える** ✓ 等差数列です。",
+          "**続けます**：第 6 項 = 35 + 16 = **51**、第 7 項 = 51 + 19 = **70**、第 8 項 = 70 + 22 = **92**。",
+          "第 9 項 = 92 + 25 = **117**、**第 10 項 = 117 + 28 = 145** ✓ で**公式による結果と完全に一致**します。",
+          "**2 つの方法が互いを裏づけ、答えは 145 で確定**です。",
+          "**2 で割る手順を省いてはいけません。**n(3n − 1) = 290 で止めると正解のちょうど 2 倍になります ✗。**分母 2 があるのは、n と 3n − 1 のどちらかが必ず偶数だから**で（n が偶数なら n、奇数なら 3n − 1）、**結果が整数であることが保証**されます。",
+          "**なお五角数と三角数は別物**です。第 n 三角数は n(n + 1)/2 で第 10 は 55。**式の形は似ていても係数が異なり、混同できません。**"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "145"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "五邊形數：代入 n(3n − 1)/2 得 145，亦可由差為公差 3 的等差數列遞推驗證",
+        "notes": "設計依據：詳解以公式直接計算，並用題目給的前五項回頭檢驗代入無誤；另以「相鄰項之差成公差 3 的等差數列」獨立遞推到第 10 項作交叉驗證。末尾說明分母 2 的存在理由（n 與 3n−1 必有一偶）並區辨五邊形數與三角形數的公式差異。答案 145 已用公式與遞推雙向驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（五邊形數）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "數論",
+        "topicCode": "number_theory",
+        "subtopic": "五邊形數",
+        "subtopicCode": "pentagonal_number"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "number_theory_grade12_foundation_025",
+      "topic": "number_theory",
+      "subtopic": "divisor_count_sum",
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "對正整數 k，用 τ(k) 表示 k 的正因數個數（例如 τ(6) = 4，因為 6 有 1、2、3、6 四個因數）。求 τ(1) + τ(2) + τ(3) + ⋯ + τ(100) 的值。",
+        "zh-Hans": "对正整数 k，用 τ(k) 表示 k 的正因数个数（例如 τ(6) = 4，因为 6 有 1、2、3、6 四个因数）。求 τ(1) + τ(2) + τ(3) + ⋯ + τ(100) 的值。",
+        "en": "For a positive integer k, let τ(k) be the number of positive divisors of k — so τ(6) = 4, since 6 has divisors 1, 2, 3 and 6. Find τ(1) + τ(2) + τ(3) + ⋯ + τ(100).",
+        "ja": "正の整数 k に対し、τ(k) を k の正の約数の個数とします（たとえば τ(6) = 4、6 の約数は 1、2、3、6）。τ(1) + τ(2) + τ(3) + ⋯ + τ(100) の値を求めなさい。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 482。",
+        "zh-Hans": "答案是 482。",
+        "en": "The answer is 482.",
+        "ja": "答えは 482 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "**逐一算出 100 個 τ 值再相加太慢，改用「換個角度數」的方法。**",
+          "**關鍵轉換：與其問「每個 k 有幾個因數」，不如問「每個數 d 當了幾次因數」。**",
+          "**d 在 1 到 100 之中，是哪些數的因數？**答案是 d 的所有倍數：d、2d、3d、⋯，**在 100 以內共有 ⌊100/d⌋ 個** ✓。",
+          "**所以總和 = ⌊100/1⌋ + ⌊100/2⌋ + ⌊100/3⌋ + ⋯ + ⌊100/100⌋。**",
+          "**這樣就把「算 100 個因數個數」換成「算 100 個除法」，而且大部分項很好算。**",
+          "**先算前十項**：100 + 50 + 33 + 25 + 20 + 16 + 14 + 12 + 11 + 10 = **291**。",
+          "**再算 d = 11 到 20**：9 + 8 + 7 + 7 + 6 + 6 + 5 + 5 + 5 + 5 = **63**。累計 291 + 63 = **354**。",
+          "**d = 21 到 30**：4 + 4 + 4 + 4 + 4 + 3 + 3 + 3 + 3 + 3 = **35**。累計 **389**。",
+          "**d = 31 到 50**：31~33 各 3（共 9）；34~50 各 2（共 17 個 × 2 = 34）。小計 **43**。累計 **432**。",
+          "**d = 51 到 100**：這 50 個數的 ⌊100/d⌋ 全部等於 **1**（因為 100/51 < 2 而 100/100 = 1），小計 **50**。",
+          "**總計** = 432 + 50 = **482**。",
+          "驗算：程式對 k = 1 到 100 逐一數出因數個數並累加，**總和恰好是 482** ✓ 與換角度的算法完全一致。",
+          "**核對合理性。**平均每個數有 482 ÷ 100 ≈ **4.82** 個因數。**這與「τ 的平均約為 ln n」的估計相符**——ln 100 ≈ 4.6，兩者接近 ✓。",
+          "**注意這個「交換計數順序」的技巧很通用。**它把「對每個 k 數因數」轉成「對每個 d 數倍數」，**兩種數法數的是同一堆東西（所有滿足 d | k 且 k ≤ 100 的數對），只是分組方式不同**。若硬要逐一分解 100 個數的質因數再套因數個數公式，工作量會大上許多。"
+        ],
+        "zh-Hans": [
+          "**逐一算出 100 个 τ 值再相加太慢，改用「换个角度数」的方法。**",
+          "**关键转换：与其问「每个 k 有几个因数」，不如问「每个数 d 当了几次因数」。**",
+          "**d 在 1 到 100 之中，是哪些数的因数？**答案是 d 的所有倍数：d、2d、3d、⋯，**在 100 以内共有 ⌊100/d⌋ 个** ✓。",
+          "**所以总和 = ⌊100/1⌋ + ⌊100/2⌋ + ⌊100/3⌋ + ⋯ + ⌊100/100⌋。**",
+          "**这样就把「算 100 个因数个数」换成「算 100 个除法」，而且大部分项很好算。**",
+          "**先算前十项**：100 + 50 + 33 + 25 + 20 + 16 + 14 + 12 + 11 + 10 = **291**。",
+          "**再算 d = 11 到 20**：9 + 8 + 7 + 7 + 6 + 6 + 5 + 5 + 5 + 5 = **63**。累计 291 + 63 = **354**。",
+          "**d = 21 到 30**：4 + 4 + 4 + 4 + 4 + 3 + 3 + 3 + 3 + 3 = **35**。累计 **389**。",
+          "**d = 31 到 50**：31~33 各 3（共 9）；34~50 各 2（共 17 个 × 2 = 34）。小计 **43**。累计 **432**。",
+          "**d = 51 到 100**：这 50 个数的 ⌊100/d⌋ 全部等于 **1**（因为 100/51 < 2 而 100/100 = 1），小计 **50**。",
+          "**总计** = 432 + 50 = **482**。",
+          "验算：程序对 k = 1 到 100 逐一数出因数个数并累加，**总和恰好是 482** ✓ 与换角度的算法完全一致。",
+          "**核对合理性。**平均每个数有 482 ÷ 100 ≈ **4.82** 个因数。**这与「τ 的平均约为 ln n」的估计相符**——ln 100 ≈ 4.6，两者接近 ✓。",
+          "**注意这个「交换计数顺序」的技巧很通用。**它把「对每个 k 数因数」转成「对每个 d 数倍数」，**两种数法数的是同一堆东西（所有满足 d | k 且 k ≤ 100 的数对），只是分组方式不同**。若硬要逐一分解 100 个数的质因数再套因数个数公式，工作量会大上许多。"
+        ],
+        "en": [
+          "Computing all 100 values of τ and adding them is slow; count from the other direction instead.",
+          "The key switch: rather than asking how many divisors each k has, ask how many times each number d serves as a divisor.",
+          "Which numbers from 1 to 100 have d as a divisor? Exactly the multiples of d — namely d, 2d, 3d and so on — of which there are ⌊100/d⌋ up to 100.",
+          "So the sum equals ⌊100/1⌋ + ⌊100/2⌋ + ⌊100/3⌋ + ⋯ + ⌊100/100⌋.",
+          "This converts a hundred divisor-counts into a hundred divisions, most of them easy.",
+          "The first ten terms: 100 + 50 + 33 + 25 + 20 + 16 + 14 + 12 + 11 + 10 = 291.",
+          "For d = 11 to 20: 9 + 8 + 7 + 7 + 6 + 6 + 5 + 5 + 5 + 5 = 63, bringing the running total to 291 + 63 = 354.",
+          "For d = 21 to 30: 4 + 4 + 4 + 4 + 4 + 3 + 3 + 3 + 3 + 3 = 35, for a total of 389.",
+          "For d = 31 to 50: values 31 through 33 give 3 each, totalling 9, and 34 through 50 give 2 each, that is 17 × 2 = 34. The subtotal is 43, for a total of 432.",
+          "For d = 51 to 100: all fifty give ⌊100/d⌋ = 1, since 100/51 < 2 and 100/100 = 1, for a subtotal of 50.",
+          "The grand total is 432 + 50 = 482.",
+          "Check: counting the divisors of each k from 1 to 100 and accumulating gives exactly 482, matching the reversed count.",
+          "Check plausibility: the average number of divisors is 482 ÷ 100 ≈ 4.82. This agrees with the estimate that τ averages about ln n, since ln 100 ≈ 4.6 — close indeed.",
+          "This swap of counting order is a widely useful technique. It turns counting divisors for each k into counting multiples for each d; both count the same collection — all pairs with d dividing k and k ≤ 100 — merely grouped differently. Factorising a hundred numbers and applying the divisor-count formula to each would be far more work."
+        ],
+        "ja": [
+          "**100 個の τ を個別に求めて足すのは遅い**ので、**数える向きを変えます**。",
+          "**要となる転換：「各 k の約数はいくつか」ではなく「各数 d が何回約数になるか」を問います。**",
+          "**1〜100 のうち d を約数にもつのは何か。**d の倍数 d、2d、3d、⋯ であり、**100 以下には ⌊100/d⌋ 個** ✓ あります。",
+          "**したがって総和 = ⌊100/1⌋ + ⌊100/2⌋ + ⌊100/3⌋ + ⋯ + ⌊100/100⌋。**",
+          "**これで「100 個の約数個数」が「100 回の割り算」に変わり**、多くの項は簡単です。",
+          "**最初の 10 項**：100 + 50 + 33 + 25 + 20 + 16 + 14 + 12 + 11 + 10 = **291**。",
+          "**d = 11〜20**：9 + 8 + 7 + 7 + 6 + 6 + 5 + 5 + 5 + 5 = **63**。累計 291 + 63 = **354**。",
+          "**d = 21〜30**：4 + 4 + 4 + 4 + 4 + 3 + 3 + 3 + 3 + 3 = **35**。累計 **389**。",
+          "**d = 31〜50**：31〜33 は各 3（計 9）、34〜50 は各 2（17 個 × 2 = 34）。小計 **43**。累計 **432**。",
+          "**d = 51〜100**：この 50 個はすべて ⌊100/d⌋ = **1**（100/51 < 2、100/100 = 1）で小計 **50**。",
+          "**総計** = 432 + 50 = **482**。",
+          "検算：k = 1〜100 の約数を個別に数えて累積すると、**総和はちょうど 482** ✓ で向きを変えた計算と完全に一致します。",
+          "**妥当性の確認**：1 個あたり平均 482 ÷ 100 ≈ **4.82** 個の約数です。**「τ の平均は約 ln n」という評価と整合**し——ln 100 ≈ 4.6 で近い値です ✓。",
+          "**この「数える順序の交換」は汎用的な技法**です。「各 k の約数を数える」を「各 d の倍数を数える」に変えるもので、**どちらも同じ集まり（d | k かつ k ≤ 100 を満たす対の全体）を、まとめ方を変えて数えている**にすぎません。100 個を素因数分解して個数公式を適用するより、はるかに手間が少なくて済みます。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "482"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "因數個數的總和：交換計數順序，總和等於 Σ⌊100/d⌋ 而非逐一分解每個數",
+        "notes": "設計依據：詳解以「每個 d 當了幾次因數」交換計數順序，把問題轉為 Σ⌊100/d⌋ 並分段累加（51 到 100 全為 1 可整批處理）；驗算以程式逐一數因數獨立確認，並用「平均約 ln n」（ln 100 ≈ 4.6 對照實際 4.82）核對合理性。答案 482 已用交換計數與程式窮舉雙向驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（因數個數的總和）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "數論",
+        "topicCode": "number_theory",
+        "subtopic": "因數個數的總和",
+        "subtopicCode": "divisor_count_sum"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "number_theory_grade12_foundation_026",
+      "topic": "number_theory",
+      "subtopic": "binomial_two_exponent",
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "求最大的非負整數 k，使得 2ᵏ 能整除組合數 C(20, 10)（也就是從 20 個相異物品中取出 10 個的取法數）。",
+        "zh-Hans": "求最大的非负整数 k，使得 2ᵏ 能整除组合数 C(20, 10)（也就是从 20 个相异物品中取出 10 个的取法数）。",
+        "en": "Find the largest non-negative integer k such that 2ᵏ divides the binomial coefficient C(20, 10), the number of ways to choose 10 objects from 20 distinct ones.",
+        "ja": "二項係数 C(20, 10)（相異なる 20 個から 10 個を選ぶ場合の数）を 2ᵏ が割り切るような最大の非負整数 k を求めなさい。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 2。",
+        "zh-Hans": "答案是 2。",
+        "en": "The answer is 2.",
+        "ja": "答えは 2 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "**C(20, 10) = 20! ÷ (10! × 10!)，所以 2 的次數 = 20! 中 2 的次數 − 兩個 10! 中 2 的次數。**",
+          "**先算 20! 中 2 的次數。**用分層計數：⌊20/2⌋ + ⌊20/4⌋ + ⌊20/8⌋ + ⌊20/16⌋ = 10 + 5 + 2 + 1 = **18**。",
+          "**再算 10! 中 2 的次數**：⌊10/2⌋ + ⌊10/4⌋ + ⌊10/8⌋ = 5 + 2 + 1 = **8**。",
+          "**相減**：k = 18 − 8 − 8 = 18 − 16 = **2**。",
+          "所以最大的 k 是 **2**。",
+          "驗算：**把 C(20, 10) 實際算出來核對。**C(20, 10) = **184756**。",
+          "**逐次除以 2**：184756 ÷ 2 = **92378**（仍為偶數）；92378 ÷ 2 = **46189**。",
+          "**檢查 46189 的奇偶**：個位是 9，**是奇數** ✗ 不能再除。",
+          "**所以總共只能除 2 次**，即 2² 整除但 2³ 不整除 ✓ **k = 2**，與公式算出的完全一致。",
+          "**還有一個更快的方法：庫默爾定理。**它說 C(m + n, m) 中質數 p 的次數，**等於在 p 進位下計算 m + n 時發生的「進位次數」**。",
+          "**這裡 m = n = 10，要在二進位下計算 10 + 10。**",
+          "**10 的二進位是 1010。**做二進位加法 1010 + 1010：",
+          "**從右起第 1 位**：0 + 0 = 0，無進位。**第 2 位**：1 + 1 = 10₂，**進位一次** ✓ 本位留 0。",
+          "**第 3 位**：0 + 0 + 進位 0 = 0，無進位。**第 4 位**：1 + 1 = 10₂，**再進位一次** ✓。**第 5 位**：進位 1 落下，結束。",
+          "**總共進位 2 次** ✓ **所以 k = 2**，三種方法完全一致。",
+          "**注意不可以把 C(20,10) 誤當成 20!/10! 而漏掉一個 10!。**那樣會算成 18 − 8 = 10，**答案會變成 10，錯得離譜**——組合數的分母有**兩個**階乘。"
+        ],
+        "zh-Hans": [
+          "**C(20, 10) = 20! ÷ (10! × 10!)，所以 2 的次数 = 20! 中 2 的次数 − 两个 10! 中 2 的次数。**",
+          "**先算 20! 中 2 的次数。**用分层计数：⌊20/2⌋ + ⌊20/4⌋ + ⌊20/8⌋ + ⌊20/16⌋ = 10 + 5 + 2 + 1 = **18**。",
+          "**再算 10! 中 2 的次数**：⌊10/2⌋ + ⌊10/4⌋ + ⌊10/8⌋ = 5 + 2 + 1 = **8**。",
+          "**相减**：k = 18 − 8 − 8 = 18 − 16 = **2**。",
+          "所以最大的 k 是 **2**。",
+          "验算：**把 C(20, 10) 实际算出来核对。**C(20, 10) = **184756**。",
+          "**逐次除以 2**：184756 ÷ 2 = **92378**（仍为偶数）；92378 ÷ 2 = **46189**。",
+          "**检查 46189 的奇偶**：个位是 9，**是奇数** ✗ 不能再除。",
+          "**所以总共只能除 2 次**，即 2² 整除但 2³ 不整除 ✓ **k = 2**，与公式算出的完全一致。",
+          "**还有一个更快的方法：库默尔定理。**它说 C(m + n, m) 中质数 p 的次数，**等于在 p 进位下计算 m + n 时发生的「进位次数」**。",
+          "**这里 m = n = 10，要在二进位下计算 10 + 10。**",
+          "**10 的二进位是 1010。**做二进位加法 1010 + 1010：",
+          "**从右起第 1 位**：0 + 0 = 0，无进位。**第 2 位**：1 + 1 = 10₂，**进位一次** ✓ 本位留 0。",
+          "**第 3 位**：0 + 0 + 进位 0 = 0，无进位。**第 4 位**：1 + 1 = 10₂，**再进位一次** ✓。**第 5 位**：进位 1 落下，结束。",
+          "**总共进位 2 次** ✓ **所以 k = 2**，三种方法完全一致。",
+          "**注意不可以把 C(20,10) 误当成 20!/10! 而漏掉一个 10!。**那样会算成 18 − 8 = 10，**答案会变成 10，错得离谱**——组合数的分母有**两个**阶乘。"
+        ],
+        "en": [
+          "Since C(20, 10) = 20! ÷ (10! × 10!), the exponent of 2 equals that in 20! minus that in the two copies of 10!.",
+          "Compute the exponent in 20! by layers: ⌊20/2⌋ + ⌊20/4⌋ + ⌊20/8⌋ + ⌊20/16⌋ = 10 + 5 + 2 + 1 = 18.",
+          "Compute it in 10!: ⌊10/2⌋ + ⌊10/4⌋ + ⌊10/8⌋ = 5 + 2 + 1 = 8.",
+          "Subtracting: k = 18 − 8 − 8 = 18 − 16 = 2.",
+          "So the largest k is 2.",
+          "Check by computing C(20, 10) outright: it equals 184756.",
+          "Divide by 2 repeatedly: 184756 ÷ 2 = 92378, still even; and 92378 ÷ 2 = 46189.",
+          "Check the parity of 46189: it ends in 9 and is odd, so no further division is possible.",
+          "So division by 2 succeeds exactly twice — 2² divides while 2³ does not — giving k = 2, exactly as the formula gave.",
+          "A quicker route is Kummer's theorem: the exponent of a prime p in C(m + n, m) equals the number of carries when m and n are added in base p.",
+          "Here m = n = 10, so add 10 + 10 in binary.",
+          "In binary 10 is 1010, so perform the addition 1010 + 1010.",
+          "In the first position from the right: 0 + 0 = 0, no carry. In the second: 1 + 1 = 10 in binary, one carry, leaving 0 in place.",
+          "In the third: 0 + 0 plus a carry of 0 gives 0, no carry. In the fourth: 1 + 1 = 10 in binary, a second carry. In the fifth: the carry of 1 drops down, ending the addition.",
+          "There are 2 carries in all, giving k = 2 — all three methods agreeing.",
+          "Do not mistake C(20,10) for 20!/10! and drop one factorial. That would give 18 − 8 = 10, an answer of 10 and wildly wrong — a binomial coefficient has two factorials in its denominator."
+        ],
+        "ja": [
+          "**C(20, 10) = 20! ÷ (10! × 10!)** なので、2 の指数 = 20! の指数 − 10! 2 つ分の指数です。",
+          "**まず 20! における 2 の指数**を層別に：⌊20/2⌋ + ⌊20/4⌋ + ⌊20/8⌋ + ⌊20/16⌋ = 10 + 5 + 2 + 1 = **18**。",
+          "**10! における 2 の指数**：⌊10/2⌋ + ⌊10/4⌋ + ⌊10/8⌋ = 5 + 2 + 1 = **8**。",
+          "**引き算**：k = 18 − 8 − 8 = **2**。",
+          "したがって最大の k は **2** です。",
+          "検算：**C(20, 10) を実際に計算**します。C(20, 10) = **184756**。",
+          "**繰り返し 2 で割ります**：184756 ÷ 2 = **92378**（まだ偶数）、92378 ÷ 2 = **46189**。",
+          "**46189 の偶奇**：一の位が 9 で**奇数** ✗ これ以上割れません。",
+          "**割れた回数は 2 回**、すなわち 2² は割り切り 2³ は割り切らず ✓ **k = 2** で公式と完全に一致します。",
+          "**より速い方法：クンマーの定理**です。C(m + n, m) における素数 p の指数は、**p 進法で m + n を計算したときの「繰り上がりの回数」**に等しくなります。",
+          "**ここでは m = n = 10 なので、2 進法で 10 + 10 を計算**します。",
+          "**10 の 2 進表記は 1010** で、1010 + 1010 を筆算します：",
+          "**右から第 1 桁**：0 + 0 = 0、繰り上がりなし。**第 2 桁**：1 + 1 = 10₂ で**繰り上がり 1 回** ✓、その桁は 0。",
+          "**第 3 桁**：0 + 0 + 繰り上がり 0 = 0、繰り上がりなし。**第 4 桁**：1 + 1 = 10₂ で**繰り上がりもう 1 回** ✓。**第 5 桁**：繰り上がり 1 が下りて終了。",
+          "**繰り上がりは計 2 回** ✓ で **k = 2**、3 つの方法が完全に一致します。",
+          "**C(20,10) を 20!/10! と誤って 10! を 1 つ落としてはいけません。**それでは 18 − 8 = 10 となり、**答えが 10 と大きく外れます**——二項係数の分母には階乗が**2 つ**あります。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "2"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "組合數中 2 的次數：由 20! 與兩個 10! 中 2 的次數相減得 2，亦可用二進位加法的進位次數求得",
+        "notes": "設計依據：詳解以分層計數對分子分母各求 2 的次數再相減，並實際算出 C(20,10) = 184756 逐次除以 2 作獨立驗證；另示範庫默爾定理（二進位下 10 + 10 的進位次數）作為第三種算法。末尾指出漏掉一個 10! 會得到 10 的常見錯誤。答案 2 已用三種方法交叉驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（組合數中 2 的次數）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "數論",
+        "topicCode": "number_theory",
+        "subtopic": "組合數中 2 的次數",
+        "subtopicCode": "binomial_two_exponent"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "number_theory_grade12_foundation_027",
+      "topic": "number_theory",
+      "subtopic": "squarefree_odd_factors",
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "在 1 到 30 之中，有些數可以寫成相異質數的乘積（也就是質因數分解中沒有任何質數重複出現）。在這些數之中，求質因數個數為奇數的數共有多少個。（注意 1 不算，因為它沒有質因數，個數 0 是偶數。）",
+        "zh-Hans": "在 1 到 30 之中，有些数可以写成相异质数的乘积（也就是质因数分解中没有任何质数重复出现）。在这些数之中，求质因数个数为奇数的数共有多少个。（注意 1 不算，因为它没有质因数，个数 0 是偶数。）",
+        "en": "Among the numbers 1 to 30, some are products of distinct primes, meaning no prime repeats in their factorisation. Among those, how many have an odd number of prime factors? Note that 1 does not count, having no prime factors, and 0 is even.",
+        "ja": "1 から 30 のうち、相異なる素数の積として書けるもの（素因数分解でどの素数も重複しないもの）があります。そのうち素因数の個数が奇数であるものはいくつありますか。なお 1 は素因数をもたず、個数 0 は偶数なので数えません。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 11 個。",
+        "zh-Hans": "答案是 11 个。",
+        "en": "The answer is 11.",
+        "ja": "答えは 11 個です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "**條件有兩層：第一，質因數不可重複；第二，質因數的個數是奇數。**",
+          "**先排除有重複質因數的數。**這些是被某個質數的平方整除的數。",
+          "**被 4 整除的**：4、8、12、16、20、24、28 ✗（7 個）。**被 9 整除的**：9、18、27 ✗（3 個）。**被 25 整除的**：25 ✗（1 個）。",
+          "**檢查有沒有重複計算**：上面三組沒有共同的數（要同時被 4 與 9 整除得是 36 的倍數，超過 30）✓ 所以共排除 7 + 3 + 1 = **11 個**。",
+          "**再排除 1**（質因數個數 0，是偶數）。",
+          "**剩下 30 − 11 − 1 = 18 個數**待檢查，它們都是相異質數的乘積。",
+          "**質因數個數為 1 的（也就是質數本身）**：2、3、5、7、11、13、17、19、23、29——**共 10 個** ✓ 1 是奇數，全部符合。",
+          "**質因數個數為 2 的**：6 = 2×3、10 = 2×5、14 = 2×7、15 = 3×5、21 = 3×7、22 = 2×11、26 = 2×13——**共 7 個** ✗ 2 是偶數，全部不符合。",
+          "**質因數個數為 3 的**：30 = 2 × 3 × 5——**只有 1 個** ✓ 3 是奇數，符合。",
+          "**（核對數量：10 + 7 + 1 = 18 ✓ 與上面算出的待檢查數目相符，沒有遺漏。）**",
+          "**把符合的加起來**：10（一個質因數）+ 1（三個質因數）= **11 個**。",
+          "驗算：程式對 1 到 30 每個數做質因數分解，檢查是否無重複質因數且個數為奇數，**符合的恰好是 11 個** ✓：2、3、5、7、11、13、17、19、23、29、30，與手算完全一致。",
+          "**注意 30 是這個範圍內唯一有三個相異質因數的數。**下一個是 42 = 2 × 3 × 7，已超出範圍——**因為最小的三個質數乘積 2 × 3 × 5 = 30 已經接近上限**。",
+          "**也要注意 1 的處理。**1 沒有質因數，個數是 0 而 0 是偶數 ✗ **所以不計入**。題目特別說明了這一點，**因為 1 的歸類常引起爭議**——它既不是質數也不是合數，計數時必須明確約定。"
+        ],
+        "zh-Hans": [
+          "**条件有两层：第一，质因数不可重复；第二，质因数的个数是奇数。**",
+          "**先排除有重复质因数的数。**这些是被某个质数的平方整除的数。",
+          "**被 4 整除的**：4、8、12、16、20、24、28 ✗（7 个）。**被 9 整除的**：9、18、27 ✗（3 个）。**被 25 整除的**：25 ✗（1 个）。",
+          "**检查有没有重复计算**：上面三组没有共同的数（要同时被 4 与 9 整除得是 36 的倍数，超过 30）✓ 所以共排除 7 + 3 + 1 = **11 个**。",
+          "**再排除 1**（质因数个数 0，是偶数）。",
+          "**剩下 30 − 11 − 1 = 18 个数**待检查，它们都是相异质数的乘积。",
+          "**质因数个数为 1 的（也就是质数本身）**：2、3、5、7、11、13、17、19、23、29——**共 10 个** ✓ 1 是奇数，全部符合。",
+          "**质因数个数为 2 的**：6 = 2×3、10 = 2×5、14 = 2×7、15 = 3×5、21 = 3×7、22 = 2×11、26 = 2×13——**共 7 个** ✗ 2 是偶数，全部不符合。",
+          "**质因数个数为 3 的**：30 = 2 × 3 × 5——**只有 1 个** ✓ 3 是奇数，符合。",
+          "**（核对数量：10 + 7 + 1 = 18 ✓ 与上面算出的待检查数目相符，没有遗漏。）**",
+          "**把符合的加起来**：10（一个质因数）+ 1（三个质因数）= **11 个**。",
+          "验算：程序对 1 到 30 每个数做质因数分解，检查是否无重复质因数且个数为奇数，**符合的恰好是 11 个** ✓：2、3、5、7、11、13、17、19、23、29、30，与手算完全一致。",
+          "**注意 30 是这个范围内唯一有三个相异质因数的数。**下一个是 42 = 2 × 3 × 7，已超出范围——**因为最小的三个质数乘积 2 × 3 × 5 = 30 已经接近上限**。",
+          "**也要注意 1 的处理。**1 没有质因数，个数是 0 而 0 是偶数 ✗ **所以不计入**。题目特别说明了这一点，**因为 1 的归类常引起争议**——它既不是质数也不是合数，计数时必须明确约定。"
+        ],
+        "en": [
+          "Two conditions apply: no prime may repeat, and the number of prime factors must be odd.",
+          "Exclude the numbers with a repeated prime factor first — those divisible by the square of some prime.",
+          "Divisible by 4: 4, 8, 12, 16, 20, 24 and 28, seven numbers. Divisible by 9: 9, 18 and 27, three numbers. Divisible by 25: just 25.",
+          "Check for double counting: the three groups share no member, since divisibility by both 4 and 9 requires a multiple of 36, beyond 30. So 7 + 3 + 1 = 11 numbers are excluded.",
+          "Exclude 1 as well, its count of prime factors being 0, an even number.",
+          "That leaves 30 − 11 − 1 = 18 numbers to check, all products of distinct primes.",
+          "With exactly one prime factor, that is the primes themselves: 2, 3, 5, 7, 11, 13, 17, 19, 23 and 29 — ten numbers, and 1 being odd they all qualify.",
+          "With two prime factors: 6 = 2×3, 10 = 2×5, 14 = 2×7, 15 = 3×5, 21 = 3×7, 22 = 2×11 and 26 = 2×13 — seven numbers, and 2 being even none qualify.",
+          "With three prime factors: 30 = 2 × 3 × 5 — a single number, and 3 being odd it qualifies.",
+          "Verify the tally: 10 + 7 + 1 = 18, matching the count of numbers to check, so nothing was missed.",
+          "Adding the qualifiers: 10 with one prime factor plus 1 with three gives 11.",
+          "Check: factorising each number from 1 to 30 and testing for distinct primes in odd quantity leaves exactly 11 — namely 2, 3, 5, 7, 11, 13, 17, 19, 23, 29 and 30 — matching the hand count.",
+          "Note 30 is the only number in range with three distinct prime factors. The next is 42 = 2 × 3 × 7, out of range, since the product of the three smallest primes, 2 × 3 × 5 = 30, already sits at the limit.",
+          "Note also the treatment of 1. Having no prime factors, its count is 0, which is even, so it does not qualify. The problem says so explicitly because the status of 1 often causes dispute — neither prime nor composite, it demands an explicit convention when counting."
+        ],
+        "ja": [
+          "**条件は 2 つ**：第 1 に素因数が重複しないこと、第 2 に素因数の個数が奇数であることです。",
+          "**まず素因数が重複する数を除外**します。ある素数の平方で割り切れる数です。",
+          "**4 で割り切れる**：4、8、12、16、20、24、28 ✗（7 個）。**9 で割り切れる**：9、18、27 ✗（3 個）。**25 で割り切れる**：25 ✗（1 個）。",
+          "**重複を確認**：3 群に共通の数はありません（4 と 9 の両方で割り切れるには 36 の倍数が必要で 30 を超える）✓。除外は 7 + 3 + 1 = **11 個**。",
+          "**さらに 1 を除外**します（素因数の個数 0 は偶数）。",
+          "**残る 30 − 11 − 1 = 18 個**が検討対象で、いずれも相異なる素数の積です。",
+          "**素因数が 1 個（すなわち素数そのもの）**：2、3、5、7、11、13、17、19、23、29——**10 個** ✓ 1 は奇数なのですべて該当します。",
+          "**素因数が 2 個**：6 = 2×3、10 = 2×5、14 = 2×7、15 = 3×5、21 = 3×7、22 = 2×11、26 = 2×13——**7 個** ✗ 2 は偶数なので該当しません。",
+          "**素因数が 3 個**：30 = 2 × 3 × 5——**1 個のみ** ✓ 3 は奇数で該当します。",
+          "**（個数の照合：10 + 7 + 1 = 18 ✓ 検討対象の数と一致し、漏れはありません。）**",
+          "**該当を合計**：10（素因数 1 個）+ 1（3 個）= **11 個**。",
+          "検算：1〜30 の各数を素因数分解し、重複がなく個数が奇数かを調べると、**該当はちょうど 11 個** ✓：2、3、5、7、11、13、17、19、23、29、30 で手計算と完全に一致します。",
+          "**30 はこの範囲で相異なる素因数を 3 個もつ唯一の数**です。次は 42 = 2 × 3 × 7 で範囲外——**最小の 3 素数の積 2 × 3 × 5 = 30 が既に上限に近い**からです。",
+          "**1 の扱いにも注意**します。素因数をもたず個数 0 は偶数 ✗ なので**数えません**。問題が明記しているのは、**1 の分類がしばしば議論になる**ためで——素数でも合成数でもなく、数えるときに明確な約束が必要です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "11"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "質因數個數為奇數的數：先排除被質數平方整除者與 1，再依質因數個數分類，僅 1 個或 3 個者符合",
+        "notes": "設計依據：詳解先以「被 4、9、25 整除」排除有重複質因數者並確認三組無交集，再依質因數個數分類逐一列出；並以 10 + 7 + 1 = 18 回頭核對待檢查的數目確保無遺漏。末尾說明 30 為範圍內唯一有三個相異質因數者的原因，以及題目為何要特別交代 1 的歸類。答案 11 已用分類枚舉與程式窮舉雙向驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（質因數個數為奇數的數）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "數論",
+        "topicCode": "number_theory",
+        "subtopic": "質因數個數為奇數的數",
+        "subtopicCode": "squarefree_odd_factors"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "number_theory_grade12_foundation_028",
+      "topic": "number_theory",
+      "subtopic": "zeckendorf_representation",
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "費氏數列為 1、2、3、5、8、13、21、34、55、89、⋯（每一項是前兩項之和）。已知每個正整數都可以唯一地寫成若干個費氏數之和，且所用的費氏數在數列中互不相鄰。求把 100 這樣拆解時，用到的費氏數共有幾個。",
+        "zh-Hans": "斐波那契数列为 1、2、3、5、8、13、21、34、55、89、⋯（每一项是前两项之和）。已知每个正整数都可以唯一地写成若干个斐波那契数之和，且所用的斐波那契数在数列中互不相邻。求把 100 这样拆解时，用到的斐波那契数共有几个。",
+        "en": "The Fibonacci numbers are 1, 2, 3, 5, 8, 13, 21, 34, 55, 89 and so on, each the sum of the previous two. Every positive integer can be written uniquely as a sum of Fibonacci numbers no two of which are adjacent in the sequence. How many Fibonacci numbers does this representation of 100 use?",
+        "ja": "フィボナッチ数列を 1、2、3、5、8、13、21、34、55、89、⋯（各項は直前 2 項の和）とします。どの正の整数も、数列中で隣り合わない複数のフィボナッチ数の和として一意に表せます。100 をこのように表すとき、使うフィボナッチ数はいくつですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 3 個。",
+        "zh-Hans": "答案是 3 个。",
+        "en": "The answer is 3.",
+        "ja": "答えは 3 個です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "**這種拆法有一個簡單可靠的做法：每次都取「不超過剩餘量的最大費氏數」，也就是貪心法。**",
+          "**先列出 100 以內的費氏數**：1、2、3、5、8、13、21、34、55、89。（下一個是 144 > 100。）",
+          "**第一步：目前要湊 100。**不超過 100 的最大費氏數是 **89**（下一個 144 太大）。",
+          "**取 89，剩下** 100 − 89 = **11**。",
+          "**第二步：要湊 11。**不超過 11 的最大費氏數是 **8**（下一個 13 太大）。",
+          "**取 8，剩下** 11 − 8 = **3**。",
+          "**第三步：要湊 3。**不超過 3 的最大費氏數就是 **3** 本身。",
+          "**取 3，剩下** 3 − 3 = **0** ✓ **拆解完成**。",
+          "**所以 100 = 89 + 8 + 3，共用了 3 個費氏數。**",
+          "驗算：**先檢查和是否正確。**89 + 8 = 97，97 + 3 = **100** ✓。",
+          "**再檢查「互不相鄰」的條件。**在數列 1、2、3、5、8、13、21、34、55、89 中，**3 排第 3 位、8 排第 5 位、89 排第 10 位**。",
+          "**位置 3、5、10 兩兩之間至少差 2** ✓（5 − 3 = 2、10 − 5 = 5），**沒有任何兩個是相鄰的**，符合要求。",
+          "程式以貪心法對 100 執行同樣的拆解，**得到 [89, 8, 3] 共 3 項** ✓ 與手算一致。",
+          "**注意貪心法在這裡一定會成功，而且結果唯一。**這不是碰巧——**若某一步不取最大的那個費氏數，剩下的量就會超過所有較小費氏數的總和而湊不出來**（因為連續費氏數之和有這個性質）。所以每一步別無選擇。",
+          "**也要注意「不相鄰」這個條件不可省略。**若允許相鄰，拆法就不唯一了——例如 100 也可以寫成 55 + 34 + 8 + 3（55 與 34 在數列中相鄰 ✗），那樣就變成 4 個費氏數，**答案會不同**。"
+        ],
+        "zh-Hans": [
+          "**这种拆法有一个简单可靠的做法：每次都取「不超过剩余量的最大斐波那契数」，也就是贪心法。**",
+          "**先列出 100 以内的斐波那契数**：1、2、3、5、8、13、21、34、55、89。（下一个是 144 > 100。）",
+          "**第一步：目前要凑 100。**不超过 100 的最大斐波那契数是 **89**（下一个 144 太大）。",
+          "**取 89，剩下** 100 − 89 = **11**。",
+          "**第二步：要凑 11。**不超过 11 的最大斐波那契数是 **8**（下一个 13 太大）。",
+          "**取 8，剩下** 11 − 8 = **3**。",
+          "**第三步：要凑 3。**不超过 3 的最大斐波那契数就是 **3** 本身。",
+          "**取 3，剩下** 3 − 3 = **0** ✓ **拆解完成**。",
+          "**所以 100 = 89 + 8 + 3，共用了 3 个斐波那契数。**",
+          "验算：**先检查和是否正确。**89 + 8 = 97，97 + 3 = **100** ✓。",
+          "**再检查「互不相邻」的条件。**在数列 1、2、3、5、8、13、21、34、55、89 中，**3 排第 3 位、8 排第 5 位、89 排第 10 位**。",
+          "**位置 3、5、10 两两之间至少差 2** ✓（5 − 3 = 2、10 − 5 = 5），**没有任何两个是相邻的**，符合要求。",
+          "程序以贪心法对 100 执行同样的拆解，**得到 [89, 8, 3] 共 3 项** ✓ 与手算一致。",
+          "**注意贪心法在这里一定会成功，而且结果唯一。**这不是碰巧——**若某一步不取最大的那个斐波那契数，剩下的量就会超过所有较小斐波那契数的总和而凑不出来**（因为连续斐波那契数之和有这个性质）。所以每一步别无选择。",
+          "**也要注意「不相邻」这个条件不可省略。**若允许相邻，拆法就不唯一了——例如 100 也可以写成 55 + 34 + 8 + 3（55 与 34 在数列中相邻 ✗），那样就变成 4 个斐波那契数，**答案会不同**。"
+        ],
+        "en": [
+          "There is a simple and reliable procedure: at each step take the largest Fibonacci number not exceeding what remains — a greedy method.",
+          "List the Fibonacci numbers up to 100: 1, 2, 3, 5, 8, 13, 21, 34, 55 and 89, the next being 144 > 100.",
+          "First step, with 100 to make: the largest Fibonacci number not exceeding 100 is 89, since the next, 144, is too big.",
+          "Take 89, leaving 100 − 89 = 11.",
+          "Second step, with 11 to make: the largest not exceeding 11 is 8, since 13 is too big.",
+          "Take 8, leaving 11 − 8 = 3.",
+          "Third step, with 3 to make: the largest not exceeding 3 is 3 itself.",
+          "Take 3, leaving 3 − 3 = 0, and the decomposition is complete.",
+          "So 100 = 89 + 8 + 3, using 3 Fibonacci numbers.",
+          "Check the sum first: 89 + 8 = 97 and 97 + 3 = 100.",
+          "Check the non-adjacency condition. In the sequence 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, the number 3 sits third, 8 sits fifth and 89 sits tenth.",
+          "The positions 3, 5 and 10 differ by at least 2 in every pair, since 5 − 3 = 2 and 10 − 5 = 5, so no two are adjacent, as required.",
+          "Running the same greedy decomposition on 100 gives [89, 8, 3], three terms, matching the hand computation.",
+          "The greedy method is guaranteed to succeed here, with a unique result. This is no accident: failing to take the largest Fibonacci number at some step leaves a remainder exceeding the total of all smaller Fibonacci numbers, which then cannot make it up — a property of sums of consecutive Fibonacci numbers. So no step offers a choice.",
+          "The non-adjacency condition is also essential. Allowing adjacent terms destroys uniqueness — 100 can also be written as 55 + 34 + 8 + 3, with 55 and 34 adjacent in the sequence, using four Fibonacci numbers and giving a different answer."
+        ],
+        "ja": [
+          "**この分解には簡明で確実な手順**があります：毎回「残りを超えない最大のフィボナッチ数」をとる貪欲法です。",
+          "**100 以下のフィボナッチ数を列挙**：1、2、3、5、8、13、21、34、55、89。（次は 144 > 100。）",
+          "**第 1 段階：100 を作ります。**100 を超えない最大は **89**（次の 144 は大きすぎる）。",
+          "**89 をとり、残り** 100 − 89 = **11**。",
+          "**第 2 段階：11 を作ります。**11 を超えない最大は **8**（次の 13 は大きすぎる）。",
+          "**8 をとり、残り** 11 − 8 = **3**。",
+          "**第 3 段階：3 を作ります。**3 を超えない最大は **3** 自身。",
+          "**3 をとり、残り** 3 − 3 = **0** ✓ **分解完了**です。",
+          "**したがって 100 = 89 + 8 + 3 で、使ったのは 3 個。**",
+          "検算：**まず和を確認**します。89 + 8 = 97、97 + 3 = **100** ✓。",
+          "**次に「隣り合わない」条件を確認**します。数列 1、2、3、5、8、13、21、34、55、89 において、**3 は第 3 項、8 は第 5 項、89 は第 10 項**です。",
+          "**位置 3、5、10 はどの 2 つも 2 以上離れており** ✓（5 − 3 = 2、10 − 5 = 5）、**隣り合うものはなく**条件を満たします。",
+          "同じ貪欲法を 100 に適用すると **[89, 8, 3] の 3 項** ✓ が得られ、手計算と一致します。",
+          "**貪欲法はここで必ず成功し、結果は一意**です。偶然ではなく——**ある段階で最大のものをとらなければ、残りが「それより小さいフィボナッチ数の総和」を超えて作れなくなる**からです（連続するフィボナッチ数の和がこの性質をもちます）。したがって各段階に選択の余地はありません。",
+          "**「隣り合わない」条件も省けません。**隣接を許せば一意性が崩れ——100 は 55 + 34 + 8 + 3 とも書けます（55 と 34 は数列で隣接 ✗）。それでは 4 個となり、**答えが変わってしまいます**。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "3"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "拆成不相鄰的費氏數：以貪心法每次取不超過剩餘量的最大費氏數，100 = 89 + 8 + 3",
+        "notes": "設計依據：詳解逐步執行貪心法並在結束後同時檢查「和正確」與「位置互不相鄰」兩個條件；並說明貪心法為何必定成功且唯一（不取最大者則餘量超過所有較小費氏數之和）。末尾以 100 = 55 + 34 + 8 + 3 為例說明若允許相鄰則拆法不唯一、答案會變成 4。答案 3 已用手算與程式貪心分解雙向驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（拆成不相鄰的費氏數）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "數論",
+        "topicCode": "number_theory",
+        "subtopic": "拆成不相鄰的費氏數",
+        "subtopicCode": "zeckendorf_representation"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "number_theory_grade12_foundation_029",
+      "topic": "number_theory",
+      "subtopic": "primitive_root_smallest",
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "在模 17 的運算中，若一個正整數 a（2 ≤ a ≤ 16）滿足「a¹、a²、a³、⋯、a¹⁶ 除以 17 的餘數恰好取遍 1 到 16 每個值各一次」，就稱 a 為模 17 的原根。求最小的模 17 原根。",
+        "zh-Hans": "在模 17 的运算中，若一个正整数 a（2 ≤ a ≤ 16）满足「a¹、a²、a³、⋯、a¹⁶ 除以 17 的余数恰好取遍 1 到 16 每个值各一次」，就称 a 为模 17 的原根。求最小的模 17 原根。",
+        "en": "Working modulo 17, an integer a with 2 ≤ a ≤ 16 is called a primitive root if the remainders of a¹, a², a³, …, a¹⁶ on division by 17 run through each of 1 to 16 exactly once. Find the smallest primitive root modulo 17.",
+        "ja": "17 を法とする計算で、整数 a（2 ≤ a ≤ 16）について「a¹、a²、a³、⋯、a¹⁶ を 17 で割った余りが 1 から 16 までをちょうど 1 回ずつとる」とき、a を 17 の原始根と呼びます。17 を法とする最小の原始根を求めなさい。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 3。",
+        "zh-Hans": "答案是 3。",
+        "en": "The answer is 3.",
+        "ja": "答えは 3 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "**要判斷 a 是不是原根，關鍵是看「a 的多少次方才第一次等於 1」——這個次數稱為 a 的階。**",
+          "**由費馬小定理，a¹⁶ ≡ 1 (mod 17) 對所有不被 17 整除的 a 都成立**，所以每個 a 的階都整除 16。",
+          "**16 的因數是 1、2、4、8、16。**若階等於 **16**，則 a¹ 到 a¹⁶ 全不重複，恰好取遍 16 個值 ✓ **a 就是原根**；若階小於 16，就會提早循環 ✗。",
+          "**判斷技巧：只要檢查 a⁸ 是否為 1 即可。**因為所有小於 16 的可能階（1、2、4、8）都整除 8，**若階小於 16 則必有 a⁸ ≡ 1**；反之若 a⁸ ≢ 1，階就只能是 16。",
+          "**先試 a = 2。**2⁴ = 16 ≡ **−1** (mod 17)。所以 2⁸ = (2⁴)² ≡ (−1)² = **1** ✗ **階是 8 而不是 16，2 不是原根**。",
+          "**（實際上 2 的冪只會產生 8 個不同的餘數：2、4、8、16、15、13、9、1，然後就循環了。）**",
+          "**再試 a = 3。**先算 3⁴ = 81。81 = 4 × 17 + 13，所以 **3⁴ ≡ 13** (mod 17)。",
+          "**再平方**：3⁸ ≡ 13² = 169。169 = 9 × 17 + 16，所以 **3⁸ ≡ 16 ≡ −1** (mod 17) ✗ **不等於 1** ✓ **所以 3 的階是 16，3 是原根**。",
+          "**由於 2 已排除、3 通過，最小的原根就是 3。**",
+          "驗算：**把 3 的各次冪逐一列出核對。**3¹ = 3、3² = 9、3³ = 27 ≡ **10**、3⁴ ≡ 30 ≡ **13**、3⁵ ≡ 39 ≡ **5**、3⁶ ≡ 15、3⁷ ≡ 45 ≡ **11**、3⁸ ≡ 33 ≡ **16**。",
+          "繼續：3⁹ ≡ 48 ≡ **14**、3¹⁰ ≡ 42 ≡ **8**、3¹¹ ≡ 24 ≡ **7**、3¹² ≡ 21 ≡ **4**、3¹³ ≡ **12**、3¹⁴ ≡ 36 ≡ **2**、3¹⁵ ≡ **6**、3¹⁶ ≡ 18 ≡ **1**。",
+          "**把這 16 個餘數排序**：1、2、3、4、5、6、7、8、10、11、12、13、14、15、16 ⋯ 加上 9，**恰好是 1 到 16 每個各一次** ✓ **確認 3 是原根**。",
+          "程式對 a = 2 到 16 逐一計算階，**第一個階為 16 的正是 3** ✓ 與推理一致。",
+          "**注意 a⁸ ≡ −1 與 a⁸ ≡ 1 是關鍵的分水嶺。**兩者的平方都是 1，但**只有 a⁸ ≡ −1 才表示階恰為 16**。若把 3⁸ ≡ 16 誤看成 ≡ 1（16 與 1 在模 17 下並不相同！），就會誤判 3 不是原根。"
+        ],
+        "zh-Hans": [
+          "**要判断 a 是不是原根，关键是看「a 的多少次方才第一次等于 1」——这个次数称为 a 的阶。**",
+          "**由费马小定理，a¹⁶ ≡ 1 (mod 17) 对所有不被 17 整除的 a 都成立**，所以每个 a 的阶都整除 16。",
+          "**16 的因数是 1、2、4、8、16。**若阶等于 **16**，则 a¹ 到 a¹⁶ 全不重复，恰好取遍 16 个值 ✓ **a 就是原根**；若阶小于 16，就会提早循环 ✗。",
+          "**判断技巧：只要检查 a⁸ 是否为 1 即可。**因为所有小于 16 的可能阶（1、2、4、8）都整除 8，**若阶小于 16 则必有 a⁸ ≡ 1**；反之若 a⁸ ≢ 1，阶就只能是 16。",
+          "**先试 a = 2。**2⁴ = 16 ≡ **−1** (mod 17)。所以 2⁸ = (2⁴)² ≡ (−1)² = **1** ✗ **阶是 8 而不是 16，2 不是原根**。",
+          "**（实际上 2 的幂只会产生 8 个不同的余数：2、4、8、16、15、13、9、1，然后就循环了。）**",
+          "**再试 a = 3。**先算 3⁴ = 81。81 = 4 × 17 + 13，所以 **3⁴ ≡ 13** (mod 17)。",
+          "**再平方**：3⁸ ≡ 13² = 169。169 = 9 × 17 + 16，所以 **3⁸ ≡ 16 ≡ −1** (mod 17) ✗ **不等于 1** ✓ **所以 3 的阶是 16，3 是原根**。",
+          "**由于 2 已排除、3 通过，最小的原根就是 3。**",
+          "验算：**把 3 的各次幂逐一列出核对。**3¹ = 3、3² = 9、3³ = 27 ≡ **10**、3⁴ ≡ 30 ≡ **13**、3⁵ ≡ 39 ≡ **5**、3⁶ ≡ 15、3⁷ ≡ 45 ≡ **11**、3⁸ ≡ 33 ≡ **16**。",
+          "继续：3⁹ ≡ 48 ≡ **14**、3¹⁰ ≡ 42 ≡ **8**、3¹¹ ≡ 24 ≡ **7**、3¹² ≡ 21 ≡ **4**、3¹³ ≡ **12**、3¹⁴ ≡ 36 ≡ **2**、3¹⁵ ≡ **6**、3¹⁶ ≡ 18 ≡ **1**。",
+          "**把这 16 个余数排序**：1、2、3、4、5、6、7、8、10、11、12、13、14、15、16 ⋯ 加上 9，**恰好是 1 到 16 每个各一次** ✓ **确认 3 是原根**。",
+          "程序对 a = 2 到 16 逐一计算阶，**第一个阶为 16 的正是 3** ✓ 与推理一致。",
+          "**注意 a⁸ ≡ −1 与 a⁸ ≡ 1 是关键的分水岭。**两者的平方都是 1，但**只有 a⁸ ≡ −1 才表示阶恰为 16**。若把 3⁸ ≡ 16 误看成 ≡ 1（16 与 1 在模 17 下并不相同！），就会误判 3 不是原根。"
+        ],
+        "en": [
+          "To test whether a is a primitive root, the key is the smallest power of a that equals 1 — that exponent is called the order of a.",
+          "By Fermat's little theorem, a¹⁶ ≡ 1 (mod 17) for every a not divisible by 17, so every order divides 16.",
+          "The divisors of 16 are 1, 2, 4, 8 and 16. An order of 16 means a¹ through a¹⁶ never repeat and run through all 16 values, making a a primitive root; a smaller order means the powers cycle early.",
+          "A shortcut: it suffices to test whether a⁸ equals 1. Every possible order below 16 — namely 1, 2, 4 and 8 — divides 8, so a smaller order forces a⁸ ≡ 1; conversely, if a⁸ is not 1, the order can only be 16.",
+          "Try a = 2 first. Since 2⁴ = 16 ≡ −1 (mod 17), we get 2⁸ = (2⁴)² ≡ (−1)² = 1. So the order is 8, not 16, and 2 is not a primitive root.",
+          "Indeed the powers of 2 produce only 8 distinct remainders — 2, 4, 8, 16, 15, 13, 9, 1 — before repeating.",
+          "Try a = 3. First 3⁴ = 81, and since 81 = 4 × 17 + 13, we have 3⁴ ≡ 13 (mod 17).",
+          "Squaring: 3⁸ ≡ 13² = 169, and since 169 = 9 × 17 + 16, we have 3⁸ ≡ 16 ≡ −1 (mod 17), which is not 1. So the order of 3 is 16 and 3 is a primitive root.",
+          "Since 2 is excluded and 3 passes, the smallest primitive root is 3.",
+          "Check by listing the powers of 3: 3¹ = 3, 3² = 9, 3³ = 27 ≡ 10, 3⁴ ≡ 13, 3⁵ ≡ 5, 3⁶ ≡ 15, 3⁷ ≡ 11 and 3⁸ ≡ 16.",
+          "Continuing: 3⁹ ≡ 14, 3¹⁰ ≡ 8, 3¹¹ ≡ 7, 3¹² ≡ 4, 3¹³ ≡ 12, 3¹⁴ ≡ 2, 3¹⁵ ≡ 6 and 3¹⁶ ≡ 1.",
+          "Sorting the sixteen remainders gives 1 through 16 with each appearing exactly once, confirming that 3 is a primitive root.",
+          "Computing the order of each a from 2 to 16 shows the first with order 16 is indeed 3, matching the reasoning.",
+          "Note the crucial distinction between a⁸ ≡ −1 and a⁸ ≡ 1. Both square to 1, but only a⁸ ≡ −1 indicates an order of exactly 16. Misreading 3⁸ ≡ 16 as ≡ 1 — and 16 is not 1 modulo 17 — would wrongly rule 3 out."
+        ],
+        "ja": [
+          "**a が原始根かの判定の鍵は「a の何乗で初めて 1 になるか」**——この指数を a の位数と呼びます。",
+          "**フェルマーの小定理より、17 で割り切れないすべての a について a¹⁶ ≡ 1 (mod 17)** なので、位数は必ず 16 を割り切ります。",
+          "**16 の約数は 1、2、4、8、16。**位数が **16** なら a¹〜a¹⁶ は重複せず 16 個の値をとり ✓ **a は原始根**、16 未満なら早く循環します ✗。",
+          "**判定の要領：a⁸ が 1 かを調べれば十分**です。16 未満の位数（1、2、4、8）はすべて 8 を割り切るので、**位数が 16 未満なら必ず a⁸ ≡ 1**。逆に a⁸ ≢ 1 なら位数は 16 に限られます。",
+          "**まず a = 2。**2⁴ = 16 ≡ **−1** (mod 17) なので 2⁸ = (2⁴)² ≡ **1** ✗ で**位数は 8 であり 2 は原始根ではありません**。",
+          "**（実際 2 の冪は 2、4、8、16、15、13、9、1 の 8 個しか生みません。）**",
+          "**次に a = 3。**3⁴ = 81 で 81 = 4 × 17 + 13 より **3⁴ ≡ 13** (mod 17)。",
+          "**平方して**：3⁸ ≡ 13² = 169、169 = 9 × 17 + 16 より **3⁸ ≡ 16 ≡ −1** (mod 17) で **1 ではありません** ✓。**したがって 3 の位数は 16 で、3 は原始根**です。",
+          "**2 は除外され 3 が通ったので、最小の原始根は 3** です。",
+          "検算：**3 の冪を順に列挙**します。3¹ = 3、3² = 9、3³ = 27 ≡ **10**、3⁴ ≡ **13**、3⁵ ≡ **5**、3⁶ ≡ **15**、3⁷ ≡ **11**、3⁸ ≡ **16**。",
+          "続けて 3⁹ ≡ **14**、3¹⁰ ≡ **8**、3¹¹ ≡ **7**、3¹² ≡ **4**、3¹³ ≡ **12**、3¹⁴ ≡ **2**、3¹⁵ ≡ **6**、3¹⁶ ≡ **1**。",
+          "**16 個の余りを並べる**と 1 から 16 が**ちょうど 1 回ずつ** ✓ 現れ、**3 が原始根であると確認**できます。",
+          "a = 2〜16 の位数を計算すると、**位数 16 の最初のものはまさに 3** ✓ で推論と一致します。",
+          "**a⁸ ≡ −1 と a⁸ ≡ 1 の区別が決定的**です。どちらも 2 乗すれば 1 ですが、**位数がちょうど 16 であることを示すのは a⁸ ≡ −1 のみ**。3⁸ ≡ 16 を ≡ 1 と読み違えると（17 を法として 16 と 1 は別物です！）3 を誤って除外してしまいます。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "3"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "模十七的原根：階必整除 16，故只需檢查 a⁸ 是否為 1；2 的階為 8 而 3 的階為 16",
+        "notes": "設計依據：詳解由費馬小定理說明階必整除 16，並導出「只需檢查 a⁸」的判準（16 以下的可能階皆整除 8）；先排除 2 再驗證 3，另完整列出 3 的十六個冪確認取遍 1 到 16。末尾強調 a⁸ ≡ −1 與 ≡ 1 的分水嶺，指出把 16 誤看成 1 會導致誤判。答案 3 已用階的判準與十六個冪的完整列舉雙向驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（模十七的原根）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "數論",
+        "topicCode": "number_theory",
+        "subtopic": "模十七的原根",
+        "subtopicCode": "primitive_root_smallest"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "number_theory_grade12_foundation_030",
+      "topic": "number_theory",
+      "subtopic": "reverse_sum_square",
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "有些三位數，把它的數字反過來寫仍是一個三位數（也就是個位不為 0），而且原數與反序數相加的結果恰好是一個完全平方數。求符合條件的最小三位數。",
+        "zh-Hans": "有些三位数，把它的数字反过来写仍是一个三位数（也就是个位不为 0），而且原数与反序数相加的结果恰好是一个完全平方数。求符合条件的最小三位数。",
+        "en": "Some three-digit numbers remain three-digit when their digits are reversed, that is their units digit is not 0, and adding the number to its reversal gives a perfect square. Find the smallest such three-digit number.",
+        "ja": "3 桁の数のうち、数字を逆に並べてもなお 3 桁である（一の位が 0 でない）もので、もとの数と逆順の数の和がちょうど平方数になるものがあります。条件を満たす最小の 3 桁の数を求めなさい。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 143。",
+        "zh-Hans": "答案是 143。",
+        "en": "The answer is 143.",
+        "ja": "答えは 143 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "**先把「原數 + 反序數」用數字表示出來，看看它有什麼結構。**",
+          "**設三位數的百位是 a、十位是 b、個位是 c**（a ≥ 1，且 c ≥ 1 才能保證反序後仍是三位數）。",
+          "**原數 = 100a + 10b + c，反序數 = 100c + 10b + a。**",
+          "**兩者相加** = 100a + 10b + c + 100c + 10b + a = **101a + 20b + 101c** = **101(a + c) + 20b**。",
+          "**這個式子告訴我們：和只取決於 (a + c) 與 b，與 a、c 各自是多少無關** ✓ 這大幅減少了要檢查的情形。",
+          "**估計和的範圍。**最小是 a + c = 2、b = 0 時的 202；最大是 a + c = 18、b = 9 時的 101 × 18 + 180 = **1998**。",
+          "**所以和介於 202 與 1998 之間，對應的完全平方數是 15² = 225 到 44² = 1936。**",
+          "**要找最小的三位數，就從百位 a = 1 開始，再讓十位 b 盡量小。**",
+          "**a = 1、b = 0**：和 = 101(1 + c) + 0 = 101 + 101c。c 從 1 到 9 給出 202、303、404、505、606、707、808、909 ⋯ **這些都不是完全平方數** ✗（14² = 196、15² = 225，202 落在其間；其餘同理）。",
+          "**a = 1、b = 1**：和 = 101(1 + c) + 20。c = 1 到 9 給出 222、323、424、525、626、727、828、929、1030 ✗ **仍無完全平方數**（20² = 400、21² = 441，424 落在其間）。",
+          "**a = 1、b = 2**：和 = 101(1 + c) + 40。c = 1 給 242 ✗；c = 2 給 343 ✗；**c = 3 給 101 × 4 + 40 = 444** ✗（21² = 441 很接近但不等）；c = 4 給 545 ✗ ⋯ 全部不符 ✗。",
+          "**a = 1、b = 3**：和 = 101(1 + c) + 60。c = 1 給 262 ✗；c = 2 給 363 ✗；**c = 3 給 101 × 4 + 60 = 464** ✗；**c = 4 給 101 × 5 + 60 = 565** ✗ ⋯ 再往下，**c = 3 對應的數是 133、c = 4 對應 134** ⋯ 逐一檢查到 **c = 3 之後**，第一個成功的是 **143**。",
+          "**驗證 143**：反序數是 **341**，兩者相加 143 + 341 = **484** = **22²** ✓ **確實是完全平方數**。",
+          "驗算：程式由 100 開始逐一往上檢查每個個位不為 0 的三位數，**第一個滿足條件的正是 143** ✓；接下來幾個是 164（+ 461 = 625 = 25²）、198（+ 891 = 1089 = 33²）、242（+ 242 = 484）。",
+          "**注意個位不為 0 這個條件不可忽略。**若允許個位為 0，例如 110，它的「反序」是 011 = 11，而 110 + 11 = 121 = 11² 也是完全平方數 ✓ **答案就會變成 110**——**題目正是為了排除這種前導零的歧義，才要求反序後仍是三位數。**"
+        ],
+        "zh-Hans": [
+          "**先把「原数 + 反序数」用数字表示出来，看看它有什么结构。**",
+          "**设三位数的百位是 a、十位是 b、个位是 c**（a ≥ 1，且 c ≥ 1 才能保证反序后仍是三位数）。",
+          "**原数 = 100a + 10b + c，反序数 = 100c + 10b + a。**",
+          "**两者相加** = 100a + 10b + c + 100c + 10b + a = **101a + 20b + 101c** = **101(a + c) + 20b**。",
+          "**这个式子告诉我们：和只取决于 (a + c) 与 b，与 a、c 各自是多少无关** ✓ 这大幅减少了要检查的情形。",
+          "**估计和的范围。**最小是 a + c = 2、b = 0 时的 202；最大是 a + c = 18、b = 9 时的 101 × 18 + 180 = **1998**。",
+          "**所以和介于 202 与 1998 之间，对应的完全平方数是 15² = 225 到 44² = 1936。**",
+          "**要找最小的三位数，就从百位 a = 1 开始，再让十位 b 尽量小。**",
+          "**a = 1、b = 0**：和 = 101(1 + c) + 0 = 101 + 101c。c 从 1 到 9 给出 202、303、404、505、606、707、808、909 ⋯ **这些都不是完全平方数** ✗（14² = 196、15² = 225，202 落在其间；其余同理）。",
+          "**a = 1、b = 1**：和 = 101(1 + c) + 20。c = 1 到 9 给出 222、323、424、525、626、727、828、929、1030 ✗ **仍无完全平方数**（20² = 400、21² = 441，424 落在其间）。",
+          "**a = 1、b = 2**：和 = 101(1 + c) + 40。c = 1 给 242 ✗；c = 2 给 343 ✗；**c = 3 给 101 × 4 + 40 = 444** ✗（21² = 441 很接近但不等）；c = 4 给 545 ✗ ⋯ 全部不符 ✗。",
+          "**a = 1、b = 3**：和 = 101(1 + c) + 60。c = 1 给 262 ✗；c = 2 给 363 ✗；**c = 3 给 101 × 4 + 60 = 464** ✗；**c = 4 给 101 × 5 + 60 = 565** ✗ ⋯ 再往下，**c = 3 对应的数是 133、c = 4 对应 134** ⋯ 逐一检查到 **c = 3 之后**，第一个成功的是 **143**。",
+          "**验证 143**：反序数是 **341**，两者相加 143 + 341 = **484** = **22²** ✓ **确实是完全平方数**。",
+          "验算：程序由 100 开始逐一往上检查每个个位不为 0 的三位数，**第一个满足条件的正是 143** ✓；接下来几个是 164（+ 461 = 625 = 25²）、198（+ 891 = 1089 = 33²）、242（+ 242 = 484）。",
+          "**注意个位不为 0 这个条件不可忽略。**若允许个位为 0，例如 110，它的「反序」是 011 = 11，而 110 + 11 = 121 = 11² 也是完全平方数 ✓ **答案就会变成 110**——**题目正是为了排除这种前导零的歧义，才要求反序后仍是三位数。**"
+        ],
+        "en": [
+          "Express the sum of a number and its reversal in terms of digits to reveal its structure.",
+          "Let the hundreds, tens and units digits be a, b and c, with a ≥ 1 and also c ≥ 1 so that the reversal remains three-digit.",
+          "The number is 100a + 10b + c and its reversal is 100c + 10b + a.",
+          "Their sum is 100a + 10b + c + 100c + 10b + a = 101a + 20b + 101c = 101(a + c) + 20b.",
+          "This shows the sum depends only on a + c and on b, not on a and c separately — greatly reducing the cases to check.",
+          "Estimate the range. The minimum is 202, at a + c = 2 and b = 0; the maximum is 101 × 18 + 180 = 1998, at a + c = 18 and b = 9.",
+          "So the sum lies between 202 and 1998, and the relevant squares run from 15² = 225 to 44² = 1936.",
+          "To find the smallest three-digit number, start with a = 1 and keep b as small as possible.",
+          "With a = 1 and b = 0, the sum is 101 + 101c, giving 202, 303, 404, 505, 606, 707, 808 and 909 for c from 1 to 9 — none a perfect square, 202 falling between 14² = 196 and 15² = 225, and the rest similarly.",
+          "With a = 1 and b = 1, the sum is 101(1 + c) + 20, giving 222, 323, 424, 525, 626, 727, 828, 929 and 1030 — still no square, 424 falling between 20² = 400 and 21² = 441.",
+          "With a = 1 and b = 2, the sum is 101(1 + c) + 40, giving 242, 343, then 101 × 4 + 40 = 444, close to 21² = 441 but not equal, then 545, and so on — none qualifying.",
+          "With a = 1 and b = 3, the sum is 101(1 + c) + 60: c = 1 gives 262, c = 2 gives 363, c = 3 gives 464 — and c = 4 gives 101 × 5 + 60 = 565. Working through the numbers 131, 132, 133 and so on, the first success is 143.",
+          "Verify 143: its reversal is 341, and 143 + 341 = 484 = 22², a perfect square indeed.",
+          "Check: scanning upward from 100 over three-digit numbers with non-zero units digit, the first to qualify is 143; the next few are 164, since 164 + 461 = 625 = 25², then 198, since 198 + 891 = 1089 = 33², then 242, since 242 + 242 = 484.",
+          "The non-zero units digit matters. Allowing a units digit of 0 would admit 110, whose reversal reads 011 = 11, and 110 + 11 = 121 = 11² is a perfect square, making the answer 110 instead. The problem requires the reversal to stay three-digit precisely to exclude this leading-zero ambiguity."
+        ],
+        "ja": [
+          "**「もとの数 + 逆順の数」を数字で表して構造を見ます。**",
+          "**百の位を a、十の位を b、一の位を c** とします（a ≥ 1、逆順も 3 桁であるために c ≥ 1）。",
+          "**もとの数 = 100a + 10b + c、逆順の数 = 100c + 10b + a。**",
+          "**和** = 100a + 10b + c + 100c + 10b + a = **101a + 20b + 101c** = **101(a + c) + 20b**。",
+          "**この式から、和は (a + c) と b だけで決まり、a と c の個々の値には依らない** ✓ ことが分かり、調べる場合が大幅に減ります。",
+          "**範囲を見積もります。**最小は a + c = 2、b = 0 の 202、最大は a + c = 18、b = 9 の 101 × 18 + 180 = **1998**。",
+          "**したがって和は 202〜1998 にあり、対応する平方数は 15² = 225 から 44² = 1936** です。",
+          "**最小の 3 桁を探すには a = 1 から始め、b をできるだけ小さく**します。",
+          "**a = 1、b = 0**：和 = 101 + 101c で、c = 1〜9 は 202、303、404、505、606、707、808、909 ⋯ **いずれも平方数ではありません** ✗（202 は 14² = 196 と 15² = 225 の間、他も同様）。",
+          "**a = 1、b = 1**：和 = 101(1 + c) + 20 で 222、323、424、525、626、727、828、929、1030 ✗ と**やはり平方数なし**（424 は 20² = 400 と 21² = 441 の間）。",
+          "**a = 1、b = 2**：和 = 101(1 + c) + 40 で 242 ✗、343 ✗、**101 × 4 + 40 = 444** ✗（21² = 441 に近いが等しくない）、545 ✗ ⋯ どれも不適 ✗。",
+          "**a = 1、b = 3**：和 = 101(1 + c) + 60 で c = 1 は 262 ✗、c = 2 は 363 ✗、c = 3 は 464 ✗、**c = 4 は 101 × 5 + 60 = 565** ✗ ⋯ 131、132、133 ⋯ と順に調べていくと、**最初に成功するのは 143** です。",
+          "**143 を検証**：逆順は **341** で、143 + 341 = **484** = **22²** ✓ **確かに平方数**です。",
+          "検算：100 から順に一の位が 0 でない 3 桁を調べると、**条件を満たす最初の数はまさに 143** ✓。続く数は 164（+ 461 = 625 = 25²）、198（+ 891 = 1089 = 33²）、242（+ 242 = 484）です。",
+          "**一の位が 0 でないという条件は無視できません。**一の位 0 を許すと、たとえば 110 の「逆順」は 011 = 11 で 110 + 11 = 121 = 11² も平方数 ✓ となり、**答えが 110 に変わります**——**問題が逆順も 3 桁であることを求めるのは、この先頭 0 の曖昧さを排除するためです。**"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "143"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "與反序數之和為平方數：和恆等於 101(a + c) + 20b，故只取決於首末位之和與中間位",
+        "notes": "設計依據：詳解先導出 101(a+c) + 20b 的結構說明和只依賴 a + c 與 b，並估出和的範圍以限定候選平方數；再由 a = 1 起依 b 遞增逐段檢查直到找到 143，最後驗證 143 + 341 = 484 = 22²。末尾以 110（反序為 11，和 121 = 11²）說明為何要求個位不為 0，避免前導零造成的歧義。答案 143 已用結構分析與程式由 100 起的逐一掃描雙向驗證。屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（與反序數之和為平方數）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "數論",
+        "topicCode": "number_theory",
+        "subtopic": "與反序數之和為平方數",
+        "subtopicCode": "reverse_sum_square"
+      },
+      "reviewStatus": "ok"
     }
   ]
 }
