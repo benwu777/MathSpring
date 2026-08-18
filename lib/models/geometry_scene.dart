@@ -4,13 +4,15 @@ import 'dart:ui';
 /// 線段樣式：實體邊 (solid) 或輔助線 (construction，畫虛線)。
 enum GeometryLineStyle { solid, construction }
 
-GeometryLineStyle _parseStyle(Object? raw) =>
-    raw == 'construction' ? GeometryLineStyle.construction : GeometryLineStyle.solid;
+GeometryLineStyle _parseStyle(Object? raw) => raw == 'construction'
+    ? GeometryLineStyle.construction
+    : GeometryLineStyle.solid;
 
 double _toDouble(Object? v) => (v as num).toDouble();
 
 class GeometrySegment {
-  const GeometrySegment({required this.from, required this.to, required this.style});
+  const GeometrySegment(
+      {required this.from, required this.to, required this.style});
   final String from;
   final String to;
   final GeometryLineStyle style;
@@ -51,7 +53,8 @@ class GeometryAngleMark {
 }
 
 class GeometryRightAngle {
-  const GeometryRightAngle({required this.at, required this.from, required this.to});
+  const GeometryRightAngle(
+      {required this.at, required this.from, required this.to});
   final String at;
   final String from;
   final String to;
@@ -70,6 +73,7 @@ class GeometryScene {
   GeometryScene({
     required this.points,
     required this.pointLabelPos,
+    required this.pointIsVisible,
     required this.segments,
     required this.polygons,
     required this.arcs,
@@ -84,6 +88,7 @@ class GeometryScene {
 
   final Map<String, Offset> points; // 數學座標
   final Map<String, String> pointLabelPos; // 標籤方位 t/b/l/r/tl/...
+  final Map<String, bool> pointIsVisible;
   final List<GeometrySegment> segments;
   final List<GeometryPolygon> polygons;
   final List<GeometryArc> arcs;
@@ -100,11 +105,13 @@ class GeometryScene {
         Map<String, dynamic>.from(params['bounds'] as Map? ?? const {});
     final Map<String, Offset> pts = <String, Offset>{};
     final Map<String, String> labelPos = <String, String>{};
+    final Map<String, bool> pointIsVisible = <String, bool>{};
     for (final Object? raw in (params['points'] as List? ?? const [])) {
       final Map<String, dynamic> p = Map<String, dynamic>.from(raw as Map);
       final String name = p['name'] as String;
       pts[name] = Offset(_toDouble(p['x']), _toDouble(p['y']));
       labelPos[name] = (p['pos'] as String?) ?? 'r';
+      pointIsVisible[name] = p['visible'] as bool? ?? true;
     }
 
     List<Map<String, dynamic>> maps(String key) =>
@@ -115,6 +122,7 @@ class GeometryScene {
     return GeometryScene(
       points: pts,
       pointLabelPos: labelPos,
+      pointIsVisible: pointIsVisible,
       segments: maps('segments')
           .map((m) => GeometrySegment(
                 from: m['from'] as String,

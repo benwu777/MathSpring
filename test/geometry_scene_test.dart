@@ -50,6 +50,19 @@ void main() {
     expect(scene.points['F'], const Offset(4, 2));
   });
 
+  test('keeps construction-only points out of the visible point layer', () {
+    final Map<String, dynamic> params = sampleParams();
+    (params['points'] as List).add(
+      {'name': 'M', 'x': 3, 'y': 3, 'visible': false},
+    );
+
+    final GeometryScene scene = GeometryScene.fromParams(params);
+
+    expect(scene.points['M'], const Offset(3, 3));
+    expect(scene.pointIsVisible['M'], isFalse);
+    expect(scene.pointIsVisible['A'], isTrue);
+  });
+
   test('parses all primitive collections', () {
     final GeometryScene scene = GeometryScene.fromParams(sampleParams());
     expect(scene.segments, hasLength(1));
@@ -90,7 +103,8 @@ void main() {
     final GeometryScene scene = GeometryScene.fromParams(sampleParams());
     const Size size = Size(100, 100);
     final Offset byName = scene.pointToScreen('C', size, padding: 10);
-    final Offset byCoord = scene.toScreen(const Offset(6, 0), size, padding: 10);
+    final Offset byCoord =
+        scene.toScreen(const Offset(6, 0), size, padding: 10);
     expect(byName, byCoord);
   });
 

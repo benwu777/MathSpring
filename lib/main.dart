@@ -32,16 +32,14 @@ Question _buildTrigDemoQuestion() {
       'zh-Hans': '观察图形，在 0 到 2π 间，sin(x) 与 cos(x) 分别在何处达到最大值？',
       'en':
           'Inspect the graph. On the interval from 0 to 2π, where do sin(x) and cos(x) each reach their maximum value?',
-      'ja':
-          'グラフを見てください。0 から 2π の区間で、sin(x) と cos(x) はそれぞれどこで最大値をとりますか。',
+      'ja': 'グラフを見てください。0 から 2π の区間で、sin(x) と cos(x) はそれぞれどこで最大値をとりますか。',
     },
     'answer': {
       'zh-Hant': 'sin(x) 在 π/2 取得最大值 1，cos(x) 在 0 取得最大值 1。',
       'zh-Hans': 'sin(x) 在 π/2 取得最大值 1，cos(x) 在 0 取得最大值 1。',
       'en':
           'sin(x) reaches its maximum value 1 at π/2, and cos(x) reaches its maximum value 1 at 0.',
-      'ja':
-          'sin(x) は π/2 で最大値 1 をとり、cos(x) は 0 で最大値 1 をとります。',
+      'ja': 'sin(x) は π/2 で最大値 1 をとり、cos(x) は 0 で最大値 1 をとります。',
     },
     'solutionSteps': {
       'zh-Hant': [
@@ -1368,9 +1366,9 @@ class _SectionCard extends StatelessWidget {
                   child: Text(
                     title,
                     style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                      fontSize: 18,
-                      letterSpacing: -0.3,
-                    ),
+                          fontSize: 18,
+                          letterSpacing: -0.3,
+                        ),
                   ),
                 ),
                 if (trailing != null) ...[
@@ -1383,9 +1381,9 @@ class _SectionCard extends StatelessWidget {
             Text(
               subtitle,
               style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                color: const Color(0xFF64748B),
-                height: 1.45,
-              ),
+                    color: const Color(0xFF64748B),
+                    height: 1.45,
+                  ),
             ),
             const SizedBox(height: 20),
             child,
@@ -1410,7 +1408,8 @@ class _LearnerProfilesSection extends StatefulWidget {
   final VoidCallback onChanged;
 
   @override
-  State<_LearnerProfilesSection> createState() => _LearnerProfilesSectionState();
+  State<_LearnerProfilesSection> createState() =>
+      _LearnerProfilesSectionState();
 }
 
 class _LearnerProfilesSectionState extends State<_LearnerProfilesSection> {
@@ -1579,9 +1578,8 @@ class _ProfileTile extends StatelessWidget {
           color: Colors.white,
           borderRadius: BorderRadius.circular(20),
           border: Border.all(
-            color: isCurrent
-                ? const Color(0xFF163D7A)
-                : const Color(0xFFE2E8F0),
+            color:
+                isCurrent ? const Color(0xFF163D7A) : const Color(0xFFE2E8F0),
           ),
           boxShadow: const [
             BoxShadow(
@@ -1708,8 +1706,7 @@ class _ProgressSection extends StatelessWidget {
             )
           : services.getLearnerProgressSummary(learnerId),
       builder: (context, snapshot) {
-        final LearnerProgressSummary summary =
-            snapshot.data ??
+        final LearnerProgressSummary summary = snapshot.data ??
             const LearnerProgressSummary(solvedCount: 0, correctCount: 0);
         return _SectionCard(
           title: title,
@@ -2358,8 +2355,7 @@ class SessionDetailPage extends StatelessWidget {
           return FutureBuilder<List<Question?>>(
             future: _loadQuestions(records),
             builder: (context, questionSnapshot) {
-              final List<Question?> questions =
-                  questionSnapshot.data ??
+              final List<Question?> questions = questionSnapshot.data ??
                   List<Question?>.filled(records.length, null);
               if (!questionSnapshot.hasData) {
                 return const Center(child: CircularProgressIndicator());
@@ -2367,7 +2363,8 @@ class SessionDetailPage extends StatelessWidget {
               return ListView.separated(
                 padding: const EdgeInsets.all(24),
                 itemCount: records.length,
-                separatorBuilder: (context, index) => const SizedBox(height: 14),
+                separatorBuilder: (context, index) =>
+                    const SizedBox(height: 14),
                 itemBuilder: (context, index) {
                   final SessionAnswerRecord record = records[index];
                   final Question? question = questions[index];
@@ -2421,8 +2418,8 @@ class SessionDetailPage extends StatelessWidget {
                           const SizedBox(height: 8),
                           Text(question.localizedAnswer(_localeCode(context))),
                           const SizedBox(height: 10),
-                          for (final String step
-                              in question.localizedSolutionSteps(_localeCode(context)))
+                          for (final String step in question
+                              .localizedSolutionSteps(_localeCode(context)))
                             Padding(
                               padding: const EdgeInsets.only(bottom: 8),
                               child: Text(step),
@@ -2440,13 +2437,15 @@ class SessionDetailPage extends StatelessWidget {
     );
   }
 
-  Future<List<Question?>> _loadQuestions(List<SessionAnswerRecord> records) async {
+  Future<List<Question?>> _loadQuestions(
+      List<SessionAnswerRecord> records) async {
     final bundled.BundledQuestionBankRepository repository =
         bundled.BundledQuestionBankRepository();
     final List<Question?> questions = <Question?>[];
 
     for (final SessionAnswerRecord record in records) {
-      final Question? injectedQuestion = initialQuestionsById?[record.questionId];
+      final Question? injectedQuestion =
+          initialQuestionsById?[record.questionId];
       if (injectedQuestion != null) {
         questions.add(injectedQuestion);
         continue;
@@ -2495,8 +2494,7 @@ class _QuestionLibraryPageState extends State<QuestionLibraryPage> {
           return ListView.separated(
             padding: const EdgeInsets.all(20),
             itemCount: packs.length,
-            separatorBuilder: (context, index) =>
-                const SizedBox(height: 14),
+            separatorBuilder: (context, index) => const SizedBox(height: 14),
             itemBuilder: (context, index) {
               final bundled.BundledQuestionPackInfo pack = packs[index];
               return _QuestionPackTile(
@@ -2715,7 +2713,9 @@ class _PracticeSessionPageState extends State<PracticeSessionPage> {
                         Expanded(
                           child: Text(
                             '${strings.questionLabel} ${_records.length + 1}',
-                            style: Theme.of(context).textTheme.headlineSmall
+                            style: Theme.of(context)
+                                .textTheme
+                                .headlineSmall
                                 ?.copyWith(fontSize: 18),
                           ),
                         ),
@@ -2731,11 +2731,11 @@ class _PracticeSessionPageState extends State<PracticeSessionPage> {
                           ),
                           child: Text(
                             _displayLevelStage(question.levelStage, strings),
-                            style: Theme.of(context).textTheme.bodySmall
-                                ?.copyWith(
-                                  fontWeight: FontWeight.w700,
-                                  color: const Color(0xFF163D7A),
-                                ),
+                            style:
+                                Theme.of(context).textTheme.bodySmall?.copyWith(
+                                      fontWeight: FontWeight.w700,
+                                      color: const Color(0xFF163D7A),
+                                    ),
                           ),
                         ),
                       ],
@@ -2751,13 +2751,15 @@ class _PracticeSessionPageState extends State<PracticeSessionPage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         _QuestionPromptText(
-                          key: ValueKey<String>('question_prompt_${question.id}'),
+                          key: ValueKey<String>(
+                              'question_prompt_${question.id}'),
                           text: question.localizedPrompt(_localeCode(context)),
                           localeCode: _localeCode(context),
                         ),
                         if (question.source?.displayLabel != null) ...[
                           const SizedBox(height: 8),
-                          _QuestionSourceText(text: question.source!.displayLabel!),
+                          _QuestionSourceText(
+                              text: question.source!.displayLabel!),
                         ],
                         if (question.figure.kind != 'none') ...[
                           const SizedBox(height: 20),
@@ -2890,10 +2892,8 @@ class _PracticeSessionPageState extends State<PracticeSessionPage> {
             sequence: index + 1,
             submittedAnswer: result.records[index].submittedAnswer,
             isCorrect: result.records[index].isCorrect,
-            answeredAtIso: result.records[index]
-                .answeredAt
-                .toUtc()
-                .toIso8601String(),
+            answeredAtIso:
+                result.records[index].answeredAt.toUtc().toIso8601String(),
           ),
       ],
     );
@@ -2966,8 +2966,10 @@ class _PracticeAnswerSectionState extends State<_PracticeAnswerSection> {
               Padding(
                 padding: const EdgeInsets.only(bottom: 12),
                 child: OutlinedButton(
-                  key: ValueKey<String>('practice_option_${widget.question.id}_$key'),
-                  onPressed: widget.isLocked ? null : () => widget.onSubmitted(key),
+                  key: ValueKey<String>(
+                      'practice_option_${widget.question.id}_$key'),
+                  onPressed:
+                      widget.isLocked ? null : () => widget.onSubmitted(key),
                   style: OutlinedButton.styleFrom(
                     minimumSize: const Size.fromHeight(56),
                     alignment: Alignment.centerLeft,
@@ -2995,7 +2997,8 @@ class _PracticeAnswerSectionState extends State<_PracticeAnswerSection> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             TextField(
-              key: ValueKey<String>('practice_integer_input_${widget.question.id}'),
+              key: ValueKey<String>(
+                  'practice_integer_input_${widget.question.id}'),
               controller: _controller,
               enabled: !widget.isLocked,
               keyboardType: TextInputType.number,
@@ -3058,7 +3061,9 @@ class _PracticeReviewCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           _ResultStatusBadge(
-            label: record.isCorrect ? strings.correctLabel : strings.incorrectLabel,
+            label: record.isCorrect
+                ? strings.correctLabel
+                : strings.incorrectLabel,
             isCorrect: record.isCorrect,
           ),
           const SizedBox(height: 12),
@@ -3071,7 +3076,8 @@ class _PracticeReviewCard extends StatelessWidget {
             localeCode: localeCode,
           ),
           const SizedBox(height: 10),
-          for (final String step in record.question.localizedSolutionSteps(localeCode))
+          for (final String step
+              in record.question.localizedSolutionSteps(localeCode))
             Padding(
               padding: const EdgeInsets.only(bottom: 8),
               child: _QuestionBodyText(
@@ -3255,7 +3261,9 @@ class _QuizSessionPageState extends State<QuizSessionPage> {
                             _currentIndex + 1,
                             questions.length,
                           ),
-                          style: Theme.of(context).textTheme.headlineSmall
+                          style: Theme.of(context)
+                              .textTheme
+                              .headlineSmall
                               ?.copyWith(fontSize: 18),
                         ),
                       ),
@@ -3270,11 +3278,11 @@ class _QuizSessionPageState extends State<QuizSessionPage> {
                         ),
                         child: Text(
                           _displayLevelStage(question.levelStage, strings),
-                          style: Theme.of(context).textTheme.bodySmall
-                              ?.copyWith(
-                                fontWeight: FontWeight.w700,
-                                color: const Color(0xFF163D7A),
-                              ),
+                          style:
+                              Theme.of(context).textTheme.bodySmall?.copyWith(
+                                    fontWeight: FontWeight.w700,
+                                    color: const Color(0xFF163D7A),
+                                  ),
                         ),
                       ),
                     ],
@@ -3284,8 +3292,8 @@ class _QuizSessionPageState extends State<QuizSessionPage> {
                 Text(
                   '${strings.elapsedLabel} ${_formatElapsed(Duration(seconds: DateTime.now().difference(_startedAt).inSeconds))}',
                   style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                    color: const Color(0xFF64748B),
-                  ),
+                        color: const Color(0xFF64748B),
+                      ),
                 ),
                 const SizedBox(height: 16),
                 _SectionCard(
@@ -3302,7 +3310,8 @@ class _QuizSessionPageState extends State<QuizSessionPage> {
                       ),
                       if (question.source?.displayLabel != null) ...[
                         const SizedBox(height: 8),
-                        _QuestionSourceText(text: question.source!.displayLabel!),
+                        _QuestionSourceText(
+                            text: question.source!.displayLabel!),
                       ],
                       if (question.figure.kind != 'none') ...[
                         const SizedBox(height: 20),
@@ -3489,7 +3498,8 @@ class _QuizAnswerSection extends StatelessWidget {
   Widget build(BuildContext context) {
     switch (question.answerMode) {
       case AnswerMode.multipleChoice:
-        final List<String> keys = (question.options?.keys.toList() ?? [])..sort();
+        final List<String> keys = (question.options?.keys.toList() ?? [])
+          ..sort();
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -3516,8 +3526,10 @@ class _QuizAnswerSection extends StatelessWidget {
                     ),
                   ),
                   child: _QuestionOptionText(
-                    key: ValueKey<String>('question_option_text_${question.id}_$key'),
-                    text: '$key  ${question.localizedOptionLabel(key, localeCode)}',
+                    key: ValueKey<String>(
+                        'question_option_text_${question.id}_$key'),
+                    text:
+                        '$key  ${question.localizedOptionLabel(key, localeCode)}',
                     localeCode: localeCode,
                   ),
                 ),
@@ -3589,7 +3601,8 @@ class QuizResultPage extends StatelessWidget {
                       'quiz_result_${record.question.id}',
                     ),
                     title: _QuestionPromptText(
-                      text: record.question.localizedPrompt(_localeCode(context)),
+                      text:
+                          record.question.localizedPrompt(_localeCode(context)),
                       localeCode: _localeCode(context),
                     ),
                     subtitle: _ResultStatusBadge(
@@ -3616,13 +3629,14 @@ class QuizResultPage extends StatelessWidget {
                       Align(
                         alignment: Alignment.centerLeft,
                         child: _QuestionBodyText(
-                          text: record.question.localizedAnswer(_localeCode(context)),
+                          text: record.question
+                              .localizedAnswer(_localeCode(context)),
                           localeCode: _localeCode(context),
                         ),
                       ),
                       const SizedBox(height: 10),
-                      for (final String step
-                          in record.question.localizedSolutionSteps(_localeCode(context)))
+                      for (final String step in record.question
+                          .localizedSolutionSteps(_localeCode(context)))
                         Padding(
                           padding: const EdgeInsets.only(bottom: 8),
                           child: Align(
@@ -3815,7 +3829,8 @@ class AppStrings {
     Locale('ja'),
   ];
 
-  static Locale resolveLocale(Locale? locale, Iterable<Locale> supportedLocales) {
+  static Locale resolveLocale(
+      Locale? locale, Iterable<Locale> supportedLocales) {
     if (locale?.languageCode == 'zh') {
       if (locale?.countryCode == 'CN' || locale?.countryCode == 'SG') {
         return const Locale('zh', 'CN');
@@ -3858,66 +3873,66 @@ class AppStrings {
   }
 
   String get heroBadge => _text(
-    zhHant: '為 iPhone 與 iPad 打造',
-    zhHans: '为 iPhone 与 iPad 打造',
-    en: 'Built for iPhone and iPad',
-    ja: 'iPhone と iPad のために設計',
-  );
+        zhHant: '為 iPhone 與 iPad 打造',
+        zhHans: '为 iPhone 与 iPad 打造',
+        en: 'Built for iPhone and iPad',
+        ja: 'iPhone と iPad のために設計',
+      );
   String get appSubtitle => _text(
-    zhHant: '奧數思維訓練',
-    zhHans: '奥数思维训练',
-    en: 'Olympiad Math',
-    ja: 'オリンピック数学トレーニング',
-  );
+        zhHant: '奧數思維訓練',
+        zhHans: '奥数思维训练',
+        en: 'Olympiad Math',
+        ja: 'オリンピック数学トレーニング',
+      );
   String get languageTraditionalChinese => '繁中';
   String get languageEnglish => 'EN';
   String get heroTitle => 'MathSpring';
   String get heroSubtitle => _text(
-    zhHant: '用更清楚的方式練習奧數思維',
-    zhHans: '用更清楚的方式练习奥数思维',
-    en: 'Train elegant mathematical thinking.',
-    ja: '数学オリンピック型の思考を、より明快に鍛える。',
-  );
-  String get pillAdaptive =>
-      _text(zhHant: '自適應版面', zhHans: '自适应版面', en: 'Adaptive layout', ja: '適応レイアウト');
-  String get pillProfiles =>
-      _text(zhHant: '多學習者切換', zhHans: '多学习者切换', en: 'Multi-profile', ja: '複数プロフィール');
-  String get pillBilingual =>
-      _text(zhHant: '雙語題庫', zhHans: '双语题库', en: 'Bilingual content', ja: '多言語問題集');
+        zhHant: '用更清楚的方式練習奧數思維',
+        zhHans: '用更清楚的方式练习奥数思维',
+        en: 'Train elegant mathematical thinking.',
+        ja: '数学オリンピック型の思考を、より明快に鍛える。',
+      );
+  String get pillAdaptive => _text(
+      zhHant: '自適應版面', zhHans: '自适应版面', en: 'Adaptive layout', ja: '適応レイアウト');
+  String get pillProfiles => _text(
+      zhHant: '多學習者切換', zhHans: '多学习者切换', en: 'Multi-profile', ja: '複数プロフィール');
+  String get pillBilingual => _text(
+      zhHant: '雙語題庫', zhHans: '双语题库', en: 'Bilingual content', ja: '多言語問題集');
   String get profilesTitle =>
       _text(zhHant: '學習者', zhHans: '学习者', en: 'Profiles', ja: '学習者');
   String get profilesSubtitle => _text(
-    zhHant: '在同一台裝置上切換不同程度的孩子。',
-    zhHans: '在同一台设备上切换不同程度的孩子。',
-    en: 'Switch between learners with different levels on one device.',
-    ja: '1 台の端末で、異なるレベルの学習者を切り替えられます。',
-  );
+        zhHant: '在同一台裝置上切換不同程度的孩子。',
+        zhHans: '在同一台设备上切换不同程度的孩子。',
+        en: 'Switch between learners with different levels on one device.',
+        ja: '1 台の端末で、異なるレベルの学習者を切り替えられます。',
+      );
   String get addLearner =>
       _text(zhHant: '新增學習者', zhHans: '新增学习者', en: 'Add learner', ja: '学習者を追加');
-  String get deleteLearner =>
-      _text(zhHant: '刪除學習者', zhHans: '删除学习者', en: 'Delete learner', ja: '学習者を削除');
+  String get deleteLearner => _text(
+      zhHant: '刪除學習者', zhHans: '删除学习者', en: 'Delete learner', ja: '学習者を削除');
   String get currentLearner =>
       _text(zhHant: '目前使用', zhHans: '当前使用', en: 'Current', ja: '現在');
   String get currentLearnerLabel => _text(
-    zhHant: '目前角色',
-    zhHans: '当前角色',
-    en: 'Current learner',
-    ja: '現在の学習者',
-  );
+        zhHant: '目前角色',
+        zhHans: '当前角色',
+        en: 'Current learner',
+        ja: '現在の学習者',
+      );
   String get gradeRangeLabel => _text(
-    zhHant: '年級範圍',
-    zhHans: '年级范围',
-    en: 'Grade range',
-    ja: '学年範囲',
-  );
+        zhHant: '年級範圍',
+        zhHans: '年级范围',
+        en: 'Grade range',
+        ja: '学年範囲',
+      );
   String get editLearner =>
       _text(zhHant: '編輯角色', zhHans: '编辑角色', en: 'Edit learner', ja: '学習者を編集');
   String get gradeRangeHint => _text(
-    zhHant: '拖曳左右兩端，設定這個角色可抽到的題目年級範圍。',
-    zhHans: '拖动左右两端，设置这个角色可抽到的题目年级范围。',
-    en: 'Drag both ends to choose the grades this learner can receive.',
-    ja: '左右のつまみを動かして、この学習者に出題する学年範囲を設定します。',
-  );
+        zhHant: '拖曳左右兩端，設定這個角色可抽到的題目年級範圍。',
+        zhHans: '拖动左右两端，设置这个角色可抽到的题目年级范围。',
+        en: 'Drag both ends to choose the grades this learner can receive.',
+        ja: '左右のつまみを動かして、この学習者に出題する学年範囲を設定します。',
+      );
   String get learnerName =>
       _text(zhHant: '名稱', zhHans: '名称', en: 'Name', ja: '名前');
   String get levelStage =>
@@ -3931,135 +3946,135 @@ class AppStrings {
   String get progressTitle =>
       _text(zhHant: '今日進度', zhHans: '今日进度', en: 'Today', ja: '今日の進捗');
   String get progressSubtitle => _text(
-    zhHant: '保留簡單、清楚、可以持續練習的節奏。',
-    zhHans: '保持简单、清楚、可以持续练习的节奏。',
-    en: 'Keep practice focused, calm, and easy to continue.',
-    ja: '落ち着いて継続できる練習リズムを保つ。',
-  );
+        zhHant: '保留簡單、清楚、可以持續練習的節奏。',
+        zhHans: '保持简单、清楚、可以持续练习的节奏。',
+        en: 'Keep practice focused, calm, and easy to continue.',
+        ja: '落ち着いて継続できる練習リズムを保つ。',
+      );
   String get dashboardFocusTitle =>
       _text(zhHant: '今日重點', zhHans: '今日重点', en: 'Daily Focus', ja: '今日の重点');
   String get dashboardFocusBody => _text(
-    zhHant: '2 題幾何推理\n1 題數列規律\n1 次作答回顧',
-    zhHans: '2 题几何推理\n1 题数列规律\n1 次作答回顾',
-    en: '2 geometry proofs\n1 number pattern\n1 review session',
-    ja: '幾何 2 題\n数列 1 題\n復習 1 セッション',
-  );
+        zhHant: '2 題幾何推理\n1 題數列規律\n1 次作答回顧',
+        zhHans: '2 题几何推理\n1 题数列规律\n1 次作答回顾',
+        en: '2 geometry proofs\n1 number pattern\n1 review session',
+        ja: '幾何 2 題\n数列 1 題\n復習 1 セッション',
+      );
   String get dashboardPathTitle =>
       _text(zhHant: '目前路徑', zhHans: '当前路径', en: 'Level Path', ja: '現在のルート');
   String get dashboardPathValue => _text(
-    zhHant: '年級範圍',
-    zhHans: '年级范围',
-    en: 'Grade range',
-    ja: '学年範囲',
-  );
+        zhHant: '年級範圍',
+        zhHans: '年级范围',
+        en: 'Grade range',
+        ja: '学年範囲',
+      );
   String get navPractice =>
       _text(zhHant: '練習', zhHans: '练习', en: 'Practice', ja: '練習');
   String get navQuiz =>
       _text(zhHant: '測驗', zhHans: '测验', en: 'Quiz', ja: 'テスト');
   String get navReview => _text(
-    zhHant: '學習回顧',
-    zhHans: '学习回顾',
-    en: 'Review',
-    ja: 'ふり返り',
-  );
+        zhHant: '學習回顧',
+        zhHans: '学习回顾',
+        en: 'Review',
+        ja: 'ふり返り',
+      );
   String get navSettings =>
       _text(zhHant: '設定', zhHans: '设置', en: 'Settings', ja: '設定');
   String get practiceEntryTitle =>
       _text(zhHant: '開始練習', zhHans: '开始练习', en: 'Practice', ja: '練習開始');
   String get practiceEntrySubtitle => _text(
-    zhHant: '直接開始目前年級範圍的練習，或指定主題。',
-    zhHans: '直接开始当前年级范围的练习，或指定主题。',
-    en: 'Start a session for the current grade range or choose a topic.',
-    ja: '現在の学年範囲で練習を始めるか、分野を指定します。',
-  );
+        zhHant: '直接開始目前年級範圍的練習，或指定主題。',
+        zhHans: '直接开始当前年级范围的练习，或指定主题。',
+        en: 'Start a session for the current grade range or choose a topic.',
+        ja: '現在の学年範囲で練習を始めるか、分野を指定します。',
+      );
   String get quizEntryTitle =>
       _text(zhHant: '開始測驗', zhHans: '开始测验', en: 'Quiz', ja: 'テスト開始');
   String get quizEntrySubtitle => _text(
-    zhHant: '用目前年級範圍出一組測驗，完成後再看詳解。',
-    zhHans: '按当前年级范围生成一组测验，完成后再看详解。',
-    en: 'Generate a quiz for the current grade range and review solutions after submission.',
-    ja: '現在の学年範囲に合わせて出題し、提出後に解説を確認します。',
-  );
+        zhHant: '用目前年級範圍出一組測驗，完成後再看詳解。',
+        zhHans: '按当前年级范围生成一组测验，完成后再看详解。',
+        en: 'Generate a quiz for the current grade range and review solutions after submission.',
+        ja: '現在の学年範囲に合わせて出題し、提出後に解説を確認します。',
+      );
   String get reviewTitle =>
       _text(zhHant: '學習回顧', zhHans: '学习回顾', en: 'Review', ja: '学習ふり返り');
   String get reviewSubtitle => _text(
-    zhHant: '回顧最近練習與測驗，重新檢查解題過程。',
-    zhHans: '回顾最近练习与测验，重新检查解题过程。',
-    en: 'Revisit recent practice and quiz sessions and inspect each solution again.',
-    ja: '最近の練習とテストを見返し、解き方を再確認します。',
-  );
+        zhHant: '回顧最近練習與測驗，重新檢查解題過程。',
+        zhHans: '回顾最近练习与测验，重新检查解题过程。',
+        en: 'Revisit recent practice and quiz sessions and inspect each solution again.',
+        ja: '最近の練習とテストを見返し、解き方を再確認します。',
+      );
   String get settingsTitle => _text(
-    zhHant: '角色與設定',
-    zhHans: '角色与设置',
-    en: 'Profiles & Settings',
-    ja: 'プロフィールと設定',
-  );
+        zhHant: '角色與設定',
+        zhHans: '角色与设置',
+        en: 'Profiles & Settings',
+        ja: 'プロフィールと設定',
+      );
   String get settingsSubtitle => _text(
-    zhHant: '在這裡管理角色、出題年級範圍與目前使用者。',
-    zhHans: '在这里管理角色、出题年级范围与当前使用者。',
-    en: 'Manage learners, grade ranges, and the active profile here.',
-    ja: 'ここで学習者、出題学年範囲、現在の利用者を管理します。',
-  );
+        zhHant: '在這裡管理角色、出題年級範圍與目前使用者。',
+        zhHans: '在这里管理角色、出题年级范围与当前使用者。',
+        en: 'Manage learners, grade ranges, and the active profile here.',
+        ja: 'ここで学習者、出題学年範囲、現在の利用者を管理します。',
+      );
   String get topicPracticeTitle => _text(
-    zhHant: '指定主題練習',
-    zhHans: '指定主题练习',
-    en: 'Practice by Topic',
-    ja: '分野別練習',
-  );
+        zhHant: '指定主題練習',
+        zhHans: '指定主题练习',
+        en: 'Practice by Topic',
+        ja: '分野別練習',
+      );
   String get topicPracticeSubtitle => _text(
-    zhHant: '依目前年級範圍，選擇想加強的主題。',
-    zhHans: '按当前年级范围，选择想加强的主题。',
-    en: 'Choose a topic to practice within the current grade range.',
-    ja: '現在の学年範囲に合わせて、強化したい分野を選びます。',
-  );
+        zhHant: '依目前年級範圍，選擇想加強的主題。',
+        zhHans: '按当前年级范围，选择想加强的主题。',
+        en: 'Choose a topic to practice within the current grade range.',
+        ja: '現在の学年範囲に合わせて、強化したい分野を選びます。',
+      );
   String get chooseTopic =>
       _text(zhHant: '指定主題', zhHans: '指定主题', en: 'Choose topic', ja: '分野を選ぶ');
   String get selectedTopicLabel => _text(
-    zhHant: '已選主題',
-    zhHans: '已选主题',
-    en: 'Selected topic',
-    ja: '選択中の分野',
-  );
+        zhHant: '已選主題',
+        zhHans: '已选主题',
+        en: 'Selected topic',
+        ja: '選択中の分野',
+      );
   String get noLearnerSelected => _text(
-    zhHant: '尚未選擇角色',
-    zhHans: '尚未选择角色',
-    en: 'No learner selected',
-    ja: '学習者が未選択です',
-  );
+        zhHant: '尚未選擇角色',
+        zhHans: '尚未选择角色',
+        en: 'No learner selected',
+        ja: '学習者が未選択です',
+      );
   String get historyTitle =>
       _text(zhHant: '作答紀錄', zhHans: '作答记录', en: 'History', ja: '履歴');
   String get historySubtitle => _text(
-    zhHant: '查看目前學習者最近的練習與測驗紀錄。',
-    zhHans: '查看当前学习者最近的练习与测验记录。',
-    en: 'Review the current learner\'s recent practice and quiz sessions.',
-    ja: '現在の学習者の最近の練習とテスト履歴を確認します。',
-  );
+        zhHant: '查看目前學習者最近的練習與測驗紀錄。',
+        zhHans: '查看当前学习者最近的练习与测验记录。',
+        en: 'Review the current learner\'s recent practice and quiz sessions.',
+        ja: '現在の学習者の最近の練習とテスト履歴を確認します。',
+      );
   String get historyPreviewTitle => _text(
-    zhHant: '最近作答',
-    zhHans: '最近作答',
-    en: 'Recent sessions',
-    ja: '最近のセッション',
-  );
+        zhHant: '最近作答',
+        zhHans: '最近作答',
+        en: 'Recent sessions',
+        ja: '最近のセッション',
+      );
   String get historyPreviewBody => _text(
-    zhHant: '保留每次練習與測驗的結果，之後可延伸成錯題本與主題分析。',
-    zhHans: '保留每次练习与测验的结果，之后可扩展为错题本与主题分析。',
-    en: 'Keep each practice and quiz result ready for future review and analysis.',
-    ja: '各セッション結果を残し、今後は弱点集や分野分析へ発展できます。',
-  );
+        zhHant: '保留每次練習與測驗的結果，之後可延伸成錯題本與主題分析。',
+        zhHans: '保留每次练习与测验的结果，之后可扩展为错题本与主题分析。',
+        en: 'Keep each practice and quiz result ready for future review and analysis.',
+        ja: '各セッション結果を残し、今後は弱点集や分野分析へ発展できます。',
+      );
   String get viewHistory =>
       _text(zhHant: '查看紀錄', zhHans: '查看记录', en: 'View history', ja: '履歴を見る');
   String get historyEmpty => _text(
-    zhHant: '目前還沒有作答紀錄。',
-    zhHans: '目前还没有作答记录。',
-    en: 'No session history yet.',
-    ja: 'まだ履歴がありません。',
-  );
+        zhHant: '目前還沒有作答紀錄。',
+        zhHans: '目前还没有作答记录。',
+        en: 'No session history yet.',
+        ja: 'まだ履歴がありません。',
+      );
   String get sessionDetailTitle => _text(
-    zhHant: '作答明細',
-    zhHans: '作答明细',
-    en: 'Session Detail',
-    ja: 'セッション詳細',
-  );
+        zhHant: '作答明細',
+        zhHans: '作答明细',
+        en: 'Session Detail',
+        ja: 'セッション詳細',
+      );
   String yourAnswerLabel(String answer) {
     return _text(
       zhHant: '你的答案：$answer',
@@ -4068,50 +4083,51 @@ class AppStrings {
       ja: 'あなたの答え: $answer',
     );
   }
+
   String get libraryTitle =>
       _text(zhHant: '題庫', zhHans: '题库', en: 'Question Library', ja: '問題集');
   String get librarySubtitle => _text(
-    zhHant: '以固定格式持續擴充題目、答案與解題步驟。',
-    zhHans: '以固定格式持续扩充题目、答案与解题步骤。',
-    en: 'Grow the bank with one stable format for prompts and solutions.',
-    ja: '問題文、解答、解説を同じ形式で継続的に追加します。',
-  );
+        zhHant: '以固定格式持續擴充題目、答案與解題步驟。',
+        zhHans: '以固定格式持续扩充题目、答案与解题步骤。',
+        en: 'Grow the bank with one stable format for prompts and solutions.',
+        ja: '問題文、解答、解説を同じ形式で継続的に追加します。',
+      );
   String get browseLibrary =>
       _text(zhHant: '瀏覽題庫', zhHans: '浏览题库', en: 'Browse library', ja: '問題集を見る');
   String get startPractice =>
       _text(zhHant: '開始練習', zhHans: '开始练习', en: 'Start practice', ja: '練習開始');
   String get startSelectedTopicPractice => _text(
-    zhHant: '開始這個主題的練習',
-    zhHans: '开始这个主题的练习',
-    en: 'Start selected topic',
-    ja: 'この分野を練習する',
-  );
+        zhHant: '開始這個主題的練習',
+        zhHans: '开始这个主题的练习',
+        en: 'Start selected topic',
+        ja: 'この分野を練習する',
+      );
   String get startQuiz =>
       _text(zhHant: '開始測驗', zhHans: '开始测验', en: 'Start quiz', ja: 'テスト開始');
   String get quizStartHint => _text(
-    zhHant: '測驗會依目前年級範圍自動抽題，完成整份後再統一看分數與詳解。',
-    zhHans: '测验会按当前年级范围自动抽题，完成整份后再统一看分数与详解。',
-    en: 'Quiz questions are selected automatically for the current grade range. Review score and solutions after submission.',
-    ja: 'テスト問題は現在の学年範囲に合わせて自動選定され、提出後に得点と解説をまとめて確認します。',
-  );
+        zhHant: '測驗會依目前年級範圍自動抽題，完成整份後再統一看分數與詳解。',
+        zhHans: '测验会按当前年级范围自动抽题，完成整份后再统一看分数与详解。',
+        en: 'Quiz questions are selected automatically for the current grade range. Review score and solutions after submission.',
+        ja: 'テスト問題は現在の学年範囲に合わせて自動選定され、提出後に得点と解説をまとめて確認します。',
+      );
   String get noApprovedQuestionsInRange => _text(
-    zhHant: '這個年級範圍目前還沒有通過審查的題目。',
-    zhHans: '这个年级范围目前还没有通过审查的题目。',
-    en: 'There are no approved questions in this grade range yet.',
-    ja: 'この学年範囲には、まだ審査済みの問題がありません。',
-  );
+        zhHant: '這個年級範圍目前還沒有通過審查的題目。',
+        zhHans: '这个年级范围目前还没有通过审查的题目。',
+        en: 'There are no approved questions in this grade range yet.',
+        ja: 'この学年範囲には、まだ審査済みの問題がありません。',
+      );
   String get languageSettingsTitle => _text(
-    zhHant: '語言',
-    zhHans: '语言',
-    en: 'Language',
-    ja: '言語',
-  );
+        zhHant: '語言',
+        zhHans: '语言',
+        en: 'Language',
+        ja: '言語',
+      );
   String get languageSettingsSubtitle => _text(
-    zhHant: '介面語系在這裡切換，題目內容也會同步切換到可用版本。',
-    zhHans: '界面语言在这里切换，题目内容也会同步切换到可用版本。',
-    en: 'Switch the interface language here. Question content follows the selected locale when translations are available.',
-    ja: 'ここで表示言語を切り替えます。問題文も利用可能な翻訳に合わせて切り替わります。',
-  );
+        zhHant: '介面語系在這裡切換，題目內容也會同步切換到可用版本。',
+        zhHans: '界面语言在这里切换，题目内容也会同步切换到可用版本。',
+        en: 'Switch the interface language here. Question content follows the selected locale when translations are available.',
+        ja: 'ここで表示言語を切り替えます。問題文も利用可能な翻訳に合わせて切り替わります。',
+      );
   String get topicArithmetic =>
       _text(zhHant: '計算', zhHans: '计算', en: 'Arithmetic', ja: '計算');
   String get topicGeometry =>
@@ -4123,79 +4139,82 @@ class AppStrings {
   String get previewLabel =>
       _text(zhHant: '示範題目', zhHans: '示范题目', en: 'Sample Prompt', ja: 'サンプル問題');
   String get previewQuestion => _text(
-    zhHant: '兩個相同的正方形拼成長方形後，周長增加了多少？',
-    zhHans: '两个相同的正方形拼成长方形后，周长增加了多少？',
-    en: 'If two equal squares form one rectangle, how much does the perimeter change?',
-    ja: '同じ正方形 2 つを長方形に並べると、周の長さはどれだけ増えますか。',
-  );
+        zhHant: '兩個相同的正方形拼成長方形後，周長增加了多少？',
+        zhHans: '两个相同的正方形拼成长方形后，周长增加了多少？',
+        en: 'If two equal squares form one rectangle, how much does the perimeter change?',
+        ja: '同じ正方形 2 つを長方形に並べると、周の長さはどれだけ増えますか。',
+      );
   String get openDemoCta => _text(
-    zhHant: '查看函數圖形示範',
-    zhHans: '查看函数图形示范',
-    en: 'View graph demo',
-    ja: '関数グラフのデモを見る',
-  );
+        zhHant: '查看函數圖形示範',
+        zhHans: '查看函数图形示范',
+        en: 'View graph demo',
+        ja: '関数グラフのデモを見る',
+      );
   String get demoTitle => _text(
-    zhHant: '座標平面上的正弦與餘弦',
-    zhHans: '坐标平面上的正弦与余弦',
-    en: 'Sine and cosine on the coordinate plane',
-    ja: '座標平面上の sin と cos',
-  );
+        zhHant: '座標平面上的正弦與餘弦',
+        zhHans: '坐标平面上的正弦与余弦',
+        en: 'Sine and cosine on the coordinate plane',
+        ja: '座標平面上の sin と cos',
+      );
   String get demoSubtitle => _text(
-    zhHant: '這一頁完全由 Flutter 直接繪製，不是點陣圖。它包含座標軸、刻度、圖例與重點角度標示。',
-    zhHans: '这一页完全由 Flutter 直接绘制，不是位图。它包含坐标轴、刻度、图例与重点角度标示。',
-    en: 'This page is drawn directly by Flutter, not a bitmap. It includes axes, ticks, a legend, and highlighted key angles.',
-    ja: 'このページはビットマップではなく Flutter で直接描画しています。軸、目盛り、凡例、重要角度の表示を含みます。',
-  );
+        zhHant: '這一頁完全由 Flutter 直接繪製，不是點陣圖。它包含座標軸、刻度、圖例與重點角度標示。',
+        zhHans: '这一页完全由 Flutter 直接绘制，不是位图。它包含坐标轴、刻度、图例与重点角度标示。',
+        en: 'This page is drawn directly by Flutter, not a bitmap. It includes axes, ticks, a legend, and highlighted key angles.',
+        ja: 'このページはビットマップではなく Flutter で直接描画しています。軸、目盛り、凡例、重要角度の表示を含みます。',
+      );
   String get demoQuestion => _text(
-    zhHant: '觀察圖形，在區間 0 到 2π 之間，sin(x) 與 cos(x) 分別在何處達到最大值？',
-    zhHans: '观察图形，在区间 0 到 2π 之间，sin(x) 与 cos(x) 分别在何处达到最大值？',
-    en: 'Inspect the graph. On the interval from 0 to 2π, where do sin(x) and cos(x) each reach their maximum value?',
-    ja: '図を見て、0 から 2π の区間で sin(x) と cos(x) がそれぞれ最大になるのはどこですか。',
-  );
+        zhHant: '觀察圖形，在區間 0 到 2π 之間，sin(x) 與 cos(x) 分別在何處達到最大值？',
+        zhHans: '观察图形，在区间 0 到 2π 之间，sin(x) 与 cos(x) 分别在何处达到最大值？',
+        en: 'Inspect the graph. On the interval from 0 to 2π, where do sin(x) and cos(x) each reach their maximum value?',
+        ja: '図を見て、0 から 2π の区間で sin(x) と cos(x) がそれぞれ最大になるのはどこですか。',
+      );
   String get demoLegend =>
       _text(zhHant: '圖例', zhHans: '图例', en: 'Graph Legend', ja: '凡例');
   String get demoLegendSin => 'sin(x)';
   String get demoLegendCos => 'cos(x)';
   String get demoLegendBand => _text(
-    zhHant: '重點觀察區段',
-    zhHans: '重点观察区段',
-    en: 'Focus interval',
-    ja: '注目区間',
-  );
+        zhHant: '重點觀察區段',
+        zhHans: '重点观察区段',
+        en: 'Focus interval',
+        ja: '注目区間',
+      );
   String get demoNote => _text(
-    zhHant: '可延伸成互動題：點選角度、逐步顯示輔助線、切換語言標籤。',
-    zhHans: '可扩展为互动题：点击角度、逐步显示辅助线、切换语言标签。',
-    en: 'This can grow into an interactive problem with tappable angles, guided hints, and multilingual labels.',
-    ja: '角度のタップ、補助線の段階表示、多言語ラベル切替などの対話型問題へ発展できます。',
-  );
+        zhHant: '可延伸成互動題：點選角度、逐步顯示輔助線、切換語言標籤。',
+        zhHans: '可扩展为互动题：点击角度、逐步显示辅助线、切换语言标签。',
+        en: 'This can grow into an interactive problem with tappable angles, guided hints, and multilingual labels.',
+        ja: '角度のタップ、補助線の段階表示、多言語ラベル切替などの対話型問題へ発展できます。',
+      );
   String get vectorDrawingTitle =>
       _text(zhHant: '向量繪製', zhHans: '向量绘制', en: 'Vector Drawing', ja: 'ベクター描画');
-  String get bitmapAssetsLabel =>
-      _text(zhHant: '點陣素材', zhHans: '位图素材', en: 'Bitmap assets', ja: 'ビットマップ素材');
-  String get customPainterLabel =>
-      _text(zhHant: 'CustomPainter', zhHans: 'CustomPainter', en: 'CustomPainter', ja: 'CustomPainter');
+  String get bitmapAssetsLabel => _text(
+      zhHant: '點陣素材', zhHans: '位图素材', en: 'Bitmap assets', ja: 'ビットマップ素材');
+  String get customPainterLabel => _text(
+      zhHant: 'CustomPainter',
+      zhHans: 'CustomPainter',
+      en: 'CustomPainter',
+      ja: 'CustomPainter');
   String get chooseOneAnswer => _text(
-    zhHant: '請選擇一個答案',
-    zhHans: '请选择一个答案',
-    en: 'Choose one answer',
-    ja: '答えを 1 つ選んでください',
-  );
+        zhHant: '請選擇一個答案',
+        zhHans: '请选择一个答案',
+        en: 'Choose one answer',
+        ja: '答えを 1 つ選んでください',
+      );
   String get enterIntegerAnswer => _text(
-    zhHant: '請輸入整數答案',
-    zhHans: '请输入整数答案',
-    en: 'Enter an integer answer',
-    ja: '整数で入力してください',
-  );
+        zhHant: '請輸入整數答案',
+        zhHans: '请输入整数答案',
+        en: 'Enter an integer answer',
+        ja: '整数で入力してください',
+      );
   String get selfCheckLabel => _text(
-    zhHant: '先自行作答，再查看解析',
-    zhHans: '先自行作答，再查看解析',
-    en: 'Solve first, then review the solution',
-    ja: 'まず自分で解き、その後で解説を確認します',
-  );
+        zhHant: '先自行作答，再查看解析',
+        zhHans: '先自行作答，再查看解析',
+        en: 'Solve first, then review the solution',
+        ja: 'まず自分で解き、その後で解説を確認します',
+      );
   String get answerLabel =>
       _text(zhHant: '作答方式', zhHans: '作答方式', en: 'Answer Mode', ja: '解答方式');
-  String get integerHint =>
-      _text(zhHant: '輸入整數', zhHans: '输入整数', en: 'Enter an integer', ja: '整数を入力');
+  String get integerHint => _text(
+      zhHant: '輸入整數', zhHans: '输入整数', en: 'Enter an integer', ja: '整数を入力');
   String get submitAnswer =>
       _text(zhHant: '提交答案', zhHans: '提交答案', en: 'Submit Answer', ja: '解答を送信');
   String get viewFigure =>
@@ -4208,8 +4227,8 @@ class AppStrings {
       _text(zhHant: '正確率', zhHans: '正确率', en: 'Accuracy', ja: '正答率');
   String get practiceMode =>
       _text(zhHant: '練習模式', zhHans: '练习模式', en: 'Practice Mode', ja: '練習モード');
-  String get practiceSummary =>
-      _text(zhHant: '練習摘要', zhHans: '练习摘要', en: 'Practice Summary', ja: '練習サマリー');
+  String get practiceSummary => _text(
+      zhHant: '練習摘要', zhHans: '练习摘要', en: 'Practice Summary', ja: '練習サマリー');
   String get quizMode =>
       _text(zhHant: '測驗模式', zhHans: '测验模式', en: 'Quiz Mode', ja: 'テストモード');
   String get submitQuiz =>
@@ -4445,7 +4464,8 @@ class _GraphPanel extends StatelessWidget {
             Text(question.localizedPrompt(_localeCode(context)),
                 style: Theme.of(context).textTheme.bodyLarge),
             const SizedBox(height: 10),
-            Text(strings.demoSubtitle, style: Theme.of(context).textTheme.bodyMedium),
+            Text(strings.demoSubtitle,
+                style: Theme.of(context).textTheme.bodyMedium),
             const SizedBox(height: 20),
             _QuestionFigureView(question: question),
           ],
@@ -4537,7 +4557,8 @@ class _AnswerComposer extends StatelessWidget {
   Widget build(BuildContext context) {
     switch (question.answerMode) {
       case AnswerMode.multipleChoice:
-        final List<String> keys = (question.options?.keys.toList() ?? [])..sort();
+        final List<String> keys = (question.options?.keys.toList() ?? [])
+          ..sort();
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -4758,7 +4779,9 @@ _FigureRenderSpec? _buildFigureRenderSpec(Question question) {
       ),
     'coordinate_plane' => CustomPaint(
         painter: CoordinatePlanePainter(
+          minX: _intFromDynamic(question.figure.params['minX'], fallback: 0),
           maxX: _intFromDynamic(question.figure.params['maxX'], fallback: 6),
+          minY: _intFromDynamic(question.figure.params['minY'], fallback: 0),
           maxY: _intFromDynamic(question.figure.params['maxY'], fallback: 6),
           showGrid: question.figure.params['showGrid'] as bool? ?? true,
           points: _pointListFromDynamic(question.figure.params['points']),
@@ -4779,8 +4802,10 @@ _FigureRenderSpec? _buildFigureRenderSpec(Question question) {
         painter: CompositeGridShapePainter(
           rows: _intFromDynamic(question.figure.params['rows'], fallback: 3),
           cols: _intFromDynamic(question.figure.params['cols'], fallback: 3),
-          filledCells: _cellListFromDynamic(question.figure.params['filledCells']),
-          cellLabels: _stringMapFromDynamic(question.figure.params['cellLabels']),
+          filledCells:
+              _cellListFromDynamic(question.figure.params['filledCells']),
+          cellLabels:
+              _stringMapFromDynamic(question.figure.params['cellLabels']),
         ),
         child: const SizedBox.expand(),
       ),
@@ -4890,10 +4915,10 @@ class _FigurePreviewDialog extends StatelessWidget {
 double _geometrySceneAspectRatio(Map<String, dynamic> params) {
   final Map<String, dynamic> b =
       Map<String, dynamic>.from(params['bounds'] as Map? ?? const {});
-  final double spanX =
-      ((b['maxX'] ?? 1) as num).toDouble() - ((b['minX'] ?? 0) as num).toDouble();
-  final double spanY =
-      ((b['maxY'] ?? 1) as num).toDouble() - ((b['minY'] ?? 0) as num).toDouble();
+  final double spanX = ((b['maxX'] ?? 1) as num).toDouble() -
+      ((b['minX'] ?? 0) as num).toDouble();
+  final double spanY = ((b['maxY'] ?? 1) as num).toDouble() -
+      ((b['minY'] ?? 0) as num).toDouble();
   if (spanY <= 0) return 1.2;
   return (spanX / spanY).clamp(0.75, 1.7).toDouble();
 }
@@ -4913,8 +4938,10 @@ class GeometryScenePainter extends CustomPainter {
   static const Color _shadeFill = Color(0x1FE47855);
   static const Color _shadeStroke = Color(0xFFC65B3C);
 
-  Offset _p(String name, Size size) => scene.pointToScreen(name, size, padding: _pad);
-  Offset _m(Offset math, Size size) => scene.toScreen(math, size, padding: _pad);
+  Offset _p(String name, Size size) =>
+      scene.pointToScreen(name, size, padding: _pad);
+  Offset _m(Offset math, Size size) =>
+      scene.toScreen(math, size, padding: _pad);
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -4970,7 +4997,8 @@ class GeometryScenePainter extends CustomPainter {
         final double deg = arc.from + (arc.to - arc.from) * i / steps;
         final double rad = deg * math.pi / 180;
         final Offset sp = _m(
-          Offset(arc.cx + arc.r * math.cos(rad), arc.cy + arc.r * math.sin(rad)),
+          Offset(
+              arc.cx + arc.r * math.cos(rad), arc.cy + arc.r * math.sin(rad)),
           size,
         );
         if (i == 0) {
@@ -5020,7 +5048,8 @@ class GeometryScenePainter extends CustomPainter {
         sweep -= 2 * math.pi;
       }
       const double r = 22;
-      canvas.drawArc(Rect.fromCircle(center: v, radius: r), a1, sweep, false, markPaint);
+      canvas.drawArc(
+          Rect.fromCircle(center: v, radius: r), a1, sweep, false, markPaint);
       if (am.label != null && am.label!.isNotEmpty) {
         final double midA = a1 + sweep / 2;
         final Offset lblAt =
@@ -5055,6 +5084,7 @@ class GeometryScenePainter extends CustomPainter {
       ..strokeWidth = 2
       ..style = PaintingStyle.stroke;
     scene.points.forEach((String name, Offset _) {
+      if (scene.pointIsVisible[name] == false) return;
       final Offset o = _p(name, size);
       canvas.drawCircle(o, 4.5, ptFill);
       canvas.drawCircle(o, 4.5, ptStroke);
@@ -5154,12 +5184,10 @@ class _ResultStatusBadge extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Color textColor = isCorrect
-        ? const Color(0xFF166534)
-        : const Color(0xFFB91C1C);
-    final Color backgroundColor = isCorrect
-        ? const Color(0xFFDCFCE7)
-        : const Color(0xFFFEE2E2);
+    final Color textColor =
+        isCorrect ? const Color(0xFF166534) : const Color(0xFFB91C1C);
+    final Color backgroundColor =
+        isCorrect ? const Color(0xFFDCFCE7) : const Color(0xFFFEE2E2);
 
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
@@ -5211,7 +5239,8 @@ Future<void> _openFirstEligiblePack({
 }) async {
   final bundled.BundledQuestionBankRepository repository =
       bundled.BundledQuestionBankRepository();
-  final bundled.BundledQuestionManifest manifest = await repository.loadManifest();
+  final bundled.BundledQuestionManifest manifest =
+      await repository.loadManifest();
   final List<bundled.BundledQuestionPackInfo> selectedPacks =
       SessionLaunchPlanBuilder.pickEligiblePacks(
     manifest.packs,
@@ -5228,11 +5257,13 @@ Future<void> _openFirstEligiblePack({
     mergedQuestions.addAll(questionBank.questions);
   }
   final List<Question> approvedQuestions =
-      SessionLaunchPlanBuilder.filterApprovedQuestionsForLaunch(mergedQuestions);
+      SessionLaunchPlanBuilder.filterApprovedQuestionsForLaunch(
+          mergedQuestions);
   if (!context.mounted || approvedQuestions.isEmpty) {
     if (context.mounted) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(AppStrings.of(context).noApprovedQuestionsInRange)),
+        SnackBar(
+            content: Text(AppStrings.of(context).noApprovedQuestionsInRange)),
       );
     }
     return;
@@ -5245,7 +5276,7 @@ Future<void> _openFirstEligiblePack({
   final bundled.BundledQuestionPackInfo launchPack =
       SessionLaunchPlanBuilder.buildLaunchPack(
     selectedPacks: selectedPacks,
-        learner: learner,
+    learner: learner,
     mergedQuestionCount: approvedQuestions.length,
     topicCode: topicCode,
   );
@@ -5484,8 +5515,10 @@ class TrigGraphPainter extends CustomPainter {
     const double yMin = -1.25;
     const double yMax = 1.25;
 
-    double mapX(double x) => plot.left + (x - xMin) / (xMax - xMin) * plot.width;
-    double mapY(double y) => plot.bottom - (y - yMin) / (yMax - yMin) * plot.height;
+    double mapX(double x) =>
+        plot.left + (x - xMin) / (xMax - xMin) * plot.width;
+    double mapY(double y) =>
+        plot.bottom - (y - yMin) / (yMax - yMin) * plot.height;
 
     final Rect focusBand = Rect.fromLTRB(
       mapX(math.pi / 2),
@@ -5676,10 +5709,14 @@ class ShapeDiagramPainter extends CustomPainter {
           Offset(center.dx + arm, center.dy),
           linePaint,
         );
-        _paintText(canvas, labels['top'] ?? 'N', Offset(center.dx, center.dy - arm - 22));
-        _paintText(canvas, labels['right'] ?? 'E', Offset(center.dx + arm + 22, center.dy));
-        _paintText(canvas, labels['bottom'] ?? 'S', Offset(center.dx, center.dy + arm + 22));
-        _paintText(canvas, labels['left'] ?? 'W', Offset(center.dx - arm - 22, center.dy));
+        _paintText(canvas, labels['top'] ?? 'N',
+            Offset(center.dx, center.dy - arm - 22));
+        _paintText(canvas, labels['right'] ?? 'E',
+            Offset(center.dx + arm + 22, center.dy));
+        _paintText(canvas, labels['bottom'] ?? 'S',
+            Offset(center.dx, center.dy + arm + 22));
+        _paintText(canvas, labels['left'] ?? 'W',
+            Offset(center.dx - arm - 22, center.dy));
         _paintText(canvas, labels['center'], center);
         break;
       case 'square':
@@ -5701,10 +5738,14 @@ class ShapeDiagramPainter extends CustomPainter {
           ..close();
         canvas.drawPath(triangle, fillPaint);
         canvas.drawPath(triangle, outlinePaint);
-        _paintText(canvas, labels['top'], Offset(size.width * 0.5, size.height * 0.1));
-        _paintText(canvas, labels['left'], Offset(size.width * 0.18, size.height * 0.48));
-        _paintText(canvas, labels['right'], Offset(size.width * 0.82, size.height * 0.48));
-        _paintText(canvas, labels['bottom'], Offset(size.width * 0.5, size.height * 0.76));
+        _paintText(
+            canvas, labels['top'], Offset(size.width * 0.5, size.height * 0.1));
+        _paintText(canvas, labels['left'],
+            Offset(size.width * 0.18, size.height * 0.48));
+        _paintText(canvas, labels['right'],
+            Offset(size.width * 0.82, size.height * 0.48));
+        _paintText(canvas, labels['bottom'],
+            Offset(size.width * 0.5, size.height * 0.76));
         break;
       case 'trapezoid':
         final Path trapezoid = Path()
@@ -5715,11 +5756,16 @@ class ShapeDiagramPainter extends CustomPainter {
           ..close();
         canvas.drawPath(trapezoid, fillPaint);
         canvas.drawPath(trapezoid, outlinePaint);
-        _paintText(canvas, labels['top'], Offset(size.width * 0.5, size.height * 0.14));
-        _paintText(canvas, labels['bottom'], Offset(size.width * 0.5, size.height * 0.78));
-        _paintText(canvas, labels['left'], Offset(size.width * 0.16, size.height * 0.46));
-        _paintText(canvas, labels['right'], Offset(size.width * 0.84, size.height * 0.46));
-        _paintText(canvas, labels['center'], Offset(size.width * 0.5, size.height * 0.48));
+        _paintText(canvas, labels['top'],
+            Offset(size.width * 0.5, size.height * 0.14));
+        _paintText(canvas, labels['bottom'],
+            Offset(size.width * 0.5, size.height * 0.78));
+        _paintText(canvas, labels['left'],
+            Offset(size.width * 0.16, size.height * 0.46));
+        _paintText(canvas, labels['right'],
+            Offset(size.width * 0.84, size.height * 0.46));
+        _paintText(canvas, labels['center'],
+            Offset(size.width * 0.5, size.height * 0.48));
         break;
       case 'parallelogram':
         final Path parallelogram = Path()
@@ -5730,11 +5776,16 @@ class ShapeDiagramPainter extends CustomPainter {
           ..close();
         canvas.drawPath(parallelogram, fillPaint);
         canvas.drawPath(parallelogram, outlinePaint);
-        _paintText(canvas, labels['top'], Offset(size.width * 0.53, size.height * 0.14));
-        _paintText(canvas, labels['bottom'], Offset(size.width * 0.41, size.height * 0.78));
-        _paintText(canvas, labels['left'], Offset(size.width * 0.14, size.height * 0.48));
-        _paintText(canvas, labels['right'], Offset(size.width * 0.8, size.height * 0.48));
-        _paintText(canvas, labels['center'], Offset(size.width * 0.47, size.height * 0.46));
+        _paintText(canvas, labels['top'],
+            Offset(size.width * 0.53, size.height * 0.14));
+        _paintText(canvas, labels['bottom'],
+            Offset(size.width * 0.41, size.height * 0.78));
+        _paintText(canvas, labels['left'],
+            Offset(size.width * 0.14, size.height * 0.48));
+        _paintText(canvas, labels['right'],
+            Offset(size.width * 0.8, size.height * 0.48));
+        _paintText(canvas, labels['center'],
+            Offset(size.width * 0.47, size.height * 0.46));
         break;
       case 'pentagon':
         final Path pentagon = Path()
@@ -5746,11 +5797,16 @@ class ShapeDiagramPainter extends CustomPainter {
           ..close();
         canvas.drawPath(pentagon, fillPaint);
         canvas.drawPath(pentagon, outlinePaint);
-        _paintText(canvas, labels['top'], Offset(size.width * 0.5, size.height * 0.08));
-        _paintText(canvas, labels['left'], Offset(size.width * 0.16, size.height * 0.44));
-        _paintText(canvas, labels['right'], Offset(size.width * 0.84, size.height * 0.44));
-        _paintText(canvas, labels['bottom'], Offset(size.width * 0.5, size.height * 0.78));
-        _paintText(canvas, labels['center'], Offset(size.width * 0.5, size.height * 0.46));
+        _paintText(canvas, labels['top'],
+            Offset(size.width * 0.5, size.height * 0.08));
+        _paintText(canvas, labels['left'],
+            Offset(size.width * 0.16, size.height * 0.44));
+        _paintText(canvas, labels['right'],
+            Offset(size.width * 0.84, size.height * 0.44));
+        _paintText(canvas, labels['bottom'],
+            Offset(size.width * 0.5, size.height * 0.78));
+        _paintText(canvas, labels['center'],
+            Offset(size.width * 0.5, size.height * 0.46));
         break;
       case 'hexagon':
         final Path hexagon = Path()
@@ -5763,11 +5819,16 @@ class ShapeDiagramPainter extends CustomPainter {
           ..close();
         canvas.drawPath(hexagon, fillPaint);
         canvas.drawPath(hexagon, outlinePaint);
-        _paintText(canvas, labels['top'], Offset(size.width * 0.5, size.height * 0.1));
-        _paintText(canvas, labels['left'], Offset(size.width * 0.14, size.height * 0.44));
-        _paintText(canvas, labels['right'], Offset(size.width * 0.86, size.height * 0.44));
-        _paintText(canvas, labels['bottom'], Offset(size.width * 0.5, size.height * 0.78));
-        _paintText(canvas, labels['center'], Offset(size.width * 0.5, size.height * 0.44));
+        _paintText(
+            canvas, labels['top'], Offset(size.width * 0.5, size.height * 0.1));
+        _paintText(canvas, labels['left'],
+            Offset(size.width * 0.14, size.height * 0.44));
+        _paintText(canvas, labels['right'],
+            Offset(size.width * 0.86, size.height * 0.44));
+        _paintText(canvas, labels['bottom'],
+            Offset(size.width * 0.5, size.height * 0.78));
+        _paintText(canvas, labels['center'],
+            Offset(size.width * 0.5, size.height * 0.44));
         break;
       case 'circle':
         final Offset center = Offset(size.width / 2, size.height / 2);
@@ -5775,8 +5836,10 @@ class ShapeDiagramPainter extends CustomPainter {
         canvas.drawCircle(center, radius, fillPaint);
         canvas.drawCircle(center, radius, outlinePaint);
         _paintText(canvas, labels['center'], center);
-        _paintText(canvas, labels['top'], Offset(center.dx, center.dy - radius - 18));
-        _paintText(canvas, labels['right'], Offset(center.dx + radius + 18, center.dy));
+        _paintText(
+            canvas, labels['top'], Offset(center.dx, center.dy - radius - 18));
+        _paintText(canvas, labels['right'],
+            Offset(center.dx + radius + 18, center.dy));
         break;
       case 'oval':
         final Rect oval = Rect.fromCenter(
@@ -5799,15 +5862,18 @@ class ShapeDiagramPainter extends CustomPainter {
 
   void _paintShapeLabels(Canvas canvas, Rect rect) {
     _paintText(canvas, labels['top'], Offset(rect.center.dx, rect.top - 18));
-    _paintText(canvas, labels['bottom'], Offset(rect.center.dx, rect.bottom + 18));
+    _paintText(
+        canvas, labels['bottom'], Offset(rect.center.dx, rect.bottom + 18));
     _paintText(canvas, labels['left'], Offset(rect.left - 18, rect.center.dy));
-    _paintText(canvas, labels['right'], Offset(rect.right + 18, rect.center.dy));
+    _paintText(
+        canvas, labels['right'], Offset(rect.right + 18, rect.center.dy));
     _paintText(canvas, labels['center'], rect.center);
   }
 
   @override
   bool shouldRepaint(covariant ShapeDiagramPainter oldDelegate) {
-    return oldDelegate.shape != shape || oldDelegate.labels.toString() != labels.toString();
+    return oldDelegate.shape != shape ||
+        oldDelegate.labels.toString() != labels.toString();
   }
 }
 
@@ -5845,7 +5911,8 @@ class CircleQuadrantsPointPainter extends CustomPainter {
     final Offset right = Offset(center.dx + radius, center.dy);
     final Offset bottom = Offset(center.dx, center.dy + radius);
     final Offset left = Offset(center.dx - radius, center.dy);
-    final Offset pointP = Offset(center.dx - radius * 0.18, center.dy + radius * 0.1);
+    final Offset pointP =
+        Offset(center.dx - radius * 0.18, center.dy + radius * 0.1);
 
     if (shadedRegion == 'topRight') {
       final Path shadedPath = Path()
@@ -5907,7 +5974,9 @@ class CircleQuadrantsPointPainter extends CustomPainter {
 
 class CoordinatePlanePainter extends CustomPainter {
   const CoordinatePlanePainter({
+    required this.minX,
     required this.maxX,
+    required this.minY,
     required this.maxY,
     required this.showGrid,
     required this.points,
@@ -5915,7 +5984,9 @@ class CoordinatePlanePainter extends CustomPainter {
     required this.highlightPoint,
   });
 
+  final int minX;
   final int maxX;
+  final int minY;
   final int maxY;
   final bool showGrid;
   final List<DiagramPoint> points;
@@ -5951,25 +6022,36 @@ class CoordinatePlanePainter extends CustomPainter {
       ..strokeWidth = 3
       ..style = PaintingStyle.stroke;
 
-    double mapX(int x) => plot.left + x / math.max(maxX, 1) * plot.width;
-    double mapY(int y) => plot.bottom - y / math.max(maxY, 1) * plot.height;
+    final int xSpan = math.max(maxX - minX, 1);
+    final int ySpan = math.max(maxY - minY, 1);
+    double mapX(int x) => plot.left + (x - minX) / xSpan * plot.width;
+    double mapY(int y) => plot.bottom - (y - minY) / ySpan * plot.height;
 
     if (showGrid) {
-      for (int x = 0; x <= maxX; x++) {
+      for (int x = minX; x <= maxX; x++) {
         final double dx = mapX(x);
-        canvas.drawLine(Offset(dx, plot.top), Offset(dx, plot.bottom), gridPaint);
+        canvas.drawLine(
+            Offset(dx, plot.top), Offset(dx, plot.bottom), gridPaint);
+        _paintText(canvas, '$x', Offset(dx, plot.bottom + 14));
       }
-      for (int y = 0; y <= maxY; y++) {
+      for (int y = minY; y <= maxY; y++) {
         final double dy = mapY(y);
-        canvas.drawLine(Offset(plot.left, dy), Offset(plot.right, dy), gridPaint);
+        canvas.drawLine(
+            Offset(plot.left, dy), Offset(plot.right, dy), gridPaint);
+        if (y != 0) _paintText(canvas, '$y', Offset(plot.left - 14, dy));
       }
     }
 
-    canvas.drawLine(Offset(plot.left, plot.bottom), Offset(plot.right, plot.bottom), axisPaint);
-    canvas.drawLine(Offset(plot.left, plot.bottom), Offset(plot.left, plot.top), axisPaint);
+    final double axisX = minX <= 0 && 0 <= maxX ? mapX(0) : plot.left;
+    final double axisY = minY <= 0 && 0 <= maxY ? mapY(0) : plot.bottom;
+    canvas.drawLine(
+        Offset(plot.left, axisY), Offset(plot.right, axisY), axisPaint);
+    canvas.drawLine(
+        Offset(axisX, plot.bottom), Offset(axisX, plot.top), axisPaint);
 
     if (pathPoints.length >= 2) {
-      final Path path = Path()..moveTo(mapX(pathPoints.first.x), mapY(pathPoints.first.y));
+      final Path path = Path()
+        ..moveTo(mapX(pathPoints.first.x), mapY(pathPoints.first.y));
       for (final DiagramPoint point in pathPoints.skip(1)) {
         path.lineTo(mapX(point.x), mapY(point.y));
       }
@@ -5990,7 +6072,9 @@ class CoordinatePlanePainter extends CustomPainter {
 
   @override
   bool shouldRepaint(covariant CoordinatePlanePainter oldDelegate) {
-    return oldDelegate.maxX != maxX ||
+    return oldDelegate.minX != minX ||
+        oldDelegate.maxX != maxX ||
+        oldDelegate.minY != minY ||
         oldDelegate.maxY != maxY ||
         oldDelegate.showGrid != showGrid ||
         oldDelegate.points.length != points.length ||
@@ -6030,9 +6114,8 @@ class CompositeGridShapePainter extends CustomPainter {
       ..strokeWidth = 2.6
       ..style = PaintingStyle.stroke;
 
-    final Set<String> filledKeys = filledCells
-        .map((cell) => '${cell.row},${cell.col}')
-        .toSet();
+    final Set<String> filledKeys =
+        filledCells.map((cell) => '${cell.row},${cell.col}').toSet();
 
     final double cellSize = math.min(
       (size.width * 0.72) / cols,
@@ -6052,7 +6135,8 @@ class CompositeGridShapePainter extends CustomPainter {
           cellSize,
         );
         final String key = '$row,$col';
-        canvas.drawRect(cellRect, filledKeys.contains(key) ? fillPaint : emptyPaint);
+        canvas.drawRect(
+            cellRect, filledKeys.contains(key) ? fillPaint : emptyPaint);
         canvas.drawRect(cellRect, gridPaint);
         _paintText(canvas, cellLabels[key], cellRect.center);
       }
@@ -6070,7 +6154,8 @@ class CompositeGridShapePainter extends CustomPainter {
         canvas.drawLine(cellRect.topLeft, cellRect.topRight, outlinePaint);
       }
       if (!filledKeys.contains('${cell.row + 1},${cell.col}')) {
-        canvas.drawLine(cellRect.bottomLeft, cellRect.bottomRight, outlinePaint);
+        canvas.drawLine(
+            cellRect.bottomLeft, cellRect.bottomRight, outlinePaint);
       }
       if (!filledKeys.contains('${cell.row},${cell.col - 1}')) {
         canvas.drawLine(cellRect.topLeft, cellRect.bottomLeft, outlinePaint);
@@ -6126,8 +6211,10 @@ List<GridCell> _cellListFromDynamic(dynamic value) {
     return const <GridCell>[];
   }
   return value.whereType<List>().map((entry) {
-    final int row = entry.isNotEmpty ? _intFromDynamic(entry[0], fallback: 0) : 0;
-    final int col = entry.length > 1 ? _intFromDynamic(entry[1], fallback: 0) : 0;
+    final int row =
+        entry.isNotEmpty ? _intFromDynamic(entry[0], fallback: 0) : 0;
+    final int col =
+        entry.length > 1 ? _intFromDynamic(entry[1], fallback: 0) : 0;
     return GridCell(row: row, col: col);
   }).toList();
 }
