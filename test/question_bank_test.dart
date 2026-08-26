@@ -2165,4 +2165,175 @@ void main() {
     );
     expect(byId('geometry_grade4_foundation_008').figure.params['minX'], -6);
   });
+
+  test('legacy kangaroo56 batch 1 uses distinct reviewed replacement questions', () async {
+    final file = File('assets/questions/mixed/kangaroo56_foundation.mixed.v1.json');
+    final rawPack =
+        jsonDecode(await file.readAsString()) as Map<String, dynamic>;
+    final pack = QuestionBank.fromJson(rawPack);
+    Question byId(String id) =>
+        pack.questions.firstWhere((question) => question.id == id);
+    Map<String, dynamic> rawById(String id) => (rawPack['questions'] as List)
+        .cast<Map<String, dynamic>>()
+        .firstWhere((question) => question['id'] == id);
+
+    final first = byId('mixed_kangaroo56_foundation_001');
+    expect(first.topic, 'mixed');
+    expect(rawById(first.id)['subtopic'], 'digit_arrangement');
+    expect(first.correctAnswer.value, '2');
+    expect(first.source?.name, 'Original olympiad-style design');
+    expect(first.localizedPrompt('zh-Hant'), contains('1、4、7'));
+
+    final second = byId('mixed_kangaroo56_foundation_002');
+    expect(rawById(second.id)['subtopic'], 'arrangement_counting');
+    expect(second.correctAnswer.value, '3');
+    expect(second.answerMode, AnswerMode.integerInput);
+
+    final third = byId('mixed_kangaroo56_foundation_003');
+    expect(rawById(third.id)['subtopic'], 'boundary_counting');
+    expect(third.correctAnswer.value, '16');
+    expect(third.figure.kind, 'none');
+  });
+
+  test('legacy kangaroo56 batch 2 uses distinct reviewed replacement questions', () async {
+    final file = File('assets/questions/mixed/kangaroo56_foundation.mixed.v1.json');
+    final rawPack =
+        jsonDecode(await file.readAsString()) as Map<String, dynamic>;
+    final pack = QuestionBank.fromJson(rawPack);
+    Question byId(String id) =>
+        pack.questions.firstWhere((question) => question.id == id);
+    Map<String, dynamic> rawById(String id) => (rawPack['questions'] as List)
+        .cast<Map<String, dynamic>>()
+        .firstWhere((question) => question['id'] == id);
+
+    final fourth = byId('mixed_kangaroo56_foundation_004');
+    expect(fourth.topic, 'mixed');
+    expect(rawById(fourth.id)['subtopic'], 'capacity_ratio');
+    expect(fourth.correctAnswer.value, '540');
+    expect(fourth.source?.name, 'Original olympiad-style design');
+
+    final fifth = byId('mixed_kangaroo56_foundation_005');
+    expect(rawById(fifth.id)['subtopic'], 'constrained_lattice_paths');
+    expect(fifth.correctAnswer.value, '18');
+    expect(fifth.answerMode, AnswerMode.integerInput);
+
+    final sixth = byId('mixed_kangaroo56_foundation_006');
+    expect(rawById(sixth.id)['subtopic'], 'digit_string_indexing');
+    expect(sixth.correctAnswer.value, '4');
+    expect(sixth.localizedPrompt('zh-Hant'), contains('3、6、9、12'));
+  });
+
+  test('legacy kangaroo56 batch 3 uses distinct reviewed replacement questions', () async {
+    final file = File('assets/questions/mixed/kangaroo56_foundation.mixed.v1.json');
+    final rawPack =
+        jsonDecode(await file.readAsString()) as Map<String, dynamic>;
+    final pack = QuestionBank.fromJson(rawPack);
+    Question byId(String id) =>
+        pack.questions.firstWhere((question) => question.id == id);
+    Map<String, dynamic> rawById(String id) => (rawPack['questions'] as List)
+        .cast<Map<String, dynamic>>()
+        .firstWhere((question) => question['id'] == id);
+
+    final seventh = byId('mixed_kangaroo56_foundation_007');
+    expect(seventh.topic, 'mixed');
+    expect(rawById(seventh.id)['subtopic'], 'inclusion_exclusion_area');
+    expect(seventh.correctAnswer.value, '12');
+    expect(seventh.source?.name, 'Original olympiad-style design');
+
+    final eighth = byId('mixed_kangaroo56_foundation_008');
+    expect(rawById(eighth.id)['subtopic'], 'nested_truth_statements');
+    expect(eighth.correctAnswer.value, 'A');
+    expect(eighth.answerMode, AnswerMode.multipleChoice);
+
+    final ninth = byId('mixed_kangaroo56_foundation_009');
+    expect(rawById(ninth.id)['subtopic'], 'simultaneous_remainders');
+    expect(ninth.correctAnswer.value, '59');
+    expect(ninth.localizedPrompt('zh-Hant'), contains('3、4、5'));
+  });
+
+  test('legacy kangaroo56 batch 4 uses distinct reviewed replacement questions', () async {
+    final rawPack = jsonDecode(await File(
+      'assets/questions/mixed/kangaroo56_foundation.mixed.v1.json',
+    ).readAsString()) as Map<String, dynamic>;
+    final pack = QuestionBank.fromJson(rawPack);
+    Question byId(String id) =>
+        pack.questions.firstWhere((question) => question.id == id);
+    Map<String, dynamic> rawById(String id) => (rawPack['questions'] as List)
+        .cast<Map<String, dynamic>>()
+        .firstWhere((question) => question['id'] == id);
+
+    final tenth = byId('mixed_kangaroo56_foundation_010');
+    expect(tenth.topic, 'mixed');
+    expect(rawById(tenth.id)['subtopic'], 'weight_elimination');
+    expect(tenth.correctAnswer.value, '8');
+
+    final eleventh = byId('mixed_kangaroo56_foundation_011');
+    expect(rawById(eleventh.id)['subtopic'], 'climb_slip_progression');
+    expect(eleventh.correctAnswer.value, '5');
+
+    final twelfth = byId('mixed_kangaroo56_foundation_012');
+    expect(rawById(twelfth.id)['subtopic'], 'rectangle_system');
+    expect(twelfth.correctAnswer.value, '8');
+    expect(twelfth.source?.name, 'Original olympiad-style design');
+  });
+
+  test('legacy kangaroo56 batch 5 uses distinct reviewed replacement questions', () async {
+    final rawPack = jsonDecode(await File('assets/questions/mixed/kangaroo56_foundation.mixed.v1.json').readAsString()) as Map<String, dynamic>;
+    final pack = QuestionBank.fromJson(rawPack);
+    Question byId(String id) => pack.questions.firstWhere((question) => question.id == id);
+    Map<String, dynamic> rawById(String id) => (rawPack['questions'] as List).cast<Map<String, dynamic>>().firstWhere((question) => question['id'] == id);
+    final thirteenth = byId('mixed_kangaroo56_foundation_013');
+    expect(thirteenth.topic, 'mixed');
+    expect(rawById(thirteenth.id)['subtopic'], 'restricted_handshake_counting');
+    expect(thirteenth.correctAnswer.value, '12');
+    final fourteenth = byId('mixed_kangaroo56_foundation_014');
+    expect(rawById(fourteenth.id)['subtopic'], 'reverse_digit_divisibility');
+    expect(fourteenth.correctAnswer.value, '72');
+    final fifteenth = byId('mixed_kangaroo56_foundation_015');
+    expect(rawById(fifteenth.id)['subtopic'], 'balance_difference');
+    expect(fifteenth.correctAnswer.value, '1');
+    expect(fifteenth.source?.name, 'Original olympiad-style design');
+  });
+
+  test('legacy kangaroo56 batch 6 uses distinct reviewed replacement questions', () async {
+    final raw = jsonDecode(await File('assets/questions/mixed/kangaroo56_foundation.mixed.v1.json').readAsString()) as Map<String,dynamic>;
+    Map<String,dynamic> byId(String id) => (raw['questions'] as List).cast<Map<String,dynamic>>().firstWhere((q) => q['id'] == id);
+    expect(byId('mixed_kangaroo56_foundation_016')['subtopic'], 'attribute_matching');
+    expect((byId('mixed_kangaroo56_foundation_016')['correctAnswer'] as Map)['value'], 'B');
+    expect(byId('mixed_kangaroo56_foundation_017')['subtopic'], 'square_classification');
+    expect((byId('mixed_kangaroo56_foundation_017')['correctAnswer'] as Map)['value'], '5');
+    expect(byId('mixed_kangaroo56_foundation_018')['subtopic'], 'weighted_average_reverse');
+    expect((byId('mixed_kangaroo56_foundation_018')['correctAnswer'] as Map)['value'], '24');
+  });
+
+  test('legacy kangaroo56 batch 7 uses distinct reviewed replacement questions', () async {
+    final raw = jsonDecode(await File('assets/questions/mixed/kangaroo56_foundation.mixed.v1.json').readAsString()) as Map<String,dynamic>;
+    Map<String,dynamic> byId(String id) => (raw['questions'] as List).cast<Map<String,dynamic>>().firstWhere((q) => q['id'] == id);
+    expect(byId('mixed_kangaroo56_foundation_019')['subtopic'], 'restricted_coin_combinations');
+    expect((byId('mixed_kangaroo56_foundation_019')['correctAnswer'] as Map)['value'], '3');
+    expect(byId('mixed_kangaroo56_foundation_020')['subtopic'], 'consecutive_product');
+    expect((byId('mixed_kangaroo56_foundation_020')['correctAnswer'] as Map)['value'], '5');
+    expect(byId('mixed_kangaroo56_foundation_021')['subtopic'], 'age_difference_invariant');
+    expect((byId('mixed_kangaroo56_foundation_021')['correctAnswer'] as Map)['value'], '10');
+  });
+
+  test('legacy kangaroo56 batch 8 uses distinct reviewed replacement questions', () async {
+    final raw = jsonDecode(await File('assets/questions/mixed/kangaroo56_foundation.mixed.v1.json').readAsString()) as Map<String,dynamic>;
+    Map<String,dynamic> byId(String id) => (raw['questions'] as List).cast<Map<String,dynamic>>().firstWhere((q) => q['id'] == id);
+    expect(byId('mixed_kangaroo56_foundation_022')['subtopic'], 'calendar_cycle');
+    expect((byId('mixed_kangaroo56_foundation_022')['correctAnswer'] as Map)['value'], '5');
+    expect(byId('mixed_kangaroo56_foundation_023')['subtopic'], 'fold_symmetry');
+    expect((byId('mixed_kangaroo56_foundation_023')['correctAnswer'] as Map)['value'], '4');
+    expect(byId('mixed_kangaroo56_foundation_024')['subtopic'], 'two_digit_inequality_count');
+    expect((byId('mixed_kangaroo56_foundation_024')['correctAnswer'] as Map)['value'], '45');
+  });
+
+  test('legacy kangaroo56 final batch uses reviewed replacement questions', () async {
+    final raw = jsonDecode(await File('assets/questions/mixed/kangaroo56_foundation.mixed.v1.json').readAsString()) as Map<String,dynamic>;
+    final questions = (raw['questions'] as List).cast<Map<String,dynamic>>();
+    expect(questions.where((q) => q['reviewStatus'] == 'ok').length, 29);
+    for (final question in questions) {
+      expect(question['source']?['name'], isNot('MathSpring Editorial'));
+    }
+  });
 }
