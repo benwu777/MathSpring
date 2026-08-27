@@ -7,6 +7,7 @@ import 'package:mathspring/models/answer_session.dart';
 import 'package:mathspring/models/learner_profile.dart';
 import 'package:mathspring/models/question_progress.dart';
 import 'package:mathspring/models/session_answer_record.dart';
+import 'package:mathspring/services/learning_activity_summary.dart';
 import 'package:sqflite/sqflite.dart';
 
 class AppServices {
@@ -23,7 +24,8 @@ class AppServices {
     List<AnswerSession>? initialSessions,
     Map<String, List<SessionAnswerRecord>>? initialSessionRecords,
   })  : learnerProfiles = <LearnerProfile>[],
-        _progressRecords = List<QuestionProgress>.from(initialProgress ?? const []),
+        _progressRecords =
+            List<QuestionProgress>.from(initialProgress ?? const []),
         _answerSessions = List<AnswerSession>.from(initialSessions ?? const []),
         _sessionRecords = Map<String, List<SessionAnswerRecord>>.from(
           initialSessionRecords ?? const {},
@@ -34,7 +36,8 @@ class AppServices {
   final QuestionProgressRepository? questionProgressRepository;
   final AppPreferencesRepository? appPreferencesRepository;
   final AnswerSessionRepository? answerSessionRepository;
-  final Future<void> Function(QuestionProgress progress)? onSaveQuestionProgress;
+  final Future<void> Function(QuestionProgress progress)?
+      onSaveQuestionProgress;
   final Future<void> Function(
     AnswerSession session,
     List<SessionAnswerRecord> records,
@@ -86,7 +89,8 @@ class AppServices {
   }
 
   Future<void> seedDefaultDataIfNeeded() async {
-    final LearnerProfileRepository learnerRepository = learnerProfileRepository!;
+    final LearnerProfileRepository learnerRepository =
+        learnerProfileRepository!;
     final AppPreferencesRepository preferencesRepository =
         appPreferencesRepository!;
     final List<LearnerProfile> existingProfiles =
@@ -200,7 +204,8 @@ class AppServices {
   }
 
   Future<void> updateLearner(LearnerProfile profile) async {
-    final int index = learnerProfiles.indexWhere((item) => item.id == profile.id);
+    final int index =
+        learnerProfiles.indexWhere((item) => item.id == profile.id);
     if (index == -1) {
       return;
     }
@@ -253,11 +258,12 @@ class AppServices {
   Future<LearnerProgressSummary> getLearnerProgressSummary(
     String learnerId,
   ) async {
-    final List<QuestionProgress> progressRecords = questionProgressRepository != null
-        ? await questionProgressRepository!.fetchByLearnerId(learnerId)
-        : _progressRecords
-            .where((progress) => progress.learnerId == learnerId)
-            .toList();
+    final List<QuestionProgress> progressRecords =
+        questionProgressRepository != null
+            ? await questionProgressRepository!.fetchByLearnerId(learnerId)
+            : _progressRecords
+                .where((progress) => progress.learnerId == learnerId)
+                .toList();
     final int solvedCount = progressRecords.length;
     final int correctCount = progressRecords
         .where((progress) => progress.status == 'correct')
@@ -280,11 +286,34 @@ class AppServices {
     return sessions;
   }
 
-  Future<List<SessionAnswerRecord>> getSessionAnswerRecords(String sessionId) async {
+  Future<List<SessionAnswerRecord>> getSessionAnswerRecords(
+      String sessionId) async {
     if (answerSessionRepository != null) {
       return answerSessionRepository!.fetchAnswerRecords(sessionId);
     }
-    return List<SessionAnswerRecord>.from(_sessionRecords[sessionId] ?? const []);
+    return List<SessionAnswerRecord>.from(
+        _sessionRecords[sessionId] ?? const []);
+  }
+
+  Future<LearningActivitySummary> getLearnerLearningActivitySummary(
+    String learnerId,
+  ) async {
+    final List<AnswerSession> sessions =
+        await getLearnerAnswerSessions(learnerId);
+    final List<List<SessionAnswerRecord>> records = await Future.wait(
+      sessions.map(
+        (AnswerSession session) => getSessionAnswerRecords(session.id),
+      ),
+    );
+    final Map<String, List<SessionAnswerRecord>> recordsBySessionId =
+        <String, List<SessionAnswerRecord>>{};
+    for (int index = 0; index < sessions.length; index += 1) {
+      recordsBySessionId[sessions[index].id] = records[index];
+    }
+    return LearningActivitySummary.fromSessions(
+      sessions: sessions,
+      recordsBySessionId: recordsBySessionId,
+    );
   }
 
   void _upsertProgressRecord(QuestionProgress progress) {
