@@ -810,7 +810,7 @@ void main() {
     await pumpApp(tester, services);
 
     expect(find.text('練習開始'), findsWidgets);
-    expect(find.text('オリンピック数学トレーニング'), findsOneWidget);
+    expect(find.text('数学的思考と発展練習'), findsOneWidget);
     expect(find.text('テスト'), findsWidgets);
     expect(find.text('図形'), findsNothing);
   });

@@ -34,9 +34,9 @@ void main() {
       correctCount: 1,
     );
     final LearningDataSnapshot merged = LearningDataSnapshot.merge(
-      LearningDataSnapshot(
-        sessions: const [firstSession],
-        recordsBySessionId: const {
+      const LearningDataSnapshot(
+        sessions: [firstSession],
+        recordsBySessionId: {
           'session-one': [
             SessionAnswerRecord(
               sessionId: 'session-one',
@@ -48,7 +48,7 @@ void main() {
             ),
           ],
         },
-        progress: const [
+        progress: [
           QuestionProgress(
             learnerId: 'learner',
             questionId: 'q1',
@@ -58,9 +58,9 @@ void main() {
           ),
         ],
       ),
-      LearningDataSnapshot(
-        sessions: const [secondSession],
-        recordsBySessionId: const {
+      const LearningDataSnapshot(
+        sessions: [secondSession],
+        recordsBySessionId: {
           'session-two': [
             SessionAnswerRecord(
               sessionId: 'session-two',
@@ -72,7 +72,7 @@ void main() {
             ),
           ],
         },
-        progress: const [
+        progress: [
           QuestionProgress(
             learnerId: 'learner',
             questionId: 'q1',

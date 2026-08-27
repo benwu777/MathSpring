@@ -2310,63 +2310,6 @@ class _StatCard extends StatelessWidget {
   }
 }
 
-class _HistoryPreviewSection extends StatelessWidget {
-  const _HistoryPreviewSection({
-    required this.strings,
-    required this.onOpenHistory,
-  });
-
-  final AppStrings strings;
-  final VoidCallback onOpenHistory;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Container(
-          width: double.infinity,
-          padding: const EdgeInsets.all(18),
-          decoration: BoxDecoration(
-            color: const Color(0xFFFAFAFA),
-            borderRadius: BorderRadius.circular(10),
-            border: Border.all(color: const Color(0xFFE5E7EB)),
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                strings.historyPreviewTitle,
-                style: Theme.of(context).textTheme.titleLarge,
-              ),
-              const SizedBox(height: 8),
-              Text(
-                strings.historyPreviewBody,
-                style: Theme.of(context).textTheme.bodyMedium,
-              ),
-            ],
-          ),
-        ),
-        const SizedBox(height: 18),
-        SizedBox(
-          width: double.infinity,
-          child: OutlinedButton(
-            onPressed: onOpenHistory,
-            style: OutlinedButton.styleFrom(
-              foregroundColor: const Color(0xFF111827),
-              minimumSize: const Size.fromHeight(52),
-              side: const BorderSide(color: Color(0xFFE5E7EB)),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
-              ),
-            ),
-            child: Text(strings.viewHistory),
-          ),
-        ),
-      ],
-    );
-  }
-}
-
 class QuestionLibraryPage extends StatefulWidget {
   const QuestionLibraryPage({
     super.key,
