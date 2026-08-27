@@ -770,6 +770,18 @@ void main() {
     expect(find.text('幾何'), findsNothing);
   });
 
+  testWidgets('home tagline uses mathematical thinking wording',
+      (WidgetTester tester) async {
+    final TestWidgetsFlutterBinding binding =
+        TestWidgetsFlutterBinding.ensureInitialized();
+    binding.platformDispatcher.localeTestValue = const Locale('zh', 'TW');
+
+    await pumpApp(tester, createTestServices());
+
+    expect(find.text('數學思維與進階練習'), findsOneWidget);
+    expect(find.textContaining('奧數'), findsNothing);
+  });
+
   testWidgets(
       'shows Simplified Chinese home content when system locale is zh-CN',
       (WidgetTester tester) async {
@@ -782,7 +794,7 @@ void main() {
     await pumpApp(tester, services);
 
     expect(find.text('开始练习'), findsWidgets);
-    expect(find.text('奥数思维训练'), findsOneWidget);
+    expect(find.text('数学思维与进阶练习'), findsOneWidget);
     expect(find.text('练习'), findsWidgets);
     expect(find.text('几何'), findsNothing);
   });

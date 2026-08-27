@@ -4036,19 +4036,19 @@ class AppStrings {
         ja: 'iPhone と iPad のために設計',
       );
   String get appSubtitle => _text(
-        zhHant: '奧數思維訓練',
-        zhHans: '奥数思维训练',
-        en: 'Olympiad Math',
-        ja: 'オリンピック数学トレーニング',
+        zhHant: '數學思維與進階練習',
+        zhHans: '数学思维与进阶练习',
+        en: 'Mathematical Thinking Practice',
+        ja: '数学的思考と発展練習',
       );
   String get languageTraditionalChinese => '繁中';
   String get languageEnglish => 'EN';
   String get heroTitle => 'MathSpring';
   String get heroSubtitle => _text(
-        zhHant: '用更清楚的方式練習奧數思維',
-        zhHans: '用更清楚的方式练习奥数思维',
-        en: 'Train elegant mathematical thinking.',
-        ja: '数学オリンピック型の思考を、より明快に鍛える。',
+        zhHant: '用更清楚的方式練習數學思維',
+        zhHans: '用更清楚的方式练习数学思维',
+        en: 'Build mathematical thinking with clarity.',
+        ja: '数学的思考を、より明快に鍛える。',
       );
   String get pillAdaptive => _text(
       zhHant: '自適應版面', zhHans: '自适应版面', en: 'Adaptive layout', ja: '適応レイアウト');
