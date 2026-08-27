@@ -2,6 +2,7 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:mathspring/competition_profiles.dart';
 import 'package:mathspring/data/bundled/bundled_question_bank_repository.dart'
     as bundled;
@@ -499,7 +500,7 @@ class _HomeShellFrame extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    _TopBar(
+                    const _TopBar(
                       title: 'MathSpring',
                     ),
                     const SizedBox(height: 18),
@@ -776,7 +777,59 @@ class _SettingsTab extends StatelessWidget {
           subtitle: strings.progressSubtitle,
           services: services,
         ),
+        const SizedBox(height: 16),
+        const _SupportAndPrivacySection(),
       ],
+    );
+  }
+}
+
+class _SupportAndPrivacySection extends StatelessWidget {
+  const _SupportAndPrivacySection();
+
+  static final Uri _supportUrl = Uri.parse(
+    'https://YOUR_GITHUB_USERNAME.github.io/mathspring/support/',
+  );
+  static final Uri _privacyUrl = Uri.parse(
+    'https://YOUR_GITHUB_USERNAME.github.io/mathspring/privacy/',
+  );
+
+  Future<void> _open(BuildContext context, Uri url) async {
+    if (await launchUrl(url, mode: LaunchMode.externalApplication)) {
+      return;
+    }
+    if (!context.mounted) {
+      return;
+    }
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text(AppStrings.of(context).linkOpenFailed)),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final AppStrings strings = AppStrings.of(context);
+    return _SectionCard(
+      title: strings.helpAndPrivacyTitle,
+      subtitle: strings.helpAndPrivacySubtitle,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          OutlinedButton.icon(
+            key: const ValueKey<String>('open_support_link'),
+            onPressed: () => _open(context, _supportUrl),
+            icon: const Icon(Icons.support_agent_outlined),
+            label: Text(strings.supportLinkLabel),
+          ),
+          const SizedBox(height: 10),
+          OutlinedButton.icon(
+            key: const ValueKey<String>('open_privacy_link'),
+            onPressed: () => _open(context, _privacyUrl),
+            icon: const Icon(Icons.privacy_tip_outlined),
+            label: Text(strings.privacyLinkLabel),
+          ),
+        ],
+      ),
     );
   }
 }
@@ -1686,7 +1739,6 @@ class _ProfileTile extends StatelessWidget {
 
 class _ProgressSection extends StatelessWidget {
   const _ProgressSection({
-    super.key,
     required this.title,
     required this.subtitle,
     required this.services,
@@ -2042,83 +2094,6 @@ class _StatCard extends StatelessWidget {
   }
 }
 
-class _TopicChipRow extends StatelessWidget {
-  const _TopicChipRow({required this.labels});
-
-  final List<String> labels;
-
-  @override
-  Widget build(BuildContext context) {
-    return Wrap(
-      spacing: 10,
-      runSpacing: 10,
-      children: labels
-          .map(
-            (label) => Container(
-              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
-              decoration: BoxDecoration(
-                color: const Color(0xFFF9FAFB),
-                borderRadius: BorderRadius.circular(8),
-                border: Border.all(color: const Color(0xFFE5E7EB)),
-              ),
-              child: Text(
-                label,
-                style: const TextStyle(
-                  color: Color(0xFF374151),
-                  fontWeight: FontWeight.w600,
-                  fontSize: 13,
-                ),
-              ),
-            ),
-          )
-          .toList(),
-    );
-  }
-}
-
-class _LibraryPreviewSection extends StatelessWidget {
-  const _LibraryPreviewSection({
-    required this.strings,
-    required this.onOpenLibrary,
-  });
-
-  final AppStrings strings;
-  final VoidCallback onOpenLibrary;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        _TopicChipRow(
-          labels: [
-            strings.topicArithmetic,
-            strings.topicGeometry,
-            strings.topicLogic,
-          ],
-        ),
-        const SizedBox(height: 18),
-        _PromptPreview(strings: strings),
-        const SizedBox(height: 18),
-        SizedBox(
-          width: double.infinity,
-          child: OutlinedButton(
-            onPressed: onOpenLibrary,
-            style: OutlinedButton.styleFrom(
-              foregroundColor: const Color(0xFF111827),
-              minimumSize: const Size.fromHeight(52),
-              side: const BorderSide(color: Color(0xFFE5E7EB)),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
-              ),
-            ),
-            child: Text(strings.browseLibrary),
-          ),
-        ),
-      ],
-    );
-  }
-}
-
 class _HistoryPreviewSection extends StatelessWidget {
   const _HistoryPreviewSection({
     required this.strings,
@@ -2176,39 +2151,6 @@ class _HistoryPreviewSection extends StatelessWidget {
   }
 }
 
-class _PromptPreview extends StatelessWidget {
-  const _PromptPreview({required this.strings});
-
-  final AppStrings strings;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      padding: const EdgeInsets.all(18),
-      decoration: BoxDecoration(
-        color: const Color(0xFFFAFAFA),
-        borderRadius: BorderRadius.circular(10),
-        border: Border.all(color: const Color(0xFFE5E7EB)),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            strings.previewLabel,
-            style: const TextStyle(
-              color: Color(0xFF374151),
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-          const SizedBox(height: 10),
-          Text(strings.previewQuestion),
-        ],
-      ),
-    );
-  }
-}
-
 class QuestionLibraryPage extends StatefulWidget {
   const QuestionLibraryPage({
     super.key,
@@ -2262,57 +2204,55 @@ class AnswerHistoryPage extends StatelessWidget {
             separatorBuilder: (context, index) => const SizedBox(height: 14),
             itemBuilder: (context, index) {
               final AnswerSession session = sessions[index];
-              return Container(
-                child: InkWell(
-                  key: ValueKey<String>('history_session_${session.id}'),
-                  borderRadius: BorderRadius.circular(12),
-                  onTap: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute<void>(
-                        builder: (_) => SessionDetailPage(
-                          services: services,
-                          session: session,
-                          initialQuestionsById: initialQuestionsById,
-                        ),
+              return InkWell(
+                key: ValueKey<String>('history_session_${session.id}'),
+                borderRadius: BorderRadius.circular(12),
+                onTap: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute<void>(
+                      builder: (_) => SessionDetailPage(
+                        services: services,
+                        session: session,
+                        initialQuestionsById: initialQuestionsById,
                       ),
-                    );
-                  },
-                  child: Container(
-                    padding: const EdgeInsets.all(18),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(12),
-                      border: Border.all(color: const Color(0xFFE5E7EB)),
                     ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          session.mode == 'quiz'
-                              ? strings.quizMode
-                              : strings.practiceMode,
-                          style: Theme.of(context).textTheme.titleLarge,
-                        ),
-                        const SizedBox(height: 6),
-                        Text(
-                          _displayTopicCode(session.topicCode, strings),
-                          style: Theme.of(context).textTheme.bodyLarge,
-                        ),
-                        const SizedBox(height: 10),
-                        Text(
-                          '${session.correctCount} / ${session.totalQuestions} ${strings.correctSuffix}',
-                        ),
-                        const SizedBox(height: 6),
-                        Text(
-                          '${strings.elapsedLabel} ${_formatElapsed(Duration(seconds: session.elapsedSeconds))}',
-                        ),
-                        const SizedBox(height: 6),
-                        Text(
-                          _formatSessionEndedAt(session.endedAtIso),
-                          style: Theme.of(context).textTheme.bodyMedium,
-                        ),
-                      ],
-                    ),
+                  );
+                },
+                child: Container(
+                  padding: const EdgeInsets.all(18),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(12),
+                    border: Border.all(color: const Color(0xFFE5E7EB)),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        session.mode == 'quiz'
+                            ? strings.quizMode
+                            : strings.practiceMode,
+                        style: Theme.of(context).textTheme.titleLarge,
+                      ),
+                      const SizedBox(height: 6),
+                      Text(
+                        _displayTopicCode(session.topicCode, strings),
+                        style: Theme.of(context).textTheme.bodyLarge,
+                      ),
+                      const SizedBox(height: 10),
+                      Text(
+                        '${session.correctCount} / ${session.totalQuestions} ${strings.correctSuffix}',
+                      ),
+                      const SizedBox(height: 6),
+                      Text(
+                        '${strings.elapsedLabel} ${_formatElapsed(Duration(seconds: session.elapsedSeconds))}',
+                      ),
+                      const SizedBox(height: 6),
+                      Text(
+                        _formatSessionEndedAt(session.endedAtIso),
+                        style: Theme.of(context).textTheme.bodyMedium,
+                      ),
+                    ],
                   ),
                 ),
               );
@@ -2636,12 +2576,12 @@ class PracticeSessionPage extends StatefulWidget {
 class _PracticeSessionPageState extends State<PracticeSessionPage> {
   late final Future<QuestionBank> _packFuture;
   final DateTime _startedAt = DateTime.now();
-  final List<_PracticeAnswerRecord> _records = <_PracticeAnswerRecord>[];
+  final List<PracticeAnswerRecord> _records = <PracticeAnswerRecord>[];
   final ScrollController _scrollController = ScrollController();
   final GlobalKey _reviewCardKey = GlobalKey();
   int _currentIndex = 0;
   bool _isReviewing = false;
-  _PracticeAnswerRecord? _latestRecord;
+  PracticeAnswerRecord? _latestRecord;
 
   @override
   void initState() {
@@ -2820,7 +2760,7 @@ class _PracticeSessionPageState extends State<PracticeSessionPage> {
       ),
     );
 
-    final _PracticeAnswerRecord record = _PracticeAnswerRecord(
+    final PracticeAnswerRecord record = PracticeAnswerRecord(
       question: question,
       submittedAnswer: submittedAnswer,
       isCorrect: isCorrect,
@@ -2864,7 +2804,7 @@ class _PracticeSessionPageState extends State<PracticeSessionPage> {
 
   Future<void> _openSummary() async {
     final PracticeSessionResult result = PracticeSessionResult(
-      records: List<_PracticeAnswerRecord>.unmodifiable(_records),
+      records: List<PracticeAnswerRecord>.unmodifiable(_records),
       startedAt: _startedAt,
       endedAt: DateTime.now(),
     );
@@ -3041,7 +2981,7 @@ class _PracticeReviewCard extends StatelessWidget {
     required this.onNext,
   });
 
-  final _PracticeAnswerRecord record;
+  final PracticeAnswerRecord record;
   final String localeCode;
   final String nextLabel;
   final VoidCallback onNext;
@@ -3153,7 +3093,7 @@ class PracticeSessionResult {
     required this.endedAt,
   });
 
-  final List<_PracticeAnswerRecord> records;
+  final List<PracticeAnswerRecord> records;
   final DateTime startedAt;
   final DateTime endedAt;
 
@@ -3167,8 +3107,8 @@ class PracticeSessionResult {
   Duration get elapsed => endedAt.difference(startedAt);
 }
 
-class _PracticeAnswerRecord {
-  const _PracticeAnswerRecord({
+class PracticeAnswerRecord {
+  const PracticeAnswerRecord({
     required this.question,
     required this.submittedAnswer,
     required this.isCorrect,
@@ -3401,6 +3341,9 @@ class _QuizSessionPageState extends State<QuizSessionPage> {
       ),
     );
 
+    if (!context.mounted) {
+      return;
+    }
     if (_currentIndex == questions.length - 1) {
       await _finishQuiz(
         context,
@@ -3425,9 +3368,9 @@ class _QuizSessionPageState extends State<QuizSessionPage> {
   }) async {
     final Map<String, String> finalAnswers = overrideAnswers ?? _answers;
     final DateTime submittedAt = DateTime.now();
-    final List<_QuizAnswerRecord> records = <_QuizAnswerRecord>[
+    final List<QuizAnswerRecord> records = <QuizAnswerRecord>[
       for (final Question item in questions)
-        _QuizAnswerRecord(
+        QuizAnswerRecord(
           question: item,
           submittedAnswer: finalAnswers[item.id] ?? '',
           isCorrect: _isCorrect(item, finalAnswers[item.id] ?? ''),
@@ -3468,7 +3411,7 @@ class _QuizSessionPageState extends State<QuizSessionPage> {
       ],
     );
 
-    if (!mounted) {
+    if (!context.mounted) {
       return;
     }
     Navigator.of(context).pushReplacement(
@@ -3587,7 +3530,7 @@ class QuizResultPage extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 18),
-            for (final _QuizAnswerRecord record in result.records)
+            for (final QuizAnswerRecord record in result.records)
               Padding(
                 padding: const EdgeInsets.only(bottom: 14),
                 child: Container(
@@ -3665,7 +3608,7 @@ class QuizSessionResult {
     required this.submittedAt,
   });
 
-  final List<_QuizAnswerRecord> records;
+  final List<QuizAnswerRecord> records;
   final DateTime startedAt;
   final DateTime submittedAt;
 
@@ -3676,8 +3619,8 @@ class QuizSessionResult {
   Duration get elapsed => submittedAt.difference(startedAt);
 }
 
-class _QuizAnswerRecord {
-  const _QuizAnswerRecord({
+class QuizAnswerRecord {
+  const QuizAnswerRecord({
     required this.question,
     required this.submittedAnswer,
     required this.isCorrect,
@@ -3746,7 +3689,6 @@ class _QuestionPromptText extends StatelessWidget {
 
 class _QuestionBodyText extends StatelessWidget {
   const _QuestionBodyText({
-    super.key,
     required this.text,
     required this.localeCode,
   });
@@ -3771,7 +3713,6 @@ class _QuestionBodyText extends StatelessWidget {
 
 class _QuestionSourceText extends StatelessWidget {
   const _QuestionSourceText({
-    super.key,
     required this.text,
   });
 
@@ -4127,6 +4068,28 @@ class AppStrings {
         zhHans: '界面语言在这里切换，题目内容也会同步切换到可用版本。',
         en: 'Switch the interface language here. Question content follows the selected locale when translations are available.',
         ja: 'ここで表示言語を切り替えます。問題文も利用可能な翻訳に合わせて切り替わります。',
+      );
+  String get helpAndPrivacyTitle => _text(
+        zhHant: '支援與隱私',
+        zhHans: '支持与隐私',
+        en: 'Help & Privacy',
+        ja: 'サポートとプライバシー',
+      );
+  String get helpAndPrivacySubtitle => _text(
+        zhHant: '查看使用說明與資料處理方式。',
+        zhHans: '查看使用说明与数据处理方式。',
+        en: 'Read support information and how data is handled.',
+        ja: '使い方とデータの取り扱いを確認します。',
+      );
+  String get supportLinkLabel =>
+      _text(zhHant: '支援', zhHans: '支持', en: 'Support', ja: 'サポート');
+  String get privacyLinkLabel => _text(
+      zhHant: '隱私政策', zhHans: '隐私政策', en: 'Privacy Policy', ja: 'プライバシーポリシー');
+  String get linkOpenFailed => _text(
+        zhHant: '目前無法開啟連結。',
+        zhHans: '目前无法打开链接。',
+        en: 'Unable to open the link right now.',
+        ja: '現在このリンクを開けません。',
       );
   String get topicArithmetic =>
       _text(zhHant: '計算', zhHans: '计算', en: 'Arithmetic', ja: '計算');
@@ -5510,8 +5473,8 @@ class TrigGraphPainter extends CustomPainter {
       ..color = const Color(0xFF0F172A)
       ..style = PaintingStyle.fill;
 
-    final double xMin = 0;
-    final double xMax = math.pi * 2;
+    const double xMin = 0;
+    const double xMax = math.pi * 2;
     const double yMin = -1.25;
     const double yMax = 1.25;
 
@@ -5579,7 +5542,7 @@ class TrigGraphPainter extends CustomPainter {
       math.pi * 2,
     ];
     final List<String> xLabels = ['0', 'π/2', 'π', '3π/2', '2π'];
-    final textStyle = const TextStyle(
+    const TextStyle textStyle = TextStyle(
       color: Color(0xFF475569),
       fontSize: 12,
       fontWeight: FontWeight.w500,
