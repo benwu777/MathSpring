@@ -2193,7 +2193,9 @@ void main() {
 
     await tester.tap(find.text('Review'));
     await tester.pumpAndSettle();
-    await tester.tap(find.text('View history'));
+    final Finder viewHistoryButton = find.text('View history');
+    await tester.ensureVisible(viewHistoryButton);
+    await tester.tap(viewHistoryButton);
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 300));
 
@@ -2203,6 +2205,64 @@ void main() {
     expect(find.text('Geometry'), findsAtLeastNWidgets(1));
     expect(find.text('8 / 10 correct'), findsOneWidget);
     expect(find.textContaining('Elapsed 5:00'), findsOneWidget);
+  });
+
+  testWidgets('review tab shows achievements and selects a practiced day',
+      (WidgetTester tester) async {
+    final TestWidgetsFlutterBinding binding =
+        TestWidgetsFlutterBinding.ensureInitialized();
+    binding.platformDispatcher.localeTestValue = const Locale('en');
+    final AppServices services = createTestServices(
+      initialSessions: const [
+        AnswerSession(
+          id: 'session_calendar',
+          learnerId: 'learner_allen',
+          mode: 'practice',
+          topicCode: 'geometry',
+          levelStage: 'grade4',
+          challengeTier: 'foundation',
+          startedAtIso: '2026-08-20T09:00:00Z',
+          endedAtIso: '2026-08-20T09:05:00Z',
+          elapsedSeconds: 300,
+          totalQuestions: 2,
+          correctCount: 1,
+        ),
+      ],
+      initialSessionRecords: const {
+        'session_calendar': [
+          SessionAnswerRecord(
+            sessionId: 'session_calendar',
+            questionId: 'q1',
+            sequence: 1,
+            submittedAnswer: 'A',
+            isCorrect: true,
+            answeredAtIso: '2026-08-20T09:01:00Z',
+          ),
+          SessionAnswerRecord(
+            sessionId: 'session_calendar',
+            questionId: 'q2',
+            sequence: 2,
+            submittedAnswer: 'B',
+            isCorrect: false,
+            answeredAtIso: '2026-08-20T09:02:00Z',
+          ),
+        ],
+      },
+    );
+
+    await pumpApp(tester, services);
+    await tester.tap(find.text('Review'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Achievements'), findsOneWidget);
+    expect(find.text('Current streak: 1 day'), findsOneWidget);
+    expect(find.byKey(const ValueKey<String>('calendar_day_2026-08-20')),
+        findsOneWidget);
+    await tester.tap(
+      find.byKey(const ValueKey<String>('calendar_day_2026-08-20')),
+    );
+    await tester.pumpAndSettle();
+    expect(find.text('2 questions · 50% correct'), findsOneWidget);
   });
 
   testWidgets(

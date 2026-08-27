@@ -14,6 +14,7 @@ import 'package:mathspring/models/question_bank.dart';
 import 'package:mathspring/models/question_progress.dart';
 import 'package:mathspring/models/learner_profile.dart';
 import 'package:mathspring/models/session_answer_record.dart';
+import 'package:mathspring/services/learning_activity_summary.dart';
 import 'package:mathspring/services/math_text_formatter.dart';
 import 'package:mathspring/services/session_launch_plan_builder.dart';
 
@@ -703,31 +704,246 @@ class _ReviewTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return _LearningReviewSection(services: services);
+  }
+}
+
+class _LearningReviewSection extends StatefulWidget {
+  const _LearningReviewSection({required this.services});
+
+  final AppServices services;
+
+  @override
+  State<_LearningReviewSection> createState() => _LearningReviewSectionState();
+}
+
+class _LearningReviewSectionState extends State<_LearningReviewSection> {
+  DateTime? _selectedDay;
+
+  @override
+  Widget build(BuildContext context) {
     final AppStrings strings = AppStrings.of(context);
+    final String? learnerId = widget.services.currentLearnerId;
+    return FutureBuilder<LearningActivitySummary>(
+      future: learnerId == null
+          ? Future<LearningActivitySummary>.value(
+              LearningActivitySummary.fromSessions(
+                sessions: const <AnswerSession>[],
+                recordsBySessionId: const <String, List<SessionAnswerRecord>>{},
+              ),
+            )
+          : widget.services.getLearnerLearningActivitySummary(learnerId),
+      builder: (BuildContext context,
+          AsyncSnapshot<LearningActivitySummary> snapshot) {
+        if (!snapshot.hasData) {
+          return const Center(child: CircularProgressIndicator());
+        }
+        final LearningActivitySummary summary = snapshot.data!;
+        final List<DateTime> practicedDays = summary.days.keys.toList()..sort();
+        final DateTime displayedDay = _selectedDay ??
+            (practicedDays.isEmpty ? DateTime.now() : practicedDays.last);
+        final LearningDaySummary daySummary = summary.dayFor(displayedDay);
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _CompactHeroBanner(
+              title: strings.reviewTitle,
+              subtitle: strings.reviewSubtitle,
+              icon: Icons.history_edu_rounded,
+            ),
+            const SizedBox(height: 18),
+            _SectionCard(
+              title: strings.achievementsTitle,
+              subtitle: strings.achievementsSubtitle,
+              child: _AchievementOverview(summary: summary, strings: strings),
+            ),
+            const SizedBox(height: 18),
+            _SectionCard(
+              title: strings.calendarTitle,
+              subtitle: strings.calendarSubtitle,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  _MonthlyLearningCalendar(
+                    month: displayedDay,
+                    summary: summary,
+                    strings: strings,
+                    selectedDay: displayedDay,
+                    onDaySelected: (DateTime day) {
+                      setState(() => _selectedDay = day);
+                    },
+                  ),
+                  const SizedBox(height: 16),
+                  Text(
+                    strings.dayActivityLabel(displayedDay),
+                    style: Theme.of(context).textTheme.titleMedium,
+                  ),
+                  const SizedBox(height: 6),
+                  Text(
+                    daySummary.questionCount == 0
+                        ? strings.calendarNoPractice
+                        : strings.dayActivitySummary(
+                            daySummary.questionCount,
+                            daySummary.accuracyRate,
+                          ),
+                  ),
+                  const SizedBox(height: 16),
+                  SizedBox(
+                    width: double.infinity,
+                    child: OutlinedButton(
+                      onPressed: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute<void>(
+                            builder: (_) => AnswerHistoryPage(
+                              services: widget.services,
+                            ),
+                          ),
+                        );
+                      },
+                      child: Text(strings.viewHistory),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        );
+      },
+    );
+  }
+}
+
+class _AchievementOverview extends StatelessWidget {
+  const _AchievementOverview({required this.summary, required this.strings});
+
+  final LearningActivitySummary summary;
+  final AppStrings strings;
+
+  @override
+  Widget build(BuildContext context) {
+    final List<Widget> badges = <Widget>[
+      _AchievementBadge(
+        label: strings.streakAchievement(
+            summary.currentStreak, summary.longestStreak),
+        icon: Icons.local_fire_department_outlined,
+      ),
+      _AchievementBadge(
+        label: strings.recoveryAchievement(summary.recoveredWrongAnswerCount),
+        icon: Icons.restart_alt_rounded,
+      ),
+      ...summary.topicQuestionCounts.entries
+          .expand((MapEntry<String, int> entry) {
+        return summary.reachedTopicMilestones(entry.key).map(
+              (int milestone) => _AchievementBadge(
+                label: strings.topicAchievement(
+                  _displayTopicCode(entry.key, strings),
+                  milestone,
+                ),
+                icon: Icons.workspace_premium_outlined,
+              ),
+            );
+      }),
+    ];
+    if (badges.isEmpty) {
+      return Text(strings.achievementsEmpty);
+    }
+    return Wrap(spacing: 10, runSpacing: 10, children: badges);
+  }
+}
+
+class _AchievementBadge extends StatelessWidget {
+  const _AchievementBadge({required this.label, required this.icon});
+
+  final String label;
+  final IconData icon;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+      decoration: BoxDecoration(
+        color: const Color(0xFFF4F7FC),
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(icon, size: 18, color: const Color(0xFF163D7A)),
+          const SizedBox(width: 6),
+          Text(label),
+        ],
+      ),
+    );
+  }
+}
+
+class _MonthlyLearningCalendar extends StatelessWidget {
+  const _MonthlyLearningCalendar({
+    required this.month,
+    required this.summary,
+    required this.strings,
+    required this.selectedDay,
+    required this.onDaySelected,
+  });
+
+  final DateTime month;
+  final LearningActivitySummary summary;
+  final AppStrings strings;
+  final DateTime selectedDay;
+  final ValueChanged<DateTime> onDaySelected;
+
+  @override
+  Widget build(BuildContext context) {
+    final DateTime firstDay = DateTime(month.year, month.month);
+    final int dayCount = DateTime(month.year, month.month + 1, 0).day;
+    final int leadingEmptyCells = firstDay.weekday % 7;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _CompactHeroBanner(
-          title: strings.reviewTitle,
-          subtitle: strings.reviewSubtitle,
-          icon: Icons.history_edu_rounded,
-        ),
-        const SizedBox(height: 18),
-        _SectionCard(
-          title: strings.reviewTitle,
-          subtitle: strings.reviewSubtitle,
-          child: _HistoryPreviewSection(
-            strings: strings,
-            onOpenHistory: () {
-              Navigator.of(context).push(
-                MaterialPageRoute<void>(
-                  builder: (_) => AnswerHistoryPage(
-                    services: services,
+        Text(strings.monthLabel(month),
+            style: Theme.of(context).textTheme.titleLarge),
+        const SizedBox(height: 12),
+        GridView.builder(
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          itemCount: leadingEmptyCells + dayCount,
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 7,
+            mainAxisSpacing: 6,
+            crossAxisSpacing: 6,
+          ),
+          itemBuilder: (BuildContext context, int index) {
+            if (index < leadingEmptyCells) {
+              return const SizedBox.shrink();
+            }
+            final DateTime day = DateTime(
+                month.year, month.month, index - leadingEmptyCells + 1);
+            final LearningDaySummary daySummary = summary.dayFor(day);
+            final bool practiced = daySummary.questionCount > 0;
+            final bool selected = day ==
+                DateTime(selectedDay.year, selectedDay.month, selectedDay.day);
+            return Material(
+              color: selected
+                  ? const Color(0xFF163D7A)
+                  : (practiced ? const Color(0xFFE7EEF9) : Colors.transparent),
+              borderRadius: BorderRadius.circular(9),
+              child: InkWell(
+                key: ValueKey<String>(
+                    'calendar_day_${day.year}-${day.month.toString().padLeft(2, '0')}-${day.day.toString().padLeft(2, '0')}'),
+                borderRadius: BorderRadius.circular(9),
+                onTap: () => onDaySelected(day),
+                child: Center(
+                  child: Text(
+                    '${day.day}',
+                    style: TextStyle(
+                      fontWeight: practiced ? FontWeight.w700 : FontWeight.w400,
+                      color: selected ? Colors.white : const Color(0xFF334155),
+                    ),
                   ),
                 ),
-              );
-            },
-          ),
+              ),
+            );
+          },
         ),
       ],
     );
@@ -3944,6 +4160,92 @@ class AppStrings {
         en: 'Revisit recent practice and quiz sessions and inspect each solution again.',
         ja: '最近の練習とテストを見返し、解き方を再確認します。',
       );
+  String get achievementsTitle => _text(
+        zhHant: '學習成就',
+        zhHans: '学习成就',
+        en: 'Achievements',
+        ja: '学習の達成',
+      );
+  String get achievementsSubtitle => _text(
+        zhHant: '依累積練習、錯題重做與持續學習解鎖。',
+        zhHans: '依累计练习、错题重做与持续学习解锁。',
+        en: 'Unlocked through steady practice, review, and persistence.',
+        ja: '練習の積み重ね、解き直し、継続によって達成します。',
+      );
+  String get achievementsEmpty => _text(
+        zhHant: '完成第一輪練習後，這裡會出現你的成就。',
+        zhHans: '完成第一轮练习后，这里会出现你的成就。',
+        en: 'Your achievements will appear after your first practice session.',
+        ja: '最初の練習を終えると、ここに達成が表示されます。',
+      );
+  String get calendarTitle => _text(
+        zhHant: '答題行事曆',
+        zhHans: '答题日历',
+        en: 'Answer calendar',
+        ja: '回答カレンダー',
+      );
+  String get calendarSubtitle => _text(
+        zhHant: '選擇日期查看答題數與正確率。',
+        zhHans: '选择日期查看答题数与正确率。',
+        en: 'Choose a date to see question count and accuracy.',
+        ja: '日付を選んで回答数と正答率を確認します。',
+      );
+  String get calendarNoPractice => _text(
+        zhHant: '這一天沒有答題紀錄。',
+        zhHans: '这一天没有答题记录。',
+        en: 'No answers recorded on this day.',
+        ja: 'この日の回答記録はありません。',
+      );
+  String dayActivityLabel(DateTime day) => _text(
+        zhHant: '${day.month} 月 ${day.day} 日',
+        zhHans: '${day.month} 月 ${day.day} 日',
+        en: '${_englishMonthName(day.month)} ${day.day}',
+        ja: '${day.month}月${day.day}日',
+      );
+  String dayActivitySummary(int count, double accuracyRate) => _text(
+        zhHant: '$count 題 · 正確率 ${(accuracyRate * 100).round()}%',
+        zhHans: '$count 题 · 正确率 ${(accuracyRate * 100).round()}%',
+        en: '$count questions · ${(accuracyRate * 100).round()}% correct',
+        ja: '$count 問 · 正答率 ${(accuracyRate * 100).round()}%',
+      );
+  String monthLabel(DateTime month) => _text(
+        zhHant: '${month.year} 年 ${month.month} 月',
+        zhHans: '${month.year} 年 ${month.month} 月',
+        en: '${_englishMonthName(month.month)} ${month.year}',
+        ja: '${month.year}年${month.month}月',
+      );
+  String streakAchievement(int current, int longest) => _text(
+        zhHant: '目前連續 $current 天 · 最高 $longest 天',
+        zhHans: '当前连续 $current 天 · 最高 $longest 天',
+        en: 'Current streak: $current day${current == 1 ? '' : 's'}',
+        ja: '現在 $current 日連続 · 最高 $longest 日',
+      );
+  String recoveryAchievement(int count) {
+    final String label = count >= 100
+        ? _text(zhHant: '百折不撓', zhHans: '百折不挠', en: 'Unbreakable', ja: '不屈')
+        : count >= 50
+            ? _text(
+                zhHant: '重新上手', zhHans: '重新上手', en: 'Back on Track', ja: '再挑戦')
+            : count >= 10
+                ? _text(
+                    zhHant: '重整旗鼓', zhHans: '重整旗鼓', en: 'Regroup', ja: '立て直し')
+                : _text(
+                    zhHant: '錯題重做 $count / 10',
+                    zhHans: '错题重做 $count / 10',
+                    en: 'Review recovery $count / 10',
+                    ja: '解き直し $count / 10');
+    return label;
+  }
+
+  String topicAchievement(String topic, int milestone) {
+    final String level = switch (milestone) {
+      100 => _text(zhHant: '達人', zhHans: '达人', en: 'Master', ja: '達人'),
+      50 => _text(zhHant: '熟手', zhHans: '熟手', en: 'Familiar', ja: '経験者'),
+      _ => _text(zhHant: '新手', zhHans: '新手', en: 'Beginner', ja: '入門者'),
+    };
+    return '$topic $level';
+  }
+
   String get settingsTitle => _text(
         zhHant: '角色與設定',
         zhHans: '角色与设置',
@@ -5298,6 +5600,24 @@ String _displayLevelStage(String levelStage, AppStrings strings) {
 
 String _displayTier(String tier, AppStrings strings) {
   return strings.tierDisplay(tier);
+}
+
+String _englishMonthName(int month) {
+  const List<String> months = <String>[
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December',
+  ];
+  return months[month - 1];
 }
 
 String _displayTopicCode(String topicCode, AppStrings strings) {
