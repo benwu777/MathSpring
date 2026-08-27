@@ -19,6 +19,7 @@ void main() {
   });
 
   AppServices createTestServices({
+    bool completeDailyMission = true,
     Future<void> Function(QuestionProgress progress)? onSaveQuestionProgress,
     Future<void> Function(
       AnswerSession session,
@@ -28,6 +29,31 @@ void main() {
     List<AnswerSession>? initialSessions,
     Map<String, List<SessionAnswerRecord>>? initialSessionRecords,
   }) {
+    final DateTime now = DateTime.now();
+    final AnswerSession dailySession = AnswerSession(
+      id: 'completed_daily_mission',
+      learnerId: 'learner_allen',
+      mode: 'practice',
+      topicCode: 'mixed',
+      levelStage: 'grade4',
+      challengeTier: 'foundation',
+      startedAtIso: now.toUtc().toIso8601String(),
+      endedAtIso: now.toUtc().toIso8601String(),
+      elapsedSeconds: 0,
+      totalQuestions: 5,
+      correctCount: 5,
+    );
+    final List<SessionAnswerRecord> dailyRecords = <SessionAnswerRecord>[
+      for (int index = 0; index < 5; index += 1)
+        SessionAnswerRecord(
+          sessionId: dailySession.id,
+          questionId: 'daily_question_$index',
+          sequence: index + 1,
+          submittedAnswer: 'A',
+          isCorrect: true,
+          answeredAtIso: now.toUtc().toIso8601String(),
+        ),
+    ];
     return AppServices.forTesting(
       learnerProfiles: const [
         LearnerProfile(
@@ -49,8 +75,14 @@ void main() {
       onSaveQuestionProgress: onSaveQuestionProgress,
       onSaveAnswerSession: onSaveAnswerSession,
       initialProgress: initialProgress,
-      initialSessions: initialSessions,
-      initialSessionRecords: initialSessionRecords,
+      initialSessions: initialSessions ??
+          (completeDailyMission ? <AnswerSession>[dailySession] : null),
+      initialSessionRecords: initialSessionRecords ??
+          (completeDailyMission
+              ? <String, List<SessionAnswerRecord>>{
+                  dailySession.id: dailyRecords,
+                }
+              : null),
     );
   }
 
@@ -751,6 +783,20 @@ void main() {
     expect(find.text('繁中'), findsNothing);
     expect(find.text('Question Library'), findsNothing);
     expect(find.text('Browse library'), findsNothing);
+  });
+
+  testWidgets('shows the daily mission before ordinary practice',
+      (WidgetTester tester) async {
+    await tester.pumpWidget(
+      MathSpringApp(services: createTestServices(completeDailyMission: false)),
+    );
+    await tester.pumpAndSettle();
+
+    expect(find.byKey(const ValueKey<String>('daily_mission_landing')),
+        findsOneWidget);
+    expect(find.text('0 / 5'), findsOneWidget);
+    expect(find.byKey(const ValueKey<String>('start_daily_mission')),
+        findsOneWidget);
   });
 
   testWidgets('shows Traditional Chinese home content when system locale is zh',

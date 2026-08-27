@@ -15,6 +15,7 @@ import 'package:mathspring/models/question_progress.dart';
 import 'package:mathspring/models/learner_profile.dart';
 import 'package:mathspring/models/session_answer_record.dart';
 import 'package:mathspring/services/learning_activity_summary.dart';
+import 'package:mathspring/services/daily_mission.dart';
 import 'package:mathspring/services/math_text_formatter.dart';
 import 'package:mathspring/services/session_launch_plan_builder.dart';
 
@@ -536,7 +537,10 @@ class _PracticeTabState extends State<_PracticeTab> {
   @override
   Widget build(BuildContext context) {
     final AppStrings strings = AppStrings.of(context);
-    return Column(
+    return _DailyMissionGate(
+      services: widget.services,
+      learner: widget.learner,
+      normalContent: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _HeroCard(
@@ -628,6 +632,128 @@ class _PracticeTabState extends State<_PracticeTab> {
                       ? strings.startPractice
                       : strings.startSelectedTopicPractice,
                 ),
+              ),
+            ],
+          ),
+        ),
+      ],
+      ),
+    );
+  }
+}
+
+class _DailyMissionGate extends StatefulWidget {
+  const _DailyMissionGate({
+    required this.services,
+    required this.learner,
+    required this.normalContent,
+  });
+
+  final AppServices services;
+  final LearnerProfile? learner;
+  final Widget normalContent;
+
+  @override
+  State<_DailyMissionGate> createState() => _DailyMissionGateState();
+}
+
+class _DailyMissionGateState extends State<_DailyMissionGate> {
+  bool _showNormalPractice = false;
+  int _version = 0;
+
+  @override
+  Widget build(BuildContext context) {
+    final String? learnerId = widget.services.currentLearnerId;
+    if (learnerId == null) {
+      return widget.normalContent;
+    }
+    return FutureBuilder<DailyMissionProgress>(
+      key: ValueKey<int>(_version),
+      future: widget.services.getLearnerDailyMissionProgress(learnerId),
+      builder: (BuildContext context,
+          AsyncSnapshot<DailyMissionProgress> snapshot) {
+        if (!snapshot.hasData) {
+          return const Center(child: CircularProgressIndicator());
+        }
+        if (snapshot.data!.isComplete || _showNormalPractice) {
+          return widget.normalContent;
+        }
+        return _DailyMissionLanding(
+          progress: snapshot.data!,
+          learner: widget.learner,
+          onStart: () async {
+            await _openFirstEligiblePack(
+              context: context,
+              services: widget.services,
+              learner: widget.learner,
+              mode: _SessionLaunchMode.practice,
+              questionLimit: DailyMission.targetCount,
+            );
+            if (mounted) {
+              setState(() => _version += 1);
+            }
+          },
+          onOpenPractice: () => setState(() => _showNormalPractice = true),
+        );
+      },
+    );
+  }
+}
+
+class _DailyMissionLanding extends StatelessWidget {
+  const _DailyMissionLanding({
+    required this.progress,
+    required this.learner,
+    required this.onStart,
+    required this.onOpenPractice,
+  });
+
+  final DailyMissionProgress progress;
+  final LearnerProfile? learner;
+  final VoidCallback onStart;
+  final VoidCallback onOpenPractice;
+
+  @override
+  Widget build(BuildContext context) {
+    final String learnerId = learner?.id ?? 'learner';
+    return Column(
+      key: const ValueKey<String>('daily_mission_landing'),
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        _CompactHeroBanner(
+          title: '每日五題',
+          subtitle: DailyMission.encouragementFor(
+            learnerId: learnerId,
+            date: progress.date,
+          ),
+          icon: Icons.wb_sunny_outlined,
+        ),
+        const SizedBox(height: 18),
+        _SectionCard(
+          title: '今天的任務',
+          subtitle: '一般練習作答五題即可完成，不限答對或答錯。',
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                '${progress.answeredCount} / ${progress.targetCount}',
+                style: Theme.of(context).textTheme.displaySmall,
+              ),
+              const SizedBox(height: 18),
+              FilledButton(
+                key: const ValueKey<String>('start_daily_mission'),
+                onPressed: onStart,
+                style: FilledButton.styleFrom(
+                  backgroundColor: const Color(0xFF111827),
+                  minimumSize: const Size.fromHeight(54),
+                ),
+                child: const Text('開始今日任務'),
+              ),
+              const SizedBox(height: 10),
+              TextButton(
+                key: const ValueKey<String>('open_regular_practice'),
+                onPressed: onOpenPractice,
+                child: const Text('仍要自由練習？從這裡開始'),
               ),
             ],
           ),
@@ -5444,6 +5570,7 @@ Future<void> _openFirstEligiblePack({
   required LearnerProfile? learner,
   required _SessionLaunchMode mode,
   String? topicCode,
+  int? questionLimit,
 }) async {
   final bundled.BundledQuestionBankRepository repository =
       bundled.BundledQuestionBankRepository();
@@ -5476,10 +5603,13 @@ Future<void> _openFirstEligiblePack({
     }
     return;
   }
-  final List<Question> sessionQuestions =
+  final List<Question> randomizedQuestions =
       SessionLaunchPlanBuilder.randomizeQuestionOrderForSession(
     approvedQuestions,
   );
+  final List<Question> sessionQuestions = questionLimit == null
+      ? randomizedQuestions
+      : randomizedQuestions.take(questionLimit).toList(growable: false);
 
   final bundled.BundledQuestionPackInfo launchPack =
       SessionLaunchPlanBuilder.buildLaunchPack(
