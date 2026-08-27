@@ -950,6 +950,23 @@ void main() {
     expect(find.text('Choose topic'), findsNothing);
   });
 
+  testWidgets('formal exam start offers the fixed exam presets',
+      (WidgetTester tester) async {
+    await tester.pumpWidget(MathSpringApp(services: createTestServices()));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Quiz'));
+    await tester.pumpAndSettle();
+    final Finder startButton =
+        find.byKey(const ValueKey<String>('open_start_quiz'));
+    await tester.ensureVisible(startButton);
+    await tester.tap(startButton);
+    await tester.pumpAndSettle();
+
+    expect(find.byKey(const ValueKey<String>('formal_exam_5_10')), findsOneWidget);
+    expect(find.byKey(const ValueKey<String>('formal_exam_10_20')), findsOneWidget);
+    expect(find.byKey(const ValueKey<String>('formal_exam_15_30')), findsOneWidget);
+  });
+
   testWidgets('home page opens the trigonometry drawing demo',
       (WidgetTester tester) async {
     final TestWidgetsFlutterBinding binding =

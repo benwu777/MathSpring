@@ -16,6 +16,7 @@ import 'package:mathspring/models/learner_profile.dart';
 import 'package:mathspring/models/session_answer_record.dart';
 import 'package:mathspring/services/learning_activity_summary.dart';
 import 'package:mathspring/services/daily_mission.dart';
+import 'package:mathspring/services/formal_exam_preset.dart';
 import 'package:mathspring/services/math_text_formatter.dart';
 import 'package:mathspring/services/session_launch_plan_builder.dart';
 
@@ -803,12 +804,20 @@ class _QuizTab extends StatelessWidget {
               const SizedBox(height: 16),
               FilledButton(
                 key: const ValueKey<String>('open_start_quiz'),
-                onPressed: () => _openFirstEligiblePack(
-                  context: context,
-                  services: services,
-                  learner: learner,
-                  mode: _SessionLaunchMode.quiz,
-                ),
+                onPressed: () async {
+                  final FormalExamPreset? preset =
+                      await _showFormalExamPresetPicker(context);
+                  if (!context.mounted || preset == null) {
+                    return;
+                  }
+                  await _openFirstEligiblePack(
+                    context: context,
+                    services: services,
+                    learner: learner,
+                    mode: _SessionLaunchMode.quiz,
+                    questionLimit: preset.questionCount,
+                  );
+                },
                 style: FilledButton.styleFrom(
                   backgroundColor: const Color(0xFF111827),
                   minimumSize: const Size.fromHeight(54),
@@ -5561,6 +5570,51 @@ Future<String?> _showTopicPicker({
         ),
       );
     },
+  );
+}
+
+Future<FormalExamPreset?> _showFormalExamPresetPicker(
+  BuildContext context,
+) {
+  return showModalBottomSheet<FormalExamPreset>(
+    context: context,
+    showDragHandle: true,
+    isScrollControlled: true,
+    builder: (BuildContext sheetContext) => SafeArea(
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(24, 8, 24, 28),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              '選擇正式測驗',
+              style: Theme.of(sheetContext).textTheme.headlineSmall,
+            ),
+            const SizedBox(height: 8),
+            const Text('開始後題目與配分固定；可自由跳題，時間到會自動交卷。'),
+            const SizedBox(height: 16),
+            for (final FormalExamPreset preset in FormalExamPreset.standard)
+              Padding(
+                padding: const EdgeInsets.only(bottom: 10),
+                child: OutlinedButton(
+                  key: ValueKey<String>(
+                    'formal_exam_${preset.questionCount}_${preset.timeLimit.inMinutes}',
+                  ),
+                  onPressed: () => Navigator.of(sheetContext).pop(preset),
+                  style: OutlinedButton.styleFrom(
+                    minimumSize: const Size.fromHeight(56),
+                    alignment: Alignment.centerLeft,
+                  ),
+                  child: Text(
+                    '${preset.questionCount} 題・${preset.timeLimit.inMinutes} 分鐘・總分 100',
+                  ),
+                ),
+              ),
+          ],
+        ),
+      ),
+    ),
   );
 }
 
