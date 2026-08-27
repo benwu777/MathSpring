@@ -10,6 +10,7 @@ import 'package:mathspring/models/question.dart';
 import 'package:mathspring/models/question_progress.dart';
 import 'package:mathspring/models/session_answer_record.dart';
 import 'package:mathspring/services/session_launch_plan_builder.dart';
+import 'package:mathspring/services/formal_exam_preset.dart';
 
 void main() {
   tearDown(() {
@@ -965,6 +966,35 @@ void main() {
     expect(find.byKey(const ValueKey<String>('formal_exam_5_10')), findsOneWidget);
     expect(find.byKey(const ValueKey<String>('formal_exam_10_20')), findsOneWidget);
     expect(find.byKey(const ValueKey<String>('formal_exam_15_30')), findsOneWidget);
+  });
+
+  testWidgets('formal exam exposes a question navigator with point values',
+      (WidgetTester tester) async {
+    const BundledQuestionPackInfo pack = BundledQuestionPackInfo(
+      path: 'unused',
+      topic: 'Mixed',
+      topicCode: 'mixed',
+      levelStage: 'grade4',
+      challengeTier: 'foundation',
+      questionCount: 2,
+    );
+    await tester.pumpWidget(MaterialApp(
+      home: QuizSessionPage(
+        services: createTestServices(),
+        pack: pack,
+        initialQuestions: <Question>[createDemoQuestion(), createSecondDemoQuestion()],
+        formalExamPreset: FormalExamPreset.standard.first,
+      ),
+    ));
+    await tester.pumpAndSettle();
+    final Finder navigatorButton =
+        find.byKey(const ValueKey<String>('open_exam_navigator'));
+    await tester.ensureVisible(navigatorButton);
+    await tester.tap(navigatorButton);
+    await tester.pumpAndSettle();
+
+    expect(find.text('題目總覽'), findsOneWidget);
+    expect(find.textContaining('分'), findsWidgets);
   });
 
   testWidgets('home page opens the trigonometry drawing demo',

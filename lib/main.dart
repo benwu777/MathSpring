@@ -3576,6 +3576,19 @@ class _QuizSessionPageState extends State<QuizSessionPage> {
                   ),
                 ),
                 const SizedBox(height: 20),
+                if (widget.formalExamPreset != null) ...[
+                  OutlinedButton.icon(
+                    key: const ValueKey<String>('open_exam_navigator'),
+                    onPressed: () => _openQuestionNavigator(
+                      context,
+                      questions: questions,
+                      scores: scores,
+                    ),
+                    icon: const Icon(Icons.grid_view_rounded),
+                    label: const Text('題目總覽'),
+                  ),
+                  const SizedBox(height: 12),
+                ],
                 Row(
                   children: [
                     Expanded(
@@ -3623,6 +3636,51 @@ class _QuizSessionPageState extends State<QuizSessionPage> {
             ),
           );
         },
+      ),
+    );
+  }
+
+  Future<void> _openQuestionNavigator(
+    BuildContext context, {
+    required List<Question> questions,
+    required List<FormalExamQuestionScore> scores,
+  }) async {
+    await showModalBottomSheet<void>(
+      context: context,
+      showDragHandle: true,
+      builder: (BuildContext sheetContext) => SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(20),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text('題目總覽', style: Theme.of(sheetContext).textTheme.titleLarge),
+              const SizedBox(height: 14),
+              Wrap(
+                spacing: 8,
+                runSpacing: 8,
+                children: [
+                  for (int index = 0; index < questions.length; index += 1)
+                    OutlinedButton(
+                      onPressed: () {
+                        setState(() => _currentIndex = index);
+                        Navigator.of(sheetContext).pop();
+                      },
+                      style: OutlinedButton.styleFrom(
+                        backgroundColor: _answers.containsKey(questions[index].id)
+                            ? const Color(0xFFEAF2FF)
+                            : Colors.white,
+                      ),
+                      child: Text('${index + 1}・${scores[index].maxScore} 分'),
+                    ),
+                ],
+              ),
+              const SizedBox(height: 12),
+              const Text('藍色代表已作答，白色代表尚未作答。'),
+            ],
+          ),
+        ),
       ),
     );
   }
