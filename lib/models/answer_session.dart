@@ -11,6 +11,9 @@ class AnswerSession {
     required this.elapsedSeconds,
     required this.totalQuestions,
     required this.correctCount,
+    this.timeLimitSeconds,
+    this.maxScore,
+    this.earnedScore,
   });
 
   final String id;
@@ -24,6 +27,9 @@ class AnswerSession {
   final int elapsedSeconds;
   final int totalQuestions;
   final int correctCount;
+  final int? timeLimitSeconds;
+  final int? maxScore;
+  final int? earnedScore;
 
   Map<String, Object?> toMap() {
     return {
@@ -38,6 +44,9 @@ class AnswerSession {
       'elapsed_seconds': elapsedSeconds,
       'total_questions': totalQuestions,
       'correct_count': correctCount,
+      'time_limit_seconds': timeLimitSeconds,
+      'max_score': maxScore,
+      'earned_score': earnedScore,
     };
   }
 
@@ -54,6 +63,9 @@ class AnswerSession {
       elapsedSeconds: map['elapsed_seconds']! as int,
       totalQuestions: map['total_questions']! as int,
       correctCount: map['correct_count']! as int,
+      timeLimitSeconds: map['time_limit_seconds'] as int?,
+      maxScore: map['max_score'] as int?,
+      earnedScore: map['earned_score'] as int?,
     );
   }
 }

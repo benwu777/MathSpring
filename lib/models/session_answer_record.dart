@@ -6,6 +6,8 @@ class SessionAnswerRecord {
     required this.submittedAnswer,
     required this.isCorrect,
     required this.answeredAtIso,
+    this.maxScore,
+    this.earnedScore,
   });
 
   final String sessionId;
@@ -14,6 +16,8 @@ class SessionAnswerRecord {
   final String submittedAnswer;
   final bool isCorrect;
   final String answeredAtIso;
+  final int? maxScore;
+  final int? earnedScore;
 
   Map<String, Object?> toMap() {
     return {
@@ -23,6 +27,8 @@ class SessionAnswerRecord {
       'submitted_answer': submittedAnswer,
       'is_correct': isCorrect ? 1 : 0,
       'answered_at': answeredAtIso,
+      'max_score': maxScore,
+      'earned_score': earnedScore,
     };
   }
 
@@ -34,6 +40,8 @@ class SessionAnswerRecord {
       submittedAnswer: map['submitted_answer']! as String,
       isCorrect: (map['is_correct']! as int) == 1,
       answeredAtIso: map['answered_at']! as String,
+      maxScore: map['max_score'] as int?,
+      earnedScore: map['earned_score'] as int?,
     );
   }
 }

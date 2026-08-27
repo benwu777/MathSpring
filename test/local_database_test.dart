@@ -62,6 +62,9 @@ void main() {
       elapsedSeconds: 180,
       totalQuestions: 2,
       correctCount: 1,
+      timeLimitSeconds: 600,
+      maxScore: 100,
+      earnedScore: 60,
     );
     const List<SessionAnswerRecord> records = [
       SessionAnswerRecord(
@@ -71,6 +74,8 @@ void main() {
         submittedAnswer: 'B',
         isCorrect: true,
         answeredAtIso: '2026-07-17T09:01:00Z',
+        maxScore: 60,
+        earnedScore: 60,
       ),
       SessionAnswerRecord(
         sessionId: 'session_quiz_001',
@@ -79,6 +84,8 @@ void main() {
         submittedAnswer: '',
         isCorrect: false,
         answeredAtIso: '2026-07-17T09:03:00Z',
+        maxScore: 40,
+        earnedScore: 0,
       ),
     ];
 
@@ -95,9 +102,14 @@ void main() {
     expect(sessions, hasLength(1));
     expect(sessions.first.mode, 'quiz');
     expect(sessions.first.correctCount, 1);
+    expect(sessions.first.timeLimitSeconds, 600);
+    expect(sessions.first.maxScore, 100);
+    expect(sessions.first.earnedScore, 60);
     expect(loadedRecords, hasLength(2));
     expect(loadedRecords.first.questionId, 'q1');
     expect(loadedRecords.last.isCorrect, isFalse);
+    expect(loadedRecords.first.maxScore, 60);
+    expect(loadedRecords.first.earnedScore, 60);
   });
 
   test('stores and reads learner profiles', () async {
