@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
@@ -3440,10 +3441,30 @@ class _QuizSessionPageState extends State<QuizSessionPage> {
   final Map<String, String> _answers = <String, String>{};
   final DateTime _startedAt = DateTime.now();
   int _currentIndex = 0;
+  Timer? _countdownTimer;
+  DateTime? _deadline;
+  List<Question>? _activeQuestions;
+  bool _hasAutoSubmitted = false;
 
   @override
   void initState() {
     super.initState();
+    if (widget.formalExamPreset != null) {
+      _deadline = _startedAt.add(widget.formalExamPreset!.timeLimit);
+      _countdownTimer = Timer.periodic(const Duration(seconds: 1), (_) {
+        final List<Question>? questions = _activeQuestions;
+        if (questions == null || !mounted) {
+          return;
+        }
+        if (_remainingExamTime.inSeconds <= 0 && !_hasAutoSubmitted) {
+          _hasAutoSubmitted = true;
+          _countdownTimer?.cancel();
+          _finishQuiz(context, questions: questions);
+          return;
+        }
+        setState(() {});
+      });
+    }
     _packFuture = widget.initialQuestions == null
         ? bundled.BundledQuestionBankRepository().loadPack(
             widget.pack.path,
@@ -3455,6 +3476,21 @@ class _QuizSessionPageState extends State<QuizSessionPage> {
               questions: widget.initialQuestions!,
             ),
           );
+  }
+
+  @override
+  void dispose() {
+    _countdownTimer?.cancel();
+    super.dispose();
+  }
+
+  Duration get _remainingExamTime {
+    final DateTime? deadline = _deadline;
+    if (deadline == null) {
+      return Duration.zero;
+    }
+    final Duration remaining = deadline.difference(DateTime.now());
+    return remaining.isNegative ? Duration.zero : remaining;
   }
 
   @override
@@ -3474,6 +3510,7 @@ class _QuizSessionPageState extends State<QuizSessionPage> {
           }
 
           final List<Question> questions = snapshot.data!.questions;
+          _activeQuestions = questions;
           final List<FormalExamQuestionScore> scores =
               FormalExamScoring.allocate(questions);
           final Question question = questions[_currentIndex];
@@ -3534,7 +3571,7 @@ class _QuizSessionPageState extends State<QuizSessionPage> {
                 Text(
                   widget.formalExamPreset == null
                       ? '${strings.elapsedLabel} ${_formatElapsed(Duration(seconds: DateTime.now().difference(_startedAt).inSeconds))}'
-                      : '限時 ${widget.formalExamPreset!.timeLimit.inMinutes} 分鐘 ・ 總分 100',
+                      : '剩餘 ${_formatElapsed(_remainingExamTime)} ・ 總分 100',
                   style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                         color: const Color(0xFF64748B),
                       ),
@@ -3729,6 +3766,7 @@ class _QuizSessionPageState extends State<QuizSessionPage> {
     Map<String, String>? overrideAnswers,
   }) async {
     final Map<String, String> finalAnswers = overrideAnswers ?? _answers;
+    _countdownTimer?.cancel();
     final DateTime submittedAt = DateTime.now();
     final List<QuizAnswerRecord> records = <QuizAnswerRecord>[
       for (final Question item in questions)
@@ -3795,6 +3833,10 @@ class _QuizSessionPageState extends State<QuizSessionPage> {
       MaterialPageRoute<void>(
         builder: (_) => QuizResultPage(
           result: result,
+          maxScore: widget.formalExamPreset == null ? null : 100,
+          earnedScore: widget.formalExamPreset == null
+              ? null
+              : _earnedFormalExamScore(records),
         ),
       ),
     );
@@ -3891,9 +3933,13 @@ class QuizResultPage extends StatelessWidget {
   const QuizResultPage({
     super.key,
     required this.result,
+    this.maxScore,
+    this.earnedScore,
   });
 
   final QuizSessionResult result;
+  final int? maxScore;
+  final int? earnedScore;
 
   @override
   Widget build(BuildContext context) {
@@ -3912,10 +3958,12 @@ class QuizResultPage extends StatelessWidget {
             _SectionCard(
               title: strings.quizResult,
               subtitle:
-                  '${result.correctCount} / ${result.totalQuestions} ${strings.correctSuffix}',
+                  maxScore == null
+                      ? '${result.correctCount} / ${result.totalQuestions} ${strings.correctSuffix}'
+                      : '正式測驗成績：$earnedScore / $maxScore',
               child: _StatRow(
-                leftValue: '${result.correctCount}',
-                leftLabel: strings.correctLabel,
+                leftValue: maxScore == null ? '${result.correctCount}' : '$earnedScore',
+                leftLabel: maxScore == null ? strings.correctLabel : '總分',
                 rightValue: _formatElapsed(result.elapsed),
                 rightLabel: strings.elapsedLabel,
               ),

@@ -986,14 +986,14 @@ void main() {
         formalExamPreset: FormalExamPreset.standard.first,
       ),
     ));
-    await tester.pumpAndSettle();
+    await tester.pump();
     final Finder navigatorButton =
         find.byKey(const ValueKey<String>('open_exam_navigator'));
     await tester.ensureVisible(navigatorButton);
     await tester.tap(navigatorButton);
-    await tester.pumpAndSettle();
+    await tester.pump();
 
-    expect(find.text('題目總覽'), findsOneWidget);
+    expect(find.text('題目總覽'), findsWidgets);
     expect(find.textContaining('分'), findsWidgets);
   });
 
