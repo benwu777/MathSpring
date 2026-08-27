@@ -8,6 +8,7 @@ import 'package:mathspring/models/learner_profile.dart';
 import 'package:mathspring/models/question_progress.dart';
 import 'package:mathspring/models/session_answer_record.dart';
 import 'package:mathspring/services/learning_activity_summary.dart';
+import 'package:mathspring/services/daily_mission.dart';
 import 'package:sqflite/sqflite.dart';
 
 class AppServices {
@@ -313,6 +314,26 @@ class AppServices {
     return LearningActivitySummary.fromSessions(
       sessions: sessions,
       recordsBySessionId: recordsBySessionId,
+    );
+  }
+
+  Future<DailyMissionProgress> getLearnerDailyMissionProgress(
+    String learnerId, {
+    DateTime? date,
+  }) async {
+    final List<AnswerSession> sessions =
+        await getLearnerAnswerSessions(learnerId);
+    final List<List<SessionAnswerRecord>> records = await Future.wait(
+      sessions.map((AnswerSession session) => getSessionAnswerRecords(session.id)),
+    );
+    return DailyMission.calculate(
+      learnerId: learnerId,
+      date: date ?? DateTime.now(),
+      sessions: sessions,
+      recordsBySessionId: <String, List<SessionAnswerRecord>>{
+        for (int index = 0; index < sessions.length; index += 1)
+          sessions[index].id: records[index],
+      },
     );
   }
 
