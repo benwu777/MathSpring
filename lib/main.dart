@@ -17,6 +17,7 @@ import 'package:mathspring/models/session_answer_record.dart';
 import 'package:mathspring/services/learning_activity_summary.dart';
 import 'package:mathspring/services/daily_mission.dart';
 import 'package:mathspring/services/formal_exam_preset.dart';
+import 'package:mathspring/services/formal_exam_scoring.dart';
 import 'package:mathspring/services/math_text_formatter.dart';
 import 'package:mathspring/services/session_launch_plan_builder.dart';
 
@@ -816,6 +817,7 @@ class _QuizTab extends StatelessWidget {
                     learner: learner,
                     mode: _SessionLaunchMode.quiz,
                     questionLimit: preset.questionCount,
+                    formalExamPreset: preset,
                   );
                 },
                 style: FilledButton.styleFrom(
@@ -3421,11 +3423,13 @@ class QuizSessionPage extends StatefulWidget {
     required this.services,
     required this.pack,
     this.initialQuestions,
+    this.formalExamPreset,
   });
 
   final AppServices services;
   final bundled.BundledQuestionPackInfo pack;
   final List<Question>? initialQuestions;
+  final FormalExamPreset? formalExamPreset;
 
   @override
   State<QuizSessionPage> createState() => _QuizSessionPageState();
@@ -3470,6 +3474,8 @@ class _QuizSessionPageState extends State<QuizSessionPage> {
           }
 
           final List<Question> questions = snapshot.data!.questions;
+          final List<FormalExamQuestionScore> scores =
+              FormalExamScoring.allocate(questions);
           final Question question = questions[_currentIndex];
           final String? selectedAnswer = _answers[question.id];
           return SingleChildScrollView(
@@ -3491,10 +3497,12 @@ class _QuizSessionPageState extends State<QuizSessionPage> {
                     children: [
                       Expanded(
                         child: Text(
-                          strings.questionCounter(
-                            _currentIndex + 1,
-                            questions.length,
-                          ),
+                          widget.formalExamPreset == null
+                              ? strings.questionCounter(
+                                  _currentIndex + 1,
+                                  questions.length,
+                                )
+                              : '第 ${_currentIndex + 1} / ${questions.length} 題 ・ ${scores[_currentIndex].maxScore} 分',
                           style: Theme.of(context)
                               .textTheme
                               .headlineSmall
@@ -3524,7 +3532,9 @@ class _QuizSessionPageState extends State<QuizSessionPage> {
                 ),
                 const SizedBox(height: 8),
                 Text(
-                  '${strings.elapsedLabel} ${_formatElapsed(Duration(seconds: DateTime.now().difference(_startedAt).inSeconds))}',
+                  widget.formalExamPreset == null
+                      ? '${strings.elapsedLabel} ${_formatElapsed(Duration(seconds: DateTime.now().difference(_startedAt).inSeconds))}'
+                      : '限時 ${widget.formalExamPreset!.timeLimit.inMinutes} 分鐘 ・ 總分 100',
                   style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                         color: const Color(0xFF64748B),
                       ),
@@ -3676,6 +3686,8 @@ class _QuizSessionPageState extends State<QuizSessionPage> {
       startedAt: _startedAt,
       submittedAt: submittedAt,
     );
+    final List<FormalExamQuestionScore> questionScores =
+        FormalExamScoring.allocate(questions);
     final String sessionId =
         'quiz_${widget.services.currentLearnerId ?? 'unknown'}_${submittedAt.microsecondsSinceEpoch}';
     await widget.services.saveAnswerSession(
@@ -3691,6 +3703,11 @@ class _QuizSessionPageState extends State<QuizSessionPage> {
         elapsedSeconds: result.elapsed.inSeconds,
         totalQuestions: result.totalQuestions,
         correctCount: result.correctCount,
+        timeLimitSeconds: widget.formalExamPreset?.timeLimit.inSeconds,
+        maxScore: widget.formalExamPreset == null ? null : 100,
+        earnedScore: widget.formalExamPreset == null
+            ? null
+            : _earnedFormalExamScore(records),
       ),
       records: [
         for (int index = 0; index < records.length; index++)
@@ -3701,6 +3718,14 @@ class _QuizSessionPageState extends State<QuizSessionPage> {
             submittedAnswer: records[index].submittedAnswer,
             isCorrect: records[index].isCorrect,
             answeredAtIso: records[index].answeredAt.toUtc().toIso8601String(),
+            maxScore: widget.formalExamPreset == null
+                ? null
+                : questionScores[index].maxScore,
+            earnedScore: widget.formalExamPreset == null
+                ? null
+                : (records[index].isCorrect
+                    ? questionScores[index].maxScore
+                    : 0),
           ),
       ],
     );
@@ -3715,6 +3740,20 @@ class _QuizSessionPageState extends State<QuizSessionPage> {
         ),
       ),
     );
+  }
+
+  int _earnedFormalExamScore(List<QuizAnswerRecord> records) {
+    final List<FormalExamQuestionScore> scores =
+        FormalExamScoring.allocate(
+      records.map((QuizAnswerRecord record) => record.question).toList(),
+    );
+    int earned = 0;
+    for (int index = 0; index < records.length; index += 1) {
+      if (records[index].isCorrect) {
+        earned += scores[index].maxScore;
+      }
+    }
+    return earned;
   }
 }
 
@@ -5625,6 +5664,7 @@ Future<void> _openFirstEligiblePack({
   required _SessionLaunchMode mode,
   String? topicCode,
   int? questionLimit,
+  FormalExamPreset? formalExamPreset,
 }) async {
   final bundled.BundledQuestionBankRepository repository =
       bundled.BundledQuestionBankRepository();
@@ -5683,6 +5723,7 @@ Future<void> _openFirstEligiblePack({
         services: services,
         pack: launchPack,
         initialQuestions: sessionQuestions,
+        formalExamPreset: formalExamPreset,
       ),
   };
 
