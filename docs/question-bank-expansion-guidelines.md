@@ -322,6 +322,34 @@ phase 1 **只有一個維度來表示難易：年級（`levelStage`，grade1–g
 - `options`
 - `inputConstraints`
 
+## 主題與選項的年級差異（2026-08-28 依實際題庫與 app 行為校正）
+
+先前本文件的「四類 topic」與「固定 4 個選項」是照 grade1-6 寫的，套到 grade7-12 會誤判。實際規則如下：
+
+- **pack 層 `topicCode`**：grade1-6 用 `arithmetic` / `geometry` / `logic` / `mixed` 四類；grade7-12 用
+  `algebra` / `combinatorics` / `geometry` / `logic` / `number_theory` 五類（每年級 5 個 pack）。
+  app 端 `displayTopicCode`（`lib/main.dart`）對這七個代碼都有多語系標籤。
+- **mixed pack 的每題 `topic`**：刻意記錄該題實際所屬領域（可以是上述任一個），pack 層 `topicCode` 才是 `mixed`。
+  不要把 mixed pack 裡的每題 topic 一律改成 `mixed`，那會丟失分類資訊。
+- **選擇題選項數**：允許 3 至 5 個，鍵必須是連續的 A、B、C…
+  - 3 個：題幹本身只給三個候選（例如「甲乙丙誰是第一名」），硬湊第 4 個選項反而更差。
+  - 4 個：grade1-6 的預設。
+  - 5 個：grade7-12 對齊 AMC 體系的題目，AMC 10/12 本來就是五選項。
+- **`kangaroo56` pack 的 id** 以競賽而非年級命名（`mixed_kangaroo56_foundation_NNN`），是既有慣例，不要改。
+
+## 自動檢查
+
+`scripts/validate_question_packs.py` 把本文件可程式化的部分寫成檢查（schema、四語系、答案一致性、
+`geometry_scene` 的座標自洽、manifest 一致性）。用法：
+
+```bash
+python3 scripts/validate_question_packs.py            # 全部
+python3 scripts/validate_question_packs.py grade3     # 單一年級
+```
+
+幾何圖的目視檢查用 `test/figure_preview_test.dart`：帶 `FIG_DIR` 指向一個資料夾並在其中放 `figspec.json`
+（`[{"id": ..., "params": ...}]`），它會用 app 同一支 `GeometryScenePainter` 把圖渲染成 PNG；沒帶 `FIG_DIR` 會自動跳過。
+
 ## answerMode 規則（phase 1 硬規則）
 
 phase 1 **只允許**兩種 `answerMode`，不得新增其他型別：

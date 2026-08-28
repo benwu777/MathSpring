@@ -1,0 +1,186 @@
+#!/usr/bin/env python3
+"""題庫上架驗收檢查（docs/question-bank-expansion-guidelines.md 的可程式化部分）。
+
+用法:
+  python3 scripts/validate_question_packs.py            # 檢查全部
+  python3 scripts/validate_question_packs.py grade1     # 只檢查某個 levelStage
+"""
+import json, glob, math, re, sys
+from collections import defaultdict
+
+LANGS = ['zh-Hant', 'zh-Hans', 'en', 'ja']
+# grade1-6 用四類；grade7-12 用五類奧數主題（見 question-bank-expansion-guidelines 的年級對齊表）
+TOPICS = {'arithmetic', 'geometry', 'logic', 'mixed'}
+TOPICS_UPPER = {'algebra', 'combinatorics', 'geometry', 'logic', 'number_theory'}
+KINDS = {'none', 'geometry_scene', 'shape_diagram', 'coordinate_plane',
+         'composite_grid_shape', 'circle_quadrants_point'}
+ID_RE = re.compile(r'(arithmetic|geometry|logic|mixed|algebra|combinatorics|number_theory)_(grade\d+)_foundation_\d{3}$')
+
+
+def allowed_topics(level_stage):
+    n = level_stage.replace('grade', '')
+    return TOPICS_UPPER if n.isdigit() and int(n) >= 7 else TOPICS
+
+
+def scene_checks(q, err):
+    p = q['figure']['params']
+    b = p['bounds']
+    pts = {d['name']: (float(d['x']), float(d['y'])) for d in p.get('points', [])}
+    for n, (x, y) in pts.items():
+        if not (b['minX'] <= x <= b['maxX'] and b['minY'] <= y <= b['maxY']):
+            err('point %s 超出 bounds' % n)
+    for a in p.get('arcs', []):
+        lo, hi = int(a['from']), int(a['to'])
+        for ang in range(min(lo, hi), max(lo, hi) + 1):
+            x = a['cx'] + a['r'] * math.cos(math.radians(ang))
+            y = a['cy'] + a['r'] * math.sin(math.radians(ang))
+            if not (b['minX'] <= x <= b['maxX'] and b['minY'] <= y <= b['maxY']):
+                err('arc(%s..%s) 在 %d° 處超出 bounds' % (a['from'], a['to'], ang))
+                break
+    for s in p.get('segments', []):
+        if s['from'] not in pts or s['to'] not in pts:
+            err('segment 引用不存在的點')
+        if s.get('style') is not None and s['style'] not in ('solid', 'construction'):
+            err('segment style 非法: %s' % s['style'])
+    for ra in p.get('rightAngles', []):
+        # 用角度容差而非內積絕對值：內積會隨座標大小放大，固定 epsilon 會誤報
+        A, B, C = pts[ra['at']], pts[ra['from']], pts[ra['to']]
+        v1 = (B[0] - A[0], B[1] - A[1])
+        v2 = (C[0] - A[0], C[1] - A[1])
+        cos = (v1[0] * v2[0] + v1[1] * v2[1]) / (math.hypot(*v1) * math.hypot(*v2))
+        ang = math.degrees(math.acos(max(-1.0, min(1.0, cos))))
+        if abs(ang - 90) > 0.5:
+            err('rightAngles 標直角但實際是 %.2f°' % ang)
+    for et in p.get('equalTicks', []):
+        # 相對容差：長度本身有捨入誤差，用比例判斷才不會誤報
+        ls = [math.dist(pts[a], pts[c]) for a, c in et['segments']]
+        if max(ls) > 0 and (max(ls) - min(ls)) / max(ls) > 0.01:
+            err('equalTicks 標等長但實際長度為 %s' % [round(x, 4) for x in ls])
+    for am in p.get('angleMarks', []):
+        m = re.match(r'^(\d+(?:\.\d+)?)°$', am.get('label') or '')
+        if not m:
+            continue
+        A, B, C = pts[am['at']], pts[am['from']], pts[am['to']]
+        v1 = (B[0] - A[0], B[1] - A[1])
+        v2 = (C[0] - A[0], C[1] - A[1])
+        ang = math.degrees(math.acos(
+            (v1[0] * v2[0] + v1[1] * v2[1]) / (math.hypot(*v1) * math.hypot(*v2))))
+        if abs(ang - float(m.group(1))) > 0.5:
+            err('angleMarks 標 %s 但實際 %.2f°' % (am['label'], ang))
+    for pg in p.get('polygons', []):
+        vs = [pts[v] for v in pg['vertices']]
+        area = abs(sum(vs[i][0] * vs[(i + 1) % len(vs)][1] - vs[(i + 1) % len(vs)][0] * vs[i][1]
+                       for i in range(len(vs)))) / 2
+        if area <= 1e-9:
+            err('polygon 頂點共線（面積為 0）')
+
+
+def main():
+    only = sys.argv[1] if len(sys.argv) > 1 else None
+    errors = defaultdict(list)
+    seen = {}
+    checked = 0
+
+    for f in sorted(glob.glob('assets/questions/*/*.json')):
+        for q in json.load(open(f))['questions']:
+            qid = q['id']
+            if qid in seen:
+                errors[qid].append('id 與 %s 重複' % seen[qid])
+            seen[qid] = f
+            if only and q.get('levelStage') != only:
+                continue
+            checked += 1
+            err = lambda m, _id=qid: errors[_id].append(m)
+
+            m = ID_RE.match(qid)
+            if qid.startswith('mixed_kangaroo56_foundation_'):
+                pass  # 該 pack 以競賽而非年級命名，是既有慣例
+            elif not m:
+                err('id 命名不符 <topicCode>_<levelStage>_foundation_<serial>')
+            elif m.group(2) != q.get('levelStage'):
+                err('id 的年級與 levelStage 不一致')
+            # mixed pack 的每題 topic 刻意記錄該題實際領域，pack 層 topicCode 才是 mixed
+            in_mixed_pack = '/mixed/' in f
+            allowed = allowed_topics(q.get('levelStage', ''))
+            if in_mixed_pack:
+                allowed = allowed | TOPICS_UPPER | {'mixed'}
+            if q.get('topic') not in allowed:
+                err('topic 不在該年級允許集合: %s' % q.get('topic'))
+            if q.get('difficulty') != 'foundation' or q.get('challengeTier') != 'foundation':
+                err('difficulty/challengeTier 必須皆為 foundation')
+            if q.get('answerMode') not in ('multiple_choice', 'integer_input'):
+                err('answerMode 非法: %s' % q.get('answerMode'))
+            for fld in ('prompt', 'answer'):
+                if not all(l in q.get(fld, {}) and q[fld][l].strip() for l in LANGS):
+                    err('%s 四語系不齊全' % fld)
+            lens = {l: len(q.get('solutionSteps', {}).get(l, [])) for l in LANGS}
+            if len(set(lens.values())) != 1 or 0 in lens.values():
+                err('solutionSteps 四語系長度不一致或為空: %s' % lens)
+            if q.get('figure', {}).get('kind') not in KINDS:
+                err('figure kind 不受 renderer 支援: %s' % q.get('figure', {}).get('kind'))
+            if q.get('figure', {}).get('kind') == 'geometry_scene':
+                scene_checks(q, err)
+
+            if q.get('answerMode') == 'multiple_choice':
+                opts = q.get('options', {})
+                expected = [chr(ord('A') + i) for i in range(len(opts))]
+                if sorted(opts) != expected or not 3 <= len(opts) <= 5:
+                    err('選項鍵必須是連續的 A、B、C… 且為 3 至 5 個（目前 %s）' % sorted(opts))
+                else:
+                    for k, v in opts.items():
+                        if not all(l in v and v[l].strip() for l in LANGS):
+                            err('選項 %s 四語系不齊全' % k)
+                    if len({tuple(v.get(l, '') for l in LANGS) for v in opts.values()}) != len(opts):
+                        err('選項內容有重複')
+                ca = q.get('correctAnswer', {})
+                if ca.get('type') != 'choice' or ca.get('value') not in opts:
+                    err('correctAnswer 未指向存在的選項')
+                if 'inputConstraints' in q:
+                    err('multiple_choice 不得有 inputConstraints')
+            elif q.get('answerMode') == 'integer_input':
+                if 'options' in q:
+                    err('integer_input 不得有 options')
+                ic = q.get('inputConstraints', {})
+                if not isinstance(ic.get('allowNegative'), bool) or not isinstance(ic.get('maxDigits'), int):
+                    err('inputConstraints 需有 allowNegative(bool) 與 maxDigits(int)')
+                ca = q.get('correctAnswer', {})
+                val = ca.get('value', '')
+                if ca.get('type') != 'integer' or not re.fullmatch(r'-?\d+', val):
+                    err('correctAnswer 非整數字串')
+                else:
+                    if isinstance(ic.get('maxDigits'), int) and len(val.lstrip('-')) > ic['maxDigits']:
+                        err('maxDigits 放不下答案 %s' % val)
+                    def norm(s):
+                        return (s.replace('\u2212', '-').replace('\uff0d', '-')
+                                 .replace(',', '').replace('\uff0c', ''))
+                    for l in LANGS:
+                        if val not in norm(q.get('answer', {}).get(l, '')):
+                            err('answer[%s] 未出現答案值 %s' % (l, val))
+                        steps = [norm(x) for x in q.get('solutionSteps', {}).get(l, [])]
+                        if steps and not any(val in s for s in steps):
+                            err('solutionSteps[%s] 完全未出現答案值 %s' % (l, val))
+
+            src = q.get('source', {})
+            if src.get('type') not in ('official_reference', 'rewritten_olympiad_style'):
+                err('source.type 非法: %s' % src.get('type'))
+            if 'Editorial Original' in json.dumps(src, ensure_ascii=False):
+                err('source 出現 MathSpring Editorial Original')
+
+    manifest = json.load(open('assets/questions/manifest.json'))
+    for p in manifest['packs']:
+        n = len(json.load(open(p['path']))['questions'])
+        if n != p['questionCount']:
+            errors['manifest'].append('%s questionCount=%d 實際=%d' % (p['path'], p['questionCount'], n))
+
+    if errors:
+        for qid in sorted(errors):
+            for msg in errors[qid]:
+                print('%-42s %s' % (qid, msg))
+        print('\n%d 題檢查完畢，%d 題有問題' % (checked, len(errors)))
+        return 1
+    print('%d 題檢查完畢，全部通過' % checked)
+    return 0
+
+
+if __name__ == '__main__':
+    sys.exit(main())

@@ -23,7 +23,8 @@
   "kind": "geometry_scene",
   "bounds": { "minX": 0, "minY": 0, "maxX": 6, "maxY": 6 },   // 數學座標畫布範圍
   "points": [
-    { "name": "A", "x": 0, "y": 6, "pos": "tl" }               // pos = 標籤方位
+    { "name": "A", "x": 0, "y": 6, "pos": "tl" },              // pos = 標籤方位
+    { "name": "H1", "x": 3, "y": 0, "visible": false }         // 隱藏輔助點：只用來拉線，不畫點也不標字
   ],
   "segments": [
     { "from": "A", "to": "C", "style": "construction" }        // solid | construction(虛線)
@@ -49,6 +50,7 @@
 ### 欄位說明
 
 - `points[].pos`：標籤相對點的方位，取 `t / b / l / r / tl / tr / bl / br`。
+- `points[].visible`：預設 `true`。填 `false` 時該點**不畫圓點、也不畫標籤**，但仍可被 `segments` / `polygons` / `arcs` 以名稱引用。用於格線端點、輔助頂點等「需要拉線但不該出現在圖面上」的點。
 - `segments[].style`：`solid`＝題目實體邊；`construction`＝輔助線（對角線、中線、角平分線），畫成虛線。
 - `polygons[].fill`：目前支援 `shaded`（半透明強調色）。頂點依序連成封閉多邊形。
 - `arcs`：角度以度為單位、逆時針為正；用於半圓、四分圓、扇形邊界。
@@ -80,7 +82,7 @@
 ### 上架前必查
 
 - **所有點與圓弧都必須完全落在 `bounds` 內**。`bounds` 只是縮放框，超出的部分會被裁掉。實例：`geometry_grade9_foundation_002` 的圓心 (0,0)、半徑 1 配上 `minX = minY = -0.3`，整圓左下角被截掉，複審時才發現。圓弧要檢查的是 `cx ± r` 與 `cy ± r`，不是圓心。
-- **每個 `points` 元素都會被畫出標籤**，沒有「只放點不標字」的選項。因此不要為了畫線而塞入大量輔助點，否則圖面會被標籤淹沒；點多的構造圖請改以文字描述題幹，或先不上圖。
+- **`points` 預設會畫出圓點與標籤**；純粹為了拉線而存在的輔助點必須加 `"visible": false`，否則圖面會被標籤淹沒。解析見 `lib/models/geometry_scene.dart` 的 `visible` 欄位，繪製略過見 `lib/main.dart` 的 `pointIsVisible` 判斷。有了隱藏點，格線、輔助頂點這類構造圖是畫得出來的，不必因為「點太多」就退回 `kind:none`；但仍要確認**顯示出來的**標籤彼此不重疊。
 - 舊的 `shape_diagram` 若只有 `{"shape": ..., "labels": {...}}`（畫一個基本形狀再貼文字），一律視為紅線 7 違規，須改為 `geometry_scene` 或 `kind:none`。
 
 ### 座標與標記的自洽檢查（最容易漏掉的一類錯誤）
