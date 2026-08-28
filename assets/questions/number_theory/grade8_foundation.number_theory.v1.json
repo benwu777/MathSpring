@@ -2597,6 +2597,162 @@
         "subtopicCode": "smallest_multiple_binary_digits"
       },
       "reviewStatus": "ok"
+    },
+    {
+      "id": "number_theory_grade8_foundation_031",
+      "topic": "number_theory",
+      "subtopic": "frobenius_number",
+      "difficulty": "foundation",
+      "levelStage": "grade8",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "郵局只賣 4 元和 7 元兩種郵票，每種都可以買任意多張（也可以一張都不買）。有些正整數金額無法用這兩種郵票剛好湊出來。求這些無法湊出的金額一共有幾個。",
+        "zh-Hans": "邮局只卖 4 元和 7 元两种邮票，每种都可以买任意多张（也可以一张都不买）。有些正整数金额无法用这两种邮票刚好凑出来。求这些无法凑出的金额一共有几个。",
+        "en": "A post office sells only 4-dollar and 7-dollar stamps, and any number of each may be bought, including none. Some whole-dollar amounts cannot be made up exactly from these stamps. How many such amounts are there in total?",
+        "ja": "郵便局では 4 円と 7 円の 2 種類の切手だけを売っていて、どちらも何枚でも買えます（0 枚でもかまいません）。この 2 種類ではちょうど作れない正の整数の金額がいくつかあります。作れない金額は全部で何通りありますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 9 個。",
+        "zh-Hans": "答案是 9 个。",
+        "en": "The answer is 9 amounts.",
+        "ja": "答えは 9 通りです。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "先把金額依除以 4 的餘數分成四組來看，因為加上 4 元郵票不會改變餘數。",
+          "在每一組裡，只要能湊出該組最小的金額，比它大且同餘的金額都可以靠多買 4 元郵票湊出。",
+          "餘數 0 那組最小可湊出的是 0；餘數 3 那組要靠一張 7 元，最小是 7；餘數 2 那組要兩張 7 元，最小是 14；餘數 1 那組要三張 7 元，最小是 21。",
+          "所以每組湊不出的金額分別是：餘 0 組沒有；餘 3 組是 3；餘 2 組是 2、6、10；餘 1 組是 1、5、9、13、17。",
+          "合計 0 + 1 + 3 + 5 = 9 個，所以無法湊出的金額一共有 9 個。"
+        ],
+        "zh-Hans": [
+          "先把金额依除以 4 的余数分成四组来看，因为加上 4 元邮票不会改变余数。",
+          "在每一组里，只要能凑出该组最小的金额，比它大且同余的金额都可以靠多买 4 元邮票凑出。",
+          "余数 0 那组最小可凑出的是 0；余数 3 那组要靠一张 7 元，最小是 7；余数 2 那组要两张 7 元，最小是 14；余数 1 那组要三张 7 元，最小是 21。",
+          "所以每组凑不出的金额分别是：余 0 组没有；余 3 组是 3；余 2 组是 2、6、10；余 1 组是 1、5、9、13、17。",
+          "合计 0 + 1 + 3 + 5 = 9 个，所以无法凑出的金额一共有 9 个。"
+        ],
+        "en": [
+          "Sort the amounts by their remainder on division by 4, since adding a 4-dollar stamp never changes that remainder.",
+          "Within each class, once the smallest reachable amount is known, every larger amount in the same class is reachable by adding more 4-dollar stamps.",
+          "For remainder 0 the smallest reachable amount is 0; for remainder 3 it takes one 7-dollar stamp, so 7; for remainder 2 it takes two, so 14; for remainder 1 it takes three, so 21.",
+          "The unreachable amounts in each class are therefore: none for remainder 0; 3 for remainder 3; 2, 6, 10 for remainder 2; and 1, 5, 9, 13, 17 for remainder 1.",
+          "Altogether that is 0 + 1 + 3 + 5 = 9, so 9 amounts cannot be made."
+        ],
+        "ja": [
+          "4 円切手を足しても 4 でわった余りは変わらないので、金額を 4 でわった余りごとに 4 つの組に分けて考えます。",
+          "各組では、その組で作れる最小の金額さえわかれば、それより大きい同じ余りの金額は 4 円切手を足して作れます。",
+          "余り 0 の組で作れる最小は 0、余り 3 の組は 7 円切手 1 枚で 7、余り 2 の組は 2 枚で 14、余り 1 の組は 3 枚で 21 です。",
+          "よって作れない金額は、余り 0 の組はなし、余り 3 の組は 3、余り 2 の組は 2、6、10、余り 1 の組は 1、5、9、13、17 です。",
+          "合計 0 + 1 + 3 + 5 = 9 個なので、作れない金額は 9 通りです。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "9"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "無法湊出的金額（由最大值改為個數）",
+        "notes": "設計依據：既有題求最大無法湊出的金額，本題改問無法湊出的金額共有幾個，必須依餘數分組逐組找出臨界值再累計，推理路徑與只找單一最大值不同；屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（湊錢・不可表示的個數）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "數論",
+        "topicCode": "number_theory",
+        "subtopic": "無法湊出的金額",
+        "subtopicCode": "frobenius_number"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "number_theory_grade8_foundation_032",
+      "topic": "number_theory",
+      "subtopic": "divisor_count",
+      "difficulty": "foundation",
+      "levelStage": "grade8",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "求最小的正整數，使得它恰好有 12 個正因數。",
+        "zh-Hans": "求最小的正整数，使得它恰好有 12 个正因数。",
+        "en": "Find the smallest positive integer that has exactly 12 positive divisors.",
+        "ja": "正の約数がちょうど 12 個であるような最小の正の整数を求めなさい。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 60。",
+        "zh-Hans": "答案是 60。",
+        "en": "The answer is 60.",
+        "ja": "答えは 60 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "若一個數分解質因數後寫成各質數的次方相乘，則它的正因數個數等於每個次方各加 1 之後的乘積。",
+          "要讓因數個數是 12，就要把 12 拆成幾個大於 1 的整數相乘：12、6 × 2、4 × 3、3 × 2 × 2。",
+          "每一種拆法對應的次方組合是：一個質數的 11 次方、次方 5 與 1、次方 3 與 2、次方 2 與 1 與 1。",
+          "要讓數字最小，應該把較大的次方配給較小的質數。四種情形的最小值分別是 2¹¹ = 2048、2⁵ × 3 = 96、2³ × 3² = 72、2² × 3 × 5 = 60。",
+          "比較這四個數，最小的是 60，所以答案是 60。"
+        ],
+        "zh-Hans": [
+          "若一个数分解质因数后写成各质数的次方相乘，则它的正因数个数等于每个次方各加 1 之后的乘积。",
+          "要让因数个数是 12，就要把 12 拆成几个大于 1 的整数相乘：12、6 × 2、4 × 3、3 × 2 × 2。",
+          "每一种拆法对应的次方组合是：一个质数的 11 次方、次方 5 与 1、次方 3 与 2、次方 2 与 1 与 1。",
+          "要让数字最小，应该把较大的次方配给较小的质数。四种情形的最小值分别是 2¹¹ = 2048、2⁵ × 3 = 96、2³ × 3² = 72、2² × 3 × 5 = 60。",
+          "比较这四个数，最小的是 60，所以答案是 60。"
+        ],
+        "en": [
+          "If a number is written as a product of prime powers, its number of positive divisors is the product of each exponent increased by 1.",
+          "For 12 divisors, write 12 as a product of integers greater than 1: 12, 6 × 2, 4 × 3, and 3 × 2 × 2.",
+          "The matching exponent patterns are: one prime to the 11th power; exponents 5 and 1; exponents 3 and 2; and exponents 2, 1 and 1.",
+          "To keep the number small, give the larger exponents to the smaller primes. The four smallest candidates are 2¹¹ = 2048, 2⁵ × 3 = 96, 2³ × 3² = 72 and 2² × 3 × 5 = 60.",
+          "Comparing these, the smallest is 60, so the answer is 60."
+        ],
+        "ja": [
+          "ある数を素因数分解して素数のべきの積で表すと、正の約数の個数は各指数に 1 を加えたものの積になります。",
+          "約数を 12 個にするには、12 を 1 より大きい整数の積に分けます。12、6 × 2、4 × 3、3 × 2 × 2 です。",
+          "それぞれに対応する指数の組は、ある素数の 11 乗、指数 5 と 1、指数 3 と 2、指数 2 と 1 と 1 です。",
+          "数を小さくするには大きい指数を小さい素数に割りあてます。4 通りの最小値は 2¹¹ = 2048、2⁵ × 3 = 96、2³ × 3² = 72、2² × 3 × 5 = 60 です。",
+          "これらを比べると最小は 60 なので、答えは 60 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "60"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "因數個數（由求個數改為求最小數）",
+        "notes": "設計依據：既有題給定數字直接數因數個數，本題反過來給定因數個數求最小的數，必須先枚舉指數組合再把大指數配給小質數比較大小；屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（因數個數・求最小數）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "數論",
+        "topicCode": "number_theory",
+        "subtopic": "因數個數",
+        "subtopicCode": "divisor_count"
+      },
+      "reviewStatus": "ok"
     }
   ]
 }

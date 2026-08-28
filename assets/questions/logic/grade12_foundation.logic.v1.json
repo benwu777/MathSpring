@@ -3082,6 +3082,162 @@
         "subtopicCode": "sign_grid_product"
       },
       "reviewStatus": "ok"
+    },
+    {
+      "id": "logic_grade12_foundation_031",
+      "topic": "logic",
+      "subtopic": "egg_drop_two",
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一棟大樓有若干層，存在一個臨界樓層 F，使得從第 F 層以上（含 F 層）往下丟蛋一定會破，從 F 層以下丟則一定不破。現在手上只有 2 顆完全相同的蛋，蛋沒破可以重複使用，破了就不能再用。已知在最壞情況下最多只丟 10 次，就一定能保證找出臨界樓層 F。求這棟大樓最多可以有幾層。",
+        "zh-Hans": "一栋大楼有若干层，存在一个临界楼层 F，使得从第 F 层以上（含 F 层）往下丢蛋一定会破，从 F 层以下丢则一定不破。现在手上只有 2 颗完全相同的蛋，蛋没破可以重复使用，破了就不能再用。已知在最坏情况下最多只丢 10 次，就一定能保证找出临界楼层 F。求这栋大楼最多可以有几层。",
+        "en": "A building has some number of floors, and there is a critical floor F such that an egg dropped from floor F or above always breaks while one dropped from below F never does. Only 2 identical eggs are available; an unbroken egg may be reused, a broken one may not. It is known that 10 drops in the worst case are always enough to determine F. At most how many floors can the building have?",
+        "ja": "ある建物に何階かあり、ある臨界階 F が存在して、F 階以上から卵を落とすと必ず割れ、F 階より下から落とすと決して割れません。手元には同じ卵が 2 個だけあり、割れていない卵は再利用でき、割れた卵は使えません。最悪の場合でも 10 回落とせば必ず F を特定できるとわかっているとき、この建物は最大で何階まであり得ますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 55 層。",
+        "zh-Hans": "答案是 55 层。",
+        "en": "The answer is 55 floors.",
+        "ja": "答えは 55 階です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "第一顆蛋負責大跨距地縮小範圍，一旦破了，第二顆蛋就只能從斷點下方逐層往上試。",
+          "設第一次從第 k 層丟。若破了，剩下 9 次要逐層檢查下方的 k − 1 層，所以 k − 1 ≤ 9，第一步最多從第 10 層丟。",
+          "若沒破，第二次要往上跳的距離必須再少 1，也就是 9 層，因為之後只剩 8 次逐層檢查；以此類推，每次的跨距依序是 10、9、8、⋯、1。",
+          "所以能覆蓋的最高樓層是這些跨距的總和：10 + 9 + 8 + ⋯ + 1。",
+          "這個和是 10 × 11 ÷ 2 = 55，所以大樓最多可以有 55 層。"
+        ],
+        "zh-Hans": [
+          "第一颗蛋负责大跨距地缩小范围，一旦破了，第二颗蛋就只能从断点下方逐层往上试。",
+          "设第一次从第 k 层丢。若破了，剩下 9 次要逐层检查下方的 k − 1 层，所以 k − 1 ≤ 9，第一步最多从第 10 层丢。",
+          "若没破，第二次要往上跳的距离必须再少 1，也就是 9 层，因为之后只剩 8 次逐层检查；以此类推，每次的跨距依次是 10、9、8、⋯、1。",
+          "所以能覆盖的最高楼层是这些跨距的总和：10 + 9 + 8 + ⋯ + 1。",
+          "这个和是 10 × 11 ÷ 2 = 55，所以大楼最多可以有 55 层。"
+        ],
+        "en": [
+          "The first egg is used to cut the range down in large jumps; once it breaks, the second egg must be tried floor by floor upward from the last safe floor.",
+          "Suppose the first drop is from floor k. If it breaks, the remaining 9 drops must check the k − 1 floors below one at a time, so k − 1 ≤ 9 and the first drop is from floor 10 at most.",
+          "If it does not break, the next jump must be one smaller, namely 9 floors, since only 8 single-floor checks would remain afterwards, and so on, giving jumps of 10, 9, 8, …, 1.",
+          "The highest floor that can be covered is therefore the total of these jumps: 10 + 9 + 8 + ⋯ + 1.",
+          "That sum is 10 × 11 ÷ 2 = 55, so the building can have at most 55 floors."
+        ],
+        "ja": [
+          "1 個目の卵で大きく間隔をとって範囲をせばめ、割れたら 2 個目で安全な階から 1 階ずつ上へ確かめます。",
+          "最初に k 階から落とすとします。割れた場合、残り 9 回で下の k − 1 階を 1 階ずつ調べる必要があるので k − 1 ≤ 9、つまり最初は最大でも 10 階からです。",
+          "割れなければ次の上げ幅は 1 つ小さい 9 階でなければなりません。その後 1 階ずつ調べる回数が 8 回しか残らないからです。以下同様に、間隔は 10、9、8、⋯、1 となります。",
+          "したがってカバーできる最高階はこれらの間隔の合計 10 + 9 + 8 + ⋯ + 1 です。",
+          "この和は 10 × 11 ÷ 2 = 55 なので、建物は最大で 55 階です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "55"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "兩顆蛋的測試（由給樓層數求次數改為給次數逆推樓層數）",
+        "notes": "設計依據：既有題給定 100 層求最壞情況的最少丟擲次數，本題反過來由允許的次數上限反求可涵蓋的最大樓層數，必須看出遞減跨距的總和恰為三角形數；屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（丟蛋・逆推樓層數）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "邏輯",
+        "topicCode": "logic",
+        "subtopic": "兩顆蛋的測試",
+        "subtopicCode": "egg_drop_two"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "logic_grade12_foundation_032",
+      "topic": "logic",
+      "subtopic": "euler_planar_faces",
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "在紙上畫一個連通的平面圖（任兩條線除端點外都不交叉），它把紙面分割成 12 個區域（包含最外圍那個無界的區域）。已知圖中每個點都恰好連出 3 條線。求這個圖有幾個點。",
+        "zh-Hans": "在纸上画一个连通的平面图（任两条线除端点外都不交叉），它把纸面分割成 12 个区域（包含最外围那个无界的区域）。已知图中每个点都恰好连出 3 条线。求这个图有几个点。",
+        "en": "A connected planar graph is drawn on paper, with no two edges crossing except at endpoints, dividing the plane into 12 regions including the unbounded outer one. Every vertex of the graph has exactly 3 edges leaving it. How many vertices does the graph have?",
+        "ja": "紙の上に連結な平面グラフ（辺は端点以外で交わらない）を描くと、紙面が外側の無限に広がる領域をふくめて 12 個の領域に分かれました。どの頂点からもちょうど 3 本の辺が出ているとき、この図の頂点は何個ありますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 20 個。",
+        "zh-Hans": "答案是 20 个。",
+        "en": "The answer is 20 vertices.",
+        "ja": "答えは 20 個です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "設點數是 V、線數是 E、區域數是 F。連通平面圖滿足歐拉公式 V − E + F = 2。",
+          "題目說 F = 12，代入得 V − E + 12 = 2，也就是 V − E = −10。",
+          "另一方面，把每個點連出的線數全部加起來會等於線數的 2 倍（每條線有兩個端點）。",
+          "每個點都恰好連出 3 條線，所以 3V = 2E，也就是 E = 3V ÷ 2。",
+          "代回 V − 3V ÷ 2 = −10，得 −V ÷ 2 = −10，所以 V = 20。"
+        ],
+        "zh-Hans": [
+          "设点数是 V、线数是 E、区域数是 F。连通平面图满足欧拉公式 V − E + F = 2。",
+          "题目说 F = 12，代入得 V − E + 12 = 2，也就是 V − E = −10。",
+          "另一方面，把每个点连出的线数全部加起来会等于线数的 2 倍（每条线有两个端点）。",
+          "每个点都恰好连出 3 条线，所以 3V = 2E，也就是 E = 3V ÷ 2。",
+          "代回 V − 3V ÷ 2 = −10，得 −V ÷ 2 = −10，所以 V = 20。"
+        ],
+        "en": [
+          "Let V be the number of vertices, E the number of edges and F the number of regions. A connected planar graph satisfies Euler's formula V − E + F = 2.",
+          "Here F = 12, so V − E + 12 = 2, that is V − E = −10.",
+          "Separately, adding up the number of edges at every vertex gives twice the number of edges, since each edge has two endpoints.",
+          "Every vertex has exactly 3 edges, so 3V = 2E, that is E = 3V ÷ 2.",
+          "Substituting back, V − 3V ÷ 2 = −10 gives −V ÷ 2 = −10, so V = 20."
+        ],
+        "ja": [
+          "頂点数を V、辺数を E、領域数を F とします。連結な平面グラフではオイラーの公式 V − E + F = 2 が成り立ちます。",
+          "ここで F = 12 なので V − E + 12 = 2、つまり V − E = −10 です。",
+          "一方、各頂点から出る辺の数をすべてたすと辺数の 2 倍になります。どの辺にも端点が 2 つあるからです。",
+          "どの頂点からもちょうど 3 本出ているので 3V = 2E、すなわち E = 3V ÷ 2 です。",
+          "代入すると V − 3V ÷ 2 = −10 となり、−V ÷ 2 = −10 より V = 20 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "20"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "歐拉公式（由給點邊求面改為給面與度數逆推點數）",
+        "notes": "設計依據：既有題給定點數與線數直接用歐拉公式求區域數，本題改給區域數並加上「每點度數為 3」的條件反求點數，必須把歐拉公式與握手引理聯立；屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（歐拉公式・逆推點數）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "邏輯",
+        "topicCode": "logic",
+        "subtopic": "平面圖的面數",
+        "subtopicCode": "euler_planar_faces"
+      },
+      "reviewStatus": "ok"
     }
   ]
 }

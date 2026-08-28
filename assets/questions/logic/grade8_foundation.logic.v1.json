@@ -2706,6 +2706,162 @@
         "subtopicCode": "gossip_min_calls"
       },
       "reviewStatus": "ok"
+    },
+    {
+      "id": "logic_grade8_foundation_031",
+      "topic": "logic",
+      "subtopic": "hanoi_min_moves",
+      "difficulty": "foundation",
+      "levelStage": "grade8",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "有 A、B、C 三根柱子由左到右排成一列，A 柱上由下而上套著 3 個大小不同的圓盤，大的在下、小的在上。每次只能搬動一根柱子最上面的一個圓盤，任何時候都不可以把大圓盤放在小圓盤上面，而且這次多了一條規定：每次只能把圓盤搬到左右相鄰的柱子（A 和 C 之間不可以直接互搬）。要把全部 3 個圓盤搬到 C 柱，最少要搬幾次？",
+        "zh-Hans": "有 A、B、C 三根柱子由左到右排成一列，A 柱上由下而上套着 3 个大小不同的圆盘，大的在下、小的在上。每次只能搬动一根柱子最上面的一个圆盘，任何时候都不可以把大圆盘放在小圆盘上面，而且这次多了一条规定：每次只能把圆盘搬到左右相邻的柱子（A 和 C 之间不可以直接互搬）。要把全部 3 个圆盘搬到 C 柱，最少要搬几次？",
+        "en": "Three pegs A, B and C stand in a row from left to right, and peg A holds 3 discs of different sizes, larger ones below smaller ones. Only the top disc of a peg may be moved at a time, a larger disc may never rest on a smaller one, and there is now an extra rule: a disc may only be moved to an adjacent peg, so nothing may go directly between A and C. What is the smallest number of moves needed to get all 3 discs onto peg C?",
+        "ja": "A、B、C の 3 本の柱が左から右に並んでいて、柱 A には大きさのちがう円盤が 3 枚、大きいものが下になるように重ねてあります。1 回に動かせるのは柱のいちばん上の円盤 1 枚だけで、大きい円盤を小さい円盤の上に置くことはできません。さらに今回は「円盤はとなり合う柱にしか動かせない（A と C の間で直接動かせない）」という規則が加わります。3 枚すべてを柱 C に移すには、最少で何回動かせばよいですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 26 次。",
+        "zh-Hans": "答案是 26 次。",
+        "en": "The answer is 26 moves.",
+        "ja": "答えは 26 回です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "設把 n 個圓盤從一端的柱子搬到另一端的柱子，最少需要 g(n) 次。",
+          "因為不能直接在 A 和 C 之間搬，最大的圓盤要從 A 搬到 C，必須先搬到 B、再從 B 搬到 C，也就是最大盤要動 2 次。",
+          "在最大盤第一次移動前，上面 n − 1 個圓盤必須全部讓開到 C；最大盤搬到 B 之後，那 n − 1 個圓盤又必須全部從 C 搬回 A；最大盤再搬到 C 之後，它們還要從 A 搬到 C。",
+          "所以上面 n − 1 個圓盤總共要做 3 趟端對端的搬運，於是 g(n) = 3 × g(n − 1) + 2，而 g(0) = 0。",
+          "依序計算：g(1) = 2，g(2) = 3 × 2 + 2 = 8，g(3) = 3 × 8 + 2 = 26，所以最少要搬 26 次。"
+        ],
+        "zh-Hans": [
+          "设把 n 个圆盘从一端的柱子搬到另一端的柱子，最少需要 g(n) 次。",
+          "因为不能直接在 A 和 C 之间搬，最大的圆盘要从 A 搬到 C，必须先搬到 B、再从 B 搬到 C，也就是最大盘要动 2 次。",
+          "在最大盘第一次移动前，上面 n − 1 个圆盘必须全部让开到 C；最大盘搬到 B 之后，那 n − 1 个圆盘又必须全部从 C 搬回 A；最大盘再搬到 C 之后，它们还要从 A 搬到 C。",
+          "所以上面 n − 1 个圆盘总共要做 3 趟端对端的搬运，于是 g(n) = 3 × g(n − 1) + 2，而 g(0) = 0。",
+          "依次计算：g(1) = 2，g(2) = 3 × 2 + 2 = 8，g(3) = 3 × 8 + 2 = 26，所以最少要搬 26 次。"
+        ],
+        "en": [
+          "Let g(n) be the least number of moves needed to take n discs from one end peg to the other end peg.",
+          "Since nothing may pass directly between A and C, the largest disc must go from A to B and then from B to C, so it moves twice.",
+          "Before the largest disc first moves, the n − 1 discs above it must all be out of the way on C; after it reaches B, those n − 1 discs must all travel back from C to A; and after it reaches C, they must travel from A to C again.",
+          "So the upper n − 1 discs make three end-to-end journeys, giving g(n) = 3 × g(n − 1) + 2, with g(0) = 0.",
+          "Computing in turn: g(1) = 2, g(2) = 3 × 2 + 2 = 8, and g(3) = 3 × 8 + 2 = 26, so 26 moves are needed."
+        ],
+        "ja": [
+          "n 枚の円盤を一方のはしの柱からもう一方のはしの柱へ移すのに必要な最少回数を g(n) とします。",
+          "A と C の間は直接動かせないので、いちばん大きい円盤は A から B、B から C と 2 回動く必要があります。",
+          "いちばん大きい円盤が最初に動く前に、その上の n − 1 枚はすべて C へどかしておく必要があり、大きい円盤が B に来たあとは n − 1 枚を C から A へ戻し、大きい円盤が C に来たあとにまた A から C へ移します。",
+          "つまり上の n − 1 枚ははしからはしへ 3 回移動するので、g(n) = 3 × g(n − 1) + 2、g(0) = 0 となります。",
+          "順に計算すると g(1) = 2、g(2) = 3 × 2 + 2 = 8、g(3) = 3 × 8 + 2 = 26 なので、最少 26 回です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "26"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "移盤最少次數（加入只能搬相鄰柱的限制）",
+        "notes": "設計依據：既有題是標準河內塔、遞迴式為 2ⁿ − 1，本題限制只能搬到相鄰柱，最大盤必須走兩步、上層必須來回三趟，遞迴式變成 g(n)=3g(n−1)+2；已用寬度優先搜尋窮舉狀態驗證最少次數為 26；屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（河內塔・相鄰柱限制）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "邏輯",
+        "topicCode": "logic",
+        "subtopic": "移盤最少次數",
+        "subtopicCode": "hanoi_min_moves"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "logic_grade8_foundation_032",
+      "topic": "logic",
+      "subtopic": "paper_folding_layers",
+      "difficulty": "foundation",
+      "levelStage": "grade8",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "把一條繩子對摺 3 次（每次都把整疊繩子一起對摺），然後在整疊繩子長度的正中間剪一刀，剪的位置不在任何摺疊處。把繩子完全攤開後，繩子被剪成幾段？",
+        "zh-Hans": "把一条绳子对折 3 次（每次都把整叠绳子一起对折），然后在整叠绳子长度的正中间剪一刀，剪的位置不在任何折叠处。把绳子完全摊开后，绳子被剪成几段？",
+        "en": "A rope is folded in half 3 times, each time folding the whole bundle together, and then a single cut is made across the bundle at the middle of its length, not at any fold. When the rope is opened out completely, into how many pieces has it been cut?",
+        "ja": "1 本のひもを 3 回半分に折り（そのつど束全体をまとめて折ります）、束の長さのちょうどまん中で 1 回だけ切ります。切る位置は折り目ではありません。ひもを完全に開いたとき、ひもは何本に切れていますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 9 段。",
+        "zh-Hans": "答案是 9 段。",
+        "en": "The answer is 9 pieces.",
+        "ja": "答えは 9 本です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "每對摺一次，繩子的層數就變成兩倍：對摺 1 次是 2 層，2 次是 4 層，3 次是 8 層。",
+          "剪一刀會同時剪過這 8 層，所以攤開後的繩子上一共出現 8 個被剪開的位置。",
+          "題目說剪的位置不在摺疊處，所以這 8 個位置都是真正的斷點，不會有兩個斷點重合。",
+          "一條繩子上有 k 個斷點時，會被分成 k + 1 段。",
+          "所以繩子被剪成 8 + 1 = 9 段。"
+        ],
+        "zh-Hans": [
+          "每对折一次，绳子的层数就变成两倍：对折 1 次是 2 层，2 次是 4 层，3 次是 8 层。",
+          "剪一刀会同时剪过这 8 层，所以摊开后的绳子上一共出现 8 个被剪开的位置。",
+          "题目说剪的位置不在折叠处，所以这 8 个位置都是真正的断点，不会有两个断点重合。",
+          "一条绳子上有 k 个断点时，会被分成 k + 1 段。",
+          "所以绳子被剪成 8 + 1 = 9 段。"
+        ],
+        "en": [
+          "Each fold doubles the number of layers: after 1 fold there are 2 layers, after 2 folds 4 layers, and after 3 folds 8 layers.",
+          "A single cut passes through all 8 layers at once, so the opened-out rope has 8 places where it was cut.",
+          "The cut is not at a fold, so all 8 places are genuine break points and no two of them coincide.",
+          "A rope with k break points falls into k + 1 pieces.",
+          "So the rope is cut into 8 + 1 = 9 pieces."
+        ],
+        "ja": [
+          "半分に折るたびに層の数は 2 倍になり、1 回で 2 層、2 回で 4 層、3 回で 8 層になります。",
+          "1 回の切断で 8 層すべてを切るので、開いたひもには切れた場所が 8 か所できます。",
+          "切る位置は折り目ではないので、この 8 か所はすべて本当の切れ目で、重なることはありません。",
+          "1 本のひもに切れ目が k か所あると、ひもは k + 1 本に分かれます。",
+          "したがってひもは 8 + 1 = 9 本に切れています。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "9"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "對摺的層數（由數層數改為數剪後段數）",
+        "notes": "設計依據：既有題只問對摺後的層數，本題再剪一刀改問段數，除了層數的倍增外還要處理「k 個斷點分成 k + 1 段」的端點效應；屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（對摺・剪後段數）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "邏輯",
+        "topicCode": "logic",
+        "subtopic": "對摺的層數",
+        "subtopicCode": "paper_folding_layers"
+      },
+      "reviewStatus": "ok"
     }
   ]
 }

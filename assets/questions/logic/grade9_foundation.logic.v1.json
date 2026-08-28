@@ -2808,6 +2808,162 @@
         "subtopicCode": "worst_case_all_colors"
       },
       "reviewStatus": "ok"
+    },
+    {
+      "id": "logic_grade9_foundation_031",
+      "topic": "logic",
+      "subtopic": "josephus_survivor",
+      "difficulty": "foundation",
+      "levelStage": "grade9",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "若干人圍成一圈依順時針編號，從 1 號開始報數，每次報到「2」的人立刻離開圈子，接著由下一個人重新從「1」開始報數，一直進行到只剩一人。已知最後剩下的是 1 號，而且人數在 10 到 20 之間。求圍成一圈的人數。",
+        "zh-Hans": "若干人围成一圈依顺时针编号，从 1 号开始报数，每次报到「2」的人立刻离开圈子，接着由下一个人重新从「1」开始报数，一直进行到只剩一人。已知最后剩下的是 1 号，而且人数在 10 到 20 之间。求围成一圈的人数。",
+        "en": "Several people stand in a circle, numbered clockwise. Counting starts at person 1; whoever says \"2\" immediately leaves the circle, and the next person starts counting again from \"1\", continuing until one person remains. The last person remaining is number 1, and the number of people is between 10 and 20. How many people were in the circle?",
+        "ja": "何人かが輪になり時計回りに番号がついています。1 番から数え始め、「2」と言った人がすぐに輪から出て、次の人がまた「1」から数え直し、1 人になるまで続けます。最後に残ったのが 1 番で、人数が 10 人以上 20 人以下であるとき、輪になっていた人数を求めなさい。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 16 人。",
+        "zh-Hans": "答案是 16 人。",
+        "en": "The answer is 16 people.",
+        "ja": "答えは 16 人です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "先觀察小人數的情形：2 人時最後剩 1 號，4 人時最後剩 1 號，8 人時最後剩 1 號。",
+          "原因是：當人數是偶數時，報數一輪之後所有偶數號都會離開，剩下的全是奇數號，而且下一輪仍然從 1 號開始報。",
+          "這相當於把人數減半後重新開始同樣的過程，所以只要人數一路減半都保持是偶數，1 號就永遠不會被點到。",
+          "人數一路減半都是偶數，等價於人數是 2 的次方；若中途出現奇數，1 號就會在下一輪被淘汰。",
+          "10 到 20 之間唯一的 2 的次方是 16，所以人數是 16 人。"
+        ],
+        "zh-Hans": [
+          "先观察小人数的情形：2 人时最后剩 1 号，4 人时最后剩 1 号，8 人时最后剩 1 号。",
+          "原因是：当人数是偶数时，报数一轮之后所有偶数号都会离开，剩下的全是奇数号，而且下一轮仍然从 1 号开始报。",
+          "这相当于把人数减半后重新开始同样的过程，所以只要人数一路减半都保持是偶数，1 号就永远不会被点到。",
+          "人数一路减半都是偶数，等价于人数是 2 的次方；若中途出现奇数，1 号就会在下一轮被淘汰。",
+          "10 到 20 之间唯一的 2 的次方是 16，所以人数是 16 人。"
+        ],
+        "en": [
+          "Look at small cases first: with 2 people number 1 survives, with 4 people number 1 survives, and with 8 people number 1 survives.",
+          "The reason is that when the count is even, one full round removes every even-numbered person, leaving only the odd numbers, and the next round again starts at number 1.",
+          "That is the same process with half as many people, so as long as halving keeps giving an even count, number 1 is never the one to go.",
+          "Halving always giving an even count is exactly the condition that the number of people is a power of 2; if an odd count ever appears, number 1 is eliminated in the following round.",
+          "The only power of 2 between 10 and 20 is 16, so there were 16 people."
+        ],
+        "ja": [
+          "まず少人数で調べます。2 人でも 4 人でも 8 人でも、最後に残るのは 1 番です。",
+          "理由は、人数が偶数のとき 1 周すると偶数番の人が全員出ていき、奇数番だけが残り、次の周もやはり 1 番から数え始めるからです。",
+          "これは人数を半分にして同じ手続きをくり返すことと同じなので、半分にしていくあいだずっと偶数であれば 1 番は決して当たりません。",
+          "半分にしてもつねに偶数であることは、人数が 2 の累乗であることと同じです。途中で奇数になると 1 番は次の周で脱落します。",
+          "10 以上 20 以下で 2 の累乗は 16 だけなので、人数は 16 人です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "16"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "圍圈報數（由求存活者改為由存活者逆推人數）",
+        "notes": "設計依據：既有題給定人數求最後存活的號碼，本題反過來由「1 號存活」這個條件反推人數，必須發現人數為 2 的次方時 1 號才會存活的結構性質；屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（圍圈報數・逆推人數）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "邏輯",
+        "topicCode": "logic",
+        "subtopic": "圍圈報數",
+        "subtopicCode": "josephus_survivor"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "logic_grade9_foundation_032",
+      "topic": "logic",
+      "subtopic": "jug_state_search",
+      "difficulty": "foundation",
+      "levelStage": "grade9",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "有一個 6 公升和一個 15 公升的水壺，兩個壺上都沒有刻度，旁邊有取用不完的水。每次操作只能是：把某個壺裝滿、把某個壺倒空，或把某個壺的水倒進另一個壺（倒到原壺空了或另一壺滿了為止）。用這兩個壺可以量出來的水量之中，最小的正整數公升數是多少？",
+        "zh-Hans": "有一个 6 升和一个 15 升的水壶，两个壶上都没有刻度，旁边有取用不完的水。每次操作只能是：把某个壶装满、把某个壶倒空，或把某个壶的水倒进另一个壶（倒到原壶空了或另一壶满了为止）。用这两个壶可以量出来的水量之中，最小的正整数升数是多少？",
+        "en": "There is a 6-litre jug and a 15-litre jug, neither with any markings, beside an unlimited supply of water. Each operation must be one of: fill a jug, empty a jug, or pour from one jug into the other until the first is empty or the second is full. Among the amounts of water that can be measured out with these jugs, what is the smallest positive whole number of litres?",
+        "ja": "目もりのない 6 リットルと 15 リットルの水がめがあり、そばには水がいくらでもあります。1 回の操作は「どちらかをいっぱいにする」「どちらかを空にする」「一方の水をもう一方に、元が空になるか相手がいっぱいになるまで移す」のいずれかです。この 2 つの水がめではかり取れる水の量のうち、最小の正の整数リットルはいくつですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 3 公升。",
+        "zh-Hans": "答案是 3 升。",
+        "en": "The answer is 3 litres.",
+        "ja": "答えは 3 リットルです。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "觀察每一次操作對「兩壺水量總和」的影響：裝滿是加 6 或加 15，倒空是減 6 或減 15，互相傾倒則總量不變。",
+          "所以任何時刻，兩壺裡的水量都可以寫成 6 的倍數加上 15 的倍數（倍數可以是負的），也就是一定是 6 與 15 的公因數的倍數。",
+          "6 與 15 的最大公因數是 3，因此能量出的水量一定是 3 的倍數，1 公升和 2 公升都不可能量出來。",
+          "而 3 公升確實量得出來：把 15 公升的壺裝滿，倒進 6 公升的壺並倒空它，再倒一次並倒空，15 − 6 − 6 = 3，大壺裡就剩下 3 公升。",
+          "所以能量出的最小正整數公升數是 3。"
+        ],
+        "zh-Hans": [
+          "观察每一次操作对「两壶水量总和」的影响：装满是加 6 或加 15，倒空是减 6 或减 15，互相倾倒则总量不变。",
+          "所以任何时刻，两壶里的水量都可以写成 6 的倍数加上 15 的倍数（倍数可以是负的），也就是一定是 6 与 15 的公因数的倍数。",
+          "6 与 15 的最大公因数是 3，因此能量出的水量一定是 3 的倍数，1 升和 2 升都不可能量出来。",
+          "而 3 升确实量得出来：把 15 升的壶装满，倒进 6 升的壶并倒空它，再倒一次并倒空，15 − 6 − 6 = 3，大壶里就剩下 3 升。",
+          "所以能量出的最小正整数升数是 3。"
+        ],
+        "en": [
+          "Consider how each operation changes the total amount of water in the two jugs: filling adds 6 or 15, emptying subtracts 6 or 15, and pouring between jugs leaves the total unchanged.",
+          "So at any moment the water present can be written as a multiple of 6 plus a multiple of 15, where the multipliers may be negative, and hence is always a multiple of a common divisor of 6 and 15.",
+          "The greatest common divisor of 6 and 15 is 3, so every measurable amount is a multiple of 3, and 1 litre and 2 litres are impossible.",
+          "And 3 litres really is achievable: fill the 15-litre jug, pour into the 6-litre jug and empty it, then pour and empty once more, leaving 15 − 6 − 6 = 3 litres in the large jug.",
+          "The smallest positive whole number of litres that can be measured is therefore 3."
+        ],
+        "ja": [
+          "各操作が「2 つの水がめの水の合計」にどう影響するかを見ます。いっぱいにすると 6 か 15 増え、空にすると 6 か 15 減り、移しかえでは合計は変わりません。",
+          "よっていつでも水の量は 6 の倍数と 15 の倍数の和（係数は負でもよい）として表され、6 と 15 の公約数の倍数になります。",
+          "6 と 15 の最大公約数は 3 なので、はかり取れる量は必ず 3 の倍数であり、1 リットルや 2 リットルは不可能です。",
+          "実際 3 リットルははかれます。15 リットルをいっぱいにし、6 リットルへ移して空にし、もう一度移して空にすると、15 − 6 − 6 = 3 で大きいほうに 3 リットル残ります。",
+          "したがってはかり取れる最小の正の整数リットルは 3 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "3"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "水壺量水（由最少操作次數改為可量出的最小量）",
+        "notes": "設計依據：既有題給定目標水量求最少操作次數，本題改問哪些水量根本量得出來，必須觀察每次操作只會讓總量改變 6 或 15，因而所有可量出的量都是最大公因數的倍數，再構造一組操作達成；屬同水準原創改寫，非抄錄特定官方題。",
+        "displayText": "改寫題（量水・最小可量量）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "邏輯",
+        "topicCode": "logic",
+        "subtopic": "水壺量水最少操作",
+        "subtopicCode": "jug_state_search"
+      },
+      "reviewStatus": "ok"
     }
   ]
 }
