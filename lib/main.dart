@@ -600,7 +600,7 @@ class _PracticeTabState extends State<_PracticeTab> {
                       ),
                       const SizedBox(height: 6),
                       Text(
-                        _displayTopicCode(_selectedTopicCode!, strings),
+                        displayTopicCode(_selectedTopicCode!, strings),
                         style: Theme.of(context).textTheme.titleMedium,
                       ),
                     ],
@@ -2295,7 +2295,7 @@ class AnswerHistoryPage extends StatelessWidget {
                         ),
                         const SizedBox(height: 6),
                         Text(
-                          _displayTopicCode(session.topicCode, strings),
+                          displayTopicCode(session.topicCode, strings),
                           style: Theme.of(context).textTheme.bodyLarge,
                         ),
                         const SizedBox(height: 10),
@@ -2555,7 +2555,7 @@ class _QuestionPackTile extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            _displayTopicCode(pack.topicCode, strings),
+            displayTopicCode(pack.topicCode, strings),
             style: const TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.w700,
@@ -2579,7 +2579,7 @@ class _QuestionPackTile extends StatelessWidget {
                     '${pack.questionCount} ${strings.questionCountLabel(pack.questionCount)}',
               ),
               const SizedBox(width: 10),
-              _InfoPill(label: _displayTopicCode(pack.topicCode, strings)),
+              _InfoPill(label: displayTopicCode(pack.topicCode, strings)),
             ],
           ),
           const SizedBox(height: 14),
@@ -2744,7 +2744,7 @@ class _PracticeSessionPageState extends State<PracticeSessionPage> {
                   const SizedBox(height: 16),
                   _SectionCard(
                     cardKey: const ValueKey<String>('study_surface_card'),
-                    title: _displayTopicCode(widget.pack.topicCode, strings),
+                    title: displayTopicCode(widget.pack.topicCode, strings),
                     subtitle:
                         '${_displayLevelStage(question.levelStage, strings)} · ${_displayTier(question.challengeTier, strings)}',
                     child: Column(
@@ -3297,7 +3297,7 @@ class _QuizSessionPageState extends State<QuizSessionPage> {
                 ),
                 const SizedBox(height: 16),
                 _SectionCard(
-                  title: _displayTopicCode(widget.pack.topicCode, strings),
+                  title: displayTopicCode(widget.pack.topicCode, strings),
                   subtitle:
                       '${_displayLevelStage(question.levelStage, strings)} · ${_displayTier(question.challengeTier, strings)}',
                   child: Column(
@@ -4136,6 +4136,12 @@ class AppStrings {
       _text(zhHant: '邏輯', zhHans: '逻辑', en: 'Logic', ja: '論理');
   String get topicMixed =>
       _text(zhHant: '綜合', zhHans: '综合', en: 'Mixed', ja: '総合');
+  String get topicAlgebra =>
+      _text(zhHant: '代數', zhHans: '代数', en: 'Algebra', ja: '代数');
+  String get topicCombinatorics =>
+      _text(zhHant: '組合', zhHans: '组合', en: 'Combinatorics', ja: '場合の数');
+  String get topicNumberTheory =>
+      _text(zhHant: '數論', zhHans: '数论', en: 'Number Theory', ja: '整数論');
   String get previewLabel =>
       _text(zhHant: '示範題目', zhHans: '示范题目', en: 'Sample Prompt', ja: 'サンプル問題');
   String get previewQuestion => _text(
@@ -5337,7 +5343,7 @@ String _displayTier(String tier, AppStrings strings) {
   return strings.tierDisplay(tier);
 }
 
-String _displayTopicCode(String topicCode, AppStrings strings) {
+String displayTopicCode(String topicCode, AppStrings strings) {
   switch (topicCode) {
     case 'mixed':
       return strings.topicMixed;
@@ -5347,6 +5353,12 @@ String _displayTopicCode(String topicCode, AppStrings strings) {
       return strings.topicArithmetic;
     case 'logic':
       return strings.topicLogic;
+    case 'algebra':
+      return strings.topicAlgebra;
+    case 'combinatorics':
+      return strings.topicCombinatorics;
+    case 'number_theory':
+      return strings.topicNumberTheory;
     default:
       return topicCode;
   }
