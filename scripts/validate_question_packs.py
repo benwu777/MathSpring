@@ -113,6 +113,17 @@ def main():
             for fld in ('prompt', 'answer'):
                 if not all(l in q.get(fld, {}) and q[fld][l].strip() for l in LANGS):
                     err('%s 四語系不齊全' % fld)
+                    continue
+                # 欄位存在不代表翻譯過：日文欄位若與英文逐字相同，等於未翻譯
+                if q[fld]['ja'].strip() == q[fld]['en'].strip():
+                    err('%s 的 ja 與 en 逐字相同（未翻譯）' % fld)
+                elif not any('\u3040' <= c <= '\u30ff' or '\u4e00' <= c <= '\u9fff'
+                             for c in q[fld]['ja']):
+                    err('%s 的 ja 不含任何日文字元' % fld)
+                # 反方向：英文欄位若含中日文字，同樣代表沒翻譯
+                if any('\u4e00' <= c <= '\u9fff' or '\u3040' <= c <= '\u30ff'
+                       for c in q[fld]['en']):
+                    err('%s 的 en 含中日文字（未翻譯）' % fld)
             lens = {l: len(q.get('solutionSteps', {}).get(l, [])) for l in LANGS}
             if len(set(lens.values())) != 1 or 0 in lens.values():
                 err('solutionSteps 四語系長度不一致或為空: %s' % lens)
