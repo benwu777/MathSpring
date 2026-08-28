@@ -2208,18 +2208,18 @@ void main() {
 
     final fourth = byId('mixed_grade6_foundation_017');
     expect(fourth.topic, 'mixed');
-    expect(rawById(fourth.id)['subtopic'], 'capacity_ratio');
-    expect(fourth.correctAnswer.value, '540');
+    expect(rawById(fourth.id)['subtopic'], 'discount_reverse_price');
+    expect(fourth.correctAnswer.value, '300');
     expect(fourth.source?.name, 'Original olympiad-style design');
 
     final fifth = byId('mixed_grade6_foundation_018');
-    expect(rawById(fifth.id)['subtopic'], 'constrained_lattice_paths');
-    expect(fifth.correctAnswer.value, '18');
+    expect(rawById(fifth.id)['subtopic'], 'meeting_time_head_on');
+    expect(fifth.correctAnswer.value, '2');
     expect(fifth.answerMode, AnswerMode.integerInput);
 
     final sixth = byId('mixed_grade6_foundation_019');
     expect(rawById(sixth.id)['subtopic'], 'digit_string_indexing');
-    expect(sixth.correctAnswer.value, '4');
+    expect(sixth.correctAnswer.value, '2');
     expect(sixth.localizedPrompt('zh-Hant'), contains('3、6、9、12'));
   });
 
@@ -2246,9 +2246,9 @@ void main() {
     expect(eighth.answerMode, AnswerMode.multipleChoice);
 
     final ninth = byId('mixed_grade6_foundation_022');
-    expect(rawById(ninth.id)['subtopic'], 'simultaneous_remainders');
-    expect(ninth.correctAnswer.value, '59');
-    expect(ninth.localizedPrompt('zh-Hant'), contains('3、4、5'));
+    expect(rawById(ninth.id)['subtopic'], 'ratio_difference_from_total');
+    expect(ninth.correctAnswer.value, '6');
+    expect(ninth.localizedPrompt('zh-Hant'), contains('3 比 4'));
   });
 
   test('legacy kangaroo56 batch 4 uses distinct reviewed replacement questions', () async {
@@ -2268,8 +2268,8 @@ void main() {
     expect(tenth.correctAnswer.value, '8');
 
     final eleventh = byId('mixed_grade6_foundation_024');
-    expect(rawById(eleventh.id)['subtopic'], 'climb_slip_progression');
-    expect(eleventh.correctAnswer.value, '5');
+    expect(rawById(eleventh.id)['subtopic'], 'efficiency_increase_percent');
+    expect(eleventh.correctAnswer.value, '25');
 
     final twelfth = byId('mixed_grade6_foundation_025');
     expect(rawById(twelfth.id)['subtopic'], 'rectangle_system');
@@ -2302,8 +2302,8 @@ void main() {
     expect((byId('mixed_grade6_foundation_029')['correctAnswer'] as Map)['value'], 'B');
     expect(byId('mixed_grade6_foundation_030')['subtopic'], 'square_classification');
     expect((byId('mixed_grade6_foundation_030')['correctAnswer'] as Map)['value'], '5');
-    expect(byId('mixed_grade6_foundation_031')['subtopic'], 'weighted_average_reverse');
-    expect((byId('mixed_grade6_foundation_031')['correctAnswer'] as Map)['value'], '24');
+    expect(byId('mixed_grade6_foundation_031')['subtopic'], 'percent_more_than');
+    expect((byId('mixed_grade6_foundation_031')['correctAnswer'] as Map)['value'], '60');
   });
 
   test('legacy kangaroo56 batch 7 uses distinct reviewed replacement questions', () async {
@@ -2311,7 +2311,7 @@ void main() {
     Map<String,dynamic> byId(String id) => (raw['questions'] as List).cast<Map<String,dynamic>>().firstWhere((q) => q['id'] == id);
     expect(byId('mixed_grade6_foundation_032')['subtopic'], 'restricted_coin_combinations');
     expect((byId('mixed_grade6_foundation_032')['correctAnswer'] as Map)['value'], '3');
-    expect(byId('mixed_grade6_foundation_033')['subtopic'], 'consecutive_product');
+    expect(byId('mixed_grade6_foundation_033')['subtopic'], 'inclusion_exclusion_neither');
     expect((byId('mixed_grade6_foundation_033')['correctAnswer'] as Map)['value'], '5');
     expect(byId('mixed_grade6_foundation_034')['subtopic'], 'age_difference_invariant');
     expect((byId('mixed_grade6_foundation_034')['correctAnswer'] as Map)['value'], '10');
