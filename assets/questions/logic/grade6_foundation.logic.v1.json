@@ -1310,38 +1310,50 @@
       "id": "logic_grade6_foundation_017",
       "reviewStatus": "ok",
       "topic": "logic",
-      "subtopic": "ordering",
+      "subtopic": "row_column_flip_parity",
       "difficulty": "foundation",
       "levelStage": "grade6",
       "challengeTier": "foundation",
       "prompt": {
-        "zh-Hant": "E 在最左邊，A 在 B 左邊，B 在 C 左邊，C 在 D 左邊，F 在最右邊。誰排第四個？",
-        "zh-Hans": "E 在最左边，A 在 B 左边，B 在 C 左边，C 在 D 左边，F 在最右边。谁排第四个？",
-        "en": "E is farthest left, A is left of B, B is left of C, C is left of D, and F is farthest right. Who is fourth?",
-        "ja": "E がいちばん左、A は B の左、B は C の左、C は D の左にいて、F がいちばん右にいます。4 番目はだれですか。"
+        "zh-Hant": "一個 5 × 5 的方格棋盤上，每一格都放一枚硬幣，一開始全部正面朝上。每次操作可以選定某一整行或某一整列，把那一行（或那一列）的 5 枚硬幣全部翻面。經過若干次操作後，有沒有可能剛好只有 1 枚硬幣是反面朝上？可能請填 1，不可能請填 0。",
+        "zh-Hans": "一个 5 × 5 的方格棋盘上，每一格都放一枚硬币，一开始全部正面朝上。每次操作可以选定某一整行或某一整列，把那一行（或那一列）的 5 枚硬币全部翻面。经过若干次操作后，有没有可能刚好只有 1 枚硬币是反面朝上？可能请填 1，不可能请填 0。",
+        "en": "A coin sits on every square of a 5 × 5 board, all showing heads at first. Each move picks a whole row or a whole column and turns over all 5 coins in it. After some moves, is it possible for exactly 1 coin to show tails? Enter 1 for possible and 0 for impossible.",
+        "ja": "5 × 5 のますめのすべてのますに硬貨を 1 枚ずつ置き、はじめはすべて表です。1 回の操作では、ある行またはある列を選び、その 5 枚をすべて裏返します。何回か操作したあと、ちょうど 1 枚だけが裏になることはありえますか。ありえるなら 1、ありえないなら 0 と答えなさい。"
       },
       "answer": {
-        "zh-Hant": "答案是C。",
-        "zh-Hans": "答案是C。",
-        "en": "The answer is C.",
-        "ja": "答えは C です。"
+        "zh-Hant": "答案是不可能，填 0。",
+        "zh-Hans": "答案是不可能，填 0。",
+        "en": "The answer is that it is impossible, entered as 0.",
+        "ja": "答えは、ありえないので 0 です。"
       },
       "solutionSteps": {
         "zh-Hant": [
-          "順序是 E、A、B、C、D、F。",
-          "第四個是 C。"
+          "同一行翻兩次就等於沒翻，所以每一行、每一列只要記錄「翻了奇數次還是偶數次」就夠了。",
+          "設有 a 行被翻了奇數次、b 列被翻了奇數次（a 和 b 都在 0 到 5 之間）。",
+          "某一格會變成反面，條件是「它所在的行和列之中，恰好有一個被翻了奇數次」。",
+          "所以反面的個數是 a ×（5 − b）+（5 − a）× b = 5a + 5b − 2ab。",
+          "把 a、b 從 0 到 5 全部代進去，可能的個數只有 0、5、8、10、11、12、13、14、15、17、20、25，其中沒有 1，所以不可能，填 0。"
         ],
         "zh-Hans": [
-          "顺序是 E、A、B、C、D、F。",
-          "第四个是 C。"
+          "同一行翻两次就等于没翻，所以每一行、每一列只要记录「翻了奇数次还是偶数次」就够了。",
+          "设有 a 行被翻了奇数次、b 列被翻了奇数次（a 和 b 都在 0 到 5 之间）。",
+          "某一格会变成反面，条件是「它所在的行和列之中，恰好有一个被翻了奇数次」。",
+          "所以反面的个数是 a ×（5 − b）+（5 − a）× b = 5a + 5b − 2ab。",
+          "把 a、b 从 0 到 5 全部代进去，可能的个数只有 0、5、8、10、11、12、13、14、15、17、20、25，其中没有 1，所以不可能，填 0。"
         ],
         "en": [
-          "The order is E, A, B, C, D, F.",
-          "The fourth is C."
+          "Flipping the same row twice undoes itself, so all that matters for each row and column is whether it was flipped an odd or an even number of times.",
+          "Say a rows and b columns were flipped an odd number of times, where a and b are between 0 and 5.",
+          "A square ends up tails exactly when precisely one of its row and its column was flipped an odd number of times.",
+          "So the number of tails is a × (5 − b) + (5 − a) × b = 5a + 5b − 2ab.",
+          "Substituting every a and b from 0 to 5 gives only the values 0, 5, 8, 10, 11, 12, 13, 14, 15, 17, 20 and 25. The value 1 never appears, so it is impossible and the answer is 0."
         ],
         "ja": [
-          "順番は E、A、B、C、D、F です。",
-          "4 番目は C です。"
+          "同じ行を 2 回裏返すと元にもどるので、各行・各列については「奇数回裏返したか偶数回か」だけを見れば十分です。",
+          "奇数回裏返した行を a 行、列を b 列とします（a も b も 0 から 5）。",
+          "あるますが裏になるのは、その行と列のうち ちょうど一方だけが奇数回裏返されたときです。",
+          "したがって裏の枚数は a ×（5 − b）+（5 − a）× b = 5a + 5b − 2ab です。",
+          "a、b に 0 から 5 をすべて入れると、とりうる枚数は 0、5、8、10、11、12、13、14、15、17、20、25 だけで 1 は現れません。よってありえないので 0 です。"
         ]
       },
       "figure": {
@@ -1349,42 +1361,20 @@
         "kind": "none",
         "params": {}
       },
-      "answerMode": "multiple_choice",
+      "answerMode": "integer_input",
       "source": {
         "type": "rewritten_olympiad_style",
         "name": "MathSpring Editorial",
         "reference": "logic-grade6-foundation",
-        "notes": "Competition-style authored content aligned to olympiad foundation progression."
-      },
-      "options": {
-        "A": {
-          "zh-Hant": "B",
-          "zh-Hans": "B",
-          "en": "B",
-          "ja": "B"
-        },
-        "B": {
-          "zh-Hant": "C",
-          "zh-Hans": "C",
-          "en": "C",
-          "ja": "C"
-        },
-        "C": {
-          "zh-Hant": "D",
-          "zh-Hans": "D",
-          "en": "D",
-          "ja": "D"
-        },
-        "D": {
-          "zh-Hant": "F",
-          "zh-Hans": "F",
-          "en": "F",
-          "ja": "F"
-        }
+        "notes": "Replaced 2026-08-28: the previous left-of ordering puzzle repeated the template of logic_grade4_foundation_022 with the same answer B."
       },
       "correctAnswer": {
-        "type": "choice",
-        "value": "B"
+        "type": "integer",
+        "value": "0"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
       }
     },
     {
@@ -1539,38 +1529,46 @@
       "id": "logic_grade6_foundation_020",
       "reviewStatus": "ok",
       "topic": "logic",
-      "subtopic": "ordering",
+      "subtopic": "cyclic_dominance",
       "difficulty": "foundation",
       "levelStage": "grade6",
       "challengeTier": "foundation",
       "prompt": {
-        "zh-Hant": "K 在 L 左邊，L 在 M 左邊，M 在 N 左邊，P 在最前面，Q 在最右邊。誰排第五個？",
-        "zh-Hans": "K 在 L 左边，L 在 M 左边，M 在 N 左边，P 在最前面，Q 在最右边。谁排第五个？",
-        "en": "K is left of L, L is left of M, M is left of N, P is first, and Q is farthest right. Who is fifth?",
-        "ja": "K は L の左、L は M の左、M は N の左にいて、P がいちばん前、Q がいちばん右にいます。5 番目はだれですか。"
+        "zh-Hant": "甲、乙、丙三人玩剪刀石頭布，三人出的手勢剛好互不相同。已知甲贏了乙，乙贏了丙。那麼贏了甲的是誰？甲請填 1、乙請填 2、丙請填 3。",
+        "zh-Hans": "甲、乙、丙三人玩剪刀石头布，三人出的手势刚好互不相同。已知甲赢了乙，乙赢了丙。那么赢了甲的是谁？甲请填 1、乙请填 2、丙请填 3。",
+        "en": "Three people play rock-paper-scissors and happen to show three different signs. The first beats the second, and the second beats the third. Who beats the first? Enter 1 for the first person, 2 for the second and 3 for the third.",
+        "ja": "3 人がじゃんけんをして、3 人の手はすべてちがっていました。1 人目は 2 人目に勝ち、2 人目は 3 人目に勝ちました。1 人目に勝ったのはだれですか。1 人目なら 1、2 人目なら 2、3 人目なら 3 と答えなさい。"
       },
       "answer": {
-        "zh-Hant": "答案是N。",
-        "zh-Hans": "答案是N。",
-        "en": "The answer is N.",
-        "ja": "答えは N です。"
+        "zh-Hant": "答案是丙，填 3。",
+        "zh-Hans": "答案是丙，填 3。",
+        "en": "The answer is the third person, entered as 3.",
+        "ja": "答えは 3 人目で、3 です。"
       },
       "solutionSteps": {
         "zh-Hant": [
-          "順序是 P、K、L、M、N、Q。",
-          "第五個是 N。"
+          "剪刀石頭布的三種手勢構成一個循環：石頭贏剪刀、剪刀贏布、布贏石頭，沒有哪一種是無敵的。",
+          "三人手勢互不相同，表示三種手勢剛好各出現一次。",
+          "甲贏乙、乙贏丙，所以甲、乙、丙依序是這個循環上的三個位置。",
+          "循環必須繞回起點，因此剩下的那一場一定是丙贏甲（例如甲出石頭、乙出剪刀、丙出布）。丙記為 3，所以答案是 3。"
         ],
         "zh-Hans": [
-          "顺序是 P、K、L、M、N、Q。",
-          "第五个是 N。"
+          "剪刀石头布的三种手势构成一个循环：石头赢剪刀、剪刀赢布、布赢石头，没有哪一种是无敌的。",
+          "三人手势互不相同，表示三种手势刚好各出现一次。",
+          "甲赢乙、乙赢丙，所以甲、乙、丙依序是这个循环上的三个位置。",
+          "循环必须绕回起点，因此剩下的那一场一定是丙赢甲（例如甲出石头、乙出剪刀、丙出布）。丙记为 3，所以答案是 3。"
         ],
         "en": [
-          "The order is P, K, L, M, N, Q.",
-          "The fifth is N."
+          "The three signs form a cycle: rock beats scissors, scissors beats paper and paper beats rock, so none of them is unbeatable.",
+          "The three players show three different signs, so each sign appears exactly once.",
+          "The first beats the second and the second beats the third, so the three players sit at three consecutive places on that cycle.",
+          "A cycle must close back on itself, so the remaining match must be the third person beating the first, for example rock, scissors and paper in that order. The third person is entered as 3, so the answer is 3."
         ],
         "ja": [
-          "順番は P、K、L、M、N、Q です。",
-          "5 番目は N です。"
+          "じゃんけんの 3 つの手は循環しています。グーはチョキに、チョキはパーに、パーはグーに勝ち、無敵の手はありません。",
+          "3 人の手はすべてちがうので、3 つの手がちょうど 1 回ずつ出ています。",
+          "1 人目が 2 人目に、2 人目が 3 人目に勝つので、3 人はこの循環上の連続した 3 か所にあたります。",
+          "循環はもとにもどるので、残りの勝負は必ず 3 人目が 1 人目に勝ちます。たとえばグー、チョキ、パーの順です。3 人目は 3 と答えるので、答えは 3 です。"
         ]
       },
       "figure": {
@@ -1578,42 +1576,20 @@
         "kind": "none",
         "params": {}
       },
-      "answerMode": "multiple_choice",
+      "answerMode": "integer_input",
       "source": {
         "type": "rewritten_olympiad_style",
         "name": "MathSpring Editorial",
         "reference": "logic-grade6-foundation",
-        "notes": "Competition-style authored content aligned to olympiad foundation progression."
-      },
-      "options": {
-        "A": {
-          "zh-Hant": "L",
-          "zh-Hans": "L",
-          "en": "L",
-          "ja": "L"
-        },
-        "B": {
-          "zh-Hant": "M",
-          "zh-Hans": "M",
-          "en": "M",
-          "ja": "M"
-        },
-        "C": {
-          "zh-Hant": "N",
-          "zh-Hans": "N",
-          "en": "N",
-          "ja": "N"
-        },
-        "D": {
-          "zh-Hant": "Q",
-          "zh-Hans": "Q",
-          "en": "Q",
-          "ja": "Q"
-        }
+        "notes": "Replaced 2026-08-28: the previous left-of ordering puzzle was 0.89 similar to logic_grade5_foundation_022 and shared its answer."
       },
       "correctAnswer": {
-        "type": "choice",
-        "value": "C"
+        "type": "integer",
+        "value": "3"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
       }
     },
     {
@@ -1880,38 +1856,46 @@
       "id": "logic_grade6_foundation_025",
       "reviewStatus": "ok",
       "topic": "logic",
-      "subtopic": "ordering",
+      "subtopic": "digit_sum_invariant",
       "difficulty": "foundation",
       "levelStage": "grade6",
       "challengeTier": "foundation",
       "prompt": {
-        "zh-Hant": "R 在 S 左邊，S 在 T 左邊，T 在 U 左邊，V 在最前面，W 在最右邊。誰排第四個？",
-        "zh-Hans": "R 在 S 左边，S 在 T 左边，T 在 U 左边，V 在最前面，W 在最右边。谁排第四个？",
-        "en": "R is left of S, S is left of T, T is left of U, V is first, and W is farthest right. Who is fourth?",
-        "ja": "R は S の左、S は T の左、T は U の左にいて、V がいちばん前、W がいちばん右にいます。4 番目はだれですか。"
+        "zh-Hant": "小安抄朋友的電話號碼時抄錯了：他把某個 7 位數號碼中相鄰的兩個數字對調了位置，其他數字都沒抄錯。已知正確號碼的各位數字和是 30。小安抄下來的號碼，各位數字和是多少？",
+        "zh-Hans": "小安抄朋友的电话号码时抄错了：他把某个 7 位数号码中相邻的两个数字对调了位置，其他数字都没抄错。已知正确号码的各位数字和是 30。小安抄下来的号码，各位数字和是多少？",
+        "en": "An copies a friend's phone number wrongly: he swaps two neighbouring digits of the 7-digit number and copies everything else correctly. The digits of the correct number add up to 30. What do the digits of An's copy add up to?",
+        "ja": "アンは友だちの電話番号を書き写すとき、7 けたの番号のうち となり合う 2 つの数字を入れかえてしまい、ほかは正しく写しました。正しい番号の各位の数字の和は 30 です。アンが写した番号の各位の数字の和はいくつですか。"
       },
       "answer": {
-        "zh-Hant": "答案是T。",
-        "zh-Hans": "答案是T。",
-        "en": "The answer is T.",
-        "ja": "答えは T です。"
+        "zh-Hant": "答案是 30。",
+        "zh-Hans": "答案是 30。",
+        "en": "The answer is 30.",
+        "ja": "答えは 30 です。"
       },
       "solutionSteps": {
         "zh-Hant": [
-          "順序是 V、R、S、T、U、W。",
-          "第四個是 T。"
+          "各位數字和只看「用到哪些數字、各用幾次」，和數字排在哪一位完全無關。",
+          "對調兩個數字的位置，並沒有換掉任何一個數字，只是換了它們的位置。",
+          "因此所有數字組成的集合完全沒變，數字和也不會變。",
+          "所以小安抄下來的號碼，各位數字和仍然是 30。"
         ],
         "zh-Hans": [
-          "顺序是 V、R、S、T、U、W。",
-          "第四个是 T。"
+          "各位数字和只看「用到哪些数字、各用几次」，和数字排在哪一位完全无关。",
+          "对调两个数字的位置，并没有换掉任何一个数字，只是换了它们的位置。",
+          "因此所有数字组成的集合完全没变，数字和也不会变。",
+          "所以小安抄下来的号码，各位数字和仍然是 30。"
         ],
         "en": [
-          "The order is V, R, S, T, U, W.",
-          "The fourth is T."
+          "A digit sum depends only on which digits appear and how often, never on the positions they sit in.",
+          "Swapping two digits does not replace any digit; it only moves them.",
+          "So the collection of digits is completely unchanged, and so is their total.",
+          "The digits of An's copy therefore still add up to 30."
         ],
         "ja": [
-          "順番は V、R、S、T、U、W です。",
-          "4 番目は T です。"
+          "各位の数字の和は「どの数字が何回使われているか」だけで決まり、どの位にあるかには関係しません。",
+          "2 つの数字を入れかえても、数字そのものは何も変わらず、位置が入れかわるだけです。",
+          "したがって数字の集まりはまったく変わらず、和も変わりません。",
+          "よってアンが写した番号の各位の和も 30 のままです。"
         ]
       },
       "figure": {
@@ -1919,42 +1903,20 @@
         "kind": "none",
         "params": {}
       },
-      "answerMode": "multiple_choice",
+      "answerMode": "integer_input",
       "source": {
         "type": "rewritten_olympiad_style",
         "name": "MathSpring Editorial",
         "reference": "logic-grade6-foundation",
-        "notes": "Competition-style authored content aligned to olympiad foundation progression."
-      },
-      "options": {
-        "A": {
-          "zh-Hant": "S",
-          "zh-Hans": "S",
-          "en": "S",
-          "ja": "S"
-        },
-        "B": {
-          "zh-Hant": "T",
-          "zh-Hans": "T",
-          "en": "T",
-          "ja": "T"
-        },
-        "C": {
-          "zh-Hant": "U",
-          "zh-Hans": "U",
-          "en": "U",
-          "ja": "U"
-        },
-        "D": {
-          "zh-Hant": "W",
-          "zh-Hans": "W",
-          "en": "W",
-          "ja": "W"
-        }
+        "notes": "Replaced 2026-08-28: the previous left-of ordering puzzle repeated the template of logic_grade5_foundation_017 with the same answer."
       },
       "correctAnswer": {
-        "type": "choice",
-        "value": "B"
+        "type": "integer",
+        "value": "30"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
       }
     },
     {
@@ -3781,46 +3743,46 @@
       "id": "logic_grade6_foundation_048",
       "reviewStatus": "ok",
       "topic": "logic",
-      "subtopic": "matching_deduction",
+      "subtopic": "digital_root",
       "difficulty": "foundation",
       "levelStage": "grade6",
       "challengeTier": "foundation",
       "prompt": {
-        "zh-Hant": "王、趙、李三位老師各帶著小華、小明、小剛其中一位學生參加數學競賽。每位老師都比自己帶的學生大 21 歲。已知李老師與小華的年齡和是 44 歲，王老師與小華的年齡和是 42 歲，而且王老師比小明大 19 歲。下列哪一個敘述一定正確？",
-        "zh-Hans": "王、赵、李三位老师各带着小华、小明、小刚其中一位学生参加数学竞赛。每位老师都比自己带的学生大 21 岁。已知李老师与小华的年龄和是 44 岁，王老师与小华的年龄和是 42 岁，而且王老师比小明大 19 岁。下列哪一个叙述一定正确？",
-        "en": "Teachers Wang, Zhao, and Li each bring one student among Hua, Ming, and Gang to a math contest. Each teacher is 21 years older than the student they bring. Li and Hua have a total age of 44, Wang and Hua have a total age of 42, and Wang is 19 years older than Ming. Which statement must be true?",
-        "ja": "王先生・趙先生・李先生の 3 人の先生が、それぞれ小華・小明・小剛のうち 1 人ずつを連れて数学大会に参加します。各先生は自分の担当生徒より 21 歳年上です。李先生と小華の年齢の和は 44、王先生と小華の年齢の和は 42、さらに王先生は小明より 19 歳年上です。必ず正しいものはどれですか。"
+        "zh-Hant": "取一個正整數，把它的各位數字相加得到一個新的數；如果新的數還不是一位數，就再對它重複同樣的動作，直到只剩一位數為止。從 2026 開始這樣做，最後剩下的那個一位數是多少？",
+        "zh-Hans": "取一个正整数，把它的各位数字相加得到一个新的数；如果新的数还不是一位数，就再对它重复同样的动作，直到只剩一位数为止。从 2026 开始这样做，最后剩下的那个一位数是多少？",
+        "en": "Take a positive whole number and add up its digits to get a new number; if the new number still has more than one digit, repeat the process until a single digit is left. Starting from 2026, what single digit is left at the end?",
+        "ja": "ある正の整数の各位の数字を足して新しい数を作り、それがまだ 1 けたでなければ同じことをくり返して、1 けたになるまで続けます。2026 から始めると、最後に残る 1 けたの数字はいくつですか。"
       },
       "answer": {
-        "zh-Hant": "答案是小華是趙老師帶的。",
-        "zh-Hans": "答案是小华是赵老师带的。",
-        "en": "The answer is that Hua is brought by Teacher Zhao.",
-        "ja": "答えは「小華は趙先生が連れている」です。"
+        "zh-Hant": "答案是 1。",
+        "zh-Hans": "答案是 1。",
+        "en": "The answer is 1.",
+        "ja": "答えは 1 です。"
       },
       "solutionSteps": {
         "zh-Hant": [
-          "若老師和自己帶的學生相差 21 歲，則兩人年齡和必為奇數。",
-          "李老師與小華年齡和是 44，王老師與小華年齡和是 42，都是偶數，所以小華不可能是李老師或王老師帶的。",
-          "因此小華一定是趙老師帶的。",
-          "再配合王老師只比小明大 19 歲，可知小明也不是王老師帶的。"
+          "第一次：2 + 0 + 2 + 6 = 10。",
+          "10 還是兩位數，所以再做一次：1 + 0 = 1。",
+          "1 已經是一位數，過程結束，答案是 1。",
+          "（也可以用一個快速的檢查法：這個結果和「原數除以 9 的餘數」一致，2026 = 9 × 225 + 1，餘數正是 1。）"
         ],
         "zh-Hans": [
-          "若老师和自己带的学生相差 21 岁，则两人年龄和必为奇数。",
-          "李老师与小华年龄和是 44，王老师与小华年龄和是 42，都是偶数，所以小华不可能是李老师或王老师带的。",
-          "因此小华一定是赵老师带的。",
-          "再配合王老师只比小明大 19 岁，可知小明也不是王老师带的。"
+          "第一次：2 + 0 + 2 + 6 = 10。",
+          "10 还是两位数，所以再做一次：1 + 0 = 1。",
+          "1 已经是一位数，过程结束，答案是 1。",
+          "（也可以用一个快速的检查法：这个结果和「原数除以 9 的余数」一致，2026 = 9 × 225 + 1，余数正是 1。）"
         ],
         "en": [
-          "A teacher and the student they bring differ by 21 years, so their age sum must be odd.",
-          "Li with Hua sums to 44 and Wang with Hua sums to 42, both even, so Hua cannot be paired with Li or Wang.",
-          "Therefore Hua must be brought by Zhao.",
-          "Also Wang is only 19 years older than Ming, so Ming is not Wang’s student either."
+          "First round: 2 + 0 + 2 + 6 = 10.",
+          "10 still has two digits, so repeat: 1 + 0 = 1.",
+          "1 is a single digit, so the process stops and the answer is 1.",
+          "A quick check: this result always matches the remainder on division by 9, and 2026 = 9 × 225 + 1, giving remainder 1."
         ],
         "ja": [
-          "先生と担当生徒の年齢差は 21 歳なので、2人の年齢の和は必ず奇数です。",
-          "李先生と小華の和 44、王先生と小華の和 42 はどちらも偶数なので、小華はその 2 人の担当ではありません。",
-          "したがって小華を連れているのは趙先生です。",
-          "さらに王先生は小明より 19 歳上なので、小明も王先生の担当ではありません。"
+          "1 回目：2 + 0 + 2 + 6 = 10 です。",
+          "10 はまだ 2 けたなので、もう一度行います。1 + 0 = 1 です。",
+          "1 は 1 けたなのでここで終わり、答えは 1 です。",
+          "確かめ方として、この結果はもとの数を 9 でわったあまりと一致します。2026 = 9 × 225 + 1 であまりは 1 です。"
         ]
       },
       "figure": {
@@ -3828,36 +3790,10 @@
         "kind": "none",
         "params": {}
       },
-      "answerMode": "multiple_choice",
-      "options": {
-        "A": {
-          "zh-Hant": "小華是王老師帶的",
-          "zh-Hans": "小华是王老师带的",
-          "en": "Hua is brought by Teacher Wang",
-          "ja": "小華は王先生が連れてきた"
-        },
-        "B": {
-          "zh-Hant": "小明是趙老師帶的",
-          "zh-Hans": "小明是赵老师带的",
-          "en": "Ming is brought by Teacher Zhao",
-          "ja": "小明は趙先生が連れてきた"
-        },
-        "C": {
-          "zh-Hant": "小剛是李老師帶的",
-          "zh-Hans": "小刚是李老师带的",
-          "en": "Gang is brought by Teacher Li",
-          "ja": "小剛は李先生が連れてきた"
-        },
-        "D": {
-          "zh-Hant": "小華是趙老師帶的",
-          "zh-Hans": "小华是赵老师带的",
-          "en": "Hua is brought by Teacher Zhao",
-          "ja": "小華は趙先生が連れてきた"
-        }
-      },
+      "answerMode": "integer_input",
       "correctAnswer": {
-        "type": "choice",
-        "value": "D"
+        "type": "integer",
+        "value": "1"
       },
       "source": {
         "type": "official_reference",
@@ -3869,7 +3805,11 @@
         "displayText": "第16屆IMC台灣區初賽國小六年級 選擇 24",
         "sourceUrl": "https://imcct.net/UserFiles/files/2020%E5%88%9D%E8%B3%BD6%E5%B9%B4%E7%B4%9A0926%20-.pdf",
         "rightsStatus": "needs_review",
-        "notes": "Imported from the official PDF without figure dependency."
+        "notes": "Replaced 2026-08-28: the previous teacher-and-student matching puzzle was essentially the same question as logic_grade5_foundation_041, with the same answer D."
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
       }
     },
     {

@@ -408,3 +408,29 @@ grade7-12 那批「情境相同、問法不同」的既有裁示保留題（id �
 剩下的兩組是 `logic/rope_burning_time`（0.52）與 `logic/egg_drop_two`（0.47）。
 這兩題的「共用敘述」就是問題本身的定義（繩子燒 60 分鐘但不均勻、
 存在臨界樓層 F），再改寫就會失去題意，因此保留現狀。
+
+## 2026-08-28 同答案值檢查的清理（11 題替換）
+
+新增 `--same-answer` 檢查後，抓到 11 組字面相似度工具漏掉的真重複。
+處理方式是「同 id 換成全新題目」，題數不減。
+
+| 保留 | 替換 | 原本為何重複 |
+| --- | --- | --- |
+| `arithmetic_grade4_024` | `arithmetic_grade5_015` | 五位數答案同為 54312。後者要求「被 6 整除」，但 1+2+3+4+5 = 15 恆為 3 的倍數，條件退化成「被 2 整除」 |
+| `logic_grade5_022` | `logic_grade6_020` | 排序模板，字面相似 0.89 |
+| `logic_grade5_017` | `logic_grade6_025` | 同上 |
+| `geometry_grade1_005` | `geometry_grade1_011` | 正方形／長方形有幾條邊，同 pack，答案同為 4 |
+| `geometry_grade2_017` | `geometry_grade5_016` | 剪角周長不變，答案同為 0 |
+| `geometry_grade8_025` | `geometry_grade5_029` | 等腰三角形 5 和 11，周長同為 27 |
+| `arithmetic_grade3_026` | `mixed_grade5_006` | 123456789101112⋯ 第 15 個數字，答案同為 2 |
+| `geometry_grade4_008` | `geometry_grade4_012` | 同 pack，只差對 y 軸或 x 軸鏡射，答案同為 A |
+| `arithmetic_grade1_022` | `arithmetic_grade2_028` | 天平移石頭使兩邊一樣多，答案同為 2 |
+| `logic_grade5_041` | `logic_grade6_048` | 王趙李老師帶學生、年齡差 21，同一題 |
+| `logic_grade4_022` | `logic_grade6_017` | 排序模板 |
+
+`arithmetic_grade5_062` / `logic_grade6_047` 不動：IMC 2015 台灣區初賽的五年級卷與
+六年級卷各出了同一題，兩題各自忠於自己的 `sourceUrl`。
+
+清理後 `--same-answer 0.55` 剩 5 組，全部是誤判或已裁示保留：
+上述 IMC 官方題、日期記法樣板共用、兩步變換順序不同、四人排隊條件與提問都不同、
+兩個不同形狀恰好周長都是 10。
