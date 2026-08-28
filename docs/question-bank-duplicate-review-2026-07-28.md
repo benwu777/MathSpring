@@ -283,3 +283,22 @@ flutter test test/question_bank_duplicate_audit_test.dart test/question_bank_tes
 
 6. When a candidate is reviewed, mark it explicitly as:
    `acceptable_variant` / `corrected` / `merged-away`
+
+## 2026-08-28 續審：題幹逐字相同的三組
+
+用重疊係數（交集 / 較短的一邊）重掃全庫，抓出三組題幹**逐字完全相同**的題。
+這三組都標著 `reviewStatus: ok`——grade1-6 的逐題稽核核對的是答案、選項、
+四語系解法與圖形，從未把題目兩兩相比（六份稽核文件裡「重複／去重」出現 0 次）。
+
+| 組 | 處理 | 說明 |
+| --- | --- | --- |
+| `geometry_grade1_002` ≡ `geometry_grade1_015` | 改寫 015 | 同一個 pack 內逐字相同。grade1-2 的「剪掉一個角」家族已有 7 題，015 改成辨識「哪一種剪法會得到三角形＋四邊形」，要逐一檢查四種剪法。 |
+| `geometry_grade4_022` ≡ `geometry_grade6_018` | 兩題都改寫 | 另有 `geometry_grade3_019` 是同模板換數字。缺口模板保留 grade3_019 一題代表；022 改成「中間挖洞，周長要加上洞的一圈」，018 改成地毯避柱的實際情境並改問裁完後的周長。 |
+| `arithmetic_grade5_062` ≡ `logic_grade6_047` | **不動** | 這不是重複匯入：兩題分屬 IMC 2015 台灣區初賽的國小五年級卷與六年級卷，都是各自考卷的「選擇 21」，官方原本就在兩個年級出了同一題。兩題各自忠於自己的 `sourceUrl`，改寫任一題都會讓 `source` 對不上出處。 |
+
+### 方針（2026-08-28 使用者裁示）
+
+近似題**優先改寫應用情境與數字**，不要動輒刪題——刪題會一直卡住，而且可能刪到
+測試引用的題（`arithmetic_grade5_062` 就被 `question_bank_test.dart` 引用）。
+刪題前務必先 `grep` 測試檔：目前有 196 個題目 id 被測試引用。
+
