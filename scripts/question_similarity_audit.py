@@ -35,6 +35,24 @@ def jaccard(a, b):
         return 0.0
     return len(a & b) / len(a | b)
 
+def overlap(a, b):
+    """重疊係數：交集 / 較短的那一邊。
+
+    Jaccard 對「同一題但一邊寫得比較囉嗦」很脆弱——聯集被長的那一邊撐大，
+    分數會被稀釋。實例：arithmetic_grade4_foundation_073 與
+    arithmetic_grade6_foundation_009 是同一題換數字，Jaccard 只有 0.27
+    （低於 0.40 門檻而漏放），重疊係數是 0.62。
+    兩個指標取大的那個當判準。
+    """
+    # 太短的題幹（如「兩個正方形一共有幾條邊？」）分母很小，重疊係數會虛高，
+    # 這種長度下 Jaccard 本來就夠靈敏，不必再用重疊係數。
+    if not a or not b or min(len(a), len(b)) < 25:
+        return 0.0
+    return len(a & b) / min(len(a), len(b))
+
+def similarity(a, b):
+    return max(jaccard(a, b), overlap(a, b))
+
 def audit_candidates(path, threshold):
     cands = json.load(open(path))
     bank = []
@@ -45,7 +63,7 @@ def audit_candidates(path, threshold):
     prepared = [(c['id'], c['prompt'], grams(c['prompt'])) for c in cands]
     hits = 0
     for cid, cp, cg in prepared:
-        worst = max(((jaccard(cg, bg), bid, bl, bs, bp) for bid, bl, bs, bp, bg in bank),
+        worst = max(((similarity(cg, bg), bid, bl, bs, bp) for bid, bl, bs, bp, bg in bank),
                     default=(0, '', '', '', ''))
         if worst[0] >= threshold:
             hits += 1
@@ -54,7 +72,7 @@ def audit_candidates(path, threshold):
             print('      撞既有 %s [%s/%s]' % (worst[1], worst[2], worst[3]))
             print('      %s\n' % worst[4][:88])
     for (ia, pa, ga), (ib, pb, gb) in itertools.combinations(prepared, 2):
-        s = jaccard(ga, gb)
+        s = similarity(ga, gb)
         if s >= threshold:
             hits += 1
             print('%.2f  候選 %s ↔ 候選 %s（同批互撞）' % (s, ia, ib))
@@ -82,7 +100,7 @@ def main():
     for (ia, la, ta, sa, pa, ga), (ib, lb, tb, sb, pb, gb) in itertools.combinations(qs, 2):
         if focus and ia not in focus and ib not in focus:
             continue
-        s = jaccard(ga, gb)
+        s = similarity(ga, gb)
         if s >= threshold:
             hits.append((s, ia, la, sa, pa, ib, lb, sb, pb))
 

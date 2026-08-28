@@ -1,0 +1,64 @@
+# MathSpring App Store 送審與發布清單
+
+最後更新：2026-08-26。
+
+## 現階段原則
+
+尚未加入 Apple Developer Program 不會阻塞產品開發。等到真機 QA、商店素材與隱私頁完成後，再申請帳號並執行簽署、TestFlight、送審。
+
+## 開發完成前
+
+- [ ] 修正 iOS 與 macOS 的正式 Bundle ID：目前皆為 `com.example.mathspring`。
+- [ ] 將 app 顯示名稱、macOS copyright 與品牌文字改為正式資料。
+- [ ] 在 app 內提供易於找到的「隱私政策」與「支援」頁面或外部連結。
+- [ ] 建立公開、免登入可開啟的支援網址與隱私政策網址；可使用 GitHub Pages、Cloudflare Pages、Netlify、Vercel、Notion 或 Google Sites，不需要自建 server。
+- [ ] 完成 iPhone、iPad 與 macOS 的真機 QA：首次開啟、題庫載入、四語系、答題、作答紀錄、離線狀態、旋轉與字級。
+- [ ] 針對所有使用者看得到的題目做最後內容抽查；確認題目、圖形、答案、選項與解法一致。
+- [ ] 清除 placeholder、測試用內容與無法使用的入口。
+- [ ] 處理 `flutter analyze` 的 warning／info，至少優先處理 async 後使用 `BuildContext`、未使用元件與 private type 暴露。
+
+## 建立 Apple 發布身分後
+
+- [ ] 加入 Apple Developer Program。
+- [ ] 在 Apple Developer portal 註冊正式 App ID。
+- [ ] 在 Xcode 設定 Team、Signing Certificate、Provisioning Profile 與正式 Bundle ID。
+- [ ] 在 App Store Connect 建立 app record：名稱、SKU、Bundle ID、主要語言、分類、年齡分級與內容權利。
+- [ ] 設定版本與 build number；目前專案版本為 `1.0.0+1`，每次上傳都必須提高 build number。
+
+## 隱私與法務
+
+- [ ] 在 App Store Connect 提供 Privacy Policy URL；Apple 對 iOS/macOS app 要求此 URL。
+- [ ] 填寫 App Privacy。若正式版本僅使用本機 SQLite、沒有帳號、分析、廣告或資料上傳，可在確認所有 SDK 行為後選擇「不收集資料」。
+- [ ] 隱私政策需說明：收集哪些資料（若無也要明示）、用途、保存／刪除政策、聯絡方式，以及使用者如何撤回同意或要求刪除資料。
+- [ ] 若未來加入登入、雲端同步、分析、廣告、付款、家長帳號或第三方 SDK，先更新隱私政策與 App Privacy，再發布。
+- [ ] 若選擇 Kids Category，確認家長門檻、外連、購買與第三方分析／廣告均符合 Kids Category 的額外規則。
+
+## 商店素材
+
+- [ ] 準備 1024×1024 正式 App Icon，確認沒有透明背景與未授權素材。
+- [ ] 撰寫名稱（30 字元內）、subtitle（30 字元內）、描述、關鍵字、支援 URL、隱私政策 URL、版權與 What’s New。
+- [ ] 準備實機截圖：每個平台至少 1 張、最多 10 張，內容須展示實際使用流程而不是單純 title／splash screen。
+- [ ] 依主要市場準備繁中與英文 metadata；若上架日文／簡中市場，再補對應在地化素材。
+
+## 測試與送審
+
+- [ ] 用 Xcode Archive 或 `flutter build ipa` 建立 Release build。
+- [ ] 上傳至 App Store Connect，等待 build 處理完成。
+- [ ] 先經 TestFlight 內部測試；再視需要邀請外部測試者。
+- [ ] 在 Review Notes 說明：app 使用離線內建題庫、是否無需帳號、是否無付款，以及任何非直覺流程。
+- [ ] 若 app 有帳號、付費或後端，提供可用 demo 帳號／測試資料並確保服務在審核期間可用。
+- [ ] 提交 App Review，通過後選擇手動或自動發布。
+
+## 目前優先順序
+
+1. 產品與真機品質：完成真機 QA、修正分析問題、整理使用者流程與內容品質。
+2. 對外頁面：支援頁與隱私政策頁。
+3. 商店準備：icon 視覺 QA、截圖、名稱／描述與分類。
+4. 帳號與發布：加入 Developer Program、簽署、TestFlight、送審。
+
+## 參考資料
+
+- [Apple App Review Guidelines](https://developer.apple.com/app-store/review/guidelines/)
+- [Manage app privacy](https://developer.apple.com/help/app-store-connect/manage-app-information/manage-app-privacy/)
+- [Required app information](https://developer.apple.com/help/app-store-connect/reference/app-information/required-localizable-and-editable-properties)
+- [Screenshot specifications](https://developer.apple.com/help/app-store-connect/reference/app-information/screenshot-specifications/)
