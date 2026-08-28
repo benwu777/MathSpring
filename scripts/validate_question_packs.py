@@ -5,7 +5,8 @@
   python3 scripts/validate_question_packs.py            # 檢查全部
   python3 scripts/validate_question_packs.py grade1     # 只檢查某個 levelStage
 """
-import json, glob, math, re, sys
+import json
+import glob, math, re, sys
 from collections import defaultdict
 
 LANGS = ['zh-Hant', 'zh-Hans', 'en', 'ja']
@@ -110,6 +111,28 @@ def main():
                 err('difficulty/challengeTier 必須皆為 foundation')
             if q.get('answerMode') not in ('multiple_choice', 'integer_input'):
                 err('answerMode 非法: %s' % q.get('answerMode'))
+            # options 與 solutionSteps 也要驗語系。先前只驗 prompt / answer，
+            # 導致 26 題的選項在 en / ja 欄位裡原封不動放著中文而沒被抓到。
+            def _cjk(s):
+                return any('\u4e00' <= c <= '\u9fff' or '\u3040' <= c <= '\u30ff' for c in s)
+
+            def _prose_en(s):
+                return re.search(r'\b[a-z]{3,}\b', s) is not None
+
+            for okey, oval in (q.get('options') or {}).items():
+                if not all(l in oval and oval[l].strip() for l in LANGS):
+                    err('選項 %s 四語系不齊全' % okey)
+                    continue
+                if _cjk(oval['en']):
+                    err('選項 %s 的 en 含中日文字（未翻譯）' % okey)
+                if _prose_en(oval['ja']) and not _cjk(oval['ja']):
+                    err('選項 %s 的 ja 是英文（未翻譯）' % okey)
+                if _prose_en(oval['zh-Hant']) and not _cjk(oval['zh-Hant']):
+                    err('選項 %s 的 zh-Hant 是英文（未翻譯）' % okey)
+            for step in q.get('solutionSteps', {}).get('en', []):
+                if _cjk(step):
+                    err('solutionSteps 的 en 含中日文字（未翻譯）')
+                    break
             # 圖不得洩題：問「在起點的哪個方向」卻在圖上標出終點，等於把答案畫出來
             fig = q.get('figure') or {}
             if fig.get('kind') == 'coordinate_plane':
