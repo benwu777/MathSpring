@@ -302,7 +302,7 @@ flutter test test/question_bank_duplicate_audit_test.dart test/question_bank_tes
 測試引用的題（`arithmetic_grade5_062` 就被 `question_bank_test.dart` 引用）。
 刪題前務必先 `grep` 測試檔：目前有 196 個題目 id 被測試引用。
 
-## 2026-08-28 去重改寫（共 44 題）
+## 2026-08-28 去重改寫（共 54 題）
 
 方針：**改寫應用情境，不刪題**。答案與推理核心一律不動，只把跨年級共用的抽象句型
 換成各自的情境；只有兩題連數字都撞到，才一併換數字。
@@ -340,3 +340,33 @@ flutter test test/question_bank_duplicate_audit_test.dart test/question_bank_tes
 - `logic_grade6_018` 原本是**多解題**：條件「大於 4、小於 10、不是 9 和 8 和 6」同時允許 5 和 7，答案卻標 5。補一個排除條件後解唯一。寫詳解、把消去過程逐步寫出來時才發現。
 - `geometry_grade3_007`、`geometry_grade3_012` 的 `coordinate_plane` 圖**把答案畫出來了**：題目問「現在在起點的哪個方向」，圖卻畫出完整路徑並標上「終點」。兩題改為 `kind: none`，並在 `scripts/validate_question_packs.py` 補上這條檢查。
 - `logic_grade4_015` 改寫時我把英文答案寫成 April，但答案值是 4，英文使用者無從得知要填數字；改為以月份數字敘述。
+
+### 第四批：0.45–0.65 區間（10 題）
+
+這一區間有不少是工具按 topic + subtopic 分組造成的鬆散配對，兩題其實推理不同，
+只是共用開頭句型。依使用者指示一併改寫，推理與答案完全不動：
+
+| 題 | 改成 |
+| --- | --- |
+| `geometry_grade3_007` | 方格移動 → 棋盤上的棋子 |
+| `geometry_grade2_046` | 正方形卡片旋轉 → 牆上的正方形相框 |
+| `logic_grade5_035` | 抽象數列遞迴 → 電子遊戲關卡分數 |
+| `geometry_grade1_029` | 正方形加兩三角形 → 美勞課色紙拼貼 |
+| `arithmetic_grade4_015` | 任選兩數和為偶數 → 抽獎箱號碼球 |
+| `geometry_grade6_026` | 長寬倍率求面積 → 海報重新印製 |
+| `geometry_grade5_046` | 方格街道最短路線 → 公園步道，往東往北 |
+| `arithmetic_grade2_049` | 三色積木抽屜原理 → 三種口味水果糖 |
+| `logic_grade6_028` | 三數兩兩相加 → 園遊會三個攤位得分 |
+| `logic_grade2_024` | 兩人各一句話 → 兄妹猜箱中球數 |
+
+### 最終狀態
+
+| 區間 | session 起點 | 完成後 |
+| --- | --- | --- |
+| ≥ 0.80 | 16 組 | 5 組 |
+| 0.65–0.80 | 15 組 | 8 組 |
+| 0.45–0.65 | 13 組 | 4 組 |
+| < 0.45 | 90 組 | 104 組 |
+
+**grade1-6 已無待議群組（從 27 組降到 0 組）。** 仍在 0.45 以上的 17 組全部是
+grade7-12 那批「情境相同、問法不同」的既有裁示保留題（id 以 `_031` / `_032` 結尾）。
