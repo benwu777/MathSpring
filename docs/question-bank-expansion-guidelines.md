@@ -680,3 +680,39 @@ pack 與測試：
 - 後續模型接手內容開發
 
 若未來 schema 有變更，請同步更新本文件。
+
+## 去重要跑兩道閘門，不是一道（2026-08-29 新增）
+
+grade12 這一輪，兩題重複是 `tool/question_bank_duplicate_audit.dart` 抓到的，
+字面相似度閘門完全放行：
+
+| 新題 | 撞到 | 字面相似度 | dart 稽核 |
+| --- | --- | --- | --- |
+| `geometry_grade12_033` 正六邊形邊長 4 求最長對角線 | `geometry_grade10_022` 邊長 6 求最長對角線 | < 0.42（放行） | 抓到 |
+| `combinatorics_grade12_040` 四種水果買 6 個 | `combinatorics_grade9_035` 四種口味買 3 杯 | < 0.42（放行） | 抓到 |
+
+兩者抓的東西不同，缺一不可：
+
+- `scripts/question_similarity_audit.py`：比**字面**（3-gram Jaccard 與重疊係數）。
+  換了故事和用詞就會漏，但能跨子分類抓到「不同名字、同一題」。
+- `tool/question_bank_duplicate_audit.dart`：比**同 topic + 同 subtopic + 結構標籤**。
+  對「只換數字」極敏感，但前提是子分類名要照概念老實取——取一個新名字就繞過去了。
+
+所以子分類命名要誠實，不要為了避開稽核而發明新名稱，那等於自己關掉安全網。
+
+### 寫入用的最終文字必須再過一次閘門
+
+同一輪還有三題是這樣漏掉的：候選階段的措辭通過 0.42 門檻，我在寫進 JSON 時
+把題幹改得更順、也更接近既有題，分數從 0.4 以下升到 0.5–0.7。實例：
+`geometry_grade12_033` 候選寫「拋物線 y² = 4x 的焦點到它的準線的距離是多少？」
+（放行），寫入時改成「拋物線的方程式是 y² = 4x。它的焦點到準線的距離是多少？」，
+與 `geometry_grade11_019`「拋物線的方程式是 y² = 12x。求它的焦點到準線的距離。」
+相似度 0.72。
+
+**閘門過的是候選文字，不是成品文字。** 寫入後一定要用該年級的 id 清單重掃一次：
+
+```
+python3 scripts/question_similarity_audit.py 0.42 <該年級 id 清單>
+python3 scripts/question_similarity_audit.py --same-answer 0.5
+dart run tool/question_bank_duplicate_audit.dart
+```
