@@ -302,3 +302,41 @@ flutter test test/question_bank_duplicate_audit_test.dart test/question_bank_tes
 測試引用的題（`arithmetic_grade5_062` 就被 `question_bank_test.dart` 引用）。
 刪題前務必先 `grep` 測試檔：目前有 196 個題目 id 被測試引用。
 
+## 2026-08-28 去重改寫（共 44 題）
+
+方針：**改寫應用情境，不刪題**。答案與推理核心一律不動，只把跨年級共用的抽象句型
+換成各自的情境；只有兩題連數字都撞到，才一併換數字。
+
+處理的群組（依 `tool/question_bank_duplicate_audit.dart` 的候選 + 重疊係數排序）：
+
+| 群組 | 題數 | 改寫方向 |
+| --- | --- | --- |
+| arithmetic/pattern、logic/pattern | 10 | 原本都是「數列是 a、b、c、d。下一個數是多少？」→ 保齡球瓶、小樹苗、存錢筒、電影院座位、飲料機、體育館分區、方塊排正方形、跳格子、積木塔、貼紙 |
+| arithmetic/pair_counting | 2 | 「從 1 到 n 任選兩數和為 k」→ 拿卡片、號碼牌配對 |
+| logic/position ×2 群 | 9 | 「X 藏在 1 到 n 號 Y」→ 排隊、樓層、月份、書架、公車站、車廂、公休日、停車位、補給站 |
+| arithmetic/inclusion_exclusion | 4 | 「1 到 N 中…的數有幾個」→ 社團分工、置物櫃標籤、停車場設施、園遊會兌換 |
+| logic/state_tracking | 2 | 「N 盞燈切換」→ 電風扇、電子看板 |
+| geometry/scale_factor | 3 | 「長寬變化求面積倍數」→ 照片放大、看板裁製、菜圃改建 |
+| 其餘單組 | 14 | elimination、lines_angles、position_direction、truth_deduction、perimeter_invariance、perimeter_area、scheduling、shape_cutting、pair_sum、route_counting 各一到兩題 |
+
+`arithmetic/inclusion_exclusion` 原本在 2026-07-28 被裁決為 `acceptable_variant`，
+2026-08-28 依使用者指示一併改寫。
+
+### 成效
+
+組內最高重疊係數的分布：
+
+| 區間 | 改寫前 | 改寫後 |
+| --- | --- | --- |
+| ≥ 0.80 | 16 組 | 5 組 |
+| 0.65–0.80 | 15 組 | 9 組 |
+| < 0.45 | 90 組 | 99 組 |
+
+改寫後仍 ≥ 0.65 的 14 組**全部**是 grade7-12 那批「情境相同、問法不同」的既有裁示保留題
+（id 以 `_031` / `_032` 結尾）。grade1-6 已無待議群組。
+
+### 順手修掉的既有瑕疵
+
+- `logic_grade6_018` 原本是**多解題**：條件「大於 4、小於 10、不是 9 和 8 和 6」同時允許 5 和 7，答案卻標 5。補一個排除條件後解唯一。寫詳解、把消去過程逐步寫出來時才發現。
+- `geometry_grade3_007`、`geometry_grade3_012` 的 `coordinate_plane` 圖**把答案畫出來了**：題目問「現在在起點的哪個方向」，圖卻畫出完整路徑並標上「終點」。兩題改為 `kind: none`，並在 `scripts/validate_question_packs.py` 補上這條檢查。
+- `logic_grade4_015` 改寫時我把英文答案寫成 April，但答案值是 4，英文使用者無從得知要填數字；改為以月份數字敘述。

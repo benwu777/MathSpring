@@ -110,6 +110,14 @@ def main():
                 err('difficulty/challengeTier 必須皆為 foundation')
             if q.get('answerMode') not in ('multiple_choice', 'integer_input'):
                 err('answerMode 非法: %s' % q.get('answerMode'))
+            # 圖不得洩題：問「在起點的哪個方向」卻在圖上標出終點，等於把答案畫出來
+            fig = q.get('figure') or {}
+            if fig.get('kind') == 'coordinate_plane':
+                labels = [pt.get('label', '')
+                          for pt in fig.get('params', {}).get('points', [])]
+                if (any(l in ('終點', '终点') for l in labels)
+                        and '方向' in q.get('prompt', {}).get('zh-Hant', '')):
+                    err('圖上標出終點，等於把「在起點的哪個方向」的答案畫出來')
             for fld in ('prompt', 'answer'):
                 if not all(l in q.get(fld, {}) and q[fld][l].strip() for l in LANGS):
                     err('%s 四語系不齊全' % fld)
