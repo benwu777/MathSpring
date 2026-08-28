@@ -3091,45 +3091,45 @@
       "levelStage": "grade12",
       "challengeTier": "foundation",
       "prompt": {
-        "zh-Hant": "一棟大樓有若干層，存在一個臨界樓層 F，使得從第 F 層以上（含 F 層）往下丟蛋一定會破，從 F 層以下丟則一定不破。現在手上只有 2 顆完全相同的蛋，蛋沒破可以重複使用，破了就不能再用。已知在最壞情況下最多只丟 10 次，就一定能保證找出臨界樓層 F。求這棟大樓最多可以有幾層。",
-        "zh-Hans": "一栋大楼有若干层，存在一个临界楼层 F，使得从第 F 层以上（含 F 层）往下丢蛋一定会破，从 F 层以下丢则一定不破。现在手上只有 2 颗完全相同的蛋，蛋没破可以重复使用，破了就不能再用。已知在最坏情况下最多只丢 10 次，就一定能保证找出临界楼层 F。求这栋大楼最多可以有几层。",
-        "en": "A building has some number of floors, and there is a critical floor F such that an egg dropped from floor F or above always breaks while one dropped from below F never does. Only 2 identical eggs are available; an unbroken egg may be reused, a broken one may not. It is known that 10 drops in the worst case are always enough to determine F. At most how many floors can the building have?",
-        "ja": "ある建物に何階かあり、ある臨界階 F が存在して、F 階以上から卵を落とすと必ず割れ、F 階より下から落とすと決して割れません。手元には同じ卵が 2 個だけあり、割れていない卵は再利用でき、割れた卵は使えません。最悪の場合でも 10 回落とせば必ず F を特定できるとわかっているとき、この建物は最大で何階まであり得ますか。"
+        "zh-Hant": "工廠要測試一款新手機從幾樓摔下才會壞。已知存在一個臨界樓層 F，從第 F 層以上（含 F 層）摔下一定會壞，從 F 層以下摔下則一定不壞。現在手上只有 2 支完全相同的測試機，沒壞的可以重複使用，壞了就不能再用。已知在最壞情況下最多只要測 10 次，就一定能確定臨界樓層 F。這棟測試樓最多可以有幾層？",
+        "zh-Hans": "工厂要测试一款新手机从几楼摔下才会坏。已知存在一个临界楼层 F，从第 F 层以上（含 F 层）摔下一定会坏，从 F 层以下摔下则一定不坏。现在手上只有 2 支完全相同的测试机，没坏的可以重复使用，坏了就不能再用。已知在最坏情况下最多只要测 10 次，就一定能确定临界楼层 F。这栋测试楼最多可以有几层？",
+        "en": "A factory tests from which floor a new phone breaks when dropped. There is a critical floor F such that a drop from floor F or above always breaks the phone, and a drop from below F never does. Only 2 identical test phones are available; an unbroken one can be reused, a broken one cannot. It is known that 10 drops always suffice in the worst case to determine F. At most how many floors can the test building have?",
+        "ja": "工場では、新しい機種を何階から落とすとこわれるかを調べます。ある臨界階 F があり、F 階以上から落とすと必ずこわれ、F 階より下から落とすと必ずこわれません。同じテスト機は 2 台だけあり、こわれていなければ再び使えますが、こわれたら使えません。最悪の場合でも 10 回落とせば必ず F を決められることがわかっています。このテスト用の建物は最大で何階建てにできますか。"
       },
       "answer": {
         "zh-Hant": "答案是 55 層。",
         "zh-Hans": "答案是 55 层。",
-        "en": "The answer is 55 floors.",
+        "en": "The answer is 55.",
         "ja": "答えは 55 階です。"
       },
       "solutionSteps": {
         "zh-Hant": [
-          "第一顆蛋負責大跨距地縮小範圍，一旦破了，第二顆蛋就只能從斷點下方逐層往上試。",
-          "設第一次從第 k 層丟。若破了，剩下 9 次要逐層檢查下方的 k − 1 層，所以 k − 1 ≤ 9，第一步最多從第 10 層丟。",
-          "若沒破，第二次要往上跳的距離必須再少 1，也就是 9 層，因為之後只剩 8 次逐層檢查；以此類推，每次的跨距依序是 10、9、8、⋯、1。",
-          "所以能覆蓋的最高樓層是這些跨距的總和：10 + 9 + 8 + ⋯ + 1。",
-          "這個和是 10 × 11 ÷ 2 = 55，所以大樓最多可以有 55 層。"
+          "第一支測試機要從某一層開始往下摔，摔壞之後只能用第二支從下方逐層往上試，不能跳層。",
+          "所以第一支的第一次選在第 a 層，若壞了，第二支最多還要逐層試 a − 1 次，加起來已用掉 a 次，故第一次最多能選第 10 層。",
+          "若第一次沒壞，剩下 9 次機會，下一次往上跳 9 層；再沒壞就跳 8 層，如此遞減。",
+          "因此能覆蓋的樓層數最多是 10 + 9 + 8 + ⋯ + 1。",
+          "這個和是 10 × 11 ÷ 2 = 55，所以最多可以有 55 層。"
         ],
         "zh-Hans": [
-          "第一颗蛋负责大跨距地缩小范围，一旦破了，第二颗蛋就只能从断点下方逐层往上试。",
-          "设第一次从第 k 层丢。若破了，剩下 9 次要逐层检查下方的 k − 1 层，所以 k − 1 ≤ 9，第一步最多从第 10 层丢。",
-          "若没破，第二次要往上跳的距离必须再少 1，也就是 9 层，因为之后只剩 8 次逐层检查；以此类推，每次的跨距依次是 10、9、8、⋯、1。",
-          "所以能覆盖的最高楼层是这些跨距的总和：10 + 9 + 8 + ⋯ + 1。",
-          "这个和是 10 × 11 ÷ 2 = 55，所以大楼最多可以有 55 层。"
+          "第一支测试机要从某一层开始往下摔，摔坏之后只能用第二支从下方逐层往上试，不能跳层。",
+          "所以第一支的第一次选在第 a 层，若坏了，第二支最多还要逐层试 a − 1 次，加起来已用掉 a 次，故第一次最多能选第 10 层。",
+          "若第一次没坏，剩下 9 次机会，下一次往上跳 9 层；再没坏就跳 8 层，如此递减。",
+          "因此能覆盖的楼层数最多是 10 + 9 + 8 + ⋯ + 1。",
+          "这个和是 10 × 11 ÷ 2 = 55，所以最多可以有 55 层。"
         ],
         "en": [
-          "The first egg is used to cut the range down in large jumps; once it breaks, the second egg must be tried floor by floor upward from the last safe floor.",
-          "Suppose the first drop is from floor k. If it breaks, the remaining 9 drops must check the k − 1 floors below one at a time, so k − 1 ≤ 9 and the first drop is from floor 10 at most.",
-          "If it does not break, the next jump must be one smaller, namely 9 floors, since only 8 single-floor checks would remain afterwards, and so on, giving jumps of 10, 9, 8, …, 1.",
-          "The highest floor that can be covered is therefore the total of these jumps: 10 + 9 + 8 + ⋯ + 1.",
+          "The first phone is dropped from some floor, and once it breaks the second phone must be tried floor by floor from below, with no skipping.",
+          "So if the first drop is from floor a and it breaks, the second phone needs up to a − 1 further drops, using a drops in all, which means the first drop can be no higher than floor 10.",
+          "If the first drop does not break the phone, 9 chances remain, so the next drop goes 9 floors higher; if that survives, the next goes 8 floors higher, and so on.",
+          "The number of floors that can be covered is therefore at most 10 + 9 + 8 + ⋯ + 1.",
           "That sum is 10 × 11 ÷ 2 = 55, so the building can have at most 55 floors."
         ],
         "ja": [
-          "1 個目の卵で大きく間隔をとって範囲をせばめ、割れたら 2 個目で安全な階から 1 階ずつ上へ確かめます。",
-          "最初に k 階から落とすとします。割れた場合、残り 9 回で下の k − 1 階を 1 階ずつ調べる必要があるので k − 1 ≤ 9、つまり最初は最大でも 10 階からです。",
-          "割れなければ次の上げ幅は 1 つ小さい 9 階でなければなりません。その後 1 階ずつ調べる回数が 8 回しか残らないからです。以下同様に、間隔は 10、9、8、⋯、1 となります。",
-          "したがってカバーできる最高階はこれらの間隔の合計 10 + 9 + 8 + ⋯ + 1 です。",
-          "この和は 10 × 11 ÷ 2 = 55 なので、建物は最大で 55 階です。"
+          "1 台目はある階から落とし、こわれたら 2 台目で下から 1 階ずつ試すしかなく、階をとばせません。",
+          "したがって 1 回目を a 階にすると、こわれた場合 2 台目で最大 a − 1 回必要となり、合計 a 回使うので、1 回目は最大でも 10 階です。",
+          "1 回目でこわれなければ残りは 9 回なので、次は 9 階上へ。またこわれなければ 8 階上へ、と 1 ずつ減らしていきます。",
+          "よってカバーできる階数は最大で 10 + 9 + 8 + ⋯ + 1 です。",
+          "この和は 10 × 11 ÷ 2 = 55 なので、建物は最大 55 階です。"
         ]
       },
       "figure": {
@@ -3150,7 +3150,7 @@
         "type": "rewritten_olympiad_style",
         "name": "MathSpring 改寫題",
         "reference": "兩顆蛋的測試（由給樓層數求次數改為給次數逆推樓層數）",
-        "notes": "設計依據：既有題給定 100 層求最壞情況的最少丟擲次數，本題反過來由允許的次數上限反求可涵蓋的最大樓層數，必須看出遞減跨距的總和恰為三角形數；屬同水準原創改寫，非抄錄特定官方題。",
+        "notes": "Rewritten 2026-08-28. This question was one of the grade 7-12 same-setting pairs the user had decided to keep; with the policy now being rewrite rather than delete, its shared setup wording was replaced with its own situation. The mathematics, reasoning and answer are unchanged.",
         "displayText": "改寫題（丟蛋・逆推樓層數）"
       },
       "olympiadTaxonomy": {
