@@ -11,6 +11,8 @@
   python3 scripts/question_similarity_audit.py 0.45          # 自訂門檻
   python3 scripts/question_similarity_audit.py 0.45 new.txt  # 只看清單內的題（每行一個 id）
   python3 scripts/question_similarity_audit.py --candidates cand.json 0.45
+  python3 scripts/question_similarity_audit.py --same-answer [門檻]
+      # 同答案值 + subtopic 家族重疊 + 字面相似：抓「改寫情境之後仍是同一題」
       # 出題前先比對：cand.json 是 [{"id": "候選代號", "prompt": "題幹"}, ...]
       # 會同時比對「候選 vs 全庫」與「候選彼此」——後者最常撞
 """
@@ -53,6 +55,48 @@ def overlap(a, b):
 def similarity(a, b):
     return max(jaccard(a, b), overlap(a, b))
 
+
+def audit_same_answer(threshold=0.55, subtopic_overlap=0.5):
+    """同答案值 + subtopic 家族重疊 + 字面相似的配對。
+
+    改寫情境會壓低字面相似度。如果兩題本來就是同一題，改寫等於把重複藏起來
+    而不是消除它——2026-08-28 就發生過：number_theory_grade9_032 被改寫成
+    旅館房號後，相似度工具再也抓不到它和 grade7_002 是同一題（答案同為 243）。
+    加上「答案值相同」這個維度，就能抓到這一類。
+    """
+    rows = []
+    for path in sorted(glob.glob('assets/questions/*/*.json')):
+        if path.endswith('manifest.json'):
+            continue
+        for q in json.load(open(path))['questions']:
+            rows.append((q['id'], q['subtopic'], q['correctAnswer']['value'],
+                         q['prompt']['zh-Hant'], grams(q['prompt']['zh-Hant'])))
+    by_answer = {}
+    for r in rows:
+        by_answer.setdefault(r[2], []).append(r)
+    hits = []
+    for value, group in by_answer.items():
+        for a, b in itertools.combinations(group, 2):
+            ta, tb = set(a[1].split('_')), set(b[1].split('_'))
+            share = len(ta & tb) / min(len(ta), len(tb))
+            if share < subtopic_overlap:
+                continue
+            s = similarity(a[4], b[4])
+            if s < threshold:
+                continue
+            hits.append((s, share, value, a, b))
+    hits.sort(reverse=True, key=lambda z: z[0])
+    for s, share, value, a, b in hits:
+        print('%.2f  答案=%s  subtopic 重疊 %.2f' % (s, value, share))
+        print('      %s [%s]' % (a[0], a[1]))
+        print('        %s' % a[3][:76])
+        print('      %s [%s]' % (b[0], b[1]))
+        print('        %s' % b[3][:76])
+        print()
+    print('同答案值配對：%d 組（門檻 字面 %.2f / subtopic %.2f）'
+          % (len(hits), threshold, subtopic_overlap))
+    return hits
+
 def audit_candidates(path, threshold):
     cands = json.load(open(path))
     bank = []
@@ -83,6 +127,9 @@ def audit_candidates(path, threshold):
 
 
 def main():
+    if sys.argv[1:2] == ['--same-answer']:
+        hits = audit_same_answer(float(sys.argv[2]) if len(sys.argv) > 2 else 0.55)
+        return 1 if hits else 0
     if len(sys.argv) > 2 and sys.argv[1] == '--candidates':
         return audit_candidates(sys.argv[2], float(sys.argv[3]) if len(sys.argv) > 3 else 0.45)
     threshold = float(sys.argv[1]) if len(sys.argv) > 1 else 0.45
