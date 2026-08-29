@@ -6,6 +6,10 @@
 
 尚未加入 Apple Developer Program 不會阻塞產品開發。等到真機 QA、商店素材與隱私頁完成後，再申請帳號並執行簽署、TestFlight、送審。
 
+**變現方式尚未拍板。** 收益估算與兩種方案（免費＋廣告／一次性付費）的實作範圍見
+[monetization-assessment-2026-08-29.md](monetization-assessment-2026-08-29.md)。
+其中「要不要進 Kids Category」會直接決定能不能放第三方廣告，建議在動工前先確認。
+
 ## 開發完成前
 
 - [ ] 修正 iOS 與 macOS 的正式 Bundle ID：目前皆為 `com.example.mathspring`。
