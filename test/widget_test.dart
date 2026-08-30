@@ -633,7 +633,7 @@ void main() {
 
     final BuildContext context = tester.element(find.byType(Scaffold).first);
     final ThemeData theme = Theme.of(context);
-    final CardTheme cardTheme = theme.cardTheme;
+    final CardThemeData cardTheme = theme.cardTheme;
     final NavigationBar navigationBar =
         tester.widget<NavigationBar>(find.byType(NavigationBar));
 

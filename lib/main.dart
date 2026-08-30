@@ -278,7 +278,7 @@ class _MathSpringAppState extends State<MathSpringApp> {
             ),
           ),
         ),
-        cardTheme: CardTheme(
+        cardTheme: CardThemeData(
           elevation: 0,
           color: Colors.white,
           shadowColor: const Color(0x140F172A),
@@ -3596,58 +3596,63 @@ class QuizResultPage extends StatelessWidget {
                     borderRadius: BorderRadius.circular(12),
                     border: Border.all(color: const Color(0xFFE5E7EB)),
                   ),
-                  child: ExpansionTile(
-                    key: ValueKey<String>(
-                      'quiz_result_${record.question.id}',
-                    ),
-                    title: _QuestionPromptText(
-                      text:
-                          record.question.localizedPrompt(_localeCode(context)),
-                      localeCode: _localeCode(context),
-                    ),
-                    subtitle: _ResultStatusBadge(
-                      label: record.isCorrect
-                          ? strings.correctLabel
-                          : strings.incorrectLabel,
-                      isCorrect: record.isCorrect,
-                    ),
-                    childrenPadding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
-                    children: [
-                      if (record.question.source?.displayLabel != null) ...[
+                  child: Material(
+                    color: Colors.transparent,
+                    borderRadius: BorderRadius.circular(12),
+                    clipBehavior: Clip.antiAlias,
+                    child: ExpansionTile(
+                      key: ValueKey<String>(
+                        'quiz_result_${record.question.id}',
+                      ),
+                      title: _QuestionPromptText(
+                        text: record.question
+                            .localizedPrompt(_localeCode(context)),
+                        localeCode: _localeCode(context),
+                      ),
+                      subtitle: _ResultStatusBadge(
+                        label: record.isCorrect
+                            ? strings.correctLabel
+                            : strings.incorrectLabel,
+                        isCorrect: record.isCorrect,
+                      ),
+                      childrenPadding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
+                      children: [
+                        if (record.question.source?.displayLabel != null) ...[
+                          Align(
+                            alignment: Alignment.centerLeft,
+                            child: _QuestionSourceText(
+                              text: record.question.source!.displayLabel!,
+                            ),
+                          ),
+                          const SizedBox(height: 10),
+                        ],
+                        if (record.question.figure.kind != 'none') ...[
+                          _QuestionFigureView(question: record.question),
+                          const SizedBox(height: 14),
+                        ],
                         Align(
                           alignment: Alignment.centerLeft,
-                          child: _QuestionSourceText(
-                            text: record.question.source!.displayLabel!,
+                          child: _QuestionBodyText(
+                            text: record.question
+                                .localizedAnswer(_localeCode(context)),
+                            localeCode: _localeCode(context),
                           ),
                         ),
                         const SizedBox(height: 10),
-                      ],
-                      if (record.question.figure.kind != 'none') ...[
-                        _QuestionFigureView(question: record.question),
-                        const SizedBox(height: 14),
-                      ],
-                      Align(
-                        alignment: Alignment.centerLeft,
-                        child: _QuestionBodyText(
-                          text: record.question
-                              .localizedAnswer(_localeCode(context)),
-                          localeCode: _localeCode(context),
-                        ),
-                      ),
-                      const SizedBox(height: 10),
-                      for (final String step in record.question
-                          .localizedSolutionSteps(_localeCode(context)))
-                        Padding(
-                          padding: const EdgeInsets.only(bottom: 8),
-                          child: Align(
-                            alignment: Alignment.centerLeft,
-                            child: _QuestionBodyText(
-                              text: step,
-                              localeCode: _localeCode(context),
+                        for (final String step in record.question
+                            .localizedSolutionSteps(_localeCode(context)))
+                          Padding(
+                            padding: const EdgeInsets.only(bottom: 8),
+                            child: Align(
+                              alignment: Alignment.centerLeft,
+                              child: _QuestionBodyText(
+                                text: step,
+                                localeCode: _localeCode(context),
+                              ),
                             ),
                           ),
-                        ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ),
