@@ -1269,29 +1269,38 @@ class _LocaleSettingsSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final AppStrings strings = AppStrings.of(context);
-    final bool isChinese = currentLocale.languageCode == 'zh';
-
     return _SectionCard(
       title: strings.languageSettingsTitle,
       subtitle: strings.languageSettingsSubtitle,
-      child: Row(
+      child: Wrap(
+        spacing: 8,
+        runSpacing: 8,
         children: [
-          Expanded(
-            child: _LanguageButton(
-              buttonKey: const ValueKey<String>('locale_option_zh'),
-              label: strings.languageTraditionalChinese,
-              selected: isChinese,
-              onPressed: () => onLocaleChanged(const Locale('zh', 'TW')),
-            ),
+          _LanguageButton(
+            buttonKey: const ValueKey<String>('locale_option_zh'),
+            label: strings.languageTraditionalChinese,
+            selected: currentLocale.languageCode == 'zh' &&
+                currentLocale.countryCode != 'CN',
+            onPressed: () => onLocaleChanged(const Locale('zh', 'TW')),
           ),
-          const SizedBox(width: 12),
-          Expanded(
-            child: _LanguageButton(
-              buttonKey: const ValueKey<String>('locale_option_en'),
-              label: strings.languageEnglish,
-              selected: !isChinese,
-              onPressed: () => onLocaleChanged(const Locale('en')),
-            ),
+          _LanguageButton(
+            buttonKey: const ValueKey<String>('locale_option_zh_hans'),
+            label: strings.languageSimplifiedChinese,
+            selected: currentLocale.languageCode == 'zh' &&
+                currentLocale.countryCode == 'CN',
+            onPressed: () => onLocaleChanged(const Locale('zh', 'CN')),
+          ),
+          _LanguageButton(
+            buttonKey: const ValueKey<String>('locale_option_en'),
+            label: strings.languageEnglish,
+            selected: currentLocale.languageCode == 'en',
+            onPressed: () => onLocaleChanged(const Locale('en')),
+          ),
+          _LanguageButton(
+            buttonKey: const ValueKey<String>('locale_option_ja'),
+            label: strings.languageJapanese,
+            selected: currentLocale.languageCode == 'ja',
+            onPressed: () => onLocaleChanged(const Locale('ja')),
           ),
         ],
       ),
@@ -1871,6 +1880,26 @@ class _LearnerProfilesSectionState extends State<_LearnerProfilesSection> {
     }
   }
 
+  Future<void> _confirmDeleteLearner(LearnerProfile learner) async {
+    final AppStrings strings = AppStrings.of(context);
+    final bool? confirmed = await showDialog<bool>(
+      context: context,
+      builder: (BuildContext dialogContext) => AlertDialog(
+        title: Text(strings.deleteLearner),
+        content: Text(strings.deleteLearnerConfirmation(learner.displayName)),
+        actions: [
+          TextButton(
+              onPressed: () => Navigator.pop(dialogContext, false),
+              child: Text(strings.cancel)),
+          FilledButton(
+              onPressed: () => Navigator.pop(dialogContext, true),
+              child: Text(strings.deleteConfirmLabel)),
+        ],
+      ),
+    );
+    if (confirmed == true) await _deleteLearner(learner.id);
+  }
+
   @override
   Widget build(BuildContext context) {
     final AppStrings strings = AppStrings.of(context);
@@ -1928,7 +1957,7 @@ class _LearnerProfilesSectionState extends State<_LearnerProfilesSection> {
               deleteTooltip: strings.deleteLearner,
               onDelete: profiles.length <= 1
                   ? null
-                  : () => _deleteLearner(profiles[index].id),
+                  : () => _confirmDeleteLearner(profiles[index]),
               deleteKey: ValueKey<String>(
                 'delete_learner_${profiles[index].id}',
               ),
@@ -3168,27 +3197,37 @@ class _PracticeAnswerSection extends StatefulWidget {
 }
 
 class _PracticeAnswerSectionState extends State<_PracticeAnswerSection> {
-  late final TextEditingController _controller;
+  late List<TextEditingController> _controllers;
 
   @override
   void initState() {
     super.initState();
-    _controller = TextEditingController();
+    _controllers = _createControllers();
   }
 
   @override
   void didUpdateWidget(covariant _PracticeAnswerSection oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (oldWidget.question.id != widget.question.id) {
-      _controller.clear();
+      for (final TextEditingController controller in _controllers) {
+        controller.dispose();
+      }
+      _controllers = _createControllers();
     }
   }
 
   @override
   void dispose() {
-    _controller.dispose();
+    for (final TextEditingController controller in _controllers) {
+      controller.dispose();
+    }
     super.dispose();
   }
+
+  List<TextEditingController> _createControllers() => <TextEditingController>[
+        for (final String _ in widget.question.correctAnswer.orderedValues)
+          TextEditingController(),
+      ];
 
   @override
   Widget build(BuildContext context) {
@@ -3230,31 +3269,53 @@ class _PracticeAnswerSectionState extends State<_PracticeAnswerSection> {
           ],
         );
       case AnswerMode.integerInput:
+        final List<String> labels = widget.question.correctAnswer
+            .localizedInputLabels(widget.localeCode);
+        final bool hasMultipleAnswers = _controllers.length > 1;
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            TextField(
-              key: ValueKey<String>(
-                  'practice_integer_input_${widget.question.id}'),
-              controller: _controller,
-              enabled: !widget.isLocked,
-              keyboardType: TextInputType.number,
-              decoration: InputDecoration(
-                hintText: widget.strings.integerHint,
-                border: const OutlineInputBorder(),
+            for (int index = 0; index < _controllers.length; index++) ...[
+              if (hasMultipleAnswers) ...[
+                Text(
+                  index < labels.length
+                      ? labels[index]
+                      : widget.strings.answerFieldLabel(index + 1),
+                  style: Theme.of(context).textTheme.labelLarge,
+                ),
+                const SizedBox(height: 6),
+              ],
+              TextField(
+                key: ValueKey<String>(
+                  hasMultipleAnswers
+                      ? 'practice_integer_input_${widget.question.id}_$index'
+                      : 'practice_integer_input_${widget.question.id}',
+                ),
+                controller: _controllers[index],
+                enabled: !widget.isLocked,
+                keyboardType: TextInputType.number,
+                decoration: InputDecoration(
+                  hintText: widget.strings.integerHint,
+                  border: const OutlineInputBorder(),
+                ),
               ),
-            ),
+              if (index < _controllers.length - 1) const SizedBox(height: 12),
+            ],
             const SizedBox(height: 12),
             FilledButton(
               key: ValueKey<String>('submit_answer_${widget.question.id}'),
               onPressed: widget.isLocked
                   ? null
                   : () {
-                      final String value = _controller.text.trim();
-                      if (value.isEmpty) {
+                      final List<String> values = <String>[
+                        for (final TextEditingController controller
+                            in _controllers)
+                          controller.text.trim(),
+                      ];
+                      if (values.any((String value) => value.isEmpty)) {
                         return;
                       }
-                      widget.onSubmitted(value);
+                      widget.onSubmitted(_encodeIntegerAnswers(values));
                     },
               style: FilledButton.styleFrom(
                 backgroundColor: const Color(0xFF111827),
@@ -3913,19 +3974,125 @@ class _QuizAnswerSection extends StatelessWidget {
           ],
         );
       case AnswerMode.integerInput:
-        return TextField(
-          key: ValueKey<String>('quiz_integer_input_${question.id}'),
-          decoration: const InputDecoration(
-            border: OutlineInputBorder(),
-          ),
-          keyboardType: TextInputType.number,
-          onChanged: onAnswerChanged,
+        return _QuizIntegerAnswerFields(
+          key: ValueKey<String>('quiz_integer_inputs_${question.id}'),
+          question: question,
+          localeCode: localeCode,
+          selectedAnswer: selectedAnswer,
+          onAnswerChanged: onAnswerChanged,
         );
       case AnswerMode.selfCheck:
         return Text(
           AppStrings.of(context).selfCheckLabel,
         );
     }
+  }
+}
+
+class _QuizIntegerAnswerFields extends StatefulWidget {
+  const _QuizIntegerAnswerFields({
+    super.key,
+    required this.question,
+    required this.localeCode,
+    required this.selectedAnswer,
+    required this.onAnswerChanged,
+  });
+
+  final Question question;
+  final String localeCode;
+  final String? selectedAnswer;
+  final ValueChanged<String> onAnswerChanged;
+
+  @override
+  State<_QuizIntegerAnswerFields> createState() =>
+      _QuizIntegerAnswerFieldsState();
+}
+
+class _QuizIntegerAnswerFieldsState extends State<_QuizIntegerAnswerFields> {
+  late List<TextEditingController> _controllers;
+
+  @override
+  void initState() {
+    super.initState();
+    _controllers = _createControllers(widget.selectedAnswer);
+  }
+
+  @override
+  void didUpdateWidget(covariant _QuizIntegerAnswerFields oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.question.id != widget.question.id) {
+      for (final TextEditingController controller in _controllers) {
+        controller.dispose();
+      }
+      _controllers = _createControllers(widget.selectedAnswer);
+    }
+  }
+
+  @override
+  void dispose() {
+    for (final TextEditingController controller in _controllers) {
+      controller.dispose();
+    }
+    super.dispose();
+  }
+
+  List<TextEditingController> _createControllers(String? selectedAnswer) {
+    final List<String> currentValues = selectedAnswer == null
+        ? const <String>[]
+        : _decodeIntegerAnswers(selectedAnswer);
+    return <TextEditingController>[
+      for (int index = 0;
+          index < widget.question.correctAnswer.orderedValues.length;
+          index++)
+        TextEditingController(
+          text: index < currentValues.length ? currentValues[index] : '',
+        ),
+    ];
+  }
+
+  void _notifyChanged() {
+    widget.onAnswerChanged(_encodeIntegerAnswers(
+      <String>[
+        for (final TextEditingController controller in _controllers)
+          controller.text.trim(),
+      ],
+    ));
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final List<String> labels =
+        widget.question.correctAnswer.localizedInputLabels(widget.localeCode);
+    final bool hasMultipleAnswers = _controllers.length > 1;
+    final AppStrings strings = AppStrings.of(context);
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        for (int index = 0; index < _controllers.length; index++) ...[
+          if (hasMultipleAnswers) ...[
+            Text(
+              index < labels.length
+                  ? labels[index]
+                  : strings.answerFieldLabel(index + 1),
+              style: Theme.of(context).textTheme.labelLarge,
+            ),
+            const SizedBox(height: 6),
+          ],
+          TextField(
+            key: ValueKey<String>(
+              hasMultipleAnswers
+                  ? 'quiz_integer_input_${widget.question.id}_$index'
+                  : 'quiz_integer_input_${widget.question.id}',
+            ),
+            controller: _controllers[index],
+            decoration: const InputDecoration(border: OutlineInputBorder()),
+            keyboardType: TextInputType.number,
+            onChanged: (_) => _notifyChanged(),
+          ),
+          if (index < _controllers.length - 1) const SizedBox(height: 12),
+        ],
+      ],
+    );
   }
 }
 
@@ -4271,7 +4438,9 @@ class AppStrings {
         ja: '数学的思考と発展練習',
       );
   String get languageTraditionalChinese => '繁中';
+  String get languageSimplifiedChinese => '简中';
   String get languageEnglish => 'EN';
+  String get languageJapanese => '日本語';
   String get heroTitle => 'MathSpring';
   String get heroSubtitle => _text(
         zhHant: '用更清楚的方式練習數學思維',
@@ -4297,6 +4466,13 @@ class AppStrings {
       _text(zhHant: '新增學習者', zhHans: '新增学习者', en: 'Add learner', ja: '学習者を追加');
   String get deleteLearner => _text(
       zhHant: '刪除學習者', zhHans: '删除学习者', en: 'Delete learner', ja: '学習者を削除');
+  String deleteLearnerConfirmation(String name) => _text(
+      zhHant: '確定要刪除「$name」嗎？這會永久刪除歷史答題紀錄、錯題紀錄與成就，無法復原。',
+      zhHans: '确定要删除“$name”吗？这会永久删除答题记录、错题记录和成就，无法恢复。',
+      en: 'Delete $name? Answer history, incorrect-answer records, and achievements will be permanently removed and cannot be restored.',
+      ja: '$name を削除しますか？解答履歴、間違い記録、実績も完全に削除され、元に戻せません。');
+  String get deleteConfirmLabel =>
+      _text(zhHant: '刪除', zhHans: '删除', en: 'Delete', ja: '削除');
   String get currentLearner =>
       _text(zhHant: '目前使用', zhHans: '当前使用', en: 'Current', ja: '現在');
   String get currentLearnerLabel => _text(
@@ -4715,6 +4891,12 @@ class AppStrings {
       _text(zhHant: '作答方式', zhHans: '作答方式', en: 'Answer Mode', ja: '解答方式');
   String get integerHint => _text(
       zhHant: '輸入整數', zhHans: '输入整数', en: 'Enter an integer', ja: '整数を入力');
+  String answerFieldLabel(int number) => _text(
+        zhHant: '答案 $number',
+        zhHans: '答案 $number',
+        en: 'Answer $number',
+        ja: '解答 $number',
+      );
   String get submitAnswer =>
       _text(zhHant: '提交答案', zhHans: '提交答案', en: 'Submit Answer', ja: '解答を送信');
   String get viewFigure =>
@@ -5107,6 +5289,7 @@ class _AnswerComposer extends StatelessWidget {
       case AnswerMode.integerInput:
         return _IntegerAnswerField(
           question: question,
+          localeCode: localeCode,
           services: services,
           strings: strings,
         );
@@ -5119,11 +5302,13 @@ class _AnswerComposer extends StatelessWidget {
 class _IntegerAnswerField extends StatefulWidget {
   const _IntegerAnswerField({
     required this.question,
+    required this.localeCode,
     required this.services,
     required this.strings,
   });
 
   final Question question;
+  final String localeCode;
   final AppServices services;
   final AppStrings strings;
 
@@ -5132,35 +5317,44 @@ class _IntegerAnswerField extends StatefulWidget {
 }
 
 class _IntegerAnswerFieldState extends State<_IntegerAnswerField> {
-  late final TextEditingController _controller;
+  late final List<TextEditingController> _controllers;
 
   @override
   void initState() {
     super.initState();
-    _controller = TextEditingController();
+    _controllers = <TextEditingController>[
+      for (final String _ in widget.question.correctAnswer.orderedValues)
+        TextEditingController(),
+    ];
   }
 
   @override
   void dispose() {
-    _controller.dispose();
+    for (final TextEditingController controller in _controllers) {
+      controller.dispose();
+    }
     super.dispose();
   }
 
   Future<void> _submit() async {
     final String? learnerId = widget.services.currentLearnerId;
-    final String value = _controller.text.trim();
-    if (learnerId == null || value.isEmpty) {
+    final List<String> values = <String>[
+      for (final TextEditingController controller in _controllers)
+        controller.text.trim(),
+    ];
+    if (learnerId == null || values.any((String value) => value.isEmpty)) {
       return;
     }
+    final String submittedAnswer = _encodeIntegerAnswers(values);
 
     await widget.services.saveQuestionProgress(
       QuestionProgress(
         learnerId: learnerId,
         questionId: widget.question.id,
-        status: value == widget.question.correctAnswer.value
+        status: _isCorrect(widget.question, submittedAnswer)
             ? 'correct'
             : 'incorrect',
-        lastResult: 'integer_input:$value',
+        lastResult: 'integer_input:$submittedAnswer',
         updatedAtIso: DateTime.now().toUtc().toIso8601String(),
       ),
     );
@@ -5168,29 +5362,48 @@ class _IntegerAnswerFieldState extends State<_IntegerAnswerField> {
 
   @override
   Widget build(BuildContext context) {
+    final List<String> labels =
+        widget.question.correctAnswer.localizedInputLabels(widget.localeCode);
+    final bool hasMultipleAnswers = _controllers.length > 1;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(widget.strings.enterIntegerAnswer),
         const SizedBox(height: 14),
-        TextField(
-          key: ValueKey<String>('practice_integer_input_${widget.question.id}'),
-          controller: _controller,
-          keyboardType: TextInputType.number,
-          decoration: InputDecoration(
-            hintText: widget.strings.integerHint,
-            filled: true,
-            fillColor: const Color(0xFFFAFAFA),
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide: const BorderSide(color: Color(0xFFE5E7EB)),
+        for (int index = 0; index < _controllers.length; index++) ...[
+          if (hasMultipleAnswers) ...[
+            Text(
+              index < labels.length
+                  ? labels[index]
+                  : widget.strings.answerFieldLabel(index + 1),
+              style: Theme.of(context).textTheme.labelLarge,
             ),
-            enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide: const BorderSide(color: Color(0xFFE5E7EB)),
+            const SizedBox(height: 6),
+          ],
+          TextField(
+            key: ValueKey<String>(
+              hasMultipleAnswers
+                  ? 'practice_integer_input_${widget.question.id}_$index'
+                  : 'practice_integer_input_${widget.question.id}',
+            ),
+            controller: _controllers[index],
+            keyboardType: TextInputType.number,
+            decoration: InputDecoration(
+              hintText: widget.strings.integerHint,
+              filled: true,
+              fillColor: const Color(0xFFFAFAFA),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10),
+                borderSide: const BorderSide(color: Color(0xFFE5E7EB)),
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10),
+                borderSide: const BorderSide(color: Color(0xFFE5E7EB)),
+              ),
             ),
           ),
-        ),
+          if (index < _controllers.length - 1) const SizedBox(height: 12),
+        ],
         const SizedBox(height: 12),
         FilledButton(
           key: ValueKey<String>('submit_answer_${widget.question.id}'),
@@ -5933,11 +6146,26 @@ String displayTopicCode(String topicCode, AppStrings strings) {
 bool _isCorrect(Question question, String submittedAnswer) {
   switch (question.answerMode) {
     case AnswerMode.multipleChoice:
-    case AnswerMode.integerInput:
     case AnswerMode.selfCheck:
       return submittedAnswer == question.correctAnswer.value;
+    case AnswerMode.integerInput:
+      final List<String> expected = question.correctAnswer.orderedValues;
+      final List<String> submitted = _decodeIntegerAnswers(submittedAnswer);
+      return expected.length == submitted.length &&
+          List<bool>.generate(
+            expected.length,
+            (int index) => expected[index] == submitted[index],
+          ).every((bool matches) => matches);
   }
 }
+
+const String _integerAnswerSeparator = '\u001F';
+
+String _encodeIntegerAnswers(Iterable<String> values) =>
+    values.join(_integerAnswerSeparator);
+
+List<String> _decodeIntegerAnswers(String encoded) =>
+    encoded.split(_integerAnswerSeparator);
 
 String _answerModeToken(AnswerMode mode) {
   switch (mode) {
@@ -5985,6 +6213,8 @@ String _displaySubmittedAnswer(
       );
       return '$submittedAnswer  $optionLabel';
     case AnswerMode.integerInput:
+      final List<String> values = _decodeIntegerAnswers(submittedAnswer);
+      return values.join('、');
     case AnswerMode.selfCheck:
       return submittedAnswer;
   }

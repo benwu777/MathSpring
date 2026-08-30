@@ -603,6 +603,43 @@ void main() {
     fail('Finder not found after waiting: $finder');
   }
 
+  Question createDualIntegerQuestion() {
+    return Question.fromJson({
+      'id': 'dual_integer_001',
+      'topic': 'arithmetic',
+      'difficulty': 'foundation',
+      'levelStage': 'grade2',
+      'challengeTier': 'foundation',
+      'prompt': {
+        'zh-Hant': '鉛筆和橡皮擦各買幾盒？',
+        'en': 'How many boxes of pencils and erasers are needed?',
+      },
+      'answer': {
+        'zh-Hant': '鉛筆 4 盒，橡皮擦 3 盒。',
+        'en': '4 pencil boxes and 3 eraser boxes.',
+      },
+      'solutionSteps': {
+        'zh-Hant': ['最小公倍數是 24。'],
+        'en': ['The least common multiple is 24.'],
+      },
+      'figure': {
+        'type': 'custom',
+        'kind': 'none',
+        'params': <String, dynamic>{},
+      },
+      'answerMode': 'integer_input',
+      'correctAnswer': {
+        'type': 'integer',
+        'value': '4',
+        'values': ['4', '3'],
+        'inputLabels': {
+          'zh-Hant': ['鉛筆', '橡皮擦'],
+          'en': ['Pencils', 'Erasers'],
+        },
+      },
+    });
+  }
+
   testWidgets('shows English home content when system locale is English',
       (WidgetTester tester) async {
     final TestWidgetsFlutterBinding binding =
@@ -888,6 +925,34 @@ void main() {
     expect(find.text('Practice'), findsWidgets);
   });
 
+  testWidgets('settings offers all four supported language choices',
+      (WidgetTester tester) async {
+    final TestWidgetsFlutterBinding binding =
+        TestWidgetsFlutterBinding.ensureInitialized();
+    binding.platformDispatcher.localeTestValue = const Locale('zh', 'TW');
+
+    await pumpApp(tester, createTestServices());
+    await tester.tap(find.text('設定'));
+    await tester.pumpAndSettle();
+
+    expect(
+        find.byKey(const ValueKey<String>('locale_option_zh')), findsOneWidget);
+    expect(
+      find.byKey(const ValueKey<String>('locale_option_zh_hans')),
+      findsOneWidget,
+    );
+    expect(
+        find.byKey(const ValueKey<String>('locale_option_en')), findsOneWidget);
+    expect(
+        find.byKey(const ValueKey<String>('locale_option_ja')), findsOneWidget);
+
+    await tester.tap(
+      find.byKey(const ValueKey<String>('locale_option_ja')),
+    );
+    await tester.pumpAndSettle();
+    expect(find.text('言語'), findsOneWidget);
+  });
+
   testWidgets('settings exposes support and privacy links in English',
       (WidgetTester tester) async {
     final TestWidgetsFlutterBinding binding =
@@ -963,9 +1028,12 @@ void main() {
     await tester.tap(startButton);
     await tester.pumpAndSettle();
 
-    expect(find.byKey(const ValueKey<String>('formal_exam_5_10')), findsOneWidget);
-    expect(find.byKey(const ValueKey<String>('formal_exam_10_20')), findsOneWidget);
-    expect(find.byKey(const ValueKey<String>('formal_exam_15_30')), findsOneWidget);
+    expect(
+        find.byKey(const ValueKey<String>('formal_exam_5_10')), findsOneWidget);
+    expect(find.byKey(const ValueKey<String>('formal_exam_10_20')),
+        findsOneWidget);
+    expect(find.byKey(const ValueKey<String>('formal_exam_15_30')),
+        findsOneWidget);
   });
 
   testWidgets('formal exam exposes a question navigator with point values',
@@ -982,7 +1050,10 @@ void main() {
       home: QuizSessionPage(
         services: createTestServices(),
         pack: pack,
-        initialQuestions: <Question>[createDemoQuestion(), createSecondDemoQuestion()],
+        initialQuestions: <Question>[
+          createDemoQuestion(),
+          createSecondDemoQuestion()
+        ],
         formalExamPreset: FormalExamPreset.standard.first,
       ),
     ));
@@ -1299,6 +1370,112 @@ void main() {
         find.byKey(
             const ValueKey<String>('figure_preview_canvas_shape_diagram')),
         findsOneWidget);
+  });
+
+  testWidgets('practice renders and checks ordered multiple integer answers',
+      (WidgetTester tester) async {
+    final TestWidgetsFlutterBinding binding =
+        TestWidgetsFlutterBinding.ensureInitialized();
+    binding.platformDispatcher.localeTestValue = const Locale('en');
+    final AppServices services = createTestServices();
+
+    await tester.pumpWidget(
+      MaterialApp(
+        locale: const Locale('en'),
+        supportedLocales: AppStrings.supportedLocales,
+        localizationsDelegates: const [
+          GlobalMaterialLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+        ],
+        home: PracticeSessionPage(
+          services: services,
+          pack: const BundledQuestionPackInfo(
+            path:
+                'assets/questions/arithmetic/grade2_foundation.arithmetic.v1.json',
+            topic: 'Arithmetic',
+            topicCode: 'arithmetic',
+            levelStage: 'grade2',
+            challengeTier: 'foundation',
+            questionCount: 1,
+          ),
+          initialQuestions: [createDualIntegerQuestion()],
+        ),
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    expect(
+      find.byKey(
+          const ValueKey<String>('practice_integer_input_dual_integer_001_0')),
+      findsOneWidget,
+    );
+    expect(
+      find.byKey(
+          const ValueKey<String>('practice_integer_input_dual_integer_001_1')),
+      findsOneWidget,
+    );
+
+    await tester.enterText(
+      find.byKey(
+          const ValueKey<String>('practice_integer_input_dual_integer_001_0')),
+      '4',
+    );
+    await tester.enterText(
+      find.byKey(
+          const ValueKey<String>('practice_integer_input_dual_integer_001_1')),
+      '3',
+    );
+    await tester.tap(
+      find.byKey(const ValueKey<String>('submit_answer_dual_integer_001')),
+    );
+    await tester.pumpAndSettle();
+
+    expect(find.text('Correct'), findsOneWidget);
+  });
+
+  testWidgets('quiz renders ordered multiple integer answers',
+      (WidgetTester tester) async {
+    final TestWidgetsFlutterBinding binding =
+        TestWidgetsFlutterBinding.ensureInitialized();
+    binding.platformDispatcher.localeTestValue = const Locale('en');
+
+    await tester.pumpWidget(
+      MaterialApp(
+        locale: const Locale('en'),
+        supportedLocales: AppStrings.supportedLocales,
+        localizationsDelegates: const [
+          GlobalMaterialLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+        ],
+        home: QuizSessionPage(
+          services: createTestServices(),
+          pack: const BundledQuestionPackInfo(
+            path:
+                'assets/questions/arithmetic/grade2_foundation.arithmetic.v1.json',
+            topic: 'Arithmetic',
+            topicCode: 'arithmetic',
+            levelStage: 'grade2',
+            challengeTier: 'foundation',
+            questionCount: 1,
+          ),
+          initialQuestions: [createDualIntegerQuestion()],
+        ),
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    expect(
+      find.byKey(
+          const ValueKey<String>('quiz_integer_input_dual_integer_001_0')),
+      findsOneWidget,
+    );
+    expect(
+      find.byKey(
+          const ValueKey<String>('quiz_integer_input_dual_integer_001_1')),
+      findsOneWidget,
+    );
   });
 
   testWidgets('practice session renders a composite grid shape figure',
@@ -1660,7 +1837,7 @@ void main() {
     );
   });
 
-  testWidgets('deletes the current learner and keeps another learner active',
+  testWidgets('asks before deleting the current learner',
       (WidgetTester tester) async {
     final TestWidgetsFlutterBinding binding =
         TestWidgetsFlutterBinding.ensureInitialized();
@@ -1675,6 +1852,33 @@ void main() {
     await tester.tap(
       find.byKey(const ValueKey<String>('delete_learner_learner_allen')),
     );
+    await tester.pumpAndSettle();
+
+    expect(find.text('Delete learner'), findsOneWidget);
+    expect(find.textContaining('Answer history'), findsOneWidget);
+    await tester.tap(find.text('Cancel'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Allen'), findsWidgets);
+    expect(services.currentLearnerId, 'learner_allen');
+  });
+
+  testWidgets('deletes the current learner after confirmation',
+      (WidgetTester tester) async {
+    final TestWidgetsFlutterBinding binding =
+        TestWidgetsFlutterBinding.ensureInitialized();
+    binding.platformDispatcher.localeTestValue = const Locale('en');
+
+    final AppServices services = createTestServices();
+    await pumpApp(tester, services);
+
+    await tester.tap(find.text('Settings'));
+    await tester.pumpAndSettle();
+    await tester.tap(
+      find.byKey(const ValueKey<String>('delete_learner_learner_allen')),
+    );
+    await tester.pumpAndSettle();
+    await tester.tap(find.widgetWithText(FilledButton, 'Delete'));
     await tester.pumpAndSettle();
 
     expect(find.text('Allen'), findsNothing);

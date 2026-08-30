@@ -106,15 +106,49 @@ class CorrectAnswer {
   const CorrectAnswer({
     required this.type,
     required this.value,
+    this.values,
+    this.inputLabels,
   });
 
   final String type;
   final String value;
+  final List<String>? values;
+  final Map<String, List<String>>? inputLabels;
+
+  List<String> get orderedValues =>
+      values == null || values!.isEmpty ? <String>[value] : values!;
+
+  List<String> localizedInputLabels(String localeCode) {
+    final Map<String, List<String>>? labels = inputLabels;
+    if (labels == null || labels.isEmpty) {
+      return const <String>[];
+    }
+    final String normalized = localeCode.replaceAll('_', '-');
+    return labels[normalized] ??
+        labels[normalized.split('-').first] ??
+        labels['en'] ??
+        labels.values.first;
+  }
 
   factory CorrectAnswer.fromJson(Map<String, dynamic> json) {
+    final List<String> parsedValues = json['values'] is List
+        ? List<String>.from(json['values'] as List<dynamic>)
+        : const <String>[];
+    final Map<String, List<String>>? parsedInputLabels =
+        json['inputLabels'] is Map
+            ? Map<String, dynamic>.from(json['inputLabels'] as Map).map(
+                (String locale, dynamic labels) => MapEntry(
+                  locale,
+                  List<String>.from(labels as List<dynamic>),
+                ),
+              )
+            : null;
     return CorrectAnswer(
       type: json['type'] as String? ?? '',
-      value: json['value'] as String? ?? '',
+      value: json['value'] as String? ??
+          (parsedValues.isEmpty ? '' : parsedValues.first),
+      values: parsedValues.isEmpty ? null : parsedValues,
+      inputLabels: parsedInputLabels,
     );
   }
 }
@@ -374,7 +408,9 @@ class Question {
       _languageFallback(normalized),
     ];
 
-    if (normalized == 'zh-TW' || normalized == 'zh-HK' || normalized == 'zh-MO') {
+    if (normalized == 'zh-TW' ||
+        normalized == 'zh-HK' ||
+        normalized == 'zh-MO') {
       candidates.insert(1, 'zh-Hant');
     }
     if (normalized == 'zh-CN' || normalized == 'zh-SG') {
