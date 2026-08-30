@@ -1,6 +1,6 @@
 # MathSpring App Store 送審與發布清單
 
-最後更新：2026-08-26。
+最後更新：2026-08-30。
 
 ## 現階段原則
 
@@ -9,6 +9,15 @@
 **變現方式尚未拍板。** 收益估算與兩種方案（免費＋廣告／一次性付費）的實作範圍見
 [monetization-assessment-2026-08-29.md](monetization-assessment-2026-08-29.md)。
 其中「要不要進 Kids Category」會直接決定能不能放第三方廣告，建議在動工前先確認。
+
+## 發布驗收（必須全部完成）
+
+- [ ] `flutter analyze` 為 0 issues。
+- [ ] `flutter test` 全數通過。
+- [ ] 完成 [iPhone／iPad 發布前 QA](ios-release-qa.md) 的必測流程。
+- [ ] App 內的支援與隱私入口可開啟公開網址。
+- [ ] 支援頁、隱私頁、App Store Connect 的 App Privacy 與 app 實際行為一致。
+- [ ] 截圖均為實際 app 畫面，且繁中、英文 metadata 已完成校對。
 
 ## 開發完成前
 
@@ -28,6 +37,7 @@
 - [ ] 在 Xcode 設定 Team、Signing Certificate、Provisioning Profile 與正式 Bundle ID。
 - [ ] 在 App Store Connect 建立 app record：名稱、SKU、Bundle ID、主要語言、分類、年齡分級與內容權利。
 - [ ] 設定版本與 build number；目前專案版本為 `1.0.0+1`，每次上傳都必須提高 build number。
+- [ ] 先經 TestFlight 內部測試，再提交 App Review。
 
 ## 隱私與法務
 

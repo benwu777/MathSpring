@@ -62,7 +62,8 @@ class QuestionDuplicateAuditResult {
 
   Map<String, dynamic> toJson() => <String, dynamic>{
         'scannedQuestions': scannedQuestions,
-        'candidateGroups': candidateGroups.map((group) => group.toJson()).toList(),
+        'candidateGroups':
+            candidateGroups.map((group) => group.toJson()).toList(),
       };
 }
 
@@ -98,8 +99,7 @@ class DuplicateReviewDecision {
 }
 
 class QuestionBankDuplicateAudit {
-  static final RegExp _numberPattern =
-      RegExp(r'\d+(?:\.\d+)?(?:/\d+)?');
+  static final RegExp _numberPattern = RegExp(r'\d+(?:\.\d+)?(?:/\d+)?');
   static final RegExp _personNamePattern = RegExp(r'小[\u4E00-\u9FFF]');
   static final RegExp _classicNamePattern = RegExp(r'[甲乙丙丁戊己庚辛壬癸]');
   static final RegExp _latinPlaceholderPattern =
@@ -152,32 +152,33 @@ class QuestionBankDuplicateAudit {
 
     for (final DuplicateAuditQuestion question in questions) {
       final String fingerprint = buildFingerprint(question);
-      final String key =
-          '${question.topic}|${question.subtopic}|$fingerprint';
+      final String key = '${question.topic}|${question.subtopic}|$fingerprint';
       grouped.putIfAbsent(key, () => <DuplicateAuditQuestion>[]).add(question);
     }
 
-    final List<DuplicateCandidateGroup> candidateGroups =
-        grouped.entries.where((entry) => entry.value.length > 1).map((entry) {
-      final List<DuplicateAuditQuestion> group = entry.value;
-      return DuplicateCandidateGroup(
-        topic: group.first.topic,
-        subtopic: group.first.subtopic,
-        fingerprint: buildFingerprint(group.first),
-        heuristic: explainHeuristic(group.first),
-        questionIds: group.map((question) => question.id).toList(),
-        prompts: group.map((question) => question.promptZhHant).toList(),
-        sourcePaths: group.map((question) => question.sourcePath).toList(),
-      );
-    }).where((group) => !_isResolved(group, decisions)).toList()
-          ..sort((left, right) {
-            final int subtopicOrder =
-                left.subtopic.compareTo(right.subtopic);
-            if (subtopicOrder != 0) {
-              return subtopicOrder;
-            }
-            return left.questionIds.first.compareTo(right.questionIds.first);
-          });
+    final List<DuplicateCandidateGroup> candidateGroups = grouped.entries
+        .where((entry) => entry.value.length > 1)
+        .map((entry) {
+          final List<DuplicateAuditQuestion> group = entry.value;
+          return DuplicateCandidateGroup(
+            topic: group.first.topic,
+            subtopic: group.first.subtopic,
+            fingerprint: buildFingerprint(group.first),
+            heuristic: explainHeuristic(group.first),
+            questionIds: group.map((question) => question.id).toList(),
+            prompts: group.map((question) => question.promptZhHant).toList(),
+            sourcePaths: group.map((question) => question.sourcePath).toList(),
+          );
+        })
+        .where((group) => !_isResolved(group, decisions))
+        .toList()
+      ..sort((left, right) {
+        final int subtopicOrder = left.subtopic.compareTo(right.subtopic);
+        if (subtopicOrder != 0) {
+          return subtopicOrder;
+        }
+        return left.questionIds.first.compareTo(right.questionIds.first);
+      });
 
     return QuestionDuplicateAuditResult(
       scannedQuestions: questions.length,
@@ -256,7 +257,8 @@ class QuestionBankDuplicateAudit {
 
     final Map<String, dynamic> payload =
         jsonDecode(decisionsFile.readAsStringSync()) as Map<String, dynamic>;
-    final List<dynamic> groups = payload['groups'] as List<dynamic>? ?? <dynamic>[];
+    final List<dynamic> groups =
+        payload['groups'] as List<dynamic>? ?? <dynamic>[];
     return groups
         .map((dynamic rawGroup) => rawGroup as Map<String, dynamic>)
         .map(
@@ -264,8 +266,7 @@ class QuestionBankDuplicateAudit {
             status: raw['status'].toString(),
             topic: raw['topic'].toString(),
             subtopic: raw['subtopic'].toString(),
-            questionIds:
-                List<String>.from(raw['questionIds'] as List<dynamic>),
+            questionIds: List<String>.from(raw['questionIds'] as List<dynamic>),
           ),
         )
         .toList();
@@ -285,7 +286,8 @@ class QuestionBankDuplicateAudit {
 
     final Map<String, dynamic> manifest =
         jsonDecode(manifestFile.readAsStringSync()) as Map<String, dynamic>;
-    final List<dynamic> packs = manifest['packs'] as List<dynamic>? ?? <dynamic>[];
+    final List<dynamic> packs =
+        manifest['packs'] as List<dynamic>? ?? <dynamic>[];
     final List<File> files = packs
         .map((dynamic rawPack) => rawPack as Map<String, dynamic>)
         .map((Map<String, dynamic> pack) => File('$rootPath/${pack['path']}'))
@@ -312,7 +314,10 @@ class QuestionBankDuplicateAudit {
       _normalizePrompt(question.promptZhHant),
     );
     final List<String> structureTags = _extractStructureTags(question);
-    return 'same subtopic + same structure tags + keywords: ${[...structureTags, ...keywords].join(', ')}';
+    return 'same subtopic + same structure tags + keywords: ${[
+      ...structureTags,
+      ...keywords
+    ].join(', ')}';
   }
 
   static String _normalizePrompt(String prompt) {
@@ -375,20 +380,6 @@ class QuestionBankDuplicateAudit {
     return located.map((entry) => entry.value).toList();
   }
 
-  static String _collapseToShape(String prompt) {
-    String shape = prompt;
-    shape = shape.replaceAll(RegExp(r'<n>'), 'N');
-    shape = shape.replaceAll(RegExp(r'<person>'), 'P');
-    shape = shape.replaceAll(RegExp(r'<place>'), 'L');
-    shape = shape.replaceAll(RegExp(r'<item>'), 'I');
-    shape = shape.replaceAll(RegExp(r'<container>'), 'C');
-    shape = shape.replaceAll(RegExp(r'<slot>'), 'S');
-    shape = shape.replaceAll(RegExp(r'<unit>'), 'U');
-    shape = shape.replaceAll(RegExp(r'[\u4E00-\u9FFF]+'), 'W');
-    shape = shape.replaceAll(RegExp(r'(W)\1+'), 'W');
-    return shape;
-  }
-
   static List<String> _extractStructureTags(DuplicateAuditQuestion question) {
     final String prompt = question.promptZhHant;
     final List<String> tags = <String>[];
@@ -414,8 +405,14 @@ class QuestionBankDuplicateAudit {
     addIf(prompt.contains('幾種'), 'asks_count');
     addIf(prompt.contains('總和'), 'asks_sum');
     addIf(prompt.contains('比') && prompt.contains('倍'), 'ratio_and_multiple');
-    addIf(prompt.contains('一共有') || prompt.contains('共裝') || prompt.contains('合起來'), 'total_given');
-    addIf(prompt.contains('再過') || prompt.contains('年後') || prompt.contains('年前'), 'time_shift');
+    addIf(
+        prompt.contains('一共有') ||
+            prompt.contains('共裝') ||
+            prompt.contains('合起來'),
+        'total_given');
+    addIf(
+        prompt.contains('再過') || prompt.contains('年後') || prompt.contains('年前'),
+        'time_shift');
     addIf(
       prompt.contains('移') ||
           prompt.contains('拿') ||
@@ -424,7 +421,11 @@ class QuestionBankDuplicateAudit {
       'transfer_action',
     );
     addIf(prompt.contains('一樣多'), 'equalized');
-    addIf(prompt.contains('相差') || prompt.contains('多 2 顆') || prompt.contains('多 4 顆'), 'difference_target');
+    addIf(
+        prompt.contains('相差') ||
+            prompt.contains('多 2 顆') ||
+            prompt.contains('多 4 顆'),
+        'difference_target');
     addIf(prompt.contains('排成一直線'), 'line_tiling');
     addIf(prompt.contains('L 形'), 'l_shape');
     addIf(prompt.contains('小正方形'), 'unit_squares');
@@ -443,7 +444,8 @@ class QuestionBankDuplicateAudit {
     addIf(prompt.contains('重新拼成'), 'reassemble_shape');
     addIf(prompt.contains('走道'), 'walkway');
     addIf(prompt.contains('平均切成'), 'equal_partition');
-    addIf(prompt.contains('沿對角線') || prompt.contains('分成兩個三角形'), 'split_into_triangles');
+    addIf(prompt.contains('沿對角線') || prompt.contains('分成兩個三角形'),
+        'split_into_triangles');
     addIf(prompt.contains('上底與下底的和'), 'sum_of_bases');
     addIf(prompt.contains('上底是下底的一半'), 'half_base_relation');
     addIf(prompt.contains('下底比上底長'), 'base_difference_relation');
@@ -452,7 +454,8 @@ class QuestionBankDuplicateAudit {
     addIf(prompt.contains('3 階'), 'stairs_3_allowed');
     addIf(prompt.contains('不能連續兩次都走 2 階'), 'stairs_no_double_two');
     addIf(prompt.contains('剛好要用兩次 2 階'), 'stairs_exact_two_twos');
-    addIf(prompt.contains('第一步不能走 2 階') || prompt.contains('最後一步也不能走 2 階'), 'stairs_end_restriction');
+    addIf(prompt.contains('第一步不能走 2 階') || prompt.contains('最後一步也不能走 2 階'),
+        'stairs_end_restriction');
     addIf(prompt.contains('最左邊'), 'leftmost_position');
     addIf(prompt.contains('最右邊'), 'rightmost_position');
     addIf(prompt.contains('最前面'), 'frontmost_position');
@@ -478,7 +481,8 @@ class QuestionBankDuplicateAudit {
         addIf(prompt.contains('不能站在最左邊'), 'arrangement_forbid_left');
         addIf(prompt.contains('不能站在最右邊'), 'arrangement_forbid_right');
         addIf(prompt.contains('不能站在最前面'), 'arrangement_forbid_front');
-        addIf(prompt.contains('相鄰') || prompt.contains('緊接'), 'arrangement_adjacent_pair');
+        addIf(prompt.contains('相鄰') || prompt.contains('緊接'),
+            'arrangement_adjacent_pair');
         break;
       case 'perimeter_area':
         addIf(prompt.contains('周長是'), 'perimeter_given');
@@ -488,31 +492,38 @@ class QuestionBankDuplicateAudit {
         addIf(prompt.contains('對摺'), 'folding');
         break;
       case 'area_counting':
-        addIf(prompt.contains('正方形') && prompt.contains('重新拼成'), 'square_reassembled_to_rectangle');
+        addIf(prompt.contains('正方形') && prompt.contains('重新拼成'),
+            'square_reassembled_to_rectangle');
         addIf(prompt.contains('走道'), 'rectangle_walkway');
         addIf(prompt.contains('平均切成'), 'rectangle_equal_partition');
         break;
       case 'average_new_member':
         addIf(prompt.contains('新加入'), 'average_add_member');
-        addIf(prompt.contains('轉出') || prompt.contains('轉入'), 'average_replace_member');
+        addIf(prompt.contains('轉出') || prompt.contains('轉入'),
+            'average_replace_member');
         break;
       case 'balance':
-        addIf(prompt.contains('從右邊拿') || prompt.contains('從右邊移'), 'balance_right_to_left');
-        addIf(prompt.contains('從左邊拿') || prompt.contains('從左邊移'), 'balance_left_to_right');
+        addIf(prompt.contains('從右邊拿') || prompt.contains('從右邊移'),
+            'balance_right_to_left');
+        addIf(prompt.contains('從左邊拿') || prompt.contains('從左邊移'),
+            'balance_left_to_right');
         break;
       case 'border_counting':
         addIf(prompt.contains('邊框'), 'border_frame');
         addIf(prompt.contains('不算四個角'), 'exclude_corners');
         addIf(prompt.contains('長方形'), 'border_rectangle');
         addIf(prompt.contains('正方形'), 'border_square');
-        addIf(prompt.contains('長邊') || prompt.contains('長的一邊'), 'border_long_side_info');
-        addIf(prompt.contains('短邊') || prompt.contains('寬的一邊'), 'border_short_side_info');
+        addIf(prompt.contains('長邊') || prompt.contains('長的一邊'),
+            'border_long_side_info');
+        addIf(prompt.contains('短邊') || prompt.contains('寬的一邊'),
+            'border_short_side_info');
         addIf(prompt.contains('整圈'), 'border_total_count');
         addIf(prompt.contains('長邊排了幾顆') || prompt.contains('長的一邊排了幾顆'),
             'border_ask_long_side_count');
         break;
       case 'coordinate_distance':
-        addIf(prompt.contains('到') && prompt.contains('距離'), 'point_to_point_distance');
+        addIf(prompt.contains('到') && prompt.contains('距離'),
+            'point_to_point_distance');
         addIf(prompt.contains('對 x 軸的鏡射點'), 'distance_with_x_reflection');
         addIf(prompt.contains('對 y 軸鏡射後'), 'distance_with_y_reflection');
         addIf(prompt.contains('第一象限'), 'first_quadrant');
@@ -523,47 +534,69 @@ class QuestionBankDuplicateAudit {
         addIf(prompt.contains('最後的 x 座標'), 'asks_final_x');
         break;
       case 'coordinate_midpoint_style':
-        addIf(prompt.contains('中點') && prompt.contains('離 A 幾格'), 'midpoint_distance_from_endpoint');
+        addIf(prompt.contains('中點') && prompt.contains('離 A 幾格'),
+            'midpoint_distance_from_endpoint');
         addIf(prompt.contains('B 點的座標'), 'recover_endpoint_from_midpoint');
         break;
       case 'ordering':
         addIf(prompt.contains('左邊'), 'ordering_left_right');
-        addIf(prompt.contains('前面') || prompt.contains('後面'), 'ordering_front_back');
+        addIf(prompt.contains('前面') || prompt.contains('後面'),
+            'ordering_front_back');
         addIf(prompt.contains('早到'), 'ordering_arrival');
-        addIf(prompt.contains('得第二名') || prompt.contains('名'), 'ordering_race_rank');
+        addIf(prompt.contains('得第二名') || prompt.contains('名'),
+            'ordering_race_rank');
         addIf(prompt.contains('一定'), 'ordering_must');
         break;
       case 'matching':
-        addIf(prompt.contains('而且每人') || prompt.contains('都不同'), 'matching_all_distinct');
+        addIf(prompt.contains('而且每人') || prompt.contains('都不同'),
+            'matching_all_distinct');
         addIf(prompt.contains('同時也各喜歡一種'), 'matching_two_dimensions');
-        addIf(prompt.contains('顏色') || prompt.contains('喜歡紅色') || prompt.contains('喜歡藍色'),
+        addIf(
+            prompt.contains('顏色') ||
+                prompt.contains('喜歡紅色') ||
+                prompt.contains('喜歡藍色'),
             'matching_colors');
         addIf(prompt.contains('帽子'), 'matching_hats');
         addIf(prompt.contains('書包'), 'matching_bags');
         addIf(prompt.contains('飲料'), 'matching_drinks');
         addIf(prompt.contains('寵物'), 'matching_pets');
         addIf(prompt.contains('水果'), 'matching_fruits');
-        addIf(prompt.contains('社團') || prompt.contains('活動'), 'matching_activities');
+        addIf(prompt.contains('社團') || prompt.contains('活動'),
+            'matching_activities');
         addIf(prompt.contains('襪子'), 'matching_pair_existence');
         break;
       case 'elimination':
         addIf(prompt.contains('帽子'), 'elimination_hats');
-        addIf(prompt.contains('盒子') || prompt.contains('標籤'), 'elimination_boxes');
-        addIf(prompt.contains('標籤全都貼錯') || prompt.contains('標籤全都錯'), 'elimination_wrong_labels');
-        addIf(prompt.contains('只抽一次') || prompt.contains('抽一次一顆球'), 'elimination_single_draw');
+        addIf(prompt.contains('盒子') || prompt.contains('標籤'),
+            'elimination_boxes');
+        addIf(prompt.contains('標籤全都貼錯') || prompt.contains('標籤全都錯'),
+            'elimination_wrong_labels');
+        addIf(prompt.contains('只抽一次') || prompt.contains('抽一次一顆球'),
+            'elimination_single_draw');
         break;
       case 'case_reasoning':
-        addIf(prompt.contains('不是茶就是水') || prompt.contains('只有一盞是亮的'), 'binary_elimination');
+        addIf(prompt.contains('不是茶就是水') || prompt.contains('只有一盞是亮的'),
+            'binary_elimination');
         addIf(prompt.contains('恰好只有一人說真話'), 'exactly_one_truth');
         addIf(prompt.contains('恰好兩人說真話'), 'exactly_two_truths');
         addIf(prompt.contains('說謊'), 'includes_liar_statement');
-        addIf(prompt.contains('贏一局得 3 分') || prompt.contains('平局兩人各得 1 分'), 'score_system_case');
-        addIf(prompt.contains('座位編號之和') || prompt.contains('都是奇數'), 'seat_number_case');
+        addIf(prompt.contains('贏一局得 3 分') || prompt.contains('平局兩人各得 1 分'),
+            'score_system_case');
+        addIf(prompt.contains('座位編號之和') || prompt.contains('都是奇數'),
+            'seat_number_case');
         break;
       case 'comparison':
-        addIf(prompt.contains('比') && prompt.contains('多') && prompt.contains('少'), 'comparison_chain');
-        addIf(prompt.contains('連桶共重') || prompt.contains('倒出一半'), 'comparison_container_weight');
-        addIf(prompt.contains('誰比較矮') || prompt.contains('誰最快') || prompt.contains('誰比較重'),
+        addIf(
+            prompt.contains('比') &&
+                prompt.contains('多') &&
+                prompt.contains('少'),
+            'comparison_chain');
+        addIf(prompt.contains('連桶共重') || prompt.contains('倒出一半'),
+            'comparison_container_weight');
+        addIf(
+            prompt.contains('誰比較矮') ||
+                prompt.contains('誰最快') ||
+                prompt.contains('誰比較重'),
             'comparison_identity_query');
         addIf(prompt.contains('天平'), 'comparison_balance_scale');
         addIf(prompt.contains('誰比較矮'), 'comparison_shorter_query');
@@ -583,8 +616,10 @@ class QuestionBankDuplicateAudit {
         addIf(prompt.contains('花圃的長是多少'), 'asks_inner_length');
         break;
       case 'concentration_mixture':
-        addIf(prompt.contains('倒在一起') || prompt.contains('配成濃度'), 'mixture_combine');
-        addIf(prompt.contains('倒出') && prompt.contains('清水'), 'mixture_dilution_replace');
+        addIf(prompt.contains('倒在一起') || prompt.contains('配成濃度'),
+            'mixture_combine');
+        addIf(prompt.contains('倒出') && prompt.contains('清水'),
+            'mixture_dilution_replace');
         break;
       case 'congruences':
         addIf(prompt.contains('有幾個'), 'congruence_count');
@@ -599,25 +634,43 @@ class QuestionBankDuplicateAudit {
         addIf(prompt.contains('1 到 20'), 'digit_count_to_20');
         break;
       case 'equation_reasoning':
-        addIf(prompt.contains('都是 1 到 9 的數字') || prompt.contains('A 和 B'), 'equation_digit_relation');
-        addIf(prompt.contains('÷') || prompt.contains('除以'), 'equation_division_relation');
-        addIf(prompt.contains('★') || prompt.contains('△') || prompt.contains('◎'), 'equation_symbol_placeholder');
+        addIf(prompt.contains('都是 1 到 9 的數字') || prompt.contains('A 和 B'),
+            'equation_digit_relation');
+        addIf(prompt.contains('÷') || prompt.contains('除以'),
+            'equation_division_relation');
+        addIf(
+            prompt.contains('★') ||
+                prompt.contains('△') ||
+                prompt.contains('◎'),
+            'equation_symbol_placeholder');
         addIf(prompt.contains('.'), 'equation_decimal_balance');
         addIf(prompt.contains('不可能'), 'equation_impossible_choice');
         break;
       case 'direction':
-        addIf(prompt.contains('左邊') && prompt.contains('右邊'), 'direction_basic_left_right');
-        addIf(prompt.contains('正北方') || prompt.contains('正東方'), 'direction_compass');
+        addIf(prompt.contains('左邊') && prompt.contains('右邊'),
+            'direction_basic_left_right');
+        addIf(prompt.contains('正北方') || prompt.contains('正東方'),
+            'direction_compass');
         break;
       case 'position_direction':
-        addIf(prompt.contains('裡面') || prompt.contains('外面') || prompt.contains('上面') || prompt.contains('下面'),
+        addIf(
+            prompt.contains('裡面') ||
+                prompt.contains('外面') ||
+                prompt.contains('上面') ||
+                prompt.contains('下面'),
             'position_vocab');
-        addIf(prompt.contains('面向') && prompt.contains('轉'), 'turning_direction');
-        addIf(prompt.contains('方格') || prompt.contains('格線') || prompt.contains('起點'),
+        addIf(
+            prompt.contains('面向') && prompt.contains('轉'), 'turning_direction');
+        addIf(
+            prompt.contains('方格') ||
+                prompt.contains('格線') ||
+                prompt.contains('起點'),
             'grid_movement');
-        addIf(prompt.contains('同一個點') || prompt.contains('不同的點'), 'same_endpoint_check');
+        addIf(prompt.contains('同一個點') || prompt.contains('不同的點'),
+            'same_endpoint_check');
         addIf(prompt.contains('最少要走幾格'), 'return_distance');
-        addIf(prompt.contains('哪個方向') || prompt.contains('哪個方位'), 'asks_direction');
+        addIf(prompt.contains('哪個方向') || prompt.contains('哪個方位'),
+            'asks_direction');
         break;
       case 'divisibility':
         addIf(prompt.contains('能被 2 整除'), 'divisible_by_2');
@@ -638,72 +691,114 @@ class QuestionBankDuplicateAudit {
         addIf(prompt.contains('一共是'), 'piece_value_total');
         break;
       case 'multi_step':
-        addIf(prompt.contains('一共要付') || prompt.contains('一共要花'), 'multi_step_total_cost');
-        addIf(prompt.contains('還剩') || prompt.contains('剩下'), 'multi_step_remaining_money');
-        addIf(prompt.contains('每枝') || prompt.contains('每本') || prompt.contains('每個'), 'multi_step_unit_price');
+        addIf(prompt.contains('一共要付') || prompt.contains('一共要花'),
+            'multi_step_total_cost');
+        addIf(prompt.contains('還剩') || prompt.contains('剩下'),
+            'multi_step_remaining_money');
+        addIf(
+            prompt.contains('每枝') ||
+                prompt.contains('每本') ||
+                prompt.contains('每個'),
+            'multi_step_unit_price');
         addIf(prompt.contains('帶了'), 'multi_step_starting_budget');
         break;
       case 'pigeonhole':
-        addIf(prompt.contains('星期一到星期日') || prompt.contains('星期幾'), 'pigeonhole_weekday');
-        addIf(prompt.contains('生日月份') || prompt.contains('月份'), 'pigeonhole_month');
-        addIf(prompt.contains('餘數相同') || prompt.contains('除以'), 'pigeonhole_remainder');
+        addIf(prompt.contains('星期一到星期日') || prompt.contains('星期幾'),
+            'pigeonhole_weekday');
+        addIf(prompt.contains('生日月份') || prompt.contains('月份'),
+            'pigeonhole_month');
+        addIf(prompt.contains('餘數相同') || prompt.contains('除以'),
+            'pigeonhole_remainder');
         break;
       case 'grid_elimination':
-        addIf(prompt.contains('從左到右') || prompt.contains('排成一列'), 'grid_linear_order');
-        addIf(prompt.contains('各養一種') || prompt.contains('各喜歡一種') || prompt.contains('各自選一種'),
+        addIf(prompt.contains('從左到右') || prompt.contains('排成一列'),
+            'grid_linear_order');
+        addIf(
+            prompt.contains('各養一種') ||
+                prompt.contains('各喜歡一種') ||
+                prompt.contains('各自選一種'),
             'grid_multi_attribute_matching');
-        addIf(prompt.contains('寵物') || prompt.contains('水果') || prompt.contains('運動') || prompt.contains('顏色'),
+        addIf(
+            prompt.contains('寵物') ||
+                prompt.contains('水果') ||
+                prompt.contains('運動') ||
+                prompt.contains('顏色'),
             'grid_category_assignment');
         break;
       case 'position':
-        addIf(prompt.contains('座位不同') || prompt.contains('坐在'), 'position_seating_assignment');
-        addIf(prompt.contains('盒') || prompt.contains('櫃') || prompt.contains('抽屜'), 'position_hidden_location');
-        addIf(prompt.contains('左邊') || prompt.contains('右邊'), 'position_relative_side');
-        addIf(prompt.contains('不在') && prompt.contains('右邊') && prompt.contains('左邊'),
+        addIf(prompt.contains('座位不同') || prompt.contains('坐在'),
+            'position_seating_assignment');
+        addIf(
+            prompt.contains('盒') ||
+                prompt.contains('櫃') ||
+                prompt.contains('抽屜'),
+            'position_hidden_location');
+        addIf(prompt.contains('左邊') || prompt.contains('右邊'),
+            'position_relative_side');
+        addIf(
+            prompt.contains('不在') &&
+                prompt.contains('右邊') &&
+                prompt.contains('左邊'),
             'position_range_filter');
         break;
       case 'set_filtering':
-        addIf(prompt.contains('乘法表中') && !prompt.contains('個位數字'), 'set_filtering_multiples');
-        addIf(prompt.contains('個位數字') || prompt.contains('十位數字'), 'set_filtering_digit_condition');
+        addIf(prompt.contains('乘法表中') && !prompt.contains('個位數字'),
+            'set_filtering_multiples');
+        addIf(prompt.contains('個位數字') || prompt.contains('十位數字'),
+            'set_filtering_digit_condition');
         break;
       case 'sequence':
         addIf(prompt.contains('__'), 'sequence_next_term');
-        addIf(prompt.contains('每次加') || prompt.contains('每次減'), 'sequence_additive');
-        addIf(prompt.contains('每次乘') || prompt.contains('每一項都是前一項'), 'sequence_multiplicative');
+        addIf(prompt.contains('每次加') || prompt.contains('每次減'),
+            'sequence_additive');
+        addIf(prompt.contains('每次乘') || prompt.contains('每一項都是前一項'),
+            'sequence_multiplicative');
         break;
       case 'shapes_properties':
         addIf(prompt.contains('沒有角'), 'no_corner_property');
-        addIf(prompt.contains('四個角都一樣大') || prompt.contains('四個直角'), 'four_right_angles_property');
+        addIf(prompt.contains('四個角都一樣大') || prompt.contains('四個直角'),
+            'four_right_angles_property');
         addIf(prompt.contains('每條邊都一樣長'), 'equal_sides_property');
-        addIf(prompt.contains('哪一個圖形') || prompt.contains('哪個圖形'), 'identify_shape');
-        addIf(prompt.contains('反駁老師') || prompt.contains('反駁他'), 'counterexample_reasoning');
+        addIf(prompt.contains('哪一個圖形') || prompt.contains('哪個圖形'),
+            'identify_shape');
+        addIf(prompt.contains('反駁老師') || prompt.contains('反駁他'),
+            'counterexample_reasoning');
         break;
       case 'symmetry':
         addIf(prompt.contains('正方形'), 'symmetry_square');
-        addIf(prompt.contains('大寫英文字母') || prompt.contains('字母'), 'symmetry_letter');
+        addIf(prompt.contains('大寫英文字母') || prompt.contains('字母'),
+            'symmetry_letter');
         addIf(prompt.contains('對稱線'), 'symmetry_line_count');
-        addIf(prompt.contains('對摺') && prompt.contains('重合'), 'symmetry_fold_overlap');
+        addIf(prompt.contains('對摺') && prompt.contains('重合'),
+            'symmetry_fold_overlap');
         break;
       case 'successive_changes':
-        addIf(prompt.contains('先漲價') && prompt.contains('再打'), 'successive_markup_discount');
-        addIf(prompt.contains('成本') && prompt.contains('可賺得'), 'successive_profit_after_discount');
+        addIf(prompt.contains('先漲價') && prompt.contains('再打'),
+            'successive_markup_discount');
+        addIf(prompt.contains('成本') && prompt.contains('可賺得'),
+            'successive_profit_after_discount');
         break;
       case 'translation':
-        addIf(prompt.contains('從 (') && prompt.contains('平移到'), 'translation_direct_vector');
+        addIf(prompt.contains('從 (') && prompt.contains('平移到'),
+            'translation_direct_vector');
         addIf(prompt.contains('平移前的座標'), 'translation_reverse_lookup');
-        addIf(prompt.contains('a 格') || prompt.contains('b 格'), 'translation_symbolic_vector');
+        addIf(prompt.contains('a 格') || prompt.contains('b 格'),
+            'translation_symbolic_vector');
         break;
       case 'truth_deduction':
         addIf(prompt.contains('也比小美矮'), 'truth_self_contradiction');
-        addIf(prompt.contains('寶石在紅盒') || prompt.contains('盒子上的話'), 'truth_box_statements');
-        addIf(prompt.contains('恰好只有一句真話') || prompt.contains('恰好一人說真話'), 'truth_exactly_one');
+        addIf(prompt.contains('寶石在紅盒') || prompt.contains('盒子上的話'),
+            'truth_box_statements');
+        addIf(prompt.contains('恰好只有一句真話') || prompt.contains('恰好一人說真話'),
+            'truth_exactly_one');
         break;
       case 'truth_network':
         addIf(prompt.contains('打破了花瓶'), 'truth_culprit_case');
         addIf(prompt.contains('甲說：「乙說真話。」'), 'truth_meta_chain');
         break;
       case 'venn_diagram':
-        addIf(prompt.contains('兩者都不喜歡') || prompt.contains('兩者都不會'), 'venn_neither');
+        addIf(prompt.contains('兩者都不喜歡') || prompt.contains('兩者都不會'),
+            'venn_neither');
         addIf(prompt.contains('只會') || prompt.contains('只喜歡'), 'venn_only_one');
         break;
       case 'trapezoid_area':

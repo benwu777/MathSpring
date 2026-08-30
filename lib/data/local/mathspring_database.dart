@@ -3,7 +3,7 @@ import 'package:sqflite/sqflite.dart';
 
 class MathSpringDatabase {
   static const String databaseName = 'mathspring.db';
-  static const int schemaVersion = 3;
+  static const int schemaVersion = 4;
 
   static Future<Database> openDefault() async {
     final String databasesPath = await getDatabasesPath();
@@ -72,6 +72,21 @@ class MathSpringDatabase {
           )
       ''');
     }
+    if (oldVersion < 4) {
+      await db.execute(
+        'ALTER TABLE answer_sessions ADD COLUMN time_limit_seconds INTEGER',
+      );
+      await db.execute('ALTER TABLE answer_sessions ADD COLUMN max_score INTEGER');
+      await db.execute(
+        'ALTER TABLE answer_sessions ADD COLUMN earned_score INTEGER',
+      );
+      await db.execute(
+        'ALTER TABLE session_answer_records ADD COLUMN max_score INTEGER',
+      );
+      await db.execute(
+        'ALTER TABLE session_answer_records ADD COLUMN earned_score INTEGER',
+      );
+    }
   }
 
   static Future<void> _createLearnerProfilesTable(Database db) async {
@@ -101,7 +116,10 @@ class MathSpringDatabase {
         ended_at TEXT NOT NULL,
         elapsed_seconds INTEGER NOT NULL,
         total_questions INTEGER NOT NULL,
-        correct_count INTEGER NOT NULL
+        correct_count INTEGER NOT NULL,
+        time_limit_seconds INTEGER,
+        max_score INTEGER,
+        earned_score INTEGER
       )
     ''');
   }
@@ -115,6 +133,8 @@ class MathSpringDatabase {
         submitted_answer TEXT NOT NULL,
         is_correct INTEGER NOT NULL,
         answered_at TEXT NOT NULL,
+        max_score INTEGER,
+        earned_score INTEGER,
         PRIMARY KEY (session_id, sequence_number)
       )
     ''');

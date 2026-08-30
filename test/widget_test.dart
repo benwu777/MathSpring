@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -12,6 +10,7 @@ import 'package:mathspring/models/question.dart';
 import 'package:mathspring/models/question_progress.dart';
 import 'package:mathspring/models/session_answer_record.dart';
 import 'package:mathspring/services/session_launch_plan_builder.dart';
+import 'package:mathspring/services/formal_exam_preset.dart';
 
 void main() {
   tearDown(() {
@@ -21,6 +20,7 @@ void main() {
   });
 
   AppServices createTestServices({
+    bool completeDailyMission = true,
     Future<void> Function(QuestionProgress progress)? onSaveQuestionProgress,
     Future<void> Function(
       AnswerSession session,
@@ -30,6 +30,31 @@ void main() {
     List<AnswerSession>? initialSessions,
     Map<String, List<SessionAnswerRecord>>? initialSessionRecords,
   }) {
+    final DateTime now = DateTime.now();
+    final AnswerSession dailySession = AnswerSession(
+      id: 'completed_daily_mission',
+      learnerId: 'learner_allen',
+      mode: 'practice',
+      topicCode: 'mixed',
+      levelStage: 'grade4',
+      challengeTier: 'foundation',
+      startedAtIso: now.toUtc().toIso8601String(),
+      endedAtIso: now.toUtc().toIso8601String(),
+      elapsedSeconds: 0,
+      totalQuestions: 5,
+      correctCount: 5,
+    );
+    final List<SessionAnswerRecord> dailyRecords = <SessionAnswerRecord>[
+      for (int index = 0; index < 5; index += 1)
+        SessionAnswerRecord(
+          sessionId: dailySession.id,
+          questionId: 'daily_question_$index',
+          sequence: index + 1,
+          submittedAnswer: 'A',
+          isCorrect: true,
+          answeredAtIso: now.toUtc().toIso8601String(),
+        ),
+    ];
     return AppServices.forTesting(
       learnerProfiles: const [
         LearnerProfile(
@@ -51,8 +76,14 @@ void main() {
       onSaveQuestionProgress: onSaveQuestionProgress,
       onSaveAnswerSession: onSaveAnswerSession,
       initialProgress: initialProgress,
-      initialSessions: initialSessions,
-      initialSessionRecords: initialSessionRecords,
+      initialSessions: initialSessions ??
+          (completeDailyMission ? <AnswerSession>[dailySession] : null),
+      initialSessionRecords: initialSessionRecords ??
+          (completeDailyMission
+              ? <String, List<SessionAnswerRecord>>{
+                  dailySession.id: dailyRecords,
+                }
+              : null),
     );
   }
 
@@ -219,7 +250,8 @@ void main() {
       'challengeTier': 'foundation',
       'prompt': {
         'zh-Hant': '下圖長方形的長是 5，寬是 3，它的周長是多少？',
-        'en': 'In the rectangle below, the length is 5 and the width is 3. What is its perimeter?',
+        'en':
+            'In the rectangle below, the length is 5 and the width is 3. What is its perimeter?',
       },
       'answer': {
         'zh-Hant': '答案是 16。',
@@ -267,11 +299,13 @@ void main() {
       'challengeTier': 'foundation',
       'prompt': {
         'zh-Hant': '在座標平面上，點 (4, 1) 往上移 3 格後，會到哪一點？',
-        'en': 'On the coordinate plane, if the point (4, 1) moves up 3 units, where does it land?',
+        'en':
+            'On the coordinate plane, if the point (4, 1) moves up 3 units, where does it land?',
       },
       'answer': {
         'zh-Hant': '往上移只增加縱坐標，所以到 (4,4)。',
-        'en': 'Moving up increases only the y-coordinate, so the point becomes (4,4).',
+        'en':
+            'Moving up increases only the y-coordinate, so the point becomes (4,4).',
       },
       'solutionSteps': {
         'zh-Hant': [
@@ -341,8 +375,10 @@ void main() {
       'levelStage': 'grade6',
       'challengeTier': 'foundation',
       'prompt': {
-        'zh-Hant': '如圖，圓內有一點 P，與圓周上的四等分點 A、B、C、D 相連，分成四部分，其中三部分面積為 12、15、20。陰影部分面積是多少？',
-        'en': 'In the diagram, a point P inside the circle is connected to four equally spaced points A, B, C, and D on the circle, creating four regions. Three regions have areas 12, 15, and 20. What is the shaded area?',
+        'zh-Hant':
+            '如圖，圓內有一點 P，與圓周上的四等分點 A、B、C、D 相連，分成四部分，其中三部分面積為 12、15、20。陰影部分面積是多少？',
+        'en':
+            'In the diagram, a point P inside the circle is connected to four equally spaced points A, B, C, and D on the circle, creating four regions. Three regions have areas 12, 15, and 20. What is the shaded area?',
       },
       'answer': {
         'zh-Hant': '答案是 23。',
@@ -491,7 +527,8 @@ void main() {
       'prompt': {
         'zh-Hant': '在四個選項中，選出最符合規則的一項，並說明你是如何判斷的。',
         'zh-Hans': '在四个选项中，选出最符合规律的一项，并说明你是如何判断的。',
-        'en': 'Choose the option that best matches the rule and explain how you decided.',
+        'en':
+            'Choose the option that best matches the rule and explain how you decided.',
         'ja': '4 つの選択肢の中から規則に最も合うものを選び、判断のしかたを考えてください。',
       },
       'answer': {
@@ -503,7 +540,10 @@ void main() {
       'solutionSteps': {
         'zh-Hant': ['觀察每一列的變化。', '只有 B 同時符合兩個條件。'],
         'zh-Hans': ['观察每一列的变化。', '只有 B 同时符合两个条件。'],
-        'en': ['Observe how each row changes.', 'Only B satisfies both conditions.'],
+        'en': [
+          'Observe how each row changes.',
+          'Only B satisfies both conditions.'
+        ],
         'ja': ['各行の変化を観察します。', '2 つの条件を同時に満たすのは B だけです。'],
       },
       'figure': {
@@ -606,17 +646,13 @@ void main() {
     expect(textTheme.bodySmall?.fontSize, 11);
     expect(textTheme.bodySmall?.height, 1.35);
     expect(
-      theme.filledButtonTheme.style
-          ?.textStyle
-          ?.resolve(const <WidgetState>{})
-          ?.fontSize,
+      theme.filledButtonTheme.style?.textStyle
+          ?.resolve(const <WidgetState>{})?.fontSize,
       14,
     );
     expect(
-      theme.outlinedButtonTheme.style
-          ?.textStyle
-          ?.resolve(const <WidgetState>{})
-          ?.fontSize,
+      theme.outlinedButtonTheme.style?.textStyle
+          ?.resolve(const <WidgetState>{})?.fontSize,
       14,
     );
   });
@@ -657,16 +693,22 @@ void main() {
 
     await pumpApp(tester, services);
 
-    expect(find.byKey(const ValueKey<String>('home_hero_surface')), findsOneWidget);
-    expect(find.byKey(const ValueKey<String>('home_background_glow')), findsOneWidget);
-    expect(find.byKey(const ValueKey<String>('hero_primary_cta')), findsOneWidget);
+    expect(find.byKey(const ValueKey<String>('home_hero_surface')),
+        findsOneWidget);
+    expect(find.byKey(const ValueKey<String>('home_background_glow')),
+        findsOneWidget);
+    expect(
+        find.byKey(const ValueKey<String>('hero_primary_cta')), findsOneWidget);
 
     await tester.tap(find.text('Settings').first);
     await tester.pumpAndSettle();
 
-    expect(find.byKey(const ValueKey<String>('home_shell_frame')), findsOneWidget);
-    expect(find.byKey(const ValueKey<String>('top_bar_brand_chip')), findsOneWidget);
-    expect(find.byKey(const ValueKey<String>('section_card_Profiles & Settings')),
+    expect(
+        find.byKey(const ValueKey<String>('home_shell_frame')), findsOneWidget);
+    expect(find.byKey(const ValueKey<String>('top_bar_brand_chip')),
+        findsOneWidget);
+    expect(
+        find.byKey(const ValueKey<String>('section_card_Profiles & Settings')),
         findsOneWidget);
     expect(find.byKey(const ValueKey<String>('learner_summary_banner')),
         findsOneWidget);
@@ -695,7 +737,8 @@ void main() {
         home: PracticeSessionPage(
           services: services,
           pack: const BundledQuestionPackInfo(
-            path: 'assets/questions/geometry/grade2_foundation.geometry.v1.json',
+            path:
+                'assets/questions/geometry/grade2_foundation.geometry.v1.json',
             topic: '幾何',
             topicCode: 'geometry',
             levelStage: 'grade2',
@@ -714,8 +757,10 @@ void main() {
 
     expect(find.byKey(const ValueKey<String>('practice_question_header')),
         findsOneWidget);
-    expect(find.byKey(const ValueKey<String>('study_surface_card')), findsOneWidget);
-    expect(find.byKey(const ValueKey<String>('question_meta_badge')), findsOneWidget);
+    expect(find.byKey(const ValueKey<String>('study_surface_card')),
+        findsOneWidget);
+    expect(find.byKey(const ValueKey<String>('question_meta_badge')),
+        findsOneWidget);
   });
 
   testWidgets('app shell shows bottom navigation and defaults to Practice',
@@ -741,6 +786,20 @@ void main() {
     expect(find.text('Browse library'), findsNothing);
   });
 
+  testWidgets('shows the daily mission before ordinary practice',
+      (WidgetTester tester) async {
+    await tester.pumpWidget(
+      MathSpringApp(services: createTestServices(completeDailyMission: false)),
+    );
+    await tester.pumpAndSettle();
+
+    expect(find.byKey(const ValueKey<String>('daily_mission_landing')),
+        findsOneWidget);
+    expect(find.text('0 / 5'), findsOneWidget);
+    expect(find.byKey(const ValueKey<String>('start_daily_mission')),
+        findsOneWidget);
+  });
+
   testWidgets('shows Traditional Chinese home content when system locale is zh',
       (WidgetTester tester) async {
     final TestWidgetsFlutterBinding binding =
@@ -758,7 +817,20 @@ void main() {
     expect(find.text('幾何'), findsNothing);
   });
 
-  testWidgets('shows Simplified Chinese home content when system locale is zh-CN',
+  testWidgets('home tagline uses mathematical thinking wording',
+      (WidgetTester tester) async {
+    final TestWidgetsFlutterBinding binding =
+        TestWidgetsFlutterBinding.ensureInitialized();
+    binding.platformDispatcher.localeTestValue = const Locale('zh', 'TW');
+
+    await pumpApp(tester, createTestServices());
+
+    expect(find.text('數學思維與進階練習'), findsOneWidget);
+    expect(find.textContaining('奧數'), findsNothing);
+  });
+
+  testWidgets(
+      'shows Simplified Chinese home content when system locale is zh-CN',
       (WidgetTester tester) async {
     final TestWidgetsFlutterBinding binding =
         TestWidgetsFlutterBinding.ensureInitialized();
@@ -769,7 +841,7 @@ void main() {
     await pumpApp(tester, services);
 
     expect(find.text('开始练习'), findsWidgets);
-    expect(find.text('奥数思维训练'), findsOneWidget);
+    expect(find.text('数学思维与进阶练习'), findsOneWidget);
     expect(find.text('练习'), findsWidgets);
     expect(find.text('几何'), findsNothing);
   });
@@ -785,7 +857,7 @@ void main() {
     await pumpApp(tester, services);
 
     expect(find.text('練習開始'), findsWidgets);
-    expect(find.text('オリンピック数学トレーニング'), findsOneWidget);
+    expect(find.text('数学的思考と発展練習'), findsOneWidget);
     expect(find.text('テスト'), findsWidgets);
     expect(find.text('図形'), findsNothing);
   });
@@ -804,7 +876,8 @@ void main() {
 
     await tester.tap(find.text('設定'));
     await tester.pumpAndSettle();
-    await tester.ensureVisible(find.byKey(const ValueKey<String>('locale_option_en')));
+    await tester
+        .ensureVisible(find.byKey(const ValueKey<String>('locale_option_en')));
     await tester.tap(find.byKey(const ValueKey<String>('locale_option_en')));
     await tester.pumpAndSettle();
 
@@ -813,6 +886,27 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.text('Start practice'), findsOneWidget);
     expect(find.text('Practice'), findsWidgets);
+  });
+
+  testWidgets('settings exposes support and privacy links in English',
+      (WidgetTester tester) async {
+    final TestWidgetsFlutterBinding binding =
+        TestWidgetsFlutterBinding.ensureInitialized();
+    binding.platformDispatcher.localeTestValue = const Locale('zh', 'TW');
+    final AppServices services = createTestServices();
+
+    await pumpApp(tester, services);
+    await tester.tap(find.text('設定'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.byKey(const ValueKey<String>('locale_option_en')));
+    await tester.pumpAndSettle();
+
+    expect(find.byKey(const ValueKey<String>('open_support_link')),
+        findsOneWidget);
+    expect(find.byKey(const ValueKey<String>('open_privacy_link')),
+        findsOneWidget);
+    expect(find.text('Support'), findsOneWidget);
+    expect(find.text('Privacy Policy'), findsOneWidget);
   });
 
   testWidgets('practice topic selection shows chosen topic before starting',
@@ -829,12 +923,14 @@ void main() {
 
     await tester.tap(find.byKey(const ValueKey<String>('open_topic_practice')));
     await tester.pumpAndSettle();
-    await tester.tap(find.byKey(const ValueKey<String>('topic_action_geometry')));
+    await tester
+        .tap(find.byKey(const ValueKey<String>('topic_action_geometry')));
     await tester.pumpAndSettle();
 
     expect(find.text('Selected topic'), findsOneWidget);
     expect(find.text('Geometry'), findsAtLeastNWidgets(1));
-    expect(find.byKey(const ValueKey<String>('open_start_practice')), findsOneWidget);
+    expect(find.byKey(const ValueKey<String>('open_start_practice')),
+        findsOneWidget);
   });
 
   testWidgets('quiz tab focuses on start action instead of topic selection',
@@ -853,6 +949,52 @@ void main() {
     expect(find.text('Start quiz'), findsOneWidget);
     expect(find.byKey(const ValueKey<String>('open_topic_quiz')), findsNothing);
     expect(find.text('Choose topic'), findsNothing);
+  });
+
+  testWidgets('formal exam start offers the fixed exam presets',
+      (WidgetTester tester) async {
+    await tester.pumpWidget(MathSpringApp(services: createTestServices()));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Quiz'));
+    await tester.pumpAndSettle();
+    final Finder startButton =
+        find.byKey(const ValueKey<String>('open_start_quiz'));
+    await tester.ensureVisible(startButton);
+    await tester.tap(startButton);
+    await tester.pumpAndSettle();
+
+    expect(find.byKey(const ValueKey<String>('formal_exam_5_10')), findsOneWidget);
+    expect(find.byKey(const ValueKey<String>('formal_exam_10_20')), findsOneWidget);
+    expect(find.byKey(const ValueKey<String>('formal_exam_15_30')), findsOneWidget);
+  });
+
+  testWidgets('formal exam exposes a question navigator with point values',
+      (WidgetTester tester) async {
+    const BundledQuestionPackInfo pack = BundledQuestionPackInfo(
+      path: 'unused',
+      topic: 'Mixed',
+      topicCode: 'mixed',
+      levelStage: 'grade4',
+      challengeTier: 'foundation',
+      questionCount: 2,
+    );
+    await tester.pumpWidget(MaterialApp(
+      home: QuizSessionPage(
+        services: createTestServices(),
+        pack: pack,
+        initialQuestions: <Question>[createDemoQuestion(), createSecondDemoQuestion()],
+        formalExamPreset: FormalExamPreset.standard.first,
+      ),
+    ));
+    await tester.pump();
+    final Finder navigatorButton =
+        find.byKey(const ValueKey<String>('open_exam_navigator'));
+    await tester.ensureVisible(navigatorButton);
+    await tester.tap(navigatorButton);
+    await tester.pump();
+
+    expect(find.text('題目總覽'), findsWidgets);
+    expect(find.textContaining('分'), findsWidgets);
   });
 
   testWidgets('home page opens the trigonometry drawing demo',
@@ -925,7 +1067,8 @@ void main() {
         home: PracticeSessionPage(
           services: services,
           pack: const BundledQuestionPackInfo(
-            path: 'assets/questions/geometry/grade2_foundation.geometry.v1.json',
+            path:
+                'assets/questions/geometry/grade2_foundation.geometry.v1.json',
             topic: '幾何',
             topicCode: 'geometry',
             levelStage: 'grade2',
@@ -942,7 +1085,8 @@ void main() {
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 300));
 
-    expect(find.byKey(const ValueKey<String>('figure_shape_diagram')), findsOneWidget);
+    expect(find.byKey(const ValueKey<String>('figure_shape_diagram')),
+        findsOneWidget);
   });
 
   testWidgets('question figures can open in fullscreen preview',
@@ -966,7 +1110,8 @@ void main() {
         home: PracticeSessionPage(
           services: services,
           pack: const BundledQuestionPackInfo(
-            path: 'assets/questions/geometry/grade2_foundation.geometry.v1.json',
+            path:
+                'assets/questions/geometry/grade2_foundation.geometry.v1.json',
             topic: '幾何',
             topicCode: 'geometry',
             levelStage: 'grade2',
@@ -988,13 +1133,19 @@ void main() {
     );
     await tester.pumpAndSettle();
 
-    expect(find.byKey(const ValueKey<String>('figure_preview_dialog')), findsOneWidget);
-    expect(find.byKey(const ValueKey<String>('figure_preview_canvas_shape_diagram')), findsOneWidget);
+    expect(find.byKey(const ValueKey<String>('figure_preview_dialog')),
+        findsOneWidget);
+    expect(
+        find.byKey(
+            const ValueKey<String>('figure_preview_canvas_shape_diagram')),
+        findsOneWidget);
 
-    await tester.tap(find.byKey(const ValueKey<String>('figure_preview_close')));
+    await tester
+        .tap(find.byKey(const ValueKey<String>('figure_preview_close')));
     await tester.pumpAndSettle();
 
-    expect(find.byKey(const ValueKey<String>('figure_preview_dialog')), findsNothing);
+    expect(find.byKey(const ValueKey<String>('figure_preview_dialog')),
+        findsNothing);
   });
 
   testWidgets('quiz session renders a coordinate plane figure',
@@ -1018,7 +1169,8 @@ void main() {
         home: QuizSessionPage(
           services: services,
           pack: const BundledQuestionPackInfo(
-            path: 'assets/questions/geometry/grade4_foundation.geometry.v1.json',
+            path:
+                'assets/questions/geometry/grade4_foundation.geometry.v1.json',
             topic: '幾何',
             topicCode: 'geometry',
             levelStage: 'grade4',
@@ -1062,7 +1214,8 @@ void main() {
         home: PracticeSessionPage(
           services: services,
           pack: const BundledQuestionPackInfo(
-            path: 'assets/questions/geometry/grade6_foundation.geometry.v1.json',
+            path:
+                'assets/questions/geometry/grade6_foundation.geometry.v1.json',
             topic: '幾何',
             topicCode: 'geometry',
             levelStage: 'grade6',
@@ -1106,7 +1259,8 @@ void main() {
         home: PracticeSessionPage(
           services: services,
           pack: const BundledQuestionPackInfo(
-            path: 'assets/questions/geometry/grade2_foundation.geometry.v1.json',
+            path:
+                'assets/questions/geometry/grade2_foundation.geometry.v1.json',
             topic: '幾何',
             topicCode: 'geometry',
             levelStage: 'grade2',
@@ -1124,11 +1278,13 @@ void main() {
     await tester.pump(const Duration(milliseconds: 300));
 
     await tester.enterText(
-      find.byKey(const ValueKey<String>('practice_integer_input_geometry_grade2_foundation_001')),
+      find.byKey(const ValueKey<String>(
+          'practice_integer_input_geometry_grade2_foundation_001')),
       '16',
     );
     await tester.tap(
-      find.byKey(const ValueKey<String>('submit_answer_geometry_grade2_foundation_001')),
+      find.byKey(const ValueKey<String>(
+          'submit_answer_geometry_grade2_foundation_001')),
     );
     await tester.pumpAndSettle();
 
@@ -1137,8 +1293,12 @@ void main() {
     );
     await tester.pumpAndSettle();
 
-    expect(find.byKey(const ValueKey<String>('figure_preview_dialog')), findsOneWidget);
-    expect(find.byKey(const ValueKey<String>('figure_preview_canvas_shape_diagram')), findsOneWidget);
+    expect(find.byKey(const ValueKey<String>('figure_preview_dialog')),
+        findsOneWidget);
+    expect(
+        find.byKey(
+            const ValueKey<String>('figure_preview_canvas_shape_diagram')),
+        findsOneWidget);
   });
 
   testWidgets('practice session renders a composite grid shape figure',
@@ -1162,7 +1322,8 @@ void main() {
         home: PracticeSessionPage(
           services: services,
           pack: const BundledQuestionPackInfo(
-            path: 'assets/questions/geometry/grade3_foundation.geometry.v1.json',
+            path:
+                'assets/questions/geometry/grade3_foundation.geometry.v1.json',
             topic: '幾何',
             topicCode: 'geometry',
             levelStage: 'grade3',
@@ -1185,7 +1346,8 @@ void main() {
     );
   });
 
-  testWidgets('practice question display uses simplified Chinese localized text widgets',
+  testWidgets(
+      'practice question display uses simplified Chinese localized text widgets',
       (WidgetTester tester) async {
     final TestWidgetsFlutterBinding binding =
         TestWidgetsFlutterBinding.ensureInitialized();
@@ -1291,7 +1453,8 @@ void main() {
     expect(find.textContaining('Math Kangaroo USA 2025'), findsOneWidget);
   });
 
-  testWidgets('switches current learner and attributes progress to that learner',
+  testWidgets(
+      'switches current learner and attributes progress to that learner',
       (WidgetTester tester) async {
     final TestWidgetsFlutterBinding binding =
         TestWidgetsFlutterBinding.ensureInitialized();
@@ -1358,7 +1521,8 @@ void main() {
     expect(savedProgress!.learnerId, 'learner_mia');
   });
 
-  testWidgets('settings shows learner grade ranges instead of competition profiles',
+  testWidgets(
+      'settings shows learner grade ranges instead of competition profiles',
       (WidgetTester tester) async {
     final TestWidgetsFlutterBinding binding =
         TestWidgetsFlutterBinding.ensureInitialized();
@@ -1404,7 +1568,8 @@ void main() {
     await pumpApp(tester, services);
     await tester.tap(find.text('設定'));
     await tester.pumpAndSettle();
-    await tester.tap(find.byKey(const ValueKey<String>('edit_learner_learner_allen')));
+    await tester
+        .tap(find.byKey(const ValueKey<String>('edit_learner_learner_allen')));
     await tester.pumpAndSettle();
 
     expect(find.text('年級範圍'), findsWidgets);
@@ -1431,10 +1596,12 @@ void main() {
 
     expect(currentRoleLabel.style, isNotNull);
     expect(allenValue.style, isNotNull);
-    expect(allenValue.style!.fontSize, greaterThan(currentRoleLabel.style!.fontSize!));
+    expect(allenValue.style!.fontSize,
+        greaterThan(currentRoleLabel.style!.fontSize!));
   });
 
-  testWidgets('secondary and high school ranges do not use primary-school labels',
+  testWidgets(
+      'secondary and high school ranges do not use primary-school labels',
       (WidgetTester tester) async {
     final TestWidgetsFlutterBinding binding =
         TestWidgetsFlutterBinding.ensureInitialized();
@@ -1642,7 +1809,8 @@ void main() {
         home: QuizSessionPage(
           services: services,
           pack: const BundledQuestionPackInfo(
-            path: 'assets/questions/geometry/grade4_foundation.geometry.v1.json',
+            path:
+                'assets/questions/geometry/grade4_foundation.geometry.v1.json',
             topic: '幾何',
             topicCode: 'geometry',
             levelStage: 'grade4',
@@ -1769,7 +1937,8 @@ void main() {
         home: PracticeSessionPage(
           services: services,
           pack: const BundledQuestionPackInfo(
-            path: 'assets/questions/geometry/grade4_foundation.geometry.v1.json',
+            path:
+                'assets/questions/geometry/grade4_foundation.geometry.v1.json',
             topic: '幾何',
             topicCode: 'geometry',
             levelStage: 'grade4',
@@ -1791,7 +1960,8 @@ void main() {
 
     await tester.tap(
       find.byKey(
-        const ValueKey<String>('practice_option_geometry_grade4_foundation_001_B'),
+        const ValueKey<String>(
+            'practice_option_geometry_grade4_foundation_001_B'),
       ),
     );
     await tester.pump();
@@ -1818,7 +1988,8 @@ void main() {
     expect(find.text('Compute 18 + 27.'), findsOneWidget);
   });
 
-  testWidgets('practice session does not show elapsed time in active practice mode',
+  testWidgets(
+      'practice session does not show elapsed time in active practice mode',
       (WidgetTester tester) async {
     final TestWidgetsFlutterBinding binding =
         TestWidgetsFlutterBinding.ensureInitialized();
@@ -1839,7 +2010,8 @@ void main() {
         home: PracticeSessionPage(
           services: services,
           pack: const BundledQuestionPackInfo(
-            path: 'assets/questions/geometry/grade4_foundation.geometry.v1.json',
+            path:
+                'assets/questions/geometry/grade4_foundation.geometry.v1.json',
             topic: '幾何',
             topicCode: 'geometry',
             levelStage: 'grade4',
@@ -1860,7 +2032,8 @@ void main() {
     expect(find.textContaining('Elapsed'), findsNothing);
   });
 
-  testWidgets('practice session localizes mixed topic and hides editorial source',
+  testWidgets(
+      'practice session localizes mixed topic and hides editorial source',
       (WidgetTester tester) async {
     final TestWidgetsFlutterBinding binding =
         TestWidgetsFlutterBinding.ensureInitialized();
@@ -1881,7 +2054,8 @@ void main() {
         home: PracticeSessionPage(
           services: services,
           pack: const BundledQuestionPackInfo(
-            path: 'assets/questions/geometry/grade5_foundation.geometry.v1.json',
+            path:
+                'assets/questions/geometry/grade5_foundation.geometry.v1.json',
             topic: '幾何',
             topicCode: 'mixed',
             levelStage: 'grade6',
@@ -1904,7 +2078,8 @@ void main() {
     expect(find.textContaining('MathSpring Editorial'), findsNothing);
   });
 
-  testWidgets('practice session renders normalized math notation for formula questions',
+  testWidgets(
+      'practice session renders normalized math notation for formula questions',
       (WidgetTester tester) async {
     final TestWidgetsFlutterBinding binding =
         TestWidgetsFlutterBinding.ensureInitialized();
@@ -1969,7 +2144,8 @@ void main() {
         home: PracticeSessionPage(
           services: services,
           pack: const BundledQuestionPackInfo(
-            path: 'assets/questions/geometry/grade4_foundation.geometry.v1.json',
+            path:
+                'assets/questions/geometry/grade4_foundation.geometry.v1.json',
             topic: '幾何',
             topicCode: 'geometry',
             levelStage: 'grade4',
@@ -1988,7 +2164,8 @@ void main() {
 
     await tester.tap(
       find.byKey(
-        const ValueKey<String>('practice_option_geometry_grade4_foundation_001_B'),
+        const ValueKey<String>(
+            'practice_option_geometry_grade4_foundation_001_B'),
       ),
     );
     await tester.pumpAndSettle();
@@ -1998,7 +2175,8 @@ void main() {
     await tester.tap(nextQuestionButton);
     await tester.pump();
 
-    await tester.tap(find.byKey(const ValueKey<String>('close_practice_session')));
+    await tester
+        .tap(find.byKey(const ValueKey<String>('close_practice_session')));
     await tester.pumpAndSettle();
 
     expect(find.text('Practice Summary'), findsAtLeastNWidgets(1));
@@ -2006,7 +2184,8 @@ void main() {
     expect(find.textContaining('Elapsed'), findsNothing);
   });
 
-  testWidgets('quiz session can submit early and counts unanswered as incorrect',
+  testWidgets(
+      'quiz session can submit early and counts unanswered as incorrect',
       (WidgetTester tester) async {
     final TestWidgetsFlutterBinding binding =
         TestWidgetsFlutterBinding.ensureInitialized();
@@ -2034,7 +2213,8 @@ void main() {
         home: QuizSessionPage(
           services: services,
           pack: const BundledQuestionPackInfo(
-            path: 'assets/questions/geometry/grade4_foundation.geometry.v1.json',
+            path:
+                'assets/questions/geometry/grade4_foundation.geometry.v1.json',
             topic: '幾何',
             topicCode: 'geometry',
             levelStage: 'grade4',
@@ -2118,7 +2298,9 @@ void main() {
 
     await tester.tap(find.text('Review'));
     await tester.pumpAndSettle();
-    await tester.tap(find.text('View history'));
+    final Finder viewHistoryButton = find.text('View history');
+    await tester.ensureVisible(viewHistoryButton);
+    await tester.tap(viewHistoryButton);
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 300));
 
@@ -2130,7 +2312,66 @@ void main() {
     expect(find.textContaining('Elapsed 5:00'), findsOneWidget);
   });
 
-  testWidgets('history session opens detail view with saved answers and solution',
+  testWidgets('review tab shows achievements and selects a practiced day',
+      (WidgetTester tester) async {
+    final TestWidgetsFlutterBinding binding =
+        TestWidgetsFlutterBinding.ensureInitialized();
+    binding.platformDispatcher.localeTestValue = const Locale('en');
+    final AppServices services = createTestServices(
+      initialSessions: const [
+        AnswerSession(
+          id: 'session_calendar',
+          learnerId: 'learner_allen',
+          mode: 'practice',
+          topicCode: 'geometry',
+          levelStage: 'grade4',
+          challengeTier: 'foundation',
+          startedAtIso: '2026-08-20T09:00:00Z',
+          endedAtIso: '2026-08-20T09:05:00Z',
+          elapsedSeconds: 300,
+          totalQuestions: 2,
+          correctCount: 1,
+        ),
+      ],
+      initialSessionRecords: const {
+        'session_calendar': [
+          SessionAnswerRecord(
+            sessionId: 'session_calendar',
+            questionId: 'q1',
+            sequence: 1,
+            submittedAnswer: 'A',
+            isCorrect: true,
+            answeredAtIso: '2026-08-20T09:01:00Z',
+          ),
+          SessionAnswerRecord(
+            sessionId: 'session_calendar',
+            questionId: 'q2',
+            sequence: 2,
+            submittedAnswer: 'B',
+            isCorrect: false,
+            answeredAtIso: '2026-08-20T09:02:00Z',
+          ),
+        ],
+      },
+    );
+
+    await pumpApp(tester, services);
+    await tester.tap(find.text('Review'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Achievements'), findsOneWidget);
+    expect(find.text('Current streak: 1 day'), findsOneWidget);
+    expect(find.byKey(const ValueKey<String>('calendar_day_2026-08-20')),
+        findsOneWidget);
+    await tester.tap(
+      find.byKey(const ValueKey<String>('calendar_day_2026-08-20')),
+    );
+    await tester.pumpAndSettle();
+    expect(find.text('2 questions · 50% correct'), findsOneWidget);
+  });
+
+  testWidgets(
+      'history session opens detail view with saved answers and solution',
       (WidgetTester tester) async {
     final TestWidgetsFlutterBinding binding =
         TestWidgetsFlutterBinding.ensureInitialized();
@@ -2190,14 +2431,17 @@ void main() {
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 300));
 
-    await tester.tap(find.byKey(const ValueKey<String>('history_session_session_quiz_recent')));
+    await tester.tap(find
+        .byKey(const ValueKey<String>('history_session_session_quiz_recent')));
     await tester.pump();
     await pumpUntilFound(tester, find.text('Question 1'));
 
     expect(find.text('Session Detail'), findsAtLeastNWidgets(1));
     expect(find.text('Question 1'), findsOneWidget);
     expect(find.text('Correct'), findsAtLeastNWidgets(1));
-    expect(find.text('Your answer: B  sin(x) at π/2, cos(x) at 0'), findsOneWidget);
-    expect(find.textContaining('sin(x) reaches its maximum value 1 at π/2'), findsOneWidget);
+    expect(find.text('Your answer: B  sin(x) at π/2, cos(x) at 0'),
+        findsOneWidget);
+    expect(find.textContaining('sin(x) reaches its maximum value 1 at π/2'),
+        findsOneWidget);
   });
 }

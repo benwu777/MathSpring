@@ -24,7 +24,6 @@ void main() {
   });
 
   setUp(() async {
-
     database = await MathSpringDatabase.openInMemory();
     learnerProfileRepository = LearnerProfileRepository(database);
     questionProgressRepository = QuestionProgressRepository(database);
@@ -40,9 +39,8 @@ void main() {
     final List<Map<String, Object?>> tables = await database.rawQuery(
       "SELECT name FROM sqlite_master WHERE type = 'table'",
     );
-    final Set<String> tableNames = tables
-        .map((row) => row['name']! as String)
-        .toSet();
+    final Set<String> tableNames =
+        tables.map((row) => row['name']! as String).toSet();
 
     expect(tableNames, contains('learner_profiles'));
     expect(tableNames, contains('answer_sessions'));
@@ -64,6 +62,9 @@ void main() {
       elapsedSeconds: 180,
       totalQuestions: 2,
       correctCount: 1,
+      timeLimitSeconds: 600,
+      maxScore: 100,
+      earnedScore: 60,
     );
     const List<SessionAnswerRecord> records = [
       SessionAnswerRecord(
@@ -73,6 +74,8 @@ void main() {
         submittedAnswer: 'B',
         isCorrect: true,
         answeredAtIso: '2026-07-17T09:01:00Z',
+        maxScore: 60,
+        earnedScore: 60,
       ),
       SessionAnswerRecord(
         sessionId: 'session_quiz_001',
@@ -81,6 +84,8 @@ void main() {
         submittedAnswer: '',
         isCorrect: false,
         answeredAtIso: '2026-07-17T09:03:00Z',
+        maxScore: 40,
+        earnedScore: 0,
       ),
     ];
 
@@ -97,9 +102,14 @@ void main() {
     expect(sessions, hasLength(1));
     expect(sessions.first.mode, 'quiz');
     expect(sessions.first.correctCount, 1);
+    expect(sessions.first.timeLimitSeconds, 600);
+    expect(sessions.first.maxScore, 100);
+    expect(sessions.first.earnedScore, 60);
     expect(loadedRecords, hasLength(2));
     expect(loadedRecords.first.questionId, 'q1');
     expect(loadedRecords.last.isCorrect, isFalse);
+    expect(loadedRecords.first.maxScore, 60);
+    expect(loadedRecords.first.earnedScore, 60);
   });
 
   test('stores and reads learner profiles', () async {
@@ -171,7 +181,8 @@ void main() {
   });
 
   test('stores and reads app preferences', () async {
-    await appPreferencesRepository.setValue('current_learner_id', 'learner_001');
+    await appPreferencesRepository.setValue(
+        'current_learner_id', 'learner_001');
     final String? value =
         await appPreferencesRepository.getValue('current_learner_id');
 
@@ -295,7 +306,8 @@ void main() {
     expect(sessions.first.totalQuestions, 2);
   });
 
-  test('app services reads learner answer session history in latest-first order',
+  test(
+      'app services reads learner answer session history in latest-first order',
       () async {
     final AppServices services = AppServices(
       database: database,
@@ -344,5 +356,57 @@ void main() {
     expect(sessions, hasLength(2));
     expect(sessions.first.id, 'session_new');
     expect(sessions.last.id, 'session_old');
+  });
+
+  test('app services derives learner activity from persisted answer records',
+      () async {
+    final AppServices services = AppServices(
+      database: database,
+      learnerProfileRepository: learnerProfileRepository,
+      questionProgressRepository: questionProgressRepository,
+      appPreferencesRepository: appPreferencesRepository,
+      answerSessionRepository: answerSessionRepository,
+    );
+    const AnswerSession session = AnswerSession(
+      id: 'session_activity',
+      learnerId: 'learner_allen',
+      mode: 'practice',
+      topicCode: 'geometry',
+      levelStage: 'grade4',
+      challengeTier: 'foundation',
+      startedAtIso: '2026-08-20T09:00:00Z',
+      endedAtIso: '2026-08-20T09:02:00Z',
+      elapsedSeconds: 120,
+      totalQuestions: 2,
+      correctCount: 1,
+    );
+
+    await services.saveAnswerSession(
+      session: session,
+      records: const [
+        SessionAnswerRecord(
+          sessionId: 'session_activity',
+          questionId: 'q1',
+          sequence: 1,
+          submittedAnswer: 'A',
+          isCorrect: false,
+          answeredAtIso: '2026-08-20T09:01:00Z',
+        ),
+        SessionAnswerRecord(
+          sessionId: 'session_activity',
+          questionId: 'q2',
+          sequence: 2,
+          submittedAnswer: 'B',
+          isCorrect: true,
+          answeredAtIso: '2026-08-20T09:02:00Z',
+        ),
+      ],
+    );
+
+    final dynamic summary =
+        await services.getLearnerLearningActivitySummary('learner_allen');
+
+    expect(summary.dayFor(DateTime(2026, 8, 20)).questionCount, 2);
+    expect(summary.topicQuestionCounts, {'geometry': 2});
   });
 }

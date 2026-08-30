@@ -1,7 +1,9 @@
+import 'dart:async';
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:mathspring/competition_profiles.dart';
 import 'package:mathspring/data/bundled/bundled_question_bank_repository.dart'
     as bundled;
@@ -13,6 +15,10 @@ import 'package:mathspring/models/question_bank.dart';
 import 'package:mathspring/models/question_progress.dart';
 import 'package:mathspring/models/learner_profile.dart';
 import 'package:mathspring/models/session_answer_record.dart';
+import 'package:mathspring/services/learning_activity_summary.dart';
+import 'package:mathspring/services/daily_mission.dart';
+import 'package:mathspring/services/formal_exam_preset.dart';
+import 'package:mathspring/services/formal_exam_scoring.dart';
 import 'package:mathspring/services/math_text_formatter.dart';
 import 'package:mathspring/services/session_launch_plan_builder.dart';
 
@@ -499,7 +505,7 @@ class _HomeShellFrame extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    _TopBar(
+                    const _TopBar(
                       title: 'MathSpring',
                     ),
                     const SizedBox(height: 18),
@@ -534,98 +540,223 @@ class _PracticeTabState extends State<_PracticeTab> {
   @override
   Widget build(BuildContext context) {
     final AppStrings strings = AppStrings.of(context);
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        _HeroCard(
-          strings: strings,
-          onOpenDemo: () {
-            Navigator.of(context).push(
-              MaterialPageRoute<void>(
-                builder: (_) => TrigGraphDemoPage(services: widget.services),
-              ),
-            );
-          },
-        ),
-        const SizedBox(height: 18),
-        _SectionCard(
-          title: strings.practiceEntryTitle,
-          subtitle: strings.practiceEntrySubtitle,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              _LearnerSummaryBanner(
-                learner: widget.learner,
-                primaryLabel: strings.currentLearnerLabel,
-                secondaryLabel: strings.gradeRangeLabel,
-              ),
-              const SizedBox(height: 18),
-              OutlinedButton(
-                key: const ValueKey<String>('open_topic_practice'),
-                onPressed: () async {
-                  final String? topicCode = await _showTopicPicker(
-                    context: context,
-                    strings: strings,
-                  );
-                  if (!mounted || topicCode == null) {
-                    return;
-                  }
-                  setState(() {
-                    _selectedTopicCode = topicCode;
-                  });
-                },
-                style: OutlinedButton.styleFrom(
-                  foregroundColor: const Color(0xFF111827),
-                  minimumSize: const Size.fromHeight(54),
-                  side: const BorderSide(color: Color(0xFFE5E7EB)),
+    return _DailyMissionGate(
+      services: widget.services,
+      learner: widget.learner,
+      normalContent: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          _HeroCard(
+            strings: strings,
+            onOpenDemo: () {
+              Navigator.of(context).push(
+                MaterialPageRoute<void>(
+                  builder: (_) => TrigGraphDemoPage(services: widget.services),
                 ),
-                child: Text(strings.chooseTopic),
-              ),
-              if (_selectedTopicCode != null) ...[
-                const SizedBox(height: 16),
-                Container(
-                  width: double.infinity,
-                  padding: const EdgeInsets.all(16),
-                  decoration: BoxDecoration(
-                    color: const Color(0xFFF9FAFB),
-                    borderRadius: BorderRadius.circular(12),
-                    border: Border.all(color: const Color(0xFFE5E7EB)),
+              );
+            },
+          ),
+          const SizedBox(height: 18),
+          _SectionCard(
+            title: strings.practiceEntryTitle,
+            subtitle: strings.practiceEntrySubtitle,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _LearnerSummaryBanner(
+                  learner: widget.learner,
+                  primaryLabel: strings.currentLearnerLabel,
+                  secondaryLabel: strings.gradeRangeLabel,
+                ),
+                const SizedBox(height: 18),
+                OutlinedButton(
+                  key: const ValueKey<String>('open_topic_practice'),
+                  onPressed: () async {
+                    final String? topicCode = await _showTopicPicker(
+                      context: context,
+                      strings: strings,
+                    );
+                    if (!mounted || topicCode == null) {
+                      return;
+                    }
+                    setState(() {
+                      _selectedTopicCode = topicCode;
+                    });
+                  },
+                  style: OutlinedButton.styleFrom(
+                    foregroundColor: const Color(0xFF111827),
+                    minimumSize: const Size.fromHeight(54),
+                    side: const BorderSide(color: Color(0xFFE5E7EB)),
                   ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        strings.selectedTopicLabel,
-                        style: Theme.of(context).textTheme.bodyMedium,
-                      ),
-                      const SizedBox(height: 6),
-                      Text(
-                        displayTopicCode(_selectedTopicCode!, strings),
-                        style: Theme.of(context).textTheme.titleMedium,
-                      ),
-                    ],
+                  child: Text(strings.chooseTopic),
+                ),
+                if (_selectedTopicCode != null) ...[
+                  const SizedBox(height: 16),
+                  Container(
+                    width: double.infinity,
+                    padding: const EdgeInsets.all(16),
+                    decoration: BoxDecoration(
+                      color: const Color(0xFFF9FAFB),
+                      borderRadius: BorderRadius.circular(12),
+                      border: Border.all(color: const Color(0xFFE5E7EB)),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          strings.selectedTopicLabel,
+                          style: Theme.of(context).textTheme.bodyMedium,
+                        ),
+                        const SizedBox(height: 6),
+                        Text(
+                          _displayTopicCode(_selectedTopicCode!, strings),
+                          style: Theme.of(context).textTheme.titleMedium,
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+                const SizedBox(height: 16),
+                FilledButton(
+                  key: const ValueKey<String>('open_start_practice'),
+                  onPressed: () => _openFirstEligiblePack(
+                    context: context,
+                    services: widget.services,
+                    learner: widget.learner,
+                    topicCode: _selectedTopicCode,
+                    mode: _SessionLaunchMode.practice,
+                  ),
+                  style: FilledButton.styleFrom(
+                    backgroundColor: const Color(0xFF111827),
+                    minimumSize: const Size.fromHeight(54),
+                  ),
+                  child: Text(
+                    _selectedTopicCode == null
+                        ? strings.startPractice
+                        : strings.startSelectedTopicPractice,
                   ),
                 ),
               ],
-              const SizedBox(height: 16),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _DailyMissionGate extends StatefulWidget {
+  const _DailyMissionGate({
+    required this.services,
+    required this.learner,
+    required this.normalContent,
+  });
+
+  final AppServices services;
+  final LearnerProfile? learner;
+  final Widget normalContent;
+
+  @override
+  State<_DailyMissionGate> createState() => _DailyMissionGateState();
+}
+
+class _DailyMissionGateState extends State<_DailyMissionGate> {
+  bool _showNormalPractice = false;
+  int _version = 0;
+
+  @override
+  Widget build(BuildContext context) {
+    final String? learnerId = widget.services.currentLearnerId;
+    if (learnerId == null) {
+      return widget.normalContent;
+    }
+    return FutureBuilder<DailyMissionProgress>(
+      key: ValueKey<int>(_version),
+      future: widget.services.getLearnerDailyMissionProgress(learnerId),
+      builder:
+          (BuildContext context, AsyncSnapshot<DailyMissionProgress> snapshot) {
+        if (!snapshot.hasData) {
+          return const Center(child: CircularProgressIndicator());
+        }
+        if (snapshot.data!.isComplete || _showNormalPractice) {
+          return widget.normalContent;
+        }
+        return _DailyMissionLanding(
+          progress: snapshot.data!,
+          learner: widget.learner,
+          onStart: () async {
+            await _openFirstEligiblePack(
+              context: context,
+              services: widget.services,
+              learner: widget.learner,
+              mode: _SessionLaunchMode.practice,
+              questionLimit: DailyMission.targetCount,
+            );
+            if (mounted) {
+              setState(() => _version += 1);
+            }
+          },
+          onOpenPractice: () => setState(() => _showNormalPractice = true),
+        );
+      },
+    );
+  }
+}
+
+class _DailyMissionLanding extends StatelessWidget {
+  const _DailyMissionLanding({
+    required this.progress,
+    required this.learner,
+    required this.onStart,
+    required this.onOpenPractice,
+  });
+
+  final DailyMissionProgress progress;
+  final LearnerProfile? learner;
+  final VoidCallback onStart;
+  final VoidCallback onOpenPractice;
+
+  @override
+  Widget build(BuildContext context) {
+    final String learnerId = learner?.id ?? 'learner';
+    return Column(
+      key: const ValueKey<String>('daily_mission_landing'),
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        _CompactHeroBanner(
+          title: '每日五題',
+          subtitle: DailyMission.encouragementFor(
+            learnerId: learnerId,
+            date: progress.date,
+          ),
+          icon: Icons.wb_sunny_outlined,
+        ),
+        const SizedBox(height: 18),
+        _SectionCard(
+          title: '今天的任務',
+          subtitle: '一般練習作答五題即可完成，不限答對或答錯。',
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                '${progress.answeredCount} / ${progress.targetCount}',
+                style: Theme.of(context).textTheme.displaySmall,
+              ),
+              const SizedBox(height: 18),
               FilledButton(
-                key: const ValueKey<String>('open_start_practice'),
-                onPressed: () => _openFirstEligiblePack(
-                  context: context,
-                  services: widget.services,
-                  learner: widget.learner,
-                  topicCode: _selectedTopicCode,
-                  mode: _SessionLaunchMode.practice,
-                ),
+                key: const ValueKey<String>('start_daily_mission'),
+                onPressed: onStart,
                 style: FilledButton.styleFrom(
                   backgroundColor: const Color(0xFF111827),
                   minimumSize: const Size.fromHeight(54),
                 ),
-                child: Text(
-                  _selectedTopicCode == null
-                      ? strings.startPractice
-                      : strings.startSelectedTopicPractice,
-                ),
+                child: const Text('開始今日任務'),
+              ),
+              const SizedBox(height: 10),
+              TextButton(
+                key: const ValueKey<String>('open_regular_practice'),
+                onPressed: onOpenPractice,
+                child: const Text('仍要自由練習？從這裡開始'),
               ),
             ],
           ),
@@ -675,12 +806,21 @@ class _QuizTab extends StatelessWidget {
               const SizedBox(height: 16),
               FilledButton(
                 key: const ValueKey<String>('open_start_quiz'),
-                onPressed: () => _openFirstEligiblePack(
-                  context: context,
-                  services: services,
-                  learner: learner,
-                  mode: _SessionLaunchMode.quiz,
-                ),
+                onPressed: () async {
+                  final FormalExamPreset? preset =
+                      await _showFormalExamPresetPicker(context);
+                  if (!context.mounted || preset == null) {
+                    return;
+                  }
+                  await _openFirstEligiblePack(
+                    context: context,
+                    services: services,
+                    learner: learner,
+                    mode: _SessionLaunchMode.quiz,
+                    questionLimit: preset.questionCount,
+                    formalExamPreset: preset,
+                  );
+                },
                 style: FilledButton.styleFrom(
                   backgroundColor: const Color(0xFF111827),
                   minimumSize: const Size.fromHeight(54),
@@ -702,31 +842,246 @@ class _ReviewTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return _LearningReviewSection(services: services);
+  }
+}
+
+class _LearningReviewSection extends StatefulWidget {
+  const _LearningReviewSection({required this.services});
+
+  final AppServices services;
+
+  @override
+  State<_LearningReviewSection> createState() => _LearningReviewSectionState();
+}
+
+class _LearningReviewSectionState extends State<_LearningReviewSection> {
+  DateTime? _selectedDay;
+
+  @override
+  Widget build(BuildContext context) {
     final AppStrings strings = AppStrings.of(context);
+    final String? learnerId = widget.services.currentLearnerId;
+    return FutureBuilder<LearningActivitySummary>(
+      future: learnerId == null
+          ? Future<LearningActivitySummary>.value(
+              LearningActivitySummary.fromSessions(
+                sessions: const <AnswerSession>[],
+                recordsBySessionId: const <String, List<SessionAnswerRecord>>{},
+              ),
+            )
+          : widget.services.getLearnerLearningActivitySummary(learnerId),
+      builder: (BuildContext context,
+          AsyncSnapshot<LearningActivitySummary> snapshot) {
+        if (!snapshot.hasData) {
+          return const Center(child: CircularProgressIndicator());
+        }
+        final LearningActivitySummary summary = snapshot.data!;
+        final List<DateTime> practicedDays = summary.days.keys.toList()..sort();
+        final DateTime displayedDay = _selectedDay ??
+            (practicedDays.isEmpty ? DateTime.now() : practicedDays.last);
+        final LearningDaySummary daySummary = summary.dayFor(displayedDay);
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _CompactHeroBanner(
+              title: strings.reviewTitle,
+              subtitle: strings.reviewSubtitle,
+              icon: Icons.history_edu_rounded,
+            ),
+            const SizedBox(height: 18),
+            _SectionCard(
+              title: strings.achievementsTitle,
+              subtitle: strings.achievementsSubtitle,
+              child: _AchievementOverview(summary: summary, strings: strings),
+            ),
+            const SizedBox(height: 18),
+            _SectionCard(
+              title: strings.calendarTitle,
+              subtitle: strings.calendarSubtitle,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  _MonthlyLearningCalendar(
+                    month: displayedDay,
+                    summary: summary,
+                    strings: strings,
+                    selectedDay: displayedDay,
+                    onDaySelected: (DateTime day) {
+                      setState(() => _selectedDay = day);
+                    },
+                  ),
+                  const SizedBox(height: 16),
+                  Text(
+                    strings.dayActivityLabel(displayedDay),
+                    style: Theme.of(context).textTheme.titleMedium,
+                  ),
+                  const SizedBox(height: 6),
+                  Text(
+                    daySummary.questionCount == 0
+                        ? strings.calendarNoPractice
+                        : strings.dayActivitySummary(
+                            daySummary.questionCount,
+                            daySummary.accuracyRate,
+                          ),
+                  ),
+                  const SizedBox(height: 16),
+                  SizedBox(
+                    width: double.infinity,
+                    child: OutlinedButton(
+                      onPressed: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute<void>(
+                            builder: (_) => AnswerHistoryPage(
+                              services: widget.services,
+                            ),
+                          ),
+                        );
+                      },
+                      child: Text(strings.viewHistory),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        );
+      },
+    );
+  }
+}
+
+class _AchievementOverview extends StatelessWidget {
+  const _AchievementOverview({required this.summary, required this.strings});
+
+  final LearningActivitySummary summary;
+  final AppStrings strings;
+
+  @override
+  Widget build(BuildContext context) {
+    final List<Widget> badges = <Widget>[
+      _AchievementBadge(
+        label: strings.streakAchievement(
+            summary.currentStreak, summary.longestStreak),
+        icon: Icons.local_fire_department_outlined,
+      ),
+      _AchievementBadge(
+        label: strings.recoveryAchievement(summary.recoveredWrongAnswerCount),
+        icon: Icons.restart_alt_rounded,
+      ),
+      ...summary.topicQuestionCounts.entries
+          .expand((MapEntry<String, int> entry) {
+        return summary.reachedTopicMilestones(entry.key).map(
+              (int milestone) => _AchievementBadge(
+                label: strings.topicAchievement(
+                  _displayTopicCode(entry.key, strings),
+                  milestone,
+                ),
+                icon: Icons.workspace_premium_outlined,
+              ),
+            );
+      }),
+    ];
+    if (badges.isEmpty) {
+      return Text(strings.achievementsEmpty);
+    }
+    return Wrap(spacing: 10, runSpacing: 10, children: badges);
+  }
+}
+
+class _AchievementBadge extends StatelessWidget {
+  const _AchievementBadge({required this.label, required this.icon});
+
+  final String label;
+  final IconData icon;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+      decoration: BoxDecoration(
+        color: const Color(0xFFF4F7FC),
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(icon, size: 18, color: const Color(0xFF163D7A)),
+          const SizedBox(width: 6),
+          Text(label),
+        ],
+      ),
+    );
+  }
+}
+
+class _MonthlyLearningCalendar extends StatelessWidget {
+  const _MonthlyLearningCalendar({
+    required this.month,
+    required this.summary,
+    required this.strings,
+    required this.selectedDay,
+    required this.onDaySelected,
+  });
+
+  final DateTime month;
+  final LearningActivitySummary summary;
+  final AppStrings strings;
+  final DateTime selectedDay;
+  final ValueChanged<DateTime> onDaySelected;
+
+  @override
+  Widget build(BuildContext context) {
+    final DateTime firstDay = DateTime(month.year, month.month);
+    final int dayCount = DateTime(month.year, month.month + 1, 0).day;
+    final int leadingEmptyCells = firstDay.weekday % 7;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _CompactHeroBanner(
-          title: strings.reviewTitle,
-          subtitle: strings.reviewSubtitle,
-          icon: Icons.history_edu_rounded,
-        ),
-        const SizedBox(height: 18),
-        _SectionCard(
-          title: strings.reviewTitle,
-          subtitle: strings.reviewSubtitle,
-          child: _HistoryPreviewSection(
-            strings: strings,
-            onOpenHistory: () {
-              Navigator.of(context).push(
-                MaterialPageRoute<void>(
-                  builder: (_) => AnswerHistoryPage(
-                    services: services,
+        Text(strings.monthLabel(month),
+            style: Theme.of(context).textTheme.titleLarge),
+        const SizedBox(height: 12),
+        GridView.builder(
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          itemCount: leadingEmptyCells + dayCount,
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 7,
+            mainAxisSpacing: 6,
+            crossAxisSpacing: 6,
+          ),
+          itemBuilder: (BuildContext context, int index) {
+            if (index < leadingEmptyCells) {
+              return const SizedBox.shrink();
+            }
+            final DateTime day = DateTime(
+                month.year, month.month, index - leadingEmptyCells + 1);
+            final LearningDaySummary daySummary = summary.dayFor(day);
+            final bool practiced = daySummary.questionCount > 0;
+            final bool selected = day ==
+                DateTime(selectedDay.year, selectedDay.month, selectedDay.day);
+            return Material(
+              color: selected
+                  ? const Color(0xFF163D7A)
+                  : (practiced ? const Color(0xFFE7EEF9) : Colors.transparent),
+              borderRadius: BorderRadius.circular(9),
+              child: InkWell(
+                key: ValueKey<String>(
+                    'calendar_day_${day.year}-${day.month.toString().padLeft(2, '0')}-${day.day.toString().padLeft(2, '0')}'),
+                borderRadius: BorderRadius.circular(9),
+                onTap: () => onDaySelected(day),
+                child: Center(
+                  child: Text(
+                    '${day.day}',
+                    style: TextStyle(
+                      fontWeight: practiced ? FontWeight.w700 : FontWeight.w400,
+                      color: selected ? Colors.white : const Color(0xFF334155),
+                    ),
                   ),
                 ),
-              );
-            },
-          ),
+              ),
+            );
+          },
         ),
       ],
     );
@@ -776,7 +1131,59 @@ class _SettingsTab extends StatelessWidget {
           subtitle: strings.progressSubtitle,
           services: services,
         ),
+        const SizedBox(height: 16),
+        const _SupportAndPrivacySection(),
       ],
+    );
+  }
+}
+
+class _SupportAndPrivacySection extends StatelessWidget {
+  const _SupportAndPrivacySection();
+
+  static final Uri _supportUrl = Uri.parse(
+    'https://YOUR_GITHUB_USERNAME.github.io/mathspring/support/',
+  );
+  static final Uri _privacyUrl = Uri.parse(
+    'https://YOUR_GITHUB_USERNAME.github.io/mathspring/privacy/',
+  );
+
+  Future<void> _open(BuildContext context, Uri url) async {
+    if (await launchUrl(url, mode: LaunchMode.externalApplication)) {
+      return;
+    }
+    if (!context.mounted) {
+      return;
+    }
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text(AppStrings.of(context).linkOpenFailed)),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final AppStrings strings = AppStrings.of(context);
+    return _SectionCard(
+      title: strings.helpAndPrivacyTitle,
+      subtitle: strings.helpAndPrivacySubtitle,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          OutlinedButton.icon(
+            key: const ValueKey<String>('open_support_link'),
+            onPressed: () => _open(context, _supportUrl),
+            icon: const Icon(Icons.support_agent_outlined),
+            label: Text(strings.supportLinkLabel),
+          ),
+          const SizedBox(height: 10),
+          OutlinedButton.icon(
+            key: const ValueKey<String>('open_privacy_link'),
+            onPressed: () => _open(context, _privacyUrl),
+            icon: const Icon(Icons.privacy_tip_outlined),
+            label: Text(strings.privacyLinkLabel),
+          ),
+        ],
+      ),
     );
   }
 }
@@ -1686,7 +2093,6 @@ class _ProfileTile extends StatelessWidget {
 
 class _ProgressSection extends StatelessWidget {
   const _ProgressSection({
-    super.key,
     required this.title,
     required this.subtitle,
     required this.services,
@@ -2042,173 +2448,6 @@ class _StatCard extends StatelessWidget {
   }
 }
 
-class _TopicChipRow extends StatelessWidget {
-  const _TopicChipRow({required this.labels});
-
-  final List<String> labels;
-
-  @override
-  Widget build(BuildContext context) {
-    return Wrap(
-      spacing: 10,
-      runSpacing: 10,
-      children: labels
-          .map(
-            (label) => Container(
-              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
-              decoration: BoxDecoration(
-                color: const Color(0xFFF9FAFB),
-                borderRadius: BorderRadius.circular(8),
-                border: Border.all(color: const Color(0xFFE5E7EB)),
-              ),
-              child: Text(
-                label,
-                style: const TextStyle(
-                  color: Color(0xFF374151),
-                  fontWeight: FontWeight.w600,
-                  fontSize: 13,
-                ),
-              ),
-            ),
-          )
-          .toList(),
-    );
-  }
-}
-
-class _LibraryPreviewSection extends StatelessWidget {
-  const _LibraryPreviewSection({
-    required this.strings,
-    required this.onOpenLibrary,
-  });
-
-  final AppStrings strings;
-  final VoidCallback onOpenLibrary;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        _TopicChipRow(
-          labels: [
-            strings.topicArithmetic,
-            strings.topicGeometry,
-            strings.topicLogic,
-          ],
-        ),
-        const SizedBox(height: 18),
-        _PromptPreview(strings: strings),
-        const SizedBox(height: 18),
-        SizedBox(
-          width: double.infinity,
-          child: OutlinedButton(
-            onPressed: onOpenLibrary,
-            style: OutlinedButton.styleFrom(
-              foregroundColor: const Color(0xFF111827),
-              minimumSize: const Size.fromHeight(52),
-              side: const BorderSide(color: Color(0xFFE5E7EB)),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
-              ),
-            ),
-            child: Text(strings.browseLibrary),
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-class _HistoryPreviewSection extends StatelessWidget {
-  const _HistoryPreviewSection({
-    required this.strings,
-    required this.onOpenHistory,
-  });
-
-  final AppStrings strings;
-  final VoidCallback onOpenHistory;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Container(
-          width: double.infinity,
-          padding: const EdgeInsets.all(18),
-          decoration: BoxDecoration(
-            color: const Color(0xFFFAFAFA),
-            borderRadius: BorderRadius.circular(10),
-            border: Border.all(color: const Color(0xFFE5E7EB)),
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                strings.historyPreviewTitle,
-                style: Theme.of(context).textTheme.titleLarge,
-              ),
-              const SizedBox(height: 8),
-              Text(
-                strings.historyPreviewBody,
-                style: Theme.of(context).textTheme.bodyMedium,
-              ),
-            ],
-          ),
-        ),
-        const SizedBox(height: 18),
-        SizedBox(
-          width: double.infinity,
-          child: OutlinedButton(
-            onPressed: onOpenHistory,
-            style: OutlinedButton.styleFrom(
-              foregroundColor: const Color(0xFF111827),
-              minimumSize: const Size.fromHeight(52),
-              side: const BorderSide(color: Color(0xFFE5E7EB)),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
-              ),
-            ),
-            child: Text(strings.viewHistory),
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-class _PromptPreview extends StatelessWidget {
-  const _PromptPreview({required this.strings});
-
-  final AppStrings strings;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      padding: const EdgeInsets.all(18),
-      decoration: BoxDecoration(
-        color: const Color(0xFFFAFAFA),
-        borderRadius: BorderRadius.circular(10),
-        border: Border.all(color: const Color(0xFFE5E7EB)),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            strings.previewLabel,
-            style: const TextStyle(
-              color: Color(0xFF374151),
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-          const SizedBox(height: 10),
-          Text(strings.previewQuestion),
-        ],
-      ),
-    );
-  }
-}
-
 class QuestionLibraryPage extends StatefulWidget {
   const QuestionLibraryPage({
     super.key,
@@ -2262,57 +2501,55 @@ class AnswerHistoryPage extends StatelessWidget {
             separatorBuilder: (context, index) => const SizedBox(height: 14),
             itemBuilder: (context, index) {
               final AnswerSession session = sessions[index];
-              return Container(
-                child: InkWell(
-                  key: ValueKey<String>('history_session_${session.id}'),
-                  borderRadius: BorderRadius.circular(12),
-                  onTap: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute<void>(
-                        builder: (_) => SessionDetailPage(
-                          services: services,
-                          session: session,
-                          initialQuestionsById: initialQuestionsById,
-                        ),
+              return InkWell(
+                key: ValueKey<String>('history_session_${session.id}'),
+                borderRadius: BorderRadius.circular(12),
+                onTap: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute<void>(
+                      builder: (_) => SessionDetailPage(
+                        services: services,
+                        session: session,
+                        initialQuestionsById: initialQuestionsById,
                       ),
-                    );
-                  },
-                  child: Container(
-                    padding: const EdgeInsets.all(18),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(12),
-                      border: Border.all(color: const Color(0xFFE5E7EB)),
                     ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          session.mode == 'quiz'
-                              ? strings.quizMode
-                              : strings.practiceMode,
-                          style: Theme.of(context).textTheme.titleLarge,
-                        ),
-                        const SizedBox(height: 6),
-                        Text(
-                          displayTopicCode(session.topicCode, strings),
-                          style: Theme.of(context).textTheme.bodyLarge,
-                        ),
-                        const SizedBox(height: 10),
-                        Text(
-                          '${session.correctCount} / ${session.totalQuestions} ${strings.correctSuffix}',
-                        ),
-                        const SizedBox(height: 6),
-                        Text(
-                          '${strings.elapsedLabel} ${_formatElapsed(Duration(seconds: session.elapsedSeconds))}',
-                        ),
-                        const SizedBox(height: 6),
-                        Text(
-                          _formatSessionEndedAt(session.endedAtIso),
-                          style: Theme.of(context).textTheme.bodyMedium,
-                        ),
-                      ],
-                    ),
+                  );
+                },
+                child: Container(
+                  padding: const EdgeInsets.all(18),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(12),
+                    border: Border.all(color: const Color(0xFFE5E7EB)),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        session.mode == 'quiz'
+                            ? strings.quizMode
+                            : strings.practiceMode,
+                        style: Theme.of(context).textTheme.titleLarge,
+                      ),
+                      const SizedBox(height: 6),
+                      Text(
+                        _displayTopicCode(session.topicCode, strings),
+                        style: Theme.of(context).textTheme.bodyLarge,
+                      ),
+                      const SizedBox(height: 10),
+                      Text(
+                        '${session.correctCount} / ${session.totalQuestions} ${strings.correctSuffix}',
+                      ),
+                      const SizedBox(height: 6),
+                      Text(
+                        '${strings.elapsedLabel} ${_formatElapsed(Duration(seconds: session.elapsedSeconds))}',
+                      ),
+                      const SizedBox(height: 6),
+                      Text(
+                        _formatSessionEndedAt(session.endedAtIso),
+                        style: Theme.of(context).textTheme.bodyMedium,
+                      ),
+                    ],
                   ),
                 ),
               );
@@ -2636,12 +2873,12 @@ class PracticeSessionPage extends StatefulWidget {
 class _PracticeSessionPageState extends State<PracticeSessionPage> {
   late final Future<QuestionBank> _packFuture;
   final DateTime _startedAt = DateTime.now();
-  final List<_PracticeAnswerRecord> _records = <_PracticeAnswerRecord>[];
+  final List<PracticeAnswerRecord> _records = <PracticeAnswerRecord>[];
   final ScrollController _scrollController = ScrollController();
   final GlobalKey _reviewCardKey = GlobalKey();
   int _currentIndex = 0;
   bool _isReviewing = false;
-  _PracticeAnswerRecord? _latestRecord;
+  PracticeAnswerRecord? _latestRecord;
 
   @override
   void initState() {
@@ -2820,7 +3057,7 @@ class _PracticeSessionPageState extends State<PracticeSessionPage> {
       ),
     );
 
-    final _PracticeAnswerRecord record = _PracticeAnswerRecord(
+    final PracticeAnswerRecord record = PracticeAnswerRecord(
       question: question,
       submittedAnswer: submittedAnswer,
       isCorrect: isCorrect,
@@ -2864,7 +3101,7 @@ class _PracticeSessionPageState extends State<PracticeSessionPage> {
 
   Future<void> _openSummary() async {
     final PracticeSessionResult result = PracticeSessionResult(
-      records: List<_PracticeAnswerRecord>.unmodifiable(_records),
+      records: List<PracticeAnswerRecord>.unmodifiable(_records),
       startedAt: _startedAt,
       endedAt: DateTime.now(),
     );
@@ -3041,7 +3278,7 @@ class _PracticeReviewCard extends StatelessWidget {
     required this.onNext,
   });
 
-  final _PracticeAnswerRecord record;
+  final PracticeAnswerRecord record;
   final String localeCode;
   final String nextLabel;
   final VoidCallback onNext;
@@ -3153,7 +3390,7 @@ class PracticeSessionResult {
     required this.endedAt,
   });
 
-  final List<_PracticeAnswerRecord> records;
+  final List<PracticeAnswerRecord> records;
   final DateTime startedAt;
   final DateTime endedAt;
 
@@ -3167,8 +3404,8 @@ class PracticeSessionResult {
   Duration get elapsed => endedAt.difference(startedAt);
 }
 
-class _PracticeAnswerRecord {
-  const _PracticeAnswerRecord({
+class PracticeAnswerRecord {
+  const PracticeAnswerRecord({
     required this.question,
     required this.submittedAnswer,
     required this.isCorrect,
@@ -3187,11 +3424,13 @@ class QuizSessionPage extends StatefulWidget {
     required this.services,
     required this.pack,
     this.initialQuestions,
+    this.formalExamPreset,
   });
 
   final AppServices services;
   final bundled.BundledQuestionPackInfo pack;
   final List<Question>? initialQuestions;
+  final FormalExamPreset? formalExamPreset;
 
   @override
   State<QuizSessionPage> createState() => _QuizSessionPageState();
@@ -3202,10 +3441,30 @@ class _QuizSessionPageState extends State<QuizSessionPage> {
   final Map<String, String> _answers = <String, String>{};
   final DateTime _startedAt = DateTime.now();
   int _currentIndex = 0;
+  Timer? _countdownTimer;
+  DateTime? _deadline;
+  List<Question>? _activeQuestions;
+  bool _hasAutoSubmitted = false;
 
   @override
   void initState() {
     super.initState();
+    if (widget.formalExamPreset != null) {
+      _deadline = _startedAt.add(widget.formalExamPreset!.timeLimit);
+      _countdownTimer = Timer.periodic(const Duration(seconds: 1), (_) {
+        final List<Question>? questions = _activeQuestions;
+        if (questions == null || !mounted) {
+          return;
+        }
+        if (_remainingExamTime.inSeconds <= 0 && !_hasAutoSubmitted) {
+          _hasAutoSubmitted = true;
+          _countdownTimer?.cancel();
+          _finishQuiz(context, questions: questions);
+          return;
+        }
+        setState(() {});
+      });
+    }
     _packFuture = widget.initialQuestions == null
         ? bundled.BundledQuestionBankRepository().loadPack(
             widget.pack.path,
@@ -3217,6 +3476,21 @@ class _QuizSessionPageState extends State<QuizSessionPage> {
               questions: widget.initialQuestions!,
             ),
           );
+  }
+
+  @override
+  void dispose() {
+    _countdownTimer?.cancel();
+    super.dispose();
+  }
+
+  Duration get _remainingExamTime {
+    final DateTime? deadline = _deadline;
+    if (deadline == null) {
+      return Duration.zero;
+    }
+    final Duration remaining = deadline.difference(DateTime.now());
+    return remaining.isNegative ? Duration.zero : remaining;
   }
 
   @override
@@ -3236,6 +3510,9 @@ class _QuizSessionPageState extends State<QuizSessionPage> {
           }
 
           final List<Question> questions = snapshot.data!.questions;
+          _activeQuestions = questions;
+          final List<FormalExamQuestionScore> scores =
+              FormalExamScoring.allocate(questions);
           final Question question = questions[_currentIndex];
           final String? selectedAnswer = _answers[question.id];
           return SingleChildScrollView(
@@ -3257,10 +3534,12 @@ class _QuizSessionPageState extends State<QuizSessionPage> {
                     children: [
                       Expanded(
                         child: Text(
-                          strings.questionCounter(
-                            _currentIndex + 1,
-                            questions.length,
-                          ),
+                          widget.formalExamPreset == null
+                              ? strings.questionCounter(
+                                  _currentIndex + 1,
+                                  questions.length,
+                                )
+                              : '第 ${_currentIndex + 1} / ${questions.length} 題 ・ ${scores[_currentIndex].maxScore} 分',
                           style: Theme.of(context)
                               .textTheme
                               .headlineSmall
@@ -3290,7 +3569,9 @@ class _QuizSessionPageState extends State<QuizSessionPage> {
                 ),
                 const SizedBox(height: 8),
                 Text(
-                  '${strings.elapsedLabel} ${_formatElapsed(Duration(seconds: DateTime.now().difference(_startedAt).inSeconds))}',
+                  widget.formalExamPreset == null
+                      ? '${strings.elapsedLabel} ${_formatElapsed(Duration(seconds: DateTime.now().difference(_startedAt).inSeconds))}'
+                      : '剩餘 ${_formatElapsed(_remainingExamTime)} ・ 總分 100',
                   style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                         color: const Color(0xFF64748B),
                       ),
@@ -3332,6 +3613,19 @@ class _QuizSessionPageState extends State<QuizSessionPage> {
                   ),
                 ),
                 const SizedBox(height: 20),
+                if (widget.formalExamPreset != null) ...[
+                  OutlinedButton.icon(
+                    key: const ValueKey<String>('open_exam_navigator'),
+                    onPressed: () => _openQuestionNavigator(
+                      context,
+                      questions: questions,
+                      scores: scores,
+                    ),
+                    icon: const Icon(Icons.grid_view_rounded),
+                    label: const Text('題目總覽'),
+                  ),
+                  const SizedBox(height: 12),
+                ],
                 Row(
                   children: [
                     Expanded(
@@ -3383,6 +3677,52 @@ class _QuizSessionPageState extends State<QuizSessionPage> {
     );
   }
 
+  Future<void> _openQuestionNavigator(
+    BuildContext context, {
+    required List<Question> questions,
+    required List<FormalExamQuestionScore> scores,
+  }) async {
+    await showModalBottomSheet<void>(
+      context: context,
+      showDragHandle: true,
+      builder: (BuildContext sheetContext) => SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(20),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text('題目總覽', style: Theme.of(sheetContext).textTheme.titleLarge),
+              const SizedBox(height: 14),
+              Wrap(
+                spacing: 8,
+                runSpacing: 8,
+                children: [
+                  for (int index = 0; index < questions.length; index += 1)
+                    OutlinedButton(
+                      onPressed: () {
+                        setState(() => _currentIndex = index);
+                        Navigator.of(sheetContext).pop();
+                      },
+                      style: OutlinedButton.styleFrom(
+                        backgroundColor:
+                            _answers.containsKey(questions[index].id)
+                                ? const Color(0xFFEAF2FF)
+                                : Colors.white,
+                      ),
+                      child: Text('${index + 1}・${scores[index].maxScore} 分'),
+                    ),
+                ],
+              ),
+              const SizedBox(height: 12),
+              const Text('藍色代表已作答，白色代表尚未作答。'),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
   Future<void> _submitCurrentAnswer(
     BuildContext context, {
     required List<Question> questions,
@@ -3401,6 +3741,9 @@ class _QuizSessionPageState extends State<QuizSessionPage> {
       ),
     );
 
+    if (!context.mounted) {
+      return;
+    }
     if (_currentIndex == questions.length - 1) {
       await _finishQuiz(
         context,
@@ -3424,10 +3767,11 @@ class _QuizSessionPageState extends State<QuizSessionPage> {
     Map<String, String>? overrideAnswers,
   }) async {
     final Map<String, String> finalAnswers = overrideAnswers ?? _answers;
+    _countdownTimer?.cancel();
     final DateTime submittedAt = DateTime.now();
-    final List<_QuizAnswerRecord> records = <_QuizAnswerRecord>[
+    final List<QuizAnswerRecord> records = <QuizAnswerRecord>[
       for (final Question item in questions)
-        _QuizAnswerRecord(
+        QuizAnswerRecord(
           question: item,
           submittedAnswer: finalAnswers[item.id] ?? '',
           isCorrect: _isCorrect(item, finalAnswers[item.id] ?? ''),
@@ -3439,6 +3783,8 @@ class _QuizSessionPageState extends State<QuizSessionPage> {
       startedAt: _startedAt,
       submittedAt: submittedAt,
     );
+    final List<FormalExamQuestionScore> questionScores =
+        FormalExamScoring.allocate(questions);
     final String sessionId =
         'quiz_${widget.services.currentLearnerId ?? 'unknown'}_${submittedAt.microsecondsSinceEpoch}';
     await widget.services.saveAnswerSession(
@@ -3454,6 +3800,11 @@ class _QuizSessionPageState extends State<QuizSessionPage> {
         elapsedSeconds: result.elapsed.inSeconds,
         totalQuestions: result.totalQuestions,
         correctCount: result.correctCount,
+        timeLimitSeconds: widget.formalExamPreset?.timeLimit.inSeconds,
+        maxScore: widget.formalExamPreset == null ? null : 100,
+        earnedScore: widget.formalExamPreset == null
+            ? null
+            : _earnedFormalExamScore(records),
       ),
       records: [
         for (int index = 0; index < records.length; index++)
@@ -3464,20 +3815,45 @@ class _QuizSessionPageState extends State<QuizSessionPage> {
             submittedAnswer: records[index].submittedAnswer,
             isCorrect: records[index].isCorrect,
             answeredAtIso: records[index].answeredAt.toUtc().toIso8601String(),
+            maxScore: widget.formalExamPreset == null
+                ? null
+                : questionScores[index].maxScore,
+            earnedScore: widget.formalExamPreset == null
+                ? null
+                : (records[index].isCorrect
+                    ? questionScores[index].maxScore
+                    : 0),
           ),
       ],
     );
 
-    if (!mounted) {
+    if (!context.mounted) {
       return;
     }
     Navigator.of(context).pushReplacement(
       MaterialPageRoute<void>(
         builder: (_) => QuizResultPage(
           result: result,
+          maxScore: widget.formalExamPreset == null ? null : 100,
+          earnedScore: widget.formalExamPreset == null
+              ? null
+              : _earnedFormalExamScore(records),
         ),
       ),
     );
+  }
+
+  int _earnedFormalExamScore(List<QuizAnswerRecord> records) {
+    final List<FormalExamQuestionScore> scores = FormalExamScoring.allocate(
+      records.map((QuizAnswerRecord record) => record.question).toList(),
+    );
+    int earned = 0;
+    for (int index = 0; index < records.length; index += 1) {
+      if (records[index].isCorrect) {
+        earned += scores[index].maxScore;
+      }
+    }
+    return earned;
   }
 }
 
@@ -3557,9 +3933,13 @@ class QuizResultPage extends StatelessWidget {
   const QuizResultPage({
     super.key,
     required this.result,
+    this.maxScore,
+    this.earnedScore,
   });
 
   final QuizSessionResult result;
+  final int? maxScore;
+  final int? earnedScore;
 
   @override
   Widget build(BuildContext context) {
@@ -3577,17 +3957,20 @@ class QuizResultPage extends StatelessWidget {
           children: [
             _SectionCard(
               title: strings.quizResult,
-              subtitle:
-                  '${result.correctCount} / ${result.totalQuestions} ${strings.correctSuffix}',
+              subtitle: maxScore == null
+                  ? '${result.correctCount} / ${result.totalQuestions} ${strings.correctSuffix}'
+                  : '正式測驗成績：$earnedScore / $maxScore',
               child: _StatRow(
-                leftValue: '${result.correctCount}',
-                leftLabel: strings.correctLabel,
+                leftValue: maxScore == null
+                    ? '${result.correctCount}'
+                    : '$earnedScore',
+                leftLabel: maxScore == null ? strings.correctLabel : '總分',
                 rightValue: _formatElapsed(result.elapsed),
                 rightLabel: strings.elapsedLabel,
               ),
             ),
             const SizedBox(height: 18),
-            for (final _QuizAnswerRecord record in result.records)
+            for (final QuizAnswerRecord record in result.records)
               Padding(
                 padding: const EdgeInsets.only(bottom: 14),
                 child: Container(
@@ -3670,7 +4053,7 @@ class QuizSessionResult {
     required this.submittedAt,
   });
 
-  final List<_QuizAnswerRecord> records;
+  final List<QuizAnswerRecord> records;
   final DateTime startedAt;
   final DateTime submittedAt;
 
@@ -3681,8 +4064,8 @@ class QuizSessionResult {
   Duration get elapsed => submittedAt.difference(startedAt);
 }
 
-class _QuizAnswerRecord {
-  const _QuizAnswerRecord({
+class QuizAnswerRecord {
+  const QuizAnswerRecord({
     required this.question,
     required this.submittedAnswer,
     required this.isCorrect,
@@ -3751,7 +4134,6 @@ class _QuestionPromptText extends StatelessWidget {
 
 class _QuestionBodyText extends StatelessWidget {
   const _QuestionBodyText({
-    super.key,
     required this.text,
     required this.localeCode,
   });
@@ -3776,7 +4158,6 @@ class _QuestionBodyText extends StatelessWidget {
 
 class _QuestionSourceText extends StatelessWidget {
   const _QuestionSourceText({
-    super.key,
     required this.text,
   });
 
@@ -3884,19 +4265,19 @@ class AppStrings {
         ja: 'iPhone と iPad のために設計',
       );
   String get appSubtitle => _text(
-        zhHant: '奧數思維訓練',
-        zhHans: '奥数思维训练',
-        en: 'Olympiad Math',
-        ja: 'オリンピック数学トレーニング',
+        zhHant: '數學思維與進階練習',
+        zhHans: '数学思维与进阶练习',
+        en: 'Mathematical Thinking Practice',
+        ja: '数学的思考と発展練習',
       );
   String get languageTraditionalChinese => '繁中';
   String get languageEnglish => 'EN';
   String get heroTitle => 'MathSpring';
   String get heroSubtitle => _text(
-        zhHant: '用更清楚的方式練習奧數思維',
-        zhHans: '用更清楚的方式练习奥数思维',
-        en: 'Train elegant mathematical thinking.',
-        ja: '数学オリンピック型の思考を、より明快に鍛える。',
+        zhHant: '用更清楚的方式練習數學思維',
+        zhHans: '用更清楚的方式练习数学思维',
+        en: 'Build mathematical thinking with clarity.',
+        ja: '数学的思考を、より明快に鍛える。',
       );
   String get pillAdaptive => _text(
       zhHant: '自適應版面', zhHans: '自适应版面', en: 'Adaptive layout', ja: '適応レイアウト');
@@ -4008,6 +4389,92 @@ class AppStrings {
         en: 'Revisit recent practice and quiz sessions and inspect each solution again.',
         ja: '最近の練習とテストを見返し、解き方を再確認します。',
       );
+  String get achievementsTitle => _text(
+        zhHant: '學習成就',
+        zhHans: '学习成就',
+        en: 'Achievements',
+        ja: '学習の達成',
+      );
+  String get achievementsSubtitle => _text(
+        zhHant: '依累積練習、錯題重做與持續學習解鎖。',
+        zhHans: '依累计练习、错题重做与持续学习解锁。',
+        en: 'Unlocked through steady practice, review, and persistence.',
+        ja: '練習の積み重ね、解き直し、継続によって達成します。',
+      );
+  String get achievementsEmpty => _text(
+        zhHant: '完成第一輪練習後，這裡會出現你的成就。',
+        zhHans: '完成第一轮练习后，这里会出现你的成就。',
+        en: 'Your achievements will appear after your first practice session.',
+        ja: '最初の練習を終えると、ここに達成が表示されます。',
+      );
+  String get calendarTitle => _text(
+        zhHant: '答題行事曆',
+        zhHans: '答题日历',
+        en: 'Answer calendar',
+        ja: '回答カレンダー',
+      );
+  String get calendarSubtitle => _text(
+        zhHant: '選擇日期查看答題數與正確率。',
+        zhHans: '选择日期查看答题数与正确率。',
+        en: 'Choose a date to see question count and accuracy.',
+        ja: '日付を選んで回答数と正答率を確認します。',
+      );
+  String get calendarNoPractice => _text(
+        zhHant: '這一天沒有答題紀錄。',
+        zhHans: '这一天没有答题记录。',
+        en: 'No answers recorded on this day.',
+        ja: 'この日の回答記録はありません。',
+      );
+  String dayActivityLabel(DateTime day) => _text(
+        zhHant: '${day.month} 月 ${day.day} 日',
+        zhHans: '${day.month} 月 ${day.day} 日',
+        en: '${_englishMonthName(day.month)} ${day.day}',
+        ja: '${day.month}月${day.day}日',
+      );
+  String dayActivitySummary(int count, double accuracyRate) => _text(
+        zhHant: '$count 題 · 正確率 ${(accuracyRate * 100).round()}%',
+        zhHans: '$count 题 · 正确率 ${(accuracyRate * 100).round()}%',
+        en: '$count questions · ${(accuracyRate * 100).round()}% correct',
+        ja: '$count 問 · 正答率 ${(accuracyRate * 100).round()}%',
+      );
+  String monthLabel(DateTime month) => _text(
+        zhHant: '${month.year} 年 ${month.month} 月',
+        zhHans: '${month.year} 年 ${month.month} 月',
+        en: '${_englishMonthName(month.month)} ${month.year}',
+        ja: '${month.year}年${month.month}月',
+      );
+  String streakAchievement(int current, int longest) => _text(
+        zhHant: '目前連續 $current 天 · 最高 $longest 天',
+        zhHans: '当前连续 $current 天 · 最高 $longest 天',
+        en: 'Current streak: $current day${current == 1 ? '' : 's'}',
+        ja: '現在 $current 日連続 · 最高 $longest 日',
+      );
+  String recoveryAchievement(int count) {
+    final String label = count >= 100
+        ? _text(zhHant: '百折不撓', zhHans: '百折不挠', en: 'Unbreakable', ja: '不屈')
+        : count >= 50
+            ? _text(
+                zhHant: '重新上手', zhHans: '重新上手', en: 'Back on Track', ja: '再挑戦')
+            : count >= 10
+                ? _text(
+                    zhHant: '重整旗鼓', zhHans: '重整旗鼓', en: 'Regroup', ja: '立て直し')
+                : _text(
+                    zhHant: '錯題重做 $count / 10',
+                    zhHans: '错题重做 $count / 10',
+                    en: 'Review recovery $count / 10',
+                    ja: '解き直し $count / 10');
+    return label;
+  }
+
+  String topicAchievement(String topic, int milestone) {
+    final String level = switch (milestone) {
+      100 => _text(zhHant: '達人', zhHans: '达人', en: 'Master', ja: '達人'),
+      50 => _text(zhHant: '熟手', zhHans: '熟手', en: 'Familiar', ja: '経験者'),
+      _ => _text(zhHant: '新手', zhHans: '新手', en: 'Beginner', ja: '入門者'),
+    };
+    return '$topic $level';
+  }
+
   String get settingsTitle => _text(
         zhHant: '角色與設定',
         zhHans: '角色与设置',
@@ -4132,6 +4599,28 @@ class AppStrings {
         zhHans: '界面语言在这里切换，题目内容也会同步切换到可用版本。',
         en: 'Switch the interface language here. Question content follows the selected locale when translations are available.',
         ja: 'ここで表示言語を切り替えます。問題文も利用可能な翻訳に合わせて切り替わります。',
+      );
+  String get helpAndPrivacyTitle => _text(
+        zhHant: '支援與隱私',
+        zhHans: '支持与隐私',
+        en: 'Help & Privacy',
+        ja: 'サポートとプライバシー',
+      );
+  String get helpAndPrivacySubtitle => _text(
+        zhHant: '查看使用說明與資料處理方式。',
+        zhHans: '查看使用说明与数据处理方式。',
+        en: 'Read support information and how data is handled.',
+        ja: '使い方とデータの取り扱いを確認します。',
+      );
+  String get supportLinkLabel =>
+      _text(zhHant: '支援', zhHans: '支持', en: 'Support', ja: 'サポート');
+  String get privacyLinkLabel => _text(
+      zhHant: '隱私政策', zhHans: '隐私政策', en: 'Privacy Policy', ja: 'プライバシーポリシー');
+  String get linkOpenFailed => _text(
+        zhHant: '目前無法開啟連結。',
+        zhHans: '目前无法打开链接。',
+        en: 'Unable to open the link right now.',
+        ja: '現在このリンクを開けません。',
       );
   String get topicArithmetic =>
       _text(zhHant: '計算', zhHans: '计算', en: 'Arithmetic', ja: '計算');
@@ -5241,12 +5730,59 @@ Future<String?> _showTopicPicker({
   );
 }
 
+Future<FormalExamPreset?> _showFormalExamPresetPicker(
+  BuildContext context,
+) {
+  return showModalBottomSheet<FormalExamPreset>(
+    context: context,
+    showDragHandle: true,
+    isScrollControlled: true,
+    builder: (BuildContext sheetContext) => SafeArea(
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(24, 8, 24, 28),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              '選擇正式測驗',
+              style: Theme.of(sheetContext).textTheme.headlineSmall,
+            ),
+            const SizedBox(height: 8),
+            const Text('開始後題目與配分固定；可自由跳題，時間到會自動交卷。'),
+            const SizedBox(height: 16),
+            for (final FormalExamPreset preset in FormalExamPreset.standard)
+              Padding(
+                padding: const EdgeInsets.only(bottom: 10),
+                child: OutlinedButton(
+                  key: ValueKey<String>(
+                    'formal_exam_${preset.questionCount}_${preset.timeLimit.inMinutes}',
+                  ),
+                  onPressed: () => Navigator.of(sheetContext).pop(preset),
+                  style: OutlinedButton.styleFrom(
+                    minimumSize: const Size.fromHeight(56),
+                    alignment: Alignment.centerLeft,
+                  ),
+                  child: Text(
+                    '${preset.questionCount} 題・${preset.timeLimit.inMinutes} 分鐘・總分 100',
+                  ),
+                ),
+              ),
+          ],
+        ),
+      ),
+    ),
+  );
+}
+
 Future<void> _openFirstEligiblePack({
   required BuildContext context,
   required AppServices services,
   required LearnerProfile? learner,
   required _SessionLaunchMode mode,
   String? topicCode,
+  int? questionLimit,
+  FormalExamPreset? formalExamPreset,
 }) async {
   final bundled.BundledQuestionBankRepository repository =
       bundled.BundledQuestionBankRepository();
@@ -5279,10 +5815,13 @@ Future<void> _openFirstEligiblePack({
     }
     return;
   }
-  final List<Question> sessionQuestions =
+  final List<Question> randomizedQuestions =
       SessionLaunchPlanBuilder.randomizeQuestionOrderForSession(
     approvedQuestions,
   );
+  final List<Question> sessionQuestions = questionLimit == null
+      ? randomizedQuestions
+      : randomizedQuestions.take(questionLimit).toList(growable: false);
 
   final bundled.BundledQuestionPackInfo launchPack =
       SessionLaunchPlanBuilder.buildLaunchPack(
@@ -5302,6 +5841,7 @@ Future<void> _openFirstEligiblePack({
         services: services,
         pack: launchPack,
         initialQuestions: sessionQuestions,
+        formalExamPreset: formalExamPreset,
       ),
   };
 
@@ -5347,6 +5887,27 @@ String _displayLevelStage(String levelStage, AppStrings strings) {
 String _displayTier(String tier, AppStrings strings) {
   return strings.tierDisplay(tier);
 }
+
+String _englishMonthName(int month) {
+  const List<String> months = <String>[
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December',
+  ];
+  return months[month - 1];
+}
+
+String _displayTopicCode(String topicCode, AppStrings strings) =>
+    displayTopicCode(topicCode, strings);
 
 String displayTopicCode(String topicCode, AppStrings strings) {
   switch (topicCode) {
@@ -5527,8 +6088,8 @@ class TrigGraphPainter extends CustomPainter {
       ..color = const Color(0xFF0F172A)
       ..style = PaintingStyle.fill;
 
-    final double xMin = 0;
-    final double xMax = math.pi * 2;
+    const double xMin = 0;
+    const double xMax = math.pi * 2;
     const double yMin = -1.25;
     const double yMax = 1.25;
 
@@ -5596,7 +6157,7 @@ class TrigGraphPainter extends CustomPainter {
       math.pi * 2,
     ];
     final List<String> xLabels = ['0', 'π/2', 'π', '3π/2', '2π'];
-    final textStyle = const TextStyle(
+    const TextStyle textStyle = TextStyle(
       color: Color(0xFF475569),
       fontSize: 12,
       fontWeight: FontWeight.w500,
