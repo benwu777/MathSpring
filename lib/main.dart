@@ -284,7 +284,7 @@ class _MathSpringAppState extends State<MathSpringApp> {
             ),
           ),
         ),
-        cardTheme: CardTheme(
+        cardTheme: CardThemeData(
           elevation: 0,
           color: Colors.white,
           shadowColor: const Color(0x140F172A),
@@ -544,102 +544,102 @@ class _PracticeTabState extends State<_PracticeTab> {
       services: widget.services,
       learner: widget.learner,
       normalContent: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        _HeroCard(
-          strings: strings,
-          onOpenDemo: () {
-            Navigator.of(context).push(
-              MaterialPageRoute<void>(
-                builder: (_) => TrigGraphDemoPage(services: widget.services),
-              ),
-            );
-          },
-        ),
-        const SizedBox(height: 18),
-        _SectionCard(
-          title: strings.practiceEntryTitle,
-          subtitle: strings.practiceEntrySubtitle,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              _LearnerSummaryBanner(
-                learner: widget.learner,
-                primaryLabel: strings.currentLearnerLabel,
-                secondaryLabel: strings.gradeRangeLabel,
-              ),
-              const SizedBox(height: 18),
-              OutlinedButton(
-                key: const ValueKey<String>('open_topic_practice'),
-                onPressed: () async {
-                  final String? topicCode = await _showTopicPicker(
-                    context: context,
-                    strings: strings,
-                  );
-                  if (!mounted || topicCode == null) {
-                    return;
-                  }
-                  setState(() {
-                    _selectedTopicCode = topicCode;
-                  });
-                },
-                style: OutlinedButton.styleFrom(
-                  foregroundColor: const Color(0xFF111827),
-                  minimumSize: const Size.fromHeight(54),
-                  side: const BorderSide(color: Color(0xFFE5E7EB)),
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          _HeroCard(
+            strings: strings,
+            onOpenDemo: () {
+              Navigator.of(context).push(
+                MaterialPageRoute<void>(
+                  builder: (_) => TrigGraphDemoPage(services: widget.services),
                 ),
-                child: Text(strings.chooseTopic),
-              ),
-              if (_selectedTopicCode != null) ...[
-                const SizedBox(height: 16),
-                Container(
-                  width: double.infinity,
-                  padding: const EdgeInsets.all(16),
-                  decoration: BoxDecoration(
-                    color: const Color(0xFFF9FAFB),
-                    borderRadius: BorderRadius.circular(12),
-                    border: Border.all(color: const Color(0xFFE5E7EB)),
+              );
+            },
+          ),
+          const SizedBox(height: 18),
+          _SectionCard(
+            title: strings.practiceEntryTitle,
+            subtitle: strings.practiceEntrySubtitle,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _LearnerSummaryBanner(
+                  learner: widget.learner,
+                  primaryLabel: strings.currentLearnerLabel,
+                  secondaryLabel: strings.gradeRangeLabel,
+                ),
+                const SizedBox(height: 18),
+                OutlinedButton(
+                  key: const ValueKey<String>('open_topic_practice'),
+                  onPressed: () async {
+                    final String? topicCode = await _showTopicPicker(
+                      context: context,
+                      strings: strings,
+                    );
+                    if (!mounted || topicCode == null) {
+                      return;
+                    }
+                    setState(() {
+                      _selectedTopicCode = topicCode;
+                    });
+                  },
+                  style: OutlinedButton.styleFrom(
+                    foregroundColor: const Color(0xFF111827),
+                    minimumSize: const Size.fromHeight(54),
+                    side: const BorderSide(color: Color(0xFFE5E7EB)),
                   ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        strings.selectedTopicLabel,
-                        style: Theme.of(context).textTheme.bodyMedium,
-                      ),
-                      const SizedBox(height: 6),
-                      Text(
-                        _displayTopicCode(_selectedTopicCode!, strings),
-                        style: Theme.of(context).textTheme.titleMedium,
-                      ),
-                    ],
+                  child: Text(strings.chooseTopic),
+                ),
+                if (_selectedTopicCode != null) ...[
+                  const SizedBox(height: 16),
+                  Container(
+                    width: double.infinity,
+                    padding: const EdgeInsets.all(16),
+                    decoration: BoxDecoration(
+                      color: const Color(0xFFF9FAFB),
+                      borderRadius: BorderRadius.circular(12),
+                      border: Border.all(color: const Color(0xFFE5E7EB)),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          strings.selectedTopicLabel,
+                          style: Theme.of(context).textTheme.bodyMedium,
+                        ),
+                        const SizedBox(height: 6),
+                        Text(
+                          _displayTopicCode(_selectedTopicCode!, strings),
+                          style: Theme.of(context).textTheme.titleMedium,
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+                const SizedBox(height: 16),
+                FilledButton(
+                  key: const ValueKey<String>('open_start_practice'),
+                  onPressed: () => _openFirstEligiblePack(
+                    context: context,
+                    services: widget.services,
+                    learner: widget.learner,
+                    topicCode: _selectedTopicCode,
+                    mode: _SessionLaunchMode.practice,
+                  ),
+                  style: FilledButton.styleFrom(
+                    backgroundColor: const Color(0xFF111827),
+                    minimumSize: const Size.fromHeight(54),
+                  ),
+                  child: Text(
+                    _selectedTopicCode == null
+                        ? strings.startPractice
+                        : strings.startSelectedTopicPractice,
                   ),
                 ),
               ],
-              const SizedBox(height: 16),
-              FilledButton(
-                key: const ValueKey<String>('open_start_practice'),
-                onPressed: () => _openFirstEligiblePack(
-                  context: context,
-                  services: widget.services,
-                  learner: widget.learner,
-                  topicCode: _selectedTopicCode,
-                  mode: _SessionLaunchMode.practice,
-                ),
-                style: FilledButton.styleFrom(
-                  backgroundColor: const Color(0xFF111827),
-                  minimumSize: const Size.fromHeight(54),
-                ),
-                child: Text(
-                  _selectedTopicCode == null
-                      ? strings.startPractice
-                      : strings.startSelectedTopicPractice,
-                ),
-              ),
-            ],
+            ),
           ),
-        ),
-      ],
+        ],
       ),
     );
   }
@@ -673,8 +673,8 @@ class _DailyMissionGateState extends State<_DailyMissionGate> {
     return FutureBuilder<DailyMissionProgress>(
       key: ValueKey<int>(_version),
       future: widget.services.getLearnerDailyMissionProgress(learnerId),
-      builder: (BuildContext context,
-          AsyncSnapshot<DailyMissionProgress> snapshot) {
+      builder:
+          (BuildContext context, AsyncSnapshot<DailyMissionProgress> snapshot) {
         if (!snapshot.hasData) {
           return const Center(child: CircularProgressIndicator());
         }
@@ -3705,9 +3705,10 @@ class _QuizSessionPageState extends State<QuizSessionPage> {
                         Navigator.of(sheetContext).pop();
                       },
                       style: OutlinedButton.styleFrom(
-                        backgroundColor: _answers.containsKey(questions[index].id)
-                            ? const Color(0xFFEAF2FF)
-                            : Colors.white,
+                        backgroundColor:
+                            _answers.containsKey(questions[index].id)
+                                ? const Color(0xFFEAF2FF)
+                                : Colors.white,
                       ),
                       child: Text('${index + 1}・${scores[index].maxScore} 分'),
                     ),
@@ -3843,8 +3844,7 @@ class _QuizSessionPageState extends State<QuizSessionPage> {
   }
 
   int _earnedFormalExamScore(List<QuizAnswerRecord> records) {
-    final List<FormalExamQuestionScore> scores =
-        FormalExamScoring.allocate(
+    final List<FormalExamQuestionScore> scores = FormalExamScoring.allocate(
       records.map((QuizAnswerRecord record) => record.question).toList(),
     );
     int earned = 0;
@@ -3957,12 +3957,13 @@ class QuizResultPage extends StatelessWidget {
           children: [
             _SectionCard(
               title: strings.quizResult,
-              subtitle:
-                  maxScore == null
-                      ? '${result.correctCount} / ${result.totalQuestions} ${strings.correctSuffix}'
-                      : '正式測驗成績：$earnedScore / $maxScore',
+              subtitle: maxScore == null
+                  ? '${result.correctCount} / ${result.totalQuestions} ${strings.correctSuffix}'
+                  : '正式測驗成績：$earnedScore / $maxScore',
               child: _StatRow(
-                leftValue: maxScore == null ? '${result.correctCount}' : '$earnedScore',
+                leftValue: maxScore == null
+                    ? '${result.correctCount}'
+                    : '$earnedScore',
                 leftLabel: maxScore == null ? strings.correctLabel : '總分',
                 rightValue: _formatElapsed(result.elapsed),
                 rightLabel: strings.elapsedLabel,
@@ -3978,58 +3979,63 @@ class QuizResultPage extends StatelessWidget {
                     borderRadius: BorderRadius.circular(12),
                     border: Border.all(color: const Color(0xFFE5E7EB)),
                   ),
-                  child: ExpansionTile(
-                    key: ValueKey<String>(
-                      'quiz_result_${record.question.id}',
-                    ),
-                    title: _QuestionPromptText(
-                      text:
-                          record.question.localizedPrompt(_localeCode(context)),
-                      localeCode: _localeCode(context),
-                    ),
-                    subtitle: _ResultStatusBadge(
-                      label: record.isCorrect
-                          ? strings.correctLabel
-                          : strings.incorrectLabel,
-                      isCorrect: record.isCorrect,
-                    ),
-                    childrenPadding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
-                    children: [
-                      if (record.question.source?.displayLabel != null) ...[
+                  child: Material(
+                    color: Colors.transparent,
+                    borderRadius: BorderRadius.circular(12),
+                    clipBehavior: Clip.antiAlias,
+                    child: ExpansionTile(
+                      key: ValueKey<String>(
+                        'quiz_result_${record.question.id}',
+                      ),
+                      title: _QuestionPromptText(
+                        text: record.question
+                            .localizedPrompt(_localeCode(context)),
+                        localeCode: _localeCode(context),
+                      ),
+                      subtitle: _ResultStatusBadge(
+                        label: record.isCorrect
+                            ? strings.correctLabel
+                            : strings.incorrectLabel,
+                        isCorrect: record.isCorrect,
+                      ),
+                      childrenPadding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
+                      children: [
+                        if (record.question.source?.displayLabel != null) ...[
+                          Align(
+                            alignment: Alignment.centerLeft,
+                            child: _QuestionSourceText(
+                              text: record.question.source!.displayLabel!,
+                            ),
+                          ),
+                          const SizedBox(height: 10),
+                        ],
+                        if (record.question.figure.kind != 'none') ...[
+                          _QuestionFigureView(question: record.question),
+                          const SizedBox(height: 14),
+                        ],
                         Align(
                           alignment: Alignment.centerLeft,
-                          child: _QuestionSourceText(
-                            text: record.question.source!.displayLabel!,
+                          child: _QuestionBodyText(
+                            text: record.question
+                                .localizedAnswer(_localeCode(context)),
+                            localeCode: _localeCode(context),
                           ),
                         ),
                         const SizedBox(height: 10),
-                      ],
-                      if (record.question.figure.kind != 'none') ...[
-                        _QuestionFigureView(question: record.question),
-                        const SizedBox(height: 14),
-                      ],
-                      Align(
-                        alignment: Alignment.centerLeft,
-                        child: _QuestionBodyText(
-                          text: record.question
-                              .localizedAnswer(_localeCode(context)),
-                          localeCode: _localeCode(context),
-                        ),
-                      ),
-                      const SizedBox(height: 10),
-                      for (final String step in record.question
-                          .localizedSolutionSteps(_localeCode(context)))
-                        Padding(
-                          padding: const EdgeInsets.only(bottom: 8),
-                          child: Align(
-                            alignment: Alignment.centerLeft,
-                            child: _QuestionBodyText(
-                              text: step,
-                              localeCode: _localeCode(context),
+                        for (final String step in record.question
+                            .localizedSolutionSteps(_localeCode(context)))
+                          Padding(
+                            padding: const EdgeInsets.only(bottom: 8),
+                            child: Align(
+                              alignment: Alignment.centerLeft,
+                              child: _QuestionBodyText(
+                                text: step,
+                                localeCode: _localeCode(context),
+                              ),
                             ),
                           ),
-                        ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ),
