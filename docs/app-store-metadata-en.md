@@ -9,8 +9,8 @@ Review this copy against the shipped app, support URL, and privacy policy before
 - Primary category: Education
 - Secondary category: Puzzle (only if it matches the final App Store category choice)
 - Age rating: Answer the App Store Connect questionnaire truthfully. The current app has no ads, purchases, user-generated interaction, or web content.
-- Support URL: `https://YOUR_GITHUB_USERNAME.github.io/mathspring/support/`
-- Privacy Policy URL: `https://YOUR_GITHUB_USERNAME.github.io/mathspring/privacy/`
+- Support URL: `https://benwu777.github.io/MathSpring/support/`
+- Privacy Policy URL: `https://benwu777.github.io/MathSpring/privacy/`
 
 ## Description
 

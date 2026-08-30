@@ -22,6 +22,11 @@ import 'package:mathspring/services/formal_exam_scoring.dart';
 import 'package:mathspring/services/math_text_formatter.dart';
 import 'package:mathspring/services/session_launch_plan_builder.dart';
 
+const String appSupportUrl =
+    'https://benwu777.github.io/MathSpring/support/';
+const String appPrivacyPolicyUrl =
+    'https://benwu777.github.io/MathSpring/privacy/';
+
 void main() {
   runApp(const MathSpringApp());
 }
@@ -1141,12 +1146,8 @@ class _SettingsTab extends StatelessWidget {
 class _SupportAndPrivacySection extends StatelessWidget {
   const _SupportAndPrivacySection();
 
-  static final Uri _supportUrl = Uri.parse(
-    'https://YOUR_GITHUB_USERNAME.github.io/mathspring/support/',
-  );
-  static final Uri _privacyUrl = Uri.parse(
-    'https://YOUR_GITHUB_USERNAME.github.io/mathspring/privacy/',
-  );
+  static final Uri _supportUrl = Uri.parse(appSupportUrl);
+  static final Uri _privacyUrl = Uri.parse(appPrivacyPolicyUrl);
 
   Future<void> _open(BuildContext context, Uri url) async {
     if (await launchUrl(url, mode: LaunchMode.externalApplication)) {

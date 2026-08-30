@@ -9,8 +9,8 @@
 - 類別：教育
 - 次要類別：益智解謎（如 App Store Connect 提供且符合最終內容）
 - 年齡分級：依 App Store Connect 問卷據實填寫；目前沒有廣告、購買、使用者互動或網路內容。
-- 支援網址：`https://YOUR_GITHUB_USERNAME.github.io/mathspring/support/`
-- 隱私政策網址：`https://YOUR_GITHUB_USERNAME.github.io/mathspring/privacy/`
+- 支援網址：`https://benwu777.github.io/MathSpring/support/`
+- 隱私政策網址：`https://benwu777.github.io/MathSpring/privacy/`
 
 ## 描述
 
