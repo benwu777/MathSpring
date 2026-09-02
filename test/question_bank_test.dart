@@ -859,7 +859,7 @@ void main() {
         findQuestion(arithmeticGrade4Pack, 'arithmetic_grade4_foundation_004');
     expect(
       arithmeticTypoQuestion.localizedPrompt('zh-Hant'),
-      '有一些貼紙。若平均分給 6 人，會多 2 張；若平均分給 7 人，剛好還差 5 張。共有幾張貼紙？',
+      '有一些貼紙。若平均分給 6 人，會多 2 張；若改成平均分給 7 人，而且每人分到的張數和剛才一樣多，剛好還差 5 張。共有幾張貼紙？',
     );
   });
 

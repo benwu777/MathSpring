@@ -4272,6 +4272,42 @@ class _InfoPill extends StatelessWidget {
   }
 }
 
+/// 題庫文字用 `**…**` 標記強調片段。app 沒有 markdown renderer，
+/// 這裡把標記拆掉、改用字重呈現，避免星號直接顯示在畫面上。
+Text _emphasisText(
+  String text, {
+  required TextStyle? style,
+  required FontWeight emphasisWeight,
+  TextAlign? textAlign,
+}) {
+  final List<MathTextSegment> segments = splitEmphasis(normalizeMathText(text));
+  if (segments.length == 1 && !segments.single.emphasized) {
+    return Text(
+      segments.single.text,
+      softWrap: true,
+      textAlign: textAlign,
+      style: style,
+    );
+  }
+  return Text.rich(
+    TextSpan(
+      children: <InlineSpan>[
+        for (final MathTextSegment segment in segments)
+          TextSpan(
+            text: segment.text,
+            style: segment.emphasized
+                ? (style ?? const TextStyle())
+                    .copyWith(fontWeight: emphasisWeight)
+                : style,
+          ),
+      ],
+    ),
+    softWrap: true,
+    textAlign: textAlign,
+    style: style,
+  );
+}
+
 class _QuestionPromptText extends StatelessWidget {
   const _QuestionPromptText({
     super.key,
@@ -4287,9 +4323,9 @@ class _QuestionPromptText extends StatelessWidget {
     final bool denseScript = _isDenseScriptLocale(localeCode);
     final double width = MediaQuery.sizeOf(context).width;
     final double fontSize = width >= 900 ? 20 : 18;
-    return Text(
-      normalizeMathText(text),
-      softWrap: true,
+    return _emphasisText(
+      text,
+      emphasisWeight: FontWeight.w800,
       style: Theme.of(context).textTheme.bodyLarge?.copyWith(
             fontSize: fontSize,
             height: denseScript ? 1.65 : 1.5,
@@ -4312,12 +4348,13 @@ class _QuestionBodyText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bool denseScript = _isDenseScriptLocale(localeCode);
-    return Text(
-      normalizeMathText(text),
-      softWrap: true,
+    return _emphasisText(
+      text,
+      emphasisWeight: FontWeight.w700,
       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
             fontSize: 15,
             height: denseScript ? 1.7 : 1.55,
+            fontWeight: FontWeight.w400,
             color: const Color(0xFF374151),
           ),
     );
@@ -4358,13 +4395,14 @@ class _QuestionOptionText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bool denseScript = _isDenseScriptLocale(localeCode);
-    return Text(
-      normalizeMathText(text),
-      softWrap: true,
+    return _emphasisText(
+      text,
       textAlign: TextAlign.left,
+      emphasisWeight: FontWeight.w700,
       style: Theme.of(context).textTheme.bodyLarge?.copyWith(
             fontSize: 15,
             height: denseScript ? 1.6 : 1.45,
+            fontWeight: FontWeight.w400,
             color: const Color(0xFF111827),
           ),
     );

@@ -400,8 +400,8 @@ void main() {
         'params': {
           'regionLabels': {
             'topLeft': '15',
-            'bottomLeft': '20',
-            'bottomRight': '12',
+            'bottomLeft': '12',
+            'bottomRight': '20',
             'topRight': '?',
           },
           'pointLabel': 'P',
@@ -2647,5 +2647,114 @@ void main() {
         findsOneWidget);
     expect(find.textContaining('sin(x) reaches its maximum value 1 at π/2'),
         findsOneWidget);
+  });
+
+  Question createEmphasisQuestion() {
+    return Question.fromJson({
+      'id': 'number_theory_grade7_foundation_016',
+      'topic': 'number_theory',
+      'difficulty': 'foundation',
+      'levelStage': 'grade7',
+      'challengeTier': 'foundation',
+      'prompt': {
+        'zh-Hant': '把 2520 做質因數分解。求它有多少個**不同的**質因數。',
+        'en':
+            'Factorise 2520 into primes. How many **distinct** prime factors does it have?',
+      },
+      'answer': {
+        'zh-Hant': '答案是 4。',
+        'en': 'The answer is 4.',
+      },
+      'solutionSteps': {
+        'zh-Hant': ['2520 = 2³ × 3² × 5 × 7，共有 **4** 個不同的質因數。'],
+        'en': ['2520 = 2³ × 3² × 5 × 7, so it has **4** distinct prime factors.'],
+      },
+      'figure': {
+        'type': 'custom',
+        'kind': 'none',
+        'params': <String, dynamic>{},
+      },
+      'answerMode': 'integer_input',
+      'inputConstraints': {
+        'allowNegative': false,
+        'maxDigits': 2,
+      },
+      'correctAnswer': {
+        'type': 'integer',
+        'value': '4',
+      },
+      'source': {
+        'type': 'rewritten_olympiad_style',
+        'name': 'MathSpring',
+        'reference': 'internal',
+      },
+    });
+  }
+
+  testWidgets('question prompts render bold markers instead of showing asterisks',
+      (WidgetTester tester) async {
+    final TestWidgetsFlutterBinding binding =
+        TestWidgetsFlutterBinding.ensureInitialized();
+    binding.platformDispatcher.localeTestValue = const Locale('en');
+
+    final AppServices services = createTestServices();
+
+    await tester.binding.setSurfaceSize(const Size(430, 932));
+    await tester.pumpWidget(
+      MaterialApp(
+        locale: const Locale('en'),
+        supportedLocales: AppStrings.supportedLocales,
+        localizationsDelegates: const [
+          GlobalMaterialLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+        ],
+        home: PracticeSessionPage(
+          services: services,
+          pack: const BundledQuestionPackInfo(
+            path:
+                'assets/questions/number_theory/grade7_foundation.number_theory.v1.json',
+            topic: 'Number theory',
+            topicCode: 'number_theory',
+            levelStage: 'grade7',
+            challengeTier: 'foundation',
+            questionCount: 1,
+          ),
+          initialQuestions: [createEmphasisQuestion()],
+        ),
+      ),
+    );
+    await tester.runAsync(() async {
+      await Future<void>.delayed(const Duration(milliseconds: 50));
+    });
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 300));
+
+    expect(find.textContaining('**'), findsNothing);
+
+    final Iterable<RichText> richTexts = tester.widgetList<RichText>(
+      find.byType(RichText),
+    );
+    FontWeight? plainWeight;
+    FontWeight? boldWeight;
+    for (final RichText richText in richTexts) {
+      richText.text.visitChildren((InlineSpan span) {
+        if (span is! TextSpan || span.text == null) {
+          return true;
+        }
+        if (span.text!.contains('distinct')) {
+          boldWeight = span.style?.fontWeight;
+        }
+        if (span.text!.contains('Factorise 2520')) {
+          plainWeight = span.style?.fontWeight;
+        }
+        return true;
+      });
+    }
+
+    expect(boldWeight, isNotNull,
+        reason: 'the emphasised run should be its own span');
+    expect(plainWeight, isNotNull);
+    expect(boldWeight!.value, greaterThan(plainWeight!.value));
   });
 }

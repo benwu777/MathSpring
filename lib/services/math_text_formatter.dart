@@ -100,3 +100,29 @@ String _toSuperscript(String exponent) {
   }
   return buffer.toString();
 }
+
+/// 題庫文字用 `**…**` 標記需要強調的片段（多半是詳解裡的關鍵數字）。
+/// app 沒有 markdown renderer，直接顯示會露出星號，因此由 UI 端拆成片段後自行套字重。
+class MathTextSegment {
+  const MathTextSegment(this.text, {required this.emphasized});
+
+  final String text;
+  final bool emphasized;
+}
+
+/// 依 `**` 標記把文字拆成一般片段與強調片段，標記本身不會保留在結果中。
+List<MathTextSegment> splitEmphasis(String text) {
+  if (!text.contains('**')) {
+    return <MathTextSegment>[MathTextSegment(text, emphasized: false)];
+  }
+
+  final List<String> parts = text.split('**');
+  final List<MathTextSegment> segments = <MathTextSegment>[];
+  for (int i = 0; i < parts.length; i++) {
+    if (parts[i].isEmpty) {
+      continue;
+    }
+    segments.add(MathTextSegment(parts[i], emphasized: i.isOdd));
+  }
+  return segments;
+}
