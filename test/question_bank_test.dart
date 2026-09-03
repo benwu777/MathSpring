@@ -772,7 +772,7 @@ void main() {
     );
     expect(
       grade3CaseQuestion.localizedPrompt('zh-Hant'),
-      '在 12、15、18 中，哪一個數不是最大的，也不是最小的 3 的倍數，而且是奇數？',
+      '在 12、15、18 這三個數之中，有一個數既不是最大的，也不是最小的，而且是奇數。這個數是多少？',
     );
 
     final Question grade3MatchingQuestion =
@@ -2321,7 +2321,8 @@ void main() {
     final raw = jsonDecode(await File('assets/questions/mixed/grade6_foundation.mixed.v1.json').readAsString()) as Map<String,dynamic>;
     Map<String,dynamic> byId(String id) => (raw['questions'] as List).cast<Map<String,dynamic>>().firstWhere((q) => q['id'] == id);
     expect(byId('mixed_grade6_foundation_035')['subtopic'], 'calendar_cycle');
-    expect((byId('mixed_grade6_foundation_035')['correctAnswer'] as Map)['value'], '5');
+    // 2026-09-03 由 integer_input（用數字 5 代表星期四）改為選擇題，答案改為選項 B。
+    expect((byId('mixed_grade6_foundation_035')['correctAnswer'] as Map)['value'], 'B');
     expect(byId('mixed_grade6_foundation_036')['subtopic'], 'fold_symmetry');
     expect((byId('mixed_grade6_foundation_036')['correctAnswer'] as Map)['value'], '4');
     expect(byId('mixed_grade6_foundation_037')['subtopic'], 'two_digit_inequality_count');
