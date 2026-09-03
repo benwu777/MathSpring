@@ -10,6 +10,8 @@ import glob, math, re, sys
 from collections import defaultdict
 
 LANGS = ['zh-Hant', 'zh-Hans', 'en', 'ja']
+# 標籤詞彙表是唯一真實來源，不在其中的標籤一律視為錯誤
+TAG_VOCAB = set(json.load(open('docs/question-bank-tags.json'))['tags'])
 # grade1-6 用四類；grade7-12 用五類奧數主題（見 question-bank-expansion-guidelines 的年級對齊表）
 TOPICS = {'arithmetic', 'geometry', 'logic', 'mixed'}
 TOPICS_UPPER = {'algebra', 'combinatorics', 'geometry', 'logic', 'number_theory'}
@@ -201,6 +203,27 @@ def main():
                         steps = [norm(x) for x in q.get('solutionSteps', {}).get(l, [])]
                         if steps and not any(val in s for s in steps):
                             err('solutionSteps[%s] 完全未出現答案值 %s' % (l, val))
+
+            # 標籤：詞彙表固定，打錯字不得產生新標籤（見 docs/question-bank-tagging.md）
+            tags = q.get('tags')
+            if not isinstance(tags, list) or not tags:
+                err('缺少 tags')
+            else:
+                for t in tags:
+                    if t not in TAG_VOCAB:
+                        err('tags 不在詞彙表內: %s' % t)
+                cs = [t for t in tags if t.startswith('c:')]
+                ms = [t for t in tags if t.startswith('m:')]
+                if not cs:
+                    err('tags 缺少 c: 概念標籤')
+                if len(cs) > 3:
+                    err('tags 的 c: 超過 3 個: %d' % len(cs))
+                if not ms:
+                    err('tags 缺少 m: 手法標籤')
+                if len(ms) > 2:
+                    err('tags 的 m: 超過 2 個: %d' % len(ms))
+                if len(set(tags)) != len(tags):
+                    err('tags 有重複')
 
             src = q.get('source', {})
             if src.get('type') not in ('official_reference', 'rewritten_olympiad_style'):
