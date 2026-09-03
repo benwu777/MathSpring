@@ -551,7 +551,7 @@ phase 1 **只允許**兩種 `answerMode`，不得新增其他型別：
   | kind | 用途 | 驗證器檢查 |
   |---|---|---|
   | `geometry_scene` | **需要畫出構造的幾何題一律用這個**：點、線段、多邊形、圓弧、角度標記、直角記號、等長刻記。座標是數學座標（y 軸向上）。 | `scene_checks()` 查 7 項：點在 bounds 內、弧不出界、引用的點存在、直角真的是 90°±0.5°、等長真的等長（1% 容差）、角度標籤與實際角度相符、多邊形頂點不共線 |
-  | `coordinate_plane` | 座標平面上的點、折線、標記點 | 只查「終點」標籤洩漏答案這一條 |
+  | `coordinate_plane` | 座標平面上的點、折線、標記點。`points` 畫藍點＋標籤，`path` 畫一條青色折線，`highlightPoint` 不會自己畫點、只把 `points` 裡座標相同的那一點改成紅色。**畫不出箭頭，所以不要用它畫向量**——把終點標成「u」會讓學生以為 u 是一個點，而兩個向量只能連成一條折線，看起來是一條折線而不是兩個向量。 | 只查「終點」標籤洩漏答案這一條 |
   | `shape_diagram` | 單一基本形狀＋最多 5 個文字標籤（`top`/`bottom`/`left`/`right`/`center`） | 無 |
   | `composite_grid_shape` | 方格拼出的複合圖形，`filledCells` 是 0-indexed 的 `[row, col]`，row 0 在最上面 | 無 |
   | `circle_quadrants_point` | **不要用**。圓、四個鑲邊點與內部點的位置全部寫死，`shadedRegion` 只有 `"topRight"` 有作用，其餘值靜默不上色。全庫只有 1 題在用。 | 無 |
