@@ -144,13 +144,31 @@ gcd      → c:factor_multiple
 
 ### 去重（主要動機）
 
-`question_similarity_audit.py` 增加 `--tags` 模式：
+`question_similarity_audit.py` 已增加 `--tags` 模式（2026-09-03 實作）：
 
-- **共同標籤為 0** → 直接放行，不必人工讀（今天那 3 筆誤判就屬於這類）
-- **`c:` 標籤完全相同** → 即使文字相似度低也要人工複判
-  （`geometry_grade6_033` 那個漏網之魚就會在這裡被抓到）
+```bash
+python3 scripts/question_similarity_audit.py --tags [門檻]   # 預設門檻 0.35
+```
 
-這正好補上目前「只看文字」的兩個破口。
+- `tag_pair_verdict(a, b)` 判定兩題概念標籤的關係：
+  **disjoint**（無共同概念，數學上無關，可直接放行）、
+  **identical**（概念完全相同，即使字面相似度低也必須人工複判）、**overlap**
+- `--tags` 報告「概念集合完全相同且字面相似度達門檻」的配對
+
+**為什麼要加門檻**：光是「概念集合相同」在全庫就有 **70,618 組**配對（最大的一組
+有 190 題），完全不可用。加上字面相似度後：0.20 → 1905 組、0.25 → 1132、
+0.30 → 702、**0.35 → 448**。取 0.35 作為預設。
+
+**驗證有抓到目標**：`geometry_grade6_033` 與 `geometry_grade8_008` 概念標籤同為
+`c:ratio + c:area + c:triangle`，字面相似度 0.565，確實出現在報告中。
+這一對正是純文字閘門的盲點類型。
+
+測試在 `scripts/tests/test_question_bank_tools.py`（stdlib unittest，不 mock，
+直接跑真實的 2528 題與真實驗證器）：
+
+```bash
+python3 -W error::ResourceWarning scripts/tests/test_question_bank_tools.py
+```
 
 ### 出題方向盤點
 

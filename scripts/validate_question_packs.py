@@ -10,14 +10,46 @@ import glob, math, re, sys
 from collections import defaultdict
 
 LANGS = ['zh-Hant', 'zh-Hans', 'en', 'ja']
-# 標籤詞彙表是唯一真實來源，不在其中的標籤一律視為錯誤
-TAG_VOCAB = set(json.load(open('docs/question-bank-tags.json'))['tags'])
 # grade1-6 用四類；grade7-12 用五類奧數主題（見 question-bank-expansion-guidelines 的年級對齊表）
 TOPICS = {'arithmetic', 'geometry', 'logic', 'mixed'}
 TOPICS_UPPER = {'algebra', 'combinatorics', 'geometry', 'logic', 'number_theory'}
 KINDS = {'none', 'geometry_scene', 'shape_diagram', 'coordinate_plane',
          'composite_grid_shape', 'circle_quadrants_point'}
 ID_RE = re.compile(r'(arithmetic|geometry|logic|mixed|algebra|combinatorics|number_theory)_(grade\d+)_foundation_\d{3}$')
+
+
+TAG_VOCAB_PATH = 'docs/question-bank-tags.json'
+
+
+def load_tag_vocab(path=TAG_VOCAB_PATH):
+    with open(path) as fh:
+        return set(json.load(fh)['tags'])
+
+
+def check_tags(tags, vocab):
+    """回傳標籤的錯誤訊息清單；合格時回傳空清單。
+
+    詞彙表是唯一真實來源，打錯字不得產生新標籤（見 docs/question-bank-tagging.md）。
+    """
+    if not isinstance(tags, list) or not tags:
+        return ['缺少 tags']
+    errs = []
+    for t in tags:
+        if t not in vocab:
+            errs.append('tags 不在詞彙表內: %s' % t)
+    cs = [t for t in tags if t.startswith('c:')]
+    ms = [t for t in tags if t.startswith('m:')]
+    if not cs:
+        errs.append('tags 缺少 c: 概念標籤')
+    if len(cs) > 3:
+        errs.append('tags 的 c: 超過 3 個: %d' % len(cs))
+    if not ms:
+        errs.append('tags 缺少 m: 手法標籤')
+    if len(ms) > 2:
+        errs.append('tags 的 m: 超過 2 個: %d' % len(ms))
+    if len(set(tags)) != len(tags):
+        errs.append('tags 有重複')
+    return errs
 
 
 def allowed_topics(level_stage):
@@ -79,6 +111,7 @@ def scene_checks(q, err):
 
 
 def main():
+    TAG_VOCAB = load_tag_vocab()
     only = sys.argv[1] if len(sys.argv) > 1 else None
     errors = defaultdict(list)
     seen = {}
@@ -204,26 +237,8 @@ def main():
                         if steps and not any(val in s for s in steps):
                             err('solutionSteps[%s] 完全未出現答案值 %s' % (l, val))
 
-            # 標籤：詞彙表固定，打錯字不得產生新標籤（見 docs/question-bank-tagging.md）
-            tags = q.get('tags')
-            if not isinstance(tags, list) or not tags:
-                err('缺少 tags')
-            else:
-                for t in tags:
-                    if t not in TAG_VOCAB:
-                        err('tags 不在詞彙表內: %s' % t)
-                cs = [t for t in tags if t.startswith('c:')]
-                ms = [t for t in tags if t.startswith('m:')]
-                if not cs:
-                    err('tags 缺少 c: 概念標籤')
-                if len(cs) > 3:
-                    err('tags 的 c: 超過 3 個: %d' % len(cs))
-                if not ms:
-                    err('tags 缺少 m: 手法標籤')
-                if len(ms) > 2:
-                    err('tags 的 m: 超過 2 個: %d' % len(ms))
-                if len(set(tags)) != len(tags):
-                    err('tags 有重複')
+            for msg in check_tags(q.get('tags'), TAG_VOCAB):
+                err(msg)
 
             src = q.get('source', {})
             if src.get('type') not in ('official_reference', 'rewritten_olympiad_style'):

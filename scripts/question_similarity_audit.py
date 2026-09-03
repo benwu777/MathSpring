@@ -15,6 +15,9 @@
       # 同答案值 + subtopic 家族重疊 + 字面相似：抓「改寫情境之後仍是同一題」
       # 出題前先比對：cand.json 是 [{"id": "候選代號", "prompt": "題幹"}, ...]
       # 會同時比對「候選 vs 全庫」與「候選彼此」——後者最常撞
+  python3 scripts/question_similarity_audit.py --tags [門檻]
+      # 概念標籤完全相同 + 字面相似：抓「措辭差很大但數學同構」的題
+      # 這是純文字閘門的盲點，2026-09-03 就漏放過一題
 """
 import json, glob, re, sys, itertools
 
@@ -54,6 +57,69 @@ def overlap(a, b):
 
 def similarity(a, b):
     return max(jaccard(a, b), overlap(a, b))
+
+
+def load_bank():
+    """讀入全庫題目，回傳 [(id, tags, grams)]。"""
+    rows = []
+    for path in sorted(glob.glob('assets/questions/*/*.json')):
+        with open(path) as fh:
+            pack = json.load(fh)
+        for q in pack['questions']:
+            rows.append((q['id'], q.get('tags', []), grams(q['prompt']['zh-Hant'])))
+    return rows
+
+
+_TAGS_BY_ID = None
+
+
+def tags_of(qid):
+    global _TAGS_BY_ID
+    if _TAGS_BY_ID is None:
+        _TAGS_BY_ID = {r[0]: r[1] for r in load_bank()}
+    return _TAGS_BY_ID[qid]
+
+
+def concepts(tags):
+    return frozenset(t for t in tags if t.startswith('c:'))
+
+
+def tag_pair_verdict(tags_a, tags_b):
+    """兩題概念標籤的關係。手法標籤（m:）不影響判定。
+
+    disjoint  —— 沒有共同概念，數學上無關，可直接放行
+    identical —— 概念完全相同，即使字面相似度低也必須人工複判
+    overlap   —— 部分重疊
+    """
+    a, b = concepts(tags_a), concepts(tags_b)
+    if not (a & b):
+        return 'disjoint'
+    if a == b:
+        return 'identical'
+    return 'overlap'
+
+
+def audit_tags(threshold=0.35, report=True):
+    """概念標籤完全相同、且字面相似度達門檻的配對。
+
+    這是純文字閘門抓不到的一類：措辭差很大但數學同構。
+    """
+    by_concept = {}
+    for qid, tags, g in load_bank():
+        by_concept.setdefault(concepts(tags), []).append((qid, g))
+    hits = []
+    for group in by_concept.values():
+        for (ia, ga), (ib, gb) in itertools.combinations(group, 2):
+            sc = similarity(ga, gb)
+            if sc >= threshold:
+                hits.append((ia, ib, sc))
+    hits.sort(key=lambda z: -z[2])
+    if report:
+        for ia, ib, sc in hits:
+            print('%.2f  %s ↔ %s  概念標籤相同 %s'
+                  % (sc, ia, ib, sorted(concepts(tags_of(ia)))))
+        print('概念標籤相同且字面相似 >= %.2f 的配對：%d 組' % (threshold, len(hits)))
+    return hits
 
 
 def audit_same_answer(threshold=0.55, subtopic_overlap=0.5):
@@ -127,6 +193,9 @@ def audit_candidates(path, threshold):
 
 
 def main():
+    if sys.argv[1:2] == ['--tags']:
+        th = float(sys.argv[2]) if len(sys.argv) > 2 else 0.35
+        return 1 if audit_tags(th) else 0
     if sys.argv[1:2] == ['--same-answer']:
         hits = audit_same_answer(float(sys.argv[2]) if len(sys.argv) > 2 else 0.55)
         return 1 if hits else 0
