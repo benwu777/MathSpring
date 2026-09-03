@@ -6711,6 +6711,242 @@
         "reference": "tag-gap-batch-b-2026-09-03",
         "notes": "題型參考公開題庫網站常見題型；數值、情境與四語系詳解為本題庫自行推導。出題方向由標籤盤點（概念 × 年級交叉統計）決定。"
       }
+    },
+    {
+      "id": "arithmetic_grade4_foundation_093",
+      "topic": "arithmetic",
+      "subtopic": "nested_tree_leaf_count",
+      "tags": [
+        "c:mul_div",
+        "c:basic_counting",
+        "m:direct"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade4",
+      "challengeTier": "foundation",
+      "reviewStatus": "ok",
+      "prompt": {
+        "zh-Hant": "一棵樹有 8 根大樹枝，每根大樹枝上長著 8 根小樹枝，每根小樹枝上長著 8 片葉子。園丁剪掉了 1 根大樹枝、1 根小樹枝和 1 片葉子；被剪掉的那根小樹枝不在被剪掉的大樹枝上，被剪掉的那片葉子也不在前面兩者上面。樹上還剩下幾片葉子？",
+        "zh-Hans": "一棵树有 8 根大树枝，每根大树枝上长着 8 根小树枝，每根小树枝上长着 8 片叶子。园丁剪掉了 1 根大树枝、1 根小树枝和 1 片叶子；被剪掉的那根小树枝不在被剪掉的大树枝上，被剪掉的那片叶子也不在前面两者上面。树上还剩下几片叶子？",
+        "en": "A tree has 8 branches, each branch has 8 twigs, and each twig has 8 leaves. A gardener cuts off 1 branch, 1 twig and 1 leaf; the twig is not on the removed branch, and the leaf is not on either of the removed parts. How many leaves remain on the tree?",
+        "ja": "木に大枝が 8 本あり、それぞれの大枝に小枝が 8 本、それぞれの小枝に葉が 8 枚ついています。庭師が大枝 1 本、小枝 1 本、葉 1 枚を切り落としました。切った小枝は切った大枝の上にはなく、切った葉もそのどちらの上にもありません。木に残る葉は何枚ですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 439 片。",
+        "zh-Hans": "答案是 439 片。",
+        "en": "The answer is 439 leaves.",
+        "ja": "答えは 439 枚です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "先算原本一共有幾片葉子。**一層一層往下乘**：8 根大樹枝 × 每根 8 根小樹枝 × 每根 8 片葉子。",
+          "原有葉子 = 8 × 8 × 8 = 512 片。",
+          "**剪掉一根大樹枝，會連帶失去它上面的所有葉子**：那根大樹枝上有 8 根小樹枝、每根 8 片葉子，共 8 × 8 = 64 片。",
+          "剪掉一根小樹枝，失去它上面的 8 片葉子。再剪掉 1 片葉子，就是 1 片。",
+          "題目特別說明三者互不重疊，所以可以直接相加：一共失去 64 + 8 + 1 = 73 片。",
+          "剩下的葉子 = 512 − 73 = 439 片。**如果題目沒有說明不重疊，就不能直接相加**——例如那片葉子若長在被剪掉的小樹枝上，就會被重複扣掉。"
+        ],
+        "zh-Hans": [
+          "先算原本一共有几片叶子。**一层一层往下乘**：8 根大树枝 × 每根 8 根小树枝 × 每根 8 片叶子。",
+          "原有叶子 = 8 × 8 × 8 = 512 片。",
+          "**剪掉一根大树枝，会连带失去它上面的所有叶子**：那根大树枝上有 8 根小树枝、每根 8 片叶子，共 8 × 8 = 64 片。",
+          "剪掉一根小树枝，失去它上面的 8 片叶子。再剪掉 1 片叶子，就是 1 片。",
+          "题目特别说明三者互不重叠，所以可以直接相加：一共失去 64 + 8 + 1 = 73 片。",
+          "剩下的叶子 = 512 − 73 = 439 片。**如果题目没有说明不重叠，就不能直接相加**——例如那片叶子若长在被剪掉的小树枝上，就会被重复扣掉。"
+        ],
+        "en": [
+          "First find the original number of leaves by multiplying level by level: 8 branches × 8 twigs each × 8 leaves each.",
+          "That gives 8 × 8 × 8 = 512 leaves.",
+          "Cutting a branch removes every leaf on it: that branch carries 8 twigs of 8 leaves each, so 8 × 8 = 64 leaves.",
+          "Cutting a twig removes its 8 leaves, and cutting a leaf removes 1.",
+          "The question states the three removals do not overlap, so they simply add: 64 + 8 + 1 = 73 leaves lost.",
+          "So 512 − 73 = 439 leaves remain. Without the non-overlap condition the counts could not simply be added: a leaf on the removed twig would be subtracted twice."
+        ],
+        "ja": [
+          "まず葉の総数を求めます。**階層ごとにかけ算**します。大枝 8 × 小枝 8 × 葉 8 です。",
+          "もとの葉は 8 × 8 × 8 = 512 枚です。",
+          "**大枝を 1 本切ると、その上の葉もすべて失われます。** その大枝には小枝 8 本、それぞれ葉 8 枚で 8 × 8 = 64 枚です。",
+          "小枝を 1 本切るとその上の葉 8 枚が、葉を 1 枚切るとその 1 枚が失われます。",
+          "3 つは重なっていないと問題文にあるので単純に足せます。失われるのは 64 + 8 + 1 = 73 枚です。",
+          "残る葉は 512 − 73 = 439 枚です。**重ならないという条件がなければ単純には足せません。** 切った小枝の上の葉なら二重に引いてしまいます。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "439"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "nrich-primary-2026-09-03",
+        "notes": "題型參考 NRICH（劍橋 Millennium Mathematics Project）公開的小學題組「The Deca Tree（樹枝與葉子的層層計數）」，2026-09-03 查閱。數值、敘述與四語系詳解為本題庫自行改寫推導，非整題引用。"
+      }
+    },
+    {
+      "id": "arithmetic_grade4_foundation_094",
+      "topic": "arithmetic",
+      "subtopic": "hundred_square_diagonal_sum",
+      "tags": [
+        "c:pattern",
+        "c:place_value",
+        "m:direct"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade4",
+      "challengeTier": "foundation",
+      "reviewStatus": "ok",
+      "prompt": {
+        "zh-Hant": "一張百數表每一列有 10 個數，第一列是 1 到 10，第二列是 11 到 20，依此類推。現在用一個 2 乘 2 的方框框住表上相鄰的四個數，方框左上角的數是 34。求方框左下角的數與右上角的數的和。",
+        "zh-Hans": "一张百数表每一列有 10 个数，第一列是 1 到 10，第二列是 11 到 20，依此类推。现在用一个 2 乘 2 的方框框住表上相邻的四个数，方框左上角的数是 34。求方框左下角的数与右上角的数的和。",
+        "en": "In a hundred square with 10 numbers per row, the first row is 1 to 10, the second 11 to 20, and so on. A 2 by 2 box surrounds four adjacent numbers, with 34 in the top-left corner. Find the sum of the bottom-left and top-right numbers.",
+        "ja": "1 行に 10 個ずつ並ぶ百ます表で、1 行目は 1〜10、2 行目は 11〜20 と続きます。隣り合う 4 つの数を 2×2 の枠で囲み、左上が 34 のとき、左下の数と右上の数の和を求めなさい。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 79。",
+        "zh-Hans": "答案是 79。",
+        "en": "The answer is 79.",
+        "ja": "答えは 79 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "先弄清楚百數表的規則：**往右一格加 1，往下一格加 10**（因為每一列有 10 個數）。",
+          "左上角是 34，所以右上角是 34 + 1 = 35。",
+          "左下角是 34 + 10 = 44。",
+          "所求的和 = 44 + 35 = 79。",
+          "**有趣的是另一條對角線的和也一樣**：右下角是 34 + 11 = 45，左上加右下 = 34 + 45 = 79，兩條對角線的和相等。",
+          "原因是：設左上角是 a，四個數就是 a、a + 1、a + 10、a + 11。兩條對角線的和都是 2a + 11，**與 a 是多少無關**，所以在百數表上任何位置都成立。"
+        ],
+        "zh-Hans": [
+          "先弄清楚百数表的规则：**往右一格加 1，往下一格加 10**（因为每一列有 10 个数）。",
+          "左上角是 34，所以右上角是 34 + 1 = 35。",
+          "左下角是 34 + 10 = 44。",
+          "所求的和 = 44 + 35 = 79。",
+          "**有趣的是另一条对角线的和也一样**：右下角是 34 + 11 = 45，左上加右下 = 34 + 45 = 79，两条对角线的和相等。",
+          "原因是：设左上角是 a，四个数就是 a、a + 1、a + 10、a + 11。两条对角线的和都是 2a + 11，**与 a 是多少无关**，所以在百数表上任何位置都成立。"
+        ],
+        "en": [
+          "First the rule of the grid: moving one square right adds 1, and moving one square down adds 10, since each row holds 10 numbers.",
+          "The top-left is 34, so the top-right is 34 + 1 = 35.",
+          "The bottom-left is 34 + 10 = 44.",
+          "The required sum is 44 + 35 = 79.",
+          "Interestingly the other diagonal gives the same total: the bottom-right is 34 + 11 = 45, and 34 + 45 = 79 as well.",
+          "The reason: writing the top-left as a, the four numbers are a, a + 1, a + 10 and a + 11, and both diagonals total 2a + 11 regardless of a, so this holds anywhere in the grid."
+        ],
+        "ja": [
+          "まず表の規則です。**右に 1 マスで 1 増え、下に 1 マスで 10 増えます**（1 行に 10 個だから）。",
+          "左上が 34 なので右上は 34 + 1 = 35 です。",
+          "左下は 34 + 10 = 44 です。",
+          "求める和は 44 + 35 = 79 です。",
+          "**もう一方の対角線の和も同じ**です。右下は 34 + 11 = 45 で、34 + 45 = 79 になります。",
+          "理由は、左上を a とすると 4 つの数は a、a + 1、a + 10、a + 11 となり、どちらの対角線の和も 2a + 11 で a によらないからです。表のどこでも成り立ちます。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "79"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "nrich-primary-2026-09-03",
+        "notes": "題型參考 NRICH（劍橋 Millennium Mathematics Project）公開的小學題組「Diagonal Sums（百數表對角線和）」，2026-09-03 查閱。數值、敘述與四語系詳解為本題庫自行改寫推導，非整題引用。"
+      }
+    },
+    {
+      "id": "arithmetic_grade4_foundation_095",
+      "topic": "arithmetic",
+      "subtopic": "times_table_shift",
+      "tags": [
+        "c:pattern",
+        "c:modular",
+        "m:direct"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade4",
+      "challengeTier": "foundation",
+      "reviewStatus": "ok",
+      "prompt": {
+        "zh-Hant": "一個數列是 7、12、17、22、27、⋯。這個數列可以看成「5 的倍數」這個數列整體加上同一個固定的數所得到的。求這個固定的數。",
+        "zh-Hans": "一个数列是 7、12、17、22、27、⋯。这个数列可以看成「5 的倍数」这个数列整体加上同一个固定的数所得到的。求这个固定的数。",
+        "en": "A sequence runs 7, 12, 17, 22, 27, …. It can be seen as the multiples of 5 with the same fixed number added to every term. Find that fixed number.",
+        "ja": "数列 7、12、17、22、27、⋯ は、5 の倍数の列に同じ数を一様に足したものと見なせます。その足した数を求めなさい。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 2。",
+        "zh-Hans": "答案是 2。",
+        "en": "The answer is 2.",
+        "ja": "答えは 2 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "先確認這個數列確實每次都加 5：12 − 7 = 5、17 − 12 = 5、22 − 17 = 5。所以它和 5 的倍數「步伐一樣大」。",
+          "5 的倍數是 5、10、15、20、25、⋯，把它們和題目的數列排在一起比較。",
+          "7 − 5 = 2、12 − 10 = 2、17 − 15 = 2、22 − 20 = 2。**每一項的差都是 2**。",
+          "所以固定加上的數是 2，這個數列可以寫成「5 的倍數加 2」。",
+          "換個角度看也一樣：**每一項除以 5 都餘 2**（7 ÷ 5 餘 2、12 ÷ 5 餘 2、17 ÷ 5 餘 2）。步伐相同的數列，一定都停在同一個餘數上。"
+        ],
+        "zh-Hans": [
+          "先确认这个数列确实每次都加 5：12 − 7 = 5、17 − 12 = 5、22 − 17 = 5。所以它和 5 的倍数「步伐一样大」。",
+          "5 的倍数是 5、10、15、20、25、⋯，把它们和题目的数列排在一起比较。",
+          "7 − 5 = 2、12 − 10 = 2、17 − 15 = 2、22 − 20 = 2。**每一项的差都是 2**。",
+          "所以固定加上的数是 2，这个数列可以写成「5 的倍数加 2」。",
+          "换个角度看也一样：**每一项除以 5 都余 2**（7 ÷ 5 余 2、12 ÷ 5 余 2、17 ÷ 5 余 2）。步伐相同的数列，一定都停在同一个余数上。"
+        ],
+        "en": [
+          "First check the sequence really goes up by 5 each time: 12 − 7 = 5, 17 − 12 = 5, 22 − 17 = 5, so it steps like the multiples of 5.",
+          "The multiples of 5 are 5, 10, 15, 20, 25, …; line them up against the given sequence.",
+          "The differences are 7 − 5 = 2, 12 − 10 = 2, 17 − 15 = 2 and 22 − 20 = 2, the same every time.",
+          "So the fixed number is 2, and the sequence is the multiples of 5 plus 2.",
+          "Another view gives the same answer: every term leaves remainder 2 on division by 5. Sequences with the same step size always land on the same remainder."
+        ],
+        "ja": [
+          "まずこの数列が毎回 5 ずつ増えることを確かめます。12 − 7 = 5、17 − 12 = 5、22 − 17 = 5 で、5 の倍数と歩幅が同じです。",
+          "5 の倍数は 5、10、15、20、25、⋯ です。問題の数列と並べて比べます。",
+          "差は 7 − 5 = 2、12 − 10 = 2、17 − 15 = 2、22 − 20 = 2 とすべて同じです。",
+          "したがって足した数は 2 で、この数列は「5 の倍数 + 2」と表せます。",
+          "別の見方でも同じです。**どの項も 5 で割ると余りが 2** になります（7 ÷ 5、12 ÷ 5、17 ÷ 5）。歩幅が同じ数列は必ず同じ余りになります。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "2"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "nrich-primary-2026-09-03",
+        "notes": "題型參考 NRICH（劍橋 Millennium Mathematics Project）公開的小學題組「Times Tables Shifts（辨認乘法表與平移量）」，2026-09-03 查閱。數值、敘述與四語系詳解為本題庫自行改寫推導，非整題引用。"
+      }
     }
   ]
 }
