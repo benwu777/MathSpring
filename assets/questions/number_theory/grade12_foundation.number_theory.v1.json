@@ -4023,6 +4023,86 @@
         "maxDigits": 4
       },
       "id": "number_theory_grade12_foundation_040"
+    },
+    {
+      "id": "number_theory_grade12_foundation_041",
+      "topic": "number_theory",
+      "subtopic": "count_binary_ones_up_to_63",
+      "tags": [
+        "c:number_base",
+        "c:basic_counting",
+        "m:bijection"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "reviewStatus": "ok",
+      "prompt": {
+        "zh-Hant": "把 1 到 63 的每一個正整數都寫成二進位表示（不補前導 0），數字 1 一共出現幾次？",
+        "zh-Hans": "把 1 到 63 的每一个正整数都写成二进制表示（不补前导 0），数字 1 一共出现几次？",
+        "en": "Write each of the integers from 1 to 63 in binary (no leading zeros). How many times does the digit 1 appear in total?",
+        "ja": "1 から 63 までの各整数を 2 進法で表す（先頭の 0 は書かない）。数字 1 は全部で何回現れるか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 192 次。",
+        "zh-Hans": "答案是 192 次。",
+        "en": "The answer is 192.",
+        "ja": "答えは 192 回です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "先把 0 一起算進來。0 的二進位表示裡沒有任何 1，加進去不影響答案，於是考慮 0 到 63 這 64 個數。",
+          "把每個數都補成 6 位（補上的前導 0 本來就不是 1，同樣不影響計數）。因為 2⁶ = 64，這 64 個數恰好是 6 個位元所有可能組合，一個不多一個不少。",
+          "固定看某一個位元位置。在所有組合中，該位取 1 與取 0 的個數各佔一半，也就是各 32 個，所以每個位置貢獻 32 個 1。",
+          "6 個位置合計 6 × 32 = 192 個 1。",
+          "換個角度驗證：把 n 與 63 − n 配成一對，兩者的 6 位二進位表示每一位恰好相反，一對合起來剛好有 6 個 1。0 到 63 共分成 32 對，總數仍是 32 × 6 = 192。",
+          "常見錯誤是硬數前幾個數就推測規律，或誤以為「不補前導 0」會讓答案變小。可推廣的規律是：計數二進位數字時，先補成固定長度再用對稱性，比逐個列舉可靠得多。"
+        ],
+        "zh-Hans": [
+          "先把 0 一起算进来。0 的二进制表示里没有任何 1，加进去不影响答案，于是考虑 0 到 63 这 64 个数。",
+          "把每个数都补成 6 位（补上的前导 0 本来就不是 1，同样不影响计数）。因为 2⁶ = 64，这 64 个数恰好是 6 个二进制位所有可能的组合，一个不多一个不少。",
+          "固定看某一个位置。在所有组合中，该位取 1 与取 0 的个数各占一半，也就是各 32 个，所以每个位置贡献 32 个 1。",
+          "6 个位置合计 6 × 32 = 192 个 1。",
+          "换个角度验证：把 n 与 63 − n 配成一对，两者的 6 位二进制表示每一位恰好相反，一对合起来刚好有 6 个 1。0 到 63 共分成 32 对，总数仍是 32 × 6 = 192。",
+          "常见错误是硬数前几个数就推测规律，或误以为“不补前导 0”会让答案变小。可推广的规律是：计数二进制数字时，先补成固定长度再用对称性，比逐个列举可靠得多。"
+        ],
+        "en": [
+          "Include 0 as well. Its binary representation contains no 1s, so adding it changes nothing, and we may consider all 64 numbers from 0 to 63.",
+          "Pad every number to 6 bits (the added leading zeros are not 1s, so the count is unaffected). Since 2⁶ = 64, these 64 numbers are exactly all possible combinations of 6 bits — no more, no fewer.",
+          "Fix one bit position. Across all combinations that bit is 1 in exactly half of them, that is in 32 numbers, so each position contributes 32 ones.",
+          "With 6 positions the total is 6 × 32 = 192 ones.",
+          "Cross-check by pairing: match n with 63 − n; their 6-bit representations are opposite in every position, so each pair contributes exactly 6 ones. The 64 numbers form 32 such pairs, again giving 32 × 6 = 192.",
+          "A common mistake is to list a few numbers and guess a pattern, or to think that omitting leading zeros lowers the count. The transferable idea: to count binary digits, pad to a fixed length and exploit symmetry rather than enumerating."
+        ],
+        "ja": [
+          "まず 0 も一緒に数える。0 の 2 進表記に 1 は含まれないので答えは変わらず、0 から 63 までの 64 個を考えればよい。",
+          "各数を 6 桁にそろえる（付け足した先頭の 0 は 1 ではないので計数に影響しない）。2⁶ = 64 だから、この 64 個は 6 ビットのすべての組み合わせちょうどに対応する。",
+          "ある 1 つの桁に注目する。すべての組み合わせのうち、その桁が 1 になるものと 0 になるものはちょうど半分ずつ、つまり 32 個ずつなので、各桁が 32 個の 1 を生む。",
+          "桁は 6 つあるので、合計 6 × 32 = 192 個の 1 が現れる。",
+          "別の見方で確認する。n と 63 − n を組にすると、6 桁の 2 進表記は各桁がちょうど逆になるので、1 組で 1 がちょうど 6 個ある。0 から 63 は 32 組に分かれ、やはり 32 × 6 = 192 となる。",
+          "最初の数個を数えて規則を推測したり、「先頭の 0 を書かない」ぶん答えが減ると考えたりするのがよくある誤りである。2 進法の数字を数えるときは、桁数をそろえて対称性を使うほうが列挙より確実である。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "192"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "agent-drafted-nrich-2026-09-03",
+        "notes": "題型參考 NRICH《Guesswork》（用六張二進位卡片猜 1 到 63 的數）與 Number Short Problems《Digit Sum》《Digital Counter》，由背景起草代理於 2026-09-03 實際查閱 NRICH 等公開題組後改寫；數值、敘述與四語系詳解為本題庫自行推導，非整題引用。主流程已跑機械校驗與跨代理去重。"
+      }
     }
   ]
 }

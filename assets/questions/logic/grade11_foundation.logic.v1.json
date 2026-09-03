@@ -4076,6 +4076,89 @@
         "reference": "applied-billing-invariant-gap-2026-09-03",
         "notes": "題型屬於數學教育中的通用題型（分級票價、分段平均、階梯計費、保險自付額、折舊、分期、趕工、機率與不變量）；未逐題查閱特定出處，數值、情境與四語系詳解為本題庫自行改寫推導，非整題引用。"
       }
+    },
+    {
+      "id": "logic_grade11_foundation_044",
+      "topic": "logic",
+      "subtopic": "board_corner_race_first_move",
+      "tags": [
+        "c:game_theory",
+        "m:bijection"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade11",
+      "challengeTier": "foundation",
+      "reviewStatus": "ok",
+      "prompt": {
+        "zh-Hant": "一個棋盤有 8 列（由下往上編號 1 到 8）與 5 行（由左往右編號 1 到 5）。一枚棋子放在第 1 列第 1 行。甲、乙輪流移動棋子，每次只能把棋子往上移動任意格數，或往右移動任意格數（至少移動 1 格，不可以斜走，也不可以往下或往左）。把棋子移到第 8 列第 5 行的人獲勝。若甲先移動並採取必勝策略，他第一步應該把棋子往上移動幾格？",
+        "zh-Hans": "一个棋盘有 8 行（由下往上编号 1 到 8）与 5 列（由左往右编号 1 到 5）。一枚棋子放在第 1 行第 1 列。甲、乙轮流移动棋子，每次只能把棋子往上移动任意格数，或往右移动任意格数（至少移动 1 格，不可以斜走，也不可以往下或往左）。把棋子移到第 8 行第 5 列的人获胜。若甲先移动并采取必胜策略，他第一步应该把棋子往上移动几格？",
+        "en": "A board has 8 rows (numbered 1 to 8 from the bottom up) and 5 columns (numbered 1 to 5 from the left). A counter starts on row 1, column 1. Two players take turns moving the counter, each move being any number of squares up or any number of squares right (at least one square, never diagonally, never down or left). Whoever moves the counter onto row 8, column 5 wins. If the first player moves first and plays a winning strategy, how many squares up should the first move be?",
+        "ja": "盤には 8 つの行（下から 1 から 8 の番号）と 5 つの列（左から 1 から 5 の番号）があります。駒は 1 行 1 列に置かれています。2 人が交互に駒を動かし、1 回に上へ何マスか、または右へ何マスか動かします（必ず 1 マス以上、斜めや下・左は不可）。駒を 8 行 5 列に動かした人が勝ちです。先手が必勝戦略をとるとき、最初の一手で駒を上へ何マス動かせばよいですか。"
+      },
+      "answer": {
+        "zh-Hant": "第一步應該把棋子往上移動 3 格。",
+        "zh-Hans": "第一步应该把棋子往上移动 3 格。",
+        "en": "The first move should be 3 squares up.",
+        "ja": "最初の一手は上へ 3 マス動かすべきです。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "把局面記成「還差幾格才到終點」：一開始還要往上 7 格、往右 4 格，記成 (7, 4)。",
+          "每一步只能讓其中一個數字變小（變多少都可以），另一個不變；誰把局面變成 (0, 0)，誰就獲勝。",
+          "關鍵觀察：如果輪到對手時兩個數字相等，他不論動哪一邊、動多少，你都可以動另一邊把兩數拉回相等。",
+          "因為每一輪兩數都會嚴格變小又保持相等，最後一定會由「維持相等的那個人」做出 (0, 0)，所以「兩數相等」就是必敗給對手的局面。",
+          "甲要把 (7, 4) 變成兩數相等，只能把 7 減到 4，也就是往上移動 3 格，變成 (4, 4)。",
+          "之後甲只要一直模仿乙：乙往上走幾格，甲就往右走同樣格數，反之亦然，必定由甲踏上終點。",
+          "常見錯誤是貪心地一口氣衝到終點附近。這類遊戲的必勝關鍵是製造對稱局面，而不是前進得多，答案是往上移動 3 格。"
+        ],
+        "zh-Hans": [
+          "把局面记成「还差几格才到终点」：一开始还要往上 7 格、往右 4 格，记成 (7, 4)。",
+          "每一步只能让其中一个数字变小（变多少都可以），另一个不变；谁把局面变成 (0, 0)，谁就获胜。",
+          "关键观察：如果轮到对手时两个数字相等，他不论动哪一边、动多少，你都可以动另一边把两数拉回相等。",
+          "因为每一轮两数都会严格变小又保持相等，最后一定会由「维持相等的那个人」做出 (0, 0)，所以「两数相等」就是必败给对手的局面。",
+          "甲要把 (7, 4) 变成两数相等，只能把 7 减到 4，也就是往上移动 3 格，变成 (4, 4)。",
+          "之后甲只要一直模仿乙：乙往上走几格，甲就往右走同样格数，反之亦然，必定由甲踏上终点。",
+          "常见错误是贪心地一口气冲到终点附近。这类游戏的必胜关键是制造对称局面，而不是前进得多，答案是往上移动 3 格。"
+        ],
+        "en": [
+          "Record a position by how far the counter still has to travel: at the start it needs 7 squares up and 4 squares right, written (7, 4).",
+          "Each move decreases exactly one of these two numbers (by any amount) and leaves the other alone; whoever produces (0, 0) wins.",
+          "Key observation: if your opponent faces a position where the two numbers are equal, then whichever side they shrink and by however much, you can shrink the other side to make them equal again.",
+          "Since both numbers strictly decrease each round while staying equal, the player who keeps restoring equality is the one who eventually produces (0, 0). So 'the two numbers are equal' is exactly the losing position for the player to move.",
+          "To turn (7, 4) into an equal pair, the first player can only reduce the 7 to 4, that is move 3 squares up, reaching (4, 4).",
+          "After that the first player just mirrors: if the opponent goes 3 up, reply 3 right, and vice versa, so the first player is guaranteed to land on the target.",
+          "A common mistake is to greedily dash close to the finish. In games like this the winning idea is to create symmetry, not to make progress, and the answer is 3 squares up."
+        ],
+        "ja": [
+          "局面を「終点まであと何マスか」で表します。最初は上へ 7 マス、右へ 4 マス必要なので (7, 4) と書きます。",
+          "1 手でこの 2 つの数のうちちょうど一方だけを（好きなだけ）減らせます。(0, 0) を作った人が勝ちです。",
+          "かぎとなる観察：相手の番に 2 つの数が等しければ、相手がどちらをどれだけ減らしても、こちらはもう一方を減らして再び等しくできます。",
+          "毎回 2 つの数は等しさを保ったまま必ず小さくなるので、等しさを保ち続ける側が最後に (0, 0) を作ります。つまり「2 数が等しい」局面は手番の人が負ける局面です。",
+          "先手が (7, 4) を等しい組にするには 7 を 4 に減らすしかなく、それは上へ 3 マス動かして (4, 4) にすることです。",
+          "その後は相手をまねるだけです。相手が上へ 3 マスなら右へ 3 マス、逆も同様にすれば、必ず先手が終点に到達します。",
+          "終点の近くまで一気に進もうとする欲張りな手がよくある誤りです。この種のゲームで勝つかぎは前進量ではなく対称な局面を作ることで、答えは上へ 3 マスです。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "3"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "agent-drafted-nrich-2026-09-03",
+        "notes": "題型參考 NRICH 'Nim-Like Games' 與 'Got It'（維持關鍵位置的必勝策略）改寫為棋盤上往上／往右移動到角落的雙堆型遊戲，由背景起草代理於 2026-09-03 實際查閱 NRICH 等公開題組後改寫；數值、敘述與四語系詳解為本題庫自行推導，非整題引用。主流程已跑機械校驗與跨代理去重。"
+      }
     }
   ]
 }

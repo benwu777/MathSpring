@@ -3917,6 +3917,86 @@
         "reference": "readmitted-after-2026-09-03-relaxation",
         "notes": "題型屬於數學教育中的通用題型（奇偶不變量）；未逐題查閱特定出處，數值、敘述與四語系詳解為本題庫自行推導。相似度 0.44 撞 logic_grade9_020，經人工複判為誤判：該題限定翻相鄰兩枚並求最少次數（計數題），本題可任翻兩枚並問可能性（不可能性論證），所求量型態不同（2026-09-03 放寬後收錄）。"
       }
+    },
+    {
+      "id": "logic_grade10_foundation_043",
+      "topic": "logic",
+      "subtopic": "chocolate_breaking_total_moves",
+      "tags": [
+        "c:game_theory",
+        "c:basic_counting",
+        "m:invariant"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "reviewStatus": "ok",
+      "prompt": {
+        "zh-Hant": "一塊長方形巧克力上刻有格線，分成 6 列 × 4 行共 24 個小方格。甲、乙輪流動手：每次選桌上任何一塊巧克力，沿著一條格線把它完整地掰成兩塊（不可以只掰一半，也不可以一次掰兩塊）。當所有巧克力都變成 1 個小方格、沒有人能再掰時遊戲結束。從整塊開始到結束，一共會進行幾次掰的動作？",
+        "zh-Hans": "一块长方形巧克力上刻有格线，分成 6 行 × 4 列共 24 个小方格。甲、乙轮流动手：每次选桌上任何一块巧克力，沿着一条格线把它完整地掰成两块（不可以只掰一半，也不可以一次掰两块）。当所有巧克力都变成 1 个小方格、没有人能再掰时游戏结束。从整块开始到结束，一共会进行几次掰的动作？",
+        "en": "A rectangular chocolate bar is scored into a 6 by 4 grid of 24 small squares. Two players take turns: on each turn a player picks any piece currently on the table and snaps it completely into two pieces along one scored line (no partial snaps, and only one piece per turn). The game ends when every piece is a single small square and nobody can snap any more. From the whole bar to the end, how many snaps are made in total?",
+        "ja": "長方形の板チョコに溝が刻まれていて、縦 6 × 横 4 の合計 24 個の小さな正方形に分かれています。2 人が交互に、机の上にあるどれか 1 つのかけらを選び、1 本の溝に沿って完全に 2 つに割ります（途中まで割ることも、一度に 2 つ割ることもできません）。すべてが 1 マスになり、誰も割れなくなったら終了です。最初の 1 枚から終了まで、割る動作は全部で何回行われますか。"
+      },
+      "answer": {
+        "zh-Hant": "一共會進行 23 次掰的動作。",
+        "zh-Hans": "一共会进行 23 次掰的动作。",
+        "en": "A total of 23 snaps are made.",
+        "ja": "割る動作は全部で 23 回行われます。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "先看每一次掰對「桌上的塊數」造成什麼影響：拿走 1 塊、放回 2 塊，所以塊數恰好增加 1。",
+          "重點是這個增加量與掰哪一塊、從哪裡掰、掰成多大都無關，永遠是 1。這就是這個遊戲的不變量。",
+          "一開始桌上是 1 整塊，結束時是 24 個小方格，也就是 24 塊。",
+          "塊數要從 1 增加到 24，共需增加 23，所以總共必定進行 23 次掰的動作。",
+          "因為 23 是奇數，第 1、3、5、…、23 次都輪到先手，最後一次也是先手，所以先手必勝，而且他完全不需要動腦選招。",
+          "常見錯誤是想用「一半再一半」去數層數，或以為聰明的掰法可以省步數。這類遊戲只要找到「每一步固定改變 1」的量，總步數就固定，勝負直接由奇偶決定。"
+        ],
+        "zh-Hans": [
+          "先看每一次掰对「桌上的块数」造成什么影响：拿走 1 块、放回 2 块，所以块数恰好增加 1。",
+          "重点是这个增加量与掰哪一块、从哪里掰、掰成多大都无关，永远是 1。这就是这个游戏的不变量。",
+          "一开始桌上是 1 整块，结束时是 24 个小方格，也就是 24 块。",
+          "块数要从 1 增加到 24，共需增加 23，所以总共必定进行 23 次掰的动作。",
+          "因为 23 是奇数，第 1、3、5、…、23 次都轮到先手，最后一次也是先手，所以先手必胜，而且他完全不需要动脑选招。",
+          "常见错误是想用「一半再一半」去数层数，或以为聪明的掰法可以省步数。这类游戏只要找到「每一步固定改变 1」的量，总步数就固定，胜负直接由奇偶决定。"
+        ],
+        "en": [
+          "Look at what one snap does to the number of pieces on the table: one piece is removed and two are put back, so the count goes up by exactly 1.",
+          "Crucially this increase does not depend on which piece is chosen, where it is snapped, or how big the parts are — it is always 1. That is the invariant of this game.",
+          "At the start there is 1 piece, and at the end there are 24 single squares, that is 24 pieces.",
+          "Going from 1 piece to 24 pieces needs an increase of 23, so exactly 23 snaps are made in total.",
+          "Since 23 is odd, snaps 1, 3, 5, ..., 23 all belong to the first player, including the last one, so the first player always wins without needing any clever choice at all.",
+          "A common mistake is to count 'halving' rounds, or to assume that a smart order of snaps saves moves. Once you find a quantity that changes by a fixed amount every turn, the total number of moves is forced and the winner is decided purely by parity."
+        ],
+        "ja": [
+          "まず 1 回の操作が「机の上のかけらの数」に与える影響を見ます。1 つ取り除いて 2 つ戻すので、数はちょうど 1 増えます。",
+          "重要なのは、この増加量がどのかけらをどこでどう割っても常に 1 だという点です。これがこのゲームの不変量です。",
+          "はじめは 1 枚、終わりは 24 個の小さな正方形、つまり 24 個です。",
+          "1 個から 24 個まで増やすには 23 だけ増やす必要があるので、割る動作は必ず合計 23 回になります。",
+          "23 は奇数なので、1、3、5、…、23 回目はすべて先手の番であり、最後の 1 回も先手です。よって先手は何も工夫せずに必ず勝ちます。",
+          "「半分ずつ」で回数を数えようとしたり、上手な割り方で回数を節約できると考えたりするのがよくある誤りです。毎回 1 ずつ決まって変わる量を見つければ総手数は固定され、勝敗は偶奇だけで決まります。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "23"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "agent-drafted-nrich-2026-09-03",
+        "notes": "題型參考 NRICH 'Nim-Like Games'（Common Nim / Straight Nim / Old Gold 等輪流操作遊戲）與 'Nim-7' 的必勝位置分析，改寫為掰巧克力的不變量遊戲，由背景起草代理於 2026-09-03 實際查閱 NRICH 等公開題組後改寫；數值、敘述與四語系詳解為本題庫自行推導，非整題引用。主流程已跑機械校驗與跨代理去重。"
+      }
     }
   ]
 }

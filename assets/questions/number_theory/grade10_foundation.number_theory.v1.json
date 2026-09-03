@@ -3816,6 +3816,162 @@
         "reference": "timezone-density-checkdigit-gap-2026-09-03",
         "notes": "題型屬於數學教育中的通用題型（時區換算、密度與階梯計費、檢查碼與半衰期應用）；未逐題查閱特定出處，數值、情境與四語系詳解為本題庫自行改寫推導，非整題引用。"
       }
+    },
+    {
+      "id": "number_theory_grade10_foundation_042",
+      "topic": "number_theory",
+      "subtopic": "last_three_digits_of_21_pow_10",
+      "tags": [
+        "c:binomial",
+        "c:modular",
+        "m:direct"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "reviewStatus": "ok",
+      "prompt": {
+        "zh-Hant": "求 21¹⁰ 的末三位數字，也就是 21¹⁰ 除以 1000 的餘數。",
+        "zh-Hans": "求 21¹⁰ 的末三位数字，也就是 21¹⁰ 除以 1000 的余数。",
+        "en": "Find the last three digits of 21¹⁰, that is, the remainder when 21¹⁰ is divided by 1000.",
+        "ja": "21¹⁰ の下 3 桁、すなわち 21¹⁰ を 1000 で割った余りを求めなさい。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 201。",
+        "zh-Hans": "答案是 201。",
+        "en": "The answer is 201.",
+        "ja": "答えは 201 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "把底數拆成 21 = 1 + 20，再用二項式定理展開：(1 + 20)¹⁰ = C(10,0) + C(10,1)×20 + C(10,2)×20² + C(10,3)×20³ + ⋯。",
+          "只要末三位，就是看除以 1000 的餘數。從第四項起每一項都含有 20³ = 8000，而 8000 是 1000 的倍數，所以這些項全部可以丟掉。",
+          "剩下前三項：1 + 10×20 + 45×400 = 1 + 200 + 18000。",
+          "18000 也是 1000 的倍數，同樣丟掉，餘數是 1 + 200 = 201。",
+          "直接驗算：21² = 441，21⁴ 的末三位是 441² = 194481 的末三位 481，21⁸ 的末三位是 481² = 231361 的末三位 361，最後 361 × 441 = 159201 的末三位正是 201，兩種算法一致。",
+          "常見錯誤是把 45 × 400 誤算成 800 或忘了它也是 1000 的倍數。可推廣的規律是：底數寫成「1 加上 10 的倍數」之後，只有展開式最前面幾項會影響末幾位，後面的高次項全被進位吃掉。"
+        ],
+        "zh-Hans": [
+          "把底数拆成 21 = 1 + 20，再用二项式定理展开：(1 + 20)¹⁰ = C(10,0) + C(10,1)×20 + C(10,2)×20² + C(10,3)×20³ + ⋯。",
+          "只要末三位，就是看除以 1000 的余数。从第四项起每一项都含有 20³ = 8000，而 8000 是 1000 的倍数，所以这些项全部可以丢掉。",
+          "剩下前三项：1 + 10×20 + 45×400 = 1 + 200 + 18000。",
+          "18000 也是 1000 的倍数，同样丢掉，余数是 1 + 200 = 201。",
+          "直接验算：21² = 441，21⁴ 的末三位是 441² = 194481 的末三位 481，21⁸ 的末三位是 481² = 231361 的末三位 361，最后 361 × 441 = 159201 的末三位正是 201，两种算法一致。",
+          "常见错误是把 45 × 400 误算成 800 或忘了它也是 1000 的倍数。可推广的规律是：底数写成“1 加上 10 的倍数”之后，只有展开式最前面几项会影响末几位，后面的高次项全被进位吃掉。"
+        ],
+        "en": [
+          "Split the base as 21 = 1 + 20 and expand with the binomial theorem: (1 + 20)¹⁰ = C(10,0) + C(10,1)×20 + C(10,2)×20² + C(10,3)×20³ + ⋯.",
+          "The last three digits are the remainder on division by 1000. From the fourth term onward every term contains 20³ = 8000, a multiple of 1000, so all of them can be discarded.",
+          "Only the first three terms survive: 1 + 10×20 + 45×400 = 1 + 200 + 18000.",
+          "But 18000 is also a multiple of 1000, so it drops out too, leaving 1 + 200 = 201.",
+          "Check directly: 21² = 441; the last three digits of 21⁴ are those of 441² = 194481, namely 481; the last three digits of 21⁸ are those of 481² = 231361, namely 361; finally 361 × 441 = 159201 ends in 201, matching the binomial computation.",
+          "A common slip is to evaluate 45 × 400 as 800, or to forget that it too is a multiple of 1000. The general lesson: once the base is written as 1 plus a multiple of 10, only the first few binomial terms affect the last few digits — the higher terms are swallowed by the carrying."
+        ],
+        "ja": [
+          "底を 21 = 1 + 20 と分け、二項定理で展開する：(1 + 20)¹⁰ = C(10,0) + C(10,1)×20 + C(10,2)×20² + C(10,3)×20³ + ⋯。",
+          "下 3 桁とは 1000 で割った余りのことである。第 4 項以降はすべて 20³ = 8000 を含み、8000 は 1000 の倍数なので、まとめて捨てられる。",
+          "残るのは最初の 3 項：1 + 10×20 + 45×400 = 1 + 200 + 18000。",
+          "18000 も 1000 の倍数なので同様に捨てられ、余りは 1 + 200 = 201 となる。",
+          "直接確かめる：21² = 441、21⁴ の下 3 桁は 441² = 194481 より 481、21⁸ の下 3 桁は 481² = 231361 より 361、最後に 361 × 441 = 159201 の下 3 桁はちょうど 201 で、二項定理の結果と一致する。",
+          "45 × 400 を 800 と計算したり、これも 1000 の倍数であることを見落としたりするのがよくある誤りである。底を「1 + 10 の倍数」の形に書けば、下の桁に効くのは展開式の先頭の数項だけ、というのが一般的な規則である。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "201"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "agent-drafted-nrich-2026-09-03",
+        "notes": "題型參考 NRICH《Binomial》（(1+x)ⁿ 的展開與巴斯卡三角）與 Number Short Problems《Powerful 9》（求乘冪的末位數字），由背景起草代理於 2026-09-03 實際查閱 NRICH 等公開題組後改寫；數值、敘述與四語系詳解為本題庫自行推導，非整題引用。主流程已跑機械校驗與跨代理去重。"
+      }
+    },
+    {
+      "id": "number_theory_grade10_foundation_043",
+      "topic": "number_theory",
+      "subtopic": "balanced_ternary_weight_set",
+      "tags": [
+        "c:number_base",
+        "c:balance",
+        "m:construction"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "reviewStatus": "ok",
+      "prompt": {
+        "zh-Hant": "有 1 公克、3 公克、9 公克、27 公克的砝碼各一個。使用一台天秤，物品固定放在左盤，砝碼可以放右盤，也可以和物品一起放左盤。若只考慮整數公克的重量，求這四個砝碼能秤出的最重物品是幾公克。",
+        "zh-Hans": "有 1 克、3 克、9 克、27 克的砝码各一个。使用一台天平，物品固定放在左盘，砝码可以放右盘，也可以和物品一起放左盘。若只考虑整数克的重量，求这四个砝码能称出的最重物品是几克。",
+        "en": "You have one weight each of 1 g, 3 g, 9 g and 27 g. On a balance the object always sits in the left pan, while each weight may be placed in the right pan or in the left pan alongside the object. Considering only whole numbers of grams, what is the heaviest object these four weights can measure?",
+        "ja": "1 g、3 g、9 g、27 g の分銅が 1 個ずつある。天びんの左の皿に品物を置き、各分銅は右の皿に置いても、品物と同じ左の皿に置いてもよい。整数グラムの重さだけを考えるとき、この 4 個の分銅で量れるいちばん重い品物は何グラムか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 40 公克。",
+        "zh-Hans": "答案是 40 克。",
+        "en": "The answer is 40 grams.",
+        "ja": "答えは 40 グラムです。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "每個砝碼有三種用法：放右盤（幫忙抵住物品，記係數 +1）、不用（記 0）、和物品一起放左盤（等於扣掉，記 −1）。",
+          "所以能秤出的重量恰好是 27a + 9b + 3c + d 這種形式，其中 a、b、c、d 各自只能取 −1、0、1。",
+          "要秤最重的物品，四個係數全取 +1：27 + 9 + 3 + 1 = 40，因此最重能秤 40 公克。",
+          "更關鍵的是 1 到 40 之間沒有任何漏網之魚。這四個砝碼恰好是 3 的 0 到 3 次方，而每個整數都能唯一寫成係數為 −1、0、1 的三進位展開式。例如 5 = 9 − 3 − 1：把 3 公克和 1 公克跟物品一起放左盤，9 公克放右盤。",
+          "常見錯誤是套用「1、2、4、8」那組答案而算出 15。可推廣的規律是：砝碼只能放單側時每個砝碼有 2 種狀態，最省的選法是 2 的次方；兩側都能放時每個砝碼有 3 種狀態，最省的選法就變成 3 的次方。"
+        ],
+        "zh-Hans": [
+          "每个砝码有三种用法：放右盘（帮忙抵住物品，记系数 +1）、不用（记 0）、和物品一起放左盘（等于扣掉，记 −1）。",
+          "所以能称出的重量恰好是 27a + 9b + 3c + d 这种形式，其中 a、b、c、d 各自只能取 −1、0、1。",
+          "要称最重的物品，四个系数全取 +1：27 + 9 + 3 + 1 = 40，因此最重能称 40 克。",
+          "更关键的是 1 到 40 之间没有任何漏网之鱼。这四个砝码恰好是 3 的 0 到 3 次方，而每个整数都能唯一写成系数为 −1、0、1 的三进制展开式。例如 5 = 9 − 3 − 1：把 3 克和 1 克跟物品一起放左盘，9 克放右盘。",
+          "常见错误是套用“1、2、4、8”那组答案而算出 15。可推广的规律是：砝码只能放单侧时每个砝码有 2 种状态，最省的选法是 2 的次方；两侧都能放时每个砝码有 3 种状态，最省的选法就变成 3 的次方。"
+        ],
+        "en": [
+          "Each weight has three possible roles: in the right pan (helping to balance the object, coefficient +1), unused (coefficient 0), or in the left pan with the object (effectively subtracted, coefficient −1).",
+          "So the measurable masses are exactly the numbers 27a + 9b + 3c + d where each of a, b, c, d is −1, 0 or 1.",
+          "To measure the heaviest object, take all four coefficients as +1: 27 + 9 + 3 + 1 = 40, so the heaviest measurable object is 40 grams.",
+          "More importantly, no whole number from 1 to 40 is missed. The four weights are precisely the powers 3⁰, 3¹, 3² and 3³, and every integer has a unique expansion in base 3 with digits −1, 0 and 1. For example 5 = 9 − 3 − 1: put the 3 g and 1 g weights beside the object and the 9 g weight in the other pan.",
+          "A common mistake is to copy the answer for the set 1, 2, 4, 8 and say 15. The general pattern: when weights may go in only one pan each weight has 2 states and powers of 2 are optimal; when both pans are allowed each weight has 3 states, so powers of 3 become optimal."
+        ],
+        "ja": [
+          "各分銅の使い方は 3 通りある：右の皿に置く（品物を支える側、係数 +1）、使わない（係数 0）、品物と同じ左の皿に置く（差し引く側、係数 −1）。",
+          "したがって量れる重さはちょうど 27a + 9b + 3c + d の形になり、a、b、c、d はそれぞれ −1、0、1 のいずれかである。",
+          "いちばん重い品物を量るには 4 つの係数をすべて +1 にすればよく、27 + 9 + 3 + 1 = 40 なので、最大 40 グラムまで量れる。",
+          "さらに重要なのは、1 から 40 までのどの整数も漏れないことである。4 個の分銅は 3⁰、3¹、3²、3³ にほかならず、どの整数も数字が −1、0、1 の 3 進法展開に一意に書ける。たとえば 5 = 9 − 3 − 1 で、3 g と 1 g を品物側に、9 g を反対側に置けばよい。",
+          "1、2、4、8 の場合の答えをそのまま使って 15 と答えてしまうのがよくある誤りである。片側にしか置けないなら各分銅は 2 状態で 2 のべきが最適、両側に置けるなら 3 状態なので 3 のべきが最適になる、というのが一般的な規則である。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "40"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "agent-drafted-nrich-2026-09-03",
+        "notes": "題型參考 NRICH《Weights》（以 −3 為底的砝碼問題）與《Balance Power》（天秤兩側都可放砝碼，秤 1 到 1000），由背景起草代理於 2026-09-03 實際查閱 NRICH 等公開題組後改寫；數值、敘述與四語系詳解為本題庫自行推導，非整題引用。主流程已跑機械校驗與跨代理去重。"
+      }
     }
   ]
 }
