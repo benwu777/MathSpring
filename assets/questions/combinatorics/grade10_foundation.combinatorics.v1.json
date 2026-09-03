@@ -3971,6 +3971,86 @@
         "reference": "applied-billing-invariant-gap-2026-09-03",
         "notes": "題型屬於數學教育中的通用題型（分級票價、分段平均、階梯計費、保險自付額、折舊、分期、趕工、機率與不變量）；未逐題查閱特定出處，數值、情境與四語系詳解為本題庫自行改寫推導，非整題引用。"
       }
+    },
+    {
+      "id": "combinatorics_grade10_foundation_044",
+      "topic": "combinatorics",
+      "subtopic": "switches_no_two_adjacent_off",
+      "tags": [
+        "c:recurrence",
+        "c:permutation_combination",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "reviewStatus": "ok",
+      "prompt": {
+        "zh-Hant": "一排有 5 個開關，每個開關的狀態不是開就是關。若要求任何兩個相鄰的開關不可以同時都是關的，這樣的設定方式一共有幾種？",
+        "zh-Hans": "一排有 5 个开关，每个开关的状态不是开就是关。若要求任何两个相邻的开关不可以同时都是关的，这样的设定方式一共有几种？",
+        "en": "Five switches are in a row and each is either on or off. No two adjacent switches may both be off. How many settings are possible?",
+        "ja": "スイッチが 5 個一列に並び、各スイッチは入か切のどちらかです。隣り合う 2 つが同時に切になってはいけないとき、設定は何通りありますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 13 種。",
+        "zh-Hans": "答案是 13 种。",
+        "en": "The answer is 13.",
+        "ja": "答えは 13 通りです。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "**直接列舉 2⁵ = 32 種再篩選很費事，改用遞推會快得多。** 設 aₙ 表示 n 個開關時符合條件的設定數。",
+          "先算最小的情形。1 個開關：開或關都可以，a₁ = 2。",
+          "2 個開關：共 4 種，其中「關關」不合法，所以 a₂ = 3。",
+          "**看最後一個開關來建立遞推**：若最後一個是「開」，前面 n − 1 個可以是任何合法設定，有 aₙ₋₁ 種；若最後一個是「關」，則**倒數第二個必須是開**，再前面 n − 2 個任意合法，有 aₙ₋₂ 種。",
+          "所以 aₙ = aₙ₋₁ + aₙ₋₂。依序算：a₃ = 3 + 2 = 5、a₄ = 5 + 3 = 8、a₅ = 8 + 5 = 13。",
+          "答案是 13 種。**這串數 2、3、5、8、13 正是費氏數列**——凡是「相鄰不能同時出現某狀態」的排列問題，幾乎都會導出費氏遞推。"
+        ],
+        "zh-Hans": [
+          "**直接列举 2⁵ = 32 种再筛选很费事，改用递推会快得多。** 设 aₙ 表示 n 个开关时符合条件的设定数。",
+          "先算最小的情形。1 个开关：开或关都可以，a₁ = 2。",
+          "2 个开关：共 4 种，其中「关关」不合法，所以 a₂ = 3。",
+          "**看最后一个开关来建立递推**：若最后一个是「开」，前面 n − 1 个可以是任何合法设定，有 aₙ₋₁ 种；若最后一个是「关」，则**倒数第二个必须是开**，再前面 n − 2 个任意合法，有 aₙ₋₂ 种。",
+          "所以 aₙ = aₙ₋₁ + aₙ₋₂。依序算：a₃ = 3 + 2 = 5、a₄ = 5 + 3 = 8、a₅ = 8 + 5 = 13。",
+          "答案是 13 种。**这串数 2、3、5、8、13 正是斐波那契数列**——凡是「相邻不能同时出现某状态」的排列问题，几乎都会导出斐波那契递推。"
+        ],
+        "en": [
+          "Listing all 2⁵ = 32 settings and filtering is laborious; a recurrence is much quicker. Let aₙ be the number of valid settings for n switches.",
+          "Start small. With one switch, on or off both work, so a₁ = 2.",
+          "With two switches there are 4 settings and only off-off is invalid, so a₂ = 3.",
+          "Build the recurrence by looking at the last switch: if it is on, the first n − 1 can be any valid setting, giving aₙ₋₁; if it is off, the one before it must be on and the first n − 2 are free, giving aₙ₋₂.",
+          "So aₙ = aₙ₋₁ + aₙ₋₂, giving a₃ = 5, a₄ = 8 and a₅ = 13.",
+          "The answer is 13. The sequence 2, 3, 5, 8, 13 is the Fibonacci sequence: problems forbidding a state on two adjacent positions almost always lead to this recurrence."
+        ],
+        "ja": [
+          "**2⁵ = 32 通りを並べて選ぶのは大変なので、漸化式を使うほうが速いです。** スイッチ n 個のときの設定数を aₙ とします。",
+          "小さい場合から求めます。1 個なら入でも切でもよく a₁ = 2 です。",
+          "2 個なら 4 通りのうち「切切」だけが不可なので a₂ = 3 です。",
+          "**最後のスイッチで場合分けします。** 最後が入なら前の n − 1 個は任意で aₙ₋₁ 通り、最後が切なら**その 1 つ前は必ず入**で、さらに前の n − 2 個は任意なので aₙ₋₂ 通りです。",
+          "よって aₙ = aₙ₋₁ + aₙ₋₂ となり、a₃ = 5、a₄ = 8、a₅ = 13 です。",
+          "答えは 13 通りです。**2、3、5、8、13 はフィボナッチ数列**で、「隣り合う位置に同じ状態を許さない」型の問題はたいていこの漸化式になります。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "13"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "nrich-statistics-probability-short-2026-09-03",
+        "notes": "題型參考 NRICH（劍橋 Millennium Mathematics Project）公開的短題組中的「Switch On（相鄰不可同時關閉的開關設定數）」，2026-09-03 查閱。數值、敘述與四語系詳解為本題庫自行改寫推導，非整題引用。"
+      }
     }
   ]
 }
