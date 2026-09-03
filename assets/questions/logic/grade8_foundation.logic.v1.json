@@ -3852,6 +3852,86 @@
         "reference": "timezone-density-checkdigit-gap-2026-09-03",
         "notes": "題型參考公開論壇與題庫網站常見的時區換算、密度與階梯計費、檢查碼與半衰期應用題型；數值、情境與四語系詳解為本題庫自行改寫推導，非整題引用。"
       }
+    },
+    {
+      "id": "logic_grade8_foundation_044",
+      "topic": "logic",
+      "subtopic": "nim_take_matches_first_move",
+      "tags": [
+        "c:game_theory",
+        "c:modular",
+        "m:invariant"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade8",
+      "challengeTier": "foundation",
+      "reviewStatus": "ok",
+      "prompt": {
+        "zh-Hant": "桌上有 21 根火柴，甲、乙兩人輪流拿，由甲先拿。每次可以拿 1 根、2 根或 3 根，拿到最後一根的人獲勝。若甲要保證獲勝，他第一次應該拿幾根？",
+        "zh-Hans": "桌上有 21 根火柴，甲、乙两人轮流拿，由甲先拿。每次可以拿 1 根、2 根或 3 根，拿到最后一根的人获胜。若甲要保证获胜，他第一次应该拿几根？",
+        "en": "There are 21 matches on a table. Two players take turns removing 1, 2 or 3 matches, the first player going first, and whoever takes the last match wins. To guarantee a win, how many should the first player take on the first move?",
+        "ja": "机の上にマッチが 21 本あります。2 人が交互に 1 本、2 本、3 本のいずれかを取り、先手から始めます。最後の 1 本を取った人が勝ちです。先手が必ず勝つには、最初に何本取ればよいですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 1 根。",
+        "zh-Hans": "答案是 1 根。",
+        "en": "The answer is 1 match.",
+        "ja": "答えは 1 本です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "**從結尾往回想**。如果輪到某個人時剩下 1、2 或 3 根，他可以一次拿光而獲勝，所以這些是「好狀態」。",
+          "反過來，如果輪到某個人時剩下 **4 根**，不論他拿 1、2 或 3 根，都會留下 3、2 或 1 根給對手，對手就贏了。所以剩 4 根輪到誰，誰就輸。",
+          "同樣的道理，剩 8 根、12 根、16 根、20 根時輪到誰，誰就輸——**只要剩下的是 4 的倍數，先動的人必輸**。",
+          "因為對手每次拿 x 根（1 ≤ x ≤ 3），你就拿 4 − x 根，這樣**每一輪合計恰好減少 4 根**，剩下的數就一直保持是 4 的倍數。",
+          "所以甲的目標是**拿完之後留下 4 的倍數給乙**。21 除以 4 餘 1，所以甲先拿 1 根，留下 20 根（4 的倍數）給乙。",
+          "之後乙拿幾根，甲就拿「4 減去那個數」，一直保持留給乙的是 4 的倍數，最後必定由甲拿到第 21 根。"
+        ],
+        "zh-Hans": [
+          "**从结尾往回想**。如果轮到某个人时剩下 1、2 或 3 根，他可以一次拿光而获胜，所以这些是「好状态」。",
+          "反过来，如果轮到某个人时剩下 **4 根**，不论他拿 1、2 或 3 根，都会留下 3、2 或 1 根给对手，对手就赢了。所以剩 4 根轮到谁，谁就输。",
+          "同样的道理，剩 8 根、12 根、16 根、20 根时轮到谁，谁就输——**只要剩下的是 4 的倍数，先动的人必输**。",
+          "因为对手每次拿 x 根（1 ≤ x ≤ 3），你就拿 4 − x 根，这样**每一轮合计恰好减少 4 根**，剩下的数就一直保持是 4 的倍数。",
+          "所以甲的目标是**拿完之后留下 4 的倍数给乙**。21 除以 4 余 1，所以甲先拿 1 根，留下 20 根（4 的倍数）给乙。",
+          "之后乙拿几根，甲就拿「4 减去那个数」，一直保持留给乙的是 4 的倍数，最后必定由甲拿到第 21 根。"
+        ],
+        "en": [
+          "Work backwards from the end. If it is your turn with 1, 2 or 3 matches left, you can take them all and win, so those are winning positions.",
+          "Conversely, facing 4 matches you must leave 3, 2 or 1 for your opponent, who then wins. So whoever faces 4 loses.",
+          "By the same reasoning, facing 8, 12, 16 or 20 also loses: whenever the remaining number is a multiple of 4, the player to move loses.",
+          "The reason is that whatever number x your opponent takes, you take 4 − x, so each round removes exactly 4 and the remainder stays a multiple of 4.",
+          "So the first player aims to leave a multiple of 4. Since 21 leaves remainder 1 on division by 4, they take 1 match, leaving 20.",
+          "After that, whatever the opponent takes, the first player takes 4 minus that, always leaving a multiple of 4, and so takes the 21st match."
+        ],
+        "ja": [
+          "**終わりから逆に考えます。** 自分の番で 1、2、3 本残っていれば全部取って勝てるので、これらは勝ちの状態です。",
+          "逆に自分の番で **4 本**残っていると、1〜3 本のどれを取っても相手に 3、2、1 本を残すことになり、相手が勝ちます。4 本を迎えた人は負けです。",
+          "同じ理由で 8 本、12 本、16 本、20 本を迎えた人も負けます。**残りが 4 の倍数なら手番の人が負け**です。",
+          "相手が x 本取ったら自分は 4 − x 本取ることで、**1 巡でちょうど 4 本減り**、残りは 4 の倍数のままになります。",
+          "したがって先手は**4 の倍数を残す**ことを目指します。21 を 4 で割ると余りは 1 なので、まず 1 本取って 20 本を残します。",
+          "その後は相手が取った本数を 4 から引いた数を取り続け、つねに 4 の倍数を残せば、最後の 21 本目は必ず先手が取ります。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "1"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "tag-gap-batch-b-2026-09-03",
+        "notes": "題型參考公開題庫網站常見題型；數值、情境與四語系詳解為本題庫自行推導。出題方向由標籤盤點（概念 × 年級交叉統計）決定。"
+      }
     }
   ]
 }
