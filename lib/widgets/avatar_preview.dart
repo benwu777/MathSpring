@@ -26,7 +26,9 @@ class AvatarPreview extends StatelessWidget {
             fit: StackFit.expand,
             children: <Widget>[
               Transform.scale(
+                key: const ValueKey<String>('avatar_face_layer'),
                 scaleX: assets.faceScaleX,
+                scaleY: assets.faceScaleY,
                 child: assets.skinTint == null
                     ? _layer(assets.baseAsset)
                     : ColorFiltered(

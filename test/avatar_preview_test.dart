@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mathspring/models/avatar_configuration.dart';
@@ -463,4 +464,141 @@ void main() {
     );
     expect(eyeTransform.transform.storage[0], .92);
   });
+
+  test('the boy cropped hairstyle shrinks its shared parting layer', () {
+    final AvatarAssetBundle assets = AvatarAssetCatalog.resolve(
+      _withOption(AvatarPresentation.boy, 'hair', 'boy_hair_05'),
+    );
+
+    expect(assets.hairAsset, 'assets/avatars/boy/hair/hair-01.png');
+    expect(assets.hairScale, lessThan(1));
+    expect(assets.hairScaleX, 1);
+  });
+
+  test(
+      'the round face option shortens the base instead of widening it past '
+      'the hairline', () {
+    for (final AvatarPresentation presentation in AvatarPresentation.values) {
+      final AvatarAssetBundle assets = AvatarAssetCatalog.resolve(
+        _withOption(presentation, 'face', '${presentation.name}_face_05'),
+      );
+
+      expect(assets.faceScaleX, 1);
+      expect(assets.faceScaleY, lessThan(1));
+    }
+  });
+
+  testWidgets('scales the face layer in both directions',
+      (WidgetTester tester) async {
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Scaffold(
+          body: AvatarPreview(
+            configuration: AvatarConfiguration.defaultFor(
+              AvatarPresentation.girl,
+            ).copyWith(faceId: 'girl_face_05'),
+          ),
+        ),
+      ),
+    );
+
+    final Transform faceTransform = tester.widget<Transform>(
+      find.byKey(const ValueKey<String>('avatar_face_layer')),
+    );
+    expect(faceTransform.transform.storage[5], lessThan(1));
+  });
+
+  test('every catalog option maps to an asset file that exists', () {
+    for (final AvatarPresentation presentation in AvatarPresentation.values) {
+      for (final String category in _categories) {
+        for (final String id
+            in AvatarConfiguration.optionsFor(presentation, category)) {
+          final String path =
+              AvatarAssetCatalog.optionAssetFor(presentation, id);
+          expect(File(path).existsSync(), isTrue,
+              reason: '$id points at a missing layer: $path');
+        }
+      }
+    }
+  });
+
+  test('every option in a category renders differently from its siblings', () {
+    for (final AvatarPresentation presentation in AvatarPresentation.values) {
+      for (final String category in _categories) {
+        final Map<String, String> signatures = <String, String>{};
+        for (final String id
+            in AvatarConfiguration.optionsFor(presentation, category)) {
+          final String signature = _signature(
+            AvatarAssetCatalog.resolve(_withOption(presentation, category, id)),
+          );
+          expect(signatures.containsKey(signature), isFalse,
+              reason: '$id renders identically to ${signatures[signature]}');
+          signatures[signature] = id;
+        }
+      }
+    }
+  });
+
+  test(
+      'keeps the boy small-nose mouth calibration for every nose that '
+      'uses the small-nose layer', () {
+    for (final String id
+        in AvatarConfiguration.optionsFor(AvatarPresentation.boy, 'nose')) {
+      final AvatarAssetBundle assets = AvatarAssetCatalog.resolve(
+        _withOption(AvatarPresentation.boy, 'nose', id),
+      );
+      final bool usesSmallNose =
+          assets.noseAsset == 'assets/avatars/boy/nose/nose-02.png';
+      expect(assets.mouthOffsetY, usesSmallNose ? .20 : .168, reason: id);
+    }
+  });
 }
+
+const List<String> _categories = <String>[
+  'skin',
+  'face',
+  'hair',
+  'eyes',
+  'nose',
+  'mouth',
+];
+
+AvatarConfiguration _withOption(
+  AvatarPresentation presentation,
+  String category,
+  String id,
+) {
+  final AvatarConfiguration base = AvatarConfiguration.defaultFor(presentation);
+  return switch (category) {
+    'skin' => base.copyWith(skinId: id),
+    'face' => base.copyWith(faceId: id),
+    'hair' => base.copyWith(hairId: id),
+    'eyes' => base.copyWith(eyesId: id),
+    'nose' => base.copyWith(noseId: id),
+    'mouth' => base.copyWith(mouthId: id),
+    _ => throw ArgumentError.value(category),
+  };
+}
+
+String _signature(AvatarAssetBundle assets) => <Object?>[
+      assets.baseAsset,
+      assets.hairAsset,
+      assets.eyesAsset,
+      assets.noseAsset,
+      assets.mouthAsset,
+      assets.hairScale,
+      assets.hairScaleX,
+      assets.hairOffsetX,
+      assets.hairOffsetY,
+      assets.eyesOffsetY,
+      assets.eyesScaleX,
+      assets.eyesScaleY,
+      assets.faceScaleX,
+      assets.faceScaleY,
+      assets.skinTint,
+      assets.noseTint,
+      assets.noseScale,
+      assets.noseOffsetY,
+      assets.mouthOffsetY,
+      assets.mouthScaleX,
+    ].join('|');

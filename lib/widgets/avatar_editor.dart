@@ -208,61 +208,24 @@ class _AvatarEditorState extends State<AvatarEditor> {
   }
 
   Widget _optionTreatment(String id, Widget child) {
-    if (id.endsWith('_skin_02')) {
-      return ColorFiltered(
-        key: ValueKey<String>('avatar_option_treatment_$id'),
-        colorFilter: const ColorFilter.mode(
-          Color(0x33703A20),
-          BlendMode.srcATop,
-        ),
-        child: child,
-      );
-    }
-    if (id.endsWith('_skin_03')) {
-      return ColorFiltered(
-        key: ValueKey<String>('avatar_option_treatment_$id'),
-        colorFilter: const ColorFilter.mode(
-          Color(0x33974F2C),
-          BlendMode.srcATop,
-        ),
-        child: child,
-      );
+    final AvatarOptionTreatment treatment = AvatarAssetCatalog.treatmentFor(id);
+    if (treatment.isNeutral) {
+      return child;
     }
 
-    final double? scaleX = switch (id) {
-      'girl_face_02' || 'boy_face_02' => .94,
-      'girl_face_03' || 'boy_face_03' => 1.06,
-      'boy_hair_03' => -1,
-      'boy_eyes_03' => .88,
-      'boy_mouth_03' => 1.22,
-      _ => null,
-    };
-    final double? scaleY = switch (id) {
-      'boy_eyes_02' => 1.13,
-      'girl_eyes_03' => .86,
-      _ => null,
-    };
-    final double? scale = switch (id) {
-      'girl_nose_03' => 1.16,
-      'boy_nose_03' => 1.18,
-      _ => null,
-    };
-
-    if (scale != null) {
-      return Transform.scale(
-        key: ValueKey<String>('avatar_option_treatment_$id'),
-        scale: scale,
+    final Key key = ValueKey<String>('avatar_option_treatment_$id');
+    if (treatment.tint case final Color tint) {
+      return ColorFiltered(
+        key: key,
+        colorFilter: ColorFilter.mode(tint, BlendMode.srcATop),
         child: child,
       );
     }
-    if (scaleX != null || scaleY != null) {
-      return Transform.scale(
-        key: ValueKey<String>('avatar_option_treatment_$id'),
-        scaleX: scaleX,
-        scaleY: scaleY,
-        child: child,
-      );
-    }
-    return child;
+    return Transform.scale(
+      key: key,
+      scaleX: treatment.scale * treatment.scaleX,
+      scaleY: treatment.scale * treatment.scaleY,
+      child: child,
+    );
   }
 }

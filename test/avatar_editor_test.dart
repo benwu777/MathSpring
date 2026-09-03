@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mathspring/models/avatar_configuration.dart';
+import 'package:mathspring/services/avatar_asset_catalog.dart';
 import 'package:mathspring/widgets/avatar_editor.dart';
 
 void main() {
@@ -109,5 +111,52 @@ void main() {
       find.byKey(const ValueKey<String>('avatar_option_treatment_boy_hair_03')),
       findsOneWidget,
     );
+  });
+
+  testWidgets('gives every treated option a matching thumbnail treatment',
+      (tester) async {
+    for (final AvatarPresentation presentation in AvatarPresentation.values) {
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: SingleChildScrollView(
+              child: AvatarEditor(
+                key: ValueKey<AvatarPresentation>(presentation),
+                initialConfiguration:
+                    AvatarConfiguration.defaultFor(presentation),
+              ),
+            ),
+          ),
+        ),
+      );
+
+      const List<String> categories = <String>[
+        'skin',
+        'face',
+        'hair',
+        'eyes',
+        'nose',
+        'mouth',
+      ];
+      for (final String category in categories) {
+        await tester
+            .tap(find.byKey(const ValueKey<String>('avatar_next_button')));
+        await tester.pump();
+
+        for (final String id
+            in AvatarConfiguration.optionsFor(presentation, category)) {
+          expect(
+              find.byKey(ValueKey<String>('avatar_option_$id')), findsOneWidget,
+              reason: '$id is missing from the $category step');
+          expect(
+            find.byKey(ValueKey<String>('avatar_option_treatment_$id')),
+            AvatarAssetCatalog.treatmentFor(id).isNeutral
+                ? findsNothing
+                : findsOneWidget,
+            reason: '$id thumbnail does not match its preview treatment',
+          );
+        }
+      }
+    }
   });
 }

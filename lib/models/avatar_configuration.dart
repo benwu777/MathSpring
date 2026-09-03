@@ -22,16 +22,41 @@ class AvatarConfiguration {
   static const Map<AvatarPresentation, Map<String, List<String>>> _options =
       <AvatarPresentation, Map<String, List<String>>>{
     AvatarPresentation.girl: <String, List<String>>{
-      'skin': <String>['girl_skin_01', 'girl_skin_02', 'girl_skin_03'],
-      'face': <String>['girl_face_01', 'girl_face_02', 'girl_face_03'],
+      'skin': <String>[
+        'girl_skin_01',
+        'girl_skin_02',
+        'girl_skin_03',
+        'girl_skin_04',
+        'girl_skin_05',
+      ],
+      'face': <String>[
+        'girl_face_01',
+        'girl_face_02',
+        'girl_face_03',
+        'girl_face_04',
+        'girl_face_05',
+      ],
       'hair': <String>[
         'girl_hair_01',
+        'girl_hair_02',
         'girl_hair_03',
         'girl_hair_04',
         'girl_hair_05',
       ],
-      'eyes': <String>['girl_eyes_01', 'girl_eyes_02', 'girl_eyes_03'],
-      'nose': <String>['girl_nose_01', 'girl_nose_02', 'girl_nose_03'],
+      'eyes': <String>[
+        'girl_eyes_01',
+        'girl_eyes_02',
+        'girl_eyes_03',
+        'girl_eyes_04',
+        'girl_eyes_05',
+      ],
+      'nose': <String>[
+        'girl_nose_01',
+        'girl_nose_02',
+        'girl_nose_03',
+        'girl_nose_04',
+        'girl_nose_05',
+      ],
       'mouth': <String>[
         'girl_mouth_01',
         'girl_mouth_02',
@@ -43,12 +68,48 @@ class AvatarConfiguration {
       ],
     },
     AvatarPresentation.boy: <String, List<String>>{
-      'skin': <String>['boy_skin_01', 'boy_skin_02', 'boy_skin_03'],
-      'face': <String>['boy_face_01', 'boy_face_02', 'boy_face_03'],
-      'hair': <String>['boy_hair_01', 'boy_hair_02', 'boy_hair_03'],
-      'eyes': <String>['boy_eyes_01', 'boy_eyes_02', 'boy_eyes_03'],
-      'nose': <String>['boy_nose_01', 'boy_nose_02', 'boy_nose_03'],
-      'mouth': <String>['boy_mouth_01', 'boy_mouth_02', 'boy_mouth_03'],
+      'skin': <String>[
+        'boy_skin_01',
+        'boy_skin_02',
+        'boy_skin_03',
+        'boy_skin_04',
+        'boy_skin_05',
+      ],
+      'face': <String>[
+        'boy_face_01',
+        'boy_face_02',
+        'boy_face_03',
+        'boy_face_04',
+        'boy_face_05',
+      ],
+      'hair': <String>[
+        'boy_hair_01',
+        'boy_hair_02',
+        'boy_hair_03',
+        'boy_hair_04',
+        'boy_hair_05',
+      ],
+      'eyes': <String>[
+        'boy_eyes_01',
+        'boy_eyes_02',
+        'boy_eyes_03',
+        'boy_eyes_04',
+        'boy_eyes_05',
+      ],
+      'nose': <String>[
+        'boy_nose_01',
+        'boy_nose_02',
+        'boy_nose_03',
+        'boy_nose_04',
+        'boy_nose_05',
+      ],
+      'mouth': <String>[
+        'boy_mouth_01',
+        'boy_mouth_02',
+        'boy_mouth_03',
+        'boy_mouth_04',
+        'boy_mouth_05',
+      ],
     },
   };
 
