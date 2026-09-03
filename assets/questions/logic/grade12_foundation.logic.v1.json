@@ -3812,6 +3812,85 @@
         "maxDigits": 2
       },
       "id": "logic_grade12_foundation_040"
+    },
+    {
+      "id": "logic_grade12_foundation_041",
+      "topic": "logic",
+      "subtopic": "votes_to_guarantee_win",
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "reviewStatus": "ok",
+      "prompt": {
+        "zh-Hant": "一場選舉有 4 位候選人，一共開出 1000 張有效票，得票數最多的一個人當選。一位候選人至少要拿到幾票，才能保證自己一定當選（不論其他票怎麼分配）？",
+        "zh-Hans": "一场选举有 4 位候选人，一共开出 1000 张有效票，得票数最多的一个人当选。一位候选人至少要拿到几票，才能保证自己一定当选（不论其他票怎么分配）？",
+        "en": "In an election with 4 candidates, 1000 valid votes are cast and the candidate with the most votes wins. At least how many votes must a candidate receive to be guaranteed to win, no matter how the remaining votes are distributed?",
+        "ja": "4 人が立候補する選挙で、有効票は 1000 票あり、最多得票の 1 人が当選します。残りの票がどう分かれても必ず当選するには、少なくとも何票必要ですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 251 票。",
+        "zh-Hans": "答案是 251 票。",
+        "en": "The answer is 251 votes.",
+        "ja": "答えは 251 票です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "「**保證**當選」的意思是：即使剩下的票用**對他最不利**的方式分配，他仍然票數最多。所以要考慮最壞的情況。",
+          "設這位候選人拿到 n 票，剩下的 1000 − n 票分給另外 3 位。**對他最不利的分法是讓其中某一位盡量多**，也就是這 3 人盡量平均分（平均分時最大的那一位最小，但仍然最有威脅）。",
+          "其他 3 人之中票數最多的那一位，至少會拿到 (1000 − n) ÷ 3 票（不足整數時要進位）。要保證當選，必須 n 大於這個數。",
+          "列出不等式：n > (1000 − n) ÷ 3，兩邊乘 3 得 3n > 1000 − n，即 4n > 1000，所以 n > 250。",
+          "票數是整數，所以最小的 n 是 251。",
+          "驗證 251 可行：其餘 749 票分給 3 人，其中最多的一位至少要拿 250 票（749 ÷ 3 進位）。250 < 251，所以他確實當選 ✓",
+          "驗證 250 不夠：其餘 750 票可能剛好分成 250、250、250，四個人全部同票，就不能保證當選 ✓ 所以答案是 251 票。**注意「保證當選」不等於「超過總票數的一半」**，候選人越多，保證所需的票數越少。"
+        ],
+        "zh-Hans": [
+          "「**保证**当选」的意思是：即使剩下的票用**对他最不利**的方式分配，他仍然票数最多。所以要考虑最坏的情况。",
+          "设这位候选人拿到 n 票，剩下的 1000 − n 票分给另外 3 位。**对他最不利的分法是让其中某一位尽量多**，也就是这 3 人尽量平均分（平均分时最大的那一位最小，但仍然最有威胁）。",
+          "其他 3 人之中票数最多的那一位，至少会拿到 (1000 − n) ÷ 3 票（不足整数时要进位）。要保证当选，必须 n 大于这个数。",
+          "列出不等式：n > (1000 − n) ÷ 3，两边乘 3 得 3n > 1000 − n，即 4n > 1000，所以 n > 250。",
+          "票数是整数，所以最小的 n 是 251。",
+          "验证 251 可行：其余 749 票分给 3 人，其中最多的一位至少要拿 250 票（749 ÷ 3 进位）。250 < 251，所以他确实当选 ✓",
+          "验证 250 不够：其余 750 票可能刚好分成 250、250、250，四个人全部同票，就不能保证当选 ✓ 所以答案是 251 票。**注意「保证当选」不等于「超过总票数的一半」**，候选人越多，保证所需的票数越少。"
+        ],
+        "en": [
+          "Guaranteed to win means that even if the remaining votes fall in the worst possible way for this candidate, they still have the most. So we must reason about the worst case.",
+          "Suppose the candidate gets n votes and the other 1000 − n go to the other three. The dangerous case is whichever rival can get the most; the smallest possible value of that maximum occurs when the three split as evenly as they can.",
+          "The strongest of the other three always has at least (1000 − n) ÷ 3 votes, rounded up. To be sure of winning, n must exceed that.",
+          "This gives n > (1000 − n) ÷ 3. Multiplying by 3: 3n > 1000 − n, so 4n > 1000 and n > 250.",
+          "Votes are whole numbers, so the smallest such n is 251.",
+          "Check that 251 works: the other 749 votes go to three people, the largest share being at least 250 by rounding up 749 ÷ 3. Since 250 is less than 251, this candidate wins.",
+          "Check that 250 is not enough: the other 750 votes could split as 250, 250, 250, leaving all four tied, so victory is not guaranteed. Hence the answer is 251. Note that guaranteeing a win is not the same as taking more than half the votes; the more candidates there are, the fewer votes are needed."
+        ],
+        "ja": [
+          "「**必ず**当選する」とは、残りの票が**その人にとって最も不利**に分かれても、なお最多得票であるということです。したがって最悪の場合を考えます。",
+          "この候補が n 票を得て、残り 1000 − n 票が他の 3 人に分かれるとします。脅威になるのは他の 3 人のうち最多の人で、その最多得票が最も小さくなるのは 3 人が均等に分けたときです。",
+          "他の 3 人のうち最多の人は、少なくとも (1000 − n) ÷ 3 票（端数は切り上げ）を得ます。必ず当選するには n がこれを上回る必要があります。",
+          "不等式は n > (1000 − n) ÷ 3 です。3 倍すると 3n > 1000 − n、4n > 1000、よって n > 250 です。",
+          "票数は整数なので、最小の n は 251 です。",
+          "251 で成り立つか確かめます。残り 749 票を 3 人で分けると、最多の人は少なくとも 250 票（749 ÷ 3 の切り上げ）です。250 < 251 なので確かに当選します。",
+          "250 では足りないことも確かめます。残り 750 票が 250、250、250 と分かれると 4 人が同数となり、当選は保証されません。よって答えは 251 票です。**「必ず当選」は「過半数」とは違い**、候補者が多いほど必要な票数は少なくなります。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "251"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 4
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "applied-billing-invariant-gap-2026-09-03",
+        "notes": "題型參考公開論壇與題庫網站常見的分級票價、分段平均、階梯計費、保險自付額、折舊、分期、趕工、機率與不變量題型；數值、情境與四語系詳解為本題庫自行改寫推導，非整題引用。"
+      }
     }
   ]
 }
