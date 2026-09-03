@@ -52,6 +52,35 @@ def check_tags(tags, vocab):
     return errs
 
 
+# 正解比最長誘答長這麼多倍就算洩漏線索。全庫 470 道選擇題實測：
+# 1.6 倍會標出 10 題，1.4 倍會把正常的長度起伏也掃進來。
+OPTION_LENGTH_RATIO = 1.6
+# 選項太短時長度不帶線索（「12」對「3」也有 2 倍），設一個絕對下限。
+OPTION_LENGTH_FLOOR = 12
+
+
+def check_option_lengths(options, correct_value):
+    """回傳選項長度洩漏線索的錯誤訊息清單；合格時回傳空清單。
+
+    正解若遠比每一個誘答都長，學生不必推理、挑最長的就會中。
+    這是 2026-09-03 那批博弈選擇題實際踩到的坑：正解寫滿完整策略，
+    誘答只有一句話。
+    """
+    if not isinstance(options, dict) or correct_value not in options:
+        return []
+    lens = {k: len(v['zh-Hant']) for k, v in options.items()}
+    correct = lens[correct_value]
+    others = [n for k, n in lens.items() if k != correct_value]
+    if not others or correct < OPTION_LENGTH_FLOOR:
+        return []
+    longest = max(others)
+    if longest and correct / longest >= OPTION_LENGTH_RATIO:
+        return ['正解 %s 長 %d 字，最長的誘答只有 %d 字（%.2f 倍），'
+                '挑最長的就會中；請把誘答寫得一樣具體'
+                % (correct_value, correct, longest, correct / longest)]
+    return []
+
+
 def allowed_topics(level_stage):
     n = level_stage.replace('grade', '')
     return TOPICS_UPPER if n.isdigit() and int(n) >= 7 else TOPICS
@@ -212,6 +241,8 @@ def main():
                 ca = q.get('correctAnswer', {})
                 if ca.get('type') != 'choice' or ca.get('value') not in opts:
                     err('correctAnswer 未指向存在的選項')
+                for msg in check_option_lengths(opts, ca.get('value')):
+                    err(msg)
                 if 'inputConstraints' in q:
                     err('multiple_choice 不得有 inputConstraints')
             elif q.get('answerMode') == 'integer_input':
