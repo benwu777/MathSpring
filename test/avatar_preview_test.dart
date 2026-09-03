@@ -121,26 +121,6 @@ void main() {
     expect(AvatarAssetCatalog.resolve(secondNose).mouthOffsetY, .20);
   });
 
-  test('uses the existing boy eye layer for the second eye thumbnail', () {
-    expect(
-      AvatarAssetCatalog.optionAssetFor(
-        AvatarPresentation.boy,
-        'boy_eyes_02',
-      ),
-      'assets/avatars/boy/eyes/eyes-01.png',
-    );
-  });
-
-  test('uses the matching presentation eye layer for third eye thumbnails', () {
-    expect(
-      AvatarAssetCatalog.optionAssetFor(
-        AvatarPresentation.girl,
-        'girl_eyes_03',
-      ),
-      'assets/avatars/girl/eyes/eyes-01.png',
-    );
-  });
-
   test('tints a boy nose with the selected deeper skin tone', () {
     final AvatarAssetBundle assets = AvatarAssetCatalog.resolve(
       AvatarConfiguration(
@@ -380,69 +360,22 @@ void main() {
     expect(assets.mouthOffsetY, .08);
   });
 
-  test('applies the second skin, face, and boy eye treatments independently',
-      () {
+  test('tints the skin without replacing the chosen face layer', () {
     const AvatarConfiguration girl = AvatarConfiguration(
       presentation: AvatarPresentation.girl,
       skinId: 'girl_skin_02',
-      faceId: 'girl_face_02',
+      faceId: 'girl_face_04',
       hairId: 'girl_hair_01',
       eyesId: 'girl_eyes_01',
       noseId: 'girl_nose_01',
       mouthId: 'girl_mouth_01',
     );
-    const AvatarConfiguration boy = AvatarConfiguration(
-      presentation: AvatarPresentation.boy,
-      skinId: 'boy_skin_02',
-      faceId: 'boy_face_02',
-      hairId: 'boy_hair_01',
-      eyesId: 'boy_eyes_02',
-      noseId: 'boy_nose_01',
-      mouthId: 'boy_mouth_01',
-    );
 
-    expect(AvatarAssetCatalog.resolve(girl).skinTint, isNotNull);
-    expect(AvatarAssetCatalog.resolve(girl).faceScaleX, lessThan(1));
-    expect(AvatarAssetCatalog.resolve(boy).skinTint, isNotNull);
-    expect(AvatarAssetCatalog.resolve(boy).faceScaleX, lessThan(1));
-    expect(AvatarAssetCatalog.resolve(boy).eyesScaleY, greaterThan(1));
-  });
+    final AvatarAssetBundle assets = AvatarAssetCatalog.resolve(girl);
 
-  test('gives every third option a distinct aligned treatment', () {
-    const AvatarConfiguration girl = AvatarConfiguration(
-      presentation: AvatarPresentation.girl,
-      skinId: 'girl_skin_03',
-      faceId: 'girl_face_03',
-      hairId: 'girl_hair_01',
-      eyesId: 'girl_eyes_03',
-      noseId: 'girl_nose_03',
-      mouthId: 'girl_mouth_01',
-    );
-    const AvatarConfiguration boy = AvatarConfiguration(
-      presentation: AvatarPresentation.boy,
-      skinId: 'boy_skin_03',
-      faceId: 'boy_face_03',
-      hairId: 'boy_hair_03',
-      eyesId: 'boy_eyes_03',
-      noseId: 'boy_nose_03',
-      mouthId: 'boy_mouth_03',
-    );
-
-    final AvatarAssetBundle girlAssets = AvatarAssetCatalog.resolve(girl);
-    final AvatarAssetBundle boyAssets = AvatarAssetCatalog.resolve(boy);
-
-    expect(girlAssets.skinTint, isNotNull);
-    expect(girlAssets.noseTint, girlAssets.skinTint);
-    expect(girlAssets.faceScaleX, greaterThan(1));
-    expect(girlAssets.eyesScaleY, lessThan(1));
-    expect(girlAssets.noseScale, greaterThan(1));
-    expect(boyAssets.skinTint, isNotNull);
-    expect(boyAssets.noseTint, boyAssets.skinTint);
-    expect(boyAssets.faceScaleX, greaterThan(1));
-    expect(boyAssets.hairScaleX, lessThan(0));
-    expect(boyAssets.eyesScaleX, lessThan(1));
-    expect(boyAssets.noseScale, greaterThan(1));
-    expect(boyAssets.mouthScaleX, greaterThan(1));
+    expect(assets.skinTint, isNotNull);
+    expect(assets.noseTint, assets.skinTint);
+    expect(assets.baseAsset, 'assets/avatars/girl/base/face-04.png');
   });
 
   testWidgets('brings the girl eye pair slightly toward the face center',
@@ -475,37 +408,27 @@ void main() {
     expect(assets.hairScaleX, 1);
   });
 
-  test(
-      'the round face option shortens the base instead of widening it past '
-      'the hairline', () {
+  test('face, eyes, nose, and mouth options each own a separate layer', () {
+    // Skin is a tint of one base and hair still shares two partings; every
+    // other part must ship real artwork per option instead of a runtime
+    // scale of its neighbour.
     for (final AvatarPresentation presentation in AvatarPresentation.values) {
-      final AvatarAssetBundle assets = AvatarAssetCatalog.resolve(
-        _withOption(presentation, 'face', '${presentation.name}_face_05'),
-      );
+      for (final String category in <String>['face', 'eyes', 'nose', 'mouth']) {
+        final List<String> options =
+            AvatarConfiguration.optionsFor(presentation, category);
+        final Set<String> layers = options
+            .map((String id) =>
+                AvatarAssetCatalog.optionAssetFor(presentation, id))
+            .toSet();
 
-      expect(assets.faceScaleX, 1);
-      expect(assets.faceScaleY, lessThan(1));
+        expect(layers.length, options.length,
+            reason: '$presentation $category options share a layer: $layers');
+        for (final String id in options) {
+          expect(AvatarAssetCatalog.treatmentFor(id).isNeutral, isTrue,
+              reason: '$id still fakes its shape with a runtime transform');
+        }
+      }
     }
-  });
-
-  testWidgets('scales the face layer in both directions',
-      (WidgetTester tester) async {
-    await tester.pumpWidget(
-      MaterialApp(
-        home: Scaffold(
-          body: AvatarPreview(
-            configuration: AvatarConfiguration.defaultFor(
-              AvatarPresentation.girl,
-            ).copyWith(faceId: 'girl_face_05'),
-          ),
-        ),
-      ),
-    );
-
-    final Transform faceTransform = tester.widget<Transform>(
-      find.byKey(const ValueKey<String>('avatar_face_layer')),
-    );
-    expect(faceTransform.transform.storage[5], lessThan(1));
   });
 
   test('every catalog option maps to an asset file that exists', () {
@@ -593,8 +516,6 @@ String _signature(AvatarAssetBundle assets) => <Object?>[
       assets.eyesOffsetY,
       assets.eyesScaleX,
       assets.eyesScaleY,
-      assets.faceScaleX,
-      assets.faceScaleY,
       assets.skinTint,
       assets.noseTint,
       assets.noseScale,
