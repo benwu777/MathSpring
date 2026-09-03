@@ -542,6 +542,9 @@ phase 1 **只允許**兩種 `answerMode`，不得新增其他型別：
 
 若一題的自然答案是分數或小數，必須改寫成整數作答（例如問「幾毫升」而非「幾公升」），或改成選擇題；不可為它發明新的 answerMode。
 
+> 目前已知的工具缺口與待辦（figure params 未驗證、簡體字混入 zh-Hant 的檢查尚未進驗證器等）
+> 見 [question-bank-handoff.md](question-bank-handoff.md)。
+
 ## schema 欄位必填/可省規則
 
 - `figure`：**每題都必須有** `figure` 欄位。無圖題填 `{"type":"custom","kind":"none","params":{}}`；有圖題 `kind` 必須是 renderer 實際支援的值，且 `params` 需符合該 kind 的 schema。renderer 畫不出的圖（角度器、一筆畫的動態過程等）一律 `kind:none`，不可硬塞畫不出的參數。
