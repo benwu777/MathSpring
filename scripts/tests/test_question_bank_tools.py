@@ -169,6 +169,66 @@ class OptionLengthOnRealPacksTest(unittest.TestCase):
         self.assertEqual(offenders, [], '\n'.join(offenders))
 
 
+class SceneChecksUndefinedPointTest(unittest.TestCase):
+    """validate_question_packs.scene_checks：引用不存在的點要報錯，不可讓驗證器整個炸掉。
+
+    只有 segments 有做名稱檢查，rightAngles / equalTicks / angleMarks / polygons
+    都是直接 pts[name]，打錯一個字就是 KeyError——驗證器當場中止，
+    後面所有題目都不會被檢查。開放起草代理畫圖之後這會變成常態錯誤。
+    """
+
+    def _scene(self, **extra):
+        params = {
+            'bounds': {'minX': 0, 'minY': 0, 'maxX': 4, 'maxY': 3},
+            'points': [{'name': 'A', 'x': 0, 'y': 0},
+                       {'name': 'B', 'x': 4, 'y': 0},
+                       {'name': 'C', 'x': 0, 'y': 3}],
+            'segments': [{'from': 'A', 'to': 'B'}, {'from': 'B', 'to': 'C'},
+                         {'from': 'C', 'to': 'A'}],
+        }
+        params.update(extra)
+        return {'figure': {'type': 'custom', 'kind': 'geometry_scene',
+                           'params': params}}
+
+    def _run(self, scene):
+        msgs = []
+        vqp.scene_checks(scene, msgs.append)
+        return msgs
+
+    def test_valid_scene_reports_nothing(self):
+        scene = self._scene(
+            rightAngles=[{'at': 'A', 'from': 'B', 'to': 'C'}],
+            polygons=[{'vertices': ['A', 'B', 'C']}],
+            equalTicks=[{'segments': [['A', 'B'], ['A', 'B']]}],
+            angleMarks=[{'at': 'A', 'from': 'B', 'to': 'C', 'label': '90°'}])
+        self.assertEqual(self._run(scene), [])
+
+    def test_right_angle_referencing_undefined_point_is_reported(self):
+        scene = self._scene(rightAngles=[{'at': 'A', 'from': 'B', 'to': 'Z'}])
+        msgs = self._run(scene)
+        self.assertEqual(len(msgs), 1)
+        self.assertIn('Z', msgs[0])
+
+    def test_equal_ticks_referencing_undefined_point_is_reported(self):
+        scene = self._scene(equalTicks=[{'segments': [['A', 'B'], ['A', 'Z']]}])
+        msgs = self._run(scene)
+        self.assertEqual(len(msgs), 1)
+        self.assertIn('Z', msgs[0])
+
+    def test_angle_mark_referencing_undefined_point_is_reported(self):
+        scene = self._scene(
+            angleMarks=[{'at': 'Z', 'from': 'B', 'to': 'C', 'label': '90°'}])
+        msgs = self._run(scene)
+        self.assertEqual(len(msgs), 1)
+        self.assertIn('Z', msgs[0])
+
+    def test_polygon_referencing_undefined_point_is_reported(self):
+        scene = self._scene(polygons=[{'vertices': ['A', 'B', 'Z']}])
+        msgs = self._run(scene)
+        self.assertEqual(len(msgs), 1)
+        self.assertIn('Z', msgs[0])
+
+
 class ValidatorReportsOptionLengthLeakTest(unittest.TestCase):
     """整合測試：驗證器本身要把長度線索當成錯誤擋下來。
 

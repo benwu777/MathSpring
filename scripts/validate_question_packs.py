@@ -106,7 +106,20 @@ def scene_checks(q, err):
             err('segment 引用不存在的點')
         if s.get('style') is not None and s['style'] not in ('solid', 'construction'):
             err('segment style 非法: %s' % s['style'])
+    def missing(names, where):
+        """回報引用了不存在的點；有缺就回 True，讓呼叫端跳過該筆。
+
+        以前這裡直接 pts[name]，打錯一個字就是 KeyError，驗證器當場中止，
+        後面所有題目都不會被檢查到。
+        """
+        bad = [n for n in names if n not in pts]
+        if bad:
+            err('%s 引用不存在的點: %s' % (where, '、'.join(bad)))
+        return bool(bad)
+
     for ra in p.get('rightAngles', []):
+        if missing([ra['at'], ra['from'], ra['to']], 'rightAngles'):
+            continue
         # 用角度容差而非內積絕對值：內積會隨座標大小放大，固定 epsilon 會誤報
         A, B, C = pts[ra['at']], pts[ra['from']], pts[ra['to']]
         v1 = (B[0] - A[0], B[1] - A[1])
@@ -116,11 +129,15 @@ def scene_checks(q, err):
         if abs(ang - 90) > 0.5:
             err('rightAngles 標直角但實際是 %.2f°' % ang)
     for et in p.get('equalTicks', []):
+        if missing([n for pair in et['segments'] for n in pair], 'equalTicks'):
+            continue
         # 相對容差：長度本身有捨入誤差，用比例判斷才不會誤報
         ls = [math.dist(pts[a], pts[c]) for a, c in et['segments']]
         if max(ls) > 0 and (max(ls) - min(ls)) / max(ls) > 0.01:
             err('equalTicks 標等長但實際長度為 %s' % [round(x, 4) for x in ls])
     for am in p.get('angleMarks', []):
+        if missing([am['at'], am['from'], am['to']], 'angleMarks'):
+            continue
         m = re.match(r'^(\d+(?:\.\d+)?)°$', am.get('label') or '')
         if not m:
             continue
@@ -132,6 +149,8 @@ def scene_checks(q, err):
         if abs(ang - float(m.group(1))) > 0.5:
             err('angleMarks 標 %s 但實際 %.2f°' % (am['label'], ang))
     for pg in p.get('polygons', []):
+        if missing(pg['vertices'], 'polygons'):
+            continue
         vs = [pts[v] for v in pg['vertices']]
         area = abs(sum(vs[i][0] * vs[(i + 1) % len(vs)][1] - vs[(i + 1) % len(vs)][0] * vs[i][1]
                        for i in range(len(vs)))) / 2

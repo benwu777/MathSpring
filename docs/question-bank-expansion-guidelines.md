@@ -544,7 +544,21 @@ phase 1 **只允許**兩種 `answerMode`，不得新增其他型別：
 
 ## schema 欄位必填/可省規則
 
-- `figure`：**每題都必須有** `figure` 欄位。無圖題填 `{"type":"custom","kind":"none","params":{}}`；有圖題 `kind` 必須是 renderer 實際支援的值（目前 `shape_diagram` / `coordinate_plane`），且 `params` 需符合該 kind 的 schema。renderer 畫不出的圖（組合圖、切割線、角度器、一筆畫等）一律 `kind:none`，不可硬塞畫不出的參數。
+- `figure`：**每題都必須有** `figure` 欄位。無圖題填 `{"type":"custom","kind":"none","params":{}}`；有圖題 `kind` 必須是 renderer 實際支援的值，且 `params` 需符合該 kind 的 schema。renderer 畫不出的圖（角度器、一筆畫的動態過程等）一律 `kind:none`，不可硬塞畫不出的參數。
+
+  renderer 實際支援的 kind 與各自的取捨（switch 在 `lib/main.dart` 的 `_buildFigureRenderSpec`）：
+
+  | kind | 用途 | 驗證器檢查 |
+  |---|---|---|
+  | `geometry_scene` | **需要畫出構造的幾何題一律用這個**：點、線段、多邊形、圓弧、角度標記、直角記號、等長刻記。座標是數學座標（y 軸向上）。 | `scene_checks()` 查 7 項：點在 bounds 內、弧不出界、引用的點存在、直角真的是 90°±0.5°、等長真的等長（1% 容差）、角度標籤與實際角度相符、多邊形頂點不共線 |
+  | `coordinate_plane` | 座標平面上的點、折線、標記點 | 只查「終點」標籤洩漏答案這一條 |
+  | `shape_diagram` | 單一基本形狀＋最多 5 個文字標籤（`top`/`bottom`/`left`/`right`/`center`） | 無 |
+  | `composite_grid_shape` | 方格拼出的複合圖形，`filledCells` 是 0-indexed 的 `[row, col]`，row 0 在最上面 | 無 |
+  | `circle_quadrants_point` | **不要用**。圓、四個鑲邊點與內部點的位置全部寫死，`shadedRegion` 只有 `"topRight"` 有作用，其餘值靜默不上色。全庫只有 1 題在用。 | 無 |
+
+  **未列在 switch 裡的 kind 會靜默不畫**——不報錯、不留 log、畫面上只是一片空白。
+  後四種 kind 的 `params` 驗證器完全不檢查，寫錯就是圖畫錯或畫不出來而沒有人知道，
+  所以這幾種一定要用 `test/figure_preview_test.dart` 目視確認（見「圖形題規則」）。
 - `options`：**只有** `multiple_choice` 有；固定 4 個選項 A/B/C/D，四語系齊全，選項互不重複，`correctAnswer.value` 必須指向其中一個 key。`integer_input` 題不得出現 `options`。
 - `inputConstraints`：**只有** `integer_input` 有，必填 `allowNegative`（bool）與 `maxDigits`（int）。`multiple_choice` 題不得出現 `inputConstraints`。
 - `correctAnswer`：`multiple_choice` 用 `{"type":"choice","value":"<A-D>"}`；`integer_input` 用 `{"type":"integer","value":"<字串數字>"}`。其值必須與 `answer` 文字、`solutionSteps` 結論三者一致。
