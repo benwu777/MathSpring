@@ -4598,6 +4598,178 @@
         "reference": "agent-drafted-nrich-2026-09-03",
         "notes": "題型參考 Wikipedia「Intransitive dice」與 Plus Magazine「Curious dice」所載的三顆非遞移骰子（2,2,4,4,9,9 / 1,1,6,6,8,8 / 3,3,5,5,7,7，勝率皆為 5/9），問法改為判斷先選或後選有利，由背景起草代理於 2026-09-03 實際查閱 NRICH 等公開題組後改寫；數值、敘述與四語系詳解為本題庫自行推導，非整題引用。主流程已跑機械校驗、全庫去重與跨代理去重。"
       }
+    },
+    {
+      "id": "combinatorics_grade12_foundation_049",
+      "topic": "combinatorics",
+      "subtopic": "stat_grade12_expected_number_of_records",
+      "tags": [
+        "c:expectation",
+        "m:direct"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "reviewStatus": "ok",
+      "prompt": {
+        "zh-Hant": "4 位實力互不相同的選手，依照隨機順序一個接一個上場面試，每一種出場順序的可能性都相同。若某位選手上場時的實力，比在他之前所有出場過的選手都強，就稱這次上場「刷新紀錄」（第一位出場的選手，一定算是刷新紀錄）。求這 4 場面試中「刷新紀錄」次數的期望值。",
+        "zh-Hans": "4 位实力互不相同的选手，依照随机顺序一个接一个上场面试，每一种出场顺序的可能性都相同。若某位选手上场时的实力，比在他之前所有出场过的选手都强，就称这次上场“刷新纪录”（第一位出场的选手，一定算是刷新纪录）。求这 4 场面试中“刷新纪录”次数的期望值。",
+        "en": "Four candidates, all with different abilities, are interviewed one at a time in a uniformly random order. Whenever a candidate is stronger than every candidate interviewed before them, that interview counts as a 'record' (the very first candidate always counts as a record). Find the expected number of records among these 4 interviews.",
+        "ja": "実力がすべて異なる4人の候補者が、一様ランダムな順番で1人ずつ面接を受ける。ある候補者が、それ以前に面接を受けた全員よりも実力が上であるとき、その面接を「記録更新」と呼ぶ（最初に面接を受ける候補者は必ず記録更新となる）。この4回の面接における「記録更新」の回数の期待値を求めよ。"
+      },
+      "answer": {
+        "zh-Hant": "刷新紀錄次數的期望值是 25/12。",
+        "zh-Hans": "刷新纪录次数的期望值是 25/12。",
+        "en": "The expected number of records is 25/12.",
+        "ja": "記録更新の回数の期待値は25/12である。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "把第 k 位出場的選手是否「刷新紀錄」，看成一個指標：是就算 1、不是就算 0，「刷新紀錄的總次數」就是這 4 個指標加起來。",
+          "第 k 位選手刷新紀錄，代表他在「前 k 位出場的選手」之中實力最強。因為出場順序完全隨機，這 k 位選手裡誰排第 k 個都是等機率的，所以他排最後（也就是最強的人剛好排在第 k 位）的機率是 1/k。",
+          "所以第 k 位刷新紀錄的機率是 1/k：第 1 位一定刷新（機率 1），第 2 位機率 1/2，第 3 位機率 1/3，第 4 位機率 1/4。",
+          "由期望值的可加性，總刷新次數的期望值 = 1 + 1/2 + 1/3 + 1/4，不需要管這些事件彼此是否獨立。",
+          "把分數通分相加：1 + 1/2 + 1/3 + 1/4 = 12/12 + 6/12 + 4/12 + 3/12 = 25/12，所以期望值是 25/12（大約是 2.08 次）。這個「1 加上 1/2 加上 1/3 一路加下去」的和叫做調和級數，人數越多，平均刷新次數會持續變大，但增加得非常慢。"
+        ],
+        "zh-Hans": [
+          "把第 k 位出场的选手是否“刷新纪录”，看成一个指标：是就算 1、不是就算 0，“刷新纪录的总次数”就是这 4 个指标加起来。",
+          "第 k 位选手刷新纪录，代表他在“前 k 位出场的选手”之中实力最强。因为出场顺序完全随机，这 k 位选手里谁排第 k 个都是等机率的，所以他排最后（也就是最强的人刚好排在第 k 位）的机率是 1/k。",
+          "所以第 k 位刷新纪录的机率是 1/k：第 1 位一定刷新（机率 1），第 2 位机率 1/2，第 3 位机率 1/3，第 4 位机率 1/4。",
+          "由期望值的可加性，总刷新次数的期望值 = 1 + 1/2 + 1/3 + 1/4，不需要管这些事件彼此是否独立。",
+          "把分数通分相加：1 + 1/2 + 1/3 + 1/4 = 12/12 + 6/12 + 4/12 + 3/12 = 25/12，所以期望值是 25/12（大约是 2.08 次）。这个“1 加上 1/2 加上 1/3 一路加下去”的和叫做调和级数，人数越多，平均刷新次数会持续变大，但增加得非常慢。"
+        ],
+        "en": [
+          "Treat whether the k-th candidate sets a record as an indicator: 1 if yes, 0 if no. The total number of records is the sum of these 4 indicators.",
+          "The k-th candidate sets a record exactly when they are the strongest among the first k candidates interviewed. Since the order is uniformly random, each of these k candidates is equally likely to be the one in position k, so the probability that the strongest of the k ends up in position k is 1/k.",
+          "So the probability that position k is a record is 1/k: position 1 is always a record (probability 1), position 2 has probability 1/2, position 3 has probability 1/3, position 4 has probability 1/4.",
+          "By additivity of expectation, the expected total number of records = 1 + 1/2 + 1/3 + 1/4, regardless of whether these events are independent.",
+          "Adding the fractions with a common denominator: 1 + 1/2 + 1/3 + 1/4 = 12/12 + 6/12 + 4/12 + 3/12 = 25/12, so the expected value is 25/12 (about 2.08 records). This sum, '1 plus 1/2 plus 1/3 and so on,' is called a harmonic series — as the number of candidates grows, the expected number of records keeps growing too, but extremely slowly."
+        ],
+        "ja": [
+          "k番目に面接を受ける候補者が「記録更新」となるかどうかを指標変数として考える：記録更新なら1、そうでなければ0とし、記録更新の総回数はこの4つの指標変数の和である。",
+          "k番目の候補者が記録更新となるのは、その候補者が最初のk人の中で最も実力が上である場合である。順番は完全にランダムなので、このk人のうち誰がk番目に来るかは等確率であり、したがって最も実力が上の候補者がちょうどk番目に来る確率は1/kである。",
+          "つまりk番目が記録更新となる確率は1/kであり、1番目は必ず記録更新（確率1）、2番目は確率1/2、3番目は確率1/3、4番目は確率1/4である。",
+          "期待値の加法性より、記録更新の総回数の期待値 = 1 + 1/2 + 1/3 + 1/4であり、これらの事象が独立かどうかは関係ない。",
+          "分数を通分して足すと、1 + 1/2 + 1/3 + 1/4 = 12/12 + 6/12 + 4/12 + 3/12 = 25/12となるので、期待値は25/12（約2.08回）である。この「1に1/2、1/3……と足していく」和は調和級数と呼ばれ、人数が増えるほど記録更新の期待回数も増え続けるが、その増え方は非常に緩やかである。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "multiple_choice",
+      "correctAnswer": {
+        "type": "choice",
+        "value": "A"
+      },
+      "options": {
+        "A": {
+          "zh-Hant": "25/12",
+          "zh-Hans": "25/12",
+          "en": "25/12",
+          "ja": "25/12"
+        },
+        "B": {
+          "zh-Hant": "11/6",
+          "zh-Hans": "11/6",
+          "en": "11/6",
+          "ja": "11/6"
+        },
+        "C": {
+          "zh-Hant": "2",
+          "zh-Hans": "2",
+          "en": "2",
+          "ja": "2"
+        },
+        "D": {
+          "zh-Hant": "3",
+          "zh-Hans": "3",
+          "en": "3",
+          "ja": "3"
+        }
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "agent-drafted-nrich-2026-09-03",
+        "notes": "題型參考 参考经典的「面试问题」（hiring problem）中，随机顺序面试候选人时刷新纪录次数期望值等于调和级数这一结果（可见于多所大学算法课讲义，如 Temple University CIS 9615 与 Hawaii ICS 311 的 Probabilistic Analysis 讲义），改写为独立设计的面试情境题，由背景起草代理於 2026-09-03 實際查閱 NRICH 等公開題組後改寫（本輪開放附圖）；數值、敘述與四語系詳解為本題庫自行推導，非整題引用。主流程已跑機械校驗、全庫去重與跨代理去重。"
+      }
+    },
+    {
+      "id": "combinatorics_grade12_foundation_050",
+      "topic": "combinatorics",
+      "subtopic": "stat_grade12_binomial_coefficient_symmetry_solve",
+      "tags": [
+        "c:binomial",
+        "m:reverse"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "reviewStatus": "ok",
+      "prompt": {
+        "zh-Hant": "已知正整數 k 滿足 C(12, k) = C(12, k + 2)，且 k 不等於 k + 2（也就是這是有意義的兩個不同位置）。求 k 的值。",
+        "zh-Hans": "已知正整数 k 满足 C(12, k) = C(12, k + 2)，且 k 不等于 k + 2（也就是这是有意义的两个不同位置）。求 k 的值。",
+        "en": "A positive integer k satisfies C(12, k) = C(12, k + 2), where k and k + 2 are genuinely two different positions. Find the value of k.",
+        "ja": "正の整数kが C(12, k) = C(12, k + 2) を満たしており、kとk+2は実際に異なる2つの位置であるとする。kの値を求めよ。"
+      },
+      "answer": {
+        "zh-Hant": "k 的值是 5。",
+        "zh-Hans": "k 的值是 5。",
+        "en": "The value of k is 5.",
+        "ja": "kの値は5である。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "組合數有一個對稱性質：C(12, a) = C(12, b) 只會發生在 a = b，或者 a 與 b 剛好互補（也就是 a + b = 12），這是因為 C(n, r) = C(n, n − r)。",
+          "題目已經明說 k 不等於 k + 2，所以只能用互補的情形：k 加上 (k + 2) 必須等於 12。",
+          "列出方程式：k + (k + 2) = 12，也就是 2k + 2 = 12。",
+          "解方程式：2k = 10，所以 k = 5。",
+          "驗算一下：C(12, 5) = 792，而 k + 2 = 7，C(12, 7) 因為 12 − 7 = 5，根據對稱性一定也等於 C(12, 5) = 792，兩邊確實相等，符合題目條件；很多人會忘記對稱性只有「相等」或「互補」兩種情形，誤以為 C(12,k)=C(12,k+2) 一定要逐一代入 k=0,1,2,… 試出答案，其實直接用互補關係列方程式會快得多。"
+        ],
+        "zh-Hans": [
+          "组合数有一个对称性质：C(12, a) = C(12, b) 只会发生在 a = b，或者 a 与 b 刚好互补（也就是 a + b = 12），这是因为 C(n, r) = C(n, n − r)。",
+          "题目已经明说 k 不等于 k + 2，所以只能用互补的情形：k 加上 (k + 2) 必须等于 12。",
+          "列出方程式：k + (k + 2) = 12，也就是 2k + 2 = 12。",
+          "解方程式：2k = 10，所以 k = 5。",
+          "验算一下：C(12, 5) = 792，而 k + 2 = 7，C(12, 7) 因为 12 − 7 = 5，根据对称性一定也等于 C(12, 5) = 792，两边确实相等，符合题目条件；很多人会忘记对称性只有“相等”或“互补”两种情形，误以为 C(12,k)=C(12,k+2) 一定要逐一代入 k=0,1,2,… 试出答案，其实直接用互补关系列方程式会快得多。"
+        ],
+        "en": [
+          "Combinations have a symmetry property: C(12, a) = C(12, b) can only happen when a = b, or when a and b are complementary (that is, a + b = 12), because C(n, r) = C(n, n − r).",
+          "The problem states k is not equal to k + 2, so the only possibility left is the complementary case: k plus (k + 2) must equal 12.",
+          "Set up the equation: k + (k + 2) = 12, which simplifies to 2k + 2 = 12.",
+          "Solving: 2k = 10, so k = 5.",
+          "Check: C(12, 5) = 792, and since k + 2 = 7 gives 12 − 7 = 5, symmetry guarantees C(12, 7) also equals 792 — both sides match, so this satisfies the condition. A common mistake is forgetting that equality only happens for equal or complementary indices, and trying every value of k = 0, 1, 2, ... by brute force instead of writing the complementary equation directly, which is much faster."
+        ],
+        "ja": [
+          "組み合わせの数には対称性という性質がある：C(12, a) = C(12, b) となるのは a = b のとき、または a と b が互いに補完的（つまり a + b = 12）であるときに限られる。これは C(n, r) = C(n, n − r) が成り立つためである。",
+          "問題文には k と k + 2 が異なることが明記されているので、残る可能性は補完的な場合のみである：k と (k + 2) の和が12に等しくなければならない。",
+          "方程式を立てる：k + (k + 2) = 12、つまり 2k + 2 = 12。",
+          "これを解くと、2k = 10なので、k = 5である。",
+          "確認すると、C(12, 5) = 792であり、k + 2 = 7で 12 − 7 = 5なので、対称性より C(12, 7) も792に等しく、両辺は確かに一致し、条件を満たす。よくある間違いは、等しくなるのは指数が等しいか補完的である場合の2通りしかないことを忘れ、k = 0, 1, 2, …と1つずつ代入して試そうとすることである。補完関係を使って方程式を直接立てる方がはるかに速い。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "5"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "agent-drafted-nrich-2026-09-03",
+        "notes": "題型參考 参考组合数对称性质 C(n,r)=C(n,n-r) 的标准定义（AoPS Wiki「Pascal's Triangle and its patterns and properties」中列出的性质之一），改写为由等式反推未知指标 k 的方程题，由背景起草代理於 2026-09-03 實際查閱 NRICH 等公開題組後改寫（本輪開放附圖）；數值、敘述與四語系詳解為本題庫自行推導，非整題引用。主流程已跑機械校驗、全庫去重與跨代理去重。"
+      }
     }
   ]
 }

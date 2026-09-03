@@ -4313,6 +4313,81 @@
         "reference": "agent-drafted-nrich-2026-09-03",
         "notes": "題型參考 NRICH「Probability Short Problems - Age 14-16」中的 Boy or Girl?、Two Girls 兩題（男女機率的條件推理），情境與問法自行改寫，由背景起草代理於 2026-09-03 實際查閱 NRICH 等公開題組後改寫；數值、敘述與四語系詳解為本題庫自行推導，非整題引用。主流程已跑機械校驗、全庫去重與跨代理去重。"
       }
+    },
+    {
+      "id": "combinatorics_grade10_foundation_048",
+      "topic": "combinatorics",
+      "subtopic": "stat_grade10_expected_sum_of_squared_dice",
+      "tags": [
+        "c:expectation",
+        "m:direct"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "reviewStatus": "ok",
+      "prompt": {
+        "zh-Hant": "小杰玩一個遊戲：每次擲一顆公正的六面骰子一次，得分定義為「骰出的點數的平方」（例如骰出 3 點就得 9 分）。他打算連續玩 6 次，每次互相獨立。求這 6 次得分總和的期望值。",
+        "zh-Hans": "小杰玩一个游戏：每次掷一颗公正的六面骰子一次，得分定义为“骰出的点数的平方”（例如骰出 3 点就得 9 分）。他打算连续玩 6 次，每次互相独立。求这 6 次得分总和的期望值。",
+        "en": "Jay plays a game: each round he rolls one fair six-sided die once, and his score is the square of the number rolled (rolling a 3 gives 9 points). He plans to play 6 independent rounds. Find the expected value of the total score over these 6 rounds.",
+        "ja": "ジェイはあるゲームをする：毎回、公正な6面サイコロを1回振り、出た目の2乗を得点とする（例えば3の目が出たら9点）。彼はこれを独立に6回行う予定である。この6回の得点の合計の期望値を求めよ。"
+      },
+      "answer": {
+        "zh-Hant": "這 6 次得分總和的期望值是 91。",
+        "zh-Hans": "这 6 次得分总和的期望值是 91。",
+        "en": "The expected value of the total score over the 6 rounds is 91.",
+        "ja": "この6回の得点の合計の期望値は91である。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "先求「單次」得分的期望值：骰出 1 到 6 點的機率都是 1/6，得分分別是 1、4、9、16、25、36（都是點數的平方）。",
+          "單次期望值 = (1+4+9+16+25+36) 除以 6 = 91 除以 6。",
+          "根據期望值的可加性，「6 次總分的期望值」就等於「6 次單次期望值的總和」，也就是把單次期望值乘以 6 次，不需要管每次骰出的結果是否相同。",
+          "6 次總分期望值 = 6 × (91 除以 6) = 91。",
+          "常見的錯誤是誤以為「總分期望值」要用「(6 次點數和的期望值) 的平方」來算，也就是先求 6 次點數和的期望值（6×3.5=21）再平方（441），這是錯的：平方是先對每一次的點數做的操作，不能等到全部加總之後才做，一定要「先平方、再求期望值、再加總」。"
+        ],
+        "zh-Hans": [
+          "先求“单次”得分的期望值：骰出 1 到 6 点的机率都是 1/6，得分分别是 1、4、9、16、25、36（都是点数的平方）。",
+          "单次期望值 = (1+4+9+16+25+36) 除以 6 = 91 除以 6。",
+          "根据期望值的可加性，“6 次总分的期望值”就等于“6 次单次期望值的总和”，也就是把单次期望值乘以 6 次，不需要管每次骰出的结果是否相同。",
+          "6 次总分期望值 = 6 × (91 除以 6) = 91。",
+          "常见的错误是误以为“总分期望值”要用“(6 次点数和的期望值) 的平方”来算，也就是先求 6 次点数和的期望值（6×3.5=21）再平方（441），这是错的：平方是先对每一次的点数做的操作，不能等到全部加总之后才做，一定要“先平方、再求期望值、再加总”。"
+        ],
+        "en": [
+          "First find the expected score of a single round: each face 1 through 6 has probability 1/6, giving scores 1, 4, 9, 16, 25, 36 (the squares of the faces).",
+          "The single-round expectation = (1+4+9+16+25+36) divided by 6 = 91 divided by 6.",
+          "By the additivity of expectation, the expected total over 6 rounds is just 6 times the single-round expectation — the rounds don't need to give the same result, and you can add their expectations directly.",
+          "Total expectation over 6 rounds = 6 × (91 divided by 6) = 91.",
+          "A common mistake is squaring the wrong thing: computing the expected sum of the 6 die faces first (6 × 3.5 = 21) and then squaring it (441). That's wrong, because squaring has to happen on each individual roll before taking the expectation — you cannot square the total after adding everything up; it must be 'square first, then take expectation, then add.'"
+        ],
+        "ja": [
+          "まず1回あたりの得点の期待値を求める：1から6の目はどれも確率1/6で、それぞれの得点は1、4、9、16、25、36（目の2乗）である。",
+          "1回あたりの期待値 = (1+4+9+16+25+36) ÷ 6 = 91 ÷ 6。",
+          "期待値の加法性より、6回の合計得点の期待値は、1回あたりの期待値の6倍にすぎない。各回の結果が同じである必要はなく、期待値をそのまま6回分足し合わせればよい。",
+          "6回分の合計期待値 = 6 × (91 ÷ 6) = 91。",
+          "よくある間違いは、まず6回の出た目の合計の期待値（6×3.5=21）を求めてから、それを2乗して441とすることである。これは誤りで、2乗は各回の目に対して先に行う操作であり、すべてを合計してから2乗してはいけない。「先に2乗し、それから期待値を取り、最後に合計する」という順序を守る必要がある。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "91"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "agent-drafted-nrich-2026-09-03",
+        "notes": "題型參考 参考 NRICH Probability Short Problems 中以骰子期望值为主题的题型，改写为「点数平方」的得分规则并延伸到多回合总分期望值，凸显平方须在期望值之前进行的常见错误，由背景起草代理於 2026-09-03 實際查閱 NRICH 等公開題組後改寫（本輪開放附圖）；數值、敘述與四語系詳解為本題庫自行推導，非整題引用。主流程已跑機械校驗、全庫去重與跨代理去重。"
+      }
     }
   ]
 }
