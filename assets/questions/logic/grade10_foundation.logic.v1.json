@@ -3563,6 +3563,81 @@
         "maxDigits": 1
       },
       "id": "logic_grade10_foundation_040"
+    },
+    {
+      "id": "logic_grade10_foundation_041",
+      "topic": "logic",
+      "subtopic": "shortest_job_first_total_time",
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "reviewStatus": "ok",
+      "prompt": {
+        "zh-Hant": "有 5 個人要輪流使用同一台影印機，各自需要 3、5、8、10、12 分鐘。同一時間只有一個人能使用，其他人必須排隊等待，等待中的人不做別的事。把每個人的「等待時間加上自己使用的時間」全部加起來，適當安排使用順序可以讓這個總和最小。這個最小的總和是幾分鐘？",
+        "zh-Hans": "有 5 个人要轮流使用同一台复印机，各自需要 3、5、8、10、12 分钟。同一时间只有一个人能使用，其他人必须排队等待，等待中的人不做别的事。把每个人的「等待时间加上自己使用的时间」全部加起来，适当安排使用顺序可以让这个总和最小。这个最小的总和是几分钟？",
+        "en": "Five people must take turns on one photocopier, needing 3, 5, 8, 10 and 12 minutes each. Only one person can use it at a time and the others wait, doing nothing else. Adding up, for every person, the waiting time plus their own copying time gives a total that depends on the order chosen. What is the smallest possible total, in minutes?",
+        "ja": "5 人が 1 台のコピー機を順番に使います。必要な時間はそれぞれ 3、5、8、10、12 分です。同時に使えるのは 1 人だけで、ほかの人は待ち、待っている間は何もしません。各人の「待ち時間 + 自分の使用時間」をすべて合計すると、その値は順番によって変わります。この合計の最小値は何分ですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 91 分鐘。",
+        "zh-Hans": "答案是 91 分钟。",
+        "en": "The answer is 91 minutes.",
+        "ja": "答えは 91 分です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "每個人的「等待 + 使用」其實就是他**離開影印機的時刻**（從一開始算起）。所以要最小化的是五個人完成時刻的總和。",
+          "觀察排在第 1 位的人：他的時間會被算進**所有 5 個人**的完成時刻裡。排第 2 位的人的時間會被算進後面 4 個人裡，依此類推。",
+          "所以總和 = 第 1 位的時間 × 5 + 第 2 位 × 4 + 第 3 位 × 3 + 第 4 位 × 2 + 第 5 位 × 1。**時間短的人應該排前面，才能讓大的倍數乘到小的數。**",
+          "依時間由小到大排：3、5、8、10、12。總和 = 3 × 5 + 5 × 4 + 8 × 3 + 10 × 2 + 12 × 1。",
+          "計算：15 + 20 + 24 + 20 + 12 = 91 分鐘。",
+          "也可以直接列出完成時刻驗算：3、8、16、26、38，相加得 3 + 8 + 16 + 26 + 38 = 91 ✓ 若反過來由長排到短，總和會是 12 × 5 + 10 × 4 + 8 × 3 + 5 × 2 + 3 = 137，明顯差很多。"
+        ],
+        "zh-Hans": [
+          "每个人的「等待 + 使用」其实就是他**离开复印机的时刻**（从一开始算起）。所以要最小化的是五个人完成时刻的总和。",
+          "观察排在第 1 位的人：他的时间会被算进**所有 5 个人**的完成时刻里。排第 2 位的人的时间会被算进后面 4 个人里，依此类推。",
+          "所以总和 = 第 1 位的时间 × 5 + 第 2 位 × 4 + 第 3 位 × 3 + 第 4 位 × 2 + 第 5 位 × 1。**时间短的人应该排前面，才能让大的倍数乘到小的数。**",
+          "依时间由小到大排：3、5、8、10、12。总和 = 3 × 5 + 5 × 4 + 8 × 3 + 10 × 2 + 12 × 1。",
+          "计算：15 + 20 + 24 + 20 + 12 = 91 分钟。",
+          "也可以直接列出完成时刻验算：3、8、16、26、38，相加得 3 + 8 + 16 + 26 + 38 = 91 ✓ 若反过来由长排到短，总和会是 12 × 5 + 10 × 4 + 8 × 3 + 5 × 2 + 3 = 137，明显差很多。"
+        ],
+        "en": [
+          "For each person, waiting time plus their own time is simply the moment they finish, measured from the start. So we are minimising the sum of the five finishing times.",
+          "Look at whoever goes first: their time is counted in all five finishing times. The second person's time is counted in four of them, and so on.",
+          "So the total is the first person's time × 5 plus the second's × 4, the third's × 3, the fourth's × 2 and the fifth's × 1. The shortest jobs should go first, so that the large multipliers fall on the small times.",
+          "Ordering from shortest to longest gives 3, 5, 8, 10, 12, and the total is 3 × 5 + 5 × 4 + 8 × 3 + 10 × 2 + 12 × 1.",
+          "That is 15 + 20 + 24 + 20 + 12 = 91 minutes.",
+          "You can also check by listing the finishing times 3, 8, 16, 26, 38, which add to 3 + 8 + 16 + 26 + 38 = 91. Going longest-first instead gives 12 × 5 + 10 × 4 + 8 × 3 + 5 × 2 + 3 = 137, far worse."
+        ],
+        "ja": [
+          "各人の「待ち時間 + 使用時間」は、始めからその人が終わる**時刻**そのものです。つまり 5 人の終了時刻の合計を最小にする問題です。",
+          "1 番目の人に注目すると、その時間は**5 人全員**の終了時刻に含まれます。2 番目の人の時間は 4 人分に、以下同様です。",
+          "したがって合計は 1 番目 × 5 + 2 番目 × 4 + 3 番目 × 3 + 4 番目 × 2 + 5 番目 × 1 です。**大きい係数が小さい時間にかかるよう、短い人を先にします。**",
+          "短い順に 3、5、8、10、12 と並べると、合計は 3 × 5 + 5 × 4 + 8 × 3 + 10 × 2 + 12 × 1 です。",
+          "計算すると 15 + 20 + 24 + 20 + 12 = 91 分です。",
+          "終了時刻 3、8、16、26、38 を並べて足しても 3 + 8 + 16 + 26 + 38 = 91 になります。逆に長い順にすると 12 × 5 + 10 × 4 + 8 × 3 + 5 × 2 + 3 = 137 となり、はるかに大きくなります。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "91"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "cryptarithm-planting-scheduling-gap-2026-09-03",
+        "notes": "題型參考公開論壇與題庫網站常見的數字謎、植樹（間隔）問題與最佳排程題型；數值、情境與四語系詳解為本題庫自行改寫推導，非整題引用。"
+      }
     }
   ]
 }
