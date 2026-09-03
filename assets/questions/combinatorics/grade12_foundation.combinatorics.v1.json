@@ -3905,6 +3905,85 @@
         "reference": "stats-probability-gap-2026-09-03",
         "notes": "題型參考公開數學教學網站的統計短題與幾何機率／條件機率常見題型；數值、敘述與詳解為本題庫自行改寫推導，非整題引用。"
       }
+    },
+    {
+      "id": "combinatorics_grade12_foundation_043",
+      "topic": "combinatorics",
+      "subtopic": "three_set_inclusion_exclusion",
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "reviewStatus": "ok",
+      "prompt": {
+        "zh-Hant": "在 1 到 1000 的整數之中，不能被 2、3、5 這三個數之中任何一個整除的數，一共有幾個？",
+        "zh-Hans": "在 1 到 1000 的整数之中，不能被 2、3、5 这三个数之中任何一个整除的数，一共有几个？",
+        "en": "How many of the integers from 1 to 1000 are divisible by none of 2, 3 and 5?",
+        "ja": "1 から 1000 までの整数のうち、2、3、5 のいずれでも割り切れないものは何個ありますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 266 個。",
+        "zh-Hans": "答案是 266 个。",
+        "en": "The answer is 266.",
+        "ja": "答えは 266 個です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "要數「三個條件都不滿足」的個數，直接數很難。**改成用全部個數減去「至少滿足一個條件」的個數**，也就是排容原理。",
+          "先算單獨的倍數個數：2 的倍數有 1000 ÷ 2 = 500 個，3 的倍數有 333 個（1000 ÷ 3 取整數部分），5 的倍數有 200 個。",
+          "**直接相加會重複計算**：例如 6 同時是 2 和 3 的倍數，被算了兩次。所以要扣掉兩兩共同的倍數。",
+          "兩兩共同的倍數要看**最小公倍數**：2 和 3 → 6 的倍數 166 個；2 和 5 → 10 的倍數 100 個；3 和 5 → 15 的倍數 66 個。",
+          "扣完之後，同時是三者倍數的數（30 的倍數，共 33 個）被加了 3 次又扣了 3 次，變成 0 次，所以要再加回來一次。",
+          "至少被一個整除的個數 = (500 + 333 + 200) − (166 + 100 + 66) + 33 = 1033 − 332 + 33 = 734 個。",
+          "所求 = 1000 − 734 = 266 個。（也可以用比例估算檢查：1000 × 1/2 × 2/3 × 4/5 = 266.7，和 266 相符 ✓）"
+        ],
+        "zh-Hans": [
+          "要数「三个条件都不满足」的个数，直接数很难。**改成用全部个数减去「至少满足一个条件」的个数**，也就是排容原理。",
+          "先算单独的倍数个数：2 的倍数有 1000 ÷ 2 = 500 个，3 的倍数有 333 个（1000 ÷ 3 取整数部分），5 的倍数有 200 个。",
+          "**直接相加会重复计算**：例如 6 同时是 2 和 3 的倍数，被算了两次。所以要扣掉两两共同的倍数。",
+          "两两共同的倍数要看**最小公倍数**：2 和 3 → 6 的倍数 166 个；2 和 5 → 10 的倍数 100 个；3 和 5 → 15 的倍数 66 个。",
+          "扣完之后，同时是三者倍数的数（30 的倍数，共 33 个）被加了 3 次又扣了 3 次，变成 0 次，所以要再加回来一次。",
+          "至少被一个整除的个数 = (500 + 333 + 200) − (166 + 100 + 66) + 33 = 1033 − 332 + 33 = 734 个。",
+          "所求 = 1000 − 734 = 266 个。（也可以用比例估算检查：1000 × 1/2 × 2/3 × 4/5 = 266.7，和 266 相符 ✓）"
+        ],
+        "en": [
+          "Counting the numbers satisfying none of the three conditions directly is awkward. Instead subtract from the total the count satisfying at least one, using inclusion and exclusion.",
+          "First count each on its own: multiples of 2 number 1000 ÷ 2 = 500, multiples of 3 number 333 taking the whole part of 1000 ÷ 3, and multiples of 5 number 200.",
+          "Simply adding these overcounts: 6, for instance, is a multiple of both 2 and 3 and gets counted twice. So subtract the numbers counted in each pair.",
+          "Each pair's common multiples are the multiples of their least common multiple: 6 gives 166, 10 gives 100, and 15 gives 66.",
+          "After those subtractions, numbers divisible by all three, the 33 multiples of 30, have been added three times and subtracted three times, leaving them counted zero times, so add them back once.",
+          "So the count divisible by at least one is (500 + 333 + 200) − (166 + 100 + 66) + 33 = 1033 − 332 + 33 = 734.",
+          "The answer is 1000 − 734 = 266. As a sanity check, 1000 × 1/2 × 2/3 × 4/5 = 266.7, which matches."
+        ],
+        "ja": [
+          "「3 つの条件をどれも満たさない」個数を直接数えるのは難しいので、**全体から「少なくとも 1 つを満たす」個数を引きます**。これが包除原理です。",
+          "まず単独の個数を数えます。2 の倍数は 1000 ÷ 2 = 500 個、3 の倍数は 1000 ÷ 3 の整数部分で 333 個、5 の倍数は 200 個です。",
+          "**そのまま足すと重複します。** たとえば 6 は 2 の倍数でも 3 の倍数でもあり、2 回数えられます。そこで 2 つずつの共通部分を引きます。",
+          "2 つずつの共通部分は**最小公倍数**の倍数です。6 の倍数が 166 個、10 の倍数が 100 個、15 の倍数が 66 個です。",
+          "この段階で 3 つすべての倍数（30 の倍数、33 個）は 3 回足して 3 回引いたので 0 回になっており、1 回足し戻します。",
+          "少なくとも 1 つで割り切れる個数は (500 + 333 + 200) − (166 + 100 + 66) + 33 = 1033 − 332 + 33 = 734 個です。",
+          "求める個数は 1000 − 734 = 266 個です。目安として 1000 × 1/2 × 2/3 × 4/5 = 266.7 となり、一致します。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "266"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "readmitted-after-2026-09-03-relaxation",
+        "notes": "題型參考公開題庫網站的三集合排容題；數值與四語系詳解為本題庫自行推導。相似度 0.42 撞 number_theory_grade7_040，經人工複判為誤判：僅共用「在 1 到 N 的整數之中……一共有幾個」的問句模板，該題為質數與個位數字的篩選，本題為三集合排容原理，數學上無關。另與 number_theory_grade10_032（0.41）雖同用排容，但該題除數 4、9、16、25 互相整除、真正的推理點是只有質數平方有效，本題三個除數兩兩互質為標準三集合排容，推理核心不同（2026-09-03 放寬後收錄）。"
+      }
     }
   ]
 }

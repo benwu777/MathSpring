@@ -3638,6 +3638,103 @@
         "reference": "cryptarithm-planting-scheduling-gap-2026-09-03",
         "notes": "題型參考公開論壇與題庫網站常見的數字謎、植樹（間隔）問題與最佳排程題型；數值、情境與四語系詳解為本題庫自行改寫推導，非整題引用。"
       }
+    },
+    {
+      "id": "logic_grade10_foundation_042",
+      "topic": "logic",
+      "subtopic": "coin_flip_parity_impossibility",
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "reviewStatus": "ok",
+      "prompt": {
+        "zh-Hant": "桌上排著 2019 枚硬幣，一開始全部都是正面朝上。每一步操作必須同時翻轉恰好 2 枚硬幣（任意兩枚都可以，不必相鄰）。經過任意多步之後，有沒有可能讓 2019 枚硬幣全部變成反面朝上？",
+        "zh-Hans": "桌上排着 2019 枚硬币，一开始全部都是正面朝上。每一步操作必须同时翻转恰好 2 枚硬币（任意两枚都可以，不必相邻）。经过任意多步之后，有没有可能让 2019 枚硬币全部变成反面朝上？",
+        "en": "There are 2019 coins on a table, all showing heads. Each move flips exactly 2 coins, any two, not necessarily adjacent. After any number of moves, is it possible for all 2019 coins to show tails?",
+        "ja": "机の上に 2019 枚の硬貨があり、はじめはすべて表を向いています。1 回の操作ではちょうど 2 枚（隣り合っていなくてもよい）を同時に裏返します。何回操作しても、2019 枚すべてを裏にすることはできますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是不可能，因為正面朝上的枚數的奇偶性永遠不變。",
+        "zh-Hans": "答案是不可能，因为正面朝上的枚数的奇偶性永远不变。",
+        "en": "The answer is no: the parity of the number of heads never changes.",
+        "ja": "答えは不可能です。表の枚数の偶奇は決して変わらないからです。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "這種「有沒有可能」的題目，如果答案是不可能，就不能靠試幾次來證明——**試不出來不等於做不到**。要找一個**不變量**。",
+          "盯住「**正面朝上的枚數**」這個量，看每一步操作會讓它怎麼變。每一步翻 2 枚，這 2 枚有三種可能：都是正面、都是反面、一正一反。",
+          "兩枚都是正面 → 都變反面，正面數減少 2；兩枚都是反面 → 都變正面，正面數增加 2；一正一反 → 互換，正面數不變。",
+          "三種情形之中，正面數的變化只可能是 −2、+2 或 0，**全都是偶數**。所以**正面數的奇偶性永遠不會改變**：一開始是奇數，就永遠是奇數。",
+          "一開始正面數是 2019，是**奇數**；目標狀態全部反面，正面數是 0，是**偶數**。奇偶性不同，所以無論操作幾次都到不了。",
+          "所以答案是不可能。**注意這與「硬幣總數是奇數」不是同一個理由**——若允許每次翻 3 枚，2019 枚就翻得成（每次翻 3 枚會改變奇偶性）。真正的關鍵是「每次翻偶數枚」。"
+        ],
+        "zh-Hans": [
+          "这种「有没有可能」的题目，如果答案是不可能，就不能靠试几次来证明——**试不出来不等于做不到**。要找一个**不变量**。",
+          "盯住「**正面朝上的枚数**」这个量，看每一步操作会让它怎么变。每一步翻 2 枚，这 2 枚有三种可能：都是正面、都是反面、一正一反。",
+          "两枚都是正面 → 都变反面，正面数减少 2；两枚都是反面 → 都变正面，正面数增加 2；一正一反 → 互换，正面数不变。",
+          "三种情形之中，正面数的变化只可能是 −2、+2 或 0，**全都是偶数**。所以**正面数的奇偶性永远不会改变**：一开始是奇数，就永远是奇数。",
+          "一开始正面数是 2019，是**奇数**；目标状态全部反面，正面数是 0，是**偶数**。奇偶性不同，所以无论操作几次都到不了。",
+          "所以答案是不可能。**注意这与「硬币总数是奇数」不是同一个理由**——若允许每次翻 3 枚，2019 枚就翻得成（每次翻 3 枚会改变奇偶性）。真正的关键是「每次翻偶数枚」。"
+        ],
+        "en": [
+          "For a question asking whether something is possible, failing to find a way proves nothing. To show it is impossible you need an invariant.",
+          "Watch the number of coins showing heads. Each move flips 2 coins, and those 2 are either both heads, both tails, or one of each.",
+          "Two heads become two tails, so the count drops by 2; two tails become two heads, so it rises by 2; one of each swaps over, leaving the count unchanged.",
+          "In all three cases the count changes by −2, +2 or 0, all even numbers. So the parity of the number of heads never changes: if it starts odd it stays odd forever.",
+          "At the start the count is 2019, which is odd; the target has 0 heads, which is even. The parities differ, so no number of moves can get there.",
+          "So it is impossible. Note this is not the same as saying the total is odd: if each move flipped 3 coins it could be done, since flipping 3 changes the parity. What matters is that each move flips an even number of coins."
+        ],
+        "ja": [
+          "「できるかどうか」を問う問題では、何回か試して失敗しても**できないことの証明にはなりません**。**不変量**を見つける必要があります。",
+          "「**表を向いている枚数**」に注目し、1 回の操作でどう変わるかを見ます。裏返す 2 枚は、両方が表、両方が裏、1 枚ずつ、の 3 通りです。",
+          "両方表なら 2 枚とも裏になり枚数は 2 減り、両方裏なら 2 増え、1 枚ずつなら入れ替わって変わりません。",
+          "3 通りとも変化は −2、+2、0 で**すべて偶数**です。したがって**表の枚数の偶奇は決して変わりません**。はじめが奇数なら、ずっと奇数のままです。",
+          "はじめの枚数は 2019 で**奇数**、目標は表 0 枚で**偶数**です。偶奇が異なるので、何回操作しても到達できません。",
+          "したがって不可能です。**これは「硬貨の総数が奇数だから」という理由とは別物**です。1 回に 3 枚裏返せるなら 2019 枚でも達成できます（3 枚では偶奇が変わるため）。要点は「1 回に偶数枚裏返す」ことです。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "multiple_choice",
+      "options": {
+        "A": {
+          "zh-Hant": "可以，只要操作的次數夠多就辦得到",
+          "zh-Hans": "可以，只要操作的次数够多就办得到",
+          "en": "Yes, it can be done with enough moves",
+          "ja": "はい、十分な回数を操作すればできます"
+        },
+        "B": {
+          "zh-Hant": "不可以，因為正面朝上的枚數的奇偶性永遠不會改變",
+          "zh-Hans": "不可以，因为正面朝上的枚数的奇偶性永远不会改变",
+          "en": "No, because the parity of the number of heads never changes",
+          "ja": "いいえ、表の枚数の偶奇が決して変わらないからです"
+        },
+        "C": {
+          "zh-Hant": "不可以，因為硬幣的總數 2019 是奇數，無法兩兩配對",
+          "zh-Hans": "不可以，因为硬币的总数 2019 是奇数，无法两两配对",
+          "en": "No, because 2019 is odd and the coins cannot be paired up",
+          "ja": "いいえ、2019 は奇数で 2 枚ずつに分けられないからです"
+        },
+        "D": {
+          "zh-Hant": "可以，而且恰好需要 2019 次操作",
+          "zh-Hans": "可以，而且恰好需要 2019 次操作",
+          "en": "Yes, and it takes exactly 2019 moves",
+          "ja": "はい、ちょうど 2019 回の操作でできます"
+        }
+      },
+      "correctAnswer": {
+        "type": "choice",
+        "value": "B"
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "readmitted-after-2026-09-03-relaxation",
+        "notes": "題型參考公開論壇常見的奇偶不變量題；數值、敘述與四語系詳解為本題庫自行推導。相似度 0.44 撞 logic_grade9_020，經人工複判為誤判：該題限定翻相鄰兩枚並求最少次數（計數題），本題可任翻兩枚並問可能性（不可能性論證），所求量型態不同（2026-09-03 放寬後收錄）。"
+      }
     }
   ]
 }
