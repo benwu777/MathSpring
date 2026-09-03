@@ -4757,6 +4757,256 @@
         "reference": "nrich-mult-div-age7-11-2026-09-03",
         "notes": "題型參考 NRICH（劍橋 Millennium Mathematics Project）公開的「Multiplication and Division: Age 7-11」題組中的「Zias and Zepts」，2026-09-03 查閱。數值、敘述與四語系詳解為本題庫自行改寫推導，非整題引用。"
       }
+    },
+    {
+      "id": "logic_grade6_foundation_058",
+      "topic": "logic",
+      "subtopic": "machine_take_five_return_two",
+      "tags": [
+        "c:modular",
+        "c:basic_counting",
+        "m:invariant",
+        "m:estimate_bound"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade6",
+      "challengeTier": "foundation",
+      "reviewStatus": "ok",
+      "prompt": {
+        "zh-Hant": "一台機器裡裝著 50 顆彈珠。每按一次按鈕，機器會從裡面取走 5 顆彈珠，再放進 2 顆彈珠。當機器裡的彈珠少於 5 顆時，按鈕就按不動了。小安一直想讓機器裡剛好剩下 4 顆彈珠，卻怎麼按都做不到。請問按到不能再按時，機器裡最少可能剩下幾顆彈珠？",
+        "zh-Hans": "一台机器里装着 50 颗弹珠。每按一次按钮，机器会从里面取走 5 颗弹珠，再放进 2 颗弹珠。当机器里的弹珠少于 5 颗时，按钮就按不动了。小安一直想让机器里刚好剩下 4 颗弹珠，却怎么按都做不到。请问按到不能再按时，机器里最少可能剩下几颗弹珠？",
+        "en": "A machine contains 50 marbles. Each press of its button takes 5 marbles out of the machine and puts 2 marbles back in. Once fewer than 5 marbles remain, the button no longer works. An keeps trying to leave exactly 4 marbles in the machine but never manages it. When the button can no longer be pressed, what is the smallest number of marbles that can be left inside?",
+        "ja": "ある機械の中にビー玉が 50 個入っています。ボタンを 1 回押すたびに、機械はビー玉を 5 個取り出し、2 個入れ直します。中のビー玉が 5 個未満になるとボタンは押せなくなります。アンは中をちょうど 4 個にしようとしましたが、どうしてもできません。ボタンが押せなくなったとき、中に残るビー玉は最も少なくて何個ですか。"
+      },
+      "answer": {
+        "zh-Hant": "機器裡最少可能剩下 2 顆彈珠。",
+        "zh-Hans": "机器里最少可能剩下 2 颗弹珠。",
+        "en": "At fewest, 2 marbles can be left inside.",
+        "ja": "最も少なくて 2 個のビー玉が残ります。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "每按一次按鈕，彈珠會少 5 顆又多 2 顆，也就是每次淨減少 5 − 2 = 3 顆。這個「每次都減 3」是整台機器唯一會變的規律。",
+          "所以按 k 次之後，機器裡的彈珠數一定是 50 − 3k。換句話說，彈珠數除以 3 的餘數永遠不會改變，這就是不變量。",
+          "50 ÷ 3 = 16 餘 2，所以任何時刻機器裡的彈珠數除以 3 都餘 2。可能出現的數是 50、47、44、…、8、5、2。",
+          "4 除以 3 餘 1，餘數對不上，所以「剛好剩 4 顆」永遠做不到，這正是小安失敗的原因。",
+          "按鈕要能按，機器裡至少要有 5 顆。上面那串數字中，5 還可以再按一次，變成 2；而 2 顆已經少於 5 顆，按不動了。",
+          "所以按到不能再按時，剩下的彈珠是 2 顆。",
+          "常見錯誤是只盯著「取走 5 顆」而忘了同時放回 2 顆，於是以為每次減 5。做這種反覆操作的題目，先算出「每次淨變化量」，再看初始值除以它的餘數，就能一口氣判斷哪些狀態永遠到不了。"
+        ],
+        "zh-Hans": [
+          "每按一次按钮，弹珠会少 5 颗又多 2 颗，也就是每次净减少 5 − 2 = 3 颗。这个「每次都减 3」是整台机器唯一会变的规律。",
+          "所以按 k 次之后，机器里的弹珠数一定是 50 − 3k。换句话说，弹珠数除以 3 的余数永远不会改变，这就是不变量。",
+          "50 ÷ 3 = 16 余 2，所以任何时刻机器里的弹珠数除以 3 都余 2。可能出现的数是 50、47、44、…、8、5、2。",
+          "4 除以 3 余 1，余数对不上，所以「刚好剩 4 颗」永远做不到，这正是小安失败的原因。",
+          "按钮要能按，机器里至少要有 5 颗。上面那串数字中，5 还可以再按一次，变成 2；而 2 颗已经少于 5 颗，按不动了。",
+          "所以按到不能再按时，剩下的弹珠是 2 颗。",
+          "常见错误是只盯着「取走 5 颗」而忘了同时放回 2 颗，于是以为每次减 5。做这种反复操作的题目，先算出「每次净变化量」，再看初始值除以它的余数，就能一口气判断哪些状态永远到不了。"
+        ],
+        "en": [
+          "Each press removes 5 marbles and adds 2, so the net change is a loss of 5 - 2 = 3 marbles. That constant drop of 3 is the only way the count ever changes.",
+          "So after k presses the machine holds exactly 50 - 3k marbles. In other words the remainder of the count on division by 3 never changes: that is the invariant.",
+          "Since 50 divided by 3 is 16 remainder 2, the count always leaves remainder 2 on division by 3. The reachable counts are 50, 47, 44, ..., 8, 5, 2.",
+          "But 4 leaves remainder 1 on division by 3, so the remainders do not match and leaving exactly 4 marbles is impossible — which is exactly why An keeps failing.",
+          "The button needs at least 5 marbles inside. In that list, 5 still allows one more press, dropping to 2; and 2 is below 5, so the button is stuck.",
+          "So when the button can no longer be pressed, 2 marbles remain.",
+          "A common error is to focus on 'takes 5 out' and forget the 2 that go back, treating the drop as 5 each time. For any repeated-operation problem, work out the net change per step, then look at the remainder of the starting value on division by it — that instantly rules out every unreachable state."
+        ],
+        "ja": [
+          "ボタンを 1 回押すとビー玉は 5 個減って 2 個増えるので、正味では毎回 5 − 2 = 3 個減ります。この「毎回 3 個減る」だけが個数の変わり方です。",
+          "したがって k 回押したあとの個数は必ず 50 − 3k です。つまり個数を 3 で割った余りは決して変わりません。これが不変量です。",
+          "50 ÷ 3 = 16 余り 2 なので、個数はいつでも 3 で割ると 2 余ります。現れうる個数は 50、47、44、…、8、5、2 です。",
+          "一方 4 は 3 で割ると 1 余るので余りが合わず、ちょうど 4 個にすることは不可能です。これがアンが失敗する理由です。",
+          "ボタンを押すには中に 5 個以上必要です。上の並びのうち 5 はもう 1 回押せて 2 になり、2 は 5 未満なのでもう押せません。",
+          "したがってボタンが押せなくなったとき残るのは 2 個です。",
+          "「5 個取り出す」ばかりに注目して 2 個戻ることを忘れ、毎回 5 個減ると考えるのがよくある誤りです。くり返し操作の問題では、まず 1 回あたりの正味の変化量を求め、初期値をそれで割った余りを見れば、到達できない状態を一度に判定できます。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "2"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "agent-drafted-nrich-2026-09-03",
+        "notes": "題型參考 NRICH age 7-11「The Deca Tree」與「Square Subtraction」（每一步固定變化量與 generic proof）；機器規則與數值自行設計，由背景起草代理於 2026-09-03 實際查閱 NRICH 等公開題組後改寫；數值、敘述與四語系詳解為本題庫自行推導，非整題引用。主流程已跑機械校驗、全庫去重與跨代理去重。"
+      }
+    },
+    {
+      "id": "logic_grade6_foundation_059",
+      "topic": "logic",
+      "subtopic": "difference_multiple_of_seven",
+      "tags": [
+        "c:modular",
+        "c:basic_counting",
+        "m:pigeonhole"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade6",
+      "challengeTier": "foundation",
+      "reviewStatus": "ok",
+      "prompt": {
+        "zh-Hant": "小安要從 1 到 100 這一百個整數中選出一些數。他希望「不論選到哪些數，其中一定有兩個數的差是 7 的倍數」。最少要選幾個數，才能保證這件事一定發生？",
+        "zh-Hans": "小安要从 1 到 100 这一百个整数中选出一些数。他希望「不论选到哪些数，其中一定有两个数的差是 7 的倍数」。最少要选几个数，才能保证这件事一定发生？",
+        "en": "An chooses some numbers from the hundred whole numbers 1 to 100. He wants to be certain that, whichever numbers he happens to choose, two of them differ by a multiple of 7. What is the smallest number of numbers he must choose to guarantee this?",
+        "ja": "アンは 1 から 100 までの 100 個の整数からいくつかを選びます。どの数を選んだとしても、その中の 2 つの数の差が必ず 7 の倍数になるようにしたいと考えています。それを保証するには最も少なくて何個選べばよいですか。"
+      },
+      "answer": {
+        "zh-Hant": "最少要選 8 個數。",
+        "zh-Hans": "最少要选 8 个数。",
+        "en": "He must choose at least 8 numbers.",
+        "ja": "最も少なくて 8 個選べばよいです。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "先把「兩數的差是 7 的倍數」翻譯成餘數的語言：兩個數相減能被 7 整除，等於這兩個數除以 7 的餘數相同。",
+          "把 1 到 100 依照「除以 7 的餘數」分成 7 個抽屜：餘 0、餘 1、餘 2、餘 3、餘 4、餘 5、餘 6。",
+          "如果只選 7 個數，有可能每個抽屜各拿 1 個，例如 7、1、2、3、4、5、6，這 7 個數的餘數兩兩不同，任兩個的差都不是 7 的倍數，所以 7 個不夠。",
+          "只要選 8 個數，因為抽屜只有 7 個，一定有兩個數落在同一個抽屜，也就是餘數相同，它們的差就是 7 的倍數。",
+          "所以最少要選 8 個數。",
+          "常見錯誤是被「1 到 100」這個大範圍嚇到，去想 100 這個數字。其實真正決定答案的是抽屜的個數 7，跟總共有幾個數幾乎無關（只要每個餘數都至少有一個數存在就行）。這個「用餘數當抽屜」的手法，也可以用來處理『差是 k 的倍數』的任何版本。"
+        ],
+        "zh-Hans": [
+          "先把「两数的差是 7 的倍数」翻译成余数的语言：两个数相减能被 7 整除，等于这两个数除以 7 的余数相同。",
+          "把 1 到 100 按照「除以 7 的余数」分成 7 个抽屉：余 0、余 1、余 2、余 3、余 4、余 5、余 6。",
+          "如果只选 7 个数，有可能每个抽屉各拿 1 个，例如 7、1、2、3、4、5、6，这 7 个数的余数两两不同，任两个的差都不是 7 的倍数，所以 7 个不够。",
+          "只要选 8 个数，因为抽屉只有 7 个，一定有两个数落在同一个抽屉，也就是余数相同，它们的差就是 7 的倍数。",
+          "所以最少要选 8 个数。",
+          "常见错误是被「1 到 100」这个大范围吓到，去想 100 这个数字。其实真正决定答案的是抽屉的个数 7，跟总共有几个数几乎无关（只要每个余数都至少有一个数存在就行）。这个「用余数当抽屉」的手法，也可以用来处理『差是 k 的倍数』的任何版本。"
+        ],
+        "en": [
+          "First translate 'the difference is a multiple of 7' into remainder language: a difference divisible by 7 means the two numbers leave the same remainder when divided by 7.",
+          "Sort 1 to 100 into 7 pigeonholes by their remainder on division by 7: remainder 0, 1, 2, 3, 4, 5 and 6.",
+          "Choosing only 7 numbers may put one in each pigeonhole, for example 7, 1, 2, 3, 4, 5, 6. These have all-different remainders, so no two differ by a multiple of 7, and 7 numbers are not enough.",
+          "Choosing 8 numbers forces two of them into the same pigeonhole, because there are only 7 pigeonholes. Those two share a remainder, so their difference is a multiple of 7.",
+          "Hence the smallest number that guarantees it is 8.",
+          "The common error is to be distracted by the large range and reason about the number 100. What really fixes the answer is the number of pigeonholes, 7; the size of the range barely matters, as long as every remainder actually occurs. Using remainders as pigeonholes handles 'difference is a multiple of k' for any k."
+        ],
+        "ja": [
+          "まず「2 数の差が 7 の倍数」を余りの言葉に直します。差が 7 で割り切れることは、2 数を 7 で割った余りが等しいことと同じです。",
+          "1 から 100 を 7 で割った余りによって、余り 0、1、2、3、4、5、6 の 7 つの巣に分けます。",
+          "7 個しか選ばない場合、各巣から 1 個ずつ、たとえば 7、1、2、3、4、5、6 と選べます。余りがすべて異なるのでどの 2 数の差も 7 の倍数にならず、7 個では足りません。",
+          "8 個選べば巣は 7 つしかないので、必ず 2 個が同じ巣に入ります。その 2 数は余りが等しいので、差は 7 の倍数になります。",
+          "したがって必要な最小の個数は 8 個です。",
+          "1 から 100 という広い範囲に気を取られて 100 という数を考えてしまうのがよくある誤りです。答えを決めているのは巣の個数 7 であり、範囲の大きさはほとんど関係ありません（各余りが少なくとも 1 つ現れれば十分です）。余りを巣として使うこの方法は「差が k の倍数」のどの場合にも使えます。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "8"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "agent-drafted-nrich-2026-09-03",
+        "notes": "題型參考 NRICH Primary Curriculum Map（age 7-11）「Remainders」與「Multiples Grid」（用餘數把整數分類）；保證式問法自行設計，由背景起草代理於 2026-09-03 實際查閱 NRICH 等公開題組後改寫；數值、敘述與四語系詳解為本題庫自行推導，非整題引用。主流程已跑機械校驗、全庫去重與跨代理去重。 相似度 0.40 撞 logic_grade10_foundation_010，兩題抽屜分類方式不同（餘數類 vs 倍數鏈）。"
+      }
+    },
+    {
+      "id": "logic_grade6_foundation_060",
+      "topic": "logic",
+      "subtopic": "seven_countries_equal_partners",
+      "tags": [
+        "c:graph_theory",
+        "c:basic_counting",
+        "m:contradiction",
+        "m:invariant"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade6",
+      "challengeTier": "foundation",
+      "reviewStatus": "ok",
+      "prompt": {
+        "zh-Hant": "有 7 個國家，任何兩個國家之間要嘛簽了友好條約，要嘛沒有簽（同兩國之間最多只簽一份）。有人希望安排成「每個國家都恰好和 k 個國家簽了友好條約」。在 k = 1、2、3、4、5、6 這六個值之中，有幾個 k 是做得到的？",
+        "zh-Hans": "有 7 个国家，任何两个国家之间要么签了友好条约，要么没有签（同两国之间最多只签一份）。有人希望安排成「每个国家都恰好和 k 个国家签了友好条约」。在 k = 1、2、3、4、5、6 这六个值之中，有几个 k 是做得到的？",
+        "en": "There are 7 countries. Between any two countries there either is a friendship treaty or there is not (at most one treaty per pair). Someone wants an arrangement in which every country has a treaty with exactly k other countries. Of the six values k = 1, 2, 3, 4, 5, 6, how many are actually possible?",
+        "ja": "7 つの国があり、どの 2 国の間にも友好条約があるかないかのどちらかです（同じ 2 国の間の条約は最大 1 つ）。「どの国もちょうど k か国と条約を結んでいる」という状態を作りたいとします。k = 1、2、3、4、5、6 の 6 つの値のうち、実際に作れるものはいくつありますか。"
+      },
+      "answer": {
+        "zh-Hant": "做得到的 k 有 3 個。",
+        "zh-Hans": "做得到的 k 有 3 个。",
+        "en": "3 of the values of k are possible.",
+        "ja": "作れる k は 3 個です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "把每一份條約想成一條連接兩個國家的線。每條線會替它兩端的國家各貢獻 1 次「簽約次數」。",
+          "所以把 7 個國家的簽約次數全部加起來，一定等於條約份數的 2 倍，必定是偶數——這是重要的不變量。",
+          "若每個國家都恰好簽 k 份，總和是 7 × k。要讓 7k 是偶數，因為 7 是奇數，k 就必須是偶數。",
+          "所以 k = 1、3、5 都不可能：例如 k = 3 時總和是 21，是奇數，無法等於條約份數的 2 倍，出現矛盾。",
+          "剩下 k = 2、4、6 要確認真的做得到。k = 6 時每國都和其餘 6 國簽約，共 21 份，可行。",
+          "k = 2 時把 7 國排成一個圓圈，每國只和左右鄰居簽約，共 7 份，可行。k = 4 時把圓圈上「左右各 2 個鄰居」都簽約，每國正好 4 份，共 14 份，可行。",
+          "所以可行的 k 有 2、4、6 共 3 個。常見錯誤是只做到「k 必須是偶數」就結束，沒有補上構造；反證只能刪掉不可能的情形，還要真的舉出例子才算完整。這個「總次數必為偶數」的規律，對任何『每兩個成員之間有沒有關係』的問題都成立。"
+        ],
+        "zh-Hans": [
+          "把每一份条约想成一条连接两个国家的线。每条线会替它两端的国家各贡献 1 次「签约次数」。",
+          "所以把 7 个国家的签约次数全部加起来，一定等于条约份数的 2 倍，必定是偶数——这是重要的不变量。",
+          "若每个国家都恰好签 k 份，总和是 7 × k。要让 7k 是偶数，因为 7 是奇数，k 就必须是偶数。",
+          "所以 k = 1、3、5 都不可能：例如 k = 3 时总和是 21，是奇数，无法等于条约份数的 2 倍，出现矛盾。",
+          "剩下 k = 2、4、6 要确认真的做得到。k = 6 时每国都和其余 6 国签约，共 21 份，可行。",
+          "k = 2 时把 7 国排成一个圆圈，每国只和左右邻居签约，共 7 份，可行。k = 4 时把圆圈上「左右各 2 个邻居」都签约，每国正好 4 份，共 14 份，可行。",
+          "所以可行的 k 有 2、4、6 共 3 个。常见错误是只做到「k 必须是偶数」就结束，没有补上构造；反证只能删掉不可能的情形，还要真的举出例子才算完整。这个「总次数必为偶数」的规律，对任何『每两个成员之间有没有关系』的问题都成立。"
+        ],
+        "en": [
+          "Think of each treaty as a line joining two countries. Each line adds 1 to the treaty count of each of its two endpoints.",
+          "So adding up the treaty counts of all 7 countries gives exactly twice the number of treaties, which must be even. That is the key invariant.",
+          "If every country has exactly k treaties the total is 7 x k. For 7k to be even, and since 7 is odd, k itself must be even.",
+          "So k = 1, 3 and 5 are impossible: for k = 3 the total would be 21, an odd number, which cannot be twice a whole number of treaties — a contradiction.",
+          "That leaves k = 2, 4 and 6 to be checked by construction. For k = 6 every country signs with all 6 others, giving 21 treaties, which works.",
+          "For k = 2 arrange the 7 countries in a circle and let each sign only with its two neighbours, giving 7 treaties. For k = 4 let each sign with the 2 neighbours on each side, giving each country exactly 4 treaties and 14 in total.",
+          "So the possible values are 2, 4 and 6, that is 3 values. The common error is to stop at 'k must be even' without supplying constructions; an impossibility argument only removes cases, and examples are still needed. The rule that the total of all counts is even holds for any problem about whether each pair of members is linked."
+        ],
+        "ja": [
+          "条約 1 つを、2 つの国を結ぶ線と考えます。線 1 本はその両端の国の「条約の本数」をそれぞれ 1 ずつ増やします。",
+          "したがって 7 か国の条約本数をすべて足すと、条約の総数のちょうど 2 倍になり、必ず偶数です。これが重要な不変量です。",
+          "どの国もちょうど k 本なら合計は 7 × k です。7 は奇数なので、7k が偶数になるには k が偶数でなければなりません。",
+          "よって k = 1、3、5 は不可能です。たとえば k = 3 なら合計は 21 で奇数となり、条約数の 2 倍にはなれず矛盾します。",
+          "残る k = 2、4、6 は実際に作れるか確かめます。k = 6 は各国が他の 6 か国すべてと結べばよく、条約は 21 本で可能です。",
+          "k = 2 は 7 か国を円状に並べ、隣どうしだけ結べば条約は 7 本で可能です。k = 4 は円上で左右 2 つずつの隣と結べば各国ちょうど 4 本、合計 14 本で可能です。",
+          "したがって可能な k は 2、4、6 の 3 個です。「k は偶数」で止めて構成を示さないのがよくある誤りです。不可能性の議論は場合を除くだけで、実例を挙げてはじめて完成します。合計が必ず偶数になるこの規則は、2 者間に関係があるかどうかを扱うどんな問題にも当てはまります。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "3"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "agent-drafted-nrich-2026-09-03",
+        "notes": "題型參考 NRICH age 7-11「Odd Times Even」（奇偶論證）與 Primary Curriculum Map「Cycling Squares」（成員兩兩相連的結構）；情境與問法自行設計，由背景起草代理於 2026-09-03 實際查閱 NRICH 等公開題組後改寫；數值、敘述與四語系詳解為本題庫自行推導，非整題引用。主流程已跑機械校驗、全庫去重與跨代理去重。"
+      }
     }
   ]
 }

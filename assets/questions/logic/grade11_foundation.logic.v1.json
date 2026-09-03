@@ -4159,6 +4159,165 @@
         "reference": "agent-drafted-nrich-2026-09-03",
         "notes": "題型參考 NRICH 'Nim-Like Games' 與 'Got It'（維持關鍵位置的必勝策略）改寫為棋盤上往上／往右移動到角落的雙堆型遊戲，由背景起草代理於 2026-09-03 實際查閱 NRICH 等公開題組後改寫；數值、敘述與四語系詳解為本題庫自行推導，非整題引用。主流程已跑機械校驗與跨代理去重。"
       }
+    },
+    {
+      "id": "logic_grade11_foundation_045",
+      "topic": "logic",
+      "subtopic": "divisor_subtraction_parity_game",
+      "tags": [
+        "c:game_theory",
+        "c:factor_multiple",
+        "m:invariant"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade11",
+      "challengeTier": "foundation",
+      "reviewStatus": "ok",
+      "prompt": {
+        "zh-Hant": "黑板上寫著一個正整數 N。甲、乙兩人輪流操作，由甲先手：輪到的人要選一個 N 的因數 d，且 1 ≤ d < N，然後把黑板上的數改寫成 N − d。當黑板上的數變成 1 時，輪到的人已經沒有合法的 d 可以選，這個人就輸。在 N = 2、3、4、⋯、20 這 19 個起始值之中，先手甲有必勝策略的有幾個？",
+        "zh-Hans": "黑板上写着一个正整数 N。甲、乙两人轮流操作，由甲先手：轮到的人要选一个 N 的因数 d，且 1 ≤ d < N，然后把黑板上的数改写成 N − d。当黑板上的数变成 1 时，轮到的人已经没有合法的 d 可以选，这个人就输。在 N = 2、3、4、⋯、20 这 19 个起始值之中，先手甲有必胜策略的有几个？",
+        "en": "A positive integer N is written on a blackboard. Two players move alternately, the first player going first: on your turn you pick a divisor d of N with 1 ≤ d < N and replace N by N − d. When the number on the board becomes 1 there is no legal d left, and the player to move loses. Among the 19 starting values N = 2, 3, 4, …, 20, for how many does the first player have a winning strategy?",
+        "ja": "黒板に正の整数 N が書かれています。二人が交互に操作し、先手から始めます。自分の番では 1 ≤ d < N を満たす N の約数 d を選び、黒板の数を N − d に書き換えます。黒板の数が 1 になると選べる d がなくなり、その手番の人が負けです。N = 2、3、4、⋯、20 という 19 個の初期値のうち、先手に必勝法があるものはいくつありますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 10 個。",
+        "zh-Hans": "答案是 10 个。",
+        "en": "The answer is 10.",
+        "ja": "答えは 10 個です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "先確認終點：黑板上是 1 時，1 沒有比自己小的正因數，所以輪到的人動不了就輸。也就是「面對 1」是必敗局面。",
+          "觀察奇偶。若 N 是奇數，它的每一個因數都是奇數，於是 N − d = 奇 − 奇 = 偶。也就是說，拿到奇數的人只能把偶數交給對手。",
+          "若 N 是偶數，d = 1 一定是合法的因數，可以把 N − 1（奇數）交給對手。",
+          "把兩點合起來：拿到偶數的人永遠能把奇數丟給對手，而拿到奇數的人只能把偶數丟回來。數字每回合至少減 1，遊戲不可能無限進行，所以一定有人面對 1。而 1 是奇數，所以輸的必定是那個一路拿到奇數的人。",
+          "結論是：N 為偶數時先手必勝，N 為奇數時先手必敗。2 到 20 之間的偶數有 2、4、6、8、10、12、14、16、18、20，共 10 個。",
+          "常見錯誤是把 2 到 20 每個數的勝負硬算一遍；一旦看出「數的奇偶性是這個遊戲的不變量」，就完全不必逐一驗算，直接得到 10。這個想法也告訴我們：起始值再大也不用重算，只要看它是奇是偶。"
+        ],
+        "zh-Hans": [
+          "先确认终点：黑板上是 1 时，1 没有比自己小的正因数，所以轮到的人动不了就输。也就是「面对 1」是必败局面。",
+          "观察奇偶。若 N 是奇数，它的每一个因数都是奇数，于是 N − d = 奇 − 奇 = 偶。也就是说，拿到奇数的人只能把偶数交给对手。",
+          "若 N 是偶数，d = 1 一定是合法的因数，可以把 N − 1（奇数）交给对手。",
+          "把两点合起来：拿到偶数的人永远能把奇数丢给对手，而拿到奇数的人只能把偶数丢回来。数字每回合至少减 1，游戏不可能无限进行，所以一定有人面对 1。而 1 是奇数，所以输的必定是那个一路拿到奇数的人。",
+          "结论是：N 为偶数时先手必胜，N 为奇数时先手必败。2 到 20 之间的偶数有 2、4、6、8、10、12、14、16、18、20，共 10 个。",
+          "常见错误是把 2 到 20 每个数的胜负硬算一遍；一旦看出「数的奇偶性是这个游戏的不变量」，就完全不必逐一验算，直接得到 10。这个想法也告诉我们：起始值再大也不用重算，只要看它是奇是偶。"
+        ],
+        "en": [
+          "First pin down the end: when the board shows 1 there is no positive divisor smaller than 1, so the player to move is stuck and loses. Facing 1 is a losing position.",
+          "Look at parity. If N is odd then every divisor of N is odd, so N − d = odd − odd = even. A player who receives an odd number can only hand an even number to the opponent.",
+          "If N is even then d = 1 is always a legal divisor, so the player can hand N − 1, an odd number, to the opponent.",
+          "Combine the two: a player holding an even number can always pass an odd number across, while a player holding an odd number can only pass an even number back. The number drops by at least 1 each turn, so the game cannot go on forever and somebody must face 1. Since 1 is odd, the loser is always the player who keeps receiving odd numbers.",
+          "So the first player wins exactly when N is even. The even values between 2 and 20 are 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, which is 10 values.",
+          "A common mistake is to grind through the win/loss status of every N from 2 to 20. Once you see that the parity of the number is the invariant of this game, no case checking is needed and the answer 10 falls out at once. The same idea shows that no matter how large the starting number is, you only need to know whether it is odd or even."
+        ],
+        "ja": [
+          "まず終点を押さえます。黒板が 1 のとき、1 より小さい正の約数はないので手番の人は動けず負けます。つまり 1 に直面する側が負けです。",
+          "偶奇に注目します。N が奇数なら約数はすべて奇数なので N − d = 奇 − 奇 = 偶となります。つまり奇数を受け取った人は偶数しか相手に渡せません。",
+          "N が偶数なら d = 1 が必ず使えるので、N − 1（奇数）を相手に渡せます。",
+          "両者を合わせると、偶数を持つ人はつねに奇数を相手に渡せ、奇数を持つ人は偶数しか返せません。数は毎回少なくとも 1 減るので無限には続かず、誰かが必ず 1 に直面します。1 は奇数なので、負けるのはずっと奇数を受け取り続けた側です。",
+          "したがって N が偶数のとき先手必勝です。2 から 20 までの偶数は 2、4、6、8、10、12、14、16、18、20 の 10 個です。",
+          "よくある誤りは 2 から 20 までを 1 つずつ勝敗判定することです。「数の偶奇がこのゲームの不変量である」と見抜けば場合分けは不要で、答えの 10 がすぐ出ます。同じ考えから、初期値がどれだけ大きくても偶数か奇数かだけ見ればよいと分かります。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "10"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "agent-drafted-nrich-2026-09-03",
+        "notes": "題型參考 LeetCode 1025「Divisor Game」與 GeeksforGeeks「Optimal Strategy for the Divisor game」所描述的因數減法遊戲（奇偶不變量），問法改為統計 2 到 20 之中先手必勝的起始值個數，由背景起草代理於 2026-09-03 實際查閱 NRICH 等公開題組後改寫；數值、敘述與四語系詳解為本題庫自行推導，非整題引用。主流程已跑機械校驗、全庫去重與跨代理去重。"
+      }
+    },
+    {
+      "id": "logic_grade11_foundation_046",
+      "topic": "logic",
+      "subtopic": "three_utilities_min_crossings",
+      "tags": [
+        "c:graph_theory",
+        "m:contradiction"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade11",
+      "challengeTier": "foundation",
+      "reviewStatus": "ok",
+      "prompt": {
+        "zh-Hant": "平面上有 3 間房子與 3 座供應站（自來水、電力、瓦斯）。每一間房子都要各拉一條管線連到這 3 座供應站，因此一共有 9 條管線。管線可以任意彎曲，但不可以穿過房子或供應站。若把整張圖畫在一張平坦的紙上，求管線之間最少會出現幾個交叉點。",
+        "zh-Hans": "平面上有 3 间房子与 3 座供应站（自来水、电力、瓦斯）。每一间房子都要各拉一条管线连到这 3 座供应站，因此一共有 9 条管线。管线可以任意弯曲，但不可以穿过房子或供应站。若把整张图画在一张平坦的纸上，求管线之间最少会出现几个交叉点。",
+        "en": "In the plane there are 3 houses and 3 utility stations (water, electricity, gas). Each house must be joined to each of the 3 stations by a pipe, so there are 9 pipes in all. Pipes may bend freely but may not pass through a house or a station. If the whole picture is drawn on a flat sheet of paper, what is the least possible number of crossing points between pipes?",
+        "ja": "平面上に 3 軒の家と 3 つの供給施設（水道・電気・ガス）があります。各家はそれぞれ 3 つの施設すべてに 1 本ずつ配管をつなぐので、配管は全部で 9 本です。配管は自由に曲げられますが、家や施設の上を通ることはできません。全体を 1 枚の平らな紙に描くとき、配管どうしの交差点は最少で何個になりますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 1 個交叉點。",
+        "zh-Hans": "答案是 1 个交叉点。",
+        "en": "The answer is 1 crossing point.",
+        "ja": "答えは 1 個です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "先問「有沒有可能一個交叉都沒有」。如果可以，這張圖就是平面圖，9 條管線會把紙面切成若干個區域，可以用歐拉公式「頂點數 − 邊數 + 面數 = 2」檢查。",
+          "這裡頂點數 V = 3 + 3 = 6，邊數 E = 9，所以面數 F = 2 − V + E = 2 − 6 + 9 = 5。",
+          "關鍵觀察：管線只連「房子—供應站」，不會連房子與房子、也不會連站與站。所以沿著任何一個區域的邊界繞一圈，房子和供應站一定交替出現，繞完至少要走過 4 條邊。",
+          "每條邊最多被兩個區域共用，所以 2E ≥ 4F，也就是 2 × 9 = 18 ≥ 4 × 5 = 20，這是矛盾的。因此不可能零交叉，交叉點至少要 1 個。",
+          "另一方面 1 個交叉點確實做得到：先把 3 間房子與其中 2 座供應站無交叉地接好（這 6 條管線可以畫成一個環狀，把 3 間房子與 2 座站交替排在圈上），最後一座供應站放進其中一塊區域再接出 3 條線，只需要讓其中 1 條越過既有的 1 條管線一次。",
+          "上界與下界夾在一起，最少交叉點是 1。常見錯誤是自己畫幾次畫不出來就宣稱「畫不出來」；「畫不出來」只是下界的一半，還要另外構造出真的只交叉 1 次的畫法，才算完整解完。"
+        ],
+        "zh-Hans": [
+          "先问「有没有可能一个交叉都没有」。如果可以，这张图就是平面图，9 条管线会把纸面切成若干个区域，可以用欧拉公式「顶点数 − 边数 + 面数 = 2」检查。",
+          "这里顶点数 V = 3 + 3 = 6，边数 E = 9，所以面数 F = 2 − V + E = 2 − 6 + 9 = 5。",
+          "关键观察：管线只连「房子—供应站」，不会连房子与房子、也不会连站与站。所以沿着任何一个区域的边界绕一圈，房子和供应站一定交替出现，绕完至少要走过 4 条边。",
+          "每条边最多被两个区域共用，所以 2E ≥ 4F，也就是 2 × 9 = 18 ≥ 4 × 5 = 20，这是矛盾的。因此不可能零交叉，交叉点至少要 1 个。",
+          "另一方面 1 个交叉点确实做得到：先把 3 间房子与其中 2 座供应站无交叉地接好（这 6 条管线可以画成一个环状，把 3 间房子与 2 座站交替排在圈上），最后一座供应站放进其中一块区域再接出 3 条线，只需要让其中 1 条越过既有的 1 条管线一次。",
+          "上界与下界夹在一起，最少交叉点是 1。常见错误是自己画几次画不出来就宣称「画不出来」；「画不出来」只是下界的一半，还要另外构造出真的只交叉 1 次的画法，才算完整解完。"
+        ],
+        "en": [
+          "First ask whether zero crossings is possible. If it were, the picture would be a planar graph and the 9 pipes would cut the paper into regions, which we can test with Euler's formula: vertices − edges + faces = 2.",
+          "Here the number of vertices is V = 3 + 3 = 6 and the number of edges is E = 9, so the number of faces would be F = 2 − V + E = 2 − 6 + 9 = 5.",
+          "Key observation: pipes only join a house to a station, never house to house or station to station. So walking once around the border of any region, houses and stations must alternate, which takes at least 4 edges.",
+          "Every edge borders at most two regions, so 2E ≥ 4F, that is 2 × 9 = 18 ≥ 4 × 5 = 20, a contradiction. Zero crossings is impossible, so at least 1 crossing is needed.",
+          "On the other hand 1 crossing really is achievable: first join the 3 houses to 2 of the stations with no crossing (those 6 pipes can be drawn as a ring alternating 3 houses and 2 stations), then place the last station inside one of the regions and run its 3 pipes out, letting just 1 of them cross 1 existing pipe once.",
+          "Squeezing the lower and upper bounds together, the minimum number of crossings is 1. A common mistake is to try a few drawings, fail, and declare it impossible. Failing to draw it is only half the argument: you still have to construct a drawing with exactly 1 crossing to finish the problem."
+        ],
+        "ja": [
+          "まず「交差 0 が可能か」を問います。可能ならこの図は平面グラフで、9 本の配管が紙面をいくつかの領域に分けるので、オイラーの公式「頂点数 − 辺数 + 面数 = 2」で確かめられます。",
+          "ここで頂点数は V = 3 + 3 = 6、辺数は E = 9 なので、面数は F = 2 − V + E = 2 − 6 + 9 = 5 になるはずです。",
+          "重要な観察は、配管が「家と施設」しか結ばず、家どうしや施設どうしを結ばないことです。したがってどの領域の境界を一周しても家と施設が必ず交互に現れ、一周するのに少なくとも 4 本の辺が必要です。",
+          "各辺は高々 2 つの領域に接するので 2E ≥ 4F、つまり 2 × 9 = 18 ≥ 4 × 5 = 20 となり矛盾します。よって交差 0 は不可能で、交差は少なくとも 1 個必要です。",
+          "一方で交差 1 個は実際に実現できます。まず 3 軒の家と 2 つの施設を交差なしにつなぎ（この 6 本は家 3 つと施設 2 つが交互に並ぶ輪として描けます）、最後の施設をどれかの領域内に置いて 3 本を引き出し、そのうち 1 本だけ既存の 1 本を 1 回またげばよいのです。",
+          "下界と上界が一致するので最少の交差点は 1 個です。よくある誤りは、何度か描いてできないからといって「描けない」で終わることです。描けないことは議論の半分にすぎず、交差 1 個の描き方を実際に構成して初めて解答が完成します。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "1"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "agent-drafted-nrich-2026-09-03",
+        "notes": "題型參考 Cut-the-Knot「3 Utilities Puzzle: Water, Gas, Electricity」與 Wikipedia「Three utilities problem」（K3,3 非平面、交叉數為 1），問法改為求最少交叉點數，由背景起草代理於 2026-09-03 實際查閱 NRICH 等公開題組後改寫；數值、敘述與四語系詳解為本題庫自行推導，非整題引用。主流程已跑機械校驗、全庫去重與跨代理去重。"
+      }
     }
   ]
 }

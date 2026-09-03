@@ -4335,6 +4335,269 @@
         "reference": "agent-drafted-nrich-2026-09-03",
         "notes": "題型參考 NRICH Probability Short Problems, 'Swapping Sweets'（交換後回到原物的機率）與 Probability - Advanced 的 'Bet You a Million' 期望值題，改寫為信封配對期望值，由背景起草代理於 2026-09-03 實際查閱 NRICH 等公開題組後改寫；數值、敘述與四語系詳解為本題庫自行推導，非整題引用。主流程已跑機械校驗與跨代理去重。"
       }
+    },
+    {
+      "id": "combinatorics_grade12_foundation_046",
+      "topic": "combinatorics",
+      "subtopic": "expected_triangles_random_graph",
+      "tags": [
+        "c:expectation",
+        "c:graph_theory",
+        "c:probability",
+        "m:direct"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "reviewStatus": "ok",
+      "prompt": {
+        "zh-Hant": "平面上有 10 個互相標號的點。對每一對點，各自獨立地以 1/2 的機率在它們之間連一條線段，以 1/2 的機率不連。若三個點兩兩之間都有線段，就說它們構成一個三角形。求這個圖中三角形個數的期望值。",
+        "zh-Hans": "平面上有 10 个互相标号的点。对每一对点，各自独立地以 1/2 的概率在它们之间连一条线段，以 1/2 的概率不连。若三个点两两之间都有线段，就说它们构成一个三角形。求这个图中三角形个数的期望值。",
+        "en": "There are 10 labelled points in the plane. For each pair of points, independently with probability 1/2 a segment is drawn between them, and with probability 1/2 it is not. Three points are said to form a triangle if all three segments among them are present. Find the expected number of triangles in this graph.",
+        "ja": "平面上に互いに区別できる 10 個の点があります。各点の組に対し、独立に確率 1/2 で線分を引き、確率 1/2 で引きません。3 点のどの 2 点間にも線分があるとき、その 3 点は三角形をなすといいます。この図における三角形の個数の期待値を求めなさい。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 15。",
+        "zh-Hans": "答案是 15。",
+        "en": "The answer is 15.",
+        "ja": "答えは 15 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "先數三點組：從 10 個點取 3 個的方式有 C(10,3) = (10 × 9 × 8) ÷ 6 = 120 組。",
+          "對每一組三點定義一個指示變數：這三點兩兩相連就記 1，否則記 0。圖中三角形的個數正好是這 120 個指示變數的總和。",
+          "固定某三個點，它們之間有 3 對點。三條線段都被連上的機率是 (1/2)³ = 1/8，這就是該指示變數的期望值。",
+          "期望值可以逐項相加。要注意不同的三點組會共用線段（例如兩組共用一條邊），彼此並不獨立，但期望值的可加性不需要獨立性。",
+          "所以期望值 = 120 × 1/8 = 15。",
+          "常見錯誤是先去求「圖中恰有 k 個三角形的機率」再加權平均，那個分佈非常難算；只要把要數的量寫成指示變數之和，就能完全繞過分佈。答案是 15。"
+        ],
+        "zh-Hans": [
+          "先数三点组：从 10 个点取 3 个的方式有 C(10,3) = (10 × 9 × 8) ÷ 6 = 120 组。",
+          "对每一组三点定义一个指示变量：这三点两两相连就记 1，否则记 0。图中三角形的个数正好是这 120 个指示变量的总和。",
+          "固定某三个点，它们之间有 3 对点。三条线段都被连上的概率是 (1/2)³ = 1/8，这就是该指示变量的期望值。",
+          "期望值可以逐项相加。要注意不同的三点组会共用线段（例如两组共用一条边），彼此并不独立，但期望值的可加性不需要独立性。",
+          "所以期望值 = 120 × 1/8 = 15。",
+          "常见错误是先去求「图中恰有 k 个三角形的概率」再加权平均，那个分布非常难算；只要把要数的量写成指示变量之和，就能完全绕过分布。答案是 15。"
+        ],
+        "en": [
+          "First count the triples: choosing 3 points from 10 can be done in C(10,3) = (10 × 9 × 8) ÷ 6 = 120 ways.",
+          "For each triple define an indicator: 1 if all three segments among those points are present, 0 otherwise. The number of triangles is exactly the sum of these 120 indicators.",
+          "Fix one triple. It involves 3 pairs of points, and all three segments are present with probability (1/2)³ = 1/8, which is the expected value of that indicator.",
+          "Expectations add term by term. Note that different triples share segments (two triples can share an edge), so they are not independent, but additivity of expectation does not require independence.",
+          "Hence the expected value is 120 × 1/8 = 15.",
+          "A common mistake is to first find the probability of exactly k triangles and then average; that distribution is extremely hard to compute. Writing the quantity as a sum of indicators bypasses the distribution altogether. The answer is 15."
+        ],
+        "ja": [
+          "まず 3 点の組を数えます。10 点から 3 点を選ぶ方法は C(10,3) = (10 × 9 × 8) ÷ 6 = 120 通りです。",
+          "各組に指示変数を定めます。その 3 点のどの 2 点間にも線分があれば 1、そうでなければ 0 です。三角形の個数はこの 120 個の指示変数の和にちょうど等しくなります。",
+          "1 つの組を固定すると、その中に点の組は 3 つあります。3 本の線分がすべて引かれている確率は (1/2)³ = 1/8 で、これがその指示変数の期待値です。",
+          "期待値は項ごとに足せます。異なる 3 点組は線分を共有する（辺を 1 本共有する組がある）ので独立ではありませんが、期待値の加法性に独立性は不要です。",
+          "よって期待値は 120 × 1/8 = 15 です。",
+          "よくある誤りは「三角形がちょうど k 個ある確率」を求めてから加重平均しようとすることですが、その分布は非常に扱いにくいものです。数えたい量を指示変数の和に書けば分布を完全に迂回できます。答えは 15 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "15"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "agent-drafted-nrich-2026-09-03",
+        "notes": "題型參考 Brilliant「Linearity of Expectation」與 Evan Chen / Andrew Critch「Unexpected Expectations」講義中的隨機圖三角形期望值例題，點數改為 10 使答案為整數，由背景起草代理於 2026-09-03 實際查閱 NRICH 等公開題組後改寫；數值、敘述與四語系詳解為本題庫自行推導，非整題引用。主流程已跑機械校驗、全庫去重與跨代理去重。"
+      }
+    },
+    {
+      "id": "combinatorics_grade12_foundation_047",
+      "topic": "combinatorics",
+      "subtopic": "de_bruijn_ring_count_ones",
+      "tags": [
+        "c:permutation_combination",
+        "c:basic_counting",
+        "m:bijection"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "reviewStatus": "ok",
+      "prompt": {
+        "zh-Hant": "有一個由 0 與 1 排成的環，環上一共 8 個數字。從環上每一個位置出發，沿著同一個方向連續讀 3 個數字（讀到尾端就繞回開頭），一共可以讀出 8 段長度為 3 的字串。已知這 8 段字串兩兩不同，因此恰好把 000、001、010、011、100、101、110、111 這 8 種字串各出現一次。求這個環上「1」的個數。",
+        "zh-Hans": "有一个由 0 与 1 排成的环，环上一共 8 个数字。从环上每一个位置出发，沿着同一个方向连续读 3 个数字（读到尾端就绕回开头），一共可以读出 8 段长度为 3 的字串。已知这 8 段字串两两不同，因此恰好把 000、001、010、011、100、101、110、111 这 8 种字串各出现一次。求这个环上「1」的个数。",
+        "en": "Eight digits, each 0 or 1, are arranged in a ring. Starting from each of the 8 positions and reading 3 consecutive digits in the same direction (wrapping around at the end) gives 8 strings of length 3. These 8 strings are known to be pairwise different, so they are exactly 000, 001, 010, 011, 100, 101, 110, 111, each occurring once. How many 1s are on the ring?",
+        "ja": "0 と 1 からなる 8 個の数字が輪に並んでいます。輪の各位置から同じ向きに連続する 3 個を読む（末尾では先頭に戻る）と、長さ 3 の文字列が 8 個得られます。この 8 個は互いに異なることが分かっており、したがって 000、001、010、011、100、101、110、111 の 8 種類がちょうど 1 回ずつ現れます。この輪の上に「1」は何個ありますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 4 個。",
+        "zh-Hans": "答案是 4 个。",
+        "en": "The answer is 4.",
+        "ja": "答えは 4 個です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "先算這 8 段字串裡總共出現幾個 1：000 有 0 個；001、010、100 各有 1 個；011、101、110 各有 2 個；111 有 3 個。合計 0 + 1 + 1 + 1 + 2 + 2 + 2 + 3 = 12 個。",
+          "換另一個角度數同一件事。環上任何一個位置，會被「以它自己為起點」「以它前一個位置為起點」「以它前兩個位置為起點」這 3 段字串各用到一次，所以每個位置恰好被數 3 次。",
+          "因此 8 段字串裡 1 的總數 = 3 ×（環上 1 的個數）。",
+          "由前兩步得 3 ×（環上 1 的個數）= 12，所以環上有 4 個 1。",
+          "這樣的環確實存在，例如把 00010111 首尾相接繞成一圈，8 段讀數恰好互不相同，而且數一數確實有 4 個 1。",
+          "常見錯誤是想直接把符合條件的環拼出來再數。「同一個量用兩種方式數」讓我們不必先找到環，就能斷定答案一定是 4；而且這個論證對任何長度都適用，例如長度 16、每段讀 4 位的環，1 的個數必定是 (4 × 8) ÷ 4 = 8。"
+        ],
+        "zh-Hans": [
+          "先算这 8 段字串里总共出现几个 1：000 有 0 个；001、010、100 各有 1 个；011、101、110 各有 2 个；111 有 3 个。合计 0 + 1 + 1 + 1 + 2 + 2 + 2 + 3 = 12 个。",
+          "换另一个角度数同一件事。环上任何一个位置，会被「以它自己为起点」「以它前一个位置为起点」「以它前两个位置为起点」这 3 段字串各用到一次，所以每个位置恰好被数 3 次。",
+          "因此 8 段字串里 1 的总数 = 3 ×（环上 1 的个数）。",
+          "由前两步得 3 ×（环上 1 的个数）= 12，所以环上有 4 个 1。",
+          "这样的环确实存在，例如把 00010111 首尾相接绕成一圈，8 段读数恰好互不相同，而且数一数确实有 4 个 1。",
+          "常见错误是想直接把符合条件的环拼出来再数。「同一个量用两种方式数」让我们不必先找到环，就能断定答案一定是 4；而且这个论证对任何长度都适用，例如长度 16、每段读 4 位的环，1 的个数必定是 (4 × 8) ÷ 4 = 8。"
+        ],
+        "en": [
+          "First count how many 1s appear across the 8 strings: 000 has 0; each of 001, 010, 100 has 1; each of 011, 101, 110 has 2; and 111 has 3. In total 0 + 1 + 1 + 1 + 2 + 2 + 2 + 3 = 12.",
+          "Now count the same thing another way. Every position on the ring is used once by the string starting at itself, once by the string starting one place earlier, and once by the string starting two places earlier, so each position is counted exactly 3 times.",
+          "Therefore the total number of 1s across the 8 strings equals 3 × (number of 1s on the ring).",
+          "Combining the two counts, 3 × (number of 1s on the ring) = 12, so the ring carries 4 ones.",
+          "Such a ring does exist: join 00010111 end to end into a loop, and its 8 readings are indeed all different, with exactly 4 ones.",
+          "A common mistake is to try to build a valid ring first and then count. Counting one quantity in two ways settles the answer as 4 without ever constructing the ring, and the same argument works for any size: a ring of length 16 read 4 digits at a time must contain (4 × 8) ÷ 4 = 8 ones."
+        ],
+        "ja": [
+          "まず 8 個の文字列に現れる 1 の総数を数えます。000 は 0 個、001・010・100 はそれぞれ 1 個、011・101・110 はそれぞれ 2 個、111 は 3 個で、合計 0 + 1 + 1 + 1 + 2 + 2 + 2 + 3 = 12 個です。",
+          "同じことを別の見方で数えます。輪のどの位置も、「その位置から始まる文字列」「1 つ前から始まる文字列」「2 つ前から始まる文字列」の 3 個にそれぞれ 1 回ずつ使われるので、各位置はちょうど 3 回数えられます。",
+          "したがって 8 個の文字列に含まれる 1 の総数は 3 ×（輪の上の 1 の個数）に等しくなります。",
+          "以上より 3 ×（輪の上の 1 の個数）= 12 なので、輪の上には 1 が 4 個あります。",
+          "そのような輪は実際に存在します。00010111 を端どうしつないで輪にすると、8 個の読み取りはすべて異なり、1 はちょうど 4 個です。",
+          "よくある誤りは、条件を満たす輪をまず作ってから数えようとすることです。「同じ量を 2 通りで数える」ことで、輪を構成しなくても答えが 4 だと確定します。しかもこの議論は長さを変えても通用し、長さ 16 で 4 桁ずつ読む輪なら 1 の個数は必ず (4 × 8) ÷ 4 = 8 になります。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "4"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "agent-drafted-nrich-2026-09-03",
+        "notes": "題型參考 Chess Programming Wiki「De Bruijn Sequence」與 Sage 文件「De Bruijn sequences」所載的 B(2,3) 環（00010111），改問環上 1 的個數並自行設計雙重計數解法，由背景起草代理於 2026-09-03 實際查閱 NRICH 等公開題組後改寫；數值、敘述與四語系詳解為本題庫自行推導，非整題引用。主流程已跑機械校驗、全庫去重與跨代理去重。"
+      }
+    },
+    {
+      "id": "combinatorics_grade12_foundation_048",
+      "topic": "combinatorics",
+      "subtopic": "nontransitive_three_dice",
+      "tags": [
+        "c:probability",
+        "c:logic_deduction",
+        "m:contradiction"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "reviewStatus": "ok",
+      "prompt": {
+        "zh-Hant": "有三顆特製的骰子，六個面的點數分別是：A 骰為 2、2、4、4、9、9；B 骰為 1、1、6、6、8、8；C 骰為 3、3、5、5、7、7。兩人各拿一顆骰子同時擲出，點數大的人獲勝（任兩顆骰子都不會擲出相同點數，所以不會平手）。若這個遊戲允許你在看到對手選了哪一顆之後才選自己的骰子，下列敘述哪一個正確？",
+        "zh-Hans": "有三颗特制的骰子，六个面的点数分别是：A 骰为 2、2、4、4、9、9；B 骰为 1、1、6、6、8、8；C 骰为 3、3、5、5、7、7。两人各拿一颗骰子同时掷出，点数大的人获胜（任两颗骰子都不会掷出相同点数，所以不会平手）。若这个游戏允许你在看到对手选了哪一颗之后才选自己的骰子，下列叙述哪一个正确？",
+        "en": "Three special dice have faces: die A shows 2, 2, 4, 4, 9, 9; die B shows 1, 1, 6, 6, 8, 8; die C shows 3, 3, 5, 5, 7, 7. Two people each take one die and roll simultaneously; the higher number wins (no two of these dice can show the same value, so ties are impossible). If the game lets you choose your die after seeing which one your opponent picked, which statement is correct?",
+        "ja": "特別なサイコロが 3 つあり、目はそれぞれ A が 2、2、4、4、9、9、B が 1、1、6、6、8、8、C が 3、3、5、5、7、7 です。二人が 1 つずつ取って同時に振り、大きい目のほうが勝ちます（この 3 つのどの 2 つでも同じ目は出ないので引き分けはありません）。相手が選んだサイコロを見てから自分のものを選べるとき、正しい記述はどれですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是選項 B：A 勝 B、B 勝 C、C 勝 A 的機率都是 5/9，三顆骰子形成循環，後選的人有利。",
+        "zh-Hans": "答案是选项 B：A 胜 B、B 胜 C、C 胜 A 的概率都是 5/9，三颗骰子形成循环，后选的人有利。",
+        "en": "The answer is option B: A beats B, B beats C and C beats A each with probability 5/9, so the dice form a cycle and choosing second is an advantage.",
+        "ja": "答えは選択肢 B です。A が B に、B が C に、C が A に勝つ確率はいずれも 5/9 で、3 つは循環をなし、後から選ぶほうが有利です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "每顆骰子的 6 面其實只有 3 個相異點數且各出現兩次，所以可以看成從 3 個數中等機率取一個。任兩顆對戰有 3 × 3 = 9 種等機率的組合。",
+          "A 對 B：A 取 2、4、9，B 取 1、6、8。A 較大的有 (2,1)、(4,1)、(9,1)、(9,6)、(9,8) 共 5 種，所以 A 勝 B 的機率是 5/9。",
+          "B 對 C：B 取 1、6、8，C 取 3、5、7。B 較大的有 (6,3)、(6,5)、(8,3)、(8,5)、(8,7) 共 5 種，所以 B 勝 C 的機率是 5/9。",
+          "C 對 A：C 取 3、5、7，A 取 2、4、9。C 較大的有 (3,2)、(5,2)、(5,4)、(7,2)、(7,4) 共 5 種，所以 C 勝 A 的機率是 5/9。",
+          "於是 A 勝 B、B 勝 C、C 勝 A 都是 5/9，三者形成一個循環，沒有哪一顆是最強的。既然每顆骰子都有一顆專門剋它，後選的人只要挑那顆剋星就有 5/9 的勝率，因此後選有利，答案是選項 B。",
+          "常見錯誤有兩種：一是像選項 D 那樣以為「勝過」像大小關係一樣可以遞移；二是像選項 C 那樣看到三顆骰子點數總和都是 30，就以為勢均力敵。機率意義下的「較常獲勝」並不遞移，也和總和無關，這正是這組骰子有名的原因。"
+        ],
+        "zh-Hans": [
+          "每颗骰子的 6 面其实只有 3 个相异点数且各出现两次，所以可以看成从 3 个数中等概率取一个。任两颗对战有 3 × 3 = 9 种等概率的组合。",
+          "A 对 B：A 取 2、4、9，B 取 1、6、8。A 较大的有 (2,1)、(4,1)、(9,1)、(9,6)、(9,8) 共 5 种，所以 A 胜 B 的概率是 5/9。",
+          "B 对 C：B 取 1、6、8，C 取 3、5、7。B 较大的有 (6,3)、(6,5)、(8,3)、(8,5)、(8,7) 共 5 种，所以 B 胜 C 的概率是 5/9。",
+          "C 对 A：C 取 3、5、7，A 取 2、4、9。C 较大的有 (3,2)、(5,2)、(5,4)、(7,2)、(7,4) 共 5 种，所以 C 胜 A 的概率是 5/9。",
+          "于是 A 胜 B、B 胜 C、C 胜 A 都是 5/9，三者形成一个循环，没有哪一颗是最强的。既然每颗骰子都有一颗专门克它，后选的人只要挑那颗克星就有 5/9 的胜率，因此后选有利，答案是选项 B。",
+          "常见错误有两种：一是像选项 D 那样以为「胜过」像大小关系一样可以递移；二是像选项 C 那样看到三颗骰子点数总和都是 30，就以为势均力敌。概率意义下的「较常获胜」并不递移，也和总和无关，这正是这组骰子有名的原因。"
+        ],
+        "en": [
+          "Each die really has only 3 distinct values, each appearing twice, so rolling it is like picking one of 3 numbers uniformly. Any two dice therefore produce 3 × 3 = 9 equally likely combinations.",
+          "A against B: A shows 2, 4 or 9 and B shows 1, 6 or 8. A is larger in (2,1), (4,1), (9,1), (9,6), (9,8), which is 5 cases, so A beats B with probability 5/9.",
+          "B against C: B shows 1, 6 or 8 and C shows 3, 5 or 7. B is larger in (6,3), (6,5), (8,3), (8,5), (8,7), which is 5 cases, so B beats C with probability 5/9.",
+          "C against A: C shows 3, 5 or 7 and A shows 2, 4 or 9. C is larger in (3,2), (5,2), (5,4), (7,2), (7,4), which is 5 cases, so C beats A with probability 5/9.",
+          "So A beats B, B beats C and C beats A, all with probability 5/9. The three dice form a cycle and none is strongest. Since every die has a die that specifically beats it, the person who chooses second just picks that one and wins with probability 5/9, so choosing second is an advantage. The answer is option B.",
+          "There are two common mistakes: assuming, as in option D, that 'beats' is transitive like the order of numbers; and noticing, as in option C, that all three dice have face totals of 30 and concluding they must be evenly matched. 'Wins more often' is not transitive in probability and does not follow from the totals, which is exactly why this set of dice is famous."
+        ],
+        "ja": [
+          "各サイコロの 6 面は実際には 3 種類の目が 2 回ずつなので、3 つの数から等確率に 1 つ選ぶのと同じです。よってどの 2 つの対戦も 3 × 3 = 9 通りの等確率な組合せになります。",
+          "A 対 B：A は 2、4、9、B は 1、6、8 を出します。A が大きいのは (2,1)、(4,1)、(9,1)、(9,6)、(9,8) の 5 通りなので、A が B に勝つ確率は 5/9 です。",
+          "B 対 C：B は 1、6、8、C は 3、5、7 を出します。B が大きいのは (6,3)、(6,5)、(8,3)、(8,5)、(8,7) の 5 通りなので、B が C に勝つ確率は 5/9 です。",
+          "C 対 A：C は 3、5、7、A は 2、4、9 を出します。C が大きいのは (3,2)、(5,2)、(5,4)、(7,2)、(7,4) の 5 通りなので、C が A に勝つ確率は 5/9 です。",
+          "こうして A は B に、B は C に、C は A にいずれも確率 5/9 で勝ち、3 つは循環をなして最強のものはありません。どのサイコロにもそれを負かす相手がいるので、後から選ぶ人はその天敵を選べば勝率 5/9 になり、後選が有利です。答えは選択肢 B です。",
+          "よくある誤りは 2 つです。1 つは選択肢 D のように「勝つ」が数の大小のように推移すると思うこと、もう 1 つは選択肢 C のように 3 つとも目の合計が 30 だから互角だと思うことです。確率の意味での「よく勝つ」は推移せず、合計とも無関係で、それがこのサイコロ組の有名な理由です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "multiple_choice",
+      "correctAnswer": {
+        "type": "choice",
+        "value": "B"
+      },
+      "options": {
+        "A": {
+          "zh-Hant": "A 骰有最大的點數 9，所以 A 骰最強，先選 A 骰的人最有利。",
+          "zh-Hans": "A 骰有最大的点数 9，所以 A 骰最强，先选 A 骰的人最有利。",
+          "en": "Die A has the largest face, 9, so A is the strongest die and picking A first is best.",
+          "ja": "A には最大の目 9 があるので A が最強であり、先に A を選ぶのが有利である。"
+        },
+        "B": {
+          "zh-Hant": "A 勝 B、B 勝 C、C 勝 A 的機率都是 5/9，所以沒有最強的骰子；後選的人永遠能挑到勝率 5/9 的骰子，因此後選有利。",
+          "zh-Hans": "A 胜 B、B 胜 C、C 胜 A 的概率都是 5/9，所以没有最强的骰子；后选的人永远能挑到胜率 5/9 的骰子，因此后选有利。",
+          "en": "A beats B, B beats C and C beats A each with probability 5/9, so no die is strongest; the player who chooses second can always take a die that wins with probability 5/9, so choosing second is an advantage.",
+          "ja": "A が B に、B が C に、C が A に勝つ確率がいずれも 5/9 なので最強のサイコロはなく、後から選ぶ人はつねに勝率 5/9 のものを取れるので後選が有利である。"
+        },
+        "C": {
+          "zh-Hant": "三顆骰子的點數總和都是 30，所以任兩顆對戰的勝率都是 1/2，先選後選都一樣。",
+          "zh-Hans": "三颗骰子的点数总和都是 30，所以任两颗对战的胜率都是 1/2，先选后选都一样。",
+          "en": "All three dice have face totals of 30, so any two are even at probability 1/2 and it makes no difference who chooses first.",
+          "ja": "3 つとも目の合計が 30 なので、どの 2 つの対戦も勝率 1/2 であり、先に選んでも後に選んでも同じである。"
+        },
+        "D": {
+          "zh-Hant": "因為 A 勝 B 且 B 勝 C，所以 A 一定勝 C，先選 A 的人穩贏。",
+          "zh-Hans": "因为 A 胜 B 且 B 胜 C，所以 A 一定胜 C，先选 A 的人稳赢。",
+          "en": "Since A beats B and B beats C, A must also beat C, so picking A first is a sure advantage.",
+          "ja": "A が B に勝ち B が C に勝つのだから A は必ず C にも勝ち、先に A を選べば確実に有利である。"
+        }
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "agent-drafted-nrich-2026-09-03",
+        "notes": "題型參考 Wikipedia「Intransitive dice」與 Plus Magazine「Curious dice」所載的三顆非遞移骰子（2,2,4,4,9,9 / 1,1,6,6,8,8 / 3,3,5,5,7,7，勝率皆為 5/9），問法改為判斷先選或後選有利，由背景起草代理於 2026-09-03 實際查閱 NRICH 等公開題組後改寫；數值、敘述與四語系詳解為本題庫自行推導，非整題引用。主流程已跑機械校驗、全庫去重與跨代理去重。"
+      }
     }
   ]
 }

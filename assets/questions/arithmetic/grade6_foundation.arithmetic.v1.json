@@ -7600,6 +7600,176 @@
         "reference": "nrich-mult-div-age7-11-2026-09-03",
         "notes": "題型參考 NRICH（劍橋 Millennium Mathematics Project）公開的「Multiplication and Division: Age 7-11」題組中的「Sweets in a Box」，2026-09-03 查閱。數值、敘述與四語系詳解為本題庫自行改寫推導，非整題引用。"
       }
+    },
+    {
+      "id": "arithmetic_grade6_foundation_101",
+      "topic": "arithmetic",
+      "subtopic": "pick_numbers_sum_not_multiple_three",
+      "tags": [
+        "c:modular",
+        "c:basic_counting",
+        "m:construction",
+        "m:estimate_bound"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade6",
+      "challengeTier": "foundation",
+      "reviewStatus": "ok",
+      "prompt": {
+        "zh-Hant": "小安要從 1 到 100 這一百個整數中挑出一些數，要求「挑出來的數當中，任意兩個數相加都不是 3 的倍數」。他最多可以挑出幾個數？",
+        "zh-Hans": "小安要从 1 到 100 这一百个整数中挑出一些数，要求「挑出来的数当中，任意两个数相加都不是 3 的倍数」。他最多可以挑出几个数？",
+        "en": "An picks some numbers from the hundred whole numbers 1 to 100, with the rule that no two of the picked numbers add up to a multiple of 3. What is the greatest number of numbers he can pick?",
+        "ja": "アンは 1 から 100 までの 100 個の整数からいくつかを選びます。ただし「選んだ数のうちどの 2 つを足しても 3 の倍数にならない」ようにします。最も多くて何個選べますか。"
+      },
+      "answer": {
+        "zh-Hant": "最多可以挑出 35 個數。",
+        "zh-Hans": "最多可以挑出 35 个数。",
+        "en": "He can pick at most 35 numbers.",
+        "ja": "最も多くて 35 個選べます。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "兩個數的和是不是 3 的倍數，只取決於它們除以 3 的餘數，所以先把 1 到 100 依餘數分成三類。",
+          "餘 1 的有 1、4、7、…、100，共 34 個；餘 2 的有 2、5、8、…、98，共 33 個；餘 0 的有 3、6、9、…、99，共 33 個。",
+          "兩數的餘數相加若是 3 的倍數，和才會是 3 的倍數。會出事的組合只有兩種：餘 0 配餘 0（0 + 0 = 0），以及餘 1 配餘 2（1 + 2 = 3）。",
+          "因此餘 0 的數最多只能選 1 個；而餘 1 和餘 2 這兩類不能同時出現，只能二選一，當然選數量較多的餘 1 那類。",
+          "上界是 34 + 1 = 35 個。餘 1 的數兩兩相加餘數是 1 + 1 = 2，不是 3 的倍數，彼此相安無事。",
+          "實際構造：取全部 34 個餘 1 的數，再加上 1 個餘 0 的數（例如 3）。餘 1 加餘 0 的和餘 1，也不是 3 的倍數，所以 35 個確實可行。",
+          "常見錯誤是以為「餘 0 的數彼此不會出事」而把 33 個全收下——其實 3 + 6 = 9 就是 3 的倍數。這類題目的通則是：先按餘數分類，找出哪些類彼此衝突，再在每一類裡決定最多能留幾個。"
+        ],
+        "zh-Hans": [
+          "两个数的和是不是 3 的倍数，只取决于它们除以 3 的余数，所以先把 1 到 100 按余数分成三类。",
+          "余 1 的有 1、4、7、…、100，共 34 个；余 2 的有 2、5、8、…、98，共 33 个；余 0 的有 3、6、9、…、99，共 33 个。",
+          "两数的余数相加若是 3 的倍数，和才会是 3 的倍数。会出事的组合只有两种：余 0 配余 0（0 + 0 = 0），以及余 1 配余 2（1 + 2 = 3）。",
+          "因此余 0 的数最多只能选 1 个；而余 1 和余 2 这两类不能同时出现，只能二选一，当然选数量较多的余 1 那类。",
+          "上界是 34 + 1 = 35 个。余 1 的数两两相加余数是 1 + 1 = 2，不是 3 的倍数，彼此相安无事。",
+          "实际构造：取全部 34 个余 1 的数，再加上 1 个余 0 的数（例如 3）。余 1 加余 0 的和余 1，也不是 3 的倍数，所以 35 个确实可行。",
+          "常见错误是以为「余 0 的数彼此不会出事」而把 33 个全收下——其实 3 + 6 = 9 就是 3 的倍数。这类题目的通则是：先按余数分类，找出哪些类彼此冲突，再在每一类里决定最多能留几个。"
+        ],
+        "en": [
+          "Whether a sum is a multiple of 3 depends only on the two remainders on division by 3, so sort 1 to 100 into three classes by remainder.",
+          "Remainder 1: 1, 4, 7, ..., 100, which is 34 numbers. Remainder 2: 2, 5, 8, ..., 98, which is 33. Remainder 0: 3, 6, 9, ..., 99, which is 33.",
+          "A sum is a multiple of 3 exactly when the two remainders add to a multiple of 3. Only two pairings cause trouble: remainder 0 with remainder 0 (0 + 0 = 0), and remainder 1 with remainder 2 (1 + 2 = 3).",
+          "So at most 1 number with remainder 0 may be taken, and the remainder-1 class and the remainder-2 class cannot both appear — take the larger one, remainder 1.",
+          "That gives the bound 34 + 1 = 35. Two remainder-1 numbers add to remainder 1 + 1 = 2, which is not a multiple of 3, so they are safe together.",
+          "Explicit construction: take all 34 numbers with remainder 1, plus one number with remainder 0 such as 3. A remainder-1 number plus a remainder-0 number leaves remainder 1, also not a multiple of 3, so 35 really is attainable.",
+          "The common error is to assume the remainder-0 numbers are safe with one another and grab all 33 — but 3 + 6 = 9 is a multiple of 3. The general recipe is: sort by remainder, find which classes clash, then decide how many may survive inside each class."
+        ],
+        "ja": [
+          "2 数の和が 3 の倍数かどうかは、2 数を 3 で割った余りだけで決まります。まず 1 から 100 を余りで 3 つに分けます。",
+          "余り 1 は 1、4、7、…、100 の 34 個、余り 2 は 2、5、8、…、98 の 33 個、余り 0 は 3、6、9、…、99 の 33 個です。",
+          "和が 3 の倍数になるのは 2 つの余りの和が 3 の倍数のときだけです。問題になる組み合わせは、余り 0 と余り 0（0 + 0 = 0）、および余り 1 と余り 2（1 + 2 = 3）の 2 通りだけです。",
+          "したがって余り 0 の数は最大 1 個までしか選べません。また余り 1 の組と余り 2 の組は同時に使えないので、個数の多い余り 1 の組を選びます。",
+          "上界は 34 + 1 = 35 個です。余り 1 どうしの和は余り 1 + 1 = 2 で 3 の倍数ではないので、互いに問題ありません。",
+          "実際の構成は、余り 1 の 34 個すべてに、余り 0 の数を 1 つ（たとえば 3）加えるものです。余り 1 と余り 0 の和は余り 1 でやはり 3 の倍数ではないので、35 個は実現できます。",
+          "余り 0 どうしは安全だと思って 33 個すべて取るのがよくある誤りですが、3 + 6 = 9 は 3 の倍数です。余りで分類し、どの組が衝突するかを調べ、各組で残せる最大個数を決める、というのがこの種の問題の定石です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "35"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "agent-drafted-nrich-2026-09-03",
+        "notes": "題型參考 NRICH Primary Curriculum Map（age 7-11）「Multiples Grid」與「Two Primes Make One Square」（用餘數與奇偶篩選可行組合）；問法與範圍自行設計，由背景起草代理於 2026-09-03 實際查閱 NRICH 等公開題組後改寫；數值、敘述與四語系詳解為本題庫自行推導，非整題引用。主流程已跑機械校驗、全庫去重與跨代理去重。"
+      }
+    },
+    {
+      "id": "arithmetic_grade6_foundation_102",
+      "topic": "arithmetic",
+      "subtopic": "dial_step_four_visits_all",
+      "tags": [
+        "c:factor_multiple",
+        "c:modular",
+        "m:casework",
+        "m:enumeration"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade6",
+      "challengeTier": "foundation",
+      "reviewStatus": "ok",
+      "prompt": {
+        "zh-Hant": "一個轉盤的外圍等距標著 n 個格子，依順時針方向編號 1 到 n（第 n 格的下一格又回到第 1 格）。指針一開始停在第 1 格，之後每一次都順時針前進 4 格。指針就這樣一直走下去。若要讓指針最後能停過每一個格子，n 在 2 到 12 之間（含 2 和 12）有幾個可能的值？",
+        "zh-Hans": "一个转盘的外围等距标着 n 个格子，按顺时针方向编号 1 到 n（第 n 格的下一格又回到第 1 格）。指针一开始停在第 1 格，之后每一次都顺时针前进 4 格。指针就这样一直走下去。若要让指针最后能停过每一个格子，n 在 2 到 12 之间（含 2 和 12）有几个可能的值？",
+        "en": "A dial has n equally spaced slots around its rim, numbered 1 to n clockwise (after slot n comes slot 1 again). A pointer starts on slot 1 and each move advances it 4 slots clockwise, going on forever. For the pointer to land on every slot at some stage, how many values of n between 2 and 12 inclusive are possible?",
+        "ja": "円盤のふちに n 個のマスが等間隔に並び、時計回りに 1 から n まで番号がついています（n の次は再び 1 に戻ります）。針ははじめマス 1 にあり、以後毎回時計回りに 4 マスずつ進み、これをずっとくり返します。針がすべてのマスに止まるようにするとき、2 以上 12 以下の n のうち条件を満たすものはいくつありますか。"
+      },
+      "answer": {
+        "zh-Hant": "可能的 n 有 5 個。",
+        "zh-Hans": "可能的 n 有 5 个。",
+        "en": "There are 5 possible values of n.",
+        "ja": "条件を満たす n は 5 個です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "先試小一點的情形找規律。n = 8 時，指針停過 1、5、1、5、…，只走得到 2 個格子；n = 6 時停過 1、5、3、1、…，只走得到 3 個格子。",
+          "n = 7 時停過 1、5、2、6、3、7、4、1，七格全部走過。n = 9 時也是九格全部走過。",
+          "看出規律：走不完的例子 8 和 6 都和 4 有大於 1 的公因數（8 和 4 的公因數是 4，6 和 4 的公因數是 2）；走得完的 7、9 則和 4 互質。",
+          "道理是：指針走 k 步後的位置只跟「4k 除以 n 的餘數」有關。這些餘數只會落在「n 和 4 的最大公因數」的倍數上，走不出那個範圍；只有當最大公因數是 1 時，餘數才能取遍所有格子。",
+          "所以條件是 n 和 4 互質。因為 4 = 2 × 2，只要 n 是奇數就互質；n 是偶數就一定和 4 有公因數 2。",
+          "2 到 12 之間的奇數是 3、5、7、9、11，共 5 個。所以答案是 5。",
+          "常見錯誤是以為「只要 n 不是 4 的倍數就可以」，於是把 6、10 也算進去；但 6 和 10 都是偶數，和 4 有公因數 2，一樣走不完。判斷標準是互質（最大公因數等於 1），不是「不是倍數」。"
+        ],
+        "zh-Hans": [
+          "先试小一点的情形找规律。n = 8 时，指针停过 1、5、1、5、…，只走得到 2 个格子；n = 6 时停过 1、5、3、1、…，只走得到 3 个格子。",
+          "n = 7 时停过 1、5、2、6、3、7、4、1，七格全部走过。n = 9 时也是九格全部走过。",
+          "看出规律：走不完的例子 8 和 6 都和 4 有大于 1 的公因数（8 和 4 的公因数是 4，6 和 4 的公因数是 2）；走得完的 7、9 则和 4 互质。",
+          "道理是：指针走 k 步后的位置只跟「4k 除以 n 的余数」有关。这些余数只会落在「n 和 4 的最大公因数」的倍数上，走不出那个范围；只有当最大公因数是 1 时，余数才能取遍所有格子。",
+          "所以条件是 n 和 4 互质。因为 4 = 2 × 2，只要 n 是奇数就互质；n 是偶数就一定和 4 有公因数 2。",
+          "2 到 12 之间的奇数是 3、5、7、9、11，共 5 个。所以答案是 5。",
+          "常见错误是以为「只要 n 不是 4 的倍数就可以」，于是把 6、10 也算进去；但 6 和 10 都是偶数，和 4 有公因数 2，一样走不完。判断标准是互质（最大公因数等于 1），不是「不是倍数」。"
+        ],
+        "en": [
+          "Try small cases to find the pattern. With n = 8 the pointer visits 1, 5, 1, 5, ..., reaching only 2 slots. With n = 6 it visits 1, 5, 3, 1, ..., reaching only 3 slots.",
+          "With n = 7 it visits 1, 5, 2, 6, 3, 7, 4 and back to 1, covering all seven slots. With n = 9 it also covers all nine.",
+          "The pattern: the failures 8 and 6 both share a factor greater than 1 with 4 (8 shares 4, and 6 shares 2), while the successes 7 and 9 are coprime to 4.",
+          "The reason is that the position after k moves depends only on the remainder of 4k on division by n. Those remainders are always multiples of the highest common factor of n and 4, so they cannot escape that set; only when that common factor is 1 can they reach every slot.",
+          "So the condition is that n and 4 are coprime. Since 4 = 2 x 2, any odd n is coprime to 4, while any even n shares the factor 2.",
+          "The odd numbers between 2 and 12 are 3, 5, 7, 9 and 11, which is 5 values, so the answer is 5.",
+          "The common error is to think 'any n that is not a multiple of 4 works' and include 6 and 10; but 6 and 10 are even and share the factor 2 with 4, so they fail too. The test is coprimality (highest common factor 1), not merely 'not a multiple'."
+        ],
+        "ja": [
+          "まず小さい場合で規則を探します。n = 8 では針は 1、5、1、5、… と動き、2 マスにしか止まりません。n = 6 では 1、5、3、1、… で 3 マスだけです。",
+          "n = 7 では 1、5、2、6、3、7、4 と回って 1 に戻り、7 マスすべてに止まります。n = 9 でも 9 マスすべてに止まります。",
+          "規則が見えます。うまくいかない 8 と 6 は 4 と 1 より大きい公約数をもち（8 は 4、6 は 2）、うまくいく 7 と 9 は 4 と互いに素です。",
+          "理由は、k 回進んだあとの位置が「4k を n で割った余り」だけで決まることです。この余りは n と 4 の最大公約数の倍数の範囲から出られません。最大公約数が 1 のときだけ、すべてのマスに届きます。",
+          "したがって条件は n と 4 が互いに素であることです。4 = 2 × 2 なので、n が奇数なら互いに素、n が偶数なら必ず 2 を共有します。",
+          "2 以上 12 以下の奇数は 3、5、7、9、11 の 5 個なので、答えは 5 です。",
+          "「4 の倍数でなければよい」と考えて 6 や 10 を含めてしまうのがよくある誤りですが、6 も 10 も偶数で 4 と 2 を共有するため同様に失敗します。判定の基準は互いに素（最大公約数が 1）であることで、倍数かどうかではありません。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "5"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "agent-drafted-nrich-2026-09-03",
+        "notes": "題型參考 NRICH age 7-11「Counting Cogs」（互質的齒輪對才能碰到每一個齒縫）；改寫成轉盤與步幅 4 的版本，數值自行設計，由背景起草代理於 2026-09-03 實際查閱 NRICH 等公開題組後改寫；數值、敘述與四語系詳解為本題庫自行推導，非整題引用。主流程已跑機械校驗、全庫去重與跨代理去重。"
+      }
     }
   ]
 }
