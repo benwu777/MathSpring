@@ -3319,7 +3319,7 @@ class _PracticeAnswerSectionState extends State<_PracticeAnswerSection> {
                       'question_option_text_${widget.question.id}_$key',
                     ),
                     text:
-                        '$key  ${widget.question.localizedOptionLabel(key, widget.localeCode)}',
+                        widget.question.optionDisplayLabel(key, widget.localeCode),
                     localeCode: widget.localeCode,
                   ),
                 ),
@@ -4032,7 +4032,7 @@ class _QuizAnswerSection extends StatelessWidget {
                     key: ValueKey<String>(
                         'question_option_text_${question.id}_$key'),
                     text:
-                        '$key  ${question.localizedOptionLabel(key, localeCode)}',
+                        question.optionDisplayLabel(key, localeCode),
                     localeCode: localeCode,
                   ),
                 ),
@@ -5394,7 +5394,7 @@ class _AnswerComposer extends StatelessWidget {
                     side: const BorderSide(color: Color(0xFFE5E7EB)),
                   ),
                   child: Text(
-                    '$key  ${question.localizedOptionLabel(key, localeCode)}',
+                    question.optionDisplayLabel(key, localeCode),
                   ),
                 ),
               ),
@@ -6368,11 +6368,7 @@ String _displaySubmittedAnswer(
 
   switch (question.answerMode) {
     case AnswerMode.multipleChoice:
-      final String optionLabel = question.localizedOptionLabel(
-        submittedAnswer,
-        localeCode,
-      );
-      return '$submittedAnswer  $optionLabel';
+      return question.optionDisplayLabel(submittedAnswer, localeCode);
     case AnswerMode.integerInput:
       final List<String> values = _decodeIntegerAnswers(submittedAnswer);
       return values.join('、');

@@ -322,6 +322,22 @@ class Question {
     return _lookupLocalizedString(option.labels, localeCode);
   }
 
+  /// 選項在畫面上要顯示的完整文字：`代號 + 兩個空白 + 內容`。
+  ///
+  /// 但有些題目的選項內容本身就是代號——例如「四顆蘋果 A、B、C、D，
+  /// 哪一顆比較重」的選項就是 A / B / C / D——直接串接會顯示成「A  A」。
+  /// 這種情況只顯示一次。全庫有 11 題屬於此類。
+  ///
+  /// 只在「內容與代號完全相同」時才省略；「A 隊」這種以代號開頭的內容
+  /// 不算重複，必須完整顯示。
+  String optionDisplayLabel(String optionKey, String localeCode) {
+    final String label = localizedOptionLabel(optionKey, localeCode);
+    if (label.trim() == optionKey) {
+      return optionKey;
+    }
+    return '$optionKey  $label';
+  }
+
   static Map<String, String> _readLocalizedStringMap(dynamic value) {
     final Map<String, dynamic> raw = Map<String, dynamic>.from(value as Map);
     return raw.map((key, value) => MapEntry(key, value as String));
