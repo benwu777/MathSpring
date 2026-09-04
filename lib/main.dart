@@ -790,7 +790,7 @@ class _DailyMissionLanding extends StatelessWidget {
               ),
             ],
           ),
-        ),
+          ),
       ],
     );
   }
@@ -3476,10 +3476,13 @@ class PracticeSummaryPage extends StatelessWidget {
         backgroundColor: Colors.white,
       ),
       body: ContentScrollView(
+        fill: true,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _SectionCard(
+            // 撐滿剩餘高度，畫面不會依內容長短留下大片空白
+            Expanded(
+              child: _SectionCard(
               title: strings.practiceSummary,
               subtitle:
                   '${result.correctCount} / ${result.totalQuestions} ${strings.correctSuffix}',
@@ -3492,6 +3495,7 @@ class PracticeSummaryPage extends StatelessWidget {
                     rightLabel: strings.accuracyLabel,
                   ),
                 ],
+              ),
               ),
             ),
           ],
@@ -4180,10 +4184,13 @@ class QuizResultPage extends StatelessWidget {
         backgroundColor: Colors.white,
       ),
       body: ContentScrollView(
+        fill: true,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _SectionCard(
+            // 撐滿剩餘高度，畫面不會依內容長短留下大片空白
+            Expanded(
+              child: _SectionCard(
               title: strings.quizResult,
               subtitle: maxScore == null
                   ? '${result.correctCount} / ${result.totalQuestions} ${strings.correctSuffix}'
@@ -4195,6 +4202,7 @@ class QuizResultPage extends StatelessWidget {
                 leftLabel: maxScore == null ? strings.correctLabel : '總分',
                 rightValue: _formatElapsed(result.elapsed),
                 rightLabel: strings.elapsedLabel,
+              ),
               ),
             ),
             const SizedBox(height: 18),
