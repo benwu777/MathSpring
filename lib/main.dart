@@ -5468,7 +5468,7 @@ class _QuestionFigureView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _FigureRenderSpec? spec = _buildFigureRenderSpec(question);
+    final FigureRenderSpec? spec = buildFigureRenderSpec(question.figure);
     if (spec == null) {
       return const SizedBox.shrink();
     }
@@ -5505,8 +5505,9 @@ class _QuestionFigureView extends StatelessWidget {
   }
 }
 
-class _FigureRenderSpec {
-  const _FigureRenderSpec({
+/// 一張圖要怎麼畫：畫布本身，加上它該用的長寬比。
+class FigureRenderSpec {
+  const FigureRenderSpec({
     required this.child,
     required this.aspectRatio,
   });
@@ -5515,8 +5516,14 @@ class _FigureRenderSpec {
   final double aspectRatio;
 }
 
-_FigureRenderSpec? _buildFigureRenderSpec(Question question) {
-  final String kind = question.figure.kind;
+/// 把 figure 的 kind 與 params 對應到實際的 painter。
+///
+/// 認不得的 kind 回傳 null，呼叫端就不畫圖——這是刻意的：題庫那一側已經有
+/// 驗證器的 KINDS 白名單擋著，真的漏進來時寧可少一張圖，也不要讓整題開不起來。
+/// 但過去它是完全靜默的，畫面一片空白而沒有任何線索，所以這裡留一行 log。
+FigureRenderSpec? buildFigureRenderSpec(QuestionFigure figure,
+    {String? labelFontFamily}) {
+  final String kind = figure.kind;
   final Widget? figureChild = switch (kind) {
     'trig_plane' => CustomPaint(
         painter: TrigGraphPainter(),
@@ -5524,51 +5531,56 @@ _FigureRenderSpec? _buildFigureRenderSpec(Question question) {
       ),
     'shape_diagram' => CustomPaint(
         painter: ShapeDiagramPainter(
-          shape: question.figure.params['shape'] as String? ?? 'rectangle',
-          labels: _stringMapFromDynamic(question.figure.params['labels']),
+          shape: figure.params['shape'] as String? ?? 'rectangle',
+          labels: _stringMapFromDynamic(figure.params['labels']),
+                  labelFontFamily: labelFontFamily,
         ),
         child: const SizedBox.expand(),
       ),
     'coordinate_plane' => CustomPaint(
         painter: CoordinatePlanePainter(
-          minX: _intFromDynamic(question.figure.params['minX'], fallback: 0),
-          maxX: _intFromDynamic(question.figure.params['maxX'], fallback: 6),
-          minY: _intFromDynamic(question.figure.params['minY'], fallback: 0),
-          maxY: _intFromDynamic(question.figure.params['maxY'], fallback: 6),
-          showGrid: question.figure.params['showGrid'] as bool? ?? true,
-          points: _pointListFromDynamic(question.figure.params['points']),
-          pathPoints: _pointListFromDynamic(question.figure.params['path']),
+          minX: _intFromDynamic(figure.params['minX'], fallback: 0),
+          maxX: _intFromDynamic(figure.params['maxX'], fallback: 6),
+          minY: _intFromDynamic(figure.params['minY'], fallback: 0),
+          maxY: _intFromDynamic(figure.params['maxY'], fallback: 6),
+          showGrid: figure.params['showGrid'] as bool? ?? true,
+          points: _pointListFromDynamic(figure.params['points']),
+          pathPoints: _pointListFromDynamic(figure.params['path']),
           highlightPoint: _pointFromDynamic(
-            question.figure.params['highlightPoint'],
+            figure.params['highlightPoint'],
           ),
+                  labelFontFamily: labelFontFamily,
         ),
         child: const SizedBox.expand(),
       ),
     'geometry_scene' => CustomPaint(
         painter: GeometryScenePainter(
-          scene: GeometryScene.fromParams(question.figure.params),
+          scene: GeometryScene.fromParams(figure.params),
+                  labelFontFamily: labelFontFamily,
         ),
         child: const SizedBox.expand(),
       ),
     'composite_grid_shape' => CustomPaint(
         painter: CompositeGridShapePainter(
-          rows: _intFromDynamic(question.figure.params['rows'], fallback: 3),
-          cols: _intFromDynamic(question.figure.params['cols'], fallback: 3),
+          rows: _intFromDynamic(figure.params['rows'], fallback: 3),
+          cols: _intFromDynamic(figure.params['cols'], fallback: 3),
           filledCells:
-              _cellListFromDynamic(question.figure.params['filledCells']),
+              _cellListFromDynamic(figure.params['filledCells']),
           cellLabels:
-              _stringMapFromDynamic(question.figure.params['cellLabels']),
+              _stringMapFromDynamic(figure.params['cellLabels']),
+                  labelFontFamily: labelFontFamily,
         ),
         child: const SizedBox.expand(),
       ),
     'circle_quadrants_point' => CustomPaint(
         painter: CircleQuadrantsPointPainter(
           regionLabels: _stringMapFromDynamic(
-            question.figure.params['regionLabels'],
+            figure.params['regionLabels'],
           ),
-          pointLabel: question.figure.params['pointLabel'] as String? ?? 'P',
+          pointLabel: figure.params['pointLabel'] as String? ?? 'P',
           shadedRegion:
-              question.figure.params['shadedRegion'] as String? ?? 'topRight',
+              figure.params['shadedRegion'] as String? ?? 'topRight',
+                  labelFontFamily: labelFontFamily,
         ),
         child: const SizedBox.expand(),
       ),
@@ -5576,19 +5588,22 @@ _FigureRenderSpec? _buildFigureRenderSpec(Question question) {
   };
 
   if (figureChild == null) {
+    if (kind != 'none' && kind.isNotEmpty) {
+      debugPrint('buildFigureRenderSpec: 認不得的 figure kind「$kind」，這題不畫圖');
+    }
     return null;
   }
 
   final double aspectRatio = switch (kind) {
     'shape_diagram' => 1.25,
-    'coordinate_plane' => 1.35,
-    'composite_grid_shape' => 1.1,
+    'coordinate_plane' => _coordinatePlaneAspectRatio(figure.params),
+    'composite_grid_shape' => _compositeGridAspectRatio(figure.params),
     'circle_quadrants_point' => 1.15,
-    'geometry_scene' => _geometrySceneAspectRatio(question.figure.params),
+    'geometry_scene' => _geometrySceneAspectRatio(figure.params),
     _ => 1.55,
   };
 
-  return _FigureRenderSpec(
+  return FigureRenderSpec(
     child: figureChild,
     aspectRatio: aspectRatio,
   );
@@ -5601,7 +5616,7 @@ class _FigurePreviewDialog extends StatelessWidget {
   });
 
   final Question question;
-  final _FigureRenderSpec spec;
+  final FigureRenderSpec spec;
 
   @override
   Widget build(BuildContext context) {
@@ -5650,7 +5665,7 @@ class _FigurePreviewDialog extends StatelessWidget {
                           border: Border.all(color: const Color(0xFFE5E7EB)),
                         ),
                         padding: const EdgeInsets.all(20),
-                        child: _buildFigureRenderSpec(question)!.child,
+                        child: buildFigureRenderSpec(question.figure)!.child,
                       ),
                     ),
                   ),
@@ -5662,6 +5677,37 @@ class _FigurePreviewDialog extends StatelessWidget {
       ),
     );
   }
+}
+
+/// 長寬比的上下限：再怎麼細長的圖，塞進題目版面時也不能變成一條線或一根柱子。
+const double _minFigureAspect = 0.5;
+const double _maxFigureAspect = 3.0;
+
+/// 格線圖的長寬比跟著 rows / cols 走。
+///
+/// 以前這裡固定 1.1，於是 1×17 的座位圖被塞進接近正方形的框裡，
+/// 畫成一條幾乎看不見的細線；2×7 的「兩種拼法並排」也一樣被壓小。
+double _compositeGridAspectRatio(Map<String, dynamic> params) {
+  final int rows = _intFromDynamic(params['rows'], fallback: 3);
+  final int cols = _intFromDynamic(params['cols'], fallback: 3);
+  if (rows <= 0 || cols <= 0) {
+    return 1.0;
+  }
+  return (cols / rows).clamp(_minFigureAspect, _maxFigureAspect);
+}
+
+/// 座標圖的長寬比跟著座標範圍走，否則 x 0..6、y -8..8 這種直立的圖會被壓成橫的。
+double _coordinatePlaneAspectRatio(Map<String, dynamic> params) {
+  final int minX = _intFromDynamic(params['minX'], fallback: 0);
+  final int maxX = _intFromDynamic(params['maxX'], fallback: 6);
+  final int minY = _intFromDynamic(params['minY'], fallback: 0);
+  final int maxY = _intFromDynamic(params['maxY'], fallback: 6);
+  final int spanX = maxX - minX;
+  final int spanY = maxY - minY;
+  if (spanX <= 0 || spanY <= 0) {
+    return 1.0;
+  }
+  return (spanX / spanY).clamp(_minFigureAspect, _maxFigureAspect);
 }
 
 double _geometrySceneAspectRatio(Map<String, dynamic> params) {
@@ -6516,10 +6562,13 @@ class ShapeDiagramPainter extends CustomPainter {
   const ShapeDiagramPainter({
     required this.shape,
     required this.labels,
+    this.labelFontFamily,
   });
 
   final String shape;
   final Map<String, String> labels;
+  /// 預覽工具會塞自己載進來的字型；app 裡是 null，用預設字型。
+  final String? labelFontFamily;
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -6557,14 +6606,14 @@ class ShapeDiagramPainter extends CustomPainter {
           linePaint,
         );
         _paintText(canvas, labels['top'] ?? 'N',
-            Offset(center.dx, center.dy - arm - 22));
+            Offset(center.dx, center.dy - arm - 22), fontFamily: labelFontFamily);
         _paintText(canvas, labels['right'] ?? 'E',
-            Offset(center.dx + arm + 22, center.dy));
+            Offset(center.dx + arm + 22, center.dy), fontFamily: labelFontFamily);
         _paintText(canvas, labels['bottom'] ?? 'S',
-            Offset(center.dx, center.dy + arm + 22));
+            Offset(center.dx, center.dy + arm + 22), fontFamily: labelFontFamily);
         _paintText(canvas, labels['left'] ?? 'W',
-            Offset(center.dx - arm - 22, center.dy));
-        _paintText(canvas, labels['center'], center);
+            Offset(center.dx - arm - 22, center.dy), fontFamily: labelFontFamily);
+        _paintText(canvas, labels['center'], center, fontFamily: labelFontFamily);
         break;
       case 'square':
         final double side = math.min(rect.width, rect.height);
@@ -6586,13 +6635,13 @@ class ShapeDiagramPainter extends CustomPainter {
         canvas.drawPath(triangle, fillPaint);
         canvas.drawPath(triangle, outlinePaint);
         _paintText(
-            canvas, labels['top'], Offset(size.width * 0.5, size.height * 0.1));
+            canvas, labels['top'], Offset(size.width * 0.5, size.height * 0.1), fontFamily: labelFontFamily);
         _paintText(canvas, labels['left'],
-            Offset(size.width * 0.18, size.height * 0.48));
+            Offset(size.width * 0.18, size.height * 0.48), fontFamily: labelFontFamily);
         _paintText(canvas, labels['right'],
-            Offset(size.width * 0.82, size.height * 0.48));
+            Offset(size.width * 0.82, size.height * 0.48), fontFamily: labelFontFamily);
         _paintText(canvas, labels['bottom'],
-            Offset(size.width * 0.5, size.height * 0.76));
+            Offset(size.width * 0.5, size.height * 0.76), fontFamily: labelFontFamily);
         break;
       case 'trapezoid':
         final Path trapezoid = Path()
@@ -6604,15 +6653,15 @@ class ShapeDiagramPainter extends CustomPainter {
         canvas.drawPath(trapezoid, fillPaint);
         canvas.drawPath(trapezoid, outlinePaint);
         _paintText(canvas, labels['top'],
-            Offset(size.width * 0.5, size.height * 0.14));
+            Offset(size.width * 0.5, size.height * 0.14), fontFamily: labelFontFamily);
         _paintText(canvas, labels['bottom'],
-            Offset(size.width * 0.5, size.height * 0.78));
+            Offset(size.width * 0.5, size.height * 0.78), fontFamily: labelFontFamily);
         _paintText(canvas, labels['left'],
-            Offset(size.width * 0.16, size.height * 0.46));
+            Offset(size.width * 0.16, size.height * 0.46), fontFamily: labelFontFamily);
         _paintText(canvas, labels['right'],
-            Offset(size.width * 0.84, size.height * 0.46));
+            Offset(size.width * 0.84, size.height * 0.46), fontFamily: labelFontFamily);
         _paintText(canvas, labels['center'],
-            Offset(size.width * 0.5, size.height * 0.48));
+            Offset(size.width * 0.5, size.height * 0.48), fontFamily: labelFontFamily);
         break;
       case 'parallelogram':
         final Path parallelogram = Path()
@@ -6624,15 +6673,15 @@ class ShapeDiagramPainter extends CustomPainter {
         canvas.drawPath(parallelogram, fillPaint);
         canvas.drawPath(parallelogram, outlinePaint);
         _paintText(canvas, labels['top'],
-            Offset(size.width * 0.53, size.height * 0.14));
+            Offset(size.width * 0.53, size.height * 0.14), fontFamily: labelFontFamily);
         _paintText(canvas, labels['bottom'],
-            Offset(size.width * 0.41, size.height * 0.78));
+            Offset(size.width * 0.41, size.height * 0.78), fontFamily: labelFontFamily);
         _paintText(canvas, labels['left'],
-            Offset(size.width * 0.14, size.height * 0.48));
+            Offset(size.width * 0.14, size.height * 0.48), fontFamily: labelFontFamily);
         _paintText(canvas, labels['right'],
-            Offset(size.width * 0.8, size.height * 0.48));
+            Offset(size.width * 0.8, size.height * 0.48), fontFamily: labelFontFamily);
         _paintText(canvas, labels['center'],
-            Offset(size.width * 0.47, size.height * 0.46));
+            Offset(size.width * 0.47, size.height * 0.46), fontFamily: labelFontFamily);
         break;
       case 'pentagon':
         final Path pentagon = Path()
@@ -6645,15 +6694,15 @@ class ShapeDiagramPainter extends CustomPainter {
         canvas.drawPath(pentagon, fillPaint);
         canvas.drawPath(pentagon, outlinePaint);
         _paintText(canvas, labels['top'],
-            Offset(size.width * 0.5, size.height * 0.08));
+            Offset(size.width * 0.5, size.height * 0.08), fontFamily: labelFontFamily);
         _paintText(canvas, labels['left'],
-            Offset(size.width * 0.16, size.height * 0.44));
+            Offset(size.width * 0.16, size.height * 0.44), fontFamily: labelFontFamily);
         _paintText(canvas, labels['right'],
-            Offset(size.width * 0.84, size.height * 0.44));
+            Offset(size.width * 0.84, size.height * 0.44), fontFamily: labelFontFamily);
         _paintText(canvas, labels['bottom'],
-            Offset(size.width * 0.5, size.height * 0.78));
+            Offset(size.width * 0.5, size.height * 0.78), fontFamily: labelFontFamily);
         _paintText(canvas, labels['center'],
-            Offset(size.width * 0.5, size.height * 0.46));
+            Offset(size.width * 0.5, size.height * 0.46), fontFamily: labelFontFamily);
         break;
       case 'hexagon':
         final Path hexagon = Path()
@@ -6667,26 +6716,26 @@ class ShapeDiagramPainter extends CustomPainter {
         canvas.drawPath(hexagon, fillPaint);
         canvas.drawPath(hexagon, outlinePaint);
         _paintText(
-            canvas, labels['top'], Offset(size.width * 0.5, size.height * 0.1));
+            canvas, labels['top'], Offset(size.width * 0.5, size.height * 0.1), fontFamily: labelFontFamily);
         _paintText(canvas, labels['left'],
-            Offset(size.width * 0.14, size.height * 0.44));
+            Offset(size.width * 0.14, size.height * 0.44), fontFamily: labelFontFamily);
         _paintText(canvas, labels['right'],
-            Offset(size.width * 0.86, size.height * 0.44));
+            Offset(size.width * 0.86, size.height * 0.44), fontFamily: labelFontFamily);
         _paintText(canvas, labels['bottom'],
-            Offset(size.width * 0.5, size.height * 0.78));
+            Offset(size.width * 0.5, size.height * 0.78), fontFamily: labelFontFamily);
         _paintText(canvas, labels['center'],
-            Offset(size.width * 0.5, size.height * 0.44));
+            Offset(size.width * 0.5, size.height * 0.44), fontFamily: labelFontFamily);
         break;
       case 'circle':
         final Offset center = Offset(size.width / 2, size.height / 2);
         final double radius = math.min(size.width, size.height) * 0.24;
         canvas.drawCircle(center, radius, fillPaint);
         canvas.drawCircle(center, radius, outlinePaint);
-        _paintText(canvas, labels['center'], center);
+        _paintText(canvas, labels['center'], center, fontFamily: labelFontFamily);
         _paintText(
-            canvas, labels['top'], Offset(center.dx, center.dy - radius - 18));
+            canvas, labels['top'], Offset(center.dx, center.dy - radius - 18), fontFamily: labelFontFamily);
         _paintText(canvas, labels['right'],
-            Offset(center.dx + radius + 18, center.dy));
+            Offset(center.dx + radius + 18, center.dy), fontFamily: labelFontFamily);
         break;
       case 'oval':
         final Rect oval = Rect.fromCenter(
@@ -6708,13 +6757,13 @@ class ShapeDiagramPainter extends CustomPainter {
   }
 
   void _paintShapeLabels(Canvas canvas, Rect rect) {
-    _paintText(canvas, labels['top'], Offset(rect.center.dx, rect.top - 18));
+    _paintText(canvas, labels['top'], Offset(rect.center.dx, rect.top - 18), fontFamily: labelFontFamily);
     _paintText(
-        canvas, labels['bottom'], Offset(rect.center.dx, rect.bottom + 18));
-    _paintText(canvas, labels['left'], Offset(rect.left - 18, rect.center.dy));
+        canvas, labels['bottom'], Offset(rect.center.dx, rect.bottom + 18), fontFamily: labelFontFamily);
+    _paintText(canvas, labels['left'], Offset(rect.left - 18, rect.center.dy), fontFamily: labelFontFamily);
     _paintText(
-        canvas, labels['right'], Offset(rect.right + 18, rect.center.dy));
-    _paintText(canvas, labels['center'], rect.center);
+        canvas, labels['right'], Offset(rect.right + 18, rect.center.dy), fontFamily: labelFontFamily);
+    _paintText(canvas, labels['center'], rect.center, fontFamily: labelFontFamily);
   }
 
   @override
@@ -6729,11 +6778,14 @@ class CircleQuadrantsPointPainter extends CustomPainter {
     required this.regionLabels,
     required this.pointLabel,
     required this.shadedRegion,
+    this.labelFontFamily,
   });
 
   final Map<String, String> regionLabels;
   final String pointLabel;
   final String shadedRegion;
+  /// 預覽工具會塞自己載進來的字型；app 裡是 null，用預設字型。
+  final String? labelFontFamily;
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -6783,31 +6835,35 @@ class CircleQuadrantsPointPainter extends CustomPainter {
 
     canvas.drawCircle(pointP, 4.5, pointPaint);
 
-    _paintText(canvas, 'A', Offset(top.dx - 6, top.dy - 24));
-    _paintText(canvas, 'B', Offset(right.dx + 18, right.dy - 8));
-    _paintText(canvas, 'C', Offset(bottom.dx - 6, bottom.dy + 12));
-    _paintText(canvas, 'D', Offset(left.dx - 24, left.dy - 8));
-    _paintText(canvas, pointLabel, pointP + const Offset(-6, -22));
+    _paintText(canvas, 'A', Offset(top.dx - 6, top.dy - 24), fontFamily: labelFontFamily);
+    _paintText(canvas, 'B', Offset(right.dx + 18, right.dy - 8), fontFamily: labelFontFamily);
+    _paintText(canvas, 'C', Offset(bottom.dx - 6, bottom.dy + 12), fontFamily: labelFontFamily);
+    _paintText(canvas, 'D', Offset(left.dx - 24, left.dy - 8), fontFamily: labelFontFamily);
+    _paintText(canvas, pointLabel, pointP + const Offset(-6, -22), fontFamily: labelFontFamily);
 
     _paintText(
       canvas,
       regionLabels['topLeft'],
       Offset(center.dx - radius * 0.34, center.dy - radius * 0.28),
+      fontFamily: labelFontFamily,
     );
     _paintText(
       canvas,
       regionLabels['topRight'],
       Offset(center.dx + radius * 0.28, center.dy - radius * 0.26),
+      fontFamily: labelFontFamily,
     );
     _paintText(
       canvas,
       regionLabels['bottomLeft'],
       Offset(center.dx - radius * 0.38, center.dy + radius * 0.3),
+      fontFamily: labelFontFamily,
     );
     _paintText(
       canvas,
       regionLabels['bottomRight'],
       Offset(center.dx + radius * 0.26, center.dy + radius * 0.3),
+      fontFamily: labelFontFamily,
     );
   }
 
@@ -6829,6 +6885,7 @@ class CoordinatePlanePainter extends CustomPainter {
     required this.points,
     required this.pathPoints,
     required this.highlightPoint,
+    this.labelFontFamily,
   });
 
   final int minX;
@@ -6839,6 +6896,8 @@ class CoordinatePlanePainter extends CustomPainter {
   final List<DiagramPoint> points;
   final List<DiagramPoint> pathPoints;
   final DiagramPoint? highlightPoint;
+  /// 預覽工具會塞自己載進來的字型；app 裡是 null，用預設字型。
+  final String? labelFontFamily;
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -6879,13 +6938,13 @@ class CoordinatePlanePainter extends CustomPainter {
         final double dx = mapX(x);
         canvas.drawLine(
             Offset(dx, plot.top), Offset(dx, plot.bottom), gridPaint);
-        _paintText(canvas, '$x', Offset(dx, plot.bottom + 14));
+        _paintText(canvas, '$x', Offset(dx, plot.bottom + 14), fontFamily: labelFontFamily);
       }
       for (int y = minY; y <= maxY; y++) {
         final double dy = mapY(y);
         canvas.drawLine(
             Offset(plot.left, dy), Offset(plot.right, dy), gridPaint);
-        if (y != 0) _paintText(canvas, '$y', Offset(plot.left - 14, dy));
+        if (y != 0) _paintText(canvas, '$y', Offset(plot.left - 14, dy), fontFamily: labelFontFamily);
       }
     }
 
@@ -6912,7 +6971,7 @@ class CoordinatePlanePainter extends CustomPainter {
           point.y == highlightPoint!.y;
       canvas.drawCircle(offset, 5, isHighlighted ? highlightPaint : pointPaint);
       if (point.label != null && point.label!.isNotEmpty) {
-        _paintText(canvas, point.label, offset + const Offset(0, -16));
+        _paintText(canvas, point.label, offset + const Offset(0, -16), fontFamily: labelFontFamily);
       }
     }
   }
@@ -6937,12 +6996,15 @@ class CompositeGridShapePainter extends CustomPainter {
     required this.cols,
     required this.filledCells,
     required this.cellLabels,
+    this.labelFontFamily,
   });
 
   final int rows;
   final int cols;
   final List<GridCell> filledCells;
   final Map<String, String> cellLabels;
+  /// 預覽工具會塞自己載進來的字型；app 裡是 null，用預設字型。
+  final String? labelFontFamily;
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -6985,7 +7047,7 @@ class CompositeGridShapePainter extends CustomPainter {
         canvas.drawRect(
             cellRect, filledKeys.contains(key) ? fillPaint : emptyPaint);
         canvas.drawRect(cellRect, gridPaint);
-        _paintText(canvas, cellLabels[key], cellRect.center);
+        _paintText(canvas, cellLabels[key], cellRect.center, fontFamily: labelFontFamily);
       }
     }
 
@@ -7022,17 +7084,21 @@ class CompositeGridShapePainter extends CustomPainter {
   }
 }
 
-void _paintText(Canvas canvas, String? text, Offset center) {
+void _paintText(Canvas canvas, String? text, Offset center,
+    {String? fontFamily}) {
   if (text == null || text.isEmpty) {
     return;
   }
   final TextPainter painter = TextPainter(
     text: TextSpan(
       text: text,
-      style: const TextStyle(
-        color: Color(0xFF0F172A),
+      style: TextStyle(
+        color: const Color(0xFF0F172A),
         fontSize: 13,
         fontWeight: FontWeight.w600,
+        // 預設 null，用 app 的字型；預覽工具會塞自己載進來的字型，
+        // 否則測試環境沒有系統字型，文字全部畫成黑方塊。
+        fontFamily: fontFamily,
       ),
     ),
     textDirection: TextDirection.ltr,

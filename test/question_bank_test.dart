@@ -935,7 +935,10 @@ void main() {
     final Question circleRegionQuestion =
         findQuestion(geometryPack, 'geometry_grade6_foundation_014');
 
-    expect(circleSquareQuestion.figure.kind, 'shape_diagram');
+    // 2026-09-04 從 shape_diagram 改成 geometry_scene：題目講的是圓內兩條互相
+    // 垂直的直徑連成的內接正方形，shape_diagram 只畫得出一個空圓，中間的「49」
+    // 反而像在說圓面積是 49。
+    expect(circleSquareQuestion.figure.kind, 'geometry_scene');
     expect(circleSquareQuestion.source?.type, 'official_reference');
     expect(circleRegionQuestion.figure.kind, 'circle_quadrants_point');
     expect(circleRegionQuestion.correctAnswer.value, '23');

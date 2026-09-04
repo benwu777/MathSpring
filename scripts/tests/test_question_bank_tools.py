@@ -564,6 +564,28 @@ class FigureParamsOnRealPacksTest(unittest.TestCase):
         self.assertEqual(offenders, [], '\n'.join(offenders))
 
 
+class ValidatorKindsMatchRendererTest(unittest.TestCase):
+    """驗證器的 KINDS 白名單不可以放行 renderer 畫不出來的 kind。
+
+    兩份清單分屬 Python 與 Dart，沒有共用的真實來源，只能靠測試防漂移。
+    反方向（renderer 有、白名單沒有）是允許的：trig_plane 就是那樣，
+    它畫的是寫死的 sin / cos 曲線，只給內建展示畫面用。
+    """
+
+    def _renderer_kinds(self):
+        with open('lib/main.dart') as fh:
+            src = fh.read()
+        start = src.index('FigureRenderSpec? buildFigureRenderSpec(')
+        body = src[start:src.index('class _FigurePreviewDialog', start)]
+        import re as _re
+        return set(_re.findall(r"^\s*'([a-z_]+)' =>", body, _re.M))
+
+    def test_every_whitelisted_kind_has_a_renderer_branch(self):
+        missing = vqp.KINDS - {'none'} - self._renderer_kinds()
+        self.assertEqual(missing, set(),
+                         'renderer 沒有這些 kind 的分支，題目會一片空白: %s' % missing)
+
+
 class ValidatorOnRealPacksTest(unittest.TestCase):
     """整合測試：驗證器對真實的 50 個題庫檔要全綠。"""
 

@@ -524,8 +524,23 @@ python3 scripts/validate_question_packs.py            # 全部
 python3 scripts/validate_question_packs.py grade3     # 單一年級
 ```
 
-幾何圖的目視檢查用 `test/figure_preview_test.dart`：帶 `FIG_DIR` 指向一個資料夾並在其中放 `figspec.json`
-（`[{"id": ..., "params": ...}]`），它會用 app 同一支 `GeometryScenePainter` 把圖渲染成 PNG；沒帶 `FIG_DIR` 會自動跳過。
+圖的目視檢查用 `scripts/dump_figure_previews.py`，它會從真實題包挑題、渲染成 PNG：
+
+```bash
+python3 scripts/dump_figure_previews.py --kind composite_grid_shape
+python3 scripts/dump_figure_previews.py --id geometry_grade9_foundation_009
+python3 scripts/dump_figure_previews.py --grade grade9 --out /tmp/figs
+```
+
+輸出資料夾裡除了 PNG 還有 `index.txt`（題號對題幹），看圖時才知道每張圖在問什麼。
+底層是 `test/figure_preview_test.dart`，走 app 自己的 `buildFigureRenderSpec`，
+所以**五種 kind 都畫得出來**，畫面也跟 app 裡一致；也可以自己準備資料夾放
+`figspec.json`（`[{"id": ..., "kind": ..., "params": ...}]`）再帶 `FIG_DIR` 直接跑，
+沒帶 `FIG_DIR` 會自動跳過。
+
+**驗證器過不代表圖是對的。**它只看得出 params 的形狀合不合法，看不出圖有沒有
+畫錯題意——2026-09-04 就是靠目視才發現「圓內接正方形」那題只畫了一個空圓、
+「兩種拼法周長相差」那題只畫了其中一種拼法。新增附圖的題請至少看過一次。
 
 ## answerMode 規則（phase 1 硬規則）
 
