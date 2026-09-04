@@ -8,6 +8,7 @@ import 'package:mathspring/models/answer_session.dart';
 import 'package:mathspring/models/learner_profile.dart';
 import 'package:mathspring/models/question.dart';
 import 'package:mathspring/models/question_bank.dart';
+import 'package:mathspring/ui/layout_spec.dart';
 import 'package:mathspring/models/question_progress.dart';
 import 'package:mathspring/models/session_answer_record.dart';
 import 'package:mathspring/services/session_launch_plan_builder.dart';
@@ -580,8 +581,19 @@ void main() {
     });
   }
 
-  Future<void> pumpApp(WidgetTester tester, AppServices services) async {
-    await tester.binding.setSurfaceSize(const Size(1200, 1600));
+  Future<void> pumpApp(WidgetTester tester, AppServices services,
+      {Size size = const Size(1200, 1600)}) async {
+    // 用 tester.view 而不是 setSurfaceSize：後者不會改變 MediaQuery
+    // （實測 setSurfaceSize(390, 844) 之後 MediaQuery.sizeOf 仍回報 800），
+    // 所以依賴寬度的版面在測試裡不會生效。
+    //
+    // 但仍要先清掉 setSurfaceSize 的覆寫：本檔有其他測試直接呼叫它設 430x932
+    // 且沒有還原，殘留下來會讓「排版用的尺寸」與「view 的尺寸」不一致，
+    // 結果是版面算在一個尺寸、點擊命中在另一個尺寸，tap 會打空。
+    await tester.binding.setSurfaceSize(null);
+    tester.view.devicePixelRatio = 1.0;
+    tester.view.physicalSize = size;
+    addTearDown(tester.view.reset);
     await tester.pumpWidget(MathSpringApp(services: services));
     await tester.runAsync(() async {
       await Future<void>.delayed(const Duration(milliseconds: 50));
@@ -660,29 +672,46 @@ void main() {
     expect(find.text('Logic'), findsNothing);
   });
 
-  testWidgets('app theme uses slightly tighter typography scale',
+  testWidgets('app 的字級跟著寬度級別走，不是固定一套手機值',
       (WidgetTester tester) async {
+    // iPad 不該是放大的 iPhone：TextTheme 由 LayoutSpec 依寬度產生，
+    // 已經在用 Theme.of(context).textTheme 的畫面因此自動縮放。
     final TestWidgetsFlutterBinding binding =
         TestWidgetsFlutterBinding.ensureInitialized();
     binding.platformDispatcher.localeTestValue = const Locale('en');
 
     final AppServices services = createTestServices();
 
-    await pumpApp(tester, services);
+    TextTheme themeAt(WidgetTester t) =>
+        Theme.of(t.element(find.byType(Scaffold).first)).textTheme;
 
-    final BuildContext context = tester.element(find.byType(Scaffold).first);
-    final ThemeData theme = Theme.of(context);
-    final TextTheme textTheme = theme.textTheme;
+    // compact：與改造前的既有值完全相同，iPhone 一個像素都不變
+    await pumpApp(tester, services, size: const Size(390, 844));
+    final TextTheme compact = themeAt(tester);
+    final LayoutSpec compactSpec = LayoutSpec.forWidth(390);
+    expect(compact.displaySmall?.fontSize, compactSpec.displayText);
+    expect(compact.displaySmall?.fontSize, 32);
+    expect(compact.headlineSmall?.fontSize, 22);
+    expect(compact.titleLarge?.fontSize, 18);
+    expect(compact.bodyLarge?.fontSize, 15);
+    expect(compact.bodyMedium?.fontSize, 13);
+    expect(compact.bodySmall?.fontSize, 11);
 
-    expect(textTheme.displaySmall?.fontSize, 32);
-    expect(textTheme.headlineSmall?.fontSize, 22);
-    expect(textTheme.titleLarge?.fontSize, 18);
-    expect(textTheme.bodyLarge?.fontSize, 15);
-    expect(textTheme.bodyLarge?.height, 1.5);
-    expect(textTheme.bodyMedium?.fontSize, 13);
-    expect(textTheme.bodyMedium?.height, 1.4);
-    expect(textTheme.bodySmall?.fontSize, 11);
-    expect(textTheme.bodySmall?.height, 1.35);
+    // expanded：字級放大，但行高與顏色這些視覺屬性不可被吃掉
+    await pumpApp(tester, services, size: const Size(1180, 820));
+    final TextTheme expanded = themeAt(tester);
+    final LayoutSpec expandedSpec = LayoutSpec.forWidth(1180);
+    expect(expanded.displaySmall?.fontSize, expandedSpec.displayText);
+    expect(expanded.bodyLarge?.fontSize, expandedSpec.bodyText);
+    expect(expanded.bodyLarge?.fontSize,
+        greaterThan(compact.bodyLarge!.fontSize!));
+    expect(expanded.bodyLarge?.height, 1.5);
+    expect(expanded.bodyMedium?.height, 1.4);
+    expect(expanded.bodySmall?.height, 1.35);
+
+    // 按鈕字級目前不隨寬度變，維持原樣
+    final ThemeData theme =
+        Theme.of(tester.element(find.byType(Scaffold).first));
     expect(
       theme.filledButtonTheme.style?.textStyle
           ?.resolve(const <WidgetState>{})?.fontSize,

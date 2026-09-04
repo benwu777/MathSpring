@@ -21,6 +21,7 @@ import 'package:mathspring/services/formal_exam_preset.dart';
 import 'package:mathspring/services/formal_exam_scoring.dart';
 import 'package:mathspring/services/math_text_formatter.dart';
 import 'package:mathspring/services/session_launch_plan_builder.dart';
+import 'package:mathspring/ui/layout_spec.dart';
 
 const String appSupportUrl =
     'https://benwu777.github.io/MathSpring/support/';
@@ -165,6 +166,18 @@ class _MathSpringAppState extends State<MathSpringApp> {
         GlobalCupertinoLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
       ],
+      // 字級依畫面寬度分級，iPad 不是放大的 iPhone。
+      // 放在 builder 而不是 theme，是因為這裡才拿得到帶 MediaQuery 的 context；
+      // 已經在用 Theme.of(context).textTheme 的畫面因此自動跟著縮放。
+      builder: (BuildContext context, Widget? child) {
+        final ThemeData base = Theme.of(context);
+        return Theme(
+          data: base.copyWith(
+            textTheme: LayoutSpec.of(context).textThemeFrom(base.textTheme),
+          ),
+          child: child ?? const SizedBox.shrink(),
+        );
+      },
       theme: ThemeData(
         useMaterial3: true,
         colorScheme: ColorScheme.fromSeed(
@@ -1201,28 +1214,34 @@ class _TopBar extends StatelessWidget {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Container(
-          key: const ValueKey<String>('top_bar_brand_chip'),
-          padding: const EdgeInsets.symmetric(horizontal: 13, vertical: 8),
-          decoration: BoxDecoration(
-            color: const Color(0xFFFDFEFF),
-            borderRadius: BorderRadius.circular(999),
-            border: Border.all(color: const Color(0xFFE6EBF2)),
-            boxShadow: const [
-              BoxShadow(
-                color: Color(0x0A0F172A),
-                blurRadius: 12,
-                offset: Offset(0, 4),
+        // 品牌 chip 必須可壓縮：英文的 appSubtitle 比中文長很多，
+        // 在 390pt 寬的 iPhone 上會把整條 Row 撐爆 29px。
+        Flexible(
+          child: Container(
+            key: const ValueKey<String>('top_bar_brand_chip'),
+            padding: const EdgeInsets.symmetric(horizontal: 13, vertical: 8),
+            decoration: BoxDecoration(
+              color: const Color(0xFFFDFEFF),
+              borderRadius: BorderRadius.circular(999),
+              border: Border.all(color: const Color(0xFFE6EBF2)),
+              boxShadow: const [
+                BoxShadow(
+                  color: Color(0x0A0F172A),
+                  blurRadius: 12,
+                  offset: Offset(0, 4),
+                ),
+              ],
+            ),
+            child: Text(
+              AppStrings.of(context).appSubtitle,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: const TextStyle(
+                fontSize: 11,
+                color: Color(0xFF64748B),
+                fontWeight: FontWeight.w700,
+                letterSpacing: 0.3,
               ),
-            ],
-          ),
-          child: Text(
-            AppStrings.of(context).appSubtitle,
-            style: const TextStyle(
-              fontSize: 11,
-              color: Color(0xFF64748B),
-              fontWeight: FontWeight.w700,
-              letterSpacing: 0.3,
             ),
           ),
         ),
