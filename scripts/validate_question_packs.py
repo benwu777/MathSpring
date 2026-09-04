@@ -135,6 +135,167 @@ def check_option_lengths(options, correct_value):
     return []
 
 
+# 每個 kind 的 renderer 實際會讀的 params 鍵（lib/main.dart 的 _buildFigureRenderSpec
+# 與各 painter）。不在名單裡的鍵會被靜默丟掉，寫了等於沒寫。
+FIGURE_PARAM_KEYS = {
+    'none': set(),
+    'geometry_scene': {'bounds', 'points', 'segments', 'polygons', 'arcs',
+                       'angleMarks', 'rightAngles', 'equalTicks'},
+    'shape_diagram': {'shape', 'labels'},
+    'coordinate_plane': {'minX', 'maxX', 'minY', 'maxY', 'showGrid',
+                         'points', 'path', 'highlightPoint'},
+    'composite_grid_shape': {'rows', 'cols', 'filledCells', 'cellLabels'},
+    'circle_quadrants_point': {'regionLabels', 'pointLabel', 'shadedRegion'},
+}
+# ShapeDiagramPainter 的 switch 分支；其餘值會落到 default，靜默畫成 rectangle。
+SHAPE_DIAGRAM_SHAPES = {'compass', 'square', 'triangle', 'trapezoid',
+                        'parallelogram', 'pentagon', 'hexagon', 'circle',
+                        'oval', 'rectangle'}
+SHAPE_DIAGRAM_LABEL_KEYS = {'top', 'bottom', 'left', 'right', 'center'}
+# circle 那一支只呼叫三次 _paintText，left / bottom 寫了也不會出現。
+SHAPE_DIAGRAM_CIRCLE_LABEL_KEYS = {'top', 'right', 'center'}
+# _buildFigureRenderSpec 對缺漏的 coordinate_plane 界限給的預設值。
+COORD_PLANE_BOUND_DEFAULTS = {'minX': 0, 'maxX': 6, 'minY': 0, 'maxY': 6}
+
+
+def _int_or_none(v):
+    """renderer 的 _intFromDynamic 只認得 int 與能 parse 成 int 的字串。
+
+    0.4 這種浮點數會 parse 失敗、fallback 成 0——點靜默跑到別的位置。
+    """
+    if isinstance(v, bool):
+        return None
+    if isinstance(v, int):
+        return v
+    if isinstance(v, str):
+        try:
+            return int(v)
+        except ValueError:
+            return None
+    return None
+
+
+def check_figure_params(figure):
+    """回傳 figure.params 與 renderer 不相容的錯誤訊息清單；合格時回傳空清單。
+
+    geometry_scene 另有 scene_checks 做幾何一致性檢查，這裡只管形狀與範圍。
+    這些 kind 過去完全沒被驗證，params 寫錯時畫面只會靜默畫錯或一片空白。
+    """
+    kind = figure.get('kind')
+    if kind not in FIGURE_PARAM_KEYS:
+        return []  # kind 白名單由 main() 負責，這裡不重複報
+    params = figure.get('params')
+    if not isinstance(params, dict):
+        return ['figure.params 必須是物件']
+    errs = []
+
+    stray = sorted(set(params) - FIGURE_PARAM_KEYS[kind])
+    if stray:
+        if kind == 'none':
+            errs.append('kind 是 none 卻帶了 params: %s' % '、'.join(stray))
+        else:
+            errs.append('%s 不認得這些 params，renderer 會靜默丟掉: %s'
+                        % (kind, '、'.join(stray)))
+
+    if kind == 'shape_diagram':
+        shape = params.get('shape', 'rectangle')
+        if shape not in SHAPE_DIAGRAM_SHAPES:
+            errs.append('shape_diagram 的 shape 不受支援，會靜默畫成 rectangle: %s' % shape)
+        labels = params.get('labels') or {}
+        if not isinstance(labels, dict):
+            errs.append('shape_diagram 的 labels 必須是物件')
+        else:
+            allowed = (SHAPE_DIAGRAM_CIRCLE_LABEL_KEYS if shape == 'circle'
+                       else SHAPE_DIAGRAM_LABEL_KEYS)
+            bad = sorted(set(labels) - allowed)
+            if bad:
+                errs.append('shape=%s 畫不出這些 labels，會靜默消失: %s'
+                            % (shape, '、'.join(bad)))
+
+    elif kind == 'coordinate_plane':
+        b = {}
+        for key, default in COORD_PLANE_BOUND_DEFAULTS.items():
+            v = _int_or_none(params.get(key, default))
+            if v is None:
+                errs.append('coordinate_plane 的 %s 必須是整數: %r' % (key, params.get(key)))
+                v = default
+            b[key] = v
+        # 界限本身就顛倒時不再檢查點的範圍：那只會噴出一串衍生錯誤，
+        # 蓋掉真正要修的那一行。
+        bounds_ok = True
+        for lo, hi in (('minX', 'maxX'), ('minY', 'maxY')):
+            if b[lo] >= b[hi]:
+                errs.append('coordinate_plane 的 %s(%d) 不小於 %s(%d)'
+                            % (lo, b[lo], hi, b[hi]))
+                bounds_ok = False
+
+        def coords(raw, where):
+            """檢查一串點的座標是整數且落在界限內，回傳可用的 (x, y) 清單。"""
+            out = []
+            if raw is None:
+                return out
+            if not isinstance(raw, list):
+                errs.append('coordinate_plane 的 %s 必須是陣列' % where)
+                return out
+            for pt in raw:
+                if not isinstance(pt, dict):
+                    errs.append('coordinate_plane 的 %s 元素必須是物件: %r' % (where, pt))
+                    continue
+                x, y = _int_or_none(pt.get('x')), _int_or_none(pt.get('y'))
+                if x is None or y is None:
+                    errs.append('%s 的座標必須是整數，非整數會 fallback 成 0: %r'
+                                % (where, pt))
+                    continue
+                if bounds_ok and not (b['minX'] <= x <= b['maxX']
+                                      and b['minY'] <= y <= b['maxY']):
+                    errs.append('%s 的點 (%d, %d) 超出 %d..%d × %d..%d，會畫到繪圖區外'
+                                % (where, x, y, b['minX'], b['maxX'],
+                                   b['minY'], b['maxY']))
+                    continue
+                out.append((x, y))
+            return out
+
+        pts = coords(params.get('points'), 'points')
+        coords(params.get('path'), 'path')
+        hp = params.get('highlightPoint')
+        if hp is not None:
+            if not isinstance(hp, dict):
+                errs.append('coordinate_plane 的 highlightPoint 必須是物件')
+            else:
+                hx, hy = _int_or_none(hp.get('x')), _int_or_none(hp.get('y'))
+                if (hx, hy) not in pts:
+                    # highlightPoint 不會自己畫點，只把 points 裡座標相同的那一點改紅
+                    errs.append('highlightPoint (%r, %r) 不等於 points 裡的任何一點，'
+                                '不會有任何效果' % (hp.get('x'), hp.get('y')))
+
+    elif kind == 'composite_grid_shape':
+        rows = _int_or_none(params.get('rows', 3))
+        cols = _int_or_none(params.get('cols', 3))
+        for name, v in (('rows', rows), ('cols', cols)):
+            if v is None or v <= 0:
+                errs.append('composite_grid_shape 的 %s 必須是正整數: %r'
+                            % (name, params.get(name)))
+        if rows and cols and rows > 0 and cols > 0:
+            for cell in params.get('filledCells') or []:
+                if (not isinstance(cell, list) or len(cell) != 2
+                        or any(_int_or_none(v) is None for v in cell)):
+                    errs.append('filledCells 的格子必須是 [row, col] 兩個整數: %r' % (cell,))
+                    continue
+                r, c = _int_or_none(cell[0]), _int_or_none(cell[1])
+                if not (0 <= r < rows and 0 <= c < cols):
+                    errs.append('filledCells 的 %r 超出 %d×%d 的格線，不會被畫出來'
+                                % (cell, rows, cols))
+            for key in params.get('cellLabels') or {}:
+                parts = str(key).split(',')
+                nums = [_int_or_none(x) for x in parts]
+                if len(nums) != 2 or any(n is None for n in nums):
+                    errs.append('cellLabels 的鍵必須是 "row,col": %r' % key)
+                elif not (0 <= nums[0] < rows and 0 <= nums[1] < cols):
+                    errs.append('cellLabels 的鍵 %r 超出 %d×%d 的格線' % (key, rows, cols))
+
+    return errs
+
+
 def allowed_topics(level_stage):
     n = level_stage.replace('grade', '')
     return TOPICS_UPPER if n.isdigit() and int(n) >= 7 else TOPICS
@@ -300,6 +461,8 @@ def main():
                 err('figure kind 不受 renderer 支援: %s' % q.get('figure', {}).get('kind'))
             if q.get('figure', {}).get('kind') == 'geometry_scene':
                 scene_checks(q, err)
+            for msg in check_figure_params(q.get('figure') or {}):
+                err(msg)
 
             if q.get('answerMode') == 'multiple_choice':
                 opts = q.get('options', {})

@@ -398,6 +398,172 @@ class ValidatorReportsSimplifiedInTraditionalTest(unittest.TestCase):
         self.assertIn('簡體', r.stdout)
 
 
+class CheckFigureParamsTest(unittest.TestCase):
+    """validate_question_packs.check_figure_params：三種 kind 的 params 過去完全沒被檢查。
+
+    只有 geometry_scene 有 scene_checks。shape_diagram / coordinate_plane /
+    composite_grid_shape 的 params 寫錯時，畫面只會靜默畫錯或一片空白，
+    不報錯、不留 log。開放起草代理附圖之後這個缺口變得重要。
+
+    每條規則都對應 renderer 實際的行為（lib/main.dart 的三個 painter）。
+    """
+
+    def _fig(self, kind, **params):
+        return {'type': 'custom', 'kind': kind, 'params': params}
+
+    # --- 共通 ---
+
+    def test_kind_none_must_have_empty_params(self):
+        msgs = vqp.check_figure_params(self._fig('none', rows=3))
+        self.assertEqual(len(msgs), 1)
+        self.assertIn('none', msgs[0])
+
+    def test_kind_none_with_empty_params_is_fine(self):
+        self.assertEqual(vqp.check_figure_params(self._fig('none')), [])
+
+    def test_unknown_param_key_is_reported(self):
+        """renderer 只讀白名單裡的鍵，多寫的鍵靜默被丟掉——例如 highlightInterval。"""
+        msgs = vqp.check_figure_params(
+            self._fig('coordinate_plane', maxX=5, maxY=5,
+                      points=[{'x': 1, 'y': 1}], highlightInterval=['-4', '4']))
+        self.assertEqual(len(msgs), 1)
+        self.assertIn('highlightInterval', msgs[0])
+
+    def test_geometry_scene_stray_key_from_another_kind_is_reported(self):
+        msgs = vqp.check_figure_params(
+            self._fig('geometry_scene', bounds={'minX': 0, 'minY': 0, 'maxX': 1, 'maxY': 1},
+                      points=[], rows=4, cols=5, filledCells=[[0, 0]]))
+        self.assertEqual(len(msgs), 1)
+        for key in ('rows', 'cols', 'filledCells'):
+            self.assertIn(key, msgs[0])
+
+    # --- shape_diagram ---
+
+    def test_shape_diagram_accepts_a_supported_shape(self):
+        self.assertEqual(vqp.check_figure_params(
+            self._fig('shape_diagram', shape='trapezoid',
+                      labels={'top': '4', 'bottom': '10'})), [])
+
+    def test_shape_diagram_unsupported_shape_is_reported(self):
+        """renderer 的 switch 沒有 default 以外的處理，寫錯就靜默畫成 rectangle。"""
+        msgs = vqp.check_figure_params(self._fig('shape_diagram', shape='rhombus'))
+        self.assertEqual(len(msgs), 1)
+        self.assertIn('rhombus', msgs[0])
+
+    def test_shape_diagram_unknown_label_key_is_reported(self):
+        msgs = vqp.check_figure_params(
+            self._fig('shape_diagram', shape='square', labels={'topLeft': '3'}))
+        self.assertEqual(len(msgs), 1)
+        self.assertIn('topLeft', msgs[0])
+
+    def test_shape_diagram_circle_cannot_paint_left_or_bottom_labels(self):
+        """circle 這一支只畫 center / top / right，其餘標籤靜默消失。"""
+        msgs = vqp.check_figure_params(
+            self._fig('shape_diagram', shape='circle',
+                      labels={'center': 'O', 'bottom': 'r'}))
+        self.assertEqual(len(msgs), 1)
+        self.assertIn('bottom', msgs[0])
+
+    # --- coordinate_plane ---
+
+    def test_coordinate_plane_valid_figure_reports_nothing(self):
+        self.assertEqual(vqp.check_figure_params(
+            self._fig('coordinate_plane', minX=-5, maxX=5, minY=-5, maxY=5,
+                      showGrid=True,
+                      points=[{'x': 1, 'y': 2, 'label': 'A'}],
+                      path=[{'x': -5, 'y': 0}, {'x': 5, 'y': 0}],
+                      highlightPoint={'x': 1, 'y': 2, 'label': 'A'})), [])
+
+    def test_coordinate_plane_point_outside_bounds_is_reported(self):
+        """省略 minY 時預設是 0，負座標的點會畫到繪圖區外面去。"""
+        msgs = vqp.check_figure_params(
+            self._fig('coordinate_plane', maxX=6, maxY=8,
+                      points=[{'x': 4, 'y': -7, 'label': "P'"}]))
+        self.assertEqual(len(msgs), 1)
+        self.assertIn('-7', msgs[0])
+
+    def test_coordinate_plane_path_outside_bounds_is_reported(self):
+        msgs = vqp.check_figure_params(
+            self._fig('coordinate_plane', maxX=8, maxY=6,
+                      points=[{'x': 3, 'y': 5}],
+                      path=[{'x': 1, 'y': -5}, {'x': 3, 'y': 5}]))
+        self.assertEqual(len(msgs), 1)
+        self.assertIn('path', msgs[0])
+
+    def test_coordinate_plane_non_integer_coordinate_is_reported(self):
+        """_intFromDynamic 對 0.4 會 parse 失敗、fallback 成 0，點默默跑到別的地方。"""
+        msgs = vqp.check_figure_params(
+            self._fig('coordinate_plane', maxX=6, maxY=11,
+                      points=[{'x': -1, 'y': 0.4, 'label': 'C'}, {'x': 0, 'y': 0}],
+                      minX=-6, minY=0))
+        self.assertEqual(len(msgs), 1)
+        self.assertIn('0.4', msgs[0])
+
+    def test_coordinate_plane_highlight_point_not_matching_any_point_is_reported(self):
+        """highlightPoint 不會自己畫點，只把 points 裡座標相同的那一點改紅；不匹配就毫無效果。"""
+        msgs = vqp.check_figure_params(
+            self._fig('coordinate_plane', maxX=6, maxY=6,
+                      points=[{'x': 1, 'y': 1, 'label': 'A'}],
+                      highlightPoint={'x': 2, 'y': 2}))
+        self.assertEqual(len(msgs), 1)
+        self.assertIn('highlightPoint', msgs[0])
+
+    def test_coordinate_plane_reversed_bounds_are_reported(self):
+        msgs = vqp.check_figure_params(
+            self._fig('coordinate_plane', minX=5, maxX=1, minY=0, maxY=6,
+                      points=[{'x': 2, 'y': 2}]))
+        self.assertEqual(len(msgs), 1)
+        self.assertIn('minX', msgs[0])
+
+    # --- composite_grid_shape ---
+
+    def test_composite_grid_shape_valid_figure_reports_nothing(self):
+        self.assertEqual(vqp.check_figure_params(
+            self._fig('composite_grid_shape', rows=2, cols=3,
+                      filledCells=[[0, 0], [1, 2]],
+                      cellLabels={'0,0': '甲'})), [])
+
+    def test_composite_grid_shape_filled_cell_out_of_range_is_reported(self):
+        """超出 rows/cols 的格子不會被畫，也不會報錯。"""
+        msgs = vqp.check_figure_params(
+            self._fig('composite_grid_shape', rows=2, cols=2,
+                      filledCells=[[0, 0], [2, 0]]))
+        self.assertEqual(len(msgs), 1)
+        self.assertIn('[2, 0]', msgs[0])
+
+    def test_composite_grid_shape_malformed_cell_is_reported(self):
+        msgs = vqp.check_figure_params(
+            self._fig('composite_grid_shape', rows=2, cols=2, filledCells=[[1]]))
+        self.assertEqual(len(msgs), 1)
+
+    def test_composite_grid_shape_cell_label_key_out_of_range_is_reported(self):
+        msgs = vqp.check_figure_params(
+            self._fig('composite_grid_shape', rows=2, cols=2,
+                      filledCells=[[0, 0]], cellLabels={'5,5': '甲'}))
+        self.assertEqual(len(msgs), 1)
+        self.assertIn('5,5', msgs[0])
+
+    def test_composite_grid_shape_rows_must_be_positive(self):
+        msgs = vqp.check_figure_params(
+            self._fig('composite_grid_shape', rows=0, cols=2, filledCells=[]))
+        self.assertTrue(msgs)
+
+
+class FigureParamsOnRealPacksTest(unittest.TestCase):
+    """整合測試：真實題庫每一張圖的 params 都要符合 renderer 讀得懂的形狀。"""
+
+    def test_every_real_figure_has_valid_params(self):
+        import glob
+        offenders = []
+        for path in sorted(glob.glob('assets/questions/*/*.json')):
+            with open(path) as fh:
+                pack = json.load(fh)
+            for q in pack['questions']:
+                offenders.extend('%s: %s' % (q['id'], e)
+                                 for e in vqp.check_figure_params(q.get('figure') or {}))
+        self.assertEqual(offenders, [], '\n'.join(offenders))
+
+
 class ValidatorOnRealPacksTest(unittest.TestCase):
     """整合測試：驗證器對真實的 50 個題庫檔要全綠。"""
 
