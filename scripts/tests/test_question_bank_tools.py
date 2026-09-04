@@ -734,3 +734,80 @@ class ValidatorOnRealPacksTest(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
+
+
+class CaretPowerTest(unittest.TestCase):
+    """validate_question_packs：數字冪次不可以寫成 `3^15` 這種程式語法。
+
+    規範（docs/AGENT_PROMPT_question_bank.md「數學排版規則」）明文禁止
+    `3^15`，但一直沒有閘門，全庫掃出 7 題共 49 處。
+
+    **只擋純數字指數。** 變數指數（`2^a`、`p₁^e₁`、`a^(p−1)`）不擋：
+    Unicode 有 ᵃ ᵏ ˣ 這類上標字母，但字型覆蓋極差，換過去反而更可能變空方塊；
+    而 `2^(p−1)` 需要上標括號與上標減號，寫出來沒人讀得懂。
+    數字上標 ⁰¹²³⁴⁵⁶⁷⁸⁹ 則是全庫本來就在用、字型覆蓋良好的寫法。
+    """
+
+    def _q(self, **fields):
+        q = {'prompt': {'zh-Hant': '答案是多少？', 'zh-Hans': '答案是多少？',
+                        'en': 'What is it?', 'ja': '答えは？'}}
+        q.update(fields)
+        return q
+
+    def test_clean_question_reports_nothing(self):
+        self.assertEqual(vqp.check_caret_power(self._q()), [])
+
+    def test_numeric_exponent_in_prompt_is_reported(self):
+        q = self._q(prompt={'zh-Hant': '求 3^15 的個位數。', 'zh-Hans': '求 3^15 的个位数。',
+                            'en': 'Find the units digit of 3^15.', 'ja': '3^15 の一の位は？'})
+        msgs = vqp.check_caret_power(q)
+        self.assertEqual(len(msgs), 1)
+        self.assertIn('prompt', msgs[0])
+        self.assertIn('3^15', msgs[0])
+
+    def test_numeric_exponent_in_solution_steps_is_reported(self):
+        q = self._q(solutionSteps={'zh-Hant': ['先算 2^10 = 1024。'],
+                                   'zh-Hans': ['先算 2^10 = 1024。'],
+                                   'en': ['First 2^10 = 1024.'], 'ja': ['まず 2^10 = 1024。']})
+        msgs = vqp.check_caret_power(q)
+        self.assertEqual(len(msgs), 1)
+        self.assertIn('solutionSteps', msgs[0])
+
+    def test_numeric_exponent_in_options_is_reported(self):
+        q = self._q(options={'A': {'zh-Hant': '2^5', 'zh-Hans': '2^5',
+                                   'en': '2^5', 'ja': '2^5'}})
+        self.assertEqual(len(vqp.check_caret_power(q)), 1)
+
+    def test_variable_exponent_is_allowed(self):
+        """`2^a` 沒有安全的上標寫法，不擋。"""
+        q = self._q(solutionSteps={'zh-Hant': ['設 n = 2^a × 3^b。'],
+                                   'zh-Hans': ['设 n = 2^a × 3^b。'],
+                                   'en': ['Let n = 2^a × 3^b.'], 'ja': ['n = 2^a × 3^b とする。']})
+        self.assertEqual(vqp.check_caret_power(q), [])
+
+    def test_parenthesised_exponent_is_allowed(self):
+        q = self._q(solutionSteps={'zh-Hant': ['由費馬小定理 a^(p−1) ≡ 1。'],
+                                   'zh-Hans': ['由费马小定理 a^(p−1) ≡ 1。'],
+                                   'en': ['By Fermat, a^(p−1) ≡ 1.'], 'ja': ['a^(p−1) ≡ 1。']})
+        self.assertEqual(vqp.check_caret_power(q), [])
+
+    def test_superscript_form_is_accepted(self):
+        """已經寫成 3¹⁵ 的就是合格寫法。"""
+        q = self._q(prompt={'zh-Hant': '求 3¹⁵ 的個位數。', 'zh-Hans': '求 3¹⁵ 的个位数。',
+                            'en': 'Units digit of 3¹⁵.', 'ja': '3¹⁵ の一の位は？'})
+        self.assertEqual(vqp.check_caret_power(q), [])
+
+
+class CaretPowerOnRealPacksTest(unittest.TestCase):
+    """整合測試：真實題庫不可有純數字的 `^` 冪次寫法。"""
+
+    def test_no_real_question_uses_caret_numeric_power(self):
+        import glob
+        offenders = []
+        for path in sorted(glob.glob('assets/questions/*/*.json')):
+            with open(path) as fh:
+                pack = json.load(fh)
+            for q in pack['questions']:
+                for msg in vqp.check_caret_power(q):
+                    offenders.append('%s: %s' % (q['id'], msg))
+        self.assertEqual(offenders, [], '\n'.join(offenders[:20]))

@@ -106,6 +106,35 @@ def check_simplified_in_traditional(q, simplified_chars):
     return errs
 
 
+CARET_NUMERIC_POWER = re.compile(r'\S\^\d')
+
+
+def check_caret_power(q):
+    """回傳把數字冪次寫成 `3^15` 的錯誤訊息清單；合格時回傳空清單。
+
+    規範明文禁止程式語法的冪次，但一直沒有閘門。
+
+    **只擋純數字指數。** 變數指數（`2^a`、`p₁^e₁`、`a^(p−1)`）刻意放行：
+    Unicode 雖有 ᵃ ᵏ ˣ 這類上標字母，字型覆蓋卻極差，換過去更可能變空方塊；
+    `2^(p−1)` 還需要上標括號與上標減號，寫出來沒人讀得懂。
+    數字上標 ⁰¹²³⁴⁵⁶⁷⁸⁹ 則是全庫本來就在用、字型覆蓋良好的寫法。
+    """
+    errs = []
+    for fld in ('prompt', 'answer', 'options', 'solutionSteps', 'hint'):
+        if fld not in q:
+            continue
+        bad = []
+        for lang in LANGS:
+            for s in iter_lang_text(q[fld], lang):
+                for m in re.finditer(r'\S+\^\d+', s):
+                    bad.append(m.group(0))
+        if bad:
+            uniq = sorted(set(bad))
+            errs.append('%s 用了程式語法的冪次: %s（改寫成上標，如 3¹⁵）'
+                        % (fld, '、'.join(uniq[:5])))
+    return errs
+
+
 # 正解要同時「比例上長很多」又「絕對字數多很多」才算洩漏線索。
 #
 # 2026-09-04 用全庫 476 道選擇題重量一次分布（前一版的門檻是用 470 道訂的）：
@@ -581,6 +610,9 @@ def main():
                 err(msg)
 
             for msg in check_simplified_in_traditional(q, SIMPLIFIED):
+                err(msg)
+
+            for msg in check_caret_power(q):
                 err(msg)
 
             src = q.get('source', {})
