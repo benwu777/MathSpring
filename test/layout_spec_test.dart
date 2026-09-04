@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mathspring/ui/layout_spec.dart';
@@ -149,6 +151,39 @@ void main() {
       final TextTheme same = LayoutSpec.forWidth(390).textThemeFrom(base);
       expect(same.displaySmall?.fontSize, 32);
       expect(same.bodyLarge?.fontSize, 15);
+    });
+  });
+
+  group('代號不可以定義了卻沒用', () {
+    // 2026-09-04 實際犯過：cardPadding / optionGap / minTapTarget 三個代號
+    // 定義在 LayoutSpec 上但一處都沒套用，等於死碼——iPad 的卡片內距與觸控目標
+    // 其實跟 iPhone 一樣。這條測試掃 lib/ 的原始碼防止再發生。
+    late final String libSource = Directory('lib')
+        .listSync(recursive: true)
+        .whereType<File>()
+        .where((File f) =>
+            f.path.endsWith('.dart') && !f.path.endsWith('layout_spec.dart'))
+        .map((File f) => f.readAsStringSync())
+        .join('\n');
+
+    const List<String> tokens = <String>[
+      'displayText', 'headingText', 'titleText', 'promptText',
+      'bodyText', 'captionText', 'microText',
+      'contentMaxWidth', 'pagePadding', 'sectionGap',
+      'cardPadding', 'optionGap', 'minTapTarget',
+    ];
+
+    test('每個代號都至少被 lib/ 底下的程式用到一次', () {
+      final List<String> unused = <String>[
+        for (final String t in tokens)
+          if (!libSource.contains('.$t')) t,
+      ];
+      expect(unused, isEmpty, reason: '這些代號定義了卻沒有套用：${unused.join("、")}');
+    });
+
+    test('偵測方式本身有效：不存在的代號會被判定為沒用到', () {
+      // 沒有這一條的話，上面那條可能因為比對方式寫錯而永遠通過
+      expect(libSource.contains('.thisTokenDoesNotExist'), isFalse);
     });
   });
 

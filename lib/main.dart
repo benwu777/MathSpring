@@ -1805,7 +1805,12 @@ class _SectionCard extends StatelessWidget {
     return Card(
       key: cardKey ?? ValueKey<String>('section_card_$title'),
       child: Padding(
-        padding: const EdgeInsets.fromLTRB(22, 22, 22, 20),
+        padding: EdgeInsets.fromLTRB(
+          layoutSpec.cardPadding,
+          layoutSpec.cardPadding,
+          layoutSpec.cardPadding,
+          layoutSpec.cardPadding - 2,
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -5333,6 +5338,7 @@ class _AnswerComposer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final LayoutSpec layoutSpec = LayoutSpec.of(context);
     switch (question.answerMode) {
       case AnswerMode.multipleChoice:
         final List<String> keys = (question.options?.keys.toList() ?? [])
@@ -5341,10 +5347,10 @@ class _AnswerComposer extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(strings.chooseOneAnswer),
-            const SizedBox(height: 14),
+            SizedBox(height: layoutSpec.optionGap + 2),
             ...keys.map(
               (key) => Padding(
-                padding: const EdgeInsets.only(bottom: 12),
+                padding: EdgeInsets.only(bottom: layoutSpec.optionGap),
                 child: OutlinedButton(
                   key: ValueKey<String>('answer_option_${question.id}_$key'),
                   onPressed: () async {
@@ -5365,7 +5371,9 @@ class _AnswerComposer extends StatelessWidget {
                     );
                   },
                   style: OutlinedButton.styleFrom(
-                    minimumSize: const Size.fromHeight(58),
+                    // 選項列是主要的觸控目標，iPad 上要比 iPhone 大
+                    minimumSize:
+                        Size.fromHeight(layoutSpec.minTapTarget + 10),
                     alignment: Alignment.centerLeft,
                     foregroundColor: const Color(0xFF111827),
                     backgroundColor: Colors.white,
