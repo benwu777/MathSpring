@@ -533,6 +533,7 @@ class _HomeShellFrame extends StatelessWidget {
           // 垂直置中就失去意義；用 Positioned.fill 明確撐滿。
           Positioned.fill(
             child: ContentScrollView(
+              fill: true,
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -540,7 +541,7 @@ class _HomeShellFrame extends StatelessWidget {
                       title: 'MathSpring',
                     ),
                     const SizedBox(height: 18),
-                    child,
+                    Expanded(child: child),
                   ],
                 ),
               ),
@@ -762,7 +763,9 @@ class _DailyMissionLanding extends StatelessWidget {
           icon: Icons.wb_sunny_outlined,
         ),
         const SizedBox(height: 18),
-        _SectionCard(
+        // 撐滿剩餘高度，首頁在 iPad 上不會只佔上方一小塊
+        Expanded(
+          child: _SectionCard(
           title: '今天的任務',
           subtitle: '一般練習作答五題即可完成，不限答對或答錯。',
           child: Column(
@@ -791,6 +794,7 @@ class _DailyMissionLanding extends StatelessWidget {
             ],
           ),
           ),
+        ),
       ],
     );
   }
@@ -1079,26 +1083,60 @@ class _MonthlyLearningCalendar extends StatelessWidget {
         Text(strings.monthLabel(month),
             style: Theme.of(context).textTheme.titleLarge),
         const SizedBox(height: 12),
-        GridView.builder(
-          shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(),
-          itemCount: leadingEmptyCells + dayCount,
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 7,
-            mainAxisSpacing: 6,
-            crossAxisSpacing: 6,
-          ),
-          itemBuilder: (BuildContext context, int index) {
-            if (index < leadingEmptyCells) {
-              return const SizedBox.shrink();
-            }
-            final DateTime day = DateTime(
-                month.year, month.month, index - leadingEmptyCells + 1);
-            final LearningDaySummary daySummary = summary.dayFor(day);
-            final bool practiced = daySummary.questionCount > 0;
-            final bool selected = day ==
-                DateTime(selectedDay.year, selectedDay.month, selectedDay.day);
-            return Material(
+        // 用 Column + Row 而不是 GridView：一個月最多 6×7 = 42 格，
+        // 不需要延遲建構；而 GridView 是 viewport，無法回報 intrinsic 高度，
+        // 會讓外層的滿版模式（IntrinsicHeight）整個炸掉。
+        ..._buildCalendarRows(
+          leadingEmptyCells: leadingEmptyCells,
+          dayCount: dayCount,
+          month: month,
+          summary: summary,
+          selectedDay: selectedDay,
+          onDaySelected: onDaySelected,
+        ),
+      ],
+    );
+  }
+}
+
+/// 月曆的日期格，一列七天。
+///
+/// 刻意不用 `GridView`：一個月最多 42 格，延遲建構沒有意義，
+/// 而 viewport 無法回報 intrinsic 高度，會擋住外層的滿版模式。
+List<Widget> _buildCalendarRows({
+  required int leadingEmptyCells,
+  required int dayCount,
+  required DateTime month,
+  required LearningActivitySummary summary,
+  required DateTime selectedDay,
+  required ValueChanged<DateTime> onDaySelected,
+}) {
+  const double spacing = 6;
+  final int cellCount = leadingEmptyCells + dayCount;
+  final int rowCount = (cellCount / 7).ceil();
+  final List<Widget> rows = <Widget>[];
+  for (int row = 0; row < rowCount; row++) {
+    final List<Widget> cells = <Widget>[];
+    for (int col = 0; col < 7; col++) {
+      final int index = row * 7 + col;
+      if (col > 0) {
+        cells.add(const SizedBox(width: spacing));
+      }
+      if (index < leadingEmptyCells || index >= cellCount) {
+        cells.add(const Expanded(child: SizedBox.shrink()));
+        continue;
+      }
+      final DateTime day =
+          DateTime(month.year, month.month, index - leadingEmptyCells + 1);
+      final LearningDaySummary daySummary = summary.dayFor(day);
+      final bool practiced = daySummary.questionCount > 0;
+      final bool selected = day ==
+          DateTime(selectedDay.year, selectedDay.month, selectedDay.day);
+      cells.add(
+        Expanded(
+          child: AspectRatio(
+            aspectRatio: 1,
+            child: Material(
               color: selected
                   ? const Color(0xFF163D7A)
                   : (practiced ? const Color(0xFFE7EEF9) : Colors.transparent),
@@ -1118,12 +1156,17 @@ class _MonthlyLearningCalendar extends StatelessWidget {
                   ),
                 ),
               ),
-            );
-          },
+            ),
+          ),
         ),
-      ],
-    );
+      );
+    }
+    if (row > 0) {
+      rows.add(const SizedBox(height: spacing));
+    }
+    rows.add(Row(crossAxisAlignment: CrossAxisAlignment.start, children: cells));
   }
+  return rows;
 }
 
 class _SettingsTab extends StatelessWidget {
