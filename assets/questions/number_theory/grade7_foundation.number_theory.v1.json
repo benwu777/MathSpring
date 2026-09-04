@@ -3973,6 +3973,85 @@
         "reference": "agent-drafted-nrich-2026-09-03",
         "notes": "題型參考 NRICH Patterns and Sequences - Short Problems —「Collatz 13」「Collatz-Ish」（查閱題名與題意後改成逆推三步求所有起點），由背景起草代理於 2026-09-03 實際查閱 NRICH 等公開題組後改寫；數值、敘述與四語系詳解為本題庫自行推導，非整題引用。主流程已跑機械校驗、全庫去重與跨代理去重。"
       }
+    },
+    {
+      "id": "number_theory_grade7_foundation_047",
+      "reviewStatus": "ok",
+      "topic": "number_theory",
+      "subtopic": "binary_length_to_ternary_length",
+      "tags": [
+        "c:number_base",
+        "m:estimate_bound"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade7",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "小安把一個正整數換算成二進位，發現剛好用掉 8 個數字（最左邊那個數字當然是 1）。他接著把同一個數換算成三進位。換算之後最多會用掉幾個數字？",
+        "zh-Hans": "小安把一个正整数换算成二进位，发现刚好用掉 8 个数字（最左边那个数字当然是 1）。他接着把同一个数换算成三进位。换算之后最多会用掉几个数字？",
+        "en": "Ann converts a positive integer into base two and finds that it uses exactly 8 digits (the leftmost one is of course 1). She then converts the same number into base three. At most how many digits does that conversion use?",
+        "ja": "アンさんがある正の整数を二進法に直したところ、ちょうど 8 個の数字を使いました（いちばん左の数字はもちろん 1 です）。同じ数を三進法に直すと、最大で何個の数字を使いますか。"
+      },
+      "answer": {
+        "zh-Hant": "改寫成三進位之後最多會有 6 位數。",
+        "zh-Hans": "改写成三进位之后最多会有 6 位数。",
+        "en": "In base three it has at most 6 digits.",
+        "ja": "三進法で書き直すと最大で 6 桁になります。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "先把這個數的範圍夾出來：二進位恰好 8 位的數，最小是 10000000₂ = 2⁷ = 128，最大是 11111111₂ = 2⁸ − 1 = 255。",
+          "位數要最多，就取範圍內最大的 255 來看。",
+          "三進位下，6 位數之中最小的是 100000₃ = 3⁵ = 243，7 位數之中最小的是 3⁶ = 729。",
+          "因為 243 ≤ 255 < 729，255 寫成三進位剛好是 6 位數（實際上 255 = 100110₃）。",
+          "範圍內最小的 128 只有 5 位（128 = 11202₃），可見這些數的三進位位數會在 5 位與 6 位之間變動。",
+          "所以最多會有 6 位數。"
+        ],
+        "zh-Hans": [
+          "先把这个数的范围夹出来：二进位恰好 8 位的数，最小是 10000000₂ = 2⁷ = 128，最大是 11111111₂ = 2⁸ − 1 = 255。",
+          "位数要最多，就取范围内最大的 255 来看。",
+          "三进位下，6 位数之中最小的是 100000₃ = 3⁵ = 243，7 位数之中最小的是 3⁶ = 729。",
+          "因为 243 ≤ 255 < 729，255 写成三进位刚好是 6 位数（实际上 255 = 100110₃）。",
+          "范围内最小的 128 只有 5 位（128 = 11202₃），可见这些数的三进位位数会在 5 位与 6 位之间变动。",
+          "所以最多会有 6 位数。"
+        ],
+        "en": [
+          "First trap the number between bounds: an 8-digit binary number is at least 10000000 in base two, which is 2⁷ = 128, and at most 11111111, which is 2⁸ − 1 = 255.",
+          "To make the number of base-three digits as large as possible, look at the largest value in the range, namely 255.",
+          "In base three the smallest 6-digit number is 100000, that is 3⁵ = 243, and the smallest 7-digit number is 3⁶ = 729.",
+          "Since 243 ≤ 255 < 729, the number 255 has exactly 6 digits in base three (indeed 255 is 100110 in base three).",
+          "The smallest value in the range, 128, has only 5 digits (128 is 11202 in base three), so these numbers have either 5 or 6 base-three digits.",
+          "Hence the largest possible number of digits is 6."
+        ],
+        "ja": [
+          "まず数の範囲をはさみます。二進法でちょうど 8 桁の数は、最小が 10000000₂ = 2⁷ = 128、最大が 11111111₂ = 2⁸ − 1 = 255 です。",
+          "桁数を最大にしたいので、範囲の中で最大の 255 を調べます。",
+          "三進法では、6 桁の数のうち最小は 100000₃ = 3⁵ = 243、7 桁の数のうち最小は 3⁶ = 729 です。",
+          "243 ≤ 255 < 729 なので、255 を三進法で書くとちょうど 6 桁になります（実際 255 = 100110₃）。",
+          "範囲の最小である 128 は 5 桁しかありません（128 = 11202₃）。つまり三進法の桁数は 5 桁か 6 桁のどちらかです。",
+          "したがって最大で 6 桁になります。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "6"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "number-theory-grade7-foundation",
+        "notes": "題型參考 AoPS 論壇與 AMC 舊題常見的「同一個數在兩種進位下的位數關係」問法（例如 AMC「N has 8 digits in base 2, how many digits in base 3」這一族）。全庫的進位制題都是單向換算或數字統計：number_theory_grade9_036（100 換成三進位有幾位）是直接換算一個特定數，number_theory_grade9_018（100 換成五進位求數字和）、number_theory_grade9_045（二進位 6 位且數字和為 2）也都給定單一個數；本題給的是一個區間，必須先夾出 128 到 255 的上下界再和 3 的次方比較，推理核心是估界而不是換算。"
+      }
     }
   ]
 }

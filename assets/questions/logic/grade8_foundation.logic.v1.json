@@ -4181,6 +4181,107 @@
         "reference": "logic-grade8-foundation",
         "notes": "可取的量是 2 的次方（1、2、4、8、16、32、64），關鍵是「2 的次方永遠不是 3 的倍數」，必敗態是 3 的倍數；與 logic_grade8_foundation_044、logic_grade11_foundation_001 的「取 1~3、模 4」不同（那裡取法是連續整數）。問法也不同：問的是必勝第一步中最大的取量，不是唯一的取量。（2026-09-04 第四輪：主流程獨立重算過答案，並重跑機械校驗與相似度閘門。）"
       }
+    },
+    {
+      "id": "logic_grade8_foundation_048",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "corner_race_with_diagonal_step",
+      "tags": [
+        "c:game_theory",
+        "m:coloring"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade8",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一個長方形棋盤有 m 列 n 行，一枚棋子放在左下角那一格。甲、乙兩人輪流移動棋子，由甲先動：每一次只能把棋子往右移一格、往上移一格，或往右上方斜移一格（每次都必須移動，不可以往左或往下）。誰把棋子移到右上角那一格，誰就獲勝。若兩人都採取最佳策略，下列哪一個棋盤會讓後手乙獲勝？",
+        "zh-Hans": "一个长方形棋盘有 m 行 n 列，一枚棋子放在左下角那一格。甲、乙两人轮流移动棋子，由甲先动：每一次只能把棋子往右移一格、往上移一格，或往右上方斜移一格（每次都必须移动，不可以往左或往下）。谁把棋子移到右上角那一格，谁就获胜。若两人都采取最佳策略，下列哪一个棋盘会让后手乙获胜？",
+        "en": "A rectangular board has m rows and n columns, and a piece starts on the bottom-left cell. Players A and B move the piece alternately, A first: each move must send the piece one cell right, one cell up, or one cell diagonally up-right (a move is compulsory, and left or down is forbidden). Whoever moves the piece onto the top-right cell wins. With best play from both sides, on which of the following boards does the second player B win?",
+        "ja": "長方形の盤に m 行 n 列のマスがあり、駒は左下のマスに置かれています。甲と乙が交互に駒を動かし、先に動くのは甲です。1 回の手で動かせるのは、右へ 1 マス、上へ 1 マス、または右上へななめに 1 マスのいずれかで、必ず動かさなければならず、左や下へは動かせません。駒を右上のマスへ動かした人が勝ちです。二人とも最善を尽くすとき、後手の乙が勝つのは次のどの盤ですか。"
+      },
+      "answer": {
+        "zh-Hant": "7 列 9 行的棋盤會讓後手乙獲勝，答案是選項 B。",
+        "zh-Hans": "7 行 9 列的棋盘会让后手乙获胜，答案是选项 B。",
+        "en": "The board with 7 rows and 9 columns lets the second player B win, so the answer is choice B.",
+        "ja": "7 行 9 列の盤で後手の乙が勝つので、答えは選択肢 B です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "把棋子的位置記成「還要往右幾格, 還要往上幾格」，寫成（右, 上）；把棋子移到右上角，就是把它變成（0, 0）。",
+          "一次移動只會讓「右」減 1、讓「上」減 1，或兩個各減 1。",
+          "觀察這兩個數的奇偶：若輪到你時兩個都是偶數，不論你怎麼移，移完之後一定至少有一個變成奇數；反過來，只要其中有一個是奇數，你一定可以移一步讓兩個同時變成偶數。",
+          "這等於把格子依「往右還差幾格的奇偶」與「往上還差幾格的奇偶」分成四種顏色，其中（偶, 偶）是必敗色：終點（0, 0）本身就是（偶, 偶），輪到誰站在這種格子上，誰最後就會輸。",
+          "所以後手乙獲勝的條件是一開始就落在（偶, 偶）：m 列 n 行的棋盤要走 n − 1 格右、m − 1 格上，兩個都要是偶數，也就是 m 與 n 都是奇數。",
+          "四個選項裡只有 7 列 9 行的兩個數都是奇數（要走 8 格右、6 格上都是偶數），所以答案是 7 列 9 行的棋盤。"
+        ],
+        "zh-Hans": [
+          "把棋子的位置记成“还要往右几格, 还要往上几格”，写成（右, 上）；把棋子移到右上角，就是把它变成（0, 0）。",
+          "一次移动只会让“右”减 1、让“上”减 1，或两个各减 1。",
+          "观察这两个数的奇偶：若轮到你时两个都是偶数，不论你怎么移，移完之后一定至少有一个变成奇数；反过来，只要其中有一个是奇数，你一定可以移一步让两个同时变成偶数。",
+          "这等于把格子依“往右还差几格的奇偶”与“往上还差几格的奇偶”分成四种颜色，其中（偶, 偶）是必败色：终点（0, 0）本身就是（偶, 偶），轮到谁站在这种格子上，谁最后就会输。",
+          "所以后手乙获胜的条件是一开始就落在（偶, 偶）：m 行 n 列的棋盘要走 n − 1 格右、m − 1 格上，两个都要是偶数，也就是 m 与 n 都是奇数。",
+          "四个选项里只有 7 行 9 列的两个数都是奇数（要走 8 格右、6 格上都是偶数），所以答案是 7 行 9 列的棋盘。"
+        ],
+        "en": [
+          "Describe the piece by how many cells it still has to travel: write (right, up). Reaching the top-right corner means turning this pair into (0, 0).",
+          "One move decreases 'right' by 1, decreases 'up' by 1, or decreases both by 1.",
+          "Look at the parities of the two numbers: if both are even on your turn, then whatever you do at least one of them becomes odd; conversely, if at least one is odd, you can always make both even in a single move.",
+          "This is the same as colouring the cells with four colours according to the parity of the distance still to go rightwards and upwards. The colour (even, even) is the losing colour, because the target (0, 0) itself is (even, even), so whoever stands on such a cell will lose.",
+          "So the second player B wins exactly when the start is (even, even): on a board with m rows and n columns the piece must travel n − 1 to the right and m − 1 upwards, and both must be even, that is, m and n are both odd.",
+          "Among the four choices only 7 rows and 9 columns has both numbers odd (8 cells right and 6 cells up, both even), so that is the board."
+        ],
+        "ja": [
+          "駒の位置を「あと右へ何マス, あと上へ何マス」と記し、（右, 上）と書きます。右上のマスへ動かすとは、これを（0, 0）にすることです。",
+          "1 回の手では「右」が 1 減るか、「上」が 1 減るか、両方が 1 ずつ減るかのどれかです。",
+          "2 つの数の偶奇を見ます。自分の手番で両方とも偶数なら、どう動かしても少なくとも一方は奇数になります。逆に一方でも奇数なら、1 手で両方を偶数にできます。",
+          "これは「右へあと何マスかの偶奇」と「上へあと何マスかの偶奇」でマスを 4 色に塗り分けることと同じで、（偶, 偶）が負けの色です。目的地（0, 0）自身が（偶, 偶）なので、この色のマスに立たされた人が最後に負けます。",
+          "よって後手の乙が勝つのは最初が（偶, 偶）のときです。m 行 n 列の盤では右へ n − 1、上へ m − 1 進むので、その両方が偶数、つまり m と n がともに奇数のときです。",
+          "4 つの選択肢のうち両方が奇数なのは 7 行 9 列だけ（右へ 8、上へ 6 でどちらも偶数）なので、答えは 7 行 9 列の盤です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "multiple_choice",
+      "correctAnswer": {
+        "type": "choice",
+        "value": "B"
+      },
+      "options": {
+        "A": {
+          "zh-Hant": "6 列 8 行的棋盤",
+          "zh-Hans": "6 行 8 列的棋盘",
+          "en": "the board with 6 rows and 8 columns",
+          "ja": "6 行 8 列の盤"
+        },
+        "B": {
+          "zh-Hant": "7 列 9 行的棋盤",
+          "zh-Hans": "7 行 9 列的棋盘",
+          "en": "the board with 7 rows and 9 columns",
+          "ja": "7 行 9 列の盤"
+        },
+        "C": {
+          "zh-Hant": "5 列 8 行的棋盤",
+          "zh-Hans": "5 行 8 列的棋盘",
+          "en": "the board with 5 rows and 8 columns",
+          "ja": "5 行 8 列の盤"
+        },
+        "D": {
+          "zh-Hant": "8 列 8 行的棋盤",
+          "zh-Hans": "8 行 8 列的棋盘",
+          "en": "the board with 8 rows and 8 columns",
+          "ja": "8 行 8 列の盤"
+        }
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade8-foundation",
+        "notes": "題型參考 UCLA Tom Ferguson 的 Game Theory 講義與 Brilliant「Combinatorial Games - Winning Positions」頁上的格盤移動遊戲（把 Nim 的必敗態改寫成座標奇偶）。全庫最接近的是 logic_grade11_044（棋子往上或往右移任意格數，先到右上角者勝），那題每次可以移動任意格數，必敗態是「兩個座標相等」的兩堆 Nim；本題每次只能移一格但多了斜走，必敗態變成「兩個座標同時為偶數」的四色奇偶結構，推理核心不同。combinatorics_grade7_032（2×2 方格含斜走的走法數）是路徑計數，不是博弈。"
+      }
     }
   ]
 }

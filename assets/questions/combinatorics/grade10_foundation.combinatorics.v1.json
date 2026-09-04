@@ -4388,6 +4388,85 @@
         "reference": "agent-drafted-nrich-2026-09-03",
         "notes": "題型參考 参考 NRICH Probability Short Problems 中以骰子期望值为主题的题型，改写为「点数平方」的得分规则并延伸到多回合总分期望值，凸显平方须在期望值之前进行的常见错误，由背景起草代理於 2026-09-03 實際查閱 NRICH 等公開題組後改寫（本輪開放附圖）；數值、敘述與四語系詳解為本題庫自行推導，非整題引用。主流程已跑機械校驗、全庫去重與跨代理去重。"
       }
+    },
+    {
+      "id": "combinatorics_grade10_foundation_049",
+      "reviewStatus": "ok",
+      "topic": "combinatorics",
+      "subtopic": "optimal_reroll_threshold_expected_payout",
+      "tags": [
+        "c:expectation",
+        "m:extremal"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一個遊戲這樣玩：先擲一顆公正的六面骰子，看到點數之後，玩家可以就此停手，也可以把這顆骰子重擲一次並改以第二次的點數為準（只能重擲一次，重擲之後不能反悔）。最後以採用的點數 k 換得 4k 元。若玩家採取讓自己期望收入最大的策略，求他的期望收入是多少元。",
+        "zh-Hans": "一个游戏这样玩：先掷一颗公正的六面骰子，看到点数之后，玩家可以就此停手，也可以把这颗骰子重掷一次并改以第二次的点数为准（只能重掷一次，重掷之后不能反悔）。最后以采用的点数 k 换得 4k 元。若玩家采取让自己期望收入最大的策略，求他的期望收入是多少元。",
+        "en": "A game works as follows. You roll one fair six-sided die. After seeing the result you may either stop, or reroll that die once and be paid according to the second roll instead (only one reroll is allowed, and you cannot go back). Finally, if the number you end up using is k, you receive 4k dollars. If the player uses the strategy that maximises his expected payout, what is his expected payout in dollars?",
+        "ja": "次のようなゲームがあります。まず公正な 6 面のさいころを 1 回振り、出た目を見てからそのまま止めるか、あるいはそのさいころを 1 回だけ振り直して 2 回目の目を採用するかを選べます（振り直しは 1 回だけで、やり直しはできません）。最終的に採用した目を k とすると 4k 円がもらえます。期待収入が最大になる戦略をとったとき、期待収入は何円か求めなさい。"
+      },
+      "answer": {
+        "zh-Hant": "他的期望收入是 17 元。",
+        "zh-Hans": "他的期望收入是 17 元。",
+        "en": "His expected payout is 17 dollars.",
+        "ja": "期待収入は 17 円です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "先算「決定重擲的話會拿到什麼」：重擲後的點數完全隨機，期望點數是 (1 + 2 + 3 + 4 + 5 + 6) ÷ 6 = 3.5。",
+          "所以最佳策略很清楚：第一次的點數若大於 3.5 就留著，小於 3.5 就重擲。也就是擲出 4、5、6 時停手，擲出 1、2、3 時重擲。",
+          "關鍵在於「要不要重擲」是看到第一次點數之後才決定的，所以既不能整局都用 3.5 計算，也不能整局都用第一次的點數計算。",
+          "第一次的六種結果機率都是 1/6，採用點數的期望值 = (3.5 + 3.5 + 3.5 + 4 + 5 + 6) ÷ 6 = 25.5 ÷ 6 = 4.25。",
+          "每 1 點換 4 元，所以期望收入 = 4 × 4.25 = 17 元。",
+          "對照一下：一律不重擲的期望點數是 3.5，一律重擲也是 3.5，兩者都只值 14 元。多出來的 3 元完全來自「看到結果再決定」這件事。"
+        ],
+        "zh-Hans": [
+          "先算「决定重掷的话会拿到什么」：重掷后的点数完全随机，期望点数是 (1 + 2 + 3 + 4 + 5 + 6) ÷ 6 = 3.5。",
+          "所以最佳策略很清楚：第一次的点数若大于 3.5 就留着，小于 3.5 就重掷。也就是掷出 4、5、6 时停手，掷出 1、2、3 时重掷。",
+          "关键在于「要不要重掷」是看到第一次点数之后才决定的，所以既不能整局都用 3.5 计算，也不能整局都用第一次的点数计算。",
+          "第一次的六种结果概率都是 1/6，采用点数的期望值 = (3.5 + 3.5 + 3.5 + 4 + 5 + 6) ÷ 6 = 25.5 ÷ 6 = 4.25。",
+          "每 1 点换 4 元，所以期望收入 = 4 × 4.25 = 17 元。",
+          "对照一下：一律不重掷的期望点数是 3.5，一律重掷也是 3.5，两者都只值 14 元。多出来的 3 元完全来自「看到结果再决定」这件事。"
+        ],
+        "en": [
+          "First work out what rerolling is worth: a rerolled die is completely fresh, so its expected value is (1 + 2 + 3 + 4 + 5 + 6) ÷ 6 = 3.5.",
+          "That makes the best strategy clear: keep the first roll when it is larger than 3.5 and reroll when it is smaller. So stop on a 4, 5 or 6, and reroll a 1, 2 or 3.",
+          "The key point is that the decision to reroll is made after seeing the first roll, so you may neither value the whole game at 3.5 nor value it by the first roll alone.",
+          "Each of the six first-roll outcomes has probability 1/6, so the expected value of the number finally used is (3.5 + 3.5 + 3.5 + 4 + 5 + 6) ÷ 6 = 25.5 ÷ 6 = 4.25.",
+          "Each point is worth 4 dollars, so the expected payout is 4 × 4.25 = 17 dollars.",
+          "For comparison, never rerolling gives an expected 3.5 and always rerolling also gives 3.5, both worth only 14 dollars. The extra 3 dollars comes entirely from deciding after seeing the result."
+        ],
+        "ja": [
+          "まず「振り直したときの価値」を計算します。振り直した目は完全にまっさらなので、期待値は (1 + 2 + 3 + 4 + 5 + 6) ÷ 6 = 3.5 です。",
+          "そこで最適な戦略が決まります。1 回目が 3.5 より大きければそのまま、小さければ振り直す。つまり 4、5、6 なら止め、1、2、3 なら振り直します。",
+          "大事なのは「振り直すかどうか」を 1 回目を見てから決める点です。ゲーム全体を 3.5 で評価しても、1 回目の目だけで評価しても正しくありません。",
+          "1 回目の 6 通りはどれも確率 1/6 なので、最終的に採用する目の期待値は (3.5 + 3.5 + 3.5 + 4 + 5 + 6) ÷ 6 = 25.5 ÷ 6 = 4.25 です。",
+          "1 点あたり 4 円なので、期待収入は 4 × 4.25 = 17 円です。",
+          "比べてみると、まったく振り直さない場合の期待値は 3.5、必ず振り直す場合も 3.5 で、どちらも 14 円にしかなりません。差の 3 円はすべて「結果を見てから決める」ことから生まれています。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "17"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "stats-grade10-optimal-stopping-die-reroll",
+        "notes": "題型取自機率面試題／論壇上流傳很廣的「roll a die, option to reroll once」問題（Quora 上的 100 面骰版本、puzzledquant 的 casino 系列、pinnacledatalabs 的 data science interview prep Q63/Q64），標準答案是門檻策略下期望點數 25.5 ÷ 6 = 4.25；本題把點數換成 4 倍的獎金讓答案是整數 17。全庫 c:expectation 共 14 題已逐題查過：combinatorics_grade10_045 是「公平參加費」的逆推、grade11_016 是兩顆骰子和的期望值、grade10_048 是點數平方和、grade12_042 是等到第一個 6 的等待時間、grade12_044 是有放回抽 4 次的和。沒有任何一題含「玩家可以看到中途結果後選擇要不要繼續」的決策層；本題的推理核心是先算出門檻 3.5 再分情形加權，屬於最佳停止，關鍵字「重擲」在全庫只命中 logic_grade5_056（擲到 1 點就強制重擲、無選擇權）。"
+      }
     }
   ]
 }

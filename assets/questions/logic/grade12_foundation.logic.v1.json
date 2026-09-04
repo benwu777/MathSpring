@@ -4328,6 +4328,188 @@
         "reference": "agent-drafted-nrich-2026-09-03",
         "notes": "題型參考 参考 NRICH Statistics Short Problems 中综合运用众数与平均数的出题概念，设计成「先辨识众数、再删除全部众数出现次数、重新求平均数」的两阶段题型，由背景起草代理於 2026-09-03 實際查閱 NRICH 等公開題組後改寫（本輪開放附圖）；數值、敘述與四語系詳解為本題庫自行推導，非整題引用。主流程已跑機械校驗、全庫去重與跨代理去重。"
       }
+    },
+    {
+      "id": "logic_grade12_foundation_045",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "normal_curve_asymmetric_interval_headcount",
+      "tags": [
+        "c:stdev",
+        "c:probability",
+        "m:estimate_bound"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "某校 1000 位學生的身高接近常態分布（左右對稱的鐘形分布），平均是 165 公分、標準差是 6 公分。已知常態分布中，與平均相差 1 個標準差以內的資料約佔全體的 68%，相差 2 個標準差以內的約佔 95%。求身高介於 159 公分與 177 公分之間的學生大約有幾人。",
+        "zh-Hans": "某校 1000 位学生的身高接近正态分布（左右对称的钟形分布），平均是 165 厘米、标准差是 6 厘米。已知正态分布中，与平均相差 1 个标准差以内的数据约占全体的 68%，相差 2 个标准差以内的约占 95%。求身高介于 159 厘米与 177 厘米之间的学生大约有几人。",
+        "en": "The heights of 1000 students at a school are approximately normally distributed (a symmetric bell shape) with mean 165 cm and standard deviation 6 cm. In a normal distribution about 68% of the data lies within 1 standard deviation of the mean and about 95% lies within 2 standard deviations of the mean. Roughly how many students have a height between 159 cm and 177 cm?",
+        "ja": "ある学校の 1000 人の生徒の身長は、平均 165 cm・標準偏差 6 cm の正規分布（左右対称の釣鐘型）に近いとします。正規分布では、平均との差が標準偏差 1 個分以内のデータは全体の約 68%、標準偏差 2 個分以内のデータは約 95% です。身長が 159 cm 以上 177 cm 以下の生徒はおよそ何人か求めなさい。"
+      },
+      "answer": {
+        "zh-Hant": "大約有 815 人。",
+        "zh-Hans": "大约有 815 人。",
+        "en": "About 815 students.",
+        "ja": "およそ 815 人です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "先把兩個端點換算成「離平均幾個標準差」：159 = 165 − 6，是平均往下 1 個標準差；177 = 165 + 2 × 6，是平均往上 2 個標準差。",
+          "這個區間左右並不對稱（下方 1 個標準差、上方 2 個標準差），所以不能直接套 68% 或 95%，必須以平均線為界拆成兩段。",
+          "常態分布左右對稱，68% 那一段被平均線平分，所以「平均往下 1 個標準差到平均」約佔 68% ÷ 2 = 34%。",
+          "同理 95% 那一段也被平均線平分，「平均到平均往上 2 個標準差」約佔 95% ÷ 2 = 47.5%。",
+          "兩段相加：34% + 47.5% = 81.5%。",
+          "人數 = 1000 × 81.5% = 815 人。若把整個區間當成 95% 會答成 950 人，當成 68% 會答成 680 人，都是沒有以平均線拆段造成的錯誤。"
+        ],
+        "zh-Hans": [
+          "先把两个端点换算成「离平均几个标准差」：159 = 165 − 6，是平均往下 1 个标准差；177 = 165 + 2 × 6，是平均往上 2 个标准差。",
+          "这个区间左右并不对称（下方 1 个标准差、上方 2 个标准差），所以不能直接套 68% 或 95%，必须以平均线为界拆成两段。",
+          "正态分布左右对称，68% 那一段被平均线平分，所以「平均往下 1 个标准差到平均」约占 68% ÷ 2 = 34%。",
+          "同理 95% 那一段也被平均线平分，「平均到平均往上 2 个标准差」约占 95% ÷ 2 = 47.5%。",
+          "两段相加：34% + 47.5% = 81.5%。",
+          "人数 = 1000 × 81.5% = 815 人。若把整个区间当成 95% 会答成 950 人，当成 68% 会答成 680 人，都是没有以平均线拆段造成的错误。"
+        ],
+        "en": [
+          "First express both endpoints in standard deviations from the mean: 159 = 165 − 6 is 1 standard deviation below the mean, and 177 = 165 + 2 × 6 is 2 standard deviations above the mean.",
+          "The interval is not symmetric about the mean (1 standard deviation below, 2 above), so neither 68% nor 95% applies directly; the interval must be split at the mean.",
+          "A normal curve is symmetric, so the mean cuts the 68% band in half: from 1 standard deviation below the mean up to the mean is about 68% ÷ 2 = 34%.",
+          "Likewise the mean cuts the 95% band in half: from the mean up to 2 standard deviations above it is about 95% ÷ 2 = 47.5%.",
+          "Adding the two pieces gives 34% + 47.5% = 81.5%.",
+          "Number of students = 1000 × 81.5% = 815. Treating the whole interval as 95% would give 950 and treating it as 68% would give 680; both errors come from not splitting the interval at the mean."
+        ],
+        "ja": [
+          "まず両端を「平均から標準偏差の何個分か」に直します。159 = 165 − 6 は平均より標準偏差 1 個分だけ下、177 = 165 + 2 × 6 は平均より標準偏差 2 個分だけ上です。",
+          "この区間は平均に対して左右対称ではない（下は 1 個分、上は 2 個分）ので、68% や 95% をそのまま当てはめられません。平均を境に 2 つに分ける必要があります。",
+          "正規分布は左右対称なので、68% の帯は平均で半分に分かれます。よって「平均より標準偏差 1 個分下から平均まで」は約 68% ÷ 2 = 34% です。",
+          "同じく 95% の帯も平均で半分に分かれ、「平均から標準偏差 2 個分上まで」は約 95% ÷ 2 = 47.5% です。",
+          "2 つを足すと 34% + 47.5% = 81.5% になります。",
+          "人数 = 1000 × 81.5% = 815 人。区間全体を 95% とみなすと 950 人、68% とみなすと 680 人になりますが、いずれも平均で分けなかったための誤りです。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "815"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 4
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "stats-grade12-empirical-rule-split-interval",
+        "notes": "題型取自各國統計教材的經驗法則（68-95-99.7 rule / empirical rule）單元，如 Statistics How To、Built In、Mathspace（NCEA Level 2）的例題；那些例題多半問對稱區間，本題刻意取「下 1 個標準差、上 2 個標準差」的不對稱區間，逼學生以平均線拆段。全庫查過：關鍵字「常態」「母體」「抽樣」在 2818 題中皆 0 命中，常態分布是題庫的空白概念。既有 c:stdev 題全部是離散資料的代數操作（線性變換、合併、補值），沒有任何一題涉及分布形狀或比例估計，推理核心完全不同。"
+      }
+    },
+    {
+      "id": "logic_grade12_foundation_046",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "subgroup_rates_reverse_when_pooled",
+      "tags": [
+        "c:probability",
+        "c:percent",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "某醫院比較甲、乙兩種療法，先把病人分成輕症與重症再統計。甲療法：輕症 20 人中有 18 人痊癒，重症 80 人中有 32 人痊癒。乙療法：輕症 80 人中有 64 人痊癒，重症 20 人中有 6 人痊癒。兩種療法各治療了 100 人。下列敘述何者正確？",
+        "zh-Hans": "某医院比较甲、乙两种疗法，先把病人分成轻症与重症再统计。甲疗法：轻症 20 人中有 18 人痊愈，重症 80 人中有 32 人痊愈。乙疗法：轻症 80 人中有 64 人痊愈，重症 20 人中有 6 人痊愈。两种疗法各治疗了 100 人。下列叙述何者正确？",
+        "en": "A hospital compares two treatments, X and Y, splitting patients into mild and severe cases first. Treatment X: 18 of 20 mild patients recovered, and 32 of 80 severe patients recovered. Treatment Y: 64 of 80 mild patients recovered, and 6 of 20 severe patients recovered. Each treatment was given to 100 patients in total. Which statement is correct?",
+        "ja": "ある病院が治療法 X と治療法 Y を比べるため、患者を軽症と重症に分けて集計しました。治療法 X は軽症 20 人のうち 18 人、重症 80 人のうち 32 人が回復。治療法 Y は軽症 80 人のうち 64 人、重症 20 人のうち 6 人が回復しました。どちらの治療法も合計 100 人に行われています。正しい記述はどれですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是選項 A：甲在兩個分組的痊癒率都比較高，整體卻比較低，原因是兩種療法收治的輕重症比例差很多。",
+        "zh-Hans": "答案是选项 A：甲在两个分组的痊愈率都比较高，整体却比较低，原因是两种疗法收治的轻重症比例差很多。",
+        "en": "The answer is option A: treatment X has the higher recovery rate in both subgroups yet the lower overall rate, because the two treatments took in very different mixes of mild and severe patients.",
+        "ja": "答えは選択肢 A です。治療法 X はどちらの分類でも回復率が高いのに全体では低くなります。理由は 2 つの治療法で軽症と重症の割合が大きく違うからです。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "先把四個分組的痊癒率算出來。甲療法輕症是 18 ÷ 20 = 90%，重症是 32 ÷ 80 = 40%。",
+          "乙療法輕症是 64 ÷ 80 = 80%，重症是 6 ÷ 20 = 30%。可見不論輕症或重症，甲的痊癒率都比乙高出 10 個百分點。",
+          "再算整體。甲療法共痊癒 18 + 32 = 50 人，整體痊癒率 50 ÷ 100 = 50%；乙療法共痊癒 64 + 6 = 70 人，整體痊癒率 70 ÷ 100 = 70%。",
+          "兩個分組都是甲贏，合起來卻變成乙贏。這不是算錯，而是統計上有名的辛普森悖論。",
+          "原因在於兩種療法面對的病人結構完全不同：甲有 80% 是重症，乙只有 20% 是重症，而重症本來就比較難痊癒。甲的整體數字被大量重症拉低，乙的整體數字被大量輕症拉高。",
+          "所以既不能把兩個分組的痊癒率直接平均（那等於假設兩組人數一樣多），也不能只看整體就下結論。正確的敘述是選項 A。"
+        ],
+        "zh-Hans": [
+          "先把四个分组的痊愈率算出来。甲疗法轻症是 18 ÷ 20 = 90%，重症是 32 ÷ 80 = 40%。",
+          "乙疗法轻症是 64 ÷ 80 = 80%，重症是 6 ÷ 20 = 30%。可见不论轻症或重症，甲的痊愈率都比乙高出 10 个百分点。",
+          "再算整体。甲疗法共痊愈 18 + 32 = 50 人，整体痊愈率 50 ÷ 100 = 50%；乙疗法共痊愈 64 + 6 = 70 人，整体痊愈率 70 ÷ 100 = 70%。",
+          "两个分组都是甲赢，合起来却变成乙赢。这不是算错，而是统计上有名的辛普森悖论。",
+          "原因在于两种疗法面对的病人结构完全不同：甲有 80% 是重症，乙只有 20% 是重症，而重症本来就比较难痊愈。甲的整体数字被大量重症拉低，乙的整体数字被大量轻症拉高。",
+          "所以既不能把两个分组的痊愈率直接平均（那等于假设两组人数一样多），也不能只看整体就下结论。正确的叙述是选项 A。"
+        ],
+        "en": [
+          "First compute the four subgroup recovery rates. For treatment X the mild rate is 18 ÷ 20 = 90% and the severe rate is 32 ÷ 80 = 40%.",
+          "For treatment Y the mild rate is 64 ÷ 80 = 80% and the severe rate is 6 ÷ 20 = 30%. So in both subgroups treatment X beats treatment Y by 10 percentage points.",
+          "Now the totals. Treatment X cured 18 + 32 = 50 patients, an overall rate of 50 ÷ 100 = 50%. Treatment Y cured 64 + 6 = 70 patients, an overall rate of 70 ÷ 100 = 70%.",
+          "X wins both subgroups yet loses overall. This is not an arithmetic mistake; it is the famous statistical phenomenon known as Simpson paradox.",
+          "The cause is that the two treatments faced completely different patient mixes: 80% of X patients were severe while only 20% of Y patients were, and severe cases are harder to cure anyway. The overall figure for X is dragged down by many severe cases, and the figure for Y is pulled up by many mild ones.",
+          "So one may neither average the two subgroup rates directly, which would assume equal group sizes, nor draw a conclusion from the overall figures alone. The correct statement is option A."
+        ],
+        "ja": [
+          "まず 4 つの分類ごとの回復率を求めます。治療法 X は軽症が 18 ÷ 20 = 90%、重症が 32 ÷ 80 = 40% です。",
+          "治療法 Y は軽症が 64 ÷ 80 = 80%、重症が 6 ÷ 20 = 30% です。軽症でも重症でも X の回復率が Y より 10 ポイント高いことが分かります。",
+          "次に全体を見ます。X は 18 + 32 = 50 人が回復し、全体の回復率は 50 ÷ 100 = 50%。Y は 64 + 6 = 70 人が回復し、全体の回復率は 70 ÷ 100 = 70% です。",
+          "どちらの分類でも X が勝っているのに、合計すると Y が勝ちます。これは計算間違いではなく、統計で有名なシンプソンのパラドックスです。",
+          "原因は、2 つの治療法が受け持った患者の構成がまったく違うことです。X は 80% が重症、Y は 20% しか重症でなく、重症はもともと回復しにくいのです。X の全体の数字は多数の重症に引き下げられ、Y の数字は多数の軽症に引き上げられています。",
+          "したがって 2 つの分類の回復率をそのまま平均すること（人数が同じだと仮定することになります）も、全体の数字だけで結論を出すこともできません。正しい記述は選択肢 A です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "multiple_choice",
+      "correctAnswer": {
+        "type": "choice",
+        "value": "A"
+      },
+      "options": {
+        "A": {
+          "zh-Hant": "甲在輕症與重症的痊癒率都比乙高（90% 對 80%、40% 對 30%），但甲的整體痊癒率 50% 卻低於乙的 70%，原因是甲收治的重症病人比例遠高於乙。",
+          "zh-Hans": "甲在轻症与重症的痊愈率都比乙高（90% 对 80%、40% 对 30%），但甲的整体痊愈率 50% 却低于乙的 70%，原因是甲收治的重症病人比例远高于乙。",
+          "en": "Treatment X beats Y in both subgroups (90% versus 80% and 40% versus 30%), yet its overall recovery rate of 50% is below the 70% of Y, because X took in a far larger proportion of severe patients.",
+          "ja": "X は軽症でも重症でも Y より回復率が高い（90% 対 80%、40% 対 30%）のに、全体の回復率は 50% で Y の 70% を下回ります。X が受け持った重症患者の割合がはるかに大きいためです。"
+        },
+        "B": {
+          "zh-Hant": "這組數字一定有誤：既然甲在兩個分組都贏過乙，把兩個分組加起來之後甲的整體痊癒率也必定比乙高，不可能出現 50% 低於 70% 的情形。",
+          "zh-Hans": "这组数字一定有误：既然甲在两个分组都赢过乙，把两个分组加起来之后甲的整体痊愈率也必定比乙高，不可能出现 50% 低于 70% 的情形。",
+          "en": "The figures must be wrong: since X beats Y in both subgroups, adding the subgroups together must also leave X ahead overall, so an overall 50% against 70% is impossible.",
+          "ja": "この数字は誤りに違いありません。X が両方の分類で Y に勝っている以上、合計しても X の全体の回復率が上回るはずで、50% が 70% を下回ることはありえないからです。"
+        },
+        "C": {
+          "zh-Hant": "甲在兩個分組都贏，所以把兩個分組的痊癒率平均起來就是整體痊癒率：甲是 65%、乙是 55%，因此甲的整體表現仍然比乙好。",
+          "zh-Hans": "甲在两个分组都赢，所以把两个分组的痊愈率平均起来就是整体痊愈率：甲是 65%、乙是 55%，因此甲的整体表现仍然比乙好。",
+          "en": "X wins both subgroups, so averaging the two subgroup rates gives the overall rate: 65% for X and 55% for Y, and therefore X still performs better overall than Y.",
+          "ja": "X は両方の分類で勝っているので、2 つの回復率を平均すれば全体の回復率になります。X は 65%、Y は 55% となり、全体でも X の方が優れていることになります。"
+        },
+        "D": {
+          "zh-Hant": "由整體痊癒率 50% 與 70% 可以直接判定乙對每一種病情都比甲有效，分組表上甲比較高只是各組人數太少造成的偶然波動。",
+          "zh-Hans": "由整体痊愈率 50% 与 70% 可以直接判定乙对每一种病情都比甲有效，分组表上甲比较高只是各组人数太少造成的偶然波动。",
+          "en": "From the overall rates of 50% and 70% one can conclude directly that Y is more effective than X for every severity, and the subgroup advantage of X is just random noise from small group sizes.",
+          "ja": "全体の回復率 50% と 70% から、Y はどの重症度でも X より効果的だと直ちに判断できます。分類表で X が高いのは各群の人数が少ないことによる偶然のばらつきにすぎません。"
+        }
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "stats-grade12-simpson-paradox-treatment",
+        "notes": "題型取自辛普森悖論最有名的教學案例——1986 年英國醫學期刊的腎結石治療研究（Wikipedia 的 Simpson’s paradox 條目、Lancaster STOR-i 的 Which treatment would you prefer、Generalist Academy 的 kidney stone paradox 都引用它）；原始數字（93%/73% 對 87%/69%）不好算，本題重新設計成 20/80 與 80/20 的乾淨配置，讓四個分組率是 90%、40%、80%、30%，整體是 50% 對 70%。全庫查過：關鍵字「相關係數」「迴歸」「抽樣」「母體」皆 0 命中，也沒有任何一題把分組率與整體率放在一起比較。最接近的 algebra_grade7_063 是加權平均（由全班平均與一組平均反推另一組），但那是單一方向的加權計算，沒有「兩個分組結論與整體結論相反」的矛盾結構；本題的推理核心是看出加權比例才是主因。"
+      }
     }
   ]
 }

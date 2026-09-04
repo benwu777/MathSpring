@@ -5095,6 +5095,244 @@
         "reference": "agent-drafted-nrich-2026-09-03",
         "notes": "題型參考 NRICH Vectors - Short Problems, 'From Point to Point'（以向量相加從一點走到另一點）改寫，由背景起草代理於 2026-09-03 實際查閱 NRICH 等公開題組後改寫；數值、敘述與四語系詳解為本題庫自行推導，非整題引用。主流程已跑機械校驗與跨代理去重。"
       }
+    },
+    {
+      "id": "geometry_grade10_foundation_046",
+      "reviewStatus": "ok",
+      "topic": "geometry",
+      "subtopic": "lattice_points_on_segment_reduced_slope",
+      "tags": [
+        "c:line_slope",
+        "c:coordinate",
+        "m:enumeration"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "把原點 O(0, 0) 和點 P(36, 84) 用一條筆直的線段連起來。這條線段上（兩個端點 O 與 P 都不算），橫座標與縱座標同時都是整數的點有多少個？",
+        "zh-Hans": "把原点 O(0, 0) 和点 P(36, 84) 用一条笔直的线段连起来。这条线段上（两个端点 O 与 P 都不算），横坐标与纵坐标同时都是整数的点有多少个？",
+        "en": "In the coordinate plane a segment has endpoints at the origin O(0, 0) and at P(36, 84). Excluding the two endpoints O and P, how many points of this segment have both coordinates equal to integers?",
+        "ja": "座標平面上で、線分の両端は原点 O(0, 0) と点 P(36, 84) です。この線分上（両端の O と P は含まない）で、x 座標も y 座標も整数である点は全部で何個ありますか。"
+      },
+      "answer": {
+        "zh-Hant": "一共有 11 個。",
+        "zh-Hans": "一共有 11 个。",
+        "en": "There are 11 such points.",
+        "ja": "全部で 11 個あります。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "線段上的點都可以寫成 (36t, 84t)，其中 t 是 0 與 1 之間的實數。",
+          "把斜率 84/36 約成最簡分數 7/3。這表示從 O 出發，每走一次位移 (3, 7) 就落在一個整數點上；而且因為 7 與 3 互質，線段上的整數點只有這些。",
+          "由 36 ÷ 3 = 12、84 ÷ 7 = 12 可知，從 O 走到 P 恰好要走 12 次，依序經過 (3, 7)、(6, 14)、⋯、(36, 84)，含兩個端點共 13 個整數點。",
+          "扣掉端點 O 與 P，中間還剩下 13 − 2 = 11 個整數點。"
+        ],
+        "zh-Hans": [
+          "线段上的点都可以写成 (36t, 84t)，其中 t 是 0 与 1 之间的实数。",
+          "把斜率 84/36 约成最简分数 7/3。这表示从 O 出发，每走一次位移 (3, 7) 就落在一个整数点上；而且因为 7 与 3 互质，线段上的整数点只有这些。",
+          "由 36 ÷ 3 = 12、84 ÷ 7 = 12 可知，从 O 走到 P 恰好要走 12 次，依次经过 (3, 7)、(6, 14)、⋯、(36, 84)，含两个端点共 13 个整数点。",
+          "扣掉端点 O 与 P，中间还剩下 13 − 2 = 11 个整数点。"
+        ],
+        "en": [
+          "Every point of the segment can be written as (36t, 84t), where t is a real number between 0 and 1.",
+          "Reduce the slope 84/36 to lowest terms: 7/3. So starting from O, each step of (3, 7) lands on a lattice point, and since 7 and 3 are coprime these are the only lattice points on the segment.",
+          "Because 36 ÷ 3 = 12 and 84 ÷ 7 = 12, going from O to P takes exactly 12 steps, passing through (3, 7), (6, 14), …, (36, 84); counting both endpoints there are 13 lattice points.",
+          "Removing the endpoints O and P leaves 13 − 2 = 11 lattice points strictly between them."
+        ],
+        "ja": [
+          "線分上の点はすべて (36t, 84t)（t は 0 と 1 の間の実数）と書けます。",
+          "傾き 84/36 を既約分数にすると 7/3 です。つまり O から (3, 7) ずつ進むたびに格子点に乗り、7 と 3 は互いに素なので線分上の格子点はそれだけです。",
+          "36 ÷ 3 = 12、84 ÷ 7 = 12 なので、O から P までちょうど 12 歩であり、途中 (3, 7)、(6, 14)、⋯、(36, 84) を通って、両端を含めると格子点は 13 個です。",
+          "両端の O と P を除くと、内部には 13 − 2 = 11 個の格子点が残ります。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "11"
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "geometry-grade10-line-slope",
+        "notes": "題型來源：AoPS Wiki 的 Lattice point 條目與 lattice point visibility 相關教材（從原點到 (a, b) 的線段上格子點數為 gcd(a, b) + 1），改寫成「不含端點」的問法並自選 (36, 84) 這組數字。去重：全庫掃「格點」只有 combinatorics_grade11_006、combinatorics_grade7_032、geometry_grade2_043、logic_grade11_018、logic_grade12_026，全部是計數或取點問題，沒有一題是把斜率約成最簡分數來數線段上的整數點；掃「斜率」的 8 題（algebra_grade8_030/050、algebra_grade9_034/048/050、algebra_grade10_046、algebra_grade11_053、algebra_grade8_054）都在求斜率或截距，推理核心不同。"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      }
+    },
+    {
+      "id": "geometry_grade10_foundation_047",
+      "reviewStatus": "ok",
+      "topic": "geometry",
+      "subtopic": "area_bisecting_cevian_from_vertex",
+      "tags": [
+        "c:line_slope",
+        "c:area",
+        "m:construction"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "有一塊三角形的板子，三個角落分別落在 A(2, 1)、B(4, 20)、C(12, 6)。工人想沿著一條通過角落 A 的直線把板子切開，使切出來的兩塊面積一樣大。下列哪一條直線可以做到？",
+        "zh-Hans": "有一块三角形的板子，三个角落分别落在 A(2, 1)、B(4, 20)、C(12, 6)。工人想沿着一条通过角落 A 的直线把板子切开，使切出来的两块面积一样大。下列哪一条直线可以做到？",
+        "en": "In the coordinate plane a triangle has vertices A(2, 1), B(4, 20) and C(12, 6). One line through the vertex A cuts this triangle into two pieces of equal area. Which of the lines below is it?",
+        "ja": "座標平面上の三角形の頂点は A(2, 1)、B(4, 20)、C(12, 6) です。頂点 A を通るある直線が、この三角形を面積の等しい 2 つの部分に分けます。次のうち、その直線はどれですか。"
+      },
+      "answer": {
+        "zh-Hant": "這條直線是 y = 2x − 3，所以選 C。",
+        "zh-Hans": "这条直线是 y = 2x − 3，所以选 C。",
+        "en": "The line is y = 2x − 3, so the answer is C.",
+        "ja": "その直線は y = 2x − 3 なので、答えは C です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "四個選項的直線都通過 A(2, 1)，所以不能只用「有沒有經過 A」來篩選。通過 A 的直線一定會和對邊 BC 交在某一點 D。",
+          "三角形 ABD 與三角形 ACD 以 BD、DC 為底時，高都是 A 到直線 BC 的距離，所以面積比就等於 BD : DC。要兩塊面積相等，必須 BD = DC，也就是 D 是 BC 的中點。",
+          "BC 的中點是 ((4 + 12) ÷ 2, (20 + 6) ÷ 2) = (8, 13)。",
+          "通過 A(2, 1) 與 (8, 13) 的直線斜率是 (13 − 1) ÷ (8 − 2) = 12 ÷ 6 = 2，方程式為 y − 1 = 2(x − 2)，整理得 y = 2x − 3。"
+        ],
+        "zh-Hans": [
+          "四个选项的直线都通过 A(2, 1)，所以不能只用「有没有经过 A」来筛选。通过 A 的直线一定会和对边 BC 交在某一点 D。",
+          "三角形 ABD 与三角形 ACD 以 BD、DC 为底时，高都是 A 到直线 BC 的距离，所以面积比就等于 BD : DC。要两块面积相等，必须 BD = DC，也就是 D 是 BC 的中点。",
+          "BC 的中点是 ((4 + 12) ÷ 2, (20 + 6) ÷ 2) = (8, 13)。",
+          "通过 A(2, 1) 与 (8, 13) 的直线斜率是 (13 − 1) ÷ (8 − 2) = 12 ÷ 6 = 2，方程为 y − 1 = 2(x − 2)，整理得 y = 2x − 3。"
+        ],
+        "en": [
+          "All four candidate lines pass through A(2, 1), so passing through A is not enough to decide. A line through A must meet the opposite side BC at some point D.",
+          "Taking BD and DC as bases, triangles ABD and ACD have the same height, namely the distance from A to line BC, so their areas are in the ratio BD : DC. Equal areas force BD = DC, i.e. D is the midpoint of BC.",
+          "The midpoint of BC is ((4 + 12) ÷ 2, (20 + 6) ÷ 2) = (8, 13).",
+          "The line through A(2, 1) and (8, 13) has slope (13 − 1) ÷ (8 − 2) = 12 ÷ 6 = 2, so its equation is y − 1 = 2(x − 2), that is y = 2x − 3."
+        ],
+        "ja": [
+          "選択肢 4 本の直線はどれも A(2, 1) を通るので、A を通るかどうかでは判別できません。A を通る直線は対辺 BC 上のある点 D と交わります。",
+          "BD、DC を底辺とみると、三角形 ABD と三角形 ACD の高さはどちらも A から直線 BC までの距離なので、面積比は BD : DC に等しくなります。面積が等しくなるには BD = DC、つまり D は BC の中点でなければなりません。",
+          "BC の中点は ((4 + 12) ÷ 2, (20 + 6) ÷ 2) = (8, 13) です。",
+          "A(2, 1) と (8, 13) を通る直線の傾きは (13 − 1) ÷ (8 − 2) = 12 ÷ 6 = 2 なので、方程式は y − 1 = 2(x − 2)、すなわち y = 2x − 3 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "multiple_choice",
+      "correctAnswer": {
+        "type": "choice",
+        "value": "C"
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "geometry-grade10-line-slope",
+        "notes": "題型來源：美國 precalculus / geometry 教材與 Math Open Reference、AoPS 論壇常見的「a line through a vertex bisects the area iff it is the median（過頂點的面積平分線就是中線）」練習，改寫成座標形式，並讓四個誘答全部通過頂點 A，使得「只看有沒有過 A」無法作答。去重：全庫掃「面積.*平分」10 題中，geometry_grade5_007 只是把面積除以 2、geometry_grade7_007 與 geometry_grade9_034 是中點連線的面積比，都沒有用到座標與斜率；geometry_grade10_025（重心）、geometry_grade10_011（中線長）雖然也牽涉中點，但求的是重心座標與中線長度，不是面積平分線的方程式。"
+      },
+      "options": {
+        "A": {
+          "zh-Hant": "直線 y = x − 1",
+          "zh-Hans": "直线 y = x − 1",
+          "en": "The line y = x − 1",
+          "ja": "直線 y = x − 1"
+        },
+        "B": {
+          "zh-Hant": "直線 y = 3x − 5",
+          "zh-Hans": "直线 y = 3x − 5",
+          "en": "The line y = 3x − 5",
+          "ja": "直線 y = 3x − 5"
+        },
+        "C": {
+          "zh-Hant": "直線 y = 2x − 3",
+          "zh-Hans": "直线 y = 2x − 3",
+          "en": "The line y = 2x − 3",
+          "ja": "直線 y = 2x − 3"
+        },
+        "D": {
+          "zh-Hant": "直線 y = 5x − 9",
+          "zh-Hans": "直线 y = 5x − 9",
+          "en": "The line y = 5x − 9",
+          "ja": "直線 y = 5x − 9"
+        }
+      }
+    },
+    {
+      "id": "geometry_grade10_foundation_048",
+      "reviewStatus": "ok",
+      "topic": "geometry",
+      "subtopic": "two_points_on_line_with_distance_ratio",
+      "tags": [
+        "c:vector",
+        "c:coordinate",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "設 A 是 (2, 3)、B 是 (11, 9)。動點 P 恆滿足「向量 AP = k × 向量 AB」，其中 k 為實數，因此 P 一定落在直線 AB 上。若 P 到 A 的距離剛好是 P 到 B 的距離的 2 倍，這樣的 P 共有兩個。求這兩個 P 的 x 座標相加是多少。",
+        "zh-Hans": "设 A 是 (2, 3)、B 是 (11, 9)。动点 P 恒满足「向量 AP = k × 向量 AB」，其中 k 为实数，因此 P 一定落在直线 AB 上。若 P 到 A 的距离刚好是 P 到 B 的距离的 2 倍，这样的 P 共有两个。求这两个 P 的 x 坐标相加是多少。",
+        "en": "Let A be (2, 3) and B be (11, 9). A moving point P always satisfies vector AP = k × vector AB for some real number k, so P lies on line AB. If the distance from P to A is exactly twice the distance from P to B, there are two such points P. Find the sum of their x-coordinates.",
+        "ja": "A を (2, 3)、B を (11, 9) とします。動点 P はある実数 k について「ベクトル AP = k × ベクトル AB」を常に満たすので、P は直線 AB 上にあります。P から A までの距離が P から B までの距離のちょうど 2 倍であるとき、そのような P は 2 つあります。その 2 点の x 座標の和を求めなさい。"
+      },
+      "answer": {
+        "zh-Hant": "兩個 P 的 x 座標之和是 28。",
+        "zh-Hans": "两个 P 的 x 坐标之和是 28。",
+        "en": "The sum of the two x-coordinates is 28.",
+        "ja": "2 点の x 座標の和は 28 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "向量 AB = (11 − 2, 9 − 3) = (9, 6)，所以 P = A + k(9, 6) = (2 + 9k, 3 + 6k)。",
+          "由此得 向量 AP = k(9, 6)，長度是 |k| 乘上 AB 的長度；而 向量 PB = 向量 AB − 向量 AP = (1 − k)(9, 6)，長度是 |1 − k| 乘上 AB 的長度。",
+          "條件「PA 是 PB 的 2 倍」化成 |k| = 2|1 − k|，要分兩種情形：若 k 與 1 − k 同號，得 k = 2(1 − k)，解得 k = 2/3；若異號，得 k = −2(1 − k)，解得 k = 2。（k = 2 時 P 落在 B 的外側，仍然在直線 AB 上，符合題意。）",
+          "k = 2/3 時 P = (2 + 6, 3 + 4) = (8, 7)；k = 2 時 P = (2 + 18, 3 + 12) = (20, 15)。兩個 x 座標之和是 8 + 20 = 28。"
+        ],
+        "zh-Hans": [
+          "向量 AB = (11 − 2, 9 − 3) = (9, 6)，所以 P = A + k(9, 6) = (2 + 9k, 3 + 6k)。",
+          "由此得 向量 AP = k(9, 6)，长度是 |k| 乘上 AB 的长度；而 向量 PB = 向量 AB − 向量 AP = (1 − k)(9, 6)，长度是 |1 − k| 乘上 AB 的长度。",
+          "条件「PA 是 PB 的 2 倍」化成 |k| = 2|1 − k|，要分两种情形：若 k 与 1 − k 同号，得 k = 2(1 − k)，解得 k = 2/3；若异号，得 k = −2(1 − k)，解得 k = 2。（k = 2 时 P 落在 B 的外侧，仍然在直线 AB 上，符合题意。）",
+          "k = 2/3 时 P = (2 + 6, 3 + 4) = (8, 7)；k = 2 时 P = (2 + 18, 3 + 12) = (20, 15)。两个 x 坐标之和是 8 + 20 = 28。"
+        ],
+        "en": [
+          "Vector AB = (11 − 2, 9 − 3) = (9, 6), so P = A + k(9, 6) = (2 + 9k, 3 + 6k).",
+          "Then vector AP = k(9, 6) has length |k| times the length of AB, while vector PB = vector AB − vector AP = (1 − k)(9, 6) has length |1 − k| times the length of AB.",
+          "The condition PA = 2 PB becomes |k| = 2|1 − k|, which splits into two cases: if k and 1 − k have the same sign, then k = 2(1 − k), giving k = 2/3; if they have opposite signs, then k = −2(1 − k), giving k = 2. (When k = 2 the point P lies beyond B, still on line AB, which the problem allows.)",
+          "For k = 2/3, P = (2 + 6, 3 + 4) = (8, 7); for k = 2, P = (2 + 18, 3 + 12) = (20, 15). The sum of the two x-coordinates is 8 + 20 = 28."
+        ],
+        "ja": [
+          "ベクトル AB = (11 − 2, 9 − 3) = (9, 6) なので、P = A + k(9, 6) = (2 + 9k, 3 + 6k) と書けます。",
+          "このときベクトル AP = k(9, 6) の長さは AB の長さの |k| 倍、ベクトル PB = ベクトル AB − ベクトル AP = (1 − k)(9, 6) の長さは AB の長さの |1 − k| 倍です。",
+          "条件「PA は PB の 2 倍」は |k| = 2|1 − k| となり、2 つの場合に分かれます。k と 1 − k が同符号なら k = 2(1 − k) より k = 2/3、異符号なら k = −2(1 − k) より k = 2 です。（k = 2 のとき P は B の外側にありますが、直線 AB 上なので条件を満たします。）",
+          "k = 2/3 のとき P = (2 + 6, 3 + 4) = (8, 7)、k = 2 のとき P = (2 + 18, 3 + 12) = (20, 15) です。2 つの x 座標の和は 8 + 20 = 28 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "28"
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "geometry-grade10-vector",
+        "notes": "題型來源：英國 A-Level 與美國 precalculus 向量單元的「internal and external division of a segment（內分點與外分點）」練習，常見形式是給距離比、要求學生自己發現有兩解。改寫重點：用 向量 AP = k 向量 AB 的參數式統一處理內外分點，把分類討論寫進解法。去重：全庫掃「分點」的 9 個命中都不是向量分點題；geometry_grade10_045 是用向量求平行四邊形第四頂點、geometry_grade11_009 是空間角平分線、geometry_grade12_041 是空間三點共線求參數，都只有唯一解、沒有內外兩解的分類；c:vector 既有的 14 題也沒有任何一題以距離比為條件。"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      }
     }
   ]
 }

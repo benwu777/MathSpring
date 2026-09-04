@@ -4274,6 +4274,173 @@
         "reference": "logic-grade9-foundation",
         "notes": "限制加在「取完之後的局面」而不是「取走的量」（剩下的顆數不可以是質數），因此很多步是違規的，遊戲會停在 4 顆這個死局。全庫的博弈題都只限制取法本身，沒有一題限制剩餘局面；問法「最後桌上剩幾顆」也是新的（既有題問第一步、問誰必勝、問總步數）。（2026-09-04 第四輪：主流程獨立重算過答案，並重跑機械校驗與相似度閘門。）"
       }
+    },
+    {
+      "id": "logic_grade9_foundation_047",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "row_of_coins_take_from_ends",
+      "tags": [
+        "c:game_theory",
+        "m:coloring"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade9",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "桌上排成一列 6 枚硬幣，由左到右的面額依序是 5 元、2 元、10 元、1 元、6 元、3 元。甲、乙兩人輪流拿硬幣，由甲先拿：每一次只能從這一列的最左端或最右端拿走一枚，拿走的硬幣歸自己所有，直到硬幣被拿光。若甲採取最佳策略，不論乙怎麼拿，甲最多能保證自己拿到多少元？",
+        "zh-Hans": "桌上排成一列 6 枚硬币，由左到右的面额依次是 5 元、2 元、10 元、1 元、6 元、3 元。甲、乙两人轮流拿硬币，由甲先拿：每一次只能从这一列的最左端或最右端拿走一枚，拿走的硬币归自己所有，直到硬币被拿光。若甲采取最佳策略，不论乙怎么拿，甲最多能保证自己拿到多少元？",
+        "en": "Six coins lie in a row on the table; from left to right their values are 5, 2, 10, 1, 6 and 3 dollars. Players A and B take coins alternately, A first: on your turn you take the coin at the left end or the coin at the right end of the row and keep it, until no coins are left. If A plays as well as possible, what is the largest amount A can guarantee for himself no matter how B plays?",
+        "ja": "テーブルの上に硬貨が 6 枚一列に並んでいて、左から順に 5 円、2 円、10 円、1 円、6 円、3 円です。甲と乙が交互に取り、先に取るのは甲です。手番の人は列の左端か右端の 1 枚だけを取って自分のものにし、これを硬貨がなくなるまで続けます。甲が最善を尽くすとき、乙がどう取っても甲が確実に手に入れられる金額は最大でいくらですか。"
+      },
+      "answer": {
+        "zh-Hant": "甲最多能保證自己拿到 21 元。",
+        "zh-Hans": "甲最多能保证自己拿到 21 元。",
+        "en": "A can guarantee at most 21 dollars.",
+        "ja": "甲が確実に手に入れられるのは最大で 21 円です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "把 6 個位置由左到右編號 1 到 6，奇數位置塗成紅色、偶數位置塗成藍色。紅色的三枚是 5 + 10 + 6 = 21 元，藍色的三枚是 2 + 1 + 3 = 6 元。",
+          "因為硬幣共有偶數枚，這一列的兩端一定一紅一藍；輪到甲時，他永遠挑得到自己想要的顏色。",
+          "甲先拿最左端的紅色 5 元。拿完之後剩下第 2 到第 6 枚，兩端都是藍色，乙不論拿哪一端都只能拿到藍色。",
+          "乙拿走一枚藍色之後，兩端又各露出一枚紅色，甲再拿紅色。這樣一直重複，甲會拿走全部三枚紅色硬幣，得到 5 + 10 + 6 = 21 元。",
+          "接著檢查甲不可能保證更多，他的第一步只有兩種：若甲改拿最右端的 3 元，乙就拿最左端的 5 元，剩下 2、10、1、6，甲之後最多再拿到 6 + 10 = 16 元，總共只有 19 元。",
+          "若甲拿最左端的 5 元，乙每次都拿走兩端之中面額較小的那一枚（依序是 2 元、1 元、3 元），甲最後恰好停在 21 元，不會更多。",
+          "所以甲能保證的最大金額是 21 元。"
+        ],
+        "zh-Hans": [
+          "把 6 个位置由左到右编号 1 到 6，奇数位置涂成红色、偶数位置涂成蓝色。红色的三枚是 5 + 10 + 6 = 21 元，蓝色的三枚是 2 + 1 + 3 = 6 元。",
+          "因为硬币共有偶数枚，这一列的两端一定一红一蓝；轮到甲时，他永远挑得到自己想要的颜色。",
+          "甲先拿最左端的红色 5 元。拿完之后剩下第 2 到第 6 枚，两端都是蓝色，乙不论拿哪一端都只能拿到蓝色。",
+          "乙拿走一枚蓝色之后，两端又各露出一枚红色，甲再拿红色。这样一直重复，甲会拿走全部三枚红色硬币，得到 5 + 10 + 6 = 21 元。",
+          "接着检查甲不可能保证更多，他的第一步只有两种：若甲改拿最右端的 3 元，乙就拿最左端的 5 元，剩下 2、10、1、6，甲之后最多再拿到 6 + 10 = 16 元，总共只有 19 元。",
+          "若甲拿最左端的 5 元，乙每次都拿走两端之中面额较小的那一枚（依次是 2 元、1 元、3 元），甲最后恰好停在 21 元，不会更多。",
+          "所以甲能保证的最大金额是 21 元。"
+        ],
+        "en": [
+          "Number the six places 1 to 6 from left to right and colour the odd places red and the even places blue. The three red coins are 5 + 10 + 6 = 21 dollars and the three blue coins are 2 + 1 + 3 = 6 dollars.",
+          "Because there is an even number of coins, the two ends of the row always have different colours, so on A's turn he can always pick the colour he wants.",
+          "A takes the red coin of 5 at the left end. What remains is places 2 to 6, whose two ends are both blue, so whichever end B takes he gets a blue coin.",
+          "After B removes a blue coin, a red coin is exposed at each end again, so A takes red once more. Repeating this, A collects all three red coins and gets 5 + 10 + 6 = 21 dollars.",
+          "Now check that A cannot guarantee more; he has only two possible first moves. If A takes the 3 at the right end instead, B answers by taking the 5 at the left end, leaving 2, 10, 1, 6, from which A can gain at most 6 + 10 = 16 more, only 19 in total.",
+          "If A takes the 5 at the left end, B can simply always take the smaller of the two end coins (2, then 1, then 3), and A finishes with exactly 21 and no more.",
+          "So the largest amount A can guarantee is 21 dollars."
+        ],
+        "ja": [
+          "6 つの場所に左から 1 から 6 まで番号を付け、奇数番目を赤、偶数番目を青に塗ります。赤の 3 枚は 5 + 10 + 6 = 21 円、青の 3 枚は 2 + 1 + 3 = 6 円です。",
+          "硬貨は偶数枚なので列の両端は必ず赤と青が 1 つずつになり、甲の手番では欲しい色を必ず選べます。",
+          "甲はまず左端の赤い 5 円を取ります。残りは 2 番目から 6 番目までで、その両端はどちらも青なので、乙はどちらを取っても青しか取れません。",
+          "乙が青を 1 枚取ると、両端にまた赤が現れるので甲はまた赤を取ります。これを繰り返すと甲は赤 3 枚をすべて取り、5 + 10 + 6 = 21 円を得ます。",
+          "次に甲がこれ以上は確実にできないことを確かめます。初手は 2 通りしかありません。甲が右端の 3 円を取ると、乙は左端の 5 円を取り、残りは 2、10、1、6 で、甲はあと最大 6 + 10 = 16 円しか取れず合計 19 円です。",
+          "甲が左端の 5 円を取った場合、乙は毎回両端のうち小さいほう（順に 2 円、1 円、3 円）を取れば、甲はちょうど 21 円で止まります。",
+          "したがって甲が確実に得られる最大の金額は 21 円です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "21"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade9-foundation",
+        "notes": "題型取自公開題庫常見的「coins in a row」對局（GeeksforGeeks Puzzle 14、Science News「Coins in a Row」、Peter Winkler 的謎題集），標準解法是把位置奇偶當成兩色，先手可鎖定其中一色。全庫 21 題博弈題全部是「取到最後一顆者勝／輸」的勝負型遊戲，沒有任何一題是比誰拿到的總分多的計分型對局；logic_grade7_047（輪流擦數字，一方想大一方想小）雖是對抗性極值，但操作是刪數字且沒有兩端限制與奇偶染色。arithmetic_grade4_101 等排列題只是把球排成一列，並非對局。"
+      }
+    },
+    {
+      "id": "logic_grade9_foundation_048",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "three_pile_stone_game_binary",
+      "tags": [
+        "c:game_theory",
+        "c:number_base",
+        "m:invariant"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade9",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "桌上放著三個盒子，裡面分別裝了 4 枚、7 枚、9 枚棋子。阿哲與小妤輪流動手，由阿哲先動：輪到的人要挑其中一個盒子，從那個盒子拿走 1 枚以上的棋子（整盒拿光也可以），但同一次不可以碰到兩個盒子。誰拿走全部棋子裡的最後一枚，誰就獲勝。已知阿哲有必勝走法，而且第一步的必勝走法只有一種。求阿哲第一步應該拿走幾枚棋子。",
+        "zh-Hans": "桌上放着三个盒子，里面分别装了 4 枚、7 枚、9 枚棋子。阿哲与小妤轮流动手，由阿哲先动：轮到的人要挑其中一个盒子，从那个盒子拿走 1 枚以上的棋子（整盒拿光也可以），但同一次不可以碰到两个盒子。谁拿走全部棋子里的最后一枚，谁就获胜。已知阿哲有必胜走法，而且第一步的必胜走法只有一种。求阿哲第一步应该拿走几枚棋子。",
+        "en": "Three boxes on the table hold 4, 7 and 9 game pieces. Zach and Sophie move alternately, Zach first: on your move you choose one box and take at least one piece out of it (emptying the box is allowed), but you may not touch two boxes in the same move. Whoever takes the very last piece of all wins. Zach has a winning strategy, and his winning first move is unique. How many pieces should Zach take on his first move?",
+        "ja": "テーブルに箱が 3 つあり、それぞれ 4 枚、7 枚、9 枚の駒が入っています。ザックとソフィーが交互に手を進め、先に動くのはザックです。手番では箱を 1 つ選び、その箱から 1 枚以上（箱を空にしてもよい）取ります。1 回の手番で 2 つの箱に手をつけることはできません。すべての駒のうち最後の 1 枚を取った人が勝ちです。ザックには必勝手があり、初手の必勝手はただ 1 通りです。ザックは初手で何枚取ればよいですか。"
+      },
+      "answer": {
+        "zh-Hant": "阿哲第一步應該從裝 9 枚的盒子拿走 6 枚。",
+        "zh-Hans": "阿哲第一步应该从装 9 枚的盒子拿走 6 枚。",
+        "en": "Zach should take 6 pieces out of the box holding 9.",
+        "ja": "ザックは 9 枚入りの箱から 6 枚取ればよいです。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "先看只有兩個盒子的情形：只要把兩盒的棋子數弄成一樣多，之後對手在哪一盒拿幾枚，你就在另一盒拿一樣多，最後一枚一定被你拿走。所以「兩盒一樣多」是必敗形狀。",
+          "三個盒子時，把「一樣多」換成更精細的說法：把每一盒的枚數寫成二進位，逐位去數三個數在該位上一共出現幾個 1。若每一位上的 1 都是偶數個，這個形狀就是必敗形狀；只要有某一位是奇數個，輪到的人就能把它變回必敗形狀。",
+          "現在 4 = 100₂、7 = 111₂、9 = 1001₂。8 的位有 1 個 1（來自 9），4 的位有 2 個，2 的位有 1 個（來自 7），1 的位有 2 個。",
+          "8 的位與 2 的位都是奇數個，所以現在不是必敗形狀，先手阿哲有必勝走法：他要動其中一盒，使每一位上的 1 都變成偶數個。",
+          "只有裝 9 枚的那一盒含有 8 的位，所以一定要動它。把 9 改成 11₂ = 3，三盒變成 4、7、3，也就是 100₂、111₂、11₂，每一位上的 1 都恰好是 2 個，正是必敗形狀。",
+          "若改動裝 4 枚或裝 7 枚的盒子，為了補上 8 的位，那一盒反而要變成 14 枚或 13 枚，比原來還多，不合規則，所以必勝走法唯一。",
+          "9 − 3 = 6，所以阿哲第一步要從裝 9 枚的盒子拿走 6 枚。"
+        ],
+        "zh-Hans": [
+          "先看只有两个盒子的情形：只要把两盒的棋子数弄成一样多，之后对手在哪一盒拿几枚，你就在另一盒拿一样多，最后一枚一定被你拿走。所以“两盒一样多”是必败形状。",
+          "三个盒子时，把“一样多”换成更精细的说法：把每一盒的枚数写成二进位，逐位去数三个数在该位上一共出现几个 1。若每一位上的 1 都是偶数个，这个形状就是必败形状；只要有某一位是奇数个，轮到的人就能把它变回必败形状。",
+          "现在 4 = 100₂、7 = 111₂、9 = 1001₂。8 的位有 1 个 1（来自 9），4 的位有 2 个，2 的位有 1 个（来自 7），1 的位有 2 个。",
+          "8 的位与 2 的位都是奇数个，所以现在不是必败形状，先手阿哲有必胜走法：他要动其中一盒，使每一位上的 1 都变成偶数个。",
+          "只有装 9 枚的那一盒含有 8 的位，所以一定要动它。把 9 改成 11₂ = 3，三盒变成 4、7、3，也就是 100₂、111₂、11₂，每一位上的 1 都恰好是 2 个，正是必败形状。",
+          "若改动装 4 枚或装 7 枚的盒子，为了补上 8 的位，那一盒反而要变成 14 枚或 13 枚，比原来还多，不合规则，所以必胜走法唯一。",
+          "9 − 3 = 6，所以阿哲第一步要从装 9 枚的盒子拿走 6 枚。"
+        ],
+        "en": [
+          "Look at two boxes first: make the two boxes hold the same number, and afterwards copy in the other box whatever the opponent does, so the last piece is always yours. Hence two equal boxes is a losing shape.",
+          "With three boxes, replace equality by something finer: write each box count in base two and, for each binary place, count how many of the three numbers have a 1 there. If every place has an even count of 1s, the shape is a losing one; if some place has an odd count, the player to move can restore a losing shape.",
+          "Here 4 is 100, 7 is 111 and 9 is 1001 in base two. The eights place has one 1 (from 9), the fours place has two, the twos place has one (from 7) and the ones place has two.",
+          "The eights place and the twos place are odd, so this is not a losing shape and Zach has a winning move: he must change one box so that every place has an even count of 1s.",
+          "Only the box of 9 contains the eights place, so that box must be the one to change. Turning 9 into 11 in base two, that is 3, gives boxes 4, 7, 3, whose binary forms 100, 111 and 11 have exactly two 1s in every place, a losing shape.",
+          "Changing the box of 4 or the box of 7 instead would require it to grow to 14 or 13 pieces to supply the eights place, which the rules forbid, so the winning move is unique.",
+          "Since 9 − 3 = 6, Zach should take 6 pieces out of the box holding 9."
+        ],
+        "ja": [
+          "まず箱が 2 つの場合を考えます。2 つの箱を同じ枚数にすれば、あとは相手が取った分だけもう一方の箱から取ればよく、最後の 1 枚は必ず自分のものになります。つまり「2 つの箱が同数」が負けの形です。",
+          "箱が 3 つのときは「同数」をもっと細かい条件に置きかえます。各箱の枚数を二進法で書き、位ごとに 3 つの数の 1 の個数を数えます。どの位でも 1 の個数が偶数なら負けの形で、どこかの位が奇数なら手番の人が負けの形に戻せます。",
+          "いま 4 = 100₂、7 = 111₂、9 = 1001₂ です。8 の位の 1 は 1 個（9 から）、4 の位は 2 個、2 の位は 1 個（7 から）、1 の位は 2 個です。",
+          "8 の位と 2 の位が奇数なので、今は負けの形ではなく、先手のザックに必勝手があります。どれか 1 つの箱を変えて、すべての位を偶数個にすればよいのです。",
+          "8 の位を持つのは 9 枚の箱だけなので、動かすのはこの箱に決まります。9 を 11₂ = 3 にすると 3 つの箱は 4、7、3、すなわち 100₂、111₂、11₂ となり、どの位でも 1 がちょうど 2 個の負けの形になります。",
+          "4 枚や 7 枚の箱を動かす場合は 8 の位を補うために 14 枚や 13 枚へ増やす必要があり、規則に反します。よって必勝手は 1 通りだけです。",
+          "9 − 3 = 6 なので、ザックは 9 枚入りの箱から 6 枚取ればよいことになります。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "6"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade9-foundation",
+        "notes": "題型取自 Nim 的標準理論（維基百科 Nim 條目、UCLA Tom Ferguson 的 Game Theory 第一章、AoPS Wiki 的 Nim 頁），必勝條件是各堆二進位逐位的 1 個數皆為偶數。全庫的取石子題 logic_grade9_034 是兩堆（3 與 5），必勝策略只是「把兩堆取成一樣多」，完全沒有二進位；logic_grade8_027 的三堆是搬移石子求最少次數，不是對局；logic_grade12_009 的磚牆遊戲是分裂型 Nim 的選擇題。本題把二進位當作博弈的不變量，是全庫唯一一題，而且刻意挑 4、7、9 讓必勝走法唯一，避免「取 1 顆」這種可以亂猜的答案。"
+      }
     }
   ]
 }

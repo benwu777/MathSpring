@@ -4770,6 +4770,86 @@
         "reference": "agent-drafted-nrich-2026-09-03",
         "notes": "題型參考 参考组合数对称性质 C(n,r)=C(n,n-r) 的标准定义（AoPS Wiki「Pascal's Triangle and its patterns and properties」中列出的性质之一），改写为由等式反推未知指标 k 的方程题，由背景起草代理於 2026-09-03 實際查閱 NRICH 等公開題組後改寫（本輪開放附圖）；數值、敘述與四語系詳解為本題庫自行推導，非整題引用。主流程已跑機械校驗、全庫去重與跨代理去重。"
       }
+    },
+    {
+      "id": "combinatorics_grade12_foundation_051",
+      "reviewStatus": "ok",
+      "topic": "combinatorics",
+      "subtopic": "expected_income_with_random_number_of_trials",
+      "tags": [
+        "c:expectation",
+        "c:probability",
+        "m:direct"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "某位業務員每天要拜訪的客戶數，由他早上擲一顆公正六面骰子的點數決定（擲出幾點就拜訪幾位客戶）。每位客戶各自獨立地以 2/3 的機率成交，每成交一筆可賺 3 千元，沒成交就沒有收入。求他一天收入的期望值是多少千元。",
+        "zh-Hans": "某位业务员每天要拜访的客户数，由他早上掷一颗公正六面骰子的点数决定（掷出几点就拜访几位客户）。每位客户各自独立地以 2/3 的概率成交，每成交一笔可赚 3 千元，没成交就没有收入。求他一天收入的期望值是多少千元。",
+        "en": "A salesman decides how many customers to visit each day by rolling one fair six-sided die in the morning: he visits as many customers as the number rolled. Each customer independently closes a deal with probability 2/3, every closed deal earns him 3 thousand dollars, and a customer who does not close earns him nothing. Find the expected value of his daily income, in thousands of dollars.",
+        "ja": "ある営業担当者は、その日に訪問する顧客の人数を朝に公正な 6 面のさいころを 1 回振って決めます（出た目の数だけ顧客を訪問します）。各顧客は互いに独立に確率 2/3 で契約し、1 件成約するごとに 3 千円の利益が出ます。成約しなければ収入はありません。1 日の収入の期待値が何千円かを求めなさい。"
+      },
+      "answer": {
+        "zh-Hant": "一天收入的期望值是 7 千元。",
+        "zh-Hans": "一天收入的期望值是 7 千元。",
+        "en": "The expected daily income is 7 thousand dollars.",
+        "ja": "1 日の収入の期待値は 7 千円です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "這題有兩層隨機：先隨機決定客戶數，再對每位客戶隨機決定成不成交。只算其中一層都會錯。",
+          "先把客戶數固定下來。若今天拜訪 n 位客戶，成交筆數的期望值是 n × 2/3，收入的期望值是 3 × n × 2/3 = 2n 千元。",
+          "也就是說，只要知道客戶數 n，當天收入的期望值就是 2n 千元；它和 n 成正比，正是這個比例關係讓第二層可以直接接回第一層。",
+          "客戶數就是骰子的點數，期望值是 (1 + 2 + 3 + 4 + 5 + 6) ÷ 6 = 3.5。",
+          "因為收入的期望值是客戶數的 2 倍，所以整體的期望收入 = 2 × 3.5 = 7 千元。",
+          "常見的卡點是「客戶數 3.5 位不是整數，不能拿來算」。期望值本來就不必是實際會出現的值，這裡真正用到的是「收入期望值與客戶數成正比」這個結構，答案是 7 千元。"
+        ],
+        "zh-Hans": [
+          "这题有两层随机：先随机决定客户数，再对每位客户随机决定成不成交。只算其中一层都会错。",
+          "先把客户数固定下来。若今天拜访 n 位客户，成交笔数的期望值是 n × 2/3，收入的期望值是 3 × n × 2/3 = 2n 千元。",
+          "也就是说，只要知道客户数 n，当天收入的期望值就是 2n 千元；它和 n 成正比，正是这个比例关系让第二层可以直接接回第一层。",
+          "客户数就是骰子的点数，期望值是 (1 + 2 + 3 + 4 + 5 + 6) ÷ 6 = 3.5。",
+          "因为收入的期望值是客户数的 2 倍，所以整体的期望收入 = 2 × 3.5 = 7 千元。",
+          "常见的卡点是「客户数 3.5 位不是整数，不能拿来算」。期望值本来就不必是实际会出现的值，这里真正用到的是「收入期望值与客户数成正比」这个结构，答案是 7 千元。"
+        ],
+        "en": [
+          "There are two layers of randomness here: first the number of customers is random, then each customer independently either closes or not. Using only one layer gives a wrong answer.",
+          "Fix the number of customers first. If he visits n customers today, the expected number of deals is n × 2/3, so the expected income is 3 × n × 2/3 = 2n thousand dollars.",
+          "In other words, once the number of customers n is known, the expected income is exactly 2n thousand dollars. It is proportional to n, and that proportionality is what lets the second layer be plugged straight back into the first.",
+          "The number of customers is the number rolled on the die, whose expected value is (1 + 2 + 3 + 4 + 5 + 6) ÷ 6 = 3.5.",
+          "Since expected income is twice the number of customers, the overall expected income is 2 × 3.5 = 7 thousand dollars.",
+          "A common sticking point is thinking that 3.5 customers is impossible so it cannot be used. An expected value need not be an attainable value; what really matters here is that expected income is proportional to the number of customers. The answer is 7 thousand dollars."
+        ],
+        "ja": [
+          "この問題には偶然が 2 段階あります。まず顧客の人数が偶然で決まり、次に各顧客が成約するかどうかが偶然で決まります。片方だけで計算すると誤りです。",
+          "まず顧客数を固定します。今日 n 人を訪問するなら、成約件数の期待値は n × 2/3、収入の期待値は 3 × n × 2/3 = 2n 千円です。",
+          "つまり顧客数 n が分かれば、その日の収入の期待値はちょうど 2n 千円です。n に比例しており、この比例関係のおかげで 2 段目を 1 段目にそのまま戻せます。",
+          "顧客数はさいころの目そのものなので、期待値は (1 + 2 + 3 + 4 + 5 + 6) ÷ 6 = 3.5 です。",
+          "収入の期待値は顧客数の 2 倍なので、全体の期待収入は 2 × 3.5 = 7 千円になります。",
+          "よくつまずくのは「顧客数 3.5 人は整数でないから使えない」という考えです。期待値は実際に現れる値である必要はなく、ここで効いているのは「収入の期待値が顧客数に比例する」という構造です。答えは 7 千円です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "7"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "stats-grade12-random-sum-two-stage-expectation",
+        "notes": "題型取自 Wald 等式（Wald’s identity / random sum）的教材例題，如 Dartmouth Math 100 的 Wald’s Identity 講義、MIT 6.042 的 Wald 定理講義與 algnotes 的 stopping times 條目，那裡的標準示例正是「先擲骰子決定次數，再做那麼多次試驗」。全庫查過：既有期望值題全部是「試驗次數事先固定」的模型（擲 4 次硬幣、擲 6 次骰子、抽 4 次球、11 人圍桌），沒有任何一題的試驗次數本身是隨機變數。最接近的 combinatorics_grade11_043 是固定擲 4 次硬幣計分，本題多出「次數隨機」這一層，必須先做條件期望再套回外層，推理核心不同。"
+      }
     }
   ]
 }

@@ -4275,6 +4275,85 @@
         "reference": "logic-grade7-foundation",
         "notes": "這是「雙方目標相反」的最佳化博弈，不是取到最後一顆的勝負博弈。與 logic_grade11_foundation_016（一列硬幣從兩端取、求先手總額）機制不同：這題擦掉哪個位置都不影響結果，因此可化成一堆數字的極大極小對抗，結論是中位數。全庫沒有「刪數字對抗」題。（2026-09-04 第四輪：主流程獨立重算過答案，並重跑機械校驗與相似度閘門。）"
       }
+    },
+    {
+      "id": "logic_grade7_foundation_048",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "pile_transform_to_staircase",
+      "tags": [
+        "c:recurrence",
+        "m:enumeration"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade7",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "把 15 顆棋子全部放成一堆。接下來每一輪都做同一個動作：從現有的每一堆各拿走 1 顆，再把這一輪拿走的棋子合起來擺成一個新的堆（顆數變成 0 的堆就消失）。例如某一輪開始時是 4 顆與 2 顆兩堆，做完之後會變成 3 顆、1 顆與新的 2 顆共三堆。從一整堆 15 顆開始，最少要做幾輪，各堆的顆數才會第一次剛好是 1、2、3、4、5？",
+        "zh-Hans": "把 15 颗棋子全部放成一堆。接下来每一轮都做同一个动作：从现有的每一堆各拿走 1 颗，再把这一轮拿走的棋子合起来摆成一个新的堆（颗数变成 0 的堆就消失）。例如某一轮开始时是 4 颗与 2 颗两堆，做完之后会变成 3 颗、1 颗与新的 2 颗共三堆。从一整堆 15 颗开始，最少要做几轮，各堆的颗数才会第一次刚好是 1、2、3、4、5？",
+        "en": "Put all 15 counters into a single pile. Then repeat the same round over and over: take one counter away from every existing pile, and put all the counters taken in that round together as one new pile (a pile that drops to zero disappears). For instance, a round that starts with piles of 4 and 2 ends with piles of 3, 1 and a new pile of 2. Starting from one pile of 15, what is the least number of rounds after which the pile sizes are exactly 1, 2, 3, 4, 5 for the first time?",
+        "ja": "15 個の駒をすべて 1 つの山にします。そのあと毎回同じ操作をくり返します。今ある山それぞれから 1 個ずつ取り、その回に取った駒をまとめて新しい山を 1 つ作ります（0 個になった山は消えます）。たとえば 4 個と 2 個の 2 つの山から始めた回は、3 個、1 個、そして新しい 2 個の 3 つの山になります。1 つの山 15 個から始めて、山の個数が初めてちょうど 1、2、3、4、5 になるのは最少で何回目ですか。"
+      },
+      "answer": {
+        "zh-Hant": "最少要做 10 輪。",
+        "zh-Hans": "最少要做 10 轮。",
+        "en": "It takes 10 rounds at least.",
+        "ja": "最少で 10 回です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "先看清楚一輪的動作：每一堆都少 1 顆，而這一輪拿走的顆數剛好等於「原本有幾堆」，這些棋子會變成一個新的堆。",
+          "第 1 輪：原本只有一堆 15 顆，做完變成 14 顆與新的 1 顆，也就是（14, 1）。",
+          "照同樣規則一輪一輪做下去：（14, 1）→（13, 2）→（12, 2, 1）→（11, 3, 1）→（10, 3, 2）→（9, 3, 2, 1）→（8, 4, 2, 1）→（7, 4, 3, 1）→（6, 4, 3, 2）→（5, 4, 3, 2, 1）。",
+          "把上面的結果依序編號，剛好是第 1 輪到第 10 輪，第一次出現 1、2、3、4、5 是在第 10 輪。",
+          "檢查終點：1 + 2 + 3 + 4 + 5 = 15，剛好用完所有棋子；而且（5, 4, 3, 2, 1）再做一輪會得到（4, 3, 2, 1）加上新的 5 顆，還是同一個形狀，所以之後不再變化，10 輪確實是第一次。",
+          "所以最少要做 10 輪。"
+        ],
+        "zh-Hans": [
+          "先看清楚一轮的动作：每一堆都少 1 颗，而这一轮拿走的颗数刚好等于“原本有几堆”，这些棋子会变成一个新的堆。",
+          "第 1 轮：原本只有一堆 15 颗，做完变成 14 颗与新的 1 颗，也就是（14, 1）。",
+          "照同样规则一轮一轮做下去：（14, 1）→（13, 2）→（12, 2, 1）→（11, 3, 1）→（10, 3, 2）→（9, 3, 2, 1）→（8, 4, 2, 1）→（7, 4, 3, 1）→（6, 4, 3, 2）→（5, 4, 3, 2, 1）。",
+          "把上面的结果依次编号，刚好是第 1 轮到第 10 轮，第一次出现 1、2、3、4、5 是在第 10 轮。",
+          "检查终点：1 + 2 + 3 + 4 + 5 = 15，刚好用完所有棋子；而且（5, 4, 3, 2, 1）再做一轮会得到（4, 3, 2, 1）加上新的 5 颗，还是同一个形状，所以之后不再变化，10 轮确实是第一次。",
+          "所以最少要做 10 轮。"
+        ],
+        "en": [
+          "First be clear about one round: every pile loses one counter, and the number of counters taken equals how many piles there were, and those counters become one new pile.",
+          "Round 1: from the single pile of 15 we get 14 and a new pile of 1, that is (14, 1).",
+          "Keep applying the same rule: (14, 1) -> (13, 2) -> (12, 2, 1) -> (11, 3, 1) -> (10, 3, 2) -> (9, 3, 2, 1) -> (8, 4, 2, 1) -> (7, 4, 3, 1) -> (6, 4, 3, 2) -> (5, 4, 3, 2, 1).",
+          "Numbering those results in order, they are rounds 1 through 10, and the sizes 1, 2, 3, 4, 5 appear for the first time at round 10.",
+          "Check the end position: 1 + 2 + 3 + 4 + 5 = 15 uses every counter, and one more round on (5, 4, 3, 2, 1) gives (4, 3, 2, 1) plus a new pile of 5, the very same shape, so nothing changes afterwards and round 10 really is the first time.",
+          "Hence at least 10 rounds are needed."
+        ],
+        "ja": [
+          "まず 1 回の操作をはっきりさせます。どの山も 1 個ずつ減り、その回に取った個数はもとの山の数と等しく、それがまとめて新しい山 1 つになります。",
+          "1 回目：15 個 1 山だけなので、終わると 14 個と新しい 1 個、つまり（14, 1）です。",
+          "同じ規則で続けます：（14, 1）→（13, 2）→（12, 2, 1）→（11, 3, 1）→（10, 3, 2）→（9, 3, 2, 1）→（8, 4, 2, 1）→（7, 4, 3, 1）→（6, 4, 3, 2）→（5, 4, 3, 2, 1）。",
+          "上の結果に順に番号をつけると 1 回目から 10 回目にあたり、1、2、3、4、5 が初めて現れるのは 10 回目です。",
+          "終わりの形を確かめます。1 + 2 + 3 + 4 + 5 = 15 でちょうど全部の駒を使い切り、さらに（5, 4, 3, 2, 1）でもう 1 回操作すると（4, 3, 2, 1）に新しい 5 個が加わって同じ形になるので、以後は変わりません。",
+          "したがって最少で 10 回です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "10"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade7-foundation",
+        "notes": "題型取自 Bulgarian solitaire（保加利亞接龍，Martin Gardner 1983 年在 Scientific American 介紹，維基百科同名條目與多篇公開講義都有完整規則），已知當總數是三角形數 n = k(k+1)/2 時，過程必定收斂到 1、2、⋯、k 的固定形狀。改寫成 15 顆棋子、問第一次達到固定形狀要幾輪。去重：全庫的遞迴題都是數列型（arithmetic_grade4_009 差遞增、arithmetic_grade4_034 乘 2 減 1、algebra_grade7_061 水塔放掉一半再注水）或走樓梯與鋪磚的計數型，操作對象都是單一個數；本題的狀態是「一組堆的顆數」，每一輪的變化規則是整組同時減 1 再生出新堆，沒有既有題用過。logic_grade6_058（機器每按一次取走 5 顆放回 2 顆）只是單一個數的等差遞減。"
+      }
     }
   ]
 }

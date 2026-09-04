@@ -4009,6 +4009,166 @@
         "reference": "agent-drafted-nrich-2026-09-03",
         "notes": "題型參考 NRICH Place Value, Integers, Ordering and Rounding - Short Problems —「Missing 9s」「Digital Counter」（查閱題名與題意後改寫成二進位數字和的限制題），由背景起草代理於 2026-09-03 實際查閱 NRICH 等公開題組後改寫；數值、敘述與四語系詳解為本題庫自行推導，非整題引用。主流程已跑機械校驗、全庫去重與跨代理去重。"
       }
+    },
+    {
+      "id": "number_theory_grade9_foundation_046",
+      "reviewStatus": "ok",
+      "topic": "number_theory",
+      "subtopic": "repunit_multiple_of_seven",
+      "tags": [
+        "c:recurrence",
+        "c:modular",
+        "m:pigeonhole"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade9",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "考慮 1、11、111、1111、⋯ 這一串數：每一項都是把前一項乘以 10 再加 1（也就是在前一項後面再寫一個 1）。這一串數之中一定找得到 7 的倍數。求最小的那一個 7 的倍數是幾位數。",
+        "zh-Hans": "考虑 1、11、111、1111、⋯ 这一串数：每一项都是把前一项乘以 10 再加 1（也就是在前一项后面再写一个 1）。这一串数之中一定找得到 7 的倍数。求最小的那一个 7 的倍数是几位数。",
+        "en": "Consider the sequence 1, 11, 111, 1111, ..., where each term is the previous term times 10 plus 1 (that is, one more digit 1 is written at the end). This sequence certainly contains a multiple of 7. How many digits does the smallest such multiple of 7 have?",
+        "ja": "1、11、111、1111、⋯ という数の列を考えます。各項は前の項を 10 倍して 1 を足したもの（つまり後ろに 1 をもう 1 つ書いたもの）です。この列の中には必ず 7 の倍数があります。そのうち最小のものは何桁ですか。"
+      },
+      "answer": {
+        "zh-Hant": "最小的那一個 7 的倍數是 6 位數。",
+        "zh-Hans": "最小的那一个 7 的倍数是 6 位数。",
+        "en": "The smallest such multiple of 7 has 6 digits.",
+        "ja": "最小のものは 6 桁です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "先說明為什麼一定找得到。一個數除以 7 的餘數只有 0、1、2、3、4、5、6 這 7 種。",
+          "如果這一串數的前 7 項都不是 7 的倍數，它們的餘數就只能落在 1 到 6 這 6 種裡；7 個數放進 6 種餘數，一定有兩項的餘數相同（抽屜原理）。",
+          "把餘數相同的兩項相減，會得到 11⋯100⋯0 的形式，它是 7 的倍數；又因為 7 與 10 互質，把末尾的 0 全部去掉之後，剩下那個全部由 1 組成的數仍然是 7 的倍數。所以這一串數裡一定有 7 的倍數。",
+          "接著找最小的。用「前一項乘以 10 再加 1」的規則只追蹤餘數：1 除以 7 餘 1；1 × 10 + 1 = 11 餘 4；4 × 10 + 1 = 41 餘 6；6 × 10 + 1 = 61 餘 5；5 × 10 + 1 = 51 餘 2；2 × 10 + 1 = 21 餘 0。",
+          "餘數第一次變成 0 是在第 6 項，也就是 111111 = 7 × 15873。",
+          "所以最小的那一個 7 的倍數是 6 位數。"
+        ],
+        "zh-Hans": [
+          "先说明为什么一定找得到。一个数除以 7 的余数只有 0、1、2、3、4、5、6 这 7 种。",
+          "如果这一串数的前 7 项都不是 7 的倍数，它们的余数就只能落在 1 到 6 这 6 种里；7 个数放进 6 种余数，一定有两项的余数相同（抽屉原理）。",
+          "把余数相同的两项相减，会得到 11⋯100⋯0 的形式，它是 7 的倍数；又因为 7 与 10 互质，把末尾的 0 全部去掉之后，剩下那个全部由 1 组成的数仍然是 7 的倍数。所以这一串数里一定有 7 的倍数。",
+          "接着找最小的。用“前一项乘以 10 再加 1”的规则只追踪余数：1 除以 7 余 1；1 × 10 + 1 = 11 余 4；4 × 10 + 1 = 41 余 6；6 × 10 + 1 = 61 余 5；5 × 10 + 1 = 51 余 2；2 × 10 + 1 = 21 余 0。",
+          "余数第一次变成 0 是在第 6 项，也就是 111111 = 7 × 15873。",
+          "所以最小的那一个 7 的倍数是 6 位数。"
+        ],
+        "en": [
+          "First see why such a term must exist. A number leaves only one of the 7 remainders 0, 1, 2, 3, 4, 5, 6 on division by 7.",
+          "If none of the first 7 terms were a multiple of 7, their remainders would all lie among the 6 values 1 to 6; putting 7 numbers into 6 remainder classes forces two terms to share a remainder, by the pigeonhole principle.",
+          "Subtracting two terms with the same remainder gives a number of the form 11...100...0, which is a multiple of 7; since 7 and 10 are coprime, stripping the trailing zeros leaves a number made only of 1s that is still a multiple of 7. So the sequence does contain a multiple of 7.",
+          "Now find the smallest one. Using the rule 'times 10 plus 1', track only the remainders: 1 leaves 1; 1 x 10 + 1 = 11 leaves 4; 4 x 10 + 1 = 41 leaves 6; 6 x 10 + 1 = 61 leaves 5; 5 x 10 + 1 = 51 leaves 2; 2 x 10 + 1 = 21 leaves 0.",
+          "The remainder first becomes 0 at the sixth term, which is 111111 = 7 x 15873.",
+          "So the smallest such multiple of 7 has 6 digits."
+        ],
+        "ja": [
+          "まず必ず存在する理由を説明します。7 で割った余りは 0、1、2、3、4、5、6 の 7 通りしかありません。",
+          "もし最初の 7 項がどれも 7 の倍数でなければ、余りは 1 から 6 の 6 通りに限られます。7 個の数を 6 通りの余りに入れるので、鳩の巣原理より余りが同じ 2 項が必ずあります。",
+          "余りが同じ 2 項の差をとると 11⋯100⋯0 の形になり、これは 7 の倍数です。7 と 10 は互いに素なので、末尾の 0 を取り除いても残った「1 だけからなる数」はやはり 7 の倍数です。よってこの列には 7 の倍数があります。",
+          "次に最小のものを探します。「前の項を 10 倍して 1 を足す」規則で余りだけを追います。1 の余りは 1、1 × 10 + 1 = 11 の余りは 4、4 × 10 + 1 = 41 の余りは 6、6 × 10 + 1 = 61 の余りは 5、5 × 10 + 1 = 51 の余りは 2、2 × 10 + 1 = 21 の余りは 0 です。",
+          "余りが初めて 0 になるのは第 6 項で、それは 111111 = 7 × 15873 です。",
+          "したがって最小のものは 6 桁です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "6"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "number-theory-grade9-foundation",
+        "notes": "題型取自 AoPS Wiki 的 Pigeonhole Principle 例題與 Math Stack Exchange 上經典的 repunit 問題「prove that some number consisting only of 1s is divisible by n（gcd(n,10)=1）」。全庫的抽屜原理題（33 題）幾乎全是「摸球／襪子保證同色」與「N 人放進 k 類」的計數型，另有 logic_grade11_014（連續一段和被 10 整除）是餘數抽屜，但物件是任意整數序列且問的是需要幾個數；本題的物件是遞迴生成的重複單位數，實作是追蹤 (10r + 1) mod 7 的餘數鏈。number_theory_grade8_030（數字只由 0 與 1 組成且是 15 的倍數）靠的是 3 與 5 的整除規則，不是餘數循環。"
+      }
+    },
+    {
+      "id": "number_theory_grade9_foundation_047",
+      "reviewStatus": "ok",
+      "topic": "number_theory",
+      "subtopic": "divisors_avoiding_four_and_six",
+      "tags": [
+        "c:inclusion_exclusion",
+        "c:factor_multiple",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade9",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "720 的正因數之中，既不是 4 的倍數、也不是 6 的倍數的因數一共有幾個？",
+        "zh-Hans": "720 的正因数之中，既不是 4 的倍数、也不是 6 的倍数的因数一共有几个？",
+        "en": "Among the positive divisors of 720, how many are neither a multiple of 4 nor a multiple of 6?",
+        "ja": "720 の正の約数のうち、4 の倍数でも 6 の倍数でもないものは全部で何個ありますか。"
+      },
+      "answer": {
+        "zh-Hant": "這樣的因數一共有 8 個。",
+        "zh-Hans": "这样的因数一共有 8 个。",
+        "en": "There are 8 such divisors.",
+        "ja": "そのような約数は全部で 8 個です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "先分解質因數：720 = 2⁴ × 3² × 5，所以 720 的正因數共有 (4 + 1)(2 + 1)(1 + 1) = 30 個。",
+          "是 4 的倍數的因數：每一個都可以寫成 4 × d，其中 d 必須是 720 ÷ 4 = 180 的因數。180 = 2² × 3² × 5，因數有 3 × 3 × 2 = 18 個。",
+          "是 6 的倍數的因數：寫成 6 × d，其中 d 必須是 720 ÷ 6 = 120 的因數。120 = 2³ × 3 × 5，因數有 4 × 2 × 2 = 16 個。",
+          "同時是 4 的倍數又是 6 的倍數，就是 12 的倍數：寫成 12 × d，其中 d 必須是 720 ÷ 12 = 60 的因數。60 = 2² × 3 × 5，因數有 3 × 2 × 2 = 12 個。",
+          "用排容原理：是 4 的倍數或 6 的倍數的因數有 18 + 16 − 12 = 22 個。",
+          "30 − 22 = 8，所以兩者都不是的因數有 8 個，實際列出來是 1、2、3、5、9、10、15、45。"
+        ],
+        "zh-Hans": [
+          "先分解质因数：720 = 2⁴ × 3² × 5，所以 720 的正因数共有 (4 + 1)(2 + 1)(1 + 1) = 30 个。",
+          "是 4 的倍数的因数：每一个都可以写成 4 × d，其中 d 必须是 720 ÷ 4 = 180 的因数。180 = 2² × 3² × 5，因数有 3 × 3 × 2 = 18 个。",
+          "是 6 的倍数的因数：写成 6 × d，其中 d 必须是 720 ÷ 6 = 120 的因数。120 = 2³ × 3 × 5，因数有 4 × 2 × 2 = 16 个。",
+          "同时是 4 的倍数又是 6 的倍数，就是 12 的倍数：写成 12 × d，其中 d 必须是 720 ÷ 12 = 60 的因数。60 = 2² × 3 × 5，因数有 3 × 2 × 2 = 12 个。",
+          "用排容原理：是 4 的倍数或 6 的倍数的因数有 18 + 16 − 12 = 22 个。",
+          "30 − 22 = 8，所以两者都不是的因数有 8 个，实际列出来是 1、2、3、5、9、10、15、45。"
+        ],
+        "en": [
+          "Factor first: 720 = 2⁴ × 3² × 5, so 720 has (4 + 1)(2 + 1)(1 + 1) = 30 positive divisors.",
+          "Divisors that are multiples of 4: each can be written as 4 × d where d must divide 720 ÷ 4 = 180. Since 180 = 2² × 3² × 5, there are 3 × 3 × 2 = 18 of them.",
+          "Divisors that are multiples of 6: write them as 6 × d where d must divide 720 ÷ 6 = 120. Since 120 = 2³ × 3 × 5, there are 4 × 2 × 2 = 16 of them.",
+          "Being a multiple of both 4 and 6 means being a multiple of 12: write them as 12 × d where d must divide 720 ÷ 12 = 60. Since 60 = 2² × 3 × 5, there are 3 × 2 × 2 = 12 of them.",
+          "By inclusion and exclusion, the divisors that are a multiple of 4 or of 6 number 18 + 16 − 12 = 22.",
+          "So 30 − 22 = 8 divisors are neither, and listing them gives 1, 2, 3, 5, 9, 10, 15, 45."
+        ],
+        "ja": [
+          "まず素因数分解します。720 = 2⁴ × 3² × 5 なので、正の約数は (4 + 1)(2 + 1)(1 + 1) = 30 個です。",
+          "4 の倍数である約数は 4 × d と書け、d は 720 ÷ 4 = 180 の約数でなければなりません。180 = 2² × 3² × 5 なので 3 × 3 × 2 = 18 個です。",
+          "6 の倍数である約数は 6 × d と書け、d は 720 ÷ 6 = 120 の約数です。120 = 2³ × 3 × 5 なので 4 × 2 × 2 = 16 個です。",
+          "4 の倍数でも 6 の倍数でもある、つまり 12 の倍数は 12 × d と書け、d は 720 ÷ 12 = 60 の約数です。60 = 2² × 3 × 5 なので 3 × 2 × 2 = 12 個です。",
+          "包除原理より、4 の倍数または 6 の倍数である約数は 18 + 16 − 12 = 22 個です。",
+          "30 − 22 = 8 なので、どちらでもない約数は 8 個で、実際に並べると 1、2、3、5、9、10、15、45 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "8"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "number-theory-grade9-foundation",
+        "notes": "題型參考 Brilliant 的 Divisor Counting 與 AoPS Wiki 的 Divisor function 例題中「數某類因數的個數」這一族，關鍵是把「是 k 的倍數的因數」對應成「720 ÷ k 的因數」。全庫的排容題都套在整數區間或人數上（arithmetic_grade5_009、arithmetic_grade6_097、logic_grade9_010 等），沒有一題把排容套在因數集合上；number_theory_grade11_027（正因數個數是奇數）、number_theory_grade11_017（因數和）雖然也在算因數，但問的是個數奇偶與因數和，沒有兩個倍數條件的交集。"
+      }
     }
   ]
 }
