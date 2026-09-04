@@ -7,6 +7,8 @@ import 'package:mathspring/ui/layout_spec.dart';
 /// 內容欄：把「置中 + 最大寬度 + 頁面留白」收斂成一個 widget，
 /// 10 個頁面共用，避免每頁各寫一次而漂移。
 void main() {
+  group('ContentScrollView 滿版模式', _fillTests);
+
   group('ContentScrollView', _scrollViewTests);
 
   Future<Size> childSizeAt(WidgetTester tester, Size view) async {
@@ -102,14 +104,17 @@ void _scrollViewTests() {
     ));
   }
 
-  testWidgets('內容遠短於視窗時垂直置中', (WidgetTester tester) async {
+  testWidgets('內容起點固定在上方，不隨內容長度移動', (WidgetTester tester) async {
+    // 一度改成「內容短時垂直置中」，但那在連續作答時是錯的：每題文字長度不同，
+    // 卡片會在題目之間上下跳。位置必須穩定，空白由滿版模式處理。
     await pump(tester, const Size(820, 1180), 200);
-    final Rect r = tester.getRect(find.byKey(const ValueKey<String>('probe')));
-    // 上下留白應該接近相等
-    final double above = r.top;
-    final double below = 1180 - r.bottom;
-    expect(above, closeTo(below, 2.0),
-        reason: '上方留白 $above 與下方留白 $below 應該接近');
+    final double shortTop =
+        tester.getRect(find.byKey(const ValueKey<String>('probe'))).top;
+    await pump(tester, const Size(820, 1180), 600);
+    final double longTop =
+        tester.getRect(find.byKey(const ValueKey<String>('probe'))).top;
+    expect(shortTop, longTop,
+        reason: '短內容起點 $shortTop 與長內容起點 $longTop 應該相同');
   });
 
   testWidgets('內容超過視窗高度時回到靠上對齊，不會被推到中間',
@@ -135,5 +140,71 @@ void _scrollViewTests() {
     final double w =
         tester.getSize(find.byKey(const ValueKey<String>('probe'))).width;
     expect(w, LayoutSpec.forWidth(1180).contentMaxWidth);
+  });
+}
+
+/// 滿版模式：內容區撐滿可用高度，讓區塊的位置與大小不隨文字長度變動。
+///
+/// 起因：作答時每題文字長度不同，若用垂直置中，卡片會在題目之間上下跳、
+/// 忽大忽小。連續作答的畫面必須穩定。
+void _fillTests() {
+  Future<void> pump(WidgetTester tester, Size view, double textHeight) async {
+    tester.view.devicePixelRatio = 1.0;
+    tester.view.physicalSize = view;
+    addTearDown(tester.view.reset);
+    await tester.pumpWidget(MaterialApp(
+      home: Scaffold(
+        body: ContentScrollView(
+          fill: true,
+          child: Column(
+            children: <Widget>[
+              Container(
+                  key: const ValueKey<String>('header'),
+                  height: 60,
+                  color: const Color(0xFFEEEEEE)),
+              Expanded(
+                child: Container(
+                  key: const ValueKey<String>('card'),
+                  color: const Color(0xFFCCCCCC),
+                  child: SizedBox(height: textHeight),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    ));
+  }
+
+  testWidgets('文字少時卡片仍然撐滿，不會縮成一小塊',
+      (WidgetTester tester) async {
+    await pump(tester, const Size(820, 1180), 100);
+    final double h =
+        tester.getSize(find.byKey(const ValueKey<String>('card'))).height;
+    expect(h, greaterThan(800), reason: '卡片應撐滿剩餘高度，實際 $h');
+  });
+
+  testWidgets('文字多寡不影響卡片高度，畫面不會呼大呼小',
+      (WidgetTester tester) async {
+    await pump(tester, const Size(820, 1180), 100);
+    final double short =
+        tester.getSize(find.byKey(const ValueKey<String>('card'))).height;
+    await pump(tester, const Size(820, 1180), 400);
+    final double long =
+        tester.getSize(find.byKey(const ValueKey<String>('card'))).height;
+    expect(long, short, reason: '短文字 $short 與長文字 $long 應該一樣高');
+  });
+
+  testWidgets('內容超過視窗時仍可捲動，不會被硬壓在一頁裡',
+      (WidgetTester tester) async {
+    await pump(tester, const Size(820, 600), 2000);
+    expect(tester.takeException(), isNull);
+    final double before =
+        tester.getRect(find.byKey(const ValueKey<String>('header'))).top;
+    await tester.drag(find.byType(ContentScrollView), const Offset(0, -300));
+    await tester.pump();
+    final double after =
+        tester.getRect(find.byKey(const ValueKey<String>('header'))).top;
+    expect(after, lessThan(before));
   });
 }

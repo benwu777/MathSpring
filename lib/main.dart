@@ -3014,6 +3014,7 @@ class _PracticeSessionPageState extends State<PracticeSessionPage> {
           final Question question = questions[_currentIndex % questions.length];
           return ContentScrollView(
             controller: _scrollController,
+            fill: true,
             child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -3062,7 +3063,10 @@ class _PracticeSessionPageState extends State<PracticeSessionPage> {
                     ),
                   ),
                   const SizedBox(height: 16),
-                  _SectionCard(
+                  // 撐滿剩餘高度：換題時卡片的位置與大小固定，
+                  // 不會因為每題文字長短而上下跳。
+                  Expanded(
+                    child: _SectionCard(
                     cardKey: const ValueKey<String>('study_surface_card'),
                     title: displayTopicCode(widget.pack.topicCode, strings),
                     subtitle:
@@ -3109,6 +3113,7 @@ class _PracticeSessionPageState extends State<PracticeSessionPage> {
                           ),
                         ],
                       ],
+                    ),
                     ),
                   ),
                 ],
@@ -3630,6 +3635,7 @@ class _QuizSessionPageState extends State<QuizSessionPage> {
           final Question question = questions[_currentIndex];
           final String? selectedAnswer = _answers[question.id];
           return ContentScrollView(
+            fill: true,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -3690,7 +3696,10 @@ class _QuizSessionPageState extends State<QuizSessionPage> {
                       ),
                 ),
                 const SizedBox(height: 16),
-                _SectionCard(
+                // 撐滿剩餘高度：換題時卡片的位置與大小固定，
+                // 不會因為每題文字長短而上下跳。
+                Expanded(
+                  child: _SectionCard(
                   title: displayTopicCode(widget.pack.topicCode, strings),
                   subtitle:
                       '${_displayLevelStage(question.levelStage, strings)} · ${_displayTier(question.challengeTier, strings)}',
@@ -3723,6 +3732,7 @@ class _QuizSessionPageState extends State<QuizSessionPage> {
                         },
                       ),
                     ],
+                  ),
                   ),
                 ),
                 const SizedBox(height: 20),
