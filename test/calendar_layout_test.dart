@@ -51,6 +51,28 @@ void main() {
         reason: 'GridView 是 viewport，會擋住首頁的滿版模式');
   });
 
+  testWidgets('月曆有星期標題列，且從週日起算', (WidgetTester tester) async {
+    // 排版用 firstDay.weekday % 7 算前置空格（週日 = 7 → 0），
+    // 所以標題列必須是「日一二三四五六」，否則日期會對錯欄。
+    await openReview(tester);
+    for (final String w in <String>['Sun', 'Mon', 'Sat']) {
+      expect(find.text(w), findsOneWidget, reason: '缺少星期標題 $w');
+    }
+    // 標題列在日期之上
+    final double sunTop = tester.getRect(find.text('Sun')).top;
+    final double firstDayTop = tester.getRect(find.text('1')).top;
+    expect(sunTop, lessThan(firstDayTop));
+  });
+
+  testWidgets('星期標題與日期欄位對齊', (WidgetTester tester) async {
+    await openReview(tester);
+    // 2026 年 9 月 1 日是星期二，應該落在「Tue」那一欄
+    final double tueCenter = tester.getRect(find.text('Tue')).center.dx;
+    final double day1Center = tester.getRect(find.text('1')).center.dx;
+    expect(day1Center, closeTo(tueCenter, 2.0),
+        reason: '9/1 是週二，應對齊 Tue 欄');
+  });
+
   testWidgets('月曆的日期仍然完整顯示且可點', (WidgetTester tester) async {
     await openReview(tester);
     final DateTime now = DateTime.now();

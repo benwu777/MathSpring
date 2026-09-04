@@ -1083,6 +1083,26 @@ class _MonthlyLearningCalendar extends StatelessWidget {
         Text(strings.monthLabel(month),
             style: Theme.of(context).textTheme.titleLarge),
         const SizedBox(height: 12),
+        // 星期標題列：欄位寬度與下方日期格完全一致，靠同一個 Row 結構保證對齊
+        Row(
+          children: <Widget>[
+            for (int i = 0; i < 7; i++) ...<Widget>[
+              if (i > 0) const SizedBox(width: 6),
+              Expanded(
+                child: Center(
+                  child: Text(
+                    AppStrings.of(context).weekdayHeaders[i],
+                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                          fontWeight: FontWeight.w600,
+                          color: const Color(0xFF94A3B8),
+                        ),
+                  ),
+                ),
+              ),
+            ],
+          ],
+        ),
+        const SizedBox(height: 6),
         // 用 Column + Row 而不是 GridView：一個月最多 6×7 = 42 格，
         // 不需要延遲建構；而 GridView 是 viewport，無法回報 intrinsic 高度，
         // 會讓外層的滿版模式（IntrinsicHeight）整個炸掉。
@@ -4767,6 +4787,25 @@ class AppStrings {
         en: '$count questions · ${(accuracyRate * 100).round()}% correct',
         ja: '$count 問 · 正答率 ${(accuracyRate * 100).round()}%',
       );
+  /// 月曆的星期標題，從**週日**起算——排版用 `firstDay.weekday % 7`
+  /// 算前置空格（週日 = 7 → 0），順序不可更動，否則日期會對錯欄。
+  List<String> get weekdayHeaders => <String>[
+        for (int i = 0; i < 7; i++) _weekdayLabel(i),
+      ];
+
+  String _weekdayLabel(int index) {
+    const List<String> zh = <String>['日', '一', '二', '三', '四', '五', '六'];
+    const List<String> en = <String>[
+      'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat',
+    ];
+    return _text(
+      zhHant: zh[index],
+      zhHans: zh[index],
+      en: en[index],
+      ja: zh[index],
+    );
+  }
+
   String monthLabel(DateTime month) => _text(
         zhHant: '${month.year} 年 ${month.month} 月',
         zhHans: '${month.year} 年 ${month.month} 月',
