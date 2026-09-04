@@ -811,3 +811,82 @@ class CaretPowerOnRealPacksTest(unittest.TestCase):
                 for msg in vqp.check_caret_power(q):
                     offenders.append('%s: %s' % (q['id'], msg))
         self.assertEqual(offenders, [], '\n'.join(offenders[:20]))
+
+
+class TrailingZeroDecimalTest(unittest.TestCase):
+    """validate_question_packs：小數不可以補一串沒有意義的尾零。
+
+    2026-09-04 真機目視時發現的一族：詳解的驗算步驟寫著
+    「∠BAE = 35.00°」「最小值恰為 12.000000」「f(0.3) + f(0.7) = 1.0000000000」，
+    看起來像是把程式的浮點輸出直接貼上去。數學沒錯，只是讀起來像 debug 訊息。
+
+    判準是**小數部分結尾有 ≥2 個零**。這條剛好放行真正的近似值
+    （`6.7082`、`4.429`、`3.818182`）與真正的步長（`0.0001`）——
+    它們的小數部分都不是以零結尾。
+    """
+
+    def _q(self, **fields):
+        q = {'prompt': {'zh-Hant': '答案是多少？', 'zh-Hans': '答案是多少？',
+                        'en': 'What is it?', 'ja': '答えは？'}}
+        q.update(fields)
+        return q
+
+    def test_clean_question_reports_nothing(self):
+        self.assertEqual(vqp.check_trailing_zero_decimal(self._q()), [])
+
+    def test_padded_angle_is_reported(self):
+        q = self._q(solutionSteps={'zh-Hant': ['實測 ∠BAE = 35.00°。'],
+                                   'zh-Hans': ['实测 ∠BAE = 35.00°。'],
+                                   'en': ['Measured angle BAE = 35.00.'],
+                                   'ja': ['実測 ∠BAE = 35.00°。']})
+        msgs = vqp.check_trailing_zero_decimal(q)
+        self.assertEqual(len(msgs), 1)
+        self.assertIn('solutionSteps', msgs[0])
+        self.assertIn('35.00', msgs[0])
+
+    def test_long_float_tail_is_reported(self):
+        q = self._q(answer={'zh-Hant': '答案是 1.0000000000。', 'zh-Hans': '答案是 1.0000000000。',
+                            'en': 'The answer is 1.0000000000.', 'ja': '答えは 1.0000000000 です。'})
+        self.assertEqual(len(vqp.check_trailing_zero_decimal(q)), 1)
+
+    def test_genuine_approximation_is_allowed(self):
+        """`6.7082`、`4.429` 是真的近似值，不可誤報。"""
+        q = self._q(solutionSteps={'zh-Hant': ['算出 A ≈ (4.429, 6.7082)。'],
+                                   'zh-Hans': ['算出 A ≈ (4.429, 6.7082)。'],
+                                   'en': ['A is about (4.429, 6.7082).'],
+                                   'ja': ['A ≈ (4.429, 6.7082)。']})
+        self.assertEqual(vqp.check_trailing_zero_decimal(q), [])
+
+    def test_step_size_is_allowed(self):
+        """`0.0001` 是掃描步長，小數部分不以零結尾。"""
+        q = self._q(solutionSteps={'zh-Hant': ['以 0.0001 為步長掃描。'],
+                                   'zh-Hans': ['以 0.0001 为步长扫描。'],
+                                   'en': ['Scan in steps of 0.0001.'],
+                                   'ja': ['0.0001 刻みで調べる。']})
+        self.assertEqual(vqp.check_trailing_zero_decimal(q), [])
+
+    def test_single_trailing_zero_is_allowed(self):
+        """`12.50` 只有一個尾零，屬正常的兩位小數，不擋。"""
+        q = self._q(answer={'zh-Hant': '共 12.50 公斤。', 'zh-Hans': '共 12.50 公斤。',
+                            'en': '12.50 kg in total.', 'ja': '合計 12.50 kg。'})
+        self.assertEqual(vqp.check_trailing_zero_decimal(q), [])
+
+    def test_integers_are_untouched(self):
+        q = self._q(answer={'zh-Hant': '答案是 100。', 'zh-Hans': '答案是 100。',
+                            'en': 'The answer is 100.', 'ja': '答えは 100 です。'})
+        self.assertEqual(vqp.check_trailing_zero_decimal(q), [])
+
+
+class TrailingZeroDecimalOnRealPacksTest(unittest.TestCase):
+    """整合測試：真實題庫不可有補零的小數。"""
+
+    def test_no_real_question_has_padded_decimal(self):
+        import glob
+        offenders = []
+        for path in sorted(glob.glob('assets/questions/*/*.json')):
+            with open(path) as fh:
+                pack = json.load(fh)
+            for q in pack['questions']:
+                for msg in vqp.check_trailing_zero_decimal(q):
+                    offenders.append('%s: %s' % (q['id'], msg))
+        self.assertEqual(offenders, [], '\n'.join(offenders[:20]))

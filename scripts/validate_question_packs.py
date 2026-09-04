@@ -106,6 +106,34 @@ def check_simplified_in_traditional(q, simplified_chars):
     return errs
 
 
+# 小數部分結尾有 ≥2 個零 = 把程式的浮點輸出直接貼上來。
+# 這條剛好放行真正的近似值（6.7082、4.429、3.818182）與步長（0.0001），
+# 它們的小數部分都不是以零結尾；也放行 12.50 這種正常的兩位小數。
+PADDED_DECIMAL = re.compile(r'\d+\.\d*?0{2,}(?!\d)')
+
+
+def check_trailing_zero_decimal(q):
+    """回傳補零小數的錯誤訊息清單；合格時回傳空清單。
+
+    2026-09-04 真機目視發現的一族：詳解的驗算步驟寫著「∠BAE = 35.00°」
+    「最小值恰為 12.000000」「= 1.0000000000」，是把程式的浮點輸出直接貼上去。
+    數學沒錯，只是讀起來像 debug 訊息，應該寫成「35°」「12」「1」。
+    """
+    errs = []
+    for fld in ('prompt', 'answer', 'options', 'solutionSteps', 'hint'):
+        if fld not in q:
+            continue
+        bad = []
+        for lang in LANGS:
+            for s in iter_lang_text(q[fld], lang):
+                bad.extend(PADDED_DECIMAL.findall(s))
+        if bad:
+            uniq = sorted(set(bad))
+            errs.append('%s 的小數補了無意義的尾零: %s（去掉尾零即可）'
+                        % (fld, '、'.join(uniq[:5])))
+    return errs
+
+
 CARET_NUMERIC_POWER = re.compile(r'\S\^\d')
 
 
@@ -613,6 +641,9 @@ def main():
                 err(msg)
 
             for msg in check_caret_power(q):
+                err(msg)
+
+            for msg in check_trailing_zero_decimal(q):
                 err(msg)
 
             src = q.get('source', {})
