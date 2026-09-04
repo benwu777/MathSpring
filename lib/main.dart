@@ -821,47 +821,51 @@ class _QuizTab extends StatelessWidget {
           icon: Icons.fact_check_rounded,
         ),
         const SizedBox(height: 18),
-        _SectionCard(
-          title: strings.quizEntryTitle,
-          subtitle: strings.quizEntrySubtitle,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              _LearnerSummaryBanner(
-                learner: learner,
-                primaryLabel: strings.currentLearnerLabel,
-                secondaryLabel: strings.gradeRangeLabel,
-              ),
-              const SizedBox(height: 18),
-              Text(
-                strings.quizStartHint,
-                style: Theme.of(context).textTheme.bodyMedium,
-              ),
-              const SizedBox(height: 16),
-              FilledButton(
-                key: const ValueKey<String>('open_start_quiz'),
-                onPressed: () async {
-                  final FormalExamPreset? preset =
-                      await _showFormalExamPresetPicker(context);
-                  if (!context.mounted || preset == null) {
-                    return;
-                  }
-                  await _openFirstEligiblePack(
-                    context: context,
-                    services: services,
-                    learner: learner,
-                    mode: _SessionLaunchMode.quiz,
-                    questionLimit: preset.questionCount,
-                    formalExamPreset: preset,
-                  );
-                },
-                style: FilledButton.styleFrom(
-                  backgroundColor: const Color(0xFF111827),
-                  minimumSize: const Size.fromHeight(54),
+        // 撐滿剩餘高度：外殼的 fill 只把分頁內容包成 Expanded，
+        // 分頁內部要自己指定哪一塊撐開，否則空間會空在裡面。
+        Expanded(
+          child: _SectionCard(
+            title: strings.quizEntryTitle,
+            subtitle: strings.quizEntrySubtitle,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _LearnerSummaryBanner(
+                  learner: learner,
+                  primaryLabel: strings.currentLearnerLabel,
+                  secondaryLabel: strings.gradeRangeLabel,
                 ),
-                child: Text(strings.startQuiz),
-              ),
-            ],
+                const SizedBox(height: 18),
+                Text(
+                  strings.quizStartHint,
+                  style: Theme.of(context).textTheme.bodyMedium,
+                ),
+                const SizedBox(height: 16),
+                FilledButton(
+                  key: const ValueKey<String>('open_start_quiz'),
+                  onPressed: () async {
+                    final FormalExamPreset? preset =
+                        await _showFormalExamPresetPicker(context);
+                    if (!context.mounted || preset == null) {
+                      return;
+                    }
+                    await _openFirstEligiblePack(
+                      context: context,
+                      services: services,
+                      learner: learner,
+                      mode: _SessionLaunchMode.quiz,
+                      questionLimit: preset.questionCount,
+                      formalExamPreset: preset,
+                    );
+                  },
+                  style: FilledButton.styleFrom(
+                    backgroundColor: const Color(0xFF111827),
+                    minimumSize: const Size.fromHeight(54),
+                  ),
+                  child: Text(strings.startQuiz),
+                ),
+              ],
+            ),
           ),
         ),
       ],

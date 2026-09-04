@@ -74,4 +74,24 @@ void main() {
       });
     });
   }
+
+  // 分頁內容撐滿高度：外殼的 fill 只把分頁內容變成 Expanded，
+  // 分頁自己沒有指定哪一塊撐開的話，空間會空在 Expanded 裡面，
+  // 畫面下半部整片空白（iPad 上特別明顯）。
+  testWidgets('測驗分頁的主卡片撐滿剩餘高度', (WidgetTester tester) async {
+    await pumpAt(tester, const Size(820, 1180));
+    await tester.tap(find.text('Quiz').last);
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 300));
+
+    final Finder card = find.byKey(const ValueKey<String>('section_card_Quiz'));
+    expect(card, findsOneWidget);
+    final double cardBottom = tester.getRect(card).bottom;
+    final double navTop = tester.getRect(find.byType(NavigationBar)).top;
+
+    // 卡片底部要貼近底部導覽列，而不是停在自然高度。
+    expect(navTop - cardBottom, lessThan(60),
+        reason: '卡片只有自然高度 ${tester.getSize(card).height}，'
+            '下方空了 ${navTop - cardBottom} 沒撐開');
+  });
 }
