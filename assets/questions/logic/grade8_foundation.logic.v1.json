@@ -3932,6 +3932,255 @@
         "reference": "tag-gap-batch-b-2026-09-03",
         "notes": "題型參考公開題庫網站常見題型；數值、情境與四語系詳解為本題庫自行推導。出題方向由標籤盤點（概念 × 年級交叉統計）決定。"
       }
+    },
+    {
+      "id": "logic_grade8_foundation_045",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "take_at_most_half_powers_of_two_minus_one",
+      "tags": [
+        "c:game_theory",
+        "c:exponent",
+        "m:reverse"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade8",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "袋子裡有 100 顆糖果。甲、乙兩人輪流取糖，由甲先取，每次至少取 1 顆，而且最多只能取走「當時袋子裡糖果數的一半」（不足一半的整數就無條件捨去，例如剩 9 顆時最多只能取 4 顆）。輪到某人時如果連 1 顆都取不了（也就是袋子裡只剩 1 顆），他就輸了。甲要保證獲勝，第一次應該取走幾顆？",
+        "zh-Hans": "袋子里有 100 颗糖果。甲、乙两人轮流取糖，由甲先取，每次至少取 1 颗，而且最多只能取走「当时袋子里糖果数的一半」（不足一半的整数就无条件舍去，例如剩 9 颗时最多只能取 4 颗）。轮到某人时如果连 1 颗都取不了（也就是袋子里只剩 1 颗），他就输了。甲要保证获胜，第一次应该取走几颗？",
+        "en": "A bag holds 100 candies. Kai and Lin take turns, Kai first. Each turn a player takes at least 1 candy and at most half of the candies currently in the bag, rounded down (for example, with 9 left you may take at most 4). If it is your turn and you cannot take even one candy (that is, only 1 candy is left), you lose. How many candies should Kai take on his first turn to guarantee a win?",
+        "ja": "袋にあめが 100 個入っています。甲と乙が交互に取り、甲が先手です。1 回に取れるのは 1 個以上で、そのとき袋にある個数の半分（切り捨て）までです。たとえば残り 9 個なら最大 4 個までです。自分の手番で 1 個も取れない（残りが 1 個の）ときは負けです。甲が必ず勝つには、最初に何個取ればよいですか。"
+      },
+      "answer": {
+        "zh-Hant": "第一次應該取走 37 顆。",
+        "zh-Hans": "第一次应该取走 37 颗。",
+        "en": "Kai should take 37 candies on his first turn.",
+        "ja": "最初に 37 個取ればよいです。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "先找必敗局面。剩 1 顆的人一半是 0 顆，什麼都取不了，直接輸，所以 1 是必敗數。",
+          "剩 3 顆時最多只能取 1 顆，只能留 2 顆；而面對 2 顆的人取 1 顆就把必敗的 1 顆丟回來，所以 3 也是必敗數。",
+          "剩 7 顆時最多取 3 顆，只能留下 4、5 或 6 顆；面對 4、5、6 顆的人分別取 1、2、3 顆就能留下必敗的 3 顆，所以 7 也是必敗數。",
+          "規律出來了：必敗數是 1、3、7、15、31、63、127、⋯⋯，也就是 2 的次方減 1（2¹ − 1、2² − 1、2³ − 1、⋯）。",
+          "為什麼？面對 2ⁿ − 1 顆時最多只能取走 2ⁿ⁻¹ − 1 顆，剩下至少 2ⁿ⁻¹ 顆、至多 2ⁿ − 2 顆；而在這個範圍裡的人，只要取走 (剩下顆數) − (2ⁿ⁻¹ − 1) 顆就能壓回下一個必敗數，而且這個取量不超過一半。",
+          "100 顆時最多可以取 50 顆，所以能留給對手的最少是 50 顆。落在 50 到 99 之間的必敗數只有 63。",
+          "因此第一步要留下 63 顆，也就是取走 100 − 63 = 37 顆。之後不論對手取幾顆，甲都能把顆數依序壓回 31、15、7、3、1，最後對手面對 1 顆取不了而輸。"
+        ],
+        "zh-Hans": [
+          "先找必败局面。剩 1 颗的人一半是 0 颗，什么都取不了，直接输，所以 1 是必败数。",
+          "剩 3 颗时最多只能取 1 颗，只能留 2 颗；而面对 2 颗的人取 1 颗就把必败的 1 颗丢回来，所以 3 也是必败数。",
+          "剩 7 颗时最多取 3 颗，只能留下 4、5 或 6 颗；面对 4、5、6 颗的人分别取 1、2、3 颗就能留下必败的 3 颗，所以 7 也是必败数。",
+          "规律出来了：必败数是 1、3、7、15、31、63、127、⋯⋯，也就是 2 的次方减 1（2¹ − 1、2² − 1、2³ − 1、⋯）。",
+          "为什么？面对 2ⁿ − 1 颗时最多只能取走 2ⁿ⁻¹ − 1 颗，剩下至少 2ⁿ⁻¹ 颗、至多 2ⁿ − 2 颗；而在这个范围里的人，只要取走 (剩下颗数) − (2ⁿ⁻¹ − 1) 颗就能压回下一个必败数，而且这个取量不超过一半。",
+          "100 颗时最多可以取 50 颗，所以能留给对手的最少是 50 颗。落在 50 到 99 之间的必败数只有 63。",
+          "因此第一步要留下 63 颗，也就是取走 100 − 63 = 37 颗。之后不论对手取几颗，甲都能把颗数依序压回 31、15、7、3、1，最后对手面对 1 颗取不了而输。"
+        ],
+        "en": [
+          "Find the losing positions first. With 1 candy left, half of it rounds down to 0, so that player cannot move and loses; 1 is a losing count.",
+          "With 3 left you may take at most 1, so you must leave 2; the player facing 2 takes 1 and hands the losing count 1 straight back, so 3 is losing as well.",
+          "With 7 left you may take at most 3, so you leave 4, 5 or 6; from any of those the opponent takes 1, 2 or 3 and leaves the losing count 3, so 7 is losing too.",
+          "The pattern is clear: the losing counts are 1, 3, 7, 15, 31, 63, 127, ..., that is, one less than a power of two (2¹ − 1, 2² − 1, 2³ − 1, ...).",
+          "Why? Facing 2ⁿ − 1 you may take at most 2ⁿ⁻¹ − 1, so you leave between 2ⁿ⁻¹ and 2ⁿ − 2, and from anywhere in that range the opponent takes (what is left) − (2ⁿ⁻¹ − 1), an amount that never exceeds half, pushing the count back to the next losing value.",
+          "With 100 candies you may take at most 50, so the smallest count you can leave is 50, and the only losing count between 50 and 99 is 63.",
+          "So the first move must leave 63, which means taking 100 − 63 = 37 candies. After that, whatever the opponent takes, Kai can push the count back to 31, 15, 7, 3 and 1 in turn, and the opponent finally faces 1 candy and cannot move."
+        ],
+        "ja": [
+          "まず負けの局面を探します。残り 1 個の人は半分が切り捨てで 0 個となり何も取れずに負けるので、1 は負けの数です。",
+          "残り 3 個では最大 1 個しか取れず 2 個を残すしかありません。2 個に直面した人は 1 個取って負けの数 1 個を返してくるので、3 も負けの数です。",
+          "残り 7 個では最大 3 個までで、残せるのは 4、5、6 個のいずれかです。4、5、6 個に直面した人はそれぞれ 1、2、3 個取って負けの数 3 個を残せるので、7 も負けの数です。",
+          "規則が見えます。負けの数は 1、3、7、15、31、63、127、⋯⋯、つまり 2 の累乗から 1 を引いた数（2¹ − 1、2² − 1、2³ − 1、⋯）です。",
+          "理由はこうです。2ⁿ − 1 個に直面すると最大でも 2ⁿ⁻¹ − 1 個しか取れず、残りは 2ⁿ⁻¹ 個以上 2ⁿ − 2 個以下になります。この範囲の人は（残り）−（2ⁿ⁻¹ − 1）個を取れば次の負けの数に戻せ、その個数は必ず半分以下です。",
+          "100 個のときは最大 50 個まで取れるので、相手に残せる最小は 50 個です。50 以上 99 以下の負けの数は 63 だけです。",
+          "よって最初に 63 個を残す、つまり 100 − 63 = 37 個を取ります。その後は相手が何個取っても 31、15、7、3、1 と順に戻せるので、最後に相手が 1 個に直面して取れずに負けます。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "37"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade8-foundation",
+        "notes": "每次可取的上限隨局面改變（最多取一半），必敗態是 2 的次方減 1（1、3、7、15、31、63），這是全庫沒有的結構——既有的取石子題都是固定取法集合（1~3 根、兩堆任取），必敗態是模 4 或兩堆相等。答案 37 也不是模運算能直接讀出的。（2026-09-04 第四輪：主流程獨立重算過答案，並重跑機械校驗與相似度閘門。）"
+      }
+    },
+    {
+      "id": "logic_grade8_foundation_046",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "multiply_by_two_or_three_first_to_reach_hundred",
+      "tags": [
+        "c:game_theory",
+        "c:mul_div",
+        "m:reverse"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade8",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一台計算機的螢幕上顯示著 1。阿宇和小恩比賽按鍵，由阿宇先按：輪到的人只能按下「× 2」或「× 3」其中一個鍵，螢幕上的數字就會變成原來的 2 倍或 3 倍。誰按出的數字第一次達到或超過 100，誰就贏。阿宇要保證獲勝，第一次應該按哪一個鍵？請把那個倍數寫成答案。",
+        "zh-Hans": "一台计算机的屏幕上显示着 1。阿宇和小恩比赛按键，由阿宇先按：轮到的人只能按下「× 2」或「× 3」其中一个键，屏幕上的数字就会变成原来的 2 倍或 3 倍。谁按出的数字第一次达到或超过 100，谁就赢。阿宇要保证获胜，第一次应该按哪一个键？请把那个倍数写成答案。",
+        "en": "A calculator screen shows 1. Ryan and Nina compete by pressing keys, Ryan going first: on your turn you may press only the key for times 2 or the key for times 3, which doubles or triples the number on the screen. Whoever first produces a number that is 100 or more wins. Which key should Ryan press first to guarantee a win? Give that multiplier as your answer.",
+        "ja": "電卓の画面に 1 と表示されています。リョウとニナがキーを押して勝負し、リョウが先手です。自分の番では「× 2」か「× 3」のキーだけを押すことができ、画面の数は 2 倍または 3 倍になります。100 以上の数を最初に出した人が勝ちです。リョウが必ず勝つには、最初にどちらのキーを押せばよいですか。その倍率を答えてください。"
+      },
+      "answer": {
+        "zh-Hant": "第一次應該按「× 3」，也就是 3。",
+        "zh-Hans": "第一次应该按「× 3」，也就是 3。",
+        "en": "Ryan should press the times 3 key first, so the answer is 3.",
+        "ja": "最初に押すべきは「× 3」、つまり 3 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "從終點往回推。輪到你時若螢幕上的數大於或等於 34，按「× 3」就會 ≥ 102，一步獲勝，所以 34 到 99 都是好位置。",
+          "若螢幕上是 17 到 33 之間的數，按「× 2」得 34 到 66、按「× 3」得 51 到 99，都還沒到 100，卻把好位置送給對手，所以 17 到 33 都是必敗位置。",
+          "再往回：數在 6 到 16 之間時，可以把它推進 17 到 33（例如 6 × 3 = 18、16 × 2 = 32），把必敗位置丟給對手，所以 6 到 16 是好位置。",
+          "接著檢查 3、4、5：3 × 2 = 6、3 × 3 = 9、4 × 2 = 8、4 × 3 = 12、5 × 2 = 10、5 × 3 = 15，全都落在好位置 6 到 16 裡，所以 3、4、5 都是必敗位置。",
+          "現在看起點 1。按「× 2」得到 2，對手再按「× 2」就變成必敗的 4，等於把好位置送給他；按「× 3」得到 3，正是剛剛找到的必敗位置。",
+          "所以阿宇第一次應該按「× 3」，答案是 3。之後小恩只能把數字變成 6 或 9（都在 6 到 16），阿宇再推進 17 到 33，小恩被迫交出 34 以上的數（33 × 3 = 99 還不到 100），阿宇最後一按就越過 100 獲勝。"
+        ],
+        "zh-Hans": [
+          "从终点往回推。轮到你时若屏幕上的数大于或等于 34，按「× 3」就会 ≥ 102，一步获胜，所以 34 到 99 都是好位置。",
+          "若屏幕上是 17 到 33 之间的数，按「× 2」得 34 到 66、按「× 3」得 51 到 99，都还没到 100，却把好位置送给对手，所以 17 到 33 都是必败位置。",
+          "再往回：数在 6 到 16 之间时，可以把它推进 17 到 33（例如 6 × 3 = 18、16 × 2 = 32），把必败位置丢给对手，所以 6 到 16 是好位置。",
+          "接着检查 3、4、5：3 × 2 = 6、3 × 3 = 9、4 × 2 = 8、4 × 3 = 12、5 × 2 = 10、5 × 3 = 15，全都落在好位置 6 到 16 里，所以 3、4、5 都是必败位置。",
+          "现在看起点 1。按「× 2」得到 2，对手再按「× 2」就变成必败的 4，等于把好位置送给他；按「× 3」得到 3，正是刚刚找到的必败位置。",
+          "所以阿宇第一次应该按「× 3」，答案是 3。之后小恩只能把数字变成 6 或 9（都在 6 到 16），阿宇再推进 17 到 33，小恩被迫交出 34 以上的数（33 × 3 = 99 还不到 100），阿宇最后一按就越过 100 获胜。"
+        ],
+        "en": [
+          "Work backwards from the target. If the screen shows 34 or more on your turn, pressing times 3 gives at least 102 and wins at once, so every value from 34 to 99 is a good spot.",
+          "If the screen shows a value from 17 to 33, doubling gives 34 to 66 and tripling gives 51 to 99, none of which reach 100, so you must hand a good spot over; every value from 17 to 33 is a losing spot.",
+          "Going back further, from 6 to 16 you can push the number into the range 17 to 33 (for instance 6 × 3 = 18 or 16 × 2 = 32) and give the losing range away, so 6 to 16 are good spots.",
+          "Now check 3, 4 and 5: 3 × 2 = 6, 3 × 3 = 9, 4 × 2 = 8, 4 × 3 = 12, 5 × 2 = 10 and 5 × 3 = 15, all landing in the good range 6 to 16, so 3, 4 and 5 are losing spots.",
+          "Finally look at the start, 1. Pressing times 2 gives 2, from which the opponent doubles to the losing value 4, meaning you handed him a good spot; pressing times 3 gives 3, exactly one of the losing spots found above.",
+          "So Ryan should press the times 3 key first, and the answer is 3. Nina can only reach 6 or 9, both in the good range, Ryan then pushes into 17 to 33, Nina must hand over 34 or more (33 × 3 = 99 still falls short of 100), and Ryan's next press passes 100 and wins."
+        ],
+        "ja": [
+          "目標から逆算します。自分の番で画面が 34 以上なら「× 3」を押すと 102 以上になり一手で勝てるので、34 から 99 はよい位置です。",
+          "画面が 17 から 33 のときは、「× 2」で 34〜66、「× 3」で 51〜99 となり 100 に届かず、相手によい位置を渡してしまうため、17 から 33 は負けの位置です。",
+          "さらに戻ると、6 から 16 のときは 17〜33 に押し込めます（例：6 × 3 = 18、16 × 2 = 32）。負けの位置を相手に渡せるので、6 から 16 はよい位置です。",
+          "次に 3、4、5 を調べます。3 × 2 = 6、3 × 3 = 9、4 × 2 = 8、4 × 3 = 12、5 × 2 = 10、5 × 3 = 15 で、すべてよい位置 6〜16 に入るため、3、4、5 は負けの位置です。",
+          "出発点の 1 を見ます。「× 2」を押すと 2 になり、相手がもう一度「× 2」を押せば負けの 4 になるので、こちらがよい位置を渡したことになります。「× 3」を押せば 3 となり、これはいま見つけた負けの位置です。",
+          "したがってリョウは最初に「× 3」を押せばよく、答えは 3 です。その後ニナは 6 か 9（どちらもよい位置）にしかできず、リョウが 17〜33 に押し込むと、ニナは 34 以上を渡すしかなく（33 × 3 = 99 はまだ 100 未満）、リョウが次に押して 100 を超え勝ちます。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "3"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade8-foundation",
+        "notes": "操作是乘法而不是減法，必敗態是一段一段的區間（17~33、3~5），不是等差的模數位置。全庫的博弈題都是「減少數量」或「移動棋子」，沒有任何一題是乘法逼近門檻；與 logic_grade12_foundation_019（累加到 30）的加法門檻遊戲在推導方式上完全不同。（2026-09-04 第四輪：主流程獨立重算過答案，並重跑機械校驗與相似度閘門。）"
+      }
+    },
+    {
+      "id": "logic_grade8_foundation_047",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "take_power_of_two_bricks_largest_winning_move",
+      "tags": [
+        "c:game_theory",
+        "c:exponent",
+        "c:modular",
+        "m:reverse"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade8",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "桌上疊著 100 塊積木。甲、乙兩人輪流拿走積木，由甲先拿，每次拿走的塊數必須是 2 的次方，也就是 1、2、4、8、16、32、64 之中的一個。拿走最後一塊積木的人獲勝。甲有必勝策略，而且第一步的合適拿法不只一種。求甲第一步最多可以拿走幾塊。",
+        "zh-Hans": "桌上叠着 100 块积木。甲、乙两人轮流拿走积木，由甲先拿，每次拿走的块数必须是 2 的次方，也就是 1、2、4、8、16、32、64 之中的一个。拿走最后一块积木的人获胜。甲有必胜策略，而且第一步的合适拿法不只一种。求甲第一步最多可以拿走几块。",
+        "en": "A stack of 100 bricks sits on a table. Kai and Lin take turns removing bricks, Kai first, and each turn a player must remove a number of bricks that is a power of two: 1, 2, 4, 8, 16, 32 or 64. Whoever takes the last brick wins. Kai has a winning strategy, and more than one first move works. What is the largest number of bricks Kai can take on his first move and still win?",
+        "ja": "テーブルの上に積み木が 100 個積まれています。甲と乙が交互に取り、甲が先手で、1 回に取れる個数は 2 の累乗、すなわち 1、2、4、8、16、32、64 のいずれかです。最後の 1 個を取った人が勝ちます。甲には必勝法があり、最初の一手は 1 通りではありません。甲が最初に取れる最大の個数はいくつですか。"
+      },
+      "answer": {
+        "zh-Hant": "甲第一步最多可以拿走 64 塊。",
+        "zh-Hans": "甲第一步最多可以拿走 64 块。",
+        "en": "Kai can take at most 64 bricks on his first move.",
+        "ja": "甲が最初に取れる最大の個数は 64 個です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "先看每一種合法拿法除以 3 的餘數：1、4、16、64 除以 3 都餘 1；2、8、32 除以 3 都餘 2。沒有任何一個 2 的次方是 3 的倍數。",
+          "（原因是 2 除以 3 餘 2，而餘數會依 2、1、2、1 交替出現，永遠輪不到 0。）",
+          "所以誰也沒辦法「一次拿走 3 的倍數塊」。面對 3 的倍數塊積木的人，拿完之後留給對手的一定不是 3 的倍數。",
+          "反過來，面對不是 3 的倍數的人，餘 1 就拿 1 塊、餘 2 就拿 2 塊，馬上把 3 的倍數丟回給對手。",
+          "所以「輪到你時剩下的塊數是 3 的倍數」就是必敗局面：0 塊代表最後一塊已被對手拿走，而在那之前你每一次都被迫交出非 3 的倍數。",
+          "100 除以 3 餘 1，所以甲要拿走一個除以 3 也餘 1 的塊數，1、4、16、64 都可以（例如 100 − 64 = 36 正好是 3 的倍數）。",
+          "其中最大的是 64，所以答案是 64 塊。"
+        ],
+        "zh-Hans": [
+          "先看每一种合法拿法除以 3 的余数：1、4、16、64 除以 3 都余 1；2、8、32 除以 3 都余 2。没有任何一个 2 的次方是 3 的倍数。",
+          "（原因是 2 除以 3 余 2，而余数会依 2、1、2、1 交替出现，永远轮不到 0。）",
+          "所以谁也没办法「一次拿走 3 的倍数块」。面对 3 的倍数块积木的人，拿完之后留给对手的一定不是 3 的倍数。",
+          "反过来，面对不是 3 的倍数的人，余 1 就拿 1 块、余 2 就拿 2 块，马上把 3 的倍数丢回给对手。",
+          "所以「轮到你时剩下的块数是 3 的倍数」就是必败局面：0 块代表最后一块已被对手拿走，而在那之前你每一次都被迫交出非 3 的倍数。",
+          "100 除以 3 余 1，所以甲要拿走一个除以 3 也余 1 的块数，1、4、16、64 都可以（例如 100 − 64 = 36 正好是 3 的倍数）。",
+          "其中最大的是 64，所以答案是 64 块。"
+        ],
+        "en": [
+          "Look at the remainder of each legal move on division by 3: 1, 4, 16 and 64 all leave remainder 1, while 2, 8 and 32 all leave remainder 2. No power of two is a multiple of 3.",
+          "(The reason is that 2 leaves remainder 2, and the remainders then alternate 2, 1, 2, 1, never reaching 0.)",
+          "So nobody can remove a multiple of 3 bricks in one move. A player facing a multiple of 3 must leave a count that is not a multiple of 3.",
+          "Conversely, a player facing a count that is not a multiple of 3 takes 1 brick if the remainder is 1 and 2 bricks if the remainder is 2, immediately handing a multiple of 3 back.",
+          "So facing a multiple of 3 is the losing position: reaching 0 means the opponent took the last brick, and before that you were forced to give away a non-multiple of 3 every single time.",
+          "Since 100 leaves remainder 1 on division by 3, Kai must take an amount that also leaves remainder 1, so 1, 4, 16 and 64 all work (for instance 100 − 64 = 36, a multiple of 3).",
+          "The largest of these is 64, so the answer is 64 bricks."
+        ],
+        "ja": [
+          "まず各手を 3 で割った余りを見ます。1、4、16、64 は余り 1、2、8、32 は余り 2 です。2 の累乗で 3 の倍数になるものはありません。",
+          "（2 を 3 で割ると余りは 2 で、以後 2、1、2、1 と交互に現れ、0 になることはないからです。）",
+          "したがって誰も一手で 3 の倍数個を取れません。3 の倍数個に直面した人は、取った後に必ず 3 の倍数でない個数を相手に残します。",
+          "逆に 3 の倍数でない個数に直面した人は、余り 1 なら 1 個、余り 2 なら 2 個取って、すぐに 3 の倍数を相手へ返せます。",
+          "よって「自分の手番で残りが 3 の倍数」が負けの局面です。0 個は相手が最後の 1 個を取ったことを意味し、それまで毎回 3 の倍数でない個数を渡さざるを得なかったからです。",
+          "100 を 3 で割ると余りは 1 なので、甲も余り 1 の個数を取ればよく、1、4、16、64 のいずれでも構いません（たとえば 100 − 64 = 36 はちょうど 3 の倍数です）。",
+          "その中で最大のものは 64 なので、答えは 64 個です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "64"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade8-foundation",
+        "notes": "可取的量是 2 的次方（1、2、4、8、16、32、64），關鍵是「2 的次方永遠不是 3 的倍數」，必敗態是 3 的倍數；與 logic_grade8_foundation_044、logic_grade11_foundation_001 的「取 1~3、模 4」不同（那裡取法是連續整數）。問法也不同：問的是必勝第一步中最大的取量，不是唯一的取量。（2026-09-04 第四輪：主流程獨立重算過答案，並重跑機械校驗與相似度閘門。）"
+      }
     }
   ]
 }
