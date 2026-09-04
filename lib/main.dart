@@ -21,7 +21,7 @@ import 'package:mathspring/services/formal_exam_preset.dart';
 import 'package:mathspring/services/formal_exam_scoring.dart';
 import 'package:mathspring/services/math_text_formatter.dart';
 import 'package:mathspring/services/session_launch_plan_builder.dart';
-import 'package:mathspring/ui/content_column.dart';
+import 'package:mathspring/ui/content_scroll_view.dart';
 import 'package:mathspring/ui/layout_spec.dart';
 
 const String appSupportUrl =
@@ -409,9 +409,20 @@ class _MathSpringHomePageState extends State<MathSpringHomePage> {
           },
         ),
       ),
-      bottomNavigationBar: Padding(
-        padding: const EdgeInsets.fromLTRB(16, 0, 16, 14),
-        child: DecoratedBox(
+      // 導覽列跟內容欄同寬：滿版導覽列配上 760pt 的內容，
+      // 在 iPad 上兩者寬度差太多，視覺節奏會斷掉。
+      //
+      // 用左右 padding 而不是包一層 Center + ConstrainedBox：後者會改變
+      // Scaffold 對底部列的量測，實測會讓其他頁面的點擊命中失效。
+      bottomNavigationBar: Builder(
+        builder: (BuildContext context) {
+          final double maxWidth = LayoutSpec.of(context).contentMaxWidth;
+          final double screen = MediaQuery.sizeOf(context).width;
+          final double side =
+              screen > maxWidth ? (screen - maxWidth) / 2 : 16.0;
+          return Padding(
+            padding: EdgeInsets.fromLTRB(side, 0, side, 14),
+            child: DecoratedBox(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(26),
             boxShadow: const [
@@ -457,7 +468,9 @@ class _MathSpringHomePageState extends State<MathSpringHomePage> {
               ],
             ),
           ),
-        ),
+          ),
+          );
+        },
       ),
     );
   }
@@ -516,10 +529,10 @@ class _HomeShellFrame extends StatelessWidget {
               ),
             ),
           ),
-          SingleChildScrollView(
-            padding: EdgeInsets.symmetric(
-                vertical: LayoutSpec.of(context).sectionGap),
-            child: ContentColumn(
+          // Stack 的非定位子項在鬆約束下不會填滿，捲動區會縮成內容高度，
+          // 垂直置中就失去意義；用 Positioned.fill 明確撐滿。
+          Positioned.fill(
+            child: ContentScrollView(
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -2999,14 +3012,9 @@ class _PracticeSessionPageState extends State<PracticeSessionPage> {
 
           final List<Question> questions = snapshot.data!.questions;
           final Question question = questions[_currentIndex % questions.length];
-          final LayoutSpec layout = LayoutSpec.of(context);
-          return ListView(
+          return ContentScrollView(
             controller: _scrollController,
-            padding: EdgeInsets.only(
-                top: layout.sectionGap, bottom: layout.sectionGap * 1.75),
-            children: [
-              ContentColumn(
-                  child: Column(
+            child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
@@ -3105,8 +3113,6 @@ class _PracticeSessionPageState extends State<PracticeSessionPage> {
                   ),
                 ],
               ),
-              ),
-            ],
           );
         },
       ),
@@ -3464,11 +3470,8 @@ class PracticeSummaryPage extends StatelessWidget {
         surfaceTintColor: Colors.transparent,
         backgroundColor: Colors.white,
       ),
-      body: SingleChildScrollView(
-        padding: EdgeInsets.symmetric(
-            vertical: LayoutSpec.of(context).sectionGap),
-        child: ContentColumn(
-            child: Column(
+      body: ContentScrollView(
+        child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             _SectionCard(
@@ -3489,7 +3492,6 @@ class PracticeSummaryPage extends StatelessWidget {
           ],
         ),
       ),
-        ),
     );
   }
 }
@@ -3627,12 +3629,8 @@ class _QuizSessionPageState extends State<QuizSessionPage> {
               FormalExamScoring.allocate(questions);
           final Question question = questions[_currentIndex];
           final String? selectedAnswer = _answers[question.id];
-          final LayoutSpec layout = LayoutSpec.of(context);
-          return SingleChildScrollView(
-            padding: EdgeInsets.only(
-                top: layout.sectionGap, bottom: layout.sectionGap * 1.75),
-            child: ContentColumn(
-                child: Column(
+          return ContentScrollView(
+            child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
@@ -3785,7 +3783,6 @@ class _QuizSessionPageState extends State<QuizSessionPage> {
                   ],
                 ),
               ],
-            ),
             ),
           );
         },
@@ -4172,11 +4169,8 @@ class QuizResultPage extends StatelessWidget {
         surfaceTintColor: Colors.transparent,
         backgroundColor: Colors.white,
       ),
-      body: SingleChildScrollView(
-        padding: EdgeInsets.symmetric(
-            vertical: LayoutSpec.of(context).sectionGap),
-        child: ContentColumn(
-            child: Column(
+      body: ContentScrollView(
+        child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             _SectionCard(
@@ -4266,7 +4260,6 @@ class QuizResultPage extends StatelessWidget {
           ],
         ),
       ),
-        ),
     );
   }
 }
