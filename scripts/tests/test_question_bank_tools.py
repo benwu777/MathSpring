@@ -125,7 +125,7 @@ class CheckOptionLengthsTest(unittest.TestCase):
         self.assertIn('正解', errs[0])
 
     def test_accepts_when_correct_is_longest_but_within_ratio(self):
-        # 正解 26 字、最長誘答 19 字，比值 1.37 < 1.6，屬正常起伏
+        # 正解 26 字、最長誘答 19 字，比值 1.37 < 1.5，屬正常起伏
         opts = self._opts(A='這個三角形一定是等腰三角形，因為它的兩個底角大小相等',
                           B='這個三角形一定是直角三角形，有一個直角',
                           C='這個三角形一定是鈍角三角形',
@@ -136,6 +136,31 @@ class CheckOptionLengthsTest(unittest.TestCase):
         # 「12」對「3」比值 2.0，但選項這麼短時長度不帶任何線索
         opts = self._opts(A='12', B='3', C='5', D='8')
         self.assertEqual(vqp.check_option_lengths(opts, 'A'), [])
+
+    def test_accepts_high_ratio_when_the_absolute_gap_is_small(self):
+        # 真實案例 logic_grade1_foundation_040：正解 15 字、最長誘答 10 字，
+        # 比值剛好 1.5，但只差 5 個字，不構成「挑最長的就會中」。
+        opts = self._opts(A='第一張，最左邊那一張',
+                          B='第二張，中間那一張',
+                          C='第三張，最右邊那一張',
+                          D='無法確定，可能是第一張或第三張')
+        self.assertEqual(vqp.check_option_lengths(opts, 'D'), [])
+
+    def test_accepts_large_absolute_gap_when_the_ratio_is_small(self):
+        # 選項本來就長的題目，差 10 個字只是正常起伏（比值 1.18）
+        opts = self._opts(A='甲' * 66, B='乙' * 56, C='丙' * 54, D='丁' * 50)
+        self.assertEqual(vqp.check_option_lengths(opts, 'A'), [])
+
+    def test_rejects_when_both_the_ratio_and_the_absolute_gap_are_large(self):
+        # 真實案例 geometry_grade1_foundation_033：正解 33 字、最長誘答 21 字
+        opts = self._opts(A='一定對稱，因為鏡像圖形跟原本的圖形，沿著黏合的那條線本來就互相對稱',
+                          B='不一定對稱，要看原本的三角形是不是正三角形',
+                          C='一定不對稱，因為兩個三角形不可能完全貼合',
+                          D='沒辦法判斷，要先量出三角形每個角的度數')
+        errs = vqp.check_option_lengths(opts, 'A')
+        self.assertEqual(len(errs), 1)
+        self.assertIn('33', errs[0])
+        self.assertIn('21', errs[0])
 
     def test_accepts_when_a_distractor_is_the_longest(self):
         opts = self._opts(A='不可能，因為另外兩個角加起來只有 90 度',
@@ -547,6 +572,34 @@ class CheckFigureParamsTest(unittest.TestCase):
         msgs = vqp.check_figure_params(
             self._fig('composite_grid_shape', rows=0, cols=2, filledCells=[]))
         self.assertTrue(msgs)
+
+
+class CircleQuadrantsParamsTest(unittest.TestCase):
+    """circle_quadrants_point 的 shadedRegion / regionLabels 只認得四個象限名。
+
+    renderer 現在四個區域都上得了色，但填錯字仍然是靜默不上色，驗證器要擋。
+    """
+
+    def _fig(self, **params):
+        return {'type': 'custom', 'kind': 'circle_quadrants_point', 'params': params}
+
+    def test_accepts_the_four_quadrants(self):
+        for region in ('topLeft', 'topRight', 'bottomLeft', 'bottomRight'):
+            self.assertEqual(
+                vqp.check_figure_params(self._fig(shadedRegion=region)), [],
+                region)
+
+    def test_rejects_an_unknown_shaded_region(self):
+        msgs = vqp.check_figure_params(self._fig(shadedRegion='middle'))
+        self.assertEqual(len(msgs), 1)
+        self.assertIn('middle', msgs[0])
+
+    def test_rejects_an_unknown_region_label_key(self):
+        msgs = vqp.check_figure_params(
+            self._fig(shadedRegion='topRight',
+                      regionLabels={'topRight': '?', 'centre': '5'}))
+        self.assertEqual(len(msgs), 1)
+        self.assertIn('centre', msgs[0])
 
 
 class FigureParamsOnRealPacksTest(unittest.TestCase):

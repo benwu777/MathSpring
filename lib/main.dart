@@ -6813,12 +6813,23 @@ class CircleQuadrantsPointPainter extends CustomPainter {
     final Offset pointP =
         Offset(center.dx - radius * 0.18, center.dy + radius * 0.1);
 
-    if (shadedRegion == 'topRight') {
+    // 四個區域都是「從某個等分點沿圓弧走 90 度到下一個等分點，再拉回 P」。
+    // 以前只寫死了 topRight 一支，填其他三個值靜默不上色。
+    // 畫布角度 0 是正右方、順時針increasing（y 向下）。
+    final Map<String, (Offset, double)> quadrants = <String, (Offset, double)>{
+      'topRight': (top, -math.pi / 2),
+      'bottomRight': (right, 0),
+      'bottomLeft': (bottom, math.pi / 2),
+      'topLeft': (left, math.pi),
+    };
+    final (Offset, double)? quadrant = quadrants[shadedRegion];
+    if (quadrant != null) {
+      final (Offset start, double startAngle) = quadrant;
       final Path shadedPath = Path()
-        ..moveTo(top.dx, top.dy)
+        ..moveTo(start.dx, start.dy)
         ..arcTo(
           Rect.fromCircle(center: center, radius: radius),
-          -math.pi / 2,
+          startAngle,
           math.pi / 2,
           false,
         )

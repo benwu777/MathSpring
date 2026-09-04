@@ -557,8 +557,7 @@ phase 1 **只允許**兩種 `answerMode`，不得新增其他型別：
 
 若一題的自然答案是分數或小數，必須改寫成整數作答（例如問「幾毫升」而非「幾公升」），或改成選擇題；不可為它發明新的 answerMode。
 
-> 目前已知的工具缺口與待辦（figure params 未驗證、簡體字混入 zh-Hant 的檢查尚未進驗證器等）
-> 見 [question-bank-handoff.md](question-bank-handoff.md)。
+> 目前的品質閘門清單與剩餘待辦見 [question-bank-handoff.md](question-bank-handoff.md)。
 
 ## schema 欄位必填/可省規則
 
@@ -572,11 +571,12 @@ phase 1 **只允許**兩種 `answerMode`，不得新增其他型別：
   | `coordinate_plane` | 座標平面上的點、折線、標記點。`points` 畫藍點＋標籤，`path` 畫一條青色折線，`highlightPoint` 不會自己畫點、只把 `points` 裡座標相同的那一點改成紅色。**畫不出箭頭，所以不要用它畫向量**——把終點標成「u」會讓學生以為 u 是一個點，而兩個向量只能連成一條折線，看起來是一條折線而不是兩個向量。 | 只查「終點」標籤洩漏答案這一條 |
   | `shape_diagram` | 單一基本形狀＋最多 5 個文字標籤（`top`/`bottom`/`left`/`right`/`center`） | 無 |
   | `composite_grid_shape` | 方格拼出的複合圖形，`filledCells` 是 0-indexed 的 `[row, col]`，row 0 在最上面 | 無 |
-  | `circle_quadrants_point` | **不要用**。圓、四個鑲邊點與內部點的位置全部寫死，`shadedRegion` 只有 `"topRight"` 有作用，其餘值靜默不上色。全庫只有 1 題在用。 | 無 |
+  | `circle_quadrants_point` | 只畫得出一種構圖：圓、圓周四等分點（標籤寫死 A/B/C/D）、一個內部點 P，四條連線把圓分成四塊。位置全部寫死不能設定，能調的只有 `shadedRegion`（四個象限名）、`regionLabels`（同樣四個鍵）與 `pointLabel`。構圖不吻合就別用。 | 無 |
 
-  **未列在 switch 裡的 kind 會靜默不畫**——不報錯、不留 log、畫面上只是一片空白。
-  後四種 kind 的 `params` 驗證器完全不檢查，寫錯就是圖畫錯或畫不出來而沒有人知道，
-  所以這幾種一定要用 `test/figure_preview_test.dart` 目視確認（見「圖形題規則」）。
+  **未列在 switch 裡的 kind 會靜默不畫**——回傳 null、畫面一片空白，
+  只在 debug console 留一行 log。五種 kind 的 `params` 現在都有驗證器檢查
+  （形狀、範圍、鍵名），但**驗證器過不代表圖是對的**：它看不出圖有沒有畫錯題意。
+  新增附圖的題一定要用 `scripts/dump_figure_previews.py` 目視確認（見「自動檢查」）。
 - `options`：**只有** `multiple_choice` 有；固定 4 個選項 A/B/C/D，四語系齊全，選項互不重複，`correctAnswer.value` 必須指向其中一個 key。`integer_input` 題不得出現 `options`。
 - `inputConstraints`：**只有** `integer_input` 有，必填 `allowNegative`（bool）與 `maxDigits`（int）。`multiple_choice` 題不得出現 `inputConstraints`。
 - `correctAnswer`：`multiple_choice` 用 `{"type":"choice","value":"<A-D>"}`；`integer_input` 用 `{"type":"integer","value":"<字串數字>"}`。其值必須與 `answer` 文字、`solutionSteps` 結論三者一致。

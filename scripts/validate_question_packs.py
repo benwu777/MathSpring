@@ -106,11 +106,21 @@ def check_simplified_in_traditional(q, simplified_chars):
     return errs
 
 
-# 正解比最長誘答長這麼多倍就算洩漏線索。全庫 470 道選擇題實測：
-# 1.6 倍會標出 10 題，1.4 倍會把正常的長度起伏也掃進來。
-OPTION_LENGTH_RATIO = 1.6
-# 選項太短時長度不帶線索（「12」對「3」也有 2 倍），設一個絕對下限。
-OPTION_LENGTH_FLOOR = 12
+# 正解要同時「比例上長很多」又「絕對字數多很多」才算洩漏線索。
+#
+# 2026-09-04 用全庫 476 道選擇題重量一次分布（前一版的門檻是用 470 道訂的）：
+#   比值   p50=1.00  p90=1.00  p95=1.25  p99=1.51  max=1.75
+#   字數差 p50=0     p90=0     p95=1     p99=12    max=18
+# 也就是九成的題目正解根本不比最長的誘答長，兩個維度都是長尾。
+#
+# 只看比值不夠：15 字對 10 字也是 1.5 倍，但只差 5 個字，學生看不出來；
+# 只看字數差也不夠：60 字對 50 字差 10 個字，比例上只有 1.18，屬正常起伏。
+# 兩個條件都要滿足才報，實測剛好標出 3 題真的把完整推理寫進正解的題目
+# （門檻取 8、10、12 標出的都是同一批，不是踩在邊緣上調出來的）。
+#
+# 舊版的 1.6 倍配 12 字下限現在會標出 0 題，等於閘門是空轉的。
+OPTION_LENGTH_RATIO = 1.5
+OPTION_LENGTH_GAP = 10
 
 
 def check_option_lengths(options, correct_value):
@@ -125,13 +135,15 @@ def check_option_lengths(options, correct_value):
     lens = {k: len(v['zh-Hant']) for k, v in options.items()}
     correct = lens[correct_value]
     others = [n for k, n in lens.items() if k != correct_value]
-    if not others or correct < OPTION_LENGTH_FLOOR:
+    if not others:
         return []
     longest = max(others)
-    if longest and correct / longest >= OPTION_LENGTH_RATIO:
-        return ['正解 %s 長 %d 字，最長的誘答只有 %d 字（%.2f 倍），'
+    if (longest and correct / longest >= OPTION_LENGTH_RATIO
+            and correct - longest >= OPTION_LENGTH_GAP):
+        return ['正解 %s 長 %d 字，最長的誘答只有 %d 字（%.2f 倍、多 %d 字），'
                 '挑最長的就會中；請把誘答寫得一樣具體'
-                % (correct_value, correct, longest, correct / longest)]
+                % (correct_value, correct, longest, correct / longest,
+                   correct - longest)]
     return []
 
 
@@ -152,6 +164,8 @@ SHAPE_DIAGRAM_SHAPES = {'compass', 'square', 'triangle', 'trapezoid',
                         'parallelogram', 'pentagon', 'hexagon', 'circle',
                         'oval', 'rectangle'}
 SHAPE_DIAGRAM_LABEL_KEYS = {'top', 'bottom', 'left', 'right', 'center'}
+# CircleQuadrantsPointPainter 認得的四個區域；填別的值會靜默不上色。
+CIRCLE_QUADRANTS = {'topLeft', 'topRight', 'bottomLeft', 'bottomRight'}
 # circle 那一支只呼叫三次 _paintText，left / bottom 寫了也不會出現。
 SHAPE_DIAGRAM_CIRCLE_LABEL_KEYS = {'top', 'right', 'center'}
 # _buildFigureRenderSpec 對缺漏的 coordinate_plane 界限給的預設值。
@@ -267,6 +281,20 @@ def check_figure_params(figure):
                     # highlightPoint 不會自己畫點，只把 points 裡座標相同的那一點改紅
                     errs.append('highlightPoint (%r, %r) 不等於 points 裡的任何一點，'
                                 '不會有任何效果' % (hp.get('x'), hp.get('y')))
+
+    elif kind == 'circle_quadrants_point':
+        region = params.get('shadedRegion', 'topRight')
+        if region not in CIRCLE_QUADRANTS:
+            errs.append('circle_quadrants_point 的 shadedRegion 不受支援，'
+                        '會靜默不上色: %s' % region)
+        labels = params.get('regionLabels') or {}
+        if not isinstance(labels, dict):
+            errs.append('circle_quadrants_point 的 regionLabels 必須是物件')
+        else:
+            bad = sorted(set(labels) - CIRCLE_QUADRANTS)
+            if bad:
+                errs.append('regionLabels 的鍵只認得四個象限，其餘靜默消失: %s'
+                            % '、'.join(bad))
 
     elif kind == 'composite_grid_shape':
         rows = _int_or_none(params.get('rows', 3))

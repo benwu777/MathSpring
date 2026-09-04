@@ -7,6 +7,7 @@ import 'package:mathspring/main.dart';
 import 'package:mathspring/models/answer_session.dart';
 import 'package:mathspring/models/learner_profile.dart';
 import 'package:mathspring/models/question.dart';
+import 'package:mathspring/models/question_bank.dart';
 import 'package:mathspring/models/question_progress.dart';
 import 'package:mathspring/models/session_answer_record.dart';
 import 'package:mathspring/services/session_launch_plan_builder.dart';
@@ -2756,5 +2757,66 @@ void main() {
         reason: 'the emphasised run should be its own span');
     expect(plainWeight, isNotNull);
     expect(boldWeight!.value, greaterThan(plainWeight!.value));
+  });
+
+  testWidgets('選項裡的根號會原樣顯示在畫面上，而且不會被排版擠掉',
+      (WidgetTester tester) async {
+    // 題幹與詳解用 √ 的有一百多題，但選項裡出現 √ 是後來才有的事，
+    // 一直只從程式碼確認過「選項與題幹走同一條 normalizeMathText 路徑」，
+    // 沒有真的把畫面渲染出來看過。這題有 5 個選項，全部帶根號或分數，
+    // 是全庫最吃版面的一組。
+    TestWidgetsFlutterBinding.ensureInitialized();
+    final AppServices services = createTestServices();
+
+    // loadPack 是真的非同步 I/O，要在 runAsync 裡跑；
+    // 直接 await 會卡在 widget test 的 fake async zone 裡不回來。
+    late final Question question;
+    await tester.runAsync(() async {
+      final QuestionBank pack = await BundledQuestionBankRepository().loadPack(
+        'assets/questions/geometry/grade11_foundation.geometry.v1.json',
+      );
+      question = pack.questions
+          .firstWhere((Question q) => q.id == 'geometry_grade11_foundation_007');
+    });
+
+    await tester.binding.setSurfaceSize(const Size(430, 932));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+    await tester.pumpWidget(
+      MaterialApp(
+        locale: const Locale('zh', 'Hant'),
+        supportedLocales: AppStrings.supportedLocales,
+        localizationsDelegates: const [
+          GlobalMaterialLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+        ],
+        home: PracticeSessionPage(
+          services: services,
+          pack: const BundledQuestionPackInfo(
+            path:
+                'assets/questions/geometry/grade11_foundation.geometry.v1.json',
+            topic: '幾何',
+            topicCode: 'geometry',
+            levelStage: 'grade11',
+            challengeTier: 'foundation',
+            questionCount: 1,
+          ),
+          initialQuestions: <Question>[question],
+        ),
+      ),
+    );
+    await tester.runAsync(() async {
+      await Future<void>.delayed(const Duration(milliseconds: 50));
+    });
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 300));
+
+    for (final QuestionOption option in question.options!.values) {
+      final String text = option.labels['zh-Hant']!;
+      expect(find.textContaining(text, findRichText: true), findsWidgets,
+          reason: '選項「$text」沒有原樣出現在畫面上');
+    }
+    // 版面塞不下時 Flutter 會在 debug 期丟 overflow 例外
+    expect(tester.takeException(), isNull);
   });
 }
