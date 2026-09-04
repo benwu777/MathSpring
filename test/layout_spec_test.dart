@@ -93,6 +93,33 @@ void main() {
     });
   });
 
+  group('scaleText', () {
+    test('compact 原樣回傳，iPhone 的零散字級一個像素都不變', () {
+      final LayoutSpec c = LayoutSpec.forWidth(390);
+      for (final double n in <double>[11, 12, 13, 14, 15, 18, 19, 20, 22, 24, 28, 32, 34]) {
+        expect(c.scaleText(n), n);
+      }
+    });
+
+    test('medium 與 expanded 依序放大，且回傳整數點數', () {
+      final LayoutSpec m = LayoutSpec.forWidth(820);
+      final LayoutSpec e = LayoutSpec.forWidth(1180);
+      for (final double n in <double>[11, 14, 20, 24, 34]) {
+        expect(m.scaleText(n), greaterThan(n));
+        expect(e.scaleText(n), greaterThan(m.scaleText(n)));
+        expect(m.scaleText(n), m.scaleText(n).roundToDouble());
+        expect(e.scaleText(n), e.scaleText(n).roundToDouble());
+      }
+    });
+
+    test('放大幅度與語意代號一致，不會出現內文比標題大', () {
+      final LayoutSpec e = LayoutSpec.forWidth(1180);
+      // 零散字級 20（介於 title 18 與 heading 22 之間）放大後仍要落在兩者之間
+      expect(e.scaleText(20), greaterThan(e.titleText));
+      expect(e.scaleText(20), lessThan(e.headingText + 1));
+    });
+  });
+
   group('textThemeFrom', () {
     test('把該級的字級套進既有的 TextTheme，但保留顏色與字重', () {
       const TextTheme base = TextTheme(

@@ -21,6 +21,7 @@ import 'package:mathspring/services/formal_exam_preset.dart';
 import 'package:mathspring/services/formal_exam_scoring.dart';
 import 'package:mathspring/services/math_text_formatter.dart';
 import 'package:mathspring/services/session_launch_plan_builder.dart';
+import 'package:mathspring/ui/content_column.dart';
 import 'package:mathspring/ui/layout_spec.dart';
 
 const String appSupportUrl =
@@ -515,12 +516,11 @@ class _HomeShellFrame extends StatelessWidget {
               ),
             ),
           ),
-          Center(
-            child: ConstrainedBox(
-              constraints: const BoxConstraints(maxWidth: 1180),
-              child: SingleChildScrollView(
-                padding: const EdgeInsets.fromLTRB(20, 20, 20, 28),
-                child: Column(
+          SingleChildScrollView(
+            padding: EdgeInsets.symmetric(
+                vertical: LayoutSpec.of(context).sectionGap),
+            child: ContentColumn(
+              child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const _TopBar(
@@ -532,7 +532,6 @@ class _HomeShellFrame extends StatelessWidget {
                 ),
               ),
             ),
-          ),
         ],
       ),
     );
@@ -1026,7 +1025,15 @@ class _AchievementBadge extends StatelessWidget {
         children: [
           Icon(icon, size: 18, color: const Color(0xFF163D7A)),
           const SizedBox(width: 6),
-          Text(label),
+          // 成就文字必須可壓縮：外層是 Wrap，寬度受限於一行的可用空間，
+          // 英文的成就描述比中文長，在 390pt 上會把徽章自己的 Row 撐爆 34px。
+          Flexible(
+            child: Text(
+              label,
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+            ),
+          ),
         ],
       ),
     );
@@ -1211,6 +1218,7 @@ class _TopBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final LayoutSpec layoutSpec = LayoutSpec.of(context);
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -1236,9 +1244,9 @@ class _TopBar extends StatelessWidget {
               AppStrings.of(context).appSubtitle,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
-              style: const TextStyle(
-                fontSize: 11,
-                color: Color(0xFF64748B),
+              style: TextStyle(
+                fontSize: layoutSpec.microText,
+                color: const Color(0xFF64748B),
                 fontWeight: FontWeight.w700,
                 letterSpacing: 0.3,
               ),
@@ -1253,7 +1261,7 @@ class _TopBar extends StatelessWidget {
               Text(
                 title,
                 style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                      fontSize: 20,
+                      fontSize: layoutSpec.scaleText(20),
                       letterSpacing: -0.6,
                       fontWeight: FontWeight.w700,
                     ),
@@ -1263,9 +1271,9 @@ class _TopBar extends StatelessWidget {
                 AppStrings.of(context).heroSubtitle,
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
-                style: const TextStyle(
-                  fontSize: 11,
-                  color: Color(0xFF94A3B8),
+                style: TextStyle(
+                  fontSize: layoutSpec.microText,
+                  color: const Color(0xFF94A3B8),
                   fontWeight: FontWeight.w500,
                 ),
               ),
@@ -1375,6 +1383,7 @@ class _LearnerSummaryBanner extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final LayoutSpec layoutSpec = LayoutSpec.of(context);
     final AppStrings strings = AppStrings.of(context);
     final TextTheme textTheme = Theme.of(context).textTheme;
     return Container(
@@ -1403,7 +1412,7 @@ class _LearnerSummaryBanner extends StatelessWidget {
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
             style: textTheme.headlineSmall?.copyWith(
-              fontSize: 24,
+              fontSize: layoutSpec.scaleText(24),
               letterSpacing: -0.5,
             ),
           ),
@@ -1422,7 +1431,7 @@ class _LearnerSummaryBanner extends StatelessWidget {
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
             style: textTheme.titleLarge?.copyWith(
-              fontSize: 19,
+              fontSize: layoutSpec.scaleText(19),
               color: const Color(0xFF1E293B),
             ),
           ),
@@ -1507,7 +1516,8 @@ class _HeroCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bool isWideLayout = MediaQuery.sizeOf(context).width >= 900;
+    final bool isWideLayout =
+        LayoutSpec.of(context).widthClass != WidthClass.compact;
 
     return Container(
       key: const ValueKey<String>('home_hero_surface'),
@@ -1567,6 +1577,7 @@ class _HeroCopy extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final LayoutSpec layoutSpec = LayoutSpec.of(context);
     final TextTheme textTheme = Theme.of(context).textTheme;
 
     return Column(
@@ -1580,10 +1591,10 @@ class _HeroCopy extends StatelessWidget {
           ),
           child: Text(
             strings.heroBadge,
-            style: const TextStyle(
-              color: Color(0xFF163D7A),
+            style: TextStyle(
+              color: const Color(0xFF163D7A),
               fontWeight: FontWeight.w700,
-              fontSize: 12,
+              fontSize: layoutSpec.scaleText(12),
             ),
           ),
         ),
@@ -1591,7 +1602,7 @@ class _HeroCopy extends StatelessWidget {
         Text(
           strings.heroTitle,
           style: textTheme.displaySmall?.copyWith(
-            fontSize: 34,
+            fontSize: layoutSpec.scaleText(34),
             height: 1.05,
           ),
         ),
@@ -1636,6 +1647,7 @@ class _HeroPanel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final LayoutSpec layoutSpec = LayoutSpec.of(context);
     final AppStrings strings = AppStrings.of(context);
     return Container(
       constraints: const BoxConstraints(minHeight: 220),
@@ -1656,18 +1668,18 @@ class _HeroPanel extends StatelessWidget {
         children: [
           Text(
             strings.dashboardFocusTitle,
-            style: const TextStyle(
-              color: Color(0xB3FFFFFF),
-              fontSize: 12,
+            style: TextStyle(
+              color: const Color(0xB3FFFFFF),
+              fontSize: layoutSpec.scaleText(12),
               fontWeight: FontWeight.w600,
             ),
           ),
           const SizedBox(height: 14),
           Text(
             strings.dashboardFocusBody,
-            style: const TextStyle(
+            style: TextStyle(
               color: Colors.white,
-              fontSize: 22,
+              fontSize: layoutSpec.headingText,
               height: 1.4,
               fontWeight: FontWeight.w600,
             ),
@@ -1685,9 +1697,9 @@ class _HeroPanel extends StatelessWidget {
                 Expanded(
                   child: Text(
                     '${strings.dashboardPathTitle}\n${strings.dashboardPathValue}',
-                    style: const TextStyle(
+                    style: TextStyle(
                       color: Colors.white,
-                      fontSize: 13,
+                      fontSize: layoutSpec.captionText,
                       height: 1.5,
                     ),
                   ),
@@ -1715,6 +1727,7 @@ class _CompactHeroBanner extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final LayoutSpec layoutSpec = LayoutSpec.of(context);
     final TextTheme textTheme = Theme.of(context).textTheme;
     return Container(
       width: double.infinity,
@@ -1750,7 +1763,7 @@ class _CompactHeroBanner extends StatelessWidget {
                 Text(
                   title,
                   style: textTheme.titleLarge?.copyWith(
-                    fontSize: 20,
+                    fontSize: layoutSpec.scaleText(20),
                     fontWeight: FontWeight.w700,
                     letterSpacing: -0.4,
                   ),
@@ -1788,6 +1801,7 @@ class _SectionCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final LayoutSpec layoutSpec = LayoutSpec.of(context);
     return Card(
       key: cardKey ?? ValueKey<String>('section_card_$title'),
       child: Padding(
@@ -1802,7 +1816,7 @@ class _SectionCard extends StatelessWidget {
                   child: Text(
                     title,
                     style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                          fontSize: 18,
+                          fontSize: layoutSpec.titleText,
                           letterSpacing: -0.3,
                         ),
                   ),
@@ -2023,6 +2037,7 @@ class _ProfileTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final LayoutSpec layoutSpec = LayoutSpec.of(context);
     final TextTheme textTheme = Theme.of(context).textTheme;
     return InkWell(
       key: tileKey,
@@ -2070,7 +2085,7 @@ class _ProfileTile extends StatelessWidget {
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                           style: textTheme.titleLarge?.copyWith(
-                            fontSize: 18,
+                            fontSize: layoutSpec.titleText,
                             letterSpacing: -0.2,
                             color: const Color(0xFF0F172A),
                           ),
@@ -2091,7 +2106,7 @@ class _ProfileTile extends StatelessWidget {
                           child: Text(
                             currentLabel,
                             style: textTheme.bodySmall?.copyWith(
-                              fontSize: 11,
+                              fontSize: layoutSpec.microText,
                               fontWeight: FontWeight.w700,
                               color: const Color(0xFF163D7A),
                             ),
@@ -2105,7 +2120,7 @@ class _ProfileTile extends StatelessWidget {
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: textTheme.bodyMedium?.copyWith(
-                      fontSize: 14,
+                      fontSize: layoutSpec.scaleText(14),
                       color: const Color(0xFF475569),
                     ),
                   ),
@@ -2471,6 +2486,7 @@ class _StatCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final LayoutSpec layoutSpec = LayoutSpec.of(context);
     return Container(
       padding: const EdgeInsets.all(18),
       decoration: BoxDecoration(
@@ -2483,10 +2499,10 @@ class _StatCard extends StatelessWidget {
         children: [
           Text(
             value,
-            style: const TextStyle(
-              fontSize: 28,
+            style: TextStyle(
+              fontSize: layoutSpec.scaleText(28),
               fontWeight: FontWeight.w700,
-              color: Color(0xFF163D7A),
+              color: const Color(0xFF163D7A),
             ),
           ),
           const SizedBox(height: 8),
@@ -2830,6 +2846,7 @@ class _QuestionPackTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final LayoutSpec layoutSpec = LayoutSpec.of(context);
     return Container(
       padding: const EdgeInsets.all(18),
       decoration: BoxDecoration(
@@ -2842,19 +2859,19 @@ class _QuestionPackTile extends StatelessWidget {
         children: [
           Text(
             displayTopicCode(pack.topicCode, strings),
-            style: const TextStyle(
-              fontSize: 18,
+            style: TextStyle(
+              fontSize: layoutSpec.titleText,
               fontWeight: FontWeight.w700,
-              color: Color(0xFF0F172A),
+              color: const Color(0xFF0F172A),
             ),
           ),
           const SizedBox(height: 6),
           Text(
             '${_displayLevelStage(pack.levelStage, strings)} · ${_displayTier(pack.challengeTier, strings)}',
-            style: const TextStyle(
-              fontSize: 14,
+            style: TextStyle(
+              fontSize: layoutSpec.scaleText(14),
               fontWeight: FontWeight.w600,
-              color: Color(0xFF475569),
+              color: const Color(0xFF475569),
             ),
           ),
           const SizedBox(height: 12),
@@ -2953,6 +2970,7 @@ class _PracticeSessionPageState extends State<PracticeSessionPage> {
 
   @override
   Widget build(BuildContext context) {
+    final LayoutSpec layoutSpec = LayoutSpec.of(context);
     final AppStrings strings = AppStrings.of(context);
     return Scaffold(
       appBar: AppBar(
@@ -2976,11 +2994,14 @@ class _PracticeSessionPageState extends State<PracticeSessionPage> {
 
           final List<Question> questions = snapshot.data!.questions;
           final Question question = questions[_currentIndex % questions.length];
+          final LayoutSpec layout = LayoutSpec.of(context);
           return ListView(
             controller: _scrollController,
-            padding: const EdgeInsets.fromLTRB(20, 16, 20, 28),
+            padding: EdgeInsets.only(
+                top: layout.sectionGap, bottom: layout.sectionGap * 1.75),
             children: [
-              Column(
+              ContentColumn(
+                  child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
@@ -3002,7 +3023,7 @@ class _PracticeSessionPageState extends State<PracticeSessionPage> {
                             style: Theme.of(context)
                                 .textTheme
                                 .headlineSmall
-                                ?.copyWith(fontSize: 18),
+                                ?.copyWith(fontSize: layoutSpec.titleText),
                           ),
                         ),
                         Container(
@@ -3078,6 +3099,7 @@ class _PracticeSessionPageState extends State<PracticeSessionPage> {
                     ),
                   ),
                 ],
+              ),
               ),
             ],
           );
@@ -3438,8 +3460,10 @@ class PracticeSummaryPage extends StatelessWidget {
         backgroundColor: Colors.white,
       ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(24),
-        child: Column(
+        padding: EdgeInsets.symmetric(
+            vertical: LayoutSpec.of(context).sectionGap),
+        child: ContentColumn(
+            child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             _SectionCard(
@@ -3460,6 +3484,7 @@ class PracticeSummaryPage extends StatelessWidget {
           ],
         ),
       ),
+        ),
     );
   }
 }
@@ -3576,6 +3601,7 @@ class _QuizSessionPageState extends State<QuizSessionPage> {
 
   @override
   Widget build(BuildContext context) {
+    final LayoutSpec layoutSpec = LayoutSpec.of(context);
     final AppStrings strings = AppStrings.of(context);
     return Scaffold(
       appBar: AppBar(
@@ -3596,9 +3622,12 @@ class _QuizSessionPageState extends State<QuizSessionPage> {
               FormalExamScoring.allocate(questions);
           final Question question = questions[_currentIndex];
           final String? selectedAnswer = _answers[question.id];
+          final LayoutSpec layout = LayoutSpec.of(context);
           return SingleChildScrollView(
-            padding: const EdgeInsets.fromLTRB(20, 16, 20, 28),
-            child: Column(
+            padding: EdgeInsets.only(
+                top: layout.sectionGap, bottom: layout.sectionGap * 1.75),
+            child: ContentColumn(
+                child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
@@ -3624,7 +3653,7 @@ class _QuizSessionPageState extends State<QuizSessionPage> {
                           style: Theme.of(context)
                               .textTheme
                               .headlineSmall
-                              ?.copyWith(fontSize: 18),
+                              ?.copyWith(fontSize: layoutSpec.titleText),
                         ),
                       ),
                       Container(
@@ -3751,6 +3780,7 @@ class _QuizSessionPageState extends State<QuizSessionPage> {
                   ],
                 ),
               ],
+            ),
             ),
           );
         },
@@ -4138,8 +4168,10 @@ class QuizResultPage extends StatelessWidget {
         backgroundColor: Colors.white,
       ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(24),
-        child: Column(
+        padding: EdgeInsets.symmetric(
+            vertical: LayoutSpec.of(context).sectionGap),
+        child: ContentColumn(
+            child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             _SectionCard(
@@ -4229,6 +4261,7 @@ class QuizResultPage extends StatelessWidget {
           ],
         ),
       ),
+        ),
     );
   }
 }
@@ -4272,6 +4305,7 @@ class _InfoPill extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final LayoutSpec layoutSpec = LayoutSpec.of(context);
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
       decoration: BoxDecoration(
@@ -4281,10 +4315,10 @@ class _InfoPill extends StatelessWidget {
       ),
       child: Text(
         label,
-        style: const TextStyle(
+        style: TextStyle(
           fontWeight: FontWeight.w600,
-          color: Color(0xFF4B5563),
-          fontSize: 13,
+          color: const Color(0xFF4B5563),
+          fontSize: layoutSpec.captionText,
         ),
       ),
     );
@@ -4340,13 +4374,13 @@ class _QuestionPromptText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bool denseScript = _isDenseScriptLocale(localeCode);
-    final double width = MediaQuery.sizeOf(context).width;
-    final double fontSize = width >= 900 ? 20 : 18;
+    // 題幹用 promptText（18 / 21 / 22）。選項走 bodyText（15 / 17 / 18），
+    // 三級都比題幹小，維持「選項略小於題幹」的關係。
     return _emphasisText(
       text,
       emphasisWeight: FontWeight.w800,
       style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-            fontSize: fontSize,
+            fontSize: LayoutSpec.of(context).promptText,
             height: denseScript ? 1.65 : 1.5,
             fontWeight: FontWeight.w600,
             color: const Color(0xFF111827),
@@ -4366,12 +4400,13 @@ class _QuestionBodyText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final LayoutSpec layoutSpec = LayoutSpec.of(context);
     final bool denseScript = _isDenseScriptLocale(localeCode);
     return _emphasisText(
       text,
       emphasisWeight: FontWeight.w700,
       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-            fontSize: 15,
+            fontSize: layoutSpec.bodyText,
             height: denseScript ? 1.7 : 1.55,
             fontWeight: FontWeight.w400,
             color: const Color(0xFF374151),
@@ -4389,10 +4424,11 @@ class _QuestionSourceText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final LayoutSpec layoutSpec = LayoutSpec.of(context);
     return Text(
       'Source: $text',
       style: Theme.of(context).textTheme.bodySmall?.copyWith(
-            fontSize: 12,
+            fontSize: layoutSpec.scaleText(12),
             height: 1.5,
             color: const Color(0xFF6B7280),
             fontWeight: FontWeight.w500,
@@ -4413,13 +4449,14 @@ class _QuestionOptionText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final LayoutSpec layoutSpec = LayoutSpec.of(context);
     final bool denseScript = _isDenseScriptLocale(localeCode);
     return _emphasisText(
       text,
       textAlign: TextAlign.left,
       emphasisWeight: FontWeight.w700,
       style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-            fontSize: 15,
+            fontSize: layoutSpec.bodyText,
             height: denseScript ? 1.6 : 1.45,
             fontWeight: FontWeight.w400,
             color: const Color(0xFF111827),
@@ -5119,7 +5156,8 @@ class TrigGraphDemoPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final AppStrings strings = AppStrings.of(context);
-    final bool wide = MediaQuery.sizeOf(context).width >= 980;
+    final bool wide =
+        LayoutSpec.of(context).widthClass == WidthClass.expanded;
 
     return Scaffold(
       appBar: AppBar(

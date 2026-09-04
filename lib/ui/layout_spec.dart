@@ -130,6 +130,25 @@ class LayoutSpec {
   static LayoutSpec of(BuildContext context) =>
       LayoutSpec.forWidth(MediaQuery.sizeOf(context).width);
 
+  /// 六個語意代號涵蓋不到的零散字級用這個縮放。
+  ///
+  /// 為什麼需要它：既有程式裡有 40 處直接寫死的 `fontSize`，數值有 13 種
+  /// （11、12、13、14、15、18、19、20、22、24、28、32、34）。硬要把它們全部
+  /// 塞進六個代號，會讓 compact 的呈現跟著變（例如 20 被歸成 titleText 就變成 18），
+  /// 而「iPhone 一個像素都不變」是這次改造的前提。
+  ///
+  /// 所以：**能對上代號的用代號，對不上的用這個函式**。
+  /// compact 原樣回傳，medium / expanded 依固定比例放大後取整數點數。
+  double scaleText(double compactSize) {
+    if (widthClass == WidthClass.compact) return compactSize;
+    final double medium = (compactSize * 1.15).roundToDouble();
+    if (widthClass == WidthClass.medium) return medium;
+    // 小字級四捨五入後兩級會相同（11 × 1.15 與 11 × 1.22 都進位到 13），
+    // 所以 expanded 至少比 medium 大 1，維持嚴格遞增。
+    final double expanded = (compactSize * 1.22).roundToDouble();
+    return expanded > medium ? expanded : medium + 1;
+  }
+
   /// 把這一級的字級套進既有的 [base]，其餘視覺屬性（字重、行高、顏色）保持不動。
   TextTheme textThemeFrom(TextTheme base) {
     return base.copyWith(
