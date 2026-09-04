@@ -195,6 +195,20 @@ void _fillTests() {
     expect(long, short, reason: '短文字 $short 與長文字 $long 應該一樣高');
   });
 
+  testWidgets('compact 也一樣撐滿：iPhone 上換題同樣不會忽大忽小',
+      (WidgetTester tester) async {
+    // fill 模式刻意不分寬度級別。iPhone 螢幕短，多數題目本來就接近滿版，
+    // 但短題目在長螢幕（例如 Pro Max）上仍會有落差，一樣需要穩定。
+    await pump(tester, const Size(390, 844), 100);
+    final double short =
+        tester.getSize(find.byKey(const ValueKey<String>('card'))).height;
+    await pump(tester, const Size(390, 844), 300);
+    final double long =
+        tester.getSize(find.byKey(const ValueKey<String>('card'))).height;
+    expect(short, long);
+    expect(short, greaterThan(600), reason: '應撐滿而非自然高度，實際 $short');
+  });
+
   testWidgets('內容超過視窗時仍可捲動，不會被硬壓在一頁裡',
       (WidgetTester tester) async {
     await pump(tester, const Size(820, 600), 2000);
