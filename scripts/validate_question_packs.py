@@ -324,6 +324,55 @@ def check_figure_params(figure):
     return errs
 
 
+def _normalize_math_punct(text):
+    """把答案裡的全形／Unicode 標點換成半形，座標才比對得起來。
+
+    詳解與答案混用 U+2212 減號、全形括號與逗號，逐字比對會漏掉。
+    """
+    for a, b in (('−', '-'), ('－', '-'), ('（', '('),
+                 ('）', ')'), ('，', ','), ('　', ' ')):
+        text = text.replace(a, b)
+    return text
+
+
+def check_figure_leaks(q):
+    """回傳「圖把答案畫出來」的錯誤訊息清單；合格時回傳空清單。
+
+    圖是拿來說明題目前提的，不是拿來公布答案的。實際踩過兩種：
+
+    1. 問「終點在起點的哪個方向」，卻在圖上標出終點——等於把方向畫出來。
+    2. 問「求某點的坐標」，卻把那個點畫在答案的位置（甚至還標成紅色）。
+       整題變成「把圖上的點讀出來」，代數完全被跳過。
+
+    題目自己給的點不算洩題：座標若同時出現在題幹裡，那是前提不是答案。
+    """
+    fig = q.get('figure') or {}
+    if fig.get('kind') != 'coordinate_plane':
+        return []
+    points = (fig.get('params') or {}).get('points') or []
+    prompt = _normalize_math_punct(q.get('prompt', {}).get('zh-Hant', ''))
+    answer = _normalize_math_punct(q.get('answer', {}).get('zh-Hant', ''))
+    errs = []
+
+    labels = [pt.get('label', '') for pt in points]
+    if any(l in ('終點', '终点') for l in labels) and '方向' in prompt:
+        errs.append('圖上標出終點，等於把「在起點的哪個方向」的答案畫出來')
+
+    for pt in points:
+        if not isinstance(pt, dict):
+            continue
+        x, y = pt.get('x'), pt.get('y')
+        if x is None or y is None:
+            continue
+        # 兩種寫法都要比：(6,4) 與 (6, 4)
+        forms = ['(%s,%s)' % (x, y), '(%s, %s)' % (x, y)]
+        if any(f in answer for f in forms) and not any(f in prompt for f in forms):
+            errs.append('圖上把點 %s畫在 (%s, %s)，而答案就是這個座標——'
+                        '整題變成把圖上的點讀出來'
+                        % (('%s ' % pt['label']) if pt.get('label') else '', x, y))
+    return errs
+
+
 def allowed_topics(level_stage):
     n = level_stage.replace('grade', '')
     return TOPICS_UPPER if n.isdigit() and int(n) >= 7 else TOPICS
@@ -460,14 +509,9 @@ def main():
                 if _cjk(step):
                     err('solutionSteps 的 en 含中日文字（未翻譯）')
                     break
-            # 圖不得洩題：問「在起點的哪個方向」卻在圖上標出終點，等於把答案畫出來
-            fig = q.get('figure') or {}
-            if fig.get('kind') == 'coordinate_plane':
-                labels = [pt.get('label', '')
-                          for pt in fig.get('params', {}).get('points', [])]
-                if (any(l in ('終點', '终点') for l in labels)
-                        and '方向' in q.get('prompt', {}).get('zh-Hant', '')):
-                    err('圖上標出終點，等於把「在起點的哪個方向」的答案畫出來')
+            # 圖不得洩題：圖是說明前提用的，不是拿來公布答案的
+            for msg in check_figure_leaks(q):
+                err(msg)
             for fld in ('prompt', 'answer'):
                 if not all(l in q.get(fld, {}) and q[fld][l].strip() for l in LANGS):
                     err('%s 四語系不齊全' % fld)

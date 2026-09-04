@@ -602,6 +602,89 @@ class CircleQuadrantsParamsTest(unittest.TestCase):
         self.assertIn('centre', msgs[0])
 
 
+class CheckFigureLeaksTest(unittest.TestCase):
+    """圖不得把答案畫出來。
+
+    驗證器本來只擋一種情形（問「在起點的哪個方向」卻把終點標在圖上）。
+    2026-09-04 掃全部 coordinate_plane 題時發現同一族還有兩題：
+    問「求點 C 的坐標」，圖上就把 C 畫在答案的位置還標紅；
+    問「A 平移後到了哪一點」，圖上就把 A' 畫在答案的位置。
+    """
+
+    def _q(self, prompt, answer, points, **params):
+        params.setdefault('maxX', 10)
+        params.setdefault('maxY', 10)
+        params['points'] = points
+        return {
+            'prompt': {'zh-Hant': prompt},
+            'answer': {'zh-Hant': answer},
+            'figure': {'type': 'custom', 'kind': 'coordinate_plane', 'params': params},
+        }
+
+    def test_clean_question_reports_nothing(self):
+        q = self._q('點 A 在 (2,3)，向右移 4 格後到了哪一點？', '答案是 (6,3)。',
+                    [{'x': 2, 'y': 3, 'label': 'A'}])
+        self.assertEqual(vqp.check_figure_leaks(q), [])
+
+    def test_point_plotted_at_the_answer_coordinate_is_reported(self):
+        q = self._q('點 A 在 (2,3)。向右移 4 格、向上移 1 格後，A 到了哪一點？',
+                    '答案是 (6,4)。',
+                    [{'x': 2, 'y': 3, 'label': 'A'}, {'x': 6, 'y': 4, 'label': "A'"}])
+        msgs = vqp.check_figure_leaks(q)
+        self.assertEqual(len(msgs), 1)
+        self.assertIn('(6, 4)', msgs[0])
+
+    def test_matches_the_answer_even_with_a_space_after_the_comma(self):
+        q = self._q('求點 C 的坐標。', '答案是 (6, 9) 或 (6, -9)。',
+                    [{'x': 6, 'y': 9, 'label': 'C'}])
+        self.assertEqual(len(vqp.check_figure_leaks(q)), 1)
+
+    def test_matches_the_answer_written_with_a_unicode_minus(self):
+        q = self._q('求點 C 的坐標。', '答案是 (6, \u22129)。',
+                    [{'x': 6, 'y': -9, 'label': 'C'}], minY=-10)
+        self.assertEqual(len(vqp.check_figure_leaks(q)), 1)
+
+    def test_a_point_given_in_the_prompt_is_not_a_leak(self):
+        """題目自己給的點當然可以畫，即使答案又把它抄一遍。"""
+        q = self._q('點 A 在 (2,3)，它在第幾象限？答案請寫出該點座標所在的象限。',
+                    '答案是第一象限，因為 (2,3) 的兩個座標都是正的。',
+                    [{'x': 2, 'y': 3, 'label': 'A'}])
+        self.assertEqual(vqp.check_figure_leaks(q), [])
+
+    def test_still_catches_the_original_endpoint_direction_leak(self):
+        q = {
+            'prompt': {'zh-Hant': '小明從起點出發，終點在起點的哪個方向？'},
+            'answer': {'zh-Hant': '答案是東北方。'},
+            'figure': {'type': 'custom', 'kind': 'coordinate_plane', 'params': {
+                'maxX': 6, 'maxY': 6,
+                'points': [{'x': 1, 'y': 1, 'label': '起點'},
+                           {'x': 4, 'y': 4, 'label': '終點'}]}},
+        }
+        msgs = vqp.check_figure_leaks(q)
+        self.assertEqual(len(msgs), 1)
+        self.assertIn('終點', msgs[0])
+
+    def test_non_coordinate_figures_are_ignored(self):
+        q = {'prompt': {'zh-Hant': '求面積。'}, 'answer': {'zh-Hant': '答案是 (6, 4)。'},
+             'figure': {'type': 'custom', 'kind': 'none', 'params': {}}}
+        self.assertEqual(vqp.check_figure_leaks(q), [])
+
+
+class FigureLeaksOnRealPacksTest(unittest.TestCase):
+    """整合測試：真實題庫沒有任何一張圖把答案畫出來。"""
+
+    def test_no_real_figure_gives_the_answer_away(self):
+        import glob
+        offenders = []
+        for path in sorted(glob.glob('assets/questions/*/*.json')):
+            with open(path) as fh:
+                pack = json.load(fh)
+            for q in pack['questions']:
+                offenders.extend('%s: %s' % (q['id'], e)
+                                 for e in vqp.check_figure_leaks(q))
+        self.assertEqual(offenders, [], '\n'.join(offenders))
+
+
 class FigureParamsOnRealPacksTest(unittest.TestCase):
     """整合測試：真實題庫每一張圖的 params 都要符合 renderer 讀得懂的形狀。"""
 
