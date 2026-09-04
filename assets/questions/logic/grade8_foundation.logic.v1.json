@@ -4282,6 +4282,159 @@
         "reference": "logic-grade8-foundation",
         "notes": "題型參考 UCLA Tom Ferguson 的 Game Theory 講義與 Brilliant「Combinatorial Games - Winning Positions」頁上的格盤移動遊戲（把 Nim 的必敗態改寫成座標奇偶）。全庫最接近的是 logic_grade11_044（棋子往上或往右移任意格數，先到右上角者勝），那題每次可以移動任意格數，必敗態是「兩個座標相等」的兩堆 Nim；本題每次只能移一格但多了斜走，必敗態變成「兩個座標同時為偶數」的四色奇偶結構，推理核心不同。combinatorics_grade7_032（2×2 方格含斜走的走法數）是路徑計數，不是博弈。"
       }
+    },
+    {
+      "id": "logic_grade8_foundation_049",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "largest_project_team_lower_bound",
+      "tags": [
+        "c:inclusion_exclusion",
+        "c:basic_counting",
+        "m:pigeonhole",
+        "m:construction"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade8",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "某公司有 45 位員工，每個人都至少負責甲、乙、丙這三個專案之中的一個。已知恰好負責兩個專案的有 12 人，三個專案都負責的有 5 人。在所有符合這些條件的情況裡，「負責人數最多的那個專案」的人數最少可能是多少？",
+        "zh-Hans": "某公司有 45 位员工，每个人都至少负责甲、乙、丙这三个专案之中的一个。已知恰好负责两个专案的有 12 人，三个专案都负责的有 5 人。在所有符合这些条件的情况里，「负责人数最多的那个专案」的人数最少可能是多少？",
+        "en": "A company has 45 employees, and each of them works on at least one of the three projects A, B and C. Exactly 12 employees work on exactly two of the projects, and 5 work on all three. Over every situation meeting these conditions, what is the smallest possible size of the largest project team?",
+        "ja": "ある会社には 45 人の社員がいて、全員が甲・乙・丙の 3 つのプロジェクトのうち少なくとも 1 つを担当しています。ちょうど 2 つを担当する人は 12 人、3 つとも担当する人は 5 人です。この条件を満たすすべての場合の中で、「担当者が最も多いプロジェクト」の人数として最小のものはいくつですか。"
+      },
+      "answer": {
+        "zh-Hant": "負責人數最多的那個專案最少會有 23 人。",
+        "zh-Hans": "负责人数最多的那个专案最少会有 23 人。",
+        "en": "The largest project team must have at least 23 people.",
+        "ja": "担当者が最も多いプロジェクトでも少なくとも 23 人になります。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "只負責一個專案的人數是 45 − 12 − 5 = 28 人。",
+          "把三個專案的人數加起來時，一個人負責幾個專案就會被算幾次，所以總和是 28 × 1 + 12 × 2 + 5 × 3 = 28 + 24 + 15 = 67。",
+          "如果三個專案的人數都不超過 22 人，總和最多只有 22 × 3 = 66，比 67 小，這不可能。所以一定有一個專案至少 23 人。",
+          "23 人也真的達得到：讓三種「恰好兩個專案」的組合各 4 人（合計 12 人），再把只負責一個專案的 28 人分成 10、9、9 人，三個專案的人數就是 23、22、22。",
+          "因此負責人數最多的專案最少是 23 人。"
+        ],
+        "zh-Hans": [
+          "只负责一个专案的人数是 45 − 12 − 5 = 28 人。",
+          "把三个专案的人数加起来时，一个人负责几个专案就会被算几次，所以总和是 28 × 1 + 12 × 2 + 5 × 3 = 28 + 24 + 15 = 67。",
+          "如果三个专案的人数都不超过 22 人，总和最多只有 22 × 3 = 66，比 67 小，这不可能。所以一定有一个专案至少 23 人。",
+          "23 人也真的达得到：让三种「恰好两个专案」的组合各 4 人（合计 12 人），再把只负责一个专案的 28 人分成 10、9、9 人，三个专案的人数就是 23、22、22。",
+          "因此负责人数最多的专案最少是 23 人。"
+        ],
+        "en": [
+          "The number of employees on exactly one project is 45 - 12 - 5 = 28.",
+          "When the three team sizes are added, each employee is counted once for every project he works on, so the total is 28 x 1 + 12 x 2 + 5 x 3 = 28 + 24 + 15 = 67.",
+          "If every team had at most 22 people the total would be at most 22 x 3 = 66, which is less than 67 and therefore impossible. So some team has at least 23 people.",
+          "The value 23 is actually attained: give each of the three two-project combinations 4 employees (12 in all) and split the 28 single-project employees into 10, 9 and 9. The team sizes become 23, 22 and 22.",
+          "Hence the largest team has at least 23 people, and 23 is the smallest possible value."
+        ],
+        "ja": [
+          "1 つだけを担当する人は 45 − 12 − 5 = 28 人です。",
+          "3 つのプロジェクトの人数を足すと、1 人が担当する数だけ重ねて数えられるので、合計は 28 × 1 + 12 × 2 + 5 × 3 = 28 + 24 + 15 = 67 です。",
+          "もしどのプロジェクトも 22 人以下なら合計は最大でも 22 × 3 = 66 となり 67 に届かず矛盾します。よってどこかは少なくとも 23 人です。",
+          "23 人は実際に達成できます。2 つを担当する 3 通りの組み合わせをそれぞれ 4 人（計 12 人）とし、1 つだけの 28 人を 10 人、9 人、9 人に分ければ、各プロジェクトは 23 人、22 人、22 人になります。",
+          "したがって担当者が最も多いプロジェクトは少なくとも 23 人で、その最小値が 23 人です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "23"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade8-foundation",
+        "notes": "題型取自各國競賽常見的『先用重複計數算出人次總和，再用平均值（鴿籠原理）逼出最大者的下界』組合題（AoPS 論壇的 counting in two ways / averaging 討論串）。既有三集合題 logic_grade6_foundation_033、combinatorics_grade9_foundation_010 是給七個區域的數字求某一區；combinatorics_grade11_foundation_046 求恰好兩類的人數；logic_grade8_foundation_014、logic_grade4_foundation_043 是兩集合重疊的上下界。本題不問任何一個區域，而是先算人次總和 67 再逼出最大專案的下界，還要補一個達成 23 的實例，推理核心與上述各題都不同。"
+      }
+    },
+    {
+      "id": "logic_grade8_foundation_050",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "subtract_multiple_pair_game_seven_twentyfive",
+      "tags": [
+        "c:game_theory",
+        "c:factor_multiple",
+        "m:reverse"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade8",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "黑板上寫著兩個正整數 7 和 25。甲、乙兩人輪流動手，由甲先動：輪到的人要把比較大的那個數減去比較小那個數的某個正整數倍，結果不可以是負數，再把新的一對數寫回黑板（例如面對 7 和 25，可以把 25 改成 18、11 或 4）。誰先寫出 0，對手就再也無法動手，於是寫出 0 的人獲勝。已知甲的必勝第一步只有一種，求他第一步要把 25 減去多少。",
+        "zh-Hans": "黑板上写着两个正整数 7 和 25。甲、乙两人轮流动手，由甲先动：轮到的人要把比较大的那个数减去比较小那个数的某个正整数倍，结果不可以是负数，再把新的一对数写回黑板（例如面对 7 和 25，可以把 25 改成 18、11 或 4）。谁先写出 0，对手就再也无法动手，于是写出 0 的人获胜。已知甲的必胜第一步只有一种，求他第一步要把 25 减去多少。",
+        "en": "The numbers 7 and 25 are written on a board. Two players move alternately, the first player starting: a move replaces the larger number by that number minus a positive multiple of the smaller one, and the result may not be negative (from 7 and 25 one may write 18, 11 or 4 in place of 25). The player who first writes 0 leaves the opponent with no move and wins. The first player has exactly one winning opening move; how much must he subtract from 25?",
+        "ja": "黒板に 7 と 25 という 2 つの正の整数が書かれています。甲と乙が交互に操作し、甲が先手です。手番の人は大きい方の数から小さい方の数の正の整数倍を引き（結果は負にできません）、新しい 2 数を書き直します（7 と 25 なら 25 を 18、11、4 のいずれかに変えられます）。先に 0 を書いた人は相手が手を指せなくなるので勝ちです。甲の必勝の初手は 1 通りしかありません。甲は 25 からいくつ引けばよいですか。"
+      },
+      "answer": {
+        "zh-Hant": "甲第一步要把 25 減去 14。",
+        "zh-Hans": "甲第一步要把 25 减去 14。",
+        "en": "The first player must subtract 14 from 25.",
+        "ja": "甲は 25 から 14 を引けばよいです。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "先確認勝負規則：只要有一個數變成 0，對手就動不了，所以「能把某個數變成 0」的人就贏。也就是說，只要輪到你時大數是小數的倍數，你就贏了。",
+          "從小的局面逆推。面對 3 和 1：3 是 1 的倍數，可以直接減成 0，所以「3 和 1」是必勝局面。面對 3 和 4：唯一的走法是 4 − 3 = 1，只能交出「3 和 1」這個必勝局面給對手，所以「3 和 4」是必敗局面。",
+          "再往上一層。面對 7 和 4：唯一的走法是 7 − 4 = 3，交出的是必敗局面「3 和 4」，所以「7 和 4」是必勝局面。面對 7 和 11：唯一的走法是 11 − 7 = 4，交出的是必勝局面「7 和 4」，所以「7 和 11」是必敗局面。",
+          "回到 7 和 25，甲有三種走法，分別留下「7 和 18」、「7 和 11」、「7 和 4」。其中「7 和 18」可以再減成「7 和 11」，是必勝局面；「7 和 4」也是必勝局面；只有「7 和 11」是必敗局面。",
+          "所以甲只能把 25 改成 11，也就是減去 7 的 2 倍。25 − 11 = 14，甲第一步要減去 14。"
+        ],
+        "zh-Hans": [
+          "先确认胜负规则：只要有一个数变成 0，对手就动不了，所以「能把某个数变成 0」的人就赢。也就是说，只要轮到你时大数是小数的倍数，你就赢了。",
+          "从小的局面逆推。面对 3 和 1：3 是 1 的倍数，可以直接减成 0，所以「3 和 1」是必胜局面。面对 3 和 4：唯一的走法是 4 − 3 = 1，只能交出「3 和 1」这个必胜局面给对手，所以「3 和 4」是必败局面。",
+          "再往上一层。面对 7 和 4：唯一的走法是 7 − 4 = 3，交出的是必败局面「3 和 4」，所以「7 和 4」是必胜局面。面对 7 和 11：唯一的走法是 11 − 7 = 4，交出的是必胜局面「7 和 4」，所以「7 和 11」是必败局面。",
+          "回到 7 和 25，甲有三种走法，分别留下「7 和 18」、「7 和 11」、「7 和 4」。其中「7 和 18」可以再减成「7 和 11」，是必胜局面；「7 和 4」也是必胜局面；只有「7 和 11」是必败局面。",
+          "所以甲只能把 25 改成 11，也就是减去 7 的 2 倍。25 − 11 = 14，甲第一步要减去 14。"
+        ],
+        "en": [
+          "First note how the game ends: once a number becomes 0 the opponent cannot move, so whoever can make a number 0 wins. In other words, if on your turn the larger number is a multiple of the smaller one, you win.",
+          "Work backwards from small positions. From 3 and 1 you may subtract 3 times 1 and write 0, so 3 and 1 is a winning position. From 3 and 4 the only move is 4 - 3 = 1, which hands the opponent the winning position 3 and 1, so 3 and 4 is a losing position.",
+          "Go one level up. From 7 and 4 the only move is 7 - 4 = 3, handing over the losing position 3 and 4, so 7 and 4 is winning. From 7 and 11 the only move is 11 - 7 = 4, handing over the winning position 7 and 4, so 7 and 11 is losing.",
+          "Back at 7 and 25 the first player has three moves, leaving 7 and 18, 7 and 11, or 7 and 4. From 7 and 18 one can move to 7 and 11, so it is winning; 7 and 4 is winning as well; only 7 and 11 is losing.",
+          "So the first player must turn 25 into 11, subtracting 2 times 7. Since 25 - 11 = 14, he subtracts 14."
+        ],
+        "ja": [
+          "まず勝敗の仕組みを確認します。どちらかの数が 0 になると相手は手を指せないので、数を 0 にできる人が勝ちです。つまり自分の手番で大きい数が小さい数の倍数なら勝ちです。",
+          "小さい局面から逆にたどります。3 と 1 では 3 から 1 の 3 倍を引いて 0 にできるので勝ち局面です。3 と 4 では唯一の手が 4 − 3 = 1 で、勝ち局面「3 と 1」を相手に渡すので負け局面です。",
+          "1 つ上に進みます。7 と 4 では唯一の手が 7 − 4 = 3 で、負け局面「3 と 4」を渡すので勝ち局面です。7 と 11 では唯一の手が 11 − 7 = 4 で、勝ち局面「7 と 4」を渡すので負け局面です。",
+          "7 と 25 に戻ると、手は「7 と 18」「7 と 11」「7 と 4」の 3 通りです。「7 と 18」はさらに「7 と 11」にできるので勝ち局面、「7 と 4」も勝ち局面で、負け局面は「7 と 11」だけです。",
+          "したがって甲は 25 を 11 に変えるしかなく、これは 7 の 2 倍を引くことです。25 − 11 = 14 なので、引く数は 14 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "14"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade8-foundation",
+        "notes": "題型取自 Euclid's Game（Cole 與 Davie 1969；Berkeley Math Circle 2012 講義與 cut-the-knot 都有完整規則），本題取小數對 (7, 25) 讓逆推鏈短到國中可算。既有 logic_grade11_foundation_045 是單一個數 N 減去它的因數，只有一個數在變；本題是一對數，走法由輾轉相減決定，必敗鏈完全不同。既有取石子類（grade8_044、grade11_001）靠餘數週期，本題沒有週期可用，只能逐層逆推。"
+      }
     }
   ]
 }

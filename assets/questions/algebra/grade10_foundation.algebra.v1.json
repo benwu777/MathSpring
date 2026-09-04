@@ -5182,6 +5182,491 @@
         "reference": "stats-grade10-two-point-data-variance",
         "notes": "題型骨架取自統計教材「二點分布（Bernoulli / two-point distribution）」的變異數 p(1−p)(b−a)² 討論（GeeksforGeeks、statproofbook 的 Bernoulli variance 條目，以及 cuemath 的 two-point distribution 說明），改寫成「先由平均反推兩種評分各幾人、再算變異數」的逆推題。全庫 c:stdev 共 14 題已逐題查過：algebra_grade11_043（4、6、8、10、12 直接代定義）、algebra_grade9_049（由平均與變異數反推遺失值）、algebra_grade8_058（由平均標準差求平方和）、algebra_grade11_061（改一個數）、logic_grade10_046 與 algebra_grade12_058（兩組合併）。本題的推理點是「資料只有兩種取值」這個結構：必須先解一次方程反推出兩群人數，才可能算變異數；沒有任何既有題把資料限制成雙值，也沒有既有題用平均去反推次數分配。"
       }
+    },
+    {
+      "id": "algebra_grade10_foundation_058",
+      "reviewStatus": "ok",
+      "topic": "algebra",
+      "subtopic": "quadratic_both_roots_above_one_parameter",
+      "tags": [
+        "c:inequality",
+        "c:quadratic",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "已知關於 x 的二次方程式 x² − 2kx + k + 6 = 0 在實數範圍內有解，而且它的每一個實數解都比 1 大。若 k 是整數，求所有符合條件的 k 之和。",
+        "zh-Hans": "已知关于 x 的二次方程式 x² − 2kx + k + 6 = 0 在实数范围内有解，而且它的每一个实数解都比 1 大。若 k 是整数，求所有符合条件的 k 之和。",
+        "en": "The quadratic equation x² − 2kx + k + 6 = 0 has at least one real solution, and every real solution of it is greater than 1. Given that k is an integer, find the sum of all such k.",
+        "ja": "x についての二次方程式 x² − 2kx + k + 6 = 0 が実数の範囲で解をもち、しかもその実数解はどれも 1 より大きいとする。k が整数であるとき、条件を満たす k の総和を求めよ。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 18。",
+        "zh-Hans": "答案是 18。",
+        "en": "The answer is 18.",
+        "ja": "答えは 18 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "在實數範圍內有解，所以判別式必須非負：(2k)² − 4(k + 6) ≥ 0。化簡得 k² − k − 6 ≥ 0，即 (k − 3)(k + 2) ≥ 0，所以 k ≥ 3 或 k ≤ −2。",
+          "設 f(x) = x² − 2kx + k + 6，開口向上，對稱軸是 x = k。兩根都大於 1，代表兩根的中點也大於 1，所以 k > 1。",
+          "開口向上而且兩根都在 1 的右邊，圖形在 x = 1 處必定在 x 軸上方，所以 f(1) > 0。f(1) = 1 − 2k + k + 6 = 7 − k，得 k < 7。",
+          "三個條件一起看：k ≥ 3 且 k > 1 且 k < 7，整數 k 只能是 3、4、5、6。檢查邊界：k = 7 時方程式是 x² − 14x + 13 = 0，根是 1 與 13，其中 1 並沒有大於 1，正好被第三個條件擋下。",
+          "把符合的 k 相加：3 + 4 + 5 + 6 = 18。"
+        ],
+        "zh-Hans": [
+          "在实数范围内有解，所以判别式必须非负：(2k)² − 4(k + 6) ≥ 0。化简得 k² − k − 6 ≥ 0，即 (k − 3)(k + 2) ≥ 0，所以 k ≥ 3 或 k ≤ −2。",
+          "设 f(x) = x² − 2kx + k + 6，开口向上，对称轴是 x = k。两根都大于 1，代表两根的中点也大于 1，所以 k > 1。",
+          "开口向上而且两根都在 1 的右边，图形在 x = 1 处必定在 x 轴上方，所以 f(1) > 0。f(1) = 1 − 2k + k + 6 = 7 − k，得 k < 7。",
+          "三个条件一起看：k ≥ 3 且 k > 1 且 k < 7，整数 k 只能是 3、4、5、6。检查边界：k = 7 时方程式是 x² − 14x + 13 = 0，根是 1 与 13，其中 1 并没有大于 1，正好被第三个条件挡下。",
+          "把符合的 k 相加：3 + 4 + 5 + 6 = 18。"
+        ],
+        "en": [
+          "Having a real solution forces the discriminant to be non-negative: (2k)² − 4(k + 6) ≥ 0. This simplifies to k² − k − 6 ≥ 0, that is (k − 3)(k + 2) ≥ 0, so k ≥ 3 or k ≤ −2.",
+          "Let f(x) = x² − 2kx + k + 6. It opens upward and its axis of symmetry is x = k. If both roots exceed 1, their midpoint also exceeds 1, so k > 1.",
+          "Since the parabola opens upward and both roots lie to the right of 1, the graph must be above the x-axis at x = 1, so f(1) > 0. Here f(1) = 1 − 2k + k + 6 = 7 − k, giving k < 7.",
+          "Combining the three conditions k ≥ 3, k > 1 and k < 7, the integers are k = 3, 4, 5, 6. Boundary check: for k = 7 the equation is x² − 14x + 13 = 0 with roots 1 and 13, and 1 is not greater than 1, exactly the case blocked by the third condition.",
+          "Adding them up: 3 + 4 + 5 + 6 = 18."
+        ],
+        "ja": [
+          "実数解をもつためには判別式が非負でなければならない：(2k)² − 4(k + 6) ≥ 0。整理すると k² − k − 6 ≥ 0、つまり (k − 3)(k + 2) ≥ 0 なので k ≥ 3 または k ≤ −2。",
+          "f(x) = x² − 2kx + k + 6 とおくと下に凸で、軸は x = k。二つの根がともに 1 より大きいなら、その中点も 1 より大きいので k > 1。",
+          "下に凸で二根がともに 1 の右側にあるから、x = 1 でグラフは x 軸より上にある。よって f(1) > 0。f(1) = 1 − 2k + k + 6 = 7 − k なので k < 7。",
+          "三つの条件 k ≥ 3、k > 1、k < 7 を合わせると整数 k は 3、4、5、6 のみ。境界の確認：k = 7 のとき方程式は x² − 14x + 13 = 0 で根は 1 と 13、1 は 1 より大きくないので三つ目の条件で排除される。",
+          "条件を満たす k を足すと 3 + 4 + 5 + 6 = 18。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "18"
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "algebra-grade10-quadratic-root-location",
+        "notes": "題型取自「根的分布（location of roots）」的標準三條件（判別式、對稱軸、端點函數值），參考 Matherama 的 Location of Roots 教材頁與 careers360／collegedunia 上同型的入學考題後改寫，數值自訂成 f(1) > 0 才是真正的束縛條件（k < 7），判別式只給出下界。去重複判：字面 0.53 撞 algebra_grade8_foundation_015（x² − 6x + k = 0 有兩相異實根、k 為正整數求最大值），但那一題只有判別式一個條件、且沒有任何關於根落在哪裡的要求；本題的推理核心是三條件並用，而且答案由 f(1) > 0 決定而不是由判別式決定，解法骨架不同，故保留。敘述經兩次調整以避開既有題的措辭模板：先避開該題的「有兩個相異的實數根」句型，再避開 algebra_grade9_foundation_037（求二次函數對稱軸）的「二次函數 y = … 的圖形」句型，最後定為「在實數範圍內有解，且每一個實數解都比 1 大」。另掃過 algebra_grade10_foundation_004（整數解個數反推參數）、028（恆正）、056（解集反推係數）、algebra_grade9_foundation_021（相切求 k），均無根的位置條件。"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      }
+    },
+    {
+      "id": "algebra_grade10_foundation_059",
+      "reviewStatus": "ok",
+      "topic": "algebra",
+      "subtopic": "decreasing_log_inequality_domain_endpoints",
+      "tags": [
+        "c:logarithm",
+        "c:inequality",
+        "m:direct"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "設 g(t) 表示 t 以 3 分之 1 為底的對數。已知不等式 g(x − 2) > −3 的解集恰好是 a < x < b 的形式。求 a + b 的值。",
+        "zh-Hans": "设 g(t) 表示 t 以 3 分之 1 为底的对数。已知不等式 g(x − 2) > −3 的解集恰好是 a < x < b 的形式。求 a + b 的值。",
+        "en": "Let g(t) denote the logarithm of t to base one third. The inequality g(x − 2) > −3 has a solution set that is exactly of the form a < x < b. Find a + b.",
+        "ja": "g(t) を、底を 3 分の 1 とする t の対数とする。不等式 g(x − 2) > −3 の解集合がちょうど a < x < b の形になるとき、a + b の値を求めよ。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 31。",
+        "zh-Hans": "答案是 31。",
+        "en": "The answer is 31.",
+        "ja": "答えは 31 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "先處理定義域：對數的真數必須是正的，所以 x − 2 > 0，也就是 x > 2。這半個條件最容易被漏掉，而它正好就是 a。",
+          "把 −3 也換成同一個函數的值：3 分之 1 的 −3 次方等於 3 的 3 次方，也就是 27，所以 g(27) = −3，原式可寫成 g(x − 2) > g(27)。",
+          "底數 3 分之 1 介於 0 與 1 之間，g 是遞減函數。遞減函數的函數值愈大代表真數愈小，所以比較真數時不等號要反向。",
+          "因此 g(x − 2) > g(27) 等價於 x − 2 < 27，解得 x < 29。若忘了反向而寫成 x − 2 > 27，會得到完全相反的區間，這是本題的陷阱。",
+          "把定義域與不等式合起來得 2 < x < 29，所以 a = 2、b = 29，a + b = 2 + 29 = 31。"
+        ],
+        "zh-Hans": [
+          "先处理定义域：对数的真数必须是正的，所以 x − 2 > 0，也就是 x > 2。这半个条件最容易被漏掉，而它正好就是 a。",
+          "把 −3 也换成同一个函数的值：3 分之 1 的 −3 次方等于 3 的 3 次方，也就是 27，所以 g(27) = −3，原式可写成 g(x − 2) > g(27)。",
+          "底数 3 分之 1 介于 0 与 1 之间，g 是递减函数。递减函数的函数值愈大代表真数愈小，所以比较真数时不等号要反向。",
+          "因此 g(x − 2) > g(27) 等价于 x − 2 < 27，解得 x < 29。若忘了反向而写成 x − 2 > 27，会得到完全相反的区间，这是本题的陷阱。",
+          "把定义域与不等式合起来得 2 < x < 29，所以 a = 2、b = 29，a + b = 2 + 29 = 31。"
+        ],
+        "en": [
+          "Start with the domain: the argument of a logarithm must be positive, so x − 2 > 0, that is x > 2. This half of the answer is the easiest to forget, and it is exactly a.",
+          "Rewrite −3 as a value of the same function: one third to the power −3 equals 3 to the power 3, which is 27, so g(27) = −3 and the statement becomes g(x − 2) > g(27).",
+          "The base one third lies strictly between 0 and 1, so g is decreasing. For a decreasing function a larger output means a smaller input, so comparing the arguments reverses the inequality.",
+          "Hence g(x − 2) > g(27) is equivalent to x − 2 < 27, giving x < 29. Forgetting to reverse and writing x − 2 > 27 produces the opposite interval, which is the trap here.",
+          "Intersecting the domain with the inequality gives 2 < x < 29, so a = 2 and b = 29, and a + b = 2 + 29 = 31."
+        ],
+        "ja": [
+          "まず定義域を押さえる：対数の真数は正でなければならないので x − 2 > 0、すなわち x > 2。この半分の条件が最も落としやすく、しかもそれがそのまま a になる。",
+          "−3 も同じ関数の値に直す：3 分の 1 の −3 乗は 3 の 3 乗、つまり 27 なので g(27) = −3 であり、もとの式は g(x − 2) > g(27) と書ける。",
+          "底の 3 分の 1 は 0 と 1 の間にあるので g は減少関数である。減少関数では値が大きいほど真数は小さいので、真数を比べるときは不等号の向きが逆になる。",
+          "よって g(x − 2) > g(27) は x − 2 < 27 と同値であり、x < 29 を得る。向きを変え忘れて x − 2 > 27 としてしまうと正反対の区間になり、それが本問の落とし穴である。",
+          "定義域と合わせると 2 < x < 29 なので a = 2、b = 29、したがって a + b = 2 + 29 = 31。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "31"
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "algebra-grade10-decreasing-logarithm-inequality",
+        "notes": "題型參考 Brilliant 的 Logarithmic Inequalities wiki（底小於 1 時不等號反向那一節，例題 log_{1/2}(3x) > log_{1/2}(2x+3)）與 Math Vault 的 log base 0.3 專文，改成常數對常數比較，並刻意把定義域端點做成答案的一半。去重複判：初稿字面 0.50 撞 algebra_grade11_foundation_040（log₁₀x + log₁₀(x−3) = 1），但那一題是同底相加合併成乘積後解二次方程式、定義域只用來刪去負根；本題沒有合併、核心是遞減底造成的不等號反向，而且定義域端點本身是答案的一部分，解法骨架不同。為了不與該題共用「以 N 為底、(x − m) 的對數」的敘述模板，改用函數符號 g(t) 陳述、底數改為 3 分之 1、真數改為 x − 2。另掃過 algebra_grade11_foundation_017（log₂(x − 1) < 3 求整數個數）：底大於 1、遞增、無反向陷阱。"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      }
+    },
+    {
+      "id": "algebra_grade10_foundation_060",
+      "reviewStatus": "ok",
+      "topic": "algebra",
+      "subtopic": "shared_root_of_swapped_coefficient_quadratics",
+      "tags": [
+        "c:polynomial",
+        "c:quadratic",
+        "m:direct"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "已知 a、b 是相異的實數，而且方程式 x² + ax + b = 0 與 x² + bx + a = 0 有一個共同的根。求 a + b 的值。",
+        "zh-Hans": "已知 a、b 是相异的实数，而且方程式 x² + ax + b = 0 与 x² + bx + a = 0 有一个共同的根。求 a + b 的值。",
+        "en": "Let a and b be distinct real numbers such that the equations x² + ax + b = 0 and x² + bx + a = 0 share a common root. Find a + b.",
+        "ja": "a、b を相異なる実数とし、方程式 x² + ax + b = 0 と x² + bx + a = 0 が共通の根をもつとする。a + b の値を求めよ。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 −1。",
+        "zh-Hans": "答案是 −1。",
+        "en": "The answer is −1.",
+        "ja": "答えは −1 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "設 r 是兩個方程式共同的根，那麼 r² + ar + b = 0 與 r² + br + a = 0 必須同時成立。",
+          "兩式相減，二次項與各自的常數項會重新組合：(ar + b) − (br + a) = 0，即 (a − b)r − (a − b) = 0，也就是 (a − b)(r − 1) = 0。",
+          "題目給了 a 與 b 相異，所以 a − b ≠ 0，只能是 r − 1 = 0。也就是說共同的根必定是 r = 1，這一步是全題的關鍵：相減把兩個未知係數壓成一個乘積為零的條件。",
+          "把 r = 1 代回第一個方程式：1 + a + b = 0。",
+          "所以 a + b = −1。",
+          "驗算：取 a = 2、b = −3（兩者相異，且和為 −1）。x² + 2x − 3 = (x + 3)(x − 1)，x² − 3x + 2 = (x − 1)(x − 2)，兩式確實共有根 1，符合結論。"
+        ],
+        "zh-Hans": [
+          "设 r 是两个方程式共同的根，那么 r² + ar + b = 0 与 r² + br + a = 0 必须同时成立。",
+          "两式相减，二次项与各自的常数项会重新组合：(ar + b) − (br + a) = 0，即 (a − b)r − (a − b) = 0，也就是 (a − b)(r − 1) = 0。",
+          "题目给了 a 与 b 相异，所以 a − b ≠ 0，只能是 r − 1 = 0。也就是说共同的根必定是 r = 1，这一步是全题的关键：相减把两个未知系数压成一个乘积为零的条件。",
+          "把 r = 1 代回第一个方程式：1 + a + b = 0。",
+          "所以 a + b = −1。",
+          "验算：取 a = 2、b = −3（两者相异，且和为 −1）。x² + 2x − 3 = (x + 3)(x − 1)，x² − 3x + 2 = (x − 1)(x − 2)，两式确实共有根 1，符合结论。"
+        ],
+        "en": [
+          "Let r be a root shared by both equations, so r² + ar + b = 0 and r² + br + a = 0 hold at the same time.",
+          "Subtract the two: the squared terms cancel and the rest regroups as (ar + b) − (br + a) = 0, that is (a − b)r − (a − b) = 0, so (a − b)(r − 1) = 0.",
+          "We are told a and b are distinct, so a − b ≠ 0 and therefore r − 1 = 0. The shared root must be r = 1. This is the crux: subtracting collapses two unknown coefficients into a single product-equals-zero condition.",
+          "Substitute r = 1 back into the first equation: 1 + a + b = 0.",
+          "Hence a + b = −1.",
+          "Check: take a = 2 and b = −3, which are distinct and sum to −1. Then x² + 2x − 3 = (x + 3)(x − 1) and x² − 3x + 2 = (x − 1)(x − 2), so 1 really is a common root, matching the conclusion."
+        ],
+        "ja": [
+          "r を二つの方程式に共通の根とすると、r² + ar + b = 0 と r² + br + a = 0 が同時に成り立つ。",
+          "二式を引くと二次の項が消え、残りは (ar + b) − (br + a) = 0、すなわち (a − b)r − (a − b) = 0、つまり (a − b)(r − 1) = 0 とまとまる。",
+          "a と b は相異なるので a − b ≠ 0 であり、よって r − 1 = 0。共通の根は必ず r = 1 である。引き算によって二つの未知の係数が「積が 0」という一つの条件に潰れる、ここが本問の要である。",
+          "r = 1 を最初の方程式に戻すと 1 + a + b = 0 となる。",
+          "したがって a + b = −1。",
+          "検算：a = 2、b = −3 をとる（相異なり、和は −1）。x² + 2x − 3 = (x + 3)(x − 1)、x² − 3x + 2 = (x − 1)(x − 2) となり、確かに 1 が共通の根であって結論と一致する。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "-1"
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "algebra-grade10-common-root-elimination",
+        "notes": "題型取自印度入學考題庫（testbook 與 careers360 都收錄的「x² + ax + b = 0 與 x² + bx + a = 0 有公根，求 a + b」）以及 CK-12 的 common roots 條目，做法是把兩式相減消去二次項後鎖定公根。本題保留這個骨架，補上 a ≠ b 的必要條件與具體驗算，使敘述完整無歧義。本題是替換題：初稿原本出的是「根平移後新三次方程式的常數項」，字面 0.54 撞 algebra_grade9_foundation_027（求 x³ − 2x² + 3x − 4 除以 x − 2 的餘數），兩者用了同一個三次多項式、而且計算都收斂成「把一個數代進 P」，判定為同骨架而整題砍掉重出。新題掃過 c:polynomial 標籤 21 題與「多項式|因式|根與係數」regex 69 題：既有題全部是單一多項式的因式、餘式或對稱和，沒有任何一題處理兩個方程式的公根，也沒有一題用相減消元。"
+      },
+      "inputConstraints": {
+        "allowNegative": true,
+        "maxDigits": 1
+      }
+    },
+    {
+      "id": "algebra_grade10_foundation_061",
+      "reviewStatus": "ok",
+      "topic": "algebra",
+      "subtopic": "bounded_pair_absolute_sum_maximum",
+      "tags": [
+        "c:absolute_value",
+        "m:extremal"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "設 a、b 是實數，且 |a| ≤ 2、|b| ≤ 3。求 |a + b| + |a − b| 的最大值。",
+        "zh-Hans": "设 a、b 是实数，且 |a| ≤ 2、|b| ≤ 3。求 |a + b| + |a − b| 的最大值。",
+        "en": "Let a and b be real numbers with |a| ≤ 2 and |b| ≤ 3. Find the maximum value of |a + b| + |a − b|.",
+        "ja": "a、b を実数とし、|a| ≤ 2、|b| ≤ 3 とする。|a + b| + |a − b| の最大値を求めよ。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 6。",
+        "zh-Hans": "答案是 6。",
+        "en": "The answer is 6.",
+        "ja": "答えは 6 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "關鍵是一個恆等式：對任意實數 a、b，|a + b| + |a − b| 都等於 2 乘上 |a| 與 |b| 之中較大的那一個。",
+          "驗證：不妨設 |a| ≥ |b|，再不妨設 a ≥ 0（否則把 a、b 同時變號，兩項的值不變）。此時 a + b ≥ 0 且 a − b ≥ 0，兩式相加得 (a + b) + (a − b) = 2a = 2|a|。若 |b| > |a| 則對調角色，同樣得 2|b|。",
+          "所以要讓式子最大，只要讓 |a| 與 |b| 之中較大的那一個盡量大。",
+          "題目限制 |a| ≤ 2、|b| ≤ 3，因此較大者最多只能是 3。",
+          "最大值是 2 × 3 = 6。取 a = 2、b = 3 驗算：|2 + 3| + |2 − 3| = 5 + 1 = 6，確實達到。",
+          "常見的錯誤是把兩項各自放到最大，得 (2 + 3) + (2 + 3) = 10；但 |a + b| 與 |a − b| 不可能同時等於 5，這個上界取不到。"
+        ],
+        "zh-Hans": [
+          "关键是一个恒等式：对任意实数 a、b，|a + b| + |a − b| 都等于 2 乘上 |a| 与 |b| 之中较大的那一个。",
+          "验证：不妨设 |a| ≥ |b|，再不妨设 a ≥ 0（否则把 a、b 同时变号，两项的值不变）。此时 a + b ≥ 0 且 a − b ≥ 0，两式相加得 (a + b) + (a − b) = 2a = 2|a|。若 |b| > |a| 则对调角色，同样得 2|b|。",
+          "所以要让式子最大，只要让 |a| 与 |b| 之中较大的那一个尽量大。",
+          "题目限制 |a| ≤ 2、|b| ≤ 3，因此较大者最多只能是 3。",
+          "最大值是 2 × 3 = 6。取 a = 2、b = 3 验算：|2 + 3| + |2 − 3| = 5 + 1 = 6，确实达到。",
+          "常见的错误是把两项各自放到最大，得 (2 + 3) + (2 + 3) = 10；但 |a + b| 与 |a − b| 不可能同时等于 5，这个上界取不到。"
+        ],
+        "en": [
+          "The key is an identity: for any real a and b, |a + b| + |a − b| equals 2 times the larger of |a| and |b|.",
+          "Check it: assume |a| ≥ |b|, and also assume a ≥ 0 (otherwise negate both a and b, which changes neither term). Then a + b ≥ 0 and a − b ≥ 0, so adding gives (a + b) + (a − b) = 2a = 2|a|. If |b| > |a|, swap the roles to get 2|b|.",
+          "So maximising the expression only requires making the larger of |a| and |b| as large as possible.",
+          "The constraints |a| ≤ 2 and |b| ≤ 3 mean that the larger one can be at most 3.",
+          "The maximum is 2 × 3 = 6. Checking with a = 2 and b = 3 gives |2 + 3| + |2 − 3| = 5 + 1 = 6, so the value is attained.",
+          "A common mistake is to maximise each term separately, getting (2 + 3) + (2 + 3) = 10; but |a + b| and |a − b| can never both equal 5, so that bound is unreachable."
+        ],
+        "ja": [
+          "鍵になるのは次の恒等式である：任意の実数 a、b について |a + b| + |a − b| は |a| と |b| のうち大きい方の 2 倍に等しい。",
+          "確認する：|a| ≥ |b| としてよく、さらに a ≥ 0 としてよい（そうでなければ a と b の符号を同時に変えればよく、値は変わらない）。このとき a + b ≥ 0 かつ a − b ≥ 0 なので、足すと (a + b) + (a − b) = 2a = 2|a| となる。|b| > |a| のときは役割を入れ替えて 2|b| を得る。",
+          "したがって式を最大にするには、|a| と |b| のうち大きい方をできるだけ大きくすればよい。",
+          "条件は |a| ≤ 2、|b| ≤ 3 なので、大きい方はたかだか 3 である。",
+          "最大値は 2 × 3 = 6。a = 2、b = 3 で確かめると |2 + 3| + |2 − 3| = 5 + 1 = 6 となり、実際に到達する。",
+          "よくある誤りは二つの項を別々に最大化して (2 + 3) + (2 + 3) = 10 とすることだが、|a + b| と |a − b| が同時に 5 になることはなく、この上界には届かない。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "multiple_choice",
+      "correctAnswer": {
+        "type": "choice",
+        "value": "C"
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "algebra-grade10-absolute-value-identity-bound",
+        "notes": "題型借自 Brilliant 的 Absolute Value Inequalities wiki 練習題「|a + 1| < 3 且 |b − 1| < 10 時 a + b 的範圍」那一族（給定各自的絕對值上界，問組合式的極值），改用恆等式 |a+b|+|a−b| = 2·max(|a|,|b|) 當推理核心。全庫掃過 c:absolute_value 標籤 22 題與「絕對值」regex 44 題：既有題不是解方程式（grade7_027、grade8_037、grade11_025）就是距離和的極值（grade9_014、grade11_012、grade12_036），沒有一題用到 max 恆等式，也沒有一題是兩個變數各自被界住。誘答 10 就是把兩項各自最大化的錯誤直覺。"
+      },
+      "options": {
+        "A": {
+          "zh-Hant": "4",
+          "zh-Hans": "4",
+          "en": "4",
+          "ja": "4"
+        },
+        "B": {
+          "zh-Hant": "5",
+          "zh-Hans": "5",
+          "en": "5",
+          "ja": "5"
+        },
+        "C": {
+          "zh-Hant": "6",
+          "zh-Hans": "6",
+          "en": "6",
+          "ja": "6"
+        },
+        "D": {
+          "zh-Hant": "10",
+          "zh-Hans": "10",
+          "en": "10",
+          "ja": "10"
+        }
+      }
+    },
+    {
+      "reviewStatus": "ok",
+      "difficulty": "foundation",
+      "challengeTier": "foundation",
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "id": "algebra_grade10_foundation_062",
+      "topic": "algebra",
+      "subtopic": "minimize_sum_of_squared_deviations",
+      "tags": [
+        "c:stdev",
+        "c:mean",
+        "m:extremal"
+      ],
+      "levelStage": "grade10",
+      "answerMode": "integer_input",
+      "prompt": {
+        "zh-Hant": "一組資料有 6 個數 x₁、x₂、⋯、x₆，平均數是 9、標準差是 √5。對任意實數 a，令 f(a) = (x₁ − a)² + (x₂ − a)² + ⋯ + (x₆ − a)²。當 a 走遍所有實數時，f(a) 這個總和能小到多少？請求出它的最小可能值。",
+        "zh-Hans": "一组资料有 6 个数 x₁、x₂、⋯、x₆，平均数是 9、标准差是 √5。对任意实数 a，令 f(a) = (x₁ − a)² + (x₂ − a)² + ⋯ + (x₆ − a)²。当 a 走遍所有实数时，f(a) 这个总和能小到多少？请求出它的最小可能值。",
+        "en": "A data set consists of 6 numbers x₁, x₂, …, x₆ with mean 9 and standard deviation √5. For any real number a, let f(a) = (x₁ − a)² + (x₂ − a)² + ⋯ + (x₆ − a)². As a ranges over all real numbers, how small can this total f(a) become? Find its smallest possible value.",
+        "ja": "6 個の数 x₁、x₂、⋯、x₆ からなるデータがあり、平均は 9、標準偏差は √5 です。任意の実数 a に対して f(a) = (x₁ − a)² + (x₂ − a)² + ⋯ + (x₆ − a)² とおきます。a が実数全体を動くとき、この総和 f(a) はどこまで小さくできますか。その最小の値を求めなさい。"
+      },
+      "correctAnswer": {
+        "type": "integer",
+        "value": "30"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
+      "answer": {
+        "zh-Hant": "f(a) 的最小值是 30，在 a = 9（也就是 a 等於平均數）時取到。",
+        "zh-Hans": "f(a) 的最小值是 30，在 a = 9（也就是 a 等于平均数）时取到。",
+        "en": "The minimum value of f(a) is 30, attained at a = 9, that is, when a equals the mean.",
+        "ja": "f(a) の最小値は 30 で、a = 9（すなわち a が平均に等しいとき）に達成されます。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "把每個括號寫成 (xᵢ − 9) + (9 − a) 再展開，得到 f(a) = 各項 (xᵢ − 9)² 的和 + 2(9 − a) × 各項 (xᵢ − 9) 的和 + 6(9 − a)²。",
+          "因為 9 是平均數，(x₁ − 9) + (x₂ − 9) + ⋯ + (x₆ − 9) = 0，所以中間那一整項消失。",
+          "標準差是 √5，所以變異數是它的平方 5，於是 (x₁ − 9)² + ⋯ + (x₆ − 9)² = 6 × 5 = 30，得到 f(a) = 30 + 6(9 − a)²。",
+          "6(9 − a)² 永遠不小於 0，且恰在 a = 9 時等於 0，所以 f(a) 的最小值是 30。"
+        ],
+        "zh-Hans": [
+          "把每个括号写成 (xᵢ − 9) + (9 − a) 再展开，得到 f(a) = 各项 (xᵢ − 9)² 的和 + 2(9 − a) × 各项 (xᵢ − 9) 的和 + 6(9 − a)²。",
+          "因为 9 是平均数，(x₁ − 9) + (x₂ − 9) + ⋯ + (x₆ − 9) = 0，所以中间那一整项消失。",
+          "标准差是 √5，所以变异数是它的平方 5，于是 (x₁ − 9)² + ⋯ + (x₆ − 9)² = 6 × 5 = 30，得到 f(a) = 30 + 6(9 − a)²。",
+          "6(9 − a)² 永远不小于 0，且恰在 a = 9 时等于 0，所以 f(a) 的最小值是 30。"
+        ],
+        "en": [
+          "Write each bracket as (xᵢ − 9) + (9 − a) and expand: f(a) = the sum of the (xᵢ − 9)² plus 2(9 − a) times the sum of the (xᵢ − 9), plus 6(9 − a)².",
+          "Because 9 is the mean, (x₁ − 9) + (x₂ − 9) + ⋯ + (x₆ − 9) = 0, so the whole middle term vanishes.",
+          "The standard deviation √5 squares to a variance of 5, so (x₁ − 9)² + ⋯ + (x₆ − 9)² = 6 × 5 = 30, giving f(a) = 30 + 6(9 − a)².",
+          "Since 6(9 − a)² is never negative and equals 0 exactly when a = 9, the minimum value of f(a) is 30."
+        ],
+        "ja": [
+          "各括弧を (xᵢ − 9) + (9 − a) と書き直して展開すると、f(a) = (xᵢ − 9)² の総和 + 2(9 − a) × (xᵢ − 9) の総和 + 6(9 − a)² となります。",
+          "9 は平均なので (x₁ − 9) + (x₂ − 9) + ⋯ + (x₆ − 9) = 0 となり、真ん中の項はまるごと消えます。",
+          "標準偏差が √5 なのでその平方である分散は 5、したがって (x₁ − 9)² + ⋯ + (x₆ − 9)² = 6 × 5 = 30 となり、f(a) = 30 + 6(9 − a)² が得られます。",
+          "6(9 − a)² は決して負にならず、a = 9 のときちょうど 0 になるので、f(a) の最小値は 30 です。"
+        ]
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "stats-grade10-least-squares-at-mean",
+        "notes": "題型取自統計教材的經典命題『偏差平方和在以平均數為中心時最小』（Tufts 的 Jerry Dallal 講義 Minimizing the Sum of Squared Deviations、askgoodquestions.blog 第 30 題都用完全平方的代數證法）；本題把它改成給定平均與變異數、直接求最小值的計算題。與 algebra_grade8_058（給平均與標準差求平方和）不同：那題是把 a 固定成 0 直接代公式，本題要先證明交叉項為 0、再說明最小值出現在平均數處，多了最佳化這一層。與 algebra_grade9_014（絕對值和的最小值）也不同，那題的最佳點是中位數且用的是絕對值。相似度閘門曾以 0.52 把本題配到 algebra_grade11_043（給 5 個具體數字求變異數），實際讀過後判定解法骨架不同：那題是照定義逐項平方再平均的直算題，本題的資料值從頭到尾未知，要靠交叉項為 0 與完全平方才做得出來；分數偏高是因為兩題都附了同一句變異數定義。已把題幹改成給標準差 √5、不再重述定義。"
+      }
+    },
+    {
+      "reviewStatus": "ok",
+      "difficulty": "foundation",
+      "challengeTier": "foundation",
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "id": "algebra_grade10_foundation_063",
+      "topic": "algebra",
+      "subtopic": "three_lines_failing_to_bound_triangle",
+      "tags": [
+        "c:line_slope",
+        "c:linear_eq",
+        "m:casework"
+      ],
+      "levelStage": "grade10",
+      "prompt": {
+        "zh-Hant": "平面上有兩條固定的直線 y = 3x + 2 與 y = −2x + 7，另外還有一條會隨實數 t 改變的直線 y = tx + 1。這三條線通常兩兩相交，交點恰好是一個三角形的三個頂點；但 t 等於某些值時就辦不到。求這些例外的 t 值的總和。",
+        "zh-Hans": "平面上有两条固定的直线 y = 3x + 2 与 y = −2x + 7，另外还有一条会随实数 t 改变的直线 y = tx + 1。这三条线通常两两相交，交点恰好是一个三角形的三个顶点；但 t 等于某些值时就办不到。求这些例外的 t 值的总和。",
+        "en": "The plane contains two fixed lines y = 3x + 2 and y = −2x + 7, together with a line y = tx + 1 that moves as the real number t changes. Usually the three cross pairwise and their crossing points are the three corners of a triangle, but for certain values of t that fails. Find the sum of those exceptional values of t.",
+        "ja": "平面上に固定された 2 直線 y = 3x + 2 と y = −2x + 7 があり、さらに実数 t によって動く直線 y = tx + 1 がある。ふつうはこの 3 本が 2 本ずつ交わり、その交点が三角形の 3 頂点になるが、t がある値のときはそうならない。そのような例外的な t の値の総和を求めよ。"
+      },
+      "answer": {
+        "zh-Hant": "所有符合條件的 t 之總和是 5。",
+        "zh-Hans": "所有符合条件的 t 之总和是 5。",
+        "en": "The sum of all such values of t is 5.",
+        "ja": "条件を満たす t の値の総和は 5 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "三條直線圍不出三角形只有兩種可能：其中兩條互相平行（永遠不相交），或者三條交於同一個點。",
+          "情形一：y = tx + 1 與 y = 3x + 2 平行需要 t = 3；兩者常數項不同，確實沒有交點。",
+          "情形一的另一種：y = tx + 1 與 y = −2x + 7 平行需要 t = −2。",
+          "情形二：先求前兩條直線的交點。由 3x + 2 = −2x + 7 得 x = 1，代回得 y = 5，交點是 (1, 5)。",
+          "要三線共點，第三條也必須通過 (1, 5)：5 = t × 1 + 1，解得 t = 4。",
+          "把三個值相加：3 + (−2) + 4 = 5。"
+        ],
+        "zh-Hans": [
+          "三条直线围不出三角形只有两种可能：其中两条互相平行（永远不相交），或者三条交于同一个点。",
+          "情形一：y = tx + 1 与 y = 3x + 2 平行需要 t = 3；两者常数项不同，确实没有交点。",
+          "情形一的另一种：y = tx + 1 与 y = −2x + 7 平行需要 t = −2。",
+          "情形二：先求前两条直线的交点。由 3x + 2 = −2x + 7 得 x = 1，代回得 y = 5，交点是 (1, 5)。",
+          "要三线共点，第三条也必须通过 (1, 5)：5 = t × 1 + 1，解得 t = 4。",
+          "把三个值相加：3 + (−2) + 4 = 5。"
+        ],
+        "en": [
+          "Three lines fail to bound a triangle in only two ways: two of them are parallel (so they never meet), or all three pass through one common point.",
+          "Case 1: y = tx + 1 is parallel to y = 3x + 2 when t = 3; the constant terms differ, so they really never meet.",
+          "Case 1, other option: y = tx + 1 is parallel to y = −2x + 7 when t = −2.",
+          "Case 2: first intersect the other two lines. From 3x + 2 = −2x + 7 we get x = 1 and then y = 5, so they meet at (1, 5).",
+          "For the three lines to be concurrent, the third one must also pass through (1, 5): 5 = t × 1 + 1, so t = 4.",
+          "Adding the three values gives 3 + (−2) + 4 = 5."
+        ],
+        "ja": [
+          "3 本の直線が三角形を囲めないのは、2 本が平行になる場合と、3 本が 1 点で交わる場合の 2 通りだけです。",
+          "場合 1：y = tx + 1 が y = 3x + 2 と平行になるのは t = 3 のとき。定数項が異なるので確かに交わりません。",
+          "場合 1 のもう一つ：y = tx + 1 が y = −2x + 7 と平行になるのは t = −2 のとき。",
+          "場合 2：まず他の 2 本の交点を求めます。3x + 2 = −2x + 7 より x = 1、y = 5 なので交点は (1, 5) です。",
+          "3 本が 1 点で交わるには、3 本目も (1, 5) を通らなければなりません。5 = t × 1 + 1 より t = 4。",
+          "3 つの値を足すと 3 + (−2) + 4 = 5 です。"
+        ]
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "5"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "geometry-grade10-lines-no-triangle",
+        "notes": "題型取自 JEE「三條直線不能構成三角形」的標準條件（askIITians / ExamSIDE 的 Straight Lines 章節：不成三角形 ⇔ 兩線平行或三線共點），改寫成三條具體直線並改問 m 的總和。全庫掃 c:line_slope（11 題）與「斜率／直線」中文 regex：geometry_grade9_010 是三條已知直線圍成三角形求面積（正推、無參數），algebra_grade10_046 只問垂直、algebra_grade11_067（直線系定點）本輪禁用；本題核心是「兩種退化情形的分類討論」，與上述都不同。"
+      }
     }
   ]
 }

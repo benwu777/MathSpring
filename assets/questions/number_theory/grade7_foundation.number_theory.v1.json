@@ -4052,6 +4052,83 @@
         "reference": "number-theory-grade7-foundation",
         "notes": "題型參考 AoPS 論壇與 AMC 舊題常見的「同一個數在兩種進位下的位數關係」問法（例如 AMC「N has 8 digits in base 2, how many digits in base 3」這一族）。全庫的進位制題都是單向換算或數字統計：number_theory_grade9_036（100 換成三進位有幾位）是直接換算一個特定數，number_theory_grade9_018（100 換成五進位求數字和）、number_theory_grade9_045（二進位 6 位且數字和為 2）也都給定單一個數；本題給的是一個區間，必須先夾出 128 到 255 的上下界再和 3 的次方比較，推理核心是估界而不是換算。"
       }
+    },
+    {
+      "id": "number_theory_grade7_foundation_048",
+      "reviewStatus": "ok",
+      "topic": "number_theory",
+      "subtopic": "binary_palindrome_count_to_hundred",
+      "tags": [
+        "c:number_base",
+        "c:basic_counting",
+        "m:casework",
+        "m:estimate_bound"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade7",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "把一個正整數寫成二進位（最高位不補 0）之後，如果從左讀到右和從右讀到左完全一樣，就說它是二進位迴文數，例如 9 寫成 1001₂ 就是。求 1 到 100 之中的二進位迴文數共有幾個。",
+        "zh-Hans": "把一个正整数写成二进位（最高位不补 0）之后，如果从左读到右和从右读到左完全一样，就说它是二进位回文数，例如 9 写成 1001₂ 就是。求 1 到 100 之中的二进位回文数共有几个。",
+        "en": "Write a positive integer in base 2 with no leading zero. If the string reads the same forwards and backwards the number is called a binary palindrome; for example 9 is 1001 in base 2, so it is one. How many binary palindromes are there from 1 to 100?",
+        "ja": "正の整数を先頭に 0 をつけずに二進法で表したとき、左から読んでも右から読んでも同じ並びになるものを二進回文数と呼びます。たとえば 9 は 1001₂ なので二進回文数です。1 から 100 までに二進回文数は何個ありますか。"
+      },
+      "answer": {
+        "zh-Hant": "1 到 100 之中的二進位迴文數共有 19 個。",
+        "zh-Hans": "1 到 100 之中的二进位回文数共有 19 个。",
+        "en": "There are 19 binary palindromes from 1 to 100.",
+        "ja": "1 から 100 までの二進回文数は 19 個です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "二進位表示的最高位一定是 1，迴文的最低位也就一定是 1，所以這些數都是奇數。又因為迴文的前一半決定後一半，所以只要按位數分類來數。",
+          "1 位到 4 位：1（就是 1）、11（3）、1 0 1 與 1 1 1（5、7）、1 0 0 1 與 1 1 1 1（9、15），分別是 1、1、2、2 個。",
+          "5 位與 6 位：5 位的形式是 1 a b a 1，a、b 各有 2 種，共 4 個（17、21、27、31）；6 位的形式是 1 a b b a 1，同樣 4 個（33、45、51、63）。這些數都在 100 以內。",
+          "7 位要特別小心：7 位二進位數是 64 到 127，形式 1 a b c b a 1 共有 2 × 2 × 2 = 8 個，但只能留下不超過 100 的，也就是 65、73、85、93、99 共 5 個（107、119、127 太大）。",
+          "把各段加起來：1 + 1 + 2 + 2 + 4 + 4 + 5 = 19，所以 1 到 100 之中有 19 個二進位迴文數。"
+        ],
+        "zh-Hans": [
+          "二进位表示的最高位一定是 1，回文的最低位也就一定是 1，所以这些数都是奇数。又因为回文的前一半决定后一半，所以只要按位数分类来数。",
+          "1 位到 4 位：1（就是 1）、11（3）、1 0 1 与 1 1 1（5、7）、1 0 0 1 与 1 1 1 1（9、15），分别是 1、1、2、2 个。",
+          "5 位与 6 位：5 位的形式是 1 a b a 1，a、b 各有 2 种，共 4 个（17、21、27、31）；6 位的形式是 1 a b b a 1，同样 4 个（33、45、51、63）。这些数都在 100 以内。",
+          "7 位要特别小心：7 位二进位数是 64 到 127，形式 1 a b c b a 1 共有 2 × 2 × 2 = 8 个，但只能留下不超过 100 的，也就是 65、73、85、93、99 共 5 个（107、119、127 太大）。",
+          "把各段加起来：1 + 1 + 2 + 2 + 4 + 4 + 5 = 19，所以 1 到 100 之中有 19 个二进位回文数。"
+        ],
+        "en": [
+          "The leading digit in base 2 is always 1, so a palindrome also ends in 1 and every such number is odd. Since the first half of a palindrome determines the second half, count them by their length.",
+          "Lengths 1 to 4: the strings are 1 (the number 1), 11 (3), 101 and 111 (5 and 7), 1001 and 1111 (9 and 15), giving 1, 1, 2 and 2 numbers.",
+          "Lengths 5 and 6: a 5-digit palindrome looks like 1ab a1 with two free digits, so there are 4 of them (17, 21, 27, 31); a 6-digit one looks like 1abba1, again 4 (33, 45, 51, 63). All of these are below 100.",
+          "Length 7 needs care: 7-digit binary numbers run from 64 to 127, and the form 1abcba1 gives 2 x 2 x 2 = 8 candidates, but only those at most 100 count, namely 65, 73, 85, 93 and 99 - five of them, since 107, 119 and 127 are too big.",
+          "Adding the groups: 1 + 1 + 2 + 2 + 4 + 4 + 5 = 19, so there are 19 binary palindromes from 1 to 100."
+        ],
+        "ja": [
+          "二進法の最上位は必ず 1 なので、回文なら最下位も 1 になり、これらの数はすべて奇数です。回文は前半が決まれば後半も決まるので、桁数ごとに数えます。",
+          "1 桁から 4 桁：1（数の 1）、11（3）、101 と 111（5 と 7）、1001 と 1111（9 と 15）で、それぞれ 1 個、1 個、2 個、2 個です。",
+          "5 桁と 6 桁：5 桁は 1ab a1 の形で自由な桁が 2 つあるので 4 個（17、21、27、31）、6 桁は 1abba1 の形でやはり 4 個（33、45、51、63）です。どれも 100 以下です。",
+          "7 桁は注意が必要です。7 桁の二進数は 64 から 127 で、1abcba1 の形は 2 × 2 × 2 = 8 個ありますが、100 以下は 65、73、85、93、99 の 5 個だけです（107、119、127 は大きすぎます）。",
+          "各段を合計すると 1 + 1 + 2 + 2 + 4 + 4 + 5 = 19 となり、1 から 100 までの二進回文数は 19 個です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "19"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "number_theory-grade7-foundation",
+        "notes": "題型參考 exploringbinary.com 的 Counting Binary Palindromes 與 Project Euler 第 36 題（double-base palindrome）所用的『按位數分組數迴文』骨架，改成只在二進位下計數並加上 100 這個非整齊上界。既有迴文題 combinatorics_grade9_foundation_023、number_theory_grade10_foundation_025、035 全都是十進位且範圍是整齊的『所有五位數／三位數』，沒有截斷；既有二進位題（grade8_019 換算、grade12_041 數 1 的個數、grade10_014 數 1 的個數）都不是迴文結構。本題的推理點是最高位那一組被 100 截斷，必須另外處理。"
+      }
     }
   ]
 }

@@ -4850,6 +4850,150 @@
         "reference": "stats-grade12-random-sum-two-stage-expectation",
         "notes": "題型取自 Wald 等式（Wald’s identity / random sum）的教材例題，如 Dartmouth Math 100 的 Wald’s Identity 講義、MIT 6.042 的 Wald 定理講義與 algnotes 的 stopping times 條目，那裡的標準示例正是「先擲骰子決定次數，再做那麼多次試驗」。全庫查過：既有期望值題全部是「試驗次數事先固定」的模型（擲 4 次硬幣、擲 6 次骰子、抽 4 次球、11 人圍桌），沒有任何一題的試驗次數本身是隨機變數。最接近的 combinatorics_grade11_043 是固定擲 4 次硬幣計分，本題多出「次數隨機」這一層，必須先做條件期望再套回外層，推理核心不同。"
       }
+    },
+    {
+      "reviewStatus": "ok",
+      "difficulty": "foundation",
+      "challengeTier": "foundation",
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "id": "combinatorics_grade12_foundation_052",
+      "topic": "combinatorics",
+      "subtopic": "solve_p_from_equal_binomial_probabilities",
+      "tags": [
+        "c:binomial",
+        "c:probability",
+        "m:reverse"
+      ],
+      "levelStage": "grade12",
+      "answerMode": "integer_input",
+      "prompt": {
+        "zh-Hant": "一位球員每次罰球命中的機率都是同一個定值 p，其中 0 < p < 1，各次罰球互相獨立。他連續罰球 5 次，令 X 是命中的次數。已知「恰好命中 1 次」與「恰好命中 2 次」這兩件事的機率剛好相等。求 1/p 的值。",
+        "zh-Hans": "一位球员每次罚球命中的机率都是同一个定值 p，其中 0 < p < 1，各次罚球互相独立。他连续罚球 5 次，令 X 是命中的次数。已知「恰好命中 1 次」与「恰好命中 2 次」这两件事的机率刚好相等。求 1/p 的值。",
+        "en": "A player makes each free throw with the same fixed probability p, where 0 < p < 1, and the throws are independent. He takes 5 free throws in a row; let X be the number of successes. It is known that the events \"exactly 1 success\" and \"exactly 2 successes\" have equal probability. Find the value of 1/p.",
+        "ja": "ある選手はフリースローを毎回同じ一定の確率 p（0 < p < 1）で成功させ、各回は独立です。連続して 5 回投げ、成功回数を X とします。「ちょうど 1 回成功」と「ちょうど 2 回成功」の確率がちょうど等しいことが分かっています。1/p の値を求めなさい。"
+      },
+      "correctAnswer": {
+        "type": "integer",
+        "value": "3"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "answer": {
+        "zh-Hant": "p = 1/3，所以 1/p = 3。",
+        "zh-Hans": "p = 1/3，所以 1/p = 3。",
+        "en": "We get p = 1/3, so 1/p = 3.",
+        "ja": "p = 1/3 となるので、1/p = 3 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "X 服從 5 次獨立試驗、成功機率 p 的二項分布，所以 P(X = 1) = C(5, 1) × p × (1 − p)⁴ = 5p(1 − p)⁴，P(X = 2) = C(5, 2) × p² × (1 − p)³ = 10p²(1 − p)³。",
+          "依題意兩者相等，也就是 5p(1 − p)⁴ = 10p²(1 − p)³。",
+          "因為 0 < p < 1，所以 p 與 1 − p 都不是 0，兩邊可以同時除以 p(1 − p)³，得到 5(1 − p) = 10p。不必真的把兩個機率算出來。",
+          "展開得 5 = 15p，所以 p = 1/3，因此 1/p = 3。"
+        ],
+        "zh-Hans": [
+          "X 服从 5 次独立试验、成功机率 p 的二项分布，所以 P(X = 1) = C(5, 1) × p × (1 − p)⁴ = 5p(1 − p)⁴，P(X = 2) = C(5, 2) × p² × (1 − p)³ = 10p²(1 − p)³。",
+          "依题意两者相等，也就是 5p(1 − p)⁴ = 10p²(1 − p)³。",
+          "因为 0 < p < 1，所以 p 与 1 − p 都不是 0，两边可以同时除以 p(1 − p)³，得到 5(1 − p) = 10p。不必真的把两个机率算出来。",
+          "展开得 5 = 15p，所以 p = 1/3，因此 1/p = 3。"
+        ],
+        "en": [
+          "X is binomial with 5 independent trials of success probability p, so P(X = 1) = C(5, 1) × p × (1 − p)⁴ = 5p(1 − p)⁴ and P(X = 2) = C(5, 2) × p² × (1 − p)³ = 10p²(1 − p)³.",
+          "The problem says these are equal, that is 5p(1 − p)⁴ = 10p²(1 − p)³.",
+          "Since 0 < p < 1, neither p nor 1 − p is zero, so we may divide both sides by p(1 − p)³ to get 5(1 − p) = 10p. There is no need to evaluate either probability.",
+          "Expanding gives 5 = 15p, so p = 1/3 and therefore 1/p = 3."
+        ],
+        "ja": [
+          "X は成功確率 p の独立試行 5 回の二項分布に従うので、P(X = 1) = C(5, 1) × p × (1 − p)⁴ = 5p(1 − p)⁴、P(X = 2) = C(5, 2) × p² × (1 − p)³ = 10p²(1 − p)³ です。",
+          "題意よりこの 2 つが等しいので、5p(1 − p)⁴ = 10p²(1 − p)³ が成り立ちます。",
+          "0 < p < 1 より p も 1 − p も 0 ではないので、両辺を p(1 − p)³ で割ると 5(1 − p) = 10p が得られます。確率の値そのものを計算する必要はありません。",
+          "展開すると 5 = 15p となり、p = 1/3、したがって 1/p = 3 です。"
+        ]
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "binomial-grade12-equal-probability-reverse",
+        "notes": "題型參考 byjus 與 omnicalculator 的二項分布章節習題『已知 P(X = r) = P(X = s) 求 p』（JEE／A-level 常見）；本題選 n = 5、r = 1、s = 2 讓 p = 1/3，並改問 1/p 讓答案是整數。與 combinatorics_grade11_027（擲硬幣 5 次恰好 2 次正面的機率）不同：那題 p 已知、直接代公式算機率；本題 p 未知，要靠兩式相除／約分反推。與 combinatorics_grade11_050（射手 9 次命中的最可能次數）也不同，那題比較的是相鄰兩項誰大以求眾數，本題是解等式。與 algebra_grade12_063 用的是平均與標準差關係，不是機率相等。相似度閘門曾以 0.35 把本題配到 number_theory_grade8_020（24 的所有正因數乘積寫成 24ᵏ 求 k），兩題共同概念標籤為 0、數學上毫無關係，撞的只是「可以寫成…的形式，其中 k 是正整數，求 k」這句問法樣板；已改問 1/p 的值。"
+      }
+    },
+    {
+      "reviewStatus": "ok",
+      "difficulty": "foundation",
+      "challengeTier": "foundation",
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "id": "combinatorics_grade12_foundation_053",
+      "topic": "combinatorics",
+      "subtopic": "meeting_time_geometric_probability",
+      "tags": [
+        "c:probability",
+        "c:area",
+        "m:bijection"
+      ],
+      "levelStage": "grade12",
+      "answerMode": "integer_input",
+      "prompt": {
+        "zh-Hant": "小安與小美約好在下午 2 點到 3 點之間到同一家咖啡店碰面。兩人到達的時刻各自在這一小時之內均勻隨機，而且互相獨立。先到的人只願意等 15 分鐘，超過就離開。求兩人碰得到面的機率；把這個機率寫成最簡分數之後，分子是多少？",
+        "zh-Hans": "小安与小美约好在下午 2 点到 3 点之间到同一家咖啡店碰面。两人到达的时刻各自在这一小时之内均匀随机，而且互相独立。先到的人只愿意等 15 分钟，超过就离开。求两人碰得到面的机率；把这个机率写成最简分数之后，分子是多少？",
+        "en": "Ann and May agree to meet at the same cafe some time between 2 p.m. and 3 p.m. Each arrival time is uniformly random within that hour, and the two are independent. Whoever arrives first is willing to wait only 15 minutes and then leaves. Find the probability that they meet; when this probability is written as a fraction in lowest terms, what is its numerator?",
+        "ja": "アンとメイは午後 2 時から 3 時の間に同じカフェで会う約束をしました。2 人の到着時刻はこの 1 時間内で一様にランダムで、互いに独立です。先に着いた人は 15 分だけ待ち、それを過ぎると帰ってしまいます。2 人が会える確率を求め、その確率を既約分数で表したときの分子を答えなさい。"
+      },
+      "correctAnswer": {
+        "type": "integer",
+        "value": "7"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "answer": {
+        "zh-Hant": "碰面的機率是 7/16，寫成最簡分數之後分子是 7。",
+        "zh-Hans": "碰面的机率是 7/16，写成最简分数之后分子是 7。",
+        "en": "The probability of meeting is 7/16, so the numerator in lowest terms is 7.",
+        "ja": "会える確率は 7/16 なので、既約分数にしたときの分子は 7 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "設小安在 2 點之後 x 分鐘到、小美在 2 點之後 y 分鐘到，則 (x, y) 均勻分布在邊長 60 分鐘的正方形內，正方形面積是 60 × 60 = 3600。",
+          "兩人碰得到面，等價於兩人到達時刻相差不超過 15 分鐘，也就是 x 與 y 的差的絕對值不超過 15。",
+          "碰不到面的區域是正方形左上角與右下角的兩個等腰直角三角形，每個三角形的兩股都是 60 − 15 = 45，兩個三角形合起來的面積剛好是 45 × 45 = 2025。",
+          "碰得到面的面積是 3600 − 2025 = 1575，機率是 1575/3600 = 7/16，所以分子是 7。"
+        ],
+        "zh-Hans": [
+          "设小安在 2 点之后 x 分钟到、小美在 2 点之后 y 分钟到，则 (x, y) 均匀分布在边长 60 分钟的正方形内，正方形面积是 60 × 60 = 3600。",
+          "两人碰得到面，等价于两人到达时刻相差不超过 15 分钟，也就是 x 与 y 的差的绝对值不超过 15。",
+          "碰不到面的区域是正方形左上角与右下角的两个等腰直角三角形，每个三角形的两股都是 60 − 15 = 45，两个三角形合起来的面积刚好是 45 × 45 = 2025。",
+          "碰得到面的面积是 3600 − 2025 = 1575，机率是 1575/3600 = 7/16，所以分子是 7。"
+        ],
+        "en": [
+          "Let Ann arrive x minutes after 2 and May arrive y minutes after 2. Then (x, y) is uniform on a square of side 60 minutes, whose area is 60 × 60 = 3600.",
+          "They meet exactly when their arrival times differ by at most 15 minutes, that is, when the absolute difference between x and y is at most 15.",
+          "The region where they miss each other consists of two isosceles right triangles at the top-left and bottom-right corners, each with legs 60 − 15 = 45, so together they have area 45 × 45 = 2025.",
+          "The meeting region therefore has area 3600 − 2025 = 1575, and the probability is 1575/3600 = 7/16, so the numerator is 7."
+        ],
+        "ja": [
+          "アンが 2 時の x 分後、メイが 2 時の y 分後に到着するとすると、(x, y) は一辺 60 分の正方形上に一様分布し、その面積は 60 × 60 = 3600 です。",
+          "2 人が会えるのは到着時刻の差が 15 分以内のとき、すなわち x と y の差の絶対値が 15 以下のときです。",
+          "会えない領域は正方形の左上と右下にある 2 つの直角二等辺三角形で、どちらも脚の長さが 60 − 15 = 45 なので、合わせた面積はちょうど 45 × 45 = 2025 です。",
+          "会える領域の面積は 3600 − 2025 = 1575 なので、確率は 1575/3600 = 7/16 となり、分子は 7 です。"
+        ]
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "probability-grade12-meeting-problem",
+        "notes": "題型是幾何機率的經典「約會問題」，在 GeeksforGeeks『Probability that two persons will meet』與 Quora／Brainly 上的多個版本都是一小時內等 15 分鐘、答案 7/16；本題沿用這個設定，改成中文情境並改問最簡分數的分子以符合整數作答。與 combinatorics_grade9_041（線段隨機取一點，較長段至少是較短段 3 倍）不同：那題是一維、只切一次；本題要把兩個獨立時刻對應到平面上的點，用二維面積比算。與 combinatorics_grade10_042（正方形靶上的圓形紅心）也不同，那題的隨機點本來就在平面上，不需要建立時刻到座標的對應。"
+      }
     }
   ]
 }

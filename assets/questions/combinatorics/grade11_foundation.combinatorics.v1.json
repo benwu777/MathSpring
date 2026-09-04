@@ -4761,6 +4761,150 @@
         "reference": "stats-grade11-independence-check-dice",
         "notes": "題型取自機率教材裡有名的「和為 7 與單顆骰子的點數互相獨立」示例（Brilliant 的 Probability - Independent events wiki、Duke STA104 作業解答、UAB 485 講義、Utah State 的 Independent Events 講義都用這個對照），本題把對照組從「特定點數」改成「奇偶」，並加上和為 8 的破壞組。全庫查過：關鍵字「獨立」命中 67 題，但全部都是把獨立當成計算前提（各次投擲互相獨立），沒有任何一題要求「檢驗兩事件是否獨立」。最接近的 combinatorics_grade10_047（兩小孩至少一女）與 grade12_041（雙面正硬幣）是條件機率的直覺陷阱，算的是後驗機率而不是驗證 P(A∩B) = P(A)P(B)，推理核心不同。"
       }
+    },
+    {
+      "reviewStatus": "ok",
+      "difficulty": "foundation",
+      "challengeTier": "foundation",
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "id": "combinatorics_grade11_foundation_052",
+      "topic": "combinatorics",
+      "subtopic": "expected_position_first_black_ball",
+      "tags": [
+        "c:expectation",
+        "c:probability",
+        "m:bijection"
+      ],
+      "levelStage": "grade11",
+      "answerMode": "integer_input",
+      "prompt": {
+        "zh-Hant": "一個不透明的箱子裡裝著 6 顆白球與 2 顆黑球，八顆球的大小與手感一模一樣。現在把箱子裡的球一顆一顆隨機摸出來，摸出後不再放回，並依摸出的先後由左往右排成一列，直到箱子清空。設 X 是第一顆黑球出現在第幾個位置。求 X 的期望值。",
+        "zh-Hans": "一个不透明的箱子里装着 6 颗白球与 2 颗黑球，八颗球的大小与手感一模一样。现在把箱子里的球一颗一颗随机摸出来，摸出后不再放回，并依摸出的先后由左往右排成一列，直到箱子清空。设 X 是第一颗黑球出现在第几个位置。求 X 的期望值。",
+        "en": "An opaque box holds 6 white balls and 2 black balls that feel exactly alike. The balls are taken out one at a time at random, never returned, and lined up from left to right in the order they come out, until the box is empty. Let X be the position of the first black ball in this row. Find the expected value of X.",
+        "ja": "不透明な箱の中に白球 6 個と黒球 2 個が入っており、大きさも手ざわりもまったく同じです。箱から球を 1 個ずつ無作為に取り出して戻さず、取り出した順に左から右へ並べ、箱が空になるまで続けます。最初の黒球が何番目に現れるかを X とします。X の期待値を求めなさい。"
+      },
+      "correctAnswer": {
+        "type": "integer",
+        "value": "3"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "answer": {
+        "zh-Hant": "第一顆黑球位置的期望值是 3。",
+        "zh-Hans": "第一颗黑球位置的期望值是 3。",
+        "en": "The expected position of the first black ball is 3.",
+        "ja": "最初の黒球の位置の期待値は 3 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "把摸球的結果看成 8 顆球排成一列。兩顆黑球把 6 顆白球切成三段：第一顆黑球前面、兩顆黑球之間、第二顆黑球後面（每一段都有可能是空的）。",
+          "三段的地位完全對稱，把黑球的位置換一換就能把任一段換成另一段，所以三段各自的白球數期望值相同。",
+          "三段的白球數加起來必定是 6，因此每一段的期望白球數是 6 ÷ 3 = 2。",
+          "第一顆黑球的位置等於它前面的白球數再加 1，所以 X 的期望值是 2 + 1 = 3。"
+        ],
+        "zh-Hans": [
+          "把摸球的结果看成 8 颗球排成一列。两颗黑球把 6 颗白球切成三段：第一颗黑球前面、两颗黑球之间、第二颗黑球后面（每一段都有可能是空的）。",
+          "三段的地位完全对称，把黑球的位置换一换就能把任一段换成另一段，所以三段各自的白球数期望值相同。",
+          "三段的白球数加起来必定是 6，因此每一段的期望白球数是 6 ÷ 3 = 2。",
+          "第一颗黑球的位置等于它前面的白球数再加 1，所以 X 的期望值是 2 + 1 = 3。"
+        ],
+        "en": [
+          "Think of the outcome as the 8 balls laid out in a row. The two black balls cut the 6 white balls into three blocks: before the first black ball, between the two black balls, and after the second black ball (any block may be empty).",
+          "The three blocks play completely symmetric roles, since moving the black balls turns any block into any other, so the three blocks have the same expected number of white balls.",
+          "The three block sizes always add up to 6, so each block contains 6 ÷ 3 = 2 white balls on average.",
+          "The position of the first black ball equals the number of white balls before it plus 1, so the expected value of X is 2 + 1 = 3."
+        ],
+        "ja": [
+          "取り出した結果を 8 個の球が一列に並んだものと考えます。2 個の黒球は 6 個の白球を 3 つのブロックに分けます（最初の黒球の前、2 個の黒球の間、2 個目の黒球の後ろ。空のブロックもあり得ます）。",
+          "3 つのブロックの立場は完全に対称で、黒球の位置を入れ替えればどのブロックも他のブロックに移せるので、各ブロックの白球数の期待値は等しくなります。",
+          "3 つのブロックの白球数の合計は必ず 6 なので、各ブロックの白球数の期待値は 6 ÷ 3 = 2 です。",
+          "最初の黒球の位置は、その前にある白球の数に 1 を足したものなので、X の期待値は 2 + 1 = 3 です。"
+        ]
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "expectation-grade11-first-black-ball-gap",
+        "notes": "題型參考 Yale 大學 Stat 600 講義 Symmetry（Polya urn）與 AoPS 論壇常見的『不放回抽球時第一顆特定顏色球出現位置的期望值』，標準解法是用黑球把白球切成等機率的區塊；期望值公式為 (白 + 黑 + 1)/(黑 + 1)，本題取 6 白 2 黑讓答案是整數 3。掃過全庫『不放回』的 11 題：combinatorics_grade9_033 只求兩顆都是紅球的機率，combinatorics_grade11_042 求兩張卡號碼差的絕對值期望，都不是位置期望；本題的推理核心是對稱切段，不是逐項列舉。相似度閘門曾以 0.31 把本題配到 combinatorics_grade9_033（4 紅 6 白不放回取兩顆都紅的機率），實際讀過後判定共用的只是「袋子裡有…不放回」這句情境樣板：那題是一步的組合機率，本題求的是位置的期望值，共同概念只有 c:probability。已改寫成不透明箱子摸球以拉開字面距離。"
+      }
+    },
+    {
+      "reviewStatus": "ok",
+      "difficulty": "foundation",
+      "challengeTier": "foundation",
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "id": "combinatorics_grade11_foundation_053",
+      "topic": "combinatorics",
+      "subtopic": "expected_letters_until_pattern_ab",
+      "tags": [
+        "c:expectation",
+        "c:recurrence",
+        "m:casework"
+      ],
+      "levelStage": "grade11",
+      "answerMode": "integer_input",
+      "prompt": {
+        "zh-Hant": "一台機器每分鐘印出一個字母，每次印出 A 或印出 B 的機率各是 1/2，各次互相獨立。只要出現「某一分鐘印出 A，緊接著的下一分鐘印出 B」，機器就立刻停機。求機器停機時總共印出的字母數的期望值。",
+        "zh-Hans": "一台机器每分钟印出一个字母，每次印出 A 或印出 B 的机率各是 1/2，各次互相独立。只要出现「某一分钟印出 A，紧接着的下一分钟印出 B」，机器就立刻停机。求机器停机时总共印出的字母数的期望值。",
+        "en": "A machine prints one letter every minute, printing A or B with probability 1/2 each, independently every time. As soon as it prints an A in one minute and a B in the very next minute, the machine stops. Find the expected number of letters printed when the machine stops.",
+        "ja": "ある機械は 1 分ごとに 1 文字を印字し、A と B がそれぞれ確率 1/2 で、毎回独立に印字されます。ある分に A を印字し、その次の分に B を印字した瞬間、機械は停止します。停止したときまでに印字された文字数の期待値を求めなさい。"
+      },
+      "correctAnswer": {
+        "type": "integer",
+        "value": "4"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "answer": {
+        "zh-Hant": "停機時印出的字母數期望值是 4 個。若把停機條件改成「A 緊接著再印一個 A」，答案會變成 6 而不是 4，兩者並不相同。",
+        "zh-Hans": "停机时印出的字母数期望值是 4 个。若把停机条件改成「A 紧接着再印一个 A」，答案会变成 6 而不是 4，两者并不相同。",
+        "en": "The expected number of letters printed when the machine stops is 4. If the stopping pattern were an A immediately followed by another A, the answer would be 6 instead of 4; the two are not the same.",
+        "ja": "停止するまでに印字される文字数の期待値は 4 文字です。停止条件が「A の次にもう一度 A」であれば答えは 4 ではなく 6 になり、両者は同じではありません。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "把過程分成兩個狀態：狀態一是「目前沒有可以接上的 A」（開頭，或上一個印的是 B）；狀態二是「上一個印出的是 A」。設從狀態一還要印的期望字母數是 a，從狀態二還要印的期望字母數是 b。",
+          "在狀態二印一個字母：有 1/2 機率印出 B 而立刻停機，有 1/2 機率印出 A 而仍停在狀態二。所以 b = 1 + (1/2)b，解得 b = 2。",
+          "在狀態一印一個字母：有 1/2 機率印出 A 走到狀態二，有 1/2 機率印出 B 留在狀態一。所以 a = 1 + (1/2)b + (1/2)a。",
+          "把 b = 2 代入得 (1/2)a = 1 + 1 = 2，所以 a = 4，也就是期望印出 4 個字母。"
+        ],
+        "zh-Hans": [
+          "把过程分成两个状态：状态一是「目前没有可以接上的 A」（开头，或上一个印的是 B）；状态二是「上一个印出的是 A」。设从状态一还要印的期望字母数是 a，从状态二还要印的期望字母数是 b。",
+          "在状态二印一个字母：有 1/2 机率印出 B 而立刻停机，有 1/2 机率印出 A 而仍停在状态二。所以 b = 1 + (1/2)b，解得 b = 2。",
+          "在状态一印一个字母：有 1/2 机率印出 A 走到状态二，有 1/2 机率印出 B 留在状态一。所以 a = 1 + (1/2)b + (1/2)a。",
+          "把 b = 2 代入得 (1/2)a = 1 + 1 = 2，所以 a = 4，也就是期望印出 4 个字母。"
+        ],
+        "en": [
+          "Split the process into two states: state one means there is no A available to build on (the very start, or the last letter printed was a B); state two means the last letter printed was an A. Let a be the expected number of further letters from state one, and b the expected number from state two.",
+          "From state two, printing one letter gives a B with probability 1/2, which stops the machine, or an A with probability 1/2, which keeps it in state two. Hence b = 1 + (1/2)b, so b = 2.",
+          "From state one, printing one letter gives an A with probability 1/2, moving to state two, or a B with probability 1/2, staying in state one. Hence a = 1 + (1/2)b + (1/2)a.",
+          "Substituting b = 2 gives (1/2)a = 1 + 1 = 2, so a = 4: the machine prints 4 letters on average."
+        ],
+        "ja": [
+          "過程を 2 つの状態に分けます。状態 1 は「つなげられる A がない」（最初、または直前が B）、状態 2 は「直前に A を印字した」状態です。状態 1 から先に印字する文字数の期待値を a、状態 2 からのそれを b とします。",
+          "状態 2 で 1 文字印字すると、確率 1/2 で B が出て直ちに停止し、確率 1/2 で A が出て状態 2 のままです。よって b = 1 + (1/2)b となり、b = 2 が得られます。",
+          "状態 1 で 1 文字印字すると、確率 1/2 で A が出て状態 2 に移り、確率 1/2 で B が出て状態 1 のままです。よって a = 1 + (1/2)b + (1/2)a です。",
+          "b = 2 を代入すると (1/2)a = 1 + 1 = 2 となり、a = 4、つまり平均 4 文字印字されます。"
+        ]
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "expectation-grade11-pattern-waiting-time",
+        "notes": "題型出自 Wolfram Demonstrations『HH Versus HT Pattern Expectations in Sequences of Coin Flips』與相關的 Penney's game 討論串（HT 的等待期望是 4、HH 是 6）；本題取 HT 這一半，改寫成機器每分鐘印字母的情境，並在答案裡點出 HH 會是 6 這個反直覺對照。與 combinatorics_grade12_042（擲骰直到第一次出現 6）的骨架不同：那題是單一幾何分布、直接套 1/p，本題要建立兩個狀態的遞迴方程組才解得出來。與 combinatorics_grade10_046（13 次投擲中連正次數的期望）也不同，那題是固定次數下用指示變數求次數期望。"
+      }
     }
   ]
 }

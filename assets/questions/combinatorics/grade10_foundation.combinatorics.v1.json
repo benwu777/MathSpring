@@ -4467,6 +4467,106 @@
         "reference": "stats-grade10-optimal-stopping-die-reroll",
         "notes": "題型取自機率面試題／論壇上流傳很廣的「roll a die, option to reroll once」問題（Quora 上的 100 面骰版本、puzzledquant 的 casino 系列、pinnacledatalabs 的 data science interview prep Q63/Q64），標準答案是門檻策略下期望點數 25.5 ÷ 6 = 4.25；本題把點數換成 4 倍的獎金讓答案是整數 17。全庫 c:expectation 共 14 題已逐題查過：combinatorics_grade10_045 是「公平參加費」的逆推、grade11_016 是兩顆骰子和的期望值、grade10_048 是點數平方和、grade12_042 是等到第一個 6 的等待時間、grade12_044 是有放回抽 4 次的和。沒有任何一題含「玩家可以看到中途結果後選擇要不要繼續」的決策層；本題的推理核心是先算出門檻 3.5 再分情形加權，屬於最佳停止，關鍵字「重擲」在全庫只命中 logic_grade5_056（擲到 1 點就強制重擲、無選擇權）。"
       }
+    },
+    {
+      "reviewStatus": "ok",
+      "difficulty": "foundation",
+      "challengeTier": "foundation",
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "id": "combinatorics_grade10_foundation_050",
+      "topic": "combinatorics",
+      "subtopic": "coupon_collector_three_types",
+      "tags": [
+        "c:expectation",
+        "c:probability",
+        "m:casework"
+      ],
+      "levelStage": "grade10",
+      "answerMode": "multiple_choice",
+      "prompt": {
+        "zh-Hant": "一款零食每包附贈一張角色卡，角色只有甲、乙、丙三種，每包出現哪一種的機率都是 1/3，而且各包互相獨立。小安一直買，直到三種角色卡都至少各拿到一張才停手。求他購買包數的期望值。",
+        "zh-Hans": "一款零食每包附赠一张角色卡，角色只有甲、乙、丙三种，每包出现哪一种的机率都是 1/3，而且各包互相独立。小安一直买，直到三种角色卡都至少各拿到一张才停手。求他购买包数的期望值。",
+        "en": "Each pack of a snack contains one character card, and there are only three characters, X, Y and Z, each equally likely with probability 1/3, independently from pack to pack. Ann keeps buying packs until she has at least one card of each of the three characters. Find the expected number of packs she buys.",
+        "ja": "あるお菓子には 1 袋につき 1 枚のキャラクターカードが入っており、キャラクターは甲・乙・丙の 3 種類だけで、どれが出る確率も 1/3、袋ごとに独立です。アンは 3 種類すべてを少なくとも 1 枚ずつ手に入れるまで買い続けます。買う袋数の期待値を求めなさい。"
+      },
+      "options": {
+        "A": {
+          "zh-Hant": "3 包：三種角色卡各買一包就湊齊，平均就是 3 包。",
+          "zh-Hans": "3 包：三种角色卡各买一包就凑齐，平均就是 3 包。",
+          "en": "3 packs: one pack for each of the three characters, so the average is 3.",
+          "ja": "3 袋：3 種類それぞれ 1 袋ずつでそろうので、平均は 3 袋。"
+        },
+        "B": {
+          "zh-Hant": "4.5 包：第二種與第三種角色各只多花半包的時間。",
+          "zh-Hans": "4.5 包：第二种与第三种角色各只多花半包的时间。",
+          "en": "4.5 packs: the second and third characters each cost only half a pack more.",
+          "ja": "4.5 袋：2 種類目と 3 種類目はそれぞれ半袋分しか余計にかからない。"
+        },
+        "C": {
+          "zh-Hant": "5.5 包：三個階段的期望包數分別是 1、1.5、3。",
+          "zh-Hans": "5.5 包：三个阶段的期望包数分别是 1、1.5、3。",
+          "en": "5.5 packs: the three stages take 1, 1.5 and 3 packs on average.",
+          "ja": "5.5 袋：3 つの段階の期待袋数がそれぞれ 1、1.5、3 だから。"
+        },
+        "D": {
+          "zh-Hant": "6 包：三種角色卡平均都要買 2 包才拿得到。",
+          "zh-Hans": "6 包：三种角色卡平均都要买 2 包才拿得到。",
+          "en": "6 packs: each of the three characters takes 2 packs on average.",
+          "ja": "6 袋：3 種類のどれも平均 2 袋買わないと出ないから。"
+        },
+        "E": {
+          "zh-Hant": "9 包：每一種角色卡平均都要買 3 包才會出現。",
+          "zh-Hans": "9 包：每一种角色卡平均都要买 3 包才会出现。",
+          "en": "9 packs: each character needs 3 packs on average to show up.",
+          "ja": "9 袋：どのキャラクターも平均 3 袋買わないと現れないから。"
+        }
+      },
+      "correctAnswer": {
+        "type": "choice",
+        "value": "C"
+      },
+      "answer": {
+        "zh-Hant": "答案是 C，期望值是 5.5 包。",
+        "zh-Hans": "答案是 C，期望值是 5.5 包。",
+        "en": "The answer is C: the expected number of packs is 5.5.",
+        "ja": "答えは C で、期待値は 5.5 袋です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "第一包不管開出哪一種都是全新的角色，所以「拿到第一種角色」平均只要 1 包。",
+          "已經有 1 種之後，每買一包有 2/3 的機率是新角色。成功機率 2/3 的等待問題，平均要 3/2 包，也就是 1.5 包。",
+          "已經有 2 種之後，每買一包只剩 1/3 的機率是最後那一種，平均要 3 包。",
+          "三個階段接在一起，期望值可以直接相加：1 + 1.5 + 3 = 5.5 包，所以選 C。"
+        ],
+        "zh-Hans": [
+          "第一包不管开出哪一种都是全新的角色，所以「拿到第一种角色」平均只要 1 包。",
+          "已经有 1 种之后，每买一包有 2/3 的机率是新角色。成功机率 2/3 的等待问题，平均要 3/2 包，也就是 1.5 包。",
+          "已经有 2 种之后，每买一包只剩 1/3 的机率是最后那一种，平均要 3 包。",
+          "三个阶段接在一起，期望值可以直接相加：1 + 1.5 + 3 = 5.5 包，所以选 C。"
+        ],
+        "en": [
+          "Whatever the first pack contains it is a brand new character, so getting the first character takes 1 pack on average.",
+          "Once one character is owned, each pack is new with probability 2/3. A waiting problem with success probability 2/3 takes 3/2 packs on average, that is 1.5 packs.",
+          "Once two characters are owned, each pack is the missing one with probability only 1/3, so this stage takes 3 packs on average.",
+          "The three stages follow one another, and expectations simply add: 1 + 1.5 + 3 = 5.5 packs, so the answer is C."
+        ],
+        "ja": [
+          "1 袋目は何が出ても必ず新しいキャラクターなので、1 種類目を得るのに平均 1 袋です。",
+          "1 種類持っている状態では、1 袋が新種である確率は 2/3 です。成功確率 2/3 の待ち時間問題なので平均 3/2 袋、つまり 1.5 袋かかります。",
+          "2 種類持っている状態では、1 袋が残り 1 種類である確率は 1/3 しかなく、平均 3 袋かかります。",
+          "3 つの段階は続けて起こるので期待値はそのまま足せます。1 + 1.5 + 3 = 5.5 袋となり、答えは C です。"
+        ]
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "expectation-grade10-coupon-collector",
+        "notes": "題型出自 Brilliant Math & Science Wiki 的 Coupon Collector Problem 條目（該頁把 n 種收集拆成 n 段幾何分布，期望值 n·Hₙ）；本題取最小的 n = 3 讓數字乾淨，並改寫成零食附贈角色卡的情境、改成選擇題以避開非整數作答。全庫掃描 c:expectation 的 17 題與『集滿／蒐集』關鍵字後確認沒有收集類期望值題：既有的等待型期望只有 combinatorics_grade12_042（擲骰直到第一次出現 6，單一幾何分布）；本題要把過程拆成三段成功機率不同的等待再相加，推理骨架不同。"
+      }
     }
   ]
 }

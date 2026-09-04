@@ -5243,6 +5243,236 @@
         "allowNegative": false,
         "maxDigits": 1
       }
+    },
+    {
+      "reviewStatus": "ok",
+      "difficulty": "foundation",
+      "challengeTier": "foundation",
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "id": "geometry_grade12_foundation_044",
+      "topic": "geometry",
+      "subtopic": "equilateral_triangle_edge_vector_dot_sum",
+      "tags": [
+        "c:vector",
+        "c:triangle",
+        "m:direct"
+      ],
+      "levelStage": "grade12",
+      "prompt": {
+        "zh-Hant": "正三角形 ABC 的邊長是 4。以 AB、BC、CA 表示三個邊向量（依 A → B → C → A 的繞行方向），求 AB · BC + BC · CA + CA · AB 的值（三個都是內積）。",
+        "zh-Hans": "正三角形 ABC 的边长是 4。以 AB、BC、CA 表示三个边向量（依 A → B → C → A 的绕行方向），求 AB · BC + BC · CA + CA · AB 的值（三个都是内积）。",
+        "en": "Equilateral triangle ABC has side length 4. Write AB, BC, CA for the three edge vectors taken in the order A → B → C → A. Find the value of AB · BC + BC · CA + CA · AB, where each term is a dot product.",
+        "ja": "正三角形 ABC の一辺の長さは 4 である。A → B → C → A の向きに沿った 3 つの辺ベクトルを AB、BC、CA と書くとき、AB · BC + BC · CA + CA · AB の値を求めよ（3 項とも内積である）。"
+      },
+      "answer": {
+        "zh-Hant": "三個內積相加的結果是 −24。",
+        "zh-Hans": "三个内积相加的结果是 −24。",
+        "en": "The three dot products add up to −24.",
+        "ja": "3 つの内積の和は −24 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "關鍵在夾角：AB 與 BC 的夾角不是三角形的內角 60°。把兩個向量的起點移到同一點之後，夾角是 180° − 60° = 120°，直接寫 cos 60° 是最常見的錯誤。",
+          "AB · BC = 4 × 4 × cos 120° = 16 × (−½) = −8。",
+          "由正三角形的對稱性，BC · CA 與 CA · AB 也都等於 −8。",
+          "三項相加：(−8) × 3 = −24。",
+          "也可以這樣驗算：沿著三角形繞一圈會回到起點，所以 AB + BC + CA = 0。兩邊平方得 3 × 4² + 2 × (三個內積之和) = 0，因此三個內積之和 = −48 ÷ 2 = −24。"
+        ],
+        "zh-Hans": [
+          "关键在夹角：AB 与 BC 的夹角不是三角形的内角 60°。把两个向量的起点移到同一点之后，夹角是 180° − 60° = 120°，直接写 cos 60° 是最常见的错误。",
+          "AB · BC = 4 × 4 × cos 120° = 16 × (−½) = −8。",
+          "由正三角形的对称性，BC · CA 与 CA · AB 也都等于 −8。",
+          "三项相加：(−8) × 3 = −24。",
+          "也可以这样验算：沿着三角形绕一圈会回到起点，所以 AB + BC + CA = 0。两边平方得 3 × 4² + 2 × (三个内积之和) = 0，因此三个内积之和 = −48 ÷ 2 = −24。"
+        ],
+        "en": [
+          "The angle is the crux: the angle between AB and BC is not the interior angle 60°. Once both vectors are moved to a common starting point the angle between them is 180° − 60° = 120°; writing cos 60° is the usual mistake.",
+          "AB · BC = 4 × 4 × cos 120° = 16 × (−½) = −8.",
+          "By the symmetry of the equilateral triangle, BC · CA and CA · AB also equal −8.",
+          "Adding the three terms: (−8) × 3 = −24.",
+          "A check: going once around the triangle returns to the start, so AB + BC + CA = 0. Squaring both sides gives 3 × 4² + 2 × (sum of the three dot products) = 0, so the sum is −48 ÷ 2 = −24."
+        ],
+        "ja": [
+          "要点はなす角です。AB と BC のなす角は内角の 60° ではありません。始点をそろえると なす角は 180° − 60° = 120° になり、cos 60° と書いてしまうのが典型的な誤りです。",
+          "AB · BC = 4 × 4 × cos 120° = 16 × (−½) = −8。",
+          "正三角形の対称性から、BC · CA と CA · AB もそれぞれ −8 です。",
+          "3 項を足すと (−8) × 3 = −24。",
+          "別の確かめ方：三角形を一周すると出発点に戻るので AB + BC + CA = 0。両辺を 2 乗すると 3 × 4² + 2 ×（3 つの内積の和）= 0 となり、和は −48 ÷ 2 = −24 です。"
+        ]
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "-24"
+      },
+      "inputConstraints": {
+        "allowNegative": true,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "geometry-grade12-equilateral-vector-dot-sum",
+        "notes": "題型取自 teachoo / EduRev / Sarthaks 上的經典題「a + b + c = 0 的單位向量求 a·b + b·c + c·a」，改寫成正三角形三邊向量、邊長 4，並把重點放在「AB 與 BC 的夾角是 120° 不是 60°」這個陷阱，詳解同時給角度法與平方法兩條路。全庫 c:vector 逐題比對：geometry_grade11_042（|u|=4、|v|=7、|u+v|=9 求內積）雖然也用平方，但那是給定合向量長度反推內積、沒有角度陷阱；本題的正解入口是 120° 的判讀。"
+      }
+    },
+    {
+      "reviewStatus": "ok",
+      "difficulty": "foundation",
+      "challengeTier": "foundation",
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "id": "geometry_grade12_foundation_045",
+      "topic": "geometry",
+      "subtopic": "regular_hexagon_vector_sum_multiple",
+      "tags": [
+        "c:vector",
+        "c:polygon",
+        "c:symmetry",
+        "m:direct"
+      ],
+      "levelStage": "grade12",
+      "prompt": {
+        "zh-Hant": "正六邊形 ABCDEF 的六個頂點依逆時針順序排列。已知向量和 AB + AC + AD + AE + AF 會等於某個實數 k 乘以向量 AD。求 k 的值。",
+        "zh-Hans": "正六边形 ABCDEF 的六个顶点依逆时针顺序排列。已知向量和 AB + AC + AD + AE + AF 会等于某个实数 k 乘以向量 AD。求 k 的值。",
+        "en": "The vertices of a regular hexagon ABCDEF are listed counterclockwise. The vector sum AB + AC + AD + AE + AF equals k times the vector AD for some real number k. Find k.",
+        "ja": "正六角形 ABCDEF の 6 頂点は反時計回りに並んでいる。ベクトルの和 AB + AC + AD + AE + AF は、ある実数 k を用いてベクトル AD の k 倍に等しい。k の値を求めよ。"
+      },
+      "answer": {
+        "zh-Hant": "k 的值是 3。",
+        "zh-Hans": "k 的值是 3。",
+        "en": "The value of k is 3.",
+        "ja": "k の値は 3 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "把六邊形放在座標上算最省事：設外接圓半徑是 1、中心在原點，依逆時針取 A(−1, 0)、B(−½, −√3/2)、C(½, −√3/2)、D(1, 0)、E(½, √3/2)、F(−½, √3/2)。",
+          "最長的對角線 AD 通過中心，向量 AD = (2, 0)，正好落在 x 軸上。",
+          "關鍵是對稱：B 與 F 關於直線 AD 對稱，C 與 E 也是。因此 AB + AF = (½, −√3/2) + (½, √3/2) = (1, 0)，AC + AE = (3/2, −√3/2) + (3/2, √3/2) = (3, 0)，垂直於 AD 的分量全部抵消。",
+          "五個向量相加：(1, 0) + (3, 0) + (2, 0) = (6, 0)。",
+          "而 (6, 0) = 3 × (2, 0) = 3 × 向量 AD，所以 k = 3。（答案與六邊形的大小無關。）"
+        ],
+        "zh-Hans": [
+          "把六边形放在坐标上算最省事：设外接圆半径是 1、中心在原点，依逆时针取 A(−1, 0)、B(−½, −√3/2)、C(½, −√3/2)、D(1, 0)、E(½, √3/2)、F(−½, √3/2)。",
+          "最长的对角线 AD 通过中心，向量 AD = (2, 0)，正好落在 x 轴上。",
+          "关键是对称：B 与 F 关于直线 AD 对称，C 与 E 也是。因此 AB + AF = (½, −√3/2) + (½, √3/2) = (1, 0)，AC + AE = (3/2, −√3/2) + (3/2, √3/2) = (3, 0)，垂直于 AD 的分量全部抵消。",
+          "五个向量相加：(1, 0) + (3, 0) + (2, 0) = (6, 0)。",
+          "而 (6, 0) = 3 × (2, 0) = 3 × 向量 AD，所以 k = 3。（答案与六边形的大小无关。）"
+        ],
+        "en": [
+          "Coordinates make this easiest: take the circumradius to be 1 with the centre at the origin, and going counterclockwise put A(−1, 0), B(−½, −√3/2), C(½, −√3/2), D(1, 0), E(½, √3/2), F(−½, √3/2).",
+          "The longest diagonal AD passes through the centre, and the vector AD = (2, 0) lies along the x-axis.",
+          "Symmetry is the key: B and F are mirror images in the line AD, and so are C and E. Hence AB + AF = (½, −√3/2) + (½, √3/2) = (1, 0) and AC + AE = (3/2, −√3/2) + (3/2, √3/2) = (3, 0); every component perpendicular to AD cancels.",
+          "Adding the five vectors: (1, 0) + (3, 0) + (2, 0) = (6, 0).",
+          "Since (6, 0) = 3 × (2, 0) = 3 × AD, we get k = 3, and the answer does not depend on the size of the hexagon."
+        ],
+        "ja": [
+          "座標に置くのが一番簡単です。外接円の半径を 1、中心を原点とし、反時計回りに A(−1, 0)、B(−½, −√3/2)、C(½, −√3/2)、D(1, 0)、E(½, √3/2)、F(−½, √3/2) と置きます。",
+          "最長の対角線 AD は中心を通り、ベクトル AD = (2, 0) はちょうど x 軸上にあります。",
+          "鍵は対称性です。B と F は直線 AD に関して対称で、C と E も同様です。よって AB + AF = (½, −√3/2) + (½, √3/2) = (1, 0)、AC + AE = (3/2, −√3/2) + (3/2, √3/2) = (3, 0) となり、AD に垂直な成分はすべて打ち消されます。",
+          "5 本を足すと (1, 0) + (3, 0) + (2, 0) = (6, 0)。",
+          "(6, 0) = 3 × (2, 0) = 3 × AD なので k = 3 です（答えは六角形の大きさによりません）。"
+        ]
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "3"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "geometry-grade12-hexagon-vector-sum",
+        "notes": "題型取自各國教材與 AoPS 論壇常見的「正多邊形頂點向量和」練習（把同一頂點出發的向量依對稱配對相消），改寫成正六邊形五個向量和對 AD 的倍數。全庫掃「正六邊形／正十二邊形」：geometry_grade10_022（最長對角線長度）、geometry_grade12_013（正六邊形與正三角形面積比）、geometry_grade12_018（六角柱體積）、combinatorics_grade12_003（選點數三角形）都不是向量題；c:vector 的 17 題也沒有任何一題用對稱配對相消。"
+      }
+    },
+    {
+      "reviewStatus": "ok",
+      "difficulty": "foundation",
+      "challengeTier": "foundation",
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "id": "geometry_grade12_foundation_046",
+      "topic": "geometry",
+      "subtopic": "largest_angle_cosine_from_sine_ratio",
+      "tags": [
+        "c:trigonometry",
+        "c:triangle",
+        "c:ratio",
+        "m:direct"
+      ],
+      "levelStage": "grade12",
+      "prompt": {
+        "zh-Hant": "某個三角形的三個角 A、B、C 滿足 sin A : sin B : sin C = 4 : 5 : 6。設 θ 是這個三角形之中最大的角，求 1 ÷ cos θ 的值。",
+        "zh-Hans": "某个三角形的三个角 A、B、C 满足 sin A : sin B : sin C = 4 : 5 : 6。设 θ 是这个三角形之中最大的角，求 1 ÷ cos θ 的值。",
+        "en": "The angles A, B and C of a certain triangle satisfy sin A : sin B : sin C = 4 : 5 : 6. Let θ be the largest angle of that triangle and find the value of 1 ÷ cos θ.",
+        "ja": "ある三角形の 3 つの角 A、B、C は sin A : sin B : sin C = 4 : 5 : 6 を満たす。θ をこの三角形の最大の角とするとき、1 ÷ cos θ の値を求めよ。"
+      },
+      "answer": {
+        "zh-Hant": "最大內角的餘弦值是 8 分之 1，它的倒數是 8。",
+        "zh-Hans": "最大内角的余弦值是 8 分之 1，它的倒数是 8。",
+        "en": "The cosine of the largest angle is 1 divided by 8, so the reciprocal is 8.",
+        "ja": "最大の内角の余弦は 1 ÷ 8 なので、その逆数は 8 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "由正弦定理，每個內角的正弦值與它的對邊成正比，所以三邊之比就是 a : b : c = 4 : 5 : 6。（注意角度本身的比並不是 4 : 5 : 6，這是最常見的誤解。）",
+          "因此可以設三邊長為 4k、5k、6k，其中 k > 0。最大的角對著最長的邊 6k，設它是 ∠C。",
+          "由餘弦定理：cos C = ((4k)² + (5k)² − (6k)²) ÷ (2 × 4k × 5k)。",
+          "分子 = 16k² + 25k² − 36k² = 5k²，分母 = 40k²，所以 cos C = 5k² ÷ 40k² = 1/8。k 被約掉了，可見答案與三角形的大小無關，只和形狀有關。",
+          "餘弦值是 8 分之 1，倒數就是 8。（cos C 是正的，代表最大的角是銳角，可見這個三角形是銳角三角形。）"
+        ],
+        "zh-Hans": [
+          "由正弦定理，每个内角的正弦值与它的对边成正比，所以三边之比就是 a : b : c = 4 : 5 : 6。（注意角度本身的比并不是 4 : 5 : 6，这是最常见的误解。）",
+          "因此可以设三边长为 4k、5k、6k，其中 k > 0。最大的角对着最长的边 6k，设它是 ∠C。",
+          "由余弦定理：cos C = ((4k)² + (5k)² − (6k)²) ÷ (2 × 4k × 5k)。",
+          "分子 = 16k² + 25k² − 36k² = 5k²，分母 = 40k²，所以 cos C = 5k² ÷ 40k² = 1/8。k 被约掉了，可见答案与三角形的大小无关，只和形状有关。",
+          "余弦值是 8 分之 1，倒数就是 8。（cos C 是正的，代表最大的角是锐角，可见这个三角形是锐角三角形。）"
+        ],
+        "en": [
+          "By the law of sines each sine is proportional to the opposite side, so the sides are in the ratio a : b : c = 4 : 5 : 6. Note that the angles themselves are not in the ratio 4 : 5 : 6, which is the usual misconception.",
+          "So the sides can be written as 4k, 5k and 6k with k > 0. The largest angle faces the longest side 6k; call it ∠C.",
+          "By the law of cosines, cos C = ((4k)² + (5k)² − (6k)²) ÷ (2 × 4k × 5k).",
+          "The numerator is 16k² + 25k² − 36k² = 5k² and the denominator is 40k², so cos C = 5k² ÷ 40k² = 1/8. The k cancels, so the answer depends only on the shape and not on the size.",
+          "The cosine equals 1 divided by 8, so its reciprocal is 8. Since cos C is positive the largest angle is acute, so the triangle is acute-angled."
+        ],
+        "ja": [
+          "正弦定理より各内角の正弦は対辺に比例するので、辺の比は a : b : c = 4 : 5 : 6 です。（角そのものの比が 4 : 5 : 6 ではない点に注意。これがよくある誤解です。）",
+          "したがって 3 辺を 4k、5k、6k（k > 0）とおけます。最大の角は最長辺 6k に対する角で、これを ∠C とします。",
+          "余弦定理より cos C = ((4k)² + (5k)² − (6k)²) ÷ (2 × 4k × 5k)。",
+          "分子は 16k² + 25k² − 36k² = 5k²、分母は 40k² なので cos C = 5k² ÷ 40k² = 1/8。k が約分され、答えは三角形の大きさによらず形だけで決まることが分かります。",
+          "余弦は 1 ÷ 8 なので、その逆数は 8 です。（cos C が正なので最大角は鋭角、この三角形は鋭角三角形です。）"
+        ]
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "8"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "geometry-grade12-sine-ratio-largest-angle",
+        "notes": "題型取自「sin A : sin B : sin C = 4 : 5 : 6 求最大角的餘弦」這個公開題庫常見題（collegedunia 的 a : b : c = 4 : 5 : 6 題與 cuemath 的 law of sines 頁面），改寫成填 n（餘弦寫成 n 分之 1）以配合整數作答，並在詳解點出 k 會被約掉。全庫掃 c:trigonometry 與「正弦定理」：geometry_grade11_011 直接給三邊長 3、7、8 求角，本題給的是正弦值之比、必須先用正弦定理換成邊長比才能動手，入口不同；geometry_grade11_036 則只用到正弦定理求外接圓半徑。"
+      }
     }
   ]
 }

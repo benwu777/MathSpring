@@ -5613,6 +5613,245 @@
         "reference": "logic-grade6-foundation",
         "notes": "題型骨架取自 AoPS Wiki 的 Principle of Inclusion-Exclusion 頁與 Brilliant 的 PIE 條目所列的「字串中指定字母都必須出現」標準例。全庫最接近的是 combinatorics_grade7_039（三位數密碼至少出現一個 0）與 combinatorics_grade9_015（三位數至少含一個 3），兩題都只有「單一個至少出現一次」，用一次補集就結束；本題要同時處理兩個「至少出現一次」，必須扣兩次再補回交集 CCCC，是多一層排容的推理核心。與 combinatorics_grade10_010（A 恰好出現 2 次）也不同，該題是恰好次數的組合計數。"
       }
+    },
+    {
+      "id": "logic_grade6_foundation_068",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "standing_rows_and_columns_in_seating_grid",
+      "tags": [
+        "c:inclusion_exclusion",
+        "c:basic_counting",
+        "m:reverse"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade6",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一間教室的座位排成 10 排 10 列，每個位置都坐著一位學生。老師先請第 2 排、第 5 排、第 9 排的學生全部起立，接著再請第 3 列與第 8 列的學生全部起立（已經站著的人就繼續站著）。最後仍然坐著的學生有幾位？",
+        "zh-Hans": "一间教室的座位排成 10 排 10 列，每个位置都坐着一位学生。老师先请第 2 排、第 5 排、第 9 排的学生全部起立，接着再请第 3 列与第 8 列的学生全部起立（已经站着的人就继续站着）。最后仍然坐着的学生有几位？",
+        "en": "A classroom has seats in 10 rows and 10 columns, with a student in every seat. The teacher first asks everyone in rows 2, 5 and 9 to stand up, and then asks everyone in columns 3 and 8 to stand up as well (anyone already standing simply stays up). How many students are still seated at the end?",
+        "ja": "教室の席は 10 行 10 列に並んでいて、すべての席に生徒が 1 人ずつ座っています。先生はまず第 2 行、第 5 行、第 9 行の生徒全員を立たせ、次に第 3 列と第 8 列の生徒全員も立たせます（すでに立っている人はそのままです）。最後まで座っている生徒は何人ですか。"
+      },
+      "answer": {
+        "zh-Hant": "最後仍然坐著的學生有 56 位。",
+        "zh-Hans": "最后仍然坐着的学生有 56 位。",
+        "en": "There are 56 students still seated.",
+        "ja": "最後まで座っている生徒は 56 人です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "先分兩批數站起來的人：被叫到的 3 排，每排 10 人，共 30 人；被叫到的 2 列，每列 10 人，共 20 人，兩批加起來是 50 人。",
+          "但這樣一定重複算了：同時位在被叫到的排與被叫到的列上的座位共有 3 × 2 = 6 個，這 6 位學生被算了兩次。",
+          "用排容原理扣掉重複：站起來的是 30 + 20 − 6 = 44 人，所以仍然坐著的是 100 − 44 = 56 位。",
+          "也可以換個角度直接數坐著的人：沒被叫到的排有 10 − 3 = 7 排，沒被叫到的列有 10 − 2 = 8 列，仍然坐著的座位剛好排成一個 7 × 8 的長方形，共 7 × 8 = 56 個，答案一致。"
+        ],
+        "zh-Hans": [
+          "先分两批数站起来的人：被叫到的 3 排，每排 10 人，共 30 人；被叫到的 2 列，每列 10 人，共 20 人，两批加起来是 50 人。",
+          "但这样一定重复算了：同时位在被叫到的排与被叫到的列上的座位共有 3 × 2 = 6 个，这 6 位学生被算了两次。",
+          "用容斥原理扣掉重复：站起来的是 30 + 20 − 6 = 44 人，所以仍然坐着的是 100 − 44 = 56 位。",
+          "也可以换个角度直接数坐着的人：没被叫到的排有 10 − 3 = 7 排，没被叫到的列有 10 − 2 = 8 列，仍然坐着的座位刚好排成一个 7 × 8 的长方形，共 7 × 8 = 56 个，答案一致。"
+        ],
+        "en": [
+          "Count the students who stand up in two batches: the 3 chosen rows hold 10 students each, giving 30, and the 2 chosen columns hold 10 each, giving 20, for a total of 50.",
+          "That total double counts: the seats lying both in a chosen row and in a chosen column number 3 x 2 = 6, and those 6 students were counted twice.",
+          "By inclusion and exclusion the number standing is 30 + 20 - 6 = 44, so the number still seated is 100 - 44 = 56.",
+          "One can also count the seated students directly: 10 - 3 = 7 rows were not called and 10 - 2 = 8 columns were not called, so the seated students form a 7 by 8 block, that is 7 x 8 = 56 students, which agrees."
+        ],
+        "ja": [
+          "立った生徒を 2 回に分けて数えます。呼ばれた 3 行は各 10 人で 30 人、呼ばれた 2 列は各 10 人で 20 人、合わせて 50 人です。",
+          "しかしこれは重複しています。呼ばれた行と呼ばれた列の交わる席は 3 × 2 = 6 席あり、その 6 人は 2 回数えられています。",
+          "包除原理で重複を引くと、立ったのは 30 + 20 − 6 = 44 人なので、座ったままなのは 100 − 44 = 56 人です。",
+          "座っている生徒を直接数えることもできます。呼ばれなかった行は 10 − 3 = 7 行、呼ばれなかった列は 10 − 2 = 8 列なので、座っている席は 7 × 8 の長方形をなし 7 × 8 = 56 席となり、答えは一致します。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "56"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade6-foundation",
+        "notes": "題型取自公開題庫常見的『整行整列被選取的方格計數』（Brilliant 的 grid counting 與 Math Stack Exchange 上 rows and columns overlap 的討論），把排容原理搬到二維座位表上。既有排容題全部是集合型的人數統計（logic_grade6_foundation_033、mixed_grade6_foundation_033、combinatorics_grade7_foundation_011 等）或倍數計數（arithmetic_grade6_foundation_097、number_theory_grade8_foundation_047）；本題的重疊部分是行列交點 3 × 2 = 6 格，而且有第二條路徑（剩下的座位自成 7 × 8 長方形）可以驗算，推理核心與上述各題都不同。"
+      }
+    },
+    {
+      "id": "logic_grade6_foundation_069",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "pick_cards_sum_fifteen_game",
+      "tags": [
+        "c:game_theory",
+        "c:basic_counting",
+        "m:bijection"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade6",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "桌上放著寫有 1 到 9 的九張卡片。甲、乙兩人輪流各拿走一張（由甲先拿），拿走的卡片歸自己。只要某人手上出現三張卡片、它們的數字加起來恰好是 15，這個人立刻獲勝；若九張卡片全被拿光都沒有人湊出這樣的三張，就算和局。若兩人都採取最佳策略，結果會是下列哪一個？",
+        "zh-Hans": "桌上放着写有 1 到 9 的九张卡片。甲、乙两人轮流各拿走一张（由甲先拿），拿走的卡片归自己。只要某人手上出现三张卡片、它们的数字加起来恰好是 15，这个人立刻获胜；若九张卡片全被拿光都没有人凑出这样的三张，就算和局。若两人都采取最佳策略，结果会是下列哪一个？",
+        "en": "Nine cards showing 1 to 9 lie on the table. Two players take turns removing one card each and keeping it, with the first player starting. As soon as a player holds three cards whose numbers add up to exactly 15, that player wins immediately; if all nine cards are taken and nobody holds such a triple, the game is a draw. With best play from both sides, which of the following describes the result?",
+        "ja": "机の上に 1 から 9 までが書かれた 9 枚のカードがあります。甲と乙が交互に 1 枚ずつ取って自分のものにし、甲が先に取ります。手元のカードのうち 3 枚の数の和がちょうど 15 になった人がその場で勝ちで、9 枚すべて取られてもそのような 3 枚が現れなければ引き分けです。両者が最善を尽くしたとき、結果は次のどれになりますか。"
+      },
+      "answer": {
+        "zh-Hant": "雙方都採取最佳策略時是和局，答案是選項 C。",
+        "zh-Hans": "双方都采取最佳策略时是和局，答案是选项 C。",
+        "en": "With best play the game ends in a draw, so the answer is option C.",
+        "ja": "両者が最善を尽くすと引き分けになるので、答えは選択肢 C です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "先把 1 到 9 之中三數和為 15 的組合全部列出來：(1,5,9)、(1,6,8)、(2,4,9)、(2,5,8)、(2,6,7)、(3,4,8)、(3,5,7)、(4,5,6)，恰好 8 組。",
+          "再把 1 到 9 排成三階幻方 4 9 2 / 3 5 7 / 8 1 6，它的每一行、每一列與兩條對角線的三數和都是 15，而且這樣的線也恰好是 3 + 3 + 2 = 8 條。",
+          "上面那 8 組數與幻方上的 8 條線一一對應，所以「湊出和為 15 的三張卡片」就等於「在幻方上把一條線的三格佔滿」。",
+          "也就是說這個拿卡片的遊戲和井字遊戲是同一個遊戲，只是換了一個外衣。井字遊戲在雙方都最佳的情況下是和局，因此本題也是和局，答案是選項 C。"
+        ],
+        "zh-Hans": [
+          "先把 1 到 9 之中三数和为 15 的组合全部列出来：(1,5,9)、(1,6,8)、(2,4,9)、(2,5,8)、(2,6,7)、(3,4,8)、(3,5,7)、(4,5,6)，恰好 8 组。",
+          "再把 1 到 9 排成三阶幻方 4 9 2 / 3 5 7 / 8 1 6，它的每一行、每一列与两条对角线的三数和都是 15，而且这样的线也恰好是 3 + 3 + 2 = 8 条。",
+          "上面那 8 组数与幻方上的 8 条线一一对应，所以「凑出和为 15 的三张卡片」就等于「在幻方上把一条线的三格占满」。",
+          "也就是说这个拿卡片的游戏和井字游戏是同一个游戏，只是换了一个外衣。井字游戏在双方都最佳的情况下是和局，因此本题也是和局，答案是选项 C。"
+        ],
+        "en": [
+          "First list every triple from 1 to 9 that adds up to 15: (1,5,9), (1,6,8), (2,4,9), (2,5,8), (2,6,7), (3,4,8), (3,5,7) and (4,5,6) - exactly 8 triples.",
+          "Now arrange 1 to 9 in the magic square 4 9 2 / 3 5 7 / 8 1 6. Each row, each column and both diagonals add up to 15, and there are exactly 3 + 3 + 2 = 8 such lines.",
+          "Those 8 triples match the 8 lines of the magic square one to one, so holding three cards summing to 15 is the same as occupying a whole line of the square.",
+          "Hence this card game is tic-tac-toe in disguise. Tic-tac-toe is a draw under best play, so this game is a draw as well, which is option C."
+        ],
+        "ja": [
+          "まず 1 から 9 の中で 3 数の和が 15 になる組を全部書き出します。(1,5,9)、(1,6,8)、(2,4,9)、(2,5,8)、(2,6,7)、(3,4,8)、(3,5,7)、(4,5,6) のちょうど 8 組です。",
+          "次に 1 から 9 を三方陣 4 9 2 / 3 5 7 / 8 1 6 に並べます。各行、各列、2 本の対角線の和はどれも 15 で、その線もちょうど 3 + 3 + 2 = 8 本です。",
+          "先ほどの 8 組と方陣の 8 本の線は一対一に対応するので、和が 15 の 3 枚を揃えることは方陣の 1 本の線を占めることと同じです。",
+          "つまりこのゲームは三目並べと同じゲームです。三目並べは両者最善なら引き分けなので、このゲームも引き分けであり、答えは選択肢 C です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "multiple_choice",
+      "correctAnswer": {
+        "type": "choice",
+        "value": "C"
+      },
+      "options": {
+        "A": {
+          "zh-Hant": "甲有必勝策略：只要第一張先拿走 5，之後不論乙怎麼拿，甲都湊得出和為 15 的三張卡片。",
+          "zh-Hans": "甲有必胜策略：只要第一张先拿走 5，之后不论乙怎么拿，甲都凑得出和为 15 的三张卡片。",
+          "en": "The first player wins: by taking 5 first, he can always complete a triple summing to 15 no matter how the second player replies.",
+          "ja": "先手が必勝です。最初に 5 を取れば、後手がどう取っても和が 15 の 3 枚を必ず揃えられます。"
+        },
+        "B": {
+          "zh-Hant": "乙有必勝策略：不論甲第一張拿走哪個數字，乙都能搶先湊出和為 15 的三張卡片。",
+          "zh-Hans": "乙有必胜策略：不论甲第一张拿走哪个数字，乙都能抢先凑出和为 15 的三张卡片。",
+          "en": "The second player wins: whichever number the first player takes first, the second player can complete a triple summing to 15 first.",
+          "ja": "後手が必勝です。先手が最初にどの数を取っても、後手が先に和が 15 の 3 枚を揃えられます。"
+        },
+        "C": {
+          "zh-Hant": "雙方都用最佳策略時是和局：誰都無法逼出和為 15 的三張卡片，九張卡片會全部被拿光。",
+          "zh-Hans": "双方都用最佳策略时是和局：谁都无法逼出和为 15 的三张卡片，九张卡片会全部被拿光。",
+          "en": "With best play it is a draw: neither player can force a triple summing to 15, and all nine cards get taken.",
+          "ja": "両者最善なら引き分けです。どちらも和が 15 の 3 枚を強制できず、9 枚すべてが取られます。"
+        },
+        "D": {
+          "zh-Hant": "結果取決於甲第一張拿的數字：拿走奇數時甲必勝，拿走偶數時反而變成乙必勝。",
+          "zh-Hans": "结果取决于甲第一张拿的数字：拿走奇数时甲必胜，拿走偶数时反而变成乙必胜。",
+          "en": "It depends on the first card: if the first player takes an odd number he wins, and if he takes an even number the second player wins.",
+          "ja": "先手の最初の数で決まります。奇数を取れば先手が勝ち、偶数を取れば後手が勝ちます。"
+        }
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade6-foundation",
+        "notes": "題型取自公開資料所稱的 Number Scrabble / Game of 15（維基百科與 Williams College MA313 講義都完整說明它與井字遊戲同構）。既有 logic_grade7_foundation_013 只是填三階幻方的靜態題，本題是兩人博弈；既有博弈題（logic_grade11_foundation_001 拿硬幣、logic_grade12_foundation_019 累加報數、logic_grade6_foundation_066 巧克力）都靠餘數或對稱找必敗態，本題的推理核心是把遊戲映射成井字遊戲的同構論證，骨架不同。"
+      }
+    },
+    {
+      "id": "logic_grade6_foundation_070",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "max_non_adjacent_tokens_five_by_five",
+      "tags": [
+        "c:permutation_combination",
+        "c:basic_counting",
+        "m:coloring",
+        "m:construction"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade6",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一個 5 列 5 行的方格板共有 25 格。要在其中一些格子各放一枚棋子（每格最多放一枚），並規定任兩枚棋子都不可以放在上下相鄰或左右相鄰的兩格（斜對角相鄰是允許的）。最多可以放幾枚棋子？",
+        "zh-Hans": "一个 5 列 5 行的方格板共有 25 格。要在其中一些格子各放一枚棋子（每格最多放一枚），并规定任两枚棋子都不可以放在上下相邻或左右相邻的两格（斜对角相邻是允许的）。最多可以放几枚棋子？",
+        "en": "A board has 5 rows and 5 columns, 25 cells in all. Counters are placed on some cells, at most one per cell, so that no two counters sit on cells that are next to each other up-down or left-right (diagonal neighbours are allowed). What is the largest possible number of counters?",
+        "ja": "5 行 5 列、全部で 25 マスの盤があります。いくつかのマスに 1 枚ずつ駒を置きますが、上下または左右に隣り合う 2 マスに駒を同時に置いてはいけません（斜めに隣り合うのは構いません）。駒は最大で何枚置けますか。"
+      },
+      "answer": {
+        "zh-Hant": "最多可以放 13 枚棋子。",
+        "zh-Hans": "最多可以放 13 枚棋子。",
+        "en": "At most 13 counters can be placed.",
+        "ja": "最大で 13 枚置けます。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "先把方格板照西洋棋的方式塗成黑白相間，左上角塗黑。這樣黑格有 13 格、白格有 12 格，而且上下或左右相鄰的兩格一定一黑一白。",
+          "把 13 個黑格全部放上棋子：任兩個黑格都不會上下或左右相鄰，所以 13 枚確實放得下。",
+          "再說明不可能更多。把第 1、2 列上下配成一對，共 5 對；第 3、4 列同樣配成 5 對；第 5 列的 5 格左右配成 2 對，還剩下 1 格。25 格因此被分成 12 組「相鄰的兩格」加上 1 個單格。",
+          "每一組相鄰的兩格最多只能有 1 枚棋子，那個單格最多也只有 1 枚，所以總數不超過 12 + 1 = 13。與上面的放法合起來，最多就是 13 枚。"
+        ],
+        "zh-Hans": [
+          "先把方格板照西洋棋的方式涂成黑白相间，左上角涂黑。这样黑格有 13 格、白格有 12 格，而且上下或左右相邻的两格一定一黑一白。",
+          "把 13 个黑格全部放上棋子：任两个黑格都不会上下或左右相邻，所以 13 枚确实放得下。",
+          "再说明不可能更多。把第 1、2 列上下配成一对，共 5 对；第 3、4 列同样配成 5 对；第 5 列的 5 格左右配成 2 对，还剩下 1 格。25 格因此被分成 12 组「相邻的两格」加上 1 个单格。",
+          "每一组相邻的两格最多只能有 1 枚棋子，那个单格最多也只有 1 枚，所以总数不超过 12 + 1 = 13。与上面的放法合起来，最多就是 13 枚。"
+        ],
+        "en": [
+          "Colour the board like a chessboard with the top left cell black. Then there are 13 black cells and 12 white cells, and any two cells adjacent up-down or left-right have opposite colours.",
+          "Put a counter on every black cell: no two black cells are adjacent up-down or left-right, so 13 counters really do fit.",
+          "Now show that more is impossible. Pair each cell of row 1 with the cell below it in row 2, giving 5 pairs; do the same for rows 3 and 4, giving 5 more; in row 5 pair the cells left to right into 2 pairs, leaving 1 cell over. The 25 cells split into 12 adjacent pairs plus a single cell.",
+          "Each adjacent pair can hold at most 1 counter and the single cell at most 1, so the total is at most 12 + 1 = 13. Combined with the arrangement above, the maximum is exactly 13."
+        ],
+        "ja": [
+          "まず盤をチェス盤のように市松に塗り、左上を黒にします。すると黒は 13 マス、白は 12 マスで、上下または左右に隣り合う 2 マスは必ず色が違います。",
+          "黒の 13 マスすべてに駒を置きます。黒どうしは上下にも左右にも隣り合わないので、13 枚は実際に置けます。",
+          "次にこれ以上は無理なことを示します。第 1 行と第 2 行を上下で組にすると 5 組、第 3 行と第 4 行も 5 組、第 5 行の 5 マスは左右で 2 組にすると 1 マス余ります。25 マスは隣り合う 2 マスの組 12 個と単独の 1 マスに分かれます。",
+          "各組には最大 1 枚、単独のマスにも最大 1 枚しか置けないので合計は 12 + 1 = 13 以下です。先ほどの置き方と合わせて最大は 13 枚です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "13"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade6-foundation",
+        "notes": "題型取自 grid graph 的最大獨立集謎題（Wikipedia independent set 條目與各家 puzzle 網站常見的『非攻擊放置』題）。既有 logic_grade11_foundation_020 是 4×4 放不互相攻擊的騎士、logic_grade11_foundation_022 是每個 2×2 至多一枚、logic_grade12_foundation_025 是 5×5 感測器覆蓋（求最少覆蓋全盤），三題的限制條件與求量都不同；本題的推理點是用黑白染色給出構造、再用配對法給出上界，兩段論證缺一不可。"
+      }
     }
   ]
 }

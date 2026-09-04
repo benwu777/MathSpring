@@ -4038,6 +4038,82 @@
         "reference": "number-theory-grade8-foundation",
         "notes": "題型參考 AoPS Wiki 的 Inclusion-Exclusion 例題與 AMC 舊題中「multiples or perfect squares in a range」這一族。全庫的排容計數題交集都很直接：arithmetic_grade5_009、arithmetic_grade6_097、combinatorics_grade12_043 的交集就是兩數的公倍數；本題的交集不是「3 與平方的最小公倍數」這種現成物件，必須先論證「k² 是 3 的倍數 ⇒ k 是 3 的倍數」才數得出來，而且平方數個數要靠 17² 與 18² 夾出上界。與 number_theory_grade9_013（同時是平方數又是立方數）不同，那題是六次方的觀察，跟 3 的倍數無關。"
       }
+    },
+    {
+      "id": "number_theory_grade8_foundation_048",
+      "reviewStatus": "ok",
+      "topic": "number_theory",
+      "subtopic": "odometer_skipping_digit_four",
+      "tags": [
+        "c:number_base",
+        "c:place_value",
+        "m:bijection"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade8",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一台里程表有毛病：它的每一位數字只會出現 0、1、2、3、5、6、7、8、9 這九個，也就是會跳過所有含有數字 4 的讀數（例如它從 39 直接跳到 50）。這台里程表從 0 開始計數，現在顯示 100。這輛車實際走了幾公里？",
+        "zh-Hans": "一台里程表有毛病：它的每一位数字只会出现 0、1、2、3、5、6、7、8、9 这九个，也就是会跳过所有含有数字 4 的读数（例如它从 39 直接跳到 50）。这台里程表从 0 开始计数，现在显示 100。这辆车实际走了几公里？",
+        "en": "A faulty odometer only ever shows the nine digits 0, 1, 2, 3, 5, 6, 7, 8 and 9 in each place, so it skips every reading that contains the digit 4; for instance it jumps straight from 39 to 50. Starting from 0, the odometer now reads 100. How many kilometres has the car really travelled?",
+        "ja": "故障した走行距離計があります。各桁には 0、1、2、3、5、6、7、8、9 の 9 個の数字しか現れず、4 を含む表示はすべて飛ばされます（たとえば 39 の次はいきなり 50 になります）。0 から数え始めたこの距離計が今 100 と表示しています。車は実際に何キロメートル走りましたか。"
+      },
+      "answer": {
+        "zh-Hant": "這輛車實際走了 81 公里。",
+        "zh-Hans": "这辆车实际走了 81 公里。",
+        "en": "The car has really travelled 81 kilometres.",
+        "ja": "車は実際に 81 キロメートル走りました。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "這台表每一位只用得到 0、1、2、3、5、6、7、8、9 九個符號，而且是照這個順序進位的。九個符號正好對應九進位裡的 0 到 8，所以這台表其實是在用九進位數數，只是把九進位的第五個數字寫成 5 而不是 4。",
+          "對照表如下：表上的 0、1、2、3 就是九進位的 0、1、2、3；表上的 5、6、7、8、9 則分別代表九進位的 4、5、6、7、8（4 被跳過，後面每個數字都往前挪一格）。",
+          "表上現在顯示 100，三個數字 1、0、0 都不大於 3，換成九進位仍然是 1、0、0，也就是九進位的 100。",
+          "把九進位的 100 換回十進位：1 × 9² + 0 × 9 + 0 = 81。",
+          "由於表從 0 開始，每走 1 公里就往前跳一個合法讀數，因此讀數所對應的九進位值就是實際里程，這輛車實際走了 81 公里。"
+        ],
+        "zh-Hans": [
+          "这台表每一位只用得到 0、1、2、3、5、6、7、8、9 九个符号，而且是照这个顺序进位的。九个符号正好对应九进位里的 0 到 8，所以这台表其实是在用九进位数数，只是把九进位的第五个数字写成 5 而不是 4。",
+          "对照表如下：表上的 0、1、2、3 就是九进位的 0、1、2、3；表上的 5、6、7、8、9 则分别代表九进位的 4、5、6、7、8（4 被跳过，后面每个数字都往前挪一格）。",
+          "表上现在显示 100，三个数字 1、0、0 都不大于 3，换成九进位仍然是 1、0、0，也就是九进位的 100。",
+          "把九进位的 100 换回十进位：1 × 9² + 0 × 9 + 0 = 81。",
+          "由于表从 0 开始，每走 1 公里就往前跳一个合法读数，因此读数所对应的九进位值就是实际里程，这辆车实际走了 81 公里。"
+        ],
+        "en": [
+          "Each place of this odometer uses only the nine symbols 0, 1, 2, 3, 5, 6, 7, 8, 9 and carries over in that order. Nine symbols match the digits 0 to 8 of base 9, so the odometer is really counting in base 9, except that its fifth symbol is written 5 instead of 4.",
+          "The dictionary is this: displayed 0, 1, 2, 3 stand for the base 9 digits 0, 1, 2, 3, while displayed 5, 6, 7, 8, 9 stand for the base 9 digits 4, 5, 6, 7, 8, since 4 is skipped and every later symbol shifts down by one.",
+          "The display reads 100, and each of the digits 1, 0, 0 is at most 3, so in base 9 the reading is still 1, 0, 0, that is the base 9 number 100.",
+          "Convert that back to base 10: 1 x 9 squared + 0 x 9 + 0 = 81.",
+          "Since the odometer starts at 0 and advances to the next legal reading after each kilometre, the base 9 value of the reading is exactly the distance, so the car has travelled 81 kilometres."
+        ],
+        "ja": [
+          "この距離計は各桁に 0、1、2、3、5、6、7、8、9 の 9 個の記号しか使わず、その順に繰り上がります。9 個の記号は九進法の 0 から 8 に対応するので、この計器は実は九進法で数えており、5 番目の数字を 4 ではなく 5 と書いているだけです。",
+          "対応は次の通りです。表示の 0、1、2、3 は九進法の 0、1、2、3 で、表示の 5、6、7、8、9 は九進法の 4、5、6、7、8 を表します（4 が飛ばされ、以降が 1 つずつずれるためです）。",
+          "今の表示は 100 で、1、0、0 はどれも 3 以下なので、九進法でもそのまま 1、0、0、つまり九進法の 100 です。",
+          "これを十進法に直すと 1 × 9² + 0 × 9 + 0 = 81 です。",
+          "計器は 0 から始まり 1 キロメートルごとに次の正しい表示へ進むので、表示に対応する九進法の値がそのまま走行距離となり、車は 81 キロメートル走ったことになります。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "81"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "number_theory-grade8-foundation",
+        "notes": "題型取自 AMC 常見的 faulty odometer / skipping digit 題（例如跳過數字 4 的里程表，公開題解都把它解讀成九進位），本題改成從 0 起算並問實際里程。既有進位制題 number_theory_grade10_foundation_009（十六進位只含 0 到 9 的個數）、number_theory_grade9_foundation_024（十進位不出現 7 的個數）是在數符合條件的數的個數；number_theory_grade9_foundation_018、036 是單純換底。本題的推理點是把『跳號的計數器』認出為九進位並建立符號對照，既有題沒有這個轉換。"
+      }
     }
   ]
 }

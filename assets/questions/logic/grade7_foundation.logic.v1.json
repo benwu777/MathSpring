@@ -4354,6 +4354,157 @@
         "reference": "logic-grade7-foundation",
         "notes": "題型取自 Bulgarian solitaire（保加利亞接龍，Martin Gardner 1983 年在 Scientific American 介紹，維基百科同名條目與多篇公開講義都有完整規則），已知當總數是三角形數 n = k(k+1)/2 時，過程必定收斂到 1、2、⋯、k 的固定形狀。改寫成 15 顆棋子、問第一次達到固定形狀要幾輪。去重：全庫的遞迴題都是數列型（arithmetic_grade4_009 差遞增、arithmetic_grade4_034 乘 2 減 1、algebra_grade7_061 水塔放掉一半再注水）或走樓梯與鋪磚的計數型，操作對象都是單一個數；本題的狀態是「一組堆的顆數」，每一輪的變化規則是整組同時減 1 再生出新堆，沒有既有題用過。logic_grade6_058（機器每按一次取走 5 顆放回 2 顆）只是單一個數的等差遞減。"
       }
+    },
+    {
+      "id": "logic_grade7_foundation_049",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "two_bags_equal_removal_game",
+      "tags": [
+        "c:game_theory",
+        "m:enumeration"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade7",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "桌上有兩個袋子，分別裝著 6 顆和 9 顆珠子。甲、乙兩人輪流動手，由甲先動。輪到的人可以二選一：一是從其中一個袋子拿走任意顆數（至少 1 顆，整袋拿光也可以）；二是從兩個袋子各拿走同樣多的顆數（每袋至少 1 顆）。拿走最後一顆珠子的人獲勝。已知甲有必勝走法，而且必勝的第一步只有一種。求甲走完第一步之後，桌上還剩下幾顆珠子。",
+        "zh-Hans": "桌上有两个袋子，分别装着 6 颗和 9 颗珠子。甲、乙两人轮流动手，由甲先动。轮到的人可以二选一：一是从其中一个袋子拿走任意颗数（至少 1 颗，整袋拿光也可以）；二是从两个袋子各拿走同样多的颗数（每袋至少 1 颗）。拿走最后一颗珠子的人获胜。已知甲有必胜走法，而且必胜的第一步只有一种。求甲走完第一步之后，桌上还剩下几颗珠子。",
+        "en": "Two bags on the table hold 6 beads and 9 beads. Two players move alternately, the first player starting. On a turn a player either takes any number of beads (at least one, possibly all) from a single bag, or takes the same number of beads from both bags (at least one from each). Whoever takes the last bead wins. The first player has a winning move, and that winning first move is unique. How many beads are left on the table right after that first move?",
+        "ja": "机の上に 2 つの袋があり、それぞれ 6 個と 9 個のビーズが入っています。甲と乙が交互に取り、甲が先手です。手番の人は、片方の袋から好きな個数（1 個以上、全部でもよい）を取るか、両方の袋から同じ個数ずつ（各袋 1 個以上）取るかを選べます。最後のビーズを取った人が勝ちです。甲には必勝の手があり、しかもその最初の一手は 1 通りしかありません。甲が最初の一手を終えた直後、机の上にビーズは何個残っていますか。"
+      },
+      "answer": {
+        "zh-Hant": "甲走完第一步之後，桌上還剩下 11 顆珠子。",
+        "zh-Hans": "甲走完第一步之后，桌上还剩下 11 颗珠子。",
+        "en": "After that first move there are 11 beads left on the table.",
+        "ja": "最初の一手のあと、机の上には 11 個のビーズが残ります。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "先找「輪到誰動手誰就輸」的必敗局面。兩袋都空的 (0, 0) 顯然是必敗，因為輪到的人無法動手。",
+          "接著由小往大檢查：只要能一步走到某個必敗局面，這個局面就是必勝。像 (1, 1) 可以兩袋各拿 1 顆變成 (0, 0)，是必勝；(1, 2) 的每一種走法都留給對手一個能一次拿光的局面，所以 (1, 2) 是必敗。",
+          "照這個方式一路算下去，顆數不超過 10 的必敗局面只有 (0, 0)、(1, 2)、(3, 5)、(4, 7)、(6, 10)（兩袋對調也算）。",
+          "現在的局面是 (6, 9)。從兩個袋子各拿走 2 顆會變成 (4, 7)，正好是必敗局面；其他走法（只動一個袋子，或各拿 1、3、4⋯顆）留下的都是必勝局面，所以第一步只有這一種。",
+          "走完之後兩袋分別剩 4 顆與 7 顆，桌上共剩 4 + 7 = 11 顆珠子。"
+        ],
+        "zh-Hans": [
+          "先找「轮到谁动手谁就输」的必败局面。两袋都空的 (0, 0) 显然是必败，因为轮到的人无法动手。",
+          "接着由小往大检查：只要能一步走到某个必败局面，这个局面就是必胜。像 (1, 1) 可以两袋各拿 1 颗变成 (0, 0)，是必胜；(1, 2) 的每一种走法都留给对手一个能一次拿光的局面，所以 (1, 2) 是必败。",
+          "照这个方式一路算下去，颗数不超过 10 的必败局面只有 (0, 0)、(1, 2)、(3, 5)、(4, 7)、(6, 10)（两袋对调也算）。",
+          "现在的局面是 (6, 9)。从两个袋子各拿走 2 颗会变成 (4, 7)，正好是必败局面；其他走法（只动一个袋子，或各拿 1、3、4⋯颗）留下的都是必胜局面，所以第一步只有这一种。",
+          "走完之后两袋分别剩 4 颗与 7 颗，桌上共剩 4 + 7 = 11 颗珠子。"
+        ],
+        "en": [
+          "Look for the losing positions, the ones where the player to move must lose. The empty position (0, 0) is losing because that player cannot move at all.",
+          "Work upwards: a position is winning if one move reaches a losing position. For instance (1, 1) becomes (0, 0) by taking one from each bag, so it is winning, while every move from (1, 2) hands the opponent a position he can clear in one go, so (1, 2) is losing.",
+          "Continuing this way, the losing positions with at most 10 beads in a bag are (0, 0), (1, 2), (3, 5), (4, 7) and (6, 10), together with the same pairs swapped.",
+          "The current position is (6, 9). Taking 2 beads from each bag gives (4, 7), a losing position; every other move, whether from one bag only or taking 1, 3, 4 and so on from both, leaves a winning position, so the first move is unique.",
+          "After that move the bags hold 4 and 7 beads, so 4 + 7 = 11 beads remain on the table."
+        ],
+        "ja": [
+          "まず「手番の人が負ける」局面を探します。両方が空の (0, 0) は手を指せないので負け局面です。",
+          "小さい方から調べます。1 手で負け局面に行ければその局面は勝ちです。(1, 1) は両方から 1 個ずつ取って (0, 0) にできるので勝ち、(1, 2) はどう取っても相手が一度に取り切れる局面を渡すので負けです。",
+          "この方法で進めると、各袋 10 個以下の負け局面は (0, 0)、(1, 2)、(3, 5)、(4, 7)、(6, 10)（左右を入れ替えたものも同じ）だけです。",
+          "今の局面は (6, 9) です。両方の袋から 2 個ずつ取ると (4, 7) となり、これが負け局面です。片方だけから取る手や 1、3、4 個ずつ取る手はすべて相手に勝ち局面を渡すので、最初の一手は 1 通りです。",
+          "その後、袋には 4 個と 7 個が残るので、机の上には 4 + 7 = 11 個のビーズが残ります。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "11"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade7-foundation",
+        "notes": "題型取自 Wythoff's game（維基百科與 Canada/USA Mathcamp 2017 講義；冷局面 (1,2)、(3,5)、(4,7)、(6,10) 與本題逐步推出的結果一致）。既有 logic_grade9_foundation_034 是純兩堆 Nim（只能動一堆），必勝法是把兩堆取成一樣多；本題多了『兩袋各取同樣多』這條走法，使得取平之後對手可以一次收光，必敗態整組改變，解法骨架完全不同。既有 logic_grade9_foundation_048 是三堆 Nim 的 XOR，也不適用於本題。"
+      }
+    },
+    {
+      "id": "logic_grade7_foundation_050",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "hamiltonian_start_cells_three_by_three",
+      "tags": [
+        "c:graph_theory",
+        "c:basic_counting",
+        "m:coloring"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade7",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一個 3 列 3 行的方格板共有 9 格。把一枚棋子放在某一格當起點，接著每一步只能移到上下左右相鄰的一格（不可以斜走），目標是走 8 步，讓 9 個格子每一格都恰好停留過一次（起點也算停留過一次）。這 9 個格子之中，可以當作這種走法起點的有幾格？",
+        "zh-Hans": "一个 3 列 3 行的方格板共有 9 格。把一枚棋子放在某一格当起点，接着每一步只能移到上下左右相邻的一格（不可以斜走），目标是走 8 步，让 9 个格子每一格都恰好停留过一次（起点也算停留过一次）。这 9 个格子之中，可以当作这种走法起点的有几格？",
+        "en": "A board has 3 rows and 3 columns, 9 cells in all. A piece starts on some cell and each step moves it to a cell adjacent up, down, left or right (no diagonal steps). The goal is to make 8 steps so that every one of the 9 cells is visited exactly once, counting the starting cell as visited. How many of the 9 cells can serve as the starting cell of such a walk?",
+        "ja": "3 行 3 列、全部で 9 マスの盤があります。ある 1 マスに駒を置いて出発し、1 歩ごとに上下左右に隣り合うマスへ移ります（斜めは不可）。8 歩動いて 9 マスすべてをちょうど 1 回ずつ通ること（出発点も 1 回通ったと数えます）が目標です。9 マスのうち、この歩き方の出発点になれるマスは何マスありますか。"
+      },
+      "answer": {
+        "zh-Hant": "可以當作起點的有 5 格。",
+        "zh-Hans": "可以当作起点的有 5 格。",
+        "en": "There are 5 cells that can serve as the start.",
+        "ja": "出発点になれるマスは 5 マスです。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "把方格板塗成黑白相間：四個角與正中央這 5 格塗黑，四個邊的中央那 4 格塗白。每走一步一定是從黑格到白格或從白格到黑格。",
+          "整條路線會停留 9 格，顏色必須黑白交錯，因此順序只能是黑、白、黑、白、⋯、黑，用掉 5 個黑格與 4 個白格，起點和終點都必須是黑格。",
+          "所以白格（四個邊的中央）都不可能當起點，可能的起點最多只有 5 個黑格。",
+          "這 5 格也真的都做得到。從左上角出發：左上 → 左中 → 左下 → 下中 → 正中 → 上中 → 右上 → 右中 → 右下；四個角依對稱性都一樣可行。",
+          "從正中央出發也可以：正中 → 左中 → 左上 → 上中 → 右上 → 右中 → 右下 → 下中 → 左下。因此答案是 5 格。"
+        ],
+        "zh-Hans": [
+          "把方格板涂成黑白相间：四个角与正中央这 5 格涂黑，四个边的中央那 4 格涂白。每走一步一定是从黑格到白格或从白格到黑格。",
+          "整条路线会停留 9 格，颜色必须黑白交错，因此顺序只能是黑、白、黑、白、⋯、黑，用掉 5 个黑格与 4 个白格，起点和终点都必须是黑格。",
+          "所以白格（四个边的中央）都不可能当起点，可能的起点最多只有 5 个黑格。",
+          "这 5 格也真的都做得到。从左上角出发：左上 → 左中 → 左下 → 下中 → 正中 → 上中 → 右上 → 右中 → 右下；四个角依对称性都一样可行。",
+          "从正中央出发也可以：正中 → 左中 → 左上 → 上中 → 右上 → 右中 → 右下 → 下中 → 左下。因此答案是 5 格。"
+        ],
+        "en": [
+          "Colour the board like a chessboard: the four corners and the centre, five cells in all, are black, and the four edge midpoints are white. Every step goes from black to white or from white to black.",
+          "The walk visits 9 cells, so the colours must alternate black, white, black, ..., black. That uses 5 black cells and 4 white cells, and both the start and the finish must be black.",
+          "Hence no white cell (no edge midpoint) can be the start, and there are at most 5 possible starting cells.",
+          "All five really work. Starting at the top left corner: top left, left middle, bottom left, bottom middle, centre, top middle, top right, right middle, bottom right. By symmetry all four corners work.",
+          "Starting at the centre also works: centre, left middle, top left, top middle, top right, right middle, bottom right, bottom middle, bottom left. So the answer is 5 cells."
+        ],
+        "ja": [
+          "盤を市松に塗ります。四隅と中央の 5 マスを黒、四辺の真ん中の 4 マスを白とすると、1 歩ごとに必ず黒から白、または白から黒へ移ります。",
+          "経路は 9 マスを通るので色は交互になり、黒、白、黒、白、⋯、黒の順しかありません。黒 5 マスと白 4 マスを使い、出発点も終点も黒でなければなりません。",
+          "したがって白（四辺の真ん中）は出発点になれず、候補は黒の 5 マスだけです。",
+          "その 5 マスはどれも実現できます。左上から出発すると、左上 → 左中 → 左下 → 下中 → 中央 → 上中 → 右上 → 右中 → 右下 となり、対称性より四隅はすべて可能です。",
+          "中央から出発する場合も、中央 → 左中 → 左上 → 上中 → 右上 → 右中 → 右下 → 下中 → 左下 で実現できます。よって答えは 5 マスです。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "5"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade7-foundation",
+        "notes": "題型取自 AoPS 與各家競賽講義常見的 Hamiltonian path parity（棋盤上走遍每格一次的黑白交錯論證）。既有 logic_grade10_foundation_014 是 4×4 不重複路徑的『條數計數』、logic_grade12_foundation_040 是 3×3 走 4 步的落點計數、combinatorics_grade12_foundation_022 是正方體頂點的路線計數，三題都在數路線條數；本題問的是『哪些格子可以當起點』，靠的是黑白格數 5 比 4 的不對稱，推理核心不同。"
+      }
     }
   ]
 }

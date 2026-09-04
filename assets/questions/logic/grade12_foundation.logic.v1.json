@@ -4510,6 +4510,172 @@
         "reference": "stats-grade12-simpson-paradox-treatment",
         "notes": "題型取自辛普森悖論最有名的教學案例——1986 年英國醫學期刊的腎結石治療研究（Wikipedia 的 Simpson’s paradox 條目、Lancaster STOR-i 的 Which treatment would you prefer、Generalist Academy 的 kidney stone paradox 都引用它）；原始數字（93%/73% 對 87%/69%）不好算，本題重新設計成 20/80 與 80/20 的乾淨配置，讓四個分組率是 90%、40%、80%、30%，整體是 50% 對 70%。全庫查過：關鍵字「相關係數」「迴歸」「抽樣」「母體」皆 0 命中，也沒有任何一題把分組率與整體率放在一起比較。最接近的 algebra_grade7_063 是加權平均（由全班平均與一組平均反推另一組），但那是單一方向的加權計算，沒有「兩個分組結論與整體結論相反」的矛盾結構；本題的推理核心是看出加權比例才是主因。"
       }
+    },
+    {
+      "reviewStatus": "ok",
+      "difficulty": "foundation",
+      "challengeTier": "foundation",
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "id": "logic_grade12_foundation_047",
+      "topic": "logic",
+      "subtopic": "chebyshev_bound_outside_interval",
+      "tags": [
+        "c:stdev",
+        "c:probability",
+        "m:estimate_bound"
+      ],
+      "levelStage": "grade12",
+      "answerMode": "integer_input",
+      "prompt": {
+        "zh-Hant": "某工廠今天生產 2000 件零件，重量的平均數是 500 公克、標準差是 4 公克，但是重量的分布形狀完全不明，不可以假設它是常態分布。柴比雪夫不等式指出：不論分布長什麼樣子，與平均數相差 k 個標準差以上（k > 1）的資料，占全體的比例都不會超過 1/k²。根據這個不等式，今天這 2000 件之中，重量與 500 公克相差 16 公克以上的零件最多可能有幾件？",
+        "zh-Hans": "某工厂今天生产 2000 件零件，重量的平均数是 500 公克、标准差是 4 公克，但是重量的分布形状完全不明，不可以假设它是常态分布。柴比雪夫不等式指出：不论分布长什么样子，与平均数相差 k 个标准差以上（k > 1）的资料，占全体的比例都不会超过 1/k²。根据这个不等式，今天这 2000 件之中，重量与 500 公克相差 16 公克以上的零件最多可能有几件？",
+        "en": "A factory produced 2000 parts today. Their weights have mean 500 grams and standard deviation 4 grams, but the shape of the weight distribution is completely unknown and must not be assumed to be normal. Chebyshev's inequality says that, whatever the shape of the distribution, the data lying k or more standard deviations away from the mean (with k > 1) make up at most 1/k² of the whole. According to this inequality, at most how many of today's 2000 parts can weigh 16 grams or more away from 500 grams?",
+        "ja": "ある工場では今日 2000 個の部品を生産しました。重さの平均は 500 グラム、標準偏差は 4 グラムですが、重さの分布の形はまったく分からず、正規分布と仮定してはいけません。チェビシェフの不等式によれば、分布の形に関係なく、平均から標準偏差の k 倍以上（k > 1）離れたデータの割合は 1/k² を超えません。この不等式によると、今日の 2000 個のうち、重さが 500 グラムから 16 グラム以上離れている部品は最大で何個ありえますか。"
+      },
+      "correctAnswer": {
+        "type": "integer",
+        "value": "125"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 4
+      },
+      "answer": {
+        "zh-Hant": "最多可能有 125 件，這是上界，實際件數可能更少。",
+        "zh-Hans": "最多可能有 125 件，这是上界，实际件数可能更少。",
+        "en": "At most 125 parts, and this is only an upper bound: the actual number could be smaller.",
+        "ja": "最大で 125 個です。これは上界であり、実際の個数はもっと少ないこともあります。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "分布形狀不明，所以不能套用常態分布那組 68%、95% 的經驗法則，只能用對任何分布都成立的柴比雪夫不等式。",
+          "先把「相差 16 公克」換算成標準差的倍數：16 ÷ 4 = 4，所以 k = 4。",
+          "依不等式，這些零件占全體的比例不超過 1/4² = 1/16。",
+          "全體有 2000 件，2000 × 1/16 = 125，所以最多可能有 125 件。"
+        ],
+        "zh-Hans": [
+          "分布形状不明，所以不能套用常态分布那组 68%、95% 的经验法则，只能用对任何分布都成立的柴比雪夫不等式。",
+          "先把「相差 16 公克」换算成标准差的倍数：16 ÷ 4 = 4，所以 k = 4。",
+          "依不等式，这些零件占全体的比例不超过 1/4² = 1/16。",
+          "全体有 2000 件，2000 × 1/16 = 125，所以最多可能有 125 件。"
+        ],
+        "en": [
+          "The shape of the distribution is unknown, so the 68% and 95% rules of thumb for a normal distribution cannot be used; only Chebyshev's inequality, valid for every distribution, applies.",
+          "Convert the gap of 16 grams into standard deviations: 16 ÷ 4 = 4, so k = 4.",
+          "By the inequality, such parts make up at most 1/4² = 1/16 of the whole.",
+          "There are 2000 parts in all, and 2000 × 1/16 = 125, so at most 125 parts can be that far from the mean."
+        ],
+        "ja": [
+          "分布の形が不明なので、正規分布の 68%・95% という経験則は使えず、あらゆる分布で成り立つチェビシェフの不等式だけが使えます。",
+          "「16 グラムの差」を標準偏差の何倍かに直します。16 ÷ 4 = 4 なので k = 4 です。",
+          "不等式より、そのような部品の割合は全体の 1/4² = 1/16 を超えません。",
+          "全体は 2000 個なので 2000 × 1/16 = 125、よって最大で 125 個です。"
+        ]
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "stats-grade12-chebyshev-upper-bound",
+        "notes": "題型取自 Statistics By Jim、CalcWorkshop、Corporate Finance Institute 等統計教材的柴比雪夫定理例題（k = 2、3、4 分別對應 75%、89%、93.75%）；本題取 k = 4，並刻意反過來問「區間外最多幾件」，讓答案是上界 2000 ÷ 16 = 125。與 logic_grade12_045（常態分布 68–95 法則求區間內大約幾人）的推理核心相反：那題假設常態、求的是近似值；本題強調分布未知、不能用經驗法則，求的是保證成立的上界。全庫用『柴比雪夫』掃過為 0 題。"
+      }
+    },
+    {
+      "reviewStatus": "ok",
+      "difficulty": "foundation",
+      "challengeTier": "foundation",
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "id": "logic_grade12_foundation_048",
+      "topic": "logic",
+      "subtopic": "expectation_one_does_not_guarantee_a_win",
+      "tags": [
+        "c:expectation",
+        "c:probability",
+        "m:contradiction"
+      ],
+      "levelStage": "grade12",
+      "answerMode": "multiple_choice",
+      "prompt": {
+        "zh-Hant": "一種刮刮樂每張中獎的機率都是 1/10，各張是否中獎互相獨立。小安一次買了 10 張。下列敘述何者正確？",
+        "zh-Hans": "一种刮刮乐每张中奖的机率都是 1/10，各张是否中奖互相独立。小安一次买了 10 张。下列叙述何者正确？",
+        "en": "Each scratch card of a certain kind wins with probability 1/10, and the cards win or lose independently of one another. Ann buys 10 cards at once. Which statement is correct?",
+        "ja": "あるスクラッチくじは 1 枚あたりの当選確率が 1/10 で、各枚の当落は互いに独立です。アンは一度に 10 枚買いました。次の記述のうち正しいものはどれですか。"
+      },
+      "options": {
+        "A": {
+          "zh-Hant": "中獎張數的期望值是 1 張，所以這 10 張裡一定至少會中 1 張。",
+          "zh-Hans": "中奖张数的期望值是 1 张，所以这 10 张里一定至少会中 1 张。",
+          "en": "The expected number of winners is 1, so among the 10 cards at least 1 is certain to win.",
+          "ja": "当選枚数の期待値は 1 枚なので、この 10 枚のうち必ず 1 枚以上当たる。"
+        },
+        "B": {
+          "zh-Hant": "中獎張數的期望值是 1 張，但一張都沒中的機率大約是 35%，並不保證會中。",
+          "zh-Hans": "中奖张数的期望值是 1 张，但一张都没中的机率大约是 35%，并不保证会中。",
+          "en": "The expected number of winners is 1, but the chance of no winner at all is about 35%, so a win is not guaranteed.",
+          "ja": "当選枚数の期待値は 1 枚だが、1 枚も当たらない確率は約 35% あり、当選は保証されない。"
+        },
+        "C": {
+          "zh-Hant": "中獎張數的期望值是 10 張，因為每張的中獎機率 1/10 會被張數抵銷掉。",
+          "zh-Hans": "中奖张数的期望值是 10 张，因为每张的中奖机率 1/10 会被张数抵销掉。",
+          "en": "The expected number of winners is 10, because the 1/10 chance per card is cancelled by the number of cards.",
+          "ja": "当選枚数の期待値は 10 枚である。1 枚あたりの確率 1/10 が枚数で打ち消されるから。"
+        },
+        "D": {
+          "zh-Hant": "中獎張數的期望值是 1 張，而且一張都沒中的機率恰好也是 1/10。",
+          "zh-Hans": "中奖张数的期望值是 1 张，而且一张都没中的机率恰好也是 1/10。",
+          "en": "The expected number of winners is 1, and the chance of no winner at all is exactly 1/10 as well.",
+          "ja": "当選枚数の期待値は 1 枚で、しかも 1 枚も当たらない確率もちょうど 1/10 である。"
+        }
+      },
+      "correctAnswer": {
+        "type": "choice",
+        "value": "B"
+      },
+      "answer": {
+        "zh-Hant": "答案是 B。期望值 1 張只是長期平均，一張都沒中的機率是 (9/10)¹⁰，大約 0.35，也就是大約 35%。",
+        "zh-Hans": "答案是 B。期望值 1 张只是长期平均，一张都没中的机率是 (9/10)¹⁰，大约 0.35，也就是大约 35%。",
+        "en": "The answer is B. An expectation of 1 is only a long-run average; the chance of no winner is (9/10)¹⁰, about 0.35, that is roughly 35%.",
+        "ja": "答えは B です。期待値 1 枚はあくまで長期的な平均であり、1 枚も当たらない確率は (9/10)¹⁰、およそ 0.35、つまり約 35% です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "把每一張中獎與否記成 1 或 0，它的期望值是 1/10。10 張的中獎張數是這 10 個數的和，期望值是 10 × 1/10 = 1 張，所以說期望值是 10 張的 C 是錯的。",
+          "期望值是「長期平均」，不是「保證會發生的次數」，所以 A 說一定至少會中 1 張是錯的。",
+          "一張都沒中，表示 10 張全都沒中，機率是 (9/10)¹⁰ ≈ 0.35，也就是大約 35%，既不是 0 也不是 1/10，所以 D 也錯。",
+          "因此正確的敘述是「期望值是 1 張，但大約有 35% 的機會一張都沒中」，選 B。"
+        ],
+        "zh-Hans": [
+          "把每一张中奖与否记成 1 或 0，它的期望值是 1/10。10 张的中奖张数是这 10 个数的和，期望值是 10 × 1/10 = 1 张，所以说期望值是 10 张的 C 是错的。",
+          "期望值是「长期平均」，不是「保证会发生的次数」，所以 A 说一定至少会中 1 张是错的。",
+          "一张都没中，表示 10 张全都没中，机率是 (9/10)¹⁰ ≈ 0.35，也就是大约 35%，既不是 0 也不是 1/10，所以 D 也错。",
+          "因此正确的叙述是「期望值是 1 张，但大约有 35% 的机会一张都没中」，选 B。"
+        ],
+        "en": [
+          "Record each card as 1 if it wins and 0 if it does not; its expectation is 1/10. The number of winners among 10 cards is the sum of these ten values, with expectation 10 × 1/10 = 1, so option C, claiming 10, is wrong.",
+          "An expectation is a long-run average, not a guaranteed count, so option A, claiming at least one winner for certain, is wrong.",
+          "Having no winner means all 10 cards lose, with probability (9/10)¹⁰ which is about 0.35, that is roughly 35%; it is neither 0 nor 1/10, so option D is wrong too.",
+          "Hence the correct statement is that the expectation is 1 winner but there is roughly a 35% chance of no winner at all, which is option B."
+        ],
+        "ja": [
+          "各カードが当たれば 1、外れれば 0 とすると、その期待値は 1/10 です。10 枚の当選枚数はこの 10 個の和なので期待値は 10 × 1/10 = 1 枚となり、10 枚とする C は誤りです。",
+          "期待値は長期的な平均であって、必ず起こる回数ではありません。したがって必ず 1 枚以上当たるとする A も誤りです。",
+          "1 枚も当たらないのは 10 枚すべて外れる場合で、その確率は (9/10)¹⁰ ≒ 0.35、つまり約 35% です。0 でも 1/10 でもないので D も誤りです。",
+          "よって正しい記述は「期待値は 1 枚だが、約 35% の確率で 1 枚も当たらない」であり、答えは B です。"
+        ]
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "expectation-grade12-expectation-vs-guarantee",
+        "notes": "題型參考機率教材與統計普及文章反覆討論的『期望值不是保證』誤解，以及 Brilliant 期望值章節裡「E(X) = 1 但 P(X = 0) = (1 − 1/n)ⁿ 接近 1/e」這個標準反例；本題取 n = 10 讓 (9/10)¹⁰ ≈ 0.35 這個數字具體可算。與 logic_grade6_064（擲 10 次出現 7 次正面就說硬幣不公正）不同：那題談的是小樣本波動不足以推翻公正性，本題談的是期望值與保證發生之間的落差，而且要真的算出 (9/10)¹⁰。與 logic_grade9_043（人類平均手臂數）也不同，那題辨析的是平均數與眾數的差別。"
+      }
     }
   ]
 }
