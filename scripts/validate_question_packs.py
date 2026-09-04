@@ -52,6 +52,60 @@ def check_tags(tags, vocab):
     return errs
 
 
+SIMPLIFIED_CHARS_PATH = 'docs/simplified-only-chars.txt'
+# zh-Hant 一段話裡出現幾個簡體專用字就報錯。設 1 是因為既有 2757 題實測全都是 0，
+# 沒有需要容忍的正常用例；混一個字進來就是代理寫錯了。
+SIMPLIFIED_TOLERANCE = 1
+
+
+def load_simplified_only_chars(path=SIMPLIFIED_CHARS_PATH):
+    """讀入簡體專用字集合（# 開頭是說明，其餘的行全部是字）。
+
+    集合由 scripts/derive_simplified_only_chars.py 從題庫自身的
+    zh-Hans / zh-Hant 字頻推導，不是通用繁簡對照表；檔頭有說明。
+    """
+    with open(path) as fh:
+        return {ch for line in fh if not line.startswith('#')
+                for ch in line.strip()}
+
+
+def iter_lang_text(node, lang):
+    """走訪題目 JSON，吐出所有掛在指定語系鍵底下的字串（含 list 形式的 solutionSteps）。"""
+    if isinstance(node, dict):
+        for k, v in node.items():
+            if k == lang:
+                if isinstance(v, str):
+                    yield v
+                elif isinstance(v, list):
+                    yield from (x for x in v if isinstance(x, str))
+            else:
+                yield from iter_lang_text(v, lang)
+    elif isinstance(node, list):
+        for item in node:
+            yield from iter_lang_text(item, lang)
+
+
+def check_simplified_in_traditional(q, simplified_chars):
+    """回傳 zh-Hant 欄位混入簡體字的錯誤訊息清單；合格時回傳空清單。
+
+    起草代理會把整段簡體同時寫進 zh-Hant 與 zh-Hans，繁體欄位等於整段是簡體。
+    英文殘留掃描與四語系齊全檢查都抓不到——兩邊都是中文、都非空。
+    只掃 zh-Hant；zh-Hans / en / ja 本來就該是別的文字。
+    """
+    errs = []
+    for fld in ('prompt', 'answer', 'options', 'solutionSteps', 'hint'):
+        if fld not in q:
+            continue
+        bad = []
+        for s in iter_lang_text(q[fld], 'zh-Hant'):
+            bad.extend(ch for ch in s if ch in simplified_chars)
+        if len(bad) >= SIMPLIFIED_TOLERANCE:
+            uniq = sorted(set(bad))
+            errs.append('%s 的 zh-Hant 含簡體字: %s（共 %d 處）'
+                        % (fld, ''.join(uniq), len(bad)))
+    return errs
+
+
 # 正解比最長誘答長這麼多倍就算洩漏線索。全庫 470 道選擇題實測：
 # 1.6 倍會標出 10 題，1.4 倍會把正常的長度起伏也掃進來。
 OPTION_LENGTH_RATIO = 1.6
@@ -160,6 +214,7 @@ def scene_checks(q, err):
 
 def main():
     TAG_VOCAB = load_tag_vocab()
+    SIMPLIFIED = load_simplified_only_chars()
     only = sys.argv[1] if len(sys.argv) > 1 else None
     errors = defaultdict(list)
     seen = {}
@@ -288,6 +343,9 @@ def main():
                             err('solutionSteps[%s] 完全未出現答案值 %s' % (l, val))
 
             for msg in check_tags(q.get('tags'), TAG_VOCAB):
+                err(msg)
+
+            for msg in check_simplified_in_traditional(q, SIMPLIFIED):
                 err(msg)
 
             src = q.get('source', {})

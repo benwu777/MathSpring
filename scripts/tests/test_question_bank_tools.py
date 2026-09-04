@@ -17,6 +17,7 @@ os.chdir(ROOT)
 
 import validate_question_packs as vqp
 import question_similarity_audit as qsa
+import derive_simplified_only_chars as dsoc
 
 with open('docs/question-bank-tags.json') as _fh:
     VOCAB = set(json.load(_fh)['tags'])
@@ -239,8 +240,9 @@ class ValidatorReportsOptionLengthLeakTest(unittest.TestCase):
     def _build_tree(self, tmp, question):
         os.makedirs(os.path.join(tmp, 'assets', 'questions', 'logic'))
         os.makedirs(os.path.join(tmp, 'docs'))
-        shutil.copy(os.path.join(ROOT, 'docs', 'question-bank-tags.json'),
-                    os.path.join(tmp, 'docs', 'question-bank-tags.json'))
+        for name in ('question-bank-tags.json', 'simplified-only-chars.txt'):
+            shutil.copy(os.path.join(ROOT, 'docs', name),
+                        os.path.join(tmp, 'docs', name))
         rel = 'assets/questions/logic/grade10_foundation.logic.v1.json'
         pack = {'schemaVersion': 1, 'questions': [question]}
         with open(os.path.join(tmp, rel), 'w') as fh:
@@ -275,6 +277,125 @@ class ValidatorReportsOptionLengthLeakTest(unittest.TestCase):
                 capture_output=True, text=True, cwd=tmp)
         self.assertNotEqual(r.returncode, 0, r.stdout)
         self.assertIn('挑最長的就會中', r.stdout)
+
+
+class SimplifiedOnlyCharsTest(unittest.TestCase):
+    """validate_question_packs：zh-Hant 欄位混入簡體字要被抓到。
+
+    這是 2026-09-03 第三輪起草代理踩到的失敗模式：代理把整段簡體文字
+    同時寫進 zh-Hant 與 zh-Hans，繁體欄位整段是簡體。既有閘門
+    （英文殘留掃描、四語系齊全檢查）完全抓不到——兩邊都是中文、都非空。
+    """
+
+    def setUp(self):
+        self.chars = vqp.load_simplified_only_chars()
+
+    def _q(self, **fields):
+        q = {'prompt': {'zh-Hant': '長方形的面積是多少？',
+                        'zh-Hans': '长方形的面积是多少？',
+                        'en': 'What is the area?', 'ja': '面積は？'}}
+        q.update(fields)
+        return q
+
+    def test_char_set_excludes_chars_shared_by_both_scripts(self):
+        for ch in '面一二三十的是':
+            self.assertNotIn(ch, self.chars)
+
+    def test_char_set_contains_known_simplified_only_chars(self):
+        for ch in '个长宽积数学题':
+            self.assertIn(ch, self.chars)
+
+    def test_clean_traditional_text_reports_nothing(self):
+        self.assertEqual(vqp.check_simplified_in_traditional(self._q(), self.chars), [])
+
+    def test_simplified_prompt_written_into_traditional_field_is_reported(self):
+        q = self._q(prompt={'zh-Hant': '长方形的面积是多少？',
+                            'zh-Hans': '长方形的面积是多少？',
+                            'en': 'What is the area?', 'ja': '面積は？'})
+        msgs = vqp.check_simplified_in_traditional(q, self.chars)
+        self.assertEqual(len(msgs), 1)
+        self.assertIn('prompt', msgs[0])
+        self.assertIn('长', msgs[0])
+
+    def test_simplified_in_solution_steps_is_reported(self):
+        q = self._q(solutionSteps={'zh-Hant': ['先算长边。'], 'zh-Hans': ['先算长边。'],
+                                   'en': ['First the side.'], 'ja': ['まず辺。']})
+        msgs = vqp.check_simplified_in_traditional(q, self.chars)
+        self.assertEqual(len(msgs), 1)
+        self.assertIn('solutionSteps', msgs[0])
+
+    def test_simplified_in_options_is_reported(self):
+        q = self._q(options={'A': {'zh-Hant': '个位数', 'zh-Hans': '个位数',
+                                   'en': 'units digit', 'ja': '一の位'}})
+        msgs = vqp.check_simplified_in_traditional(q, self.chars)
+        self.assertEqual(len(msgs), 1)
+        self.assertIn('options', msgs[0])
+
+    def test_only_the_traditional_field_is_inspected(self):
+        """zh-Hans / en / ja 本來就該是簡體或外文，不可誤報。"""
+        q = self._q(answer={'zh-Hant': '答案是 4 公分。', 'zh-Hans': '答案是 4 公分。',
+                            'en': 'The answer is 4 cm.', 'ja': '答えは4cmです。'})
+        self.assertEqual(vqp.check_simplified_in_traditional(q, self.chars), [])
+
+
+class SimplifiedCharsOnRealPacksTest(unittest.TestCase):
+    """整合測試：真實題庫每一題的 zh-Hant 都不可含簡體專用字。"""
+
+    def test_no_real_question_has_simplified_in_traditional(self):
+        import glob
+        chars = vqp.load_simplified_only_chars()
+        offenders = []
+        for path in sorted(glob.glob('assets/questions/*/*.json')):
+            with open(path) as fh:
+                pack = json.load(fh)
+            for q in pack['questions']:
+                offenders.extend('%s: %s' % (q['id'], e)
+                                 for e in vqp.check_simplified_in_traditional(q, chars))
+        self.assertEqual(offenders, [], '\n'.join(offenders))
+
+
+class DeriveSimplifiedOnlyCharsTest(unittest.TestCase):
+    """推導腳本：字集必須真的從題庫的 zh-Hans / zh-Hant 字頻算出來。
+
+    用真的函式跑一份小型題庫，不 mock——它只讀記憶體裡的 dict。
+    """
+
+    def test_char_appearing_in_both_scripts_is_not_simplified_only(self):
+        qs = [{'prompt': {'zh-Hant': '面' * 9, 'zh-Hans': '面' * 9}}]
+        self.assertEqual(dsoc.derive(qs, min_hans_count=5), [])
+
+    def test_char_only_in_hans_and_frequent_enough_is_collected(self):
+        qs = [{'prompt': {'zh-Hant': '長', 'zh-Hans': '长' * 6}}]
+        self.assertEqual(dsoc.derive(qs, min_hans_count=5), ['长'])
+
+    def test_rare_hans_only_char_is_ignored(self):
+        """只出現一兩次的字可能是既有題的漏網錯字，收進來會變成用髒資料驗髒資料。"""
+        qs = [{'prompt': {'zh-Hant': '長', 'zh-Hans': '长长'}}]
+        self.assertEqual(dsoc.derive(qs, min_hans_count=5), [])
+
+    def test_committed_char_file_matches_what_the_script_derives_now(self):
+        self.assertEqual(sorted(vqp.load_simplified_only_chars()),
+                         dsoc.derive(dsoc.load_questions()))
+
+
+class ValidatorReportsSimplifiedInTraditionalTest(unittest.TestCase):
+    """整合測試：驗證器本身要把 zh-Hant 裡的簡體字當成錯誤擋下來。
+
+    複製真實題目到暫存目錄、把 zh-Hant 換成 zh-Hans 的內容，再跑真的驗證器子行程。
+    """
+
+    def test_validator_flags_a_pack_whose_traditional_field_is_simplified(self):
+        helper = ValidatorReportsOptionLengthLeakTest()
+        q = helper._real_question('geometry_grade4_foundation_001')
+        q['prompt']['zh-Hant'] = q['prompt']['zh-Hans']
+        with tempfile.TemporaryDirectory() as tmp:
+            helper._build_tree(tmp, q)
+            r = subprocess.run(
+                [sys.executable, os.path.join(ROOT, 'scripts',
+                                              'validate_question_packs.py')],
+                capture_output=True, text=True, cwd=tmp)
+        self.assertNotEqual(r.returncode, 0, r.stdout)
+        self.assertIn('簡體', r.stdout)
 
 
 class ValidatorOnRealPacksTest(unittest.TestCase):
