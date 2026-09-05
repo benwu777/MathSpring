@@ -1,3 +1,5 @@
+import 'package:mathspring/models/avatar_configuration.dart';
+
 class LearnerProfile {
   const LearnerProfile({
     required this.id,
@@ -7,7 +9,8 @@ class LearnerProfile {
     this.maxLevelStage,
     required this.challengeTier,
     required this.createdAtIso,
-  });
+    AvatarConfiguration? avatar,
+  }) : _avatar = avatar;
 
   final String id;
   final String displayName;
@@ -16,6 +19,10 @@ class LearnerProfile {
   final String? maxLevelStage;
   final String challengeTier;
   final String createdAtIso;
+  final AvatarConfiguration? _avatar;
+
+  AvatarConfiguration get avatar =>
+      _avatar ?? AvatarConfiguration.defaultFor(AvatarPresentation.girl);
 
   String get effectiveMinLevelStage {
     return minLevelStage ?? _legacyMinLevelStage(levelStage);
@@ -26,7 +33,7 @@ class LearnerProfile {
   }
 
   Map<String, Object?> toMap() {
-    return {
+    return <String, Object?>{
       'id': id,
       'display_name': displayName,
       'level_stage': levelStage,
@@ -34,6 +41,7 @@ class LearnerProfile {
       'max_level_stage': effectiveMaxLevelStage,
       'challenge_tier': challengeTier,
       'created_at': createdAtIso,
+      ...avatar.toMap(),
     };
   }
 
@@ -46,6 +54,7 @@ class LearnerProfile {
       maxLevelStage: map['max_level_stage'] as String?,
       challengeTier: map['challenge_tier']! as String,
       createdAtIso: map['created_at']! as String,
+      avatar: AvatarConfiguration.fromMap(map),
     );
   }
 }

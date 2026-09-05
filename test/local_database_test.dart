@@ -7,6 +7,7 @@ import 'package:mathspring/data/local/mathspring_database.dart';
 import 'package:mathspring/data/local/question_progress_repository.dart';
 import 'package:mathspring/models/learner_profile.dart';
 import 'package:mathspring/models/answer_session.dart';
+import 'package:mathspring/models/avatar_configuration.dart';
 import 'package:mathspring/models/question_progress.dart';
 import 'package:mathspring/models/session_answer_record.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
@@ -128,6 +129,48 @@ void main() {
     expect(profiles, hasLength(1));
     expect(profiles.first.displayName, 'Allen');
     expect(profiles.first.levelStage, 'grade4');
+  });
+
+  test('stores and reads learner avatar selections', () async {
+    const LearnerProfile profile = LearnerProfile(
+      id: 'learner_avatar_001',
+      displayName: 'Noah',
+      levelStage: 'grade4',
+      challengeTier: 'foundation',
+      createdAtIso: '2026-09-02T08:00:00Z',
+      avatar: AvatarConfiguration(
+        presentation: AvatarPresentation.boy,
+        skinId: 'boy_skin_01',
+        faceId: 'boy_face_01',
+        hairId: 'boy_hair_02',
+        eyesId: 'boy_eyes_01',
+        noseId: 'boy_nose_02',
+        mouthId: 'boy_mouth_01',
+      ),
+    );
+
+    await learnerProfileRepository.save(profile);
+    final LearnerProfile loaded =
+        (await learnerProfileRepository.fetchAll()).single;
+
+    expect(loaded.avatar.presentation, AvatarPresentation.boy);
+    expect(loaded.avatar.hairId, 'boy_hair_02');
+    expect(loaded.avatar.noseId, 'boy_nose_02');
+  });
+
+  test('legacy learner profile maps receive a default avatar', () {
+    final LearnerProfile profile = LearnerProfile.fromMap(
+      const <String, Object?>{
+        'id': 'legacy',
+        'display_name': 'Legacy',
+        'level_stage': 'grade2',
+        'challenge_tier': 'foundation',
+        'created_at': '2026-09-02T08:00:00Z',
+      },
+    );
+
+    expect(profile.avatar.presentation, AvatarPresentation.girl);
+    expect(profile.avatar.hairId, 'girl_hair_01');
   });
 
   test('deletes learner profiles by id', () async {

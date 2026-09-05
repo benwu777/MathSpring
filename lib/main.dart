@@ -9,6 +9,7 @@ import 'package:mathspring/data/bundled/bundled_question_bank_repository.dart'
     as bundled;
 import 'package:mathspring/data/local/app_services.dart';
 import 'package:mathspring/models/answer_session.dart';
+import 'package:mathspring/models/avatar_configuration.dart';
 import 'package:mathspring/models/geometry_scene.dart';
 import 'package:mathspring/models/question.dart';
 import 'package:mathspring/models/question_bank.dart';
@@ -23,6 +24,8 @@ import 'package:mathspring/services/math_text_formatter.dart';
 import 'package:mathspring/services/session_launch_plan_builder.dart';
 import 'package:mathspring/ui/content_scroll_view.dart';
 import 'package:mathspring/ui/layout_spec.dart';
+import 'package:mathspring/widgets/avatar_editor.dart';
+import 'package:mathspring/widgets/avatar_preview.dart;
 
 const String appSupportUrl =
     'https://benwu777.github.io/MathSpring/support/';
@@ -1963,6 +1966,7 @@ class _LearnerProfilesSectionState extends State<_LearnerProfilesSection> {
       minLevelStage: draft.minLevelStage,
       maxLevelStage: draft.maxLevelStage,
       challengeTier: 'foundation',
+      avatar: draft.avatar,
     );
     await widget.services.setCurrentLearner(profile.id);
     widget.onChanged();
@@ -2064,6 +2068,7 @@ class _LearnerProfilesSectionState extends State<_LearnerProfilesSection> {
                 }
               },
               name: profiles[index].displayName,
+              avatar: profiles[index].avatar,
               level: _learnerGradeRangeLabel(profiles[index], strings),
               accent: index.isEven
                   ? const Color(0xFF163D7A)
@@ -2094,6 +2099,7 @@ class _ProfileTile extends StatelessWidget {
     this.tileKey,
     required this.onTap,
     required this.name,
+    required this.avatar,
     required this.level,
     required this.accent,
     required this.isCurrent,
@@ -2109,6 +2115,7 @@ class _ProfileTile extends StatelessWidget {
   final Key? tileKey;
   final Future<void> Function() onTap;
   final String name;
+  final AvatarConfiguration avatar;
   final String level;
   final Color accent;
   final bool isCurrent;
@@ -2147,15 +2154,7 @@ class _ProfileTile extends StatelessWidget {
         ),
         child: Row(
           children: [
-            Container(
-              width: 46,
-              height: 46,
-              decoration: BoxDecoration(
-                color: accent.withOpacity(0.12),
-                shape: BoxShape.circle,
-              ),
-              child: Icon(Icons.person_outline, color: accent),
-            ),
+            AvatarPreview(configuration: avatar, size: 54),
             const SizedBox(width: 14),
             Expanded(
               child: Column(
@@ -2283,11 +2282,13 @@ class _LearnerDraft {
     required this.displayName,
     required this.minLevelStage,
     required this.maxLevelStage,
+    required this.avatar,
   });
 
   final String displayName;
   final String minLevelStage;
   final String maxLevelStage;
+  final AvatarConfiguration avatar;
 }
 
 class _CreateLearnerDialog extends StatefulWidget {
@@ -2302,6 +2303,7 @@ class _CreateLearnerDialog extends StatefulWidget {
 class _CreateLearnerDialogState extends State<_CreateLearnerDialog> {
   final TextEditingController _nameController = TextEditingController();
   RangeValues _gradeRange = const RangeValues(1, 2);
+  AvatarConfiguration _avatar = AvatarConfiguration.defaultFor(AvatarPresentation.girl);
 
   @override
   void dispose() {
@@ -2316,7 +2318,9 @@ class _CreateLearnerDialogState extends State<_CreateLearnerDialog> {
       title: Text(widget.strings.addLearner),
       content: SizedBox(
         width: 360,
-        child: Column(
+        height: 430,
+        child: SingleChildScrollView(
+          child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             TextField(
@@ -2336,7 +2340,10 @@ class _CreateLearnerDialogState extends State<_CreateLearnerDialog> {
                 });
               },
             ),
+            const SizedBox(height: 16),
+            AvatarEditor(onChanged: (value) => _avatar = value),
           ],
+        ),
         ),
       ),
       actions: [
@@ -2356,6 +2363,7 @@ class _CreateLearnerDialogState extends State<_CreateLearnerDialog> {
                 displayName: name,
                 minLevelStage: levelStageFromNumber(_gradeRange.start.round()),
                 maxLevelStage: levelStageFromNumber(_gradeRange.end.round()),
+                avatar: _avatar,
               ),
             );
           },
@@ -2386,6 +2394,7 @@ class LearnerEditPage extends StatefulWidget {
 class _LearnerEditPageState extends State<LearnerEditPage> {
   late final TextEditingController _nameController;
   late RangeValues _gradeRange;
+  late AvatarConfiguration _avatar;
 
   @override
   void initState() {
@@ -2395,6 +2404,7 @@ class _LearnerEditPageState extends State<LearnerEditPage> {
       levelStageNumber(widget.learner.effectiveMinLevelStage).toDouble(),
       levelStageNumber(widget.learner.effectiveMaxLevelStage).toDouble(),
     );
+    _avatar = widget.learner.avatar;
   }
 
   @override
@@ -2417,6 +2427,7 @@ class _LearnerEditPageState extends State<LearnerEditPage> {
         maxLevelStage: levelStageFromNumber(_gradeRange.end.round()),
         challengeTier: widget.learner.challengeTier,
         createdAtIso: widget.learner.createdAtIso,
+        avatar: _avatar,
       ),
     );
     if (!mounted) {
@@ -2453,6 +2464,11 @@ class _LearnerEditPageState extends State<LearnerEditPage> {
                 _gradeRange = value;
               });
             },
+          ),
+          const SizedBox(height: 20),
+          AvatarEditor(
+            initialConfiguration: _avatar,
+            onChanged: (value) => _avatar = value,
           ),
           const SizedBox(height: 24),
           FilledButton(

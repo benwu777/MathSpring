@@ -3,7 +3,7 @@ import 'package:sqflite/sqflite.dart';
 
 class MathSpringDatabase {
   static const String databaseName = 'mathspring.db';
-  static const int schemaVersion = 4;
+  static const int schemaVersion = 5;
 
   static Future<Database> openDefault() async {
     final String databasesPath = await getDatabasesPath();
@@ -87,6 +87,29 @@ class MathSpringDatabase {
         'ALTER TABLE session_answer_records ADD COLUMN earned_score INTEGER',
       );
     }
+    if (oldVersion < 5) {
+      await db.execute(
+        'ALTER TABLE learner_profiles ADD COLUMN avatar_presentation TEXT',
+      );
+      await db.execute(
+        'ALTER TABLE learner_profiles ADD COLUMN avatar_skin_id TEXT',
+      );
+      await db.execute(
+        'ALTER TABLE learner_profiles ADD COLUMN avatar_face_id TEXT',
+      );
+      await db.execute(
+        'ALTER TABLE learner_profiles ADD COLUMN avatar_hair_id TEXT',
+      );
+      await db.execute(
+        'ALTER TABLE learner_profiles ADD COLUMN avatar_eyes_id TEXT',
+      );
+      await db.execute(
+        'ALTER TABLE learner_profiles ADD COLUMN avatar_nose_id TEXT',
+      );
+      await db.execute(
+        'ALTER TABLE learner_profiles ADD COLUMN avatar_mouth_id TEXT',
+      );
+    }
   }
 
   static Future<void> _createLearnerProfilesTable(Database db) async {
@@ -98,7 +121,14 @@ class MathSpringDatabase {
         min_level_stage TEXT NOT NULL,
         max_level_stage TEXT NOT NULL,
         challenge_tier TEXT NOT NULL,
-        created_at TEXT NOT NULL
+        created_at TEXT NOT NULL,
+        avatar_presentation TEXT,
+        avatar_skin_id TEXT,
+        avatar_face_id TEXT,
+        avatar_hair_id TEXT,
+        avatar_eyes_id TEXT,
+        avatar_nose_id TEXT,
+        avatar_mouth_id TEXT
       )
     ''');
   }

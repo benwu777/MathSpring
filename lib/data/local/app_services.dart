@@ -4,6 +4,7 @@ import 'package:mathspring/data/local/learner_profile_repository.dart';
 import 'package:mathspring/data/local/mathspring_database.dart';
 import 'package:mathspring/data/local/question_progress_repository.dart';
 import 'package:mathspring/models/answer_session.dart';
+import 'package:mathspring/models/avatar_configuration.dart';
 import 'package:mathspring/models/learner_profile.dart';
 import 'package:mathspring/models/question_progress.dart';
 import 'package:mathspring/models/session_answer_record.dart';
@@ -183,6 +184,7 @@ class AppServices {
     required String minLevelStage,
     required String maxLevelStage,
     required String challengeTier,
+    AvatarConfiguration? avatar,
   }) async {
     final LearnerProfile profile = LearnerProfile(
       id: 'learner_${DateTime.now().toUtc().microsecondsSinceEpoch}',
@@ -192,6 +194,7 @@ class AppServices {
       maxLevelStage: maxLevelStage,
       challengeTier: challengeTier,
       createdAtIso: DateTime.now().toUtc().toIso8601String(),
+      avatar: avatar,
     );
 
     learnerProfiles.add(profile);
