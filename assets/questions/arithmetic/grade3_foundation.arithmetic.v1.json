@@ -7372,6 +7372,987 @@
         "displayText": "改寫自新加坡 Challenging Word Problems 因數倍數單元的公倍數逆推題型",
         "notes": "題型來源：Singapore Math Challenging Word Problems（Grade 4）factors and multiples 單元的『同一批東西兩種等分方式』題型，配合日本算数『公倍数を使った文章題』的逆推寫法。改寫程度：把常見的『已知總數求每人相差』倒過來，改成『已知每人相差，逐一檢查公倍數求總數』。去重：全庫 c:factor_multiple 221 題逐條看過，公倍數題都是『下次同時發生』（arithmetic_grade3_023、arithmetic_grade4_074、arithmetic_grade6_099）或『在某範圍內求人數』（arithmetic_grade3_038）；最接近的 arithmetic_grade2_083（24 顆糖分 4 人改分 6 人少拿幾顆）是總數已知的正推兩步計算，沒有公倍數列舉。"
       }
+    },
+    {
+      "id": "arithmetic_grade3_foundation_101",
+      "reviewStatus": "ok",
+      "topic": "arithmetic",
+      "subtopic": "black_tile_count_in_odd_by_odd_region",
+      "tags": [
+        "c:basic_counting",
+        "c:pattern",
+        "m:coloring",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade3",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一大片地板鋪著同樣大小的正方形地磚，黑磚和白磚像棋盤那樣交錯排列：左右相鄰的兩塊一定不同色，上下相鄰的兩塊也一定不同色。小安在地板上圈出一塊長方形區域，這塊區域橫向有 7 塊地磚、縱向有 9 塊地磚，而且四個角落的地磚都是黑色。請問這塊區域裡的黑磚一共有幾塊？",
+        "zh-Hans": "一大片地板铺着同样大小的正方形地砖，黑砖和白砖像棋盘那样交错排列：左右相邻的两块一定不同色，上下相邻的两块也一定不同色。小安在地板上圈出一块长方形区域，这块区域横向有 7 块地砖、纵向有 9 块地砖，而且四个角落的地砖都是黑色。请问这块区域里的黑砖一共有几块？",
+        "en": "A large floor is covered with square tiles of the same size, coloured black and white like a chessboard: two tiles side by side are always different colours, and so are two tiles one above the other. Ann marks out a rectangular region that is 7 tiles across and 9 tiles down, and all four corner tiles of the region are black. How many black tiles are there in the region altogether?",
+        "ja": "広い床に同じ大きさの正方形のタイルがしきつめられていて、黒いタイルと白いタイルがチェスばんのように交ごに並んでいます。左右にとなり合う 2 まいは必ずちがう色で、上下にとなり合う 2 まいも必ずちがう色です。アンは床の上に長方形の部分を囲みました。その部分は横に 7 まい、たてに 9 まいあり、4 すみのタイルはすべて黒です。この部分にある黒いタイルは全部で何まいですか。"
+      },
+      "answer": {
+        "zh-Hant": "這塊區域裡的黑磚一共有 32 塊。",
+        "zh-Hans": "这块区域里的黑砖一共有 32 块。",
+        "en": "There are 32 black tiles in the region.",
+        "ja": "この部分の黒いタイルは全部で 32 まいです。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "這塊區域一共有 7 × 9 = 63 塊地磚。63 是單數，所以黑磚和白磚不可能一樣多，不可以直接把 63 除以 2。",
+          "一橫排一橫排地看。最下面那一排的左端是角落，是黑磚，7 塊交錯排下去就是黑、白、黑、白、黑、白、黑，這一排有 4 塊黑、3 塊白。",
+          "再往上一排，左端變成白磚，7 塊就是白、黑、白、黑、白、黑、白，這一排只有 3 塊黑。兩種橫排交錯出現，9 排之中「4 塊黑」的是第 1、3、5、7、9 排共 5 排，「3 塊黑」的是第 2、4、6、8 排共 4 排。",
+          "所以黑磚共有 5 × 4 + 4 × 3 = 20 + 12 = 32 塊。（驗算：白磚是 63 − 32 = 31 塊，黑磚剛好比白磚多 1 塊，符合格數是單數的情形。）"
+        ],
+        "zh-Hans": [
+          "这块区域一共有 7 × 9 = 63 块地砖。63 是单数，所以黑砖和白砖不可能一样多，不可以直接把 63 除以 2。",
+          "一横排一横排地看。最下面那一排的左端是角落，是黑砖，7 块交错排下去就是黑、白、黑、白、黑、白、黑，这一排有 4 块黑、3 块白。",
+          "再往上一排，左端变成白砖，7 块就是白、黑、白、黑、白、黑、白，这一排只有 3 块黑。两种横排交错出现，9 排之中「4 块黑」的是第 1、3、5、7、9 排共 5 排，「3 块黑」的是第 2、4、6、8 排共 4 排。",
+          "所以黑砖共有 5 × 4 + 4 × 3 = 20 + 12 = 32 块。（验算：白砖是 63 − 32 = 31 块，黑砖刚好比白砖多 1 块，符合格数是单数的情形。）"
+        ],
+        "en": [
+          "The region contains 7 x 9 = 63 tiles in all. Since 63 is odd, the black and white tiles cannot be equal in number, so simply halving 63 is not allowed.",
+          "Look at the region one horizontal row at a time. The leftmost tile of the bottom row is a corner, so it is black, and the 7 tiles alternate as black, white, black, white, black, white, black. That row has 4 black tiles and 3 white ones.",
+          "In the next row up, the leftmost tile is white, so the 7 tiles run white, black, white, black, white, black, white, giving only 3 black tiles. These two kinds of row alternate: among the 9 rows, rows 1, 3, 5, 7 and 9 have 4 black tiles each, and rows 2, 4, 6 and 8 have 3 black tiles each.",
+          "So the number of black tiles is 5 x 4 + 4 x 3 = 20 + 12 = 32. (Check: there are 63 - 32 = 31 white tiles, so black exceeds white by exactly 1, as expected when the number of tiles is odd.)"
+        ],
+        "ja": [
+          "この部分のタイルは全部で 7 × 9 = 63 まいです。63 は奇数なので、黒と白が同じ数になることはなく、63 を 2 でわってすませることはできません。",
+          "横の列ごとに見ていきます。いちばん下の列の左はしは 4 すみの 1 つなので黒で、7 まいは黒、白、黒、白、黒、白、黒と交ごに並びます。この列は黒 4 まい、白 3 まいです。",
+          "1 つ上の列は左はしが白になるので、7 まいは白、黒、白、黒、白、黒、白となり、黒は 3 まいだけです。この 2 種類の列が交ごに現れ、9 列のうち黒 4 まいの列は第 1、3、5、7、9 列の 5 列、黒 3 まいの列は第 2、4、6、8 列の 4 列です。",
+          "よって黒いタイルは 5 × 4 + 4 × 3 = 20 + 12 = 32 まいです。（たしかめ：白は 63 − 32 = 31 まいで、黒が白よりちょうど 1 まい多く、タイル数が奇数のときの結果と合っています。）"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "32"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "arithmetic-grade3-foundation",
+        "notes": "題型骨架取自 Wikipedia「Mutilated chessboard problem」條目裡「棋盤染色後兩色格數是否相等」的核心觀察，把它從鋪骨牌的不可能性抽出來，單獨改寫成「單數 × 單數的區域裡兩色不可能一樣多」的計數題。去重：全庫用「地磚|磁磚|地板」掃出 7 題，全部是鋪磚塊數或周長面積題（geometry_grade3_053、geometry_grade5_057 等），沒有一題牽涉黑白兩色的數量；用「黑白|相間」掃出的 17 題也全是鋪骨牌、走棋或排列計數。原本這一格的草稿（每人恰好和 3 人交換貼紙，哪個人數不可能）經比對發現與 logic_grade9_foundation_011、logic_grade11_foundation_025 同為握手引理的度數和奇偶，後者的詳解甚至已寫出「7 個人各握 3 次不可能」，已整題換掉。"
+      }
+    },
+    {
+      "id": "arithmetic_grade3_foundation_102",
+      "reviewStatus": "ok",
+      "topic": "arithmetic",
+      "subtopic": "cross_layout_equal_line_sums",
+      "tags": [
+        "c:add_sub",
+        "c:logic_deduction",
+        "m:construction"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade3",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "小安把 5 個盤子排成十字形：中間 1 個，上、下、左、右各 1 個。他要把 15 顆棋子全部分到這 5 個盤子裡，每個盤子至少 1 顆，而且 5 個盤子的顆數互不相同。他還要求：直的那條線上（上、中、下）三個盤子的顆數加起來是 10，橫的那條線上（左、中、右）三個盤子的顆數加起來也是 10。中間那個盤子裡有幾顆棋子？",
+        "zh-Hans": "小安把 5 个盘子排成十字形：中间 1 个，上、下、左、右各 1 个。他要把 15 颗棋子全部分到这 5 个盘子里，每个盘子至少 1 颗，而且 5 个盘子的颗数互不相同。他还要求：竖的那条线上（上、中、下）三个盘子的颗数加起来是 10，横的那条线上（左、中、右）三个盘子的颗数加起来也是 10。中间那个盘子里有几颗棋子？",
+        "en": "An arranges 5 plates in the shape of a cross: one in the middle, and one each above, below, to the left and to the right. He shares all 15 counters among these 5 plates, putting at least 1 counter on every plate and making sure no two plates hold the same number. He also requires that the three plates on the vertical line (top, middle, bottom) hold 10 counters altogether, and that the three plates on the horizontal line (left, middle, right) hold 10 counters altogether as well. How many counters are on the middle plate?",
+        "ja": "アンさんは5つの皿を十字の形に並べます。まん中に1つ、上・下・左・右にそれぞれ1つずつです。15 個のおはじきをこの5つの皿に全部分け、どの皿にも1個以上置き、5つの皿の個数はすべてちがうようにします。さらに、たての線の上にある3つの皿（上・まん中・下）の合計が 10 個、よこの線の上にある3つの皿（左・まん中・右）の合計も 10 個になるようにします。まん中の皿には何個ありますか。"
+      },
+      "answer": {
+        "zh-Hant": "中間那個盤子裡有 5 顆棋子。",
+        "zh-Hans": "中间那个盘子里有 5 颗棋子。",
+        "en": "The middle plate holds 5 counters.",
+        "ja": "まん中の皿には 5 個あります。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "把直的那條線和橫的那條線的顆數相加，得到 10 + 10 = 20 顆。",
+          "這樣加的時候，四隻手臂上的盤子各被算了一次，可是中間那個盤子被算了兩次，因為兩條線都會經過它。",
+          "五個盤子實際上只有 15 顆棋子，所以 20 − 15 = 5，這 5 顆就是中間那個盤子被多算的那一次，也就是中間有 5 顆。",
+          "這樣真的排得出來：中間放 5 顆，上、下放 1 顆和 4 顆（1 + 5 + 4 = 10），左、右放 2 顆和 3 顆（2 + 5 + 3 = 10）。五個盤子是 1、2、3、4、5 顆，互不相同，加起來剛好 15 顆。"
+        ],
+        "zh-Hans": [
+          "把竖的那条线和横的那条线的颗数相加，得到 10 + 10 = 20 颗。",
+          "这样加的时候，四只手臂上的盘子各被算了一次，可是中间那个盘子被算了两次，因为两条线都会经过它。",
+          "五个盘子实际上只有 15 颗棋子，所以 20 − 15 = 5，这 5 颗就是中间那个盘子被多算的那一次，也就是中间有 5 颗。",
+          "这样真的排得出来：中间放 5 颗，上、下放 1 颗和 4 颗（1 + 5 + 4 = 10），左、右放 2 颗和 3 颗（2 + 5 + 3 = 10）。五个盘子是 1、2、3、4、5 颗，互不相同，加起来刚好 15 颗。"
+        ],
+        "en": [
+          "Add the counters on the vertical line to the counters on the horizontal line: 10 + 10 = 20 counters.",
+          "In that sum each of the four arm plates is counted once, but the middle plate is counted twice, because both lines pass through it.",
+          "The five plates really hold only 15 counters, so 20 − 15 = 5, and those 5 counters are exactly the extra count of the middle plate, which means the middle plate holds 5 counters.",
+          "Such an arrangement really exists: put 5 in the middle, 1 and 4 on the top and bottom plates (1 + 5 + 4 = 10), and 2 and 3 on the left and right plates (2 + 5 + 3 = 10). The five plates then hold 1, 2, 3, 4 and 5 counters, all different, adding up to exactly 15."
+        ],
+        "ja": [
+          "たての線の個数とよこの線の個数をたすと、10 + 10 = 20 個になります。",
+          "このたし方では、4つの腕の皿はそれぞれ1回ずつ数えられますが、まん中の皿はどちらの線にも入るので2回数えられています。",
+          "5つの皿には実際には 15 個しかないので、20 − 15 = 5 となり、この 5 個がまん中の皿を余分に数えた分です。つまりまん中の皿には 5 個あります。",
+          "この並べ方は実際に作れます。まん中に 5 個、上と下に 1 個と 4 個（1 + 5 + 4 = 10）、左と右に 2 個と 3 個（2 + 5 + 3 = 10）とすると、5つの皿は 1、2、3、4、5 個ですべてちがい、合計もちょうど 15 個になります。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "5"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "arithmetic-grade3-foundation",
+        "notes": "題型骨架取自 DfEE 0083/2000「Mathematical challenges for able pupils in Key Stages 1 and 2」的 Cross-road （5 個盤子排成十字、15 顆籌碼、每盤數目不同、要讓每條線的和都是 10），本輪是讀 scratchpad 內該題本的文字檔取得，不是憑印象生題；改寫成固定問「中間那盤有幾顆」，並在詳解裡補上構造驗證。已比對 logic_grade7_foundation_013（3×3 魔方陣，由總和 45 推出每行的和 15）：那題求的是「每條線的和」，本題的線和是已知、要反過來求「兩條線共用的那一格」，方向相反。也比對了重疊計數家族 arithmetic_grade4_foundation_023（正方形桌四角坐人）、geometry_grade2_foundation_014/025、geometry_grade3_foundation_014/033（邊框排棋子、角由兩邊共用）與 arithmetic_grade3_foundation_043（集合重疊）：既有題都是「由每邊的數量推總數、扣掉重複的角」，本題是「由兩條線的和與總數反推被共用的中心」，並且還要真的排出一組 1 到 5 的分法。全庫掃「十字」只有 geometry_grade3_035、geometry_grade4_066、geometry_grade6_028 三題純幾何形狀題，沒有任何一題在十字上填數。"
+      }
+    },
+    {
+      "id": "arithmetic_grade3_foundation_103",
+      "reviewStatus": "ok",
+      "topic": "arithmetic",
+      "subtopic": "fewest_transfers_to_equalize_four_piles",
+      "tags": [
+        "c:add_sub",
+        "c:mean",
+        "m:construction"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade3",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "桌上有四疊硬幣，由左到右分別是 3 枚、5 枚、9 枚、11 枚。每一次可以從其中一疊拿走任意多枚，放進另外一疊，這樣算搬一次。最少要搬幾次，才能讓四疊硬幣的枚數都一樣多？",
+        "zh-Hans": "桌上有四叠硬币，由左到右分别是 3 枚、5 枚、9 枚、11 枚。每一次可以从其中一叠拿走任意多枚，放进另外一叠，这样算搬一次。最少要搬几次，才能让四叠硬币的枚数都一样多？",
+        "en": "Four stacks of coins sit on a table, containing 3, 5, 9 and 11 coins from left to right. In one move you may take any number of coins from one stack and put them onto another stack. What is the smallest number of moves needed to make all four stacks contain the same number of coins?",
+        "ja": "テーブルの上に4つのコインの山があり、左から順に 3 枚、5 枚、9 枚、11 枚です。1回の移動では、どれか1つの山から好きな枚数を取り、別の山に置くことができます。4つの山の枚数をすべて同じにするには、最少で何回移動すればよいですか。"
+      },
+      "answer": {
+        "zh-Hant": "最少要搬 2 次。",
+        "zh-Hans": "最少要搬 2 次。",
+        "en": "The smallest number of moves is 2.",
+        "ja": "最少で 2 回の移動で済みます。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "四疊一共有 3 + 5 + 9 + 11 = 28 枚，要變成一樣多，每一疊最後都必須是 28 ÷ 4 = 7 枚。",
+          "現在 3、5、9、11 這四疊全都不是 7 枚，也就是四疊都非改不可。",
+          "搬一次只會改變兩疊（被拿走的那一疊和被放進去的那一疊），所以搬 1 次最多只能修好兩疊，不可能一次就讓四疊都變成 7 枚。",
+          "搬 2 次真的做得到：先從 11 枚那疊拿 4 枚放到 3 枚那疊，這兩疊都變成 7 枚；再從 9 枚那疊拿 2 枚放到 5 枚那疊，這兩疊也都變成 7 枚。所以答案是 2 次。"
+        ],
+        "zh-Hans": [
+          "四叠一共有 3 + 5 + 9 + 11 = 28 枚，要变成一样多，每一叠最后都必须是 28 ÷ 4 = 7 枚。",
+          "现在 3、5、9、11 这四叠全都不是 7 枚，也就是四叠都非改不可。",
+          "搬一次只会改变两叠（被拿走的那一叠和被放进去的那一叠），所以搬 1 次最多只能修好两叠，不可能一次就让四叠都变成 7 枚。",
+          "搬 2 次真的做得到：先从 11 枚那叠拿 4 枚放到 3 枚那叠，这两叠都变成 7 枚；再从 9 枚那叠拿 2 枚放到 5 枚那叠，这两叠也都变成 7 枚。所以答案是 2 次。"
+        ],
+        "en": [
+          "The four stacks hold 3 + 5 + 9 + 11 = 28 coins in total, so if they end up equal each stack must hold 28 ÷ 4 = 7 coins.",
+          "Right now none of the stacks 3, 5, 9, 11 has 7 coins, so every one of the four stacks has to change.",
+          "A single move changes only two stacks (the one coins are taken from and the one they are put on), so one move can fix at most two stacks and cannot make all four equal.",
+          "Two moves really do work: take 4 coins from the stack of 11 and put them on the stack of 3, making both 7; then take 2 coins from the stack of 9 and put them on the stack of 5, making both 7. So the answer is 2."
+        ],
+        "ja": [
+          "4つの山の合計は 3 + 5 + 9 + 11 = 28 枚なので、同じ枚数にそろえると1つの山は 28 ÷ 4 = 7 枚になります。",
+          "今は 3、5、9、11 のどの山も 7 枚ではないので、4つの山すべてを変える必要があります。",
+          "1回の移動で変わる山は2つだけ（取り出す山と置く山）なので、1回では最大2つの山しか直せず、4つ同時に 7 枚にすることはできません。",
+          "2回なら実際にできます。まず 11 枚の山から 4 枚を 3 枚の山へ移すと両方 7 枚になり、次に 9 枚の山から 2 枚を 5 枚の山へ移すと両方 7 枚になります。よって答えは 2 回です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "2"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "arithmetic-grade3-foundation",
+        "notes": "題型骨架取自 DfEE KS1&2 Mathematical challenges 的「Gold bars」（海盜把幾堆金條搬成一樣高，只搬兩次），改寫成四疊硬幣並改問「最少搬幾次」。已比對 arithmetic_grade1_foundation_004、006、022、037、040 與 arithmetic_grade3_foundation_006：既有題全是兩堆之間「要搬幾顆」的和差問題，答案是數量；本題是四疊、問的是「移動次數」，還要論證 1 次為什麼不夠（一次只改變兩疊），推理核心不同。"
+      }
+    },
+    {
+      "id": "arithmetic_grade3_foundation_104",
+      "reviewStatus": "ok",
+      "topic": "arithmetic",
+      "subtopic": "pair_six_cards_into_consecutive_sums",
+      "tags": [
+        "c:add_sub",
+        "c:basic_counting",
+        "m:construction"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade3",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "寫著 1、2、3、4、5、6 的六張卡片要分成三組，每組兩張。分好之後，三組卡片的和剛好是三個連續的整數（像 5、6、7 那樣一個接一個）。這三個和之中，最大的那一個是多少？",
+        "zh-Hans": "写着 1、2、3、4、5、6 的六张卡片要分成三组，每组两张。分好之后，三组卡片的和刚好是三个连续的整数（像 5、6、7 那样一个接一个）。这三个和之中，最大的那一个是多少？",
+        "en": "Six cards labelled 1, 2, 3, 4, 5 and 6 are split into three groups of two cards each. After the split, the three group totals turn out to be three consecutive whole numbers (like 5, 6, 7 one after another). What is the largest of these three totals?",
+        "ja": "1、2、3、4、5、6 と書かれた6枚のカードを、2枚ずつ3つの組に分けます。分けたあと、3つの組の合計がちょうど連続する3つの整数（5、6、7 のように続く数）になりました。この3つの合計のうち、いちばん大きいものはいくつですか。"
+      },
+      "answer": {
+        "zh-Hant": "最大的那一組的和是 8。",
+        "zh-Hans": "最大的那一组的和是 8。",
+        "en": "The largest of the three totals is 8.",
+        "ja": "いちばん大きい合計は 8 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "六張卡片上的數字全部加起來是 1 + 2 + 3 + 4 + 5 + 6 = 21，不管怎麼分組，三組的和加起來一定是 21。",
+          "三個連續整數可以寫成「中間的數減 1」、「中間的數」、「中間的數加 1」，把它們加起來剛好是中間那個數的 3 倍。",
+          "所以中間那個數的 3 倍等於 21，中間的數是 7，三個和由小到大是 6、7、8。",
+          "這樣的分法真的排得出來：1 和 5 一組（和是 6），3 和 4 一組（和是 7），2 和 6 一組（和是 8）。所以最大的和是 8。"
+        ],
+        "zh-Hans": [
+          "六张卡片上的数字全部加起来是 1 + 2 + 3 + 4 + 5 + 6 = 21，不管怎么分组，三组的和加起来一定是 21。",
+          "三个连续整数可以写成「中间的数减 1」、「中间的数」、「中间的数加 1」，把它们加起来刚好是中间那个数的 3 倍。",
+          "所以中间那个数的 3 倍等于 21，中间的数是 7，三个和由小到大是 6、7、8。",
+          "这样的分法真的排得出来：1 和 5 一组（和是 6），3 和 4 一组（和是 7），2 和 6 一组（和是 8）。所以最大的和是 8。"
+        ],
+        "en": [
+          "The six card numbers add up to 1 + 2 + 3 + 4 + 5 + 6 = 21, so however the cards are grouped, the three group totals must add up to 21.",
+          "Three consecutive whole numbers can be written as \"the middle one minus 1\", \"the middle one\" and \"the middle one plus 1\", and adding them gives exactly three times the middle number.",
+          "So three times the middle number is 21, the middle number is 7, and the three totals from smallest to largest are 6, 7 and 8.",
+          "Such a grouping really exists: 1 with 5 (total 6), 3 with 4 (total 7), and 2 with 6 (total 8). So the largest total is 8."
+        ],
+        "ja": [
+          "6枚のカードの数字の合計は 1 + 2 + 3 + 4 + 5 + 6 = 21 なので、どのように分けても3つの組の合計を足すと必ず 21 になります。",
+          "連続する3つの整数は「まん中の数から 1 を引いた数」「まん中の数」「まん中の数に 1 を足した数」と書けるので、その和はまん中の数の3倍になります。",
+          "したがってまん中の数の3倍が 21 となり、まん中の数は 7、3つの合計は小さい順に 6、7、8 です。",
+          "この分け方は実際に作れます。1 と 5（合計 6）、3 と 4（合計 7）、2 と 6（合計 8）です。よっていちばん大きい合計は 8 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "8"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "arithmetic-grade3-foundation",
+        "notes": "題型骨架取自 NRICH primary「Sealed Solution」（把 0 到 9 十張卡兩兩放進五個信封、信封上寫著兩張卡的和），改成六張卡三組、並加上「三個和是連續整數」的限制，解法變成先用總和 21 定出三個和，再構造一組分法。已比對 arithmetic_grade3_foundation_028（四張券分兩組使兩組和最接近）、arithmetic_grade2_foundation_013（號碼配對和為 10）、combinatorics_grade11_foundation_007（1 到 14 分七組）：既有題不是求「兩組和最接近」就是給定目標和，沒有「先用總和推出三個連續和、再構造」這條路徑。"
+      }
+    },
+    {
+      "id": "arithmetic_grade3_foundation_105",
+      "reviewStatus": "ok",
+      "topic": "arithmetic",
+      "subtopic": "sheet_number_from_page_pair_sum",
+      "tags": [
+        "c:add_sub",
+        "c:pattern",
+        "m:bijection"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade3",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一本書從第 1 頁開始連續編頁碼。每一張紙都有正反兩面，正面印奇數頁、反面印偶數頁，所以第 1 張紙上是第 1 頁和第 2 頁。小華從書裡撕下一整張紙，發現這張紙上的兩個頁碼加起來是 75。他撕下的是第幾張紙？",
+        "zh-Hans": "一本书从第 1 页开始连续编页码。每一张纸都有正反两面，正面印奇数页、反面印偶数页，所以第 1 张纸上是第 1 页和第 2 页。小华从书里撕下一整张纸，发现这张纸上的两个页码加起来是 75。他撕下的是第几张纸？",
+        "en": "A book has its pages numbered consecutively starting from page 1. Every sheet has a front and a back: odd page numbers are printed on the fronts and even ones on the backs, so the first sheet carries pages 1 and 2. Hua tears one whole sheet out and finds that the two page numbers on it add up to 75. Which sheet did he tear out?",
+        "ja": "ある本のページ番号は1ページから順に付けられています。どの紙にも表と裏があり、表には奇数のページ、裏には偶数のページが印刷されているので、1枚目の紙には1ページと2ページがあります。ハナさんが紙を1枚まるごと破り取ったところ、その紙の2つのページ番号の和は 75 でした。破り取ったのは何枚目の紙ですか。"
+      },
+      "answer": {
+        "zh-Hant": "他撕下的是第 19 張紙。",
+        "zh-Hans": "他撕下的是第 19 张纸。",
+        "en": "He tore out sheet number 19.",
+        "ja": "破り取ったのは 19 枚目の紙です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "一張紙剛好對應兩個頁碼，一個也不會多、一個也不會少：第 1 張是 1 和 2，第 2 張是 3 和 4，第 3 張是 5 和 6。",
+          "照這個一張配兩頁的對應看下去，第幾張紙上的兩個頁碼就是「張數的 2 倍減 1」和「張數的 2 倍」。",
+          "把這兩個頁碼加起來，就是「張數的 4 倍減 1」。題目說這個和是 75，所以張數的 4 倍是 76。",
+          "76 ÷ 4 = 19，所以撕下的是第 19 張紙。驗算：第 19 張上是第 37 頁和第 38 頁，37 + 38 = 75，正確。"
+        ],
+        "zh-Hans": [
+          "一张纸刚好对应两个页码，一个也不会多、一个也不会少：第 1 张是 1 和 2，第 2 张是 3 和 4，第 3 张是 5 和 6。",
+          "照这个一张配两页的对应看下去，第几张纸上的两个页码就是「张数的 2 倍减 1」和「张数的 2 倍」。",
+          "把这两个页码加起来，就是「张数的 4 倍减 1」。题目说这个和是 75，所以张数的 4 倍是 76。",
+          "76 ÷ 4 = 19，所以撕下的是第 19 张纸。验算：第 19 张上是第 37 页和第 38 页，37 + 38 = 75，正确。"
+        ],
+        "en": [
+          "Each sheet matches exactly two page numbers, no more and no fewer: sheet 1 has pages 1 and 2, sheet 2 has pages 3 and 4, sheet 3 has pages 5 and 6.",
+          "Following this one-sheet-to-two-pages matching, the pages on sheet number n are \"twice n minus 1\" and \"twice n\".",
+          "Adding those two page numbers gives \"four times n minus 1\". The problem says this sum is 75, so four times n is 76.",
+          "76 ÷ 4 = 19, so the sheet torn out is sheet 19. Check: sheet 19 carries pages 37 and 38, and 37 + 38 = 75, which is correct."
+        ],
+        "ja": [
+          "紙1枚はちょうど2つのページ番号と対応します。1枚目は1ページと2ページ、2枚目は3ページと4ページ、3枚目は5ページと6ページです。",
+          "この「紙1枚にページ2つ」の対応を続けると、n 枚目の紙のページ番号は「n の2倍から1を引いた数」と「n の2倍」になります。",
+          "この2つを足すと「n の4倍から1を引いた数」です。問題文よりこの和が 75 なので、n の4倍は 76 です。",
+          "76 ÷ 4 = 19 なので、破り取ったのは 19 枚目の紙です。確かめると 19 枚目は37ページと38ページで、37 + 38 = 75 となり正しいです。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "19"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "arithmetic-grade3-foundation",
+        "notes": "題型骨架取自 DfEE KS1&2 Mathematical challenges 與日本算数教材常見的「本のページと紙の枚数」對應題，改寫成由兩個頁碼之和逆推張數。全庫掃「頁碼／每張紙／正反面」只掃到 arithmetic_grade5_foundation_005（編頁碼共用幾個數字）、arithmetic_grade6_foundation_036（頁碼裡數字 1 出現幾次）、logic_grade6_foundation_024（書籤頁碼），沒有任何一題用到「一張紙對應兩個頁碼」這個一一對應，判定不撞。"
+      }
+    },
+    {
+      "id": "arithmetic_grade3_foundation_106",
+      "reviewStatus": "ok",
+      "topic": "arithmetic",
+      "subtopic": "constant_sum_pairing_partner",
+      "tags": [
+        "c:add_sub",
+        "c:compare_order",
+        "m:bijection"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade3",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一場活動準備了 40 個座位，號碼從 1 排到 40，每位來賓坐一個座位，剛好坐滿。主持人說：「請兩個人一組，全場分成 20 組，而且每一組兩個座位號碼加起來都要一樣大。」小華坐在 12 號座位。他應該和幾號座位的來賓同一組？",
+        "zh-Hans": "一场活动准备了 40 个座位，号码从 1 排到 40，每位来宾坐一个座位，刚好坐满。主持人说：「请两个人一组，全场分成 20 组，而且每一组两个座位号码加起来都要一样大。」小华坐在 12 号座位。他应该和几号座位的来宾同一组？",
+        "en": "An event has 40 seats numbered 1 to 40, and every seat is taken by one guest. The host says: \"Get into pairs so that the room forms 20 groups, and make sure the two seat numbers in every group add up to the same total.\" Hua is sitting in seat 12. Which seat number should his partner be sitting in?",
+        "ja": "あるイベントには 1 から 40 まで番号のついた 40 の座席があり、来場者が1人ずつ座って満席になりました。司会者は「2人1組になって全部で 20 組をつくり、どの組でも2つの座席番号の和が同じになるようにしてください」と言いました。ハナさんは 12 番の座席です。何番の座席の人と組になればよいですか。"
+      },
+      "answer": {
+        "zh-Hant": "他要和 29 號座位的來賓同一組。",
+        "zh-Hans": "他要和 29 号座位的来宾同一组。",
+        "en": "His partner must be the guest in seat 29.",
+        "ja": "29 番の座席の人と組になります。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "坐 1 號座位的來賓號碼最小，只可能跟最大的 40 號同一組；如果 1 號配上比 40 小的號碼，那一組的和就會比別組小，做不到每組都一樣。",
+          "所以每一組的和都固定是 1 + 40 = 41。",
+          "也可以從總和來看：1 + 2 + ⋯ + 40 = 820，分成 20 組，每組的和是 820 ÷ 20 = 41，結果一樣。",
+          "小華坐 12 號座位，同組的座位號碼就是 41 − 12 = 29。"
+        ],
+        "zh-Hans": [
+          "坐 1 号座位的来宾号码最小，只可能跟最大的 40 号同一组；如果 1 号配上比 40 小的号码，那一组的和就会比别组小，做不到每组都一样。",
+          "所以每一组的和都固定是 1 + 40 = 41。",
+          "也可以从总和来看：1 + 2 + ⋯ + 40 = 820，分成 20 组，每组的和是 820 ÷ 20 = 41，结果一样。",
+          "小华坐 12 号座位，同组的座位号码就是 41 − 12 = 29。"
+        ],
+        "en": [
+          "The guest in seat 1 has the smallest number and can only be paired with the largest, seat 40; pairing seat 1 with anything smaller would make that group total smaller than the others.",
+          "So every group total is fixed at 1 + 40 = 41.",
+          "The same answer comes from the overall total: 1 + 2 + ⋯ + 40 = 820, and dividing into 20 groups gives 820 ÷ 20 = 41 per group.",
+          "Since Hua sits in seat 12, his partner sits in seat 41 − 12 = 29."
+        ],
+        "ja": [
+          "1 番の座席の人の番号はいちばん小さいので、いちばん大きい 40 番としか組めません。1 番を 40 より小さい番号と組ませると、その組の和だけ他より小さくなってしまいます。",
+          "したがって、どの組の和も 1 + 40 = 41 に決まります。",
+          "全体の和から考えても同じです。1 + 2 + ⋯ + 40 = 820 を 20 組に分けるので、1組あたりの和は 820 ÷ 20 = 41 です。",
+          "ハナさんは 12 番の座席なので、相手の座席番号は 41 − 12 = 29 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "29"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "arithmetic-grade3-foundation",
+        "notes": "題型骨架取自 NRICH primary「Sealed Solution」與新加坡 CWP 常見的「等和配對」教材例題，改寫成由極端項（1 只能配 40）推出定和、再回答特定卡片的配對對象。已比對 arithmetic_grade2_foundation_013（1 到 9 號碼牌配成和為 10、問最多幾組）與 arithmetic_grade1_foundation_013（6 張卡片取兩張和為 7 的取法數）：那兩題都直接給定目標和、問的是組數或取法數；本題的定和 41 必須自己從極端項或總和推出來，問的是特定號碼的配對對象，推理核心不同。"
+      }
+    },
+    {
+      "id": "arithmetic_grade3_foundation_107",
+      "reviewStatus": "ok",
+      "topic": "arithmetic",
+      "subtopic": "bottle_exchange_total_drunk",
+      "tags": [
+        "c:mul_div",
+        "c:basic_counting",
+        "m:bijection"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade3",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一家商店規定：3 個空瓶可以換 1 瓶新的汽水。小安一次買了 10 瓶汽水，喝完之後把空瓶拿去換，換來的汽水喝完後空瓶還可以再拿去換，一直換到不能再換為止。小安最多可以喝到幾瓶汽水？",
+        "zh-Hans": "一家商店规定：3 个空瓶可以换 1 瓶新的汽水。小安一次买了 10 瓶汽水，喝完之后把空瓶拿去换，换来的汽水喝完后空瓶还可以再拿去换，一直换到不能再换为止。小安最多可以喝到几瓶汽水？",
+        "en": "A shop has this rule: 3 empty bottles can be exchanged for 1 new bottle of soda. An buys 10 bottles of soda at once. After drinking them she exchanges the empties, drinks what she gets, exchanges those empties again, and keeps going until no more exchanges are possible. At most how many bottles of soda can An drink in total?",
+        "ja": "ある店では、空きびん 3 本を新しいサイダー 1 本と交換できます。アンさんはサイダーを 10 本まとめて買いました。飲み終わったら空きびんを交換し、交換して手に入れたサイダーを飲んだあとの空きびんもまた交換し、これ以上交換できなくなるまで続けます。アンさんは最大で何本のサイダーを飲めますか。"
+      },
+      "answer": {
+        "zh-Hant": "小安最多可以喝到 14 瓶汽水。",
+        "zh-Hans": "小安最多可以喝到 14 瓶汽水。",
+        "en": "An can drink at most 14 bottles of soda.",
+        "ja": "アンさんは最大で 14 本飲むことができます。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "每換一次，是拿 3 個空瓶換走 1 瓶汽水；這瓶喝完又留下 1 個空瓶。所以每換一次，手上的瓶子總數剛好少 2 個，一次對一次，不會有例外。",
+          "一開始手上有 10 個瓶子。當瓶子只剩 1 個或 2 個時，就湊不滿 3 個，不能再換了。",
+          "瓶子從 10 個一次少 2 個地減下去：10 → 8 → 6 → 4 → 2，一共可以減 4 次，也就是可以換 4 次，多喝到 4 瓶。",
+          "把原本買的 10 瓶和換來的 4 瓶加起來，小安最多可以喝到 10 + 4 = 14 瓶汽水。"
+        ],
+        "zh-Hans": [
+          "每换一次，是拿 3 个空瓶换走 1 瓶汽水；这瓶喝完又留下 1 个空瓶。所以每换一次，手上的瓶子总数刚好少 2 个，一次对一次，不会有例外。",
+          "一开始手上有 10 个瓶子。当瓶子只剩 1 个或 2 个时，就凑不满 3 个，不能再换了。",
+          "瓶子从 10 个一次少 2 个地减下去：10 → 8 → 6 → 4 → 2，一共可以减 4 次，也就是可以换 4 次，多喝到 4 瓶。",
+          "把原本买的 10 瓶和换来的 4 瓶加起来，小安最多可以喝到 10 + 4 = 14 瓶汽水。"
+        ],
+        "en": [
+          "Each exchange trades 3 empty bottles for 1 bottle of soda, and drinking that soda leaves 1 empty bottle behind. So every single exchange reduces the number of bottles in hand by exactly 2, with no exceptions.",
+          "She starts with 10 bottles. Once only 1 or 2 bottles are left, there are not enough for another exchange.",
+          "Counting down two at a time from 10 gives 10 → 8 → 6 → 4 → 2, which is 4 steps, so 4 exchanges are possible and 4 extra bottles are drunk.",
+          "Adding the 10 bottles bought to the 4 bottles obtained by exchange, An drinks at most 10 + 4 = 14 bottles of soda."
+        ],
+        "ja": [
+          "1回の交換では空きびん 3 本を渡してサイダー 1 本を受け取り、それを飲むと空きびんが 1 本残ります。つまり交換 1 回につき手元のびんの数はちょうど 2 本ずつ減り、例外はありません。",
+          "最初は 10 本あります。びんが 1 本か 2 本になると 3 本そろわないので、もう交換できません。",
+          "10 本から 2 本ずつ減らすと 10 → 8 → 6 → 4 → 2 となり、減らせるのは 4 回です。つまり交換できるのは 4 回で、4 本多く飲めます。",
+          "最初に買った 10 本と交換で得た 4 本を合わせて、アンさんは最大で 10 + 4 = 14 本飲めます。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "14"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "arithmetic-grade3-foundation",
+        "notes": "題型骨架是各國小學教材與 NRICH primary 都很常見的「空瓶換飲料」，本輪實際查外部題源後採用。全庫掃「空瓶／瓶蓋／回收」只掃到 arithmetic_grade3_foundation_020（4 個瓶蓋換 1 張卡片、3 張卡片換 1 個玩具），那題是單向的兩段兌換、沒有「換來的東西用完又能再換」的循環，也沒有「每換一次瓶子少 2 個」這個一一對應論證，判定不撞。"
+      }
+    },
+    {
+      "id": "arithmetic_grade3_foundation_108",
+      "reviewStatus": "ok",
+      "topic": "arithmetic",
+      "subtopic": "estimate_whether_money_is_enough",
+      "tags": [
+        "c:mul_div",
+        "c:add_sub",
+        "m:estimate_bound"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade3",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一包餅乾 47 元，小安要買 19 包，身上帶了 900 元。他想先不算出精確的乘積，只用估算來判斷錢夠不夠。下面哪一個判斷方式是正確的？",
+        "zh-Hans": "一包饼干 47 元，小安要买 19 包，身上带了 900 元。他想先不算出精确的乘积，只用估算来判断钱够不够。下面哪一个判断方式是正确的？",
+        "en": "A packet of biscuits costs 47 dollars. An wants to buy 19 packets and has 900 dollars with him. He wants to decide whether that is enough by estimating, without working out the exact product. Which of the following pieces of reasoning is correct?",
+        "ja": "ビスケット 1 袋は 47 円で、アンさんは 19 袋買いたいと思っています。手持ちは 900 円です。正確な積を計算せずに、見積もりだけで足りるかどうかを判断したいと考えています。次のうち、正しい判断のしかたはどれですか。"
+      },
+      "answer": {
+        "zh-Hant": "正確的判斷方式是 B：先算 20 包是 940 元，再扣掉多算的那 1 包 47 元，得到 893 元，比 900 元少，所以錢夠。",
+        "zh-Hans": "正确的判断方式是 B：先算 20 包是 940 元，再扣掉多算的那 1 包 47 元，得到 893 元，比 900 元少，所以钱够。",
+        "en": "The correct reasoning is B: 20 packets cost 940 dollars, and subtracting the one extra packet, 940 − 47 = 893 dollars, which is less than 900, so the money is enough.",
+        "ja": "正しいのは B です。20 袋なら 940 円、そこから多く数えた 1 袋分 47 円を引くと 893 円で、900 円より少ないのでお金は足ります。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "47 元接近 50 元但比 50 元少，所以把每包當成 50 元算出來的 950 元，一定比實際的錢多；用它來說「不夠」是不對的。",
+          "反過來把每包當成 40 元，算出來的 760 元一定比實際的錢少；用一個偏小的估計來說「一定夠」，同樣站不住腳。",
+          "正確的估法是先把包數湊成好算的整十：20 包剛好是 20 × 47 = 940 元。",
+          "19 包比 20 包少一包，940 − 47 = 893 元。893 元比 900 元少，所以小安的錢夠，答案選 B。"
+        ],
+        "zh-Hans": [
+          "47 元接近 50 元但比 50 元少，所以把每包当成 50 元算出来的 950 元，一定比实际的钱多；用它来说「不够」是不对的。",
+          "反过来把每包当成 40 元，算出来的 760 元一定比实际的钱少；用一个偏小的估计来说「一定够」，同样站不住脚。",
+          "正确的估法是先把包数凑成好算的整十：20 包刚好是 20 × 47 = 940 元。",
+          "19 包比 20 包少一包，940 − 47 = 893 元。893 元比 900 元少，所以小安的钱够，答案选 B。"
+        ],
+        "en": [
+          "47 is close to 50 but smaller, so pricing each packet at 50 gives 950, which is certainly more than the real cost; using that to claim \"not enough\" is invalid.",
+          "Pricing each packet at 40 instead gives 760, which is certainly less than the real cost; using an underestimate to claim \"definitely enough\" is equally unsound.",
+          "The correct estimate rounds the number of packets to an easy ten: 20 packets cost exactly 20 × 47 = 940.",
+          "19 packets is one packet fewer, so 940 − 47 = 893. Since 893 is less than 900, An has enough money, and the answer is B."
+        ],
+        "ja": [
+          "47 は 50 に近いですが 50 より小さいので、1 袋 50 円として求めた 950 円は必ず実際より多くなります。それをもとに「足りない」と言うのは正しくありません。",
+          "逆に 1 袋 40 円とすると 760 円となり、必ず実際より少なくなります。小さめの見積もりで「必ず足りる」と言うのも同じく成り立ちません。",
+          "正しい見積もりは、袋数を計算しやすいきりのよい数にすることです。20 袋なら 20 × 47 = 940 円です。",
+          "19 袋は 1 袋少ないので 940 − 47 = 893 円です。893 円は 900 円より少ないので、アンさんのお金は足ります。答えは B です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "multiple_choice",
+      "correctAnswer": {
+        "type": "choice",
+        "value": "B"
+      },
+      "options": {
+        "A": {
+          "zh-Hant": "不夠。每包大約 50 元，19 包大約是 950 元，950 元比 900 元多，所以錢一定不夠。",
+          "zh-Hans": "不够。每包大约 50 元，19 包大约是 950 元，950 元比 900 元多，所以钱一定不够。",
+          "en": "Not enough. Each packet is about 50, so 19 packets are about 950, and 950 is more than 900, so the money must fall short.",
+          "ja": "足りない。1 袋はおよそ 50 円なので 19 袋はおよそ 950 円で、950 円は 900 円より多いから必ず足りない。"
+        },
+        "B": {
+          "zh-Hant": "夠。20 包是 940 元，19 包比 20 包少一包，940 − 47 = 893 元，893 元比 900 元少，所以錢夠。",
+          "zh-Hans": "够。20 包是 940 元，19 包比 20 包少一包，940 − 47 = 893 元，893 元比 900 元少，所以钱够。",
+          "en": "Enough. 20 packets cost 940, and 19 packets is one fewer, so 940 − 47 = 893, and 893 is less than 900, so the money suffices.",
+          "ja": "足りる。20 袋なら 940 円、19 袋は 1 袋少ないので 940 − 47 = 893 円、893 円は 900 円より少ないから足りる。"
+        },
+        "C": {
+          "zh-Hant": "不夠。每包接近 50 元，20 包就要 1000 元，19 包也一定超過 900 元，所以錢一定不夠。",
+          "zh-Hans": "不够。每包接近 50 元，20 包就要 1000 元，19 包也一定超过 900 元，所以钱一定不够。",
+          "en": "Not enough. Each packet is near 50, so 20 packets need 1000, hence 19 packets must also exceed 900 and the money falls short.",
+          "ja": "足りない。1 袋は 50 円近いので 20 袋で 1000 円かかり、19 袋でも必ず 900 円を超えるから足りない。"
+        },
+        "D": {
+          "zh-Hant": "夠。每包大約 40 元，19 包大約是 760 元，760 元比 900 元少，所以錢一定夠。",
+          "zh-Hans": "够。每包大约 40 元，19 包大约是 760 元，760 元比 900 元少，所以钱一定够。",
+          "en": "Enough. Each packet is about 40, so 19 packets are about 760, and 760 is less than 900, so the money must suffice.",
+          "ja": "足りる。1 袋はおよそ 40 円なので 19 袋はおよそ 760 円で、760 円は 900 円より少ないから必ず足りる。"
+        }
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "arithmetic-grade3-foundation",
+        "notes": "題型骨架取自 DfEE KS1&2 Mathematical challenges 的購物估算題與新加坡 CWP 的「夠不夠」判斷題，改寫成「先估整十再修正」的上下界推理，並刻意放進「往上估反而得到錯誤結論」的陷阱。已比對 arithmetic_grade2_foundation_060（11 + 21 + 31 最接近哪個數）、algebra_grade7_foundation_022（200 元買筆記本加包裝費）、arithmetic_grade1_foundation_085（13 元買 4 元餅乾最多幾片）：既有題不是純估算就是精算，沒有一題在考「哪一種估算方向可以下結論」，推理核心不同。"
+      }
+    },
+    {
+      "id": "arithmetic_grade3_foundation_109",
+      "reviewStatus": "ok",
+      "topic": "arithmetic",
+      "subtopic": "reading_days_upper_and_lower_bound",
+      "tags": [
+        "c:mul_div",
+        "c:compare_order",
+        "m:estimate_bound"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade3",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一本故事書有 120 頁。小安每天都要讀一些，而且每天讀的頁數都是整數，最少 8 頁、最多 10 頁。他把整本書讀完，最少要幾天、最多要幾天？請回答「最多的天數」減去「最少的天數」。",
+        "zh-Hans": "一本故事书有 120 页。小安每天都要读一些，而且每天读的页数都是整数，最少 8 页、最多 10 页。他把整本书读完，最少要几天、最多要几天？请回答「最多的天数」减去「最少的天数」。",
+        "en": "A storybook has 120 pages. An reads some of it every day, always a whole number of pages, at least 8 and at most 10 pages a day. To finish the whole book, what are the fewest and the greatest numbers of days he could take? Give \"the greatest number of days\" minus \"the fewest number of days\".",
+        "ja": "物語の本が 120 ページあります。アンさんは毎日必ず何ページか読み、1 日に読むページ数はいつも整数で、少なくとも 8 ページ、多くても 10 ページです。この本を読み終えるのに、最も少ない日数と最も多い日数はそれぞれ何日ですか。「最も多い日数」から「最も少ない日数」を引いた数を答えなさい。"
+      },
+      "answer": {
+        "zh-Hant": "最多的天數減去最少的天數是 3。",
+        "zh-Hans": "最多的天数减去最少的天数是 3。",
+        "en": "The greatest number of days minus the fewest is 3.",
+        "ja": "最も多い日数から最も少ない日数を引くと 3 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "天數要最少，就每天讀最多的 10 頁。120 ÷ 10 = 12，12 天剛好讀完，所以最少是 12 天。",
+          "天數要最多，就每天讀最少的 8 頁。120 ÷ 8 = 15，15 天剛好讀完，所以最多是 15 天。",
+          "再檢查兩端：11 天最多只能讀 11 × 10 = 110 頁，不夠 120 頁，所以不可能少於 12 天；16 天至少要讀 16 × 8 = 128 頁，超過 120 頁，所以不可能多於 15 天。",
+          "所以答案是 15 − 12 = 3。"
+        ],
+        "zh-Hans": [
+          "天数要最少，就每天读最多的 10 页。120 ÷ 10 = 12，12 天刚好读完，所以最少是 12 天。",
+          "天数要最多，就每天读最少的 8 页。120 ÷ 8 = 15，15 天刚好读完，所以最多是 15 天。",
+          "再检查两端：11 天最多只能读 11 × 10 = 110 页，不够 120 页，所以不可能少于 12 天；16 天至少要读 16 × 8 = 128 页，超过 120 页，所以不可能多于 15 天。",
+          "所以答案是 15 − 12 = 3。"
+        ],
+        "en": [
+          "To take as few days as possible, read the maximum of 10 pages a day. 120 ÷ 10 = 12, and 12 days finishes exactly, so the fewest is 12 days.",
+          "To take as many days as possible, read the minimum of 8 pages a day. 120 ÷ 8 = 15, and 15 days finishes exactly, so the greatest is 15 days.",
+          "Check both ends: in 11 days he could read at most 11 × 10 = 110 pages, short of 120, so fewer than 12 days is impossible; in 16 days he would read at least 16 × 8 = 128 pages, more than 120, so more than 15 days is impossible.",
+          "Therefore the answer is 15 − 12 = 3."
+        ],
+        "ja": [
+          "日数を最も少なくするには、1 日に最大の 10 ページを読みます。120 ÷ 10 = 12 でちょうど 12 日で読み終わるので、最少は 12 日です。",
+          "日数を最も多くするには、1 日に最小の 8 ページを読みます。120 ÷ 8 = 15 でちょうど 15 日で読み終わるので、最多は 15 日です。",
+          "両端を確かめます。11 日では最大でも 11 × 10 = 110 ページで 120 ページに届かないので 12 日より少なくはできません。16 日では少なくとも 16 × 8 = 128 ページとなり 120 ページを超えるので 15 日より多くはできません。",
+          "よって答えは 15 − 12 = 3 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "3"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "arithmetic-grade3-foundation",
+        "notes": "題型骨架取自 DfEE KS1&2 Mathematical challenges 與新加坡 CWP 常見的「每天做多少、最少最多幾天」上下界題。全庫掃「每天讀／看完這本」只掃到 arithmetic_grade5_foundation_057（分數比例分三天讀完）、arithmetic_grade6_foundation_055（固定頁數的累加）：既有題都是固定速度的直接計算，沒有一題要同時夾出上界與下界並互相檢查，判定不撞。"
+      }
+    },
+    {
+      "id": "arithmetic_grade3_foundation_110",
+      "reviewStatus": "ok",
+      "topic": "arithmetic",
+      "subtopic": "guaranteed_count_from_weight_bounds",
+      "tags": [
+        "c:mul_div",
+        "c:compare_order",
+        "m:estimate_bound"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade3",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一個籃子最多只能承受 30 公斤，超過就會破掉。小安要放進去的西瓜，每一顆都比 4 公斤重，但都比 5 公斤輕（每顆的重量不一定相同，他也沒有秤）。不管這些西瓜實際上各有多重，他都能放心放進籃子的西瓜最多是幾顆？",
+        "zh-Hans": "一个篮子最多只能承受 30 公斤，超过就会破掉。小安要放进去的西瓜，每一颗都比 4 公斤重，但都比 5 公斤轻（每颗的重量不一定相同，他也没有秤）。不管这些西瓜实际上各有多重，他都能放心放进篮子的西瓜最多是几颗？",
+        "en": "A basket can hold at most 30 kilograms; any more and it breaks. Every watermelon An wants to put in weighs more than 4 kilograms but less than 5 kilograms (the melons need not weigh the same, and he has no scales). At most how many watermelons can he put in and still be sure the basket is safe, no matter what the melons actually weigh?",
+        "ja": "かごは最大で 30 キログラムまで耐えられ、それを超えると壊れます。アンさんが入れようとしているスイカは、どれも 4 キログラムより重く、5 キログラムより軽いものです（重さはそろっておらず、はかりもありません）。スイカの実際の重さがどうであっても安心してかごに入れられるのは、最大で何個ですか。"
+      },
+      "answer": {
+        "zh-Hant": "他最多可以放心放進 6 顆西瓜。",
+        "zh-Hans": "他最多可以放心放进 6 颗西瓜。",
+        "en": "He can safely put in at most 6 watermelons.",
+        "ja": "安心して入れられるのは最大で 6 個です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "每顆西瓜都比 5 公斤輕，所以 6 顆合起來一定比 6 × 5 = 30 公斤輕，籃子一定承受得住。",
+          "再多放一顆看看：每顆都比 4 公斤重，所以 7 顆合起來一定比 7 × 4 = 28 公斤重，這個下界還沒超過 30 公斤，光看下界不能斷定不行。",
+          "但是要看最壞的情況：如果 7 顆西瓜每顆都接近 5 公斤，總重就會接近 7 × 5 = 35 公斤，早就超過 30 公斤了。所以 7 顆不保證安全。",
+          "也就是說，只有 6 顆是不管西瓜多重都一定安全的，答案是 6 顆。"
+        ],
+        "zh-Hans": [
+          "每颗西瓜都比 5 公斤轻，所以 6 颗合起来一定比 6 × 5 = 30 公斤轻，篮子一定承受得住。",
+          "再多放一颗看看：每颗都比 4 公斤重，所以 7 颗合起来一定比 7 × 4 = 28 公斤重，这个下界还没超过 30 公斤，光看下界不能断定不行。",
+          "但是要看最坏的情况：如果 7 颗西瓜每颗都接近 5 公斤，总重就会接近 7 × 5 = 35 公斤，早就超过 30 公斤了。所以 7 颗不保证安全。",
+          "也就是说，只有 6 颗是不管西瓜多重都一定安全的，答案是 6 颗。"
+        ],
+        "en": [
+          "Every melon weighs less than 5 kilograms, so 6 melons together must weigh less than 6 × 5 = 30 kilograms, and the basket certainly holds.",
+          "Try one more: every melon weighs more than 4 kilograms, so 7 melons weigh more than 7 × 4 = 28 kilograms. That lower bound is still under 30, so the lower bound alone settles nothing.",
+          "Look at the worst case instead: if each of the 7 melons is close to 5 kilograms, the total approaches 7 × 5 = 35 kilograms, far above 30. So 7 melons are not guaranteed to be safe.",
+          "Hence only 6 melons are safe no matter what the melons weigh, and the answer is 6."
+        ],
+        "ja": [
+          "どのスイカも 5 キログラムより軽いので、6 個の合計は必ず 6 × 5 = 30 キログラムより軽くなり、かごは必ず耐えられます。",
+          "もう 1 個増やしてみます。どれも 4 キログラムより重いので 7 個の合計は 7 × 4 = 28 キログラムより重くなりますが、この下限はまだ 30 キログラムを超えていないため、下限だけでは判断できません。",
+          "そこで最悪の場合を考えます。7 個がどれも 5 キログラム近くなら合計は 7 × 5 = 35 キログラムに近づき、30 キログラムを大きく超えます。よって 7 個では安全が保証されません。",
+          "したがって、重さがどうであっても安全なのは 6 個までで、答えは 6 個です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "6"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "arithmetic-grade3-foundation",
+        "notes": "題型骨架取自 NRICH primary 的估量／範圍推理活動與 Math Kangaroo 中年級卷常見的「不知道確切值、只知道範圍」題，改寫成用上界保證安全、用最壞情況排除下一個數。已比對 arithmetic_grade3_foundation_021（50 顆糖每盒 6 顆至少幾盒）、arithmetic_grade2_foundation_090（每桌 3 至 5 人安排 17 位客人）：既有題都是確定數值的除法或安排，本題的重量是未知的區間、必須同時檢查上界與最壞情況，判定不撞。"
+      }
+    },
+    {
+      "id": "arithmetic_grade3_foundation_111",
+      "reviewStatus": "ok",
+      "topic": "arithmetic",
+      "subtopic": "parity_of_sum_of_ten_odd_cards",
+      "tags": [
+        "c:add_sub",
+        "c:basic_counting",
+        "m:invariant"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade3",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "四個袋子裡分別裝著很多張寫著 1、3、5、7 的卡片。小美從這些袋子裡一共抽出 10 張卡片（同一個數字可以抽好幾張），再把這 10 張卡片上的數加起來。下面哪一個總和是她怎麼抽都湊不出來的？",
+        "zh-Hans": "四个袋子里分别装着很多张写着 1、3、5、7 的卡片。小美从这些袋子里一共抽出 10 张卡片（同一个数字可以抽好几张），再把这 10 张卡片上的数加起来。下面哪一个总和是她怎么抽都凑不出来的？",
+        "en": "Four bags each hold many cards, printed with 1, 3, 5 and 7 respectively. Mei draws 10 cards in all from these bags (she may draw several cards showing the same number) and adds up the numbers on them. Which of the following totals can she never obtain, no matter how she draws?",
+        "ja": "4つの袋には、それぞれ 1、3、5、7 と書かれたカードがたくさん入っています。メイさんはこれらの袋から合計 10 枚のカードを引き（同じ数を何枚引いてもかまいません）、その 10 枚の数を全部たします。次のうち、どのように引いても作れない合計はどれですか。"
+      },
+      "answer": {
+        "zh-Hant": "她湊不出來的總和是 45。",
+        "zh-Hans": "她凑不出来的总和是 45。",
+        "en": "The total she can never obtain is 45.",
+        "ja": "作れない合計は 45 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "卡片上的數 1、3、5、7 全都是奇數。",
+          "把抽到的 10 張卡片兩張兩張配成 5 對，每一對都是兩個奇數相加，而兩個奇數相加一定是偶數。",
+          "5 個偶數再加起來還是偶數，所以不管怎麼抽，10 張卡片的總和一定是偶數。",
+          "選項中的 24、38、62 都是偶數（總和最小是 10 張全抽 1 的 10，最大是全抽 7 的 70，中間的偶數都湊得出來），只有 45 是奇數，所以 45 湊不出來。"
+        ],
+        "zh-Hans": [
+          "卡片上的数 1、3、5、7 全都是奇数。",
+          "把抽到的 10 张卡片两张两张配成 5 对，每一对都是两个奇数相加，而两个奇数相加一定是偶数。",
+          "5 个偶数再加起来还是偶数，所以不管怎么抽，10 张卡片的总和一定是偶数。",
+          "选项中的 24、38、62 都是偶数（总和最小是 10 张全抽 1 的 10，最大是全抽 7 的 70，中间的偶数都凑得出来），只有 45 是奇数，所以 45 凑不出来。"
+        ],
+        "en": [
+          "The card numbers 1, 3, 5 and 7 are all odd.",
+          "Group the 10 drawn cards into 5 pairs. Each pair adds two odd numbers, and two odd numbers always add to an even number.",
+          "Adding 5 even numbers still gives an even number, so however she draws, the total of the 10 cards must be even.",
+          "Among the options, 24, 38 and 62 are even (the total ranges from 10, all ones, up to 70, all sevens, and every even value in between is reachable); only 45 is odd, so 45 can never be obtained."
+        ],
+        "ja": [
+          "カードの数 1、3、5、7 はすべて奇数です。",
+          "引いた 10 枚を 2 枚ずつ 5 組に分けると、どの組も奇数どうしの和になり、奇数どうしの和は必ず偶数になります。",
+          "偶数を 5 つたしてもやはり偶数なので、どのように引いても 10 枚の合計は必ず偶数になります。",
+          "選択肢のうち 24、38、62 は偶数です（合計はすべて 1 のときの 10 から、すべて 7 のときの 70 までで、その間の偶数はすべて作れます）。45 だけが奇数なので、45 は作れません。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "multiple_choice",
+      "correctAnswer": {
+        "type": "choice",
+        "value": "C"
+      },
+      "options": {
+        "A": {
+          "zh-Hant": "24",
+          "zh-Hans": "24",
+          "en": "24",
+          "ja": "24"
+        },
+        "B": {
+          "zh-Hant": "38",
+          "zh-Hans": "38",
+          "en": "38",
+          "ja": "38"
+        },
+        "C": {
+          "zh-Hant": "45",
+          "zh-Hans": "45",
+          "en": "45",
+          "ja": "45"
+        },
+        "D": {
+          "zh-Hant": "62",
+          "zh-Hans": "62",
+          "en": "62",
+          "ja": "62"
+        }
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "arithmetic-grade3-foundation",
+        "notes": "題型骨架直接取自 NRICH primary「Make 37」（四個袋子裝 1、3、5、7，能不能抽 10 張湊出 37），改寫成選擇題並換掉目標數，讓學生自己找出「哪一個湊不出來」。已比對 arithmetic_grade1_foundation_019（1 到 6 選兩數和是奇數的選法數）、arithmetic_grade1_foundation_081（1234 排成圈相鄰和為奇數）、logic_grade3_foundation_057（連續四個整數的和是否被 4 整除）：既有題是數選法或判斷整除，沒有一題用奇偶不變量去證明某個目標值根本湊不出來，判定不撞。"
+      }
+    },
+    {
+      "id": "arithmetic_grade3_foundation_112",
+      "reviewStatus": "ok",
+      "topic": "arithmetic",
+      "subtopic": "equal_removal_from_three_bags",
+      "tags": [
+        "c:add_sub",
+        "c:mul_div",
+        "m:reverse"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade3",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "三個袋子裡一共有 24 顆蘋果。媽媽從每一個袋子裡都拿走同樣多顆蘋果之後，三個袋子裡分別剩下 2 顆、5 顆、8 顆。原本蘋果最多的那個袋子裡有幾顆蘋果？",
+        "zh-Hans": "三个袋子里一共有 24 颗苹果。妈妈从每一个袋子里都拿走同样多颗苹果之后，三个袋子里分别剩下 2 颗、5 颗、8 颗。原本苹果最多的那个袋子里有几颗苹果？",
+        "en": "Three bags hold 24 apples altogether. Mother takes the same number of apples out of each bag, after which the bags hold 2, 5 and 8 apples. How many apples were originally in the bag that had the most?",
+        "ja": "3つの袋に合わせて 24 個のりんごが入っています。お母さんがどの袋からも同じ個数ずつ取り出したところ、3つの袋にはそれぞれ 2 個、5 個、8 個が残りました。もともといちばん多くりんごが入っていた袋には、何個入っていましたか。"
+      },
+      "answer": {
+        "zh-Hant": "原本最多的那個袋子裡有 11 顆蘋果。",
+        "zh-Hans": "原本最多的那个袋子里有 11 颗苹果。",
+        "en": "The bag that had the most originally held 11 apples.",
+        "ja": "もともといちばん多かった袋には 11 個入っていました。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "不必先知道每個袋子原本各有幾顆，先看剩下的總數：2 + 5 + 8 = 15 顆。",
+          "原本一共 24 顆，所以媽媽一共拿走 24 − 15 = 9 顆。",
+          "三個袋子被拿走的顆數一樣多，所以每個袋子都被拿走 9 ÷ 3 = 3 顆。",
+          "每個袋子都少 3 顆，所以剩最多的那個袋子原本就是最多的，它原本有 8 + 3 = 11 顆蘋果。"
+        ],
+        "zh-Hans": [
+          "不必先知道每个袋子原本各有几颗，先看剩下的总数：2 + 5 + 8 = 15 颗。",
+          "原本一共 24 颗，所以妈妈一共拿走 24 − 15 = 9 颗。",
+          "三个袋子被拿走的颗数一样多，所以每个袋子都被拿走 9 ÷ 3 = 3 颗。",
+          "每个袋子都少 3 颗，所以剩最多的那个袋子原本就是最多的，它原本有 8 + 3 = 11 颗苹果。"
+        ],
+        "en": [
+          "There is no need to find each bag separately first; start from the total left behind: 2 + 5 + 8 = 15 apples.",
+          "There were 24 apples at the start, so Mother took away 24 − 15 = 9 apples in all.",
+          "The three bags each lost the same number, so each bag lost 9 ÷ 3 = 3 apples.",
+          "Every bag lost 3, so the bag with the most left is also the bag that had the most before, and it originally held 8 + 3 = 11 apples."
+        ],
+        "ja": [
+          "それぞれの袋にもともと何個あったかを先に求める必要はありません。まず残りの合計を見ます。2 + 5 + 8 = 15 個です。",
+          "もとは 24 個だったので、お母さんが取り出したのは合わせて 24 − 15 = 9 個です。",
+          "3つの袋から同じ個数ずつ取り出したので、1つの袋から取り出したのは 9 ÷ 3 = 3 個です。",
+          "どの袋も 3 個ずつ減ったので、残りがいちばん多い袋がもともといちばん多い袋であり、もとは 8 + 3 = 11 個入っていました。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "11"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "arithmetic-grade3-foundation",
+        "notes": "題型骨架取自 Canadian Math Kangaroo Contest 2023 Grade 1–2 第 12 題（Maria 有 19 顆蘋果在 3 個袋子裡，每袋拿走同樣多後剩 3、4、6，問每袋拿走幾顆），改寫成先求總數差、再回推最多的那袋原有多少。已比對 arithmetic_grade3_foundation_006/007/024（兩堆和差問題）、arithmetic_grade5_foundation_060：既有題是兩個量的和差，本題是三個量同減一個未知量、必須先用總數把未知量夾出來，判定不撞。"
+      }
+    },
+    {
+      "id": "arithmetic_grade3_foundation_113",
+      "reviewStatus": "ok",
+      "topic": "arithmetic",
+      "subtopic": "largest_arrangement_under_product_bound",
+      "tags": [
+        "c:place_value",
+        "c:mul_div",
+        "m:estimate_bound"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade3",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一種禮盒每盒要裝 4 個蛋糕。店員用寫著 1、2、3 的三張數字卡排成一個三位數，當作今天要做的禮盒數量（三張卡都要用到，每張只用一次）。做完之後他發現蛋糕的總數還是一個三位數，沒有超過 999 個。他排出來的三位數最大可能是多少？",
+        "zh-Hans": "一种礼盒每盒要装 4 个蛋糕。店员用写着 1、2、3 的三张数字卡排成一个三位数，当作今天要做的礼盒数量（三张卡都要用到，每张只用一次）。做完之后他发现蛋糕的总数还是一个三位数，没有超过 999 个。他排出来的三位数最大可能是多少？",
+        "en": "Each gift box holds 4 cakes. A shop assistant arranges three number cards showing 1, 2 and 3 into a three-digit number, which is how many gift boxes to make today (all three cards are used, each exactly once). Afterwards he notices that the total number of cakes is still a three-digit number, not exceeding 999. What is the largest possible three-digit number he could have arranged?",
+        "ja": "ギフトボックスは 1 箱につきケーキを 4 個入れます。店員さんは 1、2、3 と書かれた 3 枚の数字カードを並べて3桁の数をつくり、それを今日つくる箱の数としました（3 枚とも 1 回ずつ使います）。つくり終えると、ケーキの合計はまだ3桁の数で、999 個を超えていませんでした。店員さんが並べた3桁の数として、いちばん大きいものはいくつですか。"
+      },
+      "answer": {
+        "zh-Hant": "他排出來的三位數最大可能是 231。",
+        "zh-Hans": "他排出来的三位数最大可能是 231。",
+        "en": "The largest possible three-digit number is 231.",
+        "ja": "いちばん大きい3桁の数は 231 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "蛋糕的總數是禮盒數的 4 倍，題目要求這個 4 倍之後仍然不超過 999。",
+          "先夾出上界：4 × 250 = 1000 已經超過 999，所以禮盒數一定要比 250 小。",
+          "用 1、2、3 三張卡排出的三位數只有 123、132、213、231、312、321 六個，其中比 250 小的是 123、132、213、231。",
+          "這四個之中最大的是 231，而且 231 × 4 = 924 確實還是三位數，所以答案是 231。"
+        ],
+        "zh-Hans": [
+          "蛋糕的总数是礼盒数的 4 倍，题目要求这个 4 倍之后仍然不超过 999。",
+          "先夹出上界：4 × 250 = 1000 已经超过 999，所以礼盒数一定要比 250 小。",
+          "用 1、2、3 三张卡排出的三位数只有 123、132、213、231、312、321 六个，其中比 250 小的是 123、132、213、231。",
+          "这四个之中最大的是 231，而且 231 × 4 = 924 确实还是三位数，所以答案是 231。"
+        ],
+        "en": [
+          "The number of cakes is 4 times the number of boxes, and the problem requires that this fourfold amount still not exceed 999.",
+          "Bound it first: 4 × 250 = 1000 already exceeds 999, so the number of boxes must be smaller than 250.",
+          "The three-digit numbers formed from cards 1, 2 and 3 are only 123, 132, 213, 231, 312 and 321, and those smaller than 250 are 123, 132, 213 and 231.",
+          "The largest of these four is 231, and 231 × 4 = 924 is indeed still a three-digit number, so the answer is 231."
+        ],
+        "ja": [
+          "ケーキの合計は箱の数の4倍で、その4倍が 999 を超えないことが条件です。",
+          "まず上限をおさえます。4 × 250 = 1000 はすでに 999 を超えるので、箱の数は 250 より小さくなければなりません。",
+          "1、2、3 のカードで作れる3桁の数は 123、132、213、231、312、321 の6つだけで、そのうち 250 より小さいのは 123、132、213、231 です。",
+          "この4つのうちいちばん大きいのは 231 で、231 × 4 = 924 は確かに3桁なので、答えは 231 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "231"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "arithmetic-grade3-foundation",
+        "notes": "題型骨架取自 Canadian Math Kangaroo Contest 低年級卷常見的數字卡排列題與 NRICH primary 的估算上界活動，改寫成「先用整十估出上界 250，再從六個排法中挑最大」。已比對 arithmetic_grade3_foundation_018（3、6、8 排最大與最小三位數求差）、mixed_grade6_foundation_014（1、4、7 排三位數且介於 400 與 700）、arithmetic_grade2_foundation_003：既有題是直接排大小或數個數，本題的限制來自「乘 4 之後仍是三位數」，必須先把上界夾出來才知道能挑哪幾個，推理核心不同。"
+      }
     }
   ]
 }

@@ -4505,6 +4505,82 @@
         "reference": "logic-grade7-foundation",
         "notes": "題型取自 AoPS 與各家競賽講義常見的 Hamiltonian path parity（棋盤上走遍每格一次的黑白交錯論證）。既有 logic_grade10_foundation_014 是 4×4 不重複路徑的『條數計數』、logic_grade12_foundation_040 是 3×3 走 4 步的落點計數、combinatorics_grade12_foundation_022 是正方體頂點的路線計數，三題都在數路線條數；本題問的是『哪些格子可以當起點』，靠的是黑白格數 5 比 4 的不對稱，推理核心不同。"
       }
+    },
+    {
+      "id": "logic_grade7_foundation_051",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "signal_codes_counted_by_length",
+      "tags": [
+        "c:basic_counting",
+        "c:permutation_combination",
+        "m:enumeration"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade7",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一種老式電報只用「短音」和「長音」兩種訊號。一個字碼由 1 個、2 個、3 個或 4 個訊號依序組成，訊號的先後順序不同就代表不同的字碼（例如「短長」和「長短」是兩個不同的字碼），而且長度不同的字碼也一定不同。這套電報最多可以表示幾個不同的字碼？",
+        "zh-Hans": "一种老式电报只用“短音”和“长音”两种信号。一个字码由 1 个、2 个、3 个或 4 个信号依序组成，信号的先后顺序不同就代表不同的字码（例如“短长”和“长短”是两个不同的字码），而且长度不同的字码也一定不同。这套电报最多可以表示几个不同的字码？",
+        "en": "An old telegraph system uses only two signals, a short beep and a long beep. One code word is a sequence of 1, 2, 3 or 4 signals; different orders give different code words, so short-long and long-short are two different code words, and code words of different lengths are always different. At most how many different code words can this system represent?",
+        "ja": "ある古い電信では「短い音」と「長い音」の 2 種類の信号だけを使います。1 つの符号は 1 個、2 個、3 個、または 4 個の信号を順に並べたもので、並べる順序が違えば別の符号（たとえば「短・長」と「長・短」は別の符号）となり、長さが違う符号も必ず別のものとして扱われます。この電信で表せる符号は最大で何種類ですか。"
+      },
+      "answer": {
+        "zh-Hant": "最多可以表示 30 個字碼。",
+        "zh-Hans": "最多可以表示 30 个字码。",
+        "en": "At most 30 different code words.",
+        "ja": "最大で 30 種類の符号を表せます。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "字碼的長度可以是 1 到 4，長度不同的字碼一定不會互相混淆，所以用「字碼用了幾個訊號」當分類的軸，分成四類分別數，就能不重不漏。",
+          "長度 1：只有一個位置，每個位置有短音、長音兩種選擇，所以有 2 個字碼。",
+          "長度 2：兩個位置各有 2 種選擇，2 × 2 = 4 個字碼。",
+          "長度 3 有 2 × 2 × 2 = 8 個字碼；長度 4 有 2 × 2 × 2 × 2 = 16 個字碼。",
+          "四類互不重疊，直接相加：2 + 4 + 8 + 16 = 30，所以最多可以表示 30 個不同的字碼。"
+        ],
+        "zh-Hans": [
+          "字码的长度可以是 1 到 4，长度不同的字码一定不会互相混淆，所以用“字码用了几个信号”当分类的轴，分成四类分别数，就能不重不漏。",
+          "长度 1：只有一个位置，每个位置有短音、长音两种选择，所以有 2 个字码。",
+          "长度 2：两个位置各有 2 种选择，2 × 2 = 4 个字码。",
+          "长度 3 有 2 × 2 × 2 = 8 个字码；长度 4 有 2 × 2 × 2 × 2 = 16 个字码。",
+          "四类互不重叠，直接相加：2 + 4 + 8 + 16 = 30，所以最多可以表示 30 个不同的字码。"
+        ],
+        "en": [
+          "A code word has length 1 to 4, and code words of different lengths can never be confused, so use the number of signals as the classifying axis and count the four cases separately, with no repeats and no gaps.",
+          "Length 1: there is one slot with two choices, short or long, giving 2 code words.",
+          "Length 2: each of the two slots has 2 choices, giving 2 × 2 = 4 code words.",
+          "Length 3 gives 2 × 2 × 2 = 8 code words, and length 4 gives 2 × 2 × 2 × 2 = 16 code words.",
+          "The four cases do not overlap, so add them: 2 + 4 + 8 + 16 = 30 different code words at most."
+        ],
+        "ja": [
+          "符号の長さは 1 から 4 で、長さが違えば混同されないので、「信号を何個使うか」を分類の軸にして 4 つの場合を別々に数えれば、重複も数え落としもありません。",
+          "長さ 1 のとき：位置は 1 つで、短い音か長い音の 2 通りなので 2 種類です。",
+          "長さ 2 のとき：2 つの位置がそれぞれ 2 通りなので 2 × 2 = 4 種類です。",
+          "長さ 3 のときは 2 × 2 × 2 = 8 種類、長さ 4 のときは 2 × 2 × 2 × 2 = 16 種類です。",
+          "4 つの場合は互いに重ならないので、そのまま足して 2 + 4 + 8 + 16 = 30。最大で 30 種類の符号を表せます。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "30"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade7-foundation",
+        "notes": "題型出處：實際的摩斯電碼編碼容量問題（Wikipedia 的 Morse code／可變長度前綴碼題材，AoPS 與 Brilliant 的計數入門單元常見）；本輪先讀了 Wikipedia「Stars and bars」與「Combinatorial proof」確認此題的骨架是『按長度分類再相加的等比窮舉』而非隔板法。掃全庫 regex「訊號／字碼／編碼／摩斯」0 命中；最接近的 logic_grade8_foundation_017（8 瓶飲料要幾張試紙）是二進位編碼的極值題，求的是最少張數而不是可表示的總數，推理核心不同。"
+      }
     }
   ]
 }

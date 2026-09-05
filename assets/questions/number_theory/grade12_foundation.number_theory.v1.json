@@ -4103,6 +4103,81 @@
         "reference": "agent-drafted-nrich-2026-09-03",
         "notes": "題型參考 NRICH《Guesswork》（用六張二進位卡片猜 1 到 63 的數）與 Number Short Problems《Digit Sum》《Digital Counter》，由背景起草代理於 2026-09-03 實際查閱 NRICH 等公開題組後改寫；數值、敘述與四語系詳解為本題庫自行推導，非整題引用。主流程已跑機械校驗與跨代理去重。"
       }
+    },
+    {
+      "id": "number_theory_grade12_foundation_042",
+      "reviewStatus": "ok",
+      "topic": "number_theory",
+      "subtopic": "squarefree_kernel_product_square",
+      "tags": [
+        "c:factor_multiple",
+        "m:pigeonhole"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一場比賽的參賽編號是 1 到 16 的正整數。主辦單位要公布一份得獎名單，名單上的編號互不相同，並希望名單上一定有兩個編號相乘會得到完全平方數。這份名單最少要有幾個編號？",
+        "zh-Hans": "一场比赛的参赛编号是 1 到 16 的正整数。主办单位要公布一份得奖名单，名单上的编号互不相同，并希望名单上一定有两个编号相乘会得到完全平方数。这份名单最少要有几个编号？",
+        "en": "The entry numbers of a contest are the positive integers from 1 to 16. The organisers publish a prize list whose entry numbers are pairwise different, and they want the list to be sure to contain two numbers whose product is a perfect square. At least how many entry numbers must the list contain?",
+        "ja": "あるコンテストの参加番号は 1 から 16 までの正の整数です。主催者はたがいに異なる番号からなる受賞リストを発表し、そのリストの中に必ず積が平方数になる 2 つの番号が含まれるようにしたいと考えています。このリストには少なくとも何個の番号が必要ですか。"
+      },
+      "answer": {
+        "zh-Hant": "名單上最少要有 12 個編號。",
+        "zh-Hans": "名单上最少要有 12 个编号。",
+        "en": "The list must contain at least 12 entry numbers.",
+        "ja": "リストには少なくとも 12 個の番号が必要です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "把每個數寫成「一個不含平方因數的數」乘上「一個完全平方數」，前面那個因數稱為它的核。例如 12 = 3 × 2²，核是 3；8 = 2 × 2²，核是 2。",
+          "兩個數的乘積是完全平方數，等價於這兩個數的核相同：若 a = k × s²、b = k × t²，則 ab = (kst)²；反之若核不同，兩核相乘後一定還留著某個奇次方的質因數，乘積就不是完全平方數。",
+          "不大於 16 的正整數，它們的核依序是 1、2、3、1、5、6、7、2、1、10、11、3、13、14、15、1，只有 1、2、3、5、6、7、10、11、13、14、15 這 11 種，當成 11 個抽屜。",
+          "名單上有 11 個編號時，可能 11 種核各出現一次，例如 1、2、3、5、6、7、10、11、13、14、15，任兩個的核都不同，相乘都不是完全平方數，所以 11 個保證不了。",
+          "名單上有 12 個編號時，12 個編號放進 11 個抽屜，必有兩個編號的核相同，它們相乘就是完全平方數。所以答案是 12。"
+        ],
+        "zh-Hans": [
+          "把每个数写成「一个不含平方因数的数」乘上「一个完全平方数」，前面那个因数称为它的核。例如 12 = 3 × 2²，核是 3；8 = 2 × 2²，核是 2。",
+          "两个数的乘积是完全平方数，等价于这两个数的核相同：若 a = k × s²、b = k × t²，则 ab = (kst)²；反之若核不同，两核相乘后一定还留着某个奇次方的质因数，乘积就不是完全平方数。",
+          "不大于 16 的正整数，它们的核依序是 1、2、3、1、5、6、7、2、1、10、11、3、13、14、15、1，只有 1、2、3、5、6、7、10、11、13、14、15 这 11 种，当成 11 个抽屉。",
+          "名单上有 11 个编号时，可能 11 种核各出现一次，例如 1、2、3、5、6、7、10、11、13、14、15，任两个的核都不同，相乘都不是完全平方数，所以 11 个保证不了。",
+          "名单上有 12 个编号时，12 个编号放进 11 个抽屉，必有两个编号的核相同，它们相乘就是完全平方数。所以答案是 12。"
+        ],
+        "en": [
+          "Write each number as a squarefree number times a perfect square, and call that squarefree factor its kernel. For example 12 = 3 × 2² has kernel 3, and 8 = 2 × 2² has kernel 2.",
+          "The product of two numbers is a perfect square exactly when their kernels are equal: if a = k × s² and b = k × t², then ab = (kst)²; conversely, if the kernels differ, their product still contains a prime raised to an odd power, so it is not a perfect square.",
+          "The kernels of the positive integers up to 16 are, in order, 1, 2, 3, 1, 5, 6, 7, 2, 1, 10, 11, 3, 13, 14, 15, 1, so only the 11 values 1, 2, 3, 5, 6, 7, 10, 11, 13, 14, 15 occur; these are 11 pigeonholes.",
+          "A list of 11 entry numbers may use each kernel once, for instance 1, 2, 3, 5, 6, 7, 10, 11, 13, 14 and 15, where all kernels differ and no product is a perfect square, so 11 gives no guarantee.",
+          "A list of 12 entry numbers puts 12 items into 11 holes, so two entry numbers must share a kernel and their product is a perfect square. The answer is 12."
+        ],
+        "ja": [
+          "各数を「平方因数を含まない数」と「平方数」の積で表し、その平方因数を含まないほうの因数を核と呼びます。たとえば 12 = 3 × 2² の核は 3、8 = 2 × 2² の核は 2 です。",
+          "2 数の積が平方数になることは、その 2 数の核が等しいことと同値です。a = k × s²、b = k × t² なら ab = (kst)² となり、逆に核が異なれば積には奇数乗の素因数が残るので平方数になりません。",
+          "16 以下の正の整数の核は順に 1、2、3、1、5、6、7、2、1、10、11、3、13、14、15、1 であり、現れる値は 1、2、3、5、6、7、10、11、13、14、15 の 11 種類だけです。これを 11 個の引き出しとみなします。",
+          "リストが 11 個のときは 11 種類の核が 1 回ずつ現れることがあり得ます。たとえば 1、2、3、5、6、7、10、11、13、14、15 では核がすべて異なり、どの積も平方数になりません。よって 11 個では保証できません。",
+          "リストが 12 個のときは 12 個を 11 個の引き出しに入れることになり、必ず核の等しい 2 つの番号ができ、その積は平方数になります。よって答えは 12 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "12"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "number_theory-grade12-foundation",
+        "notes": "題型骨架取自 Utah 數學圈講義 Number Theory 第 8 題所用的「把每個數拆成不含平方因數的部分乘上平方數」分解法，判準改成兩數相乘為完全平方數。已實際讀過 logic_grade8_024（1 到 10 取數保證兩數和為 11）與 logic_grade2_043（10 張卡片保證兩張數字和 11）：這兩題的抽屜是配成定和的數對，抽屜數 5、答案 6；本題的抽屜是無平方核的等價類，抽屜數 11、答案 12。也讀過 logic_grade11_023（1 到 20 選數使任一數都不是另一數的倍數，最多幾個）：該題用奇數部分分組、判準是整除、問最多能選幾個、答案 10，與本題用無平方核分組、判準是乘積為完全平方數、問保證所需的最少個數不同。前兩版的敘述分別踩到「從 1、2、3、⋯、N 這 N 個整數中任意取出」與「有 N 張卡片上面分別寫著 1 到 N」兩個既有模板，第三版改用比賽得獎名單的敘述以避開，同時也離開同批 F_01「挑出一些互不相同的數」的句型。"
+      }
     }
   ]
 }

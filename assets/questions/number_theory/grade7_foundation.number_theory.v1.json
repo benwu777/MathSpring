@@ -4129,6 +4129,153 @@
         "reference": "number_theory-grade7-foundation",
         "notes": "題型參考 exploringbinary.com 的 Counting Binary Palindromes 與 Project Euler 第 36 題（double-base palindrome）所用的『按位數分組數迴文』骨架，改成只在二進位下計數並加上 100 這個非整齊上界。既有迴文題 combinatorics_grade9_foundation_023、number_theory_grade10_foundation_025、035 全都是十進位且範圍是整齊的『所有五位數／三位數』，沒有截斷；既有二進位題（grade8_019 換算、grade12_041 數 1 的個數、grade10_014 數 1 的個數）都不是迴文結構。本題的推理點是最高位那一組被 100 截斷，必須另外處理。"
       }
+    },
+    {
+      "id": "number_theory_grade7_foundation_049",
+      "reviewStatus": "ok",
+      "topic": "number_theory",
+      "subtopic": "abab_pattern_number_divisible_by_13",
+      "tags": [
+        "c:place_value",
+        "c:factor_multiple",
+        "m:bijection"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade7",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "把一個四位數由左往右的四個數字依序記為第一位、第二位、第三位、第四位。若第一位與第三位是同一個數字，第二位與第四位也是同一個數字，就把它叫做「交錯數」，例如 3737、5050、9191 都是交錯數。所有交錯數之中，13 的倍數有幾個？",
+        "zh-Hans": "把一个四位数由左往右的四个数字依次记为第一位、第二位、第三位、第四位。若第一位与第三位是同一个数字，第二位与第四位也是同一个数字，就把它叫做“交错数”，例如 3737、5050、9191 都是交错数。所有交错数之中，13 的倍数有几个？",
+        "en": "Number the digits of a four-digit number from the left as first, second, third and fourth. Call the number alternating when its first and third digits are the same and its second and fourth digits are the same; for example 3737, 5050 and 9191 are alternating. How many alternating numbers are multiples of 13?",
+        "ja": "4 桁の整数の数字を左から順に 1 番目、2 番目、3 番目、4 番目と呼ぶことにします。1 番目と 3 番目が同じ数字で、2 番目と 4 番目も同じ数字であるとき、その数を「交互数」と呼びます。たとえば 3737、5050、9191 は交互数です。交互数のうち 13 の倍数は何個ありますか。"
+      },
+      "answer": {
+        "zh-Hant": "一共有 7 個。",
+        "zh-Hans": "一共有 7 个。",
+        "en": "There are 7 such numbers.",
+        "ja": "全部で 7 個です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "設第一位（也就是第三位）的數字是 a、第二位（也就是第四位）的數字是 b，其中 a 是 1 到 9（首位不能是 0）、b 是 0 到 9。這個四位數等於 1000a + 100b + 10a + b = 1010a + 101b = 101 × (10a + b)。",
+          "而 10a + b 正好是由 a、b 組成的兩位數，範圍剛好是 10 到 99。所以每一個交錯數都寫成「101 × 某個兩位數」，而且不同的兩位數會得到不同的交錯數——兩者是一一對應的。問題於是變成：10 到 99 之間有幾個數能讓 101 × 它被 13 整除。",
+          "101 是質數，和 13 沒有共同的質因數，所以 101 × (10a + b) 能被 13 整除，等價於 10a + b 本身能被 13 整除。",
+          "10 到 99 之間 13 的倍數是 13、26、39、52、65、78、91，共 7 個（下一個 104 已經是三位數）。",
+          "每一個都對應一個交錯數，例如 13 對應 1313、91 對應 9191，所以符合條件的交錯數是 7 個。"
+        ],
+        "zh-Hans": [
+          "设第一位（也就是第三位）的数字是 a、第二位（也就是第四位）的数字是 b，其中 a 是 1 到 9（首位不能是 0）、b 是 0 到 9。这个四位数等于 1000a + 100b + 10a + b = 1010a + 101b = 101 × (10a + b)。",
+          "而 10a + b 正好是由 a、b 组成的两位数，范围刚好是 10 到 99。所以每一个交错数都写成“101 × 某个两位数”，而且不同的两位数会得到不同的交错数——两者是一一对应的。问题于是变成：10 到 99 之间有几个数能让 101 × 它被 13 整除。",
+          "101 是质数，和 13 没有共同的质因数，所以 101 × (10a + b) 能被 13 整除，等价于 10a + b 本身能被 13 整除。",
+          "10 到 99 之间 13 的倍数是 13、26、39、52、65、78、91，共 7 个（下一个 104 已经是三位数）。",
+          "每一个都对应一个交错数，例如 13 对应 1313、91 对应 9191，所以符合条件的交错数是 7 个。"
+        ],
+        "en": [
+          "Let a be the first digit, which is also the third digit, and let b be the second digit, which is also the fourth digit, with a from 1 to 9 since a leading digit cannot be 0, and b from 0 to 9. The number equals 1000a + 100b + 10a + b = 1010a + 101b = 101 × (10a + b).",
+          "Here 10a + b is exactly the two-digit number formed by a and b, so it runs over 10 to 99. Every alternating number is 101 times a two-digit number, and different two-digit numbers give different alternating numbers, so the two families match one to one.",
+          "Since 101 is prime and shares no prime factor with 13, the product 101 × (10a + b) is divisible by 13 exactly when 10a + b itself is divisible by 13.",
+          "The multiples of 13 between 10 and 99 are 13, 26, 39, 52, 65, 78 and 91, so there are 7 of them; the next one, 104, has three digits.",
+          "Each of them gives one alternating number, for instance 13 gives 1313 and 91 gives 9191, so the answer is 7."
+        ],
+        "ja": [
+          "1 番目（＝3 番目）の数字を a、2 番目（＝4 番目）の数字を b とすると、先頭は 0 になれないので a は 1 から 9、b は 0 から 9 です。この 4 桁の数は 1000a + 100b + 10a + b = 1010a + 101b = 101 × (10a + b) と書けます。",
+          "この 10a + b はちょうど 2 桁の数であり、範囲は 10 から 99 です。つまりこの形の 4 桁の数は「101 × 2 桁の数」であり、異なる 2 桁の数からは異なる 4 桁の数ができるので、両者は一対一に対応します。",
+          "101 は素数で 13 と共通の素因数を持たないため、101 × (10a + b) が 13 で割り切れることは、10a + b 自身が 13 で割り切れることと同じです。",
+          "10 から 99 までの 13 の倍数は 13、26、39、52、65、78、91 の 7 個です（次の 104 は 3 桁になります）。",
+          "それぞれが 1 つの交互数に対応し、たとえば 13 は 1313、91 は 9191 に対応するので、答えは 7 個です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "7"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "number-theory-grade7-foundation",
+        "notes": "題型出處：CEMC（Waterloo）2023 Fryer Contest 第 3 題，該題用五位數 ABABA 的整除性做結構化窮舉；本題改用四位數 abab 並改走『abab = 101 ×（兩位數）』的一一對應，除數改成 13 是為了讓末兩位整除法則失效、逼出 101 這個因式。掃全庫 regex「101／1001／千位.{0,10}十位」只命中 algebra_grade10_foundation_008（66 × 1.abab… 循環小數），推理核心完全不同；number_theory_grade7_foundation_005、arithmetic_grade6_foundation_003 是數字和的 9 整除填空題，不是計數題。"
+      }
+    },
+    {
+      "id": "number_theory_grade7_foundation_050",
+      "reviewStatus": "ok",
+      "topic": "number_theory",
+      "subtopic": "complementary_residue_classes_max_set",
+      "tags": [
+        "c:modular",
+        "m:pigeonhole"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade7",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "在紙上寫下一些互不相同的整數，要求任兩個數的和都不是 12 的倍數，而且任兩個數的差也都不是 12 的倍數。最多能寫下幾個整數？",
+        "zh-Hans": "在纸上写下一些互不相同的整数，要求任两个数的和都不是 12 的倍数，而且任两个数的差也都不是 12 的倍数。最多能写下几个整数？",
+        "en": "Pairwise different integers are written on a sheet of paper so that no two of them have a sum that is a multiple of 12 and no two of them have a difference that is a multiple of 12. At most how many integers can be written?",
+        "ja": "たがいに異なる整数を紙に書き並べ、どの 2 数の和も 12 の倍数にならず、どの 2 数の差も 12 の倍数にならないようにします。最大で何個の整数を書けますか。"
+      },
+      "answer": {
+        "zh-Hant": "最多能寫下 7 個整數。",
+        "zh-Hans": "最多能写下 7 个整数。",
+        "en": "At most 7 integers can be written.",
+        "ja": "最大で 7 個の整数を書けます。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "把每個整數依照除以 12 的餘數分類，餘數只有 0 到 11 這 12 種。",
+          "把互相補成 12 的餘數併成同一組：{0}、{1, 11}、{2, 10}、{3, 9}、{4, 8}、{5, 7}、{6}，一共 7 組。",
+          "同一組裡若寫了兩個數就一定違規：餘數相同時兩數的差是 12 的倍數；餘數分別是 r 與 12 − r 時兩數的和是 12 的倍數。所以每一組最多只能寫 1 個數，總數不超過 7 個。",
+          "7 個確實做得到：寫下 12、1、2、3、4、5、6，餘數分別是 0、1、2、3、4、5、6，每組恰好一個。任兩數的差都不為 0 且小於 12，任兩數的和介於 3 與 18 之間卻沒有一組等於 12，全部合乎要求。所以最多能寫下 7 個整數。"
+        ],
+        "zh-Hans": [
+          "把每个整数依照除以 12 的余数分类，余数只有 0 到 11 这 12 种。",
+          "把互相补成 12 的余数并成同一组：{0}、{1, 11}、{2, 10}、{3, 9}、{4, 8}、{5, 7}、{6}，一共 7 组。",
+          "同一组里若写了两个数就一定违规：余数相同时两数的差是 12 的倍数；余数分别是 r 与 12 − r 时两数的和是 12 的倍数。所以每一组最多只能写 1 个数，总数不超过 7 个。",
+          "7 个确实做得到：写下 12、1、2、3、4、5、6，余数分别是 0、1、2、3、4、5、6，每组恰好一个。任两数的差都不为 0 且小于 12，任两数的和介于 3 与 18 之间却没有一组等于 12，全部合乎要求。所以最多能写下 7 个整数。"
+        ],
+        "en": [
+          "Sort the integers by their remainder on division by 12; only the 12 remainders 0 through 11 are possible.",
+          "Group together the remainders that add up to 12: {0}, {1, 11}, {2, 10}, {3, 9}, {4, 8}, {5, 7} and {6}, giving 7 groups.",
+          "Writing two numbers from the same group always breaks a rule: equal remainders make their difference a multiple of 12, while remainders r and 12 − r make their sum a multiple of 12. So each group supplies at most one number, and the total is at most 7.",
+          "Seven is actually attainable: write 12, 1, 2, 3, 4, 5, 6, whose remainders are 0, 1, 2, 3, 4, 5, 6, one from each group. Every difference is nonzero and smaller than 12, and every sum lies between 3 and 18 without ever equalling 12, so all conditions hold. At most 7 integers can be written."
+        ],
+        "ja": [
+          "各整数を 12 で割った余りで分類します。余りは 0 から 11 までの 12 通りしかありません。",
+          "足して 12 になる余りどうしを同じ組にまとめると、{0}、{1, 11}、{2, 10}、{3, 9}、{4, 8}、{5, 7}、{6} の 7 組になります。",
+          "同じ組から 2 個書くと必ず条件に反します。余りが等しければ差が 12 の倍数になり、余りが r と 12 − r なら和が 12 の倍数になるからです。よって各組から高々 1 個、合計は 7 個以下です。",
+          "7 個は実際に達成できます。12、1、2、3、4、5、6 と書くと余りは 0、1、2、3、4、5、6 で各組から 1 個ずつです。どの差も 0 でなく 12 より小さく、どの和も 3 以上 18 以下で 12 になる組はないので条件を満たします。よって最大で 7 個です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "7"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "number_theory-grade7-foundation",
+        "notes": "題型出自 Utah 數學圈講義 Number Theory 第 7 題「任 1000 個整數中必有兩個的差或和是 1997 的倍數」，我把模數縮到 12 貼齊七年級，並把問法反過來改成求最大集合大小。抽屜是「互補餘數對 {r, 12 − r}」，抽屜數 7 遠少於模數 12，這一步是本題唯一的關鍵，與 logic_grade6_059（差是 7 的倍數）、logic_grade6_003（除以 7 餘數相同）用單一餘數類當抽屜不同。第一版與同批的立方餘數題相似度 0.73，該題已整題砍掉，本題改為反向問法後不再與同批任何一題共用敘述模板。"
+      }
     }
   ]
 }

@@ -4114,6 +4114,82 @@
         "reference": "number_theory-grade8-foundation",
         "notes": "題型取自 AMC 常見的 faulty odometer / skipping digit 題（例如跳過數字 4 的里程表，公開題解都把它解讀成九進位），本題改成從 0 起算並問實際里程。既有進位制題 number_theory_grade10_foundation_009（十六進位只含 0 到 9 的個數）、number_theory_grade9_foundation_024（十進位不出現 7 的個數）是在數符合條件的數的個數；number_theory_grade9_foundation_018、036 是單純換底。本題的推理點是把『跳號的計數器』認出為九進位並建立符號對照，既有題沒有這個轉換。"
       }
+    },
+    {
+      "id": "number_theory_grade8_foundation_049",
+      "reviewStatus": "ok",
+      "topic": "number_theory",
+      "subtopic": "count_by_digit_sum_residue_mod_three",
+      "tags": [
+        "c:place_value",
+        "c:modular",
+        "m:enumeration"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade8",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "小安做了 2025 張卡片，正面依序寫著 1、2、3、⋯、2025，並在每張卡片的背面寫下正面那個數各位數字的和（例如正面 1204 的卡片，背面寫 1 + 2 + 0 + 4 = 7）。她想把「背面的數是 3 的倍數」的卡片全部挑出來。她可以挑出幾張卡片？",
+        "zh-Hans": "小安做了 2025 张卡片，正面依次写着 1、2、3、⋯、2025，并在每张卡片的背面写下正面那个数各位数字的和（例如正面 1204 的卡片，背面写 1 + 2 + 0 + 4 = 7）。她想把“背面的数是 3 的倍数”的卡片全部挑出来。她可以挑出几张卡片？",
+        "en": "Ann makes 2025 cards. The fronts read 1, 2, 3, ..., 2025 in order, and on the back of each card she writes the sum of the digits shown on its front; for instance the card with 1204 on the front has 1 + 2 + 0 + 4 = 7 on its back. She now wants to pull out every card whose back shows a multiple of 3. How many cards can she pull out?",
+        "ja": "アンさんは 2025 枚のカードを作り、表に 1、2、3、⋯、2025 と順に書き、それぞれの裏には表の数の各位の数字の和を書きました（たとえば表が 1204 のカードの裏には 1 + 2 + 0 + 4 = 7 と書かれます）。裏の数が 3 の倍数であるカードをすべて取り出すとき、取り出せるカードは何枚ですか。"
+      },
+      "answer": {
+        "zh-Hant": "可以挑出 675 張卡片。",
+        "zh-Hans": "可以挑出 675 张卡片。",
+        "en": "She can pull out 675 cards.",
+        "ja": "675 枚のカードを取り出せます。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "先證明一件事：任何一個數與它的各位數字之和，除以 3 的餘數一定相同。以四位數為例，它等於 1000a + 100b + 10c + d，而 1000a + 100b + 10c + d − (a + b + c + d) = 999a + 99b + 9c，這個差一定是 3 的倍數，所以兩者除以 3 的餘數相同。位數更少的數同理。",
+          "因此「各位數字之和是 3 的倍數」與「這個數本身是 3 的倍數」完全等價，題目就變成：1 到 2025 之中 3 的倍數有幾個。",
+          "用「除以 3 的餘數」當分類的軸，把 1 到 2025 每連續三個分成一組：(1, 2, 3)、(4, 5, 6)、⋯，每一組裡恰好有一個 3 的倍數（就是那一組最後的那個數）。",
+          "因為 2025 = 3 × 675，這 2025 個數剛好分成 675 組，沒有多出來的零頭，所以 3 的倍數恰好有 675 個。",
+          "所以背面寫著 3 的倍數的卡片共有 675 張，小安可以挑出 675 張卡片。"
+        ],
+        "zh-Hans": [
+          "先证明一件事：任何一个数与它的各位数字之和，除以 3 的余数一定相同。以四位数为例，它等于 1000a + 100b + 10c + d，而 1000a + 100b + 10c + d − (a + b + c + d) = 999a + 99b + 9c，这个差一定是 3 的倍数，所以两者除以 3 的余数相同。位数更少的数同理。",
+          "因此“各位数字之和是 3 的倍数”与“这个数本身是 3 的倍数”完全等价，题目就变成：1 到 2025 之中 3 的倍数有几个。",
+          "用“除以 3 的余数”当分类的轴，把 1 到 2025 每连续三个分成一组：(1, 2, 3)、(4, 5, 6)、⋯，每一组里恰好有一个 3 的倍数（就是那一组最后的那个数）。",
+          "因为 2025 = 3 × 675，这 2025 个数刚好分成 675 组，没有多出来的零头，所以 3 的倍数恰好有 675 个。",
+          "所以背面写着 3 的倍数的卡片共有 675 张，小安可以挑出 675 张卡片。"
+        ],
+        "en": [
+          "First prove a fact: any number and its digit sum leave the same remainder on division by 3. For a four-digit number the value is 1000a + 100b + 10c + d, and subtracting the digit sum gives 1000a + 100b + 10c + d − (a + b + c + d) = 999a + 99b + 9c, which is a multiple of 3, so the two remainders agree. Shorter numbers work the same way.",
+          "So having a digit sum divisible by 3 is exactly the same as being divisible by 3, and the question becomes: how many multiples of 3 lie between 1 and 2025?",
+          "Use the remainder on division by 3 as the classifying axis and cut 1 to 2025 into consecutive blocks of three: (1, 2, 3), (4, 5, 6), and so on. Each block contains exactly one multiple of 3, namely its last member.",
+          "Since 2025 = 3 × 675, the 2025 integers split into exactly 675 full blocks with nothing left over, so there are exactly 675 multiples of 3.",
+          "So 675 of the cards have a multiple of 3 on the back, and Ann can pull out 675 cards."
+        ],
+        "ja": [
+          "まず次の事実を示します。どんな整数も、その各位の数字の和と、3 で割った余りが等しくなります。4 桁の数なら 1000a + 100b + 10c + d であり、そこから数字の和を引くと 1000a + 100b + 10c + d − (a + b + c + d) = 999a + 99b + 9c となり、これは 3 の倍数なので余りは一致します。桁数が少ない場合も同様です。",
+          "したがって「各位の数字の和が 3 の倍数」であることは「その数自身が 3 の倍数」であることと同値なので、問題は 1 から 2025 までに 3 の倍数がいくつあるかに変わります。",
+          "「3 で割った余り」を分類の軸にし、1 から 2025 を連続する 3 個ずつの組に分けます。(1, 2, 3)、(4, 5, 6)、⋯ とすると、どの組にもちょうど 1 個ずつ 3 の倍数（その組の最後の数）が含まれます。",
+          "2025 = 3 × 675 なので、2025 個の数はちょうど 675 組に分かれ、余りは出ません。よって 3 の倍数はちょうど 675 個です。",
+          "したがって裏に 3 の倍数が書かれたカードは 675 枚であり、アンさんは 675 枚を取り出せます。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "675"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 4
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "number-theory-grade8-foundation",
+        "notes": "題型出處：CEMC（Waterloo）2023 Fryer Contest 第 3 題開頭明列的『數字和被 3 整除即該數被 3 整除』整除法則，加上 Wikipedia「Double counting (proof technique)」條目裡『換一個角度數同一批東西』的想法。本題把該法則反過來用在計數上：先把難數的『數字和是 3 的倍數』對應成好數的『這個數是 3 的倍數』，再用餘數分組窮舉。掃全庫時發現 arithmetic_grade2_foundation_036（11 到 99 的疊數中被 3 整除者）、number_theory_grade10_foundation_025（三位迴文數中 3 的倍數）都限定在很小的特殊集合，且都沒有用到『數字和與原數同餘』這個轉換；combinatorics_grade8_foundation_014（數字和恰為 5 的三位數）求的是固定數字和而非倍數。"
+      }
     }
   ]
 }

@@ -4393,6 +4393,82 @@
         "reference": "agent-drafted-nrich-2026-09-03",
         "notes": "題型參考 参考统计教材中「新增一笔等于平均数的资料」对变异数影响的推导概念，设计成体适能测验情境并聚焦在分母变化而非分子变化这个常被忽略的细节，由背景起草代理於 2026-09-03 實際查閱 NRICH 等公開題組後改寫（本輪開放附圖）；數值、敘述與四語系詳解為本題庫自行推導，非整題引用。主流程已跑機械校驗、全庫去重與跨代理去重。"
       }
+    },
+    {
+      "id": "logic_grade11_foundation_048",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "paper_tearing_count_mod_three_minimum_operations",
+      "tags": [
+        "c:modular",
+        "m:invariant",
+        "m:extremal"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade11",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "桌上有 1 張紙。每一次操作可以任選桌上的一張紙，把它撕成 4 張，或是把它撕成 10 張；撕開後的紙片之後也可以再被拿來撕。若要讓桌上恰好出現 2026 張紙，求最少需要操作幾次。",
+        "zh-Hans": "桌上有 1 张纸。每一次操作可以任选桌上的一张纸，把它撕成 4 张，或是把它撕成 10 张；撕开后的纸片之后也可以再被拿来撕。若要让桌上恰好出现 2026 张纸，求最少需要操作几次。",
+        "en": "There is one sheet of paper on the table. In one operation you pick any sheet on the table and tear it into 4 pieces, or tear it into 10 pieces; pieces produced this way may be torn again later. To end up with exactly 2026 pieces of paper on the table, find the least number of operations needed.",
+        "ja": "机の上に紙が 1 枚あります。1 回の操作では机の上の紙を 1 枚選び、それを 4 枚に破くか、10 枚に破きます。破いてできた紙片も後で再び破くことができます。机の上の紙をちょうど 2026 枚にするために必要な操作回数の最小値を求めなさい。"
+      },
+      "answer": {
+        "zh-Hant": "最少需要操作 225 次。",
+        "zh-Hans": "最少需要操作 225 次。",
+        "en": "The least number of operations needed is 225.",
+        "ja": "必要な操作回数の最小値は 225 回です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "撕成 4 張會讓總張數增加 3，撕成 10 張會讓總張數增加 9，兩種增量都是 3 的倍數。",
+          "一開始是 1 張，所以不論怎麼操作，總張數除以 3 的餘數永遠是 1，這就是本題的不變量。2026 = 3 × 675 + 1，餘數正好是 1，所以有可能做到。",
+          "從 1 張變成 2026 張，總共要增加 2025 張；每一次操作最多只增加 9 張，因此操作次數至少是 2025 ÷ 9 = 225 次。",
+          "又 2025 = 9 × 225，所以每一次都選「撕成 10 張」，做 225 次之後張數是 1 + 9 × 225 = 2026 張，恰好達標。",
+          "上界與下界一致，所以最少需要 225 次。"
+        ],
+        "zh-Hans": [
+          "撕成 4 张会让总张数增加 3，撕成 10 张会让总张数增加 9，两种增量都是 3 的倍数。",
+          "一开始是 1 张，所以不论怎么操作，总张数除以 3 的余数永远是 1，这就是本题的不变量。2026 = 3 × 675 + 1，余数正好是 1，所以有可能做到。",
+          "从 1 张变成 2026 张，总共要增加 2025 张；每一次操作最多只增加 9 张，因此操作次数至少是 2025 ÷ 9 = 225 次。",
+          "又 2025 = 9 × 225，所以每一次都选「撕成 10 张」，做 225 次之后张数是 1 + 9 × 225 = 2026 张，恰好达标。",
+          "上界与下界一致，所以最少需要 225 次。"
+        ],
+        "en": [
+          "Tearing a sheet into 4 pieces increases the total by 3, and tearing it into 10 pieces increases the total by 9; both increments are multiples of 3.",
+          "We start with 1 sheet, so no matter what we do the total leaves remainder 1 on division by 3, and that is the invariant here. Since 2026 = 3 × 675 + 1 the remainder matches, so the target is not ruled out.",
+          "Going from 1 sheet to 2026 sheets means an increase of 2025, and each operation adds at most 9, so the number of operations is at least 2025 ÷ 9 = 225.",
+          "Moreover 2025 = 9 × 225, so choosing tear into 10 pieces every time gives 1 + 9 × 225 = 2026 sheets after exactly that many operations.",
+          "The lower bound and the construction agree, so the least number of operations is 225."
+        ],
+        "ja": [
+          "4 枚に破くと合計は 3 枚増え、10 枚に破くと合計は 9 枚増えます。どちらの増加量も 3 の倍数です。",
+          "最初は 1 枚なので、どう操作しても合計を 3 で割った余りは常に 1 です。これが本問の不変量です。2026 = 3 × 675 + 1 で余りが一致するため、実現の可能性があります。",
+          "1 枚から 2026 枚にするには 2025 枚増やす必要があり、1 回の操作で増えるのは最大 9 枚なので、操作回数は少なくとも 2025 ÷ 9 = 225 回です。",
+          "さらに 2025 = 9 × 225 なので、毎回「10 枚に破く」を選べば 1 + 9 × 225 = 2026 枚となり、ちょうど達成できます。",
+          "下界と実際の構成が一致するので、最小の操作回数は 225 回です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "225"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade11-tearing-invariant",
+        "notes": "題型是 Engel《Problem-Solving Strategies》不變量章與 AoPS Wiki 上的經典撕紙題（原型多為「撕成 4 或 10 片，能否得到 1994 片」），本題保留 mod 3 不變量並額外加上最少操作次數的極值論證。全庫掃 每次操作/撕/掰/分成 各題：logic_grade10_023 與 logic_grade10_032 是把 6×8 巧克力或郵票掰成 48 片、每次只增加 1 片、答案恆為 47，屬於「不變量是片數與掰的次數差」的另一種題；本題的增量有 3 與 9 兩種，重點在餘數判定加上極值，推理核心不同。"
+      }
     }
   ]
 }

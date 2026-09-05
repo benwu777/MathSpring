@@ -5414,6 +5414,82 @@
         "reference": "geometry-grade10-point-line-position",
         "notes": "題型取自 math-only-math「Position of a Point Relative to a Line」的異側判定（代入直線式看符號，異號即異側），改寫成含端點排除的整數計數題。全庫用「異側／同側／兩側」regex 掃過，高年級只有 geometry_grade10_005（圓內兩弦位於圓心兩側）這種幾何情境，沒有任何一題用「代入直線式判正負號」的機制；geometry_grade10_001 雖然也求參數範圍，但那是直線與圓相交的判別式。"
       }
+    },
+    {
+      "id": "geometry_grade10_foundation_050",
+      "reviewStatus": "ok",
+      "topic": "geometry",
+      "subtopic": "triangular_grid_up_down_classes_rhombus_packing",
+      "tags": [
+        "c:polygon",
+        "c:triangle",
+        "m:coloring"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "把一個正三角形的每一邊都四等分，再畫出平行於三邊的直線，整個大三角形就被分成 16 個全等的小正三角形。其中有 10 個小三角形的尖端朝上（和大三角形同方向），另外 6 個尖端朝下。菱形磁磚由一個尖端朝上與一個尖端朝下、且有共同邊的小三角形合起來組成。若磁磚之間不重疊，也不超出大三角形，求最多能放進幾塊菱形磁磚。",
+        "zh-Hans": "把一个正三角形的每一边都四等分，再画出平行于三边的直线，整个大三角形就被分成 16 个全等的小正三角形。其中有 10 个小三角形的尖端朝上（和大三角形同方向），另外 6 个尖端朝下。菱形磁砖由一个尖端朝上与一个尖端朝下、且有共同边的小三角形合起来组成。若磁砖之间不重叠，也不超出大三角形，求最多能放进几块菱形磁砖。",
+        "en": "Each side of an equilateral triangle is divided into four equal parts, and lines parallel to the three sides are drawn, cutting the big triangle into 16 congruent small equilateral triangles. Ten of them point up, the same way as the big triangle, and the other six point down. A rhombus tile is made of one upward small triangle and one downward small triangle that share an edge. If tiles may not overlap and may not stick out of the big triangle, find the largest number of rhombus tiles that can be placed.",
+        "ja": "正三角形の各辺を 4 等分し、3 辺に平行な直線を引くと、大きな三角形は合同な小さい正三角形 16 個に分かれます。そのうち 10 個は大きな三角形と同じ向きに上を向き、残り 6 個は下を向いています。ひし形のタイルは、辺を共有する上向きの小三角形 1 個と下向きの小三角形 1 個からできています。タイルどうしが重ならず、大きな三角形からはみ出さないとき、置けるひし形タイルの最大個数を求めなさい。"
+      },
+      "answer": {
+        "zh-Hant": "最多能放進 6 塊菱形磁磚。",
+        "zh-Hans": "最多能放进 6 块菱形磁砖。",
+        "en": "At most 6 rhombus tiles can be placed.",
+        "ja": "ひし形タイルは最大で 6 枚置けます。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "把尖端朝上的小三角形塗白、尖端朝下的塗黑，白色有 10 個、黑色有 6 個。",
+          "每一塊菱形磁磚一定恰好蓋住 1 白 1 黑，所以磁磚塊數不可能超過黑色小三角形的個數，也就是不超過 6。",
+          "由上往下數第 k 排（k = 1、2、3、4）有 k 個朝上、k − 1 個朝下的小三角形，並且在該排中是上、下、上、下……交替排列。",
+          "在第 k 排把每一個朝下的小三角形，和它左邊緊鄰的那個朝上的小三角形配成一塊菱形，第 2、3、4 排分別得到 1、2、3 塊，合計 6 塊，而且彼此不重疊。",
+          "上界是 6，實際也排得出 6 塊，所以最多能放 6 塊。"
+        ],
+        "zh-Hans": [
+          "把尖端朝上的小三角形涂白、尖端朝下的涂黑，白色有 10 个、黑色有 6 个。",
+          "每一块菱形磁砖一定恰好盖住 1 白 1 黑，所以磁砖块数不可能超过黑色小三角形的个数，也就是不超过 6。",
+          "由上往下数第 k 排（k = 1、2、3、4）有 k 个朝上、k − 1 个朝下的小三角形，并且在该排中是上、下、上、下……交替排列。",
+          "在第 k 排把每一个朝下的小三角形，和它左边紧邻的那个朝上的小三角形配成一块菱形，第 2、3、4 排分别得到 1、2、3 块，合计 6 块，而且彼此不重叠。",
+          "上界是 6，实际也排得出 6 块，所以最多能放 6 块。"
+        ],
+        "en": [
+          "Colour every upward small triangle white and every downward small triangle black, so there are 10 white ones and 6 black ones.",
+          "Each rhombus tile covers exactly one white and one black small triangle, so the number of tiles cannot exceed the number of black triangles, that is, it is at most 6.",
+          "Counting from the top, row k contains k upward and k − 1 downward small triangles for k = 1, 2, 3, 4, arranged alternately as up, down, up, down and so on.",
+          "In row k pair every downward triangle with the upward triangle immediately to its left; rows 2, 3 and 4 give 1, 2 and 3 tiles, so 6 tiles in all, none of them overlapping.",
+          "The upper bound is 6 and 6 is actually achieved, so the largest number of tiles is 6."
+        ],
+        "ja": [
+          "上向きの小三角形を白、下向きの小三角形を黒に塗ると、白は 10 個、黒は 6 個です。",
+          "ひし形タイルは必ず白 1 個と黒 1 個を覆うので、タイルの枚数は黒の個数を超えられず、6 枚以下です。",
+          "上から数えて第 k 段（k = 1、2、3、4）には上向きが k 個、下向きが k − 1 個あり、段の中では上、下、上、下…… と交互に並びます。",
+          "第 k 段で下向きの小三角形をそれぞれ左隣の上向きの小三角形と組ませると、第 2、3、4 段からそれぞれ 1、2、3 枚得られ、合計 6 枚が重ならずに置けます。",
+          "上限が 6 で実際に 6 枚置けるので、最大個数は 6 枚です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "6"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "geometry-grade10-triangular-grid-colouring",
+        "notes": "題型取自三角形網格上的 lozenge（菱形）鋪法問題，這是 AoPS 與 Wikipedia 的 rhombus/lozenge tiling 條目常見的入門例：以「朝上／朝下」兩類三角形數目不等推出上界。改寫成邊長 4 的三角形並改問最大塊數。全庫用 鋪滿/骨牌/覆蓋/磁磚 掃過，既有題全部是方格板上的 1×2 或 1×3 鋪法（combinatorics_grade8_021、combinatorics_grade12_023、combinatorics_grade9_042 等），沒有任何一題用三角形網格，也沒有任何一題的兩類是「朝上／朝下」。"
+      }
     }
   ]
 }

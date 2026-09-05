@@ -5852,6 +5852,154 @@
         "reference": "logic-grade6-foundation",
         "notes": "題型取自 grid graph 的最大獨立集謎題（Wikipedia independent set 條目與各家 puzzle 網站常見的『非攻擊放置』題）。既有 logic_grade11_foundation_020 是 4×4 放不互相攻擊的騎士、logic_grade11_foundation_022 是每個 2×2 至多一枚、logic_grade12_foundation_025 是 5×5 感測器覆蓋（求最少覆蓋全盤），三題的限制條件與求量都不同；本題的推理點是用黑白染色給出構造、再用配對法給出上界，兩段論證缺一不可。"
       }
+    },
+    {
+      "id": "logic_grade6_foundation_071",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "race_outcomes_allowing_ties",
+      "tags": [
+        "c:permutation_combination",
+        "c:logic_deduction",
+        "m:enumeration"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade6",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "甲、乙、丙三個人賽跑。有可能兩個人同時抵達終點，也有可能三個人同時抵達；同時抵達的人並列同一個名次。例如「甲第一、乙第二、丙第三」是一種結果，「甲和乙並列第一、丙第三」是另一種結果，「三個人並列第一」又是另一種結果。比賽名次的結果一共有幾種不同的情形？",
+        "zh-Hans": "甲、乙、丙三个人赛跑。有可能两个人同时抵达终点，也有可能三个人同时抵达；同时抵达的人并列同一个名次。例如“甲第一、乙第二、丙第三”是一种结果，“甲和乙并列第一、丙第三”是另一种结果，“三个人并列第一”又是另一种结果。比赛名次的结果一共有几种不同的情形？",
+        "en": "Three runners A, B and C take part in a race. Two of them may reach the finish line at the same moment, and all three may reach it at the same moment; runners who arrive together share the same place. For example, A first, B second, C third is one outcome; A and B tied for first with C third is another; all three tied for first is another. How many different outcomes of the race are possible?",
+        "ja": "甲、乙、丙の 3 人が競走します。2 人が同時にゴールすることも、3 人が同時にゴールすることもあり、同時にゴールした人は同じ順位に並びます。たとえば「甲が 1 位、乙が 2 位、丙が 3 位」も、「甲と乙が同着 1 位、丙が 3 位」も、「3 人とも同着 1 位」も、それぞれ別の結果です。順位の結果は全部で何通りありますか。"
+      },
+      "answer": {
+        "zh-Hant": "一共有 13 種情形。",
+        "zh-Hans": "一共有 13 种情形。",
+        "en": "There are 13 possible outcomes.",
+        "ja": "全部で 13 通りです。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "把「有沒有人並列、幾個人並列」當成分類的軸，分成三類數，就不會重複也不會遺漏。",
+          "第一類：三個人抵達的時間都不同。這時只要把三個人排出先後順序，有 3 × 2 × 1 = 6 種。",
+          "第二類：恰好有兩個人並列。先選出並列的那兩個人，甲乙、甲丙、乙丙共 3 種選法；再決定這一組並列的人是在前面還是在後面（也就是他們並列第一還是並列第二），有 2 種。所以是 3 × 2 = 6 種。",
+          "第三類：三個人全部並列第一，只有 1 種。",
+          "三類互不重疊，也涵蓋了所有可能，所以總共有 6 + 6 + 1 = 13 種情形。"
+        ],
+        "zh-Hans": [
+          "把“有没有人并列、几个人并列”当成分类的轴，分成三类数，就不会重复也不会遗漏。",
+          "第一类：三个人抵达的时间都不同。这时只要把三个人排出先后顺序，有 3 × 2 × 1 = 6 种。",
+          "第二类：恰好有两个人并列。先选出并列的那两个人，甲乙、甲丙、乙丙共 3 种选法；再决定这一组并列的人是在前面还是在后面（也就是他们并列第一还是并列第二），有 2 种。所以是 3 × 2 = 6 种。",
+          "第三类：三个人全部并列第一，只有 1 种。",
+          "三类互不重叠，也涵盖了所有可能，所以总共有 6 + 6 + 1 = 13 种情形。"
+        ],
+        "en": [
+          "Use the tie pattern as the classifying axis: no tie, exactly one pair tied, or all three tied. Splitting the count this way avoids both repeats and omissions.",
+          "Case 1: all three finish at different times. Then the outcome is just an order of the three runners, giving 3 × 2 × 1 = 6 outcomes.",
+          "Case 2: exactly two runners tie. First choose the tied pair, which can be AB, AC or BC, so 3 choices. Then decide whether the tied pair finishes ahead of the third runner or behind, so 2 choices. That gives 3 × 2 = 6 outcomes.",
+          "Case 3: all three tie for first place, which is 1 outcome.",
+          "The three cases do not overlap and cover everything, so the total is 6 + 6 + 1 = 13 outcomes."
+        ],
+        "ja": [
+          "「同着があるか、何人が同着か」を分類の軸にして 3 つの場合に分けて数えると、重複も数え落としも起きません。",
+          "第 1 の場合：3 人のゴール時刻がすべて異なるとき。3 人の順番を決めるだけなので 3 × 2 × 1 = 6 通りです。",
+          "第 2 の場合：ちょうど 2 人が同着のとき。まず同着になる 2 人を選ぶと甲乙、甲丙、乙丙の 3 通り。次にその 2 人が残りの 1 人より前か後かを決めるので 2 通り。合わせて 3 × 2 = 6 通りです。",
+          "第 3 の場合：3 人とも同着 1 位のとき、1 通りです。",
+          "3 つの場合は互いに重ならず、すべての場合を尽くしているので、合計は 6 + 6 + 1 = 13 通りです。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "13"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade6-foundation",
+        "notes": "題型出處：Wikipedia「Ordered Bell number（Fubini number）」條目所述的『允許同著的賽馬結果』解釋——3 個元素的 weak ordering 恰有 13 種，而不含同著時只有 3! = 6 種。本題把它降到 grade6 可做的規模，並要求用「同著結構」當分類軸窮舉。全庫用 regex「並列／同名次」掃出 arithmetic_grade1_foundation_090、logic_grade1_foundation_037、logic_grade2_foundation_044 三題，都是明講『成績沒有並列』的排序推理題，正好與本題相反；combinatorics_grade11_foundation_010（把 6 拆成正整數和）的分類軸是加數大小，與本題不同。"
+      }
+    },
+    {
+      "id": "logic_grade6_foundation_072",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "distinct_shares_forced_repeat",
+      "tags": [
+        "c:basic_counting",
+        "m:pigeonhole",
+        "m:reverse"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade6",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "圖書館收到 30 本一模一樣的繪本，要全部送給校內的幾個班級，每個班級至少拿到 1 本。若要保證不論怎麼送，一定有兩個班級拿到的本數相同，最少要送給幾個班級？",
+        "zh-Hans": "图书馆收到 30 本一模一样的绘本，要全部送给校内的几个班级，每个班级至少拿到 1 本。若要保证不论怎么送，一定有两个班级拿到的本数相同，最少要送给几个班级？",
+        "en": "A library receives 30 identical picture books and gives all of them to several classes in the school, each class getting at least 1 book. To guarantee that, however they are distributed, two classes receive the same number of books, at least how many classes must the books be given to?",
+        "ja": "図書館が同じ絵本を 30 冊受け取り、校内のいくつかのクラスにすべて配ります。どのクラスも少なくとも 1 冊は受け取ります。どのように配っても必ず同じ冊数を受け取るクラスが 2 つあることを保証するには、少なくとも何クラスに配ればよいですか。"
+      },
+      "answer": {
+        "zh-Hant": "最少要送給 8 個班級。",
+        "zh-Hans": "最少要送给 8 个班级。",
+        "en": "The books must be given to at least 8 classes.",
+        "ja": "少なくとも 8 クラスに配る必要があります。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "如果每個班級拿到的本數都不相同，而且每班至少 1 本，那麼這些本數必須是互不相同的正整數。",
+          "n 個班級的本數要兩兩不同，總本數至少是 1 + 2 + 3 + ⋯ + n。",
+          "7 個班級時 1 + 2 + ⋯ + 7 = 28，不超過 30，例如送成 1、2、3、4、5、6、9 本，總數剛好 30 本而且本數兩兩不同，所以 7 個班級保證不了。",
+          "8 個班級時 1 + 2 + ⋯ + 8 = 36，已經超過 30 本，本數不可能兩兩不同，必有兩個班級拿到一樣多。所以最少要送給 8 個班級。"
+        ],
+        "zh-Hans": [
+          "如果每个班级拿到的本数都不相同，而且每班至少 1 本，那么这些本数必须是互不相同的正整数。",
+          "n 个班级的本数要两两不同，总本数至少是 1 + 2 + 3 + ⋯ + n。",
+          "7 个班级时 1 + 2 + ⋯ + 7 = 28，不超过 30，例如送成 1、2、3、4、5、6、9 本，总数刚好 30 本而且本数两两不同，所以 7 个班级保证不了。",
+          "8 个班级时 1 + 2 + ⋯ + 8 = 36，已经超过 30 本，本数不可能两两不同，必有两个班级拿到一样多。所以最少要送给 8 个班级。"
+        ],
+        "en": [
+          "If every class received a different number of books and each got at least 1, those numbers would have to be pairwise different positive integers.",
+          "For n classes with pairwise different counts, the total is at least 1 + 2 + 3 + … + n.",
+          "With 7 classes, 1 + 2 + … + 7 = 28, which does not exceed 30; for example 1, 2, 3, 4, 5, 6 and 9 books uses exactly 30 while keeping all counts different, so 7 classes give no guarantee.",
+          "With 8 classes, 1 + 2 + … + 8 = 36 already exceeds 30, so the counts cannot all differ and two classes must receive the same number. Hence at least 8 classes are needed."
+        ],
+        "ja": [
+          "もしどのクラスの冊数もすべて異なり、しかも各クラスが 1 冊以上受け取っているなら、その冊数はたがいに異なる正の整数でなければなりません。",
+          "n クラスの冊数がすべて異なるなら、合計は少なくとも 1 + 2 + 3 + ⋯ + n になります。",
+          "7 クラスのとき 1 + 2 + ⋯ + 7 = 28 で 30 を超えません。たとえば 1、2、3、4、5、6、9 冊と配れば合計はちょうど 30 冊で冊数はすべて異なるので、7 クラスでは保証できません。",
+          "8 クラスのとき 1 + 2 + ⋯ + 8 = 36 となり 30 冊を超えるので、冊数をすべて異ならせることはできず、必ず同じ冊数のクラスが 2 つあります。よって少なくとも 8 クラスが必要です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "8"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade6-foundation",
+        "notes": "題型骨架取自 Utah 數學圈講義與 Brilliant〈Pigeonhole Principle Problem Solving〉的「握手次數必有兩人相同」那一族「相異值不可能」的抽屜。已實際讀過相似度 0.31 的 logic_grade4_058（25 顆糖保證有人拿到至少 5 顆，求最多幾人）：該題是摸球族的強化鴿籠、用天花板函數，我這題用的是 1 + 2 + ⋯ + n 這個三角形數下界，而且問的是最少個數而非最多個數，推理核心不同；分數來自兩題共用「全部分完、每人至少 1 個」的敘述模板，第二版已把故事換成圖書館送繪本給班級以避開模板。logic_grade6_038（8 人握手次數兩兩不同）是給定互異去推結構，也不同。"
+      }
     }
   ]
 }

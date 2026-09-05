@@ -4435,6 +4435,77 @@
         "reference": "logic-grade8-foundation",
         "notes": "題型取自 Euclid's Game（Cole 與 Davie 1969；Berkeley Math Circle 2012 講義與 cut-the-knot 都有完整規則），本題取小數對 (7, 25) 讓逆推鏈短到國中可算。既有 logic_grade11_foundation_045 是單一個數 N 減去它的因數，只有一個數在變；本題是一對數，走法由輾轉相減決定，必敗鏈完全不同。既有取石子類（grade8_044、grade11_001）靠餘數週期，本題沒有週期可用，只能逐層逆推。"
       }
+    },
+    {
+      "id": "logic_grade8_foundation_051",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "doubling_intervals_ratio_pair",
+      "tags": [
+        "c:ratio",
+        "m:pigeonhole"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade8",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一箱砝碼，每個砝碼的重量都是 1 公克到 100 公克之間的整數，而且任兩個砝碼的重量都不相同。若要保證這箱砝碼裡一定有兩個，較重的那個不到較輕的那個的 2 倍重，最少要有幾個砝碼？",
+        "zh-Hans": "一箱砝码，每个砝码的重量都是 1 克到 100 克之间的整数，而且任两个砝码的重量都不相同。若要保证这箱砝码里一定有两个，较重的那个不到较轻的那个的 2 倍重，最少要有几个砝码？",
+        "en": "A box holds weights whose masses are whole numbers of grams between 1 and 100, with no two weights equal. To guarantee that the box contains two weights for which the heavier one is less than twice the lighter one, at least how many weights are needed?",
+        "ja": "ある箱に分銅が入っていて、各分銅の重さは 1 グラム以上 100 グラム以下の整数で、どの 2 個の重さも異なります。その中に必ず、重いほうが軽いほうの 2 倍未満であるような 2 個の分銅があることを保証するには、少なくとも何個の分銅が必要ですか。"
+      },
+      "answer": {
+        "zh-Hant": "最少要有 8 個砝碼。",
+        "zh-Hans": "最少要有 8 个砝码。",
+        "en": "At least 8 weights are needed.",
+        "ja": "少なくとも 8 個の分銅が必要です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "把 1 到 100 公克依「每次加倍」切成 7 個區間：1、2 到 3、4 到 7、8 到 15、16 到 31、32 到 63、64 到 100，這 7 個區間合起來剛好蓋住 1 到 100。",
+          "每個區間裡最大的重量都不到最小重量的 2 倍（例如 64 到 100 這一段，100 還不到 64 的 2 倍 128）。所以只要有兩個砝碼落在同一個區間，較重的那個就不到較輕的那個的 2 倍。",
+          "只有 7 個砝碼時可能每個區間各一個，例如 1、2、4、8、16、32、64 公克：把它們由小到大排，後一個恰好是前一個的 2 倍，任取兩個較重的都至少是較輕的 2 倍，所以 7 個保證不了。",
+          "有 8 個砝碼時，8 個重量放進 7 個區間，由抽屜原理必有兩個落在同一個區間，就出現較重的不到較輕的 2 倍的一對。所以最少要有 8 個砝碼。"
+        ],
+        "zh-Hans": [
+          "把 1 到 100 克依「每次加倍」切成 7 个区间：1、2 到 3、4 到 7、8 到 15、16 到 31、32 到 63、64 到 100，这 7 个区间合起来刚好盖住 1 到 100。",
+          "每个区间里最大的重量都不到最小重量的 2 倍（例如 64 到 100 这一段，100 还不到 64 的 2 倍 128）。所以只要有两个砝码落在同一个区间，较重的那个就不到较轻的那个的 2 倍。",
+          "只有 7 个砝码时可能每个区间各一个，例如 1、2、4、8、16、32、64 克：把它们由小到大排，后一个恰好是前一个的 2 倍，任取两个较重的都至少是较轻的 2 倍，所以 7 个保证不了。",
+          "有 8 个砝码时，8 个重量放进 7 个区间，由抽屉原理必有两个落在同一个区间，就出现较重的不到较轻的 2 倍的一对。所以最少要有 8 个砝码。"
+        ],
+        "en": [
+          "Cut the range 1 to 100 grams into 7 doubling blocks: 1, 2 to 3, 4 to 7, 8 to 15, 16 to 31, 32 to 63 and 64 to 100. Together these blocks cover 1 to 100 exactly.",
+          "Inside each block the largest mass is less than twice the smallest one (for the block 64 to 100, for instance, 100 is still below twice 64, which is 128). So two weights in the same block always give a heavier one below twice the lighter one.",
+          "With only 7 weights each block may hold one, for example 1, 2, 4, 8, 16, 32 and 64 grams: listed in order each is exactly twice the previous one, so for any pair the heavier is at least twice the lighter, and 7 weights give no guarantee.",
+          "With 8 weights, 8 masses go into 7 blocks, so the pigeonhole principle forces two into the same block and produces the required pair. Hence at least 8 weights are needed."
+        ],
+        "ja": [
+          "1 グラムから 100 グラムまでを「倍々」で 7 つの区間、すなわち 1、2～3、4～7、8～15、16～31、32～63、64～100 に分けます。この 7 区間でちょうど 1 から 100 を覆えます。",
+          "各区間では最大の重さが最小の重さの 2 倍未満です（たとえば 64～100 の区間では 100 は 64 の 2 倍の 128 に届きません）。したがって同じ区間に 2 個入れば、重いほうは軽いほうの 2 倍未満になります。",
+          "7 個だけなら各区間に 1 個ずつという場合があり得ます。たとえば 1、2、4、8、16、32、64 グラムでは小さい順に前の 2 倍ちょうどなので、どの 2 個でも重いほうは軽いほうの 2 倍以上です。よって 7 個では保証できません。",
+          "8 個なら 8 つの重さを 7 区間に入れることになり、鳩の巣原理により 2 個が同じ区間に入って条件を満たす組ができます。よって少なくとも 8 個の分銅が必要です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "8"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "geometry-grade8-foundation",
+        "notes": "題型出自 Utah 數學圈講義 Number Theory 第 8 題與 Engel 一系的「倍半區間」抽屜（把值域依 2 的次方切段，同段內比值小於 2），我把它包裝成砝碼重量並改成求最少個數。第一版此位置原是「邊長 4 的正三角形內放點保證兩點距離不超過 2」，與同批 F_02（走廊切段）同為「把區域切成全等小塊」的抽屜、相似度 0.31，已整題砍掉換成本題，改用比值當抽屜。與 logic_grade10_010（1 到 100 取數必有一個是另一個的倍數）比對過：該題抽屜是每個數的奇數部分、判準是整除、答案 51；本題抽屜是倍半區間、判準是比值小於 2、答案 8，推理核心與答案都不同。"
+      }
     }
   ]
 }

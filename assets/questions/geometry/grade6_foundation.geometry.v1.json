@@ -5393,6 +5393,82 @@
         "reference": "agent-drafted-nrich-2026-09-03",
         "notes": "題型參考 改寫自 NRICH「Stacked Cubes」（三個不同邊長的正方體黏在一起求表面積）與「Cubes on a Cube」的題型，改為大正方體正中央黏一個小正方體、需扣除兩處被遮蓋面積的版本。，由背景起草代理於 2026-09-03 實際查閱 NRICH 等公開題組後改寫（本輪開放附圖）；數值、敘述與四語系詳解為本題庫自行推導，非整題引用。主流程已跑機械校驗、全庫去重與跨代理去重。"
       }
+    },
+    {
+      "id": "geometry_grade6_foundation_060",
+      "reviewStatus": "ok",
+      "topic": "geometry",
+      "subtopic": "free_tetromino_shapes_by_longest_run",
+      "tags": [
+        "c:basic_counting",
+        "c:symmetry",
+        "m:enumeration"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade6",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "有四塊完全相同的正方形磁磚，要把它們拼成一片連在一起的圖案。規定：任兩塊磁磚若相接，必須整條邊完全貼合（只碰到角不算相連），磁磚不可以重疊，而且四塊必須連成一整片。若某個圖案經過旋轉或翻面之後可以和另一個完全重合，就視為同一種圖案。可以拼出的圖案一共有幾種？",
+        "zh-Hans": "有四块完全相同的正方形磁砖，要把它们拼成一片连在一起的图案。规定：任两块磁砖若相接，必须整条边完全贴合（只碰到角不算相连），磁砖不可以重叠，而且四块必须连成一整片。若某个图案经过旋转或翻面之后可以和另一个完全重合，就视为同一种图案。可以拼出的图案一共有几种？",
+        "en": "Four identical square tiles are to be laid out as one connected patch. Whenever two tiles touch they must meet along a full edge (meeting only at a corner does not count as joined), tiles may not overlap, and the four tiles must form one connected patch. Two patches count as the same design when one can be rotated or flipped over to match the other exactly. How many different designs can be laid out?",
+        "ja": "まったく同じ正方形のタイルが 4 枚あり、これらをつなげて 1 枚のまとまった模様を作ります。接するタイルどうしは辺全体をぴったり合わせること（角だけで触れるのはつながったとみなさない）、重ねないこと、4 枚が 1 つにつながっていることが条件です。ある模様を回転させたり裏返したりして別の模様と完全に重なるなら、同じ模様と数えます。作れる模様は全部で何種類ありますか。"
+      },
+      "answer": {
+        "zh-Hant": "一共有 5 種圖案。",
+        "zh-Hans": "一共有 5 种图案。",
+        "en": "There are 5 different designs.",
+        "ja": "作れる模様は全部で 5 種類です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "隨便亂拼很容易重複或漏掉，所以要先找一個分類的軸。這裡用「圖案裡最長的一條直排（同一橫列或同一直行連在一起的磁磚數）」來分類。",
+          "最長直排是 4：四塊磁磚排成一直線，只有 1 種。",
+          "最長直排是 3：先擺好三塊一列，第四塊貼在這一列的上方。可以貼在左端、中間或右端；貼左端與貼右端翻面後會重合，算同一種。所以是「L 形」與「T 形」共 2 種。",
+          "最長直排是 2：只能是兩組「兩塊並排」上下疊在一起。完全對齊時是田字形，錯開一格時是 S 形（往左錯與往右錯翻面後重合），共 2 種。",
+          "最長直排是 1：任兩塊磁磚都不共邊，無法連成一整片，0 種。全部加起來是 1 + 2 + 2 = 5 種。"
+        ],
+        "zh-Hans": [
+          "随便乱拼很容易重复或漏掉，所以要先找一个分类的轴。这里用“图案里最长的一条直排（同一横列或同一直行连在一起的磁砖数）”来分类。",
+          "最长直排是 4：四块磁砖排成一直线，只有 1 种。",
+          "最长直排是 3：先摆好三块一列，第四块贴在这一列的上方。可以贴在左端、中间或右端；贴左端与贴右端翻面后会重合，算同一种。所以是“L 形”与“T 形”共 2 种。",
+          "最长直排是 2：只能是两组“两块并排”上下叠在一起。完全对齐时是田字形，错开一格时是 S 形（往左错与往右错翻面后重合），共 2 种。",
+          "最长直排是 1：任两块磁砖都不共边，无法连成一整片，0 种。全部加起来是 1 + 2 + 2 = 5 种。"
+        ],
+        "en": [
+          "Listing shapes at random leads to repeats and omissions, so first fix a classifying axis: the length of the longest straight run of squares inside the shape (squares joined along one row or one column).",
+          "Longest run 4: the four tiles lie in one straight line. That is 1 design.",
+          "Longest run 3: put three tiles in a row and attach the fourth above that row. It can go above the left end, the middle, or the right end; the left and right versions match after a flip, so they are the same. That gives an L design and a T design, 2 in total.",
+          "Longest run 2: the only option is two pairs of side-by-side tiles stacked on top of each other. Perfectly aligned gives a block design; offset by one gives an S design (offsetting left or right match after a flip). That is 2 designs.",
+          "Longest run 1: no two tiles share an edge, so the patch cannot be connected, giving 0 designs. Adding up, 1 + 2 + 2 = 5 designs."
+        ],
+        "ja": [
+          "やみくもに並べると重複や数え落としが起きるので、まず分類の軸を決めます。ここでは「図形の中でいちばん長いまっすぐな並び（同じ行または同じ列でつながっている正方形の個数）」で分類します。",
+          "いちばん長い並びが 4 のとき：4 個が一直線に並ぶ形だけで 1 種類です。",
+          "いちばん長い並びが 3 のとき：3 個を横に並べ、4 個目をその上にくっつけます。左端、中央、右端のいずれかですが、左端と右端は裏返すと重なるので同じ種類です。よって L 形と T 形の 2 種類です。",
+          "いちばん長い並びが 2 のとき：2 個並びを 2 組上下に重ねる形しかありません。ぴったり重ねると 2 × 2 の正方形、1 マスずらすと S 形（左にずらす形と右にずらす形は裏返すと重なる）で、2 種類です。",
+          "いちばん長い並びが 1 のとき：どの 2 個も辺を共有せず 1 つにつながらないので 0 種類。合計すると 1 + 2 + 2 = 5 種類です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "5"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "geometry-grade6-foundation",
+        "notes": "題型出處：Wikipedia「Tetromino」條目（free tetromino 恰有 5 種：I、O、T、L、S；one-sided 為 7 種、fixed 為 19 種）。本題把它改寫成不需附圖的敘述，並強制用「最長直排長度」當分類軸做不重不漏的窮舉，重點放在『翻面視為同一種』會讓 L 與 J、S 與 Z 各自併成一種。掃全庫 regex「連方／小正方形拼／旋轉或翻面」只命中 combinatorics_grade11_foundation_015（4 顆珠子手環的旋轉翻面等價類），對象與分類軸都不同；geometry_grade1/2/3 的拼正方形題全是求周長或根數，不是形狀計數。"
+      }
     }
   ]
 }

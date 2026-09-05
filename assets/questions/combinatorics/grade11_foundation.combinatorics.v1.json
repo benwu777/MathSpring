@@ -4905,6 +4905,179 @@
         "reference": "expectation-grade11-pattern-waiting-time",
         "notes": "題型出自 Wolfram Demonstrations『HH Versus HT Pattern Expectations in Sequences of Coin Flips』與相關的 Penney's game 討論串（HT 的等待期望是 4、HH 是 6）；本題取 HT 這一半，改寫成機器每分鐘印字母的情境，並在答案裡點出 HH 會是 6 這個反直覺對照。與 combinatorics_grade12_042（擲骰直到第一次出現 6）的骨架不同：那題是單一幾何分布、直接套 1/p，本題要建立兩個狀態的遞迴方程組才解得出來。與 combinatorics_grade10_046（13 次投擲中連正次數的期望）也不同，那題是固定次數下用指示變數求次數期望。"
       }
+    },
+    {
+      "id": "combinatorics_grade11_foundation_054",
+      "reviewStatus": "ok",
+      "topic": "combinatorics",
+      "subtopic": "column_parity_colouring_horizontal_domino_count",
+      "tags": [
+        "c:polygon",
+        "c:basic_counting",
+        "m:coloring"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade11",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "把 18 塊 1 × 2 的骨牌放到一個 6 列 6 行的方板上，讓 36 格之中每一格都恰好被一塊骨牌蓋住。每塊骨牌蓋住左右相鄰的兩格（稱為橫放），或上下相鄰的兩格（稱為直放）。關於橫放的骨牌塊數，下列哪一個敘述對每一種放法都成立？",
+        "zh-Hans": "把 18 块 1 × 2 的骨牌放到一个 6 列 6 行的方板上，让 36 格之中每一格都恰好被一块骨牌盖住。每块骨牌盖住左右相邻的两格（称为横放），或上下相邻的两格（称为直放）。关于横放的骨牌块数，下列哪一个叙述对每一种放法都成立？",
+        "en": "Eighteen dominoes of size 1 by 2 are placed on a board of 6 rows and 6 columns so that each of the 36 cells is covered by exactly one domino. A domino covers either two cells side by side, which we call horizontal, or two cells one above the other, which we call vertical. Which of the following statements about the number of horizontal dominoes holds for every such placement?",
+        "ja": "6 行 6 列の盤に 1 × 2 のドミノ 18 枚を置き、36 マスのそれぞれがちょうど 1 枚のドミノに覆われるようにします。各ドミノは左右に隣り合う 2 マス（横向きと呼ぶ）か、上下に隣り合う 2 マス（縦向きと呼ぶ）を覆います。横向きのドミノの枚数について、どの置き方でも成り立つ記述はどれですか。"
+      },
+      "answer": {
+        "zh-Hant": "正確的是 A。把奇數行的格子塗紅，直放的骨牌蓋住的紅格數必為偶數，橫放的骨牌恰好蓋住 1 個紅格，而紅格總數是 18，因此橫放的塊數一定是偶數。",
+        "zh-Hans": "正确的是 A。把奇数行的格子涂红，直放的骨牌盖住的红格数必为偶数，横放的骨牌恰好盖住 1 个红格，而红格总数是 18，因此横放的块数一定是偶数。",
+        "en": "The answer is A. Colour the cells of the odd-numbered columns red; a vertical domino covers an even number of red cells while a horizontal domino covers exactly one, and there are 18 red cells in all, so the number of horizontal dominoes must be even.",
+        "ja": "正解は A です。奇数列のマスを赤に塗ると、縦向きのドミノが覆う赤マスの数は偶数、横向きのドミノは赤マスをちょうど 1 つ覆い、赤マスは全部で 18 個なので、横向きの枚数は必ず偶数になります。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "把由左往右數的第 1、3、5 行（奇數行）的格子全部塗成紅色，其餘塗白。紅色格共有 3 × 6 = 18 格。",
+          "直放的骨牌蓋住同一行的上下兩格，所以它蓋住的紅格數不是 2（位於奇數行）就是 0（位於偶數行），一定是偶數。",
+          "橫放的骨牌蓋住相鄰兩行的各一格，這相鄰的兩行必定一奇一偶，所以它恰好蓋住 1 個紅格。",
+          "把所有骨牌蓋住的紅格數加起來要等於 18。直放的部分貢獻偶數，所以橫放的塊數也必須是偶數。",
+          "另一方面，全部直放時橫放 0 塊、每一列都排三塊橫的時橫放 18 塊，都是偶數也都做得到，所以正確的敘述是 A。"
+        ],
+        "zh-Hans": [
+          "把由左往右数的第 1、3、5 行（奇数行）的格子全部涂成红色，其余涂白。红色格共有 3 × 6 = 18 格。",
+          "直放的骨牌盖住同一行的上下两格，所以它盖住的红格数不是 2（位于奇数行）就是 0（位于偶数行），一定是偶数。",
+          "横放的骨牌盖住相邻两行的各一格，这相邻的两行必定一奇一偶，所以它恰好盖住 1 个红格。",
+          "把所有骨牌盖住的红格数加起来要等于 18。直放的部分贡献偶数，所以横放的块数也必须是偶数。",
+          "另一方面，全部直放时横放 0 块、每一列都排三块横的时横放 18 块，都是偶数也都做得到，所以正确的叙述是 A。"
+        ],
+        "en": [
+          "Colour red every cell of columns 1, 3 and 5 counted from the left, and colour the rest white. There are 3 × 6 = 18 red cells.",
+          "A vertical domino covers two cells of one column, so the number of red cells it covers is 2 if that column is odd and 0 if it is even, in either case an even number.",
+          "A horizontal domino covers one cell in each of two neighbouring columns, and neighbouring columns are one odd and one even, so it covers exactly 1 red cell.",
+          "Adding up the red cells covered by all dominoes must give 18. The vertical dominoes contribute an even total, so the number of horizontal dominoes must also be even.",
+          "On the other hand 0 horizontal dominoes (all vertical) and 18 horizontal dominoes (three per row) are both achievable and both even, so statement A is the correct one."
+        ],
+        "ja": [
+          "左から数えて第 1、3、5 列（奇数列）のマスをすべて赤に塗り、残りを白にします。赤マスは 3 × 6 = 18 個です。",
+          "縦向きのドミノは同じ列の上下 2 マスを覆うので、覆う赤マスの数は奇数列なら 2、偶数列なら 0 で、必ず偶数です。",
+          "横向きのドミノは隣り合う 2 列から 1 マスずつ覆い、隣り合う列は必ず奇数列と偶数列なので、赤マスをちょうど 1 つ覆います。",
+          "すべてのドミノが覆う赤マスの合計は 18 でなければなりません。縦向きの寄与は偶数なので、横向きの枚数も偶数でなければなりません。",
+          "一方、すべて縦向きなら横向きは 0 枚、各行に横 3 枚ずつ並べれば 18 枚となり、どちらも偶数で実現可能です。よって正しい記述は A です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "multiple_choice",
+      "correctAnswer": {
+        "type": "choice",
+        "value": "A"
+      },
+      "options": {
+        "A": {
+          "zh-Hant": "橫放的骨牌塊數一定是偶數；也就是說 0 塊、2 塊、18 塊這些情形都出現得了，但 9 塊這種奇數永遠不會出現。",
+          "zh-Hans": "横放的骨牌块数一定是偶数；也就是说 0 块、2 块、18 块这些情形都出现得了，但 9 块这种奇数永远不会出现。",
+          "en": "The number of horizontal dominoes is always even; that is, 0, 2 and 18 can all occur, but an odd value such as 9 never occurs.",
+          "ja": "横向きのドミノの枚数は必ず偶数です。つまり 0 枚、2 枚、18 枚はいずれも起こり得ますが、9 枚のような奇数は決して起こりません。"
+        },
+        "B": {
+          "zh-Hant": "橫放的骨牌塊數一定是 3 的倍數；也就是說 0 塊、3 塊、18 塊這些情形都出現得了，但 2 塊這種非 3 倍數永遠不會出現。",
+          "zh-Hans": "横放的骨牌块数一定是 3 的倍数；也就是说 0 块、3 块、18 块这些情形都出现得了，但 2 块这种非 3 倍数永远不会出现。",
+          "en": "The number of horizontal dominoes is always a multiple of 3; that is, 0, 3 and 18 can all occur, but a value such as 2 that is not a multiple of 3 never occurs.",
+          "ja": "横向きのドミノの枚数は必ず 3 の倍数です。つまり 0 枚、3 枚、18 枚はいずれも起こり得ますが、2 枚のような 3 の倍数でない値は決して起こりません。"
+        },
+        "C": {
+          "zh-Hant": "橫放的骨牌塊數一定和直放的一樣多；也就是說一定是各 9 塊，其他任何一種橫直分配永遠不會出現。",
+          "zh-Hans": "横放的骨牌块数一定和直放的一样多；也就是说一定是各 9 块，其他任何一种横直分配永远不会出现。",
+          "en": "The number of horizontal dominoes always equals the number of vertical ones; that is, it is always 9 and 9, and no other split between horizontal and vertical ever occurs.",
+          "ja": "横向きのドミノの枚数は必ず縦向きと同じです。つまり必ず 9 枚ずつであり、他のどんな配分も決して起こりません。"
+        },
+        "D": {
+          "zh-Hant": "橫放的骨牌塊數完全沒有限制；也就是說 0 到 18 之間的任何一個整數，只要鋪法安排得當都出現得了。",
+          "zh-Hans": "横放的骨牌块数完全没有限制；也就是说 0 到 18 之间的任何一个整数，只要铺法安排得当都出现得了。",
+          "en": "The number of horizontal dominoes is not restricted at all; that is, every integer from 0 to 18 can occur provided the covering is arranged suitably.",
+          "ja": "横向きのドミノの枚数にはまったく制限がありません。つまり 0 から 18 までのどの整数も、敷き方を工夫すれば起こり得ます。"
+        }
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "combinatorics-grade11-domino-column-parity",
+        "notes": "題型骨架取自 Wikipedia「Domino tiling」條目所引的著色不變量，以及 AoPS 論壇上常見的「in any domino tiling of an even board the number of horizontal dominoes is even」證明；本題把板子改成 6×6 並做成辨識敘述的選擇題。全庫既有的骨牌題（combinatorics_grade8_021 數 2×6 鋪法、combinatorics_grade12_023 數 3×4 鋪法、geometry_grade2_059 問要幾塊、logic_grade5_045／logic_grade7_015／logic_grade12_033 殘缺棋盤）問的都是鋪法數、塊數或可行性，沒有任何一題問橫放骨牌數的奇偶，也沒有用到「依行號奇偶染色」這個分類。"
+      }
+    },
+    {
+      "id": "combinatorics_grade11_foundation_055",
+      "reviewStatus": "ok",
+      "topic": "combinatorics",
+      "subtopic": "sign_board_row_column_product_consistency",
+      "tags": [
+        "c:permutation_combination",
+        "m:invariant"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade11",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一塊看板上有 16 個燈號，排成 4 橫排、4 直行。每個燈號顯示的值只能是 +1 或 −1。若每一橫排的四個值相乘都等於 −1，而且每一直行的四個值相乘也都等於 −1，求符合條件的顯示方式共有多少種。",
+        "zh-Hans": "一块看板上有 16 个灯号，排成 4 横排、4 直行。每个灯号显示的值只能是 +1 或 −1。若每一横排的四个值相乘都等于 −1，而且每一直行的四个值相乘也都等于 −1，求符合条件的显示方式共有多少种。",
+        "en": "A display panel carries 16 indicator lights arranged in 4 horizontal strips of 4. Each light shows either +1 or −1. Suppose the four values in every horizontal strip multiply to −1, and the four values in every vertical strip also multiply to −1. Find how many admissible displays there are.",
+        "ja": "掲示板に 16 個の表示灯が横 4 段、縦 4 列に並んでいます。各表示灯は +1 か −1 のどちらかを示します。どの横の段でも 4 つの値の積が −1 になり、どの縦の列でも 4 つの値の積が −1 になるとき、条件を満たす表示の仕方は何通りあるか求めなさい。"
+      },
+      "answer": {
+        "zh-Hant": "符合條件的顯示方式共有 512 種。",
+        "zh-Hans": "符合条件的显示方式共有 512 种。",
+        "en": "There are 512 admissible displays.",
+        "ja": "条件を満たす表示の仕方は 512 通りです。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "先自由決定左上角那個 3 橫排 3 直行的 9 個燈號，每個有 +1 與 −1 兩種選擇，共 2⁹ 種。",
+          "對前 3 個橫排而言，該橫排最右邊那個燈號被「整排乘積為 −1」唯一決定；同理對前 3 個直行而言，該直行最下面那個燈號被「整行乘積為 −1」唯一決定。",
+          "只剩右下角那一個燈號。它同時要讓最後一個橫排的乘積是 −1，也要讓最後一個直行的乘積是 −1，必須確認兩個要求不會互相打架。",
+          "全部 16 個值的乘積有兩種算法：四個橫排的乘積相乘得 (−1)⁴ = 1，四個直行的乘積相乘也得 (−1)⁴ = 1。這個共同的值就是不變量；兩種算法一致，代表右下角那個燈號的兩個要求必定同時被滿足，而且取法唯一。",
+          "所以顯示方式的總數就等於前面自由選擇的種數 2⁹ = 512 種。"
+        ],
+        "zh-Hans": [
+          "先自由决定左上角那个 3 横排 3 直行的 9 个灯号，每个有 +1 与 −1 两种选择，共 2⁹ 种。",
+          "对前 3 个横排而言，该横排最右边那个灯号被「整排乘积为 −1」唯一决定；同理对前 3 个直行而言，该直行最下面那个灯号被「整行乘积为 −1」唯一决定。",
+          "只剩右下角那一个灯号。它同时要让最后一个横排的乘积是 −1，也要让最后一个直行的乘积是 −1，必须确认两个要求不会互相打架。",
+          "全部 16 个值的乘积有两种算法：四个横排的乘积相乘得 (−1)⁴ = 1，四个直行的乘积相乘也得 (−1)⁴ = 1。这个共同的值就是不变量；两种算法一致，代表右下角那个灯号的两个要求必定同时被满足，而且取法唯一。",
+          "所以显示方式的总数就等于前面自由选择的种数 2⁹ = 512 种。"
+        ],
+        "en": [
+          "First decide freely the 9 lights forming the top left block of 3 strips by 3 strips; each has the two choices +1 and −1, giving 2⁹ possibilities.",
+          "For each of the first 3 horizontal strips the rightmost light is then forced by the requirement that the strip multiplies to −1, and likewise for each of the first 3 vertical strips the bottom light is forced by its own requirement.",
+          "Only the bottom right light remains. It has to make the last horizontal strip multiply to −1 and also make the last vertical strip multiply to −1, so we must check that these two demands do not clash.",
+          "The product of all 16 values can be found in two ways: multiplying the four horizontal strip products gives (−1)⁴ = 1, and multiplying the four vertical strip products also gives (−1)⁴ = 1. This common value is the invariant; because the two computations agree, both demands on the bottom right light are met by one and only one choice.",
+          "Hence the number of admissible displays equals the number of free choices, namely 2⁹ = 512."
+        ],
+        "ja": [
+          "まず左上の横 3 段、縦 3 列にあたる 9 個の表示灯を自由に決めます。各灯は +1 と −1 の 2 通りなので 2⁹ 通りです。",
+          "最初の 3 つの横の段については、その段の右端の灯が「段の積が −1」で一意に決まり、同様に最初の 3 つの縦の列については、その列の一番下の灯が自分の条件で一意に決まります。",
+          "残るのは右下の灯だけです。これは最後の横の段の積を −1 にし、同時に最後の縦の列の積も −1 にしなければならず、二つの要求が食い違わないか確かめる必要があります。",
+          "16 個すべての値の積は二通りに計算できます。四つの横の段の積を掛けると (−1)⁴ = 1、四つの縦の列の積を掛けても (−1)⁴ = 1 です。この共通の値が不変量であり、両者が一致するので、右下の灯への二つの要求はただ一通りの選び方で同時に満たされます。",
+          "したがって条件を満たす表示の総数は自由に選んだ分と同じ 2⁹ = 512 通りです。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "512"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "combinatorics-grade11-sign-matrix-count",
+        "notes": "題型是 AoPS 與各國競賽入門題常見的「±1 方陣，指定每排每行乘積」計數題，Brilliant 的組合章節也有同型例題；本題改成 4 × 4 並把情境換成看板燈號。全庫掃 每一列/每一行/乘積 各題：logic_grade11_039 是 3×3 全 0、每次對整列或整行加 1、問總和的倍數性質（加法操作），logic_grade6_017 是 5×5 硬幣翻整行整列的可行性，combinatorics_grade11_005 是 2×3 紅藍塗色且每列每行至少一紅的計數題。本題的不變量是「全體 16 個值的乘積」，用來檢驗最後一格的兩個條件是否相容，推理核心與上述各題都不同；初版題面用「方格表 / 每一列 / 每一行 / 共有多少種」的樣板，與 combinatorics_grade11_005 字面 0.38，已改寫敘述外殼。"
+      }
     }
   ]
 }
