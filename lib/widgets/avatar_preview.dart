@@ -25,14 +25,21 @@ class AvatarPreview extends StatelessWidget {
           child: Stack(
             fit: StackFit.expand,
             children: <Widget>[
+              // 垂在臉後面的頭髮（雙馬尾、長髮）必須先畫，才會被臉頰蓋住。
+              if (assets.hairBackAsset case final String path)
+                KeyedSubtree(
+                  key: const ValueKey<String>('avatar_hair_back_layer'),
+                  child: _hairLayer(assets, path),
+                ),
               KeyedSubtree(
                 key: const ValueKey<String>('avatar_face_layer'),
                 child: assets.skinTint == null
                     ? _layer(assets.baseAsset)
                     : ColorFiltered(
+                        // 相乘保留底圖的明暗與腮紅；srcATop 會把它們壓平。
                         colorFilter: ColorFilter.mode(
                           assets.skinTint!,
-                          BlendMode.srcATop,
+                          BlendMode.multiply,
                         ),
                         child: _layer(assets.baseAsset),
                       ),
@@ -42,7 +49,25 @@ class AvatarPreview extends StatelessWidget {
                   key: const ValueKey<String>('avatar_eyes_layer'),
                   scaleX: assets.eyesScaleX,
                   scaleY: assets.eyesScaleY,
-                  child: _layer(path, offsetY: assets.eyesOffsetY),
+                  child: assets.eyeTint == null
+                      ? _layer(path, offsetY: assets.eyesOffsetY)
+                      : Stack(
+                          fit: StackFit.expand,
+                          children: <Widget>[
+                            _layer(path, offsetY: assets.eyesOffsetY),
+                            Opacity(
+                              opacity: AvatarAssetCatalog.eyeTintStrength,
+                              child: ColorFiltered(
+                                colorFilter: ColorFilter.mode(
+                                  assets.eyeTint!,
+                                  BlendMode.color,
+                                ),
+                                child:
+                                    _layer(path, offsetY: assets.eyesOffsetY),
+                              ),
+                            ),
+                          ],
+                        ),
                 ),
               if (assets.noseAsset case final String path)
                 Transform.scale(
@@ -52,7 +77,7 @@ class AvatarPreview extends StatelessWidget {
                       : ColorFiltered(
                           colorFilter: ColorFilter.mode(
                             assets.noseTint!,
-                            BlendMode.srcATop,
+                            BlendMode.multiply,
                           ),
                           child: _layer(path, offsetY: assets.noseOffsetY),
                         ),
@@ -62,7 +87,15 @@ class AvatarPreview extends StatelessWidget {
                   scaleX: assets.mouthScaleX,
                   child: _layer(path, offsetY: assets.mouthOffsetY),
                 ),
-              _hairLayer(assets),
+              if (assets.accessoryAsset case final String path)
+                KeyedSubtree(
+                  key: const ValueKey<String>('avatar_accessory_layer'),
+                  child: _layer(path),
+                ),
+              KeyedSubtree(
+                key: const ValueKey<String>('avatar_hair_front_layer'),
+                child: _hairLayer(assets, assets.hairFrontAsset),
+              ),
             ],
           ),
         ),
@@ -75,13 +108,14 @@ class AvatarPreview extends StatelessWidget {
         child: Image.asset(asset, fit: BoxFit.contain),
       );
 
-  Widget _hairLayer(AvatarAssetBundle assets) => FractionalTranslation(
+  Widget _hairLayer(AvatarAssetBundle assets, String asset) =>
+      FractionalTranslation(
         translation: Offset(assets.hairOffsetX, assets.hairOffsetY),
         child: Transform.scale(
           scaleX: assets.hairScale * assets.hairScaleX,
           scaleY: assets.hairScale,
           alignment: Alignment.topCenter,
-          child: _layer(assets.hairAsset),
+          child: _layer(asset),
         ),
       );
 }

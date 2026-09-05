@@ -25,7 +25,7 @@ import 'package:mathspring/services/session_launch_plan_builder.dart';
 import 'package:mathspring/ui/content_scroll_view.dart';
 import 'package:mathspring/ui/layout_spec.dart';
 import 'package:mathspring/widgets/avatar_editor.dart';
-import 'package:mathspring/widgets/avatar_preview.dart;
+import 'package:mathspring/widgets/avatar_preview.dart';
 
 const String appSupportUrl =
     'https://benwu777.github.io/MathSpring/support/';

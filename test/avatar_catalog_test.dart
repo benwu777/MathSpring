@@ -44,6 +44,7 @@ void main() {
       'girl_hair_03',
       'girl_hair_04',
       'girl_hair_05',
+        'girl_hair_06',
     ]);
     expect(AvatarCatalog.eyeOptionsFor(AvatarPresentation.girl), <String>[
       'girl_eyes_01',

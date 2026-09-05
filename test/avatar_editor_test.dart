@@ -59,20 +59,29 @@ void main() {
           .crossAxisCount;
     }
 
+    // 步驟：3 髮型 → 4 眼型 → 5 眼色 → 6 鼻 → 7 嘴 → 8 眼鏡
     await advanceTo(3);
-    expect(columnCount(), 3);
+    expect(columnCount(), 3, reason: '髮型');
 
     await tester.tap(find.byKey(const ValueKey<String>('avatar_next_button')));
     await tester.pump();
-    expect(columnCount(), 4);
+    expect(columnCount(), 4, reason: '眼型');
 
     await tester.tap(find.byKey(const ValueKey<String>('avatar_next_button')));
     await tester.pump();
-    expect(columnCount(), 5);
+    expect(columnCount(), 4, reason: '眼色');
 
     await tester.tap(find.byKey(const ValueKey<String>('avatar_next_button')));
     await tester.pump();
-    expect(columnCount(), 5);
+    expect(columnCount(), 5, reason: '鼻');
+
+    await tester.tap(find.byKey(const ValueKey<String>('avatar_next_button')));
+    await tester.pump();
+    expect(columnCount(), 5, reason: '嘴');
+
+    await tester.tap(find.byKey(const ValueKey<String>('avatar_next_button')));
+    await tester.pump();
+    expect(columnCount(), 4, reason: '眼鏡');
   });
 
   testWidgets('zooms mouth art inside its compact option tile', (tester) async {
@@ -80,7 +89,8 @@ void main() {
       const MaterialApp(home: Scaffold(body: AvatarEditor())),
     );
 
-    for (int step = 0; step < 6; step++) {
+    // 插入「眼色」步驟後，嘴巴從第 6 步移到第 7 步。
+    for (int step = 0; step < 7; step++) {
       await tester
           .tap(find.byKey(const ValueKey<String>('avatar_next_button')));
       await tester.pump();
@@ -130,13 +140,16 @@ void main() {
         ),
       );
 
+      // 順序必須與 AvatarEditor 的步驟一致。
       const List<String> categories = <String>[
         'skin',
         'face',
         'hair',
         'eyes',
+        'eyeColor',
         'nose',
         'mouth',
+        'accessory',
       ];
       for (final String category in categories) {
         await tester

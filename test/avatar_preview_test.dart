@@ -79,9 +79,9 @@ void main() {
     );
 
     expect(girl.baseAsset, 'assets/avatars/girl/base/face-01.png');
-    expect(girl.hairAsset, 'assets/avatars/girl/hair/hair-01.png');
+    expect(girl.hairFrontAsset, 'assets/avatars/girl/hair/hair-01.png');
     expect(boy.baseAsset, 'assets/avatars/boy/base/base-01.png');
-    expect(boy.hairAsset, 'assets/avatars/boy/hair/hair-01.png');
+    expect(boy.hairFrontAsset, 'assets/avatars/boy/hair/hair-01.png');
     expect(boy.noseAsset, 'assets/avatars/boy/nose/nose-01.png');
     expect(boy.mouthAsset, 'assets/avatars/boy/mouth/mouth-01.png');
   });
@@ -98,7 +98,7 @@ void main() {
     );
 
     expect(
-      AvatarAssetCatalog.resolve(firstHair).hairAsset,
+      AvatarAssetCatalog.resolve(firstHair).hairFrontAsset,
       'assets/avatars/boy/hair/hair-01.png',
     );
   });
@@ -123,7 +123,7 @@ void main() {
 
   test('tints a boy nose with the selected deeper skin tone', () {
     final AvatarAssetBundle assets = AvatarAssetCatalog.resolve(
-      AvatarConfiguration(
+      const AvatarConfiguration(
         presentation: AvatarPresentation.boy,
         skinId: 'boy_skin_02',
         faceId: 'boy_face_01',
@@ -167,7 +167,7 @@ void main() {
     );
 
     expect(
-      AvatarAssetCatalog.resolve(curlyHair).hairAsset,
+      AvatarAssetCatalog.resolve(curlyHair).hairFrontAsset,
       'assets/avatars/girl/hair/hair-03.png',
     );
   });
@@ -218,7 +218,7 @@ void main() {
     );
 
     expect(
-      AvatarAssetCatalog.resolve(bobHair).hairAsset,
+      AvatarAssetCatalog.resolve(bobHair).hairFrontAsset,
       'assets/avatars/girl/hair/hair-04.png',
     );
   });
@@ -235,7 +235,7 @@ void main() {
     );
 
     expect(
-      AvatarAssetCatalog.resolve(ponytailHair).hairAsset,
+      AvatarAssetCatalog.resolve(ponytailHair).hairFrontAsset,
       'assets/avatars/girl/hair/hair-05.png',
     );
   });
@@ -403,7 +403,7 @@ void main() {
       _withOption(AvatarPresentation.boy, 'hair', 'boy_hair_05'),
     );
 
-    expect(assets.hairAsset, 'assets/avatars/boy/hair/hair-01.png');
+    expect(assets.hairFrontAsset, 'assets/avatars/boy/hair/hair-01.png');
     expect(assets.hairScale, lessThan(1));
     expect(assets.hairScaleX, 1);
   });
@@ -505,7 +505,7 @@ AvatarConfiguration _withOption(
 
 String _signature(AvatarAssetBundle assets) => <Object?>[
       assets.baseAsset,
-      assets.hairAsset,
+      assets.hairFrontAsset,
       assets.eyesAsset,
       assets.noseAsset,
       assets.mouthAsset,

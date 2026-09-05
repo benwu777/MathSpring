@@ -20,9 +20,11 @@ class _AvatarEditorState extends State<AvatarEditor> {
     'Skin tone',
     'Face shape',
     'Hairstyle',
-    'Eyes / glasses',
+    'Eyes',
+    'Eye colour',
     'Nose',
     'Mouth',
+    'Glasses',
   ];
   @override
   void initState() {
@@ -47,9 +49,15 @@ class _AvatarEditorState extends State<AvatarEditor> {
       case 4:
         return AvatarCatalog.eyeOptionsFor(_configuration.presentation);
       case 5:
+        return AvatarConfiguration.optionsFor(
+            _configuration.presentation, 'eyeColor');
+      case 6:
         return AvatarCatalog.noseOptionsFor(_configuration.presentation);
-      default:
+      case 7:
         return AvatarCatalog.mouthOptionsFor(_configuration.presentation);
+      default:
+        return AvatarConfiguration.optionsFor(
+            _configuration.presentation, 'accessory');
     }
   }
 
@@ -64,9 +72,13 @@ class _AvatarEditorState extends State<AvatarEditor> {
       case 4:
         return _configuration.eyesId;
       case 5:
+        return _configuration.eyeColorId;
+      case 6:
         return _configuration.noseId;
-      default:
+      case 7:
         return _configuration.mouthId;
+      default:
+        return _configuration.accessoryId;
     }
   }
 
@@ -75,7 +87,10 @@ class _AvatarEditorState extends State<AvatarEditor> {
       case 4:
         return 4;
       case 5:
+      case 8:
+        return 4;
       case 6:
+      case 7:
         return 5;
       default:
         return 3;
@@ -97,10 +112,16 @@ class _AvatarEditorState extends State<AvatarEditor> {
         _set(_configuration.copyWith(eyesId: id));
         break;
       case 5:
+        _set(_configuration.copyWith(eyeColorId: id));
+        break;
+      case 6:
         _set(_configuration.copyWith(noseId: id));
         break;
-      default:
+      case 7:
         _set(_configuration.copyWith(mouthId: id));
+        break;
+      default:
+        _set(_configuration.copyWith(accessoryId: id));
     }
   }
 

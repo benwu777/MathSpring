@@ -9,6 +9,8 @@ class AvatarConfiguration {
     required this.eyesId,
     required this.noseId,
     required this.mouthId,
+    this.eyeColorId = 'eye_color_01',
+    this.accessoryId = 'accessory_none',
   });
 
   final AvatarPresentation presentation;
@@ -18,6 +20,12 @@ class AvatarConfiguration {
   final String eyesId;
   final String noseId;
   final String mouthId;
+
+  /// 眼珠顏色。與 [eyesId]（眼型）正交：同一個眼型可以配任何顏色。
+  final String eyeColorId;
+
+  /// 臉上的配件（眼鏡／墨鏡）。`accessory_none` 代表不戴。
+  final String accessoryId;
 
   static const Map<AvatarPresentation, Map<String, List<String>>> _options =
       <AvatarPresentation, Map<String, List<String>>>{
@@ -42,6 +50,8 @@ class AvatarConfiguration {
         'girl_hair_03',
         'girl_hair_04',
         'girl_hair_05',
+        // 雙馬尾：由 hair-05 拆成前後兩層，馬尾垂在臉後面。
+        'girl_hair_06',
       ],
       'eyes': <String>[
         'girl_eyes_01',
@@ -113,8 +123,30 @@ class AvatarConfiguration {
     },
   };
 
+  /// 眼珠顏色與配件不分男女，兩種造型共用同一組選項。
+  static const List<String> _eyeColorOptions = <String>[
+    'eye_color_01', // 深褐
+    'eye_color_02', // 淺褐
+    'eye_color_03', // 琥珀
+    'eye_color_04', // 灰藍
+    'eye_color_05', // 墨綠
+  ];
+
+  static const List<String> _accessoryOptions = <String>[
+    'accessory_none',
+    'accessory_glasses_01', // 圓框
+    'accessory_glasses_02', // 方框
+    'accessory_sunglasses_01', // 墨鏡
+  ];
+
   static List<String> optionsFor(
       AvatarPresentation presentation, String category) {
+    if (category == 'eyeColor') {
+      return List<String>.unmodifiable(_eyeColorOptions);
+    }
+    if (category == 'accessory') {
+      return List<String>.unmodifiable(_accessoryOptions);
+    }
     return List<String>.unmodifiable(_options[presentation]![category]!);
   }
 
@@ -127,6 +159,8 @@ class AvatarConfiguration {
       eyesId: optionsFor(presentation, 'eyes').first,
       noseId: optionsFor(presentation, 'nose').first,
       mouthId: optionsFor(presentation, 'mouth').first,
+      eyeColorId: optionsFor(presentation, 'eyeColor').first,
+      accessoryId: optionsFor(presentation, 'accessory').first,
     );
   }
 
@@ -148,6 +182,8 @@ class AvatarConfiguration {
       eyesId: resolved('eyes', 'avatar_eyes_id'),
       noseId: resolved('nose', 'avatar_nose_id'),
       mouthId: resolved('mouth', 'avatar_mouth_id'),
+      eyeColorId: resolved('eyeColor', 'avatar_eye_color_id'),
+      accessoryId: resolved('accessory', 'avatar_accessory_id'),
     );
   }
 
@@ -159,6 +195,8 @@ class AvatarConfiguration {
     String? eyesId,
     String? noseId,
     String? mouthId,
+    String? eyeColorId,
+    String? accessoryId,
   }) {
     return AvatarConfiguration(
       presentation: presentation ?? this.presentation,
@@ -168,6 +206,8 @@ class AvatarConfiguration {
       eyesId: eyesId ?? this.eyesId,
       noseId: noseId ?? this.noseId,
       mouthId: mouthId ?? this.mouthId,
+      eyeColorId: eyeColorId ?? this.eyeColorId,
+      accessoryId: accessoryId ?? this.accessoryId,
     );
   }
 
@@ -179,5 +219,7 @@ class AvatarConfiguration {
         'avatar_eyes_id': eyesId,
         'avatar_nose_id': noseId,
         'avatar_mouth_id': mouthId,
+        'avatar_eye_color_id': eyeColorId,
+        'avatar_accessory_id': accessoryId,
       };
 }

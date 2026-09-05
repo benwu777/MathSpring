@@ -8,7 +8,10 @@ import 'package:mathspring/models/avatar_configuration.dart';
 class AvatarAssetBundle {
   const AvatarAssetBundle({
     required this.baseAsset,
-    required this.hairAsset,
+    required this.hairFrontAsset,
+    this.hairBackAsset,
+    this.accessoryAsset,
+    this.eyeTint,
     this.eyesAsset,
     this.noseAsset,
     this.mouthAsset,
@@ -28,7 +31,18 @@ class AvatarAssetBundle {
   });
 
   final String baseAsset;
-  final String hairAsset;
+  /// 瀏海與頭頂：畫在臉之後（蓋住額頭）。
+  final String hairFrontAsset;
+
+  /// 垂在臉後面的部分（雙馬尾、長髮）：畫在臉之前，所以會被臉頰蓋住。
+  /// 短髮造型沒有這一層，值為 null。
+  final String? hairBackAsset;
+
+  /// 眼鏡或墨鏡。不戴時為 null。
+  final String? accessoryAsset;
+
+  /// 眼珠顏色。與眼型正交，用染色的方式套在眼睛圖層上。
+  final Color? eyeTint;
   final String? eyesAsset;
   final String? noseAsset;
   final String? mouthAsset;
@@ -85,12 +99,55 @@ class AvatarAssetCatalog {
 
   /// Skin is never only a base swap: the nose layer receives the same tint so
   /// a deeper skin tone never carries a pale nose.
+  /// 膚色色階。原本四個色票都是 0x33（20% 不透明度）的褐色系、以 srcATop
+  /// 整片覆蓋，結果是既分不出深淺、又把腮紅與鼻尖高光壓平。
+  ///
+  /// 改用**相乘**（[BlendMode.multiply]）：相乘只會讓底圖變暗，原圖的明暗
+  /// 層次因此完整保留，而色票本身用不透明色去描述「這個膚色有多深」。
+  ///   01 = 底圖原色（最淺），不套色
   static const Map<String, Color> _skinTints = <String, Color>{
-    'skin_02': Color(0x33703A20),
-    'skin_03': Color(0x33974F2C),
-    'skin_04': Color(0x33D9925B),
-    'skin_05': Color(0x33472616),
+    'skin_02': Color(0xFFF2D9BE),
+    'skin_03': Color(0xFFE0AE7C),
+    'skin_04': Color(0xFFB77B49),
+    'skin_05': Color(0xFF7E4B2A),
   };
+
+  /// 眼珠顏色。用 [BlendMode.color]（取色相與飽和度、保留原本的明度）
+  /// 才不會把睫毛一起塗掉。整層套用會連眼白也染色，看起來像全眼變色片，
+  /// 所以渲染時只疊 [eyeTintStrength] 的強度：虹膜是中間調會明顯偏移，
+  /// 眼白接近純白只會帶一點色暈。
+  static const double eyeTintStrength = .62;
+
+  static const Map<String, Color> _eyeTints = <String, Color>{
+    'eye_color_01': Color(0x00000000), // 深褐＝原圖，不染色
+    'eye_color_02': Color(0xFF8A5A32), // 淺褐
+    'eye_color_03': Color(0xFFC98A2B), // 琥珀
+    'eye_color_04': Color(0xFF4E7EA8), // 灰藍
+    'eye_color_05': Color(0xFF3F6B4A), // 墨綠
+  };
+
+  /// 配件圖層。`accessory_none` 不在表內，解析結果為 null。
+  static const Map<String, String> _accessoryAssets = <String, String>{
+    'accessory_glasses_01': 'assets/avatars/shared/accessory/glasses-round.png',
+    'accessory_glasses_02': 'assets/avatars/shared/accessory/glasses-square.png',
+    'accessory_sunglasses_01':
+        'assets/avatars/shared/accessory/sunglasses.png',
+  };
+
+  /// 有後層的髮型：值是後層圖檔（垂在臉後面的部分）。
+  static const Map<String, String> _hairBackAssets = <String, String>{
+    'girl_hair_06': 'assets/avatars/girl/hair/hair-06-back.png',
+  };
+
+  static Color? eyeTintFor(String eyeColorId) {
+    final Color? c = _eyeTints[eyeColorId];
+    return (c == null || c.a == 0) ? null : c;
+  }
+
+  static String? accessoryAssetFor(String accessoryId) =>
+      _accessoryAssets[accessoryId];
+
+  static String? hairBackAssetFor(String hairId) => _hairBackAssets[hairId];
 
   static const Map<String, AvatarOptionTreatment> _treatments =
       <String, AvatarOptionTreatment>{
@@ -103,6 +160,12 @@ class AvatarAssetCatalog {
   };
 
   static AvatarOptionTreatment treatmentFor(String optionId) {
+    if (optionId.startsWith('eye_color_')) {
+      final Color? tint = _eyeTints[optionId];
+      return (tint == null || tint.a == 0)
+          ? _neutral
+          : AvatarOptionTreatment(tint: tint);
+    }
     if (optionId.contains('_skin_')) {
       final Color? tint = _skinTints[optionId.substring(optionId.length - 7)];
       return tint == null ? _neutral : AvatarOptionTreatment(tint: tint);
@@ -119,6 +182,16 @@ class AvatarAssetCatalog {
     final List<String> parts = optionId.split('_');
     final String category = parts[1];
     final String index = parts.last;
+
+    // 眼色與配件不是「一個選項一張圖」的部位，縮圖借用既有圖層：
+    // 眼色顯示套了顏色的眼睛，配件顯示鏡框本身（不戴則顯示原本的眼睛）。
+    if (optionId.startsWith('eye_color_')) {
+      return 'assets/avatars/$prefix/eyes/eyes-01.png';
+    }
+    if (optionId.startsWith('accessory_')) {
+      return _accessoryAssets[optionId] ??
+          'assets/avatars/$prefix/eyes/eyes-01.png';
+    }
 
     final String? shared = _sharedLayerSource[optionId];
     if (shared != null) {
@@ -165,7 +238,10 @@ class AvatarAssetCatalog {
 
     return AvatarAssetBundle(
       baseAsset: optionAssetFor(presentation, configuration.faceId),
-      hairAsset: optionAssetFor(presentation, configuration.hairId),
+      hairFrontAsset: optionAssetFor(presentation, configuration.hairId),
+      hairBackAsset: hairBackAssetFor(configuration.hairId),
+      accessoryAsset: accessoryAssetFor(configuration.accessoryId),
+      eyeTint: eyeTintFor(configuration.eyeColorId),
       hairScale: hair.scale,
       hairScaleX: hair.scaleX,
       // The boy source artwork's canvas sits lower than the face canvas, so

@@ -3,7 +3,7 @@ import 'package:sqflite/sqflite.dart';
 
 class MathSpringDatabase {
   static const String databaseName = 'mathspring.db';
-  static const int schemaVersion = 5;
+  static const int schemaVersion = 6;
 
   static Future<Database> openDefault() async {
     final String databasesPath = await getDatabasesPath();
@@ -110,6 +110,14 @@ class MathSpringDatabase {
         'ALTER TABLE learner_profiles ADD COLUMN avatar_mouth_id TEXT',
       );
     }
+    if (oldVersion < 6) {
+      await db.execute(
+        'ALTER TABLE learner_profiles ADD COLUMN avatar_eye_color_id TEXT',
+      );
+      await db.execute(
+        'ALTER TABLE learner_profiles ADD COLUMN avatar_accessory_id TEXT',
+      );
+    }
   }
 
   static Future<void> _createLearnerProfilesTable(Database db) async {
@@ -128,7 +136,9 @@ class MathSpringDatabase {
         avatar_hair_id TEXT,
         avatar_eyes_id TEXT,
         avatar_nose_id TEXT,
-        avatar_mouth_id TEXT
+        avatar_mouth_id TEXT,
+        avatar_eye_color_id TEXT,
+        avatar_accessory_id TEXT
       )
     ''');
   }
