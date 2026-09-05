@@ -44,7 +44,11 @@ void main() {
       'girl_hair_03',
       'girl_hair_04',
       'girl_hair_05',
-        'girl_hair_06',
+      'girl_hair_06',
+      'girl_hair_07',
+      'girl_hair_08',
+      'girl_hair_09',
+      'girl_hair_10',
     ]);
     expect(AvatarCatalog.eyeOptionsFor(AvatarPresentation.girl), <String>[
       'girl_eyes_01',
@@ -90,6 +94,10 @@ void main() {
       'boy_hair_03',
       'boy_hair_04',
       'boy_hair_05',
+      'boy_hair_06',
+      'boy_hair_07',
+      'boy_hair_08',
+      'boy_hair_09',
     ]);
     expect(AvatarCatalog.eyeOptionsFor(AvatarPresentation.boy), <String>[
       'boy_eyes_01',

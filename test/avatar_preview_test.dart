@@ -341,6 +341,21 @@ void main() {
     expect(assets.hairOffsetY, -.1);
   });
 
+  test('keeps the new boy hairstyle artwork on its aligned canvas', () {
+    for (final String hairId in <String>[
+      'boy_hair_06',
+      'boy_hair_07',
+      'boy_hair_08',
+      'boy_hair_09',
+    ]) {
+      final AvatarAssetBundle assets = AvatarAssetCatalog.resolve(
+        _withOption(AvatarPresentation.boy, 'hair', hairId),
+      );
+
+      expect(assets.hairOffsetY, 0, reason: '$hairId is already aligned');
+    }
+  });
+
   test('calibrates boy nose and mouth to their facial landmarks', () {
     final AvatarAssetBundle assets = AvatarAssetCatalog.resolve(
       AvatarConfiguration.defaultFor(AvatarPresentation.boy),

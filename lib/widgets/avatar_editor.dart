@@ -144,14 +144,17 @@ class _AvatarEditorState extends State<AvatarEditor> {
                       onSelected: (_) => _set(AvatarCatalog.defaultFor(p))))
                   .toList())
         else
-          GridView.count(
-            crossAxisCount: _gridColumnCount,
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            mainAxisSpacing: 8,
-            crossAxisSpacing: 8,
-            childAspectRatio: 1,
-            children: _options.map(_optionTile).toList(),
+          SizedBox(
+            // Ten hairstyle tiles need four rows.  Keep navigation in the
+            // editor viewport and let the choices themselves scroll.
+            height: 260,
+            child: GridView.count(
+              crossAxisCount: _gridColumnCount,
+              mainAxisSpacing: 8,
+              crossAxisSpacing: 8,
+              childAspectRatio: 1,
+              children: _options.map(_optionTile).toList(),
+            ),
           ),
         const SizedBox(height: 12),
         Row(mainAxisSize: MainAxisSize.min, children: [

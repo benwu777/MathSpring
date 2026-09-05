@@ -40,6 +40,28 @@ void main() {
         findsOneWidget);
   });
 
+  testWidgets('keeps hairstyle navigation visible with ten options',
+      (tester) async {
+    await tester.binding.setSurfaceSize(const Size(320, 600));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+    await tester.pumpWidget(
+      const MaterialApp(home: Scaffold(body: AvatarEditor())),
+    );
+
+    for (int step = 0; step < 3; step++) {
+      await tester
+          .tap(find.byKey(const ValueKey<String>('avatar_next_button')));
+      await tester.pump();
+    }
+
+    expect(
+      tester
+          .getCenter(find.byKey(const ValueKey<String>('avatar_next_button')))
+          .dy,
+      lessThan(600),
+    );
+  });
+
   testWidgets('uses a denser grid for smaller facial parts', (tester) async {
     await tester.pumpWidget(
       const MaterialApp(home: Scaffold(body: AvatarEditor())),
@@ -156,8 +178,15 @@ void main() {
             .tap(find.byKey(const ValueKey<String>('avatar_next_button')));
         await tester.pump();
 
-        for (final String id
-            in AvatarConfiguration.optionsFor(presentation, category)) {
+        // A scrollable hairstyle grid intentionally builds only its visible
+        // tiles.  Only treated hair options need this test's transform check;
+        // all neutral styles are covered by the catalog and asset tests.
+        final Iterable<String> ids = category == 'hair'
+            ? AvatarConfiguration.optionsFor(presentation, category).where(
+                (String id) => !AvatarAssetCatalog.treatmentFor(id).isNeutral,
+              )
+            : AvatarConfiguration.optionsFor(presentation, category);
+        for (final String id in ids) {
           expect(
               find.byKey(ValueKey<String>('avatar_option_$id')), findsOneWidget,
               reason: '$id is missing from the $category step');

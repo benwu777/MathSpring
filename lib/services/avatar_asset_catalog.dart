@@ -31,6 +31,7 @@ class AvatarAssetBundle {
   });
 
   final String baseAsset;
+
   /// 瀏海與頭頂：畫在臉之後（蓋住額頭）。
   final String hairFrontAsset;
 
@@ -129,9 +130,9 @@ class AvatarAssetCatalog {
   /// 配件圖層。`accessory_none` 不在表內，解析結果為 null。
   static const Map<String, String> _accessoryAssets = <String, String>{
     'accessory_glasses_01': 'assets/avatars/shared/accessory/glasses-round.png',
-    'accessory_glasses_02': 'assets/avatars/shared/accessory/glasses-square.png',
-    'accessory_sunglasses_01':
-        'assets/avatars/shared/accessory/sunglasses.png',
+    'accessory_glasses_02':
+        'assets/avatars/shared/accessory/glasses-square.png',
+    'accessory_sunglasses_01': 'assets/avatars/shared/accessory/sunglasses.png',
   };
 
   /// 有後層的髮型：值是後層圖檔（垂在臉後面的部分）。
@@ -157,6 +158,16 @@ class AvatarAssetCatalog {
     // A cropped cut: the same parting drawn smaller so the ears show and the
     // fringe sits higher.  Lowered by the amount the layer shrinks upward.
     'boy_hair_05': AvatarOptionTreatment(scale: .92, offsetY: .02),
+  };
+
+  /// These source layers predate the aligned generated artwork and sit lower
+  /// in their canvases, so only they need the legacy upward correction.
+  static const Set<String> _legacyBoyHair = <String>{
+    'boy_hair_01',
+    'boy_hair_02',
+    'boy_hair_03',
+    'boy_hair_04',
+    'boy_hair_05',
   };
 
   static AvatarOptionTreatment treatmentFor(String optionId) {
@@ -244,9 +255,11 @@ class AvatarAssetCatalog {
       eyeTint: eyeTintFor(configuration.eyeColorId),
       hairScale: hair.scale,
       hairScaleX: hair.scaleX,
-      // The boy source artwork's canvas sits lower than the face canvas, so
-      // every boy hairstyle is lifted to keep the fringe above both eyes.
-      hairOffsetY: (isBoy ? -.1 : 0) + hair.offsetY,
+      // The original boy layers sit lower than the face canvas. New hair
+      // artwork is already aligned, so it must not inherit that correction.
+      hairOffsetY:
+          (isBoy && _legacyBoyHair.contains(configuration.hairId) ? -.1 : 0) +
+              hair.offsetY,
       eyesAsset: optionAssetFor(presentation, configuration.eyesId),
       eyesScaleX: (isBoy ? 1 : girlEyeSpread) * eyes.scaleX,
       eyesScaleY: eyes.scaleY,

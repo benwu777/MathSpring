@@ -52,6 +52,11 @@ class AvatarConfiguration {
         'girl_hair_05',
         // 雙馬尾：由 hair-05 拆成前後兩層，馬尾垂在臉後面。
         'girl_hair_06',
+        // 紅棕高馬尾、金色蓬鬆捲髮、藍紫短鮑伯、深棕雙辮。
+        'girl_hair_07',
+        'girl_hair_08',
+        'girl_hair_09',
+        'girl_hair_10',
       ],
       'eyes': <String>[
         'girl_eyes_01',
@@ -98,6 +103,11 @@ class AvatarConfiguration {
         'boy_hair_03',
         'boy_hair_04',
         'boy_hair_05',
+        // 金色刺蝟頭、紅棕捲髮、藍紫側削短髮、深棕髮髻。
+        'boy_hair_06',
+        'boy_hair_07',
+        'boy_hair_08',
+        'boy_hair_09',
       ],
       'eyes': <String>[
         'boy_eyes_01',
