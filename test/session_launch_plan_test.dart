@@ -97,12 +97,12 @@ void main() {
     );
 
     expect(selected, hasLength(4));
-    expect(selected.every((pack) => pack.challengeTier == 'foundation'), isTrue);
+    expect(
+        selected.every((pack) => pack.challengeTier == 'foundation'), isTrue);
     expect(selected.every((pack) => pack.topicCode == 'geometry'), isTrue);
   });
 
-  test('learner launch supports grade7+ packs inside the selected range',
-      () {
+  test('learner launch supports grade7+ packs inside the selected range', () {
     const LearnerProfile learner = LearnerProfile(
       id: 'learner_senior',
       displayName: 'Senior',
@@ -145,7 +145,8 @@ void main() {
     expect(selected.first.challengeTier, 'foundation');
   });
 
-  test('builds mixed launch pack with merged question count and representative level',
+  test(
+      'builds mixed launch pack with merged question count and representative level',
       () {
     const LearnerProfile learner = LearnerProfile(
       id: 'learner_2',
@@ -188,15 +189,19 @@ void main() {
     );
 
     expect(selected, hasLength(4));
-    expect(selected.map((pack) => pack.topicCode).toSet(), equals(<String>{
-      'geometry',
-      'logic',
-      'mixed',
-    }));
-    expect(selected.map((pack) => pack.levelStage).toSet(), equals(<String>{
-      'grade5',
-      'grade6',
-    }));
+    expect(
+        selected.map((pack) => pack.topicCode).toSet(),
+        equals(<String>{
+          'geometry',
+          'logic',
+          'mixed',
+        }));
+    expect(
+        selected.map((pack) => pack.levelStage).toSet(),
+        equals(<String>{
+          'grade5',
+          'grade6',
+        }));
     expect(selected.where((pack) => pack.topicCode == 'mixed'), hasLength(2));
   });
 
@@ -241,13 +246,15 @@ void main() {
       seed: 7,
     );
 
-    expect(randomized.map((question) => question.id), isNot(equals([
-      'q1',
-      'q2',
-      'q3',
-      'q4',
-      'q5',
-    ])));
+    expect(
+        randomized.map((question) => question.id),
+        isNot(equals([
+          'q1',
+          'q2',
+          'q3',
+          'q4',
+          'q5',
+        ])));
     expect(
       randomized.map((question) => question.id).toSet(),
       equals(<String>{'q1', 'q2', 'q3', 'q4', 'q5'}),
@@ -292,6 +299,27 @@ void main() {
     expect(filtered.map((item) => item.id), <String>['q_ok_1', 'q_ok_2']);
   });
 
+  test('launch selection keeps only unanswered eligible questions', () {
+    final List<Question> selected =
+        SessionLaunchPlanBuilder.preferUnansweredQuestionsForLaunch(
+      <Question>[_question('answered'), _question('new_1'), _question('new_2')],
+      answeredQuestionIds: <String>{'answered'},
+    );
+
+    expect(selected.map((question) => question.id), <String>['new_1', 'new_2']);
+  });
+
+  test('launch selection falls back to all questions after all are answered',
+      () {
+    final List<Question> selected =
+        SessionLaunchPlanBuilder.preferUnansweredQuestionsForLaunch(
+      <Question>[_question('q1'), _question('q2')],
+      answeredQuestionIds: <String>{'q1', 'q2'},
+    );
+
+    expect(selected.map((question) => question.id), <String>['q1', 'q2']);
+  });
+
   test('question parser preserves review status', () {
     final Question question = Question.fromJson({
       'id': 'geometry_grade7_foundation_approved',
@@ -321,3 +349,24 @@ void main() {
     expect(question.isReviewApproved, isTrue);
   });
 }
+
+Question _question(String id) => Question.fromJson(<String, Object?>{
+      'id': id,
+      'topic': 'geometry',
+      'difficulty': 'foundation',
+      'levelStage': 'grade4',
+      'challengeTier': 'foundation',
+      'prompt': <String, String>{'en': 'Prompt $id'},
+      'answer': <String, String>{'en': 'Answer $id'},
+      'solutionSteps': <String, List<String>>{
+        'en': <String>['Step $id'],
+      },
+      'figure': <String, Object?>{
+        'type': 'custom',
+        'kind': 'none',
+        'params': <String, Object?>{},
+      },
+      'answerMode': 'integer_input',
+      'correctAnswer': <String, String>{'type': 'integer', 'value': '1'},
+      'reviewStatus': 'ok',
+    });

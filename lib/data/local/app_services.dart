@@ -263,11 +263,7 @@ class AppServices {
     String learnerId,
   ) async {
     final List<QuestionProgress> progressRecords =
-        questionProgressRepository != null
-            ? await questionProgressRepository!.fetchByLearnerId(learnerId)
-            : _progressRecords
-                .where((progress) => progress.learnerId == learnerId)
-                .toList();
+        await _getLearnerQuestionProgress(learnerId);
     final int solvedCount = progressRecords.length;
     final int correctCount = progressRecords
         .where((progress) => progress.status == 'correct')
@@ -277,6 +273,11 @@ class AppServices {
       correctCount: correctCount,
     );
   }
+
+  Future<Set<String>> getLearnerAnsweredQuestionIds(String learnerId) async =>
+      (await _getLearnerQuestionProgress(learnerId))
+          .map((QuestionProgress progress) => progress.questionId)
+          .toSet();
 
   Future<List<AnswerSession>> getLearnerAnswerSessions(String learnerId) async {
     if (answerSessionRepository != null) {
@@ -327,7 +328,8 @@ class AppServices {
     final List<AnswerSession> sessions =
         await getLearnerAnswerSessions(learnerId);
     final List<List<SessionAnswerRecord>> records = await Future.wait(
-      sessions.map((AnswerSession session) => getSessionAnswerRecords(session.id)),
+      sessions
+          .map((AnswerSession session) => getSessionAnswerRecords(session.id)),
     );
     return DailyMission.calculate(
       learnerId: learnerId,
@@ -352,6 +354,16 @@ class AppServices {
     }
     _progressRecords[existingIndex] = progress;
   }
+
+  Future<List<QuestionProgress>> _getLearnerQuestionProgress(
+    String learnerId,
+  ) async =>
+      questionProgressRepository != null
+          ? questionProgressRepository!.fetchByLearnerId(learnerId)
+          : _progressRecords
+              .where((QuestionProgress progress) =>
+                  progress.learnerId == learnerId)
+              .toList();
 
   void _upsertAnswerSession(
     AnswerSession session,

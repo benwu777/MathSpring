@@ -89,6 +89,20 @@ class SessionLaunchPlanBuilder {
     return shuffled;
   }
 
+  /// Prefer questions this learner has not yet answered. Once the eligible
+  /// pool is exhausted, retain every question so sessions can continue as
+  /// randomized review.
+  static List<Question> preferUnansweredQuestionsForLaunch(
+    List<Question> questions, {
+    required Set<String> answeredQuestionIds,
+  }) {
+    final List<Question> unanswered = questions
+        .where(
+            (Question question) => !answeredQuestionIds.contains(question.id))
+        .toList(growable: false);
+    return unanswered.isEmpty ? List<Question>.from(questions) : unanswered;
+  }
+
   static List<Question> filterApprovedQuestionsForLaunch(
     List<Question> questions,
   ) {

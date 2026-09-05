@@ -6291,9 +6291,21 @@ Future<void> _openFirstEligiblePack({
     }
     return;
   }
+  final String? learnerId = learner?.id ?? services.currentLearnerId;
+  final Set<String> answeredQuestionIds = learnerId == null
+      ? const <String>{}
+      : await services.getLearnerAnsweredQuestionIds(learnerId);
+  if (!context.mounted) {
+    return;
+  }
+  final List<Question> prioritizedQuestions =
+      SessionLaunchPlanBuilder.preferUnansweredQuestionsForLaunch(
+    approvedQuestions,
+    answeredQuestionIds: answeredQuestionIds,
+  );
   final List<Question> randomizedQuestions =
       SessionLaunchPlanBuilder.randomizeQuestionOrderForSession(
-    approvedQuestions,
+    prioritizedQuestions,
   );
   final List<Question> sessionQuestions = questionLimit == null
       ? randomizedQuestions

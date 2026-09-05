@@ -299,6 +299,39 @@ void main() {
     expect(summary.accuracyRate, 0.5);
   });
 
+  test('reads only the current learner question IDs for launch selection',
+      () async {
+    final AppServices services = AppServices(
+      database: database,
+      learnerProfileRepository: learnerProfileRepository,
+      questionProgressRepository: questionProgressRepository,
+      appPreferencesRepository: appPreferencesRepository,
+    );
+    await questionProgressRepository.upsert(
+      const QuestionProgress(
+        learnerId: 'learner_allen',
+        questionId: 'answered_1',
+        status: 'correct',
+        lastResult: 'integer_input:1',
+        updatedAtIso: '2026-09-06T09:00:00Z',
+      ),
+    );
+    await questionProgressRepository.upsert(
+      const QuestionProgress(
+        learnerId: 'learner_mia',
+        questionId: 'other_learner',
+        status: 'correct',
+        lastResult: 'integer_input:1',
+        updatedAtIso: '2026-09-06T09:01:00Z',
+      ),
+    );
+
+    expect(
+      await services.getLearnerAnsweredQuestionIds('learner_allen'),
+      <String>{'answered_1'},
+    );
+  });
+
   test('app services persists practice session summaries', () async {
     final AppServices services = AppServices(
       database: database,
