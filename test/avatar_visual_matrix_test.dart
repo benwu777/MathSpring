@@ -230,7 +230,7 @@ Future<void> _composeAvatar(
     args.addAll(<String>['(', eyesAsset, '-resize', '251x251!', ')']);
   }
   if (assets.noseAsset case final String noseAsset) {
-    args.addAll(<String>['(', noseAsset, '-resize', '251x251!', ')']);
+    args.addAll(_noseLayerArgs(noseAsset, assets));
   }
   if (assets.mouthAsset case final String mouthAsset) {
     args.addAll(<String>['(', mouthAsset, '-resize', '251x251!', ')']);
@@ -244,6 +244,25 @@ Future<void> _composeAvatar(
     output.path,
   ]);
   await _runMagick(args);
+}
+
+List<String> _noseLayerArgs(String asset, AvatarAssetBundle assets) {
+  final String? tint = assets.noseTint == null
+      ? null
+      : '#${assets.noseTint!.toARGB32().toRadixString(16).padLeft(8, '0').substring(2)}';
+  return <String>[
+    '(',
+    asset,
+    '-resize',
+    '${_matrixCanvasSize}x$_matrixCanvasSize!',
+    if (tint != null) ...<String>[
+      '-fill',
+      tint,
+      '-colorize',
+      '35%',
+    ],
+    ')',
+  ];
 }
 
 List<String> _faceLayerArgs(AvatarAssetBundle assets) {

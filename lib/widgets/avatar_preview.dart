@@ -60,7 +60,7 @@ class AvatarPreview extends StatelessWidget {
                       : ColorFiltered(
                           colorFilter: ColorFilter.mode(
                             assets.noseTint!,
-                            BlendMode.multiply,
+                            BlendMode.modulate,
                           ),
                           child: _layer(path, offsetY: assets.noseOffsetY),
                         ),

@@ -161,6 +161,15 @@ void main() {
       findsNWidgets(2),
       reason: '只有臉部與鼻子皮膚圖層可以套用膚色濾鏡',
     );
+    final List<ColorFiltered> skinFilters =
+        tester.widgetList<ColorFiltered>(find.byType(ColorFiltered)).toList();
+    expect(
+      skinFilters.map((ColorFiltered filter) => filter.colorFilter),
+      everyElement(
+        const ColorFilter.mode(Color(0xFFB77B49), BlendMode.modulate),
+      ),
+      reason: '臉部與鼻子都必須保留透明畫布，不能用 multiply 填滿背景',
+    );
   });
 
   testWidgets('renders every glasses variant in the fixed dark colour',
