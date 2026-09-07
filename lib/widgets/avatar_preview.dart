@@ -70,17 +70,6 @@ class AvatarPreview extends StatelessWidget {
                   scaleX: assets.mouthScaleX,
                   child: _layer(path, offsetY: assets.mouthOffsetY),
                 ),
-              if (assets.accessoryAsset case final String path)
-                KeyedSubtree(
-                  key: const ValueKey<String>('avatar_accessory_layer'),
-                  child: ColorFiltered(
-                    colorFilter: const ColorFilter.mode(
-                      AvatarAssetCatalog.fixedDarkFeatureTint,
-                      BlendMode.srcATop,
-                    ),
-                    child: _layer(path),
-                  ),
-                ),
               KeyedSubtree(
                 key: const ValueKey<String>('avatar_hair_front_layer'),
                 child: _hairLayer(assets, assets.hairFrontAsset),

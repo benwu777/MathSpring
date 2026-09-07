@@ -23,7 +23,6 @@ class _AvatarEditorState extends State<AvatarEditor> {
     'Eyes',
     'Nose',
     'Mouth',
-    'Glasses',
   ];
   @override
   void initState() {
@@ -52,8 +51,7 @@ class _AvatarEditorState extends State<AvatarEditor> {
       case 6:
         return AvatarCatalog.mouthOptionsFor(_configuration.presentation);
       default:
-        return AvatarConfiguration.optionsFor(
-            _configuration.presentation, 'accessory');
+        throw StateError('Unexpected avatar editor step: $_step');
     }
   }
 
@@ -72,15 +70,13 @@ class _AvatarEditorState extends State<AvatarEditor> {
       case 6:
         return _configuration.mouthId;
       default:
-        return _configuration.accessoryId;
+        throw StateError('Unexpected avatar editor step: $_step');
     }
   }
 
   int get _gridColumnCount {
     switch (_step) {
       case 4:
-        return 4;
-      case 7:
         return 4;
       case 5:
       case 6:
@@ -111,7 +107,7 @@ class _AvatarEditorState extends State<AvatarEditor> {
         _set(_configuration.copyWith(mouthId: id));
         break;
       default:
-        _set(_configuration.copyWith(accessoryId: id));
+        throw StateError('Unexpected avatar editor step: $_step');
     }
   }
 

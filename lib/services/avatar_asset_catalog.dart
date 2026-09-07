@@ -10,7 +10,6 @@ class AvatarAssetBundle {
     required this.baseAsset,
     required this.hairFrontAsset,
     this.hairBackAsset,
-    this.accessoryAsset,
     this.eyesAsset,
     this.noseAsset,
     this.mouthAsset,
@@ -37,9 +36,6 @@ class AvatarAssetBundle {
   /// 垂在臉後面的部分（雙馬尾、長髮）：畫在臉之前，所以會被臉頰蓋住。
   /// 短髮造型沒有這一層，值為 null。
   final String? hairBackAsset;
-
-  /// 眼鏡或墨鏡。不戴時為 null。
-  final String? accessoryAsset;
 
   final String? eyesAsset;
   final String? noseAsset;
@@ -85,9 +81,6 @@ class AvatarAssetCatalog {
 
   static const AvatarOptionTreatment _neutral = AvatarOptionTreatment();
 
-  /// 眼睛圖稿與眼鏡統一使用的固定深色。
-  static const Color fixedDarkFeatureTint = Color(0xFF30241F);
-
   /// Options without dedicated artwork reuse an aligned layer from the same
   /// part.  The value is the path below `assets/avatars/`.
   /// Only hair still shares a layer: the two accepted boy partings are also
@@ -113,21 +106,10 @@ class AvatarAssetCatalog {
     'skin_05': Color(0xFF7E4B2A),
   };
 
-  /// 配件圖層。`accessory_none` 不在表內，解析結果為 null。
-  static const Map<String, String> _accessoryAssets = <String, String>{
-    'accessory_glasses_01': 'assets/avatars/shared/accessory/glasses-round.png',
-    'accessory_glasses_02':
-        'assets/avatars/shared/accessory/glasses-square.png',
-    'accessory_sunglasses_01': 'assets/avatars/shared/accessory/sunglasses.png',
-  };
-
   /// 有後層的髮型：值是後層圖檔（垂在臉後面的部分）。
   static const Map<String, String> _hairBackAssets = <String, String>{
     'girl_hair_06': 'assets/avatars/girl/hair/hair-06-back.png',
   };
-
-  static String? accessoryAssetFor(String accessoryId) =>
-      _accessoryAssets[accessoryId];
 
   static String? hairBackAssetFor(String hairId) => _hairBackAssets[hairId];
 
@@ -168,12 +150,6 @@ class AvatarAssetCatalog {
     final List<String> parts = optionId.split('_');
     final String category = parts[1];
     final String index = parts.last;
-
-    // 配件不是「一個選項一張圖」的部位；不戴時縮圖借用既有眼睛。
-    if (optionId.startsWith('accessory_')) {
-      return _accessoryAssets[optionId] ??
-          'assets/avatars/$prefix/eyes/eyes-01.png';
-    }
 
     final String? shared = _sharedLayerSource[optionId];
     if (shared != null) {
@@ -222,7 +198,6 @@ class AvatarAssetCatalog {
       baseAsset: optionAssetFor(presentation, configuration.faceId),
       hairFrontAsset: optionAssetFor(presentation, configuration.hairId),
       hairBackAsset: hairBackAssetFor(configuration.hairId),
-      accessoryAsset: accessoryAssetFor(configuration.accessoryId),
       hairScale: hair.scale,
       hairScaleX: hair.scaleX,
       // The original boy layers sit lower than the face canvas. New hair

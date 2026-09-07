@@ -77,27 +77,35 @@ void main() {
     });
   });
 
-  group('眼鏡配件', () {
-    test('accessory 是一個獨立的可選類別，預設為「不戴」', () {
+  group('眼睛與眼鏡', () {
+    test('眼鏡款是眼睛選項的一部分，且仍保留一般眼睛款', () {
       final List<String> options =
-          AvatarConfiguration.optionsFor(AvatarPresentation.girl, 'accessory');
-      expect(options.first, 'accessory_none');
-      expect(options.length, greaterThanOrEqualTo(3), reason: '至少要有：不戴、眼鏡、墨鏡');
+          AvatarConfiguration.optionsFor(AvatarPresentation.girl, 'eyes');
+      expect(
+          options,
+          containsAll(<String>[
+            'girl_eyes_01',
+            'girl_eyes_06',
+            'girl_eyes_07',
+            'girl_eyes_08',
+          ]));
+      expect(
+        () => AvatarConfiguration.optionsFor(
+            AvatarPresentation.girl, 'accessory'),
+        throwsArgumentError,
+      );
     });
 
-    testWidgets('選了眼鏡時畫面上要有配件圖層，選「不戴」時沒有', (WidgetTester tester) async {
-      final AvatarConfiguration withGlasses =
-          girl().copyWith(accessoryId: 'accessory_glasses_01');
+    testWidgets('legacy glasses values cannot add a second overlay',
+        (WidgetTester tester) async {
+      final AvatarConfiguration glassesEyes = girl().copyWith(
+          eyesId: 'girl_eyes_06', accessoryId: 'accessory_glasses_01');
       await tester.pumpWidget(
         MaterialApp(
-            home: Scaffold(body: AvatarPreview(configuration: withGlasses))),
+            home: Scaffold(body: AvatarPreview(configuration: glassesEyes))),
       );
-      expect(find.byKey(const ValueKey<String>('avatar_accessory_layer')),
+      expect(find.byKey(const ValueKey<String>('avatar_eyes_layer')),
           findsOneWidget);
-
-      await tester.pumpWidget(
-        MaterialApp(home: Scaffold(body: AvatarPreview(configuration: girl()))),
-      );
       expect(find.byKey(const ValueKey<String>('avatar_accessory_layer')),
           findsNothing);
     });

@@ -81,7 +81,7 @@ void main() {
           .crossAxisCount;
     }
 
-    // 步驟：3 髮型 → 4 眼型 → 5 鼻 → 6 嘴 → 7 眼鏡
+    // 步驟：3 髮型 → 4 眼型（包含眼鏡）→ 5 鼻 → 6 嘴
     await advanceTo(3);
     expect(columnCount(), 3, reason: '髮型');
 
@@ -97,9 +97,7 @@ void main() {
     await tester.pump();
     expect(columnCount(), 5, reason: '嘴');
 
-    await tester.tap(find.byKey(const ValueKey<String>('avatar_next_button')));
-    await tester.pump();
-    expect(columnCount(), 4, reason: '眼鏡');
+    expect(find.text('Glasses'), findsNothing);
   });
 
   testWidgets('does not offer eye colour as an avatar editor step',
@@ -176,7 +174,7 @@ void main() {
         ),
       );
 
-      // 順序必須與 AvatarEditor 的步驟一致。
+      // 順序必須與 AvatarEditor 的步驟一致；眼鏡是眼睛圖稿的一部分。
       const List<String> categories = <String>[
         'skin',
         'face',
@@ -184,7 +182,6 @@ void main() {
         'eyes',
         'nose',
         'mouth',
-        'accessory',
       ];
       for (final String category in categories) {
         await tester

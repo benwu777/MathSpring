@@ -24,7 +24,8 @@ class AvatarConfiguration {
   /// 舊版儲存的眼珠顏色。保留欄位以讀取既有帳號，但不再用於顯示或編輯。
   final String eyeColorId;
 
-  /// 臉上的配件（眼鏡／墨鏡）。`accessory_none` 代表不戴。
+  /// 舊版獨立眼鏡欄位。保留欄位以讀取及回寫既有帳號，但眼鏡現已併入
+  /// [eyesId] 的完整圖稿，不再用於顯示或編輯。
   final String accessoryId;
 
   static const Map<AvatarPresentation, Map<String, List<String>>> _options =
@@ -64,6 +65,10 @@ class AvatarConfiguration {
         'girl_eyes_03',
         'girl_eyes_04',
         'girl_eyes_05',
+        // 眼睛與圓框／方框／墨鏡為同一張完整圖稿，避免疊圖對位跑掉。
+        'girl_eyes_06',
+        'girl_eyes_07',
+        'girl_eyes_08',
       ],
       'nose': <String>[
         'girl_nose_01',
@@ -115,6 +120,9 @@ class AvatarConfiguration {
         'boy_eyes_03',
         'boy_eyes_04',
         'boy_eyes_05',
+        'boy_eyes_06',
+        'boy_eyes_07',
+        'boy_eyes_08',
       ],
       'nose': <String>[
         'boy_nose_01',
@@ -142,7 +150,7 @@ class AvatarConfiguration {
     'eye_color_05', // 墨綠
   ];
 
-  static const List<String> _accessoryOptions = <String>[
+  static const List<String> _legacyAccessoryIds = <String>[
     'accessory_none',
     'accessory_glasses_01', // 圓框
     'accessory_glasses_02', // 方框
@@ -151,9 +159,6 @@ class AvatarConfiguration {
 
   static List<String> optionsFor(
       AvatarPresentation presentation, String category) {
-    if (category == 'accessory') {
-      return List<String>.unmodifiable(_accessoryOptions);
-    }
     final List<String>? options = _options[presentation]![category];
     if (options == null) {
       throw ArgumentError.value(category, 'category', 'Unknown avatar option');
@@ -171,7 +176,7 @@ class AvatarConfiguration {
       noseId: optionsFor(presentation, 'nose').first,
       mouthId: optionsFor(presentation, 'mouth').first,
       eyeColorId: 'eye_color_01',
-      accessoryId: optionsFor(presentation, 'accessory').first,
+      accessoryId: 'accessory_none',
     );
   }
 
@@ -194,7 +199,7 @@ class AvatarConfiguration {
       noseId: resolved('nose', 'avatar_nose_id'),
       mouthId: resolved('mouth', 'avatar_mouth_id'),
       eyeColorId: _resolvedLegacyEyeColor(map['avatar_eye_color_id']),
-      accessoryId: resolved('accessory', 'avatar_accessory_id'),
+      accessoryId: _resolvedLegacyAccessory(map['avatar_accessory_id']),
     );
   }
 
@@ -203,6 +208,13 @@ class AvatarConfiguration {
     return _legacyEyeColorIds.contains(candidate)
         ? candidate
         : _legacyEyeColorIds.first;
+  }
+
+  static String _resolvedLegacyAccessory(Object? value) {
+    final String candidate = value as String? ?? '';
+    return _legacyAccessoryIds.contains(candidate)
+        ? candidate
+        : _legacyAccessoryIds.first;
   }
 
   AvatarConfiguration copyWith({
