@@ -821,6 +821,96 @@ void main() {
     );
   });
 
+  testWidgets('answer sessions show current learner identity',
+      (WidgetTester tester) async {
+    const LearnerProfile learner = LearnerProfile(
+      id: 'learner_allen',
+      displayName: 'Allen',
+      levelStage: 'grade4',
+      challengeTier: 'advanced',
+      createdAtIso: '2026-07-16T00:00:00Z',
+    );
+    const BundledQuestionPackInfo pack = BundledQuestionPackInfo(
+      path: 'unused',
+      topic: 'Mixed',
+      topicCode: 'mixed',
+      levelStage: 'grade4',
+      challengeTier: 'foundation',
+      questionCount: 1,
+    );
+
+    await tester.pumpWidget(
+      MaterialApp(
+        locale: const Locale('en'),
+        supportedLocales: AppStrings.supportedLocales,
+        localizationsDelegates: const [
+          GlobalMaterialLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+        ],
+        home: PracticeSessionPage(
+          services: createTestServices(),
+          pack: pack,
+          initialQuestions: [createDemoQuestion()],
+          learner: learner,
+        ),
+      ),
+    );
+    await tester.pump();
+
+    expect(
+      find.byKey(const ValueKey<String>('current_learner_identity')),
+      findsOneWidget,
+    );
+    expect(find.text('Allen'), findsOneWidget);
+    expect(find.text('Grade 4'), findsOneWidget);
+    expect(find.byType(AvatarPreview), findsOneWidget);
+
+    await tester.pumpWidget(
+      MaterialApp(
+        locale: const Locale('en'),
+        supportedLocales: AppStrings.supportedLocales,
+        localizationsDelegates: const [
+          GlobalMaterialLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+        ],
+        home: QuizSessionPage(
+          services: createTestServices(),
+          pack: pack,
+          initialQuestions: [createDemoQuestion()],
+          formalExamPreset: FormalExamPreset.standard.first,
+          learner: learner,
+        ),
+      ),
+    );
+    await tester.pump();
+
+    expect(
+      find.byKey(const ValueKey<String>('current_learner_identity')),
+      findsOneWidget,
+    );
+    expect(find.text('Allen'), findsOneWidget);
+    expect(find.text('Grade 4'), findsOneWidget);
+    expect(find.byType(AvatarPreview), findsOneWidget);
+
+    await tester.pumpWidget(
+      MaterialApp(
+        home: PracticeSessionPage(
+          services: createTestServices(),
+          pack: pack,
+          initialQuestions: [createDemoQuestion()],
+        ),
+      ),
+    );
+    await tester.pump();
+
+    expect(
+      find.byKey(const ValueKey<String>('current_learner_identity')),
+      findsNothing,
+    );
+  });
+
   testWidgets('question pages use refreshed study card styling',
       (WidgetTester tester) async {
     final TestWidgetsFlutterBinding binding =

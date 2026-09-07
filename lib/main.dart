@@ -3095,11 +3095,13 @@ class PracticeSessionPage extends StatefulWidget {
     required this.services,
     required this.pack,
     this.initialQuestions,
+    this.learner,
   });
 
   final AppServices services;
   final bundled.BundledQuestionPackInfo pack;
   final List<Question>? initialQuestions;
+  final LearnerProfile? learner;
 
   @override
   State<PracticeSessionPage> createState() => _PracticeSessionPageState();
@@ -3151,6 +3153,16 @@ class _PracticeSessionPageState extends State<PracticeSessionPage> {
           icon: const Icon(Icons.close),
         ),
         title: Text(strings.practiceMode),
+        actions: [
+          if (widget.learner != null)
+            Padding(
+              padding: const EdgeInsets.only(right: 12),
+              child: SizedBox(
+                width: 124,
+                child: _CurrentLearnerIdentity(learner: widget.learner!),
+              ),
+            ),
+        ],
         surfaceTintColor: Colors.transparent,
         backgroundColor: const Color(0xFFF5F7FB),
       ),
@@ -3698,12 +3710,14 @@ class QuizSessionPage extends StatefulWidget {
     required this.pack,
     this.initialQuestions,
     this.formalExamPreset,
+    this.learner,
   });
 
   final AppServices services;
   final bundled.BundledQuestionPackInfo pack;
   final List<Question>? initialQuestions;
   final FormalExamPreset? formalExamPreset;
+  final LearnerProfile? learner;
 
   @override
   State<QuizSessionPage> createState() => _QuizSessionPageState();
@@ -3773,6 +3787,16 @@ class _QuizSessionPageState extends State<QuizSessionPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(strings.quizMode),
+        actions: [
+          if (widget.learner != null)
+            Padding(
+              padding: const EdgeInsets.only(right: 12),
+              child: SizedBox(
+                width: 124,
+                child: _CurrentLearnerIdentity(learner: widget.learner!),
+              ),
+            ),
+        ],
         surfaceTintColor: Colors.transparent,
         backgroundColor: const Color(0xFFF5F7FB),
       ),
@@ -6394,12 +6418,14 @@ Future<void> _openFirstEligiblePack({
         services: services,
         pack: launchPack,
         initialQuestions: sessionQuestions,
+        learner: learner,
       ),
     _SessionLaunchMode.quiz => QuizSessionPage(
         services: services,
         pack: launchPack,
         initialQuestions: sessionQuestions,
         formalExamPreset: formalExamPreset,
+        learner: learner,
       ),
   };
 
