@@ -85,6 +85,9 @@ class AvatarAssetCatalog {
 
   static const AvatarOptionTreatment _neutral = AvatarOptionTreatment();
 
+  /// 眼睛圖稿與眼鏡統一使用的固定深色。
+  static const Color fixedDarkFeatureTint = Color(0xFF30241F);
+
   /// Options without dedicated artwork reuse an aligned layer from the same
   /// part.  The value is the path below `assets/avatars/`.
   /// Only hair still shares a layer: the two accepted boy partings are also

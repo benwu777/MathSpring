@@ -150,7 +150,6 @@ void main() {
             ).copyWith(
               skinId: 'girl_skin_04',
               eyeColorId: 'eye_color_04',
-              accessoryId: 'accessory_glasses_01',
             ),
           ),
         ),
@@ -162,6 +161,47 @@ void main() {
       findsNWidgets(2),
       reason: '只有臉部與鼻子皮膚圖層可以套用膚色濾鏡',
     );
+  });
+
+  testWidgets('renders every glasses variant in the fixed dark colour',
+      (WidgetTester tester) async {
+    const ColorFilter expectedDarkGlasses = ColorFilter.mode(
+      Color(0xFF30241F),
+      BlendMode.srcATop,
+    );
+    const List<String> glasses = <String>[
+      'accessory_glasses_01',
+      'accessory_glasses_02',
+      'accessory_sunglasses_01',
+    ];
+
+    for (final String accessoryId in glasses) {
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: AvatarPreview(
+              configuration: AvatarConfiguration.defaultFor(
+                AvatarPresentation.girl,
+              ).copyWith(accessoryId: accessoryId),
+            ),
+          ),
+        ),
+      );
+
+      final Finder glassesLayer = find.byKey(
+        const ValueKey<String>('avatar_accessory_layer'),
+      );
+      final Finder glassesTint = find.descendant(
+        of: glassesLayer,
+        matching: find.byType(ColorFiltered),
+      );
+      expect(glassesTint, findsOneWidget, reason: accessoryId);
+      expect(
+        tester.widget<ColorFiltered>(glassesTint).colorFilter,
+        expectedDarkGlasses,
+        reason: '$accessoryId 必須與眼睛使用相同固定深色',
+      );
+    }
   });
 
   test('resolves the accepted boy toothy-smile mouth', () {
