@@ -34,10 +34,14 @@ TOL_ANGLE = 2.0    # 角度誤差 2 度
 def points_of(fig):
     pts = {}
     for p in (fig.get('params') or {}).get('points', []) or []:
-        # 有些 kind 的 points 只是座標對、沒有名字，那種無從比對，跳過
-        if not isinstance(p, dict) or 'name' not in p:
+        # geometry_scene 用 name、coordinate_plane 用 label；兩種都要讀。
+        # 真的沒有名字的點無從與題幹對應，跳過。
+        if not isinstance(p, dict):
             continue
-        pts[p['name']] = (float(p['x']), float(p['y']))
+        n = p.get('name') or p.get('label')
+        if not n or 'x' not in p or 'y' not in p:
+            continue
+        pts[str(n)] = (float(p['x']), float(p['y']))
     return pts
 
 
@@ -158,7 +162,30 @@ def checks_from_prompt(text, pts):
             out.append(('%s 是正多邊形' % m.group(0).strip(), okk,
                         '邊長 %s' % ' '.join('%.2f' % v for v in sides)))
 
-    # 7) 中點
+    # 7) 題幹直接給座標 → 圖上的點必須是同一個形狀
+    #
+    # 圖可能整體縮放或平移（示意圖常這樣），所以比的是「點與點之間距離的比值」：
+    # 旋轉、平移、等比縮放都不影響，但形狀畫錯就會被抓到。
+    coords = {}
+    for m in re.finditer(r'([A-Z])\s*\(\s*(-?\d+(?:\.\d+)?)\s*,\s*(-?\d+(?:\.\d+)?)\s*\)', text):
+        n, x, y = m.group(1), float(m.group(2)), float(m.group(3))
+        if n in pts:
+            coords[n] = (x, y)
+    if len(coords) >= 3:
+        ns = sorted(coords)
+        pairs = [(a, b) for i, a in enumerate(ns) for b in ns[i + 1:]]
+        want = [dist(coords[a], coords[b]) for a, b in pairs]
+        got = [dist(pts[a], pts[b]) for a, b in pairs]
+        # 用最長的一段當基準做等比正規化
+        i = want.index(max(want))
+        if got[i] > 0:
+            k = want[i] / got[i]
+            worst = max(abs(g * k - w) / max(w, 1e-9)
+                        for g, w in zip(got, want) if w > 0)
+            out.append(('座標 %s 的形狀' % ''.join(ns), worst <= TOL_RATIO,
+                        '最大偏差 %.1f%%' % (100 * worst)))
+
+    # 8) 中點
     for m in re.finditer(r'([A-Z])\s*是\s*(?:邊\s*|線段\s*)?([A-Z])([A-Z])\s*的中點', text):
         x, a, b = m.groups()
         if have(x, a, b):
@@ -167,6 +194,41 @@ def checks_from_prompt(text, pts):
             scale = max(dist(pts[a], pts[b]), 1e-9)
             out.append(('%s 是 %s%s 的中點' % (x, a, b), d <= 0.03 * scale,
                         '偏離 %.1f%%' % (100 * d / scale)))
+    return out
+
+
+def absolute_coord_checks(text, pts):
+    """題幹給了座標、圖上又是有格線的座標平面 → 點必須畫在同一個座標上。
+
+    這比形狀比對嚴格：座標平面上的點是絕對位置，畫錯一格學生就會讀錯。
+    """
+    out = []
+    for m in re.finditer(
+            r'([A-Z][A-Za-z0-9]?)\s*\(\s*(-?\d+(?:\.\d+)?)\s*,\s*(-?\d+(?:\.\d+)?)\s*\)',
+            text):
+        n, x, y = m.group(1), float(m.group(2)), float(m.group(3))
+        if n not in pts:
+            continue
+        gx, gy = pts[n]
+        okk = abs(gx - x) < 1e-6 and abs(gy - y) < 1e-6
+        out.append(('%s 應畫在 (%g, %g)' % (n, x, y), okk,
+                    '圖上畫在 (%g, %g)' % (gx, gy)))
+    return out
+
+
+def circle_checks(text, params):
+    """題幹寫「半徑分別是 a 和 b」時，圖上兩個圓的半徑比要對得上。"""
+    out = []
+    circles = (params or {}).get('circles') or []
+    rs = sorted(float(c['r']) for c in circles if 'r' in c)
+    m = re.search(r'半徑分別是\s*(\d+(?:\.\d+)?)\s*(?:和|與|、)\s*(\d+(?:\.\d+)?)', text)
+    if m and len(rs) == 2:
+        want = sorted((float(m.group(1)), float(m.group(2))))
+        ratio_want = want[1] / want[0]
+        ratio_got = rs[1] / rs[0]
+        out.append(('半徑比 %g : %g' % (want[1], want[0]),
+                    abs(ratio_got - ratio_want) <= TOL_RATIO * ratio_want,
+                    '圖上 %.3f，題目 %.3f' % (ratio_got, ratio_want)))
     return out
 
 
@@ -185,9 +247,10 @@ def main(argv):
             if kind and fig.get('kind') != kind:
                 continue
             pts = points_of(fig)
-            if not pts:
-                continue
             res = checks_from_prompt(q['prompt']['zh-Hant'], pts)
+            res += circle_checks(q['prompt']['zh-Hant'], fig.get('params'))
+            if fig.get('kind') == 'coordinate_plane':
+                res += absolute_coord_checks(q['prompt']['zh-Hant'], pts)
             if not res:
                 continue
             checked += 1

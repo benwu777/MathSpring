@@ -82,3 +82,57 @@ class RegularPolygonTest(unittest.TestCase):
         import math as _m
         pts = {'A': (0, 0), 'B': (4, 0), 'C': (2, 4 * _m.sqrt(3) / 2)}
         self.assertEqual(fails('正三角形 ABC 的邊長是 4。', pts), [])
+
+
+class ExplicitCoordinateTest(unittest.TestCase):
+    """題幹直接給座標時，圖上的點必須是同一個形狀。
+
+    圖可能整體縮放或平移，所以比的是「點與點之間距離的比值」，
+    這樣旋轉、平移、縮放都不影響，但形狀畫錯就會被抓到。
+    """
+
+    TEXT = '四邊形 ABCD 的四個頂點依序是 A(0, 0)、B(6, 0)、C(8, 5)、D(2, 7)。'
+
+    def test_matching_shape_passes(self):
+        pts = {'A': (0, 0), 'B': (6, 0), 'C': (8, 5), 'D': (2, 7)}
+        self.assertEqual(fails(self.TEXT, pts), [])
+
+    def test_uniformly_scaled_shape_passes(self):
+        pts = {k: (v[0] * 3, v[1] * 3) for k, v in
+               {'A': (0, 0), 'B': (6, 0), 'C': (8, 5), 'D': (2, 7)}.items()}
+        self.assertEqual(fails(self.TEXT, pts), [])
+
+    def test_wrong_shape_is_reported(self):
+        pts = {'A': (0, 0), 'B': (6, 0), 'C': (8, 5), 'D': (2, 2)}   # D 畫錯
+        self.assertTrue(fails(self.TEXT, pts))
+
+
+class CircleRadiusTest(unittest.TestCase):
+    def test_radius_ratio_is_checked(self):
+        text = '兩個圓外切於一點，半徑分別是 4 和 9。'
+        good = {'circles': [{'cx': 0, 'cy': 0, 'r': 4}, {'cx': 13, 'cy': 0, 'r': 9}]}
+        bad = {'circles': [{'cx': 0, 'cy': 0, 'r': 4}, {'cx': 9, 'cy': 0, 'r': 5}]}
+        self.assertEqual(
+            [d for d, ok, _ in chk.circle_checks(text, good) if not ok], [])
+        self.assertTrue(
+            [d for d, ok, _ in chk.circle_checks(text, bad) if not ok])
+
+
+class CoordinatePlaneTest(unittest.TestCase):
+    """coordinate_plane 有格線、座標是絕對值，所以要比「相等」而不只是形狀。"""
+
+    def test_label_key_is_read_as_a_point_name(self):
+        fig = {'kind': 'coordinate_plane',
+               'params': {'points': [{'x': 1, 'y': 1, 'label': 'A'},
+                                     {'x': 6, 'y': 2, 'label': 'B'}]}}
+        self.assertEqual(chk.points_of(fig), {'A': (1.0, 1.0), 'B': (6.0, 2.0)})
+
+    def test_plotted_point_must_match_stated_coordinate(self):
+        text = '三角形的三個頂點是 A(1,1)、B(6,2)、C(2,6)。'
+        good = {'A': (1, 1), 'B': (6, 2), 'C': (2, 6)}
+        bad = {'A': (1, 1), 'B': (6, 2), 'C': (3, 6)}
+        self.assertEqual(
+            [d for d, ok, _ in chk.absolute_coord_checks(text, good) if not ok], [])
+        self.assertEqual(
+            [d for d, ok, _ in chk.absolute_coord_checks(text, bad) if not ok],
+            ['C 應畫在 (2, 6)'])   # 描述寫的是題目要求的座標，不是圖上畫錯的那個
