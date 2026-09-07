@@ -6325,6 +6325,336 @@
         "reference": "algebra-grade12-sine-radian-ordering",
         "notes": "題型取自弧度制單元常見的「不用計算機比較 sin 1、sin 2、sin 3」討論串（Math Stack Exchange 與各家三角函數教材的單調性練習），改寫成四選一並讓每個誘答各自對應一種常見誤解。全庫掃「由大到小／弧度」：algebra_grade11_001 是排 log₂3、log₃4、log₄5、log₅6（對數估值，概念標籤是 c:logarithm），algebra_grade11_004 是 sin²(π/8) 那組的補角配對求和；兩者都不是用單調區間搬移來比大小。"
       }
+    },
+    {
+      "id": "algebra_grade12_foundation_071",
+      "reviewStatus": "ok",
+      "topic": "algebra",
+      "subtopic": "blend_cost_minimum_binding_constraint",
+      "tags": [
+        "c:mixture",
+        "c:inequality",
+        "c:percent",
+        "m:extremal"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一種飼料要用甲、乙兩種原料調配，總重恰好 100 公斤。甲原料每公斤 40 元，含蛋白質 30%、纖維 5%；乙原料每公斤 25 元，含蛋白質 10%、纖維 25%。成品的蛋白質含量必須至少 18%，纖維含量必須至多 15%。在符合規定的前提下，求調配這 100 公斤飼料的最低成本是多少元。",
+        "zh-Hans": "一种饲料要用甲、乙两种原料调配，总重恰好 100 千克。甲原料每千克 40 元，含蛋白质 30%、纤维 5%；乙原料每千克 25 元，含蛋白质 10%、纤维 25%。成品的蛋白质含量必须至少 18%，纤维含量必须至多 15%。在符合规定的前提下，求调配这 100 千克饲料的最低成本是多少元。",
+        "en": "A feed is blended from two ingredients, X and Y, to a total weight of exactly 100 kilograms. Ingredient X costs 40 dollars per kilogram and contains 30% protein and 5% fibre; ingredient Y costs 25 dollars per kilogram and contains 10% protein and 25% fibre. The finished feed must contain at least 18% protein and at most 15% fibre. Find the lowest possible cost, in dollars, of blending these 100 kilograms.",
+        "ja": "ある飼料を原料甲と原料乙から調合し、総重量をちょうど 100 キログラムにします。原料甲は 1 キログラム 40 元で、たんぱく質 30%、繊維 5% を含みます。原料乙は 1 キログラム 25 元で、たんぱく質 10%、繊維 25% を含みます。完成した飼料はたんぱく質を 18% 以上、繊維を 15% 以下にしなければなりません。この条件を満たしながら 100 キログラムを調合するときの最低費用は何元ですか。"
+      },
+      "answer": {
+        "zh-Hant": "最低成本是 3250 元。",
+        "zh-Hans": "最低成本是 3250 元。",
+        "en": "The lowest possible cost is 3250 dollars.",
+        "ja": "最低費用は 3250 元です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "設甲原料用 x 公斤，則乙原料用 (100 − x) 公斤，且 0 ≤ x ≤ 100。",
+          "蛋白質的限制：0.3x + 0.1(100 − x) ≥ 18，整理得 0.2x + 10 ≥ 18，也就是 x ≥ 40。",
+          "纖維的限制：0.05x + 0.25(100 − x) ≤ 15，整理得 25 − 0.2x ≤ 15，也就是 x ≥ 50。",
+          "兩條限制都必須成立，所以真正生效的是比較嚴的那一條 x ≥ 50。這一步是本題的關鍵：只看蛋白質會誤以為 x = 40 就夠了，但那時纖維是 0.05 × 40 + 0.25 × 60 = 17 公斤，超過 15% 的上限。",
+          "成本 = 40x + 25(100 − x) = 2500 + 15x。x 前面的係數 15 是正的，成本隨 x 遞增，所以在可行範圍裡 x 取最小值 50 時成本最低。",
+          "最低成本 = 2500 + 15 × 50 = 3250 元。驗算：甲、乙各 50 公斤，蛋白質 15 + 5 = 20 公斤（20% ≥ 18% ✓），纖維 2.5 + 12.5 = 15 公斤（15% ≤ 15% ✓），花費 50 × 40 + 50 × 25 = 3250 元 ✓。"
+        ],
+        "zh-Hans": [
+          "设甲原料用 x 千克，则乙原料用 (100 − x) 千克，且 0 ≤ x ≤ 100。",
+          "蛋白质的限制：0.3x + 0.1(100 − x) ≥ 18，整理得 0.2x + 10 ≥ 18，也就是 x ≥ 40。",
+          "纤维的限制：0.05x + 0.25(100 − x) ≤ 15，整理得 25 − 0.2x ≤ 15，也就是 x ≥ 50。",
+          "两条限制都必须成立，所以真正生效的是比较严的那一条 x ≥ 50。这一步是本题的关键：只看蛋白质会误以为 x = 40 就够了，但那时纤维是 0.05 × 40 + 0.25 × 60 = 17 千克，超过 15% 的上限。",
+          "成本 = 40x + 25(100 − x) = 2500 + 15x。x 前面的系数 15 是正的，成本随 x 递增，所以在可行范围里 x 取最小值 50 时成本最低。",
+          "最低成本 = 2500 + 15 × 50 = 3250 元。验算：甲、乙各 50 千克，蛋白质 15 + 5 = 20 千克（20% ≥ 18% ✓），纤维 2.5 + 12.5 = 15 千克（15% ≤ 15% ✓），花费 50 × 40 + 50 × 25 = 3250 元 ✓。"
+        ],
+        "en": [
+          "Let x kilograms of ingredient X be used, so ingredient Y supplies (100 − x) kilograms, with 0 ≤ x ≤ 100.",
+          "Protein constraint: 0.3x + 0.1(100 − x) ≥ 18, which simplifies to 0.2x + 10 ≥ 18, that is x ≥ 40.",
+          "Fibre constraint: 0.05x + 0.25(100 − x) ≤ 15, which simplifies to 25 − 0.2x ≤ 15, that is x ≥ 50.",
+          "Both constraints must hold, so the stricter one, x ≥ 50, is the one that actually binds. This is the key step: looking only at protein suggests x = 40 is enough, but then the fibre is 0.05 × 40 + 0.25 × 60 = 17 kilograms, above the 15% ceiling.",
+          "Cost = 40x + 25(100 − x) = 2500 + 15x. The coefficient 15 is positive, so cost increases with x and is smallest at the smallest feasible x, namely 50.",
+          "Lowest cost = 2500 + 15 × 50 = 3250 dollars. Check: 50 kilograms of each gives protein 15 + 5 = 20 kilograms (20% ≥ 18%) and fibre 2.5 + 12.5 = 15 kilograms (15% ≤ 15%), at a cost of 50 × 40 + 50 × 25 = 3250 dollars."
+        ],
+        "ja": [
+          "原料甲を x キログラム使うとすると、原料乙は (100 − x) キログラムで、0 ≤ x ≤ 100 です。",
+          "たんぱく質の条件：0.3x + 0.1(100 − x) ≥ 18 を整理すると 0.2x + 10 ≥ 18、つまり x ≥ 40。",
+          "繊維の条件：0.05x + 0.25(100 − x) ≤ 15 を整理すると 25 − 0.2x ≤ 15、つまり x ≥ 50。",
+          "両方の条件を満たす必要があるので、実際に効いているのは厳しいほうの x ≥ 50 です。ここが本問の要で、たんぱく質だけを見ると x = 40 で足りると思いがちですが、そのときの繊維は 0.05 × 40 + 0.25 × 60 = 17 キログラムで、15% の上限を超えてしまいます。",
+          "費用 = 40x + 25(100 − x) = 2500 + 15x。x の係数 15 は正なので費用は x とともに増え、実行可能な範囲で最小の x = 50 のときに最小になります。",
+          "最低費用 = 2500 + 15 × 50 = 3250 元。検算：甲・乙を 50 キログラムずつにすると、たんぱく質は 15 + 5 = 20 キログラム（20% ≥ 18%）、繊維は 2.5 + 12.5 = 15 キログラム（15% ≤ 15%）、費用は 50 × 40 + 50 × 25 = 3250 元です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "3250"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 4
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "algebra-grade12-mixture-optimization",
+        "notes": "題型骨架取自 Wikipedia「Linear programming」條目的資源配置例（農夫問題）與其中提到的 diet/blending problem 標準式，改成兩種原料、兩個成分限制、成本最小化。全庫以「最低成本／花費最少／飼料／配方」regex 掃描為 0 題；既有的濃度題沒有任何一題帶成本目標函數，algebra_grade7_071（茶葉）雖有單價但是由售價逆推成本的十字交叉，沒有不等式可行域。"
+      }
+    },
+    {
+      "id": "algebra_grade12_foundation_072",
+      "reviewStatus": "ok",
+      "topic": "algebra",
+      "subtopic": "merged_variance_lower_bound",
+      "tags": [
+        "c:stdev",
+        "c:mean",
+        "c:mixture",
+        "m:extremal"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "兩批同型零件混在一起。甲批有 20 個，平均重量是 70 公克；乙批有 30 個，平均重量是 80 公克。每一批內部各個零件的重量不一定相同，除此之外沒有其他資訊。求混合後這 50 個零件重量的變異數，最小可能是多少。（本題的變異數採用一般定義：把每筆資料減去整組平均後平方，再把這些平方值取平均。）",
+        "zh-Hans": "两批同型零件混在一起。甲批有 20 个，平均重量是 70 克；乙批有 30 个，平均重量是 80 克。每一批内部各个零件的重量不一定相同，除此之外没有其他信息。求混合后这 50 个零件重量的方差，最小可能是多少。（本题的方差采用一般定义：把每笔资料减去整组平均后平方，再把这些平方值取平均。）",
+        "en": "Two batches of the same kind of part are mixed together. Batch X has 20 parts with an average weight of 70 grams, and batch Y has 30 parts with an average weight of 80 grams. Within each batch the individual weights need not be equal, and nothing else is known. Find the smallest possible variance of the weights of all 50 parts after mixing. (Variance here has its usual meaning: subtract the overall mean from each value, square the result, and average those squares.)",
+        "ja": "同じ種類の部品を 2 つのロットに分けて混ぜます。甲 ロットは 20 個で平均の重さは 70 グラム、乙 ロットは 30 個で平均の重さは 80 グラムです。各ロットの中の個々の重さは同じとは限らず、これ以外の情報はありません。混ぜたあとの 50 個の重さの分散として、最小の値を求めなさい。（ここでの分散は通常の定義で、各データから全体の平均を引いて 2 乗し、その 2 乗値の平均をとったものです。）"
+      },
+      "answer": {
+        "zh-Hant": "最小可能的變異數是 24。",
+        "zh-Hans": "最小可能的方差是 24。",
+        "en": "The smallest possible variance is 24.",
+        "ja": "最小の分散は 24 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "先算混合後 50 個零件的平均重量：(20 × 70 + 30 × 80) ÷ 50 = (1400 + 2400) ÷ 50 = 76 公克。這個值只由兩批的個數與平均決定，跟批內怎麼分佈無關。",
+          "變異數等於「每個零件的重量與 76 的差的平方」的總和再除以 50。要讓變異數最小，就是要讓這個平方和最小。",
+          "把甲批的貢獻拆開：對甲批的每個重量 x，(x − 76)² = (x − 70)² + 2(x − 70)(70 − 76) + (70 − 76)²。因為甲批各數對自己的平均 70 的離差總和是 0，中間那一項加起來會整個消掉。",
+          "所以甲批的貢獻 = 甲批自己的離差平方和 + 20 × (70 − 76)² = 甲批離差平方和 + 720。同理乙批的貢獻 = 乙批離差平方和 + 30 × (80 − 76)² = 乙批離差平方和 + 480。",
+          "720 與 480 這兩項只由兩批的個數與平均決定，是躲不掉的固定成本；能被調整的只有兩批各自的離差平方和，而平方和永遠不會是負數。",
+          "因此最小值出現在兩批的離差平方和都等於 0 時，也就是甲批 20 個都恰好重 70 公克、乙批 30 個都恰好重 80 公克。此時總平方和 = 720 + 480 = 1200。",
+          "最小的變異數 = 1200 ÷ 50 = 24。這代表就算兩批內部完全整齊，兩批平均相差 10 公克這件事本身就會在合併後製造出 24 的變異數。"
+        ],
+        "zh-Hans": [
+          "先算混合后 50 个零件的平均重量：(20 × 70 + 30 × 80) ÷ 50 = (1400 + 2400) ÷ 50 = 76 克。这个值只由两批的个数与平均决定，跟批内怎么分布无关。",
+          "方差等于「每个零件的重量与 76 的差的平方」的总和再除以 50。要让方差最小，就是要让这个平方和最小。",
+          "把甲批的贡献拆开：对甲批的每个重量 x，(x − 76)² = (x − 70)² + 2(x − 70)(70 − 76) + (70 − 76)²。因为甲批各数对自己的平均 70 的离差总和是 0，中间那一项加起来会整个消掉。",
+          "所以甲批的贡献 = 甲批自己的离差平方和 + 20 × (70 − 76)² = 甲批离差平方和 + 720。同理乙批的贡献 = 乙批离差平方和 + 30 × (80 − 76)² = 乙批离差平方和 + 480。",
+          "720 与 480 这两项只由两批的个数与平均决定，是躲不掉的固定成本；能被调整的只有两批各自的离差平方和，而平方和永远不会是负数。",
+          "因此最小值出现在两批的离差平方和都等于 0 时，也就是甲批 20 个都恰好重 70 克、乙批 30 个都恰好重 80 克。此时总平方和 = 720 + 480 = 1200。",
+          "最小的方差 = 1200 ÷ 50 = 24。这代表就算两批内部完全整齐，两批平均相差 10 克这件事本身就会在合并后制造出 24 的方差。"
+        ],
+        "en": [
+          "First find the mean weight of all 50 parts: (20 × 70 + 30 × 80) ÷ 50 = (1400 + 2400) ÷ 50 = 76 grams. This value depends only on the batch sizes and batch means, not on how weights are spread inside a batch.",
+          "The variance is the sum of the squared differences from 76, divided by 50. Minimising the variance means minimising that sum of squares.",
+          "Split the contribution of batch X. For each weight x in batch X, (x − 76)² = (x − 70)² + 2(x − 70)(70 − 76) + (70 − 76)². Since the deviations of batch X from its own mean 70 sum to zero, the middle term vanishes when summed.",
+          "So batch X contributes its own sum of squared deviations plus 20 × (70 − 76)², that is its own sum plus 720. Likewise batch Y contributes its own sum plus 30 × (80 − 76)², that is its own sum plus 480.",
+          "The terms 720 and 480 depend only on the batch sizes and means, so they are a fixed cost that cannot be avoided. The only adjustable quantities are the two within-batch sums of squares, and a sum of squares is never negative.",
+          "The minimum therefore occurs when both within-batch sums are zero, that is when all 20 parts of batch X weigh exactly 70 grams and all 30 parts of batch Y weigh exactly 80 grams. Then the total sum of squares is 720 + 480 = 1200.",
+          "The smallest variance is 1200 ÷ 50 = 24. In other words, even with perfectly uniform batches, the 10 gram gap between the two batch means by itself creates a variance of 24 after mixing."
+        ],
+        "ja": [
+          "まず混ぜたあとの 50 個の平均の重さを求めます：(20 × 70 + 30 × 80) ÷ 50 = (1400 + 2400) ÷ 50 = 76 グラム。この値はロットの個数と平均だけで決まり、ロット内の散らばり方には関係しません。",
+          "分散は「各部品の重さと 76 との差の 2 乗」の総和を 50 で割った値です。分散を最小にするには、この平方和を最小にすればよいことになります。",
+          "甲 ロットの寄与を分解します。甲 の各値 x について (x − 76)² = (x − 70)² + 2(x − 70)(70 − 76) + (70 − 76)²。甲 の値の自分の平均 70 からの偏差の総和は 0 なので、真ん中の項は足すと消えます。",
+          "よって 甲 の寄与は 甲 自身の偏差平方和 + 20 × (70 − 76)²、つまり自身の平方和 + 720。同様に 乙 の寄与は自身の平方和 + 30 × (80 − 76)²、つまり自身の平方和 + 480 です。",
+          "720 と 480 はロットの個数と平均だけで決まる避けられない固定分で、調整できるのは各ロット内の偏差平方和だけですが、平方和は決して負になりません。",
+          "したがって最小値は両方の平方和が 0 のとき、つまり 甲 の 20 個がすべてちょうど 70 グラム、乙 の 30 個がすべてちょうど 80 グラムのときに現れます。このとき総平方和は 720 + 480 = 1200。",
+          "最小の分散は 1200 ÷ 50 = 24 です。つまりロット内が完全にそろっていても、2 つのロットの平均が 10 グラム違うというだけで、混ぜたあとに 24 の分散が生じます。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "24"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "algebra-grade12-variance-decomposition-bound",
+        "notes": "外部題源：Wikipedia「Law of total variance」的組內／組間分解，改成只給組數與組平均、求合併變異數下界。全庫變異數題掃過 22 題：algebra_grade12_058 是已知合併變異數逆推乙組變異數，logic_grade10_046 是兩組平均相同時的直接相加，logic_grade11_047 是加入一位等於平均的人。本題兩組平均不同、兩組變異數皆未知，求的是極小值，推理點在「組間項躲不掉、組內項可以歸零」，不是套公式解一個未知數。"
+      }
+    },
+    {
+      "id": "algebra_grade12_foundation_073",
+      "reviewStatus": "ok",
+      "topic": "algebra",
+      "subtopic": "credit_weight_reduction_threshold",
+      "tags": [
+        "c:mean",
+        "c:inequality",
+        "m:extremal"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "某校的學期總平均是各科分數以學分數為權重的加權平均。某位學生這學期四科的分數與學分數是：國文 88 分、3 學分；英文 76 分、3 學分；數學 64 分、4 學分；自然 82 分、2 學分。學校打算只調降數學這一科的學分數（四科的分數都不變，其他三科的學分數也不變），使這位學生的學期總平均高於 78 分。求數學的學分數至少要比原本少幾學分。",
+        "zh-Hans": "某校的学期总平均是各科分数以学分数为权重的加权平均。某位学生这学期四科的分数与学分数是：语文 88 分、3 学分；英文 76 分、3 学分；数学 64 分、4 学分；自然 82 分、2 学分。学校打算只调降数学这一科的学分数（四科的分数都不变，其他三科的学分数也不变），使这位学生的学期总平均高于 78 分。求数学的学分数至少要比原本少几学分。",
+        "en": "At a school the term average is the weighted average of subject scores, weighted by credit hours. One student's four subjects this term are: Chinese 88 points with 3 credits, English 76 points with 3 credits, Mathematics 64 points with 4 credits, and Science 82 points with 2 credits. The school plans to lower only the credit count of Mathematics, keeping every score and the other three credit counts unchanged, so that the student's term average rises above 78. By at least how many credits must the Mathematics credit count be reduced?",
+        "ja": "ある学校では、学期の総平均を各科目の点数を単位数で重みづけした加重平均で出します。ある生徒の今学期の 4 科目は、国語 88 点で 3 単位、英語 76 点で 3 単位、数学 64 点で 4 単位、理科 82 点で 2 単位です。学校は数学の単位数だけを下げ（すべての点数と他の 3 科目の単位数はそのまま）、この生徒の学期総平均を 78 点より高くしようとしています。数学の単位数は元より少なくとも何単位減らす必要がありますか。"
+      },
+      "answer": {
+        "zh-Hant": "數學的學分數至少要比原本少 2 學分。",
+        "zh-Hans": "数学的学分数至少要比原本少 2 学分。",
+        "en": "The Mathematics credit count must be reduced by at least 2 credits.",
+        "ja": "数学の単位数は少なくとも 2 単位減らす必要があります。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "先算原本的總平均：(88 × 3 + 76 × 3 + 64 × 4 + 82 × 2) ÷ (3 + 3 + 4 + 2) = (264 + 228 + 256 + 164) ÷ 12 = 912 ÷ 12 = 76 分，確實不到 78 分。",
+          "數學 64 分低於目標 78 分，是把加權平均往下拉的那一科；把它的權重調小，平均才會上升。反之若調小其他高分科目的權重，平均只會更低。",
+          "設調整後數學的學分數是 w 學分。其他三科的加權分數和固定是 88 × 3 + 76 × 3 + 82 × 2 = 264 + 228 + 164 = 656，學分和固定是 3 + 3 + 2 = 8。",
+          "條件是 (656 + 64w) ÷ (8 + w) > 78。因為 8 + w 一定是正數，可以直接乘過去不必變號：656 + 64w > 78(8 + w) = 624 + 78w。",
+          "整理得 32 > 14w，也就是 w < 16/7，約 2.29。學分數 w 是非負整數，所以 w ≤ 2。",
+          "原本數學是 4 學分，最多只能留 2 學分，也就是至少要少 2 學分。",
+          "驗算：w = 2 時總平均 = (656 + 128) ÷ 10 = 784 ÷ 10 = 78.4 > 78 ✓；w = 3 時 = (656 + 192) ÷ 11 = 848 ÷ 11 ≈ 77.1，仍然不到 78 ✗。所以答案是至少少 2 學分。"
+        ],
+        "zh-Hans": [
+          "先算原本的总平均：(88 × 3 + 76 × 3 + 64 × 4 + 82 × 2) ÷ (3 + 3 + 4 + 2) = (264 + 228 + 256 + 164) ÷ 12 = 912 ÷ 12 = 76 分，确实不到 78 分。",
+          "数学 64 分低于目标 78 分，是把加权平均往下拉的那一科；把它的权重调小，平均才会上升。反之若调小其他高分科目的权重，平均只会更低。",
+          "设调整后数学的学分数是 w 学分。其他三科的加权分数和固定是 88 × 3 + 76 × 3 + 82 × 2 = 264 + 228 + 164 = 656，学分和固定是 3 + 3 + 2 = 8。",
+          "条件是 (656 + 64w) ÷ (8 + w) > 78。因为 8 + w 一定是正数，可以直接乘过去不必变号：656 + 64w > 78(8 + w) = 624 + 78w。",
+          "整理得 32 > 14w，也就是 w < 16/7，约 2.29。学分数 w 是非负整数，所以 w ≤ 2。",
+          "原本数学是 4 学分，最多只能留 2 学分，也就是至少要少 2 学分。",
+          "验算：w = 2 时总平均 = (656 + 128) ÷ 10 = 784 ÷ 10 = 78.4 > 78 ✓；w = 3 时 = (656 + 192) ÷ 11 = 848 ÷ 11 ≈ 77.1，仍然不到 78 ✗。所以答案是至少少 2 学分。"
+        ],
+        "en": [
+          "First compute the current average: (88 × 3 + 76 × 3 + 64 × 4 + 82 × 2) ÷ (3 + 3 + 4 + 2) = (264 + 228 + 256 + 164) ÷ 12 = 912 ÷ 12 = 76, which is indeed below 78.",
+          "Mathematics at 64 is below the target 78, so it is the subject dragging the weighted average down; shrinking its weight is what raises the average. Shrinking the weight of a high-scoring subject would only lower it further.",
+          "Let w be the new Mathematics credit count. The other three subjects contribute a fixed weighted total of 88 × 3 + 76 × 3 + 82 × 2 = 264 + 228 + 164 = 656 over a fixed 3 + 3 + 2 = 8 credits.",
+          "The requirement is (656 + 64w) ÷ (8 + w) > 78. Since 8 + w is certainly positive, we may multiply through without flipping the inequality: 656 + 64w > 78(8 + w) = 624 + 78w.",
+          "This rearranges to 32 > 14w, that is w < 16/7, about 2.29. Since w is a non-negative whole number of credits, w ≤ 2.",
+          "Mathematics originally had 4 credits, so at most 2 may remain, meaning a reduction of at least 2 credits.",
+          "Check: with w = 2 the average is (656 + 128) ÷ 10 = 784 ÷ 10 = 78.4, above 78; with w = 3 it is (656 + 192) ÷ 11 = 848 ÷ 11, about 77.1, still below 78. So the reduction must be at least 2 credits."
+        ],
+        "ja": [
+          "まず現在の総平均を求めます：(88 × 3 + 76 × 3 + 64 × 4 + 82 × 2) ÷ (3 + 3 + 4 + 2) = (264 + 228 + 256 + 164) ÷ 12 = 912 ÷ 12 = 76 点で、たしかに 78 点に届いていません。",
+          "数学の 64 点は目標の 78 点より低く、加重平均を下へ引っ張っている科目です。その重みを小さくしてはじめて平均が上がります。逆に高得点の科目の重みを下げれば平均はさらに下がります。",
+          "調整後の数学の単位数を w とします。他の 3 科目の加重得点の合計は 88 × 3 + 76 × 3 + 82 × 2 = 264 + 228 + 164 = 656 で固定、単位数の合計も 3 + 3 + 2 = 8 で固定です。",
+          "条件は (656 + 64w) ÷ (8 + w) > 78 です。8 + w は必ず正なので、不等号の向きを変えずに払えます：656 + 64w > 78(8 + w) = 624 + 78w。",
+          "整理すると 32 > 14w、すなわち w < 16/7 で約 2.29。単位数 w は 0 以上の整数なので w ≤ 2 です。",
+          "数学はもともと 4 単位なので、残せるのは多くても 2 単位、つまり少なくとも 2 単位減らす必要があります。",
+          "検算：w = 2 のとき総平均は (656 + 128) ÷ 10 = 784 ÷ 10 = 78.4 で 78 より上、w = 3 のときは (656 + 192) ÷ 11 = 848 ÷ 11 で約 77.1 とまだ 78 に届きません。よって少なくとも 2 単位減らす必要があります。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "2"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "algebra-grade12-weight-sensitivity",
+        "notes": "題型參考各國大學 GPA／學分加權制的課本例題（Wikipedia「Weighted arithmetic mean」條目所述的成績加權），把未知量從「分數」改成「權重」。全庫掃「加權／學分／比重」共 17 題：algebra_grade8_029 是權重固定（平時 40%、期末 60%）求期末最低分數，方向恰好相反。本題未知的是權重本身，且需要先判斷「該調降哪一科的權重」才會讓平均上升，再解一個未知數同時出現在分子與分母的不等式。"
+      }
+    },
+    {
+      "id": "algebra_grade12_foundation_074",
+      "reviewStatus": "ok",
+      "topic": "algebra",
+      "subtopic": "parabola_chord_through_fixed_point_slope_product",
+      "tags": [
+        "c:line_slope",
+        "c:quadratic",
+        "m:invariant"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "在座標平面上，拋物線 y = x² 上有相異兩點 A 與 B，且直線 AB 通過點 (0, 3)。設 O 是原點，直線 OA 的斜率是 k₁、直線 OB 的斜率是 k₂。求 k₁ × k₂ 的值。",
+        "zh-Hans": "在坐标平面上，抛物线 y = x² 上有相异两点 A 与 B，且直线 AB 通过点 (0, 3)。设 O 是原点，直线 OA 的斜率是 k₁、直线 OB 的斜率是 k₂。求 k₁ × k₂ 的值。",
+        "en": "In the coordinate plane, A and B are two distinct points on the parabola y = x², and the line AB passes through the point (0, 3). Let O be the origin, let k₁ be the slope of line OA and let k₂ be the slope of line OB. Find the value of k₁ × k₂.",
+        "ja": "座標平面上で、放物線 y = x² 上に異なる 2 点 A、B があり、直線 AB は点 (0, 3) を通る。O を原点とし、直線 OA の傾きを k₁、直線 OB の傾きを k₂ とする。k₁ × k₂ の値を求めよ。"
+      },
+      "answer": {
+        "zh-Hant": "k₁ × k₂ 的值是 −3。",
+        "zh-Hans": "k₁ × k₂ 的值是 −3。",
+        "en": "The value of k₁ × k₂ is −3.",
+        "ja": "k₁ × k₂ の値は −3 である。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "先確認直線 AB 不可能是鉛直線：鉛直線 x = c 與拋物線 y = x² 只有一個交點，不可能同時通過相異的 A 與 B。所以可以設 AB 的方程式是 y = mx + 3（它通過 (0, 3)）。",
+          "把 y = mx + 3 代入 y = x²，得 x² = mx + 3，整理成 x² − mx − 3 = 0。設 A、B 的橫座標分別是 a 與 b，它們就是這個二次方程式的兩根。",
+          "判別式是 m² + 4 × 3 = m² + 12，恆為正，所以不論 m 取什麼值，直線都真的與拋物線交於相異兩點，題目的情境永遠成立。",
+          "由根與係數的關係，兩根之積 ab = 常數項 ÷ 領導係數 = (−3) ÷ 1 = −3。",
+          "A 在拋物線上，座標是 (a, a²)，所以 OA 的斜率 k₁ = a² ÷ a = a；同理 k₂ = b。（因為 ab = −3 ≠ 0，a 與 b 都不是 0，兩個斜率都有定義。）",
+          "所以 k₁ × k₂ = a × b = −3。這個乘積完全不含 m，也就是不論這條弦怎麼繞著 (0, 3) 轉，兩條連線的斜率乘積都固定是 −3。"
+        ],
+        "zh-Hans": [
+          "先确认直线 AB 不可能是竖直线：竖直线 x = c 与抛物线 y = x² 只有一个交点，不可能同时通过相异的 A 与 B。所以可以设 AB 的方程是 y = mx + 3（它通过 (0, 3)）。",
+          "把 y = mx + 3 代入 y = x²，得 x² = mx + 3，整理成 x² − mx − 3 = 0。设 A、B 的横坐标分别是 a 与 b，它们就是这个二次方程的两根。",
+          "判别式是 m² + 4 × 3 = m² + 12，恒为正，所以不论 m 取什么值，直线都真的与抛物线交于相异两点，题目的情境永远成立。",
+          "由根与系数的关系，两根之积 ab = 常数项 ÷ 首项系数 = (−3) ÷ 1 = −3。",
+          "A 在抛物线上，坐标是 (a, a²)，所以 OA 的斜率 k₁ = a² ÷ a = a；同理 k₂ = b。（因为 ab = −3 ≠ 0，a 与 b 都不是 0，两个斜率都有定义。）",
+          "所以 k₁ × k₂ = a × b = −3。这个乘积完全不含 m，也就是不论这条弦怎么绕着 (0, 3) 转，两条连线的斜率乘积都固定是 −3。"
+        ],
+        "en": [
+          "First check that line AB cannot be vertical: a vertical line x = c meets y = x² only once, so it cannot pass through two distinct points A and B. Hence we may write AB as y = mx + 3, which does pass through (0, 3).",
+          "Substituting y = mx + 3 into y = x² gives x² = mx + 3, that is x² − mx − 3 = 0. If a and b are the x-coordinates of A and B, they are the two roots of this quadratic.",
+          "The discriminant is m² + 4 × 3 = m² + 12, which is always positive, so for every m the line really does meet the parabola at two distinct points and the situation described always exists.",
+          "By the relation between roots and coefficients, the product of the roots is ab = constant term ÷ leading coefficient = (−3) ÷ 1 = −3.",
+          "Since A lies on the parabola its coordinates are (a, a²), so the slope of OA is k₁ = a² ÷ a = a, and likewise k₂ = b. Because ab = −3 is not zero, neither a nor b is zero, so both slopes are defined.",
+          "Therefore k₁ × k₂ = a × b = −3. The product contains no m at all: however the chord is turned about (0, 3), the product of the two slopes stays fixed at −3."
+        ],
+        "ja": [
+          "まず直線 AB が鉛直でないことを確かめる。鉛直な直線 x = c は放物線 y = x² と 1 点でしか交わらないので、異なる 2 点 A、B を同時に通ることはできない。よって AB を y = mx + 3 とおける（これは (0, 3) を通る）。",
+          "y = mx + 3 を y = x² に代入すると x² = mx + 3、整理して x² − mx − 3 = 0 となる。A、B の x 座標を a、b とすると、これらがこの 2 次方程式の 2 根である。",
+          "判別式は m² + 4 × 3 = m² + 12 で常に正だから、m がどんな値でも直線は放物線と異なる 2 点で交わり、問題の状況は必ず成立する。",
+          "解と係数の関係より、2 根の積は ab = 定数項 ÷ 最高次の係数 = (−3) ÷ 1 = −3 である。",
+          "A は放物線上にあるので座標は (a, a²)、よって OA の傾きは k₁ = a² ÷ a = a、同様に k₂ = b。ab = −3 ≠ 0 なので a も b も 0 ではなく、どちらの傾きも定義される。",
+          "したがって k₁ × k₂ = a × b = −3。この積には m が全く含まれず、弦を (0, 3) のまわりにどう回しても 2 つの傾きの積は −3 のまま一定である。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "-3"
+      },
+      "inputConstraints": {
+        "allowNegative": true,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring",
+        "reference": "algebra-grade12-foundation",
+        "notes": "全庫「拋物線」10 題與「斜率」24 題都掃過。最接近的是 algebra_grade12_foundation_061（y = x² 與過原點的直線圍成面積求參數 t，用積分）與 algebra_grade12_foundation_051（原點對 y = x² + 4 的兩條切線），兩題都不涉及根與係數，也不是不變量題。本題的核心是「弦繞定點旋轉時，兩條連線的斜率乘積是不變量」，由 Vieta 得出。題型取自解析幾何教材「圓錐曲線的定點弦」單元的常見結論。"
+      }
     }
   ]
 }

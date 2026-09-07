@@ -5078,6 +5078,275 @@
         "reference": "combinatorics-grade11-sign-matrix-count",
         "notes": "題型是 AoPS 與各國競賽入門題常見的「±1 方陣，指定每排每行乘積」計數題，Brilliant 的組合章節也有同型例題；本題改成 4 × 4 並把情境換成看板燈號。全庫掃 每一列/每一行/乘積 各題：logic_grade11_039 是 3×3 全 0、每次對整列或整行加 1、問總和的倍數性質（加法操作），logic_grade6_017 是 5×5 硬幣翻整行整列的可行性，combinatorics_grade11_005 是 2×3 紅藍塗色且每列每行至少一紅的計數題。本題的不變量是「全體 16 個值的乘積」，用來檢驗最後一格的兩個條件是否相容，推理核心與上述各題都不同；初版題面用「方格表 / 每一列 / 每一行 / 共有多少種」的樣板，與 combinatorics_grade11_005 字面 0.38，已改寫敘述外殼。"
       }
+    },
+    {
+      "id": "combinatorics_grade11_foundation_056",
+      "reviewStatus": "ok",
+      "topic": "combinatorics",
+      "subtopic": "partial_alternating_binomial_sum",
+      "tags": [
+        "c:binomial",
+        "m:bijection"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade11",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "巴斯卡三角形第 20 列由左到右一共有 21 個數，最左邊那個算第 0 個，第 k 個就是組合數 C(20, k)。現在只取這一列的前 11 個數（第 0 個到第 10 個），把它們一正一負交替合起來：第 0 個減第 1 個，加第 2 個，減第 3 個，⋯⋯，最後加上第 10 個。求這樣算出來的值。（這 11 個數當中最大的一個已經超過十八萬，硬算再加減並不實際。）",
+        "zh-Hans": "帕斯卡三角形第 20 行由左到右一共有 21 个数，最左边那个算第 0 个，第 k 个就是组合数 C(20, k)。现在只取这一行的前 11 个数（第 0 个到第 10 个），把它们一正一负交替合起来：第 0 个减第 1 个，加第 2 个，减第 3 个，⋯⋯，最后加上第 10 个。求这样算出来的值。（这 11 个数当中最大的一个已经超过十八万，硬算再加减并不实际。）",
+        "en": "Row 20 of Pascal's triangle has 21 numbers from left to right; call the leftmost one entry 0, so entry k is the binomial coefficient C(20, k). Take only the first 11 entries of that row, entry 0 through entry 10, and combine them with alternating signs: entry 0 minus entry 1, plus entry 2, minus entry 3, and so on, finishing by adding entry 10. Find the resulting value. Note that the largest of these 11 numbers already exceeds one hundred and eighty thousand, so working them out and combining them by hand is not practical.",
+        "ja": "パスカルの三角形の第 20 行には左から右へ 21 個の数が並び、いちばん左を第 0 番目と数えると、第 k 番目はちょうど二項係数 C(20, k) です。この行の最初の 11 個（第 0 番目から第 10 番目まで）だけを取り出し、符号を交互に変えて足し合わせます。すなわち第 0 番目から第 1 番目を引き、第 2 番目を足し、第 3 番目を引き、⋯⋯、最後に第 10 番目を足します。こうして得られる値を求めなさい。（この 11 個のうち最大のものはすでに 18 万を超えており、実際に計算して足し引きするのは現実的ではありません。）"
+      },
+      "answer": {
+        "zh-Hant": "這樣算出來的值是 92378。",
+        "zh-Hans": "这样算出来的值是 92378。",
+        "en": "The resulting value is 92378.",
+        "ja": "得られる値は 92378 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "這 11 個數當中最大的是 C(20, 10) = 184756，逐項算出來再一加一減並不實際，必須先看出結構。",
+          "先排除一個很容易誤用的做法：把 x = −1 代進 (1 + x)²⁰，算出來的是**整列 21 個數**的交錯和 (1 − 1)²⁰ = 0。那是整列的結果，對「只取前 11 個」的部分和沒有直接幫助——這正是本題不能照抄係數和套路的地方。",
+          "主線用巴斯卡三角形的基本規律：每一個數等於它正上方相鄰兩數之和，也就是 C(20, k) = C(19, k) + C(19, k − 1)，其中 C(19, −1) 視為 0。把前 11 項全部拆成第 19 列的數。",
+          "拆開後依序是 +C(19,0)、−[C(19,1) + C(19,0)]、+[C(19,2) + C(19,1)]、−[C(19,3) + C(19,2)]、⋯、+[C(19,10) + C(19,9)]。",
+          "觀察抵銷：對每一個 j = 0、1、2、⋯、9，C(19, j) 都恰好出現兩次，一次帶正號、一次帶負號，全部兩兩相消；只有最後一項多出來的 C(19, 10) 沒有伴，被留了下來。",
+          "所以整個式子就等於 C(19, 10)。計算 C(19, 10) = C(19, 9) = 92378，這就是答案。",
+          "另一條路可以互相印證，用的是對稱性 C(20, k) = C(20, 20 − k)。設所求為 S，整列的交錯和是 0，把它拆成前 11 項的 S 與後 10 項；後 10 項用 k = 20 − j 換元後（20 是偶數，正負號不變）會變成 S − C(20, 10)。於是 0 = S + S − C(20, 10)，得 S = 184756 ÷ 2 = 92378 ✓，與第一條路一致。",
+          "驗算：用程式把 C(20,0) 到 C(20,10) 這 11 個數（1、20、190、1140、4845、15504、38760、77520、125970、167960、184756）依序一加一減，結果正是 92378 ✓。"
+        ],
+        "zh-Hans": [
+          "这 11 个数当中最大的是 C(20, 10) = 184756，逐项算出来再一加一减并不实际，必须先看出结构。",
+          "先排除一个很容易误用的做法：把 x = −1 代进 (1 + x)²⁰，算出来的是**整行 21 个数**的交错和 (1 − 1)²⁰ = 0。那是整行的结果，对“只取前 11 个”的部分和没有直接帮助——这正是本题不能照抄系数和套路的地方。",
+          "主线用帕斯卡三角形的基本规律：每一个数等于它正上方相邻两数之和，也就是 C(20, k) = C(19, k) + C(19, k − 1)，其中 C(19, −1) 视为 0。把前 11 项全部拆成第 19 行的数。",
+          "拆开后依序是 +C(19,0)、−[C(19,1) + C(19,0)]、+[C(19,2) + C(19,1)]、−[C(19,3) + C(19,2)]、⋯、+[C(19,10) + C(19,9)]。",
+          "观察抵销：对每一个 j = 0、1、2、⋯、9，C(19, j) 都恰好出现两次，一次带正号、一次带负号，全部两两相消；只有最后一项多出来的 C(19, 10) 没有伴，被留了下来。",
+          "所以整个式子就等于 C(19, 10)。计算 C(19, 10) = C(19, 9) = 92378，这就是答案。",
+          "另一条路可以互相印证，用的是对称性 C(20, k) = C(20, 20 − k)。设所求为 S，整行的交错和是 0，把它拆成前 11 项的 S 与后 10 项；后 10 项用 k = 20 − j 换元后（20 是偶数，正负号不变）会变成 S − C(20, 10)。于是 0 = S + S − C(20, 10)，得 S = 184756 ÷ 2 = 92378 ✓，与第一条路一致。",
+          "验算：用程序把 C(20,0) 到 C(20,10) 这 11 个数（1、20、190、1140、4845、15504、38760、77520、125970、167960、184756）依序一加一减，结果正是 92378 ✓。"
+        ],
+        "en": [
+          "The largest of these 11 numbers is C(20, 10) = 184756, so computing them term by term and combining them is impractical; the structure has to be spotted first.",
+          "Rule out one tempting move straight away. Substituting x = -1 into (1 + x)²⁰ gives the alternating sum of the whole row of 21 entries, namely (1 - 1)²⁰ = 0. That is a statement about the entire row and says nothing directly about a partial sum stopping at entry 10, which is exactly why the usual coefficient-sum trick fails here.",
+          "The main route uses the defining rule of Pascal's triangle, that every entry is the sum of the two entries above it: C(20, k) = C(19, k) + C(19, k - 1), where C(19, -1) is read as 0. Split all 11 terms into entries of row 19.",
+          "After splitting, the expression reads +C(19,0), then -[C(19,1) + C(19,0)], then +[C(19,2) + C(19,1)], then -[C(19,3) + C(19,2)], and so on up to +[C(19,10) + C(19,9)].",
+          "Now watch the cancellation: for every j = 0, 1, 2, ..., 9 the value C(19, j) appears exactly twice, once with a plus sign and once with a minus sign, so all of them cancel in pairs. Only the extra C(19, 10) from the final bracket has no partner and survives.",
+          "The whole expression therefore equals C(19, 10). Evaluating, C(19, 10) = C(19, 9) = 92378, which is the answer.",
+          "A second route confirms it, using the symmetry C(20, k) = C(20, 20 - k). Let S be the required value. The alternating sum of the whole row is 0, and splitting it gives S from the first 11 terms plus the last 10 terms; substituting k = 20 - j in those last 10 terms, and noting that 20 is even so the signs are unchanged, turns them into S - C(20, 10). Hence 0 = S + S - C(20, 10), so S = 184756 divided by 2, which is 92378, agreeing with the first route.",
+          "Check: combining the 11 numbers C(20,0) through C(20,10), namely 1, 20, 190, 1140, 4845, 15504, 38760, 77520, 125970, 167960, 184756, with alternating signs by computer gives exactly 92378."
+        ],
+        "ja": [
+          "この 11 個のうち最大のものは C(20, 10) = 184756 で、1 項ずつ計算して足し引きするのは現実的ではありません。まず構造を見抜く必要があります。",
+          "まず、つい使いたくなる手を排除します。(1 + x)²⁰ に x = −1 を代入すると得られるのは**行全体 21 個**の交代和 (1 − 1)²⁰ = 0 です。これは行全体についての結果であり、第 10 番目で止める部分和については何も直接には教えてくれません。ここが係数和の定石をそのまま使えない理由です。",
+          "本筋ではパスカルの三角形の基本規則、すなわち各数はその真上に隣り合う 2 数の和である、を使います。式で書くと C(20, k) = C(19, k) + C(19, k − 1) で、C(19, −1) は 0 と読みます。11 項すべてを第 19 行の数に分解します。",
+          "分解すると順に +C(19,0)、−[C(19,1) + C(19,0)]、+[C(19,2) + C(19,1)]、−[C(19,3) + C(19,2)]、⋯、+[C(19,10) + C(19,9)] となります。",
+          "打ち消しに注目します。j = 0、1、2、⋯、9 のそれぞれについて C(19, j) はちょうど 2 回、プラスとマイナスで 1 回ずつ現れるので、すべて対になって消えます。最後の括弧から余分に出た C(19, 10) だけが相手を持たず残ります。",
+          "したがって式全体は C(19, 10) に等しくなります。計算すると C(19, 10) = C(19, 9) = 92378 で、これが答えです。",
+          "対称性 C(20, k) = C(20, 20 − k) を使う別の経路でも確認できます。求める値を S とすると、行全体の交代和は 0 で、これを前半 11 項の S と後半 10 項に分けます。後半は k = 20 − j と置き換えると（20 は偶数なので符号は変わらず）S − C(20, 10) になります。よって 0 = S + S − C(20, 10) となり、S = 184756 ÷ 2 = 92378 ✓ で、最初の経路と一致します。",
+          "検算：C(20,0) から C(20,10) までの 11 個の数（1、20、190、1140、4845、15504、38760、77520、125970、167960、184756）を符号を交互に変えて足し引きすると、ちょうど 92378 ✓ になります。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "92378"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 5
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "combinatorics-grade11-partial-alternating-row-sum",
+        "notes": "題型來源：本輪以 WebFetch 實際抓取英文維基百科 Binomial coefficient 條目，該條目逐字列出部分交錯和恆等式「∑ⱼ₌₀ᵏ (-1)ʲ (n choose j) = (-1)ᵏ (n-1 choose k)」（適用於 k = 0, …, n − 1），以及 Pascal's rule 與 symmetry rule。本題取 n = 20、k = 10 的具體情形，改寫成巴斯卡三角形第 20 列前 11 個數的交錯和，答案 C(19,10) = 92378。無法硬算：11 項中最大的 C(20,10) = 184756，逐項求值再加減不是實際做法，而且代 x = −1 只能得到整列交錯和 0，對部分和無效，學生被迫使用 C(20,k) = C(19,k) + C(19,k−1) 的裂項相消，或用對稱性導出 2S = C(20,10)。去重：c:binomial 全部 23 題逐題讀過並讀了詳解——combinatorics_grade9_foundation_012 與 algebra_grade12_foundation_030 的答案都是「整列的一半 2ⁿ⁻¹ = 512」，前者用翻轉第 1 號元素的一一對應、後者用代 x = 1 與 x = −1 相加，兩題都是把整列切成奇偶兩半，本題切的是位置上的前半段且答案不是 2 的次方；combinatorics_grade11_foundation_048（曲棍球棒恆等式）在題目裡就把恆等式給出來讓學生代入，本題要學生自己找出裂項；algebra_grade9_foundation_053 雖然也講「每個數等於正上方兩數之和」，但只是把第 8 列兩個數相加得到第 9 列的一個數。也對照 algebra_grade12_foundation_021（(1+x+x²)⁵ 全部係數和 = 243）與 algebra_grade11_foundation_045（連續三項係數比求 n），走的都是代值或係數比路線，與裂項相消無關。"
+      }
+    },
+    {
+      "id": "combinatorics_grade11_foundation_057",
+      "reviewStatus": "ok",
+      "topic": "combinatorics",
+      "subtopic": "round_robin_without_undefeated_team",
+      "tags": [
+        "c:permutation_combination",
+        "c:inclusion_exclusion",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade11",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "五支球隊參加一項聯賽，賽制是每一隊都要和其餘四隊各交手一次，因此全季一共會打 10 場，而且每場一定分出勝負。把這 10 場的勝隊全部記下來，就構成一種「賽果」；只要有任何一場的勝隊不一樣，就算成不同的賽果。求不含全勝隊伍（也就是沒有任何一隊贏滿自己的 4 場）的賽果一共有多少種。",
+        "zh-Hans": "五支球队参加一项联赛，赛制是每一队都要和其余四队各交手一次，因此全季一共会打 10 场，而且每场一定分出胜负。把这 10 场的胜队全部记下来，就构成一种“赛果”；只要有任何一场的胜队不一样，就算成不同的赛果。求不含全胜队伍（也就是没有任何一队赢满自己的 4 场）的赛果一共有多少种。",
+        "en": "Five teams take part in a league in which every team meets each of the other four exactly once, so 10 matches are played over the season and each match produces a winner. Recording the winners of all 10 matches gives one outcome, and two outcomes count as different whenever any single match is won by a different team. How many outcomes contain no undefeated team, that is, no team that wins all 4 of its own matches?",
+        "ja": "5 チームがリーグ戦に参加し、どのチームも他の 4 チームと 1 回ずつ対戦するので、シーズン全体で 10 試合が行われ、各試合には必ず勝者がいます。10 試合すべての勝者を記録したものを 1 つの「結果」と呼び、どこか 1 試合でも勝者が違えば別の結果とみなします。全勝チーム（自分の 4 試合すべてに勝つチーム）が 1 つも含まれない結果は何通りありますか。"
+      },
+      "answer": {
+        "zh-Hant": "這樣的賽果共有 704 種。",
+        "zh-Hans": "这样的赛果共有 704 种。",
+        "en": "There are 704 such outcomes.",
+        "ja": "そのような結果は 704 通りです。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "先算全部賽果數。10 場比賽各有 2 種可能的勝隊，而且彼此獨立，所以總共 2¹⁰ = 1024 種賽果。",
+          "直接數「沒有全勝隊」要分很多類，很麻煩；改成先數「有球隊全勝」的賽果，再從總數扣掉。",
+          "關鍵觀察：不可能有兩支球隊同時全勝，因為這兩隊之間也要比一場，那一場必定有一隊落敗。所以「某隊全勝」的各種情形彼此互斥，可以直接相加，不需要動用排容原理去扣重複。",
+          "指定某一隊全勝之後，它的 4 場比賽結果全部被鎖死（都由它贏），剩下 10 − 4 = 6 場比賽仍然自由，共 2⁶ = 64 種。",
+          "全勝的那一隊有 5 種選擇，所以「有球隊全勝」的賽果共有 5 × 64 = 320 種。",
+          "因此沒有任何一隊全勝的賽果有 1024 − 320 = 704 種。驗算：用程式列舉全部 1024 種賽果並統計每隊的勝場數，勝場數中不出現 4 的賽果恰好有 704 種 ✓。"
+        ],
+        "zh-Hans": [
+          "先算全部赛果数。10 场比赛各有 2 种可能的胜队，而且彼此独立，所以总共 2¹⁰ = 1024 种赛果。",
+          "直接数“没有全胜队”要分很多类，很麻烦；改成先数“有球队全胜”的赛果，再从总数扣掉。",
+          "关键观察：不可能有两支球队同时全胜，因为这两队之间也要比一场，那一场必定有一队落败。所以“某队全胜”的各种情形彼此互斥，可以直接相加，不需要动用排容原理去扣重复。",
+          "指定某一队全胜之后，它的 4 场比赛结果全部被锁死（都由它赢），剩下 10 − 4 = 6 场比赛仍然自由，共 2⁶ = 64 种。",
+          "全胜的那一队有 5 种选择，所以“有球队全胜”的赛果共有 5 × 64 = 320 种。",
+          "因此没有任何一队全胜的赛果有 1024 − 320 = 704 种。验算：用程序列举全部 1024 种赛果并统计每队的胜场数，胜场数中不出现 4 的赛果恰好有 704 种 ✓。"
+        ],
+        "en": [
+          "First count all outcomes. Each of the 10 matches has 2 possible winners and the matches are independent, so there are 2¹⁰ = 1024 outcomes altogether.",
+          "Counting the outcomes with no undefeated team directly would need many cases, so instead count the outcomes that do have an undefeated team and subtract from the total.",
+          "The key observation is that two teams can never both be undefeated, because those two teams also play each other and one of them must lose. Hence the situations 'team X is undefeated' are mutually exclusive and can simply be added, with no need for inclusion-exclusion.",
+          "Once a particular team is declared undefeated, its 4 matches are all fixed as wins for it, and the remaining 10 - 4 = 6 matches are still free, giving 2⁶ = 64 outcomes.",
+          "There are 5 choices for the undefeated team, so the outcomes with an undefeated team number 5 × 64 = 320.",
+          "Therefore the outcomes with no undefeated team number 1024 - 320 = 704. Check: enumerating all 1024 outcomes by computer and tallying each team's wins, exactly 704 of them contain no win total equal to 4."
+        ],
+        "ja": [
+          "まず結果の総数を数えます。10 試合それぞれに勝者は 2 通りあり互いに独立なので、全部で 2¹⁰ = 1024 通りです。",
+          "「全勝チームがいない」を直接数えると場合分けが多くなるので、逆に「全勝チームがいる」結果を数えて総数から引きます。",
+          "重要な点は、2 チームが同時に全勝することはあり得ないということです。その 2 チームどうしも対戦し、必ず一方が負けるからです。よって「あるチームが全勝」という事象は互いに排反で、単純に足せばよく、包除原理で重複を引く必要はありません。",
+          "あるチームを全勝と決めると、そのチームの 4 試合はすべて勝ちに固定され、残る 10 − 4 = 6 試合は自由なので 2⁶ = 64 通りです。",
+          "全勝チームの選び方は 5 通りなので、「全勝チームがいる」結果は 5 × 64 = 320 通りです。",
+          "したがって全勝チームがいない結果は 1024 − 320 = 704 通りです。検算：1024 通りの結果をすべて列挙して各チームの勝ち数を数えると、勝ち数に 4 が現れない結果はちょうど 704 通り ✓。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "704"
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "combinatorics-grade11-tournament-no-undefeated",
+        "notes": "題型來源：單循環賽（tournament）賽果計數的標準題型，推理點是「兩隊不可能同時全勝 ⟹ 互斥 ⟹ 不必排容」；本輪沒有抓到可直接引用的外部頁面，照實記錄為自行設計。去重：用 regex 掃「循環賽｜每兩隊都要比｜全勝｜不敗」，既有題只有 combinatorics_grade7_foundation_018（12 隊分 3 組算場次）、logic_grade8_foundation_025（6 隊最少幾輪）、logic_grade10_foundation_015（5 隊已知四隊勝場數求第五隊）與 combinatorics_grade9_foundation_031（雙敗淘汰場次），全都在算場次或勝場數，沒有一題在數「賽果的種數」。也對照 combinatorics_grade7_foundation_015（五戰三勝的勝負過程 20 種）：那是兩隊之間的序列計數，不是五隊之間 2¹⁰ 個結果的補集計數。"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      }
+    },
+    {
+      "id": "combinatorics_grade11_foundation_058",
+      "reviewStatus": "ok",
+      "topic": "combinatorics",
+      "subtopic": "broken_stick_triangle_probability",
+      "tags": [
+        "c:probability",
+        "c:area",
+        "m:bijection"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade11",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一根長 1 公尺的直木棒，在上面獨立且均勻隨機地取兩個點，再沿著這兩個點把木棒切成三段。這三段木棒能圍成一個三角形的機率是多少？",
+        "zh-Hans": "一根长 1 米的直木棒，在上面独立且均匀随机地取两个点，再沿着这两个点把木棒切成三段。这三段木棒能围成一个三角形的概率是多少？",
+        "en": "Two points are chosen independently and uniformly at random on a straight stick of length 1 metre, and the stick is cut at those two points into three pieces. What is the probability that the three pieces can form a triangle?",
+        "ja": "長さ 1 メートルのまっすぐな棒の上に、独立かつ一様にランダムな 2 点をとり、その 2 点で棒を 3 つに切ります。この 3 本で三角形をつくれる確率はいくつですか。"
+      },
+      "answer": {
+        "zh-Hant": "三段能圍成三角形的機率是 1/4，答案是 C。",
+        "zh-Hans": "三段能围成三角形的概率是 1/4，答案是 C。",
+        "en": "The probability that the three pieces form a triangle is 1/4, so the answer is C.",
+        "ja": "3 本で三角形をつくれる確率は 1/4 なので、答えは C です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "設兩個切點與木棒左端的距離分別是 x 與 y，兩者各自在 0 與 1 之間均勻隨機且互相獨立。所有可能的 (x, y) 均勻分布在一個邊長 1 的正方形內，正方形面積是 1，機率就等於合格區域的面積。",
+          "三段能圍成三角形的條件，可以化簡成「每一段都短於 1/2」：三段長度和是 1，若某一段大於或等於 1/2，它就不小於另外兩段之和，三角不等式失效；反之三段都短於 1/2 時三個不等式全部成立。",
+          "先看 x < y 的那半邊（正方形的一半）。三段長度依序是 x、y − x、1 − y，於是三個條件變成 x < 1/2、y − x < 1/2、y > 1/2。",
+          "在 x < y 的那半個區域裡，同時滿足這三個條件的部分，是以 (0, 1/2)、(1/2, 1/2)、(1/2, 1) 為頂點的直角三角形，面積是 (1/2) × (1/2) ÷ 2 = 1/8。",
+          "x > y 的情形完全對稱，合格區域的面積也是 1/8。兩塊合起來是 1/8 + 1/8 = 1/4，正方形總面積是 1，所以機率是 1/4，選 C。",
+          "驗算：用程式隨機模擬 200 萬次切棒，成功圍成三角形的比例約 0.2498，與 1/4 相符 ✓。很多人第一直覺會猜 1/2，但「三段都必須短於一半」是相當強的限制，實際只有四分之一。"
+        ],
+        "zh-Hans": [
+          "设两个切点与木棒左端的距离分别是 x 与 y，两者各自在 0 与 1 之间均匀随机且互相独立。所有可能的 (x, y) 均匀分布在一个边长 1 的正方形内，正方形面积是 1，概率就等于合格区域的面积。",
+          "三段能围成三角形的条件，可以化简成“每一段都短于 1/2”：三段长度和是 1，若某一段大于或等于 1/2，它就不小于另外两段之和，三角不等式失效；反之三段都短于 1/2 时三个不等式全部成立。",
+          "先看 x < y 的那半边（正方形的一半）。三段长度依序是 x、y − x、1 − y，于是三个条件变成 x < 1/2、y − x < 1/2、y > 1/2。",
+          "在 x < y 的那半个区域里，同时满足这三个条件的部分，是以 (0, 1/2)、(1/2, 1/2)、(1/2, 1) 为顶点的直角三角形，面积是 (1/2) × (1/2) ÷ 2 = 1/8。",
+          "x > y 的情形完全对称，合格区域的面积也是 1/8。两块合起来是 1/8 + 1/8 = 1/4，正方形总面积是 1，所以概率是 1/4，选 C。",
+          "验算：用程序随机模拟 200 万次切棒，成功围成三角形的比例约 0.2498，与 1/4 相符 ✓。很多人第一直觉会猜 1/2，但“三段都必须短于一半”是相当强的限制，实际只有四分之一。"
+        ],
+        "en": [
+          "Let x and y be the distances from the left end of the stick to the two cut points. Each is uniform on 0 to 1 and they are independent, so the pair (x, y) is uniform on a unit square of area 1, and the probability equals the area of the favourable region.",
+          "The condition for three pieces to form a triangle reduces to every piece being shorter than 1/2. The three lengths sum to 1, so if one piece is at least 1/2 it is at least as long as the other two combined and the triangle inequality fails; conversely, if all three are shorter than 1/2 all three inequalities hold.",
+          "Consider first the half of the square with x < y. The three lengths are then x, y - x and 1 - y, so the three conditions become x < 1/2, y - x < 1/2 and y > 1/2.",
+          "Within that half, the part satisfying all three conditions is the right triangle with vertices (0, 1/2), (1/2, 1/2) and (1/2, 1), whose area is (1/2) × (1/2) divided by 2, that is 1/8.",
+          "The case x > y is completely symmetric and also contributes area 1/8. Together the favourable area is 1/8 + 1/8 = 1/4 out of a total area of 1, so the probability is 1/4 and the answer is C.",
+          "Check: simulating 2 million random cuts by computer gives a success rate of about 0.2498, matching 1/4. Many people first guess 1/2, but requiring all three pieces to be shorter than half is a strong restriction and only a quarter of the cuts qualify."
+        ],
+        "ja": [
+          "2 つの切断点の左端からの距離を x、y とします。どちらも 0 から 1 の一様分布で互いに独立なので、(x, y) は面積 1 の単位正方形上に一様分布し、確率は条件を満たす領域の面積に等しくなります。",
+          "3 本で三角形ができる条件は「どの断片も 1/2 より短い」ことに帰着します。3 本の長さの和は 1 なので、ある断片が 1/2 以上なら残り 2 本の和以上となり三角不等式が破れます。逆に 3 本すべてが 1/2 より短ければ 3 つの不等式はすべて成り立ちます。",
+          "まず x < y の側（正方形の半分）を考えます。3 本の長さは順に x、y − x、1 − y なので、条件は x < 1/2、y − x < 1/2、y > 1/2 になります。",
+          "この半分の領域で 3 条件をすべて満たす部分は、(0, 1/2)、(1/2, 1/2)、(1/2, 1) を頂点とする直角三角形で、面積は (1/2) × (1/2) ÷ 2 = 1/8 です。",
+          "x > y の場合も完全に対称で面積は同じく 1/8。合わせて 1/8 + 1/8 = 1/4、正方形の面積は 1 なので確率は 1/4、答えは C です。",
+          "検算：プログラムで 200 万回ランダムに切る試行を行うと成功割合は約 0.2498 で、1/4 と一致します ✓。多くの人は直感で 1/2 と答えますが、「3 本すべてが半分より短い」という条件はかなり強く、実際は 4 分の 1 だけです。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "multiple_choice",
+      "correctAnswer": {
+        "type": "choice",
+        "value": "C"
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "combinatorics-grade11-broken-stick",
+        "notes": "題型來源：本輪以 WebFetch 實際抓取英文維基百科 Broken stick problem 條目，確認「兩個均勻隨機切點時能圍成三角形的機率是 1/4」以及單位正方形與 Poincaré 重心座標兩種論證，本題改寫成中文情境並改成選擇題，詳解採單位正方形的面積論證。去重：全庫掃「折成｜圍成三角形｜三段」沒有折棒題。combinatorics_grade9_foundation_041（線段上隨機取一點，較長段至少是較短段 3 倍）只切一次、是一維比例問題；combinatorics_grade12_foundation_053（約會問題）雖然同樣化成單位正方形，但條件是單一的「差不超過 15 分鐘」，本題是三個上限條件同時成立且要拆 x < y 與 x > y 兩半；combinatorics_grade9_foundation_018（5 根木棒選 3 根圍三角形）是離散選取。"
+      },
+      "options": {
+        "A": {
+          "zh-Hant": "機率是 1/2",
+          "zh-Hans": "概率是 1/2",
+          "en": "The probability is 1/2",
+          "ja": "確率は 1/2"
+        },
+        "B": {
+          "zh-Hant": "機率是 1/3",
+          "zh-Hans": "概率是 1/3",
+          "en": "The probability is 1/3",
+          "ja": "確率は 1/3"
+        },
+        "C": {
+          "zh-Hant": "機率是 1/4",
+          "zh-Hans": "概率是 1/4",
+          "en": "The probability is 1/4",
+          "ja": "確率は 1/4"
+        },
+        "D": {
+          "zh-Hant": "機率是 1/8",
+          "zh-Hans": "概率是 1/8",
+          "en": "The probability is 1/8",
+          "ja": "確率は 1/8"
+        }
+      }
     }
   ]
 }

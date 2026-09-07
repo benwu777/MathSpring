@@ -5905,6 +5905,345 @@
         "reference": "algebra-grade10-estimate-bound",
         "notes": "題型取自 AoPS Wiki 的 Harmonic series 條目所示範的 Oresme 分組法：把 1/3 之後的項按 2 的次方分組，每組和落在 1/2 與 1 之間，用來證明調和級數發散。原論證是無窮級數的發散性證明，本題截到第 1024 項並改成「夾出部分和的範圍」的四選一，讓上下界都要真的算出來（實際值約 7.5，落在 6 與 11 之間）。去重：全庫掃 倒數|調和 共 25 題，最接近的是 number_theory_grade10_foundation_028（求 28 的所有正因數倒數和，是有限個具體分數相加）與 algebra_grade12_foundation_040（x 加上倒數等於 3 求立方和），都與分組估界無關；algebra_grade11_foundation_014、algebra_grade11_foundation_071 是對數位數與首位數字，屬於另一種估算手法。"
       }
+    },
+    {
+      "id": "algebra_grade10_foundation_067",
+      "reviewStatus": "ok",
+      "topic": "algebra",
+      "subtopic": "dilution_integer_count_open_interval",
+      "tags": [
+        "c:mixture",
+        "c:inequality",
+        "c:percent",
+        "m:estimate_bound"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一瓶消毒液重 240 公克，其中有效成分佔 45%。實驗室要加入 w 公克的純水把它稀釋（w 是正整數，加水過程中有效成分的重量不變）。稀釋之後，有效成分的濃度必須嚴格大於 30% 且嚴格小於 36%。求符合條件的整數 w 一共有幾個。",
+        "zh-Hans": "一瓶消毒液重 240 克，其中有效成分占 45%。实验室要加入 w 克的纯水把它稀释（w 是正整数，加水过程中有效成分的重量不变）。稀释之后，有效成分的浓度必须严格大于 30% 且严格小于 36%。求符合条件的整数 w 一共有几个。",
+        "en": "A bottle of disinfectant weighs 240 grams, and 45% of it is active ingredient. A lab adds w grams of pure water to dilute it, where w is a positive integer and the weight of active ingredient never changes. After dilution the concentration of active ingredient must be strictly greater than 30% and strictly less than 36%. How many integer values of w satisfy this?",
+        "ja": "消毒液が 240 グラムあり、そのうち 45% が有効成分です。実験室ではこれに純水を w グラム加えて薄めます（w は正の整数で、有効成分の重さは変わりません）。薄めたあとの有効成分の濃度は、30% より真に大きく、かつ 36% より真に小さくなければなりません。条件を満たす整数 w は全部でいくつありますか。"
+      },
+      "answer": {
+        "zh-Hant": "符合條件的整數 w 一共有 59 個。",
+        "zh-Hans": "符合条件的整数 w 一共有 59 个。",
+        "en": "There are 59 integer values of w that satisfy the condition.",
+        "ja": "条件を満たす整数 w は全部で 59 個あります。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "加水只會增加總重，不會改變有效成分的重量。有效成分固定是 240 × 45% = 108 公克，稀釋後的總重是 (240 + w) 公克。",
+          "稀釋後的濃度是 108 ÷ (240 + w)。分子固定、分母隨 w 變大，所以濃度隨 w 遞減——先看清這個方向，才知道兩個不等式各自對應 w 的哪一邊。",
+          "濃度要小於 36%，就是要分母夠大：108 ÷ (240 + w) < 0.36，即 240 + w > 108 ÷ 0.36 = 300，得 w > 60。",
+          "濃度要大於 30%，就是分母不可以太大：108 ÷ (240 + w) > 0.30，即 240 + w < 108 ÷ 0.30 = 360，得 w < 120。",
+          "兩條合起來是 60 < w < 120。w 是整數，可以取 61、62、⋯、119。",
+          "個數 = 119 − 61 + 1 = 59。驗算兩個端點：w = 60 時濃度恰為 36%、w = 120 時濃度恰為 30%，都因為題目寫「嚴格」而被排除，所以答案是 59 個。"
+        ],
+        "zh-Hans": [
+          "加水只会增加总重，不会改变有效成分的重量。有效成分固定是 240 × 45% = 108 克，稀释后的总重是 (240 + w) 克。",
+          "稀释后的浓度是 108 ÷ (240 + w)。分子固定、分母随 w 变大，所以浓度随 w 递减——先看清这个方向，才知道两个不等式各自对应 w 的哪一边。",
+          "浓度要小于 36%，就是要分母够大：108 ÷ (240 + w) < 0.36，即 240 + w > 108 ÷ 0.36 = 300，得 w > 60。",
+          "浓度要大于 30%，就是分母不可以太大：108 ÷ (240 + w) > 0.30，即 240 + w < 108 ÷ 0.30 = 360，得 w < 120。",
+          "两条合起来是 60 < w < 120。w 是整数，可以取 61、62、⋯、119。",
+          "个数 = 119 − 61 + 1 = 59。验算两个端点：w = 60 时浓度恰为 36%、w = 120 时浓度恰为 30%，都因为题目写「严格」而被排除，所以答案是 59 个。"
+        ],
+        "en": [
+          "Adding water increases only the total mass; the amount of active ingredient stays fixed at 240 × 45% = 108 grams, while the total becomes (240 + w) grams.",
+          "The diluted concentration is 108 ÷ (240 + w). The numerator is fixed and the denominator grows with w, so the concentration decreases as w increases. Knowing this direction tells you which inequality bounds w from which side.",
+          "Concentration below 36% means the denominator must be large enough: 108 ÷ (240 + w) < 0.36, so 240 + w > 108 ÷ 0.36 = 300, giving w > 60.",
+          "Concentration above 30% means the denominator must not be too large: 108 ÷ (240 + w) > 0.30, so 240 + w < 108 ÷ 0.30 = 360, giving w < 120.",
+          "Combining the two gives 60 < w < 120, so the integer values are 61, 62, ..., 119.",
+          "The count is 119 − 61 + 1 = 59. Check the endpoints: w = 60 gives exactly 36% and w = 120 gives exactly 30%; both are excluded because the problem says strictly, so the answer is 59."
+        ],
+        "ja": [
+          "水を加えても増えるのは全体の重さだけで、有効成分の重さは変わりません。有効成分は 240 × 45% = 108 グラムで固定、全体は (240 + w) グラムになります。",
+          "薄めたあとの濃度は 108 ÷ (240 + w) です。分子は固定で分母は w とともに増えるので、濃度は w について減少します。この向きをつかんでおくと、2 つの不等式がそれぞれ w のどちら側を押さえるかが分かります。",
+          "濃度が 36% 未満という条件は分母が十分大きいことを意味します。108 ÷ (240 + w) < 0.36 より 240 + w > 108 ÷ 0.36 = 300、つまり w > 60。",
+          "濃度が 30% より大きいという条件は分母が大きすぎないことを意味します。108 ÷ (240 + w) > 0.30 より 240 + w < 108 ÷ 0.30 = 360、つまり w < 120。",
+          "合わせると 60 < w < 120。w は整数なので 61、62、⋯、119 が候補です。",
+          "個数は 119 − 61 + 1 = 59。端点を確認すると、w = 60 でちょうど 36%、w = 120 でちょうど 30% となり、どちらも「真に」という条件で除外されます。よって答えは 59 個です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "59"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "algebra-grade10-mixture-inequality",
+        "notes": "題型骨架取自 Wikipedia「Alligation」條目的稀釋（dilution）型，再改成整數解計數。已用 regex 掃全庫的濃度／鹽水／稀釋／蒸發共 32 題：既有稀釋題（algebra_grade7_010 加純鹽、algebra_grade8_046 蒸發、arithmetic_grade6_047／053 加清水）問的都是單一濃度值，沒有任何一題把濃度限制成開區間再數整數解。與 algebra_grade9_016（|2x−1| 型整數解計數）也不同，後者無混合情境。"
+      }
+    },
+    {
+      "id": "algebra_grade10_foundation_068",
+      "reviewStatus": "ok",
+      "topic": "algebra",
+      "subtopic": "swapped_mixing_ratio_recover_both",
+      "tags": [
+        "c:mixture",
+        "c:ratio",
+        "c:percent",
+        "m:reverse"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "甲、乙兩種鹽水的濃度都不知道。把甲、乙以重量比 1 : 3 混合，得到的鹽水濃度是 20%；把同樣的兩種鹽水改成以重量比 3 : 1 混合，得到的鹽水濃度是 30%。求甲鹽水的濃度是百分之幾。",
+        "zh-Hans": "甲、乙两种盐水的浓度都不知道。把甲、乙以重量比 1 : 3 混合，得到的盐水浓度是 20%；把同样的两种盐水改成以重量比 3 : 1 混合，得到的盐水浓度是 30%。求甲盐水的浓度是百分之几。",
+        "en": "Two brines, X and Y, have unknown concentrations. Mixing X and Y in the weight ratio 1 : 3 gives a brine of concentration 20%. Mixing the same two brines in the weight ratio 3 : 1 instead gives a brine of concentration 30%. Find the concentration of brine X, as a percentage.",
+        "ja": "食塩水 甲 と 乙 の濃度はどちらも分かっていません。甲 と 乙 を重さの比 1 : 3 で混ぜると濃度 20% の食塩水になり、同じ 2 種類を重さの比 3 : 1 で混ぜると濃度 30% の食塩水になります。食塩水 甲 の濃度は何パーセントですか。"
+      },
+      "answer": {
+        "zh-Hant": "甲鹽水的濃度是 35%。",
+        "zh-Hans": "甲盐水的浓度是 35%。",
+        "en": "Brine X has a concentration of 35%.",
+        "ja": "食塩水 甲 の濃度は 35% です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "設甲的濃度是 a%、乙的濃度是 b%。混合後的濃度是兩者以重量為權重的加權平均，不是把兩個濃度直接相加或相乘。",
+          "以 1 : 3 混合時，把總重看成 4 份，甲佔 1 份、乙佔 3 份，所以 (a + 3b) ÷ 4 = 20，即 a + 3b = 80。",
+          "以 3 : 1 混合時同理：(3a + b) ÷ 4 = 30，即 3a + b = 120。",
+          "兩式相加會得到對稱的結果：4a + 4b = 200，所以 a + b = 50。",
+          "兩式相減（第二式減第一式）：2a − 2b = 40，所以 a − b = 20。",
+          "由 a + b = 50 與 a − b = 20 解得 a = 35、b = 15，所以甲鹽水的濃度是 35%。",
+          "驗算：(35 + 3 × 15) ÷ 4 = 80 ÷ 4 = 20 ✓；(3 × 35 + 15) ÷ 4 = 120 ÷ 4 = 30 ✓。順帶可以看出兩次混合濃度的平均 (20 + 30) ÷ 2 = 25，恰好等於 a 與 b 的平均，這正是把比例對調造成的對稱性。"
+        ],
+        "zh-Hans": [
+          "设甲的浓度是 a%、乙的浓度是 b%。混合后的浓度是两者以重量为权重的加权平均，不是把两个浓度直接相加或相乘。",
+          "以 1 : 3 混合时，把总重看成 4 份，甲占 1 份、乙占 3 份，所以 (a + 3b) ÷ 4 = 20，即 a + 3b = 80。",
+          "以 3 : 1 混合时同理：(3a + b) ÷ 4 = 30，即 3a + b = 120。",
+          "两式相加会得到对称的结果：4a + 4b = 200，所以 a + b = 50。",
+          "两式相减（第二式减第一式）：2a − 2b = 40，所以 a − b = 20。",
+          "由 a + b = 50 与 a − b = 20 解得 a = 35、b = 15，所以甲盐水的浓度是 35%。",
+          "验算：(35 + 3 × 15) ÷ 4 = 80 ÷ 4 = 20 ✓；(3 × 35 + 15) ÷ 4 = 120 ÷ 4 = 30 ✓。顺带可以看出两次混合浓度的平均 (20 + 30) ÷ 2 = 25，恰好等于 a 与 b 的平均，这正是把比例对调造成的对称性。"
+        ],
+        "en": [
+          "Let X have concentration a% and Y have concentration b%. The concentration after mixing is the weighted average of the two, weighted by mass, not a sum or product of the two percentages.",
+          "For the 1 : 3 mixture, split the total into 4 parts with 1 part X and 3 parts Y, so (a + 3b) ÷ 4 = 20, that is a + 3b = 80.",
+          "For the 3 : 1 mixture, likewise (3a + b) ÷ 4 = 30, that is 3a + b = 120.",
+          "Adding the two equations gives the symmetric result 4a + 4b = 200, so a + b = 50.",
+          "Subtracting the first from the second gives 2a − 2b = 40, so a − b = 20.",
+          "From a + b = 50 and a − b = 20 we get a = 35 and b = 15, so brine X has concentration 35%.",
+          "Check: (35 + 3 × 15) ÷ 4 = 80 ÷ 4 = 20 and (3 × 35 + 15) ÷ 4 = 120 ÷ 4 = 30. Notice also that the average of the two mixture concentrations, (20 + 30) ÷ 2 = 25, equals the average of a and b; that symmetry is exactly what swapping the ratio produces."
+        ],
+        "ja": [
+          "甲 の濃度を a%、乙 の濃度を b% とします。混ぜたあとの濃度は重さを重みとする加重平均で、2 つの濃度をそのまま足したり掛けたりしたものではありません。",
+          "1 : 3 で混ぜるときは全体を 4 等分と考え、甲 が 1、乙 が 3 なので (a + 3b) ÷ 4 = 20、つまり a + 3b = 80。",
+          "3 : 1 で混ぜるときも同様に (3a + b) ÷ 4 = 30、つまり 3a + b = 120。",
+          "2 式を足すと対称な結果 4a + 4b = 200 が得られ、a + b = 50 となります。",
+          "2 式を引くと（2 番目から 1 番目を引く）2a − 2b = 40 となり、a − b = 20。",
+          "a + b = 50 と a − b = 20 から a = 35、b = 15。よって 甲 の濃度は 35% です。",
+          "検算：(35 + 3 × 15) ÷ 4 = 80 ÷ 4 = 20、(3 × 35 + 15) ÷ 4 = 120 ÷ 4 = 30。さらに 2 回の混合濃度の平均 (20 + 30) ÷ 2 = 25 が a と b の平均に一致することも分かります。これは比を入れ替えたことによる対称性です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "35"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "algebra-grade10-mixture-inverse-ratio",
+        "notes": "題型骨架取自 Wikipedia「Alligation」條目的 alligation medial（已知配比求混合值）之逆向：把配比對調兩次，得到二元一次聯立。全庫濃度題共 32 題，逆推型只有 algebra_grade9_047（兩已知濃度配目標，十字交叉）、algebra_grade8_060（三種鹽水其中兩份等重）、arithmetic_grade6_041（求乙杯重量），全都是「濃度已知、求重量」；本題反過來是「配比已知、兩個濃度都未知」，未知量的身分不同，且靠比例對調製造對稱聯立。"
+      }
+    },
+    {
+      "id": "algebra_grade10_foundation_069",
+      "reviewStatus": "ok",
+      "topic": "algebra",
+      "subtopic": "group_size_from_integer_combined_mean",
+      "tags": [
+        "c:mean",
+        "c:linear_eq",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "某社團分成甲、乙兩組。甲組有 12 人，平均年齡是 16 歲；乙組人數不知道（至少 1 人），平均年齡是 22 歲。已知全社團所有人的平均年齡剛好是一個整數，而且不小於 18 歲、不大於 20 歲。求乙組人數最多可能是幾人。",
+        "zh-Hans": "某社团分成甲、乙两组。甲组有 12 人，平均年龄是 16 岁；乙组人数不知道（至少 1 人），平均年龄是 22 岁。已知全社团所有人的平均年龄刚好是一个整数，而且不小于 18 岁、不大于 20 岁。求乙组人数最多可能是几人。",
+        "en": "A club is split into group X and group Y. Group X has 12 members with an average age of 16. Group Y has an unknown number of members, at least 1, with an average age of 22. The average age of the whole club happens to be an integer that is at least 18 and at most 20. What is the largest possible number of members in group Y?",
+        "ja": "あるクラブは 甲 組と 乙 組に分かれています。甲 組は 12 人で平均年齢は 16 歳、乙 組は人数が分かりません（1 人以上）が平均年齢は 22 歳です。クラブ全員の平均年齢はちょうど整数で、18 歳以上 20 歳以下であることが分かっています。乙 組の人数は最大で何人ですか。"
+      },
+      "answer": {
+        "zh-Hant": "乙組人數最多是 24 人。",
+        "zh-Hans": "乙组人数最多是 24 人。",
+        "en": "Group Y has at most 24 members.",
+        "ja": "乙 組の人数は最大で 24 人です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "甲組的年齡總和是 12 × 16 = 192 歲。設乙組有 n 人，年齡總和是 22n 歲，全社團共 (12 + n) 人。",
+          "全社團的平均年齡 m = (192 + 22n) ÷ (12 + n)。題目說 m 是整數且 18 ≤ m ≤ 20，所以 m 只可能是 18、19、20 三個值，逐一討論即可。",
+          "m = 18：192 + 22n = 18(12 + n) = 216 + 18n，得 4n = 24，n = 6。",
+          "m = 19：192 + 22n = 19(12 + n) = 228 + 19n，得 3n = 36，n = 12。",
+          "m = 20：192 + 22n = 20(12 + n) = 240 + 20n，得 2n = 48，n = 24。",
+          "三種情形算出的 n 都是正整數，都合法，其中最大的是 24 人。",
+          "順帶檢查方向性：n 越大代表乙組在加權平均裡的權重越重，全社團的平均就越靠近乙組的 22 歲，所以 m 從 18 增到 20 時 n 跟著變大，結果合理。驗算 n = 24：(192 + 528) ÷ (12 + 24) = 720 ÷ 36 = 20 ✓。"
+        ],
+        "zh-Hans": [
+          "甲组的年龄总和是 12 × 16 = 192 岁。设乙组有 n 人，年龄总和是 22n 岁，全社团共 (12 + n) 人。",
+          "全社团的平均年龄 m = (192 + 22n) ÷ (12 + n)。题目说 m 是整数且 18 ≤ m ≤ 20，所以 m 只可能是 18、19、20 三个值，逐一讨论即可。",
+          "m = 18：192 + 22n = 18(12 + n) = 216 + 18n，得 4n = 24，n = 6。",
+          "m = 19：192 + 22n = 19(12 + n) = 228 + 19n，得 3n = 36，n = 12。",
+          "m = 20：192 + 22n = 20(12 + n) = 240 + 20n，得 2n = 48，n = 24。",
+          "三种情形算出的 n 都是正整数，都合法，其中最大的是 24 人。",
+          "顺带检查方向性：n 越大代表乙组在加权平均里的权重越重，全社团的平均就越靠近乙组的 22 岁，所以 m 从 18 增到 20 时 n 跟着变大，结果合理。验算 n = 24：(192 + 528) ÷ (12 + 24) = 720 ÷ 36 = 20 ✓。"
+        ],
+        "en": [
+          "The total age of group X is 12 × 16 = 192. Let group Y have n members, so its total age is 22n and the club has (12 + n) members.",
+          "The club average is m = (192 + 22n) ÷ (12 + n). Since m is an integer with 18 ≤ m ≤ 20, the only possibilities are m = 18, 19 or 20, so we check each case.",
+          "If m = 18: 192 + 22n = 18(12 + n) = 216 + 18n, so 4n = 24 and n = 6.",
+          "If m = 19: 192 + 22n = 19(12 + n) = 228 + 19n, so 3n = 36 and n = 12.",
+          "If m = 20: 192 + 22n = 20(12 + n) = 240 + 20n, so 2n = 48 and n = 24.",
+          "All three values of n are positive integers and therefore valid, and the largest is 24.",
+          "A sanity check on direction: the larger n is, the more weight group Y carries in the weighted average, so the club average moves closer to Y's 22. That is why n grows as m goes from 18 to 20. Verify n = 24: (192 + 528) ÷ (12 + 24) = 720 ÷ 36 = 20."
+        ],
+        "ja": [
+          "甲 組の年齢の合計は 12 × 16 = 192 歳です。乙 組を n 人とすると年齢の合計は 22n 歳、クラブ全体は (12 + n) 人になります。",
+          "全体の平均年齢は m = (192 + 22n) ÷ (12 + n) です。m は整数で 18 ≤ m ≤ 20 なので、m は 18、19、20 の 3 通りしかなく、順に調べれば十分です。",
+          "m = 18 のとき：192 + 22n = 18(12 + n) = 216 + 18n より 4n = 24、n = 6。",
+          "m = 19 のとき：192 + 22n = 19(12 + n) = 228 + 19n より 3n = 36、n = 12。",
+          "m = 20 のとき：192 + 22n = 20(12 + n) = 240 + 20n より 2n = 48、n = 24。",
+          "3 つの場合の n はいずれも正の整数で条件を満たし、その中で最大は 24 人です。",
+          "向きの確認もしておきます。n が大きいほど加重平均における 乙 組の重みが増し、全体の平均は 乙 組の 22 歳に近づきます。だから m が 18 から 20 へ増えるにつれて n も増えるわけで、結果は自然です。検算：n = 24 のとき (192 + 528) ÷ (12 + 24) = 720 ÷ 36 = 20。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "24"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "algebra-grade10-weighted-mean-casework",
+        "notes": "題型參考 2019 CEMC Fermat 第 12 題那類「兩群人數不同的合併平均」，再加上「合併平均必須是整數」的限制轉成分類討論。全庫以「平均是整數／人數最多」regex 掃描，僅命中鴿籠與期望值題，與本題無關。既有 algebra_grade7_026、algebra_grade8_051 是兩群人數都已知的直接合併平均，arithmetic_grade6_041 是濃度逆推重量；本題的未知量是「其中一組的人數」，而且是靠整數限制枚舉出三組解再取極大，推理路徑不同。"
+      }
+    },
+    {
+      "id": "algebra_grade10_foundation_070",
+      "reviewStatus": "ok",
+      "topic": "algebra",
+      "subtopic": "sequential_transfer_back_and_forth_amount",
+      "tags": [
+        "c:mixture",
+        "c:percent",
+        "c:linear_eq",
+        "m:reverse"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "甲杯裝 200 公克、濃度 30% 的鹽水，乙杯裝 300 公克、濃度 20% 的鹽水。先從甲杯舀出 x 公克倒入乙杯並攪拌均勻，接著再從乙杯舀出 x 公克倒回甲杯並攪拌均勻。結果甲杯的濃度變成 27%。求 x。",
+        "zh-Hans": "甲杯装 200 克、浓度 30% 的盐水，乙杯装 300 克、浓度 20% 的盐水。先从甲杯舀出 x 克倒入乙杯并搅拌均匀，接着再从乙杯舀出 x 克倒回甲杯并搅拌均匀。结果甲杯的浓度变成 27%。求 x。",
+        "en": "Cup A holds 200 grams of brine at 30% concentration and cup B holds 300 grams of brine at 20% concentration. First x grams are scooped from cup A into cup B and stirred evenly, and then x grams are scooped from cup B back into cup A and stirred evenly. Cup A now has a concentration of 27%. Find x.",
+        "ja": "コップ 甲 には濃度 30% の食塩水が 200 グラム、コップ 乙 には濃度 20% の食塩水が 300 グラム入っています。まず 甲 から x グラムをすくって 乙 に入れてよくかき混ぜ、次に 乙 から x グラムをすくって 甲 に戻してよくかき混ぜます。その結果、甲 の濃度は 27% になりました。x を求めなさい。"
+      },
+      "answer": {
+        "zh-Hant": "x 是 75 公克。",
+        "zh-Hans": "x 是 75 克。",
+        "en": "x is 75 grams.",
+        "ja": "x は 75 グラムです。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "兩次搬運的重量都是 x 公克，一來一回之後甲杯回到 200 公克、乙杯回到 300 公克。這一點要先確定，後面才能把濃度直接乘上 200。",
+          "第一步之後，甲杯剩下 (200 − x) 公克，鹽是 0.3(200 − x) = 60 − 0.3x 公克；被舀走的 x 公克帶走 0.3x 公克的鹽。",
+          "這 0.3x 公克的鹽進了乙杯。此時乙杯重 (300 + x) 公克，鹽是 60 + 0.3x 公克，所以乙杯的濃度是 (60 + 0.3x) ÷ (300 + x)。這個中間濃度是本題的關鍵——倒回去的那一勺不是 20%，也不是 30%。",
+          "第二步從乙杯舀 x 公克倒回甲杯，帶回的鹽是 x × (60 + 0.3x) ÷ (300 + x) 公克。",
+          "甲杯最後重 200 公克、濃度 27%，所以鹽是 200 × 27% = 54 公克。列式：(60 − 0.3x) + x(60 + 0.3x) ÷ (300 + x) = 54。",
+          "把常數項移過去：x(60 + 0.3x) ÷ (300 + x) = 0.3x − 6。兩邊同乘 (300 + x)：60x + 0.3x² = (0.3x − 6)(300 + x) = 84x + 0.3x² − 1800。",
+          "兩邊的 0.3x² 互相消掉，剩下 60x = 84x − 1800，即 24x = 1800，所以 x = 75。",
+          "驗算：舀走 75 公克後甲杯剩 125 公克、鹽 37.5 公克；乙杯變成 375 公克、鹽 82.5 公克，濃度 22%。倒回 75 公克帶回 16.5 公克的鹽，甲杯成為 200 公克、鹽 37.5 + 16.5 = 54 公克，濃度 54 ÷ 200 = 27% ✓。"
+        ],
+        "zh-Hans": [
+          "两次搬运的重量都是 x 克，一来一回之后甲杯回到 200 克、乙杯回到 300 克。这一点要先确定，后面才能把浓度直接乘上 200。",
+          "第一步之后，甲杯剩下 (200 − x) 克，盐是 0.3(200 − x) = 60 − 0.3x 克；被舀走的 x 克带走 0.3x 克的盐。",
+          "这 0.3x 克的盐进了乙杯。此时乙杯重 (300 + x) 克，盐是 60 + 0.3x 克，所以乙杯的浓度是 (60 + 0.3x) ÷ (300 + x)。这个中间浓度是本题的关键——倒回去的那一勺不是 20%，也不是 30%。",
+          "第二步从乙杯舀 x 克倒回甲杯，带回的盐是 x × (60 + 0.3x) ÷ (300 + x) 克。",
+          "甲杯最后重 200 克、浓度 27%，所以盐是 200 × 27% = 54 克。列式：(60 − 0.3x) + x(60 + 0.3x) ÷ (300 + x) = 54。",
+          "把常数项移过去：x(60 + 0.3x) ÷ (300 + x) = 0.3x − 6。两边同乘 (300 + x)：60x + 0.3x² = (0.3x − 6)(300 + x) = 84x + 0.3x² − 1800。",
+          "两边的 0.3x² 互相消掉，剩下 60x = 84x − 1800，即 24x = 1800，所以 x = 75。",
+          "验算：舀走 75 克后甲杯剩 125 克、盐 37.5 克；乙杯变成 375 克、盐 82.5 克，浓度 22%。倒回 75 克带回 16.5 克的盐，甲杯成为 200 克、盐 37.5 + 16.5 = 54 克，浓度 54 ÷ 200 = 27% ✓。"
+        ],
+        "en": [
+          "Both transfers move x grams, so after the round trip cup A is back to 200 grams and cup B is back to 300 grams. Fixing this first is what lets us multiply the final concentration by 200 later.",
+          "After the first transfer cup A holds (200 − x) grams containing 0.3(200 − x) = 60 − 0.3x grams of salt, while the x grams scooped out carry away 0.3x grams of salt.",
+          "Those 0.3x grams of salt go into cup B, which now weighs (300 + x) grams and holds 60 + 0.3x grams of salt, so its concentration is (60 + 0.3x) ÷ (300 + x). This intermediate concentration is the crux of the problem: the scoop poured back is neither 20% nor 30%.",
+          "The second transfer returns x grams from cup B, carrying x × (60 + 0.3x) ÷ (300 + x) grams of salt.",
+          "Cup A finally weighs 200 grams at 27%, so it holds 200 × 27% = 54 grams of salt. Hence (60 − 0.3x) + x(60 + 0.3x) ÷ (300 + x) = 54.",
+          "Move the constants across: x(60 + 0.3x) ÷ (300 + x) = 0.3x − 6. Multiply both sides by (300 + x): 60x + 0.3x² = (0.3x − 6)(300 + x) = 84x + 0.3x² − 1800.",
+          "The 0.3x² terms cancel, leaving 60x = 84x − 1800, so 24x = 1800 and x = 75.",
+          "Check: after scooping out 75 grams, cup A has 125 grams with 37.5 grams of salt, and cup B becomes 375 grams with 82.5 grams of salt, a concentration of 22%. Pouring back 75 grams returns 16.5 grams of salt, so cup A ends with 200 grams and 37.5 + 16.5 = 54 grams of salt, a concentration of 54 ÷ 200 = 27%."
+        ],
+        "ja": [
+          "2 回の移し替えはどちらも x グラムなので、往復したあと 甲 は 200 グラム、乙 は 300 グラムに戻ります。これを先に確かめておくことで、あとで濃度に 200 を掛けられます。",
+          "1 回目のあと、甲 は (200 − x) グラムで食塩は 0.3(200 − x) = 60 − 0.3x グラム、すくい出した x グラムは食塩を 0.3x グラム持ち出します。",
+          "その 0.3x グラムの食塩が 乙 に入ります。乙 は (300 + x) グラム、食塩は 60 + 0.3x グラムになるので、濃度は (60 + 0.3x) ÷ (300 + x) です。この途中の濃度が本問の要で、戻すひとすくいは 20% でも 30% でもありません。",
+          "2 回目に 乙 から x グラムを戻すと、持ち帰る食塩は x × (60 + 0.3x) ÷ (300 + x) グラムです。",
+          "最後の 甲 は 200 グラムで濃度 27% なので、食塩は 200 × 27% = 54 グラム。したがって (60 − 0.3x) + x(60 + 0.3x) ÷ (300 + x) = 54。",
+          "定数を移項して x(60 + 0.3x) ÷ (300 + x) = 0.3x − 6。両辺に (300 + x) を掛けると 60x + 0.3x² = (0.3x − 6)(300 + x) = 84x + 0.3x² − 1800。",
+          "両辺の 0.3x² が消えて 60x = 84x − 1800、つまり 24x = 1800 となり x = 75。",
+          "検算：75 グラムをすくうと 甲 は 125 グラムで食塩 37.5 グラム、乙 は 375 グラムで食塩 82.5 グラム、濃度 22% です。75 グラムを戻すと食塩を 16.5 グラム持ち帰り、甲 は 200 グラムで食塩 37.5 + 16.5 = 54 グラム、濃度は 54 ÷ 200 = 27% になります。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "75"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "algebra-grade10-sequential-transfer",
+        "notes": "題型骨架取自 Wikipedia「Alligation」條目提到的 repeated drawing-and-replacing（酒桶反覆取出補水）家族，改成兩杯之間一來一回、搬運量未知並反解。本題是替換稿：初版（未知原始濃度、濃度降 4 個百分點）對 algebra_grade7_025 得 0.50，骨架仍是「兩種鹽水混合求百分比」，依規定砍掉重出。全庫掃過的相關題：logic_grade7_036 是同樣的一來一回但刻意不計算（問果汁與水誰多，答案為一樣多）；algebra_grade8_064 是兩塊合金同時互換等重小塊求該重量，是同時交換而非有先後的序列操作；algebra_grade7_059 是同一容器反覆倒出補水。本題的推理點在於倒回去那一勺的濃度是第一步之後才產生的中間值，必須先把它表示出來，展開後二次項互相消掉才回到一次方程。"
+      }
     }
   ]
 }

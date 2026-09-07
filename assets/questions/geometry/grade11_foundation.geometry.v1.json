@@ -5484,6 +5484,254 @@
         "reference": "geometry-grade11-foundation",
         "notes": "題型骨架取自 Utah 數學圈講義 Geometry 第 17 題「單位圓內任 6 點必有兩點距離小於 1」的扇形切割法，但我改用「n 個間隔角總和 360°」的平均法，得到比扇形法更緊的界，並把扇形法會給出的 12 當成誘答。第一版問「最少要取幾個點才保證」，與同批 F_06（格點中點）共用「在平面上取若干個相異的點……最少要取幾個」的敘述模板，相似度 0.42；第二版改成反向問最多能取幾個點，抽屜（間隔角）與物件（點）都與 F_06（抽屜是座標奇偶四類）不同。全庫「圓周上的點|圓心角」regex 命中 21 題全是弧長、面積或圓周角計算。"
       }
+    },
+    {
+      "id": "geometry_grade11_foundation_052",
+      "reviewStatus": "ok",
+      "topic": "geometry",
+      "subtopic": "count_integer_length_chords_through_a_point",
+      "tags": [
+        "c:circle",
+        "c:pythagoras",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade11",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "圓 O 的半徑是 10，P 是圓內的一點，且 OP = 6。在所有通過 P 的弦當中，長度恰好是整數的弦共有幾條？",
+        "zh-Hans": "圆 O 的半径是 10，P 是圆内的一点，且 OP = 6。在所有通过 P 的弦当中，长度恰好是整数的弦共有几条？",
+        "en": "A circle with centre O has radius 10, and P is a point inside it with OP = 6. Among all the chords that pass through P, how many have a length that is exactly an integer?",
+        "ja": "中心 O、半径 10 の円があり、その内部の点 P は OP = 6 を満たす。P を通るすべての弦のうち、長さがちょうど整数になるものは何本あるか。"
+      },
+      "answer": {
+        "zh-Hant": "長度是整數的弦共有 8 條。",
+        "zh-Hans": "长度是整数的弦共有 8 条。",
+        "en": "There are 8 chords whose length is an integer.",
+        "ja": "長さが整数になる弦は 8 本ある。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "一條弦的長度只由圓心到它的距離 d 決定：把圓心到弦的垂線畫出來，垂足是弦的中點，由畢氏定理得弦長 = 2√(10² − d²) = 2√(100 − d²)。d 越大，弦越短。",
+          "對通過 P 的弦來說，d 的範圍是 0 ≤ d ≤ 6。因為圓心到弦的距離不會超過圓心到弦上任一點的距離，而 P 在這條弦上，所以 d ≤ OP = 6；而且 d = 6 只在弦與 OP 垂直時發生，d = 0 只在弦通過圓心時發生。",
+          "所以最長的弦是直徑，長 2 × 10 = 20；最短的弦是與 OP 垂直的那一條，長 2√(100 − 36) = 2 × 8 = 16。通過 P 的弦長全部落在 16 與 20 之間。",
+          "因此整數長度只可能是 16、17、18、19、20 這五個值。",
+          "接著數每個值各有幾條。長度 20 對應 d = 0，只有直徑這一條；長度 16 對應 d = 6，只有與 OP 垂直的那一條。兩個極端各只有 1 條。",
+          "長度介於 16 與 20 之間時，對應的 d 落在 0 與 6 之間（不含端點）。以 O 為圓心、半徑 d 的圓與過 P 的直線相切，這樣的直線恰有兩條，且對稱於直線 OP，所以長度 17、18、19 各有 2 條。",
+          "合計 1 + 2 + 2 + 2 + 1 = 8 條。常見的錯誤是忘記中間長度各有兩條而答 5，或忘記兩個極端只有一條而答 10。"
+        ],
+        "zh-Hans": [
+          "一条弦的长度只由圆心到它的距离 d 决定：把圆心到弦的垂线画出来，垂足是弦的中点，由勾股定理得弦长 = 2√(10² − d²) = 2√(100 − d²)。d 越大，弦越短。",
+          "对通过 P 的弦来说，d 的范围是 0 ≤ d ≤ 6。因为圆心到弦的距离不会超过圆心到弦上任一点的距离，而 P 在这条弦上，所以 d ≤ OP = 6；而且 d = 6 只在弦与 OP 垂直时发生，d = 0 只在弦通过圆心时发生。",
+          "所以最长的弦是直径，长 2 × 10 = 20；最短的弦是与 OP 垂直的那一条，长 2√(100 − 36) = 2 × 8 = 16。通过 P 的弦长全部落在 16 与 20 之间。",
+          "因此整数长度只可能是 16、17、18、19、20 这五个值。",
+          "接着数每个值各有几条。长度 20 对应 d = 0，只有直径这一条；长度 16 对应 d = 6，只有与 OP 垂直的那一条。两个极端各只有 1 条。",
+          "长度介于 16 与 20 之间时，对应的 d 落在 0 与 6 之间（不含端点）。以 O 为圆心、半径 d 的圆与过 P 的直线相切，这样的直线恰有两条，且对称于直线 OP，所以长度 17、18、19 各有 2 条。",
+          "合计 1 + 2 + 2 + 2 + 1 = 8 条。常见的错误是忘记中间长度各有两条而答 5，或忘记两个极端只有一条而答 10。"
+        ],
+        "en": [
+          "The length of a chord depends only on the distance d from the centre to it: dropping the perpendicular from O to the chord bisects it, so by the Pythagorean theorem the chord has length 2√(10² − d²) = 2√(100 − d²). The larger d is, the shorter the chord.",
+          "For chords through P the range of d is 0 ≤ d ≤ 6. The distance from O to a line never exceeds the distance from O to a point of that line, and P is on the chord, so d ≤ OP = 6. Moreover d = 6 happens only when the chord is perpendicular to OP, and d = 0 only when the chord passes through O.",
+          "So the longest chord is a diameter of length 2 × 10 = 20, and the shortest is the one perpendicular to OP, of length 2√(100 − 36) = 2 × 8 = 16. Every chord through P has length between 16 and 20.",
+          "Hence the only possible integer lengths are 16, 17, 18, 19 and 20.",
+          "Now count how many chords give each value. Length 20 corresponds to d = 0, which is the diameter alone; length 16 corresponds to d = 6, which is the perpendicular chord alone. Each extreme gives exactly one chord.",
+          "For a length strictly between 16 and 20 the matching d lies strictly between 0 and 6. The lines through P that are tangent to the circle of centre O and radius d are exactly two, symmetric about the line OP, so lengths 17, 18 and 19 each give 2 chords.",
+          "In total 1 + 2 + 2 + 2 + 1 = 8 chords. A common error is to answer 5 by forgetting that the middle lengths occur twice, or 10 by forgetting that the two extremes occur only once."
+        ],
+        "ja": [
+          "弦の長さは中心からその弦までの距離 d だけで決まる。O から弦に垂線を下ろすと足は弦の中点になり、三平方の定理から弦の長さ = 2√(10² − d²) = 2√(100 − d²)。d が大きいほど弦は短い。",
+          "P を通る弦では d の範囲は 0 ≤ d ≤ 6 である。中心から直線までの距離は、その直線上の任意の点までの距離を超えないので、P が弦上にあることから d ≤ OP = 6。さらに d = 6 は弦が OP に垂直なときだけ、d = 0 は弦が中心を通るときだけ起こる。",
+          "よって最長の弦は直径で 2 × 10 = 20、最短の弦は OP に垂直なもので 2√(100 − 36) = 2 × 8 = 16。P を通る弦の長さはすべて 16 と 20 の間にある。",
+          "したがって整数の長さになりうるのは 16、17、18、19、20 の 5 通りだけである。",
+          "次に各値について本数を数える。長さ 20 は d = 0 に対応し直径の 1 本のみ、長さ 16 は d = 6 に対応し OP に垂直な 1 本のみ。両端はそれぞれ 1 本である。",
+          "長さが 16 と 20 の間（両端を除く）のときは、対応する d が 0 と 6 の間にある。中心 O、半径 d の円に接し P を通る直線はちょうど 2 本あり、直線 OP について対称である。よって長さ 17、18、19 はそれぞれ 2 本ずつある。",
+          "合計 1 + 2 + 2 + 2 + 1 = 8 本。中間の長さが 2 本ずつあることを忘れて 5 と答えたり、両端が 1 本しかないことを忘れて 10 と答えたりするのがよくある誤りである。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "8"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring",
+        "reference": "geometry-grade11-foundation",
+        "notes": "全庫「弦」36 題全掃過。既有題都是求單一弦長或距離：geometry_grade8_foundation_005（弦到圓心距離求弦長）、geometry_grade10_foundation_005（兩平行弦距離）、geometry_grade11_foundation_004（劣弧上的點到弦的最大距離）、geometry_grade9_foundation_006（相交弦定理）。沒有任何一題在「數弦的條數」，也沒有任何一題同時處理最長弦與最短弦的範圍。本題的推理核心是把長度範圍轉成整數列舉，再對每個值數對稱的兩條，屬於分類討論。題型取自北美競賽常見的「過定點的整數長度弦」題族。"
+      }
+    },
+    {
+      "id": "geometry_grade11_foundation_053",
+      "reviewStatus": "ok",
+      "topic": "geometry",
+      "subtopic": "count_points_on_circle_at_given_distance_from_line",
+      "tags": [
+        "c:circle",
+        "c:coordinate",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade11",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "在座標平面上，圓 C 的方程式是 x² + y² = 169，直線 L 的方程式是 5x + 12y = 78。在圓 C 上，到直線 L 的距離恰好等於 7 的點一共有幾個？",
+        "zh-Hans": "在坐标平面上，圆 C 的方程是 x² + y² = 169，直线 L 的方程是 5x + 12y = 78。在圆 C 上，到直线 L 的距离恰好等于 7 的点一共有几个？",
+        "en": "In the coordinate plane, circle C has equation x² + y² = 169 and line L has equation 5x + 12y = 78. How many points of circle C are at distance exactly 7 from line L?",
+        "ja": "座標平面上で、円 C の方程式は x² + y² = 169、直線 L の方程式は 5x + 12y = 78 である。円 C 上の点のうち、直線 L からの距離がちょうど 7 であるものは全部で何個か。"
+      },
+      "answer": {
+        "zh-Hant": "這樣的點一共有 3 個。",
+        "zh-Hans": "这样的点一共有 3 个。",
+        "en": "There are 3 such points.",
+        "ja": "そのような点は全部で 3 個ある。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "圓 C 的圓心是原點 O(0, 0)、半徑是 √169 = 13。先算圓心到直線 L 的距離：|5 × 0 + 12 × 0 − 78| ÷ √(5² + 12²) = 78 ÷ 13 = 6。因為 6 < 13，L 與圓相交。",
+          "平面上「到 L 的距離等於 7」的點，並不是一條線，而是兩條與 L 平行的直線，一條在 L 的每一側。所以要找的點就是這兩條平行線與圓 C 的交點。",
+          "把平行線寫成 5x + 12y = c。它與 L 的距離是 |c − 78| ÷ 13，令它等於 7 得 |c − 78| = 91，所以 c = 169 或 c = −13，兩條平行線是 5x + 12y = 169 與 5x + 12y = −13。",
+          "第一條 5x + 12y = 169：圓心到它的距離是 169 ÷ 13 = 13，恰好等於半徑，所以這條線與圓相切，只交出 1 個點。",
+          "第二條 5x + 12y = −13：圓心到它的距離是 13 ÷ 13 = 1，小於半徑 13，所以這條線與圓相交，交出 2 個點。",
+          "合計 1 + 2 = 3 個點。常見的錯誤是不檢查就答 4——那等於假設兩條平行線都與圓相交；本題有一條恰好相切，兩條必須分開判斷。"
+        ],
+        "zh-Hans": [
+          "圆 C 的圆心是原点 O(0, 0)、半径是 √169 = 13。先算圆心到直线 L 的距离：|5 × 0 + 12 × 0 − 78| ÷ √(5² + 12²) = 78 ÷ 13 = 6。因为 6 < 13，L 与圆相交。",
+          "平面上「到 L 的距离等于 7」的点，并不是一条线，而是两条与 L 平行的直线，一条在 L 的每一侧。所以要找的点就是这两条平行线与圆 C 的交点。",
+          "把平行线写成 5x + 12y = c。它与 L 的距离是 |c − 78| ÷ 13，令它等于 7 得 |c − 78| = 91，所以 c = 169 或 c = −13，两条平行线是 5x + 12y = 169 与 5x + 12y = −13。",
+          "第一条 5x + 12y = 169：圆心到它的距离是 169 ÷ 13 = 13，恰好等于半径，所以这条线与圆相切，只交出 1 个点。",
+          "第二条 5x + 12y = −13：圆心到它的距离是 13 ÷ 13 = 1，小于半径 13，所以这条线与圆相交，交出 2 个点。",
+          "合计 1 + 2 = 3 个点。常见的错误是不检查就答 4——那等于假设两条平行线都与圆相交；本题有一条恰好相切，两条必须分开判断。"
+        ],
+        "en": [
+          "Circle C has centre the origin O(0, 0) and radius √169 = 13. First find the distance from the centre to L: |5 × 0 + 12 × 0 − 78| ÷ √(5² + 12²) = 78 ÷ 13 = 6. Since 6 < 13, the line L cuts the circle.",
+          "The points of the plane at distance 7 from L do not form one line but two lines parallel to L, one on each side of it. The points we want are therefore the intersections of these two parallel lines with circle C.",
+          "Write a parallel line as 5x + 12y = c. Its distance from L is |c − 78| ÷ 13, and setting this equal to 7 gives |c − 78| = 91, so c = 169 or c = −13. The two parallel lines are 5x + 12y = 169 and 5x + 12y = −13.",
+          "First line, 5x + 12y = 169: the distance from the centre is 169 ÷ 13 = 13, exactly the radius, so this line is tangent to the circle and contributes only 1 point.",
+          "Second line, 5x + 12y = −13: the distance from the centre is 13 ÷ 13 = 1, less than the radius 13, so this line cuts the circle and contributes 2 points.",
+          "In total 1 + 2 = 3 points. A common error is to answer 4 without checking, which assumes both parallel lines cut the circle; here one of them happens to be tangent, so the two lines must be tested separately."
+        ],
+        "ja": [
+          "円 C の中心は原点 O(0, 0)、半径は √169 = 13 である。まず中心から直線 L までの距離を求める：|5 × 0 + 12 × 0 − 78| ÷ √(5² + 12²) = 78 ÷ 13 = 6。6 < 13 なので L は円と交わる。",
+          "平面上で「L からの距離が 7」である点は 1 本の直線ではなく、L に平行な 2 本の直線（L の両側に 1 本ずつ）をなす。したがって求める点は、この 2 本と円 C の交点である。",
+          "平行な直線を 5x + 12y = c とおく。L との距離は |c − 78| ÷ 13 であり、これを 7 とおくと |c − 78| = 91、よって c = 169 または c = −13。2 本の直線は 5x + 12y = 169 と 5x + 12y = −13 である。",
+          "1 本目 5x + 12y = 169：中心からの距離は 169 ÷ 13 = 13 でちょうど半径に等しいので、この直線は円に接し、点を 1 個だけ与える。",
+          "2 本目 5x + 12y = −13：中心からの距離は 13 ÷ 13 = 1 で半径 13 より小さいので、この直線は円と交わり、点を 2 個与える。",
+          "合計 1 + 2 = 3 個。確かめずに 4 と答えるのがよくある誤りで、それは 2 本とも円と交わると仮定したことになる。本問では一方がちょうど接するので、2 本を別々に判定しなければならない。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "3"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring",
+        "reference": "geometry-grade11-foundation",
+        "notes": "原本的草稿是「|a| = 5、|b| = 3、|a + t b| 的最小值是 4，求 |a · b|」，與 geometry_grade11_foundation_042（|u| = 4、|v| = 7、|u + v| = 9 求內積）撞到 0.40：兩題的已知資料型態（兩個長度加一個組合向量的長度）與求量（內積）完全一樣，解法骨架都是「把長度平方展開再解出內積」，差別只有多一層取極值。判定為骨架相同，整題砍掉重出。改成的這一題是圓與直線的分類討論：查過 geometry_grade11_foundation_030（圓 x² + y² = 25 與直線 3x + 4y = 15 求弦長）、geometry_grade12_foundation_015（兩圓公切線條數）、geometry_grade10_foundation_005（兩平行弦距離），沒有任何一題在數「圓上到定直線距離為定值的點」，也沒有任何一題的陷阱是「兩條平行線之中有一條恰好相切」。題型取自解析幾何教材圓與直線位置關係單元的延伸題。"
+      }
+    },
+    {
+      "id": "geometry_grade11_foundation_054",
+      "reviewStatus": "ok",
+      "topic": "geometry",
+      "subtopic": "cosine_rule_with_sum_of_two_sides",
+      "tags": [
+        "c:trigonometry",
+        "c:triangle",
+        "m:direct"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade11",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一個三角形有一個內角是 60°。夾住這個 60° 角的兩條邊，長度加起來是 10；而這個 60° 角的對邊長 8。若這個三角形的面積可以寫成 k√3，求 k 的值。",
+        "zh-Hans": "一个三角形有一个内角是 60°。夹住这个 60° 角的两条边，长度加起来是 10；而这个 60° 角的对边长 8。若这个三角形的面积可以写成 k√3，求 k 的值。",
+        "en": "A triangle has an interior angle of 60°. The two sides enclosing that 60° angle have lengths adding up to 10, and the side opposite the 60° angle has length 8. If the area of the triangle can be written as k√3, find the value of k.",
+        "ja": "ある三角形の内角の 1 つが 60° である。この 60° の角を挟む 2 辺の長さの和は 10 で、この角の対辺の長さは 8 である。この三角形の面積が k√3 と書けるとき、k の値を求めよ。"
+      },
+      "answer": {
+        "zh-Hant": "k 的值是 3。",
+        "zh-Hans": "k 的值是 3。",
+        "en": "The value of k is 3.",
+        "ja": "k の値は 3 である。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "設夾住 60° 角的兩條邊長是 b 與 c，這個角的對邊長是 a。已知 b + c = 10、a = 8。注意題目沒有分別給出 b 與 c，只給了它們的和，所以不要急著把 b 與 c 個別解出來。",
+          "由餘弦定理，對邊的平方 a² = b² + c² − 2bc cos 60°，而 cos 60° = 1/2，所以 a² = b² + c² − bc。",
+          "關鍵的代數變形：把 b² + c² 換成 (b + c)² − 2bc，於是 a² = (b + c)² − 2bc − bc = (b + c)² − 3bc。這一步把「和」與「積」分開，正好對應題目給的條件。",
+          "代入數值：8² = 10² − 3bc，也就是 64 = 100 − 3bc，所以 3bc = 36，bc = 12。乘積求出來了，個別的 b 與 c 完全不需要知道。",
+          "三角形面積 = (1/2) bc sin 60° = (1/2) × 12 × (√3/2) = 3√3。",
+          "確認這樣的三角形真的存在：b 與 c 是 t² − 10t + 12 = 0 的兩根，判別式 100 − 48 = 52 > 0，兩根之和 10 與之積 12 都是正數，所以兩根都是正的實數，三角形成立。",
+          "所以面積是 3√3，也就是 k = 3。"
+        ],
+        "zh-Hans": [
+          "设夹住 60° 角的两条边长是 b 与 c，这个角的对边长是 a。已知 b + c = 10、a = 8。注意题目没有分别给出 b 与 c，只给了它们的和，所以不要急着把 b 与 c 个别解出来。",
+          "由余弦定理，对边的平方 a² = b² + c² − 2bc cos 60°，而 cos 60° = 1/2，所以 a² = b² + c² − bc。",
+          "关键的代数变形：把 b² + c² 换成 (b + c)² − 2bc，于是 a² = (b + c)² − 2bc − bc = (b + c)² − 3bc。这一步把「和」与「积」分开，正好对应题目给的条件。",
+          "代入数值：8² = 10² − 3bc，也就是 64 = 100 − 3bc，所以 3bc = 36，bc = 12。乘积求出来了，个别的 b 与 c 完全不需要知道。",
+          "三角形面积 = (1/2) bc sin 60° = (1/2) × 12 × (√3/2) = 3√3。",
+          "确认这样的三角形真的存在：b 与 c 是 t² − 10t + 12 = 0 的两根，判别式 100 − 48 = 52 > 0，两根之和 10 与之积 12 都是正数，所以两根都是正的实数，三角形成立。",
+          "所以面积是 3√3，也就是 k = 3。"
+        ],
+        "en": [
+          "Let the two sides enclosing the 60° angle have lengths b and c, and let the opposite side have length a. We know b + c = 10 and a = 8. Note that b and c are not given separately, only their sum, so do not rush to solve for them individually.",
+          "By the law of cosines the opposite side satisfies a² = b² + c² − 2bc cos 60°, and cos 60° = 1/2, so a² = b² + c² − bc.",
+          "The key algebraic move: replace b² + c² by (b + c)² − 2bc, giving a² = (b + c)² − 2bc − bc = (b + c)² − 3bc. This separates the sum from the product, exactly matching the given data.",
+          "Substituting: 8² = 10² − 3bc, that is 64 = 100 − 3bc, so 3bc = 36 and bc = 12. The product is found, and the individual values of b and c are never needed.",
+          "The area is (1/2) bc sin 60° = (1/2) × 12 × (√3/2) = 3√3.",
+          "Confirm such a triangle exists: b and c are the roots of t² − 10t + 12 = 0, whose discriminant is 100 − 48 = 52 > 0, and whose sum 10 and product 12 are both positive, so both roots are positive reals and the triangle is genuine.",
+          "Hence the area is 3√3, so k = 3."
+        ],
+        "ja": [
+          "60° の角を挟む 2 辺の長さを b、c、その角の対辺の長さを a とする。b + c = 10、a = 8 が与えられている。b と c は個別には与えられておらず和だけなので、急いで個別に求めようとしないこと。",
+          "余弦定理より対辺について a² = b² + c² − 2bc cos 60° であり、cos 60° = 1/2 なので a² = b² + c² − bc となる。",
+          "鍵となる式変形：b² + c² を (b + c)² − 2bc に置き換えると a² = (b + c)² − 2bc − bc = (b + c)² − 3bc。これで「和」と「積」が分離され、与えられた条件とちょうど対応する。",
+          "数値を代入すると 8² = 10² − 3bc、つまり 64 = 100 − 3bc となり 3bc = 36、bc = 12。積が求まり、b と c の個別の値は全く必要ない。",
+          "面積は (1/2) bc sin 60° = (1/2) × 12 × (√3/2) = 3√3 である。",
+          "そのような三角形が実在することの確認：b と c は t² − 10t + 12 = 0 の 2 根で、判別式は 100 − 48 = 52 > 0、和 10 と積 12 はともに正なので 2 根はともに正の実数であり、三角形は成立する。",
+          "したがって面積は 3√3、すなわち k = 3 である。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "3"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring",
+        "reference": "geometry-grade11-foundation",
+        "notes": "全庫「餘弦定理／正弦定理」9 題全部掃過。geometry_grade11_foundation_011 是三邊求角、geometry_grade11_foundation_014 是兩邊夾角直接求面積、geometry_grade12_foundation_043 是三角成等差、geometry_grade12_foundation_046 是 sin 比求最大角，都沒有用到「和與積分離」的代數變形。本題的推理核心是 (b + c)² − 3bc 這個恆等變形，讓個別邊長不必求出。題型取自高中三角教材「餘弦定理與對稱式」單元。 初稿的題幹用了「三角形 ABC 中，AB = …、BC = …」這個模板，因而與 geometry_grade11_foundation_011（三邊求角）撞到 0.50；那題是三邊直接求角，與本題的和積分離無關，已把題幹改成不指定頂點字母的敘述。"
+      }
     }
   ]
 }

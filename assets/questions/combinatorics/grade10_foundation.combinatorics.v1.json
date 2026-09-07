@@ -4816,6 +4816,164 @@
         "reference": "combinatorics-grade10-foundation",
         "notes": "題型出自 Utah 數學圈講義 Number Theory 第 12 題（Erdős–Szekeres 定理）與 cut-the-knot〈The Puzzlers' Pigeonhole〉裡「10 個相異數的任一排列必有長度 4 的遞增或遞減子序列」，我改寫成求最少人數並補上 9 人的具體反例。全庫掃過「遞增|遞減|單調」regex 只命中 4 題，全是計數題（嚴格遞增四位數、嚴格遞增函數個數等），沒有一題涉及子序列的存在性；c:sequence 的既有題都是求通項或求和。"
       }
+    },
+    {
+      "id": "combinatorics_grade10_foundation_054",
+      "reviewStatus": "ok",
+      "topic": "combinatorics",
+      "subtopic": "conjugate_binomial_product_coefficient",
+      "tags": [
+        "c:binomial",
+        "m:direct"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "求多項式 (1 + x)⁶ (1 − x)⁶ 展開後 x⁴ 項的係數。（提醒：兩個六次式相乘，展開後會得到一個十二次多項式。）",
+        "zh-Hans": "求多项式 (1 + x)⁶ (1 − x)⁶ 展开后 x⁴ 项的系数。（提醒：两个六次式相乘，展开后会得到一个十二次多项式。）",
+        "en": "Find the coefficient of x⁴ in the expansion of the polynomial (1 + x)⁶ (1 − x)⁶. Note that multiplying two factors of degree six gives a polynomial of degree twelve.",
+        "ja": "多項式 (1 + x)⁶ (1 − x)⁶ を展開したときの x⁴ の項の係数を求めなさい。（注意：6 次式どうしの積なので、展開すると 12 次の多項式になります。）"
+      },
+      "answer": {
+        "zh-Hant": "x⁴ 項的係數是 15。",
+        "zh-Hans": "x⁴ 项的系数是 15。",
+        "en": "The coefficient of x⁴ is 15.",
+        "ja": "x⁴ の係数は 15 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "硬幹的話要先把 (1 + x)⁶ 與 (1 − x)⁶ 各七項寫出來，再做一次逐項相乘與合併，項數多又容易漏。先看看兩個括號之間有什麼關係。",
+          "兩個式子的指數都是 6，所以可以先把底乘起來再取次方：(1 + x)⁶ × (1 − x)⁶ = [(1 + x)(1 − x)]⁶ = (1 − x²)⁶。",
+          "於是原式其實就是 (1 − x²)⁶。把 (−x²) 當成一個整體來套二項式定理，一般項是 C(6, k) 乘上 (−x²) 的 k 次方，也就是帶著正負號的 C(6, k) 乘 x 的 2k 次方。",
+          "要得到 x⁴ 就需要 2k = 4，也就是 k = 2；此時的正負號是負號的平方，等於正號，所以這一項是 C(6, 2) × x⁴ = 15x⁴，係數是 15。",
+          "驗算：把 (1 − x²)⁶ 完全展開得到 1 − 6x² + 15x⁴ − 20x⁶ + 15x⁸ − 6x¹⁰ + x¹²，x⁴ 的係數確實是 15 ✓。順帶注意展開式只剩偶次項，所有奇次項的係數都是 0，這正是兩個括號互為共軛所造成的對稱。"
+        ],
+        "zh-Hans": [
+          "硬干的话要先把 (1 + x)⁶ 与 (1 − x)⁶ 各七项写出来，再做一次逐项相乘与合并，项数多又容易漏。先看看两个括号之间有什么关系。",
+          "两个式子的指数都是 6，所以可以先把底乘起来再取次方：(1 + x)⁶ × (1 − x)⁶ = [(1 + x)(1 − x)]⁶ = (1 − x²)⁶。",
+          "于是原式其实就是 (1 − x²)⁶。把 (−x²) 当成一个整体来套二项式定理，一般项是 C(6, k) 乘上 (−x²) 的 k 次方，也就是带着正负号的 C(6, k) 乘 x 的 2k 次方。",
+          "要得到 x⁴ 就需要 2k = 4，也就是 k = 2；此时的正负号是负号的平方，等于正号，所以这一项是 C(6, 2) × x⁴ = 15x⁴，系数是 15。",
+          "验算：把 (1 − x²)⁶ 完全展开得到 1 − 6x² + 15x⁴ − 20x⁶ + 15x⁸ − 6x¹⁰ + x¹²，x⁴ 的系数确实是 15 ✓。顺带注意展开式只剩偶次项，所有奇次项的系数都是 0，这正是两个括号互为共轭所造成的对称。"
+        ],
+        "en": [
+          "Brute force would mean writing out all seven terms of each factor and multiplying them together term by term, which is long and error-prone. Look first at how the two brackets are related.",
+          "Both factors carry the same exponent 6, so the bases may be multiplied first: (1 + x)⁶ × (1 − x)⁶ = [(1 + x)(1 − x)]⁶ = (1 − x²)⁶.",
+          "The product is therefore just (1 − x²)⁶. Treating (−x²) as a single quantity in the binomial theorem, the general term is C(6, k) times the k-th power of (−x²), that is, a signed C(6, k) times x raised to 2k.",
+          "For an x⁴ term we need 2k = 4, so k = 2; the sign is a minus sign squared, hence positive, and the term is C(6, 2) × x⁴ = 15x⁴, giving coefficient 15.",
+          "Check: expanding (1 − x²)⁶ fully gives 1 − 6x² + 15x⁴ − 20x⁶ + 15x⁸ − 6x¹⁰ + x¹², and the coefficient of x⁴ is indeed 15. Note also that only even powers survive, every odd coefficient being 0, which is exactly the symmetry created by the two conjugate brackets."
+        ],
+        "ja": [
+          "力ずくで解くには (1 + x)⁶ と (1 − x)⁶ の 7 項ずつをすべて書き出して掛け合わせる必要があり、項数が多く見落としやすいです。まず 2 つの括弧の関係を見ましょう。",
+          "指数がどちらも 6 なので、底どうしを先に掛けてから 6 乗できます：(1 + x)⁶ × (1 − x)⁶ = [(1 + x)(1 − x)]⁶ = (1 − x²)⁶。",
+          "つまり元の式は (1 − x²)⁶ です。(−x²) をひとかたまりとみて二項定理を使うと、一般項は C(6, k) に (−x²) の k 乗を掛けたもの、すなわち符号つきの C(6, k) と x の 2k 乗の積になります。",
+          "x⁴ を得るには 2k = 4、つまり k = 2 が必要で、符号はマイナスの 2 乗なのでプラスです。したがってこの項は C(6, 2) × x⁴ = 15x⁴ で、係数は 15 です。",
+          "検算：(1 − x²)⁶ を完全に展開すると 1 − 6x² + 15x⁴ − 20x⁶ + 15x⁸ − 6x¹⁰ + x¹² となり、x⁴ の係数は確かに 15 ✓。偶数次の項しか残らず奇数次の係数がすべて 0 になるのは、2 つの括弧が互いに共役であることによる対称性です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "15"
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "combinatorics-grade10-conjugate-product-expansion",
+        "notes": "題型來源：標準的二項式展開延伸題，推理點是先辨認出 (1+x)(1−x) = 1 − x² 再展開；本輪沒有抓到專門講這一招的外部頁面，只在英文維基百科 Binomial coefficient 條目確認了二項式定理的一般項寫法，其餘為自行設計，照實記錄。去重：全庫 c:binomial 的 23 題逐題看過，algebra_grade10_foundation_012（(x + 2/x)⁶ 的常數項）與 combinatorics_grade9_foundation_019（(x + 2)⁵ 的 x³ 項）都是單一括號直接套一般項；algebra_grade12_foundation_030（(1+x)¹⁰ 偶次項係數和）與 algebra_grade12_foundation_021（(1+x+x²)⁵ 係數總和）走的是代入 x = 1、−1 的路子，都不是本題「先把兩個括號合併成 (1 − x²)⁶」的結構。"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      }
+    },
+    {
+      "id": "combinatorics_grade10_foundation_055",
+      "reviewStatus": "ok",
+      "topic": "combinatorics",
+      "subtopic": "cheapest_connecting_road_network",
+      "tags": [
+        "c:graph_theory",
+        "m:extremal"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "甲、乙、丙、丁、戊五個村莊分散在山區。工程隊評估後，只有下面七條路線的地形蓋得起來，括號內是造價（單位：萬元）：甲–丙（2）、乙–丙（3）、甲–乙（4）、丙–丁（5）、乙–丁（6）、丁–戊（7）、丙–戊（8）。縣府要挑出其中幾條動工，讓五個村莊連成一片，也就是從任何一個村莊出發，都能沿著修好的道路走到其餘四個村莊。求動工的總造價最少是多少萬元。",
+        "zh-Hans": "甲、乙、丙、丁、戊五个村庄分散在山区。工程队评估后，只有下面七条路线的地形盖得起来，括号内是造价（单位：万元）：甲–丙（2）、乙–丙（3）、甲–乙（4）、丙–丁（5）、乙–丁（6）、丁–戊（7）、丙–戊（8）。县府要挑出其中几条动工，让五个村庄连成一片，也就是从任何一个村庄出发，都能沿着修好的道路走到其余四个村庄。求动工的总造价最少是多少万元。",
+        "en": "Five villages P, Q, R, S and T are scattered across a hilly region. Surveyors report that only the following seven links sit on terrain that can be built on, with construction costs in brackets: P-R (2), Q-R (3), P-Q (4), R-S (5), Q-S (6), S-T (7), R-T (8). The county will start work on some of them so that the five villages form one connected whole, meaning that from any village one can reach the other four along the roads that get built. Find the smallest possible total construction cost.",
+        "ja": "5 つの村 P、Q、R、S、T が山間部に点在しています。調査の結果、地形の都合で建設できるのは次の 7 本だけで、括弧内は建設費です：P-R（2）、Q-R（3）、P-Q（4）、R-S（5）、Q-S（6）、S-T（7）、R-T（8）。県はこのうち何本かを着工し、5 つの村が一つにつながるようにします。つまりどの村から出発しても、建設された道路をたどって残り 4 つの村へ行けるようにします。総建設費の最小値を求めなさい。"
+      },
+      "answer": {
+        "zh-Hant": "最低的總造價是 17 萬元。",
+        "zh-Hans": "最低的总造价是 17 万元。",
+        "en": "The smallest possible total cost is 17.",
+        "ja": "総建設費の最小値は 17 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "五個村莊要全部連通，至少得修 4 條道路：一開始有 5 個各自孤立的區塊，每修一條道路最多只能把兩個區塊併成一個，區塊數最多減 1，要從 5 塊變成 1 塊就得修 4 條。",
+          "直覺可能會想「挑最便宜的四條」，也就是造價 2、3、4、5 的甲–丙、乙–丙、甲–乙、丙–丁，總價 14 萬元。但這四條裡沒有一條碰到戊，戊完全被孤立，方案不合格——便宜不代表有用。",
+          "正確的做法是把七條路線由便宜排到貴，逐條檢視，只有在「這條路能把兩個目前還不相通的區塊接起來」時才修，否則跳過。",
+          "甲–丙（2）：修，甲與丙相通。乙–丙（3）：修，甲、乙、丙相通。甲–乙（4）：跳過，甲與乙已經相通，修了只是多花 4 萬元。",
+          "丙–丁（5）：修，甲、乙、丙、丁相通。乙–丁（6）：跳過，兩端已相通。丁–戊（7）：修，戊終於接上，五個村莊全部相通，可以收工。丙–戊（8）不必再修。",
+          "選中的是甲–丙、乙–丙、丙–丁、丁–戊四條，總造價 2 + 3 + 5 + 7 = 17 萬元。",
+          "驗算：用程式列出全部 2⁷ = 128 種修路方案，逐一判斷五個村莊是否連通，其中連通方案的最低總造價正是 17 萬元 ✓。另外注意戊只有丁–戊（7）與丙–戊（8）兩條路可以接上，所以任何合格方案都得付出至少 7 萬元，這就是答案高於「最便宜四條」的原因。"
+        ],
+        "zh-Hans": [
+          "五个村庄要全部连通，至少得修 4 条道路：一开始有 5 个各自孤立的区块，每修一条道路最多只能把两个区块并成一个，区块数最多减 1，要从 5 块变成 1 块就得修 4 条。",
+          "直觉可能会想“挑最便宜的四条”，也就是造价 2、3、4、5 的甲–丙、乙–丙、甲–乙、丙–丁，总价 14 万元。但这四条里没有一条碰到戊，戊完全被孤立，方案不合格——便宜不代表有用。",
+          "正确的做法是把七条路线由便宜排到贵，逐条检视，只有在“这条路能把两个目前还不相通的区块接起来”时才修，否则跳过。",
+          "甲–丙（2）：修，甲与丙相通。乙–丙（3）：修，甲、乙、丙相通。甲–乙（4）：跳过，甲与乙已经相通，修了只是多花 4 万元。",
+          "丙–丁（5）：修，甲、乙、丙、丁相通。乙–丁（6）：跳过，两端已相通。丁–戊（7）：修，戊终于接上，五个村庄全部相通，可以收工。丙–戊（8）不必再修。",
+          "选中的是甲–丙、乙–丙、丙–丁、丁–戊四条，总造价 2 + 3 + 5 + 7 = 17 万元。",
+          "验算：用程序列出全部 2⁷ = 128 种修路方案，逐一判断五个村庄是否连通，其中连通方案的最低总造价正是 17 万元 ✓。另外注意戊只有丁–戊（7）与丙–戊（8）两条路可以接上，所以任何合格方案都得付出至少 7 万元，这就是答案高于“最便宜四条”的原因。"
+        ],
+        "en": [
+          "Connecting all five villages needs at least 4 roads: at the start there are 5 separate blocks, and each new road merges at most two blocks into one, cutting the block count by at most 1, so going from 5 blocks to 1 requires 4 roads.",
+          "The tempting move is to take the four cheapest links, namely P-R (2), Q-R (3), P-Q (4) and R-S (5), for a total of 14. But none of those four touches T, which stays isolated, so the plan fails. Cheap does not mean useful.",
+          "The correct method is to sort the seven links from cheapest to dearest and inspect them one at a time, building a link only when it joins two blocks that are not yet connected, and skipping it otherwise.",
+          "P-R (2): build, P and R are joined. Q-R (3): build, P, Q, R are joined. P-Q (4): skip, since P and Q are already connected and this link would only waste 4.",
+          "R-S (5): build, P, Q, R, S are joined. Q-S (6): skip, both ends already connected. S-T (7): build, T is finally attached and all five villages are connected, so we can stop. R-T (8) is not needed.",
+          "The chosen links are P-R, Q-R, R-S and S-T, with total cost 2 + 3 + 5 + 7 = 17.",
+          "Check: enumerating all 2⁷ = 128 subsets of links by computer and testing each for connectivity, the cheapest connected plan costs exactly 17. Note also that T can only be reached through S-T (7) or R-T (8), so every valid plan must spend at least 7 on T alone, which is why the answer exceeds the cost of the four cheapest links."
+        ],
+        "ja": [
+          "5 つの村をすべてつなぐには少なくとも 4 本の道路が必要です。最初は 5 個の孤立したかたまりがあり、道路を 1 本引くとかたまりは高々 1 つ減るので、5 個を 1 個にするには 4 本要ります。",
+          "つい「安い 4 本を選ぶ」と考えたくなります。すなわち費用 2、3、4、5 の P-R、Q-R、P-Q、R-S で合計 14 です。しかしこの 4 本はどれも T に触れておらず、T が孤立するので不合格です。安さは有用さではありません。",
+          "正しいやり方は、7 本を安い順に並べて 1 本ずつ調べ、「まだつながっていない 2 つのかたまりを結ぶとき」だけ建設し、そうでなければ飛ばすことです。",
+          "P-R（2）：建設、P と R がつながる。Q-R（3）：建設、P、Q、R がつながる。P-Q（4）：スキップ、P と Q はすでに連結で、建てても 4 を無駄にするだけ。",
+          "R-S（5）：建設、P、Q、R、S がつながる。Q-S（6）：スキップ、両端はすでに連結。S-T（7）：建設、ついに T がつながり 5 村すべて連結したので終了。R-T（8）は不要です。",
+          "選ばれたのは P-R、Q-R、R-S、S-T の 4 本で、総費用は 2 + 3 + 5 + 7 = 17 です。",
+          "検算：7 本の部分集合 2⁷ = 128 通りをすべて列挙して連結性を判定すると、連結になる案の最小費用はちょうど 17 ✓。また T につながる道は S-T（7）と R-T（8）しかないので、どの正しい案でも T のために最低 7 を払う必要があり、これが「安い 4 本」より高くなる理由です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "17"
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "combinatorics-grade10-minimum-spanning-tree",
+        "notes": "題型來源：本輪以 WebFetch 實際抓取英文維基百科 Minimum spanning tree 條目，取用 Kruskal 演算法（由小到大掃邊、成環就跳過）與 cut property 的敘述，再自行設計一組會讓「最便宜的四條」失敗的權重，使貪心與直覺分歧。去重：全庫用 regex 掃「造價｜成本｜最低.*費用｜鋪設」與「最小生成」都沒有帶權重的連通問題。既有的 logic_grade7_foundation_040（4 座城市最少修幾條路）與 logic_grade8_foundation_026（8 城市最少幾條路）只問道路「條數」、沒有造價，答案就是 n − 1；logic_grade10_foundation_045（20 村莊 14 條路無環，求區塊數）是反過來由邊數推連通塊數。本題是唯一要在權重下做取捨的。"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      }
     }
   ]
 }

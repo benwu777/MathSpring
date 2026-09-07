@@ -3581,6 +3581,86 @@
         "reference": "combinatorics-grade8-foundation",
         "notes": "題型出處：CEMC（Waterloo）2024 Cayley Contest 第 17 題（1000 至 9999 之中四位數字都是偶數的有幾個）給了『四位數＋逐位限制＋計數』的骨架；本題把限制換成乘積條件，因此不能像原題那樣直接乘上每位的選擇數，必須先按『用到哪一組數字（多重集合）』分類再算排列數。掃全庫 regex「數字乘積／各位數字之積」命中 number_theory_grade8_foundation_028（兩位數十位乘個位＝12 有幾個，只需列 12 的因數對）與 number_theory_grade12_foundation_021（乘積為 24 的最小正整數，求極值），都沒有多重集合分類＋重複排列這一層；乘積數也刻意避開 12 與 24。"
       }
+    },
+    {
+      "id": "combinatorics_grade8_foundation_042",
+      "reviewStatus": "ok",
+      "topic": "combinatorics",
+      "subtopic": "two_role_selection_with_overlap",
+      "tags": [
+        "c:permutation_combination",
+        "c:inclusion_exclusion",
+        "m:direct"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade8",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "某社團有 20 位成員，其中會下西洋棋的有 12 人、會下圍棋的有 9 人，兩種棋都會的有 5 人。現在要選出「西洋棋代表」1 人和「圍棋代表」1 人：西洋棋代表必須會下西洋棋，圍棋代表必須會下圍棋，而且同一個人不可以同時擔任這兩個職務。求共有多少種選法。",
+        "zh-Hans": "某社团有 20 位成员，其中会下国际象棋的有 12 人、会下围棋的有 9 人，两种棋都会的有 5 人。现在要选出“国际象棋代表”1 人和“围棋代表”1 人：国际象棋代表必须会下国际象棋，围棋代表必须会下围棋，而且同一个人不可以同时担任这两个职务。求共有多少种选法。",
+        "en": "A club has 20 members, of whom 12 can play chess, 9 can play Go, and 5 can play both. One chess representative and one Go representative are to be chosen: the chess representative must be able to play chess, the Go representative must be able to play Go, and one person may not hold both posts. How many ways are there to choose them?",
+        "ja": "あるクラブには 20 人の会員がいて、そのうちチェスができるのは 12 人、囲碁ができるのは 9 人、両方できるのは 5 人です。ここから「チェス代表」1 人と「囲碁代表」1 人を選びます。チェス代表はチェスができる人、囲碁代表は囲碁ができる人でなければならず、同じ人が両方の役を兼ねることはできません。選び方は何通りありますか。"
+      },
+      "answer": {
+        "zh-Hant": "共有 103 種選法。",
+        "zh-Hans": "共有 103 种选法。",
+        "en": "There are 103 ways to choose them.",
+        "ja": "選び方は 103 通りです。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "先暫時忽略「不可以兼任」這條限制。西洋棋代表要從會下西洋棋的 12 人裡挑，有 12 種選擇；圍棋代表要從會下圍棋的 9 人裡挑，有 9 種選擇。用乘法原理得 12 × 9 = 108 種配對。",
+          "這 108 種裡面混進了一些不合格的：兩個職務被同一個人包辦。要把它們找出來扣掉。",
+          "一個人要能同時被選為兩個代表，他必須兩種棋都會。這樣的人有 5 位，而每一位恰好對應 1 種不合格的配對（他自己同時當西洋棋代表和圍棋代表），所以不合格的共有 5 種。",
+          "因此合格的選法是 108 − 5 = 103 種。",
+          "常見的錯誤是先算「至少會下一種棋」的人數 12 + 9 − 5 = 16，再算 16 × 15 = 240 或 C(16, 2) = 120。這是錯的：兩個職務對棋種各有各的要求，不能把兩群人混成一群任意挑；順帶一提，題目給的成員總數 20 在本題完全用不到，那 4 位兩種棋都不會的人不影響答案。",
+          "驗算：用程式把成員編號，讓 1 到 12 號會西洋棋、8 到 16 號會圍棋（重疊的 8 到 12 號恰好是 5 人兩種都會），再列舉所有「西洋棋代表、圍棋代表」的有序配對並排除同一人的情形，得到 103 種 ✓。"
+        ],
+        "zh-Hans": [
+          "先暂时忽略“不可以兼任”这条限制。国际象棋代表要从会下国际象棋的 12 人里挑，有 12 种选择；围棋代表要从会下围棋的 9 人里挑，有 9 种选择。用乘法原理得 12 × 9 = 108 种配对。",
+          "这 108 种里面混进了一些不合格的：两个职务被同一个人包办。要把它们找出来扣掉。",
+          "一个人要能同时被选为两个代表，他必须两种棋都会。这样的人有 5 位，而每一位恰好对应 1 种不合格的配对（他自己同时当国际象棋代表和围棋代表），所以不合格的共有 5 种。",
+          "因此合格的选法是 108 − 5 = 103 种。",
+          "常见的错误是先算“至少会下一种棋”的人数 12 + 9 − 5 = 16，再算 16 × 15 = 240 或 C(16, 2) = 120。这是错的：两个职务对棋种各有各的要求，不能把两群人混成一群任意挑；顺带一提，题目给的成员总数 20 在本题完全用不到，那 4 位两种棋都不会的人不影响答案。",
+          "验算：用程序把成员编号，让 1 到 12 号会国际象棋、8 到 16 号会围棋（重叠的 8 到 12 号恰好是 5 人两种都会），再列举所有“国际象棋代表、围棋代表”的有序配对并排除同一人的情形，得到 103 种 ✓。"
+        ],
+        "en": [
+          "Ignore the no-double-post rule for a moment. The chess representative is chosen from the 12 chess players, giving 12 options, and the Go representative from the 9 Go players, giving 9 options. By the multiplication principle that is 12 × 9 = 108 pairings.",
+          "Some of those 108 pairings are invalid, namely the ones in which a single person fills both posts. We must identify and subtract them.",
+          "To be chosen for both posts a person must play both games, and there are 5 such people. Each of them corresponds to exactly 1 invalid pairing, in which that person is both the chess and the Go representative, so 5 pairings are invalid.",
+          "The number of valid choices is therefore 108 - 5 = 103.",
+          "A common mistake is to first compute the 12 + 9 - 5 = 16 members who play at least one game and then evaluate 16 × 15 = 240 or C(16, 2) = 120. That is wrong: the two posts have different game requirements, so the two groups cannot be merged into one pool. Note also that the total of 20 members is never used here, since the 4 people who play neither game do not affect the answer.",
+          "Check: labelling the members by computer so that numbers 1 to 12 play chess and numbers 8 to 16 play Go, the overlap 8 to 12 being exactly 5 people who play both, and listing every ordered pair of chess and Go representatives while excluding the ones with the same person, yields 103."
+        ],
+        "ja": [
+          "まず「兼任禁止」の条件をいったん無視します。チェス代表はチェスができる 12 人から選ぶので 12 通り、囲碁代表は囲碁ができる 9 人から選ぶので 9 通り。積の法則で 12 × 9 = 108 通りの組ができます。",
+          "この 108 通りには、1 人が両方の役を兼ねてしまう不適格なものが紛れ込んでいます。それを見つけて引きます。",
+          "両方の代表に選ばれうる人は、両方の競技ができる人でなければなりません。そのような人は 5 人おり、各人がちょうど 1 通りの不適格な組（その人自身がチェス代表かつ囲碁代表）に対応するので、不適格は 5 通りです。",
+          "したがって適格な選び方は 108 − 5 = 103 通りです。",
+          "よくある誤りは、まず「少なくとも一方ができる」人数 12 + 9 − 5 = 16 を求めて 16 × 15 = 240 や C(16, 2) = 120 と計算することです。これは誤りで、2 つの役には別々の条件があるため 2 つの集団を 1 つのプールにまとめて自由に選ぶことはできません。なお会員総数 20 はこの問題では一切使わず、どちらもできない 4 人は答えに影響しません。",
+          "検算：会員に番号をつけ、1 から 12 番がチェス、8 から 16 番が囲碁ができる（重なる 8 から 12 番がちょうど両方できる 5 人）としてプログラムで「チェス代表、囲碁代表」の順序対をすべて列挙し、同一人物の場合を除くと 103 通りになります ✓。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "103"
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "combinatorics-grade8-two-roles-overlapping-pools",
+        "notes": "題型來源：兩個候選人集合重疊時的職務指派計數，是集合與計數單元的常見延伸題；本輪沒有抓到可直接引用的外部頁面，照實記錄為自行設計。去重：全庫 c:inclusion_exclusion 的 26 題逐題看過，從 arithmetic_grade3_foundation_043 到 logic_grade6_foundation_033、combinatorics_grade9_foundation_010，全部都是「求某一群人的人數」的文氏圖題；本題給了同樣形狀的資料，但問的是「配對的方法數」，推理點在於乘法原理算出的 108 種裡有 5 種必須扣掉，而且兩群人不能合併成一群。也對照 combinatorics_grade8_foundation_012（選 3 人再指定主席）與 combinatorics_grade9_foundation_025（三個獎項頒給 5 人），那兩題的候選人來自同一群，沒有重疊集合造成的無效配對。"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      }
     }
   ]
 }

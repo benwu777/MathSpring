@@ -3933,6 +3933,186 @@
         "reference": "agent-drafted-nrich-2026-09-03",
         "notes": "題型參考 NRICH《Common Divisor》（n⁵ − n 這一列數的最大公因數）與 NRICH Polynomial functions and their roots 題組，由背景起草代理於 2026-09-03 實際查閱 NRICH 等公開題組後改寫；數值、敘述與四語系詳解為本題庫自行推導，非整題引用。主流程已跑機械校驗與跨代理去重。"
       }
+    },
+    {
+      "id": "number_theory_grade11_foundation_042",
+      "reviewStatus": "ok",
+      "topic": "number_theory",
+      "subtopic": "reduced_fractions_between_two_values",
+      "tags": [
+        "c:fraction",
+        "c:basic_counting",
+        "m:enumeration"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade11",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "求同時滿足下列三個條件的分數 p/q 一共有多少個：p、q 都是正整數且分母 q 不超過 10；p/q 已經是最簡分數（p 與 q 互質）；而且它的值嚴格介於 1/3 與 1/2 之間。",
+        "zh-Hans": "求同时满足下列三个条件的分数 p/q 一共有多少个：p、q 都是正整数且分母 q 不超过 10；p/q 已经是最简分数（p 与 q 互质）；而且它的值严格介于 1/3 与 1/2 之间。",
+        "en": "How many fractions p/q satisfy all three conditions below: p and q are positive integers with denominator q at most 10; p/q is already in lowest terms, that is, p and q are coprime; and its value lies strictly between 1/3 and 1/2?",
+        "ja": "次の 3 つの条件をすべて満たす分数 p/q は何個ありますか。p、q はともに正の整数で分母 q は 10 以下である。p/q はすでに既約分数である（p と q は互いに素）。そして、その値は 1/3 と 1/2 の間に厳密に入る。"
+      },
+      "answer": {
+        "zh-Hant": "符合條件的分數一共有 4 個。",
+        "zh-Hans": "符合条件的分数一共有 4 个。",
+        "en": "There are 4 such fractions.",
+        "ja": "条件を満たす分数は 4 個あります。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "把條件 1/3 < p/q < 1/2 的三邊同乘以正數 q（不等號方向不變），得到 q/3 < p < q/2。",
+          "於是只要對每一個分母 q，找出嚴格落在 q/3 與 q/2 之間的整數 p 就好。注意 q = 1 時分數是整數，不可能落在 1/3 與 1/2 之間。",
+          "q = 2、3、4：範圍分別是 2/3 < p < 1、1 < p < 3/2、4/3 < p < 2，中間都沒有整數。",
+          "q = 5：範圍是 5/3 < p < 5/2，只有 p = 2；2 與 5 互質，所以 2/5 合格。",
+          "q = 6：範圍是 2 < p < 3，中間沒有整數。",
+          "q = 7：範圍是 7/3 < p < 7/2，只有 p = 3，得 3/7；q = 8：範圍是 8/3 < p < 4，只有 p = 3，得 3/8。兩個都是最簡分數。",
+          "q = 9：範圍是 3 < p < 9/2，只有 p = 4，得 4/9（互質，合格）。",
+          "q = 10：範圍是 10/3 < p < 5，只有 p = 4，但 4/10 約分之後是 2/5，不是最簡分數，而且數值和前面的 2/5 重複，不能再算一次。",
+          "所以合格的分數是 2/5、3/7、3/8、4/9，一共 4 個。"
+        ],
+        "zh-Hans": [
+          "把条件 1/3 < p/q < 1/2 的三边同乘以正数 q（不等号方向不变），得到 q/3 < p < q/2。",
+          "于是只要对每一个分母 q，找出严格落在 q/3 与 q/2 之间的整数 p 就好。注意 q = 1 时分数是整数，不可能落在 1/3 与 1/2 之间。",
+          "q = 2、3、4：范围分别是 2/3 < p < 1、1 < p < 3/2、4/3 < p < 2，中间都没有整数。",
+          "q = 5：范围是 5/3 < p < 5/2，只有 p = 2；2 与 5 互质，所以 2/5 合格。",
+          "q = 6：范围是 2 < p < 3，中间没有整数。",
+          "q = 7：范围是 7/3 < p < 7/2，只有 p = 3，得 3/7；q = 8：范围是 8/3 < p < 4，只有 p = 3，得 3/8。两个都是最简分数。",
+          "q = 9：范围是 3 < p < 9/2，只有 p = 4，得 4/9（互质，合格）。",
+          "q = 10：范围是 10/3 < p < 5，只有 p = 4，但 4/10 约分之后是 2/5，不是最简分数，而且数值和前面的 2/5 重复，不能再算一次。",
+          "所以合格的分数是 2/5、3/7、3/8、4/9，一共 4 个。"
+        ],
+        "en": [
+          "Multiply all three parts of 1/3 < p/q < 1/2 by the positive number q, which keeps the inequalities pointing the same way, to get q/3 < p < q/2.",
+          "So for each denominator q we only need the integers p lying strictly between q/3 and q/2. Note that q = 1 makes the fraction an integer, which cannot lie between 1/3 and 1/2.",
+          "q = 2, 3, 4: the ranges are 2/3 < p < 1, then 1 < p < 3/2, then 4/3 < p < 2, and none of them contains an integer.",
+          "q = 5: the range is 5/3 < p < 5/2, so p = 2 only; 2 and 5 are coprime, so 2/5 counts.",
+          "q = 6: the range is 2 < p < 3, which contains no integer.",
+          "q = 7: the range is 7/3 < p < 7/2, so p = 3, giving 3/7. q = 8: the range is 8/3 < p < 4, so p = 3, giving 3/8. Both are already in lowest terms.",
+          "q = 9: the range is 3 < p < 9/2, so p = 4, giving 4/9, which is coprime and counts.",
+          "q = 10: the range is 10/3 < p < 5, so p = 4, but 4/10 reduces to 2/5, so it is not in lowest terms and its value repeats one already counted.",
+          "The qualifying fractions are therefore 2/5, 3/7, 3/8 and 4/9, which is 4 of them."
+        ],
+        "ja": [
+          "条件 1/3 < p/q < 1/2 の 3 辺に正の数 q を掛けます（不等号の向きは変わりません）。すると q/3 < p < q/2 が得られます。",
+          "したがって各分母 q について、q/3 と q/2 の間に厳密に入る整数 p を探せば十分です。なお q = 1 のとき分数は整数になり、1/3 と 1/2 の間には入りません。",
+          "q = 2、3、4 のとき、範囲はそれぞれ 2/3 < p < 1、1 < p < 3/2、4/3 < p < 2 で、いずれも整数を含みません。",
+          "q = 5 のとき範囲は 5/3 < p < 5/2 で p = 2 のみです。2 と 5 は互いに素なので 2/5 は条件を満たします。",
+          "q = 6 のとき範囲は 2 < p < 3 で、整数はありません。",
+          "q = 7 のとき範囲は 7/3 < p < 7/2 で p = 3、3/7 が得られます。q = 8 のとき範囲は 8/3 < p < 4 で p = 3、3/8 が得られます。どちらも既約です。",
+          "q = 9 のとき範囲は 3 < p < 9/2 で p = 4、4/9 が得られ、互いに素なので条件を満たします。",
+          "q = 10 のとき範囲は 10/3 < p < 5 で p = 4 ですが、4/10 は約分すると 2/5 となり既約ではなく、値もすでに数えた 2/5 と重なるので数えません。",
+          "したがって条件を満たす分数は 2/5、3/7、3/8、4/9 の 4 個です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "4"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "number-theory-grade11-foundation",
+        "notes": "題型取自 Wikipedia「Farey sequence」條目：把分母有上界的既約分數排在一個區間裡數個數，是該條目的基本操作，本題取區間 (1/3, 1/2) 與上界 10。去重：全庫用「最簡分數|既約分數|之間的分數」掃出 25 題，全部是「答案為最簡分數」這種答題格式說明，沒有一題是在區間內數既約分數。number_theory_grade9_022（求最小的 n 使 (n+3)/(2n+1) 不是最簡分數）談的是同一個互質概念，但那是解一個 gcd 條件求單一 n；本題是逐一分母夾出整數再排除可約的，而且 4/10 這個陷阱正是本題的判斷點。"
+      }
+    },
+    {
+      "id": "number_theory_grade11_foundation_043",
+      "reviewStatus": "ok",
+      "topic": "number_theory",
+      "subtopic": "triangular_number_divisibility",
+      "tags": [
+        "c:sequence",
+        "c:factor_multiple",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade11",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "令 Tₙ = 1 + 2 + 3 + ⋯ + n。已知 2026 = 2 × 1013，其中 1013 是質數。求最小的正整數 n，使得 Tₙ 是 2026 的倍數。",
+        "zh-Hans": "令 Tₙ = 1 + 2 + 3 + ⋯ + n。已知 2026 = 2 × 1013，其中 1013 是质数。求最小的正整数 n，使得 Tₙ 是 2026 的倍数。",
+        "en": "Let Tₙ = 1 + 2 + 3 + ... + n. You are given that 2026 = 2 × 1013 and that 1013 is prime. Find the smallest positive integer n for which Tₙ is a multiple of 2026.",
+        "ja": "Tₙ = 1 + 2 + 3 + ⋯ + n とします。2026 = 2 × 1013 であり、1013 は素数であることが分かっています。Tₙ が 2026 の倍数となる最小の正の整数 n を求めなさい。"
+      },
+      "answer": {
+        "zh-Hant": "最小的 n 是 1012。",
+        "zh-Hans": "最小的 n 是 1012。",
+        "en": "The smallest such n is 1012.",
+        "ja": "最小の n は 1012 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "Tₙ = n(n + 1)/2，所以「Tₙ 是 2026 的倍數」等價於 n(n + 1) 是 2 × 2026 = 4052 的倍數。",
+          "把 4052 分解成 4052 = 2² × 1013，而 1013 是質數。所以 n(n + 1) 必須同時被 4 與 1013 整除，這是兩個要分開處理的條件。",
+          "關鍵觀察：n 與 n + 1 是相鄰整數，一定互質，所以質數 1013 不可能被拆成兩半分給兩個數——它必須整除 n，或者整除 n + 1，兩者只能挑一個。",
+          "情形一：1013 整除 n + 1。最小的可能是 n + 1 = 1013，也就是 n = 1012。此時另一個條件也要檢查：1012 = 4 × 253 本身就被 4 整除 ✓，兩個條件同時成立。",
+          "情形二：1013 整除 n。最小的可能是 n = 1013，但它是奇數，而 n + 1 = 1014 = 2 × 507 只含一個因數 2，所以乘積不是 4 的倍數 ✗。",
+          "情形二的下一個候選 n = 2026 也不行（2026 = 2 × 1013 同樣只含一個因數 2，而 2027 是奇數）；再下一個 n = 3039 才成立，但 3039 已經比 1012 大。",
+          "所以最小的 n 是 1012。",
+          "驗算：T₁₀₁₂ = 1012 × 1013 ÷ 2 = 506 × 1013 = 512578，而 512578 ÷ 2026 = 253，確實整除 ✓。"
+        ],
+        "zh-Hans": [
+          "Tₙ = n(n + 1)/2，所以「Tₙ 是 2026 的倍数」等价于 n(n + 1) 是 2 × 2026 = 4052 的倍数。",
+          "把 4052 分解成 4052 = 2² × 1013，而 1013 是质数。所以 n(n + 1) 必须同时被 4 与 1013 整除，这是两个要分开处理的条件。",
+          "关键观察：n 与 n + 1 是相邻整数，一定互质，所以质数 1013 不可能被拆成两半分给两个数——它必须整除 n，或者整除 n + 1，两者只能挑一个。",
+          "情形一：1013 整除 n + 1。最小的可能是 n + 1 = 1013，也就是 n = 1012。此时另一个条件也要检查：1012 = 4 × 253 本身就被 4 整除 ✓，两个条件同时成立。",
+          "情形二：1013 整除 n。最小的可能是 n = 1013，但它是奇数，而 n + 1 = 1014 = 2 × 507 只含一个因数 2，所以乘积不是 4 的倍数 ✗。",
+          "情形二的下一个候选 n = 2026 也不行（2026 = 2 × 1013 同样只含一个因数 2，而 2027 是奇数）；再下一个 n = 3039 才成立，但 3039 已经比 1012 大。",
+          "所以最小的 n 是 1012。",
+          "验算：T₁₀₁₂ = 1012 × 1013 ÷ 2 = 506 × 1013 = 512578，而 512578 ÷ 2026 = 253，确实整除 ✓。"
+        ],
+        "en": [
+          "Since Tₙ = n(n + 1)/2, saying that Tₙ is a multiple of 2026 is the same as saying that n(n + 1) is a multiple of 2 × 2026 = 4052.",
+          "Factor 4052 = 2² × 1013, where 1013 is prime. So n(n + 1) must be divisible by 4 and by 1013, and these two requirements are handled separately.",
+          "Key observation: n and n + 1 are consecutive, hence coprime, so the prime 1013 cannot be split between them. It must divide n, or it must divide n + 1, and only one of these can happen.",
+          "Case 1: 1013 divides n + 1. The smallest possibility is n + 1 = 1013, that is n = 1012. Check the other requirement too: 1012 = 4 × 253 is already divisible by 4, so both requirements hold.",
+          "Case 2: 1013 divides n. The smallest possibility is n = 1013, but that is odd, and n + 1 = 1014 = 2 × 507 contains only one factor of 2, so the product is not a multiple of 4.",
+          "The next candidate in case 2, n = 2026, fails as well, since 2026 = 2 × 1013 also carries only one factor of 2 while 2027 is odd; the next one that works is n = 3039, already larger than 1012.",
+          "Therefore the smallest n is 1012.",
+          "Check: T₁₀₁₂ = 1012 × 1013 divided by 2 equals 506 × 1013 = 512578, and 512578 divided by 2026 is 253, so it really is a multiple."
+        ],
+        "ja": [
+          "Tₙ = n(n + 1)/2 なので、「Tₙ が 2026 の倍数」であることは「n(n + 1) が 2 × 2026 = 4052 の倍数」であることと同値です。",
+          "4052 = 2² × 1013 と分解できて、1013 は素数です。したがって n(n + 1) は 4 でも 1013 でも割り切れる必要があり、この 2 つの条件は分けて扱います。",
+          "重要な着眼点：n と n + 1 は連続する整数なので必ず互いに素です。よって素数 1013 を 2 つに分けて割り当てることはできず、n を割り切るか、n + 1 を割り切るかのどちらか一方に限られます。",
+          "場合 1：1013 が n + 1 を割り切るとき。最小の可能性は n + 1 = 1013、すなわち n = 1012 です。もう一方の条件も確認すると 1012 = 4 × 253 で 4 で割り切れる ✓ ので、両方の条件が同時に成り立ちます。",
+          "場合 2：1013 が n を割り切るとき。最小の可能性は n = 1013 ですが、これは奇数で、n + 1 = 1014 = 2 × 507 は因数 2 を 1 個しか含まないため、積は 4 の倍数になりません ✗。",
+          "場合 2 の次の候補 n = 2026 も不可です（2026 = 2 × 1013 も因数 2 を 1 個しか含まず、2027 は奇数です）。その次の n = 3039 では成立しますが、すでに 1012 より大きい値です。",
+          "したがって最小の n は 1012 です。",
+          "検算：T₁₀₁₂ = 1012 × 1013 ÷ 2 = 506 × 1013 = 512578 であり、512578 ÷ 2026 = 253 なので確かに割り切れます ✓。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "1012"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 4
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "number-theory-grade11-foundation",
+        "notes": "題型參考 Wikipedia「Triangular number」條目關於 n 與 n + 1 互質、因子必須整段分給其中一個的性質，並借用 CEMC 競賽卷常見的『把年份數分解後當模數』設定。去重：全庫掃「三角形數|1 + 2 + 3」共 50 餘題並逐一檢視。number_theory_grade12_013 是求既是三角形數又是完全平方數的最小數（解法是解 Pell 型條件）、number_theory_grade8_024 是求 1 + 2 + ⋯ + 100 除以 7 的餘數、number_theory_grade8_040 是求它的個位數字，三題都是對固定的和做運算；本題是反過來找最小的 n，核心是 gcd(n, n + 1) = 1 讓質數 1013 不可拆，再檢查 4 落在哪一邊。本題取代了初稿中一題『最大奇因數求和』——它與 algebra_grade12_066（f(k) = log₂k 的整數部分之和）同樣是『定義函數再對 1 到 2 的冪求和、按 2 的冪分段』，相似度 0.65，我判定骨架相同，直接砍掉重出。"
+      }
     }
   ]
 }

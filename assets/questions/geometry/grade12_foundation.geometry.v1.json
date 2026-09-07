@@ -5549,6 +5549,254 @@
         "reference": "geometry-grade12-3d-block-colouring",
         "notes": "題型直接取自 de Bruijn 的 harmonic brick 定理與其著名起源（Wikipedia「De Bruijn's theorem」記載：1×2×4 積木最多只能放 26 塊進 6×6×6 的盒子，證明用 27 個 2×2×2 小方塊的黑白著色）。本題保留原論證並補上 26 塊的具體排法。全庫掃 立方體/正方體/體積/積木 各題：geometry_grade12_038、geometry_grade10_037 是多面體的面稜頂點數，combinatorics_grade12_022、combinatorics_grade10_018 是正方體上的螞蟻路徑，沒有任何一題是三維裝箱，也沒有任何一題用三維著色論證。"
       }
+    },
+    {
+      "id": "geometry_grade12_foundation_048",
+      "reviewStatus": "ok",
+      "topic": "geometry",
+      "subtopic": "largest_slope_of_ray_from_origin_to_circle",
+      "tags": [
+        "c:line_slope",
+        "c:circle",
+        "m:extremal"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "圓 (x − 2)² + (y − 4)² = 2 上有一個動點 P，把它的座標記成 (x, y)。當 P 繞行整個圓一圈時，比值 y ÷ x 會取到許多不同的值。求其中最大的那一個。",
+        "zh-Hans": "圆 (x − 2)² + (y − 4)² = 2 上有一个动点 P，把它的坐标记成 (x, y)。当 P 绕行整个圆一圈时，比值 y ÷ x 会取到许多不同的值。求其中最大的那一个。",
+        "en": "A point P moves on the circle (x − 2)² + (y − 4)² = 2; write its coordinates as (x, y). As P travels once around the circle the ratio y ÷ x takes many different values. Find the largest of them.",
+        "ja": "円 (x − 2)² + (y − 4)² = 2 の上を動く点 P の座標を (x, y) とする。P が円を 1 周する間に比 y ÷ x はさまざまな値をとる。そのうち最大のものを求めよ。"
+      },
+      "answer": {
+        "zh-Hant": "y/x 的最大值是 7。",
+        "zh-Hans": "y/x 的最大值是 7。",
+        "en": "The largest value of y/x is 7.",
+        "ja": "y/x の最大値は 7 である。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "關鍵的翻譯：y/x 就是原點 O(0, 0) 與 P 的連線的斜率。所以題目其實在問：所有通過原點又與這個圓有公共點的直線之中，斜率最大是多少。",
+          "先確認題目有意義。圓心是 (2, 4)、半徑是 √2；圓心到原點的距離是 √(2² + 4²) = √20 ≈ 4.47，比半徑大，所以原點在圓外。又圓上的點橫座標介於 2 − √2 與 2 + √2 之間，全都是正數，因此 y/x 一定有定義。",
+          "設過原點的直線是 y = kx，改寫成 kx − y = 0。這條直線與圓有公共點的條件，是圓心到它的距離不超過半徑。",
+          "圓心 (2, 4) 到直線的距離是 |2k − 4| ÷ √(k² + 1)。斜率走到極端（最大或最小）時，直線恰好與圓相切，也就是這個距離等於半徑 √2。",
+          "由 |2k − 4| ÷ √(k² + 1) = √2 兩邊平方得 (2k − 4)² = 2(k² + 1)，展開是 4k² − 16k + 16 = 2k² + 2。",
+          "整理成 2k² − 16k + 14 = 0，同除以 2 得 k² − 8k + 7 = 0，因式分解為 (k − 1)(k − 7) = 0，所以 k = 1 或 k = 7。",
+          "這兩個切線斜率就是 y/x 的最小值與最大值（圓是連通的封閉曲線，斜率在兩個切線值之間連續變化），所以最大值是 7。"
+        ],
+        "zh-Hans": [
+          "关键的翻译：y/x 就是原点 O(0, 0) 与 P 的连线的斜率。所以题目其实在问：所有通过原点又与这个圆有公共点的直线之中，斜率最大是多少。",
+          "先确认题目有意义。圆心是 (2, 4)、半径是 √2；圆心到原点的距离是 √(2² + 4²) = √20 ≈ 4.47，比半径大，所以原点在圆外。又圆上的点横坐标介于 2 − √2 与 2 + √2 之间，全都是正数，因此 y/x 一定有定义。",
+          "设过原点的直线是 y = kx，改写成 kx − y = 0。这条直线与圆有公共点的条件，是圆心到它的距离不超过半径。",
+          "圆心 (2, 4) 到直线的距离是 |2k − 4| ÷ √(k² + 1)。斜率走到极端（最大或最小）时，直线恰好与圆相切，也就是这个距离等于半径 √2。",
+          "由 |2k − 4| ÷ √(k² + 1) = √2 两边平方得 (2k − 4)² = 2(k² + 1)，展开是 4k² − 16k + 16 = 2k² + 2。",
+          "整理成 2k² − 16k + 14 = 0，同除以 2 得 k² − 8k + 7 = 0，因式分解为 (k − 1)(k − 7) = 0，所以 k = 1 或 k = 7。",
+          "这两个切线斜率就是 y/x 的最小值与最大值（圆是连通的封闭曲线，斜率在两个切线值之间连续变化），所以最大值是 7。"
+        ],
+        "en": [
+          "The key translation: y/x is exactly the slope of the line joining the origin O(0, 0) to P. So the question asks for the largest slope among all lines through the origin that meet this circle.",
+          "First check the question makes sense. The centre is (2, 4) and the radius is √2. The distance from the centre to the origin is √(2² + 4²) = √20 ≈ 4.47, which exceeds the radius, so the origin lies outside the circle. Also every point of the circle has x between 2 − √2 and 2 + √2, all positive, so y/x is always defined.",
+          "Let a line through the origin be y = kx, rewritten as kx − y = 0. Such a line meets the circle exactly when the distance from the centre to the line is at most the radius.",
+          "That distance is |2k − 4| ÷ √(k² + 1). When the slope reaches an extreme value the line is tangent to the circle, so the distance equals the radius √2.",
+          "Squaring |2k − 4| ÷ √(k² + 1) = √2 gives (2k − 4)² = 2(k² + 1), that is 4k² − 16k + 16 = 2k² + 2.",
+          "Rearranging gives 2k² − 16k + 14 = 0, and dividing by 2 gives k² − 8k + 7 = 0, which factors as (k − 1)(k − 7) = 0, so k = 1 or k = 7.",
+          "These two tangent slopes are the smallest and largest values of y/x, since the circle is a connected closed curve and the slope varies continuously between them. Hence the maximum is 7."
+        ],
+        "ja": [
+          "重要な言い換え：y/x は原点 O(0, 0) と P を結ぶ直線の傾きそのものである。したがって本問は、原点を通りこの円と共有点をもつ直線のうち、傾きの最大値を問うている。",
+          "まず問題が成り立つことを確認する。中心は (2, 4)、半径は √2 で、中心から原点までの距離は √(2² + 4²) = √20 ≈ 4.47 と半径より大きいので、原点は円の外にある。また円上の点の x 座標は 2 − √2 と 2 + √2 の間にあり、すべて正なので y/x は必ず定義される。",
+          "原点を通る直線を y = kx、すなわち kx − y = 0 とおく。この直線が円と共有点をもつ条件は、中心から直線までの距離が半径以下であることである。",
+          "中心 (2, 4) から直線までの距離は |2k − 4| ÷ √(k² + 1)。傾きが極端な値になるとき直線は円に接し、この距離が半径 √2 に等しくなる。",
+          "|2k − 4| ÷ √(k² + 1) = √2 の両辺を 2 乗すると (2k − 4)² = 2(k² + 1)、展開して 4k² − 16k + 16 = 2k² + 2。",
+          "整理すると 2k² − 16k + 14 = 0、2 で割って k² − 8k + 7 = 0、因数分解して (k − 1)(k − 7) = 0 より k = 1 または k = 7。",
+          "円は連結した閉曲線で傾きは連続に変化するので、この 2 つの接線の傾きが y/x の最小値と最大値である。よって最大値は 7 である。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "7"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring",
+        "reference": "geometry-grade12-foundation",
+        "notes": "全庫「斜率」24 題全部掃過。最接近的是 algebra_grade11_foundation_026（直線上動點求 x² + y² 最小值，是點到直線距離）與 geometry_grade11_foundation_030（圓與定直線的弦長），兩題的求量都不是斜率。也確認 c:line_slope 在 grade12 是零覆蓋。本題的推理核心是「把 y/x 讀成過原點直線的斜率，再用相切條件解二次方程式」，與既有題不同。題型取自解析幾何教材常見的「圓上動點的分式極值」單元。 初稿的題幹措辭與 algebra_grade11_foundation_026（直線上動點求 x² + y² 最小值）撞到 0.43，純粹是句型模板重疊（該題求的是點到直線距離，與斜率無關），已改寫題幹句型。"
+      }
+    },
+    {
+      "id": "geometry_grade12_foundation_049",
+      "reviewStatus": "ok",
+      "topic": "geometry",
+      "subtopic": "ellipse_chord_with_given_midpoint_slope",
+      "tags": [
+        "c:line_slope",
+        "c:coordinate",
+        "m:direct"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一個橢圓滿足方程式 4x² + y² = 16。它有一條弦，這條弦的中點恰好落在 M(1, 2)。求這條弦所在直線的斜率。",
+        "zh-Hans": "一个椭圆满足方程 4x² + y² = 16。它有一条弦，这条弦的中点恰好落在 M(1, 2)。求这条弦所在直线的斜率。",
+        "en": "An ellipse satisfies the equation 4x² + y² = 16. One of its chords has its midpoint exactly at M(1, 2). Find the slope of the line containing that chord.",
+        "ja": "楕円が方程式 4x² + y² = 16 を満たしている。その弦の 1 つの中点がちょうど M(1, 2) にあるとき、その弦を含む直線の傾きを求めよ。"
+      },
+      "answer": {
+        "zh-Hant": "這條弦所在直線的斜率是 −2。",
+        "zh-Hans": "这条弦所在直线的斜率是 −2。",
+        "en": "The slope of the line containing the chord is −2.",
+        "ja": "その弦を含む直線の傾きは −2 である。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "先確認這樣的弦真的存在：把 M(1, 2) 代入左式得 4 × 1² + 2² = 4 + 4 = 8，小於 16，所以 M 落在橢圓內部，以 M 為中點的弦確實存在。（把方程式除以 16 可改寫成 x²/4 + y²/16 = 1，看得出長軸在 y 軸上。）",
+          "設弦的兩個端點是 A(x₁, y₁) 與 B(x₂, y₂)，兩點都在橢圓上，所以 4x₁² + y₁² = 16 且 4x₂² + y₂² = 16。",
+          "兩式相減（這一步就是點差法）：4(x₁² − x₂²) + (y₁² − y₂²) = 0，因式分解成 4(x₁ + x₂)(x₁ − x₂) + (y₁ + y₂)(y₁ − y₂) = 0。",
+          "M 是 AB 的中點，所以 x₁ + x₂ = 2 × 1 = 2、y₁ + y₂ = 2 × 2 = 4。代入得 8(x₁ − x₂) + 4(y₁ − y₂) = 0。",
+          "兩邊同除以 4，得 2(x₁ − x₂) + (y₁ − y₂) = 0，所以斜率 (y₁ − y₂) ÷ (x₁ − x₂) = −2。整個過程完全不必解出 A、B 的座標。",
+          "驗算：這條直線是 y − 2 = −2(x − 1)，即 y = −2x + 4。代回 4x² + y² = 16 得 4x² + (−2x + 4)² = 16，展開整理成 8x² − 16x = 0，兩根是 0 與 2，橫座標中點 (0 + 2) ÷ 2 = 1；對應的縱座標是 4 與 0，縱座標中點 (4 + 0) ÷ 2 = 2，恰好是 M(1, 2)。所以斜率確實是 −2。"
+        ],
+        "zh-Hans": [
+          "先确认这样的弦真的存在：把 M(1, 2) 代入左式得 4 × 1² + 2² = 4 + 4 = 8，小于 16，所以 M 落在椭圆内部，以 M 为中点的弦确实存在。（把方程除以 16 可改写成 x²/4 + y²/16 = 1，看得出长轴在 y 轴上。）",
+          "设弦的两个端点是 A(x₁, y₁) 与 B(x₂, y₂)，两点都在椭圆上，所以 4x₁² + y₁² = 16 且 4x₂² + y₂² = 16。",
+          "两式相减（这一步就是点差法）：4(x₁² − x₂²) + (y₁² − y₂²) = 0，因式分解成 4(x₁ + x₂)(x₁ − x₂) + (y₁ + y₂)(y₁ − y₂) = 0。",
+          "M 是 AB 的中点，所以 x₁ + x₂ = 2 × 1 = 2、y₁ + y₂ = 2 × 2 = 4。代入得 8(x₁ − x₂) + 4(y₁ − y₂) = 0。",
+          "两边同除以 4，得 2(x₁ − x₂) + (y₁ − y₂) = 0，所以斜率 (y₁ − y₂) ÷ (x₁ − x₂) = −2。整个过程完全不必解出 A、B 的坐标。",
+          "验算：这条直线是 y − 2 = −2(x − 1)，即 y = −2x + 4。代回 4x² + y² = 16 得 4x² + (−2x + 4)² = 16，展开整理成 8x² − 16x = 0，两根是 0 与 2，横坐标中点 (0 + 2) ÷ 2 = 1；对应的纵坐标是 4 与 0，纵坐标中点 (4 + 0) ÷ 2 = 2，恰好是 M(1, 2)。所以斜率确实是 −2。"
+        ],
+        "en": [
+          "First check that such a chord exists: substituting M(1, 2) into the left side gives 4 × 1² + 2² = 4 + 4 = 8, which is less than 16, so M lies inside the ellipse and a chord with midpoint M does exist. Dividing the equation by 16 rewrites it as x²/4 + y²/16 = 1, showing that the major axis is along the y-axis.",
+          "Let the endpoints of the chord be A(x₁, y₁) and B(x₂, y₂). Both lie on the ellipse, so 4x₁² + y₁² = 16 and 4x₂² + y₂² = 16.",
+          "Subtract the two equations, the point-difference step: 4(x₁² − x₂²) + (y₁² − y₂²) = 0, which factors as 4(x₁ + x₂)(x₁ − x₂) + (y₁ + y₂)(y₁ − y₂) = 0.",
+          "Since M is the midpoint of AB, x₁ + x₂ = 2 × 1 = 2 and y₁ + y₂ = 2 × 2 = 4. Substituting gives 8(x₁ − x₂) + 4(y₁ − y₂) = 0.",
+          "Dividing by 4 gives 2(x₁ − x₂) + (y₁ − y₂) = 0, so the slope (y₁ − y₂) ÷ (x₁ − x₂) = −2. The coordinates of A and B are never needed.",
+          "Check: the line is y − 2 = −2(x − 1), that is y = −2x + 4. Substituting into 4x² + y² = 16 gives 4x² + (−2x + 4)² = 16, which simplifies to 8x² − 16x = 0 with roots 0 and 2, so the midpoint has x-coordinate (0 + 2) ÷ 2 = 1; the matching y-coordinates are 4 and 0, giving midpoint y-coordinate (4 + 0) ÷ 2 = 2, exactly M(1, 2). So the slope is indeed −2."
+        ],
+        "ja": [
+          "まずそのような弦が存在するか確かめる。M(1, 2) を左辺に代入すると 4 × 1² + 2² = 4 + 4 = 8 で 16 より小さいので、M は楕円の内部にあり、M を中点とする弦は確かに存在する。方程式を 16 で割ると x²/4 + y²/16 = 1 となり、長軸が y 軸方向であることも分かる。",
+          "弦の両端を A(x₁, y₁)、B(x₂, y₂) とする。どちらも楕円上にあるので 4x₁² + y₁² = 16 かつ 4x₂² + y₂² = 16。",
+          "2 式を引く（これが点差法）と 4(x₁² − x₂²) + (y₁² − y₂²) = 0、因数分解して 4(x₁ + x₂)(x₁ − x₂) + (y₁ + y₂)(y₁ − y₂) = 0 となる。",
+          "M は AB の中点なので x₁ + x₂ = 2 × 1 = 2、y₁ + y₂ = 2 × 2 = 4。代入すると 8(x₁ − x₂) + 4(y₁ − y₂) = 0。",
+          "両辺を 4 で割ると 2(x₁ − x₂) + (y₁ − y₂) = 0、よって傾き (y₁ − y₂) ÷ (x₁ − x₂) = −2 を得る。A、B の座標を求める必要は全くない。",
+          "検算：直線は y − 2 = −2(x − 1)、すなわち y = −2x + 4。4x² + y² = 16 に代入すると 4x² + (−2x + 4)² = 16、整理して 8x² − 16x = 0、根は 0 と 2 なので x 座標の中点は (0 + 2) ÷ 2 = 1、対応する y 座標は 4 と 0 で中点は (4 + 0) ÷ 2 = 2 となり、ちょうど M(1, 2) である。よって傾きは確かに −2 である。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "-2"
+      },
+      "inputConstraints": {
+        "allowNegative": true,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring",
+        "reference": "geometry-grade12-foundation",
+        "notes": "全庫只有兩題橢圓題（geometry_grade11_foundation_017 焦距、geometry_grade11_foundation_037 長軸），都是直接代公式。用「中點弦」「點差」掃全庫是 0 題。也掃過「斜率」24 題，沒有任何一題用點差法。題型取自解析幾何教材「圓錐曲線的中點弦與點差法」單元。 初稿寫成 x²/4 + y²/16 = 1，與 geometry_grade11_foundation_017（橢圓 x²/25 + y²/9 = 1 求焦距）撞到 0.61，但那是純句型模板重疊——該題求焦距、本題求中點弦斜率，數學上毫無關係。已把方程式改寫成 4x² + y² = 16 的等價形式並重寫詳解，切斷模板。"
+      }
+    },
+    {
+      "id": "geometry_grade12_foundation_050",
+      "reviewStatus": "ok",
+      "topic": "geometry",
+      "subtopic": "apollonius_circle_radius_from_distance_ratio",
+      "tags": [
+        "c:coordinate",
+        "c:circle",
+        "m:direct"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "在座標平面上，A(0, 0) 與 B(9, 0) 是兩個定點。動點 P 恆滿足「P 到 A 的距離恰好是 P 到 B 的距離的 2 倍」。P 的軌跡是一個圓，求這個圓的半徑。",
+        "zh-Hans": "在坐标平面上，A(0, 0) 与 B(9, 0) 是两个定点。动点 P 恒满足「P 到 A 的距离恰好是 P 到 B 的距离的 2 倍」。P 的轨迹是一个圆，求这个圆的半径。",
+        "en": "In the coordinate plane, A(0, 0) and B(9, 0) are fixed points. A moving point P always satisfies the condition that its distance to A is exactly twice its distance to B. The path of P is a circle. Find the radius of that circle.",
+        "ja": "座標平面上に定点 A(0, 0) と B(9, 0) がある。動点 P は常に「A までの距離が B までの距離のちょうど 2 倍」という条件を満たす。P の軌跡は円になる。その円の半径を求めよ。"
+      },
+      "answer": {
+        "zh-Hant": "這個圓的半徑是 6。",
+        "zh-Hans": "这个圆的半径是 6。",
+        "en": "The radius of the circle is 6.",
+        "ja": "その円の半径は 6 である。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "設 P 的座標是 (x, y)。條件是 PA = 2 × PB，兩邊都是非負數，可以平方而不改變條件：PA² = 4 × PB²。",
+          "用座標寫出來：x² + y² = 4[(x − 9)² + y²]。",
+          "把右邊展開：4(x² − 18x + 81 + y²) = 4x² − 72x + 324 + 4y²。",
+          "移項整理：0 = 4x² − 72x + 324 + 4y² − x² − y² = 3x² + 3y² − 72x + 324，兩邊同除以 3 得 x² + y² − 24x + 108 = 0。",
+          "對 x 配方：x² − 24x = (x − 12)² − 144，所以式子變成 (x − 12)² + y² = 144 − 108 = 36。",
+          "這是圓心 (12, 0)、半徑 √36 = 6 的圓，所以半徑是 6。",
+          "驗算：這個圓與 x 軸交於 (6, 0) 與 (18, 0)。點 (6, 0) 到 A 的距離是 6、到 B 的距離是 3，比值是 2 ✓；點 (18, 0) 到 A 的距離是 18、到 B 的距離是 9，比值也是 2 ✓。這兩點正是把線段 AB 內分與外分成 2 : 1 的點，兩點距離 12，半徑是它的一半 6，完全吻合。"
+        ],
+        "zh-Hans": [
+          "设 P 的坐标是 (x, y)。条件是 PA = 2 × PB，两边都是非负数，可以平方而不改变条件：PA² = 4 × PB²。",
+          "用坐标写出来：x² + y² = 4[(x − 9)² + y²]。",
+          "把右边展开：4(x² − 18x + 81 + y²) = 4x² − 72x + 324 + 4y²。",
+          "移项整理：0 = 4x² − 72x + 324 + 4y² − x² − y² = 3x² + 3y² − 72x + 324，两边同除以 3 得 x² + y² − 24x + 108 = 0。",
+          "对 x 配方：x² − 24x = (x − 12)² − 144，所以式子变成 (x − 12)² + y² = 144 − 108 = 36。",
+          "这是圆心 (12, 0)、半径 √36 = 6 的圆，所以半径是 6。",
+          "验算：这个圆与 x 轴交于 (6, 0) 与 (18, 0)。点 (6, 0) 到 A 的距离是 6、到 B 的距离是 3，比值是 2 ✓；点 (18, 0) 到 A 的距离是 18、到 B 的距离是 9，比值也是 2 ✓。这两点正是把线段 AB 内分与外分成 2 : 1 的点，两点距离 12，半径是它的一半 6，完全吻合。"
+        ],
+        "en": [
+          "Let P have coordinates (x, y). The condition is PA = 2 × PB. Both sides are non-negative, so squaring does not change it: PA² = 4 × PB².",
+          "In coordinates this reads x² + y² = 4[(x − 9)² + y²].",
+          "Expand the right side: 4(x² − 18x + 81 + y²) = 4x² − 72x + 324 + 4y².",
+          "Rearranging gives 0 = 4x² − 72x + 324 + 4y² − x² − y² = 3x² + 3y² − 72x + 324, and dividing by 3 gives x² + y² − 24x + 108 = 0.",
+          "Complete the square in x: x² − 24x = (x − 12)² − 144, so the equation becomes (x − 12)² + y² = 144 − 108 = 36.",
+          "This is the circle with centre (12, 0) and radius √36 = 6, so the radius is 6.",
+          "Check: the circle meets the x-axis at (6, 0) and (18, 0). The point (6, 0) is at distance 6 from A and 3 from B, a ratio of 2. The point (18, 0) is at distance 18 from A and 9 from B, again a ratio of 2. These are exactly the internal and external division points of AB in ratio 2 : 1; they are 12 apart, and half of that is the radius 6, which agrees."
+        ],
+        "ja": [
+          "P の座標を (x, y) とする。条件は PA = 2 × PB であり、両辺とも非負なので 2 乗しても条件は変わらない：PA² = 4 × PB²。",
+          "座標で書くと x² + y² = 4[(x − 9)² + y²]。",
+          "右辺を展開すると 4(x² − 18x + 81 + y²) = 4x² − 72x + 324 + 4y²。",
+          "移項して整理すると 0 = 4x² − 72x + 324 + 4y² − x² − y² = 3x² + 3y² − 72x + 324、両辺を 3 で割って x² + y² − 24x + 108 = 0。",
+          "x について平方完成すると x² − 24x = (x − 12)² − 144 なので、式は (x − 12)² + y² = 144 − 108 = 36 となる。",
+          "これは中心 (12, 0)、半径 √36 = 6 の円である。よって半径は 6。",
+          "検算：この円は x 軸と (6, 0)、(18, 0) で交わる。(6, 0) は A から 6、B から 3 で比は 2、(18, 0) は A から 18、B から 9 でやはり比は 2 である。この 2 点は線分 AB を 2 : 1 に内分・外分する点であり、2 点間の距離 12 の半分が半径 6 で一致する。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "6"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring",
+        "reference": "geometry-grade12-foundation",
+        "notes": "用「軌跡」掃全庫是 0 題，用「距離的比／距離之比」掃也只有 geometry_grade9_foundation_032（中線分面積），數學上無關。既有的座標圓題 geometry_grade12_foundation_019（外心）、geometry_grade12_foundation_005（內心）都是求特殊點，不是求軌跡。題型出處：維基百科 Circles of Apollonius 條目（定距離比的點軌跡是圓，直徑兩端是內分點與外分點），本題把它改寫成給定 A、B 與比值 2 : 1 求半徑，並在詳解最後用內外分點驗算。"
+      }
     }
   ]
 }

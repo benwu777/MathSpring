@@ -4469,6 +4469,87 @@
         "reference": "logic-grade11-tearing-invariant",
         "notes": "題型是 Engel《Problem-Solving Strategies》不變量章與 AoPS Wiki 上的經典撕紙題（原型多為「撕成 4 或 10 片，能否得到 1994 片」），本題保留 mod 3 不變量並額外加上最少操作次數的極值論證。全庫掃 每次操作/撕/掰/分成 各題：logic_grade10_023 與 logic_grade10_032 是把 6×8 巧克力或郵票掰成 48 片、每次只增加 1 片、答案恆為 47，屬於「不變量是片數與掰的次數差」的另一種題；本題的增量有 3 與 9 兩種，重點在餘數判定加上極值，推理核心不同。"
       }
+    },
+    {
+      "id": "logic_grade11_foundation_049",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "simpson_paradox_minimum_count",
+      "tags": [
+        "c:mean",
+        "c:percent",
+        "c:mixture",
+        "m:extremal"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade11",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "甲、乙兩家工廠都生產 A、B 兩型產品，這個月各檢驗了 100 件。甲廠：A 型檢驗 10 件、合格 9 件；B 型檢驗 90 件、合格 45 件。乙廠：A 型檢驗 80 件、合格 k 件；B 型檢驗 20 件、合格 9 件。已知乙廠在 A 型與 B 型的合格率都比甲廠低，但乙廠這 100 件的整體合格率卻比甲廠高。求整數 k 的最小值。",
+        "zh-Hans": "甲、乙两家工厂都生产 A、B 两型产品，这个月各检验了 100 件。甲厂：A 型检验 10 件、合格 9 件；B 型检验 90 件、合格 45 件。乙厂：A 型检验 80 件、合格 k 件；B 型检验 20 件、合格 9 件。已知乙厂在 A 型与 B 型的合格率都比甲厂低，但乙厂这 100 件的整体合格率却比甲厂高。求整数 k 的最小值。",
+        "en": "Factories X and Y both make products of type A and type B, and each inspected 100 items this month. Factory X: 10 type-A items inspected with 9 passing, and 90 type-B items inspected with 45 passing. Factory Y: 80 type-A items inspected with k passing, and 20 type-B items inspected with 9 passing. Factory Y has a lower pass rate than X on type A and also on type B, yet Y has a higher overall pass rate across its 100 items. Find the smallest possible integer k.",
+        "ja": "工場甲と工場乙はどちらも A 型と B 型の製品を作っており、今月それぞれ 100 個を検査しました。甲工場は A 型を 10 個検査して 9 個が合格、B 型を 90 個検査して 45 個が合格。乙工場は A 型を 80 個検査して k 個が合格、B 型を 20 個検査して 9 個が合格でした。乙工場は A 型でも B 型でも合格率が甲工場より低いのに、100 個全体の合格率は甲工場より高いといいます。整数 k の最小値を求めなさい。"
+      },
+      "answer": {
+        "zh-Hant": "整數 k 的最小值是 46。",
+        "zh-Hans": "整数 k 的最小值是 46。",
+        "en": "The smallest possible integer k is 46.",
+        "ja": "整数 k の最小値は 46 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "先把甲廠算清楚：A 型合格率 9 ÷ 10 = 90%，B 型合格率 45 ÷ 90 = 50%，整體合格率 (9 + 45) ÷ 100 = 54%。",
+          "乙廠 B 型的合格率是 9 ÷ 20 = 45%，本來就低於甲廠 B 型的 50%，這一條與 k 無關，自動成立。",
+          "乙廠 A 型要比甲廠低：k ÷ 80 < 90%，也就是 k < 72。",
+          "乙廠整體要比甲廠高：(k + 9) ÷ 100 > 54%，也就是 k + 9 > 54，得 k > 45。",
+          "兩個條件合起來是 45 < k < 72，最小的整數是 46。此時乙廠 A 型合格率 46 ÷ 80 = 57.5%，確實低於 90%；整體 (46 + 9) ÷ 100 = 55%，確實高於 54%。",
+          "「兩類都比較低、整體卻比較高」並不矛盾：整體合格率是兩類合格率的加權平均，權重是各類的檢驗件數。甲廠有 90 件壓在合格率低的 B 型上，乙廠只有 20 件，權重差異就足以讓整體翻轉。所以 k 的最小值是 46。"
+        ],
+        "zh-Hans": [
+          "先把甲厂算清楚：A 型合格率 9 ÷ 10 = 90%，B 型合格率 45 ÷ 90 = 50%，整体合格率 (9 + 45) ÷ 100 = 54%。",
+          "乙厂 B 型的合格率是 9 ÷ 20 = 45%，本来就低于甲厂 B 型的 50%，这一条与 k 无关，自动成立。",
+          "乙厂 A 型要比甲厂低：k ÷ 80 < 90%，也就是 k < 72。",
+          "乙厂整体要比甲厂高：(k + 9) ÷ 100 > 54%，也就是 k + 9 > 54，得 k > 45。",
+          "两个条件合起来是 45 < k < 72，最小的整数是 46。此时乙厂 A 型合格率 46 ÷ 80 = 57.5%，确实低于 90%；整体 (46 + 9) ÷ 100 = 55%，确实高于 54%。",
+          "「两类都比较低、整体却比较高」并不矛盾：整体合格率是两类合格率的加权平均，权重是各类的检验件数。甲厂有 90 件压在合格率低的 B 型上，乙厂只有 20 件，权重差异就足以让整体翻转。所以 k 的最小值是 46。"
+        ],
+        "en": [
+          "Work out factory X first: type A pass rate 9 ÷ 10 = 90%, type B pass rate 45 ÷ 90 = 50%, overall pass rate (9 + 45) ÷ 100 = 54%.",
+          "Factory Y's type-B pass rate is 9 ÷ 20 = 45%, already below X's 50%. That condition does not involve k and holds automatically.",
+          "Y must be lower on type A: k ÷ 80 < 90%, so k < 72.",
+          "Y must be higher overall: (k + 9) ÷ 100 > 54%, so k + 9 > 54, giving k > 45.",
+          "Together 45 < k < 72, and the smallest integer is 46. Then Y's type-A rate is 46 ÷ 80 = 57.5%, indeed below 90%, and Y's overall rate is (46 + 9) ÷ 100 = 55%, indeed above 54%.",
+          "Being lower in both categories yet higher overall is not a contradiction: the overall rate is a weighted average of the two category rates, weighted by how many items fall in each category. X puts 90 items into the low-rate type B while Y puts only 20 there, and that difference in weights is enough to flip the comparison. So the smallest k is 46."
+        ],
+        "ja": [
+          "まず甲工場を整理します。A 型の合格率は 9 ÷ 10 = 90%、B 型は 45 ÷ 90 = 50%、全体は (9 + 45) ÷ 100 = 54% です。",
+          "乙工場の B 型の合格率は 9 ÷ 20 = 45% で、もともと甲の 50% より低く、この条件は k に関係なく自動的に満たされます。",
+          "乙が A 型で甲より低いこと：k ÷ 80 < 90%、すなわち k < 72。",
+          "乙が全体で甲より高いこと：(k + 9) ÷ 100 > 54%、すなわち k + 9 > 54 なので k > 45。",
+          "合わせると 45 < k < 72 となり、最小の整数は 46 です。このとき乙の A 型は 46 ÷ 80 = 57.5% で 90% より低く、全体は (46 + 9) ÷ 100 = 55% で 54% より高くなります。",
+          "「どちらの型でも低いのに全体では高い」ことは矛盾ではありません。全体の合格率は 2 つの型の合格率の加重平均で、重みは各型の検査個数だからです。甲は合格率の低い B 型に 90 個も置き、乙は 20 個しか置いていないので、この重みの差だけで逆転が起きます。したがって k の最小値は 46 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "46"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade11-weighted-average-paradox",
+        "notes": "題型來自 Wikipedia「Simpson's paradox」條目的腎結石治療表（分組成功率高、整體反而低），權重分佈參考 2019 CEMC Fermat 第 12 題「兩段題數不同的加權百分比」。改寫成「求使反轉成立的最小整數」。全庫掃「加權／合併／各組平均」共 40 餘題，皆為單純合併平均（algebra_grade7_026、algebra_grade8_051）或合併變異數（algebra_grade12_058、logic_grade10_046），沒有任何一題出現分組與整體方向相反的悖論結構。"
+      }
     }
   ]
 }

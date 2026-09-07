@@ -4245,6 +4245,174 @@
         "reference": "number-theory-grade9-foundation",
         "notes": "題型出處：Wikipedia「Euler's totient function」與標準數論教材的『a = dx、b = dy 且 gcd(x, y) = 1』化簡手法（AoPS 論壇的 gcd/lcm 入門討論串常見題型）。原本規劃的是 1/a + 1/b = 1/6 的因數對計數，跑掃描時發現與 number_theory_grade12_foundation_015（求滿足 1/x + 1/y = 1/6 的正整數對）完全同題，直接放棄改出本題。再掃「最大公因數是」相關題：arithmetic_grade6_foundation_019（gcd 4、lcm 84、和 40，求較大的數）求的是特定一組解、arithmetic_grade6_foundation_052（兩個兩位數 gcd 為 12，和最大）是極值題、number_theory_grade9_foundation_029（lcm(a,b)=12 的有序對個數）用的是指數分配而非和的限制，三者的推理核心都與本題不同。"
       }
+    },
+    {
+      "id": "number_theory_grade9_foundation_049",
+      "reviewStatus": "ok",
+      "topic": "number_theory",
+      "subtopic": "digit_sum_recurrence_residue",
+      "tags": [
+        "c:recurrence",
+        "c:modular",
+        "c:place_value",
+        "m:invariant"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade9",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一個數列這樣產生：a₁ = 1，而且從第二項起，每一項都等於前一項加上前一項的各位數字之和。例如 a₂ = 1 + 1 = 2、a₃ = 2 + 2 = 4、a₄ = 4 + 4 = 8、a₅ = 8 + 8 = 16、a₆ = 16 + (1 + 6) = 23。求 a₂₀₂₆ 除以 9 的餘數。",
+        "zh-Hans": "一个数列这样产生：a₁ = 1，而且从第二项起，每一项都等于前一项加上前一项的各位数字之和。例如 a₂ = 1 + 1 = 2、a₃ = 2 + 2 = 4、a₄ = 4 + 4 = 8、a₅ = 8 + 8 = 16、a₆ = 16 + (1 + 6) = 23。求 a₂₀₂₆ 除以 9 的余数。",
+        "en": "A sequence is built as follows: a₁ = 1, and from the second term on, each term equals the previous term plus the sum of the digits of that previous term. For example a₂ = 1 + 1 = 2, a₃ = 2 + 2 = 4, a₄ = 4 + 4 = 8, a₅ = 8 + 8 = 16, a₆ = 16 + (1 + 6) = 23. What is the remainder when a₂₀₂₆ is divided by 9?",
+        "ja": "次のように数列をつくります。a₁ = 1 とし、第 2 項からは、各項が「1 つ前の項」と「1 つ前の項の各位の数字の和」との和になります。たとえば a₂ = 1 + 1 = 2、a₃ = 2 + 2 = 4、a₄ = 4 + 4 = 8、a₅ = 8 + 8 = 16、a₆ = 16 + (1 + 6) = 23 です。a₂₀₂₆ を 9 で割った余りを求めなさい。"
+      },
+      "answer": {
+        "zh-Hant": "a₂₀₂₆ 除以 9 的餘數是 8。",
+        "zh-Hans": "a₂₀₂₆ 除以 9 的余数是 8。",
+        "en": "The remainder when a₂₀₂₆ is divided by 9 is 8.",
+        "ja": "a₂₀₂₆ を 9 で割った余りは 8 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "先用一個熟悉的性質：任何正整數除以 9 的餘數，都和它的各位數字之和除以 9 的餘數相同（因為 10、100、1000 除以 9 都餘 1）。",
+          "把這個性質套進遞迴式：下一項 = 這一項 + 這一項的數字和，而數字和與這一項同餘，所以下一項除以 9 的餘數 = 這一項餘數的 2 倍（再取餘數）。",
+          "也就是說，項數每往後一項，除以 9 的餘數就乘以 2；數列本身長得很快，但餘數的規律非常簡單。",
+          "從 a₁ = 1 出發，餘數依序是 1、2、4、8、7、5，接著又回到 1、2、4、⋯，每 6 項循環一次。",
+          "要找 a₂₀₂₆，就看它是從 a₁ 往後走了 2026 − 1 = 2025 步。2025 = 6 × 337 + 3，所以與從 1 開始往後走 3 步的結果相同。",
+          "從 1 走 3 步依序是 2、4、8，所以 a₂₀₂₆ 除以 9 的餘數是 8。（等價的說法：aₙ 的餘數就是 2 的 (n − 1) 次方的餘數。）",
+          "驗算：往下實際算 a₆ = 23、a₇ = 28、a₈ = 38、a₉ = 49、a₁₀ = 62，它們除以 9 的餘數依序是 5、1、2、4、8，正好照著 1、2、4、8、7、5 的循環走 ✓。"
+        ],
+        "zh-Hans": [
+          "先用一个熟悉的性质：任何正整数除以 9 的余数，都和它的各位数字之和除以 9 的余数相同（因为 10、100、1000 除以 9 都余 1）。",
+          "把这个性质套进递推式：下一项 = 这一项 + 这一项的数字和，而数字和与这一项同余，所以下一项除以 9 的余数 = 这一项余数的 2 倍（再取余数）。",
+          "也就是说，项数每往后一项，除以 9 的余数就乘以 2；数列本身长得很快，但余数的规律非常简单。",
+          "从 a₁ = 1 出发，余数依序是 1、2、4、8、7、5，接着又回到 1、2、4、⋯，每 6 项循环一次。",
+          "要找 a₂₀₂₆，就看它是从 a₁ 往后走了 2026 − 1 = 2025 步。2025 = 6 × 337 + 3，所以与从 1 开始往后走 3 步的结果相同。",
+          "从 1 走 3 步依序是 2、4、8，所以 a₂₀₂₆ 除以 9 的余数是 8。（等价的说法：aₙ 的余数就是 2 的 (n − 1) 次方的余数。）",
+          "验算：往下实际算 a₆ = 23、a₇ = 28、a₈ = 38、a₉ = 49、a₁₀ = 62，它们除以 9 的余数依序是 5、1、2、4、8，正好照着 1、2、4、8、7、5 的循环走 ✓。"
+        ],
+        "en": [
+          "Start from a familiar fact: any positive integer leaves the same remainder mod 9 as the sum of its digits, because 10, 100 and 1000 all leave remainder 1 when divided by 9.",
+          "Feed this into the recursion: the next term equals this term plus its digit sum, and the digit sum is congruent to the term itself, so the remainder of the next term mod 9 is twice the remainder of this term.",
+          "In other words, each step multiplies the remainder mod 9 by 2. The sequence itself grows quickly, but the pattern of remainders is very simple.",
+          "Starting from a₁ = 1, the remainders run 1, 2, 4, 8, 7, 5 and then return to 1, 2, 4, ... , a cycle of length 6.",
+          "To reach a₂₀₂₆ we take 2026 - 1 = 2025 steps from a₁. Since 2025 = 6 × 337 + 3, the result is the same as taking just 3 steps from 1.",
+          "Three steps from 1 give 2, 4, 8, so a₂₀₂₆ leaves remainder 8 when divided by 9. Equivalently, the remainder of aₙ is the remainder of 2 raised to the power n - 1.",
+          "Check: computing onward gives a₆ = 23, a₇ = 28, a₈ = 38, a₉ = 49, a₁₀ = 62, whose remainders mod 9 are 5, 1, 2, 4, 8, exactly following the cycle 1, 2, 4, 8, 7, 5."
+        ],
+        "ja": [
+          "まずよく知られた性質を使います。どんな正の整数も、9 で割った余りは各位の数字の和を 9 で割った余りと等しくなります（10、100、1000 はいずれも 9 で割ると 1 余るからです）。",
+          "これを漸化式に当てはめます。次の項 = 今の項 + 今の項の数字の和であり、数字の和は今の項と 9 を法として合同なので、次の項の余りは今の項の余りの 2 倍になります。",
+          "つまり 1 項進むごとに、9 で割った余りが 2 倍になります。数列自体は急速に大きくなりますが、余りの規則はとても単純です。",
+          "a₁ = 1 から始めると、余りは 1、2、4、8、7、5 と進み、再び 1、2、4、⋯ に戻ります。周期は 6 です。",
+          "a₂₀₂₆ は a₁ から 2026 − 1 = 2025 歩進んだところにあります。2025 = 6 × 337 + 3 なので、1 から 3 歩進んだ場合と同じ結果になります。",
+          "1 から 3 歩進むと 2、4、8 となるので、a₂₀₂₆ を 9 で割った余りは 8 です（言い換えると、aₙ の余りは 2 の n − 1 乗の余りに等しくなります）。",
+          "検算：実際に計算すると a₆ = 23、a₇ = 28、a₈ = 38、a₉ = 49、a₁₀ = 62 で、9 で割った余りは順に 5、1、2、4、8 となり、周期 1、2、4、8、7、5 にぴったり従っています ✓。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "8"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "number-theory-grade9-foundation",
+        "notes": "題型參考 Wikipedia「Digit sum」與「Self number（Colombian number）」條目所介紹的映射 n → n + S(n)，把它改造成從 1 出發的遞迴數列並改問餘數。去重：全庫用寬鬆 regex「各位數字之和|數字和」掃出 73 題全部瀏覽過，沒有任何一題把 n → n + S(n) 當成數列反覆迭代；最接近的是 number_theory_grade7_038（兩位數加自己的數字和等於 70，只做一次且是逆推）與 number_theory_grade7_024（三位數減自己的數字和等於 693），兩題都是單次運算解方程。number_theory_grade9_014（費氏數列除以 3 的週期）雖然也是遞迴取餘，但它的遞迴是加前兩項、週期來自二階線性遞迴，本題的遞迴係數來自數字和同餘、週期來自 2 對 9 的乘法階。"
+      }
+    },
+    {
+      "id": "number_theory_grade9_foundation_050",
+      "reviewStatus": "ok",
+      "topic": "number_theory",
+      "subtopic": "three_smallest_divisors_condition",
+      "tags": [
+        "c:factor_multiple",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade9",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "把某個正整數 N 的所有正因數由小到大排列，最前面三個依序是 1、a、b（其中 1 < a < b）。已知 a + b = 14，求最小的 N。",
+        "zh-Hans": "把某个正整数 N 的所有正因数由小到大排列，最前面三个依序是 1、a、b（其中 1 < a < b）。已知 a + b = 14，求最小的 N。",
+        "en": "The positive divisors of a positive integer N are listed in increasing order, and the first three of them are 1, a, b, where 1 < a < b. Given that a + b = 14, find the smallest possible N.",
+        "ja": "ある正の整数 N の正の約数を小さい順に並べたとき、先頭の 3 個が順に 1、a、b（ただし 1 < a < b）であるとします。a + b = 14 であるとき、N として最小のものを求めなさい。"
+      },
+      "answer": {
+        "zh-Hant": "最小的 N 是 33。",
+        "zh-Hans": "最小的 N 是 33。",
+        "en": "The smallest N is 33.",
+        "ja": "最小の N は 33 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "第二小的正因數 a 一定是質數：若 a 是合數，它會有一個大於 1 又小於 a 的因數，那個因數同樣整除 N，就會比 a 更小，與 a 是第二小的因數矛盾。",
+          "由 a + b = 14 且 a < b 可知 a < 7，所以 a 只能是質數 2、3 或 5。",
+          "若 a = 2，則 b = 12。但 12 整除 N 時 3 也整除 N，而 2 < 3 < 12，第三小的因數就會是 3 而不是 12，矛盾。",
+          "若 a = 5，則 b = 9。但 9 整除 N 時 3 也整除 N，而 3 < 5，第二小的因數就會是 3 而不是 5，矛盾。",
+          "只剩下 a = 3、b = 11：此時 N 同時是 3 與 11 的倍數，而且 2、5、7、9 都不能整除 N（否則會多出一個排在 3 前面或夾在 3 與 11 之間的因數）。",
+          "最小的候選就是 3 × 11 = 33。33 的正因數是 1、3、11、33，最前面三個正好是 1、3、11，而且 3 + 11 = 14 ✓。",
+          "所以最小的 N 是 33。（下一個符合條件的數是 363 = 3 × 11²，比 33 大很多，可見 33 確實是最小的。）"
+        ],
+        "zh-Hans": [
+          "第二小的正因数 a 一定是质数：若 a 是合数，它会有一个大于 1 又小于 a 的因数，那个因数同样整除 N，就会比 a 更小，与 a 是第二小的因数矛盾。",
+          "由 a + b = 14 且 a < b 可知 a < 7，所以 a 只能是质数 2、3 或 5。",
+          "若 a = 2，则 b = 12。但 12 整除 N 时 3 也整除 N，而 2 < 3 < 12，第三小的因数就会是 3 而不是 12，矛盾。",
+          "若 a = 5，则 b = 9。但 9 整除 N 时 3 也整除 N，而 3 < 5，第二小的因数就会是 3 而不是 5，矛盾。",
+          "只剩下 a = 3、b = 11：此时 N 同时是 3 与 11 的倍数，而且 2、5、7、9 都不能整除 N（否则会多出一个排在 3 前面或夹在 3 与 11 之间的因数）。",
+          "最小的候选就是 3 × 11 = 33。33 的正因数是 1、3、11、33，最前面三个正好是 1、3、11，而且 3 + 11 = 14 ✓。",
+          "所以最小的 N 是 33。（下一个符合条件的数是 363 = 3 × 11²，比 33 大很多，可见 33 确实是最小的。）"
+        ],
+        "en": [
+          "The second smallest divisor a must be prime: if a were composite it would have a divisor larger than 1 and smaller than a, and that divisor would also divide N, contradicting the fact that a is the second smallest divisor.",
+          "From a + b = 14 with a < b we get a < 7, so a can only be the prime 2, 3 or 5.",
+          "If a = 2 then b = 12. But if 12 divides N then 3 divides N as well, and since 2 < 3 < 12 the third smallest divisor would be 3, not 12. Contradiction.",
+          "If a = 5 then b = 9. But if 9 divides N then 3 divides N as well, and since 3 < 5 the second smallest divisor would be 3, not 5. Contradiction.",
+          "Only a = 3, b = 11 survives: N is a multiple of both 3 and 11, and none of 2, 5, 7, 9 may divide N, otherwise an extra divisor would appear before 3 or between 3 and 11.",
+          "The smallest candidate is therefore 3 × 11 = 33. The divisors of 33 are 1, 3, 11, 33, whose first three are exactly 1, 3, 11, and 3 + 11 = 14.",
+          "So the smallest N is 33. The next number with the same property is 363 = 3 × 11², far larger, which confirms that 33 is minimal."
+        ],
+        "ja": [
+          "2 番目に小さい約数 a は必ず素数です。もし a が合成数なら、1 より大きく a より小さい約数をもち、それも N を割り切るので a より小さい約数が存在することになり、矛盾します。",
+          "a + b = 14 かつ a < b より a < 7 なので、a は素数 2、3、5 のいずれかです。",
+          "a = 2 とすると b = 12 です。しかし 12 が N を割り切るなら 3 も N を割り切り、2 < 3 < 12 なので 3 番目に小さい約数は 12 ではなく 3 になってしまい矛盾します。",
+          "a = 5 とすると b = 9 です。しかし 9 が N を割り切るなら 3 も N を割り切り、3 < 5 なので 2 番目に小さい約数は 5 ではなく 3 になってしまい矛盾します。",
+          "残るのは a = 3、b = 11 の場合だけです。このとき N は 3 と 11 の公倍数で、しかも 2、5、7、9 のいずれも N を割り切ってはいけません（割り切ると 3 の前や 3 と 11 の間に別の約数が入ってしまうからです）。",
+          "最小の候補は 3 × 11 = 33 です。33 の正の約数は 1、3、11、33 で、先頭の 3 個はちょうど 1、3、11 であり、3 + 11 = 14 を満たします ✓。",
+          "したがって最小の N は 33 です（次に条件を満たすのは 363 = 3 × 11² で 33 よりずっと大きく、33 が最小であることが確かめられます）。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "33"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "number-theory-grade9-foundation",
+        "notes": "題型參考 Wikipedia「Divisor」條目關於最小質因數的敘述，以及 AMC 型「把因數由小到大列出」的常見設定（本輪 AoPS Wiki 回 403，改讀 Wikipedia 與 CEMC 卷）。去重：全庫用 regex「由小到大.{0,10}因數|最小的因數|第二小的」掃過，只有 number_theory_grade11_010（Mary 寫因數寫到 323，下一個因數最小可能是多少）同樣談排序後的因數列，但那題的推理核心是 323 = 17 × 19 的質因數強制，且問的是上界；本題是用「第二小的因數必為質數」逐一排除 a 的候選並求最小的 N，方向相反。刻意避開全庫已飽和的「因數個數」家族（grade11_006/016/026/027/029/030、grade8_032），本題完全不談因數個數。"
+      }
     }
   ]
 }

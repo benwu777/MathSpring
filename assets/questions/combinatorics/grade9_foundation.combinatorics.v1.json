@@ -3913,6 +3913,174 @@
         "reference": "number_theory-grade9-foundation",
         "notes": "題型出自 The Math Doctors〈Pigeonhole Principle I: Paths, Penguins, and Points〉的第 3 題「8×8 棋盤上 9 枚棋子的 36 個點對只有 35 種可能距離，必有兩對等距」，我改成一維整數座標讓距離種類可以數清楚，並補上 4 點的完美尺 0、1、4、6 作為反例。這是全批唯一一題把「點對」當成物件放進抽屜的題。第一版此位置原是「立方差被 9 整除」的餘數抽屜，與同批 F_04（和或差被 12 整除）相似度 0.73，確實是同一種抽屜只換判準，已整題砍掉重出。全庫掃過「距離」regex 與 m:pigeonhole 的 35 題，沒有一題以點對為物件，也沒有一題問等距的存在性。"
       }
+    },
+    {
+      "id": "combinatorics_grade9_foundation_045",
+      "reviewStatus": "ok",
+      "topic": "combinatorics",
+      "subtopic": "layered_constraint_digit_code_count",
+      "tags": [
+        "c:permutation_combination",
+        "c:basic_counting",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade9",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "工廠替每件產品編一組序號，由四個位置的數字排成，每個位置都取自 1 到 9（永遠用不到 0），不同位置可以填相同的數字。合格序號的規則有兩條：整串之中數字 7 只用過一次；整串之中必須用到數字 1，但末尾那個位置不許填 1。求合格序號一共有幾組。",
+        "zh-Hans": "工厂替每件产品编一组序号，由四个位置的数字排成，每个位置都取自 1 到 9（永远用不到 0），不同位置可以填相同的数字。合格序号的规则有两条：整串之中数字 7 只用过一次；整串之中必须用到数字 1，但末尾那个位置不许填 1。求合格序号一共有几组。",
+        "en": "A factory gives each product a serial number made of four digit positions, each position taken from 1 to 9 with 0 never used, and the same digit may appear in different positions. A serial number is valid under two rules: the digit 7 is used exactly once in the whole string, and the digit 1 must be used somewhere in the string but the final position may not hold a 1. How many valid serial numbers are there?",
+        "ja": "工場は製品ごとに 4 つの桁からなる製造番号をつけます。各桁は 1 から 9 のいずれかで、0 は決して使わず、違う桁に同じ数字を入れてもかまいません。有効な製造番号の規則は 2 つあります。全体で数字 7 をちょうど 1 回だけ使うこと、そして全体で数字 1 を必ず使うが、末尾の桁には 1 を入れないことです。有効な製造番号は何通りありますか。"
+      },
+      "answer": {
+        "zh-Hant": "合格序號一共有 484 組。",
+        "zh-Hans": "合格序号一共有 484 组。",
+        "en": "There are 484 valid serial numbers.",
+        "ja": "有効な製造番号は 484 通りです。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "兩個條件的性質不一樣：「7 恰好出現一次」是精確的位置條件，適合直接分類；「1 至少出現一次」則適合先放寬再用補集扣掉。策略是先數「7 恰好一次且最後一位不是 1」的序號，再從中扣掉「完全沒有 1」的。",
+          "第一步分兩類。第一類：7 站在最後一位。此時「最後一位不是 1」自動成立，前面三位只要不是 7 就好，各有 8 種選擇，共 8³ = 512 組。",
+          "第二類：7 站在前三位之一，位置有 3 種選法。最後一位既不能是 7（否則 7 出現兩次）也不能是 1，剩 7 種選擇；另外兩個位置只要不是 7，各有 8 種。共 3 × 7 × 8² = 3 × 7 × 64 = 1344 組。",
+          "兩類合計 512 + 1344 = 1856 組，這些都滿足「7 恰好一次」與「最後一位不是 1」，但還沒管有沒有出現 1。",
+          "第二步，把上面 1856 組之中「完全沒有數字 1」的扣掉。第一類（7 在最後一位）：前三位不能是 7 也不能是 1，各 7 種，共 7³ = 343 組。",
+          "第二類（7 在前三位）：位置 3 種，最後一位不能是 7 也不能是 1 有 7 種，另外兩位同樣各 7 種，共 3 × 7 × 7² = 3 × 7 × 49 = 1029 組。沒有 1 的合計 343 + 1029 = 1372 組。",
+          "所求 = 1856 − 1372 = 484 組。驗算：用程式跑遍 9⁴ = 6561 組候選序號，逐一檢查三個條件，符合的正好是 484 組 ✓。"
+        ],
+        "zh-Hans": [
+          "两个条件的性质不一样：“7 恰好出现一次”是精确的位置条件，适合直接分类；“1 至少出现一次”则适合先放宽再用补集扣掉。策略是先数“7 恰好一次且最后一位不是 1”的序号，再从中扣掉“完全没有 1”的。",
+          "第一步分两类。第一类：7 站在最后一位。此时“最后一位不是 1”自动成立，前面三位只要不是 7 就好，各有 8 种选择，共 8³ = 512 组。",
+          "第二类：7 站在前三位之一，位置有 3 种选法。最后一位既不能是 7（否则 7 出现两次）也不能是 1，剩 7 种选择；另外两个位置只要不是 7，各有 8 种。共 3 × 7 × 8² = 3 × 7 × 64 = 1344 组。",
+          "两类合计 512 + 1344 = 1856 组，这些都满足“7 恰好一次”与“最后一位不是 1”，但还没管有没有出现 1。",
+          "第二步，把上面 1856 组之中“完全没有数字 1”的扣掉。第一类（7 在最后一位）：前三位不能是 7 也不能是 1，各 7 种，共 7³ = 343 组。",
+          "第二类（7 在前三位）：位置 3 种，最后一位不能是 7 也不能是 1 有 7 种，另外两位同样各 7 种，共 3 × 7 × 7² = 3 × 7 × 49 = 1029 组。没有 1 的合计 343 + 1029 = 1372 组。",
+          "所求 = 1856 − 1372 = 484 组。验算：用程序跑遍 9⁴ = 6561 组候选序号，逐一检查三个条件，符合的正好是 484 组 ✓。"
+        ],
+        "en": [
+          "The two rules have different flavours. 'Exactly one 7' is a precise positional condition and invites direct case splitting, while 'at least one 1' is best handled by relaxing it and subtracting a complement. So first count serial numbers with exactly one 7 whose last digit is not 1, then remove those containing no 1 at all.",
+          "Step one, case A: the 7 sits in the last position. Then 'last digit is not 1' holds automatically, and each of the first three positions may be anything except 7, giving 8³ = 512 serial numbers.",
+          "Case B: the 7 sits in one of the first three positions, 3 choices of place. The last digit can be neither 7 (or the 7 would appear twice) nor 1, leaving 7 choices, and the other two positions may be anything except 7, 8 choices each. That gives 3 × 7 × 8² = 3 × 7 × 64 = 1344 serial numbers.",
+          "The two cases total 512 + 1344 = 1856 serial numbers, all with exactly one 7 and a last digit other than 1, but so far with no control over whether a 1 appears.",
+          "Step two, remove from those 1856 the serial numbers containing no digit 1 at all. In case A, the first three positions may be neither 7 nor 1, giving 7 choices each and 7³ = 343 serial numbers.",
+          "In case B, 3 choices of place for the 7, then 7 choices for the last digit and 7 choices for each of the other two positions, giving 3 × 7 × 7² = 3 × 7 × 49 = 1029 serial numbers. Codes with no 1 total 343 + 1029 = 1372.",
+          "The answer is 1856 - 1372 = 484. Check: testing all 9⁴ = 6561 candidate serial numbers by computer against the three rules leaves exactly 484 of them."
+        ],
+        "ja": [
+          "2 つの条件は性質が違います。「7 がちょうど 1 回」は正確な位置の条件なので場合分けに向き、「1 が少なくとも 1 回」はいったん外して補集合で引くのに向いています。そこでまず「7 がちょうど 1 回かつ最後の桁が 1 でない」製造番号を数え、そこから「1 が 1 つもない」ものを引きます。",
+          "第 1 段階、ケース A：7 が最後の桁にある場合。このとき「最後の桁が 1 でない」は自動的に成り立ち、前の 3 桁は 7 以外なら何でもよいので 8³ = 512 通りです。",
+          "ケース B：7 が前 3 桁のどれかにある場合、位置の選び方は 3 通り。最後の桁は 7 でも（7 が 2 回になる）1 でもいけないので 7 通り、残り 2 桁は 7 以外で各 8 通り。よって 3 × 7 × 8² = 3 × 7 × 64 = 1344 通りです。",
+          "2 つのケースの合計は 512 + 1344 = 1856 通りで、いずれも「7 がちょうど 1 回」「最後の桁が 1 でない」を満たしますが、1 が現れるかどうかはまだ制御していません。",
+          "第 2 段階、この 1856 通りから「1 が 1 つもない」ものを引きます。ケース A では前 3 桁が 7 でも 1 でもいけないので各 7 通り、7³ = 343 通りです。",
+          "ケース B では位置 3 通り、最後の桁は 7 通り、残り 2 桁も各 7 通りで 3 × 7 × 7² = 3 × 7 × 49 = 1029 通り。1 を含まないものは合計 343 + 1029 = 1372 通りです。",
+          "求める答えは 1856 − 1372 = 484 通りです。検算：9⁴ = 6561 通りの候補をすべて 3 つの規則で調べると、残るのはちょうど 484 通り ✓。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "484"
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "combinatorics-grade9-layered-code-constraints",
+        "notes": "題型來源：CEMC 2024 Pascal Contest 第 23 題（本輪以 WebFetch 抓下 2024PascalContest.pdf 後用 pdftotext 讀出原文），該題是「至少一個 4 但第二、四位不是 4；恰好一個 2 但首位不是 2；恰好一個 7；還要含 1 或 6 或兩個 4」的多層密碼計數。本題只保留「精確次數條件 + 位置禁止 + 至少出現一次」這個骨架，改成三條規則、數字改用 1 到 9，答案自行推導並用窮舉驗證。去重：全庫掃「密碼」得 12 題，combinatorics_grade7_foundation_017（首位不是 0、末位是偶數）與 combinatorics_grade7_foundation_039（至少一個 0）各只有一層限制且不含「恰好出現一次」；logic_grade11_foundation_030、logic_grade7_foundation_034 是數字互異且數字和固定的謎題，解法是列舉而非分類乘法。"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      }
+    },
+    {
+      "id": "combinatorics_grade9_foundation_046",
+      "reviewStatus": "ok",
+      "topic": "combinatorics",
+      "subtopic": "max_handshakes_all_even_degrees",
+      "tags": [
+        "c:graph_theory",
+        "m:extremal",
+        "m:invariant"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade9",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一場聚會有 6 個人，任何兩個人之間最多只握一次手。已知每一個人握手的次數都是偶數（完全沒有和任何人握手算 0 次，也算偶數）。求全場握手的總次數最多可能是幾次。",
+        "zh-Hans": "一场聚会有 6 个人，任何两个人之间最多只握一次手。已知每一个人握手的次数都是偶数（完全没有和任何人握手算 0 次，也算偶数）。求全场握手的总次数最多可能是几次。",
+        "en": "Six people are at a party, and any two of them shake hands at most once. Every person shakes hands an even number of times, where shaking with nobody counts as 0 and is even. What is the largest possible total number of handshakes at the party?",
+        "ja": "パーティーに 6 人がいて、どの 2 人も握手をするのは高々 1 回です。各人の握手の回数はすべて偶数です（誰とも握手しない 0 回も偶数とみなします）。会場全体での握手の総回数は最大でいくつになりますか。"
+      },
+      "answer": {
+        "zh-Hant": "全場握手的總次數最多是 12 次。",
+        "zh-Hans": "全场握手的总次数最多是 12 次。",
+        "en": "The largest possible total is 12 handshakes.",
+        "ja": "握手の総回数は最大で 12 回です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "先看沒有限制時的上限：6 個人兩兩之間最多握 C(6, 2) = 15 次手。但「每個人的次數都是偶數」這個要求會把它壓下來。",
+          "一個人最多能和其他 5 個人各握一次，所以任何人的握手次數不超過 5。可是次數還必須是偶數，5 是奇數，因此每個人最多只能握 4 次。",
+          "接著用一個計數關係：把 6 個人的握手次數全部加起來時，每一次握手都會被它的兩位當事人各算一次，所以「所有人次數的總和」恰好等於「握手總次數」的 2 倍。",
+          "所有人次數的總和最多是 6 × 4 = 24，所以握手總次數最多是 24 ÷ 2 = 12 次。",
+          "上界算出來還不夠，必須確認 12 次真的做得到，否則只是空談。作法：把 6 個人配成 3 對，例如（甲、乙）、（丙、丁）、（戊、己），規定每個人和自己搭檔以外的四個人都握手，只跟自己的搭檔不握。",
+          "這樣每個人恰好握 4 次手，是偶數 ✓；總次數是 15 − 3 = 12 次，正好打到上界。",
+          "所以答案是 12 次。驗算：用程式列舉 6 個人之間全部 2¹⁵ = 32768 種握手情形，篩出每個人次數都是偶數的，其中握手最多的確實是 12 次 ✓。"
+        ],
+        "zh-Hans": [
+          "先看没有限制时的上限：6 个人两两之间最多握 C(6, 2) = 15 次手。但“每个人的次数都是偶数”这个要求会把它压下来。",
+          "一个人最多能和其他 5 个人各握一次，所以任何人的握手次数不超过 5。可是次数还必须是偶数，5 是奇数，因此每个人最多只能握 4 次。",
+          "接着用一个计数关系：把 6 个人的握手次数全部加起来时，每一次握手都会被它的两位当事人各算一次，所以“所有人次数的总和”恰好等于“握手总次数”的 2 倍。",
+          "所有人次数的总和最多是 6 × 4 = 24，所以握手总次数最多是 24 ÷ 2 = 12 次。",
+          "上界算出来还不够，必须确认 12 次真的做得到，否则只是空谈。作法：把 6 个人配成 3 对，例如（甲、乙）、（丙、丁）、（戊、己），规定每个人和自己搭档以外的四个人都握手，只跟自己的搭档不握。",
+          "这样每个人恰好握 4 次手，是偶数 ✓；总次数是 15 − 3 = 12 次，正好打到上界。",
+          "所以答案是 12 次。验算：用程序列举 6 个人之间全部 2¹⁵ = 32768 种握手情形，筛出每个人次数都是偶数的，其中握手最多的确实是 12 次 ✓。"
+        ],
+        "en": [
+          "Start with the unrestricted ceiling: six people can shake at most C(6, 2) = 15 times in total. The requirement that every personal count be even pushes this down.",
+          "One person can shake with at most the other 5, so nobody exceeds 5 handshakes. But the count must also be even, and 5 is odd, so nobody can exceed 4 handshakes.",
+          "Next use a counting relation: when the six personal counts are added up, each handshake is counted once by each of its two participants, so the sum of all personal counts is exactly twice the total number of handshakes.",
+          "That sum is at most 6 × 4 = 24, so the total number of handshakes is at most 24 divided by 2, which is 12.",
+          "An upper bound alone is not enough; we must show 12 is actually reachable. Pair the six people up into three couples, say (A, B), (C, D), (E, F), and let everyone shake hands with all four people outside their own couple, skipping only their partner.",
+          "Then every person shakes exactly 4 times, which is even, and the total is 15 - 3 = 12 handshakes, exactly meeting the bound.",
+          "So the answer is 12. Check: enumerating all 2¹⁵ = 32768 handshake patterns among six people by computer and keeping those in which every personal count is even, the maximum number of handshakes really is 12."
+        ],
+        "ja": [
+          "まず制限のない上限を見ます。6 人が両者間で握手できる回数は最大 C(6, 2) = 15 回です。しかし「各人の回数が偶数」という条件がこれを引き下げます。",
+          "1 人が握手できる相手は他の 5 人までなので、誰の回数も 5 を超えません。さらに偶数でなければならず 5 は奇数なので、各人は最大でも 4 回までです。",
+          "次に数え上げの関係を使います。6 人の回数をすべて足すと、1 回の握手はその当事者 2 人に 1 回ずつ数えられるので、「全員の回数の合計」はちょうど「握手の総回数」の 2 倍になります。",
+          "合計は最大でも 6 × 4 = 24 なので、握手の総回数は最大 24 ÷ 2 = 12 回です。",
+          "上限を出しただけでは不十分で、12 回が実際に達成できることを示さねばなりません。6 人を 3 組のペア、たとえば（A、B）、（C、D）、（E、F）に分け、各人は自分の相方以外の 4 人全員と握手し、相方とだけ握手しないことにします。",
+          "すると各人はちょうど 4 回握手し偶数 ✓、総回数は 15 − 3 = 12 回で、ちょうど上限に達します。",
+          "したがって答えは 12 回です。検算：6 人の握手のしかた 2¹⁵ = 32768 通りをすべて列挙し、各人の回数が偶数のものだけを残すと、握手が最も多いものは確かに 12 回 ✓。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "12"
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "combinatorics-grade9-max-edges-even-degrees",
+        "notes": "題型來源：握手引理（度數總和是邊數的兩倍）與偶度數子圖的極值問題，屬圖論教材標準內容；本輪沒有抓到可直接引用的外部頁面，照實記錄為自行設計。去重：全庫掃過 c:graph_theory 的 42 題與所有握手題。logic_grade2_foundation_045（7 人各握 3 次是否可能）、logic_grade6_foundation_060（7 國各簽 k 份條約有幾個 k 可行）只用奇偶性判可行性，不求極值；logic_grade6_foundation_052、logic_grade6_foundation_038 是「次數互不相同」的推理；logic_grade11_foundation_032 已知總握手數反推人數。本題要同時給出上界（每人 ≤ 4 加度數和 = 2 × 邊數）與達成上界的構造（完全圖去掉一組完美配對），是既有題沒有的組合。 需要主流程留意的家族相似：全庫已有兩題「小點集上求最多邊數」——logic_grade12_foundation_012（5 點無三角形，最多 6 條，靠二部構造）與 logic_grade12_foundation_028（6 點不連通，最多 10 條，靠分成兩群比較 C(k,2)）。本題同樣是「上界加構造」的形狀，但限制是局部的度數奇偶性，上界來自握手引理（度數和 = 2 × 邊數）而非禁止子圖或連通性，構造是完全圖去掉一組完美配對，三者的定理各不相同。若主流程認為同形狀已經夠多，本題是這批 12 題中最適合被砍掉的一題。"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      }
     }
   ]
 }

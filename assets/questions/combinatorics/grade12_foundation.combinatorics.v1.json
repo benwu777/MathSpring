@@ -5066,6 +5066,342 @@
         "reference": "combinatorics-grade12-foundation",
         "notes": "題型出自 Utah 數學圈講義 Combinatorics 第 28 題「圓桌 n 席坐了至少 (k−1)n/k 人必有 k 個連續席位有人」，我把它具體化成 20 席、連續 4 席，並改成求最少人數，補上 15 人的構造反例。全庫掃過「圓桌|連續.{0,4}個座位」regex 命中 10 題，全是排列組合的坐法計數或邏輯排座位推理，沒有一題問「保證出現連續若干個有人的座位」；logic_grade5_010 與 logic_grade2_011 那類球放盒子的強化鴿籠沒有環狀結構，也不需要構造反例。"
       }
+    },
+    {
+      "id": "combinatorics_grade12_foundation_055",
+      "reviewStatus": "ok",
+      "topic": "combinatorics",
+      "subtopic": "window_average_constraint_max_length",
+      "tags": [
+        "c:mixture",
+        "c:mean",
+        "c:inequality",
+        "m:extremal",
+        "m:contradiction"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一排瓶子由左到右編號，每瓶裝的液體體積都相同，而且每一瓶不是純果汁（果汁濃度 100%）就是純水（果汁濃度 0%）。這排瓶子同時滿足兩個條件：任意連續 3 瓶的液體全部倒在一起攪勻後，果汁濃度大於 65%；任意連續 5 瓶的液體全部倒在一起攪勻後，果汁濃度小於 65%。求這排瓶子最多可能有幾瓶。",
+        "zh-Hans": "一排瓶子由左到右编号，每瓶装的液体体积都相同，而且每一瓶不是纯果汁（果汁浓度 100%）就是纯水（果汁浓度 0%）。这排瓶子同时满足两个条件：任意连续 3 瓶的液体全部倒在一起搅匀后，果汁浓度大于 65%；任意连续 5 瓶的液体全部倒在一起搅匀后，果汁浓度小于 65%。求这排瓶子最多可能有几瓶。",
+        "en": "Bottles are lined up and numbered from left to right. Every bottle holds the same volume of liquid, and each bottle contains either pure juice (juice concentration 100%) or pure water (juice concentration 0%). The row satisfies both conditions: pouring together any 3 consecutive bottles and stirring gives a juice concentration greater than 65%, and pouring together any 5 consecutive bottles and stirring gives a juice concentration less than 65%. What is the largest possible number of bottles in the row?",
+        "ja": "びんが左から右へ番号順に並んでいます。どのびんにも同じ体積の液体が入っており、各びんの中身は純粋な果汁（果汁濃度 100%）か水（果汁濃度 0%）のどちらかです。この並びは次の 2 つを同時に満たします。連続する任意の 3 本を全部混ぜると果汁濃度が 65% より大きくなり、連続する任意の 5 本を全部混ぜると果汁濃度が 65% より小さくなります。びんは最大で何本並べられますか。"
+      },
+      "answer": {
+        "zh-Hant": "這排瓶子最多有 6 瓶。",
+        "zh-Hans": "这排瓶子最多有 6 瓶。",
+        "en": "The row can contain at most 6 bottles.",
+        "ja": "びんは最大で 6 本並べられます。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "每瓶體積相同，所以把 m 瓶倒在一起後的果汁濃度，就等於這 m 瓶裡果汁瓶的瓶數除以 m。整個題目因此變成在數果汁瓶與水瓶的個數。",
+          "任意連續 3 瓶：果汁瓶數 ÷ 3 > 65%，即果汁瓶數 > 1.95，所以每連續 3 瓶至少有 2 瓶果汁，換句話說每連續 3 瓶最多只有 1 瓶水。",
+          "「每連續 3 瓶最多 1 瓶水」等於說任兩瓶水不能靠得太近：兩瓶水的編號至少要相差 3。",
+          "任意連續 5 瓶：果汁瓶數 ÷ 5 < 65%，即果汁瓶數 < 3.25，所以每連續 5 瓶最多 3 瓶果汁，也就是每連續 5 瓶至少要有 2 瓶水。",
+          "假設有 7 瓶。先看水恰好 3 瓶的情形：編號兩兩相差至少 3，在 1 到 7 之中唯一的放法是 1、4、7。但第 2 到第 6 瓶這 5 瓶裡只有第 4 瓶是水，不滿足「每連續 5 瓶至少 2 瓶水」。",
+          "再看水只有 2 瓶或更少的情形：第 1 到第 5 瓶要有 2 瓶水，第 3 到第 7 瓶也要有 2 瓶水，兩瓶水必須同時落在第 3、4、5 這三個位置裡；但這三個位置任兩個相差都小於 3，與第 3 步矛盾。水更少就更不可能，所以 7 瓶不成立。",
+          "7 瓶不行，那 6 瓶呢？取「果、水、果、果、水、果」：連續 3 瓶的四個窗口都恰有 2 瓶果汁，濃度 2 ÷ 3 約 66.7% > 65% ✓；連續 5 瓶的兩個窗口都恰有 3 瓶果汁，濃度 3 ÷ 5 = 60% < 65% ✓。",
+          "因此上限 7 做不到、6 做得到，這排瓶子最多有 6 瓶。"
+        ],
+        "zh-Hans": [
+          "每瓶体积相同，所以把 m 瓶倒在一起后的果汁浓度，就等于这 m 瓶里果汁瓶的瓶数除以 m。整个题目因此变成在数果汁瓶与水瓶的个数。",
+          "任意连续 3 瓶：果汁瓶数 ÷ 3 > 65%，即果汁瓶数 > 1.95，所以每连续 3 瓶至少有 2 瓶果汁，换句话说每连续 3 瓶最多只有 1 瓶水。",
+          "「每连续 3 瓶最多 1 瓶水」等于说任两瓶水不能靠得太近：两瓶水的编号至少要相差 3。",
+          "任意连续 5 瓶：果汁瓶数 ÷ 5 < 65%，即果汁瓶数 < 3.25，所以每连续 5 瓶最多 3 瓶果汁，也就是每连续 5 瓶至少要有 2 瓶水。",
+          "假设有 7 瓶。先看水恰好 3 瓶的情形：编号两两相差至少 3，在 1 到 7 之中唯一的放法是 1、4、7。但第 2 到第 6 瓶这 5 瓶里只有第 4 瓶是水，不满足「每连续 5 瓶至少 2 瓶水」。",
+          "再看水只有 2 瓶或更少的情形：第 1 到第 5 瓶要有 2 瓶水，第 3 到第 7 瓶也要有 2 瓶水，两瓶水必须同时落在第 3、4、5 这三个位置里；但这三个位置任两个相差都小于 3，与第 3 步矛盾。水更少就更不可能，所以 7 瓶不成立。",
+          "7 瓶不行，那 6 瓶呢？取「果、水、果、果、水、果」：连续 3 瓶的四个窗口都恰有 2 瓶果汁，浓度 2 ÷ 3 约 66.7% > 65% ✓；连续 5 瓶的两个窗口都恰有 3 瓶果汁，浓度 3 ÷ 5 = 60% < 65% ✓。",
+          "因此上限 7 做不到、6 做得到，这排瓶子最多有 6 瓶。"
+        ],
+        "en": [
+          "Every bottle holds the same volume, so pouring m bottles together gives a juice concentration equal to the number of juice bottles among them divided by m. The whole problem becomes a counting problem about juice bottles and water bottles.",
+          "Any 3 consecutive bottles: juice count ÷ 3 > 65%, so the juice count exceeds 1.95, meaning every 3 consecutive bottles contain at least 2 juice bottles, that is at most 1 water bottle.",
+          "At most 1 water bottle in every 3 consecutive positions means no two water bottles may sit close together: their numbers must differ by at least 3.",
+          "Any 5 consecutive bottles: juice count ÷ 5 < 65%, so the juice count is less than 3.25, meaning every 5 consecutive bottles contain at most 3 juice bottles, that is at least 2 water bottles.",
+          "Suppose there are 7 bottles. If there are exactly 3 water bottles, their numbers differ by at least 3, so within 1 to 7 the only placement is 1, 4 and 7. But bottles 2 through 6 then contain only bottle 4 as water, which violates the requirement of at least 2 water bottles in every 5 consecutive.",
+          "If instead there are 2 or fewer water bottles, then bottles 1 to 5 need 2 of them and bottles 3 to 7 also need 2 of them, forcing both water bottles into positions 3, 4 and 5. But any two of those positions differ by less than 3, contradicting the spacing rule. Fewer water bottles is worse still, so 7 bottles is impossible.",
+          "Can 6 work? Take juice, water, juice, juice, water, juice. Each of the four windows of 3 has exactly 2 juice bottles, giving 2 ÷ 3, about 66.7%, above 65%. Each of the two windows of 5 has exactly 3 juice bottles, giving 3 ÷ 5 = 60%, below 65%.",
+          "So 7 is impossible while 6 is achievable, and the row has at most 6 bottles."
+        ],
+        "ja": [
+          "どのびんも体積が同じなので、m 本を混ぜたときの果汁濃度は、その m 本に含まれる果汁のびんの本数を m で割った値になります。問題は果汁と水の本数を数えることに帰着します。",
+          "連続する任意の 3 本：果汁の本数 ÷ 3 > 65% より果汁の本数は 1.95 より大きく、したがって連続する 3 本には果汁が少なくとも 2 本、言いかえると水は多くても 1 本しか入りません。",
+          "「連続する 3 本に水は多くても 1 本」とは、水どうしが近づけないということです。水のびんの番号は少なくとも 3 だけ離れていなければなりません。",
+          "連続する任意の 5 本：果汁の本数 ÷ 5 < 65% より果汁は 3.25 本未満、つまり連続する 5 本に果汁は多くても 3 本、言いかえると水が少なくとも 2 本必要です。",
+          "7 本あると仮定します。水がちょうど 3 本の場合、番号は 3 以上離れるので 1 から 7 の中では 1、4、7 の 1 通りしかありません。しかし 2 番目から 6 番目の 5 本には水が 4 番目の 1 本しかなく、「連続する 5 本に水が 2 本以上」に反します。",
+          "水が 2 本以下の場合、1 から 5 番目にも 3 から 7 番目にも水が 2 本必要なので、2 本とも 3、4、5 番目に入らねばなりません。ところがこの 3 か所はどの 2 つも差が 3 未満で、3 番目の段階の結論と矛盾します。水がさらに少なければなおさら不可能なので、7 本は成立しません。",
+          "では 6 本はどうでしょうか。果汁、水、果汁、果汁、水、果汁 と並べると、連続 3 本の 4 つの窓はどれも果汁が 2 本で濃度は 2 ÷ 3、約 66.7% で 65% より大きく、連続 5 本の 2 つの窓はどれも果汁が 3 本で濃度は 3 ÷ 5 = 60% で 65% より小さくなります。",
+          "よって 7 本は不可能、6 本は可能なので、びんは最大で 6 本です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "6"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "combinatorics-grade12-window-average",
+        "notes": "題型骨架取自 2018 CEMC Pascal 第 24 題（身高 1.60／1.22 兩種值，任意連續 4 人平均大於 1.50、任意連續 7 人平均小於 1.50，求最大人數），把兩種身高換成兩種濃度的瓶子、窗口長度改成 3 與 5、門檻改成 65%，答案由 9 變 6，且最佳排列唯一。全庫以「任意連續／每連續／相鄰幾個的平均」regex 掃描 0 題命中；既有濃度題全部是一次混合或反覆稀釋，沒有任何一題把限制加在滑動窗口上。"
+      }
+    },
+    {
+      "id": "combinatorics_grade12_foundation_056",
+      "reviewStatus": "ok",
+      "topic": "combinatorics",
+      "subtopic": "alternating_turns_first_six_wins",
+      "tags": [
+        "c:probability",
+        "c:recurrence",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "甲、乙兩人輪流擲同一顆公正的六面骰子：先由甲擲一次，若沒有擲出 6 點就換乙擲一次，若乙也沒擲出 6 點就再輪回甲，如此一直輪流下去。第一個擲出 6 點的人獲勝，遊戲立刻結束。求甲獲勝的機率；把這個機率寫成最簡分數之後，分母是多少？",
+        "zh-Hans": "甲、乙两人轮流掷同一颗公正的六面骰子：先由甲掷一次，若没有掷出 6 点就换乙掷一次，若乙也没掷出 6 点就再轮回甲，如此一直轮流下去。第一个掷出 6 点的人获胜，游戏立刻结束。求甲获胜的概率；把这个概率写成最简分数之后，分母是多少？",
+        "en": "Two players, A and B, take turns rolling the same fair six-sided die. A rolls first; if A does not roll a 6 then B rolls, and if B does not roll a 6 the turn passes back to A, and so on. The first player to roll a 6 wins and the game stops at once. Find the probability that A wins, and state the denominator of that probability when written as a fraction in lowest terms.",
+        "ja": "A と B の 2 人が、同じ公正な 6 面のさいころを交互に振ります。まず A が 1 回振り、6 が出なければ B が 1 回振り、B も 6 が出なければまた A の番、というように続けます。先に 6 を出した人が勝ちで、その時点でゲームは終了します。A が勝つ確率を求め、その確率を既約分数で表したときの分母を答えなさい。"
+      },
+      "answer": {
+        "zh-Hant": "甲獲勝的機率是 6/11，寫成最簡分數之後，分母是 11。",
+        "zh-Hans": "甲获胜的概率是 6/11，写成最简分数之后，分母是 11。",
+        "en": "A wins with probability 6/11, so the denominator in lowest terms is 11.",
+        "ja": "A が勝つ確率は 6/11 なので、既約分数にしたときの分母は 11 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "這個遊戲理論上可能一直玩不完（兩人輪流一直擲不出 6 點），輪數沒有上限，所以不能把有限多種情形列完再相加。要利用「局面會原封不動地重演」這件事。",
+          "設甲獲勝的機率是 p。遊戲的第一次由甲擲：有 1/6 的機率當場擲出 6 點，甲直接獲勝。",
+          "若甲沒擲出 6 點（機率 5/6），接著乙也沒擲出 6 點（機率 5/6），球又回到甲手上。這時的局面與遊戲一開始一模一樣——同一顆骰子、同樣輪到甲先擲，所以從這一刻起甲獲勝的機率仍然是 p。",
+          "把兩條路徑合起來：p = 1/6 + (5/6) × (5/6) × p，也就是 p = 1/6 + (25/36)p。",
+          "移項得 p − (25/36)p = 1/6，即 (11/36)p = 1/6，解得 p = (1/6) × (36/11) = 6/11。這已是最簡分數，分母是 11。",
+          "驗算：也可以把甲在第 1、3、5、⋯ 次擲出 6 點的機率直接加起來，得 (1/6) × [1 + 25/36 + (25/36)² + ⋯] = (1/6) ÷ (1 − 25/36) = (1/6) ÷ (11/36) = 6/11 ✓。乙獲勝的機率則是 5/11，兩者相加為 1，表示遊戲以機率 1 會結束；先擲的甲機率過半，符合「先手有利」的直覺。"
+        ],
+        "zh-Hans": [
+          "这个游戏理论上可能一直玩不完（两人轮流一直掷不出 6 点），轮数没有上限，所以不能把有限多种情形列完再相加。要利用“局面会原封不动地重演”这件事。",
+          "设甲获胜的概率是 p。游戏的第一次由甲掷：有 1/6 的概率当场掷出 6 点，甲直接获胜。",
+          "若甲没掷出 6 点（概率 5/6），接着乙也没掷出 6 点（概率 5/6），球又回到甲手上。这时的局面与游戏一开始一模一样——同一颗骰子、同样轮到甲先掷，所以从这一刻起甲获胜的概率仍然是 p。",
+          "把两条路径合起来：p = 1/6 + (5/6) × (5/6) × p，也就是 p = 1/6 + (25/36)p。",
+          "移项得 p − (25/36)p = 1/6，即 (11/36)p = 1/6，解得 p = (1/6) × (36/11) = 6/11。这已是最简分数，分母是 11。",
+          "验算：也可以把甲在第 1、3、5、⋯ 次掷出 6 点的概率直接加起来，得 (1/6) × [1 + 25/36 + (25/36)² + ⋯] = (1/6) ÷ (1 − 25/36) = (1/6) ÷ (11/36) = 6/11 ✓。乙获胜的概率则是 5/11，两者相加为 1，表示游戏以概率 1 会结束；先掷的甲概率过半，符合“先手有利”的直觉。"
+        ],
+        "en": [
+          "In principle the game may never end, since both players could keep missing, so the number of rounds is unbounded and we cannot list finitely many cases and add them. The trick is that the position repeats itself exactly.",
+          "Let p be the probability that A wins. A rolls first: with probability 1/6 a 6 appears immediately and A wins on the spot.",
+          "If A misses (probability 5/6) and then B also misses (probability 5/6), it is A's turn again. The position is identical to the start of the game, same die and A to roll, so from that moment A's winning probability is still p.",
+          "Combining the two routes gives p = 1/6 + (5/6) × (5/6) × p, that is p = 1/6 + (25/36)p.",
+          "Rearranging, p − (25/36)p = 1/6, so (11/36)p = 1/6 and p = (1/6) × (36/11) = 6/11. This fraction is already in lowest terms, so the denominator is 11.",
+          "Check: summing the probabilities that A rolls the first 6 on turn 1, 3, 5, ... gives (1/6) × [1 + 25/36 + (25/36)² + ...] = (1/6) ÷ (1 − 25/36) = (1/6) ÷ (11/36) = 6/11. B wins with probability 5/11, and the two add to 1, so the game ends with probability 1. A, who moves first, wins more than half the time, matching the intuition that going first is an advantage."
+        ],
+        "ja": [
+          "このゲームは理論上いつまでも終わらない可能性があり（2 人とも 6 を出し続けないこともある）、回数に上限がないので有限個の場合を並べて足すことはできません。「局面がそっくり繰り返される」ことを利用します。",
+          "A が勝つ確率を p とします。最初に振るのは A で、確率 1/6 でその場で 6 が出て A の勝ちです。",
+          "A が外し（確率 5/6）、続いて B も外すと（確率 5/6）、再び A の番になります。このときの局面は開始時とまったく同じ、同じさいころで A が先に振る状況なので、そこから A が勝つ確率はやはり p です。",
+          "2 つの経路を合わせると p = 1/6 + (5/6) × (5/6) × p、すなわち p = 1/6 + (25/36)p となります。",
+          "移項すると p − (25/36)p = 1/6、つまり (11/36)p = 1/6 なので p = (1/6) × (36/11) = 6/11 です。これは既約分数なので分母は 11 です。",
+          "検算：A が 1 回目、3 回目、5 回目、⋯ で初めて 6 を出す確率を足すと (1/6) × [1 + 25/36 + (25/36)² + ⋯] = (1/6) ÷ (1 − 25/36) = (1/6) ÷ (11/36) = 6/11 ✓。B が勝つ確率は 5/11 で、合計が 1 になるのでゲームは確率 1 で終わります。先攻の A が半分を超えるのは「先手有利」の直感と合っています。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "11"
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "combinatorics-grade12-alternating-first-success",
+        "notes": "題型來源：兩人輪流嘗試、先成功者勝的經典機率題型（教科書常見的無窮等比級數／自相似方程式例題）；本輪沒有抓到可引用的單一外部頁面，照實記錄為自行設計。去重：用寬鬆 regex 掃全庫「輪流擲｜先擲出｜輪流丟」得到 0 題。最接近的既有題是 combinatorics_grade12_foundation_042（反覆擲骰子直到出現 6 點，求次數期望值 6），但那題只有一位擲骰者、求的是期望值；本題有兩位輪流者、求的是先手獲勝機率，方程式是 p = 1/6 + (25/36)p 而非 E = 1 + (5/6)E。也對照過 combinatorics_grade11_foundation_045（分賭本問題）：那題是有限局數的比分分配，與本題無窮輪的自相似結構不同，且本題刻意不問分配金額以免答案撞上該題的 48。"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      }
+    },
+    {
+      "id": "combinatorics_grade12_foundation_057",
+      "reviewStatus": "ok",
+      "topic": "combinatorics",
+      "subtopic": "streak_dependent_elimination_probability",
+      "tags": [
+        "c:probability",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "小安參加一項比賽，每一場都分出勝負，沒有平手。只要累積輸滿 2 場就被淘汰，之後不再出賽。他第一場獲勝的機率是 1/2；在剛贏了一場之後，下一場獲勝的機率是 2/3；在剛輸了一場之後，下一場獲勝的機率是 1/4。已知「小安在被淘汰之前恰好贏 2 場」的機率，剛好是某個正整數 n 的倒數。求 n 的值。",
+        "zh-Hans": "小安参加一项比赛，每一场都分出胜负，没有平手。只要累积输满 2 场就被淘汰，之后不再出赛。他第一场获胜的概率是 1/2；在刚赢了一场之后，下一场获胜的概率是 2/3；在刚输了一场之后，下一场获胜的概率是 1/4。已知“小安在被淘汰之前恰好赢 2 场”的概率，刚好是某个正整数 n 的倒数。求 n 的值。",
+        "en": "An is in a tournament in which no match can be drawn. Once An has lost 2 matches he is eliminated and plays no more. He wins his first match with probability 1/2; immediately after a win, he wins the next match with probability 2/3; immediately after a loss, he wins the next match with probability 1/4. The probability that An wins exactly 2 matches before being eliminated turns out to be the reciprocal of a positive integer n. Find n.",
+        "ja": "アンはある大会に出場しています。引き分けはなく、2 敗した時点で敗退し、それ以降は試合をしません。初戦に勝つ確率は 1/2、勝った直後の試合に勝つ確率は 2/3、負けた直後の試合に勝つ確率は 1/4 です。「アンが敗退するまでにちょうど 2 勝する」確率は、ある正の整数 n の逆数にちょうど等しくなります。n の値を求めなさい。"
+      },
+      "answer": {
+        "zh-Hant": "這個機率是 1/8，也就是 8 的倒數，所以 n = 8。",
+        "zh-Hans": "这个概率是 1/8，也就是 8 的倒数，所以 n = 8。",
+        "en": "The probability is 1/8, the reciprocal of 8, so n = 8.",
+        "ja": "確率は 1/8、すなわち 8 の逆数なので、n = 8 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "小安一路比到第 2 敗為止。若他總共贏 2 場，整段賽程一定恰好是 4 場：2 勝 2 敗，而且最後一場必定是敗——因為第 2 敗一出現，比賽立刻結束，不可能還有後續。",
+          "所以前 3 場是 2 勝 1 敗的某種順序，共三種：勝勝敗、勝敗勝、敗勝勝，各自再接上第 4 場的敗。",
+          "每一場的機率只看「上一場」的結果：開局勝的機率是 1/2、敗是 1/2；上一場勝則本場勝 2/3、敗 1/3；上一場敗則本場勝 1/4、敗 3/4。",
+          "勝勝敗敗：(1/2) × (2/3) × (1/3) × (3/4) = 1/12。",
+          "勝敗勝敗：(1/2) × (1/3) × (1/4) × (1/3) = 1/72。",
+          "敗勝勝敗：(1/2) × (1/4) × (2/3) × (1/3) = 1/36。三種相加：1/12 + 1/72 + 1/36 = 6/72 + 1/72 + 2/72 = 9/72 = 1/8。",
+          "驗算：用程式依規則遞迴展開所有可能賽程直到第 2 敗，把全部機率累加得 1（表示沒有漏掉路徑），其中「恰好贏 2 場」的部分正好是 1/8 ✓。它剛好是 8 的倒數，所以 n = 8。"
+        ],
+        "zh-Hans": [
+          "小安一路比到第 2 败为止。若他总共赢 2 场，整段赛程一定恰好是 4 场：2 胜 2 败，而且最后一场必定是败——因为第 2 败一出现，比赛立刻结束，不可能还有后续。",
+          "所以前 3 场是 2 胜 1 败的某种顺序，共三种：胜胜败、胜败胜、败胜胜，各自再接上第 4 场的败。",
+          "每一场的概率只看“上一场”的结果：开局胜的概率是 1/2、败是 1/2；上一场胜则本场胜 2/3、败 1/3；上一场败则本场胜 1/4、败 3/4。",
+          "胜胜败败：(1/2) × (2/3) × (1/3) × (3/4) = 1/12。",
+          "胜败胜败：(1/2) × (1/3) × (1/4) × (1/3) = 1/72。",
+          "败胜胜败：(1/2) × (1/4) × (2/3) × (1/3) = 1/36。三种相加：1/12 + 1/72 + 1/36 = 6/72 + 1/72 + 2/72 = 9/72 = 1/8。",
+          "验算：用程序依规则递归展开所有可能赛程直到第 2 败，把全部概率累加得 1（表示没有漏掉路径），其中“恰好赢 2 场”的部分正好是 1/8 ✓。它刚好是 8 的倒数，所以 n = 8。"
+        ],
+        "en": [
+          "An keeps playing until his second loss. If he wins exactly 2 matches, the whole run must be exactly 4 matches: 2 wins and 2 losses, and the last match must be a loss, because the moment the second loss occurs the run ends and nothing can follow.",
+          "So the first 3 matches are 2 wins and 1 loss in some order, giving three patterns: WWL, WLW, LWW, each followed by a loss in match 4.",
+          "Each match probability depends only on the previous result: at the start a win has probability 1/2 and a loss 1/2; after a win, a win has probability 2/3 and a loss 1/3; after a loss, a win has probability 1/4 and a loss 3/4.",
+          "Pattern WWLL: (1/2) × (2/3) × (1/3) × (3/4) = 1/12.",
+          "Pattern WLWL: (1/2) × (1/3) × (1/4) × (1/3) = 1/72.",
+          "Pattern LWWL: (1/2) × (1/4) × (2/3) × (1/3) = 1/36. Adding the three: 1/12 + 1/72 + 1/36 = 6/72 + 1/72 + 2/72 = 9/72 = 1/8.",
+          "Check: expanding every possible run recursively by computer until the second loss, the probabilities total 1, confirming that no path was missed, and the part with exactly 2 wins is exactly 1/8. That is the reciprocal of 8, so n = 8."
+        ],
+        "ja": [
+          "アンは 2 敗するまで試合を続けます。ちょうど 2 勝するなら、全体は必ず 4 試合、すなわち 2 勝 2 敗で、しかも最後の試合は必ず敗北です。2 敗目が出た瞬間に終了するので、その後に試合は続きません。",
+          "したがって最初の 3 試合は 2 勝 1 敗の並びで、勝勝敗・勝敗勝・敗勝勝の 3 通り。それぞれの後に 4 試合目の敗北が続きます。",
+          "各試合の確率は直前の結果だけで決まります。初戦は勝ち 1/2、負け 1/2。勝った直後は勝ち 2/3、負け 1/3。負けた直後は勝ち 1/4、負け 3/4 です。",
+          "勝勝敗敗：(1/2) × (2/3) × (1/3) × (3/4) = 1/12。",
+          "勝敗勝敗：(1/2) × (1/3) × (1/4) × (1/3) = 1/72。",
+          "敗勝勝敗：(1/2) × (1/4) × (2/3) × (1/3) = 1/36。3 つを足すと 1/12 + 1/72 + 1/36 = 6/72 + 1/72 + 2/72 = 9/72 = 1/8 です。",
+          "検算：プログラムで 2 敗するまでのすべての進行を再帰的に展開して確率を合計すると 1 になり（経路の取りこぼしなし）、そのうち「ちょうど 2 勝」の部分はちょうど 1/8 ✓。これは 8 の逆数なので n = 8 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "8"
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "combinatorics-grade12-streak-dependent-knockout",
+        "notes": "題型來源：CEMC 2023 Cayley Contest 第 24 題（本輪以 WebFetch 抓下 2023CayleyContest.pdf 後用 pdftotext 讀出原文），該題設定為「輸滿 2 場淘汰、勝率隨上一場結果改變、求恰好贏 3 場的機率，並回答最簡分數的分子與分母之和」。本題沿用這個狀態相依的骨架，但把勝率改成 1/2、2/3、1/4，目標改成恰好贏 2 場，賽程長度因此變成 4 場、三種順序，答案自行推導為 1/8，並改成回答其倒數 8 以避開「求 a + b」這個常見句型。去重：全庫 c:probability 的 57 題與 c:expectation 的 21 題逐題看過，沒有任何一題的機率會隨「上一場結果」改變（combinatorics_grade11_foundation_050、combinatorics_grade12_foundation_052 都是各次獨立的二項情境，combinatorics_grade10_foundation_049 是一次重擲的最佳停止）。"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      }
+    },
+    {
+      "id": "combinatorics_grade12_foundation_058",
+      "reviewStatus": "ok",
+      "topic": "combinatorics",
+      "subtopic": "permutation_without_short_cycles",
+      "tags": [
+        "c:permutation_combination",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "某公司有 5 個部門，要辦一次交流：每個部門各派出 1 位員工到別的部門，而且每個部門恰好接待 1 位外來的員工。安排必須同時滿足兩條規定：沒有人被派回自己原本的部門；也不可以出現兩個部門「互相對調」的情形（也就是不能有甲部門的人被派到乙部門、同時乙部門的人被派到甲部門）。求符合規定的安排方式共有多少種。",
+        "zh-Hans": "某公司有 5 个部门，要办一次交流：每个部门各派出 1 位员工到别的部门，而且每个部门恰好接待 1 位外来的员工。安排必须同时满足两条规定：没有人被派回自己原本的部门；也不可以出现两个部门“互相对调”的情形（也就是不能有甲部门的人被派到乙部门、同时乙部门的人被派到甲部门）。求符合规定的安排方式共有多少种。",
+        "en": "A company has 5 departments and runs an exchange: each department sends 1 employee to another department, and each department hosts exactly 1 visiting employee. Two rules must hold at once: nobody is sent back to their own department, and no two departments may swap directly, meaning it is forbidden for department X to send someone to department Y while Y sends someone to X. How many arrangements satisfy the rules?",
+        "ja": "ある会社には 5 つの部署があり、交流を行います。各部署は 1 名を別の部署へ派遣し、各部署はちょうど 1 名の外部からの社員を受け入れます。守るべき規則は 2 つあります。誰も自分の部署へ戻されないこと、そしてどの 2 部署も直接入れ替えにならないこと（部署 X が部署 Y に人を送り、同時に Y が X に人を送るのは禁止）です。規則を満たす配置は何通りありますか。"
+      },
+      "answer": {
+        "zh-Hant": "符合規定的安排方式共有 24 種。",
+        "zh-Hans": "符合规定的安排方式共有 24 种。",
+        "en": "There are 24 arrangements that satisfy the rules.",
+        "ja": "規則を満たす配置は 24 通りです。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "把一種安排畫成「派遣圖」：從每個部門畫一個箭頭，指向它派出的員工要去的部門。因為每個部門恰好派出 1 人也恰好接待 1 人，每個點都是一進一出，這些箭頭必然把 5 個部門切成若干個互不相交的圈。",
+          "兩條規定翻譯成圈的語言：「沒有人被派回原部門」就是不可以出現長度 1 的圈（自己指向自己）；「不可以兩個部門互相對調」就是不可以出現長度 2 的圈。所以每個圈的長度至少是 3。",
+          "接著看 5 個部門能怎麼拆成長度至少 3 的圈，總長度必須是 5。5 = 3 + 2 不行，因為會冒出一個長度 2 的圈；5 = 4 + 1 也不行，會冒出長度 1 的圈；5 = 3 + 1 + 1 同理不行。唯一可行的拆法是 5 = 5，也就是整個安排是一個把五個部門全部串起來的大圈。",
+          "剩下的問題就是：把 5 個部門串成一個圈，有幾種串法？這相當於把 5 個部門排成一個環狀順序，環狀排列的種數是 (5 − 1)! = 4! = 24。",
+          "每一種環狀順序，對應「每個部門把人派給環上的下一個部門」這唯一一種安排，而不同的環狀順序給出的箭頭方向不同，所以是一對一的對應，沒有多算也沒有漏算。",
+          "所以答案是 24 種。",
+          "驗算：用程式列舉 5 個部門的全部 5! = 120 種派遣方式，先篩掉有人留在原部門的，再篩掉存在互相對調的，剩下恰好 24 種 ✓。順帶對照：若只要求「沒有人留在原部門」，答案是錯排數 44；多出來的 44 − 24 = 20 種全都含有一對互相對調的部門。"
+        ],
+        "zh-Hans": [
+          "把一种安排画成“派遣图”：从每个部门画一个箭头，指向它派出的员工要去的部门。因为每个部门恰好派出 1 人也恰好接待 1 人，每个点都是一进一出，这些箭头必然把 5 个部门切成若干个互不相交的圈。",
+          "两条规定翻译成圈的语言：“没有人被派回原部门”就是不准出现长度 1 的圈（自己指向自己）；“不可以两个部门互相对调”就是不准出现长度 2 的圈。所以每个圈的长度至少是 3。",
+          "接着看 5 个部门能怎么拆成长度至少 3 的圈，总长度必须是 5。5 = 3 + 2 不行，因为会冒出一个长度 2 的圈；5 = 4 + 1 也不行，会冒出长度 1 的圈；5 = 3 + 1 + 1 同理不行。唯一可行的拆法是 5 = 5，也就是整个安排是一个把五个部门全部串起来的大圈。",
+          "剩下的问题就是：把 5 个部门串成一个圈，有几种串法？这相当于把 5 个部门排成一个环状顺序，环状排列的种数是 (5 − 1)! = 4! = 24。",
+          "每一种环状顺序，对应“每个部门把人派给环上的下一个部门”这唯一一种安排，而不同的环状顺序给出的箭头方向不同，所以是一对一的对应，没有多算也没有漏算。",
+          "所以答案是 24 种。",
+          "验算：用程序列举 5 个部门的全部 5! = 120 种派遣方式，先筛掉有人留在原部门的，再筛掉存在互相对调的，剩下恰好 24 种 ✓。顺带对照：若只要求“没有人留在原部门”，答案是错排数 44；多出来的 44 − 24 = 20 种全都含有一对互相对调的部门。"
+        ],
+        "en": [
+          "Draw an arrangement as a dispatch diagram: from each department draw an arrow to the department its employee goes to. Since each department sends exactly one person and hosts exactly one, every node has one arrow out and one in, so the arrows necessarily break the 5 departments into disjoint cycles.",
+          "Translate the two rules into cycle language. Nobody returning to their own department forbids cycles of length 1, an arrow from a department to itself. No two departments swapping forbids cycles of length 2. So every cycle must have length at least 3.",
+          "Now see how 5 departments can be split into cycles of length at least 3, with total length 5. The split 5 = 3 + 2 fails because it creates a cycle of length 2; 5 = 4 + 1 fails because it creates a cycle of length 1; 5 = 3 + 1 + 1 fails for the same reason. The only workable split is 5 = 5, so the whole arrangement is one big cycle through all five departments.",
+          "The remaining question is how many ways there are to string 5 departments into one cycle. That is the number of circular orderings of 5 items, which is (5 - 1)! = 4! = 24.",
+          "Each circular ordering corresponds to exactly one arrangement, namely each department sending its employee to the next department around the ring, and different circular orderings give different arrows, so the correspondence is one to one with nothing double counted or missed.",
+          "So the answer is 24.",
+          "Check: enumerating all 5! = 120 dispatch patterns by computer, discarding those where someone stays in their own department and then those containing a direct swap, leaves exactly 24. For comparison, requiring only that nobody stays put gives the derangement number 44, and all 44 - 24 = 20 extra patterns contain a swapped pair."
+        ],
+        "ja": [
+          "1 つの配置を「派遣図」として描きます。各部署から、その部署が送る社員の行き先へ矢印を引きます。各部署はちょうど 1 名を送り 1 名を受け入れるので、どの点も出入りが 1 本ずつとなり、矢印は 5 つの部署をいくつかの互いに交わらないサイクルに分けます。",
+          "2 つの規則をサイクルの言葉に直します。「自分の部署に戻らない」は長さ 1 のサイクル（自分へ向かう矢印）の禁止、「2 部署の直接入れ替え禁止」は長さ 2 のサイクルの禁止です。したがってどのサイクルも長さは 3 以上でなければなりません。",
+          "次に、長さ 3 以上のサイクルで合計 5 になる分け方を調べます。5 = 3 + 2 は長さ 2 のサイクルが出るので不可、5 = 4 + 1 は長さ 1 のサイクルが出るので不可、5 = 3 + 1 + 1 も同様に不可。可能なのは 5 = 5 だけで、配置全体が 5 部署を一巡する 1 つの大きなサイクルになります。",
+          "残る問題は、5 部署を 1 つの輪につなぐ方法が何通りあるかです。これは 5 個の円順列の総数で、(5 − 1)! = 4! = 24 通りです。",
+          "どの円順列も「各部署が輪の次の部署へ社員を送る」というただ 1 つの配置に対応し、異なる円順列は異なる矢印を与えるので、対応は 1 対 1 で数え漏れも重複もありません。",
+          "したがって答えは 24 通りです。",
+          "検算：5! = 120 通りの派遣のしかたをすべて列挙し、自分の部署に残る人がいるものを除き、さらに直接入れ替えを含むものを除くと、ちょうど 24 通りが残ります ✓。参考までに「自分の部署に残らない」だけを課すと完全順列の 44 通りとなり、余分な 44 − 24 = 20 通りにはすべて入れ替えの組が含まれます。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "24"
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "combinatorics-grade12-cycles-length-at-least-three",
+        "notes": "題型來源：置換的循環結構分類（禁止長度 1 與長度 2 的循環），是離散數學教材的標準延伸；本輪沒有抓到可直接引用的外部頁面，照實記錄為自行設計。去重：全庫錯排題全部看過——combinatorics_grade8_foundation_036（3 人不坐回原位 = 2）、combinatorics_grade11_foundation_002（4 封信全錯 = 9）、combinatorics_grade12_foundation_012 與 combinatorics_grade11_foundation_031（恰好 1 封、恰好 2 封放對）、combinatorics_grade10_foundation_004、combinatorics_grade12_foundation_045（期望值）——全部只管固定點，沒有任何一題禁止長度 2 的循環，因此都不需要循環型分類。本題也刻意換成部門交流的敘述，避免與「信封／座位」系列共用措辭。"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      }
     }
   ]
 }

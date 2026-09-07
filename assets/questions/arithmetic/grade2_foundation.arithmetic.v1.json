@@ -7497,6 +7497,278 @@
         "reference": "arithmetic-grade2-foundation",
         "notes": "本輪 WebSearch 額度用罄，改用 WebFetch；實際抓得到的外部頁面只有 Wikipedia 的 Three cups problem、Fencepost error、Knights and Knaves 三頁，以及 NRICH primary 與 CEMC past-contests 兩個索引頁（CEMC 的競賽 PDF 全部回 404，抓不到題目原文）。以下如實說明本題題型來源與去重依據。 骨架是「兩段時間各自往回推出門時刻，再比較誰早」。掃全庫的時刻題：arithmetic_grade1_071（扣掉休息求實際時間）、arithmetic_grade2_081（開演加 90 分鐘）、arithmetic_grade3_015、arithmetic_grade4_052、arithmetic_grade5_064 全部是單向往後推或求經過時間；arithmetic_grade6_110 雖然提到出門，但是速度與遲到的行程問題。全庫沒有「兩個人各扣兩段時間再互相比較」這個骨架，而且此處走得慢的人反而晚出門，是一個真正的錯誤直覺陷阱。"
       }
+    },
+    {
+      "id": "arithmetic_grade2_foundation_101",
+      "reviewStatus": "ok",
+      "topic": "arithmetic",
+      "subtopic": "bounding_a_partly_unknown_total",
+      "tags": [
+        "c:place_value",
+        "c:add_sub",
+        "m:estimate_bound"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade2",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "小安有 7 包彩色筆，每一包剛好裝 10 枝。除此之外，他可能還有一些散的彩色筆沒有裝進包裝裡：散的枝數可能是 0 枝到 9 枝之間的任何一個數（也可能一枝都沒有），小安沒有數過。下面哪一句話一定正確？",
+        "zh-Hans": "小安有 7 包彩色笔，每一包刚好装 10 枝。除此之外，他可能还有一些散的彩色笔没有装进包装里：散的枝数可能是 0 枝到 9 枝之间的任何一个数（也可能一枝都没有），小安没有数过。下面哪一句话一定正确？",
+        "en": "An has 7 packs of coloured pens, and each pack holds exactly 10 pens. Besides those, there may also be loose pens that are not inside any pack: the number of loose pens could be any number from 0 to 9 (there may be none at all), and An has never counted them. Which sentence below must be true?",
+        "ja": "アンさんはいろえんぴつのパックを 7 つ持っていて、1 パックにはちょうど 10 本入っています。そのほかに、パックに入っていないばらのえんぴつがあるかもしれません。ばらの本数は 0 本から 9 本までのどれかで（1 本もないこともあります）、アンさんは数えたことがありません。次のうち、かならず正しいのはどれですか。"
+      },
+      "options": {
+        "A": {
+          "zh-Hant": "小安的彩色筆一定超過 70 枝。",
+          "zh-Hans": "小安的彩色笔一定超过 70 枝。",
+          "en": "An certainly has more than 70 pens.",
+          "ja": "アンさんのえんぴつはかならず 70 本より多い。"
+        },
+        "B": {
+          "zh-Hant": "小安的彩色筆一定不到 80 枝。",
+          "zh-Hans": "小安的彩色笔一定不到 80 枝。",
+          "en": "An certainly has fewer than 80 pens.",
+          "ja": "アンさんのえんぴつはかならず 80 本より少ない。"
+        },
+        "C": {
+          "zh-Hant": "小安的彩色筆一定超過 75 枝。",
+          "zh-Hans": "小安的彩色笔一定超过 75 枝。",
+          "en": "An certainly has more than 75 pens.",
+          "ja": "アンさんのえんぴつはかならず 75 本より多い。"
+        },
+        "D": {
+          "zh-Hant": "小安的彩色筆剛好是 70 枝。",
+          "zh-Hans": "小安的彩色笔刚好是 70 枝。",
+          "en": "An has exactly 70 pens.",
+          "ja": "アンさんのえんぴつはちょうど 70 本である。"
+        }
+      },
+      "answer": {
+        "zh-Hant": "答案是 B：小安的彩色筆一定不到 80 枝。",
+        "zh-Hans": "答案是 B：小安的彩色笔一定不到 80 枝。",
+        "en": "The answer is B: An certainly has fewer than 80 pens.",
+        "ja": "答えは B：アンさんのえんぴつはかならず 80 本より少ないです。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "7 包各 10 枝，合起來是 70 枝，這一部分是確定的。",
+          "散的最少可能是 0 枝，所以總數最少是 70 枝；散的最多是 9 枝，所以總數最多是 70 + 9 = 79 枝。",
+          "總數一定落在 70 枝到 79 枝之間，因此「一定不到 80 枝」成立，B 正確。",
+          "A 不正確：散的可能一枝都沒有，這時總數剛好 70 枝，不能算是超過 70 枝。",
+          "C 不正確：散的如果只有 2 枝，總數是 72 枝，並沒有超過 75 枝。D 也不正確：散的如果有 4 枝，總數就是 74 枝，不是剛好 70 枝。"
+        ],
+        "zh-Hans": [
+          "7 包各 10 枝，合起来是 70 枝，这一部分是确定的。",
+          "散的最少可能是 0 枝，所以总数最少是 70 枝；散的最多是 9 枝，所以总数最多是 70 + 9 = 79 枝。",
+          "总数一定落在 70 枝到 79 枝之间，因此「一定不到 80 枝」成立，B 正确。",
+          "A 不正确：散的可能一枝都没有，这时总数刚好 70 枝，不能算是超过 70 枝。",
+          "C 不正确：散的如果只有 2 枝，总数是 72 枝，并没有超过 75 枝。D 也不正确：散的如果有 4 枝，总数就是 74 枝，不是刚好 70 枝。"
+        ],
+        "en": [
+          "The 7 packs hold 10 pens each, which is 70 pens for sure.",
+          "The loose pens could be as few as 0, so the total is at least 70; they could be as many as 9, so the total is at most 70 + 9 = 79.",
+          "The total always lies between 70 and 79, so 'fewer than 80 for sure' holds and B is correct.",
+          "A is wrong: there may be no loose pens at all, making the total exactly 70, which does not count as more than 70.",
+          "C is wrong: with only 2 loose pens the total is 72, which is not more than 75. D is wrong too: with 4 loose pens the total is 74, not exactly 70."
+        ],
+        "ja": [
+          "7 パックはそれぞれ 10 本なので、合わせて 70 本は確実です。",
+          "ばらは 0 本のこともあるので合計は少なくとも 70 本、多くても 9 本なので合計は多くて 70 + 9 = 79 本です。",
+          "合計はかならず 70 本から 79 本の間に入るので、「かならず 80 本より少ない」は成り立ち、B が正しいです。",
+          "A は正しくありません。ばらが 1 本もなければ合計はちょうど 70 本で、70 本より多いとは言えません。",
+          "C も正しくありません。ばらが 2 本なら合計は 72 本で 75 本より多くありません。D も正しくなく、ばらが 4 本なら合計は 74 本でちょうど 70 本ではありません。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "multiple_choice",
+      "correctAnswer": {
+        "type": "choice",
+        "value": "B"
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "arithmetic-grade2-foundation",
+        "displayText": "改寫自「上下界估計」與位值教材",
+        "notes": "骨架同樣參考 Wikipedia「Upper and lower bounds」條目（實際讀過），情境改成十進位的『幾包十枝加零散』，讓上下界剛好是十位不變、個位未知。去重：全庫掃 m:estimate_bound 44 題。arithmetic_grade2_foundation_060（11 + 21 + 31 最接近哪個數）是四捨五入取近似值，不是界；arithmetic_grade3_foundation_108（估算判斷錢夠不夠）是選正確的估算方式且用到乘法，本題是判斷四個敘述中哪一個必然成立，而且陷阱在『可能剛好 70』的邊界。原本想用硬幣情境，掃到硬幣題有 41 題（arithmetic_grade1_foundation_062、logic_grade2_foundation_031 等）才改成彩色筆包裝。"
+      }
+    },
+    {
+      "id": "arithmetic_grade2_foundation_102",
+      "reviewStatus": "ok",
+      "topic": "arithmetic",
+      "subtopic": "unreachable_two_stamp_total",
+      "tags": [
+        "c:add_sub",
+        "c:basic_counting",
+        "m:enumeration",
+        "m:construction"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade2",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "小安有 2 元、5 元、8 元三種郵票，每一種都有很多張。他要在一封信上剛好貼 2 張郵票（兩張可以是同一種，也可以是不同種）。下面哪一個金額，是他不管怎麼貼都貼不出來的？",
+        "zh-Hans": "小安有 2 元、5 元、8 元三种邮票，每一种都有很多张。他要在一封信上刚好贴 2 张邮票（两张可以是同一种，也可以是不同种）。下面哪一个金额，是他不管怎么贴都贴不出来的？",
+        "en": "An has stamps worth 2 dollars, 5 dollars and 8 dollars, with plenty of each kind. He wants to stick exactly 2 stamps on one letter (the two stamps may be the same kind or different kinds). Which amount below can he never make, no matter how he sticks them?",
+        "ja": "アンさんは 2 元、5 元、8 元の 3 しゅるいの切手を、どれもたくさん持っています。1 通の手紙にちょうど 2 まいの切手をはります（2 まいは同じしゅるいでも、ちがうしゅるいでもかまいません）。次のうち、どうはってもつくれない金がくはどれですか。"
+      },
+      "options": {
+        "A": {
+          "zh-Hant": "7 元",
+          "zh-Hans": "7 元",
+          "en": "7 dollars",
+          "ja": "7 元"
+        },
+        "B": {
+          "zh-Hant": "10 元",
+          "zh-Hans": "10 元",
+          "en": "10 dollars",
+          "ja": "10 元"
+        },
+        "C": {
+          "zh-Hant": "12 元",
+          "zh-Hans": "12 元",
+          "en": "12 dollars",
+          "ja": "12 元"
+        },
+        "D": {
+          "zh-Hant": "13 元",
+          "zh-Hans": "13 元",
+          "en": "13 dollars",
+          "ja": "13 元"
+        }
+      },
+      "answer": {
+        "zh-Hant": "答案是 C：12 元貼不出來。",
+        "zh-Hans": "答案是 C：12 元贴不出来。",
+        "en": "The answer is C: 12 dollars cannot be made.",
+        "ja": "答えは C：12 元はつくれません。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "貼 2 張郵票的方法只有 6 種，把每一種的金額都列出來就不會漏掉。",
+          "兩張同種的有三種：2 + 2 = 4 元、5 + 5 = 10 元、8 + 8 = 16 元。",
+          "兩張不同種的也有三種：2 + 5 = 7 元、2 + 8 = 10 元、5 + 8 = 13 元。",
+          "所以貼得出來的金額只有 4 元、7 元、10 元、13 元、16 元這五種（10 元有兩種貼法，但算同一個金額）。",
+          "7 元、10 元、13 元都貼得出來，只有 12 元不在裡面，所以答案是 C。"
+        ],
+        "zh-Hans": [
+          "贴 2 张邮票的方法只有 6 种，把每一种的金额都列出来就不会漏掉。",
+          "两张同种的有三种：2 + 2 = 4 元、5 + 5 = 10 元、8 + 8 = 16 元。",
+          "两张不同种的也有三种：2 + 5 = 7 元、2 + 8 = 10 元、5 + 8 = 13 元。",
+          "所以贴得出来的金额只有 4 元、7 元、10 元、13 元、16 元这五种（10 元有两种贴法，但算同一个金额）。",
+          "7 元、10 元、13 元都贴得出来，只有 12 元不在里面，所以答案是 C。"
+        ],
+        "en": [
+          "There are only 6 ways to stick 2 stamps, so listing every total leaves nothing out.",
+          "Two stamps of the same kind give three cases: 2 + 2 = 4, 5 + 5 = 10 and 8 + 8 = 16 dollars.",
+          "Two stamps of different kinds give three more: 2 + 5 = 7, 2 + 8 = 10 and 5 + 8 = 13 dollars.",
+          "So the totals he can make are only 4, 7, 10, 13 and 16 dollars (10 dollars comes up twice but counts as one amount).",
+          "7, 10 and 13 dollars can all be made; only 12 dollars is missing, so the answer is C."
+        ],
+        "ja": [
+          "切手を 2 まいはる方法は 6 とおりしかないので、すべての金がくを書き出せば見落としません。",
+          "同じしゅるい 2 まいは 3 とおりで、2 + 2 = 4 元、5 + 5 = 10 元、8 + 8 = 16 元です。",
+          "ちがうしゅるい 2 まいも 3 とおりで、2 + 5 = 7 元、2 + 8 = 10 元、5 + 8 = 13 元です。",
+          "つくれる金がくは 4 元、7 元、10 元、13 元、16 元の 5 つだけです（10 元は 2 とおりのはり方がありますが、金がくとしては同じです）。",
+          "7 元、10 元、13 元はつくれ、12 元だけがないので、答えは C です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "multiple_choice",
+      "correctAnswer": {
+        "type": "choice",
+        "value": "C"
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "arithmetic-grade2-foundation",
+        "displayText": "改寫自「用固定面額能否湊出某金額」題型",
+        "notes": "沒有借到外部頁面（本 session 的 WebSearch 額度已用盡，CEMC 的 Gauss PDF 各種路徑都 404、Math Kangaroo 樣題頁 404），骨架是郵資湊數題型的存在性版本，照實記錄。去重：全庫掃「硬幣|郵票|湊」共 41 題。arithmetic_grade2_foundation_074、logic_grade4_foundation_055、mixed_grade5_foundation_013/032、arithmetic_grade4_foundation_036 全部都是『湊出某個固定金額有幾種方法』，張數不限；本題把張數鎖死在剛好 2 張，問的是『哪一個金額做不出來』，是存在性而不是計數，而且陷阱在 10 元有兩種貼法卻只算一個金額。本題是第一版草稿被閘門擋下後的替換題：原本第 10 題是『1、2、2、3、3、3……的第 15 個數』，跑相似度時抓到 arithmetic_grade6_foundation_071 完全同一個數列（只是問第 50 個），屬於只換數字的跨年級弱變形，整題砍掉重出。"
+      }
+    },
+    {
+      "id": "arithmetic_grade2_foundation_103",
+      "reviewStatus": "ok",
+      "topic": "arithmetic",
+      "subtopic": "two_offset_clocks_conversion",
+      "tags": [
+        "c:add_sub",
+        "c:logic_deduction",
+        "m:reverse"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade2",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "小安的鬧鐘比正確時間快 5 分鐘，也就是鬧鐘顯示的時刻比正確時刻多 5 分鐘；他的手錶比正確時間慢 3 分鐘，也就是手錶顯示的時刻比正確時刻少 3 分鐘。當鬧鐘顯示 8 點整的時候，手錶顯示的是 7 點幾分？（請回答分鐘數。）",
+        "zh-Hans": "小安的闹钟比正确时间快 5 分钟，也就是闹钟显示的时刻比正确时刻多 5 分钟；他的手表比正确时间慢 3 分钟，也就是手表显示的时刻比正确时刻少 3 分钟。当闹钟显示 8 点整的时候，手表显示的是 7 点几分？（请回答分钟数。）",
+        "en": "An's alarm clock runs 5 minutes fast, which means the time it shows is 5 minutes later than the correct time. His watch runs 3 minutes slow, which means the time it shows is 3 minutes earlier than the correct time. When the alarm clock shows 8 o'clock exactly, the watch shows a time just after 7. How many minutes past 7 does the watch show?",
+        "ja": "アンさんの目ざまし時計は 5 分進んでいます。つまり、示す時刻が正しい時刻より 5 分あとになります。うで時計は 3 分おくれていて、示す時刻が正しい時刻より 3 分前になります。目ざまし時計がちょうど 8 時を示しているとき、うで時計は 7 時何分を示していますか。（分の数を答えてください。）"
+      },
+      "answer": {
+        "zh-Hant": "手錶顯示 7 點 52 分，所以答案是 52。",
+        "zh-Hans": "手表显示 7 点 52 分，所以答案是 52。",
+        "en": "The watch shows 7:52, so the answer is 52.",
+        "ja": "うで時計は 7 時 52 分を示しているので、答えは 52 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "鬧鐘顯示 8 點整，而鬧鐘比正確時刻多 5 分鐘，所以正確時刻要往回推 5 分鐘，是 7 點 55 分。",
+          "手錶比正確時刻少 3 分鐘，所以手錶顯示的時刻要從 7 點 55 分再往回推 3 分鐘。",
+          "55 − 3 = 52，手錶顯示的是 7 點 52 分。",
+          "題目問的是分鐘數，所以答案是 52。"
+        ],
+        "zh-Hans": [
+          "闹钟显示 8 点整，而闹钟比正确时刻多 5 分钟，所以正确时刻要往回推 5 分钟，是 7 点 55 分。",
+          "手表比正确时刻少 3 分钟，所以手表显示的时刻要从 7 点 55 分再往回推 3 分钟。",
+          "55 − 3 = 52，手表显示的是 7 点 52 分。",
+          "题目问的是分钟数，所以答案是 52。"
+        ],
+        "en": [
+          "The alarm clock shows 8 o'clock and runs 5 minutes later than the correct time, so the correct time is 5 minutes earlier: 7:55.",
+          "The watch runs 3 minutes earlier than the correct time, so its reading is 3 minutes before 7:55.",
+          "55 − 3 = 52, so the watch shows 7:52.",
+          "The question asks for the number of minutes, so the answer is 52."
+        ],
+        "ja": [
+          "目ざまし時計は 8 時ちょうどを示し、正しい時刻より 5 分あとなので、正しい時刻は 5 分もどして 7 時 55 分です。",
+          "うで時計は正しい時刻より 3 分前なので、7 時 55 分からさらに 3 分もどします。",
+          "55 − 3 = 52 なので、うで時計は 7 時 52 分を示します。",
+          "問われているのは分の数なので、答えは 52 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "52"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "arithmetic-grade2-foundation",
+        "displayText": "改寫自「儀器固定偏差」題型",
+        "notes": "沒有借到外部頁面（WebSearch 額度用盡、CEMC PDF 路徑全部 404），骨架來自課本『量測工具有固定偏差要往哪邊修正』的觀念，照實記錄。去重：全庫掃「鬧鐘|快了|慢了|不準|偏差」共 5 題。algebra_grade7_foundation_048 與 logic_grade8_foundation_037 是『每小時慢 X 分』的累積誤差，要先算經過幾小時；arithmetic_grade6_foundation_109 是天平固定偏差，但問的是兩物合秤的讀數，要把偏差抵銷。本題的偏差不隨時間累積，重點是同一個正確時刻要往兩個相反方向各修正一次，兩次都容易把加減弄反。"
+      }
     }
   ]
 }

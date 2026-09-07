@@ -3519,6 +3519,90 @@
         "reference": "combinatorics-grade7-foundation",
         "notes": "題型出處：CEMC（Waterloo）2022 Pascal Contest 第 19 題（六位數的兩個 3 沒印出來，收到的是四位數 2022，問原數有幾種可能）。本題改成兩個 7 與 2025，並補上原題沒有明說的兩個推理環節：對應的可逆性（2025 不含 7，所以位置可還原）與首位不為 0 的驗證。掃全庫 regex「刪掉／擦掉／插入」命中的 logic_grade7_foundation_047（輪流擦數字的博弈）、combinatorics_grade12_foundation_027（甲不排兩端）等題骨架都不同；本庫沒有任何『刪去指定數字後還原原數』的計數題。"
       }
+    },
+    {
+      "id": "combinatorics_grade7_foundation_042",
+      "reviewStatus": "ok",
+      "topic": "combinatorics",
+      "subtopic": "palindromic_clock_readings",
+      "tags": [
+        "c:basic_counting",
+        "c:place_value",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade7",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "車站月台的顯示板用「時時：分分」的形式報時，位數不足時前面補 0，例如上午 9 點 5 分會顯示成 09:05。顯示板每分鐘更新一次，從午夜零時零分一路走到晚上 11 時 59 分，剛好是一整天。這一天出現過的畫面裡，有幾個畫面把它上面的數字順著唸和倒著唸，唸出來一模一樣？（像 12:21 就可以，順著唸是一二二一，倒著唸也是一二二一。）",
+        "zh-Hans": "车站月台的显示板用“时时：分分”的形式报时，位数不足时前面补 0，例如上午 9 点 5 分会显示成 09:05。显示板每分钟更新一次，从午夜零时零分一路走到晚上 11 时 59 分，刚好是一整天。这一天出现过的画面里，有几个画面把它上面的数字顺着念和倒着念，念出来一模一样？（像 12:21 就可以，顺着念是一二二一，倒着念也是一二二一。）",
+        "en": "A platform display board at a station shows the time in the form hh:mm, padding with a leading zero when needed, so five past nine in the morning appears as 09:05. The board refreshes once a minute, running from midnight, zero hours and zero minutes, all the way to 11:59 at night, which is exactly one whole day. Among the displays that appear during that day, how many read out exactly the same forwards as backwards? For instance 12:21 qualifies, since reading it forwards gives one two two one and reading it backwards gives one two two one as well.",
+        "ja": "駅のホームにある表示板は「時時：分分」の形で時刻を示し、桁が足りないときは前に 0 を補います（午前 9 時 5 分は 09:05）。表示板は 1 分ごとに更新され、真夜中の 0 時 0 分から夜の 11 時 59 分まで進んでちょうど 1 日になります。この 1 日に現れた表示のうち、そこに並ぶ数字を順に読んでも逆に読んでもまったく同じになるものはいくつありますか。（たとえば 12:21 は、順に読むと一二二一、逆に読んでも一二二一なので条件を満たします。）"
+      },
+      "answer": {
+        "zh-Hant": "這一天裡共有 16 個這樣的時刻。",
+        "zh-Hans": "这一天里共有 16 个这样的时刻。",
+        "en": "There are 16 such moments in the day.",
+        "ja": "そのような時刻はこの 1 日に 16 回あります。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "把顯示寫成 ab:cd 四個數字。由左往右讀與由右往左讀相同，表示第一個數字等於第四個、第二個數字等於第三個，也就是 a = d 且 b = c。",
+          "換句話說，只要決定了小時 ab，分鐘就被逼成 ba，一點自由度都沒有。所以問題變成：小時從 00 走到 23 這 24 個值裡，有幾個能讓 ba 是一個合法的分鐘（00 到 59）？",
+          "分鐘 ba 的十位數字是 b，個位數字是 a。個位怎麼樣都合法，唯一的限制是十位：b 只能是 0 到 5，不能是 6、7、8、9。",
+          "小時 00 到 09 這一段：a = 0，b 是 0 到 9，其中 b ≤ 5 的有 0、1、2、3、4、5 共 6 個小時。",
+          "小時 10 到 19 這一段：a = 1，b 一樣是 0 到 9，符合 b ≤ 5 的也是 6 個小時。",
+          "小時 20 到 23 這一段：b 只可能是 0、1、2、3，全都符合 b ≤ 5，共 4 個小時。三段合計 6 + 6 + 4 = 16 個時刻。",
+          "驗算：用程式跑遍一天的 24 × 60 = 1440 個時刻，逐一把四位顯示反過來比對，符合的正好 16 個 ✓，分別是 00:00、01:10、02:20、03:30、04:40、05:50、10:01、11:11、12:21、13:31、14:41、15:51、20:02、21:12、22:22、23:32。"
+        ],
+        "zh-Hans": [
+          "把显示写成 ab:cd 四个数字。由左往右读与由右往左读相同，表示第一个数字等于第四个、第二个数字等于第三个，也就是 a = d 且 b = c。",
+          "换句话说，只要决定了小时 ab，分钟就被逼成 ba，一点自由度都没有。所以问题变成：小时从 00 走到 23 这 24 个值里，有几个能让 ba 是一个合法的分钟（00 到 59）？",
+          "分钟 ba 的十位数字是 b，个位数字是 a。个位怎么样都合法，唯一的限制是十位：b 只能是 0 到 5，不能是 6、7、8、9。",
+          "小时 00 到 09 这一段：a = 0，b 是 0 到 9，其中 b ≤ 5 的有 0、1、2、3、4、5 共 6 个小时。",
+          "小时 10 到 19 这一段：a = 1，b 一样是 0 到 9，符合 b ≤ 5 的也是 6 个小时。",
+          "小时 20 到 23 这一段：b 只可能是 0、1、2、3，全都符合 b ≤ 5，共 4 个小时。三段合计 6 + 6 + 4 = 16 个时刻。",
+          "验算：用程序跑遍一天的 24 × 60 = 1440 个时刻，逐一把四位显示反过来比对，符合的正好 16 个 ✓，分别是 00:00、01:10、02:20、03:30、04:40、05:50、10:01、11:11、12:21、13:31、14:41、15:51、20:02、21:12、22:22、23:32。"
+        ],
+        "en": [
+          "Write the display as the four digits ab:cd. Reading the same forwards and backwards means the first digit equals the fourth and the second equals the third, that is a = d and b = c.",
+          "So once the hour ab is chosen, the minutes are forced to be ba, with no freedom left. The question becomes: among the 24 hour values from 00 to 23, how many make ba a legal minute value between 00 and 59?",
+          "The minute ba has tens digit b and units digit a. Any units digit is fine, so the only restriction is on the tens digit: b must be 0 to 5, and cannot be 6, 7, 8 or 9.",
+          "Hours 00 to 09: here a = 0 and b ranges over 0 to 9, of which the values with b at most 5 are 0, 1, 2, 3, 4, 5, giving 6 hours.",
+          "Hours 10 to 19: here a = 1 and b again ranges over 0 to 9, so again 6 hours satisfy the restriction.",
+          "Hours 20 to 23: here b can only be 0, 1, 2 or 3, all of which are at most 5, giving 4 hours. The three blocks total 6 + 6 + 4 = 16 moments.",
+          "Check: testing all 24 × 60 = 1440 moments of the day by computer and comparing each display with its reversal leaves exactly 16 of them, namely 00:00, 01:10, 02:20, 03:30, 04:40, 05:50, 10:01, 11:11, 12:21, 13:31, 14:41, 15:51, 20:02, 21:12, 22:22 and 23:32."
+        ],
+        "ja": [
+          "表示を 4 桁 ab:cd と書きます。左から読んでも右から読んでも同じということは、1 桁目と 4 桁目、2 桁目と 3 桁目が等しい、すなわち a = d かつ b = c ということです。",
+          "つまり時 ab を決めると分は ba に強制され、自由度はまったくありません。問題は「00 から 23 までの 24 個の時のうち、ba が 00 から 59 の正しい分になるのはいくつか」に変わります。",
+          "分 ba の十の位は b、一の位は a です。一の位は何でもよいので、制限は十の位だけ、すなわち b は 0 から 5 でなければならず、6、7、8、9 は不可です。",
+          "時が 00 から 09 の範囲：a = 0 で b は 0 から 9 を動き、b が 5 以下なのは 0、1、2、3、4、5 の 6 個です。",
+          "時が 10 から 19 の範囲：a = 1 で b はやはり 0 から 9 を動くので、条件を満たすのも 6 個です。",
+          "時が 20 から 23 の範囲：b は 0、1、2、3 しかとれず、すべて 5 以下なので 4 個です。3 つの範囲を合わせて 6 + 6 + 4 = 16 個の時刻になります。",
+          "検算：1 日の 24 × 60 = 1440 個の時刻をすべて調べ、表示を逆順にして比べると、条件を満たすのはちょうど 16 個 ✓。00:00、01:10、02:20、03:30、04:40、05:50、10:01、11:11、12:21、13:31、14:41、15:51、20:02、21:12、22:22、23:32 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "16"
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "combinatorics-grade7-palindromic-clock",
+        "notes": "題型來源：電子鐘顯示的迴文時刻是各國中小學數學競賽與教材常見的計數題型；本輪沒有抓到可直接引用的外部頁面，照實記錄為自行設計。去重：用 regex 掃「電子鐘｜時刻｜鐘面｜數位時鐘」得 39 題，最接近的 logic_grade7_foundation_044 同樣以 00:00 到 23:59 為舞台，但問的是「數字 3 一共出現幾次」，解法是逐位統計出現次數；本題的推理核心是「迴文條件把分鐘鎖死成小時的反寫，只剩十位不得超過 5 這一個限制」，兩者不同。另掃過 number_theory 的迴文數題（三位、五位迴文數與二進位迴文數），那些沒有分鐘上限這個額外約束。"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      }
     }
   ]
 }

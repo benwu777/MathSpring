@@ -5490,6 +5490,443 @@
         "reference": "geometry-grade10-triangular-grid-colouring",
         "notes": "題型取自三角形網格上的 lozenge（菱形）鋪法問題，這是 AoPS 與 Wikipedia 的 rhombus/lozenge tiling 條目常見的入門例：以「朝上／朝下」兩類三角形數目不等推出上界。改寫成邊長 4 的三角形並改問最大塊數。全庫用 鋪滿/骨牌/覆蓋/磁磚 掃過，既有題全部是方格板上的 1×2 或 1×3 鋪法（combinatorics_grade8_021、combinatorics_grade12_023、combinatorics_grade9_042 等），沒有任何一題用三角形網格，也沒有任何一題的兩類是「朝上／朝下」。"
       }
+    },
+    {
+      "id": "geometry_grade10_foundation_051",
+      "reviewStatus": "ok",
+      "topic": "geometry",
+      "subtopic": "rotation_congruence_in_right_angled_quadrilateral",
+      "tags": [
+        "c:congruent",
+        "c:quadrilateral",
+        "m:construction"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "凸四邊形 ABCD 中，AB = AD，∠BAD = 90°，∠BCD = 90°，而且 CB 與 CD 的長度和是 14。已知對角線 AC 的長可以寫成 k√2，求 k 的值。",
+        "zh-Hans": "凸四边形 ABCD 中，AB = AD，∠BAD = 90°，∠BCD = 90°，而且 CB 与 CD 的长度和是 14。已知对角线 AC 的长可以写成 k√2，求 k 的值。",
+        "en": "In a convex quadrilateral ABCD we have AB = AD, angle BAD = 90°, angle BCD = 90°, and the lengths CB and CD add up to 14. The diagonal AC can be written as k√2. Find the value of k.",
+        "ja": "凸四角形 ABCD において AB = AD、∠BAD = 90°、∠BCD = 90° であり、CB と CD の長さの和は 14 である。対角線 AC の長さが k√2 と書けるとき、k の値を求めよ。"
+      },
+      "answer": {
+        "zh-Hant": "k 的值是 7。",
+        "zh-Hans": "k 的值是 7。",
+        "en": "The value of k is 7.",
+        "ja": "k の値は 7 である。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "四邊形的內角和是 360°，扣掉 ∠BAD 與 ∠BCD 這兩個直角，得 ∠ABC + ∠ADC = 360° − 90° − 90° = 180°，也就是這兩個角互補。這個關係是後面拼圖的關鍵。",
+          "以 A 為中心，把三角形 ABC 旋轉 90°，讓 B 落到 D。這個旋轉一定辦得到，因為 AB = AD 且 ∠BAD = 90°。設 C 的像是 C′。",
+          "旋轉保持長度與角度，所以三角形 ABC 與三角形 ADC′ 全等，於是 AC′ = AC、DC′ = BC、∠ADC′ = ∠ABC。",
+          "把第一步的結論接上：∠ADC′ + ∠ADC = ∠ABC + ∠ADC = 180°，所以 C′、D、C 三點共線，而且 D 夾在 C′ 與 C 之間。",
+          "因此線段 CC′ 可以拆成兩段相加：CC′ = C′D + DC = BC + CD = 14。這一步把題目給的「兩段長度的和」變成了一整條線段。",
+          "旋轉角是 90°，所以 ∠CAC′ = 90°；又 AC′ = AC，三角形 ACC′ 是等腰直角三角形，斜邊 CC′ = AC × √2。",
+          "由 AC × √2 = 14 得 AC = 14 ÷ √2 = 7√2，所以 k = 7。",
+          "驗算：取對稱的情形 CB = CD = 7，此時 ABCD 其實是邊長 7 的正方形，對角線 AC = 7√2 ✓；再取不對稱的 CB = 4、CD = 10，解得 AB = AD = √58，AC 仍然是 7√2 ✓。可見 AC 只由 CB + CD 決定，與兩者各自多長無關。"
+        ],
+        "zh-Hans": [
+          "四边形的内角和是 360°，扣掉 ∠BAD 与 ∠BCD 这两个直角，得 ∠ABC + ∠ADC = 360° − 90° − 90° = 180°，也就是这两个角互补。这个关系是后面拼图的关键。",
+          "以 A 为中心，把三角形 ABC 旋转 90°，让 B 落到 D。这个旋转一定办得到，因为 AB = AD 且 ∠BAD = 90°。设 C 的像是 C′。",
+          "旋转保持长度与角度，所以三角形 ABC 与三角形 ADC′ 全等，于是 AC′ = AC、DC′ = BC、∠ADC′ = ∠ABC。",
+          "把第一步的结论接上：∠ADC′ + ∠ADC = ∠ABC + ∠ADC = 180°，所以 C′、D、C 三点共线，而且 D 夹在 C′ 与 C 之间。",
+          "因此线段 CC′ 可以拆成两段相加：CC′ = C′D + DC = BC + CD = 14。这一步把题目给的「两段长度的和」变成了一整条线段。",
+          "旋转角是 90°，所以 ∠CAC′ = 90°；又 AC′ = AC，三角形 ACC′ 是等腰直角三角形，斜边 CC′ = AC × √2。",
+          "由 AC × √2 = 14 得 AC = 14 ÷ √2 = 7√2，所以 k = 7。",
+          "验算：取对称的情形 CB = CD = 7，此时 ABCD 其实是边长 7 的正方形，对角线 AC = 7√2 ✓；再取不对称的 CB = 4、CD = 10，解得 AB = AD = √58，AC 仍然是 7√2 ✓。可见 AC 只由 CB + CD 决定，与两者各自多长无关。"
+        ],
+        "en": [
+          "The angles of a quadrilateral add up to 360°. Removing the two right angles BAD and BCD gives angle ABC + angle ADC = 360° − 90° − 90° = 180°, so those two angles are supplementary. This relation is the key to the construction that follows.",
+          "Rotate triangle ABC about A through 90° so that B lands on D. This is always possible because AB = AD and angle BAD = 90°. Let C map to C′.",
+          "A rotation preserves lengths and angles, so triangle ABC is congruent to triangle ADC′. Hence AC′ = AC, DC′ = BC and angle ADC′ = angle ABC.",
+          "Now use the first step: angle ADC′ + angle ADC = angle ABC + angle ADC = 180°, so C′, D and C are collinear, with D between C′ and C.",
+          "Therefore the segment CC′ splits into two pieces: CC′ = C′D + DC = BC + CD = 14. This turns the given sum of two lengths into one whole segment.",
+          "The rotation angle is 90°, so angle CAC′ = 90°, and AC′ = AC, making triangle ACC′ an isosceles right triangle with hypotenuse CC′ = AC × √2.",
+          "From AC × √2 = 14 we get AC = 14 ÷ √2 = 7√2, so k = 7.",
+          "Check: in the symmetric case CB = CD = 7 the quadrilateral is in fact a square of side 7, whose diagonal is 7√2. In the unsymmetric case CB = 4 and CD = 10 one finds AB = AD = √58, and AC is still 7√2. So AC depends only on CB + CD, not on the individual lengths."
+        ],
+        "ja": [
+          "四角形の内角の和は 360° である。直角である ∠BAD と ∠BCD を引くと ∠ABC + ∠ADC = 360° − 90° − 90° = 180° となり、この 2 つの角は補角である。この関係が以下の作図の鍵になる。",
+          "A を中心として三角形 ABC を 90° 回転させ、B を D に移す。AB = AD かつ ∠BAD = 90° なのでこの回転は必ず可能である。C の像を C′ とする。",
+          "回転は長さも角も保つので、三角形 ABC と三角形 ADC′ は合同である。よって AC′ = AC、DC′ = BC、∠ADC′ = ∠ABC となる。",
+          "ここで最初の結論を使う。∠ADC′ + ∠ADC = ∠ABC + ∠ADC = 180° なので、C′、D、C は一直線上にあり、D は C′ と C の間にある。",
+          "したがって線分 CC′ は 2 つに分かれて CC′ = C′D + DC = BC + CD = 14 となる。この段階で、与えられた「2 つの長さの和」が 1 本の線分に置き換わる。",
+          "回転角は 90° なので ∠CAC′ = 90°、さらに AC′ = AC だから三角形 ACC′ は直角二等辺三角形で、斜辺は CC′ = AC × √2。",
+          "AC × √2 = 14 より AC = 14 ÷ √2 = 7√2、よって k = 7。",
+          "検算：対称な場合 CB = CD = 7 では ABCD は一辺 7 の正方形になり、対角線は 7√2 である。非対称な CB = 4、CD = 10 の場合は AB = AD = √58 となるが、AC はやはり 7√2 である。AC は CB + CD だけで決まり、それぞれの長さにはよらない。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "7"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring",
+        "reference": "geometry-grade10-foundation",
+        "notes": "原本的草稿是「正方形內一點 PA、PB、PC」，跑相似度時撞上 geometry_grade9_foundation_050（長方形內一點給三段距離求第四段，英國國旗定理）到 0.56，配置完全相同，因此整題砍掉重出。改成的這一題是不同的配置：兩個直角落在對角、AB = AD、給的是 CB + CD 這個「和」。查過 geometry_grade7_foundation_048 與 geometry_grade9_foundation_028（都是箏形 AB = AD、CB = CD），本題不要求 CB = CD，也不用對角線垂直。掃過「凸四邊形」3 題、「旋轉」29 題，沒有任何一題用旋轉把兩段折線接成一條直線段。題型骨架取自 CEMC Euclid 競賽卷那種純文字敘述、以互補角與旋轉構造為核心的幾何題（2019 年 Euclid 第 6(b)、8(a) 題為同類風格）。"
+      }
+    },
+    {
+      "id": "geometry_grade10_foundation_052",
+      "reviewStatus": "ok",
+      "topic": "geometry",
+      "subtopic": "equal_medians_force_isosceles_triangle",
+      "tags": [
+        "c:congruent",
+        "c:triangle",
+        "m:construction"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "三角形 ABC 中，BE 是 AC 邊上的中線（E 是 AC 的中點），CF 是 AB 邊上的中線（F 是 AB 的中點）。已知 BE = CF = 9，且 BC = 8。求三角形 ABC 的周長。",
+        "zh-Hans": "三角形 ABC 中，BE 是 AC 边上的中线（E 是 AC 的中点），CF 是 AB 边上的中线（F 是 AB 的中点）。已知 BE = CF = 9，且 BC = 8。求三角形 ABC 的周长。",
+        "en": "In triangle ABC, BE is the median to side AC (so E is the midpoint of AC) and CF is the median to side AB (so F is the midpoint of AB). Given that BE = CF = 9 and BC = 8, find the perimeter of triangle ABC.",
+        "ja": "三角形 ABC において、BE は辺 AC の中線（E は AC の中点）、CF は辺 AB の中線（F は AB の中点）である。BE = CF = 9、BC = 8 のとき、三角形 ABC の周の長さを求めよ。"
+      },
+      "answer": {
+        "zh-Hant": "三角形 ABC 的周長是 36。",
+        "zh-Hans": "三角形 ABC 的周长是 36。",
+        "en": "The perimeter of triangle ABC is 36.",
+        "ja": "三角形 ABC の周の長さは 36 である。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "設兩條中線交於重心 G。重心把每一條中線分成 2 : 1 兩段，靠頂點的那一段較長，所以 BG = 9 × 2/3 = 6，CG = 9 × 2/3 = 6。",
+          "BG = CG 表示三角形 GBC 是等腰三角形，因此兩底角相等：∠GBC = ∠GCB，也就是 ∠EBC = ∠FCB。",
+          "比較三角形 EBC 與三角形 FCB：EB = FC = 9（已知）、∠EBC = ∠FCB（上一步）、BC = CB（公共邊）。由 SAS 判定，這兩個三角形全等。",
+          "全等給出對應邊 EC = FB。而 EC 是 AC 的一半、FB 是 AB 的一半，所以 AC = AB——「兩條中線等長」逼出了等腰三角形，這是本題的關鍵轉折。",
+          "接著算邊長。把圖放上座標平面：取 B(−4, 0)、C(4, 0)，因為 AB = AC，頂點 A 一定落在 BC 的垂直平分線也就是 y 軸上，設 A(0, h)。E 是 AC 的中點，座標是 (2, h/2)。",
+          "由 BE = 9 得 (2 + 4)² + (h/2)² = 81，也就是 36 + h²/4 = 81，所以 h² = 180。",
+          "於是 AB = √(4² + h²) = √(16 + 180) = √196 = 14，AC 也是 14。周長 = 14 + 14 + 8 = 36。"
+        ],
+        "zh-Hans": [
+          "设两条中线交于重心 G。重心把每一条中线分成 2 : 1 两段，靠顶点的那一段较长，所以 BG = 9 × 2/3 = 6，CG = 9 × 2/3 = 6。",
+          "BG = CG 表示三角形 GBC 是等腰三角形，因此两底角相等：∠GBC = ∠GCB，也就是 ∠EBC = ∠FCB。",
+          "比较三角形 EBC 与三角形 FCB：EB = FC = 9（已知）、∠EBC = ∠FCB（上一步）、BC = CB（公共边）。由 SAS 判定，这两个三角形全等。",
+          "全等给出对应边 EC = FB。而 EC 是 AC 的一半、FB 是 AB 的一半，所以 AC = AB——「两条中线等长」逼出了等腰三角形，这是本题的关键转折。",
+          "接着算边长。把图放上坐标平面：取 B(−4, 0)、C(4, 0)，因为 AB = AC，顶点 A 一定落在 BC 的垂直平分线也就是 y 轴上，设 A(0, h)。E 是 AC 的中点，坐标是 (2, h/2)。",
+          "由 BE = 9 得 (2 + 4)² + (h/2)² = 81，也就是 36 + h²/4 = 81，所以 h² = 180。",
+          "于是 AB = √(4² + h²) = √(16 + 180) = √196 = 14，AC 也是 14。周长 = 14 + 14 + 8 = 36。"
+        ],
+        "en": [
+          "Let the two medians meet at the centroid G. The centroid cuts each median in the ratio 2 : 1, with the longer part next to the vertex, so BG = 9 × 2/3 = 6 and CG = 9 × 2/3 = 6.",
+          "Since BG = CG, triangle GBC is isosceles, so its base angles are equal: angle GBC = angle GCB, that is, angle EBC = angle FCB.",
+          "Compare triangle EBC with triangle FCB: EB = FC = 9 (given), angle EBC = angle FCB (previous step), and BC = CB (common side). By SAS the two triangles are congruent.",
+          "Congruence gives the corresponding sides EC = FB. But EC is half of AC and FB is half of AB, so AC = AB. Two equal medians force the triangle to be isosceles, and that is the key turn of this problem.",
+          "Now compute the side length. Put the picture on coordinates: let B(−4, 0) and C(4, 0). Since AB = AC, the vertex A must lie on the perpendicular bisector of BC, the y-axis, so write A(0, h). Then E, the midpoint of AC, is (2, h/2).",
+          "From BE = 9 we get (2 + 4)² + (h/2)² = 81, that is 36 + h²/4 = 81, so h² = 180.",
+          "Hence AB = √(4² + h²) = √(16 + 180) = √196 = 14, and AC is 14 as well. The perimeter is 14 + 14 + 8 = 36."
+        ],
+        "ja": [
+          "2 本の中線の交点を重心 G とする。重心は各中線を 2 : 1 に分け、頂点側が長いので BG = 9 × 2/3 = 6、CG = 9 × 2/3 = 6 である。",
+          "BG = CG より三角形 GBC は二等辺三角形なので底角が等しく、∠GBC = ∠GCB、すなわち ∠EBC = ∠FCB となる。",
+          "三角形 EBC と三角形 FCB を比べる。EB = FC = 9（仮定）、∠EBC = ∠FCB（前の段階）、BC = CB（共通辺）。よって 2 辺夾角相等（SAS）により合同である。",
+          "合同から対応する辺 EC = FB が得られる。EC は AC の半分、FB は AB の半分なので AC = AB となる。2 本の中線が等しいことが二等辺三角形を強制する、これが本問の要である。",
+          "次に辺の長さを計算する。座標平面に置き、B(−4, 0)、C(4, 0) とする。AB = AC なので頂点 A は BC の垂直二等分線すなわち y 軸上にあり、A(0, h) とおける。E は AC の中点なので (2, h/2)。",
+          "BE = 9 より (2 + 4)² + (h/2)² = 81、つまり 36 + h²/4 = 81 となり、h² = 180 を得る。",
+          "よって AB = √(4² + h²) = √(16 + 180) = √196 = 14、AC も 14 である。周の長さは 14 + 14 + 8 = 36。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "36"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring",
+        "reference": "geometry-grade10-foundation",
+        "notes": "全庫「全等」42 題中，唯一同樣以中線為主角的是 geometry_grade8_foundation_047（倍長中線求三角形 ACE 周長），但那題是把單一中線延長一倍造平行四邊形，本題是用「兩條中線等長」反推等腰。也查過 geometry_grade8_foundation_036（重心 2:1）與 geometry_grade9_foundation_012（重心分面積），兩題都只用比例、沒有全等論證。重心 2 : 1 與中線長度公式（Apollonius 定理）已於維基百科 Median (geometry) 條目核對，該頁未直接處理「兩中線等長」，本題的等腰判定是自己補上的 SAS 全等論證。"
+      }
+    },
+    {
+      "id": "geometry_grade10_foundation_053",
+      "reviewStatus": "ok",
+      "topic": "geometry",
+      "subtopic": "three_parallels_through_interior_point_area",
+      "tags": [
+        "c:similar",
+        "c:area",
+        "m:direct"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "三角形 ABC 的內部有一點 P。過 P 各作一條直線，分別平行於三角形的三條邊；這三條直線把三角形 ABC 切成六塊，其中恰好有三塊是三角形。已知這三個小三角形的面積分別是 4、25、49，求三角形 ABC 的面積。",
+        "zh-Hans": "三角形 ABC 的内部有一点 P。过 P 各作一条直线，分别平行于三角形的三条边；这三条直线把三角形 ABC 切成六块，其中恰好有三块是三角形。已知这三个小三角形的面积分别是 4、25、49，求三角形 ABC 的面积。",
+        "en": "A point P lies inside triangle ABC. Through P three lines are drawn, one parallel to each side of the triangle. These three lines cut triangle ABC into six pieces, exactly three of which are triangles. Their areas are 4, 25 and 49. Find the area of triangle ABC.",
+        "ja": "三角形 ABC の内部に点 P がある。P を通り、三角形の三辺のそれぞれに平行な直線を 1 本ずつ引く。この 3 本の直線は三角形 ABC を 6 個の部分に分け、そのうちちょうど 3 個が三角形になる。それらの面積が 4、25、49 であるとき、三角形 ABC の面積を求めよ。"
+      },
+      "answer": {
+        "zh-Hant": "三角形 ABC 的面積是 196。",
+        "zh-Hans": "三角形 ABC 的面积是 196。",
+        "en": "The area of triangle ABC is 196.",
+        "ja": "三角形 ABC の面積は 196 である。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "三個小三角形都以 P 為一個頂點，而且每一個的三條邊都分別平行於三角形 ABC 的三條邊，所以三組角分別相等，三個小三角形都與三角形 ABC 相似。",
+          "把注意力放在邊 BC 上。平行於 AB 的那條線與平行於 AC 的那條線各與 BC 交於一點，於是 BC 被分成三段。",
+          "剩下的三塊都是平行四邊形（兩組對邊分別平行），把平行四邊形的對邊平移過去比對，就會看到 BC 上這三段的長度，恰好就是三個小三角形「對應於 BC 的那一條邊」的長度。",
+          "設三個小三角形對應於 BC 的邊長依序是 a₁、a₂、a₃，而 BC = a，於是有關鍵關係 a₁ + a₂ + a₃ = a。",
+          "相似圖形的面積比等於對應邊比的平方，所以邊比等於面積比開根號：a₁ : a₂ : a₃ : a = √4 : √25 : √49 : √S = 2 : 5 : 7 : √S，其中 S 是三角形 ABC 的面積。",
+          "代入關係式得 2 + 5 + 7 = √S，也就是 √S = 14。",
+          "所以三角形 ABC 的面積 S = 14² = 196。"
+        ],
+        "zh-Hans": [
+          "三个小三角形都以 P 为一个顶点，而且每一个的三条边都分别平行于三角形 ABC 的三条边，所以三组角分别相等，三个小三角形都与三角形 ABC 相似。",
+          "把注意力放在边 BC 上。平行于 AB 的那条线与平行于 AC 的那条线各与 BC 交于一点，于是 BC 被分成三段。",
+          "剩下的三块都是平行四边形（两组对边分别平行），把平行四边形的对边平移过去比对，就会看到 BC 上这三段的长度，恰好就是三个小三角形「对应于 BC 的那一条边」的长度。",
+          "设三个小三角形对应于 BC 的边长依次是 a₁、a₂、a₃，而 BC = a，于是有关键关系 a₁ + a₂ + a₃ = a。",
+          "相似图形的面积比等于对应边比的平方，所以边比等于面积比开根号：a₁ : a₂ : a₃ : a = √4 : √25 : √49 : √S = 2 : 5 : 7 : √S，其中 S 是三角形 ABC 的面积。",
+          "代入关系式得 2 + 5 + 7 = √S，也就是 √S = 14。",
+          "所以三角形 ABC 的面积 S = 14² = 196。"
+        ],
+        "en": [
+          "Each of the three small triangles has P as one vertex, and each of their sides is parallel to a side of triangle ABC. So all three angles match and every small triangle is similar to triangle ABC.",
+          "Focus on side BC. The line parallel to AB and the line parallel to AC each meet BC once, so BC is split into three segments.",
+          "The remaining three pieces are parallelograms, since each has two pairs of parallel sides. Sliding the opposite sides of those parallelograms across shows that the three segments on BC are exactly the sides of the three small triangles that correspond to BC.",
+          "Write a₁, a₂, a₃ for those corresponding sides and a for BC. This gives the key relation a₁ + a₂ + a₃ = a.",
+          "For similar figures the ratio of areas is the square of the ratio of corresponding sides, so the side ratios are the square roots of the area ratios: a₁ : a₂ : a₃ : a = √4 : √25 : √49 : √S = 2 : 5 : 7 : √S, where S is the area of triangle ABC.",
+          "Substituting into the relation gives 2 + 5 + 7 = √S, so √S = 14.",
+          "Therefore the area of triangle ABC is S = 14² = 196."
+        ],
+        "ja": [
+          "3 個の小三角形はいずれも P を 1 つの頂点とし、各辺は三角形 ABC の各辺に平行である。よって 3 組の角がそれぞれ等しく、3 個とも三角形 ABC と相似である。",
+          "辺 BC に注目する。AB に平行な直線と AC に平行な直線がそれぞれ BC と 1 点で交わるので、BC は 3 つの線分に分かれる。",
+          "残りの 3 個の部分は 2 組の対辺が平行なので平行四辺形である。平行四辺形の対辺を平行移動して比べると、BC 上のこの 3 つの線分の長さが、3 個の小三角形の「BC に対応する辺」の長さそのものであることが分かる。",
+          "その対応する辺の長さを順に a₁、a₂、a₃ とし、BC = a とすると、鍵となる関係 a₁ + a₂ + a₃ = a が成り立つ。",
+          "相似な図形では面積比は対応する辺の比の 2 乗なので、辺の比は面積比の平方根である。すなわち a₁ : a₂ : a₃ : a = √4 : √25 : √49 : √S = 2 : 5 : 7 : √S（S は三角形 ABC の面積）。",
+          "これを関係式に代入すると 2 + 5 + 7 = √S、つまり √S = 14 となる。",
+          "したがって三角形 ABC の面積は S = 14² = 196 である。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "196"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring",
+        "reference": "geometry-grade10-foundation",
+        "notes": "全庫「相似」34 題都掃過。最接近的是 geometry_grade10_foundation_028（單一條平行 BC 的線，求四邊形與小三角形面積比 3 倍）與 geometry_grade9_foundation_011（平行線截三角形比例），兩題都只有一條平行線、只用一次面積比平方。本題有三條平行線且核心是「三段對應邊之和等於整條邊」這個結構恆等式，答案由 (2 + 5 + 7)² 得出，推理骨架不同。題型出自經典競賽題族（三條過內點的平行線分割三角形），數值 4、25、49 是自訂，避開流傳最廣的 4、9、49 版本。"
+      }
+    },
+    {
+      "id": "geometry_grade10_foundation_054",
+      "reviewStatus": "ok",
+      "topic": "geometry",
+      "subtopic": "similarity_correspondence_is_not_unique",
+      "tags": [
+        "c:similar",
+        "c:triangle",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "三角形 ABC 與三角形 DEF 中，已知 ∠A = ∠D，AB = 8、AC = 12、DE = 6，而且這兩個三角形相似。關於 DF 的長度，下列哪一個判斷是正確的？",
+        "zh-Hans": "三角形 ABC 与三角形 DEF 中，已知 ∠A = ∠D，AB = 8、AC = 12、DE = 6，而且这两个三角形相似。关于 DF 的长度，下列哪一个判断是正确的？",
+        "en": "In triangles ABC and DEF we know that angle A = angle D, AB = 8, AC = 12, DE = 6, and the two triangles are similar. Which statement about the length of DF is correct?",
+        "ja": "三角形 ABC と三角形 DEF において、∠A = ∠D、AB = 8、AC = 12、DE = 6 であり、2 つの三角形は相似である。DF の長さについて、次のうち正しい判断はどれか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 C：DF 可能是 9，也可能是 4，因為夾住相等角的兩組邊有兩種對應方式。",
+        "zh-Hans": "答案是 C：DF 可能是 9，也可能是 4，因为夹住相等角的两组边有两种对应方式。",
+        "en": "The answer is C: DF can be 9 or 4, because the two pairs of sides around the equal angle can be matched in two ways.",
+        "ja": "答えは C：等しい角を挟む 2 組の辺の対応の仕方が 2 通りあるため、DF は 9 にも 4 にもなりうる。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "相似只保證「有一種對應方式」使三組角相等、三組對應邊成比例，並沒有指定哪一條邊配哪一條邊。",
+          "題目只給了 ∠A = ∠D，所以 A 與 D 是對應頂點是確定的；但夾住 ∠A 的兩邊是 AB 與 AC，夾住 ∠D 的兩邊是 DE 與 DF，這兩組邊的配對方式有兩種。",
+          "第一種：AB 對應 DE、AC 對應 DF。此時 AB : DE = AC : DF，也就是 8 : 6 = 12 : DF，交叉相乘得 8 × DF = 72，DF = 9。",
+          "第二種：AB 對應 DF、AC 對應 DE。此時 AB : DF = AC : DE，也就是 8 : DF = 12 : 6，交叉相乘得 12 × DF = 48，DF = 4。",
+          "兩種都真的成立：第一種的相似比是 4 : 3（8 : 6 = 12 : 9），第二種的相似比是 2 : 1（12 : 6 = 8 : 4），兩組比例都自洽，而且兩個三角形都以 ∠A = ∠D 為夾角，由「兩邊成比例且夾角相等」確實相似。",
+          "所以 DF 有 9 與 4 兩種可能，正確的判斷是選項 C。"
+        ],
+        "zh-Hans": [
+          "相似只保证「有一种对应方式」使三组角相等、三组对应边成比例，并没有指定哪一条边配哪一条边。",
+          "题目只给了 ∠A = ∠D，所以 A 与 D 是对应顶点是确定的；但夹住 ∠A 的两边是 AB 与 AC，夹住 ∠D 的两边是 DE 与 DF，这两组边的配对方式有两种。",
+          "第一种：AB 对应 DE、AC 对应 DF。此时 AB : DE = AC : DF，也就是 8 : 6 = 12 : DF，交叉相乘得 8 × DF = 72，DF = 9。",
+          "第二种：AB 对应 DF、AC 对应 DE。此时 AB : DF = AC : DE，也就是 8 : DF = 12 : 6，交叉相乘得 12 × DF = 48，DF = 4。",
+          "两种都真的成立：第一种的相似比是 4 : 3（8 : 6 = 12 : 9），第二种的相似比是 2 : 1（12 : 6 = 8 : 4），两组比例都自洽，而且两个三角形都以 ∠A = ∠D 为夹角，由「两边成比例且夹角相等」确实相似。",
+          "所以 DF 有 9 与 4 两种可能，正确的判断是选项 C。"
+        ],
+        "en": [
+          "Similarity only guarantees that there is some matching under which the three angles agree and the three pairs of corresponding sides are proportional. It does not say which side pairs with which.",
+          "We are told only that angle A = angle D, so A and D are certainly corresponding vertices. But the sides around angle A are AB and AC, while the sides around angle D are DE and DF, and these two pairs can be matched in two ways.",
+          "First matching: AB with DE and AC with DF. Then AB : DE = AC : DF, that is 8 : 6 = 12 : DF, so 8 × DF = 72 and DF = 9.",
+          "Second matching: AB with DF and AC with DE. Then AB : DF = AC : DE, that is 8 : DF = 12 : 6, so 12 × DF = 48 and DF = 4.",
+          "Both really occur: the first has similarity ratio 4 : 3 (8 : 6 = 12 : 9) and the second has ratio 2 : 1 (12 : 6 = 8 : 4). Each set of ratios is consistent, and in both cases the equal angles A and D are the included angles, so the triangles are similar by the two-sides-in-proportion-with-equal-included-angle test.",
+          "Hence DF can be 9 or 4, and the correct statement is option C."
+        ],
+        "ja": [
+          "相似が保証するのは「ある対応の仕方で」3 組の角が等しく 3 組の対応辺が比例することだけで、どの辺とどの辺が対応するかまでは決まっていない。",
+          "与えられているのは ∠A = ∠D だけなので、A と D が対応する頂点であることは確定する。しかし ∠A を挟む辺は AB と AC、∠D を挟む辺は DE と DF であり、この 2 組の対応の付け方は 2 通りある。",
+          "第 1 の対応：AB と DE、AC と DF。このとき AB : DE = AC : DF、つまり 8 : 6 = 12 : DF となり、8 × DF = 72 から DF = 9。",
+          "第 2 の対応：AB と DF、AC と DE。このとき AB : DF = AC : DE、つまり 8 : DF = 12 : 6 となり、12 × DF = 48 から DF = 4。",
+          "どちらも実際に成立する。第 1 の相似比は 4 : 3（8 : 6 = 12 : 9）、第 2 の相似比は 2 : 1（12 : 6 = 8 : 4）であり、いずれも比が整合し、しかも等しい角 A と D が挟む角なので、2 辺の比と挟む角が等しいという条件から相似である。",
+          "よって DF は 9 と 4 の 2 通りがあり、正しい判断は選択肢 C である。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "multiple_choice",
+      "correctAnswer": {
+        "type": "choice",
+        "value": "C"
+      },
+      "options": {
+        "A": {
+          "zh-Hant": "DF 只能是 9。因為 ∠A 與 ∠D 是對應角，夾這個角的兩邊一定是 AB 對應 DE、AC 對應 DF，由 8 : 6 = 12 : DF 得 DF = 9，沒有別的可能。",
+          "zh-Hans": "DF 只能是 9。因为 ∠A 与 ∠D 是对应角，夹这个角的两边一定是 AB 对应 DE、AC 对应 DF，由 8 : 6 = 12 : DF 得 DF = 9，没有别的可能。",
+          "en": "DF can only be 9. Since angles A and D correspond, the sides around them must match as AB with DE and AC with DF, so 8 : 6 = 12 : DF gives DF = 9 and nothing else is possible.",
+          "ja": "DF は 9 に限る。∠A と ∠D が対応角なので、その角を挟む辺は必ず AB と DE、AC と DF が対応し、8 : 6 = 12 : DF から DF = 9 となり、他の可能性はない。"
+        },
+        "B": {
+          "zh-Hant": "DF 只能是 4。因為相似時較長的邊一定對應較短的邊，所以是 AB 對應 DF、AC 對應 DE，由 8 : DF = 12 : 6 得 DF = 4，沒有別的可能。",
+          "zh-Hans": "DF 只能是 4。因为相似时较长的边一定对应较短的边，所以是 AB 对应 DF、AC 对应 DE，由 8 : DF = 12 : 6 得 DF = 4，没有别的可能。",
+          "en": "DF can only be 4. In similar triangles a longer side always matches a shorter one, so AB matches DF and AC matches DE, and 8 : DF = 12 : 6 gives DF = 4 with nothing else possible.",
+          "ja": "DF は 4 に限る。相似では長い辺が必ず短い辺に対応するので AB と DF、AC と DE が対応し、8 : DF = 12 : 6 から DF = 4 となり、他の可能性はない。"
+        },
+        "C": {
+          "zh-Hant": "DF 可能是 9，也可能是 4。夾住 ∠A 的兩邊與夾住 ∠D 的兩邊有兩種對應方式：AB 對 DE、AC 對 DF 時 DF = 9；AB 對 DF、AC 對 DE 時 DF = 4。兩種都能構成相似。",
+          "zh-Hans": "DF 可能是 9，也可能是 4。夹住 ∠A 的两边与夹住 ∠D 的两边有两种对应方式：AB 对 DE、AC 对 DF 时 DF = 9；AB 对 DF、AC 对 DE 时 DF = 4。两种都能构成相似。",
+          "en": "DF can be 9 or 4. The sides around angle A and those around angle D can be matched in two ways: AB with DE and AC with DF gives DF = 9, while AB with DF and AC with DE gives DF = 4. Both give similar triangles.",
+          "ja": "DF は 9 にも 4 にもなりうる。∠A を挟む辺と ∠D を挟む辺の対応は 2 通りあり、AB と DE、AC と DF なら DF = 9、AB と DF、AC と DE なら DF = 4 となり、どちらも相似になる。"
+        },
+        "D": {
+          "zh-Hant": "DF 可能是 9，也可能是 16。除了 AB 對應 DE 得到 DF = 9 之外，也可能是 DE 對應 AC，使比例反過來變成 6 : 12 = 8 : DF，因而得到 DF = 16。兩種都能構成相似。",
+          "zh-Hans": "DF 可能是 9，也可能是 16。除了 AB 对应 DE 得到 DF = 9 之外，也可能是 DE 对应 AC，使比例反过来变成 6 : 12 = 8 : DF，因而得到 DF = 16。两种都能构成相似。",
+          "en": "DF can be 9 or 16. Besides matching AB with DE, which gives DF = 9, one could match DE with AC so the proportion reverses to 6 : 12 = 8 : DF, giving DF = 16. Both give similar triangles.",
+          "ja": "DF は 9 にも 16 にもなりうる。AB と DE を対応させて DF = 9 となるほか、DE と AC を対応させて比が逆になり 6 : 12 = 8 : DF から DF = 16 ともなる。どちらも相似になる。"
+        }
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring",
+        "reference": "geometry-grade10-foundation",
+        "notes": "本題考的是「相似的對應方式不唯一」，屬於判定型。全庫 34 題相似題全部掃過，沒有任何一題處理對應歧義：geometry_grade8_foundation_015、geometry_grade9_foundation_041 是面積比與周長比，geometry_grade7_foundation_049 是給定對應邊比求邊長，都預設了唯一對應。也確認 geometry_grade7_foundation_056（哪一組條件不保證全等）談的是全等判定的條件組，不是對應方式的分類討論。題型骨架取自教科書「相似三角形的對應」章節常見的兩解陷阱題。"
+      }
+    },
+    {
+      "id": "geometry_grade10_foundation_055",
+      "reviewStatus": "ok",
+      "topic": "geometry",
+      "subtopic": "radii_of_three_mutually_tangent_circles_from_triangle",
+      "tags": [
+        "c:circle",
+        "m:reverse"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "平面上有三個圓，它們兩兩相切，而且沒有任何一個圓落在另一個圓的內部。以三個圓心為頂點的三角形，三邊長分別是 12、14、18。求三個圓的半徑之中最小的那一個。",
+        "zh-Hans": "平面上有三个圆，它们两两相切，而且没有任何一个圆落在另一个圆的内部。以三个圆心为顶点的三角形，三边长分别是 12、14、18。求三个圆的半径之中最小的那一个。",
+        "en": "Three circles in the plane are tangent to one another in pairs, and none of them lies inside another. The triangle whose vertices are the three centres has sides of lengths 12, 14 and 18. Find the smallest of the three radii.",
+        "ja": "平面上に 3 つの円があり、どの 2 つも互いに接していて、どの円も他の円の内部にはない。3 つの中心を頂点とする三角形の 3 辺の長さは 12、14、18 である。3 つの半径のうち最も小さいものを求めよ。"
+      },
+      "answer": {
+        "zh-Hant": "最小的半徑是 4。",
+        "zh-Hans": "最小的半径是 4。",
+        "en": "The smallest radius is 4.",
+        "ja": "最も小さい半径は 4 である。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "兩個圓相切而且互相不在對方內部時（也就是外切），切點落在兩圓心的連線上，所以兩個圓心之間的距離恰好等於兩個半徑之和。這是把幾何條件翻成方程式的關鍵一步。",
+          "設三個半徑是 r₁、r₂、r₃，把三邊配給三對圓心，得到 r₁ + r₂ = 12、r₂ + r₃ = 14、r₃ + r₁ = 18。",
+          "一個一個代入消元會很繞。改用整體的做法：把三個式子全部相加，得 2(r₁ + r₂ + r₃) = 12 + 14 + 18 = 44，所以 r₁ + r₂ + r₃ = 22。",
+          "有了總和，用總和減去每一個式子，每個半徑就一次算出來：r₃ = 22 − 12 = 10、r₁ = 22 − 14 = 8、r₂ = 22 − 18 = 4。",
+          "檢查：r₁ + r₂ = 8 + 4 = 12 ✓、r₂ + r₃ = 4 + 10 = 14 ✓、r₃ + r₁ = 10 + 8 = 18 ✓，三個半徑都是正數，這樣的三個圓確實存在。",
+          "換一種方式把三邊配給三對圓心，只會把 4、8、10 這三個數重新排列，半徑的集合不變。所以答案與標號方式無關：最小的半徑是 4。"
+        ],
+        "zh-Hans": [
+          "两个圆相切而且互相不在对方内部时（也就是外切），切点落在两圆心的连线上，所以两个圆心之间的距离恰好等于两个半径之和。这是把几何条件翻成方程的关键一步。",
+          "设三个半径是 r₁、r₂、r₃，把三边配给三对圆心，得到 r₁ + r₂ = 12、r₂ + r₃ = 14、r₃ + r₁ = 18。",
+          "一个一个代入消元会很绕。改用整体的做法：把三个式子全部相加，得 2(r₁ + r₂ + r₃) = 12 + 14 + 18 = 44，所以 r₁ + r₂ + r₃ = 22。",
+          "有了总和，用总和减去每一个式子，每个半径就一次算出来：r₃ = 22 − 12 = 10、r₁ = 22 − 14 = 8、r₂ = 22 − 18 = 4。",
+          "检查：r₁ + r₂ = 8 + 4 = 12 ✓、r₂ + r₃ = 4 + 10 = 14 ✓、r₃ + r₁ = 10 + 8 = 18 ✓，三个半径都是正数，这样的三个圆确实存在。",
+          "换一种方式把三边配给三对圆心，只会把 4、8、10 这三个数重新排列，半径的集合不变。所以答案与标号方式无关：最小的半径是 4。"
+        ],
+        "en": [
+          "When two circles are tangent and neither lies inside the other, the point of contact is on the segment joining their centres, so the distance between the centres equals the sum of the two radii. That is the key step turning the geometry into equations.",
+          "Let the radii be r₁, r₂, r₃. Assigning the three sides to the three pairs of centres gives r₁ + r₂ = 12, r₂ + r₃ = 14 and r₃ + r₁ = 18.",
+          "Eliminating one variable at a time is awkward. Work with the whole system instead: adding all three equations gives 2(r₁ + r₂ + r₃) = 12 + 14 + 18 = 44, so r₁ + r₂ + r₃ = 22.",
+          "With the total known, subtracting each equation from it produces every radius at once: r₃ = 22 − 12 = 10, r₁ = 22 − 14 = 8 and r₂ = 22 − 18 = 4.",
+          "Check: r₁ + r₂ = 8 + 4 = 12, r₂ + r₃ = 4 + 10 = 14, r₃ + r₁ = 10 + 8 = 18, and all three radii are positive, so three such circles really exist.",
+          "Assigning the sides to the pairs of centres differently only permutes the numbers 4, 8 and 10, leaving the set of radii unchanged. So the answer does not depend on the labelling: the smallest radius is 4."
+        ],
+        "ja": [
+          "2 つの円が接し、どちらも相手の内部にないとき（外接するとき）、接点は 2 つの中心を結ぶ線分上にあるので、中心間の距離はちょうど 2 つの半径の和に等しい。これが幾何の条件を方程式に直す要の一歩である。",
+          "3 つの半径を r₁、r₂、r₃ とし、3 辺を 3 組の中心に割り当てると r₁ + r₂ = 12、r₂ + r₃ = 14、r₃ + r₁ = 18 となる。",
+          "1 つずつ消去するのは回り道である。全体をまとめて扱い、3 式を足すと 2(r₁ + r₂ + r₃) = 12 + 14 + 18 = 44、よって r₁ + r₂ + r₃ = 22。",
+          "総和が分かれば、そこから各式を引くだけで各半径が一度に求まる：r₃ = 22 − 12 = 10、r₁ = 22 − 14 = 8、r₂ = 22 − 18 = 4。",
+          "検算：r₁ + r₂ = 8 + 4 = 12、r₂ + r₃ = 4 + 10 = 14、r₃ + r₁ = 10 + 8 = 18。3 つの半径はすべて正なので、このような 3 円は確かに存在する。",
+          "3 辺の割り当て方を変えても 4、8、10 が並び替わるだけで半径の集合は変わらない。よって答えは番号の付け方によらず、最も小さい半径は 4 である。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "4"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring",
+        "reference": "geometry-grade10-foundation",
+        "notes": "用「外切」掃全庫只有 4 題：geometry_grade9_foundation_037（兩圓外切求圓心距，正向一步）、geometry_grade10_foundation_004（兩圓外切求外公切線段長）、geometry_grade12_foundation_015（兩圓公切線條數）、geometry_grade11_foundation_007（同心圓與正方形）。全部都是兩個圓，而且都是正推。本題是三個圓且是逆推：由圓心三角形的三邊反解三個半徑，用「三式相加取總和」的手法。題型取自教材圓與圓位置關係單元的延伸題。 初稿的外切定義句直接沿用了 geometry_grade9_foundation_037 的措辭而撞到 0.38（該題只是兩圓外切求圓心距的一步題），已改寫定義句並換掉全部數值。"
+      }
     }
   ]
 }

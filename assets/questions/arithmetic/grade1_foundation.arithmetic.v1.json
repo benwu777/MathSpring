@@ -6811,6 +6811,379 @@
         "reference": "arithmetic-grade1-foundation",
         "notes": "本輪 WebSearch 額度用罄，改用 WebFetch；實際抓得到的外部頁面只有 Wikipedia 的 Three cups problem、Fencepost error、Knights and Knaves 三頁，以及 NRICH primary 與 CEMC past-contests 兩個索引頁（CEMC 的競賽 PDF 全部回 404，抓不到題目原文）。以下如實說明本題題型來源與去重依據。 骨架是「走錯方向後要多走回頭的那一段」，陷阱是直覺算成 7 − 2。掃全庫「往東／往西／反方向」9 題：arithmetic_grade6_023 是相反方向的速度題、geometry_grade2_033 是東北兩種走法終點相同、geometry_grade5_046 與 combinatorics_grade10_022 是方格最短路線計數，都不是一維的反向抵銷。geometry_grade1_041（小熊跳回起點最少幾格）是二維淨位移，求的量與推理都不同。"
       }
+    },
+    {
+      "id": "arithmetic_grade1_foundation_096",
+      "reviewStatus": "ok",
+      "topic": "arithmetic",
+      "subtopic": "bounded_pile_comparison",
+      "tags": [
+        "c:add_sub",
+        "c:compare_order",
+        "m:estimate_bound"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade1",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "桌上有兩堆積木。左邊那一堆分成 3 疊，每一疊都超過 4 塊；右邊那一堆分成 2 疊，每一疊都不到 6 塊。每一疊的塊數都是整數。不用真的把積木數出來，就已經可以知道左堆一定比右堆多。左堆至少比右堆多幾塊？",
+        "zh-Hans": "桌上有两堆积木。左边那一堆分成 3 叠，每一叠都超过 4 块；右边那一堆分成 2 叠，每一叠都不到 6 块。每一叠的块数都是整数。不用真的把积木数出来，就已经可以知道左堆一定比右堆多。左堆至少比右堆多几块？",
+        "en": "There are two piles of blocks on the table. The left pile is split into 3 stacks, and every one of those stacks has more than 4 blocks. The right pile is split into 2 stacks, and every one of those stacks has fewer than 6 blocks. Every stack holds a whole number of blocks. Without counting the blocks, we already know the left pile has more. At least how many more blocks does the left pile have than the right pile?",
+        "ja": "机の上に積み木が 2 山あります。左の山は 3 つの束に分かれていて、どの束も 4 個より多く入っています。右の山は 2 つの束に分かれていて、どの束も 6 個より少ないです。どの束の個数も整数です。実際に数えなくても、左の山のほうが多いことはわかります。左の山は右の山より少なくとも何個多いですか。"
+      },
+      "answer": {
+        "zh-Hant": "左堆至少比右堆多 5 塊。",
+        "zh-Hans": "左堆至少比右堆多 5 块。",
+        "en": "The left pile has at least 5 more blocks than the right pile.",
+        "ja": "左の山は右の山より少なくとも 5 個多いです。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "左邊每一疊都超過 4 塊，而且塊數是整數，所以左邊的每一疊最少是 5 塊。",
+          "左堆最少就是 5 + 5 + 5 = 15 塊。",
+          "右邊每一疊都不到 6 塊，所以右邊的每一疊最多是 5 塊，右堆最多是 5 + 5 = 10 塊。",
+          "左堆最少 15 塊、右堆最多 10 塊，所以左堆至少比右堆多 15 − 10 = 5 塊。"
+        ],
+        "zh-Hans": [
+          "左边每一叠都超过 4 块，而且块数是整数，所以左边的每一叠最少是 5 块。",
+          "左堆最少就是 5 + 5 + 5 = 15 块。",
+          "右边每一叠都不到 6 块，所以右边的每一叠最多是 5 块，右堆最多是 5 + 5 = 10 块。",
+          "左堆最少 15 块、右堆最多 10 块，所以左堆至少比右堆多 15 − 10 = 5 块。"
+        ],
+        "en": [
+          "Each stack on the left has more than 4 blocks, and the counts are whole numbers, so each of those stacks has at least 5 blocks.",
+          "So the left pile has at least 5 + 5 + 5 = 15 blocks.",
+          "Each stack on the right has fewer than 6 blocks, so each of those stacks has at most 5 blocks, and the right pile has at most 5 + 5 = 10 blocks.",
+          "The left pile has at least 15 blocks while the right pile has at most 10 blocks, so the left pile has at least 15 − 10 = 5 more blocks."
+        ],
+        "ja": [
+          "左の束はどれも 4 個より多く、個数は整数なので、左の束はどれも少なくとも 5 個です。",
+          "したがって左の山は少なくとも 5 + 5 + 5 = 15 個です。",
+          "右の束はどれも 6 個より少ないので、右の束はどれも多くて 5 個、右の山は多くて 5 + 5 = 10 個です。",
+          "左の山は少なくとも 15 個、右の山は多くて 10 個なので、左の山は右の山より少なくとも 15 − 10 = 5 個多いです。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "5"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "arithmetic-grade1-foundation",
+        "displayText": "改寫自「上下界估計」題型",
+        "notes": "題型骨架取自 Wikipedia「Upper and lower bounds」條目中『每一項都有界時如何界定總和』的說明（實際以 WebFetch 讀過該頁），改寫成小一可用的積木情境。去重：全庫掃「天平|平衡|秤」30 題、m:estimate_bound 全庫 44 題逐題看過。最接近的是 arithmetic_grade3_foundation_110（西瓜每顆 4 至 5 公斤、籃子上限 30 公斤，問最多幾顆），但那題是用單一上界去求一個『數量』的極值；本題是同時用左堆的下界與右堆的上界去比較兩個總量，並要求由『超過 4』推出整數下界 5，推理核心不同。arithmetic_grade1_foundation_084（兩骰子和的最大最小相差）只是取極值後相減，沒有界的推導。"
+      }
+    },
+    {
+      "id": "arithmetic_grade1_foundation_097",
+      "reviewStatus": "ok",
+      "topic": "arithmetic",
+      "subtopic": "overlapping_number_range_count",
+      "tags": [
+        "c:basic_counting",
+        "c:position_direction",
+        "m:enumeration"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade1",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "走廊上有一排置物櫃，從左到右編號 1 號到 20 號。老師請小安擦第 3 號到第 12 號的櫃子（第 3 號和第 12 號自己也要擦），請小美擦第 8 號到第 20 號的櫃子（第 8 號和第 20 號自己也要擦）。有幾個櫃子被同時分配給了兩個人？",
+        "zh-Hans": "走廊上有一排储物柜，从左到右编号 1 号到 20 号。老师请小安擦第 3 号到第 12 号的柜子（第 3 号和第 12 号自己也要擦），请小美擦第 8 号到第 20 号的柜子（第 8 号和第 20 号自己也要擦）。有几个柜子被同时分配给了两个人？",
+        "en": "A row of lockers along the corridor is numbered 1 to 20 from left to right. The teacher asks An to wipe lockers 3 through 12 (locker 3 and locker 12 are wiped too), and asks Mei to wipe lockers 8 through 20 (locker 8 and locker 20 are wiped too). How many lockers were handed to both children at the same time?",
+        "ja": "廊下にロッカーが一列に並んでいて、左から右へ 1 番から 20 番まで番号がついています。先生はアンさんに 3 番から 12 番まで（3 番と 12 番もふく）をふくようにたのみ、メイさんに 8 番から 20 番まで（8 番と 20 番もふく）をふくようにたのみました。二人の両方にわりあてられたロッカーは何個ですか。"
+      },
+      "answer": {
+        "zh-Hant": "有 5 個櫃子被同時分配給兩個人。",
+        "zh-Hans": "有 5 个柜子被同时分配给两个人。",
+        "en": "5 lockers were handed to both children.",
+        "ja": "二人の両方にわりあてられたロッカーは 5 個です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "兩個人都要擦的櫃子，編號必須同時落在「3 號到 12 號」和「8 號到 20 號」這兩段裡面。",
+          "開頭要取比較晚的那一個：小美從 8 號才開始，所以重複的部分從 8 號起算。",
+          "結尾要取比較早的那一個：小安擦到 12 號就結束，所以重複的部分到 12 號為止。",
+          "從 8 號數到 12 號是 8、9、10、11、12，兩端都要算進去，一共是 12 − 8 + 1 = 5 個。",
+          "所以有 5 個櫃子被同時分配給兩個人。"
+        ],
+        "zh-Hans": [
+          "两个人都要擦的柜子，编号必须同时落在「3 号到 12 号」和「8 号到 20 号」这两段里面。",
+          "开头要取比较晚的那一个：小美从 8 号才开始，所以重复的部分从 8 号起算。",
+          "结尾要取比较早的那一个：小安擦到 12 号就结束，所以重复的部分到 12 号为止。",
+          "从 8 号数到 12 号是 8、9、10、11、12，两端都要算进去，一共是 12 − 8 + 1 = 5 个。",
+          "所以有 5 个柜子被同时分配给两个人。"
+        ],
+        "en": [
+          "A locker given to both children must lie in the block 3 to 12 and in the block 8 to 20 at the same time.",
+          "For the start, take the later one: Mei begins at locker 8, so the shared part starts at 8.",
+          "For the end, take the earlier one: An stops at locker 12, so the shared part ends at 12.",
+          "Counting from 8 to 12 gives 8, 9, 10, 11, 12; both ends count, so there are 12 − 8 + 1 = 5 of them.",
+          "So 5 lockers were handed to both children."
+        ],
+        "ja": [
+          "二人の両方がふくロッカーの番号は、「3 番から 12 番」と「8 番から 20 番」の両方に入っていなければなりません。",
+          "始まりはおそいほうを取ります。メイさんは 8 番からなので、重なる部分は 8 番からです。",
+          "終わりははやいほうを取ります。アンさんは 12 番で終わるので、重なる部分は 12 番までです。",
+          "8 番から 12 番までは 8、9、10、11、12 で、両はしも数えるので 12 − 8 + 1 = 5 個です。",
+          "よって、二人の両方にわりあてられたロッカーは 5 個です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "5"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "arithmetic-grade1-foundation",
+        "displayText": "改寫自「柵欄樁誤差（差一）」題型",
+        "notes": "題型骨架取自 Wikipedia「Off-by-one error」條目的 fencepost error 與 inclusive range 段落（實際以 WebFetch 讀過該頁，該頁明寫 n − m + 1 這個數法），把它改寫成兩段編號區間相交的情境。去重：全庫用「標籤|置物櫃|編號」與「第.{0,6}號到第」掃過。arithmetic_grade5_foundation_047（100 個置物櫃貼倍數標籤）是倍數篩選，不是區間相交；arithmetic_grade1_foundation_072（種樹間隔）與 logic_grade7_foundation_019（鋸木頭）是間隔差一，本題是兩個閉區間取交集再數個數，答案與結構都不同。同批 B_04 也用到差一，但那題數的是『空隙』而非『區間交集』，一個是圈與線的對應，一個是兩段範圍的重疊。"
+      }
+    },
+    {
+      "id": "arithmetic_grade1_foundation_098",
+      "reviewStatus": "ok",
+      "topic": "arithmetic",
+      "subtopic": "workdays_only_tally",
+      "tags": [
+        "c:pattern",
+        "c:basic_counting",
+        "m:enumeration"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade1",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "小安從星期一開始，每天畫 1 張圖，但是星期六和星期日休息，不畫圖。他要畫滿 10 張圖。從他開始畫的那一天算到他畫完第 10 張圖的那一天，一共是幾天？",
+        "zh-Hans": "小安从星期一开始，每天画 1 张图，但是星期六和星期日休息，不画图。他要画满 10 张图。从他开始画的那一天算到他画完第 10 张图的那一天，一共是几天？",
+        "en": "An starts on a Monday and draws 1 picture every day, but he rests on Saturdays and Sundays and draws nothing. He wants to finish 10 pictures. Counting from the day he starts to the day he finishes the 10th picture, how many days is that altogether?",
+        "ja": "アンさんは月曜日から始めて、毎日 1 まいずつ絵をかきますが、土曜日と日曜日は休んでかきません。絵を 10 まい仕上げたいと思っています。かき始めた日から 10 まい目をかき終わる日まで、全部で何日ですか。"
+      },
+      "answer": {
+        "zh-Hant": "一共是 12 天。",
+        "zh-Hans": "一共是 12 天。",
+        "en": "It takes 12 days altogether.",
+        "ja": "全部で 12 日です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "一個星期有 7 天，其中星期六和星期日不畫，所以一個星期只會畫 5 張圖。",
+          "第一個星期一到星期五畫了 5 張；接著星期六、星期日兩天都沒有畫，張數還是 5 張。",
+          "再從下一個星期一數過去：星期一是第 6 張、星期二第 7 張、星期三第 8 張、星期四第 9 張、星期五第 10 張，剛好畫滿。",
+          "把天數加起來：第一個星期一到星期日是 7 天，再加上第二個星期一到星期五的 5 天，7 + 5 = 12 天。",
+          "要注意答案不是 14 天：第二個星期六和星期日還沒到，第 10 張在星期五就畫完了。"
+        ],
+        "zh-Hans": [
+          "一个星期有 7 天，其中星期六和星期日不画，所以一个星期只会画 5 张图。",
+          "第一个星期一到星期五画了 5 张；接着星期六、星期日两天都没有画，张数还是 5 张。",
+          "再从下一个星期一数过去：星期一是第 6 张、星期二第 7 张、星期三第 8 张、星期四第 9 张、星期五第 10 张，刚好画满。",
+          "把天数加起来：第一个星期一到星期日是 7 天，再加上第二个星期一到星期五的 5 天，7 + 5 = 12 天。",
+          "要注意答案不是 14 天：第二个星期六和星期日还没到，第 10 张在星期五就画完了。"
+        ],
+        "en": [
+          "A week has 7 days, and he draws nothing on Saturday or Sunday, so only 5 pictures get drawn in one week.",
+          "From the first Monday to Friday he draws 5 pictures; Saturday and Sunday add none, so the count stays at 5.",
+          "Counting on from the next Monday: Monday is picture 6, Tuesday 7, Wednesday 8, Thursday 9 and Friday 10, which finishes the job.",
+          "Add up the days: the first Monday to Sunday is 7 days, plus the second Monday to Friday, 5 days, giving 7 + 5 = 12 days.",
+          "Note that the answer is not 14 days: the second Saturday and Sunday never arrive, because picture 10 is done on the Friday."
+        ],
+        "ja": [
+          "1 週間は 7 日ですが、土曜日と日曜日はかかないので、1 週間にかけるのは 5 まいだけです。",
+          "1 週目の月曜日から金曜日までで 5 まいかき、土曜日と日曜日は 0 まいなので、合計は 5 まいのままです。",
+          "次の月曜日から数えると、月曜日が 6 まい目、火曜日が 7 まい目、水曜日が 8 まい目、木曜日が 9 まい目、金曜日が 10 まい目でちょうど仕上がります。",
+          "日数をたすと、1 週目の月曜日から日曜日までが 7 日、2 週目の月曜日から金曜日までが 5 日で、7 + 5 = 12 日です。",
+          "答えは 14 日ではないことに注意します。2 週目の土曜日と日曜日はまだ来ておらず、10 まい目は金曜日に終わるからです。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "12"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "arithmetic-grade1-foundation",
+        "displayText": "改寫自「只在工作日累積」的週期計數題型",
+        "notes": "沒有借到外部頁面（本 session 的 WebSearch 額度已用盡，CEMC 的 Gauss PDF 與 Math Kangaroo 樣題頁都抓不到），骨架是日曆上『只有平日才累積』的計數，照實記錄。去重：全庫掃「星期」與 c:pattern 低年級題。logic_grade1_foundation_051、arithmetic_grade2_foundation_004、logic_grade2_foundation_041 都是『過幾天是星期幾』的餘數題；arithmetic_grade1_foundation_063 是固定週期數某種顏色的個數；arithmetic_grade1_foundation_056/057（古董鐘一天敲幾下）是週期次數的加總。沒有一題是『中間有幾天完全不累積、問要經過幾天才累積到目標』，而且本題的陷阱是答案不是 14 天。本題是第一版草稿被 0.22 診斷掃描擋下後的替換題：原本第 3 題是『一排 6 個數，相鄰兩數和都是 10』，與同為小一的 arithmetic_grade1_foundation_081（相鄰兩張卡片和都是奇數）共用同一個『相鄰和條件推出交錯』前提，判定為同族，整題砍掉重出。"
+      }
+    },
+    {
+      "id": "arithmetic_grade1_foundation_099",
+      "reviewStatus": "ok",
+      "topic": "arithmetic",
+      "subtopic": "circle_versus_line_gap_count",
+      "tags": [
+        "c:basic_counting",
+        "c:position_direction",
+        "m:bijection"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade1",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "6 個小朋友圍著圓桌坐成一圈，每兩個相鄰的人中間都放一盤點心。後來這 6 個人改成排成一直排坐，一樣在每兩個相鄰的人中間各放一盤點心。排成一直排的時候，點心的盤數比圍成一圈的時候少幾盤？",
+        "zh-Hans": "6 个小朋友围着圆桌坐成一圈，每两个相邻的人中间都放一盘点心。后来这 6 个人改成排成一直排坐，一样在每两个相邻的人中间各放一盘点心。排成一直排的时候，点心的盘数比围成一圈的时候少几盘？",
+        "en": "Six children sit around a round table in a ring, and a plate of snacks is placed between every two children who sit next to each other. Later the same six children sit in a straight row, and again a plate is placed between every two children who sit next to each other. When they sit in a row, how many fewer plates are used than when they sit in a ring?",
+        "ja": "6 人の子どもが丸いテーブルのまわりに輪になってすわり、となり合う 2 人の間におかしの皿を 1 まいずつ置きます。あとで同じ 6 人が一列にすわり、やはりとなり合う 2 人の間に皿を 1 まいずつ置きます。一列にすわるときの皿の数は、輪になるときより何まい少ないですか。"
+      },
+      "answer": {
+        "zh-Hant": "排成一直排的時候少放 1 盤。",
+        "zh-Hans": "排成一直排的时候少放 1 盘。",
+        "en": "Sitting in a row uses 1 fewer plate.",
+        "ja": "一列にすわるときは 1 まい少なくてすみます。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "圍成一圈時，每一個人的右手邊都剛好有一個空隙，而且每個空隙都只會被算到一次，所以空隙的個數和人數一樣多，是 6 個，要放 6 盤。",
+          "排成一直排時，最右邊那個人的右手邊沒有人，那個位置不放點心。",
+          "所以直排的空隙比圍成一圈時少一個，是 6 − 1 = 5 個，要放 5 盤。",
+          "6 − 5 = 1，排成一直排的時候少放 1 盤。"
+        ],
+        "zh-Hans": [
+          "围成一圈时，每一个人的右手边都刚好有一个空隙，而且每个空隙都只会被算到一次，所以空隙的个数和人数一样多，是 6 个，要放 6 盘。",
+          "排成一直排时，最右边那个人的右手边没有人，那个位置不放点心。",
+          "所以直排的空隙比围成一圈时少一个，是 6 − 1 = 5 个，要放 5 盘。",
+          "6 − 5 = 1，排成一直排的时候少放 1 盘。"
+        ],
+        "en": [
+          "In the ring, each child has exactly one gap on their right, and every gap is counted exactly once, so the number of gaps equals the number of children: 6 gaps, hence 6 plates.",
+          "In the row, the child on the far right has nobody to their right, so no plate goes there.",
+          "So the row has one gap fewer than the ring: 6 − 1 = 5 gaps, hence 5 plates.",
+          "6 − 5 = 1, so sitting in a row uses 1 fewer plate."
+        ],
+        "ja": [
+          "輪のときは、どの子にも右どなりとの間のすきまがちょうど 1 つあり、どのすきまも 1 回だけ数えられるので、すきまの数は人数と同じ 6 個、皿も 6 まいです。",
+          "一列のときは、いちばん右の子の右どなりには人がいないので、そこには皿を置きません。",
+          "よって一列のすきまは輪より 1 つ少なく、6 − 1 = 5 個、皿は 5 まいです。",
+          "6 − 5 = 1 なので、一列にすわるときは 1 まい少なくてすみます。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "1"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "arithmetic-grade1-foundation",
+        "displayText": "改寫自「柵欄樁誤差」的環狀版本",
+        "notes": "同樣取自 Wikipedia「Off-by-one error」的 fencepost 段落（實際讀過該頁），但用的是它的反面：環狀排列時樁數等於段數，直線排列才會少 1。去重：全庫掃「圍|一圈|相鄰」。logic_grade1_foundation_068（圍圈傳球奇偶）、logic_grade2_foundation_064（圍圈帽子同色組數）、logic_grade2_foundation_067（圍圈兩段報數求人數）都是圍圈情境但問的是傳球位置、染色與人數；geometry_grade2_foundation_014/025/026（沿正方形邊排棋子、角共用）是邊界重複計數。沒有任何一題比較『圍成圈的空隙數』與『排成一列的空隙數』。arithmetic_grade1_foundation_072（5 棵樹間隔）只有直線的一半。"
+      }
+    },
+    {
+      "id": "arithmetic_grade1_foundation_100",
+      "reviewStatus": "ok",
+      "topic": "arithmetic",
+      "subtopic": "lower_bound_after_removal",
+      "tags": [
+        "c:basic_counting",
+        "c:add_sub",
+        "m:estimate_bound"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade1",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "籃子裡裝著一些蘋果，小安不知道到底有幾顆，只知道比 10 顆多、比 15 顆少，而且顆數是整數。現在他從籃子裡拿走 3 顆。小美說：「不管本來有幾顆，拿走以後一定還剩超過 8 顆。」拿走 3 顆以後，籃子裡最少會剩下幾顆蘋果？",
+        "zh-Hans": "篮子里装着一些苹果，小安不知道到底有几颗，只知道比 10 颗多、比 15 颗少，而且颗数是整数。现在他从篮子里拿走 3 颗。小美说：「不管本来有几颗，拿走以后一定还剩超过 8 颗。」拿走 3 颗以后，篮子里最少会剩下几颗苹果？",
+        "en": "A basket holds some apples. An does not know how many there are; he only knows there are more than 10 and fewer than 15, and that the number of apples is a whole number. He now takes 3 apples out. Mei says, 'No matter how many were there at first, more than 8 apples must be left.' After the 3 apples are taken out, at least how many apples are left in the basket?",
+        "ja": "かごにりんごが入っています。アンさんは何個あるか知らず、10 個より多く 15 個より少ないこと、個数は整数であることだけを知っています。いま、かごから 3 個取り出します。メイさんは「もとが何個でも、取り出したあとに 8 個より多く残るはずだ」と言いました。3 個取り出したあと、かごには少なくとも何個のりんごが残りますか。"
+      },
+      "answer": {
+        "zh-Hant": "籃子裡最少會剩下 8 顆蘋果。",
+        "zh-Hans": "篮子里最少会剩下 8 颗苹果。",
+        "en": "At least 8 apples are left in the basket.",
+        "ja": "かごには少なくとも 8 個のりんごが残ります。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "蘋果的顆數比 10 顆多，而且是整數，所以最少是 11 顆，不可能剛好是 10 顆。",
+          "本來的顆數愈少，拿走 3 顆以後剩下的就愈少，所以要用最少的 11 顆來算。",
+          "11 − 3 = 8，籃子裡最少會剩下 8 顆蘋果。",
+          "這也說明小美說錯了：剩下的有可能剛好是 8 顆，並沒有超過 8 顆。"
+        ],
+        "zh-Hans": [
+          "苹果的颗数比 10 颗多，而且是整数，所以最少是 11 颗，不可能刚好是 10 颗。",
+          "本来的颗数愈少，拿走 3 颗以后剩下的就愈少，所以要用最少的 11 颗来算。",
+          "11 − 3 = 8，篮子里最少会剩下 8 颗苹果。",
+          "这也说明小美说错了：剩下的有可能刚好是 8 颗，并没有超过 8 颗。"
+        ],
+        "en": [
+          "The number of apples is more than 10 and is a whole number, so it is at least 11; it cannot be exactly 10.",
+          "The fewer apples there were at the start, the fewer are left after 3 are removed, so use the smallest case, 11.",
+          "11 − 3 = 8, so at least 8 apples are left in the basket.",
+          "This also shows Mei is wrong: what is left may be exactly 8, which is not more than 8."
+        ],
+        "ja": [
+          "りんごの個数は 10 個より多く、しかも整数なので、少なくとも 11 個であり、ちょうど 10 個ということはありません。",
+          "もとの個数が少ないほど、3 個取り出したあとに残る数も少なくなるので、いちばん少ない 11 個で考えます。",
+          "11 − 3 = 8 なので、かごには少なくとも 8 個のりんごが残ります。",
+          "これはメイさんがまちがっていることも示します。残りはちょうど 8 個になることがあり、8 個より多いとはかぎりません。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "8"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "arithmetic-grade1-foundation",
+        "displayText": "改寫自「上下界估計」題型",
+        "notes": "與 B_01 同樣參考 Wikipedia「Upper and lower bounds」條目（實際讀過），但用的是另一半：由嚴格不等式與整數條件推出下界，再把下界往下傳遞到減法之後。去重：全庫掃 m:estimate_bound 44 題與「比 .{1,3} 多|比 .{1,3} 少」。arithmetic_grade1_foundation_035（比 12 大比 16 小且是偶數）與 logic_grade2_foundation_059（十位個位和為 6 的最小數）是用條件夾出唯一值；本題不求出那個數，而是把界往下傳。同批 B_01 是比較兩堆的界，本題是單一個量的下界加上『超過 8 與剛好 8』的差一陷阱，答案與推理路徑都不同。"
+      }
     }
   ]
 }

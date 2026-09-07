@@ -4190,6 +4190,178 @@
         "reference": "number-theory-grade8-foundation",
         "notes": "題型出處：CEMC（Waterloo）2023 Fryer Contest 第 3 題開頭明列的『數字和被 3 整除即該數被 3 整除』整除法則，加上 Wikipedia「Double counting (proof technique)」條目裡『換一個角度數同一批東西』的想法。本題把該法則反過來用在計數上：先把難數的『數字和是 3 的倍數』對應成好數的『這個數是 3 的倍數』，再用餘數分組窮舉。掃全庫時發現 arithmetic_grade2_foundation_036（11 到 99 的疊數中被 3 整除者）、number_theory_grade10_foundation_025（三位迴文數中 3 的倍數）都限定在很小的特殊集合，且都沒有用到『數字和與原數同餘』這個轉換；combinatorics_grade8_foundation_014（數字和恰為 5 的三位數）求的是固定數字和而非倍數。"
       }
+    },
+    {
+      "id": "number_theory_grade8_foundation_050",
+      "reviewStatus": "ok",
+      "topic": "number_theory",
+      "subtopic": "base_seven_counter_wraparound",
+      "tags": [
+        "c:number_base",
+        "c:modular",
+        "m:direct"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade8",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "小安有一台機械計數器，它只有三個位數，而且每一位只顯示 0 到 6 這七個數字：某一位加到 6 之後再加 1 就變回 0 並向左邊進位；顯示 666 時再按一次就整個回到 000。計數器一開始顯示 000，小安連續按了 2026 次。求這時計數器上顯示的三個數字，依顯示的順序寫成的三位數是多少。",
+        "zh-Hans": "小安有一台机械计数器，它只有三个位数，而且每一位只显示 0 到 6 这七个数字：某一位加到 6 之后再加 1 就变回 0 并向左边进位；显示 666 时再按一次就整个回到 000。计数器一开始显示 000，小安连续按了 2026 次。求这时计数器上显示的三个数字，依显示的顺序写成的三位数是多少。",
+        "en": "A mechanical counter has only three positions, and each position shows only the seven digits 0 to 6: when a position reaches 6, adding 1 more sends it back to 0 and carries to the left, and pressing once more at 666 sends the whole counter back to 000. The counter starts at 000 and is pressed 2026 times in a row. Reading the three shown digits in order as a three-digit string, what is displayed?",
+        "ja": "ある機械式カウンターは 3 桁しかなく、各桁は 0 から 6 までの 7 個の数字しか表示しません。ある桁が 6 になった後にさらに 1 を加えると 0 に戻って左へ繰り上がり、666 の状態でもう一度押すと全体が 000 に戻ります。カウンターは 000 から始まり、続けて 2026 回押されました。このとき表示されている 3 個の数字を表示順に並べた 3 桁の数はいくつですか。"
+      },
+      "answer": {
+        "zh-Hant": "計數器顯示 623。",
+        "zh-Hans": "计数器显示 623。",
+        "en": "The counter displays 623.",
+        "ja": "カウンターは 623 を表示しています。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "每一位只有 0 到 6 共七個數字，滿七就向左進位，所以這台計數器其實是一個三位的七進位計數器。",
+          "它能顯示的不同狀態一共有 7 × 7 × 7 = 343 種，也就是說每按 343 次就會回到 000。",
+          "因此只要看 2026 除以 343 的餘數：343 × 5 = 1715，2026 − 1715 = 311，所以按 2026 次的顯示和按 311 次的顯示完全一樣。",
+          "把 311 換成七進位。七進位各位的位值是 49、7、1：311 ÷ 49 = 6 餘 17，所以 49 那一位是 6。",
+          "剩下的 17 ÷ 7 = 2 餘 3，所以 7 那一位是 2、個位是 3。",
+          "三個數字依序是 6、2、3，計數器顯示 623。",
+          "驗算：6 × 49 + 2 × 7 + 3 = 294 + 14 + 3 = 311，再加上繞了 5 圈的 5 × 343 = 1715，合計 1715 + 311 = 2026 ✓。"
+        ],
+        "zh-Hans": [
+          "每一位只有 0 到 6 共七个数字，满七就向左进位，所以这台计数器其实是一个三位的七进位计数器。",
+          "它能显示的不同状态一共有 7 × 7 × 7 = 343 种，也就是说每按 343 次就会回到 000。",
+          "因此只要看 2026 除以 343 的余数：343 × 5 = 1715，2026 − 1715 = 311，所以按 2026 次的显示和按 311 次的显示完全一样。",
+          "把 311 换成七进位。七进位各位的位值是 49、7、1：311 ÷ 49 = 6 余 17，所以 49 那一位是 6。",
+          "剩下的 17 ÷ 7 = 2 余 3，所以 7 那一位是 2、个位是 3。",
+          "三个数字依序是 6、2、3，计数器显示 623。",
+          "验算：6 × 49 + 2 × 7 + 3 = 294 + 14 + 3 = 311，再加上绕了 5 圈的 5 × 343 = 1715，合计 1715 + 311 = 2026 ✓。"
+        ],
+        "en": [
+          "Each position holds only the seven digits 0 to 6 and carries to the left once it passes 6, so the device is really a three-place counter in base 7.",
+          "It has 7 × 7 × 7 = 343 different states, which means it returns to 000 after every 343 presses.",
+          "So we only need the remainder of 2026 divided by 343: since 343 × 5 = 1715 and 2026 - 1715 = 311, pressing 2026 times shows the same thing as pressing 311 times.",
+          "Convert 311 to base 7. The place values are 49, 7 and 1: 311 divided by 49 is 6 with remainder 17, so the 49 place shows 6.",
+          "The remaining 17 divided by 7 is 2 with remainder 3, so the 7 place shows 2 and the units place shows 3.",
+          "The three digits in order are 6, 2, 3, so the counter displays 623.",
+          "Check: 6 × 49 + 2 × 7 + 3 = 294 + 14 + 3 = 311, and adding the five full loops 5 × 343 = 1715 gives 1715 + 311 = 2026."
+        ],
+        "ja": [
+          "各桁は 0 から 6 までの 7 個の数字しか持たず、7 になると左へ繰り上がるので、この装置は実質的に 3 桁の 7 進法カウンターです。",
+          "表示できる状態は全部で 7 × 7 × 7 = 343 通りあり、343 回押すごとに 000 に戻ります。",
+          "したがって 2026 を 343 で割った余りを見ればよく、343 × 5 = 1715、2026 − 1715 = 311 なので、2026 回押した表示は 311 回押した表示と同じです。",
+          "311 を 7 進法に直します。位の重みは 49、7、1 で、311 ÷ 49 = 6 余り 17 なので、49 の位は 6 です。",
+          "残りの 17 ÷ 7 = 2 余り 3 なので、7 の位は 2、一の位は 3 になります。",
+          "3 個の数字は順に 6、2、3 なので、カウンターは 623 を表示します。",
+          "検算：6 × 49 + 2 × 7 + 3 = 294 + 14 + 3 = 311 であり、5 周分の 5 × 343 = 1715 を足すと 1715 + 311 = 2026 となります ✓。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "623"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "number-theory-grade8-foundation",
+        "notes": "題型參考 Wikipedia「Odometer / Mechanical counter」與「Modular arithmetic（clock arithmetic）」兩個條目所描述的『位數有限的計數器會繞回』現象，把繞回（mod 343）與七進位換算接在一起。去重：全庫 regex 掃「進位」36 題、「七進位」5 題全部讀過。最接近的是 number_theory_grade8_048（里程表跳過所有含 4 的讀數）——那題的骨架是『跳號讀數其實是九進位』的一一對應，沒有繞回；本題沒有跳號，核心是先取 mod 7³ 再換底，兩者的第一步完全不同。另比對 number_theory_grade9_036（100 換成三進位有幾位）與 number_theory_grade8_019（二進位換十進位），那兩題只有單純換底、沒有循環。"
+      }
+    },
+    {
+      "id": "number_theory_grade8_foundation_051",
+      "reviewStatus": "ok",
+      "topic": "number_theory",
+      "subtopic": "six_digit_square_cube_blocks",
+      "tags": [
+        "c:place_value",
+        "c:exponent",
+        "m:enumeration"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade8",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "有一個六位數同時滿足下列三個條件：左邊三個數字組成的三位數是完全平方數；右邊三個數字組成的三位數是完全立方數；而且它最左邊那一位的數字與最右邊那一位的數字相同。求符合條件的六位數共有多少個。",
+        "zh-Hans": "有一个六位数同时满足下列三个条件：左边三个数字组成的三位数是完全平方数；右边三个数字组成的三位数是完全立方数；而且它最左边那一位的数字与最右边那一位的数字相同。求符合条件的六位数共有多少个。",
+        "en": "A six-digit number satisfies all three conditions below: the three-digit number formed by its leftmost three digits is a perfect square; the three-digit number formed by its rightmost three digits is a perfect cube; and its leftmost digit equals its rightmost digit. How many such six-digit numbers are there?",
+        "ja": "ある 6 桁の数が次の 3 つの条件をすべて満たします。左の 3 個の数字がつくる 3 桁の数は平方数である。右の 3 個の数字がつくる 3 桁の数は立方数である。さらに、いちばん左の数字といちばん右の数字が等しい。条件を満たす 6 桁の数は何個ありますか。"
+      },
+      "answer": {
+        "zh-Hant": "符合條件的六位數共有 11 個。",
+        "zh-Hans": "符合条件的六位数共有 11 个。",
+        "en": "There are 11 such six-digit numbers.",
+        "ja": "条件を満たす 6 桁の数は 11 個あります。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "先看三位的完全平方數：從 10² = 100 到 31² = 961，一共 22 個。",
+          "再看三位的完全立方數：只有 5³ = 125、6³ = 216、7³ = 343、8³ = 512、9³ = 729 這 5 個。",
+          "立方數少得多，所以從立方數下手。它們的個位數字依序是 5、6、3、2、9。",
+          "第三個條件說最左邊的數字（平方數的首位）要等於最右邊的數字（立方數的個位），所以只要數出首位是 5、6、3、2、9 的三位平方數各有幾個。",
+          "把 22 個三位平方數按首位分類：首位 2 的有 225、256、289（3 個）；首位 3 的有 324、361（2 個）；首位 5 的有 529、576（2 個）；首位 6 的有 625、676（2 個）；首位 9 的有 900、961（2 個）。",
+          "配對起來：立方數 512（個位 2）可搭 3 個平方數；343（個位 3）可搭 2 個；125（個位 5）可搭 2 個；216（個位 6）可搭 2 個；729（個位 9）可搭 2 個。",
+          "相加得 3 + 2 + 2 + 2 + 2 = 11 個。",
+          "驗算：這 11 個六位數是 225512、256512、289512、324343、361343、529125、576125、625216、676216、900729、961729 ✓。"
+        ],
+        "zh-Hans": [
+          "先看三位的完全平方数：从 10² = 100 到 31² = 961，一共 22 个。",
+          "再看三位的完全立方数：只有 5³ = 125、6³ = 216、7³ = 343、8³ = 512、9³ = 729 这 5 个。",
+          "立方数少得多，所以从立方数下手。它们的个位数字依序是 5、6、3、2、9。",
+          "第三个条件说最左边的数字（平方数的首位）要等于最右边的数字（立方数的个位），所以只要数出首位是 5、6、3、2、9 的三位平方数各有几个。",
+          "把 22 个三位平方数按首位分类：首位 2 的有 225、256、289（3 个）；首位 3 的有 324、361（2 个）；首位 5 的有 529、576（2 个）；首位 6 的有 625、676（2 个）；首位 9 的有 900、961（2 个）。",
+          "配对起来：立方数 512（个位 2）可搭 3 个平方数；343（个位 3）可搭 2 个；125（个位 5）可搭 2 个；216（个位 6）可搭 2 个；729（个位 9）可搭 2 个。",
+          "相加得 3 + 2 + 2 + 2 + 2 = 11 个。",
+          "验算：这 11 个六位数是 225512、256512、289512、324343、361343、529125、576125、625216、676216、900729、961729 ✓。"
+        ],
+        "en": [
+          "First list the three-digit perfect squares: from 10² = 100 up to 31² = 961, there are 22 of them.",
+          "Next list the three-digit perfect cubes: only 5³ = 125, 6³ = 216, 7³ = 343, 8³ = 512 and 9³ = 729, just 5 of them.",
+          "There are far fewer cubes, so start from them. Their units digits are 5, 6, 3, 2 and 9 respectively.",
+          "The third condition says the leftmost digit (the leading digit of the square) must equal the rightmost digit (the units digit of the cube), so we only need to count three-digit squares with leading digit 5, 6, 3, 2 or 9.",
+          "Sort the 22 squares by leading digit: leading digit 2 gives 225, 256, 289 (3 of them); leading digit 3 gives 324, 361 (2); leading digit 5 gives 529, 576 (2); leading digit 6 gives 625, 676 (2); leading digit 9 gives 900, 961 (2).",
+          "Now pair them up: the cube 512 (units digit 2) matches 3 squares; 343 (units digit 3) matches 2; 125 (units digit 5) matches 2; 216 (units digit 6) matches 2; 729 (units digit 9) matches 2.",
+          "Adding these gives 3 + 2 + 2 + 2 + 2 = 11 numbers.",
+          "Check: the 11 numbers are 225512, 256512, 289512, 324343, 361343, 529125, 576125, 625216, 676216, 900729 and 961729."
+        ],
+        "ja": [
+          "まず 3 桁の平方数を挙げます。10² = 100 から 31² = 961 まで、全部で 22 個あります。",
+          "次に 3 桁の立方数を挙げます。5³ = 125、6³ = 216、7³ = 343、8³ = 512、9³ = 729 の 5 個しかありません。",
+          "立方数のほうがずっと少ないので、そちらから考えます。一の位は順に 5、6、3、2、9 です。",
+          "3 つ目の条件は、いちばん左の数字（平方数の先頭）といちばん右の数字（立方数の一の位）が等しいことなので、先頭が 5、6、3、2、9 である 3 桁の平方数の個数を数えれば十分です。",
+          "22 個の平方数を先頭の数字で分類します。先頭 2 は 225、256、289（3 個）、先頭 3 は 324、361（2 個）、先頭 5 は 529、576（2 個）、先頭 6 は 625、676（2 個）、先頭 9 は 900、961（2 個）です。",
+          "組み合わせると、立方数 512（一の位 2）には 3 個、343（一の位 3）には 2 個、125（一の位 5）には 2 個、216（一の位 6）には 2 個、729（一の位 9）には 2 個の平方数が対応します。",
+          "合計すると 3 + 2 + 2 + 2 + 2 = 11 個です。",
+          "検算：該当する 6 桁の数は 225512、256512、289512、324343、361343、529125、576125、625216、676216、900729、961729 です ✓。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "11"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "number-theory-grade8-foundation",
+        "notes": "題型骨架取自 CEMC 2022 Pascal 第 24 題「Pretti number」（七位數：左三位是平方數、右四位是立方數、萬位與個位相同），已用 pdftotext 讀過原卷；改成六位數、右三位是立方數、首末位相同，數字與答案全部重算。去重：全庫掃「完全立方」與「完全平方 + 三位數」，最接近的是 number_theory_grade10_023（等於各位立方和的三位數）與 number_theory_grade12_039（四位重複數字是不是平方數），前者是把數字各自立方再相加、後者只驗證單一數，都不是把六位數切成兩段各自受限再配對。"
+      }
     }
   ]
 }

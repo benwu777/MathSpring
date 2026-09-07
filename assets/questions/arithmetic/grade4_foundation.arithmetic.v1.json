@@ -8614,6 +8614,310 @@
         "reference": "arithmetic-grade4-foundation",
         "notes": "題型骨架取自 CEMC Gauss Grade 7（2023 年第 15 題，2、9、4、n、2n 平均為 6 求 n），改成問「五個數之中最大的」而不是問 n，多一步比較。掃庫比對過 arithmetic_grade4_072、arithmetic_grade5_034、036、038、049、mixed_grade5_012、logic_grade9_027，這些平均題全部是「加入或移出一位成員後平均改變」的骨架；本題的推理點是同一個未知數在資料中出現兩次，全庫用寬鬆 regex 掃「平均」也沒有同型題。"
       }
+    },
+    {
+      "id": "arithmetic_grade4_foundation_118",
+      "reviewStatus": "ok",
+      "topic": "arithmetic",
+      "subtopic": "class_size_from_two_leftovers",
+      "tags": [
+        "c:factor_multiple",
+        "m:reverse"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade4",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一箱糖果有 74 顆，平分給班上的同學，每人拿到一樣多，最後剩下 2 顆；另一箱餅乾有 55 塊，也平分給同樣這些同學，每人一樣多，最後剩下 1 塊。班上最多可能有幾位同學？",
+        "zh-Hans": "一箱糖果有 74 颗，平分给班上的同学，每人拿到一样多，最后剩下 2 颗；另一箱饼干有 55 块，也平分给同样这些同学，每人一样多，最后剩下 1 块。班上最多可能有几位同学？",
+        "en": "A box of 74 sweets is shared equally among the students in a class, everyone getting the same number, and 2 sweets are left over. A box of 55 biscuits is shared equally among the same students, everyone getting the same number, and 1 biscuit is left over. At most how many students can there be in the class?",
+        "ja": "あめ 74 個をクラスの生徒に同じ数ずつ配ると 2 個あまりました。ビスケット 55 枚を同じ生徒たちに同じ数ずつ配ると 1 枚あまりました。クラスの生徒は最も多くて何人ですか。"
+      },
+      "answer": {
+        "zh-Hant": "班上最多有 18 位同學。",
+        "zh-Hans": "班上最多有 18 位同学。",
+        "en": "There can be at most 18 students.",
+        "ja": "生徒は最も多くて 18 人です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "糖果剩下 2 顆，表示 74 − 2 = 72 顆剛好分得完；餅乾剩下 1 塊，表示 55 − 1 = 54 塊剛好分得完。",
+          "所以人數同時是 72 和 54 的因數。72 = 2 × 2 × 2 × 3 × 3，54 = 2 × 3 × 3 × 3，兩數的最大公因數是 2 × 3 × 3 = 18。",
+          "還要檢查一個條件：剩下的數量一定要比人數少，否則還可以再分一輪。2 和 1 都比 18 小，符合，所以班上最多有 18 位同學。"
+        ],
+        "zh-Hans": [
+          "糖果剩下 2 颗，表示 74 − 2 = 72 颗刚好分得完；饼干剩下 1 块，表示 55 − 1 = 54 块刚好分得完。",
+          "所以人数同时是 72 和 54 的因数。72 = 2 × 2 × 2 × 3 × 3，54 = 2 × 3 × 3 × 3，两数的最大公因数是 2 × 3 × 3 = 18。",
+          "还要检查一个条件：剩下的数量一定要比人数少，否则还可以再分一轮。2 和 1 都比 18 小，符合，所以班上最多有 18 位同学。"
+        ],
+        "en": [
+          "Since 2 sweets are left, 74 − 2 = 72 sweets are shared out exactly; since 1 biscuit is left, 55 − 1 = 54 biscuits are shared out exactly.",
+          "So the number of students divides both 72 and 54. As 72 = 2 × 2 × 2 × 3 × 3 and 54 = 2 × 3 × 3 × 3, their greatest common divisor is 2 × 3 × 3 = 18.",
+          "One more condition must be checked: each leftover must be smaller than the number of students, otherwise another round could be handed out. Both 2 and 1 are smaller than 18, so the class can have at most 18 students."
+        ],
+        "ja": [
+          "あめが 2 個あまったので 74 − 2 = 72 個はちょうど配り切れます。ビスケットが 1 枚あまったので 55 − 1 = 54 枚もちょうど配り切れます。",
+          "つまり人数は 72 と 54 の両方の約数です。72 = 2 × 2 × 2 × 3 × 3、54 = 2 × 3 × 3 × 3 なので、最大公約数は 2 × 3 × 3 = 18 です。",
+          "もう一つ確かめることがあります。あまりは人数より少なくなければならず、そうでなければもう一回ずつ配れてしまいます。2 も 1 も 18 より小さいので条件に合い、生徒は最も多くて 18 人です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "18"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "arithmetic-grade4-foundation",
+        "notes": "外部題型來源：教材中「先扣掉餘數再取最大公因數」的經典除數題（Wikipedia 的最大公因數條目只寫到等分磁磚的應用，沒有這一型，故照實說明來源是教材）。全庫掃過：arithmetic_grade5_028（24 顆糖 60 塊餅乾分裝最多幾包）沒有餘數、答案是 12；arithmetic_grade5_029、arithmetic_grade6_002、arithmetic_grade5_026 等餘數題都是已知除數求被除數，用的是公倍數。本題是反過來由兩個餘數求除數，還要驗證餘數小於人數。"
+      }
+    },
+    {
+      "id": "arithmetic_grade4_foundation_119",
+      "reviewStatus": "ok",
+      "topic": "arithmetic",
+      "subtopic": "two_primes_odd_sum_difference",
+      "tags": [
+        "c:factor_multiple",
+        "m:invariant"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade4",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "兩個質數相加，和剛好是 39。這兩個質數相差多少？",
+        "zh-Hans": "两个质数相加，和刚好是 39。这两个质数相差多少？",
+        "en": "Two prime numbers add up to exactly 39. What is the difference between these two primes?",
+        "ja": "2 つの素数をたすと、ちょうど 39 になりました。この 2 つの素数の差はいくつですか。"
+      },
+      "answer": {
+        "zh-Hant": "這兩個質數相差 35。",
+        "zh-Hans": "这两个质数相差 35。",
+        "en": "The difference between the two primes is 35.",
+        "ja": "2 つの素数の差は 35 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "39 是奇數。兩個數相加得到奇數，只可能是「一個奇數加一個偶數」，不可能兩個都是奇數，也不可能兩個都是偶數。",
+          "質數之中只有 2 是偶數，其他質數全是奇數。所以這兩個質數裡一定有一個是 2。",
+          "另一個是 39 − 2 = 37，而 37 除了 1 和自己以外沒有別的因數，確實是質數。",
+          "所以兩個質數是 2 和 37，相差 37 − 2 = 35。"
+        ],
+        "zh-Hans": [
+          "39 是奇数。两个数相加得到奇数，只可能是「一个奇数加一个偶数」，不可能两个都是奇数，也不可能两个都是偶数。",
+          "质数之中只有 2 是偶数，其他质数全是奇数。所以这两个质数里一定有一个是 2。",
+          "另一个是 39 − 2 = 37，而 37 除了 1 和自己以外没有别的因数，确实是质数。",
+          "所以两个质数是 2 和 37，相差 37 − 2 = 35。"
+        ],
+        "en": [
+          "39 is odd. A sum of two numbers is odd only when one of them is odd and the other is even; it cannot be odd plus odd, nor even plus even.",
+          "Among the primes, only 2 is even and every other prime is odd. So one of the two primes must be 2.",
+          "The other one is 39 − 2 = 37, and 37 has no divisors apart from 1 and itself, so it really is prime.",
+          "The two primes are therefore 2 and 37, and their difference is 37 − 2 = 35."
+        ],
+        "ja": [
+          "39 は奇数です。2 つの数の和が奇数になるのは「奇数 + 偶数」のときだけで、奇数どうしでも偶数どうしでもいけません。",
+          "素数の中で偶数は 2 だけで、ほかの素数はすべて奇数です。だからこの 2 つの素数のうち 1 つは必ず 2 です。",
+          "もう 1 つは 39 − 2 = 37 で、37 は 1 と自分以外に約数がないので確かに素数です。",
+          "したがって 2 つの素数は 2 と 37 で、その差は 37 − 2 = 35 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "35"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "arithmetic-grade4-foundation",
+        "notes": "外部題型來源：WebFetch 讀了 Wikipedia 的 Goldbach's conjecture 條目，其中明確寫出「besides the number 2, only odd numbers can be prime」這個奇偶關鍵；把它降階成小學可解的單一問法。全庫用 質數/兩個質數 掃過：number_theory_grade7_015（100 寫成兩質數之和有幾種）、number_theory_grade7_043（1 到 20 哪些數寫不成兩質數之和）、number_theory_grade7_013（孿生質數）都是計數題，和是偶數，用不到 2 是唯一偶質數的推理；本題的和是奇數，答案由奇偶性唯一決定。"
+      }
+    },
+    {
+      "id": "arithmetic_grade4_foundation_120",
+      "reviewStatus": "ok",
+      "topic": "arithmetic",
+      "subtopic": "two_candles_remaining_ratio",
+      "tags": [
+        "c:ratio",
+        "c:mul_div",
+        "m:reverse"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade4",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "小安有兩支一樣長的蠟燭。第一支點燃後每小時燒掉 3 公分，第二支每小時燒掉 2 公分。兩支同時點燃，燒了 4 小時之後把火吹熄，這時第二支剩下的長度剛好是第一支剩下長度的 2 倍。這兩支蠟燭原來各長幾公分？",
+        "zh-Hans": "小安有两支一样长的蜡烛。第一支点燃后每小时烧掉 3 厘米，第二支每小时烧掉 2 厘米。两支同时点燃，烧了 4 小时之后把火吹熄，这时第二支剩下的长度刚好是第一支剩下长度的 2 倍。这两支蜡烛原来各长几厘米？",
+        "en": "An has two candles of the same length. The first burns down 3 centimetres every hour and the second burns down 2 centimetres every hour. He lights both at the same time and blows them out after 4 hours, at which moment the length left on the second candle is exactly twice the length left on the first. How many centimetres long was each candle to start with?",
+        "ja": "アンは同じ長さのろうそくを 2 本持っています。1 本目は 1 時間に 3 センチメートル、2 本目は 1 時間に 2 センチメートル短くなります。2 本同時に火をつけ、4 時間後に消したところ、2 本目の残りの長さは 1 本目の残りの長さのちょうど 2 倍でした。ろうそくははじめ何センチメートルでしたか。"
+      },
+      "answer": {
+        "zh-Hant": "兩支蠟燭原來各長 16 公分。",
+        "zh-Hans": "两支蜡烛原来各长 16 厘米。",
+        "en": "Each candle was 16 centimetres long to start with.",
+        "ja": "ろうそくははじめそれぞれ 16 センチメートルでした。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "4 小時之後，第一支燒掉 3 × 4 = 12 公分，第二支燒掉 2 × 4 = 8 公分。",
+          "兩支原來一樣長，燒掉的量相差 12 − 8 = 4 公分，所以第二支剩下的比第一支剩下的多 4 公分。",
+          "第二支剩下的是第一支的 2 倍，也就是比第一支多出「第一支剩下的那麼多」。因此第一支剩下的正好是 4 公分。",
+          "原來的長度 = 剩下的 + 燒掉的 = 4 + 12 = 16（公分）。檢查：第二支剩 16 − 8 = 8 公分，正好是 4 公分的 2 倍。"
+        ],
+        "zh-Hans": [
+          "4 小时之后，第一支烧掉 3 × 4 = 12 厘米，第二支烧掉 2 × 4 = 8 厘米。",
+          "两支原来一样长，烧掉的量相差 12 − 8 = 4 厘米，所以第二支剩下的比第一支剩下的多 4 厘米。",
+          "第二支剩下的是第一支的 2 倍，也就是比第一支多出「第一支剩下的那么多」。因此第一支剩下的正好是 4 厘米。",
+          "原来的长度 = 剩下的 + 烧掉的 = 4 + 12 = 16（厘米）。检查：第二支剩 16 − 8 = 8 厘米，正好是 4 厘米的 2 倍。"
+        ],
+        "en": [
+          "After 4 hours the first candle has burnt 3 × 4 = 12 centimetres and the second has burnt 2 × 4 = 8 centimetres.",
+          "The two started equal, and the burnt amounts differ by 12 − 8 = 4 centimetres, so the piece left on the second candle is 4 centimetres longer than the piece left on the first.",
+          "The second piece is twice the first, which means it exceeds the first by exactly one copy of the first piece. So the piece left on the first candle is exactly 4 centimetres.",
+          "Original length = piece left + burnt part = 4 + 12 = 16 centimetres. Check: the second candle has 16 − 8 = 8 centimetres left, which is indeed twice 4 centimetres."
+        ],
+        "ja": [
+          "4 時間後、1 本目は 3 × 4 = 12 センチメートル、2 本目は 2 × 4 = 8 センチメートル短くなっています。",
+          "はじめの長さが同じで、減った長さの差は 12 − 8 = 4 センチメートルなので、2 本目の残りは 1 本目の残りより 4 センチメートル長いです。",
+          "2 本目の残りは 1 本目の残りの 2 倍、つまり 1 本目の残り 1 つ分だけ長いということです。よって 1 本目の残りはちょうど 4 センチメートルです。",
+          "はじめの長さ = 残り + 減った分 = 4 + 12 = 16（センチメートル）。確かめると 2 本目の残りは 16 − 8 = 8 センチメートルで、4 センチメートルの 2 倍になっています。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "16"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "arithmetic-grade4-foundation",
+        "notes": "外部題型來源：英美教材與論壇常見的 two candles burning at different rates 題型。全庫用 蠟燭 掃過 0 筆（只有 logic_grade11_013、logic_grade11_031 的不均勻繩／香計時題，數學完全不同）。與 arithmetic_grade4_007（從多的一盒拿 5 顆使另一盒變 2 倍）不同：本題兩個量的差是固定的燃燒量差，關鍵是把「2 倍」翻譯成「多出一份」。"
+      }
+    },
+    {
+      "id": "arithmetic_grade4_foundation_121",
+      "reviewStatus": "ok",
+      "topic": "arithmetic",
+      "subtopic": "place_decimal_point_closest_to_five",
+      "tags": [
+        "c:decimal",
+        "c:place_value",
+        "m:enumeration"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade4",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "小安有寫著 1、4、7 的三張數字卡。他把三張卡排成一列（每張都要用到，各用一次），再在其中兩張卡之間插入一個小數點，就得到一個小數，例如 4.17 和 41.7 都是這樣排出來的。在所有排得出來的小數之中，哪一個最接近 5？",
+        "zh-Hans": "小安有写着 1、4、7 的三张数字卡。他把三张卡排成一列（每张都要用到，各用一次），再在其中两张卡之间插入一个小数点，就得到一个小数，例如 4.17 和 41.7 都是这样排出来的。在所有排得出来的小数之中，哪一个最接近 5？",
+        "en": "An has three number cards showing 1, 4 and 7. He lays the three cards in a row, using each card once, and then slips one decimal point in between two of the cards, which gives a decimal number; 4.17 and 41.7 are both made this way. Among all the decimal numbers he can make, which one is closest to 5?",
+        "ja": "アンは 1、4、7 と書かれた数字カードを 3 枚持っています。3 枚を 1 枚ずつ使って横一列にならべ、そのうち 2 枚のカードのあいだに小数点を 1 つ入れて小数をつくります。4.17 も 41.7 もこのようにしてできます。つくれる小数のうち、5 にいちばん近いのはどれですか。"
+      },
+      "answer": {
+        "zh-Hant": "最接近 5 的是 4.71，選 C。",
+        "zh-Hans": "最接近 5 的是 4.71，选 C。",
+        "en": "The number closest to 5 is 4.71, choice C.",
+        "ja": "5 にいちばん近いのは 4.71 で、選択肢は C です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "小數點放在第一張卡後面時，可以排出 1.47、1.74、4.17、4.71、7.14、7.41；放在第二張卡後面時，可以排出 14.7、17.4、41.7、47.1、71.4、74.1。",
+          "後面那六個都比 14 大，離 5 很遠，可以整批先排除，只要比較整數部分是 1、4、7 的那六個。",
+          "整數部分是 4 的兩個離 5 最近：5 − 4.71 = 0.29，5 − 4.17 = 0.83；整數部分是 7 的最小是 7.14，離 5 有 2.14；整數部分是 1 的更遠。",
+          "所以最接近 5 的是 4.71。"
+        ],
+        "zh-Hans": [
+          "小数点放在第一张卡后面时，可以排出 1.47、1.74、4.17、4.71、7.14、7.41；放在第二张卡后面时，可以排出 14.7、17.4、41.7、47.1、71.4、74.1。",
+          "后面那六个都比 14 大，离 5 很远，可以整批先排除，只要比较整数部分是 1、4、7 的那六个。",
+          "整数部分是 4 的两个离 5 最近：5 − 4.71 = 0.29，5 − 4.17 = 0.83；整数部分是 7 的最小是 7.14，离 5 有 2.14；整数部分是 1 的更远。",
+          "所以最接近 5 的是 4.71。"
+        ],
+        "en": [
+          "With the point after the first card the numbers are 1.47, 1.74, 4.17, 4.71, 7.14 and 7.41; with the point after the second card they are 14.7, 17.4, 41.7, 47.1, 71.4 and 74.1.",
+          "The second group is all larger than 14 and far from 5, so it can be ruled out at once, leaving the six numbers whose whole-number part is 1, 4 or 7.",
+          "The two with whole-number part 4 are closest: 5 − 4.71 = 0.29 and 5 − 4.17 = 0.83. The smallest one starting with 7 is 7.14, which is 2.14 away, and those starting with 1 are further still.",
+          "So the number closest to 5 is 4.71."
+        ],
+        "ja": [
+          "小数点を 1 枚目の後ろに置くと 1.47、1.74、4.17、4.71、7.14、7.41 ができ、2 枚目の後ろに置くと 14.7、17.4、41.7、47.1、71.4、74.1 ができます。",
+          "後のグループはすべて 14 より大きく 5 から遠いので、まとめて外せます。残るのは整数部分が 1、4、7 の 6 つです。",
+          "整数部分が 4 の 2 つがいちばん近く、5 − 4.71 = 0.29、5 − 4.17 = 0.83 です。7 で始まるものは最小でも 7.14 で 5 との差は 2.14、1 で始まるものはさらに遠いです。",
+          "よって 5 にいちばん近いのは 4.71 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "multiple_choice",
+      "correctAnswer": {
+        "type": "choice",
+        "value": "C"
+      },
+      "options": {
+        "A": {
+          "zh-Hant": "1.74",
+          "zh-Hans": "1.74",
+          "en": "1.74",
+          "ja": "1.74"
+        },
+        "B": {
+          "zh-Hant": "4.17",
+          "zh-Hans": "4.17",
+          "en": "4.17",
+          "ja": "4.17"
+        },
+        "C": {
+          "zh-Hant": "4.71",
+          "zh-Hans": "4.71",
+          "en": "4.71",
+          "ja": "4.71"
+        },
+        "D": {
+          "zh-Hant": "7.14",
+          "zh-Hans": "7.14",
+          "en": "7.14",
+          "ja": "7.14"
+        }
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "arithmetic-grade4-foundation",
+        "notes": "外部題型來源：Math Kangaroo 與教材常見的「數字卡加小數點，排出最接近某數的小數」型。全庫用 最接近 掃過只有 6 筆，最接近的是 mixed_grade5_001（用 1、3、5、7 排兩個兩位數使和最接近 100），那題求的是兩數之和且沒有小數點位置的選擇；arithmetic_grade4_025、arithmetic_grade3_018 是數字卡排極值的整數題。本題的推理點是小數點位置分兩類、先整批排除十位數的一類。"
+      }
     }
   ]
 }

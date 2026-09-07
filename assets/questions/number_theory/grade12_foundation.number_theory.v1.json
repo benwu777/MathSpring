@@ -4178,6 +4178,204 @@
         "reference": "number_theory-grade12-foundation",
         "notes": "題型骨架取自 Utah 數學圈講義 Number Theory 第 8 題所用的「把每個數拆成不含平方因數的部分乘上平方數」分解法，判準改成兩數相乘為完全平方數。已實際讀過 logic_grade8_024（1 到 10 取數保證兩數和為 11）與 logic_grade2_043（10 張卡片保證兩張數字和 11）：這兩題的抽屜是配成定和的數對，抽屜數 5、答案 6；本題的抽屜是無平方核的等價類，抽屜數 11、答案 12。也讀過 logic_grade11_023（1 到 20 選數使任一數都不是另一數的倍數，最多幾個）：該題用奇數部分分組、判準是整除、問最多能選幾個、答案 10，與本題用無平方核分組、判準是乘積為完全平方數、問保證所需的最少個數不同。前兩版的敘述分別踩到「從 1、2、3、⋯、N 這 N 個整數中任意取出」與「有 N 張卡片上面分別寫著 1 到 N」兩個既有模板，第三版改用比賽得獎名單的敘述以避開，同時也離開同批 F_01「挑出一些互不相同的數」的句型。"
       }
+    },
+    {
+      "id": "number_theory_grade12_foundation_043",
+      "reviewStatus": "ok",
+      "topic": "number_theory",
+      "subtopic": "consecutive_integers_with_square_factors",
+      "tags": [
+        "c:factor_multiple",
+        "m:casework",
+        "m:extremal"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "小安想找三個連續的正整數，要求它們每一個都能被某個大於 1 的完全平方數（4、9、16、25、⋯）整除，例如 12 = 4 × 3 與 45 = 9 × 5 都符合這個要求。他從小的數開始一路往上找。求他找到的第一組裡面最小的那個數。",
+        "zh-Hans": "小安想找三个连续的正整数，要求它们每一个都能被某个大于 1 的完全平方数（4、9、16、25、⋯）整除，例如 12 = 4 × 3 与 45 = 9 × 5 都符合这个要求。他从小的数开始一路往上找。求他找到的第一组里面最小的那个数。",
+        "en": "A student looks for three consecutive positive integers such that each of them is divisible by some perfect square greater than 1, such as 4, 9, 16 or 25; for example 12 = 4 × 3 and 45 = 9 × 5 both qualify. Searching upward from the small numbers, what is the smallest member of the first such triple found?",
+        "ja": "連続する 3 つの正の整数で、そのどれもが 1 より大きい平方数（4、9、16、25、⋯）で割り切れるものを探します。たとえば 12 = 4 × 3 や 45 = 9 × 5 は条件を満たす数です。小さい数から順に探していくとき、最初に見つかる 3 つ組のうち最小の数はいくつですか。"
+      },
+      "answer": {
+        "zh-Hant": "最小的 n 是 48。",
+        "zh-Hans": "最小的 n 是 48。",
+        "en": "The smallest n is 48.",
+        "ja": "最小の n は 48 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "先找出最強的限制：三個連續整數之中一定有奇數，而奇數不可能被 4 整除，所以奇數要有平方因數，只能被 9、25、49、⋯ 這些奇數的平方整除。這個條件很難滿足，正是解題的突破口。",
+          "情形一：n 是偶數。這時 n 與 n + 2 都是偶數（比較容易有平方因數 4），中間的 n + 1 是奇數，必須被 9、25、49 之一整除。",
+          "在 50 以下，被奇平方數整除的奇數只有 9、25、27、45、49，所以只需檢查 n + 1 是這五個數的情況。",
+          "n + 1 = 9：n = 8 = 4 × 2 有平方因數，但 n + 2 = 10 = 2 × 5 沒有 ✗。",
+          "n + 1 = 25：n = 24 = 4 × 6 ✓，但 n + 2 = 26 = 2 × 13 ✗。n + 1 = 27：n = 26 = 2 × 13 就已經 ✗。n + 1 = 45：n = 44 = 4 × 11 ✓，但 n + 2 = 46 = 2 × 23 ✗。",
+          "n + 1 = 49：n = 48 = 16 × 3 ✓、n + 1 = 49 = 7² ✓、n + 2 = 50 = 25 × 2 ✓，三個數全部成立。",
+          "情形二：n 是奇數。這時 n 與 n + 2 都是奇數，兩個相差 2 的奇數都必須被奇平方數整除；在 50 以下的候選 9、25、27、45、49 之中，只有 25 與 27 相差 2，但中間的 26 = 2 × 13 沒有平方因數 ✗。",
+          "兩種情形都檢查完，48 以下沒有任何解，所以最小的 n 是 48。"
+        ],
+        "zh-Hans": [
+          "先找出最强的限制：三个连续整数之中一定有奇数，而奇数不可能被 4 整除，所以奇数要有平方因数，只能被 9、25、49、⋯ 这些奇数的平方整除。这个条件很难满足，正是解题的突破口。",
+          "情形一：n 是偶数。这时 n 与 n + 2 都是偶数（比较容易有平方因数 4），中间的 n + 1 是奇数，必须被 9、25、49 之一整除。",
+          "在 50 以下，被奇平方数整除的奇数只有 9、25、27、45、49，所以只需检查 n + 1 是这五个数的情况。",
+          "n + 1 = 9：n = 8 = 4 × 2 有平方因数，但 n + 2 = 10 = 2 × 5 没有 ✗。",
+          "n + 1 = 25：n = 24 = 4 × 6 ✓，但 n + 2 = 26 = 2 × 13 ✗。n + 1 = 27：n = 26 = 2 × 13 就已经 ✗。n + 1 = 45：n = 44 = 4 × 11 ✓，但 n + 2 = 46 = 2 × 23 ✗。",
+          "n + 1 = 49：n = 48 = 16 × 3 ✓、n + 1 = 49 = 7² ✓、n + 2 = 50 = 25 × 2 ✓，三个数全部成立。",
+          "情形二：n 是奇数。这时 n 与 n + 2 都是奇数，两个相差 2 的奇数都必须被奇平方数整除；在 50 以下的候选 9、25、27、45、49 之中，只有 25 与 27 相差 2，但中间的 26 = 2 × 13 没有平方因数 ✗。",
+          "两种情形都检查完，48 以下没有任何解，所以最小的 n 是 48。"
+        ],
+        "en": [
+          "Find the strongest constraint first: among three consecutive integers at least one is odd, and an odd number cannot be divisible by 4, so an odd number with a square factor must be divisible by an odd square such as 9, 25, 49 and so on. That is hard to arrange, and it is the way in.",
+          "Case 1: n is even. Then n and n + 2 are both even, so they can easily pick up the square factor 4, while the middle number n + 1 is odd and must be divisible by 9, 25 or 49.",
+          "Below 50 the odd numbers divisible by an odd square are only 9, 25, 27, 45 and 49, so we only need to test these five values of n + 1.",
+          "n + 1 = 9: n = 8 = 4 × 2 has a square factor, but n + 2 = 10 = 2 × 5 does not.",
+          "n + 1 = 25: n = 24 = 4 × 6 has a square factor but n + 2 = 26 = 2 × 13 does not. n + 1 = 27: n = 26 = 2 × 13 already fails. n + 1 = 45: n = 44 = 4 × 11 works but n + 2 = 46 = 2 × 23 does not.",
+          "n + 1 = 49: here n = 48 = 16 × 3, n + 1 = 49 = 7² and n + 2 = 50 = 25 × 2, so all three have a square factor.",
+          "Case 2: n is odd. Then n and n + 2 are both odd, so two odd numbers two apart must each be divisible by an odd square. Among the candidates 9, 25, 27, 45, 49 below 50, only 25 and 27 differ by 2, and the number between them, 26 = 2 × 13, has no square factor.",
+          "Both cases are now exhausted and nothing below 48 works, so the smallest n is 48."
+        ],
+        "ja": [
+          "まず最も強い制約を見つけます。連続する 3 つの整数には必ず奇数が含まれ、奇数は 4 で割り切れないので、条件を満たす奇数は 9、25、49、⋯ といった奇数の平方で割り切れなければなりません。これは満たしにくい条件で、突破口になります。",
+          "場合 1：n が偶数のとき。n と n + 2 はともに偶数なので平方因数 4 をもちやすく、真ん中の n + 1 は奇数なので 9、25、49 のいずれかで割り切れる必要があります。",
+          "50 以下で奇数の平方に割り切られる奇数は 9、25、27、45、49 だけなので、n + 1 がこの 5 個である場合を調べれば十分です。",
+          "n + 1 = 9 のとき、n = 8 = 4 × 2 は条件を満たしますが、n + 2 = 10 = 2 × 5 は満たしません ✗。",
+          "n + 1 = 25 のとき n = 24 = 4 × 6 ✓ ですが n + 2 = 26 = 2 × 13 ✗。n + 1 = 27 のときは n = 26 = 2 × 13 の時点で ✗。n + 1 = 45 のとき n = 44 = 4 × 11 ✓ ですが n + 2 = 46 = 2 × 23 ✗ です。",
+          "n + 1 = 49 のとき、n = 48 = 16 × 3 ✓、n + 1 = 49 = 7² ✓、n + 2 = 50 = 25 × 2 ✓ となり、3 つすべてが条件を満たします。",
+          "場合 2：n が奇数のとき。n と n + 2 はともに奇数なので、2 だけ離れた 2 つの奇数がどちらも奇数の平方で割り切れる必要があります。50 以下の候補 9、25、27、45、49 のうち差が 2 なのは 25 と 27 だけですが、間の 26 = 2 × 13 には平方因数がありません ✗。",
+          "両方の場合を調べ尽くしても 48 未満に解はないので、最小の n は 48 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "48"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "number-theory-grade12-foundation",
+        "notes": "題型取自 Wikipedia「Square-free integer」條目提到的『連續非無平方因數的數』（OEIS A045882 的最小值 48），改寫成國中高年級可以手算的分類討論題。去重：全庫用「平方因數|完全平方數整除」掃出 4 題。number_theory_grade10_018（1 到 300 的無平方因數的數有幾個）與 number_theory_grade10_032（1 到 100 蓋章）都是排容原理的計數；number_theory_grade12_042 是用無平方因數核心做鴿籠。本題不做計數也不用鴿籠，而是用奇數不能被 4 整除這個限制把搜尋範圍壓到五個候選再逐一檢查，答案是一個具體的最小值。"
+      }
+    },
+    {
+      "id": "number_theory_grade12_foundation_044",
+      "reviewStatus": "ok",
+      "topic": "number_theory",
+      "subtopic": "totient_equals_eight_count",
+      "tags": [
+        "c:factor_multiple",
+        "c:basic_counting",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "設 n 是正整數，φ(n) 代表 1、2、⋯、n 這 n 個數之中與 n 互質的有幾個，例如 φ(10) = 4。解題時可以使用下列兩個性質：當 m 與 k 互質時 φ(mk) = φ(m) × φ(k)；當 p 是質數時 φ(p) = p − 1 且 φ(p²) = p(p − 1)。若 φ(n) = 8，這樣的正整數 n 有幾個？",
+        "zh-Hans": "设 n 是正整数，φ(n) 代表 1、2、⋯、n 这 n 个数之中与 n 互质的有几个，例如 φ(10) = 4。解题时可以使用下列两个性质：当 m 与 k 互质时 φ(mk) = φ(m) × φ(k)；当 p 是质数时 φ(p) = p − 1 且 φ(p²) = p(p − 1)。若 φ(n) = 8，这样的正整数 n 有几个？",
+        "en": "For a positive integer n, let φ(n) count how many of the n numbers 1, 2, ... , n are coprime to n; for instance φ(10) = 4. You may use two properties: φ(mk) = φ(m) × φ(k) whenever m and k are coprime, and φ(p) = p − 1 with φ(p²) = p(p − 1) whenever p is prime. If φ(n) = 8, how many such positive integers n are there?",
+        "ja": "正の整数 n に対して、φ(n) は 1、2、⋯、n の n 個の数のうち n と互いに素なものの個数を表します（たとえば φ(10) = 4）。解答では次の 2 つの性質を用いてよいものとします。m と k が互いに素なら φ(mk) = φ(m) × φ(k)、p が素数なら φ(p) = p − 1 かつ φ(p²) = p(p − 1)。φ(n) = 8 となる正の整数 n は何個ありますか。"
+      },
+      "options": {
+        "A": {
+          "zh-Hant": "3 個",
+          "zh-Hans": "3 个",
+          "en": "3",
+          "ja": "3 個"
+        },
+        "B": {
+          "zh-Hant": "4 個",
+          "zh-Hans": "4 个",
+          "en": "4",
+          "ja": "4 個"
+        },
+        "C": {
+          "zh-Hant": "5 個",
+          "zh-Hans": "5 个",
+          "en": "5",
+          "ja": "5 個"
+        },
+        "D": {
+          "zh-Hant": "6 個",
+          "zh-Hans": "6 个",
+          "en": "6",
+          "ja": "6 個"
+        }
+      },
+      "answer": {
+        "zh-Hant": "滿足 φ(n) = 8 的 n 共有 5 個，分別是 15、16、20、24、30。",
+        "zh-Hans": "满足 φ(n) = 8 的 n 共有 5 个，分别是 15、16、20、24、30。",
+        "en": "There are 5 such integers: 15, 16, 20, 24 and 30.",
+        "ja": "φ(n) = 8 を満たす n は 15、16、20、24、30 の 5 個です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "先限制 n 可以有哪些質因數。若質數 p 整除 n，把 n 寫成 p 的次方乘上與 p 互質的部分，用兩個性質展開後可以看出 φ(n) 一定是 p − 1 的倍數。",
+          "因為 φ(n) = 8，所以每個質因數 p 都要滿足「p − 1 整除 8」，也就是 p − 1 是 1、2、4 或 8。對應的 p 是 2、3、5、9，其中 9 不是質數，所以質因數只能是 2、3、5。",
+          "於是 n 一定寫得成 2^a × 3^b × 5^c 的形式。再看指數：若 9 整除 n，φ(n) 會含有因數 3，與 8 矛盾，所以 b ≤ 1；若 25 整除 n，φ(n) 會含有因數 5，同樣矛盾，所以 c ≤ 1。",
+          "情形一：n 只有質因數 2。此時 φ(n) = 2^a − 2^(a−1) = 2^(a−1) = 8，得 a = 4，n = 16。",
+          "情形二：n 含 3 但不含 5。此時 φ(n) = φ(2^a) × φ(3) = φ(2^a) × 2 = 8，需要 φ(2^a) = 4，只有 2^a = 8，所以 n = 8 × 3 = 24。",
+          "情形三：n 含 5 但不含 3。此時 φ(n) = φ(2^a) × 4 = 8，需要 φ(2^a) = 2，只有 2^a = 4，所以 n = 4 × 5 = 20。",
+          "情形四：n 同時含 3 與 5。此時 φ(n) = φ(2^a) × 2 × 4 = 8，需要 φ(2^a) = 1，也就是 a = 0 或 a = 1，得 n = 15 或 n = 30。",
+          "四種情形合起來，解是 15、16、20、24、30，共 5 個。驗算：φ(15) = 8、φ(16) = 8、φ(20) = 8、φ(24) = 8、φ(30) = 8 ✓。"
+        ],
+        "zh-Hans": [
+          "先限制 n 可以有哪些质因数。若质数 p 整除 n，把 n 写成 p 的次方乘上与 p 互质的部分，用两个性质展开后可以看出 φ(n) 一定是 p − 1 的倍数。",
+          "因为 φ(n) = 8，所以每个质因数 p 都要满足「p − 1 整除 8」，也就是 p − 1 是 1、2、4 或 8。对应的 p 是 2、3、5、9，其中 9 不是质数，所以质因数只能是 2、3、5。",
+          "于是 n 一定写得成 2^a × 3^b × 5^c 的形式。再看指数：若 9 整除 n，φ(n) 会含有因数 3，与 8 矛盾，所以 b ≤ 1；若 25 整除 n，φ(n) 会含有因数 5，同样矛盾，所以 c ≤ 1。",
+          "情形一：n 只有质因数 2。此时 φ(n) = 2^a − 2^(a−1) = 2^(a−1) = 8，得 a = 4，n = 16。",
+          "情形二：n 含 3 但不含 5。此时 φ(n) = φ(2^a) × φ(3) = φ(2^a) × 2 = 8，需要 φ(2^a) = 4，只有 2^a = 8，所以 n = 8 × 3 = 24。",
+          "情形三：n 含 5 但不含 3。此时 φ(n) = φ(2^a) × 4 = 8，需要 φ(2^a) = 2，只有 2^a = 4，所以 n = 4 × 5 = 20。",
+          "情形四：n 同时含 3 与 5。此时 φ(n) = φ(2^a) × 2 × 4 = 8，需要 φ(2^a) = 1，也就是 a = 0 或 a = 1，得 n = 15 或 n = 30。",
+          "四种情形合起来，解是 15、16、20、24、30，共 5 个。验算：φ(15) = 8、φ(16) = 8、φ(20) = 8、φ(24) = 8、φ(30) = 8 ✓。"
+        ],
+        "en": [
+          "First restrict which primes can divide n. If a prime p divides n, write n as a power of p times a part coprime to p; expanding with the two given properties shows that φ(n) is always a multiple of p − 1.",
+          "Since φ(n) = 8, every prime factor p must satisfy p − 1 divides 8, so p − 1 is 1, 2, 4 or 8. That gives p = 2, 3, 5 or 9, and 9 is not prime, so the only possible prime factors are 2, 3 and 5.",
+          "Hence n must have the form 2^a × 3^b × 5^c. Now bound the exponents: if 9 divides n then φ(n) has a factor 3, contradicting 8, so b is at most 1; if 25 divides n then φ(n) has a factor 5, again a contradiction, so c is at most 1.",
+          "Case 1: n has only the prime factor 2. Then φ(n) = 2^a − 2^(a−1) = 2^(a−1) = 8, so a = 4 and n = 16.",
+          "Case 2: n contains 3 but not 5. Then φ(n) = φ(2^a) × φ(3) = φ(2^a) × 2 = 8, so φ(2^a) = 4, which forces 2^a = 8 and n = 8 × 3 = 24.",
+          "Case 3: n contains 5 but not 3. Then φ(n) = φ(2^a) × 4 = 8, so φ(2^a) = 2, which forces 2^a = 4 and n = 4 × 5 = 20.",
+          "Case 4: n contains both 3 and 5. Then φ(n) = φ(2^a) × 2 × 4 = 8, so φ(2^a) = 1, meaning a = 0 or a = 1, giving n = 15 or n = 30.",
+          "Putting the four cases together, the solutions are 15, 16, 20, 24 and 30, which is 5 numbers. Check: φ(15) = 8, φ(16) = 8, φ(20) = 8, φ(24) = 8 and φ(30) = 8."
+        ],
+        "ja": [
+          "まず n がもてる素因数を絞ります。素数 p が n を割り切るとき、n を p のべき乗と p に互いに素な部分の積と書き、与えられた 2 つの性質で展開すると、φ(n) は必ず p − 1 の倍数になることがわかります。",
+          "φ(n) = 8 なので、各素因数 p は「p − 1 が 8 を割り切る」を満たす必要があり、p − 1 は 1、2、4、8 のいずれかです。対応する p は 2、3、5、9 ですが 9 は素数でないので、素因数は 2、3、5 に限られます。",
+          "したがって n は 2^a × 3^b × 5^c の形になります。指数も絞ります。9 が n を割り切ると φ(n) が因数 3 をもち 8 と矛盾するので b ≤ 1、25 が n を割り切ると φ(n) が因数 5 をもち同様に矛盾するので c ≤ 1 です。",
+          "場合 1：n の素因数が 2 だけのとき。φ(n) = 2^a − 2^(a−1) = 2^(a−1) = 8 より a = 4、n = 16 です。",
+          "場合 2：n が 3 を含み 5 を含まないとき。φ(n) = φ(2^a) × φ(3) = φ(2^a) × 2 = 8 より φ(2^a) = 4 が必要で、2^a = 8 に限られ n = 8 × 3 = 24 です。",
+          "場合 3：n が 5 を含み 3 を含まないとき。φ(n) = φ(2^a) × 4 = 8 より φ(2^a) = 2 が必要で、2^a = 4 に限られ n = 4 × 5 = 20 です。",
+          "場合 4：n が 3 と 5 の両方を含むとき。φ(n) = φ(2^a) × 2 × 4 = 8 より φ(2^a) = 1、すなわち a = 0 または a = 1 となり、n = 15 または n = 30 です。",
+          "4 つの場合を合わせると解は 15、16、20、24、30 の 5 個です。検算：φ(15) = 8、φ(16) = 8、φ(20) = 8、φ(24) = 8、φ(30) = 8 ✓。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "multiple_choice",
+      "correctAnswer": {
+        "type": "choice",
+        "value": "C"
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "number-theory-grade12-foundation",
+        "notes": "題型取自 Wikipedia「Euler's totient function」條目中的 inverse totient（給定 φ 的值反求 n）一節，把它縮小到 φ(n) = 8 這個手算可完成的規模。去重：全庫用「互質|φ」掃出 41 題並逐一檢視。number_theory_grade9_016（與 100 互質的座號個數）、number_theory_grade11_033（與 36 互質的數有幾個）、number_theory_grade7_023（與 12 互質）都是給定 n 算 φ(n)，是正推；number_theory_grade12_020 是求 φ 在因數上的和。本題是反推：由 φ(n) = 8 先用「p − 1 整除 8」把質因數鎖成 2、3、5，再分四種情形枚舉，推理方向與工具都不同。"
+      }
     }
   ]
 }
