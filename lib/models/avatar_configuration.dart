@@ -21,7 +21,7 @@ class AvatarConfiguration {
   final String noseId;
   final String mouthId;
 
-  /// 眼珠顏色。與 [eyesId]（眼型）正交：同一個眼型可以配任何顏色。
+  /// 舊版儲存的眼珠顏色。保留欄位以讀取既有帳號，但不再用於顯示或編輯。
   final String eyeColorId;
 
   /// 臉上的配件（眼鏡／墨鏡）。`accessory_none` 代表不戴。
@@ -133,8 +133,8 @@ class AvatarConfiguration {
     },
   };
 
-  /// 眼珠顏色與配件不分男女，兩種造型共用同一組選項。
-  static const List<String> _eyeColorOptions = <String>[
+  /// 舊版眼色值，以便從既有帳號資料恢復設定。
+  static const List<String> _legacyEyeColorIds = <String>[
     'eye_color_01', // 深褐
     'eye_color_02', // 淺褐
     'eye_color_03', // 琥珀
@@ -151,13 +151,14 @@ class AvatarConfiguration {
 
   static List<String> optionsFor(
       AvatarPresentation presentation, String category) {
-    if (category == 'eyeColor') {
-      return List<String>.unmodifiable(_eyeColorOptions);
-    }
     if (category == 'accessory') {
       return List<String>.unmodifiable(_accessoryOptions);
     }
-    return List<String>.unmodifiable(_options[presentation]![category]!);
+    final List<String>? options = _options[presentation]![category];
+    if (options == null) {
+      throw ArgumentError.value(category, 'category', 'Unknown avatar option');
+    }
+    return List<String>.unmodifiable(options);
   }
 
   factory AvatarConfiguration.defaultFor(AvatarPresentation presentation) {
@@ -169,7 +170,7 @@ class AvatarConfiguration {
       eyesId: optionsFor(presentation, 'eyes').first,
       noseId: optionsFor(presentation, 'nose').first,
       mouthId: optionsFor(presentation, 'mouth').first,
-      eyeColorId: optionsFor(presentation, 'eyeColor').first,
+      eyeColorId: 'eye_color_01',
       accessoryId: optionsFor(presentation, 'accessory').first,
     );
   }
@@ -192,9 +193,16 @@ class AvatarConfiguration {
       eyesId: resolved('eyes', 'avatar_eyes_id'),
       noseId: resolved('nose', 'avatar_nose_id'),
       mouthId: resolved('mouth', 'avatar_mouth_id'),
-      eyeColorId: resolved('eyeColor', 'avatar_eye_color_id'),
+      eyeColorId: _resolvedLegacyEyeColor(map['avatar_eye_color_id']),
       accessoryId: resolved('accessory', 'avatar_accessory_id'),
     );
+  }
+
+  static String _resolvedLegacyEyeColor(Object? value) {
+    final String candidate = value as String? ?? '';
+    return _legacyEyeColorIds.contains(candidate)
+        ? candidate
+        : _legacyEyeColorIds.first;
   }
 
   AvatarConfiguration copyWith({

@@ -138,6 +138,32 @@ void main() {
     expect(assets.noseTint, assets.skinTint);
   });
 
+  testWidgets(
+      'applies skin colour only to skin layers, not a persisted eye colour',
+      (WidgetTester tester) async {
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Scaffold(
+          body: AvatarPreview(
+            configuration: AvatarConfiguration.defaultFor(
+              AvatarPresentation.girl,
+            ).copyWith(
+              skinId: 'girl_skin_04',
+              eyeColorId: 'eye_color_04',
+              accessoryId: 'accessory_glasses_01',
+            ),
+          ),
+        ),
+      ),
+    );
+
+    expect(
+      find.byType(ColorFiltered),
+      findsNWidgets(2),
+      reason: '只有臉部與鼻子皮膚圖層可以套用膚色濾鏡',
+    );
+  });
+
   test('resolves the accepted boy toothy-smile mouth', () {
     const AvatarConfiguration toothySmile = AvatarConfiguration(
       presentation: AvatarPresentation.boy,

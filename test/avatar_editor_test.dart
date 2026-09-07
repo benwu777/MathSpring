@@ -81,17 +81,13 @@ void main() {
           .crossAxisCount;
     }
 
-    // 步驟：3 髮型 → 4 眼型 → 5 眼色 → 6 鼻 → 7 嘴 → 8 眼鏡
+    // 步驟：3 髮型 → 4 眼型 → 5 鼻 → 6 嘴 → 7 眼鏡
     await advanceTo(3);
     expect(columnCount(), 3, reason: '髮型');
 
     await tester.tap(find.byKey(const ValueKey<String>('avatar_next_button')));
     await tester.pump();
     expect(columnCount(), 4, reason: '眼型');
-
-    await tester.tap(find.byKey(const ValueKey<String>('avatar_next_button')));
-    await tester.pump();
-    expect(columnCount(), 4, reason: '眼色');
 
     await tester.tap(find.byKey(const ValueKey<String>('avatar_next_button')));
     await tester.pump();
@@ -106,13 +102,31 @@ void main() {
     expect(columnCount(), 4, reason: '眼鏡');
   });
 
+  testWidgets('does not offer eye colour as an avatar editor step',
+      (tester) async {
+    await tester.pumpWidget(
+      const MaterialApp(home: Scaffold(body: AvatarEditor())),
+    );
+
+    for (int step = 0; step < 4; step++) {
+      await tester
+          .tap(find.byKey(const ValueKey<String>('avatar_next_button')));
+      await tester.pump();
+    }
+    expect(find.text('Eyes'), findsOneWidget);
+
+    await tester.tap(find.byKey(const ValueKey<String>('avatar_next_button')));
+    await tester.pump();
+    expect(find.text('Nose'), findsOneWidget);
+    expect(find.text('Eye colour'), findsNothing);
+  });
+
   testWidgets('zooms mouth art inside its compact option tile', (tester) async {
     await tester.pumpWidget(
       const MaterialApp(home: Scaffold(body: AvatarEditor())),
     );
 
-    // 插入「眼色」步驟後，嘴巴從第 6 步移到第 7 步。
-    for (int step = 0; step < 7; step++) {
+    for (int step = 0; step < 6; step++) {
       await tester
           .tap(find.byKey(const ValueKey<String>('avatar_next_button')));
       await tester.pump();
@@ -168,7 +182,6 @@ void main() {
         'face',
         'hair',
         'eyes',
-        'eyeColor',
         'nose',
         'mouth',
         'accessory',

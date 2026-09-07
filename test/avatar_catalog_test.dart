@@ -137,4 +137,21 @@ void main() {
     expect(restored.faceId,
         AvatarCatalog.defaultFor(AvatarPresentation.boy).faceId);
   });
+
+  test('keeps a persisted eye colour for compatibility without exposing it',
+      () {
+    final AvatarConfiguration restored = AvatarConfiguration.fromMap(
+      const <String, Object?>{
+        'avatar_presentation': 'girl',
+        'avatar_eye_color_id': 'eye_color_04',
+      },
+    );
+
+    expect(restored.eyeColorId, 'eye_color_04');
+    expect(
+      () => AvatarConfiguration.optionsFor(AvatarPresentation.girl, 'eyeColor'),
+      throwsArgumentError,
+      reason: '眼色不再是可供編輯的紙娃娃選項',
+    );
+  });
 }

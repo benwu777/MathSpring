@@ -49,25 +49,7 @@ class AvatarPreview extends StatelessWidget {
                   key: const ValueKey<String>('avatar_eyes_layer'),
                   scaleX: assets.eyesScaleX,
                   scaleY: assets.eyesScaleY,
-                  child: assets.eyeTint == null
-                      ? _layer(path, offsetY: assets.eyesOffsetY)
-                      : Stack(
-                          fit: StackFit.expand,
-                          children: <Widget>[
-                            _layer(path, offsetY: assets.eyesOffsetY),
-                            Opacity(
-                              opacity: AvatarAssetCatalog.eyeTintStrength,
-                              child: ColorFiltered(
-                                colorFilter: ColorFilter.mode(
-                                  assets.eyeTint!,
-                                  BlendMode.color,
-                                ),
-                                child:
-                                    _layer(path, offsetY: assets.eyesOffsetY),
-                              ),
-                            ),
-                          ],
-                        ),
+                  child: _layer(path, offsetY: assets.eyesOffsetY),
                 ),
               if (assets.noseAsset case final String path)
                 Transform.scale(

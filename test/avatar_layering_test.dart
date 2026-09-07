@@ -22,17 +22,21 @@ void main() {
       );
 
   group('圖層堆疊順序', () {
-    testWidgets('後層頭髮畫在臉之前，前層頭髮畫在臉之後',
-        (WidgetTester tester) async {
+    testWidgets('後層頭髮畫在臉之前，前層頭髮畫在臉之後', (WidgetTester tester) async {
       await tester.pumpWidget(
-        MaterialApp(home: Scaffold(body: AvatarPreview(configuration: girl(hair: 'girl_hair_06')))),
+        MaterialApp(
+            home: Scaffold(
+                body:
+                    AvatarPreview(configuration: girl(hair: 'girl_hair_06')))),
       );
 
       final Stack stack = tester.widget<Stack>(
-        find.descendant(
-          of: find.byKey(const ValueKey<String>('avatar_preview')),
-          matching: find.byType(Stack),
-        ).first,
+        find
+            .descendant(
+              of: find.byKey(const ValueKey<String>('avatar_preview')),
+              matching: find.byType(Stack),
+            )
+            .first,
       );
       final List<Key?> keys = stack.children.map((Widget w) => w.key).toList();
 
@@ -54,8 +58,7 @@ void main() {
   group('資產解析', () {
     test('每個髮型都要能查到前層，後層可以為 null', () {
       for (final AvatarPresentation p in AvatarPresentation.values) {
-        for (final String hair
-            in AvatarConfiguration.optionsFor(p, 'hair')) {
+        for (final String hair in AvatarConfiguration.optionsFor(p, 'hair')) {
           final AvatarAssetBundle b = AvatarAssetCatalog.resolve(
             AvatarConfiguration.defaultFor(p).copyWith(hairId: hair),
           );
@@ -79,12 +82,10 @@ void main() {
       final List<String> options =
           AvatarConfiguration.optionsFor(AvatarPresentation.girl, 'accessory');
       expect(options.first, 'accessory_none');
-      expect(options.length, greaterThanOrEqualTo(3),
-          reason: '至少要有：不戴、眼鏡、墨鏡');
+      expect(options.length, greaterThanOrEqualTo(3), reason: '至少要有：不戴、眼鏡、墨鏡');
     });
 
-    testWidgets('選了眼鏡時畫面上要有配件圖層，選「不戴」時沒有',
-        (WidgetTester tester) async {
+    testWidgets('選了眼鏡時畫面上要有配件圖層，選「不戴」時沒有', (WidgetTester tester) async {
       final AvatarConfiguration withGlasses =
           girl().copyWith(accessoryId: 'accessory_glasses_01');
       await tester.pumpWidget(
@@ -115,8 +116,7 @@ void main() {
       ];
       final List<double> lums = <double>[
         for (final Color c in tints)
-          if (c.a > 0)
-            (0.299 * c.r + 0.587 * c.g + 0.114 * c.b) * 255 * c.a,
+          if (c.a > 0) (0.299 * c.r + 0.587 * c.g + 0.114 * c.b) * 255 * c.a,
       ];
       lums.sort();
       expect(lums.length, greaterThanOrEqualTo(4));
@@ -124,19 +124,14 @@ void main() {
           reason: '最淺與最深的膚色差距太小，看起來會像同一個顏色');
     });
 
-    test('眼色是獨立維度，且至少有三種可辨識的顏色', () {
-      final List<String> options =
-          AvatarConfiguration.optionsFor(AvatarPresentation.girl, 'eyeColor');
-      expect(options.length, greaterThanOrEqualTo(3));
-      final Set<int> colors = <int>{
-        for (final String id in options)
-          AvatarAssetCatalog.resolve(
-                AvatarConfiguration.defaultFor(AvatarPresentation.girl)
-                    .copyWith(eyeColorId: id),
-              ).eyeTint?.toARGB32() ??
-              0,
-      };
-      expect(colors.length, options.length, reason: '眼色不可重複');
+    test('眼色不再是可選的造型維度', () {
+      expect(
+        () => AvatarConfiguration.optionsFor(
+          AvatarPresentation.girl,
+          'eyeColor',
+        ),
+        throwsArgumentError,
+      );
     });
   });
 }
