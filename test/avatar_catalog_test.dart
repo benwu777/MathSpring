@@ -1,5 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mathspring/models/avatar_configuration.dart';
+import 'package:mathspring/services/avatar_asset_catalog.dart';
 import 'package:mathspring/services/avatar_catalog.dart';
 
 void main() {
@@ -153,5 +154,27 @@ void main() {
       throwsArgumentError,
       reason: '眼色不再是可供編輯的紙娃娃選項',
     );
+  });
+
+  test('keeps the four redesigned boy hair layers safely aligned', () {
+    for (final String hairId in <String>[
+      'boy_hair_06',
+      'boy_hair_07',
+      'boy_hair_08',
+      'boy_hair_09',
+    ]) {
+      final AvatarAssetBundle assets = AvatarAssetCatalog.resolve(
+        AvatarConfiguration.defaultFor(AvatarPresentation.boy).copyWith(
+          hairId: hairId,
+        ),
+      );
+
+      expect(assets.hairOffsetY, 0,
+          reason: '$hairId must not use the old upward hair correction');
+      expect(assets.hairScale, 1,
+          reason: '$hairId is safely positioned within its own canvas');
+      expect(assets.hairScaleX, 1,
+          reason: '$hairId must not inherit a mirrored legacy parting');
+    }
   });
 }
