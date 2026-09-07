@@ -13,6 +13,7 @@ import 'package:mathspring/models/question_progress.dart';
 import 'package:mathspring/models/session_answer_record.dart';
 import 'package:mathspring/services/session_launch_plan_builder.dart';
 import 'package:mathspring/services/formal_exam_preset.dart';
+import 'package:mathspring/widgets/avatar_preview.dart';
 
 void main() {
   tearDown(() {
@@ -672,8 +673,7 @@ void main() {
     expect(find.text('Logic'), findsNothing);
   });
 
-  testWidgets('app 的字級跟著寬度級別走，不是固定一套手機值',
-      (WidgetTester tester) async {
+  testWidgets('app 的字級跟著寬度級別走，不是固定一套手機值', (WidgetTester tester) async {
     // iPad 不該是放大的 iPhone：TextTheme 由 LayoutSpec 依寬度產生，
     // 已經在用 Theme.of(context).textTheme 的畫面因此自動縮放。
     final TestWidgetsFlutterBinding binding =
@@ -781,6 +781,44 @@ void main() {
         findsOneWidget);
     expect(find.byKey(const ValueKey<String>('profile_tile_learner_allen')),
         findsOneWidget);
+  });
+
+  testWidgets('home shell shows bounded current learner identity',
+      (WidgetTester tester) async {
+    final TestWidgetsFlutterBinding binding =
+        TestWidgetsFlutterBinding.ensureInitialized();
+    binding.platformDispatcher.localeTestValue = const Locale('en');
+
+    await pumpApp(tester, createTestServices(), size: const Size(320, 844));
+
+    final Finder identity =
+        find.byKey(const ValueKey<String>('current_learner_identity'));
+    expect(identity, findsOneWidget);
+    expect(find.descendant(of: identity, matching: find.text('Allen')),
+        findsOneWidget);
+    expect(find.descendant(of: identity, matching: find.text('Grades 3-4')),
+        findsOneWidget);
+    expect(find.descendant(of: identity, matching: find.byType(AvatarPreview)),
+        findsOneWidget);
+    expect(tester.takeException(), isNull);
+  });
+
+  testWidgets('home shell hides current learner identity without a learner',
+      (WidgetTester tester) async {
+    final TestWidgetsFlutterBinding binding =
+        TestWidgetsFlutterBinding.ensureInitialized();
+    binding.platformDispatcher.localeTestValue = const Locale('en');
+
+    final AppServices services = AppServices.forTesting(
+      learnerProfiles: const <LearnerProfile>[],
+      currentLearnerId: '',
+    )..currentLearnerId = null;
+    await pumpApp(tester, services);
+
+    expect(
+      find.byKey(const ValueKey<String>('current_learner_identity')),
+      findsNothing,
+    );
   });
 
   testWidgets('question pages use refreshed study card styling',
@@ -2697,7 +2735,9 @@ void main() {
       },
       'solutionSteps': {
         'zh-Hant': ['2520 = 2³ × 3² × 5 × 7，共有 **4** 個不同的質因數。'],
-        'en': ['2520 = 2³ × 3² × 5 × 7, so it has **4** distinct prime factors.'],
+        'en': [
+          '2520 = 2³ × 3² × 5 × 7, so it has **4** distinct prime factors.'
+        ],
       },
       'figure': {
         'type': 'custom',
@@ -2721,7 +2761,8 @@ void main() {
     });
   }
 
-  testWidgets('question prompts render bold markers instead of showing asterisks',
+  testWidgets(
+      'question prompts render bold markers instead of showing asterisks',
       (WidgetTester tester) async {
     final TestWidgetsFlutterBinding binding =
         TestWidgetsFlutterBinding.ensureInitialized();
@@ -2788,8 +2829,7 @@ void main() {
     expect(boldWeight!.value, greaterThan(plainWeight!.value));
   });
 
-  testWidgets('選項裡的根號會原樣顯示在畫面上，而且不會被排版擠掉',
-      (WidgetTester tester) async {
+  testWidgets('選項裡的根號會原樣顯示在畫面上，而且不會被排版擠掉', (WidgetTester tester) async {
     // 題幹與詳解用 √ 的有一百多題，但選項裡出現 √ 是後來才有的事，
     // 一直只從程式碼確認過「選項與題幹走同一條 normalizeMathText 路徑」，
     // 沒有真的把畫面渲染出來看過。這題有 5 個選項，全部帶根號或分數，
@@ -2804,8 +2844,8 @@ void main() {
       final QuestionBank pack = await BundledQuestionBankRepository().loadPack(
         'assets/questions/geometry/grade11_foundation.geometry.v1.json',
       );
-      question = pack.questions
-          .firstWhere((Question q) => q.id == 'geometry_grade11_foundation_007');
+      question = pack.questions.firstWhere(
+          (Question q) => q.id == 'geometry_grade11_foundation_007');
     });
 
     await tester.binding.setSurfaceSize(const Size(430, 932));
