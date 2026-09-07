@@ -1946,7 +1946,11 @@ void main() {
     );
 
     expect(grade12TrapezoidLineQuestion.figure.kind, 'geometry_scene');
-    expect(grade12TrapezoidDiagonalQuestion.figure.kind, 'geometry_scene');
+
+    // 2026-09-08：_003 的圖被移除了。題目要求 BC = CD，但圖上兩邊長分別是
+    // 4.472 與 6.000，與題幹條件矛盾——這是 scripts/check_figure_matches_prompt.py
+    // 抓到的。梯形的形狀由題幹文字已能確定，寧缺勿濫先不畫圖。
+    expect(grade12TrapezoidDiagonalQuestion.figure.kind, 'none');
   });
 
   test('number theory packs include rewritten public competition sources',
