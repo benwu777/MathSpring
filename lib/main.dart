@@ -27,7 +27,8 @@ import 'package:mathspring/ui/layout_spec.dart';
 import 'package:mathspring/widgets/avatar_editor.dart';
 import 'package:mathspring/widgets/avatar_preview.dart';
 
-const String appSupportUrl = 'https://benwu777.github.io/MathSpring/support/';
+const String appSupportUrl =
+    'https://benwu777.github.io/MathSpring/support/';
 const String appPrivacyPolicyUrl =
     'https://benwu777.github.io/MathSpring/privacy/';
 
@@ -426,52 +427,52 @@ class _MathSpringHomePageState extends State<MathSpringHomePage> {
           return Padding(
             padding: EdgeInsets.fromLTRB(side, 0, side, 14),
             child: DecoratedBox(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(26),
-                boxShadow: const [
-                  BoxShadow(
-                    color: Color(0x120F172A),
-                    blurRadius: 24,
-                    offset: Offset(0, 10),
-                  ),
-                ],
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(26),
+            boxShadow: const [
+              BoxShadow(
+                color: Color(0x120F172A),
+                blurRadius: 24,
+                offset: Offset(0, 10),
               ),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(26),
-                child: NavigationBar(
-                  backgroundColor: const Color(0xFFFDFDFE),
-                  indicatorColor: const Color(0xFFE7EEF9),
-                  selectedIndex: _currentTab.index,
-                  onDestinationSelected: (index) {
-                    setState(() {
-                      _currentTab = _HomeTab.values[index];
-                    });
-                  },
-                  destinations: [
-                    NavigationDestination(
-                      icon: const Icon(Icons.play_circle_outline),
-                      selectedIcon: const Icon(Icons.play_circle_fill),
-                      label: strings.navPractice,
-                    ),
-                    NavigationDestination(
-                      icon: const Icon(Icons.fact_check_outlined),
-                      selectedIcon: const Icon(Icons.fact_check),
-                      label: strings.navQuiz,
-                    ),
-                    NavigationDestination(
-                      icon: const Icon(Icons.history_edu_outlined),
-                      selectedIcon: const Icon(Icons.history_edu),
-                      label: strings.navReview,
-                    ),
-                    NavigationDestination(
-                      icon: const Icon(Icons.settings_outlined),
-                      selectedIcon: const Icon(Icons.settings),
-                      label: strings.navSettings,
-                    ),
-                  ],
+            ],
+          ),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(26),
+            child: NavigationBar(
+              backgroundColor: const Color(0xFFFDFDFE),
+              indicatorColor: const Color(0xFFE7EEF9),
+              selectedIndex: _currentTab.index,
+              onDestinationSelected: (index) {
+                setState(() {
+                  _currentTab = _HomeTab.values[index];
+                });
+              },
+              destinations: [
+                NavigationDestination(
+                  icon: const Icon(Icons.play_circle_outline),
+                  selectedIcon: const Icon(Icons.play_circle_fill),
+                  label: strings.navPractice,
                 ),
-              ),
+                NavigationDestination(
+                  icon: const Icon(Icons.fact_check_outlined),
+                  selectedIcon: const Icon(Icons.fact_check),
+                  label: strings.navQuiz,
+                ),
+                NavigationDestination(
+                  icon: const Icon(Icons.history_edu_outlined),
+                  selectedIcon: const Icon(Icons.history_edu),
+                  label: strings.navReview,
+                ),
+                NavigationDestination(
+                  icon: const Icon(Icons.settings_outlined),
+                  selectedIcon: const Icon(Icons.settings),
+                  label: strings.navSettings,
+                ),
+              ],
             ),
+          ),
+          ),
           );
         },
       ),
@@ -540,18 +541,18 @@ class _HomeShellFrame extends StatelessWidget {
             child: ContentScrollView(
               fill: true,
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  _TopBar(
-                    title: 'MathSpring',
-                    learner: learner,
-                  ),
-                  const SizedBox(height: 18),
-                  Expanded(child: child),
-                ],
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    _TopBar(
+                      title: 'MathSpring',
+                      learner: learner,
+                    ),
+                    const SizedBox(height: 18),
+                    Expanded(child: child),
+                  ],
+                ),
               ),
             ),
-          ),
         ],
       ),
     );
@@ -772,33 +773,33 @@ class _DailyMissionLanding extends StatelessWidget {
         // 撐滿剩餘高度，首頁在 iPad 上不會只佔上方一小塊
         Expanded(
           child: _SectionCard(
-            title: '今天的任務',
-            subtitle: '一般練習作答五題即可完成，不限答對或答錯。',
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  '${progress.answeredCount} / ${progress.targetCount}',
-                  style: Theme.of(context).textTheme.displaySmall,
+          title: '今天的任務',
+          subtitle: '一般練習作答五題即可完成，不限答對或答錯。',
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                '${progress.answeredCount} / ${progress.targetCount}',
+                style: Theme.of(context).textTheme.displaySmall,
+              ),
+              const SizedBox(height: 18),
+              FilledButton(
+                key: const ValueKey<String>('start_daily_mission'),
+                onPressed: onStart,
+                style: FilledButton.styleFrom(
+                  backgroundColor: const Color(0xFF111827),
+                  minimumSize: const Size.fromHeight(54),
                 ),
-                const SizedBox(height: 18),
-                FilledButton(
-                  key: const ValueKey<String>('start_daily_mission'),
-                  onPressed: onStart,
-                  style: FilledButton.styleFrom(
-                    backgroundColor: const Color(0xFF111827),
-                    minimumSize: const Size.fromHeight(54),
-                  ),
-                  child: const Text('開始今日任務'),
-                ),
-                const SizedBox(height: 10),
-                TextButton(
-                  key: const ValueKey<String>('open_regular_practice'),
-                  onPressed: onOpenPractice,
-                  child: const Text('仍要自由練習？從這裡開始'),
-                ),
-              ],
-            ),
+                child: const Text('開始今日任務'),
+              ),
+              const SizedBox(height: 10),
+              TextButton(
+                key: const ValueKey<String>('open_regular_practice'),
+                onPressed: onOpenPractice,
+                child: const Text('仍要自由練習？從這裡開始'),
+              ),
+            ],
+          ),
           ),
         ),
       ],
@@ -1160,8 +1161,8 @@ List<Widget> _buildCalendarRows({
           DateTime(month.year, month.month, index - leadingEmptyCells + 1);
       final LearningDaySummary daySummary = summary.dayFor(day);
       final bool practiced = daySummary.questionCount > 0;
-      final bool selected =
-          day == DateTime(selectedDay.year, selectedDay.month, selectedDay.day);
+      final bool selected = day ==
+          DateTime(selectedDay.year, selectedDay.month, selectedDay.day);
       cells.add(
         Expanded(
           child: AspectRatio(
@@ -1194,8 +1195,7 @@ List<Widget> _buildCalendarRows({
     if (row > 0) {
       rows.add(const SizedBox(height: spacing));
     }
-    rows.add(
-        Row(crossAxisAlignment: CrossAxisAlignment.start, children: cells));
+    rows.add(Row(crossAxisAlignment: CrossAxisAlignment.start, children: cells));
   }
   return rows;
 }
@@ -1311,43 +1311,42 @@ class _TopBar extends StatelessWidget {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        // 品牌 chip 必須可壓縮：英文的 appSubtitle 比中文長很多，
+        // 在 390pt 寬的 iPhone 上會把整條 Row 撐爆 29px。
+        Flexible(
+          child: Container(
+            key: const ValueKey<String>('top_bar_brand_chip'),
+            padding: const EdgeInsets.symmetric(horizontal: 13, vertical: 8),
+            decoration: BoxDecoration(
+              color: const Color(0xFFFDFEFF),
+              borderRadius: BorderRadius.circular(999),
+              border: Border.all(color: const Color(0xFFE6EBF2)),
+              boxShadow: const [
+                BoxShadow(
+                  color: Color(0x0A0F172A),
+                  blurRadius: 12,
+                  offset: Offset(0, 4),
+                ),
+              ],
+            ),
+            child: Text(
+              AppStrings.of(context).appSubtitle,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(
+                fontSize: layoutSpec.microText,
+                color: const Color(0xFF64748B),
+                fontWeight: FontWeight.w700,
+                letterSpacing: 0.3,
+              ),
+            ),
+          ),
+        ),
+        const SizedBox(width: 12),
         Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // 品牌 chip 必須可壓縮：英文的 appSubtitle 比中文長很多。
-              SizedBox(
-                width: double.infinity,
-                child: Container(
-                  key: const ValueKey<String>('top_bar_brand_chip'),
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 13, vertical: 8),
-                  decoration: BoxDecoration(
-                    color: const Color(0xFFFDFEFF),
-                    borderRadius: BorderRadius.circular(999),
-                    border: Border.all(color: const Color(0xFFE6EBF2)),
-                    boxShadow: const [
-                      BoxShadow(
-                        color: Color(0x0A0F172A),
-                        blurRadius: 12,
-                        offset: Offset(0, 4),
-                      ),
-                    ],
-                  ),
-                  child: Text(
-                    AppStrings.of(context).appSubtitle,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyle(
-                      fontSize: layoutSpec.microText,
-                      color: const Color(0xFF64748B),
-                      fontWeight: FontWeight.w700,
-                      letterSpacing: 0.3,
-                    ),
-                  ),
-                ),
-              ),
-              const SizedBox(height: 8),
               Text(
                 title,
                 style: Theme.of(context).textTheme.titleLarge?.copyWith(
@@ -1409,22 +1408,19 @@ class _CurrentLearnerIdentity extends StatelessWidget {
                   learner.displayName,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
-                    fontSize: layoutSpec.scaleText(13),
-                    fontWeight: FontWeight.w700,
-                    color: const Color(0xFF1E293B),
-                  ),
+                  style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                        fontSize: layoutSpec.scaleText(13),
+                        fontWeight: FontWeight.w700,
+                      ),
                 ),
-                const SizedBox(height: 2),
                 Text(
                   _learnerGradeRangeLabel(learner, strings),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
-                    fontSize: layoutSpec.scaleText(11),
-                    fontWeight: FontWeight.w600,
-                    color: const Color(0xFF64748B),
-                  ),
+                  style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                        fontSize: layoutSpec.microText,
+                        color: const Color(0xFF64748B),
+                      ),
                 ),
               ],
             ),
@@ -2370,8 +2366,7 @@ class _CreateLearnerDialog extends StatefulWidget {
 class _CreateLearnerDialogState extends State<_CreateLearnerDialog> {
   final TextEditingController _nameController = TextEditingController();
   RangeValues _gradeRange = const RangeValues(1, 2);
-  AvatarConfiguration _avatar =
-      AvatarConfiguration.defaultFor(AvatarPresentation.girl);
+  AvatarConfiguration _avatar = AvatarConfiguration.defaultFor(AvatarPresentation.girl);
 
   @override
   void dispose() {
@@ -2389,29 +2384,29 @@ class _CreateLearnerDialogState extends State<_CreateLearnerDialog> {
         height: 430,
         child: SingleChildScrollView(
           child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              TextField(
-                key: const ValueKey<String>('learner_name_field'),
-                controller: _nameController,
-                decoration: InputDecoration(
-                  labelText: widget.strings.learnerName,
-                ),
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            TextField(
+              key: const ValueKey<String>('learner_name_field'),
+              controller: _nameController,
+              decoration: InputDecoration(
+                labelText: widget.strings.learnerName,
               ),
-              const SizedBox(height: 16),
-              _LearnerGradeRangeSelector(
-                strings: widget.strings,
-                values: _gradeRange,
-                onChanged: (value) {
-                  setState(() {
-                    _gradeRange = value;
-                  });
-                },
-              ),
-              const SizedBox(height: 16),
-              AvatarEditor(onChanged: (value) => _avatar = value),
-            ],
-          ),
+            ),
+            const SizedBox(height: 16),
+            _LearnerGradeRangeSelector(
+              strings: widget.strings,
+              values: _gradeRange,
+              onChanged: (value) {
+                setState(() {
+                  _gradeRange = value;
+                });
+              },
+            ),
+            const SizedBox(height: 16),
+            AvatarEditor(onChanged: (value) => _avatar = value),
+          ],
+        ),
         ),
       ),
       actions: [
@@ -3179,57 +3174,57 @@ class _PracticeSessionPageState extends State<PracticeSessionPage> {
             controller: _scrollController,
             fill: true,
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  key: const ValueKey<String>('practice_question_header'),
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 16,
-                    vertical: 14,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    key: const ValueKey<String>('practice_question_header'),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 14,
+                    ),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(18),
+                      border: Border.all(color: const Color(0xFFE7EBF2)),
+                    ),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: Text(
+                            '${strings.questionLabel} ${_records.length + 1}',
+                            style: Theme.of(context)
+                                .textTheme
+                                .headlineSmall
+                                ?.copyWith(fontSize: layoutSpec.titleText),
+                          ),
+                        ),
+                        Container(
+                          key: const ValueKey<String>('question_meta_badge'),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 10,
+                            vertical: 6,
+                          ),
+                          decoration: BoxDecoration(
+                            color: const Color(0xFFEAF2FF),
+                            borderRadius: BorderRadius.circular(999),
+                          ),
+                          child: Text(
+                            _displayLevelStage(question.levelStage, strings),
+                            style:
+                                Theme.of(context).textTheme.bodySmall?.copyWith(
+                                      fontWeight: FontWeight.w700,
+                                      color: const Color(0xFF163D7A),
+                                    ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(18),
-                    border: Border.all(color: const Color(0xFFE7EBF2)),
-                  ),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: Text(
-                          '${strings.questionLabel} ${_records.length + 1}',
-                          style: Theme.of(context)
-                              .textTheme
-                              .headlineSmall
-                              ?.copyWith(fontSize: layoutSpec.titleText),
-                        ),
-                      ),
-                      Container(
-                        key: const ValueKey<String>('question_meta_badge'),
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 10,
-                          vertical: 6,
-                        ),
-                        decoration: BoxDecoration(
-                          color: const Color(0xFFEAF2FF),
-                          borderRadius: BorderRadius.circular(999),
-                        ),
-                        child: Text(
-                          _displayLevelStage(question.levelStage, strings),
-                          style:
-                              Theme.of(context).textTheme.bodySmall?.copyWith(
-                                    fontWeight: FontWeight.w700,
-                                    color: const Color(0xFF163D7A),
-                                  ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                const SizedBox(height: 16),
-                // 撐滿剩餘高度：換題時卡片的位置與大小固定，
-                // 不會因為每題文字長短而上下跳。
-                Expanded(
-                  child: _SectionCard(
+                  const SizedBox(height: 16),
+                  // 撐滿剩餘高度：換題時卡片的位置與大小固定，
+                  // 不會因為每題文字長短而上下跳。
+                  Expanded(
+                    child: _SectionCard(
                     cardKey: const ValueKey<String>('study_surface_card'),
                     title: displayTopicCode(widget.pack.topicCode, strings),
                     subtitle:
@@ -3277,10 +3272,10 @@ class _PracticeSessionPageState extends State<PracticeSessionPage> {
                         ],
                       ],
                     ),
+                    ),
                   ),
-                ),
-              ],
-            ),
+                ],
+              ),
           );
         },
       ),
@@ -3481,8 +3476,8 @@ class _PracticeAnswerSectionState extends State<_PracticeAnswerSection> {
                     key: ValueKey<String>(
                       'question_option_text_${widget.question.id}_$key',
                     ),
-                    text: widget.question
-                        .optionDisplayLabel(key, widget.localeCode),
+                    text:
+                        widget.question.optionDisplayLabel(key, widget.localeCode),
                     localeCode: widget.localeCode,
                   ),
                 ),
@@ -3646,19 +3641,19 @@ class PracticeSummaryPage extends StatelessWidget {
             // 撐滿剩餘高度，畫面不會依內容長短留下大片空白
             Expanded(
               child: _SectionCard(
-                title: strings.practiceSummary,
-                subtitle:
-                    '${result.correctCount} / ${result.totalQuestions} ${strings.correctSuffix}',
-                child: Column(
-                  children: [
-                    _StatRow(
-                      leftValue: '${result.totalQuestions}',
-                      leftLabel: strings.solvedLabel,
-                      rightValue: '${result.accuracyRate.round()}%',
-                      rightLabel: strings.accuracyLabel,
-                    ),
-                  ],
-                ),
+              title: strings.practiceSummary,
+              subtitle:
+                  '${result.correctCount} / ${result.totalQuestions} ${strings.correctSuffix}',
+              child: Column(
+                children: [
+                  _StatRow(
+                    leftValue: '${result.totalQuestions}',
+                    leftLabel: strings.solvedLabel,
+                    rightValue: '${result.accuracyRate.round()}%',
+                    rightLabel: strings.accuracyLabel,
+                  ),
+                ],
+              ),
               ),
             ),
           ],
@@ -3879,40 +3874,39 @@ class _QuizSessionPageState extends State<QuizSessionPage> {
                 // 不會因為每題文字長短而上下跳。
                 Expanded(
                   child: _SectionCard(
-                    title: displayTopicCode(widget.pack.topicCode, strings),
-                    subtitle:
-                        '${_displayLevelStage(question.levelStage, strings)} · ${_displayTier(question.challengeTier, strings)}',
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        _QuestionPromptText(
-                          key: ValueKey<String>(
-                              'question_prompt_${question.id}'),
-                          text: question.localizedPrompt(_localeCode(context)),
-                          localeCode: _localeCode(context),
-                        ),
-                        if (question.source?.displayLabel != null) ...[
-                          const SizedBox(height: 8),
-                          _QuestionSourceText(
-                              text: question.source!.displayLabel!),
-                        ],
-                        if (question.figure.kind != 'none') ...[
-                          const SizedBox(height: 20),
-                          _QuestionFigureView(question: question),
-                        ],
-                        const SizedBox(height: 20),
-                        _QuizAnswerSection(
-                          question: question,
-                          localeCode: _localeCode(context),
-                          selectedAnswer: selectedAnswer,
-                          onAnswerChanged: (answer) {
-                            setState(() {
-                              _answers[question.id] = answer;
-                            });
-                          },
-                        ),
+                  title: displayTopicCode(widget.pack.topicCode, strings),
+                  subtitle:
+                      '${_displayLevelStage(question.levelStage, strings)} · ${_displayTier(question.challengeTier, strings)}',
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      _QuestionPromptText(
+                        key: ValueKey<String>('question_prompt_${question.id}'),
+                        text: question.localizedPrompt(_localeCode(context)),
+                        localeCode: _localeCode(context),
+                      ),
+                      if (question.source?.displayLabel != null) ...[
+                        const SizedBox(height: 8),
+                        _QuestionSourceText(
+                            text: question.source!.displayLabel!),
                       ],
-                    ),
+                      if (question.figure.kind != 'none') ...[
+                        const SizedBox(height: 20),
+                        _QuestionFigureView(question: question),
+                      ],
+                      const SizedBox(height: 20),
+                      _QuizAnswerSection(
+                        question: question,
+                        localeCode: _localeCode(context),
+                        selectedAnswer: selectedAnswer,
+                        onAnswerChanged: (answer) {
+                          setState(() {
+                            _answers[question.id] = answer;
+                          });
+                        },
+                      ),
+                    ],
+                  ),
                   ),
                 ),
                 const SizedBox(height: 20),
@@ -4207,7 +4201,8 @@ class _QuizAnswerSection extends StatelessWidget {
                   child: _QuestionOptionText(
                     key: ValueKey<String>(
                         'question_option_text_${question.id}_$key'),
-                    text: question.optionDisplayLabel(key, localeCode),
+                    text:
+                        question.optionDisplayLabel(key, localeCode),
                     localeCode: localeCode,
                   ),
                 ),
@@ -4366,18 +4361,18 @@ class QuizResultPage extends StatelessWidget {
             // 撐滿剩餘高度，畫面不會依內容長短留下大片空白
             Expanded(
               child: _SectionCard(
-                title: strings.quizResult,
-                subtitle: maxScore == null
-                    ? '${result.correctCount} / ${result.totalQuestions} ${strings.correctSuffix}'
-                    : '正式測驗成績：$earnedScore / $maxScore',
-                child: _StatRow(
-                  leftValue: maxScore == null
-                      ? '${result.correctCount}'
-                      : '$earnedScore',
-                  leftLabel: maxScore == null ? strings.correctLabel : '總分',
-                  rightValue: _formatElapsed(result.elapsed),
-                  rightLabel: strings.elapsedLabel,
-                ),
+              title: strings.quizResult,
+              subtitle: maxScore == null
+                  ? '${result.correctCount} / ${result.totalQuestions} ${strings.correctSuffix}'
+                  : '正式測驗成績：$earnedScore / $maxScore',
+              child: _StatRow(
+                leftValue: maxScore == null
+                    ? '${result.correctCount}'
+                    : '$earnedScore',
+                leftLabel: maxScore == null ? strings.correctLabel : '總分',
+                rightValue: _formatElapsed(result.elapsed),
+                rightLabel: strings.elapsedLabel,
+              ),
               ),
             ),
             const SizedBox(height: 18),
@@ -4899,7 +4894,6 @@ class AppStrings {
         en: '$count questions · ${(accuracyRate * 100).round()}% correct',
         ja: '$count 問 · 正答率 ${(accuracyRate * 100).round()}%',
       );
-
   /// 月曆的星期標題，從**週日**起算——排版用 `firstDay.weekday % 7`
   /// 算前置空格（週日 = 7 → 0），順序不可更動，否則日期會對錯欄。
   List<String> get weekdayHeaders => <String>[
@@ -4909,13 +4903,7 @@ class AppStrings {
   String _weekdayLabel(int index) {
     const List<String> zh = <String>['日', '一', '二', '三', '四', '五', '六'];
     const List<String> en = <String>[
-      'Sun',
-      'Mon',
-      'Tue',
-      'Wed',
-      'Thu',
-      'Fri',
-      'Sat',
+      'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat',
     ];
     return _text(
       zhHant: zh[index],
@@ -5373,7 +5361,8 @@ class TrigGraphDemoPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final AppStrings strings = AppStrings.of(context);
-    final bool wide = LayoutSpec.of(context).widthClass == WidthClass.expanded;
+    final bool wide =
+        LayoutSpec.of(context).widthClass == WidthClass.expanded;
 
     return Scaffold(
       appBar: AppBar(
@@ -5583,7 +5572,8 @@ class _AnswerComposer extends StatelessWidget {
                   },
                   style: OutlinedButton.styleFrom(
                     // 選項列是主要的觸控目標，iPad 上要比 iPhone 大
-                    minimumSize: Size.fromHeight(layoutSpec.minTapTarget + 10),
+                    minimumSize:
+                        Size.fromHeight(layoutSpec.minTapTarget + 10),
                     alignment: Alignment.centerLeft,
                     foregroundColor: const Color(0xFF111827),
                     backgroundColor: Colors.white,
@@ -5808,7 +5798,7 @@ FigureRenderSpec? buildFigureRenderSpec(QuestionFigure figure,
         painter: ShapeDiagramPainter(
           shape: figure.params['shape'] as String? ?? 'rectangle',
           labels: _stringMapFromDynamic(figure.params['labels']),
-          labelFontFamily: labelFontFamily,
+                  labelFontFamily: labelFontFamily,
         ),
         child: const SizedBox.expand(),
       ),
@@ -5824,14 +5814,14 @@ FigureRenderSpec? buildFigureRenderSpec(QuestionFigure figure,
           highlightPoint: _pointFromDynamic(
             figure.params['highlightPoint'],
           ),
-          labelFontFamily: labelFontFamily,
+                  labelFontFamily: labelFontFamily,
         ),
         child: const SizedBox.expand(),
       ),
     'geometry_scene' => CustomPaint(
         painter: GeometryScenePainter(
           scene: GeometryScene.fromParams(figure.params),
-          labelFontFamily: labelFontFamily,
+                  labelFontFamily: labelFontFamily,
         ),
         child: const SizedBox.expand(),
       ),
@@ -5839,9 +5829,11 @@ FigureRenderSpec? buildFigureRenderSpec(QuestionFigure figure,
         painter: CompositeGridShapePainter(
           rows: _intFromDynamic(figure.params['rows'], fallback: 3),
           cols: _intFromDynamic(figure.params['cols'], fallback: 3),
-          filledCells: _cellListFromDynamic(figure.params['filledCells']),
-          cellLabels: _stringMapFromDynamic(figure.params['cellLabels']),
-          labelFontFamily: labelFontFamily,
+          filledCells:
+              _cellListFromDynamic(figure.params['filledCells']),
+          cellLabels:
+              _stringMapFromDynamic(figure.params['cellLabels']),
+                  labelFontFamily: labelFontFamily,
         ),
         child: const SizedBox.expand(),
       ),
@@ -5851,8 +5843,9 @@ FigureRenderSpec? buildFigureRenderSpec(QuestionFigure figure,
             figure.params['regionLabels'],
           ),
           pointLabel: figure.params['pointLabel'] as String? ?? 'P',
-          shadedRegion: figure.params['shadedRegion'] as String? ?? 'topRight',
-          labelFontFamily: labelFontFamily,
+          shadedRegion:
+              figure.params['shadedRegion'] as String? ?? 'topRight',
+                  labelFontFamily: labelFontFamily,
         ),
         child: const SizedBox.expand(),
       ),
@@ -6849,7 +6842,6 @@ class ShapeDiagramPainter extends CustomPainter {
 
   final String shape;
   final Map<String, String> labels;
-
   /// 預覽工具會塞自己載進來的字型；app 裡是 null，用預設字型。
   final String? labelFontFamily;
 
@@ -6889,19 +6881,14 @@ class ShapeDiagramPainter extends CustomPainter {
           linePaint,
         );
         _paintText(canvas, labels['top'] ?? 'N',
-            Offset(center.dx, center.dy - arm - 22),
-            fontFamily: labelFontFamily);
+            Offset(center.dx, center.dy - arm - 22), fontFamily: labelFontFamily);
         _paintText(canvas, labels['right'] ?? 'E',
-            Offset(center.dx + arm + 22, center.dy),
-            fontFamily: labelFontFamily);
+            Offset(center.dx + arm + 22, center.dy), fontFamily: labelFontFamily);
         _paintText(canvas, labels['bottom'] ?? 'S',
-            Offset(center.dx, center.dy + arm + 22),
-            fontFamily: labelFontFamily);
+            Offset(center.dx, center.dy + arm + 22), fontFamily: labelFontFamily);
         _paintText(canvas, labels['left'] ?? 'W',
-            Offset(center.dx - arm - 22, center.dy),
-            fontFamily: labelFontFamily);
-        _paintText(canvas, labels['center'], center,
-            fontFamily: labelFontFamily);
+            Offset(center.dx - arm - 22, center.dy), fontFamily: labelFontFamily);
+        _paintText(canvas, labels['center'], center, fontFamily: labelFontFamily);
         break;
       case 'square':
         final double side = math.min(rect.width, rect.height);
@@ -6923,17 +6910,13 @@ class ShapeDiagramPainter extends CustomPainter {
         canvas.drawPath(triangle, fillPaint);
         canvas.drawPath(triangle, outlinePaint);
         _paintText(
-            canvas, labels['top'], Offset(size.width * 0.5, size.height * 0.1),
-            fontFamily: labelFontFamily);
+            canvas, labels['top'], Offset(size.width * 0.5, size.height * 0.1), fontFamily: labelFontFamily);
         _paintText(canvas, labels['left'],
-            Offset(size.width * 0.18, size.height * 0.48),
-            fontFamily: labelFontFamily);
+            Offset(size.width * 0.18, size.height * 0.48), fontFamily: labelFontFamily);
         _paintText(canvas, labels['right'],
-            Offset(size.width * 0.82, size.height * 0.48),
-            fontFamily: labelFontFamily);
+            Offset(size.width * 0.82, size.height * 0.48), fontFamily: labelFontFamily);
         _paintText(canvas, labels['bottom'],
-            Offset(size.width * 0.5, size.height * 0.76),
-            fontFamily: labelFontFamily);
+            Offset(size.width * 0.5, size.height * 0.76), fontFamily: labelFontFamily);
         break;
       case 'trapezoid':
         final Path trapezoid = Path()
@@ -6944,21 +6927,16 @@ class ShapeDiagramPainter extends CustomPainter {
           ..close();
         canvas.drawPath(trapezoid, fillPaint);
         canvas.drawPath(trapezoid, outlinePaint);
-        _paintText(
-            canvas, labels['top'], Offset(size.width * 0.5, size.height * 0.14),
-            fontFamily: labelFontFamily);
+        _paintText(canvas, labels['top'],
+            Offset(size.width * 0.5, size.height * 0.14), fontFamily: labelFontFamily);
         _paintText(canvas, labels['bottom'],
-            Offset(size.width * 0.5, size.height * 0.78),
-            fontFamily: labelFontFamily);
+            Offset(size.width * 0.5, size.height * 0.78), fontFamily: labelFontFamily);
         _paintText(canvas, labels['left'],
-            Offset(size.width * 0.16, size.height * 0.46),
-            fontFamily: labelFontFamily);
+            Offset(size.width * 0.16, size.height * 0.46), fontFamily: labelFontFamily);
         _paintText(canvas, labels['right'],
-            Offset(size.width * 0.84, size.height * 0.46),
-            fontFamily: labelFontFamily);
+            Offset(size.width * 0.84, size.height * 0.46), fontFamily: labelFontFamily);
         _paintText(canvas, labels['center'],
-            Offset(size.width * 0.5, size.height * 0.48),
-            fontFamily: labelFontFamily);
+            Offset(size.width * 0.5, size.height * 0.48), fontFamily: labelFontFamily);
         break;
       case 'parallelogram':
         final Path parallelogram = Path()
@@ -6970,20 +6948,15 @@ class ShapeDiagramPainter extends CustomPainter {
         canvas.drawPath(parallelogram, fillPaint);
         canvas.drawPath(parallelogram, outlinePaint);
         _paintText(canvas, labels['top'],
-            Offset(size.width * 0.53, size.height * 0.14),
-            fontFamily: labelFontFamily);
+            Offset(size.width * 0.53, size.height * 0.14), fontFamily: labelFontFamily);
         _paintText(canvas, labels['bottom'],
-            Offset(size.width * 0.41, size.height * 0.78),
-            fontFamily: labelFontFamily);
+            Offset(size.width * 0.41, size.height * 0.78), fontFamily: labelFontFamily);
         _paintText(canvas, labels['left'],
-            Offset(size.width * 0.14, size.height * 0.48),
-            fontFamily: labelFontFamily);
+            Offset(size.width * 0.14, size.height * 0.48), fontFamily: labelFontFamily);
         _paintText(canvas, labels['right'],
-            Offset(size.width * 0.8, size.height * 0.48),
-            fontFamily: labelFontFamily);
+            Offset(size.width * 0.8, size.height * 0.48), fontFamily: labelFontFamily);
         _paintText(canvas, labels['center'],
-            Offset(size.width * 0.47, size.height * 0.46),
-            fontFamily: labelFontFamily);
+            Offset(size.width * 0.47, size.height * 0.46), fontFamily: labelFontFamily);
         break;
       case 'pentagon':
         final Path pentagon = Path()
@@ -6995,21 +6968,16 @@ class ShapeDiagramPainter extends CustomPainter {
           ..close();
         canvas.drawPath(pentagon, fillPaint);
         canvas.drawPath(pentagon, outlinePaint);
-        _paintText(
-            canvas, labels['top'], Offset(size.width * 0.5, size.height * 0.08),
-            fontFamily: labelFontFamily);
+        _paintText(canvas, labels['top'],
+            Offset(size.width * 0.5, size.height * 0.08), fontFamily: labelFontFamily);
         _paintText(canvas, labels['left'],
-            Offset(size.width * 0.16, size.height * 0.44),
-            fontFamily: labelFontFamily);
+            Offset(size.width * 0.16, size.height * 0.44), fontFamily: labelFontFamily);
         _paintText(canvas, labels['right'],
-            Offset(size.width * 0.84, size.height * 0.44),
-            fontFamily: labelFontFamily);
+            Offset(size.width * 0.84, size.height * 0.44), fontFamily: labelFontFamily);
         _paintText(canvas, labels['bottom'],
-            Offset(size.width * 0.5, size.height * 0.78),
-            fontFamily: labelFontFamily);
+            Offset(size.width * 0.5, size.height * 0.78), fontFamily: labelFontFamily);
         _paintText(canvas, labels['center'],
-            Offset(size.width * 0.5, size.height * 0.46),
-            fontFamily: labelFontFamily);
+            Offset(size.width * 0.5, size.height * 0.46), fontFamily: labelFontFamily);
         break;
       case 'hexagon':
         final Path hexagon = Path()
@@ -7023,34 +6991,26 @@ class ShapeDiagramPainter extends CustomPainter {
         canvas.drawPath(hexagon, fillPaint);
         canvas.drawPath(hexagon, outlinePaint);
         _paintText(
-            canvas, labels['top'], Offset(size.width * 0.5, size.height * 0.1),
-            fontFamily: labelFontFamily);
+            canvas, labels['top'], Offset(size.width * 0.5, size.height * 0.1), fontFamily: labelFontFamily);
         _paintText(canvas, labels['left'],
-            Offset(size.width * 0.14, size.height * 0.44),
-            fontFamily: labelFontFamily);
+            Offset(size.width * 0.14, size.height * 0.44), fontFamily: labelFontFamily);
         _paintText(canvas, labels['right'],
-            Offset(size.width * 0.86, size.height * 0.44),
-            fontFamily: labelFontFamily);
+            Offset(size.width * 0.86, size.height * 0.44), fontFamily: labelFontFamily);
         _paintText(canvas, labels['bottom'],
-            Offset(size.width * 0.5, size.height * 0.78),
-            fontFamily: labelFontFamily);
+            Offset(size.width * 0.5, size.height * 0.78), fontFamily: labelFontFamily);
         _paintText(canvas, labels['center'],
-            Offset(size.width * 0.5, size.height * 0.44),
-            fontFamily: labelFontFamily);
+            Offset(size.width * 0.5, size.height * 0.44), fontFamily: labelFontFamily);
         break;
       case 'circle':
         final Offset center = Offset(size.width / 2, size.height / 2);
         final double radius = math.min(size.width, size.height) * 0.24;
         canvas.drawCircle(center, radius, fillPaint);
         canvas.drawCircle(center, radius, outlinePaint);
-        _paintText(canvas, labels['center'], center,
-            fontFamily: labelFontFamily);
+        _paintText(canvas, labels['center'], center, fontFamily: labelFontFamily);
         _paintText(
-            canvas, labels['top'], Offset(center.dx, center.dy - radius - 18),
-            fontFamily: labelFontFamily);
-        _paintText(
-            canvas, labels['right'], Offset(center.dx + radius + 18, center.dy),
-            fontFamily: labelFontFamily);
+            canvas, labels['top'], Offset(center.dx, center.dy - radius - 18), fontFamily: labelFontFamily);
+        _paintText(canvas, labels['right'],
+            Offset(center.dx + radius + 18, center.dy), fontFamily: labelFontFamily);
         break;
       case 'oval':
         final Rect oval = Rect.fromCenter(
@@ -7072,17 +7032,13 @@ class ShapeDiagramPainter extends CustomPainter {
   }
 
   void _paintShapeLabels(Canvas canvas, Rect rect) {
-    _paintText(canvas, labels['top'], Offset(rect.center.dx, rect.top - 18),
-        fontFamily: labelFontFamily);
+    _paintText(canvas, labels['top'], Offset(rect.center.dx, rect.top - 18), fontFamily: labelFontFamily);
     _paintText(
-        canvas, labels['bottom'], Offset(rect.center.dx, rect.bottom + 18),
-        fontFamily: labelFontFamily);
-    _paintText(canvas, labels['left'], Offset(rect.left - 18, rect.center.dy),
-        fontFamily: labelFontFamily);
-    _paintText(canvas, labels['right'], Offset(rect.right + 18, rect.center.dy),
-        fontFamily: labelFontFamily);
-    _paintText(canvas, labels['center'], rect.center,
-        fontFamily: labelFontFamily);
+        canvas, labels['bottom'], Offset(rect.center.dx, rect.bottom + 18), fontFamily: labelFontFamily);
+    _paintText(canvas, labels['left'], Offset(rect.left - 18, rect.center.dy), fontFamily: labelFontFamily);
+    _paintText(
+        canvas, labels['right'], Offset(rect.right + 18, rect.center.dy), fontFamily: labelFontFamily);
+    _paintText(canvas, labels['center'], rect.center, fontFamily: labelFontFamily);
   }
 
   @override
@@ -7103,7 +7059,6 @@ class CircleQuadrantsPointPainter extends CustomPainter {
   final Map<String, String> regionLabels;
   final String pointLabel;
   final String shadedRegion;
-
   /// 預覽工具會塞自己載進來的字型；app 裡是 null，用預設字型。
   final String? labelFontFamily;
 
@@ -7166,16 +7121,11 @@ class CircleQuadrantsPointPainter extends CustomPainter {
 
     canvas.drawCircle(pointP, 4.5, pointPaint);
 
-    _paintText(canvas, 'A', Offset(top.dx - 6, top.dy - 24),
-        fontFamily: labelFontFamily);
-    _paintText(canvas, 'B', Offset(right.dx + 18, right.dy - 8),
-        fontFamily: labelFontFamily);
-    _paintText(canvas, 'C', Offset(bottom.dx - 6, bottom.dy + 12),
-        fontFamily: labelFontFamily);
-    _paintText(canvas, 'D', Offset(left.dx - 24, left.dy - 8),
-        fontFamily: labelFontFamily);
-    _paintText(canvas, pointLabel, pointP + const Offset(-6, -22),
-        fontFamily: labelFontFamily);
+    _paintText(canvas, 'A', Offset(top.dx - 6, top.dy - 24), fontFamily: labelFontFamily);
+    _paintText(canvas, 'B', Offset(right.dx + 18, right.dy - 8), fontFamily: labelFontFamily);
+    _paintText(canvas, 'C', Offset(bottom.dx - 6, bottom.dy + 12), fontFamily: labelFontFamily);
+    _paintText(canvas, 'D', Offset(left.dx - 24, left.dy - 8), fontFamily: labelFontFamily);
+    _paintText(canvas, pointLabel, pointP + const Offset(-6, -22), fontFamily: labelFontFamily);
 
     _paintText(
       canvas,
@@ -7232,7 +7182,6 @@ class CoordinatePlanePainter extends CustomPainter {
   final List<DiagramPoint> points;
   final List<DiagramPoint> pathPoints;
   final DiagramPoint? highlightPoint;
-
   /// 預覽工具會塞自己載進來的字型；app 裡是 null，用預設字型。
   final String? labelFontFamily;
 
@@ -7275,16 +7224,13 @@ class CoordinatePlanePainter extends CustomPainter {
         final double dx = mapX(x);
         canvas.drawLine(
             Offset(dx, plot.top), Offset(dx, plot.bottom), gridPaint);
-        _paintText(canvas, '$x', Offset(dx, plot.bottom + 14),
-            fontFamily: labelFontFamily);
+        _paintText(canvas, '$x', Offset(dx, plot.bottom + 14), fontFamily: labelFontFamily);
       }
       for (int y = minY; y <= maxY; y++) {
         final double dy = mapY(y);
         canvas.drawLine(
             Offset(plot.left, dy), Offset(plot.right, dy), gridPaint);
-        if (y != 0)
-          _paintText(canvas, '$y', Offset(plot.left - 14, dy),
-              fontFamily: labelFontFamily);
+        if (y != 0) _paintText(canvas, '$y', Offset(plot.left - 14, dy), fontFamily: labelFontFamily);
       }
     }
 
@@ -7311,8 +7257,7 @@ class CoordinatePlanePainter extends CustomPainter {
           point.y == highlightPoint!.y;
       canvas.drawCircle(offset, 5, isHighlighted ? highlightPaint : pointPaint);
       if (point.label != null && point.label!.isNotEmpty) {
-        _paintText(canvas, point.label, offset + const Offset(0, -16),
-            fontFamily: labelFontFamily);
+        _paintText(canvas, point.label, offset + const Offset(0, -16), fontFamily: labelFontFamily);
       }
     }
   }
@@ -7344,7 +7289,6 @@ class CompositeGridShapePainter extends CustomPainter {
   final int cols;
   final List<GridCell> filledCells;
   final Map<String, String> cellLabels;
-
   /// 預覽工具會塞自己載進來的字型；app 裡是 null，用預設字型。
   final String? labelFontFamily;
 
@@ -7389,8 +7333,7 @@ class CompositeGridShapePainter extends CustomPainter {
         canvas.drawRect(
             cellRect, filledKeys.contains(key) ? fillPaint : emptyPaint);
         canvas.drawRect(cellRect, gridPaint);
-        _paintText(canvas, cellLabels[key], cellRect.center,
-            fontFamily: labelFontFamily);
+        _paintText(canvas, cellLabels[key], cellRect.center, fontFamily: labelFontFamily);
       }
     }
 
