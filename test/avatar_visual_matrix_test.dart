@@ -138,6 +138,50 @@ void main() {
     }
   });
 
+  test(
+      'every non-default skin keeps the composed canvas background transparent',
+      () async {
+    final Directory outputDirectory = Directory(
+      '/private/tmp/mathspring-avatar-skin-alpha',
+    );
+    await outputDirectory.create(recursive: true);
+
+    for (final AvatarPresentation presentation in AvatarPresentation.values) {
+      final List<String> skinOptions =
+          AvatarConfiguration.optionsFor(presentation, 'skin');
+      for (final String skinId in skinOptions.skip(1)) {
+        final AvatarConfiguration configuration =
+            AvatarConfiguration.defaultFor(presentation).copyWith(
+          skinId: skinId,
+        );
+        final File composite = File(
+          '${outputDirectory.path}/${presentation.name}-$skinId.png',
+        );
+        await _composeAvatar(configuration, composite);
+
+        final ProcessResult pixel = await Process.run('magick', <String>[
+          composite.path,
+          '-alpha',
+          'extract',
+          '-format',
+          '%[fx:p{0,0}],%[fx:p{125,125}]',
+          'info:',
+        ]);
+        expect(pixel.exitCode, 0, reason: pixel.stderr);
+        expect(
+          double.parse((pixel.stdout as String).trim().split(',').first),
+          0,
+          reason: '$skinId must not tint the transparent canvas background',
+        );
+        expect(
+          double.parse((pixel.stdout as String).trim().split(',').last),
+          greaterThan(.9),
+          reason: '$skinId must retain the opaque face at the canvas center',
+        );
+      }
+    }
+  });
+
   test('hair placement transforms remain bounded inside an avatar preview', () {
     for (final AvatarPresentation presentation in AvatarPresentation.values) {
       for (final String hairId
@@ -213,20 +257,16 @@ List<String> _faceLayerArgs(AvatarAssetBundle assets) {
     ];
   }
   final String tint =
-      '#${assets.skinTint!.value.toRadixString(16).padLeft(8, '0').substring(2)}';
+      '#${assets.skinTint!.toARGB32().toRadixString(16).padLeft(8, '0').substring(2)}';
   return <String>[
     '(',
     assets.baseAsset,
     '-resize',
     '${_matrixCanvasSize}x$_matrixCanvasSize!',
-    '(',
-    '-size',
-    '${_matrixCanvasSize}x$_matrixCanvasSize',
-    'xc:$tint',
-    ')',
-    '-compose',
-    'Multiply',
-    '-composite',
+    '-fill',
+    tint,
+    '-colorize',
+    '35%',
     ')',
   ];
 }

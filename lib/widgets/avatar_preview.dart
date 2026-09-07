@@ -36,10 +36,11 @@ class AvatarPreview extends StatelessWidget {
                 child: assets.skinTint == null
                     ? _layer(assets.baseAsset)
                     : ColorFiltered(
-                        // 相乘保留底圖的明暗與腮紅；srcATop 會把它們壓平。
+                        // Modulate 保留底圖的明暗與腮紅，同時不會把不透明
+                        // 色票合成到透明畫布，避免膚色染到背景。
                         colorFilter: ColorFilter.mode(
                           assets.skinTint!,
-                          BlendMode.multiply,
+                          BlendMode.modulate,
                         ),
                         child: _layer(assets.baseAsset),
                       ),
