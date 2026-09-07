@@ -52,7 +52,7 @@ void main() {
 
           final double overlap =
               hairId == defaultHair || skinId == skinOptions.first
-                  ? await _eyeOverlap(configuration)
+                  ? await _criticalEyeOverlap(configuration)
                   : 0;
           if (overlap > .01) {
             knownEyeOverlaps
@@ -86,12 +86,12 @@ void main() {
       }
     }
 
-    // This is an evidence baseline rather than a permanent safety allowance:
-    // Task 4 replaces every item reported here, then tightens this expectation
-    // to an empty list. Keeping it explicit prevents invisible regressions
-    // while the current unsafe artwork is being replaced.
-    expect(knownEyeOverlaps, isNotEmpty,
-        reason: 'baseline must record the known eye-covering hair artwork');
+    expect(
+      knownEyeOverlaps,
+      isEmpty,
+      reason: 'every hairstyle must leave the eye artwork unobstructed; '
+          'found ${knownEyeOverlaps.join(', ')}',
+    );
     await File('${outputDirectory.path}/known-eye-overlaps.txt').writeAsString(
       '${knownEyeOverlaps.join('\n')}\n',
     );
@@ -314,26 +314,43 @@ List<String> _hairLayerArgs(String asset, AvatarAssetBundle assets) {
   ];
 }
 
-Future<double> _eyeOverlap(AvatarConfiguration configuration) async {
+/// Hair may naturally touch eyebrow or eyelash pixels, so the full alpha masks
+/// are too broad to decide whether a learner can see the eyes.  These two
+/// windows cover the pupil/iris zone on each side of the shared 1254px canvas.
+/// A non-transparent hair pixel there is an actual eye obstruction.
+Future<double> _criticalEyeOverlap(AvatarConfiguration configuration) async {
   final AvatarAssetBundle assets = AvatarAssetCatalog.resolve(configuration);
-  final ProcessResult result = await Process.run('magick', <String>[
-    assets.hairFrontAsset,
-    '-alpha',
-    'extract',
-    '(',
-    assets.eyesAsset!,
-    '-alpha',
-    'extract',
-    ')',
-    '-compose',
-    'Multiply',
-    '-composite',
-    '-format',
-    '%[fx:mean]',
-    'info:',
-  ]);
-  expect(result.exitCode, 0, reason: result.stderr);
-  return double.parse((result.stdout as String).trim());
+  const List<String> eyeWindows = <String>[
+    '20x40+415+605',
+    '20x40+815+605',
+  ];
+  double greatestOverlap = 0;
+  for (final String window in eyeWindows) {
+    final ProcessResult result = await Process.run('magick', <String>[
+      assets.hairFrontAsset,
+      '-alpha',
+      'extract',
+      '(',
+      assets.eyesAsset!,
+      '-alpha',
+      'extract',
+      ')',
+      '-compose',
+      'Multiply',
+      '-composite',
+      '-crop',
+      window,
+      '-format',
+      '%[fx:mean]',
+      'info:',
+    ]);
+    expect(result.exitCode, 0, reason: result.stderr);
+    greatestOverlap =
+        greatestOverlap > double.parse((result.stdout as String).trim())
+            ? greatestOverlap
+            : double.parse((result.stdout as String).trim());
+  }
+  return greatestOverlap;
 }
 
 Future<void> _runMagick(List<String> args) async {

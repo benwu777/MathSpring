@@ -81,16 +81,6 @@ class AvatarAssetCatalog {
 
   static const AvatarOptionTreatment _neutral = AvatarOptionTreatment();
 
-  /// Options without dedicated artwork reuse an aligned layer from the same
-  /// part.  The value is the path below `assets/avatars/`.
-  /// Only hair still shares a layer: the two accepted boy partings are also
-  /// used mirrored.  Every other part ships one layer per option.
-  static const Map<String, String> _sharedLayerSource = <String, String>{
-    'boy_hair_03': 'boy/hair/hair-01.png',
-    'boy_hair_04': 'boy/hair/hair-02.png',
-    'boy_hair_05': 'boy/hair/hair-01.png',
-  };
-
   /// Skin is never only a base swap: the nose layer receives the same tint so
   /// a deeper skin tone never carries a pale nose.
   /// 膚色色階。原本四個色票都是 0x33（20% 不透明度）的褐色系、以 srcATop
@@ -113,32 +103,12 @@ class AvatarAssetCatalog {
 
   static String? hairBackAssetFor(String hairId) => _hairBackAssets[hairId];
 
-  static const Map<String, AvatarOptionTreatment> _treatments =
-      <String, AvatarOptionTreatment>{
-    // Mirrored partings keep the fringe line, so no eye is newly covered.
-    'boy_hair_03': AvatarOptionTreatment(scaleX: -1),
-    'boy_hair_04': AvatarOptionTreatment(scaleX: -1),
-    // A cropped cut: the same parting drawn smaller so the ears show and the
-    // fringe sits higher.  Lowered by the amount the layer shrinks upward.
-    'boy_hair_05': AvatarOptionTreatment(scale: .92, offsetY: .02),
-  };
-
-  /// These source layers predate the aligned generated artwork and sit lower
-  /// in their canvases, so only they need the legacy upward correction.
-  static const Set<String> _legacyBoyHair = <String>{
-    'boy_hair_01',
-    'boy_hair_02',
-    'boy_hair_03',
-    'boy_hair_04',
-    'boy_hair_05',
-  };
-
   static AvatarOptionTreatment treatmentFor(String optionId) {
     if (optionId.contains('_skin_')) {
       final Color? tint = _skinTints[optionId.substring(optionId.length - 7)];
       return tint == null ? _neutral : AvatarOptionTreatment(tint: tint);
     }
-    return _treatments[optionId] ?? _neutral;
+    return _neutral;
   }
 
   static String optionAssetFor(
@@ -150,11 +120,6 @@ class AvatarAssetCatalog {
     final List<String> parts = optionId.split('_');
     final String category = parts[1];
     final String index = parts.last;
-
-    final String? shared = _sharedLayerSource[optionId];
-    if (shared != null) {
-      return 'assets/avatars/$shared';
-    }
 
     switch (category) {
       case 'hair':
@@ -200,11 +165,7 @@ class AvatarAssetCatalog {
       hairBackAsset: hairBackAssetFor(configuration.hairId),
       hairScale: hair.scale,
       hairScaleX: hair.scaleX,
-      // The original boy layers sit lower than the face canvas. New hair
-      // artwork is already aligned, so it must not inherit that correction.
-      hairOffsetY:
-          (isBoy && _legacyBoyHair.contains(configuration.hairId) ? -.1 : 0) +
-              hair.offsetY,
+      hairOffsetY: hair.offsetY,
       eyesAsset: optionAssetFor(presentation, configuration.eyesId),
       eyesScaleX: (isBoy ? 1 : girlEyeSpread) * eyes.scaleX,
       eyesScaleY: eyes.scaleY,

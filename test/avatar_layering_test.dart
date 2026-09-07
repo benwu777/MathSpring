@@ -75,6 +75,27 @@ void main() {
       expect(longHair.hairBackAsset, isNotNull,
           reason: 'girl_hair_06（雙馬尾）應該要有後層');
     });
+
+    test('每款髮型都要使用自己的素材與中性定位', () {
+      for (final AvatarPresentation presentation in AvatarPresentation.values) {
+        final Set<String> frontAssets = <String>{};
+        for (final String hair
+            in AvatarConfiguration.optionsFor(presentation, 'hair')) {
+          final AvatarAssetBundle bundle = AvatarAssetCatalog.resolve(
+            AvatarConfiguration.defaultFor(presentation).copyWith(hairId: hair),
+          );
+          expect(
+            frontAssets.add(bundle.hairFrontAsset),
+            isTrue,
+            reason: '$hair 不可鏡像或縮放重用另一款髮型素材',
+          );
+          expect(bundle.hairScale, 1, reason: '$hair 必須由素材本身對齊');
+          expect(bundle.hairScaleX, 1, reason: '$hair 不可鏡像另一款髮型');
+          expect(bundle.hairOffsetX, 0, reason: '$hair 不可偏離畫布中心');
+          expect(bundle.hairOffsetY, 0, reason: '$hair 必須由素材本身垂直對齊');
+        }
+      }
+    });
   });
 
   group('眼睛與眼鏡', () {
