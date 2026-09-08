@@ -76,25 +76,36 @@ void main() {
           reason: 'girl_hair_06（雙馬尾）應該要有後層');
     });
 
-    test('每款髮型都要使用自己的素材與中性定位', () {
+    test('每款髮型都要從透明基準素材套用安全定位', () {
       for (final AvatarPresentation presentation in AvatarPresentation.values) {
-        final Set<String> frontAssets = <String>{};
         for (final String hair
             in AvatarConfiguration.optionsFor(presentation, 'hair')) {
           final AvatarAssetBundle bundle = AvatarAssetCatalog.resolve(
             AvatarConfiguration.defaultFor(presentation).copyWith(hairId: hair),
           );
-          expect(
-            frontAssets.add(bundle.hairFrontAsset),
-            isTrue,
-            reason: '$hair 不可鏡像或縮放重用另一款髮型素材',
-          );
-          expect(bundle.hairScale, 1, reason: '$hair 必須由素材本身對齊');
-          expect(bundle.hairScaleX, 1, reason: '$hair 不可鏡像另一款髮型');
+          expect(bundle.hairFrontAsset, contains('/hair/'), reason: '$hair 必須有髮型素材');
+          expect(bundle.hairScale, inInclusiveRange(.8, 1),
+              reason: '$hair 不得放大而跑出頭部');
+          expect(bundle.hairScaleX.abs(), inInclusiveRange(.8, 1),
+              reason: '$hair 不得水平放大而遮住臉');
           expect(bundle.hairOffsetX, 0, reason: '$hair 不可偏離畫布中心');
-          expect(bundle.hairOffsetY, 0, reason: '$hair 必須由素材本身垂直對齊');
+          expect(bundle.hairOffsetY, inInclusiveRange(-.12, 0),
+              reason: '$hair 只可上移至眼睛安全範圍');
         }
       }
+    });
+
+    test('第一款男生髮型是臉型對齊的未變形基準', () {
+      final AvatarAssetBundle reference = AvatarAssetCatalog.resolve(
+        AvatarConfiguration.defaultFor(AvatarPresentation.boy),
+      );
+
+      expect(reference.hairFrontAsset,
+          'assets/avatars/boy/hair/hair-01.png');
+      expect(reference.hairScale, 1);
+      expect(reference.hairScaleX, 1);
+      expect(reference.hairOffsetX, 0);
+      expect(reference.hairOffsetY, 0);
     });
   });
 

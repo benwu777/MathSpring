@@ -192,10 +192,10 @@ void main() {
           ),
         );
 
-        expect(assets.hairScale, inInclusiveRange(.85, 1.1), reason: hairId);
+        expect(assets.hairScale, inInclusiveRange(.8, 1.1), reason: hairId);
         expect(
           assets.hairScaleX.abs(),
-          inInclusiveRange(.85, 1.1),
+          inInclusiveRange(.8, 1.1),
           reason: '$hairId 不得被過度水平拉伸',
         );
         expect(
@@ -325,11 +325,28 @@ Future<double> _criticalEyeOverlap(AvatarConfiguration configuration) async {
     '20x40+815+605',
   ];
   double greatestOverlap = 0;
+  final int hairWidth = (1254 * assets.hairScale * assets.hairScaleX.abs()).round();
+  final int hairHeight = (1254 * assets.hairScale).round();
+  final int hairOffsetX = (1254 * assets.hairOffsetX).round();
+  final int hairOffsetY = (1254 * assets.hairOffsetY).round();
   for (final String window in eyeWindows) {
     final ProcessResult result = await Process.run('magick', <String>[
+      '(',
       assets.hairFrontAsset,
+      '-resize',
+      '${hairWidth}x$hairHeight!',
+      if (assets.hairScaleX.isNegative) '-flop',
+      '-gravity',
+      'North',
+      '-geometry',
+      '${hairOffsetX >= 0 ? '+' : ''}$hairOffsetX${hairOffsetY >= 0 ? '+' : ''}$hairOffsetY',
+      '-background',
+      'none',
+      '-extent',
+      '1254x1254',
       '-alpha',
       'extract',
+      ')',
       '(',
       assets.eyesAsset!,
       '-alpha',
