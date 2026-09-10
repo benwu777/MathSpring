@@ -2345,7 +2345,10 @@ void main() {
       return index >= 14 && index <= 42;
     }).toList();
     expect(migrated.length, 29);
-    expect(migrated.where((q) => q['reviewStatus'] == 'ok').length, 29);
+    // 2026-09-10：全庫 reviewStatus 已清空，重新進行「詳解逐步核對」的審查。
+    // 舊的 'ok' 是上一輪「答案／格式」審查的結論，不再代表這一輪的狀態，
+    // 因此這裡只釘住仍然成立的事實：欄位存在且尚未被新一輪標記。
+    expect(migrated.where((q) => q['reviewStatus'] == '').length, 29);
     for (final question in migrated) {
       expect(question['source']?['name'], isNot('MathSpring Editorial'));
     }
