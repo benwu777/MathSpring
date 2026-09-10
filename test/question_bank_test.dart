@@ -2345,10 +2345,13 @@ void main() {
       return index >= 14 && index <= 42;
     }).toList();
     expect(migrated.length, 29);
-    // 2026-09-10：全庫 reviewStatus 已清空，重新進行「詳解逐步核對」的審查。
-    // 舊的 'ok' 是上一輪「答案／格式」審查的結論，不再代表這一輪的狀態，
-    // 因此這裡只釘住仍然成立的事實：欄位存在且尚未被新一輪標記。
-    expect(migrated.where((q) => q['reviewStatus'] == '').length, 29);
+    // 2026-09-10 全庫 reviewStatus 清空、重新進行「詳解逐步核對」的審查之後，
+    // 這一欄會隨審查進度從 '' 變成 'ok'，不能拿來當斷言——先前釘住「尚未被標記」
+    // 是錯的，審到這 29 題其中任何一題就會爆掉（2026-09-11 實際發生）。
+    // 這裡只檢查欄位處於合法狀態，真正的不變量是下面的 source 檢查。
+    for (final question in migrated) {
+      expect(['', 'ok'], contains(question['reviewStatus']));
+    }
     for (final question in migrated) {
       expect(question['source']?['name'], isNot('MathSpring Editorial'));
     }
