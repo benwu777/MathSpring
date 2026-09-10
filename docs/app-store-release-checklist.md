@@ -11,6 +11,10 @@
 年齡分級 4+、**不進 Kids Category**。完整設計見
 `docs/plans/2026-09-10-freemium-monetization-design.md`，接入步驟見 `docs/monetization-handoff.md`。
 
+**待辦功能**：每日練習提醒（本地通知，不需伺服器）尚未實作，
+可行性與實作注意事項見 `docs/daily-reminder-handoff.md`。若實作，送審前需確認
+符合審查指南 4.5.4，並更新 App Privacy 中的通知相關敘述。
+
 ## 發布驗收（必須全部完成）
 
 - [ ] `flutter analyze` 為 0 issues。
