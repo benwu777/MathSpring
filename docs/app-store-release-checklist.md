@@ -6,9 +6,10 @@
 
 尚未加入 Apple Developer Program 不會阻塞產品開發。等到真機 QA、商店素材與隱私頁完成後，再申請帳號並執行簽署、TestFlight、送審。
 
-**變現方式尚未拍板。** 收益估算與兩種方案（免費＋廣告／一次性付費）的實作範圍見
-[monetization-assessment-2026-08-29.md](monetization-assessment-2026-08-29.md)。
-其中「要不要進 Kids Category」會直接決定能不能放第三方廣告，建議在動工前先確認。
+**變現方式已定稿**：免費層可作答全部題目並顯示答案，付費 NT$60（US$1.99）
+一次性解鎖完整詳解、移除廣告、紙娃娃全套樣式與 5 個角色；分類 Education、
+年齡分級 4+、**不進 Kids Category**。完整設計見
+`docs/plans/2026-09-10-freemium-monetization-design.md`，接入步驟見 `docs/monetization-handoff.md`。
 
 ## 發布驗收（必須全部完成）
 
