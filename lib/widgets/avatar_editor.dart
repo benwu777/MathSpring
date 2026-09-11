@@ -13,11 +13,15 @@ class AvatarEditor extends StatefulWidget {
     this.onChanged,
     this.assetPackage,
     this.sectionSelectorLayout = AvatarSectionSelectorLayout.scrollable,
+    this.showOptionIds = false,
   });
   final AvatarConfiguration? initialConfiguration;
   final ValueChanged<AvatarConfiguration>? onChanged;
   final String? assetPackage;
   final AvatarSectionSelectorLayout sectionSelectorLayout;
+
+  /// Used by the reviewer tool so artwork can be identified unambiguously.
+  final bool showOptionIds;
   @override
   State<AvatarEditor> createState() => _AvatarEditorState();
 }
@@ -244,6 +248,33 @@ class _AvatarEditorState extends State<AvatarEditor> {
                     child: const Padding(
                       padding: EdgeInsets.all(3),
                       child: Icon(Icons.check, color: Colors.white, size: 14),
+                    ),
+                  ),
+                ),
+              if (widget.showOptionIds)
+                Align(
+                  alignment: Alignment.bottomLeft,
+                  child: Padding(
+                    padding: const EdgeInsets.all(3),
+                    child: DecoratedBox(
+                      decoration: BoxDecoration(
+                        color: Colors.black.withValues(alpha: .68),
+                        borderRadius: BorderRadius.circular(4),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 4,
+                          vertical: 2,
+                        ),
+                        child: Text(
+                          id,
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 9,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ),
                     ),
                   ),
                 ),

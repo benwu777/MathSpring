@@ -138,6 +138,49 @@ void main() {
     }
   });
 
+  test('composes every eye option into an inspectable reviewer sheet',
+      () async {
+    final Directory outputDirectory = Directory(
+      '/private/tmp/mathspring-avatar-eye-matrix',
+    );
+    await outputDirectory.create(recursive: true);
+
+    for (final AvatarPresentation presentation in AvatarPresentation.values) {
+      final List<File> composites = <File>[];
+      for (final String eyesId
+          in AvatarConfiguration.optionsFor(presentation, 'eyes')) {
+        final AvatarConfiguration configuration =
+            AvatarConfiguration.defaultFor(presentation).copyWith(
+          eyesId: eyesId,
+        );
+        final File composite = File(
+          '${outputDirectory.path}/${presentation.name}-$eyesId.png',
+        );
+        await _composeAvatar(configuration, composite);
+        expect(await composite.length(), greaterThan(1000), reason: eyesId);
+        composites.add(composite);
+      }
+      final File sheet = File(
+        '${outputDirectory.path}/${presentation.name}-eyes.png',
+      );
+      await _runMagick(<String>[
+        'montage',
+        ...composites.map((File file) => file.path),
+        '-tile',
+        '4x',
+        '-geometry',
+        '130x130+4+18',
+        '-label',
+        '%t',
+        '-background',
+        'white',
+        sheet.path,
+      ]);
+      expect(await sheet.length(), greaterThan(1000),
+          reason: '${presentation.name} eye matrix must be non-empty');
+    }
+  });
+
   test(
       'every non-default skin keeps the composed canvas background transparent',
       () async {
@@ -325,7 +368,8 @@ Future<double> _criticalEyeOverlap(AvatarConfiguration configuration) async {
     '20x40+815+605',
   ];
   double greatestOverlap = 0;
-  final int hairWidth = (1254 * assets.hairScale * assets.hairScaleX.abs()).round();
+  final int hairWidth =
+      (1254 * assets.hairScale * assets.hairScaleX.abs()).round();
   final int hairHeight = (1254 * assets.hairScale).round();
   final int hairOffsetX = (1254 * assets.hairOffsetX).round();
   final int hairOffsetY = (1254 * assets.hairOffsetY).round();

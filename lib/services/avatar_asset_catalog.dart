@@ -109,14 +109,7 @@ class AvatarAssetCatalog {
   /// while keeping pupils visible.
   static const Map<String, AvatarOptionTreatment> _treatments =
       <String, AvatarOptionTreatment>{
-    // The baseline front fringe was painted just below the reference face's
-    // hairline; lift it enough to keep the pupils visible.
-    'boy_hair_01': AvatarOptionTreatment(offsetY: -.1),
-    'boy_hair_02': AvatarOptionTreatment(scale: .85, offsetY: -.12),
-    'girl_hair_02': AvatarOptionTreatment(scale: .80, offsetY: -.12),
     'girl_hair_07': AvatarOptionTreatment(scale: .80, offsetY: -.12),
-    'girl_hair_08': AvatarOptionTreatment(scale: .80, offsetY: -.12),
-    'girl_hair_09': AvatarOptionTreatment(scale: .80, offsetY: -.12),
   };
 
   static AvatarOptionTreatment treatmentFor(String optionId) {

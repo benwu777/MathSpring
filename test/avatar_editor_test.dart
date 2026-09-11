@@ -41,14 +41,38 @@ void main() {
         findsOneWidget);
     expect(find.text('膚色'), findsOneWidget);
 
-    await tester.tap(
-      find.byKey(const ValueKey<String>('avatar_section_tab_3')),
-    );
-    await tester.pump();
+    for (int step = 0; step < 3; step++) {
+      await tester
+          .tap(find.byKey(const ValueKey<String>('avatar_next_button')));
+      await tester.pump();
+    }
 
     expect(find.text('髮型'), findsAtLeastNWidgets(1));
     expect(find.byKey(const ValueKey<String>('avatar_option_girl_hair_01')),
         findsOneWidget);
+  });
+
+  testWidgets('can show stable asset IDs on preview option tiles',
+      (tester) async {
+    await tester.pumpWidget(
+      const MaterialApp(
+        home: Scaffold(body: AvatarEditor(showOptionIds: true)),
+      ),
+    );
+
+    for (int step = 0; step < 3; step++) {
+      await tester
+          .tap(find.byKey(const ValueKey<String>('avatar_next_button')));
+      await tester.pump();
+    }
+
+    expect(find.text('girl_hair_01'), findsOneWidget);
+    await tester.scrollUntilVisible(
+      find.text('girl_hair_10'),
+      120,
+      scrollable: find.byType(Scrollable).last,
+    );
+    expect(find.text('girl_hair_10'), findsOneWidget);
   });
 
   testWidgets('keeps direct section controls and navigation inside iPhone view',
@@ -188,7 +212,8 @@ void main() {
     expect(mouthArt.transform.storage[0], 3);
   });
 
-  testWidgets('shows the third boy hairstyle as its own untransformed thumbnail',
+  testWidgets(
+      'shows the third boy hairstyle as its own untransformed thumbnail',
       (tester) async {
     await tester.pumpWidget(
       const MaterialApp(home: Scaffold(body: AvatarEditor())),

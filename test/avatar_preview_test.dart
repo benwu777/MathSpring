@@ -391,13 +391,13 @@ void main() {
         'assets/avatars/girl/mouth/mouth-07.png');
   });
 
-  test('calibrates the boy hair layer above the eye line', () {
+  test('keeps the boy baseline hair on the shared face canvas', () {
     final AvatarAssetBundle assets = AvatarAssetCatalog.resolve(
       AvatarConfiguration.defaultFor(AvatarPresentation.boy),
     );
 
     expect(assets.hairScale, 1);
-    expect(assets.hairOffsetY, -.1);
+    expect(assets.hairOffsetY, 0);
   });
 
   test('keeps the new boy hairstyle artwork on its aligned canvas', () {
