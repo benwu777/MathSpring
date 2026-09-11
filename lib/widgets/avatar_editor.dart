@@ -4,16 +4,20 @@ import 'package:mathspring/services/avatar_asset_catalog.dart';
 import 'package:mathspring/services/avatar_catalog.dart';
 import 'package:mathspring/widgets/avatar_preview.dart';
 
+enum AvatarSectionSelectorLayout { scrollable, wrap }
+
 class AvatarEditor extends StatefulWidget {
   const AvatarEditor({
     super.key,
     this.initialConfiguration,
     this.onChanged,
     this.assetPackage,
+    this.sectionSelectorLayout = AvatarSectionSelectorLayout.scrollable,
   });
   final AvatarConfiguration? initialConfiguration;
   final ValueChanged<AvatarConfiguration>? onChanged;
   final String? assetPackage;
+  final AvatarSectionSelectorLayout sectionSelectorLayout;
   @override
   State<AvatarEditor> createState() => _AvatarEditorState();
 }
@@ -131,6 +135,7 @@ class _AvatarEditorState extends State<AvatarEditor> {
                 labels: labels.sectionTitles,
                 selectedIndex: _step,
                 onSelected: (int step) => setState(() => _step = step),
+                layout: widget.sectionSelectorLayout,
               ),
               const SizedBox(height: 8),
               if (_step == 0)
@@ -277,42 +282,54 @@ class _SectionSelector extends StatelessWidget {
     required this.labels,
     required this.selectedIndex,
     required this.onSelected,
+    required this.layout,
   });
 
   final List<String> labels;
   final int selectedIndex;
   final ValueChanged<int> onSelected;
+  final AvatarSectionSelectorLayout layout;
 
   @override
   Widget build(BuildContext context) {
     final Color selectedColor = Theme.of(context).colorScheme.primary;
+    final List<Widget> tabs = List<Widget>.generate(labels.length, (
+      int index,
+    ) {
+      final bool selected = selectedIndex == index;
+      return Padding(
+        padding: EdgeInsetsDirectional.only(
+          end: index == labels.length - 1 ? 0 : 4,
+        ),
+        child: TextButton(
+          key: ValueKey<String>('avatar_section_tab_$index'),
+          onPressed: () => onSelected(index),
+          style: TextButton.styleFrom(
+            foregroundColor: selected ? selectedColor : null,
+            backgroundColor:
+                selected ? selectedColor.withValues(alpha: .12) : null,
+            padding: const EdgeInsets.symmetric(horizontal: 12),
+            minimumSize: const Size(0, 40),
+          ),
+          child: Text(labels[index]),
+        ),
+      );
+    });
+    if (layout == AvatarSectionSelectorLayout.wrap) {
+      return Wrap(
+        key: const ValueKey<String>('avatar_section_selector'),
+        alignment: WrapAlignment.center,
+        spacing: 4,
+        runSpacing: 4,
+        children: tabs,
+      );
+    }
     return SizedBox(
       key: const ValueKey<String>('avatar_section_selector'),
       height: 40,
       child: SingleChildScrollView(
         scrollDirection: Axis.horizontal,
-        child: Row(
-          children: List<Widget>.generate(labels.length, (int index) {
-            final bool selected = selectedIndex == index;
-            return Padding(
-              padding: EdgeInsetsDirectional.only(
-                end: index == labels.length - 1 ? 0 : 4,
-              ),
-              child: TextButton(
-                key: ValueKey<String>('avatar_section_tab_$index'),
-                onPressed: () => onSelected(index),
-                style: TextButton.styleFrom(
-                  foregroundColor: selected ? selectedColor : null,
-                  backgroundColor:
-                      selected ? selectedColor.withValues(alpha: .12) : null,
-                  padding: const EdgeInsets.symmetric(horizontal: 12),
-                  minimumSize: const Size(0, 40),
-                ),
-                child: Text(labels[index]),
-              ),
-            );
-          }),
-        ),
+        child: Row(children: tabs),
       ),
     );
   }
