@@ -415,6 +415,14 @@ void main() {
     }
   });
 
+  test('narrows the girl braided hairstyle by ten percent', () {
+    final AvatarAssetBundle assets = AvatarAssetCatalog.resolve(
+      _withOption(AvatarPresentation.girl, 'hair', 'girl_hair_10'),
+    );
+
+    expect(assets.hairScaleX, .9);
+  });
+
   test('calibrates boy nose and mouth to their facial landmarks', () {
     final AvatarAssetBundle assets = AvatarAssetCatalog.resolve(
       AvatarConfiguration.defaultFor(AvatarPresentation.boy),

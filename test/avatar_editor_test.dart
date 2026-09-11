@@ -268,12 +268,12 @@ void main() {
         await tester.pump();
 
         // A scrollable hairstyle grid intentionally builds only its visible
-        // tiles.  Only treated hair options need this test's transform check;
-        // all neutral styles are covered by the catalog and asset tests.
+        // tiles.  This widget test checks one visible treated thumbnail;
+        // non-visible treatments are asserted by their catalog tests.
         final Iterable<String> ids = category == 'hair'
             ? AvatarConfiguration.optionsFor(presentation, category).where(
                 (String id) => !AvatarAssetCatalog.treatmentFor(id).isNeutral,
-              )
+              ).take(1)
             : AvatarConfiguration.optionsFor(presentation, category);
         for (final String id in ids) {
           expect(

@@ -109,7 +109,10 @@ class AvatarAssetCatalog {
   /// while keeping pupils visible.
   static const Map<String, AvatarOptionTreatment> _treatments =
       <String, AvatarOptionTreatment>{
-    'girl_hair_07': AvatarOptionTreatment(scale: .80, offsetY: -.12),
+    // The high updo owns the same canonical canvas as face_01.  Keep it near
+    // the crown rather than shrinking it so far upward that it visibly floats.
+    'girl_hair_07': AvatarOptionTreatment(scale: .9, offsetY: -.05),
+    'girl_hair_10': AvatarOptionTreatment(scaleX: .9),
   };
 
   static AvatarOptionTreatment treatmentFor(String optionId) {
