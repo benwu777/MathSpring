@@ -13,7 +13,7 @@
   "questions": [
     {
       "id": "mixed_grade6_foundation_001",
-      "reviewStatus": "",
+      "reviewStatus": "ok",
       "topic": "geometry",
       "subtopic": "overlap_area",
       "tags": [
@@ -81,7 +81,7 @@
     },
     {
       "id": "mixed_grade6_foundation_002",
-      "reviewStatus": "",
+      "reviewStatus": "ok",
       "topic": "logic",
       "subtopic": "truth_statements",
       "tags": [
@@ -174,7 +174,7 @@
     },
     {
       "id": "mixed_grade6_foundation_003",
-      "reviewStatus": "",
+      "reviewStatus": "ok",
       "topic": "number_theory",
       "subtopic": "remainders",
       "tags": [
@@ -335,7 +335,7 @@
     },
     {
       "id": "mixed_grade6_foundation_005",
-      "reviewStatus": "",
+      "reviewStatus": "ok",
       "topic": "number_theory",
       "subtopic": "digit_reversal_difference",
       "tags": [
@@ -475,7 +475,7 @@
     },
     {
       "id": "mixed_grade6_foundation_007",
-      "reviewStatus": "",
+      "reviewStatus": "ok",
       "topic": "algebra",
       "subtopic": "trial_and_improve_age",
       "tags": [
@@ -568,7 +568,7 @@
     },
     {
       "id": "mixed_grade6_foundation_008",
-      "reviewStatus": "",
+      "reviewStatus": "ok",
       "topic": "combinatorics",
       "subtopic": "symmetry_counting",
       "tags": [
@@ -657,7 +657,7 @@
     },
     {
       "id": "mixed_grade6_foundation_009",
-      "reviewStatus": "",
+      "reviewStatus": "ok",
       "topic": "mixed",
       "subtopic": "double_sided_cards",
       "tags": [
@@ -682,23 +682,43 @@
       "solutionSteps": {
         "zh-Hant": [
           "若先不管首位不能是 0，也不處理重複 5 的情況，4 張卡片每張有 2 面，排列有 2⁴ × 4! = 384 種。",
-          "首位若是 0，剩下三張卡排列有 2³ × 3! = 48 種，必須扣掉。",
-          "另外數字 5 會從兩張卡片同時出現，造成重複計數；用容斥修正後，總數是 294。"
+          "首位若是 0，剩下三張卡排列有 2³ × 3! = 48 種，必須扣掉，得到 384 − 48 = **336**。",
+          "但 336 還不是答案，因為**第三張卡與第四張卡都可能翻出 5**。當兩張卡同時翻出 5 時，四個數字裡有兩個一樣，把這兩個 5 對調並不會產生新的數，**同一個數被算了兩次**。",
+          "先數這種選面方式有幾組：第三張、第四張都取 5 是固定的，第一張有 2 種（0 或 1）、第二張有 2 種（2 或 3），共 **4 組**。",
+          "再看每一組被多算了幾個。若第一張取 1，四個數字是 1、2（或 3）、5、5：排法 4! = 24 種，但實際只有 4! ÷ 2! = 12 個不同的數，**多算 12 個**。這樣的組有 2 組（第二張取 2 或 3），共多算 24 個。",
+          "若第一張取 0，四個數字是 0、2（或 3）、5、5：扣掉開頭是 0 的之後，原本算了 24 − 3! = 18 種，實際只有 12 − 3!÷2! = 9 個不同的數，**多算 9 個**。這樣的組也有 2 組，共多算 18 個。",
+          "所以總共多算了 24 + 18 = **42 個**，真正不同的四位數有 336 − 42 = **294 個**。",
+          "驗算：程式列出四張卡片全部 2⁴ = 16 種選面方式、每種的 4! 種排列，去掉開頭為 0 的之後把結果放進集合去除重複，**得到的相異四位數正是 294 個** ✓。"
         ],
         "zh-Hans": [
           "若先不管首位不能是 0，也不处理重复 5 的情况，4 张卡片每张有 2 面，排列有 2⁴ × 4! = 384 种。",
-          "首位若是 0，剩下三张卡排列有 2³ × 3! = 48 种，必须扣掉。",
-          "另外数字 5 会从两张卡片同时出现，造成重复计数；用容斥修正后，总数是 294。"
+          "首位若是 0，剩下三张卡排列有 2³ × 3! = 48 种，必须扣掉，得到 384 − 48 = **336**。",
+          "但 336 还不是答案，因为**第三张卡与第四张卡都可能翻出 5**。当两张卡同时翻出 5 时，四个数字里有两个一样，把这两个 5 对调并不会产生新的数，**同一个数被算了两次**。",
+          "先数这种选面方式有几组：第三张、第四张都取 5 是固定的，第一张有 2 种（0 或 1）、第二张有 2 种（2 或 3），共 **4 组**。",
+          "再看每一组被多算了几个。若第一张取 1，四个数字是 1、2（或 3）、5、5：排法 4! = 24 种，但实际只有 4! ÷ 2! = 12 个不同的数，**多算 12 个**。这样的组有 2 组（第二张取 2 或 3），共多算 24 个。",
+          "若第一张取 0，四个数字是 0、2（或 3）、5、5：扣掉开头是 0 的之后，原本算了 24 − 3! = 18 种，实际只有 12 − 3!÷2! = 9 个不同的数，**多算 9 个**。这样的组也有 2 组，共多算 18 个。",
+          "所以总共多算了 24 + 18 = **42 个**，真正不同的四位数有 336 − 42 = **294 个**。",
+          "验算：程序列出四张卡片全部 2⁴ = 16 种选面方式、每种的 4! 种排列，去掉开头为 0 的之后把结果放进集合去除重复，**得到的相异四位数正是 294 个** ✓。"
         ],
         "en": [
           "Ignore for a moment the leading-zero restriction and the repeated digit 5. Then there are 2⁴ × 4! = 384 arrangements.",
-          "If the first digit is 0, the remaining three cards can be arranged in 2³ × 3! = 48 ways, so these must be removed.",
-          "The digit 5 can appear from two different cards, which creates overcounting. Using inclusion-exclusion to correct that gives a final total of 294."
+          "If the first digit is 0, the remaining three cards can be arranged in 2³ × 3! = 48 ways, so removing those leaves 384 − 48 = 336.",
+          "But 336 is not yet the answer, because the third and fourth cards can both show 5. When they do, two of the four digits are equal, swapping the two 5s produces no new number, and the same number has been counted twice.",
+          "Count how many face choices do this: the third and fourth cards are fixed at 5, the first card has 2 options (0 or 1) and the second has 2 (2 or 3), giving 4 such choices.",
+          "Now the overcount in each. With 1 on the first card the digits are 1, 2 (or 3), 5, 5: the 4! = 24 orderings give only 4! ÷ 2! = 12 distinct numbers, an overcount of 12. Two such choices give 24.",
+          "With 0 on the first card the digits are 0, 2 (or 3), 5, 5: after dropping the leading zeros, 24 − 3! = 18 orderings were counted but only 12 − 3!÷2! = 9 distinct numbers exist, an overcount of 9. Two such choices give 18.",
+          "The total overcount is 24 + 18 = 42, so the number of distinct four-digit numbers is 336 − 42 = 294.",
+          "Check: enumerating all 2⁴ = 16 face choices with their 4! orderings, discarding those starting with 0 and collecting the results in a set to remove duplicates, gives exactly 294 distinct four-digit numbers."
         ],
         "ja": [
           "まず、先頭が 0 になれない条件と、数字 5 の重複を一旦無視すると、4枚のカードにはそれぞれ2通りあり、並べ方は 2⁴ × 4! = 384 通りです。",
-          "先頭が 0 になる場合は、残り3枚の並べ方が 2³ × 3! = 48 通りあるので、これを引きます。",
-          "さらに数字 5 は2枚のカードから現れるため重複数えが起きます。これを包除原理で直すと、最終的に 294 通りです。"
+          "先頭が 0 になる場合は、残り3枚の並べ方が 2³ × 3! = 48 通りあるので、これを引いて 384 − 48 = **336** です。",
+          "しかし 336 はまだ答えではありません。**3枚目と4枚目のカードはどちらも 5 を出しうる**からです。両方が 5 のとき 4つの数字のうち2つが同じになり、2つの 5 を入れ替えても新しい数にはならず、**同じ数を2回数えて**います。",
+          "その面の選び方が何組あるかを数えます：3枚目・4枚目は 5 で固定、1枚目は 2 通り（0 か 1）、2枚目は 2 通り（2 か 3）で、計 **4 組**です。",
+          "各組で何個多く数えたかを見ます。1枚目が 1 のとき、数字は 1、2（または 3）、5、5：並べ方 4! = 24 通りに対し、異なる数は 4! ÷ 2! = 12 個だけで、**12 個多い**。この組は2組（2枚目が 2 か 3）なので計 24 個。",
+          "1枚目が 0 のとき、数字は 0、2（または 3）、5、5：先頭が 0 のものを除くと 24 − 3! = 18 通り数えていますが、実際の異なる数は 12 − 3!÷2! = 9 個で、**9 個多い**。この組も2組なので計 18 個。",
+          "多く数えた分は合計 24 + 18 = **42 個**なので、異なる4けたの数は 336 − 42 = **294 個**です。",
+          "検算：4枚のカードの面の選び方 2⁴ = 16 通りそれぞれについて 4! 通りの並べ方を列挙し、先頭が 0 のものを除いて集合に入れ重複を取り除くと、**異なる4けたの数はちょうど 294 個** ✓。"
         ]
       },
       "figure": {
@@ -749,7 +769,7 @@
     },
     {
       "id": "mixed_grade6_foundation_010",
-      "reviewStatus": "",
+      "reviewStatus": "ok",
       "topic": "algebra",
       "subtopic": "function_machine",
       "tags": [
@@ -933,7 +953,7 @@
     },
     {
       "id": "mixed_grade6_foundation_012",
-      "reviewStatus": "",
+      "reviewStatus": "ok",
       "topic": "number_theory",
       "subtopic": "digit_sum_divisibility",
       "tags": [
@@ -1108,7 +1128,7 @@
       "difficulty": "foundation",
       "levelStage": "grade6",
       "challengeTier": "foundation",
-      "reviewStatus": "",
+      "reviewStatus": "ok",
       "prompt": {
         "zh-Hant": "用數字 1、4、7 各一次排成三位數。大於 400、但小於 700 的數有幾個？",
         "en": "Use 1, 4, and 7 once each to make three-digit numbers. How many are greater than 400 but less than 700?",
@@ -1180,7 +1200,7 @@
       "difficulty": "foundation",
       "levelStage": "grade6",
       "challengeTier": "foundation",
-      "reviewStatus": "",
+      "reviewStatus": "ok",
       "prompt": {
         "zh-Hant": "甲、乙、丙、丁四人排成一列。甲緊接在乙的左邊，丙在丁的左邊。共有幾種不同排法？",
         "en": "A, B, C, and D stand in a row. A is immediately left of B, and C is left of D. How many arrangements are possible?",
@@ -1251,7 +1271,7 @@
       "difficulty": "foundation",
       "levelStage": "grade6",
       "challengeTier": "foundation",
-      "reviewStatus": "",
+      "reviewStatus": "ok",
       "prompt": {
         "zh-Hant": "把 3×3 方格的正中央一格挖掉。剩下圖形的邊界共有幾條長度為 1 的小邊？",
         "en": "Remove the center cell from a 3×3 grid. How many unit-length edges are on the boundary of the remaining shape?",
@@ -1537,7 +1557,7 @@
       "difficulty": "foundation",
       "levelStage": "grade6",
       "challengeTier": "foundation",
-      "reviewStatus": "",
+      "reviewStatus": "ok",
       "prompt": {
         "zh-Hant": "一個長 7、寬 5 的長方形和一個長 6、寬 4 的長方形部分重疊。兩個長方形合起來的面積是 47。重疊部分的面積是多少？",
         "en": "A 7-by-5 rectangle and a 6-by-4 rectangle overlap. Their combined area is 47. What is the area of the overlap?",
@@ -1608,7 +1628,7 @@
       "difficulty": "foundation",
       "levelStage": "grade6",
       "challengeTier": "foundation",
-      "reviewStatus": "",
+      "reviewStatus": "ok",
       "prompt": {
         "zh-Hant": "甲、乙、丙三人比跳遠，只有一人是第一名。甲說：「我不是第一名。」乙說：「甲是第一名。」丙說：「乙說的是假話。」已知恰好只有一句話是真的，誰是第一名？",
         "en": "A, B, and C compete in long jump, and exactly one is first. A says, “I am not first.” B says, “A is first.” C says, “B is lying.” Exactly one statement is true. Who is first?",
@@ -1766,7 +1786,7 @@
       "difficulty": "foundation",
       "levelStage": "grade6",
       "challengeTier": "foundation",
-      "reviewStatus": "",
+      "reviewStatus": "ok",
       "prompt": {
         "zh-Hant": "三個砝碼甲、乙、丙中：甲乙共重 11，乙丙共重 13，甲丙共重 14。丙重多少？",
         "en": "Three weights A, B, and C satisfy A+B=11, B+C=13, and A+C=14. What is the weight of C?",
@@ -1981,7 +2001,7 @@
       "difficulty": "foundation",
       "levelStage": "grade6",
       "challengeTier": "foundation",
-      "reviewStatus": "",
+      "reviewStatus": "ok",
       "prompt": {
         "zh-Hant": "六位朋友中每兩人本來都要握手；但有三對朋友不能握手。共握幾次手？",
         "en": "Six friends would all shake hands pairwise, but three pairs cannot shake hands. How many handshakes occur?",
@@ -2052,7 +2072,7 @@
       "difficulty": "foundation",
       "levelStage": "grade6",
       "challengeTier": "foundation",
-      "reviewStatus": "",
+      "reviewStatus": "ok",
       "prompt": {
         "zh-Hant": "一個兩位數的十位比個位大 5，且把數字倒過來後得到的數可被 9 整除。原數是多少？",
         "en": "A two-digit number has a tens digit 5 greater than its ones digit. Its reversed number is divisible by 9. What is the original number?",
@@ -2123,7 +2143,7 @@
       "difficulty": "foundation",
       "levelStage": "grade6",
       "challengeTier": "foundation",
-      "reviewStatus": "",
+      "reviewStatus": "ok",
       "prompt": {
         "zh-Hant": "兩個正方體和一個球共重 17 公克；一個正方體和兩個球共重 16 公克。正方體和球的重量相差幾公克？",
         "en": "Two cubes and one ball weigh 17 g; one cube and two balls weigh 16 g. What is their weight difference?",
@@ -2194,7 +2214,7 @@
       "difficulty": "foundation",
       "levelStage": "grade6",
       "challengeTier": "foundation",
-      "reviewStatus": "",
+      "reviewStatus": "ok",
       "prompt": {
         "zh-Hant": "甲、乙、丙各選一張不同顏色的卡：紅、藍、綠。甲不選紅，乙不選綠，丙選藍。誰選紅？",
         "en": "A, B, and C each choose a different card: red, blue, or green. A does not choose red, B does not choose green, and C chooses blue. Who chooses red?",
@@ -2288,7 +2308,7 @@
       "difficulty": "foundation",
       "levelStage": "grade6",
       "challengeTier": "foundation",
-      "reviewStatus": "",
+      "reviewStatus": "ok",
       "prompt": {
         "zh-Hant": "一個 2×2 方格由四個小正方形組成。數出所有 1×1 和 2×2 的正方形，共有幾個？",
         "en": "A 2-by-2 grid is made of four unit squares. Counting all 1-by-1 and 2-by-2 squares, how many squares are there?",
@@ -2359,7 +2379,7 @@
       "difficulty": "foundation",
       "levelStage": "grade6",
       "challengeTier": "foundation",
-      "reviewStatus": "",
+      "reviewStatus": "ok",
       "prompt": {
         "zh-Hant": "甲數比乙數多 20%。已知乙數是 50，甲數是多少？",
         "zh-Hans": "甲数比乙数多 20%。已知乙数是 50，甲数是多少？",
@@ -2572,7 +2592,7 @@
       "difficulty": "foundation",
       "levelStage": "grade6",
       "challengeTier": "foundation",
-      "reviewStatus": "",
+      "reviewStatus": "ok",
       "prompt": {
         "zh-Hant": "姐姐今年 25 歲，妹妹今年 15 歲。姐姐比妹妹大幾歲？五年後這個年齡差是多少？",
         "en": "An older sister is 25 and her younger sister is 15. How many years older is she, and what will the difference be in five years?",
@@ -2737,7 +2757,7 @@
       "difficulty": "foundation",
       "levelStage": "grade6",
       "challengeTier": "foundation",
-      "reviewStatus": "",
+      "reviewStatus": "ok",
       "prompt": {
         "zh-Hant": "把一張正方形紙沿兩條互相垂直的中線各對摺一次。在摺好的小正方形中央打一個洞，完全攤開後有幾個洞？",
         "en": "Fold a square sheet once along each of two perpendicular midlines. Punch one hole at the center of the folded square. How many holes appear when it is fully unfolded?",
@@ -2809,7 +2829,7 @@
       "difficulty": "foundation",
       "levelStage": "grade6",
       "challengeTier": "foundation",
-      "reviewStatus": "",
+      "reviewStatus": "ok",
       "prompt": {
         "zh-Hant": "所有兩位數中，十位數字大於個位數字的有幾個？",
         "en": "Among all two-digit numbers, how many have a tens digit greater than the ones digit?",
@@ -2880,7 +2900,7 @@
       "difficulty": "foundation",
       "levelStage": "grade6",
       "challengeTier": "foundation",
-      "reviewStatus": "",
+      "reviewStatus": "ok",
       "prompt": {
         "zh-Hant": "三張卡片由左到右擺成一排，位置固定不動。第一張卡片的兩面是 1 和 2，第二張是 3 和 4，第三張是 5 和 6。每張卡片各翻出一面，由左到右讀成一個三位數。個位是偶數的翻法有幾種？",
         "zh-Hans": "三张卡片由左到右摆成一排，位置固定不动。第一张卡片的两面是 1 和 2，第二张是 3 和 4，第三张是 5 和 6。每张卡片各翻出一面，由左到右读成一个三位数。个位是偶数的翻法有几种？",
@@ -2951,7 +2971,7 @@
       "difficulty": "foundation",
       "levelStage": "grade6",
       "challengeTier": "foundation",
-      "reviewStatus": "",
+      "reviewStatus": "ok",
       "prompt": {
         "zh-Hant": "一個規則把輸入 n 變成 3n+2。輸入 10 時輸出多少？",
         "en": "A rule transforms an input n into 3n+2. What is the output for 10?",
@@ -3095,7 +3115,7 @@
       "difficulty": "foundation",
       "levelStage": "grade6",
       "challengeTier": "foundation",
-      "reviewStatus": "",
+      "reviewStatus": "ok",
       "prompt": {
         "zh-Hant": "一個兩位數的數字和是 13。最大的可能數是多少？",
         "en": "A two-digit number has digit sum 13. What is the greatest possible number?",
@@ -3167,7 +3187,7 @@
       "difficulty": "foundation",
       "levelStage": "grade6",
       "challengeTier": "foundation",
-      "reviewStatus": "",
+      "reviewStatus": "ok",
       "prompt": {
         "zh-Hant": "一杯鹽水重 200 公克，其中鹽佔 10%。再倒入 50 公克的清水之後，這杯鹽水的含鹽率變成百分之幾？",
         "zh-Hans": "一杯盐水重 200 克，其中盐占 10%。再倒入 50 克的清水之后，这杯盐水的含盐率变成百分之几？",
