@@ -1844,7 +1844,7 @@
           "S 中除了 m 還有 6 個元素，它們都在 m+1 到 10 之間。**其中滿足 a + m ≤ 10 的（也就是 a ≤ 10 − m）每一個，都會「禁止」一個數 a + m 進入 S**，而這些被禁止的數彼此相異（因為 a 相異）。",
           "以 m = 4 為例：S 還有 6 個元素落在 5 到 10 之間——但 5 到 10 只有 6 個數，所以 S = {4,5,6,7,8,9,10} 共 7 個。此時 4 + 5 = 9 ∈ S ✗ 矛盾。m 更小時可用的數更多，但被禁止的數也更多，同樣無法湊滿 7 個。",
           "驗算：程式窮舉 1 到 10 的**全部 1024 個子集**，逐一檢查是否存在兩個相異元素之和落在該子集中，**符合條件的最大子集大小正是 6，而且大小為 6 的方案恰好只有一種：{5, 6, 7, 8, 9, 10}** ✓ 與上面的構造完全相同。",
-          "**注意條件說的是「相異元素」的和**——所以 a + a 這種情形不算。若把它也算進去（即要求 2a 也不在 S 中），{5,...,10} 仍然成立（最小的 2a 是 10，而 10 ∈ S ✗ 就會失敗），答案會變小，可見這個細節會影響結果。"
+          "**注意條件說的是「相異元素」的和**——所以 a + a 這種情形不算。若把它也算進去（即要求 2a 也不在 S 中），**{5, …, 10} 就不再成立**：最小的 2a 是 5 + 5 = **10**，而 10 ∈ S ✗。此時最大只能到 **5 個**（例如 {6, 7, 8, 9, 10} 或 {5, 6, 7, 8, 9}），**可見「相異」這兩個字直接改變了答案**。"
         ],
         "zh-Hans": [
           "**先想一个能达成的方案，再论证不可能更多。**",
@@ -1857,7 +1857,7 @@
           "S 中除了 m 还有 6 个元素，它们都在 m+1 到 10 之间。**其中满足 a + m ≤ 10 的（也就是 a ≤ 10 − m）每一个，都会「禁止」一个数 a + m 进入 S**，而这些被禁止的数彼此相异（因为 a 相异）。",
           "以 m = 4 为例：S 还有 6 个元素落在 5 到 10 之间——但 5 到 10 只有 6 个数，所以 S = {4,5,6,7,8,9,10} 共 7 个。此时 4 + 5 = 9 ∈ S ✗ 矛盾。m 更小时可用的数更多，但被禁止的数也更多，同样无法凑满 7 个。",
           "验算：程序穷举 1 到 10 的**全部 1024 个子集**，逐一检查是否存在两个相异元素之和落在该子集中，**符合条件的最大子集大小正是 6，而且大小为 6 的方案恰好只有一种：{5, 6, 7, 8, 9, 10}** ✓ 与上面的构造完全相同。",
-          "**注意条件说的是「相异元素」的和**——所以 a + a 这种情形不算。若把它也算进去（即要求 2a 也不在 S 中），{5,...,10} 仍然成立（最小的 2a 是 10，而 10 ∈ S ✗ 就会失败），答案会变小，可见这个细节会影响结果。"
+          "**注意条件说的是「相异元素」的和**——所以 a + a 这种情形不算。若把它也算进去（即要求 2a 也不在 S 中），**{5, …, 10} 就不再成立**：最小的 2a 是 5 + 5 = **10**，而 10 ∈ S ✗。此时最大只能到 **5 个**（例如 {6, 7, 8, 9, 10} 或 {5, 6, 7, 8, 9}），**可见「相异」这两个字直接改变了答案**。"
         ],
         "en": [
           "Find an achievable construction first, then argue that more is impossible.",
@@ -1870,7 +1870,7 @@
           "Besides m, S has 6 more elements, all between m+1 and 10. Each of those with a ≤ 10 − m forbids a distinct number a + m from belonging to S, and these forbidden numbers are all different, since the values of a are.",
           "Take m = 4: the other 6 elements must lie between 5 and 10 — but that range holds exactly 6 numbers, forcing S = {4,5,6,7,8,9,10}. Then 4 + 5 = 9 lies in S, a contradiction. Smaller m leaves more numbers available but forbids more of them, and 7 still cannot be reached.",
           "Check: enumerating all 1024 subsets of 1 to 10 and testing whether any two distinct elements sum to a member shows the largest valid subset has size 6, and exactly one subset of that size works: {5, 6, 7, 8, 9, 10}, precisely the construction above.",
-          "Note the condition concerns sums of distinct elements, so a + a does not count. Including it, by also forbidding 2a in S, would break {5,...,10}, since the smallest such doubling gives 10, which is in S, and the answer would drop — so this detail genuinely affects the result."
+          "Note the condition concerns sums of distinct elements, so a + a does not count. Including it, by also forbidding 2a in S, breaks {5, …, 10}: the smallest such doubling is 5 + 5 = 10, and 10 lies in S. The maximum then drops to 5, achieved for instance by {6, 7, 8, 9, 10} or {5, 6, 7, 8, 9}, so the single word distinct changes the answer outright."
         ],
         "ja": [
           "**まず達成できる配置を考え、次にそれ以上が不可能であることを論じます。**",
@@ -1883,7 +1883,7 @@
           "m のほかに S には 6 要素があり、いずれも m+1 から 10 の間にあります。**そのうち a ≤ 10 − m を満たす各要素が、それぞれ相異なる数 a + m を S から締め出します**（a が相異なるため）。",
           "m = 4 の場合：他の 6 要素は 5〜10 に入りますが、その範囲はちょうど 6 個なので S = {4,5,6,7,8,9,10} に定まります。すると 4 + 5 = 9 ∈ S ✗ で矛盾します。m がより小さければ使える数は増えますが締め出される数も増え、やはり 7 には届きません。",
           "検算：1〜10 の**全 1024 個の部分集合**を列挙し、相異なる 2 元の和がその集合に属するかを調べると、**条件を満たす最大の大きさはちょうど 6 で、大きさ 6 の配置は {5, 6, 7, 8, 9, 10} のただ 1 通り** ✓ で上の構成と完全に一致します。",
-          "**条件は「相異なる」2 元の和**である点に注意します——a + a は数えません。これも含める（2a も S に属さないと要求する）と {5,...,10} は成り立たなくなり（最小の 2a は 10 で、10 ∈ S ✗）、答えは小さくなります。この細部が結果を左右します。"
+          "**条件は「相異なる」2 元の和**である点に注意します——a + a は数えません。これも含める（2a も S に属さないと要求する）と **{5, …, 10} は成り立たなくなります**：最小の 2a は 5 + 5 = **10** で、10 ∈ S ✗。このとき最大は **5 個**まで（例えば {6, 7, 8, 9, 10} や {5, 6, 7, 8, 9}）となり、**「相異なる」という一語が答えを変えてしまう**ことが分かります。"
         ]
       },
       "figure": {
@@ -1913,7 +1913,7 @@
         "subtopic": "和不落在集合內",
         "subtopicCode": "sum_free_subset"
       },
-      "reviewStatus": ""
+      "reviewStatus": "ok"
     },
     {
       "id": "logic_grade11_foundation_020",
