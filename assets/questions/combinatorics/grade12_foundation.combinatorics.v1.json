@@ -583,7 +583,7 @@
         "subtopic": "含斜步的格點路徑",
         "subtopicCode": "diagonal_lattice_paths"
       },
-      "reviewStatus": ""
+      "reviewStatus": "ok"
     },
     {
       "id": "combinatorics_grade12_foundation_006",
@@ -3694,7 +3694,7 @@
       "id": "combinatorics_grade12_foundation_037"
     },
     {
-      "reviewStatus": "",
+      "reviewStatus": "ok",
       "topic": "combinatorics",
       "subtopic": "cycle_proper_colouring",
       "tags": [
@@ -3721,25 +3721,41 @@
           "先想像把五邊形剪開成一條鏈：頂點 1 到 5 排成一列，只要求相鄰不同色。",
           "這時第 1 個頂點有 3 種選擇，之後每一個都只要和前一個不同，各有 2 種，共 3 × 2⁴ = 48 種。",
           "但這 48 種裡，有些會讓第 5 個頂點和第 1 個頂點同色，那在五邊形上是不合法的，必須扣掉。",
-          "「第 5 和第 1 同色」的鏈相當於把這兩點併成一點，變成長度 4 的環，數量是 3 × 2³ − …；直接用環的公式較快：n 個頂點的環用 k 色的合法塗法是 (k − 1)ⁿ + (−1)ⁿ(k − 1)。代入 n = 5、k = 3：2⁵ + (−1)⁵ × 2 = 32 − 2 = 30 種。"
+          "**把「鏈」的總數拆成兩類**：第 5 點與第 1 點**不同色**（這才是合法的五邊形塗法，設有 P₅ 種），以及第 5 點與第 1 點**同色**。",
+          "**同色的那一類，恰好對應長度 4 的環**——把重合的第 1、5 點併成一個點，原本的鏈就變成 1–2–3–4 首尾相接的四邊形，而且相鄰不同色的要求完全對應 ✓ 所以同色的鏈有 P₄ 種。",
+          "**於是得到遞迴關係**：3 × 2ⁿ⁻¹ = Pₙ + Pₙ₋₁（左邊是 n 個點排成鏈的塗法數）。**從三角形開始往上推**：P₃ = 3 × 2 × 1 = **6**（三個點兩兩相鄰，三色各用一次）。",
+          "n = 4：3 × 2³ = 24 = P₄ + P₃ = P₄ + 6，得 **P₄ = 18**。n = 5：3 × 2⁴ = 48 = P₅ + P₄ = P₅ + 18，得 **P₅ = 48 − 18 = 30 種**。",
+          "驗算：也可以直接套環的公式 (k − 1)ⁿ + (−1)ⁿ(k − 1)。代入 n = 5、k = 3 得 2⁵ + (−1)⁵ × 2 = 32 − 2 = **30** ✓；代入 n = 4 得 2⁴ + 2 = **18** ✓，與上面遞迴推出的完全一致。**程式窮舉 3⁵ = 243 種塗法逐一檢查五對相鄰點，合格的正是 30 種** ✓。"
         ],
         "zh-Hans": [
           "先想象把五边形剪开成一条链：顶点 1 到 5 排成一列，只要求相邻不同色。",
           "这时第 1 个顶点有 3 种选择，之后每一个都只要和前一个不同，各有 2 种，共 3 × 2⁴ = 48 种。",
           "但这 48 种里，有些会让第 5 个顶点和第 1 个顶点同色，那在五边形上是不合法的，必须扣掉。",
-          "「第 5 和第 1 同色」的链相当于把这两点并成一点，变成长度 4 的环；直接用环的公式较快：n 个顶点的环用 k 色的合法涂法是 (k − 1)ⁿ + (−1)ⁿ(k − 1)。代入 n = 5、k = 3：2⁵ + (−1)⁵ × 2 = 32 − 2 = 30 种。"
+          "**把「链」的总数拆成两类**：第 5 点与第 1 点**不同色**（这才是合法的五边形涂法，设有 P₅ 种），以及第 5 点与第 1 点**同色**。",
+          "**同色的那一类，恰好对应长度 4 的环**——把重合的第 1、5 点并成一个点，原本的链就变成 1–2–3–4 首尾相接的四边形，而且相邻不同色的要求完全对应 ✓ 所以同色的链有 P₄ 种。",
+          "**于是得到递推关系**：3 × 2ⁿ⁻¹ = Pₙ + Pₙ₋₁（左边是 n 个点排成链的涂法数）。**从三角形开始往上推**：P₃ = 3 × 2 × 1 = **6**（三个点两两相邻，三色各用一次）。",
+          "n = 4：3 × 2³ = 24 = P₄ + P₃ = P₄ + 6，得 **P₄ = 18**。n = 5：3 × 2⁴ = 48 = P₅ + P₄ = P₅ + 18，得 **P₅ = 48 − 18 = 30 种**。",
+          "验算：也可以直接套环的公式 (k − 1)ⁿ + (−1)ⁿ(k − 1)。代入 n = 5、k = 3 得 2⁵ + (−1)⁵ × 2 = 32 − 2 = **30** ✓；代入 n = 4 得 2⁴ + 2 = **18** ✓，与上面递推得到的完全一致。**程序穷举 3⁵ = 243 种涂法逐一检查五对相邻点，合格的正是 30 种** ✓。"
         ],
         "en": [
           "First imagine cutting the pentagon open into a chain: vertices 1 to 5 in a row, with only neighbours in the row required to differ.",
           "Then vertex 1 has 3 choices and each later vertex only has to differ from the one before it, giving 2 choices each, for 3 × 2⁴ = 48 colourings.",
           "But some of those 48 give vertex 5 the same colour as vertex 1, which is not allowed on the pentagon, so they must be removed.",
-          "A chain with vertices 5 and 1 the same colour behaves like merging those two into one, giving a cycle of length 4. The cycle formula is quicker: a cycle on n vertices with k colours has (k − 1)ⁿ + (−1)ⁿ(k − 1) proper colourings. With n = 5 and k = 3 this is 2⁵ + (−1)⁵ × 2 = 32 − 2 = 30."
+          "Split the chain count into two classes: those where vertex 5 differs in colour from vertex 1, which are exactly the legal pentagon colourings, say P₅ of them, and those where vertices 5 and 1 share a colour.",
+          "The same-colour class corresponds exactly to a cycle of length 4: merging the coinciding vertices 1 and 5 into one turns the chain into the quadrilateral 1-2-3-4 closed up, and the adjacent-differ requirements match up perfectly. So there are P₄ such chains.",
+          "This gives the recurrence 3 × 2^(n−1) = Pₙ + Pₙ₋₁, the left side counting colourings of n vertices in a row. Start from the triangle: P₃ = 3 × 2 × 1 = 6, since three mutually adjacent vertices use each of the three colours once.",
+          "For n = 4: 3 × 2³ = 24 = P₄ + P₃ = P₄ + 6, so P₄ = 18. For n = 5: 3 × 2⁴ = 48 = P₅ + P₄ = P₅ + 18, so P₅ = 48 − 18 = 30.",
+          "Check: the cycle formula (k − 1)ⁿ + (−1)ⁿ(k − 1) gives 2⁵ + (−1)⁵ × 2 = 32 − 2 = 30 for n = 5, k = 3, and 2⁴ + 2 = 18 for n = 4, matching the recurrence exactly. Enumerating all 3⁵ = 243 colourings and checking the five adjacent pairs also yields exactly 30."
         ],
         "ja": [
           "まず五角形を切りひらいて鎖にすることを考えます。頂点 1 から 5 を一列に並べ、列でとなり合うものだけ色をちがえます。",
           "このとき頂点 1 は 3 通り、以降は直前とちがえばよいので各 2 通りで、3 × 2⁴ = 48 通りです。",
           "しかしこの 48 通りの中には 頂点 5 と頂点 1 が同色になるものがあり、五角形では不可なので取りのぞきます。",
-          "頂点 5 と 1 が同色の鎖は、その 2 点を 1 点にまとめた長さ 4 の輪にあたります。輪の公式を使うほうが速く、n 頂点の輪を k 色でぬる方法は (k − 1)ⁿ + (−1)ⁿ(k − 1) です。n = 5、k = 3 を代入すると 2⁵ + (−1)⁵ × 2 = 32 − 2 = 30 通りです。"
+          "**「鎖」の総数を二つに分けます**：第 5 点と第 1 点が**異なる色**（これが正しい五角形の塗り方、P₅ 通りとする）と、第 5 点と第 1 点が**同じ色**の場合。",
+          "**同色の場合は長さ 4 の輪にちょうど対応します**——重なった第 1・5 点を 1 点にまとめると、鎖は 1–2–3–4 を閉じた四角形になり、隣接が異色という条件も完全に対応します ✓ よって同色の鎖は P₄ 通り。",
+          "**こうして漸化式が得られます**：3 × 2ⁿ⁻¹ = Pₙ + Pₙ₋₁（左辺は n 点を一列に並べた塗り方の数）。**三角形から順に上げていきます**：P₃ = 3 × 2 × 1 = **6**（3 点が互いに隣接し、3 色を一度ずつ使う）。",
+          "n = 4：3 × 2³ = 24 = P₄ + P₃ = P₄ + 6 より **P₄ = 18**。n = 5：3 × 2⁴ = 48 = P₅ + P₄ = P₅ + 18 より **P₅ = 48 − 18 = 30 通り**。",
+          "検算：輪の公式 (k − 1)ⁿ + (−1)ⁿ(k − 1) を直接使っても、n = 5、k = 3 で 2⁵ + (−1)⁵ × 2 = 32 − 2 = **30** ✓、n = 4 で 2⁴ + 2 = **18** ✓ となり、漸化式の結果と完全に一致します。**3⁵ = 243 通りを全列挙して隣接 5 組を確認しても、合格は 30 通り** ✓。"
         ]
       },
       "figure": {
@@ -3920,7 +3936,7 @@
       "difficulty": "foundation",
       "levelStage": "grade12",
       "challengeTier": "foundation",
-      "reviewStatus": "",
+      "reviewStatus": "ok",
       "prompt": {
         "zh-Hant": "箱子裡有 3 枚硬幣，其中兩枚是公正硬幣，另一枚的兩面都是正面。隨機取出一枚並擲一次，結果出現正面。求這枚硬幣是兩面都是正面的那一枚的機率。（答案為最簡分數）",
         "zh-Hans": "箱子里有 3 枚硬币，其中两枚是公正硬币，另一枚的两面都是正面。随机取出一枚并掷一次，结果出现正面。求这枚硬币是两面都是正面的那一枚的概率。（答案为最简分数）",
