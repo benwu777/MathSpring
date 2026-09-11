@@ -3053,29 +3053,41 @@
           "n! 末尾 0 的個數等於把 n 依序除以 5、25、125⋯ 後取整數部分再相加。",
           "當 n 每增加 1，這個個數要嘛不變，要嘛跳增；跳增的幅度等於新增的那個數含有多少個因數 5。",
           "若 n 是 25 的倍數但不是 125 的倍數，它一次帶進兩個因數 5，零的個數會一口氣跳過 1 個值，那個被跳過的值就永遠達不到。",
-          "在 1 到 100 的範圍內，這樣的跳躍發生在 n = 25、50、75、100 各跳過 1 個值，n = 125 因含三個因數 5 會跳過 2 個值，依此類推逐一累計。",
-          "把所有被跳過而落在 1 到 100 之間的值數出來，一共有 19 個，所以答案是 19。"
+          "**所以被跳過的值，全部來自 n 是 25 的倍數的那些跳躍。**每個 25 的倍數（但非 125 的倍數）跳過 **1** 個值；每個 125 的倍數（但非 625 的倍數）一次帶進三個因數 5，跳過 **2** 個值。",
+          "**接著要確定 n 該看到多大。**零的個數 Z(n) 隨 n 遞增，而 Z(400) = 80 + 16 + 3 = **99**、Z(405) = 81 + 16 + 3 = **100**、Z(410) = **101**。所以被跳過而仍 ≤ 100 的值，只可能來自 **n ≤ 400** 的跳躍。",
+          "**數一數 1 到 400 之間 25 的倍數**：400 ÷ 25 = **16 個**。其中同時是 125 倍數的有 125、250、375 共 **3 個**（625 已超出範圍）。",
+          "**所以被跳過的值有** (16 − 3) × 1 + 3 × 2 = 13 + 6 = **19 個**。",
+          "驗算：**把它們全部列出來**——5、11、17、23、29、30、36、42、48、54、60、61、67、73、79、85、91、92、98，恰好 **19 個** ✓ 都落在 1 到 100 之內。**注意 29 與 30 相連、60 與 61 相連、91 與 92 相連**，那三處正是 n = 125、250、375 一次跳過兩個值造成的 ✓ 與上面的計數完全對得上。"
         ],
         "zh-Hans": [
           "n! 末尾 0 的个数等于把 n 依序除以 5、25、125⋯ 后取整数部分再相加。",
           "当 n 每增加 1，这个个数要么不变，要么跳增；跳增的幅度等于新增的那个数含有多少个因数 5。",
           "若 n 是 25 的倍数但不是 125 的倍数，它一次带进两个因数 5，零的个数会一口气跳过 1 个值，那个被跳过的值就永远达不到。",
-          "在 1 到 100 的范围内，这样的跳跃发生在 n = 25、50、75、100 各跳过 1 个值，n = 125 因含三个因数 5 会跳过 2 个值，依此类推逐一累计。",
-          "把所有被跳过而落在 1 到 100 之间的值数出来，一共有 19 个，所以答案是 19。"
+          "**所以被跳过的值，全部来自 n 是 25 的倍数的那些跳跃。**每个 25 的倍数（但非 125 的倍数）跳过 **1** 个值；每个 125 的倍数（但非 625 的倍数）一次带进三个因数 5，跳过 **2** 个值。",
+          "**接着要确定 n 该看到多大。**零的个数 Z(n) 随 n 递增，而 Z(400) = 80 + 16 + 3 = **99**、Z(405) = 81 + 16 + 3 = **100**、Z(410) = **101**。所以被跳过而仍 ≤ 100 的值，只可能来自 **n ≤ 400** 的跳跃。",
+          "**数一数 1 到 400 之间 25 的倍数**：400 ÷ 25 = **16 个**。其中同时是 125 倍数的有 125、250、375 共 **3 个**（625 已超出范围）。",
+          "**所以被跳过的值有** (16 − 3) × 1 + 3 × 2 = 13 + 6 = **19 个**。",
+          "验算：**把它们全部列出来**——5、11、17、23、29、30、36、42、48、54、60、61、67、73、79、85、91、92、98，恰好 **19 个** ✓ 都落在 1 到 100 之内。**注意 29 与 30 相连、60 与 61 相连、91 与 92 相连**，那三处正是 n = 125、250、375 一次跳过两个值造成的 ✓ 与上面的计数完全对得上。"
         ],
         "en": [
           "The number of trailing zeros of n! is found by dividing n by 5, then 25, then 125, and so on, taking whole parts and adding them.",
           "As n increases by 1 this count either stays the same or jumps, and the size of the jump is the number of factors of 5 in the new value of n.",
           "If n is a multiple of 25 but not of 125, it brings in two factors of 5 at once, so the count skips over one value entirely, and that skipped value is never attainable.",
-          "Within the range 1 to 100 such jumps occur at n = 25, 50, 75 and 100, each skipping one value, while n = 125 carries three factors of 5 and skips two values, and so on for higher multiples.",
-          "Counting all the skipped values that fall between 1 and 100 gives 19 of them, so the answer is 19."
+          "So every skipped value comes from a jump at a multiple of 25. Each multiple of 25 that is not a multiple of 125 skips 1 value, while each multiple of 125 that is not a multiple of 625 brings in three factors of 5 at once and skips 2 values.",
+          "Next decide how far n has to be examined. The count Z(n) is non-decreasing, and Z(400) = 80 + 16 + 3 = 99, Z(405) = 81 + 16 + 3 = 100, Z(410) = 101. So any skipped value that is still at most 100 must come from a jump with n ≤ 400.",
+          "Count the multiples of 25 up to 400: 400 ÷ 25 = 16 of them. Of these, the multiples of 125 are 125, 250 and 375, three in all, since 625 is out of range.",
+          "Hence the number of skipped values is (16 − 3) × 1 + 3 × 2 = 13 + 6 = 19.",
+          "Check by listing them all: 5, 11, 17, 23, 29, 30, 36, 42, 48, 54, 60, 61, 67, 73, 79, 85, 91, 92 and 98, exactly 19 values, all between 1 and 100. Note that 29 and 30 are consecutive, as are 60 and 61 and also 91 and 92: those three places are precisely where n = 125, 250 and 375 each skip two values at once, matching the count above."
         ],
         "ja": [
           "n! の末尾の 0 の個数は、n を 5、25、125⋯ で順にわって整数部分をたすことで求められます。",
           "n が 1 増えるとこの個数は変わらないか跳ね上がり、跳ね上がる幅は新しい n がふくむ因数 5 の個数に等しくなります。",
           "n が 25 の倍数で 125 の倍数でないとき、一度に因数 5 を 2 つもたらすので 0 の個数は 1 つの値を飛ばし、その値には決して到達できません。",
-          "1 から 100 の範囲では、こうした飛びが n = 25、50、75、100 で 1 つずつ起こり、n = 125 は因数 5 を 3 つふくむので 2 つ飛ばすというように、順に積み上がっていきます。",
-          "1 から 100 の間で飛ばされる値をすべて数えると 19 個になるので、答えは 19 です。"
+          "**したがって飛ばされる値はすべて、n が 25 の倍数のときの跳躍から生じます。**25 の倍数（ただし 125 の倍数でない）ごとに **1** 個、125 の倍数（ただし 625 の倍数でない）は一度に因数 5 を三つ持ち込むので **2** 個を飛ばします。",
+          "**次に n をどこまで見ればよいかを定めます。**零の個数 Z(n) は単調非減少で、Z(400) = 80 + 16 + 3 = **99**、Z(405) = 81 + 16 + 3 = **100**、Z(410) = **101**。よって 100 以下で飛ばされる値は **n ≤ 400** の跳躍からしか生じません。",
+          "**1 から 400 までの 25 の倍数を数えます**：400 ÷ 25 = **16 個**。そのうち 125 の倍数は 125、250、375 の **3 個**（625 は範囲外）。",
+          "**よって飛ばされる値は** (16 − 3) × 1 + 3 × 2 = 13 + 6 = **19 個**。",
+          "検算：**すべて列挙します**——5、11、17、23、29、30、36、42、48、54、60、61、67、73、79、85、91、92、98 でちょうど **19 個** ✓ いずれも 1 以上 100 以下。**29 と 30、60 と 61、91 と 92 が連続している**点に注意——この三箇所こそ n = 125、250、375 が一度に二つ飛ばした結果で ✓ 上の計数と完全に一致します。"
         ]
       },
       "figure": {
@@ -3096,7 +3108,7 @@
         "subtopic": "階乘末尾零的個數",
         "subtopicCode": "factorial_trailing_zeros"
       },
-      "reviewStatus": "",
+      "reviewStatus": "ok",
       "answerMode": "integer_input",
       "correctAnswer": {
         "type": "integer",
