@@ -75,29 +75,69 @@ void main() {
       expect(longHair.hairBackAsset, isNotNull,
           reason: 'girl_hair_06（雙馬尾）應該要有後層');
     });
-  });
 
-  group('眼鏡配件', () {
-    test('accessory 是一個獨立的可選類別，預設為「不戴」', () {
-      final List<String> options =
-          AvatarConfiguration.optionsFor(AvatarPresentation.girl, 'accessory');
-      expect(options.first, 'accessory_none');
-      expect(options.length, greaterThanOrEqualTo(3), reason: '至少要有：不戴、眼鏡、墨鏡');
+    test('每款髮型都要從透明基準素材套用安全定位', () {
+      for (final AvatarPresentation presentation in AvatarPresentation.values) {
+        for (final String hair
+            in AvatarConfiguration.optionsFor(presentation, 'hair')) {
+          final AvatarAssetBundle bundle = AvatarAssetCatalog.resolve(
+            AvatarConfiguration.defaultFor(presentation).copyWith(hairId: hair),
+          );
+          expect(bundle.hairFrontAsset, contains('/hair/'), reason: '$hair 必須有髮型素材');
+          expect(bundle.hairScale, inInclusiveRange(.8, 1),
+              reason: '$hair 不得放大而跑出頭部');
+          expect(bundle.hairScaleX.abs(), inInclusiveRange(.8, 1),
+              reason: '$hair 不得水平放大而遮住臉');
+          expect(bundle.hairOffsetX, 0, reason: '$hair 不可偏離畫布中心');
+          expect(bundle.hairOffsetY, inInclusiveRange(-.12, 0),
+              reason: '$hair 只可上移至眼睛安全範圍');
+        }
+      }
     });
 
-    testWidgets('選了眼鏡時畫面上要有配件圖層，選「不戴」時沒有', (WidgetTester tester) async {
-      final AvatarConfiguration withGlasses =
-          girl().copyWith(accessoryId: 'accessory_glasses_01');
+    test('第一款男生髮型以共用畫布對齊基準臉', () {
+      final AvatarAssetBundle reference = AvatarAssetCatalog.resolve(
+        AvatarConfiguration.defaultFor(AvatarPresentation.boy),
+      );
+
+      expect(reference.hairFrontAsset,
+          'assets/avatars/boy/hair/hair-01.png');
+      expect(reference.hairScale, 1);
+      expect(reference.hairScaleX, 1);
+      expect(reference.hairOffsetX, 0);
+      expect(reference.hairOffsetY, 0);
+    });
+  });
+
+  group('眼睛與眼鏡', () {
+    test('眼鏡款是眼睛選項的一部分，且仍保留一般眼睛款', () {
+      final List<String> options =
+          AvatarConfiguration.optionsFor(AvatarPresentation.girl, 'eyes');
+      expect(
+          options,
+          containsAll(<String>[
+            'girl_eyes_01',
+            'girl_eyes_06',
+            'girl_eyes_07',
+            'girl_eyes_08',
+          ]));
+      expect(
+        () => AvatarConfiguration.optionsFor(
+            AvatarPresentation.girl, 'accessory'),
+        throwsArgumentError,
+      );
+    });
+
+    testWidgets('legacy glasses values cannot add a second overlay',
+        (WidgetTester tester) async {
+      final AvatarConfiguration glassesEyes = girl().copyWith(
+          eyesId: 'girl_eyes_06', accessoryId: 'accessory_glasses_01');
       await tester.pumpWidget(
         MaterialApp(
-            home: Scaffold(body: AvatarPreview(configuration: withGlasses))),
+            home: Scaffold(body: AvatarPreview(configuration: glassesEyes))),
       );
-      expect(find.byKey(const ValueKey<String>('avatar_accessory_layer')),
+      expect(find.byKey(const ValueKey<String>('avatar_eyes_layer')),
           findsOneWidget);
-
-      await tester.pumpWidget(
-        MaterialApp(home: Scaffold(body: AvatarPreview(configuration: girl()))),
-      );
       expect(find.byKey(const ValueKey<String>('avatar_accessory_layer')),
           findsNothing);
     });

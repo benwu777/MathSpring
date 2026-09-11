@@ -4,11 +4,16 @@ import 'package:mathspring/services/avatar_asset_catalog.dart';
 
 /// Renders production illustration layers rather than procedural geometry.
 class AvatarPreview extends StatelessWidget {
-  const AvatarPreview(
-      {super.key, required this.configuration, this.size = 180});
+  const AvatarPreview({
+    super.key,
+    required this.configuration,
+    this.size = 180,
+    this.assetPackage,
+  });
 
   final AvatarConfiguration configuration;
   final double size;
+  final String? assetPackage;
 
   @override
   Widget build(BuildContext context) {
@@ -36,10 +41,11 @@ class AvatarPreview extends StatelessWidget {
                 child: assets.skinTint == null
                     ? _layer(assets.baseAsset)
                     : ColorFiltered(
-                        // 相乘保留底圖的明暗與腮紅；srcATop 會把它們壓平。
+                        // Modulate 保留底圖的明暗與腮紅，同時不會把不透明
+                        // 色票合成到透明畫布，避免膚色染到背景。
                         colorFilter: ColorFilter.mode(
                           assets.skinTint!,
-                          BlendMode.multiply,
+                          BlendMode.modulate,
                         ),
                         child: _layer(assets.baseAsset),
                       ),
@@ -59,7 +65,7 @@ class AvatarPreview extends StatelessWidget {
                       : ColorFiltered(
                           colorFilter: ColorFilter.mode(
                             assets.noseTint!,
-                            BlendMode.multiply,
+                            BlendMode.modulate,
                           ),
                           child: _layer(path, offsetY: assets.noseOffsetY),
                         ),
@@ -68,17 +74,6 @@ class AvatarPreview extends StatelessWidget {
                 Transform.scale(
                   scaleX: assets.mouthScaleX,
                   child: _layer(path, offsetY: assets.mouthOffsetY),
-                ),
-              if (assets.accessoryAsset case final String path)
-                KeyedSubtree(
-                  key: const ValueKey<String>('avatar_accessory_layer'),
-                  child: ColorFiltered(
-                    colorFilter: const ColorFilter.mode(
-                      AvatarAssetCatalog.fixedDarkFeatureTint,
-                      BlendMode.srcATop,
-                    ),
-                    child: _layer(path),
-                  ),
                 ),
               KeyedSubtree(
                 key: const ValueKey<String>('avatar_hair_front_layer'),
@@ -93,7 +88,11 @@ class AvatarPreview extends StatelessWidget {
 
   Widget _layer(String asset, {double offsetY = 0}) => FractionalTranslation(
         translation: Offset(0, offsetY),
-        child: Image.asset(asset, fit: BoxFit.contain),
+        child: Image.asset(
+          asset,
+          package: assetPackage,
+          fit: BoxFit.contain,
+        ),
       );
 
   Widget _hairLayer(AvatarAssetBundle assets, String asset) =>

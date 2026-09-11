@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mathspring/models/avatar_configuration.dart';
 import 'package:mathspring/services/avatar_asset_catalog.dart';
@@ -10,15 +11,90 @@ void main() {
       (tester) async {
     await tester
         .pumpWidget(const MaterialApp(home: Scaffold(body: AvatarEditor())));
-    expect(find.text('Choose avatar'), findsOneWidget);
+    expect(find.text('Choose avatar'), findsAtLeastNWidgets(1));
     await tester
         .tap(find.byKey(const ValueKey<String>('avatar_presentation_boy')));
     await tester.tap(find.byKey(const ValueKey<String>('avatar_next_button')));
     await tester.pump();
-    expect(find.text('Skin tone'), findsOneWidget);
+    expect(find.text('Skin tone'), findsAtLeastNWidgets(1));
     await tester.tap(find.byKey(const ValueKey<String>('avatar_next_button')));
     await tester.pump();
-    expect(find.text('Face shape'), findsOneWidget);
+    expect(find.text('Face shape'), findsAtLeastNWidgets(1));
+  });
+
+  testWidgets('lets learners jump straight to a localized avatar section',
+      (tester) async {
+    await tester.pumpWidget(
+      const MaterialApp(
+        locale: Locale('zh', 'TW'),
+        supportedLocales: <Locale>[Locale('zh', 'TW')],
+        localizationsDelegates: <LocalizationsDelegate<dynamic>>[
+          GlobalMaterialLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+        ],
+        home: Scaffold(body: AvatarEditor()),
+      ),
+    );
+
+    expect(find.byKey(const ValueKey<String>('avatar_section_selector')),
+        findsOneWidget);
+    expect(find.text('膚色'), findsOneWidget);
+
+    for (int step = 0; step < 3; step++) {
+      await tester
+          .tap(find.byKey(const ValueKey<String>('avatar_next_button')));
+      await tester.pump();
+    }
+
+    expect(find.text('髮型'), findsAtLeastNWidgets(1));
+    expect(find.byKey(const ValueKey<String>('avatar_option_girl_hair_01')),
+        findsOneWidget);
+  });
+
+  testWidgets('can show stable asset IDs on preview option tiles',
+      (tester) async {
+    await tester.pumpWidget(
+      const MaterialApp(
+        home: Scaffold(body: AvatarEditor(showOptionIds: true)),
+      ),
+    );
+
+    for (int step = 0; step < 3; step++) {
+      await tester
+          .tap(find.byKey(const ValueKey<String>('avatar_next_button')));
+      await tester.pump();
+    }
+
+    expect(find.text('girl_hair_01'), findsOneWidget);
+    await tester.scrollUntilVisible(
+      find.text('girl_hair_10'),
+      120,
+      scrollable: find.byType(Scrollable).last,
+    );
+    expect(find.text('girl_hair_10'), findsOneWidget);
+  });
+
+  testWidgets('keeps direct section controls and navigation inside iPhone view',
+      (tester) async {
+    tester.view.devicePixelRatio = 1.0;
+    tester.view.physicalSize = const Size(390, 844);
+    addTearDown(tester.view.reset);
+
+    await tester.pumpWidget(
+      const MaterialApp(home: Scaffold(body: AvatarEditor())),
+    );
+
+    for (final Finder control in <Finder>[
+      find.byKey(const ValueKey<String>('avatar_section_selector')),
+      find.byKey(const ValueKey<String>('avatar_back_button')),
+      find.byKey(const ValueKey<String>('avatar_next_button')),
+    ]) {
+      final Rect rect = tester.getRect(control);
+      expect(rect.top, greaterThanOrEqualTo(0));
+      expect(rect.bottom, lessThanOrEqualTo(844));
+    }
+    expect(tester.takeException(), isNull);
   });
 
   testWidgets('shows girl hairstyle options as tappable asset thumbnails',
@@ -33,7 +109,7 @@ void main() {
       await tester.pump();
     }
 
-    expect(find.text('Hairstyle'), findsOneWidget);
+    expect(find.text('Hairstyle'), findsAtLeastNWidgets(1));
     expect(find.byKey(const ValueKey<String>('avatar_option_girl_hair_01')),
         findsOneWidget);
     expect(find.byKey(const ValueKey<String>('avatar_option_girl_hair_03')),
@@ -81,7 +157,7 @@ void main() {
           .crossAxisCount;
     }
 
-    // 步驟：3 髮型 → 4 眼型 → 5 鼻 → 6 嘴 → 7 眼鏡
+    // 步驟：3 髮型 → 4 眼型（包含眼鏡）→ 5 鼻 → 6 嘴
     await advanceTo(3);
     expect(columnCount(), 3, reason: '髮型');
 
@@ -97,9 +173,7 @@ void main() {
     await tester.pump();
     expect(columnCount(), 5, reason: '嘴');
 
-    await tester.tap(find.byKey(const ValueKey<String>('avatar_next_button')));
-    await tester.pump();
-    expect(columnCount(), 4, reason: '眼鏡');
+    expect(find.text('Glasses'), findsNothing);
   });
 
   testWidgets('does not offer eye colour as an avatar editor step',
@@ -113,11 +187,11 @@ void main() {
           .tap(find.byKey(const ValueKey<String>('avatar_next_button')));
       await tester.pump();
     }
-    expect(find.text('Eyes'), findsOneWidget);
+    expect(find.text('Eyes'), findsAtLeastNWidgets(1));
 
     await tester.tap(find.byKey(const ValueKey<String>('avatar_next_button')));
     await tester.pump();
-    expect(find.text('Nose'), findsOneWidget);
+    expect(find.text('Nose'), findsAtLeastNWidgets(1));
     expect(find.text('Eye colour'), findsNothing);
   });
 
@@ -138,7 +212,8 @@ void main() {
     expect(mouthArt.transform.storage[0], 3);
   });
 
-  testWidgets('shows the third boy hairstyle as a mirrored thumbnail',
+  testWidgets(
+      'shows the third boy hairstyle as its own untransformed thumbnail',
       (tester) async {
     await tester.pumpWidget(
       const MaterialApp(home: Scaffold(body: AvatarEditor())),
@@ -152,10 +227,12 @@ void main() {
       await tester.pump();
     }
 
-    expect(find.text('Hairstyle'), findsOneWidget);
+    expect(find.text('Hairstyle'), findsAtLeastNWidgets(1));
+    expect(find.byKey(const ValueKey<String>('avatar_option_boy_hair_03')),
+        findsOneWidget);
     expect(
       find.byKey(const ValueKey<String>('avatar_option_treatment_boy_hair_03')),
-      findsOneWidget,
+      findsNothing,
     );
   });
 
@@ -176,7 +253,7 @@ void main() {
         ),
       );
 
-      // 順序必須與 AvatarEditor 的步驟一致。
+      // 順序必須與 AvatarEditor 的步驟一致；眼鏡是眼睛圖稿的一部分。
       const List<String> categories = <String>[
         'skin',
         'face',
@@ -184,7 +261,6 @@ void main() {
         'eyes',
         'nose',
         'mouth',
-        'accessory',
       ];
       for (final String category in categories) {
         await tester

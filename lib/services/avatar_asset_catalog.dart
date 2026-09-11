@@ -10,7 +10,6 @@ class AvatarAssetBundle {
     required this.baseAsset,
     required this.hairFrontAsset,
     this.hairBackAsset,
-    this.accessoryAsset,
     this.eyesAsset,
     this.noseAsset,
     this.mouthAsset,
@@ -37,9 +36,6 @@ class AvatarAssetBundle {
   /// 垂在臉後面的部分（雙馬尾、長髮）：畫在臉之前，所以會被臉頰蓋住。
   /// 短髮造型沒有這一層，值為 null。
   final String? hairBackAsset;
-
-  /// 眼鏡或墨鏡。不戴時為 null。
-  final String? accessoryAsset;
 
   final String? eyesAsset;
   final String? noseAsset;
@@ -85,19 +81,6 @@ class AvatarAssetCatalog {
 
   static const AvatarOptionTreatment _neutral = AvatarOptionTreatment();
 
-  /// 眼睛圖稿與眼鏡統一使用的固定深色。
-  static const Color fixedDarkFeatureTint = Color(0xFF30241F);
-
-  /// Options without dedicated artwork reuse an aligned layer from the same
-  /// part.  The value is the path below `assets/avatars/`.
-  /// Only hair still shares a layer: the two accepted boy partings are also
-  /// used mirrored.  Every other part ships one layer per option.
-  static const Map<String, String> _sharedLayerSource = <String, String>{
-    'boy_hair_03': 'boy/hair/hair-01.png',
-    'boy_hair_04': 'boy/hair/hair-02.png',
-    'boy_hair_05': 'boy/hair/hair-01.png',
-  };
-
   /// Skin is never only a base swap: the nose layer receives the same tint so
   /// a deeper skin tone never carries a pale nose.
   /// 膚色色階。原本四個色票都是 0x33（20% 不透明度）的褐色系、以 srcATop
@@ -113,42 +96,20 @@ class AvatarAssetCatalog {
     'skin_05': Color(0xFF7E4B2A),
   };
 
-  /// 配件圖層。`accessory_none` 不在表內，解析結果為 null。
-  static const Map<String, String> _accessoryAssets = <String, String>{
-    'accessory_glasses_01': 'assets/avatars/shared/accessory/glasses-round.png',
-    'accessory_glasses_02':
-        'assets/avatars/shared/accessory/glasses-square.png',
-    'accessory_sunglasses_01': 'assets/avatars/shared/accessory/sunglasses.png',
-  };
-
   /// 有後層的髮型：值是後層圖檔（垂在臉後面的部分）。
   static const Map<String, String> _hairBackAssets = <String, String>{
     'girl_hair_06': 'assets/avatars/girl/hair/hair-06-back.png',
   };
 
-  static String? accessoryAssetFor(String accessoryId) =>
-      _accessoryAssets[accessoryId];
-
   static String? hairBackAssetFor(String hairId) => _hairBackAssets[hairId];
 
+  /// Original full-head layers were painted lower than the face landmarks.
+  /// Scale them down and raise them within the common canvas instead of
+  /// replacing their artwork; this preserves the original paper-doll style
+  /// while keeping pupils visible.
   static const Map<String, AvatarOptionTreatment> _treatments =
       <String, AvatarOptionTreatment>{
-    // Mirrored partings keep the fringe line, so no eye is newly covered.
-    'boy_hair_03': AvatarOptionTreatment(scaleX: -1),
-    'boy_hair_04': AvatarOptionTreatment(scaleX: -1),
-    // A cropped cut: the same parting drawn smaller so the ears show and the
-    // fringe sits higher.  Lowered by the amount the layer shrinks upward.
-    'boy_hair_05': AvatarOptionTreatment(scale: .92, offsetY: .02),
-  };
-
-  /// These source layers predate the aligned generated artwork and sit lower
-  /// in their canvases, so only they need the legacy upward correction.
-  static const Set<String> _legacyBoyHair = <String>{
-    'boy_hair_01',
-    'boy_hair_02',
-    'boy_hair_03',
-    'boy_hair_04',
-    'boy_hair_05',
+    'girl_hair_07': AvatarOptionTreatment(scale: .80, offsetY: -.12),
   };
 
   static AvatarOptionTreatment treatmentFor(String optionId) {
@@ -168,17 +129,6 @@ class AvatarAssetCatalog {
     final List<String> parts = optionId.split('_');
     final String category = parts[1];
     final String index = parts.last;
-
-    // 配件不是「一個選項一張圖」的部位；不戴時縮圖借用既有眼睛。
-    if (optionId.startsWith('accessory_')) {
-      return _accessoryAssets[optionId] ??
-          'assets/avatars/$prefix/eyes/eyes-01.png';
-    }
-
-    final String? shared = _sharedLayerSource[optionId];
-    if (shared != null) {
-      return 'assets/avatars/$shared';
-    }
 
     switch (category) {
       case 'hair':
@@ -222,14 +172,9 @@ class AvatarAssetCatalog {
       baseAsset: optionAssetFor(presentation, configuration.faceId),
       hairFrontAsset: optionAssetFor(presentation, configuration.hairId),
       hairBackAsset: hairBackAssetFor(configuration.hairId),
-      accessoryAsset: accessoryAssetFor(configuration.accessoryId),
       hairScale: hair.scale,
       hairScaleX: hair.scaleX,
-      // The original boy layers sit lower than the face canvas. New hair
-      // artwork is already aligned, so it must not inherit that correction.
-      hairOffsetY:
-          (isBoy && _legacyBoyHair.contains(configuration.hairId) ? -.1 : 0) +
-              hair.offsetY,
+      hairOffsetY: hair.offsetY,
       eyesAsset: optionAssetFor(presentation, configuration.eyesId),
       eyesScaleX: (isBoy ? 1 : girlEyeSpread) * eyes.scaleX,
       eyesScaleY: eyes.scaleY,

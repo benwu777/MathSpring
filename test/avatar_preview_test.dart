@@ -161,47 +161,40 @@ void main() {
       findsNWidgets(2),
       reason: '只有臉部與鼻子皮膚圖層可以套用膚色濾鏡',
     );
+    final List<ColorFiltered> skinFilters =
+        tester.widgetList<ColorFiltered>(find.byType(ColorFiltered)).toList();
+    expect(
+      skinFilters.map((ColorFiltered filter) => filter.colorFilter),
+      everyElement(
+        const ColorFilter.mode(Color(0xFFB77B49), BlendMode.modulate),
+      ),
+      reason: '臉部與鼻子都必須保留透明畫布，不能用 multiply 填滿背景',
+    );
   });
 
-  testWidgets('renders every glasses variant in the fixed dark colour',
+  testWidgets('renders glasses as part of the selected eyes layer',
       (WidgetTester tester) async {
-    const ColorFilter expectedDarkGlasses = ColorFilter.mode(
-      Color(0xFF30241F),
-      BlendMode.srcATop,
+    final AvatarConfiguration glassesEyes = AvatarConfiguration.defaultFor(
+      AvatarPresentation.girl,
+    ).copyWith(
+      eyesId: 'girl_eyes_06',
+      accessoryId: 'accessory_glasses_01',
     );
-    const List<String> glasses = <String>[
-      'accessory_glasses_01',
-      'accessory_glasses_02',
-      'accessory_sunglasses_01',
-    ];
 
-    for (final String accessoryId in glasses) {
-      await tester.pumpWidget(
-        MaterialApp(
-          home: Scaffold(
-            body: AvatarPreview(
-              configuration: AvatarConfiguration.defaultFor(
-                AvatarPresentation.girl,
-              ).copyWith(accessoryId: accessoryId),
-            ),
-          ),
-        ),
-      );
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Scaffold(body: AvatarPreview(configuration: glassesEyes)),
+      ),
+    );
 
-      final Finder glassesLayer = find.byKey(
-        const ValueKey<String>('avatar_accessory_layer'),
-      );
-      final Finder glassesTint = find.descendant(
-        of: glassesLayer,
-        matching: find.byType(ColorFiltered),
-      );
-      expect(glassesTint, findsOneWidget, reason: accessoryId);
-      expect(
-        tester.widget<ColorFiltered>(glassesTint).colorFilter,
-        expectedDarkGlasses,
-        reason: '$accessoryId 必須與眼睛使用相同固定深色',
-      );
-    }
+    expect(
+      AvatarAssetCatalog.resolve(glassesEyes).eyesAsset,
+      'assets/avatars/girl/eyes/eyes-06.png',
+    );
+    expect(find.byKey(const ValueKey<String>('avatar_eyes_layer')),
+        findsOneWidget);
+    expect(find.byKey(const ValueKey<String>('avatar_accessory_layer')),
+        findsNothing);
   });
 
   test('resolves the accepted boy toothy-smile mouth', () {
@@ -398,13 +391,13 @@ void main() {
         'assets/avatars/girl/mouth/mouth-07.png');
   });
 
-  test('calibrates the boy hair layer above the eye line', () {
+  test('keeps the boy baseline hair on the shared face canvas', () {
     final AvatarAssetBundle assets = AvatarAssetCatalog.resolve(
       AvatarConfiguration.defaultFor(AvatarPresentation.boy),
     );
 
     expect(assets.hairScale, 1);
-    expect(assets.hairOffsetY, -.1);
+    expect(assets.hairOffsetY, 0);
   });
 
   test('keeps the new boy hairstyle artwork on its aligned canvas', () {
@@ -479,13 +472,13 @@ void main() {
     expect(eyeTransform.transform.storage[0], .92);
   });
 
-  test('the boy cropped hairstyle shrinks its shared parting layer', () {
+  test('the boy cropped hairstyle owns a distinct, aligned artwork layer', () {
     final AvatarAssetBundle assets = AvatarAssetCatalog.resolve(
       _withOption(AvatarPresentation.boy, 'hair', 'boy_hair_05'),
     );
 
-    expect(assets.hairFrontAsset, 'assets/avatars/boy/hair/hair-01.png');
-    expect(assets.hairScale, lessThan(1));
+    expect(assets.hairFrontAsset, 'assets/avatars/boy/hair/hair-05.png');
+    expect(assets.hairScale, 1);
     expect(assets.hairScaleX, 1);
   });
 

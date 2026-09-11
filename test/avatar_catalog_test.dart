@@ -57,6 +57,9 @@ void main() {
       'girl_eyes_03',
       'girl_eyes_04',
       'girl_eyes_05',
+      'girl_eyes_06',
+      'girl_eyes_07',
+      'girl_eyes_08',
     ]);
     expect(AvatarCatalog.noseOptionsFor(AvatarPresentation.girl), <String>[
       'girl_nose_01',
@@ -106,6 +109,9 @@ void main() {
       'boy_eyes_03',
       'boy_eyes_04',
       'boy_eyes_05',
+      'boy_eyes_06',
+      'boy_eyes_07',
+      'boy_eyes_08',
     ]);
     expect(AvatarCatalog.noseOptionsFor(AvatarPresentation.boy), <String>[
       'boy_nose_01',
@@ -153,6 +159,25 @@ void main() {
       () => AvatarConfiguration.optionsFor(AvatarPresentation.girl, 'eyeColor'),
       throwsArgumentError,
       reason: '眼色不再是可供編輯的紙娃娃選項',
+    );
+  });
+
+  test(
+      'keeps a legacy glasses selection without offering a separate editor option',
+      () {
+    final AvatarConfiguration restored = AvatarConfiguration.fromMap(
+      const <String, Object?>{
+        'avatar_presentation': 'girl',
+        'avatar_accessory_id': 'accessory_glasses_01',
+      },
+    );
+
+    expect(restored.accessoryId, 'accessory_glasses_01');
+    expect(
+      () =>
+          AvatarConfiguration.optionsFor(AvatarPresentation.girl, 'accessory'),
+      throwsArgumentError,
+      reason: '眼鏡改為眼睛圖稿的一部分，不能再獨立編輯',
     );
   });
 
