@@ -423,6 +423,27 @@ void main() {
     expect(assets.hairScaleX, .9);
   });
 
+  test('keeps rebuilt boy hairstyles on the hair 01 canonical placement', () {
+    for (final String hairId in <String>[
+      'boy_hair_02',
+      'boy_hair_03',
+      'boy_hair_04',
+      'boy_hair_06',
+      'boy_hair_07',
+      'boy_hair_08',
+      'boy_hair_09',
+    ]) {
+      final AvatarAssetBundle assets = AvatarAssetCatalog.resolve(
+        _withOption(AvatarPresentation.boy, 'hair', hairId),
+      );
+
+      expect(assets.hairScale, 1, reason: hairId);
+      expect(assets.hairScaleX, 1, reason: hairId);
+      expect(assets.hairOffsetX, 0, reason: hairId);
+      expect(assets.hairOffsetY, 0, reason: hairId);
+    }
+  });
+
   test('calibrates boy nose and mouth to their facial landmarks', () {
     final AvatarAssetBundle assets = AvatarAssetCatalog.resolve(
       AvatarConfiguration.defaultFor(AvatarPresentation.boy),
