@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:flutter_test/flutter_test.dart';
+import 'package:path/path.dart' as p;
 import 'package:mathspring/data/local/app_services.dart';
 import 'package:mathspring/data/local/app_preferences_repository.dart';
 import 'package:mathspring/data/local/answer_session_repository.dart';
@@ -48,6 +51,63 @@ void main() {
     expect(tableNames, contains('session_answer_records'));
     expect(tableNames, contains('question_progress'));
     expect(tableNames, contains('app_preferences'));
+  });
+
+  test('upgrades a partially migrated version 4 profile database', () async {
+    final Directory directory = await Directory.systemTemp.createTemp(
+      'mathspring_partial_migration_',
+    );
+    final String path = p.join(directory.path, 'mathspring.db');
+
+    try {
+      final Database legacy = await openDatabase(
+        path,
+        version: 4,
+        onCreate: (Database db, int version) async {
+          await db.execute('''
+            CREATE TABLE learner_profiles(
+              id TEXT PRIMARY KEY,
+              display_name TEXT NOT NULL,
+              level_stage TEXT NOT NULL,
+              min_level_stage TEXT NOT NULL,
+              max_level_stage TEXT NOT NULL,
+              challenge_tier TEXT NOT NULL,
+              created_at TEXT NOT NULL,
+              avatar_presentation TEXT,
+              avatar_skin_id TEXT,
+              avatar_face_id TEXT,
+              avatar_hair_id TEXT,
+              avatar_eyes_id TEXT,
+              avatar_nose_id TEXT,
+              avatar_mouth_id TEXT
+            )
+          ''');
+        },
+      );
+      await legacy.close();
+
+      final Database migrated = await MathSpringDatabase.openAtPath(path);
+      final List<Map<String, Object?>> columns = await migrated.rawQuery(
+        'PRAGMA table_info(learner_profiles)',
+      );
+      final List<Map<String, Object?>> version = await migrated.rawQuery(
+        'PRAGMA user_version',
+      );
+
+      expect(
+        columns.map((Map<String, Object?> row) => row['name']),
+        containsAll(<String>[
+          'avatar_presentation',
+          'avatar_mouth_id',
+          'avatar_eye_color_id',
+          'avatar_accessory_id',
+        ]),
+      );
+      expect(version.single['user_version'], MathSpringDatabase.schemaVersion);
+      await migrated.close();
+    } finally {
+      await directory.delete(recursive: true);
+    }
   });
 
   test('stores and reads answer sessions with linked answer records', () async {

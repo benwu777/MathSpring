@@ -4,11 +4,16 @@ import 'package:mathspring/services/avatar_asset_catalog.dart';
 
 /// Renders production illustration layers rather than procedural geometry.
 class AvatarPreview extends StatelessWidget {
-  const AvatarPreview(
-      {super.key, required this.configuration, this.size = 180});
+  const AvatarPreview({
+    super.key,
+    required this.configuration,
+    this.size = 180,
+    this.assetPackage,
+  });
 
   final AvatarConfiguration configuration;
   final double size;
+  final String? assetPackage;
 
   @override
   Widget build(BuildContext context) {
@@ -83,7 +88,11 @@ class AvatarPreview extends StatelessWidget {
 
   Widget _layer(String asset, {double offsetY = 0}) => FractionalTranslation(
         translation: Offset(0, offsetY),
-        child: Image.asset(asset, fit: BoxFit.contain),
+        child: Image.asset(
+          asset,
+          package: assetPackage,
+          fit: BoxFit.contain,
+        ),
       );
 
   Widget _hairLayer(AvatarAssetBundle assets, String asset) =>

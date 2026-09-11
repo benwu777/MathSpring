@@ -81,15 +81,6 @@ class AvatarAssetCatalog {
 
   static const AvatarOptionTreatment _neutral = AvatarOptionTreatment();
 
-  /// The established paper-doll set only has two original boy front layers.
-  /// The remaining legacy choices intentionally reuse those normal drawings
-  /// rather than introducing generated artwork with a different visual style.
-  static const Map<String, String> _sharedLayerSource = <String, String>{
-    'boy_hair_03': 'boy/hair/hair-01.png',
-    'boy_hair_04': 'boy/hair/hair-02.png',
-    'boy_hair_05': 'boy/hair/hair-01.png',
-  };
-
   /// Skin is never only a base swap: the nose layer receives the same tint so
   /// a deeper skin tone never carries a pale nose.
   /// 膚色色階。原本四個色票都是 0x33（20% 不透明度）的褐色系、以 srcATop
@@ -118,10 +109,10 @@ class AvatarAssetCatalog {
   /// while keeping pupils visible.
   static const Map<String, AvatarOptionTreatment> _treatments =
       <String, AvatarOptionTreatment>{
+    // The baseline front fringe was painted just below the reference face's
+    // hairline; lift it enough to keep the pupils visible.
+    'boy_hair_01': AvatarOptionTreatment(offsetY: -.1),
     'boy_hair_02': AvatarOptionTreatment(scale: .85, offsetY: -.12),
-    'boy_hair_03': AvatarOptionTreatment(scale: .85, offsetY: -.12),
-    'boy_hair_04': AvatarOptionTreatment(scale: .85, offsetY: -.12),
-    'boy_hair_05': AvatarOptionTreatment(scale: .85, offsetY: -.12),
     'girl_hair_02': AvatarOptionTreatment(scale: .80, offsetY: -.12),
     'girl_hair_07': AvatarOptionTreatment(scale: .80, offsetY: -.12),
     'girl_hair_08': AvatarOptionTreatment(scale: .80, offsetY: -.12),
@@ -145,11 +136,6 @@ class AvatarAssetCatalog {
     final List<String> parts = optionId.split('_');
     final String category = parts[1];
     final String index = parts.last;
-
-    final String? shared = _sharedLayerSource[optionId];
-    if (shared != null) {
-      return 'assets/avatars/$shared';
-    }
 
     switch (category) {
       case 'hair':

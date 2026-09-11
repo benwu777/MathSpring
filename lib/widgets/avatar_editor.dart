@@ -5,9 +5,15 @@ import 'package:mathspring/services/avatar_catalog.dart';
 import 'package:mathspring/widgets/avatar_preview.dart';
 
 class AvatarEditor extends StatefulWidget {
-  const AvatarEditor({super.key, this.initialConfiguration, this.onChanged});
+  const AvatarEditor({
+    super.key,
+    this.initialConfiguration,
+    this.onChanged,
+    this.assetPackage,
+  });
   final AvatarConfiguration? initialConfiguration;
   final ValueChanged<AvatarConfiguration>? onChanged;
+  final String? assetPackage;
   @override
   State<AvatarEditor> createState() => _AvatarEditorState();
 }
@@ -115,7 +121,11 @@ class _AvatarEditorState extends State<AvatarEditor> {
           child: SizedBox(
             width: editorWidth,
             child: Column(children: [
-              AvatarPreview(configuration: _configuration, size: 170),
+              AvatarPreview(
+                configuration: _configuration,
+                size: 170,
+                assetPackage: widget.assetPackage,
+              ),
               const SizedBox(height: 12),
               _SectionSelector(
                 labels: labels.sectionTitles,
@@ -214,6 +224,7 @@ class _AvatarEditorState extends State<AvatarEditor> {
                     child: Image.asset(
                       AvatarAssetCatalog.optionAssetFor(
                           _configuration.presentation, id),
+                      package: widget.assetPackage,
                       fit: BoxFit.contain,
                     ),
                   ),

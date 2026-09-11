@@ -472,13 +472,13 @@ void main() {
     expect(eyeTransform.transform.storage[0], .92);
   });
 
-  test('the boy cropped hairstyle shrinks its shared parting layer', () {
+  test('the boy cropped hairstyle owns a distinct, aligned artwork layer', () {
     final AvatarAssetBundle assets = AvatarAssetCatalog.resolve(
       _withOption(AvatarPresentation.boy, 'hair', 'boy_hair_05'),
     );
 
-    expect(assets.hairFrontAsset, 'assets/avatars/boy/hair/hair-01.png');
-    expect(assets.hairScale, lessThan(1));
+    expect(assets.hairFrontAsset, 'assets/avatars/boy/hair/hair-05.png');
+    expect(assets.hairScale, 1);
     expect(assets.hairScaleX, 1);
   });
 

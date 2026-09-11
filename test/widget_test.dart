@@ -617,6 +617,22 @@ void main() {
     fail('Finder not found after waiting: $finder');
   }
 
+  testWidgets('review does not offer the avatar simulator',
+      (WidgetTester tester) async {
+    final TestWidgetsFlutterBinding binding =
+        TestWidgetsFlutterBinding.ensureInitialized();
+    binding.platformDispatcher.localeTestValue = const Locale('en');
+
+    await pumpApp(tester, createTestServices());
+    await tester.tap(find.text('Review').first);
+    await tester.pumpAndSettle();
+
+    expect(
+      find.byKey(const ValueKey<String>('review_avatar_tab')),
+      findsNothing,
+    );
+  });
+
   Question createDualIntegerQuestion() {
     return Question.fromJson({
       'id': 'dual_integer_001',

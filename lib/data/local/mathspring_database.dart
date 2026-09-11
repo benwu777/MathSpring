@@ -8,6 +8,12 @@ class MathSpringDatabase {
   static Future<Database> openDefault() async {
     final String databasesPath = await getDatabasesPath();
     final String path = p.join(databasesPath, databaseName);
+    return openAtPath(path);
+  }
+
+  /// Opens the database at [path], upgrading resiliently if a prior app build
+  /// added columns without recording the matching schema version.
+  static Future<Database> openAtPath(String path) {
     return openDatabase(
       path,
       version: schemaVersion,
@@ -17,12 +23,7 @@ class MathSpringDatabase {
   }
 
   static Future<Database> openInMemory() {
-    return openDatabase(
-      inMemoryDatabasePath,
-      version: schemaVersion,
-      onCreate: _onCreate,
-      onUpgrade: _onUpgrade,
-    );
+    return openAtPath(inMemoryDatabasePath);
   }
 
   static Future<void> _onCreate(Database db, int version) async {
@@ -43,11 +44,17 @@ class MathSpringDatabase {
       await _createSessionAnswerRecordsTable(db);
     }
     if (oldVersion < 3) {
-      await db.execute(
-        'ALTER TABLE learner_profiles ADD COLUMN min_level_stage TEXT',
+      await _addColumnIfMissing(
+        db,
+        table: 'learner_profiles',
+        column: 'min_level_stage',
+        definition: 'TEXT',
       );
-      await db.execute(
-        'ALTER TABLE learner_profiles ADD COLUMN max_level_stage TEXT',
+      await _addColumnIfMissing(
+        db,
+        table: 'learner_profiles',
+        column: 'max_level_stage',
+        definition: 'TEXT',
       );
       await db.execute('''
         UPDATE learner_profiles
@@ -73,50 +80,84 @@ class MathSpringDatabase {
       ''');
     }
     if (oldVersion < 4) {
-      await db.execute(
-        'ALTER TABLE answer_sessions ADD COLUMN time_limit_seconds INTEGER',
+      await _addColumnIfMissing(
+        db,
+        table: 'answer_sessions',
+        column: 'time_limit_seconds',
+        definition: 'INTEGER',
       );
-      await db.execute('ALTER TABLE answer_sessions ADD COLUMN max_score INTEGER');
-      await db.execute(
-        'ALTER TABLE answer_sessions ADD COLUMN earned_score INTEGER',
+      await _addColumnIfMissing(
+        db,
+        table: 'answer_sessions',
+        column: 'max_score',
+        definition: 'INTEGER',
       );
-      await db.execute(
-        'ALTER TABLE session_answer_records ADD COLUMN max_score INTEGER',
+      await _addColumnIfMissing(
+        db,
+        table: 'answer_sessions',
+        column: 'earned_score',
+        definition: 'INTEGER',
       );
-      await db.execute(
-        'ALTER TABLE session_answer_records ADD COLUMN earned_score INTEGER',
+      await _addColumnIfMissing(
+        db,
+        table: 'session_answer_records',
+        column: 'max_score',
+        definition: 'INTEGER',
+      );
+      await _addColumnIfMissing(
+        db,
+        table: 'session_answer_records',
+        column: 'earned_score',
+        definition: 'INTEGER',
       );
     }
     if (oldVersion < 5) {
-      await db.execute(
-        'ALTER TABLE learner_profiles ADD COLUMN avatar_presentation TEXT',
-      );
-      await db.execute(
-        'ALTER TABLE learner_profiles ADD COLUMN avatar_skin_id TEXT',
-      );
-      await db.execute(
-        'ALTER TABLE learner_profiles ADD COLUMN avatar_face_id TEXT',
-      );
-      await db.execute(
-        'ALTER TABLE learner_profiles ADD COLUMN avatar_hair_id TEXT',
-      );
-      await db.execute(
-        'ALTER TABLE learner_profiles ADD COLUMN avatar_eyes_id TEXT',
-      );
-      await db.execute(
-        'ALTER TABLE learner_profiles ADD COLUMN avatar_nose_id TEXT',
-      );
-      await db.execute(
-        'ALTER TABLE learner_profiles ADD COLUMN avatar_mouth_id TEXT',
-      );
+      for (final String column in <String>[
+        'avatar_presentation',
+        'avatar_skin_id',
+        'avatar_face_id',
+        'avatar_hair_id',
+        'avatar_eyes_id',
+        'avatar_nose_id',
+        'avatar_mouth_id',
+      ]) {
+        await _addColumnIfMissing(
+          db,
+          table: 'learner_profiles',
+          column: column,
+          definition: 'TEXT',
+        );
+      }
     }
     if (oldVersion < 6) {
-      await db.execute(
-        'ALTER TABLE learner_profiles ADD COLUMN avatar_eye_color_id TEXT',
-      );
-      await db.execute(
-        'ALTER TABLE learner_profiles ADD COLUMN avatar_accessory_id TEXT',
-      );
+      for (final String column in <String>[
+        'avatar_eye_color_id',
+        'avatar_accessory_id',
+      ]) {
+        await _addColumnIfMissing(
+          db,
+          table: 'learner_profiles',
+          column: column,
+          definition: 'TEXT',
+        );
+      }
+    }
+  }
+
+  static Future<void> _addColumnIfMissing(
+    Database db, {
+    required String table,
+    required String column,
+    required String definition,
+  }) async {
+    final List<Map<String, Object?>> columns = await db.rawQuery(
+      'PRAGMA table_info($table)',
+    );
+    final bool exists = columns.any(
+      (Map<String, Object?> item) => item['name'] == column,
+    );
+    if (!exists) {
+      await db.execute('ALTER TABLE $table ADD COLUMN $column $definition');
     }
   }
 

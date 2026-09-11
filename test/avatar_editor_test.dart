@@ -188,7 +188,7 @@ void main() {
     expect(mouthArt.transform.storage[0], 3);
   });
 
-  testWidgets('shows the third boy hairstyle as a mirrored thumbnail',
+  testWidgets('shows the third boy hairstyle as its own untransformed thumbnail',
       (tester) async {
     await tester.pumpWidget(
       const MaterialApp(home: Scaffold(body: AvatarEditor())),
@@ -203,9 +203,11 @@ void main() {
     }
 
     expect(find.text('Hairstyle'), findsAtLeastNWidgets(1));
+    expect(find.byKey(const ValueKey<String>('avatar_option_boy_hair_03')),
+        findsOneWidget);
     expect(
       find.byKey(const ValueKey<String>('avatar_option_treatment_boy_hair_03')),
-      findsOneWidget,
+      findsNothing,
     );
   });
 
