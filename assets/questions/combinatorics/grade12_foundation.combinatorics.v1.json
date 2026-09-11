@@ -2336,8 +2336,8 @@
           "**接著計數。**設方格表是 3 列 4 行，用**逐行推進**的方式：從最左邊那一行開始，決定每一格由哪塊骨牌覆蓋。",
           "**用遞迴思考：設 T(n) 是 3 × n 方格表的鋪法數。**由於每一行有 3 格（奇數），**單獨一行不可能被直放的骨牌鋪滿**，橫放的骨牌必定會跨到下一行。",
           "**這使得 3 × 奇數 的方格表根本無法鋪滿**（總格數為奇數）——所以只有偶數的 n 有解。",
-          "**已知的小情形**：T(2) = **3**（3 × 2 有三種鋪法：三塊橫放；或左上直放一塊加⋯ 逐一列舉可得 3 種）。",
-          "**T(4) 的遞迴關係是 T(4) = 3 × T(2) + 2**（多出的 2 來自無法切開成兩個獨立區塊的「跨越式」鋪法）。代入：T(4) = 3 × 3 + 2 = **11**。",
+          "**先把最小的情形列全：T(2) = 3。**3 × 2 的六格只有三種鋪法——(a) **三塊全部橫放**，每一列一塊；(b) **上面兩列各一塊直放**（左右各一），**第三列一塊橫放**；(c) **第一列一塊橫放**，**下面兩列各一塊直放**。再沒有別的了，因為只要決定第一列那兩格是被一塊橫的蓋住還是被兩塊直的蓋住，剩下的就跟著定了。",
+          "**把 3 × 4 依中線分成左右兩塊 3 × 2 來數。**若某個鋪法可以沿中線切開（沒有骨牌跨越中線），左右各自獨立，鋪法數是 T(2) × T(2) = 3 × 3 = **9**。**另外還有 2 種鋪法跨越中線、切不開**（兩塊橫的骨牌從左半伸進右半，上下各一組）。所以 T(4) = 9 + 2 = **11**。",
           "驗算：程式用逐格填入的方式窮舉所有鋪法（每次處理最左上的空格，嘗試在該處橫放或直放），**得到 3 × 4 的鋪法數正是 11** ✓；同一程式對 3 × 2 得到 **3** ✓ 與上面的小情形相符。",
           "**注意 11 這個數不是 3 的冪次，也不是簡單的倍數關係。**若誤以為 T(4) = T(2)² = 9（把 3 × 4 切成兩個 3 × 2 分開處理），就會漏掉那 2 種**跨越中線、無法切開**的鋪法。**這正是這類鋪磚問題必須用遞迴而不能單純相乘的原因。**"
         ],
@@ -2348,8 +2348,8 @@
           "**接着计数。**设方格表是 3 列 4 行，用**逐行推进**的方式：从最左边那一行开始，决定每一格由哪块骨牌覆盖。",
           "**用递归思考：设 T(n) 是 3 × n 方格表的铺法数。**由于每一行有 3 格（奇数），**单独一行不可能被直放的骨牌铺满**，横放的骨牌必定会跨到下一行。",
           "**这使得 3 × 奇数 的方格表根本无法铺满**（总格数为奇数）——所以只有偶数的 n 有解。",
-          "**已知的小情形**：T(2) = **3**（3 × 2 有三种铺法）。",
-          "**T(4) 的递归关系是 T(4) = 3 × T(2) + 2**（多出的 2 来自无法切开成两个独立区块的「跨越式」铺法）。代入：T(4) = 3 × 3 + 2 = **11**。",
+          "**先把最小的情形列全：T(2) = 3。**3 × 2 的六格只有三种铺法——(a) **三块全部横放**，每一列一块；(b) **上面两列各一块直放**（左右各一），**第三列一块横放**；(c) **第一列一块横放**，**下面两列各一块直放**。再没有别的了，因为只要决定第一列那两格是被一块横的盖住还是被两块直的盖住，剩下的就跟着定了。",
+          "**把 3 × 4 依中线分成左右两块 3 × 2 来数。**若某个铺法可以沿中线切开（没有骨牌跨越中线），左右各自独立，铺法数是 T(2) × T(2) = 3 × 3 = **9**。**另外还有 2 种铺法跨越中线、切不开**（两块横的骨牌从左半伸进右半，上下各一组）。所以 T(4) = 9 + 2 = **11**。",
           "验算：程序用逐格填入的方式穷举所有铺法（每次处理最左上的空格，尝试在该处横放或直放），**得到 3 × 4 的铺法数正是 11** ✓；同一程序对 3 × 2 得到 **3** ✓ 与上面的小情形相符。",
           "**注意 11 这个数不是 3 的幂次，也不是简单的倍数关系。**若误以为 T(4) = T(2)² = 9（把 3 × 4 切成两个 3 × 2 分开处理），就会漏掉那 2 种**跨越中线、无法切开**的铺法。**这正是这类铺砖问题必须用递归而不能单纯相乘的原因。**"
         ],
@@ -2360,8 +2360,8 @@
           "Now count the tilings. Take the grid as 3 rows by 4 columns and work column by column, deciding which domino covers each cell.",
           "Think recursively: let T(n) count tilings of a 3 × n grid. Since each column has 3 cells, an odd number, no column can be filled by vertical dominoes alone, and horizontal dominoes must cross into the next column.",
           "This also shows that 3 × odd grids cannot be tiled at all, having an odd number of cells, so only even n admit solutions.",
-          "The small case is known: T(2) = 3, a 3 × 2 grid having three tilings.",
-          "The recursion gives T(4) = 3 × T(2) + 2, the extra 2 coming from tilings that straddle the middle and cannot be cut into independent halves. So T(4) = 3 × 3 + 2 = 11.",
+          "List the smallest case in full: T(2) = 3. The six cells of a 3 × 2 grid admit exactly three tilings — (a) three horizontal dominoes, one per row; (b) two vertical dominoes side by side covering the top two rows, plus one horizontal domino in the third row; (c) one horizontal domino in the first row, plus two vertical dominoes side by side covering the bottom two rows. There are no others, because once you decide whether the first row is covered by a single horizontal domino or by two vertical ones, everything else follows.",
+          "Count the 3 × 4 tilings by splitting at the middle line into two 3 × 2 halves. Tilings that can be cut there, with no domino crossing the line, split into two independent halves and number T(2) × T(2) = 3 × 3 = 9. Two further tilings straddle the middle line and cannot be cut, with horizontal dominoes reaching from the left half into the right. Hence T(4) = 9 + 2 = 11.",
           "Check: enumerating all tilings cell by cell, taking the topmost empty cell each time and trying a horizontal or vertical domino there, gives 11 for the 3 × 4 grid; the same program gives 3 for the 3 × 2 grid, matching the small case.",
           "Note that 11 is neither a power of 3 nor a simple multiple. Assuming T(4) = T(2)² = 9, by cutting the 3 × 4 grid into two independent 3 × 2 halves, would miss the 2 tilings that straddle the middle and cannot be cut. That is exactly why such tiling problems need a recursion rather than a plain product."
         ],
@@ -2372,8 +2372,8 @@
           "**次に数えます。**3 行 4 列とし、**列ごとに進める**方法で、各マスをどのドミノが覆うかを決めます。",
           "**再帰で考えます：T(n) を 3 × n の敷き詰め方の数**とします。各列は 3 マス（奇数）なので、**1 列だけを縦置きで埋めることはできず**、横置きが必ず次の列にまたがります。",
           "**このことから 3 × 奇数 のマス目はそもそも敷き詰められません**（総マス数が奇数）——よって偶数の n だけが解をもちます。",
-          "**小さい場合**：T(2) = **3**（3 × 2 の敷き詰めは 3 通り）。",
-          "**漸化関係は T(4) = 3 × T(2) + 2**（余分の 2 は独立な 2 区画に切り分けられない「またがり型」から生じます）。代入して T(4) = 3 × 3 + 2 = **11**。",
+          "**最小の場合を漏れなく挙げます：T(2) = 3。**3 × 2 の 6 マスの敷き方はちょうど三通り——(a) **3 枚すべて横置き**で各行に 1 枚；(b) **上 2 行を左右 2 枚の縦置き**で覆い、**3 行目に横置き 1 枚**；(c) **1 行目に横置き 1 枚**、**下 2 行を左右 2 枚の縦置き**で覆う。これ以外にはありません——1 行目の 2 マスを横 1 枚で覆うか縦 2 枚で覆うかを決めれば、残りは自動的に定まるからです。",
+          "**3 × 4 を中央線で左右 2 つの 3 × 2 に分けて数えます。**中央線で切り離せる敷き方（線をまたぐ駒がないもの）は左右が独立なので T(2) × T(2) = 3 × 3 = **9** 通り。**さらに中央線をまたいで切り離せない敷き方が 2 通り**あります（横置きの駒が左半分から右半分へ伸びるもの）。よって T(4) = 9 + 2 = **11**。",
           "検算：左上の空きマスから横置き・縦置きを試すやり方で全敷き詰めを列挙すると、3 × 4 は **11** ✓、同じプログラムで 3 × 2 は **3** ✓ と小さい場合にも一致します。",
           "**11 は 3 の累乗でも単純な倍数でもありません。**T(4) = T(2)² = 9（3 × 4 を 2 つの 3 × 2 に切って別々に扱う）と誤ると、**中央をまたいで切り分けられない** 2 通りを落とします。**この種の敷き詰め問題で単純な掛け算ではなく漸化式が必要な理由**がここにあります。"
         ]
@@ -2405,7 +2405,7 @@
         "subtopic": "骨牌鋪滿長方形",
         "subtopicCode": "domino_tiling_three_by_four"
       },
-      "reviewStatus": ""
+      "reviewStatus": "ok"
     },
     {
       "id": "combinatorics_grade12_foundation_024",
