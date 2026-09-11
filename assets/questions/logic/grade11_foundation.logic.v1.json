@@ -2279,7 +2279,7 @@
           "**每一組內的任兩個數，其中一個必定是另一個的倍數**（因為它們的奇數部分相同，只差 2 的冪次，例如 3 與 12 差 4 倍）。所以**每組至多只能選 1 個數**。",
           "10 組各至多 1 個，所以**最多 10 個**——這就是上界。**上界與下界都是 10，答案確定。**",
           "驗算：程式對 k 由 20 遞減，逐一檢查是否存在大小為 k 且任兩數不互為倍數的子集，**最大的 k 正是 10** ✓，程式找到的一個例子是 {4, 6, 7, 9, 10, 11, 13, 15, 17, 19}——**與 {11,⋯,20} 不同**，可見達成 10 個的方案不只一種。",
-          "**注意分組的依據是「奇數部分」而不是別的。**這樣分才能保證**同組必成倍數關係、不同組必不成倍數關係**——例如 6 與 10 的奇數部分分別是 3 與 5，不同組，而 6 確實不是 10 的倍數也不被 10 整除 ✓。"
+          "**注意這個分組只保證「同組必成倍數關係」，並不保證「不同組必不成倍數關係」。**例如 3 與 15 的奇數部分分別是 3 與 15，屬於不同組，但 3 仍然整除 15。所以「每組各挑一個」挑出來的集合不一定合格（同時挑了 3 與 15 就違規）。**上界論證只需要前半句**——每組至多 1 個，故至多 10 個；而 10 個確實達得到，靠的是前面 {11,⋯,20} 這個明確的例子。上界與達成方案兩半缺一不可。"
         ],
         "zh-Hans": [
           "**先找一个能达成的方案。关键的观察是：如果所有数都大于 10，那么任一个数的 2 倍都超过 20，不可能也在集合里。**",
@@ -2292,7 +2292,7 @@
           "**每一组内的任两个数，其中一个必定是另一个的倍数**（因为它们的奇数部分相同，只差 2 的幂次，例如 3 与 12 差 4 倍）。所以**每组至多只能选 1 个数**。",
           "10 组各至多 1 个，所以**最多 10 个**——这就是上界。**上界与下界都是 10，答案确定。**",
           "验算：程序对 k 由 20 递减，逐一检查是否存在大小为 k 且任两数不互为倍数的子集，**最大的 k 正是 10** ✓，程序找到的一个例子是 {4, 6, 7, 9, 10, 11, 13, 15, 17, 19}——**与 {11,⋯,20} 不同**，可见达成 10 个的方案不只一种。",
-          "**注意分组的依据是「奇数部分」而不是别的。**这样分才能保证**同组必成倍数关系、不同组必不成倍数关系**——例如 6 与 10 的奇数部分分别是 3 与 5，不同组，而 6 确实不是 10 的倍数也不被 10 整除 ✓。"
+          "**注意这个分组只保证「同组必成倍数关系」，并不保证「不同组必不成倍数关系」。**例如 3 与 15 的奇数部分分别是 3 与 15，属于不同组，但 3 仍然整除 15。所以「每组各挑一个」挑出来的集合不一定合格（同时挑了 3 与 15 就违规）。**上界论证只需要前半句**——每组至多 1 个，故至多 10 个；而 10 个确实达得到，靠的是前面 {11,⋯,20} 这个明确的例子。上界与达成方案两半缺一不可。"
         ],
         "en": [
           "Find an achievable construction first. The key observation is that if every number exceeds 10, then twice any of them exceeds 20 and cannot also belong to the set.",
@@ -2305,7 +2305,7 @@
           "Within a group, one of any two numbers is a multiple of the other, since they share an odd part and differ only by a power of 2 — 3 and 12 differ by a factor of 4, for instance. So at most 1 number may be chosen from each group.",
           "With 10 groups each contributing at most 1, the maximum is 10 — the upper bound. Both bounds equal 10, settling the answer.",
           "Check: searching downward from k = 20 for a subset of size k with no member a multiple of another finds the largest such k to be 10, and one example found is {4, 6, 7, 9, 10, 11, 13, 15, 17, 19} — different from {11,...,20}, showing that more than one arrangement achieves 10.",
-          "Note the grouping is by odd part and nothing else. Only that guarantees members of the same group are related by divisibility while members of different groups are not — 6 and 10 have odd parts 3 and 5, hence different groups, and indeed neither divides the other."
+          "Note that the grouping guarantees only that two numbers in the same group are related by divisibility; it does not guarantee that two numbers in different groups are unrelated. The odd parts of 3 and 15 are 3 and 15, so they sit in different groups, yet 3 still divides 15. Picking one number from each group therefore need not yield a valid set — taking both 3 and 15 violates the condition. The upper-bound argument uses only the first half: at most 1 per group, hence at most 10. That 10 is actually attained rests on the explicit set {11,...,20} above, and neither half can be dropped."
         ],
         "ja": [
           "**まず達成できる構成を探します。鍵となる観察は、すべての数が 10 より大きければ、どの数の 2 倍も 20 を超え、集合に入りえないことです。**",
@@ -2318,7 +2318,7 @@
           "**同じ組の 2 数はいずれか一方が他方の倍数**です（奇数部分が同じで 2 の累乗だけ異なるため。3 と 12 は 4 倍違い）。したがって**各組から選べるのは高々 1 個**です。",
           "10 組が各々高々 1 個なので **最大 10 個**——これが上界です。**上界も下界も 10 で答えが確定します。**",
           "検算：k を 20 から下げながら、大きさ k で互いに倍数関係にない部分集合の有無を調べると、**最大の k はちょうど 10** ✓。見つかった例の 1 つは {4, 6, 7, 9, 10, 11, 13, 15, 17, 19} で——**{11,⋯,20} とは異なり**、10 個を達成する配置が 1 通りでないことが分かります。",
-          "**分類の基準は「奇数部分」であって他ではありません。**こう分けてこそ**同じ組は必ず倍数関係、異なる組は必ず倍数関係でない**ことが保証されます——6 と 10 の奇数部分は 3 と 5 で別の組、実際どちらも他方を割りません ✓。"
+          "**この分類が保証するのは「同じ組なら必ず倍数関係」だけで、「異なる組なら倍数関係にならない」ことは保証しません。**3 と 15 の奇数部分は 3 と 15 で別の組ですが、3 は 15 を割り切ります。したがって「各組から 1 個ずつ選ぶ」だけでは条件を満たす集合になるとは限りません（3 と 15 を両方選ぶと違反）。**上界の議論に必要なのは前半だけ**で、各組から高々 1 個ゆえ高々 10 個。10 個が実際に達成できることは前述の {11,⋯,20} という具体例が担っており、上界と達成例はどちらも欠かせません。"
         ]
       },
       "figure": {
@@ -2348,7 +2348,7 @@
         "subtopic": "沒有一個是另一個的倍數",
         "subtopicCode": "antichain_no_multiple"
       },
-      "reviewStatus": ""
+      "reviewStatus": "ok"
     },
     {
       "id": "logic_grade11_foundation_024",
