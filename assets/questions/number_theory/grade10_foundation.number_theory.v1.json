@@ -692,7 +692,7 @@
     },
     {
       "id": "number_theory_grade10_foundation_008",
-      "reviewStatus": "",
+      "reviewStatus": "ok",
       "topic": "number_theory",
       "subtopic": "gcd_prime_forcing",
       "tags": [
@@ -717,32 +717,52 @@
       },
       "solutionSteps": {
         "zh-Hant": [
-          "24 = 2³×3，36 = 2²×3²，54 = 2×3³。",
-          "由最大公因數條件可知 a 至少含有 2³×3，d 至少含有 2×3³，而 gcd(a,d) 中共同的 2 次方只能到 2¹、共同的 3 次方只能到 3¹。",
-          "所以 gcd(a,d) 必須是 6 再乘上一個不含 2、3 的因數，且它介於 70 和 100 之間。",
-          "70 到 100 之間的 6 的倍數有 72、78、84、90、96，其中只有 78 = 2×3×13 的額外質因數不含 2、3。",
-          "因此 gcd(a,d)=78，故 2、3、13 都一定整除 a，其中最大的質數是 13。"
+          "先分解：24 = 2³ × 3、36 = 2² × 3²、54 = 2 × 3³。**最大公因數在每個質因數上取的是兩者指數的較小值**，所以四個條件可以拆成「2 的指數」與「3 的指數」兩條獨立的鏈分別追。",
+          "**先追 2 的指數**，把 x 的 2 的指數記成 v(x)。由 gcd(a, b) = 24 得 min(v(a), v(b)) = 3，所以 **v(a) ≥ 3 且 v(b) ≥ 3**。",
+          "由 gcd(b, c) = 36 得 min(v(b), v(c)) = 2。**因為 v(b) ≥ 3 > 2，這個最小值只能由 c 提供**，所以 **v(c) 恰好是 2**。",
+          "由 gcd(c, d) = 54 得 min(v(c), v(d)) = 1。同理 v(c) = 2 > 1，所以 **v(d) 恰好是 1**。於是 gcd(a, d) 的 2 的指數 = min(v(a), v(d)) = min(≥3, 1) = **1**——**這一步正是「a 很多個 2 也沒用，被 d 卡死在 2¹」的關鍵**。",
+          "**再追 3 的指數**，記成 w(x)。由 gcd(b, c) = 36 得 min(w(b), w(c)) = 2，所以 **w(b) ≥ 2**。",
+          "由 gcd(a, b) = 24 = 2³ × 3 得 min(w(a), w(b)) = 1。**因為 w(b) ≥ 2 > 1，只能由 a 提供**，所以 **w(a) 恰好是 1**。又由 gcd(c, d) = 54 = 2 × 3³ 得 w(d) ≥ 3，所以 gcd(a, d) 的 3 的指數 = min(1, ≥3) = **1**。",
+          "兩條鏈合起來：gcd(a, d) = 2¹ × 3¹ × k = **6k**，其中 **k 不含質因數 2 與 3**（2 與 3 的部分已經被鎖死，剩下的因數只能來自其他質數）。",
+          "代入範圍 70 < 6k < 100。這個區間裡 6 的倍數是 72、78、84、90、96，對應 k = 12、13、14、15、16。逐一檢查 k 是否與 6 互質：12 ✗（含 2、3）、**13 ✓**、14 ✗（含 2）、15 ✗（含 3）、16 ✗（含 2）。**只有 k = 13 通過**。",
+          "所以 gcd(a, d) = 78 = 2 × 3 × 13。既然 78 整除 a，**2、3、13 都一定整除 a**，其中最大的質數是 **13**。",
+          "驗算：舉一組真的滿足全部條件的實例——**a = 2³ × 3 × 13 = 312、b = 2³ × 3² = 72、c = 2² × 3³ = 108、d = 2 × 3³ × 13 = 702**。核對四個條件：gcd(312, 72) = 24 ✓、gcd(72, 108) = 36 ✓、gcd(108, 702) = 54 ✓、gcd(702, 312) = 78 ✓ 且 70 < 78 < 100 ✓ 全部成立。**而這個 a = 312 沒有任何大於 13 的質因數**，所以 13 確實是「一定整除 a」的最大質數，不會更大。"
         ],
         "zh-Hans": [
-          "24 = 2³×3，36 = 2²×3²，54 = 2×3³。",
-          "由最大公因数条件可知 a 至少含有 2³×3，d 至少含有 2×3³，而 gcd(a,d) 中共同的 2 次方只能到 2¹、共同的 3 次方只能到 3¹。",
-          "所以 gcd(a,d) 必须是 6 再乘上一个不含 2、3 的因数，且它介于 70 和 100 之间。",
-          "70 到 100 之间的 6 的倍数有 72、78、84、90、96，其中只有 78 = 2×3×13 的额外质因数不含 2、3。",
-          "因此 gcd(a,d)=78，故 2、3、13 都一定整除 a，其中最大的质数是 13。"
+          "先分解：24 = 2³ × 3、36 = 2² × 3²、54 = 2 × 3³。**最大公因数在每个质因数上取的是两者指数的较小值**，所以四个条件可以拆成「2 的指数」与「3 的指数」两条独立的链分别追。",
+          "**先追 2 的指数**，把 x 的 2 的指数记成 v(x)。由 gcd(a, b) = 24 得 min(v(a), v(b)) = 3，所以 **v(a) ≥ 3 且 v(b) ≥ 3**。",
+          "由 gcd(b, c) = 36 得 min(v(b), v(c)) = 2。**因为 v(b) ≥ 3 > 2，这个最小值只能由 c 提供**，所以 **v(c) 恰好是 2**。",
+          "由 gcd(c, d) = 54 得 min(v(c), v(d)) = 1。同理 v(c) = 2 > 1，所以 **v(d) 恰好是 1**。于是 gcd(a, d) 的 2 的指数 = min(v(a), v(d)) = min(≥3, 1) = **1**——**这一步正是「a 很多个 2 也没用，被 d 卡死在 2¹」的关键**。",
+          "**再追 3 的指数**，记成 w(x)。由 gcd(b, c) = 36 得 min(w(b), w(c)) = 2，所以 **w(b) ≥ 2**。",
+          "由 gcd(a, b) = 24 = 2³ × 3 得 min(w(a), w(b)) = 1。**因为 w(b) ≥ 2 > 1，只能由 a 提供**，所以 **w(a) 恰好是 1**。又由 gcd(c, d) = 54 = 2 × 3³ 得 w(d) ≥ 3，所以 gcd(a, d) 的 3 的指数 = min(1, ≥3) = **1**。",
+          "两条链合起来：gcd(a, d) = 2¹ × 3¹ × k = **6k**，其中 **k 不含质因数 2 与 3**（2 与 3 的部分已经被锁死，剩下的因数只能来自其他质数）。",
+          "代入范围 70 < 6k < 100。这个区间里 6 的倍数是 72、78、84、90、96，对应 k = 12、13、14、15、16。逐一检查 k 是否与 6 互质：12 ✗（含 2、3）、**13 ✓**、14 ✗（含 2）、15 ✗（含 3）、16 ✗（含 2）。**只有 k = 13 通过**。",
+          "所以 gcd(a, d) = 78 = 2 × 3 × 13。既然 78 整除 a，**2、3、13 都一定整除 a**，其中最大的质数是 **13**。",
+          "验算：举一组真的满足全部条件的实例——**a = 2³ × 3 × 13 = 312、b = 2³ × 3² = 72、c = 2² × 3³ = 108、d = 2 × 3³ × 13 = 702**。核对四个条件：gcd(312, 72) = 24 ✓、gcd(72, 108) = 36 ✓、gcd(108, 702) = 54 ✓、gcd(702, 312) = 78 ✓ 且 70 < 78 < 100 ✓ 全部成立。**而这个 a = 312 没有任何大于 13 的质因数**，所以 13 确实是「一定整除 a」的最大质数，不会更大。"
         ],
         "en": [
-          "We have 24 = 2³×3, 36 = 2²×3², and 54 = 2×3³.",
-          "The gcd conditions force a to contain 2³×3 and d to contain 2×3³, while their common powers of 2 and 3 contribute only 2¹ and 3¹ to gcd(a,d).",
-          "So gcd(a,d) must equal 6 times a factor not divisible by 2 or 3, and it lies between 70 and 100.",
-          "The multiples of 6 in that interval are 72, 78, 84, 90, and 96. Only 78 = 2×3×13 has no extra factor 2 or 3 beyond the forced 6.",
-          "Therefore gcd(a,d)=78, so 2, 3 and 13 all must divide a, and the largest of these primes is 13."
+          "Factorise first: 24 = 2³ × 3, 36 = 2² × 3², 54 = 2 × 3³. A gcd takes the smaller exponent at each prime, so the four conditions split into two independent chains, one for the exponent of 2 and one for the exponent of 3.",
+          "Follow the exponent of 2 first, writing v(x) for it. From gcd(a, b) = 24 we get min(v(a), v(b)) = 3, so v(a) ≥ 3 and v(b) ≥ 3.",
+          "From gcd(b, c) = 36 we get min(v(b), v(c)) = 2. Since v(b) ≥ 3 > 2, that minimum can only come from c, so v(c) is exactly 2.",
+          "From gcd(c, d) = 54 we get min(v(c), v(d)) = 1, and since v(c) = 2 > 1 the same reasoning gives v(d) exactly 1. Hence the exponent of 2 in gcd(a, d) is min(v(a), v(d)) = min(at least 3, 1) = 1. This is the crucial step: however many factors of 2 sit inside a, d pins the gcd down to 2¹.",
+          "Now follow the exponent of 3, written w(x). From gcd(b, c) = 36 we get min(w(b), w(c)) = 2, so w(b) ≥ 2.",
+          "From gcd(a, b) = 24 = 2³ × 3 we get min(w(a), w(b)) = 1, and since w(b) ≥ 2 > 1 that minimum can only come from a, so w(a) is exactly 1. From gcd(c, d) = 54 = 2 × 3³ we also get w(d) ≥ 3, so the exponent of 3 in gcd(a, d) is min(1, at least 3) = 1.",
+          "Putting the two chains together, gcd(a, d) = 2¹ × 3¹ × k = 6k, where k has no prime factor 2 or 3, since those parts are already pinned down and anything left must come from other primes.",
+          "Now impose 70 < 6k < 100. The multiples of 6 in that range are 72, 78, 84, 90 and 96, giving k = 12, 13, 14, 15, 16. Checking which k are coprime to 6: 12 fails, 13 works, 14 has a factor 2, 15 has a factor 3, and 16 has a factor 2. Only k = 13 survives.",
+          "So gcd(a, d) = 78 = 2 × 3 × 13. Since 78 divides a, the primes 2, 3 and 13 all must divide a, and the largest of them is 13.",
+          "Check with an explicit example satisfying every condition: a = 2³ × 3 × 13 = 312, b = 2³ × 3² = 72, c = 2² × 3³ = 108, d = 2 × 3³ × 13 = 702. Then gcd(312, 72) = 24, gcd(72, 108) = 36, gcd(108, 702) = 54, and gcd(702, 312) = 78 with 70 < 78 < 100, so all four conditions hold. This a = 312 has no prime factor larger than 13, confirming that 13 really is the largest prime forced to divide a."
         ],
         "ja": [
-          "24 = 2³×3、36 = 2²×3²、54 = 2×3³ です。",
-          "最大公約数の条件から、a は少なくとも 2³×3 を含み、d は少なくとも 2×3³ を含みます。また gcd(a,d) に現れる 2 と 3 の指数はそれぞれ 1 までです。",
-          "したがって gcd(a,d) は 6 に、2 と 3 を含まない因数を掛けた形で、しかも 70 と 100 の間にあります。",
-          "この範囲の 6 の倍数は 72、78、84、90、96 ですが、余分な素因数に 2 や 3 を含まないのは 78 = 2×3×13 だけです。",
-          "よって gcd(a,d)=78 となり、2、3、13 はいずれも必ず a を割り切るので、そのうち最大の素数は 13 です。"
+          "まず素因数分解します：24 = 2³ × 3、36 = 2² × 3²、54 = 2 × 3³。**最大公約数は各素因数について指数の小さい方を取る**ので、四つの条件は「2 の指数」と「3 の指数」という独立した二本の鎖に分けて追えます。",
+          "**まず 2 の指数**を追い、x の 2 の指数を v(x) と書きます。gcd(a, b) = 24 より min(v(a), v(b)) = 3、よって **v(a) ≥ 3 かつ v(b) ≥ 3**。",
+          "gcd(b, c) = 36 より min(v(b), v(c)) = 2。**v(b) ≥ 3 > 2 なので、この最小値は c 側からしか来ません**。よって **v(c) はちょうど 2**。",
+          "gcd(c, d) = 54 より min(v(c), v(d)) = 1。同様に v(c) = 2 > 1 なので **v(d) はちょうど 1**。したがって gcd(a, d) の 2 の指数は min(v(a), v(d)) = min(3 以上, 1) = **1**——**a にいくら 2 が入っていても d が 2¹ で止める**、これが要です。",
+          "**次に 3 の指数**を w(x) と書いて追います。gcd(b, c) = 36 より min(w(b), w(c)) = 2、よって **w(b) ≥ 2**。",
+          "gcd(a, b) = 24 = 2³ × 3 より min(w(a), w(b)) = 1。**w(b) ≥ 2 > 1 なので a 側からしか来ず**、**w(a) はちょうど 1**。また gcd(c, d) = 54 = 2 × 3³ より w(d) ≥ 3 なので、gcd(a, d) の 3 の指数は min(1, 3 以上) = **1**。",
+          "二本の鎖を合わせると gcd(a, d) = 2¹ × 3¹ × k = **6k**。ここで **k は素因数 2 と 3 を含みません**（2 と 3 の分はすでに固定され、残りは他の素数からしか来ないため）。",
+          "範囲 70 < 6k < 100 を入れます。この区間の 6 の倍数は 72、78、84、90、96 で、k = 12、13、14、15、16 に対応。k が 6 と互いに素かを確認すると 12 ✗、**13 ✓**、14 ✗（2 を含む）、15 ✗（3 を含む）、16 ✗（2 を含む）。**k = 13 だけが残ります**。",
+          "よって gcd(a, d) = 78 = 2 × 3 × 13。78 が a を割り切るので **2、3、13 はいずれも必ず a を割り切り**、その中で最大の素数は **13** です。",
+          "検算：すべての条件を実際に満たす例を挙げます——**a = 2³ × 3 × 13 = 312、b = 2³ × 3² = 72、c = 2² × 3³ = 108、d = 2 × 3³ × 13 = 702**。gcd(312, 72) = 24 ✓、gcd(72, 108) = 36 ✓、gcd(108, 702) = 54 ✓、gcd(702, 312) = 78 ✓ で 70 < 78 < 100 ✓ とすべて成立。**しかもこの a = 312 には 13 より大きい素因数がない**ので、13 が「必ず a を割り切る最大の素数」であり、それ以上にはならないことも確認できます。"
         ]
       },
       "figure": {
