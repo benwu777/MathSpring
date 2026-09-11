@@ -1689,7 +1689,7 @@
     },
     {
       "id": "geometry_grade12_foundation_010",
-      "reviewStatus": "",
+      "reviewStatus": "ok",
       "topic": "geometry",
       "subtopic": "right_triangle_pentagon_area",
       "tags": [
@@ -1714,36 +1714,48 @@
       },
       "solutionSteps": {
         "zh-Hant": [
-          "因為 5² + 12² = 13²，所以三角形 ABC 是直角三角形，面積是 (1/2)×5×12 = 30。",
-          "取座標 C=(0,0)、A=(0,5)、B=(12,0)，則 M=(0,4)、N=(4,0)。",
-          "直線 AB 的方程可寫成 5x + 12y = 60。",
-          "把 M、N 投影到 AB 上，可得 J、K 分別是從 M、N 向 AB 作垂線的垂足。",
-          "用座標幾何或鞋帶公式計算五邊形 C-M-J-K-N 的面積，可得 18.4615…",
-          "化成分數正好是 240/13。"
+          "先看三角形 ABC 本身：5² + 12² = 25 + 144 = 169 = 13²，所以 ∠C 是直角，面積 = (1/2) × 5 × 12 = **30**。",
+          "**五邊形 CMJKN 就是三角形 ABC 挖掉兩個角**——靠 A 那邊的三角形 AMJ，與靠 B 那邊的三角形 BNK。只要算出這兩個小三角形的面積再扣掉就好，**完全不必求出 J、K 的座標**。",
+          "兩個小三角形都是直角三角形（MJ ⊥ AB、NK ⊥ AB），而且各自帶著三角形 ABC 的一個銳角，所以用 ∠A 與 ∠B 的三角比就能算。",
+          "在直角三角形 ABC 中，∠A 的對邊是 BC = 12、鄰邊是 AC = 5、斜邊 AB = 13，所以 sin A = 12/13、cos A = 5/13；同理 sin B = 5/13、cos B = 12/13。",
+          "**三角形 AMJ**：AM = AC − CM = 5 − 4 = **1**。直角在 J，所以 AJ = AM cos A = 5/13、MJ = AM sin A = 12/13，面積 = (1/2) × (5/13) × (12/13) = **30/169**。",
+          "**三角形 BNK**：BN = BC − CN = 12 − 4 = **8**。直角在 K，所以 BK = BN cos B = 96/13、NK = BN sin B = 40/13，面積 = (1/2) × (96/13) × (40/13) = **1920/169**。",
+          "相減：五邊形面積 = 30 − 30/169 − 1920/169 = 30 − 1950/169 = (5070 − 1950)/169 = 3120/169 = **240/13**。",
+          "**要確認這樣扣是合法的**：AJ = 5/13、BK = 96/13，兩段合計 101/13 < 13 = AB，所以 J 與 K 都落在線段 AB 上、順序是 A、J、K、B，中間還剩 JK = 13 − 101/13 = 68/13 ✓ 兩個被挖掉的角互不重疊，也沒有超出三角形。",
+          "驗算：改用座標核對——C(0,0)、A(0,5)、B(12,0)、M(0,4)、N(4,0)，AB 的方程式是 5x + 12y = 60，垂足是 J = (60/169, 820/169)、K = (876/169, 480/169)，代進鞋帶公式得五邊形面積 240/13 ≈ 18.46 ✓ 與相減法完全一致。"
         ],
         "zh-Hans": [
-          "因为 5² + 12² = 13²，所以三角形 ABC 是直角三角形，面积是 (1/2)×5×12 = 30。",
-          "取坐标 C=(0,0)、A=(0,5)、B=(12,0)，则 M=(0,4)、N=(4,0)。",
-          "直线 AB 的方程可写成 5x + 12y = 60。",
-          "把 M、N 投影到 AB 上，可得 J、K 分别是从 M、N 向 AB 作垂线的垂足。",
-          "用坐标几何或鞋带公式计算五边形 C-M-J-K-N 的面积，可得 18.4615…",
-          "化成分数正好是 240/13。"
+          "先看三角形 ABC 本身：5² + 12² = 25 + 144 = 169 = 13²，所以 ∠C 是直角，面积 = (1/2) × 5 × 12 = **30**。",
+          "**五边形 CMJKN 就是三角形 ABC 挖掉两个角**——靠 A 那边的三角形 AMJ，与靠 B 那边的三角形 BNK。只要算出这两个小三角形的面积再扣掉就好，**完全不必求出 J、K 的坐标**。",
+          "两个小三角形都是直角三角形（MJ ⊥ AB、NK ⊥ AB），而且各自带着三角形 ABC 的一个锐角，所以用 ∠A 与 ∠B 的三角比就能算。",
+          "在直角三角形 ABC 中，∠A 的对边是 BC = 12、邻边是 AC = 5、斜边 AB = 13，所以 sin A = 12/13、cos A = 5/13；同理 sin B = 5/13、cos B = 12/13。",
+          "**三角形 AMJ**：AM = AC − CM = 5 − 4 = **1**。直角在 J，所以 AJ = AM cos A = 5/13、MJ = AM sin A = 12/13，面积 = (1/2) × (5/13) × (12/13) = **30/169**。",
+          "**三角形 BNK**：BN = BC − CN = 12 − 4 = **8**。直角在 K，所以 BK = BN cos B = 96/13、NK = BN sin B = 40/13，面积 = (1/2) × (96/13) × (40/13) = **1920/169**。",
+          "相减：五边形面积 = 30 − 30/169 − 1920/169 = 30 − 1950/169 = (5070 − 1950)/169 = 3120/169 = **240/13**。",
+          "**要确认这样扣是合法的**：AJ = 5/13、BK = 96/13，两段合计 101/13 < 13 = AB，所以 J 与 K 都落在线段 AB 上、顺序是 A、J、K、B，中间还剩 JK = 13 − 101/13 = 68/13 ✓ 两个被挖掉的角互不重叠，也没有超出三角形。",
+          "验算：改用坐标核对——C(0,0)、A(0,5)、B(12,0)、M(0,4)、N(4,0)，AB 的方程式是 5x + 12y = 60，垂足是 J = (60/169, 820/169)、K = (876/169, 480/169)，代进鞋带公式得五边形面积 240/13 ≈ 18.46 ✓ 与相减法完全一致。"
         ],
         "en": [
-          "Since 5² + 12² = 13², triangle ABC is right, with area (1/2)·5·12 = 30.",
-          "Use coordinates C=(0,0), A=(0,5), and B=(12,0), so M=(0,4) and N=(4,0).",
-          "Line AB has equation 5x + 12y = 60.",
-          "Project M and N perpendicularly onto AB to obtain J and K.",
-          "Using coordinates and the shoelace formula, the area of pentagon C-M-J-K-N is 18.4615....",
-          "In exact form this is 240/13."
+          "Look at triangle ABC first: 5² + 12² = 25 + 144 = 169 = 13², so angle C is right and the area is (1/2)·5·12 = 30.",
+          "Pentagon CMJKN is triangle ABC with two corners cut off — triangle AMJ near A and triangle BNK near B. Computing those two small areas and subtracting them is enough, and the coordinates of J and K are never needed.",
+          "Both small triangles are right triangles, since MJ and NK are perpendicular to AB, and each carries one acute angle of triangle ABC, so the trigonometric ratios of angles A and B settle them.",
+          "In right triangle ABC the side opposite angle A is BC = 12, the adjacent side is AC = 5 and the hypotenuse is AB = 13, so sin A = 12/13 and cos A = 5/13; likewise sin B = 5/13 and cos B = 12/13.",
+          "Triangle AMJ: AM = AC − CM = 5 − 4 = 1. The right angle is at J, so AJ = AM cos A = 5/13 and MJ = AM sin A = 12/13, giving area (1/2)·(5/13)·(12/13) = 30/169.",
+          "Triangle BNK: BN = BC − CN = 12 − 4 = 8. The right angle is at K, so BK = BN cos B = 96/13 and NK = BN sin B = 40/13, giving area (1/2)·(96/13)·(40/13) = 1920/169.",
+          "Subtracting: the pentagon has area 30 − 30/169 − 1920/169 = 30 − 1950/169 = (5070 − 1950)/169 = 3120/169 = 240/13.",
+          "Check that the subtraction is legitimate: AJ = 5/13 and BK = 96/13 total 101/13 < 13 = AB, so J and K both lie on segment AB in the order A, J, K, B, with JK = 13 − 101/13 = 68/13 left between them. The two removed corners neither overlap nor stick out of the triangle.",
+          "Verification by coordinates: with C(0,0), A(0,5), B(12,0), M(0,4) and N(4,0), line AB is 5x + 12y = 60, the feet are J = (60/169, 820/169) and K = (876/169, 480/169), and the shoelace formula gives pentagon area 240/13 ≈ 18.46, matching the subtraction."
         ],
         "ja": [
-          "5² + 12² = 13² なので、三角形 ABC は直角三角形で、面積は (1/2)×5×12 = 30 です。",
-          "座標を C=(0,0)、A=(0,5)、B=(12,0) とすると、M=(0,4)、N=(4,0) です。",
-          "直線 AB の方程式は 5x + 12y = 60。",
-          "M、N から AB に垂線を下ろした足がそれぞれ J、K です。",
-          "座標幾何と靴紐公式で五角形 C-M-J-K-N の面積を計算すると 18.4615... になります。",
-          "これを分数で表すと 240/13 です。"
+          "まず三角形 ABC を見ます：5² + 12² = 25 + 144 = 169 = 13² なので ∠C は直角で、面積は (1/2) × 5 × 12 = **30** です。",
+          "**五角形 CMJKN は三角形 ABC から二つの角を切り落とした形**です——A 側の三角形 AMJ と、B 側の三角形 BNK。この二つの小三角形の面積を求めて引けばよく、**J、K の座標を求める必要はまったくありません**。",
+          "どちらの小三角形も直角三角形（MJ ⊥ AB、NK ⊥ AB）で、しかも三角形 ABC の鋭角を一つずつ持つので、∠A と ∠B の三角比で計算できます。",
+          "直角三角形 ABC において ∠A の対辺は BC = 12、隣辺は AC = 5、斜辺は AB = 13 なので sin A = 12/13、cos A = 5/13。同様に sin B = 5/13、cos B = 12/13 です。",
+          "**三角形 AMJ**：AM = AC − CM = 5 − 4 = **1**。直角は J にあるので AJ = AM cos A = 5/13、MJ = AM sin A = 12/13、面積 = (1/2) × (5/13) × (12/13) = **30/169**。",
+          "**三角形 BNK**：BN = BC − CN = 12 − 4 = **8**。直角は K にあるので BK = BN cos B = 96/13、NK = BN sin B = 40/13、面積 = (1/2) × (96/13) × (40/13) = **1920/169**。",
+          "引き算します：五角形の面積 = 30 − 30/169 − 1920/169 = 30 − 1950/169 = (5070 − 1950)/169 = 3120/169 = **240/13**。",
+          "**この引き算が正当であることを確認します**：AJ = 5/13、BK = 96/13 で合計 101/13 < 13 = AB なので、J と K はともに線分 AB 上にあり、並びは A、J、K、B、間には JK = 13 − 101/13 = 68/13 が残ります ✓ 切り落とした二つの角は重ならず、三角形からはみ出しもしません。",
+          "検算：座標で確かめます——C(0,0)、A(0,5)、B(12,0)、M(0,4)、N(4,0) とすると AB の方程式は 5x + 12y = 60、垂線の足は J = (60/169, 820/169)、K = (876/169, 480/169) で、靴紐公式から五角形の面積は 240/13 ≈ 18.46 ✓ 引き算の結果と完全に一致します。"
         ]
       },
       "figure": {
@@ -2179,7 +2191,7 @@
         "subtopic": "直角三角形內接正方形",
         "subtopicCode": "inscribed_square_right_triangle"
       },
-      "reviewStatus": ""
+      "reviewStatus": "ok"
     },
     {
       "id": "geometry_grade12_foundation_013",
