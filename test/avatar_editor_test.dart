@@ -271,9 +271,11 @@ void main() {
         // tiles.  This widget test checks one visible treated thumbnail;
         // non-visible treatments are asserted by their catalog tests.
         final Iterable<String> ids = category == 'hair'
-            ? AvatarConfiguration.optionsFor(presentation, category).where(
-                (String id) => !AvatarAssetCatalog.treatmentFor(id).isNeutral,
-              ).take(1)
+            ? AvatarConfiguration.optionsFor(presentation, category)
+                .where(
+                  (String id) => !AvatarAssetCatalog.treatmentFor(id).isNeutral,
+                )
+                .take(1)
             : AvatarConfiguration.optionsFor(presentation, category);
         for (final String id in ids) {
           expect(
@@ -289,5 +291,41 @@ void main() {
         }
       }
     }
+  });
+
+  testWidgets('keeps an existing premium avatar choice but locks new choices',
+      (tester) async {
+    String? requestedUnlockFor;
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Scaffold(
+          body: AvatarEditor(
+            initialConfiguration: AvatarConfiguration.defaultFor(
+              AvatarPresentation.boy,
+            ).copyWith(hairId: 'boy_hair_02'),
+            hasFullUnlock: false,
+            onLockedOptionSelected: (String id) => requestedUnlockFor = id,
+          ),
+        ),
+      ),
+    );
+
+    for (int step = 0; step < 3; step++) {
+      await tester
+          .tap(find.byKey(const ValueKey<String>('avatar_next_button')));
+      await tester.pump();
+    }
+
+    expect(
+        find.byKey(const ValueKey<String>('avatar_locked_option_boy_hair_02')),
+        findsNothing);
+    expect(
+        find.byKey(const ValueKey<String>('avatar_locked_option_boy_hair_03')),
+        findsOneWidget);
+
+    await tester
+        .tap(find.byKey(const ValueKey<String>('avatar_option_boy_hair_03')));
+    await tester.pump();
+    expect(requestedUnlockFor, 'boy_hair_03');
   });
 }

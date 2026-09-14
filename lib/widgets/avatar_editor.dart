@@ -14,6 +14,8 @@ class AvatarEditor extends StatefulWidget {
     this.assetPackage,
     this.sectionSelectorLayout = AvatarSectionSelectorLayout.scrollable,
     this.showOptionIds = false,
+    this.hasFullUnlock = true,
+    this.onLockedOptionSelected,
   });
   final AvatarConfiguration? initialConfiguration;
   final ValueChanged<AvatarConfiguration>? onChanged;
@@ -22,6 +24,11 @@ class AvatarEditor extends StatefulWidget {
 
   /// Used by the reviewer tool so artwork can be identified unambiguously.
   final bool showOptionIds;
+
+  /// Existing choices always remain visible; only choosing a new non-basic
+  /// option requires the full unlock.
+  final bool hasFullUnlock;
+  final ValueChanged<String>? onLockedOptionSelected;
   @override
   State<AvatarEditor> createState() => _AvatarEditorState();
 }
@@ -203,6 +210,8 @@ class _AvatarEditorState extends State<AvatarEditor> {
 
   Widget _optionTile(String id) {
     final bool selected = _selected() == id;
+    final bool locked =
+        !widget.hasFullUnlock && !selected && !_isBasicOption(id);
     final bool isMouth = id.contains('_mouth_');
     final Color accent = Theme.of(context).colorScheme.primary;
     return Semantics(
@@ -212,7 +221,13 @@ class _AvatarEditorState extends State<AvatarEditor> {
       child: InkWell(
         key: ValueKey<String>('avatar_option_$id'),
         borderRadius: BorderRadius.circular(12),
-        onTap: () => _choose(id),
+        onTap: () {
+          if (locked) {
+            widget.onLockedOptionSelected?.call(id);
+            return;
+          }
+          _choose(id);
+        },
         child: Container(
           decoration: BoxDecoration(
             color: Theme.of(context).colorScheme.surfaceContainerHighest,
@@ -251,6 +266,21 @@ class _AvatarEditorState extends State<AvatarEditor> {
                     ),
                   ),
                 ),
+              if (locked)
+                Align(
+                  key: ValueKey<String>('avatar_locked_option_$id'),
+                  alignment: Alignment.topRight,
+                  child: DecoratedBox(
+                    decoration: BoxDecoration(
+                      color: Colors.black.withValues(alpha: .58),
+                      shape: BoxShape.circle,
+                    ),
+                    child: const Padding(
+                      padding: EdgeInsets.all(4),
+                      child: Icon(Icons.lock, color: Colors.white, size: 14),
+                    ),
+                  ),
+                ),
               if (widget.showOptionIds)
                 Align(
                   alignment: Alignment.bottomLeft,
@@ -284,6 +314,8 @@ class _AvatarEditorState extends State<AvatarEditor> {
       ),
     );
   }
+
+  bool _isBasicOption(String id) => id.endsWith('_01');
 
   Widget _optionTreatment(String id, Widget child) {
     final AvatarOptionTreatment treatment = AvatarAssetCatalog.treatmentFor(id);

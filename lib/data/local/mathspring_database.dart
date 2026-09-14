@@ -3,7 +3,7 @@ import 'package:sqflite/sqflite.dart';
 
 class MathSpringDatabase {
   static const String databaseName = 'mathspring.db';
-  static const int schemaVersion = 6;
+  static const int schemaVersion = 7;
 
   static Future<Database> openDefault() async {
     final String databasesPath = await getDatabasesPath();
@@ -32,6 +32,7 @@ class MathSpringDatabase {
     await _createSessionAnswerRecordsTable(db);
     await _createQuestionProgressTable(db);
     await _createAppPreferencesTable(db);
+    await _createFavoriteQuestionTables(db);
   }
 
   static Future<void> _onUpgrade(
@@ -142,6 +143,7 @@ class MathSpringDatabase {
         );
       }
     }
+    if (oldVersion < 7) await _createFavoriteQuestionTables(db);
   }
 
   static Future<void> _addColumnIfMissing(
@@ -241,5 +243,23 @@ class MathSpringDatabase {
         value TEXT NOT NULL
       )
     ''');
+  }
+
+  static Future<void> _createFavoriteQuestionTables(Database db) async {
+    await db
+        .execute('''CREATE TABLE IF NOT EXISTS favorite_question_collections(
+      id TEXT PRIMARY KEY, learner_id TEXT NOT NULL, name TEXT NOT NULL,
+      sort_order INTEGER NOT NULL, is_default INTEGER NOT NULL, created_at TEXT NOT NULL
+    )''');
+    await db.execute('''CREATE TABLE IF NOT EXISTS favorite_questions(
+      learner_id TEXT NOT NULL, question_id TEXT NOT NULL, note TEXT NOT NULL,
+      tags_json TEXT NOT NULL, created_at TEXT NOT NULL, updated_at TEXT NOT NULL,
+      PRIMARY KEY (learner_id, question_id)
+    )''');
+    await db.execute(
+        '''CREATE TABLE IF NOT EXISTS favorite_question_collection_memberships(
+      learner_id TEXT NOT NULL, question_id TEXT NOT NULL, collection_id TEXT NOT NULL,
+      PRIMARY KEY (learner_id, question_id, collection_id)
+    )''');
   }
 }

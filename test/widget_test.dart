@@ -13,6 +13,7 @@ import 'package:mathspring/models/question_progress.dart';
 import 'package:mathspring/models/session_answer_record.dart';
 import 'package:mathspring/services/session_launch_plan_builder.dart';
 import 'package:mathspring/services/formal_exam_preset.dart';
+import 'package:mathspring/services/monetization_service.dart';
 import 'package:mathspring/widgets/avatar_preview.dart';
 
 void main() {
@@ -583,7 +584,8 @@ void main() {
   }
 
   Future<void> pumpApp(WidgetTester tester, AppServices services,
-      {Size size = const Size(1200, 1600)}) async {
+      {Size size = const Size(1200, 1600),
+      MonetizationService? monetizationService}) async {
     // 用 tester.view 而不是 setSurfaceSize：後者不會改變 MediaQuery
     // （實測 setSurfaceSize(390, 844) 之後 MediaQuery.sizeOf 仍回報 800），
     // 所以依賴寬度的版面在測試裡不會生效。
@@ -595,7 +597,10 @@ void main() {
     tester.view.devicePixelRatio = 1.0;
     tester.view.physicalSize = size;
     addTearDown(tester.view.reset);
-    await tester.pumpWidget(MathSpringApp(services: services));
+    await tester.pumpWidget(MathSpringApp(
+      services: services,
+      monetizationService: monetizationService,
+    ));
     await tester.runAsync(() async {
       await Future<void>.delayed(const Duration(milliseconds: 50));
     });
@@ -677,8 +682,12 @@ void main() {
     binding.platformDispatcher.localeTestValue = const Locale('en');
 
     final AppServices services = createTestServices();
+    final InMemoryMonetizationService monetization =
+        InMemoryMonetizationService.withProduct();
+    await monetization.initialize();
+    await monetization.purchaseFullUnlock();
 
-    await pumpApp(tester, services);
+    await pumpApp(tester, services, monetizationService: monetization);
 
     expect(find.text('MathSpring'), findsAtLeastNWidgets(1));
     expect(find.text('Practice'), findsWidgets);
@@ -1989,8 +1998,12 @@ void main() {
     binding.platformDispatcher.localeTestValue = const Locale('en');
 
     final AppServices services = createTestServices();
+    final InMemoryMonetizationService monetization =
+        InMemoryMonetizationService.withProduct();
+    await monetization.initialize();
+    await monetization.purchaseFullUnlock();
 
-    await pumpApp(tester, services);
+    await pumpApp(tester, services, monetizationService: monetization);
 
     await tester.tap(find.text('Settings'));
     await tester.pumpAndSettle();
@@ -2166,7 +2179,7 @@ void main() {
     expect(find.text('Browse library'), findsNothing);
   });
 
-  testWidgets('can complete a quiz session and review the solution',
+  testWidgets('free quiz review locks the solution steps',
       (WidgetTester tester) async {
     final TestWidgetsFlutterBinding binding =
         TestWidgetsFlutterBinding.ensureInitialized();
@@ -2233,8 +2246,62 @@ void main() {
     await tester.pump(const Duration(milliseconds: 300));
 
     expect(
-      find.textContaining('sin(x) reaches its maximum value 1 at π/2'),
+      find.byKey(const ValueKey<String>('unlock_solution_steps')),
       findsOneWidget,
+    );
+  });
+
+  testWidgets('full unlock shows quiz solution steps',
+      (WidgetTester tester) async {
+    final InMemoryMonetizationService monetization =
+        InMemoryMonetizationService.withProduct();
+    await monetization.initialize();
+    await monetization.purchaseFullUnlock();
+    final DateTime now = DateTime.utc(2026, 9, 13);
+
+    await tester.pumpWidget(
+      MaterialApp(
+        locale: const Locale('en'),
+        supportedLocales: AppStrings.supportedLocales,
+        localizationsDelegates: const [
+          GlobalMaterialLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+        ],
+        home: MonetizationScope(
+          service: monetization,
+          child: QuizResultPage(
+            result: QuizSessionResult(
+              records: [
+                QuizAnswerRecord(
+                  question: createDemoQuestion(),
+                  submittedAnswer: 'B',
+                  isCorrect: true,
+                  answeredAt: now,
+                ),
+              ],
+              startedAt: now,
+              submittedAt: now,
+            ),
+          ),
+        ),
+      ),
+    );
+
+    await tester.tap(
+      find.byKey(
+        const ValueKey<String>('quiz_result_geometry_grade4_foundation_001'),
+      ),
+    );
+    await tester.pump();
+
+    expect(
+      find.text('Look at the highest point of the blue sin(x) curve.'),
+      findsOneWidget,
+    );
+    expect(
+      find.byKey(const ValueKey<String>('unlock_solution_steps')),
+      findsNothing,
     );
   });
 
@@ -2993,5 +3060,52 @@ void main() {
     }
     // 版面塞不下時 Flutter 會在 debug 期丟 overflow 例外
     expect(tester.takeException(), isNull);
+  });
+
+  test('full unlock strings cover every supported locale', () {
+    expect(
+      AppStrings(const Locale('zh', 'TW')).restorePurchases,
+      '回復購買',
+    );
+    expect(
+      AppStrings(const Locale('zh', 'CN')).restorePurchases,
+      '恢复购买',
+    );
+    expect(
+      AppStrings(const Locale('en')).restorePurchases,
+      'Restore Purchases',
+    );
+    expect(
+      AppStrings(const Locale('ja')).restorePurchases,
+      '購入を復元',
+    );
+  });
+
+  testWidgets('settings exposes the full unlock purchase and restore actions',
+      (tester) async {
+    final InMemoryMonetizationService monetization =
+        InMemoryMonetizationService.withProduct();
+    await monetization.initialize();
+    await tester.pumpWidget(MathSpringApp(
+      services: createTestServices(),
+      monetizationService: monetization,
+    ));
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.byIcon(Icons.settings_outlined));
+    await tester.pumpAndSettle();
+
+    final Finder fullUnlock =
+        find.byKey(const ValueKey<String>('open_full_unlock'));
+    expect(fullUnlock, findsOneWidget);
+    await tester.ensureVisible(fullUnlock);
+    await tester.tap(fullUnlock);
+    await tester.pumpAndSettle();
+    expect(find.text('MathSpring Full Unlock'), findsAtLeastNWidgets(1));
+    expect(find.text('Restore Purchases'), findsOneWidget);
+    expect(find.byKey(const ValueKey<String>('purchase_full_unlock')),
+        findsOneWidget);
+    expect(find.byKey(const ValueKey<String>('restore_purchases')),
+        findsOneWidget);
   });
 }

@@ -21,14 +21,15 @@ import 'package:mathspring/services/daily_mission.dart';
 import 'package:mathspring/services/formal_exam_preset.dart';
 import 'package:mathspring/services/formal_exam_scoring.dart';
 import 'package:mathspring/services/math_text_formatter.dart';
+import 'package:mathspring/services/monetization_service.dart';
 import 'package:mathspring/services/session_launch_plan_builder.dart';
+import 'package:mathspring/services/storekit_monetization_service.dart';
 import 'package:mathspring/ui/content_scroll_view.dart';
 import 'package:mathspring/ui/layout_spec.dart';
 import 'package:mathspring/widgets/avatar_editor.dart';
 import 'package:mathspring/widgets/avatar_preview.dart';
 
-const String appSupportUrl =
-    'https://benwu777.github.io/MathSpring/support/';
+const String appSupportUrl = 'https://benwu777.github.io/MathSpring/support/';
 const String appPrivacyPolicyUrl =
     'https://benwu777.github.io/MathSpring/privacy/';
 
@@ -125,9 +126,10 @@ Question _buildTrigDemoQuestion() {
 }
 
 class MathSpringApp extends StatefulWidget {
-  const MathSpringApp({super.key, this.services});
+  const MathSpringApp({super.key, this.services, this.monetizationService});
 
   final AppServices? services;
+  final MonetizationService? monetizationService;
 
   @override
   State<MathSpringApp> createState() => _MathSpringAppState();
@@ -136,6 +138,7 @@ class MathSpringApp extends StatefulWidget {
 class _MathSpringAppState extends State<MathSpringApp> {
   Locale? _localeOverride;
   late final Future<AppServices> _servicesFuture;
+  late final MonetizationService _monetization;
 
   @override
   void initState() {
@@ -143,6 +146,17 @@ class _MathSpringAppState extends State<MathSpringApp> {
     _servicesFuture = widget.services == null
         ? AppServices.openDefault()
         : Future<AppServices>.value(widget.services!);
+    _monetization = widget.monetizationService ??
+        StoreKitMonetizationService(
+          gateway: InAppPurchaseStorefrontGateway(),
+        );
+    unawaited(_monetization.initialize());
+  }
+
+  @override
+  void dispose() {
+    _monetization.dispose();
+    super.dispose();
   }
 
   void _updateLocale(Locale locale) {
@@ -175,11 +189,14 @@ class _MathSpringAppState extends State<MathSpringApp> {
       // 已經在用 Theme.of(context).textTheme 的畫面因此自動跟著縮放。
       builder: (BuildContext context, Widget? child) {
         final ThemeData base = Theme.of(context);
-        return Theme(
-          data: base.copyWith(
-            textTheme: LayoutSpec.of(context).textThemeFrom(base.textTheme),
+        return MonetizationScope(
+          service: _monetization,
+          child: Theme(
+            data: base.copyWith(
+              textTheme: LayoutSpec.of(context).textThemeFrom(base.textTheme),
+            ),
+            child: child ?? const SizedBox.shrink(),
           ),
-          child: child ?? const SizedBox.shrink(),
         );
       },
       theme: ThemeData(
@@ -318,27 +335,49 @@ class _MathSpringAppState extends State<MathSpringApp> {
           ),
         ),
       ),
-      home: widget.services != null
-          ? MathSpringHomePage(
-              onLocaleChanged: _updateLocale,
-              services: widget.services!,
-            )
-          : FutureBuilder<AppServices>(
-              future: _servicesFuture,
-              builder: (context, snapshot) {
-                if (!snapshot.hasData) {
-                  return const Scaffold(
-                    body: Center(child: CircularProgressIndicator()),
-                  );
-                }
-                return MathSpringHomePage(
-                  onLocaleChanged: _updateLocale,
-                  services: snapshot.data!,
-                );
-              },
-            ),
+      home: ValueListenableBuilder<MonetizationState>(
+        valueListenable: _monetization,
+        builder: (BuildContext context, MonetizationState monetization, _) =>
+            widget.services != null
+                ? MathSpringHomePage(
+                    onLocaleChanged: _updateLocale,
+                    services: widget.services!,
+                    monetization: _monetization,
+                  )
+                : FutureBuilder<AppServices>(
+                    future: _servicesFuture,
+                    builder: (context, snapshot) {
+                      if (!snapshot.hasData) {
+                        return const Scaffold(
+                          body: Center(child: CircularProgressIndicator()),
+                        );
+                      }
+                      return MathSpringHomePage(
+                        onLocaleChanged: _updateLocale,
+                        services: snapshot.data!,
+                        monetization: _monetization,
+                      );
+                    },
+                  ),
+      ),
     );
   }
+}
+
+class MonetizationScope extends InheritedNotifier<MonetizationService> {
+  static final MonetizationService _fallback = NoopMonetizationService();
+
+  const MonetizationScope({
+    super.key,
+    required MonetizationService service,
+    required super.child,
+  }) : super(notifier: service);
+
+  static MonetizationService of(BuildContext context) =>
+      context
+          .dependOnInheritedWidgetOfExactType<MonetizationScope>()
+          ?.notifier ??
+      _fallback;
 }
 
 class MathSpringHomePage extends StatefulWidget {
@@ -346,10 +385,12 @@ class MathSpringHomePage extends StatefulWidget {
     super.key,
     required this.onLocaleChanged,
     required this.services,
+    required this.monetization,
   });
 
   final ValueChanged<Locale> onLocaleChanged;
   final AppServices services;
+  final MonetizationService monetization;
 
   @override
   State<MathSpringHomePage> createState() => _MathSpringHomePageState();
@@ -409,6 +450,7 @@ class _MathSpringHomePageState extends State<MathSpringHomePage> {
                 onChanged: _handleLearnerChanged,
                 currentLocale: Localizations.localeOf(context),
                 onLocaleChanged: widget.onLocaleChanged,
+                monetization: widget.monetization,
               ),
           },
         ),
@@ -427,52 +469,52 @@ class _MathSpringHomePageState extends State<MathSpringHomePage> {
           return Padding(
             padding: EdgeInsets.fromLTRB(side, 0, side, 14),
             child: DecoratedBox(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(26),
-            boxShadow: const [
-              BoxShadow(
-                color: Color(0x120F172A),
-                blurRadius: 24,
-                offset: Offset(0, 10),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(26),
+                boxShadow: const [
+                  BoxShadow(
+                    color: Color(0x120F172A),
+                    blurRadius: 24,
+                    offset: Offset(0, 10),
+                  ),
+                ],
               ),
-            ],
-          ),
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(26),
-            child: NavigationBar(
-              backgroundColor: const Color(0xFFFDFDFE),
-              indicatorColor: const Color(0xFFE7EEF9),
-              selectedIndex: _currentTab.index,
-              onDestinationSelected: (index) {
-                setState(() {
-                  _currentTab = _HomeTab.values[index];
-                });
-              },
-              destinations: [
-                NavigationDestination(
-                  icon: const Icon(Icons.play_circle_outline),
-                  selectedIcon: const Icon(Icons.play_circle_fill),
-                  label: strings.navPractice,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(26),
+                child: NavigationBar(
+                  backgroundColor: const Color(0xFFFDFDFE),
+                  indicatorColor: const Color(0xFFE7EEF9),
+                  selectedIndex: _currentTab.index,
+                  onDestinationSelected: (index) {
+                    setState(() {
+                      _currentTab = _HomeTab.values[index];
+                    });
+                  },
+                  destinations: [
+                    NavigationDestination(
+                      icon: const Icon(Icons.play_circle_outline),
+                      selectedIcon: const Icon(Icons.play_circle_fill),
+                      label: strings.navPractice,
+                    ),
+                    NavigationDestination(
+                      icon: const Icon(Icons.fact_check_outlined),
+                      selectedIcon: const Icon(Icons.fact_check),
+                      label: strings.navQuiz,
+                    ),
+                    NavigationDestination(
+                      icon: const Icon(Icons.history_edu_outlined),
+                      selectedIcon: const Icon(Icons.history_edu),
+                      label: strings.navReview,
+                    ),
+                    NavigationDestination(
+                      icon: const Icon(Icons.settings_outlined),
+                      selectedIcon: const Icon(Icons.settings),
+                      label: strings.navSettings,
+                    ),
+                  ],
                 ),
-                NavigationDestination(
-                  icon: const Icon(Icons.fact_check_outlined),
-                  selectedIcon: const Icon(Icons.fact_check),
-                  label: strings.navQuiz,
-                ),
-                NavigationDestination(
-                  icon: const Icon(Icons.history_edu_outlined),
-                  selectedIcon: const Icon(Icons.history_edu),
-                  label: strings.navReview,
-                ),
-                NavigationDestination(
-                  icon: const Icon(Icons.settings_outlined),
-                  selectedIcon: const Icon(Icons.settings),
-                  label: strings.navSettings,
-                ),
-              ],
+              ),
             ),
-          ),
-          ),
           );
         },
       ),
@@ -541,18 +583,18 @@ class _HomeShellFrame extends StatelessWidget {
             child: ContentScrollView(
               fill: true,
               child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    _TopBar(
-                      title: 'MathSpring',
-                      learner: learner,
-                    ),
-                    const SizedBox(height: 18),
-                    Expanded(child: child),
-                  ],
-                ),
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  _TopBar(
+                    title: 'MathSpring',
+                    learner: learner,
+                  ),
+                  const SizedBox(height: 18),
+                  Expanded(child: child),
+                ],
               ),
             ),
+          ),
         ],
       ),
     );
@@ -773,33 +815,33 @@ class _DailyMissionLanding extends StatelessWidget {
         // 撐滿剩餘高度，首頁在 iPad 上不會只佔上方一小塊
         Expanded(
           child: _SectionCard(
-          title: '今天的任務',
-          subtitle: '一般練習作答五題即可完成，不限答對或答錯。',
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                '${progress.answeredCount} / ${progress.targetCount}',
-                style: Theme.of(context).textTheme.displaySmall,
-              ),
-              const SizedBox(height: 18),
-              FilledButton(
-                key: const ValueKey<String>('start_daily_mission'),
-                onPressed: onStart,
-                style: FilledButton.styleFrom(
-                  backgroundColor: const Color(0xFF111827),
-                  minimumSize: const Size.fromHeight(54),
+            title: '今天的任務',
+            subtitle: '一般練習作答五題即可完成，不限答對或答錯。',
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  '${progress.answeredCount} / ${progress.targetCount}',
+                  style: Theme.of(context).textTheme.displaySmall,
                 ),
-                child: const Text('開始今日任務'),
-              ),
-              const SizedBox(height: 10),
-              TextButton(
-                key: const ValueKey<String>('open_regular_practice'),
-                onPressed: onOpenPractice,
-                child: const Text('仍要自由練習？從這裡開始'),
-              ),
-            ],
-          ),
+                const SizedBox(height: 18),
+                FilledButton(
+                  key: const ValueKey<String>('start_daily_mission'),
+                  onPressed: onStart,
+                  style: FilledButton.styleFrom(
+                    backgroundColor: const Color(0xFF111827),
+                    minimumSize: const Size.fromHeight(54),
+                  ),
+                  child: const Text('開始今日任務'),
+                ),
+                const SizedBox(height: 10),
+                TextButton(
+                  key: const ValueKey<String>('open_regular_practice'),
+                  onPressed: onOpenPractice,
+                  child: const Text('仍要自由練習？從這裡開始'),
+                ),
+              ],
+            ),
           ),
         ),
       ],
@@ -1161,8 +1203,8 @@ List<Widget> _buildCalendarRows({
           DateTime(month.year, month.month, index - leadingEmptyCells + 1);
       final LearningDaySummary daySummary = summary.dayFor(day);
       final bool practiced = daySummary.questionCount > 0;
-      final bool selected = day ==
-          DateTime(selectedDay.year, selectedDay.month, selectedDay.day);
+      final bool selected =
+          day == DateTime(selectedDay.year, selectedDay.month, selectedDay.day);
       cells.add(
         Expanded(
           child: AspectRatio(
@@ -1195,7 +1237,8 @@ List<Widget> _buildCalendarRows({
     if (row > 0) {
       rows.add(const SizedBox(height: spacing));
     }
-    rows.add(Row(crossAxisAlignment: CrossAxisAlignment.start, children: cells));
+    rows.add(
+        Row(crossAxisAlignment: CrossAxisAlignment.start, children: cells));
   }
   return rows;
 }
@@ -1207,12 +1250,14 @@ class _SettingsTab extends StatelessWidget {
     required this.onChanged,
     required this.currentLocale,
     required this.onLocaleChanged,
+    required this.monetization,
   });
 
   final AppServices services;
   final VoidCallback onChanged;
   final Locale currentLocale;
   final ValueChanged<Locale> onLocaleChanged;
+  final MonetizationService monetization;
 
   @override
   Widget build(BuildContext context) {
@@ -1231,7 +1276,16 @@ class _SettingsTab extends StatelessWidget {
           subtitle: strings.settingsSubtitle,
           services: services,
           onChanged: onChanged,
+          maxLearnerProfiles: monetization.value.maxLearnerProfiles,
+          hasFullUnlock: monetization.value.hasFullUnlock,
+          onProfileLimitReached: () => showModalBottomSheet<void>(
+            context: context,
+            isScrollControlled: true,
+            builder: (_) => _FullUnlockSheet(monetization: monetization),
+          ),
         ),
+        const SizedBox(height: 16),
+        _FullUnlockSection(monetization: monetization),
         const SizedBox(height: 16),
         _LocaleSettingsSection(
           currentLocale: currentLocale,
@@ -1246,6 +1300,127 @@ class _SettingsTab extends StatelessWidget {
         const SizedBox(height: 16),
         const _SupportAndPrivacySection(),
       ],
+    );
+  }
+}
+
+class _FullUnlockSection extends StatelessWidget {
+  const _FullUnlockSection({required this.monetization});
+
+  final MonetizationService monetization;
+
+  Future<void> _showPaywall(BuildContext context) => showModalBottomSheet<void>(
+        context: context,
+        isScrollControlled: true,
+        builder: (_) => _FullUnlockSheet(monetization: monetization),
+      );
+
+  @override
+  Widget build(BuildContext context) {
+    final AppStrings strings = AppStrings.of(context);
+    return ValueListenableBuilder<MonetizationState>(
+      valueListenable: monetization,
+      builder: (BuildContext context, MonetizationState state, _) =>
+          _SectionCard(
+        title: state.hasFullUnlock
+            ? strings.fullUnlockUnlockedTitle
+            : strings.fullUnlockTitle,
+        subtitle: state.hasFullUnlock
+            ? strings.fullUnlockUnlockedSubtitle
+            : strings.fullUnlockSubtitle,
+        trailing: state.hasFullUnlock
+            ? const Icon(Icons.verified_rounded, color: Color(0xFF163D7A))
+            : TextButton(
+                key: const ValueKey<String>('open_full_unlock'),
+                onPressed: state.status == MonetizationStatus.unavailable
+                    ? null
+                    : () => _showPaywall(context),
+                child:
+                    Text(state.product?.price ?? strings.purchaseUnavailable),
+              ),
+        child: const SizedBox.shrink(),
+      ),
+    );
+  }
+}
+
+class _LockedSolutionSteps extends StatelessWidget {
+  const _LockedSolutionSteps();
+
+  @override
+  Widget build(BuildContext context) {
+    final MonetizationService monetization = MonetizationScope.of(context);
+    final AppStrings strings = AppStrings.of(context);
+    return Align(
+      alignment: Alignment.centerLeft,
+      child: OutlinedButton.icon(
+        key: const ValueKey<String>('unlock_solution_steps'),
+        onPressed: () => showModalBottomSheet<void>(
+          context: context,
+          isScrollControlled: true,
+          builder: (_) => _FullUnlockSheet(monetization: monetization),
+        ),
+        icon: const Icon(Icons.lock_outline),
+        label: Text(strings.unlockSolutionSteps),
+      ),
+    );
+  }
+}
+
+class _FullUnlockSheet extends StatelessWidget {
+  const _FullUnlockSheet({required this.monetization});
+
+  final MonetizationService monetization;
+
+  @override
+  Widget build(BuildContext context) {
+    final AppStrings strings = AppStrings.of(context);
+    return SafeArea(
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(24, 24, 24, 32),
+        child: ValueListenableBuilder<MonetizationState>(
+          valueListenable: monetization,
+          builder: (BuildContext context, MonetizationState state, _) => Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(strings.fullUnlockTitle,
+                  style: Theme.of(context).textTheme.headlineSmall),
+              const SizedBox(height: 12),
+              Text(strings.fullUnlockDescription),
+              const SizedBox(height: 20),
+              if (state.errorMessage != null) ...[
+                Text(state.errorMessage!,
+                    style: const TextStyle(color: Colors.red)),
+                const SizedBox(height: 12),
+              ],
+              if (state.hasFullUnlock)
+                Text(strings.fullUnlockAlreadyPurchased)
+              else if (state.product == null)
+                Text(strings.fullUnlockProductUnavailable)
+              else ...[
+                FilledButton(
+                  key: const ValueKey<String>('purchase_full_unlock'),
+                  onPressed: state.status == MonetizationStatus.purchasing ||
+                          state.status == MonetizationStatus.restoring
+                      ? null
+                      : monetization.purchaseFullUnlock,
+                  child: Text(strings.purchaseFullUnlock(state.product!.price)),
+                ),
+                const SizedBox(height: 8),
+                TextButton(
+                  key: const ValueKey<String>('restore_purchases'),
+                  onPressed: state.status == MonetizationStatus.purchasing ||
+                          state.status == MonetizationStatus.restoring
+                      ? null
+                      : monetization.restorePurchases,
+                  child: Text(strings.restorePurchases),
+                ),
+              ],
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
@@ -2001,12 +2176,18 @@ class _LearnerProfilesSection extends StatefulWidget {
     required this.subtitle,
     required this.services,
     required this.onChanged,
+    this.maxLearnerProfiles = 1,
+    this.onProfileLimitReached,
+    this.hasFullUnlock = false,
   });
 
   final String title;
   final String subtitle;
   final AppServices services;
   final VoidCallback onChanged;
+  final int maxLearnerProfiles;
+  final VoidCallback? onProfileLimitReached;
+  final bool hasFullUnlock;
 
   @override
   State<_LearnerProfilesSection> createState() =>
@@ -2015,10 +2196,18 @@ class _LearnerProfilesSection extends StatefulWidget {
 
 class _LearnerProfilesSectionState extends State<_LearnerProfilesSection> {
   Future<void> _openCreateLearnerDialog(BuildContext context) async {
+    if (widget.services.learnerProfiles.length >= widget.maxLearnerProfiles) {
+      widget.onProfileLimitReached?.call();
+      return;
+    }
     final AppStrings strings = AppStrings.of(context);
     final _LearnerDraft? draft = await showDialog<_LearnerDraft>(
       context: context,
-      builder: (_) => _CreateLearnerDialog(strings: strings),
+      builder: (_) => _CreateLearnerDialog(
+        strings: strings,
+        hasFullUnlock: widget.hasFullUnlock,
+        onLockedOptionSelected: widget.onProfileLimitReached,
+      ),
     );
     if (draft == null) {
       return;
@@ -2030,6 +2219,7 @@ class _LearnerProfilesSectionState extends State<_LearnerProfilesSection> {
       maxLevelStage: draft.maxLevelStage,
       challengeTier: 'foundation',
       avatar: draft.avatar,
+      maxLearnerProfiles: widget.maxLearnerProfiles,
     );
     await widget.services.setCurrentLearner(profile.id);
     widget.onChanged();
@@ -2047,6 +2237,8 @@ class _LearnerProfilesSectionState extends State<_LearnerProfilesSection> {
         builder: (_) => LearnerEditPage(
           services: widget.services,
           learner: learner,
+          hasFullUnlock: widget.hasFullUnlock,
+          onLockedOptionSelected: widget.onProfileLimitReached,
         ),
       ),
     );
@@ -2355,9 +2547,15 @@ class _LearnerDraft {
 }
 
 class _CreateLearnerDialog extends StatefulWidget {
-  const _CreateLearnerDialog({required this.strings});
+  const _CreateLearnerDialog({
+    required this.strings,
+    required this.hasFullUnlock,
+    this.onLockedOptionSelected,
+  });
 
   final AppStrings strings;
+  final bool hasFullUnlock;
+  final VoidCallback? onLockedOptionSelected;
 
   @override
   State<_CreateLearnerDialog> createState() => _CreateLearnerDialogState();
@@ -2366,7 +2564,8 @@ class _CreateLearnerDialog extends StatefulWidget {
 class _CreateLearnerDialogState extends State<_CreateLearnerDialog> {
   final TextEditingController _nameController = TextEditingController();
   RangeValues _gradeRange = const RangeValues(1, 2);
-  AvatarConfiguration _avatar = AvatarConfiguration.defaultFor(AvatarPresentation.girl);
+  AvatarConfiguration _avatar =
+      AvatarConfiguration.defaultFor(AvatarPresentation.girl);
 
   @override
   void dispose() {
@@ -2384,29 +2583,34 @@ class _CreateLearnerDialogState extends State<_CreateLearnerDialog> {
         height: 430,
         child: SingleChildScrollView(
           child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            TextField(
-              key: const ValueKey<String>('learner_name_field'),
-              controller: _nameController,
-              decoration: InputDecoration(
-                labelText: widget.strings.learnerName,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              TextField(
+                key: const ValueKey<String>('learner_name_field'),
+                controller: _nameController,
+                decoration: InputDecoration(
+                  labelText: widget.strings.learnerName,
+                ),
               ),
-            ),
-            const SizedBox(height: 16),
-            _LearnerGradeRangeSelector(
-              strings: widget.strings,
-              values: _gradeRange,
-              onChanged: (value) {
-                setState(() {
-                  _gradeRange = value;
-                });
-              },
-            ),
-            const SizedBox(height: 16),
-            AvatarEditor(onChanged: (value) => _avatar = value),
-          ],
-        ),
+              const SizedBox(height: 16),
+              _LearnerGradeRangeSelector(
+                strings: widget.strings,
+                values: _gradeRange,
+                onChanged: (value) {
+                  setState(() {
+                    _gradeRange = value;
+                  });
+                },
+              ),
+              const SizedBox(height: 16),
+              AvatarEditor(
+                onChanged: (value) => _avatar = value,
+                hasFullUnlock: widget.hasFullUnlock,
+                onLockedOptionSelected: (_) =>
+                    widget.onLockedOptionSelected?.call(),
+              ),
+            ],
+          ),
         ),
       ),
       actions: [
@@ -2445,10 +2649,14 @@ class LearnerEditPage extends StatefulWidget {
     super.key,
     required this.services,
     required this.learner,
+    required this.hasFullUnlock,
+    this.onLockedOptionSelected,
   });
 
   final AppServices services;
   final LearnerProfile learner;
+  final bool hasFullUnlock;
+  final VoidCallback? onLockedOptionSelected;
 
   @override
   State<LearnerEditPage> createState() => _LearnerEditPageState();
@@ -2532,6 +2740,9 @@ class _LearnerEditPageState extends State<LearnerEditPage> {
           AvatarEditor(
             initialConfiguration: _avatar,
             onChanged: (value) => _avatar = value,
+            hasFullUnlock: widget.hasFullUnlock,
+            onLockedOptionSelected: (_) =>
+                widget.onLockedOptionSelected?.call(),
           ),
           const SizedBox(height: 24),
           FilledButton(
@@ -2884,12 +3095,17 @@ class SessionDetailPage extends StatelessWidget {
                           const SizedBox(height: 8),
                           Text(question.localizedAnswer(_localeCode(context))),
                           const SizedBox(height: 10),
-                          for (final String step in question
-                              .localizedSolutionSteps(_localeCode(context)))
-                            Padding(
-                              padding: const EdgeInsets.only(bottom: 8),
-                              child: Text(step),
-                            ),
+                          if (MonetizationScope.of(context)
+                              .value
+                              .canViewSolutionSteps)
+                            for (final String step in question
+                                .localizedSolutionSteps(_localeCode(context)))
+                              Padding(
+                                padding: const EdgeInsets.only(bottom: 8),
+                                child: Text(step),
+                              )
+                          else
+                            const _LockedSolutionSteps(),
                         ],
                       ],
                     ),
@@ -3110,6 +3326,7 @@ class _PracticeSessionPageState extends State<PracticeSessionPage> {
   final GlobalKey _reviewCardKey = GlobalKey();
   int _currentIndex = 0;
   bool _isReviewing = false;
+  bool _isCurrentQuestionFavorite = false;
   PracticeAnswerRecord? _latestRecord;
 
   @override
@@ -3126,6 +3343,31 @@ class _PracticeSessionPageState extends State<PracticeSessionPage> {
               questions: widget.initialQuestions!,
             ),
           );
+    _loadFavoriteForCurrentQuestion();
+  }
+
+  Future<void> _loadFavoriteForCurrentQuestion() async {
+    final QuestionBank bank = await _packFuture;
+    final Question question =
+        bank.questions[_currentIndex % bank.questions.length];
+    final bool value = await widget.services.isFavoriteQuestion(
+      learnerId: widget.services.currentLearnerId ?? 'unknown',
+      questionId: question.id,
+    );
+    if (mounted) setState(() => _isCurrentQuestionFavorite = value);
+  }
+
+  Future<void> _toggleFavorite(Question question) async {
+    final bool value = await widget.services.toggleFavoriteQuestion(
+      learnerId: widget.services.currentLearnerId ?? 'unknown',
+      questionId: question.id,
+    );
+    if (!mounted) return;
+    setState(() => _isCurrentQuestionFavorite = value);
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      content: Text(value ? '已加入收藏' : '已移除收藏'),
+      duration: const Duration(seconds: 1),
+    ));
   }
 
   @override
@@ -3174,57 +3416,66 @@ class _PracticeSessionPageState extends State<PracticeSessionPage> {
             controller: _scrollController,
             fill: true,
             child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Container(
-                    key: const ValueKey<String>('practice_question_header'),
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 16,
-                      vertical: 14,
-                    ),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(18),
-                      border: Border.all(color: const Color(0xFFE7EBF2)),
-                    ),
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: Text(
-                            '${strings.questionLabel} ${_records.length + 1}',
-                            style: Theme.of(context)
-                                .textTheme
-                                .headlineSmall
-                                ?.copyWith(fontSize: layoutSpec.titleText),
-                          ),
-                        ),
-                        Container(
-                          key: const ValueKey<String>('question_meta_badge'),
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 10,
-                            vertical: 6,
-                          ),
-                          decoration: BoxDecoration(
-                            color: const Color(0xFFEAF2FF),
-                            borderRadius: BorderRadius.circular(999),
-                          ),
-                          child: Text(
-                            _displayLevelStage(question.levelStage, strings),
-                            style:
-                                Theme.of(context).textTheme.bodySmall?.copyWith(
-                                      fontWeight: FontWeight.w700,
-                                      color: const Color(0xFF163D7A),
-                                    ),
-                          ),
-                        ),
-                      ],
-                    ),
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  key: const ValueKey<String>('practice_question_header'),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 16,
+                    vertical: 14,
                   ),
-                  const SizedBox(height: 16),
-                  // 撐滿剩餘高度：換題時卡片的位置與大小固定，
-                  // 不會因為每題文字長短而上下跳。
-                  Expanded(
-                    child: _SectionCard(
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(18),
+                    border: Border.all(color: const Color(0xFFE7EBF2)),
+                  ),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Text(
+                          '${strings.questionLabel} ${_records.length + 1}',
+                          style: Theme.of(context)
+                              .textTheme
+                              .headlineSmall
+                              ?.copyWith(fontSize: layoutSpec.titleText),
+                        ),
+                      ),
+                      IconButton(
+                        key: ValueKey<String>(
+                            'bookmark_question_${question.id}'),
+                        tooltip: '收藏題目',
+                        onPressed: () => _toggleFavorite(question),
+                        icon: Icon(_isCurrentQuestionFavorite
+                            ? Icons.bookmark
+                            : Icons.bookmark_border),
+                      ),
+                      Container(
+                        key: const ValueKey<String>('question_meta_badge'),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 10,
+                          vertical: 6,
+                        ),
+                        decoration: BoxDecoration(
+                          color: const Color(0xFFEAF2FF),
+                          borderRadius: BorderRadius.circular(999),
+                        ),
+                        child: Text(
+                          _displayLevelStage(question.levelStage, strings),
+                          style:
+                              Theme.of(context).textTheme.bodySmall?.copyWith(
+                                    fontWeight: FontWeight.w700,
+                                    color: const Color(0xFF163D7A),
+                                  ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 16),
+                // 撐滿剩餘高度：換題時卡片的位置與大小固定，
+                // 不會因為每題文字長短而上下跳。
+                Expanded(
+                  child: _SectionCard(
                     cardKey: const ValueKey<String>('study_surface_card'),
                     title: displayTopicCode(widget.pack.topicCode, strings),
                     subtitle:
@@ -3272,10 +3523,10 @@ class _PracticeSessionPageState extends State<PracticeSessionPage> {
                         ],
                       ],
                     ),
-                    ),
                   ),
-                ],
-              ),
+                ),
+              ],
+            ),
           );
         },
       ),
@@ -3328,7 +3579,9 @@ class _PracticeSessionPageState extends State<PracticeSessionPage> {
       _currentIndex++;
       _isReviewing = false;
       _latestRecord = null;
+      _isCurrentQuestionFavorite = false;
     });
+    _loadFavoriteForCurrentQuestion();
   }
 
   Future<void> _scrollToReviewCard() async {
@@ -3476,8 +3729,8 @@ class _PracticeAnswerSectionState extends State<_PracticeAnswerSection> {
                     key: ValueKey<String>(
                       'question_option_text_${widget.question.id}_$key',
                     ),
-                    text:
-                        widget.question.optionDisplayLabel(key, widget.localeCode),
+                    text: widget.question
+                        .optionDisplayLabel(key, widget.localeCode),
                     localeCode: widget.localeCode,
                   ),
                 ),
@@ -3590,15 +3843,18 @@ class _PracticeReviewCard extends StatelessWidget {
             localeCode: localeCode,
           ),
           const SizedBox(height: 10),
-          for (final String step
-              in record.question.localizedSolutionSteps(localeCode))
-            Padding(
-              padding: const EdgeInsets.only(bottom: 8),
-              child: _QuestionBodyText(
-                text: step,
-                localeCode: localeCode,
-              ),
-            ),
+          if (MonetizationScope.of(context).value.canViewSolutionSteps)
+            for (final String step
+                in record.question.localizedSolutionSteps(localeCode))
+              Padding(
+                padding: const EdgeInsets.only(bottom: 8),
+                child: _QuestionBodyText(
+                  text: step,
+                  localeCode: localeCode,
+                ),
+              )
+          else
+            const _LockedSolutionSteps(),
           const SizedBox(height: 12),
           Align(
             alignment: Alignment.centerLeft,
@@ -3641,19 +3897,19 @@ class PracticeSummaryPage extends StatelessWidget {
             // 撐滿剩餘高度，畫面不會依內容長短留下大片空白
             Expanded(
               child: _SectionCard(
-              title: strings.practiceSummary,
-              subtitle:
-                  '${result.correctCount} / ${result.totalQuestions} ${strings.correctSuffix}',
-              child: Column(
-                children: [
-                  _StatRow(
-                    leftValue: '${result.totalQuestions}',
-                    leftLabel: strings.solvedLabel,
-                    rightValue: '${result.accuracyRate.round()}%',
-                    rightLabel: strings.accuracyLabel,
-                  ),
-                ],
-              ),
+                title: strings.practiceSummary,
+                subtitle:
+                    '${result.correctCount} / ${result.totalQuestions} ${strings.correctSuffix}',
+                child: Column(
+                  children: [
+                    _StatRow(
+                      leftValue: '${result.totalQuestions}',
+                      leftLabel: strings.solvedLabel,
+                      rightValue: '${result.accuracyRate.round()}%',
+                      rightLabel: strings.accuracyLabel,
+                    ),
+                  ],
+                ),
               ),
             ),
           ],
@@ -3727,6 +3983,7 @@ class _QuizSessionPageState extends State<QuizSessionPage> {
   DateTime? _deadline;
   List<Question>? _activeQuestions;
   bool _hasAutoSubmitted = false;
+  final Set<String> _favoriteQuestionIds = <String>{};
 
   @override
   void initState() {
@@ -3758,6 +4015,29 @@ class _QuizSessionPageState extends State<QuizSessionPage> {
               questions: widget.initialQuestions!,
             ),
           );
+    _loadFavorites();
+  }
+
+  Future<void> _loadFavorites() async {
+    final QuestionBank bank = await _packFuture;
+    final String learnerId = widget.services.currentLearnerId ?? 'unknown';
+    for (final Question question in bank.questions) {
+      if (await widget.services
+          .isFavoriteQuestion(learnerId: learnerId, questionId: question.id)) {
+        _favoriteQuestionIds.add(question.id);
+      }
+    }
+    if (mounted) setState(() {});
+  }
+
+  Future<void> _toggleQuizFavorite(Question question) async {
+    final bool value = await widget.services.toggleFavoriteQuestion(
+        learnerId: widget.services.currentLearnerId ?? 'unknown',
+        questionId: question.id);
+    if (!mounted) return;
+    setState(() => value
+        ? _favoriteQuestionIds.add(question.id)
+        : _favoriteQuestionIds.remove(question.id));
   }
 
   @override
@@ -3839,6 +4119,15 @@ class _QuizSessionPageState extends State<QuizSessionPage> {
                               ?.copyWith(fontSize: layoutSpec.titleText),
                         ),
                       ),
+                      IconButton(
+                        key: ValueKey<String>(
+                            'bookmark_question_${question.id}'),
+                        tooltip: '收藏題目',
+                        onPressed: () => _toggleQuizFavorite(question),
+                        icon: Icon(_favoriteQuestionIds.contains(question.id)
+                            ? Icons.bookmark
+                            : Icons.bookmark_border),
+                      ),
                       Container(
                         padding: const EdgeInsets.symmetric(
                           horizontal: 10,
@@ -3874,39 +4163,40 @@ class _QuizSessionPageState extends State<QuizSessionPage> {
                 // 不會因為每題文字長短而上下跳。
                 Expanded(
                   child: _SectionCard(
-                  title: displayTopicCode(widget.pack.topicCode, strings),
-                  subtitle:
-                      '${_displayLevelStage(question.levelStage, strings)} · ${_displayTier(question.challengeTier, strings)}',
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      _QuestionPromptText(
-                        key: ValueKey<String>('question_prompt_${question.id}'),
-                        text: question.localizedPrompt(_localeCode(context)),
-                        localeCode: _localeCode(context),
-                      ),
-                      if (question.source?.displayLabel != null) ...[
-                        const SizedBox(height: 8),
-                        _QuestionSourceText(
-                            text: question.source!.displayLabel!),
-                      ],
-                      if (question.figure.kind != 'none') ...[
+                    title: displayTopicCode(widget.pack.topicCode, strings),
+                    subtitle:
+                        '${_displayLevelStage(question.levelStage, strings)} · ${_displayTier(question.challengeTier, strings)}',
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        _QuestionPromptText(
+                          key: ValueKey<String>(
+                              'question_prompt_${question.id}'),
+                          text: question.localizedPrompt(_localeCode(context)),
+                          localeCode: _localeCode(context),
+                        ),
+                        if (question.source?.displayLabel != null) ...[
+                          const SizedBox(height: 8),
+                          _QuestionSourceText(
+                              text: question.source!.displayLabel!),
+                        ],
+                        if (question.figure.kind != 'none') ...[
+                          const SizedBox(height: 20),
+                          _QuestionFigureView(question: question),
+                        ],
                         const SizedBox(height: 20),
-                        _QuestionFigureView(question: question),
+                        _QuizAnswerSection(
+                          question: question,
+                          localeCode: _localeCode(context),
+                          selectedAnswer: selectedAnswer,
+                          onAnswerChanged: (answer) {
+                            setState(() {
+                              _answers[question.id] = answer;
+                            });
+                          },
+                        ),
                       ],
-                      const SizedBox(height: 20),
-                      _QuizAnswerSection(
-                        question: question,
-                        localeCode: _localeCode(context),
-                        selectedAnswer: selectedAnswer,
-                        onAnswerChanged: (answer) {
-                          setState(() {
-                            _answers[question.id] = answer;
-                          });
-                        },
-                      ),
-                    ],
-                  ),
+                    ),
                   ),
                 ),
                 const SizedBox(height: 20),
@@ -4201,8 +4491,7 @@ class _QuizAnswerSection extends StatelessWidget {
                   child: _QuestionOptionText(
                     key: ValueKey<String>(
                         'question_option_text_${question.id}_$key'),
-                    text:
-                        question.optionDisplayLabel(key, localeCode),
+                    text: question.optionDisplayLabel(key, localeCode),
                     localeCode: localeCode,
                   ),
                 ),
@@ -4361,18 +4650,18 @@ class QuizResultPage extends StatelessWidget {
             // 撐滿剩餘高度，畫面不會依內容長短留下大片空白
             Expanded(
               child: _SectionCard(
-              title: strings.quizResult,
-              subtitle: maxScore == null
-                  ? '${result.correctCount} / ${result.totalQuestions} ${strings.correctSuffix}'
-                  : '正式測驗成績：$earnedScore / $maxScore',
-              child: _StatRow(
-                leftValue: maxScore == null
-                    ? '${result.correctCount}'
-                    : '$earnedScore',
-                leftLabel: maxScore == null ? strings.correctLabel : '總分',
-                rightValue: _formatElapsed(result.elapsed),
-                rightLabel: strings.elapsedLabel,
-              ),
+                title: strings.quizResult,
+                subtitle: maxScore == null
+                    ? '${result.correctCount} / ${result.totalQuestions} ${strings.correctSuffix}'
+                    : '正式測驗成績：$earnedScore / $maxScore',
+                child: _StatRow(
+                  leftValue: maxScore == null
+                      ? '${result.correctCount}'
+                      : '$earnedScore',
+                  leftLabel: maxScore == null ? strings.correctLabel : '總分',
+                  rightValue: _formatElapsed(result.elapsed),
+                  rightLabel: strings.elapsedLabel,
+                ),
               ),
             ),
             const SizedBox(height: 18),
@@ -4428,18 +4717,23 @@ class QuizResultPage extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(height: 10),
-                        for (final String step in record.question
-                            .localizedSolutionSteps(_localeCode(context)))
-                          Padding(
-                            padding: const EdgeInsets.only(bottom: 8),
-                            child: Align(
-                              alignment: Alignment.centerLeft,
-                              child: _QuestionBodyText(
-                                text: step,
-                                localeCode: _localeCode(context),
+                        if (MonetizationScope.of(context)
+                            .value
+                            .canViewSolutionSteps)
+                          for (final String step in record.question
+                              .localizedSolutionSteps(_localeCode(context)))
+                            Padding(
+                              padding: const EdgeInsets.only(bottom: 8),
+                              child: Align(
+                                alignment: Alignment.centerLeft,
+                                child: _QuestionBodyText(
+                                  text: step,
+                                  localeCode: _localeCode(context),
+                                ),
                               ),
-                            ),
-                          ),
+                            )
+                        else
+                          const _LockedSolutionSteps(),
                       ],
                     ),
                   ),
@@ -4722,6 +5016,72 @@ class AppStrings {
   String get languageSimplifiedChinese => '简中';
   String get languageEnglish => 'EN';
   String get languageJapanese => '日本語';
+  String get fullUnlockTitle => _text(
+        zhHant: 'MathSpring 完整版',
+        zhHans: 'MathSpring 完整版',
+        en: 'MathSpring Full Unlock',
+        ja: 'MathSpring フル版',
+      );
+  String get fullUnlockUnlockedTitle => _text(
+        zhHant: '完整版已解鎖',
+        zhHans: '完整版已解锁',
+        en: 'Full Unlock Active',
+        ja: 'フル版を解除済み',
+      );
+  String get fullUnlockSubtitle => _text(
+        zhHant: '完整詳解、無廣告、全套紙娃娃與最多五位角色。',
+        zhHans: '完整详解、无广告、全套纸娃娃与最多五位角色。',
+        en: 'Full solutions, ad-free learning, all avatar styles, and up to five learners.',
+        ja: '詳しい解説、広告なし、全アバタースタイル、学習者は最大5人。',
+      );
+  String get fullUnlockUnlockedSubtitle => _text(
+        zhHant: '完整詳解、無廣告、全套紙娃娃與最多五位角色已可使用。',
+        zhHans: '完整详解、无广告、全套纸娃娃与最多五位角色已可使用。',
+        en: 'Full solutions, ad-free learning, all avatar styles, and up to five learners are active.',
+        ja: '詳しい解説、広告なし、全アバタースタイル、最大5人の学習者を利用できます。',
+      );
+  String get fullUnlockDescription => _text(
+        zhHant: '一次解鎖完整詳解、無廣告、全套紙娃娃樣式與最多五位學習者角色。',
+        zhHans: '一次解锁完整详解、无广告、全套纸娃娃样式与最多五位学习者角色。',
+        en: 'Unlock full solutions, ad-free learning, all avatar styles, and up to five learners with one purchase.',
+        ja: '1回の購入で、詳しい解説、広告なし、全アバタースタイル、最大5人の学習者を解除します。',
+      );
+  String get unlockSolutionSteps => _text(
+        zhHant: '解鎖完整詳解',
+        zhHans: '解锁完整详解',
+        en: 'Unlock Full Solutions',
+        ja: '詳しい解説を解除',
+      );
+  String get purchaseUnavailable => _text(
+        zhHant: '暫時無法購買',
+        zhHans: '暂时无法购买',
+        en: 'Unavailable',
+        ja: '現在は購入できません',
+      );
+  String get fullUnlockAlreadyPurchased => _text(
+        zhHant: '此 Apple 帳號已解鎖完整版。',
+        zhHans: '此 Apple 账户已解锁完整版。',
+        en: 'This Apple Account has already unlocked the full version.',
+        ja: 'この Apple Account はすでにフル版を解除しています。',
+      );
+  String get fullUnlockProductUnavailable => _text(
+        zhHant: '目前無法載入購買商品，請稍後再試。',
+        zhHans: '目前无法加载购买商品，请稍后再试。',
+        en: 'The purchase product cannot be loaded right now. Please try again later.',
+        ja: '購入商品を読み込めません。しばらくしてからもう一度お試しください。',
+      );
+  String purchaseFullUnlock(String price) => _text(
+        zhHant: '以 $price 解鎖',
+        zhHans: '以 $price 解锁',
+        en: 'Unlock for $price',
+        ja: '$price で解除',
+      );
+  String get restorePurchases => _text(
+        zhHant: '回復購買',
+        zhHans: '恢复购买',
+        en: 'Restore Purchases',
+        ja: '購入を復元',
+      );
   String get heroTitle => 'MathSpring';
   String get heroSubtitle => _text(
         zhHant: '用更清楚的方式練習數學思維',
@@ -4894,6 +5254,7 @@ class AppStrings {
         en: '$count questions · ${(accuracyRate * 100).round()}% correct',
         ja: '$count 問 · 正答率 ${(accuracyRate * 100).round()}%',
       );
+
   /// 月曆的星期標題，從**週日**起算——排版用 `firstDay.weekday % 7`
   /// 算前置空格（週日 = 7 → 0），順序不可更動，否則日期會對錯欄。
   List<String> get weekdayHeaders => <String>[
@@ -4903,7 +5264,13 @@ class AppStrings {
   String _weekdayLabel(int index) {
     const List<String> zh = <String>['日', '一', '二', '三', '四', '五', '六'];
     const List<String> en = <String>[
-      'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat',
+      'Sun',
+      'Mon',
+      'Tue',
+      'Wed',
+      'Thu',
+      'Fri',
+      'Sat',
     ];
     return _text(
       zhHant: zh[index],
@@ -5361,8 +5728,7 @@ class TrigGraphDemoPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final AppStrings strings = AppStrings.of(context);
-    final bool wide =
-        LayoutSpec.of(context).widthClass == WidthClass.expanded;
+    final bool wide = LayoutSpec.of(context).widthClass == WidthClass.expanded;
 
     return Scaffold(
       appBar: AppBar(
@@ -5572,8 +5938,7 @@ class _AnswerComposer extends StatelessWidget {
                   },
                   style: OutlinedButton.styleFrom(
                     // 選項列是主要的觸控目標，iPad 上要比 iPhone 大
-                    minimumSize:
-                        Size.fromHeight(layoutSpec.minTapTarget + 10),
+                    minimumSize: Size.fromHeight(layoutSpec.minTapTarget + 10),
                     alignment: Alignment.centerLeft,
                     foregroundColor: const Color(0xFF111827),
                     backgroundColor: Colors.white,
@@ -5798,7 +6163,7 @@ FigureRenderSpec? buildFigureRenderSpec(QuestionFigure figure,
         painter: ShapeDiagramPainter(
           shape: figure.params['shape'] as String? ?? 'rectangle',
           labels: _stringMapFromDynamic(figure.params['labels']),
-                  labelFontFamily: labelFontFamily,
+          labelFontFamily: labelFontFamily,
         ),
         child: const SizedBox.expand(),
       ),
@@ -5814,14 +6179,14 @@ FigureRenderSpec? buildFigureRenderSpec(QuestionFigure figure,
           highlightPoint: _pointFromDynamic(
             figure.params['highlightPoint'],
           ),
-                  labelFontFamily: labelFontFamily,
+          labelFontFamily: labelFontFamily,
         ),
         child: const SizedBox.expand(),
       ),
     'geometry_scene' => CustomPaint(
         painter: GeometryScenePainter(
           scene: GeometryScene.fromParams(figure.params),
-                  labelFontFamily: labelFontFamily,
+          labelFontFamily: labelFontFamily,
         ),
         child: const SizedBox.expand(),
       ),
@@ -5829,11 +6194,9 @@ FigureRenderSpec? buildFigureRenderSpec(QuestionFigure figure,
         painter: CompositeGridShapePainter(
           rows: _intFromDynamic(figure.params['rows'], fallback: 3),
           cols: _intFromDynamic(figure.params['cols'], fallback: 3),
-          filledCells:
-              _cellListFromDynamic(figure.params['filledCells']),
-          cellLabels:
-              _stringMapFromDynamic(figure.params['cellLabels']),
-                  labelFontFamily: labelFontFamily,
+          filledCells: _cellListFromDynamic(figure.params['filledCells']),
+          cellLabels: _stringMapFromDynamic(figure.params['cellLabels']),
+          labelFontFamily: labelFontFamily,
         ),
         child: const SizedBox.expand(),
       ),
@@ -5843,9 +6206,8 @@ FigureRenderSpec? buildFigureRenderSpec(QuestionFigure figure,
             figure.params['regionLabels'],
           ),
           pointLabel: figure.params['pointLabel'] as String? ?? 'P',
-          shadedRegion:
-              figure.params['shadedRegion'] as String? ?? 'topRight',
-                  labelFontFamily: labelFontFamily,
+          shadedRegion: figure.params['shadedRegion'] as String? ?? 'topRight',
+          labelFontFamily: labelFontFamily,
         ),
         child: const SizedBox.expand(),
       ),
@@ -6842,6 +7204,7 @@ class ShapeDiagramPainter extends CustomPainter {
 
   final String shape;
   final Map<String, String> labels;
+
   /// 預覽工具會塞自己載進來的字型；app 裡是 null，用預設字型。
   final String? labelFontFamily;
 
@@ -6881,14 +7244,19 @@ class ShapeDiagramPainter extends CustomPainter {
           linePaint,
         );
         _paintText(canvas, labels['top'] ?? 'N',
-            Offset(center.dx, center.dy - arm - 22), fontFamily: labelFontFamily);
+            Offset(center.dx, center.dy - arm - 22),
+            fontFamily: labelFontFamily);
         _paintText(canvas, labels['right'] ?? 'E',
-            Offset(center.dx + arm + 22, center.dy), fontFamily: labelFontFamily);
+            Offset(center.dx + arm + 22, center.dy),
+            fontFamily: labelFontFamily);
         _paintText(canvas, labels['bottom'] ?? 'S',
-            Offset(center.dx, center.dy + arm + 22), fontFamily: labelFontFamily);
+            Offset(center.dx, center.dy + arm + 22),
+            fontFamily: labelFontFamily);
         _paintText(canvas, labels['left'] ?? 'W',
-            Offset(center.dx - arm - 22, center.dy), fontFamily: labelFontFamily);
-        _paintText(canvas, labels['center'], center, fontFamily: labelFontFamily);
+            Offset(center.dx - arm - 22, center.dy),
+            fontFamily: labelFontFamily);
+        _paintText(canvas, labels['center'], center,
+            fontFamily: labelFontFamily);
         break;
       case 'square':
         final double side = math.min(rect.width, rect.height);
@@ -6910,13 +7278,17 @@ class ShapeDiagramPainter extends CustomPainter {
         canvas.drawPath(triangle, fillPaint);
         canvas.drawPath(triangle, outlinePaint);
         _paintText(
-            canvas, labels['top'], Offset(size.width * 0.5, size.height * 0.1), fontFamily: labelFontFamily);
+            canvas, labels['top'], Offset(size.width * 0.5, size.height * 0.1),
+            fontFamily: labelFontFamily);
         _paintText(canvas, labels['left'],
-            Offset(size.width * 0.18, size.height * 0.48), fontFamily: labelFontFamily);
+            Offset(size.width * 0.18, size.height * 0.48),
+            fontFamily: labelFontFamily);
         _paintText(canvas, labels['right'],
-            Offset(size.width * 0.82, size.height * 0.48), fontFamily: labelFontFamily);
+            Offset(size.width * 0.82, size.height * 0.48),
+            fontFamily: labelFontFamily);
         _paintText(canvas, labels['bottom'],
-            Offset(size.width * 0.5, size.height * 0.76), fontFamily: labelFontFamily);
+            Offset(size.width * 0.5, size.height * 0.76),
+            fontFamily: labelFontFamily);
         break;
       case 'trapezoid':
         final Path trapezoid = Path()
@@ -6927,16 +7299,21 @@ class ShapeDiagramPainter extends CustomPainter {
           ..close();
         canvas.drawPath(trapezoid, fillPaint);
         canvas.drawPath(trapezoid, outlinePaint);
-        _paintText(canvas, labels['top'],
-            Offset(size.width * 0.5, size.height * 0.14), fontFamily: labelFontFamily);
+        _paintText(
+            canvas, labels['top'], Offset(size.width * 0.5, size.height * 0.14),
+            fontFamily: labelFontFamily);
         _paintText(canvas, labels['bottom'],
-            Offset(size.width * 0.5, size.height * 0.78), fontFamily: labelFontFamily);
+            Offset(size.width * 0.5, size.height * 0.78),
+            fontFamily: labelFontFamily);
         _paintText(canvas, labels['left'],
-            Offset(size.width * 0.16, size.height * 0.46), fontFamily: labelFontFamily);
+            Offset(size.width * 0.16, size.height * 0.46),
+            fontFamily: labelFontFamily);
         _paintText(canvas, labels['right'],
-            Offset(size.width * 0.84, size.height * 0.46), fontFamily: labelFontFamily);
+            Offset(size.width * 0.84, size.height * 0.46),
+            fontFamily: labelFontFamily);
         _paintText(canvas, labels['center'],
-            Offset(size.width * 0.5, size.height * 0.48), fontFamily: labelFontFamily);
+            Offset(size.width * 0.5, size.height * 0.48),
+            fontFamily: labelFontFamily);
         break;
       case 'parallelogram':
         final Path parallelogram = Path()
@@ -6948,15 +7325,20 @@ class ShapeDiagramPainter extends CustomPainter {
         canvas.drawPath(parallelogram, fillPaint);
         canvas.drawPath(parallelogram, outlinePaint);
         _paintText(canvas, labels['top'],
-            Offset(size.width * 0.53, size.height * 0.14), fontFamily: labelFontFamily);
+            Offset(size.width * 0.53, size.height * 0.14),
+            fontFamily: labelFontFamily);
         _paintText(canvas, labels['bottom'],
-            Offset(size.width * 0.41, size.height * 0.78), fontFamily: labelFontFamily);
+            Offset(size.width * 0.41, size.height * 0.78),
+            fontFamily: labelFontFamily);
         _paintText(canvas, labels['left'],
-            Offset(size.width * 0.14, size.height * 0.48), fontFamily: labelFontFamily);
+            Offset(size.width * 0.14, size.height * 0.48),
+            fontFamily: labelFontFamily);
         _paintText(canvas, labels['right'],
-            Offset(size.width * 0.8, size.height * 0.48), fontFamily: labelFontFamily);
+            Offset(size.width * 0.8, size.height * 0.48),
+            fontFamily: labelFontFamily);
         _paintText(canvas, labels['center'],
-            Offset(size.width * 0.47, size.height * 0.46), fontFamily: labelFontFamily);
+            Offset(size.width * 0.47, size.height * 0.46),
+            fontFamily: labelFontFamily);
         break;
       case 'pentagon':
         final Path pentagon = Path()
@@ -6968,16 +7350,21 @@ class ShapeDiagramPainter extends CustomPainter {
           ..close();
         canvas.drawPath(pentagon, fillPaint);
         canvas.drawPath(pentagon, outlinePaint);
-        _paintText(canvas, labels['top'],
-            Offset(size.width * 0.5, size.height * 0.08), fontFamily: labelFontFamily);
+        _paintText(
+            canvas, labels['top'], Offset(size.width * 0.5, size.height * 0.08),
+            fontFamily: labelFontFamily);
         _paintText(canvas, labels['left'],
-            Offset(size.width * 0.16, size.height * 0.44), fontFamily: labelFontFamily);
+            Offset(size.width * 0.16, size.height * 0.44),
+            fontFamily: labelFontFamily);
         _paintText(canvas, labels['right'],
-            Offset(size.width * 0.84, size.height * 0.44), fontFamily: labelFontFamily);
+            Offset(size.width * 0.84, size.height * 0.44),
+            fontFamily: labelFontFamily);
         _paintText(canvas, labels['bottom'],
-            Offset(size.width * 0.5, size.height * 0.78), fontFamily: labelFontFamily);
+            Offset(size.width * 0.5, size.height * 0.78),
+            fontFamily: labelFontFamily);
         _paintText(canvas, labels['center'],
-            Offset(size.width * 0.5, size.height * 0.46), fontFamily: labelFontFamily);
+            Offset(size.width * 0.5, size.height * 0.46),
+            fontFamily: labelFontFamily);
         break;
       case 'hexagon':
         final Path hexagon = Path()
@@ -6991,26 +7378,34 @@ class ShapeDiagramPainter extends CustomPainter {
         canvas.drawPath(hexagon, fillPaint);
         canvas.drawPath(hexagon, outlinePaint);
         _paintText(
-            canvas, labels['top'], Offset(size.width * 0.5, size.height * 0.1), fontFamily: labelFontFamily);
+            canvas, labels['top'], Offset(size.width * 0.5, size.height * 0.1),
+            fontFamily: labelFontFamily);
         _paintText(canvas, labels['left'],
-            Offset(size.width * 0.14, size.height * 0.44), fontFamily: labelFontFamily);
+            Offset(size.width * 0.14, size.height * 0.44),
+            fontFamily: labelFontFamily);
         _paintText(canvas, labels['right'],
-            Offset(size.width * 0.86, size.height * 0.44), fontFamily: labelFontFamily);
+            Offset(size.width * 0.86, size.height * 0.44),
+            fontFamily: labelFontFamily);
         _paintText(canvas, labels['bottom'],
-            Offset(size.width * 0.5, size.height * 0.78), fontFamily: labelFontFamily);
+            Offset(size.width * 0.5, size.height * 0.78),
+            fontFamily: labelFontFamily);
         _paintText(canvas, labels['center'],
-            Offset(size.width * 0.5, size.height * 0.44), fontFamily: labelFontFamily);
+            Offset(size.width * 0.5, size.height * 0.44),
+            fontFamily: labelFontFamily);
         break;
       case 'circle':
         final Offset center = Offset(size.width / 2, size.height / 2);
         final double radius = math.min(size.width, size.height) * 0.24;
         canvas.drawCircle(center, radius, fillPaint);
         canvas.drawCircle(center, radius, outlinePaint);
-        _paintText(canvas, labels['center'], center, fontFamily: labelFontFamily);
+        _paintText(canvas, labels['center'], center,
+            fontFamily: labelFontFamily);
         _paintText(
-            canvas, labels['top'], Offset(center.dx, center.dy - radius - 18), fontFamily: labelFontFamily);
-        _paintText(canvas, labels['right'],
-            Offset(center.dx + radius + 18, center.dy), fontFamily: labelFontFamily);
+            canvas, labels['top'], Offset(center.dx, center.dy - radius - 18),
+            fontFamily: labelFontFamily);
+        _paintText(
+            canvas, labels['right'], Offset(center.dx + radius + 18, center.dy),
+            fontFamily: labelFontFamily);
         break;
       case 'oval':
         final Rect oval = Rect.fromCenter(
@@ -7032,13 +7427,17 @@ class ShapeDiagramPainter extends CustomPainter {
   }
 
   void _paintShapeLabels(Canvas canvas, Rect rect) {
-    _paintText(canvas, labels['top'], Offset(rect.center.dx, rect.top - 18), fontFamily: labelFontFamily);
+    _paintText(canvas, labels['top'], Offset(rect.center.dx, rect.top - 18),
+        fontFamily: labelFontFamily);
     _paintText(
-        canvas, labels['bottom'], Offset(rect.center.dx, rect.bottom + 18), fontFamily: labelFontFamily);
-    _paintText(canvas, labels['left'], Offset(rect.left - 18, rect.center.dy), fontFamily: labelFontFamily);
-    _paintText(
-        canvas, labels['right'], Offset(rect.right + 18, rect.center.dy), fontFamily: labelFontFamily);
-    _paintText(canvas, labels['center'], rect.center, fontFamily: labelFontFamily);
+        canvas, labels['bottom'], Offset(rect.center.dx, rect.bottom + 18),
+        fontFamily: labelFontFamily);
+    _paintText(canvas, labels['left'], Offset(rect.left - 18, rect.center.dy),
+        fontFamily: labelFontFamily);
+    _paintText(canvas, labels['right'], Offset(rect.right + 18, rect.center.dy),
+        fontFamily: labelFontFamily);
+    _paintText(canvas, labels['center'], rect.center,
+        fontFamily: labelFontFamily);
   }
 
   @override
@@ -7059,6 +7458,7 @@ class CircleQuadrantsPointPainter extends CustomPainter {
   final Map<String, String> regionLabels;
   final String pointLabel;
   final String shadedRegion;
+
   /// 預覽工具會塞自己載進來的字型；app 裡是 null，用預設字型。
   final String? labelFontFamily;
 
@@ -7121,11 +7521,16 @@ class CircleQuadrantsPointPainter extends CustomPainter {
 
     canvas.drawCircle(pointP, 4.5, pointPaint);
 
-    _paintText(canvas, 'A', Offset(top.dx - 6, top.dy - 24), fontFamily: labelFontFamily);
-    _paintText(canvas, 'B', Offset(right.dx + 18, right.dy - 8), fontFamily: labelFontFamily);
-    _paintText(canvas, 'C', Offset(bottom.dx - 6, bottom.dy + 12), fontFamily: labelFontFamily);
-    _paintText(canvas, 'D', Offset(left.dx - 24, left.dy - 8), fontFamily: labelFontFamily);
-    _paintText(canvas, pointLabel, pointP + const Offset(-6, -22), fontFamily: labelFontFamily);
+    _paintText(canvas, 'A', Offset(top.dx - 6, top.dy - 24),
+        fontFamily: labelFontFamily);
+    _paintText(canvas, 'B', Offset(right.dx + 18, right.dy - 8),
+        fontFamily: labelFontFamily);
+    _paintText(canvas, 'C', Offset(bottom.dx - 6, bottom.dy + 12),
+        fontFamily: labelFontFamily);
+    _paintText(canvas, 'D', Offset(left.dx - 24, left.dy - 8),
+        fontFamily: labelFontFamily);
+    _paintText(canvas, pointLabel, pointP + const Offset(-6, -22),
+        fontFamily: labelFontFamily);
 
     _paintText(
       canvas,
@@ -7182,6 +7587,7 @@ class CoordinatePlanePainter extends CustomPainter {
   final List<DiagramPoint> points;
   final List<DiagramPoint> pathPoints;
   final DiagramPoint? highlightPoint;
+
   /// 預覽工具會塞自己載進來的字型；app 裡是 null，用預設字型。
   final String? labelFontFamily;
 
@@ -7224,13 +7630,16 @@ class CoordinatePlanePainter extends CustomPainter {
         final double dx = mapX(x);
         canvas.drawLine(
             Offset(dx, plot.top), Offset(dx, plot.bottom), gridPaint);
-        _paintText(canvas, '$x', Offset(dx, plot.bottom + 14), fontFamily: labelFontFamily);
+        _paintText(canvas, '$x', Offset(dx, plot.bottom + 14),
+            fontFamily: labelFontFamily);
       }
       for (int y = minY; y <= maxY; y++) {
         final double dy = mapY(y);
         canvas.drawLine(
             Offset(plot.left, dy), Offset(plot.right, dy), gridPaint);
-        if (y != 0) _paintText(canvas, '$y', Offset(plot.left - 14, dy), fontFamily: labelFontFamily);
+        if (y != 0)
+          _paintText(canvas, '$y', Offset(plot.left - 14, dy),
+              fontFamily: labelFontFamily);
       }
     }
 
@@ -7257,7 +7666,8 @@ class CoordinatePlanePainter extends CustomPainter {
           point.y == highlightPoint!.y;
       canvas.drawCircle(offset, 5, isHighlighted ? highlightPaint : pointPaint);
       if (point.label != null && point.label!.isNotEmpty) {
-        _paintText(canvas, point.label, offset + const Offset(0, -16), fontFamily: labelFontFamily);
+        _paintText(canvas, point.label, offset + const Offset(0, -16),
+            fontFamily: labelFontFamily);
       }
     }
   }
@@ -7289,6 +7699,7 @@ class CompositeGridShapePainter extends CustomPainter {
   final int cols;
   final List<GridCell> filledCells;
   final Map<String, String> cellLabels;
+
   /// 預覽工具會塞自己載進來的字型；app 裡是 null，用預設字型。
   final String? labelFontFamily;
 
@@ -7333,7 +7744,8 @@ class CompositeGridShapePainter extends CustomPainter {
         canvas.drawRect(
             cellRect, filledKeys.contains(key) ? fillPaint : emptyPaint);
         canvas.drawRect(cellRect, gridPaint);
-        _paintText(canvas, cellLabels[key], cellRect.center, fontFamily: labelFontFamily);
+        _paintText(canvas, cellLabels[key], cellRect.center,
+            fontFamily: labelFontFamily);
       }
     }
 

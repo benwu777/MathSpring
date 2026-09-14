@@ -5,12 +5,14 @@ import 'package:path/path.dart' as p;
 import 'package:mathspring/data/local/app_services.dart';
 import 'package:mathspring/data/local/app_preferences_repository.dart';
 import 'package:mathspring/data/local/answer_session_repository.dart';
+import 'package:mathspring/data/local/favorite_question_repository.dart';
 import 'package:mathspring/data/local/learner_profile_repository.dart';
 import 'package:mathspring/data/local/mathspring_database.dart';
 import 'package:mathspring/data/local/question_progress_repository.dart';
 import 'package:mathspring/models/learner_profile.dart';
 import 'package:mathspring/models/answer_session.dart';
 import 'package:mathspring/models/avatar_configuration.dart';
+import 'package:mathspring/models/favorite_question.dart';
 import 'package:mathspring/models/question_progress.dart';
 import 'package:mathspring/models/session_answer_record.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
@@ -51,6 +53,45 @@ void main() {
     expect(tableNames, contains('session_answer_records'));
     expect(tableNames, contains('question_progress'));
     expect(tableNames, contains('app_preferences'));
+    expect(tableNames, contains('favorite_question_collections'));
+    expect(tableNames, contains('favorite_questions'));
+    expect(tableNames, contains('favorite_question_collection_memberships'));
+  });
+
+  test('favorites preserve questions when a custom collection is deleted',
+      () async {
+    final FavoriteQuestionRepository repository =
+        FavoriteQuestionRepository(database);
+    final List<FavoriteQuestionCollection> defaults =
+        await repository.ensureDefaultCollections('learner_allen');
+    final FavoriteQuestionCollection custom = await repository.createCollection(
+      learnerId: 'learner_allen',
+      name: '討論',
+    );
+    await repository.saveFavorite(const FavoriteQuestion(
+      learnerId: 'learner_allen',
+      questionId: 'geometry_grade4_foundation_001',
+      note: '問老師為何這樣想',
+      tags: <String>['討論'],
+      createdAtIso: '2026-09-14T00:00:00Z',
+      updatedAtIso: '2026-09-14T00:00:00Z',
+    ));
+    await repository.addToCollection(
+      learnerId: 'learner_allen',
+      questionId: 'geometry_grade4_foundation_001',
+      collectionId: custom.id,
+    );
+
+    await repository.deleteCollection(custom);
+
+    expect(defaults, hasLength(2));
+    expect(
+      await repository.fetchFavorite(
+        learnerId: 'learner_allen',
+        questionId: 'geometry_grade4_foundation_001',
+      ),
+      isNotNull,
+    );
   });
 
   test('upgrades a partially migrated version 4 profile database', () async {
@@ -544,5 +585,44 @@ void main() {
 
     expect(summary.dayFor(DateTime(2026, 8, 20)).questionCount, 2);
     expect(summary.topicQuestionCounts, {'geometry': 2});
+  });
+
+  test('learner creation respects the supplied full unlock profile limit',
+      () async {
+    final AppServices services = AppServices.forTesting(
+      learnerProfiles: const <LearnerProfile>[
+        LearnerProfile(
+          id: 'learner_one',
+          displayName: 'One',
+          levelStage: 'grade1',
+          challengeTier: 'foundation',
+          createdAtIso: '2026-09-13T00:00:00Z',
+        ),
+      ],
+      currentLearnerId: 'learner_one',
+    );
+
+    await expectLater(
+      services.createLearner(
+        displayName: 'Two',
+        minLevelStage: 'grade1',
+        maxLevelStage: 'grade1',
+        challengeTier: 'foundation',
+        maxLearnerProfiles: 1,
+      ),
+      throwsA(isA<LearnerProfileLimitReached>()),
+    );
+
+    for (int index = 2; index <= 5; index++) {
+      await services.createLearner(
+        displayName: 'Learner $index',
+        minLevelStage: 'grade1',
+        maxLevelStage: 'grade1',
+        challengeTier: 'foundation',
+        maxLearnerProfiles: 5,
+      );
+    }
+
+    expect(services.learnerProfiles, hasLength(5));
   });
 }

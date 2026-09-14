@@ -1,10 +1,12 @@
 import 'package:mathspring/data/local/app_preferences_repository.dart';
+import 'package:mathspring/data/local/favorite_question_repository.dart';
 import 'package:mathspring/data/local/answer_session_repository.dart';
 import 'package:mathspring/data/local/learner_profile_repository.dart';
 import 'package:mathspring/data/local/mathspring_database.dart';
 import 'package:mathspring/data/local/question_progress_repository.dart';
 import 'package:mathspring/models/answer_session.dart';
 import 'package:mathspring/models/avatar_configuration.dart';
+import 'package:mathspring/models/favorite_question.dart';
 import 'package:mathspring/models/learner_profile.dart';
 import 'package:mathspring/models/question_progress.dart';
 import 'package:mathspring/models/session_answer_record.dart';
@@ -19,6 +21,7 @@ class AppServices {
     this.questionProgressRepository,
     this.appPreferencesRepository,
     this.answerSessionRepository,
+    this.favoriteQuestionRepository,
     this.onSaveQuestionProgress,
     this.onSaveAnswerSession,
     List<LearnerProfile>? learnerProfiles,
@@ -38,6 +41,7 @@ class AppServices {
   final QuestionProgressRepository? questionProgressRepository;
   final AppPreferencesRepository? appPreferencesRepository;
   final AnswerSessionRepository? answerSessionRepository;
+  final FavoriteQuestionRepository? favoriteQuestionRepository;
   final Future<void> Function(QuestionProgress progress)?
       onSaveQuestionProgress;
   final Future<void> Function(
@@ -85,6 +89,7 @@ class AppServices {
       questionProgressRepository: QuestionProgressRepository(database),
       appPreferencesRepository: AppPreferencesRepository(database),
       answerSessionRepository: AnswerSessionRepository(database),
+      favoriteQuestionRepository: FavoriteQuestionRepository(database),
     );
     await services.seedDefaultDataIfNeeded();
     return services;
@@ -152,6 +157,43 @@ class AppServices {
     await questionProgressRepository!.upsert(progress);
   }
 
+  Future<bool> toggleFavoriteQuestion({
+    required String learnerId,
+    required String questionId,
+  }) async {
+    final FavoriteQuestionRepository? repository = favoriteQuestionRepository;
+    if (repository == null) return false;
+    final FavoriteQuestion? existing = await repository.fetchFavorite(
+      learnerId: learnerId,
+      questionId: questionId,
+    );
+    if (existing != null) {
+      await database!.delete('favorite_questions',
+          where: 'learner_id = ? AND question_id = ?',
+          whereArgs: <Object?>[learnerId, questionId]);
+      return false;
+    }
+    final String now = DateTime.now().toUtc().toIso8601String();
+    await repository.saveFavorite(FavoriteQuestion(
+      learnerId: learnerId,
+      questionId: questionId,
+      note: '',
+      tags: const <String>[],
+      createdAtIso: now,
+      updatedAtIso: now,
+    ));
+    return true;
+  }
+
+  Future<bool> isFavoriteQuestion({
+    required String learnerId,
+    required String questionId,
+  }) async =>
+      favoriteQuestionRepository
+          ?.fetchFavorite(learnerId: learnerId, questionId: questionId)
+          .then((FavoriteQuestion? value) => value != null) ??
+      false;
+
   Future<void> setCurrentLearner(String learnerId) async {
     currentLearnerId = learnerId;
     if (appPreferencesRepository != null) {
@@ -185,7 +227,11 @@ class AppServices {
     required String maxLevelStage,
     required String challengeTier,
     AvatarConfiguration? avatar,
+    int maxLearnerProfiles = 1,
   }) async {
+    if (learnerProfiles.length >= maxLearnerProfiles) {
+      throw LearnerProfileLimitReached(maxLearnerProfiles);
+    }
     final LearnerProfile profile = LearnerProfile(
       id: 'learner_${DateTime.now().toUtc().microsecondsSinceEpoch}',
       displayName: displayName,
@@ -379,6 +425,16 @@ class AppServices {
     }
     _sessionRecords[session.id] = List<SessionAnswerRecord>.from(records);
   }
+}
+
+class LearnerProfileLimitReached implements Exception {
+  const LearnerProfileLimitReached(this.maxLearnerProfiles);
+
+  final int maxLearnerProfiles;
+
+  @override
+  String toString() =>
+      'LearnerProfileLimitReached(maxLearnerProfiles: $maxLearnerProfiles)';
 }
 
 class LearnerProgressSummary {

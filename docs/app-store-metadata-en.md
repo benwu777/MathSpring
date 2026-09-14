@@ -8,7 +8,7 @@ Review this copy against the shipped app, support URL, and privacy policy before
 - Subtitle: Offline math practice and thinking challenges
 - Primary category: Education
 - Secondary category: Puzzle (only if it matches the final App Store category choice)
-- Age rating: Answer the App Store Connect questionnaire truthfully. The current app has no ads, purchases, user-generated interaction, or web content.
+- Age rating: Answer the App Store Connect questionnaire truthfully. The current app has no ads, user-generated interaction, or web content; it offers a one-time in-app purchase.
 - Support URL: `https://benwu777.github.io/MathSpring/support/`
 - Privacy Policy URL: `https://benwu777.github.io/MathSpring/privacy/`
 
@@ -22,7 +22,7 @@ Highlights:
 
 - Grade-range and topic-based question packs
 - Practice and quiz flows
-- Figures, choices, and solution review
+- Figures, choices, and answer review, with an optional one-time full-solution unlock
 - On-device progress and history for multiple learners
 - Traditional Chinese, English, Simplified Chinese, and Japanese interfaces
 - No account required to start offline practice
@@ -33,8 +33,8 @@ math, practice, logic, geometry, algebra, learning, quiz, puzzles
 
 ## What's New (1.0.0)
 
-Initial release with offline math practice, quizzes, solutions, and learning history.
+Initial release with offline math practice, quizzes, answer review, and learning history. A one-time purchase unlocks full solutions, all paper-doll styles, and up to five learner profiles.
 
 ## App Review Notes
 
-No sign-in, account creation, payment, or subscription is required. Core question packs and learning records work offline. Support and privacy links open the browser only after the user chooses them.
+No sign-in or account creation is required. An optional non-consumable one-time in-app purchase is available; there is no subscription. Core question packs and learning records work offline. Support and privacy links open the browser only after the user chooses them.
