@@ -512,23 +512,21 @@ class _MathSpringHomePageState extends State<MathSpringHomePage> {
           final double side =
               screen > maxWidth ? (screen - maxWidth) / 2 : 16.0;
           return Padding(
-            padding: EdgeInsets.fromLTRB(side, 0, side, 14),
+            padding: EdgeInsets.fromLTRB(side, 0, side, 8),
             child: DecoratedBox(
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(26),
+                borderRadius: BorderRadius.circular(14),
                 boxShadow: const [
                   BoxShadow(
-                    color: Color(0x120F172A),
-                    blurRadius: 24,
-                    offset: Offset(0, 10),
+                    color: Color(0x1217201D),
+                    blurRadius: 12,
+                    offset: Offset(0, 4),
                   ),
                 ],
               ),
               child: ClipRRect(
-                borderRadius: BorderRadius.circular(26),
+                borderRadius: BorderRadius.circular(14),
                 child: NavigationBar(
-                  backgroundColor: const Color(0xFFFDFDFE),
-                  indicatorColor: const Color(0xFFE7EEF9),
                   selectedIndex: _currentTab.index,
                   onDestinationSelected: (index) {
                     setState(() {
@@ -538,22 +536,22 @@ class _MathSpringHomePageState extends State<MathSpringHomePage> {
                   destinations: [
                     NavigationDestination(
                       icon: const Icon(Icons.play_circle_outline),
-                      selectedIcon: const Icon(Icons.play_circle_fill),
+                      selectedIcon: const Icon(Icons.play_circle_outline),
                       label: strings.navPractice,
                     ),
                     NavigationDestination(
                       icon: const Icon(Icons.fact_check_outlined),
-                      selectedIcon: const Icon(Icons.fact_check),
+                      selectedIcon: const Icon(Icons.fact_check_outlined),
                       label: strings.navQuiz,
                     ),
                     NavigationDestination(
                       icon: const Icon(Icons.history_edu_outlined),
-                      selectedIcon: const Icon(Icons.history_edu),
+                      selectedIcon: const Icon(Icons.history_edu_outlined),
                       label: strings.navReview,
                     ),
                     NavigationDestination(
                       icon: const Icon(Icons.settings_outlined),
-                      selectedIcon: const Icon(Icons.settings),
+                      selectedIcon: const Icon(Icons.settings_outlined),
                       label: strings.navSettings,
                     ),
                   ],
@@ -580,67 +578,20 @@ class _HomeShellFrame extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       key: const ValueKey<String>('home_shell_frame'),
-      color: const Color(0xFFF6F8FC),
-      child: Stack(
-        children: [
-          Positioned(
-            top: -80,
-            right: -40,
-            child: IgnorePointer(
-              child: Container(
-                key: const ValueKey<String>('home_background_glow'),
-                width: 260,
-                height: 260,
-                decoration: const BoxDecoration(
-                  shape: BoxShape.circle,
-                  gradient: RadialGradient(
-                    colors: [
-                      Color(0x55C9D9F6),
-                      Color(0x00C9D9F6),
-                    ],
-                  ),
-                ),
-              ),
+      color: AppVisualTokens.canvas,
+      child: ContentScrollView(
+        fill: true,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _TopBar(
+              title: 'MathSpring',
+              learner: learner,
             ),
-          ),
-          Positioned(
-            top: 120,
-            left: -70,
-            child: IgnorePointer(
-              child: Container(
-                width: 220,
-                height: 220,
-                decoration: const BoxDecoration(
-                  shape: BoxShape.circle,
-                  gradient: RadialGradient(
-                    colors: [
-                      Color(0x35E3ECFA),
-                      Color(0x00E3ECFA),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-          ),
-          // Stack 的非定位子項在鬆約束下不會填滿，捲動區會縮成內容高度，
-          // 垂直置中就失去意義；用 Positioned.fill 明確撐滿。
-          Positioned.fill(
-            child: ContentScrollView(
-              fill: true,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  _TopBar(
-                    title: 'MathSpring',
-                    learner: learner,
-                  ),
-                  const SizedBox(height: 18),
-                  Expanded(child: child),
-                ],
-              ),
-            ),
-          ),
-        ],
+            const SizedBox(height: 12),
+            Expanded(child: child),
+          ],
+        ),
       ),
     );
   }
@@ -1888,27 +1839,19 @@ class _HeroCard extends StatelessWidget {
     return Container(
       key: const ValueKey<String>('home_hero_surface'),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(30),
-        gradient: const LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: [
-            Color(0xFFFDFEFF),
-            Color(0xFFF3F7FD),
-            Color(0xFFEFF4FB),
-          ],
-        ),
-        border: Border.all(color: const Color(0xFFE1E8F4)),
+        color: AppVisualTokens.surface,
+        borderRadius: BorderRadius.circular(14),
+        border: Border.all(color: AppVisualTokens.outline),
         boxShadow: const [
           BoxShadow(
-            color: Color(0x120F172A),
-            blurRadius: 32,
-            offset: Offset(0, 16),
+            color: Color(0x1217201D),
+            blurRadius: 14,
+            offset: Offset(0, 5),
           ),
         ],
       ),
       child: Padding(
-        padding: const EdgeInsets.fromLTRB(24, 24, 24, 22),
+        padding: const EdgeInsets.all(20),
         child: isWideLayout
             ? Row(
                 children: [
@@ -1952,13 +1895,13 @@ class _HeroCopy extends StatelessWidget {
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
           decoration: BoxDecoration(
-            color: const Color(0xFFEAF1FC),
-            borderRadius: BorderRadius.circular(999),
+            color: AppVisualTokens.primarySoft,
+            borderRadius: BorderRadius.circular(10),
           ),
           child: Text(
             strings.heroBadge,
             style: TextStyle(
-              color: const Color(0xFF163D7A),
+              color: AppVisualTokens.primary,
               fontWeight: FontWeight.w700,
               fontSize: layoutSpec.scaleText(12),
             ),
@@ -1976,7 +1919,7 @@ class _HeroCopy extends StatelessWidget {
         Text(
           strings.heroSubtitle,
           style: textTheme.bodyLarge?.copyWith(
-            color: const Color(0xFF52637A),
+            color: AppVisualTokens.inkMuted,
           ),
         ),
         const SizedBox(height: 18),
@@ -1994,12 +1937,7 @@ class _HeroCopy extends StatelessWidget {
           key: const ValueKey<String>('hero_primary_cta'),
           onPressed: onOpenDemo,
           style: FilledButton.styleFrom(
-            backgroundColor: const Color(0xFF163D7A),
-            foregroundColor: Colors.white,
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(16),
-            ),
+            padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 12),
           ),
           child: Text(strings.openDemoCta),
         ),
@@ -2018,13 +1956,13 @@ class _HeroPanel extends StatelessWidget {
     return Container(
       constraints: const BoxConstraints(minHeight: 220),
       decoration: BoxDecoration(
-        color: const Color(0xFF163D7A),
-        borderRadius: BorderRadius.circular(26),
+        color: AppVisualTokens.primary,
+        borderRadius: BorderRadius.circular(14),
         boxShadow: const [
           BoxShadow(
-            color: Color(0x1E163D7A),
-            blurRadius: 24,
-            offset: Offset(0, 12),
+            color: Color(0x26177C87),
+            blurRadius: 12,
+            offset: Offset(0, 5),
           ),
         ],
       ),
@@ -2055,7 +1993,7 @@ class _HeroPanel extends StatelessWidget {
             padding: const EdgeInsets.all(14),
             decoration: BoxDecoration(
               color: const Color(0x1FFFFFFF),
-              borderRadius: BorderRadius.circular(18),
+              borderRadius: BorderRadius.circular(10),
               border: Border.all(color: const Color(0x2FFFFFFF)),
             ),
             child: Row(
@@ -2099,16 +2037,9 @@ class _CompactHeroBanner extends StatelessWidget {
       width: double.infinity,
       padding: const EdgeInsets.fromLTRB(20, 18, 20, 18),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(26),
-        gradient: const LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: [
-            Color(0xFFFDFEFF),
-            Color(0xFFF2F6FC),
-          ],
-        ),
-        border: Border.all(color: const Color(0xFFE1E8F4)),
+        color: AppVisualTokens.surface,
+        borderRadius: BorderRadius.circular(14),
+        border: Border.all(color: AppVisualTokens.outline),
       ),
       child: Row(
         children: [
@@ -2116,10 +2047,10 @@ class _CompactHeroBanner extends StatelessWidget {
             width: 46,
             height: 46,
             decoration: BoxDecoration(
-              color: const Color(0xFFEAF1FC),
-              borderRadius: BorderRadius.circular(16),
+              color: AppVisualTokens.primarySoft,
+              borderRadius: BorderRadius.circular(10),
             ),
-            child: Icon(icon, color: const Color(0xFF163D7A)),
+            child: Icon(icon, color: AppVisualTokens.primary),
           ),
           const SizedBox(width: 14),
           Expanded(
@@ -2138,7 +2069,7 @@ class _CompactHeroBanner extends StatelessWidget {
                 Text(
                   subtitle,
                   style: textTheme.bodyMedium?.copyWith(
-                    color: const Color(0xFF64748B),
+                    color: AppVisualTokens.inkMuted,
                   ),
                 ),
               ],

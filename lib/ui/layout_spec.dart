@@ -80,7 +80,7 @@ class LayoutSpec {
     microText: 11,
     contentMaxWidth: double.infinity,
     pagePadding: 16,
-    sectionGap: 16,
+    sectionGap: 12,
     cardPadding: 16,
     optionGap: 8,
     minTapTarget: 48,

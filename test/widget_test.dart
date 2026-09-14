@@ -3124,4 +3124,15 @@ void main() {
         theme.cardTheme.shape! as RoundedRectangleBorder;
     expect(cardShape.borderRadius, BorderRadius.circular(14));
   });
+
+  testWidgets('home shell avoids decorative glows and filled navigation icons',
+      (WidgetTester tester) async {
+    await tester.pumpWidget(MathSpringApp(services: createTestServices()));
+    await tester.pumpAndSettle();
+
+    expect(find.byKey(const ValueKey<String>('home_background_glow')),
+        findsNothing);
+    expect(find.byIcon(Icons.play_circle_fill), findsNothing);
+    expect(find.byIcon(Icons.play_circle_outline), findsOneWidget);
+  });
 }

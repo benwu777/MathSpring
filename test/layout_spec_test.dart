@@ -37,7 +37,8 @@ void main() {
 
     test('每個字級代號都必須隨寬度遞增', () {
       // 這條擋的是「調某一級時讓 iPad 比 iPhone 還小」——最容易犯又最難目視發現
-      final List<(String, double, double, double)> scales = <(String, double, double, double)>[
+      final List<(String, double, double, double)> scales =
+          <(String, double, double, double)>[
         ('displayText', c.displayText, m.displayText, e.displayText),
         ('headingText', c.headingText, m.headingText, e.headingText),
         ('titleText', c.titleText, m.titleText, e.titleText),
@@ -53,7 +54,8 @@ void main() {
     });
 
     test('版面留白與觸控目標也隨寬度遞增（或持平）', () {
-      for (final (String name, double a, double b, double d) in <(String, double, double, double)>[
+      for (final (String name, double a, double b, double d)
+          in <(String, double, double, double)>[
         ('pagePadding', c.pagePadding, m.pagePadding, e.pagePadding),
         ('sectionGap', c.sectionGap, m.sectionGap, e.sectionGap),
         ('cardPadding', c.cardPadding, m.cardPadding, e.cardPadding),
@@ -70,6 +72,12 @@ void main() {
       expect(c.contentMaxWidth, double.infinity);
       expect(m.contentMaxWidth, lessThan(double.infinity));
       expect(e.contentMaxWidth, greaterThan(m.contentMaxWidth));
+    });
+
+    test('compact 保持答題資訊緊湊但不縮小觸控目標', () {
+      expect(c.sectionGap, 12);
+      expect(c.cardPadding, 16);
+      expect(c.minTapTarget, 48);
     });
 
     test('compact 的字級與現況完全相同，iPhone 一個像素都不變', () {
@@ -98,7 +106,21 @@ void main() {
   group('scaleText', () {
     test('compact 原樣回傳，iPhone 的零散字級一個像素都不變', () {
       final LayoutSpec c = LayoutSpec.forWidth(390);
-      for (final double n in <double>[11, 12, 13, 14, 15, 18, 19, 20, 22, 24, 28, 32, 34]) {
+      for (final double n in <double>[
+        11,
+        12,
+        13,
+        14,
+        15,
+        18,
+        19,
+        20,
+        22,
+        24,
+        28,
+        32,
+        34
+      ]) {
         expect(c.scaleText(n), n);
       }
     });
@@ -125,12 +147,18 @@ void main() {
   group('textThemeFrom', () {
     test('把該級的字級套進既有的 TextTheme，但保留顏色與字重', () {
       const TextTheme base = TextTheme(
-        displaySmall: TextStyle(fontSize: 32, fontWeight: FontWeight.w700, color: Color(0xFF0F172A)),
+        displaySmall: TextStyle(
+            fontSize: 32,
+            fontWeight: FontWeight.w700,
+            color: Color(0xFF0F172A)),
         headlineSmall: TextStyle(fontSize: 22, color: Color(0xFF0F172A)),
         titleLarge: TextStyle(fontSize: 18, color: Color(0xFF0F172A)),
-        bodyLarge: TextStyle(fontSize: 15, height: 1.5, color: Color(0xFF334155)),
-        bodyMedium: TextStyle(fontSize: 13, height: 1.4, color: Color(0xFF475569)),
-        bodySmall: TextStyle(fontSize: 11, height: 1.35, color: Color(0xFF64748B)),
+        bodyLarge:
+            TextStyle(fontSize: 15, height: 1.5, color: Color(0xFF334155)),
+        bodyMedium:
+            TextStyle(fontSize: 13, height: 1.4, color: Color(0xFF475569)),
+        bodySmall:
+            TextStyle(fontSize: 11, height: 1.35, color: Color(0xFF64748B)),
       );
       final LayoutSpec e = LayoutSpec.forWidth(1180);
       final TextTheme scaled = e.textThemeFrom(base);
@@ -167,10 +195,19 @@ void main() {
         .join('\n');
 
     const List<String> tokens = <String>[
-      'displayText', 'headingText', 'titleText', 'promptText',
-      'bodyText', 'captionText', 'microText',
-      'contentMaxWidth', 'pagePadding', 'sectionGap',
-      'cardPadding', 'optionGap', 'minTapTarget',
+      'displayText',
+      'headingText',
+      'titleText',
+      'promptText',
+      'bodyText',
+      'captionText',
+      'microText',
+      'contentMaxWidth',
+      'pagePadding',
+      'sectionGap',
+      'cardPadding',
+      'optionGap',
+      'minTapTarget',
     ];
 
     test('每個代號都至少被 lib/ 底下的程式用到一次', () {
