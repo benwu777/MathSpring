@@ -138,7 +138,7 @@ class _AvatarEditorState extends State<AvatarEditor> {
             child: Column(children: [
               AvatarPreview(
                 configuration: _configuration,
-                size: 170,
+                size: 160,
                 assetPackage: widget.assetPackage,
               ),
               const SizedBox(height: 12),
@@ -167,7 +167,7 @@ class _AvatarEditorState extends State<AvatarEditor> {
                 SizedBox(
                   // Ten hairstyle tiles need four rows.  Keep navigation in the
                   // editor viewport and let the choices themselves scroll.
-                  height: 260,
+                  height: 248,
                   child: GridView.count(
                     crossAxisCount: _gridColumnCount,
                     mainAxisSpacing: 8,
@@ -229,11 +229,14 @@ class _AvatarEditorState extends State<AvatarEditor> {
           _choose(id);
         },
         child: Container(
+          key: ValueKey<String>('avatar_option_surface_$id'),
           decoration: BoxDecoration(
             color: Theme.of(context).colorScheme.surfaceContainerHighest,
             borderRadius: BorderRadius.circular(12),
             border: Border.all(
-                color: selected ? accent : Colors.transparent, width: 2),
+              color: selected ? accent : Theme.of(context).colorScheme.outline,
+              width: selected ? 2 : 1,
+            ),
           ),
           child: Stack(
             fit: StackFit.expand,
@@ -369,10 +372,14 @@ class _SectionSelector extends StatelessWidget {
           onPressed: () => onSelected(index),
           style: TextButton.styleFrom(
             foregroundColor: selected ? selectedColor : null,
-            backgroundColor:
-                selected ? selectedColor.withValues(alpha: .12) : null,
-            padding: const EdgeInsets.symmetric(horizontal: 12),
+            backgroundColor: selected
+                ? Theme.of(context).colorScheme.primaryContainer
+                : null,
+            padding: const EdgeInsets.symmetric(horizontal: 10),
             minimumSize: const Size(0, 40),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10),
+            ),
           ),
           child: Text(labels[index]),
         ),

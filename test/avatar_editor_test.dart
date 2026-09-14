@@ -52,6 +52,28 @@ void main() {
         findsOneWidget);
   });
 
+  testWidgets('avatar option tiles retain a quiet outline when unselected',
+      (tester) async {
+    await tester.pumpWidget(
+      const MaterialApp(home: Scaffold(body: AvatarEditor())),
+    );
+
+    await tester
+        .tap(find.byKey(const ValueKey<String>('avatar_section_tab_1')));
+    await tester.pump();
+
+    final Container tile = tester.widget<Container>(
+      find.byKey(const ValueKey<String>('avatar_option_surface_girl_skin_02')),
+    );
+    final BoxDecoration decoration = tile.decoration! as BoxDecoration;
+    expect(
+        decoration.border!.top.color,
+        Theme.of(tester.element(find.byType(AvatarEditor)))
+            .colorScheme
+            .outline);
+    expect(decoration.borderRadius, BorderRadius.circular(12));
+  });
+
   testWidgets('can show stable asset IDs on preview option tiles',
       (tester) async {
     await tester.pumpWidget(

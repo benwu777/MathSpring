@@ -2689,11 +2689,10 @@ class _LearnerEditPageState extends State<LearnerEditPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(strings.editLearner),
-        backgroundColor: Colors.white,
         surfaceTintColor: Colors.transparent,
       ),
       body: ListView(
-        padding: const EdgeInsets.all(20),
+        padding: const EdgeInsets.all(16),
         children: [
           TextField(
             key: const ValueKey<String>('edit_learner_name_field'),
@@ -2720,14 +2719,10 @@ class _LearnerEditPageState extends State<LearnerEditPage> {
             onLockedOptionSelected: (_) =>
                 widget.onLockedOptionSelected?.call(),
           ),
-          const SizedBox(height: 24),
+          const SizedBox(height: 16),
           FilledButton(
             key: const ValueKey<String>('save_learner_profile_button'),
             onPressed: _save,
-            style: FilledButton.styleFrom(
-              backgroundColor: const Color(0xFF111827),
-              minimumSize: const Size.fromHeight(52),
-            ),
             child: Text(strings.saveLearner),
           ),
         ],
@@ -2768,9 +2763,9 @@ class _LearnerGradeRangeSelector extends StatelessWidget {
           width: double.infinity,
           padding: const EdgeInsets.fromLTRB(16, 16, 16, 12),
           decoration: BoxDecoration(
-            color: const Color(0xFFF8FAFC),
-            borderRadius: BorderRadius.circular(16),
-            border: Border.all(color: const Color(0xFFE2E8F0)),
+            color: AppVisualTokens.surfaceMuted,
+            borderRadius: BorderRadius.circular(14),
+            border: Border.all(color: AppVisualTokens.outline),
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -2841,9 +2836,9 @@ class _StatCard extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(18),
       decoration: BoxDecoration(
-        color: const Color(0xFFFAFAFA),
-        borderRadius: BorderRadius.circular(10),
-        border: Border.all(color: const Color(0xFFE5E7EB)),
+        color: AppVisualTokens.surfaceMuted,
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: AppVisualTokens.outline),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -2853,7 +2848,7 @@ class _StatCard extends StatelessWidget {
             style: TextStyle(
               fontSize: layoutSpec.scaleText(28),
               fontWeight: FontWeight.w700,
-              color: const Color(0xFF163D7A),
+              color: AppVisualTokens.primary,
             ),
           ),
           const SizedBox(height: 8),
