@@ -660,9 +660,7 @@ class _PracticeTabState extends State<_PracticeTab> {
                     });
                   },
                   style: OutlinedButton.styleFrom(
-                    foregroundColor: const Color(0xFF111827),
-                    minimumSize: const Size.fromHeight(54),
-                    side: const BorderSide(color: Color(0xFFE5E7EB)),
+                    minimumSize: const Size.fromHeight(48),
                   ),
                   child: Text(strings.chooseTopic),
                 ),
@@ -703,8 +701,7 @@ class _PracticeTabState extends State<_PracticeTab> {
                     mode: _SessionLaunchMode.practice,
                   ),
                   style: FilledButton.styleFrom(
-                    backgroundColor: const Color(0xFF111827),
-                    minimumSize: const Size.fromHeight(54),
+                    minimumSize: const Size.fromHeight(48),
                   ),
                   child: Text(
                     _selectedTopicCode == null
@@ -825,8 +822,7 @@ class _DailyMissionLanding extends StatelessWidget {
                   key: const ValueKey<String>('start_daily_mission'),
                   onPressed: onStart,
                   style: FilledButton.styleFrom(
-                    backgroundColor: const Color(0xFF111827),
-                    minimumSize: const Size.fromHeight(54),
+                    minimumSize: const Size.fromHeight(48),
                   ),
                   child: const Text('開始今日任務'),
                 ),
@@ -904,8 +900,7 @@ class _QuizTab extends StatelessWidget {
                     );
                   },
                   style: FilledButton.styleFrom(
-                    backgroundColor: const Color(0xFF111827),
-                    minimumSize: const Size.fromHeight(54),
+                    minimumSize: const Size.fromHeight(48),
                   ),
                   child: Text(strings.startQuiz),
                 ),

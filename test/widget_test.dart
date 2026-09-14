@@ -3146,4 +3146,21 @@ void main() {
     expect(find.byIcon(Icons.play_circle_fill), findsNothing);
     expect(find.byIcon(Icons.play_circle_outline), findsOneWidget);
   });
+
+  testWidgets('home primary actions use the shared teal accent',
+      (WidgetTester tester) async {
+    await tester.pumpWidget(MathSpringApp(services: createTestServices()));
+    await tester.pumpAndSettle();
+
+    final FilledButton practiceButton = tester.widget<FilledButton>(
+      find.byKey(const ValueKey<String>('open_start_practice')),
+    );
+    expect(practiceButton.style?.backgroundColor, isNull);
+    expect(
+      Theme.of(tester.element(find.byKey(
+        const ValueKey<String>('open_start_practice'),
+      ))).colorScheme.primary,
+      AppVisualTokens.primary,
+    );
+  });
 }
