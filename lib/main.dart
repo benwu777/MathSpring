@@ -3377,7 +3377,6 @@ class _PracticeSessionPageState extends State<PracticeSessionPage> {
             ),
         ],
         surfaceTintColor: Colors.transparent,
-        backgroundColor: const Color(0xFFF5F7FB),
       ),
       body: FutureBuilder<QuestionBank>(
         future: _packFuture,
@@ -3401,9 +3400,9 @@ class _PracticeSessionPageState extends State<PracticeSessionPage> {
                     vertical: 14,
                   ),
                   decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(18),
-                    border: Border.all(color: const Color(0xFFE7EBF2)),
+                    color: AppVisualTokens.surface,
+                    borderRadius: BorderRadius.circular(14),
+                    border: Border.all(color: AppVisualTokens.outline),
                   ),
                   child: Row(
                     children: [
@@ -3432,15 +3431,15 @@ class _PracticeSessionPageState extends State<PracticeSessionPage> {
                           vertical: 6,
                         ),
                         decoration: BoxDecoration(
-                          color: const Color(0xFFEAF2FF),
-                          borderRadius: BorderRadius.circular(999),
+                          color: AppVisualTokens.primarySoft,
+                          borderRadius: BorderRadius.circular(10),
                         ),
                         child: Text(
                           _displayLevelStage(question.levelStage, strings),
                           style:
                               Theme.of(context).textTheme.bodySmall?.copyWith(
                                     fontWeight: FontWeight.w700,
-                                    color: const Color(0xFF163D7A),
+                                    color: AppVisualTokens.primary,
                                   ),
                         ),
                       ),
@@ -3694,11 +3693,8 @@ class _PracticeAnswerSectionState extends State<_PracticeAnswerSection> {
                   style: OutlinedButton.styleFrom(
                     minimumSize: const Size.fromHeight(56),
                     alignment: Alignment.centerLeft,
-                    foregroundColor: const Color(0xFF111827),
-                    backgroundColor: Colors.white,
-                    side: const BorderSide(color: Color(0xFFE5E7EB)),
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
+                      borderRadius: BorderRadius.circular(12),
                     ),
                   ),
                   child: _QuestionOptionText(
@@ -3762,9 +3758,7 @@ class _PracticeAnswerSectionState extends State<_PracticeAnswerSection> {
                       }
                       widget.onSubmitted(_encodeIntegerAnswers(values));
                     },
-              style: FilledButton.styleFrom(
-                backgroundColor: const Color(0xFF111827),
-              ),
+              style: FilledButton.styleFrom(),
               child: Text(widget.strings.submitAnswer),
             ),
           ],
@@ -3796,9 +3790,9 @@ class _PracticeReviewCard extends StatelessWidget {
       width: double.infinity,
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: const Color(0xFFF8FAFC),
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: const Color(0xFFE5E7EB)),
+        color: AppVisualTokens.surfaceMuted,
+        borderRadius: BorderRadius.circular(14),
+        border: Border.all(color: AppVisualTokens.outline),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -3836,9 +3830,7 @@ class _PracticeReviewCard extends StatelessWidget {
             alignment: Alignment.centerLeft,
             child: FilledButton(
               onPressed: onNext,
-              style: FilledButton.styleFrom(
-                backgroundColor: const Color(0xFF111827),
-              ),
+              style: FilledButton.styleFrom(),
               child: Text(nextLabel),
             ),
           ),
@@ -4049,7 +4041,6 @@ class _QuizSessionPageState extends State<QuizSessionPage> {
             ),
         ],
         surfaceTintColor: Colors.transparent,
-        backgroundColor: const Color(0xFFF5F7FB),
       ),
       body: FutureBuilder<QuestionBank>(
         future: _packFuture,
@@ -4075,9 +4066,9 @@ class _QuizSessionPageState extends State<QuizSessionPage> {
                     vertical: 14,
                   ),
                   decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(18),
-                    border: Border.all(color: const Color(0xFFE7EBF2)),
+                    color: AppVisualTokens.surface,
+                    borderRadius: BorderRadius.circular(14),
+                    border: Border.all(color: AppVisualTokens.outline),
                   ),
                   child: Row(
                     children: [
@@ -4110,15 +4101,15 @@ class _QuizSessionPageState extends State<QuizSessionPage> {
                           vertical: 6,
                         ),
                         decoration: BoxDecoration(
-                          color: const Color(0xFFEAF2FF),
-                          borderRadius: BorderRadius.circular(999),
+                          color: AppVisualTokens.primarySoft,
+                          borderRadius: BorderRadius.circular(10),
                         ),
                         child: Text(
                           _displayLevelStage(question.levelStage, strings),
                           style:
                               Theme.of(context).textTheme.bodySmall?.copyWith(
                                     fontWeight: FontWeight.w700,
-                                    color: const Color(0xFF163D7A),
+                                    color: AppVisualTokens.primary,
                                   ),
                         ),
                       ),
@@ -4131,7 +4122,7 @@ class _QuizSessionPageState extends State<QuizSessionPage> {
                       ? '${strings.elapsedLabel} ${_formatElapsed(Duration(seconds: DateTime.now().difference(_startedAt).inSeconds))}'
                       : '剩餘 ${_formatElapsed(_remainingExamTime)} ・ 總分 100',
                   style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                        color: const Color(0xFF64748B),
+                        color: AppVisualTokens.inkMuted,
                       ),
                 ),
                 const SizedBox(height: 16),
@@ -4201,9 +4192,7 @@ class _QuizSessionPageState extends State<QuizSessionPage> {
                           );
                         },
                         style: OutlinedButton.styleFrom(
-                          foregroundColor: const Color(0xFF111827),
                           minimumSize: const Size.fromHeight(52),
-                          side: const BorderSide(color: Color(0xFFD1D5DB)),
                         ),
                         child: Text(strings.submitQuiz),
                       ),
@@ -4220,7 +4209,6 @@ class _QuizSessionPageState extends State<QuizSessionPage> {
                                   submittedAnswer: selectedAnswer,
                                 ),
                         style: FilledButton.styleFrom(
-                          backgroundColor: const Color(0xFF111827),
                           minimumSize: const Size.fromHeight(52),
                         ),
                         child: Text(
@@ -4270,8 +4258,8 @@ class _QuizSessionPageState extends State<QuizSessionPage> {
                       style: OutlinedButton.styleFrom(
                         backgroundColor:
                             _answers.containsKey(questions[index].id)
-                                ? const Color(0xFFEAF2FF)
-                                : Colors.white,
+                                ? AppVisualTokens.primarySoft
+                                : AppVisualTokens.surface,
                       ),
                       child: Text('${index + 1}・${scores[index].maxScore} 分'),
                     ),
@@ -4451,17 +4439,16 @@ class _QuizAnswerSection extends StatelessWidget {
                   style: OutlinedButton.styleFrom(
                     minimumSize: const Size.fromHeight(56),
                     alignment: Alignment.centerLeft,
-                    foregroundColor: const Color(0xFF111827),
                     backgroundColor: selectedAnswer == key
-                        ? const Color(0xFFF3F4F6)
-                        : Colors.white,
+                        ? AppVisualTokens.primarySoft
+                        : AppVisualTokens.surface,
                     side: BorderSide(
                       color: selectedAnswer == key
-                          ? const Color(0xFF111827)
-                          : const Color(0xFFE5E7EB),
+                          ? AppVisualTokens.primary
+                          : AppVisualTokens.outline,
                     ),
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
+                      borderRadius: BorderRadius.circular(12),
                     ),
                   ),
                   child: _QuestionOptionText(
@@ -4839,7 +4826,7 @@ class _QuestionPromptText extends StatelessWidget {
             fontSize: LayoutSpec.of(context).promptText,
             height: denseScript ? 1.65 : 1.5,
             fontWeight: FontWeight.w600,
-            color: const Color(0xFF111827),
+            color: AppVisualTokens.ink,
           ),
     );
   }
@@ -4865,7 +4852,7 @@ class _QuestionBodyText extends StatelessWidget {
             fontSize: layoutSpec.bodyText,
             height: denseScript ? 1.7 : 1.55,
             fontWeight: FontWeight.w400,
-            color: const Color(0xFF374151),
+            color: const Color(0xFF34423E),
           ),
     );
   }
@@ -4886,7 +4873,7 @@ class _QuestionSourceText extends StatelessWidget {
       style: Theme.of(context).textTheme.bodySmall?.copyWith(
             fontSize: layoutSpec.scaleText(12),
             height: 1.5,
-            color: const Color(0xFF6B7280),
+            color: AppVisualTokens.inkMuted,
             fontWeight: FontWeight.w500,
           ),
     );
@@ -4915,7 +4902,7 @@ class _QuestionOptionText extends StatelessWidget {
             fontSize: layoutSpec.bodyText,
             height: denseScript ? 1.6 : 1.45,
             fontWeight: FontWeight.w400,
-            color: const Color(0xFF111827),
+            color: AppVisualTokens.ink,
           ),
     );
   }
@@ -5916,12 +5903,9 @@ class _AnswerComposer extends StatelessWidget {
                     // 選項列是主要的觸控目標，iPad 上要比 iPhone 大
                     minimumSize: Size.fromHeight(layoutSpec.minTapTarget + 10),
                     alignment: Alignment.centerLeft,
-                    foregroundColor: const Color(0xFF111827),
-                    backgroundColor: Colors.white,
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
+                      borderRadius: BorderRadius.circular(12),
                     ),
-                    side: const BorderSide(color: Color(0xFFE5E7EB)),
                   ),
                   child: Text(
                     question.optionDisplayLabel(key, localeCode),
@@ -6036,14 +6020,14 @@ class _IntegerAnswerFieldState extends State<_IntegerAnswerField> {
             decoration: InputDecoration(
               hintText: widget.strings.integerHint,
               filled: true,
-              fillColor: const Color(0xFFFAFAFA),
+              fillColor: AppVisualTokens.surface,
               border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(10),
-                borderSide: const BorderSide(color: Color(0xFFE5E7EB)),
+                borderRadius: BorderRadius.circular(12),
+                borderSide: const BorderSide(color: AppVisualTokens.outline),
               ),
               enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(10),
-                borderSide: const BorderSide(color: Color(0xFFE5E7EB)),
+                borderRadius: BorderRadius.circular(12),
+                borderSide: const BorderSide(color: AppVisualTokens.outline),
               ),
             ),
           ),
@@ -6053,13 +6037,7 @@ class _IntegerAnswerFieldState extends State<_IntegerAnswerField> {
         FilledButton(
           key: ValueKey<String>('submit_answer_${widget.question.id}'),
           onPressed: _submit,
-          style: FilledButton.styleFrom(
-            backgroundColor: const Color(0xFF111827),
-            foregroundColor: Colors.white,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10),
-            ),
-          ),
+          style: FilledButton.styleFrom(),
           child: Text(widget.strings.submitAnswer),
         ),
       ],

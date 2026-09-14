@@ -762,17 +762,15 @@ void main() {
     final BuildContext context = tester.element(find.byType(Scaffold).first);
     final ThemeData theme = Theme.of(context);
     final CardThemeData cardTheme = theme.cardTheme;
-    final NavigationBar navigationBar =
-        tester.widget<NavigationBar>(find.byType(NavigationBar));
-
-    expect(theme.scaffoldBackgroundColor, const Color(0xFFF5F7FB));
-    expect(cardTheme.color, Colors.white);
-    expect(cardTheme.shadowColor, const Color(0x140F172A));
+    expect(theme.scaffoldBackgroundColor, AppVisualTokens.canvas);
+    expect(cardTheme.color, AppVisualTokens.surface);
+    expect(cardTheme.shadowColor, const Color(0x1217201D));
     expect(cardTheme.surfaceTintColor, Colors.transparent);
     expect((cardTheme.shape as RoundedRectangleBorder).borderRadius,
-        BorderRadius.circular(24));
-    expect(navigationBar.backgroundColor, const Color(0xFFFDFDFE));
-    expect(navigationBar.indicatorColor, const Color(0xFFE7EEF9));
+        BorderRadius.circular(14));
+    expect(theme.navigationBarTheme.backgroundColor, AppVisualTokens.surface);
+    expect(
+        theme.navigationBarTheme.indicatorColor, AppVisualTokens.primarySoft);
   });
 
   testWidgets('home shell applies refreshed cards and profile styling',
@@ -788,7 +786,7 @@ void main() {
     expect(find.byKey(const ValueKey<String>('home_hero_surface')),
         findsOneWidget);
     expect(find.byKey(const ValueKey<String>('home_background_glow')),
-        findsOneWidget);
+        findsNothing);
     expect(
         find.byKey(const ValueKey<String>('hero_primary_cta')), findsOneWidget);
 
@@ -981,6 +979,19 @@ void main() {
         findsOneWidget);
     expect(find.byKey(const ValueKey<String>('question_meta_badge')),
         findsOneWidget);
+
+    final Container header = tester.widget<Container>(
+      find.byKey(const ValueKey<String>('practice_question_header')),
+    );
+    final BoxDecoration headerDecoration = header.decoration! as BoxDecoration;
+    expect(headerDecoration.borderRadius, BorderRadius.circular(14));
+
+    final Container badge = tester.widget<Container>(
+      find.byKey(const ValueKey<String>('question_meta_badge')),
+    );
+    final BoxDecoration badgeDecoration = badge.decoration! as BoxDecoration;
+    expect(badgeDecoration.color, AppVisualTokens.primarySoft);
+    expect(badgeDecoration.borderRadius, BorderRadius.circular(10));
   });
 
   testWidgets('app shell shows bottom navigation and defaults to Practice',
