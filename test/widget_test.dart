@@ -3108,4 +3108,20 @@ void main() {
     expect(find.byKey(const ValueKey<String>('restore_purchases')),
         findsOneWidget);
   });
+
+  testWidgets('app uses the compact teal learning-workspace theme',
+      (WidgetTester tester) async {
+    await tester.pumpWidget(MathSpringApp(services: createTestServices()));
+    await tester.pumpAndSettle();
+
+    final ThemeData theme =
+        Theme.of(tester.element(find.byType(Scaffold).first));
+    expect(theme.scaffoldBackgroundColor, const Color(0xFFF8F8F5));
+    expect(theme.colorScheme.primary, const Color(0xFF177C87));
+    expect(theme.navigationBarTheme.indicatorColor, const Color(0xFFDDF1F0));
+
+    final RoundedRectangleBorder cardShape =
+        theme.cardTheme.shape! as RoundedRectangleBorder;
+    expect(cardShape.borderRadius, BorderRadius.circular(14));
+  });
 }

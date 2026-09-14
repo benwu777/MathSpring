@@ -33,6 +33,19 @@ const String appSupportUrl = 'https://benwu777.github.io/MathSpring/support/';
 const String appPrivacyPolicyUrl =
     'https://benwu777.github.io/MathSpring/privacy/';
 
+/// 全站共用的視覺 token。頁面不應自行發明相近但不同的藍、灰或陰影。
+abstract final class AppVisualTokens {
+  static const Color canvas = Color(0xFFF8F8F5);
+  static const Color surface = Color(0xFFFFFFFF);
+  static const Color surfaceMuted = Color(0xFFF1F3F1);
+  static const Color ink = Color(0xFF17201D);
+  static const Color inkMuted = Color(0xFF5E6E69);
+  static const Color outline = Color(0xFFD9E1DD);
+  static const Color primary = Color(0xFF177C87);
+  static const Color primarySoft = Color(0xFFDDF1F0);
+  static const Color danger = Color(0xFFB54747);
+}
+
 void main() {
   runApp(const MathSpringApp());
 }
@@ -167,7 +180,7 @@ class _MathSpringAppState extends State<MathSpringApp> {
 
   @override
   Widget build(BuildContext context) {
-    const Color seedColor = Color(0xFF163D7A);
+    const Color seedColor = AppVisualTokens.primary;
     final Locale resolvedLocale = _localeOverride ??
         AppStrings.resolveLocale(
           WidgetsBinding.instance.platformDispatcher.locale,
@@ -204,84 +217,97 @@ class _MathSpringAppState extends State<MathSpringApp> {
         colorScheme: ColorScheme.fromSeed(
           seedColor: seedColor,
           brightness: Brightness.light,
-          surface: Colors.white,
+          surface: AppVisualTokens.surface,
+        ).copyWith(
+          primary: AppVisualTokens.primary,
+          onPrimary: Colors.white,
+          primaryContainer: AppVisualTokens.primarySoft,
+          onPrimaryContainer: const Color(0xFF105D65),
+          surface: AppVisualTokens.surface,
+          surfaceContainerHighest: AppVisualTokens.surfaceMuted,
+          onSurface: AppVisualTokens.ink,
+          onSurfaceVariant: AppVisualTokens.inkMuted,
+          outline: AppVisualTokens.outline,
+          error: AppVisualTokens.danger,
         ),
-        scaffoldBackgroundColor: const Color(0xFFF5F7FB),
+        scaffoldBackgroundColor: AppVisualTokens.canvas,
+        dividerColor: AppVisualTokens.outline,
         textTheme: const TextTheme(
           displaySmall: TextStyle(
             fontSize: 32,
             fontWeight: FontWeight.w700,
             letterSpacing: -1.0,
-            color: Color(0xFF0F172A),
+            color: AppVisualTokens.ink,
           ),
           headlineSmall: TextStyle(
             fontSize: 22,
             fontWeight: FontWeight.w700,
-            color: Color(0xFF0F172A),
+            color: AppVisualTokens.ink,
           ),
           titleLarge: TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.w600,
-            color: Color(0xFF0F172A),
+            color: AppVisualTokens.ink,
           ),
           titleMedium: TextStyle(
             fontSize: 15,
             fontWeight: FontWeight.w600,
-            color: Color(0xFF0F172A),
+            color: AppVisualTokens.ink,
           ),
           bodyLarge: TextStyle(
             fontSize: 15,
             height: 1.5,
-            color: Color(0xFF334155),
+            color: Color(0xFF34423E),
           ),
           bodyMedium: TextStyle(
             fontSize: 13,
             height: 1.4,
-            color: Color(0xFF475569),
+            color: AppVisualTokens.inkMuted,
           ),
           bodySmall: TextStyle(
             fontSize: 11,
             height: 1.35,
-            color: Color(0xFF64748B),
+            color: Color(0xFF73817C),
           ),
         ),
         appBarTheme: const AppBarTheme(
-          backgroundColor: Color(0xFFF5F7FB),
-          foregroundColor: Color(0xFF0F172A),
+          backgroundColor: AppVisualTokens.canvas,
+          foregroundColor: AppVisualTokens.ink,
           surfaceTintColor: Colors.transparent,
           elevation: 0,
           titleTextStyle: TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.w700,
-            color: Color(0xFF0F172A),
+            color: AppVisualTokens.ink,
             letterSpacing: -0.3,
           ),
         ),
         inputDecorationTheme: InputDecorationTheme(
           filled: true,
-          fillColor: Colors.white,
+          fillColor: AppVisualTokens.surface,
           contentPadding: const EdgeInsets.symmetric(
             horizontal: 16,
             vertical: 18,
           ),
           border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(14),
-            borderSide: const BorderSide(color: Color(0xFFD1D5DB)),
+            borderRadius: BorderRadius.circular(12),
+            borderSide: const BorderSide(color: AppVisualTokens.outline),
           ),
           enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(14),
-            borderSide: const BorderSide(color: Color(0xFFD1D5DB)),
+            borderRadius: BorderRadius.circular(12),
+            borderSide: const BorderSide(color: AppVisualTokens.outline),
           ),
           focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(14),
-            borderSide: const BorderSide(color: Color(0xFF163D7A), width: 1.2),
+            borderRadius: BorderRadius.circular(12),
+            borderSide:
+                const BorderSide(color: AppVisualTokens.primary, width: 1.2),
           ),
         ),
         filledButtonTheme: FilledButtonThemeData(
           style: FilledButton.styleFrom(
-            minimumSize: const Size.fromHeight(54),
+            minimumSize: const Size.fromHeight(48),
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(14),
+              borderRadius: BorderRadius.circular(12),
             ),
             textStyle: const TextStyle(
               fontSize: 14,
@@ -291,9 +317,9 @@ class _MathSpringAppState extends State<MathSpringApp> {
         ),
         outlinedButtonTheme: OutlinedButtonThemeData(
           style: OutlinedButton.styleFrom(
-            minimumSize: const Size.fromHeight(54),
+            minimumSize: const Size.fromHeight(48),
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(14),
+              borderRadius: BorderRadius.circular(12),
             ),
             textStyle: const TextStyle(
               fontSize: 14,
@@ -304,6 +330,7 @@ class _MathSpringAppState extends State<MathSpringApp> {
         textButtonTheme: TextButtonThemeData(
           style: TextButton.styleFrom(
             minimumSize: const Size(0, 44),
+            foregroundColor: AppVisualTokens.primary,
             textStyle: const TextStyle(
               fontSize: 13,
               fontWeight: FontWeight.w600,
@@ -311,27 +338,45 @@ class _MathSpringAppState extends State<MathSpringApp> {
           ),
         ),
         navigationBarTheme: const NavigationBarThemeData(
-          backgroundColor: Color(0xFFFDFDFE),
-          indicatorColor: Color(0xFFE7EEF9),
+          backgroundColor: AppVisualTokens.surface,
+          indicatorColor: AppVisualTokens.primarySoft,
           surfaceTintColor: Colors.transparent,
           elevation: 0,
           labelTextStyle: WidgetStatePropertyAll<TextStyle>(
             TextStyle(
               fontSize: 12,
               fontWeight: FontWeight.w700,
-              color: Color(0xFF334155),
+              color: AppVisualTokens.inkMuted,
             ),
           ),
         ),
         cardTheme: CardThemeData(
-          elevation: 0,
-          color: Colors.white,
-          shadowColor: const Color(0x140F172A),
+          elevation: 1,
+          color: AppVisualTokens.surface,
+          shadowColor: const Color(0x1217201D),
           surfaceTintColor: Colors.transparent,
           margin: EdgeInsets.zero,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(24),
-            side: const BorderSide(color: Color(0xFFE7EBF2)),
+            borderRadius: BorderRadius.circular(14),
+            side: const BorderSide(color: AppVisualTokens.outline),
+          ),
+        ),
+        iconButtonTheme: IconButtonThemeData(
+          style: IconButton.styleFrom(
+            foregroundColor: AppVisualTokens.inkMuted,
+            minimumSize: const Size.square(48),
+          ),
+        ),
+        chipTheme: ChipThemeData(
+          backgroundColor: AppVisualTokens.surfaceMuted,
+          selectedColor: AppVisualTokens.primarySoft,
+          side: const BorderSide(color: AppVisualTokens.outline),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+          labelStyle: const TextStyle(
+            color: AppVisualTokens.inkMuted,
+            fontSize: 12,
+            fontWeight: FontWeight.w600,
           ),
         ),
       ),
