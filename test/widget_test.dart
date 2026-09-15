@@ -2584,7 +2584,7 @@ void main() {
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 300));
 
-    expect(find.text('綜合'), findsOneWidget);
+    expect(find.text('綜合'), findsNothing);
     expect(find.text('mixed'), findsNothing);
     expect(find.textContaining('Source:'), findsNothing);
     expect(find.textContaining('MathSpring Editorial'), findsNothing);

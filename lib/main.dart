@@ -3696,9 +3696,8 @@ class _PracticeSessionPageState extends State<PracticeSessionPage> {
                 Expanded(
                   child: _SectionCard(
                     cardKey: const ValueKey<String>('study_surface_card'),
-                    title: displayTopicCode(widget.pack.topicCode, strings),
-                    subtitle:
-                        '${_displayLevelStage(question.levelStage, strings)} · ${_displayTier(question.challengeTier, strings)}',
+                    title: _displayLevelStage(question.levelStage, strings),
+                    subtitle: '',
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -4374,9 +4373,8 @@ class _QuizSessionPageState extends State<QuizSessionPage> {
                 // 不會因為每題文字長短而上下跳。
                 Expanded(
                   child: _SectionCard(
-                    title: displayTopicCode(widget.pack.topicCode, strings),
-                    subtitle:
-                        '${_displayLevelStage(question.levelStage, strings)} · ${_displayTier(question.challengeTier, strings)}',
+                    title: _displayLevelStage(question.levelStage, strings),
+                    subtitle: '',
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
