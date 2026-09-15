@@ -58,7 +58,7 @@ void main() {
     expect(tableNames, contains('favorite_question_collection_memberships'));
   });
 
-  test('favorites preserve questions when a custom collection is deleted',
+  test('favorites use one all-favorites default and preserve questions when a custom collection is deleted',
       () async {
     final FavoriteQuestionRepository repository =
         FavoriteQuestionRepository(database);
@@ -84,7 +84,7 @@ void main() {
 
     await repository.deleteCollection(custom);
 
-    expect(defaults, hasLength(2));
+    expect(defaults, hasLength(1));
     expect(
       await repository.fetchFavorite(
         learnerId: 'learner_allen',
@@ -92,6 +92,32 @@ void main() {
       ),
       isNotNull,
     );
+  });
+
+  test('favorites can be listed and their note and tags updated', () async {
+    final FavoriteQuestionRepository repository =
+        FavoriteQuestionRepository(database);
+    await repository.saveFavorite(const FavoriteQuestion(
+      learnerId: 'learner_allen',
+      questionId: 'number_grade3_foundation_001',
+      note: '',
+      tags: <String>[],
+      createdAtIso: '2026-09-15T00:00:00Z',
+      updatedAtIso: '2026-09-15T00:00:00Z',
+    ));
+
+    await repository.updateFavoriteDetails(
+      learnerId: 'learner_allen',
+      questionId: 'number_grade3_foundation_001',
+      note: '和家人一起討論',
+      tags: const <String>['數學', '討論'],
+    );
+
+    final List<FavoriteQuestion> favorites =
+        await repository.fetchFavorites('learner_allen');
+    expect(favorites, hasLength(1));
+    expect(favorites.single.note, '和家人一起討論');
+    expect(favorites.single.tags, <String>['數學', '討論']);
   });
 
   test('upgrades a partially migrated version 4 profile database', () async {

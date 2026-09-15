@@ -12,24 +12,14 @@ class FavoriteQuestionRepository {
         await fetchCollections(learnerId);
     if (existing.isNotEmpty) return existing;
     final String now = DateTime.now().toUtc().toIso8601String();
-    await _database.batch()
-      ..insert('favorite_question_collections', <String, Object?>{
-        'id': 'favorites_all_$learnerId',
-        'learner_id': learnerId,
-        'name': 'All favorites',
-        'sort_order': 0,
-        'is_default': 1,
-        'created_at': now,
-      })
-      ..insert('favorite_question_collections', <String, Object?>{
-        'id': 'favorites_discuss_$learnerId',
-        'learner_id': learnerId,
-        'name': 'Discuss',
-        'sort_order': 1,
-        'is_default': 1,
-        'created_at': now,
-      })
-      ..commit(noResult: true);
+    await _database.insert('favorite_question_collections', <String, Object?>{
+      'id': 'favorites_all_$learnerId',
+      'learner_id': learnerId,
+      'name': 'All favorites',
+      'sort_order': 0,
+      'is_default': 1,
+      'created_at': now,
+    });
     return fetchCollections(learnerId);
   }
 
@@ -82,6 +72,37 @@ class FavoriteQuestionRepository {
         whereArgs: <Object?>[learnerId, questionId],
         limit: 1);
     return rows.isEmpty ? null : FavoriteQuestion.fromMap(rows.single);
+  }
+
+  Future<List<FavoriteQuestion>> fetchFavorites(String learnerId) async =>
+      (await _database.query(
+        'favorite_questions',
+        where: 'learner_id = ?',
+        whereArgs: <Object?>[learnerId],
+        orderBy: 'updated_at DESC',
+      ))
+          .map(FavoriteQuestion.fromMap)
+          .toList();
+
+  Future<void> updateFavoriteDetails({
+    required String learnerId,
+    required String questionId,
+    required String note,
+    required List<String> tags,
+  }) async {
+    final FavoriteQuestion? favorite = await fetchFavorite(
+      learnerId: learnerId,
+      questionId: questionId,
+    );
+    if (favorite == null) return;
+    await saveFavorite(FavoriteQuestion(
+      learnerId: learnerId,
+      questionId: questionId,
+      note: note.trim(),
+      tags: tags,
+      createdAtIso: favorite.createdAtIso,
+      updatedAtIso: DateTime.now().toUtc().toIso8601String(),
+    ));
   }
 
   Future<void> addToCollection(
