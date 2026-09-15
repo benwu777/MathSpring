@@ -52,6 +52,9 @@ class AppServices {
   final List<QuestionProgress> _progressRecords;
   final List<AnswerSession> _answerSessions;
   final Map<String, List<SessionAnswerRecord>> _sessionRecords;
+  final List<FavoriteQuestion> _inMemoryFavorites = <FavoriteQuestion>[];
+  final List<FavoriteQuestionCollection> _inMemoryFavoriteCollections =
+      <FavoriteQuestionCollection>[];
   String? currentLearnerId;
 
   factory AppServices.forTesting({
@@ -162,7 +165,25 @@ class AppServices {
     required String questionId,
   }) async {
     final FavoriteQuestionRepository? repository = favoriteQuestionRepository;
-    if (repository == null) return false;
+    if (repository == null) {
+      final int existingIndex = _inMemoryFavorites.indexWhere(
+          (FavoriteQuestion item) =>
+              item.learnerId == learnerId && item.questionId == questionId);
+      if (existingIndex >= 0) {
+        _inMemoryFavorites.removeAt(existingIndex);
+        return false;
+      }
+      final String now = DateTime.now().toUtc().toIso8601String();
+      _inMemoryFavorites.add(FavoriteQuestion(
+        learnerId: learnerId,
+        questionId: questionId,
+        note: '',
+        tags: const <String>[],
+        createdAtIso: now,
+        updatedAtIso: now,
+      ));
+      return true;
+    }
     final FavoriteQuestion? existing = await repository.fetchFavorite(
       learnerId: learnerId,
       questionId: questionId,
@@ -188,11 +209,94 @@ class AppServices {
   Future<bool> isFavoriteQuestion({
     required String learnerId,
     required String questionId,
-  }) async =>
-      favoriteQuestionRepository
-          ?.fetchFavorite(learnerId: learnerId, questionId: questionId)
-          .then((FavoriteQuestion? value) => value != null) ??
-      false;
+  }) async {
+    final FavoriteQuestionRepository? repository = favoriteQuestionRepository;
+    if (repository == null) {
+      return _inMemoryFavorites.any((FavoriteQuestion item) =>
+          item.learnerId == learnerId && item.questionId == questionId);
+    }
+    return (await repository.fetchFavorite(
+          learnerId: learnerId,
+          questionId: questionId,
+        )) !=
+        null;
+  }
+
+  Future<List<FavoriteQuestionCollection>> getFavoriteCollections(
+      String learnerId) async {
+    final FavoriteQuestionRepository? repository = favoriteQuestionRepository;
+    if (repository == null) {
+      if (_inMemoryFavoriteCollections
+          .where(
+              (FavoriteQuestionCollection item) => item.learnerId == learnerId)
+          .isEmpty) {
+        _inMemoryFavoriteCollections.add(FavoriteQuestionCollection(
+          id: 'favorites_all_$learnerId',
+          learnerId: learnerId,
+          name: 'All favorites',
+          sortOrder: 0,
+          isDefault: true,
+          createdAtIso: DateTime.now().toUtc().toIso8601String(),
+        ));
+      }
+      return _inMemoryFavoriteCollections
+          .where(
+              (FavoriteQuestionCollection item) => item.learnerId == learnerId)
+          .toList();
+    }
+    return repository.ensureDefaultCollections(learnerId);
+  }
+
+  Future<List<FavoriteQuestion>> getFavoriteQuestions(String learnerId) async {
+    final FavoriteQuestionRepository? repository = favoriteQuestionRepository;
+    if (repository == null) {
+      return _inMemoryFavorites
+          .where((FavoriteQuestion item) => item.learnerId == learnerId)
+          .toList();
+    }
+    return repository.fetchFavorites(learnerId);
+  }
+
+  Future<List<FavoriteQuestion>> getFavoriteQuestionsInCollection({
+    required String learnerId,
+    required String collectionId,
+  }) async {
+    final FavoriteQuestionRepository? repository = favoriteQuestionRepository;
+    if (repository == null || collectionId == 'favorites_all_$learnerId') {
+      return getFavoriteQuestions(learnerId);
+    }
+    return repository.fetchFavoritesInCollection(
+      learnerId: learnerId,
+      collectionId: collectionId,
+    );
+  }
+
+  Future<FavoriteQuestionCollection?> createFavoriteCollection({
+    required String learnerId,
+    required String name,
+  }) async {
+    if (name.trim().isEmpty) return null;
+    final FavoriteQuestionRepository? repository = favoriteQuestionRepository;
+    if (repository != null) {
+      return repository.createCollection(learnerId: learnerId, name: name);
+    }
+    final List<FavoriteQuestionCollection> collections =
+        await getFavoriteCollections(learnerId);
+    if (collections.length >= FavoriteQuestionRepository.maxCollections) {
+      throw FavoriteCollectionLimitReached(
+          FavoriteQuestionRepository.maxCollections);
+    }
+    final FavoriteQuestionCollection collection = FavoriteQuestionCollection(
+      id: 'favorite_collection_${DateTime.now().toUtc().microsecondsSinceEpoch}',
+      learnerId: learnerId,
+      name: name.trim(),
+      sortOrder: collections.length,
+      isDefault: false,
+      createdAtIso: DateTime.now().toUtc().toIso8601String(),
+    );
+    _inMemoryFavoriteCollections.add(collection);
+    return collection;
+  }
 
   Future<void> setCurrentLearner(String learnerId) async {
     currentLearnerId = learnerId;

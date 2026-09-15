@@ -10,6 +10,7 @@ import 'package:mathspring/data/bundled/bundled_question_bank_repository.dart'
 import 'package:mathspring/data/local/app_services.dart';
 import 'package:mathspring/models/answer_session.dart';
 import 'package:mathspring/models/avatar_configuration.dart';
+import 'package:mathspring/models/favorite_question.dart';
 import 'package:mathspring/models/geometry_scene.dart';
 import 'package:mathspring/models/question.dart';
 import 'package:mathspring/models/question_bank.dart';
@@ -40,9 +41,13 @@ abstract final class AppVisualTokens {
   static const Color surfaceMuted = Color(0xFFF1F3F1);
   static const Color ink = Color(0xFF17201D);
   static const Color inkMuted = Color(0xFF5E6E69);
-  static const Color outline = Color(0xFFD9E1DD);
-  static const Color primary = Color(0xFF177C87);
-  static const Color primarySoft = Color(0xFFDDF1F0);
+  static const Color outline = Color(0xFFD9DEE8);
+  static const Color brand = Color(0xFF273B78);
+  static const Color brandSoft = Color(0xFFE7EBF8);
+  static const Color progress = Color(0xFF168A82);
+  static const Color progressSoft = Color(0xFFDDF3F0);
+  static const Color primary = brand;
+  static const Color primarySoft = brandSoft;
   static const Color danger = Color(0xFFB54747);
 }
 
@@ -222,7 +227,7 @@ class _MathSpringAppState extends State<MathSpringApp> {
           primary: AppVisualTokens.primary,
           onPrimary: Colors.white,
           primaryContainer: AppVisualTokens.primarySoft,
-          onPrimaryContainer: const Color(0xFF105D65),
+          onPrimaryContainer: const Color(0xFF273B78),
           surface: AppVisualTokens.surface,
           surfaceContainerHighest: AppVisualTokens.surfaceMuted,
           onSurface: AppVisualTokens.ink,
@@ -339,7 +344,7 @@ class _MathSpringAppState extends State<MathSpringApp> {
         ),
         navigationBarTheme: const NavigationBarThemeData(
           backgroundColor: AppVisualTokens.surface,
-          indicatorColor: AppVisualTokens.primarySoft,
+          indicatorColor: AppVisualTokens.brandSoft,
           surfaceTintColor: Colors.transparent,
           elevation: 0,
           labelTextStyle: WidgetStatePropertyAll<TextStyle>(
@@ -369,7 +374,7 @@ class _MathSpringAppState extends State<MathSpringApp> {
         ),
         chipTheme: ChipThemeData(
           backgroundColor: AppVisualTokens.surfaceMuted,
-          selectedColor: AppVisualTokens.primarySoft,
+          selectedColor: AppVisualTokens.progressSoft,
           side: const BorderSide(color: AppVisualTokens.outline),
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
@@ -962,6 +967,19 @@ class _LearningReviewSectionState extends State<_LearningReviewSection> {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            Align(
+              alignment: Alignment.centerRight,
+              child: IconButton.outlined(
+                key: const ValueKey<String>('open_favorites'),
+                tooltip: strings.favoritesTitle,
+                icon: const Icon(Icons.bookmark_outline_rounded),
+                onPressed: () {
+                  Navigator.of(context).push(MaterialPageRoute<void>(
+                    builder: (_) => FavoritesPage(services: widget.services),
+                  ));
+                },
+              ),
+            ),
             _CompactHeroBanner(
               title: strings.reviewTitle,
               subtitle: strings.reviewSubtitle,
@@ -1084,7 +1102,7 @@ class _AchievementBadge extends StatelessWidget {
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(icon, size: 18, color: const Color(0xFF163D7A)),
+          Icon(icon, size: 18, color: AppVisualTokens.brand),
           const SizedBox(width: 6),
           // 成就文字必須可壓縮：外層是 Wrap，寬度受限於一行的可用空間，
           // 英文的成就描述比中文長，在 390pt 上會把徽章自己的 Row 撐爆 34px。
@@ -1202,7 +1220,7 @@ List<Widget> _buildCalendarRows({
             aspectRatio: 1,
             child: Material(
               color: selected
-                  ? const Color(0xFF163D7A)
+                  ? AppVisualTokens.brand
                   : (practiced ? const Color(0xFFE7EEF9) : Colors.transparent),
               borderRadius: BorderRadius.circular(9),
               child: InkWell(
@@ -1320,7 +1338,7 @@ class _FullUnlockSection extends StatelessWidget {
             ? strings.fullUnlockUnlockedSubtitle
             : strings.fullUnlockSubtitle,
         trailing: state.hasFullUnlock
-            ? const Icon(Icons.verified_rounded, color: Color(0xFF163D7A))
+            ? const Icon(Icons.verified_rounded, color: AppVisualTokens.brand)
             : TextButton(
                 key: const ValueKey<String>('open_full_unlock'),
                 onPressed: state.status == MonetizationStatus.unavailable
@@ -2297,7 +2315,7 @@ class _LearnerProfilesSectionState extends State<_LearnerProfilesSection> {
               avatar: profiles[index].avatar,
               level: _learnerGradeRangeLabel(profiles[index], strings),
               accent: index.isEven
-                  ? const Color(0xFF163D7A)
+                  ? AppVisualTokens.brand
                   : const Color(0xFF3B82F6),
               isCurrent: profiles[index].id == widget.services.currentLearnerId,
               currentLabel: strings.currentLearner,
@@ -2367,8 +2385,7 @@ class _ProfileTile extends StatelessWidget {
           color: Colors.white,
           borderRadius: BorderRadius.circular(20),
           border: Border.all(
-            color:
-                isCurrent ? const Color(0xFF163D7A) : const Color(0xFFE2E8F0),
+            color: isCurrent ? AppVisualTokens.brand : const Color(0xFFE2E8F0),
           ),
           boxShadow: const [
             BoxShadow(
@@ -2418,7 +2435,7 @@ class _ProfileTile extends StatelessWidget {
                             style: textTheme.bodySmall?.copyWith(
                               fontSize: layoutSpec.microText,
                               fontWeight: FontWeight.w700,
-                              color: const Color(0xFF163D7A),
+                              color: AppVisualTokens.brand,
                             ),
                           ),
                         ),
@@ -2864,6 +2881,243 @@ class QuestionLibraryPage extends StatefulWidget {
 
   @override
   State<QuestionLibraryPage> createState() => _QuestionLibraryPageState();
+}
+
+class FavoritesPage extends StatefulWidget {
+  const FavoritesPage({super.key, required this.services});
+
+  final AppServices services;
+
+  @override
+  State<FavoritesPage> createState() => _FavoritesPageState();
+}
+
+class _FavoritesPageState extends State<FavoritesPage> {
+  late Future<_FavoritesPageData> _pageFuture;
+  String? _selectedCollectionId;
+
+  @override
+  void initState() {
+    super.initState();
+    _reload();
+  }
+
+  void _reload() {
+    final String? learnerId = widget.services.currentLearnerId;
+    _pageFuture = learnerId == null
+        ? Future<_FavoritesPageData>.value(const _FavoritesPageData.empty())
+        : _load(learnerId);
+  }
+
+  Future<_FavoritesPageData> _load(String learnerId) async {
+    final List<FavoriteQuestionCollection> collections =
+        await widget.services.getFavoriteCollections(learnerId);
+    final List<FavoriteQuestion> favorites =
+        await widget.services.getFavoriteQuestionsInCollection(
+      learnerId: learnerId,
+      collectionId: _selectedCollectionId ?? 'favorites_all_$learnerId',
+    );
+    if (favorites.isEmpty) {
+      return _FavoritesPageData(
+        collections: collections,
+        favorites: favorites,
+        questionsById: const <String, Question>{},
+      );
+    }
+    final List<QuestionBank> packs =
+        await bundled.BundledQuestionBankRepository().loadAllPacks();
+    return _FavoritesPageData(
+      collections: collections,
+      favorites: favorites,
+      questionsById: <String, Question>{
+        for (final QuestionBank pack in packs)
+          for (final Question question in pack.questions) question.id: question,
+      },
+    );
+  }
+
+  Future<void> _addCollection(AppStrings strings) async {
+    final TextEditingController controller = TextEditingController();
+    final String? name = await showDialog<String>(
+      context: context,
+      builder: (BuildContext dialogContext) => AlertDialog(
+        title: Text(strings.addCollection),
+        content: TextField(
+          controller: controller,
+          autofocus: true,
+          decoration: InputDecoration(labelText: strings.collectionName),
+          onSubmitted: (String value) => Navigator.pop(dialogContext, value),
+        ),
+        actions: <Widget>[
+          TextButton(
+            onPressed: () => Navigator.pop(dialogContext),
+            child: Text(strings.cancelLabel),
+          ),
+          FilledButton(
+            onPressed: () => Navigator.pop(dialogContext, controller.text),
+            child: Text(strings.saveLabel),
+          ),
+        ],
+      ),
+    );
+    final String? learnerId = widget.services.currentLearnerId;
+    if (name == null || learnerId == null) return;
+    await widget.services.createFavoriteCollection(
+      learnerId: learnerId,
+      name: name,
+    );
+    if (mounted) setState(_reload);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final AppStrings strings = AppStrings.of(context);
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(strings.favoritesTitle),
+        actions: <Widget>[
+          IconButton(
+            key: const ValueKey<String>('add_favorite_collection'),
+            tooltip: strings.addCollection,
+            onPressed: () => _addCollection(strings),
+            icon: const Icon(Icons.create_new_folder_outlined),
+          ),
+        ],
+      ),
+      body: FutureBuilder<_FavoritesPageData>(
+        future: _pageFuture,
+        builder:
+            (BuildContext context, AsyncSnapshot<_FavoritesPageData> snapshot) {
+          if (!snapshot.hasData) {
+            return const Center(child: CircularProgressIndicator());
+          }
+          final _FavoritesPageData data = snapshot.data!;
+          final List<FavoriteQuestionCollection> collections = data.collections;
+          final String? selectedId = _selectedCollectionId ??
+              (collections.isEmpty ? null : collections.first.id);
+          return ListView(
+            padding: const EdgeInsets.all(20),
+            children: <Widget>[
+              if (collections.isNotEmpty)
+                DropdownButtonFormField<String>(
+                  key: const ValueKey<String>('favorite_collection_picker'),
+                  value: selectedId,
+                  decoration:
+                      InputDecoration(labelText: strings.favoritesTitle),
+                  items: collections
+                      .map((FavoriteQuestionCollection collection) =>
+                          DropdownMenuItem<String>(
+                            value: collection.id,
+                            child: Text(collection.isDefault
+                                ? strings.allFavorites
+                                : collection.name),
+                          ))
+                      .toList(),
+                  onChanged: (String? value) => setState(() {
+                    _selectedCollectionId = value;
+                    _reload();
+                  }),
+                ),
+              const SizedBox(height: 24),
+              if (data.favorites.isEmpty)
+                _FavoriteEmptyState(message: strings.favoritesEmpty)
+              else
+                ...data.favorites
+                    .map((FavoriteQuestion favorite) => _FavoriteQuestionCard(
+                          favorite: favorite,
+                          question: data.questionsById[favorite.questionId],
+                          onOpen:
+                              data.questionsById[favorite.questionId] == null
+                                  ? null
+                                  : () => _openQuestion(
+                                      data.questionsById[favorite.questionId]!),
+                        )),
+            ],
+          );
+        },
+      ),
+    );
+  }
+
+  void _openQuestion(Question question) {
+    Navigator.of(context).push(MaterialPageRoute<void>(
+      builder: (_) => PracticeSessionPage(
+        services: widget.services,
+        pack: bundled.BundledQuestionPackInfo(
+          path: '',
+          topic: question.topic,
+          topicCode: question.topic,
+          levelStage: question.levelStage,
+          challengeTier: question.challengeTier,
+          questionCount: 1,
+        ),
+        initialQuestions: <Question>[question],
+      ),
+    ));
+  }
+}
+
+class _FavoritesPageData {
+  const _FavoritesPageData({
+    required this.collections,
+    required this.favorites,
+    required this.questionsById,
+  });
+
+  const _FavoritesPageData.empty()
+      : collections = const <FavoriteQuestionCollection>[],
+        favorites = const <FavoriteQuestion>[],
+        questionsById = const <String, Question>{};
+
+  final List<FavoriteQuestionCollection> collections;
+  final List<FavoriteQuestion> favorites;
+  final Map<String, Question> questionsById;
+}
+
+class _FavoriteEmptyState extends StatelessWidget {
+  const _FavoriteEmptyState({required this.message});
+
+  final String message;
+
+  @override
+  Widget build(BuildContext context) => Center(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 80, horizontal: 28),
+          child: Column(
+            children: <Widget>[
+              Icon(Icons.bookmark_border_rounded,
+                  size: 48, color: AppVisualTokens.primary),
+              const SizedBox(height: 14),
+              Text(message, textAlign: TextAlign.center),
+            ],
+          ),
+        ),
+      );
+}
+
+class _FavoriteQuestionCard extends StatelessWidget {
+  const _FavoriteQuestionCard({
+    required this.favorite,
+    required this.question,
+    required this.onOpen,
+  });
+
+  final FavoriteQuestion favorite;
+  final Question? question;
+  final VoidCallback? onOpen;
+
+  @override
+  Widget build(BuildContext context) => Card(
+        child: ListTile(
+          onTap: onOpen,
+          leading: const Icon(Icons.bookmark_rounded),
+          title: Text(question?.localizedPrompt(_localeCode(context)) ??
+              favorite.questionId),
+          subtitle: Text(favorite.note.isEmpty
+              ? favorite.tags.join(' · ')
+              : favorite.note),
+        ),
+      );
 }
 
 class AnswerHistoryPage extends StatelessWidget {
@@ -5311,6 +5565,32 @@ class AppStrings {
       );
   String get historyTitle =>
       _text(zhHant: '作答紀錄', zhHans: '作答记录', en: 'History', ja: '履歴');
+  String get favoritesTitle => _text(
+        zhHant: '我的收藏',
+        zhHans: '我的收藏',
+        en: 'My Favorites',
+        ja: 'お気に入り',
+      );
+  String get allFavorites => _text(
+        zhHant: '全部收藏',
+        zhHans: '全部收藏',
+        en: 'All favorites',
+        ja: 'すべてのお気に入り',
+      );
+  String get favoritesEmpty => _text(
+        zhHant: '從答題畫面收藏題目，它們會出現在這裡。',
+        zhHans: '从答题页面收藏题目，它们会出现在这里。',
+        en: 'Bookmark questions while answering and they will appear here.',
+        ja: '解答画面で保存した問題がここに表示されます。',
+      );
+  String get addCollection => _text(
+      zhHant: '新增書籤', zhHans: '新增书签', en: 'Add collection', ja: 'コレクションを追加');
+  String get collectionName => _text(
+      zhHant: '書籤名稱', zhHans: '书签名称', en: 'Collection name', ja: 'コレクション名');
+  String get saveLabel =>
+      _text(zhHant: '儲存', zhHans: '保存', en: 'Save', ja: '保存');
+  String get cancelLabel =>
+      _text(zhHant: '取消', zhHans: '取消', en: 'Cancel', ja: 'キャンセル');
   String get historySubtitle => _text(
         zhHant: '查看目前學習者最近的練習與測驗紀錄。',
         zhHans: '查看当前学习者最近的练习与测验记录。',
