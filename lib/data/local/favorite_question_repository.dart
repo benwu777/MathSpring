@@ -12,24 +12,14 @@ class FavoriteQuestionRepository {
         await fetchCollections(learnerId);
     if (existing.isNotEmpty) return existing;
     final String now = DateTime.now().toUtc().toIso8601String();
-    await _database.batch()
-      ..insert('favorite_question_collections', <String, Object?>{
-        'id': 'favorites_all_$learnerId',
-        'learner_id': learnerId,
-        'name': 'All favorites',
-        'sort_order': 0,
-        'is_default': 1,
-        'created_at': now,
-      })
-      ..insert('favorite_question_collections', <String, Object?>{
-        'id': 'favorites_discuss_$learnerId',
-        'learner_id': learnerId,
-        'name': 'Discuss',
-        'sort_order': 1,
-        'is_default': 1,
-        'created_at': now,
-      })
-      ..commit(noResult: true);
+    await _database.insert('favorite_question_collections', <String, Object?>{
+      'id': 'favorites_all_$learnerId',
+      'learner_id': learnerId,
+      'name': 'All favorites',
+      'sort_order': 0,
+      'is_default': 1,
+      'created_at': now,
+    });
     return fetchCollections(learnerId);
   }
 
@@ -84,6 +74,56 @@ class FavoriteQuestionRepository {
     return rows.isEmpty ? null : FavoriteQuestion.fromMap(rows.single);
   }
 
+  Future<List<FavoriteQuestion>> fetchFavorites(String learnerId) async =>
+      (await _database.query(
+        'favorite_questions',
+        where: 'learner_id = ?',
+        whereArgs: <Object?>[learnerId],
+        orderBy: 'updated_at DESC',
+      ))
+          .map(FavoriteQuestion.fromMap)
+          .toList();
+
+  Future<List<FavoriteQuestion>> fetchFavoritesInCollection({
+    required String learnerId,
+    required String collectionId,
+  }) async {
+    if (collectionId == 'favorites_all_$learnerId') {
+      return fetchFavorites(learnerId);
+    }
+    return (await _database.rawQuery('''
+      SELECT favorite_questions.* FROM favorite_questions
+      INNER JOIN favorite_question_collection_memberships memberships
+        ON memberships.learner_id = favorite_questions.learner_id
+        AND memberships.question_id = favorite_questions.question_id
+      WHERE favorite_questions.learner_id = ? AND memberships.collection_id = ?
+      ORDER BY favorite_questions.updated_at DESC
+    ''', <Object?>[learnerId, collectionId]))
+        .map(FavoriteQuestion.fromMap)
+        .toList();
+  }
+
+  Future<void> updateFavoriteDetails({
+    required String learnerId,
+    required String questionId,
+    required String note,
+    required List<String> tags,
+  }) async {
+    final FavoriteQuestion? favorite = await fetchFavorite(
+      learnerId: learnerId,
+      questionId: questionId,
+    );
+    if (favorite == null) return;
+    await saveFavorite(FavoriteQuestion(
+      learnerId: learnerId,
+      questionId: questionId,
+      note: note.trim(),
+      tags: tags,
+      createdAtIso: favorite.createdAtIso,
+      updatedAtIso: DateTime.now().toUtc().toIso8601String(),
+    ));
+  }
+
   Future<void> addToCollection(
           {required String learnerId,
           required String questionId,
@@ -96,6 +136,29 @@ class FavoriteQuestionRepository {
             'collection_id': collectionId
           },
           conflictAlgorithm: ConflictAlgorithm.ignore);
+
+  Future<void> removeFromCollection({
+    required String learnerId,
+    required String questionId,
+    required String collectionId,
+  }) =>
+      _database.delete('favorite_question_collection_memberships',
+          where: 'learner_id = ? AND question_id = ? AND collection_id = ?',
+          whereArgs: <Object?>[learnerId, questionId, collectionId]);
+
+  Future<void> deleteFavorite({
+    required String learnerId,
+    required String questionId,
+  }) async {
+    await _database.transaction((Transaction transaction) async {
+      await transaction.delete('favorite_question_collection_memberships',
+          where: 'learner_id = ? AND question_id = ?',
+          whereArgs: <Object?>[learnerId, questionId]);
+      await transaction.delete('favorite_questions',
+          where: 'learner_id = ? AND question_id = ?',
+          whereArgs: <Object?>[learnerId, questionId]);
+    });
+  }
 
   Future<void> deleteCollection(FavoriteQuestionCollection collection) async {
     if (collection.isDefault) return;

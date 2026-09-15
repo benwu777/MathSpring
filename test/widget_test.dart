@@ -17,6 +17,12 @@ import 'package:mathspring/services/monetization_service.dart';
 import 'package:mathspring/widgets/avatar_preview.dart';
 
 void main() {
+  test('application visual tokens use indigo primary and teal progress', () {
+    expect(AppVisualTokens.brand, const Color(0xFF273B78));
+    expect(AppVisualTokens.progress, const Color(0xFF168A82));
+    expect(AppVisualTokens.primary, AppVisualTokens.brand);
+  });
+
   tearDown(() {
     TestWidgetsFlutterBinding.ensureInitialized()
         .platformDispatcher
@@ -163,6 +169,56 @@ void main() {
       },
     });
   }
+
+  testWidgets('我的收藏會顯示空狀態並可從學習回顧開啟', (WidgetTester tester) async {
+    final AppServices services = createTestServices();
+    await tester.pumpWidget(
+      MaterialApp(
+        locale: const Locale('zh', 'TW'),
+        supportedLocales: AppStrings.supportedLocales,
+        localizationsDelegates: const [
+          GlobalMaterialLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+        ],
+        home: FavoritesPage(services: services),
+      ),
+    );
+
+    await tester.pumpAndSettle();
+
+    expect(find.text('我的收藏'), findsWidgets);
+    expect(find.text('從答題畫面收藏題目，它們會出現在這裡。'), findsOneWidget);
+  });
+
+  testWidgets('我的收藏可新增自訂書籤', (WidgetTester tester) async {
+    final AppServices services = createTestServices();
+    await tester.pumpWidget(
+      MaterialApp(
+        locale: const Locale('zh', 'TW'),
+        supportedLocales: AppStrings.supportedLocales,
+        localizationsDelegates: const [
+          GlobalMaterialLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+        ],
+        home: FavoritesPage(services: services),
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    await tester
+        .tap(find.byKey(const ValueKey<String>('add_favorite_collection')));
+    await tester.pumpAndSettle();
+    await tester.enterText(find.byType(TextField), '問老師');
+    await tester.tap(find.text('儲存'));
+    await tester.pumpAndSettle();
+
+    await tester
+        .tap(find.byKey(const ValueKey<String>('favorite_collection_picker')));
+    await tester.pumpAndSettle();
+    expect(find.text('問老師'), findsOneWidget);
+  });
 
   Question createSecondDemoQuestion() {
     return Question.fromJson({
@@ -3120,7 +3176,7 @@ void main() {
         findsOneWidget);
   });
 
-  testWidgets('app uses the compact teal learning-workspace theme',
+  testWidgets('app uses the compact indigo and teal learning-workspace theme',
       (WidgetTester tester) async {
     await tester.pumpWidget(MathSpringApp(services: createTestServices()));
     await tester.pumpAndSettle();
@@ -3128,8 +3184,9 @@ void main() {
     final ThemeData theme =
         Theme.of(tester.element(find.byType(Scaffold).first));
     expect(theme.scaffoldBackgroundColor, const Color(0xFFF8F8F5));
-    expect(theme.colorScheme.primary, const Color(0xFF177C87));
-    expect(theme.navigationBarTheme.indicatorColor, const Color(0xFFDDF1F0));
+    expect(theme.colorScheme.primary, AppVisualTokens.brand);
+    expect(theme.navigationBarTheme.indicatorColor,
+        AppVisualTokens.brandSoft);
 
     final RoundedRectangleBorder cardShape =
         theme.cardTheme.shape! as RoundedRectangleBorder;
@@ -3147,7 +3204,7 @@ void main() {
     expect(find.byIcon(Icons.play_circle_outline), findsOneWidget);
   });
 
-  testWidgets('home primary actions use the shared teal accent',
+  testWidgets('home primary actions use the shared indigo accent',
       (WidgetTester tester) async {
     await tester.pumpWidget(MathSpringApp(services: createTestServices()));
     await tester.pumpAndSettle();
