@@ -4644,6 +4644,158 @@
         "reference": "logic-grade10-foundation",
         "notes": "題型出自 Utah 數學圈講義引用的 Rosen 第 2 題「六月每天至少一場、共至多 45 場，必有連續數天恰好 14 場」那一族的區塊平均法，我把「連續若干天恰好」改成「固定長度為 2 的連續區塊至少」，答案由不等式與構造反例雙向夾出。全庫掃過「連續.{0,3}天|每天.{0,12}小時」regex 只命中 4 題，全是日期或存錢的計算題；logic_grade11_014 用前綴和求整除，骨架不同；logic_grade5_055（12 份問卷中 3 至少出現幾次）雖同為極值抽屜，但抽屜是四個分數選項而非連續區塊。"
       }
+    },
+    {
+      "id": "logic_grade10_foundation_052",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "box_plot_outlier_threshold_unknown_max",
+      "tags": [
+        "c:median_mode",
+        "c:inequality",
+        "m:reverse"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一組資料有 11 個整數：12、15、16、18、20、21、23、25、26、28、x，其中 x 比其他 10 個數都大。四分位數的算法是：把資料由小到大排好，中位數是第 6 個數；第 1 四分位數 Q1 是較小的 5 個數的中位數，第 3 四分位數 Q3 是較大的 5 個數的中位數。若一個數大於 Q3 + 1.5 × (Q3 − Q1)，就稱它為離群值。求使 x 成為離群值的最小整數 x。",
+        "zh-Hans": "一组数据有 11 个整数：12、15、16、18、20、21、23、25、26、28、x，其中 x 比其他 10 个数都大。四分位数的算法是：把数据由小到大排好，中位数是第 6 个数；第 1 四分位数 Q1 是较小的 5 个数的中位数，第 3 四分位数 Q3 是较大的 5 个数的中位数。若一个数大于 Q3 + 1.5 × (Q3 − Q1)，就称它为离群值。求使 x 成为离群值的最小整数 x。",
+        "en": "A data set has 11 integers: 12, 15, 16, 18, 20, 21, 23, 25, 26, 28 and x, where x is larger than all the other 10. Quartiles are computed as follows: sort the data; the median is the 6th value; the first quartile Q1 is the median of the lower 5 values and the third quartile Q3 is the median of the upper 5 values. A value is called an outlier if it is greater than Q3 + 1.5 × (Q3 − Q1). Find the smallest integer x that makes x an outlier.",
+        "ja": "11 個の整数 12、15、16、18、20、21、23、25、26、28、x からなるデータがあり、x はほかの 10 個のどれよりも大きいです。四分位数は次のように求めます。データを小さい順に並べ、中央値は 6 番目の値、第 1 四分位数 Q1 は小さい方 5 個の中央値、第 3 四分位数 Q3 は大きい方 5 個の中央値とします。Q3 + 1.5 × (Q3 − Q1) より大きい値を外れ値とよびます。x が外れ値になるような最小の整数 x を求めなさい。"
+      },
+      "answer": {
+        "zh-Hant": "最小的整數 x 是 42。",
+        "zh-Hans": "最小的整数 x 是 42。",
+        "en": "The smallest integer x is 42.",
+        "ja": "最小の整数 x は 42 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "x 比其他數都大，所以由小到大排列後 x 在第 11 個：12、15、16、18、20、21、23、25、26、28、x。",
+          "較小的 5 個數是 12、15、16、18、20，中位數 Q1 = 16。較大的 5 個數是 23、25、26、28、x，中位數是第 3 個 Q3 = 26。注意 x 雖然未知，但它只是排在最後，不影響 Q3。",
+          "四分位距 Q3 − Q1 = 26 − 16 = 10，離群值的門檻是 26 + 1.5 × 10 = 41。",
+          "x 要大於 41 才算離群值，而 x 是整數，所以最小的 x 是 42。x = 41 剛好等於門檻，不算離群值。",
+          "這裡的重點是：極端值不論多大都不會改變四分位數，所以用四分位距判斷離群值很穩定；如果改用平均數與標準差，x 本身會把標準差撐大，門檻跟著移動。"
+        ],
+        "zh-Hans": [
+          "x 比其他数都大，所以由小到大排列后 x 在第 11 个：12、15、16、18、20、21、23、25、26、28、x。",
+          "较小的 5 个数是 12、15、16、18、20，中位数 Q1 = 16。较大的 5 个数是 23、25、26、28、x，中位数是第 3 个 Q3 = 26。注意 x 虽然未知，但它只是排在最后，不影响 Q3。",
+          "四分位距 Q3 − Q1 = 26 − 16 = 10，离群值的门槛是 26 + 1.5 × 10 = 41。",
+          "x 要大于 41 才算离群值，而 x 是整数，所以最小的 x 是 42。x = 41 刚好等于门槛，不算离群值。",
+          "这里的重点是：极端值不论多大都不会改变四分位数，所以用四分位距判断离群值很稳定；如果改用平均数与标准差，x 本身会把标准差撑大，门槛跟着移动。"
+        ],
+        "en": [
+          "Since x is larger than all the others, it is 11th in sorted order: 12, 15, 16, 18, 20, 21, 23, 25, 26, 28, x.",
+          "The lower five are 12, 15, 16, 18, 20 with median Q1 = 16. The upper five are 23, 25, 26, 28, x with median (the 3rd) Q3 = 26. Although x is unknown, it simply sits last and does not affect Q3.",
+          "The interquartile range is Q3 − Q1 = 26 − 16 = 10, and the outlier threshold is 26 + 1.5 × 10 = 41.",
+          "x must exceed 41 to be an outlier, and x is an integer, so the smallest x is 42. x = 41 equals the threshold and is not an outlier.",
+          "The key point is that an extreme value, however large, does not change the quartiles, so the IQR test is stable; with the mean and standard deviation, x itself would inflate the standard deviation and move the threshold."
+        ],
+        "ja": [
+          "x はほかのどれよりも大きいので、並べると 11 番目です：12、15、16、18、20、21、23、25、26、28、x。",
+          "小さい方 5 個は 12、15、16、18、20 で中央値 Q1 = 16。大きい方 5 個は 23、25、26、28、x で中央値（3 番目）Q3 = 26 です。x は未知ですが、最後に並ぶだけなので Q3 には影響しません。",
+          "四分位範囲は Q3 − Q1 = 26 − 16 = 10、外れ値の境目は 26 + 1.5 × 10 = 41 です。",
+          "x が外れ値になるには 41 より大きくなければならず、x は整数なので最小の x は 42 です。x = 41 はちょうど境目で、外れ値ではありません。",
+          "ポイントは、極端な値がどれほど大きくても四分位数は変わらないので、四分位範囲による判定は安定していることです。平均値と標準偏差を使うと、x 自身が標準偏差を大きくして境目も動いてしまいます。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "42"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "statistics-grade10-iqr-outlier-threshold",
+        "notes": "改寫自數據分析單元「1.5 倍四分位距判斷離群值」的題型，改成反問「未知的最大值至少多大才算離群值」。全庫以「四分|盒|箱」掃描無四分位數題（本批 e_g9_01 是國三盒狀圖求總和最大，推理不同）；離群值觀念題如 algebra_grade7_062（平均減中位數）、logic_grade8_042（哪個統計量會變）不涉及四分位距。推理點是看出 x 不影響 Q3，再處理嚴格不等號的整數邊界。"
+      }
+    },
+    {
+      "id": "logic_grade10_foundation_053",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "frequency_table_missing_counts_from_mean",
+      "tags": [
+        "c:mean",
+        "c:median_mode",
+        "m:reverse"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "某班 30 位學生的一次測驗成績只有 60、70、80、90 分四種。得 70 分的有 8 人，得 90 分的有 4 人，得 60 分與 80 分的人數登記表被弄髒看不清楚。已知全班平均是 76 分。求全班成績的中位數。",
+        "zh-Hans": "某班 30 位学生的一次测验成绩只有 60、70、80、90 分四种。得 70 分的有 8 人，得 90 分的有 4 人，得 60 分与 80 分的人数登记表被弄脏看不清楚。已知全班平均是 76 分。求全班成绩的中位数。",
+        "en": "In a class of 30 students, the only test scores were 60, 70, 80 and 90. Eight students scored 70 and four scored 90; the numbers who scored 60 and 80 are smudged on the record sheet. The class mean is 76. Find the median score of the class.",
+        "ja": "あるクラス 30 人のテストの得点は 60、70、80、90 点の 4 種類だけでした。70 点は 8 人、90 点は 4 人で、60 点と 80 点の人数は記録用紙が汚れて読めません。クラスの平均点は 76 点です。クラスの得点の中央値を求めなさい。"
+      },
+      "answer": {
+        "zh-Hant": "全班成績的中位數是 80 分。",
+        "zh-Hans": "全班成绩的中位数是 80 分。",
+        "en": "The median score is 80.",
+        "ja": "クラスの得点の中央値は 80 点です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "設得 60 分的有 x 人、得 80 分的有 y 人。總人數：x + 8 + y + 4 = 30，所以 x + y = 18。",
+          "總分：60x + 70 × 8 + 80y + 90 × 4 = 76 × 30 = 2280。其中 70 × 8 = 560、90 × 4 = 360，所以 60x + 80y = 1360，也就是 3x + 4y = 68。",
+          "由 x + y = 18 得 3x + 3y = 54，相減得 y = 14，x = 4。",
+          "30 個成績由低到高排：第 1 到 4 名是 60 分，第 5 到 12 名是 70 分，第 13 到 26 名是 80 分，第 27 到 30 名是 90 分。",
+          "人數是偶數，中位數是第 15 與第 16 名的平均，兩人都在 80 分那一段，所以中位數是 80 分。注意平均 76 分比中位數低，因為有 4 位 60 分與 8 位 70 分把平均往下拉。"
+        ],
+        "zh-Hans": [
+          "设得 60 分的有 x 人、得 80 分的有 y 人。总人数：x + 8 + y + 4 = 30，所以 x + y = 18。",
+          "总分：60x + 70 × 8 + 80y + 90 × 4 = 76 × 30 = 2280。其中 70 × 8 = 560、90 × 4 = 360，所以 60x + 80y = 1360，也就是 3x + 4y = 68。",
+          "由 x + y = 18 得 3x + 3y = 54，相减得 y = 14，x = 4。",
+          "30 个成绩由低到高排：第 1 到 4 名是 60 分，第 5 到 12 名是 70 分，第 13 到 26 名是 80 分，第 27 到 30 名是 90 分。",
+          "人数是偶数，中位数是第 15 与第 16 名的平均，两人都在 80 分那一段，所以中位数是 80 分。注意平均 76 分比中位数低，因为有 4 位 60 分与 8 位 70 分把平均往下拉。"
+        ],
+        "en": [
+          "Let x students score 60 and y students score 80. Headcount: x + 8 + y + 4 = 30, so x + y = 18.",
+          "Total score: 60x + 70 × 8 + 80y + 90 × 4 = 76 × 30 = 2280. Since 70 × 8 = 560 and 90 × 4 = 360, we get 60x + 80y = 1360, i.e. 3x + 4y = 68.",
+          "From x + y = 18, 3x + 3y = 54; subtracting gives y = 14 and then x = 4.",
+          "Sorting the 30 scores: positions 1 to 4 are 60, positions 5 to 12 are 70, positions 13 to 26 are 80, and positions 27 to 30 are 90.",
+          "With an even count, the median is the average of the 15th and 16th scores, both in the 80 block, so the median is 80. The mean 76 is below the median because the four 60s and eight 70s pull it down."
+        ],
+        "ja": [
+          "60 点を x 人、80 点を y 人とします。人数より x + 8 + y + 4 = 30 なので x + y = 18 です。",
+          "合計点は 60x + 70 × 8 + 80y + 90 × 4 = 76 × 30 = 2280。70 × 8 = 560、90 × 4 = 360 なので 60x + 80y = 1360、つまり 3x + 4y = 68 です。",
+          "x + y = 18 から 3x + 3y = 54、引くと y = 14、よって x = 4 です。",
+          "30 人の得点を低い順に並べると、1〜4 番目が 60 点、5〜12 番目が 70 点、13〜26 番目が 80 点、27〜30 番目が 90 点です。",
+          "人数が偶数なので中央値は 15 番目と 16 番目の平均で、どちらも 80 点の区間にあるので中央値は 80 点です。平均 76 点が中央値より低いのは、60 点の 4 人と 70 点の 8 人が平均を下げているためです。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "80"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "statistics-grade10-missing-frequencies",
+        "notes": "改寫自統計單元「次數分配表有缺漏，用總人數與平均數列聯立補齊」的常見題，再加一步求中位數。全庫以「次數.{0,30}平均|平均.{0,30}人數」掃描，algebra_grade10_069 是一組人數未知且平均需為整數、algebra_grade8_056 是次數全知求中位數、algebra_grade7_063 是分組平均逆推。本題用兩條方程補出兩個次數，再排序找中位數。本批 e_g9_14 是中位數固定求未知次數的範圍（方向相反、不涉平均）。"
+      }
     }
   ]
 }
