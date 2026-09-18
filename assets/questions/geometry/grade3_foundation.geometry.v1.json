@@ -6054,6 +6054,82 @@
         "reference": "geometry-grade3-foundation",
         "notes": "正方體頂點的二色交替（二部圖入門），以程式窮舉 2 的 8 次方種塗法確認：固定一角為紅時只有一種塗法，最遠角為藍、紅球 4 顆。掃「頂點.*(顏色|塗|同色)」「正方體.*塗」：geometry_grade2_065（正方體 6 個面相鄰不同色最少幾色，答 3）、combinatorics_grade12_038（五邊形頂點塗色計數）、geometry_grade1_063（正方體骨架吸管與黏土球數量）。本題塗的是頂點，關鍵是「沿稜走一步就換色」的奇偶性。"
       }
+    },
+    {
+      "id": "geometry_grade3_foundation_071",
+      "reviewStatus": "ok",
+      "topic": "geometry",
+      "subtopic": "robot_spiral_steps_return_distance",
+      "tags": [
+        "c:position_direction",
+        "c:add_sub",
+        "m:invariant"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade3",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "方格紙上有一台機器人，一開始面向北方。它依序執行 8 個指令：前進 1 格後向右轉，前進 2 格後向右轉，前進 3 格後向右轉，……，一直到前進 8 格後向右轉（第幾個指令就前進幾格）。做完以後，機器人要沿著格線回到出發點，只能往東、西、南、北走，最少還要走幾格？",
+        "zh-Hans": "方格纸上有一台机器人，一开始面向北方。它依序执行 8 个指令：前进 1 格后向右转，前进 2 格后向右转，前进 3 格后向右转，……，一直到前进 8 格后向右转（第几个指令就前进几格）。做完以后，机器人要沿着格线回到出发点，只能往东、西、南、北走，最少还要走几格？",
+        "en": "A robot on grid paper starts facing north. It carries out 8 commands in order: move 1 square then turn right, move 2 squares then turn right, move 3 squares then turn right, …, up to move 8 squares then turn right (command number k moves k squares). Afterwards the robot must return to its starting point along the grid lines, moving only east, west, south or north. What is the fewest number of squares it must still move?",
+        "ja": "ほうがん紙の 上に ロボットが いて、はじめは 北を むいて います。ロボットは じゅんに 8この めいれいを します。1ます すすんで 右を むく、2ます すすんで 右を むく、3ます すすんで 右を むく、……、8ます すすんで 右を むく（なんばんめの めいれいかと おなじ ますだけ すすむ）。おわったあと、東・西・南・北 だけに すすんで 出発点に もどるには、少なくとも あと 何ます すすめば よいですか。"
+      },
+      "answer": {
+        "zh-Hant": "最少還要走 8 格。",
+        "zh-Hans": "最少还要走 8 格。",
+        "en": "It must move at least 8 more squares.",
+        "ja": "少なくとも あと 8ます です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "每向右轉一次，方向就依序變成北 → 東 → 南 → 西 → 北……，所以 8 個指令的方向是：北 1、東 2、南 3、西 4、北 5、東 6、南 7、西 8。",
+          "看南北方向：往北 1 + 5 = 6 格，往南 3 + 7 = 10 格，最後在出發點南邊 10 − 6 = 4 格。",
+          "看東西方向：往東 2 + 6 = 8 格，往西 4 + 8 = 12 格，最後在出發點西邊 12 − 8 = 4 格。",
+          "也可以兩個兩個配對看：北 1 和南 3 抵消後往南 2 格，北 5 和南 7 又往南 2 格；東西也一樣各往西 2 格兩次。",
+          "要回去得往北 4 格、往東 4 格，最少還要走 4 + 4 = 8 格。"
+        ],
+        "zh-Hans": [
+          "每向右转一次，方向就依序变成北 → 东 → 南 → 西 → 北……，所以 8 个指令的方向是：北 1、东 2、南 3、西 4、北 5、东 6、南 7、西 8。",
+          "看南北方向：往北 1 + 5 = 6 格，往南 3 + 7 = 10 格，最后在出发点南边 10 − 6 = 4 格。",
+          "看东西方向：往东 2 + 6 = 8 格，往西 4 + 8 = 12 格，最后在出发点西边 12 − 8 = 4 格。",
+          "也可以两个两个配对看：北 1 和南 3 抵消后往南 2 格，北 5 和南 7 又往南 2 格；东西也一样各往西 2 格两次。",
+          "要回去得往北 4 格、往东 4 格，最少还要走 4 + 4 = 8 格。"
+        ],
+        "en": [
+          "Each right turn changes the direction north → east → south → west → north …, so the 8 commands go: north 1, east 2, south 3, west 4, north 5, east 6, south 7, west 8.",
+          "North–south: north 1 + 5 = 6, south 3 + 7 = 10, so the robot ends 10 − 6 = 4 squares south of the start.",
+          "East–west: east 2 + 6 = 8, west 4 + 8 = 12, so it ends 12 − 8 = 4 squares west of the start.",
+          "Pairing also works: north 1 and south 3 leave 2 south, north 5 and south 7 leave another 2 south; east–west likewise gives 2 west twice.",
+          "To get back it must go 4 north and 4 east, so at least 4 + 4 = 8 more squares."
+        ],
+        "ja": [
+          "右を むくたびに、北 → 東 → 南 → 西 → 北……と かわるので、8この めいれいは 北1、東2、南3、西4、北5、東6、南7、西8 です。",
+          "南北を 見ると、北へ 1 + 5 = 6ます、南へ 3 + 7 = 10ます なので、出発点の 南 10 − 6 = 4ます に います。",
+          "東西を 見ると、東へ 2 + 6 = 8ます、西へ 4 + 8 = 12ます なので、出発点の 西 12 − 8 = 4ます に います。",
+          "2つずつ くみにしても わかります。北1 と 南3 で 南へ 2、北5 と 南7 で また 南へ 2。東西も 西へ 2 が 2かい です。",
+          "もどるには 北へ 4ます、東へ 4ます、少なくとも 4 + 4 = 8ます です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "8"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "geometry-grade3-foundation",
+        "notes": "螺旋式指令的位移（南北、東西分開抵消）。掃過「機器人|右轉|左轉」「前進.{0,6}格」「方格」；讀過 geometry_grade3_foundation_012（掃地機器人上 4 右 3 下 4）、geometry_grade3_foundation_037（轉三次能否面北）、geometry_grade2_foundation_007/031（轉向）、logic_grade12_foundation_040。程式模擬確認終點在西 4、南 4。"
+      }
     }
   ]
 }
