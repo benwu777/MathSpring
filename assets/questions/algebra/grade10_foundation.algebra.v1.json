@@ -6244,6 +6244,690 @@
         "reference": "algebra-grade10-sequential-transfer",
         "notes": "題型骨架取自 Wikipedia「Alligation」條目提到的 repeated drawing-and-replacing（酒桶反覆取出補水）家族，改成兩杯之間一來一回、搬運量未知並反解。本題是替換稿：初版（未知原始濃度、濃度降 4 個百分點）對 algebra_grade7_025 得 0.50，骨架仍是「兩種鹽水混合求百分比」，依規定砍掉重出。全庫掃過的相關題：logic_grade7_036 是同樣的一來一回但刻意不計算（問果汁與水誰多，答案為一樣多）；algebra_grade8_064 是兩塊合金同時互換等重小塊求該重量，是同時交換而非有先後的序列操作；algebra_grade7_059 是同一容器反覆倒出補水。本題的推理點在於倒回去那一勺的濃度是第一步之後才產生的中間值，必須先把它表示出來，展開後二次項互相消掉才回到一次方程。"
       }
+    },
+    {
+      "id": "algebra_grade10_foundation_071",
+      "reviewStatus": "ok",
+      "topic": "algebra",
+      "subtopic": "regression_line_prediction_from_summary",
+      "tags": [
+        "c:stdev",
+        "c:line_slope",
+        "m:direct"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "某校調查一群學生的身高 x（公分）與體重 y（公斤）。身高的平均數是 170、標準差是 5；體重的平均數是 60、標準差是 8；x 與 y 的相關係數是 0.75。用 y 對 x 的最小平方迴歸直線來預測，身高 180 公分的學生，預測體重是幾公斤？",
+        "zh-Hans": "某校调查一群学生的身高 x（厘米）与体重 y（公斤）。身高的平均数是 170、标准差是 5；体重的平均数是 60、标准差是 8；x 与 y 的相关系数是 0.75。用 y 对 x 的最小平方回归直线来预测，身高 180 厘米的学生，预测体重是几公斤？",
+        "en": "A school surveys the heights x (cm) and weights y (kg) of a group of students. The heights have mean 170 and standard deviation 5; the weights have mean 60 and standard deviation 8; the correlation coefficient between x and y is 0.75. Using the least-squares regression line of y on x, what weight in kilograms is predicted for a student 180 cm tall?",
+        "ja": "ある学校で生徒の身長 x（センチメートル）と体重 y（キログラム）を調べました。身長の平均値は 170、標準偏差は 5、体重の平均値は 60、標準偏差は 8、x と y の相関係数は 0.75 です。y の x への最小二乗回帰直線を使うと、身長 180 センチメートルの生徒の体重は何キログラムと予測されますか。"
+      },
+      "answer": {
+        "zh-Hant": "預測體重是 72 公斤。",
+        "zh-Hans": "预测体重是 72 公斤。",
+        "en": "The predicted weight is 72 kg.",
+        "ja": "予測される体重は 72 キログラムです。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "y 對 x 的迴歸直線斜率是 r × (y 的標準差) ÷ (x 的標準差) = 0.75 × 8 ÷ 5 = 1.2，意思是身高每多 1 公分，預測體重多 1.2 公斤。",
+          "迴歸直線一定通過兩個平均數構成的點 (170, 60)，所以直線是 y − 60 = 1.2(x − 170)。",
+          "代入 x = 180：y = 60 + 1.2 × 10 = 60 + 12 = 72。",
+          "注意斜率不是 8 ÷ 5 = 1.6。若直接用標準差的比，等於假設相關係數是 1（所有點都在一直線上），會高估成 76 公斤；相關係數 0.75 讓預測值往平均數「迴歸」一些。",
+          "所以預測體重是 72 公斤。"
+        ],
+        "zh-Hans": [
+          "y 对 x 的回归直线斜率是 r × (y 的标准差) ÷ (x 的标准差) = 0.75 × 8 ÷ 5 = 1.2，意思是身高每多 1 厘米，预测体重多 1.2 公斤。",
+          "回归直线一定通过两个平均数构成的点 (170, 60)，所以直线是 y − 60 = 1.2(x − 170)。",
+          "代入 x = 180：y = 60 + 1.2 × 10 = 60 + 12 = 72。",
+          "注意斜率不是 8 ÷ 5 = 1.6。若直接用标准差的比，等于假设相关系数是 1（所有点都在一直在线），会高估成 76 公斤；相关系数 0.75 让预测值往平均数「回归」一些。",
+          "所以预测体重是 72 公斤。"
+        ],
+        "en": [
+          "The slope of the regression line of y on x is r × (SD of y) ÷ (SD of x) = 0.75 × 8 ÷ 5 = 1.2: each extra centimetre of height adds 1.2 kg to the predicted weight.",
+          "The regression line always passes through the point of means (170, 60), so it is y − 60 = 1.2(x − 170).",
+          "Substituting x = 180: y = 60 + 1.2 × 10 = 60 + 12 = 72.",
+          "Note that the slope is not 8 ÷ 5 = 1.6. Using the ratio of standard deviations alone assumes a correlation of 1 (all points on a line) and would overestimate 76 kg; the correlation 0.75 pulls the prediction back toward the mean.",
+          "So the predicted weight is 72 kg."
+        ],
+        "ja": [
+          "y の x への回帰直線の傾きは r ×（y の標準偏差）÷（x の標準偏差）= 0.75 × 8 ÷ 5 = 1.2 で、身長が 1 センチメートル高いごとに予測体重は 1.2 キログラム増えます。",
+          "回帰直線は必ず平均値の点 (170, 60) を通るので、直線は y − 60 = 1.2(x − 170) です。",
+          "x = 180 を代入すると y = 60 + 1.2 × 10 = 60 + 12 = 72 です。",
+          "傾きは 8 ÷ 5 = 1.6 ではないことに注意します。標準偏差の比だけを使うのは相関係数を 1（すべての点が直線上）と仮定するのと同じで、76 キログラムと過大に予測してしまいます。相関係数 0.75 のため、予測値は平均の方へ「回帰」します。",
+          "よって予測される体重は 72 キログラムです。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "72"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "statistics-grade10-regression-prediction",
+        "notes": "改寫自高一數據分析單元「由平均、標準差、相關係數寫出迴歸直線並預測」的標準題型。全庫以「迴歸|相關係數」掃描無任何命中，是全庫第一題迴歸直線題。推理點是斜率要乘上相關係數、直線必過平均點，並指出直接用標準差比的錯誤。"
+      }
+    },
+    {
+      "id": "algebra_grade10_foundation_072",
+      "reviewStatus": "ok",
+      "topic": "algebra",
+      "subtopic": "parallel_vectors_same_direction_parameter",
+      "tags": [
+        "c:vector",
+        "c:quadratic",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "平面上兩個向量 u = (2, k) 與 v = (k, 8)。已知 u 與 v 平行，而且方向相同。求 k 的值。",
+        "zh-Hans": "平面上两个矢量 u = (2, k) 与 v = (k, 8)。已知 u 与 v 平行，而且方向相同。求 k 的值。",
+        "en": "In the plane, u = (2, k) and v = (k, 8). The vectors u and v are parallel and point in the same direction. Find k.",
+        "ja": "平面上に 2 つのベクトル u = (2, k)、v = (k, 8) があります。u と v は平行で、しかも向きが同じです。k の値を求めなさい。"
+      },
+      "answer": {
+        "zh-Hant": "k 的值是 4。",
+        "zh-Hans": "k 的值是 4。",
+        "en": "k is 4.",
+        "ja": "k の値は 4 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "兩個非零向量平行，表示其中一個是另一個的實數倍：v = t × u，也就是 (k, 8) = (2t, kt)。",
+          "等價地，平行的條件是分量交叉相乘相等：2 × 8 − k × k = 0，即 k² = 16，k = 4 或 k = −4。",
+          "k = 4：u = (2, 4)、v = (4, 8) = 2u，倍數 2 是正數，方向相同 ✓。",
+          "k = −4：u = (2, −4)、v = (−4, 8) = −2u，倍數 −2 是負數，兩向量平行但方向相反，不合題意，捨去。",
+          "所以 k = 4。只用「平行」而忽略「方向相同」會得到兩個答案。"
+        ],
+        "zh-Hans": [
+          "两个非零矢量平行，表示其中一个是另一个的实数倍：v = t × u，也就是 (k, 8) = (2t, kt)。",
+          "等价地，平行的条件是分量交叉相乘相等：2 × 8 − k × k = 0，即 k² = 16，k = 4 或 k = −4。",
+          "k = 4：u = (2, 4)、v = (4, 8) = 2u，倍数 2 是正数，方向相同 ✓。",
+          "k = −4：u = (2, −4)、v = (−4, 8) = −2u，倍数 −2 是负数，两矢量平行但方向相反，不合题意，舍去。",
+          "所以 k = 4。只用「平行」而忽略「方向相同」会得到两个答案。"
+        ],
+        "en": [
+          "Two non-zero vectors are parallel when one is a real multiple of the other: v = t × u, i.e. (k, 8) = (2t, kt).",
+          "Equivalently, parallel means the cross-multiplied components agree: 2 × 8 − k × k = 0, so k² = 16 and k = 4 or k = −4.",
+          "k = 4: u = (2, 4) and v = (4, 8) = 2u. The multiple 2 is positive, so they point the same way.",
+          "k = −4: u = (2, −4) and v = (−4, 8) = −2u. The multiple −2 is negative, so the vectors are parallel but opposite; this is rejected.",
+          "So k = 4. Using only 'parallel' and ignoring 'same direction' would give two answers."
+        ],
+        "ja": [
+          "0 でない 2 つのベクトルが平行であるとは、一方が他方の実数倍であること、つまり v = t × u、(k, 8) = (2t, kt) となることです。",
+          "同じことを成分のたすきがけで書くと 2 × 8 − k × k = 0、よって k² = 16 で k = 4 または k = −4 です。",
+          "k = 4 のとき u = (2, 4)、v = (4, 8) = 2u で、倍数 2 は正なので同じ向きです。",
+          "k = −4 のとき u = (2, −4)、v = (−4, 8) = −2u で、倍数 −2 は負なので平行ですが逆向きになり、不適です。",
+          "よって k = 4 です。「平行」だけを使って「同じ向き」を無視すると答えが 2 つになってしまいます。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "4"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "vector-grade10-parallel-same-direction",
+        "notes": "改寫自平面向量入門「兩向量平行求參數」的常見題，加上「方向相同」使二次方程的一根要捨去。全庫以「內積|向量」「平行」掃描，geometry_grade11_038 是垂直求參數（內積為 0）、geometry_grade11_046 是夾角為鈍角的整數個數、algebra_grade10_051 是向量和的長度；沒有平行（共線）條件的向量題。"
+      }
+    },
+    {
+      "id": "algebra_grade10_foundation_073",
+      "reviewStatus": "ok",
+      "topic": "algebra",
+      "subtopic": "two_pipes_together_and_half_each",
+      "tags": [
+        "c:work_rate",
+        "c:quadratic",
+        "m:direct"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一個水池裝有甲、乙兩根進水管，各自以固定的速度注水，甲管比乙管快。兩管同時打開，6 小時可以把空池注滿。若改成先只開甲管把空池注滿一半，再關掉甲管、只開乙管注滿另一半，總共要 12.5 小時。求只開甲管，注滿整個空池需要幾小時。",
+        "zh-Hans": "一个水池装有甲、乙两根进水管，各自以固定的速度注水，甲管比乙管快。两管同时打开，6 小时可以把空池注满。若改成先只开甲管把空池注满一半，再关掉甲管、只开乙管注满另一半，总共要 12.5 小时。求只开甲管，注满整个空池需要几小时。",
+        "en": "A tank has two inlet pipes, A and B, each filling at its own constant rate, with A faster than B. With both open, the empty tank fills in 6 hours. If instead A alone fills half of the empty tank and then A is shut and B alone fills the other half, it takes 12.5 hours in total. How many hours does pipe A alone take to fill the empty tank?",
+        "ja": "水そうに 甲、乙 の 2 本の給水管があり、それぞれ一定の速さで水を入れます。甲 の方が 乙 より速いです。2 本を同時に開くと、空の水そうは 6 時間でいっぱいになります。代わりに、まず 甲 だけで空の水そうの半分まで入れ、次に 甲 を閉じて 乙 だけで残りの半分を入れると、全部で 12.5 時間かかります。甲 だけで空の水そうをいっぱいにするには何時間かかりますか。"
+      },
+      "answer": {
+        "zh-Hant": "只開甲管需要 10 小時。",
+        "zh-Hans": "只开甲管需要 10 小时。",
+        "en": "Pipe A alone takes 10 hours.",
+        "ja": "甲 だけだと 10 時間かかります。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "設只開甲管要 a 小時注滿，只開乙管要 b 小時注滿，a < b。",
+          "同時開：每小時注滿 1/a + 1/b，6 小時注滿，所以 1/a + 1/b = 1/6，也就是 (a + b) ÷ (ab) = 1/6，ab = 6(a + b)。",
+          "各注一半：甲注一半要 a/2 小時，乙注一半要 b/2 小時，所以 a/2 + b/2 = 12.5，a + b = 25。",
+          "代回得 ab = 6 × 25 = 150。a、b 是 t² − 25t + 150 = 0 的兩根，因式分解 (t − 10)(t − 15) = 0，兩根是 10 和 15。",
+          "甲管比較快、所需時間比較短，所以 a = 10、b = 15。驗算：1/10 + 1/15 = 1/6 ✓；10/2 + 15/2 = 12.5 ✓。只開甲管需要 10 小時。"
+        ],
+        "zh-Hans": [
+          "设只开甲管要 a 小时注满，只开乙管要 b 小时注满，a < b。",
+          "同时开：每小时注满 1/a + 1/b，6 小时注满，所以 1/a + 1/b = 1/6，也就是 (a + b) ÷ (ab) = 1/6，ab = 6(a + b)。",
+          "各注一半：甲注一半要 a/2 小时，乙注一半要 b/2 小时，所以 a/2 + b/2 = 12.5，a + b = 25。",
+          "代回得 ab = 6 × 25 = 150。a、b 是 t² − 25t + 150 = 0 的两根，因式分解 (t − 10)(t − 15) = 0，两根是 10 和 15。",
+          "甲管比较快、所需时间比较短，所以 a = 10、b = 15。验算：1/10 + 1/15 = 1/6 ✓；10/2 + 15/2 = 12.5 ✓。只开甲管需要 10 小时。"
+        ],
+        "en": [
+          "Let A alone take a hours and B alone take b hours to fill the tank, with a < b.",
+          "Both open: they fill 1/a + 1/b per hour and finish in 6 hours, so 1/a + 1/b = 1/6, i.e. (a + b) ÷ (ab) = 1/6 and ab = 6(a + b).",
+          "Half each: A takes a/2 hours for its half and B takes b/2 hours, so a/2 + b/2 = 12.5 and a + b = 25.",
+          "Then ab = 6 × 25 = 150, so a and b are the roots of t² − 25t + 150 = 0, which factorises as (t − 10)(t − 15) = 0: the roots are 10 and 15.",
+          "A is faster, so it needs less time: a = 10 and b = 15. Check: 1/10 + 1/15 = 1/6 and 10/2 + 15/2 = 12.5. Pipe A alone takes 10 hours."
+        ],
+        "ja": [
+          "甲 だけでいっぱいにするのに a 時間、乙 だけで b 時間かかるとします（a < b）。",
+          "同時に開くと 1 時間に 1/a + 1/b ずつ入り 6 時間でいっぱいになるので、1/a + 1/b = 1/6、つまり (a + b) ÷ (ab) = 1/6、ab = 6(a + b) です。",
+          "半分ずつの場合、甲 は a/2 時間、乙 は b/2 時間かかるので a/2 + b/2 = 12.5、a + b = 25 です。",
+          "よって ab = 6 × 25 = 150 で、a、b は t² − 25t + 150 = 0 の 2 つの解です。(t − 10)(t − 15) = 0 より解は 10 と 15 です。",
+          "甲 の方が速く、かかる時間が短いので a = 10、b = 15 です。検算：1/10 + 1/15 = 1/6、10/2 + 15/2 = 12.5。甲 だけだと 10 時間かかります。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "10"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "algebra-grade10-pipes-sum-product",
+        "notes": "改寫自工作問題的經典變形「合作時間與各做一半的時間都已知」，把兩個條件轉成兩個單獨時間的和與積，再用根與係數關係求解。全庫以「工作|完成|水管|注水|排水」掃描，algebra_grade8_042、logic_grade9_024、arithmetic_grade4_030 都是速率已知求時間；algebra_grade8_062 是兩兩合作求單人（線性）。本題未知的是兩個單獨時間，靠「各做一半＝兩時間的平均」這個轉換建立和。"
+      }
+    },
+    {
+      "id": "algebra_grade10_foundation_074",
+      "reviewStatus": "ok",
+      "topic": "algebra",
+      "subtopic": "digits_of_two_power_and_five_power_combined",
+      "tags": [
+        "c:exponent",
+        "c:place_value",
+        "m:estimate_bound"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "把 2²⁰²⁶ 和 5²⁰²⁶ 這兩個數都用十進位完整寫出來，再把兩個數並排寫成一長串數字。這一長串一共有幾個數字？",
+        "zh-Hans": "把 2²⁰²⁶ 和 5²⁰²⁶ 这两个数都用十进位完整写出来，再把两个数并排写成一长串数字。这一长串一共有几个数字？",
+        "en": "Write out both 2²⁰²⁶ and 5²⁰²⁶ in full in decimal, and place the two numbers side by side to form one long string of digits. How many digits does the string have?",
+        "ja": "2²⁰²⁶ と 5²⁰²⁶ をどちらも 10 進法ですべて書き出し、2 つの数を横に並べて 1 列の数字の並びにします。この並びには全部で何個の数字がありますか。"
+      },
+      "answer": {
+        "zh-Hant": "這一長串一共有 2027 個數字。",
+        "zh-Hans": "这一长串一共有 2027 个数字。",
+        "en": "The string has 2027 digits.",
+        "ja": "数字は全部で 2027 個です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "設 2²⁰²⁶ 是 a 位數、5²⁰²⁶ 是 b 位數。一個 a 位的正整數 N 滿足 10 的 (a − 1) 次方 ≤ N < 10 的 a 次方。",
+          "2²⁰²⁶ 不是 10 的整數次方（它沒有因數 5），所以不等式兩端都嚴格：10 的 (a − 1) 次方 < 2²⁰²⁶ < 10 的 a 次方。同理 10 的 (b − 1) 次方 < 5²⁰²⁶ < 10 的 b 次方。",
+          "兩式相乘：10 的 (a + b − 2) 次方 < 2²⁰²⁶ × 5²⁰²⁶ = 10²⁰²⁶ < 10 的 (a + b) 次方。",
+          "指數必須滿足 a + b − 2 < 2026 < a + b。a + b 是整數，夾在 2026 和 2028 之間的只有 2027，所以 a + b = 2027。",
+          "用小的例子檢查規律：2³ = 8（1 位）、5³ = 125（3 位），共 4 = 3 + 1 位；2¹⁰ = 1024（4 位）、5¹⁰ = 9765625（7 位），共 11 = 10 + 1 位 ✓。不需要知道 log 2 的近似值，就能確定總位數是 2027。"
+        ],
+        "zh-Hans": [
+          "设 2²⁰²⁶ 是 a 位数、5²⁰²⁶ 是 b 位数。一个 a 位的正整数 N 满足 10 的 (a − 1) 次方 ≤ N < 10 的 a 次方。",
+          "2²⁰²⁶ 不是 10 的整数次方（它没有因数 5），所以不等式两端都严格：10 的 (a − 1) 次方 < 2²⁰²⁶ < 10 的 a 次方。同理 10 的 (b − 1) 次方 < 5²⁰²⁶ < 10 的 b 次方。",
+          "两式相乘：10 的 (a + b − 2) 次方 < 2²⁰²⁶ × 5²⁰²⁶ = 10²⁰²⁶ < 10 的 (a + b) 次方。",
+          "指数必须满足 a + b − 2 < 2026 < a + b。a + b 是整数，夹在 2026 和 2028 之间的只有 2027，所以 a + b = 2027。",
+          "用小的例子检查规律：2³ = 8（1 位）、5³ = 125（3 位），共 4 = 3 + 1 位；2¹⁰ = 1024（4 位）、5¹⁰ = 9765625（7 位），共 11 = 10 + 1 位 ✓。不需要知道 log 2 的近似值，就能确定总位数是 2027。"
+        ],
+        "en": [
+          "Suppose 2²⁰²⁶ has a digits and 5²⁰²⁶ has b digits. A positive integer N with a digits satisfies 10 to the power (a − 1) ≤ N < 10 to the power a.",
+          "2²⁰²⁶ is not a power of 10 (it has no factor 5), so both inequalities are strict: 10 to the power (a − 1) < 2²⁰²⁶ < 10 to the power a. Likewise 10 to the power (b − 1) < 5²⁰²⁶ < 10 to the power b.",
+          "Multiplying: 10 to the power (a + b − 2) < 2²⁰²⁶ × 5²⁰²⁶ = 10²⁰²⁶ < 10 to the power (a + b).",
+          "So a + b − 2 < 2026 < a + b. Since a + b is an integer strictly between 2026 and 2028, a + b = 2027.",
+          "Check the pattern on small cases: 2³ = 8 (1 digit) and 5³ = 125 (3 digits), 4 = 3 + 1 digits in all; 2¹⁰ = 1024 (4 digits) and 5¹⁰ = 9765625 (7 digits), 11 = 10 + 1 digits. No approximation of log 2 is needed to know the total is 2027."
+        ],
+        "ja": [
+          "2²⁰²⁶ を a 桁、5²⁰²⁶ を b 桁とします。a 桁の正の整数 N は「10 の (a − 1) 乗 ≤ N < 10 の a 乗」を満たします。",
+          "2²⁰²⁶ は 10 の累乗ではない（因数 5 をもたない）ので、両端とも等号はつかず「10 の (a − 1) 乗 < 2²⁰²⁶ < 10 の a 乗」です。同様に「10 の (b − 1) 乗 < 5²⁰²⁶ < 10 の b 乗」です。",
+          "2 式を掛けると「10 の (a + b − 2) 乗 < 2²⁰²⁶ × 5²⁰²⁶ = 10²⁰²⁶ < 10 の (a + b) 乗」です。",
+          "よって a + b − 2 < 2026 < a + b。a + b は整数で 2026 と 2028 の間にあるので、a + b = 2027 です。",
+          "小さい例で確かめると、2³ = 8（1 桁）と 5³ = 125（3 桁）で合計 4 = 3 + 1 桁、2¹⁰ = 1024（4 桁）と 5¹⁰ = 9765625（7 桁）で合計 11 = 10 + 1 桁です。log 2 の近似値を知らなくても、合計が 2027 桁だと分かります。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "2027"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 4
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "algebra-grade10-digits-two-and-five-powers",
+        "notes": "改寫自競賽常見題「2ⁿ 與 5ⁿ 並排寫出的總位數」（如 AMC、全俄題的變形），用位數的不等式夾擠，不需對數近似值。全庫（含新進題）以「位數」掃描，algebra_grade11_014 用 log 2 ≈ 0.3010 求 2¹⁰⁰ 的位數、number_theory_grade9_034 由 2¹⁰ 推 2²⁰ 的位數、algebra_grade11_071 求最高位數字；都是單一個數的位數且需要近似值。本題推理點是把兩個位數不等式相乘、利用乘積恰為 10 的冪。"
+      }
+    },
+    {
+      "id": "algebra_grade10_foundation_075",
+      "reviewStatus": "ok",
+      "topic": "algebra",
+      "subtopic": "exponential_reciprocal_sum_cube_identity",
+      "tags": [
+        "c:exponent",
+        "c:algebraic_identity",
+        "m:direct"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "實數 x 滿足 2 的 x 次方加上 2 的 (−x) 次方等於 3，也就是 2ˣ + 2⁻ˣ = 3。求 8ˣ + 8⁻ˣ 的值。",
+        "zh-Hans": "实数 x 满足 2 的 x 次方加上 2 的 (−x) 次方等于 3，也就是 2ˣ + 2⁻ˣ = 3。求 8ˣ + 8⁻ˣ 的值。",
+        "en": "A real number x satisfies 2 to the power x plus 2 to the power (−x) equals 3, that is, 2ˣ + 2⁻ˣ = 3. Find 8ˣ + 8⁻ˣ.",
+        "ja": "実数 x は「2 の x 乗 + 2 の (−x) 乗 = 3」、すなわち 2ˣ + 2⁻ˣ = 3 を満たします。8ˣ + 8⁻ˣ の値を求めなさい。"
+      },
+      "answer": {
+        "zh-Hant": "8ˣ + 8⁻ˣ 的值是 18。",
+        "zh-Hans": "8ˣ + 8⁻ˣ 的值是 18。",
+        "en": "8ˣ + 8⁻ˣ is 18.",
+        "ja": "8ˣ + 8⁻ˣ の値は 18 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "令 t = 2ˣ，則 2⁻ˣ = 1/t，條件是 t + 1/t = 3。所求 8ˣ + 8⁻ˣ = (2ˣ)³ + (2⁻ˣ)³ = t³ + 1/t³。",
+          "不必解出 t，用立方和的恆等式：t³ + 1/t³ = (t + 1/t)³ − 3 × t × (1/t) × (t + 1/t) = (t + 1/t)³ − 3(t + 1/t)。",
+          "代入 t + 1/t = 3：t³ + 1/t³ = 3³ − 3 × 3 = 27 − 9 = 18。",
+          "檢查：t + 1/t = 3 有正實數解 t = (3 ± √5)/2，所以這樣的 x 真的存在。數值上 t ≈ 2.618，t³ ≈ 17.944，1/t³ ≈ 0.056，相加約 18 ✓。",
+          "所以 8ˣ + 8⁻ˣ = 18。若誤以為 8ˣ + 8⁻ˣ 是 2ˣ + 2⁻ˣ 的 3 倍或 3 次方，會得到 9 或 27。"
+        ],
+        "zh-Hans": [
+          "令 t = 2ˣ，则 2⁻ˣ = 1/t，条件是 t + 1/t = 3。所求 8ˣ + 8⁻ˣ = (2ˣ)³ + (2⁻ˣ)³ = t³ + 1/t³。",
+          "不必解出 t，用立方和的恒等式：t³ + 1/t³ = (t + 1/t)³ − 3 × t × (1/t) × (t + 1/t) = (t + 1/t)³ − 3(t + 1/t)。",
+          "代入 t + 1/t = 3：t³ + 1/t³ = 3³ − 3 × 3 = 27 − 9 = 18。",
+          "检查：t + 1/t = 3 有正实数解 t = (3 ± √5)/2，所以这样的 x 真的存在。数值上 t ≈ 2.618，t³ ≈ 17.944，1/t³ ≈ 0.056，相加约 18 ✓。",
+          "所以 8ˣ + 8⁻ˣ = 18。若误以为 8ˣ + 8⁻ˣ 是 2ˣ + 2⁻ˣ 的 3 倍或 3 次方，会得到 9 或 27。"
+        ],
+        "en": [
+          "Let t = 2ˣ; then 2⁻ˣ = 1/t and the condition is t + 1/t = 3. The target is 8ˣ + 8⁻ˣ = (2ˣ)³ + (2⁻ˣ)³ = t³ + 1/t³.",
+          "No need to solve for t; use the sum-of-cubes identity: t³ + 1/t³ = (t + 1/t)³ − 3 × t × (1/t) × (t + 1/t) = (t + 1/t)³ − 3(t + 1/t).",
+          "Substituting t + 1/t = 3: t³ + 1/t³ = 3³ − 3 × 3 = 27 − 9 = 18.",
+          "Check: t + 1/t = 3 has positive real solutions t = (3 ± √5)/2, so such x exists. Numerically t ≈ 2.618, t³ ≈ 17.944 and 1/t³ ≈ 0.056, summing to about 18.",
+          "So 8ˣ + 8⁻ˣ = 18. Thinking it is 3 times or the cube of 2ˣ + 2⁻ˣ would give 9 or 27."
+        ],
+        "ja": [
+          "t = 2ˣ とおくと 2⁻ˣ = 1/t で、条件は t + 1/t = 3 です。求めるのは 8ˣ + 8⁻ˣ = (2ˣ)³ + (2⁻ˣ)³ = t³ + 1/t³ です。",
+          "t を求める必要はなく、3 乗の和の恒等式 t³ + 1/t³ = (t + 1/t)³ − 3 × t × (1/t) × (t + 1/t) = (t + 1/t)³ − 3(t + 1/t) を使います。",
+          "t + 1/t = 3 を代入すると t³ + 1/t³ = 3³ − 3 × 3 = 27 − 9 = 18 です。",
+          "確認：t + 1/t = 3 は正の実数解 t = (3 ± √5)/2 をもつので、このような x は実際に存在します。数値では t ≈ 2.618、t³ ≈ 17.944、1/t³ ≈ 0.056 で、和は約 18 です。",
+          "よって 8ˣ + 8⁻ˣ = 18 です。2ˣ + 2⁻ˣ の 3 倍や 3 乗だと考えると 9 や 27 になってしまいます。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "18"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "algebra-grade10-exponential-cube-identity",
+        "notes": "改寫自指數單元常見的「由 a^x + a^(−x) 求高次」題，結合立方和恆等式。全庫以「2ˣ|3ˣ|⁻ˣ」掃描，algebra_grade10_015 與 algebra_grade9 的 exponential_substitution 是解指數方程、algebra_grade12_065 是對稱指數不等式、algebra_grade8_014 是指數律代換；沒有「和 → 立方和」的恆等式轉換。"
+      }
+    },
+    {
+      "id": "algebra_grade10_foundation_076",
+      "reviewStatus": "ok",
+      "topic": "algebra",
+      "subtopic": "composite_quadratic_root_count_range",
+      "tags": [
+        "c:function",
+        "c:quadratic",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "設 f(x) = x² + 2x。方程式 f(f(x)) = 0 共有幾個相異的實數解？",
+        "zh-Hans": "设 f(x) = x² + 2x。方程序 f(f(x)) = 0 共有几个相异的实数解？",
+        "en": "Let f(x) = x² + 2x. How many distinct real solutions does the equation f(f(x)) = 0 have?",
+        "ja": "f(x) = x² + 2x とします。方程式 f(f(x)) = 0 の異なる実数解は何個ありますか。"
+      },
+      "answer": {
+        "zh-Hant": "共有 2 個相異的實數解。",
+        "zh-Hans": "共有 2 个相异的实数解。",
+        "en": "It has 2 distinct real solutions.",
+        "ja": "異なる実数解は 2 個です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "先把外層看成 f(u) = 0，其中 u = f(x)。f(u) = u² + 2u = u(u + 2) = 0，所以 u = 0 或 u = −2。",
+          "於是原方程式等價於 f(x) = 0 或 f(x) = −2。",
+          "f(x) = 0：x² + 2x = 0，x(x + 2) = 0，x = 0 或 x = −2，兩個解。",
+          "f(x) = −2：x² + 2x + 2 = 0，判別式 4 − 8 = −4 < 0，沒有實數解。也可以從值域看：f(x) = (x + 1)² − 1 ≥ −1，永遠取不到 −2。",
+          "所以 f(f(x)) = 0 只有 x = 0 和 x = −2 兩個實數解。直覺以為「兩層二次函數就有 4 個解」，會忽略內層的值域限制。"
+        ],
+        "zh-Hans": [
+          "先把外层看成 f(u) = 0，其中 u = f(x)。f(u) = u² + 2u = u(u + 2) = 0，所以 u = 0 或 u = −2。",
+          "于是原方程序等价于 f(x) = 0 或 f(x) = −2。",
+          "f(x) = 0：x² + 2x = 0，x(x + 2) = 0，x = 0 或 x = −2，两个解。",
+          "f(x) = −2：x² + 2x + 2 = 0，判别式 4 − 8 = −4 < 0，没有实数解。也可以从值域看：f(x) = (x + 1)² − 1 ≥ −1，永远取不到 −2。",
+          "所以 f(f(x)) = 0 只有 x = 0 和 x = −2 两个实数解。直觉以为「两层二次函数就有 4 个解」，会忽略内层的值域限制。"
+        ],
+        "en": [
+          "Treat the outer layer as f(u) = 0 with u = f(x). f(u) = u² + 2u = u(u + 2) = 0, so u = 0 or u = −2.",
+          "So the equation is equivalent to f(x) = 0 or f(x) = −2.",
+          "f(x) = 0: x² + 2x = 0, x(x + 2) = 0, so x = 0 or x = −2, two solutions.",
+          "f(x) = −2: x² + 2x + 2 = 0 has discriminant 4 − 8 = −4 < 0, so no real solutions. From the range: f(x) = (x + 1)² − 1 ≥ −1, so it can never equal −2.",
+          "So f(f(x)) = 0 has only the two real solutions x = 0 and x = −2. Expecting 'two layers of a quadratic give 4 solutions' ignores the range of the inner function."
+        ],
+        "ja": [
+          "外側を u = f(x) として f(u) = 0 と考えます。f(u) = u² + 2u = u(u + 2) = 0 なので u = 0 または u = −2 です。",
+          "したがってもとの方程式は f(x) = 0 または f(x) = −2 と同じです。",
+          "f(x) = 0：x² + 2x = 0、x(x + 2) = 0 より x = 0 または x = −2 の 2 個です。",
+          "f(x) = −2：x² + 2x + 2 = 0 の判別式は 4 − 8 = −4 < 0 で、実数解はありません。値域からも、f(x) = (x + 1)² − 1 ≥ −1 なので −2 にはなりません。",
+          "よって f(f(x)) = 0 の実数解は x = 0 と x = −2 の 2 個だけです。「2 次関数を 2 回合成すれば解は 4 個」と思い込むと、内側の関数の値域を見落とします。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "2"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "algebra-grade10-composite-quadratic-roots",
+        "notes": "改寫自函數單元「合成函數方程式的解數」題型，選擇讓其中一支因為值域限制而無解。全庫以「f\\(f\\(|composite」掃描，algebra_grade9_030 是 f(f(2)) 求值、combinatorics_grade10_024 是 f(f(x)) = x 的函數個數、algebra_grade11_022 是迭代週期；algebra_grade9 的 composite_function_solve 是解合成方程的單一值。本題推理點是把外層拆成兩個內層方程，並用值域排除一支。"
+      }
+    },
+    {
+      "id": "algebra_grade10_foundation_077",
+      "reviewStatus": "ok",
+      "topic": "algebra",
+      "subtopic": "vector_sum_length_integer_range",
+      "tags": [
+        "c:vector",
+        "c:inequality",
+        "m:extremal"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "平面上兩個向量 u、v 的長度分別是 |u| = 5、|v| = 3，兩者的夾角可以任意改變。當夾角改變時，|u + v| 可能取到的整數值共有幾個？",
+        "zh-Hans": "平面上两个矢量 u、v 的长度分别是 |u| = 5、|v| = 3，两者的夹角可以任意改变。当夹角改变时，|u + v| 可能取到的整数值共有几个？",
+        "en": "Two vectors u and v in the plane have lengths |u| = 5 and |v| = 3, and the angle between them can be changed freely. As the angle varies, how many integer values can |u + v| take?",
+        "ja": "平面上の 2 つのベクトル u、v の大きさは |u| = 5、|v| = 3 で、2 つのなす角は自由に変えられます。なす角を変えるとき、|u + v| がとりうる整数の値は何個ありますか。"
+      },
+      "answer": {
+        "zh-Hant": "|u + v| 可能取到的整數值共有 7 個。",
+        "zh-Hans": "|u + v| 可能取到的整数值共有 7 个。",
+        "en": "|u + v| can take 7 integer values.",
+        "ja": "|u + v| がとりうる整数の値は 7 個です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "設 u、v 的夾角是 θ（0° ≤ θ ≤ 180°）。|u + v|² = |u|² + |v|² + 2|u||v| cos θ = 25 + 9 + 30 cos θ = 34 + 30 cos θ。",
+          "cos θ 從 1 連續地變到 −1，所以 |u + v|² 從 64 連續地變到 4，|u + v| 從 8 連續地變到 2。",
+          "最大值 8 出現在 θ = 0°（同方向，長度直接相加 5 + 3）；最小值 2 出現在 θ = 180°（反方向，長度相減 5 − 3）。這就是三角不等式 |5 − 3| ≤ |u + v| ≤ 5 + 3。",
+          "因為變化是連續的，2 到 8 之間的每個值都取得到。其中的整數是 2、3、4、5、6、7、8，共 7 個。",
+          "注意端點 2 和 8 也取得到（兩向量共線時），所以不能用嚴格不等式而只算出 5 個。"
+        ],
+        "zh-Hans": [
+          "设 u、v 的夹角是 θ（0° ≤ θ ≤ 180°）。|u + v|² = |u|² + |v|² + 2|u||v| cos θ = 25 + 9 + 30 cos θ = 34 + 30 cos θ。",
+          "cos θ 从 1 连续地变到 −1，所以 |u + v|² 从 64 连续地变到 4，|u + v| 从 8 连续地变到 2。",
+          "最大值 8 出现在 θ = 0°（同方向，长度直接相加 5 + 3）；最小值 2 出现在 θ = 180°（反方向，长度相减 5 − 3）。这就是三角不等式 |5 − 3| ≤ |u + v| ≤ 5 + 3。",
+          "因为变化是连续的，2 到 8 之间的每个值都取得到。其中的整数是 2、3、4、5、6、7、8，共 7 个。",
+          "注意端点 2 和 8 也取得到（两矢量共线时），所以不能用严格不等式而只算出 5 个。"
+        ],
+        "en": [
+          "Let θ be the angle between u and v (0° ≤ θ ≤ 180°). |u + v|² = |u|² + |v|² + 2|u||v| cos θ = 25 + 9 + 30 cos θ = 34 + 30 cos θ.",
+          "As cos θ runs continuously from 1 to −1, |u + v|² runs from 64 to 4 and |u + v| runs from 8 to 2.",
+          "The maximum 8 occurs at θ = 0° (same direction, lengths add: 5 + 3); the minimum 2 occurs at θ = 180° (opposite, lengths subtract: 5 − 3). This is the triangle inequality |5 − 3| ≤ |u + v| ≤ 5 + 3.",
+          "Because the change is continuous, every value from 2 to 8 is attained. The integers among them are 2, 3, 4, 5, 6, 7, 8, which is 7 values.",
+          "Note that the endpoints 2 and 8 are attained (when the vectors are collinear), so using strict inequalities and counting only 5 would be wrong."
+        ],
+        "ja": [
+          "u と v のなす角を θ（0° ≤ θ ≤ 180°）とすると、|u + v|² = |u|² + |v|² + 2|u||v| cos θ = 25 + 9 + 30 cos θ = 34 + 30 cos θ です。",
+          "cos θ が 1 から −1 まで連続的に変わると、|u + v|² は 64 から 4 まで、|u + v| は 8 から 2 まで連続的に変わります。",
+          "最大値 8 は θ = 0°（同じ向きで長さがそのまま足される 5 + 3）、最小値 2 は θ = 180°（逆向きで長さが引かれる 5 − 3）のときです。これが三角不等式 |5 − 3| ≤ |u + v| ≤ 5 + 3 です。",
+          "変化は連続なので 2 から 8 までのすべての値をとります。その中の整数は 2、3、4、5、6、7、8 の 7 個です。",
+          "端の 2 と 8 も（2 つのベクトルが一直線上にあるとき）実際にとるので、不等号を厳密にして 5 個と数えるのは誤りです。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "7"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "vector-grade10-triangle-inequality-range",
+        "notes": "改寫自向量長度與三角不等式的常見題「兩向量和的長度範圍」。全庫以「內積|向量」掃描，algebra_grade10_051 是給定分量求和的長度、geometry_grade11_042 是三個長度反求內積、algebra_grade12_048 是含參數向量長度的最小值；沒有「夾角任意時長度範圍」的題。推理點是由 cos θ 的範圍得到連續區間，並確認端點取得到。"
+      }
+    },
+    {
+      "id": "algebra_grade10_foundation_078",
+      "reviewStatus": "ok",
+      "topic": "algebra",
+      "subtopic": "vertex_locus_of_parabola_family",
+      "tags": [
+        "c:quadratic",
+        "c:line_slope",
+        "m:invariant"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "對每一個實數 m，二次函數 y = x² − 2mx + m² − 4m + 1 的圖形都是一條拋物線。當 m 取遍所有實數時，這些拋物線的頂點全部落在同一條直線上。求這條直線的斜率。",
+        "zh-Hans": "对每一个实数 m，二次函数 y = x² − 2mx + m² − 4m + 1 的图形都是一条抛物线。当 m 取遍所有实数时，这些抛物线的顶点全部落在同一条直在线。求这条直线的斜率。",
+        "en": "For every real number m, the graph of y = x² − 2mx + m² − 4m + 1 is a parabola. As m ranges over all real numbers, the vertices of these parabolas all lie on one straight line. Find the slope of that line.",
+        "ja": "すべての実数 m について、2 次関数 y = x² − 2mx + m² − 4m + 1 のグラフは放物線です。m がすべての実数を動くとき、これらの放物線の頂点はすべて 1 本の直線上にあります。その直線の傾きを求めなさい。"
+      },
+      "answer": {
+        "zh-Hant": "這條直線的斜率是 −4。",
+        "zh-Hans": "这条直线的斜率是 −4。",
+        "en": "The slope of the line is −4.",
+        "ja": "その直線の傾きは −4 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "先配方找頂點：x² − 2mx + m² 正好是 (x − m)²，所以 y = (x − m)² − 4m + 1。",
+          "頂點是 (m, −4m + 1)。把頂點座標記為 (X, Y)，則 X = m、Y = −4m + 1。",
+          "消去參數 m：m = X，代入得 Y = −4X + 1。所以不論 m 是多少，頂點都在直線 y = −4x + 1 上。",
+          "這條直線的斜率是 −4。檢查幾個例子：m = 0 時頂點 (0, 1)；m = 1 時頂點 (1, −3)；m = 2 時頂點 (2, −7)，三點都在 y = −4x + 1 上 ✓。",
+          "注意所求的是「頂點軌跡」的斜率，不是拋物線本身在某一點的斜率；每條拋物線形狀相同，只是沿著這條直線平移。"
+        ],
+        "zh-Hans": [
+          "先配方找顶点：x² − 2mx + m² 正好是 (x − m)²，所以 y = (x − m)² − 4m + 1。",
+          "顶点是 (m, −4m + 1)。把顶点座标记为 (X, Y)，则 X = m、Y = −4m + 1。",
+          "消去参数 m：m = X，代入得 Y = −4X + 1。所以不论 m 是多少，顶点都在直线 y = −4x + 1 上。",
+          "这条直线的斜率是 −4。检查几个例子：m = 0 时顶点 (0, 1)；m = 1 时顶点 (1, −3)；m = 2 时顶点 (2, −7)，三点都在 y = −4x + 1 上 ✓。",
+          "注意所求的是「顶点轨迹」的斜率，不是抛物线本身在某一点的斜率；每条抛物线形状相同，只是沿着这条直线平移。"
+        ],
+        "en": [
+          "Complete the square: x² − 2mx + m² is exactly (x − m)², so y = (x − m)² − 4m + 1.",
+          "The vertex is (m, −4m + 1). Write the vertex as (X, Y), so X = m and Y = −4m + 1.",
+          "Eliminate the parameter: m = X, so Y = −4X + 1. Whatever m is, the vertex lies on the line y = −4x + 1.",
+          "Its slope is −4. Check a few: m = 0 gives vertex (0, 1); m = 1 gives (1, −3); m = 2 gives (2, −7); all three lie on y = −4x + 1.",
+          "Note that we want the slope of the path of the vertices, not the slope of any parabola at a point; all the parabolas have the same shape and are just translated along this line."
+        ],
+        "ja": [
+          "平方完成します。x² − 2mx + m² はちょうど (x − m)² なので、y = (x − m)² − 4m + 1 です。",
+          "頂点は (m, −4m + 1) です。頂点を (X, Y) とすると X = m、Y = −4m + 1 です。",
+          "m を消去すると m = X より Y = −4X + 1。m が何であっても、頂点は直線 y = −4x + 1 上にあります。",
+          "この直線の傾きは −4 です。例で確かめると、m = 0 のとき頂点 (0, 1)、m = 1 のとき (1, −3)、m = 2 のとき (2, −7) で、3 点とも y = −4x + 1 上にあります。",
+          "求めているのは頂点の描く軌跡の傾きであって、放物線のある点での傾きではありません。どの放物線も同じ形で、この直線に沿って平行移動しているだけです。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "-4"
+      },
+      "inputConstraints": {
+        "allowNegative": true,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "algebra-grade10-vertex-locus",
+        "notes": "改寫自二次函數單元「含參數拋物線族的頂點軌跡」題型。全庫以「頂點.{0,20}(直線|軌跡)」掃描無同類題；二次函數題如 algebra_grade9_035（最低點）、algebra_grade9_037（對稱軸）、algebra_grade10_002（區間最值）都是單一拋物線。本題推理點是配方後頂點含參數，再消去參數得到軌跡方程。"
+      }
+    },
+    {
+      "id": "algebra_grade10_foundation_079",
+      "reviewStatus": "ok",
+      "topic": "algebra",
+      "subtopic": "polynomial_long_division_by_quadratic_remainder",
+      "tags": [
+        "c:polynomial",
+        "c:linear_eq",
+        "m:direct"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "多項式 x³ + 2x² + ax + b 除以 x² + x + 1，所得的餘式是 2x + 3，其中 a、b 是常數。求 a + b 的值。",
+        "zh-Hans": "多项式 x³ + 2x² + ax + b 除以 x² + x + 1，所得的余式是 2x + 3，其中 a、b 是常数。求 a + b 的值。",
+        "en": "When the polynomial x³ + 2x² + ax + b is divided by x² + x + 1, the remainder is 2x + 3, where a and b are constants. Find a + b.",
+        "ja": "多項式 x³ + 2x² + ax + b を x² + x + 1 で割ると、余りは 2x + 3 になります。a、b は定数です。a + b の値を求めなさい。"
+      },
+      "answer": {
+        "zh-Hant": "a + b 的值是 8。",
+        "zh-Hans": "a + b 的值是 8。",
+        "en": "a + b is 8.",
+        "ja": "a + b の値は 8 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "除式 x² + x + 1 是二次式，沒有實數根，不能直接用餘式定理代值，所以用長除法。",
+          "第一步：x³ ÷ x² = x，x × (x² + x + 1) = x³ + x² + x。相減：(x³ + 2x² + ax + b) − (x³ + x² + x) = x² + (a − 1)x + b。",
+          "第二步：x² ÷ x² = 1，1 × (x² + x + 1) = x² + x + 1。相減：x² + (a − 1)x + b − (x² + x + 1) = (a − 2)x + (b − 1)。",
+          "所以商是 x + 1，餘式是 (a − 2)x + (b − 1)。它要等於 2x + 3：a − 2 = 2、b − 1 = 3，得 a = 4、b = 4。",
+          "驗算：(x² + x + 1)(x + 1) + (2x + 3) = x³ + 2x² + 2x + 1 + 2x + 3 = x³ + 2x² + 4x + 4 ✓。a + b = 4 + 4 = 8。"
+        ],
+        "zh-Hans": [
+          "除式 x² + x + 1 是二次式，没有实数根，不能直接用余式定理代值，所以用长除法。",
+          "第一步：x³ ÷ x² = x，x × (x² + x + 1) = x³ + x² + x。相减：(x³ + 2x² + ax + b) − (x³ + x² + x) = x² + (a − 1)x + b。",
+          "第二步：x² ÷ x² = 1，1 × (x² + x + 1) = x² + x + 1。相减：x² + (a − 1)x + b − (x² + x + 1) = (a − 2)x + (b − 1)。",
+          "所以商是 x + 1，余式是 (a − 2)x + (b − 1)。它要等于 2x + 3：a − 2 = 2、b − 1 = 3，得 a = 4、b = 4。",
+          "验算：(x² + x + 1)(x + 1) + (2x + 3) = x³ + 2x² + 2x + 1 + 2x + 3 = x³ + 2x² + 4x + 4 ✓。a + b = 4 + 4 = 8。"
+        ],
+        "en": [
+          "The divisor x² + x + 1 is quadratic with no real roots, so we cannot simply substitute a root; use long division.",
+          "Step 1: x³ ÷ x² = x, and x × (x² + x + 1) = x³ + x² + x. Subtracting: (x³ + 2x² + ax + b) − (x³ + x² + x) = x² + (a − 1)x + b.",
+          "Step 2: x² ÷ x² = 1, and 1 × (x² + x + 1) = x² + x + 1. Subtracting: x² + (a − 1)x + b − (x² + x + 1) = (a − 2)x + (b − 1).",
+          "So the quotient is x + 1 and the remainder is (a − 2)x + (b − 1). Setting it equal to 2x + 3: a − 2 = 2 and b − 1 = 3, so a = 4 and b = 4.",
+          "Check: (x² + x + 1)(x + 1) + (2x + 3) = x³ + 2x² + 2x + 1 + 2x + 3 = x³ + 2x² + 4x + 4. So a + b = 4 + 4 = 8."
+        ],
+        "ja": [
+          "割る式 x² + x + 1 は 2 次式で実数の解をもたないので、剰余の定理で値を代入するわけにはいきません。筆算で割り算をします。",
+          "1 段目：x³ ÷ x² = x、x × (x² + x + 1) = x³ + x² + x。引くと (x³ + 2x² + ax + b) − (x³ + x² + x) = x² + (a − 1)x + b です。",
+          "2 段目：x² ÷ x² = 1、1 × (x² + x + 1) = x² + x + 1。引くと x² + (a − 1)x + b − (x² + x + 1) = (a − 2)x + (b − 1) です。",
+          "よって商は x + 1、余りは (a − 2)x + (b − 1) です。これが 2x + 3 に等しいので a − 2 = 2、b − 1 = 3 より a = 4、b = 4 です。",
+          "検算：(x² + x + 1)(x + 1) + (2x + 3) = x³ + 2x² + 2x + 1 + 2x + 3 = x³ + 2x² + 4x + 4。a + b = 4 + 4 = 8 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "8"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "algebra-grade10-long-division-quadratic-divisor",
+        "notes": "改寫自高一多項式除法單元「除以二次式、已知餘式求係數」的常見題。全庫以「x² \\+ x \\+ 1」「餘式|除以」掃描，x² + x + 1 無命中；algebra_grade12_004 是由兩個一次除式的餘數求二次除式的餘式、algebra_grade12_018 是 x¹⁰⁰ 除以 x² − 1（除式有實根可代值）。本題除式無實根，必須做長除法、比較餘式係數。"
+      }
     }
   ]
 }

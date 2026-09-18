@@ -4594,6 +4594,252 @@
         "reference": "logic-grade9-foundation",
         "notes": "題型取自 Mantel／Turán 定理最小情形的公開教材（AoPS Wiki 的 Turan's theorem 與各家圖論講義都以 K(3,3) 的 9 條邊為極值例），改寫成 6 人社團的朋友對數。既有 logic_grade11_foundation_015 是 Ramsey R(3,3)＝6（求人數，且允許『三人互不認識』）；logic_grade12_foundation_028 是 6 點圖『不連通最多幾條邊』；logic_grade11_foundation_025、032 是給定度數求邊數。本題求的是逼出三角形的邊數門檻，必須同時給出 9 條邊的構造與 10 條邊的反證，推理核心與上述各題都不同。"
       }
+    },
+    {
+      "id": "logic_grade9_foundation_051",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "box_plot_five_number_summary_max_total",
+      "tags": [
+        "c:median_mode",
+        "m:extremal"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade9",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "某次測驗有 11 位同學，成績都是正整數，而且 11 個成績互不相同。把成績由小到大排好後，中位數是第 6 個數；第 1 四分位數是較低的 5 個成績（第 1 到第 5 個）的中位數，第 3 四分位數是較高的 5 個成績（第 7 到第 11 個）的中位數。已知這組成績的盒狀圖五個數是：最小值 3、第 1 四分位數 7、中位數 12、第 3 四分位數 18、最大值 25。求這 11 個成績的總和最大可能是多少。",
+        "zh-Hans": "某次测验有 11 位同学，成绩都是正整数，而且 11 个成绩互不相同。把成绩由小到大排好后，中位数是第 6 个数；第 1 四分位数是较低的 5 个成绩（第 1 到第 5 个）的中位数，第 3 四分位数是较高的 5 个成绩（第 7 到第 11 个）的中位数。已知这组成绩的盒状图五个数是：最小值 3、第 1 四分位数 7、中位数 12、第 3 四分位数 18、最大值 25。求这 11 个成绩的总和最大可能是多少。",
+        "en": "In a test taken by 11 students, every score is a positive integer and the 11 scores are all different. Sort the scores from lowest to highest. The median is the 6th score; the first quartile is the median of the lower 5 scores (the 1st to the 5th), and the third quartile is the median of the upper 5 scores (the 7th to the 11th). The box plot of these scores shows the five numbers: minimum 3, first quartile 7, median 12, third quartile 18, maximum 25. What is the largest possible total of the 11 scores?",
+        "ja": "11 人の生徒があるテストを受けました。得点はすべて正の整数で、11 人の得点はすべて異なります。得点を小さい順に並べたとき、中央値は 6 番目の値です。第 1 四分位数は下位 5 人（1 番目から 5 番目）の得点の中央値、第 3 四分位数は上位 5 人（7 番目から 11 番目）の得点の中央値とします。この得点の箱ひげ図の 5 つの値は、最小値 3、第 1 四分位数 7、中央値 12、第 3 四分位数 18、最大値 25 でした。11 人の得点の合計として考えられる最大の値はいくつですか。"
+      },
+      "answer": {
+        "zh-Hant": "總和最大可能是 149。",
+        "zh-Hans": "总和最大可能是 149。",
+        "en": "The largest possible total is 149.",
+        "ja": "合計の最大値は 149 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "把成績由小到大記為 a₁ < a₂ < ⋯ < a₁₁。依題目的定義，最小值 a₁ = 3，最大值 a₁₁ = 25，中位數 a₆ = 12；較低 5 個數的中位數是第 3 個，所以 a₃ = 7；較高 5 個數（a₇ 到 a₁₁）的中位數是 a₉，所以 a₉ = 18。",
+          "盒狀圖只固定了 5 個數，另外 6 個數 a₂、a₄、a₅、a₇、a₈、a₁₀ 可以變動。要讓總和最大，就讓每一個都盡量大，但必須守住「互不相同、由小到大」的限制。",
+          "a₂ 夾在 3 和 7 之間，最大是 6。",
+          "a₄、a₅ 夾在 7 和 12 之間，而且 a₄ < a₅ < 12，所以 a₅ 最大 11，a₄ 最大 10。",
+          "a₇、a₈ 夾在 12 和 18 之間，a₇ < a₈ < 18，所以 a₈ 最大 17，a₇ 最大 16。",
+          "a₁₀ 夾在 18 和 25 之間，最大是 24。這 6 個上限可以同時達到，而且不會互相衝突。",
+          "總和最大是 3 + 6 + 7 + 10 + 11 + 12 + 16 + 17 + 18 + 24 + 25 = 149。若忘了「互不相同」而把每個數都頂到上一個固定值，會誤算成 157。"
+        ],
+        "zh-Hans": [
+          "把成绩由小到大记为 a₁ < a₂ < ⋯ < a₁₁。依题目的定义，最小值 a₁ = 3，最大值 a₁₁ = 25，中位数 a₆ = 12；较低 5 个数的中位数是第 3 个，所以 a₃ = 7；较高 5 个数（a₇ 到 a₁₁）的中位数是 a₉，所以 a₉ = 18。",
+          "盒状图只固定了 5 个数，另外 6 个数 a₂、a₄、a₅、a₇、a₈、a₁₀ 可以变动。要让总和最大，就让每一个都尽量大，但必须守住「互不相同、由小到大」的限制。",
+          "a₂ 夹在 3 和 7 之间，最大是 6。",
+          "a₄、a₅ 夹在 7 和 12 之间，而且 a₄ < a₅ < 12，所以 a₅ 最大 11，a₄ 最大 10。",
+          "a₇、a₈ 夹在 12 和 18 之间，a₇ < a₈ < 18，所以 a₈ 最大 17，a₇ 最大 16。",
+          "a₁₀ 夹在 18 和 25 之间，最大是 24。这 6 个上限可以同时达到，而且不会互相冲突。",
+          "总和最大是 3 + 6 + 7 + 10 + 11 + 12 + 16 + 17 + 18 + 24 + 25 = 149。若忘了「互不相同」而把每个数都顶到上一个固定值，会误算成 157。"
+        ],
+        "en": [
+          "Write the sorted scores as a₁ < a₂ < ⋯ < a₁₁. By the definitions, the minimum is a₁ = 3, the maximum is a₁₁ = 25 and the median is a₆ = 12. The median of the lower five is the 3rd score, so a₃ = 7; the median of the upper five (a₇ to a₁₁) is a₉, so a₉ = 18.",
+          "The box plot pins down only 5 of the scores. The other 6, namely a₂, a₄, a₅, a₇, a₈, a₁₀, can vary. To maximise the total we make each of them as large as possible while keeping the scores distinct and in increasing order.",
+          "a₂ lies between 3 and 7, so it is at most 6.",
+          "a₄ and a₅ lie between 7 and 12 with a₄ < a₅ < 12, so a₅ is at most 11 and a₄ is at most 10.",
+          "a₇ and a₈ lie between 12 and 18 with a₇ < a₈ < 18, so a₈ is at most 17 and a₇ is at most 16.",
+          "a₁₀ lies between 18 and 25, so it is at most 24. All six upper limits can be reached at the same time without any conflict.",
+          "The largest total is 3 + 6 + 7 + 10 + 11 + 12 + 16 + 17 + 18 + 24 + 25 = 149. Forgetting that the scores are distinct and pushing every free score up to the next fixed value would give the wrong total 157."
+        ],
+        "ja": [
+          "得点を小さい順に a₁ < a₂ < ⋯ < a₁₁ とします。定義より、最小値 a₁ = 3、最大値 a₁₁ = 25、中央値 a₆ = 12 です。下位 5 人の中央値は 3 番目なので a₃ = 7、上位 5 人（a₇ から a₁₁）の中央値は a₉ なので a₉ = 18 です。",
+          "箱ひげ図で決まるのは 5 つの値だけで、残りの 6 つ a₂、a₄、a₅、a₇、a₈、a₁₀ は動かせます。合計を最大にするには、「すべて異なり、小さい順に並ぶ」という条件を守りながら、それぞれをできるだけ大きくします。",
+          "a₂ は 3 と 7 の間なので、最大で 6 です。",
+          "a₄、a₅ は 7 と 12 の間で a₄ < a₅ < 12 なので、a₅ は最大 11、a₄ は最大 10 です。",
+          "a₇、a₈ は 12 と 18 の間で a₇ < a₈ < 18 なので、a₈ は最大 17、a₇ は最大 16 です。",
+          "a₁₀ は 18 と 25 の間なので、最大で 24 です。これら 6 つの上限は互いに矛盾せず、同時に実現できます。",
+          "合計の最大値は 3 + 6 + 7 + 10 + 11 + 12 + 16 + 17 + 18 + 24 + 25 = 149 です。「すべて異なる」ことを忘れて各値を次の固定値まで上げると、誤って 157 になります。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "149"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "statistics-grade9-box-plot-extremal",
+        "notes": "題型取自盒狀圖（五數摘要）教材中「由五數摘要反推資料範圍」的常見練習，改成「互不相同」下求總和極大。全庫以「四分|盒|箱」掃描，沒有任何四分位數或盒狀圖題；再以「中位數|眾數」掃描，最接近的是 logic_grade9_041（平均、中位數、唯一眾數下求最大值）與 logic_grade8_041（唯一眾數下求最小全距）。本題的限制來自四分位數的位置，每個自由值被夾在兩個固定值之間，推理點是「互不相同」讓上限各退一格。"
+      }
+    },
+    {
+      "id": "logic_grade9_foundation_052",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "median_range_after_adding_two_values",
+      "tags": [
+        "c:median_mode",
+        "m:extremal"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade9",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一組資料有 7 個整數：2、4、4、5、7、9、10。現在再加入兩個整數（可以是任何整數，也可以和原有的數相同，兩個也可以相同），變成 9 個數。新資料的中位數共有幾種可能的值？",
+        "zh-Hans": "一组数据有 7 个整数：2、4、4、5、7、9、10。现在再加入两个整数（可以是任何整数，也可以和原有的数相同，两个也可以相同），变成 9 个数。新数据的中位数共有几种可能的值？",
+        "en": "A data set has 7 integers: 2, 4, 4, 5, 7, 9, 10. Two more integers are added (they can be any integers, may equal existing values, and may equal each other), making 9 numbers. How many different values can the new median take?",
+        "ja": "7 個の整数 2、4、4、5、7、9、10 からなるデータがあります。ここに整数を 2 個加えて 9 個にします（加える数はどんな整数でもよく、もとの数と同じでも、2 個が同じでもかまいません）。新しいデータの中央値として考えられる値は何通りありますか。"
+      },
+      "answer": {
+        "zh-Hant": "新資料的中位數共有 4 種可能的值。",
+        "zh-Hans": "新数据的中位数共有 4 种可能的值。",
+        "en": "The new median can take 4 different values.",
+        "ja": "新しいデータの中央値は 4 通りです。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "原資料排好是 2、4、4、5、7、9、10，中位數是第 4 個數 5。加入兩個數後共 9 個，中位數是排好後的第 5 個數。",
+          "中位數最小的情形：兩個新數都很小（例如都不超過 4），它們排在前面，把原資料往後推兩格。新的第 5 個數是原資料的第 3 個數 4。不論新數多小都不會更低，所以最小是 4。",
+          "中位數最大的情形：兩個新數都很大（例如都至少是 7），排在後面，新的第 5 個數就是原資料的第 5 個數 7。不論新數多大都不會更高，所以最大是 7。",
+          "中間的值：若一個新數很小、一個很大，中位數就是原來的第 4 個數 5；若一個新數是 6、另一個很大，排好是 2、4、4、5、6、7、9、10、⋯，第 5 個數是 6。所以 4、5、6、7 都取得到。",
+          "中位數必定介於 4 和 7 之間，而且新數都是整數、原資料也是整數，第 5 個數一定是整數，因此可能的值只有 4、5、6、7，共 4 種。",
+          "這說明中位數很「穩定」：加入兩個數，不論它們多極端，中位數最多只會從原資料的第 3 個數移到第 5 個數之間。"
+        ],
+        "zh-Hans": [
+          "原数据排好是 2、4、4、5、7、9、10，中位数是第 4 个数 5。加入两个数后共 9 个，中位数是排好后的第 5 个数。",
+          "中位数最小的情形：两个新数都很小（例如都不超过 4），它们排在前面，把原数据往后推两格。新的第 5 个数是原数据的第 3 个数 4。不论新数多小都不会更低，所以最小是 4。",
+          "中位数最大的情形：两个新数都很大（例如都至少是 7），排在后面，新的第 5 个数就是原数据的第 5 个数 7。不论新数多大都不会更高，所以最大是 7。",
+          "中间的值：若一个新数很小、一个很大，中位数就是原来的第 4 个数 5；若一个新数是 6、另一个很大，排好是 2、4、4、5、6、7、9、10、⋯，第 5 个数是 6。所以 4、5、6、7 都取得到。",
+          "中位数必定介于 4 和 7 之间，而且新数都是整数、原数据也是整数，第 5 个数一定是整数，因此可能的值只有 4、5、6、7，共 4 种。",
+          "这说明中位数很「稳定」：加入两个数，不论它们多极端，中位数最多只会从原数据的第 3 个数移到第 5 个数之间。"
+        ],
+        "en": [
+          "Sorted, the original data are 2, 4, 4, 5, 7, 9, 10, with median the 4th value, 5. With two numbers added there are 9 values, and the median is the 5th in sorted order.",
+          "Smallest median: both new numbers are small (say at most 4). They go in front and push the original data back two places, so the new 5th value is the original 3rd value, 4. However small the new numbers are, it cannot go lower, so the minimum is 4.",
+          "Largest median: both new numbers are large (say at least 7). They go at the end, so the new 5th value is the original 5th value, 7. However large they are, it cannot go higher, so the maximum is 7.",
+          "Values in between: if one new number is very small and the other very large, the median is the original 4th value, 5; if one new number is 6 and the other very large, the sorted list is 2, 4, 4, 5, 6, 7, 9, 10, …, whose 5th value is 6. So 4, 5, 6 and 7 all occur.",
+          "The median must lie between 4 and 7, and since all numbers are integers the 5th value is an integer, so the only possible values are 4, 5, 6, 7, which is 4 values.",
+          "This shows how stable the median is: adding two numbers, however extreme, can only move it between the original 3rd and 5th values."
+        ],
+        "ja": [
+          "もとのデータを並べると 2、4、4、5、7、9、10 で、中央値は 4 番目の 5 です。2 個加えると 9 個になり、中央値は並べたときの 5 番目です。",
+          "中央値が最小になるのは、加える 2 個がどちらも小さい（たとえば 4 以下の）ときです。それらが前に入ってもとのデータを 2 つ後ろへずらすので、新しい 5 番目はもとの 3 番目の 4 です。どれほど小さい数を加えてもこれより下がらないので、最小は 4 です。",
+          "中央値が最大になるのは、加える 2 個がどちらも大きい（たとえば 7 以上の）ときで、後ろに入るので新しい 5 番目はもとの 5 番目の 7 です。どれほど大きくてもこれより上がらないので、最大は 7 です。",
+          "間の値：1 個をとても小さく、もう 1 個をとても大きくすると中央値はもとの 4 番目の 5 です。1 個を 6、もう 1 個をとても大きくすると 2、4、4、5、6、7、9、10、⋯ と並び、5 番目は 6 です。よって 4、5、6、7 はどれも実現できます。",
+          "中央値は必ず 4 以上 7 以下で、すべて整数なので 5 番目の値も整数です。したがって考えられる値は 4、5、6、7 の 4 通りです。",
+          "これは中央値が「安定」していることを示しています。2 個加えると、どれほど極端な値でも、中央値はもとの 3 番目から 5 番目の値の間でしか動きません。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "4"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "statistics-grade9-median-after-adding-two",
+        "notes": "改寫自統計單元「新增資料對中位數影響範圍」的觀念題。全庫（含 2026-09-19 新進的 grade7、8、11、12 題）以「中位數」「再加入兩|新增兩」掃描，algebra_grade7_060 是加入一人使中位數為指定值（求那個值）、logic_grade7_042 是把大於中位數的數加 5、logic_grade8_042 是更正一筆資料後哪個統計量會變。本題推理點是用極端情形找出中位數的上下界，再確認中間值都取得到。"
+      }
+    },
+    {
+      "id": "logic_grade9_foundation_053",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "frequency_table_unknown_count_median",
+      "tags": [
+        "c:median_mode",
+        "c:inequality",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade9",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "某班一次小考的成績只有 6、7、8、9、10 分五種。得 6 分的有 3 人、得 7 分的有 x 人、得 8 分的有 4 人、得 9 分的有 8 人、得 10 分的有 4 人，其中 x 是正整數。已知全班成績的中位數恰好是 8 分（人數是偶數時，中位數取正中間兩個成績的平均）。x 共有幾種可能的值？",
+        "zh-Hans": "某班一次小考的成绩只有 6、7、8、9、10 分五种。得 6 分的有 3 人、得 7 分的有 x 人、得 8 分的有 4 人、得 9 分的有 8 人、得 10 分的有 4 人，其中 x 是正整数。已知全班成绩的中位数恰好是 8 分（人数是偶数时，中位数取正中间两个成绩的平均）。x 共有几种可能的值？",
+        "en": "In a class quiz the only possible scores were 6, 7, 8, 9 and 10. Three students scored 6, x students scored 7, four scored 8, eight scored 9 and four scored 10, where x is a positive integer. The median score of the class is exactly 8 (when the number of students is even, the median is the average of the two middle scores). How many possible values of x are there?",
+        "ja": "あるクラスの小テストの得点は 6、7、8、9、10 点の 5 種類だけでした。6 点が 3 人、7 点が x 人、8 点が 4 人、9 点が 8 人、10 点が 4 人で、x は正の整数です。クラス全体の得点の中央値はちょうど 8 点でした（人数が偶数のときは、真ん中の 2 人の得点の平均を中央値とします）。x として考えられる値は何通りありますか。"
+      },
+      "answer": {
+        "zh-Hant": "x 共有 7 種可能的值。",
+        "zh-Hans": "x 共有 7 种可能的值。",
+        "en": "There are 7 possible values of x.",
+        "ja": "x は 7 通りです。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "全班有 3 + x + 4 + 8 + 4 = 19 + x 人。把成績由低到高排好：第 1 到第 3 名是 6 分，第 4 到第 (3 + x) 名是 7 分，第 (4 + x) 到第 (7 + x) 名是 8 分，之後是 9 分和 10 分。",
+          "中位數是 8 分，代表正中間的成績要是 8 分。若人數是偶數，正中間兩個成績的平均是 8，但這兩個成績相鄰排著，只可能是 7 和 8、8 和 8、8 和 9，平均是 8 只有「兩個都是 8」這一種。所以不論奇偶，正中間的一個或兩個成績都必須落在 8 分那一段。",
+          "8 分那一段是第 (4 + x) 到第 (7 + x) 名。人數 19 + x 的正中間位置是 (20 + x)/2（奇數時是這一名，偶數時是它兩側的兩名），這些位置都要介於 4 + x 和 7 + x 之間。",
+          "上界：正中間最前面的位置不能落在 7 分段，要至少是 4 + x。奇數時需要 (20 + x)/2 ≥ 4 + x，即 x ≤ 12；偶數時較前的一名是 (19 + x)/2，需要 (19 + x)/2 ≥ 4 + x，即 x ≤ 11。",
+          "下界：正中間最後面的位置不能落到 9 分段，要至多是 7 + x。奇數時 (20 + x)/2 ≤ 7 + x，即 x ≥ 6；偶數時較後的一名是 (21 + x)/2，需要 ≤ 7 + x，即 x ≥ 7。",
+          "合起來：x = 6、8、10、12（使人數為奇數）以及 x = 7、9、11（使人數為偶數）都可以，也就是 6 ≤ x ≤ 12。檢查邊界：x = 5 時 24 人，第 12、13 名是 8 和 9，中位數 8.5 ✗；x = 13 時 32 人，第 16、17 名是 7 和 8，中位數 7.5 ✗。",
+          "所以 x 可以是 6、7、8、9、10、11、12，共 7 種。"
+        ],
+        "zh-Hans": [
+          "全班有 3 + x + 4 + 8 + 4 = 19 + x 人。把成绩由低到高排好：第 1 到第 3 名是 6 分，第 4 到第 (3 + x) 名是 7 分，第 (4 + x) 到第 (7 + x) 名是 8 分，之后是 9 分和 10 分。",
+          "中位数是 8 分，代表正中间的成绩要是 8 分。若人数是偶数，正中间两个成绩的平均是 8，但这两个成绩相邻排着，只可能是 7 和 8、8 和 8、8 和 9，平均是 8 只有「两个都是 8」这一种。所以不论奇偶，正中间的一个或两个成绩都必须落在 8 分那一段。",
+          "8 分那一段是第 (4 + x) 到第 (7 + x) 名。人数 19 + x 的正中间位置是 (20 + x)/2（奇数时是这一名，偶数时是它两侧的两名），这些位置都要介于 4 + x 和 7 + x 之间。",
+          "上界：正中间最前面的位置不能落在 7 分段，要至少是 4 + x。奇数时需要 (20 + x)/2 ≥ 4 + x，即 x ≤ 12；偶数时较前的一名是 (19 + x)/2，需要 (19 + x)/2 ≥ 4 + x，即 x ≤ 11。",
+          "下界：正中间最后面的位置不能落到 9 分段，要至多是 7 + x。奇数时 (20 + x)/2 ≤ 7 + x，即 x ≥ 6；偶数时较后的一名是 (21 + x)/2，需要 ≤ 7 + x，即 x ≥ 7。",
+          "合起来：x = 6、8、10、12（使人数为奇数）以及 x = 7、9、11（使人数为偶数）都可以，也就是 6 ≤ x ≤ 12。检查边界：x = 5 时 24 人，第 12、13 名是 8 和 9，中位数 8.5 ✗；x = 13 时 32 人，第 16、17 名是 7 和 8，中位数 7.5 ✗。",
+          "所以 x 可以是 6、7、8、9、10、11、12，共 7 种。"
+        ],
+        "en": [
+          "The class has 3 + x + 4 + 8 + 4 = 19 + x students. In order from lowest: positions 1 to 3 score 6, positions 4 to (3 + x) score 7, positions (4 + x) to (7 + x) score 8, then come the 9s and 10s.",
+          "A median of 8 means the middle score(s) must be 8. With an even class, the two middle scores sit next to each other, so they can only be 7 and 8, 8 and 8, or 8 and 9; an average of 8 happens only when both are 8. So in every case the middle one or two positions must lie in the block of 8s.",
+          "The block of 8s is positions (4 + x) to (7 + x). For 19 + x students the centre is at position (20 + x)/2 (that position itself if the count is odd, the two positions around it if even), and these must lie between 4 + x and 7 + x.",
+          "Upper limit on x: the earliest middle position must not be in the 7s, so it must be at least 4 + x. Odd case: (20 + x)/2 ≥ 4 + x gives x ≤ 12. Even case: the earlier middle position is (19 + x)/2 ≥ 4 + x, giving x ≤ 11.",
+          "Lower limit on x: the latest middle position must not reach the 9s, so it is at most 7 + x. Odd case: (20 + x)/2 ≤ 7 + x gives x ≥ 6. Even case: the later middle position is (21 + x)/2 ≤ 7 + x, giving x ≥ 7.",
+          "Together: x = 6, 8, 10, 12 (odd class size) and x = 7, 9, 11 (even class size) all work, i.e. 6 ≤ x ≤ 12. Check the edges: x = 5 gives 24 students with 12th and 13th scores 8 and 9, median 8.5; x = 13 gives 32 students with 16th and 17th scores 7 and 8, median 7.5.",
+          "So x can be 6, 7, 8, 9, 10, 11 or 12, which is 7 values."
+        ],
+        "ja": [
+          "クラスの人数は 3 + x + 4 + 8 + 4 = 19 + x 人です。低い順に並べると、1 番目から 3 番目が 6 点、4 番目から (3 + x) 番目が 7 点、(4 + x) 番目から (7 + x) 番目が 8 点で、そのあとが 9 点と 10 点です。",
+          "中央値が 8 点ということは、真ん中の得点が 8 点であることです。人数が偶数のとき、真ん中の 2 人はとなり合っているので 7 と 8、8 と 8、8 と 9 のどれかで、平均が 8 になるのは 2 人とも 8 のときだけです。したがってどちらの場合も、真ん中の 1 人または 2 人は 8 点の区間に入らなければなりません。",
+          "8 点の区間は (4 + x) 番目から (7 + x) 番目です。19 + x 人の真ん中は (20 + x)/2 番目（奇数ならその 1 人、偶数ならその両隣の 2 人）で、これらが 4 + x 以上 7 + x 以下にあることが条件です。",
+          "x の上限：真ん中のうち前の方が 7 点の区間に入ってはいけないので、4 + x 以上です。奇数のとき (20 + x)/2 ≥ 4 + x より x ≤ 12、偶数のとき前の方は (19 + x)/2 番目で (19 + x)/2 ≥ 4 + x より x ≤ 11 です。",
+          "x の下限：真ん中のうち後の方が 9 点の区間に入ってはいけないので、7 + x 以下です。奇数のとき (20 + x)/2 ≤ 7 + x より x ≥ 6、偶数のとき後の方は (21 + x)/2 番目で、これが 7 + x 以下より x ≥ 7 です。",
+          "まとめると x = 6、8、10、12（人数が奇数）と x = 7、9、11（人数が偶数）がすべて条件を満たし、6 ≤ x ≤ 12 です。境目の確認：x = 5 のとき 24 人で 12 番目と 13 番目は 8 と 9、中央値 8.5 で不適。x = 13 のとき 32 人で 16 番目と 17 番目は 7 と 8、中央値 7.5 で不適です。",
+          "よって x は 6、7、8、9、10、11、12 の 7 通りです。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "7"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "statistics-grade9-frequency-table-median-range",
+        "notes": "改寫自次數分配表求中位數的課本題型，把其中一個次數改成未知數，反問「中位數固定時未知次數的範圍」。全庫以「次數」「中位數」掃描，algebra_grade8_056 是次數全部已知、直接找中位數；algebra_grade7_060、algebra_grade8_038 是單一未知資料值。本題未知的是次數，須依總人數奇偶分開處理上下界，並排除偶數時平均恰為 8 的其他組合。"
+      }
     }
   ]
 }
