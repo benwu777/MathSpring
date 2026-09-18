@@ -5727,6 +5727,162 @@
         "reference": "logic-grade4-foundation",
         "notes": "國王步最短距離（橫縱位移取較大者），自編位置並以 BFS 程式確認 6 步。掃「國王|周圍.*8 格|斜著走|斜走」：combinatorics_grade12_005、combinatorics_grade7_032（右、上、右上三種步法的路徑數）、geometry_grade1_044（不能斜走的最短格數）、logic_grade7_050（上下左右走遍 3×3）。本題問可以斜走時的最少步數，要看出斜步同時抵兩種位移，下界是較大的那個位移。"
       }
+    },
+    {
+      "id": "logic_grade4_foundation_072",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "share_full_half_empty_cups_equally",
+      "tags": [
+        "c:fraction",
+        "c:logic_deduction",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade4",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "有 7 杯裝滿的果汁、7 杯只裝一半的果汁、7 個空杯子，杯子都一樣大。要把這 21 個杯子分給 3 個人，每人拿到的杯子數要一樣多，拿到的果汁也要一樣多，而且不可以把果汁從一個杯子倒到另一個杯子。只看每一份裡有幾杯滿的、幾杯半杯、幾個空杯（不管哪一份給誰），一共有幾種不同的分法？",
+        "zh-Hans": "有 7 杯装满的果汁、7 杯只装一半的果汁、7 个空杯子，杯子都一样大。要把这 21 个杯子分给 3 个人，每人拿到的杯子数要一样多，拿到的果汁也要一样多，而且不可以把果汁从一个杯子倒到另一个杯子。只看每一份里有几杯满的、几杯半杯、几个空杯（不管哪一份给谁），一共有几种不同的分法？",
+        "en": "There are 7 full cups of juice, 7 half-full cups and 7 empty cups, all the same size. The 21 cups are to be shared among 3 people so that everyone gets the same number of cups and the same amount of juice, without pouring juice from one cup to another. Looking only at how many full, half-full and empty cups are in each share (not who gets which share), how many different ways are there to share them?",
+        "ja": "おなじ 大きさの コップに、ジュースが いっぱいの ものが 7こ、半分の ものが 7こ、からの ものが 7こ あります。この 21この コップを 3人に 分けます。1人の コップの 数も ジュースの りょうも みんな おなじに し、ジュースを ほかの コップに うつしては いけません。1人ぶんに いっぱい・半分・から が それぞれ なんこ あるかだけを 見て（だれが どの 1人ぶんを もらうかは くべつしない）、分けかたは ぜんぶで 何とおり ありますか。"
+      },
+      "answer": {
+        "zh-Hant": "一共有 2 種分法。",
+        "zh-Hans": "一共有 2 种分法。",
+        "en": "There are 2 ways.",
+        "ja": "分けかたは 2とおり です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "每人拿 21 ÷ 3 = 7 個杯子。果汁一共是 7 杯加 7 個半杯，也就是 7 + 7 ÷ 2 = 10 又 1/2 杯，每人要分到 3 又 1/2 杯。",
+          "用「半杯」當單位：1 杯滿的 = 2 個半杯，每人要有 7 個半杯的果汁。設一人拿 a 杯滿、b 杯半、c 個空杯，則 a + b + c = 7，而且 2 × a + b = 7。",
+          "由 2 × a + b = 7，一份只可能是：(0 滿, 7 半, 0 空)、(1 滿, 5 半, 1 空)、(2 滿, 3 半, 2 空)、(3 滿, 1 半, 3 空)；每一份的滿杯數都等於空杯數。",
+          "三份的滿杯數加起來要是 7，每份是 0 到 3：只能是 3 + 3 + 1 或 3 + 2 + 2（3 + 3 + 0 只有 6，不夠；其他組合也湊不到 7）。",
+          "檢查半杯：3 + 3 + 1 對應半杯 1 + 1 + 5 = 7，可以；3 + 2 + 2 對應半杯 1 + 3 + 3 = 7，可以。空杯數和滿杯數相同，也都是 7。",
+          "所以一共有 2 種分法。"
+        ],
+        "zh-Hans": [
+          "每人拿 21 ÷ 3 = 7 个杯子。果汁一共是 7 杯加 7 个半杯，也就是 7 + 7 ÷ 2 = 10 又 1/2 杯，每人要分到 3 又 1/2 杯。",
+          "用「半杯」当单位：1 杯满的 = 2 个半杯，每人要有 7 个半杯的果汁。设一人拿 a 杯满、b 杯半、c 个空杯，则 a + b + c = 7，而且 2 × a + b = 7。",
+          "由 2 × a + b = 7，一份只可能是：(0 满, 7 半, 0 空)、(1 满, 5 半, 1 空)、(2 满, 3 半, 2 空)、(3 满, 1 半, 3 空)；每一份的满杯数都等于空杯数。",
+          "三份的满杯数加起来要是 7，每份是 0 到 3：只能是 3 + 3 + 1 或 3 + 2 + 2（3 + 3 + 0 只有 6，不够；其他组合也凑不到 7）。",
+          "检查半杯：3 + 3 + 1 对应半杯 1 + 1 + 5 = 7，可以；3 + 2 + 2 对应半杯 1 + 3 + 3 = 7，可以。空杯数和满杯数相同，也都是 7。",
+          "所以一共有 2 种分法。"
+        ],
+        "en": [
+          "Each person gets 21 ÷ 3 = 7 cups. The juice totals 7 cups plus 7 half cups, i.e. 7 + 7 ÷ 2 = 10 and 1/2 cups, so each person needs 3 and 1/2 cups.",
+          "Use \"half cups\" as the unit: 1 full cup = 2 half cups, so each person needs 7 half cups of juice. If a share has a full, b half and c empty cups, then a + b + c = 7 and 2 × a + b = 7.",
+          "From 2 × a + b = 7, a share can only be (0 full, 7 half, 0 empty), (1, 5, 1), (2, 3, 2) or (3, 1, 3); in every share the number of full cups equals the number of empty cups.",
+          "The full cups in the three shares must add to 7, each being 0 to 3: only 3 + 3 + 1 or 3 + 2 + 2 work (3 + 3 + 0 is only 6, and no other choice reaches 7).",
+          "Check half cups: 3 + 3 + 1 gives 1 + 1 + 5 = 7 half cups, fine; 3 + 2 + 2 gives 1 + 3 + 3 = 7, fine. The empty cups match the full cups, so they also total 7.",
+          "So there are 2 ways."
+        ],
+        "ja": [
+          "1人 21 ÷ 3 = 7こ です。ジュースは いっぱい 7こ と 半分 7こ なので 7 + 7 ÷ 2 = 10と2分の1 ぱいぶん、1人 3と2分の1 ぱいぶん です。",
+          "「半分」を 1つぶんと すると、いっぱい 1こ = 半分 2つぶん で、1人 半分 7つぶん いります。1人が いっぱい a こ、半分 b こ、から c こ なら、a + b + c = 7、2 × a + b = 7 です。",
+          "2 × a + b = 7 から、1人ぶんは (いっぱい0, 半分7, から0)、(1, 5, 1)、(2, 3, 2)、(3, 1, 3) の どれかで、いっぱいの 数と からの 数は いつも おなじです。",
+          "3人の いっぱいの 数を たして 7 に なるのは、どれも 0〜3 なので 3 + 3 + 1 か 3 + 2 + 2 だけです（3 + 3 + 0 は 6 で たりません）。",
+          "半分を たしかめると、3 + 3 + 1 は 1 + 1 + 5 = 7、3 + 2 + 2 は 1 + 3 + 3 = 7 で どちらも よいです。からの 数も 7 に なります。",
+          "だから 分けかたは 2とおり です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "2"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade4-foundation",
+        "notes": "滿杯、半杯、空杯平分的經典題，改成問「共有幾種分法」並用半杯為單位列式分類。掃過「半滿|半杯|空杯|空的」「平分」「一樣多」；讀過 mixed_grade5_foundation_004（半滿倒出後三分之一滿）、arithmetic_grade3_foundation_103（四疊硬幣搬到一樣多）、logic_grade11_foundation_035（15 顆糖分三堆互不相同）。程式窮舉確認恰 2 種。"
+      }
+    },
+    {
+      "id": "logic_grade4_foundation_073",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "fewest_lines_between_stations",
+      "tags": [
+        "c:graph_theory",
+        "c:logic_deduction",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade4",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "某城市有 5 條捷運路線，每條路線會停的車站如下：1 號線：甲、乙、丙、丁；2 號線：丁、戊、己；3 號線：乙、庚、己、辛；4 號線：辛、壬、癸；5 號線：丙、戊、壬。兩條路線都有停的車站，就可以在那一站換線。小安要從甲站到癸站，最少要搭幾條路線（一開始上車的那條也算 1 條）？",
+        "zh-Hans": "某城市有 5 条地铁线路，每条线路会停的车站如下：1 号线：甲、乙、丙、丁；2 号线：丁、戊、己；3 号线：乙、庚、己、辛；4 号线：辛、壬、癸；5 号线：丙、戊、壬。两条线路都有停的车站，就可以在那一站换线。小安要从甲站到癸站，最少要坐几条线路（一开始上车的那条也算 1 条）？",
+        "en": "A city has 5 metro lines, stopping at these stations: Line 1: A, B, C, D; Line 2: D, E, F; Line 3: B, G, F, H; Line 4: H, I, J; Line 5: C, E, I. At any station served by two lines you can change between them. An wants to go from station A to station J. What is the fewest number of lines he must ride (the first line counts as 1)?",
+        "ja": "ある まちに ちかてつが 5ろせん あり、それぞれ とまる 駅は つぎの とおりです。1ごう線：A、B、C、D。2ごう線：D、E、F。3ごう線：B、G、F、H。4ごう線：H、I、J。5ごう線：C、E、I。2つの ろせんが どちらも とまる 駅では、のりかえが できます。アンは A駅から J駅へ 行きます。少なくとも 何ろせんに のる ひつようが ありますか（さいしょに のる ろせんも 1ろせんと かぞえます）。"
+      },
+      "answer": {
+        "zh-Hant": "最少要搭 3 條路線。",
+        "zh-Hans": "最少要坐 3 条线路。",
+        "en": "He must ride at least 3 lines.",
+        "ja": "少なくとも 3ろせん です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "甲站只有 1 號線停，癸站只有 4 號線停，所以 1 號線和 4 號線一定都要搭。",
+          "只搭 2 條的話，就要在 1 號線和 4 號線都有停的站換車。1 號線停甲、乙、丙、丁，4 號線停辛、壬、癸，沒有共同的站，所以 2 條不夠。",
+          "所以至少要 3 條。",
+          "3 條做得到：搭 1 號線到乙站換 3 號線，坐到辛站換 4 號線到癸站（也可以 1 號線到丙站換 5 號線，到壬站換 4 號線）。",
+          "最少要搭 3 條路線。"
+        ],
+        "zh-Hans": [
+          "甲站只有 1 号线停，癸站只有 4 号线停，所以 1 号线和 4 号线一定都要坐。",
+          "只坐 2 条的话，就要在 1 号线和 4 号线都有停的站换车。1 号线停甲、乙、丙、丁，4 号线停辛、壬、癸，没有共同的站，所以 2 条不够。",
+          "所以至少要 3 条。",
+          "3 条做得到：坐 1 号线到乙站换 3 号线，坐到辛站换 4 号线到癸站（也可以 1 号线到丙站换 5 号线，到壬站换 4 号线）。",
+          "最少要坐 3 条线路。"
+        ],
+        "en": [
+          "Station A is served only by Line 1 and station J only by Line 4, so Lines 1 and 4 must both be ridden.",
+          "With only 2 lines, An would change directly between Line 1 and Line 4 at a shared station. Line 1 stops at A, B, C, D and Line 4 at H, I, J; they share no station, so 2 lines are not enough.",
+          "So at least 3 lines are needed.",
+          "3 lines work: Line 1 to B, change to Line 3, ride to H, change to Line 4 to J (or Line 1 to C, Line 5 to I, then Line 4).",
+          "The fewest number of lines is 3."
+        ],
+        "ja": [
+          "A駅に とまるのは 1ごう線 だけ、J駅に とまるのは 4ごう線 だけ なので、1ごう線と 4ごう線には かならず のります。",
+          "2ろせん だけなら 1ごう線と 4ごう線が どちらも とまる 駅で のりかえる ことに なりますが、1ごう線は A・B・C・D、4ごう線は H・I・J で おなじ 駅が ないので、2ろせんでは たりません。",
+          "だから 少なくとも 3ろせん です。",
+          "3ろせんで 行けます：1ごう線で B駅、3ごう線に のりかえて H駅、4ごう線に のりかえて J駅（1ごう線で C駅、5ごう線で I駅、4ごう線 でも よい）。",
+          "いちばん 少なくて 3ろせん です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "3"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade4-foundation",
+        "notes": "路線圖上的最少換乘（下界論證加構造），答案以 BFS 驗證。掃過「航線|轉機|轉車|直達|捷運」「路線」「道路|修路|連通」；讀過 logic_grade10_foundation_049（捷運地面站與地下站的路徑奇偶）、logic_grade7_foundation_040（連通最少道路）、arithmetic_grade4_foundation_087（車票種類）、arithmetic_grade1_foundation_029（路線乘法原理）。"
+      }
     }
   ]
 }
