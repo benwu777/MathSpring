@@ -58,7 +58,8 @@ void main() {
     expect(tableNames, contains('favorite_question_collection_memberships'));
   });
 
-  test('favorites use one all-favorites default and preserve questions when a custom collection is deleted',
+  test(
+      'favorites use one all-favorites default and preserve questions when a custom collection is deleted',
       () async {
     final FavoriteQuestionRepository repository =
         FavoriteQuestionRepository(database);
@@ -118,6 +119,48 @@ void main() {
     expect(favorites, hasLength(1));
     expect(favorites.single.note, '和家人一起討論');
     expect(favorites.single.tags, <String>['數學', '討論']);
+  });
+
+  test('favorite collection assignments can be replaced together', () async {
+    final AppServices services = AppServices(
+      database: database,
+      favoriteQuestionRepository: FavoriteQuestionRepository(database),
+    );
+    const String learnerId = 'learner_allen';
+    const String questionId = 'number_grade3_foundation_001';
+    await services.toggleFavoriteQuestion(
+      learnerId: learnerId,
+      questionId: questionId,
+    );
+    final FavoriteQuestionCollection discuss =
+        (await services.createFavoriteCollection(
+      learnerId: learnerId,
+      name: '討論',
+    ))!;
+    final FavoriteQuestionCollection review =
+        (await services.createFavoriteCollection(
+      learnerId: learnerId,
+      name: '複習',
+    ))!;
+
+    await services.setFavoriteQuestionCollections(
+      learnerId: learnerId,
+      questionId: questionId,
+      collectionIds: <String>[discuss.id, review.id],
+    );
+    await services.setFavoriteQuestionCollections(
+      learnerId: learnerId,
+      questionId: questionId,
+      collectionIds: <String>[review.id],
+    );
+
+    expect(
+      await services.getFavoriteQuestionCollectionIds(
+        learnerId: learnerId,
+        questionId: questionId,
+      ),
+      <String>{review.id},
+    );
   });
 
   test('upgrades a partially migrated version 4 profile database', () async {

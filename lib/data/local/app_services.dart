@@ -55,6 +55,8 @@ class AppServices {
   final List<FavoriteQuestion> _inMemoryFavorites = <FavoriteQuestion>[];
   final List<FavoriteQuestionCollection> _inMemoryFavoriteCollections =
       <FavoriteQuestionCollection>[];
+  final Map<String, Set<String>> _inMemoryFavoriteCollectionMemberships =
+      <String, Set<String>>{};
   String? currentLearnerId;
 
   factory AppServices.forTesting({
@@ -171,6 +173,10 @@ class AppServices {
               item.learnerId == learnerId && item.questionId == questionId);
       if (existingIndex >= 0) {
         _inMemoryFavorites.removeAt(existingIndex);
+        for (final Set<String> questionIds
+            in _inMemoryFavoriteCollectionMemberships.values) {
+          questionIds.remove(questionId);
+        }
         return false;
       }
       final String now = DateTime.now().toUtc().toIso8601String();
@@ -189,9 +195,10 @@ class AppServices {
       questionId: questionId,
     );
     if (existing != null) {
-      await database!.delete('favorite_questions',
-          where: 'learner_id = ? AND question_id = ?',
-          whereArgs: <Object?>[learnerId, questionId]);
+      await repository.deleteFavorite(
+        learnerId: learnerId,
+        questionId: questionId,
+      );
       return false;
     }
     final String now = DateTime.now().toUtc().toIso8601String();
@@ -262,13 +269,81 @@ class AppServices {
     required String collectionId,
   }) async {
     final FavoriteQuestionRepository? repository = favoriteQuestionRepository;
-    if (repository == null || collectionId == 'favorites_all_$learnerId') {
+    if (collectionId == 'favorites_all_$learnerId') {
       return getFavoriteQuestions(learnerId);
+    }
+    if (repository == null) {
+      final Set<String> questionIds =
+          _inMemoryFavoriteCollectionMemberships[collectionId] ??
+              const <String>{};
+      return (await getFavoriteQuestions(learnerId))
+          .where((FavoriteQuestion favorite) =>
+              questionIds.contains(favorite.questionId))
+          .toList();
     }
     return repository.fetchFavoritesInCollection(
       learnerId: learnerId,
       collectionId: collectionId,
     );
+  }
+
+  Future<Set<String>> getFavoriteQuestionCollectionIds({
+    required String learnerId,
+    required String questionId,
+  }) async {
+    final FavoriteQuestionRepository? repository = favoriteQuestionRepository;
+    if (repository != null) {
+      return repository.fetchCollectionIdsForFavorite(
+        learnerId: learnerId,
+        questionId: questionId,
+      );
+    }
+    return Set<String>.from(
+      _inMemoryFavoriteCollectionMemberships.entries
+          .where((MapEntry<String, Set<String>> entry) =>
+              entry.value.contains(questionId))
+          .map((MapEntry<String, Set<String>> entry) => entry.key),
+    );
+  }
+
+  Future<void> setFavoriteQuestionCollections({
+    required String learnerId,
+    required String questionId,
+    required Iterable<String> collectionIds,
+  }) async {
+    final String allFavoritesId = 'favorites_all_$learnerId';
+    final Set<String> selectedIds =
+        collectionIds.where((String id) => id != allFavoritesId).toSet();
+    final Set<String> existingIds = await getFavoriteQuestionCollectionIds(
+      learnerId: learnerId,
+      questionId: questionId,
+    );
+    final FavoriteQuestionRepository? repository = favoriteQuestionRepository;
+    for (final String collectionId in existingIds.difference(selectedIds)) {
+      if (repository != null) {
+        await repository.removeFromCollection(
+          learnerId: learnerId,
+          questionId: questionId,
+          collectionId: collectionId,
+        );
+      } else {
+        _inMemoryFavoriteCollectionMemberships[collectionId]
+            ?.remove(questionId);
+      }
+    }
+    for (final String collectionId in selectedIds.difference(existingIds)) {
+      if (repository != null) {
+        await repository.addToCollection(
+          learnerId: learnerId,
+          questionId: questionId,
+          collectionId: collectionId,
+        );
+      } else {
+        _inMemoryFavoriteCollectionMemberships
+            .putIfAbsent(collectionId, () => <String>{})
+            .add(questionId);
+      }
+    }
   }
 
   Future<FavoriteQuestionCollection?> createFavoriteCollection({

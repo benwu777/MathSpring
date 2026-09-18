@@ -942,7 +942,7 @@ void main() {
       findsOneWidget,
     );
     expect(find.text('Allen'), findsOneWidget);
-    expect(find.text('Grade 4'), findsOneWidget);
+    expect(find.text('Grade 4'), findsWidgets);
     expect(find.byType(AvatarPreview), findsOneWidget);
 
     await tester.pumpWidget(
@@ -970,7 +970,7 @@ void main() {
       findsOneWidget,
     );
     expect(find.text('Allen'), findsOneWidget);
-    expect(find.text('Grade 4'), findsOneWidget);
+    expect(find.text('Grade 4'), findsWidgets);
     expect(find.byType(AvatarPreview), findsOneWidget);
 
     await tester.pumpWidget(

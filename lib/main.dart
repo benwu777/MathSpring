@@ -2969,6 +2969,78 @@ class _FavoritesPageState extends State<FavoritesPage> {
     if (mounted) setState(_reload);
   }
 
+  Future<void> _editFavoriteCollections({
+    required FavoriteQuestion favorite,
+    required List<FavoriteQuestionCollection> collections,
+    required AppStrings strings,
+  }) async {
+    final String? learnerId = widget.services.currentLearnerId;
+    if (learnerId == null) return;
+    final List<FavoriteQuestionCollection> customCollections = collections
+        .where((FavoriteQuestionCollection collection) => !collection.isDefault)
+        .toList();
+    if (customCollections.isEmpty) {
+      await _addCollection(strings);
+      return;
+    }
+    final Set<String> initialIds =
+        await widget.services.getFavoriteQuestionCollectionIds(
+      learnerId: learnerId,
+      questionId: favorite.questionId,
+    );
+    if (!mounted) return;
+    final Set<String>? selectedIds = await showDialog<Set<String>>(
+      context: context,
+      builder: (BuildContext dialogContext) {
+        final Set<String> selected = Set<String>.from(initialIds);
+        return StatefulBuilder(
+          builder: (BuildContext context, StateSetter setDialogState) =>
+              AlertDialog(
+            title: Text(strings.organizeFavorite),
+            content: SizedBox(
+              width: double.maxFinite,
+              child: ListView(
+                shrinkWrap: true,
+                children: customCollections
+                    .map((FavoriteQuestionCollection collection) =>
+                        CheckboxListTile(
+                          value: selected.contains(collection.id),
+                          title: Text(collection.name),
+                          contentPadding: EdgeInsets.zero,
+                          onChanged: (bool? value) => setDialogState(() {
+                            if (value ?? false) {
+                              selected.add(collection.id);
+                            } else {
+                              selected.remove(collection.id);
+                            }
+                          }),
+                        ))
+                    .toList(),
+              ),
+            ),
+            actions: <Widget>[
+              TextButton(
+                onPressed: () => Navigator.pop(dialogContext),
+                child: Text(strings.cancelLabel),
+              ),
+              FilledButton(
+                onPressed: () => Navigator.pop(dialogContext, selected),
+                child: Text(strings.saveLabel),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+    if (selectedIds == null) return;
+    await widget.services.setFavoriteQuestionCollections(
+      learnerId: learnerId,
+      questionId: favorite.questionId,
+      collectionIds: selectedIds,
+    );
+    if (mounted) setState(_reload);
+  }
+
   @override
   Widget build(BuildContext context) {
     final AppStrings strings = AppStrings.of(context);
@@ -3022,16 +3094,22 @@ class _FavoritesPageState extends State<FavoritesPage> {
               if (data.favorites.isEmpty)
                 _FavoriteEmptyState(message: strings.favoritesEmpty)
               else
-                ...data.favorites
-                    .map((FavoriteQuestion favorite) => _FavoriteQuestionCard(
+                ...data.favorites.map((FavoriteQuestion favorite) => Padding(
+                      padding: const EdgeInsets.only(bottom: 12),
+                      child: _FavoriteQuestionCard(
+                        favorite: favorite,
+                        question: data.questionsById[favorite.questionId],
+                        onOrganize: () => _editFavoriteCollections(
                           favorite: favorite,
-                          question: data.questionsById[favorite.questionId],
-                          onOpen:
-                              data.questionsById[favorite.questionId] == null
-                                  ? null
-                                  : () => _openQuestion(
-                                      data.questionsById[favorite.questionId]!),
-                        )),
+                          collections: collections,
+                          strings: strings,
+                        ),
+                        onOpen: data.questionsById[favorite.questionId] == null
+                            ? null
+                            : () => _openQuestion(
+                                data.questionsById[favorite.questionId]!),
+                      ),
+                    )),
             ],
           );
         },
@@ -3100,22 +3178,34 @@ class _FavoriteQuestionCard extends StatelessWidget {
     required this.favorite,
     required this.question,
     required this.onOpen,
+    required this.onOrganize,
   });
 
   final FavoriteQuestion favorite;
   final Question? question;
   final VoidCallback? onOpen;
+  final VoidCallback onOrganize;
 
   @override
   Widget build(BuildContext context) => Card(
         child: ListTile(
           onTap: onOpen,
           leading: const Icon(Icons.bookmark_rounded),
-          title: Text(question?.localizedPrompt(_localeCode(context)) ??
-              favorite.questionId),
+          title: Text(
+            question?.localizedPrompt(_localeCode(context)) ??
+                favorite.questionId,
+            maxLines: 3,
+            overflow: TextOverflow.ellipsis,
+          ),
           subtitle: Text(favorite.note.isEmpty
               ? favorite.tags.join(' · ')
               : favorite.note),
+          trailing: IconButton(
+            key: ValueKey<String>('organize_favorite_${favorite.questionId}'),
+            tooltip: AppStrings.of(context).organizeFavorite,
+            onPressed: onOrganize,
+            icon: const Icon(Icons.more_horiz_rounded),
+          ),
         ),
       );
 }
@@ -5583,6 +5673,12 @@ class AppStrings {
       );
   String get addCollection => _text(
       zhHant: '新增書籤', zhHans: '新增书签', en: 'Add collection', ja: 'コレクションを追加');
+  String get organizeFavorite => _text(
+        zhHant: '整理收藏',
+        zhHans: '整理收藏',
+        en: 'Organize favorite',
+        ja: 'お気に入りに分類',
+      );
   String get collectionName => _text(
       zhHant: '書籤名稱', zhHans: '书签名称', en: 'Collection name', ja: 'コレクション名');
   String get saveLabel =>

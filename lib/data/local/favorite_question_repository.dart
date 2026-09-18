@@ -137,6 +137,21 @@ class FavoriteQuestionRepository {
           },
           conflictAlgorithm: ConflictAlgorithm.ignore);
 
+  Future<Set<String>> fetchCollectionIdsForFavorite({
+    required String learnerId,
+    required String questionId,
+  }) async {
+    final List<Map<String, Object?>> rows = await _database.query(
+      'favorite_question_collection_memberships',
+      columns: <String>['collection_id'],
+      where: 'learner_id = ? AND question_id = ?',
+      whereArgs: <Object?>[learnerId, questionId],
+    );
+    return rows
+        .map((Map<String, Object?> row) => row['collection_id']! as String)
+        .toSet();
+  }
+
   Future<void> removeFromCollection({
     required String learnerId,
     required String questionId,
