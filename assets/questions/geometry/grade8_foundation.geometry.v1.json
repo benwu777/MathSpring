@@ -6284,6 +6284,578 @@
         "reference": "geometry-grade8-foundation",
         "notes": "題型出處：Wikipedia「Truncated icosahedron」條目（12 個正五邊形＋20 個正六邊形、每頂點 3 面相接、90 邊 60 頂點）與 Wikipedia「Double counting (proof technique)」條目的握手引理式論證。本題刻意不給尤拉公式，改要求學生自己用『皮革的角』做兩次計數。掃全庫 regex「足球／截角／正五邊形.{0,20}正六邊形」沒有命中任何多面體計數題；geometry_grade10_foundation_037 是直接套用尤拉公式求正二十面體邊數、geometry_grade12_foundation_038 只是把正十二面體的面／頂點／稜三個已知數字相加，都沒有兩次計數的推理環節。"
       }
+    },
+    {
+      "id": "geometry_grade8_foundation_061",
+      "reviewStatus": "ok",
+      "topic": "geometry",
+      "subtopic": "integer_right_triangle_fixed_leg",
+      "tags": [
+        "c:pythagoras",
+        "c:factor_multiple",
+        "m:enumeration"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade8",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一個直角三角形的三邊長都是正整數，其中一條股長 12。這樣的直角三角形一共有幾種？（全等的視為同一種）",
+        "zh-Hans": "一个直角三角形的三边长都是正整数，其中一条股长 12。这样的直角三角形一共有几种？（全等的视为同一种）",
+        "en": "A right triangle has all three side lengths positive integers, and one of its legs is 12. How many such right triangles are there? (Congruent triangles count as the same.)",
+        "ja": "3 辺の長さがすべて正の整数である直角三角形で、直角をはさむ辺の 1 つが 12 です。このような直角三角形は全部で何種類ありますか。（合同なものは同じとみなします。）"
+      },
+      "answer": {
+        "zh-Hant": "答案是 4。",
+        "zh-Hans": "答案是 4。",
+        "en": "The answer is 4.",
+        "ja": "答えは 4 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "設另一股是 b、斜邊是 c。畢氏定理：12² + b² = c²，所以 c² − b² = 144，也就是 (c − b)(c + b) = 144。",
+          "c − b 和 c + b 相加是 2c，是偶數，所以兩者同奇同偶；乘積 144 是偶數，所以兩者都是偶數，而且 c − b < c + b。",
+          "144 分成兩個偶數相乘（小的在前）：2 × 72、4 × 36、6 × 24、8 × 18（12 × 12 會得到 b = 0，不行）。",
+          "分別解出 (b, c) = (35, 37)、(16, 20)、(9, 15)、(5, 13)，共 4 種直角三角形。"
+        ],
+        "zh-Hans": [
+          "设另一股是 b、斜边是 c。勾股定理：12² + b² = c²，所以 c² − b² = 144，也就是 (c − b)(c + b) = 144。",
+          "c − b 和 c + b 相加是 2c，是偶数，所以两者同奇同偶；乘积 144 是偶数，所以两者都是偶数，而且 c − b < c + b。",
+          "144 分成两个偶数相乘（小的在前）：2 × 72、4 × 36、6 × 24、8 × 18（12 × 12 会得到 b = 0，不行）。",
+          "分别解出 (b, c) = (35, 37)、(16, 20)、(9, 15)、(5, 13)，共 4 种直角三角形。"
+        ],
+        "en": [
+          "Let the other leg be b and the hypotenuse c. By Pythagoras, 12² + b² = c², so c² − b² = 144, that is (c − b)(c + b) = 144.",
+          "c − b and c + b add up to 2c, an even number, so they are both odd or both even; their product 144 is even, so both are even, and c − b < c + b.",
+          "Write 144 as a product of two even numbers, smaller first: 2 × 72, 4 × 36, 6 × 24, 8 × 18 (12 × 12 would give b = 0, which is impossible).",
+          "These give (b, c) = (35, 37), (16, 20), (9, 15), (5, 13): 4 right triangles in all."
+        ],
+        "ja": [
+          "もう一方の辺を b、斜辺を c とすると、三平方の定理より 12² + b² = c² なので c² − b² = 144、つまり (c − b)(c + b) = 144。",
+          "c − b と c + b の和は 2c で偶数なので、両方奇数か両方偶数です。積 144 は偶数なので両方偶数で、c − b < c + b です。",
+          "144 を 2 つの偶数の積（小さい方が先）に分けると 2 × 72、4 × 36、6 × 24、8 × 18 です（12 × 12 は b = 0 になるので不可）。",
+          "それぞれ (b, c) = (35, 37)、(16, 20)、(9, 15)、(5, 13) となり、全部で 4 種類です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "4"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "geometry-grade8-foundation",
+        "notes": "題型：固定一股的整數邊直角三角形計數。掃過「一股|股長|直角三角形.*整數」，讀過 geometry_grade8_foundation_040（三邊為連續整數）、number_theory_grade11_foundation_015（周長 60 的整數直角三角形）、geometry_grade8_foundation_039（已知斜邊與一股）。本題用平方差分解＋奇偶性計數。"
+      }
+    },
+    {
+      "id": "geometry_grade8_foundation_062",
+      "reviewStatus": "ok",
+      "topic": "geometry",
+      "subtopic": "congruent_pairs_rectangle_diagonals",
+      "tags": [
+        "c:congruent",
+        "c:quadrilateral",
+        "m:enumeration"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade8",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "長方形 ABCD 的長和寬不相等，兩條對角線 AC 和 BD 交於點 O。圖中只畫了四條邊和兩條對角線。以 A、B、C、D、O 其中三點為頂點、而且三條邊都在這些線段上的三角形共有 8 個：△AOB、△BOC、△COD、△DOA、△ABC、△BCD、△CDA、△DAB。這 8 個三角形中，一共有幾對全等三角形？",
+        "zh-Hans": "长方形 ABCD 的长和宽不相等，两条对角线 AC 和 BD 交于点 O。图中只画了四条边和两条对角线。以 A、B、C、D、O 其中三点为顶点、而且三条边都在这些线段上的三角形共有 8 个：△AOB、△BOC、△COD、△DOA、△ABC、△BCD、△CDA、△DAB。这 8 个三角形中，一共有几对全等三角形？",
+        "en": "Rectangle ABCD has unequal length and width, and its diagonals AC and BD meet at O. Only the four sides and the two diagonals are drawn. There are 8 triangles whose vertices are three of A, B, C, D, O and whose sides lie on these segments: △AOB, △BOC, △COD, △DOA, △ABC, △BCD, △CDA, △DAB. How many pairs of congruent triangles are there among these 8?",
+        "ja": "長方形 ABCD は縦と横の長さが異なり、対角線 AC と BD は点 O で交わります。図には 4 本の辺と 2 本の対角線だけがかかれています。A、B、C、D、O のうち 3 点を頂点とし、3 辺がこれらの線分上にある三角形は △AOB、△BOC、△COD、△DOA、△ABC、△BCD、△CDA、△DAB の 8 個です。この 8 個の中に合同な三角形の組は全部で何組ありますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 8。",
+        "zh-Hans": "答案是 8。",
+        "en": "The answer is 8.",
+        "ja": "答えは 8 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "大三角形 △ABC、△BCD、△CDA、△DAB 都是直角三角形，兩股分別是長方形的長和寬，所以四個兩兩全等（SAS），共 4 × 3 ÷ 2 = 6 對。",
+          "長方形的對角線等長而且互相平分，所以 OA = OB = OC = OD。",
+          "△AOB 和 △COD：OA = OC、OB = OD、AB = CD，全等（SSS）；同理 △BOC 和 △DOA 全等。但 △AOB 和 △BOC 的第三邊是 AB 和 BC，長寬不相等，所以不全等。小三角形只有 2 對。",
+          "小三角形的面積是長方形的 1/4，大三角形是 1/2，大小之間不會全等。所以共有 6 + 2 = 8 對。"
+        ],
+        "zh-Hans": [
+          "大三角形 △ABC、△BCD、△CDA、△DAB 都是直角三角形，两股分别是长方形的长和宽，所以四个两两全等（SAS），共 4 × 3 ÷ 2 = 6 对。",
+          "长方形的对角线等长而且互相平分，所以 OA = OB = OC = OD。",
+          "△AOB 和 △COD：OA = OC、OB = OD、AB = CD，全等（SSS）；同理 △BOC 和 △DOA 全等。但 △AOB 和 △BOC 的第三边是 AB 和 BC，长宽不相等，所以不全等。小三角形只有 2 对。",
+          "小三角形的面积是长方形的 1/4，大三角形是 1/2，大小之间不会全等。所以共有 6 + 2 = 8 对。"
+        ],
+        "en": [
+          "The large triangles △ABC, △BCD, △CDA, △DAB are all right triangles whose legs are the length and width of the rectangle, so all four are congruent to each other (SAS), giving 4 × 3 ÷ 2 = 6 pairs.",
+          "The diagonals of a rectangle are equal and bisect each other, so OA = OB = OC = OD.",
+          "△AOB and △COD: OA = OC, OB = OD, AB = CD, so they are congruent (SSS); likewise △BOC and △DOA are congruent. But the third sides of △AOB and △BOC are AB and BC, which differ because the length and width differ, so those are not congruent. The small triangles give only 2 pairs.",
+          "Each small triangle has 1/4 of the rectangle's area and each large one has 1/2, so no small triangle is congruent to a large one. The total is 6 + 2 = 8 pairs."
+        ],
+        "ja": [
+          "大きい三角形 △ABC、△BCD、△CDA、△DAB はどれも直角三角形で、直角をはさむ辺が長方形の縦と横なので、4 つとも互いに合同（2 辺とその間の角）で、4 × 3 ÷ 2 = 6 組です。",
+          "長方形の対角線は長さが等しく互いに二等分するので OA = OB = OC = OD です。",
+          "△AOB と △COD は OA = OC、OB = OD、AB = CD なので合同（3 辺）、同様に △BOC と △DOA も合同です。しかし △AOB と △BOC の 3 つ目の辺は AB と BC で、縦と横が違うので合同ではありません。小さい三角形は 2 組だけです。",
+          "小さい三角形の面積は長方形の 1/4、大きい三角形は 1/2 なので、大小の間に合同はありません。合計 6 + 2 = 8 組です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "8"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "geometry-grade8-foundation",
+        "notes": "題型：長方形對角線所成三角形的全等對數，國中全等單元課本延伸題。掃過「全等」「對角線」，讀過 geometry_grade8_foundation_043（兩全等直角三角形拼長方形）、geometry_grade7_foundation_043。推理點是「長寬不等」使 △AOB 與 △BOC 不全等的陷阱，以及大小三角形面積不同的排除。"
+      }
+    },
+    {
+      "id": "geometry_grade8_foundation_063",
+      "reviewStatus": "ok",
+      "topic": "geometry",
+      "subtopic": "isosceles_equal_segments_sas_angle",
+      "tags": [
+        "c:congruent",
+        "c:angle",
+        "m:direct"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade8",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "三角形 ABC 中，AB = AC，∠BAC = 100°。點 D、E 都在邊 BC 上，由 B 往 C 依序是 B、D、E、C，而且 BD = CE。已知 ∠DAE = 40°，求 ∠BAD 是幾度。",
+        "zh-Hans": "三角形 ABC 中，AB = AC，∠BAC = 100°。点 D、E 都在边 BC 上，由 B 往 C 依序是 B、D、E、C，而且 BD = CE。已知 ∠DAE = 40°，求 ∠BAD 是几度。",
+        "en": "In triangle ABC, AB = AC and ∠BAC = 100°. Points D and E lie on side BC in the order B, D, E, C, with BD = CE. Given ∠DAE = 40°, find ∠BAD in degrees.",
+        "ja": "三角形 ABC で AB = AC、∠BAC = 100° です。点 D、E は辺 BC 上にあり、B から C へ B、D、E、C の順に並び、BD = CE です。∠DAE = 40° のとき、∠BAD は何度ですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 30。",
+        "zh-Hans": "答案是 30。",
+        "en": "The answer is 30.",
+        "ja": "答えは 30 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "AB = AC，所以 △ABC 是等腰三角形，兩底角相等：∠B = ∠C。",
+          "在 △ABD 和 △ACE 中：AB = AC、∠B = ∠C、BD = CE，所以 △ABD ≅ △ACE（SAS）。",
+          "對應角相等：∠BAD = ∠CAE。",
+          "∠BAD + ∠DAE + ∠EAC = ∠BAC = 100°，所以 2 × ∠BAD = 100° − 40° = 60°，∠BAD = 30°。"
+        ],
+        "zh-Hans": [
+          "AB = AC，所以 △ABC 是等腰三角形，两底角相等：∠B = ∠C。",
+          "在 △ABD 和 △ACE 中：AB = AC、∠B = ∠C、BD = CE，所以 △ABD ≅ △ACE（SAS）。",
+          "对应角相等：∠BAD = ∠CAE。",
+          "∠BAD + ∠DAE + ∠EAC = ∠BAC = 100°，所以 2 × ∠BAD = 100° − 40° = 60°，∠BAD = 30°。"
+        ],
+        "en": [
+          "AB = AC, so triangle ABC is isosceles and its base angles are equal: ∠B = ∠C.",
+          "In △ABD and △ACE: AB = AC, ∠B = ∠C and BD = CE, so △ABD ≅ △ACE (SAS).",
+          "Corresponding angles are equal: ∠BAD = ∠CAE.",
+          "∠BAD + ∠DAE + ∠EAC = ∠BAC = 100°, so 2 × ∠BAD = 100° − 40° = 60° and ∠BAD = 30°."
+        ],
+        "ja": [
+          "AB = AC なので △ABC は二等辺三角形で、底角が等しく ∠B = ∠C です。",
+          "△ABD と △ACE で AB = AC、∠B = ∠C、BD = CE なので △ABD ≡ △ACE（2 辺とその間の角）。",
+          "対応する角は等しいので ∠BAD = ∠CAE。",
+          "∠BAD + ∠DAE + ∠EAC = ∠BAC = 100° なので 2 × ∠BAD = 100° − 40° = 60°、∠BAD = 30°。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "30"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "geometry-grade8-foundation",
+        "notes": "題型：等腰三角形底邊上等長截取的 SAS 全等，國中全等證明課本題改成求角。掃過「全等」「AB = AC」「BD = CE」，讀過 geometry_grade7_foundation_004（等腰頂角平分線）、geometry_grade8_foundation_058（角平分線截等長 SAS）。本題的推理點是必須先證全等才能說 ∠BAD = ∠CAE。"
+      }
+    },
+    {
+      "id": "geometry_grade8_foundation_064",
+      "reviewStatus": "ok",
+      "topic": "geometry",
+      "subtopic": "triangle_vertex_from_side_midpoints",
+      "tags": [
+        "c:coordinate",
+        "c:triangle",
+        "m:reverse"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade8",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "三角形 ABC 中，邊 AB 的中點是 (1, 2)，邊 BC 的中點是 (3, 4)，邊 CA 的中點是 (5, 0)。求頂點 B 的 x 座標與 y 座標之和。",
+        "zh-Hans": "三角形 ABC 中，边 AB 的中点是 (1, 2)，边 BC 的中点是 (3, 4)，边 CA 的中点是 (5, 0)。求顶点 B 的 x 坐标与 y 坐标之和。",
+        "en": "In triangle ABC, the midpoint of side AB is (1, 2), the midpoint of side BC is (3, 4), and the midpoint of side CA is (5, 0). Find the sum of the x- and y-coordinates of vertex B.",
+        "ja": "三角形 ABC で、辺 AB の中点は (1, 2)、辺 BC の中点は (3, 4)、辺 CA の中点は (5, 0) です。頂点 B の x 座標と y 座標の和を求めなさい。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 5。",
+        "zh-Hans": "答案是 5。",
+        "en": "The answer is 5.",
+        "ja": "答えは 5 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "中點座標是兩端點座標的平均，所以兩端點的座標和是中點的 2 倍：A + B = (2, 4)、B + C = (6, 8)、C + A = (10, 0)（這裡把 x、y 分開各自相加）。",
+          "三式相加：2(A + B + C) = (18, 12)，所以 A + B + C = (9, 6)。",
+          "B = (A + B + C) − (C + A) = (9 − 10, 6 − 0) = (−1, 6)。",
+          "驗算：A = (3, −2)、C = (7, 2)，AB 中點 (1, 2)、BC 中點 (3, 4)、CA 中點 (5, 0) 都正確。B 的座標和是 −1 + 6 = 5。"
+        ],
+        "zh-Hans": [
+          "中点坐标是两端点坐标的平均，所以两端点的坐标和是中点的 2 倍：A + B = (2, 4)、B + C = (6, 8)、C + A = (10, 0)（这里把 x、y 分开各自相加）。",
+          "三式相加：2(A + B + C) = (18, 12)，所以 A + B + C = (9, 6)。",
+          "B = (A + B + C) − (C + A) = (9 − 10, 6 − 0) = (−1, 6)。",
+          "验算：A = (3, −2)、C = (7, 2)，AB 中点 (1, 2)、BC 中点 (3, 4)、CA 中点 (5, 0) 都正确。B 的坐标和是 −1 + 6 = 5。"
+        ],
+        "en": [
+          "A midpoint is the average of the two endpoints, so the endpoints' coordinates add up to twice the midpoint: A + B = (2, 4), B + C = (6, 8), C + A = (10, 0) (adding x and y separately).",
+          "Add all three: 2(A + B + C) = (18, 12), so A + B + C = (9, 6).",
+          "B = (A + B + C) − (C + A) = (9 − 10, 6 − 0) = (−1, 6).",
+          "Check: A = (3, −2) and C = (7, 2), and the midpoints of AB, BC, CA are (1, 2), (3, 4), (5, 0) as required. The coordinate sum of B is −1 + 6 = 5."
+        ],
+        "ja": [
+          "中点は両端の座標の平均なので、両端の座標の和は中点の 2 倍です：A + B = (2, 4)、B + C = (6, 8)、C + A = (10, 0)（x、y を別々に足す）。",
+          "3 式を足すと 2(A + B + C) = (18, 12) なので A + B + C = (9, 6)。",
+          "B = (A + B + C) − (C + A) = (9 − 10, 6 − 0) = (−1, 6)。",
+          "確かめ：A = (3, −2)、C = (7, 2) で、AB、BC、CA の中点は (1, 2)、(3, 4)、(5, 0) と一致します。B の座標の和は −1 + 6 = 5。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "5"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "geometry-grade8-foundation",
+        "notes": "題型：由三邊中點反推三角形頂點。掃過「中點」「座標」，讀過 geometry_grade5_foundation_034（由一端點與中點求另一端點）、geometry_grade9_foundation_016（兩點求中點）、geometry_grade12_foundation_025（中點三角形面積比）。本題三個中點互相牽連，要用「三式相加再相減」解出頂點。"
+      }
+    },
+    {
+      "id": "geometry_grade8_foundation_065",
+      "reviewStatus": "ok",
+      "topic": "geometry",
+      "subtopic": "cylinder_helix_shortest_path",
+      "tags": [
+        "c:pythagoras",
+        "c:solid",
+        "m:construction"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade8",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一根圓柱形柱子的底面周長是 12 公分，高是 7 公分。從柱子底部邊緣的一點 A 出發，用一條細線沿著側面剛好繞柱子 2 圈，到達 A 正上方、頂部邊緣的點 B。細線最短要多長（公分）？",
+        "zh-Hans": "一根圆柱形柱子的底面周长是 12 厘米，高是 7 厘米。从柱子底部边缘的一点 A 出发，用一条细线沿着侧面刚好绕柱子 2 圈，到达 A 正上方、顶部边缘的点 B。细线最短要多长（厘米）？",
+        "en": "A cylindrical post has base circumference 12 cm and height 7 cm. A thin string starts at point A on the bottom rim, winds around the side exactly 2 times, and ends at point B on the top rim directly above A. What is the shortest possible length of the string, in cm?",
+        "ja": "円柱形の柱の底面の周の長さは 12 cm、高さは 7 cm です。柱の下の縁の点 A から、細い糸を側面にそってちょうど 2 周巻きつけ、A の真上の上の縁の点 B まで届かせます。糸の長さは最短で何 cm ですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 25。",
+        "zh-Hans": "答案是 25。",
+        "en": "The answer is 25.",
+        "ja": "答えは 25 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "把側面沿著通過 A 的直線剪開攤平，得到一個寬 12、高 7 的長方形。繞 2 圈就把兩個這樣的長方形並排，成為寬 2 × 12 = 24、高 7 的長方形。",
+          "細線從這個大長方形的左下角走到右上角，兩點之間直線最短。",
+          "長度 = √(24² + 7²) = √(576 + 49) = √625 = 25 公分。"
+        ],
+        "zh-Hans": [
+          "把侧面沿着通过 A 的直线剪开摊平，得到一个宽 12、高 7 的长方形。绕 2 圈就把两个这样的长方形并排，成为宽 2 × 12 = 24、高 7 的长方形。",
+          "细线从这个大长方形的左下角走到右上角，两点之间直线最短。",
+          "长度 = √(24² + 7²) = √(576 + 49) = √625 = 25 厘米。"
+        ],
+        "en": [
+          "Cut the side along the vertical line through A and unroll it into a 12-by-7 rectangle. Winding twice corresponds to placing two such rectangles side by side, giving a rectangle 2 × 12 = 24 wide and 7 high.",
+          "The string goes from the bottom-left corner to the top-right corner of this large rectangle, and the shortest path is the straight line.",
+          "Length = √(24² + 7²) = √(576 + 49) = √625 = 25 cm."
+        ],
+        "ja": [
+          "側面を A を通る縦の線で切り開くと、横 12、縦 7 の長方形になります。2 周巻くことは、この長方形を 2 つ横に並べた、横 2 × 12 = 24、縦 7 の長方形を考えることにあたります。",
+          "糸はこの大きな長方形の左下の角から右上の角まで進み、最短は直線です。",
+          "長さ = √(24² + 7²) = √(576 + 49) = √625 = 25 cm。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "25"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "geometry-grade8-foundation",
+        "notes": "題型：圓柱側面纏繞最短路徑（展開＋畢氏定理）經典題。掃過「圓柱.*(繞|纏|螺旋)」「螞蟻」，讀過 geometry_grade9_foundation_044（長方體表面最短路徑）、geometry_grade8_foundation_053（長方體內最長細棒）。本題的推理點是「繞 2 圈」要並排兩個展開圖。"
+      }
+    },
+    {
+      "id": "geometry_grade8_foundation_066",
+      "reviewStatus": "ok",
+      "topic": "geometry",
+      "subtopic": "obtuse_triangle_area_thirty_degree_height",
+      "tags": [
+        "c:triangle",
+        "c:area",
+        "m:construction"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade8",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "三角形 ABC 中，AB = 10 公分、AC = 6 公分，∠BAC = 150°。求三角形 ABC 的面積（平方公分）。",
+        "zh-Hans": "三角形 ABC 中，AB = 10 厘米、AC = 6 厘米，∠BAC = 150°。求三角形 ABC 的面积（平方厘米）。",
+        "en": "In triangle ABC, AB = 10 cm, AC = 6 cm and ∠BAC = 150°. Find the area of triangle ABC in square centimetres.",
+        "ja": "三角形 ABC で AB = 10 cm、AC = 6 cm、∠BAC = 150° です。三角形 ABC の面積は何 cm² ですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 15。",
+        "zh-Hans": "答案是 15。",
+        "en": "The answer is 15.",
+        "ja": "答えは 15 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "以 AC 為底，需要 B 到直線 AC 的高。∠A 是鈍角，所以高的垂足落在三角形外面：把 CA 延長超過 A，從 B 作垂線，垂足是 H。",
+          "∠BAH 和 ∠BAC 合起來是一直線，所以 ∠BAH = 180° − 150° = 30°。",
+          "直角三角形 ABH 中，30° 角所對的邊是斜邊的一半（30°-60°-90° 三角形的邊長比 1 : √3 : 2），所以 BH = AB ÷ 2 = 5 公分。",
+          "面積 = AC × BH ÷ 2 = 6 × 5 ÷ 2 = 15 平方公分。"
+        ],
+        "zh-Hans": [
+          "以 AC 为底，需要 B 到直线 AC 的高。∠A 是钝角，所以高的垂足落在三角形外面：把 CA 延长超过 A，从 B 作垂线，垂足是 H。",
+          "∠BAH 和 ∠BAC 合起来是一直线，所以 ∠BAH = 180° − 150° = 30°。",
+          "直角三角形 ABH 中，30° 角所对的边是斜边的一半（30°-60°-90° 三角形的边长比 1 : √3 : 2），所以 BH = AB ÷ 2 = 5 厘米。",
+          "面积 = AC × BH ÷ 2 = 6 × 5 ÷ 2 = 15 平方厘米。"
+        ],
+        "en": [
+          "Take AC as the base; we need the height from B to line AC. Since ∠A is obtuse, the foot of this height lies outside the triangle: extend CA beyond A and drop a perpendicular from B, with foot H.",
+          "∠BAH and ∠BAC together form a straight angle, so ∠BAH = 180° − 150° = 30°.",
+          "In right triangle ABH, the side opposite the 30° angle is half the hypotenuse (a 30°-60°-90° triangle has sides in ratio 1 : √3 : 2), so BH = AB ÷ 2 = 5 cm.",
+          "Area = AC × BH ÷ 2 = 6 × 5 ÷ 2 = 15 square centimetres."
+        ],
+        "ja": [
+          "AC を底辺とすると、B から直線 AC への高さが必要です。∠A は鈍角なので垂線の足は三角形の外にあります。CA を A の先へ延ばし、B から垂線をひいて足を H とします。",
+          "∠BAH と ∠BAC を合わせると一直線なので ∠BAH = 180° − 150° = 30°。",
+          "直角三角形 ABH で、30° の角に向かい合う辺は斜辺の半分（30°-60°-90° の三角形の辺の比は 1 : √3 : 2）なので BH = AB ÷ 2 = 5 cm。",
+          "面積 = AC × BH ÷ 2 = 6 × 5 ÷ 2 = 15 cm²。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "15"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "geometry-grade8-foundation",
+        "notes": "題型：鈍角三角形作外部高，配合 30°-60°-90° 邊長比求面積，國中課本延伸題。掃過「150°|30°」「鈍角」，庫中 grade7–9 沒有用 30° 對邊一半求高的題；讀過 geometry_grade8_foundation_034（正三角形的高）、geometry_grade8_foundation_035（5-12-13 面積）。推理點是高落在形外、要延長邊並用補角。"
+      }
+    },
+    {
+      "id": "geometry_grade8_foundation_067",
+      "reviewStatus": "ok",
+      "topic": "geometry",
+      "subtopic": "parallelogram_angle_bisector_isosceles",
+      "tags": [
+        "c:quadrilateral",
+        "c:triangle",
+        "m:direct"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade8",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "平行四邊形 ABCD 的頂點依序排列，AB = 6 公分、AD = 10 公分。∠DAB 的角平分線和邊 BC 交於點 E。求 EC 的長度（公分）。",
+        "zh-Hans": "平行四边形 ABCD 的顶点依序排列，AB = 6 厘米、AD = 10 厘米。∠DAB 的角平分线和边 BC 交于点 E。求 EC 的长度（厘米）。",
+        "en": "Parallelogram ABCD (vertices in order) has AB = 6 cm and AD = 10 cm. The bisector of ∠DAB meets side BC at E. Find the length of EC in cm.",
+        "ja": "平行四辺形 ABCD（頂点は順番に並ぶ）で AB = 6 cm、AD = 10 cm です。∠DAB の二等分線が辺 BC と点 E で交わります。EC の長さは何 cm ですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 4。",
+        "zh-Hans": "答案是 4。",
+        "en": "The answer is 4.",
+        "ja": "答えは 4 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "AD ∥ BC，AE 是截線，所以內錯角相等：∠DAE = ∠AEB。",
+          "AE 平分 ∠DAB，所以 ∠DAE = ∠BAE。合起來得 ∠BAE = ∠AEB。",
+          "△ABE 有兩個角相等，是等腰三角形，所以 BE = AB = 6 公分。",
+          "平行四邊形對邊相等，BC = AD = 10 公分，所以 EC = 10 − 6 = 4 公分。"
+        ],
+        "zh-Hans": [
+          "AD ∥ BC，AE 是截线，所以内错角相等：∠DAE = ∠AEB。",
+          "AE 平分 ∠DAB，所以 ∠DAE = ∠BAE。合起来得 ∠BAE = ∠AEB。",
+          "△ABE 有两个角相等，是等腰三角形，所以 BE = AB = 6 厘米。",
+          "平行四边形对边相等，BC = AD = 10 厘米，所以 EC = 10 − 6 = 4 厘米。"
+        ],
+        "en": [
+          "AD ∥ BC and AE is a transversal, so the alternate angles are equal: ∠DAE = ∠AEB.",
+          "AE bisects ∠DAB, so ∠DAE = ∠BAE. Together, ∠BAE = ∠AEB.",
+          "Triangle ABE has two equal angles, so it is isosceles and BE = AB = 6 cm.",
+          "Opposite sides of a parallelogram are equal, so BC = AD = 10 cm and EC = 10 − 6 = 4 cm."
+        ],
+        "ja": [
+          "AD ∥ BC で AE は交わる直線なので、錯角が等しく ∠DAE = ∠AEB。",
+          "AE は ∠DAB を二等分するので ∠DAE = ∠BAE。合わせて ∠BAE = ∠AEB。",
+          "△ABE は 2 つの角が等しいので二等辺三角形で、BE = AB = 6 cm。",
+          "平行四辺形の対辺は等しいので BC = AD = 10 cm、EC = 10 − 6 = 4 cm。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "4"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "geometry-grade8-foundation",
+        "notes": "題型：平行四邊形中角平分線截出等腰三角形，國中平行四邊形單元經典題。掃過「平行四邊形.*平分|平分線.*平行四邊形」全庫無此型；讀過 geometry_grade7_foundation_018（平行四邊形周長）、geometry_grade7_foundation_052（角平分線上的點）。推理點是內錯角＋平分得到等角對等邊。"
+      }
+    },
+    {
+      "id": "geometry_grade8_foundation_068",
+      "reviewStatus": "ok",
+      "topic": "geometry",
+      "subtopic": "square_perpendicular_segments_congruence",
+      "tags": [
+        "c:congruent",
+        "c:pythagoras",
+        "m:direct"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade8",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "正方形 ABCD 的邊長是 12 公分，頂點依序排列。點 E 在邊 BC 上，BE = 5 公分；點 F 在邊 CD 上，而且線段 AE 和線段 BF 互相垂直。求 BF 的長度（公分）。",
+        "zh-Hans": "正方形 ABCD 的边长是 12 厘米，顶点依序排列。点 E 在边 BC 上，BE = 5 厘米；点 F 在边 CD 上，而且线段 AE 和线段 BF 互相垂直。求 BF 的长度（厘米）。",
+        "en": "Square ABCD (vertices in order) has side 12 cm. Point E lies on side BC with BE = 5 cm, and point F lies on side CD such that segments AE and BF are perpendicular. Find the length of BF in cm.",
+        "ja": "正方形 ABCD（頂点は順番に並ぶ）の 1 辺は 12 cm です。点 E は辺 BC 上で BE = 5 cm、点 F は辺 CD 上にあり、線分 AE と線分 BF は垂直です。BF の長さは何 cm ですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 13。",
+        "zh-Hans": "答案是 13。",
+        "en": "The answer is 13.",
+        "ja": "答えは 13 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "設 AE 和 BF 交於 G。在直角三角形 ABE 中，∠BAE + ∠AEB = 90°。",
+          "AE ⟂ BF，所以在 △BGE 中 ∠GBE + ∠BEG = 90°，也就是 ∠CBF + ∠AEB = 90°。比較兩式得 ∠CBF = ∠BAE。",
+          "△ABE 和 △BCF 中：∠ABE = ∠BCF = 90°、AB = BC、∠BAE = ∠CBF，所以 △ABE ≅ △BCF（ASA），得 BF = AE。",
+          "AE = √(12² + 5²) = √169 = 13，所以 BF = 13 公分。"
+        ],
+        "zh-Hans": [
+          "设 AE 和 BF 交于 G。在直角三角形 ABE 中，∠BAE + ∠AEB = 90°。",
+          "AE ⟂ BF，所以在 △BGE 中 ∠GBE + ∠BEG = 90°，也就是 ∠CBF + ∠AEB = 90°。比较两式得 ∠CBF = ∠BAE。",
+          "△ABE 和 △BCF 中：∠ABE = ∠BCF = 90°、AB = BC、∠BAE = ∠CBF，所以 △ABE ≅ △BCF（ASA），得 BF = AE。",
+          "AE = √(12² + 5²) = √169 = 13，所以 BF = 13 厘米。"
+        ],
+        "en": [
+          "Let AE and BF meet at G. In right triangle ABE, ∠BAE + ∠AEB = 90°.",
+          "Since AE ⟂ BF, in triangle BGE we have ∠GBE + ∠BEG = 90°, that is ∠CBF + ∠AEB = 90°. Comparing the two gives ∠CBF = ∠BAE.",
+          "In △ABE and △BCF: ∠ABE = ∠BCF = 90°, AB = BC and ∠BAE = ∠CBF, so △ABE ≅ △BCF (ASA), which gives BF = AE.",
+          "AE = √(12² + 5²) = √169 = 13, so BF = 13 cm."
+        ],
+        "ja": [
+          "AE と BF の交点を G とします。直角三角形 ABE で ∠BAE + ∠AEB = 90°。",
+          "AE ⟂ BF なので △BGE で ∠GBE + ∠BEG = 90°、つまり ∠CBF + ∠AEB = 90°。2 式を比べて ∠CBF = ∠BAE。",
+          "△ABE と △BCF で ∠ABE = ∠BCF = 90°、AB = BC、∠BAE = ∠CBF なので △ABE ≡ △BCF（1 辺とその両端の角）、よって BF = AE。",
+          "AE = √(12² + 5²) = √169 = 13 なので BF = 13 cm。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "13"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "geometry-grade8-foundation",
+        "notes": "題型：正方形內互相垂直的兩線段等長（全等證明）經典題。掃過「正方形.*垂直|⟂」，讀過 geometry_grade8_foundation_054（正方形半角旋轉）、geometry_grade8_foundation_048（兩正方形旋轉重疊）。本題要自己找出等角再用 ASA 全等。"
+      }
     }
   ]
 }
