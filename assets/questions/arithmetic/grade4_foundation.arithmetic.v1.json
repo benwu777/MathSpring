@@ -8918,6 +8918,518 @@
         "reference": "arithmetic-grade4-foundation",
         "notes": "外部題型來源：Math Kangaroo 與教材常見的「數字卡加小數點，排出最接近某數的小數」型。全庫用 最接近 掃過只有 6 筆，最接近的是 mixed_grade5_001（用 1、3、5、7 排兩個兩位數使和最接近 100），那題求的是兩數之和且沒有小數點位置的選擇；arithmetic_grade4_025、arithmetic_grade3_018 是數字卡排極值的整數題。本題的推理點是小數點位置分兩類、先整批排除十位數的一類。"
       }
+    },
+    {
+      "id": "arithmetic_grade4_foundation_122",
+      "reviewStatus": "ok",
+      "topic": "arithmetic",
+      "subtopic": "fast_clock_shows_correct_again",
+      "tags": [
+        "c:modular",
+        "c:mul_div",
+        "m:unit_analysis"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade4",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "小華有一個指針式的時鐘（鐘面只有 1 到 12），它每天都固定快 5 分鐘。某天中午 12 點整，他把時鐘調到正確的時間，之後就再也沒有調過。從那天起至少要再過幾天，這個時鐘的指針才會再一次指出正確的時間？",
+        "zh-Hans": "小华有一个指针式的时钟（钟面只有 1 到 12），它每天都固定快 5 分钟。某天中午 12 点整，他把时钟调到正确的时间，之后就再也没有调过。从那天起至少要再过几天，这个时钟的指针才会再一次指出正确的时间？",
+        "en": "Hua has a clock with hands (its face shows only 1 to 12) that gains exactly 5 minutes every day. One day at 12 noon he sets it to the correct time and never adjusts it again. At least how many days later will the hands show the correct time again?",
+        "ja": "ホアははりのある時計（文字ばんは 1 から 12 まで）を持っていて、この時計は毎日 5 分ずつ進みます。ある日の正午 12 時ちょうどに正しい時こくに合わせ、そのあと一度も合わせ直しませんでした。少なくとも何日後に、この時計のはりがふたたび正しい時こくを指しますか。"
+      },
+      "answer": {
+        "zh-Hant": "至少要再過 144 天。",
+        "zh-Hans": "至少要再过 144 天。",
+        "en": "At least 144 days later.",
+        "ja": "少なくとも 144 日後です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "時鐘快了幾分鐘，指針就會比正確時間往前跑那麼多。要讓指針「看起來」又指對，快出來的時間必須剛好讓指針多繞整整一圈。",
+          "指針式鐘面只有 12 個小時，時針和分針走完 12 小時就回到同一個位置，所以快出來的時間要剛好是 12 小時。",
+          "12 小時 = 12 × 60 = 720 分鐘。",
+          "每天快 5 分鐘，快到 720 分鐘要 720 ÷ 5 = 144 天。之前快的分鐘數都不到 720，指針都不對，所以至少要 144 天。"
+        ],
+        "zh-Hans": [
+          "时钟快了几分钟，指针就会比正确时间往前跑那么多。要让指针「看起来」又指对，快出来的时间必须刚好让指针多绕整整一圈。",
+          "指针式钟面只有 12 个小时，时针和分针走完 12 小时就回到同一个位置，所以快出来的时间要刚好是 12 小时。",
+          "12 小时 = 12 × 60 = 720 分钟。",
+          "每天快 5 分钟，快到 720 分钟要 720 ÷ 5 = 144 天。之前快的分钟数都不到 720，指针都不对，所以至少要 144 天。"
+        ],
+        "en": [
+          "The clock's hands run ahead by however many minutes it has gained. For the hands to look right again, the gain must make them go around exactly one extra full turn.",
+          "A clock face shows only 12 hours; after 12 hours the hour and minute hands are back in the same positions. So the total gain must be exactly 12 hours.",
+          "12 hours = 12 × 60 = 720 minutes.",
+          "Gaining 5 minutes a day, it takes 720 ÷ 5 = 144 days to gain 720 minutes. Before that the gain is less than 720 minutes and the hands are wrong, so at least 144 days are needed."
+        ],
+        "ja": [
+          "時計が何分進んでいるかだけ、はりは正しい時こくより先を指します。はりが「また正しく見える」には、進んだ分がはりをちょうど 1 周分よけいに回す必要があります。",
+          "はりの時計の文字ばんは 12 時間分しかなく、12 時間たつと短いはりも長いはりも同じ位置にもどります。だから進んだ時間の合計がちょうど 12 時間になればよいです。",
+          "12 時間 = 12 × 60 = 720 分です。",
+          "1 日に 5 分進むので、720 分進むには 720 ÷ 5 = 144 日かかります。それより前は 720 分に足りず正しくないので、少なくとも 144 日です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "144"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "arithmetic-grade4-foundation",
+        "notes": "「快鐘何時再次正確」的經典週期題，自編數值。掃「快.*分鐘|慢.*分鐘」「再次.*正確」：arithmetic_grade4_085（每小時快 2 分，6 小時後快多少）、fast_clock_gain 類只算快了多少；logic_grade8_020、geometry_grade5_056 是鏡中時鐘。本題要看出指針式鐘面以 12 小時為一個循環，快滿 720 分鐘才會「看起來」正確。"
+      }
+    },
+    {
+      "id": "arithmetic_grade4_foundation_123",
+      "reviewStatus": "ok",
+      "topic": "arithmetic",
+      "subtopic": "dog_running_back_and_forth_until_meeting",
+      "tags": [
+        "c:rate_speed",
+        "c:mul_div",
+        "m:unit_analysis"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade4",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "小安和小美相距 1800 公尺，兩人同時出發，面對面朝對方走去：小安每分鐘走 50 公尺，小美每分鐘走 40 公尺。小安的小狗和小安一起出發，以每分鐘 120 公尺的速度跑向小美，碰到小美就立刻轉頭跑回小安，碰到小安又立刻轉頭跑向小美……一直這樣來回跑，直到小安和小美相遇才停下。小狗一共跑了幾公尺？",
+        "zh-Hans": "小安和小美相距 1800 公尺，两人同时出发，面对面朝对方走去：小安每分钟走 50 公尺，小美每分钟走 40 公尺。小安的小狗和小安一起出发，以每分钟 120 公尺的速度跑向小美，碰到小美就立刻转头跑回小安，碰到小安又立刻转头跑向小美……一直这样来回跑，直到小安和小美相遇才停下。小狗一共跑了几公尺？",
+        "en": "An and Mei are 1800 m apart and start walking toward each other at the same time: An at 50 m per minute and Mei at 40 m per minute. An's dog starts with An and runs toward Mei at 120 m per minute; when it reaches Mei it immediately turns and runs back to An, then back to Mei again, and so on, until An and Mei meet. How many meters does the dog run in all?",
+        "ja": "アンとメイは 1800 m はなれていて、同時に向かい合って歩きはじめます。アンは 1 分間に 50 m、メイは 1 分間に 40 m 歩きます。アンの犬はアンといっしょに出発し、1 分間に 120 m の速さでメイのほうへ走り、メイに着くとすぐ向きをかえてアンのほうへ、アンに着くとまたメイのほうへ……と行ったり来たりして、アンとメイが出会ったところで止まります。犬は全部で何 m 走りましたか。"
+      },
+      "answer": {
+        "zh-Hant": "小狗一共跑了 2400 公尺。",
+        "zh-Hans": "小狗一共跑了 2400 公尺。",
+        "en": "The dog runs 2400 m in all.",
+        "ja": "犬は全部で 2400 m 走りました。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "如果一趟一趟去算小狗每次跑多遠，要算很多趟，而且越來越短，很麻煩。換個角度：小狗從頭到尾都沒停，只要知道牠跑了「多久」就好。",
+          "小狗跑的時間，剛好就是小安和小美從出發到相遇的時間。",
+          "兩人面對面走，每分鐘一共靠近 50 + 40 = 90 公尺，1800 公尺要 1800 ÷ 90 = 20 分鐘才相遇。",
+          "小狗跑了 20 分鐘，每分鐘 120 公尺，一共跑 120 × 20 = 2400 公尺。"
+        ],
+        "zh-Hans": [
+          "如果一趟一趟去算小狗每次跑多远，要算很多趟，而且越来越短，很麻烦。换个角度：小狗从头到尾都没停，只要知道它跑了「多久」就好。",
+          "小狗跑的时间，刚好就是小安和小美从出发到相遇的时间。",
+          "两人面对面走，每分钟一共靠近 50 + 40 = 90 公尺，1800 公尺要 1800 ÷ 90 = 20 分钟才相遇。",
+          "小狗跑了 20 分钟，每分钟 120 公尺，一共跑 120 × 20 = 2400 公尺。"
+        ],
+        "en": [
+          "Adding up each trip of the dog would take many steps, with trips getting shorter and shorter. Instead, notice that the dog never stops, so we only need to know how long it runs.",
+          "The dog runs for exactly the time it takes An and Mei to meet.",
+          "Walking toward each other they close the gap by 50 + 40 = 90 m each minute, so 1800 m takes 1800 ÷ 90 = 20 minutes.",
+          "The dog runs for 20 minutes at 120 m per minute, which is 120 × 20 = 2400 m."
+        ],
+        "ja": [
+          "犬が 1 回ごとに何 m 走るかを計算していくと、回数が多く、どんどん短くなってたいへんです。見方をかえると、犬はずっと止まらずに走っているので、「何分走ったか」がわかればよいのです。",
+          "犬が走った時間は、アンとメイが出発してから出会うまでの時間と同じです。",
+          "2 人は向かい合って歩くので、1 分間に 50 + 40 = 90 m ずつ近づき、1800 m では 1800 ÷ 90 = 20 分で出会います。",
+          "犬は 1 分間に 120 m で 20 分走るので、120 × 20 = 2400 m 走りました。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "2400"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 4
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "arithmetic-grade4-foundation",
+        "notes": "「來回跑的狗」經典題改寫。掃「狗|來回跑」全庫只有排序與寵物配對題；相遇題 arithmetic_grade4_092（相距 1200 公尺相向而行求時間）只求相遇時間。本題在相遇時間之上加了一個看似要無窮加總的第三者，關鍵是改算「時間」。"
+      }
+    },
+    {
+      "id": "arithmetic_grade4_foundation_124",
+      "reviewStatus": "ok",
+      "topic": "arithmetic",
+      "subtopic": "ticket_queue_second_window_opens",
+      "tags": [
+        "c:work_rate",
+        "c:rate_speed",
+        "m:direct"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade4",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "電影院售票口開門時，已經有 60 人在排隊，之後每分鐘都會有 4 個人來排隊。一個售票窗口每分鐘可以賣票給 6 個人。一開始只開 1 個窗口，開門 10 分鐘後又加開 1 個同樣快的窗口。從開門算起，第幾分鐘結束時，排隊的人剛好全部買完票？",
+        "zh-Hans": "电影院售票口开门时，已经有 60 人在排队，之后每分钟都会有 4 个人来排队。一个售票窗口每分钟可以卖票给 6 个人。一开始只开 1 个窗口，开门 10 分钟后又加开 1 个同样快的窗口。从开门算起，第几分钟结束时，排队的人刚好全部买完票？",
+        "en": "When the cinema box office opens, 60 people are already in line, and after that 4 more people join the line every minute. One ticket window serves 6 people per minute. At first only 1 window is open; 10 minutes after opening, a second window that is just as fast opens. Counting from the opening, at the end of which minute has everyone in line just bought a ticket?",
+        "ja": "映画館のきっぷ売り場が開いたとき、すでに 60 人がならんでいて、そのあと毎分 4 人ずつ列にくわわります。窓口 1 つで 1 分間に 6 人にきっぷを売れます。はじめは窓口を 1 つだけ開け、開店から 10 分後に同じ速さの窓口をもう 1 つ開けました。開店から数えて何分目の終わりに、ならんでいる人がちょうど全員きっぷを買い終わりますか。"
+      },
+      "answer": {
+        "zh-Hant": "第 15 分鐘結束時全部買完。",
+        "zh-Hans": "第 15 分钟结束时全部买完。",
+        "en": "At the end of minute 15.",
+        "ja": "15 分目の終わりに全員買い終わります。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "前 10 分鐘只有 1 個窗口：每分鐘賣掉 6 人、又來 4 人，隊伍每分鐘只少 6 − 4 = 2 人。",
+          "10 分鐘後，隊伍剩 60 − 2 × 10 = 40 人。",
+          "開了 2 個窗口以後，每分鐘賣掉 6 × 2 = 12 人，還是每分鐘來 4 人，隊伍每分鐘少 12 − 4 = 8 人。",
+          "剩下的 40 人要 40 ÷ 8 = 5 分鐘才會清空。",
+          "所以是開門後第 10 + 5 = 15 分鐘結束時全部買完。只看 60 ÷ 6 = 10 分鐘，是忘了一直有新的人來排隊。"
+        ],
+        "zh-Hans": [
+          "前 10 分钟只有 1 个窗口：每分钟卖掉 6 人、又来 4 人，队伍每分钟只少 6 − 4 = 2 人。",
+          "10 分钟后，队伍剩 60 − 2 × 10 = 40 人。",
+          "开了 2 个窗口以后，每分钟卖掉 6 × 2 = 12 人，还是每分钟来 4 人，队伍每分钟少 12 − 4 = 8 人。",
+          "剩下的 40 人要 40 ÷ 8 = 5 分钟才会清空。",
+          "所以是开门后第 10 + 5 = 15 分钟结束时全部买完。只看 60 ÷ 6 = 10 分钟，是忘了一直有新的人来排队。"
+        ],
+        "en": [
+          "For the first 10 minutes there is 1 window: each minute 6 people are served and 4 arrive, so the line shrinks by only 6 − 4 = 2 people per minute.",
+          "After 10 minutes the line has 60 − 2 × 10 = 40 people.",
+          "With 2 windows, 6 × 2 = 12 people are served each minute while 4 still arrive, so the line shrinks by 12 − 4 = 8 per minute.",
+          "The remaining 40 people take 40 ÷ 8 = 5 minutes to clear.",
+          "So everyone has bought a ticket at the end of minute 10 + 5 = 15. Computing 60 ÷ 6 = 10 forgets that new people keep arriving."
+        ],
+        "ja": [
+          "はじめの 10 分は窓口が 1 つで、1 分間に 6 人売れて 4 人ふえるので、列は 1 分間に 6 − 4 = 2 人しかへりません。",
+          "10 分後、列は 60 − 2 × 10 = 40 人です。",
+          "窓口が 2 つになると 1 分間に 6 × 2 = 12 人売れ、4 人ふえるので、列は 1 分間に 12 − 4 = 8 人へります。",
+          "のこりの 40 人は 40 ÷ 8 = 5 分でいなくなります。",
+          "だから開店から 10 + 5 = 15 分目の終わりに全員買い終わります。60 ÷ 6 = 10 分とするのは、新しい人が来つづけることをわすれています。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "15"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "arithmetic-grade4-foundation",
+        "notes": "排隊與售票窗口（簡化版牛吃草），自編並以逐分鐘模擬確認。掃「窗口|牛.*草|吃草」：algebra_grade7_043 是完整牛吃草（要從兩組資料反推草的生長速度）；arithmetic_grade4_030、arithmetic_grade4_041 是進水出水同時進行。本題的新增點是中途加開窗口，要分兩段計算淨減少速度。"
+      }
+    },
+    {
+      "id": "arithmetic_grade4_foundation_125",
+      "reviewStatus": "ok",
+      "topic": "arithmetic",
+      "subtopic": "full_marks_needed_to_raise_average",
+      "tags": [
+        "c:mean",
+        "c:linear_eq",
+        "m:extremal"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade4",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "小美前 5 次數學小考的平均是 80 分。從第 6 次開始，她每一次都考 100 分。她至少還要再考幾次 100 分，全部小考的平均才會達到 90 分？",
+        "zh-Hans": "小美前 5 次数学小考的平均是 80 分。从第 6 次开始，她每一次都考 100 分。她至少还要再考几次 100 分，全部小考的平均才会达到 90 分？",
+        "en": "Mei's average on her first 5 math quizzes is 80. From the 6th quiz on she scores 100 every time. At least how many more quizzes with 100 does she need for her overall average to reach 90?",
+        "ja": "メイの算数の小テスト 5 回の平均は 80 点です。6 回目からは毎回 100 点をとります。全部の小テストの平均が 90 点になるには、少なくともあと何回 100 点をとればよいですか。"
+      },
+      "answer": {
+        "zh-Hant": "至少還要再考 5 次。",
+        "zh-Hans": "至少还要再考 5 次。",
+        "en": "She needs at least 5 more.",
+        "ja": "少なくともあと 5 回です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "把「和 90 分差多少」當成欠分或多出的分數來算。前 5 次每次平均比 90 少 10 分，一共少了 5 × 10 = 50 分。",
+          "之後每考一次 100 分，就比 90 多出 10 分，可以補回 10 分。",
+          "要把少的 50 分全部補回來，需要 50 ÷ 10 = 5 次 100 分。補回之前平均都還低於 90。",
+          "驗算：總分 5 × 80 + 5 × 100 = 400 + 500 = 900，考了 10 次，平均 900 ÷ 10 = 90 分；只考 4 次 100 分時是 800 ÷ 9，比 90 少。所以至少 5 次。"
+        ],
+        "zh-Hans": [
+          "把「和 90 分差多少」当成欠分或多出的分数来算。前 5 次每次平均比 90 少 10 分，一共少了 5 × 10 = 50 分。",
+          "之后每考一次 100 分，就比 90 多出 10 分，可以补回 10 分。",
+          "要把少的 50 分全部补回来，需要 50 ÷ 10 = 5 次 100 分。补回之前平均都还低于 90。",
+          "验算：总分 5 × 80 + 5 × 100 = 400 + 500 = 900，考了 10 次，平均 900 ÷ 10 = 90 分；只考 4 次 100 分时是 800 ÷ 9，比 90 少。所以至少 5 次。"
+        ],
+        "en": [
+          "Measure each quiz against 90. The first 5 quizzes average 10 below 90, so together they are 5 × 10 = 50 points short.",
+          "Each later 100 is 10 above 90, making up 10 points.",
+          "Making up the 50-point shortfall takes 50 ÷ 10 = 5 quizzes of 100. Before that the average is still below 90.",
+          "Check: total 5 × 80 + 5 × 100 = 900 over 10 quizzes gives average 90; with only 4 more it is 800 ÷ 9, less than 90. So at least 5."
+        ],
+        "ja": [
+          "90 点との差で考えます。はじめの 5 回は平均して 90 点より 10 点ずつ少ないので、合わせて 5 × 10 = 50 点足りません。",
+          "そのあと 100 点を 1 回とるごとに、90 点より 10 点多いので 10 点ずつ取りもどせます。",
+          "足りない 50 点を取りもどすには 50 ÷ 10 = 5 回の 100 点が必要です。それまでは平均は 90 点より低いままです。",
+          "たしかめ：合計 5 × 80 + 5 × 100 = 900 点、10 回で平均 90 点です。4 回だと 800 ÷ 9 で 90 点より低いので、少なくとも 5 回です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "5"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "arithmetic-grade4-foundation",
+        "notes": "「拉高平均需要幾次滿分」，以「與目標差」的補足法解，自編並以程式驗證。掃「滿分|平均.*(提高|拉高|達到)」全庫 0 筆；平均題 arithmetic_grade3_085（第四次 92 分後的平均）、average_after_one_more、arithmetic_grade4_072（拿掉一數後平均）都只加減一筆資料。本題新增的是「未知次數的相同分數」，要用差額補足。"
+      }
+    },
+    {
+      "id": "arithmetic_grade4_foundation_126",
+      "reviewStatus": "ok",
+      "topic": "arithmetic",
+      "subtopic": "successive_fraction_cuts_telescoping",
+      "tags": [
+        "c:fraction",
+        "c:mul_div",
+        "m:invariant"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade4",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一條緞帶長 60 公分。小美第 1 次剪掉全長的 2 分之 1；第 2 次剪掉剩下部分的 3 分之 1；第 3 次剪掉剩下部分的 4 分之 1；照這樣下去，每次剪掉「當時剩下部分」的幾分之 1，分母每次多 1，一直剪到第 11 次剪掉剩下部分的 12 分之 1 為止。最後緞帶還剩幾公分？",
+        "zh-Hans": "一条缎带长 60 公分。小美第 1 次剪掉全长的 2 分之 1；第 2 次剪掉剩下部分的 3 分之 1；第 3 次剪掉剩下部分的 4 分之 1；照这样下去，每次剪掉「当时剩下部分」的几分之 1，分母每次多 1，一直剪到第 11 次剪掉剩下部分的 12 分之 1 为止。最后缎带还剩几公分？",
+        "en": "A ribbon is 60 cm long. The 1st time, Mei cuts off 1/2 of the whole length; the 2nd time, 1/3 of what is left; the 3rd time, 1/4 of what is left; and so on, each time cutting off a fraction of what is then left, with the denominator going up by 1 each time, until the 11th cut removes 1/12 of what is left. How many centimeters of ribbon remain at the end?",
+        "ja": "長さ 60 cm のリボンがあります。メイは 1 回目に全体の 2 分の 1 を切り取り、2 回目にのこりの 3 分の 1、3 回目にのこりの 4 分の 1 を切り取ります。このように毎回「そのときののこり」の何分の 1 かを切り取り、分母は 1 ずつふえて、11 回目にのこりの 12 分の 1 を切り取ったところで終わります。さいごにリボンは何 cm のこりますか。"
+      },
+      "answer": {
+        "zh-Hant": "最後還剩 5 公分。",
+        "zh-Hans": "最后还剩 5 公分。",
+        "en": "5 cm remain.",
+        "ja": "5 cm のこります。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "換個角度看「剩下多少」：剪掉 2 分之 1，剩下 2 分之 1；剪掉剩下的 3 分之 1，剩下的變成原來的 3 分之 2；剪掉 4 分之 1，剩下 4 分之 3……剪掉 12 分之 1，剩下 12 分之 11。",
+          "所以最後剩下的是 60 × 1/2 × 2/3 × 3/4 × ⋯ × 11/12。",
+          "一步一步看：60 的一半是 30；30 的 3 分之 2 是 20；20 的 4 分之 3 是 15；15 的 5 分之 4 是 12；12 的 6 分之 5 是 10……每一次剩下的剛好是「60 ÷ 下一個分母」：30 = 60 ÷ 2、20 = 60 ÷ 3、15 = 60 ÷ 4、12 = 60 ÷ 5、10 = 60 ÷ 6。",
+          "原因是前一個分數的分母會和後一個分數的分子約掉（2 和 2、3 和 3……），只剩下最前面的分子 1 和最後面的分母 12。",
+          "所以最後剩下 60 ÷ 12 = 5 公分。"
+        ],
+        "zh-Hans": [
+          "换个角度看「剩下多少」：剪掉 2 分之 1，剩下 2 分之 1；剪掉剩下的 3 分之 1，剩下的变成原来的 3 分之 2；剪掉 4 分之 1，剩下 4 分之 3……剪掉 12 分之 1，剩下 12 分之 11。",
+          "所以最后剩下的是 60 × 1/2 × 2/3 × 3/4 × ⋯ × 11/12。",
+          "一步一步看：60 的一半是 30；30 的 3 分之 2 是 20；20 的 4 分之 3 是 15；15 的 5 分之 4 是 12；12 的 6 分之 5 是 10……每一次剩下的刚好是「60 ÷ 下一个分母」：30 = 60 ÷ 2、20 = 60 ÷ 3、15 = 60 ÷ 4、12 = 60 ÷ 5、10 = 60 ÷ 6。",
+          "原因是前一个分数的分母会和后一个分数的分子约掉（2 和 2、3 和 3……），只剩下最前面的分子 1 和最后面的分母 12。",
+          "所以最后剩下 60 ÷ 12 = 5 公分。"
+        ],
+        "en": [
+          "Look at what is left each time: cutting off 1/2 leaves 1/2; cutting off 1/3 of the rest leaves 2/3 of it; cutting off 1/4 leaves 3/4; ...; cutting off 1/12 leaves 11/12.",
+          "So the final length is 60 × 1/2 × 2/3 × 3/4 × ⋯ × 11/12.",
+          "Step by step: half of 60 is 30; 2/3 of 30 is 20; 3/4 of 20 is 15; 4/5 of 15 is 12; 5/6 of 12 is 10; ... Each time what is left is exactly \"60 ÷ the next denominator\": 30 = 60 ÷ 2, 20 = 60 ÷ 3, 15 = 60 ÷ 4, 12 = 60 ÷ 5, 10 = 60 ÷ 6.",
+          "The reason is that each denominator cancels with the next numerator (2 with 2, 3 with 3, ...), leaving only the first numerator 1 and the last denominator 12.",
+          "So 60 ÷ 12 = 5 cm remain."
+        ],
+        "ja": [
+          "「のこり」に注目します。2 分の 1 を切るとのこりは 2 分の 1、のこりの 3 分の 1 を切るとのこりの 3 分の 2、4 分の 1 を切ると 4 分の 3……12 分の 1 を切ると 12 分の 11 がのこります。",
+          "だからさいごの長さは 60 × 1/2 × 2/3 × 3/4 × ⋯ × 11/12 です。",
+          "1 回ずつ見ると、60 の半分は 30、30 の 3 分の 2 は 20、20 の 4 分の 3 は 15、15 の 5 分の 4 は 12、12 の 6 分の 5 は 10……で、のこりはいつも「60 ÷ つぎの分母」になっています（30 = 60 ÷ 2、20 = 60 ÷ 3、15 = 60 ÷ 4、12 = 60 ÷ 5、10 = 60 ÷ 6）。",
+          "前の分数の分母とつぎの分数の分子（2 と 2、3 と 3……）が約分で消え、さいしょの分子 1 とさいごの分母 12 だけがのこるからです。",
+          "だからさいごは 60 ÷ 12 = 5 cm のこります。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "5"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "arithmetic-grade4-foundation",
+        "notes": "連續剪掉「剩下的幾分之一」的相消（望遠鏡乘積），自編 11 次並以分數程式逐步計算確認 5 公分。掃「剩下的.*分之」：arithmetic_grade3_042（先花一半再花剩下的 1/3，逆推原有）、arithmetic_grade3_079（兩天看書）都只有兩步；本題有 11 步，必須看出分母分子一路約掉的規律。"
+      }
+    },
+    {
+      "id": "arithmetic_grade4_foundation_127",
+      "reviewStatus": "ok",
+      "topic": "arithmetic",
+      "subtopic": "mean_without_max_or_min_gives_range",
+      "tags": [
+        "c:mean",
+        "c:add_sub",
+        "m:invariant"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade4",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "有 5 個數。如果把其中最大的那一個拿掉，剩下 4 個數的平均是 10；如果改成把其中最小的那一個拿掉（最大的放回去），剩下 4 個數的平均是 12。這 5 個數之中，最大的數比最小的數大多少？",
+        "zh-Hans": "有 5 个数。如果把其中最大的那一个拿掉，剩下 4 个数的平均是 10；如果改成把其中最小的那一个拿掉（最大的放回去），剩下 4 个数的平均是 12。这 5 个数之中，最大的数比最小的数大多少？",
+        "en": "There are 5 numbers. If the largest one is removed, the remaining 4 numbers have an average of 10. If instead the smallest one is removed (with the largest put back), the remaining 4 have an average of 12. By how much is the largest of the 5 numbers greater than the smallest?",
+        "ja": "5 この数があります。いちばん大きい数を取りのぞくと、のこりの 4 この平均は 10 です。かわりにいちばん小さい数を取りのぞくと（いちばん大きい数はもどします）、のこりの 4 この平均は 12 です。5 この数のうち、いちばん大きい数はいちばん小さい数より何大きいですか。"
+      },
+      "answer": {
+        "zh-Hant": "最大的數比最小的數大 8。",
+        "zh-Hans": "最大的数比最小的数大 8。",
+        "en": "The largest is 8 more than the smallest.",
+        "ja": "いちばん大きい数はいちばん小さい数より 8 大きいです。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "平均 10 的 4 個數，和是 10 × 4 = 40：這是「5 個數的總和減去最大的數」。",
+          "平均 12 的 4 個數，和是 12 × 4 = 48：這是「5 個數的總和減去最小的數」。",
+          "兩個都是從同一個總和減掉一個數。減掉最小的剩 48，減掉最大的只剩 40，差了 48 − 40 = 8，這個差正好是最大的數比最小的數多出來的部分。",
+          "所以最大的數比最小的數大 8。例如 4、12、12、12、12 就符合：拿掉一個 12 平均 10，拿掉 4 平均 12。不需要知道每一個數是多少。"
+        ],
+        "zh-Hans": [
+          "平均 10 的 4 个数，和是 10 × 4 = 40：这是「5 个数的总和减去最大的数」。",
+          "平均 12 的 4 个数，和是 12 × 4 = 48：这是「5 个数的总和减去最小的数」。",
+          "两个都是从同一个总和减掉一个数。减掉最小的剩 48，减掉最大的只剩 40，差了 48 − 40 = 8，这个差正好是最大的数比最小的数多出来的部分。",
+          "所以最大的数比最小的数大 8。例如 4、12、12、12、12 就符合：拿掉一个 12 平均 10，拿掉 4 平均 12。不需要知道每一个数是多少。"
+        ],
+        "en": [
+          "Four numbers averaging 10 add up to 10 × 4 = 40: this is \"the total of all 5 minus the largest\".",
+          "Four numbers averaging 12 add up to 12 × 4 = 48: this is \"the total of all 5 minus the smallest\".",
+          "Both come from the same total with one number removed. Removing the smallest leaves 48, removing the largest leaves only 40; the difference 48 − 40 = 8 is exactly how much larger the largest is than the smallest.",
+          "So the largest is 8 more than the smallest. For example, 4, 12, 12, 12, 12 works: removing a 12 gives average 10, removing 4 gives average 12. We never need the individual numbers."
+        ],
+        "ja": [
+          "平均 10 の 4 この和は 10 × 4 = 40 で、これは「5 こ全部の和からいちばん大きい数を引いたもの」です。",
+          "平均 12 の 4 この和は 12 × 4 = 48 で、これは「5 こ全部の和からいちばん小さい数を引いたもの」です。",
+          "どちらも同じ合計から 1 こを引いています。いちばん小さい数を引くと 48、いちばん大きい数を引くと 40 なので、その差 48 − 40 = 8 が、いちばん大きい数といちばん小さい数の差です。",
+          "だから 8 大きいです。たとえば 4、12、12、12、12 なら、12 を 1 こ取ると平均 10、4 を取ると平均 12 になります。1 こ 1 この数がわからなくても答えが出ます。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "8"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "arithmetic-grade4-foundation",
+        "notes": "「去掉最大／最小」兩個平均求全距，自編。掃「去掉最|拿掉最」全庫 0 筆；平均題 arithmetic_grade4_072（5 個數平均 12，拿掉一個後平均 10，求拿掉的數）、arithmetic_grade3_094（去掉最高最低分）。本題有兩種拿法，要看出兩個和都來自同一個總和，相減直接得到最大減最小，不必求總和。"
+      }
+    },
+    {
+      "id": "arithmetic_grade4_foundation_128",
+      "reviewStatus": "ok",
+      "topic": "arithmetic",
+      "subtopic": "joint_painting_one_worker_rests",
+      "tags": [
+        "c:work_rate",
+        "c:linear_eq",
+        "m:reverse"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade4",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "小安和小美一起油漆 22 面一樣大的牆。小安每小時漆 3 面，小美每小時漆 2 面。兩人同時開工，中途小安休息了 1 小時（休息時不漆），小美從頭到尾都沒有休息，最後兩人剛好同時把 22 面牆漆完。從開工到漆完，一共花了幾小時？",
+        "zh-Hans": "小安和小美一起油漆 22 面一样大的墙。小安每小时漆 3 面，小美每小时漆 2 面。两人同时开工，中途小安休息了 1 小时（休息时不漆），小美从头到尾都没有休息，最后两人刚好同时把 22 面墙漆完。从开工到漆完，一共花了几小时？",
+        "en": "An and Mei together paint 22 walls of the same size. An paints 3 walls per hour and Mei paints 2 walls per hour. They start together; partway through An takes a 1-hour break (painting nothing), while Mei never stops, and all 22 walls are finished at the same moment. How many hours does the whole job take from start to finish?",
+        "ja": "アンとメイがいっしょに同じ大きさのかべ 22 まいにペンキをぬります。アンは 1 時間に 3 まい、メイは 1 時間に 2 まいぬります。2 人は同時に始め、とちゅうでアンだけが 1 時間休みました（休んでいる間はぬりません）。メイは一度も休まず、22 まいがちょうどぬり終わりました。始めてからぬり終わるまで何時間かかりましたか。"
+      },
+      "answer": {
+        "zh-Hant": "一共花了 5 小時。",
+        "zh-Hans": "一共花了 5 小时。",
+        "en": "The job takes 5 hours.",
+        "ja": "5 時間かかりました。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "假設小安也沒有休息，兩人每小時一共漆 3 + 2 = 5 面。",
+          "小安休息的那 1 小時少漆了 3 面，所以如果他沒休息，同樣的時間可以漆 22 + 3 = 25 面。",
+          "兩人都不休息時漆 25 面要 25 ÷ 5 = 5 小時，所以實際花的時間也是 5 小時。",
+          "驗算：小美漆了 2 × 5 = 10 面，小安只漆了 5 − 1 = 4 小時，漆 3 × 4 = 12 面，10 + 12 = 22 面，正確。"
+        ],
+        "zh-Hans": [
+          "假设小安也没有休息，两人每小时一共漆 3 + 2 = 5 面。",
+          "小安休息的那 1 小时少漆了 3 面，所以如果他没休息，同样的时间可以漆 22 + 3 = 25 面。",
+          "两人都不休息时漆 25 面要 25 ÷ 5 = 5 小时，所以实际花的时间也是 5 小时。",
+          "验算：小美漆了 2 × 5 = 10 面，小安只漆了 5 − 1 = 4 小时，漆 3 × 4 = 12 面，10 + 12 = 22 面，正确。"
+        ],
+        "en": [
+          "Suppose An had not rested; together they would paint 3 + 2 = 5 walls per hour.",
+          "During his 1-hour break An missed 3 walls, so without the break the same time would give 22 + 3 = 25 walls.",
+          "With no breaks, 25 walls take 25 ÷ 5 = 5 hours, so the actual time is also 5 hours.",
+          "Check: Mei paints 2 × 5 = 10 walls; An paints for 5 − 1 = 4 hours, 3 × 4 = 12 walls; 10 + 12 = 22. Correct."
+        ],
+        "ja": [
+          "アンも休まなかったとすると、2 人で 1 時間に 3 + 2 = 5 まいぬります。",
+          "アンが休んだ 1 時間で 3 まい少なくなったので、休まなければ同じ時間で 22 + 3 = 25 まいぬれたことになります。",
+          "2 人とも休まずに 25 まいぬるには 25 ÷ 5 = 5 時間かかるので、実際にかかった時間も 5 時間です。",
+          "たしかめ：メイは 2 × 5 = 10 まい、アンは 5 − 1 = 4 時間で 3 × 4 = 12 まい、10 + 12 = 22 まいで正しいです。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "5"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "arithmetic-grade4-foundation",
+        "notes": "合作中一人休息的工作量題，自編整數效率。掃「休息」：algebra_grade7_068（甲請假幾天，分數工作量）、arithmetic_grade1_071（扣掉休息時間）。grade4 的 work_rate 題是進出水管與配套生產。本題用「假設沒休息就多做 3 面」的補足法，把休息轉成工作量。"
+      }
     }
   ]
 }
