@@ -4550,6 +4550,154 @@
         "reference": "logic-grade11-weighted-average-paradox",
         "notes": "題型來自 Wikipedia「Simpson's paradox」條目的腎結石治療表（分組成功率高、整體反而低），權重分佈參考 2019 CEMC Fermat 第 12 題「兩段題數不同的加權百分比」。改寫成「求使反轉成立的最小整數」。全庫掃「加權／合併／各組平均」共 40 餘題，皆為單純合併平均（algebra_grade7_026、algebra_grade8_051）或合併變異數（algebra_grade12_058、logic_grade10_046），沒有任何一題出現分組與整體方向相反的悖論結構。"
       }
+    },
+    {
+      "id": "logic_grade11_foundation_050",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "binary_sampling_single_weighing_multiple_fake_bags",
+      "tags": [
+        "c:balance",
+        "c:number_base",
+        "m:construction"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade11",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "有 5 袋硬幣，編號 1 到 5，每袋都有很多枚。真幣每枚 10 公克，假幣每枚 9 公克；同一袋裡要嘛全是真幣、要嘛全是假幣，但不知道共有幾袋是假的（可能一袋都沒有，也可能好幾袋）。小明從第 1、2、3、4、5 袋分別取出 1、2、4、8、16 枚硬幣，全部一起放上電子秤只秤一次，讀數是 296 公克。求所有假幣袋的編號總和。",
+        "zh-Hans": "有 5 袋硬币，编号 1 到 5，每袋都有很多枚。真币每枚 10 克，假币每枚 9 克；同一袋里要么全是真币、要么全是假币，但不知道共有几袋是假的（可能一袋都没有，也可能好几袋）。小明从第 1、2、3、4、5 袋分别取出 1、2、4、8、16 枚硬币，全部一起放上电子秤只秤一次，读数是 296 克。求所有假币袋的编号总和。",
+        "en": "There are 5 bags of coins numbered 1 to 5, each with many coins. A genuine coin weighs 10 g and a fake coin weighs 9 g; each bag is either all genuine or all fake, but the number of fake bags is unknown (it could be none or several). Ming takes 1, 2, 4, 8 and 16 coins from bags 1, 2, 3, 4, 5 respectively and weighs them all together once on a digital scale, which reads 296 g. Find the sum of the numbers of all fake bags.",
+        "ja": "1 から 5 の番号がついた 5 袋の硬貨があり、どの袋にもたくさん入っています。本物は 1 枚 10 g、偽物は 1 枚 9 g で、各袋はすべて本物かすべて偽物のどちらかですが、偽物の袋が何袋あるかはわかりません（0 袋のことも、何袋もあることもあります）。ミンは 1、2、3、4、5 番の袋からそれぞれ 1、2、4、8、16 枚を取り出し、全部まとめて電子はかりで 1 回だけ量ったところ 296 g でした。偽物の袋の番号の和を求めてください。"
+      },
+      "answer": {
+        "zh-Hant": "假幣袋是第 2、3、4 袋，編號總和是 9。",
+        "zh-Hans": "假币袋是第 2、3、4 袋，编号总和是 9。",
+        "en": "The fake bags are 2, 3 and 4, so the sum is 9.",
+        "ja": "偽物の袋は 2、3、4 番で、番号の和は 9 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "一共取了 1 + 2 + 4 + 8 + 16 = 31 枚。如果全是真幣，應該重 31 × 10 = 310 公克。",
+          "每一枚假幣少 1 公克，所以少掉的 310 − 296 = 14 公克，就是秤上假幣的枚數。",
+          "每一個假幣袋會貢獻它被取出的枚數，而 1、2、4、8、16 是 2 的次方：每個總數只有一種寫成其中若干個「不重複相加」的方法（就是二進位表示）。14 = 8 + 4 + 2，二進位是 01110。",
+          "8、4、2 枚分別來自第 4、3、2 袋，所以假幣袋是第 2、3、4 袋，編號總和 2 + 3 + 4 = 9。",
+          "為什麼不取 1、2、3、4、5 枚？那樣少 5 公克時，可能是第 5 袋，也可能是第 1 與第 4 袋，無法分辨；取 2 的次方才能保證一次秤出唯一答案。"
+        ],
+        "zh-Hans": [
+          "一共取了 1 + 2 + 4 + 8 + 16 = 31 枚。如果全是真币，应该重 31 × 10 = 310 克。",
+          "每一枚假币少 1 克，所以少掉的 310 − 296 = 14 克，就是秤上假币的枚数。",
+          "每一个假币袋会贡献它被取出的枚数，而 1、2、4、8、16 是 2 的次方：每个总数只有一种写成其中若干个「不重复相加」的方法（就是二进位表示）。14 = 8 + 4 + 2，二进位是 01110。",
+          "8、4、2 枚分别来自第 4、3、2 袋，所以假币袋是第 2、3、4 袋，编号总和 2 + 3 + 4 = 9。",
+          "为什么不取 1、2、3、4、5 枚？那样少 5 克时，可能是第 5 袋，也可能是第 1 与第 4 袋，无法分辨；取 2 的次方才能保证一次秤出唯一答案。"
+        ],
+        "en": [
+          "In total 1 + 2 + 4 + 8 + 16 = 31 coins are weighed. If all were genuine they would weigh 31 × 10 = 310 g.",
+          "Each fake coin is 1 g lighter, so the shortfall 310 − 296 = 14 g equals the number of fake coins on the scale.",
+          "Each fake bag contributes the number of coins taken from it, and 1, 2, 4, 8, 16 are powers of 2: every total can be written in only one way as a sum of distinct ones (its binary representation). 14 = 8 + 4 + 2, binary 01110.",
+          "The 8, 4 and 2 coins came from bags 4, 3 and 2, so the fake bags are 2, 3, 4, and the sum of their numbers is 2 + 3 + 4 = 9.",
+          "Why not take 1, 2, 3, 4, 5 coins? Then a 5 g shortfall could mean bag 5 alone or bags 1 and 4, which cannot be told apart; powers of 2 guarantee a unique answer from one weighing."
+        ],
+        "ja": [
+          "取り出したのは全部で 1 + 2 + 4 + 8 + 16 = 31 枚です。すべて本物なら 31 × 10 = 310 g のはずです。",
+          "偽物は 1 枚につき 1 g 軽いので、不足分 310 − 296 = 14 g がはかりに載った偽物の枚数です。",
+          "偽物の袋はそれぞれ取り出した枚数だけ寄与します。1、2、4、8、16 は 2 のべき乗なので、どの合計も「異なるものの和」としてただ 1 通りにしか表せません（2 進法表示）。14 = 8 + 4 + 2 で、2 進法では 01110 です。",
+          "8 枚、4 枚、2 枚はそれぞれ 4、3、2 番の袋から取ったものなので、偽物の袋は 2、3、4 番で、番号の和は 2 + 3 + 4 = 9 です。",
+          "なぜ 1、2、3、4、5 枚ではだめなのでしょうか。その場合 5 g 不足なら「5 番だけ」なのか「1 番と 4 番」なのか区別できません。2 のべき乗にすると 1 回の計量で答えが 1 つに決まります。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "9"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade11-foundation",
+        "notes": "題型改寫自經典「一次秤重找假幣袋」的多袋版本。掃過「天平|秤|砝碼」全庫 27 題；最接近 logic_grade8_018（10 疊中恰 1 疊假，取 1..10 枚，讀差值即得疊號）與 logic_grade9_029（1、2、4、8 砝碼可秤幾種重量）。本題假袋數量未知，必須用二進位唯一表示來解碼，並說明為何 1..5 枚會混淆，推理點不同。"
+      }
+    },
+    {
+      "id": "logic_grade11_foundation_051",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "minimum_strokes_by_odd_vertices",
+      "tags": [
+        "c:graph_theory",
+        "m:estimate_bound",
+        "m:construction"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade11",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一張 3 × 3 的方格圖由 4 條橫線與 4 條直線畫成，共有 9 個小正方形、24 條長度為 1 的小線段。現在要把這 24 條小線段全部描一遍：每一筆的筆尖都不離開紙面，每條小線段恰好描一次（不同的筆可以經過同一個交叉點）。最少需要幾筆？",
+        "zh-Hans": "一张 3 × 3 的方格图由 4 条横线与 4 条直线画成，共有 9 个小正方形、24 条长度为 1 的小线段。现在要把这 24 条小线段全部描一遍：每一笔的笔尖都不离开纸面，每条小线段恰好描一次（不同的笔可以经过同一个交叉点）。最少需要几笔？",
+        "en": "A 3 × 3 grid is drawn with 4 horizontal and 4 vertical lines, forming 9 small squares and 24 unit segments. We want to trace all 24 unit segments: during each stroke the pen never leaves the paper, and each unit segment is traced exactly once (different strokes may pass through the same crossing point). What is the minimum number of strokes?",
+        "ja": "横線 4 本と縦線 4 本でかいた 3 × 3 のます目があり、小さな正方形が 9 個、長さ 1 の小さな線分が 24 本あります。この 24 本をすべてなぞります。1 筆の間はペン先を紙から離さず、どの線分もちょうど 1 回ずつなぞります（別の筆が同じ交点を通るのはかまいません）。最少で何筆必要ですか。"
+      },
+      "answer": {
+        "zh-Hant": "最少需要 4 筆。",
+        "zh-Hans": "最少需要 4 笔。",
+        "en": "At least 4 strokes are needed, and 4 suffice.",
+        "ja": "最少で 4 筆必要です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "把 16 個交叉點看成頂點、24 條小線段看成邊。數每個點連出的線段數：4 個角落各 2 條，邊上非角落的 8 個點各 3 條，內部 4 個點各 4 條。",
+          "一筆畫經過某點時，進去一條、出來一條，會用掉偶數條；只有一筆的起點或終點才會用掉奇數條。所以連出奇數條的點，一定是某一筆的端點。",
+          "連出奇數條的點有 8 個，而每一筆只有 2 個端點，因此至少需要 8 ÷ 2 = 4 筆。",
+          "4 筆做得到：在這 8 個奇數點中，任取 3 對用「假想線段」連起來，圖就只剩 2 個奇數點，可以一筆畫完（從一個奇數點出發、到另一個結束）；再把這 3 條假想線段拿掉，那一筆就被切成 4 段，正好是 4 筆。所以最少是 4 筆。"
+        ],
+        "zh-Hans": [
+          "把 16 个交叉点看成顶点、24 条小线段看成边。数每个点连出的线段数：4 个角落各 2 条，边上非角落的 8 个点各 3 条，内部 4 个点各 4 条。",
+          "一笔画经过某点时，进去一条、出来一条，会用掉偶数条；只有一笔的起点或终点才会用掉奇数条。所以连出奇数条的点，一定是某一笔的端点。",
+          "连出奇数条的点有 8 个，而每一笔只有 2 个端点，因此至少需要 8 ÷ 2 = 4 笔。",
+          "4 笔做得到：在这 8 个奇数点中，任取 3 对用「假想线段」连起来，图就只剩 2 个奇数点，可以一笔画完（从一个奇数点出发、到另一个结束）；再把这 3 条假想线段拿掉，那一笔就被切成 4 段，正好是 4 笔。所以最少是 4 笔。"
+        ],
+        "en": [
+          "Treat the 16 crossing points as vertices and the 24 unit segments as edges. Count the segments at each point: the 4 corners have 2, the 8 non-corner boundary points have 3, and the 4 interior points have 4.",
+          "When a stroke passes through a point it uses one segment in and one out, an even number; only a stroke’s start or end uses an odd number. So every point with an odd number of segments must be an endpoint of some stroke.",
+          "There are 8 odd points and each stroke has only 2 endpoints, so at least 8 ÷ 2 = 4 strokes are needed.",
+          "4 strokes are enough: join 3 pairs of the 8 odd points with imaginary segments; then only 2 odd points remain and the whole figure can be drawn in one stroke from one odd point to the other. Removing the 3 imaginary segments cuts that stroke into 4 pieces, i.e. 4 strokes. So the minimum is 4."
+        ],
+        "ja": [
+          "16 個の交点を頂点、24 本の線分を辺と考えます。各点から出る線分の本数は、4 つの角が 2 本、角でない周上の 8 点が 3 本、内部の 4 点が 4 本です。",
+          "1 筆が点を通過するときは入る 1 本と出る 1 本で偶数本を使い、奇数本になるのはその筆の始点か終点だけです。したがって奇数本の線分が出ている点は、必ずどれかの筆の端点になります。",
+          "奇数本の点は 8 個あり、1 筆の端点は 2 つだけなので、少なくとも 8 ÷ 2 = 4 筆必要です。",
+          "4 筆で実際にかけます。8 個の奇数点のうち 3 組を仮の線分で結ぶと、奇数点は 2 個だけになり、一方の奇数点から他方まで一筆でかけます。仮の線分 3 本を取り除くと、その 1 筆は 4 つに分かれ、ちょうど 4 筆になります。よって最少は 4 筆です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "4"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade11-foundation",
+        "notes": "題型取自圖論一筆畫的推廣（最少筆數 = 奇點數 ÷ 2）。掃過「一筆畫|筆畫」：只有 logic_grade3_056（正六邊形對角線不能一筆畫的理由，判斷可不可以）。本題要計數奇點得下界，並構造達到下界，推理點不同。"
+      }
     }
   ]
 }
