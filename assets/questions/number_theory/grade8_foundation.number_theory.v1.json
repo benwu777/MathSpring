@@ -4362,6 +4362,152 @@
         "reference": "number-theory-grade8-foundation",
         "notes": "題型骨架取自 CEMC 2022 Pascal 第 24 題「Pretti number」（七位數：左三位是平方數、右四位是立方數、萬位與個位相同），已用 pdftotext 讀過原卷；改成六位數、右三位是立方數、首末位相同，數字與答案全部重算。去重：全庫掃「完全立方」與「完全平方 + 三位數」，最接近的是 number_theory_grade10_023（等於各位立方和的三位數）與 number_theory_grade12_039（四位重複數字是不是平方數），前者是把數字各自立方再相加、後者只驗證單一數，都不是把六位數切成兩段各自受限再配對。"
       }
+    },
+    {
+      "id": "number_theory_grade8_foundation_052",
+      "reviewStatus": "ok",
+      "topic": "number_theory",
+      "subtopic": "missing_digit_by_casting_out_nines",
+      "tags": [
+        "c:modular",
+        "c:place_value",
+        "c:exponent",
+        "m:invariant"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade8",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "2²⁹ 是一個九位數，而且它的九個數字互不相同，所以 0 到 9 這十個數字中恰好少了一個。不必把 2²⁹ 整個算出來，請判斷缺少的是哪一個數字。",
+        "zh-Hans": "2²⁹ 是一个九位数，而且它的九个数字互不相同，所以 0 到 9 这十个数字中恰好少了一个。不必把 2²⁹ 整个算出来，请判断缺少的是哪一个数字。",
+        "en": "2²⁹ is a nine-digit number whose nine digits are all different, so exactly one of the ten digits 0 to 9 is missing. Without computing 2²⁹ in full, decide which digit is missing.",
+        "ja": "2²⁹ は 9 けたの数で、9 つの数字はすべてちがうので、0 から 9 の 10 この数字のうちちょうど 1 つが欠けています。2²⁹ を全部計算しないで、欠けている数字を答えなさい。"
+      },
+      "answer": {
+        "zh-Hant": "缺少的數字是 4。",
+        "zh-Hans": "缺少的数字是 4。",
+        "en": "The missing digit is 4.",
+        "ja": "欠けている数字は 4 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "0 + 1 + 2 + … + 9 = 45。設缺少的數字是 m，那麼 2²⁹ 的各位數字和是 45 − m。",
+          "一個數除以 9 的餘數，等於它的各位數字和除以 9 的餘數。所以只要算 2²⁹ 除以 9 的餘數。",
+          "2⁶ = 64 = 63 + 1，除以 9 餘 1。2²⁹ = (2⁶)⁴ × 2⁵，所以餘數和 1 × 32 = 32 除以 9 的餘數一樣，是 5。",
+          "所以 45 − m 除以 9 餘 5。45 是 9 的倍數，m 必須除以 9 餘 4，在 0 到 9 之中只有 m = 4。驗算：2²⁹ = 536870912，確實沒有數字 4。"
+        ],
+        "zh-Hans": [
+          "0 + 1 + 2 + … + 9 = 45。设缺少的数字是 m，那么 2²⁹ 的各位数字和是 45 − m。",
+          "一个数除以 9 的余数，等于它的各位数字和除以 9 的余数。所以只要算 2²⁹ 除以 9 的余数。",
+          "2⁶ = 64 = 63 + 1，除以 9 余 1。2²⁹ = (2⁶)⁴ × 2⁵，所以余数和 1 × 32 = 32 除以 9 的余数一样，是 5。",
+          "所以 45 − m 除以 9 余 5。45 是 9 的倍数，m 必须除以 9 余 4，在 0 到 9 之中只有 m = 4。验算：2²⁹ = 536870912，确实没有数字 4。"
+        ],
+        "en": [
+          "0 + 1 + 2 + … + 9 = 45. If the missing digit is m, the digit sum of 2²⁹ is 45 − m.",
+          "A number leaves the same remainder on division by 9 as its digit sum does. So we only need the remainder of 2²⁹ divided by 9.",
+          "2⁶ = 64 = 63 + 1 leaves remainder 1 on division by 9. 2²⁹ = (2⁶)⁴ × 2⁵, so its remainder is the same as that of 1 × 32 = 32, which is 5.",
+          "So 45 − m leaves remainder 5 on division by 9. Since 45 is a multiple of 9, m must leave remainder 4, and among 0 to 9 only m = 4 works. Check: 2²⁹ = 536870912 indeed has no digit 4."
+        ],
+        "ja": [
+          "0 + 1 + 2 + … + 9 = 45 です。欠けている数字を m とすると、2²⁹ の各位の数字の和は 45 − m です。",
+          "ある数を 9 でわったあまりは、その各位の数字の和を 9 でわったあまりと同じです。だから 2²⁹ を 9 でわったあまりだけを求めればよいです。",
+          "2⁶ = 64 = 63 + 1 は 9 でわると 1 あまります。2²⁹ = (2⁶)⁴ × 2⁵ なので、あまりは 1 × 32 = 32 を 9 でわったあまりと同じ 5 です。",
+          "だから 45 − m は 9 でわると 5 あまります。45 は 9 の倍数なので m は 9 でわると 4 あまる数で、0 から 9 では m = 4 だけです。たしかめ：2²⁹ = 536870912 にはたしかに 4 がありません。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "4"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "number_theory-grade8-foundation",
+        "notes": "棄九法：數字和與原數同餘 9，配合 0～9 總和 45 找缺少的數字。掃過：缺.*數字|九位數|互不相同.*數字|數字和.*9|2²⁹|棄九；讀過 logic_grade6_048（2026 反覆求數字和）、number_theory_grade7_005（3a7b 被 9 整除）、number_theory_grade8_029（2¹⁰ 的數字和）。既有題多是「數字和判斷整除」；本題反過來用同餘找出缺少的數字，並需算 2 的高次方除以 9 的餘數。"
+      }
+    },
+    {
+      "id": "number_theory_grade8_foundation_053",
+      "reviewStatus": "ok",
+      "topic": "number_theory",
+      "subtopic": "integer_right_triangle_area_equals_perimeter",
+      "tags": [
+        "c:pythagoras",
+        "c:area",
+        "c:factor_multiple",
+        "m:enumeration"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade8",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一個直角三角形的三邊長都是正整數（單位：公分），而且它的面積數值（平方公分）恰好等於周長數值（公分）。這樣的直角三角形一共有幾種？（三邊長都相同的算同一種。）",
+        "zh-Hans": "一个直角三角形的三边长都是正整数（单位：公分），而且它的面积数值（平方公分）恰好等于周长数值（公分）。这样的直角三角形一共有几种？（三边长都相同的算同一种。）",
+        "en": "A right triangle has all three sides whole numbers of centimetres, and the number giving its area (in square centimetres) equals the number giving its perimeter (in centimetres). How many such right triangles are there? (Triangles with the same three side lengths count as one.)",
+        "ja": "直角三角形の 3 辺の長さがどれも整数（単位は cm）で、面積の数（平方 cm）と周の長さの数（cm）がちょうど等しいとします。このような直角三角形は全部で何種類ありますか。（3 辺の長さが同じものは 1 種類と数えます。）"
+      },
+      "answer": {
+        "zh-Hant": "一共有 2 種。",
+        "zh-Hans": "一共有 2 种。",
+        "en": "There are 2 such triangles.",
+        "ja": "全部で 2 種類です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "設兩股是 a ≤ b、斜邊是 c。條件是 ab/2 = a + b + c，所以 c = ab/2 − a − b；又 c² = a² + b²。",
+          "把 c 代入平方：(ab/2 − a − b)² = a² + b²。展開後 a²、b² 兩邊消掉，得到 a²b²/4 − ab(a + b) + 2ab = 0，兩邊除以 ab：ab/4 − (a + b) + 2 = 0，也就是 ab − 4a − 4b + 8 = 0。",
+          "整理成 (a − 4)(b − 4) = 8，其中 a − 4 ≤ b − 4。若兩個因數都是負的，只能是 (−8) × (−1) 或 (−4) × (−2)，較小的因數 ≤ −4 會使 a ≤ 0，不可能；所以兩個因數都是正整數，只有 1 × 8 和 2 × 4 兩種。",
+          "得到 (a, b) = (5, 12)，斜邊 13；(a, b) = (6, 8)，斜邊 10。驗算：5 × 12 ÷ 2 = 30 = 5 + 12 + 13；6 × 8 ÷ 2 = 24 = 6 + 8 + 10。一共 2 種。"
+        ],
+        "zh-Hans": [
+          "设两股是 a ≤ b、斜边是 c。条件是 ab/2 = a + b + c，所以 c = ab/2 − a − b；又 c² = a² + b²。",
+          "把 c 代入平方：(ab/2 − a − b)² = a² + b²。展开后 a²、b² 两边消掉，得到 a²b²/4 − ab(a + b) + 2ab = 0，两边除以 ab：ab/4 − (a + b) + 2 = 0，也就是 ab − 4a − 4b + 8 = 0。",
+          "整理成 (a − 4)(b − 4) = 8，其中 a − 4 ≤ b − 4。若两个因数都是负的，只能是 (−8) × (−1) 或 (−4) × (−2)，较小的因数 ≤ −4 会使 a ≤ 0，不可能；所以两个因数都是正整数，只有 1 × 8 和 2 × 4 两种。",
+          "得到 (a, b) = (5, 12)，斜边 13；(a, b) = (6, 8)，斜边 10。验算：5 × 12 ÷ 2 = 30 = 5 + 12 + 13；6 × 8 ÷ 2 = 24 = 6 + 8 + 10。一共 2 种。"
+        ],
+        "en": [
+          "Let the legs be a ≤ b and the hypotenuse c. The condition is ab/2 = a + b + c, so c = ab/2 − a − b; also c² = a² + b².",
+          "Substitute into the square: (ab/2 − a − b)² = a² + b². After expanding, a² and b² cancel, leaving a²b²/4 − ab(a + b) + 2ab = 0; dividing by ab gives ab/4 − (a + b) + 2 = 0, that is ab − 4a − 4b + 8 = 0.",
+          "Rearrange to (a − 4)(b − 4) = 8 with a − 4 ≤ b − 4. If both factors were negative they would be (−8) × (−1) or (−4) × (−2); the smaller factor ≤ −4 would make a ≤ 0, impossible. So both factors are positive, giving only 1 × 8 and 2 × 4.",
+          "This gives (a, b) = (5, 12) with hypotenuse 13, and (a, b) = (6, 8) with hypotenuse 10. Check: 5 × 12 ÷ 2 = 30 = 5 + 12 + 13 and 6 × 8 ÷ 2 = 24 = 6 + 8 + 10. So there are 2."
+        ],
+        "ja": [
+          "直角をはさむ 2 辺を a ≤ b、斜辺を c とします。条件は ab/2 = a + b + c なので c = ab/2 − a − b で、さらに c² = a² + b² です。",
+          "c を代入すると (ab/2 − a − b)² = a² + b² です。展開すると a² と b² が消えて a²b²/4 − ab(a + b) + 2ab = 0、ab でわると ab/4 − (a + b) + 2 = 0、つまり ab − 4a − 4b + 8 = 0 です。",
+          "(a − 4)(b − 4) = 8（a − 4 ≤ b − 4）と変形します。両方負なら (−8) × (−1) か (−4) × (−2) ですが、小さいほうが −4 以下なので a ≤ 0 となり、ありえません。だから両方正で、1 × 8 と 2 × 4 の 2 通りだけです。",
+          "(a, b) = (5, 12) で斜辺 13、(a, b) = (6, 8) で斜辺 10 です。たしかめ：5 × 12 ÷ 2 = 30 = 5 + 12 + 13、6 × 8 ÷ 2 = 24 = 6 + 8 + 10。全部で 2 種類です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "2"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "number_theory-grade8-foundation",
+        "notes": "整數直角三角形「面積 = 周長」化成 (a − 4)(b − 4) = 8 的因數分解。掃過：面積.*周長|周長.*面積|數值相等|直角三角形.*整數；讀過 geometry_grade4_064（長方形面積 = 周長）、geometry_grade8_061（一股為 12 的整數直角三角形個數，題幹模板相似 0.58 但解法是因數分解 (c−b)(c+b)）、number_theory_grade11_015（周長 60 的整數直角三角形個數）、combinatorics_grade9_032（周長 30 求面積）。grade4_064 是長方形 (l − 2)(w − 2) = 4；本題要先結合畢氏定理消去斜邊，再做因數分解，並排除負因數。"
+      }
     }
   ]
 }

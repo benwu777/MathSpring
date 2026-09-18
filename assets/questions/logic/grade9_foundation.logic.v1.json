@@ -4840,6 +4840,86 @@
         "reference": "statistics-grade9-frequency-table-median-range",
         "notes": "改寫自次數分配表求中位數的課本題型，把其中一個次數改成未知數，反問「中位數固定時未知次數的範圍」。全庫以「次數」「中位數」掃描，algebra_grade8_056 是次數全部已知、直接找中位數；algebra_grade7_060、algebra_grade8_038 是單一未知資料值。本題未知的是次數，須依總人數奇偶分開處理上下界，並排除偶數時平均恰為 8 的其他組合。"
       }
+    },
+    {
+      "id": "logic_grade9_foundation_054",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "triangular_grid_toothpicks_reverse",
+      "tags": [
+        "c:pattern",
+        "c:triangle",
+        "m:bijection"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade9",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "小安用同樣長的牙籤拼出一個大正三角形，裡面再用牙籤隔成許多邊長 1 根牙籤的小正三角形（有尖端朝上的，也有尖端朝下的），每根牙籤剛好是一個小正三角形的一條邊，大三角形每邊用的牙籤根數都相同。拼完後她數了數，一共用了 135 根牙籤。這個圖形裡邊長 1 根牙籤的小正三角形（朝上與朝下都算）一共有幾個？",
+        "zh-Hans": "小安用同样长的牙签拼出一个大正三角形，里面再用牙签隔成许多边长 1 根牙签的小正三角形（有尖端朝上的，也有尖端朝下的），每根牙签刚好是一个小正三角形的一条边，大三角形每边用的牙签根数都相同。拼完后她数了数，一共用了 135 根牙签。这个图形里边长 1 根牙签的小正三角形（朝上与朝下都算）一共有几个？",
+        "en": "An builds a large equilateral triangle out of identical toothpicks and divides its inside with toothpicks into small equilateral triangles whose sides are one toothpick long (some point up, some point down). Each toothpick is exactly one side of a small triangle, and each side of the large triangle uses the same number of toothpicks. Altogether she used 135 toothpicks. How many small triangles with side one toothpick (pointing up or down) are in the figure?",
+        "ja": "安さんは同じ長さのつまようじで大きな正三角形をつくり、その内側もつまようじで区切って、1 辺がつまようじ 1 本の小さな正三角形（上向きのものも下向きのものもあります）に分けました。どのつまようじも小さな正三角形の 1 辺になっていて、大きな三角形の各辺に使った本数は同じです。数えると、つまようじは全部で 135 本でした。この図形の中に、1 辺がつまようじ 1 本の小さな正三角形（上向きも下向きも数える）は全部でいくつありますか。"
+      },
+      "answer": {
+        "zh-Hant": "一共有 81 個小正三角形。",
+        "zh-Hans": "一共有 81 个小正三角形。",
+        "en": "There are 81 small triangles.",
+        "ja": "小さな正三角形は全部で 81 個です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "設大三角形每邊用 n 根牙籤。從上往下數，第 1 列有 1 個尖端朝上的小三角形，第 2 列有 2 個，⋯⋯，第 n 列有 n 個，所以朝上的小三角形共有 1 + 2 + ⋯ + n = n(n + 1) ÷ 2 個。",
+          "關鍵觀察：每一根牙籤都恰好是「某一個朝上小三角形」的一條邊（朝下的小三角形，三條邊都借自旁邊朝上的小三角形），而且不會同時屬於兩個朝上的小三角形。",
+          "所以牙籤總數 = 3 × 朝上小三角形個數 = 3n(n + 1) ÷ 2。",
+          "由 3n(n + 1) ÷ 2 = 135，得 n(n + 1) = 90 = 9 × 10，所以 n = 9。",
+          "每邊 n 根時，第 k 列有 k 個朝上、k − 1 個朝下，共 2k − 1 個小三角形；全部加起來 1 + 3 + 5 + ⋯ + 17 = 9² = 81。",
+          "所以小正三角形一共有 81 個。"
+        ],
+        "zh-Hans": [
+          "设大三角形每边用 n 根牙签。从上往下数，第 1 行有 1 个尖端朝上的小三角形，第 2 行有 2 个，……，第 n 行有 n 个，所以朝上的小三角形共有 1 + 2 + ⋯ + n = n(n + 1) ÷ 2 个。",
+          "关键观察：每一根牙签都恰好是“某一个朝上小三角形”的一条边（朝下的小三角形，三条边都借自旁边朝上的小三角形），而且不会同时属于两个朝上的小三角形。",
+          "所以牙签总数 = 3 × 朝上小三角形个数 = 3n(n + 1) ÷ 2。",
+          "由 3n(n + 1) ÷ 2 = 135，得 n(n + 1) = 90 = 9 × 10，所以 n = 9。",
+          "每边 n 根时，第 k 行有 k 个朝上、k − 1 个朝下，共 2k − 1 个小三角形；全部加起来 1 + 3 + 5 + ⋯ + 17 = 9² = 81。",
+          "所以小正三角形一共有 81 个。"
+        ],
+        "en": [
+          "Let each side of the large triangle use n toothpicks. Row 1 from the top has 1 upward small triangle, row 2 has 2, …, row n has n, so there are 1 + 2 + ⋯ + n = n(n + 1) ÷ 2 upward triangles.",
+          "Key observation: every toothpick is a side of exactly one upward small triangle (each downward triangle borrows all three of its sides from neighbouring upward ones), and no toothpick belongs to two upward triangles.",
+          "So the number of toothpicks is 3 × (number of upward triangles) = 3n(n + 1) ÷ 2.",
+          "From 3n(n + 1) ÷ 2 = 135 we get n(n + 1) = 90 = 9 × 10, so n = 9.",
+          "With side n, row k contains k upward and k − 1 downward triangles, 2k − 1 in all; summing, 1 + 3 + 5 + ⋯ + 17 = 9² = 81.",
+          "So there are 81 small triangles."
+        ],
+        "ja": [
+          "大きな三角形の 1 辺のつまようじを n 本とします。上から 1 段目には上向きの小三角形が 1 個、2 段目には 2 個、…、n 段目には n 個あるので、上向きの小三角形は 1 + 2 + ⋯ + n = n(n + 1) ÷ 2 個です。",
+          "大事な見方：どのつまようじも、ちょうど 1 つの上向き小三角形の辺になっています（下向きの小三角形の 3 辺は、となりの上向き小三角形の辺を借りています）。2 つの上向き小三角形に同時に属するつまようじはありません。",
+          "したがって、つまようじの本数 = 3 × 上向き小三角形の数 = 3n(n + 1) ÷ 2 です。",
+          "3n(n + 1) ÷ 2 = 135 より n(n + 1) = 90 = 9 × 10 なので、n = 9 です。",
+          "1 辺 n 本のとき、k 段目には上向き k 個と下向き k − 1 個、合わせて 2k − 1 個の小三角形があります。合計は 1 + 3 + 5 + ⋯ + 17 = 9² = 81 です。",
+          "よって小さな正三角形は全部で 81 個です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "81"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade9-foundation",
+        "notes": "題型取自火柴棒圖形規律題的延伸（三角形格網），改成已知總根數逆推。掃過「火柴|牙籤|小三角形」：logic_grade8_003（一排火柴 2n+1，線性）、logic_grade8_044（取火柴博弈）。本題新增：牙籤與朝上小三角形一一對應得 3n(n+1)/2，再逆推 n 與小三角形總數 n²。"
+      }
     }
   ]
 }

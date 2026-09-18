@@ -5418,6 +5418,86 @@
         "allowNegative": false,
         "maxDigits": 2
       }
+    },
+    {
+      "id": "combinatorics_grade12_foundation_059",
+      "reviewStatus": "ok",
+      "topic": "combinatorics",
+      "subtopic": "permutations_avoiding_consecutive_successions",
+      "tags": [
+        "c:inclusion_exclusion",
+        "c:permutation_combination",
+        "m:bijection"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "把 1、2、3、4、5、6 排成一列。若某個數 k 的右邊緊鄰著 k + 1（例如 ⋯ 3、4 ⋯），就說這一列出現了一個「接續」。求完全沒有接續的排法共有多少種。",
+        "zh-Hans": "把 1、2、3、4、5、6 排成一列。若某个数 k 的右边紧邻着 k + 1（例如 … 3、4 …），就说这一列出现了一个“接续”。求完全没有接续的排法共有多少种。",
+        "en": "Arrange 1, 2, 3, 4, 5, 6 in a row. If some number k is immediately followed on its right by k + 1 (for example … 3, 4 …), we say the row contains a succession. How many arrangements contain no succession at all?",
+        "ja": "1、2、3、4、5、6 を 1 列に並べます。ある数 k のすぐ右に k + 1 がある（たとえば … 3、4 …）とき、その列には「つながり」があるといいます。つながりが 1 つもない並べ方は何通りありますか。"
+      },
+      "answer": {
+        "zh-Hant": "完全沒有接續的排法共有 309 種。",
+        "zh-Hans": "完全没有接续的排法共有 309 种。",
+        "en": "There are 309 arrangements with no succession.",
+        "ja": "つながりのない並べ方は 309 通りです。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "可能出現的接續只有 5 種：12、23、34、45、56。設 Aᵢ 表示「i 的右邊緊鄰 i + 1」的排法集合（i = 1～5），用排容原理扣除。",
+          "指定其中 k 個接續同時出現時，把每個接續黏成一塊。例如同時要 12 和 23，就黏成「123」一塊；同時要 12 和 45 就是兩塊「12」「45」。不論怎麼選，黏完之後恰好剩下 6 − k 個「單位」，可以任意排列，所以有 (6 − k)! 種。",
+          "從 5 種接續中選 k 種有 C(5, k) 種選法，所以「至少含指定 k 個」的總數是 C(5, k) × (6 − k)!。",
+          "排容：6! − C(5,1) × 5! + C(5,2) × 4! − C(5,3) × 3! + C(5,4) × 2! − C(5,5) × 1! = 720 − 600 + 240 − 60 + 10 − 1。",
+          "計算得 720 − 600 = 120，120 + 240 = 360，360 − 60 = 300，300 + 10 = 310，310 − 1 = 309。",
+          "用程式列出 720 種排列逐一檢查，也恰好有 309 種沒有接續。"
+        ],
+        "zh-Hans": [
+          "可能出现的接续只有 5 种：12、23、34、45、56。设 Aᵢ 表示“i 的右边紧邻 i + 1”的排法集合（i = 1～5），用容斥原理扣除。",
+          "指定其中 k 个接续同时出现时，把每个接续粘成一块。例如同时要 12 和 23，就粘成“123”一块；同时要 12 和 45 就是两块“12”“45”。不论怎么选，粘完之后恰好剩下 6 − k 个“单位”，可以任意排列，所以有 (6 − k)! 种。",
+          "从 5 种接续中选 k 种有 C(5, k) 种选法，所以“至少含指定 k 个”的总数是 C(5, k) × (6 − k)!。",
+          "容斥：6! − C(5,1) × 5! + C(5,2) × 4! − C(5,3) × 3! + C(5,4) × 2! − C(5,5) × 1! = 720 − 600 + 240 − 60 + 10 − 1。",
+          "计算得 720 − 600 = 120，120 + 240 = 360，360 − 60 = 300，300 + 10 = 310，310 − 1 = 309。",
+          "用程序列出 720 种排列逐一检查，也恰好有 309 种没有接续。"
+        ],
+        "en": [
+          "Only 5 successions are possible: 12, 23, 34, 45, 56. Let Aᵢ be the set of arrangements where i is immediately followed by i + 1 (i = 1 to 5), and use inclusion–exclusion.",
+          "If k specified successions must all appear, glue each one into a block. For example, requiring 12 and 23 gives one block \"123\"; requiring 12 and 45 gives two blocks \"12\" and \"45\". In every case exactly 6 − k units remain, which can be arranged freely in (6 − k)! ways.",
+          "There are C(5, k) ways to choose k of the 5 successions, so the k-th term is C(5, k) × (6 − k)!.",
+          "Inclusion–exclusion: 6! − C(5,1) × 5! + C(5,2) × 4! − C(5,3) × 3! + C(5,4) × 2! − C(5,5) × 1! = 720 − 600 + 240 − 60 + 10 − 1.",
+          "Step by step: 720 − 600 = 120, 120 + 240 = 360, 360 − 60 = 300, 300 + 10 = 310, 310 − 1 = 309.",
+          "Listing all 720 arrangements by computer also gives exactly 309 with no succession."
+        ],
+        "ja": [
+          "つながりになりうるのは 12、23、34、45、56 の 5 種類だけです。Aᵢ を「i のすぐ右に i + 1 がある」並べ方の集合（i = 1～5）として、包除原理で除きます。",
+          "指定した k 個のつながりがすべて現れる場合、各つながりを 1 つのかたまりにします。たとえば 12 と 23 なら「123」の 1 かたまり、12 と 45 なら「12」「45」の 2 かたまりです。どう選んでも、かたまりにしたあとはちょうど 6 − k 個の「単位」が残り、自由に並べられるので (6 − k)! 通りです。",
+          "5 種類から k 種類を選ぶ方法は C(5, k) 通りなので、k 番目の項は C(5, k) × (6 − k)! です。",
+          "包除原理：6! − C(5,1) × 5! + C(5,2) × 4! − C(5,3) × 3! + C(5,4) × 2! − C(5,5) × 1! = 720 − 600 + 240 − 60 + 10 − 1 です。",
+          "順に 720 − 600 = 120、120 + 240 = 360、360 − 60 = 300、300 + 10 = 310、310 − 1 = 309 です。",
+          "720 通りの並べ方をすべてコンピューターで調べても、つながりのないものはちょうど 309 通りです。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "309"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "combinatorics-grade12-foundation",
+        "notes": "題型取自排容原理經典「無接續排列」（Whitworth）。掃過「接續|緊接|緊鄰|相鄰.{0,15}(連續|差 1|大 1)|排容」：combinatorics_grade12_013（AAA 不相鄰的多重集排列）、combinatorics_grade11_021（恰一次下降）、combinatorics_grade11_002/grade12_012（錯排）。本題新增：黏塊後單位數恆為 6 − k 的觀察，使排容每項都是 C(5, k)(6 − k)!。"
+      }
     }
   ]
 }

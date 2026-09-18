@@ -4796,6 +4796,82 @@
         "reference": "statistics-grade10-missing-frequencies",
         "notes": "改寫自統計單元「次數分配表有缺漏，用總人數與平均數列聯立補齊」的常見題，再加一步求中位數。全庫以「次數.{0,30}平均|平均.{0,30}人數」掃描，algebra_grade10_069 是一組人數未知且平均需為整數、algebra_grade8_056 是次數全知求中位數、algebra_grade7_063 是分組平均逆推。本題用兩條方程補出兩個次數，再排序找中位數。本批 e_g9_14 是中位數固定求未知次數的範圍（方向相反、不涉平均）。"
       }
+    },
+    {
+      "id": "logic_grade10_foundation_054",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "three_pile_nim_winning_first_moves",
+      "tags": [
+        "c:game_theory",
+        "c:number_base",
+        "m:invariant"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "桌上有三堆石子，分別是 4 顆、5 顆、7 顆。甲、乙兩人輪流操作，甲先。每次操作要選定一堆，從中拿走至少 1 顆（可以把整堆拿完），拿走最後一顆石子的人獲勝。甲的第一步有很多種拿法（選哪一堆、拿幾顆都算不同拿法）。其中能讓甲在之後保證獲勝的拿法共有幾種？",
+        "zh-Hans": "桌上有三堆石子，分别是 4 颗、5 颗、7 颗。甲、乙两人轮流操作，甲先。每次操作要选定一堆，从中拿走至少 1 颗（可以把整堆拿完），拿走最后一颗石子的人获胜。甲的第一步有很多种拿法（选哪一堆、拿几颗都算不同拿法）。其中能让甲在之后保证获胜的拿法共有几种？",
+        "en": "There are three piles of 4, 5 and 7 stones. Players A and B alternate, A first. On a turn a player chooses one pile and removes at least 1 stone from it (possibly the whole pile); whoever takes the last stone wins. A has many possible first moves (which pile and how many stones count as different moves). How many of these first moves let A guarantee a win afterwards?",
+        "ja": "机の上に 4 個、5 個、7 個の石の山が 3 つあります。甲と乙が交互に操作し、甲が先手です。1 回の操作では山を 1 つ選び、そこから 1 個以上取ります（山を全部取ってもかまいません）。最後の石を取った人が勝ちです。甲の最初の手はいろいろあります（どの山から何個取るかがちがえば別の手とします）。そのうち、その後甲が必ず勝てる手は何通りありますか。"
+      },
+      "answer": {
+        "zh-Hant": "能保證獲勝的第一步共有 3 種。",
+        "zh-Hans": "能保证获胜的第一步共有 3 种。",
+        "en": "There are 3 winning first moves.",
+        "ja": "必ず勝てる最初の手は 3 通りです。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "把每堆的顆數寫成二進位：4 = 100，5 = 101，7 = 111。把三個數逐位做「不進位加法」（每一位數 1 的個數是奇數就記 1，偶數就記 0），這叫 Nim 和。",
+          "已知結論（Nim 遊戲）：Nim 和為 0 的局面，輪到的人必輸；Nim 和不為 0 的局面，輪到的人一定能一步走到 Nim 和為 0 的局面。理由是：從 Nim 和為 0 出發，只改一堆必定讓某一位的奇偶改變，Nim 和就不再是 0；而最後全空的局面 Nim 和是 0，是輪到的人輸。",
+          "現在 4、5、7 的 Nim 和：100、101、111 逐位——最高位三個 1（奇）→ 1；中間位 0、0、1（奇）→ 1；最低位 0、1、1（偶）→ 0，Nim 和是 110 = 6，不為 0，甲有必勝走法。",
+          "甲必須把某一堆 x 變成「x 與 6 做不進位加法的結果」，而且這個數要比 x 小才拿得到：4 → 100 與 110 → 010 = 2（比 4 小，可行，拿 2 顆）；5 → 101 與 110 → 011 = 3（比 5 小，可行，拿 2 顆）；7 → 111 與 110 → 001 = 1（比 7 小，可行，拿 6 顆）。",
+          "每一堆各有一種必勝拿法，其他拿法都會留下 Nim 和不為 0 的局面讓乙贏。所以必勝的第一步共有 3 種。用程式對所有局面由小到大算勝負，也得到恰好 3 種。"
+        ],
+        "zh-Hans": [
+          "把每堆的颗数写成二进制：4 = 100，5 = 101，7 = 111。把三个数逐位做“不进位加法”（每一位数 1 的个数是奇数就记 1，偶数就记 0），这叫 Nim 和。",
+          "已知结论（Nim 游戏）：Nim 和为 0 的局面，轮到的人必输；Nim 和不为 0 的局面，轮到的人一定能一步走到 Nim 和为 0 的局面。理由是：从 Nim 和为 0 出发，只改一堆必定让某一位的奇偶改变，Nim 和就不再是 0；而最后全空的局面 Nim 和是 0，是轮到的人输。",
+          "现在 4、5、7 的 Nim 和：100、101、111 逐位——最高位三个 1（奇）→ 1；中间位 0、0、1（奇）→ 1；最低位 0、1、1（偶）→ 0，Nim 和是 110 = 6，不为 0，甲有必胜走法。",
+          "甲必须把某一堆 x 变成“x 与 6 做不进位加法的结果”，而且这个数要比 x 小才拿得到：4 → 100 与 110 → 010 = 2（比 4 小，可行，拿 2 颗）；5 → 101 与 110 → 011 = 3（比 5 小，可行，拿 2 颗）；7 → 111 与 110 → 001 = 1（比 7 小，可行，拿 6 颗）。",
+          "每一堆各有一种必胜拿法，其他拿法都会留下 Nim 和不为 0 的局面让乙赢。所以必胜的第一步共有 3 种。用程序对所有局面由小到大算胜负，也得到恰好 3 种。"
+        ],
+        "en": [
+          "Write the pile sizes in binary: 4 = 100, 5 = 101, 7 = 111. Add them digit by digit without carrying (a column with an odd number of 1s gives 1, even gives 0); this is the Nim-sum.",
+          "Known fact for Nim: if the Nim-sum is 0, the player to move loses; if it is not 0, the player to move can always reach a Nim-sum of 0. Reason: from Nim-sum 0, changing one pile flips the parity of some column, so the Nim-sum becomes non-zero; and the empty final position has Nim-sum 0 and is a loss for the player to move.",
+          "For 4, 5, 7: the top column has three 1s (odd) → 1; the middle column 0, 0, 1 (odd) → 1; the last column 0, 1, 1 (even) → 0. The Nim-sum is 110 = 6, not 0, so A has winning moves.",
+          "A must turn some pile x into x combined with 6 without carrying, and that number must be smaller than x: 4 → 100 with 110 → 010 = 2 (smaller, take 2); 5 → 101 with 110 → 011 = 3 (smaller, take 2); 7 → 111 with 110 → 001 = 1 (smaller, take 6).",
+          "Each pile has exactly one winning move, and every other move leaves a non-zero Nim-sum for B. So there are 3 winning first moves. A computer evaluation of all positions from small to large also gives exactly 3."
+        ],
+        "ja": [
+          "各山の個数を 2 進法で書きます：4 = 100、5 = 101、7 = 111。3 つの数を位ごとに「くり上がりなしのたし算」（その位の 1 の個数が奇数なら 1、偶数なら 0）をしたものを Nim 和といいます。",
+          "Nim の性質：Nim 和が 0 の局面では手番の人が負け、0 でない局面では手番の人は 1 手で Nim 和 0 の局面にできます。理由：Nim 和 0 から 1 つの山だけを変えると、どこかの位の偶奇が変わり Nim 和は 0 でなくなります。そして全部なくなった最後の局面は Nim 和 0 で、手番の人の負けです。",
+          "4、5、7 では、いちばん上の位は 1 が 3 個（奇数）→ 1、まん中の位は 0、0、1（奇数）→ 1、いちばん下の位は 0、1、1（偶数）→ 0 で、Nim 和は 110 = 6 です。0 でないので甲には勝つ手があります。",
+          "甲はある山 x を「x と 6 のくり上がりなしのたし算」にしなければならず、それが x より小さいときだけ実行できます。4 → 100 と 110 → 010 = 2（小さいので可、2 個取る）、5 → 101 と 110 → 011 = 3（可、2 個取る）、7 → 111 と 110 → 001 = 1（可、6 個取る）。",
+          "どの山にも勝つ手がちょうど 1 つあり、それ以外の手は Nim 和が 0 でない局面を乙に渡してしまいます。よって勝つ最初の手は 3 通りです。すべての局面の勝敗を小さい順にコンピューターで求めても、ちょうど 3 通りになります。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "3"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade10-foundation",
+        "notes": "題型取自三堆 Nim（二進位 Nim 和）。掃過「取.{0,4}石|Nim|三堆|火柴」：logic_grade9_034（兩堆 3、5，對稱策略）、logic_grade8_044（單堆取 1～3）、logic_grade9_044（取平方數）。兩堆題用「拿成一樣多」即可，三堆必須用二進位不進位加法，且本題問必勝走法的個數。"
+      }
     }
   ]
 }

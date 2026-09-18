@@ -4392,6 +4392,82 @@
         "reference": "number-theory-grade12-foundation",
         "notes": "題型取自 Wikipedia「Euler's totient function」條目中的 inverse totient（給定 φ 的值反求 n）一節，把它縮小到 φ(n) = 8 這個手算可完成的規模。去重：全庫用「互質|φ」掃出 41 題並逐一檢視。number_theory_grade9_016（與 100 互質的座號個數）、number_theory_grade11_033（與 36 互質的數有幾個）、number_theory_grade7_023（與 12 互質）都是給定 n 算 φ(n)，是正推；number_theory_grade12_020 是求 φ 在因數上的和。本題是反推：由 φ(n) = 8 先用「p − 1 整除 8」把質因數鎖成 2、3、5，再分四種情形枚舉，推理方向與工具都不同。"
       }
+    },
+    {
+      "id": "number_theory_grade12_foundation_045",
+      "reviewStatus": "ok",
+      "topic": "number_theory",
+      "subtopic": "count_binary_weight_three_up_to_bound",
+      "tags": [
+        "c:number_base",
+        "c:permutation_combination",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "在 1 到 100 的正整數中，寫成二進位後恰好有 3 個數字是 1 的共有幾個？（例如 7 = 111₂、11 = 1011₂ 都符合。）",
+        "zh-Hans": "在 1 到 100 的正整数中，写成二进制后恰好有 3 个数字是 1 的共有几个？（例如 7 = 111₂、11 = 1011₂ 都符合。）",
+        "en": "Among the integers 1 to 100, how many have exactly three 1s in their binary representation? (For example 7 = 111₂ and 11 = 1011₂ both qualify.)",
+        "ja": "1 から 100 までの正の整数のうち、2 進法で表したとき 1 がちょうど 3 個あるものはいくつありますか。（たとえば 7 = 111₂、11 = 1011₂ はあてはまります。）"
+      },
+      "answer": {
+        "zh-Hant": "共有 33 個。",
+        "zh-Hans": "共有 33 个。",
+        "en": "There are 33 such numbers.",
+        "ja": "全部で 33 個です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "100 = 64 + 32 + 4 = 1100100₂，是 7 位二進位數。把 1～100 分成兩段：小於 64 的，以及 64～100。",
+          "小於 64 的數最多 6 位（第 0 位到第 5 位，對應 1、2、4、8、16、32）。恰有 3 個 1，就是從這 6 個位置選 3 個放 1：C(6, 3) = 20 個。",
+          "64～100 的數第 6 位（64）一定是 1，還要再有恰好 2 個 1，而且剩下部分 m = n − 64 必須滿足 0 ≤ m ≤ 36。",
+          "數 m ≤ 36 且恰有 2 個 1 的 m：若 m < 32，就是從第 0～4 位選 2 個，C(5, 2) = 10 個；若 32 ≤ m ≤ 36，第 5 位是 1，另一個 1 只能是 1、2、4（m = 33、34、36），共 3 個。這一段共 10 + 3 = 13 個。",
+          "合計 20 + 13 = 33 個。用程式逐一檢查 1～100 也得到 33。"
+        ],
+        "zh-Hans": [
+          "100 = 64 + 32 + 4 = 1100100₂，是 7 位二进制数。把 1～100 分成两段：小于 64 的，以及 64～100。",
+          "小于 64 的数最多 6 位（第 0 位到第 5 位，对应 1、2、4、8、16、32）。恰有 3 个 1，就是从这 6 个位置选 3 个放 1：C(6, 3) = 20 个。",
+          "64～100 的数第 6 位（64）一定是 1，还要再有恰好 2 个 1，而且剩下部分 m = n − 64 必须满足 0 ≤ m ≤ 36。",
+          "数 m ≤ 36 且恰有 2 个 1 的 m：若 m < 32，就是从第 0～4 位选 2 个，C(5, 2) = 10 个；若 32 ≤ m ≤ 36，第 5 位是 1，另一个 1 只能是 1、2、4（m = 33、34、36），共 3 个。这一段共 10 + 3 = 13 个。",
+          "合计 20 + 13 = 33 个。用程序逐一检查 1～100 也得到 33。"
+        ],
+        "en": [
+          "100 = 64 + 32 + 4 = 1100100₂, a 7-digit binary number. Split 1 to 100 into numbers below 64 and numbers from 64 to 100.",
+          "Numbers below 64 use at most 6 binary places (places 0 to 5, worth 1, 2, 4, 8, 16, 32). Exactly three 1s means choosing 3 of these 6 places: C(6, 3) = 20 numbers.",
+          "Numbers from 64 to 100 have a 1 in place 6 (worth 64) and need exactly two more 1s, with the remainder m = n − 64 satisfying 0 ≤ m ≤ 36.",
+          "Count m ≤ 36 with exactly two 1s: if m < 32, choose 2 of places 0 to 4, C(5, 2) = 10; if 32 ≤ m ≤ 36, place 5 is 1 and the other 1 must be worth 1, 2 or 4 (m = 33, 34, 36), 3 numbers. This part gives 10 + 3 = 13.",
+          "Total 20 + 13 = 33. Checking 1 to 100 by computer also gives 33."
+        ],
+        "ja": [
+          "100 = 64 + 32 + 4 = 1100100₂ で、2 進法で 7 けたです。1～100 を、64 未満と 64～100 に分けます。",
+          "64 未満の数は 2 進法で多くても 6 けた（0 けた目～5 けた目、1、2、4、8、16、32）です。1 がちょうど 3 個なのは、この 6 か所から 3 か所を選ぶことで、C(6, 3) = 20 個です。",
+          "64～100 の数は 6 けた目（64）が必ず 1 で、あと 1 がちょうど 2 個必要です。残り m = n − 64 は 0 ≤ m ≤ 36 をみたします。",
+          "m ≤ 36 で 1 がちょうど 2 個の m を数えます。m < 32 なら 0～4 けた目から 2 か所で C(5, 2) = 10 個、32 ≤ m ≤ 36 なら 5 けた目が 1 で、もう 1 つの 1 は 1、2、4 のどれか（m = 33、34、36）で 3 個です。この部分は 10 + 3 = 13 個です。",
+          "合計 20 + 13 = 33 個です。1～100 をコンピューターで調べても 33 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "33"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "number_theory-grade12-foundation",
+        "notes": "題型取自「上界不是 2 的冪」的二進位固定權重計數（逐位分段）。掃過「二進位|二進制|恰好.{0,6}(三|3) ?個 ?1」：number_theory_grade12_041（1～63 二進位 1 的總個數）、number_theory_grade9_045（6 位且恰 2 個 1 的數之和）、number_theory_grade7_048（二進位迴文）、combinatorics_grade11_024（不相鄰 1）。本題新增：上界 100 不是 2ⁿ − 1，須依最高位分段、逐位處理上界。"
+      }
     }
   ]
 }
