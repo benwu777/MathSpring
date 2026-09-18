@@ -6012,6 +6012,596 @@
         "reference": "logic-grade6-foundation",
         "notes": "題型骨架取自 Utah 數學圈講義與 Brilliant〈Pigeonhole Principle Problem Solving〉的「握手次數必有兩人相同」那一族「相異值不可能」的抽屜。已實際讀過相似度 0.31 的 logic_grade4_058（25 顆糖保證有人拿到至少 5 顆，求最多幾人）：該題是摸球族的強化鴿籠、用天花板函數，我這題用的是 1 + 2 + ⋯ + n 這個三角形數下界，而且問的是最少個數而非最多個數，推理核心不同；分數來自兩題共用「全部分完、每人至少 1 個」的敘述模板，第二版已把故事換成圖書館送繪本給班級以避開模板。logic_grade6_038（8 人握手次數兩兩不同）是給定互異去推結構，也不同。"
       }
+    },
+    {
+      "id": "logic_grade6_foundation_073",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "max_pieces_from_straight_cuts_recurrence",
+      "tags": [
+        "c:recurrence",
+        "c:pattern",
+        "m:extremal"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade6",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一張圓形的大餅，用刀直直地切 5 刀，每一刀都是從餅的邊緣切到邊緣的一條直線，切的時候不移動、不疊起餅。最多可以把大餅切成幾塊？",
+        "zh-Hans": "一张圆形的大饼，用刀直直地切 5 刀，每一刀都是从饼的边缘切到边缘的一条直线，切的时候不移动、不叠起饼。最多可以把大饼切成几块？",
+        "en": "A large round pancake is cut with 5 straight cuts, each a straight line from edge to edge, without moving or stacking the pieces. What is the largest number of pieces that can be made?",
+        "ja": "大きな丸いパンケーキを、ふちからふちまでのまっすぐな線で 5 回切ります。切るときに動かしたり重ねたりはしません。最大でいくつに分けられますか。"
+      },
+      "answer": {
+        "zh-Hant": "最多可以切成 16 塊。",
+        "zh-Hans": "最多可以切成 16 块。",
+        "en": "At most 16 pieces.",
+        "ja": "最大で 16 個です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "新切的一刀，每和之前的一刀相交一次，就被分成多一段；它最多和之前的每一刀都各交一次（交點都不重合）。所以第 k 刀最多被之前的 k − 1 刀切成 k 段。",
+          "每一段都把它經過的那一塊分成兩塊，所以第 k 刀最多讓塊數增加 k。",
+          "一開始 1 塊，依序最多加 1、2、3、4、5：1 + 1 + 2 + 3 + 4 + 5 = 16 塊（依序是 2、4、7、11、16）。",
+          "只要讓每兩刀都在餅內相交、而且沒有三刀交在同一點，就能真的切出 16 塊，所以最多 16 塊。"
+        ],
+        "zh-Hans": [
+          "新切的一刀，每和之前的一刀相交一次，就被分成多一段；它最多和之前的每一刀都各交一次（交点都不重合）。所以第 k 刀最多被之前的 k − 1 刀切成 k 段。",
+          "每一段都把它经过的那一块分成两块，所以第 k 刀最多让块数增加 k。",
+          "一开始 1 块，依序最多加 1、2、3、4、5：1 + 1 + 2 + 3 + 4 + 5 = 16 块（依序是 2、4、7、11、16）。",
+          "只要让每两刀都在饼内相交、而且没有三刀交在同一点，就能真的切出 16 块，所以最多 16 块。"
+        ],
+        "en": [
+          "A new cut is split into one more segment each time it crosses an earlier cut; at best it crosses each earlier cut once (at different points). So the k-th cut is divided by the previous k − 1 cuts into at most k segments.",
+          "Each segment splits the piece it passes through into two, so the k-th cut adds at most k pieces.",
+          "Start with 1 piece and add at most 1, 2, 3, 4, 5 in turn: 1 + 1 + 2 + 3 + 4 + 5 = 16 pieces (2, 4, 7, 11, 16 along the way).",
+          "As long as every two cuts cross inside the pancake and no three cuts meet at one point, 16 pieces really occur, so the maximum is 16."
+        ],
+        "ja": [
+          "新しい 1 回の切れ目は、前の切れ目と 1 回交わるごとに 1 区間ずつ増えます。前の切れ目それぞれと 1 回ずつ（交点が重ならずに）交わるのが最多です。だから k 回目の切れ目は、前の k − 1 本によって最大 k 区間に分かれます。",
+          "各区間は通りぬける 1 切れを 2 つに分けるので、k 回目で切れの数は最大 k 増えます。",
+          "はじめは 1 切れで、最大 1、2、3、4、5 ずつ増えるので 1 + 1 + 2 + 3 + 4 + 5 = 16 切れです（途中は 2、4、7、11、16）。",
+          "どの 2 本もパンケーキの中で交わり、3 本が 1 点で交わらないようにすれば実際に 16 切れになるので、最大は 16 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "16"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade6-foundation",
+        "notes": "平面切割的遞推（懶人切餅數）。掃過：切.*刀|切成.*塊|直線.*區域；讀過 geometry_grade1_059（兩刀最多 4 塊）、logic_grade7_031（切 6 塊最少幾刀）、logic_grade8_029（立方體 27 塊最少幾刀）。grade1_059 只有兩刀可以直接畫；本題需要「第 k 刀最多增加 k 塊」的遞推論證。"
+      }
+    },
+    {
+      "id": "logic_grade6_foundation_074",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "binary_mind_reading_cards",
+      "tags": [
+        "c:number_base",
+        "c:modular",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade6",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "老師做了五張卡片，把 1 到 31 的整數依下面的規則寫在卡片上（一個數可以寫在好幾張卡片上）：\n甲卡：除以 2 餘 1 的數；\n乙卡：除以 4 餘 2 或餘 3 的數；\n丙卡：除以 8 餘 4、5、6 或 7 的數；\n丁卡：除以 16 餘 8 到 15 的數；\n戊卡：16 到 31 的數。\n小安心裡想了一個 1 到 31 的整數，發現它出現在乙卡、丙卡、戊卡上，但不在甲卡和丁卡上。小安想的是哪一個數？",
+        "zh-Hans": "老师做了五张卡片，把 1 到 31 的整数依下面的规则写在卡片上（一个数可以写在好几张卡片上）：\n甲卡：除以 2 余 1 的数；\n乙卡：除以 4 余 2 或余 3 的数；\n丙卡：除以 8 余 4、5、6 或 7 的数；\n丁卡：除以 16 余 8 到 15 的数；\n戊卡：16 到 31 的数。\n小安心里想了一个 1 到 31 的整数，发现它出现在乙卡、丙卡、戊卡上，但不在甲卡和丁卡上。小安想的是哪一个数？",
+        "en": "A teacher makes five cards and writes the whole numbers 1 to 31 on them by these rules (a number may appear on several cards):\nCard A: numbers with remainder 1 when divided by 2;\nCard B: numbers with remainder 2 or 3 when divided by 4;\nCard C: numbers with remainder 4, 5, 6 or 7 when divided by 8;\nCard D: numbers with remainder 8 to 15 when divided by 16;\nCard E: the numbers 16 to 31.\nAn thinks of a whole number from 1 to 31 and finds that it is on cards B, C and E but not on cards A and D. What is his number?",
+        "ja": "先生が 5 まいのカードを作り、1 から 31 までの整数を次の決まりで書きました（1 つの数が何まいものカードに書かれることもあります）。\n甲カード：2 で割って 1 あまる数\n乙カード：4 で割って 2 か 3 あまる数\n丙カード：8 で割って 4、5、6、7 あまる数\n丁カード：16 で割って 8 から 15 あまる数\n戊カード：16 から 31 までの数\nアンは 1 から 31 までの整数を 1 つ思いうかべ、それが乙・丙・戊のカードにはあり、甲・丁のカードにはないことに気づきました。アンが思いうかべた数はいくつですか。"
+      },
+      "answer": {
+        "zh-Hant": "小安想的數是 22。",
+        "zh-Hans": "小安想的数是 22。",
+        "en": "His number is 22.",
+        "ja": "アンの数は 22 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "在戊卡上，所以這個數在 16 到 31 之間，可以寫成 16 + m，m 是 0 到 15。",
+          "不在丁卡上：它除以 16 的餘數就是 m，m 不在 8 到 15，所以 m 是 0 到 7。在丙卡上：m 除以 8 的餘數（就是 m 本身）是 4 到 7。",
+          "在乙卡上：m 除以 4 的餘數是 2 或 3，m 只能是 6 或 7。不在甲卡上：這個數是偶數，所以 m = 6。",
+          "所以這個數是 16 + 6 = 22。其實 22 = 16 + 4 + 2，剛好是戊、丙、乙三張卡的第一個數加起來：每張卡對應一個「2 的次方」，這就是二進位的讀心術。"
+        ],
+        "zh-Hans": [
+          "在戊卡上，所以这个数在 16 到 31 之间，可以写成 16 + m，m 是 0 到 15。",
+          "不在丁卡上：它除以 16 的余数就是 m，m 不在 8 到 15，所以 m 是 0 到 7。在丙卡上：m 除以 8 的余数（就是 m 本身）是 4 到 7。",
+          "在乙卡上：m 除以 4 的余数是 2 或 3，m 只能是 6 或 7。不在甲卡上：这个数是偶数，所以 m = 6。",
+          "所以这个数是 16 + 6 = 22。其实 22 = 16 + 4 + 2，刚好是戊、丙、乙三张卡的第一个数加起来：每张卡对应一个「2 的次方」，这就是二进位的读心术。"
+        ],
+        "en": [
+          "It is on card E, so the number is between 16 and 31; write it as 16 + m with m from 0 to 15.",
+          "Not on card D: its remainder when divided by 16 is m, and m is not 8 to 15, so m is 0 to 7. On card C: the remainder when divided by 8 is m itself, which must be 4 to 7.",
+          "On card B: m leaves remainder 2 or 3 when divided by 4, so m is 6 or 7. Not on card A: the number is even, so m = 6.",
+          "So the number is 16 + 6 = 22. In fact 22 = 16 + 4 + 2, the sum of the first numbers on cards E, C and B: each card stands for a power of 2, which is the binary mind-reading trick."
+        ],
+        "ja": [
+          "戊カードにあるので、数は 16 から 31 の間で、16 + m（m は 0 から 15）と書けます。",
+          "丁カードにない：16 で割ったあまりは m で、m は 8 から 15 ではないので 0 から 7 です。丙カードにある：8 で割ったあまりは m そのもので、4 から 7 です。",
+          "乙カードにある：m を 4 で割ると 2 か 3 あまるので、m は 6 か 7 です。甲カードにない：数は偶数なので m = 6 です。",
+          "したがって数は 16 + 6 = 22 です。じつは 22 = 16 + 4 + 2 で、戊・丙・乙のカードの最初の数の和になっています。どのカードも「2 を何回かかけた数」に対応していて、これが 2 進法の数当て手品です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "22"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade6-foundation",
+        "notes": "二進位讀心卡（以餘數規則描述，不直接說二進位）。掃過：卡片|心裡想|心中想|二進|進位；讀過 number_theory_grade7_047、number_theory_grade9_045、number_theory_grade12_041（二進位計數）、logic_grade7_014（猜數）。既有二進位題都是換算或數 1 的個數，本題要用餘數條件逐層縮小範圍，最後才看出二進位結構。"
+      }
+    },
+    {
+      "id": "logic_grade6_foundation_075",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "distinct_totals_with_penalty_scoring",
+      "tags": [
+        "c:basic_counting",
+        "c:linear_eq",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade6",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一份測驗有 10 題，每題答對得 3 分，答錯扣 1 分，不作答得 0 分，總分可以是負數。把所有同學可能拿到的總分都列出來，一共有幾種不同的數值？",
+        "zh-Hans": "一份测验有 10 题，每题答对得 3 分，答错扣 1 分，不作答得 0 分，总分可以是负数。把所有同学可能拿到的总分都列出来，一共有几种不同的数值？",
+        "en": "A test has 10 questions. Each correct answer scores 3 points, each wrong answer loses 1 point, and each unanswered question scores 0; totals may be negative. Listing every possible total score, how many different values are there?",
+        "ja": "テストは 10 問で、正解は 3 点、不正解は 1 点減点、無回答は 0 点です。合計点はマイナスになることもあります。とりうる合計点を全部書き出すと、ちがう値は全部で何通りありますか。"
+      },
+      "answer": {
+        "zh-Hant": "一共有 38 種不同的總分。",
+        "zh-Hans": "一共有 38 种不同的总分。",
+        "en": "There are 38 different totals.",
+        "ja": "全部で 38 通りです。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "設答對 c 題、答錯 w 題，c + w ≤ 10，總分是 3 × c − w。固定 c 時，w 可以是 0 到 10 − c，所以總分從 3 × c −（10 − c）= 4 × c − 10 一路到 3 × c，中間的整數全都拿得到。",
+          "依 c 列出範圍：c = 0 為 −10～0；1 為 −6～3；2 為 −2～6；3 為 2～9；4 為 6～12；5 為 10～15；6 為 14～18；7 為 18～21；8 為 22～24；9 為 26～27；10 為 30。",
+          "c = 0 到 7 的範圍前後相接，合起來是 −10 到 21，共 32 個值。之後就開始出現空缺：再加上 22～24（3 個）、26～27（2 個）、30（1 個）。25、28、29 分都拿不到。",
+          "一共 32 + 3 + 2 + 1 = 38 種不同的總分。"
+        ],
+        "zh-Hans": [
+          "设答对 c 题、答错 w 题，c + w ≤ 10，总分是 3 × c − w。固定 c 时，w 可以是 0 到 10 − c，所以总分从 3 × c −（10 − c）= 4 × c − 10 一路到 3 × c，中间的整数全都拿得到。",
+          "依 c 列出范围：c = 0 为 −10～0；1 为 −6～3；2 为 −2～6；3 为 2～9；4 为 6～12；5 为 10～15；6 为 14～18；7 为 18～21；8 为 22～24；9 为 26～27；10 为 30。",
+          "c = 0 到 7 的范围前后相接，合起来是 −10 到 21，共 32 个值。之后就开始出现空缺：再加上 22～24（3 个）、26～27（2 个）、30（1 个）。25、28、29 分都拿不到。",
+          "一共 32 + 3 + 2 + 1 = 38 种不同的总分。"
+        ],
+        "en": [
+          "Let c be correct and w wrong, with c + w ≤ 10; the total is 3 × c − w. For fixed c, w runs from 0 to 10 − c, so the total takes every whole number from 3 × c − (10 − c) = 4 × c − 10 up to 3 × c.",
+          "List the ranges by c: c = 0 gives −10 to 0; 1 gives −6 to 3; 2 gives −2 to 6; 3 gives 2 to 9; 4 gives 6 to 12; 5 gives 10 to 15; 6 gives 14 to 18; 7 gives 18 to 21; 8 gives 22 to 24; 9 gives 26 to 27; 10 gives 30.",
+          "For c = 0 to 7 the ranges join up into −10 to 21, which is 32 values. After that gaps appear: add 22–24 (3 values), 26–27 (2 values) and 30 (1 value). Scores of 25, 28 and 29 are impossible.",
+          "In total 32 + 3 + 2 + 1 = 38 different totals."
+        ],
+        "ja": [
+          "正解を c 問、不正解を w 問とすると c + w ≤ 10 で、合計は 3 × c − w です。c を決めると w は 0 から 10 − c まで動くので、合計は 3 × c − (10 − c) = 4 × c − 10 から 3 × c までのすべての整数になります。",
+          "c ごとの範囲は、c = 0 で −10～0、1 で −6～3、2 で −2～6、3 で 2～9、4 で 6～12、5 で 10～15、6 で 14～18、7 で 18～21、8 で 22～24、9 で 26～27、10 で 30 です。",
+          "c = 0 から 7 までの範囲はつながって −10 から 21 までの 32 通りになります。そのあとはすき間ができ、22～24（3 通り）、26～27（2 通り）、30（1 通り）が加わります。25、28、29 点はとれません。",
+          "全部で 32 + 3 + 2 + 1 = 38 通りです。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "38"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade6-foundation",
+        "notes": "計分規則下可能總分的個數。掃過：不作答|答錯.*扣|倒扣|空白；讀過 arithmetic_grade5_076（全作答、已知總分求答對題數）、arithmetic_grade6_014（已知作答情形算總分）、logic_grade3_029。既有題都是求單一情形的分數或題數；本題要找出所有可能總分，發現高分區出現拿不到的分數。"
+      }
+    },
+    {
+      "id": "logic_grade6_foundation_076",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "round_robin_total_points_count_draws",
+      "tags": [
+        "c:basic_counting",
+        "c:linear_eq",
+        "m:invariant"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade6",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "6 支球隊進行單循環賽，每兩隊之間恰好比賽一場。每一場比賽，勝隊得 3 分、敗隊得 0 分；如果平手，兩隊各得 1 分。全部比完後，6 支球隊的積分加起來一共是 40 分。整個比賽中一共有幾場平手？",
+        "zh-Hans": "6 支球队进行单循环赛，每两队之间恰好比赛一场。每一场比赛，胜队得 3 分、败队得 0 分；如果平手，两队各得 1 分。全部比完后，6 支球队的积分加起来一共是 40 分。整个比赛中一共有几场平手？",
+        "en": "Six teams play a round robin: every two teams play each other exactly once. In each match the winner gets 3 points and the loser 0; in a draw each team gets 1 point. When all matches are over, the six teams' points add up to 40. How many matches were draws?",
+        "ja": "6 チームが総当たり戦をし、どの 2 チームもちょうど 1 回ずつ対戦します。1 試合ごとに勝ったチームは 3 点、負けたチームは 0 点、引き分けなら両チームに 1 点ずつです。全試合が終わったとき、6 チームの得点の合計は 40 点でした。引き分けの試合は全部で何試合ありましたか。"
+      },
+      "answer": {
+        "zh-Hant": "一共有 5 場平手。",
+        "zh-Hans": "一共有 5 场平手。",
+        "en": "There were 5 draws.",
+        "ja": "引き分けは 5 試合です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "比賽場數：每兩隊一場，6 隊中每隊要和另外 5 隊比，6 × 5 = 30，但每場被兩隊各算一次，所以共 30 ÷ 2 = 15 場。",
+          "看每一場送出的總分：分出勝負的一場共送出 3 + 0 = 3 分，平手的一場共送出 1 + 1 = 2 分。也就是每多一場平手，總積分就比「全部分出勝負」少 1 分。",
+          "15 場全部分出勝負時總積分是 15 × 3 = 45 分，實際是 40 分，少了 45 − 40 = 5 分，所以一共有 5 場平手。"
+        ],
+        "zh-Hans": [
+          "比赛场数：每两队一场，6 队中每队要和另外 5 队比，6 × 5 = 30，但每场被两队各算一次，所以共 30 ÷ 2 = 15 场。",
+          "看每一场送出的总分：分出胜负的一场共送出 3 + 0 = 3 分，平手的一场共送出 1 + 1 = 2 分。也就是每多一场平手，总积分就比「全部分出胜负」少 1 分。",
+          "15 场全部分出胜负时总积分是 15 × 3 = 45 分，实际是 40 分，少了 45 − 40 = 5 分，所以一共有 5 场平手。"
+        ],
+        "en": [
+          "Number of matches: each team plays the other 5, and 6 × 5 = 30, but each match is counted by both teams, so there are 30 ÷ 2 = 15 matches.",
+          "Look at the total points handed out per match: a match with a winner gives 3 + 0 = 3 points, a draw gives 1 + 1 = 2. So each draw makes the grand total 1 point less than if every match had a winner.",
+          "If all 15 matches had a winner the total would be 15 × 3 = 45 points; it is actually 40, which is 45 − 40 = 5 less, so there were 5 draws."
+        ],
+        "ja": [
+          "試合数：どのチームもほかの 5 チームと対戦するので 6 × 5 = 30 ですが、1 試合を 2 チームで 2 回数えているので 30 ÷ 2 = 15 試合です。",
+          "1 試合で配られる点の合計を見ます。勝ち負けがつく試合は 3 + 0 = 3 点、引き分けは 1 + 1 = 2 点です。つまり引き分けが 1 試合あるごとに、全部勝ち負けがついた場合より合計が 1 点少なくなります。",
+          "15 試合すべてに勝ち負けがつけば合計は 15 × 3 = 45 点ですが、実際は 40 点で 45 − 40 = 5 点少ないので、引き分けは 5 試合です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "5"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade6-foundation",
+        "notes": "循環賽總積分與平手場數。掃過：循環賽|平手|和局|積分|得 3 分；讀過 logic_grade10_015（五隊循環賽勝場數）、logic_grade3_029（兩人三局贏 3 分平 1 分）、combinatorics_grade7_018（分組循環賽場數）、logic_grade5_017。既有題求勝場數或場數；本題要看出「每場送出的總分只取決於是否平手」，把 6 隊的總積分轉成平手場數。"
+      }
+    },
+    {
+      "id": "logic_grade6_foundation_077",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "route_inspection_complete_four_villages",
+      "tags": [
+        "c:graph_theory",
+        "m:estimate_bound",
+        "m:construction"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade6",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "A、B、C、D 四個村莊，每兩個村莊之間都有一條長 1 公里的路直接相連，一共 6 條路，路和路只在村莊相交。郵差從 A 村出發，要把這 6 條路每一條都至少走過一次，最後回到 A 村。他最少要走幾公里？",
+        "zh-Hans": "A、B、C、D 四个村庄，每两个村庄之间都有一条长 1 公里的路直接相连，一共 6 条路，路和路只在村庄相交。邮差从 A 村出发，要把这 6 条路每一条都至少走过一次，最后回到 A 村。他最少要走几公里？",
+        "en": "There are four villages A, B, C, D, and every two of them are joined directly by a road 1 km long, 6 roads in all; roads meet only at villages. A postman starts at village A, must walk along each of the 6 roads at least once, and finally return to A. What is the smallest total distance he must walk, in km?",
+        "ja": "A、B、C、D の 4 つの村があり、どの 2 つの村の間にも長さ 1 km の道が 1 本ずつ直接通じていて、道は全部で 6 本です。道どうしは村でしか交わりません。郵便配達の人が A 村を出発し、6 本の道をどれも少なくとも 1 回は通って、最後に A 村にもどります。最も短くて何 km 歩きますか。"
+      },
+      "answer": {
+        "zh-Hant": "最少要走 8 公里。",
+        "zh-Hans": "最少要走 8 公里。",
+        "en": "At least 8 km.",
+        "ja": "最も短くて 8 km です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "走一條會回到起點的路線時，每經過一個村莊，都是「走進去一次、走出來一次」，用掉 2 次路段。所以每個村莊連著的路段，被走過的總次數一定是偶數。",
+          "每個村莊都連著 3 條路，3 是奇數，所以每個村莊至少有 1 條路要多走一次。多走一條路，只能同時照顧到它兩端的 2 個村莊；4 個村莊至少要多走 2 條路。",
+          "所以至少要走 6 + 2 = 8 公里。",
+          "實際走法：A→B→A→C→D→C→B→D→A。A–B 和 C–D 各走兩次，其他 4 條各走一次，6 條路都走到了，共 8 公里。所以最少 8 公里。"
+        ],
+        "zh-Hans": [
+          "走一条会回到起点的路线时，每经过一个村庄，都是「走进去一次、走出来一次」，用掉 2 次路段。所以每个村庄连着的路段，被走过的总次数一定是偶数。",
+          "每个村庄都连着 3 条路，3 是奇数，所以每个村庄至少有 1 条路要多走一次。多走一条路，只能同时照顾到它两端的 2 个村庄；4 个村庄至少要多走 2 条路。",
+          "所以至少要走 6 + 2 = 8 公里。",
+          "实际走法：A→B→A→C→D→C→B→D→A。A–B 和 C–D 各走两次，其他 4 条各走一次，6 条路都走到了，共 8 公里。所以最少 8 公里。"
+        ],
+        "en": [
+          "On a route that returns to its start, each visit to a village uses the roads there twice: once in and once out. So at every village, the total number of times its roads are walked must be even.",
+          "Each village has 3 roads, an odd number, so at each village at least one road must be walked an extra time. An extra walk of one road helps only the 2 villages at its ends; 4 villages need at least 2 extra roads.",
+          "So he must walk at least 6 + 2 = 8 km.",
+          "A route that works: A→B→A→C→D→C→B→D→A. Roads A–B and C–D are walked twice and the other 4 once each; all 6 roads are covered in 8 km. So the minimum is 8 km."
+        ],
+        "ja": [
+          "出発点にもどる道順では、村を通るたびに「入る 1 回と出る 1 回」で道を 2 回使います。だから、どの村でも、そこにつながる道を歩く回数の合計は偶数です。",
+          "どの村にも道が 3 本あり 3 は奇数なので、どの村でも少なくとも 1 本の道をもう 1 回歩く必要があります。1 本の道をもう 1 回歩いても、助かるのはその両はしの 2 つの村だけなので、4 つの村には少なくとも 2 本分よけいに歩く必要があります。",
+          "したがって少なくとも 6 + 2 = 8 km 歩きます。",
+          "実際の道順の例：A→B→A→C→D→C→B→D→A。A–B と C–D を 2 回ずつ、ほかの 4 本を 1 回ずつ歩き、6 本全部を通って 8 km です。だから最短は 8 km です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "8"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade6-foundation",
+        "notes": "中國郵差問題入門（奇點配對）。掃過：郵差|每一條路|一筆畫|走過.*每一條；讀過 logic_grade3_056（正六邊形對角線不能一筆畫）、logic_grade5_050（點與線的度數和）、logic_grade11_046。既有題判斷能否一筆畫或數線段數，本題要求「不能一筆畫時最少重走多少」，用每個村莊次數必為偶數給下界再構造。"
+      }
+    },
+    {
+      "id": "logic_grade6_foundation_078",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "circle_coin_game_symmetry_strategy",
+      "tags": [
+        "c:game_theory",
+        "c:symmetry",
+        "m:construction"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade6",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "桌上有 12 枚硬幣排成一個圓圈。甲、乙兩人輪流拿硬幣，由甲先拿：每次可以拿走 1 枚硬幣，或拿走 2 枚「原本在圓圈上緊鄰、而且目前都還在桌上」的硬幣。拿走最後一枚硬幣的人獲勝。如果兩人都用最好的策略，結果會是下列哪一個？",
+        "zh-Hans": "桌上有 12 枚硬币排成一个圆圈。甲、乙两人轮流拿硬币，由甲先拿：每次可以拿走 1 枚硬币，或拿走 2 枚「原本在圆圈上紧邻、而且目前都还在桌上」的硬币。拿走最后一枚硬币的人获胜。如果两人都用最好的策略，结果会是下列哪一个？",
+        "en": "Twelve coins lie in a circle on a table. A and B take turns, A first: each turn a player takes 1 coin, or takes 2 coins that were next to each other in the original circle and are both still on the table. Whoever takes the last coin wins. If both play as well as possible, which statement is true?",
+        "ja": "机の上に 12 枚の硬貨が円形に並んでいます。甲と乙が交互に取り、甲が先です。1 回に硬貨を 1 枚取るか、「もとの円でとなり合っていて、どちらもまだ机の上にある」2 枚を取ります。最後の 1 枚を取った人の勝ちです。2 人とも最善をつくすと、どうなりますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 C：乙必勝，不論甲第一步怎麼拿。",
+        "zh-Hans": "答案是 C：乙必胜，不论甲第一步怎么拿。",
+        "en": "The answer is C: B wins, whatever A does first.",
+        "ja": "答えは C：甲が最初にどう取っても乙が必ず勝つ、です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "甲第一步不論拿 1 枚還是 2 枚，圓圈都會斷開，剩下的硬幣排成一條直線：拿 1 枚剩 11 枚一排，拿 2 枚剩 10 枚一排。",
+          "乙接著從這一排的正中間拿：剩 11 枚就拿中間第 6 枚，剩 10 枚就拿中間的第 5、6 枚。這樣桌上變成兩段一樣長的硬幣（5 枚和 5 枚，或 4 枚和 4 枚），兩段之間是空的，不再緊鄰。",
+          "之後甲在某一段怎麼拿，乙就在另一段的對應位置照樣拿。兩段永遠保持一模一樣，甲每一次能拿，乙一定也能跟著拿。",
+          "所以最後一枚一定是乙拿走，乙必勝，而且和甲第一步拿哪裡、拿幾枚都無關。答案是 C。"
+        ],
+        "zh-Hans": [
+          "甲第一步不论拿 1 枚还是 2 枚，圆圈都会断开，剩下的硬币排成一条直线：拿 1 枚剩 11 枚一排，拿 2 枚剩 10 枚一排。",
+          "乙接着从这一排的正中间拿：剩 11 枚就拿中间第 6 枚，剩 10 枚就拿中间的第 5、6 枚。这样桌上变成两段一样长的硬币（5 枚和 5 枚，或 4 枚和 4 枚），两段之间是空的，不再紧邻。",
+          "之后甲在某一段怎么拿，乙就在另一段的对应位置照样拿。两段永远保持一模一样，甲每一次能拿，乙一定也能跟着拿。",
+          "所以最后一枚一定是乙拿走，乙必胜，而且和甲第一步拿哪里、拿几枚都无关。答案是 C。"
+        ],
+        "en": [
+          "Whether A first takes 1 or 2 coins, the circle is broken and the remaining coins form a straight line: 11 in a row after taking 1, or 10 in a row after taking 2.",
+          "B then takes from the exact middle of the row: from 11 coins take the 6th, from 10 coins take the 5th and 6th. This leaves two equal stretches (5 and 5, or 4 and 4) with a gap between them, so they are no longer adjacent.",
+          "From then on, whatever A takes in one stretch, B takes the matching coins in the other stretch. The two stretches always stay identical, so whenever A can move, B can copy.",
+          "So B always takes the last coin: B wins, no matter where or how many A takes first. The answer is C."
+        ],
+        "ja": [
+          "甲が最初に 1 枚取っても 2 枚取っても円は切れて、残りは 1 列に並びます。1 枚取れば 11 枚、2 枚取れば 10 枚の列です。",
+          "乙は次に列の真ん中から取ります。11 枚なら真ん中の 6 枚目、10 枚なら真ん中の 5 枚目と 6 枚目です。すると同じ長さの 2 つの列（5 枚と 5 枚、または 4 枚と 4 枚）になり、間があいて、もうとなり合いません。",
+          "その後は、甲が一方の列でどう取っても、乙はもう一方の列の対応する場所を同じように取ります。2 つの列はいつも同じ形なので、甲が取れるときは乙も必ずまねできます。",
+          "したがって最後の 1 枚は必ず乙が取り、甲が最初にどこを何枚取っても乙の勝ちです。答えは C です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "multiple_choice",
+      "options": {
+        "A": {
+          "zh-Hant": "甲必勝，第一步拿 1 枚就能贏",
+          "zh-Hans": "甲必胜，第一步拿 1 枚就能赢",
+          "en": "A wins by taking 1 coin first",
+          "ja": "甲が最初に 1 枚取れば必ず勝つ"
+        },
+        "B": {
+          "zh-Hant": "甲必勝，第一步拿 2 枚就能贏",
+          "zh-Hans": "甲必胜，第一步拿 2 枚就能赢",
+          "en": "A wins by taking 2 coins first",
+          "ja": "甲が最初に 2 枚取れば必ず勝つ"
+        },
+        "C": {
+          "zh-Hant": "乙必勝，不論甲第一步怎麼拿",
+          "zh-Hans": "乙必胜，不论甲第一步怎么拿",
+          "en": "B wins, whatever A does first",
+          "ja": "甲が最初にどう取っても乙が必ず勝つ"
+        },
+        "D": {
+          "zh-Hant": "誰贏要看甲第一步拿的是哪一枚",
+          "zh-Hans": "谁赢要看甲第一步拿的是哪一枚",
+          "en": "The winner depends on which coin A takes",
+          "ja": "どちらが勝つかは甲が最初に取る硬貨による"
+        }
+      },
+      "correctAnswer": {
+        "type": "choice",
+        "value": "C"
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade6-foundation",
+        "notes": "對稱策略博弈（圓圈硬幣）。掃過：圍成一圈|排成一圈|硬幣.*圈|對稱.*策略|輪流；讀過 logic_grade10_044（圓桌放硬幣，先手放中心對稱）、logic_grade12_009（Kayles 磚牆組態）、logic_grade9_047。grade10_044 是先手占中心後模仿；本題相反，是後手利用「圓斷成直線」再占中間模仿，且要注意拿 1 或拿 2 時中間取法不同。"
+      }
+    },
+    {
+      "id": "logic_grade6_foundation_079",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "folded_newspaper_sheet_page_numbers",
+      "tags": [
+        "c:add_sub",
+        "c:pattern",
+        "m:invariant"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade6",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一份報紙由好幾張大紙對摺後疊在一起組成，每張大紙對摺後形成 4 頁，全份報紙從最外面那張的第 1 頁開始連續編頁碼，總頁數是 4 的倍數。小安從中抽出一張大紙，發現上面印有第 7 頁和第 30 頁。這份報紙一共有幾頁？",
+        "zh-Hans": "一份报纸由好几张大纸对折后叠在一起组成，每张大纸对折后形成 4 页，全份报纸从最外面那张的第 1 页开始连续编页码，总页数是 4 的倍数。小安从中抽出一张大纸，发现上面印有第 7 页和第 30 页。这份报纸一共有几页？",
+        "en": "A newspaper is made of several large sheets, each folded in half and stacked together; each folded sheet forms 4 pages, and the pages are numbered consecutively starting with page 1 on the outermost sheet, the total being a multiple of 4. An pulls out one large sheet and sees that it carries page 7 and page 30. How many pages does the newspaper have?",
+        "ja": "新聞は何まいかの大きな紙を二つ折りにして重ねたもので、1 まいの紙で 4 ページになります。いちばん外側の紙の 1 ページから順にページ番号がつき、ページ数の合計は 4 の倍数です。アンが 1 まいの紙をぬき出すと、7 ページと 30 ページが印刷されていました。この新聞は全部で何ページですか。"
+      },
+      "answer": {
+        "zh-Hant": "這份報紙一共有 36 頁。",
+        "zh-Hans": "这份报纸一共有 36 页。",
+        "en": "The newspaper has 36 pages.",
+        "ja": "全部で 36 ページです。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "設總頁數是 N。一張大紙從外往內算的第 k 張，前半印第 2k − 1、2k 頁，後半印第 N − 2k + 1、N − 2k + 2 頁；同一張紙上成對的頁碼加起來都是 N + 1。",
+          "第 7 頁是奇數，所以它在第 4 張紙上，這張紙有第 7、8 頁，以及 N − 7、N − 6 頁（7 + (N − 6) = N + 1，8 + (N − 7) = N + 1）。",
+          "第 30 頁是 N − 6 或 N − 7。若 30 = N − 6，N = 36，是 4 的倍數；若 30 = N − 7，N = 37，不是 4 的倍數，不行。",
+          "所以報紙共 36 頁，這張紙上是第 7、8、29、30 頁。"
+        ],
+        "zh-Hans": [
+          "设总页数是 N。一张大纸从外往内算的第 k 张，前半印第 2k − 1、2k 页，后半印第 N − 2k + 1、N − 2k + 2 页；同一张纸上成对的页码加起来都是 N + 1。",
+          "第 7 页是奇数，所以它在第 4 张纸上，这张纸有第 7、8 页，以及 N − 7、N − 6 页（7 + (N − 6) = N + 1，8 + (N − 7) = N + 1）。",
+          "第 30 页是 N − 6 或 N − 7。若 30 = N − 6，N = 36，是 4 的倍数；若 30 = N − 7，N = 37，不是 4 的倍数，不行。",
+          "所以报纸共 36 页，这张纸上是第 7、8、29、30 页。"
+        ],
+        "en": [
+          "Let the total be N. The k-th sheet from the outside carries pages 2k − 1 and 2k in the front half and pages N − 2k + 1 and N − 2k + 2 in the back half; paired pages on one sheet always add up to N + 1.",
+          "Page 7 is odd, so it is on sheet 4, which carries pages 7 and 8 and pages N − 7 and N − 6 (7 + (N − 6) = N + 1 and 8 + (N − 7) = N + 1).",
+          "Page 30 is either N − 6 or N − 7. If 30 = N − 6 then N = 36, a multiple of 4; if 30 = N − 7 then N = 37, not a multiple of 4, rejected.",
+          "So the newspaper has 36 pages, and this sheet carries pages 7, 8, 29 and 30."
+        ],
+        "ja": [
+          "ページ数の合計を N とします。外から k まい目の紙には、前半に 2k − 1 ページと 2k ページ、後半に N − 2k + 1 ページと N − 2k + 2 ページがあり、同じ紙の組になるページの和はいつも N + 1 です。",
+          "7 ページは奇数なので 4 まい目の紙にあり、この紙には 7、8 ページと N − 7、N − 6 ページがあります（7 + (N − 6) = N + 1、8 + (N − 7) = N + 1）。",
+          "30 ページは N − 6 か N − 7 です。30 = N − 6 なら N = 36 で 4 の倍数、30 = N − 7 なら N = 37 で 4 の倍数ではないのでだめです。",
+          "したがって新聞は 36 ページで、この紙には 7、8、29、30 ページがあります。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "36"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade6-foundation",
+        "notes": "對摺報紙的頁碼配對規律。掃過：報紙|頁碼|一張紙.*頁；讀過 arithmetic_grade3_105（書頁撕下一張，正反面兩頁和 75）、arithmetic_grade5_005。grade3_105 是單張正反兩頁連號；本題是對摺紙一張四頁、前後兩半配對和為 N + 1，還要用 4 的倍數排除一種情形。"
+      }
+    },
+    {
+      "id": "logic_grade6_foundation_080",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "plus_minus_signs_parity_minimum",
+      "tags": [
+        "c:add_sub",
+        "m:invariant",
+        "m:construction"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade6",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "在算式 1 □ 2 □ 3 □ 4 □ 5 □ 6 □ 7 □ 8 □ 9 □ 10 的 9 個方格裡，每一格都填入「+」或「−」（數字順序不能改，也不能加括號），然後算出結果。在所有填法中，算出來的結果如果不能是負數，最小可以是多少？",
+        "zh-Hans": "在算式 1 □ 2 □ 3 □ 4 □ 5 □ 6 □ 7 □ 8 □ 9 □ 10 的 9 个方格里，每一格都填入「+」或「−」（数字顺序不能改，也不能加括号），然后算出结果。在所有填法中，算出来的结果如果不能是负数，最小可以是多少？",
+        "en": "In the expression 1 □ 2 □ 3 □ 4 □ 5 □ 6 □ 7 □ 8 □ 9 □ 10, each of the 9 boxes is filled with \"+\" or \"−\" (the order of the numbers cannot change and no brackets may be added), and the result is computed. Among all fillings whose result is not negative, what is the smallest possible result?",
+        "ja": "式 1 □ 2 □ 3 □ 4 □ 5 □ 6 □ 7 □ 8 □ 9 □ 10 の 9 つの □ に、それぞれ「+」か「−」を入れて計算します（数の順番は変えられず、かっこも使えません）。結果が負の数にならない入れ方のうち、結果は最小でいくつにできますか。"
+      },
+      "answer": {
+        "zh-Hant": "結果最小是 1。",
+        "zh-Hans": "结果最小是 1。",
+        "en": "The smallest result is 1.",
+        "ja": "結果は最小で 1 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "全部填「+」時，結果是 1 + 2 + ⋯ + 10 = 55，是奇數。",
+          "把某個數 k 前面的「+」改成「−」，結果會少 2 × k，是偶數。不論改幾個，結果都是 55 減掉一個偶數，永遠是奇數，所以結果不可能是 0，最小至少是 1。",
+          "要得到 1，減掉的數加起來要是 (55 − 1) ÷ 2 = 27。取 8 + 9 + 10 = 27：1 + 2 + 3 + 4 + 5 + 6 + 7 − 8 − 9 − 10 = 28 − 27 = 1。所以最小是 1。"
+        ],
+        "zh-Hans": [
+          "全部填「+」时，结果是 1 + 2 + ⋯ + 10 = 55，是奇数。",
+          "把某个数 k 前面的「+」改成「−」，结果会少 2 × k，是偶数。不论改几个，结果都是 55 减掉一个偶数，永远是奇数，所以结果不可能是 0，最小至少是 1。",
+          "要得到 1，减掉的数加起来要是 (55 − 1) ÷ 2 = 27。取 8 + 9 + 10 = 27：1 + 2 + 3 + 4 + 5 + 6 + 7 − 8 − 9 − 10 = 28 − 27 = 1。所以最小是 1。"
+        ],
+        "en": [
+          "With all \"+\", the result is 1 + 2 + … + 10 = 55, which is odd.",
+          "Changing the \"+\" before some number k into \"−\" lowers the result by 2 × k, an even number. However many are changed, the result is 55 minus an even number, always odd, so it can never be 0; the smallest is at least 1.",
+          "To get 1, the numbers with \"−\" must add up to (55 − 1) ÷ 2 = 27. Take 8 + 9 + 10 = 27: 1 + 2 + 3 + 4 + 5 + 6 + 7 − 8 − 9 − 10 = 28 − 27 = 1. So the smallest is 1."
+        ],
+        "ja": [
+          "すべて「+」なら結果は 1 + 2 + … + 10 = 55 で、奇数です。",
+          "ある数 k の前の「+」を「−」にかえると、結果は 2 × k、つまり偶数だけ小さくなります。いくつかえても結果は 55 から偶数をひいた数で、いつも奇数です。だから 0 にはならず、最小でも 1 です。",
+          "1 にするには、「−」をつける数の和が (55 − 1) ÷ 2 = 27 になればよいです。8 + 9 + 10 = 27 をとると、1 + 2 + 3 + 4 + 5 + 6 + 7 − 8 − 9 − 10 = 28 − 27 = 1 です。だから最小は 1 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "1"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade6-foundation",
+        "notes": "填加減號的奇偶不變量。掃過：加號|減號|「+」|「−」|填入.*符號；讀過 arithmetic_grade2_094（9□4□3□2 結果 4 填幾個減號）、arithmetic_grade3_090（填加號或乘號求最大）、logic_grade3_044（翻杯子奇偶）。grade2_094 是小數字直接試；本題要先用奇偶說明 0 不可能，再構造出 1。"
+      }
     }
   ]
 }

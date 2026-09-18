@@ -8662,6 +8662,366 @@
         "reference": "arithmetic-grade5-foundation",
         "notes": "題型骨架取自 CEMC Gauss Grade 7（2015 年第 16 題，三種硬幣枚數相同湊出 440 分）與同系列的湊整值題，改成小數重量並要求唯一組合。掃庫比對過 arithmetic_grade4_020、036（硬幣枚數湊金額，是整數且問組合數）、arithmetic_grade5_071（8 元筆改買 5 元筆可多買 3 支）、arithmetic_grade6_069（三種硬幣共 20 枚求 10 元最多幾枚，是極值），本題的推理點是先把小數化成整數再用倍數論證把解卡成唯一，型態不同。"
       }
+    },
+    {
+      "id": "arithmetic_grade5_foundation_116",
+      "reviewStatus": "ok",
+      "topic": "arithmetic",
+      "subtopic": "base_six_packing_fewest_packages",
+      "tags": [
+        "c:number_base",
+        "c:mul_div",
+        "m:extremal"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade5",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "養雞場出貨時這樣包裝雞蛋：6 顆蛋裝成 1 盒，6 盒裝成 1 箱。寄出時可以寄整箱、整盒，也可以寄沒有裝盒的單顆蛋。今天要寄出剛好 200 顆蛋，希望「箱數＋盒數＋單顆蛋的顆數」加起來越少越好。這個總件數最少是多少？",
+        "zh-Hans": "养鸡场出货时这样包装鸡蛋：6 颗蛋装成 1 盒，6 盒装成 1 箱。寄出时可以寄整箱、整盒，也可以寄没有装盒的单颗蛋。今天要寄出刚好 200 颗蛋，希望「箱数＋盒数＋单颗蛋的颗数」加起来越少越好。这个总件数最少是多少？",
+        "en": "A farm packs eggs like this: 6 eggs make 1 box, and 6 boxes make 1 crate. A shipment may contain full crates, full boxes, and loose single eggs. Today exactly 200 eggs must be shipped, and the farm wants \"number of crates + number of boxes + number of loose eggs\" to be as small as possible. What is the smallest possible total?",
+        "ja": "養鶏場では卵をこのように包みます。卵 6 個で 1 パック、6 パックで 1 箱です。出荷するときは、箱のまま、パックのまま、またはパックに入れないばらの卵 1 個ずつでも送れます。今日はちょうど 200 個の卵を送ります。「箱の数＋パックの数＋ばらの卵の個数」をできるだけ少なくしたいとき、その合計は最も少なくていくつですか。"
+      },
+      "answer": {
+        "zh-Hant": "總件數最少是 10 件。",
+        "zh-Hans": "总件数最少是 10 件。",
+        "en": "The smallest total is 10.",
+        "ja": "合計は最も少なくて 10 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "1 箱 = 6 盒 = 36 顆。如果有 6 盒沒裝箱，把它們裝成 1 箱，件數就從 6 件變成 1 件；如果有 6 顆散蛋，把它們裝成 1 盒，件數也從 6 件變成 1 件。所以件數最少時，盒數和散蛋都不會超過 5。",
+          "先裝箱：200 ÷ 36 = 5 餘 20，所以裝 5 箱，共 180 顆，還剩 20 顆。",
+          "再裝盒：20 ÷ 6 = 3 餘 2，所以裝 3 盒，共 18 顆，剩下 2 顆散蛋。盒數 3 和散蛋 2 都不超過 5，不能再合併。",
+          "總件數 = 5 + 3 + 2 = 10 件。這其實就是把 200 用「逢 6 進 1」的方式寫出來（5、3、2 三個位），所以最少是 10 件。"
+        ],
+        "zh-Hans": [
+          "1 箱 = 6 盒 = 36 颗。如果有 6 盒没装箱，把它们装成 1 箱，件数就从 6 件变成 1 件；如果有 6 颗散蛋，把它们装成 1 盒，件数也从 6 件变成 1 件。所以件数最少时，盒数和散蛋都不会超过 5。",
+          "先装箱：200 ÷ 36 = 5 余 20，所以装 5 箱，共 180 颗，还剩 20 颗。",
+          "再装盒：20 ÷ 6 = 3 余 2，所以装 3 盒，共 18 颗，剩下 2 颗散蛋。盒数 3 和散蛋 2 都不超过 5，不能再合并。",
+          "总件数 = 5 + 3 + 2 = 10 件。这其实就是把 200 用「逢 6 进 1」的方式写出来（5、3、2 三个位），所以最少是 10 件。"
+        ],
+        "en": [
+          "1 crate = 6 boxes = 36 eggs. If 6 boxes are left uncrated, putting them into 1 crate turns 6 items into 1; if 6 eggs are loose, putting them into 1 box also turns 6 items into 1. So when the count is smallest, there are at most 5 boxes and at most 5 loose eggs.",
+          "Crates first: 200 ÷ 36 = 5 remainder 20, so 5 crates hold 180 eggs and 20 eggs are left.",
+          "Then boxes: 20 ÷ 6 = 3 remainder 2, so 3 boxes hold 18 eggs and 2 loose eggs remain. Both 3 and 2 are at most 5, so nothing can be merged further.",
+          "Total = 5 + 3 + 2 = 10 items. This is just writing 200 in a \"carry at 6\" system with digits 5, 3, 2, so the minimum is 10."
+        ],
+        "ja": [
+          "1 箱 = 6 パック = 36 個です。箱に入れていないパックが 6 つあれば 1 箱にまとめると 6 件が 1 件になり、ばらの卵が 6 個あれば 1 パックにまとめると 6 件が 1 件になります。だから件数が最も少ないとき、パックもばらの卵も 5 以下です。",
+          "まず箱に入れます。200 ÷ 36 = 5 あまり 20 なので、5 箱で 180 個、残りは 20 個です。",
+          "次にパックに入れます。20 ÷ 6 = 3 あまり 2 なので、3 パックで 18 個、ばらの卵が 2 個残ります。3 も 2 も 5 以下なので、これ以上まとめられません。",
+          "件数は 5 + 3 + 2 = 10 件です。これは 200 を「6 でくり上がる」書き方（5、3、2 の 3 けた）で表したことと同じなので、最も少ない件数は 10 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "10"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "arithmetic-grade5-foundation",
+        "notes": "改寫自進位制入門題型（以包裝層級代替底數），掃過關鍵字：進位|一盒.*一箱|每箱.*盒|雞蛋；讀過 arithmetic_grade3_117、number_theory_grade8_050、number_theory_grade9_018。最接近的是 grade9_018（把 100 換成五進位求數字和），本題不出現「進位制」字樣，學生要自己看出「件數最少 ⇔ 每一層不超過 5」這個合併論證。"
+      }
+    },
+    {
+      "id": "arithmetic_grade5_foundation_117",
+      "reviewStatus": "ok",
+      "topic": "arithmetic",
+      "subtopic": "bus_count_range_intersection",
+      "tags": [
+        "c:inequality",
+        "c:mul_div",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade5",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "學校校外教學要租車，每個人都要有座位。如果租每輛坐 45 人的車，租 2 輛坐不下，租 3 輛才坐得下；如果改租每輛坐 40 人的車，租 3 輛坐不下，租 4 輛才坐得下。參加的人數有幾種可能？",
+        "zh-Hans": "学校校外教学要租车，每个人都要有座位。如果租每辆坐 45 人的车，租 2 辆坐不下，租 3 辆才坐得下；如果改租每辆坐 40 人的车，租 3 辆坐不下，租 4 辆才坐得下。参加的人数有几种可能？",
+        "en": "A school rents buses for a field trip, and everyone needs a seat. With buses that seat 45 each, 2 buses are not enough but 3 buses are enough. With buses that seat 40 each, 3 buses are not enough but 4 buses are enough. How many different numbers of participants are possible?",
+        "ja": "遠足のためにバスを借ります。全員が座れなければなりません。45 人乗りのバスなら 2 台では足りず、3 台なら足ります。40 人乗りのバスなら 3 台では足りず、4 台なら足ります。参加人数として考えられる数は何通りありますか。"
+      },
+      "answer": {
+        "zh-Hant": "參加的人數有 15 種可能。",
+        "zh-Hans": "参加的人数有 15 种可能。",
+        "en": "There are 15 possible numbers of participants.",
+        "ja": "参加人数は 15 通り考えられます。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "45 人座的車：2 輛坐不下，表示人數比 2 × 45 = 90 多；3 輛坐得下，表示人數不超過 3 × 45 = 135。所以人數在 91 到 135 之間。",
+          "40 人座的車：3 輛坐不下，表示人數比 3 × 40 = 120 多；4 輛坐得下，表示人數不超過 4 × 40 = 160。所以人數在 121 到 160 之間。",
+          "兩個條件都要成立，人數必須同時在 91～135 和 121～160 之中，也就是 121 到 135。",
+          "121 到 135 共有 135 − 121 + 1 = 15 個整數，所以有 15 種可能。"
+        ],
+        "zh-Hans": [
+          "45 人座的车：2 辆坐不下，表示人数比 2 × 45 = 90 多；3 辆坐得下，表示人数不超过 3 × 45 = 135。所以人数在 91 到 135 之间。",
+          "40 人座的车：3 辆坐不下，表示人数比 3 × 40 = 120 多；4 辆坐得下，表示人数不超过 4 × 40 = 160。所以人数在 121 到 160 之间。",
+          "两个条件都要成立，人数必须同时在 91～135 和 121～160 之中，也就是 121 到 135。",
+          "121 到 135 共有 135 − 121 + 1 = 15 个整数，所以有 15 种可能。"
+        ],
+        "en": [
+          "45-seat buses: 2 are not enough, so there are more than 2 × 45 = 90 people; 3 are enough, so there are at most 3 × 45 = 135. The number is from 91 to 135.",
+          "40-seat buses: 3 are not enough, so more than 3 × 40 = 120; 4 are enough, so at most 4 × 40 = 160. The number is from 121 to 160.",
+          "Both conditions must hold, so the number lies in both 91–135 and 121–160, that is, from 121 to 135.",
+          "From 121 to 135 there are 135 − 121 + 1 = 15 whole numbers, so 15 possibilities."
+        ],
+        "ja": [
+          "45 人乗り：2 台で足りないので人数は 2 × 45 = 90 より多く、3 台で足りるので 3 × 45 = 135 以下です。人数は 91 から 135 までです。",
+          "40 人乗り：3 台で足りないので 3 × 40 = 120 より多く、4 台で足りるので 4 × 40 = 160 以下です。人数は 121 から 160 までです。",
+          "両方の条件が成り立つので、人数は 91～135 と 121～160 の両方に入り、121 から 135 までです。",
+          "121 から 135 までの整数は 135 − 121 + 1 = 15 個なので、15 通りです。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "15"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "arithmetic-grade5-foundation",
+        "notes": "生活情境的範圍交集題。掃過：遊覽車|巴士|輛車|坐不下|坐得下；讀過 arithmetic_grade3_118（大小巴士最省租金）、arithmetic_grade1_067（最少袋數）。既有題都是已知人數求車數，本題反過來由兩組「不夠／夠」條件夾出人數範圍再取交集。"
+      }
+    },
+    {
+      "id": "arithmetic_grade5_foundation_118",
+      "reviewStatus": "ok",
+      "topic": "arithmetic",
+      "subtopic": "two_printers_discrete_finish_time",
+      "tags": [
+        "c:work_rate",
+        "c:factor_multiple",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade5",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "兩台印表機同時開始列印。甲機每 3 秒印好 1 張，乙機每 5 秒印好 1 張，也就是甲機在第 3、6、9、⋯⋯ 秒各印好 1 張，乙機在第 5、10、15、⋯⋯ 秒各印好 1 張。兩台合起來要印好 60 張，從開始算起最少要幾秒？",
+        "zh-Hans": "两台印表机同时开始列印。甲机每 3 秒印好 1 张，乙机每 5 秒印好 1 张，也就是甲机在第 3、6、9、⋯⋯ 秒各印好 1 张，乙机在第 5、10、15、⋯⋯ 秒各印好 1 张。两台合起来要印好 60 张，从开始算起最少要几秒？",
+        "en": "Two printers start printing at the same moment. Printer A finishes 1 page every 3 seconds and printer B finishes 1 page every 5 seconds; that is, A finishes a page at seconds 3, 6, 9, … and B at seconds 5, 10, 15, …. Together they must finish 60 pages. What is the smallest number of seconds needed from the start?",
+        "ja": "2 台のプリンターが同時に印刷を始めます。甲は 3 秒ごとに 1 枚、乙は 5 秒ごとに 1 枚印刷します。つまり甲は 3、6、9、…… 秒に 1 枚ずつ、乙は 5、10、15、…… 秒に 1 枚ずつ仕上げます。2 台合わせて 60 枚仕上げるには、始めてから最も少なくて何秒かかりますか。"
+      },
+      "answer": {
+        "zh-Hant": "最少要 114 秒。",
+        "zh-Hans": "最少要 114 秒。",
+        "en": "It takes at least 114 seconds.",
+        "ja": "最も少なくて 114 秒です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "3 和 5 的最小公倍數是 15。每 15 秒，甲印 5 張、乙印 3 張，合起來 8 張。",
+          "60 = 8 × 7 + 4。經過 7 個 15 秒，也就是 105 秒時，已經印好 56 張，還差 4 張。",
+          "105 秒之後，依時間先後印好的張數是：第 108 秒甲（第 57 張）、第 110 秒乙（第 58 張）、第 111 秒甲（第 59 張）、第 114 秒甲（第 60 張）。",
+          "所以最少要 114 秒。直接用 60 ÷ 8 × 15 = 112.5 秒是錯的，因為每一張都要印完整才算，張數只會在固定的秒數跳一下。"
+        ],
+        "zh-Hans": [
+          "3 和 5 的最小公倍数是 15。每 15 秒，甲印 5 张、乙印 3 张，合起来 8 张。",
+          "60 = 8 × 7 + 4。经过 7 个 15 秒，也就是 105 秒时，已经印好 56 张，还差 4 张。",
+          "105 秒之后，依时间先后印好的张数是：第 108 秒甲（第 57 张）、第 110 秒乙（第 58 张）、第 111 秒甲（第 59 张）、第 114 秒甲（第 60 张）。",
+          "所以最少要 114 秒。直接用 60 ÷ 8 × 15 = 112.5 秒是错的，因为每一张都要印完整才算，张数只会在固定的秒数跳一下。"
+        ],
+        "en": [
+          "The least common multiple of 3 and 5 is 15. Every 15 seconds A prints 5 pages and B prints 3, 8 pages together.",
+          "60 = 8 × 7 + 4. After 7 periods of 15 seconds, that is at 105 seconds, 56 pages are done and 4 more are needed.",
+          "After 105 seconds the next pages come in time order: A at 108 s (page 57), B at 110 s (page 58), A at 111 s (page 59), A at 114 s (page 60).",
+          "So the answer is 114 seconds. Computing 60 ÷ 8 × 15 = 112.5 seconds is wrong, because a page only counts when it is finished, and the count jumps only at those fixed seconds."
+        ],
+        "ja": [
+          "3 と 5 の最小公倍数は 15 です。15 秒ごとに甲は 5 枚、乙は 3 枚、合わせて 8 枚仕上げます。",
+          "60 = 8 × 7 + 4 です。15 秒を 7 回、つまり 105 秒で 56 枚できていて、あと 4 枚です。",
+          "105 秒のあと、仕上がる順に並べると、108 秒に甲（57 枚目）、110 秒に乙（58 枚目）、111 秒に甲（59 枚目）、114 秒に甲（60 枚目）です。",
+          "よって 114 秒です。60 ÷ 8 × 15 = 112.5 秒とするのはまちがいです。1 枚は仕上がって初めて数えられ、枚数は決まった秒にしか増えないからです。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "114"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "arithmetic-grade5-foundation",
+        "notes": "工作量合作題，加入「離散完成時刻」的轉折。掃過：印表機|影印|一起做|合作|每.*秒.*張；讀過 arithmetic_grade5_066（合作天數）、arithmetic_grade5_107（機器效率）、arithmetic_grade5_105（輪流做）。既有題都把工作量當連續量相除，本題要逐一列出印好的時刻，破除 112.5 秒的直覺。"
+      }
+    },
+    {
+      "id": "arithmetic_grade5_foundation_119",
+      "reviewStatus": "ok",
+      "topic": "arithmetic",
+      "subtopic": "page_sum_with_one_page_counted_twice",
+      "tags": [
+        "c:sequence",
+        "c:add_sub",
+        "m:estimate_bound"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade5",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "小安把一本書的頁碼從第 1 頁一直加到最後一頁。他不小心把其中某一頁的頁碼多加了一次（那一頁被加了兩次），其他頁都只加一次，結果得到 1000。被加了兩次的是第幾頁？",
+        "zh-Hans": "小安把一本书的页码从第 1 页一直加到最后一页。他不小心把其中某一页的页码多加了一次（那一页被加了两次），其他页都只加一次，结果得到 1000。被加了两次的是第几页？",
+        "en": "An added up the page numbers of a book from page 1 to the last page. By mistake he added one page number twice, and every other page once, getting 1000. Which page was added twice?",
+        "ja": "アンはある本のページ番号を 1 ページ目から最後のページまで足しました。うっかり 1 つのページ番号だけを 2 回足してしまい、ほかのページは 1 回ずつ足したところ、1000 になりました。2 回足したのは何ページ目ですか。"
+      },
+      "answer": {
+        "zh-Hant": "被加了兩次的是第 10 頁。",
+        "zh-Hans": "被加了两次的是第 10 页。",
+        "en": "Page 10 was added twice.",
+        "ja": "2 回足したのは 10 ページ目です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "設書共有 n 頁，正確的總和是 1 + 2 + ⋯ + n = n × (n + 1) ÷ 2。多加的那一頁頁碼介於 1 和 n 之間，所以正確總和比 1000 小，而且 1000 減正確總和不超過 n。",
+          "試算：n = 44 時正確總和是 44 × 45 ÷ 2 = 990；n = 45 時是 45 × 46 ÷ 2 = 1035，已經超過 1000，不可能。",
+          "n = 43 時正確總和是 43 × 44 ÷ 2 = 946，多出 1000 − 946 = 54，但書只有 43 頁，沒有第 54 頁，也不可能；頁數更少時差距更大，同樣不行。",
+          "所以書有 44 頁，多加的是 1000 − 990 = 10，也就是第 10 頁被加了兩次。"
+        ],
+        "zh-Hans": [
+          "设书共有 n 页，正确的总和是 1 + 2 + ⋯ + n = n × (n + 1) ÷ 2。多加的那一页页码介于 1 和 n 之间，所以正确总和比 1000 小，而且 1000 减正确总和不超过 n。",
+          "试算：n = 44 时正确总和是 44 × 45 ÷ 2 = 990；n = 45 时是 45 × 46 ÷ 2 = 1035，已经超过 1000，不可能。",
+          "n = 43 时正确总和是 43 × 44 ÷ 2 = 946，多出 1000 − 946 = 54，但书只有 43 页，没有第 54 页，也不可能；页数更少时差距更大，同样不行。",
+          "所以书有 44 页，多加的是 1000 − 990 = 10，也就是第 10 页被加了两次。"
+        ],
+        "en": [
+          "Let the book have n pages; the correct total is 1 + 2 + … + n = n × (n + 1) ÷ 2. The extra page number is between 1 and n, so the correct total is less than 1000, and 1000 minus it is at most n.",
+          "Try values: n = 44 gives 44 × 45 ÷ 2 = 990; n = 45 gives 45 × 46 ÷ 2 = 1035, already more than 1000, impossible.",
+          "n = 43 gives 43 × 44 ÷ 2 = 946, so the extra would be 1000 − 946 = 54, but a 43-page book has no page 54, impossible; fewer pages make the gap even bigger.",
+          "So the book has 44 pages and the extra amount is 1000 − 990 = 10: page 10 was added twice."
+        ],
+        "ja": [
+          "本が n ページあるとすると、正しい合計は 1 + 2 + … + n = n × (n + 1) ÷ 2 です。余分に足したページ番号は 1 から n の間なので、正しい合計は 1000 より小さく、1000 との差は n 以下です。",
+          "計算してみると、n = 44 なら 44 × 45 ÷ 2 = 990、n = 45 なら 45 × 46 ÷ 2 = 1035 で 1000 をこえるので不可能です。",
+          "n = 43 なら 43 × 44 ÷ 2 = 946 で、差は 1000 − 946 = 54 ですが、43 ページの本に 54 ページはないので不可能です。ページ数がもっと少ないと差はさらに大きくなります。",
+          "したがって本は 44 ページで、余分は 1000 − 990 = 10、つまり 10 ページ目を 2 回足しました。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "10"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "arithmetic-grade5-foundation",
+        "notes": "連續整數和的逆推題。掃過：頁碼|多加|重複加|加了兩次；讀過 arithmetic_grade5_005（頁碼用了幾個數字）、arithmetic_grade3_105（撕下一張兩頁和）、arithmetic_grade6_036（數字 1 出現次數）。既有頁碼題都是數字個數或單張頁碼，本題要用「差值不超過 n」夾出唯一的 n。"
+      }
+    },
+    {
+      "id": "arithmetic_grade5_foundation_120",
+      "reviewStatus": "ok",
+      "topic": "arithmetic",
+      "subtopic": "chained_race_head_starts",
+      "tags": [
+        "c:ratio",
+        "c:rate_speed",
+        "m:direct"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade5",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "在一場 100 公尺賽跑中，甲衝過終點時，乙還差 10 公尺才到終點。在另一場 100 公尺賽跑中，乙衝過終點時，丙還差 10 公尺才到終點。每個人每一次都用自己固定的速度跑。如果甲和丙比一場 100 公尺賽跑，甲衝過終點時，丙還差幾公尺？",
+        "zh-Hans": "在一场 100 公尺赛跑中，甲冲过终点时，乙还差 10 公尺才到终点。在另一场 100 公尺赛跑中，乙冲过终点时，丙还差 10 公尺才到终点。每个人每一次都用自己固定的速度跑。如果甲和丙比一场 100 公尺赛跑，甲冲过终点时，丙还差几公尺？",
+        "en": "In a 100 m race, when A crosses the finish line, B is still 10 m short of it. In another 100 m race, when B crosses the finish line, C is still 10 m short. Everyone always runs at his own constant speed. If A and C race 100 m, how many metres short of the finish is C when A crosses the line?",
+        "ja": "100 m 競走で、甲がゴールしたとき、乙はゴールまであと 10 m でした。別の 100 m 競走で、乙がゴールしたとき、丙はゴールまであと 10 m でした。どの人もいつも自分の一定の速さで走ります。甲と丙が 100 m 競走をすると、甲がゴールしたとき、丙はゴールまであと何 m ですか。"
+      },
+      "answer": {
+        "zh-Hant": "丙還差 19 公尺。",
+        "zh-Hans": "丙还差 19 公尺。",
+        "en": "C is 19 m short.",
+        "ja": "丙はあと 19 m です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "第一場：同樣的時間裡，甲跑 100 公尺，乙跑 90 公尺，所以乙的速度是甲的 90/100 = 9/10。",
+          "第二場：同樣的時間裡，乙跑 100 公尺，丙跑 90 公尺，所以丙的速度是乙的 9/10。",
+          "甲跑完 100 公尺的時間裡，乙跑 90 公尺；而丙跑的是乙的 9/10，也就是 90 × 9/10 = 81 公尺。",
+          "丙離終點還差 100 − 81 = 19 公尺，不是直覺的 10 + 10 = 20 公尺。"
+        ],
+        "zh-Hans": [
+          "第一场：同样的时间里，甲跑 100 公尺，乙跑 90 公尺，所以乙的速度是甲的 90/100 = 9/10。",
+          "第二场：同样的时间里，乙跑 100 公尺，丙跑 90 公尺，所以丙的速度是乙的 9/10。",
+          "甲跑完 100 公尺的时间里，乙跑 90 公尺；而丙跑的是乙的 9/10，也就是 90 × 9/10 = 81 公尺。",
+          "丙离终点还差 100 − 81 = 19 公尺，不是直觉的 10 + 10 = 20 公尺。"
+        ],
+        "en": [
+          "First race: in the same time A runs 100 m and B runs 90 m, so B's speed is 90/100 = 9/10 of A's.",
+          "Second race: in the same time B runs 100 m and C runs 90 m, so C's speed is 9/10 of B's.",
+          "In the time A runs 100 m, B runs 90 m, and C runs 9/10 of what B runs: 90 × 9/10 = 81 m.",
+          "C is 100 − 81 = 19 m short, not the intuitive 10 + 10 = 20 m."
+        ],
+        "ja": [
+          "1 回目：同じ時間に甲は 100 m、乙は 90 m 走るので、乙の速さは甲の 90/100 = 9/10 です。",
+          "2 回目：同じ時間に乙は 100 m、丙は 90 m 走るので、丙の速さは乙の 9/10 です。",
+          "甲が 100 m 走る間に乙は 90 m 走り、丙はその 9/10 の 90 × 9/10 = 81 m 走ります。",
+          "丙はゴールまで 100 − 81 = 19 m で、つい考えてしまう 10 + 10 = 20 m ではありません。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "19"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "arithmetic-grade5-foundation",
+        "notes": "連比速度題，破除「差距直接相加」的直覺。掃過：賽跑|衝過終點|差.*公尺|領先；讀過 logic_grade5_012、logic_grade5_023（賽跑名次邏輯）、arithmetic_grade6_040（相向速度比）。既有賽跑題多是名次推理；本題是速度比的連乘。"
+      }
     }
   ]
 }

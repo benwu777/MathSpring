@@ -8598,6 +8598,362 @@
         "reference": "arithmetic-grade6-foundation",
         "notes": "題型骨架取自 Wikipedia「Stars and bars (combinatorics)」條目所述的『物件 ↔ 分隔位置』對應，再參考 CEMC 2023 Cayley 第 12 題（封閉圍籬上每 2 公尺一根木樁，答案靠「木樁 ↔ 區段」的一一對應）的推理方式改寫。原本想直接改寫該木樁題，掃庫時發現 arithmetic_grade4_foundation_079（正方形花圃每隔 2 公尺種樹）與 arithmetic_grade5_foundation_083 已把植樹問題寫滿，故改成『一列 10 格中選連續一段』這個不同的對應（區間 ↔ 兩個切口）。全庫用 regex 掃「連續的一段／掰下／一整段」只命中 logic_grade9_foundation_010（4×6 巧克力最少掰幾次）與 logic_grade11_foundation_014（抽屜原理的連續段和），推理核心都不同。"
       }
+    },
+    {
+      "id": "arithmetic_grade6_foundation_114",
+      "reviewStatus": "ok",
+      "topic": "arithmetic",
+      "subtopic": "unit_fraction_two_term_decomposition",
+      "tags": [
+        "c:fraction",
+        "c:factor_multiple",
+        "m:enumeration"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade6",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "把 1/6 寫成兩個分子都是 1、分母不同的分數相加：1/6 = 1/a + 1/b，其中 a、b 都是正整數，而且 a < b。這樣的寫法一共有幾種？",
+        "zh-Hans": "把 1/6 写成两个分子都是 1、分母不同的分数相加：1/6 = 1/a + 1/b，其中 a、b 都是正整数，而且 a < b。这样的写法一共有几种？",
+        "en": "Write 1/6 as the sum of two fractions with numerator 1 and different denominators: 1/6 = 1/a + 1/b, where a and b are positive whole numbers with a < b. How many ways are there?",
+        "ja": "1/6 を、分子が 1 で分母がちがう 2 つの分数の和 1/6 = 1/a + 1/b で表します。a、b は正の整数で a < b です。このような表し方は全部で何通りありますか。"
+      },
+      "answer": {
+        "zh-Hant": "一共有 4 種寫法。",
+        "zh-Hans": "一共有 4 种写法。",
+        "en": "There are 4 ways.",
+        "ja": "全部で 4 通りです。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "兩個分數都比 1/6 小，所以 a、b 都比 6 大。又因為 a < b，1/a 是比較大的那一個，至少佔 1/6 的一半：1/a > 1/12，所以 a < 12。a 只能是 7、8、9、10、11。",
+          "逐一算 1/b = 1/6 − 1/a = (a − 6)/(6 × a)：a = 7 得 1/42；a = 8 得 2/48 = 1/24；a = 9 得 3/54 = 1/18；a = 10 得 4/60 = 1/15。",
+          "a = 11 得 5/66，不能約分成分子是 1 的分數，不行。",
+          "所以寫法有 1/7 + 1/42、1/8 + 1/24、1/9 + 1/18、1/10 + 1/15，一共 4 種。"
+        ],
+        "zh-Hans": [
+          "两个分数都比 1/6 小，所以 a、b 都比 6 大。又因为 a < b，1/a 是比较大的那一个，至少占 1/6 的一半：1/a > 1/12，所以 a < 12。a 只能是 7、8、9、10、11。",
+          "逐一算 1/b = 1/6 − 1/a = (a − 6)/(6 × a)：a = 7 得 1/42；a = 8 得 2/48 = 1/24；a = 9 得 3/54 = 1/18；a = 10 得 4/60 = 1/15。",
+          "a = 11 得 5/66，不能约分成分子是 1 的分数，不行。",
+          "所以写法有 1/7 + 1/42、1/8 + 1/24、1/9 + 1/18、1/10 + 1/15，一共 4 种。"
+        ],
+        "en": [
+          "Both fractions are smaller than 1/6, so a and b are greater than 6. Since a < b, 1/a is the larger one and must be more than half of 1/6: 1/a > 1/12, so a < 12. Thus a is 7, 8, 9, 10 or 11.",
+          "Compute 1/b = 1/6 − 1/a = (a − 6)/(6 × a) for each: a = 7 gives 1/42; a = 8 gives 2/48 = 1/24; a = 9 gives 3/54 = 1/18; a = 10 gives 4/60 = 1/15.",
+          "a = 11 gives 5/66, which cannot be reduced to a fraction with numerator 1, so it fails.",
+          "So the ways are 1/7 + 1/42, 1/8 + 1/24, 1/9 + 1/18, 1/10 + 1/15: 4 in total."
+        ],
+        "ja": [
+          "どちらの分数も 1/6 より小さいので、a、b は 6 より大きいです。a < b なので 1/a のほうが大きく、1/6 の半分より大きい：1/a > 1/12 なので a < 12。a は 7、8、9、10、11 のどれかです。",
+          "1/b = 1/6 − 1/a = (a − 6)/(6 × a) を順に計算します。a = 7 なら 1/42、a = 8 なら 2/48 = 1/24、a = 9 なら 3/54 = 1/18、a = 10 なら 4/60 = 1/15 です。",
+          "a = 11 なら 5/66 で、分子が 1 の分数にできないのでだめです。",
+          "したがって 1/7 + 1/42、1/8 + 1/24、1/9 + 1/18、1/10 + 1/15 の 4 通りです。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "4"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "arithmetic-grade6-foundation",
+        "notes": "埃及分數（單位分數拆分）計數。掃過：單位分數|分子是 1|分子都是 1|1/a；讀過 algebra_grade10_066（調和級數分組）、algebra_grade9_028（裂項相消）。全庫沒有把單位分數拆成兩個單位分數的題；推理點是用 a < b 夾出 a 的範圍再逐一檢查。"
+      }
+    },
+    {
+      "id": "arithmetic_grade6_foundation_115",
+      "reviewStatus": "ok",
+      "topic": "arithmetic",
+      "subtopic": "total_from_rounded_average",
+      "tags": [
+        "c:mean",
+        "c:inequality",
+        "m:estimate_bound"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade6",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "7 位同學的考試成績都是整數分。老師用計算機算出這 7 人的平均分數，把它四捨五入到小數第一位，得到 86.4 分。這 7 人的成績總和是多少分？",
+        "zh-Hans": "7 位同学的考试成绩都是整数分。老师用计算机算出这 7 人的平均分数，把它四舍五入到小数第一位，得到 86.4 分。这 7 人的成绩总和是多少分？",
+        "en": "Seven students' test scores are all whole numbers. The teacher computes their average with a calculator and rounds it to one decimal place, getting 86.4. What is the total of the 7 scores?",
+        "ja": "7 人の生徒のテストの点数はどれも整数です。先生が電卓で 7 人の平均点を計算し、小数第 1 位までに四捨五入すると 86.4 点になりました。7 人の点数の合計は何点ですか。"
+      },
+      "answer": {
+        "zh-Hant": "7 人的成績總和是 605 分。",
+        "zh-Hans": "7 人的成绩总和是 605 分。",
+        "en": "The total is 605 points.",
+        "ja": "合計は 605 点です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "四捨五入到小數第一位是 86.4，表示真正的平均至少 86.35、而且小於 86.45。",
+          "總和 = 平均 × 7，所以總和至少 86.35 × 7 = 604.45，而且小於 86.45 × 7 = 605.15。",
+          "成績都是整數，總和也是整數；604.45 到 605.15 之間的整數只有 605。",
+          "驗算：605 ÷ 7 = 86.428⋯，四捨五入是 86.4；而 604 ÷ 7 = 86.28⋯ 會變成 86.3，606 ÷ 7 = 86.57⋯ 會變成 86.6。所以總和是 605 分。"
+        ],
+        "zh-Hans": [
+          "四舍五入到小数第一位是 86.4，表示真正的平均至少 86.35、而且小于 86.45。",
+          "总和 = 平均 × 7，所以总和至少 86.35 × 7 = 604.45，而且小于 86.45 × 7 = 605.15。",
+          "成绩都是整数，总和也是整数；604.45 到 605.15 之间的整数只有 605。",
+          "验算：605 ÷ 7 = 86.428⋯，四舍五入是 86.4；而 604 ÷ 7 = 86.28⋯ 会变成 86.3，606 ÷ 7 = 86.57⋯ 会变成 86.6。所以总和是 605 分。"
+        ],
+        "en": [
+          "Rounding to one decimal gives 86.4, so the true average is at least 86.35 and less than 86.45.",
+          "Total = average × 7, so the total is at least 86.35 × 7 = 604.45 and less than 86.45 × 7 = 605.15.",
+          "The scores are whole numbers, so the total is a whole number; the only whole number from 604.45 to below 605.15 is 605.",
+          "Check: 605 ÷ 7 = 86.428…, which rounds to 86.4; 604 ÷ 7 = 86.28… would round to 86.3 and 606 ÷ 7 = 86.57… to 86.6. So the total is 605."
+        ],
+        "ja": [
+          "小数第 1 位までに四捨五入して 86.4 なので、本当の平均は 86.35 以上 86.45 未満です。",
+          "合計 = 平均 × 7 なので、合計は 86.35 × 7 = 604.45 以上、86.45 × 7 = 605.15 未満です。",
+          "点数はどれも整数なので合計も整数で、604.45 以上 605.15 未満の整数は 605 だけです。",
+          "たしかめ：605 ÷ 7 = 86.428… で四捨五入すると 86.4。604 ÷ 7 = 86.28… なら 86.3、606 ÷ 7 = 86.57… なら 86.6 になります。だから合計は 605 点です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "605"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 4
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "arithmetic-grade6-foundation",
+        "notes": "由四捨五入後的平均反推總和（近似值的範圍）。掃過：四捨五入|平均.*小數|約.*平均；讀過 arithmetic_grade6_107（兩種四捨五入同時成立的小數個數）、arithmetic_grade6_046、arithmetic_grade6_092（平均反推）。grade6_107 是單一小數的四捨五入條件；本題要把平均的範圍乘上人數，並利用總和必為整數鎖定唯一值。"
+      }
+    },
+    {
+      "id": "arithmetic_grade6_foundation_116",
+      "reviewStatus": "ok",
+      "topic": "arithmetic",
+      "subtopic": "max_product_of_parts_with_fixed_sum",
+      "tags": [
+        "c:mul_div",
+        "c:add_sub",
+        "m:extremal"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade6",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "把 20 拆成幾個正整數的和（拆成幾個都可以，數字也可以重複），再把拆出來的這些數全部相乘。乘積最大是多少？",
+        "zh-Hans": "把 20 拆成几个正整数的和（拆成几个都可以，数字也可以重复），再把拆出来的这些数全部相乘。乘积最大是多少？",
+        "en": "Split 20 into a sum of positive whole numbers (any number of parts, repeats allowed), then multiply all the parts together. What is the largest possible product?",
+        "ja": "20 をいくつかの正の整数の和に分け（いくつに分けてもよく、同じ数を使ってもかまいません）、分けた数を全部かけ合わせます。積は最大でいくつですか。"
+      },
+      "answer": {
+        "zh-Hant": "乘積最大是 1458。",
+        "zh-Hans": "乘积最大是 1458。",
+        "en": "The largest product is 1458.",
+        "ja": "積は最大で 1458 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "拆出 1 不划算：把 1 併到別的數上，和不變，乘積會變大。拆出 5 以上的數也不划算：例如 5 改成 2 + 3，乘積從 5 變 6；一般地 k ≥ 5 時改成 2 和 k − 2，2 × (k − 2) 比 k 大。4 改成 2 + 2 乘積一樣。",
+          "所以只要用 2 和 3。三個 2（和 6、乘積 8）不如兩個 3（和 6、乘積 9），所以 2 最多用兩個，其餘都用 3。",
+          "20 = 3 × 6 + 2，也就是六個 3 和一個 2。乘積 = 3 × 3 × 3 × 3 × 3 × 3 × 2 = 729 × 2 = 1458。"
+        ],
+        "zh-Hans": [
+          "拆出 1 不划算：把 1 并到别的数上，和不变，乘积会变大。拆出 5 以上的数也不划算：例如 5 改成 2 + 3，乘积从 5 变 6；一般地 k ≥ 5 时改成 2 和 k − 2，2 × (k − 2) 比 k 大。4 改成 2 + 2 乘积一样。",
+          "所以只要用 2 和 3。三个 2（和 6、乘积 8）不如两个 3（和 6、乘积 9），所以 2 最多用两个，其余都用 3。",
+          "20 = 3 × 6 + 2，也就是六个 3 和一个 2。乘积 = 3 × 3 × 3 × 3 × 3 × 3 × 2 = 729 × 2 = 1458。"
+        ],
+        "en": [
+          "A part equal to 1 is wasteful: merging it into another part keeps the sum and increases the product. A part of 5 or more is also wasteful: e.g. replace 5 by 2 + 3 and the product goes from 5 to 6; in general for k ≥ 5, 2 × (k − 2) is larger than k. A 4 can be replaced by 2 + 2 with the same product.",
+          "So only 2s and 3s are needed. Three 2s (sum 6, product 8) are worse than two 3s (sum 6, product 9), so use at most two 2s and make the rest 3s.",
+          "20 = 3 × 6 + 2, i.e. six 3s and one 2. Product = 3 × 3 × 3 × 3 × 3 × 3 × 2 = 729 × 2 = 1458."
+        ],
+        "ja": [
+          "1 に分けるのは損です。1 をほかの数に足せば、和は同じで積は大きくなります。5 以上の数も損です。たとえば 5 を 2 + 3 にすると積は 5 から 6 になり、一般に k ≥ 5 なら 2 × (k − 2) は k より大きくなります。4 は 2 + 2 にしても積は同じです。",
+          "だから 2 と 3 だけを使えばよいです。2 を 3 つ（和 6、積 8）より 3 を 2 つ（和 6、積 9）のほうが大きいので、2 は多くても 2 つで、残りはすべて 3 にします。",
+          "20 = 3 × 6 + 2、つまり 3 を 6 つと 2 を 1 つです。積は 3 × 3 × 3 × 3 × 3 × 3 × 2 = 729 × 2 = 1458 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "1458"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 5
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "arithmetic-grade6-foundation",
+        "notes": "固定和求最大乘積（拆 3 原則）。掃過：乘積最大|乘積.*最大|最大.*乘積|拆成；讀過 algebra_grade8_022（兩正數和 20 乘積最大）、arithmetic_grade4_025、arithmetic_grade6_066（數字排成兩數相乘）。grade8_022 固定拆成兩個實數；本題個數不限，要用「換成 2、3 會更大」的調整論證。"
+      }
+    },
+    {
+      "id": "arithmetic_grade6_foundation_117",
+      "reviewStatus": "ok",
+      "topic": "arithmetic",
+      "subtopic": "clock_hands_perpendicular_count_interval",
+      "tags": [
+        "c:angle",
+        "c:rate_speed",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade6",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "從下午 1:00 到下午 5:00 這段時間裡（1:00 和 5:00 這兩個時刻不算），時鐘的時針和分針互相垂直（夾角 90°）一共有幾次？",
+        "zh-Hans": "从下午 1:00 到下午 5:00 这段时间里（1:00 和 5:00 这两个时刻不算），时钟的时针和分针互相垂直（夹角 90°）一共有几次？",
+        "en": "Between 1:00 pm and 5:00 pm (not counting the moments 1:00 and 5:00 themselves), how many times are the hour hand and minute hand of a clock perpendicular (at 90° to each other)?",
+        "ja": "午後 1:00 から午後 5:00 までの間（1:00 と 5:00 のちょうどの時刻はのぞく）に、時計の短針と長針が垂直（90° の角）になるのは全部で何回ですか。"
+      },
+      "answer": {
+        "zh-Hant": "一共有 7 次。",
+        "zh-Hans": "一共有 7 次。",
+        "en": "It happens 7 times.",
+        "ja": "全部で 7 回です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "分針每分鐘走 6°，時針每分鐘走 0.5°，所以分針每分鐘比時針多走 5.5°。看「分針領先時針幾度」這個量，它每分鐘增加 5.5°。",
+          "1:00 時分針指 12、時針指 1，分針落後 30°，也就是領先 −30°。4 小時 = 240 分鐘，領先量增加 5.5 × 240 = 1320°，到 5:00 時是 −30 + 1320 = 1290°。",
+          "兩針垂直，就是領先量等於 90°、270°、450°、⋯⋯（90 再加上 180 的倍數）。在 −30° 到 1290° 之間的有 90、270、450、630、810、990、1170，共 7 個；下一個 1350 已超過。",
+          "其中 630° 發生在 3:00 整（剛好經過 120 分鐘）。直覺「每小時垂直 2 次，4 小時 8 次」是錯的，答案是 7 次。"
+        ],
+        "zh-Hans": [
+          "分针每分钟走 6°，时针每分钟走 0.5°，所以分针每分钟比时针多走 5.5°。看「分针领先时针几度」这个量，它每分钟增加 5.5°。",
+          "1:00 时分针指 12、时针指 1，分针落后 30°，也就是领先 −30°。4 小时 = 240 分钟，领先量增加 5.5 × 240 = 1320°，到 5:00 时是 −30 + 1320 = 1290°。",
+          "两针垂直，就是领先量等于 90°、270°、450°、⋯⋯（90 再加上 180 的倍数）。在 −30° 到 1290° 之间的有 90、270、450、630、810、990、1170，共 7 个；下一个 1350 已超过。",
+          "其中 630° 发生在 3:00 整（刚好经过 120 分钟）。直觉「每小时垂直 2 次，4 小时 8 次」是错的，答案是 7 次。"
+        ],
+        "en": [
+          "The minute hand moves 6° per minute and the hour hand 0.5°, so the minute hand gains 5.5° per minute. Track \"how many degrees the minute hand is ahead of the hour hand\": it grows by 5.5° per minute.",
+          "At 1:00 the minute hand is at 12 and the hour hand at 1, so the minute hand is 30° behind, i.e. ahead by −30°. In 4 hours = 240 minutes the lead grows by 5.5 × 240 = 1320°, reaching −30 + 1320 = 1290° at 5:00.",
+          "The hands are perpendicular when the lead is 90°, 270°, 450°, … (90 plus a multiple of 180). Between −30° and 1290° these are 90, 270, 450, 630, 810, 990, 1170: 7 values; the next, 1350, is too big.",
+          "One of them, 630°, happens exactly at 3:00 (after 120 minutes). The guess \"twice an hour, so 8 times in 4 hours\" is wrong; the answer is 7."
+        ],
+        "ja": [
+          "長針は 1 分に 6°、短針は 0.5° 進むので、長針は 1 分ごとに短針より 5.5° 多く進みます。「長針が短針より何度先にいるか」を考えると、1 分に 5.5° ずつ増えます。",
+          "1:00 では長針が 12、短針が 1 を指し、長針は 30° おくれている、つまり −30° 先にいます。4 時間 = 240 分でこの量は 5.5 × 240 = 1320° 増え、5:00 には −30 + 1320 = 1290° になります。",
+          "2 本の針が垂直になるのは、この量が 90°、270°、450°、……（90 に 180 の倍数を足したもの）のときです。−30° から 1290° の間には 90、270、450、630、810、990、1170 の 7 つがあり、次の 1350 はこえています。",
+          "そのうち 630° はちょうど 3:00（120 分後）です。「1 時間に 2 回だから 4 時間で 8 回」という考えはまちがいで、答えは 7 回です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "7"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "arithmetic-grade6-foundation",
+        "notes": "時鐘兩針相對速度與事件計數。掃過：時針|分針|垂直|直角；讀過 arithmetic_grade4_057（7:15 再過 15 分的夾角）、arithmetic_grade5_052（短針走幾度）、arithmetic_grade3_058。既有時鐘題都是求某一時刻的角度；本題要用相對速度把「垂直」轉成領先量的等差條件並計數，破除每小時 2 次的直覺。"
+      }
+    },
+    {
+      "id": "arithmetic_grade6_foundation_118",
+      "reviewStatus": "ok",
+      "topic": "arithmetic",
+      "subtopic": "birth_year_digit_sum_equals_age",
+      "tags": [
+        "c:place_value",
+        "c:linear_eq",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade6",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "2026 年時，小安今年的生日已經過了。他發現自己出生那一年的四個數字加起來，剛好等於他現在的年齡。小安是哪一年出生的？",
+        "zh-Hans": "2026 年时，小安今年的生日已经过了。他发现自己出生那一年的四个数字加起来，刚好等于他现在的年龄。小安是哪一年出生的？",
+        "en": "In 2026, An has already had his birthday this year. He notices that the four digits of his birth year add up to exactly his present age. In which year was An born?",
+        "ja": "2026 年、アンの今年のたん生日はもう過ぎました。アンは、自分の生まれた年の 4 つの数字の和が、ちょうど今の年れいと等しいことに気づきました。アンは何年生まれですか。"
+      },
+      "answer": {
+        "zh-Hant": "小安是 2021 年出生的。",
+        "zh-Hans": "小安是 2021 年出生的。",
+        "en": "An was born in 2021.",
+        "ja": "アンは 2021 年生まれです。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "生日已過，所以年齡 = 2026 − 出生年。出生年一定是 19ab 或 20ab 這樣的形式（a、b 是數字），因為數字和最多 1 + 9 + 9 + 9 = 28，年齡不可能太大。",
+          "若是 19ab 年：年齡 = 2026 − 1900 − 10 × a − b = 126 − 10 × a − b，數字和 = 10 + a + b。相等得 11 × a + 2 × b = 116。b 最大 9，所以 11 × a ≥ 98，a = 9，這時 2 × b = 17，b 不是整數，不可能。",
+          "若是 20ab 年：年齡 = 26 − 10 × a − b，數字和 = 2 + a + b。相等得 11 × a + 2 × b = 24。a = 0 時 b = 12 不行；a = 1 時 2 × b = 13 不行；a = 2 時 b = 1，可以。",
+          "所以小安 2021 年出生，今年 5 歲；驗算 2 + 0 + 2 + 1 = 5。"
+        ],
+        "zh-Hans": [
+          "生日已过，所以年龄 = 2026 − 出生年。出生年一定是 19ab 或 20ab 这样的形式（a、b 是数字），因为数字和最多 1 + 9 + 9 + 9 = 28，年龄不可能太大。",
+          "若是 19ab 年：年龄 = 2026 − 1900 − 10 × a − b = 126 − 10 × a − b，数字和 = 10 + a + b。相等得 11 × a + 2 × b = 116。b 最大 9，所以 11 × a ≥ 98，a = 9，这时 2 × b = 17，b 不是整数，不可能。",
+          "若是 20ab 年：年龄 = 26 − 10 × a − b，数字和 = 2 + a + b。相等得 11 × a + 2 × b = 24。a = 0 时 b = 12 不行；a = 1 时 2 × b = 13 不行；a = 2 时 b = 1，可以。",
+          "所以小安 2021 年出生，今年 5 岁；验算 2 + 0 + 2 + 1 = 5。"
+        ],
+        "en": [
+          "His birthday has passed, so age = 2026 − birth year. The birth year has the form 19ab or 20ab (a, b digits), since a digit sum is at most 1 + 9 + 9 + 9 = 28, so the age cannot be large.",
+          "If 19ab: age = 2026 − 1900 − 10 × a − b = 126 − 10 × a − b and digit sum = 10 + a + b. Equal means 11 × a + 2 × b = 116. b is at most 9, so 11 × a ≥ 98, giving a = 9, and then 2 × b = 17, not a whole number: impossible.",
+          "If 20ab: age = 26 − 10 × a − b and digit sum = 2 + a + b. Equal means 11 × a + 2 × b = 24. a = 0 gives b = 12, no; a = 1 gives 2 × b = 13, no; a = 2 gives b = 1, which works.",
+          "So An was born in 2021 and is 5 years old; check: 2 + 0 + 2 + 1 = 5."
+        ],
+        "ja": [
+          "たん生日は過ぎたので、年れい = 2026 − 生まれ年 です。数字の和は多くても 1 + 9 + 9 + 9 = 28 なので年れいは大きくなれず、生まれ年は 19ab か 20ab の形です（a、b は数字）。",
+          "19ab 年なら、年れい = 2026 − 1900 − 10 × a − b = 126 − 10 × a − b、数字の和 = 10 + a + b。等しいので 11 × a + 2 × b = 116。b は 9 以下なので 11 × a ≥ 98 で a = 9、すると 2 × b = 17 で b が整数にならず、ありえません。",
+          "20ab 年なら、年れい = 26 − 10 × a − b、数字の和 = 2 + a + b。等しいので 11 × a + 2 × b = 24。a = 0 なら b = 12 でだめ、a = 1 なら 2 × b = 13 でだめ、a = 2 なら b = 1 で成り立ちます。",
+          "したがってアンは 2021 年生まれで 5 才です。たしかめ：2 + 0 + 2 + 1 = 5。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "2021"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 4
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "arithmetic-grade6-foundation",
+        "notes": "出生年數字和等於年齡（位值方程＋分類）。掃過：出生.*年|年齡.*數字和|數字和.*年齡；全庫沒有此題型。讀過 arithmetic_grade6_104（家人年齡和追溯到出生年）、number_theory_grade7_038（兩位數加數字和等於 70）。grade7_038 是兩位數位值方程；本題是四位年份，要先用數字和上界限定世紀，再各自列方程。"
+      }
     }
   ]
 }
