@@ -6928,6 +6928,82 @@
         "reference": "algebra-grade10-long-division-quadratic-divisor",
         "notes": "改寫自高一多項式除法單元「除以二次式、已知餘式求係數」的常見題。全庫以「x² \\+ x \\+ 1」「餘式|除以」掃描，x² + x + 1 無命中；algebra_grade12_004 是由兩個一次除式的餘數求二次除式的餘式、algebra_grade12_018 是 x¹⁰⁰ 除以 x² − 1（除式有實根可代值）。本題除式無實根，必須做長除法、比較餘式係數。"
       }
+    },
+    {
+      "id": "algebra_grade10_foundation_080",
+      "reviewStatus": "ok",
+      "topic": "algebra",
+      "subtopic": "count_powers_of_two_with_leading_digit_one",
+      "tags": [
+        "c:logarithm",
+        "c:exponent",
+        "m:bijection"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "已知 log 2 ≈ 0.30103（以 10 為底）。在 2¹、2²、2³、⋯、2¹⁰⁰ 這 100 個數中，最高位數字（最左邊那一位）是 1 的共有幾個？",
+        "zh-Hans": "已知 log 2 ≈ 0.30103（以 10 为底）。在 2¹、2²、2³、…、2¹⁰⁰ 这 100 个数中，最高位数字（最左边那一位）是 1 的共有几个？",
+        "en": "Given log 2 ≈ 0.30103 (base 10). Among the 100 numbers 2¹, 2², 2³, …, 2¹⁰⁰, how many have leading digit (leftmost digit) 1?",
+        "ja": "log 2 ≈ 0.30103（常用対数）とします。2¹、2²、2³、…、2¹⁰⁰ の 100 個の数のうち、最高位の数字（いちばん左の数字）が 1 であるものはいくつありますか。"
+      },
+      "answer": {
+        "zh-Hant": "最高位是 1 的共有 30 個。",
+        "zh-Hans": "最高位是 1 的共有 30 个。",
+        "en": "30 of them have leading digit 1.",
+        "ja": "最高位の数字が 1 のものは 30 個です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "關鍵觀察：一個數乘以 2 時，位數最多增加 1。若 2ⁿ 比 2ⁿ⁻¹ 多一位，那 2ⁿ 是「剛跨過某個 10 的次方」：2ⁿ⁻¹ < 10ᵏ ≤ 2ⁿ < 2 × 10ᵏ，所以 2ⁿ 的最高位是 1。",
+          "反過來，若 2ⁿ 的最高位是 1，也就是 10ᵏ ≤ 2ⁿ < 2 × 10ᵏ，那麼 2ⁿ⁻¹ = 2ⁿ ÷ 2 < 10ᵏ，位數比 2ⁿ 少一位。所以「最高位是 1」和「比前一個多一位」是同一件事。",
+          "因此，在 n = 1～100 中，最高位為 1 的個數 = 從 2⁰ 到 2¹⁰⁰ 位數增加的次數 = (2¹⁰⁰ 的位數) − (2⁰ 的位數)。",
+          "log 2¹⁰⁰ = 100 × 0.30103 = 30.103，所以 2¹⁰⁰ 介於 10³⁰ 與 10³¹ 之間，有 31 位；2⁰ = 1 有 1 位。",
+          "位數從 1 增加到 31，共增加 30 次，所以最高位是 1 的共有 30 個（例如 16、128、1024、⋯）。用程式逐一檢查 2¹～2¹⁰⁰ 也得到 30。"
+        ],
+        "zh-Hans": [
+          "关键观察：一个数乘以 2 时，位数最多增加 1。若 2ⁿ 比 2ⁿ⁻¹ 多一位，那 2ⁿ 是“刚跨过某个 10 的次方”：2ⁿ⁻¹ < 10ᵏ ≤ 2ⁿ < 2 × 10ᵏ，所以 2ⁿ 的最高位是 1。",
+          "反过来，若 2ⁿ 的最高位是 1，也就是 10ᵏ ≤ 2ⁿ < 2 × 10ᵏ，那么 2ⁿ⁻¹ = 2ⁿ ÷ 2 < 10ᵏ，位数比 2ⁿ 少一位。所以“最高位是 1”和“比前一个多一位”是同一件事。",
+          "因此，在 n = 1～100 中，最高位为 1 的个数 = 从 2⁰ 到 2¹⁰⁰ 位数增加的次数 = (2¹⁰⁰ 的位数) − (2⁰ 的位数)。",
+          "log 2¹⁰⁰ = 100 × 0.30103 = 30.103，所以 2¹⁰⁰ 介于 10³⁰ 与 10³¹ 之间，有 31 位；2⁰ = 1 有 1 位。",
+          "位数从 1 增加到 31，共增加 30 次，所以最高位是 1 的共有 30 个（例如 16、128、1024、…）。用程序逐一检查 2¹～2¹⁰⁰ 也得到 30。"
+        ],
+        "en": [
+          "Key observation: doubling a number increases its digit count by at most 1. If 2ⁿ has one more digit than 2ⁿ⁻¹, then 2ⁿ has just crossed a power of 10: 2ⁿ⁻¹ < 10ᵏ ≤ 2ⁿ < 2 × 10ᵏ, so the leading digit of 2ⁿ is 1.",
+          "Conversely, if 2ⁿ has leading digit 1, i.e. 10ᵏ ≤ 2ⁿ < 2 × 10ᵏ, then 2ⁿ⁻¹ = 2ⁿ ÷ 2 < 10ᵏ has one digit fewer. So \"leading digit 1\" and \"one more digit than the previous power\" are the same event.",
+          "Hence, for n = 1 to 100, the count equals the number of times the digit count increases from 2⁰ to 2¹⁰⁰, which is (digits of 2¹⁰⁰) − (digits of 2⁰).",
+          "log 2¹⁰⁰ = 100 × 0.30103 = 30.103, so 2¹⁰⁰ lies between 10³⁰ and 10³¹ and has 31 digits; 2⁰ = 1 has 1 digit.",
+          "The digit count rises from 1 to 31, that is 30 times, so 30 of the powers have leading digit 1 (for example 16, 128, 1024, …). Checking 2¹ to 2¹⁰⁰ by computer also gives 30."
+        ],
+        "ja": [
+          "大事な見方：2 倍すると、けた数は多くても 1 しか増えません。2ⁿ が 2ⁿ⁻¹ より 1 けた多いなら、2ⁿ はちょうど 10 の累乗をこえたところで、2ⁿ⁻¹ < 10ᵏ ≤ 2ⁿ < 2 × 10ᵏ となり、2ⁿ の最高位は 1 です。",
+          "逆に 2ⁿ の最高位が 1、つまり 10ᵏ ≤ 2ⁿ < 2 × 10ᵏ なら、2ⁿ⁻¹ = 2ⁿ ÷ 2 < 10ᵏ で、けた数は 1 少なくなります。「最高位が 1」と「前の数より 1 けた多い」は同じことです。",
+          "したがって n = 1～100 で最高位が 1 の個数は、2⁰ から 2¹⁰⁰ までにけた数が増えた回数、つまり (2¹⁰⁰ のけた数) − (2⁰ のけた数) です。",
+          "log 2¹⁰⁰ = 100 × 0.30103 = 30.103 なので、2¹⁰⁰ は 10³⁰ と 10³¹ の間にあり 31 けたです。2⁰ = 1 は 1 けたです。",
+          "けた数は 1 から 31 まで 30 回増えるので、最高位が 1 のものは 30 個です（16、128、1024、…）。2¹～2¹⁰⁰ をコンピューターで調べても 30 になります。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "30"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "algebra-grade10-foundation",
+        "notes": "題型取自對數與首位數字的經典計數題。掃過「首位|最高位|最左邊.{0,4}數字|位數|對數」：algebra_grade11_071（6²⁰ 的最高位數字）、algebra_grade11_digit_count_via_log、algebra_grade10_digits_of_two_power_and_five_power_combined。本題不是求單一數的首位，而是用「首位為 1 ⇔ 位數加一」的一一對應把計數化成位數差。"
+      }
     }
   ]
 }

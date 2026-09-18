@@ -4458,6 +4458,151 @@
         "reference": "number-theory-grade7-foundation",
         "notes": "題型來自 Wikipedia「Polydivisible number / Harshad number」條目周邊常見的「數被自己的數字整除」課本延伸題，另參考 CEMC 2023 Cayley 第 11 題那種「哪一個不可能」的選項設計。去重：全庫用 regex「每一位數字整除|它的數字整除|各位數字整除」掃出 0 題，這條線完全空白。最接近的既有題是 number_theory_grade8_008（兩位數＝數字積＋數字和）與 arithmetic_grade5_069（數字和 12 且是 4 的倍數的兩位數），兩題都是把數字做加乘後比對數值，本題則是把數字當成除數並用 a | b、b | 10a 兩個條件夾出範圍，推理核心不同。"
       }
+    },
+    {
+      "id": "number_theory_grade7_foundation_053",
+      "reviewStatus": "ok",
+      "topic": "number_theory",
+      "subtopic": "four_digit_times_nine_reverses",
+      "tags": [
+        "c:place_value",
+        "c:mul_div",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade7",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "有一個四位數，乘以 9 之後得到的還是一個四位數，而且剛好是把原來四位數的數字順序完全倒過來寫。原來的四位數是多少？",
+        "zh-Hans": "有一个四位数，乘以 9 之后得到的还是一个四位数，而且刚好是把原来四位数的数字顺序完全倒过来写。原来的四位数是多少？",
+        "en": "A four-digit number multiplied by 9 gives another four-digit number, which is exactly the original number with its digits written in reverse order. What is the original four-digit number?",
+        "ja": "ある 4 けたの数に 9 をかけると、答えも 4 けたの数になり、それはちょうどもとの数の数字の順番を逆にした数です。もとの 4 けたの数はいくつですか。"
+      },
+      "answer": {
+        "zh-Hant": "原來的四位數是 1089。",
+        "zh-Hans": "原来的四位数是 1089。",
+        "en": "The original number is 1089.",
+        "ja": "もとの数は 1089 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "設原數是 ABCD（A、B、C、D 是各位數字），ABCD × 9 = DCBA。乘以 9 還是四位數，所以 ABCD ≤ 9999 ÷ 9 = 1111，千位 A 只能是 1。",
+          "DCBA 的個位是 A = 1，而 DCBA 的個位等於 D × 9 的個位。9 的倍數中個位是 1 的只有 9 × 9 = 81，所以 D = 9。",
+          "代回去：(1000 + 100B + 10C + 9) × 9 = 9000 + 100C + 10B + 1。左邊是 9081 + 900B + 90C，整理得 80 + 890B = 10C，也就是 C = 8 + 89B。",
+          "C 是一位數字，所以 B 只能是 0，C = 8。原數是 1089，驗算 1089 × 9 = 9801，正好倒過來。"
+        ],
+        "zh-Hans": [
+          "设原数是 ABCD（A、B、C、D 是各位数字），ABCD × 9 = DCBA。乘以 9 还是四位数，所以 ABCD ≤ 9999 ÷ 9 = 1111，千位 A 只能是 1。",
+          "DCBA 的个位是 A = 1，而 DCBA 的个位等于 D × 9 的个位。9 的倍数中个位是 1 的只有 9 × 9 = 81，所以 D = 9。",
+          "代回去：(1000 + 100B + 10C + 9) × 9 = 9000 + 100C + 10B + 1。左边是 9081 + 900B + 90C，整理得 80 + 890B = 10C，也就是 C = 8 + 89B。",
+          "C 是一位数字，所以 B 只能是 0，C = 8。原数是 1089，验算 1089 × 9 = 9801，正好倒过来。"
+        ],
+        "en": [
+          "Let the number be ABCD (digits A, B, C, D) with ABCD × 9 = DCBA. The product is still four digits, so ABCD ≤ 9999 ÷ 9 = 1111, and the thousands digit A must be 1.",
+          "The units digit of DCBA is A = 1, and it equals the units digit of D × 9. The only multiple of 9 (from a single digit) ending in 1 is 9 × 9 = 81, so D = 9.",
+          "Substitute: (1000 + 100B + 10C + 9) × 9 = 9000 + 100C + 10B + 1. The left side is 9081 + 900B + 90C, which simplifies to 80 + 890B = 10C, that is C = 8 + 89B.",
+          "C is a single digit, so B must be 0 and C = 8. The number is 1089; check: 1089 × 9 = 9801, exactly reversed."
+        ],
+        "ja": [
+          "もとの数を ABCD（A、B、C、D は各位の数字）とすると、ABCD × 9 = DCBA です。答えも 4 けたなので ABCD ≤ 9999 ÷ 9 = 1111 となり、千の位の A は 1 しかありません。",
+          "DCBA の一の位は A = 1 で、これは D × 9 の一の位と同じです。一の位が 1 になるのは 9 × 9 = 81 だけなので、D = 9 です。",
+          "代入すると (1000 + 100B + 10C + 9) × 9 = 9000 + 100C + 10B + 1 です。左は 9081 + 900B + 90C なので、整理すると 80 + 890B = 10C、つまり C = 8 + 89B です。",
+          "C は 1 けたの数字なので B = 0、C = 8 です。もとの数は 1089 で、1089 × 9 = 9801 とちょうど逆になります。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "1089"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 4
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "number_theory-grade7-foundation",
+        "notes": "位值分析：由位數限制定 A，由個位定 D，再列式定 B、C。掃過：倒過來|反過來|顛倒|倒著|反序|乘以 9|數字.*順序；讀過 algebra_grade7_004（兩位數顛倒少 27）、number_theory_grade12_030（原數加反序數為平方）、number_theory_grade7_041（百位搬到個位差 216）。既有題都是加減關係；本題是乘法關係，推理點是先用「乘 9 仍為四位數」鎖住首位。"
+      }
+    },
+    {
+      "id": "number_theory_grade7_foundation_054",
+      "reviewStatus": "ok",
+      "topic": "number_theory",
+      "subtopic": "digit_sum_equals_digit_product_count",
+      "tags": [
+        "c:place_value",
+        "c:mul_div",
+        "m:estimate_bound",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade7",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "小明發現 1124 很特別：1 + 1 + 2 + 4 = 8，1 × 1 × 2 × 4 = 8，數字相加和數字相乘得到同一個數。在所有的四位數之中，「各位數字的和」等於「各位數字的積」的一共有幾個（1124 也算在內）？",
+        "zh-Hans": "小明发现 1124 很特别：1 + 1 + 2 + 4 = 8，1 × 1 × 2 × 4 = 8，数字相加和数字相乘得到同一个数。在所有的四位数之中，「各位数字的和」等于「各位数字的积」的一共有几个（1124 也算在内）？",
+        "en": "Ming notices that 1124 is special: 1 + 1 + 2 + 4 = 8 and 1 × 1 × 2 × 4 = 8, so adding its digits and multiplying its digits give the same number. Among all four-digit numbers, how many have the sum of their digits equal to the product of their digits (1124 included)?",
+        "ja": "ミンさんは 1124 がとくべつなことに気づきました。1 + 1 + 2 + 4 = 8、1 × 1 × 2 × 4 = 8 で、数字をたしてもかけても同じ数になります。4 けたの数のうち、「各位の数字の和」と「各位の数字の積」が等しいものは全部で何こありますか（1124 もふくめます）。"
+      },
+      "answer": {
+        "zh-Hant": "這樣的四位數一共有 12 個。",
+        "zh-Hans": "这样的四位数一共有 12 个。",
+        "en": "There are 12 such numbers.",
+        "ja": "全部で 12 こあります。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "若有數字是 0，積是 0，但千位不是 0，和至少是 1，不可能相等。所以四個數字都在 1 到 9 之間。",
+          "把數字由小到大排成 a ≤ b ≤ c ≤ d。和最多是 4d；若 a、b 都不是 1，積至少是 2 × 2 × c × d ≥ 4d，只有全部是 2 時才相等，但 2 + 2 + 2 + 2 = 8、2 × 2 × 2 × 2 = 16，不相等。所以至少有兩個 1：a = b = 1。",
+          "這時要 2 + c + d = c × d，也就是 (c − 1) × (d − 1) = 3。3 只能拆成 1 × 3，所以 c = 2、d = 4。（若有三個 1，就要 3 + d = d，不可能。）",
+          "所以四個數字一定是 1、1、2、4。把它們排成四位數：4 個位置選 2 個放 2 和 4（有順序）是 4 × 3 = 12 種，剩下兩格放 1。共有 12 個，例如 1124、2411、4121。"
+        ],
+        "zh-Hans": [
+          "若有数字是 0，积是 0，但千位不是 0，和至少是 1，不可能相等。所以四个数字都在 1 到 9 之间。",
+          "把数字由小到大排成 a ≤ b ≤ c ≤ d。和最多是 4d；若 a、b 都不是 1，积至少是 2 × 2 × c × d ≥ 4d，只有全部是 2 时才相等，但 2 + 2 + 2 + 2 = 8、2 × 2 × 2 × 2 = 16，不相等。所以至少有两个 1：a = b = 1。",
+          "这时要 2 + c + d = c × d，也就是 (c − 1) × (d − 1) = 3。3 只能拆成 1 × 3，所以 c = 2、d = 4。（若有三个 1，就要 3 + d = d，不可能。）",
+          "所以四个数字一定是 1、1、2、4。把它们排成四位数：4 个位置选 2 个放 2 和 4（有顺序）是 4 × 3 = 12 种，剩下两格放 1。共有 12 个，例如 1124、2411、4121。"
+        ],
+        "en": [
+          "If any digit is 0 the product is 0, but the thousands digit is not 0 so the sum is at least 1; they cannot be equal. So all four digits are from 1 to 9.",
+          "Order the digits a ≤ b ≤ c ≤ d. The sum is at most 4d; if neither a nor b is 1, the product is at least 2 × 2 × c × d ≥ 4d, with equality only when all are 2, but then 2 + 2 + 2 + 2 = 8 and 2 × 2 × 2 × 2 = 16 differ. So there are at least two 1s: a = b = 1.",
+          "Then 2 + c + d = c × d, that is (c − 1) × (d − 1) = 3. The only split of 3 is 1 × 3, so c = 2 and d = 4. (With three 1s we would need 3 + d = d, impossible.)",
+          "So the digits must be 1, 1, 2, 4. Arrange them: choose ordered places for the 2 and the 4 among 4 positions in 4 × 3 = 12 ways, and the other two places get 1s. There are 12 numbers, such as 1124, 2411 and 4121."
+        ],
+        "ja": [
+          "0 の数字があると積は 0 ですが、千の位は 0 でないので和は 1 以上で、等しくなりません。だから 4 つの数字はどれも 1 から 9 です。",
+          "数字を小さい順に a ≤ b ≤ c ≤ d とします。和は多くても 4d です。a も b も 1 でなければ積は 2 × 2 × c × d ≥ 4d 以上で、等しくなるのは全部 2 のときだけですが、2 + 2 + 2 + 2 = 8、2 × 2 × 2 × 2 = 16 でちがいます。だから 1 が少なくとも 2 つあり、a = b = 1 です。",
+          "このとき 2 + c + d = c × d、つまり (c − 1) × (d − 1) = 3 です。3 は 1 × 3 にしか分けられないので c = 2、d = 4 です。（1 が 3 つだと 3 + d = d となり、ありえません。）",
+          "だから 4 つの数字は必ず 1、1、2、4 です。4 つの位のうち 2 と 4 を置く場所を順に選ぶと 4 × 3 = 12 通りで、残り 2 か所は 1 です。全部で 12 こで、たとえば 1124、2411、4121 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "12"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "number_theory-grade7-foundation",
+        "notes": "數字和 = 數字積：用「積長得比和快」的上界迫出至少兩個 1，再因式分解 (c − 1)(d − 1) = 3，最後排列計數。掃過：乘積.*和|和.*乘積|數字和|數字.*乘積|各位數字.*相乘；讀過 number_theory_grade8_008（兩位數：數字積 + 數字和 = 本身）、number_theory_grade8_028（兩位數數字積為 12）、combinatorics_grade8_041（數字積為 18 的四位數個數）。grade8_008 是兩位數代數式；本題是四個數字的和積相等，靠不等式縮小範圍再計數排列。"
+      }
     }
   ]
 }

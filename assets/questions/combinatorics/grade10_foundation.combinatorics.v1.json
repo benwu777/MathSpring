@@ -5441,6 +5441,180 @@
         "reference": "probability-grade10-independent-vs-exclusive",
         "notes": "改寫自機率單元的觀念題「由聯集機率判斷獨立與互斥」。全庫以「獨立|互斥」掃描，命中的題都是直接使用「互相獨立」這個假設來計算（如 combinatorics_grade10_043 至少一時段下雨），沒有要求學生判斷兩事件是否獨立、是否互斥的題。本題推理點是用排容求交集，再分別對照兩個定義，並澄清兩個概念的差別。"
       }
+    },
+    {
+      "id": "combinatorics_grade10_foundation_061",
+      "reviewStatus": "ok",
+      "topic": "combinatorics",
+      "subtopic": "equal_boys_girls_committee_vandermonde",
+      "tags": [
+        "c:permutation_combination",
+        "c:binomial",
+        "m:bijection"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "某社團有 6 位男生和 6 位女生。要從中選出一個委員會，規定委員會裡的男生人數和女生人數必須相同，而且委員會至少要有 1 個人。求選法共有多少種。",
+        "zh-Hans": "某社团有 6 位男生和 6 位女生。要从中选出一个委员会，规定委员会里的男生人数和女生人数必须相同，而且委员会至少要有 1 个人。求选法共有多少种。",
+        "en": "A club has 6 boys and 6 girls. A committee is to be chosen with the same number of boys as girls, and it must have at least 1 member. How many ways are there to choose it?",
+        "ja": "あるクラブに男子 6 人と女子 6 人がいます。この中から委員会を選びます。委員会の男子の人数と女子の人数は等しく、委員会には少なくとも 1 人いなければなりません。選び方は何通りありますか。"
+      },
+      "answer": {
+        "zh-Hant": "選法共有 923 種。",
+        "zh-Hans": "选法共有 923 种。",
+        "en": "There are 923 ways.",
+        "ja": "選び方は 923 通りです。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "直接算：男女各選 k 人（k = 1～6）的選法是 C(6, k) × C(6, k)，要把 k = 1 到 6 全部加起來。",
+          "換個角度建立一一對應：一個「男 k 人、女 k 人」的委員會，對應到「被選中的 k 位男生」加上「沒被選中的 6 − k 位女生」，這是從 12 人中挑出 6 − k + k = 6 人的一種挑法。",
+          "反過來，從 12 人中任挑 6 人，若其中有 k 位男生，就有 6 − k 位女生；把這 6 − k 位女生換成「另外那 k 位女生」，就還原成男女各 k 人的委員會。所以兩邊一一對應。",
+          "因此 k = 0 到 6 的所有情形合計等於 C(12, 6) = 924。其中 k = 0 是「一個人都不選」，題目不允許，要扣掉 1 種。",
+          "答案是 924 − 1 = 923。直接驗算：C(6,1)² + ⋯ + C(6,6)² = 36 + 225 + 400 + 225 + 36 + 1 = 923 ✓。"
+        ],
+        "zh-Hans": [
+          "直接算：男女各选 k 人（k = 1～6）的选法是 C(6, k) × C(6, k)，要把 k = 1 到 6 全部加起来。",
+          "换个角度建立一一对应：一个“男 k 人、女 k 人”的委员会，对应到“被选中的 k 位男生”加上“没被选中的 6 − k 位女生”，这是从 12 人中挑出 6 − k + k = 6 人的一种挑法。",
+          "反过来，从 12 人中任挑 6 人，若其中有 k 位男生，就有 6 − k 位女生；把这 6 − k 位女生换成“另外那 k 位女生”，就还原成男女各 k 人的委员会。所以两边一一对应。",
+          "因此 k = 0 到 6 的所有情形合计等于 C(12, 6) = 924。其中 k = 0 是“一个人都不选”，题目不允许，要扣掉 1 种。",
+          "答案是 924 − 1 = 923。直接验算：C(6,1)² + ⋯ + C(6,6)² = 36 + 225 + 400 + 225 + 36 + 1 = 923 ✓。"
+        ],
+        "en": [
+          "Directly: choosing k boys and k girls (k = 1 to 6) gives C(6, k) × C(6, k) ways, and we must add these for k = 1 to 6.",
+          "Set up a one-to-one correspondence instead: a committee with k boys and k girls corresponds to \"the k chosen boys\" together with \"the 6 − k girls NOT chosen\", which is a choice of 6 − k + k = 6 people out of 12.",
+          "Conversely, any 6 of the 12 people contain some k boys and 6 − k girls; replacing those 6 − k girls by the other k girls recovers a committee with k of each. So the correspondence is one-to-one.",
+          "Therefore the total over k = 0 to 6 is C(12, 6) = 924. The case k = 0 is the empty committee, which is not allowed, so subtract 1.",
+          "The answer is 924 − 1 = 923. Direct check: C(6,1)² + ⋯ + C(6,6)² = 36 + 225 + 400 + 225 + 36 + 1 = 923 ✓."
+        ],
+        "ja": [
+          "直接数えると、男女それぞれ k 人（k = 1～6）選ぶ方法は C(6, k) × C(6, k) 通りで、k = 1 から 6 まで全部たす必要があります。",
+          "見方を変えて 1 対 1 の対応をつくります。「男子 k 人・女子 k 人」の委員会に、「選ばれた男子 k 人」と「選ばれなかった女子 6 − k 人」を対応させると、12 人から 6 − k + k = 6 人を選ぶ 1 つの選び方になります。",
+          "逆に、12 人から 6 人を選ぶと男子 k 人・女子 6 − k 人になり、その女子 6 − k 人を「残りの女子 k 人」に取りかえれば、男女 k 人ずつの委員会にもどります。したがって 1 対 1 に対応します。",
+          "よって k = 0 から 6 までの合計は C(12, 6) = 924 です。k = 0 はだれも選ばない場合で、問題では認められないので 1 通り引きます。",
+          "答えは 924 − 1 = 923 です。直接の確認：C(6,1)² + ⋯ + C(6,6)² = 36 + 225 + 400 + 225 + 36 + 1 = 923 ✓。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "923"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 4
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "combinatorics-grade10-foundation",
+        "notes": "題型取自 Vandermonde 恆等式 Σ C(n,k)² = C(2n,n) 的組合解釋。掃過「男生.{0,30}女生.{0,30}(相同|一樣)|平方和|C(.{0,8})²」：combinatorics_grade10_012（男女相間圓桌）、combinatorics_grade8_029。庫中沒有用補集對應把平方和化為 C(12, 6) 的題。"
+      }
+    },
+    {
+      "id": "combinatorics_grade10_foundation_062",
+      "reviewStatus": "ok",
+      "topic": "combinatorics",
+      "subtopic": "random_divisor_probability_exponent_grid",
+      "tags": [
+        "c:probability",
+        "c:factor_multiple",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "從 10⁶ = 1000000 的所有正因數中隨機選出一個，每一個因數被選中的機會都相同。求選出的因數「是 100 的倍數，但不是 1000 的倍數」的機率。",
+        "zh-Hans": "从 10⁶ = 1000000 的所有正因数中随机选出一个，每一个因数被选中的机会都相同。求选出的因数“是 100 的倍数，但不是 1000 的倍数”的概率。",
+        "en": "One of the positive divisors of 10⁶ = 1000000 is chosen at random, each divisor equally likely. What is the probability that the chosen divisor is a multiple of 100 but not a multiple of 1000?",
+        "ja": "10⁶ = 1000000 の正の約数の中から 1 つを無作為に選びます。どの約数も選ばれる確率は同じです。選んだ約数が「100 の倍数であるが 1000 の倍数ではない」確率を求めなさい。"
+      },
+      "answer": {
+        "zh-Hant": "機率是 9/49。",
+        "zh-Hans": "概率是 9/49。",
+        "en": "The probability is 9/49.",
+        "ja": "確率は 9/49 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "10⁶ = 2⁶ × 5⁶，每個正因數都能唯一寫成 2ᵃ × 5ᵇ，a、b 各取 0～6，共 7 × 7 = 49 個因數，這就是樣本空間。",
+          "是 100 = 2² × 5² 的倍數 ⇔ a ≥ 2 且 b ≥ 2：a、b 各有 5 種（2～6），共 25 個。",
+          "是 1000 = 2³ × 5³ 的倍數 ⇔ a ≥ 3 且 b ≥ 3：a、b 各有 4 種，共 16 個，這 16 個都包含在前面的 25 個裡。",
+          "「是 100 的倍數但不是 1000 的倍數」共 25 − 16 = 9 個。注意「不是 1000 的倍數」只要 a、b 其中一個小於 3 即可，所以不能只算 a = b = 2 那 1 個。",
+          "機率 = 9/49。"
+        ],
+        "zh-Hans": [
+          "10⁶ = 2⁶ × 5⁶，每个正因数都能唯一写成 2ᵃ × 5ᵇ，a、b 各取 0～6，共 7 × 7 = 49 个因数，这就是样本空间。",
+          "是 100 = 2² × 5² 的倍数 ⇔ a ≥ 2 且 b ≥ 2：a、b 各有 5 种（2～6），共 25 个。",
+          "是 1000 = 2³ × 5³ 的倍数 ⇔ a ≥ 3 且 b ≥ 3：a、b 各有 4 种，共 16 个，这 16 个都包含在前面的 25 个里。",
+          "“是 100 的倍数但不是 1000 的倍数”共 25 − 16 = 9 个。注意“不是 1000 的倍数”只要 a、b 其中一个小于 3 即可，所以不能只算 a = b = 2 那 1 个。",
+          "概率 = 9/49。"
+        ],
+        "en": [
+          "10⁶ = 2⁶ × 5⁶, so every positive divisor is uniquely 2ᵃ × 5ᵇ with a, b each from 0 to 6: 7 × 7 = 49 divisors, the sample space.",
+          "A multiple of 100 = 2² × 5² ⇔ a ≥ 2 and b ≥ 2: 5 choices each (2 to 6), 25 divisors.",
+          "A multiple of 1000 = 2³ × 5³ ⇔ a ≥ 3 and b ≥ 3: 4 choices each, 16 divisors, all inside the previous 25.",
+          "Multiples of 100 that are not multiples of 1000: 25 − 16 = 9. Note that \"not a multiple of 1000\" only needs a < 3 or b < 3, so it is not just the single divisor with a = b = 2.",
+          "Probability = 9/49."
+        ],
+        "ja": [
+          "10⁶ = 2⁶ × 5⁶ なので、正の約数はどれも 2ᵃ × 5ᵇ（a、b はそれぞれ 0～6）とただ 1 通りに書け、7 × 7 = 49 個あります。これが全体です。",
+          "100 = 2² × 5² の倍数 ⇔ a ≥ 2 かつ b ≥ 2：a、b それぞれ 5 通り（2～6）で 25 個です。",
+          "1000 = 2³ × 5³ の倍数 ⇔ a ≥ 3 かつ b ≥ 3：それぞれ 4 通りで 16 個、これらはすべて先の 25 個にふくまれます。",
+          "「100 の倍数だが 1000 の倍数でない」ものは 25 − 16 = 9 個です。「1000 の倍数でない」は a、b のどちらか一方が 3 未満であればよいので、a = b = 2 の 1 個だけではありません。",
+          "確率は 9/49 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "multiple_choice",
+      "options": {
+        "A": {
+          "zh-Hant": "1/49",
+          "zh-Hans": "1/49",
+          "en": "1/49",
+          "ja": "1/49"
+        },
+        "B": {
+          "zh-Hant": "9/49",
+          "zh-Hans": "9/49",
+          "en": "9/49",
+          "ja": "9/49"
+        },
+        "C": {
+          "zh-Hant": "16/49",
+          "zh-Hans": "16/49",
+          "en": "16/49",
+          "ja": "16/49"
+        },
+        "D": {
+          "zh-Hant": "25/49",
+          "zh-Hans": "25/49",
+          "en": "25/49",
+          "ja": "25/49"
+        }
+      },
+      "correctAnswer": {
+        "type": "choice",
+        "value": "B"
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "combinatorics-grade10-foundation",
+        "notes": "題型取自「隨機因數」機率題，用指數格點當樣本空間。掃過「因數.{0,20}機率|隨機.{0,10}因數|因數.{0,6}個數」：number_theory_grade9_005（完全平方因數個數）、number_theory_grade11 因數個數題、combinatorics_grade11_020（三位數機率）。既有題數因數個數，沒有以因數為樣本空間求條件事件機率。"
+      }
     }
   ]
 }

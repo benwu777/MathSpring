@@ -4413,6 +4413,82 @@
         "reference": "number-theory-grade9-foundation",
         "notes": "題型參考 Wikipedia「Divisor」條目關於最小質因數的敘述，以及 AMC 型「把因數由小到大列出」的常見設定（本輪 AoPS Wiki 回 403，改讀 Wikipedia 與 CEMC 卷）。去重：全庫用 regex「由小到大.{0,10}因數|最小的因數|第二小的」掃過，只有 number_theory_grade11_010（Mary 寫因數寫到 323，下一個因數最小可能是多少）同樣談排序後的因數列，但那題的推理核心是 323 = 17 × 19 的質因數強制，且問的是上界；本題是用「第二小的因數必為質數」逐一排除 a 的候選並求最小的 N，方向相反。刻意避開全庫已飽和的「因數個數」家族（grade11_006/016/026/027/029/030、grade8_032），本題完全不談因數個數。"
       }
+    },
+    {
+      "id": "number_theory_grade9_foundation_051",
+      "reviewStatus": "ok",
+      "topic": "number_theory",
+      "subtopic": "two_digit_equals_digit_sum_plus_product",
+      "tags": [
+        "c:place_value",
+        "c:linear_eq",
+        "m:direct"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade9",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "有些兩位數有這樣的性質：它剛好等於「它的兩個數字的和」再加上「它的兩個數字的乘積」。例如若某兩位數的十位數字是 a、個位數字是 b，就要求這個數等於 (a + b) + a × b。求所有具有這個性質的兩位數的總和。",
+        "zh-Hans": "有些两位数有这样的性质：它刚好等于“它的两个数字的和”再加上“它的两个数字的乘积”。例如若某两位数的十位数字是 a、个位数字是 b，就要求这个数等于 (a + b) + a × b。求所有具有这个性质的两位数的总和。",
+        "en": "Some two-digit numbers have this property: the number equals the sum of its two digits plus the product of its two digits. That is, if the tens digit is a and the units digit is b, the number must equal (a + b) + a × b. Find the sum of all two-digit numbers with this property.",
+        "ja": "ある 2 けたの数は、「2 つの数字の和」と「2 つの数字の積」をたしたものにちょうど等しくなります。つまり十の位の数字を a、一の位の数字を b とすると、その数が (a + b) + a × b に等しいということです。この性質をもつ 2 けたの数をすべてたした和を求めなさい。"
+      },
+      "answer": {
+        "zh-Hant": "所有這樣的兩位數總和是 531。",
+        "zh-Hans": "所有这样的两位数总和是 531。",
+        "en": "The sum of all such numbers is 531.",
+        "ja": "そのような 2 けたの数の和は 531 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "兩位數的值是 10a + b，其中 a 是 1～9、b 是 0～9。條件寫成 10a + b = a + b + ab。",
+          "兩邊都減去 a + b：9a = ab。",
+          "因為 a 是十位數字，a ≥ 1，不是 0，可以兩邊同除以 a：b = 9。",
+          "所以條件和 a 無關，只要個位數字是 9 就一定成立，例如 39 = (3 + 9) + 3 × 9 = 12 + 27。符合的數是 19、29、39、⋯、99，共 9 個。",
+          "總和 = (19 + 99) × 9 ÷ 2 = 118 × 9 ÷ 2 = 531。"
+        ],
+        "zh-Hans": [
+          "两位数的值是 10a + b，其中 a 是 1～9、b 是 0～9。条件写成 10a + b = a + b + ab。",
+          "两边都减去 a + b：9a = ab。",
+          "因为 a 是十位数字，a ≥ 1，不是 0，可以两边同除以 a：b = 9。",
+          "所以条件和 a 无关，只要个位数字是 9 就一定成立，例如 39 = (3 + 9) + 3 × 9 = 12 + 27。符合的数是 19、29、39、…、99，共 9 个。",
+          "总和 = (19 + 99) × 9 ÷ 2 = 118 × 9 ÷ 2 = 531。"
+        ],
+        "en": [
+          "The number equals 10a + b with a from 1 to 9 and b from 0 to 9. The condition is 10a + b = a + b + ab.",
+          "Subtract a + b from both sides: 9a = ab.",
+          "Since a is the tens digit, a ≥ 1 is not 0, so we may divide by a: b = 9.",
+          "So the condition does not depend on a at all: every number ending in 9 works, e.g. 39 = (3 + 9) + 3 × 9 = 12 + 27. The numbers are 19, 29, 39, …, 99, nine of them.",
+          "Their sum is (19 + 99) × 9 ÷ 2 = 118 × 9 ÷ 2 = 531."
+        ],
+        "ja": [
+          "2 けたの数は 10a + b（a は 1～9、b は 0～9）です。条件は 10a + b = a + b + ab です。",
+          "両辺から a + b を引くと 9a = ab です。",
+          "a は十の位なので a ≥ 1 で 0 ではなく、両辺を a で割れます。b = 9 です。",
+          "つまり条件は a に関係なく、一の位が 9 ならいつでも成り立ちます。たとえば 39 = (3 + 9) + 3 × 9 = 12 + 27 です。あてはまる数は 19、29、39、…、99 の 9 個です。",
+          "和は (19 + 99) × 9 ÷ 2 = 118 × 9 ÷ 2 = 531 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "531"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 4
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "number_theory-grade9-foundation",
+        "notes": "題型取自數字謎經典題（數 = 數字和 + 數字積）。掃過「數字和|數字的乘積|數字積|十位數字.{0,10}個位」：combinatorics_grade7_023（抽卡乘積偶數）、number_theory_grade9_049（加數字和的數列）、arithmetic_grade6_081（AB × 3 = CCC）。庫中沒有「條件化簡後與十位無關」的題。"
+      }
     }
   ]
 }

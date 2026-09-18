@@ -7012,6 +7012,86 @@
         "reference": "geometry-grade9-parabola-line-triangle",
         "notes": "改寫自國三二次函數與一次函數圖形綜合題「拋物線與直線交點和原點圍成的三角形面積」。全庫以「y = x².{0,40}(直線|y = )」掃描，只有 grade12 的切線、微積分圍面積、弦過定點斜率積；geometry_grade9 的 coordinate_triangle_area 是三頂點座標已知直接算。本題先解聯立求交點，再用 y 軸把三角形切成兩塊、共用底邊 OC。"
       }
+    },
+    {
+      "id": "geometry_grade9_foundation_067",
+      "reviewStatus": "ok",
+      "topic": "geometry",
+      "subtopic": "lattice_points_inside_right_triangle_by_rectangle_halving",
+      "tags": [
+        "c:coordinate",
+        "c:symmetry",
+        "m:bijection"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade9",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "座標平面上有一個直角三角形，三個頂點是 (0, 0)、(20, 0)、(0, 15)。橫座標與縱座標都是整數的點稱為格點。求落在這個三角形「內部」的格點共有幾個？（落在三條邊上的格點不算。）",
+        "zh-Hans": "坐标平面上有一个直角三角形，三个顶点是 (0, 0)、(20, 0)、(0, 15)。横坐标与纵坐标都是整数的点称为格点。求落在这个三角形“内部”的格点共有几个？（落在三条边上的格点不算。）",
+        "en": "In the coordinate plane, a right triangle has vertices (0, 0), (20, 0) and (0, 15). A point whose two coordinates are both integers is called a lattice point. How many lattice points lie strictly inside the triangle? (Lattice points on the three sides do not count.)",
+        "ja": "座標平面上に、3 つの頂点が (0, 0)、(20, 0)、(0, 15) である直角三角形があります。x 座標と y 座標がどちらも整数である点を格子点とよびます。この三角形の「内部」にある格子点はいくつありますか。（3 辺の上にある格子点は数えません。）"
+      },
+      "answer": {
+        "zh-Hant": "三角形內部共有 131 個格點。",
+        "zh-Hans": "三角形内部共有 131 个格点。",
+        "en": "There are 131 lattice points strictly inside the triangle.",
+        "ja": "三角形の内部にある格子点は 131 個です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "把三角形補成長方形：頂點 (0, 0)、(20, 0)、(20, 15)、(0, 15)。長方形內部的格點，橫座標可取 1～19（19 種），縱座標可取 1～14（14 種），共 19 × 14 = 266 個。",
+          "長方形的對角線從 (20, 0) 連到 (0, 15)，它把長方形分成兩個全等的直角三角形，其中一個就是題目的三角形。",
+          "先數對角線上（不含兩端）的格點。從 (0, 15) 走到 (20, 0)，橫向 20、縱向 −15，兩者的最大公因數是 5，所以每走一小步是 (4, −3)，端點之間共有 5 − 1 = 4 個格點：(4, 12)、(8, 9)、(12, 6)、(16, 3)。",
+          "把長方形繞中心 (10, 7.5) 轉 180°，格點仍變成格點，兩個三角形互換，所以兩個三角形內部的格點一樣多。",
+          "長方形內部的 266 個格點，扣掉對角線上的 4 個，剩下的 262 個平分給兩個三角形：262 ÷ 2 = 131。",
+          "所以三角形內部共有 131 個格點。"
+        ],
+        "zh-Hans": [
+          "把三角形补成长方形：顶点 (0, 0)、(20, 0)、(20, 15)、(0, 15)。长方形内部的格点，横坐标可取 1～19（19 种），纵坐标可取 1～14（14 种），共 19 × 14 = 266 个。",
+          "长方形的对角线从 (20, 0) 连到 (0, 15)，它把长方形分成两个全等的直角三角形，其中一个就是题目的三角形。",
+          "先数对角线上（不含两端）的格点。从 (0, 15) 走到 (20, 0)，横向 20、纵向 −15，两者的最大公因数是 5，所以每走一小步是 (4, −3)，端点之间共有 5 − 1 = 4 个格点：(4, 12)、(8, 9)、(12, 6)、(16, 3)。",
+          "把长方形绕中心 (10, 7.5) 转 180°，格点仍变成格点，两个三角形互换，所以两个三角形内部的格点一样多。",
+          "长方形内部的 266 个格点，扣掉对角线上的 4 个，剩下的 262 个平分给两个三角形：262 ÷ 2 = 131。",
+          "所以三角形内部共有 131 个格点。"
+        ],
+        "en": [
+          "Complete the triangle to the rectangle with vertices (0, 0), (20, 0), (20, 15), (0, 15). Inside the rectangle the x-coordinate can be 1 to 19 (19 choices) and the y-coordinate 1 to 14 (14 choices), giving 19 × 14 = 266 lattice points.",
+          "The diagonal from (20, 0) to (0, 15) cuts the rectangle into two congruent right triangles, one of which is our triangle.",
+          "Count the lattice points on the diagonal, excluding its ends. Going from (0, 15) to (20, 0) moves 20 across and −15 down; gcd(20, 15) = 5, so the smallest step is (4, −3) and there are 5 − 1 = 4 lattice points between the ends: (4, 12), (8, 9), (12, 6), (16, 3).",
+          "Rotating the rectangle 180° about its centre (10, 7.5) sends lattice points to lattice points and swaps the two triangles, so both triangles contain the same number of interior lattice points.",
+          "Of the 266 interior points of the rectangle, remove the 4 on the diagonal; the remaining 262 split evenly: 262 ÷ 2 = 131.",
+          "So 131 lattice points lie strictly inside the triangle."
+        ],
+        "ja": [
+          "三角形を、頂点 (0, 0)、(20, 0)、(20, 15)、(0, 15) の長方形に広げます。長方形の内部の格子点は、x 座標が 1～19 の 19 通り、y 座標が 1～14 の 14 通りで、19 × 14 = 266 個です。",
+          "長方形の対角線 (20, 0)–(0, 15) は、長方形を合同な 2 つの直角三角形に分け、その一方が問題の三角形です。",
+          "まず対角線上（両端を除く）の格子点を数えます。(0, 15) から (20, 0) へは横に 20、縦に −15 進み、最大公約数は 5 なので、最小の一歩は (4, −3) です。両端の間には 5 − 1 = 4 個の格子点 (4, 12)、(8, 9)、(12, 6)、(16, 3) があります。",
+          "長方形を中心 (10, 7.5) のまわりに 180° 回すと、格子点は格子点に移り、2 つの三角形が入れかわります。したがって 2 つの三角形の内部の格子点の数は等しくなります。",
+          "長方形内部の 266 個から対角線上の 4 個を除いた 262 個を 2 つの三角形で等分して、262 ÷ 2 = 131 です。",
+          "よって三角形の内部の格子点は 131 個です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "131"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "geometry-grade9-foundation",
+        "notes": "題型取自格點計數（Pick 定理前身）的經典「補成長方形再對半」手法。掃過「格點|整數點|座標都是整數」全庫：geometry_grade10_046（線段上的格點，gcd）、geometry_grade9_059（格點中點鴿籠）、combinatorics_grade11_006（4×4 格點取三點）。本題要數三角形「內部」，關鍵推理是補長方形後用 180° 旋轉對稱把內部點對半分，gcd 只是扣掉對角線的小步驟。"
+      }
     }
   ]
 }
