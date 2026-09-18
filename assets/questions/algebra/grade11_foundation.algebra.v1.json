@@ -6805,6 +6805,607 @@
         "reference": "algebra-grade11-ratio-batch-merge",
         "notes": "題型參考 Wikipedia「Alligation」的 alligation medial 例（三種汽水依不同份量混合求平均含糖量），改成三項連比的兩批合併與化簡。全庫以「連比」與比例 regex 掃過 70 題：algebra_grade9_026、arithmetic_grade6_078 是 a:b 與 b:c 的鏈式連比合成，arithmetic_grade5_081、arithmetic_grade5_108 是單一比例的加水調整，都沒有「兩批不同三項連比、重量不同、合併後再化簡」。本題的推理點是排除「兩個比可以逐項相加」這個錯誤直覺。"
       }
+    },
+    {
+      "id": "algebra_grade11_foundation_079",
+      "reviewStatus": "ok",
+      "topic": "algebra",
+      "subtopic": "composition_of_two_reflections_is_rotation",
+      "tags": [
+        "c:matrix",
+        "c:trigonometry",
+        "m:direct"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade11",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "平面上有兩條通過原點的直線：L₁ 的傾斜角（與 x 軸正向的夾角）是 15°，L₂ 的傾斜角是 60°。把平面上任意一點先對 L₁ 作鏡射，再把得到的點對 L₂ 作鏡射。已知這兩次鏡射合起來的效果，等於以原點為中心逆時針旋轉某個角度 θ（0° ≤ θ < 360°）。求 θ 是幾度。",
+        "zh-Hans": "平面上有两条通过原点的直线：L₁ 的倾斜角（与 x 轴正向的夹角）是 15°，L₂ 的倾斜角是 60°。把平面上任意一点先对 L₁ 作镜射，再把得到的点对 L₂ 作镜射。已知这两次镜射合起来的效果，等于以原点为中心逆时针旋转某个角度 θ（0° ≤ θ < 360°）。求 θ 是几度。",
+        "en": "Two lines pass through the origin: L₁ has inclination 15° (angle with the positive x-axis) and L₂ has inclination 60°. Every point of the plane is first reflected in L₁, and the result is then reflected in L₂. The combined effect equals a counterclockwise rotation about the origin by some angle θ (0° ≤ θ < 360°). Find θ in degrees.",
+        "ja": "原点を通る 2 本の直線があり、L₁ の傾き角（x 軸の正の向きとなす角）は 15°、L₂ の傾き角は 60° です。平面上の任意の点をまず L₁ に関して対称移動し、得られた点をさらに L₂ に関して対称移動します。この 2 回の対称移動を合わせたものは、原点を中心とする反時計回りの角 θ（0° ≤ θ < 360°）の回転に等しくなります。θ は何度ですか。"
+      },
+      "answer": {
+        "zh-Hant": "θ 是 90°。",
+        "zh-Hans": "θ 是 90°。",
+        "en": "θ is 90°.",
+        "ja": "θ は 90° です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "對傾斜角 α 的直線作鏡射，矩陣是 [cos2α, sin2α; sin2α, −cos2α]。所以 L₁ 的矩陣用 2α = 30°，L₂ 的矩陣用 2α = 120°。",
+          "先做 L₁ 再做 L₂，合成矩陣是 M₂M₁（先做的放右邊）。相乘後左上角是 cos120°cos30° + sin120°sin30° = cos(120° − 30°) = cos90°，左下角是 sin120°cos30° − cos120°sin30° = sin(120° − 30°) = sin90°。",
+          "所以 M₂M₁ = [cos90°, −sin90°; sin90°, cos90°]，正是逆時針旋轉 90° 的矩陣；一般而言旋轉角是兩線夾角的 2 倍：2 × (60° − 15°) = 90°。",
+          "用一個點驗算：(1, 0) 對 L₁ 鏡射後落在與 x 軸夾 30° 的單位向量上；再對 60° 的線鏡射，角度變成 2 × 60° − 30° = 90°，即 (0, 1)。(1, 0) 轉到 (0, 1) 正是逆時針 90°。若把順序顛倒，會得到 270°，所以順序不能搞錯。"
+        ],
+        "zh-Hans": [
+          "对倾斜角 α 的直线作镜射，矩阵是 [cos2α, sin2α; sin2α, −cos2α]。所以 L₁ 的矩阵用 2α = 30°，L₂ 的矩阵用 2α = 120°。",
+          "先做 L₁ 再做 L₂，合成矩阵是 M₂M₁（先做的放右边）。相乘后左上角是 cos120°cos30° + sin120°sin30° = cos(120° − 30°) = cos90°，左下角是 sin120°cos30° − cos120°sin30° = sin(120° − 30°) = sin90°。",
+          "所以 M₂M₁ = [cos90°, −sin90°; sin90°, cos90°]，正是逆时针旋转 90° 的矩阵；一般而言旋转角是两线夹角的 2 倍：2 × (60° − 15°) = 90°。",
+          "用一个点验算：(1, 0) 对 L₁ 镜射后落在与 x 轴夹 30° 的单位向量上；再对 60° 的线镜射，角度变成 2 × 60° − 30° = 90°，即 (0, 1)。(1, 0) 转到 (0, 1) 正是逆时针 90°。若把顺序颠倒，会得到 270°，所以顺序不能搞错。"
+        ],
+        "en": [
+          "Reflection in the line with inclination α has matrix [cos2α, sin2α; sin2α, −cos2α]. So L₁ uses 2α = 30° and L₂ uses 2α = 120°.",
+          "Doing L₁ first and then L₂ gives the matrix M₂M₁ (the first map goes on the right). Its top-left entry is cos120°cos30° + sin120°sin30° = cos(120° − 30°) = cos90°, and its bottom-left entry is sin120°cos30° − cos120°sin30° = sin(120° − 30°) = sin90°.",
+          "Hence M₂M₁ = [cos90°, −sin90°; sin90°, cos90°], the matrix of a 90° counterclockwise rotation. In general the rotation angle is twice the angle between the lines: 2 × (60° − 15°) = 90°.",
+          "Check with a point: (1, 0) reflected in L₁ becomes the unit vector at 30°; reflected in the 60° line its angle becomes 2 × 60° − 30° = 90°, i.e. (0, 1). Moving (1, 0) to (0, 1) is a 90° counterclockwise turn. Reversing the order would give 270°, so the order matters."
+        ],
+        "ja": [
+          "傾き角 α の直線に関する対称移動の行列は [cos2α, sin2α; sin2α, −cos2α] です。L₁ では 2α = 30°、L₂ では 2α = 120° を使います。",
+          "L₁ を先、L₂ を後に行う合成の行列は M₂M₁（先に行う方を右に置く）です。左上成分は cos120°cos30° + sin120°sin30° = cos(120° − 30°) = cos90°、左下成分は sin120°cos30° − cos120°sin30° = sin(120° − 30°) = sin90° です。",
+          "よって M₂M₁ = [cos90°, −sin90°; sin90°, cos90°] で、反時計回り 90° の回転行列です。一般に回転角は 2 直線のなす角の 2 倍で、2 × (60° − 15°) = 90° です。",
+          "点で確かめます。(1, 0) を L₁ で対称移動すると角 30° の単位ベクトルになり、60° の直線で対称移動すると角は 2 × 60° − 30° = 90°、つまり (0, 1) になります。(1, 0) が (0, 1) に移るのは反時計回り 90° です。順序を逆にすると 270° になるので、順序に注意が必要です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "90"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "algebra-grade11-foundation",
+        "notes": "題型取自高中矩陣「鏡射矩陣相乘得旋轉矩陣」的課本延伸。掃過「鏡射|反射|翻折|旋轉」：geometry_grade12_001（旋轉後再對 y = −x 對稱，求原點座標）、algebra_grade11_058（旋轉與鏡射交換順序，比較像點）、geometry_grade10_043（兩次對稱）。本題新增：兩次鏡射合成為旋轉、角度是夾角的 2 倍且順序影響方向，要從矩陣乘法推出。"
+      }
+    },
+    {
+      "id": "algebra_grade11_foundation_080",
+      "reviewStatus": "ok",
+      "topic": "algebra",
+      "subtopic": "count_singular_binary_matrices",
+      "tags": [
+        "c:matrix",
+        "c:basic_counting",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade11",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一個 2 × 2 矩陣的四個元素，每一個都只能是 0 或 1，這樣的矩陣一共有 16 個。其中沒有反矩陣的有幾個？",
+        "zh-Hans": "一个 2 × 2 矩阵的四个元素，每一个都只能是 0 或 1，这样的矩阵一共有 16 个。其中没有逆矩阵的有几个？",
+        "en": "Each of the four entries of a 2 × 2 matrix is either 0 or 1, giving 16 such matrices. How many of them have no inverse?",
+        "ja": "2 × 2 行列の 4 つの成分がどれも 0 か 1 のどちらかである行列は全部で 16 個あります。そのうち逆行列をもたないものはいくつですか。"
+      },
+      "answer": {
+        "zh-Hant": "沒有反矩陣的有 10 個。",
+        "zh-Hans": "没有逆矩阵的有 10 个。",
+        "en": "10 of them have no inverse.",
+        "ja": "逆行列をもたないものは 10 個です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "把矩陣寫成第一列 a、b，第二列 c、d。2 × 2 矩陣沒有反矩陣，等價於行列式 ad − bc = 0，也就是 ad = bc。",
+          "元素只有 0 與 1，所以 ad 只可能是 0 或 1。ad = 1 只有 a = d = 1 這 1 種；ad = 0 則有 4 − 1 = 3 種。bc 的情形完全相同。",
+          "ad = bc 分成兩類：兩者都等於 1，有 1 × 1 = 1 種；兩者都等於 0，有 3 × 3 = 9 種。",
+          "合計 1 + 9 = 10 個矩陣沒有反矩陣（其餘 6 個的行列式是 1 或 −1，都可逆）。"
+        ],
+        "zh-Hans": [
+          "把矩阵写成第一列 a、b，第二列 c、d。2 × 2 矩阵没有逆矩阵，等价于行列式 ad − bc = 0，也就是 ad = bc。",
+          "元素只有 0 与 1，所以 ad 只可能是 0 或 1。ad = 1 只有 a = d = 1 这 1 种；ad = 0 则有 4 − 1 = 3 种。bc 的情形完全相同。",
+          "ad = bc 分成两类：两者都等于 1，有 1 × 1 = 1 种；两者都等于 0，有 3 × 3 = 9 种。",
+          "合计 1 + 9 = 10 个矩阵没有逆矩阵（其余 6 个的行列式是 1 或 −1，都可逆）。"
+        ],
+        "en": [
+          "Write the matrix with first row a, b and second row c, d. A 2 × 2 matrix has no inverse exactly when its determinant ad − bc is 0, i.e. ad = bc.",
+          "Entries are 0 or 1, so ad is 0 or 1. ad = 1 only when a = d = 1 (1 way); ad = 0 in 4 − 1 = 3 ways. The same holds for bc.",
+          "ad = bc splits into two cases: both equal 1, in 1 × 1 = 1 way; both equal 0, in 3 × 3 = 9 ways.",
+          "In total 1 + 9 = 10 matrices have no inverse (the other 6 have determinant 1 or −1 and are invertible)."
+        ],
+        "ja": [
+          "行列の第 1 行を a、b、第 2 行を c、d とします。2 × 2 行列が逆行列をもたないのは、行列式 ad − bc が 0、つまり ad = bc のときです。",
+          "成分は 0 か 1 なので ad は 0 か 1 です。ad = 1 は a = d = 1 の 1 通り、ad = 0 は 4 − 1 = 3 通りです。bc も同じです。",
+          "ad = bc は 2 つに分かれます。どちらも 1 のとき 1 × 1 = 1 通り、どちらも 0 のとき 3 × 3 = 9 通りです。",
+          "合計 1 + 9 = 10 個が逆行列をもちません（残りの 6 個は行列式が 1 か −1 で可逆です）。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "10"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "algebra-grade11-foundation",
+        "notes": "題型為矩陣可逆條件結合計數的課本延伸。掃過「可逆|反矩陣|行列式」：algebra_grade11_048（單一參數 k 使矩陣不可逆）、algebra_grade11_049（反矩陣對角和）、algebra_grade11_033（行列式計算）。本題不是解參數，而是把 ad = bc 拆成乘積值的分類計數。"
+      }
+    },
+    {
+      "id": "algebra_grade11_foundation_081",
+      "reviewStatus": "ok",
+      "topic": "algebra",
+      "subtopic": "integer_linear_programming_vertex_not_integer",
+      "tags": [
+        "c:inequality",
+        "c:linear_eq",
+        "m:extremal",
+        "m:enumeration"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade11",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "某工廠生產甲、乙兩種產品。每件甲可獲利 5 千元，每件乙可獲利 4 千元。每件甲需要機器 6 小時、人工 1 小時；每件乙需要機器 4 小時、人工 2 小時。每天機器最多用 24 小時，人工最多用 6 小時。產品必須整件生產（件數都是非負整數）。求每天的最大獲利是幾千元。",
+        "zh-Hans": "某工厂生产甲、乙两种产品。每件甲可获利 5 千元，每件乙可获利 4 千元。每件甲需要机器 6 小时、人工 1 小时；每件乙需要机器 4 小时、人工 2 小时。每天机器最多用 24 小时，人工最多用 6 小时。产品必须整件生产（件数都是非负整数）。求每天的最大获利是几千元。",
+        "en": "A factory makes products X and Y. Each X earns a profit of 5 thousand dollars and each Y earns 4 thousand. Each X needs 6 machine hours and 1 labour hour; each Y needs 4 machine hours and 2 labour hours. Each day at most 24 machine hours and 6 labour hours are available. Only whole items can be produced (non-negative integers). What is the maximum daily profit, in thousands of dollars?",
+        "ja": "ある工場は製品 甲 と 乙 を作ります。甲 1 個の利益は 5 千円、乙 1 個は 4 千円です。甲 1 個には機械 6 時間と人手 1 時間、乙 1 個には機械 4 時間と人手 2 時間が必要です。1 日に使えるのは機械 24 時間以内、人手 6 時間以内です。製品は 1 個単位でしか作れません（個数は 0 以上の整数）。1 日の利益の最大値は何千円ですか。"
+      },
+      "answer": {
+        "zh-Hant": "每天的最大獲利是 20 千元（生產 4 件甲、0 件乙）。",
+        "zh-Hans": "每天的最大获利是 20 千元（生产 4 件甲、0 件乙）。",
+        "en": "The maximum daily profit is 20 thousand dollars (4 of X, 0 of Y).",
+        "ja": "1 日の最大利益は 20 千円です（甲 4 個、乙 0 個）。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "設甲生產 x 件、乙生產 y 件。限制是 6x + 4y ≤ 24、x + 2y ≤ 6、x ≥ 0、y ≥ 0；獲利 P = 5x + 4y（千元）。",
+          "若不管整數，可行區域的頂點是 (0, 0)、(4, 0)、(3, 1.5)、(0, 3)，其中 (3, 1.5) 由 6x + 4y = 24 與 x + 2y = 6 解出。對應的 P 是 0、20、21、12，最大 21 出現在 (3, 1.5)，但 1.5 件無法生產。",
+          "直接把 (3, 1.5) 捨成 (3, 1) 只得 P = 19，不一定是最好的。因為 P 的上限是 21，先看 P = 21 的整數點：5x + 4y = 21 的非負整數解只有 (1, 4)，但 1 + 8 = 9 > 6 違反人工限制，所以 P 取不到 21。",
+          "再看 P = 20：(4, 0) 滿足 6 × 4 = 24 ≤ 24、4 ≤ 6，可行。所以整數限制下的最大獲利是 20 千元，發生在 (4, 0)，而不是在「捨入後的頂點」附近。"
+        ],
+        "zh-Hans": [
+          "设甲生产 x 件、乙生产 y 件。限制是 6x + 4y ≤ 24、x + 2y ≤ 6、x ≥ 0、y ≥ 0；获利 P = 5x + 4y（千元）。",
+          "若不管整数，可行区域的顶点是 (0, 0)、(4, 0)、(3, 1.5)、(0, 3)，其中 (3, 1.5) 由 6x + 4y = 24 与 x + 2y = 6 解出。对应的 P 是 0、20、21、12，最大 21 出现在 (3, 1.5)，但 1.5 件无法生产。",
+          "直接把 (3, 1.5) 舍成 (3, 1) 只得 P = 19，不一定是最好的。因为 P 的上限是 21，先看 P = 21 的整数点：5x + 4y = 21 的非负整数解只有 (1, 4)，但 1 + 8 = 9 > 6 违反人工限制，所以 P 取不到 21。",
+          "再看 P = 20：(4, 0) 满足 6 × 4 = 24 ≤ 24、4 ≤ 6，可行。所以整数限制下的最大获利是 20 千元，发生在 (4, 0)，而不是在「舍入后的顶点」附近。"
+        ],
+        "en": [
+          "Let x be the number of X and y the number of Y. Constraints: 6x + 4y ≤ 24, x + 2y ≤ 6, x ≥ 0, y ≥ 0; profit P = 5x + 4y (thousands).",
+          "Ignoring integrality, the feasible region has vertices (0, 0), (4, 0), (3, 1.5), (0, 3), where (3, 1.5) solves 6x + 4y = 24 and x + 2y = 6. The profits are 0, 20, 21, 12, so the maximum 21 is at (3, 1.5), but 1.5 items cannot be made.",
+          "Rounding (3, 1.5) down to (3, 1) gives only P = 19, which need not be best. Since P cannot exceed 21, first try P = 21: the only non-negative integer solution of 5x + 4y = 21 is (1, 4), but 1 + 8 = 9 > 6 violates the labour limit, so 21 is impossible.",
+          "Next try P = 20: (4, 0) satisfies 6 × 4 = 24 ≤ 24 and 4 ≤ 6, so it is feasible. The maximum profit with whole items is 20 thousand, at (4, 0), not near the rounded vertex."
+        ],
+        "ja": [
+          "甲を x 個、乙を y 個作るとします。条件は 6x + 4y ≤ 24、x + 2y ≤ 6、x ≥ 0、y ≥ 0、利益は P = 5x + 4y（千円）です。",
+          "整数の条件を無視すると実行可能領域の頂点は (0, 0)、(4, 0)、(3, 1.5)、(0, 3) で、(3, 1.5) は 6x + 4y = 24 と x + 2y = 6 の交点です。P はそれぞれ 0、20、21、12 で、最大の 21 は (3, 1.5) ですが、1.5 個は作れません。",
+          "(3, 1.5) を (3, 1) に切り捨てると P = 19 にしかならず、最善とは限りません。P は 21 を超えないので、まず P = 21 を調べます。5x + 4y = 21 の 0 以上の整数解は (1, 4) だけですが、1 + 8 = 9 > 6 で人手の条件に反するので、21 は不可能です。",
+          "次に P = 20 を調べると、(4, 0) は 6 × 4 = 24 ≤ 24、4 ≤ 6 を満たし実行可能です。よって整数の条件のもとでの最大利益は 20 千円で、(4, 0) のときです。切り捨てた頂点の近くではありません。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "20"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "algebra-grade11-foundation",
+        "notes": "線性規劃是高中數學乙的單元；題型取自教材常提的「最佳頂點不是整數點」陷阱，數字用程式窮舉確認。掃過「線性規劃|可行解|限制條件|利潤|獲利」：只有 algebra_grade12_071（飼料調配成本，連續變數、最佳解就在頂點）。本題的推理點是頂點非整數，捨入頂點會錯，要從目標值上限往下逐值找整數可行解。"
+      }
+    },
+    {
+      "id": "algebra_grade11_foundation_082",
+      "reviewStatus": "ok",
+      "topic": "algebra",
+      "subtopic": "symmetric_function_root_sum_odd_count",
+      "tags": [
+        "c:function",
+        "c:symmetry",
+        "m:invariant"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade11",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "某個函數的圖形對直線 x = 2 左右對稱，也就是任何實數 t 都有 f(2 + t) = f(2 − t)。已知方程式 f(x) = 0 恰好有 5 個相異的實數解，求這 5 個解的總和。",
+        "zh-Hans": "某个函数的图形对直线 x = 2 左右对称，也就是任何实数 t 都有 f(2 + t) = f(2 − t)。已知方程式 f(x) = 0 恰好有 5 个相异的实数解，求这 5 个解的总和。",
+        "en": "The graph of a function f is symmetric about the line x = 2, that is, f(2 + t) = f(2 − t) for every real t. The equation f(x) = 0 has exactly 5 distinct real solutions. Find the sum of these 5 solutions.",
+        "ja": "ある関数 f のグラフは直線 x = 2 に関して左右対称で、任意の実数 t について f(2 + t) = f(2 − t) が成り立ちます。方程式 f(x) = 0 はちょうど 5 個の異なる実数解をもちます。この 5 個の解の和を求めてください。"
+      },
+      "answer": {
+        "zh-Hant": "5 個解的總和是 10。",
+        "zh-Hans": "5 个解的总和是 10。",
+        "en": "The sum of the 5 solutions is 10.",
+        "ja": "5 個の解の和は 10 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "條件 f(2 + x) = f(2 − x) 表示圖形對直線 x = 2 左右對稱。若 r 是解，令 x = r − 2 代入，得 f(4 − r) = f(r) = 0，所以 4 − r 也是解。",
+          "解因此兩兩配對成 (r, 4 − r)，每一對的和是 4。只有 r = 4 − r，也就是 r = 2 時，這個解和自己配對。",
+          "5 是奇數，無法全部兩兩配成不同的對，所以 2 一定是其中一個解，另外 4 個解組成 2 對。",
+          "總和 = 2 + 2 × 4 = 10。例如 f(x) = (x − 2)((x − 2)² − 1)((x − 2)² − 9) 的 5 個解 −1、1、2、3、5 加起來正好是 10。"
+        ],
+        "zh-Hans": [
+          "条件 f(2 + x) = f(2 − x) 表示图形对直线 x = 2 左右对称。若 r 是解，令 x = r − 2 代入，得 f(4 − r) = f(r) = 0，所以 4 − r 也是解。",
+          "解因此两两配对成 (r, 4 − r)，每一对的和是 4。只有 r = 4 − r，也就是 r = 2 时，这个解和自己配对。",
+          "5 是奇数，无法全部两两配成不同的对，所以 2 一定是其中一个解，另外 4 个解组成 2 对。",
+          "总和 = 2 + 2 × 4 = 10。例如 f(x) = (x − 2)((x − 2)² − 1)((x − 2)² − 9) 的 5 个解 −1、1、2、3、5 加起来正好是 10。"
+        ],
+        "en": [
+          "The condition f(2 + x) = f(2 − x) means the graph is symmetric about the line x = 2. If r is a solution, substitute x = r − 2 to get f(4 − r) = f(r) = 0, so 4 − r is also a solution.",
+          "So solutions pair up as (r, 4 − r), each pair summing to 4. A solution pairs with itself only when r = 4 − r, i.e. r = 2.",
+          "5 is odd, so the solutions cannot all be split into pairs of distinct numbers; hence 2 must be a solution and the other 4 form 2 pairs.",
+          "Sum = 2 + 2 × 4 = 10. For example, f(x) = (x − 2)((x − 2)² − 1)((x − 2)² − 9) has solutions −1, 1, 2, 3, 5, whose sum is exactly 10."
+        ],
+        "ja": [
+          "条件 f(2 + x) = f(2 − x) は、グラフが直線 x = 2 に関して左右対称であることを表します。r が解なら x = r − 2 を代入して f(4 − r) = f(r) = 0 なので、4 − r も解です。",
+          "したがって解は (r, 4 − r) の組に分かれ、各組の和は 4 です。自分自身と組になるのは r = 4 − r、つまり r = 2 のときだけです。",
+          "5 は奇数なので、すべてを異なる 2 つずつの組に分けることはできません。よって 2 は必ず解で、残りの 4 個が 2 組を作ります。",
+          "和は 2 + 2 × 4 = 10 です。たとえば f(x) = (x − 2)((x − 2)² − 1)((x − 2)² − 9) の 5 個の解 −1、1、2、3、5 の和はちょうど 10 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "10"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "algebra-grade11-foundation",
+        "notes": "題型取自函數對稱性常見題。掃過「對稱」：algebra_grade9_037（二次函數對稱軸）、algebra_grade12_014（f(x) + f(1 − x) = 1 的配對求和）、algebra_grade12_065。grade12_014 是函數值配對、和為常數；本題是根的配對，而且要用奇數個根推出中心點本身必是根。"
+      }
+    },
+    {
+      "id": "algebra_grade11_foundation_083",
+      "reviewStatus": "ok",
+      "topic": "algebra",
+      "subtopic": "exponential_equals_square_solution_count",
+      "tags": [
+        "c:exponent",
+        "c:logarithm",
+        "c:function",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade11",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "方程式 2ˣ = x² 在實數範圍內共有幾個解？",
+        "zh-Hans": "方程式 2ˣ = x² 在实数范围内共有几个解？",
+        "en": "How many real solutions does the equation 2ˣ = x² have?",
+        "ja": "方程式 2ˣ = x² の実数解はいくつありますか。"
+      },
+      "answer": {
+        "zh-Hant": "共有 3 個實數解。",
+        "zh-Hans": "共有 3 个实数解。",
+        "en": "There are 3 real solutions.",
+        "ja": "実数解は 3 個です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "先找容易看出的解：x = 2 時兩邊都是 4，x = 4 時兩邊都是 16。x = 0 不是解（左邊 1、右邊 0）。",
+          "x < 0 的部分：令 g(x) = 2ˣ − x²。當 x 由負往 0 增加時，2ˣ 遞增而 x² 遞減，所以 g 嚴格遞增；又 g(−1) = 1/2 − 1 < 0、g(0) = 1 > 0，所以負數範圍恰有 1 個解（在 −1 與 0 之間）。這個解不是整數，最容易漏掉。",
+          "x > 0 的部分：兩邊都是正數，取以 2 為底的對數得 x = 2 log₂x，即 log₂x = x/2。y = log₂x 的圖形是向下彎的曲線，一條直線 y = x/2 與它最多只有 2 個交點，而 x = 2 與 x = 4 已經是 2 個，所以正數範圍恰好 2 個解。",
+          "合計 1 + 2 = 3 個實數解。"
+        ],
+        "zh-Hans": [
+          "先找容易看出的解：x = 2 时两边都是 4，x = 4 时两边都是 16。x = 0 不是解（左边 1、右边 0）。",
+          "x < 0 的部分：令 g(x) = 2ˣ − x²。当 x 由负往 0 增加时，2ˣ 递增而 x² 递减，所以 g 严格递增；又 g(−1) = 1/2 − 1 < 0、g(0) = 1 > 0，所以负数范围恰有 1 个解（在 −1 与 0 之间）。这个解不是整数，最容易漏掉。",
+          "x > 0 的部分：两边都是正数，取以 2 为底的对数得 x = 2 log₂x，即 log₂x = x/2。y = log₂x 的图形是向下弯的曲线，一条直线 y = x/2 与它最多只有 2 个交点，而 x = 2 与 x = 4 已经是 2 个，所以正数范围恰好 2 个解。",
+          "合计 1 + 2 = 3 个实数解。"
+        ],
+        "en": [
+          "First the easy solutions: at x = 2 both sides are 4, and at x = 4 both sides are 16. x = 0 is not a solution (left 1, right 0).",
+          "For x < 0: let g(x) = 2ˣ − x². As x increases toward 0 from the negatives, 2ˣ increases and x² decreases, so g is strictly increasing; and g(−1) = 1/2 − 1 < 0, g(0) = 1 > 0. So there is exactly 1 negative solution (between −1 and 0). It is not an integer and is the easiest to miss.",
+          "For x > 0: both sides are positive, so taking log base 2 gives x = 2 log₂x, i.e. log₂x = x/2. The graph of y = log₂x bends downward (concave), so the straight line y = x/2 meets it at most twice; x = 2 and x = 4 are already two, so there are exactly 2 positive solutions.",
+          "In total 1 + 2 = 3 real solutions."
+        ],
+        "ja": [
+          "まず見つけやすい解：x = 2 のとき両辺とも 4、x = 4 のとき両辺とも 16 です。x = 0 は解ではありません（左辺 1、右辺 0）。",
+          "x < 0 の部分：g(x) = 2ˣ − x² とします。x が負から 0 へ増えるとき 2ˣ は増加し x² は減少するので g は狭義増加です。g(−1) = 1/2 − 1 < 0、g(0) = 1 > 0 なので、負の範囲にちょうど 1 個の解があります（−1 と 0 の間）。整数でないので最も見落としやすい解です。",
+          "x > 0 の部分：両辺とも正なので、2 を底とする対数をとると x = 2 log₂x、すなわち log₂x = x/2 です。y = log₂x のグラフは上に凸（下向きに曲がる）なので、直線 y = x/2 との交点は多くても 2 個で、x = 2 と x = 4 ですでに 2 個です。よって正の範囲の解はちょうど 2 個です。",
+          "合計 1 + 2 = 3 個の実数解があります。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "3"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "algebra-grade11-foundation",
+        "notes": "題型取自指數與多項式圖形交點的經典問題。掃過「2ˣ|x².{0,5}=.{0,5}2」：algebra_grade10_015（4ˣ − 3·2ˣ + 2 = 0 換元）、algebra_grade12_065（對稱指數不等式）、algebra_grade8_014。本題無法換元，必須分正負兩段：負數段用單調性加勘根，正數段用對數曲線凹性限制交點數。"
+      }
+    },
+    {
+      "id": "algebra_grade11_foundation_084",
+      "reviewStatus": "ok",
+      "topic": "algebra",
+      "subtopic": "ph_of_mixed_solutions",
+      "tags": [
+        "c:logarithm",
+        "c:mixture",
+        "m:direct"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade11",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "溶液的 pH 值定義為 pH = −log[H⁺]，其中 [H⁺] 是氫離子濃度（單位：莫耳/公升），log 以 10 為底。把 pH = 2 的鹽酸與 pH = 4 的鹽酸取相同體積混合，假設混合後體積相加、氫離子總量不變。混合液的 pH 最接近下列哪一個？（log 5.05 ≈ 0.70）",
+        "zh-Hans": "溶液的 pH 值定义为 pH = −log[H⁺]，其中 [H⁺] 是氢离子浓度（单位：摩尔/升），log 以 10 为底。把 pH = 2 的盐酸与 pH = 4 的盐酸取相同体积混合，假设混合后体积相加、氢离子总量不变。混合液的 pH 最接近下列哪一个？（log 5.05 ≈ 0.70）",
+        "en": "The pH of a solution is defined as pH = −log[H⁺], where [H⁺] is the hydrogen-ion concentration (mol/L) and log is base 10. Equal volumes of hydrochloric acid with pH = 2 and with pH = 4 are mixed; assume the volumes add and the total amount of hydrogen ions is unchanged. Which value is closest to the pH of the mixture? (log 5.05 ≈ 0.70)",
+        "ja": "溶液の pH は pH = −log[H⁺] で定義されます。[H⁺] は水素イオン濃度（mol/L）、log は常用対数です。pH = 2 の塩酸と pH = 4 の塩酸を同じ体積ずつ混ぜます。混合後の体積は和になり、水素イオンの総量は変わらないものとします。混合液の pH に最も近いものはどれですか。（log 5.05 ≈ 0.70）"
+      },
+      "answer": {
+        "zh-Hant": "答案是 B，混合液的 pH 約是 2.3。",
+        "zh-Hans": "答案是 B，混合液的 pH 约是 2.3。",
+        "en": "The answer is B: the pH is about 2.3.",
+        "ja": "答えは B で、pH は約 2.3 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "由定義，pH = 2 的濃度是 10⁻² = 0.01，pH = 4 的濃度是 10⁻⁴ = 0.0001（莫耳/公升）。",
+          "各取體積 V 混合：氫離子總量是 0.01V + 0.0001V = 0.0101V，總體積 2V，新濃度 = 0.0101 ÷ 2 = 0.00505 = 5.05 × 10⁻³。",
+          "pH = −log(5.05 × 10⁻³) = −(log 5.05 − 3) = 3 − 0.70 = 2.3。",
+          "直接把 pH 平均成 (2 + 4) ÷ 2 = 3 是錯的：pH 是對數刻度，要平均的是濃度。濃度大的那一瓶幾乎主導結果，所以答案只比 2 大一點，約 2.3，選 B。"
+        ],
+        "zh-Hans": [
+          "由定义，pH = 2 的浓度是 10⁻² = 0.01，pH = 4 的浓度是 10⁻⁴ = 0.0001（摩尔/升）。",
+          "各取体积 V 混合：氢离子总量是 0.01V + 0.0001V = 0.0101V，总体积 2V，新浓度 = 0.0101 ÷ 2 = 0.00505 = 5.05 × 10⁻³。",
+          "pH = −log(5.05 × 10⁻³) = −(log 5.05 − 3) = 3 − 0.70 = 2.3。",
+          "直接把 pH 平均成 (2 + 4) ÷ 2 = 3 是错的：pH 是对数刻度，要平均的是浓度。浓度大的那一瓶几乎主导结果，所以答案只比 2 大一点，约 2.3，选 B。"
+        ],
+        "en": [
+          "By definition, pH 2 means concentration 10⁻² = 0.01 and pH 4 means 10⁻⁴ = 0.0001 (mol/L).",
+          "Mix volume V of each: total ions 0.01V + 0.0001V = 0.0101V in volume 2V, so the new concentration is 0.0101 ÷ 2 = 0.00505 = 5.05 × 10⁻³.",
+          "pH = −log(5.05 × 10⁻³) = −(log 5.05 − 3) = 3 − 0.70 = 2.3.",
+          "Averaging the pH values to (2 + 4) ÷ 2 = 3 is wrong: pH is a logarithmic scale, so it is the concentrations that average. The stronger acid dominates, so the answer is only a little above 2, about 2.3, choice B."
+        ],
+        "ja": [
+          "定義より、pH 2 の濃度は 10⁻² = 0.01、pH 4 の濃度は 10⁻⁴ = 0.0001（mol/L）です。",
+          "それぞれ体積 V ずつ混ぜると、水素イオンの総量は 0.01V + 0.0001V = 0.0101V、体積は 2V なので、新しい濃度は 0.0101 ÷ 2 = 0.00505 = 5.05 × 10⁻³ です。",
+          "pH = −log(5.05 × 10⁻³) = −(log 5.05 − 3) = 3 − 0.70 = 2.3 です。",
+          "pH をそのまま平均して (2 + 4) ÷ 2 = 3 とするのは誤りです。pH は対数の目盛りなので、平均すべきは濃度です。濃い方がほぼ結果を決めるので、答えは 2 より少し大きい約 2.3 で、B です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "multiple_choice",
+      "options": {
+        "A": {
+          "zh-Hant": "約 2.0",
+          "zh-Hans": "约 2.0",
+          "en": "about 2.0",
+          "ja": "約 2.0"
+        },
+        "B": {
+          "zh-Hant": "約 2.3",
+          "zh-Hans": "约 2.3",
+          "en": "about 2.3",
+          "ja": "約 2.3"
+        },
+        "C": {
+          "zh-Hant": "約 3.0",
+          "zh-Hans": "约 3.0",
+          "en": "about 3.0",
+          "ja": "約 3.0"
+        },
+        "D": {
+          "zh-Hant": "約 3.7",
+          "zh-Hans": "约 3.7",
+          "en": "about 3.7",
+          "ja": "約 3.7"
+        }
+      },
+      "correctAnswer": {
+        "type": "choice",
+        "value": "B"
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "algebra-grade11-foundation",
+        "notes": "題型取自對數課本的 pH 應用與「對數刻度不能直接平均」的迷思。掃過「pH|酸鹼|氫離子」全庫 0 題；讀過 algebra_grade12_decibel_doubling_intensity、algebra_grade10_042（地震能量倍數）。本題要先由對數還原濃度、按混合平均後再取對數，推理點與分貝／地震題（單純倍數換算）不同。"
+      }
+    },
+    {
+      "id": "algebra_grade11_foundation_085",
+      "reviewStatus": "ok",
+      "topic": "algebra",
+      "subtopic": "involutory_matrix_determinant",
+      "tags": [
+        "c:matrix",
+        "m:casework",
+        "m:contradiction"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade11",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一個 2 × 2 實數矩陣 A 自乘一次後恰好等於單位矩陣 I（即 A² = I），但 A 本身既不是 I 也不是 −I。求 A 的行列式值。",
+        "zh-Hans": "一个 2 × 2 实数矩阵 A 自乘一次后恰好等于单位矩阵 I（即 A² = I），但 A 本身既不是 I 也不是 −I。求 A 的行列式值。",
+        "en": "A is a 2 × 2 real matrix with A² = I (the 2 × 2 identity matrix), but A ≠ I and A ≠ −I. Find the determinant of A.",
+        "ja": "A は 2 × 2 の実数行列で A² = I（I は 2 × 2 の単位行列）を満たしますが、A ≠ I かつ A ≠ −I です。A の行列式の値を求めてください。"
+      },
+      "answer": {
+        "zh-Hant": "A 的行列式值是 −1。",
+        "zh-Hans": "A 的行列式值是 −1。",
+        "en": "The determinant of A is −1.",
+        "ja": "A の行列式は −1 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "設 A 的第一列是 a、b，第二列是 c、d。計算 A²：第一列是 a² + bc、b(a + d)，第二列是 c(a + d)、d² + bc。A² = I 表示 a² + bc = 1、d² + bc = 1、b(a + d) = 0、c(a + d) = 0。",
+          "情況一：a + d ≠ 0。則 b = c = 0，於是 a² = 1、d² = 1，且 a + d ≠ 0 迫使 a = d = 1 或 a = d = −1，也就是 A = I 或 A = −I，被題目排除。",
+          "情況二：a + d = 0，即 d = −a。這時行列式 ad − bc = −a² − bc = −(a² + bc) = −1。",
+          "所以行列式一定是 −1。例如第一列 3、4，第二列 −2、−3 的矩陣：平方後是單位矩陣，行列式 = −9 + 8 = −1 ✓。直覺上這類矩陣像鏡射，把平面「翻面」，所以行列式是負的。"
+        ],
+        "zh-Hans": [
+          "设 A 的第一列是 a、b，第二列是 c、d。计算 A²：第一列是 a² + bc、b(a + d)，第二列是 c(a + d)、d² + bc。A² = I 表示 a² + bc = 1、d² + bc = 1、b(a + d) = 0、c(a + d) = 0。",
+          "情况一：a + d ≠ 0。则 b = c = 0，于是 a² = 1、d² = 1，且 a + d ≠ 0 迫使 a = d = 1 或 a = d = −1，也就是 A = I 或 A = −I，被题目排除。",
+          "情况二：a + d = 0，即 d = −a。这时行列式 ad − bc = −a² − bc = −(a² + bc) = −1。",
+          "所以行列式一定是 −1。例如第一列 3、4，第二列 −2、−3 的矩阵：平方后是单位矩阵，行列式 = −9 + 8 = −1 ✓。直觉上这类矩阵像镜射，把平面「翻面」，所以行列式是负的。"
+        ],
+        "en": [
+          "Let A have first row a, b and second row c, d. Then A² has first row a² + bc, b(a + d) and second row c(a + d), d² + bc. A² = I means a² + bc = 1, d² + bc = 1, b(a + d) = 0, c(a + d) = 0.",
+          "Case 1: a + d ≠ 0. Then b = c = 0, so a² = 1 and d² = 1, and a + d ≠ 0 forces a = d = 1 or a = d = −1, i.e. A = I or A = −I, which are excluded.",
+          "Case 2: a + d = 0, i.e. d = −a. Then the determinant is ad − bc = −a² − bc = −(a² + bc) = −1.",
+          "So the determinant must be −1. For example, the matrix with rows (3, 4) and (−2, −3) squares to the identity and has determinant −9 + 8 = −1 ✓. Intuitively such matrices act like reflections that flip the plane over, hence the negative determinant."
+        ],
+        "ja": [
+          "A の第 1 行を a、b、第 2 行を c、d とします。A² の第 1 行は a² + bc、b(a + d)、第 2 行は c(a + d)、d² + bc です。A² = I より a² + bc = 1、d² + bc = 1、b(a + d) = 0、c(a + d) = 0 です。",
+          "場合 1：a + d ≠ 0。このとき b = c = 0 なので a² = 1、d² = 1 で、a + d ≠ 0 から a = d = 1 または a = d = −1、つまり A = I または A = −I となり、条件で除かれています。",
+          "場合 2：a + d = 0、つまり d = −a。このとき行列式は ad − bc = −a² − bc = −(a² + bc) = −1 です。",
+          "よって行列式は必ず −1 です。たとえば行が (3, 4)、(−2, −3) の行列は 2 乗すると単位行列になり、行列式は −9 + 8 = −1 ✓。直感的には、このような行列は平面を裏返す鏡映のようにはたらくので、行列式が負になります。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "-1"
+      },
+      "inputConstraints": {
+        "allowNegative": true,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "algebra-grade11-foundation",
+        "notes": "題型取自矩陣單元「A² = I 的矩陣結構」。掃過「矩陣|行列式」g11/g12 共 18 題：algebra_grade11_068（Aⁿ = I 的最小 n）、algebra_grade12_056（A² 表為 pA + qI）、algebra_grade12_047（行列式乘法）。本題是由方程反推行列式，需分類 a + d 是否為 0 並排除 ±I。"
+      }
+    },
+    {
+      "id": "algebra_grade11_foundation_086",
+      "reviewStatus": "ok",
+      "topic": "algebra",
+      "subtopic": "log_linear_model_back_transform",
+      "tags": [
+        "c:logarithm",
+        "c:exponent",
+        "c:line_slope",
+        "m:direct"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade11",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "研究人員記錄某種細菌的數量 y 與時間 x（小時）。把每筆資料畫成 (x, log y) 的點（log 以 10 為底）之後，這些點幾乎落在一條直線上，求得的直線是 log y = 1 + 0.301x。依照這個模型，x = 5 時細菌數量約是多少？（log 2 ≈ 0.301）",
+        "zh-Hans": "研究人员记录某种细菌的数量 y 与时间 x（小时）。把每笔数据画成 (x, log y) 的点（log 以 10 为底）之后，这些点几乎落在一条直线上，求得的直线是 log y = 1 + 0.301x。依照这个模型，x = 5 时细菌数量约是多少？（log 2 ≈ 0.301）",
+        "en": "Researchers record the number y of bacteria at time x (hours). When each data point is plotted as (x, log y), with log base 10, the points lie almost on a straight line, found to be log y = 1 + 0.301x. According to this model, about how many bacteria are there at x = 5? (log 2 ≈ 0.301)",
+        "ja": "ある細菌の数 y と時間 x（時間）を記録しました。各データを (x, log y) の点としてかくと（log は常用対数）ほぼ 1 本の直線上に並び、その直線は log y = 1 + 0.301x でした。このモデルによると、x = 5 のとき細菌の数はおよそいくつですか。（log 2 ≈ 0.301）"
+      },
+      "answer": {
+        "zh-Hant": "x = 5 時細菌約有 320 個。",
+        "zh-Hans": "x = 5 时细菌约有 320 个。",
+        "en": "At x = 5 there are about 320 bacteria.",
+        "ja": "x = 5 のとき細菌はおよそ 320 個です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "直線的縱軸是 log y，不是 y，所以要先把模型還原：y = 10 的 (1 + 0.301x) 次方 = 10 × (10 的 0.301 次方)ˣ。",
+          "因為 log 2 ≈ 0.301，10 的 0.301 次方約等於 2，所以模型是 y ≈ 10 × 2ˣ：一開始約 10 個，每小時加倍。直線的斜率 0.301 對應的正是「每小時乘以 2」，截距 1 對應初始量 10。",
+          "x = 5 時 y ≈ 10 × 2⁵ = 10 × 32 = 320。",
+          "若把 log y 的值直接當成數量，會誤得 1 + 0.301 × 5 ≈ 2.5，這只是 log y 的值；還原回 y 才是 10 的 2.505 次方，約 320。"
+        ],
+        "zh-Hans": [
+          "直线的纵轴是 log y，不是 y，所以要先把模型还原：y = 10 的 (1 + 0.301x) 次方 = 10 × (10 的 0.301 次方)ˣ。",
+          "因为 log 2 ≈ 0.301，10 的 0.301 次方约等于 2，所以模型是 y ≈ 10 × 2ˣ：一开始约 10 个，每小时加倍。直线的斜率 0.301 对应的正是「每小时乘以 2」，截距 1 对应初始量 10。",
+          "x = 5 时 y ≈ 10 × 2⁵ = 10 × 32 = 320。",
+          "若把 log y 的值直接当成数量，会误得 1 + 0.301 × 5 ≈ 2.5，这只是 log y 的值；还原回 y 才是 10 的 2.505 次方，约 320。"
+        ],
+        "en": [
+          "The vertical axis is log y, not y, so first undo the logarithm: y = 10 to the power (1 + 0.301x) = 10 × (10 to the power 0.301)ˣ.",
+          "Since log 2 ≈ 0.301, 10 to the power 0.301 is about 2, so the model is y ≈ 10 × 2ˣ: about 10 at the start, doubling every hour. The slope 0.301 corresponds to \"multiply by 2 each hour\" and the intercept 1 to the initial amount 10.",
+          "At x = 5, y ≈ 10 × 2⁵ = 10 × 32 = 320.",
+          "Taking the value of log y as the count would give 1 + 0.301 × 5 ≈ 2.5, which is only log y; converting back gives 10 to the power 2.505, about 320."
+        ],
+        "ja": [
+          "直線の縦軸は y ではなく log y なので、まずモデルを元に戻します。y = 10 の (1 + 0.301x) 乗 = 10 ×（10 の 0.301 乗）ˣ です。",
+          "log 2 ≈ 0.301 なので 10 の 0.301 乗はおよそ 2 で、モデルは y ≈ 10 × 2ˣ、つまり最初およそ 10 個で 1 時間ごとに 2 倍になります。傾き 0.301 は「1 時間ごとに 2 倍」、切片 1 は初期値 10 に対応します。",
+          "x = 5 のとき y ≈ 10 × 2⁵ = 10 × 32 = 320 です。",
+          "log y の値をそのまま個数と思うと 1 + 0.301 × 5 ≈ 2.5 となりますが、これは log y の値にすぎません。y に戻すと 10 の 2.505 乗で、およそ 320 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "320"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "algebra-grade11-foundation",
+        "notes": "題型取自高中統計與對數的「對數變換後線性迴歸」應用。掃過「迴歸|相關|趨勢」全庫 0 題；讀過 algebra_grade12 log_investment_doubling、algebra_grade11_041（半衰期）。本題新增從半對數圖的直線還原指數模型、辨識斜率對應成長倍率。"
+      }
     }
   ]
 }
