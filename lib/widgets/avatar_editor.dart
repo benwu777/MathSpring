@@ -213,6 +213,7 @@ class _AvatarEditorState extends State<AvatarEditor> {
     final bool locked =
         !widget.hasFullUnlock && !selected && !_isBasicOption(id);
     final bool isMouth = id.contains('_mouth_');
+    final bool isHair = id.contains('_hair_');
     final Color accent = Theme.of(context).colorScheme.primary;
     return Semantics(
       label: id.replaceAll('_', ' '),
@@ -243,19 +244,25 @@ class _AvatarEditorState extends State<AvatarEditor> {
             children: <Widget>[
               Padding(
                 padding: const EdgeInsets.all(4),
-                child: _optionTreatment(
-                  id,
-                  Transform.scale(
-                    key: ValueKey<String>('avatar_option_image_$id'),
-                    scale: isMouth ? 3 : 1,
-                    child: Image.asset(
-                      AvatarAssetCatalog.optionAssetFor(
-                          _configuration.presentation, id),
-                      package: widget.assetPackage,
-                      fit: BoxFit.contain,
-                    ),
-                  ),
-                ),
+                child: isHair
+                    ? AvatarPreview(
+                        configuration: _configuration.copyWith(hairId: id),
+                        size: double.infinity,
+                        assetPackage: widget.assetPackage,
+                      )
+                    : _optionTreatment(
+                        id,
+                        Transform.scale(
+                          key: ValueKey<String>('avatar_option_image_$id'),
+                          scale: isMouth ? 3 : 1,
+                          child: Image.asset(
+                            AvatarAssetCatalog.optionAssetFor(
+                                _configuration.presentation, id),
+                            package: widget.assetPackage,
+                            fit: BoxFit.contain,
+                          ),
+                        ),
+                      ),
               ),
               if (selected)
                 Align(

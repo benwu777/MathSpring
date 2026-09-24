@@ -4,6 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mathspring/models/avatar_configuration.dart';
 import 'package:mathspring/services/avatar_asset_catalog.dart';
 import 'package:mathspring/widgets/avatar_editor.dart';
+import 'package:mathspring/widgets/avatar_preview.dart';
 
 void main() {
   testWidgets(
@@ -136,6 +137,46 @@ void main() {
         findsOneWidget);
     expect(find.byKey(const ValueKey<String>('avatar_option_girl_hair_03')),
         findsOneWidget);
+  });
+
+  testWidgets(
+      'renders girl hair 06 thumbnail with the preview resolved hair layers',
+      (tester) async {
+    await tester.pumpWidget(
+      const MaterialApp(home: Scaffold(body: AvatarEditor())),
+    );
+
+    for (int step = 0; step < 3; step++) {
+      await tester
+          .tap(find.byKey(const ValueKey<String>('avatar_next_button')));
+      await tester.pump();
+    }
+
+    await tester.scrollUntilVisible(
+      find.byKey(const ValueKey<String>('avatar_option_girl_hair_06')),
+      120,
+      scrollable: find.byType(Scrollable).last,
+    );
+    final AvatarPreview thumbnail = tester.widget<AvatarPreview>(
+      find.descendant(
+        of: find.byKey(const ValueKey<String>('avatar_option_girl_hair_06')),
+        matching: find.byType(AvatarPreview),
+      ),
+    );
+    final AvatarAssetBundle thumbnailAssets =
+        AvatarAssetCatalog.resolve(thumbnail.configuration);
+    final AvatarAssetBundle previewAssets = AvatarAssetCatalog.resolve(
+      AvatarConfiguration.defaultFor(AvatarPresentation.girl)
+          .copyWith(hairId: 'girl_hair_06'),
+    );
+
+    expect(thumbnail.configuration.hairId, 'girl_hair_06');
+    expect(thumbnailAssets.hairBackAsset, previewAssets.hairBackAsset);
+    expect(thumbnailAssets.hairFrontAsset, previewAssets.hairFrontAsset);
+    expect(thumbnailAssets.hairScale, previewAssets.hairScale);
+    expect(thumbnailAssets.hairScaleX, previewAssets.hairScaleX);
+    expect(thumbnailAssets.hairOffsetX, previewAssets.hairOffsetX);
+    expect(thumbnailAssets.hairOffsetY, previewAssets.hairOffsetY);
   });
 
   testWidgets('keeps hairstyle navigation visible with ten options',
@@ -303,6 +344,17 @@ void main() {
           expect(
               find.byKey(ValueKey<String>('avatar_option_$id')), findsOneWidget,
               reason: '$id is missing from the $category step');
+          if (category == 'hair') {
+            final AvatarPreview thumbnail = tester.widget<AvatarPreview>(
+              find.descendant(
+                of: find.byKey(ValueKey<String>('avatar_option_$id')),
+                matching: find.byType(AvatarPreview),
+              ),
+            );
+            expect(thumbnail.configuration.hairId, id,
+                reason: '$id thumbnail must use the same preview resolver');
+            continue;
+          }
           expect(
             find.byKey(ValueKey<String>('avatar_option_treatment_$id')),
             AvatarAssetCatalog.treatmentFor(id).isNeutral
