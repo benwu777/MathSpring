@@ -6602,6 +6602,220 @@
         "reference": "logic-grade6-foundation",
         "notes": "填加減號的奇偶不變量。掃過：加號|減號|「+」|「−」|填入.*符號；讀過 arithmetic_grade2_094（9□4□3□2 結果 4 填幾個減號）、arithmetic_grade3_090（填加號或乘號求最大）、logic_grade3_044（翻杯子奇偶）。grade2_094 是小數字直接試；本題要先用奇偶說明 0 不可能，再構造出 1。"
       }
+    },
+    {
+      "id": "logic_grade6_foundation_081",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "seating_hamiltonian_cycles",
+      "tags": [
+        "c:graph_theory",
+        "m:construction",
+        "m:estimate_bound"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade6",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "7 位好朋友連續好幾天晚上聚餐，每天晚上 7 個人都圍著一張圓桌坐一圈。他們約定：任何兩個人只要曾經在某一天晚上坐在隔壁，以後就不可以再坐隔壁。照這個約定，最多可以安排幾個晚上？",
+        "zh-Hans": "7 位好朋友连续好几天晚上聚餐，每天晚上 7 个人都围着一张圆桌坐一圈。他们约定：任何两个人只要曾经在某一天晚上坐在隔壁，以后就不可以再坐隔壁。照这个约定，最多可以安排几个晚上？",
+        "en": "Seven friends have dinner together on several evenings; each evening all 7 sit around a round table. They agree that any two people who have sat next to each other on some evening may never sit next to each other again. Under this rule, what is the largest number of evenings they can arrange?",
+        "ja": "7人の友だちが何日か続けて夕食会をし、毎晩7人全員が1つの円いテーブルのまわりにすわります。「ある晩にとなりにすわった2人は、それ以後二度ととなりにすわらない」と決めました。この決まりのもとで、夕食会は最大で何晩できますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 3 個晚上。",
+        "zh-Hans": "答案是 3 个晚上。",
+        "en": "The answer is 3 evenings.",
+        "ja": "答えは3晩です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "每天晚上，每個人左右各有一位鄰居，也就是每晚每人會「用掉」2 位從沒坐過隔壁的朋友。",
+          "每個人只有另外 6 位朋友可以當鄰居，所以最多 6 ÷ 2 = 3 個晚上。",
+          "3 個晚上真的做得到：把 7 人編號 0 到 6，第一晚依序坐 0、1、2、3、4、5、6；第二晚坐 0、2、4、6、1、3、5；第三晚坐 0、3、6、2、5、1、4（都是圍成一圈，最後一位和第一位也相鄰）。",
+          "第一晚隔壁的兩人編號相差 1 或 6，第二晚相差 2 或 5，第三晚相差 3 或 4，所以三晚沒有任何一對重複坐隔壁。最多可以安排 3 個晚上。"
+        ],
+        "zh-Hans": [
+          "每天晚上，每个人左右各有一位邻居，也就是每晚每人会「用掉」2 位从没坐过隔壁的朋友。",
+          "每个人只有另外 6 位朋友可以当邻居，所以最多 6 ÷ 2 = 3 个晚上。",
+          "3 个晚上真的做得到：把 7 人编号 0 到 6，第一晚依序坐 0、1、2、3、4、5、6；第二晚坐 0、2、4、6、1、3、5；第三晚坐 0、3、6、2、5、1、4（都是围成一圈，最后一位和第一位也相邻）。",
+          "第一晚隔壁的两人编号相差 1 或 6，第二晚相差 2 或 5，第三晚相差 3 或 4，所以三晚没有任何一对重复坐隔壁。最多可以安排 3 个晚上。"
+        ],
+        "en": [
+          "Each evening every person has one neighbor on each side, so each evening uses up 2 of that person's possible new neighbors.",
+          "Each person has only 6 other friends, so there can be at most 6 ÷ 2 = 3 evenings.",
+          "3 evenings are possible: number the friends 0 to 6. Evening 1: 0, 1, 2, 3, 4, 5, 6; evening 2: 0, 2, 4, 6, 1, 3, 5; evening 3: 0, 3, 6, 2, 5, 1, 4 (each around the table, so the last sits next to the first).",
+          "On evening 1 neighbors differ by 1 or 6, on evening 2 by 2 or 5, and on evening 3 by 3 or 4, so no pair sits together twice. The maximum is 3 evenings."
+        ],
+        "ja": [
+          "毎晩、どの人にも左右に1人ずつとなりの人がいるので、1晩で2人の「まだとなりになっていない友だち」を使います。",
+          "となりになれる友だちは6人しかいないので、最大で6 ÷ 2 = 3晩です。",
+          "3晩は実際にできます。7人に0から6の番号をつけ、1晩目は0、1、2、3、4、5、6、2晩目は0、2、4、6、1、3、5、3晩目は0、3、6、2、5、1、4の順にすわります（どれも円形なので、最後の人と最初の人もとなりです）。",
+          "1晩目のとなりどうしは番号の差が1か6、2晩目は2か5、3晩目は3か4なので、どのペアも二度ととなりになりません。したがって最大3晩です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "3"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade6-foundation",
+        "notes": "K₇ 分解成 3 個哈密頓圈（上界＋構造）；掃過「圓桌|鄰座|隔壁|相鄰」與 c:graph_theory 全庫。最接近 logic_grade6_foundation_060（7 國各簽 k 份條約是否可能，問正則圖存在性），本題要同時給上界與具體排法；combinatorics_grade11_foundation_044 是圓桌男女相鄰期望值。"
+      }
+    },
+    {
+      "id": "logic_grade6_foundation_082",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "knight_swap_cycle",
+      "tags": [
+        "c:graph_theory",
+        "m:invariant"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade6",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一個 3 × 3 的棋盤，左上角和右上角各放一隻白馬，左下角和右下角各放一隻黑馬，其餘 5 格是空的。馬走「日」字：先沿一個方向走 2 格，再往垂直的方向走 1 格，而且只能停在空格。每次移動一隻馬算 1 步，白馬、黑馬不必輪流。要讓兩隻白馬移到下面兩個角、兩隻黑馬移到上面兩個角，最少要幾步？",
+        "zh-Hans": "一个 3 × 3 的棋盘，左上角和右上角各放一只白马，左下角和右下角各放一只黑马，其余 5 格是空的。马走「日」字：先沿一个方向走 2 格，再往垂直的方向走 1 格，而且只能停在空格。每次移动一只马算 1 步，白马、黑马不必轮流。要让两只白马移到下面两个角、两只黑马移到上面两个角，最少要几步？",
+        "en": "On a 3 × 3 board, white knights stand in the top-left and top-right corners and black knights in the bottom-left and bottom-right corners; the other 5 squares are empty. A knight moves in an L: 2 squares in one direction and then 1 square at a right angle, and it may only land on an empty square. Moving one knight once counts as 1 move, and white and black need not alternate. What is the fewest moves needed so that the two white knights end in the bottom corners and the two black knights end in the top corners?",
+        "ja": "3 × 3のばんの左上と右上のすみに白いナイト（馬）、左下と右下のすみに黒いナイトが1つずつあり、残りの5マスは空いています。ナイトは「L字」に動きます。ある向きに2マス進んでから、それと直角の向きに1マス進み、空いているマスにしか止まれません。1つのナイトを1回動かすと1手とし、白と黒は交互でなくてもかまいません。2つの白いナイトを下の2つのすみへ、2つの黒いナイトを上の2つのすみへ動かすには、最も少なくて何手必要ですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 16 步。",
+        "zh-Hans": "答案是 16 步。",
+        "en": "The answer is 16 moves.",
+        "ja": "答えは16手です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "正中央那一格，馬永遠跳不進去也跳不出來。其餘 8 格中，每一格恰好能跳到另外 2 格；把能互跳的格子連起來，8 格剛好連成一個圈。",
+          "沿著這個圈依序是：左上角、中列右格、左下角、上列中格、右下角、中列左格、右上角、下列中格，再回到左上角。四個角在圈上每隔一格出現一次，上面的馬依序是 白、黑、黑、白。",
+          "馬只能沿著圈移動到相鄰的空格，不能跳過別的馬，所以四隻馬在圈上的前後順序永遠不變。目標是左上、左下、右下、右上依序變成 黑、白、白、黑；在順序不變之下，唯一的辦法是每隻馬都沿同一個方向前進 4 格（例如左上的白馬走到右下、左下的黑馬走到右上）。",
+          "每隻馬至少要走 4 步，4 隻至少 16 步；而讓四隻馬輪流往同一方向前進，前方一直有空格，16 步就做得到。所以最少 16 步。"
+        ],
+        "zh-Hans": [
+          "正中央那一格，马永远跳不进去也跳不出来。其余 8 格中，每一格恰好能跳到另外 2 格；把能互跳的格子连起来，8 格刚好连成一个圈。",
+          "沿着这个圈依序是：左上角、中列右格、左下角、上列中格、右下角、中列左格、右上角、下列中格，再回到左上角。四个角在圈上每隔一格出现一次，上面的马依序是 白、黑、黑、白。",
+          "马只能沿着圈移动到相邻的空格，不能跳过别的马，所以四只马在圈上的前后顺序永远不变。目标是左上、左下、右下、右上依序变成 黑、白、白、黑；在顺序不变之下，唯一的办法是每只马都沿同一个方向前进 4 格（例如左上的白马走到右下、左下的黑马走到右上）。",
+          "每只马至少要走 4 步，4 只至少 16 步；而让四只马轮流往同一方向前进，前方一直有空格，16 步就做得到。所以最少 16 步。"
+        ],
+        "en": [
+          "No knight can ever jump into or out of the center square. Each of the other 8 squares can reach exactly 2 others, and linking squares that reach each other joins all 8 into one loop.",
+          "Around the loop the order is: top-left corner, middle-right, bottom-left corner, top-middle, bottom-right corner, middle-left, top-right corner, bottom-middle, back to top-left. The corners are every other square on the loop, holding white, black, black, white in that order.",
+          "Knights only move to a neighboring empty square on the loop and cannot pass each other, so their order around the loop never changes. The goal is black, white, white, black at top-left, bottom-left, bottom-right, top-right; keeping the order, the only way is for every knight to advance 4 squares in the same direction (e.g., the top-left white knight goes to bottom-right and the bottom-left black knight goes to top-right).",
+          "Each knight needs at least 4 moves, so at least 16 in total; and moving the knights forward in turn always finds an empty square ahead, so 16 moves suffice. The minimum is 16."
+        ],
+        "ja": [
+          "真ん中のマスには、ナイトは入ることも出ることもできません。残りの8マスは、どれもちょうど2つのマスへとべるので、とび合えるマスどうしを線でつなぐと、8マスがちょうど1つのわになります。",
+          "わにそって順に、左上のすみ、中段の右、左下のすみ、上段の中、右下のすみ、中段の左、右上のすみ、下段の中、そして左上のすみにもどります。4つのすみはわの上で1つおきにあり、ナイトの色は順に白、黒、黒、白です。",
+          "ナイトはわにそってとなりの空きマスへしか動けず、ほかのナイトを追いこせないので、わの上の順番はずっと変わりません。目標は左上、左下、右下、右上が順に黒、白、白、黒になることで、順番を変えずにそうするには、どのナイトも同じ向きに4マスずつ進むしかありません（たとえば左上の白は右下へ、左下の黒は右上へ）。",
+          "どのナイトも少なくとも4手、4つで少なくとも16手必要です。4つのナイトを順に同じ向きへ進めれば前がいつも空いているので、16手でできます。したがって最も少なくて16手です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "16"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade6-foundation",
+        "notes": "Guarini 馬交換問題：馬步圖在 3×3 上是 8 圈，順序不變量＋每隻至少 4 步；BFS 驗證最少 16 步。掃過「馬|騎士|日字」與 c:graph_theory 全庫。最接近 logic_grade11_foundation_012（8×8 騎士從角到角最少步數），那是單隻馬的最短路；本題是多隻馬互換，關鍵是把棋盤攤成一個圈。"
+      }
+    },
+    {
+      "id": "logic_grade6_foundation_083",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "regular_bipartite_count",
+      "tags": [
+        "c:graph_theory",
+        "m:bijection"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade6",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "舞會上有 3 位男生和 3 位女生。整晚跳舞時，每一位男生都恰好和 2 位不同的女生各跳過一支舞，每一位女生也都恰好和 2 位不同的男生各跳過一支舞（同一對男女最多只跳一支）。如果只看「哪些男女配對跳過舞」，一共有幾種不同的可能？",
+        "zh-Hans": "舞会上有 3 位男生和 3 位女生。整晚跳舞时，每一位男生都恰好和 2 位不同的女生各跳过一支舞，每一位女生也都恰好和 2 位不同的男生各跳过一支舞（同一对男女最多只跳一支）。如果只看「哪些男女配对跳过舞」，一共有几种不同的可能？",
+        "en": "At a dance there are 3 boys and 3 girls. During the evening, each boy dances exactly once with each of 2 different girls, and each girl dances exactly once with each of 2 different boys (a given boy–girl pair dances at most once). Looking only at which boy–girl pairs danced together, how many different possibilities are there?",
+        "ja": "ダンスパーティーに男子3人と女子3人がいます。その夜、どの男子もちがう女子2人とそれぞれ1回ずつおどり、どの女子もちがう男子2人とそれぞれ1回ずつおどりました（同じ男女の組は多くても1回です）。「どの男女の組がおどったか」だけを見るとき、考えられる組み合わせは全部で何通りありますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 6 種。",
+        "zh-Hans": "答案是 6 种。",
+        "en": "The answer is 6 possibilities.",
+        "ja": "答えは6通りです。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "每位男生和 2 位女生跳過舞，也就是恰好有 1 位女生「沒跟他跳」；同樣地，每位女生恰好有 1 位男生「沒跟她跳」。",
+          "把「沒一起跳舞」的配對拿出來看：每位男生恰好對到 1 位女生，每位女生也恰好對到 1 位男生，這正好是把 3 位男生和 3 位女生一對一配成 3 對。",
+          "反過來，任意一種一對一配對，讓配對以外的男女都一起跳過舞，就符合題目條件。所以跳舞的情形和一對一配對剛好一一對應。",
+          "3 位男生和 3 位女生一對一配對的方法有 3 × 2 × 1 = 6 種，所以一共有 6 種可能。"
+        ],
+        "zh-Hans": [
+          "每位男生和 2 位女生跳过舞，也就是恰好有 1 位女生「没跟他跳」；同样地，每位女生恰好有 1 位男生「没跟她跳」。",
+          "把「没一起跳舞」的配对拿出来看：每位男生恰好对到 1 位女生，每位女生也恰好对到 1 位男生，这正好是把 3 位男生和 3 位女生一对一配成 3 对。",
+          "反过来，任意一种一对一配对，让配对以外的男女都一起跳过舞，就符合题目条件。所以跳舞的情形和一对一配对刚好一一对应。",
+          "3 位男生和 3 位女生一对一配对的方法有 3 × 2 × 1 = 6 种，所以一共有 6 种可能。"
+        ],
+        "en": [
+          "Each boy danced with 2 girls, so exactly 1 girl did not dance with him; likewise each girl has exactly 1 boy who did not dance with her.",
+          "Look at the pairs that did not dance: each boy is matched to exactly 1 girl and each girl to exactly 1 boy, so these pairs split the 3 boys and 3 girls into 3 one-to-one couples.",
+          "Conversely, for any one-to-one pairing, letting every other boy–girl pair dance satisfies the conditions. So the dance patterns correspond exactly to one-to-one pairings.",
+          "There are 3 × 2 × 1 = 6 one-to-one pairings of 3 boys with 3 girls, so there are 6 possibilities."
+        ],
+        "ja": [
+          "どの男子も2人の女子とおどったので、その男子と「おどらなかった女子」はちょうど1人です。同じように、どの女子にも「おどらなかった男子」がちょうど1人います。",
+          "「おどらなかった組」だけを見ると、どの男子もちょうど1人の女子と、どの女子もちょうど1人の男子と組になっているので、3人の男子と3人の女子を1対1に3組に分けたものになります。",
+          "逆に、どんな1対1の組み分けでも、その組以外の男女がみんなおどれば条件に合います。したがって、おどり方と1対1の組み分けはちょうど1つずつ対応します。",
+          "男子3人と女子3人の1対1の組み分けは3 × 2 × 1 = 6通りなので、全部で6通りです。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "6"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade6-foundation",
+        "notes": "2-正則二部圖 ↔ 補圖是完美配對（一一對應）；掃過「跳舞|舞伴|配對|握手」與 c:graph_theory 全庫。最接近 combinatorics_grade8_foundation_032（男女全部握手求人數）與 combinatorics_grade8_foundation_023（8 人兩兩配對方式），本題的關鍵是看「沒跳舞的配對」這個補集轉換。"
+      }
     }
   ]
 }
