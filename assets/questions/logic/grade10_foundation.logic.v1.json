@@ -4872,6 +4872,107 @@
         "reference": "logic-grade10-foundation",
         "notes": "題型取自三堆 Nim（二進位 Nim 和）。掃過「取.{0,4}石|Nim|三堆|火柴」：logic_grade9_034（兩堆 3、5，對稱策略）、logic_grade8_044（單堆取 1～3）、logic_grade9_044（取平方數）。兩堆題用「拿成一樣多」即可，三堆必須用二進位不進位加法，且本題問必勝走法的個數。"
       }
+    },
+    {
+      "id": "logic_grade10_foundation_055",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "split_unequal_piles_game",
+      "tags": [
+        "c:game_theory",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "桌上有一堆 7 枚硬幣。甲、乙兩人輪流操作，由甲先：每次選桌上的某一堆，把它分成數量不相等的兩堆（例如 4 枚可以分成 3 與 1，但不可以分成 2 與 2）。輪到的人如果每一堆都無法再這樣分，就輸了。若兩人都採取最佳策略，下列哪一個敘述正確？",
+        "zh-Hans": "桌上有一堆 7 枚硬币。甲、乙两人轮流操作，由甲先：每次选桌上的某一堆，把它分成数量不相等的两堆（例如 4 枚可以分成 3 与 1，但不可以分成 2 与 2）。轮到的人如果每一堆都无法再这样分，就输了。若两人都采取最佳策略，下列哪一个叙述正确？",
+        "en": "There is one pile of 7 coins. A and B take turns, A first: a move is to choose a pile and split it into two piles of different sizes (4 may become 3 and 1, but not 2 and 2). A player who cannot split any pile loses. With best play by both, which statement is correct?",
+        "ja": "机の上に 7 枚の硬貨の山が 1 つあります。甲と乙が甲から交互に、どれか 1 つの山を枚数の異なる 2 つの山に分けます（4 枚は 3 と 1 に分けられるが、2 と 2 には分けられない）。どの山も分けられなくなった人の負けです。両者が最善を尽くすとき、正しいものはどれですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 D：乙必勝，不論甲第一步怎麼分都一樣。",
+        "zh-Hans": "答案是 D：乙必胜，不论甲第一步怎么分都一样。",
+        "en": "The answer is D: B wins, whatever A does on the first move.",
+        "ja": "答えは D：乙の必勝で、甲が最初にどう分けても同じ です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "1 枚與 2 枚的堆永遠不能再分（2 只能分成 1 與 1，數量相等），可以不管。",
+          "只剩一堆 3：分成 2 與 1 後對手無步可走，所以面對一堆 3 的人會贏。",
+          "只剩一堆 4：唯一分法是 3 與 1，對手接著把 3 分掉，輪到自己時已無步可走，所以面對一堆 4 的人會輸。",
+          "甲第一步只有三種分法：6 與 1、5 與 2、4 與 3。",
+          "分成 6 與 1：乙把 6 分成 4 與 2。分成 5 與 2：乙把 5 分成 4 與 1。分成 4 與 3：乙把 3 分成 2 與 1。三種情形之後，能分的都只剩一堆 4，輪到甲面對它，甲輸。",
+          "不論甲怎麼分，乙都能把局面變成「甲面對一堆 4」，所以乙必勝，答案是 D。"
+        ],
+        "zh-Hans": [
+          "1 枚与 2 枚的堆永远不能再分（2 只能分成 1 与 1，数量相等），可以不管。",
+          "只剩一堆 3：分成 2 与 1 后对手无步可走，所以面对一堆 3 的人会赢。",
+          "只剩一堆 4：唯一分法是 3 与 1，对手接着把 3 分掉，轮到自己时已无步可走，所以面对一堆 4 的人会输。",
+          "甲第一步只有三种分法：6 与 1、5 与 2、4 与 3。",
+          "分成 6 与 1：乙把 6 分成 4 与 2。分成 5 与 2：乙把 5 分成 4 与 1。分成 4 与 3：乙把 3 分成 2 与 1。三种情形之后，能分的都只剩一堆 4，轮到甲面对它，甲输。",
+          "不论甲怎么分，乙都能把局面变成「甲面对一堆 4」，所以乙必胜，答案是 D。"
+        ],
+        "en": [
+          "Piles of 1 or 2 can never be split (2 could only become 1 and 1, which are equal), so they can be ignored.",
+          "A lone pile of 3: splitting it into 2 and 1 leaves the opponent stuck, so the player facing a single 3 wins.",
+          "A lone pile of 4: the only split is 3 and 1; the opponent then splits the 3 and you are stuck, so the player facing a single 4 loses.",
+          "A's first move has only three options: 6 and 1, 5 and 2, or 4 and 3.",
+          "If A makes 6 and 1, B splits 6 into 4 and 2. If A makes 5 and 2, B splits 5 into 4 and 1. If A makes 4 and 3, B splits 3 into 2 and 1. In every case the only splittable pile left is a single 4, and A must face it, so A loses.",
+          "Whatever A does, B can leave A facing a single 4, so B wins. The answer is D."
+        ],
+        "ja": [
+          "1 枚と 2 枚の山はもう分けられない（2 は 1 と 1 にしかならず等しい）ので、無視できます。",
+          "3 枚の山だけ：2 と 1 に分けると相手は動けないので、3 の山 1 つに直面した人は勝ちます。",
+          "4 枚の山だけ：分け方は 3 と 1 だけで、相手が 3 を分けると自分は動けないので、4 の山 1 つに直面した人は負けます。",
+          "甲の最初の手は 6 と 1、5 と 2、4 と 3 の 3 通りだけです。",
+          "6 と 1 なら乙は 6 を 4 と 2 に、5 と 2 なら乙は 5 を 4 と 1 に、4 と 3 なら乙は 3 を 2 と 1 に分けます。どの場合も分けられる山は 4 の山 1 つだけになり、それに直面する甲が負けます。",
+          "甲がどう分けても乙は「甲が 4 の山 1 つに直面する」局面にできるので、乙の必勝です。答えは D です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "multiple_choice",
+      "options": {
+        "A": {
+          "zh-Hant": "甲必勝，第一步把 7 枚分成 6 與 1",
+          "zh-Hans": "甲必胜，第一步把 7 枚分成 6 与 1",
+          "en": "A wins by first splitting 7 into 6 and 1",
+          "ja": "甲の必勝で、最初に 7 を 6 と 1 に分ける"
+        },
+        "B": {
+          "zh-Hant": "甲必勝，第一步把 7 枚分成 5 與 2",
+          "zh-Hans": "甲必胜，第一步把 7 枚分成 5 与 2",
+          "en": "A wins by first splitting 7 into 5 and 2",
+          "ja": "甲の必勝で、最初に 7 を 5 と 2 に分ける"
+        },
+        "C": {
+          "zh-Hant": "甲必勝，第一步把 7 枚分成 4 與 3",
+          "zh-Hans": "甲必胜，第一步把 7 枚分成 4 与 3",
+          "en": "A wins by first splitting 7 into 4 and 3",
+          "ja": "甲の必勝で、最初に 7 を 4 と 3 に分ける"
+        },
+        "D": {
+          "zh-Hant": "乙必勝，不論甲第一步怎麼分都一樣",
+          "zh-Hans": "乙必胜，不论甲第一步怎么分都一样",
+          "en": "B wins, whatever A does on the first move",
+          "ja": "乙の必勝で、甲が最初にどう分けても同じ"
+        }
+      },
+      "correctAnswer": {
+        "type": "choice",
+        "value": "D"
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade10-foundation",
+        "notes": "Grundy 分堆遊戲（分成不等兩堆），單堆 7 為後手勝。python 以多重集合狀態窮舉驗證 7 為必敗、三種第一步都輸（verify.py gw）。掃「分成兩堆|兩堆.{0,10}不等」：logic_grade12_027（分堆乘積總分，非賽局）。既有博弈題沒有分堆型。"
+      }
     }
   ]
 }

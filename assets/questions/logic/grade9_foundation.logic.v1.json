@@ -4920,6 +4920,270 @@
         "reference": "logic-grade9-foundation",
         "notes": "題型取自火柴棒圖形規律題的延伸（三角形格網），改成已知總根數逆推。掃過「火柴|牙籤|小三角形」：logic_grade8_003（一排火柴 2n+1，線性）、logic_grade8_044（取火柴博弈）。本題新增：牙籤與朝上小三角形一一對應得 3n(n+1)/2，再逆推 n 與小三角形總數 n²。"
       }
+    },
+    {
+      "id": "logic_grade9_foundation_055",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "sign_choice_absolute_game",
+      "tags": [
+        "c:game_theory",
+        "c:absolute_value",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade9",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "黑板上依序寫著 1、2、3、4、5、6。甲、乙兩人輪流在這些數前面填上「+」或「−」號：甲填 1 的符號，乙填 2 的，甲填 3 的，乙填 4 的，甲填 5 的，乙填 6 的；每個人填之前都看得到前面已填好的符號。六個符號都填完後算出總和 S。甲希望 |S| 越大越好，乙希望 |S| 越小越好。若兩人都採取最佳策略，最後 |S| 是多少？",
+        "zh-Hans": "黑板上依序写着 1、2、3、4、5、6。甲、乙两人轮流在这些数前面填上「+」或「−」号：甲填 1 的符号，乙填 2 的，甲填 3 的，乙填 4 的，甲填 5 的，乙填 6 的；每个人填之前都看得到前面已填好的符号。六个符号都填完后算出总和 S。甲希望 |S| 越大越好，乙希望 |S| 越小越好。若两人都采取最佳策略，最后 |S| 是多少？",
+        "en": "The numbers 1, 2, 3, 4, 5, 6 are written in order on a board. A and B take turns putting a \"+\" or \"−\" sign in front of them: A signs 1, B signs 2, A signs 3, B signs 4, A signs 5, B signs 6, and each player sees all earlier signs. After all six signs are placed the total S is computed. A wants |S| as large as possible and B wants it as small as possible. With best play by both, what is |S| at the end?",
+        "ja": "黒板に 1、2、3、4、5、6 が順に書かれています。甲と乙が交互にこれらの数の前に「+」か「−」をつけます。甲が 1、乙が 2、甲が 3、乙が 4、甲が 5、乙が 6 の符号を決め、それぞれそれまでの符号を見てから決めます。6 つすべてに符号をつけた後の合計を S とします。甲は |S| をできるだけ大きく、乙はできるだけ小さくしたいと考えています。両者が最善を尽くすとき、最後の |S| はいくつですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 3。",
+        "zh-Hans": "答案是 3。",
+        "en": "The answer is 3.",
+        "ja": "答えは 3 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "由後往前想。記填完前 k 個符號後總和的絕對值為 dₖ，d₁ = 1。一個數填 + 或 −，新的絕對值是「d 加上它」或「d 與它的差的絕對值」。",
+          "最後乙填 6：乙一定選較小的，結果是 |d₅ − 6|。",
+          "甲填 5 時，d₅ 可選 d₄ + 5 或 |d₄ − 5|，甲挑讓 |d₅ − 6| 較大的：d₄ = 0 → 結果 1；d₄ = 2 → max(1, 3) = 3；d₄ = 4 → max(3, 5) = 5；d₄ = 6 → 5；d₄ = 8 → max(7, 3) = 7；d₄ = 10 → max(9, 1) = 9。",
+          "乙填 4 時，d₄ 可選 d₃ + 4 或 |d₃ − 4|，乙挑結果較小的：d₃ = 0 → d₄ 只能是 4，結果 5；d₃ = 2 → min(5, 3) = 3；d₃ = 4 → min(7, 1) = 1；d₃ = 6 → min(9, 3) = 3。",
+          "甲填 3 時：若 d₂ = 3，d₃ 可選 6 或 0，結果 max(3, 5) = 5；若 d₂ = 1，d₃ 可選 4 或 2，結果 max(1, 3) = 3。",
+          "乙填 2 時，d₂ 可以是 3 或 1，乙選 d₂ = 1（讓 1 與 2 異號），結果是 3。",
+          "所以雙方都用最佳策略時，最後 |S| = 3。"
+        ],
+        "zh-Hans": [
+          "由后往前想。记填完前 k 个符号后总和的绝对值为 dₖ，d₁ = 1。一个数填 + 或 −，新的绝对值是「d 加上它」或「d 与它的差的绝对值」。",
+          "最后乙填 6：乙一定选较小的，结果是 |d₅ − 6|。",
+          "甲填 5 时，d₅ 可选 d₄ + 5 或 |d₄ − 5|，甲挑让 |d₅ − 6| 较大的：d₄ = 0 → 结果 1；d₄ = 2 → max(1, 3) = 3；d₄ = 4 → max(3, 5) = 5；d₄ = 6 → 5；d₄ = 8 → max(7, 3) = 7；d₄ = 10 → max(9, 1) = 9。",
+          "乙填 4 时，d₄ 可选 d₃ + 4 或 |d₃ − 4|，乙挑结果较小的：d₃ = 0 → d₄ 只能是 4，结果 5；d₃ = 2 → min(5, 3) = 3；d₃ = 4 → min(7, 1) = 1；d₃ = 6 → min(9, 3) = 3。",
+          "甲填 3 时：若 d₂ = 3，d₃ 可选 6 或 0，结果 max(3, 5) = 5；若 d₂ = 1，d₃ 可选 4 或 2，结果 max(1, 3) = 3。",
+          "乙填 2 时，d₂ 可以是 3 或 1，乙选 d₂ = 1（让 1 与 2 异号），结果是 3。",
+          "所以双方都用最佳策略时，最后 |S| = 3。"
+        ],
+        "en": [
+          "Work backwards. Let dₖ be the absolute value of the running total after k signs; d₁ = 1. Signing the next number n makes the new absolute value either d + n or |d − n|.",
+          "Last, B signs 6 and picks the smaller option, so the result is |d₅ − 6|.",
+          "When A signs 5, d₅ is d₄ + 5 or |d₄ − 5| and A picks the one making |d₅ − 6| larger: d₄ = 0 → 1; d₄ = 2 → max(1, 3) = 3; d₄ = 4 → max(3, 5) = 5; d₄ = 6 → 5; d₄ = 8 → max(7, 3) = 7; d₄ = 10 → max(9, 1) = 9.",
+          "When B signs 4, d₄ is d₃ + 4 or |d₃ − 4| and B picks the smaller result: d₃ = 0 → d₄ must be 4, result 5; d₃ = 2 → min(5, 3) = 3; d₃ = 4 → min(7, 1) = 1; d₃ = 6 → min(9, 3) = 3.",
+          "When A signs 3: if d₂ = 3, d₃ can be 6 or 0, giving max(3, 5) = 5; if d₂ = 1, d₃ can be 4 or 2, giving max(1, 3) = 3.",
+          "When B signs 2, d₂ can be 3 or 1; B chooses d₂ = 1 (opposite signs on 1 and 2), and the result is 3.",
+          "So with best play the final value is |S| = 3."
+        ],
+        "ja": [
+          "後ろから考えます。k 個目まで符号をつけた時点の合計の絶対値を dₖ とすると d₁ = 1。次の数 n に符号をつけると、新しい絶対値は d + n か |d − n| のどちらかになります。",
+          "最後に乙が 6 の符号を決め、小さいほうを選ぶので結果は |d₅ − 6| です。",
+          "甲が 5 の符号を決めるとき、d₅ は d₄ + 5 か |d₄ − 5| で、甲は |d₅ − 6| が大きいほうを選びます。d₄ = 0 → 1、d₄ = 2 → max(1, 3) = 3、d₄ = 4 → max(3, 5) = 5、d₄ = 6 → 5、d₄ = 8 → max(7, 3) = 7、d₄ = 10 → max(9, 1) = 9。",
+          "乙が 4 の符号を決めるとき、d₄ は d₃ + 4 か |d₃ − 4| で、乙は結果が小さいほうを選びます。d₃ = 0 → d₄ は 4 だけで結果 5、d₃ = 2 → min(5, 3) = 3、d₃ = 4 → min(7, 1) = 1、d₃ = 6 → min(9, 3) = 3。",
+          "甲が 3 の符号を決めるとき、d₂ = 3 なら d₃ は 6 か 0 で結果 max(3, 5) = 5、d₂ = 1 なら d₃ は 4 か 2 で結果 max(1, 3) = 3 です。",
+          "乙が 2 の符号を決めるとき d₂ は 3 か 1 で、乙は d₂ = 1（1 と 2 を異符号）を選び、結果は 3 です。",
+          "よって両者が最善を尽くすと最後の |S| = 3 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "3"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade9-foundation",
+        "notes": "雙方輪流決定正負號的極大極小賽局，狀態是目前總和的絕對值，由後往前填表。答案用 python 窮舉 2⁶ 種符號序列的 minimax 驗證（verify.py sg）。掃「正負號|+ 或 −|輪流」：既有博弈題全是取石子、報數、Nim、Chomp、骨牌、除數遊戲等，沒有填符號的賽局。"
+      }
+    },
+    {
+      "id": "logic_grade9_foundation_056",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "add_one_or_double_game",
+      "tags": [
+        "c:game_theory",
+        "m:reverse"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade9",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "黑板上寫著一個正整數。甲、乙兩人輪流操作：輪到的人要把黑板上的數 n 改寫成 n + 1 或 2n，但寫出的數不可以超過 100；誰寫出 100 誰就獲勝。若輪到某人時黑板上的數是 n（1 ≤ n ≤ 99），而且只要對手採取最佳策略這個人就一定會輸，就稱 n 為「必敗數」。在 1 到 99 之中，必敗數共有幾個？",
+        "zh-Hans": "黑板上写着一个正整数。甲、乙两人轮流操作：轮到的人要把黑板上的数 n 改写成 n + 1 或 2n，但写出的数不可以超过 100；谁写出 100 谁就获胜。若轮到某人时黑板上的数是 n（1 ≤ n ≤ 99），而且只要对手采取最佳策略这个人就一定会输，就称 n 为「必败数」。在 1 到 99 之中，必败数共有几个？",
+        "en": "A positive integer is written on a board. A and B take turns: the player to move replaces the number n by n + 1 or 2n, but may not write a number larger than 100; whoever writes 100 wins. Call n (1 ≤ n ≤ 99) a \"losing number\" if the player who must move when the board shows n is sure to lose against best play. How many losing numbers are there from 1 to 99?",
+        "ja": "黒板に正の整数が書かれています。甲と乙は交互に、黒板の数 n を n + 1 か 2n に書きかえます。ただし 100 を超える数は書けず、100 を書いた人が勝ちです。黒板の数が n（1 ≤ n ≤ 99）のときに手番の人が、相手が最善を尽くすと必ず負けるとき、n を「必敗数」と呼びます。1 から 99 までに必敗数はいくつありますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 37。",
+        "zh-Hans": "答案是 37。",
+        "en": "The answer is 37.",
+        "ja": "答えは 37 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "從 100 往回推。n 是必敗數，當且僅當它的每一種寫法都讓對手面對一個「不是必敗數」的數；n 不是必敗數，當且僅當它有一種寫法能寫出 100 或寫出必敗數。",
+          "51 到 99：2n 超過 100，只能加 1。面對 99 可以寫 100 獲勝；面對 98 只能寫 99 給對手，必敗。依此類推，52、54、⋯、98 這些偶數是必敗數，51 到 99 的奇數不是。",
+          "26 到 50：把 n 加倍會寫出 52 到 100 之間的偶數，那是必敗數或直接獲勝，所以 26 到 50 都不是必敗數。",
+          "1 到 25 由大往小看：25 只能寫 26 或 50，兩者都不是必敗數，所以 25 是必敗數；24 可以寫 25，所以 24 不是；23 只能寫 24 或 46，都不是必敗數，所以 23 是必敗數。",
+          "這個規律一路往下成立：偶數 n 可以寫出奇數 n + 1（必敗數），所以不是必敗數；奇數 n 的兩種寫法 n + 1 與 2n 都是 2 到 50 之間的偶數，都不是必敗數，所以奇數 n 是必敗數（n = 1 時兩種寫法都寫出 2，也一樣）。",
+          "必敗數是 1 到 25 的奇數（13 個）與 52 到 98 的偶數（24 個），共 13 + 24 = 37 個。"
+        ],
+        "zh-Hans": [
+          "从 100 往回推。n 是必败数，当且仅当它的每一种写法都让对手面对一个「不是必败数」的数；n 不是必败数，当且仅当它有一种写法能写出 100 或写出必败数。",
+          "51 到 99：2n 超过 100，只能加 1。面对 99 可以写 100 获胜；面对 98 只能写 99 给对手，必败。依此类推，52、54、⋯、98 这些偶数是必败数，51 到 99 的奇数不是。",
+          "26 到 50：把 n 加倍会写出 52 到 100 之间的偶数，那是必败数或直接获胜，所以 26 到 50 都不是必败数。",
+          "1 到 25 由大往小看：25 只能写 26 或 50，两者都不是必败数，所以 25 是必败数；24 可以写 25，所以 24 不是；23 只能写 24 或 46，都不是必败数，所以 23 是必败数。",
+          "这个规律一路往下成立：偶数 n 可以写出奇数 n + 1（必败数），所以不是必败数；奇数 n 的两种写法 n + 1 与 2n 都是 2 到 50 之间的偶数，都不是必败数，所以奇数 n 是必败数（n = 1 时两种写法都写出 2，也一样）。",
+          "必败数是 1 到 25 的奇数（13 个）与 52 到 98 的偶数（24 个），共 13 + 24 = 37 个。"
+        ],
+        "en": [
+          "Work back from 100. n is a losing number exactly when every legal move hands the opponent a number that is not losing; n is not losing exactly when some move writes 100 or a losing number.",
+          "For 51 to 99, 2n exceeds 100, so the only move is +1. From 99 you write 100 and win; from 98 you must hand over 99 and lose. Continuing, the even numbers 52, 54, …, 98 are losing and the odd numbers 51 to 99 are not.",
+          "For 26 to 50, doubling writes an even number from 52 to 100, which is a losing number or an outright win, so none of 26 to 50 is losing.",
+          "Now go down from 25: 25 can only become 26 or 50, neither losing, so 25 is losing; 24 can become 25, so 24 is not; 23 can only become 24 or 46, neither losing, so 23 is losing.",
+          "The pattern continues all the way down: an even n can write the odd number n + 1 (losing), so it is not losing; an odd n can only write n + 1 or 2n, both even numbers from 2 to 50 and not losing, so it is losing (for n = 1 both moves give 2).",
+          "The losing numbers are the odd numbers 1 to 25 (13 of them) and the even numbers 52 to 98 (24 of them): 13 + 24 = 37."
+        ],
+        "ja": [
+          "100 から逆にたどります。n が必敗数であるのは、どの書きかえも相手に「必敗数でない数」を渡すときで、n が必敗数でないのは、100 か必敗数を書ける手があるときです。",
+          "51 から 99 では 2n が 100 を超えるので +1 しかできません。99 なら 100 を書いて勝ち、98 なら 99 を渡すしかなく負けです。同様に 52、54、…、98 の偶数は必敗数で、51 から 99 の奇数は必敗数ではありません。",
+          "26 から 50 では 2 倍すると 52 から 100 の偶数を書け、それは必敗数か勝ちなので、26 から 50 はどれも必敗数ではありません。",
+          "1 から 25 は大きいほうから見ます。25 は 26 か 50 にしかできず、どちらも必敗数でないので 25 は必敗数。24 は 25 にできるので必敗数でない。23 は 24 か 46 にしかできず、どちらも必敗数でないので 23 は必敗数です。",
+          "この規則は下までずっと成り立ちます。偶数 n は奇数 n + 1（必敗数）を書けるので必敗数ではなく、奇数 n の 2 つの書きかえ n + 1 と 2n はどちらも 2 から 50 の偶数で必敗数でないので、奇数 n は必敗数です（n = 1 では 2 つとも 2 になりますが同じです）。",
+          "必敗数は 1 から 25 の奇数（13 個）と 52 から 98 の偶数（24 個）で、合計 13 + 24 = 37 個です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "37"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade9-foundation",
+        "notes": "「加 1 或加倍、先寫到 100 者勝」的必敗數分層結構。python bottom-up 從 100 倒推驗證（verify.py dbl），1–99 中必敗數 37 個。掃「2 倍|加 1|× 2|乘」：logic_grade8_046（按 ×2 或 ×3 達到 100 以上者勝，問第一步）。本題可加 1、不可超過、問必敗數個數，分成 51–99 / 26–50 / 1–25 三層。"
+      }
+    },
+    {
+      "id": "logic_grade9_foundation_057",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "domino_placement_symmetry_game",
+      "tags": [
+        "c:game_theory",
+        "m:construction"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade9",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一個 4 × 4 的棋盤有 16 個小方格。甲、乙兩人輪流在棋盤上放一塊 1 × 2 的骨牌，由甲先放：每塊骨牌要剛好蓋住兩個有共同邊、而且都還沒被蓋住的小方格。輪到的人如果找不到位置可以放，就輸了。若兩人都採取最佳策略，下列哪一個敘述正確？",
+        "zh-Hans": "一个 4 × 4 的棋盘有 16 个小方格。甲、乙两人轮流在棋盘上放一块 1 × 2 的骨牌，由甲先放：每块骨牌要刚好盖住两个有共同边、而且都还没被盖住的小方格。轮到的人如果找不到位置可以放，就输了。若两人都采取最佳策略，下列哪一个叙述正确？",
+        "en": "A 4 × 4 board has 16 small squares. A and B take turns placing a 1 × 2 domino on the board, A first: each domino must cover two uncovered squares that share a side. A player who cannot place a domino on their turn loses. With best play by both, which statement is correct?",
+        "ja": "4 × 4 の盤には小さな正方形が 16 個あります。甲と乙が甲から交互に 1 × 2 のドミノを 1 枚ずつ置きます。ドミノは、辺を共有していてまだおおわれていない 2 マスをちょうどおおうように置きます。自分の番に置く場所がない人の負けです。両者が最善を尽くすとき、正しいものはどれですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 D：乙必勝：每次放在甲那塊繞中心轉半圈的位置即可。",
+        "zh-Hans": "答案是 D：乙必胜：每次放在甲那块绕中心转半圈的位置即可。",
+        "en": "The answer is D: B wins: always place at the half-turn image of A's domino.",
+        "ja": "答えは D：乙の必勝：毎回甲のドミノを中心で半回転させた位置に置けばよい です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "把棋盤繞中心轉半圈（180°），第 r 列第 c 行的格子會對應到第 (5 − r) 列第 (5 − c) 行，而且沒有任何一格對應到自己。",
+          "乙的策略：甲每放一塊骨牌，乙就把骨牌放在甲那塊轉半圈後的位置。",
+          "這個位置一定能放：甲放之前盤面是轉半圈對稱的，甲那塊的對應位置原本是空的；而且兩格 (r, c) 與 (5 − r, 5 − c) 的列差 |5 − 2r| 與行差 |5 − 2c| 都是奇數，加起來至少 2，不可能相鄰，所以一塊骨牌和它的對應位置不會重疊。",
+          "所以甲每放一塊，乙都放得下，盤面又恢復對稱。棋盤有限，最後一定是甲先找不到位置，乙必勝，A、B 都不對。",
+          "左右鏡射行不通：甲若把一塊橫放的骨牌蓋在第 2、3 行，它的左右鏡射就是它自己，乙無法照抄，所以 C 的方法不保證成功。",
+          "答案是 D。"
+        ],
+        "zh-Hans": [
+          "把棋盘绕中心转半圈（180°），第 r 列第 c 行的格子会对应到第 (5 − r) 列第 (5 − c) 行，而且没有任何一格对应到自己。",
+          "乙的策略：甲每放一块骨牌，乙就把骨牌放在甲那块转半圈后的位置。",
+          "这个位置一定能放：甲放之前盘面是转半圈对称的，甲那块的对应位置原本是空的；而且两格 (r, c) 与 (5 − r, 5 − c) 的列差 |5 − 2r| 与行差 |5 − 2c| 都是奇数，加起来至少 2，不可能相邻，所以一块骨牌和它的对应位置不会重叠。",
+          "所以甲每放一块，乙都放得下，盘面又恢复对称。棋盘有限，最后一定是甲先找不到位置，乙必胜，A、B 都不对。",
+          "左右镜射行不通：甲若把一块横放的骨牌盖在第 2、3 行，它的左右镜射就是它自己，乙无法照抄，所以 C 的方法不保证成功。",
+          "答案是 D。"
+        ],
+        "en": [
+          "Rotate the board a half turn (180°) about its centre: the square in row r, column c goes to row 5 − r, column 5 − c, and no square goes to itself.",
+          "B's strategy: whenever A places a domino, B places one in the position obtained by rotating A's domino a half turn.",
+          "That position is always free: before A's move the board was symmetric under the half turn, so the image of A's domino was empty; and for squares (r, c) and (5 − r, 5 − c) the row gap |5 − 2r| and column gap |5 − 2c| are both odd, adding to at least 2, so they are never adjacent and a domino never overlaps its own image.",
+          "So after every move by A, B can reply and restore the symmetry. The board is finite, so A is the first to run out of moves; B wins, and A and B are wrong.",
+          "Left–right mirroring fails: if A lays a horizontal domino across columns 2 and 3, its mirror image is itself and B cannot copy it, so the method in C is not guaranteed.",
+          "The answer is D."
+        ],
+        "ja": [
+          "盤を中心のまわりに半回転（180°）させると、r 行 c 列のマスは (5 − r) 行 (5 − c) 列のマスに移り、自分自身に移るマスはありません。",
+          "乙の戦略：甲がドミノを置くたびに、乙は甲のドミノを半回転させた位置にドミノを置きます。",
+          "その位置には必ず置けます。甲が置く前の盤面は半回転について対称なので、甲のドミノの対応位置は空いています。また (r, c) と (5 − r, 5 − c) の行の差 |5 − 2r| と列の差 |5 − 2c| はどちらも奇数で和は 2 以上なので隣り合うことはなく、ドミノが自分の対応位置と重なることもありません。",
+          "したがって甲が置くたびに乙も置けて、盤面は再び対称になります。盤は有限なので、先に置けなくなるのは甲で、乙の必勝です。A、B は誤りです。",
+          "左右の鏡映ではうまくいきません。甲が横向きのドミノを 2 列目と 3 列目にまたがって置くと、その鏡映は自分自身なので乙はまねできず、C の方法は保証されません。",
+          "答えは D です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "multiple_choice",
+      "options": {
+        "A": {
+          "zh-Hant": "甲必勝：第一塊骨牌放在最靠近中央的位置即可",
+          "zh-Hans": "甲必胜：第一块骨牌放在最靠近中央的位置即可",
+          "en": "A wins: place the first domino as close to the centre as possible",
+          "ja": "甲の必勝：最初のドミノをできるだけ中央寄りに置けばよい"
+        },
+        "B": {
+          "zh-Hant": "甲必勝：第一塊骨牌放在任何一個角落即可",
+          "zh-Hans": "甲必胜：第一块骨牌放在任何一个角落即可",
+          "en": "A wins: place the first domino in any corner",
+          "ja": "甲の必勝：最初のドミノをどこかの角に置けばよい"
+        },
+        "C": {
+          "zh-Hant": "乙必勝：每次放在甲那塊左右鏡射的位置即可",
+          "zh-Hans": "乙必胜：每次放在甲那块左右镜射的位置即可",
+          "en": "B wins: always place at the left–right mirror of A's domino",
+          "ja": "乙の必勝：毎回甲のドミノの左右鏡映の位置に置けばよい"
+        },
+        "D": {
+          "zh-Hant": "乙必勝：每次放在甲那塊繞中心轉半圈的位置即可",
+          "zh-Hans": "乙必胜：每次放在甲那块绕中心转半圈的位置即可",
+          "en": "B wins: always place at the half-turn image of A's domino",
+          "ja": "乙の必勝：毎回甲のドミノを中心で半回転させた位置に置けばよい"
+        }
+      },
+      "correctAnswer": {
+        "type": "choice",
+        "value": "D"
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade9-foundation",
+        "notes": "4×4 放骨牌遊戲，後手以中心對稱策略必勝。python 以位元遮罩窮舉 4×4 所有局面確認先手必敗（verify.py dw）。掃「骨牌.{0,80}輪流」：無；對稱策略的既有博弈題是 logic_grade6_078（圓圈硬幣，後手對稱）與 logic_grade10_044（圓桌放硬幣，先手放中心），本題需要檢查「骨牌不會與自己的對應位置重疊」，且左右鏡射會失敗。"
+      }
     }
   ]
 }
