@@ -4698,6 +4698,158 @@
         "reference": "logic-grade11-foundation",
         "notes": "題型取自圖論一筆畫的推廣（最少筆數 = 奇點數 ÷ 2）。掃過「一筆畫|筆畫」：只有 logic_grade3_056（正六邊形對角線不能一筆畫的理由，判斷可不可以）。本題要計數奇點得下界，並構造達到下界，推理點不同。"
       }
+    },
+    {
+      "id": "logic_grade11_foundation_052",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "subtraction_game_period_losing_positions",
+      "tags": [
+        "c:game_theory",
+        "c:modular",
+        "m:invariant"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade11",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "桌上有 n 枚硬幣。甲、乙兩人輪流拿，甲先拿；每次只能拿 1 枚、3 枚或 4 枚（不能不拿，也不能拿超過桌上的數量），拿到最後一枚的人獲勝。在 n = 1、2、3、⋯、100 這 100 種情形中，先手甲在乙採取最佳策略時一定會輸的情形共有幾種？",
+        "zh-Hans": "桌上有 n 枚硬币。甲、乙两人轮流拿，甲先拿；每次只能拿 1 枚、3 枚或 4 枚（不能不拿，也不能拿超过桌上的数量），拿到最后一枚的人获胜。在 n = 1、2、3、⋯、100 这 100 种情形中，先手甲在乙采取最佳策略时一定会输的情形共有几种？",
+        "en": "There are n coins on a table. A and B take turns, A first; each turn a player must take 1, 3 or 4 coins (not more than remain). Whoever takes the last coin wins. Among the 100 cases n = 1, 2, 3, …, 100, in how many does the first player A lose against best play by B?",
+        "ja": "机の上に n 枚の硬貨があります。甲と乙が交互に取り、甲が先手です。1 回に 1 枚、3 枚、4 枚のどれかを取らなければならず（残りより多くは取れない）、最後の 1 枚を取った人が勝ちです。n = 1、2、3、⋯、100 の 100 通りのうち、乙が最善をつくすと先手の甲が必ず負けるのは何通りですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 29。",
+        "zh-Hans": "答案是 29。",
+        "en": "The answer is 29.",
+        "ja": "答えは 29 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "稱「輪到的人必輸」的局面為 P。n = 0 是 P（沒得拿就輸）；一個局面是 P ⇔ 拿 1、3、4 之後都不會到 P。",
+          "逐一判斷：n = 1（拿 1 到 0）、3、4 必贏；n = 2 只能拿 1 到 1，是 P；n = 5（拿 3 到 2）、6（拿 4 到 2）必贏；n = 7 拿 1、3、4 到 6、4、3 都是必贏局，是 P；n = 8（拿 1 到 7）必贏。",
+          "接著 n = 9 到 2、6、5 以外……可驗證 n = 9 拿 1、3、4 到 8、6、5 都必贏，是 P。P 局面依序是 0、2、7、9、14、16、⋯：每隔 7 重複，n 除以 7 餘 0 或 2 時是 P。",
+          "理由：若 n ≡ 0 或 2（mod 7），拿 1、3、4 之後餘數變成 6、4、3 或 1、6、5，都不是 0 或 2；若餘數是 1、3、4、5、6，分別拿 1、1、4、3、4 就能到餘 0 或 2。",
+          "1～100 中除以 7 餘 0 的有 7、14、⋯、98 共 14 個，餘 2 的有 2、9、⋯、100 共 15 個，先手必輸共 29 種。"
+        ],
+        "zh-Hans": [
+          "称「轮到的人必输」的局面为 P。n = 0 是 P（没得拿就输）；一个局面是 P ⇔ 拿 1、3、4 之后都不会到 P。",
+          "逐一判断：n = 1（拿 1 到 0）、3、4 必赢；n = 2 只能拿 1 到 1，是 P；n = 5（拿 3 到 2）、6（拿 4 到 2）必赢；n = 7 拿 1、3、4 到 6、4、3 都是必赢局，是 P；n = 8（拿 1 到 7）必赢。",
+          "接着 n = 9 到 2、6、5 以外……可验证 n = 9 拿 1、3、4 到 8、6、5 都必赢，是 P。P 局面依序是 0、2、7、9、14、16、⋯：每隔 7 重复，n 除以 7 余 0 或 2 时是 P。",
+          "理由：若 n ≡ 0 或 2（mod 7），拿 1、3、4 之后余数变成 6、4、3 或 1、6、5，都不是 0 或 2；若余数是 1、3、4、5、6，分别拿 1、1、4、3、4 就能到余 0 或 2。",
+          "1～100 中除以 7 余 0 的有 7、14、⋯、98 共 14 个，余 2 的有 2、9、⋯、100 共 15 个，先手必输共 29 种。"
+        ],
+        "en": [
+          "Call a position P if the player to move loses. n = 0 is P (no move); a position is P ⇔ every move (take 1, 3 or 4) leads to a non-P position.",
+          "Check in order: n = 1 (take 1 to 0), 3, 4 are wins; n = 2 can only go to 1, so P; n = 5 (take 3 to 2) and 6 (take 4 to 2) are wins; n = 7 goes to 6, 4, 3, all wins, so P; n = 8 (take 1 to 7) is a win.",
+          "n = 9 goes to 8, 6, 5, all wins, so P. The P-positions are 0, 2, 7, 9, 14, 16, …: repeating every 7, n is P exactly when n leaves remainder 0 or 2 on division by 7.",
+          "Reason: from remainder 0 or 2, taking 1, 3, 4 gives remainders 6, 4, 3 or 1, 6, 5 — never 0 or 2; from remainders 1, 3, 4, 5, 6 take 1, 1, 4, 3, 4 respectively to reach remainder 0 or 2.",
+          "In 1–100, remainder 0: 7, 14, …, 98 (14 values); remainder 2: 2, 9, …, 100 (15 values). The first player loses in 29 cases."
+        ],
+        "ja": [
+          "手番の人が必ず負ける局面を P と呼びます。n = 0 は P（取れないので負け）。ある局面が P ⇔ 1、3、4 枚取ったどの先も P でない。",
+          "順に調べます：n = 1（1 取って 0）、3、4 は勝ち。n = 2 は 1 にしか行けず P。n = 5（3 取って 2）、6（4 取って 2）は勝ち。n = 7 は 6、4、3 のどれも勝ち局面なので P。n = 8（1 取って 7）は勝ち。",
+          "n = 9 は 8、6、5 のどれも勝ち局面なので P。P 局面は 0、2、7、9、14、16、⋯ と 7 ごとに繰り返し、n を 7 で割った余りが 0 か 2 のとき P です。",
+          "理由：余り 0 か 2 から 1、3、4 を取ると余りは 6、4、3 または 1、6、5 で、0 や 2 になりません。余り 1、3、4、5、6 からはそれぞれ 1、1、4、3、4 を取れば余り 0 か 2 にできます。",
+          "1～100 で余り 0 は 7、14、⋯、98 の 14 個、余り 2 は 2、9、⋯、100 の 15 個で、先手必敗は 29 通り。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "29"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade11-foundation",
+        "notes": "題型：取子遊戲（可拿 {1, 3, 4}）找 P 局面的週期 7，並用餘數證明。掃過 輪流.*拿|取.*枚.*獲勝|必勝|必輸 全庫：logic_grade11_001 是拿 1～3 枚（週期 4，答第一步）、logic_grade6_091 是拿 1～4 且拿最後輸，logic_grade10_054 是 Nim；拿法集合不連續 {1, 3, 4} 產生「兩個 P 餘數」的沒有。"
+      }
+    },
+    {
+      "id": "logic_grade11_foundation_053",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "round_robin_max_teams_with_many_wins",
+      "tags": [
+        "c:graph_theory",
+        "c:inequality",
+        "m:extremal"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade11",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "7 支球隊進行單循環賽，每兩隊恰好比賽一場，每場都分出勝負。比賽結束後，勝場數至少 5 場的球隊最多可能有幾隊？",
+        "zh-Hans": "7 支球队进行单循环赛，每两队恰好比赛一场，每场都分出胜负。比赛结束后，胜场数至少 5 场的球队最多可能有几队？",
+        "en": "Seven teams play a round robin: every two teams meet exactly once and every game has a winner. After the tournament, at most how many teams can have at least 5 wins?",
+        "ja": "7 チームが総当たり戦を行い、どの 2 チームもちょうど 1 回対戦し、必ず勝敗がつきます。大会後、5 勝以上したチームは最大で何チームありえますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 3。",
+        "zh-Hans": "答案是 3。",
+        "en": "The answer is 3.",
+        "ja": "答えは 3 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "設有 k 隊勝場數都至少 5，它們的勝場合計至少 5k。",
+          "這 k 隊的勝場只能來自：它們彼此之間的 C(k, 2) 場（每場恰有一勝），以及它們各自對其餘 7 − k 隊的 k(7 − k) 場。所以 5k ≤ C(k, 2) + k(7 − k)。",
+          "k = 4：右邊 6 + 12 = 18 < 20，不可能；k 更大時更不可能（k = 5：10 + 10 = 20 < 25），所以 k ≤ 3。",
+          "k = 3 可以做到：甲、乙、丙各自贏其餘 4 隊（4 勝），三隊之間循環相剋（甲勝乙、乙勝丙、丙勝甲）各再得 1 勝，每隊都是 5 勝。",
+          "所以最多 3 隊。"
+        ],
+        "zh-Hans": [
+          "设有 k 队胜场数都至少 5，它们的胜场合计至少 5k。",
+          "这 k 队的胜场只能来自：它们彼此之间的 C(k, 2) 场（每场恰有一胜），以及它们各自对其余 7 − k 队的 k(7 − k) 场。所以 5k ≤ C(k, 2) + k(7 − k)。",
+          "k = 4：右边 6 + 12 = 18 < 20，不可能；k 更大时更不可能（k = 5：10 + 10 = 20 < 25），所以 k ≤ 3。",
+          "k = 3 可以做到：甲、乙、丙各自赢其余 4 队（4 胜），三队之间循环相克（甲胜乙、乙胜丙、丙胜甲）各再得 1 胜，每队都是 5 胜。",
+          "所以最多 3 队。"
+        ],
+        "en": [
+          "Suppose k teams each have at least 5 wins; together they have at least 5k wins.",
+          "Their wins can only come from the C(k, 2) games among themselves (one win each) and the k(7 − k) games against the other 7 − k teams. So 5k ≤ C(k, 2) + k(7 − k).",
+          "k = 4: the right side is 6 + 12 = 18 < 20, impossible; larger k is worse (k = 5: 10 + 10 = 20 < 25). So k ≤ 3.",
+          "k = 3 works: A, B, C each beat all 4 other teams (4 wins), and among themselves A beats B, B beats C, C beats A, giving each one more win: 5 wins each.",
+          "So at most 3 teams."
+        ],
+        "ja": [
+          "5 勝以上のチームが k チームあるとすると、それらの勝ち数の合計は 5k 以上です。",
+          "その勝ちは、k チーム同士の C(k, 2) 試合（1 試合に 1 勝）と、残り 7 − k チームとの k(7 − k) 試合からしか得られないので 5k ≤ C(k, 2) + k(7 − k)。",
+          "k = 4 では右辺 6 + 12 = 18 < 20 で不可能。k が大きいとさらに不可能（k = 5：10 + 10 = 20 < 25）。よって k ≤ 3。",
+          "k = 3 は実現できます：甲・乙・丙がそれぞれ他の 4 チームに全勝（4 勝）し、3 チームの間は甲が乙に、乙が丙に、丙が甲に勝てば、どれも 5 勝です。",
+          "よって最大 3 チーム。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "3"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade11-foundation",
+        "notes": "題型：循環賽勝場的上界（計算「只能從哪些比賽得勝」）＋構造達成。掃過 循環賽|每兩隊|勝場 全庫：logic_grade10_015 是已知四隊勝場求第五隊（總和守恆），logic_grade6_076 是積分反推平手，combinatorics_grade11_057 是不含全勝隊的賽果數；沒有「高勝場隊數最多」的極值題。"
+      }
     }
   ]
 }
