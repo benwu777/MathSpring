@@ -5774,6 +5774,383 @@
         "reference": "combinatorics-grade11-foundation",
         "notes": "題型取自遞迴「平面分空間（蛋糕數）」，是「直線分平面」往上一維。掃過「分成幾個區域|最多.*區域|切.*塊|空間」：logic_grade8_011（5 條直線分平面 = 16）、logic_grade6_073（切餅 5 刀）、logic_grade10_028（4 個圓分平面）、combinatorics_grade9_026（圓內弦分區）。本題在空間中，遞迴的增量本身是平面上的分割數。"
       }
+    },
+    {
+      "id": "combinatorics_grade11_foundation_064",
+      "reviewStatus": "ok",
+      "topic": "combinatorics",
+      "subtopic": "truncated_doubling_game",
+      "tags": [
+        "c:expectation",
+        "c:probability",
+        "m:direct"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade11",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一個遊戲擲一枚公正的硬幣，最多擲 5 次，一出現正面就停止。若第 k 次才第一次擲出正面（k = 1、2、3、4、5），可以領 2 的 k 次方 元；若 5 次都是反面，什麼都領不到。求領到金額的期望值是幾元。",
+        "zh-Hans": "一个游戏掷一枚公正的硬币，最多掷 5 次，一出现正面就停止。若第 k 次才第一次掷出正面（k = 1、2、3、4、5），可以领 2 的 k 次方 元；若 5 次都是反面，什么都领不到。求领到金额的期望值是几元。",
+        "en": "A game tosses a fair coin at most 5 times, stopping at the first head. If the first head appears on toss k (k = 1, 2, 3, 4, 5), the prize is 2 to the power k dollars; if all 5 tosses are tails, the prize is 0. Find the expected prize in dollars.",
+        "ja": "あるゲームでは公正な硬貨を最大 5 回投げ、表が出たらすぐやめます。初めて表が出たのが k 回目（k = 1、2、3、4、5）なら 2 の k 乗 元もらえ、5 回とも裏なら何ももらえません。もらえる金額の期待値は何元ですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 5。",
+        "zh-Hans": "答案是 5。",
+        "en": "The answer is 5.",
+        "ja": "答えは 5 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "第 1 次就正面：機率 1/2，領 2 元；第 2 次才正面（反正）：機率 1/4，領 4 元；第 3 次：機率 1/8，領 8 元。",
+          "第 4 次：機率 1/16，領 16 元；第 5 次：機率 1/32，領 32 元；5 次全是反面：機率 1/32，領 0 元。",
+          "檢查機率總和：1/2 + 1/4 + 1/8 + 1/16 + 1/32 + 1/32 = 1。",
+          "每一種 k 的「機率 × 金額」都等於 1：1/2 × 2 = 1/4 × 4 = 1/8 × 8 = 1/16 × 16 = 1/32 × 32 = 1。",
+          "期望值 = 1 + 1 + 1 + 1 + 1 + 0 = 5 元。"
+        ],
+        "zh-Hans": [
+          "第 1 次就正面：机率 1/2，领 2 元；第 2 次才正面（反正）：机率 1/4，领 4 元；第 3 次：机率 1/8，领 8 元。",
+          "第 4 次：机率 1/16，领 16 元；第 5 次：机率 1/32，领 32 元；5 次全是反面：机率 1/32，领 0 元。",
+          "检查机率总和：1/2 + 1/4 + 1/8 + 1/16 + 1/32 + 1/32 = 1。",
+          "每一种 k 的「机率 × 金额」都等于 1：1/2 × 2 = 1/4 × 4 = 1/8 × 8 = 1/16 × 16 = 1/32 × 32 = 1。",
+          "期望值 = 1 + 1 + 1 + 1 + 1 + 0 = 5 元。"
+        ],
+        "en": [
+          "First head on toss 1: probability 1/2, prize 2; on toss 2 (tail, head): probability 1/4, prize 4; on toss 3: probability 1/8, prize 8.",
+          "Toss 4: probability 1/16, prize 16; toss 5: probability 1/32, prize 32; five tails: probability 1/32, prize 0.",
+          "Check the probabilities: 1/2 + 1/4 + 1/8 + 1/16 + 1/32 + 1/32 = 1.",
+          "For each k, probability × prize equals 1: 1/2 × 2 = 1/4 × 4 = 1/8 × 8 = 1/16 × 16 = 1/32 × 32 = 1.",
+          "Expected prize = 1 + 1 + 1 + 1 + 1 + 0 = 5 dollars."
+        ],
+        "ja": [
+          "1 回目で表：確率 1/2、2 元。2 回目で初めて表（裏表）：確率 1/4、4 元。3 回目：確率 1/8、8 元。",
+          "4 回目：確率 1/16、16 元。5 回目：確率 1/32、32 元。5 回とも裏：確率 1/32、0 元。",
+          "確率の和の確認：1/2 + 1/4 + 1/8 + 1/16 + 1/32 + 1/32 = 1。",
+          "どの k でも「確率 × 金額」は 1：1/2 × 2 = 1/4 × 4 = 1/8 × 8 = 1/16 × 16 = 1/32 × 32 = 1。",
+          "期待値 = 1 + 1 + 1 + 1 + 1 + 0 = 5 元。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "5"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "combinatorics-grade11-foundation",
+        "notes": "題型：截斷的聖彼得堡遊戲期望值。掃過 直到.*正面|出現正面為止 全庫無命中；最接近 combinatorics_grade10_foundation_045（公平參加費）、combinatorics_grade12_foundation_042（擲到 6 為止的次數期望），本題是金額隨停止時間倍增。"
+      }
+    },
+    {
+      "id": "combinatorics_grade11_foundation_065",
+      "reviewStatus": "ok",
+      "topic": "combinatorics",
+      "subtopic": "expected_inversions",
+      "tags": [
+        "c:expectation",
+        "c:permutation_combination",
+        "m:bijection"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade11",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "把寫著 1 到 8 的八張卡片洗勻後由左到右排成一列（每一種排法機會相同）。在任意兩張卡片中，若數字較大的那張排在數字較小那張的左邊，就稱這兩張卡片構成一個「逆序對」。求逆序對個數的期望值。",
+        "zh-Hans": "把写着 1 到 8 的八张卡片洗匀后由左到右排成一列（每一种排法机会相同）。在任意两张卡片中，若数字较大的那张排在数字较小那张的左边，就称这两张卡片构成一个「逆序对」。求逆序对个数的期望值。",
+        "en": "Eight cards numbered 1 to 8 are shuffled and laid in a row from left to right (all orders equally likely). Two cards form an “inversion” if the larger number lies to the left of the smaller one. Find the expected number of inversions.",
+        "ja": "1 から 8 までの数が書かれた 8 枚のカードをよく混ぜて左から右へ 1 列に並べます（どの並び方も同様に確からしい）。2 枚のカードのうち、大きい数のカードが小さい数のカードより左にあるとき、その 2 枚を「転倒」と呼びます。転倒の個数の期待値を求めなさい。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 14。",
+        "zh-Hans": "答案是 14。",
+        "en": "The answer is 14.",
+        "ja": "答えは 14 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "8 張卡片兩兩一組，共有 C(8, 2) = 28 組，每一組可能是或不是逆序對。",
+          "對任何一組，把這兩張卡片的位置對調會得到另一種機會相同的排法，而這一組是否為逆序對恰好相反，所以每一組是逆序對的機率都是 1/2。",
+          "期望值具有線性：逆序對個數的期望值 = 每一組成為逆序對的機率全部加起來。",
+          "期望值 = 28 × 1/2 = 14。"
+        ],
+        "zh-Hans": [
+          "8 张卡片两两一组，共有 C(8, 2) = 28 组，每一组可能是或不是逆序对。",
+          "对任何一组，把这两张卡片的位置对调会得到另一种机会相同的排法，而这一组是否为逆序对恰好相反，所以每一组是逆序对的机率都是 1/2。",
+          "期望值具有线性：逆序对个数的期望值 = 每一组成为逆序对的机率全部加起来。",
+          "期望值 = 28 × 1/2 = 14。"
+        ],
+        "en": [
+          "There are C(8, 2) = 28 pairs of cards, and each pair either is or is not an inversion.",
+          "For any pair, swapping those two cards gives another equally likely order in which the pair’s status is reversed, so each pair is an inversion with probability 1/2.",
+          "By linearity of expectation, the expected number of inversions is the sum of these probabilities over all pairs.",
+          "Expected value = 28 × 1/2 = 14."
+        ],
+        "ja": [
+          "8 枚から 2 枚を選ぶ組は C(8, 2) = 28 組あり、それぞれ転倒であるかないかのどちらかです。",
+          "どの組でも、その 2 枚の位置を入れ替えると同様に確からしい別の並びになり、その組が転倒かどうかがちょうど逆になるので、各組が転倒である確率は 1/2 です。",
+          "期待値の線形性より、転倒の個数の期待値は各組の確率の和です。",
+          "期待値 = 28 × 1/2 = 14。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "14"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "combinatorics-grade11-foundation",
+        "notes": "題型：隨機排列逆序對數的期望值（成對對調的對稱＋期望值線性）。掃過 逆序|前大後小|身高 全庫；最接近 logic_grade11_foundation_010（固定排列 3、1、4、2 的相鄰對調最少次數＝逆序數）、combinatorics_grade10_foundation_076（8 人身高小山頭期望）、combinatorics_grade12_foundation_049（刷新紀錄期望），本題的指標事件是任意兩張的相對順序。"
+      }
+    },
+    {
+      "id": "combinatorics_grade11_foundation_066",
+      "reviewStatus": "ok",
+      "topic": "combinatorics",
+      "subtopic": "binomial_second_moment",
+      "tags": [
+        "c:expectation",
+        "c:binomial",
+        "c:stdev",
+        "m:direct"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade11",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一位球員每次罰球命中的機率都是 0.6，各次互相獨立。他罰球 50 次，命中次數記為 X。求 X² 的期望值。",
+        "zh-Hans": "一位球员每次罚球命中的机率都是 0.6，各次互相独立。他罚球 50 次，命中次数记为 X。求 X² 的期望值。",
+        "en": "A player makes each free throw with probability 0.6, independently. He shoots 50 free throws and X is the number made. Find the expected value of X².",
+        "ja": "ある選手のフリースローの成功率は毎回 0.6 で、各回は独立です。50 本打ったときの成功数を X とします。X² の期待値を求めなさい。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 912。",
+        "zh-Hans": "答案是 912。",
+        "en": "The answer is 912.",
+        "ja": "答えは 912 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "X 服從二項分布，試驗次數 n = 50、成功機率 p = 0.6。",
+          "期望值 E(X) = np = 50 × 0.6 = 30。",
+          "變異數 Var(X) = np(1 − p) = 50 × 0.6 × 0.4 = 12。",
+          "由變異數的定義 Var(X) = E(X²) − (E(X))²，得 E(X²) = Var(X) + (E(X))²。",
+          "E(X²) = 12 + 30² = 12 + 900 = 912。"
+        ],
+        "zh-Hans": [
+          "X 服从二项分布，试验次数 n = 50、成功机率 p = 0.6。",
+          "期望值 E(X) = np = 50 × 0.6 = 30。",
+          "变异数 Var(X) = np(1 − p) = 50 × 0.6 × 0.4 = 12。",
+          "由变异数的定义 Var(X) = E(X²) − (E(X))²，得 E(X²) = Var(X) + (E(X))²。",
+          "E(X²) = 12 + 30² = 12 + 900 = 912。"
+        ],
+        "en": [
+          "X is binomial with n = 50 trials and success probability p = 0.6.",
+          "E(X) = np = 50 × 0.6 = 30.",
+          "Var(X) = np(1 − p) = 50 × 0.6 × 0.4 = 12.",
+          "From Var(X) = E(X²) − (E(X))², E(X²) = Var(X) + (E(X))².",
+          "E(X²) = 12 + 30² = 12 + 900 = 912."
+        ],
+        "ja": [
+          "X は試行回数 n = 50、成功確率 p = 0.6 の二項分布に従います。",
+          "期待値 E(X) = np = 50 × 0.6 = 30。",
+          "分散 Var(X) = np(1 − p) = 50 × 0.6 × 0.4 = 12。",
+          "分散の定義 Var(X) = E(X²) − (E(X))² より E(X²) = Var(X) + (E(X))²。",
+          "E(X²) = 12 + 30² = 12 + 900 = 912。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "912"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "combinatorics-grade11-foundation",
+        "notes": "題型：二項分布的二階動差 E(X²) = Var + 平均²。掃過 X²|平方的期望|罰球 全庫；最接近 algebra_grade11_foundation_074（二項分布標準差最大值）、combinatorics_grade12_foundation_052（罰球機率反求 p），本題要把變異數公式反過來用。"
+      }
+    },
+    {
+      "id": "combinatorics_grade11_foundation_067",
+      "reviewStatus": "ok",
+      "topic": "combinatorics",
+      "subtopic": "lottery_expected_prize",
+      "tags": [
+        "c:expectation",
+        "c:permutation_combination",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade11",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一種彩券從 1 到 10 號中選 3 個不同的號碼下注；開獎時也從 1 到 10 號中隨機開出 3 個不同的號碼（每種開法機會相同）。下注的 3 個號碼若全部被開出可得 600 元，恰好 2 個被開出可得 40 元，其餘情形沒有獎金。求一張彩券獎金的期望值是幾元。",
+        "zh-Hans": "一种彩券从 1 到 10 号中选 3 个不同的号码下注；开奖时也从 1 到 10 号中随机开出 3 个不同的号码（每种开法机会相同）。下注的 3 个号码若全部被开出可得 600 元，恰好 2 个被开出可得 40 元，其余情形没有奖金。求一张彩券奖金的期望值是几元。",
+        "en": "A lottery ticket picks 3 different numbers from 1 to 10; the draw also picks 3 different numbers from 1 to 10 at random (all draws equally likely). Matching all 3 pays 600 dollars, matching exactly 2 pays 40 dollars, and otherwise nothing. Find the expected prize of one ticket in dollars.",
+        "ja": "ある宝くじは 1〜10 番から異なる 3 つの番号を選んで買います。抽選でも 1〜10 番から異なる 3 つの番号が無作為に選ばれます（どの選ばれ方も同様に確からしい）。3 つとも当たれば 600 元、ちょうど 2 つ当たれば 40 元、それ以外は賞金なしです。宝くじ 1 枚の賞金の期待値は何元ですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 12。",
+        "zh-Hans": "答案是 12。",
+        "en": "The answer is 12.",
+        "ja": "答えは 12 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "開出的 3 個號碼共有 C(10, 3) = 120 種開法，每種機會相同。",
+          "3 個全中：只有 1 種開法，機率 1/120。",
+          "恰中 2 個：從自己的 3 個號碼中選 2 個被開出，再從其餘 7 個號碼中選 1 個：C(3, 2) × C(7, 1) = 21 種，機率 21/120。",
+          "期望值 = 600 × 1/120 + 40 × 21/120 = 5 + 7 = 12 元。"
+        ],
+        "zh-Hans": [
+          "开出的 3 个号码共有 C(10, 3) = 120 种开法，每种机会相同。",
+          "3 个全中：只有 1 种开法，机率 1/120。",
+          "恰中 2 个：从自己的 3 个号码中选 2 个被开出，再从其余 7 个号码中选 1 个：C(3, 2) × C(7, 1) = 21 种，机率 21/120。",
+          "期望值 = 600 × 1/120 + 40 × 21/120 = 5 + 7 = 12 元。"
+        ],
+        "en": [
+          "The draw has C(10, 3) = 120 equally likely outcomes.",
+          "Match all 3: only 1 outcome, probability 1/120.",
+          "Match exactly 2: choose 2 of your 3 numbers to be drawn and 1 of the other 7: C(3, 2) × C(7, 1) = 21 outcomes, probability 21/120.",
+          "Expected prize = 600 × 1/120 + 40 × 21/120 = 5 + 7 = 12 dollars."
+        ],
+        "ja": [
+          "抽選の選ばれ方は C(10, 3) = 120 通りで、どれも同様に確からしいです。",
+          "3 つとも当たり：1 通りだけで確率 1/120。",
+          "ちょうど 2 つ当たり：自分の 3 つから当たる 2 つを選び、残り 7 つから 1 つを選ぶ：C(3, 2) × C(7, 1) = 21 通り、確率 21/120。",
+          "期待値 = 600 × 1/120 + 40 × 21/120 = 5 + 7 = 12 元。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "12"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "combinatorics-grade11-foundation",
+        "notes": "題型：超幾何計數＋期望值。掃過 樂透|彩券|對獎|中獎 全庫；最接近 logic_grade12_foundation_048（刮刮樂中獎張數期望），本題要數「恰中 2 個」的組合數。"
+      }
+    },
+    {
+      "id": "combinatorics_grade11_foundation_068",
+      "reviewStatus": "ok",
+      "topic": "combinatorics",
+      "subtopic": "random_walk_second_moment",
+      "tags": [
+        "c:expectation",
+        "c:probability",
+        "m:invariant"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade11",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一枚棋子從數線的原點出發。每一回合擲一枚公正的硬幣：正面就往右移 1 單位，反面就往左移 1 單位，各回合互相獨立。擲完 10 回合後，棋子所在位置的座標記為 S。求 S² 的期望值。",
+        "zh-Hans": "一枚棋子从数线的原点出发。每一回合掷一枚公正的硬币：正面就往右移 1 单位，反面就往左移 1 单位，各回合互相独立。掷完 10 回合后，棋子所在位置的座标记为 S。求 S² 的期望值。",
+        "en": "A token starts at 0 on the number line. Each round a fair coin is tossed: heads moves it 1 unit right, tails 1 unit left, independently each round. After 10 rounds its coordinate is S. Find the expected value of S².",
+        "ja": "数直線の原点から駒が出発します。毎回公正な硬貨を投げ、表なら右に 1、裏なら左に 1 動かし、各回は独立です。10 回投げた後の駒の座標を S とします。S² の期待値を求めなさい。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 10。",
+        "zh-Hans": "答案是 10。",
+        "en": "The answer is 10.",
+        "ja": "答えは 10 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "把第 i 回合的移動量記為 Xᵢ（+1 或 −1，機率各 1/2），則 S = X₁ + X₂ + ⋯ + X₁₀。",
+          "展開平方：S² =（X₁² + X₂² + ⋯ + X₁₀²）+ 2 ×（所有 i < j 的 XᵢXⱼ 之和）。",
+          "每一個 Xᵢ² 都等於 1，所以第一部分恰好是 10，不隨機。",
+          "i ≠ j 時 Xᵢ、Xⱼ 互相獨立，XᵢXⱼ 等於 +1 或 −1 的機率各 1/2，期望值是 0。",
+          "由期望值的線性：E(S²) = 10 + 2 × 0 = 10。",
+          "小例子檢查：只擲 2 回合時 S 可能是 2、0、0、−2，S² 的平均是 (4 + 0 + 0 + 4) ÷ 4 = 2，正好等於回合數。所以答案是 10。"
+        ],
+        "zh-Hans": [
+          "把第 i 回合的移动量记为 Xᵢ（+1 或 −1，机率各 1/2），则 S = X₁ + X₂ + ⋯ + X₁₀。",
+          "展开平方：S² =（X₁² + X₂² + ⋯ + X₁₀²）+ 2 ×（所有 i < j 的 XᵢXⱼ 之和）。",
+          "每一个 Xᵢ² 都等于 1，所以第一部分恰好是 10，不随机。",
+          "i ≠ j 时 Xᵢ、Xⱼ 互相独立，XᵢXⱼ 等于 +1 或 −1 的机率各 1/2，期望值是 0。",
+          "由期望值的线性：E(S²) = 10 + 2 × 0 = 10。",
+          "小例子检查：只掷 2 回合时 S 可能是 2、0、0、−2，S² 的平均是 (4 + 0 + 0 + 4) ÷ 4 = 2，正好等于回合数。所以答案是 10。"
+        ],
+        "en": [
+          "Let Xᵢ be the move in round i (+1 or −1, each with probability 1/2); then S = X₁ + X₂ + ⋯ + X₁₀.",
+          "Expand the square: S² = (X₁² + X₂² + ⋯ + X₁₀²) + 2 × (sum of XᵢXⱼ over all i < j).",
+          "Each Xᵢ² equals 1, so the first part is exactly 10, not random.",
+          "For i ≠ j, Xᵢ and Xⱼ are independent, so XᵢXⱼ is +1 or −1 with probability 1/2 each and has expectation 0.",
+          "By linearity of expectation, E(S²) = 10 + 2 × 0 = 10.",
+          "Small check: with 2 rounds S is 2, 0, 0, −2, and the average of S² is (4 + 0 + 0 + 4) ÷ 4 = 2, equal to the number of rounds. So the answer is 10."
+        ],
+        "ja": [
+          "i 回目の移動量を Xᵢ（+1 か −1、確率はそれぞれ 1/2）とすると S = X₁ + X₂ + ⋯ + X₁₀。",
+          "2 乗を展開：S² =（X₁² + X₂² + ⋯ + X₁₀²）+ 2 ×（i < j となるすべての XᵢXⱼ の和）。",
+          "どの Xᵢ² も 1 なので、第 1 の部分はちょうど 10 で確定しています。",
+          "i ≠ j なら Xᵢ と Xⱼ は独立で、XᵢXⱼ は +1 と −1 をそれぞれ確率 1/2 でとり、期待値は 0。",
+          "期待値の線形性より E(S²) = 10 + 2 × 0 = 10。",
+          "小さい例で確認：2 回なら S は 2、0、0、−2 で、S² の平均は (4 + 0 + 0 + 4) ÷ 4 = 2、回数と一致します。答えは 10。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "10"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "combinatorics-grade11-foundation",
+        "notes": "題型：隨機漫步終點平方的期望（展開平方＋交叉項獨立期望為 0）。掃過 前進|後退|往右|隨機走 全庫無同型；最接近 combinatorics_grade11_foundation_062（同樣 ±1 的公平賭局，但問先到 0 或 5 的機率）。原本此位置的「擲到與前一次同點為止」化簡後是 combinatorics_grade12_foundation_042 的幾何分布期望值，已撤換。"
+      }
     }
   ]
 }
