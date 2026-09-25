@@ -5620,6 +5620,706 @@
         "reference": "logic-grade5-foundation",
         "notes": "有根樹「每個內部點恰有 3 個孩子」的葉子數；掃過「資料夾|樹枝|分枝|樹」與 c:graph_theory 全庫。最接近 logic_grade12_foundation_020（樹的度數和求葉子數），那題用度數總和＝2 ×（點數 − 1）；本題用「每個非根點恰有一個父點」的計數，五年級可做。arithmetic_grade4_foundation_093 是 8×8×8 樹枝葉子的乘法。"
       }
+    },
+    {
+      "id": "logic_grade5_foundation_072",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "backward_induction_track_with_hole",
+      "tags": [
+        "c:game_theory",
+        "m:reverse"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade5",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一條步道畫了 25 格，依序編號 1 到 25，一枚棋子放在第 25 格。甲、乙兩人輪流移動這枚棋子，由甲先動：每次要把棋子往編號小的方向移 1 格、2 格或 3 格。第 5 格是一個水坑，棋子不可以停在第 5 格，但可以越過它。誰把棋子移到第 1 格，誰就獲勝。甲要保證獲勝，第一步應該把棋子移到第幾格？",
+        "zh-Hans": "一条步道画了 25 格，依序编号 1 到 25，一枚棋子放在第 25 格。甲、乙两人轮流移动这枚棋子，由甲先动：每次要把棋子往编号小的方向移 1 格、2 格或 3 格。第 5 格是一个水坑，棋子不可以停在第 5 格，但可以越过它。谁把棋子移到第 1 格，谁就获胜。甲要保证获胜，第一步应该把棋子移到第几格？",
+        "en": "A path has 25 squares numbered 1 to 25, and a token sits on square 25. Players A and B take turns moving the token, A first; each move takes it 1, 2, or 3 squares toward the smaller numbers. Square 5 is a puddle: the token may jump over it but may never stop on it. Whoever moves the token onto square 1 wins. To be sure of winning, which square should A move the token to on the first move?",
+        "ja": "道に 1 から 25 までの番号をつけた 25 マスがあり、25 番のマスにこまが 1 つあります。甲さんと乙さんが交互にこまを動かし、甲さんが先に動かします。1 回に番号の小さい方へ 1 マス、2 マス、3 マスのどれかだけ動かします。5 番のマスは水たまりで、こまを 5 番に止めることはできませんが、飛びこえることはできます。こまを 1 番のマスに動かした人が勝ちです。甲さんが必ず勝つには、最初にこまを何番のマスに動かせばよいですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是第 22 格。",
+        "zh-Hans": "答案是第 22 格。",
+        "en": "The answer is square 22.",
+        "ja": "答えは 22 番のマスです。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "從第 1 格往回推，把「輪到對手時棋子停在這裡，對手就一定會輸」的格子叫做好格。第 1 格就是好格（對手已經輸了）。",
+          "第 2、3、4 格都能一步移到第 1 格，所以不是好格。第 6 格只能移到第 4 格或第 3 格（不能停在第 5 格），兩者都讓對方一步到第 1 格，所以第 6 格是好格。",
+          "第 7、8、9 格都能一步移到第 6 格；第 10 格只能移到第 9、8、7 格，所以第 10 格是好格。之後每隔 4 格出現一個：第 14、18、22 格也是好格，第 23、24、25 格不是。",
+          "甲從第 25 格移 3 格到第 22 格。之後乙移 1、2、3 格，甲就移 3、2、1 格，每一輪合計 4 格，棋子依序停在第 18、14、10、6 格；乙從第 6 格只能移到第 4 或第 3 格，甲再一步移到第 1 格獲勝。所以甲第一步應該移到第 22 格。"
+        ],
+        "zh-Hans": [
+          "从第 1 格往回推，把「轮到对手时棋子停在这里，对手就一定会输」的格子叫做好格。第 1 格就是好格（对手已经输了）。",
+          "第 2、3、4 格都能一步移到第 1 格，所以不是好格。第 6 格只能移到第 4 格或第 3 格（不能停在第 5 格），两者都让对方一步到第 1 格，所以第 6 格是好格。",
+          "第 7、8、9 格都能一步移到第 6 格；第 10 格只能移到第 9、8、7 格，所以第 10 格是好格。之后每隔 4 格出现一个：第 14、18、22 格也是好格，第 23、24、25 格不是。",
+          "甲从第 25 格移 3 格到第 22 格。之后乙移 1、2、3 格，甲就移 3、2、1 格，每一轮合计 4 格，棋子依序停在第 18、14、10、6 格；乙从第 6 格只能移到第 4 或第 3 格，甲再一步移到第 1 格获胜。所以甲第一步应该移到第 22 格。"
+        ],
+        "en": [
+          "Work backward from square 1. Call a square good if the player who must move from it is sure to lose. Square 1 is good (the opponent has already lost).",
+          "Squares 2, 3, and 4 reach square 1 in one move, so they are not good. From square 6 the only moves are to 4 or 3 (square 5 is forbidden), and both let the opponent reach 1, so square 6 is good.",
+          "Squares 7, 8, and 9 can move to 6; square 10 can only move to 9, 8, or 7, so square 10 is good. After that a good square appears every 4 squares: 14, 18, and 22 are good, while 23, 24, and 25 are not.",
+          "A moves 3 squares from 25 to 22. Whenever B then moves 1, 2, or 3, A moves 3, 2, or 1, so each round covers 4 squares and the token stops at 18, 14, 10, and 6. From 6, B can only reach 4 or 3, and A then moves to 1 and wins. So A should move to square 22."
+        ],
+        "ja": [
+          "1 番のマスから逆にたどります。「相手の番でこまがここにあると、相手は必ず負ける」マスを「よいマス」と呼びます。1 番はよいマスです（相手はもう負けています）。",
+          "2、3、4 番は 1 回で 1 番へ行けるので、よいマスではありません。6 番からは 4 番か 3 番にしか動けず（5 番には止まれない）、どちらでも相手が 1 番へ行けるので、6 番はよいマスです。",
+          "7、8、9 番は 1 回で 6 番へ行けます。10 番からは 9、8、7 番にしか行けないので、10 番はよいマスです。その後は 4 マスおきに現れ、14、18、22 番がよいマスで、23、24、25 番はちがいます。",
+          "甲さんは 25 番から 3 マス動かして 22 番に止めます。その後、乙さんが 1、2、3 マス動かしたら甲さんは 3、2、1 マス動かし、毎回 2 人で 4 マス進めて 18、14、10、6 番に止めます。6 番からは乙さんは 4 番か 3 番にしか行けず、甲さんが 1 番に動かして勝ちます。最初は 22 番に動かすべきです。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "22"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade5-foundation",
+        "notes": "有禁止格的倒推（水坑剛好落在原本的關鍵格 5 上，使整串關鍵格從 1,5,9,… 位移成 1,6,10,…）。掃過「棋子|步道|格.{0,6}移|輪流」與 c:game_theory 全庫；games2.py/verify.py 程式驗證必勝格為 1,6,10,14,18,22 且第一步唯一。既有題都是無障礙的「湊固定和」，本題的教學點是障礙物讓關鍵格整體位移，必須從終點重新倒推。"
+      }
+    },
+    {
+      "id": "logic_grade5_foundation_073",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "erase_numbers_parity_game",
+      "tags": [
+        "c:game_theory",
+        "c:logic_deduction",
+        "m:invariant"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade5",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "黑板上寫著 1、2、3、4、5、6、7、8、9 這九個數。甲、乙兩人輪流擦掉黑板上的一個數，由甲先擦，一直擦到黑板上只剩下一個數為止。如果剩下的數是雙數，甲獲勝；如果是單數，乙獲勝。若兩人都採取最佳策略，下列哪一個敘述正確？",
+        "zh-Hans": "黑板上写着 1、2、3、4、5、6、7、8、9 这九个数。甲、乙两人轮流擦掉黑板上的一个数，由甲先擦，一直擦到黑板上只剩下一个数为止。如果剩下的数是双数，甲获胜；如果是单数，乙获胜。若两人都采取最佳策略，下列哪一个叙述正确？",
+        "en": "The nine numbers 1, 2, 3, 4, 5, 6, 7, 8, 9 are written on a board. Players A and B take turns erasing one number, A first, until only one number is left. If the last number is even, A wins; if it is odd, B wins. If both play their best, which statement is correct?",
+        "ja": "黒板に 1、2、3、4、5、6、7、8、9 の 9 個の数が書いてあります。甲さんと乙さんが交互に 1 個ずつ数を消し、甲さんが先に消します。黒板に数が 1 個だけ残るまで続けます。残った数が偶数なら甲さんの勝ち、奇数なら乙さんの勝ちです。2 人とも最善をつくすとき、正しいのはどれですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 B：乙一定能獲勝，只要每次都擦掉雙數。",
+        "zh-Hans": "答案是 B：乙一定能获胜，只要每次都擦掉双数。",
+        "en": "The answer is B: B can always win by erasing an even number each time.",
+        "ja": "答えは B：乙さんは毎回偶数を消せば必ず勝てる です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "一共要擦掉 9 − 1 = 8 個數，甲擦第 1、3、5、7 個，乙擦第 2、4、6、8 個，兩人各擦 4 次。",
+          "黑板上的雙數只有 2、4、6、8 這 4 個。乙只要每次都擦掉一個雙數（如果雙數已經被甲擦光了，就隨便擦一個），4 次就能保證把雙數全部擦掉。",
+          "所以不論甲怎麼擦，最後剩下的一定是單數，乙獲勝。",
+          "甲想讓最後剩下雙數，就得擦掉全部 5 個單數，但他只有 4 次機會，做不到。答案是 B：乙一定能獲勝，只要每次都擦掉雙數。"
+        ],
+        "zh-Hans": [
+          "一共要擦掉 9 − 1 = 8 个数，甲擦第 1、3、5、7 个，乙擦第 2、4、6、8 个，两人各擦 4 次。",
+          "黑板上的双数只有 2、4、6、8 这 4 个。乙只要每次都擦掉一个双数（如果双数已经被甲擦光了，就随便擦一个），4 次就能保证把双数全部擦掉。",
+          "所以不论甲怎么擦，最后剩下的一定是单数，乙获胜。",
+          "甲想让最后剩下双数，就得擦掉全部 5 个单数，但他只有 4 次机会，做不到。答案是 B：乙一定能获胜，只要每次都擦掉双数。"
+        ],
+        "en": [
+          "8 numbers are erased in all (9 − 1 = 8); A erases the 1st, 3rd, 5th, 7th and B the 2nd, 4th, 6th, 8th, so each erases 4 numbers.",
+          "The only even numbers are 2, 4, 6, 8 — four of them. If B always erases an even number (or any number once the evens are gone), B's 4 turns are enough to remove every even number.",
+          "So whatever A does, the last number is odd and B wins.",
+          "For A to leave an even number, A would have to erase all 5 odd numbers, but A has only 4 turns. The answer is B: B can always win by erasing an even number each time."
+        ],
+        "ja": [
+          "消す数は全部で 9 − 1 = 8 個で、甲さんが 1、3、5、7 番目、乙さんが 2、4、6、8 番目を消すので、2 人とも 4 回ずつ消します。",
+          "偶数は 2、4、6、8 の 4 個だけです。乙さんが毎回偶数を 1 個消せば（偶数がもう無ければ何を消してもよい）、4 回で偶数をすべて消せます。",
+          "だから甲さんがどう消しても、最後に残るのは奇数で、乙さんが勝ちます。",
+          "甲さんが偶数を残すには奇数 5 個をすべて消す必要がありますが、甲さんは 4 回しか消せません。答えは B：乙さんは毎回偶数を消せば必ず勝てる、です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "multiple_choice",
+      "options": {
+        "A": {
+          "zh-Hant": "甲一定能獲勝，只要每次都擦掉單數",
+          "zh-Hans": "甲一定能获胜，只要每次都擦掉单数",
+          "en": "A can always win by erasing an odd number each time",
+          "ja": "甲さんは毎回奇数を消せば必ず勝てる"
+        },
+        "B": {
+          "zh-Hant": "乙一定能獲勝，只要每次都擦掉雙數",
+          "zh-Hans": "乙一定能获胜，只要每次都擦掉双数",
+          "en": "B can always win by erasing an even number each time",
+          "ja": "乙さんは毎回偶数を消せば必ず勝てる"
+        },
+        "C": {
+          "zh-Hant": "甲一定能獲勝，只要第一步先擦掉 9",
+          "zh-Hans": "甲一定能获胜，只要第一步先擦掉 9",
+          "en": "A can always win by erasing 9 on the first turn",
+          "ja": "甲さんは最初に 9 を消せば必ず勝てる"
+        },
+        "D": {
+          "zh-Hant": "誰獲勝要看甲第一步擦掉哪一個數",
+          "zh-Hans": "谁获胜要看甲第一步擦掉哪一个数",
+          "en": "The winner depends on which number A erases first",
+          "ja": "どちらが勝つかは甲さんが最初に消す数で決まる"
+        }
+      },
+      "correctAnswer": {
+        "type": "choice",
+        "value": "B"
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade5-foundation",
+        "notes": "輪流擦數、比較「各自能擦幾次」與「某類數有幾個」的資源計數博弈。掃過「擦掉|黑板上寫著|剩下一個數」與 c:game_theory 全庫；verify.py 以 minimax 窮舉確認乙必勝。logic_grade7_foundation_047 是擦數字留最大／最小（要看位置的 minimax），logic_grade9_foundation_004 是擦兩數寫差（不變量），本題的關鍵是乙的 4 次剛好能清光 4 個雙數。"
+      }
+    },
+    {
+      "id": "logic_grade5_foundation_074",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "digit_writing_game_pairing_nine",
+      "tags": [
+        "c:game_theory",
+        "c:factor_multiple",
+        "m:construction"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade5",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "甲、乙兩人合寫一個六位數，由左到右一位一位寫：甲寫第 1、3、5 位，乙寫第 2、4、6 位，兩人輪流寫，每一位只能寫 1 到 9 的數字，寫之前都看得到前面已經寫好的數字。寫完後，如果這個六位數是 9 的倍數，乙獲勝；否則甲獲勝。若兩人都採取最佳策略，下列哪一個敘述正確？",
+        "zh-Hans": "甲、乙两人合写一个六位数，由左到右一位一位写：甲写第 1、3、5 位，乙写第 2、4、6 位，两人轮流写，每一位只能写 1 到 9 的数字，写之前都看得到前面已经写好的数字。写完后，如果这个六位数是 9 的倍数，乙获胜；否则甲获胜。若两人都采取最佳策略，下列哪一个叙述正确？",
+        "en": "A and B write a six-digit number together, one digit at a time from left to right: A writes the 1st, 3rd, and 5th digits and B writes the 2nd, 4th, and 6th, taking turns. Each digit must be one of 1 to 9, and each player sees the digits already written. If the finished number is a multiple of 9, B wins; otherwise A wins. If both play their best, which statement is correct?",
+        "ja": "甲さんと乙さんが 6 けたの数を左から 1 けたずつ交互に書きます。甲さんが 1、3、5 けた目、乙さんが 2、4、6 けた目を書き、どのけたにも 1 から 9 の数字しか書けません。書く前に、それまでに書かれた数字は見えます。できた 6 けたの数が 9 の倍数なら乙さんの勝ち、そうでなければ甲さんの勝ちです。2 人とも最善をつくすとき、正しいのはどれですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 C：乙一定能獲勝，每輪讓兩數和是 9 的倍數。",
+        "zh-Hans": "答案是 C：乙一定能获胜，每轮让两数和是 9 的倍数。",
+        "en": "The answer is C: B can always win by making each pair of digits sum to a multiple of 9.",
+        "ja": "答えは C：乙さんは毎回 2 つの数字の和を 9 の倍数にすれば必ず勝てる です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "一個數是不是 9 的倍數，只要看它的各位數字和是不是 9 的倍數。",
+          "乙的做法：甲寫了數字 a 之後，乙緊接著寫 9 − a；如果甲寫的是 9，乙就寫 9。甲寫 1 到 8 時，9 − a 也在 1 到 8 之間，所以乙一定寫得出來。",
+          "這樣每一輪（甲一位、乙一位）兩個數字的和是 9 或 18，都是 9 的倍數；三輪下來，六個數字的和也是 9 的倍數。",
+          "所以不論甲怎麼寫，這個六位數都是 9 的倍數，乙一定獲勝。答案是 C：乙一定能獲勝，每輪讓兩數和是 9 的倍數。"
+        ],
+        "zh-Hans": [
+          "一个数是不是 9 的倍数，只要看它的各位数字和是不是 9 的倍数。",
+          "乙的做法：甲写了数字 a 之后，乙紧接着写 9 − a；如果甲写的是 9，乙就写 9。甲写 1 到 8 时，9 − a 也在 1 到 8 之间，所以乙一定写得出来。",
+          "这样每一轮（甲一位、乙一位）两个数字的和是 9 或 18，都是 9 的倍数；三轮下来，六个数字的和也是 9 的倍数。",
+          "所以不论甲怎么写，这个六位数都是 9 的倍数，乙一定获胜。答案是 C：乙一定能获胜，每轮让两数和是 9 的倍数。"
+        ],
+        "en": [
+          "A number is a multiple of 9 exactly when its digit sum is a multiple of 9.",
+          "B's plan: right after A writes a digit a, B writes 9 − a; if A writes 9, B writes 9. When a is 1 to 8, 9 − a is also 1 to 8, so B can always do this.",
+          "Then each round (one digit from A, one from B) adds 9 or 18 to the digit sum, a multiple of 9; after three rounds the sum of all six digits is a multiple of 9.",
+          "So whatever A writes, the number is a multiple of 9 and B wins. The answer is C: B can always win by making each pair of digits sum to a multiple of 9."
+        ],
+        "ja": [
+          "ある数が 9 の倍数かどうかは、各けたの数字の和が 9 の倍数かどうかで決まります。",
+          "乙さんのやり方：甲さんが数字 a を書いたら、乙さんはすぐ次に 9 − a を書きます。甲さんが 9 を書いたときは 9 を書きます。a が 1〜8 なら 9 − a も 1〜8 なので、いつでも書けます。",
+          "すると毎回（甲さん 1 けた、乙さん 1 けた）の 2 つの数字の和は 9 か 18 で 9 の倍数になり、3 回で 6 つの数字の和も 9 の倍数になります。",
+          "よって甲さんがどう書いても 6 けたの数は 9 の倍数になり、乙さんが必ず勝ちます。答えは C：乙さんは毎回 2 つの数字の和を 9 の倍数にすれば必ず勝てる、です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "multiple_choice",
+      "options": {
+        "A": {
+          "zh-Hant": "甲一定能獲勝，只要第一位寫 9",
+          "zh-Hans": "甲一定能获胜，只要第一位写 9",
+          "en": "A can always win by writing 9 as the first digit",
+          "ja": "甲さんは 1 けた目に 9 を書けば必ず勝てる"
+        },
+        "B": {
+          "zh-Hant": "甲一定能獲勝，因為甲比乙先寫",
+          "zh-Hans": "甲一定能获胜，因为甲比乙先写",
+          "en": "A can always win because A writes first",
+          "ja": "甲さんは先に書くので必ず勝てる"
+        },
+        "C": {
+          "zh-Hant": "乙一定能獲勝，每輪讓兩數和是 9 的倍數",
+          "zh-Hans": "乙一定能获胜，每轮让两数和是 9 的倍数",
+          "en": "B can always win by making each pair of digits sum to a multiple of 9",
+          "ja": "乙さんは毎回 2 つの数字の和を 9 の倍数にすれば必ず勝てる"
+        },
+        "D": {
+          "zh-Hant": "誰獲勝要看甲寫的數字，雙方都沒把握",
+          "zh-Hans": "谁获胜要看甲写的数字，双方都没把握",
+          "en": "The winner depends on A's digits; neither player can be sure",
+          "ja": "どちらが勝つかは甲さんの数字しだいで、どちらも確実ではない"
+        }
+      },
+      "correctAnswer": {
+        "type": "choice",
+        "value": "C"
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade5-foundation",
+        "notes": "配對策略（每輪湊成 9 的倍數）＋ 9 的倍數判別。掃過「合寫|輪流寫|六位數|9 的倍數」與 c:game_theory 全庫；verify.py 以 minimax 窮舉確認乙必勝。logic_grade9_foundation_055 是輪流填正負號使 |S| 大／小，logic_grade6_foundation_069 是 15 點選卡；本題的關鍵是後手的「補數」配對策略，以及甲寫 9 時要改寫 9 的邊界情況。"
+      }
+    },
+    {
+      "id": "logic_grade5_foundation_075",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "frog_triangular_jumps_circle",
+      "tags": [
+        "c:modular",
+        "c:pattern",
+        "m:enumeration"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade5",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "池塘裡有 7 片荷葉圍成一圈，按順時針方向依序編號 0 到 6。一隻青蛙站在 0 號荷葉上，開始按順時針方向跳：第 1 次往前跳 1 片（到 1 號），第 2 次往前跳 2 片，第 3 次往前跳 3 片，⋯⋯，第 k 次往前跳 k 片，一直跳下去。有幾片荷葉是青蛙永遠不會停在上面的？",
+        "zh-Hans": "池塘里有 7 片荷叶围成一圈，按顺时针方向依序编号 0 到 6。一只青蛙站在 0 号荷叶上，开始按顺时针方向跳：第 1 次往前跳 1 片（到 1 号），第 2 次往前跳 2 片，第 3 次往前跳 3 片，⋯⋯，第 k 次往前跳 k 片，一直跳下去。有几片荷叶是青蛙永远不会停在上面的？",
+        "en": "Seven lily pads form a circle, numbered 0 to 6 clockwise. A frog starts on pad 0 and jumps clockwise: the 1st jump moves 1 pad forward (to pad 1), the 2nd jump 2 pads, the 3rd jump 3 pads, …, the k-th jump k pads, and it keeps going forever. How many pads will the frog never land on?",
+        "ja": "池に 7 まいのはすの葉が輪になってならび、時計回りに 0 から 6 の番号がついています。カエルが 0 番の葉から時計回りにとびます。1 回目は 1 まい先（1 番）へ、2 回目は 2 まい先へ、3 回目は 3 まい先へ、……、k 回目は k まい先へと、ずっととび続けます。カエルが一度も止まらない葉は何まいありますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 3 片。",
+        "zh-Hans": "答案是 3 片。",
+        "en": "The answer is 3 pads.",
+        "ja": "答えは 3 まいです。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "跳完第 k 次時，青蛙一共往前移了 1 + 2 + ⋯ + k 片，停在「這個和除以 7 的餘數」那一號荷葉上。",
+          "依序算 k = 1 到 7：和是 1、3、6、10、15、21、28，除以 7 的餘數是 1、3、6、3、1、0、0。",
+          "第 k + 7 次的和比第 k 次多了 (k + 1) + (k + 2) + ⋯ + (k + 7) = 7 × k + 28，是 7 的倍數，所以停的位置每 7 次重複一輪，永遠只會是 0、1、3、6 號。",
+          "青蛙永遠停不到的是 2、4、5 號，一共 3 片。"
+        ],
+        "zh-Hans": [
+          "跳完第 k 次时，青蛙一共往前移了 1 + 2 + ⋯ + k 片，停在「这个和除以 7 的余数」那一号荷叶上。",
+          "依序算 k = 1 到 7：和是 1、3、6、10、15、21、28，除以 7 的余数是 1、3、6、3、1、0、0。",
+          "第 k + 7 次的和比第 k 次多了 (k + 1) + (k + 2) + ⋯ + (k + 7) = 7 × k + 28，是 7 的倍数，所以停的位置每 7 次重复一轮，永远只会是 0、1、3、6 号。",
+          "青蛙永远停不到的是 2、4、5 号，一共 3 片。"
+        ],
+        "en": [
+          "After the k-th jump the frog has moved 1 + 2 + … + k pads in total, so it sits on the pad whose number is that sum's remainder when divided by 7.",
+          "For k = 1 to 7 the sums are 1, 3, 6, 10, 15, 21, 28, with remainders 1, 3, 6, 3, 1, 0, 0.",
+          "The sum after jump k + 7 exceeds the sum after jump k by (k + 1) + (k + 2) + … + (k + 7) = 7 × k + 28, a multiple of 7, so the landing pads repeat every 7 jumps and are always 0, 1, 3, or 6.",
+          "The frog never lands on pads 2, 4, 5 — 3 pads."
+        ],
+        "ja": [
+          "k 回とんだとき、カエルは合わせて 1 + 2 + … + k まい進んでいて、その和を 7 でわった余りの番号の葉にいます。",
+          "k = 1 から 7 まで順に計算すると、和は 1、3、6、10、15、21、28 で、7 でわった余りは 1、3、6、3、1、0、0 です。",
+          "k + 7 回目の和は k 回目より (k + 1) + (k + 2) + … + (k + 7) = 7 × k + 28 だけ多く、7 の倍数なので、止まる葉は 7 回ごとにくり返し、いつも 0、1、3、6 番のどれかです。",
+          "一度も止まらないのは 2、4、5 番の 3 まいです。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "3"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade5-foundation",
+        "notes": "三角形數除以 7 的餘數循環。掃過「青蛙|跳|荷葉|圍成一圈」與 c:modular 全庫。logic_grade5_foundation_022 是圓圈上固定步長傳球回到起點；本題步長每次加 1，要看 1 + 2 + ⋯ + k 的餘數並證明循環。"
+      }
+    },
+    {
+      "id": "logic_grade5_foundation_076",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "self_describing_four_digit",
+      "tags": [
+        "c:place_value",
+        "c:logic_deduction",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade5",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "有些四位數很特別：它的千位數字等於這個四位數裡數字 0 出現的次數，百位數字等於數字 1 出現的次數，十位數字等於數字 2 出現的次數，個位數字等於數字 3 出現的次數。把所有這樣的四位數加起來，和是多少？",
+        "zh-Hans": "有些四位数很特别：它的千位数字等于这个四位数里数字 0 出现的次数，百位数字等于数字 1 出现的次数，十位数字等于数字 2 出现的次数，个位数字等于数字 3 出现的次数。把所有这样的四位数加起来，和是多少？",
+        "en": "Some four-digit numbers are special: the thousands digit equals how many times the digit 0 appears in the number, the hundreds digit equals how many times 1 appears, the tens digit equals how many times 2 appears, and the ones digit equals how many times 3 appears. What is the sum of all such four-digit numbers?",
+        "ja": "ある 4 けたの数はとくべつで、千の位の数字はその数の中に数字 0 が出てくる回数、百の位は数字 1 の回数、十の位は数字 2 の回数、一の位は数字 3 の回数に等しくなっています。このような 4 けたの数をすべてたすといくつですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 3230。",
+        "zh-Hans": "答案是 3230。",
+        "en": "The answer is 3230.",
+        "ja": "答えは 3230 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "千位數字記錄 0 的個數。千位不能是 0，所以這個數至少有一個 0，千位是 1、2 或 3。",
+          "若千位是 3：有三個 0，這個數是 3000，但它含有一個 3，個位應該是 1，矛盾。",
+          "若千位是 2：後三位恰有兩個 0。這個數含有 2，所以十位不是 0，於是百位、個位都是 0，數是 20□0。十位填 2 時共有兩個 2，符合；填 1 時就有一個 1，但百位是 0，矛盾。得到 2020。",
+          "若千位是 1：後三位恰有一個 0。這個數含有 1，所以百位至少是 1；百位是 1 就有兩個 1，矛盾；百位是 3 就要有三個 1，但後兩位中已有一個 0，也不行。所以百位是 2，後兩位是一個 1 和一個 0；又因為有一個 2，十位是 1、個位是 0，得到 1210（它沒有 3，個位 0 也符合）。",
+          "符合的四位數只有 1210 和 2020，和是 1210 + 2020 = 3230。"
+        ],
+        "zh-Hans": [
+          "千位数字记录 0 的个数。千位不能是 0，所以这个数至少有一个 0，千位是 1、2 或 3。",
+          "若千位是 3：有三个 0，这个数是 3000，但它含有一个 3，个位应该是 1，矛盾。",
+          "若千位是 2：后三位恰有两个 0。这个数含有 2，所以十位不是 0，于是百位、个位都是 0，数是 20□0。十位填 2 时共有两个 2，符合；填 1 时就有一个 1，但百位是 0，矛盾。得到 2020。",
+          "若千位是 1：后三位恰有一个 0。这个数含有 1，所以百位至少是 1；百位是 1 就有两个 1，矛盾；百位是 3 就要有三个 1，但后两位中已有一个 0，也不行。所以百位是 2，后两位是一个 1 和一个 0；又因为有一个 2，十位是 1、个位是 0，得到 1210（它没有 3，个位 0 也符合）。",
+          "符合的四位数只有 1210 和 2020，和是 1210 + 2020 = 3230。"
+        ],
+        "en": [
+          "The thousands digit counts the 0s. It cannot be 0, so the number contains at least one 0 and the thousands digit is 1, 2, or 3.",
+          "If it is 3: there are three 0s, so the number is 3000; but it contains one 3, so the ones digit should be 1 — a contradiction.",
+          "If it is 2: exactly two of the last three digits are 0. The number contains a 2, so the tens digit is not 0; hence the hundreds and ones digits are 0 and the number is 20□0. A tens digit of 2 gives two 2s, which fits; a tens digit of 1 would mean one 1 while the hundreds digit is 0 — a contradiction. This gives 2020.",
+          "If it is 1: exactly one of the last three digits is 0. The number contains a 1, so the hundreds digit is at least 1. If it were 1 there would be two 1s, a contradiction; if it were 3 there would need to be three 1s, but one of the last two digits is 0. So the hundreds digit is 2, and the last two digits are one 1 and one 0; since there is one 2, the tens digit is 1 and the ones digit is 0, giving 1210 (it has no 3, matching the ones digit 0).",
+          "The only such numbers are 1210 and 2020, and their sum is 1210 + 2020 = 3230."
+        ],
+        "ja": [
+          "千の位は 0 の個数を表します。千の位は 0 ではないので、この数には 0 が少なくとも 1 つあり、千の位は 1、2、3 のどれかです。",
+          "千の位が 3 なら 0 が 3 つで、数は 3000 ですが、3 が 1 つあるので一の位は 1 のはずで、矛盾します。",
+          "千の位が 2 なら下 3 けたにちょうど 2 つ 0 があります。2 をふくむので十の位は 0 ではなく、百の位と一の位が 0 で、数は 20□0 です。十の位が 2 なら 2 が 2 つで合います。1 なら 1 が 1 つあるのに百の位が 0 で矛盾します。よって 2020 です。",
+          "千の位が 1 なら下 3 けたにちょうど 1 つ 0 があります。1 をふくむので百の位は 1 以上です。百の位が 1 だと 1 が 2 つで矛盾、3 だと 1 が 3 つ必要ですが下 2 けたの 1 つは 0 なのでだめです。よって百の位は 2 で、下 2 けたは 1 と 0 が 1 つずつ。2 が 1 つなので十の位が 1、一の位が 0 で、1210 です（3 はなく一の位 0 とも合う）。",
+          "あてはまるのは 1210 と 2020 だけで、和は 1210 + 2020 = 3230 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "3230"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 4
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade5-foundation",
+        "notes": "自我描述數的分類討論。掃過「出現的次數|個數.{0,6}數字|自己」與 c:place_value 全庫；verify.py 窮舉 1000–9999 得 1210、2020。number_theory_grade7_foundation_054 是數字和＝數字積的計數，與本題的自我指涉條件不同。"
+      }
+    },
+    {
+      "id": "logic_grade5_foundation_077",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "number_spiral_distance",
+      "tags": [
+        "c:pattern",
+        "c:position_direction",
+        "m:enumeration"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade5",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "在方格紙上從中央開始寫數：1 寫在中央的格子，2 寫在 1 的右邊一格，接著按逆時針方向一圈一圈往外繞著寫：3 在 2 的上面，4、5 從 3 往左寫，6、7 往下寫，8、9、10 往右寫，⋯⋯，每一格寫一個數，緊貼著已經寫好的格子繞圈。從寫 1 的格子走到寫 2026 的格子，如果只能沿著格子上下左右走，最少要走幾格？",
+        "zh-Hans": "在方格纸上从中央开始写数：1 写在中央的格子，2 写在 1 的右边一格，接着按逆时针方向一圈一圈往外绕着写：3 在 2 的上面，4、5 从 3 往左写，6、7 往下写，8、9、10 往右写，⋯⋯，每一格写一个数，紧贴着已经写好的格子绕圈。从写 1 的格子走到写 2026 的格子，如果只能沿着格子上下左右走，最少要走几格？",
+        "en": "Numbers are written on grid paper starting from the center: 1 goes in the center square, 2 in the square to the right of 1, and then the numbers wind outward counterclockwise, one square each, hugging the squares already used: 3 is above 2, 4 and 5 go to the left from 3, 6 and 7 go down, 8, 9, 10 go to the right, and so on. Moving only up, down, left, or right one square at a time, what is the fewest number of steps from the square with 1 to the square with 2026?",
+        "ja": "方眼紙の中央から数を書きます。1 を中央のマスに、2 を 1 の右どなりに書き、そこから反時計回りにうずまき状に外へ書いていきます。3 は 2 の上、4、5 は 3 から左へ、6、7 は下へ、8、9、10 は右へ、……と、書いたマスにそって 1 マスに 1 つずつ書きます。上下左右にだけ 1 マスずつ動くとき、1 のマスから 2026 のマスまで少なくとも何マス動けばよいですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 45 格。",
+        "zh-Hans": "答案是 45 格。",
+        "en": "The answer is 45 steps.",
+        "ja": "答えは 45 マスです。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "每繞完一圈，寫好的格子會拼成一個正方形：寫到 9 時是 3 × 3，寫到 25 時是 5 × 5，寫到 49 時是 7 × 7，而且 9、25、49 這些單數的平方都寫在正方形的右下角。",
+          "右下角的位置依序是：9 在 1 的右 1 格、下 1 格；25 在右 2 格、下 2 格；49 在右 3 格、下 3 格。一般來說，(2m + 1) × (2m + 1) 寫在 1 的右邊 m 格、下面 m 格。",
+          "2025 = 45 × 45，而 45 = 2 × 22 + 1，所以 2025 寫在 1 的右邊 22 格、下面 22 格。",
+          "寫完 2025 之後要開始新的一圈，就像 10 寫在 9 的右邊一樣，2026 寫在 2025 的右邊一格，也就是 1 的右邊 23 格、下面 22 格。",
+          "最少要走 23 + 22 = 45 格。"
+        ],
+        "zh-Hans": [
+          "每绕完一圈，写好的格子会拼成一个正方形：写到 9 时是 3 × 3，写到 25 时是 5 × 5，写到 49 时是 7 × 7，而且 9、25、49 这些单数的平方都写在正方形的右下角。",
+          "右下角的位置依序是：9 在 1 的右 1 格、下 1 格；25 在右 2 格、下 2 格；49 在右 3 格、下 3 格。一般来说，(2m + 1) × (2m + 1) 写在 1 的右边 m 格、下面 m 格。",
+          "2025 = 45 × 45，而 45 = 2 × 22 + 1，所以 2025 写在 1 的右边 22 格、下面 22 格。",
+          "写完 2025 之后要开始新的一圈，就像 10 写在 9 的右边一样，2026 写在 2025 的右边一格，也就是 1 的右边 23 格、下面 22 格。",
+          "最少要走 23 + 22 = 45 格。"
+        ],
+        "en": [
+          "Each completed lap fills a square: through 9 it is 3 × 3, through 25 it is 5 × 5, through 49 it is 7 × 7, and the odd squares 9, 25, 49 are always in the bottom-right corner.",
+          "Those corners are: 9 is 1 right and 1 down from 1; 25 is 2 right and 2 down; 49 is 3 right and 3 down. In general, (2m + 1) × (2m + 1) is m squares right and m squares down from 1.",
+          "2025 = 45 × 45 and 45 = 2 × 22 + 1, so 2025 is 22 right and 22 down from 1.",
+          "After 2025 a new lap begins; just as 10 is to the right of 9, 2026 is one square to the right of 2025, i.e. 23 right and 22 down from 1.",
+          "The fewest steps are 23 + 22 = 45."
+        ],
+        "ja": [
+          "1 周書き終えるごとに、書いたマスは正方形になります。9 までで 3 × 3、25 までで 5 × 5、49 までで 7 × 7 で、9、25、49 のような奇数の 2 乗はいつも正方形の右下のすみにあります。",
+          "その右下のすみは、9 が 1 から右へ 1、下へ 1、25 が右へ 2、下へ 2、49 が右へ 3、下へ 3 のところです。一般に (2m + 1) × (2m + 1) は 1 から右へ m、下へ m のマスです。",
+          "2025 = 45 × 45 で 45 = 2 × 22 + 1 なので、2025 は 1 から右へ 22、下へ 22 のマスです。",
+          "2025 のあとは新しい 1 周が始まり、10 が 9 の右にあるのと同じように、2026 は 2025 の右どなり、つまり 1 から右へ 23、下へ 22 のマスです。",
+          "少なくとも 23 + 22 = 45 マス動きます。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "45"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade5-foundation",
+        "notes": "數字螺旋中單數平方落在對角線角落的規律。掃過「螺旋|繞圈|逆時針.{0,10}寫」與 c:pattern、c:position_direction 全庫；verify.py 以程式生成螺旋確認 2026 在 (23, −22)。geometry_grade3_foundation_071 是機器人依指令走後回原點，與本題的數字排列規律不同。"
+      }
+    },
+    {
+      "id": "logic_grade5_foundation_078",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "brothers_sisters_counts",
+      "tags": [
+        "c:linear_eq",
+        "c:logic_deduction",
+        "m:direct"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade5",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一個家庭有好幾個孩子。每個男孩的兄弟人數和姊妹人數一樣多；每個女孩的兄弟人數是她姊妹人數的 2 倍。（兄弟、姊妹都不算自己。）這個家庭一共有幾個孩子？",
+        "zh-Hans": "一个家庭有好几个孩子。每个男孩的兄弟人数和姐妹人数一样多；每个女孩的兄弟人数是她姐妹人数的 2 倍。（兄弟、姐妹都不算自己。）这个家庭一共有几个孩子？",
+        "en": "A family has several children. Each boy has as many brothers as sisters. Each girl has twice as many brothers as sisters. (Brothers and sisters do not include oneself.) How many children are in the family?",
+        "ja": "ある家族には何人かの子どもがいます。どの男の子も、兄弟の人数と姉妹の人数が同じです。どの女の子も、兄弟の人数が姉妹の人数の 2 倍です。（兄弟・姉妹に自分はふくめません。）この家族の子どもは全部で何人ですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 7 個孩子。",
+        "zh-Hans": "答案是 7 个孩子。",
+        "en": "The answer is 7 children.",
+        "ja": "答えは 7 人です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "設男孩有「男」人，女孩有「女」人。一個男孩的兄弟是另外的男孩，有 男 − 1 人；他的姊妹是全部女孩，有 女 人。所以 男 − 1 = 女，男孩比女孩多 1 人。",
+          "一個女孩的兄弟是全部男孩，有 男 人；她的姊妹有 女 − 1 人。所以 男 = 2 × (女 − 1)。",
+          "把 男 = 女 + 1 代入：女 + 1 = 2 × 女 − 2，得到 女 = 3，男 = 4。",
+          "驗算：每個男孩有 3 個兄弟、3 個姊妹；每個女孩有 4 個兄弟、2 個姊妹，4 是 2 的 2 倍。一共 4 + 3 = 7 個孩子。"
+        ],
+        "zh-Hans": [
+          "设男孩有「男」人，女孩有「女」人。一个男孩的兄弟是另外的男孩，有 男 − 1 人；他的姐妹是全部女孩，有 女 人。所以 男 − 1 = 女，男孩比女孩多 1 人。",
+          "一个女孩的兄弟是全部男孩，有 男 人；她的姐妹有 女 − 1 人。所以 男 = 2 × (女 − 1)。",
+          "把 男 = 女 + 1 代入：女 + 1 = 2 × 女 − 2，得到 女 = 3，男 = 4。",
+          "验算：每个男孩有 3 个兄弟、3 个姐妹；每个女孩有 4 个兄弟、2 个姐妹，4 是 2 的 2 倍。一共 4 + 3 = 7 个孩子。"
+        ],
+        "en": [
+          "Say there are b boys and g girls. A boy's brothers are the other boys, b − 1 of them, and his sisters are all g girls. So b − 1 = g: there is one more boy than girls.",
+          "A girl's brothers are all b boys and her sisters number g − 1. So b = 2 × (g − 1).",
+          "Substituting b = g + 1: g + 1 = 2 × g − 2, so g = 3 and b = 4.",
+          "Check: each boy has 3 brothers and 3 sisters; each girl has 4 brothers and 2 sisters, and 4 is twice 2. There are 4 + 3 = 7 children."
+        ],
+        "ja": [
+          "男の子を b 人、女の子を g 人とします。男の子 1 人にとって兄弟はほかの男の子で b − 1 人、姉妹は女の子全員で g 人なので、b − 1 = g、男の子は女の子より 1 人多いです。",
+          "女の子 1 人にとって兄弟は男の子全員で b 人、姉妹は g − 1 人なので、b = 2 × (g − 1) です。",
+          "b = g + 1 を入れると g + 1 = 2 × g − 2 で、g = 3、b = 4 です。",
+          "たしかめ：男の子は兄弟 3 人・姉妹 3 人、女の子は兄弟 4 人・姉妹 2 人で、4 は 2 の 2 倍です。子どもは 4 + 3 = 7 人です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "7"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade5-foundation",
+        "notes": "「不算自己」造成的減 1 陷阱。掃過「兄弟|姊妹|姐妹|男孩.{0,10}女孩」與 c:linear_eq 全庫，未見同型題；logic_grade4_foundation_035 是三兄弟年齡和差。"
+      }
+    },
+    {
+      "id": "logic_grade5_foundation_079",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "chocolate_cut_with_stacking",
+      "tags": [
+        "c:logic_deduction",
+        "c:exponent",
+        "m:estimate_bound",
+        "m:construction"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade5",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一塊巧克力有 7 × 7 共 49 個小格。每一刀都沿著一條格線筆直切下去；切開後的巧克力塊可以隨意移動、轉向，也可以疊起來或排在一起，讓同一刀同時切過好幾塊（每一刀仍然是一條直線）。要把整塊巧克力切成 49 個單獨的小格，最少要切幾刀？",
+        "zh-Hans": "一块巧克力有 7 × 7 共 49 个小格。每一刀都沿着一条格线笔直切下去；切开后的巧克力块可以随意移动、转向，也可以叠起来或排在一起，让同一刀同时切过好几块（每一刀仍然是一条直线）。要把整块巧克力切成 49 个单独的小格，最少要切几刀？",
+        "en": "A chocolate bar has 7 × 7 = 49 small squares. Each cut goes straight along a grid line. After cutting, pieces may be moved, turned, stacked, or lined up so that one cut passes through several pieces at once (each cut is still one straight line). What is the fewest number of cuts needed to separate the bar into 49 single squares?",
+        "ja": "板チョコが 7 × 7 の 49 マスに分かれています。1 回の切り方は、みぞにそってまっすぐ切ることです。切った後のかけらは自由に動かしたり向きを変えたり、重ねたりならべたりして、1 回で何まいもいっしょに切ってかまいません（1 回の切り方はやはり 1 本の直線です）。49 個のばらばらのマスにするには、少なくとも何回切ればよいですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 6 刀。",
+        "zh-Hans": "答案是 6 刀。",
+        "en": "The answer is 6 cuts.",
+        "ja": "答えは 6 回です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "每一刀最多把每一塊巧克力切成 2 塊，所以切一刀之後，塊數最多變成原來的 2 倍。",
+          "從 1 塊開始，切 5 刀後最多只有 2 × 2 × 2 × 2 × 2 = 32 塊，不到 49 塊，所以至少要切 6 刀。",
+          "6 刀做得到：先直著切 3 刀。第 1 刀把 7 行分成 4 行和 3 行；把兩塊並排，第 2 刀切成寬 2、2、2、1 行的塊；再把寬 2 行的塊並排，第 3 刀全部切成寬 1 行的長條，得到 7 條。",
+          "再把 7 條長條轉向並排，同樣用 3 刀橫著切，每條都切成 7 個小格。一共 3 + 3 = 6 刀，所以最少是 6 刀。"
+        ],
+        "zh-Hans": [
+          "每一刀最多把每一块巧克力切成 2 块，所以切一刀之后，块数最多变成原来的 2 倍。",
+          "从 1 块开始，切 5 刀后最多只有 2 × 2 × 2 × 2 × 2 = 32 块，不到 49 块，所以至少要切 6 刀。",
+          "6 刀做得到：先直着切 3 刀。第 1 刀把 7 行分成 4 行和 3 行；把两块并排，第 2 刀切成宽 2、2、2、1 行的块；再把宽 2 行的块并排，第 3 刀全部切成宽 1 行的长条，得到 7 条。",
+          "再把 7 条长条转向并排，同样用 3 刀横着切，每条都切成 7 个小格。一共 3 + 3 = 6 刀，所以最少是 6 刀。"
+        ],
+        "en": [
+          "Each cut splits each piece into at most 2 pieces, so one cut at most doubles the number of pieces.",
+          "Starting from 1 piece, after 5 cuts there are at most 2 × 2 × 2 × 2 × 2 = 32 pieces, fewer than 49, so at least 6 cuts are needed.",
+          "6 cuts suffice: first make 3 cuts in one direction. Cut 1 splits the 7 columns into 4 and 3; lining the two pieces up, cut 2 gives pieces 2, 2, 2, and 1 columns wide; lining up the 2-wide pieces, cut 3 makes every strip 1 column wide — 7 strips.",
+          "Then turn the 7 strips and line them up, and 3 cuts the other way split each strip into 7 squares the same way. That is 3 + 3 = 6 cuts, so the fewest is 6."
+        ],
+        "ja": [
+          "1 回切ると、どのかけらも多くて 2 つに分かれるので、かけらの数は多くても 2 倍にしかなりません。",
+          "1 まいから始めて 5 回切っても、多くて 2 × 2 × 2 × 2 × 2 = 32 個で 49 個に足りないので、少なくとも 6 回必要です。",
+          "6 回でできます。まずたてに 3 回切ります。1 回目で 7 列を 4 列と 3 列に分け、2 つをならべて 2 回目で 2、2、2、1 列はばのかけらにし、2 列はばのかけらをならべて 3 回目ですべて 1 列はばにすると、7 本の細長いかけらができます。",
+          "次に 7 本の向きを変えてならべ、同じように横に 3 回切ると、どれも 7 マスに分かれます。合わせて 3 + 3 = 6 回なので、最少は 6 回です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "6"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade5-foundation",
+        "notes": "可疊切時，每刀塊數至多加倍 → 2⁵ < 49 ≤ 2⁶。掃過「疊起來|切成.{0,10}小|巧克力|掰」與 c:logic_deduction 全庫。logic_grade10_foundation_023（掰巧克力）、logic_grade10_foundation_032（撕郵票）、logic_grade7_foundation_031（切蛋糕）都明訂「不可疊起來」，答案是固定的 n − 1 或最少刀數；本題刻意允許疊切，教學點變成「每刀最多加倍」的界限與構造。"
+      }
+    },
+    {
+      "id": "logic_grade5_foundation_080",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "flip_exactly_three_parity",
+      "tags": [
+        "c:logic_deduction",
+        "m:invariant",
+        "m:construction"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade5",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "桌上有 8 張卡片，全部背面朝上。每一次操作必須剛好翻動其中 3 張卡片（背面朝上的翻成正面朝上，正面朝上的翻成背面朝上）。要讓 8 張卡片全部正面朝上，最少要操作幾次？",
+        "zh-Hans": "桌上有 8 张卡片，全部背面朝上。每一次操作必须刚好翻动其中 3 张卡片（背面朝上的翻成正面朝上，正面朝上的翻成背面朝上）。要让 8 张卡片全部正面朝上，最少要操作几次？",
+        "en": "Eight cards lie on a table, all face down. Each move must turn over exactly 3 of the cards (face-down becomes face-up and face-up becomes face-down). What is the fewest number of moves needed to make all 8 cards face up?",
+        "ja": "テーブルに 8 まいのカードがあり、すべてうら向きです。1 回の操作では、ちょうど 3 まいのカードをひっくり返さなければなりません（うら向きは表向きに、表向きはうら向きになります）。8 まいすべてを表向きにするには、少なくとも何回操作が必要ですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 4 次。",
+        "zh-Hans": "答案是 4 次。",
+        "en": "The answer is 4 moves.",
+        "ja": "答えは 4 回です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "每張卡片最後要正面朝上，它必須被翻奇數次。8 個奇數加起來是雙數，所以所有卡片被翻的次數加起來是雙數。",
+          "每次操作翻 3 張，操作 m 次一共翻了 3 × m 張次。3 × m 要是雙數，m 就必須是雙數；又至少要翻 8 張次，3 × m 至少是 8，m 至少是 3。所以 m 至少是 4。",
+          "4 次做得到：把卡片編號 1 到 8，依序翻 {1, 7, 8}、{2, 7, 8}、{3, 7, 8}、{4, 5, 6}。卡片 1 到 6 各被翻 1 次，卡片 7 和 8 各被翻 3 次，都是奇數次，全部正面朝上。",
+          "所以最少要操作 4 次。"
+        ],
+        "zh-Hans": [
+          "每张卡片最后要正面朝上，它必须被翻奇数次。8 个奇数加起来是双数，所以所有卡片被翻的次数加起来是双数。",
+          "每次操作翻 3 张，操作 m 次一共翻了 3 × m 张次。3 × m 要是双数，m 就必须是双数；又至少要翻 8 张次，3 × m 至少是 8，m 至少是 3。所以 m 至少是 4。",
+          "4 次做得到：把卡片编号 1 到 8，依序翻 {1, 7, 8}、{2, 7, 8}、{3, 7, 8}、{4, 5, 6}。卡片 1 到 6 各被翻 1 次，卡片 7 和 8 各被翻 3 次，都是奇数次，全部正面朝上。",
+          "所以最少要操作 4 次。"
+        ],
+        "en": [
+          "Each card must end face up, so it must be turned an odd number of times. Eight odd numbers add up to an even number, so the total number of turns is even.",
+          "Each move turns 3 cards, so m moves give 3 × m turns. For 3 × m to be even, m must be even; also 3 × m must be at least 8, so m is at least 3. Hence m is at least 4.",
+          "4 moves work: number the cards 1 to 8 and turn {1, 7, 8}, {2, 7, 8}, {3, 7, 8}, {4, 5, 6}. Cards 1 to 6 are turned once and cards 7 and 8 three times — all odd — so all are face up.",
+          "So the fewest is 4 moves."
+        ],
+        "ja": [
+          "どのカードも最後に表向きになるには、奇数回ひっくり返す必要があります。奇数 8 つの和は偶数なので、ひっくり返した回数の合計は偶数です。",
+          "1 回に 3 まいなので、m 回で合計 3 × m まい回です。3 × m が偶数になるには m が偶数でなければならず、また 3 × m は 8 以上なので m は 3 以上です。よって m は少なくとも 4 です。",
+          "4 回でできます。カードに 1〜8 の番号をつけ、{1, 7, 8}、{2, 7, 8}、{3, 7, 8}、{4, 5, 6} の順にひっくり返すと、1〜6 は 1 回、7 と 8 は 3 回で、どれも奇数回なので全部表向きになります。",
+          "したがって最少は 4 回です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "4"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade5-foundation",
+        "notes": "奇偶性下界（總翻動數須為雙數）＋構造。掃過「翻|正面朝上|背面朝上|每次.{0,8}翻」與 c:logic_deduction 全庫；verify.py 以 BFS 確認最少 4 次。logic_grade6_foundation_017 是整行整列翻硬幣能否只剩一枚反面，logic_grade10_foundation_021 是點燈；本題的關鍵是 8 張時單看 3m ≥ 8 會誤答 3，要再用奇偶把 3 推到 4。"
+      }
     }
   ]
 }

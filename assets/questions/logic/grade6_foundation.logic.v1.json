@@ -6816,6 +6816,372 @@
         "reference": "logic-grade6-foundation",
         "notes": "2-正則二部圖 ↔ 補圖是完美配對（一一對應）；掃過「跳舞|舞伴|配對|握手」與 c:graph_theory 全庫。最接近 combinatorics_grade8_foundation_032（男女全部握手求人數）與 combinatorics_grade8_foundation_023（8 人兩兩配對方式），本題的關鍵是看「沒跳舞的配對」這個補集轉換。"
       }
+    },
+    {
+      "id": "logic_grade6_foundation_084",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "discard_and_split_parity_game",
+      "tags": [
+        "c:game_theory",
+        "m:invariant",
+        "m:enumeration"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade6",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "桌上有兩堆硬幣，一堆 6 枚、一堆 10 枚。甲、乙兩人輪流動作，由甲先：輪到的人要先選一堆整堆拿走，再把剩下的那一堆分成兩堆（每堆至少 1 枚，兩堆不必一樣多）。輪到的人如果沒辦法這樣做（兩堆都只有 1 枚），就輸了。甲的第一步有很多種走法，其中能保證甲獲勝的有幾種？（留下哪一堆來分算不同的走法；分成的兩堆只看各有幾枚，不計順序，例如把 6 分成 1 和 5 與分成 5 和 1 算同一種。）",
+        "zh-Hans": "桌上有两堆硬币，一堆 6 枚、一堆 10 枚。甲、乙两人轮流动作，由甲先：轮到的人要先选一堆整堆拿走，再把剩下的那一堆分成两堆（每堆至少 1 枚，两堆不必一样多）。轮到的人如果没办法这样做（两堆都只有 1 枚），就输了。甲的第一步有很多种走法，其中能保证甲获胜的有几种？（留下哪一堆来分算不同的走法；分成的两堆只看各有几枚，不计顺序，例如把 6 分成 1 和 5 与分成 5 和 1 算同一种。）",
+        "en": "There are two piles of coins, one with 6 and one with 10. Players A and B take turns, A first: on a turn, a player removes one whole pile and then splits the other pile into two piles (each with at least 1 coin; they need not be equal). A player who cannot do this (both piles have only 1 coin) loses. A has many possible first moves. How many of them guarantee that A wins? (Keeping a different pile to split counts as a different move; a split is described only by the two pile sizes, in any order — splitting 6 into 1 and 5 is the same as 5 and 1.)",
+        "ja": "テーブルに硬貨の山が 2 つあり、6 まいと 10 まいです。甲さんと乙さんが交互に行い、甲さんが先です。自分の番では、まず一方の山をまるごと取りのぞき、残った山を 2 つの山に分けます（どちらも 1 まい以上、同じ数でなくてよい）。これができない（2 つの山がどちらも 1 まい）人の負けです。甲さんの 1 手目には何通りもありますが、必ず勝てる手は何通りですか。（どちらの山を残して分けるかがちがえば別の手とし、分け方は 2 つの山のまい数の組だけを考え、6 を 1 と 5 に分けるのと 5 と 1 に分けるのは同じとします。）"
+      },
+      "answer": {
+        "zh-Hant": "答案是 5 種。",
+        "zh-Hans": "答案是 5 种。",
+        "en": "The answer is 5 moves.",
+        "ja": "答えは 5 通りです。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "關鍵：輪到某人時，如果兩堆都是單數枚，他就會輸。因為他留下的那一堆是單數，單數分成兩堆一定是一堆單數、一堆雙數，對手面對的兩堆中就有雙數。",
+          "反過來，只要兩堆中有一堆是雙數，輪到的人就拿走另一堆，把雙數那一堆分成兩個單數（例如 1 和「雙數 − 1」），讓對手面對兩個單數。雙數至少是 2，一定分得出來。",
+          "這樣一直做下去，對手每次都面對兩個單數，枚數越來越少，最後他面對 1 枚和 1 枚而無法動作。所以甲第一步必須讓乙面對兩個單數；讓乙面對雙數的走法，乙就能用同樣方法反過來獲勝。",
+          "拿走 6 枚那堆、分 10 枚：1 和 9、3 和 7、5 和 5，共 3 種；拿走 10 枚那堆、分 6 枚：1 和 5、3 和 3，共 2 種。",
+          "一共 3 + 2 = 5 種必勝走法。"
+        ],
+        "zh-Hans": [
+          "关键：轮到某人时，如果两堆都是单数枚，他就会输。因为他留下的那一堆是单数，单数分成两堆一定是一堆单数、一堆双数，对手面对的两堆中就有双数。",
+          "反过来，只要两堆中有一堆是双数，轮到的人就拿走另一堆，把双数那一堆分成两个单数（例如 1 和「双数 − 1」），让对手面对两个单数。双数至少是 2，一定分得出来。",
+          "这样一直做下去，对手每次都面对两个单数，枚数越来越少，最后他面对 1 枚和 1 枚而无法动作。所以甲第一步必须让乙面对两个单数；让乙面对双数的走法，乙就能用同样方法反过来获胜。",
+          "拿走 6 枚那堆、分 10 枚：1 和 9、3 和 7、5 和 5，共 3 种；拿走 10 枚那堆、分 6 枚：1 和 5、3 和 3，共 2 种。",
+          "一共 3 + 2 = 5 种必胜走法。"
+        ],
+        "en": [
+          "Key fact: a player who faces two odd piles loses. The pile they keep is odd, and an odd pile always splits into one odd and one even pile, so the opponent then faces an even pile.",
+          "Conversely, if one pile is even, the player to move removes the other pile and splits the even one into two odd piles (for example 1 and \"even − 1\"), so the opponent faces two odd piles. An even pile has at least 2 coins, so this is always possible.",
+          "Repeating this, the opponent always faces two odd piles with fewer and fewer coins, until they face 1 and 1 and cannot move. So A's first move must leave B two odd piles; any move leaving an even pile lets B win the same way.",
+          "Removing the 6-pile and splitting 10: 1 and 9, 3 and 7, 5 and 5 — 3 moves. Removing the 10-pile and splitting 6: 1 and 5, 3 and 3 — 2 moves.",
+          "In total 3 + 2 = 5 winning moves."
+        ],
+        "ja": [
+          "ポイント：自分の番で 2 つの山がどちらも奇数まいなら、その人は負けます。残す山は奇数で、奇数を 2 つに分けると必ず奇数と偶数になり、相手の山に偶数ができるからです。",
+          "逆に、どちらかの山が偶数なら、もう一方を取りのぞいて偶数の山を 2 つの奇数（たとえば 1 と「偶数 − 1」）に分け、相手に奇数 2 つを回せます。偶数は 2 以上なので必ず分けられます。",
+          "これをくり返すと、相手はいつも奇数 2 つに直面し、まい数はへっていき、最後は 1 まいと 1 まいで動けなくなります。だから甲さんは 1 手目で乙さんに奇数 2 つを回す必要があり、偶数を残す手だと乙さんに同じ方法で勝たれます。",
+          "6 まいの山を取りのぞいて 10 を分けると 1 と 9、3 と 7、5 と 5 の 3 通り、10 まいの山を取りのぞいて 6 を分けると 1 と 5、3 と 3 の 2 通りです。",
+          "合わせて 3 + 2 = 5 通りです。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "5"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade6-foundation",
+        "notes": "「丟一堆、分另一堆」遊戲：必敗局面＝兩堆皆單數（奇偶不變量）。掃過「分成兩堆|整堆拿走|兩堆」與 c:game_theory 全庫；verify6.py 以遞迴驗證 1–29 內「兩堆皆單數 ⇔ 必敗」，並列出甲的 5 種必勝第一步。logic_grade10_foundation_055 是把一堆分成不等的兩堆（不丟堆），logic_grade10_foundation_043 是掰巧克力總步數固定；本題靠奇偶判斷局面，再數必勝走法。"
+      }
+    },
+    {
+      "id": "logic_grade6_foundation_085",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "light_counter_total_toggles",
+      "tags": [
+        "c:number_base",
+        "m:enumeration"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade6",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "牆上有一排 7 盞燈當作計數器，一開始全部是暗的。每按一次按鈕，最右邊那盞燈就切換一次（暗變亮，或亮變暗）；而且任何一盞燈只要從亮變暗，它左邊相鄰的那盞燈就會跟著切換一次（這又可能讓更左邊的燈切換）。小安一共按了 100 次按鈕。這段期間，7 盞燈一共切換了幾次？",
+        "zh-Hans": "墙上有一排 7 盏灯当作计数器，一开始全部是暗的。每按一次按钮，最右边那盏灯就切换一次（暗变亮，或亮变暗）；而且任何一盏灯只要从亮变暗，它左边相邻的那盏灯就会跟着切换一次（这又可能让更左边的灯切换）。小安一共按了 100 次按钮。这段期间，7 盏灯一共切换了几次？",
+        "en": "A row of 7 lights on a wall works as a counter; at first all are off. Each press of a button switches the rightmost light (off to on, or on to off), and whenever any light switches from on to off, the light immediately to its left switches once too (which may in turn switch lights further left). An presses the button 100 times. How many switches did the 7 lights make in total during this time?",
+        "ja": "かべに 7 こ一列にならんだ電球が数を数える装置になっていて、はじめはすべて消えています。ボタンを 1 回おすと、いちばん右の電球が 1 回切りかわります（消→点、または点→消）。また、どの電球でも点→消に変わると、そのすぐ左の電球も 1 回切りかわります（それがさらに左の電球を切りかえることもあります）。アンさんはボタンを 100 回おしました。その間に 7 この電球は合わせて何回切りかわりましたか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 197 次。",
+        "zh-Hans": "答案是 197 次。",
+        "en": "The answer is 197 switches.",
+        "ja": "答えは 197 回です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "最右邊的燈每按一次就切換一次，共切換 100 次。它從暗開始，第 2、4、6、⋯ 次切換是「亮變暗」，共 100 ÷ 2 = 50 次，所以右邊數來第 2 盞燈切換了 50 次。",
+          "同樣地，第 2 盞燈切換 50 次，其中 25 次是亮變暗，所以第 3 盞切換 25 次；第 3 盞切換 25 次，第 2、4、⋯、24 次是亮變暗，共 12 次，所以第 4 盞切換 12 次。",
+          "接著第 5 盞切換 6 次，第 6 盞切換 3 次，第 7 盞切換 1 次（3 次中只有第 2 次是亮變暗）。",
+          "一共切換 100 + 50 + 25 + 12 + 6 + 3 + 1 = 197 次。",
+          "（這排燈其實是用二進位在計數：亮代表 1、暗代表 0，按 100 次後由左到右顯示 1100100，正好是 100 的二進位寫法。）"
+        ],
+        "zh-Hans": [
+          "最右边的灯每按一次就切换一次，共切换 100 次。它从暗开始，第 2、4、6、⋯ 次切换是「亮变暗」，共 100 ÷ 2 = 50 次，所以右边数来第 2 盏灯切换了 50 次。",
+          "同样地，第 2 盏灯切换 50 次，其中 25 次是亮变暗，所以第 3 盏切换 25 次；第 3 盏切换 25 次，第 2、4、⋯、24 次是亮变暗，共 12 次，所以第 4 盏切换 12 次。",
+          "接着第 5 盏切换 6 次，第 6 盏切换 3 次，第 7 盏切换 1 次（3 次中只有第 2 次是亮变暗）。",
+          "一共切换 100 + 50 + 25 + 12 + 6 + 3 + 1 = 197 次。",
+          "（这排灯其实是用二进位在计数：亮代表 1、暗代表 0，按 100 次后由左到右显示 1100100，正好是 100 的二进位写法。）"
+        ],
+        "en": [
+          "The rightmost light switches on every press, 100 times. Starting from off, its 2nd, 4th, 6th, … switches are on-to-off, 100 ÷ 2 = 50 of them, so the 2nd light from the right switches 50 times.",
+          "Likewise the 2nd light switches 50 times, 25 of them on-to-off, so the 3rd light switches 25 times; of the 3rd light's 25 switches, the 2nd, 4th, …, 24th are on-to-off, 12 in all, so the 4th light switches 12 times.",
+          "Then the 5th light switches 6 times, the 6th 3 times, and the 7th once (only the 2nd of 3 switches is on-to-off).",
+          "In total 100 + 50 + 25 + 12 + 6 + 3 + 1 = 197 switches.",
+          "(The lights are really counting in binary: on means 1 and off means 0, and after 100 presses they read 1100100 from left to right, which is 100 in binary.)"
+        ],
+        "ja": [
+          "いちばん右の電球はおすたびに切りかわり、100 回切りかわります。消えた状態から始まるので、2、4、6、… 回目が点→消で、100 ÷ 2 = 50 回、だから右から 2 番目の電球は 50 回切りかわります。",
+          "同じように 2 番目は 50 回のうち 25 回が点→消なので 3 番目は 25 回、3 番目の 25 回のうち 2、4、…、24 回目の 12 回が点→消なので 4 番目は 12 回切りかわります。",
+          "続けて 5 番目は 6 回、6 番目は 3 回、7 番目は 1 回です（3 回のうち点→消は 2 回目だけ）。",
+          "合わせて 100 + 50 + 25 + 12 + 6 + 3 + 1 = 197 回です。",
+          "（この電球は 2 進法で数えています。点が 1、消が 0 で、100 回おした後は左から 1100100 となり、100 の 2 進法の書き方になっています。）"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "197"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade6-foundation",
+        "notes": "二進位計數器的總切換次數＝100 + 50 + 25 + ⋯（逐位向下取整相加）。掃過「計數器|燈.{0,10}(亮|暗)|切換|二進位」與 c:number_base 全庫；verify6.py 模擬 100 次得 197。number_theory_grade8_foundation_050 是七進位計數器按 2026 次顯示什麼（問狀態），number_theory_grade12_foundation_041 是 1 到 63 二進位中 1 的總數；本題問的是「變化次數」，要看出每一位是前一位切換次數的一半（捨去）。"
+      }
+    },
+    {
+      "id": "logic_grade6_foundation_086",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "spreadsheet_column_letters",
+      "tags": [
+        "c:number_base",
+        "m:bijection"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade6",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "試算表的欄位用英文字母命名：第 1 到第 26 欄依序是 A、B、⋯、Z；第 27 欄起改用兩個字母，依序是 AA、AB、⋯、AZ，接著 BA、BB、⋯、BZ，再來 CA、CB、⋯，依此類推。欄名是 CV 的那一欄是第幾欄？",
+        "zh-Hans": "试算表的栏位用英文字母命名：第 1 到第 26 栏依序是 A、B、⋯、Z；第 27 栏起改用两个字母，依序是 AA、AB、⋯、AZ，接着 BA、BB、⋯、BZ，再来 CA、CB、⋯，依此类推。栏名是 CV 的那一栏是第几栏？",
+        "en": "Spreadsheet columns are named with letters: columns 1 to 26 are A, B, …, Z; from column 27 on, two letters are used in the order AA, AB, …, AZ, then BA, BB, …, BZ, then CA, CB, …, and so on. Which column number is the column named CV?",
+        "ja": "表計算ソフトの列はアルファベットで名前がついています。1〜26 列目は順に A、B、…、Z、27 列目からは 2 文字で AA、AB、…、AZ、次に BA、BB、…、BZ、さらに CA、CB、… と続きます。列名が CV の列は何列目ですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是第 100 欄。",
+        "zh-Hans": "答案是第 100 栏。",
+        "en": "The answer is column 100.",
+        "ja": "答えは 100 列目です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "單一字母的欄有 26 欄（A 到 Z），是第 1 到第 26 欄。",
+          "兩個字母的欄名中，第一個字母是 A 的有 AA 到 AZ 共 26 欄，是第 27 到第 52 欄；第一個字母是 B 的是第 53 到第 78 欄。",
+          "第一個字母是 C 的從第 79 欄開始，CA 是第 79 欄。V 是第 22 個字母，所以 CV 是 CA 往後再數 21 欄，第 79 + 21 = 100 欄。",
+          "也可以把 A 到 Z 看成 1 到 26，兩個字母的欄名就像「二十六進位」：CV = 3 × 26 + 22 = 100。答案是第 100 欄。"
+        ],
+        "zh-Hans": [
+          "单一字母的栏有 26 栏（A 到 Z），是第 1 到第 26 栏。",
+          "两个字母的栏名中，第一个字母是 A 的有 AA 到 AZ 共 26 栏，是第 27 到第 52 栏；第一个字母是 B 的是第 53 到第 78 栏。",
+          "第一个字母是 C 的从第 79 栏开始，CA 是第 79 栏。V 是第 22 个字母，所以 CV 是 CA 往后再数 21 栏，第 79 + 21 = 100 栏。",
+          "也可以把 A 到 Z 看成 1 到 26，两个字母的栏名就像「二十六进位」：CV = 3 × 26 + 22 = 100。答案是第 100 栏。"
+        ],
+        "en": [
+          "Single letters give 26 columns (A to Z), columns 1 to 26.",
+          "Among two-letter names, those starting with A (AA to AZ) are 26 columns, 27 to 52; those starting with B are columns 53 to 78.",
+          "Names starting with C begin at column 79, so CA is column 79. V is the 22nd letter, so CV is 21 columns after CA: column 79 + 21 = 100.",
+          "Equivalently, treat A to Z as 1 to 26; a two-letter name works like base 26: CV = 3 × 26 + 22 = 100. The answer is column 100."
+        ],
+        "ja": [
+          "1 文字の列は A〜Z の 26 列で、1〜26 列目です。",
+          "2 文字の列名で、1 文字目が A のものは AA〜AZ の 26 列で 27〜52 列目、1 文字目が B のものは 53〜78 列目です。",
+          "1 文字目が C のものは 79 列目から始まり、CA が 79 列目です。V は 22 番目の文字なので、CV は CA から 21 列後の 79 + 21 = 100 列目です。",
+          "A〜Z を 1〜26 と見ると、2 文字の列名は「26 進法」のようになり、CV = 3 × 26 + 22 = 100 です。答えは 100 列目です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "100"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade6-foundation",
+        "notes": "試算表欄名＝以 1–26 為數字的二十六進位（沒有 0 的進位制）。掃過「欄|試算表|字母.{0,10}(排|編)」與 c:number_base 全庫，無同型題。arithmetic_grade5_foundation_129 是只含 0、1 的數與二進位對應；本題的數字從 1 到 26、沒有 0，要自己算每組 26 欄的起點。"
+      }
+    },
+    {
+      "id": "logic_grade6_foundation_087",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "take_one_or_prime_mod_four",
+      "tags": [
+        "c:game_theory",
+        "c:factor_multiple",
+        "m:invariant"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade6",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "桌上有 51 顆石子。甲、乙兩人輪流拿，由甲先拿，每次可以拿 1 顆，或拿質數顆（2、3、5、7、11、⋯ 顆都可以），但不能超過桌上剩下的顆數。拿走最後一顆石子的人獲勝。甲的第一步有好幾種拿法（拿的顆數不同就算不同拿法），其中能保證甲獲勝的有幾種？",
+        "zh-Hans": "桌上有 51 颗石子。甲、乙两人轮流拿，由甲先拿，每次可以拿 1 颗，或拿质数颗（2、3、5、7、11、⋯ 颗都可以），但不能超过桌上剩下的颗数。拿走最后一颗石子的人获胜。甲的第一步有好几种拿法（拿的颗数不同就算不同拿法），其中能保证甲获胜的有几种？",
+        "en": "There are 51 stones on a table. Players A and B take turns, A first; on each turn a player takes either 1 stone or a prime number of stones (2, 3, 5, 7, 11, …), but not more than are left. Whoever takes the last stone wins. A has several possible first moves (different numbers of stones count as different moves). How many of them guarantee that A wins?",
+        "ja": "テーブルに石が 51 個あります。甲さんと乙さんが交互に取り、甲さんが先に取ります。1 回に 1 個か、素数個（2、3、5、7、11、… 個）を取れますが、残りの個数より多くは取れません。最後の石を取った人の勝ちです。甲さんの 1 手目の取り方（取る個数がちがえば別の取り方）のうち、必ず勝てるのは何通りですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 8 種。",
+        "zh-Hans": "答案是 8 种。",
+        "en": "The answer is 8 moves.",
+        "ja": "答えは 8 通りです。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "可以拿的顆數是 1 或質數，其中沒有一個是 4 的倍數（4 的倍數都是大於 2 的雙數，不是質數）。所以從 4 的倍數出發，不論拿幾顆，剩下的都不是 4 的倍數。",
+          "從不是 4 的倍數的數出發，一定能拿到剩下 4 的倍數：除以 4 餘 1 就拿 1 顆，餘 2 就拿 2 顆，餘 3 就拿 3 顆（2、3 都是質數）。",
+          "所以只要讓對手面對 4 的倍數，就能一直讓他面對 4 的倍數，最後他面對 0 顆，最後一顆是自己拿的；反之，若留給對手的不是 4 的倍數，對手就能用這個方法獲勝。甲第一步必須讓剩下的是 4 的倍數。",
+          "51 除以 4 餘 3，甲拿的顆數除以 4 也必須餘 3，而且要是 1 或質數、不超過 51：3、7、11、19、23、31、43、47，共 8 種。"
+        ],
+        "zh-Hans": [
+          "可以拿的颗数是 1 或质数，其中没有一个是 4 的倍数（4 的倍数都是大于 2 的双数，不是质数）。所以从 4 的倍数出发，不论拿几颗，剩下的都不是 4 的倍数。",
+          "从不是 4 的倍数的数出发，一定能拿到剩下 4 的倍数：除以 4 余 1 就拿 1 颗，余 2 就拿 2 颗，余 3 就拿 3 颗（2、3 都是质数）。",
+          "所以只要让对手面对 4 的倍数，就能一直让他面对 4 的倍数，最后他面对 0 颗，最后一颗是自己拿的；反之，若留给对手的不是 4 的倍数，对手就能用这个方法获胜。甲第一步必须让剩下的是 4 的倍数。",
+          "51 除以 4 余 3，甲拿的颗数除以 4 也必须余 3，而且要是 1 或质数、不超过 51：3、7、11、19、23、31、43、47，共 8 种。"
+        ],
+        "en": [
+          "The allowed amounts are 1 and the primes, and none of them is a multiple of 4 (multiples of 4 are even numbers larger than 2, so not prime). So from a multiple of 4, whatever you take, what remains is not a multiple of 4.",
+          "From a number that is not a multiple of 4, you can always leave a multiple of 4: take 1 if the remainder on division by 4 is 1, take 2 if it is 2, and take 3 if it is 3 (2 and 3 are primes).",
+          "So once the opponent faces a multiple of 4, you can keep it that way until they face 0 stones — you took the last one. If instead you leave a non-multiple of 4, the opponent can use this plan against you. So A must leave a multiple of 4.",
+          "51 has remainder 3 when divided by 4, so A must take a number with remainder 3 that is 1 or prime and at most 51: 3, 7, 11, 19, 23, 31, 43, 47 — 8 moves."
+        ],
+        "ja": [
+          "取れる個数は 1 か素数で、そのどれも 4 の倍数ではありません（4 の倍数は 2 より大きい偶数で、素数ではない）。だから 4 の倍数から何個取っても、残りは 4 の倍数ではありません。",
+          "4 の倍数でない数からは、必ず 4 の倍数を残せます。4 でわった余りが 1 なら 1 個、2 なら 2 個、3 なら 3 個取ります（2 と 3 は素数）。",
+          "だから相手に 4 の倍数を回せば、ずっと 4 の倍数を回し続けられ、最後に相手は 0 個に直面し、最後の石は自分が取っています。逆に 4 の倍数でない数を回すと、相手にこの方法で勝たれます。甲さんは 4 の倍数を残す必要があります。",
+          "51 は 4 でわると 3 余るので、甲さんが取る個数も 4 でわって 3 余り、しかも 1 か素数で 51 以下のもの：3、7、11、19、23、31、43、47 の 8 通りです。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "8"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade6-foundation",
+        "notes": "可拿 1 或質數顆：必敗數正是 4 的倍數（4 的倍數都不是質數），再數「除以 4 餘 3 的質數」。掃過「質數顆|每次.{0,10}拿|輪流拿」與 c:game_theory 全庫；games 程式驗證必敗數為 4 的倍數、甲的必勝首步恰 8 種。logic_grade8_foundation_047（2 的次方，必敗數為 3 的倍數、問最大首步）、logic_grade9_foundation_044（平方數）的可拿集合與推理都不同；本題還要結合質數除以 4 的餘數。"
+      }
+    },
+    {
+      "id": "logic_grade6_foundation_088",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "perfect_shuffle_period",
+      "tags": [
+        "c:pattern",
+        "c:modular",
+        "m:enumeration"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade6",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "10 張牌由上到下依序是 1 到 10 號。一次「完美洗牌」是這樣做的：把整疊分成上面 5 張和下面 5 張，然後從上半疊的第一張開始，上半疊、下半疊一張一張交錯疊回去。所以洗一次後，由上到下變成 1、6、2、7、3、8、4、9、5、10。一直重複這樣洗，最少要洗幾次，牌才會第一次回到 1 到 10 的原來順序？",
+        "zh-Hans": "10 张牌由上到下依序是 1 到 10 号。一次「完美洗牌」是这样做的：把整叠分成上面 5 张和下面 5 张，然后从上半叠的第一张开始，上半叠、下半叠一张一张交错叠回去。所以洗一次后，由上到下变成 1、6、2、7、3、8、4、9、5、10。一直重复这样洗，最少要洗几次，牌才会第一次回到 1 到 10 的原来顺序？",
+        "en": "Ten cards are numbered 1 to 10 from top to bottom. A \"perfect shuffle\" splits the deck into the top 5 and bottom 5 cards and then interleaves them one at a time, starting with the first card of the top half. After one shuffle, the order from top to bottom is 1, 6, 2, 7, 3, 8, 4, 9, 5, 10. If this shuffle is repeated, what is the fewest number of shuffles after which the cards first return to the original order 1 to 10?",
+        "ja": "10 まいのカードが上から順に 1〜10 番とならんでいます。「完全なシャッフル」は、上の 5 まいと下の 5 まいに分け、上の半分の 1 まい目から、上と下を 1 まいずつ交互に重ねもどす方法です。1 回シャッフルすると、上から 1、6、2、7、3、8、4、9、5、10 になります。これをくり返すと、少なくとも何回で初めて 1〜10 のもとの順にもどりますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 6 次。",
+        "zh-Hans": "答案是 6 次。",
+        "en": "The answer is 6 shuffles.",
+        "ja": "答えは 6 回です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "看每個位置的牌洗一次後會跑到哪個位置：上半疊第 1、2、3、4、5 張分別到第 1、3、5、7、9 個位置；下半疊第 6、7、8、9、10 張分別到第 2、4、6、8、10 個位置。",
+          "追蹤位置：第 1 個和第 10 個位置的牌永遠不動。第 2 個位置的牌依序到第 3、5、9、8、6 個位置，再回到第 2 個位置，繞一圈要洗 6 次；第 3、5、9、8、6 個位置的牌也在這一圈上。",
+          "第 4 個位置的牌到第 7 個位置，再回到第 4 個位置，繞一圈要洗 2 次。",
+          "要所有牌同時回到原位，洗的次數必須同時是 6 的倍數和 2 的倍數，最少是 6 次。"
+        ],
+        "zh-Hans": [
+          "看每个位置的牌洗一次后会跑到哪个位置：上半叠第 1、2、3、4、5 张分别到第 1、3、5、7、9 个位置；下半叠第 6、7、8、9、10 张分别到第 2、4、6、8、10 个位置。",
+          "追踪位置：第 1 个和第 10 个位置的牌永远不动。第 2 个位置的牌依序到第 3、5、9、8、6 个位置，再回到第 2 个位置，绕一圈要洗 6 次；第 3、5、9、8、6 个位置的牌也在这一圈上。",
+          "第 4 个位置的牌到第 7 个位置，再回到第 4 个位置，绕一圈要洗 2 次。",
+          "要所有牌同时回到原位，洗的次数必须同时是 6 的倍数和 2 的倍数，最少是 6 次。"
+        ],
+        "en": [
+          "Track where each position goes in one shuffle: top-half cards in positions 1, 2, 3, 4, 5 go to positions 1, 3, 5, 7, 9; bottom-half cards in positions 6, 7, 8, 9, 10 go to positions 2, 4, 6, 8, 10.",
+          "Positions 1 and 10 never move. The card in position 2 goes to 3, 5, 9, 8, 6, and back to 2, a cycle of 6 shuffles; positions 3, 5, 9, 8, 6 are on this same cycle.",
+          "The card in position 4 goes to 7 and back to 4, a cycle of 2 shuffles.",
+          "For every card to be back at once, the number of shuffles must be a multiple of both 6 and 2, so the fewest is 6."
+        ],
+        "ja": [
+          "1 回のシャッフルで各位置のカードがどこへ行くかを見ると、上の半分の 1、2、3、4、5 番目は 1、3、5、7、9 番目へ、下の半分の 6、7、8、9、10 番目は 2、4、6、8、10 番目へ行きます。",
+          "1 番目と 10 番目の位置のカードは動きません。2 番目の位置のカードは 3、5、9、8、6 番目と進んで 2 番目にもどり、1 周に 6 回かかります。3、5、9、8、6 番目の位置もこの周の上にあります。",
+          "4 番目の位置のカードは 7 番目へ行って 4 番目にもどり、1 周に 2 回です。",
+          "すべてのカードが同時にもどるには、回数が 6 の倍数でも 2 の倍数でもなければならず、最少は 6 回です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "6"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade6-foundation",
+        "notes": "洗牌＝位置置換，分解成長 6 與長 2 的循環，再取最小公倍數。掃過「洗牌|交錯|疊回」與 c:pattern 全庫，無洗牌題；verify6.py 模擬得 6。三顆月亮對齊、lcm 排程題是給定週期求公倍數，本題要自己追蹤位置找出各循環的長度。"
+      }
     }
   ]
 }
