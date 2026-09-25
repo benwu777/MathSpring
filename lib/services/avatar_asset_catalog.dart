@@ -22,6 +22,7 @@ class AvatarAssetBundle {
     this.eyesScaleY = 1,
     this.skinTint,
     this.noseTint,
+    this.hairTint,
     this.noseScale = 1,
     this.noseOffsetY = 0,
     this.mouthOffsetY = 0,
@@ -49,6 +50,10 @@ class AvatarAssetBundle {
   final double eyesScaleY;
   final Color? skinTint;
   final Color? noseTint;
+
+  /// Girls share neutral hairstyle artwork; this tint supplies the selected
+  /// hair colour while keeping the image's transparent pixels and highlights.
+  final Color? hairTint;
   final double noseScale;
   final double noseOffsetY;
   final double mouthOffsetY;
@@ -80,6 +85,16 @@ class AvatarAssetCatalog {
   const AvatarAssetCatalog._();
 
   static const AvatarOptionTreatment _neutral = AvatarOptionTreatment();
+
+  /// Fixed display swatches and runtime tints for the girl-only hair colours.
+  static const Map<String, Color> girlHairColors = <String, Color>{
+    'girl_hair_color_01': Color(0xFF1B1B1B),
+    'girl_hair_color_02': Color(0xFF3A2418),
+    'girl_hair_color_03': Color(0xFF7B3F20),
+    'girl_hair_color_04': Color(0xFFA97142),
+    'girl_hair_color_05': Color(0xFF6F1D1B),
+    'girl_hair_color_06': Color(0xFF9EA3A8),
+  };
 
   /// Skin is never only a base swap: the nose layer receives the same tint so
   /// a deeper skin tone never carries a pale nose.
@@ -161,6 +176,10 @@ class AvatarAssetCatalog {
   static AvatarAssetBundle resolve(AvatarConfiguration configuration) {
     final AvatarPresentation presentation = configuration.presentation;
     final bool isBoy = presentation == AvatarPresentation.boy;
+    final Color? hairTint = isBoy
+        ? null
+        : girlHairColors[configuration.hairColorId] ??
+            girlHairColors['girl_hair_color_02'];
     final AvatarOptionTreatment skin = treatmentFor(configuration.skinId);
     final AvatarOptionTreatment hair = treatmentFor(configuration.hairId);
     final AvatarOptionTreatment eyes = treatmentFor(configuration.eyesId);
@@ -183,6 +202,7 @@ class AvatarAssetCatalog {
       eyesScaleY: eyes.scaleY,
       skinTint: skin.tint,
       noseTint: skin.tint,
+      hairTint: hairTint,
       noseAsset: noseAsset,
       noseScale: nose.scale,
       noseOffsetY: isBoy ? .092 : .1,

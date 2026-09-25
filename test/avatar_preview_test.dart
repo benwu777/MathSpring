@@ -156,19 +156,86 @@ void main() {
       ),
     );
 
-    expect(
-      find.byType(ColorFiltered),
-      findsNWidgets(2),
-      reason: '只有臉部與鼻子皮膚圖層可以套用膚色濾鏡',
-    );
-    final List<ColorFiltered> skinFilters =
-        tester.widgetList<ColorFiltered>(find.byType(ColorFiltered)).toList();
+    final List<ColorFiltered> skinFilters = tester
+        .widgetList<ColorFiltered>(find.byType(ColorFiltered))
+        .where(
+          (ColorFiltered filter) =>
+              filter.colorFilter ==
+              const ColorFilter.mode(Color(0xFFB77B49), BlendMode.modulate),
+        )
+        .toList();
+    expect(skinFilters, hasLength(2), reason: '只有臉部與鼻子皮膚圖層可以套用膚色濾鏡');
     expect(
       skinFilters.map((ColorFiltered filter) => filter.colorFilter),
       everyElement(
         const ColorFilter.mode(Color(0xFFB77B49), BlendMode.modulate),
       ),
       reason: '臉部與鼻子都必須保留透明畫布，不能用 multiply 填滿背景',
+    );
+  });
+
+  testWidgets('applies the selected girl hair tint to the front layer',
+      (WidgetTester tester) async {
+    final AvatarConfiguration girl = AvatarConfiguration.defaultFor(
+      AvatarPresentation.girl,
+    ).copyWith(hairColorId: 'girl_hair_color_03');
+
+    await tester.pumpWidget(
+      MaterialApp(home: Scaffold(body: AvatarPreview(configuration: girl))),
+    );
+
+    final ColorFiltered frontTint = tester.widget<ColorFiltered>(
+      find.byKey(const ValueKey<String>('avatar_hair_front_tint')),
+    );
+    expect(
+      frontTint.colorFilter,
+      const ColorFilter.mode(Color(0xFF7B3F20), BlendMode.color),
+    );
+  });
+
+  testWidgets('applies the selected girl hair tint to hair 06 back layer',
+      (WidgetTester tester) async {
+    final AvatarConfiguration girl = AvatarConfiguration.defaultFor(
+      AvatarPresentation.girl,
+    ).copyWith(
+      hairId: 'girl_hair_06',
+      hairColorId: 'girl_hair_color_03',
+    );
+
+    await tester.pumpWidget(
+      MaterialApp(home: Scaffold(body: AvatarPreview(configuration: girl))),
+    );
+
+    final ColorFiltered backTint = tester.widget<ColorFiltered>(
+      find.byKey(const ValueKey<String>('avatar_hair_back_tint')),
+    );
+    expect(
+      backTint.colorFilter,
+      const ColorFilter.mode(Color(0xFF7B3F20), BlendMode.color),
+    );
+  });
+
+  testWidgets('does not apply a girl hair tint to boy layers',
+      (WidgetTester tester) async {
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Scaffold(
+          body: AvatarPreview(
+            configuration: AvatarConfiguration.defaultFor(
+              AvatarPresentation.boy,
+            ),
+          ),
+        ),
+      ),
+    );
+
+    expect(
+      find.byKey(const ValueKey<String>('avatar_hair_front_tint')),
+      findsNothing,
+    );
+    expect(
+      find.byKey(const ValueKey<String>('avatar_hair_back_tint')),
+      findsNothing,
     );
   });
 

@@ -34,7 +34,7 @@ class AvatarPreview extends StatelessWidget {
               if (assets.hairBackAsset case final String path)
                 KeyedSubtree(
                   key: const ValueKey<String>('avatar_hair_back_layer'),
-                  child: _hairLayer(assets, path),
+                  child: _hairLayer(assets, path, isBack: true),
                 ),
               KeyedSubtree(
                 key: const ValueKey<String>('avatar_face_layer'),
@@ -95,14 +95,30 @@ class AvatarPreview extends StatelessWidget {
         ),
       );
 
-  Widget _hairLayer(AvatarAssetBundle assets, String asset) =>
-      FractionalTranslation(
-        translation: Offset(assets.hairOffsetX, assets.hairOffsetY),
-        child: Transform.scale(
-          scaleX: assets.hairScale * assets.hairScaleX,
-          scaleY: assets.hairScale,
-          alignment: Alignment.topCenter,
-          child: _layer(asset),
-        ),
-      );
+  Widget _hairLayer(
+    AvatarAssetBundle assets,
+    String asset, {
+    bool isBack = false,
+  }) {
+    final Widget layer = FractionalTranslation(
+      translation: Offset(assets.hairOffsetX, assets.hairOffsetY),
+      child: Transform.scale(
+        scaleX: assets.hairScale * assets.hairScaleX,
+        scaleY: assets.hairScale,
+        alignment: Alignment.topCenter,
+        child: _layer(asset),
+      ),
+    );
+    final Color? hairTint = assets.hairTint;
+    if (hairTint == null) {
+      return layer;
+    }
+    return ColorFiltered(
+      key: ValueKey<String>(
+        isBack ? 'avatar_hair_back_tint' : 'avatar_hair_front_tint',
+      ),
+      colorFilter: ColorFilter.mode(hairTint, BlendMode.color),
+      child: layer,
+    );
+  }
 }
