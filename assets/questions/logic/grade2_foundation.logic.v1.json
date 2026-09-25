@@ -6188,6 +6188,602 @@
         "reference": "logic-grade2-foundation",
         "notes": "整數分拆（不計順序），用由大到小排列有系統地列舉。掃「分成.{0,4}堆|分給.{0,10}至少」：logic_grade2_049（7 顆分三人各不相同的最大者最小）、arithmetic_grade4_028（4 人兩兩分組）、arithmetic_grade2_087（15 元分袋）。本題計數不計順序、允許相同。"
       }
+    },
+    {
+      "id": "logic_grade2_foundation_081",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "cut_one_sheet_into_three_repeatedly",
+      "tags": [
+        "c:recurrence",
+        "c:add_sub",
+        "m:invariant"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade2",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "桌上有 1 張紙。小安每一次都拿起桌上的其中 1 張紙，把它剪成 3 張，再全部放回桌上。他這樣剪了 5 次之後，桌上一共有幾張紙？",
+        "zh-Hans": "桌上有 1 张纸。小安每一次都拿起桌上的其中 1 张纸，把它剪成 3 张，再全部放回桌上。他这样剪了 5 次之后，桌上一共有几张纸？",
+        "en": "There is 1 sheet of paper on the table. Each time, An picks up one sheet from the table, cuts it into 3 sheets, and puts them all back. After doing this 5 times, how many sheets are on the table?",
+        "ja": "つくえの 上に 紙が 1まい あります。アンは 毎回、つくえの 上の 紙を 1まい とって 3まいに 切り、ぜんぶ つくえに もどします。これを 5回 した あと、つくえの 上には 紙が 何まい ありますか。"
+      },
+      "answer": {
+        "zh-Hant": "桌上一共有 11 張紙。",
+        "zh-Hans": "桌上一共有 11 张纸。",
+        "en": "There are 11 sheets on the table.",
+        "ja": "紙は 11まい あります。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "每剪一次：拿走 1 張，放回 3 張，桌上的紙就多了 3 − 1 = 2 張。",
+          "不管剪的是哪一張，每次都是多 2 張。",
+          "剪了 5 次，一共多了 2 + 2 + 2 + 2 + 2 = 10 張。",
+          "桌上原本有 1 張，現在有 1 + 10 = 11 張。"
+        ],
+        "zh-Hans": [
+          "每剪一次：拿走 1 张，放回 3 张，桌上的纸就多了 3 − 1 = 2 张。",
+          "不管剪的是哪一张，每次都是多 2 张。",
+          "剪了 5 次，一共多了 2 + 2 + 2 + 2 + 2 = 10 张。",
+          "桌上原本有 1 张，现在有 1 + 10 = 11 张。"
+        ],
+        "en": [
+          "Each cut takes away 1 sheet and puts back 3, so the table gains 3 − 1 = 2 sheets.",
+          "No matter which sheet is cut, each time there are 2 more.",
+          "After 5 cuts there are 2 + 2 + 2 + 2 + 2 = 10 more sheets.",
+          "There was 1 sheet at first, so now there are 1 + 10 = 11 sheets."
+        ],
+        "ja": [
+          "1回 切るごとに、1まい とって 3まい もどすので、紙は 3 − 1 = 2まい ふえます。",
+          "どの 紙を 切っても、毎回 2まいずつ ふえます。",
+          "5回 切ると 2 + 2 + 2 + 2 + 2 = 10まい ふえます。",
+          "はじめ 1まい だったので、いまは 1 + 10 = 11まい です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "11"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade2-foundation",
+        "notes": "每次操作固定增加 2（遞推 aₙ₊₁ = aₙ + 2）。掃「剪成|撕成|剪.{0,6}(段|塊|張)」：logic_grade10_032（撕郵票次數不變）、logic_grade11_048（撕成 4 張或 10 張求最少次數）、logic_grade5_064（對摺後剪一刀）。高年級兩題是「求次數」或「最少次數」並要處理兩種操作；本題是二年級正向計算、單一操作。"
+      }
+    },
+    {
+      "id": "logic_grade2_foundation_082",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "glasses_boys_girls_table",
+      "tags": [
+        "c:inclusion_exclusion",
+        "c:add_sub",
+        "m:direct"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade2",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "全班有 30 個小朋友，其中男生有 14 人。全班戴眼鏡的一共有 10 人。沒有戴眼鏡的男生有 8 人。戴眼鏡的女生有幾人？",
+        "zh-Hans": "全班有 30 个小朋友，其中男生有 14 人。全班戴眼镜的一共有 10 人。没有戴眼镜的男生有 8 人。戴眼镜的女生有几人？",
+        "en": "A class has 30 children, and 14 of them are boys. In the whole class, 10 children wear glasses. 8 boys do not wear glasses. How many girls wear glasses?",
+        "ja": "クラスには 30人 いて、そのうち 男の子は 14人 です。クラス全体で めがねを かけて いるのは 10人 です。めがねを かけて いない 男の子は 8人 です。めがねを かけて いる 女の子は 何人 ですか。"
+      },
+      "answer": {
+        "zh-Hant": "戴眼鏡的女生有 4 人。",
+        "zh-Hans": "戴眼镜的女生有 4 人。",
+        "en": "4 girls wear glasses.",
+        "ja": "めがねを かけて いる 女の子は 4人 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "男生 14 人，其中沒戴眼鏡的有 8 人，所以戴眼鏡的男生有 14 − 8 = 6 人。",
+          "戴眼鏡的一共 10 人，男生佔了 6 人。",
+          "剩下的都是女生：10 − 6 = 4 人。",
+          "（檢查：女生 30 − 14 = 16 人，戴眼鏡 4 人、沒戴 12 人；沒戴眼鏡的共 8 + 12 = 20 = 30 − 10，對得上。）戴眼鏡的女生有 4 人。"
+        ],
+        "zh-Hans": [
+          "男生 14 人，其中没戴眼镜的有 8 人，所以戴眼镜的男生有 14 − 8 = 6 人。",
+          "戴眼镜的一共 10 人，男生占了 6 人。",
+          "剩下的都是女生：10 − 6 = 4 人。",
+          "（检查：女生 30 − 14 = 16 人，戴眼镜 4 人、没戴 12 人；没戴眼镜的共 8 + 12 = 20 = 30 − 10，对得上。）戴眼镜的女生有 4 人。"
+        ],
+        "en": [
+          "Of the 14 boys, 8 do not wear glasses, so 14 − 8 = 6 boys wear glasses.",
+          "10 children wear glasses in all, and 6 of them are boys.",
+          "The rest are girls: 10 − 6 = 4.",
+          "(Check: there are 30 − 14 = 16 girls, 4 with glasses and 12 without; children without glasses are 8 + 12 = 20 = 30 − 10, which fits.) 4 girls wear glasses."
+        ],
+        "ja": [
+          "男の子 14人の うち 8人は めがねなし なので、めがねの 男の子は 14 − 8 = 6人 です。",
+          "めがねの 人は ぜんぶで 10人 で、そのうち 男の子が 6人 です。",
+          "のこりは 女の子で、10 − 6 = 4人 です。",
+          "（たしかめ：女の子は 30 − 14 = 16人 で、めがねあり 4人、なし 12人。めがねなしは 8 + 12 = 20 = 30 − 10 で あいます。）めがねの 女の子は 4人 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "4"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade2-foundation",
+        "notes": "兩種分類（男／女、戴／不戴眼鏡）交叉的二乘二表格推理。掃「眼鏡|男生.{0,20}女生」：logic_grade7_033（全班戴眼鏡的邏輯否定）、arithmetic_grade1_106（男女人數差）。低年級的集合題都是「喜歡 A、喜歡 B」的文氏圖；本題是互補分類的交叉表，要先從男生那一格推到女生那一格。"
+      }
+    },
+    {
+      "id": "logic_grade2_foundation_083",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "ring_bus_route_shorter_direction",
+      "tags": [
+        "c:graph_theory",
+        "c:add_sub",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade2",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一條環狀的公車路線上，依序有甲、乙、丙、丁、戊五個站，最後由戊站再接回甲站，兩個方向都有公車可以坐。相鄰兩站之間的車程是：甲到乙 3 分鐘、乙到丙 5 分鐘、丙到丁 2 分鐘、丁到戊 4 分鐘、戊到甲 6 分鐘。小安要從乙站坐到戊站，最快要坐幾分鐘的車？（只算車程，不算等車和停車的時間。）",
+        "zh-Hans": "一条环状的公车路线上，依序有甲、乙、丙、丁、戊五个站，最后由戊站再接回甲站，两个方向都有公车可以坐。相邻两站之间的车程是：甲到乙 3 分钟、乙到丙 5 分钟、丙到丁 2 分钟、丁到戊 4 分钟、戊到甲 6 分钟。小安要从乙站坐到戊站，最快要坐几分钟的车？（只算车程，不算等车和停车的时间。）",
+        "en": "A circular bus route has five stops in order, A, B, C, D, E, and then from E back to A; buses run in both directions. The travel times between neighboring stops are: A to B 3 minutes, B to C 5 minutes, C to D 2 minutes, D to E 4 minutes, E to A 6 minutes. An rides from stop B to stop E. What is the shortest riding time in minutes? (Count only travel time, not waiting or stopping.)",
+        "ja": "わに なった バスの 路線に、A、B、C、D、E の 5つの バスていが じゅんに あり、E の つぎは また A に もどります。バスは どちら向きにも 走ります。となりの バスていの 間の 時間は、A から B が 3分、B から C が 5分、C から D が 2分、D から E が 4分、E から A が 6分 です。アンは B から E まで バスに のります。いちばん はやくて 何分 のれば よいですか。（走って いる 時間 だけ 数え、まつ 時間や とまる 時間は 数えません。）"
+      },
+      "answer": {
+        "zh-Hant": "最快要坐 9 分鐘。",
+        "zh-Hans": "最快要坐 9 分钟。",
+        "en": "The shortest ride is 9 minutes.",
+        "ja": "いちばん はやくて 9分 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "環狀路線從乙到戊有兩個方向可以走。",
+          "往「乙→丙→丁→戊」的方向：5 + 2 + 4 = 11 分鐘，中間經過 2 站。",
+          "往「乙→甲→戊」的方向：3 + 6 = 9 分鐘，中間只經過 1 站。",
+          "9 比 11 小，最快要坐 9 分鐘。"
+        ],
+        "zh-Hans": [
+          "环状路线从乙到戊有两个方向可以走。",
+          "往「乙→丙→丁→戊」的方向：5 + 2 + 4 = 11 分钟，中间经过 2 站。",
+          "往「乙→甲→戊」的方向：3 + 6 = 9 分钟，中间只经过 1 站。",
+          "9 比 11 小，最快要坐 9 分钟。"
+        ],
+        "en": [
+          "On a circular route there are two ways to go from B to E.",
+          "The way B→C→D→E takes 5 + 2 + 4 = 11 minutes, passing 2 stops.",
+          "The way B→A→E takes 3 + 6 = 9 minutes, passing only 1 stop.",
+          "9 is less than 11, so the shortest ride is 9 minutes."
+        ],
+        "ja": [
+          "わに なった 路線では、B から E へ 行く 向きが 2つ あります。",
+          "「B→C→D→E」の 向き：5 + 2 + 4 = 11分 で、とちゅうの バスていは 2つ。",
+          "「B→A→E」の 向き：3 + 6 = 9分 で、とちゅうの バスていは 1つ だけ。",
+          "9は 11より 小さいので、いちばん はやくて 9分 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "9"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade2-foundation",
+        "notes": "自編：環狀圖上兩點間取兩個方向中較短者。掃「環狀|環形|公車.{0,10}站|圍成一圈.{0,10}站」：arithmetic_grade4_112（環形步道四涼亭分段）、arithmetic_grade3_140（直線公車路線含停站時間）、logic_grade5_059（一般路網最短路）。g4_112 是由整圈長度求一段；本題要比較兩個方向的路徑和；g5_059 有 7 條路要搜尋，本題只有兩條候選，是二年級版的「路線比較」。"
+      }
+    },
+    {
+      "id": "logic_grade2_foundation_084",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "domino_chain_end_numbers",
+      "tags": [
+        "c:graph_theory",
+        "m:invariant"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade2",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "小安有 5 張骨牌，每張骨牌上寫著兩個數：1 和 2、2 和 3、3 和 4、4 和 1、1 和 3。他要把 5 張全部排成一長條，相鄰兩張骨牌碰在一起的那兩個數必須一樣（骨牌可以左右翻過來放）。排好以後，這一長條最左端和最右端的兩個數加起來是多少？",
+        "zh-Hans": "小安有 5 张骨牌，每张骨牌上写着两个数：1 和 2、2 和 3、3 和 4、4 和 1、1 和 3。他要把 5 张全部排成一长条，相邻两张骨牌碰在一起的那两个数必须一样（骨牌可以左右翻过来放）。排好以后，这一长条最左端和最右端的两个数加起来是多少？",
+        "en": "An has 5 dominoes, each showing two numbers: 1 and 2, 2 and 3, 3 and 4, 4 and 1, 1 and 3. He must line up all 5 in one long chain so that where two dominoes touch, the touching numbers are the same (a domino may be turned around). When the chain is finished, what is the sum of the number at the far left end and the number at the far right end?",
+        "ja": "アンは ドミノを 5まい もって います。それぞれ 2つの 数が 書いて あり、1と 2、2と 3、3と 4、4と 1、1と 3 です。5まい ぜんぶを 1れつに つなげますが、となりあう ドミノの くっつく 数は 同じで なければ なりません（ドミノは 左右 ぎゃくに おいても かまいません）。できあがった れつの いちばん 左はしの 数と いちばん 右はしの 数を たすと いくつ ですか。"
+      },
+      "answer": {
+        "zh-Hant": "兩端的數加起來是 4。",
+        "zh-Hans": "两端的数加起来是 4。",
+        "en": "The two end numbers add up to 4.",
+        "ja": "両はしの 数の 合計は 4 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "數一數每個數出現幾次：1 出現 3 次（1–2、4–1、1–3），2 出現 2 次，3 出現 3 次（2–3、3–4、1–3），4 出現 2 次。",
+          "長條中間每一個接頭，都是兩個相同的數碰在一起，所以在中間的數總是兩個兩個成對出現。",
+          "出現單數次的數，一定有一次是落單在最端點。1 和 3 都出現 3 次，所以兩端一定是 1 和 3（例如 1–2、2–3、3–4、4–1、1–3，左端 1、右端 3）。",
+          "兩端的數加起來是 1 + 3 = 4。"
+        ],
+        "zh-Hans": [
+          "数一数每个数出现几次：1 出现 3 次（1–2、4–1、1–3），2 出现 2 次，3 出现 3 次（2–3、3–4、1–3），4 出现 2 次。",
+          "长条中间每一个接头，都是两个相同的数碰在一起，所以在中间的数总是两个两个成对出现。",
+          "出现单数次的数，一定有一次是落单在最端点。1 和 3 都出现 3 次，所以两端一定是 1 和 3（例如 1–2、2–3、3–4、4–1、1–3，左端 1、右端 3）。",
+          "两端的数加起来是 1 + 3 = 4。"
+        ],
+        "en": [
+          "Count how often each number appears: 1 appears 3 times (1–2, 4–1, 1–3), 2 appears 2 times, 3 appears 3 times (2–3, 3–4, 1–3), and 4 appears 2 times.",
+          "At every join inside the chain two equal numbers touch, so numbers inside the chain always come in pairs.",
+          "A number that appears an odd number of times must have one copy left alone at an end. Both 1 and 3 appear 3 times, so the ends must be 1 and 3 (for example 1–2, 2–3, 3–4, 4–1, 1–3, with 1 on the left and 3 on the right).",
+          "The end numbers add up to 1 + 3 = 4."
+        ],
+        "ja": [
+          "それぞれの 数が 何回 出て くるか 数えます。1は 3回（1–2、4–1、1–3）、2は 2回、3は 3回（2–3、3–4、1–3）、4は 2回 です。",
+          "れつの 中の つなぎめでは、同じ 数が 2つ くっつくので、中に ある 数は いつも 2つずつ ペアに なります。",
+          "き数回 出る 数は、1つが ペアに ならず はしに のこります。1と 3が 3回ずつ なので、両はしは 1と 3 です（たとえば 1–2、2–3、3–4、4–1、1–3 で 左はし 1、右はし 3）。",
+          "両はしの 数の 合計は 1 + 3 = 4 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "4"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade2-foundation",
+        "notes": "骨牌接龍＝一筆畫（尤拉路徑）：出現奇數次的數必在兩端。掃「骨牌」：arithmetic_grade3_089（骨牌點數和）、arithmetic_grade6_096（一副骨牌張數）、geometry_grade2_059（骨牌鋪長方形）；一筆畫題 logic_grade3_056、logic_grade9_013。既有骨牌題都不是接龍；本題把奇點規則放進骨牌情境，不必畫圖。"
+      }
+    },
+    {
+      "id": "logic_grade2_foundation_085",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "postman_visit_each_house_once",
+      "tags": [
+        "c:graph_theory",
+        "c:basic_counting",
+        "m:enumeration"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade2",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "郵差要把信送到甲、乙、丙、丁四戶人家，從甲家開始送。四戶之間只有這 5 條路：甲–乙、乙–丙、丙–丁、丁–甲、甲–丙。他只能沿著這些路走，每一戶都要剛好經過一次（已經去過的人家不可以再經過）。他送信的順序一共有幾種？",
+        "zh-Hans": "邮差要把信送到甲、乙、丙、丁四户人家，从甲家开始送。四户之间只有这 5 条路：甲–乙、乙–丙、丙–丁、丁–甲、甲–丙。他只能沿着这些路走，每一户都要刚好经过一次（已经去过的人家不可以再经过）。他送信的顺序一共有几种？",
+        "en": "A mail carrier must deliver letters to four houses A, B, C and D, starting at house A. Only these 5 roads join the houses: A–B, B–C, C–D, D–A and A–C. He may only walk along these roads, and must pass each house exactly once (he may not pass a house he has already visited). How many different delivery orders are possible?",
+        "ja": "ゆうびんやさんが A、B、C、D の 4けんの 家に 手紙を とどけます。A の 家から はじめます。家と 家の 間の 道は A–B、B–C、C–D、D–A、A–C の 5本 だけ です。この 道だけを 通り、どの 家も ちょうど 1回ずつ 通ります（一度 行った 家は もう 通れません）。とどける じゅんばんは ぜんぶで 何とおり ありますか。"
+      },
+      "answer": {
+        "zh-Hant": "一共有 2 種順序。",
+        "zh-Hans": "一共有 2 种顺序。",
+        "en": "There are 2 orders.",
+        "ja": "ぜんぶで 2とおり です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "從甲出發，下一戶可以是乙、丙或丁（甲和三戶都有路）。",
+          "先去乙：乙只和甲、丙相連，接著只能去丙，丙再去丁：甲→乙→丙→丁，成功。先去丁：丁只和甲、丙相連，接著去丙，再去乙：甲→丁→丙→乙，成功。",
+          "先去丙：接著去乙的話，乙的另一個鄰居只有甲、丙，都去過了，丁送不到；去丁的話，丁的鄰居甲、丙也都去過，乙送不到。都失敗。",
+          "一共有 2 種順序。"
+        ],
+        "zh-Hans": [
+          "从甲出发，下一户可以是乙、丙或丁（甲和三户都有路）。",
+          "先去乙：乙只和甲、丙相连，接着只能去丙，丙再去丁：甲→乙→丙→丁，成功。先去丁：丁只和甲、丙相连，接着去丙，再去乙：甲→丁→丙→乙，成功。",
+          "先去丙：接着去乙的话，乙的另一个邻居只有甲、丙，都去过了，丁送不到；去丁的话，丁的邻居甲、丙也都去过，乙送不到。都失败。",
+          "一共有 2 种顺序。"
+        ],
+        "en": [
+          "From A, the next house can be B, C or D (A has a road to all three).",
+          "Go to B first: B is joined only to A and C, so next is C, then D: A→B→C→D works. Go to D first: D is joined only to A and C, so next is C, then B: A→D→C→B works.",
+          "Go to C first: if he then goes to B, B's only other neighbors A and C are used, so D is never reached; if he goes to D, D's neighbors A and C are used, so B is never reached. Both fail.",
+          "There are 2 orders."
+        ],
+        "ja": [
+          "A から 出発すると、つぎは B、C、D の どれでも 行けます（A は 3けん すべてと つながって います）。",
+          "さきに B：B は A と C だけと つながるので つぎは C、そして D。A→B→C→D で 成功。さきに D：D も A と C だけなので つぎは C、そして B。A→D→C→B で 成功。",
+          "さきに C：つぎに B へ 行くと、B の となりは A と C だけで どちらも 行った あとなので、D に 行けません。D へ 行っても、D の となりの A と C は 行った あとで、B に 行けません。どちらも だめ です。",
+          "ぜんぶで 2とおり です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "2"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade2-foundation",
+        "notes": "不重複經過每個點的路徑（哈密頓路徑）計數，靠「只有兩個鄰居的點」剪枝。掃「郵差|送信|每.{0,4}經過一次」：logic_grade6_077（K4 每條路至少走一次）、logic_grade7_050（3×3 方格走遍起點數）、combinatorics_grade12_022（正方體走遍 8 頂點）。g6_077 是走遍「路」；本題是走遍「點」且不回頭，規模為二年級可列舉。"
+      }
+    },
+    {
+      "id": "logic_grade2_foundation_086",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "two_teams_no_quarrel_pairs",
+      "tags": [
+        "c:graph_theory",
+        "c:logic_deduction",
+        "m:coloring"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade2",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "老師要把小安、小美、小華、小明、小芳、小強 6 個人分成紅、藍兩隊。下面每一對小朋友吵過架，不能分在同一隊：小美和小明、小安和小華、小明和小芳、小華和小強、小強和小美。已知小安在紅隊。紅隊另外還有哪兩個人？",
+        "zh-Hans": "老师要把小安、小美、小华、小明、小芳、小强 6 个人分成红、蓝两队。下面每一对小朋友吵过架，不能分在同一队：小美和小明、小安和小华、小明和小芳、小华和小强、小强和小美。已知小安在红队。红队另外还有哪两个人？",
+        "en": "The teacher splits An, Mei, Hua, Ming, Fang and Qiang into a red team and a blue team. Each of the following pairs has quarreled and may not be on the same team: Mei and Ming, An and Hua, Ming and Fang, Hua and Qiang, Qiang and Mei. An is on the red team. Which two other children are on the red team?",
+        "ja": "先生が アン、メイ、ホア、ミン、ファン、チアンの 6人を 赤組と 青組に 分けます。つぎの 2人ずつは けんかを したので、同じ 組に できません：メイと ミン、アンと ホア、ミンと ファン、ホアと チアン、チアンと メイ。アンは 赤組 です。赤組の ほかの 2人は だれ ですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 D：小強和小明。",
+        "zh-Hans": "答案是 D：小强和小明。",
+        "en": "The answer is D: Qiang and Ming.",
+        "ja": "答えは D の チアンと ミン です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "小安在紅隊，小安和小華吵過架，所以小華在藍隊。",
+          "小華和小強吵過架，小強在紅隊；小強和小美吵過架，小美在藍隊。",
+          "小美和小明吵過架，小明在紅隊；小明和小芳吵過架，小芳在藍隊。",
+          "紅隊是小安、小強、小明，藍隊是小華、小美、小芳，每一對吵架的人都不同隊。答案是 D。"
+        ],
+        "zh-Hans": [
+          "小安在红队，小安和小华吵过架，所以小华在蓝队。",
+          "小华和小强吵过架，小强在红队；小强和小美吵过架，小美在蓝队。",
+          "小美和小明吵过架，小明在红队；小明和小芳吵过架，小芳在蓝队。",
+          "红队是小安、小强、小明，蓝队是小华、小美、小芳，每一对吵架的人都不同队。答案是 D。"
+        ],
+        "en": [
+          "An is red, and An quarreled with Hua, so Hua is blue.",
+          "Hua quarreled with Qiang, so Qiang is red; Qiang quarreled with Mei, so Mei is blue.",
+          "Mei quarreled with Ming, so Ming is red; Ming quarreled with Fang, so Fang is blue.",
+          "Red: An, Qiang, Ming; blue: Hua, Mei, Fang, and every quarreling pair is split. The answer is D."
+        ],
+        "ja": [
+          "アンは 赤組で、アンと ホアは けんかしたので、ホアは 青組 です。",
+          "ホアと チアンが けんかしたので チアンは 赤組、チアンと メイが けんかしたので メイは 青組 です。",
+          "メイと ミンが けんかしたので ミンは 赤組、ミンと ファンが けんかしたので ファンは 青組 です。",
+          "赤組は アン、チアン、ミン、青組は ホア、メイ、ファンで、けんかした 2人は みんな べつの 組です。答えは D です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "multiple_choice",
+      "options": {
+        "A": {
+          "zh-Hant": "小美和小芳",
+          "zh-Hans": "小美和小芳",
+          "en": "Mei and Fang",
+          "ja": "メイと ファン"
+        },
+        "B": {
+          "zh-Hant": "小華和小明",
+          "zh-Hans": "小华和小明",
+          "en": "Hua and Ming",
+          "ja": "ホアと ミン"
+        },
+        "C": {
+          "zh-Hant": "小強和小芳",
+          "zh-Hans": "小强和小芳",
+          "en": "Qiang and Fang",
+          "ja": "チアンと ファン"
+        },
+        "D": {
+          "zh-Hant": "小強和小明",
+          "zh-Hans": "小强和小明",
+          "en": "Qiang and Ming",
+          "ja": "チアンと ミン"
+        }
+      },
+      "correctAnswer": {
+        "type": "choice",
+        "value": "D"
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade2-foundation",
+        "notes": "二分圖著色：從已知一人沿著「吵架」關係交替推下去。掃「分成兩組|不能同(一)?組|同一組」：logic_grade2_064（圍圈帽子兩色）、logic_grade2_065（花盆紅白相鄰不同色）、logic_grade6_031（數字分組和相等）。g2_064／g2_065 是排成一圈或一列的兩色；本題關係以打散的配對給出，要自己串成鏈再推。"
+      }
+    },
+    {
+      "id": "logic_grade2_foundation_087",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "round_robin_chess_min_days",
+      "tags": [
+        "c:graph_theory",
+        "c:basic_counting",
+        "m:construction"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade2",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "小安、小美、小華、小明四個人比下棋，每兩個人都要下一盤。每天每個人最多只能下一盤棋。最少要幾天才能全部下完？",
+        "zh-Hans": "小安、小美、小华、小明四个人比下棋，每两个人都要下一盘。每天每个人最多只能下一盘棋。最少要几天才能全部下完？",
+        "en": "An, Mei, Hua and Ming hold a chess contest in which every two of them play one game. Each person can play at most one game per day. What is the smallest number of days needed to finish all the games?",
+        "ja": "アン、メイ、ホア、ミンの 4人で しょうぎの 大会を します。どの 2人も 1回ずつ たいせんします。1人は 1日に 1回までしか たいせんできません。ぜんぶの たいせんを おえるのに、いちばん 少なくて 何日 かかりますか。"
+      },
+      "answer": {
+        "zh-Hant": "最少要 3 天。",
+        "zh-Hans": "最少要 3 天。",
+        "en": "It takes at least 3 days.",
+        "ja": "いちばん 少なくて 3日 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "每兩個人下一盤：安美、安華、安明、美華、美明、華明，一共 6 盤。",
+          "每天每人最多下一盤，4 個人一天最多只能下 2 盤（兩兩一組）。",
+          "6 盤棋每天最多 2 盤，至少要 3 天。",
+          "真的排得出來：第 1 天安美、華明；第 2 天安華、美明；第 3 天安明、美華。最少要 3 天。"
+        ],
+        "zh-Hans": [
+          "每两个人下一盘：安美、安华、安明、美华、美明、华明，一共 6 盘。",
+          "每天每人最多下一盘，4 个人一天最多只能下 2 盘（两两一组）。",
+          "6 盘棋每天最多 2 盘，至少要 3 天。",
+          "真的排得出来：第 1 天安美、华明；第 2 天安华、美明；第 3 天安明、美华。最少要 3 天。"
+        ],
+        "en": [
+          "Every pair plays once: An–Mei, An–Hua, An–Ming, Mei–Hua, Mei–Ming, Hua–Ming, 6 games in all.",
+          "Each person plays at most one game a day, so 4 people can play at most 2 games a day (two pairs).",
+          "6 games at most 2 per day needs at least 3 days.",
+          "It can be done: day 1 An–Mei and Hua–Ming; day 2 An–Hua and Mei–Ming; day 3 An–Ming and Mei–Hua. The least is 3 days."
+        ],
+        "ja": [
+          "どの 2人も 1回ずつ：アン–メイ、アン–ホア、アン–ミン、メイ–ホア、メイ–ミン、ホア–ミン の 6回 です。",
+          "1人 1日 1回まで なので、4人では 1日に 多くて 2回（2人ずつ 2組）です。",
+          "6回を 1日 2回まで なので、少なくとも 3日 いります。",
+          "じっさいに：1日目 アン–メイ と ホア–ミン、2日目 アン–ホア と メイ–ミン、3日目 アン–ミン と メイ–ホア。いちばん 少なくて 3日 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "3"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade2-foundation",
+        "notes": "循環賽排程（K4 邊著色）：總盤數 ÷ 每日上限得下界，再構造。掃「下棋|每天.{0,12}(最多|只能)|比賽.{0,10}每兩」：logic_grade1_059（4 人握手 6 次）、logic_grade6_081（7 人圓桌不重複鄰座最多幾晚）、logic_grade5_017（三隊循環賽勝場）。g1_059 只數總場數；本題要再加每天的限制求天數。"
+      }
+    },
+    {
+      "id": "logic_grade2_foundation_088",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "adult_and_two_kids_cross_river",
+      "tags": [
+        "c:logic_deduction",
+        "m:construction"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade2",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "1 個大人和 2 個小孩要坐一條小船過河。小船一次只能載 1 個大人，或是載 1 到 2 個小孩（大人和小孩不能一起坐），船上至少要有 1 個人划船。從這一岸划到對岸，或從對岸划回來，都算 1 趟。三個人全部到對岸，最少要划幾趟？",
+        "zh-Hans": "1 个大人和 2 个小孩要坐一条小船过河。小船一次只能载 1 个大人，或是载 1 到 2 个小孩（大人和小孩不能一起坐），船上至少要有 1 个人划船。从这一岸划到对岸，或从对岸划回来，都算 1 趟。三个人全部到对岸，最少要划几趟？",
+        "en": "One adult and two children must cross a river in a small boat. The boat can carry either 1 adult alone or 1 to 2 children (an adult and a child cannot ride together), and at least one person must row. Each crossing, whether going over or coming back, counts as 1 trip. What is the least number of trips needed to get all three to the other side?",
+        "ja": "おとな 1人と 子ども 2人が 小さな ボートで 川を わたります。ボートには、おとな 1人 だけか、子ども 1人か 2人 だけが のれます（おとなと 子どもは いっしょに のれません）。ボートを こぐ 人が 少なくとも 1人 いります。こちらから むこう岸へ 行くのも、もどって くるのも 1回と 数えます。3人 ぜんいんが むこう岸へ わたるには、いちばん 少なくて 何回 こげば よいですか。"
+      },
+      "answer": {
+        "zh-Hant": "最少要划 5 趟。",
+        "zh-Hans": "最少要划 5 趟。",
+        "en": "At least 5 trips are needed.",
+        "ja": "いちばん 少なくて 5回 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "大人只能自己一個人過去；如果大人先過去，船就在對岸，得由大人自己划回來，等於白跑。所以大人過河前，對岸要先有一個小孩，等一下負責把船划回來。",
+          "第 1 趟：兩個小孩一起過去。第 2 趟：一個小孩划回來。第 3 趟：大人自己過去。",
+          "第 4 趟：留在對岸的那個小孩把船划回來。第 5 趟：兩個小孩一起過去，三個人都到了對岸。",
+          "少於 5 趟不行：如果只往對岸去 2 趟，其中一趟只能載大人，另一趟最多載 2 個小孩，一共最多送過去 3 人；可是中間要划回來 1 趟，至少會帶回 1 人，對岸就湊不滿 3 人。所以至少去 3 趟、回 2 趟，共 3 + 2 = 5 趟。最少要划 5 趟。"
+        ],
+        "zh-Hans": [
+          "大人只能自己一个人过去；如果大人先过去，船就在对岸，得由大人自己划回来，等于白跑。所以大人过河前，对岸要先有一个小孩，等一下负责把船划回来。",
+          "第 1 趟：两个小孩一起过去。第 2 趟：一个小孩划回来。第 3 趟：大人自己过去。",
+          "第 4 趟：留在对岸的那个小孩把船划回来。第 5 趟：两个小孩一起过去，三个人都到了对岸。",
+          "少于 5 趟不行：如果只往对岸去 2 趟，其中一趟只能载大人，另一趟最多载 2 个小孩，一共最多送过去 3 人；可是中间要划回来 1 趟，至少会带回 1 人，对岸就凑不满 3 人。所以至少去 3 趟、回 2 趟，共 3 + 2 = 5 趟。最少要划 5 趟。"
+        ],
+        "en": [
+          "The adult can only cross alone; if he goes first, the boat is on the far side and he would have to row it back himself, wasting the trip. So before the adult crosses, a child must already be on the far side to bring the boat back.",
+          "Trip 1: both children cross. Trip 2: one child rows back. Trip 3: the adult crosses alone.",
+          "Trip 4: the child waiting on the far side rows back. Trip 5: both children cross, and all three are across.",
+          "Fewer than 5 is impossible: with only 2 trips going over, one carries just the adult and the other at most 2 children, 3 people at most; but the return trip in between brings back at least 1 person, so the far side cannot reach 3. So there are at least 3 trips over and 2 back: 3 + 2 = 5. The least is 5 trips."
+        ],
+        "ja": [
+          "おとなは 1人で しか わたれません。おとなが さきに わたると ボートは むこう岸に あり、おとなが じぶんで もどす ことに なって むだです。だから おとなが わたる 前に、むこう岸に ボートを もどす 子どもが 1人 いる ように します。",
+          "1回目：子ども 2人が わたる。2回目：子ども 1人が もどる。3回目：おとなが 1人で わたる。",
+          "4回目：むこう岸に いた 子どもが ボートを もどす。5回目：子ども 2人が わたり、3人とも むこう岸に つきます。",
+          "5回より 少なくは できません。むこうへ 行くのが 2回 だけだと、1回は おとな だけ、もう1回は 子ども 2人までで、多くて 3人 です。でも 間に もどる 1回で 少なくとも 1人 もどるので、むこう岸に 3人 そろいません。だから 行く 3回、もどる 2回で 3 + 2 = 5回 です。いちばん 少なくて 5回 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "5"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade2-foundation",
+        "notes": "過河問題（載重限制：大人單獨、小孩最多 2 人），BFS 驗證最少 5 趟。掃「過河|渡河|划船|大人.{0,20}小孩」：logic_grade5_048（9 人、船載 2 人要划回，求趟數）、logic_grade7_010（狼羊白菜）。g5_048 所有人等價、船限 2 人；本題大人不能和小孩同船，必須先把小孩送到對岸當回船的人，推理點不同。"
+      }
     }
   ]
 }
