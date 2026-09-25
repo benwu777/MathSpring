@@ -226,6 +226,10 @@ void main() {
 
     await tester.tap(find.byKey(const ValueKey<String>('avatar_next_button')));
     await tester.pump();
+    expect(find.text('Hair colour'), findsAtLeastNWidgets(1));
+
+    await tester.tap(find.byKey(const ValueKey<String>('avatar_next_button')));
+    await tester.pump();
     expect(columnCount(), 4, reason: '眼型');
 
     await tester.tap(find.byKey(const ValueKey<String>('avatar_next_button')));
@@ -245,7 +249,7 @@ void main() {
       const MaterialApp(home: Scaffold(body: AvatarEditor())),
     );
 
-    for (int step = 0; step < 4; step++) {
+    for (int step = 0; step < 5; step++) {
       await tester
           .tap(find.byKey(const ValueKey<String>('avatar_next_button')));
       await tester.pump();
@@ -263,7 +267,7 @@ void main() {
       const MaterialApp(home: Scaffold(body: AvatarEditor())),
     );
 
-    for (int step = 0; step < 6; step++) {
+    for (int step = 0; step < 7; step++) {
       await tester
           .tap(find.byKey(const ValueKey<String>('avatar_next_button')));
       await tester.pump();
@@ -363,6 +367,11 @@ void main() {
             reason: '$id thumbnail does not match its preview treatment',
           );
         }
+        if (presentation == AvatarPresentation.girl && category == 'hair') {
+          await tester
+              .tap(find.byKey(const ValueKey<String>('avatar_next_button')));
+          await tester.pump();
+        }
       }
     }
   });
@@ -401,5 +410,88 @@ void main() {
         .tap(find.byKey(const ValueKey<String>('avatar_option_boy_hair_03')));
     await tester.pump();
     expect(requestedUnlockFor, 'boy_hair_03');
+  });
+
+  testWidgets('offers six girl hair-colour swatches after hairstyle',
+      (tester) async {
+    AvatarConfiguration? changedConfiguration;
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Scaffold(
+          body: AvatarEditor(
+            onChanged: (AvatarConfiguration value) =>
+                changedConfiguration = value,
+          ),
+        ),
+      ),
+    );
+
+    for (int step = 0; step < 4; step++) {
+      await tester
+          .tap(find.byKey(const ValueKey<String>('avatar_next_button')));
+      await tester.pump();
+    }
+
+    expect(find.text('Hair colour'), findsAtLeastNWidgets(1));
+    for (int index = 1; index <= 6; index++) {
+      final String id = 'girl_hair_color_${index.toString().padLeft(2, '0')}';
+      expect(find.byKey(ValueKey<String>('avatar_option_$id')), findsOneWidget);
+    }
+    expect(
+        find.byKey(const ValueKey<String>('avatar_option_girl_hair_color_07')),
+        findsNothing);
+
+    await tester.tap(
+      find.byKey(const ValueKey<String>('avatar_option_girl_hair_color_03')),
+    );
+    await tester.pump();
+
+    expect(changedConfiguration!.hairColorId, 'girl_hair_color_03');
+    expect(
+      tester
+          .widget<AvatarPreview>(find.byType(AvatarPreview).first)
+          .configuration
+          .hairColorId,
+      'girl_hair_color_03',
+    );
+
+    await tester.tap(find.byKey(const ValueKey<String>('avatar_back_button')));
+    await tester.pump();
+    final AvatarPreview hairTilePreview = tester.widget<AvatarPreview>(
+      find.descendant(
+        of: find.byKey(const ValueKey<String>('avatar_option_girl_hair_03')),
+        matching: find.byType(AvatarPreview),
+      ),
+    );
+    expect(hairTilePreview.configuration.hairColorId, 'girl_hair_color_03');
+  });
+
+  testWidgets('does not offer a hair-colour section for boys', (tester) async {
+    await tester.pumpWidget(
+      const MaterialApp(home: Scaffold(body: AvatarEditor())),
+    );
+
+    await tester
+        .tap(find.byKey(const ValueKey<String>('avatar_presentation_boy')));
+    await tester.pump();
+
+    expect(find.text('Hair colour'), findsNothing);
+    for (int index = 0; index < 7; index++) {
+      expect(find.byKey(ValueKey<String>('avatar_section_tab_$index')),
+          findsOneWidget);
+    }
+    expect(find.byKey(const ValueKey<String>('avatar_section_tab_7')),
+        findsNothing);
+
+    for (int step = 0; step < 6; step++) {
+      await tester
+          .tap(find.byKey(const ValueKey<String>('avatar_next_button')));
+      await tester.pump();
+    }
+    expect(find.text('Mouth'), findsAtLeastNWidgets(1));
+    expect(find.text('Hair colour'), findsNothing);
+    expect(
+        find.byKey(const ValueKey<String>('avatar_option_girl_hair_color_01')),
+        findsNothing);
   });
 }
