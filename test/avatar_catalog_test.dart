@@ -215,7 +215,7 @@ void main() {
       ),
       throwsAssertionError,
     );
-    final AvatarConfiguration boyWithPersistedGirlColour = AvatarConfiguration(
+    const AvatarConfiguration boyWithPersistedGirlColour = AvatarConfiguration(
       presentation: AvatarPresentation.boy,
       skinId: 'boy_skin_01',
       faceId: 'boy_face_01',
