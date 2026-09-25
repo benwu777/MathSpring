@@ -6779,6 +6779,1106 @@
         "reference": "combinatorics-grade10-foundation",
         "notes": "指示變數＋期望值線性，端點與中間分開算。掃「鄰居|左右|相鄰.{0,20}高」：combinatorics_grade12_049（刷新紀錄次數期望）、combinatorics_grade11_044（圓桌一男一女相鄰對期望）、combinatorics_grade10_046（連正次數期望）。同屬線性期望，本題的局部最大值與端點分類不同。"
       }
+    },
+    {
+      "id": "combinatorics_grade10_foundation_077",
+      "reviewStatus": "ok",
+      "topic": "combinatorics",
+      "subtopic": "pascal_triangle_value_occurrences",
+      "tags": [
+        "c:binomial",
+        "c:permutation_combination",
+        "m:enumeration"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "巴斯卡三角形第 n 列（最上面一列是第 0 列）由左到右是 C(n, 0)、C(n, 1)、⋯、C(n, n)，其中 C(n, k) 表示從 n 個相異物件中取 k 個的組合數。把整個無限延伸的巴斯卡三角形看一遍，數字 120 一共出現幾次？",
+        "zh-Hans": "巴斯卡三角形第 n 列（最上面一列是第 0 列）由左到右是 C(n, 0)、C(n, 1)、⋯、C(n, n)，其中 C(n, k) 表示从 n 个相异物件中取 k 个的组合数。把整个无限延伸的巴斯卡三角形看一遍，数字 120 一共出现几次？",
+        "en": "Row n of Pascal’s triangle (the top row is row 0) reads C(n, 0), C(n, 1), ⋯, C(n, n) from left to right, where C(n, k) is the number of ways to choose k of n distinct objects. Looking over the whole infinite triangle, how many times does the number 120 appear?",
+        "ja": "パスカルの三角形の第 n 行（いちばん上を第 0 行とする）は左から C(n, 0)、C(n, 1)、⋯、C(n, n) で、C(n, k) は異なる n 個から k 個選ぶ組合せの数です。無限に続くパスカルの三角形全体で、数 120 は何回現れますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 6。",
+        "zh-Hans": "答案是 6。",
+        "en": "The answer is 6.",
+        "ja": "答えは 6 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "C(n, k) = C(n, n − k)，所以只要找 k ≤ n/2 的位置，再看對稱位置是否是另一個格子。",
+          "k = 1：C(n, 1) = n = 120，得 n = 120，這一列的 C(120, 1) 與 C(120, 119) 各出現一次。",
+          "k = 2：n(n − 1)/2 = 120，n(n − 1) = 240 = 16 × 15，n = 16，得 C(16, 2) 與 C(16, 14)。k = 3：n(n − 1)(n − 2) = 720 = 10 × 9 × 8，n = 10，得 C(10, 3) 與 C(10, 7)。",
+          "k = 4：C(8, 4) = 70、C(9, 4) = 126，跳過了 120；k = 5：C(10, 5) = 252 > 120，而且 n ≥ 2k 時 C(n, k) ≥ C(2k, k) 會隨 k 變大，k ≥ 5 不可能再等於 120。",
+          "共出現 2 + 2 + 2 = 6 次。答案是 6。"
+        ],
+        "zh-Hans": [
+          "C(n, k) = C(n, n − k)，所以只要找 k ≤ n/2 的位置，再看对称位置是否是另一个格子。",
+          "k = 1：C(n, 1) = n = 120，得 n = 120，这一列的 C(120, 1) 与 C(120, 119) 各出现一次。",
+          "k = 2：n(n − 1)/2 = 120，n(n − 1) = 240 = 16 × 15，n = 16，得 C(16, 2) 与 C(16, 14)。k = 3：n(n − 1)(n − 2) = 720 = 10 × 9 × 8，n = 10，得 C(10, 3) 与 C(10, 7)。",
+          "k = 4：C(8, 4) = 70、C(9, 4) = 126，跳过了 120；k = 5：C(10, 5) = 252 > 120，而且 n ≥ 2k 时 C(n, k) ≥ C(2k, k) 会随 k 变大，k ≥ 5 不可能再等于 120。",
+          "共出现 2 + 2 + 2 = 6 次。答案是 6。"
+        ],
+        "en": [
+          "Since C(n, k) = C(n, n − k), look for positions with k ≤ n/2 and then count the mirror positions.",
+          "k = 1: C(n, 1) = n = 120 gives n = 120; C(120, 1) and C(120, 119) each give one occurrence.",
+          "k = 2: n(n − 1)/2 = 120, n(n − 1) = 240 = 16 × 15, so n = 16: C(16, 2) and C(16, 14). k = 3: n(n − 1)(n − 2) = 720 = 10 × 9 × 8, so n = 10: C(10, 3) and C(10, 7).",
+          "k = 4: C(8, 4) = 70 and C(9, 4) = 126 skip over 120; k = 5: C(10, 5) = 252 > 120, and for n ≥ 2k, C(n, k) ≥ C(2k, k), which grows with k, so k ≥ 5 is impossible.",
+          "120 appears 2 + 2 + 2 = 6 times. The answer is 6."
+        ],
+        "ja": [
+          "C(n, k) = C(n, n − k) なので、k ≤ n/2 の位置を探し、対称な位置も数えます。",
+          "k = 1：C(n, 1) = n = 120 より n = 120。C(120, 1) と C(120, 119) で 1 回ずつ。",
+          "k = 2：n(n − 1)/2 = 120、n(n − 1) = 240 = 16 × 15 で n = 16。C(16, 2) と C(16, 14)。k = 3：n(n − 1)(n − 2) = 720 = 10 × 9 × 8 で n = 10。C(10, 3) と C(10, 7)。",
+          "k = 4：C(8, 4) = 70、C(9, 4) = 126 で 120 を飛び越える。k = 5：C(10, 5) = 252 > 120 で、n ≥ 2k なら C(n, k) ≥ C(2k, k) は k とともに増えるので k ≥ 5 はありえない。",
+          "合計 2 + 2 + 2 = 6 回。答えは 6 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "6"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "combinatorics-grade10-foundation",
+        "notes": "在巴斯卡三角形中找某個值出現的次數，按 k 分類解 C(n, k) = 120。掃過 巴斯卡|帕斯卡|出現幾次：algebra_grade9_053（相鄰兩數相加）、combinatorics_grade11_048（曲棍球棒）、combinatorics_grade11_056（交錯和）、number_theory_grade12_016（奇數個數）、combinatorics_grade12_050（C(12,k) = C(12,k+2)）。無「某數出現幾次」。"
+      }
+    },
+    {
+      "id": "combinatorics_grade10_foundation_078",
+      "reviewStatus": "ok",
+      "topic": "combinatorics",
+      "subtopic": "binomial_half_row_symmetry",
+      "tags": [
+        "c:binomial",
+        "m:bijection"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "求 C(9, 0) + C(9, 1) + C(9, 2) + C(9, 3) + C(9, 4) 的值，其中 C(n, k) 表示從 n 個相異物件中取 k 個的組合數。",
+        "zh-Hans": "求 C(9, 0) + C(9, 1) + C(9, 2) + C(9, 3) + C(9, 4) 的值，其中 C(n, k) 表示从 n 个相异物件中取 k 个的组合数。",
+        "en": "Find C(9, 0) + C(9, 1) + C(9, 2) + C(9, 3) + C(9, 4), where C(n, k) is the number of ways to choose k of n distinct objects.",
+        "ja": "C(9, 0) + C(9, 1) + C(9, 2) + C(9, 3) + C(9, 4) の値を求めなさい。ただし C(n, k) は異なる n 個から k 個選ぶ組合せの数です。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 256。",
+        "zh-Hans": "答案是 256。",
+        "en": "The answer is 256.",
+        "ja": "答えは 256 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "整列的和：C(9, 0) + C(9, 1) + ⋯ + C(9, 9) = (1 + 1)⁹ = 2⁹ = 512（這是 9 個元素的集合的子集總數）。",
+          "對稱性：C(9, k) = C(9, 9 − k)。選 k 個等於「留下 9 − k 個」，所以 C(9, 0) = C(9, 9)、C(9, 1) = C(9, 8)、⋯、C(9, 4) = C(9, 5)。",
+          "9 是奇數，0 到 9 這 10 項恰好配成 5 對，前半段 k = 0 到 4 與後半段 k = 5 到 9 的和相等。",
+          "所以所求 = 512 ÷ 2 = 256。（直接加：1 + 9 + 36 + 84 + 126 = 256。）答案是 256。"
+        ],
+        "zh-Hans": [
+          "整列的和：C(9, 0) + C(9, 1) + ⋯ + C(9, 9) = (1 + 1)⁹ = 2⁹ = 512（这是 9 个元素的集合的子集总数）。",
+          "对称性：C(9, k) = C(9, 9 − k)。选 k 个等于「留下 9 − k 个」，所以 C(9, 0) = C(9, 9)、C(9, 1) = C(9, 8)、⋯、C(9, 4) = C(9, 5)。",
+          "9 是奇数，0 到 9 这 10 项恰好配成 5 对，前半段 k = 0 到 4 与后半段 k = 5 到 9 的和相等。",
+          "所以所求 = 512 ÷ 2 = 256。（直接加：1 + 9 + 36 + 84 + 126 = 256。）答案是 256。"
+        ],
+        "en": [
+          "The whole row sums to C(9, 0) + C(9, 1) + ⋯ + C(9, 9) = (1 + 1)⁹ = 2⁹ = 512 (the number of subsets of a 9-element set).",
+          "Symmetry: C(9, k) = C(9, 9 − k), since choosing k is the same as leaving 9 − k. So C(9, 0) = C(9, 9), C(9, 1) = C(9, 8), ⋯, C(9, 4) = C(9, 5).",
+          "Because 9 is odd, the 10 terms pair up exactly, and the first half (k = 0 to 4) equals the second half (k = 5 to 9).",
+          "So the sum is 512 ÷ 2 = 256. (Directly: 1 + 9 + 36 + 84 + 126 = 256.) The answer is 256."
+        ],
+        "ja": [
+          "行全体の和は C(9, 0) + C(9, 1) + ⋯ + C(9, 9) = (1 + 1)⁹ = 2⁹ = 512（9 個の要素をもつ集合の部分集合の総数）。",
+          "対称性：C(9, k) = C(9, 9 − k)（k 個選ぶことは 9 − k 個残すこと）。よって C(9, 0) = C(9, 9)、C(9, 1) = C(9, 8)、⋯、C(9, 4) = C(9, 5)。",
+          "9 は奇数なので 10 項がちょうど 5 組に分かれ、前半（k = 0〜4）と後半（k = 5〜9）の和は等しい。",
+          "よって求める和は 512 ÷ 2 = 256。（直接足しても 1 + 9 + 36 + 84 + 126 = 256。）答えは 256 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "256"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "combinatorics-grade10-foundation",
+        "notes": "用對稱性把奇數列的前半段和化成 2ⁿ⁻¹。掃過 C\\(|組合數.*和：combinatorics_grade9_012（C(10, 偶數) 和 = 512，用 ±1 代入）、algebra_grade12_030（(1+x)¹⁰ 偶次項係數和）、combinatorics_grade11_056（前半段交錯和）。本題是前半段的一般和，靠對稱配對。"
+      }
+    },
+    {
+      "id": "combinatorics_grade10_foundation_079",
+      "reviewStatus": "ok",
+      "topic": "combinatorics",
+      "subtopic": "galton_board_expected_count",
+      "tags": [
+        "c:binomial",
+        "c:expectation",
+        "c:probability",
+        "m:bijection"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "高爾頓板上有 10 層釘子。每顆小球落下時，每碰到一層都以各 1/2 的機率往左或往右偏一格，各層互相獨立，最後落進底部 11 個格子之一，由左到右編號 0 到 10（往右偏了幾次就落進幾號格）。放下 1024 顆小球，落進 2 號格的小球個數的期望值是多少？",
+        "zh-Hans": "高尔顿板上有 10 层钉子。每颗小球落下时，每碰到一层都以各 1/2 的概率往左或往右偏一格，各层互相独立，最后落进底部 11 个格子之一，由左到右编号 0 到 10（往右偏了几次就落进几号格）。放下 1024 颗小球，落进 2 号格的小球个数的期望值是多少？",
+        "en": "A Galton board has 10 rows of pegs. At each row a falling ball moves one step left or right with probability 1/2 each, independently, and finally lands in one of 11 bins numbered 0 to 10 from left to right (the bin number equals the number of right moves). If 1024 balls are dropped, what is the expected number of balls in bin 2?",
+        "ja": "ゴルトンボードには釘が 10 段あります。落ちる玉は各段で確率 1/2 ずつ左か右に 1 つずれ（各段は独立）、最後に下の 11 個の枠の 1 つに入ります。枠は左から 0〜10 番で、右にずれた回数がそのまま枠の番号です。玉を 1024 個落とすとき、2 番の枠に入る玉の個数の期待値はいくつですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 45。",
+        "zh-Hans": "答案是 45。",
+        "en": "The answer is 45.",
+        "ja": "答えは 45 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "一顆球落進 2 號格，表示 10 層中恰好有 2 層往右。往右的那 2 層有 C(10, 2) = 45 種選法。",
+          "每一種左右路徑的機率都是 (1/2)¹⁰ = 1/1024，所以一顆球落進 2 號格的機率 = 45/1024。",
+          "1024 顆球，每顆落進 2 號格的機率都是 45/1024；落進 2 號格的個數 = 每顆球「進 2 號記 1、否則記 0」的總和。",
+          "期望值可以逐顆相加：1024 × 45/1024 = 45。答案是 45。"
+        ],
+        "zh-Hans": [
+          "一颗球落进 2 号格，表示 10 层中恰好有 2 层往右。往右的那 2 层有 C(10, 2) = 45 种选法。",
+          "每一种左右路径的概率都是 (1/2)¹⁰ = 1/1024，所以一颗球落进 2 号格的概率 = 45/1024。",
+          "1024 颗球，每颗落进 2 号格的概率都是 45/1024；落进 2 号格的个数 = 每颗球「进 2 号记 1、否则记 0」的总和。",
+          "期望值可以逐颗相加：1024 × 45/1024 = 45。答案是 45。"
+        ],
+        "en": [
+          "A ball lands in bin 2 exactly when it moves right at exactly 2 of the 10 rows; those rows can be chosen in C(10, 2) = 45 ways.",
+          "Each left/right path has probability (1/2)¹⁰ = 1/1024, so one ball lands in bin 2 with probability 45/1024.",
+          "The number of balls in bin 2 is the sum over the 1024 balls of \"1 if it lands in bin 2, else 0\".",
+          "Expectations add: 1024 × 45/1024 = 45. The answer is 45."
+        ],
+        "ja": [
+          "玉が 2 番に入るのは、10 段のうちちょうど 2 段で右にずれるとき。その 2 段の選び方は C(10, 2) = 45 通り。",
+          "左右の経路はどれも確率 (1/2)¹⁰ = 1/1024 なので、1 個の玉が 2 番に入る確率は 45/1024。",
+          "2 番に入る玉の個数は、1024 個それぞれについて「2 番なら 1、そうでなければ 0」とした値の和です。",
+          "期待値は足し合わせられるので 1024 × 45/1024 = 45。答えは 45 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "45"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "combinatorics-grade10-foundation",
+        "notes": "高爾頓板：路徑數＝二項係數，期望個數＝總數 × 二項機率。掃過 高爾頓|釘|格子.*機率：無。二項分布題 combinatorics_grade10_066（4 次擲 2 正 vs 6 次擲 3 正比較）、combinatorics_grade11_050（眾數）。"
+      }
+    },
+    {
+      "id": "combinatorics_grade10_foundation_080",
+      "reviewStatus": "ok",
+      "topic": "combinatorics",
+      "subtopic": "expected_pairs_same_birth_month",
+      "tags": [
+        "c:expectation",
+        "c:permutation_combination",
+        "m:bijection"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "9 個人的出生月份各自獨立，而且每個人落在 12 個月份中任一個月的機會都相同。若兩個人在同一個月份出生，就稱他們是一對「同月生」。求 9 個人之中「同月生」配對數的期望值。",
+        "zh-Hans": "9 个人的出生月份各自独立，而且每个人落在 12 个月份中任一个月的机会都相同。若两个人在同一个月份出生，就称他们是一对「同月生」。求 9 个人之中「同月生」配对数的期望值。",
+        "en": "Each of 9 people has a birth month chosen independently and uniformly among the 12 months. Two people born in the same month form a \"same-month pair\". Find the expected number of same-month pairs among the 9 people.",
+        "ja": "9 人の誕生月はそれぞれ独立で、12 か月のどれになる確率も同じです。2 人が同じ月に生まれていれば「同月ペア」と呼びます。9 人の中の同月ペアの数の期待値を求めなさい。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 3。",
+        "zh-Hans": "答案是 3。",
+        "en": "The answer is 3.",
+        "ja": "答えは 3 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "9 個人兩兩配對，一共有 C(9, 2) = 36 對。",
+          "任取其中一對：第二個人的月份和第一個人相同的機率是 1/12。",
+          "同月生的對數 = 36 對之中每一對「同月記 1、不同月記 0」的總和，期望值可以逐對相加（不需要各對之間獨立）。",
+          "期望值 = 36 × 1/12 = 3。答案是 3。"
+        ],
+        "zh-Hans": [
+          "9 个人两两配对，一共有 C(9, 2) = 36 对。",
+          "任取其中一对：第二个人的月份和第一个人相同的概率是 1/12。",
+          "同月生的对数 = 36 对之中每一对「同月记 1、不同月记 0」的总和，期望值可以逐对相加（不需要各对之间独立）。",
+          "期望值 = 36 × 1/12 = 3。答案是 3。"
+        ],
+        "en": [
+          "There are C(9, 2) = 36 pairs of people.",
+          "For any one pair, the second person’s month matches the first with probability 1/12.",
+          "The number of same-month pairs is the sum over the 36 pairs of \"1 if same month, 0 otherwise\"; expectations add even though the pairs are not independent.",
+          "Expected value = 36 × 1/12 = 3. The answer is 3."
+        ],
+        "ja": [
+          "9 人から 2 人の組は C(9, 2) = 36 組あります。",
+          "どの 1 組でも、2 人目の月が 1 人目と同じになる確率は 1/12。",
+          "同月ペアの数は 36 組それぞれの「同じ月なら 1、違えば 0」の和で、組どうしが独立でなくても期待値は足し合わせられます。",
+          "期待値 = 36 × 1/12 = 3。答えは 3 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "3"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "combinatorics-grade10-foundation",
+        "notes": "以「配對」為指標變數的期望值（生日問題的期望版本）。掃過 生日|月份：logic_grade5_019、logic_grade8_019（鴿籠）、combinatorics_grade11_017（三人星期幾全相異的機率）。庫中無配對數期望值。其他線性期望題：combinatorics_grade10_063（空餐廳）、combinatorics_grade11_044（混合相鄰對）。"
+      }
+    },
+    {
+      "id": "combinatorics_grade10_foundation_081",
+      "reviewStatus": "ok",
+      "topic": "combinatorics",
+      "subtopic": "pooled_testing_expected_tests",
+      "tags": [
+        "c:expectation",
+        "c:probability",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "某單位要替 100 人做檢驗，每人檢驗結果為陽性的機率都是 0.1，彼此獨立。做法是把 100 人分成 50 組、每組 2 人，先把同組 2 人的檢體混在一起驗一次：若混合結果是陰性，這 2 人都確定是陰性，這組只用 1 次；若是陽性，再把這 2 人各自單獨驗一次，這組共用 3 次。求這 100 人總檢驗次數的期望值。",
+        "zh-Hans": "某单位要替 100 人做检验，每人检验结果为阳性的概率都是 0.1，彼此独立。做法是把 100 人分成 50 组、每组 2 人，先把同组 2 人的检体混在一起验一次：若混合结果是阴性，这 2 人都确定是阴性，这组只用 1 次；若是阳性，再把这 2 人各自单独验一次，这组共用 3 次。求这 100 人总检验次数的期望值。",
+        "en": "A lab tests 100 people; each is positive with probability 0.1, independently. The 100 people are split into 50 pairs. Each pair’s samples are first pooled and tested once: if the pool is negative, both are negative and the pair uses 1 test; if positive, both are then tested individually, 3 tests in total for that pair. Find the expected total number of tests for the 100 people.",
+        "ja": "ある機関が 100 人を検査します。各人が陽性である確率は 0.1 で、互いに独立です。100 人を 2 人ずつ 50 組に分け、まず組の 2 人の検体を混ぜて 1 回検査します。混合結果が陰性なら 2 人とも陰性でその組は 1 回、陽性なら 2 人を個別にもう 1 回ずつ検査してその組は計 3 回です。100 人の総検査回数の期待値を求めなさい。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 69。",
+        "zh-Hans": "答案是 69。",
+        "en": "The answer is 69.",
+        "ja": "答えは 69 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "一組 2 人都是陰性的機率 = 0.9 × 0.9 = 0.81；至少一人陽性的機率 = 1 − 0.81 = 0.19。",
+          "一組的檢驗次數：機率 0.81 時是 1 次，機率 0.19 時是 3 次。期望值 = 0.81 × 1 + 0.19 × 3 = 0.81 + 0.57 = 1.38 次。",
+          "50 組的期望值相加：50 × 1.38 = 69 次。",
+          "對照：每人單獨驗要 100 次，混合檢驗平均省下約 31 次。答案是 69。"
+        ],
+        "zh-Hans": [
+          "一组 2 人都是阴性的概率 = 0.9 × 0.9 = 0.81；至少一人阳性的概率 = 1 − 0.81 = 0.19。",
+          "一组的检验次数：概率 0.81 时是 1 次，概率 0.19 时是 3 次。期望值 = 0.81 × 1 + 0.19 × 3 = 0.81 + 0.57 = 1.38 次。",
+          "50 组的期望值相加：50 × 1.38 = 69 次。",
+          "对照：每人单独验要 100 次，混合检验平均省下约 31 次。答案是 69。"
+        ],
+        "en": [
+          "A pair is all negative with probability 0.9 × 0.9 = 0.81, and has at least one positive with probability 1 − 0.81 = 0.19.",
+          "Tests for one pair: 1 with probability 0.81, 3 with probability 0.19. Expected value = 0.81 × 1 + 0.19 × 3 = 0.81 + 0.57 = 1.38.",
+          "Adding over 50 pairs: 50 × 1.38 = 69.",
+          "For comparison, testing everyone separately takes 100 tests; pooling saves about 31 on average. The answer is 69."
+        ],
+        "ja": [
+          "1 組の 2 人がともに陰性の確率は 0.9 × 0.9 = 0.81、少なくとも 1 人陽性の確率は 1 − 0.81 = 0.19。",
+          "1 組の検査回数は確率 0.81 で 1 回、確率 0.19 で 3 回。期待値は 0.81 × 1 + 0.19 × 3 = 0.81 + 0.57 = 1.38 回。",
+          "50 組分を足して 50 × 1.38 = 69 回。",
+          "比較：1 人ずつなら 100 回なので、混合検査で平均約 31 回節約できます。答えは 69 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "69"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "combinatorics-grade10-foundation",
+        "notes": "混合檢驗（群檢）的期望次數。掃過 檢驗|篩檢|混合：combinatorics_grade10_068（貝氏陽性）、logic_grade8_017（試紙找壞瓶，二進位）。無期望次數題。"
+      }
+    },
+    {
+      "id": "combinatorics_grade10_foundation_082",
+      "reviewStatus": "ok",
+      "topic": "combinatorics",
+      "subtopic": "expected_total_before_stopping_face",
+      "tags": [
+        "c:expectation",
+        "c:probability",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "小安反覆擲一顆公正的六面骰子，一擲出 1 點就停止。停止前擲出的點數（不含最後那個 1）全部加起來就是他的得分；如果第一次就擲出 1，得分是 0。求得分的期望值。",
+        "zh-Hans": "小安反复掷一颗公正的六面骰子，一掷出 1 点就停止。停止前掷出的点数（不含最后那个 1）全部加起来就是他的得分；如果第一次就掷出 1，得分是 0。求得分的期望值。",
+        "en": "An Ang repeatedly rolls a fair six-sided die and stops as soon as he rolls a 1. His score is the sum of all numbers rolled before stopping (not counting the final 1); if the first roll is a 1, the score is 0. Find the expected score.",
+        "ja": "アンさんは公正な 6 面さいころを繰り返し振り、1 の目が出たらすぐやめます。やめる前に出た目（最後の 1 は含めない）の合計が得点で、最初に 1 が出たら得点は 0 です。得点の期待値を求めなさい。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 20。",
+        "zh-Hans": "答案是 20。",
+        "en": "The answer is 20.",
+        "ja": "答えは 20 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "設得分的期望值是 E。看第一次擲：機率 1/6 擲出 1，得分 0；機率 5/6 擲出 2 到 6 之一，這一擲的點數先記進得分，之後的情況和從頭開始完全一樣。",
+          "擲出不是 1 時，點數是 2、3、4、5、6 等可能，平均是 (2 + 3 + 4 + 5 + 6) ÷ 5 = 4。",
+          "所以 E = (1/6) × 0 + (5/6) × (4 + E)，即 E = 10/3 + (5/6)E。",
+          "(1/6)E = 10/3，E = 20。（另一個看法：擲到 1 之前平均擲出 5 次非 1，每次平均 4 點，5 × 4 = 20。）答案是 20。"
+        ],
+        "zh-Hans": [
+          "设得分的期望值是 E。看第一次掷：概率 1/6 掷出 1，得分 0；概率 5/6 掷出 2 到 6 之一，这一掷的点数先记进得分，之后的情况和从头开始完全一样。",
+          "掷出不是 1 时，点数是 2、3、4、5、6 等可能，平均是 (2 + 3 + 4 + 5 + 6) ÷ 5 = 4。",
+          "所以 E = (1/6) × 0 + (5/6) × (4 + E)，即 E = 10/3 + (5/6)E。",
+          "(1/6)E = 10/3，E = 20。（另一个看法：掷到 1 之前平均掷出 5 次非 1，每次平均 4 点，5 × 4 = 20。）答案是 20。"
+        ],
+        "en": [
+          "Let E be the expected score. Look at the first roll: with probability 1/6 it is a 1 and the score is 0; with probability 5/6 it is one of 2 to 6, that value is added, and afterwards the situation is exactly as at the start.",
+          "Given the roll is not 1, it is 2, 3, 4, 5 or 6 equally likely, with average (2 + 3 + 4 + 5 + 6) ÷ 5 = 4.",
+          "So E = (1/6) × 0 + (5/6) × (4 + E), i.e. E = 10/3 + (5/6)E.",
+          "(1/6)E = 10/3, so E = 20. (Another view: on average 5 non-1 rolls occur before the 1, each averaging 4, and 5 × 4 = 20.) The answer is 20."
+        ],
+        "ja": [
+          "得点の期待値を E とします。1 回目を見ると、確率 1/6 で 1 が出て得点 0。確率 5/6 で 2〜6 のどれかが出て、その目が得点に加わり、その後は最初と全く同じ状況になります。",
+          "1 以外が出たとき、目は 2、3、4、5、6 が同様に確からしく、平均は (2 + 3 + 4 + 5 + 6) ÷ 5 = 4。",
+          "よって E = (1/6) × 0 + (5/6) × (4 + E)、すなわち E = 10/3 + (5/6)E。",
+          "(1/6)E = 10/3 より E = 20。（別の見方：1 が出るまでに平均 5 回 1 以外が出て、1 回あたり平均 4 なので 5 × 4 = 20。）答えは 20 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "20"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "combinatorics-grade10-foundation",
+        "notes": "「第一步分析」建立期望值方程式（自我相似）。掃過 擲到|直到|停止：combinatorics_grade12_042（擲到 6 的次數期望 6）、combinatorics_grade11_064（最多 5 次的 2ᵏ 獎金）、combinatorics_grade11_053（AB 停機）。本題求的是停止前點數和，需同時處理條件平均 4。"
+      }
+    },
+    {
+      "id": "combinatorics_grade10_foundation_083",
+      "reviewStatus": "ok",
+      "topic": "combinatorics",
+      "subtopic": "expected_digit_sum_three_digit",
+      "tags": [
+        "c:expectation",
+        "c:place_value",
+        "m:direct"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "從所有三位數（100 到 999）中隨機選出一個，每個被選到的機會都相同。求它的三個數字相加之和的期望值。",
+        "zh-Hans": "从所有三位数（100 到 999）中随机选出一个，每个被选到的机会都相同。求它的三个数字相加之和的期望值。",
+        "en": "A three-digit number (100 to 999) is chosen uniformly at random. Find the expected value of the sum of its three digits.",
+        "ja": "3 桁の数（100〜999）から 1 つを、どれも同じ確率で無作為に選びます。その 3 つの数字の和の期待値を求めなさい。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 14。",
+        "zh-Hans": "答案是 14。",
+        "en": "The answer is 14.",
+        "ja": "答えは 14 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "數字和 = 百位數字 + 十位數字 + 個位數字，期望值可以分開算再相加。",
+          "百位數字是 1 到 9，每個都有 100 個三位數，機會相同，期望值 = (1 + 2 + ⋯ + 9) ÷ 9 = 5。",
+          "十位數字與個位數字都是 0 到 9，每個數字各佔 90 個三位數，機會相同，期望值都是 (0 + 1 + ⋯ + 9) ÷ 10 = 4.5。",
+          "期望值 = 5 + 4.5 + 4.5 = 14。答案是 14。"
+        ],
+        "zh-Hans": [
+          "数字和 = 百位数字 + 十位数字 + 个位数字，期望值可以分开算再相加。",
+          "百位数字是 1 到 9，每个都有 100 个三位数，机会相同，期望值 = (1 + 2 + ⋯ + 9) ÷ 9 = 5。",
+          "十位数字与个位数字都是 0 到 9，每个数字各占 90 个三位数，机会相同，期望值都是 (0 + 1 + ⋯ + 9) ÷ 10 = 4.5。",
+          "期望值 = 5 + 4.5 + 4.5 = 14。答案是 14。"
+        ],
+        "en": [
+          "Digit sum = hundreds digit + tens digit + units digit; compute each expectation and add.",
+          "The hundreds digit is 1 to 9, each for 100 numbers, equally likely: expectation (1 + 2 + ⋯ + 9) ÷ 9 = 5.",
+          "The tens and units digits are each 0 to 9, each value occurring in 90 numbers, equally likely: expectation (0 + 1 + ⋯ + 9) ÷ 10 = 4.5 each.",
+          "Expected sum = 5 + 4.5 + 4.5 = 14. The answer is 14."
+        ],
+        "ja": [
+          "数字の和 = 百の位 + 十の位 + 一の位 なので、期待値を別々に求めて足します。",
+          "百の位は 1〜9 で、それぞれ 100 個ずつ同じ確率。期待値は (1 + 2 + ⋯ + 9) ÷ 9 = 5。",
+          "十の位と一の位はどちらも 0〜9 で、それぞれ 90 個ずつ同じ確率。期待値はどちらも (0 + 1 + ⋯ + 9) ÷ 10 = 4.5。",
+          "期待値 = 5 + 4.5 + 4.5 = 14。答えは 14 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "14"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "combinatorics-grade10-foundation",
+        "notes": "數字和的期望值，拆成各位數字期望相加。掃過 數字和|各位數字.*期望：無期望值題；計數型 number_theory_grade10_037（數字和為 10 的個數）。"
+      }
+    },
+    {
+      "id": "combinatorics_grade10_foundation_084",
+      "reviewStatus": "ok",
+      "topic": "combinatorics",
+      "subtopic": "stopping_rule_sex_ratio",
+      "tags": [
+        "c:expectation",
+        "c:probability",
+        "m:invariant"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "某地每個家庭都採取同一個生育規則：一直生到第一個女孩出生就不再生（只要還沒生到女孩就繼續生）。假設每一胎是男是女的機率都是 1/2，各胎互相獨立，也不考慮其他限制。長期而言，這個地區新生兒的男女人數比例會是怎樣？",
+        "zh-Hans": "某地每个家庭都采取同一个生育规则：一直生到第一个女孩出生就不再生（只要还没生到女孩就继续生）。假设每一胎是男是女的概率都是 1/2，各胎互相独立，也不考虑其他限制。长期而言，这个地区新生儿的男女人数比例会是怎样？",
+        "en": "Every family in a town follows the same rule: keep having children until the first girl is born, then stop. Assume each child is a boy or girl with probability 1/2, independently, with no other limits. In the long run, what is the ratio of boys to girls among the newborns?",
+        "ja": "ある地域のすべての家庭が同じ規則に従います：最初の女の子が生まれるまで子どもを産み続け、生まれたらやめる。各子が男か女かは確率 1/2 ずつで互いに独立、ほかの制限は考えません。長い目で見て、この地域の新生児の男女の比はどうなりますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 C：男女大約 1 : 1。",
+        "zh-Hans": "答案是 C：男女大约 1 : 1。",
+        "en": "The answer is C: about 1 : 1.",
+        "ja": "答えは C：男女はおよそ 1 : 1 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "每個家庭恰好有 1 個女孩（最後一胎），所以每個家庭女孩數的期望值是 1。",
+          "男孩數 = 第一個女孩之前的男孩數。第一胎是男孩的機率 1/2，前兩胎都是男孩的機率 1/4，⋯⋯ 男孩數的期望值 = 1/2 + 1/4 + 1/8 + ⋯ = 1。",
+          "另一個看法：不論規則怎麼定，每一胎本身是男是女的機率都是 1/2，停止規則只決定「生幾胎」，不會改變每一胎的性別機率。",
+          "所以每個家庭平均 1 男 1 女，長期男女比例大約 1 : 1。答案是 C。"
+        ],
+        "zh-Hans": [
+          "每个家庭恰好有 1 个女孩（最后一胎），所以每个家庭女孩数的期望值是 1。",
+          "男孩数 = 第一个女孩之前的男孩数。第一胎是男孩的概率 1/2，前两胎都是男孩的概率 1/4，⋯⋯ 男孩数的期望值 = 1/2 + 1/4 + 1/8 + ⋯ = 1。",
+          "另一个看法：不论规则怎么定，每一胎本身是男是女的概率都是 1/2，停止规则只决定「生几胎」，不会改变每一胎的性别概率。",
+          "所以每个家庭平均 1 男 1 女，长期男女比例大约 1 : 1。答案是 C。"
+        ],
+        "en": [
+          "Each family has exactly 1 girl (the last child), so the expected number of girls per family is 1.",
+          "Boys are those born before the first girl. The first child is a boy with probability 1/2, the first two are boys with probability 1/4, and so on; the expected number of boys = 1/2 + 1/4 + 1/8 + ⋯ = 1.",
+          "Another view: whatever the rule, each birth is still a boy or a girl with probability 1/2; the stopping rule only decides how many births there are, not the sex of each one.",
+          "So each family averages 1 boy and 1 girl, and the long-run ratio is about 1 : 1. The answer is C."
+        ],
+        "ja": [
+          "どの家庭もちょうど 1 人の女の子（最後の子）をもつので、1 家庭あたりの女の子の数の期待値は 1。",
+          "男の子は最初の女の子より前に生まれた子。1 人目が男の確率 1/2、最初の 2 人とも男の確率 1/4、⋯⋯ なので男の子の数の期待値は 1/2 + 1/4 + 1/8 + ⋯ = 1。",
+          "別の見方：規則がどうであれ、1 人 1 人の出産は確率 1/2 で男か女で、やめる規則は「何人産むか」を決めるだけで各子の性別の確率は変えない。",
+          "よって 1 家庭あたり平均 1 男 1 女で、長期の男女比はおよそ 1 : 1。答えは C です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "multiple_choice",
+      "options": {
+        "A": {
+          "zh-Hant": "男孩明顯比女孩多",
+          "zh-Hans": "男孩明显比女孩多",
+          "en": "clearly more boys than girls",
+          "ja": "男の子が明らかに多い"
+        },
+        "B": {
+          "zh-Hant": "女孩明顯比男孩多",
+          "zh-Hans": "女孩明显比男孩多",
+          "en": "clearly more girls than boys",
+          "ja": "女の子が明らかに多い"
+        },
+        "C": {
+          "zh-Hant": "男女大約 1 : 1",
+          "zh-Hans": "男女大约 1 : 1",
+          "en": "about 1 : 1",
+          "ja": "男女はおよそ 1 : 1"
+        },
+        "D": {
+          "zh-Hant": "要看家庭數才能決定",
+          "zh-Hans": "要看家庭数才能决定",
+          "en": "it depends on the number of families",
+          "ja": "家庭の数によって決まる"
+        }
+      },
+      "correctAnswer": {
+        "type": "choice",
+        "value": "C"
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "combinatorics-grade10-foundation",
+        "notes": "停止規則不改變性別比：男孩數期望為等比級數和 1。掃過 生到|女孩|男孩：combinatorics_grade10_047（兩個小孩至少一女的條件機率）、logic_grade5_078（兄弟姊妹人數）。本題是期望值與停止規則。"
+      }
+    },
+    {
+      "id": "combinatorics_grade10_foundation_085",
+      "reviewStatus": "ok",
+      "topic": "combinatorics",
+      "subtopic": "expected_exceedances_random_permutation",
+      "tags": [
+        "c:expectation",
+        "c:permutation_combination",
+        "m:bijection"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "把寫著 1 到 9 的九張卡片洗勻後，隨機放進編號 1 到 9 的九個位置，每個位置放一張，每一種放法機會相同。若第 i 號位置上的卡片數字比 i 大，就說這個位置「超標」。求超標位置個數的期望值。",
+        "zh-Hans": "把写着 1 到 9 的九张卡片洗匀后，随机放进编号 1 到 9 的九个位置，每个位置放一张，每一种放法机会相同。若第 i 号位置上的卡片数字比 i 大，就说这个位置「超标」。求超标位置个数的期望值。",
+        "en": "Nine cards numbered 1 to 9 are shuffled and placed into positions numbered 1 to 9, one card per position, all arrangements equally likely. Position i is \"over\" if the card there is greater than i. Find the expected number of over positions.",
+        "ja": "1〜9 の数字が書かれた 9 枚のカードをよく切り、1〜9 番の 9 か所に 1 枚ずつ無作為に置きます（どの置き方も同じ確率）。i 番の位置のカードの数字が i より大きいとき、その位置は「超過」といいます。超過している位置の個数の期待値を求めなさい。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 4。",
+        "zh-Hans": "答案是 4。",
+        "en": "The answer is 4.",
+        "ja": "答えは 4 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "看第 i 號位置：放在那裡的卡片是 1 到 9 之中任一張，機會相同，比 i 大的有 9 − i 張，所以超標機率是 (9 − i)/9。",
+          "超標個數 = 9 個位置各自「超標記 1、否則記 0」的總和，期望值逐位置相加。",
+          "期望值 = (8 + 7 + 6 + 5 + 4 + 3 + 2 + 1 + 0) ÷ 9 = 36 ÷ 9 = 4。",
+          "答案是 4。"
+        ],
+        "zh-Hans": [
+          "看第 i 号位置：放在那里的卡片是 1 到 9 之中任一张，机会相同，比 i 大的有 9 − i 张，所以超标概率是 (9 − i)/9。",
+          "超标个数 = 9 个位置各自「超标记 1、否则记 0」的总和，期望值逐位置相加。",
+          "期望值 = (8 + 7 + 6 + 5 + 4 + 3 + 2 + 1 + 0) ÷ 9 = 36 ÷ 9 = 4。",
+          "答案是 4。"
+        ],
+        "en": [
+          "Look at position i: the card there is equally likely to be any of 1 to 9, and 9 − i of them exceed i, so the probability of \"over\" is (9 − i)/9.",
+          "The number of over positions is the sum over the 9 positions of \"1 if over, 0 otherwise\"; expectations add.",
+          "Expected value = (8 + 7 + 6 + 5 + 4 + 3 + 2 + 1 + 0) ÷ 9 = 36 ÷ 9 = 4.",
+          "The answer is 4."
+        ],
+        "ja": [
+          "i 番の位置を見ると、そこのカードは 1〜9 のどれも同じ確率で、i より大きいのは 9 − i 枚なので、超過の確率は (9 − i)/9。",
+          "超過の個数は 9 か所それぞれの「超過なら 1、そうでなければ 0」の和で、期待値は位置ごとに足せます。",
+          "期待値 = (8 + 7 + 6 + 5 + 4 + 3 + 2 + 1 + 0) ÷ 9 = 36 ÷ 9 = 4。",
+          "答えは 4 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "4"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "combinatorics-grade10-foundation",
+        "notes": "隨機排列中「值大於位置」的個數期望值，各位置機率不同但可逐項相加。掃過 排列.*期望|放進.*信封：combinatorics_grade12_045（放對信封數期望 1）、combinatorics_grade11_065（逆序對期望）、combinatorics_grade10_076（小山頭期望）。本題每個位置的機率各不相同，是另一種指標和。"
+      }
+    },
+    {
+      "id": "combinatorics_grade10_foundation_086",
+      "reviewStatus": "ok",
+      "topic": "combinatorics",
+      "subtopic": "random_rope_ends_single_loop",
+      "tags": [
+        "c:probability",
+        "c:permutation_combination",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "手中握著 3 條繩子的中段，露出 6 個繩頭（每條繩子 2 個），看不出哪兩個繩頭屬於同一條。把 6 個繩頭隨機兩兩配對打結（每一種配對方式機會相同）。打完 3 個結後，3 條繩子恰好連成一個大圈的機率是多少？",
+        "zh-Hans": "手中握着 3 条绳子的中段，露出 6 个绳头（每条绳子 2 个），看不出哪两个绳头属于同一条。把 6 个绳头随机两两配对打结（每一种配对方式机会相同）。打完 3 个结后，3 条绳子恰好连成一个大圈的概率是多少？",
+        "en": "You hold the middles of 3 ropes so that 6 ends stick out (2 per rope), without knowing which ends belong together. The 6 ends are randomly paired and tied (every pairing equally likely). After the 3 knots, what is the probability that the ropes form one single big loop?",
+        "ja": "3 本のひもの真ん中を握り、6 つのひもの端（1 本につき 2 つ）が出ていますが、どの 2 つが同じひもか分かりません。6 つの端を無作為に 2 つずつ組にして結びます（どの組み方も同じ確率）。3 つ結んだあと、3 本のひもがちょうど 1 つの大きな輪になる確率はいくつですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 A：8/15。",
+        "zh-Hans": "答案是 A：8/15。",
+        "en": "The answer is A: 8/15.",
+        "ja": "答えは A：8/15 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "一次一次打結來看。任取一個繩頭，它要和另外 5 個繩頭之一配對；不能接到自己那條繩的另一端（否則那條繩單獨成圈），成功機率 4/5。",
+          "接好後，兩條繩子變成一條長繩，還剩 4 個繩頭、分屬 2 條繩。再任取一個繩頭，它和其餘 3 個之一配對，不能接到自己那條的另一端，成功機率 2/3。",
+          "最後剩下 2 個繩頭，接起來必定形成一個大圈。",
+          "機率 = 4/5 × 2/3 = 8/15。（驗算：6 個繩頭的配對方式共 5 × 3 × 1 = 15 種，其中成為一個大圈的有 8 種。）答案是 A。"
+        ],
+        "zh-Hans": [
+          "一次一次打结来看。任取一个绳头，它要和另外 5 个绳头之一配对；不能接到自己那条绳的另一端（否则那条绳单独成圈），成功概率 4/5。",
+          "接好后，两条绳子变成一条长绳，还剩 4 个绳头、分属 2 条绳。再任取一个绳头，它和其余 3 个之一配对，不能接到自己那条的另一端，成功概率 2/3。",
+          "最后剩下 2 个绳头，接起来必定形成一个大圈。",
+          "概率 = 4/5 × 2/3 = 8/15。（验算：6 个绳头的配对方式共 5 × 3 × 1 = 15 种，其中成为一个大圈的有 8 种。）答案是 A。"
+        ],
+        "en": [
+          "Tie one knot at a time. Take any end; it pairs with one of the other 5 ends and must not be the other end of its own rope (that would close a loop alone): probability 4/5.",
+          "Now two ropes have become one longer rope; 4 ends remain on 2 ropes. Take any end; it pairs with one of the other 3 and must avoid its own rope’s other end: probability 2/3.",
+          "The last 2 ends are tied together and necessarily close one big loop.",
+          "Probability = 4/5 × 2/3 = 8/15. (Check: there are 5 × 3 × 1 = 15 pairings, 8 of which give one big loop.) The answer is A."
+        ],
+        "ja": [
+          "1 つずつ結んで考えます。任意の端を 1 つ取ると、ほかの 5 つの端のどれかと組になります。自分のひものもう一方の端と結ぶとそのひもだけで輪になるので避ける必要があり、成功確率は 4/5。",
+          "結ぶと 2 本が 1 本の長いひもになり、残りは 2 本のひもの端 4 つ。任意の端を 1 つ取ると残り 3 つのどれかと組になり、自分のひものもう一方を避ける確率は 2/3。",
+          "最後の 2 つの端を結ぶと必ず 1 つの大きな輪になります。",
+          "確率 = 4/5 × 2/3 = 8/15。（確認：組み方は 5 × 3 × 1 = 15 通りで、大きな輪 1 つになるのは 8 通り。）答えは A です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "multiple_choice",
+      "options": {
+        "A": {
+          "zh-Hant": "8/15",
+          "zh-Hans": "8/15",
+          "en": "8/15",
+          "ja": "8/15"
+        },
+        "B": {
+          "zh-Hant": "1/3",
+          "zh-Hans": "1/3",
+          "en": "1/3",
+          "ja": "1/3"
+        },
+        "C": {
+          "zh-Hant": "2/5",
+          "zh-Hans": "2/5",
+          "en": "2/5",
+          "ja": "2/5"
+        },
+        "D": {
+          "zh-Hant": "1/15",
+          "zh-Hans": "1/15",
+          "en": "1/15",
+          "ja": "1/15"
+        }
+      },
+      "correctAnswer": {
+        "type": "choice",
+        "value": "A"
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "combinatorics-grade10-foundation",
+        "notes": "繩頭隨機配對成一個大圈的機率，逐步條件機率。掃過 繩|繩頭|配對.*機率：只有繩長、跳繩、燒繩等非機率題。"
+      }
+    },
+    {
+      "id": "combinatorics_grade10_foundation_087",
+      "reviewStatus": "ok",
+      "topic": "combinatorics",
+      "subtopic": "sum_products_hockey_bijection",
+      "tags": [
+        "c:sequence",
+        "c:permutation_combination",
+        "m:bijection"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "求 1 × 10 + 2 × 9 + 3 × 8 + 4 × 7 + ⋯ + 9 × 2 + 10 × 1 的值。（第 k 項是 k × (11 − k)，k 從 1 到 10。）",
+        "zh-Hans": "求 1 × 10 + 2 × 9 + 3 × 8 + 4 × 7 + ⋯ + 9 × 2 + 10 × 1 的值。（第 k 项是 k × (11 − k)，k 从 1 到 10。）",
+        "en": "Find 1 × 10 + 2 × 9 + 3 × 8 + 4 × 7 + ⋯ + 9 × 2 + 10 × 1. (The k-th term is k × (11 − k), for k from 1 to 10.)",
+        "ja": "1 × 10 + 2 × 9 + 3 × 8 + 4 × 7 + ⋯ + 9 × 2 + 10 × 1 の値を求めなさい。（第 k 項は k × (11 − k)、k は 1 から 10 まで。）"
+      },
+      "answer": {
+        "zh-Hant": "答案是 220。",
+        "zh-Hans": "答案是 220。",
+        "en": "The answer is 220.",
+        "ja": "答えは 220 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "展開：k(11 − k) = 11k − k²。",
+          "所以總和 = 11 × (1 + 2 + ⋯ + 10) − (1² + 2² + ⋯ + 10²) = 11 × 55 − 385。",
+          "（1² + ⋯ + 10² = 10 × 11 × 21 ÷ 6 = 385。）11 × 55 = 605，605 − 385 = 220。",
+          "另一個看法：從 1 到 12 中選 3 個數，中間那個是 k + 1 時，左邊有 k 種、右邊有 11 − k 種選法，所以總和也等於 C(12, 3) = 220。答案是 220。"
+        ],
+        "zh-Hans": [
+          "展开：k(11 − k) = 11k − k²。",
+          "所以总和 = 11 × (1 + 2 + ⋯ + 10) − (1² + 2² + ⋯ + 10²) = 11 × 55 − 385。",
+          "（1² + ⋯ + 10² = 10 × 11 × 21 ÷ 6 = 385。）11 × 55 = 605，605 − 385 = 220。",
+          "另一个看法：从 1 到 12 中选 3 个数，中间那个是 k + 1 时，左边有 k 种、右边有 11 − k 种选法，所以总和也等于 C(12, 3) = 220。答案是 220。"
+        ],
+        "en": [
+          "Expand: k(11 − k) = 11k − k².",
+          "So the sum is 11 × (1 + 2 + ⋯ + 10) − (1² + 2² + ⋯ + 10²) = 11 × 55 − 385.",
+          "(1² + ⋯ + 10² = 10 × 11 × 21 ÷ 6 = 385.) 11 × 55 = 605, and 605 − 385 = 220.",
+          "Another view: choose 3 numbers from 1 to 12; if the middle one is k + 1 there are k choices on the left and 11 − k on the right, so the sum also equals C(12, 3) = 220. The answer is 220."
+        ],
+        "ja": [
+          "展開すると k(11 − k) = 11k − k²。",
+          "よって和は 11 × (1 + 2 + ⋯ + 10) − (1² + 2² + ⋯ + 10²) = 11 × 55 − 385。",
+          "（1² + ⋯ + 10² = 10 × 11 × 21 ÷ 6 = 385。）11 × 55 = 605、605 − 385 = 220。",
+          "別の見方：1〜12 から 3 つ選ぶとき、真ん中が k + 1 なら左は k 通り、右は 11 − k 通りなので、和は C(12, 3) = 220 にも等しい。答えは 220 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "220"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "combinatorics-grade10-foundation",
+        "notes": "Σk(11 − k) 用平方和公式，並以「選 3 數看中間」的雙射驗證為 C(12,3)。掃過 1 × 10|k\\(11|平方和：algebra_grade12_041（立方和恆等式）、number_theory_grade9_027（立方和）。無此乘積和。"
+      }
+    },
+    {
+      "id": "combinatorics_grade10_foundation_088",
+      "reviewStatus": "ok",
+      "topic": "combinatorics",
+      "subtopic": "secretary_problem_skip_first",
+      "tags": [
+        "c:probability",
+        "c:permutation_combination",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "4 位應徵者實力互不相同，以隨機順序一個一個面試，每一種順序機會相同。面試官必須當場決定錄不錄取，放棄的人不能再找回來。他採用的策略是：第 1 位一律不錄取，只當作參考；從第 2 位開始，只要遇到比之前所有人都強的，就立刻錄取；如果一直沒遇到，就錄取最後一位。他錄取到 4 人中最強那一位的機率是多少？",
+        "zh-Hans": "4 位应征者实力互不相同，以随机顺序一个一个面试，每一种顺序机会相同。面试官必须当场决定录不录取，放弃的人不能再找回来。他采用的策略是：第 1 位一律不录取，只当作参考；从第 2 位开始，只要遇到比之前所有人都强的，就立刻录取；如果一直没遇到，就录取最后一位。他录取到 4 人中最强那一位的概率是多少？",
+        "en": "Four applicants of distinct ability are interviewed one by one in random order, all orders equally likely. The interviewer must decide on the spot, and rejected applicants cannot be recalled. His strategy: never hire the 1st (use as a benchmark); from the 2nd on, hire the first one better than everyone seen so far; if none appears, hire the last. What is the probability he hires the best of the 4?",
+        "ja": "能力がすべて異なる 4 人の応募者を無作為な順番（どの順番も同じ確率）で 1 人ずつ面接します。面接官はその場で採否を決め、見送った人は呼び戻せません。戦略は次のとおり：1 人目は必ず見送り参考にする。2 人目以降、それまでの全員より優れた人が現れたらすぐ採用する。現れなければ最後の人を採用する。4 人のうち最も優れた人を採用できる確率はいくつですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 C：11/24。",
+        "zh-Hans": "答案是 C：11/24。",
+        "en": "The answer is C: 11/24.",
+        "ja": "答えは C：11/24 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "把 4 人依實力記為 1（最強）到 4。最強者在第 1 位：必定錯過，成功機率 0。",
+          "最強者在第 2 位（機率 1/4）：第 2 位一定比第 1 位強，立刻錄取，成功。",
+          "最強者在第 3 位（機率 1/4）：要成功，第 2 位不能被錄取，也就是第 2 位不比第 1 位強；前兩位中較強的在第 1 位，機率 1/2。最強者在第 4 位（機率 1/4）：要第 2、3 位都沒被錄取，即前三位中最強的在第 1 位，機率 1/3。",
+          "總機率 = 1/4 × 1 + 1/4 × 1/2 + 1/4 × 1/3 = 1/4 × (6/6 + 3/6 + 2/6) = 1/4 × 11/6 = 11/24。答案是 C。"
+        ],
+        "zh-Hans": [
+          "把 4 人依实力记为 1（最强）到 4。最强者在第 1 位：必定错过，成功概率 0。",
+          "最强者在第 2 位（概率 1/4）：第 2 位一定比第 1 位强，立刻录取，成功。",
+          "最强者在第 3 位（概率 1/4）：要成功，第 2 位不能被录取，也就是第 2 位不比第 1 位强；前两位中较强的在第 1 位，概率 1/2。最强者在第 4 位（概率 1/4）：要第 2、3 位都没被录取，即前三位中最强的在第 1 位，概率 1/3。",
+          "总概率 = 1/4 × 1 + 1/4 × 1/2 + 1/4 × 1/3 = 1/4 × (6/6 + 3/6 + 2/6) = 1/4 × 11/6 = 11/24。答案是 C。"
+        ],
+        "en": [
+          "Rank the applicants 1 (best) to 4. If the best is 1st, he is always passed over: success probability 0.",
+          "If the best is 2nd (probability 1/4): he beats the 1st and is hired at once — success.",
+          "If the best is 3rd (probability 1/4): success needs the 2nd not hired, i.e. the better of the first two is the 1st, probability 1/2. If the best is 4th (probability 1/4): the 2nd and 3rd must both be passed over, i.e. the best of the first three is the 1st, probability 1/3.",
+          "Total = 1/4 × 1 + 1/4 × 1/2 + 1/4 × 1/3 = 1/4 × (6/6 + 3/6 + 2/6) = 1/4 × 11/6 = 11/24. The answer is C."
+        ],
+        "ja": [
+          "4 人を能力順に 1（最強）〜4 とします。最強が 1 番目なら必ず見送られ、成功確率 0。",
+          "最強が 2 番目（確率 1/4）：1 番目より必ず強いのですぐ採用、成功。",
+          "最強が 3 番目（確率 1/4）：2 番目が採用されないこと、つまり最初の 2 人のうち強いほうが 1 番目である必要があり、確率 1/2。最強が 4 番目（確率 1/4）：2、3 番目がともに見送られること、つまり最初の 3 人の最強が 1 番目で、確率 1/3。",
+          "合計 = 1/4 × 1 + 1/4 × 1/2 + 1/4 × 1/3 = 1/4 × (6/6 + 3/6 + 2/6) = 1/4 × 11/6 = 11/24。答えは C です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "multiple_choice",
+      "options": {
+        "A": {
+          "zh-Hant": "1/4",
+          "zh-Hans": "1/4",
+          "en": "1/4",
+          "ja": "1/4"
+        },
+        "B": {
+          "zh-Hant": "1/2",
+          "zh-Hans": "1/2",
+          "en": "1/2",
+          "ja": "1/2"
+        },
+        "C": {
+          "zh-Hant": "11/24",
+          "zh-Hans": "11/24",
+          "en": "11/24",
+          "ja": "11/24"
+        },
+        "D": {
+          "zh-Hant": "5/12",
+          "zh-Hans": "5/12",
+          "en": "5/12",
+          "ja": "5/12"
+        }
+      },
+      "correctAnswer": {
+        "type": "choice",
+        "value": "C"
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "combinatorics-grade10-foundation",
+        "notes": "秘書問題 n = 4、放過第 1 位的成功機率，按最強者位置分類。已窮舉 24 種順序驗算（放過 0、1、2、3 位分別是 1/4、11/24、5/12、1/4）。掃過 秘書|面試|錄取：combinatorics_grade12_049（刷新紀錄次數的期望）不同。"
+      }
+    },
+    {
+      "id": "combinatorics_grade10_foundation_089",
+      "reviewStatus": "ok",
+      "topic": "combinatorics",
+      "subtopic": "expected_area_square_vs_rectangle",
+      "tags": [
+        "c:expectation",
+        "c:area",
+        "m:direct"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "甲、乙兩人用公正的六面骰子畫圖形（單位：公分）。甲擲一次，以點數當邊長畫一個正方形；乙擲兩次，以第一次點數當長、第二次點數當寬畫一個長方形。兩人所畫圖形面積的期望值分別記為 E甲、E乙。下列哪一個正確？",
+        "zh-Hans": "甲、乙两人用公正的六面骰子画图形（单位：公分）。甲掷一次，以点数当边长画一个正方形；乙掷两次，以第一次点数当长、第二次点数当宽画一个长方形。两人所画图形面积的期望值分别记为 E甲、E乙。下列哪一个正确？",
+        "en": "A and B draw shapes using a fair six-sided die (units: cm). A rolls once and draws a square whose side is the number rolled; B rolls twice and draws a rectangle with length the first number and width the second. Let E_A and E_B be the expected areas. Which statement is correct?",
+        "ja": "甲と乙が公正な 6 面さいころを使って図形をかきます（単位：cm）。甲は 1 回振り、出た目を 1 辺とする正方形をかきます。乙は 2 回振り、1 回目の目を縦、2 回目の目を横とする長方形をかきます。面積の期待値をそれぞれ E甲、E乙 とします。正しいのはどれですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 A：E甲 比 E乙 大 35/12。",
+        "zh-Hans": "答案是 A：E甲 比 E乙 大 35/12。",
+        "en": "The answer is A: E_A is larger than E_B by 35/12.",
+        "ja": "答えは A：E甲 が E乙 より 35/12 大きい です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "甲：面積是點數的平方，E甲 = (1² + 2² + 3² + 4² + 5² + 6²) ÷ 6 = 91/6。",
+          "乙：兩次擲骰互相獨立，長與寬的期望都是 3.5，而且獨立時乘積的期望等於期望的乘積，所以 E乙 = 3.5 × 3.5 = 49/4。（也可以直接算：36 種結果的面積總和 = (1 + ⋯ + 6)² = 441，441 ÷ 36 = 49/4。）",
+          "E甲 − E乙 = 91/6 − 49/4 = 182/12 − 147/12 = 35/12 > 0。",
+          "所以 E甲 比 E乙 大 35/12（這正是一顆骰子點數的變異數）。答案是 A。"
+        ],
+        "zh-Hans": [
+          "甲：面积是点数的平方，E甲 = (1² + 2² + 3² + 4² + 5² + 6²) ÷ 6 = 91/6。",
+          "乙：两次掷骰互相独立，长与宽的期望都是 3.5，而且独立时乘积的期望等于期望的乘积，所以 E乙 = 3.5 × 3.5 = 49/4。（也可以直接算：36 种结果的面积总和 = (1 + ⋯ + 6)² = 441，441 ÷ 36 = 49/4。）",
+          "E甲 − E乙 = 91/6 − 49/4 = 182/12 − 147/12 = 35/12 > 0。",
+          "所以 E甲 比 E乙 大 35/12（这正是一颗骰子点数的变异数）。答案是 A。"
+        ],
+        "en": [
+          "A: the area is the square of the roll, so E_A = (1² + 2² + 3² + 4² + 5² + 6²) ÷ 6 = 91/6.",
+          "B: the two rolls are independent, each with expectation 3.5, and for independent variables the expectation of the product is the product of expectations: E_B = 3.5 × 3.5 = 49/4. (Directly: the 36 areas sum to (1 + ⋯ + 6)² = 441, and 441 ÷ 36 = 49/4.)",
+          "E_A − E_B = 91/6 − 49/4 = 182/12 − 147/12 = 35/12 > 0.",
+          "So E_A exceeds E_B by 35/12 (exactly the variance of one die roll). The answer is A."
+        ],
+        "ja": [
+          "甲：面積は目の 2 乗なので E甲 = (1² + 2² + 3² + 4² + 5² + 6²) ÷ 6 = 91/6。",
+          "乙：2 回の出目は独立で、縦・横の期待値はどちらも 3.5。独立なら積の期待値は期待値の積なので E乙 = 3.5 × 3.5 = 49/4。（直接計算：36 通りの面積の和は (1 + ⋯ + 6)² = 441、441 ÷ 36 = 49/4。）",
+          "E甲 − E乙 = 91/6 − 49/4 = 182/12 − 147/12 = 35/12 > 0。",
+          "よって E甲 は E乙 より 35/12 大きい（これはさいころ 1 個の目の分散そのもの）。答えは A です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "multiple_choice",
+      "options": {
+        "A": {
+          "zh-Hant": "E甲 比 E乙 大 35/12",
+          "zh-Hans": "E甲 比 E乙 大 35/12",
+          "en": "E_A is larger than E_B by 35/12",
+          "ja": "E甲 が E乙 より 35/12 大きい"
+        },
+        "B": {
+          "zh-Hant": "E乙 比 E甲 大 35/12",
+          "zh-Hans": "E乙 比 E甲 大 35/12",
+          "en": "E_B is larger than E_A by 35/12",
+          "ja": "E乙 が E甲 より 35/12 大きい"
+        },
+        "C": {
+          "zh-Hant": "E甲 與 E乙 相等",
+          "zh-Hans": "E甲 与 E乙 相等",
+          "en": "E_A and E_B are equal",
+          "ja": "E甲 と E乙 は等しい"
+        },
+        "D": {
+          "zh-Hant": "E甲 比 E乙 大 7/2",
+          "zh-Hans": "E甲 比 E乙 大 7/2",
+          "en": "E_A is larger than E_B by 7/2",
+          "ja": "E甲 が E乙 より 7/2 大きい"
+        }
+      },
+      "correctAnswer": {
+        "type": "choice",
+        "value": "A"
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "combinatorics-grade10-foundation",
+        "notes": "E[X²] 與 E[X]E[Y] 的比較，差值恰為變異數。掃過 骰子.*正方形|邊長.*擲|平方.*期望：combinatorics_grade10_048（6 次點數平方和期望 91，只算 E[X²]）。本題重點是兩者比較與獨立乘積。"
+      }
+    },
+    {
+      "id": "combinatorics_grade10_foundation_090",
+      "reviewStatus": "ok",
+      "topic": "combinatorics",
+      "subtopic": "expected_value_reroll_on_six",
+      "tags": [
+        "c:expectation",
+        "c:sequence",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一種擲骰規則：擲一顆公正的六面骰子，把點數記下來；只要擲出 6 點，就再擲一次並把新點數加上去，一直到擲出不是 6 點為止。例如依序擲出 6、6、2，得分是 14。設得分的期望值是 E，求 5E。",
+        "zh-Hans": "一种掷骰规则：掷一颗公正的六面骰子，把点数记下来；只要掷出 6 点，就再掷一次并把新点数加上去，一直到掷出不是 6 点为止。例如依序掷出 6、6、2，得分是 14。设得分的期望值是 E，求 5E。",
+        "en": "A dice rule: roll a fair six-sided die and record the value; whenever a 6 comes up, roll again and add the new value, continuing until a non-6 appears. For example, rolling 6, 6, 2 scores 14. Let E be the expected score. Find 5E.",
+        "ja": "さいころの規則：公正な 6 面さいころを振って目を記録し、6 が出るたびにもう一度振って新しい目を加え、6 以外が出るまで続けます。例えば 6、6、2 と出たら得点は 14。得点の期待値を E とするとき、5E を求めなさい。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 21。",
+        "zh-Hans": "答案是 21。",
+        "en": "The answer is 21.",
+        "ja": "答えは 21 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "第一擲的點數期望是 (1 + 2 + ⋯ + 6) ÷ 6 = 3.5。",
+          "若第一擲是 6（機率 1/6），之後會再重新開始一輪同樣的遊戲，這部分額外增加的得分期望也是 E。",
+          "所以 E = 3.5 + (1/6)E，(5/6)E = 3.5，E = 3.5 × 6/5 = 4.2。",
+          "5E = 21。（也可以看成 3.5 × (1 + 1/6 + 1/36 + ⋯) = 3.5 × 6/5。）答案是 21。"
+        ],
+        "zh-Hans": [
+          "第一掷的点数期望是 (1 + 2 + ⋯ + 6) ÷ 6 = 3.5。",
+          "若第一掷是 6（概率 1/6），之后会再重新开始一轮同样的游戏，这部分额外增加的得分期望也是 E。",
+          "所以 E = 3.5 + (1/6)E，(5/6)E = 3.5，E = 3.5 × 6/5 = 4.2。",
+          "5E = 21。（也可以看成 3.5 × (1 + 1/6 + 1/36 + ⋯) = 3.5 × 6/5。）答案是 21。"
+        ],
+        "en": [
+          "The first roll has expected value (1 + 2 + ⋯ + 6) ÷ 6 = 3.5.",
+          "If the first roll is 6 (probability 1/6), a fresh copy of the same game starts, adding an expected E more.",
+          "So E = 3.5 + (1/6)E, (5/6)E = 3.5, E = 3.5 × 6/5 = 4.2.",
+          "5E = 21. (Equivalently 3.5 × (1 + 1/6 + 1/36 + ⋯) = 3.5 × 6/5.) The answer is 21."
+        ],
+        "ja": [
+          "1 回目の目の期待値は (1 + 2 + ⋯ + 6) ÷ 6 = 3.5。",
+          "1 回目が 6（確率 1/6）なら、同じゲームがもう一度最初から始まり、その分さらに期待値 E が加わります。",
+          "よって E = 3.5 + (1/6)E、(5/6)E = 3.5、E = 3.5 × 6/5 = 4.2。",
+          "5E = 21。（3.5 × (1 + 1/6 + 1/36 + ⋯) = 3.5 × 6/5 と見てもよい。）答えは 21 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "21"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "combinatorics-grade10-foundation",
+        "notes": "「擲 6 再加擲」的期望值，用自我相似方程式 E = 3.5 + E/6。掃過 再擲|加擲|重擲：combinatorics_grade10_049（可選擇重擲一次的最佳策略）、combinatorics_grade12_056（輪流擲先出 6）。本題是無上限連鎖加擲。"
+      }
     }
   ]
 }

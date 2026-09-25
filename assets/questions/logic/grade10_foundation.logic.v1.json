@@ -4973,6 +4973,100 @@
         "reference": "logic-grade10-foundation",
         "notes": "Grundy 分堆遊戲（分成不等兩堆），單堆 7 為後手勝。python 以多重集合狀態窮舉驗證 7 為必敗、三種第一步都輸（verify.py gw）。掃「分成兩堆|兩堆.{0,10}不等」：logic_grade12_027（分堆乘積總分，非賽局）。既有博弈題沒有分堆型。"
       }
+    },
+    {
+      "id": "logic_grade10_foundation_056",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "mathematical_induction_flawed_proof",
+      "tags": [
+        "c:logic_deduction",
+        "c:sequence",
+        "m:contradiction"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "有人用數學歸納法「證明」：任意 n 匹馬都是同一個顏色。\n步驟一：n = 1 時，只有一匹馬，當然同色。\n步驟二：假設任意 k 匹馬都同色。現在有 k + 1 匹馬，先拿掉第 1 匹，剩下 k 匹同色；再放回第 1 匹、拿掉最後一匹，剩下的 k 匹也同色。兩組有共同的馬，所以 k + 1 匹馬全部同色。\n這個結論顯然是錯的。錯誤出在哪裡？",
+        "zh-Hans": "有人用数学归纳法「证明」：任意 n 匹马都是同一个颜色。\n步骤一：n = 1 时，只有一匹马，当然同色。\n步骤二：假设任意 k 匹马都同色。现在有 k + 1 匹马，先拿掉第 1 匹，剩下 k 匹同色；再放回第 1 匹、拿掉最后一匹，剩下的 k 匹也同色。两组有共同的马，所以 k + 1 匹马全部同色。\n这个结论显然是错的。错误出在哪里？",
+        "en": "Someone \"proves\" by induction that any n horses are all the same color.\nStep 1: For n = 1 there is one horse, so of course one color.\nStep 2: Assume any k horses are the same color. Given k + 1 horses, remove the first; the remaining k are one color. Put it back and remove the last; those k are also one color. The two groups share horses, so all k + 1 are one color.\nThe conclusion is clearly false. Where is the error?",
+        "ja": "ある人が数学的帰納法で「任意の n 頭の馬はすべて同じ色」と「証明」しました。\n手順 1：n = 1 のとき馬は 1 頭なので当然同じ色。\n手順 2：任意の k 頭が同じ色と仮定する。k + 1 頭いるとき、1 頭目を除くと残り k 頭は同じ色。1 頭目を戻して最後の 1 頭を除くと、その k 頭も同じ色。2 つのグループには共通の馬がいるので、k + 1 頭すべて同じ色。\nこの結論は明らかに誤りです。誤りはどこにありますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 B：從 1 匹推到 2 匹時兩組沒有共同的馬。",
+        "zh-Hans": "答案是 B：从 1 匹推到 2 匹时两组没有共同的马。",
+        "en": "The answer is B: going from 1 horse to 2, the two groups share no horse.",
+        "ja": "答えは B：1 頭から 2 頭へ進むとき 2 つのグループに共通の馬がいない です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "步驟一沒有問題：一匹馬確實只有一個顏色。",
+          "步驟二的關鍵是「兩組有共同的馬」，才能把兩組的顏色連起來。兩組分別是第 2 到第 k + 1 匹、第 1 到第 k 匹，共同的是第 2 到第 k 匹，共 k − 1 匹。",
+          "當 k = 1（要從 1 匹推到 2 匹）時，k − 1 = 0，兩組各只有 1 匹而且沒有共同的馬，推論斷掉；所以從 n = 1 無法推到 n = 2，整條歸納鏈從第一步就斷了。",
+          "（k ≥ 2 時論證確實成立，但前提「2 匹馬同色」從來沒被證明。）答案是 B。"
+        ],
+        "zh-Hans": [
+          "步骤一没有问题：一匹马确实只有一个颜色。",
+          "步骤二的关键是「两组有共同的马」，才能把两组的颜色连起来。两组分别是第 2 到第 k + 1 匹、第 1 到第 k 匹，共同的是第 2 到第 k 匹，共 k − 1 匹。",
+          "当 k = 1（要从 1 匹推到 2 匹）时，k − 1 = 0，两组各只有 1 匹而且没有共同的马，推论断掉；所以从 n = 1 无法推到 n = 2，整条归纳链从第一步就断了。",
+          "（k ≥ 2 时论证确实成立，但前提「2 匹马同色」从来没被证明。）答案是 B。"
+        ],
+        "en": [
+          "Step 1 is fine: one horse has one color.",
+          "Step 2 relies on the two groups sharing a horse to link their colors. The groups are horses 2 to k + 1 and horses 1 to k; they share horses 2 to k, which is k − 1 horses.",
+          "When k = 1 (going from 1 horse to 2), k − 1 = 0: each group has one horse and they share none, so the argument breaks; n = 1 does not lead to n = 2, and the chain fails at its first link.",
+          "(For k ≥ 2 the step does work, but \"any 2 horses are the same color\" was never proved.) The answer is B."
+        ],
+        "ja": [
+          "手順 1 は問題ありません：1 頭の馬の色は 1 色です。",
+          "手順 2 の要は「2 つのグループに共通の馬がいる」ことで、これで 2 つのグループの色がつながります。グループは 2〜k + 1 頭目と 1〜k 頭目で、共通なのは 2〜k 頭目の k − 1 頭。",
+          "k = 1（1 頭から 2 頭へ進む）とき k − 1 = 0 で、各グループは 1 頭ずつで共通の馬がいないため推論が切れます。n = 1 から n = 2 へ進めず、帰納の鎖は最初の輪で切れています。",
+          "（k ≥ 2 なら手順 2 は正しいが、前提の「2 頭は同じ色」は一度も証明されていない。）答えは B です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "multiple_choice",
+      "options": {
+        "A": {
+          "zh-Hant": "步驟一錯：一匹馬不能說是同色",
+          "zh-Hans": "步骤一错：一匹马不能说是同色",
+          "en": "Step 1 is wrong: one horse cannot be called one color",
+          "ja": "手順 1 が誤り：1 頭では同じ色といえない"
+        },
+        "B": {
+          "zh-Hant": "從 1 匹推到 2 匹時兩組沒有共同的馬",
+          "zh-Hans": "从 1 匹推到 2 匹时两组没有共同的马",
+          "en": "going from 1 horse to 2, the two groups share no horse",
+          "ja": "1 頭から 2 頭へ進むとき 2 つのグループに共通の馬がいない"
+        },
+        "C": {
+          "zh-Hant": "從 2 匹推到 3 匹時兩組沒有共同的馬",
+          "zh-Hans": "从 2 匹推到 3 匹时两组没有共同的马",
+          "en": "going from 2 horses to 3, the two groups share no horse",
+          "ja": "2 頭から 3 頭へ進むとき 2 つのグループに共通の馬がいない"
+        },
+        "D": {
+          "zh-Hant": "數學歸納法不能用在有限的馬群上",
+          "zh-Hans": "数学归纳法不能用在有限的马群上",
+          "en": "induction cannot be used on a finite group of horses",
+          "ja": "帰納法は有限の馬の集団には使えない"
+        }
+      },
+      "correctAnswer": {
+        "type": "choice",
+        "value": "B"
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade10-foundation",
+        "notes": "數學歸納法的錯誤證明（所有馬同色），找出 k = 1 → 2 的斷點。掃過 歸納|同色.*馬：無。"
+      }
     }
   ]
 }

@@ -4200,6 +4200,150 @@
         "reference": "number-theory-grade10-foundation",
         "notes": "題型取自 Wikipedia「Continued fraction」條目的標準展開流程（含與輾轉相除法的商一一對應這個事實），自選 43/30 這個四層剛好停止的分數。去重：全庫用 regex「連分數」掃出 0 題，這個題型完全空白；用「輾轉相除|歐幾里得」掃出 7 題，其中 number_theory_grade8_018（求 gcd(1071, 462)）只用到輾轉相除的餘數、不看商，number_theory_grade9_015、grade10_005 是求 gcd 的可能值，都沒有把商取出來重組成分數。number_theory_grade8_033（循環小數化分數）方向相反且用的是等比級數。"
       }
+    },
+    {
+      "id": "number_theory_grade10_foundation_046",
+      "reviewStatus": "ok",
+      "topic": "number_theory",
+      "subtopic": "binomial_expansion_divisibility",
+      "tags": [
+        "c:binomial",
+        "c:factor_multiple",
+        "m:invariant"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "對每一個正整數 n，7ⁿ − 6n − 1 都是某個正整數 m 的倍數。求具有這個性質的 m 的最大值。",
+        "zh-Hans": "对每一个正整数 n，7ⁿ − 6n − 1 都是某个正整数 m 的倍数。求具有这个性质的 m 的最大值。",
+        "en": "For every positive integer n, 7ⁿ − 6n − 1 is a multiple of some positive integer m. Find the largest m with this property.",
+        "ja": "すべての正の整数 n について、7ⁿ − 6n − 1 はある正の整数 m の倍数です。この性質をもつ m の最大値を求めなさい。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 36。",
+        "zh-Hans": "答案是 36。",
+        "en": "The answer is 36.",
+        "ja": "答えは 36 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "把 7 寫成 1 + 6，用二項式定理展開：7ⁿ = (1 + 6)ⁿ = 1 + C(n, 1) × 6 + C(n, 2) × 6² + C(n, 3) × 6³ + ⋯。",
+          "前兩項是 1 + 6n，所以 7ⁿ − 6n − 1 = C(n, 2) × 6² + C(n, 3) × 6³ + ⋯，每一項都含 6² = 36，因此對所有 n 都是 36 的倍數。",
+          "另一方面，m 必須整除 n = 2 時的值：7² − 12 − 1 = 36。（n = 1 時值是 0，任何 m 都整除。）",
+          "m 必須是 36 的因數，而 36 本身就可以，所以最大的 m 是 36。答案是 36。"
+        ],
+        "zh-Hans": [
+          "把 7 写成 1 + 6，用二项式定理展开：7ⁿ = (1 + 6)ⁿ = 1 + C(n, 1) × 6 + C(n, 2) × 6² + C(n, 3) × 6³ + ⋯。",
+          "前两项是 1 + 6n，所以 7ⁿ − 6n − 1 = C(n, 2) × 6² + C(n, 3) × 6³ + ⋯，每一项都含 6² = 36，因此对所有 n 都是 36 的倍数。",
+          "另一方面，m 必须整除 n = 2 时的值：7² − 12 − 1 = 36。（n = 1 时值是 0，任何 m 都整除。）",
+          "m 必须是 36 的因数，而 36 本身就可以，所以最大的 m 是 36。答案是 36。"
+        ],
+        "en": [
+          "Write 7 = 1 + 6 and expand by the binomial theorem: 7ⁿ = (1 + 6)ⁿ = 1 + C(n, 1) × 6 + C(n, 2) × 6² + C(n, 3) × 6³ + ⋯.",
+          "The first two terms are 1 + 6n, so 7ⁿ − 6n − 1 = C(n, 2) × 6² + C(n, 3) × 6³ + ⋯; every term contains 6² = 36, so it is always a multiple of 36.",
+          "On the other hand, m must divide the value at n = 2: 7² − 12 − 1 = 36. (At n = 1 the value is 0, divisible by everything.)",
+          "So m divides 36, and 36 itself works; the largest m is 36. The answer is 36."
+        ],
+        "ja": [
+          "7 = 1 + 6 と書いて二項定理で展開すると、7ⁿ = (1 + 6)ⁿ = 1 + C(n, 1) × 6 + C(n, 2) × 6² + C(n, 3) × 6³ + ⋯。",
+          "最初の 2 項は 1 + 6n なので、7ⁿ − 6n − 1 = C(n, 2) × 6² + C(n, 3) × 6³ + ⋯。どの項も 6² = 36 を含むので、つねに 36 の倍数です。",
+          "一方、m は n = 2 のときの値 7² − 12 − 1 = 36 を割り切らなければなりません。（n = 1 のときは 0 で、何でも割り切れる。）",
+          "よって m は 36 の約数で、36 自身は条件を満たすので、最大の m は 36。答えは 36 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "36"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "number_theory-grade10-foundation",
+        "notes": "用 (1 + 6)ⁿ 的二項展開證明恆被 36 整除，再用 n = 2 說明不能更大。掃過 都是.*倍數|恆.*整除：number_theory_grade11_044（3²ⁿ⁺¹ + 2ⁿ⁺² 恆為 7 的倍數，用同餘）。本題的工具是二項式展開，答案與數字都不同。"
+      }
+    },
+    {
+      "id": "number_theory_grade10_foundation_047",
+      "reviewStatus": "ok",
+      "topic": "number_theory",
+      "subtopic": "common_residue_arithmetic_sum",
+      "tags": [
+        "c:sequence",
+        "c:modular",
+        "m:direct"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "1 到 100 的整數中，除以 3 餘 1、而且除以 4 餘 2 的數全部加起來，總和是多少？",
+        "zh-Hans": "1 到 100 的整数中，除以 3 余 1、而且除以 4 余 2 的数全部加起来，总和是多少？",
+        "en": "Among the integers from 1 to 100, add up all numbers that leave remainder 1 when divided by 3 and remainder 2 when divided by 4. What is the total?",
+        "ja": "1 から 100 までの整数のうち、3 で割ると 1 余り、かつ 4 で割ると 2 余る数をすべて足すといくつですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 416。",
+        "zh-Hans": "答案是 416。",
+        "en": "The answer is 416.",
+        "ja": "答えは 416 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "先找最小的一個：除以 4 餘 2 的數是 2、6、10、⋯，其中除以 3 餘 1 的第一個是 10。",
+          "3 和 4 互質，符合兩個條件的數每隔 lcm(3, 4) = 12 重複一次：10、22、34、⋯，形成公差 12 的等差數列。",
+          "不超過 100 的最後一項：10 + 12 × 7 = 94（再加 12 是 106 > 100），共 8 項。",
+          "和 = (首項 + 末項) × 項數 ÷ 2 = (10 + 94) × 8 ÷ 2 = 416。答案是 416。"
+        ],
+        "zh-Hans": [
+          "先找最小的一个：除以 4 余 2 的数是 2、6、10、⋯，其中除以 3 余 1 的第一个是 10。",
+          "3 和 4 互质，符合两个条件的数每隔 lcm(3, 4) = 12 重复一次：10、22、34、⋯，形成公差 12 的等差数列。",
+          "不超过 100 的最后一项：10 + 12 × 7 = 94（再加 12 是 106 > 100），共 8 项。",
+          "和 = (首项 + 末项) × 项数 ÷ 2 = (10 + 94) × 8 ÷ 2 = 416。答案是 416。"
+        ],
+        "en": [
+          "Find the smallest: numbers with remainder 2 mod 4 are 2, 6, 10, ⋯; the first with remainder 1 mod 3 is 10.",
+          "Since 3 and 4 are coprime, the solutions repeat every lcm(3, 4) = 12: 10, 22, 34, ⋯, an arithmetic sequence with difference 12.",
+          "The last term not above 100 is 10 + 12 × 7 = 94 (adding 12 gives 106 > 100), so there are 8 terms.",
+          "Sum = (first + last) × count ÷ 2 = (10 + 94) × 8 ÷ 2 = 416. The answer is 416."
+        ],
+        "ja": [
+          "最小のものを探します。4 で割って 2 余る数は 2、6、10、⋯ で、このうち 3 で割って 1 余る最初の数は 10。",
+          "3 と 4 は互いに素なので、条件を満たす数は lcm(3, 4) = 12 ごとに現れ、10、22、34、⋯ と公差 12 の等差数列になります。",
+          "100 以下の最後の項は 10 + 12 × 7 = 94（さらに 12 足すと 106 > 100）で、8 項。",
+          "和 = (初項 + 末項) × 項数 ÷ 2 = (10 + 94) × 8 ÷ 2 = 416。答えは 416 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "416"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "number_theory-grade10-foundation",
+        "notes": "同餘聯立的解成等差數列再求和。掃過 除以 3 餘|除以 4 餘：arithmetic_grade5_004（除以 3、4 都餘 1 的個數）、number_theory_grade9_001（中國剩餘最小值）。本題餘數不同且求和。"
+      }
     }
   ]
 }
