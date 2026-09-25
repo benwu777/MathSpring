@@ -117,10 +117,33 @@ class AvatarPreview extends StatelessWidget {
       key: ValueKey<String>(
         isBack ? 'avatar_hair_back_tint' : 'avatar_hair_front_tint',
       ),
-      // Multiply preserves the source alpha and hair strand shading while
-      // applying the opaque swatch to the shared hairstyle artwork.
-      colorFilter: ColorFilter.mode(hairTint, BlendMode.multiply),
+      // The matrix only transforms RGB; its alpha row passes source alpha
+      // through unchanged, preserving transparent canvas pixels and strands.
+      colorFilter: _hairTintFilter(hairTint),
       child: layer,
     );
   }
+
+  ColorFilter _hairTintFilter(Color tint) => ColorFilter.matrix(<double>[
+        tint.r,
+        0,
+        0,
+        0,
+        0,
+        0,
+        tint.g,
+        0,
+        0,
+        0,
+        0,
+        0,
+        tint.b,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+      ]);
 }

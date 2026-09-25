@@ -192,7 +192,7 @@ void main() {
     );
     expect(
       frontTint.colorFilter,
-      const ColorFilter.mode(Color(0xFF7B3F20), BlendMode.multiply),
+      ColorFilter.matrix(_hairTintMatrix(const Color(0xFF7B3F20))),
     );
   });
 
@@ -214,7 +214,7 @@ void main() {
     );
     expect(
       backTint.colorFilter,
-      const ColorFilter.mode(Color(0xFF7B3F20), BlendMode.multiply),
+      ColorFilter.matrix(_hairTintMatrix(const Color(0xFF7B3F20))),
     );
   });
 
@@ -252,11 +252,7 @@ void main() {
         textDirection: TextDirection.ltr,
         child: RepaintBoundary(
           key: const ValueKey<String>('tinted_girl_hair_boundary'),
-          child: SizedBox(
-            width: 182,
-            height: 182,
-            child: Center(child: AvatarPreview(configuration: girl)),
-          ),
+          child: AvatarPreview(configuration: girl),
         ),
       ),
     );
@@ -267,7 +263,7 @@ void main() {
     final AvatarAssetBundle assets = AvatarAssetCatalog.resolve(girl);
     expect(
       hairTreatment.colorFilter,
-      ColorFilter.mode(assets.hairTint!, BlendMode.multiply),
+      ColorFilter.matrix(_hairTintMatrix(assets.hairTint!)),
     );
     final RenderRepaintBoundary boundary = tester.renderObject(
       find.byKey(const ValueKey<String>('tinted_girl_hair_boundary')),
@@ -282,9 +278,9 @@ void main() {
             }) ??
             (throw StateError('Unable to render tinted girl hair preview'));
     expect(
-      rendered.$2!.getUint8(3),
+      rendered.$2!.getUint8((3 * rendered.$1.width + 3) * 4 + 3),
       0,
-      reason: '預覽畫布外的左上角必須維持透明',
+      reason: '預覽畫布內的角落必須維持透明',
     );
   });
 
@@ -742,3 +738,26 @@ String _signature(AvatarAssetBundle assets) => <Object?>[
       assets.mouthOffsetY,
       assets.mouthScaleX,
     ].join('|');
+
+List<double> _hairTintMatrix(Color tint) => <double>[
+      tint.r,
+      0,
+      0,
+      0,
+      0,
+      0,
+      tint.g,
+      0,
+      0,
+      0,
+      0,
+      0,
+      tint.b,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      0,
+    ];
