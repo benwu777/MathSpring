@@ -10303,6 +10303,1733 @@
         "reference": "arithmetic-grade2-foundation",
         "notes": "數字積與數字和同時限制，先分解 12 再用和篩選，最後排最小。掃「數字.{0,8}(相乘|乘起來|的積)|數字.{0,6}加起來」：arithmetic_grade3_131（各位數字相乘的機器）、arithmetic_grade2_121（數字和 10 的回文數個數）、logic_grade2_059（數字和 6 的最小數）。g2_059 只有數字和一個條件；本題多了乘積條件，要先做九九乘法的分解。"
       }
+    },
+    {
+      "id": "arithmetic_grade2_foundation_138",
+      "reviewStatus": "ok",
+      "topic": "arithmetic",
+      "subtopic": "sequence_each_term_sum_of_all_before",
+      "tags": [
+        "c:recurrence",
+        "c:add_sub",
+        "m:direct"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade2",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "小安寫一串數。第 1 個數是 3。從第 2 個數開始，每一個數都等於它前面所有的數加起來。例如第 2 個數是 3，第 3 個數是 3 + 3 = 6。第 7 個數是多少？",
+        "zh-Hans": "小安写一串数。第 1 个数是 3。从第 2 个数开始，每一个数都等于它前面所有的数加起来。例如第 2 个数是 3，第 3 个数是 3 + 3 = 6。第 7 个数是多少？",
+        "en": "An writes a list of numbers. The 1st number is 3. From the 2nd number on, each number equals the sum of all the numbers before it. For example, the 2nd number is 3 and the 3rd number is 3 + 3 = 6. What is the 7th number?",
+        "ja": "アンは 数を じゅんに 書いて いきます。1ばんめの 数は 3 です。2ばんめ からは、どの 数も その前に ある 数を ぜんぶ たした 数に します。たとえば 2ばんめは 3、3ばんめは 3 + 3 = 6 です。7ばんめの 数は いくつですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 96。",
+        "zh-Hans": "答案是 96。",
+        "en": "The answer is 96.",
+        "ja": "こたえは 96 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "第 4 個數是 3 + 3 + 6 = 12。可以發現：前面所有數的和，等於「前一個數」再加上「前一個數前面所有數的和」。",
+          "從第 3 個數開始，「前一個數前面所有數的和」剛好就是前一個數本身，所以每一個數都是前一個數的 2 倍。",
+          "所以這串數是 3、3、6、12、24、48、96。",
+          "第 7 個數是 96。"
+        ],
+        "zh-Hans": [
+          "第 4 个数是 3 + 3 + 6 = 12。可以发现：前面所有数的和，等于「前一个数」再加上「前一个数前面所有数的和」。",
+          "从第 3 个数开始，「前一个数前面所有数的和」刚好就是前一个数本身，所以每一个数都是前一个数的 2 倍。",
+          "所以这串数是 3、3、6、12、24、48、96。",
+          "第 7 个数是 96。"
+        ],
+        "en": [
+          "The 4th number is 3 + 3 + 6 = 12. Notice that the sum of all earlier numbers equals the previous number plus the sum of everything before the previous number.",
+          "From the 3rd number on, the sum of everything before the previous number is exactly the previous number itself, so each number is 2 times the previous one.",
+          "So the list is 3, 3, 6, 12, 24, 48, 96.",
+          "The 7th number is 96."
+        ],
+        "ja": [
+          "4ばんめは 3 + 3 + 6 = 12 です。前の 数を ぜんぶ たした 数は、「1つ前の 数」と「1つ前の 数より 前を ぜんぶ たした 数」を たした ものです。",
+          "3ばんめ からは、「1つ前の 数より 前を ぜんぶ たした 数」が ちょうど 1つ前の 数と 同じなので、どの 数も 1つ前の 数の 2ばいに なります。",
+          "だから 3、3、6、12、24、48、96 と ならびます。",
+          "7ばんめの 数は 96 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "96"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "arithmetic-grade2-foundation",
+        "notes": "遞推：每項等於前面所有項的和 ⇒ 從第 3 項起倍增。掃「前面所有|前面.{0,6}加起來|前兩個數」：arithmetic_grade2_113、grade1_127 是「前兩項相加」（費氏型）；logic_grade2_012 直接給倍數。本題要自己發現「前面全部的和＝前一項的 2 倍」，是不同的遞推關係。"
+      }
+    },
+    {
+      "id": "arithmetic_grade2_foundation_139",
+      "reviewStatus": "ok",
+      "topic": "arithmetic",
+      "subtopic": "sequence_difference_of_previous_two",
+      "tags": [
+        "c:recurrence",
+        "c:add_sub",
+        "m:enumeration"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade2",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "小美寫一串數。第 1 個數是 40，第 2 個數是 15。從第 3 個數開始，每一個數都是它前面兩個數相減（用大的減小的，一樣大就寫 0）。把前 20 個數全部加起來，是多少？",
+        "zh-Hans": "小美写一串数。第 1 个数是 40，第 2 个数是 15。从第 3 个数开始，每一个数都是它前面两个数相减（用大的减小的，一样大就写 0）。把前 20 个数全部加起来，是多少？",
+        "en": "Mei writes a list of numbers. The 1st number is 40 and the 2nd is 15. From the 3rd number on, each number is the difference of the two numbers just before it (larger minus smaller; if they are equal, write 0). What is the sum of the first 20 numbers?",
+        "ja": "メイは 数を じゅんに 書いて いきます。1ばんめは 40、2ばんめは 15 です。3ばんめ からは、どの 数も すぐ前の 2つの 数の ちがい（大きい ほうから 小さい ほうを ひく。同じなら 0）に します。はじめの 20この 数を ぜんぶ たすと いくつですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 165。",
+        "zh-Hans": "答案是 165。",
+        "en": "The answer is 165.",
+        "ja": "こたえは 165 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "照規則寫：40、15、25、10、15、5、10、5、5、0、5、5、0、……",
+          "從第 8 個數開始，一直重複「5、5、0」這三個數。",
+          "前 7 個數的和是 40 + 15 + 25 + 10 + 15 + 5 + 10 = 120。第 8 到第 20 個數共 13 個，是 4 組「5、5、0」再多一個 5，和是 4 × 10 + 5 = 45。",
+          "前 20 個數的和是 120 + 45 = 165。"
+        ],
+        "zh-Hans": [
+          "照规则写：40、15、25、10、15、5、10、5、5、0、5、5、0、……",
+          "从第 8 个数开始，一直重复「5、5、0」这三个数。",
+          "前 7 个数的和是 40 + 15 + 25 + 10 + 15 + 5 + 10 = 120。第 8 到第 20 个数共 13 个，是 4 组「5、5、0」再多一个 5，和是 4 × 10 + 5 = 45。",
+          "前 20 个数的和是 120 + 45 = 165。"
+        ],
+        "en": [
+          "Follow the rule: 40, 15, 25, 10, 15, 5, 10, 5, 5, 0, 5, 5, 0, …",
+          "From the 8th number on, the three numbers 5, 5, 0 repeat again and again.",
+          "The first 7 numbers add to 40 + 15 + 25 + 10 + 15 + 5 + 10 = 120. The 8th to 20th numbers are 13 numbers: four groups of 5, 5, 0 and one more 5, which add to 4 × 10 + 5 = 45.",
+          "The sum of the first 20 numbers is 120 + 45 = 165."
+        ],
+        "ja": [
+          "きまりの とおりに 書くと 40、15、25、10、15、5、10、5、5、0、5、5、0、…… です。",
+          "8ばんめ からは「5、5、0」の 3つが ずっと くりかえします。",
+          "はじめの 7この 和は 40 + 15 + 25 + 10 + 15 + 5 + 10 = 120 です。8ばんめ から 20ばんめ までの 13こは「5、5、0」が 4組と 5が 1こで、4 × 10 + 5 = 45 です。",
+          "20この 和は 120 + 45 = 165 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "165"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "arithmetic-grade2-foundation",
+        "notes": "「前兩項相減」的遞推，會掉進 5、5、0 的循環，再用循環求和。掃「相減|大的減小的|差」：logic_grade9_004 是黑板上擦兩數寫差的最小值（不同題型）；arithmetic_grade2_124 是交錯數列找規律；grade2_113 是前兩項相加。沒有「差的遞推＋循環求和」。"
+      }
+    },
+    {
+      "id": "arithmetic_grade2_foundation_140",
+      "reviewStatus": "ok",
+      "topic": "arithmetic",
+      "subtopic": "chipmunk_half_plus_one_reverse",
+      "tags": [
+        "c:recurrence",
+        "c:mul_div",
+        "m:reverse"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade2",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "小花栗鼠有一堆橡實。牠每天都先吃掉當時橡實的一半，再多吃 1 顆。吃了 3 天以後，還剩下 2 顆。小花栗鼠原來有幾顆橡實？",
+        "zh-Hans": "小花栗鼠有一堆橡实。它每天都先吃掉当时橡实的一半，再多吃 1 颗。吃了 3 天以后，还剩下 2 颗。小花栗鼠原来有几颗橡实？",
+        "en": "A little chipmunk has a pile of acorns. Every day it first eats half of the acorns it has at that time, and then eats 1 more. After 3 days, 2 acorns are left. How many acorns did the chipmunk have at first?",
+        "ja": "シマリスが どんぐりを いくつか もって います。シマリスは 毎日、そのとき ある どんぐりの 半分を 食べて、さらに 1こ 食べます。3日 たつと、のこりは 2こに なりました。シマリスは はじめに どんぐりを いくつ もって いましたか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 30。",
+        "zh-Hans": "答案是 30。",
+        "en": "The answer is 30.",
+        "ja": "こたえは 30 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "從最後一天倒回去想。某一天吃完剩下的顆數，是「吃之前的一半再少 1」。所以吃之前的顆數＝（剩下的顆數 + 1）× 2。",
+          "第 3 天吃之前：(2 + 1) × 2 = 6 顆。",
+          "第 2 天吃之前：(6 + 1) × 2 = 14 顆；第 1 天吃之前：(14 + 1) × 2 = 30 顆。",
+          "驗算：30 → 30 − 16 = 14 → 14 − 8 = 6 → 6 − 4 = 2。小花栗鼠原來有 30 顆。"
+        ],
+        "zh-Hans": [
+          "从最后一天倒回去想。某一天吃完剩下的颗数，是「吃之前的一半再少 1」。所以吃之前的颗数＝（剩下的颗数 + 1）× 2。",
+          "第 3 天吃之前：(2 + 1) × 2 = 6 颗。",
+          "第 2 天吃之前：(6 + 1) × 2 = 14 颗；第 1 天吃之前：(14 + 1) × 2 = 30 颗。",
+          "验算：30 → 30 − 16 = 14 → 14 − 8 = 6 → 6 − 4 = 2。小花栗鼠原来有 30 颗。"
+        ],
+        "en": [
+          "Work backwards. What is left after a day is half of what there was, minus 1. So before eating there were (what is left + 1) × 2.",
+          "Before day 3: (2 + 1) × 2 = 6 acorns.",
+          "Before day 2: (6 + 1) × 2 = 14; before day 1: (14 + 1) × 2 = 30.",
+          "Check: 30 → 30 − 16 = 14 → 14 − 8 = 6 → 6 − 4 = 2. The chipmunk had 30 acorns at first."
+        ],
+        "ja": [
+          "うしろから もどって 考えます。1日 食べた あとの 数は「食べる 前の 半分より 1こ 少ない」ので、食べる 前の 数は（のこりの 数 + 1）× 2 です。",
+          "3日目の 前：(2 + 1) × 2 = 6こ。",
+          "2日目の 前：(6 + 1) × 2 = 14こ、1日目の 前：(14 + 1) × 2 = 30こ。",
+          "たしかめ：30 → 30 − 16 = 14 → 14 − 8 = 6 → 6 − 4 = 2。はじめは 30こ です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "30"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "arithmetic-grade2-foundation",
+        "notes": "反覆「吃一半再多吃 1」的逆推（猴子吃桃型）。掃「一半.{0,15}(再|又|多)|桃|猴子|橡實」：arithmetic_grade3_036 只做一次「倒出一半再倒 6 公升」；grade4_037 是一半、加 36、三分之一的不同步驟；grade1_078 正推兩次一半。沒有同一操作重複三天的逆推。"
+      }
+    },
+    {
+      "id": "arithmetic_grade2_foundation_141",
+      "reviewStatus": "ok",
+      "topic": "arithmetic",
+      "subtopic": "bacteria_doubling_start_four",
+      "tags": [
+        "c:recurrence",
+        "c:mul_div",
+        "m:reverse"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade2",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "瓶子裡的細菌每過 1 分鐘，數量就變成原來的 2 倍。如果一開始放進 1 隻，剛好過了 12 分鐘會長滿整個瓶子。如果一開始改成放進 4 隻，要過幾分鐘才會剛好長滿整個瓶子？",
+        "zh-Hans": "瓶子里的细菌每过 1 分钟，数量就变成原来的 2 倍。如果一开始放进 1 只，刚好过了 12 分钟会长满整个瓶子。如果一开始改成放进 4 只，要过几分钟才会刚好长满整个瓶子？",
+        "en": "The bacteria in a bottle double every 1 minute. If 1 bacterium is put in at the start, the bottle becomes exactly full after 12 minutes. If 4 bacteria are put in at the start instead, how many minutes does it take for the bottle to become exactly full?",
+        "ja": "びんの 中の さいきんは、1分 たつごとに 数が 2ばいに なります。はじめに 1ぴき 入れると、ちょうど 12分で びんが いっぱいに なります。はじめに 4ひき 入れると、何分で ちょうど いっぱいに なりますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 10。",
+        "zh-Hans": "答案是 10。",
+        "en": "The answer is 10.",
+        "ja": "こたえは 10 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "從 1 隻開始：1 分鐘後是 2 隻，2 分鐘後是 4 隻。",
+          "所以「一開始放 4 隻」，就等於「從 1 隻開始已經長了 2 分鐘」的樣子。",
+          "從 1 隻開始要 12 分鐘才長滿，已經先省下 2 分鐘，還要 12 − 2 = 10 分鐘。",
+          "所以要過 10 分鐘。"
+        ],
+        "zh-Hans": [
+          "从 1 只开始：1 分钟后是 2 只，2 分钟后是 4 只。",
+          "所以「一开始放 4 只」，就等于「从 1 只开始已经长了 2 分钟」的样子。",
+          "从 1 只开始要 12 分钟才长满，已经先省下 2 分钟，还要 12 − 2 = 10 分钟。",
+          "所以要过 10 分钟。"
+        ],
+        "en": [
+          "Starting from 1: after 1 minute there are 2, after 2 minutes there are 4.",
+          "So starting with 4 is exactly like starting with 1 and having already grown for 2 minutes.",
+          "Starting from 1 takes 12 minutes to fill the bottle, and 2 minutes are already done, so it takes 12 − 2 = 10 minutes.",
+          "So it takes 10 minutes."
+        ],
+        "ja": [
+          "1ぴき から はじめると、1分後に 2ひき、2分後に 4ひき です。",
+          "だから「はじめに 4ひき」は「1ぴき から 2分 たった ところ」と 同じです。",
+          "1ぴき からだと 12分 かかり、もう 2分ぶん すすんで いるので、12 − 2 = 10分 です。",
+          "だから 10分 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "10"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "arithmetic-grade2-foundation",
+        "notes": "倍增的逆向思考：起始量變 4 倍＝提前 2 步。掃「細菌|半罐|一半.{0,10}滿|浮萍|睡蓮」：arithmetic_grade6_095、algebra_grade10_021 都是正推倍增後的數量；庫內沒有「長滿時間」的逆向比較題。"
+      }
+    },
+    {
+      "id": "arithmetic_grade2_foundation_142",
+      "reviewStatus": "ok",
+      "topic": "arithmetic",
+      "subtopic": "elevator_skipped_floor_labels",
+      "tags": [
+        "c:basic_counting",
+        "c:add_sub",
+        "m:bijection"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade2",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一棟大樓的電梯裡，每一層樓都有一個按鈕。按鈕上的數字從 1 開始往上排，但是跳過了 4 和 13（沒有寫著 4 和 13 的按鈕）。小安家的那一層，按鈕上寫著 15。小安家是從下面數上來的第幾層樓？",
+        "zh-Hans": "一栋大楼的电梯里，每一层楼都有一个按钮。按钮上的数字从 1 开始往上排，但是跳过了 4 和 13（没有写着 4 和 13 的按钮）。小安家的那一层，按钮上写着 15。小安家是从下面数上来的第几层楼？",
+        "en": "In the elevator of a building there is one button for each floor. The numbers on the buttons start at 1 and go up, but 4 and 13 are skipped (there are no buttons marked 4 or 13). The button for An's floor is marked 15. Counting from the bottom, which floor does An live on?",
+        "ja": "あるビルの エレベーターには、1つの かいに 1つずつ ボタンが あります。ボタンの 数字は 1から じゅんに ならんで いますが、4と 13は とばして あります（4と 13の ボタンは ありません）。アンの 家の かいの ボタンには 15と 書いて あります。アンの 家は 下から 数えて 何かいめ ですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 13。",
+        "zh-Hans": "答案是 13。",
+        "en": "The answer is 13.",
+        "ja": "こたえは 13 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "如果沒有跳號，寫著 15 的按鈕就是第 15 層。",
+          "從 1 到 15 之間被跳過的數字有 4 和 13 兩個，這兩個數字沒有對應任何一層樓。",
+          "所以寫著 1 到 15 的按鈕一共只有 15 − 2 = 13 個，寫著 15 的是第 13 個。",
+          "小安家是從下面數上來的第 13 層。"
+        ],
+        "zh-Hans": [
+          "如果没有跳号，写着 15 的按钮就是第 15 层。",
+          "从 1 到 15 之间被跳过的数字有 4 和 13 两个，这两个数字没有对应任何一层楼。",
+          "所以写着 1 到 15 的按钮一共只有 15 − 2 = 13 个，写着 15 的是第 13 个。",
+          "小安家是从下面数上来的第 13 层。"
+        ],
+        "en": [
+          "If no numbers were skipped, the button marked 15 would be the 15th floor.",
+          "Between 1 and 15, two numbers are skipped: 4 and 13. They do not belong to any floor.",
+          "So there are only 15 − 2 = 13 buttons marked 1 to 15, and the one marked 15 is the 13th.",
+          "An lives on the 13th floor from the bottom."
+        ],
+        "ja": [
+          "とばしが なければ、15の ボタンは 15かいめ です。",
+          "1から 15までの あいだで とばした 数は 4と 13の 2つで、どの かいにも あたりません。",
+          "だから 1から 15までの ボタンは 15 − 2 = 13こ しか なく、15の ボタンは 13ばんめ です。",
+          "アンの 家は 下から 13かいめ です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "13"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "arithmetic-grade2-foundation",
+        "notes": "跳號標籤與實際順序的一一對應。掃「按鈕|電梯|樓.{0,10}(沒有|跳過)」：arithmetic_grade1_111 是沒有 0 樓的樓層差；本題是跳過 4 與 13 的按鈕，數實際第幾層（標籤 ≠ 位置）。"
+      }
+    },
+    {
+      "id": "arithmetic_grade2_foundation_143",
+      "reviewStatus": "ok",
+      "topic": "arithmetic",
+      "subtopic": "cookie_tray_remove_row_then_column",
+      "tags": [
+        "c:mul_div",
+        "c:inclusion_exclusion",
+        "m:reverse"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade2",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一盒餅乾排成長方形，每一橫排的塊數都一樣，每一直行的塊數也都一樣。小安先拿走完整的一橫排，一共 8 塊。小美再從剩下的餅乾裡，拿走完整的一直行，一共 5 塊。盒子裡還剩幾塊餅乾？",
+        "zh-Hans": "一盒饼干排成长方形，每一横排的块数都一样，每一直行的块数也都一样。小安先拿走完整的一横排，一共 8 块。小美再从剩下的饼干里，拿走完整的一直行，一共 5 块。盒子里还剩几块饼干？",
+        "en": "A box of cookies is arranged in a rectangle: every row has the same number of cookies and every column has the same number. An first takes away one whole row, 8 cookies. Then, from the cookies left, Mei takes away one whole column, 5 cookies. How many cookies are left in the box?",
+        "ja": "はこの 中の クッキーが 長方形に ならんで います。どの よこの だんも 同じ 数、どの たての れつも 同じ 数 です。まず アンが よこ 1だんを ぜんぶ とりました。8まい でした。つぎに メイが のこりの 中から たて 1れつを ぜんぶ とりました。5まい でした。はこには クッキーが 何まい のこって いますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 35。",
+        "zh-Hans": "答案是 35。",
+        "en": "The answer is 35.",
+        "ja": "こたえは 35 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "一整橫排有 8 塊，所以每排 8 塊，一共有 8 個直行。",
+          "小安拿走一排以後，每一直行少了 1 塊；這時一直行有 5 塊，所以原來每一直行有 5 + 1 = 6 塊，也就是一共 6 排。",
+          "原來一共有 6 × 8 = 48 塊。",
+          "兩人一共拿走 8 + 5 = 13 塊，還剩 48 − 13 = 35 塊。"
+        ],
+        "zh-Hans": [
+          "一整横排有 8 块，所以每排 8 块，一共有 8 个直行。",
+          "小安拿走一排以后，每一直行少了 1 块；这时一直行有 5 块，所以原来每一直行有 5 + 1 = 6 块，也就是一共 6 排。",
+          "原来一共有 6 × 8 = 48 块。",
+          "两人一共拿走 8 + 5 = 13 块，还剩 48 − 13 = 35 块。"
+        ],
+        "en": [
+          "A whole row has 8 cookies, so there are 8 columns.",
+          "After An took a row, each column lost 1 cookie; a column then had 5, so originally each column had 5 + 1 = 6 cookies — there were 6 rows.",
+          "So the box had 6 × 8 = 48 cookies.",
+          "They took 8 + 5 = 13 in all, leaving 48 − 13 = 35."
+        ],
+        "ja": [
+          "よこ 1だんが 8まい なので、たての れつは 8れつ です。",
+          "アンが 1だん とると、どの たての れつも 1まい へります。そのとき 1れつが 5まい なので、もとは 5 + 1 = 6まい、つまり 6だん ありました。",
+          "もとは 6 × 8 = 48まい です。",
+          "2人で 8 + 5 = 13まい とったので、のこりは 48 − 13 = 35まい です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "35"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "arithmetic-grade2-foundation",
+        "notes": "先拿一排再拿一行：拿走的那一行因為共用的那一塊已經先被拿走，只剩「排數 − 1」，要倒推排數。掃「一整排|完整的一(排|行)|拿走.{0,10}(一排|一行)」：logic_grade6_068 是指定排和列起立（排容求坐著人數，數量給定）；本題要從剩下的長度倒推出排數。"
+      }
+    },
+    {
+      "id": "arithmetic_grade2_foundation_144",
+      "reviewStatus": "ok",
+      "topic": "arithmetic",
+      "subtopic": "three_digits_pairwise_products",
+      "tags": [
+        "c:mul_div",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade2",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "A、B、C 都是 1 到 9 之間的數。已知 A × B = 24，B × C = 32，A × C = 12。A + B + C 是多少？",
+        "zh-Hans": "A、B、C 都是 1 到 9 之间的数。已知 A × B = 24，B × C = 32，A × C = 12。A + B + C 是多少？",
+        "en": "A, B and C are numbers from 1 to 9. We know A × B = 24, B × C = 32 and A × C = 12. What is A + B + C?",
+        "ja": "A、B、C は どれも 1から 9までの 数 です。A × B = 24、B × C = 32、A × C = 12 です。A + B + C は いくつ ですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 15。",
+        "zh-Hans": "答案是 15。",
+        "en": "The answer is 15.",
+        "ja": "こたえは 15 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "B 同時出現在 A × B = 24 和 B × C = 32 裡。32 用九九乘法只能拆成 4 × 8 或 8 × 4，所以 B 是 4 或 8。",
+          "如果 B = 4：A = 24 ÷ 4 = 6，C = 32 ÷ 4 = 8，可是 A × C = 6 × 8 = 48，不是 12，不行。",
+          "如果 B = 8：A = 24 ÷ 8 = 3，C = 32 ÷ 8 = 4，A × C = 3 × 4 = 12，符合。",
+          "所以 A = 3、B = 8、C = 4，A + B + C = 15。"
+        ],
+        "zh-Hans": [
+          "B 同时出现在 A × B = 24 和 B × C = 32 里。32 用九九乘法只能拆成 4 × 8 或 8 × 4，所以 B 是 4 或 8。",
+          "如果 B = 4：A = 24 ÷ 4 = 6，C = 32 ÷ 4 = 8，可是 A × C = 6 × 8 = 48，不是 12，不行。",
+          "如果 B = 8：A = 24 ÷ 8 = 3，C = 32 ÷ 8 = 4，A × C = 3 × 4 = 12，符合。",
+          "所以 A = 3、B = 8、C = 4，A + B + C = 15。"
+        ],
+        "en": [
+          "B appears in both A × B = 24 and B × C = 32. Within the times tables, 32 can only be 4 × 8 or 8 × 4, so B is 4 or 8.",
+          "If B = 4: A = 24 ÷ 4 = 6 and C = 32 ÷ 4 = 8, but A × C = 6 × 8 = 48, not 12. No.",
+          "If B = 8: A = 24 ÷ 8 = 3 and C = 32 ÷ 8 = 4, and A × C = 3 × 4 = 12. Yes.",
+          "So A = 3, B = 8, C = 4, and A + B + C = 15."
+        ],
+        "ja": [
+          "B は A × B = 24 にも B × C = 32 にも 出て きます。九九で 32 に なるのは 4 × 8 か 8 × 4 だけ なので、B は 4 か 8 です。",
+          "B = 4 なら A = 24 ÷ 4 = 6、C = 32 ÷ 4 = 8 ですが、A × C = 48 で 12 に なりません。",
+          "B = 8 なら A = 24 ÷ 8 = 3、C = 32 ÷ 8 = 4 で、A × C = 12 に なります。",
+          "A = 3、B = 8、C = 4 なので、A + B + C = 15 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "15"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "arithmetic-grade2-foundation",
+        "notes": "三個兩兩乘積，用共同因數 B 分類討論。掃「× B|兩兩相乘|乘積是」：arithmetic_grade2_034、grade2_035 是「兩數積給定、和最小」；logic_grade3_014 是兩兩相加（體重）。沒有兩兩乘積的題。"
+      }
+    },
+    {
+      "id": "arithmetic_grade2_foundation_145",
+      "reviewStatus": "ok",
+      "topic": "arithmetic",
+      "subtopic": "place_digits_max_sum_of_two_products",
+      "tags": [
+        "c:mul_div",
+        "c:add_sub",
+        "m:extremal"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade2",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "把 2、3、4、5 四個數各填進一個方格：□ × □ + □ × □。每個數都要用，而且只用一次。算出來的結果最大是多少？",
+        "zh-Hans": "把 2、3、4、5 四个数各填进一个方格：□ × □ + □ × □。每个数都要用，而且只用一次。算出来的结果最大是多少？",
+        "en": "Put each of the numbers 2, 3, 4, 5 into one box of □ × □ + □ × □, using each number exactly once. What is the largest possible result?",
+        "ja": "2、3、4、5 の 4つの 数を、□ × □ + □ × □ の □ に 1つずつ 入れます。どの 数も 1回ずつ つかいます。答えが いちばん 大きく なるのは いくつ ですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 26。",
+        "zh-Hans": "答案是 26。",
+        "en": "The answer is 26.",
+        "ja": "こたえは 26 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "只要看哪兩個數放在同一個乘法裡，一共只有 3 種分法：（5 和 4、3 和 2）、（5 和 3、4 和 2）、（5 和 2、4 和 3）。",
+          "5 × 4 + 3 × 2 = 20 + 6 = 26。",
+          "5 × 3 + 4 × 2 = 15 + 8 = 23；5 × 2 + 4 × 3 = 10 + 12 = 22。",
+          "最大是 26（大的配大的：5 × 4 + 3 × 2）。"
+        ],
+        "zh-Hans": [
+          "只要看哪两个数放在同一个乘法里，一共只有 3 种分法：（5 和 4、3 和 2）、（5 和 3、4 和 2）、（5 和 2、4 和 3）。",
+          "5 × 4 + 3 × 2 = 20 + 6 = 26。",
+          "5 × 3 + 4 × 2 = 15 + 8 = 23；5 × 2 + 4 × 3 = 10 + 12 = 22。",
+          "最大是 26（大的配大的：5 × 4 + 3 × 2）。"
+        ],
+        "en": [
+          "All that matters is which two numbers share a product; there are only 3 ways to pair them: (5 and 4, 3 and 2), (5 and 3, 4 and 2), (5 and 2, 4 and 3).",
+          "5 × 4 + 3 × 2 = 20 + 6 = 26.",
+          "5 × 3 + 4 × 2 = 15 + 8 = 23; 5 × 2 + 4 × 3 = 10 + 12 = 22.",
+          "The largest is 26 (big with big: 5 × 4 + 3 × 2)."
+        ],
+        "ja": [
+          "どの 2つを 同じ かけ算に するかだけで きまり、組みかたは（5と 4、3と 2）（5と 3、4と 2）（5と 2、4と 3）の 3とおり だけ です。",
+          "5 × 4 + 3 × 2 = 20 + 6 = 26。",
+          "5 × 3 + 4 × 2 = 15 + 8 = 23、5 × 2 + 4 × 3 = 10 + 12 = 22。",
+          "いちばん 大きいのは 26 です（大きい 数どうしを かける）。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "26"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "arithmetic-grade2-foundation",
+        "notes": "兩組乘積之和的極值：只需比較 3 種配對。掃「□ × □|乘積.{0,10}最大|加號或.{0,4}乘號」：arithmetic_grade3_090 在 3、4、5、6 間放加號或乘號（順序固定）；grade4_025 兩個兩位數相乘最大；grade2_071 兩個兩位數相加最小。本題是自由配對的 a × b + c × d。"
+      }
+    },
+    {
+      "id": "arithmetic_grade2_foundation_146",
+      "reviewStatus": "ok",
+      "topic": "arithmetic",
+      "subtopic": "cross_number_times_tables_2x2",
+      "tags": [
+        "c:mul_div",
+        "c:place_value",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade2",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一個 2 × 2 的方格裡，每格填一個數字，讀出四個兩位數：上面一排從左讀到右，是 9 的乘法表裡的答案；下面一排從左讀到右，是 7 的乘法表裡的答案；左邊一行從上讀到下，是 5 的乘法表裡的答案；右邊一行從上讀到下，是 8 的乘法表裡的答案。四個數字加起來是多少？",
+        "zh-Hans": "一个 2 × 2 的方格里，每格填一个数字，读出四个两位数：上面一排从左读到右，是 9 的乘法表里的答案；下面一排从左读到右，是 7 的乘法表里的答案；左边一行从上读到下，是 5 的乘法表里的答案；右边一行从上读到下，是 8 的乘法表里的答案。四个数字加起来是多少？",
+        "en": "In a 2 × 2 grid, each square holds one digit, forming four two-digit numbers. The top row read left to right is an answer in the 9 times table; the bottom row read left to right is in the 7 times table; the left column read top to bottom is in the 5 times table; the right column read top to bottom is in the 8 times table. What is the sum of the four digits?",
+        "ja": "2 × 2 の ますに 数字を 1つずつ 入れて、2けたの 数を 4つ つくります。上の だんを 左から 読むと 9の だんの 答え、下の だんを 左から 読むと 7の だんの 答え、左の れつを 上から 読むと 5の だんの 答え、右の れつを 上から 読むと 8の だんの 答え です。4つの 数字を たすと いくつ ですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 20。",
+        "zh-Hans": "答案是 20。",
+        "en": "The answer is 20.",
+        "ja": "こたえは 20 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "左邊一行是 5 的乘法表的兩位數，個位只能是 0 或 5，所以左下角是 0 或 5。左下角也是下面一排的十位，不能是 0，所以左下角是 5。",
+          "下面一排是 7 的乘法表、十位是 5 的數，只有 56，所以右下角是 6。",
+          "右邊一行是 8 的乘法表、個位是 6 的數：16 或 56，所以右上角是 1 或 5。上面一排是 9 的乘法表的數 18、27、36、45、54、63、72、81，個位是 1 或 5 的有 45 和 81；左邊一行是「左上角接 5」，要是 5 的倍數，45 的 4 接 5 是 45 可以，81 的 8 接 5 是 85 不在 5 的乘法表裡。",
+          "所以方格是 4、5／5、6，四個數字加起來 4 + 5 + 5 + 6 = 20。"
+        ],
+        "zh-Hans": [
+          "左边一行是 5 的乘法表的两位数，个位只能是 0 或 5，所以左下角是 0 或 5。左下角也是下面一排的十位，不能是 0，所以左下角是 5。",
+          "下面一排是 7 的乘法表、十位是 5 的数，只有 56，所以右下角是 6。",
+          "右边一行是 8 的乘法表、个位是 6 的数：16 或 56，所以右上角是 1 或 5。上面一排是 9 的乘法表的数 18、27、36、45、54、63、72、81，个位是 1 或 5 的有 45 和 81；左边一行是「左上角接 5」，要是 5 的倍数，45 的 4 接 5 是 45 可以，81 的 8 接 5 是 85 不在 5 的乘法表里。",
+          "所以方格是 4、5／5、6，四个数字加起来 4 + 5 + 5 + 6 = 20。"
+        ],
+        "en": [
+          "The left column is a two-digit answer in the 5 times table, so its ones digit (bottom left) is 0 or 5. The bottom left is also the tens digit of the bottom row, so it cannot be 0: it is 5.",
+          "The bottom row is in the 7 times table with tens digit 5: only 56. So the bottom right is 6.",
+          "The right column is in the 8 times table ending in 6: 16 or 56, so the top right is 1 or 5. The top row is one of 18, 27, 36, 45, 54, 63, 72, 81; those ending in 1 or 5 are 45 and 81. The left column is the top-left digit followed by 5: 45 is in the 5 times table, but 85 is not.",
+          "So the grid is 4, 5 / 5, 6, and the digits add to 4 + 5 + 5 + 6 = 20."
+        ],
+        "ja": [
+          "左の れつは 5の だんの 2けたの 数なので、一の位（左下）は 0か 5 です。左下は 下の だんの 十の位でも あるので 0では なく、5 です。",
+          "下の だんは 7の だんで 十の位が 5 の 数なので 56 だけ、右下は 6 です。",
+          "右の れつは 8の だんで 一の位が 6 の 数、16か 56 なので、右上は 1か 5 です。上の だんは 18、27、36、45、54、63、72、81 の どれかで、一の位が 1か 5 なのは 45 と 81 です。左の れつは「左上 と 5」で、45 は 5の だん ですが 85 は ちがいます。",
+          "だから 4、5／5、6 で、4 + 5 + 5 + 6 = 20 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "20"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "arithmetic-grade2-foundation",
+        "notes": "交叉數字謎（直橫兩位數各屬某段乘法表），從「5 的倍數個位是 0 或 5」切入。掃「橫的.{0,30}直的|填字|直行.{0,30}橫排」：無命中；logic_grade2_074 是拉丁方數獨；logic_grade2_033 是單一數的多條件篩選。"
+      }
+    },
+    {
+      "id": "arithmetic_grade2_foundation_147",
+      "reviewStatus": "ok",
+      "topic": "arithmetic",
+      "subtopic": "four_multiples_of_seven_sum_seventy",
+      "tags": [
+        "c:mul_div",
+        "c:add_sub",
+        "m:estimate_bound"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade2",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "從 7 的乘法表的 9 個答案（7、14、21、……、63）裡面，挑出 4 個不同的數，加起來剛好是 70。挑出的 4 個數裡，最大的是多少？",
+        "zh-Hans": "从 7 的乘法表的 9 个答案（7、14、21、……、63）里面，挑出 4 个不同的数，加起来刚好是 70。挑出的 4 个数里，最大的是多少？",
+        "en": "From the 9 answers of the 7 times table (7, 14, 21, …, 63), choose 4 different numbers that add up to exactly 70. What is the largest of the 4 numbers?",
+        "ja": "7の だんの 9つの 答え（7、14、21、……、63）から、ちがう 数を 4つ えらんで、たすと ちょうど 70 に します。えらんだ 4つの うち、いちばん 大きい 数は いくつ ですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 28。",
+        "zh-Hans": "答案是 28。",
+        "en": "The answer is 28.",
+        "ja": "こたえは 28 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "每個數都是「7 × 幾」。4 個數加起來是 70 = 7 × 10，所以 4 個「幾」加起來要是 10。",
+          "4 個不同的數（1 到 9）加起來，最小是 1 + 2 + 3 + 4 = 10。",
+          "要剛好是 10，只能是 1、2、3、4，不能換成別的（換任何一個都會變大）。",
+          "挑出的是 7、14、21、28，最大的是 28。"
+        ],
+        "zh-Hans": [
+          "每个数都是「7 × 几」。4 个数加起来是 70 = 7 × 10，所以 4 个「几」加起来要是 10。",
+          "4 个不同的数（1 到 9）加起来，最小是 1 + 2 + 3 + 4 = 10。",
+          "要刚好是 10，只能是 1、2、3、4，不能换成别的（换任何一个都会变大）。",
+          "挑出的是 7、14、21、28，最大的是 28。"
+        ],
+        "en": [
+          "Each number is 7 × something. The 4 numbers add up to 70 = 7 × 10, so the 4 \"somethings\" must add up to 10.",
+          "Four different numbers from 1 to 9 add up to at least 1 + 2 + 3 + 4 = 10.",
+          "To get exactly 10 they must be 1, 2, 3, 4; changing any one would make the sum bigger.",
+          "So the numbers are 7, 14, 21, 28, and the largest is 28."
+        ],
+        "ja": [
+          "どの 数も「7 × いくつ」です。4つで 70 = 7 × 10 なので、4つの「いくつ」を たすと 10 に なります。",
+          "1から 9の ちがう 数 4つを たすと、いちばん 小さくても 1 + 2 + 3 + 4 = 10 です。",
+          "ちょうど 10 に なるのは 1、2、3、4 だけで、どれか 1つでも かえると 大きく なります。",
+          "えらんだ 数は 7、14、21、28 で、いちばん 大きいのは 28 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "28"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "arithmetic-grade2-foundation",
+        "notes": "提出公因數 7 把問題變成「4 個不同的數和為 10」，再用最小和逼出唯一。掃「乘法表.{0,20}挑|7 的倍數.{0,20}加起來」：arithmetic_grade2_082 是 7 的幾倍相加；grade1_129 選 3 張和 10（有 3 種）；logic_grade2_049 和固定的極值。"
+      }
+    },
+    {
+      "id": "arithmetic_grade2_foundation_148",
+      "reviewStatus": "ok",
+      "topic": "arithmetic",
+      "subtopic": "product_exceeds_sum_by_thirteen",
+      "tags": [
+        "c:mul_div",
+        "c:add_sub",
+        "m:enumeration"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade2",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "小安心裡想了兩個 1 到 9 之間的數（可以一樣）。把這兩個數相乘，再把這兩個數相加，乘出來的比加出來的多 13。這兩個數之中，比較大的是多少？",
+        "zh-Hans": "小安心里想了两个 1 到 9 之间的数（可以一样）。把这两个数相乘，再把这两个数相加，乘出来的比加出来的多 13。这两个数之中，比较大的是多少？",
+        "en": "An thinks of two numbers from 1 to 9 (they may be equal). Their product is 13 more than their sum. What is the larger of the two numbers?",
+        "ja": "アンは 1から 9までの 数を 2つ 考えました（同じ 数でも よい）。2つを かけた 答えは、2つを たした 答えより 13 大きい です。2つの 数の うち、大きい ほうは いくつ ですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 8。",
+        "zh-Hans": "答案是 8。",
+        "en": "The answer is 8.",
+        "ja": "こたえは 8 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "如果其中一個數是 1，乘出來反而比加出來小。如果比較小的數是 2：2 × □ − (2 + □) = □ − 2，最多只有 9 − 2 = 7，不夠 13。所以兩個數都至少是 3。",
+          "比較小的數是 3：3 × □ − (3 + □) = 13，試 □ = 8：24 − 11 = 13 ✓。",
+          "比較小的數是 4：試 4 × 5 − 9 = 11、4 × 6 − 10 = 14，沒有剛好 13。比較小的數是 5 以上：5 × 5 − 10 = 15 已經超過 13，而且越大差越多。",
+          "所以兩個數是 3 和 8，比較大的是 8。"
+        ],
+        "zh-Hans": [
+          "如果其中一个数是 1，乘出来反而比加出来小。如果比较小的数是 2：2 × □ − (2 + □) = □ − 2，最多只有 9 − 2 = 7，不够 13。所以两个数都至少是 3。",
+          "比较小的数是 3：3 × □ − (3 + □) = 13，试 □ = 8：24 − 11 = 13 ✓。",
+          "比较小的数是 4：试 4 × 5 − 9 = 11、4 × 6 − 10 = 14，没有刚好 13。比较小的数是 5 以上：5 × 5 − 10 = 15 已经超过 13，而且越大差越多。",
+          "所以两个数是 3 和 8，比较大的是 8。"
+        ],
+        "en": [
+          "If one number is 1, the product is even smaller than the sum; if it is 2, the product minus the sum is 2 × □ − (2 + □) = □ − 2, at most 7. So both numbers are at least 3.",
+          "Smaller number 3: 3 × □ − (3 + □) = 13; try □ = 8: 24 − 11 = 13 ✓.",
+          "Smaller number 4: 4 × 5 − 9 = 11 and 4 × 6 − 10 = 14, never exactly 13. Smaller number 5 or more: 5 × 5 − 10 = 15 is already over 13, and it only grows.",
+          "So the numbers are 3 and 8, and the larger is 8."
+        ],
+        "ja": [
+          "1 が あると、かけた ほうが たした ほうより 小さく なります。2 だと、ちがいは 2 × □ − (2 + □) = □ − 2 で、多くて 7 です。だから 2つとも 3 いじょう です。",
+          "小さい ほうが 3：3 × □ − (3 + □) = 13 で、□ = 8 だと 24 − 11 = 13 ✓。",
+          "小さい ほうが 4：4 × 5 − 9 = 11、4 × 6 − 10 = 14 で、13 に なりません。5 いじょう：5 × 5 − 10 = 15 で もう 13 を こえ、大きく なるほど ちがいも ふえます。",
+          "だから 2つの 数は 3 と 8 で、大きい ほうは 8 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "8"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "arithmetic-grade2-foundation",
+        "notes": "積與和之差固定，按較小數分類討論。掃「相乘.{0,20}相加|乘.{0,10}比.{0,10}加」：arithmetic_grade2_034、035 是積給定求和最小；logic_grade2_032 是積 32、一數是另一數 2 倍。本題條件是「積 − 和」，要逐一排除。"
+      }
+    },
+    {
+      "id": "arithmetic_grade2_foundation_149",
+      "reviewStatus": "ok",
+      "topic": "arithmetic",
+      "subtopic": "column_addition_hidden_digits_carries",
+      "tags": [
+        "c:add_sub",
+        "c:place_value",
+        "m:reverse"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade2",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "在直式加法 □4□ + 3□7 = 825 裡，三個 □ 各代表一個數字（可以不一樣）。三個 □ 裡的數字加起來是多少？",
+        "zh-Hans": "在直式加法 □4□ + 3□7 = 825 里，三个 □ 各代表一个数字（可以不一样）。三个 □ 里的数字加起来是多少？",
+        "en": "In the column addition □4□ + 3□7 = 825, each box stands for one digit (they may be different). What is the sum of the three digits in the boxes?",
+        "ja": "ひっ算の たし算 □4□ + 3□7 = 825 で、3つの □ には それぞれ 数字が 1つ 入ります（ちがっても よい）。3つの □ の 数字を たすと いくつ ですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 19。",
+        "zh-Hans": "答案是 19。",
+        "en": "The answer is 19.",
+        "ja": "こたえは 19 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "個位：□ + 7 的個位要是 5，所以 □ + 7 = 15，第一個數的個位是 8，進 1 到十位。",
+          "十位：4 + □ + 1（進位）的個位要是 2，所以 4 + □ + 1 = 12，第二個數的十位是 7，再進 1 到百位。",
+          "百位：□ + 3 + 1（進位）= 8，所以第一個數的百位是 4。算式是 448 + 377 = 825。",
+          "三個 □ 是 4、8、7，加起來 4 + 8 + 7 = 19。"
+        ],
+        "zh-Hans": [
+          "个位：□ + 7 的个位要是 5，所以 □ + 7 = 15，第一个数的个位是 8，进 1 到十位。",
+          "十位：4 + □ + 1（进位）的个位要是 2，所以 4 + □ + 1 = 12，第二个数的十位是 7，再进 1 到百位。",
+          "百位：□ + 3 + 1（进位）= 8，所以第一个数的百位是 4。算式是 448 + 377 = 825。",
+          "三个 □ 是 4、8、7，加起来 4 + 8 + 7 = 19。"
+        ],
+        "en": [
+          "Ones: □ + 7 must end in 5, so □ + 7 = 15; the first number's ones digit is 8, carrying 1 to the tens.",
+          "Tens: 4 + □ + 1 (carry) must end in 2, so 4 + □ + 1 = 12; the second number's tens digit is 7, carrying 1 to the hundreds.",
+          "Hundreds: □ + 3 + 1 (carry) = 8, so the first number's hundreds digit is 4. The sum is 448 + 377 = 825.",
+          "The boxes hold 4, 8, 7, which add up to 4 + 8 + 7 = 19."
+        ],
+        "ja": [
+          "一の位：□ + 7 の 一の位が 5 なので □ + 7 = 15、上の 数の 一の位は 8 で、十の位へ 1 くり上がります。",
+          "十の位：4 + □ + 1（くり上がり）の 一の位が 2 なので 4 + □ + 1 = 12、下の 数の 十の位は 7 で、百の位へ 1 くり上がります。",
+          "百の位：□ + 3 + 1 = 8 なので、上の 数の 百の位は 4 です。448 + 377 = 825 です。",
+          "□ は 4、8、7 で、たすと 19 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "19"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "arithmetic-grade2-foundation",
+        "notes": "直式加法補數字，兩次進位要逐位倒推。掃「□.{0,6}\\+.{0,10}□|直式」：arithmetic_grade2_123 是 5□3 與 54□ 比大小；grade3_074 是 4□6 被 3 整除；grade2_019 單一方格加法。沒有帶兩次進位的三位數直式填空。"
+      }
+    },
+    {
+      "id": "arithmetic_grade2_foundation_150",
+      "reviewStatus": "ok",
+      "topic": "arithmetic",
+      "subtopic": "house_left_sum_equals_right_sum",
+      "tags": [
+        "c:add_sub",
+        "m:enumeration"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade2",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一條小路的一邊有 8 戶人家排成一排，門牌從左到右依序是 1 號到 8 號。小安家左邊所有人家的門牌號碼加起來，剛好等於他家右邊所有人家的門牌號碼加起來。小安家是幾號？",
+        "zh-Hans": "一条小路的一边有 8 户人家排成一排，门牌从左到右依序是 1 号到 8 号。小安家左边所有人家的门牌号码加起来，刚好等于他家右边所有人家的门牌号码加起来。小安家是几号？",
+        "en": "Along one side of a lane there are 8 houses in a row, numbered 1 to 8 from left to right. The house numbers of all the houses to the left of An's house add up to exactly the same as the house numbers of all the houses to the right of it. What is An's house number?",
+        "ja": "こみちの かたがわに 8けんの 家が 1れつに ならび、ばんちは 左から じゅんに 1ばんから 8ばん です。アンの 家より 左の 家の ばんちを ぜんぶ たすと、右の 家の ばんちを ぜんぶ たした 数と ちょうど 同じ です。アンの 家は 何ばん ですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 6。",
+        "zh-Hans": "答案是 6。",
+        "en": "The answer is 6.",
+        "ja": "こたえは 6 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "1 到 8 全部加起來是 36。小安家左邊的和加上右邊的和，再加上小安家自己的號碼，等於 36。",
+          "左右兩邊的和一樣，所以 36 減去小安家的號碼要能平分成兩半。",
+          "從大的號碼試：小安家是 6 號時，左邊 1 + 2 + 3 + 4 + 5 = 15，右邊 7 + 8 = 15，剛好一樣。",
+          "再看別的號碼：5 號時左邊 10、右邊 21；7 號時左邊 21、右邊 8，都不一樣。所以小安家是 6 號。"
+        ],
+        "zh-Hans": [
+          "1 到 8 全部加起来是 36。小安家左边的和加上右边的和，再加上小安家自己的号码，等于 36。",
+          "左右两边的和一样，所以 36 减去小安家的号码要能平分成两半。",
+          "从大的号码试：小安家是 6 号时，左边 1 + 2 + 3 + 4 + 5 = 15，右边 7 + 8 = 15，刚好一样。",
+          "再看别的号码：5 号时左边 10、右边 21；7 号时左边 21、右边 8，都不一样。所以小安家是 6 号。"
+        ],
+        "en": [
+          "1 to 8 add up to 36. The left sum plus the right sum plus An's own number is 36.",
+          "The two sums are equal, so 36 minus An's number must split into two equal halves.",
+          "Try from the big numbers: if An is number 6, the left side is 1 + 2 + 3 + 4 + 5 = 15 and the right side is 7 + 8 = 15 — equal.",
+          "Check others: number 5 gives left 10 and right 21; number 7 gives left 21 and right 8 — not equal. So An's house is number 6."
+        ],
+        "ja": [
+          "1から 8まで ぜんぶ たすと 36 です。左の 和と 右の 和と アンの 家の ばんちを たすと 36 に なります。",
+          "左と 右の 和は 同じ なので、36 から アンの ばんちを ひいた 数を 半分ずつに わけられます。",
+          "大きい ほうから ためすと、6ばん なら 左は 1 + 2 + 3 + 4 + 5 = 15、右は 7 + 8 = 15 で 同じ です。",
+          "ほかの ばんちでは、5ばん なら 左 10・右 21、7ばん なら 左 21・右 8 で ちがいます。アンの 家は 6ばん です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "6"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "arithmetic-grade2-foundation",
+        "notes": "拉馬努金門牌題的小型版：左側和＝右側和。掃「門牌|左邊.{0,20}加起來.{0,20}右邊」：arithmetic_grade3_174 是單數門牌相隔戶數；grade2_096 是單雙數階梯和差；logic_grade1_050 是 1 到 7 分兩堆和相等的最少張數。沒有「以某戶為界兩側和相等」的題。"
+      }
+    },
+    {
+      "id": "arithmetic_grade2_foundation_151",
+      "reviewStatus": "ok",
+      "topic": "arithmetic",
+      "subtopic": "insert_plus_signs_make_ninety_three",
+      "tags": [
+        "c:add_sub",
+        "c:place_value",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade2",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "在 1 2 3 4 5 6 這六個數字之間，可以選一些地方放加號，沒有放加號的相鄰數字就連在一起變成兩位數（例如 12 + 3 + 456）。數字的順序不能改。要讓算出來的結果剛好是 93，算式裡最大的那個數是多少？",
+        "zh-Hans": "在 1 2 3 4 5 6 这六个数字之间，可以选一些地方放加号，没有放加号的相邻数字就连在一起变成两位数（例如 12 + 3 + 456）。数字的顺序不能改。要让算出来的结果刚好是 93，算式里最大的那个数是多少？",
+        "en": "Between the six digits 1 2 3 4 5 6 you may put plus signs in some places; neighboring digits without a plus sign between them join into one number (for example 12 + 3 + 456). The order of the digits may not change. To make the result exactly 93, what is the largest number in the expression?",
+        "ja": "1 2 3 4 5 6 の 6つの 数字の あいだの どこかに たし算の しるし + を 入れます。+ を 入れない となりの 数字は くっついて 1つの 数に なります（たとえば 12 + 3 + 456）。数字の じゅんばんは かえられません。答えを ちょうど 93 に するとき、しきの 中で いちばん 大きい 数は いくつ ですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 56。",
+        "zh-Hans": "答案是 56。",
+        "en": "The answer is 56.",
+        "ja": "こたえは 56 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "不能有三位數：最小的三位數 123 已經比 93 大，後面接 456 更大。",
+          "全部都放加號是 1 + 2 + 3 + 4 + 5 + 6 = 21，還差 93 − 21 = 72，要靠連成兩位數補上。把兩個數字 a、b 連成 ab，會比 a + b 多出 9 × a（例如 56 比 5 + 6 多 45）。",
+          "要多出 72 = 9 × 8，連起來的兩位數，它們的十位數字加起來要是 8，而且不能重疊：可以是 34 和 56（3 + 5 = 8）；其他像 12 和 67 不行（沒有 7），23 和 56 的 2 + 5 = 7 不行。",
+          "所以算式是 1 + 2 + 34 + 56 = 93，最大的數是 56。"
+        ],
+        "zh-Hans": [
+          "不能有三位数：最小的三位数 123 已经比 93 大，后面接 456 更大。",
+          "全部都放加号是 1 + 2 + 3 + 4 + 5 + 6 = 21，还差 93 − 21 = 72，要靠连成两位数补上。把两个数字 a、b 连成 ab，会比 a + b 多出 9 × a（例如 56 比 5 + 6 多 45）。",
+          "要多出 72 = 9 × 8，连起来的两位数，它们的十位数字加起来要是 8，而且不能重叠：可以是 34 和 56（3 + 5 = 8）；其他像 12 和 67 不行（没有 7），23 和 56 的 2 + 5 = 7 不行。",
+          "所以算式是 1 + 2 + 34 + 56 = 93，最大的数是 56。"
+        ],
+        "en": [
+          "No three-digit number is possible: the smallest, 123, is already larger than 93.",
+          "With plus signs everywhere, 1 + 2 + 3 + 4 + 5 + 6 = 21, which is 93 − 21 = 72 short. Joining two digits a, b into ab adds 9 × a more than a + b (for example 56 is 45 more than 5 + 6).",
+          "To gain 72 = 9 × 8, the tens digits of the joined numbers must add up to 8 without overlapping: 34 and 56 work (3 + 5 = 8); others fail, e.g. 23 and 56 give 2 + 5 = 7.",
+          "So the expression is 1 + 2 + 34 + 56 = 93, and the largest number is 56."
+        ],
+        "ja": [
+          "3けたの 数は つくれません。いちばん 小さい 123 でも 93 より 大きい からです。",
+          "ぜんぶ + に すると 1 + 2 + 3 + 4 + 5 + 6 = 21 で、93 − 21 = 72 たりません。2つの 数字 a、b を くっつけて ab に すると、a + b より 9 × a ふえます（56 は 5 + 6 より 45 大きい）。",
+          "72 = 9 × 8 ふやすには、くっつけた 2けたの 数の 十の位を たして 8 に します。重ならない ものは 34 と 56（3 + 5 = 8）で、23 と 56 は 2 + 5 = 7 で だめ です。",
+          "しきは 1 + 2 + 34 + 56 = 93 で、いちばん 大きい 数は 56 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "56"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "arithmetic-grade2-foundation",
+        "notes": "數字間插加號（可合併成兩位數）湊目標；關鍵是「合併 ab 比 a + b 多 9a」。掃「加號|數字之間」：arithmetic_grade2_094 在固定數字間填加或減號湊 4；grade3_090 填加號或乘號求最大；grade2_071 用卡片排兩個兩位數求和最小。本題是「不放號就合併」的湊數。"
+      }
+    },
+    {
+      "id": "arithmetic_grade2_foundation_152",
+      "reviewStatus": "ok",
+      "topic": "arithmetic",
+      "subtopic": "card_game_transfer_count_wins",
+      "tags": [
+        "c:add_sub",
+        "c:mul_div",
+        "m:reverse"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade2",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "小安和小美玩遊戲，一開始每人各有 20 張卡片。每一局都分出輸贏，輸的人要給贏的人 3 張卡片。兩人一共玩了 8 局，最後小安有 32 張卡片。小安贏了幾局？",
+        "zh-Hans": "小安和小美玩游戏，一开始每人各有 20 张卡片。每一局都分出输赢，输的人要给赢的人 3 张卡片。两人一共玩了 8 局，最后小安有 32 张卡片。小安赢了几局？",
+        "en": "An and Mei play a game, each starting with 20 cards. Every round has a winner and a loser, and the loser gives the winner 3 cards. They play 8 rounds in all, and at the end An has 32 cards. How many rounds did An win?",
+        "ja": "アンと メイが ゲームを します。はじめは 2人とも カードを 20まいずつ もって います。どの 回も かちまけが きまり、まけた 人は かった 人に カードを 3まい わたします。ぜんぶで 8回 あそんで、さいごに アンは 32まい もって いました。アンは 何回 かちましたか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 6。",
+        "zh-Hans": "答案是 6。",
+        "en": "The answer is 6.",
+        "ja": "こたえは 6 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "小安從 20 張變成 32 張，一共多了 32 − 20 = 12 張。",
+          "一贏一輸會先多 3 張再少 3 張，剛好抵消。所以多出來的 12 張，是「贏的比輸的多出來的局數」造成的，每局 3 張：12 ÷ 3 = 4，贏的局數比輸的多 4 局。",
+          "一共 8 局，贏比輸多 4：贏 6 局、輸 2 局（6 + 2 = 8，6 − 2 = 4）。",
+          "驗算：20 + 6 × 3 − 2 × 3 = 32。小安贏了 6 局。"
+        ],
+        "zh-Hans": [
+          "小安从 20 张变成 32 张，一共多了 32 − 20 = 12 张。",
+          "一赢一输会先多 3 张再少 3 张，刚好抵消。所以多出来的 12 张，是「赢的比输的多出来的局数」造成的，每局 3 张：12 ÷ 3 = 4，赢的局数比输的多 4 局。",
+          "一共 8 局，赢比输多 4：赢 6 局、输 2 局（6 + 2 = 8，6 − 2 = 4）。",
+          "验算：20 + 6 × 3 − 2 × 3 = 32。小安赢了 6 局。"
+        ],
+        "en": [
+          "An went from 20 to 32 cards, a gain of 32 − 20 = 12.",
+          "One win and one loss cancel out (+3 then −3). So the gain of 12 comes from the extra wins, 3 cards each: 12 ÷ 3 = 4, so he won 4 more rounds than he lost.",
+          "8 rounds with 4 more wins than losses: 6 wins and 2 losses (6 + 2 = 8, 6 − 2 = 4).",
+          "Check: 20 + 6 × 3 − 2 × 3 = 32. An won 6 rounds."
+        ],
+        "ja": [
+          "アンは 20まい から 32まい に なり、32 − 20 = 12まい ふえました。",
+          "1回 かって 1回 まけると +3 と −3 で もとに もどります。ふえた 12まいは「かちが まけより 多い 回数」の ぶんで、1回 3まい なので 12 ÷ 3 = 4、かちが まけより 4回 多い です。",
+          "8回で かちが 4回 多いので、かち 6回・まけ 2回 です（6 + 2 = 8、6 − 2 = 4）。",
+          "たしかめ：20 + 6 × 3 − 2 × 3 = 32。アンは 6回 かちました。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "6"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "arithmetic-grade2-foundation",
+        "notes": "零和轉移：一勝一負抵消，淨增量 ÷ 3 = 勝負差，再用和差求勝局。掃「局|輸的人|贏的人」：logic_grade1_083 猜拳只有贏得分（輸不扣）；logic_grade3_029 勝 3 分和局 1 分；logic_grade2_060 每次貼 1 或 3 張。本題輸方要把卡片交給贏方，勝負都改變數量。"
+      }
+    },
+    {
+      "id": "arithmetic_grade2_foundation_153",
+      "reviewStatus": "ok",
+      "topic": "arithmetic",
+      "subtopic": "budget_multiples_of_three_max_spend",
+      "tags": [
+        "c:add_sub",
+        "c:mul_div",
+        "m:extremal"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade2",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "文具店裡的東西只有三種價錢：12 元、15 元、18 元，每種都可以買很多個，也可以不買。小安帶了 50 元，錢不一定要花完，但不能超過 50 元。他最多可以花掉幾元？",
+        "zh-Hans": "文具店里的东西只有三种价钱：12 元、15 元、18 元，每种都可以买很多个，也可以不买。小安带了 50 元，钱不一定要花完，但不能超过 50 元。他最多可以花掉几元？",
+        "en": "At a stationery shop, every item costs 12, 15 or 18 dollars, and you can buy as many of each as you like, or none. An has 50 dollars. He does not have to spend it all, but he cannot spend more than 50. What is the most he can spend?",
+        "ja": "文ぼうぐやさんの しなものの ねだんは 12円、15円、18円の 3しゅるい だけで、どれも いくつでも 買えます（買わなくても よい）。アンは 50円 もって います。ぜんぶ つかわなくても よいですが、50円より 多くは つかえません。いちばん 多くて 何円 つかえますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 48。",
+        "zh-Hans": "答案是 48。",
+        "en": "The answer is 48.",
+        "ja": "こたえは 48 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "12、15、18 都在 3 的乘法表裡，所以不管怎麼買，花的錢一定也是 3 的倍數（3、6、9、……）。",
+          "50、49 都不是 3 的倍數，一定湊不出來；比 50 小、最大的 3 的倍數是 48。",
+          "48 湊得出來：12 × 4 = 48，或 15 + 15 + 18 = 48。",
+          "所以最多可以花掉 48 元。"
+        ],
+        "zh-Hans": [
+          "12、15、18 都在 3 的乘法表里，所以不管怎么买，花的钱一定也是 3 的倍数（3、6、9、……）。",
+          "50、49 都不是 3 的倍数，一定凑不出来；比 50 小、最大的 3 的倍数是 48。",
+          "48 凑得出来：12 × 4 = 48，或 15 + 15 + 18 = 48。",
+          "所以最多可以花掉 48 元。"
+        ],
+        "en": [
+          "12, 15 and 18 are all in the 3 times table, so whatever he buys, the total is a multiple of 3 (3, 6, 9, …).",
+          "50 and 49 are not multiples of 3, so they are impossible; the largest multiple of 3 not above 50 is 48.",
+          "48 can be made: 12 × 4 = 48, or 15 + 15 + 18 = 48.",
+          "So the most he can spend is 48 dollars."
+        ],
+        "ja": [
+          "12、15、18 は みんな 3の だんの 数 なので、どう 買っても 合計は 3の だんの 数（3、6、9、……）に なります。",
+          "50 と 49 は 3の だんの 数 では ないので つくれません。50 までで いちばん 大きい 3の だんの 数は 48 です。",
+          "48 は つくれます：12 × 4 = 48、または 15 + 15 + 18 = 48。",
+          "だから いちばん 多くて 48円 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "48"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "arithmetic-grade2-foundation",
+        "notes": "所有價格同為 3 的倍數 ⇒ 總額必為 3 的倍數，先定上界再構造。掃「最多.{0,10}(花|用掉)|錢不一定要花完」：無直接命中；arithmetic_grade2_102 是兩張郵票湊不出的金額（列舉）；grade2_074、grade3_084 是剛好湊整數金額的方法數。"
+      }
+    },
+    {
+      "id": "arithmetic_grade2_foundation_154",
+      "reviewStatus": "ok",
+      "topic": "arithmetic",
+      "subtopic": "subtract_one_two_three_until_stuck",
+      "tags": [
+        "c:add_sub",
+        "c:sequence",
+        "m:estimate_bound"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade2",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "黑板上寫著 100。小安依序減去 1、2、3、4、5、……（每次減的數比上一次多 1）。如果剩下的數比下一個要減的數還小，就停下來。最後黑板上剩下多少？",
+        "zh-Hans": "黑板上写着 100。小安依序减去 1、2、3、4、5、……（每次减的数比上一次多 1）。如果剩下的数比下一个要减的数还小，就停下来。最后黑板上剩下多少？",
+        "en": "The number 100 is written on the board. An subtracts 1, 2, 3, 4, 5, … in order (each time 1 more than the time before). When what is left is smaller than the next number to subtract, he stops. What number is left on the board at the end?",
+        "ja": "こくばんに 100 と 書いて あります。アンは じゅんに 1、2、3、4、5、……（前より 1 大きい 数）を ひいて いきます。のこりが つぎに ひく 数より 小さく なったら やめます。さいごに こくばんに のこる 数は いくつ ですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 9。",
+        "zh-Hans": "答案是 9。",
+        "en": "The answer is 9.",
+        "ja": "こたえは 9 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "減掉的總數是 1 + 2 + 3 + …… 一路加上去，只要看加到哪裡還不超過 100。",
+          "1 + 2 + …… + 10 = 55，再加 11、12、13：55 + 11 = 66、66 + 12 = 78、78 + 13 = 91。再加 14 就是 105，超過 100。",
+          "所以減到 13 時，已經減掉 91，剩下 100 − 91 = 9。",
+          "下一個要減的是 14，9 比 14 小，停下來。黑板上剩下 9。"
+        ],
+        "zh-Hans": [
+          "减掉的总数是 1 + 2 + 3 + …… 一路加上去，只要看加到哪里还不超过 100。",
+          "1 + 2 + …… + 10 = 55，再加 11、12、13：55 + 11 = 66、66 + 12 = 78、78 + 13 = 91。再加 14 就是 105，超过 100。",
+          "所以减到 13 时，已经减掉 91，剩下 100 − 91 = 9。",
+          "下一个要减的是 14，9 比 14 小，停下来。黑板上剩下 9。"
+        ],
+        "en": [
+          "The total subtracted is 1 + 2 + 3 + … added up, so find how far the sum can go without passing 100.",
+          "1 + 2 + … + 10 = 55; then 55 + 11 = 66, 66 + 12 = 78, 78 + 13 = 91. Adding 14 would give 105, which is over 100.",
+          "So after subtracting 13, a total of 91 is gone and 100 − 91 = 9 is left.",
+          "The next number to subtract is 14, and 9 is smaller than 14, so he stops. 9 is left."
+        ],
+        "ja": [
+          "ひいた 数の 合計は 1 + 2 + 3 + …… なので、100 を こえない ところまで たして いきます。",
+          "1 + 2 + …… + 10 = 55、55 + 11 = 66、66 + 12 = 78、78 + 13 = 91 です。さらに 14 を たすと 105 で 100 を こえます。",
+          "13 まで ひくと 91 ひいた ことに なり、100 − 91 = 9 のこります。",
+          "つぎに ひく 14 より 9 が 小さいので やめます。のこりは 9 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "9"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "arithmetic-grade2-foundation",
+        "notes": "連續整數和逼近 100（三角數界限）。掃「依序減|減去 1、2|連續.{0,10}加.{0,20}超過」：無命中；arithmetic_grade2_057 只是 1 到 10 的和再減 55。本題要用累加和找停止點。"
+      }
+    },
+    {
+      "id": "arithmetic_grade2_foundation_155",
+      "reviewStatus": "ok",
+      "topic": "arithmetic",
+      "subtopic": "pay_234_with_18_pieces",
+      "tags": [
+        "c:add_sub",
+        "c:place_value",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade2",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "小安要剛好付 234 元，只能用 100 元鈔票、10 元硬幣和 1 元硬幣（每一種都有很多，也可以不用某一種）。他希望鈔票和硬幣加起來剛好用 18 個（張）。一共有幾種付法？（只看每一種各用幾個。）",
+        "zh-Hans": "小安要刚好付 234 元，只能用 100 元钞票、10 元硬币和 1 元硬币（每一种都有很多，也可以不用某一种）。他希望钞票和硬币加起来刚好用 18 个（张）。一共有几种付法？（只看每一种各用几个。）",
+        "en": "An must pay exactly 234 dollars using only 100-dollar bills, 10-dollar coins and 1-dollar coins (he has plenty of each, and may skip a kind). He wants to use exactly 18 bills and coins in total. How many ways can he pay? (Only the number of each kind matters.)",
+        "ja": "アンは ちょうど 234円を はらいます。つかえるのは 100円さつ、10円玉、1円玉 だけ です（どれも たくさん あり、つかわない しゅるいが あっても よい）。おさつと コインを あわせて ちょうど 18こ つかいたい です。はらいかたは 何とおり ありますか。（それぞれ 何こ つかうか だけを 考えます。）"
+      },
+      "answer": {
+        "zh-Hant": "答案是 2。",
+        "zh-Hans": "答案是 2。",
+        "en": "The answer is 2.",
+        "ja": "こたえは 2 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "用最少的個數付 234 元是 2 張 100 元、3 個 10 元、4 個 1 元，一共 2 + 3 + 4 = 9 個，還要多 18 − 9 = 9 個。",
+          "把 1 個 10 元換成 10 個 1 元，錢一樣，個數多 9 個；把 1 張 100 元換成 10 個 10 元，個數也多 9 個。每換一次多 9 個，所以剛好要換 1 次。",
+          "換 10 元：2 張 100 元、2 個 10 元、14 個 1 元（2 + 2 + 14 = 18）。換 100 元：1 張 100 元、13 個 10 元、4 個 1 元（1 + 13 + 4 = 18）。",
+          "沒有別的換法，所以一共有 2 種付法。"
+        ],
+        "zh-Hans": [
+          "用最少的个数付 234 元是 2 张 100 元、3 个 10 元、4 个 1 元，一共 2 + 3 + 4 = 9 个，还要多 18 − 9 = 9 个。",
+          "把 1 个 10 元换成 10 个 1 元，钱一样，个数多 9 个；把 1 张 100 元换成 10 个 10 元，个数也多 9 个。每换一次多 9 个，所以刚好要换 1 次。",
+          "换 10 元：2 张 100 元、2 个 10 元、14 个 1 元（2 + 2 + 14 = 18）。换 100 元：1 张 100 元、13 个 10 元、4 个 1 元（1 + 13 + 4 = 18）。",
+          "没有别的换法，所以一共有 2 种付法。"
+        ],
+        "en": [
+          "The fewest pieces for 234 is 2 hundreds, 3 tens, 4 ones: 2 + 3 + 4 = 9 pieces. He needs 18 − 9 = 9 more.",
+          "Changing one 10 into ten 1s keeps the money the same and adds 9 pieces; changing one 100 into ten 10s also adds 9 pieces. Each change adds 9, so exactly 1 change is needed.",
+          "Change a 10: 2 hundreds, 2 tens, 14 ones (2 + 2 + 14 = 18). Change a 100: 1 hundred, 13 tens, 4 ones (1 + 13 + 4 = 18).",
+          "There are no other ways, so there are 2 ways to pay."
+        ],
+        "ja": [
+          "いちばん 少ない こ数は 100円 2まい、10円 3まい、1円 4まいで 2 + 3 + 4 = 9こ です。あと 18 − 9 = 9こ ふやします。",
+          "10円 1まいを 1円 10まいに かえると、お金は 同じで こ数が 9こ ふえます。100円 1まいを 10円 10まいに かえても 9こ ふえます。1回で 9こ なので、ちょうど 1回 かえます。",
+          "10円を かえる：100円 2、10円 2、1円 14（2 + 2 + 14 = 18）。100円を かえる：100円 1、10円 13、1円 4（1 + 13 + 4 = 18）。",
+          "ほかには ないので 2とおり です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "2"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "arithmetic-grade2-foundation",
+        "notes": "位值「換開」：每拆一次多 9 個，個數差 ÷ 9 決定拆的次數。掃「100 元.{0,30}10 元.{0,30}1 元|個數.{0,10}剛好」：combinatorics_grade8_007 是 10/50/100 湊 1000 的組合數；arithmetic_grade3_064 是幾個千、百、十、一合起來；grade1_066 最少硬幣。本題固定總個數，用「拆一次加 9」推理。"
+      }
+    },
+    {
+      "id": "arithmetic_grade2_foundation_156",
+      "reviewStatus": "ok",
+      "topic": "arithmetic",
+      "subtopic": "ladder_middle_rung_reverse",
+      "tags": [
+        "c:add_sub",
+        "c:position_direction",
+        "m:reverse"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade2",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "小安站在一把梯子最中間的那一階。他先往上爬 4 階，再往下退 6 階，接著又往上爬 9 階，剛好站在最上面那一階。這把梯子一共有幾階？",
+        "zh-Hans": "小安站在一把梯子最中间的那一阶。他先往上爬 4 阶，再往下退 6 阶，接着又往上爬 9 阶，刚好站在最上面那一阶。这把梯子一共有几阶？",
+        "en": "An stands on the middle rung of a ladder. He climbs up 4 rungs, goes down 6 rungs, then climbs up 9 rungs and is exactly on the top rung. How many rungs does the ladder have?",
+        "ja": "アンは はしごの ちょうど まん中の だんに 立って います。4だん 上り、6だん 下りて、それから 9だん 上ると、ちょうど いちばん 上の だんに つきました。この はしごは ぜんぶで 何だん ありますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 15。",
+        "zh-Hans": "答案是 15。",
+        "en": "The answer is 15.",
+        "ja": "こたえは 15 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "上 4、下 6、上 9，合起來是往上 4 − 6 + 9 = 7 階。",
+          "所以最上面那一階比最中間那一階高 7 階，也就是中間那一階上面還有 7 階。",
+          "既然是最中間，下面也有 7 階。",
+          "梯子一共 7 + 1 + 7 = 15 階。"
+        ],
+        "zh-Hans": [
+          "上 4、下 6、上 9，合起来是往上 4 − 6 + 9 = 7 阶。",
+          "所以最上面那一阶比最中间那一阶高 7 阶，也就是中间那一阶上面还有 7 阶。",
+          "既然是最中间，下面也有 7 阶。",
+          "梯子一共 7 + 1 + 7 = 15 阶。"
+        ],
+        "en": [
+          "Up 4, down 6, up 9 is a total of 4 − 6 + 9 = 7 rungs up.",
+          "So the top rung is 7 rungs above the middle rung: there are 7 rungs above the middle one.",
+          "Since it is the middle rung, there are also 7 rungs below it.",
+          "The ladder has 7 + 1 + 7 = 15 rungs."
+        ],
+        "ja": [
+          "4だん 上り、6だん 下り、9だん 上ると、あわせて 4 − 6 + 9 = 7だん 上に います。",
+          "だから いちばん 上の だんは まん中の だんより 7だん 上で、まん中の 上に 7だん あります。",
+          "まん中 なので、下にも 7だん あります。",
+          "はしごは 7 + 1 + 7 = 15だん です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "15"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "arithmetic-grade2-foundation",
+        "notes": "正中間 ⇒ 上下各半，淨位移推出一半的階數。掃「梯子|最中間|正中間.{0,10}(階|級)」：無相同題；arithmetic_grade1_111 是地下樓層差；grade1_090 名次夾人數。"
+      }
+    },
+    {
+      "id": "arithmetic_grade2_foundation_157",
+      "reviewStatus": "ok",
+      "topic": "arithmetic",
+      "subtopic": "five_days_arithmetic_middle_day",
+      "tags": [
+        "c:add_sub",
+        "c:sequence",
+        "m:reverse"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade2",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一隻毛毛蟲連續 5 天吃葉子，從第 2 天起，每天都比前一天多吃 3 片。5 天一共吃了 50 片。牠第 1 天吃了幾片？",
+        "zh-Hans": "一只毛毛虫连续 5 天吃叶子，从第 2 天起，每天都比前一天多吃 3 片。5 天一共吃了 50 片。它第 1 天吃了几片？",
+        "en": "A caterpillar eats leaves for 5 days in a row. From the 2nd day on, it eats 3 more leaves each day than the day before. In the 5 days it eats 50 leaves in all. How many leaves did it eat on the 1st day?",
+        "ja": "あおむしが 5日 つづけて 葉っぱを 食べました。2日目 からは、毎日 前の 日より 3まい 多く 食べました。5日で ぜんぶで 50まい 食べました。1日目は 何まい 食べましたか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 4。",
+        "zh-Hans": "答案是 4。",
+        "en": "The answer is 4.",
+        "ja": "こたえは 4 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "第 1 天和第 5 天、第 2 天和第 4 天，兩兩一比，一天少幾片另一天就多幾片，平均起來都等於第 3 天。",
+          "所以 5 天的總數是第 3 天的 5 倍：第 3 天吃 50 ÷ 5 = 10 片。",
+          "第 3 天比第 1 天多兩次 3 片，第 1 天吃 10 − 3 − 3 = 4 片。",
+          "驗算：4 + 7 + 10 + 13 + 16 = 50。第 1 天吃了 4 片。"
+        ],
+        "zh-Hans": [
+          "第 1 天和第 5 天、第 2 天和第 4 天，两两一比，一天少几片另一天就多几片，平均起来都等于第 3 天。",
+          "所以 5 天的总数是第 3 天的 5 倍：第 3 天吃 50 ÷ 5 = 10 片。",
+          "第 3 天比第 1 天多两次 3 片，第 1 天吃 10 − 3 − 3 = 4 片。",
+          "验算：4 + 7 + 10 + 13 + 16 = 50。第 1 天吃了 4 片。"
+        ],
+        "en": [
+          "Pair day 1 with day 5 and day 2 with day 4: in each pair one is as much below day 3 as the other is above it, so they balance out to day 3.",
+          "So the 5-day total is 5 times day 3: day 3 is 50 ÷ 5 = 10 leaves.",
+          "Day 3 is two steps of 3 above day 1, so day 1 is 10 − 3 − 3 = 4 leaves.",
+          "Check: 4 + 7 + 10 + 13 + 16 = 50. It ate 4 leaves on day 1."
+        ],
+        "ja": [
+          "1日目と 5日目、2日目と 4日目を くらべると、3日目より 少ない ぶんと 多い ぶんが 同じで、ならすと どれも 3日目と 同じ です。",
+          "だから 5日の 合計は 3日目の 5ばいで、3日目は 50 ÷ 5 = 10まい です。",
+          "3日目は 1日目より 3まいが 2回 多いので、1日目は 10 − 3 − 3 = 4まい です。",
+          "たしかめ：4 + 7 + 10 + 13 + 16 = 50。1日目は 4まい です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "4"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "arithmetic-grade2-foundation",
+        "notes": "等差五項以中項為平均，逆推首項。掃「每天.{0,10}比前一天多|毛毛蟲」：arithmetic_grade2_136 是倍增（份數法）；grade3_173 是三天平均＋差；grade3_019 是正推五本書的總厚度。本題是給總和逆推首項、用中項平衡。"
+      }
+    },
+    {
+      "id": "arithmetic_grade2_foundation_158",
+      "reviewStatus": "ok",
+      "topic": "arithmetic",
+      "subtopic": "floors_stairs_elevator_exactly_once",
+      "tags": [
+        "c:basic_counting",
+        "c:mul_div",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade2",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一棟樓從 1 樓到 4 樓，每兩層相鄰的樓層之間都有 2 座樓梯，也可以坐電梯只上一層。小安從 1 樓要到 4 樓，每上一層都要選一座樓梯或坐電梯，而且他剛好只坐 1 次電梯（只坐一層）。一共有幾種不同的上樓方法？",
+        "zh-Hans": "一栋楼从 1 楼到 4 楼，每两层相邻的楼层之间都有 2 座楼梯，也可以坐电梯只上一层。小安从 1 楼要到 4 楼，每上一层都要选一座楼梯或坐电梯，而且他刚好只坐 1 次电梯（只坐一层）。一共有几种不同的上楼方法？",
+        "en": "A building has floors 1 to 4. Between every two neighboring floors there are 2 staircases, and the elevator can also be taken up just one floor. An goes from floor 1 to floor 4; for each floor he goes up, he picks one staircase or the elevator, and he uses the elevator exactly once (for just one floor). How many different ways can he go up?",
+        "ja": "ビルは 1かいから 4かいまで あります。となりあう かいの あいだには かいだんが 2つずつ あり、エレベーターで 1かい だけ 上がる ことも できます。アンは 1かいから 4かいへ 行きます。1かい 上がるごとに かいだんの どちらかか エレベーターを えらび、エレベーターは ちょうど 1回（1かいぶん）だけ のります。上がりかたは 何とおり ありますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 12。",
+        "zh-Hans": "答案是 12。",
+        "en": "The answer is 12.",
+        "ja": "こたえは 12 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "從 1 樓到 4 樓要上 3 次：1 到 2 樓、2 到 3 樓、3 到 4 樓。",
+          "先選哪一次坐電梯：有 3 種選法。",
+          "另外兩次都走樓梯，每次有 2 座樓梯可選：2 × 2 = 4 種。",
+          "一共 3 × 4 = 12 種上樓方法。"
+        ],
+        "zh-Hans": [
+          "从 1 楼到 4 楼要上 3 次：1 到 2 楼、2 到 3 楼、3 到 4 楼。",
+          "先选哪一次坐电梯：有 3 种选法。",
+          "另外两次都走楼梯，每次有 2 座楼梯可选：2 × 2 = 4 种。",
+          "一共 3 × 4 = 12 种上楼方法。"
+        ],
+        "en": [
+          "Going from floor 1 to floor 4 means 3 steps up: 1 to 2, 2 to 3, 3 to 4.",
+          "First choose which step uses the elevator: 3 choices.",
+          "The other two steps use stairs, with 2 staircases each: 2 × 2 = 4 ways.",
+          "In total 3 × 4 = 12 ways."
+        ],
+        "ja": [
+          "1かいから 4かいへは 3回 上がります：1から 2、2から 3、3から 4。",
+          "まず どの 回に エレベーターに のるかを えらびます。3とおり です。",
+          "のこりの 2回は かいだんで、それぞれ 2つから えらぶので 2 × 2 = 4とおり です。",
+          "ぜんぶで 3 × 4 = 12とおり です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "12"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "arithmetic-grade2-foundation",
+        "notes": "乘法原理加上「恰好一次」的位置選擇。掃「樓梯|電梯|每上一層」：arithmetic_grade2_021 家到學校經圖書館 3 × 2；grade3_016 多段路扣 1 組；logic_grade3_035 經郵局或超市。本題多一層「電梯剛好用一次」要先選位置。"
+      }
+    },
+    {
+      "id": "arithmetic_grade2_foundation_159",
+      "reviewStatus": "ok",
+      "topic": "arithmetic",
+      "subtopic": "number_line_possible_positions",
+      "tags": [
+        "c:add_sub",
+        "c:position_direction",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade2",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "小安、小美、小華站在一條很長的數線上。小安站在 12。小美和小安相距 5 格，小華和小美相距 3 格。小華可能站在的位置一共有幾個？",
+        "zh-Hans": "小安、小美、小华站在一条很长的数线上。小安站在 12。小美和小安相距 5 格，小华和小美相距 3 格。小华可能站在的位置一共有几个？",
+        "en": "An, Mei and Hua stand on a very long number line. An stands at 12. Mei is 5 units away from An, and Hua is 3 units away from Mei. How many different positions could Hua be at?",
+        "ja": "アン、メイ、ホアが とても 長い 数直線の 上に 立って います。アンは 12 に います。メイは アンから 5 はなれて いて、ホアは メイから 3 はなれて います。ホアが 立って いる かもしれない 場所は 何か所 ありますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 4。",
+        "zh-Hans": "答案是 4。",
+        "en": "The answer is 4.",
+        "ja": "こたえは 4 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "小美可能在小安的左邊或右邊：12 − 5 = 7，或 12 + 5 = 17。",
+          "小美在 7 時，小華可能在 7 − 3 = 4 或 7 + 3 = 10。",
+          "小美在 17 時，小華可能在 17 − 3 = 14 或 17 + 3 = 20。",
+          "4、10、14、20 都不一樣，所以一共有 4 個位置。"
+        ],
+        "zh-Hans": [
+          "小美可能在小安的左边或右边：12 − 5 = 7，或 12 + 5 = 17。",
+          "小美在 7 时，小华可能在 7 − 3 = 4 或 7 + 3 = 10。",
+          "小美在 17 时，小华可能在 17 − 3 = 14 或 17 + 3 = 20。",
+          "4、10、14、20 都不一样，所以一共有 4 个位置。"
+        ],
+        "en": [
+          "Mei can be on either side of An: 12 − 5 = 7 or 12 + 5 = 17.",
+          "If Mei is at 7, Hua is at 7 − 3 = 4 or 7 + 3 = 10.",
+          "If Mei is at 17, Hua is at 17 − 3 = 14 or 17 + 3 = 20.",
+          "4, 10, 14, 20 are all different, so there are 4 positions."
+        ],
+        "ja": [
+          "メイは アンの 左か 右で、12 − 5 = 7 か 12 + 5 = 17 です。",
+          "メイが 7 なら、ホアは 7 − 3 = 4 か 7 + 3 = 10 です。",
+          "メイが 17 なら、ホアは 17 − 3 = 14 か 17 + 3 = 20 です。",
+          "4、10、14、20 は みんな ちがうので、4か所 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "4"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "arithmetic-grade2-foundation",
+        "notes": "相距（不分方向）要兩邊分類，兩層就有 4 種。掃「相距|距離|數線」：logic_grade1_118 是背對背走再轉身的距離（方向已定）；arithmetic_grade1_095 走錯方向回頭；logic_grade1_112 左右數的排隊可能人數。本題是兩層「左或右」的分類。"
+      }
+    },
+    {
+      "id": "arithmetic_grade2_foundation_160",
+      "reviewStatus": "ok",
+      "topic": "arithmetic",
+      "subtopic": "hundreds_digit_equals_sum_of_others",
+      "tags": [
+        "c:basic_counting",
+        "c:place_value",
+        "c:add_sub",
+        "m:enumeration"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade2",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "在 100 到 399 之間，有些三位數的百位數字剛好等於十位數字加個位數字，例如 312（3 = 1 + 2）。這樣的三位數一共有幾個？",
+        "zh-Hans": "在 100 到 399 之间，有些三位数的百位数字刚好等于十位数字加个位数字，例如 312（3 = 1 + 2）。这样的三位数一共有几个？",
+        "en": "Between 100 and 399, some three-digit numbers have a hundreds digit equal to the tens digit plus the ones digit, like 312 (3 = 1 + 2). How many such numbers are there?",
+        "ja": "100 から 399 までの 3けたの 数の 中には、百の位の 数字が 十の位と 一の位の 数字を たした 数と 同じ ものが あります。たとえば 312（3 = 1 + 2）です。このような 数は いくつ ありますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 9。",
+        "zh-Hans": "答案是 9。",
+        "en": "The answer is 9.",
+        "ja": "こたえは 9 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "百位是 1：十位加個位要是 1，有 101、110，共 2 個。",
+          "百位是 2：十位加個位要是 2，有 202、211、220，共 3 個。",
+          "百位是 3：十位加個位要是 3，有 303、312、321、330，共 4 個。",
+          "一共 2 + 3 + 4 = 9 個。"
+        ],
+        "zh-Hans": [
+          "百位是 1：十位加个位要是 1，有 101、110，共 2 个。",
+          "百位是 2：十位加个位要是 2，有 202、211、220，共 3 个。",
+          "百位是 3：十位加个位要是 3，有 303、312、321、330，共 4 个。",
+          "一共 2 + 3 + 4 = 9 个。"
+        ],
+        "en": [
+          "Hundreds digit 1: tens + ones = 1 gives 101, 110 — 2 numbers.",
+          "Hundreds digit 2: tens + ones = 2 gives 202, 211, 220 — 3 numbers.",
+          "Hundreds digit 3: tens + ones = 3 gives 303, 312, 321, 330 — 4 numbers.",
+          "In total 2 + 3 + 4 = 9 numbers."
+        ],
+        "ja": [
+          "百の位が 1：十の位 + 一の位 = 1 で、101、110 の 2こ。",
+          "百の位が 2：十の位 + 一の位 = 2 で、202、211、220 の 3こ。",
+          "百の位が 3：十の位 + 一の位 = 3 で、303、312、321、330 の 4こ。",
+          "ぜんぶで 2 + 3 + 4 = 9こ です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "9"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "arithmetic-grade2-foundation",
+        "notes": "按百位分類，每類是「兩數字和為 h」的 h + 1 種。掃「百位數字.{0,10}(等於|是).{0,10}加|數字.{0,10}加起來」：arithmetic_grade3_063 是數字和 24 的三位數個數；grade2_121 回文數數字和 10；grade2_109 十位比個位大 2。本題條件連結三個位，分類後出現 2、3、4 的規律。"
+      }
+    },
+    {
+      "id": "arithmetic_grade2_foundation_161",
+      "reviewStatus": "ok",
+      "topic": "arithmetic",
+      "subtopic": "park_time_only_one_present",
+      "tags": [
+        "c:inclusion_exclusion",
+        "c:add_sub",
+        "m:direct"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade2",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "小安 9:20 到公園，10:40 離開。小美 10:10 到公園，11:30 離開。從 9:20 到 11:30 這段時間裡，公園裡「剛好只有他們其中一個人在」的時間，一共是幾分鐘？",
+        "zh-Hans": "小安 9:20 到公园，10:40 离开。小美 10:10 到公园，11:30 离开。从 9:20 到 11:30 这段时间里，公园里「刚好只有他们其中一个人在」的时间，一共是几分钟？",
+        "en": "An arrives at the park at 9:20 and leaves at 10:40. Mei arrives at 10:10 and leaves at 11:30. Between 9:20 and 11:30, for how many minutes in total is exactly one of them in the park?",
+        "ja": "アンは 9:20 に 公園に 来て、10:40 に 帰りました。メイは 10:10 に 来て、11:30 に 帰りました。9:20 から 11:30 までの あいだで、公園に「2人の うち ちょうど 1人だけ」が いた 時間は、ぜんぶで 何分 ですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 100。",
+        "zh-Hans": "答案是 100。",
+        "en": "The answer is 100.",
+        "ja": "こたえは 100 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "小安在公園 9:20 到 10:40，是 80 分鐘；小美 10:10 到 11:30，也是 80 分鐘。",
+          "兩個人都在的時間是 10:10 到 10:40，30 分鐘。",
+          "只有小安在：80 − 30 = 50 分鐘；只有小美在：80 − 30 = 50 分鐘。",
+          "剛好只有一個人在的時間是 50 + 50 = 100 分鐘。"
+        ],
+        "zh-Hans": [
+          "小安在公园 9:20 到 10:40，是 80 分钟；小美 10:10 到 11:30，也是 80 分钟。",
+          "两个人都在的时间是 10:10 到 10:40，30 分钟。",
+          "只有小安在：80 − 30 = 50 分钟；只有小美在：80 − 30 = 50 分钟。",
+          "刚好只有一个人在的时间是 50 + 50 = 100 分钟。"
+        ],
+        "en": [
+          "An is in the park from 9:20 to 10:40, 80 minutes; Mei from 10:10 to 11:30, also 80 minutes.",
+          "Both are there from 10:10 to 10:40, 30 minutes.",
+          "Only An: 80 − 30 = 50 minutes; only Mei: 80 − 30 = 50 minutes.",
+          "Exactly one of them is there for 50 + 50 = 100 minutes."
+        ],
+        "ja": [
+          "アンが 公園に いたのは 9:20 から 10:40 の 80分、メイは 10:10 から 11:30 の 80分 です。",
+          "2人とも いたのは 10:10 から 10:40 の 30分 です。",
+          "アンだけ：80 − 30 = 50分、メイだけ：80 − 30 = 50分。",
+          "ちょうど 1人だけ いた 時間は 50 + 50 = 100分 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "100"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "arithmetic-grade2-foundation",
+        "notes": "時間區間的「恰好其一」（對稱差）＝各自時間減兩倍重疊。掃「同時在|只有.{0,6}一個人|離開」：arithmetic_grade2_127 是尺上只有一種顏色的點（離散倍數）；logic_grade2_035 只會跑步（文氏圖）；grade3_045 書號範圍交集。本題是連續時間區間、要處理跨小時的分鐘計算。"
+      }
     }
   ]
 }

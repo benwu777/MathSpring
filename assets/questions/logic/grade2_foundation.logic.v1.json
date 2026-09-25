@@ -6784,6 +6784,1175 @@
         "reference": "logic-grade2-foundation",
         "notes": "過河問題（載重限制：大人單獨、小孩最多 2 人），BFS 驗證最少 5 趟。掃「過河|渡河|划船|大人.{0,20}小孩」：logic_grade5_048（9 人、船載 2 人要划回，求趟數）、logic_grade7_010（狼羊白菜）。g5_048 所有人等價、船限 2 人；本題大人不能和小孩同船，必須先把小孩送到對岸當回船的人，推理點不同。"
       }
+    },
+    {
+      "id": "logic_grade2_foundation_089",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "gift_matching_count",
+      "tags": [
+        "c:graph_theory",
+        "c:basic_counting",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade2",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "老師要把球、小熊、玩具車、故事書 4 樣禮物分給小安、小美、小華、小明，每人剛好拿 1 樣。每個人只肯拿自己喜歡的禮物：小安喜歡球和玩具車；小美喜歡球、小熊和玩具車；小華喜歡小熊和故事書；小明喜歡玩具車和故事書。讓每個人都拿到喜歡的禮物，一共有幾種分法？",
+        "zh-Hans": "老师要把球、小熊、玩具车、故事书 4 样礼物分给小安、小美、小华、小明，每人刚好拿 1 样。每个人只肯拿自己喜欢的礼物：小安喜欢球和玩具车；小美喜欢球、小熊和玩具车；小华喜欢小熊和故事书；小明喜欢玩具车和故事书。让每个人都拿到喜欢的礼物，一共有几种分法？",
+        "en": "The teacher gives 4 gifts — a ball, a teddy bear, a toy car and a storybook — to An, Mei, Hua and Ming, exactly 1 gift each. Each child only accepts a gift they like: An likes the ball and the toy car; Mei likes the ball, the teddy bear and the toy car; Hua likes the teddy bear and the storybook; Ming likes the toy car and the storybook. In how many ways can the gifts be given so that everyone gets a gift they like?",
+        "ja": "先生が ボール、くまの ぬいぐるみ、おもちゃの 車、絵本の 4つの プレゼントを、アン、メイ、ホア、ミンに 1人 1つずつ くばります。みんな すきな ものしか もらいません。アンは ボールと 車、メイは ボールと くまと 車、ホアは くまと 絵本、ミンは 車と 絵本が すきです。みんなが すきな ものを もらえる くばりかたは、何とおり ありますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 3。",
+        "zh-Hans": "答案是 3。",
+        "en": "The answer is 3.",
+        "ja": "こたえは 3 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "先看小安，他只能拿球或玩具車。",
+          "小安拿球：小美只能拿小熊或玩具車。小美拿小熊，小華只剩故事書，小明拿玩具車，可以；小美拿玩具車，小明只能拿故事書，小華拿小熊，也可以。這樣有 2 種。",
+          "小安拿玩具車：小明只能拿故事書，小華只能拿小熊，小美拿球，可以。這樣有 1 種。",
+          "一共 2 + 1 = 3 種分法。"
+        ],
+        "zh-Hans": [
+          "先看小安，他只能拿球或玩具车。",
+          "小安拿球：小美只能拿小熊或玩具车。小美拿小熊，小华只剩故事书，小明拿玩具车，可以；小美拿玩具车，小明只能拿故事书，小华拿小熊，也可以。这样有 2 种。",
+          "小安拿玩具车：小明只能拿故事书，小华只能拿小熊，小美拿球，可以。这样有 1 种。",
+          "一共 2 + 1 = 3 种分法。"
+        ],
+        "en": [
+          "Start with An: he can only take the ball or the toy car.",
+          "An takes the ball: Mei can take the bear or the car. If Mei takes the bear, Hua must take the book and Ming the car — OK. If Mei takes the car, Ming must take the book and Hua the bear — OK. That is 2 ways.",
+          "An takes the car: Ming must take the book, Hua must take the bear, and Mei takes the ball — OK. That is 1 way.",
+          "In total 2 + 1 = 3 ways."
+        ],
+        "ja": [
+          "まず アンを 考えます。アンは ボールか 車しか もらえません。",
+          "アンが ボール：メイは くまか 車。メイが くまなら、ホアは 絵本、ミンは 車で OK。メイが 車なら、ミンは 絵本、ホアは くまで OK。これで 2とおり。",
+          "アンが 車：ミンは 絵本、ホアは くま、メイは ボールで OK。これで 1とおり。",
+          "ぜんぶで 2 + 1 = 3とおり です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "3"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade2-foundation",
+        "notes": "二分圖完美配對計數，按小安分類討論。掃「喜歡.{0,20}(禮物|玩具)|每人.{0,6}拿 1」：logic_grade2_016、grade1_058 是「每人一樣、用排除法求唯一解」；logic_grade6_083 是舞伴配對圖的計數（每人度數 2）。本題是給偏好清單數完美配對的個數。"
+      }
+    },
+    {
+      "id": "logic_grade2_foundation_090",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "one_way_roads_reach_all",
+      "tags": [
+        "c:graph_theory",
+        "c:logic_deduction",
+        "m:enumeration"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade2",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "甲、乙、丙、丁、戊五戶人家之間只有這些單行道，只能照箭頭方向走：甲 → 乙、乙 → 丙、丙 → 甲、丙 → 丁、丁 → 戊、戊 → 丁。從哪幾戶人家出發，才能沿著這些路走到其他每一戶人家？",
+        "zh-Hans": "甲、乙、丙、丁、戊五户人家之间只有这些单行道，只能照箭头方向走：甲 → 乙、乙 → 丙、丙 → 甲、丙 → 丁、丁 → 戊、戊 → 丁。从哪几户人家出发，才能沿着这些路走到其他每一户人家？",
+        "en": "Between five houses A, B, C, D and E there are only these one-way roads, which can only be used in the arrow direction: A → B, B → C, C → A, C → D, D → E, E → D. Starting from which houses can you reach every other house along these roads?",
+        "ja": "A、B、C、D、E の 5けんの 家の あいだには、つぎの 一方通行の 道しか ありません。やじるしの むきにしか すすめません：A → B、B → C、C → A、C → D、D → E、E → D。どの 家から 出発すれば、ほかの どの 家にも 行けますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 C：從甲、乙、丙出發都可以。",
+        "zh-Hans": "答案是 C：从甲、乙、丙出发都可以。",
+        "en": "The answer is C: from any of houses A, B and C.",
+        "ja": "こたえは C：A、B、Cの どれからでも 行けます。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "甲 → 乙 → 丙 → 甲 繞成一圈，所以甲、乙、丙之中從任何一戶都能走到另外兩戶。",
+          "丙 → 丁 → 戊，所以從甲、乙、丙出發，繞到丙以後就能再走到丁和戊。",
+          "丁和戊只有互相往來的路（丁 → 戊、戊 → 丁），沒有任何路從丁或戊通回甲、乙、丙，所以從丁、戊出發到不了甲、乙、丙。",
+          "所以只有從甲、乙、丙出發可以走到每一戶，答案是 C。"
+        ],
+        "zh-Hans": [
+          "甲 → 乙 → 丙 → 甲 绕成一圈，所以甲、乙、丙之中从任何一户都能走到另外两户。",
+          "丙 → 丁 → 戊，所以从甲、乙、丙出发，绕到丙以后就能再走到丁和戊。",
+          "丁和戊只有互相往来的路（丁 → 戊、戊 → 丁），没有任何路从丁或戊通回甲、乙、丙，所以从丁、戊出发到不了甲、乙、丙。",
+          "所以只有从甲、乙、丙出发可以走到每一户，答案是 C。"
+        ],
+        "en": [
+          "A → B → C → A forms a loop, so from any one of A, B, C you can reach the other two.",
+          "C → D → E, so from A, B or C you can go round to C and then on to D and E.",
+          "D and E only have roads between themselves (D → E, E → D); no road leads from D or E back to A, B or C, so starting from D or E you cannot reach A, B, C.",
+          "So exactly the houses A, B and C work. The answer is C."
+        ],
+        "ja": [
+          "A → B → C → A と 1しゅう つながって いるので、A・B・Cの どこからでも ほかの 2けんに 行けます。",
+          "C → D → E なので、A・B・Cから Cまで 行けば、Dと Eにも 行けます。",
+          "Dと Eは おたがいの あいだの 道（D → E、E → D）しか なく、A・B・Cへ もどる 道が ないので、Dや Eからは A・B・Cへ 行けません。",
+          "だから A・B・Cから だけ 行けます。こたえは C です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "multiple_choice",
+      "options": {
+        "A": {
+          "zh-Hant": "只有從甲出發才可以",
+          "zh-Hans": "只有从甲出发才可以",
+          "en": "Only from house A",
+          "ja": "Aの 家から だけ"
+        },
+        "B": {
+          "zh-Hant": "只有從丁、戊出發才可以",
+          "zh-Hans": "只有从丁、戊出发才可以",
+          "en": "Only from houses D and E",
+          "ja": "Dと Eの 家から だけ"
+        },
+        "C": {
+          "zh-Hant": "從甲、乙、丙出發都可以",
+          "zh-Hans": "从甲、乙、丙出发都可以",
+          "en": "From any of houses A, B and C",
+          "ja": "A、B、Cの どれからでも"
+        },
+        "D": {
+          "zh-Hant": "從五戶的哪一戶出發都可以",
+          "zh-Hans": "从五户的哪一户出发都可以",
+          "en": "From any of the five houses",
+          "ja": "5けんの どの 家からでも"
+        }
+      },
+      "correctAnswer": {
+        "type": "choice",
+        "value": "C"
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade2-foundation",
+        "notes": "有向圖的可達性（強連通分量＋出邊）。掃「單行|箭頭|只能照」：logic_grade5_069 是單行道 DAG 數路線；logic_grade4_073 捷運換線最少次數；logic_grade1_097 雙向傳話最少次數。本題問「從哪些點出發能到全部」，是可達性判斷。"
+      }
+    },
+    {
+      "id": "logic_grade2_foundation_091",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "count_bridge_roads",
+      "tags": [
+        "c:graph_theory",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade2",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "八個村莊 A、B、C、D、E、F、G、H 之間只有這 9 條路，每條路都可以雙向走：A–B、B–C、C–A、C–D、D–E、E–F、F–G、G–D、G–H。如果某一條路一封起來，就會有兩個村莊之間走不到，這種路叫做「重要的路」。這 9 條路之中，重要的路有幾條？",
+        "zh-Hans": "八个村庄 A、B、C、D、E、F、G、H 之间只有这 9 条路，每条路都可以双向走：A–B、B–C、C–A、C–D、D–E、E–F、F–G、G–D、G–H。如果某一条路一封起来，就会有两个村庄之间走不到，这种路叫做「重要的路」。这 9 条路之中，重要的路有几条？",
+        "en": "Eight villages A, B, C, D, E, F, G, H are connected only by these 9 two-way roads: A–B, B–C, C–A, C–D, D–E, E–F, F–G, G–D, G–H. A road is called \"important\" if closing just that road makes some two villages unable to reach each other. How many of the 9 roads are important?",
+        "ja": "8つの 村 A、B、C、D、E、F、G、H の あいだには、つぎの 9本の 道しか ありません。どの 道も 行き来 できます：A–B、B–C、C–A、C–D、D–E、E–F、F–G、G–D、G–H。ある 道 1本を 通れなく すると、行き来 できない 村が 出て くる とき、その 道を「大じな 道」と よびます。9本の うち、大じな 道は 何本 ですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 2。",
+        "zh-Hans": "答案是 2。",
+        "en": "The answer is 2.",
+        "ja": "こたえは 2 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "A、B、C 三條路繞成一個圈：封掉圈上任何一條，還可以從圈的另一邊繞過去，所以 A–B、B–C、C–A 都不重要。",
+          "D、E、F、G 四條路也繞成一個圈（D–E、E–F、F–G、G–D），同樣封掉其中一條都還能繞路，所以這 4 條也不重要。",
+          "C–D 是左邊的圈和右邊的圈之間唯一的路，封掉它 A 就到不了 D；G–H 是通到 H 的唯一的路，封掉它 H 就被隔開。這 2 條是重要的路。",
+          "所以重要的路有 2 條。"
+        ],
+        "zh-Hans": [
+          "A、B、C 三条路绕成一个圈：封掉圈上任何一条，还可以从圈的另一边绕过去，所以 A–B、B–C、C–A 都不重要。",
+          "D、E、F、G 四条路也绕成一个圈（D–E、E–F、F–G、G–D），同样封掉其中一条都还能绕路，所以这 4 条也不重要。",
+          "C–D 是左边的圈和右边的圈之间唯一的路，封掉它 A 就到不了 D；G–H 是通到 H 的唯一的路，封掉它 H 就被隔开。这 2 条是重要的路。",
+          "所以重要的路有 2 条。"
+        ],
+        "en": [
+          "A–B, B–C, C–A form a loop: if one of them is closed you can still go around the other way, so none of these 3 is important.",
+          "D–E, E–F, F–G, G–D also form a loop, so closing any one of these 4 still leaves a way around. They are not important either.",
+          "C–D is the only road between the left loop and the right loop, so closing it cuts A off from D; G–H is the only road to H, so closing it cuts H off. These 2 roads are important.",
+          "So 2 roads are important."
+        ],
+        "ja": [
+          "A–B、B–C、C–A は わに なって いて、1本 通れなく しても はんたいがわを まわって 行けるので、この 3本は 大じでは ありません。",
+          "D–E、E–F、F–G、G–D の 4本も わに なって いるので、どれか 1本を 通れなく しても まわり道が あります。",
+          "C–D は 左の わと 右の わを つなぐ ただ 1本の 道で、通れなく すると A から D へ 行けません。G–H は H へ 行く ただ 1本の 道です。この 2本が 大じな 道です。",
+          "だから 大じな 道は 2本 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "2"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade2-foundation",
+        "notes": "找圖的橋（割邊）：在圈上的邊都不是橋。掃「封|斷掉|不能走|走不到」：logic_grade7_040、grade8_026 是最少修幾條路讓全部連通；logic_grade12_039 刪邊成樹；logic_grade5_070 一筆畫加橋。沒有「哪些路一斷就不連通」的題。"
+      }
+    },
+    {
+      "id": "logic_grade2_foundation_092",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "tree_paths_visit_all_benches",
+      "tags": [
+        "c:graph_theory",
+        "c:add_sub",
+        "m:extremal"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade2",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "公園大門有 3 條步道，分別通到甲、乙、丙三座涼亭，長度是：大門到甲 20 公尺、到乙 30 公尺、到丙 40 公尺。每座涼亭又各有 2 條 10 公尺長的步道，分別通到 2 張長椅。除了這些步道以外沒有別的路。小安從大門出發，要走到全部 6 張長椅，最後停在哪一張長椅都可以。他最少要走幾公尺？",
+        "zh-Hans": "公园大门有 3 条步道，分别通到甲、乙、丙三座凉亭，长度是：大门到甲 20 公尺、到乙 30 公尺、到丙 40 公尺。每座凉亭又各有 2 条 10 公尺长的步道，分别通到 2 张长椅。除了这些步道以外没有别的路。小安从大门出发，要走到全部 6 张长椅，最后停在哪一张长椅都可以。他最少要走几公尺？",
+        "en": "From the park gate, 3 paths lead to three pavilions: 20 m to pavilion A, 30 m to pavilion B and 40 m to pavilion C. From each pavilion, 2 more paths, each 10 m long, lead to 2 benches. There are no other paths. An starts at the gate and wants to visit all 6 benches; he may finish at any bench. What is the least distance, in meters, he must walk?",
+        "ja": "公園の 門から 3本の 道が A・B・Cの 3つの あずまやへ のびて います。長さは 門から Aまで 20メートル、Bまで 30メートル、Cまで 40メートル です。どの あずまやからも 10メートルの 道が 2本 あって、それぞれ ベンチに つながって います。道は これだけです。アンは 門から 出発して、6つの ベンチ ぜんぶに 行きます。さいごは どの ベンチで おわっても かまいません。いちばん 少なくて 何メートル 歩きますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 250。",
+        "zh-Hans": "答案是 250。",
+        "en": "The answer is 250.",
+        "ja": "こたえは 250 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "路都是分岔、不會繞回來，走進一條步道去長椅，還要從同一條步道走出來。所以如果最後要回到大門，每條步道都要走 2 次。",
+          "步道總長是 20 + 30 + 40 + 6 × 10 = 150 公尺，全部走 2 次是 300 公尺。",
+          "不必回大門，最後一段「大門 → 涼亭 → 長椅」只要走 1 次就好，這一段越長越省。最長的是大門到丙再到長椅：40 + 10 = 50 公尺。",
+          "所以最少要走 300 − 50 = 250 公尺（最後去丙那邊的長椅）。"
+        ],
+        "zh-Hans": [
+          "路都是分岔、不会绕回来，走进一条步道去长椅，还要从同一条步道走出来。所以如果最后要回到大门，每条步道都要走 2 次。",
+          "步道总长是 20 + 30 + 40 + 6 × 10 = 150 公尺，全部走 2 次是 300 公尺。",
+          "不必回大门，最后一段「大门 → 凉亭 → 长椅」只要走 1 次就好，这一段越长越省。最长的是大门到丙再到长椅：40 + 10 = 50 公尺。",
+          "所以最少要走 300 − 50 = 250 公尺（最后去丙那边的长椅）。"
+        ],
+        "en": [
+          "The paths only branch and never loop, so to reach a bench you must come back out along the same path. If he had to return to the gate, every path would be walked 2 times.",
+          "The paths total 20 + 30 + 40 + 6 × 10 = 150 m, so walking all twice is 300 m.",
+          "He need not return, so the last stretch \"gate → pavilion → bench\" is walked only once; the longer it is, the more he saves. The longest is gate → C → bench: 40 + 10 = 50 m.",
+          "So the least distance is 300 − 50 = 250 m (finishing at a bench near pavilion C)."
+        ],
+        "ja": [
+          "道は えだわかれ するだけで わに なって いないので、ベンチへ 行ったら 同じ 道を もどって 出て きます。門に もどるなら、どの 道も 2回 歩きます。",
+          "道の 長さの 合計は 20 + 30 + 40 + 6 × 10 = 150メートル で、ぜんぶ 2回 歩くと 300メートル です。",
+          "門に もどらなくて よいので、さいごの「門 → あずまや → ベンチ」は 1回で すみます。これが 長いほど へります。いちばん 長いのは 門 → C → ベンチ で 40 + 10 = 50メートル です。",
+          "だから いちばん 少なくて 300 − 50 = 250メートル です（Cの そばの ベンチで おわる）。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "250"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade2-foundation",
+        "notes": "樹上遍歷：每邊走兩次，不回起點時省下最長的根到葉路徑。掃「涼亭|長椅|步道|每.{0,6}都要走」：logic_grade1_096 是直線上送卡片回家（一維）；logic_grade6_077 是完全圖每條路至少走一次（中國郵差）；logic_grade5_059 最短路。本題是樹形步道與「最後停在最遠的葉」。"
+      }
+    },
+    {
+      "id": "logic_grade2_foundation_093",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "count_friend_triangles",
+      "tags": [
+        "c:graph_theory",
+        "c:basic_counting",
+        "m:enumeration"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade2",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "小安、小美、小華、小明、小芳五個人之中，只有下面這 8 對是好朋友：小安和小美、小安和小華、小美和小華、小美和小明、小華和小明、小明和小芳、小華和小芳、小安和小芳。如果三個人之中每兩個人都是好朋友，就叫做一個「好朋友三人組」。一共有幾個好朋友三人組？",
+        "zh-Hans": "小安、小美、小华、小明、小芳五个人之中，只有下面这 8 对是好朋友：小安和小美、小安和小华、小美和小华、小美和小明、小华和小明、小明和小芳、小华和小芳、小安和小芳。如果三个人之中每两个人都是好朋友，就叫做一个「好朋友三人组」。一共有几个好朋友三人组？",
+        "en": "Among An, Mei, Hua, Ming and Fang, only these 8 pairs are good friends: An–Mei, An–Hua, Mei–Hua, Mei–Ming, Hua–Ming, Ming–Fang, Hua–Fang, An–Fang. Three people in which every two are good friends form a \"friend trio\". How many friend trios are there?",
+        "ja": "アン、メイ、ホア、ミン、ファンの 5人の うち、なかよしなのは つぎの 8組 だけです：アンと メイ、アンと ホア、メイと ホア、メイと ミン、ホアと ミン、ミンと ファン、ホアと ファン、アンと ファン。3人の うち どの 2人も なかよしの とき、「なかよし 3人組」と いいます。なかよし 3人組は いくつ ありますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 4。",
+        "zh-Hans": "答案是 4。",
+        "en": "The answer is 4.",
+        "ja": "こたえは 4 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "五個人選三個人，一共有 10 種選法，一組一組檢查三對是不是都是好朋友。",
+          "有小華的組合：安美華（安美、安華、美華都是）✓；美華明 ✓；華明芳 ✓；安華芳 ✓；安華明（安明不是）✗；美華芳（美芳不是）✗。",
+          "沒有小華的組合：安美明、安美芳、安明芳、美明芳，裡面分別有安明、美芳、安明、美芳不是好朋友，都 ✗。",
+          "所以一共有 4 個好朋友三人組。"
+        ],
+        "zh-Hans": [
+          "五个人选三个人，一共有 10 种选法，一组一组检查三对是不是都是好朋友。",
+          "有小华的组合：安美华（安美、安华、美华都是）✓；美华明 ✓；华明芳 ✓；安华芳 ✓；安华明（安明不是）✗；美华芳（美芳不是）✗。",
+          "没有小华的组合：安美明、安美芳、安明芳、美明芳，里面分别有安明、美芳、安明、美芳不是好朋友，都 ✗。",
+          "所以一共有 4 个好朋友三人组。"
+        ],
+        "en": [
+          "There are 10 ways to choose 3 of the 5 people; check each trio for all three pairs.",
+          "Trios with Hua: An-Mei-Hua (An–Mei, An–Hua, Mei–Hua) ✓; Mei-Hua-Ming ✓; Hua-Ming-Fang ✓; An-Hua-Fang ✓; An-Hua-Ming (An–Ming is not) ✗; Mei-Hua-Fang (Mei–Fang is not) ✗.",
+          "Trios without Hua: An-Mei-Ming, An-Mei-Fang, An-Ming-Fang, Mei-Ming-Fang contain An–Ming, Mei–Fang, An–Ming, Mei–Fang respectively, which are not friends, so all ✗.",
+          "So there are 4 friend trios."
+        ],
+        "ja": [
+          "5人から 3人を えらぶ えらびかたは 10とおり あるので、1組ずつ 3つの ペアが みんな なかよしか しらべます。",
+          "ホアが 入る 組：アン・メイ・ホア ✓、メイ・ホア・ミン ✓、ホア・ミン・ファン ✓、アン・ホア・ファン ✓、アン・ホア・ミン（アンと ミンが ちがう）✗、メイ・ホア・ファン（メイと ファンが ちがう）✗。",
+          "ホアが 入らない 組：アン・メイ・ミン、アン・メイ・ファン、アン・ミン・ファン、メイ・ミン・ファン には それぞれ アンと ミン、メイと ファン、アンと ミン、メイと ファンが 入って いて、みんな ✗。",
+          "だから なかよし 3人組は 4つ です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "4"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade2-foundation",
+        "notes": "在給定的朋友圖中數三角形。掃「好朋友|三人.{0,6}(都|兩兩)|每兩個人都」：logic_grade9_050 是保證出現三角形的極值（Turán 型）；logic_grade1_085 是三人寫水果的重疊；logic_grade2_086 是吵架分兩隊（二分圖染色）。沒有直接數三角形的題。"
+      }
+    },
+    {
+      "id": "logic_grade2_foundation_094",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "chores_max_matching_hall",
+      "tags": [
+        "c:graph_theory",
+        "c:logic_deduction",
+        "m:pigeonhole"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade2",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "班上有擦黑板、澆花、發作業本、關窗戶、排桌椅 5 件工作，要分給小安、小美、小華、小明、小芳 5 個人，每件工作只給 1 個人，每人最多做 1 件。每個人只願意做自己想做的工作：小安、小美、小華都只想擦黑板或澆花；小明想發作業本或關窗戶；小芳想關窗戶或排桌椅。最多可以讓幾個人做到自己想做的工作？",
+        "zh-Hans": "班上有擦黑板、浇花、发作业本、关窗户、排桌椅 5 件工作，要分给小安、小美、小华、小明、小芳 5 个人，每件工作只给 1 个人，每人最多做 1 件。每个人只愿意做自己想做的工作：小安、小美、小华都只想擦黑板或浇花；小明想发作业本或关窗户；小芳想关窗户或排桌椅。最多可以让几个人做到自己想做的工作？",
+        "en": "A class has 5 jobs — wiping the board, watering plants, handing out notebooks, closing windows, arranging desks — to give to An, Mei, Hua, Ming and Fang. Each job goes to 1 person and each person does at most 1 job. Each person only wants certain jobs: An, Mei and Hua each only want wiping the board or watering plants; Ming wants handing out notebooks or closing windows; Fang wants closing windows or arranging desks. At most how many people can get a job they want?",
+        "ja": "クラスに こくばんけし、花の 水やり、ノートくばり、まどしめ、つくえならべ の 5つの 仕事が あり、アン、メイ、ホア、ミン、ファンの 5人に わけます。1つの 仕事は 1人だけ、1人は 1つまで です。アン、メイ、ホアは 3人とも こくばんけしか 水やりだけ やりたい です。ミンは ノートくばりか まどしめ、ファンは まどしめか つくえならべを やりたい です。やりたい 仕事が できる 人は、いちばん 多くて 何人 ですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 4。",
+        "zh-Hans": "答案是 4。",
+        "en": "The answer is 4.",
+        "ja": "こたえは 4 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "小安、小美、小華三個人想做的工作只有擦黑板、澆花這 2 件。每件工作只給 1 個人，所以這三個人之中最多只有 2 個人能做到想做的工作。",
+          "小明和小芳不會和他們搶工作，最多再加 2 個人，所以最多是 2 + 2 = 4 個人。",
+          "真的做得到 4 個人：小安擦黑板、小美澆花、小明發作業本、小芳關窗戶（小華做剩下的排桌椅）。",
+          "所以最多可以讓 4 個人做到想做的工作。"
+        ],
+        "zh-Hans": [
+          "小安、小美、小华三个人想做的工作只有擦黑板、浇花这 2 件。每件工作只给 1 个人，所以这三个人之中最多只有 2 个人能做到想做的工作。",
+          "小明和小芳不会和他们抢工作，最多再加 2 个人，所以最多是 2 + 2 = 4 个人。",
+          "真的做得到 4 个人：小安擦黑板、小美浇花、小明发作业本、小芳关窗户（小华做剩下的排桌椅）。",
+          "所以最多可以让 4 个人做到想做的工作。"
+        ],
+        "en": [
+          "An, Mei and Hua only want 2 jobs between them: wiping the board and watering plants. Each job goes to only 1 person, so at most 2 of these three can get a job they want.",
+          "Ming and Fang add at most 2 more, so the most is 2 + 2 = 4 people.",
+          "4 is possible: An wipes the board, Mei waters the plants, Ming hands out notebooks, Fang closes the windows (Hua gets the remaining job, arranging desks).",
+          "So at most 4 people get a job they want."
+        ],
+        "ja": [
+          "アン、メイ、ホアの 3人が やりたい 仕事は こくばんけしと 水やりの 2つ だけです。1つの 仕事は 1人 だけなので、この 3人の うち やりたい 仕事が できるのは 多くて 2人 です。",
+          "ミンと ファンを 足しても 多くて 2人 ふえるだけで、いちばん 多くて 2 + 2 = 4人 です。",
+          "4人は できます：アンが こくばんけし、メイが 水やり、ミンが ノートくばり、ファンが まどしめ（ホアは のこりの つくえならべ）。",
+          "だから いちばん 多くて 4人 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "4"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade2-foundation",
+        "notes": "二分圖最大配對與 Hall 條件（三人只搶兩件工作⇒至少一人落空）。掃「工作|分給.{0,20}每人|只想|只願意」：logic_grade2_016、grade2_037 都是唯一解的排除推理；本題是極值（上界論證＋構造）。"
+      }
+    },
+    {
+      "id": "logic_grade2_foundation_095",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "count_shortest_routes_weighted",
+      "tags": [
+        "c:graph_theory",
+        "c:add_sub",
+        "m:enumeration"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade2",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "從家到學校之間有甲、乙、丙、丁、戊五個路口，只有下面這些路（每條都可以雙向走，數字是走這條路要花的分鐘數）：家–甲 2、家–乙 3、甲–丙 4、甲–丁 3、乙–丁 2、乙–戊 2、丙–學校 2、丁–學校 3、戊–學校 4。從家走到學校，花的時間最少的走法一共有幾種？",
+        "zh-Hans": "从家到学校之间有甲、乙、丙、丁、戊五个路口，只有下面这些路（每条都可以双向走，数字是走这条路要花的分钟数）：家–甲 2、家–乙 3、甲–丙 4、甲–丁 3、乙–丁 2、乙–戊 2、丙–学校 2、丁–学校 3、戊–学校 4。从家走到学校，花的时间最少的走法一共有几种？",
+        "en": "Between home and school there are five crossings A, B, C, D, E, and only these roads (each two-way; the number is the minutes it takes): home–A 2, home–B 3, A–C 4, A–D 3, B–D 2, B–E 2, C–school 2, D–school 3, E–school 4. How many different routes from home to school take the least time?",
+        "ja": "家から 学校までの あいだに A、B、C、D、E の 5つの こうさてんが あり、道は つぎの ものだけ です（どれも 行き来 でき、数は かかる 分を あらわします）：家–A 2、家–B 3、A–C 4、A–D 3、B–D 2、B–E 2、C–学校 2、D–学校 3、E–学校 4。家から 学校まで いちばん はやく 行ける 行きかたは 何とおり ありますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 3。",
+        "zh-Hans": "答案是 3。",
+        "en": "The answer is 3.",
+        "ja": "こたえは 3 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "列出從家到學校、每個路口最多經過一次的走法：家–甲–丙–學校 2 + 4 + 2 = 8；家–甲–丁–學校 2 + 3 + 3 = 8；家–乙–丁–學校 3 + 2 + 3 = 8；家–乙–戊–學校 3 + 2 + 4 = 9。",
+          "會繞彎的走法更久，例如家–甲–丁–乙–戊–學校 2 + 3 + 2 + 2 + 4 = 13，家–乙–丁–甲–丙–學校 3 + 2 + 3 + 4 + 2 = 14。",
+          "最少要 8 分鐘，花 8 分鐘的走法有：經過甲、丙；經過甲、丁；經過乙、丁。",
+          "所以最快的走法一共有 3 種。"
+        ],
+        "zh-Hans": [
+          "列出从家到学校、每个路口最多经过一次的走法：家–甲–丙–学校 2 + 4 + 2 = 8；家–甲–丁–学校 2 + 3 + 3 = 8；家–乙–丁–学校 3 + 2 + 3 = 8；家–乙–戊–学校 3 + 2 + 4 = 9。",
+          "会绕弯的走法更久，例如家–甲–丁–乙–戊–学校 2 + 3 + 2 + 2 + 4 = 13，家–乙–丁–甲–丙–学校 3 + 2 + 3 + 4 + 2 = 14。",
+          "最少要 8 分钟，花 8 分钟的走法有：经过甲、丙；经过甲、丁；经过乙、丁。",
+          "所以最快的走法一共有 3 种。"
+        ],
+        "en": [
+          "List the routes from home to school that pass each crossing at most once: home–A–C–school 2 + 4 + 2 = 8; home–A–D–school 2 + 3 + 3 = 8; home–B–D–school 3 + 2 + 3 = 8; home–B–E–school 3 + 2 + 4 = 9.",
+          "Routes that wander are longer, e.g. home–A–D–B–E–school 2 + 3 + 2 + 2 + 4 = 13 and home–B–D–A–C–school 3 + 2 + 3 + 4 + 2 = 14.",
+          "The least time is 8 minutes, taken by the routes through A and C, through A and D, and through B and D.",
+          "So there are 3 fastest routes."
+        ],
+        "ja": [
+          "家から 学校まで、同じ こうさてんを 2回 通らない 行きかたを 書きだします：家–A–C–学校 2 + 4 + 2 = 8、家–A–D–学校 2 + 3 + 3 = 8、家–B–D–学校 3 + 2 + 3 = 8、家–B–E–学校 3 + 2 + 4 = 9。",
+          "まわり道を すると もっと かかります。たとえば 家–A–D–B–E–学校 は 2 + 3 + 2 + 2 + 4 = 13、家–B–D–A–C–学校 は 3 + 2 + 3 + 4 + 2 = 14 です。",
+          "いちばん はやいのは 8分で、A と C、A と D、B と D を 通る 3つです。",
+          "だから 3とおり です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "3"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade2-foundation",
+        "notes": "加權圖最短路「條數」。掃「最短|最快|分鐘.{0,20}路」：logic_grade2_083 是環狀公車求最短時間（一個值）；logic_grade5_059 最短距離；logic_grade5_069 單行道數路線。本題要同時求最短時間並數出達到最短的路線有幾條。"
+      }
+    },
+    {
+      "id": "logic_grade2_foundation_096",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "arrow_squares_enter_cycle",
+      "tags": [
+        "c:graph_theory",
+        "c:modular",
+        "m:enumeration"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade2",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "地上有 1 號到 6 號六個格子，每一格都畫著一個箭頭，指向另一個格子：1 號指向 2 號、2 號指向 4 號、3 號指向 5 號、4 號指向 6 號、5 號指向 4 號、6 號指向 3 號。小安站在 1 號格，每走一步就跳到自己腳下箭頭指的那一格。走完第 30 步時，他站在幾號格？",
+        "zh-Hans": "地上有 1 号到 6 号六个格子，每一格都画着一个箭头，指向另一个格子：1 号指向 2 号、2 号指向 4 号、3 号指向 5 号、4 号指向 6 号、5 号指向 4 号、6 号指向 3 号。小安站在 1 号格，每走一步就跳到自己脚下箭头指的那一格。走完第 30 步时，他站在几号格？",
+        "en": "There are six squares numbered 1 to 6 on the ground, and each square has an arrow pointing to another square: 1 points to 2, 2 points to 4, 3 points to 5, 4 points to 6, 5 points to 4, 6 points to 3. An stands on square 1, and each step he jumps to the square that the arrow under his feet points to. After the 30th step, which square is he on?",
+        "ja": "地面に 1ばんから 6ばんまでの 6つの ますが あり、どの ますにも ほかの ますを さす やじるしが かいて あります：1ばんは 2ばん、2ばんは 4ばん、3ばんは 5ばん、4ばんは 6ばん、5ばんは 4ばん、6ばんは 3ばんを さします。アンは 1ばんの ますに 立って いて、1歩ごとに 足もとの やじるしが さす ますへ とびます。30歩目を とんだ とき、アンは 何ばんの ますに いますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 4。",
+        "zh-Hans": "答案是 4。",
+        "en": "The answer is 4.",
+        "ja": "こたえは 4 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "照箭頭走：1 → 2 → 4 → 6 → 3 → 5 → 4 → 6 → 3 → 5 → 4 ……",
+          "第 2 步到 4 號以後，就一直照「4、6、3、5」這 4 格繞圈：第 2 步在 4，第 6 步在 4，第 10 步在 4……每多走 4 步又回到 4。",
+          "第 30 步比第 2 步多走 30 − 2 = 28 步，28 = 4 × 7，剛好繞了 7 圈。",
+          "所以第 30 步時站在 4 號格。"
+        ],
+        "zh-Hans": [
+          "照箭头走：1 → 2 → 4 → 6 → 3 → 5 → 4 → 6 → 3 → 5 → 4 ……",
+          "第 2 步到 4 号以后，就一直照「4、6、3、5」这 4 格绕圈：第 2 步在 4，第 6 步在 4，第 10 步在 4……每多走 4 步又回到 4。",
+          "第 30 步比第 2 步多走 30 − 2 = 28 步，28 = 4 × 7，刚好绕了 7 圈。",
+          "所以第 30 步时站在 4 号格。"
+        ],
+        "en": [
+          "Follow the arrows: 1 → 2 → 4 → 6 → 3 → 5 → 4 → 6 → 3 → 5 → 4 …",
+          "After reaching 4 at step 2, he keeps going round the 4 squares 4, 6, 3, 5: he is on 4 at step 2, step 6, step 10, … — every 4 more steps he is back on 4.",
+          "Step 30 is 30 − 2 = 28 steps after step 2, and 28 = 4 × 7, exactly 7 rounds.",
+          "So after step 30 he is on square 4."
+        ],
+        "ja": [
+          "やじるしの とおりに すすむと 1 → 2 → 4 → 6 → 3 → 5 → 4 → 6 → 3 → 5 → 4 …… です。",
+          "2歩目で 4ばんに ついたら、あとは「4、6、3、5」の 4つを ぐるぐる まわります。2歩目、6歩目、10歩目……と 4歩ごとに 4ばんに もどります。",
+          "30歩目は 2歩目より 30 − 2 = 28歩 あとで、28 = 4 × 7 なので ちょうど 7しゅう です。",
+          "だから 4ばんの ますに います。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "4"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade2-foundation",
+        "notes": "函數圖（每點一條出邊）先走一段尾巴再進入長度 4 的循環，用除法找位置。掃「箭頭|指向|跳到.{0,10}格」：logic_grade3_036、grade1_045 是固定週期循環排座／分隊（從第 1 項就循環）；本題要先找出進入循環的位置，1、2 兩格不在圈上。"
+      }
+    },
+    {
+      "id": "logic_grade2_foundation_097",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "shortest_round_trip_three_houses",
+      "tags": [
+        "c:graph_theory",
+        "c:add_sub",
+        "m:enumeration"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade2",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "小安要從家出發，到甲、乙、丙三個同學家各送一份禮物，最後回到自己家。每兩個地方之間都有一條路，走路要花的分鐘數是：家–甲 5、家–乙 7、家–丙 6、甲–乙 4、甲–丙 8、乙–丙 3。他最少要走幾分鐘？",
+        "zh-Hans": "小安要从家出发，到甲、乙、丙三个同学家各送一份礼物，最后回到自己家。每两个地方之间都有一条路，走路要花的分钟数是：家–甲 5、家–乙 7、家–丙 6、甲–乙 4、甲–丙 8、乙–丙 3。他最少要走几分钟？",
+        "en": "An leaves home, delivers a gift to each of his classmates A, B and C, and then returns home. There is a road between every two places, and the walking times in minutes are: home–A 5, home–B 7, home–C 6, A–B 4, A–C 8, B–C 3. What is the least number of minutes he must walk?",
+        "ja": "アンは 家を 出て、A、B、C の 3人の ともだちの 家に プレゼントを 1つずつ とどけて、さいごに 自分の 家へ もどります。どの 2か所の あいだにも 道が 1本 あり、歩いて かかる 分は 家–A 5、家–B 7、家–C 6、A–B 4、A–C 8、B–C 3 です。いちばん 少なくて 何分 歩きますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 18。",
+        "zh-Hans": "答案是 18。",
+        "en": "The answer is 18.",
+        "ja": "こたえは 18 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "送禮的順序有 6 種，但「甲乙丙」和倒過來的「丙乙甲」走的是同一圈路，時間一樣，所以只要比 3 圈。",
+          "家→甲→乙→丙→家：5 + 4 + 3 + 6 = 18 分鐘。",
+          "家→甲→丙→乙→家：5 + 8 + 3 + 7 = 23 分鐘；家→乙→甲→丙→家：7 + 4 + 8 + 6 = 25 分鐘。",
+          "最少要走 18 分鐘。"
+        ],
+        "zh-Hans": [
+          "送礼的顺序有 6 种，但「甲乙丙」和倒过来的「丙乙甲」走的是同一圈路，时间一样，所以只要比 3 圈。",
+          "家→甲→乙→丙→家：5 + 4 + 3 + 6 = 18 分钟。",
+          "家→甲→丙→乙→家：5 + 8 + 3 + 7 = 23 分钟；家→乙→甲→丙→家：7 + 4 + 8 + 6 = 25 分钟。",
+          "最少要走 18 分钟。"
+        ],
+        "en": [
+          "There are 6 delivery orders, but an order and its reverse (such as A, B, C and C, B, A) use the same loop and take the same time, so only 3 loops need comparing.",
+          "home → A → B → C → home: 5 + 4 + 3 + 6 = 18 minutes.",
+          "home → A → C → B → home: 5 + 8 + 3 + 7 = 23 minutes; home → B → A → C → home: 7 + 4 + 8 + 6 = 25 minutes.",
+          "The least is 18 minutes."
+        ],
+        "ja": [
+          "まわる じゅんばんは 6とおり ありますが、「A、B、C」と ぎゃくの「C、B、A」は 同じ わを まわるので 時間も 同じです。だから 3つの わを くらべれば よいです。",
+          "家 → A → B → C → 家：5 + 4 + 3 + 6 = 18分。",
+          "家 → A → C → B → 家：5 + 8 + 3 + 7 = 23分、家 → B → A → C → 家：7 + 4 + 8 + 6 = 25分。",
+          "いちばん 少なくて 18分 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "18"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade2-foundation",
+        "notes": "小型旅行推銷員（完全圖 K4 上的最短迴路），利用「順序倒過來同一圈」減半。掃「各送|送.{0,10}回到|最後回到」：logic_grade1_096 是直線上的來回（位置在一條路上）；grade2_083 環狀路線兩點最短；grade5_059 單源最短路。沒有「一圈經過全部點」的最短比較。"
+      }
+    },
+    {
+      "id": "logic_grade2_foundation_098",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "stamp_sheet_adjacent_pairs",
+      "tags": [
+        "c:basic_counting",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade2",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一整張郵票排成 3 橫排，每排 4 張，一共 12 張。小安要從這張郵票上撕下 2 張「有一條邊連在一起」的郵票（左右相鄰或上下相鄰都可以）。撕下的位置不同就算不同的撕法。一共有幾種撕法？",
+        "zh-Hans": "一整张邮票排成 3 横排，每排 4 张，一共 12 张。小安要从这张邮票上撕下 2 张「有一条边连在一起」的邮票（左右相邻或上下相邻都可以）。撕下的位置不同就算不同的撕法。一共有几种撕法？",
+        "en": "A sheet of stamps has 3 rows with 4 stamps in each row, 12 stamps in all. An wants to tear off 2 stamps that share a whole edge (side by side or one above the other). Different positions count as different ways. How many ways are there?",
+        "ja": "きってが 1まいの シートに 3だん、1だんに 4まいずつ、ぜんぶで 12まい ならんで います。アンは このシートから、へんが 1つ くっついて いる きって 2まい（左右に となりか 上下に となり）を きりとります。きりとる 場所が ちがえば ちがう きりかた です。きりかたは 何とおり ありますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 17。",
+        "zh-Hans": "答案是 17。",
+        "en": "The answer is 17.",
+        "ja": "こたえは 17 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "分成「左右相鄰」和「上下相鄰」兩種來數。",
+          "左右相鄰：每一橫排 4 張，相鄰的有 3 對；3 排一共 3 × 3 = 9 種。",
+          "上下相鄰：每一直行 3 張，相鄰的有 2 對；4 行一共 4 × 2 = 8 種。",
+          "一共 9 + 8 = 17 種撕法。"
+        ],
+        "zh-Hans": [
+          "分成「左右相邻」和「上下相邻」两种来数。",
+          "左右相邻：每一横排 4 张，相邻的有 3 对；3 排一共 3 × 3 = 9 种。",
+          "上下相邻：每一直行 3 张，相邻的有 2 对；4 行一共 4 × 2 = 8 种。",
+          "一共 9 + 8 = 17 种撕法。"
+        ],
+        "en": [
+          "Count side-by-side pairs and one-above-the-other pairs separately.",
+          "Side by side: each row of 4 has 3 neighboring pairs; 3 rows give 3 × 3 = 9.",
+          "One above the other: each column of 3 has 2 neighboring pairs; 4 columns give 4 × 2 = 8.",
+          "In total 9 + 8 = 17 ways."
+        ],
+        "ja": [
+          "「左右に となり」と「上下に となり」に わけて 数えます。",
+          "左右：1だん 4まいの 中に となりどうしは 3組、3だんで 3 × 3 = 9とおり。",
+          "上下：1れつ 3まいの 中に となりどうしは 2組、4れつで 4 × 2 = 8とおり。",
+          "ぜんぶで 9 + 8 = 17とおり です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "17"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade2-foundation",
+        "notes": "方格中相鄰對（格點圖的邊）計數，按方向分類。掃「郵票|相鄰.{0,10}(兩張|2 張)|骨牌」：logic_grade10_032 是撕成單張要撕幾次（不變量）；geometry_grade2_059、grade2_067 是骨牌鋪滿／最多放幾塊。沒有數「相鄰兩格的位置有幾種」的題。"
+      }
+    },
+    {
+      "id": "logic_grade2_foundation_099",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "l_tromino_positions_3x3",
+      "tags": [
+        "c:basic_counting",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade2",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一大張貼紙排成 3 橫排、每排 3 張，一共 9 張。小安要撕下 3 張連在一起、排成 L 形的貼紙：也就是從一個 2 排 2 張的小正方形裡，只少掉其中 1 張的樣子。撕下的 3 張位置不同就算不同的撕法。一共有幾種撕法？",
+        "zh-Hans": "一大张贴纸排成 3 横排、每排 3 张，一共 9 张。小安要撕下 3 张连在一起、排成 L 形的贴纸：也就是从一个 2 排 2 张的小正方形里，只少掉其中 1 张的样子。撕下的 3 张位置不同就算不同的撕法。一共有几种撕法？",
+        "en": "A big sheet of stickers has 3 rows with 3 stickers in each row, 9 stickers in all. An wants to tear off 3 joined stickers in an L shape — that is, a 2-by-2 square of stickers with exactly 1 of the 4 missing. Different sets of positions count as different ways. How many ways are there?",
+        "ja": "シールが 3だん、1だんに 3まいずつ、ぜんぶで 9まい ならんだ シートが あります。アンは つながった 3まいを L の 形に きりとります。つまり、2だん 2まいの 小さな 正方形から 1まいだけ ぬけた 形です。きりとる 3まいの 場所が ちがえば ちがう きりかた です。きりかたは 何とおり ありますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 16。",
+        "zh-Hans": "答案是 16。",
+        "en": "The answer is 16.",
+        "ja": "こたえは 16 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "每一個 L 形都剛好放在一個「2 排 2 張的小正方形」裡面，而且只會在一個小正方形裡。",
+          "3 排 3 張的貼紙裡，2 排 2 張的小正方形有 4 個：左上、右上、左下、右下。",
+          "每個小正方形去掉 4 張中的任何 1 張，就是一種 L 形，有 4 種。",
+          "一共 4 × 4 = 16 種撕法。"
+        ],
+        "zh-Hans": [
+          "每一个 L 形都刚好放在一个「2 排 2 张的小正方形」里面，而且只会在一个小正方形里。",
+          "3 排 3 张的贴纸里，2 排 2 张的小正方形有 4 个：左上、右上、左下、右下。",
+          "每个小正方形去掉 4 张中的任何 1 张，就是一种 L 形，有 4 种。",
+          "一共 4 × 4 = 16 种撕法。"
+        ],
+        "en": [
+          "Every L shape sits inside exactly one 2-by-2 square of stickers.",
+          "A 3-by-3 sheet contains 4 such 2-by-2 squares: top left, top right, bottom left, bottom right.",
+          "Leaving out any 1 of the 4 stickers of a square gives an L shape, so each square gives 4.",
+          "In total 4 × 4 = 16 ways."
+        ],
+        "ja": [
+          "どの L の 形も、「2だん 2まいの 小さな 正方形」の どれか 1つの 中に ちょうど 入ります。",
+          "3だん 3まいの シートには、2だん 2まいの 正方形が 4つ（左上、右上、左下、右下）あります。",
+          "1つの 正方形から 4まいの うち 1まいを ぬけば L の 形に なるので、4とおり です。",
+          "ぜんぶで 4 × 4 = 16とおり です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "16"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade2-foundation",
+        "notes": "L 形三格在 3×3 中的位置數，以「所在的 2×2 方塊」一一對應計數。掃「L 形|L 字」：geometry_grade2_053 是四格拼形的種類（形狀數，不是位置數）；grade1_051 是 L 形平移覆蓋格數；grade4_054 數正方形。沒有數 L 形位置的題。"
+      }
+    },
+    {
+      "id": "logic_grade2_foundation_100",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "bench_three_no_neighbors",
+      "tags": [
+        "c:basic_counting",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade2",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一張長椅上有 5 個位子排成一排。小安、小美、小華 3 個人要坐下，每人坐一個位子，而且任兩個人都不可以坐在隔壁。一共有幾種坐法？",
+        "zh-Hans": "一张长椅上有 5 个位子排成一排。小安、小美、小华 3 个人要坐下，每人坐一个位子，而且任两个人都不可以坐在隔壁。一共有几种坐法？",
+        "en": "A bench has 5 seats in a row. An, Mei and Hua sit down, one per seat, and no two of them may sit next to each other. How many ways can they sit?",
+        "ja": "ベンチに 5つの せきが 1れつに ならんで います。アン、メイ、ホアの 3人が 1人 1せきずつ すわります。どの 2人も となりどうしに すわっては いけません。すわりかたは 何とおり ありますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 6。",
+        "zh-Hans": "答案是 6。",
+        "en": "The answer is 6.",
+        "ja": "こたえは 6 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "3 個人都不相鄰，任兩個人中間至少要空 1 個位子，所以至少要 3 + 2 = 5 個位子，剛好就是 5 個。",
+          "這表示坐的位子只能是第 1、3、5 個位子，第 2、4 個位子都空著。",
+          "3 個人坐進第 1、3、5 個位子：第 1 個位子有 3 種選法，第 3 個位子有 2 種，第 5 個位子剩 1 種。",
+          "一共 3 × 2 × 1 = 6 種坐法。"
+        ],
+        "zh-Hans": [
+          "3 个人都不相邻，任两个人中间至少要空 1 个位子，所以至少要 3 + 2 = 5 个位子，刚好就是 5 个。",
+          "这表示坐的位子只能是第 1、3、5 个位子，第 2、4 个位子都空着。",
+          "3 个人坐进第 1、3、5 个位子：第 1 个位子有 3 种选法，第 3 个位子有 2 种，第 5 个位子剩 1 种。",
+          "一共 3 × 2 × 1 = 6 种坐法。"
+        ],
+        "en": [
+          "No two of the 3 are neighbors, so at least 1 empty seat is between any two of them. That needs at least 3 + 2 = 5 seats — exactly the 5 we have.",
+          "So they must sit in seats 1, 3 and 5, with seats 2 and 4 empty.",
+          "Seat 1 can take any of 3 people, seat 3 any of the remaining 2, and seat 5 the last 1.",
+          "In total 3 × 2 × 1 = 6 ways."
+        ],
+        "ja": [
+          "3人とも となりどうしに ならないので、2人の あいだには 少なくとも 1せき あきが いります。それには 3 + 2 = 5せき いり、ちょうど 5せき です。",
+          "だから すわれるのは 1ばん、3ばん、5ばんの せきだけで、2ばんと 4ばんは あきます。",
+          "1ばんは 3人の だれでも 3とおり、3ばんは のこり 2とおり、5ばんは 1とおり です。",
+          "ぜんぶで 3 × 2 × 1 = 6とおり です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "6"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade2-foundation",
+        "notes": "先用「間隔至少 1」確定座位只能是 1、3、5，再排人。掃「隔壁|相鄰|不相鄰」：logic_grade1_049 是 3 人不讓兩人相鄰（1 條限制）；combinatorics_grade7_026 是 5 人中甲乙不相鄰（補集法）；logic_grade3_070 號碼相連不相鄰。本題是空位受限、先定位再排。"
+      }
+    },
+    {
+      "id": "logic_grade2_foundation_101",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "room_numbers_containing_digit_three",
+      "tags": [
+        "c:basic_counting",
+        "c:inclusion_exclusion",
+        "c:place_value",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade2",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一棟大樓有 1 樓到 9 樓，每一層都有 6 間房間。房號是在樓層數字後面接上 01 到 06，例如 3 樓的第 5 間是 305，7 樓的第 3 間是 703。房號裡面有數字 3 的房間一共有幾間？",
+        "zh-Hans": "一栋大楼有 1 楼到 9 楼，每一层都有 6 间房间。房号是在楼层数字后面接上 01 到 06，例如 3 楼的第 5 间是 305，7 楼的第 3 间是 703。房号里面有数字 3 的房间一共有几间？",
+        "en": "A building has floors 1 to 9, with 6 rooms on each floor. A room number is the floor number followed by 01 to 06; for example, the 5th room on floor 3 is 305 and the 3rd room on floor 7 is 703. How many rooms have the digit 3 in their room number?",
+        "ja": "あるビルは 1かいから 9かいまで あり、どの かいにも へやが 6つ あります。へやの ばんごうは、かいの 数の うしろに 01から 06を つけます。たとえば 3かいの 5ばんめの へやは 305、7かいの 3ばんめの へやは 703 です。ばんごうに 数字の 3が 入って いる へやは 何へや ありますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 14。",
+        "zh-Hans": "答案是 14。",
+        "en": "The answer is 14.",
+        "ja": "こたえは 14 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "房號裡的 3 只可能出現在兩個地方：百位（在 3 樓），或個位（每一層的第 3 間，房號後兩位是 03）。",
+          "在 3 樓的房間：301 到 306，一共 6 間。",
+          "每一層的第 3 間：103、203、303、……、903，一共 9 間。",
+          "303 在兩邊都算到了一次，要扣掉 1 次：6 + 9 − 1 = 14 間。"
+        ],
+        "zh-Hans": [
+          "房号里的 3 只可能出现在两个地方：百位（在 3 楼），或个位（每一层的第 3 间，房号后两位是 03）。",
+          "在 3 楼的房间：301 到 306，一共 6 间。",
+          "每一层的第 3 间：103、203、303、……、903，一共 9 间。",
+          "303 在两边都算到了一次，要扣掉 1 次：6 + 9 − 1 = 14 间。"
+        ],
+        "en": [
+          "A 3 can only appear in two places: the hundreds digit (floor 3) or the ones digit (the 3rd room on a floor, ending in 03).",
+          "Rooms on floor 3: 301 to 306, 6 rooms.",
+          "The 3rd room on each floor: 103, 203, 303, …, 903, 9 rooms.",
+          "Room 303 was counted in both lists, so subtract it once: 6 + 9 − 1 = 14 rooms."
+        ],
+        "ja": [
+          "3が 出て くるのは 2か所だけ です。百の位（3かい）か、一の位（どの かいでも 3ばんめの へやで、うしろが 03）です。",
+          "3かいの へや：301から 306までの 6へや。",
+          "どの かいでも 3ばんめの へや：103、203、303、……、903 の 9へや。",
+          "303 は 両方で 数えたので 1回 ひきます：6 + 9 − 1 = 14へや です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "14"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade2-foundation",
+        "notes": "兩個條件（百位是 3／個位是 3）的聯集，重疊一間。掃「房號|房間號碼|數字 3」：arithmetic_grade3_124 是 7 的倍數或含 7（1 到 50）；grade3_003 數數字 2 出現次數；grade2_127 只有一種顏色的點。本題是房號的位值結構帶出兩個集合，交集只有 303。"
+      }
+    },
+    {
+      "id": "logic_grade2_foundation_102",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "chocolate_bar_break_patterns",
+      "tags": [
+        "c:basic_counting",
+        "m:bijection"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade2",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一條巧克力有 5 小塊排成一排，相鄰兩小塊之間都有一條凹痕，一共 4 條凹痕。小安可以選一些凹痕把巧克力掰開，每條凹痕都可以掰或不掰，一條都不掰也算一種。只看最後分成的每一段各在哪裡，一共有幾種不同的掰法？",
+        "zh-Hans": "一条巧克力有 5 小块排成一排，相邻两小块之间都有一条凹痕，一共 4 条凹痕。小安可以选一些凹痕把巧克力掰开，每条凹痕都可以掰或不掰，一条都不掰也算一种。只看最后分成的每一段各在哪里，一共有几种不同的掰法？",
+        "en": "A chocolate bar has 5 small pieces in a row, with a groove between every two neighboring pieces — 4 grooves in all. An may break the bar at some of the grooves; each groove can be broken or not, and breaking none also counts. Looking only at which pieces end up together, how many different ways of breaking are there?",
+        "ja": "板チョコが 5つの 小さな かけらで 1れつに なって いて、となりどうしの あいだに みぞが 1本ずつ、ぜんぶで 4本 あります。アンは みぞの どこかで チョコを わります。どの みぞも わっても わらなくても よく、1本も わらないのも 1とおりに 数えます。さいごに どの かけらが いっしょに なって いるかだけを 見ると、わりかたは 何とおり ありますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 16。",
+        "zh-Hans": "答案是 16。",
+        "en": "The answer is 16.",
+        "ja": "こたえは 16 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "最後分成的樣子，完全由「哪幾條凹痕有掰開」決定；不同的掰開凹痕，分出來的段一定不一樣。",
+          "每一條凹痕都有「掰」和「不掰」2 種選擇。",
+          "4 條凹痕一共 2 × 2 × 2 × 2 = 16 種選法。",
+          "所以一共有 16 種不同的掰法。"
+        ],
+        "zh-Hans": [
+          "最后分成的样子，完全由「哪几条凹痕有掰开」决定；不同的掰开凹痕，分出来的段一定不一样。",
+          "每一条凹痕都有「掰」和「不掰」2 种选择。",
+          "4 条凹痕一共 2 × 2 × 2 × 2 = 16 种选法。",
+          "所以一共有 16 种不同的掰法。"
+        ],
+        "en": [
+          "The final pieces are decided exactly by which grooves are broken, and different sets of broken grooves always give different pieces.",
+          "Each groove has 2 choices: break or not.",
+          "4 grooves give 2 × 2 × 2 × 2 = 16 choices.",
+          "So there are 16 different ways."
+        ],
+        "ja": [
+          "さいごの わかれかたは「どの みぞを わったか」で きまり、わった みぞが ちがえば わかれかたも ちがいます。",
+          "どの みぞも「わる」「わらない」の 2とおり です。",
+          "4本で 2 × 2 × 2 × 2 = 16とおり です。",
+          "だから 16とおり です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "16"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade2-foundation",
+        "notes": "切法與「凹痕的子集」一一對應。掃「巧克力|凹痕|掰」：arithmetic_grade6_113 數掰下「連續一段」的位置（55）；logic_grade3_072 平分巧克力最少刀數；logic_grade10_032 撕郵票次數不變量。沒有「任意切法數＝2 的凹痕數次方」的題。"
+      }
+    },
+    {
+      "id": "logic_grade2_foundation_103",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "three_coins_one_per_row_column_no_center",
+      "tags": [
+        "c:basic_counting",
+        "m:enumeration"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade2",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一個 3 × 3 的方格板有 9 格。小安要放 3 枚硬幣，每格最多放 1 枚，而且每一橫排剛好 1 枚、每一直行也剛好 1 枚。另外，正中間那一格不可以放硬幣。一共有幾種放法？",
+        "zh-Hans": "一个 3 × 3 的方格板有 9 格。小安要放 3 枚硬币，每格最多放 1 枚，而且每一横排刚好 1 枚、每一直行也刚好 1 枚。另外，正中间那一格不可以放硬币。一共有几种放法？",
+        "en": "A 3 × 3 board has 9 squares. An places 3 coins, at most 1 per square, so that every row has exactly 1 coin and every column has exactly 1 coin. Also, the center square may not have a coin. How many ways are there to place the coins?",
+        "ja": "3 × 3 の ますが 9つ あります。アンは コインを 3まい おきます。1つの ますには 1まいまで で、どの よこの だんにも ちょうど 1まい、どの たての れつにも ちょうど 1まい に します。また、まん中の ますには おけません。おきかたは 何とおり ありますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 4。",
+        "zh-Hans": "答案是 4。",
+        "en": "The answer is 4.",
+        "ja": "こたえは 4 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "先不管正中間：第 1 排的硬幣可以放在 3 個直行之一，第 2 排剩 2 個直行可選，第 3 排只剩 1 個，一共 3 × 2 × 1 = 6 種。",
+          "其中硬幣放到正中間的，是第 2 排放在中間那一行的情形。",
+          "這時第 1 排和第 3 排只能放在左、右兩行，有 2 種放法，所以要扣掉 2 種。",
+          "一共 6 − 2 = 4 種放法。"
+        ],
+        "zh-Hans": [
+          "先不管正中间：第 1 排的硬币可以放在 3 个直行之一，第 2 排剩 2 个直行可选，第 3 排只剩 1 个，一共 3 × 2 × 1 = 6 种。",
+          "其中硬币放到正中间的，是第 2 排放在中间那一行的情形。",
+          "这时第 1 排和第 3 排只能放在左、右两行，有 2 种放法，所以要扣掉 2 种。",
+          "一共 6 − 2 = 4 种放法。"
+        ],
+        "en": [
+          "Ignore the center first: the coin in row 1 can go in any of 3 columns, row 2 then has 2 columns left, row 3 has 1 left — 3 × 2 × 1 = 6 ways.",
+          "A coin is on the center exactly when row 2 uses the middle column.",
+          "Then rows 1 and 3 must use the left and right columns, in 2 ways, so 2 ways must be removed.",
+          "In total 6 − 2 = 4 ways."
+        ],
+        "ja": [
+          "まず まん中を 気に しないと、1だんめの コインは 3つの れつの どれか、2だんめは のこり 2つ、3だんめは のこり 1つで、3 × 2 × 1 = 6とおり です。",
+          "まん中に コインが くるのは、2だんめを まん中の れつに おいた とき です。",
+          "そのとき 1だんめと 3だんめは 左と 右の れつに おくので 2とおり あり、これを ひきます。",
+          "6 − 2 = 4とおり です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "4"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade2-foundation",
+        "notes": "每排每行各一（3 階排列）扣掉中心被占的情形。掃「每一橫排.{0,20}每一直行|每一排.{0,10}每一行」：logic_grade2_074 是 4 × 4 數獨填數（唯一解）；logic_grade2_051 是紅卡在頭尾的排列；geometry_grade2_067 放骨牌最多幾塊。沒有「每排每行各一枚、禁一格」的計數題。"
+      }
+    },
+    {
+      "id": "logic_grade2_foundation_104",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "street_lamps_cover_houses_minimum",
+      "tags": [
+        "c:graph_theory",
+        "m:estimate_bound",
+        "m:construction"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade2",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一條路的一邊有 10 戶人家排成一排。在某一戶門口裝一盞燈，可以照亮這一戶，以及左右隔壁各一戶（最旁邊的那一戶只有一邊有隔壁）。最少要裝幾盞燈，才能讓 10 戶人家每一戶都被照亮？",
+        "zh-Hans": "一条路的一边有 10 户人家排成一排。在某一户门口装一盏灯，可以照亮这一户，以及左右隔壁各一户（最旁边的那一户只有一边有隔壁）。最少要装几盏灯，才能让 10 户人家每一户都被照亮？",
+        "en": "On one side of a road, 10 houses stand in a row. A lamp put at a house lights up that house and the next-door house on each side (a house at an end has a neighbor on one side only). What is the least number of lamps needed so that all 10 houses are lit?",
+        "ja": "道の かたがわに 10けんの 家が 1れつに ならんで います。ある 家の 前に あかりを 1つ つけると、その 家と、左右 となりの 家 1けんずつが 明るく なります（はしの 家は となりが かたほう だけ）。10けん ぜんぶを 明るく するには、少なくとも あかりを いくつ つければ よいですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 4。",
+        "zh-Hans": "答案是 4。",
+        "en": "The answer is 4.",
+        "ja": "こたえは 4 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "一盞燈最多照亮 3 戶（自己和左右兩戶）。",
+          "如果只裝 3 盞，最多照亮 3 × 3 = 9 戶，比 10 戶少，一定有人家沒被照亮。所以至少要 4 盞。",
+          "4 盞做得到：從左邊數，裝在第 2、5、8、10 戶門口，分別照亮 1–3、4–6、7–9、9–10 戶，10 戶全部都亮。",
+          "所以最少要裝 4 盞燈。"
+        ],
+        "zh-Hans": [
+          "一盏灯最多照亮 3 户（自己和左右两户）。",
+          "如果只装 3 盏，最多照亮 3 × 3 = 9 户，比 10 户少，一定有人家没被照亮。所以至少要 4 盏。",
+          "4 盏做得到：从左边数，装在第 2、5、8、10 户门口，分别照亮 1–3、4–6、7–9、9–10 户，10 户全部都亮。",
+          "所以最少要装 4 盏灯。"
+        ],
+        "en": [
+          "One lamp lights at most 3 houses (its own and the two next door).",
+          "With only 3 lamps, at most 3 × 3 = 9 houses are lit, fewer than 10, so some house would stay dark. At least 4 lamps are needed.",
+          "4 lamps work: put them at the 2nd, 5th, 8th and 10th houses from the left, lighting houses 1–3, 4–6, 7–9 and 9–10, so all 10 are lit.",
+          "So the least number is 4 lamps."
+        ],
+        "ja": [
+          "あかり 1つで 明るく なるのは 多くて 3けん（自分と 左右）です。",
+          "3つ だけだと 多くて 3 × 3 = 9けんで、10けんに たりないので、どこかが くらいまま です。だから 少なくとも 4つ いります。",
+          "4つで できます：左から 2、5、8、10ばんめの 家に つけると、1〜3、4〜6、7〜9、9〜10ばんめが 明るく なり、10けん ぜんぶ 明るい です。",
+          "だから 少なくとも 4つ です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "4"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade2-foundation",
+        "notes": "直線上的支配集：每盞最多蓋 3 戶給下界，再構造。掃「照亮|照到|監視|路燈」：logic_grade12_022 是覆蓋每條道路兩端的監視器（點覆蓋）；logic_grade12_025 是 5 × 5 方格的感測器（二維支配）；logic_grade1_110 是紅黃綠路燈循環。沒有一維照明覆蓋的低年級題。"
+      }
     }
   ]
 }
