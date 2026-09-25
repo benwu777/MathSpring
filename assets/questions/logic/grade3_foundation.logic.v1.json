@@ -5604,6 +5604,586 @@
         "reference": "logic-grade3-foundation",
         "notes": "公平分配的最少刀數：下界（沒切的整條會超過 3/4）＋構造。掃過「刀|平分|切成」：logic_grade7_031（長方形蛋糕分 6 塊最少刀數，不可移動）、geometry_grade1_059（圓蛋糕兩刀最多塊）、logic_grade8_029（立方體切 27 塊）。差異：這題是分數份量的公平分配，下界來自「一整條大於 3/4」。"
       }
+    },
+    {
+      "id": "logic_grade3_foundation_073",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "palindrome_card_arrangements",
+      "tags": [
+        "c:symmetry",
+        "c:permutation_combination",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade3",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "有 9 張數字卡：1、1、2、2、3、3、3、4、4。把 9 張全部排成一排，組成一個九位數，而且這個九位數從左邊讀和從右邊讀完全一樣（例如 123434321）。這樣的九位數一共有幾個？",
+        "zh-Hans": "有 9 张数字卡：1、1、2、2、3、3、3、4、4。把 9 张全部排成一排，组成一个九位数，而且这个九位数从左边读和从右边读完全一样（例如 123434321）。这样的九位数一共有几个？",
+        "en": "There are 9 digit cards: 1, 1, 2, 2, 3, 3, 3, 4, 4. All 9 cards are placed in a row to form a 9-digit number that reads the same from left to right as from right to left (for example 123434321). How many such 9-digit numbers are there?",
+        "ja": "数字カードが 9まい あります：1、1、2、2、3、3、3、4、4。9まい ぜんぶを 1れつに ならべて 9けたの 数を つくり、左から 読んでも 右から 読んでも 同じに なるように します（たとえば 123434321）。このような 9けたの 数は 何こ ありますか。"
+      },
+      "answer": {
+        "zh-Hant": "一共有 24 個。",
+        "zh-Hans": "一共有 24 个。",
+        "en": "There are 24 such numbers.",
+        "ja": "24こ です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "左右讀起來一樣，表示第 1 位和第 9 位相同、第 2 位和第 8 位相同、第 3 位和第 7 位相同、第 4 位和第 6 位相同；第 5 位在正中間，自己一組。",
+          "所以除了正中間那一張，其他 8 張要兩張兩張配成一樣的數字。",
+          "1、2、4 各有 2 張，3 有 3 張。只有 3 的張數是單數，所以正中間一定放 3。",
+          "剩下的 1、1、2、2、3、3、4、4 剛好 4 對：左邊 4 個位置放 1、2、3、4 各一張，右邊 4 個位置照著左邊倒過來放，自動決定。",
+          "左邊 4 個位置排 1、2、3、4：第 1 位有 4 種選法、第 2 位 3 種、第 3 位 2 種、第 4 位 1 種，共 4 × 3 × 2 × 1 = 24 種。",
+          "所以這樣的九位數一共有 24 個。"
+        ],
+        "zh-Hans": [
+          "左右读起来一样，表示第 1 位和第 9 位相同、第 2 位和第 8 位相同、第 3 位和第 7 位相同、第 4 位和第 6 位相同；第 5 位在正中间，自己一组。",
+          "所以除了正中间那一张，其他 8 张要两张两张配成一样的数字。",
+          "1、2、4 各有 2 张，3 有 3 张。只有 3 的张数是单数，所以正中间一定放 3。",
+          "剩下的 1、1、2、2、3、3、4、4 刚好 4 对：左边 4 个位置放 1、2、3、4 各一张，右边 4 个位置照着左边倒过来放，自动决定。",
+          "左边 4 个位置排 1、2、3、4：第 1 位有 4 种选法、第 2 位 3 种、第 3 位 2 种、第 4 位 1 种，共 4 × 3 × 2 × 1 = 24 种。",
+          "所以这样的九位数一共有 24 个。"
+        ],
+        "en": [
+          "Reading the same both ways means digit 1 = digit 9, digit 2 = digit 8, digit 3 = digit 7, digit 4 = digit 6, and digit 5 sits alone in the middle.",
+          "So apart from the middle card, the other 8 cards must form 4 matching pairs.",
+          "There are two each of 1, 2, 4 and three 3s. Only 3 appears an odd number of times, so the middle card must be a 3.",
+          "The remaining 1, 1, 2, 2, 3, 3, 4, 4 form exactly 4 pairs: the left 4 places get one each of 1, 2, 3, 4, and the right 4 places are the mirror image.",
+          "Arranging 1, 2, 3, 4 in the left 4 places: 4 choices, then 3, then 2, then 1, so 4 × 3 × 2 × 1 = 24.",
+          "There are 24 such numbers."
+        ],
+        "ja": [
+          "左右 どちらから 読んでも 同じなので、1けため＝9けため、2けため＝8けため、3けため＝7けため、4けため＝6けため で、5けためは まん中で 1つだけ です。",
+          "まん中の 1まい いがいの 8まいは、同じ 数字 2まいずつの ペアに なります。",
+          "1、2、4 は 2まいずつ、3 は 3まい です。まい数が きすうなのは 3 だけなので、まん中は かならず 3 です。",
+          "のこりの 1、1、2、2、3、3、4、4 は ちょうど 4ペア。左の 4か所に 1、2、3、4 を 1まいずつ ならべれば、右の 4か所は 左を 反対に した ならびで きまります。",
+          "左の 4か所の ならべ方は 4 × 3 × 2 × 1 = 24通り です。",
+          "このような 数は 24こ です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "24"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade3-foundation",
+        "notes": "回文排列：奇數張的數字必在中央，其餘成對，左半邊排列數即答案。程式窮舉 9 張卡片所有相異排列驗證 24。掃過「左右.{0,6}一樣|對稱|從右邊讀」：logic_grade2_foundation_061（5 格 2 紅 2 綠 1 藍，問藍色在哪格＝中間）、arithmetic_grade2_foundation_121（三位回文數字和 10）、arithmetic_grade1_foundation_113、logic_grade2_foundation_075。差異：本題在「中間必是單數張」之後還要數左半排列 4!。"
+      }
+    },
+    {
+      "id": "logic_grade3_foundation_074",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "swap_weights_to_balance",
+      "tags": [
+        "c:balance",
+        "c:add_sub",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade3",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "天平左盤放著 3 公克、8 公克、10 公克三個砝碼，右盤放著 2 公克、5 公克、6 公克三個砝碼。現在要從左盤拿一個砝碼、從右盤拿一個砝碼，兩個互相交換位置，讓天平剛好平衡。被交換的那兩個砝碼加起來是幾公克？",
+        "zh-Hans": "天平左盘放着 3 公克、8 公克、10 公克三个砝码，右盘放着 2 公克、5 公克、6 公克三个砝码。现在要从左盘拿一个砝码、从右盘拿一个砝码，两个互相交换位置，让天平刚好平衡。被交换的那两个砝码加起来是几公克？",
+        "en": "The left pan of a balance holds weights of 3 g, 8 g and 10 g; the right pan holds weights of 2 g, 5 g and 6 g. One weight from the left pan and one from the right pan are to swap places so that the balance becomes level. What is the total of the two swapped weights, in grams?",
+        "ja": "てんびんの 左の さらに 3g、8g、10g の おもり、右の さらに 2g、5g、6g の おもりが のって います。左から 1こ、右から 1こ えらんで 入れかえ、てんびんを ちょうど つりあわせます。入れかえた 2この おもりの 重さの 和は 何g ですか。"
+      },
+      "answer": {
+        "zh-Hant": "交換的是 10 公克和 6 公克，加起來 16 公克。",
+        "zh-Hans": "交换的是 10 公克和 6 公克，加起来 16 公克。",
+        "en": "The 10 g and 6 g weights are swapped; together 16 g.",
+        "ja": "10g と 6g を 入れかえるので、16g です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "左盤 3 + 8 + 10 = 21 公克，右盤 2 + 5 + 6 = 13 公克，一共 34 公克。平衡時每盤要 34 ÷ 2 = 17 公克。",
+          "左盤要從 21 公克變成 17 公克，要少 4 公克。",
+          "左盤拿走一個、換來一個，左盤減少的重量是「拿走的減去換來的」，所以左盤拿走的砝碼要比換來的重 4 公克。",
+          "一個一個試：左盤的 3 要配 −1（不行），8 要配 4（右盤沒有），10 要配 6（右盤有）。",
+          "交換 10 和 6：左盤 3 + 8 + 6 = 17，右盤 2 + 5 + 10 = 17，剛好平衡。",
+          "兩個砝碼加起來 10 + 6 = 16 公克。"
+        ],
+        "zh-Hans": [
+          "左盘 3 + 8 + 10 = 21 公克，右盘 2 + 5 + 6 = 13 公克，一共 34 公克。平衡时每盘要 34 ÷ 2 = 17 公克。",
+          "左盘要从 21 公克变成 17 公克，要少 4 公克。",
+          "左盘拿走一个、换来一个，左盘减少的重量是「拿走的减去换来的」，所以左盘拿走的砝码要比换来的重 4 公克。",
+          "一个一个试：左盘的 3 要配 −1（不行），8 要配 4（右盘没有），10 要配 6（右盘有）。",
+          "交换 10 和 6：左盘 3 + 8 + 6 = 17，右盘 2 + 5 + 10 = 17，刚好平衡。",
+          "两个砝码加起来 10 + 6 = 16 公克。"
+        ],
+        "en": [
+          "Left pan 3 + 8 + 10 = 21 g, right pan 2 + 5 + 6 = 13 g, 34 g in all. When level, each pan holds 34 ÷ 2 = 17 g.",
+          "The left pan must drop from 21 g to 17 g, a loss of 4 g.",
+          "The left pan loses (weight sent away − weight received), so the left weight must be 4 g heavier than the right weight.",
+          "Try each: 3 would need −1 (impossible), 8 would need 4 (not on the right), 10 needs 6 (on the right).",
+          "Swapping 10 and 6: left 3 + 8 + 6 = 17, right 2 + 5 + 10 = 17. Level.",
+          "Total 10 + 6 = 16 g."
+        ],
+        "ja": [
+          "左は 3 + 8 + 10 = 21g、右は 2 + 5 + 6 = 13g、あわせて 34g。つりあうと それぞれ 34 ÷ 2 = 17g です。",
+          "左は 21g から 17g へ、4g へらす ひつようが あります。",
+          "左から 出した おもりと 入って きた おもりの ちがいだけ 左が へるので、左から 出す おもりは 右から 来る おもりより 4g 重く なければ なりません。",
+          "じゅんに ためすと、3 には −1（むり）、8 には 4（右に ない）、10 には 6（右に ある）。",
+          "10 と 6 を 入れかえると、左 3 + 8 + 6 = 17、右 2 + 5 + 10 = 17 で つりあいます。",
+          "10 + 6 = 16g です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "16"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade3-foundation",
+        "notes": "交換一對砝碼使平衡：先求每盤目標重量，再看差值的一半。程式窮舉 9 種交換，唯一解 (10,6)。掃過「交換」「砝碼」「天平」：logic_grade1_foundation_084（木塊換盤）、arithmetic_grade1_foundation_022（移石頭使兩邊一樣多）、mixed_grade6_foundation_023（砝碼兩兩合重）。差異：交換而非移動，差值要除以 2 的理由是「一邊少、一邊多」。"
+      }
+    },
+    {
+      "id": "logic_grade3_foundation_075",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "fewest_weighings_find_heaviest",
+      "tags": [
+        "c:balance",
+        "c:logic_deduction",
+        "m:estimate_bound"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade3",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "有 6 個外表一樣的禮物盒，重量都不相同。只能用一台沒有砝碼的天平，每次把兩個盒子分別放在左右兩盤，比比看哪一個重。要保證找出最重的那一盒，最少要秤幾次？",
+        "zh-Hans": "有 6 个外表一样的礼物盒，重量都不相同。只能用一台没有砝码的天平，每次把两个盒子分别放在左右两盘，比比看哪一个重。要保证找出最重的那一盒，最少要秤几次？",
+        "en": "There are 6 gift boxes that look the same but all have different weights. Using a balance with no weights, each weighing compares two boxes, one on each pan, to see which is heavier. What is the fewest number of weighings that guarantees finding the heaviest box?",
+        "ja": "見た目が 同じで、重さが みんな ちがう プレゼントの 箱が 6こ あります。おもりの ない てんびんで、1回に 2こを 左右に のせて どちらが 重いかを くらべます。いちばん 重い 箱を かならず 見つけるには、少なくとも 何回 はかれば よいですか。"
+      },
+      "answer": {
+        "zh-Hant": "最少要秤 5 次。",
+        "zh-Hans": "最少要秤 5 次。",
+        "en": "At least 5 weighings.",
+        "ja": "少なくとも 5回 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "每秤一次，比較輕的那一盒就一定不是最重的，可以把它「淘汰」。",
+          "秤一次只比兩盒，只能知道輕的那一盒不是最重，所以每秤一次最多淘汰 1 盒。",
+          "要確定誰最重，另外 5 盒都必須被淘汰（每一盒都至少要輸一次），所以至少要秤 5 次。",
+          "5 次做得到：第 1 盒和第 2 盒比，留下重的；再和第 3 盒比，留下重的；……一直比到第 6 盒，共比 5 次，最後留下的就是最重的。",
+          "所以最少要秤 5 次。"
+        ],
+        "zh-Hans": [
+          "每秤一次，比较轻的那一盒就一定不是最重的，可以把它「淘汰」。",
+          "秤一次只比两盒，只能知道轻的那一盒不是最重，所以每秤一次最多淘汰 1 盒。",
+          "要确定谁最重，另外 5 盒都必须被淘汰（每一盒都至少要输一次），所以至少要秤 5 次。",
+          "5 次做得到：第 1 盒和第 2 盒比，留下重的；再和第 3 盒比，留下重的；……一直比到第 6 盒，共比 5 次，最后留下的就是最重的。",
+          "所以最少要秤 5 次。"
+        ],
+        "en": [
+          "Each weighing shows that the lighter box is not the heaviest, so that box is eliminated.",
+          "A weighing compares only two boxes, so it eliminates at most 1 box.",
+          "To be sure which box is heaviest, the other 5 boxes must all be eliminated (each must lose at least once), so at least 5 weighings are needed.",
+          "5 weighings suffice: compare box 1 with box 2 and keep the heavier, compare it with box 3 and keep the heavier, …, up to box 6: 5 weighings, and the survivor is the heaviest.",
+          "The fewest number is 5."
+        ],
+        "ja": [
+          "1回 はかるたびに、かるい ほうの 箱は いちばん 重く ないと わかり、こうほから はずせます。",
+          "1回で くらべるのは 2こ だけなので、はずせるのは 1回に 1こ までです。",
+          "いちばん 重い 箱を きめるには、ほかの 5こが ぜんぶ はずれる（どれも 1回は まける）ひつようが あるので、少なくとも 5回 いります。",
+          "5回で できます：1ばんと 2ばんを くらべて 重いほうを のこし、3ばんと くらべて 重いほうを のこし……6ばんまで 5回 くらべると、のこった 箱が いちばん 重い 箱です。",
+          "少なくとも 5回 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "5"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade3-foundation",
+        "notes": "找最大值的比較次數下界（每次淘汰一個）與構造。掃過「最重|最輕|秤.{0,4}次|淘汰」：logic_grade8_foundation_034（9 枚找輕假幣 2 次）、logic_grade10_foundation_001、logic_grade4_foundation_032（4 顆找重的一顆）、logic_grade7_foundation_028（9 匹馬 3 跑道找最快）。差異：重量全相異、只比兩個，下界來自「每次只淘汰一個」，不是三分法。"
+      }
+    },
+    {
+      "id": "logic_grade3_foundation_076",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "hanging_mobile_balance",
+      "tags": [
+        "c:balance",
+        "c:add_sub",
+        "m:reverse"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade3",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "小美做了一個吊飾：最上面一根橫桿從正中間用線吊起來，左端吊著甲桿，右端吊著乙桿；甲桿和乙桿也都是從正中間吊起來。甲桿左端掛 1 朵雲，右端掛 2 顆星星；乙桿左端掛 1 個月亮，右端掛 1 個太陽和 1 顆星星。橫桿和線都很輕，重量不計，三根桿子都保持水平。（從正中間吊起的桿子，兩端掛的重量一樣時才會水平。）已知 1 顆星星重 10 公克，1 個月亮重幾公克？",
+        "zh-Hans": "小美做了一个吊饰：最上面一根横杆从正中间用线吊起来，左端吊着甲杆，右端吊着乙杆；甲杆和乙杆也都是从正中间吊起来。甲杆左端挂 1 朵云，右端挂 2 颗星星；乙杆左端挂 1 个月亮，右端挂 1 个太阳和 1 颗星星。横杆和线都很轻，重量不计，三根杆子都保持水平。（从正中间吊起的杆子，两端挂的重量一样时才会水平。）已知 1 颗星星重 10 公克，1 个月亮重几公克？",
+        "en": "Mei builds a hanging mobile. The top bar hangs from a string at its midpoint; its left end holds bar A and its right end holds bar B, and bars A and B also hang from their midpoints. Bar A has 1 cloud on the left end and 2 stars on the right end. Bar B has 1 moon on the left end and 1 sun plus 1 star on the right end. Bars and strings weigh nothing, and all three bars hang level. (A bar hung from its midpoint is level only when both ends carry equal weight.) One star weighs 10 g. How many grams does the moon weigh?",
+        "ja": "メイは つるす かざりを 作りました。いちばん 上の ぼうは まん中を 糸で つるし、左はしに ぼうA、右はしに ぼうB を つるします。ぼうA と ぼうB も まん中で つるします。ぼうA の 左はしには 雲 1こ、右はしには 星 2こ。ぼうB の 左はしには 月 1こ、右はしには 太陽 1こと 星 1こ。ぼうと 糸の 重さは 考えず、3本の ぼうは みんな 水平です。（まん中で つるした ぼうは、両はしの 重さが 同じとき 水平に なります。）星 1こが 10g のとき、月 1こは 何g ですか。"
+      },
+      "answer": {
+        "zh-Hant": "1 個月亮重 20 公克。",
+        "zh-Hans": "1 个月亮重 20 公克。",
+        "en": "The moon weighs 20 g.",
+        "ja": "20g です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "甲桿水平，所以左端的雲 = 右端 2 顆星星 = 2 × 10 = 20 公克；甲桿下面一共掛 20 + 20 = 40 公克。",
+          "最上面的橫桿水平，所以右端乙桿下面掛的也一共是 40 公克。",
+          "乙桿水平，左端月亮和右端（太陽 + 星星）一樣重，各佔一半：40 ÷ 2 = 20 公克。",
+          "所以月亮重 20 公克。（太陽 = 20 − 10 = 10 公克。）"
+        ],
+        "zh-Hans": [
+          "甲杆水平，所以左端的云 = 右端 2 颗星星 = 2 × 10 = 20 公克；甲杆下面一共挂 20 + 20 = 40 公克。",
+          "最上面的横杆水平，所以右端乙杆下面挂的也一共是 40 公克。",
+          "乙杆水平，左端月亮和右端（太阳 + 星星）一样重，各占一半：40 ÷ 2 = 20 公克。",
+          "所以月亮重 20 公克。（太阳 = 20 − 10 = 10 公克。）"
+        ],
+        "en": [
+          "Bar A is level, so the cloud = 2 stars = 2 × 10 = 20 g, and bar A carries 20 + 20 = 40 g in all.",
+          "The top bar is level, so bar B also carries 40 g in all.",
+          "Bar B is level, so the moon and (sun + star) are equal, each half of 40: 40 ÷ 2 = 20 g.",
+          "The moon weighs 20 g. (The sun is 20 − 10 = 10 g.)"
+        ],
+        "ja": [
+          "ぼうA が 水平なので、雲 = 星 2こ = 2 × 10 = 20g。ぼうA ぜんたいで 20 + 20 = 40g です。",
+          "いちばん 上の ぼうが 水平なので、ぼうB ぜんたいも 40g です。",
+          "ぼうB が 水平なので、月と（太陽 ＋ 星）は 同じ 重さで、それぞれ 40 ÷ 2 = 20g です。",
+          "月は 20g です。（太陽は 20 − 10 = 10g）"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "20"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade3-foundation",
+        "notes": "吊飾平衡：由下往上求每根桿的總重，再往下分配。掃過「吊|懸掛|橫桿|吊飾」無命中；讀過 logic_grade3_foundation_047（水果天平兩次代換）、arithmetic_grade5_foundation_086（翹翹板力矩）。差異：多層結構、兩端等重，先求整根桿再拆半。"
+      }
+    },
+    {
+      "id": "logic_grade3_foundation_077",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "split_flour_with_one_weight",
+      "tags": [
+        "c:balance",
+        "c:add_sub",
+        "m:direct"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade3",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "小安要把 1000 公克的麵粉分成兩堆，手邊只有一台天平和一個 200 公克的砝碼。他把砝碼放在右盤，再把麵粉分別倒在左盤和右盤，1000 公克全部倒完時，天平剛好平衡。右盤裡的麵粉是幾公克？",
+        "zh-Hans": "小安要把 1000 公克的面粉分成两堆，手边只有一台天平和一个 200 公克的砝码。他把砝码放在右盘，再把面粉分别倒在左盘和右盘，1000 公克全部倒完时，天平刚好平衡。右盘里的面粉是几公克？",
+        "en": "An wants to split 1000 g of flour into two piles, using only a balance and one 200 g weight. He puts the weight on the right pan, then pours flour onto both pans. When all 1000 g has been poured, the balance is exactly level. How many grams of flour are on the right pan?",
+        "ja": "アンは 1000g の 小麦粉を 2つの 山に 分けたいのですが、てんびんと 200g の おもり 1こ しか ありません。おもりを 右の さらに のせ、小麦粉を 左と 右の さらに 分けて 入れました。1000g ぜんぶ 入れおわったとき、てんびんは ちょうど つりあいました。右の さらの 小麦粉は 何g ですか。"
+      },
+      "answer": {
+        "zh-Hant": "右盤的麵粉是 400 公克。",
+        "zh-Hans": "右盘的面粉是 400 公克。",
+        "en": "There are 400 g of flour on the right pan.",
+        "ja": "400g です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "平衡表示：左盤的麵粉 = 右盤的麵粉 + 200 公克，所以左盤的麵粉比右盤多 200 公克。",
+          "兩堆麵粉合起來是 1000 公克。",
+          "把左盤多出來的 200 公克先拿開，剩下 1000 − 200 = 800 公克，兩堆一樣多，各 800 ÷ 2 = 400 公克。",
+          "右盤 400 公克，左盤 400 + 200 = 600 公克。驗算：600 = 400 + 200，平衡；600 + 400 = 1000。",
+          "右盤的麵粉是 400 公克。"
+        ],
+        "zh-Hans": [
+          "平衡表示：左盘的面粉 = 右盘的面粉 + 200 公克，所以左盘的面粉比右盘多 200 公克。",
+          "两堆面粉合起来是 1000 公克。",
+          "把左盘多出来的 200 公克先拿开，剩下 1000 − 200 = 800 公克，两堆一样多，各 800 ÷ 2 = 400 公克。",
+          "右盘 400 公克，左盘 400 + 200 = 600 公克。验算：600 = 400 + 200，平衡；600 + 400 = 1000。",
+          "右盘的面粉是 400 公克。"
+        ],
+        "en": [
+          "Level means: left flour = right flour + 200 g, so the left pile is 200 g heavier.",
+          "The two piles together weigh 1000 g.",
+          "Set aside the extra 200 g: 1000 − 200 = 800 g remain in two equal parts of 800 ÷ 2 = 400 g.",
+          "Right pile 400 g, left pile 400 + 200 = 600 g. Check: 600 = 400 + 200 and 600 + 400 = 1000.",
+          "The right pan holds 400 g of flour."
+        ],
+        "ja": [
+          "つりあうので、左の 小麦粉 = 右の 小麦粉 + 200g。左の ほうが 200g 多いです。",
+          "2つの 山を あわせると 1000g です。",
+          "左の 多い 200g を のけると、1000 − 200 = 800g が 同じ 2つに 分かれて いて、800 ÷ 2 = 400g ずつ です。",
+          "右は 400g、左は 400 + 200 = 600g。たしかめ：600 = 400 + 200、600 + 400 = 1000。",
+          "右の 小麦粉は 400g です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "400"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade3-foundation",
+        "notes": "用一個砝碼一次秤出和差：兩堆和 1000、差 200。掃過「麵粉|分成兩堆|砝碼」：arithmetic_grade1_foundation_022（天平移石頭）、logic_grade1_foundation_050（卡片分兩堆和相等）、mixed_grade5_foundation_019。差異：砝碼與物品同盤，天平平衡即給出兩堆差。"
+      }
+    },
+    {
+      "id": "logic_grade3_foundation_078",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "same_vs_different_color_pairs",
+      "tags": [
+        "c:probability",
+        "c:basic_counting",
+        "m:enumeration"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade3",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "袋子裡有 2 顆紅球和 2 顆藍球，除了顏色以外完全一樣。閉著眼睛一次抓出 2 顆球。小安說：「抓到兩顆同色和抓到兩顆不同色，機會一樣大。」下面哪一句話正確？",
+        "zh-Hans": "袋子里有 2 颗红球和 2 颗蓝球，除了颜色以外完全一样。闭着眼睛一次抓出 2 颗球。小安说：「抓到两颗同色和抓到两颗不同色，机会一样大。」下面哪一句话正确？",
+        "en": "A bag holds 2 red balls and 2 blue balls, identical except for colour. With eyes closed, 2 balls are grabbed at once. An says: \"Getting two of the same colour is just as likely as getting two different colours.\" Which statement is correct?",
+        "ja": "ふくろに 赤い 玉 2こと 青い 玉 2こが 入って いて、色いがいは まったく 同じです。目を とじて 2こ いっしょに とりだします。アンは「同じ 色 2こに なるのと、ちがう 色 2こに なるのは、起こりやすさが 同じ」と いいました。正しいのは どれですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 C：不同色的機會比較大。",
+        "zh-Hans": "答案是 C：不同色的机会比较大。",
+        "en": "The answer is C: different colours is more likely.",
+        "ja": "答えは C：ちがう色の ほうが 起こりやすい です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "把球記成紅 1、紅 2、藍 1、藍 2，每一種「兩顆的組合」被抓到的機會都一樣。",
+          "兩顆的組合一共有：紅1紅2、藍1藍2、紅1藍1、紅1藍2、紅2藍1、紅2藍2，共 6 種。",
+          "同色：紅1紅2、藍1藍2，共 2 種。",
+          "不同色：紅1藍1、紅1藍2、紅2藍1、紅2藍2，共 4 種。",
+          "不同色的抓法是同色的 2 倍，機會比較大，小安說錯了。答案是 C。"
+        ],
+        "zh-Hans": [
+          "把球记成红 1、红 2、蓝 1、蓝 2，每一种「两颗的组合」被抓到的机会都一样。",
+          "两颗的组合一共有：红1红2、蓝1蓝2、红1蓝1、红1蓝2、红2蓝1、红2蓝2，共 6 种。",
+          "同色：红1红2、蓝1蓝2，共 2 种。",
+          "不同色：红1蓝1、红1蓝2、红2蓝1、红2蓝2，共 4 种。",
+          "不同色的抓法是同色的 2 倍，机会比较大，小安说错了。答案是 C。"
+        ],
+        "en": [
+          "Label the balls R1, R2, B1, B2; every pair of balls is equally likely to be grabbed.",
+          "All pairs: R1R2, B1B2, R1B1, R1B2, R2B1, R2B2, which is 6 pairs.",
+          "Same colour: R1R2 and B1B2, 2 pairs.",
+          "Different colours: R1B1, R1B2, R2B1, R2B2, 4 pairs.",
+          "Different colours has twice as many ways, so it is more likely; An is wrong. The answer is C."
+        ],
+        "ja": [
+          "玉を 赤1、赤2、青1、青2 と します。どの 2この くみあわせも 同じように 起こります。",
+          "くみあわせは 赤1赤2、青1青2、赤1青1、赤1青2、赤2青1、赤2青2 の 6通り。",
+          "同じ色は 赤1赤2、青1青2 の 2通り。",
+          "ちがう色は 赤1青1、赤1青2、赤2青1、赤2青2 の 4通り。",
+          "ちがう色の ほうが 2ばい 多いので 起こりやすく、アンは まちがい。答えは C です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "multiple_choice",
+      "options": {
+        "A": {
+          "zh-Hant": "小安說得對，同色和不同色各有 2 種抓法",
+          "zh-Hans": "小安说得对，同色和不同色各有 2 种抓法",
+          "en": "An is right: same colour and different colours each have 2 ways",
+          "ja": "アンが 正しい。同じ色も ちがう色も 2通りずつ"
+        },
+        "B": {
+          "zh-Hant": "同色的機會比較大，同色有 4 種、不同色有 2 種抓法",
+          "zh-Hans": "同色的机会比较大，同色有 4 种、不同色有 2 种抓法",
+          "en": "Same colour is more likely: 4 ways for same, 2 for different",
+          "ja": "同じ色の ほうが 起こりやすい。同じ色 4通り、ちがう色 2通り"
+        },
+        "C": {
+          "zh-Hant": "不同色的機會比較大，同色有 2 種、不同色有 4 種抓法",
+          "zh-Hans": "不同色的机会比较大，同色有 2 种、不同色有 4 种抓法",
+          "en": "Different colours is more likely: 2 ways for same, 4 for different",
+          "ja": "ちがう色の ほうが 起こりやすい。同じ色 2通り、ちがう色 4通り"
+        },
+        "D": {
+          "zh-Hant": "不同色的機會比較大，同色有 3 種、不同色有 6 種抓法",
+          "zh-Hans": "不同色的机会比较大，同色有 3 种、不同色有 6 种抓法",
+          "en": "Different colours is more likely: 3 ways for same, 6 for different",
+          "ja": "ちがう色の ほうが 起こりやすい。同じ色 3通り、ちがう色 6通り"
+        }
+      },
+      "correctAnswer": {
+        "type": "choice",
+        "value": "C"
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade3-foundation",
+        "notes": "把同色球編號後列舉所有組合，破除「兩種結果一樣可能」直覺。掃過「一次.{0,4}(抓|拿|摸).{0,4}2|同色|不同色」：arithmetic_grade2_foundation_106（兩硬幣一正一反 vs 兩正）、combinatorics_grade9_foundation_053（放回與不放回同色機率）、combinatorics_grade9_foundation_047。差異：三年級層次的一次抓兩顆，用列舉比較。"
+      }
+    },
+    {
+      "id": "logic_grade3_foundation_079",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "certain_event_drawing_balls",
+      "tags": [
+        "c:probability",
+        "c:logic_deduction",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade3",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "袋子裡有 4 顆紅球、3 顆藍球和 2 顆黃球，除了顏色以外完全一樣。閉著眼睛一次拿出 4 顆球。下面哪一件事「一定」會發生？",
+        "zh-Hans": "袋子里有 4 颗红球、3 颗蓝球和 2 颗黄球，除了颜色以外完全一样。闭着眼睛一次拿出 4 颗球。下面哪一件事「一定」会发生？",
+        "en": "A bag holds 4 red, 3 blue and 2 yellow balls, identical except for colour. With eyes closed, 4 balls are taken out at once. Which of these is certain to happen?",
+        "ja": "ふくろに 赤い 玉 4こ、青い 玉 3こ、黄色い 玉 2こが 入って いて、色いがいは 同じです。目を とじて 4こ いっしょに とりだします。「かならず」起こる ことは どれですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 A：至少有 1 顆不是黃球。",
+        "zh-Hans": "答案是 A：至少有 1 颗不是黄球。",
+        "en": "The answer is A: at least one ball is not yellow.",
+        "ja": "答えは A：少なくとも 1こは 黄色で ない です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "「一定會發生」表示不管怎麼拿都成立；只要找到一種拿法不成立，就不是一定。",
+          "B 不一定：可以拿到 3 顆藍球和 1 顆黃球，沒有紅球。",
+          "C 不一定：可以 4 顆都是紅球，只有 1 種顏色。",
+          "D 不一定：同樣 4 顆都是紅球時就沒有藍球。",
+          "A 一定：黃球只有 2 顆，4 顆裡最多 2 顆是黃的，至少還有 2 顆不是黃球。答案是 A。"
+        ],
+        "zh-Hans": [
+          "「一定会发生」表示不管怎么拿都成立；只要找到一种拿法不成立，就不是一定。",
+          "B 不一定：可以拿到 3 颗蓝球和 1 颗黄球，没有红球。",
+          "C 不一定：可以 4 颗都是红球，只有 1 种颜色。",
+          "D 不一定：同样 4 颗都是红球时就没有蓝球。",
+          "A 一定：黄球只有 2 颗，4 颗里最多 2 颗是黄的，至少还有 2 颗不是黄球。答案是 A。"
+        ],
+        "en": [
+          "\"Certain\" means it holds however the balls come out; one counterexample is enough to rule a choice out.",
+          "B fails: we could take 3 blue and 1 yellow, with no red.",
+          "C fails: all 4 could be red, only one colour.",
+          "D fails: again, 4 red balls include no blue.",
+          "A is certain: there are only 2 yellow balls, so at most 2 of the 4 are yellow and at least 2 are not. The answer is A."
+        ],
+        "ja": [
+          "「かならず 起こる」は、どう とりだしても なりたつ ことです。なりたたない とりだし方が 1つでも あれば ちがいます。",
+          "B は ちがう：青 3こと 黄 1こなら 赤は ありません。",
+          "C は ちがう：4こ とも 赤なら 色は 1しゅるい です。",
+          "D は ちがう：4こ とも 赤なら 青は ありません。",
+          "A は かならず：黄色は 2こ しか ないので、4この うち 黄色は 多くて 2こ、少なくとも 2こは 黄色で ありません。答えは A です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "multiple_choice",
+      "options": {
+        "A": {
+          "zh-Hant": "4 顆之中至少有 1 顆不是黃球",
+          "zh-Hans": "4 颗之中至少有 1 颗不是黄球",
+          "en": "At least 1 of the 4 is not yellow",
+          "ja": "4この うち 少なくとも 1こは 黄色で ない"
+        },
+        "B": {
+          "zh-Hant": "4 顆之中至少有 1 顆是紅球",
+          "zh-Hans": "4 颗之中至少有 1 颗是红球",
+          "en": "At least 1 of the 4 is red",
+          "ja": "4この うち 少なくとも 1こは 赤"
+        },
+        "C": {
+          "zh-Hant": "4 顆之中至少有 2 種顏色",
+          "zh-Hans": "4 颗之中至少有 2 种颜色",
+          "en": "The 4 balls show at least 2 colours",
+          "ja": "4この 中に 少なくとも 2しゅるいの 色が ある"
+        },
+        "D": {
+          "zh-Hant": "4 顆之中至少有 1 顆是藍球",
+          "zh-Hans": "4 颗之中至少有 1 颗是蓝球",
+          "en": "At least 1 of the 4 is blue",
+          "ja": "4この うち 少なくとも 1こは 青"
+        }
+      },
+      "correctAnswer": {
+        "type": "choice",
+        "value": "A"
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade3-foundation",
+        "notes": "「一定發生」要對所有取法成立，用反例排除。程式列舉 4R3B2Y 取 4 的所有組合驗證。掃過「一定會|可能發生|不可能」：arithmetic_grade1_foundation_088（鉛筆盒可能性敘述）、arithmetic_grade1_foundation_101、logic_grade3_foundation_059（抽籤公平）。差異：用反例檢查「一定」，並用數量上限說明唯一成立的選項。"
+      }
     }
   ]
 }
