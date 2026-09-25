@@ -7182,6 +7182,638 @@
         "reference": "logic-grade6-foundation",
         "notes": "洗牌＝位置置換，分解成長 6 與長 2 的循環，再取最小公倍數。掃過「洗牌|交錯|疊回」與 c:pattern 全庫，無洗牌題；verify6.py 模擬得 6。三顆月亮對齊、lcm 排程題是給定週期求公倍數，本題要自己追蹤位置找出各循環的長度。"
       }
+    },
+    {
+      "id": "logic_grade6_foundation_089",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "treblecross_one_by_seven",
+      "tags": [
+        "c:game_theory",
+        "m:casework",
+        "m:construction"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade6",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一排有 7 個格子，由左到右編號 1 到 7。甲、乙兩人輪流在空格裡畫一個「○」，由甲先畫，兩人畫的記號都一樣。誰畫完之後，這一排出現連續 3 格都是「○」，誰就獲勝。甲第一步要畫在第幾格，才能保證獲勝？",
+        "zh-Hans": "一排有 7 个格子，由左到右编号 1 到 7。甲、乙两人轮流在空格里画一个「○」，由甲先画，两人画的记号都一样。谁画完之后，这一排出现连续 3 格都是「○」，谁就获胜。甲第一步要画在第几格，才能保证获胜？",
+        "en": "A row has 7 squares numbered 1 to 7 from left to right. A and B take turns drawing a circle in an empty square, A first, and both use the same mark. Whoever, after drawing, creates 3 consecutive squares with circles wins. In which square must A draw first to guarantee a win?",
+        "ja": "横一列に 7 つのマスがあり、左から 1 から 7 の番号がついています。甲と乙が交互に空いているマスに「○」を 1 つかきます。甲が先で、2 人とも同じ記号を使います。かいた後、「○」が 3 マス続けて並んだ人の勝ちです。甲が必ず勝つには、最初に何番のマスにかけばよいですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 4。",
+        "zh-Hans": "答案是 4。",
+        "en": "The answer is 4.",
+        "ja": "答えは 4 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "關鍵：如果某人畫的「○」和已經有的「○」距離不超過 2 格（相鄰，或中間只隔 1 格），對手下一步就能補成連續 3 格而獲勝。所以誰被迫畫在這種位置，誰就輸。",
+          "甲畫第 4 格後，離第 4 格至少 3 格的只有第 1 格和第 7 格，乙只能畫在這兩格之一；畫在別處，甲就直接獲勝。",
+          "乙畫第 1 格，甲就畫第 7 格；乙畫第 7 格，甲就畫第 1 格。這時剩下的第 2、3、5、6 格都離某個「○」不超過 2 格，乙不論畫哪裡，甲都能補成連續 3 格。",
+          "反過來，若甲第一步畫第 1、2、3 格，乙就畫在它右邊隔 4 格的第 5、6、7 格，剩下的空格都離某個「○」不超過 2 格，換甲被迫送出勝利；甲畫第 5、6、7 格時左右對稱。",
+          "所以甲第一步要畫在第 4 格。"
+        ],
+        "zh-Hans": [
+          "关键：如果某人画的「○」和已经有的「○」距离不超过 2 格（相邻，或中间只隔 1 格），对手下一步就能补成连续 3 格而获胜。所以谁被迫画在这种位置，谁就输。",
+          "甲画第 4 格后，离第 4 格至少 3 格的只有第 1 格和第 7 格，乙只能画在这两格之一；画在别处，甲就直接获胜。",
+          "乙画第 1 格，甲就画第 7 格；乙画第 7 格，甲就画第 1 格。这时剩下的第 2、3、5、6 格都离某个「○」不超过 2 格，乙不论画哪里，甲都能补成连续 3 格。",
+          "反过来，若甲第一步画第 1、2、3 格，乙就画在它右边隔 4 格的第 5、6、7 格，剩下的空格都离某个「○」不超过 2 格，换甲被迫送出胜利；甲画第 5、6、7 格时左右对称。",
+          "所以甲第一步要画在第 4 格。"
+        ],
+        "en": [
+          "Key idea: if a player draws a circle within 2 squares of an existing circle (adjacent, or with one square between), the opponent can complete 3 in a row next turn. So whoever is forced to draw there loses.",
+          "After A draws in square 4, only squares 1 and 7 are at least 3 away from it, so B must use one of them; anywhere else lets A win at once.",
+          "If B takes 1, A takes 7; if B takes 7, A takes 1. Now the empty squares 2, 3, 5, 6 are all within 2 of some circle, so wherever B draws, A completes 3 in a row.",
+          "Conversely, if A starts in square 1, 2 or 3, B answers 4 squares to the right (5, 6 or 7); then every empty square is within 2 of a circle and A is forced to hand B the win. Starting in 5, 6 or 7 is the mirror image.",
+          "So A must draw first in square 4."
+        ],
+        "ja": [
+          "ポイント：すでにある「○」から 2 マス以内（となり、または 1 マスあけたところ）にかくと、相手が次に 3 つ並べて勝ちます。だから、そこにかくしかなくなった人が負けます。",
+          "甲が 4 番にかくと、4 番から 3 マス以上はなれているのは 1 番と 7 番だけなので、乙はそのどちらかにかくしかありません（ほかにかけば甲がすぐ勝ちます）。",
+          "乙が 1 番なら甲は 7 番、乙が 7 番なら甲は 1 番にかきます。残りの 2、3、5、6 番はどれもどこかの「○」から 2 マス以内なので、乙がどこにかいても甲が 3 つ並べられます。",
+          "逆に甲が最初に 1、2、3 番にかくと、乙はその 4 マス右の 5、6、7 番にかき、残りのマスはすべて「○」から 2 マス以内になって甲が負けます。5、6、7 番は左右対称です。",
+          "よって甲は最初に 4 番にかけばよいです。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "4"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade6-foundation",
+        "notes": "題型：一維同記號連三（Treblecross）1×7，程式窮舉確認唯一必勝首步是第 4 格、且每種開局皆有勝負（7 格填滿必出現連三）。掃過 c:game_theory 全庫 42 題與「連成三|連續三」；最接近 logic_grade6_069（15 點遊戲＝井字）、logic_grade6_078（圓圈拿硬幣對稱）、logic_grade9_057（放骨牌）。本題的教學點是「安全格」與距離 3 的佈局，既有題沒有。"
+      }
+    },
+    {
+      "id": "logic_grade6_foundation_090",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "divide_by_primes_game",
+      "tags": [
+        "c:game_theory",
+        "c:factor_multiple",
+        "m:bijection"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade6",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "黑板上寫著 720。甲、乙兩人輪流操作，由甲先：輪到的人要把黑板上的數除以「一個質數」或「兩個質數的乘積」（兩個質數可以相同，例如除以 4 = 2 × 2），而且必須除得盡，再把商寫上去。誰寫出 1，誰就獲勝。甲的第一步有好幾種除法（除數不同就算不同除法），其中能保證甲獲勝的有幾種？",
+        "zh-Hans": "黑板上写着 720。甲、乙两人轮流操作，由甲先：轮到的人要把黑板上的数除以「一个质数」或「两个质数的乘积」（两个质数可以相同，例如除以 4 = 2 × 2），而且必须除得尽，再把商写上去。谁写出 1，谁就获胜。甲的第一步有好几种除法（除数不同就算不同除法），其中能保证甲获胜的有几种？",
+        "en": "The number 720 is on the board. A and B take turns, A first: the player must divide the number on the board by \"one prime\" or by \"a product of two primes\" (the two primes may be equal, e.g. dividing by 4 = 2 × 2), the division must be exact, and the quotient replaces the number. Whoever writes 1 wins. A has several possible first moves (different divisors count as different moves). How many of them guarantee a win for A?",
+        "ja": "黒板に 720 と書いてあります。甲と乙が交互に操作し、甲が先です。番の人は黒板の数を「1 つの素数」か「2 つの素数の積」（同じ素数でもよく、たとえば 4 = 2 × 2 で割ってもよい）で割り切れるように割り、その商を書きます。1 を書いた人の勝ちです。甲の最初の割り方（割る数がちがえば別の割り方）のうち、甲が必ず勝てるものは何通りありますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 3。",
+        "zh-Hans": "答案是 3。",
+        "en": "The answer is 3.",
+        "ja": "答えは 3 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "720 = 2 × 2 × 2 × 2 × 3 × 3 × 5，一共是 7 個質數相乘（相同的質數也分開算）。",
+          "除以一個質數，就是拿掉 1 個質因數；除以兩個質數的乘積，就是拿掉 2 個。寫出 1 就是把質因數全部拿完。所以這個遊戲等於：7 個質因數，每次拿走 1 個或 2 個，拿走最後一個的人獲勝。",
+          "如果剩下的質因數個數是 3 的倍數，輪到的人拿 1 個，對手就拿 2 個；他拿 2 個，對手就拿 1 個。每一輪共拿 3 個，最後由對手拿完。所以要讓對手面對 3 的倍數。",
+          "7 個要變成 6 個，甲第一步必須剛好拿掉 1 個質因數，也就是除以一個質數：2、3、5 都可以；若除以兩個質數的乘積，會剩下 5 個，不是 3 的倍數。",
+          "能保證甲獲勝的除法有 3 種。"
+        ],
+        "zh-Hans": [
+          "720 = 2 × 2 × 2 × 2 × 3 × 3 × 5，一共是 7 个质数相乘（相同的质数也分开算）。",
+          "除以一个质数，就是拿掉 1 个质因数；除以两个质数的乘积，就是拿掉 2 个。写出 1 就是把质因数全部拿完。所以这个游戏等于：7 个质因数，每次拿走 1 个或 2 个，拿走最后一个的人获胜。",
+          "如果剩下的质因数个数是 3 的倍数，轮到的人拿 1 个，对手就拿 2 个；他拿 2 个，对手就拿 1 个。每一轮共拿 3 个，最后由对手拿完。所以要让对手面对 3 的倍数。",
+          "7 个要变成 6 个，甲第一步必须刚好拿掉 1 个质因数，也就是除以一个质数：2、3、5 都可以；若除以两个质数的乘积，会剩下 5 个，不是 3 的倍数。",
+          "能保证甲获胜的除法有 3 种。"
+        ],
+        "en": [
+          "720 = 2 × 2 × 2 × 2 × 3 × 3 × 5, a product of 7 primes (repeated primes counted separately).",
+          "Dividing by a prime removes 1 prime factor; dividing by a product of two primes removes 2. Writing 1 means all prime factors are gone. So the game is: from 7 prime factors, remove 1 or 2 per turn, and whoever removes the last one wins.",
+          "If the number of prime factors left is a multiple of 3, whenever the mover removes 1 the opponent removes 2, and vice versa; each round removes 3 and the opponent removes the last. So you want to leave a multiple of 3.",
+          "To go from 7 to 6, A must remove exactly 1 prime factor, i.e. divide by a prime: 2, 3 or 5 all work; dividing by a product of two primes leaves 5, not a multiple of 3.",
+          "So 3 first moves guarantee A a win."
+        ],
+        "ja": [
+          "720 = 2 × 2 × 2 × 2 × 3 × 3 × 5 で、7 個の素数の積です（同じ素数も別々に数えます）。",
+          "素数で割ると素因数が 1 個減り、2 つの素数の積で割ると 2 個減ります。1 を書くことは素因数を全部なくすことです。つまりこのゲームは「7 個の素因数から 1 回に 1 個か 2 個取り、最後の 1 個を取った人の勝ち」と同じです。",
+          "残りの素因数の個数が 3 の倍数のとき、相手が 1 個取れば 2 個、2 個取れば 1 個取ると、1 回りで 3 個ずつ減り、最後はこちらが取れます。だから相手に 3 の倍数を渡せばよいです。",
+          "7 個を 6 個にするには、甲は最初に素因数をちょうど 1 個減らす、つまり素数で割ればよく、2、3、5 のどれでもかまいません。2 つの素数の積で割ると 5 個残り、3 の倍数になりません。",
+          "甲が必ず勝てる割り方は 3 通りです。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "3"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade6-foundation",
+        "notes": "題型：以質因數個數轉成「拿 1 或 2」的取物遊戲，程式窮舉 720 的所有合法除數確認必勝首步恰為 ÷2、÷3、÷5。掃過 c:game_theory 全庫與「質數.*除|除以.*質數」；最接近 logic_grade6_087（拿 1 或質數顆）、logic_grade11_045（減去真因數）、logic_grade7_046（減去數字）。本題的推理點是把除法對應到質因數個數。"
+      }
+    },
+    {
+      "id": "logic_grade6_foundation_091",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "misere_take_away_one_to_four",
+      "tags": [
+        "c:game_theory",
+        "c:modular",
+        "m:reverse"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade6",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "桌上有 30 顆彈珠。甲、乙兩人輪流拿，由甲先拿，每次可以拿 1、2、3 或 4 顆。拿到最後一顆彈珠的人就輸了。甲第一步要拿幾顆，才能保證獲勝？",
+        "zh-Hans": "桌上有 30 颗弹珠。甲、乙两人轮流拿，由甲先拿，每次可以拿 1、2、3 或 4 颗。拿到最后一颗弹珠的人就输了。甲第一步要拿几颗，才能保证获胜？",
+        "en": "There are 30 marbles on the table. A and B take turns, A first, taking 1, 2, 3 or 4 marbles each time. Whoever takes the last marble loses. How many marbles must A take on the first move to guarantee a win?",
+        "ja": "テーブルにビー玉が 30 個あります。甲と乙が交互に取り、甲が先です。1 回に 1、2、3、4 個のどれかを取ります。最後の 1 個を取った人の負けです。甲が必ず勝つには、最初に何個取ればよいですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 4。",
+        "zh-Hans": "答案是 4。",
+        "en": "The answer is 4.",
+        "ja": "答えは 4 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "誰拿最後一顆誰輸，所以要設法讓對手面對「只剩 1 顆」。",
+          "如果留給對手 1 + 5 = 6 顆，對手拿幾顆（1 到 4 顆），自己就拿「5 減去那個數」顆，又留給對手 1 顆。",
+          "同理，只要留給對手的顆數除以 5 餘 1（1、6、11、16、21、26 顆），自己每一輪都能和對手湊成 5 顆，最後留給對手 1 顆。",
+          "30 顆要變成 26 顆，甲第一步要拿 4 顆。"
+        ],
+        "zh-Hans": [
+          "谁拿最后一颗谁输，所以要设法让对手面对「只剩 1 颗」。",
+          "如果留给对手 1 + 5 = 6 颗，对手拿几颗（1 到 4 颗），自己就拿「5 减去那个数」颗，又留给对手 1 颗。",
+          "同理，只要留给对手的颗数除以 5 余 1（1、6、11、16、21、26 颗），自己每一轮都能和对手凑成 5 颗，最后留给对手 1 颗。",
+          "30 颗要变成 26 颗，甲第一步要拿 4 颗。"
+        ],
+        "en": [
+          "Taking the last marble loses, so you want your opponent to face exactly 1 marble.",
+          "If you leave 1 + 5 = 6, whatever the opponent takes (1 to 4), you take 5 minus that, leaving 1 again.",
+          "Likewise, leaving a number that is 1 more than a multiple of 5 (1, 6, 11, 16, 21, 26) lets you make each round total 5 and finally leave the opponent 1.",
+          "To go from 30 to 26, A must take 4 marbles first."
+        ],
+        "ja": [
+          "最後の 1 個を取った人が負けなので、相手に「残り 1 個」を渡せばよいです。",
+          "相手に 1 + 5 = 6 個を渡せば、相手が何個（1〜4 個）取っても自分は「5 からその数を引いた数」だけ取って、また 1 個を渡せます。",
+          "同じように、5 で割って 1 余る数（1、6、11、16、21、26 個）を相手に渡せば、毎回 2 人で 5 個ずつにして最後に 1 個を渡せます。",
+          "30 個を 26 個にするので、甲は最初に 4 個取ればよいです。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "4"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade6-foundation",
+        "notes": "題型：取物遊戲的「拿最後一顆輸」（misère）版本，程式確認首步唯一為 4。掃過 c:game_theory 全庫與「最後一.*輸|的人輸」：全庫的取物題都是拿最後一顆贏（logic_grade8_044、logic_grade11_001、logic_grade2_071、logic_grade12_019），沒有輸的版本。"
+      }
+    },
+    {
+      "id": "logic_grade6_foundation_092",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "divide_and_choose_minimax",
+      "tags": [
+        "c:game_theory",
+        "c:add_sub",
+        "m:extremal"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade6",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "甲把 25 顆糖分成 3 堆，每堆至少 1 顆。分好後，乙先挑走一堆，甲再挑走一堆，剩下的一堆給丙。乙會想辦法讓甲拿到的越少越好。不論乙怎麼挑，甲最多能保證自己拿到幾顆糖？",
+        "zh-Hans": "甲把 25 颗糖分成 3 堆，每堆至少 1 颗。分好后，乙先挑走一堆，甲再挑走一堆，剩下的一堆给丙。乙会想办法让甲拿到的越少越好。不论乙怎么挑，甲最多能保证自己拿到几颗糖？",
+        "en": "A splits 25 candies into 3 piles with at least 1 candy each. Then B takes one pile first, A takes one of the remaining piles, and the last pile goes to C. B tries to make A get as few as possible. What is the largest number of candies A can guarantee for himself, no matter how B chooses?",
+        "ja": "甲があめ 25 個を 3 つの山に分けます（どの山も 1 個以上）。分けたあと、まず乙が 1 山を取り、次に甲が 1 山を取り、残りの 1 山は丙のものになります。乙は甲の取る数ができるだけ少なくなるようにします。乙がどう取っても、甲が必ずもらえるあめは最大で何個ですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 12。",
+        "zh-Hans": "答案是 12。",
+        "en": "The answer is 12.",
+        "ja": "答えは 12 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "乙挑走一堆後，甲一定挑剩下兩堆中比較多的那堆。乙挑較少的堆，甲就能拿最多的堆；所以乙會挑走最多的那一堆，甲只能拿到第二多的那一堆。",
+          "因此甲要讓「第二多的那一堆」越多越好。設三堆由多到少是 a ≥ b ≥ c ≥ 1，甲拿到 b。",
+          "因為 a ≥ b、c ≥ 1，所以 25 = a + b + c ≥ b + b + 1，得到 b ≤ 12。",
+          "分成 12、12、1 時，乙挑走一堆 12 顆，甲還能拿另一堆 12 顆，所以甲最多能保證拿到 12 顆。"
+        ],
+        "zh-Hans": [
+          "乙挑走一堆后，甲一定挑剩下两堆中比较多的那堆。乙挑较少的堆，甲就能拿最多的堆；所以乙会挑走最多的那一堆，甲只能拿到第二多的那一堆。",
+          "因此甲要让「第二多的那一堆」越多越好。设三堆由多到少是 a ≥ b ≥ c ≥ 1，甲拿到 b。",
+          "因为 a ≥ b、c ≥ 1，所以 25 = a + b + c ≥ b + b + 1，得到 b ≤ 12。",
+          "分成 12、12、1 时，乙挑走一堆 12 颗，甲还能拿另一堆 12 颗，所以甲最多能保证拿到 12 颗。"
+        ],
+        "en": [
+          "After B takes a pile, A will take the larger of the two left. If B took a smaller pile, A would get the biggest one, so B takes the biggest pile and A gets the second biggest.",
+          "So A wants the second-largest pile to be as large as possible. Let the piles be a ≥ b ≥ c ≥ 1; A gets b.",
+          "Since a ≥ b and c ≥ 1, 25 = a + b + c ≥ b + b + 1, so b ≤ 12.",
+          "With piles 12, 12, 1, B takes a 12 and A still gets the other 12, so A can guarantee 12 candies."
+        ],
+        "ja": [
+          "乙が 1 山取ったあと、甲は残り 2 山の多いほうを取ります。乙が少ない山を取ると甲はいちばん多い山を取れるので、乙はいちばん多い山を取り、甲は 2 番目に多い山しかもらえません。",
+          "だから甲は「2 番目に多い山」をできるだけ多くしたいです。山を多い順に a ≥ b ≥ c ≥ 1 とすると、甲がもらうのは b です。",
+          "a ≥ b、c ≥ 1 なので 25 = a + b + c ≥ b + b + 1、よって b ≤ 12 です。",
+          "12、12、1 に分ければ、乙が 12 個の山を取っても甲はもう 1 つの 12 個を取れるので、甲が必ずもらえるのは最大 12 個です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "12"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade6-foundation",
+        "notes": "題型：分堆後對手先挑的極小極大。程式窮舉所有分法確認 12。掃過 c:game_theory 全庫與「分成三堆|先挑」；最接近 logic_grade9_047（兩端取硬幣保證金額）、logic_grade11_035（15 顆分三堆計數）。"
+      }
+    },
+    {
+      "id": "logic_grade6_foundation_093",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "matching_lineup_tianji_horse_race",
+      "tags": [
+        "c:game_theory",
+        "c:compare_order",
+        "m:extremal"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade6",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "甲、乙兩隊各有 5 位選手，要進行 5 場一對一比賽，每位選手只出場一次，分數高的人贏。甲隊選手的分數是 95、88、80、72、60，乙隊是 90、85、78、70、65，比賽時每個人都照這個分數發揮。甲隊先公布每一場要派誰，乙隊看完再決定自己的出場安排。乙隊最多能贏幾場？",
+        "zh-Hans": "甲、乙两队各有 5 位选手，要进行 5 场一对一比赛，每位选手只出场一次，分数高的人赢。甲队选手的分数是 95、88、80、72、60，乙队是 90、85、78、70、65，比赛时每个人都照这个分数发挥。甲队先公布每一场要派谁，乙队看完再决定自己的出场安排。乙队最多能赢几场？",
+        "en": "Teams A and B each have 5 players for 5 one-on-one matches; each player plays once and the higher score wins. Team A's scores are 95, 88, 80, 72, 60 and team B's are 90, 85, 78, 70, 65, and everyone plays exactly at their score. Team A announces its line-up first, and then team B chooses its own. At most how many matches can team B win?",
+        "ja": "甲チームと乙チームに 5 人ずつ選手がいて、1 対 1 の試合を 5 試合します。どの選手も 1 回だけ出場し、点数の高いほうが勝ちます。甲チームの点数は 95、88、80、72、60、乙チームは 90、85、78、70、65 で、試合ではみなこの点数どおりの力を出します。甲チームが先に各試合の出場者を発表し、乙チームはそれを見てから出場順を決めます。乙チームは最大で何試合勝てますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 4。",
+        "zh-Hans": "答案是 4。",
+        "en": "The answer is 4.",
+        "ja": "答えは 4 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "乙隊最強的 90 分也贏不了甲隊的 95 分，所以對上 95 分的那一場乙隊一定輸，派最弱的 65 分去就好，把強的選手留給別場。",
+          "剩下的 90、85、78、70 去對甲隊的 88、80、72、60，每一場都派「剛好比對手高一點的人」：90 對 88、85 對 80、78 對 72、70 對 60，四場全贏。",
+          "95 分那一場乙隊不論派誰都輸，所以不可能贏 5 場。",
+          "乙隊最多能贏 4 場。"
+        ],
+        "zh-Hans": [
+          "乙队最强的 90 分也赢不了甲队的 95 分，所以对上 95 分的那一场乙队一定输，派最弱的 65 分去就好，把强的选手留给别场。",
+          "剩下的 90、85、78、70 去对甲队的 88、80、72、60，每一场都派「刚好比对手高一点的人」：90 对 88、85 对 80、78 对 72、70 对 60，四场全赢。",
+          "95 分那一场乙队不论派谁都输，所以不可能赢 5 场。",
+          "乙队最多能赢 4 场。"
+        ],
+        "en": [
+          "B's best player (90) cannot beat A's 95, so B loses that match anyway; send the weakest, 65, there and save the strong players.",
+          "Match the remaining 90, 85, 78, 70 against A's 88, 80, 72, 60, each time using the player just above the opponent: 90 vs 88, 85 vs 80, 78 vs 72, 70 vs 60, winning all four.",
+          "B loses the match against 95 whoever plays, so B cannot win all 5.",
+          "Team B can win at most 4 matches."
+        ],
+        "ja": [
+          "乙チームでいちばん強い 90 点でも甲の 95 点には勝てないので、その試合は必ず負けます。いちばん弱い 65 点を出し、強い選手はほかの試合に回します。",
+          "残りの 90、85、78、70 を甲の 88、80、72、60 に当て、毎回「相手より少しだけ高い人」を出します。90 対 88、85 対 80、78 対 72、70 対 60 で 4 試合とも勝てます。",
+          "95 点との試合はだれを出しても負けるので、5 試合全部は勝てません。",
+          "乙チームは最大で 4 試合勝てます。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "4"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade6-foundation",
+        "notes": "題型：田忌賽馬式的出場配對，程式窮舉 120 種排法確認最多 4 勝。掃過 c:game_theory 全庫與「賽馬|田忌|出場順序|一對一」：無同型題。"
+      }
+    },
+    {
+      "id": "logic_grade6_foundation_094",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "time_split_versus_distance_split",
+      "tags": [
+        "c:rate_speed",
+        "c:mean",
+        "m:direct"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade6",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "甲、乙兩人同時從 A 地出發前往 B 地。兩人走路的速度一樣，跑步的速度也一樣，而且跑步比走路快。甲把全程所用的「時間」分成兩半：前一半的時間走、後一半的時間跑。乙把全程的「路程」分成兩半：前一半的路走、後一半的路跑。誰先到達 B 地？",
+        "zh-Hans": "甲、乙两人同时从 A 地出发前往 B 地。两人走路的速度一样，跑步的速度也一样，而且跑步比走路快。甲把全程所用的「时间」分成两半：前一半的时间走、后一半的时间跑。乙把全程的「路程」分成两半：前一半的路走、后一半的路跑。谁先到达 B 地？",
+        "en": "A and B leave place P at the same time for place Q. They walk at the same speed as each other and run at the same speed as each other, and running is faster than walking. A splits his total travel time in half: he walks for the first half of the time and runs for the second half. B splits the distance in half: he walks the first half of the way and runs the second half. Who reaches Q first?",
+        "ja": "甲と乙が同時に A 地を出発して B 地へ向かいます。2 人の歩く速さは同じで、走る速さも同じ、走るほうが歩くより速いです。甲はかかる「時間」を半分に分け、前半の時間は歩き、後半の時間は走ります。乙は「道のり」を半分に分け、前半の道は歩き、後半の道は走ります。先に B 地に着くのはだれですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 C：甲先到。",
+        "zh-Hans": "答案是 C：甲先到。",
+        "en": "The answer is C: A arrives first.",
+        "ja": "答えは C：甲が先、です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "乙前一半路用走的、後一半路用跑的；走得比較慢，所以走那一半路花的時間比較長，也就是乙超過一半的時間都在走路。",
+          "甲剛好一半的時間走、一半的時間跑。",
+          "走完全程時，花在跑步上的時間所占的比例越高，平均速度就越快。甲有一半時間在跑，乙跑步的時間不到一半，所以甲的平均速度比乙快。",
+          "甲先到，答案是 C。（例如全程 6 公里，走路每小時 1 公里、跑步每小時 3 公里：甲 3 小時就到，乙要 3 + 1 = 4 小時。）"
+        ],
+        "zh-Hans": [
+          "乙前一半路用走的、后一半路用跑的；走得比较慢，所以走那一半路花的时间比较长，也就是乙超过一半的时间都在走路。",
+          "甲刚好一半的时间走、一半的时间跑。",
+          "走完全程时，花在跑步上的时间所占的比例越高，平均速度就越快。甲有一半时间在跑，乙跑步的时间不到一半，所以甲的平均速度比乙快。",
+          "甲先到，答案是 C。（例如全程 6 公里，走路每小时 1 公里、跑步每小时 3 公里：甲 3 小时就到，乙要 3 + 1 = 4 小时。）"
+        ],
+        "en": [
+          "B walks the first half of the way and runs the second; walking is slower, so the walking half takes longer, meaning B spends more than half his time walking.",
+          "A spends exactly half his time walking and half running.",
+          "The larger the share of time spent running, the higher the average speed. A runs half the time and B less than half, so A's average speed is higher.",
+          "A arrives first; the answer is C. (For example, with 6 km, walking 1 km/h and running 3 km/h: A needs 3 hours, B needs 3 + 1 = 4 hours.)"
+        ],
+        "ja": [
+          "乙は前半の道を歩き、後半の道を走ります。歩くほうがおそいので歩く半分に時間が多くかかり、乙は半分より長い時間を歩いています。",
+          "甲はちょうど半分の時間を歩き、半分の時間を走ります。",
+          "全体のうち走っている時間の割合が大きいほど平均の速さは速くなります。甲は半分の時間走り、乙が走るのは半分より短いので、甲の平均の速さのほうが速いです。",
+          "甲が先に着き、答えは C です。（たとえば道のり 6 km、歩く速さ時速 1 km、走る速さ時速 3 km なら、甲は 3 時間、乙は 3 + 1 = 4 時間です。）"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "multiple_choice",
+      "options": {
+        "A": {
+          "zh-Hant": "乙先到",
+          "zh-Hans": "乙先到",
+          "en": "B arrives first",
+          "ja": "乙が先"
+        },
+        "B": {
+          "zh-Hant": "兩人同時到",
+          "zh-Hans": "两人同时到",
+          "en": "They arrive together",
+          "ja": "2 人同時"
+        },
+        "C": {
+          "zh-Hant": "甲先到",
+          "zh-Hans": "甲先到",
+          "en": "A arrives first",
+          "ja": "甲が先"
+        },
+        "D": {
+          "zh-Hant": "要看兩種速度才能決定",
+          "zh-Hans": "要看两种速度才能决定",
+          "en": "It depends on the two speeds",
+          "ja": "2 つの速さしだいで決まる"
+        }
+      },
+      "correctAnswer": {
+        "type": "choice",
+        "value": "C"
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade6-foundation",
+        "notes": "題型：時間平分 vs 路程平分的平均速度比較。掃過「前一半|後一半|誰先到」與 c:rate_speed、c:mean 全庫；最接近 arithmetic_grade6_070（往返平均速度 48）、arithmetic_grade3_180（先走 1/3 再跑）。本題是兩種分法的比較，不求數值。"
+      }
+    },
+    {
+      "id": "logic_grade6_foundation_095",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "missing_money_paradox",
+      "tags": [
+        "c:add_sub",
+        "c:logic_deduction",
+        "m:contradiction"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade6",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "三個人合住一間房，老闆收了 300 元，每人付 100 元。後來老闆發現今天的房價只要 250 元，就請服務生把 50 元退給他們。服務生自己偷偷留下 20 元，只退給三個人各 10 元。有人這樣算：「每人實際付了 90 元，三人共 270 元，加上服務生留下的 20 元是 290 元，比 300 元少了 10 元。」下列哪一個說法正確？",
+        "zh-Hans": "三个人合住一间房，老板收了 300 元，每人付 100 元。后来老板发现今天的房价只要 250 元，就请服务生把 50 元退给他们。服务生自己偷偷留下 20 元，只退给三个人各 10 元。有人这样算：「每人实际付了 90 元，三人共 270 元，加上服务生留下的 20 元是 290 元，比 300 元少了 10 元。」下列哪一个说法正确？",
+        "en": "Three people share a room and the owner collects 300 dollars, 100 from each. Later the owner realizes today's price is only 250 dollars and asks a clerk to return 50 dollars. The clerk secretly keeps 20 dollars and returns only 10 dollars to each person. Someone reasons: \"Each person really paid 90, so 270 in all; add the clerk's 20 and you get 290, which is 10 short of 300.\" Which statement is correct?",
+        "ja": "3 人が 1 部屋にとまり、主人は 300 円を受け取りました（1 人 100 円）。あとで主人は今日の部屋代が 250 円だけだと気づき、係の人に 50 円を返しに行かせました。係の人はこっそり 20 円をとり、3 人に 10 円ずつだけ返しました。ある人はこう考えました。「1 人 90 円はらったので 3 人で 270 円、係の人の 20 円を足すと 290 円で、300 円より 10 円少ない。」正しいのはどれですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 B：270 元裡已經包含服務生的 20 元，不該再加。",
+        "zh-Hans": "答案是 B：270 元里已经包含服务生的 20 元，不该再加。",
+        "en": "The answer is B: the 270 already includes the clerk's 20.",
+        "ja": "答えは B：270 円に係の人の 20 円がふくまれている、です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "三人實際付出 270 元，這 270 元的去向是：老闆收 250 元、服務生留 20 元，250 + 20 = 270。",
+          "所以服務生的 20 元已經算在 270 元裡面，再加一次 20 元是重複計算，沒有意義。",
+          "正確的對帳是：付出的 270 元加上退回的 30 元 = 300 元；或是老闆 250 元 + 服務生 20 元 + 退回 30 元 = 300 元。",
+          "錢一元也沒有少，答案是 B。"
+        ],
+        "zh-Hans": [
+          "三人实际付出 270 元，这 270 元的去向是：老板收 250 元、服务生留 20 元，250 + 20 = 270。",
+          "所以服务生的 20 元已经算在 270 元里面，再加一次 20 元是重复计算，没有意义。",
+          "正确的对账是：付出的 270 元加上退回的 30 元 = 300 元；或是老板 250 元 + 服务生 20 元 + 退回 30 元 = 300 元。",
+          "钱一元也没有少，答案是 B。"
+        ],
+        "en": [
+          "The 3 people paid 270 dollars in total, and it went as follows: 250 to the owner and 20 to the clerk, 250 + 20 = 270.",
+          "So the clerk's 20 is already inside the 270; adding 20 again counts it twice and means nothing.",
+          "The correct check is: 270 paid + 30 returned = 300, or owner 250 + clerk 20 + returned 30 = 300.",
+          "Not a single dollar is missing; the answer is B."
+        ],
+        "ja": [
+          "3 人が実際にはらったのは 270 円で、その行き先は主人 250 円と係の人 20 円、250 + 20 = 270 です。",
+          "つまり係の人の 20 円はすでに 270 円の中に入っていて、もう一度 20 円を足すのは二重に数えることになり、意味がありません。",
+          "正しい確かめ方は、はらった 270 円 + 返ってきた 30 円 = 300 円、または主人 250 円 + 係の人 20 円 + 返ってきた 30 円 = 300 円です。",
+          "お金は 1 円もなくなっておらず、答えは B です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "multiple_choice",
+      "options": {
+        "A": {
+          "zh-Hant": "那 10 元被老闆多收走了，所以帳才對不起來",
+          "zh-Hans": "那 10 元被老板多收走了，所以账才对不起来",
+          "en": "The owner kept an extra 10 dollars, which is why the sum fails",
+          "ja": "主人が 10 円よけいにとったので計算が合わない"
+        },
+        "B": {
+          "zh-Hant": "270 元裡已經包含服務生的 20 元，不該再加",
+          "zh-Hans": "270 元里已经包含服务生的 20 元，不该再加",
+          "en": "The 270 already includes the clerk's 20; adding it again is wrong",
+          "ja": "270 円に係の人の 20 円がふくまれていて、足すのがまちがい"
+        },
+        "C": {
+          "zh-Hant": "服務生其實留下 30 元，那個人少算了 10 元",
+          "zh-Hans": "服务生其实留下 30 元，那个人少算了 10 元",
+          "en": "The clerk really kept 30 dollars, so the reasoning missed 10",
+          "ja": "係の人は本当は 30 円とっていて、10 円数えもれた"
+        },
+        "D": {
+          "zh-Hant": "三個人其實各只拿回 7 元，所以少了 10 元",
+          "zh-Hans": "三个人其实各只拿回 7 元，所以少了 10 元",
+          "en": "Each person really got back only 7 dollars, so 10 is missing",
+          "ja": "3 人は本当は 7 円ずつしか返されていない"
+        }
+      },
+      "correctAnswer": {
+        "type": "choice",
+        "value": "B"
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade6-foundation",
+        "notes": "題型：旅館少一元的帳目謬誤。掃過「旅館|退回|退給|私」與 c:logic_deduction 全庫：無同型題。"
+      }
+    },
+    {
+      "id": "logic_grade6_foundation_096",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "pirate_gold_backward_induction",
+      "tags": [
+        "c:game_theory",
+        "c:logic_deduction",
+        "m:reverse"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade6",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "甲、乙、丙、丁、戊 5 個海盜要分 100 枚金幣，地位由高到低依序是甲、乙、丙、丁、戊。由地位最高、還活著的海盜提出分配方案，所有還活著的海盜（包括提案的人）一起投票：贊成票至少占一半，方案就通過；否則提案的人被丟下海，改由下一位提案。每個海盜都非常聰明，第一想活命，第二想拿越多金幣越好；如果投贊成和投反對拿到的金幣一樣多，他就投反對。甲最多能分到幾枚金幣？",
+        "zh-Hans": "甲、乙、丙、丁、戊 5 个海盜要分 100 枚金币，地位由高到低依序是甲、乙、丙、丁、戊。由地位最高、还活着的海盜提出分配方案，所有还活着的海盜（包括提案的人）一起投票：贊成票至少占一半，方案就通过；否则提案的人被丢下海，改由下一位提案。每个海盜都非常聪明，第一想活命，第二想拿越多金币越好；如果投贊成和投反对拿到的金币一样多，他就投反对。甲最多能分到几枚金币？",
+        "en": "Five pirates A, B, C, D, E, ranked from highest to lowest in that order, must share 100 gold coins. The highest-ranked living pirate proposes a split, and all living pirates (including the proposer) vote: if at least half vote yes, it passes; otherwise the proposer is thrown overboard and the next pirate proposes. Every pirate is perfectly clever: first he wants to survive, second he wants as many coins as possible; if voting yes or no would give him the same number of coins, he votes no. At most how many coins can A get?",
+        "ja": "甲・乙・丙・丁・戊の 5 人の海賊が金貨 100 枚を分けます。地位は高い順に甲、乙、丙、丁、戊です。生きている中でいちばん地位の高い海賊が分け方を提案し、生きている全員（提案した人もふくむ）で投票します。賛成が半分以上なら決まり、そうでなければ提案した人は海に投げこまれ、次の人が提案します。海賊はみなとてもかしこく、まず生きのびたい、次に金貨をできるだけ多くほしいと考えます。賛成しても反対しても金貨の数が同じなら反対します。甲は最大で何枚もらえますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 98。",
+        "zh-Hans": "答案是 98。",
+        "en": "The answer is 98.",
+        "ja": "答えは 98 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "從最後往前推。只剩丁、戊兩人時，丁提「丁 100、戊 0」，丁自己一票就占一半，方案通過，所以戊拿 0 枚。",
+          "剩丙、丁、戊三人時，丙需要 2 票。戊若讓丙落海只會拿 0 枚，所以丙只要給戊 1 枚就能拿到戊的贊成票：丙 99、丁 0、戊 1。",
+          "剩乙、丙、丁、戊四人時，乙需要 2 票。丁在上一種情況拿 0 枚，給丁 1 枚就夠：乙 99、丙 0、丁 1、戊 0。",
+          "五人都在時，甲需要 3 票（自己加 2 票）。在乙提案的情況下，丙和戊都拿 0 枚，甲各給他們 1 枚，就能買到這 2 票：甲 98、乙 0、丙 1、丁 0、戊 1。",
+          "甲至少要送出 2 枚才湊得到 3 票，所以甲最多能分到 98 枚。"
+        ],
+        "zh-Hans": [
+          "从最后往前推。只剩丁、戊两人时，丁提「丁 100、戊 0」，丁自己一票就占一半，方案通过，所以戊拿 0 枚。",
+          "剩丙、丁、戊三人时，丙需要 2 票。戊若让丙落海只会拿 0 枚，所以丙只要给戊 1 枚就能拿到戊的贊成票：丙 99、丁 0、戊 1。",
+          "剩乙、丙、丁、戊四人时，乙需要 2 票。丁在上一种情况拿 0 枚，给丁 1 枚就够：乙 99、丙 0、丁 1、戊 0。",
+          "五人都在时，甲需要 3 票（自己加 2 票）。在乙提案的情况下，丙和戊都拿 0 枚，甲各给他们 1 枚，就能买到这 2 票：甲 98、乙 0、丙 1、丁 0、戊 1。",
+          "甲至少要送出 2 枚才凑得到 3 票，所以甲最多能分到 98 枚。"
+        ],
+        "en": [
+          "Work backwards. With only D and E left, D proposes \"D 100, E 0\"; D's own vote is half, so it passes and E gets 0.",
+          "With C, D, E left, C needs 2 votes. E would get 0 if C were thrown overboard, so 1 coin buys E's vote: C 99, D 0, E 1.",
+          "With B, C, D, E left, B needs 2 votes. D gets 0 in the previous case, so 1 coin buys D: B 99, C 0, D 1, E 0.",
+          "With all five, A needs 3 votes (his own plus 2). Under B's plan C and E get 0, so A gives each of them 1 coin: A 98, B 0, C 1, D 0, E 1.",
+          "A must give away at least 2 coins to get 3 votes, so A can get at most 98 coins."
+        ],
+        "ja": [
+          "最後から考えます。丁と戊の 2 人だけなら、丁が「丁 100、戊 0」と提案し、丁自身の 1 票で半分になるので決まり、戊は 0 枚です。",
+          "丙・丁・戊の 3 人なら、丙は 2 票必要です。丙が海に落ちると戊は 0 枚なので、戊に 1 枚わたせば賛成してもらえます：丙 99、丁 0、戊 1。",
+          "乙・丙・丁・戊の 4 人なら、乙は 2 票必要です。前の場合に丁は 0 枚なので、丁に 1 枚わたせばよいです：乙 99、丙 0、丁 1、戊 0。",
+          "5 人全員なら、甲は 3 票（自分と 2 票）必要です。乙の提案では丙と戊が 0 枚なので、2 人に 1 枚ずつわたして賛成してもらいます：甲 98、乙 0、丙 1、丁 0、戊 1。",
+          "3 票集めるには少なくとも 2 枚わたす必要があるので、甲は最大で 98 枚もらえます。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "98"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade6-foundation",
+        "notes": "題型：海盜分金（逆推的博弈）。程式由 1 人逆推到 6 人確認 5 人時甲得 98、且收買對象唯一（丙、戊）。掃過「海盜|金幣.*投票|提案」與 c:game_theory 全庫：無同型題。"
+      }
     }
   ]
 }
