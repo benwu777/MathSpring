@@ -4125,6 +4125,82 @@
         "reference": "number-theory-grade11-foundation",
         "notes": "題型參考 Wikipedia「Triangular number」條目關於 n 與 n + 1 互質、因子必須整段分給其中一個的性質，並借用 CEMC 競賽卷常見的『把年份數分解後當模數』設定。去重：全庫掃「三角形數|1 + 2 + 3」共 50 餘題並逐一檢視。number_theory_grade12_013 是求既是三角形數又是完全平方數的最小數（解法是解 Pell 型條件）、number_theory_grade8_024 是求 1 + 2 + ⋯ + 100 除以 7 的餘數、number_theory_grade8_040 是求它的個位數字，三題都是對固定的和做運算；本題是反過來找最小的 n，核心是 gcd(n, n + 1) = 1 讓質數 1013 不可拆，再檢查 4 落在哪一邊。本題取代了初稿中一題『最大奇因數求和』——它與 algebra_grade12_066（f(k) = log₂k 的整數部分之和）同樣是『定義函數再對 1 到 2 的冪求和、按 2 的冪分段』，相似度 0.65，我判定骨架相同，直接砍掉重出。"
       }
+    },
+    {
+      "id": "number_theory_grade11_foundation_044",
+      "reviewStatus": "ok",
+      "topic": "number_theory",
+      "subtopic": "largest_divisor_for_all_n_exponential",
+      "tags": [
+        "c:modular",
+        "c:exponent",
+        "m:estimate_bound"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade11",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "不論正整數 n 是多少，3²ⁿ⁺¹ + 2ⁿ⁺² 這個數都是某個正整數 m 的倍數。求具有這個性質的最大正整數 m。",
+        "zh-Hans": "不论正整数 n 是多少，3²ⁿ⁺¹ + 2ⁿ⁺² 这个数都是某个正整数 m 的倍数。求具有这个性质的最大正整数 m。",
+        "en": "For every positive integer n, the number 3²ⁿ⁺¹ + 2ⁿ⁺² is a multiple of a certain positive integer m. Find the largest m with this property.",
+        "ja": "正の整数 n がどんな値でも、3²ⁿ⁺¹ + 2ⁿ⁺² はある正の整数 m の倍数になります。この性質をもつ最大の正の整数 m を求めなさい。"
+      },
+      "answer": {
+        "zh-Hant": "最大的 m 是 7。",
+        "zh-Hans": "最大的 m 是 7。",
+        "en": "The largest m is 7.",
+        "ja": "最大の m は 7 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "先代小的 n：n = 1 時是 3³ + 2³ = 27 + 8 = 35；n = 2 時是 3⁵ + 2⁴ = 243 + 16 = 259。",
+          "m 必須同時整除 35 與 259。35 = 5 × 7、259 = 7 × 37，最大公因數是 7，所以 m ≤ 7。",
+          "再證明 7 對每個 n 都成立：3²ⁿ⁺¹ = 3 × 9ⁿ，而 9 除以 7 餘 2，所以 3 × 9ⁿ 與 3 × 2ⁿ 除以 7 的餘數相同。",
+          "2ⁿ⁺² = 4 × 2ⁿ，所以 3²ⁿ⁺¹ + 2ⁿ⁺² 與 3 × 2ⁿ + 4 × 2ⁿ = 7 × 2ⁿ 除以 7 的餘數相同，都是 0。",
+          "因此對所有正整數 n 它都是 7 的倍數，最大的 m 是 7。"
+        ],
+        "zh-Hans": [
+          "先代小的 n：n = 1 时是 3³ + 2³ = 27 + 8 = 35；n = 2 时是 3⁵ + 2⁴ = 243 + 16 = 259。",
+          "m 必须同时整除 35 与 259。35 = 5 × 7、259 = 7 × 37，最大公因数是 7，所以 m ≤ 7。",
+          "再证明 7 对每个 n 都成立：3²ⁿ⁺¹ = 3 × 9ⁿ，而 9 除以 7 余 2，所以 3 × 9ⁿ 与 3 × 2ⁿ 除以 7 的余数相同。",
+          "2ⁿ⁺² = 4 × 2ⁿ，所以 3²ⁿ⁺¹ + 2ⁿ⁺² 与 3 × 2ⁿ + 4 × 2ⁿ = 7 × 2ⁿ 除以 7 的余数相同，都是 0。",
+          "因此对所有正整数 n 它都是 7 的倍数，最大的 m 是 7。"
+        ],
+        "en": [
+          "Try small n: n = 1 gives 3³ + 2³ = 27 + 8 = 35; n = 2 gives 3⁵ + 2⁴ = 243 + 16 = 259.",
+          "m must divide both 35 and 259. 35 = 5 × 7 and 259 = 7 × 37, whose greatest common divisor is 7, so m ≤ 7.",
+          "Now show 7 always works: 3²ⁿ⁺¹ = 3 × 9ⁿ, and 9 leaves remainder 2 when divided by 7, so 3 × 9ⁿ and 3 × 2ⁿ leave the same remainder mod 7.",
+          "2ⁿ⁺² = 4 × 2ⁿ, so 3²ⁿ⁺¹ + 2ⁿ⁺² has the same remainder mod 7 as 3 × 2ⁿ + 4 × 2ⁿ = 7 × 2ⁿ, namely 0.",
+          "Hence it is a multiple of 7 for every positive integer n, and the largest m is 7."
+        ],
+        "ja": [
+          "小さい n を代入します。n = 1 のとき 3³ + 2³ = 27 + 8 = 35、n = 2 のとき 3⁵ + 2⁴ = 243 + 16 = 259 です。",
+          "m は 35 と 259 の両方を割り切らなければなりません。35 = 5 × 7、259 = 7 × 37 で最大公約数は 7 なので m ≤ 7 です。",
+          "次に 7 がつねに割り切ることを示します。3²ⁿ⁺¹ = 3 × 9ⁿ で、9 を 7 で割った余りは 2 なので、3 × 9ⁿ と 3 × 2ⁿ は 7 で割った余りが等しいです。",
+          "2ⁿ⁺² = 4 × 2ⁿ なので、3²ⁿ⁺¹ + 2ⁿ⁺² を 7 で割った余りは 3 × 2ⁿ + 4 × 2ⁿ = 7 × 2ⁿ と同じで 0 です。",
+          "よってすべての正の整数 n で 7 の倍数となり、最大の m は 7 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "7"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "number_theory-grade11-foundation",
+        "notes": "題型取自數學歸納法／同餘單元「對所有 n 恆為某數的倍數，求最大者」。掃過「恆為|都能被|一定都能被|整除」：number_theory_grade8_013（n³ − n 恆被 6 整除，靠連續整數乘積）、number_theory_grade9_040（aaa 恆被 111 整除）。本題是指數式，要用同餘把 9ⁿ 換成 2ⁿ 合併。"
+      }
     }
   ]
 }

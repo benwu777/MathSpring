@@ -5699,6 +5699,81 @@
         "reference": "combinatorics-grade11-foundation",
         "notes": "題型取自賭徒破產（gambler’s ruin）公平版。掃過「破產|輸光|賭金|籌碼」：只有 combinatorics_grade11_045（點數問題，固定局數內分賭金）。點數問題是有限局的組合計數；本題無上限局數，需建立遞迴並看出等差，或用期望值不變。"
       }
+    },
+    {
+      "id": "combinatorics_grade11_foundation_063",
+      "reviewStatus": "ok",
+      "topic": "combinatorics",
+      "subtopic": "max_regions_of_space_by_planes",
+      "tags": [
+        "c:recurrence",
+        "m:extremal"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade11",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "用 5 個平面去切整個空間。這 5 個平面最多可以把空間分成幾個區域？",
+        "zh-Hans": "用 5 个平面去切整个空间。这 5 个平面最多可以把空间分成几个区域？",
+        "en": "Five planes cut through space. At most how many regions can these 5 planes divide space into?",
+        "ja": "5 枚の平面で空間を切ります。この 5 枚の平面で空間を最大でいくつの部分に分けられますか。"
+      },
+      "answer": {
+        "zh-Hant": "最多可以分成 26 個區域。",
+        "zh-Hans": "最多可以分成 26 个区域。",
+        "en": "At most 26 regions.",
+        "ja": "最大で 26 個の部分に分けられます。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "先看平面上的情形：k 條直線最多把平面分成 1 + (1 + 2 + ⋯ + k) 塊，k = 0、1、2、3、4 時依序是 1、2、4、7、11 塊。",
+          "設 n 個平面最多把空間分成 Sₙ 塊。加入第 n 個平面時，它和前面 n − 1 個平面各交出一條直線，這 n − 1 條直線最多把新平面分成的塊數就是上一步的數。",
+          "新平面上的每一塊都把它穿過的那個空間區域一分為二，所以 Sₙ = Sₙ₋₁ +（n − 1 條直線最多把平面分成的塊數），而且這些最大值可以同時達到（平面位置一般時）。",
+          "S₀ = 1，S₁ = 1 + 1 = 2，S₂ = 2 + 2 = 4，S₃ = 4 + 4 = 8，S₄ = 8 + 7 = 15。",
+          "S₅ = 15 + 11 = 26，所以最多分成 26 個區域。"
+        ],
+        "zh-Hans": [
+          "先看平面上的情形：k 条直线最多把平面分成 1 + (1 + 2 + ⋯ + k) 块，k = 0、1、2、3、4 时依序是 1、2、4、7、11 块。",
+          "设 n 个平面最多把空间分成 Sₙ 块。加入第 n 个平面时，它和前面 n − 1 个平面各交出一条直线，这 n − 1 条直线最多把新平面分成的块数就是上一步的数。",
+          "新平面上的每一块都把它穿过的那个空间区域一分为二，所以 Sₙ = Sₙ₋₁ +（n − 1 条直线最多把平面分成的块数），而且这些最大值可以同时达到（平面位置一般时）。",
+          "S₀ = 1，S₁ = 1 + 1 = 2，S₂ = 2 + 2 = 4，S₃ = 4 + 4 = 8，S₄ = 8 + 7 = 15。",
+          "S₅ = 15 + 11 = 26，所以最多分成 26 个区域。"
+        ],
+        "en": [
+          "First the planar case: k lines divide the plane into at most 1 + (1 + 2 + ⋯ + k) pieces, i.e. 1, 2, 4, 7, 11 pieces for k = 0, 1, 2, 3, 4.",
+          "Let Sₙ be the maximum number of regions made by n planes. The n-th plane meets each of the previous n − 1 planes in a line, and these n − 1 lines divide the new plane into at most the planar number from the previous step.",
+          "Each piece of the new plane splits one existing region of space into two, so Sₙ = Sₙ₋₁ + (the maximum number of pieces made by n − 1 lines in a plane), and these maxima are reached together when the planes are in general position.",
+          "S₀ = 1, S₁ = 1 + 1 = 2, S₂ = 2 + 2 = 4, S₃ = 4 + 4 = 8, S₄ = 8 + 7 = 15.",
+          "S₅ = 15 + 11 = 26, so at most 26 regions."
+        ],
+        "ja": [
+          "まず平面の場合：k 本の直線は平面を最大で 1 + (1 + 2 + ⋯ + k) 個に分け、k = 0、1、2、3、4 のとき順に 1、2、4、7、11 個です。",
+          "n 枚の平面で空間を最大 Sₙ 個に分けるとします。n 枚目の平面は前の n − 1 枚とそれぞれ 1 本の直線で交わり、この n − 1 本の直線が新しい平面を分ける個数の最大値は平面の場合の値です。",
+          "新しい平面の各部分は、通りぬける空間の部分を 2 つに分けるので、Sₙ = Sₙ₋₁ +（n − 1 本の直線が平面を分ける最大個数）で、平面が一般の位置にあればこれらの最大値は同時に実現します。",
+          "S₀ = 1、S₁ = 1 + 1 = 2、S₂ = 2 + 2 = 4、S₃ = 4 + 4 = 8、S₄ = 8 + 7 = 15。",
+          "S₅ = 15 + 11 = 26 なので、最大で 26 個です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "26"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "combinatorics-grade11-foundation",
+        "notes": "題型取自遞迴「平面分空間（蛋糕數）」，是「直線分平面」往上一維。掃過「分成幾個區域|最多.*區域|切.*塊|空間」：logic_grade8_011（5 條直線分平面 = 16）、logic_grade6_073（切餅 5 刀）、logic_grade10_028（4 個圓分平面）、combinatorics_grade9_026（圓內弦分區）。本題在空間中，遞迴的增量本身是平面上的分割數。"
+      }
     }
   ]
 }
