@@ -145,6 +145,93 @@ void main() {
         AvatarCatalog.defaultFor(AvatarPresentation.boy).faceId);
   });
 
+  test('girl hair colours use a deep brown default and validate persisted ids',
+      () {
+    const List<String> hairColorIds = <String>[
+      'girl_hair_color_01',
+      'girl_hair_color_02',
+      'girl_hair_color_03',
+      'girl_hair_color_04',
+      'girl_hair_color_05',
+      'girl_hair_color_06',
+    ];
+
+    expect(
+      AvatarConfiguration.defaultFor(AvatarPresentation.girl).hairColorId,
+      'girl_hair_color_02',
+    );
+    expect(
+      AvatarConfiguration.optionsFor(AvatarPresentation.girl, 'hair_color'),
+      hairColorIds,
+    );
+    for (final String hairColorId in hairColorIds) {
+      final AvatarConfiguration restored = AvatarConfiguration.fromMap(
+        <String, Object?>{
+          'avatar_presentation': 'girl',
+          'avatar_hair_color_id': hairColorId,
+        },
+      );
+      expect(restored.hairColorId, hairColorId);
+      expect(restored.toMap()['avatar_hair_color_id'], hairColorId);
+    }
+    expect(
+      AvatarConfiguration.fromMap(
+        const <String, Object?>{'avatar_presentation': 'girl'},
+      ).hairColorId,
+      'girl_hair_color_02',
+    );
+    expect(
+      AvatarConfiguration.fromMap(const <String, Object?>{
+        'avatar_presentation': 'girl',
+        'avatar_hair_color_id': 'unknown',
+      }).hairColorId,
+      'girl_hair_color_02',
+    );
+    expect(
+      AvatarConfiguration.defaultFor(AvatarPresentation.boy).hairColorId,
+      'girl_hair_color_02',
+    );
+    expect(
+      () =>
+          AvatarConfiguration.optionsFor(AvatarPresentation.boy, 'hair_color'),
+      throwsArgumentError,
+    );
+    expect(
+      AvatarConfiguration.defaultFor(AvatarPresentation.girl)
+          .copyWith(hairColorId: 'unknown')
+          .hairColorId,
+      'girl_hair_color_02',
+    );
+    expect(
+      () => AvatarConfiguration(
+        presentation: AvatarPresentation.girl,
+        skinId: 'girl_skin_01',
+        faceId: 'girl_face_01',
+        hairId: 'girl_hair_01',
+        hairColorId: 'unknown',
+        eyesId: 'girl_eyes_01',
+        noseId: 'girl_nose_01',
+        mouthId: 'girl_mouth_01',
+      ),
+      throwsAssertionError,
+    );
+    final AvatarConfiguration boyWithPersistedGirlColour = AvatarConfiguration(
+      presentation: AvatarPresentation.boy,
+      skinId: 'boy_skin_01',
+      faceId: 'boy_face_01',
+      hairId: 'boy_hair_01',
+      hairColorId: 'girl_hair_color_03',
+      eyesId: 'boy_eyes_01',
+      noseId: 'boy_nose_01',
+      mouthId: 'boy_mouth_01',
+    );
+    expect(boyWithPersistedGirlColour.hairColorId, 'girl_hair_color_02');
+    expect(
+      boyWithPersistedGirlColour.toMap()['avatar_hair_color_id'],
+      'girl_hair_color_02',
+    );
+  });
+
   test('keeps a persisted eye colour for compatibility without exposing it',
       () {
     final AvatarConfiguration restored = AvatarConfiguration.fromMap(

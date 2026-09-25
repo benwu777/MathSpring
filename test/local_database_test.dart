@@ -56,9 +56,17 @@ void main() {
     expect(tableNames, contains('favorite_question_collections'));
     expect(tableNames, contains('favorite_questions'));
     expect(tableNames, contains('favorite_question_collection_memberships'));
+    final List<Map<String, Object?>> profileColumns = await database.rawQuery(
+      'PRAGMA table_info(learner_profiles)',
+    );
+    expect(
+      profileColumns.map((Map<String, Object?> row) => row['name']),
+      contains('avatar_hair_color_id'),
+    );
   });
 
-  test('favorites use one all-favorites default and preserve questions when a custom collection is deleted',
+  test(
+      'favorites use one all-favorites default and preserve questions when a custom collection is deleted',
       () async {
     final FavoriteQuestionRepository repository =
         FavoriteQuestionRepository(database);
@@ -177,6 +185,81 @@ void main() {
     }
   });
 
+  test('upgrades a version 7 profile database and round-trips hair colour',
+      () async {
+    final Directory directory = await Directory.systemTemp.createTemp(
+      'mathspring_hair_color_migration_',
+    );
+    final String path = p.join(directory.path, 'mathspring.db');
+
+    try {
+      final Database legacy = await openDatabase(
+        path,
+        version: 7,
+        onCreate: (Database db, int version) async {
+          await db.execute('''
+            CREATE TABLE learner_profiles(
+              id TEXT PRIMARY KEY,
+              display_name TEXT NOT NULL,
+              level_stage TEXT NOT NULL,
+              min_level_stage TEXT NOT NULL,
+              max_level_stage TEXT NOT NULL,
+              challenge_tier TEXT NOT NULL,
+              created_at TEXT NOT NULL,
+              avatar_presentation TEXT,
+              avatar_skin_id TEXT,
+              avatar_face_id TEXT,
+              avatar_hair_id TEXT,
+              avatar_eyes_id TEXT,
+              avatar_nose_id TEXT,
+              avatar_mouth_id TEXT,
+              avatar_eye_color_id TEXT,
+              avatar_accessory_id TEXT
+            )
+          ''');
+        },
+      );
+      await legacy.close();
+
+      final Database migrated = await MathSpringDatabase.openAtPath(path);
+      final List<Map<String, Object?>> columns = await migrated.rawQuery(
+        'PRAGMA table_info(learner_profiles)',
+      );
+      expect(
+        columns.map((Map<String, Object?> row) => row['name']),
+        contains('avatar_hair_color_id'),
+      );
+
+      final LearnerProfileRepository repository =
+          LearnerProfileRepository(migrated);
+      const LearnerProfile profile = LearnerProfile(
+        id: 'learner_hair_color_001',
+        displayName: 'Mia',
+        levelStage: 'grade4',
+        challengeTier: 'foundation',
+        createdAtIso: '2026-09-25T08:00:00Z',
+        avatar: AvatarConfiguration(
+          presentation: AvatarPresentation.girl,
+          skinId: 'girl_skin_01',
+          faceId: 'girl_face_01',
+          hairId: 'girl_hair_01',
+          hairColorId: 'girl_hair_color_03',
+          eyesId: 'girl_eyes_01',
+          noseId: 'girl_nose_01',
+          mouthId: 'girl_mouth_01',
+        ),
+      );
+      await repository.save(profile);
+      expect(
+        (await repository.fetchAll()).single.avatar.hairColorId,
+        'girl_hair_color_03',
+      );
+      await migrated.close();
+    } finally {
+      await directory.delete(recursive: true);
+    }
+  });
+
   test('stores and reads answer sessions with linked answer records', () async {
     const AnswerSession session = AnswerSession(
       id: 'session_quiz_001',
@@ -270,6 +353,7 @@ void main() {
         skinId: 'boy_skin_01',
         faceId: 'boy_face_01',
         hairId: 'boy_hair_02',
+        hairColorId: 'girl_hair_color_02',
         eyesId: 'boy_eyes_01',
         noseId: 'boy_nose_02',
         mouthId: 'boy_mouth_01',
