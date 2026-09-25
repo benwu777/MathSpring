@@ -373,8 +373,9 @@ class _AvatarEditorState extends State<AvatarEditor> {
 
   Widget _hairColorSwatch(String id) {
     final bool selected = _selected() == id;
-    final bool locked =
-        !widget.hasFullUnlock && !selected && !_isBasicOption(id);
+    // Hair colour is a visual preference, not premium avatar artwork.  Keep
+    // all six swatches available in the standard learner flow.
+    const bool locked = false;
     final Color accent = Theme.of(context).colorScheme.primary;
     final Color swatchColor = AvatarAssetCatalog.girlHairColors[id]!;
     return Semantics(

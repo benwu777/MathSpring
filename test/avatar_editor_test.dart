@@ -494,4 +494,40 @@ void main() {
         find.byKey(const ValueKey<String>('avatar_option_girl_hair_color_01')),
         findsNothing);
   });
+
+  testWidgets('keeps girl hair colours selectable without a full unlock',
+      (tester) async {
+    AvatarConfiguration? changed;
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Scaffold(
+          body: AvatarEditor(
+            hasFullUnlock: false,
+            onChanged: (AvatarConfiguration value) => changed = value,
+          ),
+        ),
+      ),
+    );
+
+    for (int step = 0; step < 4; step++) {
+      await tester
+          .tap(find.byKey(const ValueKey<String>('avatar_next_button')));
+      await tester.pump();
+    }
+
+    await tester.tap(
+      find.byKey(
+        const ValueKey<String>('avatar_option_girl_hair_color_06'),
+      ),
+    );
+    await tester.pump();
+
+    expect(changed?.hairColorId, 'girl_hair_color_06');
+    expect(
+      find.byKey(
+        const ValueKey<String>('avatar_locked_option_girl_hair_color_06'),
+      ),
+      findsNothing,
+    );
+  });
 }
