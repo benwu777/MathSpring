@@ -739,25 +739,25 @@ String _signature(AvatarAssetBundle assets) => <Object?>[
       assets.mouthScaleX,
     ].join('|');
 
-List<double> _hairTintMatrix(Color tint) => <double>[
-      tint.r,
-      0,
-      0,
-      0,
-      0,
-      0,
-      tint.g,
-      0,
-      0,
-      0,
-      0,
-      0,
-      tint.b,
-      0,
-      0,
-      0,
-      0,
-      0,
-      1,
-      0,
-    ];
+List<double> _hairTintMatrix(Color tint) {
+  const double redLuma = .2126;
+  const double greenLuma = .7152;
+  const double blueLuma = .0722;
+  List<double> channel(double target) => <double>[
+        redLuma * target,
+        greenLuma * target,
+        blueLuma * target,
+        0,
+        0,
+      ];
+  return <double>[
+    ...channel(tint.r),
+    ...channel(tint.g),
+    ...channel(tint.b),
+    0,
+    0,
+    0,
+    1,
+    0,
+  ];
+}

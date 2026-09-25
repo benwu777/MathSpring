@@ -124,26 +124,30 @@ class AvatarPreview extends StatelessWidget {
     );
   }
 
-  ColorFilter _hairTintFilter(Color tint) => ColorFilter.matrix(<double>[
-        tint.r,
-        0,
-        0,
-        0,
-        0,
-        0,
-        tint.g,
-        0,
-        0,
-        0,
-        0,
-        0,
-        tint.b,
-        0,
-        0,
-        0,
-        0,
-        0,
-        1,
-        0,
-      ]);
+  ColorFilter _hairTintFilter(Color tint) {
+    // Rebuild RGB from the original luminance.  Multiplying the original
+    // brown channels only darkens/lightens brown, while this preserves strand
+    // shading yet gives every swatch its own visible hue.  Alpha passes
+    // through unchanged.
+    const double redLuma = .2126;
+    const double greenLuma = .7152;
+    const double blueLuma = .0722;
+    List<double> channel(double target) => <double>[
+          redLuma * target,
+          greenLuma * target,
+          blueLuma * target,
+          0,
+          0,
+        ];
+    return ColorFilter.matrix(<double>[
+      ...channel(tint.r),
+      ...channel(tint.g),
+      ...channel(tint.b),
+      0,
+      0,
+      0,
+      1,
+      0,
+    ]);
+  }
 }
