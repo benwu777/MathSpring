@@ -6320,6 +6320,83 @@
         "reference": "logic-grade5-foundation",
         "notes": "奇偶性下界（總翻動數須為雙數）＋構造。掃過「翻|正面朝上|背面朝上|每次.{0,8}翻」與 c:logic_deduction 全庫；verify.py 以 BFS 確認最少 4 次。logic_grade6_foundation_017 是整行整列翻硬幣能否只剩一枚反面，logic_grade10_foundation_021 是點燈；本題的關鍵是 8 張時單看 3m ≥ 8 會誤答 3，要再用奇偶把 3 推到 4。"
       }
+    },
+    {
+      "id": "logic_grade5_foundation_081",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "binary_coin_bags_minimax",
+      "tags": [
+        "c:number_base",
+        "c:add_sub",
+        "m:extremal",
+        "m:construction"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade5",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "小安要把 100 枚 1 元硬幣全部分裝進 7 個袋子，每袋至少 1 枚，封好以後就不再打開。他希望 1 元到 100 元之間的任何金額，都能直接拿其中幾袋（不拆袋）剛好湊出來。在做得到的前提下，裝最多的那一袋最少要裝幾枚？",
+        "zh-Hans": "小安要把 100 枚 1 元硬币全部分装进 7 个袋子，每袋至少 1 枚，封好以后就不再打开。他希望 1 元到 100 元之间的任何金额，都能直接拿其中几袋（不拆袋）刚好凑出来。在做得到的前提下，装最多的那一袋最少要装几枚？",
+        "en": "Xiao An puts all 100 one-dollar coins into 7 bags, at least 1 coin per bag, and seals them. He wants every amount from 1 to 100 dollars to be payable exactly by handing over some of the bags without opening any. Among all ways that work, what is the smallest possible number of coins in the fullest bag?",
+        "ja": "アンさんは 1 元玉 100 枚を全部 7 つのふくろに分けて入れ（どのふくろにも 1 枚以上）、ふうをして二度と開けません。1 元から 100 元までのどの金額も、ふくろをいくつか選んで（開けずに）ちょうどはらえるようにしたいです。それができる分け方のうち、いちばん多く入ったふくろの枚数は、少なくとも何枚ですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 37 枚。",
+        "zh-Hans": "答案是 37 枚。",
+        "en": "The answer is 37 coins.",
+        "ja": "答えは 37 枚です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "把袋子由少到多排好。要湊出 1 元，一定有一袋只裝 1 枚。",
+          "若某一袋的枚數比「比它少的所有袋子合計」再多 1 還要多，那麼「前面合計 + 1」這個金額就湊不出來：用前面的袋子全部都不夠，用了這一袋或更大的又太多。",
+          "所以第 2 袋最多 2 枚，前 2 袋最多合計 3；第 3 袋最多 4，前 3 袋最多 7；照這樣，前 6 袋合計最多 1 + 2 + 4 + 8 + 16 + 32 = 63 枚。",
+          "第 7 袋（最多的那袋）至少裝 100 − 63 = 37 枚。",
+          "裝成 1、2、4、8、16、32、37 就做得到：1 到 63 元用前 6 袋組合（像二進位一樣），64 到 100 元先拿 37 枚那袋，剩下的 27 到 63 元再用前 6 袋湊。所以答案是 37。"
+        ],
+        "zh-Hans": [
+          "把袋子由少到多排好。要凑出 1 元，一定有一袋只装 1 枚。",
+          "若某一袋的枚数比「比它少的所有袋子合计」再多 1 还要多，那么「前面合计 + 1」这个金额就凑不出来：用前面的袋子全部都不够，用了这一袋或更大的又太多。",
+          "所以第 2 袋最多 2 枚，前 2 袋最多合计 3；第 3 袋最多 4，前 3 袋最多 7；照这样，前 6 袋合计最多 1 + 2 + 4 + 8 + 16 + 32 = 63 枚。",
+          "第 7 袋（最多的那袋）至少装 100 − 63 = 37 枚。",
+          "装成 1、2、4、8、16、32、37 就做得到：1 到 63 元用前 6 袋组合（像二进位一样），64 到 100 元先拿 37 枚那袋，剩下的 27 到 63 元再用前 6 袋凑。所以答案是 37。"
+        ],
+        "en": [
+          "Sort the bags from smallest to largest. To pay 1 dollar, one bag must hold exactly 1 coin.",
+          "If a bag held more than 1 + (the total of all smaller bags), the amount \"that total + 1\" could not be paid: the smaller bags are not enough, and this bag or any bigger one is too much.",
+          "So bag 2 has at most 2 (first two total at most 3), bag 3 at most 4 (total 7), and so on: the first 6 bags hold at most 1 + 2 + 4 + 8 + 16 + 32 = 63 coins.",
+          "The 7th, fullest bag holds at least 100 − 63 = 37 coins.",
+          "Bags of 1, 2, 4, 8, 16, 32, 37 work: 1 to 63 come from the first six bags (like binary), and 64 to 100 use the 37-bag plus 27 to 63 from the others. The answer is 37."
+        ],
+        "ja": [
+          "ふくろを少ない順にならべます。1 元をはらうには、1 枚だけのふくろが必要です。",
+          "あるふくろの枚数が「それより少ないふくろの合計 + 1」より多いと、「その合計 + 1」の金額がはらえません。小さいふくろを全部使っても足りず、そのふくろ以上を使うと多すぎるからです。",
+          "だから 2 つ目は 2 枚まで（2 つの合計 3 まで）、3 つ目は 4 枚まで（合計 7 まで）と続き、はじめの 6 つの合計は多くても 1 + 2 + 4 + 8 + 16 + 32 = 63 枚です。",
+          "いちばん多い 7 つ目のふくろは少なくとも 100 − 63 = 37 枚です。",
+          "1、2、4、8、16、32、37 と分ければできます。1 から 63 元ははじめの 6 つで（2 進法のように）作れ、64 から 100 元は 37 枚のふくろと、残り 27 から 63 元を 6 つで作ります。答えは 37 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "37"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade5-foundation",
+        "notes": "二進位分裝的「最大袋最小化」；logic_grade11_029 是砝碼最少個數、logic_grade9_029 是 1,2,4,8 能秤幾種，本題固定袋數與總數，求最大那袋的下限並構造。"
+      }
     }
   ]
 }
