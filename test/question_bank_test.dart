@@ -1570,7 +1570,13 @@ void main() {
 
     expect(arithmeticQuestion.source?.type, 'official_reference');
     expect(arithmeticQuestion.source?.problemNumber, '選擇 1');
-    expect(arithmeticQuestion2.source?.problemNumber, '選擇 21');
+    // 062 原本是 IMC 2015 選擇 21，與 logic_grade6_foundation_047（六年級卷同一題）
+    // 逐字重複，已改寫成不同的鴿籠題，只保留六年級那份官方題。
+    expect(arithmeticQuestion2.source?.type, 'rewritten_olympiad_style');
+    expect(
+      arithmeticQuestion2.localizedPrompt('zh-Hant'),
+      isNot(contains('生日')),
+    );
     expect(logicQuestion.source?.type, 'official_reference');
     expect(logicQuestion.source?.problemNumber, '選擇 24');
     expect(logicQuestion.source?.year, '2015');
