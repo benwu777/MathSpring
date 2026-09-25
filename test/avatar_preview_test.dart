@@ -1,5 +1,8 @@
 import 'dart:io';
+import 'dart:typed_data';
+import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mathspring/models/avatar_configuration.dart';
 import 'package:mathspring/services/avatar_asset_catalog.dart';
@@ -189,7 +192,7 @@ void main() {
     );
     expect(
       frontTint.colorFilter,
-      const ColorFilter.mode(Color(0xFF7B3F20), BlendMode.modulate),
+      const ColorFilter.mode(Color(0xFF7B3F20), BlendMode.multiply),
     );
   });
 
@@ -211,7 +214,7 @@ void main() {
     );
     expect(
       backTint.colorFilter,
-      const ColorFilter.mode(Color(0xFF7B3F20), BlendMode.modulate),
+      const ColorFilter.mode(Color(0xFF7B3F20), BlendMode.multiply),
     );
   });
 
@@ -239,14 +242,22 @@ void main() {
     );
   });
 
-  testWidgets('uses alpha-preserving treatment for tinted girl hair',
+  testWidgets('renders tinted girl hair with a transparent canvas corner',
       (WidgetTester tester) async {
     final AvatarConfiguration girl = AvatarConfiguration.defaultFor(
       AvatarPresentation.girl,
     ).copyWith(hairColorId: 'girl_hair_color_03');
     await tester.pumpWidget(
-      MaterialApp(
-        home: Scaffold(body: AvatarPreview(configuration: girl)),
+      Directionality(
+        textDirection: TextDirection.ltr,
+        child: RepaintBoundary(
+          key: const ValueKey<String>('tinted_girl_hair_boundary'),
+          child: SizedBox(
+            width: 182,
+            height: 182,
+            child: Center(child: AvatarPreview(configuration: girl)),
+          ),
+        ),
       ),
     );
 
@@ -256,54 +267,24 @@ void main() {
     final AvatarAssetBundle assets = AvatarAssetCatalog.resolve(girl);
     expect(
       hairTreatment.colorFilter,
-      ColorFilter.mode(assets.hairTint!, BlendMode.modulate),
+      ColorFilter.mode(assets.hairTint!, BlendMode.multiply),
     );
-  });
-
-  test('keeps a rendered tinted girl hair preview canvas transparent',
-      () async {
-    final AvatarConfiguration girl = AvatarConfiguration.defaultFor(
-      AvatarPresentation.girl,
-    ).copyWith(hairColorId: 'girl_hair_color_03');
-    final AvatarAssetBundle assets = AvatarAssetCatalog.resolve(girl);
-    final File output = File(
-      '/private/tmp/mathspring-tinted-girl-hair-preview.png',
+    final RenderRepaintBoundary boundary = tester.renderObject(
+      find.byKey(const ValueKey<String>('tinted_girl_hair_boundary')),
     );
-    final String tint = assets.hairTint!
-        .toARGB32()
-        .toRadixString(16)
-        .padLeft(8, '0')
-        .substring(2);
-    final ProcessResult render = await Process.run('magick', <String>[
-      assets.hairFrontAsset,
-      '-resize',
-      '180x180!',
-      '(',
-      '+clone',
-      '-fill',
-      '#$tint',
-      '-colorize',
-      '100%',
-      ')',
-      '-compose',
-      'Multiply',
-      '-composite',
-      output.path,
-    ]);
-    expect(render.exitCode, 0, reason: render.stderr);
-    final ProcessResult alpha = await Process.run('magick', <String>[
-      output.path,
-      '-alpha',
-      'extract',
-      '-format',
-      '%[fx:p{0,0}]',
-      'info:',
-    ]);
-    expect(alpha.exitCode, 0, reason: alpha.stderr);
+    final (ui.Image, ByteData?) rendered =
+        await tester.runAsync<(ui.Image, ByteData?)>(() async {
+              final ui.Image image = await boundary.toImage();
+              return (
+                image,
+                await image.toByteData(format: ui.ImageByteFormat.rawRgba),
+              );
+            }) ??
+            (throw StateError('Unable to render tinted girl hair preview'));
     expect(
-      double.parse((alpha.stdout as String).trim()),
+      rendered.$2!.getUint8(3),
       0,
-      reason: '畫布左上角必須維持透明',
+      reason: '預覽畫布外的左上角必須維持透明',
     );
   });
 
