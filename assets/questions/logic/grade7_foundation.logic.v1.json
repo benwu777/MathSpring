@@ -4585,6 +4585,150 @@
         "reference": "logic-grade7-foundation",
         "notes": "題型出處：實際的摩斯電碼編碼容量問題（Wikipedia 的 Morse code／可變長度前綴碼題材，AoPS 與 Brilliant 的計數入門單元常見）；本輪先讀了 Wikipedia「Stars and bars」與「Combinatorial proof」確認此題的骨架是『按長度分類再相加的等比窮舉』而非隔板法。掃全庫 regex「訊號／字碼／編碼／摩斯」0 命中；最接近的 logic_grade8_foundation_017（8 瓶飲料要幾張試紙）是二進位編碼的極值題，求的是最少張數而不是可表示的總數，推理核心不同。"
       }
+    },
+    {
+      "id": "logic_grade7_foundation_052",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "pairwise_product_sign_deduction",
+      "tags": [
+        "c:logic_deduction",
+        "c:mul_div",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade7",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "黑板上有 5 個都不是 0 的數。把其中每兩個數相乘，一共得到 10 個乘積，其中恰好有 4 個是正數。又知道這 5 個數全部相乘的結果是正數。這 5 個數之中有幾個是負數？",
+        "zh-Hans": "黑板上有 5 个都不是 0 的数。把其中每两个数相乘，一共得到 10 个乘积，其中恰好有 4 个是正数。又知道这 5 个数全部相乘的结果是正数。这 5 个数之中有几个是负数？",
+        "en": "Five nonzero numbers are on the board. Multiplying every pair gives 10 products, exactly 4 of which are positive. The product of all five numbers is also positive. How many of the five numbers are negative?",
+        "ja": "黒板に 0 でない数が 5 つあります。2 つずつかけると 10 個の積ができ、そのうちちょうど 4 個が正です。また 5 つすべての積は正です。5 つの数のうち負の数はいくつですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 2。",
+        "zh-Hans": "答案是 2。",
+        "en": "The answer is 2.",
+        "ja": "答えは 2 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "設有 k 個負數、5 − k 個正數。兩數乘積為正，表示兩個同號。",
+          "同號的配對數 = k(k − 1)/2 + (5 − k)(4 − k)/2。k = 0～5 依序得 10、6、4、4、6、10，所以 k = 2 或 k = 3。",
+          "5 個數全部相乘為正，負數個數必須是偶數。",
+          "所以 k = 2，有 2 個負數。"
+        ],
+        "zh-Hans": [
+          "设有 k 个负数、5 − k 个正数。两数乘积为正，表示两个同号。",
+          "同号的配对数 = k(k − 1)/2 + (5 − k)(4 − k)/2。k = 0～5 依序得 10、6、4、4、6、10，所以 k = 2 或 k = 3。",
+          "5 个数全部相乘为正，负数个数必须是偶数。",
+          "所以 k = 2，有 2 个负数。"
+        ],
+        "en": [
+          "Let k be negative and 5 − k positive. A pair product is positive when the two have the same sign.",
+          "Same-sign pairs = k(k − 1)/2 + (5 − k)(4 − k)/2. For k = 0 to 5 this is 10, 6, 4, 4, 6, 10, so k = 2 or k = 3.",
+          "The product of all five is positive, so the number of negatives is even.",
+          "Hence k = 2: two numbers are negative."
+        ],
+        "ja": [
+          "負の数を k 個、正の数を 5 − k 個とします。2 数の積が正なのは同符号のとき。",
+          "同符号の組の数 = k(k − 1)/2 + (5 − k)(4 − k)/2。k = 0〜5 で 10、6、4、4、6、10 なので k = 2 または 3。",
+          "5 つすべての積が正なので、負の数の個数は偶数。",
+          "よって k = 2、負の数は 2 個。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "2"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade7-foundation",
+        "notes": "同號配對計數＋整體乘積奇偶排除。掃過「乘積.*負|負數.*個」未見；與本批 42、43 同用符號法則但推理方向不同（由結果反推負數個數）。"
+      }
+    },
+    {
+      "id": "logic_grade7_foundation_053",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "signed_increasing_jumps_reach_target",
+      "tags": [
+        "c:add_sub",
+        "c:modular",
+        "m:extremal"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade7",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一隻青蛙站在數線上的 0。第 1 次跳 1 個單位，第 2 次跳 2 個單位，第 3 次跳 3 個單位，依此類推，第 k 次跳 k 個單位；每一次都可以自己選擇往左或往右跳。要恰好停在 12，最少要跳幾次？",
+        "zh-Hans": "一只青蛙站在数线上的 0。第 1 次跳 1 个单位，第 2 次跳 2 个单位，第 3 次跳 3 个单位，依此类推，第 k 次跳 k 个单位；每一次都可以自己选择往左或往右跳。要恰好停在 12，最少要跳几次？",
+        "en": "A frog sits at 0 on the number line. Its 1st jump is 1 unit, its 2nd is 2 units, its 3rd is 3 units, and so on: the k-th jump is k units, and each jump may go left or right. What is the fewest number of jumps needed to land exactly on 12?",
+        "ja": "数直線の 0 にカエルがいます。1 回目は 1、2 回目は 2、3 回目は 3、…と、k 回目は k だけ跳び、毎回左右どちらに跳ぶかを選べます。ちょうど 12 に止まるには、少なくとも何回跳ぶ必要がありますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 7。",
+        "zh-Hans": "答案是 7。",
+        "en": "The answer is 7.",
+        "ja": "答えは 7 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "跳 n 次後的位置 = (1 + 2 + ⋯ + n) − 2 ×（往左跳的那些步長之和）。所以 1 + 2 + ⋯ + n 至少要 12，而且它和 12 的差必須是偶數。",
+          "n = 5：和 15，15 − 12 = 3 是奇數，不行；n = 6：和 21，21 − 12 = 9 是奇數，不行；n ≤ 4 時和 ≤ 10 < 12，不行。",
+          "n = 7：和 28，28 − 12 = 16 是偶數，需要往左跳的步長和是 8。",
+          "例如第 1 次和第 7 次往左：−1 + 2 + 3 + 4 + 5 + 6 − 7 = 12 ✓。所以最少跳 7 次。"
+        ],
+        "zh-Hans": [
+          "跳 n 次后的位置 = (1 + 2 + ⋯ + n) − 2 ×（往左跳的那些步长之和）。所以 1 + 2 + ⋯ + n 至少要 12，而且它和 12 的差必须是偶数。",
+          "n = 5：和 15，15 − 12 = 3 是奇数，不行；n = 6：和 21，21 − 12 = 9 是奇数，不行；n ≤ 4 时和 ≤ 10 < 12，不行。",
+          "n = 7：和 28，28 − 12 = 16 是偶数，需要往左跳的步长和是 8。",
+          "例如第 1 次和第 7 次往左：−1 + 2 + 3 + 4 + 5 + 6 − 7 = 12 ✓。所以最少跳 7 次。"
+        ],
+        "en": [
+          "After n jumps the position is (1 + 2 + … + n) − 2 × (sum of the left jumps). So 1 + 2 + … + n must be at least 12 and differ from 12 by an even number.",
+          "n = 5: sum 15, 15 − 12 = 3 is odd, no; n = 6: sum 21, 21 − 12 = 9 is odd, no; for n ≤ 4 the sum is at most 10 < 12, no.",
+          "n = 7: sum 28, 28 − 12 = 16 is even; the left jumps must add up to 8.",
+          "For example jumps 1 and 7 to the left: −1 + 2 + 3 + 4 + 5 + 6 − 7 = 12 ✓. So the minimum is 7 jumps."
+        ],
+        "ja": [
+          "n 回跳んだ位置 = (1 + 2 + … + n) − 2 ×（左に跳んだ長さの和）。よって 1 + 2 + … + n は 12 以上で、12 との差が偶数でなければなりません。",
+          "n = 5：和 15、15 − 12 = 3 は奇数で不可。n = 6：和 21、21 − 12 = 9 は奇数で不可。n ≤ 4 は和が 10 以下で不可。",
+          "n = 7：和 28、28 − 12 = 16 は偶数で、左に跳ぶ長さの和は 8。",
+          "たとえば 1 回目と 7 回目を左に：−1 + 2 + 3 + 4 + 5 + 6 − 7 = 12 ✓。よって最少 7 回。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "7"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade7-foundation",
+        "notes": "步長 1,2,…,n 自選方向的奇偶與總和限制。掃過「跳」：logic_grade11_034（只能 +2 或 −3）、logic_grade8_007（+5 或 −3）是固定步長；本題步長遞增，推理點是奇偶性。"
+      }
     }
   ]
 }
