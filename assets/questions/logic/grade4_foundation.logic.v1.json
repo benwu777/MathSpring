@@ -5883,6 +5883,78 @@
         "reference": "logic-grade4-foundation",
         "notes": "路線圖上的最少換乘（下界論證加構造），答案以 BFS 驗證。掃過「航線|轉機|轉車|直達|捷運」「路線」「道路|修路|連通」；讀過 logic_grade10_foundation_049（捷運地面站與地下站的路徑奇偶）、logic_grade7_foundation_040（連通最少道路）、arithmetic_grade4_foundation_087（車票種類）、arithmetic_grade1_foundation_029（路線乘法原理）。"
       }
+    },
+    {
+      "id": "logic_grade4_foundation_074",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "shared_bread_fair_payment",
+      "tags": [
+        "c:fraction",
+        "c:ratio",
+        "m:unit_analysis"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade4",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "甲帶了 5 個麵包，乙帶了 3 個麵包，麵包都一樣大；丙沒有帶麵包。三個人把這 8 個麵包全部平分吃完。吃完後，丙拿出 8 枚硬幣付給甲和乙，要按照甲、乙各自「分給丙吃的麵包有多少」來分這 8 枚硬幣。甲應該分到幾枚硬幣？",
+        "zh-Hans": "甲带了 5 个面包，乙带了 3 个面包，面包都一样大；丙没有带面包。三个人把这 8 个面包全部平分吃完。吃完后，丙拿出 8 枚硬币付给甲和乙，要按照甲、乙各自「分给丙吃的面包有多少」来分这 8 枚硬币。甲应该分到几枚硬币？",
+        "en": "A brought 5 loaves and B brought 3 loaves, all the same size; C brought none. The three of them shared all 8 loaves equally. Afterwards C pays 8 coins to A and B, divided according to how much bread each of A and B gave up for C to eat. How many coins should A receive?",
+        "ja": "甲は パンを 5こ、乙は 3こ もってきました。パンは どれも 同じ 大きさで、丙は もってきませんでした。3人で 8この パンを 同じ りょうずつ ぜんぶ 食べました。そのあと 丙が コイン 8まいを 甲と 乙に はらい、甲と 乙が それぞれ 丙に 分けた パンの りょうに 合わせて 分けます。甲は コインを 何まい もらえば よいですか。"
+      },
+      "answer": {
+        "zh-Hant": "甲應該分到 7 枚硬幣。",
+        "zh-Hans": "甲应该分到 7 枚硬币。",
+        "en": "A should receive 7 coins.",
+        "ja": "7まい です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "8 個麵包三人平分，每人吃 8/3 個，也就是 2 又 2/3 個。",
+          "把每個麵包切成 3 等份來看：甲有 15 份，乙有 9 份，每人吃 8 份。",
+          "甲分給丙 15 − 8 = 7 份，乙分給丙 9 − 8 = 1 份，丙吃的 8 份正好是 7 + 1。",
+          "8 枚硬幣按 7 : 1 分，每份 1 枚，甲分到 7 枚（乙 1 枚）。"
+        ],
+        "zh-Hans": [
+          "8 个面包三人平分，每人吃 8/3 个，也就是 2 又 2/3 个。",
+          "把每个面包切成 3 等份来看：甲有 15 份，乙有 9 份，每人吃 8 份。",
+          "甲分给丙 15 − 8 = 7 份，乙分给丙 9 − 8 = 1 份，丙吃的 8 份正好是 7 + 1。",
+          "8 枚硬币按 7 : 1 分，每份 1 枚，甲分到 7 枚（乙 1 枚）。"
+        ],
+        "en": [
+          "Sharing 8 loaves among 3, each eats 8/3 = 2 2/3 loaves.",
+          "Cut each loaf into 3 equal parts: A has 15 parts, B has 9 parts, and each person eats 8 parts.",
+          "A gives C 15 − 8 = 7 parts and B gives 9 − 8 = 1 part; C eats 7 + 1 = 8 parts.",
+          "Split the 8 coins 7 : 1, so A gets 7 coins (B gets 1)."
+        ],
+        "ja": [
+          "8こを 3人で 分けるので、1人 8/3 こ、つまり 2と 2/3 こ 食べます。",
+          "パンを 1こ 3つに 分けて 考えると、甲は 15こ分、乙は 9こ分 もっていて、1人 8こ分 食べます。",
+          "甲は 丙に 15 − 8 = 7こ分、乙は 9 − 8 = 1こ分 わたし、丙の 8こ分は 7 + 1 です。",
+          "8まいを 7 : 1 で 分けて、甲は 7まい（乙は 1まい）です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "7"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade4-foundation",
+        "notes": "經典「五三分餅」：按實際讓出的量分錢，不是按帶來的量。掃過「麵包|硬幣|平分.{0,10}吃」：algebra_grade7_036（麵包飲料方程組）、arithmetic_grade3_116（三人先付款後分攤，找平）。差異：grade3_116 是錢的多退少補；這題要先算各自讓出的分數量（直覺答案 5 枚是錯的）。"
+      }
     }
   ]
 }

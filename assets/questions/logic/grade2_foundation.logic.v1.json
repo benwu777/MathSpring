@@ -5734,6 +5734,460 @@
         "reference": "logic-grade2-foundation",
         "notes": "4 × 4 迷你數獨的連鎖推理（題目由程式窮舉 288 種完整盤面確認只有唯一解）。掃過「數獨」「九宮格」「每一橫排.*每一直行」；讀過 logic_grade4_foundation_068（九宮格填 1–3 的線和鴿籠）、logic_grade5_foundation_063 與 logic_grade7_foundation_013（魔方陣中心）、geometry_grade3_foundation_069（九宮格對稱塗色）。庫中沒有數獨題。"
       }
+    },
+    {
+      "id": "logic_grade2_foundation_075",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "symmetric_row_coloring_count",
+      "tags": [
+        "c:symmetry",
+        "c:basic_counting",
+        "m:enumeration"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade2",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一排有 5 個方格，每一格都要塗紅色或藍色（可以全部塗同一種顏色）。塗好之後，這一排從左邊看過去和從右邊看過去要完全一樣。一共有幾種不同的塗法？",
+        "zh-Hans": "一排有 5 个方格，每一格都要涂红色或蓝色（可以全部涂同一种颜色）。涂好之后，这一排从左边看过去和从右边看过去要完全一样。一共有几种不同的涂法？",
+        "en": "A row has 5 squares. Each square is coloured red or blue (all the same colour is allowed). After colouring, the row must look exactly the same from the left as from the right. How many different colourings are there?",
+        "ja": "5この ますが 1れつに ならんでいます。どの ますも 赤か 青で ぬります（ぜんぶ 同じ 色でも よい）。ぬった あと、左から 見ても 右から 見ても まったく 同じに なるように します。ぬりかたは ぜんぶで なんとおり ありますか。"
+      },
+      "answer": {
+        "zh-Hant": "一共有 8 種塗法。",
+        "zh-Hans": "一共有 8 种涂法。",
+        "en": "There are 8 colourings.",
+        "ja": "ぜんぶで 8とおり です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "左右看起來一樣，第 5 格要和第 1 格同色，第 4 格要和第 2 格同色。",
+          "所以只要決定第 1、2、3 格，第 4、5 格就跟著決定了。",
+          "第 1 格有 2 種選法，第 2 格有 2 種，第 3 格有 2 種：2 × 2 × 2 = 8。",
+          "一共 8 種塗法。"
+        ],
+        "zh-Hans": [
+          "左右看起来一样，第 5 格要和第 1 格同色，第 4 格要和第 2 格同色。",
+          "所以只要决定第 1、2、3 格，第 4、5 格就跟着决定了。",
+          "第 1 格有 2 种选法，第 2 格有 2 种，第 3 格有 2 种：2 × 2 × 2 = 8。",
+          "一共 8 种涂法。"
+        ],
+        "en": [
+          "To look the same both ways, square 5 must match square 1 and square 4 must match square 2.",
+          "So once squares 1, 2 and 3 are chosen, squares 4 and 5 are fixed.",
+          "Squares 1, 2, 3 each have 2 choices: 2 × 2 × 2 = 8.",
+          "There are 8 colourings."
+        ],
+        "ja": [
+          "左右 同じに 見えるには、5ばんめは 1ばんめと、4ばんめは 2ばんめと 同じ 色です。",
+          "だから 1、2、3ばんめを きめれば、4、5ばんめも きまります。",
+          "1、2、3ばんめは それぞれ 2とおり：2 × 2 × 2 = 8。",
+          "ぜんぶで 8とおり です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "8"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade2-foundation",
+        "notes": "對稱讓一半的格子被決定，只數前半加中間。掃「塗.{0,8}色|左右對稱」：logic_grade2_061（給定 2 紅 2 綠 1 藍，推藍色位置）、combinatorics_grade10_036（相鄰不同色的塗法）、combinatorics_grade11_015（手環旋轉翻面）。本題是無數量限制的對稱塗法計數。"
+      }
+    },
+    {
+      "id": "logic_grade2_foundation_076",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "digital_clock_palindrome_times",
+      "tags": [
+        "c:symmetry",
+        "c:basic_counting",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade2",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "電子鐘用「時:分」顯示時間，例如 9:05、11:40（分鐘一定寫兩位數，小時不寫前面的 0）。把冒號拿掉，9:09 變成 909、12:21 變成 1221，從左讀和從右讀都一樣。從 9:00 到 12:59 之間，這樣的時刻一共有幾個？",
+        "zh-Hans": "电子钟用“时:分”显示时间，例如 9:05、11:40（分钟一定写两位数，小时不写前面的 0）。把冒号拿掉，9:09 变成 909、12:21 变成 1221，从左读和从右读都一样。从 9:00 到 12:59 之间，这样的时刻一共有几个？",
+        "en": "A digital clock shows \"hour:minute\", such as 9:05 or 11:40 (minutes always use two digits; the hour has no leading 0). Removing the colon, 9:09 becomes 909 and 12:21 becomes 1221, which read the same both ways. From 9:00 to 12:59, how many times like this are there?",
+        "ja": "デジタル時計は「時:分」で 9:05、11:40 のように 時こくを 見せます（分は かならず 2けた、時の まえに 0は つけません）。「:」を とると 9:09 は 909、12:21 は 1221 に なり、左から よんでも 右から よんでも 同じです。9:00 から 12:59 までに、このような 時こくは いくつ ありますか。"
+      },
+      "answer": {
+        "zh-Hant": "一共有 9 個。",
+        "zh-Hans": "一共有 9 个。",
+        "en": "There are 9 such times.",
+        "ja": "ぜんぶで 9こ です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "9 點的時刻是三位數「9 □ □」，左右讀一樣，個位要是 9，十位可以是 0 到 5：9:09、9:19、9:29、9:39、9:49、9:59，共 6 個。",
+          "10、11、12 點是四位數，分鐘要把小時倒過來寫：10 點配 01、11 點配 11、12 點配 21。",
+          "10:01、11:11、12:21 都是真的時刻，共 3 個。",
+          "6 + 3 = 9 個。"
+        ],
+        "zh-Hans": [
+          "9 点的时刻是三位数“9 □ □”，左右读一样，个位要是 9，十位可以是 0 到 5：9:09、9:19、9:29、9:39、9:49、9:59，共 6 个。",
+          "10、11、12 点是四位数，分钟要把小时倒过来写：10 点配 01、11 点配 11、12 点配 21。",
+          "10:01、11:11、12:21 都是真的时刻，共 3 个。",
+          "6 + 3 = 9 个。"
+        ],
+        "en": [
+          "Times at 9 o'clock are three digits \"9 _ _\"; to read the same both ways the last digit must be 9 and the middle can be 0 to 5: 9:09, 9:19, 9:29, 9:39, 9:49, 9:59, which is 6 times.",
+          "At 10, 11 and 12 the display has four digits, so the minutes must be the hour written backwards: 10 with 01, 11 with 11, 12 with 21.",
+          "10:01, 11:11 and 12:21 are all real times: 3 more.",
+          "6 + 3 = 9 times."
+        ],
+        "ja": [
+          "9時台は 3けたの「9 □ □」で、一のくらいは 9、十のくらいは 0から 5：9:09、9:19、9:29、9:39、9:49、9:59 の 6こ。",
+          "10、11、12時は 4けたなので、分は 時を ぎゃくに したもの：10時は 01、11時は 11、12時は 21。",
+          "10:01、11:11、12:21 は どれも ある 時こくで、3こ。",
+          "6 + 3 = 9こ です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "9"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade2-foundation",
+        "notes": "回文時刻要分三位數與四位數兩種情況，且分鐘十位不能超過 5。掃「電子鐘|時刻|左右讀」：logic_grade7_044（一天出現幾次數字 3）、logic_grade4_064（四個數字互不相同最少再過幾分鐘）、algebra_grade7_090（里程表回文）。本題是低年級的回文時刻分類計數。"
+      }
+    },
+    {
+      "id": "logic_grade2_foundation_077",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "balance_flip_after_removal",
+      "tags": [
+        "c:balance",
+        "c:compare_order",
+        "m:contradiction"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade2",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "天平左盤放 3 顆一樣的蘋果，右盤放 2 顆一樣的梨子，左盤往下沉。從左盤拿走 1 顆蘋果以後，換成右盤往下沉。下面哪一句話一定對？",
+        "zh-Hans": "天平左盘放 3 颗一样的苹果，右盘放 2 颗一样的梨子，左盘往下沉。从左盘拿走 1 颗苹果以后，换成右盘往下沉。下面哪一句话一定对？",
+        "en": "A balance has 3 identical apples on the left and 2 identical pears on the right, and the left pan goes down. After 1 apple is removed from the left, the right pan goes down instead. Which statement must be true?",
+        "ja": "てんびんの 左に 同じ りんごを 3こ、右に 同じ なしを 2こ のせると、左が さがりました。左から りんごを 1こ とると、こんどは 右が さがりました。かならず 正しいのは どれですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 A：1 顆蘋果比 1 顆梨子輕。",
+        "zh-Hans": "答案是 A：1 颗苹果比 1 颗梨子轻。",
+        "en": "The answer is A: 1 apple is lighter than 1 pear.",
+        "ja": "答えは A です。りんご 1こは なし 1こより かるいです。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "拿走 1 顆後，左盤剩 2 顆蘋果，右盤是 2 顆梨子，右盤沉下去，表示 2 顆梨子比 2 顆蘋果重。",
+          "兩邊都是 2 顆，所以 1 顆梨子比 1 顆蘋果重，也就是 1 顆蘋果比 1 顆梨子輕。",
+          "第一次左盤沉下去，只是因為蘋果多放了 1 顆，不能說蘋果比較重。",
+          "答案是 A。"
+        ],
+        "zh-Hans": [
+          "拿走 1 颗后，左盘剩 2 颗苹果，右盘是 2 颗梨子，右盘沉下去，表示 2 颗梨子比 2 颗苹果重。",
+          "两边都是 2 颗，所以 1 颗梨子比 1 颗苹果重，也就是 1 颗苹果比 1 颗梨子轻。",
+          "第一次左盘沉下去，只是因为苹果多放了 1 颗，不能说苹果比较重。",
+          "答案是 A。"
+        ],
+        "en": [
+          "After removing 1 apple, the left holds 2 apples and the right 2 pears, and the right goes down: 2 pears are heavier than 2 apples.",
+          "Both sides have 2 fruits, so 1 pear is heavier than 1 apple; that is, 1 apple is lighter than 1 pear.",
+          "The left went down at first only because it had one more fruit; that does not make an apple heavier.",
+          "The answer is A."
+        ],
+        "ja": [
+          "1こ とると 左は りんご 2こ、右は なし 2こで、右が さがったので、なし 2こは りんご 2こより おもいです。",
+          "どちらも 2こ なので、なし 1こは りんご 1こより おもい、つまり りんご 1こは なし 1こより かるいです。",
+          "はじめ 左が さがったのは、りんごが 1こ おおかった からで、りんごが おもいとは いえません。",
+          "答えは A です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "multiple_choice",
+      "options": {
+        "A": {
+          "zh-Hant": "1 顆蘋果比 1 顆梨子輕，因為 2 顆梨子比 2 顆蘋果重",
+          "zh-Hans": "1 颗苹果比 1 颗梨子轻，因为 2 颗梨子比 2 颗苹果重",
+          "en": "1 apple is lighter than 1 pear, since 2 pears outweigh 2 apples",
+          "ja": "りんご 1こは なし 1こより かるい。なし 2こが りんご 2こより おもいから"
+        },
+        "B": {
+          "zh-Hant": "1 顆蘋果比 1 顆梨子重，因為一開始是蘋果那一盤沉下去",
+          "zh-Hans": "1 颗苹果比 1 颗梨子重，因为一开始是苹果那一盘沉下去",
+          "en": "1 apple is heavier than 1 pear, since the apple pan went down first",
+          "ja": "りんご 1こは なし 1こより おもい。さいしょは りんごの ほうが さがったから"
+        },
+        "C": {
+          "zh-Hant": "1 顆蘋果和 1 顆梨子一樣重，因為天平兩次沉的方向不同",
+          "zh-Hans": "1 颗苹果和 1 颗梨子一样重，因为天平两次沉的方向不同",
+          "en": "1 apple and 1 pear weigh the same, since the two results disagree",
+          "ja": "りんご 1こと なし 1こは 同じ。2回の けっかが ぎゃくだから"
+        },
+        "D": {
+          "zh-Hant": "不能確定，因為蘋果和梨子從來沒有一顆對一顆比過",
+          "zh-Hans": "不能确定，因为苹果和梨子从来没有一颗对一颗比过",
+          "en": "Cannot tell, since they were never compared one against one",
+          "ja": "わからない。1こずつで くらべた ことが ないから"
+        }
+      },
+      "correctAnswer": {
+        "type": "choice",
+        "value": "A"
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade2-foundation",
+        "notes": "兩次天平結果中，第二次是 2 對 2 的公平比較，第一次的多一顆是干擾。掃「天平|往下沉|比.{0,6}重」：logic_grade6_065（兩次實驗判最重最輕）、logic_grade4_032（找較重蘋果）、logic_grade4_070（2 蘋果 = 3 橘子且差 50 克）。本題考辨認哪一次比較才有意義。"
+      }
+    },
+    {
+      "id": "logic_grade2_foundation_078",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "rank_with_ties_count",
+      "tags": [
+        "c:compare_order",
+        "c:add_sub",
+        "m:direct"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade2",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "全班 30 人考數學。小安的分數比班上 12 個人高，比班上 15 個人低，其餘的同學都和小安同分。除了小安自己，和小安同分的有幾個人？",
+        "zh-Hans": "全班 30 人考数学。小安的分数比班上 12 个人高，比班上 15 个人低，其余的同学都和小安同分。除了小安自己，和小安同分的有几个人？",
+        "en": "A class of 30 takes a maths test. An scored higher than 12 classmates and lower than 15 classmates; all the other classmates got the same score as An. Not counting An, how many got the same score as An?",
+        "ja": "クラス 30人で 算数の テストを しました。アンの 点は 12人より 高く、15人より ひくく、のこりの 人は みんな アンと 同じ 点でした。アンを のぞいて、アンと 同じ 点の 人は なん人 いますか。"
+      },
+      "answer": {
+        "zh-Hant": "和小安同分的有 2 人。",
+        "zh-Hans": "和小安同分的有 2 人。",
+        "en": "2 classmates have the same score.",
+        "ja": "アンと 同じ 点の 人は 2人 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "全班 30 人，先扣掉小安自己，剩 30 − 1 = 29 人。",
+          "這 29 人分成三種：比小安低的 12 人、比小安高的 15 人、和小安同分的。",
+          "和小安同分的有 29 − 12 − 15 = 2 人。",
+          "所以是 2 人。"
+        ],
+        "zh-Hans": [
+          "全班 30 人，先扣掉小安自己，剩 30 − 1 = 29 人。",
+          "这 29 人分成三种：比小安低的 12 人、比小安高的 15 人、和小安同分的。",
+          "和小安同分的有 29 − 12 − 15 = 2 人。",
+          "所以是 2 人。"
+        ],
+        "en": [
+          "There are 30 in the class; leaving out An gives 30 − 1 = 29 others.",
+          "These 29 are of three kinds: 12 below An, 15 above An, and those equal to An.",
+          "Those equal to An: 29 − 12 − 15 = 2.",
+          "So 2 classmates."
+        ],
+        "ja": [
+          "30人から アンを のぞくと 30 − 1 = 29人。",
+          "この 29人は、アンより ひくい 12人、アンより 高い 15人、アンと 同じ 人の 3つに 分かれます。",
+          "同じ 点の 人は 29 − 12 − 15 = 2人。",
+          "だから 2人 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "2"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade2-foundation",
+        "notes": "比較關係把全班分成高、低、同三類，要記得扣掉自己。掃「同分|並列|名次」：arithmetic_grade1_090（第 3 名與最後一名間夾 3 人）、logic_grade11_042（無同分名次換百分比）、logic_grade2_047（排隊人數）。本題允許同分，是分類計數。"
+      }
+    },
+    {
+      "id": "logic_grade2_foundation_079",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "three_guesses_distances",
+      "tags": [
+        "c:compare_order",
+        "c:logic_deduction",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade2",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "罐子裡有一些彈珠。小安猜 45 顆，小美猜 52 顆，小華猜 60 顆。打開一數，三個人猜的數和真正的顆數分別差了 3 顆、4 顆、11 顆（不知道誰差幾顆）。罐子裡有幾顆彈珠？",
+        "zh-Hans": "罐子里有一些弹珠。小安猜 45 颗，小美猜 52 颗，小华猜 60 颗。打开一数，三个人猜的数和真正的颗数分别差了 3 颗、4 颗、11 颗（不知道谁差几颗）。罐子里有几颗弹珠？",
+        "en": "A jar holds some marbles. An guesses 45, Mei guesses 52 and Hua guesses 60. When counted, the three guesses were off by 3, 4 and 11 (we do not know who was off by how much). How many marbles are in the jar?",
+        "ja": "びんに ビーだまが 入っています。アンは 45こ、メイは 52こ、ホアは 60こと よそうしました。かぞえてみると、3人の よそうと ほんとうの かずの ちがいは 3こ、4こ、11こ でした（だれが いくつ ちがったかは わかりません）。ビーだまは なんこ ですか。"
+      },
+      "answer": {
+        "zh-Hant": "罐子裡有 49 顆彈珠。",
+        "zh-Hans": "罐子里有 49 颗弹珠。",
+        "en": "There are 49 marbles.",
+        "ja": "ビーだまは 49こ です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "45 和 60 相差 15，而 4 + 11 = 15，所以真正的顆數夾在 45 和 60 中間，離其中一個 4、離另一個 11。",
+          "如果離 45 差 4，就是 49；如果離 60 差 4，就是 56。",
+          "49 和小美的 52 差 3，剛好符合；56 和 52 差 4，差距會出現兩次 4，不符合。",
+          "所以罐子裡有 49 顆。（檢查：49 和 45、52、60 分別差 4、3、11。）"
+        ],
+        "zh-Hans": [
+          "45 和 60 相差 15，而 4 + 11 = 15，所以真正的颗数夹在 45 和 60 中间，离其中一个 4、离另一个 11。",
+          "如果离 45 差 4，就是 49；如果离 60 差 4，就是 56。",
+          "49 和小美的 52 差 3，刚好符合；56 和 52 差 4，差距会出现两次 4，不符合。",
+          "所以罐子里有 49 颗。（检查：49 和 45、52、60 分别差 4、3、11。）"
+        ],
+        "en": [
+          "45 and 60 are 15 apart, and 4 + 11 = 15, so the true number lies between 45 and 60, 4 from one of them and 11 from the other.",
+          "4 from 45 gives 49; 4 from 60 gives 56.",
+          "49 is 3 from Mei's 52, which fits; 56 is 4 from 52, giving two errors of 4, which does not fit.",
+          "So there are 49 marbles. (Check: 49 is 4, 3 and 11 away from 45, 52 and 60.)"
+        ],
+        "ja": [
+          "45と 60の ちがいは 15、4 + 11 = 15 なので、ほんとうの かずは 45と 60の あいだで、かたほうから 4、もう かたほうから 11 はなれています。",
+          "45から 4なら 49、60から 4なら 56。",
+          "49は メイの 52と 3 ちがいで 合います。56は 52と 4 ちがいで、4が 2回に なり 合いません。",
+          "だから 49こ です。（45、52、60 との ちがいは 4、3、11。）"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "49"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade2-foundation",
+        "notes": "由三個差距推回真值；關鍵觀察 45 與 60 相差 15 = 4 + 11。掃「猜」10 題：logic_grade3_038（兩人說對求數字）、logic_grade1_081（一對一錯）、logic_grade5_040（四人恰一人錯）。沒有以猜測誤差量推回真值的題。答案經窮舉 0 到 199 唯一。"
+      }
+    },
+    {
+      "id": "logic_grade2_foundation_080",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "partition_ten_into_three_piles",
+      "tags": [
+        "c:basic_counting",
+        "c:add_sub",
+        "m:enumeration"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade2",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "小安把 10 顆糖分成 3 堆，每堆至少 1 顆。只看每堆的顆數，不管哪一堆放在哪裡（例如 5、3、2 和 2、3、5 算同一種）。一共有幾種不同的分法？",
+        "zh-Hans": "小安把 10 颗糖分成 3 堆，每堆至少 1 颗。只看每堆的颗数，不管哪一堆放在哪里（例如 5、3、2 和 2、3、5 算同一种）。一共有几种不同的分法？",
+        "en": "An splits 10 sweets into 3 piles, each with at least 1 sweet. Only the pile sizes matter, not their order (5, 3, 2 and 2, 3, 5 count as the same). How many different ways are there?",
+        "ja": "アンは あめ 10こを 3つの 山に 分けます。どの 山も 1こいじょう です。山の こすうだけを 見て、ならびかたは 考えません（5、3、2 と 2、3、5 は 同じ）。分けかたは ぜんぶで なんとおり ありますか。"
+      },
+      "answer": {
+        "zh-Hant": "一共有 8 種分法。",
+        "zh-Hans": "一共有 8 种分法。",
+        "en": "There are 8 ways.",
+        "ja": "ぜんぶで 8とおり です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "把三堆由多到少寫，才不會重複。先看最多的那一堆。",
+          "最多的是 8：8、1、1。最多的是 7：7、2、1。最多的是 6：6、3、1 和 6、2、2。",
+          "最多的是 5：5、4、1 和 5、3、2。最多的是 4：4、4、2 和 4、3、3。最多的那堆不能小於 4，因為 3 + 3 + 3 = 9 不夠 10。",
+          "1 + 1 + 2 + 2 + 2 = 8 種。"
+        ],
+        "zh-Hans": [
+          "把三堆由多到少写，才不会重复。先看最多的那一堆。",
+          "最多的是 8：8、1、1。最多的是 7：7、2、1。最多的是 6：6、3、1 和 6、2、2。",
+          "最多的是 5：5、4、1 和 5、3、2。最多的是 4：4、4、2 和 4、3、3。最多的那堆不能小于 4，因为 3 + 3 + 3 = 9 不够 10。",
+          "1 + 1 + 2 + 2 + 2 = 8 种。"
+        ],
+        "en": [
+          "Write the piles from largest to smallest to avoid repeats, and sort by the largest pile.",
+          "Largest 8: 8, 1, 1. Largest 7: 7, 2, 1. Largest 6: 6, 3, 1 and 6, 2, 2.",
+          "Largest 5: 5, 4, 1 and 5, 3, 2. Largest 4: 4, 4, 2 and 4, 3, 3. The largest cannot be less than 4, since 3 + 3 + 3 = 9 is not enough.",
+          "1 + 1 + 2 + 2 + 2 = 8 ways."
+        ],
+        "ja": [
+          "山を おおい じゅんに 書くと、かさなりません。いちばん おおい 山で 分けます。",
+          "いちばん おおいのが 8：8、1、1。7：7、2、1。6：6、3、1 と 6、2、2。",
+          "5：5、4、1 と 5、3、2。4：4、4、2 と 4、3、3。3 + 3 + 3 = 9 で たりないので、いちばん おおい 山は 4より 小さく なりません。",
+          "1 + 1 + 2 + 2 + 2 = 8とおり です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "8"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade2-foundation",
+        "notes": "整數分拆（不計順序），用由大到小排列有系統地列舉。掃「分成.{0,4}堆|分給.{0,10}至少」：logic_grade2_049（7 顆分三人各不相同的最大者最小）、arithmetic_grade4_028（4 人兩兩分組）、arithmetic_grade2_087（15 元分袋）。本題計數不計順序、允許相同。"
+      }
     }
   ]
 }
