@@ -4773,6 +4773,360 @@
         "reference": "logic-grade12-fifteen-puzzle-invariant",
         "notes": "題型取自 Sam Loyd 的 14-15 拼圖與 Johnson & Story 1879 年的不可解證明（Wikipedia「15 puzzle」條目詳述排列奇偶加空格曼哈頓距離奇偶的合併不變量）。本題保留原始配置，做成辨識正確論證的選擇題。全庫掃 拼圖/滑動/空格/奇偶 各題：logic_grade11_010 是四張卡片相鄰對調排序的最少次數（計數題）、logic_grade12_042 是 2×3 盤上不重複踏格的博弈、logic_grade9_026 是移動硬幣翻轉三角形，沒有任何一題用到排列奇偶性這個不變量，也沒有任何一題是滑塊拼圖。"
       }
+    },
+    {
+      "id": "logic_grade12_foundation_050",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "zero_sum_game_equalizing_mixed_strategy",
+      "tags": [
+        "c:game_theory",
+        "c:expectation",
+        "m:extremal"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "甲把一枚硬幣藏在左手或右手，讓乙猜在哪一手。規則：乙猜左手而且猜中，甲付乙 4 元；乙猜右手而且猜中，甲付乙 1 元；乙猜錯，乙付甲 1 元。這個遊戲要玩很多局。甲決定每一局都以同一個機率 p 把硬幣藏在左手，並把 p 選成「不論乙猜哪一手，乙每局的期望收益都一樣」。把 p 寫成最簡分數 m/n，求 m + n。",
+        "zh-Hans": "甲把一枚硬币藏在左手或右手，让乙猜在哪一手。规则：乙猜左手而且猜中，甲付乙 4 元；乙猜右手而且猜中，甲付乙 1 元；乙猜错，乙付甲 1 元。这个游戏要玩很多局。甲决定每一局都以同一个机率 p 把硬币藏在左手，并把 p 选成「不论乙猜哪一手，乙每局的期望收益都一样」。把 p 写成最简分数 m/n，求 m + n。",
+        "en": "A hides a coin in the left or right hand and B guesses which. Rules: if B guesses left and is right, A pays B 4 dollars; if B guesses right and is right, A pays B 1 dollar; if B guesses wrong, B pays A 1 dollar. They play many rounds. A hides the coin in the left hand with the same probability p every round, choosing p so that B’s expected gain per round is the same whichever hand B guesses. Write p = m/n in lowest terms and find m + n.",
+        "ja": "甲がコインを左手か右手にかくし、乙がどちらの手かを当てます。ルール：乙が左と言って当たれば甲が乙に 4 円払う、右と言って当たれば甲が乙に 1 円払う、外れたら乙が甲に 1 円払う。何回も行います。甲は毎回同じ確率 p でコインを左手にかくし、p を「乙がどちらの手を言っても、乙の 1 回あたりの期待値が同じになる」ように選びます。p を既約分数 m/n で表すとき、m + n を求めなさい。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 9。",
+        "zh-Hans": "答案是 9。",
+        "en": "The answer is 9.",
+        "ja": "答えは 9 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "乙猜左手：以機率 p 猜中得 4 元，以機率 1 − p 猜錯付 1 元，期望收益 4p − (1 − p) = 5p − 1。",
+          "乙猜右手：以機率 1 − p 猜中得 1 元，以機率 p 猜錯付 1 元，期望收益 (1 − p) − p = 1 − 2p。",
+          "兩者相等：5p − 1 = 1 − 2p → 7p = 2 → p = 2/7。",
+          "此時乙不論怎麼猜，每局期望收益都是 5 × 2/7 − 1 = 3/7 元；若 p 偏離 2/7，乙只要固定猜期望較高的那一手，就能拿到超過 3/7 元，所以這是甲最保險的選法。",
+          "m/n = 2/7，m + n = 9。"
+        ],
+        "zh-Hans": [
+          "乙猜左手：以机率 p 猜中得 4 元，以机率 1 − p 猜错付 1 元，期望收益 4p − (1 − p) = 5p − 1。",
+          "乙猜右手：以机率 1 − p 猜中得 1 元，以机率 p 猜错付 1 元，期望收益 (1 − p) − p = 1 − 2p。",
+          "两者相等：5p − 1 = 1 − 2p → 7p = 2 → p = 2/7。",
+          "此时乙不论怎么猜，每局期望收益都是 5 × 2/7 − 1 = 3/7 元；若 p 偏离 2/7，乙只要固定猜期望较高的那一手，就能拿到超过 3/7 元，所以这是甲最保险的选法。",
+          "m/n = 2/7，m + n = 9。"
+        ],
+        "en": [
+          "B guesses left: wins 4 with probability p and pays 1 with probability 1 − p, expected gain 4p − (1 − p) = 5p − 1.",
+          "B guesses right: wins 1 with probability 1 − p and pays 1 with probability p, expected gain (1 − p) − p = 1 − 2p.",
+          "Setting them equal: 5p − 1 = 1 − 2p → 7p = 2 → p = 2/7.",
+          "Then B’s expected gain is 5 × 2/7 − 1 = 3/7 per round whatever B does; if p moved away from 2/7, B could always guess the better hand and get more than 3/7, so this is A’s safest choice.",
+          "m/n = 2/7, so m + n = 9."
+        ],
+        "ja": [
+          "乙が左と言う場合：確率 p で当たって 4 円、確率 1 − p で外れて 1 円払うので、期待値は 4p − (1 − p) = 5p − 1。",
+          "乙が右と言う場合：確率 1 − p で当たって 1 円、確率 p で外れて 1 円払うので、期待値は (1 − p) − p = 1 − 2p。",
+          "等しいとおくと 5p − 1 = 1 − 2p → 7p = 2 → p = 2/7。",
+          "このとき乙がどう言っても 1 回あたりの期待値は 5 × 2/7 − 1 = 3/7 円。p が 2/7 からずれると、乙は期待値の高いほうを言い続ければ 3/7 円より多く得られるので、これが甲にとっていちばん安全な選び方です。",
+          "m/n = 2/7 なので m + n = 9。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "9"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade12-foundation",
+        "notes": "題型：二人零和賽局的混合策略（讓對手兩種選擇期望相同）。掃過 猜|藏|賽局|策略|期望 全庫：logic 的賽局題都是取石子、報數等「必勝策略」，combinatorics_grade10_045 是公平入場費；沒有混合策略。"
+      }
+    },
+    {
+      "id": "logic_grade12_foundation_051",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "three_hat_guessing_with_pass",
+      "tags": [
+        "c:probability",
+        "c:logic_deduction",
+        "m:construction",
+        "m:estimate_bound"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "甲、乙、丙三人各被戴上一頂帽子，每頂帽子是紅色或藍色，各自以 1/2 的機率決定、互相獨立。每個人看得到另外兩人的帽子，看不到自己的。三人事先可以商量策略，但戴上帽子後不能交談；然後三人同時各寫下一個答案：猜「紅」、猜「藍」或「棄權」。只要至少有一人猜了，而且猜的人全部猜對，三人就一起獲勝。在最好的策略下，獲勝的機率是百分之幾？",
+        "zh-Hans": "甲、乙、丙三人各被戴上一顶帽子，每顶帽子是红色或蓝色，各自以 1/2 的机率决定、互相独立。每个人看得到另外两人的帽子，看不到自己的。三人事先可以商量策略，但戴上帽子后不能交谈；然后三人同时各写下一个答案：猜「红」、猜「蓝」或「弃权」。只要至少有一人猜了，而且猜的人全部猜对，三人就一起获胜。在最好的策略下，获胜的机率是百分之几？",
+        "en": "Three players each receive a hat, red or blue, each colour with probability 1/2, independently. Everyone sees the other two hats but not their own. They may agree on a strategy beforehand but cannot communicate afterwards; then all three simultaneously write “red”, “blue” or “pass”. They win together if at least one person guesses and every person who guesses is correct. With the best strategy, what is the winning probability, as a percentage?",
+        "ja": "甲、乙、丙の 3 人がそれぞれ赤か青の帽子をかぶります。色はそれぞれ確率 1/2 で独立に決まります。各人はほかの 2 人の帽子は見えますが、自分のは見えません。前もって作戦を相談できますが、帽子をかぶった後は話せません。その後 3 人は同時に「赤」「青」「パス」のどれかを書きます。少なくとも 1 人が色を答え、答えた人が全員正しければ 3 人の勝ちです。最もよい作戦で勝つ確率は何 % ですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 75。",
+        "zh-Hans": "答案是 75。",
+        "en": "The answer is 75.",
+        "ja": "答えは 75 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "策略：若看到的兩頂帽子同色，就猜自己是另一種顏色；若看到的兩頂異色，就棄權。",
+          "8 種戴法中，三頂全同色的有 2 種：這時每個人都看到同色而猜另一色，全部猜錯，輸。",
+          "其餘 6 種是「兩頂同色、一頂異色」：戴異色帽的人看到兩頂同色，猜另一色——正好猜對；另外兩人看到異色而棄權。贏。所以獲勝機率 6/8 = 75%。",
+          "不可能更好：每個人猜的時候，自己的帽子是紅或藍的機會相同，所以把 8 種情形合起來，「猜對的次數」等於「猜錯的次數」。每個獲勝情形至少用掉 1 次猜對，每個輸的情形最多只能有 3 次猜錯。",
+          "設贏 W 種、輸 L 種，則 W ≤ 猜對次數 = 猜錯次數 ≤ 3L，又 W + L = 8，所以 W ≤ 6，機率最多 6/8。",
+          "答案是 75。"
+        ],
+        "zh-Hans": [
+          "策略：若看到的两顶帽子同色，就猜自己是另一种颜色；若看到的两顶异色，就弃权。",
+          "8 种戴法中，三顶全同色的有 2 种：这时每个人都看到同色而猜另一色，全部猜错，输。",
+          "其余 6 种是「两顶同色、一顶异色」：戴异色帽的人看到两顶同色，猜另一色——正好猜对；另外两人看到异色而弃权。赢。所以获胜机率 6/8 = 75%。",
+          "不可能更好：每个人猜的时候，自己的帽子是红或蓝的机会相同，所以把 8 种情形合起来，「猜对的次数」等于「猜错的次数」。每个获胜情形至少用掉 1 次猜对，每个输的情形最多只能有 3 次猜错。",
+          "设赢 W 种、输 L 种，则 W ≤ 猜对次数 = 猜错次数 ≤ 3L，又 W + L = 8，所以 W ≤ 6，机率最多 6/8。",
+          "答案是 75。"
+        ],
+        "en": [
+          "Strategy: if the two hats you see are the same colour, guess the other colour; if they differ, pass.",
+          "Of the 8 hat patterns, 2 are all one colour: then everyone sees two equal hats and guesses the other colour, all wrong, and they lose.",
+          "The other 6 have two of one colour and one of the other: the odd one out sees two equal hats and guesses the other colour — correctly; the other two see different colours and pass. They win. So the winning probability is 6/8 = 75%.",
+          "No strategy does better: whenever a player guesses, his own hat is equally likely red or blue, so over the 8 patterns the number of correct guesses equals the number of wrong guesses. Each winning pattern uses at least one correct guess, and each losing pattern has at most 3 wrong guesses.",
+          "With W winning and L losing patterns, W ≤ correct guesses = wrong guesses ≤ 3L and W + L = 8, so W ≤ 6 and the probability is at most 6/8.",
+          "The answer is 75."
+        ],
+        "ja": [
+          "作戦：見える 2 つの帽子が同じ色なら自分はもう一方の色と答え、ちがう色ならパスする。",
+          "8 通りのかぶり方のうち、3 つとも同じ色は 2 通り：全員が同じ色を見てもう一方の色と答え、全員外れて負け。",
+          "残りの 6 通りは「2 つが同じ色、1 つがちがう色」：ちがう色の人は同じ色 2 つを見てもう一方の色と答え、ちょうど当たり、ほかの 2 人はちがう色を見てパス。勝ち。よって勝つ確率は 6/8 = 75%。",
+          "これより良くはできません：だれかが答えるとき、自分の帽子が赤か青かは同じ確率なので、8 通り全体では「当たりの回数」と「外れの回数」が等しくなります。勝つ場合は少なくとも 1 回の当たりを使い、負ける場合の外れは多くても 3 回です。",
+          "勝ちを W 通り、負けを L 通りとすると W ≤ 当たりの回数 = 外れの回数 ≤ 3L、W + L = 8 なので W ≤ 6、確率は最大 6/8。",
+          "答えは 75。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "75"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade12-foundation",
+        "notes": "題型：三人帽子猜色可棄權（把猜錯集中在少數情形）。掃過 帽 全庫：logic_grade12_010 是一排 100 人依序猜（奇偶策略），logic_grade8_052 是依序推理帽色；沒有同時猜、可棄權、求最大機率的題。用程式窮舉 3 人各 81 種策略，確認最大勝率 6/8。"
+      }
+    },
+    {
+      "id": "logic_grade12_foundation_052",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "realizable_handshake_degree_sequence",
+      "tags": [
+        "c:graph_theory",
+        "c:logic_deduction",
+        "m:contradiction",
+        "m:construction"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "6 個人參加聚會，某些人之間握了手（同兩人至多握一次、不跟自己握）。把 6 個人各自握手的次數記下來。下列哪一組次數是可能出現的？",
+        "zh-Hans": "6 个人参加聚会，某些人之间握了手（同两人至多握一次、不跟自己握）。把 6 个人各自握手的次数记下来。下列哪一组次数是可能出现的？",
+        "en": "Six people are at a party, and some pairs shake hands (each pair at most once, nobody with themselves). The number of handshakes of each of the 6 people is recorded. Which list below can actually occur?",
+        "ja": "6 人がパーティーに参加し、何組かが握手をしました（同じ 2 人は多くても 1 回、自分とはしない）。6 人それぞれの握手の回数を記録しました。次のうち、実際に起こりうるのはどれですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 C：5、4、3、2、2、2。",
+        "zh-Hans": "答案是 C：5、4、3、2、2、2。",
+        "en": "The answer is C: 5, 4, 3, 2, 2, 2.",
+        "ja": "答えは C：5、4、3、2、2、2 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "D：六個數的和 4 × 5 + 1 = 21 是奇數；但每次握手讓兩個人各加 1 次，總和一定是偶數，所以不可能。",
+          "A：有兩個人握了 5 次，表示這兩人都和其他每個人握過手，於是每個人至少握了 2 次；但清單裡有人只握 1 次，矛盾。",
+          "B：有三個人握了 5 次，每個人至少握了 3 次；清單裡卻有人只握 1 次，矛盾。",
+          "C 可以做到：設六人為 P₁～P₆，P₁ 與其他 5 人都握手，另外 P₂ 與 P₃、P₂ 與 P₄、P₂ 與 P₅、P₃ 與 P₆ 各握一次；次數依序是 5、4、3、2、2、2。",
+          "答案是 C。"
+        ],
+        "zh-Hans": [
+          "D：六个数的和 4 × 5 + 1 = 21 是奇数；但每次握手让两个人各加 1 次，总和一定是偶数，所以不可能。",
+          "A：有两个人握了 5 次，表示这两人都和其他每个人握过手，于是每个人至少握了 2 次；但清单里有人只握 1 次，矛盾。",
+          "B：有三个人握了 5 次，每个人至少握了 3 次；清单里却有人只握 1 次，矛盾。",
+          "C 可以做到：设六人为 P₁～P₆，P₁ 与其他 5 人都握手，另外 P₂ 与 P₃、P₂ 与 P₄、P₂ 与 P₅、P₃ 与 P₆ 各握一次；次数依序是 5、4、3、2、2、2。",
+          "答案是 C。"
+        ],
+        "en": [
+          "D: the sum 4 × 5 + 1 = 21 is odd, but each handshake adds 1 to two people, so the total must be even. Impossible.",
+          "A: two people shook 5 hands, so each of them shook hands with everyone else, and then everyone has at least 2 handshakes; but the list contains a 1. Contradiction.",
+          "B: three people shook 5 hands, so everyone has at least 3; the list contains a 1. Contradiction.",
+          "C is possible: with people P₁–P₆, let P₁ shake hands with all 5 others, and add P₂–P₃, P₂–P₄, P₂–P₅, P₃–P₆; the counts are 5, 4, 3, 2, 2, 2.",
+          "The answer is C."
+        ],
+        "ja": [
+          "D：6 つの数の和 4 × 5 + 1 = 21 は奇数ですが、握手 1 回で 2 人が 1 回ずつ増えるので合計は必ず偶数。ありえません。",
+          "A：5 回握手した人が 2 人いると、その 2 人はほかの全員と握手しているので、全員が少なくとも 2 回握手しています。しかし 1 回の人がいるので矛盾。",
+          "B：5 回の人が 3 人いると全員が少なくとも 3 回ですが、1 回の人がいるので矛盾。",
+          "C は実現できます：6 人を P₁～P₆ とし、P₁ がほかの 5 人全員と握手、さらに P₂ と P₃、P₂ と P₄、P₂ と P₅、P₃ と P₆ が握手すると、回数は順に 5、4、3、2、2、2。",
+          "答えは C。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "multiple_choice",
+      "options": {
+        "A": {
+          "zh-Hant": "5、5、4、3、2、1",
+          "zh-Hans": "5、5、4、3、2、1",
+          "en": "5, 5, 4, 3, 2, 1",
+          "ja": "5、5、4、3、2、1"
+        },
+        "B": {
+          "zh-Hant": "5、5、5、1、1、1",
+          "zh-Hans": "5、5、5、1、1、1",
+          "en": "5, 5, 5, 1, 1, 1",
+          "ja": "5、5、5、1、1、1"
+        },
+        "C": {
+          "zh-Hant": "5、4、3、2、2、2",
+          "zh-Hans": "5、4、3、2、2、2",
+          "en": "5, 4, 3, 2, 2, 2",
+          "ja": "5、4、3、2、2、2"
+        },
+        "D": {
+          "zh-Hant": "4、4、4、4、4、1",
+          "zh-Hans": "4、4、4、4、4、1",
+          "en": "4, 4, 4, 4, 4, 1",
+          "ja": "4、4、4、4、4、1"
+        }
+      },
+      "correctAnswer": {
+        "type": "choice",
+        "value": "C"
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade12-foundation",
+        "notes": "題型：度數序列是否可實現（握手引理＋極端度數矛盾＋構造）。掃過 握手|度數|連出.*條 全庫：logic_grade11_025、_032 是握手總數的雙重計數（已知可實現求總數），logic_grade12_020 是樹的葉子數；沒有判斷序列能否實現。窮舉 6 點所有 2¹⁵ 個圖確認只有 C 可實現。"
+      }
+    },
+    {
+      "id": "logic_grade12_foundation_053",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "condorcet_cycle_agenda_manipulation",
+      "tags": [
+        "c:logic_deduction",
+        "c:game_theory",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "委員會有甲、乙、丙三位委員，要從 A、B、C 三個方案選出一個。三人心中的偏好順序是：甲 A > B > C，乙 B > C > A，丙 C > A > B。表決方式是：主席先挑兩個方案表決（多數決），勝出的方案再和第三個方案表決，最後勝出的就是結論。每位委員每次表決都投給自己比較喜歡的那一個。主席希望最後的結論是 C，他應該怎麼安排？",
+        "zh-Hans": "委员会有甲、乙、丙三位委员，要从 A、B、C 三个方案选出一个。三人心中的偏好顺序是：甲 A > B > C，乙 B > C > A，丙 C > A > B。表决方式是：主席先挑两个方案表决（多数决），胜出的方案再和第三个方案表决，最后胜出的就是结论。每位委员每次表决都投给自己比较喜欢的那一个。主席希望最后的结论是 C，他应该怎么安排？",
+        "en": "A committee of three members, P, Q and R, must choose one of three proposals A, B, C. Their preference orders are: P: A > B > C; Q: B > C > A; R: C > A > B. Voting procedure: the chair first puts two proposals to a majority vote, and the winner then faces the third proposal; the final winner is adopted. In every vote each member votes for the one he prefers. The chair wants C to be adopted. How should he arrange the votes?",
+        "ja": "委員会の甲、乙、丙の 3 人が、A、B、C の 3 つの案から 1 つを選びます。3 人の好みの順は、甲 A > B > C、乙 B > C > A、丙 C > A > B です。議長がまず 2 つの案で多数決をとり、勝った案と残りの案でもう一度多数決をとって、最後に勝った案に決めます。各委員は毎回、自分の好きなほうに投票します。議長は C に決めたいと思っています。どう決めればよいですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 A：先表決 A 與 B，勝者再與 C 表決。",
+        "zh-Hans": "答案是 A：先表决 A 与 B，胜者再与 C 表决。",
+        "en": "The answer is A: vote A against B first, then the winner against C.",
+        "ja": "答えは A：先に A と B で採決し、勝った案と C で採決するです。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "先看兩兩對決：A 對 B，甲、丙較喜歡 A，A 勝；B 對 C，甲、乙較喜歡 B，B 勝；C 對 A，乙、丙較喜歡 C，C 勝。三者形成循環，沒有誰能贏過另外兩個。",
+          "先表決 A 與 B：A 勝；再 A 對 C：C 勝，結論是 C。",
+          "先表決 A 與 C：C 勝；再 C 對 B：B 勝，結論是 B。",
+          "先表決 B 與 C：B 勝；再 B 對 A：A 勝，結論是 A。",
+          "所以主席必須先表決 A 與 B，讓 C 留到最後才上場。答案是 A。"
+        ],
+        "zh-Hans": [
+          "先看两两对决：A 对 B，甲、丙较喜欢 A，A 胜；B 对 C，甲、乙较喜欢 B，B 胜；C 对 A，乙、丙较喜欢 C，C 胜。三者形成循环，没有谁能赢过另外两个。",
+          "先表决 A 与 B：A 胜；再 A 对 C：C 胜，结论是 C。",
+          "先表决 A 与 C：C 胜；再 C 对 B：B 胜，结论是 B。",
+          "先表决 B 与 C：B 胜；再 B 对 A：A 胜，结论是 A。",
+          "所以主席必须先表决 A 与 B，让 C 留到最后才上场。答案是 A。"
+        ],
+        "en": [
+          "Head-to-head: A vs B, P and R prefer A, so A wins; B vs C, P and Q prefer B, so B wins; C vs A, Q and R prefer C, so C wins. The three form a cycle; none beats both others.",
+          "Vote A vs B first: A wins; then A vs C: C wins, so C is adopted.",
+          "Vote A vs C first: C wins; then C vs B: B wins, so B is adopted.",
+          "Vote B vs C first: B wins; then B vs A: A wins, so A is adopted.",
+          "So the chair must hold A vs B first and bring C in last. The answer is A."
+        ],
+        "ja": [
+          "まず 1 対 1 で比べます：A 対 B は甲と丙が A を好むので A の勝ち、B 対 C は甲と乙が B を好むので B の勝ち、C 対 A は乙と丙が C を好むので C の勝ち。3 つは循環していて、ほかの 2 つに両方勝つ案はありません。",
+          "先に A と B：A が勝ち、次に A 対 C：C が勝つので C に決まります。",
+          "先に A と C：C が勝ち、次に C 対 B：B が勝つので B に決まります。",
+          "先に B と C：B が勝ち、次に B 対 A：A が勝つので A に決まります。",
+          "よって議長は先に A と B で採決し、C を最後に出せばよいです。答えは A。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "multiple_choice",
+      "options": {
+        "A": {
+          "zh-Hant": "先表決 A 與 B，勝者再與 C 表決",
+          "zh-Hans": "先表决 A 与 B，胜者再与 C 表决",
+          "en": "Vote A against B first, then the winner against C",
+          "ja": "先に A と B で採決し、勝った案と C で採決する"
+        },
+        "B": {
+          "zh-Hant": "先表決 A 與 C，勝者再與 B 表決",
+          "zh-Hans": "先表决 A 与 C，胜者再与 B 表决",
+          "en": "Vote A against C first, then the winner against B",
+          "ja": "先に A と C で採決し、勝った案と B で採決する"
+        },
+        "C": {
+          "zh-Hant": "先表決 B 與 C，勝者再與 A 表決",
+          "zh-Hans": "先表决 B 与 C，胜者再与 A 表决",
+          "en": "Vote B against C first, then the winner against A",
+          "ja": "先に B と C で採決し、勝った案と A で採決する"
+        },
+        "D": {
+          "zh-Hant": "不論怎麼安排，結論都不可能是 C",
+          "zh-Hans": "不论怎么安排，结论都不可能是 C",
+          "en": "No arrangement can make C the result",
+          "ja": "どう決めても C にすることはできない"
+        }
+      },
+      "correctAnswer": {
+        "type": "choice",
+        "value": "A"
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade12-foundation",
+        "notes": "題型：孔多塞循環與議程操縱（兩兩多數決不遞移）。掃過 表決|投票|偏好|多數決 全庫：沒有社會選擇題；combinatorics_grade12_048 的非遞移骰子是同一種「不遞移」現象但在機率上。"
+      }
     }
   ]
 }
