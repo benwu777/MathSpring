@@ -5650,6 +5650,383 @@
         "reference": "combinatorics-grade12-foundation",
         "notes": "題型取自多項式展開的係數＝選項計數（三項式係數）。掃過「1 \\+ x \\+ x²|x² \\+ x \\+ 1\\)|係數」：algebra_grade12_021（(1 + x + x²)⁵ 所有係數和，代 x = 1）、combinatorics_grade11_011（(x + y + z)⁶ 中 x²y²z² 係數＝多項係數）。本題要求單一項係數，必須依 x² 的個數分類。"
       }
+    },
+    {
+      "id": "combinatorics_grade12_foundation_062",
+      "reviewStatus": "ok",
+      "topic": "combinatorics",
+      "subtopic": "unimodal_permutations",
+      "tags": [
+        "c:permutation_combination",
+        "m:bijection"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "把 1、2、3、4、5、6、7 排成一列，要求這一列「先嚴格遞增、再嚴格遞減」（全部遞增或全部遞減也算在內）。例如 1 3 6 7 5 4 2、1 2 3 4 5 6 7 都符合。這樣的排法共有幾種？",
+        "zh-Hans": "把 1、2、3、4、5、6、7 排成一列，要求这一列「先严格递增、再严格递减」（全部递增或全部递减也算在内）。例如 1 3 6 7 5 4 2、1 2 3 4 5 6 7 都符合。这样的排法共有几种？",
+        "en": "Arrange 1, 2, 3, 4, 5, 6, 7 in a row so that the row first strictly increases and then strictly decreases (entirely increasing or entirely decreasing also counts). For example 1 3 6 7 5 4 2 and 1 2 3 4 5 6 7 both qualify. How many such arrangements are there?",
+        "ja": "1、2、3、4、5、6、7 を 1 列に並べ、その列が「まず狭義に増加し、その後狭義に減少する」ようにする（すべて増加、すべて減少も含む）。たとえば 1 3 6 7 5 4 2 や 1 2 3 4 5 6 7 は条件を満たす。このような並べ方は何通りあるか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 64。",
+        "zh-Hans": "答案是 64。",
+        "en": "The answer is 64.",
+        "ja": "答えは 64 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "先增後減的數列，最大的數 7 一定在「山頂」：它左邊全部遞增、右邊全部遞減。",
+          "所以只要決定 1 到 6 各自放在 7 的左邊還是右邊；決定之後，左邊的數只能由小到大排、右邊的數只能由大到小排，排法唯一。",
+          "反過來，每一種符合條件的排法也恰好對應一種左右分配，這是一一對應。",
+          "每個數有左、右 2 種選擇，6 個數共 2⁶ 種分配（全放右邊就是全部遞減，全放左邊就是全部遞增）。",
+          "所以共有 2⁶ = 64 種排法。（以程式窮舉 7! = 5040 種排列驗證為 64。）"
+        ],
+        "zh-Hans": [
+          "先增后减的数列，最大的数 7 一定在「山顶」：它左边全部递增、右边全部递减。",
+          "所以只要决定 1 到 6 各自放在 7 的左边还是右边；决定之后，左边的数只能由小到大排、右边的数只能由大到小排，排法唯一。",
+          "反过来，每一种符合条件的排法也恰好对应一种左右分配，这是一一对应。",
+          "每个数有左、右 2 种选择，6 个数共 2⁶ 种分配（全放右边就是全部递减，全放左边就是全部递增）。",
+          "所以共有 2⁶ = 64 种排法。（以程式穷举 7! = 5040 种排列验证为 64。）"
+        ],
+        "en": [
+          "In a sequence that rises and then falls, the largest number 7 must be at the peak: everything to its left increases and everything to its right decreases.",
+          "So we only need to decide, for each of 1 to 6, whether it goes left or right of 7; once decided, the left numbers must be in increasing order and the right numbers in decreasing order, so the arrangement is unique.",
+          "Conversely, every valid arrangement corresponds to exactly one such left/right assignment, so this is a one-to-one correspondence.",
+          "Each of the 6 numbers has 2 choices, left or right, giving 2⁶ assignments (all right gives the decreasing row, all left gives the increasing row).",
+          "So there are 2⁶ = 64 arrangements. (Verified by enumerating all 7! = 5040 permutations.)"
+        ],
+        "ja": [
+          "増加してから減少する列では、最大の数 7 は必ず「山頂」にあり、その左はすべて増加、右はすべて減少である。",
+          "したがって 1～6 のそれぞれを 7 の左に置くか右に置くかを決めればよい。決めれば左の数は小さい順、右の数は大きい順にしか並べられず、並べ方は 1 通り。",
+          "逆に、条件を満たす並べ方はそれぞれちょうど 1 つの左右の振り分けに対応するので、1 対 1 対応である。",
+          "6 個の数はそれぞれ左か右の 2 通りなので 2⁶ 通り（すべて右ならすべて減少、すべて左ならすべて増加）。",
+          "よって並べ方は 2⁶ = 64 通り。（7! = 5040 通りの全数検査で確認済み。）"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "64"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "combinatorics-grade12-unimodal-permutations",
+        "notes": "單峰排列：把最大數固定在峰頂，其餘各選左右。全庫搜「先增後減／山峰」無排列題；最接近是 combinatorics_grade11_022（嚴格遞減的四位數，選定集合後排法唯一）與 combinatorics_grade12_009。"
+      }
+    },
+    {
+      "id": "combinatorics_grade12_foundation_063",
+      "reviewStatus": "ok",
+      "topic": "combinatorics",
+      "subtopic": "multiset_no_adjacent_equal",
+      "tags": [
+        "c:permutation_combination",
+        "c:inclusion_exclusion",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "有 2 顆紅球、2 顆藍球、2 顆綠球，同色的球完全相同。把這 6 顆球排成一列，要求相鄰兩顆的顏色都不同。排法共有幾種？",
+        "zh-Hans": "有 2 颗红球、2 颗蓝球、2 颗绿球，同色的球完全相同。把这 6 颗球排成一列，要求相邻两颗的颜色都不同。排法共有几种？",
+        "en": "There are 2 red, 2 blue and 2 green balls; balls of the same colour are identical. Arrange the 6 balls in a row so that no two adjacent balls have the same colour. How many arrangements are there?",
+        "ja": "赤玉 2 個、青玉 2 個、緑玉 2 個があり、同じ色の玉は区別しない。この 6 個を 1 列に並べ、隣り合う 2 個の色がすべて異なるようにする。並べ方は何通りあるか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 30。",
+        "zh-Hans": "答案是 30。",
+        "en": "The answer is 30.",
+        "ja": "答えは 30 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "不限制時的排法：6!/(2! 2! 2!) = 90。用排容原理扣掉「某種顏色的兩顆相鄰」的排法。",
+          "紅色兩顆相鄰：把它們綁成一塊，共 5 個物件，排法 5!/(2! 2!) = 30。三種顏色各一次，共 3 × 30 = 90。",
+          "兩種顏色都各自相鄰（例如紅、藍）：4 個物件，排法 4!/2! = 12，三種配對共 3 × 12 = 36。",
+          "三種顏色都各自相鄰：3 個物件，3! = 6 種。",
+          "符合條件的排法 = 90 − 90 + 36 − 6 = 30。（以程式列出全部 90 種排法逐一檢查，得 30 種。）"
+        ],
+        "zh-Hans": [
+          "不限制时的排法：6!/(2! 2! 2!) = 90。用排容原理扣掉「某种颜色的两颗相邻」的排法。",
+          "红色两颗相邻：把它们绑成一块，共 5 个物件，排法 5!/(2! 2!) = 30。三种颜色各一次，共 3 × 30 = 90。",
+          "两种颜色都各自相邻（例如红、蓝）：4 个物件，排法 4!/2! = 12，三种配对共 3 × 12 = 36。",
+          "三种颜色都各自相邻：3 个物件，3! = 6 种。",
+          "符合条件的排法 = 90 − 90 + 36 − 6 = 30。（以程式列出全部 90 种排法逐一检查，得 30 种。）"
+        ],
+        "en": [
+          "Without restriction there are 6!/(2! 2! 2!) = 90 arrangements. Use inclusion–exclusion to remove arrangements where the two balls of some colour are adjacent.",
+          "Two reds adjacent: glue them into one block, giving 5 objects and 5!/(2! 2!) = 30 arrangements. One for each colour gives 3 × 30 = 90.",
+          "Two colours each adjacent (say red and blue): 4 objects, 4!/2! = 12 arrangements, and 3 pairs of colours give 3 × 12 = 36.",
+          "All three colours adjacent: 3 objects, 3! = 6 arrangements.",
+          "Valid arrangements = 90 − 90 + 36 − 6 = 30. (Checked by listing all 90 arrangements by program: 30 qualify.)"
+        ],
+        "ja": [
+          "制限なしの並べ方は 6!/(2! 2! 2!) = 90 通り。包除原理で「ある色の 2 個が隣り合う」並べ方を除く。",
+          "赤 2 個が隣り合う場合：1 つにまとめて 5 個の物として 5!/(2! 2!) = 30 通り。3 色それぞれで 3 × 30 = 90。",
+          "2 色がそれぞれ隣り合う場合（たとえば赤と青）：4 個の物で 4!/2! = 12 通り、色の組 3 通りで 3 × 12 = 36。",
+          "3 色とも隣り合う場合：3 個の物で 3! = 6 通り。",
+          "条件を満たす並べ方は 90 − 90 + 36 − 6 = 30。（90 通りすべてをプログラムで調べ 30 通りと確認。）"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "30"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "combinatorics-grade12-multiset-adjacency-inclusion-exclusion",
+        "notes": "不盡相異物排列配排容原理。掃過 combinatorics_grade12_013（AAABBC 三個 A 不相鄰，用插空）、combinatorics_grade10_036（一排格子相鄰不同色，每格自由選色）、combinatorics_grade11_028（四對夫妻不相鄰）。013 只限制一種字母、可插空；本題三種顏色都受限，必須排容。"
+      }
+    },
+    {
+      "id": "combinatorics_grade12_foundation_064",
+      "reviewStatus": "ok",
+      "topic": "combinatorics",
+      "subtopic": "subsets_with_fixed_range",
+      "tags": [
+        "c:permutation_combination",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "從 1、2、3、⋯、10 這十個整數中選出 4 個不同的數（不計順序），要求所選的數中最大的數減去最小的數恰好等於 6。選法共有幾種？",
+        "zh-Hans": "从 1、2、3、⋯、10 这十个整数中选出 4 个不同的数（不计顺序），要求所选的数中最大的数减去最小的数恰好等于 6。选法共有几种？",
+        "en": "Choose 4 different numbers from the integers 1, 2, 3, …, 10 (order does not matter) so that the largest chosen number minus the smallest is exactly 6. How many choices are there?",
+        "ja": "1、2、3、⋯、10 の 10 個の整数から異なる 4 個を選ぶ（順序は考えない）。選んだ数の最大から最小を引くとちょうど 6 になるようにする。選び方は何通りあるか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 40。",
+        "zh-Hans": "答案是 40。",
+        "en": "The answer is 40.",
+        "ja": "答えは 40 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "設最小的數是 m，則最大的數是 m + 6。m + 6 ≤ 10，所以 m 可以是 1、2、3、4，共 4 種。",
+          "最小與最大確定後，另外 2 個數必須嚴格介於 m 與 m + 6 之間，也就是從 m + 1、⋯、m + 5 這 5 個數中選 2 個。",
+          "從 5 個選 2 個有 C(5, 2) = 10 種，而且這 10 種對每一個 m 都一樣多。",
+          "不同的 m 給出的選法最小數不同，互不重疊，所以總數 = 4 × 10 = 40。",
+          "以程式列出全部 C(10, 4) = 210 種選法逐一檢查，恰有 40 種 ✓。"
+        ],
+        "zh-Hans": [
+          "设最小的数是 m，则最大的数是 m + 6。m + 6 ≤ 10，所以 m 可以是 1、2、3、4，共 4 种。",
+          "最小与最大确定后，另外 2 个数必须严格介于 m 与 m + 6 之间，也就是从 m + 1、⋯、m + 5 这 5 个数中选 2 个。",
+          "从 5 个选 2 个有 C(5, 2) = 10 种，而且这 10 种对每一个 m 都一样多。",
+          "不同的 m 给出的选法最小数不同，互不重叠，所以总数 = 4 × 10 = 40。",
+          "以程式列出全部 C(10, 4) = 210 种选法逐一检查，恰有 40 种 ✓。"
+        ],
+        "en": [
+          "Let the smallest number be m; then the largest is m + 6. Since m + 6 ≤ 10, m can be 1, 2, 3 or 4: 4 possibilities.",
+          "Once the smallest and largest are fixed, the other 2 numbers must lie strictly between m and m + 6, i.e. be chosen from the 5 numbers m + 1, …, m + 5.",
+          "Choosing 2 of 5 gives C(5, 2) = 10 ways, the same for every m.",
+          "Different values of m give selections with different minima, so there is no overlap; the total is 4 × 10 = 40.",
+          "Listing all C(10, 4) = 210 selections by program confirms exactly 40 ✓."
+        ],
+        "ja": [
+          "最小の数を m とすると最大の数は m + 6。m + 6 ≤ 10 なので m は 1、2、3、4 の 4 通り。",
+          "最小と最大が決まれば、残り 2 個は m と m + 6 の間に厳密に入らなければならない。すなわち m + 1、⋯、m + 5 の 5 個から 2 個を選ぶ。",
+          "5 個から 2 個を選ぶ方法は C(5, 2) = 10 通りで、どの m でも同じ。",
+          "異なる m では最小の数が異なるので重複はなく、合計は 4 × 10 = 40。",
+          "C(10, 4) = 210 通りの選び方をすべてプログラムで調べると、ちょうど 40 通り ✓。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "40"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "combinatorics-grade12-subsets-with-given-range",
+        "notes": "先固定極端值（最小、最大），中間元素自由組合。原第 50 題（xyz = 72 的有序三元組）與 combinatorics_grade10_020（abc = 36）同骨架而撤換。掃過 combinatorics_grade12_039（選 3 個互不相鄰的數）、combinatorics_grade11_022（嚴格遞減四位數）、combinatorics_grade8_040（等差三數）。全庫搜「最大與最小的差」只命中函數極值與數列題。"
+      }
+    },
+    {
+      "id": "combinatorics_grade12_foundation_065",
+      "reviewStatus": "ok",
+      "topic": "combinatorics",
+      "subtopic": "grid_proper_colouring_three_colours",
+      "tags": [
+        "c:permutation_combination",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一個 2 列 3 行的方格表共有 6 格。每一格塗紅、黃、藍三種顏色之一，要求有公共邊的兩格顏色不同（只有公共頂點的不算相鄰）。塗法共有幾種？",
+        "zh-Hans": "一个 2 列 3 行的方格表共有 6 格。每一格涂红、黄、蓝三种颜色之一，要求有公共边的两格颜色不同（只有公共顶点的不算相邻）。涂法共有几种？",
+        "en": "A grid with 2 rows and 3 columns has 6 cells. Each cell is painted red, yellow or blue, and two cells sharing an edge must have different colours (cells sharing only a corner do not count as adjacent). How many colourings are there?",
+        "ja": "2 行 3 列のマス目には 6 マスある。各マスを赤、黄、青のいずれかで塗り、辺を共有する 2 マスは異なる色にする（頂点だけを共有するマスは隣り合うとみなさない）。塗り方は何通りあるか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 54。",
+        "zh-Hans": "答案是 54。",
+        "en": "The answer is 54.",
+        "ja": "答えは 54 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "一行一行從左往右塗。第一行上下兩格要不同色：上格 3 種、下格 2 種，共 6 種。",
+          "設前一行是（上 p、下 q），p ≠ q。新的一行（上 u、下 v）要滿足 u ≠ p、v ≠ q、u ≠ v。",
+          "記第三種顏色為 w。u 可以是 q 或 w：若 u = q，則 v 可以是 p 或 w（2 種）；若 u = w，則 v 只能是 p（1 種）。所以每一行接續下一行都有 3 種。",
+          "第二行、第三行各有 3 種，總數 = 6 × 3 × 3 = 54。",
+          "以程式窮舉全部 3⁶ = 729 種塗法逐一檢查，得 54 種 ✓。"
+        ],
+        "zh-Hans": [
+          "一行一行从左往右涂。第一行上下两格要不同色：上格 3 种、下格 2 种，共 6 种。",
+          "设前一行是（上 p、下 q），p ≠ q。新的一行（上 u、下 v）要满足 u ≠ p、v ≠ q、u ≠ v。",
+          "记第三种颜色为 w。u 可以是 q 或 w：若 u = q，则 v 可以是 p 或 w（2 种）；若 u = w，则 v 只能是 p（1 种）。所以每一行接续下一行都有 3 种。",
+          "第二行、第三行各有 3 种，总数 = 6 × 3 × 3 = 54。",
+          "以程式穷举全部 3⁶ = 729 种涂法逐一检查，得 54 种 ✓。"
+        ],
+        "en": [
+          "Paint column by column from left to right. In the first column the top and bottom cells must differ: 3 choices for the top and 2 for the bottom, 6 in all.",
+          "Suppose the previous column is (top p, bottom q) with p ≠ q. The new column (top u, bottom v) must satisfy u ≠ p, v ≠ q and u ≠ v.",
+          "Call the third colour w. u can be q or w: if u = q, v can be p or w (2 ways); if u = w, v must be p (1 way). So each column can be followed in 3 ways.",
+          "The second and third columns have 3 choices each, so the total is 6 × 3 × 3 = 54.",
+          "Checking all 3⁶ = 729 colourings by program gives 54 ✓."
+        ],
+        "ja": [
+          "左から 1 列ずつ塗る。1 列目は上下 2 マスが異なる色でなければならず、上が 3 通り、下が 2 通りで 6 通り。",
+          "前の列を（上 p、下 q）、p ≠ q とする。新しい列（上 u、下 v）は u ≠ p、v ≠ q、u ≠ v を満たさなければならない。",
+          "3 つ目の色を w とする。u は q か w：u = q なら v は p か w の 2 通り、u = w なら v は p の 1 通り。よってどの列にも次の列の塗り方が 3 通りある。",
+          "2 列目と 3 列目がそれぞれ 3 通りなので、合計は 6 × 3 × 3 = 54。",
+          "3⁶ = 729 通りの塗り方をすべてプログラムで調べると 54 通り ✓。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "54"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "combinatorics-grade12-ladder-colouring",
+        "notes": "2 × n 梯形格的三色正常著色，逐行遞推。掃過 combinatorics_grade10_036（一排 5 格相鄰不同色 3 × 2⁴）、combinatorics_grade12_038（五邊形頂點三色）、combinatorics_grade7_021（旗子橫紋）。本題每一行有兩格且上下左右都受限，轉移數 3 要分情形數。"
+      }
+    },
+    {
+      "id": "combinatorics_grade12_foundation_066",
+      "reviewStatus": "ok",
+      "topic": "combinatorics",
+      "subtopic": "lattice_paths_exact_turns",
+      "tags": [
+        "c:permutation_combination",
+        "c:coordinate",
+        "m:bijection"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "在方格紙上從 (0, 0) 走到 (4, 4)，每一步向右或向上走一格，共走 8 步。若相鄰兩步方向不同就算轉彎一次。恰好轉彎 3 次的走法共有幾種？",
+        "zh-Hans": "在方格纸上从 (0, 0) 走到 (4, 4)，每一步向右或向上走一格，共走 8 步。若相邻两步方向不同就算转弯一次。恰好转弯 3 次的走法共有几种？",
+        "en": "On grid paper, walk from (0, 0) to (4, 4), each step going one unit right or one unit up, 8 steps in all. A turn occurs whenever two consecutive steps go in different directions. How many paths have exactly 3 turns?",
+        "ja": "方眼紙の上で (0, 0) から (4, 4) まで、1 歩ごとに右か上に 1 マス進み、全部で 8 歩で行く。続く 2 歩の向きが異なるたびに 1 回曲がったと数える。ちょうど 3 回曲がる道順は何通りあるか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 18。",
+        "zh-Hans": "答案是 18。",
+        "en": "The answer is 18.",
+        "ja": "答えは 18 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "把走法看成由「同方向的連續步」組成的段。轉彎 3 次代表共有 4 段，而且方向交替。",
+          "若第一段向右，段的方向是 右、上、右、上：4 步向右要分成 2 段、4 步向上也分成 2 段，每段至少 1 步。",
+          "把 4 分成有順序的 2 個正整數之和有 C(3, 1) = 3 種，所以這一類有 3 × 3 = 9 種。",
+          "若第一段向上，同理也有 9 種。兩類互不重疊。",
+          "總共 9 + 9 = 18 種。（以程式列出全部 C(8, 4) = 70 條路徑並數轉彎次數驗證為 18。）"
+        ],
+        "zh-Hans": [
+          "把走法看成由「同方向的连续步」组成的段。转弯 3 次代表共有 4 段，而且方向交替。",
+          "若第一段向右，段的方向是 右、上、右、上：4 步向右要分成 2 段、4 步向上也分成 2 段，每段至少 1 步。",
+          "把 4 分成有顺序的 2 个正整数之和有 C(3, 1) = 3 种，所以这一类有 3 × 3 = 9 种。",
+          "若第一段向上，同理也有 9 种。两类互不重叠。",
+          "总共 9 + 9 = 18 种。（以程式列出全部 C(8, 4) = 70 条路径并数转弯次数验证为 18。）"
+        ],
+        "en": [
+          "View a path as a sequence of runs of consecutive steps in the same direction. Exactly 3 turns means 4 runs, alternating in direction.",
+          "If the first run goes right, the runs are right, up, right, up: the 4 right steps are split into 2 runs and the 4 up steps into 2 runs, each run with at least 1 step.",
+          "Writing 4 as an ordered sum of 2 positive integers can be done in C(3, 1) = 3 ways, so this case gives 3 × 3 = 9 paths.",
+          "If the first run goes up, there are likewise 9 paths. The two cases do not overlap.",
+          "In total 9 + 9 = 18 paths. (Verified by listing all C(8, 4) = 70 paths by program and counting turns.)"
+        ],
+        "ja": [
+          "道順を同じ向きに続けて進む「区間」の並びとみる。ちょうど 3 回曲がるとは区間が 4 つあり、向きが交互になることである。",
+          "最初の区間が右向きなら区間の向きは 右、上、右、上 で、右への 4 歩を 2 区間に、上への 4 歩も 2 区間に分け、各区間は 1 歩以上。",
+          "4 を順序つきの 2 つの正の整数の和に分ける方法は C(3, 1) = 3 通りなので、この場合は 3 × 3 = 9 通り。",
+          "最初の区間が上向きの場合も同様に 9 通りで、2 つの場合は重ならない。",
+          "合計 9 + 9 = 18 通り。（C(8, 4) = 70 通りの道順をすべてプログラムで調べ、曲がる回数を数えて確認。）"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "18"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "combinatorics-grade12-lattice-paths-by-turns",
+        "notes": "最短路徑依轉彎次數分類：轉彎數決定段數，再把步數拆成有序正整數和。掃過 logic_grade12_037（4 × 4 避開中心點）、combinatorics_grade12_005（可斜走）、combinatorics_grade11_037（三維路徑）。全庫搜「轉彎」只命中幾何角度題，沒有依轉彎次數計數的路徑題。"
+      }
     }
   ]
 }
