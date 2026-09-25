@@ -117,7 +117,9 @@ class AvatarPreview extends StatelessWidget {
       key: ValueKey<String>(
         isBack ? 'avatar_hair_back_tint' : 'avatar_hair_front_tint',
       ),
-      colorFilter: ColorFilter.mode(hairTint, BlendMode.color),
+      // Modulate keeps the source alpha when the swatch is opaque, while its
+      // multiplication retains the hairstyle's strand shading and highlights.
+      colorFilter: ColorFilter.mode(hairTint, BlendMode.modulate),
       child: layer,
     );
   }

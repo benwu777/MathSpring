@@ -189,7 +189,7 @@ void main() {
     );
     expect(
       frontTint.colorFilter,
-      const ColorFilter.mode(Color(0xFF7B3F20), BlendMode.color),
+      const ColorFilter.mode(Color(0xFF7B3F20), BlendMode.modulate),
     );
   });
 
@@ -211,7 +211,7 @@ void main() {
     );
     expect(
       backTint.colorFilter,
-      const ColorFilter.mode(Color(0xFF7B3F20), BlendMode.color),
+      const ColorFilter.mode(Color(0xFF7B3F20), BlendMode.modulate),
     );
   });
 
@@ -236,6 +236,74 @@ void main() {
     expect(
       find.byKey(const ValueKey<String>('avatar_hair_back_tint')),
       findsNothing,
+    );
+  });
+
+  testWidgets('uses alpha-preserving treatment for tinted girl hair',
+      (WidgetTester tester) async {
+    final AvatarConfiguration girl = AvatarConfiguration.defaultFor(
+      AvatarPresentation.girl,
+    ).copyWith(hairColorId: 'girl_hair_color_03');
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Scaffold(body: AvatarPreview(configuration: girl)),
+      ),
+    );
+
+    final ColorFiltered hairTreatment = tester.widget<ColorFiltered>(
+      find.byKey(const ValueKey<String>('avatar_hair_front_tint')),
+    );
+    final AvatarAssetBundle assets = AvatarAssetCatalog.resolve(girl);
+    expect(
+      hairTreatment.colorFilter,
+      ColorFilter.mode(assets.hairTint!, BlendMode.modulate),
+    );
+  });
+
+  test('keeps a rendered tinted girl hair preview canvas transparent',
+      () async {
+    final AvatarConfiguration girl = AvatarConfiguration.defaultFor(
+      AvatarPresentation.girl,
+    ).copyWith(hairColorId: 'girl_hair_color_03');
+    final AvatarAssetBundle assets = AvatarAssetCatalog.resolve(girl);
+    final File output = File(
+      '/private/tmp/mathspring-tinted-girl-hair-preview.png',
+    );
+    final String tint = assets.hairTint!
+        .toARGB32()
+        .toRadixString(16)
+        .padLeft(8, '0')
+        .substring(2);
+    final ProcessResult render = await Process.run('magick', <String>[
+      assets.hairFrontAsset,
+      '-resize',
+      '180x180!',
+      '(',
+      '+clone',
+      '-fill',
+      '#$tint',
+      '-colorize',
+      '100%',
+      ')',
+      '-compose',
+      'Multiply',
+      '-composite',
+      output.path,
+    ]);
+    expect(render.exitCode, 0, reason: render.stderr);
+    final ProcessResult alpha = await Process.run('magick', <String>[
+      output.path,
+      '-alpha',
+      'extract',
+      '-format',
+      '%[fx:p{0,0}]',
+      'info:',
+    ]);
+    expect(alpha.exitCode, 0, reason: alpha.stderr);
+    expect(
+      double.parse((alpha.stdout as String).trim()),
+      0,
+      reason: '畫布左上角必須維持透明',
     );
   });
 
