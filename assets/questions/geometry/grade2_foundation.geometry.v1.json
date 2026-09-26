@@ -6466,6 +6466,354 @@
         "reference": "geometry-grade2-foundation",
         "notes": "自編：剩下長方形的周長恰是「兩個長」，由此分開長與寬。掃「剪下.{0,10}正方形|剩下.{0,10}周長」：geometry_grade4_030（木板切成上下兩塊、已知一塊周長求另一塊）、geometry_grade1_038（6×4 剪出正方形後數角）、geometry_grade3_044（剪去角上小正方形周長不變）。g4_030 已知長寬；本題長寬都未知，要從兩個周長列出「長 + 寬」與「長 + 長」。"
       }
+    },
+    {
+      "id": "geometry_grade2_foundation_078",
+      "reviewStatus": "ok",
+      "topic": "geometry",
+      "subtopic": "grid_monotone_path_cell_count",
+      "tags": [
+        "c:position_direction",
+        "c:add_sub",
+        "m:invariant"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade2",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "百數表每一排有 10 個數：第一排是 1 到 10，第二排是 11 到 20，……，最後一排是 91 到 100。小安從寫著 1 的格子出發，每一步只能往右走一格或往下走一格，一直走到寫著 100 的格子。不管他怎麼走，一共會經過幾個格子？（出發的 1 和最後的 100 都要算。）",
+        "zh-Hans": "百数表每一排有 10 个数：第一排是 1 到 10，第二排是 11 到 20，……，最后一排是 91 到 100。小安从写着 1 的格子出发，每一步只能往右走一格或往下走一格，一直走到写着 100 的格子。不管他怎么走，一共会经过几个格子？（出发的 1 和最后的 100 都要算。）",
+        "en": "A hundred chart has 10 numbers in each row: the first row is 1 to 10, the second 11 to 20, …, the last 91 to 100. An starts on the square with 1 and each step moves one square right or one square down, until he reaches the square with 100. No matter how he walks, how many squares does he pass through? (Count both the starting 1 and the final 100.)",
+        "ja": "百の 数ひょうは 1れつに 10こずつ 数が ならび、1れつめが 1～10、2れつめが 11～20、……、さいごが 91～100 です。アンさんは 1 の マスから 出発し、1回に 右か 下へ 1マスずつ すすんで、100 の マスまで 行きます。どう すすんでも、ぜんぶで 何マスを とおりますか。（さいしょの 1 と さいごの 100 も かぞえます。）"
+      },
+      "answer": {
+        "zh-Hant": "答案是 19。",
+        "zh-Hans": "答案是 19。",
+        "en": "The answer is 19.",
+        "ja": "こたえは 19 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "1 在左上角，100 在右下角。從第 1 行到第 10 行要往右走 9 步，從第 1 排到第 10 排要往下走 9 步。",
+          "不管先右還是先下，一共都是 9 + 9 = 18 步，每走一步就到一個新的格子。",
+          "再加上出發的那一格：18 + 1 = 19 格。"
+        ],
+        "zh-Hans": [
+          "1 在左上角，100 在右下角。从第 1 行到第 10 行要往右走 9 步，从第 1 排到第 10 排要往下走 9 步。",
+          "不管先右还是先下，一共都是 9 + 9 = 18 步，每走一步就到一个新的格子。",
+          "再加上出发的那一格：18 + 1 = 19 格。"
+        ],
+        "en": [
+          "1 is at the top-left and 100 at the bottom-right. Getting from column 1 to column 10 takes 9 steps right, and from row 1 to row 10 takes 9 steps down.",
+          "Whatever the order, there are 9 + 9 = 18 steps in total, each landing on a new square.",
+          "Add the starting square: 18 + 1 = 19 squares."
+        ],
+        "ja": [
+          "1 は 左上、100 は 右下。右へ 9マス、下へ 9マス すすむ ひつようが あります。",
+          "じゅんばんに かんけいなく 9 + 9 = 18歩で、1歩ごとに 新しい マスに 入ります。",
+          "出発の マスを たして 18 + 1 = 19マス です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "19"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "geometry-grade2-foundation",
+        "notes": "只能往右或往下的路徑長度不變（步數＝右步＋下步）。掃「百數表|往右.*往下」：arithmetic_grade1_118 百數表斜走；arithmetic_grade4_094 2×2 方框；geometry_grade2_048 數最短路線條數。本題不數路線，而是指出所有路線經過格數相同。"
+      }
+    },
+    {
+      "id": "geometry_grade2_foundation_079",
+      "reviewStatus": "ok",
+      "topic": "geometry",
+      "subtopic": "count_right_angles_in_divided_rectangle",
+      "tags": [
+        "c:angle",
+        "c:quadrilateral",
+        "m:bijection"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade2",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "在一張長方形紙上，畫 2 條從上邊畫到下邊的直線，再畫 1 條從左邊畫到右邊的直線，這 3 條線都和長方形的邊平行，把紙分成 6 個小長方形。在這張圖上，一共可以數到幾個直角？",
+        "zh-Hans": "在一张长方形纸上，画 2 条从上边画到下边的直线，再画 1 条从左边画到右边的直线，这 3 条线都和长方形的边平行，把纸分成 6 个小长方形。在这张图上，一共可以数到几个直角？",
+        "en": "On a rectangular sheet, draw 2 lines from the top edge to the bottom edge and 1 line from the left edge to the right edge, all parallel to the sides, dividing the sheet into 6 small rectangles. How many right angles can be counted in this figure?",
+        "ja": "長方形の 紙に、上の 辺から 下の 辺まで 2本、左の 辺から 右の 辺まで 1本の 直線を かきます。3本とも 辺に 平行で、紙は 6つの 小さな 長方形に 分かれます。この 図には 直角が ぜんぶで いくつ ありますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 24。",
+        "zh-Hans": "答案是 24。",
+        "en": "The answer is 24.",
+        "ja": "こたえは 24 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "圖裡的每一個直角，都剛好是某一個小長方形的一個角；每個小長方形的 4 個角也都是圖裡的直角，而且不會被兩個小長方形共用。",
+          "所以直角有 6 × 4 = 24 個。",
+          "用交點檢查：長方形 4 個角各 1 個直角；邊上的丁字交點有 6 個（上邊 2、下邊 2、左右各 1），各 2 個直角；裡面的十字交點 2 個，各 4 個直角。4 + 12 + 8 = 24。"
+        ],
+        "zh-Hans": [
+          "图里的每一个直角，都刚好是某一个小长方形的一个角；每个小长方形的 4 个角也都是图里的直角，而且不会被两个小长方形共用。",
+          "所以直角有 6 × 4 = 24 个。",
+          "用交点检查：长方形 4 个角各 1 个直角；边上的丁字交点有 6 个（上边 2、下边 2、左右各 1），各 2 个直角；里面的十字交点 2 个，各 4 个直角。4 + 12 + 8 = 24。"
+        ],
+        "en": [
+          "Every right angle in the figure is exactly one corner of one small rectangle, and each small rectangle's 4 corners are right angles of the figure, never shared by two rectangles.",
+          "So there are 6 × 4 = 24 right angles.",
+          "Check by crossing points: the 4 outer corners give 1 each; the 6 T-junctions on the edges (2 top, 2 bottom, 1 left, 1 right) give 2 each; the 2 inner crossings give 4 each. 4 + 12 + 8 = 24."
+        ],
+        "ja": [
+          "図の 直角は どれも、どれか 1つの 小さな 長方形の 角 です。小さな 長方形の 4つの 角も みんな 直角で、2つの 長方形で 同じ 角を つかう ことは ありません。",
+          "だから 直角は 6 × 4 = 24こ です。",
+          "交わる 点で たしかめると、外の 4すみが 1こずつ、辺の 上の T字の 点 6こ（上 2、下 2、左右 1ずつ）が 2こずつ、中の 十字の 点 2こが 4こずつで、4 + 12 + 8 = 24。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "24"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "geometry-grade2-foundation",
+        "notes": "數直角：每個直角對應一個小長方形的角（一一對應），再用交點分類交叉檢查。掃「直角」：geometry_grade1_053 對角線剪開後直角數；geometry_grade2_051 直角分成兩角；geometry_grade3_005 哪個圖形有 4 個直角。全庫無網格中數直角題。"
+      }
+    },
+    {
+      "id": "geometry_grade2_foundation_080",
+      "reviewStatus": "ok",
+      "topic": "geometry",
+      "subtopic": "tetromino_line_symmetry",
+      "tags": [
+        "c:symmetry",
+        "c:quadrilateral",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade2",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "用 4 個一樣大的小正方形，每個都至少和另一個有一整條邊貼在一起，可以拼出 5 種形狀：一直條（4 個排成一排）、田字（2 × 2 的大正方形）、T 字形、L 字形、Z 字形（上排 2 格、下排 2 格，錯開 1 格）。這 5 種形狀之中，找得到對稱線（沿著這條線對摺，兩邊完全重合）的有幾種？",
+        "zh-Hans": "用 4 个一样大的小正方形，每个都至少和另一个有一整条边贴在一起，可以拼出 5 种形状：一直条（4 个排成一排）、田字（2 × 2 的大正方形）、T 字形、L 字形、Z 字形（上排 2 格、下排 2 格，错开 1 格）。这 5 种形状之中，找得到对称线（沿着这条线对折，两边完全重合）的有几种？",
+        "en": "Using 4 equal small squares, each sharing a whole side with at least one other, you can make 5 shapes: a straight bar (4 in a row), a 2 × 2 square, a T shape, an L shape, and a Z shape (2 squares on top and 2 below, shifted by 1). How many of these 5 shapes have a line of symmetry (folding along it makes the two halves match exactly)?",
+        "ja": "同じ 大きさの 正方形 4まいを、どれも ほかの 1まいと 辺が ぴったり くっつくように ならべると、5しゅるいの 形が できます：まっすぐ（4まい 1れつ）、田の字（2 × 2 の 正方形）、T字、L字、Z字（上に 2まい、下に 2まいで 1マス ずれた 形）。この 5しゅるいの うち、たいしょうの じく（そこで おると ぴったり かさなる 線）が ある ものは いくつ ですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 3。",
+        "zh-Hans": "答案是 3。",
+        "en": "The answer is 3.",
+        "ja": "こたえは 3 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "一直條：沿著中間對摺可以重合，有。田字：沿著中線對摺可以重合，有。",
+          "T 字形：沿著中間那一直行對摺，左右兩邊各 1 格，可以重合，有。",
+          "L 字形：一邊長 3 格、另一邊只伸出 1 格，怎麼摺都對不齊，沒有。Z 字形：要轉半圈才重合，對摺兩邊不重合，沒有。",
+          "有對稱線的是一直條、田字、T 字形，共 3 種。"
+        ],
+        "zh-Hans": [
+          "一直条：沿着中间对折可以重合，有。田字：沿着中线对折可以重合，有。",
+          "T 字形：沿着中间那一直行对折，左右两边各 1 格，可以重合，有。",
+          "L 字形：一边长 3 格、另一边只伸出 1 格，怎么折都对不齐，没有。Z 字形：要转半圈才重合，对折两边不重合，没有。",
+          "有对称线的是一直条、田字、T 字形，共 3 种。"
+        ],
+        "en": [
+          "Straight bar: folding across the middle matches, so yes. 2 × 2 square: folding along a middle line matches, so yes.",
+          "T shape: fold along the middle column; one square on each side matches, so yes.",
+          "L shape: one arm is 3 long and the other sticks out 1, so no fold matches — none. Z shape: it matches only after a half turn, not after a fold — none.",
+          "The shapes with a line of symmetry are the bar, the square and the T: 3 shapes."
+        ],
+        "ja": [
+          "まっすぐ：まん中で おると かさなるので ある。田の字：まん中の 線で おると かさなるので ある。",
+          "T字：まん中の たての れつで おると 左右 1まいずつで かさなるので ある。",
+          "L字：かたほうは 3まい、もう かたほうは 1まい 出て いるだけで、どう おっても かさならない。Z字：半回転すれば かさなるが、おっても かさならないので ない。",
+          "たいしょうの じくが あるのは まっすぐ、田の字、T字の 3しゅるい です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "3"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "geometry-grade2-foundation",
+        "notes": "四格骨牌的線對稱判斷（Z 形只有旋轉對稱）。掃「對稱線|四格|4 個.*小正方形」：geometry_grade2_053 數 4 格能拼出幾種形狀；geometry_grade3_035 十字形對稱線數；geometry_grade3_048 半圈重合。本題判斷各形狀有無對稱線。"
+      }
+    },
+    {
+      "id": "geometry_grade2_foundation_081",
+      "reviewStatus": "ok",
+      "topic": "geometry",
+      "subtopic": "triangles_from_square_corners_and_center",
+      "tags": [
+        "c:triangle",
+        "c:basic_counting",
+        "m:enumeration"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade2",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一塊木板上釘了 5 根釘子：4 根釘在一個正方形的四個角上，第 5 根釘在正方形的正中心。用橡皮筋套住其中 3 根釘子圍成三角形；如果 3 根釘子在同一條直線上，就圍不成三角形。一共可以圍出幾個不同的三角形？",
+        "zh-Hans": "一块木板上钉了 5 根钉子：4 根钉在一个正方形的四个角上，第 5 根钉在正方形的正中心。用橡皮筋套住其中 3 根钉子围成三角形；如果 3 根钉子在同一条直线上，就围不成三角形。一共可以围出几个不同的三角形？",
+        "en": "A board has 5 nails: 4 at the corners of a square and the 5th at the center of the square. A rubber band around 3 of the nails makes a triangle; if the 3 nails lie on one straight line, no triangle is formed. How many different triangles can be made?",
+        "ja": "板に くぎが 5本 うって あります。4本は 正方形の 4すみに、5本めは 正方形の まん中に あります。その うち 3本に わゴムを かけて 三角形を つくります。3本が 1本の 直線の 上に あると、三角形に なりません。ちがう 三角形は いくつ つくれますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 8。",
+        "zh-Hans": "答案是 8。",
+        "en": "The answer is 8.",
+        "ja": "こたえは 8 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "不用中心的釘子：從 4 個角選 3 個，等於決定哪 1 個角不選，有 4 種，都圍得成三角形。",
+          "用中心的釘子：再從 4 個角選 2 個，兩兩配對有 6 種。",
+          "但是對角的兩個角（左上和右下、右上和左下）和中心在同一條對角線上，圍不成三角形，要扣掉這 2 種。",
+          "一共 4 + 6 − 2 = 8 個三角形。"
+        ],
+        "zh-Hans": [
+          "不用中心的钉子：从 4 个角选 3 个，等于决定哪 1 个角不选，有 4 种，都围得成三角形。",
+          "用中心的钉子：再从 4 个角选 2 个，两两配对有 6 种。",
+          "但是对角的两个角（左上和右下、右上和左下）和中心在同一条对角线上，围不成三角形，要扣掉这 2 种。",
+          "一共 4 + 6 − 2 = 8 个三角形。"
+        ],
+        "en": [
+          "Without the center nail: choosing 3 of the 4 corners is the same as choosing which corner to leave out, 4 ways, and all make triangles.",
+          "Using the center nail: choose 2 of the 4 corners; there are 6 pairs.",
+          "But two opposite corners (top-left with bottom-right, top-right with bottom-left) lie on a diagonal with the center, so these 2 cannot form triangles and are removed.",
+          "Altogether 4 + 6 − 2 = 8 triangles."
+        ],
+        "ja": [
+          "まん中を つかわない：4すみから 3つ えらぶのは、つかわない 1すみを きめるのと 同じで 4とおり。どれも 三角形に なります。",
+          "まん中を つかう：4すみから 2つ えらぶ ペアは 6とおり。",
+          "でも むかいあう すみ（左上と 右下、右上と 左下）と まん中は 同じ 対角線の 上に あるので 三角形に ならず、この 2とおりを ひきます。",
+          "ぜんぶで 4 + 6 − 2 = 8こ です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "8"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "geometry-grade2-foundation",
+        "notes": "點集選 3 點成三角形，扣共線三點。程式驗證。掃「釘子|橡皮筋|三點.*直線」：geometry_grade6_081 釘板圍正方形；geometry_grade2_045 正方形兩對角線圖中數三角形（數已畫出的三角形）。本題是選點並排除共線。"
+      }
+    },
+    {
+      "id": "geometry_grade2_foundation_082",
+      "reviewStatus": "ok",
+      "topic": "geometry",
+      "subtopic": "cube_edges_neither_touching_nor_parallel",
+      "tags": [
+        "c:solid",
+        "c:basic_counting",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade2",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一個正方體有 12 條邊，邊的方向只有三種：左右方向、前後方向、上下方向，每一種方向各有 4 條邊。小安用手指著其中一條邊。在其他 11 條邊之中，和這條邊「沒有碰在一起，也不是同一個方向」的一共有幾條？",
+        "zh-Hans": "一个正方体有 12 条边，边的方向只有三种：左右方向、前后方向、上下方向，每一种方向各有 4 条边。小安用手指着其中一条边。在其他 11 条边之中，和这条边「没有碰在一起，也不是同一个方向」的一共有几条？",
+        "en": "A cube has 12 edges, and edges run in only three directions — left-right, front-back and up-down — with 4 edges in each direction. An points at one edge. Among the other 11 edges, how many neither touch it nor run in the same direction?",
+        "ja": "立方体には 辺が 12本 あり、辺の むきは 左右・前後・上下の 3しゅるいで、どの むきも 4本ずつ です。アンさんは その うち 1本の 辺を ゆびさします。ほかの 11本の うち、その 辺と「くっついて いなくて、むきも ちがう」辺は 何本 ありますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 4。",
+        "zh-Hans": "答案是 4。",
+        "en": "The answer is 4.",
+        "ja": "こたえは 4 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "和它同一個方向的，還有另外 3 條，要扣掉。",
+          "和它碰在一起的：這條邊的兩端各是一個角，每個角還連著另外 2 條邊，共 2 × 2 = 4 條，也要扣掉（它們的方向都和這條邊不同）。",
+          "剩下 11 − 3 − 4 = 4 條。"
+        ],
+        "zh-Hans": [
+          "和它同一个方向的，还有另外 3 条，要扣掉。",
+          "和它碰在一起的：这条边的两端各是一个角，每个角还连着另外 2 条边，共 2 × 2 = 4 条，也要扣掉（它们的方向都和这条边不同）。",
+          "剩下 11 − 3 − 4 = 4 条。"
+        ],
+        "en": [
+          "There are 3 other edges in the same direction; exclude them.",
+          "Edges touching it: each end of the edge is a corner joined to 2 other edges, 2 × 2 = 4 edges, also excluded (all in other directions).",
+          "That leaves 11 − 3 − 4 = 4 edges."
+        ],
+        "ja": [
+          "同じ むきの 辺は ほかに 3本 あるので のぞきます。",
+          "くっついて いる 辺：りょうはしの かどに、ほかの 辺が 2本ずつ ついて いて 2 × 2 = 4本。これも のぞきます（どれも むきが ちがいます）。",
+          "のこりは 11 − 3 − 4 = 4本 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "4"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "geometry-grade2-foundation",
+        "notes": "正方體稜的分類（同向／相交／歪斜）。程式驗證 4 條。掃「正方體.*邊|稜.*平行」：geometry_grade2_057 長方體頂點數；geometry_grade1_063 骨架吸管；geometry_grade4_057 稜長和。全庫無「異面稜」計數題。"
+      }
     }
   ]
 }
