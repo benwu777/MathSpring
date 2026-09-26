@@ -134,12 +134,14 @@ class AvatarPreview extends StatelessWidget {
     const double redLuma = .2126;
     const double greenLuma = .7152;
     const double blueLuma = .0722;
+    const double baseBrightness = .45;
+    const double detailBrightness = .55;
     List<double> channel(double target) => <double>[
-          redLuma * target,
-          greenLuma * target,
-          blueLuma * target,
+          redLuma * target * detailBrightness,
+          greenLuma * target * detailBrightness,
+          blueLuma * target * detailBrightness,
           0,
-          0,
+          255 * target * baseBrightness,
         ];
     return ColorFilter.matrix(<double>[
       ...channel(tint.r),
