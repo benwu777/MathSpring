@@ -134,8 +134,8 @@ class AvatarPreview extends StatelessWidget {
     const double redLuma = .2126;
     const double greenLuma = .7152;
     const double blueLuma = .0722;
-    const double baseBrightness = .45;
-    const double detailBrightness = .55;
+    const double baseBrightness = .85;
+    const double detailBrightness = .15;
     List<double> channel(double target) => <double>[
           redLuma * target * detailBrightness,
           greenLuma * target * detailBrightness,
