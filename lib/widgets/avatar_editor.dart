@@ -55,6 +55,10 @@ class _AvatarEditorState extends State<AvatarEditor> {
   }
 
   void _set(AvatarConfiguration value) {
+    if (value.hairColorId != _configuration.hairColorId) {
+      debugPrint('[hair-color] state ${_configuration.hairColorId} -> '
+          '${value.hairColorId}');
+    }
     setState(() => _configuration = value);
     widget.onChanged?.call(value);
   }
@@ -269,6 +273,9 @@ class _AvatarEditorState extends State<AvatarEditor> {
         key: ValueKey<String>('avatar_option_$id'),
         borderRadius: BorderRadius.circular(12),
         onTap: () {
+          debugPrint(
+              '[hair-color] tap id=$id selected=$selected locked=$locked '
+              'hasFullUnlock=${widget.hasFullUnlock}');
           if (locked) {
             widget.onLockedOptionSelected?.call(id);
             return;
@@ -386,6 +393,8 @@ class _AvatarEditorState extends State<AvatarEditor> {
         key: ValueKey<String>('avatar_option_$id'),
         customBorder: const CircleBorder(),
         onTap: () {
+          debugPrint('[hair-color] swatch tap id=$id selected=$selected '
+              'locked=$locked hasFullUnlock=${widget.hasFullUnlock}');
           if (locked) {
             widget.onLockedOptionSelected?.call(id);
             return;
