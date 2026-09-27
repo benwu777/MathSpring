@@ -4,7 +4,7 @@ import 'package:sqflite/sqflite.dart';
 
 class MathSpringDatabase {
   static const String databaseName = 'mathspring.db';
-  static const int schemaVersion = 8;
+  static const int schemaVersion = 9;
 
   static Future<Database> openDefault() async {
     final String databasesPath = await getDatabasesPath();
@@ -145,7 +145,7 @@ class MathSpringDatabase {
       }
     }
     if (oldVersion < 7) await _createFavoriteQuestionTables(db);
-    if (oldVersion < 8) await _addFavoriteCollectionColors(db);
+    if (oldVersion < 9) await _addFavoriteCollectionColors(db);
   }
 
   /// Adds collection colors and gives each learner's existing custom

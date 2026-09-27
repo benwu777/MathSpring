@@ -325,4 +325,57 @@ void main() {
       await directory.delete(recursive: true);
     }
   });
+
+  // Version 8 was already used by the girl hair color branch
+  // (learner_profiles.avatar_hair_color_id), so devices can be at version 8
+  // without the collection color column.
+  test('a version 8 database without collection colors can create collections',
+      () async {
+    final Directory directory =
+        await Directory.systemTemp.createTemp('mathspring_v8_hair_');
+    final String path = p.join(directory.path, 'mathspring.db');
+    try {
+      final Database legacy = await openDatabase(path, version: 8,
+          onCreate: (Database db, int version) async {
+        await db.execute('''CREATE TABLE favorite_question_collections(
+          id TEXT PRIMARY KEY, learner_id TEXT NOT NULL, name TEXT NOT NULL,
+          sort_order INTEGER NOT NULL, is_default INTEGER NOT NULL,
+          created_at TEXT NOT NULL)''');
+        await db.execute('''CREATE TABLE favorite_questions(
+          learner_id TEXT NOT NULL, question_id TEXT NOT NULL,
+          note TEXT NOT NULL, tags_json TEXT NOT NULL,
+          created_at TEXT NOT NULL, updated_at TEXT NOT NULL,
+          PRIMARY KEY (learner_id, question_id))''');
+        await db.insert('favorite_question_collections', <String, Object?>{
+          'id': 'c1',
+          'learner_id': learnerId,
+          'name': '討論',
+          'sort_order': 1,
+          'is_default': 0,
+          'created_at': '2026-09-15T00:00:00Z',
+        });
+      });
+      await legacy.close();
+
+      final Database upgraded = await MathSpringDatabase.openAtPath(path);
+      final FavoriteQuestionRepository upgradedRepository =
+          FavoriteQuestionRepository(upgraded);
+      final FavoriteQuestionCollection created =
+          await upgradedRepository.createCollection(
+              learnerId: learnerId, name: '易錯', colorKey: 'rose');
+      final List<FavoriteQuestionCollection> collections =
+          await upgradedRepository.fetchCollections(learnerId);
+      await upgraded.close();
+
+      expect(created.colorKey, 'rose');
+      expect(
+        collections
+            .singleWhere((FavoriteQuestionCollection c) => c.id == 'c1')
+            .colorKey,
+        FavoriteCollectionColors.keys[0],
+      );
+    } finally {
+      await directory.delete(recursive: true);
+    }
+  });
 }
