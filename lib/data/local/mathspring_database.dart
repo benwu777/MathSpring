@@ -1,9 +1,10 @@
+import 'package:mathspring/models/favorite_question.dart';
 import 'package:path/path.dart' as p;
 import 'package:sqflite/sqflite.dart';
 
 class MathSpringDatabase {
   static const String databaseName = 'mathspring.db';
-  static const int schemaVersion = 7;
+  static const int schemaVersion = 8;
 
   static Future<Database> openDefault() async {
     final String databasesPath = await getDatabasesPath();
@@ -144,6 +145,39 @@ class MathSpringDatabase {
       }
     }
     if (oldVersion < 7) await _createFavoriteQuestionTables(db);
+    if (oldVersion < 8) await _addFavoriteCollectionColors(db);
+  }
+
+  /// Adds collection colors and gives each learner's existing custom
+  /// collections palette colors in their display order.
+  static Future<void> _addFavoriteCollectionColors(Database db) async {
+    await _addColumnIfMissing(
+      db,
+      table: 'favorite_question_collections',
+      column: 'color_key',
+      definition: 'TEXT',
+    );
+    final List<Map<String, Object?>> rows = await db.query(
+      'favorite_question_collections',
+      columns: <String>['id', 'learner_id'],
+      where: 'is_default = 0 AND color_key IS NULL',
+      orderBy: 'learner_id, sort_order',
+    );
+    final Map<String, int> colored = <String, int>{};
+    for (final Map<String, Object?> row in rows) {
+      final String learnerId = row['learner_id']! as String;
+      final int index = colored[learnerId] ?? 0;
+      colored[learnerId] = index + 1;
+      await db.update(
+        'favorite_question_collections',
+        <String, Object?>{
+          'color_key': FavoriteCollectionColors
+              .keys[index % FavoriteCollectionColors.keys.length],
+        },
+        where: 'id = ?',
+        whereArgs: <Object?>[row['id']],
+      );
+    }
   }
 
   static Future<void> _addColumnIfMissing(
@@ -249,7 +283,8 @@ class MathSpringDatabase {
     await db
         .execute('''CREATE TABLE IF NOT EXISTS favorite_question_collections(
       id TEXT PRIMARY KEY, learner_id TEXT NOT NULL, name TEXT NOT NULL,
-      sort_order INTEGER NOT NULL, is_default INTEGER NOT NULL, created_at TEXT NOT NULL
+      sort_order INTEGER NOT NULL, is_default INTEGER NOT NULL, created_at TEXT NOT NULL,
+      color_key TEXT
     )''');
     await db.execute('''CREATE TABLE IF NOT EXISTS favorite_questions(
       learner_id TEXT NOT NULL, question_id TEXT NOT NULL, note TEXT NOT NULL,

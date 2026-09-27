@@ -8,6 +8,7 @@ import 'package:mathspring/competition_profiles.dart';
 import 'package:mathspring/data/bundled/bundled_question_bank_repository.dart'
     as bundled;
 import 'package:mathspring/data/local/app_services.dart';
+import 'package:mathspring/data/local/favorite_question_repository.dart';
 import 'package:mathspring/models/answer_session.dart';
 import 'package:mathspring/models/avatar_configuration.dart';
 import 'package:mathspring/models/favorite_question.dart';
@@ -26,6 +27,7 @@ import 'package:mathspring/services/monetization_service.dart';
 import 'package:mathspring/services/session_launch_plan_builder.dart';
 import 'package:mathspring/services/storekit_monetization_service.dart';
 import 'package:mathspring/ui/content_scroll_view.dart';
+import 'package:mathspring/ui/favorite_collection_palette.dart';
 import 'package:mathspring/ui/layout_spec.dart';
 import 'package:mathspring/widgets/avatar_editor.dart';
 import 'package:mathspring/widgets/avatar_preview.dart';
@@ -2884,9 +2886,14 @@ class QuestionLibraryPage extends StatefulWidget {
 }
 
 class FavoritesPage extends StatefulWidget {
-  const FavoritesPage({super.key, required this.services});
+  const FavoritesPage({
+    super.key,
+    required this.services,
+    this.initialQuestionsById,
+  });
 
   final AppServices services;
+  final Map<String, Question>? initialQuestionsById;
 
   @override
   State<FavoritesPage> createState() => _FavoritesPageState();
@@ -2912,59 +2919,58 @@ class _FavoritesPageState extends State<FavoritesPage> {
   Future<_FavoritesPageData> _load(String learnerId) async {
     final List<FavoriteQuestionCollection> collections =
         await widget.services.getFavoriteCollections(learnerId);
+    // A deleted collection falls back to all favorites.
+    final String selectedId = collections.any(
+            (FavoriteQuestionCollection c) => c.id == _selectedCollectionId)
+        ? _selectedCollectionId!
+        : 'favorites_all_$learnerId';
+    _selectedCollectionId = selectedId;
     final List<FavoriteQuestion> favorites =
         await widget.services.getFavoriteQuestionsInCollection(
       learnerId: learnerId,
-      collectionId: _selectedCollectionId ?? 'favorites_all_$learnerId',
+      collectionId: selectedId,
     );
-    if (favorites.isEmpty) {
-      return _FavoritesPageData(
-        collections: collections,
-        favorites: favorites,
-        questionsById: const <String, Question>{},
-      );
+    final Map<String, Set<String>> collectionIdsByQuestion =
+        <String, Set<String>>{
+      for (final FavoriteQuestion favorite in favorites)
+        favorite.questionId:
+            await widget.services.getFavoriteQuestionCollectionIds(
+          learnerId: learnerId,
+          questionId: favorite.questionId,
+        ),
+    };
+    final Map<String, Question> questionsById = <String, Question>{
+      ...?widget.initialQuestionsById,
+    };
+    if (favorites.isNotEmpty && widget.initialQuestionsById == null) {
+      final List<QuestionBank> packs =
+          await bundled.BundledQuestionBankRepository().loadAllPacks();
+      for (final QuestionBank pack in packs) {
+        for (final Question question in pack.questions) {
+          questionsById[question.id] = question;
+        }
+      }
     }
-    final List<QuestionBank> packs =
-        await bundled.BundledQuestionBankRepository().loadAllPacks();
     return _FavoritesPageData(
       collections: collections,
+      selectedCollectionId: selectedId,
       favorites: favorites,
-      questionsById: <String, Question>{
-        for (final QuestionBank pack in packs)
-          for (final Question question in pack.questions) question.id: question,
-      },
+      collectionIdsByQuestion: collectionIdsByQuestion,
+      questionsById: questionsById,
     );
   }
 
-  Future<void> _addCollection(AppStrings strings) async {
-    final TextEditingController controller = TextEditingController();
-    final String? name = await showDialog<String>(
-      context: context,
-      builder: (BuildContext dialogContext) => AlertDialog(
-        title: Text(strings.addCollection),
-        content: TextField(
-          controller: controller,
-          autofocus: true,
-          decoration: InputDecoration(labelText: strings.collectionName),
-          onSubmitted: (String value) => Navigator.pop(dialogContext, value),
-        ),
-        actions: <Widget>[
-          TextButton(
-            onPressed: () => Navigator.pop(dialogContext),
-            child: Text(strings.cancelLabel),
-          ),
-          FilledButton(
-            onPressed: () => Navigator.pop(dialogContext, controller.text),
-            child: Text(strings.saveLabel),
-          ),
-        ],
-      ),
-    );
+  Future<void> _manageCollections() async {
     final String? learnerId = widget.services.currentLearnerId;
-    if (name == null || learnerId == null) return;
-    await widget.services.createFavoriteCollection(
-      learnerId: learnerId,
-      name: name,
+    if (learnerId == null) return;
+    await showModalBottomSheet<void>(
+      context: context,
+      isScrollControlled: true,
+      showDragHandle: true,
+      builder: (_) => _ManageCollectionsSheet(
+        services: widget.services,
+        learnerId: learnerId,
+      ),
     );
     if (mounted) setState(_reload);
   }
@@ -2980,7 +2986,7 @@ class _FavoritesPageState extends State<FavoritesPage> {
         .where((FavoriteQuestionCollection collection) => !collection.isDefault)
         .toList();
     if (customCollections.isEmpty) {
-      await _addCollection(strings);
+      await _manageCollections();
       return;
     }
     final Set<String> initialIds =
@@ -3005,6 +3011,8 @@ class _FavoritesPageState extends State<FavoritesPage> {
                     .map((FavoriteQuestionCollection collection) =>
                         CheckboxListTile(
                           value: selected.contains(collection.id),
+                          secondary: _CollectionColorDot(
+                              colorKey: collection.colorKey),
                           title: Text(collection.name),
                           contentPadding: EdgeInsets.zero,
                           onChanged: (bool? value) => setDialogState(() {
@@ -3041,6 +3049,40 @@ class _FavoritesPageState extends State<FavoritesPage> {
     if (mounted) setState(_reload);
   }
 
+  Future<void> _editFavoriteDetails(FavoriteQuestion favorite) async {
+    final String? learnerId = widget.services.currentLearnerId;
+    if (learnerId == null) return;
+    final List<String> usedTags =
+        await widget.services.getUsedFavoriteTags(learnerId);
+    if (!mounted) return;
+    final _FavoriteDetails? details =
+        await showModalBottomSheet<_FavoriteDetails>(
+      context: context,
+      isScrollControlled: true,
+      showDragHandle: true,
+      builder: (_) =>
+          _FavoriteDetailsSheet(favorite: favorite, usedTags: usedTags),
+    );
+    if (details == null) return;
+    await widget.services.updateFavoriteDetails(
+      learnerId: learnerId,
+      questionId: favorite.questionId,
+      note: details.note,
+      tags: details.tags,
+    );
+    if (mounted) setState(_reload);
+  }
+
+  Future<void> _removeFavorite(FavoriteQuestion favorite) async {
+    final String? learnerId = widget.services.currentLearnerId;
+    if (learnerId == null) return;
+    await widget.services.toggleFavoriteQuestion(
+      learnerId: learnerId,
+      questionId: favorite.questionId,
+    );
+    if (mounted) setState(_reload);
+  }
+
   @override
   Widget build(BuildContext context) {
     final AppStrings strings = AppStrings.of(context);
@@ -3049,10 +3091,10 @@ class _FavoritesPageState extends State<FavoritesPage> {
         title: Text(strings.favoritesTitle),
         actions: <Widget>[
           IconButton(
-            key: const ValueKey<String>('add_favorite_collection'),
-            tooltip: strings.addCollection,
-            onPressed: () => _addCollection(strings),
-            icon: const Icon(Icons.create_new_folder_outlined),
+            key: const ValueKey<String>('manage_favorite_collections'),
+            tooltip: strings.manageCollections,
+            onPressed: _manageCollections,
+            icon: const Icon(Icons.tune_rounded, color: AppVisualTokens.progress),
           ),
         ],
       ),
@@ -3065,24 +3107,37 @@ class _FavoritesPageState extends State<FavoritesPage> {
           }
           final _FavoritesPageData data = snapshot.data!;
           final List<FavoriteQuestionCollection> collections = data.collections;
-          final String? selectedId = _selectedCollectionId ??
-              (collections.isEmpty ? null : collections.first.id);
+          final Map<String, FavoriteQuestionCollection> collectionsById =
+              <String, FavoriteQuestionCollection>{
+            for (final FavoriteQuestionCollection collection in collections)
+              collection.id: collection,
+          };
           return ListView(
             padding: const EdgeInsets.all(20),
             children: <Widget>[
               if (collections.isNotEmpty)
                 DropdownButtonFormField<String>(
                   key: const ValueKey<String>('favorite_collection_picker'),
-                  value: selectedId,
+                  value: data.selectedCollectionId,
                   decoration:
                       InputDecoration(labelText: strings.favoritesTitle),
                   items: collections
                       .map((FavoriteQuestionCollection collection) =>
                           DropdownMenuItem<String>(
                             value: collection.id,
-                            child: Text(collection.isDefault
-                                ? strings.allFavorites
-                                : collection.name),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: <Widget>[
+                                if (!collection.isDefault) ...<Widget>[
+                                  _CollectionColorDot(
+                                      colorKey: collection.colorKey, size: 10),
+                                  const SizedBox(width: 8),
+                                ],
+                                Text(collection.isDefault
+                                    ? strings.allFavorites
+                                    : collection.name),
+                              ],
+                            ),
                           ))
                       .toList(),
                   onChanged: (String? value) => setState(() {
@@ -3094,22 +3149,37 @@ class _FavoritesPageState extends State<FavoritesPage> {
               if (data.favorites.isEmpty)
                 _FavoriteEmptyState(message: strings.favoritesEmpty)
               else
-                ...data.favorites.map((FavoriteQuestion favorite) => Padding(
-                      padding: const EdgeInsets.only(bottom: 12),
-                      child: _FavoriteQuestionCard(
+                ...data.favorites.map((FavoriteQuestion favorite) {
+                  final Question? question =
+                      data.questionsById[favorite.questionId];
+                  return Padding(
+                    padding: const EdgeInsets.only(bottom: 12),
+                    child: _FavoriteQuestionCard(
+                      favorite: favorite,
+                      question: question,
+                      collections: <FavoriteQuestionCollection>[
+                        for (final FavoriteQuestionCollection collection
+                            in collections)
+                          if (!collection.isDefault &&
+                              (data.collectionIdsByQuestion[
+                                          favorite.questionId] ??
+                                      const <String>{})
+                                  .contains(collection.id))
+                            collectionsById[collection.id]!,
+                      ],
+                      onOrganize: () => _editFavoriteCollections(
                         favorite: favorite,
-                        question: data.questionsById[favorite.questionId],
-                        onOrganize: () => _editFavoriteCollections(
-                          favorite: favorite,
-                          collections: collections,
-                          strings: strings,
-                        ),
-                        onOpen: data.questionsById[favorite.questionId] == null
-                            ? null
-                            : () => _openQuestion(
-                                data.questionsById[favorite.questionId]!),
+                        collections: collections,
+                        strings: strings,
                       ),
-                    )),
+                      onEditDetails: () => _editFavoriteDetails(favorite),
+                      onRemove: () => _removeFavorite(favorite),
+                      onOpen: question == null
+                          ? null
+                          : () => _openQuestion(question),
+                    ),
+                  );
+                }),
             ],
           );
         },
@@ -3138,18 +3208,359 @@ class _FavoritesPageState extends State<FavoritesPage> {
 class _FavoritesPageData {
   const _FavoritesPageData({
     required this.collections,
+    required this.selectedCollectionId,
     required this.favorites,
+    required this.collectionIdsByQuestion,
     required this.questionsById,
   });
 
   const _FavoritesPageData.empty()
       : collections = const <FavoriteQuestionCollection>[],
+        selectedCollectionId = null,
         favorites = const <FavoriteQuestion>[],
+        collectionIdsByQuestion = const <String, Set<String>>{},
         questionsById = const <String, Question>{};
 
   final List<FavoriteQuestionCollection> collections;
+  final String? selectedCollectionId;
   final List<FavoriteQuestion> favorites;
+  final Map<String, Set<String>> collectionIdsByQuestion;
   final Map<String, Question> questionsById;
+}
+
+class _CollectionColorDot extends StatelessWidget {
+  const _CollectionColorDot({required this.colorKey, this.size = 12});
+
+  final String? colorKey;
+  final double size;
+
+  @override
+  Widget build(BuildContext context) => Container(
+        width: size,
+        height: size,
+        decoration: BoxDecoration(
+          color: FavoriteCollectionPalette.of(colorKey).strong,
+          shape: BoxShape.circle,
+        ),
+      );
+}
+
+class _ManageCollectionsSheet extends StatefulWidget {
+  const _ManageCollectionsSheet({
+    required this.services,
+    required this.learnerId,
+  });
+
+  final AppServices services;
+  final String learnerId;
+
+  @override
+  State<_ManageCollectionsSheet> createState() =>
+      _ManageCollectionsSheetState();
+}
+
+class _ManageCollectionsSheetState extends State<_ManageCollectionsSheet> {
+  late Future<
+      (
+        List<FavoriteQuestionCollection> collections,
+        Map<String, int> counts
+      )> _future;
+
+  @override
+  void initState() {
+    super.initState();
+    _reload();
+  }
+
+  void _reload() {
+    _future = _fetch();
+  }
+
+  Future<(List<FavoriteQuestionCollection>, Map<String, int>)> _fetch() async =>
+      (
+        await widget.services.getFavoriteCollections(widget.learnerId),
+        await widget.services.getFavoriteCollectionCounts(widget.learnerId),
+      );
+
+  Future<void> _openEditor({
+    required List<FavoriteQuestionCollection> collections,
+    FavoriteQuestionCollection? collection,
+  }) async {
+    final bool? saved = await showDialog<bool>(
+      context: context,
+      builder: (_) => _CollectionEditorDialog(
+        collection: collection,
+        initialColorKey:
+            collection?.colorKey ?? nextFavoriteCollectionColor(collections),
+        onSubmit: (String name, String colorKey) async {
+          if (collection == null) {
+            await widget.services.createFavoriteCollection(
+              learnerId: widget.learnerId,
+              name: name,
+              colorKey: colorKey,
+            );
+          } else {
+            await widget.services.updateFavoriteCollection(
+              collection: collection,
+              name: name,
+              colorKey: colorKey,
+            );
+          }
+        },
+      ),
+    );
+    if (saved == true && mounted) setState(_reload);
+  }
+
+  Future<void> _delete(FavoriteQuestionCollection collection) async {
+    final AppStrings strings = AppStrings.of(context);
+    final bool? confirmed = await showDialog<bool>(
+      context: context,
+      builder: (BuildContext dialogContext) => AlertDialog(
+        title: Text(strings.deleteCollection),
+        content: Text(strings.deleteCollectionConfirm(collection.name)),
+        actions: <Widget>[
+          TextButton(
+            onPressed: () => Navigator.pop(dialogContext, false),
+            child: Text(strings.cancelLabel),
+          ),
+          FilledButton(
+            style:
+                FilledButton.styleFrom(backgroundColor: AppVisualTokens.danger),
+            onPressed: () => Navigator.pop(dialogContext, true),
+            child: Text(strings.deleteLabel),
+          ),
+        ],
+      ),
+    );
+    if (confirmed != true) return;
+    await widget.services.deleteFavoriteCollection(collection);
+    if (mounted) setState(_reload);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final AppStrings strings = AppStrings.of(context);
+    final TextTheme textTheme = Theme.of(context).textTheme;
+    return SafeArea(
+      child:
+          FutureBuilder<(List<FavoriteQuestionCollection>, Map<String, int>)>(
+        future: _future,
+        builder: (BuildContext context,
+            AsyncSnapshot<(List<FavoriteQuestionCollection>, Map<String, int>)>
+                snapshot) {
+          if (!snapshot.hasData) {
+            return const Padding(
+              padding: EdgeInsets.all(32),
+              child: Center(child: CircularProgressIndicator()),
+            );
+          }
+          final (
+            List<FavoriteQuestionCollection> collections,
+            Map<String, int> counts
+          ) = snapshot.data!;
+          final int customCount = collections
+              .where((FavoriteQuestionCollection c) => !c.isDefault)
+              .length;
+          final bool isFull =
+              customCount >= FavoriteQuestionRepository.maxCustomCollections;
+          return SingleChildScrollView(
+            padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: <Widget>[
+                Text(strings.manageCollections, style: textTheme.titleLarge),
+                const SizedBox(height: 12),
+                for (final FavoriteQuestionCollection collection in collections)
+                  ListTile(
+                    contentPadding: EdgeInsets.zero,
+                    leading: collection.isDefault
+                        ? const Icon(Icons.bookmark_border_rounded,
+                            color: AppVisualTokens.inkMuted)
+                        : _CollectionColorDot(colorKey: collection.colorKey),
+                    minLeadingWidth: 24,
+                    title: Text(collection.isDefault
+                        ? strings.allFavorites
+                        : collection.name),
+                    subtitle: Text(strings
+                        .favoriteQuestionCount(counts[collection.id] ?? 0)),
+                    trailing: collection.isDefault
+                        ? Text(strings.fixedCollection,
+                            style: textTheme.labelMedium
+                                ?.copyWith(color: AppVisualTokens.inkMuted))
+                        : Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: <Widget>[
+                              IconButton(
+                                key: ValueKey<String>(
+                                    'edit_favorite_collection_${collection.id}'),
+                                tooltip: strings.editCollection,
+                                onPressed: () => _openEditor(
+                                    collections: collections,
+                                    collection: collection),
+                                icon: const Icon(Icons.edit_outlined),
+                              ),
+                              IconButton(
+                                key: ValueKey<String>(
+                                    'delete_favorite_collection_${collection.id}'),
+                                tooltip: strings.deleteCollection,
+                                onPressed: () => _delete(collection),
+                                icon: const Icon(Icons.delete_outline_rounded),
+                              ),
+                            ],
+                          ),
+                  ),
+                const SizedBox(height: 12),
+                FilledButton.tonalIcon(
+                  key: const ValueKey<String>('add_favorite_collection'),
+                  onPressed: isFull
+                      ? null
+                      : () => _openEditor(collections: collections),
+                  icon: const Icon(Icons.add_rounded),
+                  label: Text(strings.addCollection),
+                ),
+                if (isFull) ...<Widget>[
+                  const SizedBox(height: 8),
+                  Text(
+                    strings.collectionLimitReached(
+                        FavoriteQuestionRepository.maxCustomCollections),
+                    textAlign: TextAlign.center,
+                    style: textTheme.bodySmall
+                        ?.copyWith(color: AppVisualTokens.inkMuted),
+                  ),
+                ],
+              ],
+            ),
+          );
+        },
+      ),
+    );
+  }
+}
+
+/// Creates or edits a collection; [onSubmit] runs inside the dialog so name
+/// problems are shown in place instead of closing it.
+class _CollectionEditorDialog extends StatefulWidget {
+  const _CollectionEditorDialog({
+    required this.collection,
+    required this.initialColorKey,
+    required this.onSubmit,
+  });
+
+  final FavoriteQuestionCollection? collection;
+  final String initialColorKey;
+  final Future<void> Function(String name, String colorKey) onSubmit;
+
+  @override
+  State<_CollectionEditorDialog> createState() =>
+      _CollectionEditorDialogState();
+}
+
+class _CollectionEditorDialogState extends State<_CollectionEditorDialog> {
+  late final TextEditingController _nameController =
+      TextEditingController(text: widget.collection?.name ?? '');
+  late String _colorKey = widget.initialColorKey;
+  String? _error;
+
+  @override
+  void dispose() {
+    _nameController.dispose();
+    super.dispose();
+  }
+
+  Future<void> _submit(AppStrings strings) async {
+    try {
+      await widget.onSubmit(_nameController.text, _colorKey);
+    } on FavoriteCollectionNameInvalid catch (error) {
+      setState(() => _error = strings.collectionNameError(error.reason));
+      return;
+    } on FavoriteCollectionLimitReached {
+      setState(() => _error = strings.collectionLimitReached(
+          FavoriteQuestionRepository.maxCustomCollections));
+      return;
+    }
+    if (mounted) Navigator.pop(context, true);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final AppStrings strings = AppStrings.of(context);
+    return AlertDialog(
+      title: Text(widget.collection == null
+          ? strings.addCollection
+          : strings.editCollection),
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          TextField(
+            key: const ValueKey<String>('favorite_collection_name'),
+            controller: _nameController,
+            autofocus: widget.collection == null,
+            maxLength: maxFavoriteCollectionNameLength,
+            decoration: InputDecoration(
+              labelText: strings.collectionName,
+              errorText: _error,
+            ),
+            onChanged: (_) {
+              if (_error != null) setState(() => _error = null);
+            },
+            onSubmitted: (_) => _submit(strings),
+          ),
+          const SizedBox(height: 8),
+          Text(strings.collectionColor,
+              style: Theme.of(context).textTheme.labelLarge),
+          const SizedBox(height: 10),
+          Wrap(
+            spacing: 10,
+            runSpacing: 10,
+            children: <Widget>[
+              for (final String key in FavoriteCollectionColors.keys)
+                Semantics(
+                  label: strings.collectionColorName(key),
+                  selected: key == _colorKey,
+                  button: true,
+                  child: InkWell(
+                    key: ValueKey<String>('collection_color_$key'),
+                    customBorder: const CircleBorder(),
+                    onTap: () => setState(() => _colorKey = key),
+                    child: Container(
+                      width: 36,
+                      height: 36,
+                      decoration: BoxDecoration(
+                        color: FavoriteCollectionPalette.of(key).strong,
+                        shape: BoxShape.circle,
+                        border: Border.all(
+                          color: key == _colorKey
+                              ? AppVisualTokens.ink
+                              : Colors.transparent,
+                          width: 2,
+                        ),
+                      ),
+                      child: key == _colorKey
+                          ? const Icon(Icons.check_rounded,
+                              color: Colors.white, size: 20)
+                          : null,
+                    ),
+                  ),
+                ),
+            ],
+          ),
+        ],
+      ),
+      actions: <Widget>[
+        TextButton(
+          onPressed: () => Navigator.pop(context, false),
+          child: Text(strings.cancelLabel),
+        ),
+        FilledButton(
+          onPressed: () => _submit(strings),
+          child: Text(strings.saveLabel),
+        ),
+      ],
+    );
+  }
 }
 
 class _FavoriteEmptyState extends StatelessWidget {
@@ -3173,41 +3584,351 @@ class _FavoriteEmptyState extends StatelessWidget {
       );
 }
 
+enum _FavoriteAction { organize, editDetails, remove }
+
 class _FavoriteQuestionCard extends StatelessWidget {
   const _FavoriteQuestionCard({
     required this.favorite,
     required this.question,
+    required this.collections,
     required this.onOpen,
     required this.onOrganize,
+    required this.onEditDetails,
+    required this.onRemove,
   });
 
   final FavoriteQuestion favorite;
   final Question? question;
+  final List<FavoriteQuestionCollection> collections;
   final VoidCallback? onOpen;
   final VoidCallback onOrganize;
+  final VoidCallback onEditDetails;
+  final VoidCallback onRemove;
 
-  @override
-  Widget build(BuildContext context) => Card(
-        child: ListTile(
-          onTap: onOpen,
-          leading: const Icon(Icons.bookmark_rounded),
-          title: Text(
-            question?.localizedPrompt(_localeCode(context)) ??
-                favorite.questionId,
-            maxLines: 3,
-            overflow: TextOverflow.ellipsis,
-          ),
-          subtitle: Text(favorite.note.isEmpty
-              ? favorite.tags.join(' · ')
-              : favorite.note),
-          trailing: IconButton(
-            key: ValueKey<String>('organize_favorite_${favorite.questionId}'),
-            tooltip: AppStrings.of(context).organizeFavorite,
-            onPressed: onOrganize,
-            icon: const Icon(Icons.more_horiz_rounded),
-          ),
+  static Widget _pill({
+    Key? key,
+    required String label,
+    required Color background,
+    required Color foreground,
+  }) =>
+      Container(
+        key: key,
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+        decoration: BoxDecoration(
+          color: background,
+          borderRadius: BorderRadius.circular(999),
+        ),
+        child: Text(
+          label,
+          style: TextStyle(
+              fontSize: 12, fontWeight: FontWeight.w600, color: foreground),
         ),
       );
+
+  @override
+  Widget build(BuildContext context) {
+    final AppStrings strings = AppStrings.of(context);
+    final TextTheme textTheme = Theme.of(context).textTheme;
+    return Container(
+      decoration: BoxDecoration(
+        color: AppVisualTokens.surface,
+        borderRadius: BorderRadius.circular(14),
+        border: Border.all(color: AppVisualTokens.outline),
+        boxShadow: const <BoxShadow>[
+          BoxShadow(
+              color: Color(0x0A17201D), blurRadius: 8, offset: Offset(0, 2)),
+        ],
+      ),
+      child: Material(
+        type: MaterialType.transparency,
+        child: InkWell(
+          borderRadius: BorderRadius.circular(14),
+          onTap: onOpen,
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(16, 12, 4, 14),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.only(top: 6),
+                        child: Text(
+                          question?.localizedPrompt(_localeCode(context)) ??
+                              favorite.questionId,
+                          maxLines: 3,
+                          overflow: TextOverflow.ellipsis,
+                          style: textTheme.bodyLarge?.copyWith(height: 1.5),
+                        ),
+                      ),
+                    ),
+                    PopupMenuButton<_FavoriteAction>(
+                      key: ValueKey<String>(
+                          'favorite_actions_${favorite.questionId}'),
+                      tooltip: strings.organizeFavorite,
+                      icon: const Icon(Icons.more_horiz_rounded),
+                      onSelected: (_FavoriteAction action) => switch (action) {
+                        _FavoriteAction.organize => onOrganize(),
+                        _FavoriteAction.editDetails => onEditDetails(),
+                        _FavoriteAction.remove => onRemove(),
+                      },
+                      itemBuilder: (_) => <PopupMenuEntry<_FavoriteAction>>[
+                        PopupMenuItem<_FavoriteAction>(
+                          value: _FavoriteAction.organize,
+                          child: Text(strings.organizeFavorite),
+                        ),
+                        PopupMenuItem<_FavoriteAction>(
+                          value: _FavoriteAction.editDetails,
+                          child: Text(strings.editTagsAndNote),
+                        ),
+                        PopupMenuItem<_FavoriteAction>(
+                          value: _FavoriteAction.remove,
+                          child: Text(strings.removeFavorite),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+                if (collections.isNotEmpty ||
+                    favorite.tags.isNotEmpty) ...<Widget>[
+                  const SizedBox(height: 10),
+                  Wrap(
+                    spacing: 6,
+                    runSpacing: 6,
+                    children: <Widget>[
+                      for (final FavoriteQuestionCollection collection
+                          in collections)
+                        _pill(
+                          key: ValueKey<String>(
+                              'favorite_collection_chip_${favorite.questionId}_${collection.id}'),
+                          label: collection.name,
+                          background:
+                              FavoriteCollectionPalette.of(collection.colorKey)
+                                  .soft,
+                          foreground:
+                              FavoriteCollectionPalette.of(collection.colorKey)
+                                  .strong,
+                        ),
+                      for (final String tag in favorite.tags)
+                        _pill(
+                          label: tag,
+                          background: AppVisualTokens.surfaceMuted,
+                          foreground: AppVisualTokens.inkMuted,
+                        ),
+                    ],
+                  ),
+                ],
+                if (favorite.note.isNotEmpty) ...<Widget>[
+                  const SizedBox(height: 8),
+                  Padding(
+                    padding: const EdgeInsets.only(right: 12),
+                    child: Text(
+                      favorite.note,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: textTheme.bodySmall
+                          ?.copyWith(color: AppVisualTokens.inkMuted),
+                    ),
+                  ),
+                ],
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _FavoriteDetails {
+  const _FavoriteDetails({required this.note, required this.tags});
+
+  final String note;
+  final List<String> tags;
+}
+
+/// Edits a favorite's note and tags; nothing is saved until the learner taps
+/// save, which returns the edited [_FavoriteDetails].
+class _FavoriteDetailsSheet extends StatefulWidget {
+  const _FavoriteDetailsSheet({required this.favorite, required this.usedTags});
+
+  final FavoriteQuestion favorite;
+  final List<String> usedTags;
+
+  @override
+  State<_FavoriteDetailsSheet> createState() => _FavoriteDetailsSheetState();
+}
+
+class _FavoriteDetailsSheetState extends State<_FavoriteDetailsSheet> {
+  static const int _maxUsedTagsShown = 15;
+
+  late final TextEditingController _noteController =
+      TextEditingController(text: widget.favorite.note);
+  final TextEditingController _tagController = TextEditingController();
+  final FocusNode _tagFocus = FocusNode();
+  late final List<String> _tags = List<String>.from(widget.favorite.tags);
+
+  bool get _isFull => _tags.length >= maxFavoriteTags;
+
+  @override
+  void dispose() {
+    _noteController.dispose();
+    _tagController.dispose();
+    _tagFocus.dispose();
+    super.dispose();
+  }
+
+  void _addTag(String tag) {
+    final List<String> next = normalizeFavoriteTags(<String>[..._tags, tag]);
+    setState(() {
+      _tags
+        ..clear()
+        ..addAll(next);
+      _tagController.clear();
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final AppStrings strings = AppStrings.of(context);
+    final TextTheme textTheme = Theme.of(context).textTheme;
+    final List<String> suggestions = widget.usedTags
+        .where((String tag) => !_tags.contains(tag))
+        .take(_maxUsedTagsShown)
+        .toList();
+    return Padding(
+      padding: EdgeInsets.only(bottom: MediaQuery.viewInsetsOf(context).bottom),
+      child: SafeArea(
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.fromLTRB(20, 0, 20, 16),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              Text(strings.editTagsAndNote, style: textTheme.titleLarge),
+              const SizedBox(height: 16),
+              TextField(
+                key: const ValueKey<String>('favorite_note_field'),
+                controller: _noteController,
+                minLines: 2,
+                maxLines: 4,
+                maxLength: maxFavoriteNoteLength,
+                decoration: InputDecoration(labelText: strings.favoriteNote),
+              ),
+              const SizedBox(height: 8),
+              Text(strings.favoriteTags, style: textTheme.labelLarge),
+              const SizedBox(height: 8),
+              if (_tags.isNotEmpty)
+                Wrap(
+                  spacing: 6,
+                  runSpacing: 6,
+                  children: <Widget>[
+                    for (final String tag in _tags)
+                      Container(
+                        padding: const EdgeInsets.only(left: 10),
+                        decoration: BoxDecoration(
+                          color: AppVisualTokens.surfaceMuted,
+                          borderRadius: BorderRadius.circular(999),
+                        ),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: <Widget>[
+                            Text(tag,
+                                style: const TextStyle(
+                                    color: AppVisualTokens.ink,
+                                    fontWeight: FontWeight.w600)),
+                            IconButton(
+                              key: ValueKey<String>('remove_favorite_tag_$tag'),
+                              visualDensity: VisualDensity.compact,
+                              iconSize: 16,
+                              tooltip: strings.deleteLabel,
+                              onPressed: () =>
+                                  setState(() => _tags.remove(tag)),
+                              icon: const Icon(Icons.close_rounded),
+                            ),
+                          ],
+                        ),
+                      ),
+                  ],
+                ),
+              const SizedBox(height: 8),
+              Row(
+                children: <Widget>[
+                  Expanded(
+                    child: TextField(
+                      key: const ValueKey<String>('favorite_tag_field'),
+                      controller: _tagController,
+                      focusNode: _tagFocus,
+                      enabled: !_isFull,
+                      maxLength: maxFavoriteTagLength,
+                      textInputAction: TextInputAction.done,
+                      decoration: InputDecoration(
+                        hintText: _isFull
+                            ? strings.favoriteTagLimit(maxFavoriteTags)
+                            : strings.addFavoriteTagHint,
+                        counterText: '',
+                      ),
+                      onSubmitted: (String value) {
+                        _addTag(value);
+                        _tagFocus.requestFocus();
+                      },
+                    ),
+                  ),
+                  const SizedBox(width: 8),
+                  TextButton(
+                    onPressed:
+                        _isFull ? null : () => _addTag(_tagController.text),
+                    child: Text(strings.addFavoriteTag),
+                  ),
+                ],
+              ),
+              if (suggestions.isNotEmpty && !_isFull) ...<Widget>[
+                const SizedBox(height: 12),
+                Text(strings.usedFavoriteTags,
+                    style: textTheme.labelMedium
+                        ?.copyWith(color: AppVisualTokens.inkMuted)),
+                const SizedBox(height: 8),
+                Wrap(
+                  spacing: 6,
+                  runSpacing: 6,
+                  children: <Widget>[
+                    for (final String tag in suggestions)
+                      ActionChip(
+                        key: ValueKey<String>('used_favorite_tag_$tag'),
+                        label: Text(tag),
+                        avatar: const Icon(Icons.add_rounded, size: 16),
+                        onPressed: () => _addTag(tag),
+                      ),
+                  ],
+                ),
+              ],
+              const SizedBox(height: 20),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: <Widget>[
+                  TextButton(
+                    onPressed: () => Navigator.pop(context),
+                    child: Text(strings.cancelLabel),
+                  ),
+                  const SizedBox(width: 8),
+                  FilledButton(
+                    onPressed: () => Navigator.pop(
+                      context,
+                      _FavoriteDetails(
+                          note: _noteController.text, tags: List.of(_tags)),
+                    ),
+                    child: Text(strings.saveLabel),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
 }
 
 class AnswerHistoryPage extends StatelessWidget {
@@ -5672,15 +6393,109 @@ class AppStrings {
         ja: '解答画面で保存した問題がここに表示されます。',
       );
   String get addCollection => _text(
-      zhHant: '新增書籤', zhHans: '新增书签', en: 'Add collection', ja: 'コレクションを追加');
+      zhHant: '新增分類', zhHans: '新增分类', en: 'Add collection', ja: 'コレクションを追加');
   String get organizeFavorite => _text(
-        zhHant: '整理收藏',
-        zhHans: '整理收藏',
-        en: 'Organize favorite',
-        ja: 'お気に入りに分類',
+        zhHant: '調整所屬分類',
+        zhHans: '调整所属分类',
+        en: 'Choose collections',
+        ja: 'コレクションを選ぶ',
       );
   String get collectionName => _text(
-      zhHant: '書籤名稱', zhHans: '书签名称', en: 'Collection name', ja: 'コレクション名');
+      zhHant: '分類名稱', zhHans: '分类名称', en: 'Collection name', ja: 'コレクション名');
+  String get manageCollections => _text(
+      zhHant: '管理分類',
+      zhHans: '管理分类',
+      en: 'Manage collections',
+      ja: 'コレクションを管理');
+  String get editCollection => _text(
+      zhHant: '編輯分類', zhHans: '编辑分类', en: 'Edit collection', ja: 'コレクションを編集');
+  String get deleteCollection => _text(
+      zhHant: '刪除分類', zhHans: '删除分类', en: 'Delete collection', ja: 'コレクションを削除');
+  String deleteCollectionConfirm(String name) => _text(
+        zhHant: '要刪除「$name」嗎？題目仍會保留在全部收藏。',
+        zhHans: '要删除「$name」吗？题目仍会保留在全部收藏。',
+        en: 'Delete "$name"? Its questions stay in All favorites.',
+        ja: '「$name」を削除しますか？問題はすべてのお気に入りに残ります。',
+      );
+  String get deleteLabel =>
+      _text(zhHant: '刪除', zhHans: '删除', en: 'Delete', ja: '削除');
+  String get fixedCollection =>
+      _text(zhHant: '固定', zhHans: '固定', en: 'Fixed', ja: '固定');
+  String favoriteQuestionCount(int count) => _text(
+        zhHant: '$count 題',
+        zhHans: '$count 题',
+        en: count == 1 ? '1 question' : '$count questions',
+        ja: '$count 問',
+      );
+  String collectionLimitReached(int max) => _text(
+        zhHant: '最多 $max 個自訂分類',
+        zhHans: '最多 $max 个自定义分类',
+        en: 'Up to $max custom collections',
+        ja: 'カスタムコレクションは最大 $max 個',
+      );
+  String get collectionColor =>
+      _text(zhHant: '顏色', zhHans: '颜色', en: 'Color', ja: '色');
+  String collectionNameError(FavoriteCollectionNameProblem problem) =>
+      switch (problem) {
+        FavoriteCollectionNameProblem.empty => _text(
+            zhHant: '請輸入分類名稱',
+            zhHans: '请输入分类名称',
+            en: 'Enter a collection name',
+            ja: 'コレクション名を入力してください'),
+        FavoriteCollectionNameProblem.tooLong => _text(
+            zhHant: '名稱最多 $maxFavoriteCollectionNameLength 字',
+            zhHans: '名称最多 $maxFavoriteCollectionNameLength 字',
+            en: 'Use at most $maxFavoriteCollectionNameLength characters',
+            ja: '名前は $maxFavoriteCollectionNameLength 文字以内です'),
+        FavoriteCollectionNameProblem.duplicate => _text(
+            zhHant: '已經有同名的分類',
+            zhHans: '已经有同名的分类',
+            en: 'A collection with this name already exists',
+            ja: '同じ名前のコレクションがあります'),
+      };
+  String collectionColorName(String key) => switch (key) {
+        'sage' => _text(zhHant: '灰綠', zhHans: '灰绿', en: 'Sage', ja: 'セージ'),
+        'teal' => _text(zhHant: '青綠', zhHans: '青绿', en: 'Teal', ja: 'ティール'),
+        'sky' => _text(zhHant: '天藍', zhHans: '天蓝', en: 'Sky', ja: 'スカイ'),
+        'lavender' =>
+          _text(zhHant: '薰衣草紫', zhHans: '薰衣草紫', en: 'Lavender', ja: 'ラベンダー'),
+        'rose' => _text(zhHant: '玫瑰', zhHans: '玫瑰', en: 'Rose', ja: 'ローズ'),
+        'apricot' =>
+          _text(zhHant: '杏橘', zhHans: '杏橘', en: 'Apricot', ja: 'アプリコット'),
+        'sand' => _text(zhHant: '沙黃', zhHans: '沙黄', en: 'Sand', ja: 'サンド'),
+        _ => _text(zhHant: '石板灰', zhHans: '石板灰', en: 'Slate', ja: 'スレート'),
+      };
+  String get editTagsAndNote => _text(
+        zhHant: '編輯標籤與筆記',
+        zhHans: '编辑标签与笔记',
+        en: 'Edit tags and note',
+        ja: 'タグとメモを編集',
+      );
+  String get removeFavorite => _text(
+      zhHant: '取消收藏',
+      zhHans: '取消收藏',
+      en: 'Remove from favorites',
+      ja: 'お気に入りから外す');
+  String get favoriteNote =>
+      _text(zhHant: '筆記', zhHans: '笔记', en: 'Note', ja: 'メモ');
+  String get favoriteTags =>
+      _text(zhHant: '標籤', zhHans: '标签', en: 'Tags', ja: 'タグ');
+  String get addFavoriteTagHint => _text(
+        zhHant: '輸入標籤後按 Enter',
+        zhHans: '输入标签后按 Enter',
+        en: 'Type a tag and press Enter',
+        ja: 'タグを入力して Enter',
+      );
+  String get addFavoriteTag =>
+      _text(zhHant: '新增', zhHans: '新增', en: 'Add', ja: '追加');
+  String get usedFavoriteTags =>
+      _text(zhHant: '用過的標籤', zhHans: '用过的标签', en: 'Used tags', ja: '使ったタグ');
+  String favoriteTagLimit(int max) => _text(
+        zhHant: '每題最多 $max 個標籤',
+        zhHans: '每题最多 $max 个标签',
+        en: 'Up to $max tags per question',
+        ja: '1問につきタグは最大 $max 個',
+      );
   String get saveLabel =>
       _text(zhHant: '儲存', zhHans: '保存', en: 'Save', ja: '保存');
   String get cancelLabel =>

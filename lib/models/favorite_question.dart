@@ -45,6 +45,7 @@ class FavoriteQuestionCollection {
     required this.sortOrder,
     required this.isDefault,
     required this.createdAtIso,
+    this.colorKey,
   });
 
   final String id;
@@ -54,6 +55,9 @@ class FavoriteQuestionCollection {
   final bool isDefault;
   final String createdAtIso;
 
+  /// Palette key from [FavoriteCollectionColors]; null for all favorites.
+  final String? colorKey;
+
   factory FavoriteQuestionCollection.fromMap(Map<String, Object?> map) =>
       FavoriteQuestionCollection(
         id: map['id']! as String,
@@ -62,5 +66,52 @@ class FavoriteQuestionCollection {
         sortOrder: map['sort_order']! as int,
         isDefault: (map['is_default']! as int) == 1,
         createdAtIso: map['created_at']! as String,
+        colorKey: map['color_key'] as String?,
       );
 }
+
+class FavoriteCollectionColors {
+  const FavoriteCollectionColors._();
+
+  static const List<String> keys = <String>[
+    'sage',
+    'teal',
+    'sky',
+    'lavender',
+    'rose',
+    'apricot',
+    'sand',
+    'slate',
+  ];
+
+  /// The first palette color no existing collection uses, cycling once all
+  /// eight are taken.
+  static String next(Iterable<String?> usedKeys) {
+    final List<String?> used = usedKeys.toList();
+    for (final String key in keys) {
+      if (!used.contains(key)) return key;
+    }
+    return keys[used.length % keys.length];
+  }
+}
+
+const int maxFavoriteTags = 8;
+const int maxFavoriteTagLength = 12;
+const int maxFavoriteNoteLength = 200;
+
+List<String> normalizeFavoriteTags(Iterable<String> tags) {
+  final List<String> normalized = <String>[];
+  for (final String tag in tags) {
+    final String trimmed = _truncate(tag.trim(), maxFavoriteTagLength);
+    if (trimmed.isEmpty || normalized.contains(trimmed)) continue;
+    normalized.add(trimmed);
+    if (normalized.length == maxFavoriteTags) break;
+  }
+  return normalized;
+}
+
+String normalizeFavoriteNote(String note) =>
+    _truncate(note.trim(), maxFavoriteNoteLength);
+
+String _truncate(String text, int maxLength) =>
+    String.fromCharCodes(text.runes.take(maxLength));
