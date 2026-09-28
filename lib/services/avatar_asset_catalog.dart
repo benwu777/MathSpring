@@ -107,6 +107,9 @@ class AvatarAssetCatalog {
     'boy_hair_04': -.075,
     'boy_hair_05': -.075,
     'boy_hair_07': -.075,
+    'boy_hair_08': -.10,
+    'boy_hair_09': -.09,
+    'boy_hair_10': -.07,
   };
 
   /// Fixed display swatches and runtime tints for the girl-only hair colours.

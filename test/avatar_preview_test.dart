@@ -569,8 +569,6 @@ void main() {
   test('keeps the new boy hairstyle artwork on its aligned canvas', () {
     for (final String hairId in <String>[
       'boy_hair_06',
-      'boy_hair_08',
-      'boy_hair_09',
     ]) {
       final AvatarAssetBundle assets = AvatarAssetCatalog.resolve(
         _withOption(AvatarPresentation.boy, 'hair', hairId),
@@ -599,6 +597,7 @@ void main() {
       'boy_hair_07',
       'boy_hair_08',
       'boy_hair_09',
+      'boy_hair_10',
     ]) {
       final AvatarAssetBundle assets = AvatarAssetCatalog.resolve(
         _withOption(AvatarPresentation.boy, 'hair', hairId),
@@ -616,6 +615,9 @@ void main() {
           'boy_hair_04': -.075,
           'boy_hair_05': -.075,
           'boy_hair_07': -.075,
+          'boy_hair_08': -.10,
+          'boy_hair_09': -.09,
+          'boy_hair_10': -.07,
         }[hairId] ??
             0,
         reason: hairId,
@@ -777,6 +779,26 @@ void main() {
     }
   });
 
+  test('resolves the animated boy hairstyles 08 through 10', () {
+    final AvatarConfiguration base = AvatarConfiguration.defaultFor(
+      AvatarPresentation.boy,
+    );
+    final Set<String> resolvedAssets = <String>{
+      for (final String hairId in <String>[
+        'boy_hair_08',
+        'boy_hair_09',
+        'boy_hair_10',
+      ])
+        AvatarAssetCatalog.resolve(base.copyWith(hairId: hairId)).hairFrontAsset,
+    };
+
+    expect(resolvedAssets, <String>{
+      'assets/avatars/boy/hair/hair-08.png',
+      'assets/avatars/boy/hair/hair-09.png',
+      'assets/avatars/boy/hair/hair-10.png',
+    });
+  });
+
   test('keeps the requested individual crown lifts for rebuilt boy hairstyles',
       () {
     final AvatarConfiguration base = AvatarConfiguration.defaultFor(
@@ -789,6 +811,9 @@ void main() {
       'boy_hair_04': -.075,
       'boy_hair_05': -.075,
       'boy_hair_07': -.075,
+      'boy_hair_08': -.10,
+      'boy_hair_09': -.09,
+      'boy_hair_10': -.07,
     };
 
     for (final MapEntry<String, double> expected in expectedOffsets.entries) {

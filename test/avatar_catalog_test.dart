@@ -272,8 +272,6 @@ void main() {
   test('keeps the non-lifted redesigned boy hair layers safely aligned', () {
     for (final String hairId in <String>[
       'boy_hair_06',
-      'boy_hair_08',
-      'boy_hair_09',
     ]) {
       final AvatarAssetBundle assets = AvatarAssetCatalog.resolve(
         AvatarConfiguration.defaultFor(AvatarPresentation.boy).copyWith(
