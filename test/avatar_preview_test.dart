@@ -284,6 +284,60 @@ void main() {
     );
   });
 
+  testWidgets('renders visibly different pixels for different girl hair colours',
+      (WidgetTester tester) async {
+    final AvatarConfiguration base = AvatarConfiguration.defaultFor(
+      AvatarPresentation.girl,
+    );
+    await tester.pumpWidget(
+      Directionality(
+        textDirection: TextDirection.ltr,
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            RepaintBoundary(
+              key: const ValueKey<String>('black_hair_preview'),
+              child: AvatarPreview(
+                configuration: base.copyWith(
+                  hairColorId: 'girl_hair_color_01',
+                ),
+              ),
+            ),
+            RepaintBoundary(
+              key: const ValueKey<String>('silver_hair_preview'),
+              child: AvatarPreview(
+                configuration: base.copyWith(
+                  hairColorId: 'girl_hair_color_06',
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+
+    Future<ByteData> pixels(String key) async {
+      final RenderRepaintBoundary boundary = tester.renderObject(
+        find.byKey(ValueKey<String>(key)),
+      );
+      final ByteData? data = await tester.runAsync<ByteData>(() async {
+            final ui.Image image = await boundary.toImage();
+            return (await image.toByteData(
+              format: ui.ImageByteFormat.rawRgba,
+            ))!;
+          });
+      return data ?? (throw StateError('Unable to render $key'));
+    }
+
+    final ByteData black = await pixels('black_hair_preview');
+    final ByteData silver = await pixels('silver_hair_preview');
+    int changedChannels = 0;
+    for (int index = 0; index < black.lengthInBytes; index++) {
+      if (black.getUint8(index) != silver.getUint8(index)) changedChannels++;
+    }
+    expect(changedChannels, greaterThan(500));
+  });
+
   testWidgets('renders glasses as part of the selected eyes layer',
       (WidgetTester tester) async {
     final AvatarConfiguration glassesEyes = AvatarConfiguration.defaultFor(
@@ -503,19 +557,18 @@ void main() {
         'assets/avatars/girl/mouth/mouth-07.png');
   });
 
-  test('keeps the boy baseline hair on the shared face canvas', () {
+  test('raises the boy baseline hair over the shared face canvas', () {
     final AvatarAssetBundle assets = AvatarAssetCatalog.resolve(
       AvatarConfiguration.defaultFor(AvatarPresentation.boy),
     );
 
     expect(assets.hairScale, 1);
-    expect(assets.hairOffsetY, 0);
+    expect(assets.hairOffsetY, -.075);
   });
 
   test('keeps the new boy hairstyle artwork on its aligned canvas', () {
     for (final String hairId in <String>[
       'boy_hair_06',
-      'boy_hair_07',
       'boy_hair_08',
       'boy_hair_09',
     ]) {
@@ -535,11 +588,13 @@ void main() {
     expect(assets.hairScaleX, .9);
   });
 
-  test('keeps rebuilt boy hairstyles on the hair 01 canonical placement', () {
+  test('keeps rebuilt boy hairstyles on their intended vertical placement', () {
     for (final String hairId in <String>[
+      'boy_hair_01',
       'boy_hair_02',
       'boy_hair_03',
       'boy_hair_04',
+      'boy_hair_05',
       'boy_hair_06',
       'boy_hair_07',
       'boy_hair_08',
@@ -552,7 +607,19 @@ void main() {
       expect(assets.hairScale, 1, reason: hairId);
       expect(assets.hairScaleX, 1, reason: hairId);
       expect(assets.hairOffsetX, 0, reason: hairId);
-      expect(assets.hairOffsetY, 0, reason: hairId);
+      expect(
+        assets.hairOffsetY,
+        const <String, double>{
+          'boy_hair_01': -.075,
+          'boy_hair_02': -.05,
+          'boy_hair_03': -.05,
+          'boy_hair_04': -.075,
+          'boy_hair_05': -.075,
+          'boy_hair_07': -.075,
+        }[hairId] ??
+            0,
+        reason: hairId,
+      );
     }
   });
 
@@ -690,6 +757,54 @@ void main() {
       expect(assets.mouthOffsetY, usesSmallNose ? .20 : .168, reason: id);
     }
   });
+
+  test('uses the redesigned first boy hairstyle for every boy face shape', () {
+    final AvatarConfiguration base = AvatarConfiguration.defaultFor(
+      AvatarPresentation.boy,
+    );
+
+    for (final String faceId in AvatarConfiguration.optionsFor(
+      AvatarPresentation.boy,
+      'face',
+    )) {
+      expect(
+        AvatarAssetCatalog.resolve(
+          base.copyWith(faceId: faceId, hairId: 'boy_hair_01'),
+        ).hairFrontAsset,
+        'assets/avatars/boy/hair/hair-01.png',
+        reason: faceId,
+      );
+    }
+  });
+
+  test('keeps the requested individual crown lifts for rebuilt boy hairstyles',
+      () {
+    final AvatarConfiguration base = AvatarConfiguration.defaultFor(
+      AvatarPresentation.boy,
+    );
+    const Map<String, double> expectedOffsets = <String, double>{
+      'boy_hair_01': -.075,
+      'boy_hair_02': -.05,
+      'boy_hair_03': -.05,
+      'boy_hair_04': -.075,
+      'boy_hair_05': -.075,
+      'boy_hair_07': -.075,
+    };
+
+    for (final MapEntry<String, double> expected in expectedOffsets.entries) {
+      expect(
+        AvatarAssetCatalog.resolve(base.copyWith(hairId: expected.key))
+            .hairOffsetY,
+        expected.value,
+        reason: expected.key,
+      );
+    }
+    expect(
+      AvatarAssetCatalog.resolve(base.copyWith(hairId: 'boy_hair_06'))
+          .hairOffsetY,
+      0,
+    );
+  });
 }
 
 const List<String> _categories = <String>[
@@ -743,12 +858,14 @@ List<double> _hairTintMatrix(Color tint) {
   const double redLuma = .2126;
   const double greenLuma = .7152;
   const double blueLuma = .0722;
+  const double baseBrightness = .85;
+  const double detailBrightness = .15;
   List<double> channel(double target) => <double>[
-        redLuma * target,
-        greenLuma * target,
-        blueLuma * target,
+        redLuma * target * detailBrightness,
+        greenLuma * target * detailBrightness,
+        blueLuma * target * detailBrightness,
         0,
-        0,
+        255 * target * baseBrightness,
       ];
   return <double>[
     ...channel(tint.r),

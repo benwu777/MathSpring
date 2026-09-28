@@ -102,6 +102,7 @@ void main() {
       'boy_hair_07',
       'boy_hair_08',
       'boy_hair_09',
+      'boy_hair_10',
     ]);
     expect(AvatarCatalog.eyeOptionsFor(AvatarPresentation.boy), <String>[
       'boy_eyes_01',
@@ -268,10 +269,9 @@ void main() {
     );
   });
 
-  test('keeps the four redesigned boy hair layers safely aligned', () {
+  test('keeps the non-lifted redesigned boy hair layers safely aligned', () {
     for (final String hairId in <String>[
       'boy_hair_06',
-      'boy_hair_07',
       'boy_hair_08',
       'boy_hair_09',
     ]) {

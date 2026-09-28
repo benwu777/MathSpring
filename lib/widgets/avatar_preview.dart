@@ -104,7 +104,7 @@ class AvatarPreview extends StatelessWidget {
       translation: Offset(assets.hairOffsetX, assets.hairOffsetY),
       child: Transform.scale(
         scaleX: assets.hairScale * assets.hairScaleX,
-        scaleY: assets.hairScale,
+        scaleY: assets.hairScale * assets.hairScaleY,
         alignment: Alignment.topCenter,
         child: _layer(asset),
       ),

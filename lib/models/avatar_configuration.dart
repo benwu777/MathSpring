@@ -136,6 +136,7 @@ class AvatarConfiguration {
         'boy_hair_07',
         'boy_hair_08',
         'boy_hair_09',
+        'boy_hair_10',
       ],
       'eyes': <String>[
         'boy_eyes_01',
