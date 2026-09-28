@@ -325,6 +325,7 @@ void main() {
         'skin',
         'face',
         'hair',
+        'hair_color',
         'eyes',
         'nose',
         'mouth',
@@ -366,11 +367,6 @@ void main() {
                 : findsOneWidget,
             reason: '$id thumbnail does not match its preview treatment',
           );
-        }
-        if (presentation == AvatarPresentation.girl && category == 'hair') {
-          await tester
-              .tap(find.byKey(const ValueKey<String>('avatar_next_button')));
-          await tester.pump();
         }
       }
     }
@@ -466,7 +462,7 @@ void main() {
     expect(hairTilePreview.configuration.hairColorId, 'girl_hair_color_03');
   });
 
-  testWidgets('does not offer a hair-colour section for boys', (tester) async {
+  testWidgets('offers the shared hair-colour section for boys', (tester) async {
     await tester.pumpWidget(
       const MaterialApp(home: Scaffold(body: AvatarEditor())),
     );
@@ -475,24 +471,24 @@ void main() {
         .tap(find.byKey(const ValueKey<String>('avatar_presentation_boy')));
     await tester.pump();
 
-    expect(find.text('Hair colour'), findsNothing);
-    for (int index = 0; index < 7; index++) {
+    expect(find.text('Hair colour'), findsAtLeastNWidgets(1));
+    for (int index = 0; index < 8; index++) {
       expect(find.byKey(ValueKey<String>('avatar_section_tab_$index')),
           findsOneWidget);
     }
-    expect(find.byKey(const ValueKey<String>('avatar_section_tab_7')),
+    expect(find.byKey(const ValueKey<String>('avatar_section_tab_8')),
         findsNothing);
 
-    for (int step = 0; step < 6; step++) {
+    for (int step = 0; step < 4; step++) {
       await tester
           .tap(find.byKey(const ValueKey<String>('avatar_next_button')));
       await tester.pump();
     }
-    expect(find.text('Mouth'), findsAtLeastNWidgets(1));
-    expect(find.text('Hair colour'), findsNothing);
-    expect(
-        find.byKey(const ValueKey<String>('avatar_option_girl_hair_color_01')),
-        findsNothing);
+    expect(find.text('Hair colour'), findsAtLeastNWidgets(1));
+    for (int index = 1; index <= 6; index++) {
+      final String id = 'girl_hair_color_${index.toString().padLeft(2, '0')}';
+      expect(find.byKey(ValueKey<String>('avatar_option_$id')), findsOneWidget);
+    }
   });
 
   testWidgets('keeps girl hair colours selectable without a full unlock',

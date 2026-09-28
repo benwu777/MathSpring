@@ -193,9 +193,8 @@ void main() {
       'girl_hair_color_02',
     );
     expect(
-      () =>
-          AvatarConfiguration.optionsFor(AvatarPresentation.boy, 'hair_color'),
-      throwsArgumentError,
+      AvatarConfiguration.optionsFor(AvatarPresentation.boy, 'hair_color'),
+      hairColorIds,
     );
     expect(
       AvatarConfiguration.defaultFor(AvatarPresentation.girl)
@@ -226,10 +225,10 @@ void main() {
       noseId: 'boy_nose_01',
       mouthId: 'boy_mouth_01',
     );
-    expect(boyWithPersistedGirlColour.hairColorId, 'girl_hair_color_02');
+    expect(boyWithPersistedGirlColour.hairColorId, 'girl_hair_color_03');
     expect(
       boyWithPersistedGirlColour.toMap()['avatar_hair_color_id'],
-      'girl_hair_color_02',
+      'girl_hair_color_03',
     );
   });
 

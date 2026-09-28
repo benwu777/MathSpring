@@ -218,28 +218,26 @@ void main() {
     );
   });
 
-  testWidgets('does not apply a girl hair tint to boy layers',
+  testWidgets('applies the selected shared hair tint to boy layers',
       (WidgetTester tester) async {
+    final AvatarConfiguration boy = AvatarConfiguration.defaultFor(
+      AvatarPresentation.boy,
+    ).copyWith(hairColorId: 'girl_hair_color_03');
     await tester.pumpWidget(
       MaterialApp(
         home: Scaffold(
           body: AvatarPreview(
-            configuration: AvatarConfiguration.defaultFor(
-              AvatarPresentation.boy,
-            ),
+            configuration: boy,
           ),
         ),
       ),
     );
 
-    expect(
+    final ColorFiltered frontTint = tester.widget<ColorFiltered>(
       find.byKey(const ValueKey<String>('avatar_hair_front_tint')),
-      findsNothing,
     );
-    expect(
-      find.byKey(const ValueKey<String>('avatar_hair_back_tint')),
-      findsNothing,
-    );
+    expect(frontTint.colorFilter,
+        ColorFilter.matrix(_hairTintMatrix(const Color(0xFF7B3F20))));
   });
 
   testWidgets('renders tinted girl hair with a transparent canvas corner',

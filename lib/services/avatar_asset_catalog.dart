@@ -112,7 +112,7 @@ class AvatarAssetCatalog {
     'boy_hair_10': -.07,
   };
 
-  /// Fixed display swatches and runtime tints for the girl-only hair colours.
+  /// Fixed display swatches and runtime tints for the shared hair colours.
   static const Map<String, Color> girlHairColors = <String, Color>{
     'girl_hair_color_01': Color(0xFF1B1B1B),
     'girl_hair_color_02': Color(0xFF3A2418),
@@ -264,10 +264,8 @@ class AvatarAssetCatalog {
   static AvatarAssetBundle resolve(AvatarConfiguration configuration) {
     final AvatarPresentation presentation = configuration.presentation;
     final bool isBoy = presentation == AvatarPresentation.boy;
-    final Color? hairTint = isBoy
-        ? null
-        : girlHairColors[configuration.hairColorId] ??
-            girlHairColors['girl_hair_color_02'];
+    final Color? hairTint = girlHairColors[configuration.hairColorId] ??
+        girlHairColors['girl_hair_color_02'];
     final AvatarOptionTreatment skin = treatmentFor(configuration.skinId);
     final AvatarOptionTreatment hair = isBoy
         ? hairTreatmentFor(configuration.faceId, configuration.hairId) ??

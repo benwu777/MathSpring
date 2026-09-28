@@ -68,8 +68,7 @@ class _AvatarEditorState extends State<AvatarEditor> {
         _AvatarEditorSection.skin,
         _AvatarEditorSection.face,
         _AvatarEditorSection.hair,
-        if (_configuration.presentation == AvatarPresentation.girl)
-          _AvatarEditorSection.hairColor,
+        _AvatarEditorSection.hairColor,
         _AvatarEditorSection.eyes,
         _AvatarEditorSection.nose,
         _AvatarEditorSection.mouth,
@@ -580,14 +579,9 @@ class _AvatarEditorLabels {
     );
   }
 
-  List<String> sectionTitlesFor(AvatarPresentation presentation) {
-    if (presentation == AvatarPresentation.boy) {
-      return sectionTitles;
-    }
-    return <String>[
+  List<String> sectionTitlesFor(AvatarPresentation presentation) => <String>[
       ...sectionTitles.take(4),
       hairColor,
       ...sectionTitles.skip(4),
     ];
-  }
 }

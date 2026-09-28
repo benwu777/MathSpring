@@ -14,14 +14,13 @@ class AvatarConfiguration {
     this.accessoryId = 'accessory_none',
   })  : _hairColorId = hairColorId,
         assert(
-          presentation == AvatarPresentation.boy ||
-              hairColorId == 'girl_hair_color_01' ||
+          hairColorId == 'girl_hair_color_01' ||
               hairColorId == _defaultGirlHairColorId ||
               hairColorId == 'girl_hair_color_03' ||
               hairColorId == 'girl_hair_color_04' ||
               hairColorId == 'girl_hair_color_05' ||
               hairColorId == 'girl_hair_color_06',
-          'Unknown girl hair colour',
+          'Unknown shared hair colour',
         );
 
   final AvatarPresentation presentation;
@@ -32,12 +31,11 @@ class AvatarConfiguration {
   final String noseId;
   final String mouthId;
 
-  /// 女生髮色。男生沒有可選色票，固定使用預設值以維持資料格式一致。
+  /// 男女共用的髮色。
   final String _hairColorId;
 
   String get hairColorId {
-    if (presentation == AvatarPresentation.boy ||
-        !_girlHairColorIds.contains(_hairColorId)) {
+    if (!_girlHairColorIds.contains(_hairColorId)) {
       return _defaultGirlHairColorId;
     }
     return _hairColorId;
@@ -138,6 +136,7 @@ class AvatarConfiguration {
         'boy_hair_09',
         'boy_hair_10',
       ],
+      'hair_color': _girlHairColorIds,
       'eyes': <String>[
         'boy_eyes_01',
         'boy_eyes_02',
@@ -247,9 +246,6 @@ class AvatarConfiguration {
     AvatarPresentation presentation,
     Object? value,
   ) {
-    if (presentation == AvatarPresentation.boy) {
-      return _defaultGirlHairColorId;
-    }
     final String candidate = value as String? ?? '';
     return _girlHairColorIds.contains(candidate)
         ? candidate
