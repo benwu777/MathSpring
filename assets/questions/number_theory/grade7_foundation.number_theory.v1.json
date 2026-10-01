@@ -6025,6 +6025,222 @@
         "reference": "number_theory-grade7-foundation",
         "notes": "四捨五入範圍＋區間內倍數個數（相減法）。全庫四捨五入題（algebra_grade7_074 乘積範圍、arithmetic_grade6_107、grade6_115 平均反推）都沒有結合倍數計數。"
       }
+    },
+    {
+      "id": "number_theory_grade7_foundation_074",
+      "reviewStatus": "ok",
+      "topic": "number_theory",
+      "subtopic": "digit_sum_of_consecutive_integers_with_carries",
+      "tags": [
+        "c:place_value",
+        "c:modular",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade7",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "求最小的正整數 n，使得 n 的各位數字和與 n + 1 的各位數字和都是 7 的倍數。",
+        "zh-Hans": "求最小的正整数 n，使得 n 的各位数字和与 n + 1 的各位数字和都是 7 的倍数。",
+        "en": "Find the smallest positive integer n such that both the digit sum of n and the digit sum of n + 1 are multiples of 7.",
+        "ja": "n の各位の数字の和と、n + 1 の各位の数字の和が、どちらも 7 の倍数になるような最小の正の整数 n を求めなさい。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 69999。",
+        "zh-Hans": "答案是 69999。",
+        "en": "The answer is 69999.",
+        "ja": "答えは 69999 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "如果 n 的個位不是 9，加 1 時不會進位，n + 1 的數字和恰好比 n 的數字和多 1，兩者不可能同時是 7 的倍數。所以 n 的末尾一定有若干個 9。",
+          "設 n 的末尾恰好有 k 個 9（再往左一位不是 9）。加 1 時這 k 個 9 都變成 0，左邊那一位加 1，所以 n + 1 的數字和 = n 的數字和 − 9k + 1。",
+          "兩個數字和都是 7 的倍數，差 9k − 1 也要是 7 的倍數。k = 1、2、3、4 時，9k − 1 依序是 8、17、26、35，第一個是 7 的倍數的是 k = 4。所以 n 至少以 9999 結尾，而且是五位數以上。",
+          "末尾 4 個 9 的數字和是 36，36 除以 7 餘 1，所以前面的數字之和除以 7 要餘 6。前面只放一位數 6 時最小：n = 69999，數字和 6 + 36 = 42 = 7 × 6；n + 1 = 70000，數字和 7。前面放 0（n = 9999）時數字和 36 不行。答案是 69999。"
+        ],
+        "zh-Hans": [
+          "如果 n 的个位不是 9，加 1 时不会进位，n + 1 的数字和恰好比 n 的数字和多 1，两者不可能同时是 7 的倍数。所以 n 的末尾一定有若干个 9。",
+          "设 n 的末尾恰好有 k 个 9（再往左一位不是 9）。加 1 时这 k 个 9 都变成 0，左边那一位加 1，所以 n + 1 的数字和 = n 的数字和 − 9k + 1。",
+          "两个数字和都是 7 的倍数，差 9k − 1 也要是 7 的倍数。k = 1、2、3、4 时，9k − 1 依序是 8、17、26、35，第一个是 7 的倍数的是 k = 4。所以 n 至少以 9999 结尾，而且是五位数以上。",
+          "末尾 4 个 9 的数字和是 36，36 除以 7 余 1，所以前面的数字之和除以 7 要余 6。前面只放一位数 6 时最小：n = 69999，数字和 6 + 36 = 42 = 7 × 6；n + 1 = 70000，数字和 7。前面放 0（n = 9999）时数字和 36 不行。答案是 69999。"
+        ],
+        "en": [
+          "If the last digit of n is not 9, adding 1 causes no carry, so the digit sum of n + 1 is exactly 1 more than that of n; both cannot be multiples of 7. So n must end in some 9s.",
+          "Let n end in exactly k nines (the digit to their left is not 9). Adding 1 turns those k nines into 0s and raises the next digit by 1, so digit sum of n + 1 = digit sum of n − 9k + 1.",
+          "Both digit sums are multiples of 7, so their difference 9k − 1 must be too. For k = 1, 2, 3, 4 we get 8, 17, 26, 35; the first multiple of 7 is at k = 4. So n ends in at least 9999 and has at least five digits.",
+          "Four trailing 9s contribute 36, which leaves remainder 1 when divided by 7, so the digits in front must sum to a number leaving remainder 6. The smallest choice is the single digit 6: n = 69999 with digit sum 6 + 36 = 42 = 7 × 6, and n + 1 = 70000 with digit sum 7. (With nothing in front, n = 9999 has digit sum 36, which fails.) The answer is 69999."
+        ],
+        "ja": [
+          "n の一の位が 9 でなければ、1 を足してもくり上がりがないので、n + 1 の数字の和は n の数字の和よりちょうど 1 大きく、両方が 7 の倍数にはなれません。したがって n の末尾には 9 が並んでいます。",
+          "n の末尾にちょうど k 個の 9 が並ぶとします（その左の位は 9 ではない）。1 を足すとこの k 個の 9 はすべて 0 になり、左の位が 1 増えるので、n + 1 の数字の和 = n の数字の和 − 9k + 1 です。",
+          "2 つの数字の和がどちらも 7 の倍数なら、その差 9k − 1 も 7 の倍数です。k = 1、2、3、4 のとき 9k − 1 は 8、17、26、35 で、最初に 7 の倍数になるのは k = 4 です。よって n は少なくとも 9999 で終わる 5 けた以上の数です。",
+          "末尾の 9 が 4 個で数字の和は 36、36 を 7 で割った余りは 1 なので、前の部分の数字の和は 7 で割って 6 余る必要があります。前に 1 けたの 6 を置くのが最小で、n = 69999 の数字の和は 6 + 36 = 42 = 7 × 6、n + 1 = 70000 の数字の和は 7 です（前に何も置かない 9999 は数字の和 36 で不適）。答えは 69999 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "69999"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 5
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "number_theory-grade7-foundation",
+        "notes": "加 1 時末尾 k 個 9 進位，數字和變化 1 − 9k，需 9k ≡ 1 (mod 7) 得 k = 4。掃過「數字和」（38 題）、「各位數字」；最接近 number_theory_grade7_foundation_022（1～20 的數字和總計）與 number_theory_grade8_foundation_049（背面寫數字和），都沒有「n 與 n + 1 的數字和同時整除」的進位分析。"
+      }
+    },
+    {
+      "id": "number_theory_grade7_foundation_075",
+      "reviewStatus": "ok",
+      "topic": "number_theory",
+      "subtopic": "mean_of_three_digit_palindromes_by_pairing",
+      "tags": [
+        "c:mean",
+        "c:place_value",
+        "m:bijection"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade7",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一個數如果從左讀到右和從右讀到左完全一樣，就叫做迴文數，例如 373、808。三位數的迴文數一共有 90 個。求這 90 個三位數的平均數。",
+        "zh-Hans": "一个数如果从左读到右和从右读到左完全一样，就叫做回文数，例如 373、808。三位数的回文数一共有 90 个。求这 90 个三位数的平均数。",
+        "en": "A number that reads the same from left to right and from right to left is a palindrome, such as 373 or 808. There are 90 three-digit palindromes. Find the average of these 90 numbers.",
+        "ja": "左から読んでも右から読んでも同じになる数を回文数といいます（たとえば 373、808）。3 けたの回文数は全部で 90 個あります。この 90 個の平均を求めなさい。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 550。",
+        "zh-Hans": "答案是 550。",
+        "en": "The answer is 550.",
+        "ja": "答えは 550 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "三位數迴文數的形式是 aba：百位和個位都是 a（1～9），十位是 b（0～9），數值是 101a + 10b。",
+          "把 aba 和 (10 − a)(9 − b)(10 − a) 配成一對。因為 a 在 1～9，10 − a 也在 1～9；b 在 0～9，9 − b 也在 0～9，所以配對的對象仍是三位數迴文數，而且再配一次就回到自己，90 個數恰好兩兩配對。",
+          "不會有數和自己配對：那需要 a = 10 − a 且 b = 9 − b，但 b = 4.5 不是數字。每一對的和是 101 × (a + 10 − a) + 10 × (b + 9 − b) = 1010 + 90 = 1100。",
+          "90 個數分成 45 對，每對的和都是 1100，總和是 45 × 1100 = 49500，平均數是 49500 ÷ 90 = 550。答案是 550。"
+        ],
+        "zh-Hans": [
+          "三位数回文数的形式是 aba：百位和个位都是 a（1～9），十位是 b（0～9），数值是 101a + 10b。",
+          "把 aba 和 (10 − a)(9 − b)(10 − a) 配成一对。因为 a 在 1～9，10 − a 也在 1～9；b 在 0～9，9 − b 也在 0～9，所以配对的对象仍是三位数回文数，而且再配一次就回到自己，90 个数恰好两两配对。",
+          "不会有数和自己配对：那需要 a = 10 − a 且 b = 9 − b，但 b = 4.5 不是数字。每一对的和是 101 × (a + 10 − a) + 10 × (b + 9 − b) = 1010 + 90 = 1100。",
+          "90 个数分成 45 对，每对的和都是 1100，总和是 45 × 1100 = 49500，平均数是 49500 ÷ 90 = 550。答案是 550。"
+        ],
+        "en": [
+          "A three-digit palindrome has the form aba: hundreds and units digits are a (1–9) and the tens digit is b (0–9). Its value is 101a + 10b.",
+          "Pair aba with (10 − a)(9 − b)(10 − a). Since a is 1–9, so is 10 − a; since b is 0–9, so is 9 − b. The partner is again a three-digit palindrome and pairing twice returns the original, so the 90 numbers split exactly into pairs.",
+          "No number is paired with itself: that would need a = 10 − a and b = 9 − b, but b = 4.5 is not a digit. Each pair sums to 101 × (a + 10 − a) + 10 × (b + 9 − b) = 1010 + 90 = 1100.",
+          "The 90 numbers form 45 pairs, each summing to 1100, so the total is 45 × 1100 = 49500 and the average is 49500 ÷ 90 = 550. The answer is 550."
+        ],
+        "ja": [
+          "3 けたの回文数は aba の形で、百の位と一の位が a（1〜9）、十の位が b（0〜9）なので、値は 101a + 10b です。",
+          "aba と (10 − a)(9 − b)(10 − a) を組にします。a が 1〜9 なら 10 − a も 1〜9、b が 0〜9 なら 9 − b も 0〜9 なので、相手もやはり 3 けたの回文数で、もう一度組にすると元にもどります。90 個はちょうど 2 個ずつの組に分かれます。",
+          "自分自身と組になる数はありません。それには a = 10 − a かつ b = 9 − b が必要ですが、b = 4.5 は数字ではないからです。各組の和は 101 × (a + 10 − a) + 10 × (b + 9 − b) = 1010 + 90 = 1100 です。",
+          "90 個は 45 組に分かれ、どの組の和も 1100 なので、合計は 45 × 1100 = 49500、平均は 49500 ÷ 90 = 550 です。答えは 550 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "550"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "number_theory-grade7-foundation",
+        "notes": "迴文數 aba 與 (10−a)(9−b)(10−a) 配對、每對和 1100，平均 550。掃過「迴文|回文」（3＋多題）、「平均」；最接近 number_theory_grade10_foundation_025（三位迴文數中 3 的倍數個數）與 combinatorics_grade9_foundation_023（五位迴文數個數），兩者都是計數，本題是用配對求平均。"
+      }
+    },
+    {
+      "id": "number_theory_grade7_foundation_076",
+      "reviewStatus": "ok",
+      "topic": "number_theory",
+      "subtopic": "aabb_perfect_square_via_eleven",
+      "tags": [
+        "c:factor_multiple",
+        "c:place_value",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade7",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "有一個四位數，千位和百位是同一個數字 a，十位和個位是同一個數字 b（例如 3366 這種形式），而且它是一個完全平方數。求這個四位數。",
+        "zh-Hans": "有一个四位数，千位和百位是同一个数字 a，十位和个位是同一个数字 b（例如 3366 这种形式），而且它是一个完全平方数。求这个四位数。",
+        "en": "A four-digit number has the same digit a in its thousands and hundreds places and the same digit b in its tens and units places (like 3366), and it is a perfect square. Find this four-digit number.",
+        "ja": "ある 4 けたの数は、千の位と百の位が同じ数字 a、十の位と一の位が同じ数字 b で（3366 のような形）、しかも平方数です。この 4 けたの数を求めなさい。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 7744。",
+        "zh-Hans": "答案是 7744。",
+        "en": "The answer is 7744.",
+        "ja": "答えは 7744 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "這個數是 1000a + 100a + 10b + b = 1100a + 11b = 11 × (100a + b)。它是完全平方數而且有因數 11（質數），所以 11² = 121 一定整除它，也就是 100a + b 要是 11 的倍數。",
+          "100a + b = 99a + (a + b)，99a 是 11 的倍數，所以 a + b 是 11 的倍數。a 是 1～9、b 是 0～9，a + b 在 1 到 18 之間，只能 a + b = 11。",
+          "這時 100a + b = 99a + 11 = 11 × (9a + 1)，原數 = 121 × (9a + 1)，所以 9a + 1 要是完全平方數。b = 11 − a ≤ 9 使 a 在 2 到 9：9a + 1 依序是 19、28、37、46、55、64、73、82，只有 a = 7 時的 64 = 8²。",
+          "a = 7、b = 4，原數 = 121 × 64 = 7744 = 88²。答案是 7744。"
+        ],
+        "zh-Hans": [
+          "这个数是 1000a + 100a + 10b + b = 1100a + 11b = 11 × (100a + b)。它是完全平方数而且有因数 11（质数），所以 11² = 121 一定整除它，也就是 100a + b 要是 11 的倍数。",
+          "100a + b = 99a + (a + b)，99a 是 11 的倍数，所以 a + b 是 11 的倍数。a 是 1～9、b 是 0～9，a + b 在 1 到 18 之间，只能 a + b = 11。",
+          "这时 100a + b = 99a + 11 = 11 × (9a + 1)，原数 = 121 × (9a + 1)，所以 9a + 1 要是完全平方数。b = 11 − a ≤ 9 使 a 在 2 到 9：9a + 1 依序是 19、28、37、46、55、64、73、82，只有 a = 7 时的 64 = 8²。",
+          "a = 7、b = 4，原数 = 121 × 64 = 7744 = 88²。答案是 7744。"
+        ],
+        "en": [
+          "The number is 1000a + 100a + 10b + b = 1100a + 11b = 11 × (100a + b). It is a perfect square with the prime factor 11, so 11² = 121 divides it; that is, 100a + b is a multiple of 11.",
+          "100a + b = 99a + (a + b), and 99a is a multiple of 11, so a + b is a multiple of 11. With a from 1 to 9 and b from 0 to 9, a + b is between 1 and 18, so a + b = 11.",
+          "Then 100a + b = 99a + 11 = 11 × (9a + 1) and the number equals 121 × (9a + 1), so 9a + 1 must be a perfect square. b = 11 − a ≤ 9 forces a from 2 to 9: 9a + 1 is 19, 28, 37, 46, 55, 64, 73, 82, and only a = 7 gives 64 = 8².",
+          "a = 7, b = 4, and the number is 121 × 64 = 7744 = 88². The answer is 7744."
+        ],
+        "ja": [
+          "この数は 1000a + 100a + 10b + b = 1100a + 11b = 11 × (100a + b) です。平方数で素因数 11 をもつので 11² = 121 で割り切れ、100a + b は 11 の倍数です。",
+          "100a + b = 99a + (a + b) で、99a は 11 の倍数なので a + b も 11 の倍数です。a は 1〜9、b は 0〜9 なので a + b は 1〜18、よって a + b = 11 です。",
+          "このとき 100a + b = 99a + 11 = 11 × (9a + 1) で、もとの数は 121 × (9a + 1) なので、9a + 1 が平方数でなければなりません。b = 11 − a ≤ 9 より a は 2〜9 で、9a + 1 は 19、28、37、46、55、64、73、82、平方数は a = 7 のときの 64 = 8² だけです。",
+          "a = 7、b = 4 で、もとの数は 121 × 64 = 7744 = 88² です。答えは 7744 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "7744"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 4
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "number_theory-grade7-foundation",
+        "notes": "aabb = 11(100a + b)，平方數需 121 整除 → a + b = 11 → 9a + 1 為平方。掃過「7744|完全平方.*四位數|四位數.*完全平方」（0 題）、「平方數」（26 題）；最接近 number_theory_grade8_foundation_055（2025 型：前後兩半之和平方），本題是 11 的整除與平方因數。"
+      }
     }
   ]
 }

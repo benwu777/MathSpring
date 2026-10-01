@@ -3891,6 +3891,78 @@
         "reference": "combinatorics-grade7-foundation",
         "notes": "「至少兩個相同」用餘事件。最接近 combinatorics_grade7_039（三位密碼至少一個 0，也用餘事件）與 combinatorics_grade7_020（不重複五位數）；本題的餘事件是「三個都不同」，且百位不能是 0。"
       }
+    },
+    {
+      "id": "combinatorics_grade7_foundation_047",
+      "reviewStatus": "ok",
+      "topic": "combinatorics",
+      "subtopic": "balanced_four_digit_numbers_count",
+      "tags": [
+        "c:basic_counting",
+        "c:place_value",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade7",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一個四位數，如果前兩位數字的和等於後兩位數字的和，就叫做「平衡數」，例如 3507（3 + 5 = 0 + 8）和 9090（9 + 0 = 9 + 0）。四位數之中一共有幾個平衡數？",
+        "zh-Hans": "一个四位数，如果前两位数字的和等于后两位数字的和，就叫做「平衡数」，例如 3507（3 + 5 = 0 + 8）和 9090（9 + 0 = 9 + 0）。四位数之中一共有几个平衡数？",
+        "en": "A four-digit number is called “balanced” if the sum of its first two digits equals the sum of its last two digits, for example 3507 (3 + 5 = 0 + 8) and 9090 (9 + 0 = 9 + 0). How many four-digit balanced numbers are there?",
+        "ja": "4 けたの数で、前の 2 つの数字の和と後ろの 2 つの数字の和が等しいものを「つり合い数」とよびます。たとえば 3507（3 + 5 = 0 + 8）や 9090（9 + 0 = 9 + 0）です。4 けたのつり合い数は全部で何個ありますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 615。",
+        "zh-Hans": "答案是 615。",
+        "en": "The answer is 615.",
+        "ja": "答えは 615 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "依共同的和 s 分類（s 從 0 到 18）。後兩位是兩個 0～9 的數字，和為 s 的組數記作 N(s)：s ≤ 9 時 N(s) = s + 1，s ≥ 9 時 N(s) = 19 − s。",
+          "前兩位的千位不能是 0。和為 s 時，若 s ≤ 9 要扣掉「千位是 0」的那一組 (0, s)，組數是 N(s) − 1；若 s ≥ 10，千位本來就不可能是 0，組數是 N(s)。",
+          "總數 = Σ N(s)² − Σ_{s=0}^{9} N(s)。Σ N(s)² = 2 × (1² + 2² + ⋯ + 9²) + 10² = 2 × 285 + 100 = 670；Σ_{s=0}^{9} N(s) = 1 + 2 + ⋯ + 10 = 55。",
+          "平衡數一共有 670 − 55 = 615 個。答案是 615。"
+        ],
+        "zh-Hans": [
+          "依共同的和 s 分类（s 从 0 到 18）。后两位是两个 0～9 的数字，和为 s 的组数记作 N(s)：s ≤ 9 时 N(s) = s + 1，s ≥ 9 时 N(s) = 19 − s。",
+          "前两位的千位不能是 0。和为 s 时，若 s ≤ 9 要扣掉「千位是 0」的那一组 (0, s)，组数是 N(s) − 1；若 s ≥ 10，千位本来就不可能是 0，组数是 N(s)。",
+          "总数 = Σ N(s)² − Σ_{s=0}^{9} N(s)。Σ N(s)² = 2 × (1² + 2² + ⋯ + 9²) + 10² = 2 × 285 + 100 = 670；Σ_{s=0}^{9} N(s) = 1 + 2 + ⋯ + 10 = 55。",
+          "平衡数一共有 670 − 55 = 615 个。答案是 615。"
+        ],
+        "en": [
+          "Split by the common sum s (from 0 to 18). The last two digits are two digits 0–9; let N(s) be the number of pairs with sum s: N(s) = s + 1 for s ≤ 9 and N(s) = 19 − s for s ≥ 9.",
+          "The first digit cannot be 0. For s ≤ 9 we must remove the pair (0, s), giving N(s) − 1 choices; for s ≥ 10 the first digit cannot be 0 anyway, giving N(s) choices.",
+          "Total = Σ N(s)² − Σ_{s=0}^{9} N(s). Here Σ N(s)² = 2 × (1² + 2² + ⋯ + 9²) + 10² = 2 × 285 + 100 = 670 and Σ_{s=0}^{9} N(s) = 1 + 2 + ⋯ + 10 = 55.",
+          "There are 670 − 55 = 615 balanced numbers. The answer is 615."
+        ],
+        "ja": [
+          "共通の和 s（0〜18）で分けます。後ろの 2 けたは 0〜9 の数字 2 つで、和が s になる組の数を N(s) とすると、s ≤ 9 なら N(s) = s + 1、s ≥ 9 なら N(s) = 19 − s です。",
+          "千の位は 0 にできません。s ≤ 9 のときは (0, s) の組を除いて N(s) − 1 通り、s ≥ 10 のときは千の位がもともと 0 になれないので N(s) 通りです。",
+          "合計 = Σ N(s)² − Σ_{s=0}^{9} N(s)。Σ N(s)² = 2 × (1² + 2² + ⋯ + 9²) + 10² = 2 × 285 + 100 = 670、Σ_{s=0}^{9} N(s) = 1 + 2 + ⋯ + 10 = 55 です。",
+          "つり合い数は 670 − 55 = 615 個です。答えは 615 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "615"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "combinatorics-grade7-foundation",
+        "notes": "依共同和 s 分類，Σ N(s)² 再扣千位為 0 的情形（幸運車票型計數）。掃過「前兩位|後兩位」（4 題）、「數字和」（38 題）；最接近 combinatorics_grade8_foundation_014（數字和為 5 的三位數個數）與 number_theory_grade8_foundation_055（前後兩半之和平方），本題是兩半數字和相等的 Σ N(s)² 配對計數。"
+      }
     }
   ]
 }

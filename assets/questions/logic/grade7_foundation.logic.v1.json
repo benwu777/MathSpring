@@ -4873,6 +4873,243 @@
         "reference": "logic-grade7-foundation",
         "notes": "二進位編碼的一次性檢驗（資訊下界 2ⁿ ≥ 100 ＋構造）。全庫 grep「毒」只有消毒液濃度題；logic_grade7_014（1～100 猜數最少次數）是三種回答的逐次二分，本題是同時進行、兩種結果的編碼。"
       }
+    },
+    {
+      "id": "logic_grade7_foundation_056",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "min_arbitrary_swaps_cycle_decomposition",
+      "tags": [
+        "c:logic_deduction",
+        "m:invariant",
+        "m:construction"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade7",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "桌上由左到右排著 10 張卡片，上面的數字依序是 4、7、1、2、9、6、3、10、5、8。每一次操作可以任選兩張卡片（不一定相鄰），把它們的位置互換。要把卡片排成由左到右 1、2、3、⋯、10，最少需要幾次操作？",
+        "zh-Hans": "桌上由左到右排着 10 张卡片，上面的数字依序是 4、7、1、2、9、6、3、10、5、8。每一次操作可以任选两张卡片（不一定相邻），把它们的位置互换。要把卡片排成由左到右 1、2、3、⋯、10，最少需要几次操作？",
+        "en": "Ten cards lie in a row on a table. From left to right they show 4, 7, 1, 2, 9, 6, 3, 10, 5, 8. In one move you may pick any two cards (not necessarily adjacent) and swap their positions. What is the fewest number of moves needed to arrange the cards as 1, 2, 3, …, 10 from left to right?",
+        "ja": "机の上に 10 枚のカードが左から右へ並んでいて、書かれた数は順に 4、7、1、2、9、6、3、10、5、8 です。1 回の操作では、どの 2 枚でも（となり合っていなくてもよい）選んで位置を入れかえられます。カードを左から 1、2、3、⋯、10 の順に並べるには、最少で何回の操作が必要ですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 6。",
+        "zh-Hans": "答案是 6。",
+        "en": "The answer is 6.",
+        "ja": "答えは 6 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "把位置也編號 1～10。從第 1 個位置出發追蹤「這張卡應該去哪裡」：第 1 位是 4，該去第 4 位；第 4 位是 2，該去第 2 位；第 2 位是 7，該去第 7 位；第 7 位是 3，該去第 3 位；第 3 位是 1，回到第 1 位。這 5 張卡 4、2、7、3、1 圍成一個「循環」。",
+          "同樣追蹤其餘位置：第 5 位的 9 與第 9 位的 5 互相占了對方的位置，是一個 2 張的循環；第 8 位的 10 與第 10 位的 8 也是一個 2 張的循環；第 6 位的 6 已經在正確位置，自成一個循環。所以 10 張卡一共分成 4 個循環（5 + 2 + 2 + 1 = 10）。",
+          "排好之後每張卡都在自己的位置，也就是 10 個循環。一次互換，如果兩張卡在同一個循環裡，最多把它拆成兩個；如果在不同循環裡，會把兩個循環合成一個。所以每次操作，循環的個數最多增加 1，從 4 個變成 10 個至少要 10 − 4 = 6 次。",
+          "6 次做得到：在每個循環裡，每次把一張卡直接換到它該在的位置，長度 L 的循環用 L − 1 次就排好：5 張的循環 4 次、兩個 2 張的循環各 1 次，合計 4 + 1 + 1 = 6 次。答案是 6。"
+        ],
+        "zh-Hans": [
+          "把位置也编号 1～10。从第 1 个位置出发追踪「这张卡应该去哪里」：第 1 位是 4，该去第 4 位；第 4 位是 2，该去第 2 位；第 2 位是 7，该去第 7 位；第 7 位是 3，该去第 3 位；第 3 位是 1，回到第 1 位。这 5 张卡 4、2、7、3、1 围成一个「循环」。",
+          "同样追踪其余位置：第 5 位的 9 与第 9 位的 5 互相占了对方的位置，是一个 2 张的循环；第 8 位的 10 与第 10 位的 8 也是一个 2 张的循环；第 6 位的 6 已经在正确位置，自成一个循环。所以 10 张卡一共分成 4 个循环（5 + 2 + 2 + 1 = 10）。",
+          "排好之后每张卡都在自己的位置，也就是 10 个循环。一次互换，如果两张卡在同一个循环里，最多把它拆成两个；如果在不同循环里，会把两个循环合成一个。所以每次操作，循环的个数最多增加 1，从 4 个变成 10 个至少要 10 − 4 = 6 次。",
+          "6 次做得到：在每个循环里，每次把一张卡直接换到它该在的位置，长度 L 的循环用 L − 1 次就排好：5 张的循环 4 次、两个 2 张的循环各 1 次，合计 4 + 1 + 1 = 6 次。答案是 6。"
+        ],
+        "en": [
+          "Number the positions 1–10 and follow “where this card should go”: position 1 holds 4, which belongs at position 4; position 4 holds 2, which belongs at 2; position 2 holds 7 → position 7; position 7 holds 3 → position 3; position 3 holds 1 → back to position 1. The five cards 4, 2, 7, 3, 1 form one cycle.",
+          "Do the same for the rest: the 9 at position 5 and the 5 at position 9 occupy each other’s places (a 2-card cycle); the 10 at position 8 and the 8 at position 10 form another 2-card cycle; the 6 at position 6 is already correct (a cycle by itself). So the cards split into 4 cycles (5 + 2 + 2 + 1 = 10).",
+          "When sorted, every card is its own cycle, so there are 10 cycles. A swap of two cards in the same cycle splits it into at most two; a swap of cards in different cycles merges them into one. Hence each move raises the number of cycles by at most 1, and going from 4 to 10 cycles needs at least 10 − 4 = 6 moves.",
+          "6 moves are enough: inside each cycle, keep swapping one card directly into its correct spot; a cycle of length L is fixed in L − 1 moves. That is 4 moves for the 5-cycle and 1 move for each 2-cycle, 4 + 1 + 1 = 6. The answer is 6."
+        ],
+        "ja": [
+          "位置にも 1〜10 の番号をつけ、「このカードはどこへ行くべきか」をたどります。1 番目は 4 なので 4 番目へ、4 番目は 2 なので 2 番目へ、2 番目は 7 なので 7 番目へ、7 番目は 3 なので 3 番目へ、3 番目は 1 なので 1 番目にもどります。この 5 枚 4、2、7、3、1 で 1 つの「輪」ができます。",
+          "残りも同じようにたどると、5 番目の 9 と 9 番目の 5 はおたがいの場所にあり 2 枚の輪、8 番目の 10 と 10 番目の 8 も 2 枚の輪、6 番目の 6 はすでに正しい場所で 1 枚だけの輪です。10 枚は全部で 4 つの輪に分かれます（5 + 2 + 2 + 1 = 10）。",
+          "並べ終わると、どのカードも自分の場所にあるので輪は 10 個です。1 回の入れかえで、同じ輪の 2 枚なら輪は多くても 2 つに分かれるだけ、別の輪の 2 枚なら 2 つの輪が 1 つにまとまります。つまり 1 回で輪の数は多くても 1 しか増えず、4 個から 10 個にするには少なくとも 10 − 4 = 6 回必要です。",
+          "6 回で実際にできます。各輪の中で、1 枚ずつ正しい場所へ直接入れかえていけば、長さ L の輪は L − 1 回でそろいます。5 枚の輪に 4 回、2 枚の輪にそれぞれ 1 回で、4 + 1 + 1 = 6 回です。答えは 6 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "6"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade7-foundation",
+        "notes": "任意兩張互換的最少次數＝張數－循環個數（循環分解＋每次最多增加一個循環的不變量）。掃過「交換|對調」（28 題）、「排成由小到大」；最接近 logic_grade11_foundation_010（只能交換相鄰兩張，答案是逆序數 3）。本題允許任意兩張互換，關鍵改成循環分解，逆序數不再適用。另 logic_grade12_foundation_017 也用循環分解，但求的是置換的週期（循環長度的最小公倍數），本題求的是張數減循環數。"
+      }
+    },
+    {
+      "id": "logic_grade7_foundation_057",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "instant_runoff_non_monotonic_paradox",
+      "tags": [
+        "c:logic_deduction",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade7",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "班上 20 人用「淘汰制」選班長：每人把甲、乙、丙排出第一、第二、第三志願。開票時先數第一志願；如果有人超過半數就當選，否則把第一志願票數最少的人淘汰，他的票改算給這些票上排在下一位、而且還沒被淘汰的人，再重新計算，直到有人過半。原本的選票是：7 張「丙＞甲＞乙」、7 張「甲＞乙＞丙」、6 張「乙＞丙＞甲」。開票前，其中 2 位原本投「甲＞乙＞丙」的同學覺得丙也不錯，把選票改成「丙＞甲＞乙」，其他人都不變。改票之前與改票之後，當選的分別是誰？",
+        "zh-Hans": "班上 20 人用「淘汰制」选班长：每人把甲、乙、丙排出第一、第二、第三志愿。开票时先数第一志愿；如果有人超过半数就当选，否则把第一志愿票数最少的人淘汰，他的票改算给这些票上排在下一位、而且还没被淘汰的人，再重新计算，直到有人过半。原本的选票是：7 张「丙＞甲＞乙」、7 张「甲＞乙＞丙」、6 张「乙＞丙＞甲」。开票前，其中 2 位原本投「甲＞乙＞丙」的同学觉得丙也不错，把选票改成「丙＞甲＞乙」，其他人都不变。改票之前与改票之后，当选的分别是谁？",
+        "en": "A class of 20 elects a leader by instant runoff: each voter ranks the candidates Ann, Bo and Cy first, second, third. First choices are counted; if someone has more than half, they win; otherwise the candidate with the fewest first-choice votes is eliminated and each of their ballots is transferred to the next not-yet-eliminated candidate on that ballot, and the count is repeated until someone has a majority. The ballots are: 7 of “Cy > Ann > Bo”, 7 of “Ann > Bo > Cy”, and 6 of “Bo > Cy > Ann”. Before counting, 2 voters who wrote “Ann > Bo > Cy” decide they like Cy too and change their ballots to “Cy > Ann > Bo”; nobody else changes. Who wins before the change, and who wins after it?",
+        "ja": "クラスの 20 人が「決選投票方式」で学級委員を選びます。各自が甲、乙、丙に第 1、第 2、第 3 希望の順位をつけます。まず第 1 希望の票を数え、過半数の人がいれば当選、いなければ第 1 希望の票が最も少ない人を落選させ、その票はその票の中でまだ落選していない次の順位の人に移して数え直します。これを過半数の人が出るまで続けます。投票は「丙＞甲＞乙」が 7 票、「甲＞乙＞丙」が 7 票、「乙＞丙＞甲」が 6 票です。開票前に、「甲＞乙＞丙」と書いた 2 人が丙もよいと思い直し、票を「丙＞甲＞乙」に書きかえました。ほかの人は変えません。書きかえる前と後で、当選するのはそれぞれだれですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 C：改票前丙當選，改票後換成乙當選。",
+        "zh-Hans": "答案是 C：改票前丙当选，改票后换成乙当选。",
+        "en": "The answer is C: Cy wins before, and Bo wins after.",
+        "ja": "答えは C：前は丙が当選し、後は乙が当選 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "改票前，第一志願：丙 7、甲 7、乙 6，沒有人超過 10 票。乙最少被淘汰，乙的 6 張票「乙＞丙＞甲」改算給丙。",
+          "第二輪丙有 7 + 6 = 13 票、甲 7 票，13 超過半數，改票前丙當選。",
+          "改票後，第一志願：丙 7 + 2 = 9、甲 7 − 2 = 5、乙 6，還是沒有人過半。這次最少的是甲，甲被淘汰，剩下 5 張「甲＞乙＞丙」改算給乙。",
+          "第二輪乙有 6 + 5 = 11 票、丙 9 票，乙當選。兩位同學把丙往前排，反而害丙落選：改票前丙當選，改票後乙當選，選 C。"
+        ],
+        "zh-Hans": [
+          "改票前，第一志愿：丙 7、甲 7、乙 6，没有人超过 10 票。乙最少被淘汰，乙的 6 张票「乙＞丙＞甲」改算给丙。",
+          "第二轮丙有 7 + 6 = 13 票、甲 7 票，13 超过半数，改票前丙当选。",
+          "改票后，第一志愿：丙 7 + 2 = 9、甲 7 − 2 = 5、乙 6，还是没有人过半。这次最少的是甲，甲被淘汰，剩下 5 张「甲＞乙＞丙」改算给乙。",
+          "第二轮乙有 6 + 5 = 11 票、丙 9 票，乙当选。两位同学把丙往前排，反而害丙落选：改票前丙当选，改票后乙当选，选 C。"
+        ],
+        "en": [
+          "Before the change, first choices: Cy 7, Ann 7, Bo 6; nobody exceeds 10. Bo has the fewest and is eliminated; Bo’s 6 ballots “Bo > Cy > Ann” go to Cy.",
+          "In round two Cy has 7 + 6 = 13 and Ann has 7; 13 is a majority, so Cy wins before the change.",
+          "After the change, first choices: Cy 7 + 2 = 9, Ann 7 − 2 = 5, Bo 6; still no majority. Now Ann is lowest and is eliminated, and the remaining 5 ballots “Ann > Bo > Cy” go to Bo.",
+          "In round two Bo has 6 + 5 = 11 and Cy has 9, so Bo wins. Moving Cy up on two ballots made Cy lose: Cy before, Bo after — choice C."
+        ],
+        "ja": [
+          "書きかえる前の第 1 希望は 丙 7、甲 7、乙 6 で、10 票を超える人はいません。最も少ない乙が落選し、乙の 6 票「乙＞丙＞甲」は丙に移ります。",
+          "2 回目は丙が 7 + 6 = 13 票、甲が 7 票で、13 は過半数なので、書きかえる前は丙が当選します。",
+          "書きかえた後の第 1 希望は 丙 7 + 2 = 9、甲 7 − 2 = 5、乙 6 で、やはり過半数はいません。今度は甲が最も少なく落選し、残りの 5 票「甲＞乙＞丙」は乙に移ります。",
+          "2 回目は乙が 6 + 5 = 11 票、丙が 9 票で乙が当選します。2 人が丙の順位を上げたことで、かえって丙が落選しました。前は丙、後は乙なので C です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "multiple_choice",
+      "options": {
+        "A": {
+          "zh-Hant": "改票前丙當選，改票後仍是丙當選",
+          "zh-Hans": "改票前丙当选，改票后仍是丙当选",
+          "en": "Cy wins before, and Cy still wins after",
+          "ja": "前は丙が当選し、後もやはり丙が当選"
+        },
+        "B": {
+          "zh-Hant": "改票前甲當選，改票後換成乙當選",
+          "zh-Hans": "改票前甲当选，改票后换成乙当选",
+          "en": "Ann wins before, and Bo wins after",
+          "ja": "前は甲が当選し、後は乙が当選"
+        },
+        "C": {
+          "zh-Hant": "改票前丙當選，改票後換成乙當選",
+          "zh-Hans": "改票前丙当选，改票后换成乙当选",
+          "en": "Cy wins before, and Bo wins after",
+          "ja": "前は丙が当選し、後は乙が当選"
+        },
+        "D": {
+          "zh-Hant": "改票前丙當選，改票後換成甲當選",
+          "zh-Hans": "改票前丙当选，改票后换成甲当选",
+          "en": "Cy wins before, and Ann wins after",
+          "ja": "前は丙が当選し、後は甲が当選"
+        }
+      },
+      "correctAnswer": {
+        "type": "choice",
+        "value": "C"
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade7-foundation",
+        "notes": "淘汰制（instant runoff）的非單調性：把當選者往前排，改變了誰先被淘汰而使他落選。掃過「投票|選舉|候選人|志願|多數決」（共 8 題）；最接近 logic_grade12_foundation_053（議程操控：先表決哪兩案的 Condorcet 循環），本題是淘汰制的票數轉移與非單調現象，不是兩兩多數決。"
+      }
+    },
+    {
+      "id": "logic_grade7_foundation_058",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "square_sum_chain_endpoints",
+      "tags": [
+        "c:logic_deduction",
+        "m:extremal",
+        "m:construction"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade7",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "把 1 到 15 這十五個整數排成一列，每個數恰好用一次，使得任意相鄰的兩個數相加都是完全平方數。已知這樣的排法存在。求排在兩端的那兩個數的和。",
+        "zh-Hans": "把 1 到 15 这十五个整数排成一列，每个数恰好用一次，使得任意相邻的两个数相加都是完全平方数。已知这样的排法存在。求排在两端的那两个数的和。",
+        "en": "The fifteen integers 1 to 15 are arranged in a row, each used exactly once, so that every two neighbouring numbers add up to a perfect square. Such an arrangement exists. Find the sum of the two numbers at the ends of the row.",
+        "ja": "1 から 15 までの 15 個の整数を、どれもちょうど 1 回ずつ使って 1 列に並べ、となり合うどの 2 数の和も平方数になるようにします。このような並べ方は存在します。両はしにある 2 つの数の和を求めなさい。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 17。",
+        "zh-Hans": "答案是 17。",
+        "en": "The answer is 17.",
+        "ja": "答えは 17 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "兩個相異的數最大和是 14 + 15 = 29，所以相鄰兩數的和只可能是 4、9、16、25。",
+          "找 8 的可能鄰居：和為 9 時是 1；和為 16 時要配 8 本身，不行；和為 25 時要配 17，超過 15。所以 8 只有一個可能的鄰居 1，8 不能夾在兩個數中間，一定在某一端。",
+          "找 9 的可能鄰居：和為 16 時是 7；和為 25 時要配 16，超過 15；和為 4 或 9 也不可能。所以 9 只有一個可能的鄰居 7，9 也一定在某一端。",
+          "一列只有兩端，所以兩端就是 8 和 9。實際排法例如 8、1、15、10、6、3、13、12、4、5、11、14、2、7、9。兩端的和是 8 + 9 = 17。答案是 17。"
+        ],
+        "zh-Hans": [
+          "两个相异的数最大和是 14 + 15 = 29，所以相邻两数的和只可能是 4、9、16、25。",
+          "找 8 的可能邻居：和为 9 时是 1；和为 16 时要配 8 本身，不行；和为 25 时要配 17，超过 15。所以 8 只有一个可能的邻居 1，8 不能夹在两个数中间，一定在某一端。",
+          "找 9 的可能邻居：和为 16 时是 7；和为 25 时要配 16，超过 15；和为 4 或 9 也不可能。所以 9 只有一个可能的邻居 7，9 也一定在某一端。",
+          "一列只有两端，所以两端就是 8 和 9。实际排法例如 8、1、15、10、6、3、13、12、4、5、11、14、2、7、9。两端的和是 8 + 9 = 17。答案是 17。"
+        ],
+        "en": [
+          "The largest sum of two different numbers is 14 + 15 = 29, so neighbouring sums can only be 4, 9, 16 or 25.",
+          "Neighbours of 8: sum 9 needs 1; sum 16 needs 8 itself (not allowed); sum 25 needs 17 (too big). So 8 has only one possible neighbour, 1; it cannot sit between two numbers and must be at an end.",
+          "Neighbours of 9: sum 16 needs 7; sum 25 needs 16 (too big); sums 4 and 9 are impossible. So 9 has only one possible neighbour, 7, and must also be at an end.",
+          "A row has only two ends, so the ends are 8 and 9. For example: 8, 1, 15, 10, 6, 3, 13, 12, 4, 5, 11, 14, 2, 7, 9. The sum of the ends is 8 + 9 = 17. The answer is 17."
+        ],
+        "ja": [
+          "異なる 2 数の和は最大でも 14 + 15 = 29 なので、となり合う 2 数の和は 4、9、16、25 のどれかです。",
+          "8 のとなりになれる数：和が 9 なら 1、和が 16 なら 8 自身で不可、和が 25 なら 17 で 15 を超えます。8 のとなりになれるのは 1 だけなので、8 は 2 数の間には入れず、どちらかのはしにあります。",
+          "9 のとなりになれる数：和が 16 なら 7、和が 25 なら 16 で 15 を超え、和が 4 や 9 も不可能です。9 のとなりは 7 だけなので、9 もはしにあります。",
+          "列のはしは 2 か所しかないので、両はしは 8 と 9 です。実際の並びの例は 8、1、15、10、6、3、13、12、4、5、11、14、2、7、9 です。両はしの和は 8 + 9 = 17。答えは 17 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "17"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade7-foundation",
+        "notes": "只有一個可能鄰居的數必在端點（度數 1 的頂點），不必整列構造即可定出兩端。掃過「相鄰.*完全平方|完全平方.*相鄰|兩數之和.*平方」（0 題）、「相鄰」（169 題，無此題型）；最接近 logic_grade5_foundation_053（V 字形填數）類的填數題，但推理骨架是圖的端點度數。"
+      }
     }
   ]
 }
