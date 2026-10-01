@@ -8241,6 +8241,250 @@
         "reference": "logic-grade6-foundation",
         "notes": "預切蛋糕使 3 人或 4 人都能平分的最少塊數（下界：每塊 ≤ 1/4 → 每人 ≥ 2 塊；構造 1/4,1/4,1/6,1/6,1/12,1/12）。掃過 蛋糕.*最少|不論.*人.*平分（0 題）。"
       }
+    },
+    {
+      "id": "logic_grade6_foundation_102",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "fewest_roads_to_close_bottleneck",
+      "tags": [
+        "c:graph_theory",
+        "m:extremal",
+        "m:contradiction"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade6",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "八個村莊之間有下面這些道路，每條路都可以雙向通行：甲–乙、甲–丙、甲–丁、乙–丙、丙–丁、乙–戊、丁–庚、戊–庚、戊–辛、庚–辛、戊–己、庚–己、辛–己。颱風要來了，有關單位想封閉一些道路，讓甲村的人沒辦法沿著道路走到己村。最少要封閉幾條道路？",
+        "zh-Hans": "八个村庄之间有下面这些道路，每条路都可以双向通行：甲–乙、甲–丙、甲–丁、乙–丙、丙–丁、乙–戊、丁–庚、戊–庚、戊–辛、庚–辛、戊–己、庚–己、辛–己。颱风要来了，有关单位想封闭一些道路，让甲村的人没办法沿着道路走到己村。最少要封闭几条道路？",
+        "en": "Eight villages are joined by these two-way roads: Jia–Yi, Jia–Bing, Jia–Ding, Yi–Bing, Bing–Ding, Yi–Wu, Ding–Geng, Wu–Geng, Wu–Xin, Geng–Xin, Wu–Ji, Geng–Ji, Xin–Ji. A typhoon is coming, and the authorities want to close some roads so that people in Jia cannot travel by road to Ji. What is the smallest number of roads that must be closed?",
+        "ja": "8 つの村の間に次の道があり、どれも両方向に通れます：甲–乙、甲–丙、甲–丁、乙–丙、丙–丁、乙–戊、丁–庚、戊–庚、戊–辛、庚–辛、戊–己、庚–己、辛–己。台風が来るので、いくつかの道を通行止めにして、甲村の人が道を通って己村へ行けないようにしたいです。最も少なくて何本の道を通行止めにすればよいですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 2。",
+        "zh-Hans": "答案是 2。",
+        "en": "The answer is 2.",
+        "ja": "答えは 2 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "甲村和己村各連著 3 條路，把其中一村的路全部封掉要 3 條，但也許有更少的封法。",
+          "把村莊分成兩群：甲、乙、丙、丁一群，戊、己、庚、辛一群。兩群之間只有乙–戊和丁–庚兩條路，封閉這 2 條，甲村那一群就完全到不了己村。",
+          "只封 1 條不夠：甲 → 乙 → 戊 → 己 和 甲 → 丁 → 庚 → 己 這兩條路線沒有共用任何一條道路，封閉 1 條最多只擋住其中一條路線，另一條仍然可以走。",
+          "所以最少要封閉 2 條道路（乙–戊和丁–庚）。"
+        ],
+        "zh-Hans": [
+          "甲村和己村各连着 3 条路，把其中一村的路全部封掉要 3 条，但也许有更少的封法。",
+          "把村庄分成两群：甲、乙、丙、丁一群，戊、己、庚、辛一群。两群之间只有乙–戊和丁–庚两条路，封闭这 2 条，甲村那一群就完全到不了己村。",
+          "只封 1 条不够：甲 → 乙 → 戊 → 己 和 甲 → 丁 → 庚 → 己 这两条路线没有共用任何一条道路，封闭 1 条最多只挡住其中一条路线，另一条仍然可以走。",
+          "所以最少要封闭 2 条道路（乙–戊和丁–庚）。"
+        ],
+        "en": [
+          "Jia and Ji each have 3 roads, so closing all roads at one of them takes 3, but there may be a way with fewer.",
+          "Split the villages into two groups: Jia, Yi, Bing, Ding and Wu, Ji, Geng, Xin. Only the two roads Yi–Wu and Ding–Geng connect the groups; closing these 2 cuts Jia's group off from Ji completely.",
+          "One road is not enough: the routes Jia → Yi → Wu → Ji and Jia → Ding → Geng → Ji share no road, so closing one road blocks at most one of these routes and the other is still open.",
+          "So at least 2 roads must be closed (Yi–Wu and Ding–Geng)."
+        ],
+        "ja": [
+          "甲村も己村も道が 3 本ずつつながっているので、どちらかの道を全部止めると 3 本ですが、もっと少なくできるかもしれません。",
+          "村を甲・乙・丙・丁と戊・己・庚・辛の 2 つのグループに分けると、グループの間をつなぐ道は乙–戊と丁–庚の 2 本だけです。この 2 本を止めれば、甲のグループから己村へは行けません。",
+          "1 本では足りません。甲 → 乙 → 戊 → 己 と 甲 → 丁 → 庚 → 己 の 2 つの道すじは同じ道を 1 本も使わないので、1 本止めてもどちらか一方しかふさげず、もう一方は通れます。",
+          "よって最も少なくて 2 本（乙–戊と丁–庚）です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "2"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade6-foundation",
+        "notes": "最小割：找出兩群村莊間只有 2 條連接路（上界），再用 2 條不共用道路的路線證明 1 條不夠（下界）。掃過 封閉|封鎖|切斷（8 題）、村莊.*道路|道路.*村莊（2 題）；最接近 logic_grade2_foundation_091，差異：那題是村莊路網上的走法/連通判斷；本題求使兩點不連通的最少刪邊數，需要「上界構造 + 不相交路線下界」"
+      }
+    },
+    {
+      "id": "logic_grade6_foundation_103",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "gas_station_loop_unique_start",
+      "tags": [
+        "c:add_sub",
+        "c:logic_deduction",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade6",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一條環狀公路上依順時針方向有甲、乙、丙、丁、戊五個加油站，戊站之後又回到甲站。在各站可以加到的油依序是：甲 4 公升、乙 6 公升、丙 4 公升、丁 2 公升、戊 6 公升。各段路要用的油是：甲到乙 5 公升、乙到丙 4 公升、丙到丁 4 公升、丁到戊 7 公升、戊到甲 1 公升。一輛車的油箱一開始是空的（油箱夠大），從某一站出發時加上那一站的油，之後每到一站都把那一站的油全部加上，一直順時針開。要能繞一整圈回到出發的那一站，必須從哪一站出發？",
+        "zh-Hans": "一条环状公路上依顺时针方向有甲、乙、丙、丁、戊五个加油站，戊站之后又回到甲站。在各站可以加到的油依序是：甲 4 升、乙 6 升、丙 4 升、丁 2 升、戊 6 升。各段路要用的油是：甲到乙 5 升、乙到丙 4 升、丙到丁 4 升、丁到戊 7 升、戊到甲 1 升。一辆车的油箱一开始是空的（油箱够大），从某一站出发时加上那一站的油，之后每到一站都把那一站的油全部加上，一直顺时针开。要能绕一整圈回到出发的那一站，必须从哪一站出发？",
+        "en": "Five petrol stations Jia, Yi, Bing, Ding, Wu lie clockwise around a ring road, and after Wu comes Jia again. The fuel available at each station is: Jia 4 litres, Yi 6, Bing 4, Ding 2, Wu 6. The fuel needed for each stretch is: Jia to Yi 5 litres, Yi to Bing 4, Bing to Ding 4, Ding to Wu 7, Wu to Jia 1. A car starts with an empty (large enough) tank, takes all the fuel at its starting station, and at every station it reaches it takes all the fuel there, always driving clockwise. To get all the way round back to its starting station, which station must it start from?",
+        "ja": "環状道路に時計回りに甲・乙・丙・丁・戊の 5 つのガソリンスタンドがあり、戊の次はまた甲です。各スタンドで入れられるガソリンは、甲 4 L、乙 6 L、丙 4 L、丁 2 L、戊 6 L です。各区間で使うガソリンは、甲→乙 5 L、乙→丙 4 L、丙→丁 4 L、丁→戊 7 L、戊→甲 1 L です。車のタンクははじめ空で（十分大きい）、出発するスタンドのガソリンを入れ、着いたスタンドでもそこのガソリンを全部入れて、ずっと時計回りに走ります。1 周して出発したスタンドにもどるには、どのスタンドから出発しなければなりませんか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是：戊站。",
+        "zh-Hans": "答案是：戊站。",
+        "en": "The answer is: Station Wu.",
+        "ja": "答えは「戊のスタンド」です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "每一站算「加的油 − 開到下一站要用的油」：甲 4 − 5 = −1，乙 6 − 4 = +2，丙 4 − 4 = 0，丁 2 − 7 = −5，戊 6 − 1 = +5。全部加起來是 +1，總油量夠用。",
+          "從某站出發，就從那一站開始把這些數依序累加，只要途中出現負數，表示開到下一站前就沒油。從甲出發：第一段就是 −1，不行。從乙出發：+2、+2、−3，不行。從丙出發：0、−5，不行。從丁出發：−5，不行。",
+          "從戊出發：+5、+4、+6、+6、+1，每一段結束時油量都不是負數，可以繞回戊站。",
+          "所以必須從戊站出發。"
+        ],
+        "zh-Hans": [
+          "每一站算「加的油 − 开到下一站要用的油」：甲 4 − 5 = −1，乙 6 − 4 = +2，丙 4 − 4 = 0，丁 2 − 7 = −5，戊 6 − 1 = +5。全部加起来是 +1，总油量够用。",
+          "从某站出发，就从那一站开始把这些数依序累加，只要途中出现负数，表示开到下一站前就没油。从甲出发：第一段就是 −1，不行。从乙出发：+2、+2、−3，不行。从丙出发：0、−5，不行。从丁出发：−5，不行。",
+          "从戊出发：+5、+4、+6、+6、+1，每一段结束时油量都不是负数，可以绕回戊站。",
+          "所以必须从戊站出发。"
+        ],
+        "en": [
+          "For each station compute \"fuel added − fuel needed to reach the next station\": Jia 4 − 5 = −1, Yi 6 − 4 = +2, Bing 4 − 4 = 0, Ding 2 − 7 = −5, Wu 6 − 1 = +5. These add up to +1, so in total there is enough fuel.",
+          "Starting at a station, add these numbers in order from there; if the running total ever becomes negative, the car runs dry before the next station. From Jia: −1 at once, no. From Yi: +2, +2, −3, no. From Bing: 0, −5, no. From Ding: −5, no.",
+          "From Wu: +5, +4, +6, +6, +1; the fuel never goes negative, so the car gets back to Wu.",
+          "So the car must start from Wu."
+        ],
+        "ja": [
+          "各スタンドで「入れるガソリン − 次まで使うガソリン」を計算します。甲 4 − 5 = −1、乙 6 − 4 = +2、丙 4 − 4 = 0、丁 2 − 7 = −5、戊 6 − 1 = +5 で、合計は +1 なので全体では足ります。",
+          "あるスタンドから出発するとき、そこから順にこれらの数をたしていき、とちゅうで負になれば次のスタンドの前でガソリンがなくなります。甲から：いきなり −1 でだめ。乙から：+2、+2、−3 でだめ。丙から：0、−5 でだめ。丁から：−5 でだめ。",
+          "戊から：+5、+4、+6、+6、+1 で、どの区間の終わりでも負にならず、戊にもどれます。",
+          "よって戊から出発しなければなりません。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "multiple_choice",
+      "options": {
+        "A": {
+          "zh-Hant": "甲站",
+          "zh-Hans": "甲站",
+          "en": "Station Jia",
+          "ja": "甲のスタンド"
+        },
+        "B": {
+          "zh-Hant": "乙站",
+          "zh-Hans": "乙站",
+          "en": "Station Yi",
+          "ja": "乙のスタンド"
+        },
+        "C": {
+          "zh-Hant": "丙站",
+          "zh-Hans": "丙站",
+          "en": "Station Bing",
+          "ja": "丙のスタンド"
+        },
+        "D": {
+          "zh-Hant": "丁站",
+          "zh-Hans": "丁站",
+          "en": "Station Ding",
+          "ja": "丁のスタンド"
+        },
+        "E": {
+          "zh-Hant": "戊站",
+          "zh-Hans": "戊站",
+          "en": "Station Wu",
+          "ja": "戊のスタンド"
+        }
+      },
+      "correctAnswer": {
+        "type": "choice",
+        "value": "E"
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade6-foundation",
+        "notes": "環狀加油站問題：把「加油 − 耗油」依序累加，只有從累計最低點之後的那一站出發才不會變負。掃過 加油站|加油（0 題）、環狀|一整圈|繞一圈（19 題）；最接近 logic_grade2_foundation_083，差異：那題是環狀公車路線的最短車程；本題是累加油量不能為負的出發點判定"
+      }
+    },
+    {
+      "id": "logic_grade6_foundation_104",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "sort_four_weights_min_comparisons",
+      "tags": [
+        "c:permutation_combination",
+        "m:extremal",
+        "m:contradiction"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade6",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "有 4 個外表一樣、重量都不相同的盒子。用一台沒有砝碼的天平，每次只能把兩個盒子分別放在左右兩盤，看哪一個比較重。要保證把 4 個盒子由輕到重完全排好，最少要比較幾次？",
+        "zh-Hans": "有 4 个外表一样、重量都不相同的盒子。用一台没有砝码的天平，每次只能把两个盒子分别放在左右两盘，看哪一个比较重。要保证把 4 个盒子由轻到重完全排好，最少要比较几次？",
+        "en": "There are 4 boxes that look the same but all have different weights. Using a balance with no weights, each time you may put two boxes on the two pans and see which is heavier. What is the smallest number of weighings that guarantees putting all 4 boxes in order from lightest to heaviest?",
+        "ja": "見た目は同じで重さがすべてちがう箱が 4 つあります。分銅のない天びんを使い、1 回に 2 つの箱を左右の皿にのせて、どちらが重いかを調べます。4 つの箱を軽い順に完全に並べることを必ずできるようにするには、最も少なくて何回比べればよいですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 5。",
+        "zh-Hans": "答案是 5。",
+        "en": "The answer is 5.",
+        "ja": "答えは 5 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "4 個盒子由輕到重的排法有 4 × 3 × 2 × 1 = 24 種可能。",
+          "每比較一次只有「左重」或「右重」兩種結果。比 4 次，結果最多只有 2 × 2 × 2 × 2 = 16 種，少於 24 種，一定有兩種不同的排法會得到完全一樣的結果而分不出來，所以至少要比 5 次。",
+          "5 次做得到：先比 A 和 B、再比 C 和 D，假設 A < B、C < D；再比兩個較重的 B 和 D，假設 B < D，就知道 A < B < D，而且 C < D。",
+          "只剩 C 要插進 A < B 之中：先比 C 和 A，C 比較輕就排好了；C 比較重再比 C 和 B，就能排好。最多 2 + 1 + 2 = 5 次（若 B > D，對 A 做同樣的事）。所以最少要 5 次。"
+        ],
+        "zh-Hans": [
+          "4 个盒子由轻到重的排法有 4 × 3 × 2 × 1 = 24 种可能。",
+          "每比较一次只有「左重」或「右重」两种结果。比 4 次，结果最多只有 2 × 2 × 2 × 2 = 16 种，少于 24 种，一定有两种不同的排法会得到完全一样的结果而分不出来，所以至少要比 5 次。",
+          "5 次做得到：先比 A 和 B、再比 C 和 D，假设 A < B、C < D；再比两个较重的 B 和 D，假设 B < D，就知道 A < B < D，而且 C < D。",
+          "只剩 C 要插进 A < B 之中：先比 C 和 A，C 比较轻就排好了；C 比较重再比 C 和 B，就能排好。最多 2 + 1 + 2 = 5 次（若 B > D，对 A 做同样的事）。所以最少要 5 次。"
+        ],
+        "en": [
+          "There are 4 × 3 × 2 × 1 = 24 possible orders of the 4 boxes from lightest to heaviest.",
+          "Each weighing has only two outcomes, left heavier or right heavier. Four weighings give at most 2 × 2 × 2 × 2 = 16 different result patterns, fewer than 24, so two different orders would give identical results and could not be told apart. At least 5 weighings are needed.",
+          "5 weighings suffice: compare A with B and C with D, say A < B and C < D; then compare the two heavier ones, B and D, say B < D, so A < B < D and also C < D.",
+          "Now C only has to be placed among A < B: compare C with A; if C is lighter the order is known, otherwise compare C with B. That is at most 2 + 1 + 2 = 5 weighings (if B > D, do the same with A instead). So the minimum is 5."
+        ],
+        "ja": [
+          "4 つの箱の軽い順の並び方は 4 × 3 × 2 × 1 = 24 通りあります。",
+          "1 回の比較の結果は「左が重い」か「右が重い」の 2 通りだけです。4 回では結果は多くても 2 × 2 × 2 × 2 = 16 通りで 24 通りより少ないので、ちがう 2 つの並び方で結果がまったく同じになり、区別できません。よって少なくとも 5 回必要です。",
+          "5 回でできます。A と B、C と D を比べ、A < B、C < D だったとします。次に重い方どうしの B と D を比べ、B < D なら A < B < D で、さらに C < D がわかります。",
+          "あとは C を A < B の中に入れるだけです。C と A を比べ、C が軽ければ順番が決まり、重ければ C と B を比べれば決まります。最大で 2 + 1 + 2 = 5 回です（B > D のときは A について同じことをします）。よって最も少なくて 5 回です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "5"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade6-foundation",
+        "notes": "4 個物品比較排序的最少次數：24 種排列 > 2⁴ = 16 得下界 5，再用兩兩比較加插入給出 5 次的方法。掃過 天平（38 題）、由輕到重|排好|排序（21 題）；最接近 logic_grade3_foundation_075，差異：那題只要找出最重的一盒（淘汰賽，n − 1 次）；本題要完整排序，需要資訊量下界與插入策略"
+      }
     }
   ]
 }
