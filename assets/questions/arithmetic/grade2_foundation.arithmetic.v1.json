@@ -13563,6 +13563,217 @@
         "reference": "arithmetic-grade2-foundation",
         "notes": "一排中連續 k 格的位置數再扣掉含障礙者。掃「連在一起.*座|座位.*連」：logic_grade2_100 三人不相鄰坐法；logic_grade2_098 郵票撕連在一起的兩張；arithmetic_grade1_097 區間重疊。本題是滑動窗口扣除被占座位。"
       }
+    },
+    {
+      "id": "arithmetic_grade2_foundation_184",
+      "reviewStatus": "ok",
+      "topic": "arithmetic",
+      "subtopic": "flip_scoreboard_card_turns",
+      "tags": [
+        "c:place_value",
+        "m:enumeration"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade2",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "球場的記分板用翻牌顯示兩位數：十位一疊牌、個位一疊牌，每翻動一疊牌換一個數字算翻 1 次。比分從 00 開始，每得 1 分就把顯示的數加 1，例如從 09 變成 10，十位和個位都要換，算翻 2 次。一隊從 00 一路得分到 35 分，記分板一共翻了幾次？",
+        "zh-Hans": "球场的记分板用翻牌显示两位数：十位一叠牌、个位一叠牌，每翻动一叠牌换一个数字算翻 1 次。比分从 00 开始，每得 1 分就把显示的数加 1，例如从 09 变成 10，十位和个位都要换，算翻 2 次。一队从 00 一路得分到 35 分，记分板一共翻了几次？",
+        "en": "A scoreboard shows a two-digit number with flip cards: one stack for the tens digit and one for the ones digit, and changing the digit on one stack counts as 1 flip. The score starts at 00 and goes up by 1 for each point; for example, going from 09 to 10 changes both digits, which is 2 flips. A team scores from 00 all the way to 35. How many flips are made in total?",
+        "ja": "球場の得点板は、めくりカードで 2 けたの数を表示します。十の位の束と一の位の束があり、1 つの束の数字をかえるごとに 1 回めくったと数えます。得点は 00 から始まり、1 点ごとに表示を 1 ふやします。たとえば 09 から 10 になるときは十の位も一の位もかわるので 2 回です。あるチームが 00 から 35 点まで得点しました。全部で何回めくりましたか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 38。",
+        "zh-Hans": "答案是 38。",
+        "en": "The answer is 38.",
+        "ja": "答えは 38 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "個位：每得 1 分，個位數字一定會換，35 分就換 35 次。",
+          "十位：只有 09 變 10、19 變 20、29 變 30 這 3 次會換。",
+          "一共 35 + 3 = 38 次。"
+        ],
+        "zh-Hans": [
+          "个位：每得 1 分，个位数字一定会换，35 分就换 35 次。",
+          "十位：只有 09 变 10、19 变 20、29 变 30 这 3 次会换。",
+          "一共 35 + 3 = 38 次。"
+        ],
+        "en": [
+          "Ones digit: every point changes the ones digit, so 35 points give 35 flips.",
+          "Tens digit: it changes only from 09 to 10, 19 to 20 and 29 to 30: 3 times.",
+          "In total 35 + 3 = 38 flips."
+        ],
+        "ja": [
+          "一の位：1 点ごとに必ずかわるので、35 点で 35 回です。",
+          "十の位：09 から 10、19 から 20、29 から 30 の 3 回だけかわります。",
+          "全部で 35 + 3 = 38 回です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "38"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "arithmetic-grade2-foundation",
+        "notes": "逐一加 1 時個位每次變、十位每逢進位才變，翻牌次數＝分數＋進位次數。掃過 記分|計分板|翻牌（0 題）、電子鐘|數字鐘（7 題，皆問特殊時刻）；最接近 logic_grade6_085（燈泡計數器按鈕，二進位進位），差異：十進位、問總翻動次數。"
+      }
+    },
+    {
+      "id": "arithmetic_grade2_foundation_185",
+      "reviewStatus": "ok",
+      "topic": "arithmetic",
+      "subtopic": "subtract_largest_digit_steps",
+      "tags": [
+        "c:place_value",
+        "c:add_sub",
+        "m:enumeration"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade2",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "從 40 開始，每一步都減去「這個數裡面最大的那個數字」。例如 40 裡最大的數字是 4，所以第一步是 40 − 4 = 36。一直做到變成 0 為止，一共要做幾步？",
+        "zh-Hans": "从 40 开始，每一步都减去「这个数里面最大的那个数字」。例如 40 里最大的数字是 4，所以第一步是 40 − 4 = 36。一直做到变成 0 为止，一共要做几步？",
+        "en": "Start from 40. At each step, subtract the largest digit of the current number. For example, the largest digit of 40 is 4, so the first step is 40 − 4 = 36. Keep going until you reach 0. How many steps are there?",
+        "ja": "40 から始めて、毎回「その数の中でいちばん大きい数字」をひきます。たとえば 40 でいちばん大きい数字は 4 なので、1 回目は 40 − 4 = 36 です。0 になるまで続けると、全部で何回ひきますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 8。",
+        "zh-Hans": "答案是 8。",
+        "en": "The answer is 8.",
+        "ja": "答えは 8 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "40 − 4 = 36（第 1 步），36 − 6 = 30（第 2 步），30 − 3 = 27（第 3 步）。",
+          "27 − 7 = 20（第 4 步），20 − 2 = 18（第 5 步），18 − 8 = 10（第 6 步）。",
+          "10 − 1 = 9（第 7 步），9 − 9 = 0（第 8 步）。",
+          "一共 8 步。"
+        ],
+        "zh-Hans": [
+          "40 − 4 = 36（第 1 步），36 − 6 = 30（第 2 步），30 − 3 = 27（第 3 步）。",
+          "27 − 7 = 20（第 4 步），20 − 2 = 18（第 5 步），18 − 8 = 10（第 6 步）。",
+          "10 − 1 = 9（第 7 步），9 − 9 = 0（第 8 步）。",
+          "一共 8 步。"
+        ],
+        "en": [
+          "40 − 4 = 36 (step 1), 36 − 6 = 30 (step 2), 30 − 3 = 27 (step 3).",
+          "27 − 7 = 20 (step 4), 20 − 2 = 18 (step 5), 18 − 8 = 10 (step 6).",
+          "10 − 1 = 9 (step 7), 9 − 9 = 0 (step 8).",
+          "There are 8 steps in all."
+        ],
+        "ja": [
+          "40 − 4 = 36（1 回目）、36 − 6 = 30（2 回目）、30 − 3 = 27（3 回目）。",
+          "27 − 7 = 20（4 回目）、20 − 2 = 18（5 回目）、18 − 8 = 10（6 回目）。",
+          "10 − 1 = 9（7 回目）、9 − 9 = 0（8 回目）。",
+          "全部で 8 回です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "8"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "arithmetic-grade2-foundation",
+        "notes": "每步減去本身最大的數字，逐步追蹤到 0。掃過 最大的數字|最大.{0,10}數字.{0,10}減（0 題）、個位數字.{0,20}加上（add_own_ones_digit_chain）；最接近 arithmetic_grade1_154（每次加上自己的個位數字），差異：減去的是最大數字，會依十位、個位輪流取值，最後歸零。"
+      }
+    },
+    {
+      "id": "arithmetic_grade2_foundation_186",
+      "reviewStatus": "ok",
+      "topic": "arithmetic",
+      "subtopic": "cars_inside_tunnel_at_once",
+      "tags": [
+        "c:basic_counting",
+        "c:rate_speed",
+        "m:extremal"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade2",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一條單向的隧道，車子每 2 分鐘開進去 1 輛，而且每輛車都要在隧道裡開 7 分鐘才會開出來。已經開了很久以後，隧道裡同一時間最多有幾輛車？",
+        "zh-Hans": "一条单向的隧道，车子每 2 分钟开进去 1 辆，而且每辆车都要在隧道里开 7 分钟才会开出来。已经开了很久以后，隧道里同一时间最多有几辆车？",
+        "en": "Cars enter a one-way tunnel at a rate of 1 car every 2 minutes, and each car spends 7 minutes inside before coming out. After this has been going on for a long time, at most how many cars are inside the tunnel at the same moment?",
+        "ja": "一方通行のトンネルに、車が 2 分ごとに 1 台入り、どの車もトンネルの中を 7 分走ってから出てきます。長い時間がたったあと、トンネルの中には同時に最大何台の車がいますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 4。",
+        "zh-Hans": "答案是 4。",
+        "en": "The answer is 4.",
+        "ja": "答えは 4 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "想像某一輛車剛開進隧道的那一刻，看還有哪些車在隧道裡。",
+          "2 分鐘前、4 分鐘前、6 分鐘前開進去的車，都還沒開滿 7 分鐘，還在裡面；8 分鐘前開進去的車，1 分鐘前就開出去了。",
+          "所以這一刻隧道裡有剛進去的那輛再加 3 輛，一共 4 輛。任何時刻，隧道裡的車都是最近 7 分鐘內開進去的，而 7 分鐘內最多只會開進 4 輛，所以不會更多。",
+          "最多 4 輛。"
+        ],
+        "zh-Hans": [
+          "想像某一辆车刚开进隧道的那一刻，看还有哪些车在隧道里。",
+          "2 分钟前、4 分钟前、6 分钟前开进去的车，都还没开满 7 分钟，还在里面；8 分钟前开进去的车，1 分钟前就开出去了。",
+          "所以这一刻隧道里有刚进去的那辆再加 3 辆，一共 4 辆。任何时刻，隧道里的车都是最近 7 分钟内开进去的，而 7 分钟内最多只会开进 4 辆，所以不会更多。",
+          "最多 4 辆。"
+        ],
+        "en": [
+          "Look at the moment a car has just entered and check which cars are still inside.",
+          "Cars that entered 2, 4 and 6 minutes ago have not yet spent 7 minutes inside, so they are still there; the car from 8 minutes ago left 1 minute ago.",
+          "So at that moment there are the new car plus 3 more: 4 cars. At any moment, the cars inside are those that entered in the last 7 minutes, and at most 4 cars can enter in 7 minutes, so there are never more.",
+          "At most 4 cars."
+        ],
+        "ja": [
+          "ある車がトンネルに入ったばかりのしゅん間に、中にどの車がいるかを考えます。",
+          "2 分前、4 分前、6 分前に入った車は、まだ 7 分たっていないので中にいます。8 分前に入った車は 1 分前に出ています。",
+          "だからこのしゅん間は、入ったばかりの車と 3 台で 4 台です。どの時こくでも中にいるのは最近 7 分の間に入った車で、7 分の間に入れるのは多くても 4 台なので、これより多くなりません。",
+          "最大 4 台です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "4"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "arithmetic-grade2-foundation",
+        "notes": "每 2 分鐘進一輛、停留 7 分鐘，任一時刻車數＝最近 7 分鐘內進入的車數。掃過 隧道.{0,40}車（3 題：火車過隧道求長度）、同一時間.{0,10}最多；最接近 arithmetic_grade1_146（每 4 秒閃一次數閃幾次），差異：要計算時間區間的重疊而非單純計數。"
+      }
     }
   ]
 }
