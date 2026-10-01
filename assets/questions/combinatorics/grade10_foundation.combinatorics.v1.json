@@ -8905,6 +8905,466 @@
         "reference": "combinatorics-grade10-foundation",
         "notes": "恰好兩種數字的計數，需分 0 是否出現處理首位。掃過「四位數」「數字」計數：combinatorics_grade7_045（數字和 4）、combinatorics_grade10_017（至少兩位相同）、number_theory_grade12_039（四個數字相同）。"
       }
+    },
+    {
+      "id": "combinatorics_grade10_foundation_104",
+      "reviewStatus": "ok",
+      "topic": "combinatorics",
+      "subtopic": "partitions_into_distinct_parts",
+      "tags": [
+        "c:basic_counting",
+        "m:casework",
+        "m:enumeration"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "把 12 寫成若干個「互不相同」的正整數之和，不計加數的先後順序（例如 5 + 4 + 3 與 3 + 4 + 5 算同一種；只寫 12 本身也算一種）。一共有幾種不同的寫法？",
+        "zh-Hans": "把 12 写成若干个「互不相同」的正整数之和，不计加数的先后顺序（例如 5 + 4 + 3 与 3 + 4 + 5 算同一种；只写 12 本身也算一种）。一共有几种不同的写法？",
+        "en": "Write 12 as a sum of positive integers that are all different from one another, ignoring the order of the terms (for example, 5 + 4 + 3 and 3 + 4 + 5 count as the same way, and 12 by itself also counts as one way). How many different ways are there?",
+        "ja": "12 を、互いに異なる正の整数の和として表す。足す順番は区別しない（たとえば 5 + 4 + 3 と 3 + 4 + 5 は同じ表し方とみなし、12 だけの表し方も 1 通りと数える）。異なる表し方は全部で何通りあるか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 15。",
+        "zh-Hans": "答案是 15。",
+        "en": "The answer is 15.",
+        "ja": "答えは 15 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "依加數的個數分類。k 個互不相同的正整數之和至少是 1 + 2 + ⋯ + k，而 1 + 2 + 3 + 4 + 5 = 15 > 12，所以加數最多 4 個。",
+          "1 個加數：只有 12 本身，1 種。",
+          "2 個加數 a > b：a + b = 12 且 b < 6，b = 1～5，得 11 + 1、10 + 2、9 + 3、8 + 4、7 + 5，共 5 種。",
+          "3 個加數 a > b > c：c = 1 時 a + b = 11、b ≥ 2，有 9 + 2、8 + 3、7 + 4、6 + 5 共 4 種；c = 2 時 a + b = 10、b ≥ 3，有 7 + 3、6 + 4 共 2 種；c = 3 時 a + b = 9、b ≥ 4，只有 5 + 4 共 1 種；c ≥ 4 時 a + b + c ≥ 4 + 5 + 6 = 15，不可能。共 7 種。",
+          "4 個加數：最小的和是 1 + 2 + 3 + 4 = 10，還要再多 2，而且仍要互不相同，只有 1 + 2 + 3 + 6 與 1 + 2 + 4 + 5，共 2 種。",
+          "合計 1 + 5 + 7 + 2 = 15 種。"
+        ],
+        "zh-Hans": [
+          "依加数的个数分类。k 个互不相同的正整数之和至少是 1 + 2 + ⋯ + k，而 1 + 2 + 3 + 4 + 5 = 15 > 12，所以加数最多 4 个。",
+          "1 个加数：只有 12 本身，1 种。",
+          "2 个加数 a > b：a + b = 12 且 b < 6，b = 1～5，得 11 + 1、10 + 2、9 + 3、8 + 4、7 + 5，共 5 种。",
+          "3 个加数 a > b > c：c = 1 时 a + b = 11、b ≥ 2，有 9 + 2、8 + 3、7 + 4、6 + 5 共 4 种；c = 2 时 a + b = 10、b ≥ 3，有 7 + 3、6 + 4 共 2 种；c = 3 时 a + b = 9、b ≥ 4，只有 5 + 4 共 1 种；c ≥ 4 时 a + b + c ≥ 4 + 5 + 6 = 15，不可能。共 7 种。",
+          "4 个加数：最小的和是 1 + 2 + 3 + 4 = 10，还要再多 2，而且仍要互不相同，只有 1 + 2 + 3 + 6 与 1 + 2 + 4 + 5，共 2 种。",
+          "合计 1 + 5 + 7 + 2 = 15 种。"
+        ],
+        "en": [
+          "Classify by the number of terms. A sum of k distinct positive integers is at least 1 + 2 + ⋯ + k, and 1 + 2 + 3 + 4 + 5 = 15 > 12, so there are at most 4 terms.",
+          "One term: only 12 itself, 1 way.",
+          "Two terms a > b: a + b = 12 with b < 6, so b = 1 to 5, giving 11 + 1, 10 + 2, 9 + 3, 8 + 4, 7 + 5: 5 ways.",
+          "Three terms a > b > c: if c = 1 then a + b = 11 with b ≥ 2: 9 + 2, 8 + 3, 7 + 4, 6 + 5 (4 ways); if c = 2 then a + b = 10 with b ≥ 3: 7 + 3, 6 + 4 (2 ways); if c = 3 then a + b = 9 with b ≥ 4: only 5 + 4 (1 way); c ≥ 4 forces a + b + c ≥ 4 + 5 + 6 = 15, impossible. Total 7 ways.",
+          "Four terms: the smallest possible sum is 1 + 2 + 3 + 4 = 10, so 2 more must be added while keeping the terms distinct: only 1 + 2 + 3 + 6 and 1 + 2 + 4 + 5, 2 ways.",
+          "In total 1 + 5 + 7 + 2 = 15 ways."
+        ],
+        "ja": [
+          "項の個数で場合分けする。互いに異なる k 個の正の整数の和は少なくとも 1 + 2 + ⋯ + k であり、1 + 2 + 3 + 4 + 5 = 15 > 12 なので、項は多くても 4 個である。",
+          "項が 1 個：12 そのものだけで 1 通り。",
+          "項が 2 個 a > b：a + b = 12 かつ b < 6 なので b = 1～5。11 + 1、10 + 2、9 + 3、8 + 4、7 + 5 の 5 通り。",
+          "項が 3 個 a > b > c：c = 1 のとき a + b = 11、b ≥ 2 で 9 + 2、8 + 3、7 + 4、6 + 5 の 4 通り。c = 2 のとき a + b = 10、b ≥ 3 で 7 + 3、6 + 4 の 2 通り。c = 3 のとき a + b = 9、b ≥ 4 で 5 + 4 の 1 通り。c ≥ 4 なら a + b + c ≥ 4 + 5 + 6 = 15 となり不可能。合計 7 通り。",
+          "項が 4 個：最小の和は 1 + 2 + 3 + 4 = 10 で、あと 2 を互いに異なるまま加える必要があり、1 + 2 + 3 + 6 と 1 + 2 + 4 + 5 の 2 通りだけ。",
+          "合計 1 + 5 + 7 + 2 = 15 通り。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "15"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "combinatorics-grade10-foundation",
+        "notes": "把整數拆成互不相同的加數（相異分拆），依加數個數分類並用最小和設上限。掃過 /相異.*正整數.*和|不同的正整數.*和|不計順序|分拆/（9 題）；最接近 combinatorics_grade9_foundation_009（2016 拆成 2 與 3 之和），差異：該題加數只有兩種、化為一條一次方程；本題要求加數互不相同，需依個數分類並用 1+2+⋯+k 設上限"
+      }
+    },
+    {
+      "id": "combinatorics_grade10_foundation_105",
+      "reviewStatus": "ok",
+      "topic": "combinatorics",
+      "subtopic": "reseating_without_former_neighbors",
+      "tags": [
+        "c:graph_theory",
+        "c:permutation_combination",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "6 位同學原本依 1、2、3、4、5、6 號的順序圍著一張圓桌坐（6 號的另一邊是 1 號）。休息後大家重新圍著這張圓桌坐，要求原本相鄰的任兩人，現在都不相鄰。若把整體旋轉後相同的坐法視為同一種（但順時針、逆時針排列不同的算不同），一共有幾種坐法？",
+        "zh-Hans": "6 位同学原本依 1、2、3、4、5、6 号的顺序围着一张圆桌坐（6 号的另一边是 1 号）。休息后大家重新围着这张圆桌坐，要求原本相邻的任两人，现在都不相邻。若把整体旋转后相同的坐法视为同一种（但顺时针、逆时针排列不同的算不同），一共有几种坐法？",
+        "en": "Six students originally sit around a round table in the order 1, 2, 3, 4, 5, 6 (with 6 next to 1). After a break they sit around the same table again so that no two students who were neighbours before are neighbours now. Seatings that differ only by a rotation count as the same (but clockwise and counterclockwise orders that differ count as different). How many seatings are possible?",
+        "ja": "6 人の生徒が最初、1、2、3、4、5、6 番の順に円卓を囲んで座っている（6 番の隣は 1 番）。休憩後、同じ円卓に座り直すが、もともと隣り合っていた 2 人はどの組も隣り合わないようにする。全体を回転して同じになる座り方は同じとみなす（ただし時計回りと反時計回りで異なる並びは別とする）。座り方は何通りあるか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 6。",
+        "zh-Hans": "答案是 6。",
+        "en": "The answer is 6.",
+        "ja": "答えは 6 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "把「可以相鄰」的兩人連線：原本不相鄰的兩人才能相鄰，所以 1 可以和 3、4、5 相鄰，依此類推。這些連線是：三角形 1–3–5、三角形 2–4–6，以及三條「橫槓」1–4、2–5、3–6。",
+          "新的坐法就是沿著這些連線走一圈、恰好經過 6 人各一次的路線。這條路線每次從三角形 {1, 3, 5} 跨到 {2, 4, 6} 都要用一條橫槓，繞一圈回到原處，跨越的次數必須是偶數；橫槓只有 3 條，所以恰好用 2 條。",
+          "若不用 3–6 這條：3 和 6 都只剩三角形裡的兩條連線，必須都用上，路線被迫是 1–4–6–2–5–3–1。同理，不用 1–4 或不用 2–5 也各恰好有一條路線，共 3 條路線。",
+          "每條路線可以順時針或逆時針坐（例如 1、4、6、2、5、3 與 1、3、5、2、6、4），旋轉不算不同，所以每條路線對應 2 種坐法。",
+          "共 3 × 2 = 6 種坐法。"
+        ],
+        "zh-Hans": [
+          "把「可以相邻」的两人连线：原本不相邻的两人才能相邻，所以 1 可以和 3、4、5 相邻，依此类推。这些连线是：三角形 1–3–5、三角形 2–4–6，以及三条「横杠」1–4、2–5、3–6。",
+          "新的坐法就是沿着这些连线走一圈、恰好经过 6 人各一次的路线。这条路线每次从三角形 {1, 3, 5} 跨到 {2, 4, 6} 都要用一条横杠，绕一圈回到原处，跨越的次数必须是偶数；横杠只有 3 条，所以恰好用 2 条。",
+          "若不用 3–6 这条：3 和 6 都只剩三角形里的两条连线，必须都用上，路线被迫是 1–4–6–2–5–3–1。同理，不用 1–4 或不用 2–5 也各恰好有一条路线，共 3 条路线。",
+          "每条路线可以顺时针或逆时针坐（例如 1、4、6、2、5、3 与 1、3、5、2、6、4），旋转不算不同，所以每条路线对应 2 种坐法。",
+          "共 3 × 2 = 6 种坐法。"
+        ],
+        "en": [
+          "Join two students by a link if they may sit together now, i.e. if they were not neighbours before: 1 may sit next to 3, 4, 5, and so on. The links form the triangle 1–3–5, the triangle 2–4–6, and three \"rungs\" 1–4, 2–5, 3–6.",
+          "A new seating is a round trip along links visiting each of the 6 students exactly once. Each move from {1, 3, 5} to {2, 4, 6} uses a rung, and returning to the start requires an even number of crossings; with only 3 rungs, exactly 2 are used.",
+          "If 3–6 is not used, 3 and 6 each have only their two triangle links left, which must both be used, forcing the route 1–4–6–2–5–3–1. Likewise, omitting 1–4 or omitting 2–5 gives exactly one route each: 3 routes in all.",
+          "Each route can be seated clockwise or counterclockwise (e.g. 1, 4, 6, 2, 5, 3 versus 1, 3, 5, 2, 6, 4); rotations do not count as different, so each route gives 2 seatings.",
+          "Total 3 × 2 = 6 seatings."
+        ],
+        "ja": [
+          "今隣り合ってよい 2 人、すなわちもともと隣でなかった 2 人を線で結ぶ。1 は 3、4、5 と隣になれる、などとなり、線は三角形 1–3–5、三角形 2–4–6、および 3 本の「横棒」1–4、2–5、3–6 になる。",
+          "新しい座り方は、これらの線に沿って 6 人をちょうど 1 回ずつ通って一周する道筋である。{1, 3, 5} から {2, 4, 6} へ移るたびに横棒を 1 本使い、一周して戻るには移る回数が偶数でなければならない。横棒は 3 本しかないので、ちょうど 2 本使う。",
+          "3–6 を使わない場合、3 と 6 には三角形の 2 本の線しか残らず両方とも使うので、道筋は 1–4–6–2–5–3–1 に決まる。同様に 1–4 を使わない場合、2–5 を使わない場合もそれぞれ 1 通りで、道筋は全部で 3 通り。",
+          "各道筋は時計回りにも反時計回りにも座れる（たとえば 1、4、6、2、5、3 と 1、3、5、2、6、4）。回転は区別しないので、各道筋につき 2 通りの座り方になる。",
+          "合計 3 × 2 = 6 通り。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "6"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "combinatorics-grade10-foundation",
+        "notes": "重新入座不與舊鄰相鄰 = 補圖（三角柱圖）的哈密頓圈：恰用 2 條橫槓，共 3 圈 × 2 方向。掃過 /原來.*相鄰|不再相鄰|原本.*(旁邊|鄰)|重新.*座位|重新入座|圓桌/（16 題）；最接近 combinatorics_grade12_foundation_075（6 人部分錯排，限制坐回原座位），差異：該題限制「座位」；本題限制「鄰座關係」，轉成可相鄰關係圖上找環，用跨越次數為偶數只能用 2 條橫槓"
+      }
+    },
+    {
+      "id": "combinatorics_grade10_foundation_106",
+      "reviewStatus": "ok",
+      "topic": "combinatorics",
+      "subtopic": "expected_number_of_empty_boxes",
+      "tags": [
+        "c:expectation",
+        "c:probability",
+        "m:direct"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "把 4 顆球逐一隨機放進 4 個不同的盒子裡：每顆球放進哪一個盒子都是等可能的，而且各顆球互相獨立。設最後空盒子個數的期望值是最簡分數 m/n，求 m + n。",
+        "zh-Hans": "把 4 颗球逐一随机放进 4 个不同的盒子里：每颗球放进哪一个盒子都是等可能的，而且各颗球互相独立。设最后空盒子个数的期望值是最简分数 m/n，求 m + n。",
+        "en": "Four balls are placed one by one into 4 different boxes at random: each ball is equally likely to go into any box, independently of the others. The expected number of empty boxes is the fraction m/n in lowest terms. Find m + n.",
+        "ja": "4 個の玉を 1 個ずつ、4 つの異なる箱に無作為に入れる。どの玉もどの箱に入るかは同様に確からしく、玉どうしは互いに独立である。最後に空の箱の個数の期待値が既約分数 m/n で表されるとき、m + n を求めなさい。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 145。",
+        "zh-Hans": "答案是 145。",
+        "en": "The answer is 145.",
+        "ja": "答えは 145 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "對每個盒子定一個指標：這個盒子最後是空的記 1，否則記 0。空盒子的個數就等於這 4 個指標相加。",
+          "指定的某一個盒子是空的，表示 4 顆球都沒有放進它，機率是 (3/4)⁴ = 81/256，所以它的指標期望值就是 81/256。",
+          "和的期望值等於各項期望值的和（不需要各盒子互相獨立），所以空盒子個數的期望值 = 4 × 81/256 = 81/64。",
+          "81 = 3⁴ 與 64 = 2⁶ 互質，已是最簡分數，m + n = 81 + 64 = 145。"
+        ],
+        "zh-Hans": [
+          "对每个盒子定一个指标：这个盒子最后是空的记 1，否则记 0。空盒子的个数就等于这 4 个指标相加。",
+          "指定的某一个盒子是空的，表示 4 颗球都没有放进它，概率是 (3/4)⁴ = 81/256，所以它的指标期望值就是 81/256。",
+          "和的期望值等于各项期望值的和（不需要各盒子互相独立），所以空盒子个数的期望值 = 4 × 81/256 = 81/64。",
+          "81 = 3⁴ 与 64 = 2⁶ 互质，已是最简分数，m + n = 81 + 64 = 145。"
+        ],
+        "en": [
+          "For each box define an indicator: 1 if the box ends up empty, 0 otherwise. The number of empty boxes is the sum of these 4 indicators.",
+          "A particular box is empty when none of the 4 balls goes into it, with probability (3/4)⁴ = 81/256, so its indicator has expected value 81/256.",
+          "The expectation of a sum is the sum of the expectations (no independence between boxes is needed), so the expected number of empty boxes is 4 × 81/256 = 81/64.",
+          "Since 81 = 3⁴ and 64 = 2⁶ are coprime, the fraction is in lowest terms and m + n = 81 + 64 = 145."
+        ],
+        "ja": [
+          "各箱について指標を考える：その箱が最後に空なら 1、そうでなければ 0。空の箱の個数はこの 4 つの指標の和である。",
+          "特定の 1 つの箱が空になるのは 4 個の玉がどれもそこに入らないときで、その確率は (3/4)⁴ = 81/256。よってその指標の期待値は 81/256。",
+          "和の期待値は各期待値の和に等しい（箱どうしが独立である必要はない）ので、空の箱の個数の期待値は 4 × 81/256 = 81/64。",
+          "81 = 3⁴ と 64 = 2⁶ は互いに素なので既約分数であり、m + n = 81 + 64 = 145。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "145"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "combinatorics-grade10-foundation",
+        "notes": "以指標變數與期望值線性性求空盒數期望。掃過 /空盒|空的盒|空著的盒/（0 題）；最接近 combinatorics_grade10_foundation_023（5 球入 3 盒恰一盒空的放法數），差異：該題是計數；本題求期望值，用逐盒指標相加，不需處理盒子間的相依"
+      }
+    },
+    {
+      "id": "combinatorics_grade10_foundation_107",
+      "reviewStatus": "ok",
+      "topic": "combinatorics",
+      "subtopic": "zero_free_pairs_with_fixed_sum",
+      "tags": [
+        "c:place_value",
+        "c:basic_counting",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "滿足 a + b = 1000 的正整數有序數對 (a, b) 中，有幾組使得 a 與 b 寫成十進位時都不含數字 0？",
+        "zh-Hans": "满足 a + b = 1000 的正整数有序数对 (a, b) 中，有几组使得 a 与 b 写成十进位时都不含数字 0？",
+        "en": "How many ordered pairs of positive integers (a, b) with a + b = 1000 are there such that neither a nor b contains the digit 0 when written in base ten?",
+        "ja": "a + b = 1000 を満たす正の整数の順序対 (a, b) のうち、a も b も 10 進法で書いたとき数字 0 を含まないものは何組あるか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 738。",
+        "zh-Hans": "答案是 738。",
+        "en": "The answer is 738.",
+        "ja": "答えは 738 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "b = 1000 − a，所以只要數 1 ≤ a ≤ 999 之中，a 與 1000 − a 都不含 0 的 a 有幾個。",
+          "把 a 補成三位 xyz（不足三位就在前面補 0，補上的 0 不算數字）。若 z = 0，a 的個位就是 0，不行，所以 z 是 1～9；這時 1000 − a 的百、十、個位依序是 9 − x、9 − y、10 − z（同樣可能有前導 0），而 10 − z 一定在 1～9。",
+          "x 為 1～8：a 與 b 都是三位數，十位 y 與 9 − y 都不能是 0，所以 y 只能是 1～8。共 8 × 8 × 9 = 576 個。",
+          "x = 0（a 不足三位）：b 的百位是 9；b 的十位 9 − y 不能是 0，所以 y ≠ 9；y = 0 時 a 是一位數，那個 0 是前導 0，不算。y 有 0～8 共 9 種，共 9 × 9 = 81 個。",
+          "x = 9：b 的百位 0 是前導 0，不算；a 的十位 y 不能是 0；y = 9 時 b 只剩一位數 10 − z，也可以。y 有 1～9 共 9 種，共 9 × 9 = 81 個。",
+          "合計 576 + 81 + 81 = 738 組。"
+        ],
+        "zh-Hans": [
+          "b = 1000 − a，所以只要数 1 ≤ a ≤ 999 之中，a 与 1000 − a 都不含 0 的 a 有几个。",
+          "把 a 补成三位 xyz（不足三位就在前面补 0，补上的 0 不算数字）。若 z = 0，a 的个位就是 0，不行，所以 z 是 1～9；这时 1000 − a 的百、十、个位依序是 9 − x、9 − y、10 − z（同样可能有前导 0），而 10 − z 一定在 1～9。",
+          "x 为 1～8：a 与 b 都是三位数，十位 y 与 9 − y 都不能是 0，所以 y 只能是 1～8。共 8 × 8 × 9 = 576 个。",
+          "x = 0（a 不足三位）：b 的百位是 9；b 的十位 9 − y 不能是 0，所以 y ≠ 9；y = 0 时 a 是一位数，那个 0 是前导 0，不算。y 有 0～8 共 9 种，共 9 × 9 = 81 个。",
+          "x = 9：b 的百位 0 是前导 0，不算；a 的十位 y 不能是 0；y = 9 时 b 只剩一位数 10 − z，也可以。y 有 1～9 共 9 种，共 9 × 9 = 81 个。",
+          "合计 576 + 81 + 81 = 738 组。"
+        ],
+        "en": [
+          "Since b = 1000 − a, we count the a with 1 ≤ a ≤ 999 such that neither a nor 1000 − a contains a 0.",
+          "Write a as three digits xyz, padding with leading zeros if needed (padded zeros are not real digits). If z = 0, the units digit of a is 0, which is not allowed, so z is 1 to 9; then the hundreds, tens and units digits of 1000 − a are 9 − x, 9 − y, 10 − z (possibly with leading zeros), and 10 − z is automatically between 1 and 9.",
+          "x from 1 to 8: both a and b have three digits, and the tens digits y and 9 − y must both be nonzero, so y is 1 to 8. That gives 8 × 8 × 9 = 576 values.",
+          "x = 0 (a has fewer than three digits): b has hundreds digit 9; its tens digit 9 − y must be nonzero, so y ≠ 9; when y = 0 the number a has one digit and that 0 is a leading zero, which is fine. So y has 9 choices (0 to 8): 9 × 9 = 81 values.",
+          "x = 9: the hundreds digit 0 of b is a leading zero, which is fine; the tens digit y of a must be nonzero; when y = 9, b is the single digit 10 − z, which is also fine. So y has 9 choices (1 to 9): 9 × 9 = 81 values.",
+          "In total 576 + 81 + 81 = 738 pairs."
+        ],
+        "ja": [
+          "b = 1000 − a なので、1 ≤ a ≤ 999 のうち a と 1000 − a がどちらも 0 を含まない a の個数を数えればよい。",
+          "a を 3 桁 xyz と書く（足りない桁は前に 0 を補い、補った 0 は数字とみなさない）。z = 0 なら a の一の位が 0 になり不可なので z は 1～9。このとき 1000 − a の百・十・一の位は順に 9 − x、9 − y、10 − z（前に 0 がつくこともある）で、10 − z は必ず 1～9 にある。",
+          "x が 1～8 のとき：a も b も 3 桁で、十の位 y と 9 − y がどちらも 0 でない必要があるので y は 1～8。8 × 8 × 9 = 576 個。",
+          "x = 0（a が 3 桁未満）のとき：b の百の位は 9。b の十の位 9 − y が 0 でないので y ≠ 9。y = 0 のとき a は 1 桁でその 0 は前置の 0 なので構わない。y は 0～8 の 9 通りで、9 × 9 = 81 個。",
+          "x = 9 のとき：b の百の位の 0 は前置の 0 なので構わない。a の十の位 y は 0 でない。y = 9 のとき b は 1 桁の 10 − z となりこれもよい。y は 1～9 の 9 通りで、9 × 9 = 81 個。",
+          "合計 576 + 81 + 81 = 738 組。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "738"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "combinatorics-grade10-foundation",
+        "notes": "a + b = 1000 時逐位對應 (9 − x, 9 − y, 10 − z)，依百位分類並處理前導 0。掃過 /不含.*0|沒有.*0|和是 1000/（43 題）；最接近 number_theory_grade10_foundation_009（十六進位不含 A–F 的個數），差異：該題只看單一數的數字；本題兩數綁定 a + b = 1000，需逐位對應並區分前導 0"
+      }
+    },
+    {
+      "id": "combinatorics_grade10_foundation_108",
+      "reviewStatus": "ok",
+      "topic": "combinatorics",
+      "subtopic": "expected_rolls_until_first_repeat",
+      "tags": [
+        "c:expectation",
+        "c:probability",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "小安反覆擲一顆公正的四面骰（點數 1、2、3、4 出現的機率都相同）。一旦擲出的點數和之前某一次相同，他就停止，停止的那一次也算在擲的次數裡。設他擲的次數的期望值是最簡分數 m/n，求 m + n。",
+        "zh-Hans": "小安反复掷一颗公正的四面骰（点数 1、2、3、4 出现的概率都相同）。一旦掷出的点数和之前某一次相同，他就停止，停止的那一次也算在掷的次数里。设他掷的次数的期望值是最简分数 m/n，求 m + n。",
+        "en": "An repeatedly rolls a fair four-sided die (faces 1, 2, 3, 4 equally likely). As soon as he rolls a number that has appeared before, he stops; the stopping roll is included in the count. The expected number of rolls is the fraction m/n in lowest terms. Find m + n.",
+        "ja": "アンは公正な 4 面のさいころ（1、2、3、4 の目が同様に確からしい）をくり返し投げる。それまでに出た目と同じ目が出たらすぐにやめ、そのやめた回も投げた回数に含める。投げる回数の期待値が既約分数 m/n で表されるとき、m + n を求めなさい。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 135。",
+        "zh-Hans": "答案是 135。",
+        "en": "The answer is 135.",
+        "ja": "答えは 135 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "設擲的次數為 N。前 4 次若互不相同，第 5 次一定與之前重複，所以 N 最多是 5。",
+          "N 等於「N > 0」「N > 1」「N > 2」「N > 3」「N > 4」這五件事中成立的件數（例如 N = 3 時恰好前三件成立），所以 E[N] = P(N > 0) + P(N > 1) + P(N > 2) + P(N > 3) + P(N > 4)。而 N > k 就是「前 k 次的點數互不相同」。",
+          "P(N > 0) = 1，P(N > 1) = 1，P(N > 2) = 3/4，P(N > 3) = (3/4)(2/4) = 3/8，P(N > 4) = (3/4)(2/4)(1/4) = 3/32。",
+          "E[N] = 1 + 1 + 3/4 + 3/8 + 3/32 = (32 + 32 + 24 + 12 + 3)/32 = 103/32。",
+          "103 是質數，與 32 互質，所以 m + n = 103 + 32 = 135。"
+        ],
+        "zh-Hans": [
+          "设掷的次数为 N。前 4 次若互不相同，第 5 次一定与之前重复，所以 N 最多是 5。",
+          "N 等于「N > 0」「N > 1」「N > 2」「N > 3」「N > 4」这五件事中成立的件数（例如 N = 3 时恰好前三件成立），所以 E[N] = P(N > 0) + P(N > 1) + P(N > 2) + P(N > 3) + P(N > 4)。而 N > k 就是「前 k 次的点数互不相同」。",
+          "P(N > 0) = 1，P(N > 1) = 1，P(N > 2) = 3/4，P(N > 3) = (3/4)(2/4) = 3/8，P(N > 4) = (3/4)(2/4)(1/4) = 3/32。",
+          "E[N] = 1 + 1 + 3/4 + 3/8 + 3/32 = (32 + 32 + 24 + 12 + 3)/32 = 103/32。",
+          "103 是质数，与 32 互质，所以 m + n = 103 + 32 = 135。"
+        ],
+        "en": [
+          "Let N be the number of rolls. If the first 4 rolls are all different, the 5th must repeat one of them, so N is at most 5.",
+          "N equals the number of the events \"N > 0\", \"N > 1\", \"N > 2\", \"N > 3\", \"N > 4\" that occur (for example, when N = 3 exactly the first three occur), so E[N] = P(N > 0) + P(N > 1) + P(N > 2) + P(N > 3) + P(N > 4). The event N > k means the first k rolls are all different.",
+          "P(N > 0) = 1, P(N > 1) = 1, P(N > 2) = 3/4, P(N > 3) = (3/4)(2/4) = 3/8, P(N > 4) = (3/4)(2/4)(1/4) = 3/32.",
+          "E[N] = 1 + 1 + 3/4 + 3/8 + 3/32 = (32 + 32 + 24 + 12 + 3)/32 = 103/32.",
+          "103 is prime and coprime to 32, so m + n = 103 + 32 = 135."
+        ],
+        "ja": [
+          "投げる回数を N とする。最初の 4 回がすべて異なれば 5 回目は必ずそれまでの目と重なるので、N は最大で 5。",
+          "N は「N > 0」「N > 1」「N > 2」「N > 3」「N > 4」の 5 つの事象のうち起こるものの個数に等しい（たとえば N = 3 のときちょうど最初の 3 つが起こる）。よって E[N] = P(N > 0) + P(N > 1) + P(N > 2) + P(N > 3) + P(N > 4)。N > k は「最初の k 回の目がすべて異なる」ことである。",
+          "P(N > 0) = 1、P(N > 1) = 1、P(N > 2) = 3/4、P(N > 3) = (3/4)(2/4) = 3/8、P(N > 4) = (3/4)(2/4)(1/4) = 3/32。",
+          "E[N] = 1 + 1 + 3/4 + 3/8 + 3/32 = (32 + 32 + 24 + 12 + 3)/32 = 103/32。",
+          "103 は素数で 32 と互いに素なので、m + n = 103 + 32 = 135。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "135"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "combinatorics-grade10-foundation",
+        "notes": "擲到第一次重複為止的期望次數，用 E[N] = Σ P(N > k)（前 k 次互異的機率）。掃過 /重複|直到.*相同|第一次.*相同/（65 題）；最接近 combinatorics_grade10_foundation_050（集滿三種角色卡的期望包數），差異：該題等待「全部出現」用幾何分布相加；本題等待「第一次重複」，用尾機率和"
+      }
+    },
+    {
+      "id": "combinatorics_grade10_foundation_109",
+      "reviewStatus": "ok",
+      "topic": "combinatorics",
+      "subtopic": "coplanar_cube_vertices_probability",
+      "tags": [
+        "c:probability",
+        "c:solid",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "從一個正方體的 8 個頂點中隨機選出 4 個（每一種選法的機會都相同）。這 4 個點落在同一個平面上的機率是最簡分數 m/n，求 m + n。",
+        "zh-Hans": "从一个正方体的 8 个顶点中随机选出 4 个（每一种选法的机会都相同）。这 4 个点落在同一个平面上的概率是最简分数 m/n，求 m + n。",
+        "en": "Four of the 8 vertices of a cube are chosen at random (every choice equally likely). The probability that the 4 points lie in one plane is the fraction m/n in lowest terms. Find m + n.",
+        "ja": "立方体の 8 個の頂点から 4 個を無作為に選ぶ（どの選び方も同様に確からしい）。選んだ 4 点が同一平面上にある確率が既約分数 m/n で表されるとき、m + n を求めなさい。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 41。",
+        "zh-Hans": "答案是 41。",
+        "en": "The answer is 41.",
+        "ja": "答えは 41 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "選 4 個頂點共有 C(8, 4) = 70 種，每種機會相同。",
+          "第一類共面：正方體的 6 個面，每個面的 4 個頂點，共 6 組。",
+          "第二類共面：取兩條「平行、但不在同一個面上」的稜，它們的 4 個端點構成一個長方形（對角面），例如底面前緣與頂面後緣。12 條稜恰好分成 6 對這樣的稜，共 6 組。",
+          "沒有別的情形：把頂點看成 (x, y, z)，每個座標是 0 或 1。含 4 個頂點的平面只可能是 x = 常數這類（面），或 x = y、x + y = 1 這類（對角面）；像 x + y + z = 1 這種斜面只含 3 個頂點。",
+          "共面的選法共 6 + 6 = 12 種，機率 12/70 = 6/35，m + n = 6 + 35 = 41。"
+        ],
+        "zh-Hans": [
+          "选 4 个顶点共有 C(8, 4) = 70 种，每种机会相同。",
+          "第一类共面：正方体的 6 个面，每个面的 4 个顶点，共 6 组。",
+          "第二类共面：取两条「平行、但不在同一个面上」的棱，它们的 4 个端点构成一个长方形（对角面），例如底面前缘与顶面后缘。12 条棱恰好分成 6 对这样的棱，共 6 组。",
+          "没有别的情形：把顶点看成 (x, y, z)，每个座标是 0 或 1。含 4 个顶点的平面只可能是 x = 常数这类（面），或 x = y、x + y = 1 这类（对角面）；像 x + y + z = 1 这种斜面只含 3 个顶点。",
+          "共面的选法共 6 + 6 = 12 种，概率 12/70 = 6/35，m + n = 6 + 35 = 41。"
+        ],
+        "en": [
+          "There are C(8, 4) = 70 equally likely ways to choose 4 vertices.",
+          "First kind of coplanar set: the 4 vertices of one of the cube's 6 faces, 6 sets.",
+          "Second kind: take two edges that are parallel but not on the same face; their 4 endpoints form a rectangle (a diagonal section), such as the front bottom edge with the back top edge. The 12 edges split into exactly 6 such pairs, giving 6 sets.",
+          "There are no others: with vertices (x, y, z), each coordinate 0 or 1, a plane containing 4 vertices must be like x = constant (a face) or like x = y, x + y = 1 (a diagonal section); a slanted plane such as x + y + z = 1 contains only 3 vertices.",
+          "So 6 + 6 = 12 choices are coplanar, the probability is 12/70 = 6/35, and m + n = 6 + 35 = 41."
+        ],
+        "ja": [
+          "4 個の頂点の選び方は C(8, 4) = 70 通りで、どれも同様に確からしい。",
+          "同一平面上にある第 1 の型：立方体の 6 つの面それぞれの 4 頂点で、6 組。",
+          "第 2 の型：平行だが同じ面上にない 2 本の辺をとると、その 4 つの端点は長方形（対角面）をつくる。たとえば底面の手前の辺と上面の奥の辺。12 本の辺はちょうど 6 組のこのような対に分かれるので 6 組。",
+          "ほかにはない：頂点を (x, y, z)（各座標は 0 か 1）と表すと、4 頂点を含む平面は x = 定数 の型（面）か x = y、x + y = 1 の型（対角面）に限られ、x + y + z = 1 のような斜めの平面は頂点を 3 つしか含まない。",
+          "同一平面上にある選び方は 6 + 6 = 12 通りで、確率は 12/70 = 6/35。m + n = 6 + 35 = 41。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "41"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "combinatorics-grade10-foundation",
+        "notes": "正方體 4 頂點共面的分類：6 個面 + 6 個對角面。掃過 /共面|正方體.*頂點/（14 題）；最接近 combinatorics_grade12_foundation_025（正八邊形取 4 點成矩形），差異：該題是平面上的矩形計數；本題是立體頂點共面分類並求機率"
+      }
     }
   ]
 }
