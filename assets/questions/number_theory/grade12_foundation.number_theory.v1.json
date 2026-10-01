@@ -4705,81 +4705,6 @@
       "id": "number_theory_grade12_foundation_049",
       "reviewStatus": "ok",
       "topic": "number_theory",
-      "subtopic": "inverse_euler_totient",
-      "tags": [
-        "c:factor_multiple",
-        "m:casework"
-      ],
-      "difficulty": "foundation",
-      "levelStage": "grade12",
-      "challengeTier": "foundation",
-      "prompt": {
-        "zh-Hant": "用 φ(n) 表示 1 到 n 之中與 n 互質的正整數個數（例如 φ(9) = 6）。已知若 n 的質因數分解是 p₁^e₁ × p₂^e₂ × ⋯，則 φ(n) 等於各個 pᵢ^(eᵢ − 1) × (pᵢ − 1) 的乘積。求所有滿足 φ(n) = 12 的正整數 n 之和。",
-        "zh-Hans": "用 φ(n) 表示 1 到 n 之中与 n 互质的正整数个数（例如 φ(9) = 6）。已知若 n 的质因数分解是 p₁^e₁ × p₂^e₂ × ⋯，则 φ(n) 等于各个 pᵢ^(eᵢ − 1) × (pᵢ − 1) 的乘积。求所有满足 φ(n) = 12 的正整数 n 之和。",
-        "en": "Let φ(n) be the number of integers from 1 to n that are coprime to n (for example φ(9) = 6). It is known that if n = p₁^e₁ × p₂^e₂ × ⋯ is the prime factorization, then φ(n) is the product of the factors pᵢ^(eᵢ − 1) × (pᵢ − 1). Find the sum of all positive integers n with φ(n) = 12.",
-        "ja": "φ(n) を 1 から n までのうち n と互いに素な整数の個数とする（たとえば φ(9) = 6）。n の素因数分解が p₁^e₁ × p₂^e₂ × ⋯ のとき、φ(n) は各 pᵢ^(eᵢ − 1) × (pᵢ − 1) の積に等しいことが知られている。φ(n) = 12 を満たす正の整数 n すべての和を求めなさい。"
-      },
-      "answer": {
-        "zh-Hant": "答案是 166。",
-        "zh-Hans": "答案是 166。",
-        "en": "The answer is 166.",
-        "ja": "答えは 166 です。"
-      },
-      "solutionSteps": {
-        "zh-Hant": [
-          "n 的每個質因數 p 都在 φ(n) 中貢獻因數 p − 1，所以 p − 1 必須整除 12，p − 1 ∈ {1, 2, 3, 4, 6, 12}，而 p 要是質數：p ∈ {2, 3, 5, 7, 13}。",
-          "含 13：13 只能出現一次（13² 會貢獻 13 × 12），它已貢獻 12，其餘部分的 φ 值必須是 1，只能是 1 或 2：n = 13、26。",
-          "含 7 不含 13：7 只能出現一次，貢獻 6，其餘部分 φ 值須為 2，那部分只能是 3、4、6（5 會貢獻 4、9 會貢獻 6，都太大）：n = 21、28、42。",
-          "只含 2、3、5：5 只能出現一次（貢獻 4），3 的部分貢獻 2（3¹）或 6（3²），2 的部分貢獻 1、1、2、4、⋯（2⁰、2¹、2²、2³⋯）。要乘積恰為 12 = 4 × 3，必須有因數 3，只有 3² 貢獻的 6 含 3；6 × 2 = 12 需 2 的部分貢獻 2，即 2²。若再含 5 會多乘 4，太大。所以只有 n = 2² × 3² = 36。",
-          "所有 n 是 13、21、26、28、36、42，和 = 13 + 21 + 26 + 28 + 36 + 42 = 166。"
-        ],
-        "zh-Hans": [
-          "n 的每个质因数 p 都在 φ(n) 中贡献因数 p − 1，所以 p − 1 必须整除 12，p − 1 ∈ {1, 2, 3, 4, 6, 12}，而 p 要是质数：p ∈ {2, 3, 5, 7, 13}。",
-          "含 13：13 只能出现一次（13² 会贡献 13 × 12），它已贡献 12，其余部分的 φ 值必须是 1，只能是 1 或 2：n = 13、26。",
-          "含 7 不含 13：7 只能出现一次，贡献 6，其余部分 φ 值须为 2，那部分只能是 3、4、6（5 会贡献 4、9 会贡献 6，都太大）：n = 21、28、42。",
-          "只含 2、3、5：5 只能出现一次（贡献 4），3 的部分贡献 2（3¹）或 6（3²），2 的部分贡献 1、1、2、4、⋯（2⁰、2¹、2²、2³⋯）。要乘积恰为 12 = 4 × 3，必须有因数 3，只有 3² 贡献的 6 含 3；6 × 2 = 12 需 2 的部分贡献 2，即 2²。若再含 5 会多乘 4，太大。所以只有 n = 2² × 3² = 36。",
-          "所有 n 是 13、21、26、28、36、42，和 = 13 + 21 + 26 + 28 + 36 + 42 = 166。"
-        ],
-        "en": [
-          "Each prime factor p of n contributes a factor p − 1 to φ(n), so p − 1 divides 12, p − 1 ∈ {1, 2, 3, 4, 6, 12}, and p is prime: p ∈ {2, 3, 5, 7, 13}.",
-          "With 13: it appears only once (13² would contribute 13 × 12) and already contributes 12, so the rest has φ value 1, i.e. it is 1 or 2: n = 13, 26.",
-          "With 7 but not 13: 7 appears once, contributing 6, so the rest has φ value 2, which means the rest is 3, 4 or 6 (5 would contribute 4 and 9 would contribute 6, too much): n = 21, 28, 42.",
-          "Only 2, 3, 5: 5 can appear once (contributing 4), the 3-part contributes 2 (3¹) or 6 (3²), the 2-part contributes 1, 1, 2, 4, … (2⁰, 2¹, 2², 2³, …). To get exactly 12 = 4 × 3 we need a factor 3, which only 3² (contributing 6) provides; 6 × 2 = 12 requires the 2-part to contribute 2, i.e. 2². Including 5 would multiply by 4, too much. So only n = 2² × 3² = 36.",
-          "The values are 13, 21, 26, 28, 36, 42, with sum 13 + 21 + 26 + 28 + 36 + 42 = 166."
-        ],
-        "ja": [
-          "n の各素因数 p は φ(n) に因数 p − 1 を与えるので、p − 1 は 12 を割り切る。p − 1 ∈ {1, 2, 3, 4, 6, 12} で p は素数なので p ∈ {2, 3, 5, 7, 13}。",
-          "13 を含む場合：13 は 1 回しか現れず（13² なら 13 × 12 を与える）、すでに 12 を与えているので、残りの部分の φ の値は 1、つまり残りは 1 か 2：n = 13、26。",
-          "7 を含み 13 を含まない場合：7 は 1 回だけで 6 を与えるので、残りの φ の値は 2。残りは 3、4、6 のいずれか（5 なら 4、9 なら 6 を与えて大きすぎる）：n = 21、28、42。",
-          "2、3、5 だけの場合：5 は 1 回まで（4 を与える）、3 の部分は 2（3¹）か 6（3²）、2 の部分は 1、1、2、4、…（2⁰、2¹、2²、2³、…）を与える。積をちょうど 12 = 4 × 3 にするには因数 3 が必要で、それを与えるのは 6 を与える 3² だけ。6 × 2 = 12 となるには 2 の部分が 2、つまり 2²。5 を含めるとさらに 4 倍になり大きすぎる。よって n = 2² × 3² = 36 のみ。",
-          "n は 13、21、26、28、36、42 で、和は 13 + 21 + 26 + 28 + 36 + 42 = 166。"
-        ]
-      },
-      "figure": {
-        "type": "custom",
-        "kind": "none",
-        "params": {}
-      },
-      "answerMode": "integer_input",
-      "correctAnswer": {
-        "type": "integer",
-        "value": "166"
-      },
-      "inputConstraints": {
-        "allowNegative": false,
-        "maxDigits": 3
-      },
-      "source": {
-        "type": "rewritten_olympiad_style",
-        "name": "MathSpring Editorial",
-        "reference": "number-theory-grade12-foundation",
-        "notes": "反解 φ(n) = 12：質因數 p 需 p − 1 | 12，依最大質因數分類組合。掃過 /φ\\(n\\)|歐拉函數|互質.*個數/（3 題）；最接近 number_theory_grade12_foundation_044（給定性質求 φ 相關選擇題），差異：該題是正向計算 φ；本題反解 φ(n) = 12 的所有 n，需由 p − 1 | 12 限定質因數再分類"
-      }
-    },
-    {
-      "id": "number_theory_grade12_foundation_050",
-      "reviewStatus": "ok",
-      "topic": "number_theory",
       "subtopic": "sum_of_two_squares_mod_seven",
       "tags": [
         "c:modular",
@@ -4853,7 +4778,7 @@
       }
     },
     {
-      "id": "number_theory_grade12_foundation_051",
+      "id": "number_theory_grade12_foundation_050",
       "reviewStatus": "ok",
       "topic": "number_theory",
       "subtopic": "differences_of_two_powers_of_two",

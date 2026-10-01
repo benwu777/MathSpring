@@ -6930,6 +6930,82 @@
         "reference": "combinatorics-grade12-foundation",
         "notes": "4 × 4 的 0/1 矩陣每列每行恰兩個 1：固定第一列，按第二列重疊數分類。掃過 /每一(列|橫排|行).*恰好.*(2|兩)|恰好.*(2|兩)個.*每一|4 × 4.*塗/（1 題）；最接近 combinatorics_grade10_foundation_029（4 × 4 放 4 個互不攻擊的城堡），差異：該題每列每行恰 1 個（排列數 4!）；本題每列每行恰 2 個，需依前兩列重疊情形分類"
       }
+    },
+    {
+      "id": "combinatorics_grade12_foundation_079",
+      "reviewStatus": "ok",
+      "topic": "combinatorics",
+      "subtopic": "noncrossing_partial_chord_diagrams",
+      "tags": [
+        "c:recurrence",
+        "c:circle",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "圓周上依序有 6 個相異的點。在這些點之間畫若干條弦（可以一條都不畫），要求每個點最多只當一條弦的端點，而且任兩條弦在圓內都不相交。一共有幾種畫法？",
+        "zh-Hans": "圆周上依序有 6 个相异的点。在这些点之间画若干条弦（可以一条都不画），要求每个点最多只当一条弦的端点，而且任两条弦在圆内都不相交。一共有几种画法？",
+        "en": "There are 6 distinct points in order around a circle. Some chords are drawn between these points (possibly none) so that each point is an endpoint of at most one chord and no two chords cross inside the circle. How many ways are there to draw the chords?",
+        "ja": "円周上に順に異なる 6 個の点がある。これらの点の間に弦をいくつか引く（1 本も引かなくてもよい）。どの点も高々 1 本の弦の端点であり、どの 2 本の弦も円の内部で交わらないようにするとき、引き方は何通りあるか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 51。",
+        "zh-Hans": "答案是 51。",
+        "en": "The answer is 51.",
+        "ja": "答えは 51 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "設 Mₙ 為依序排列的 n 個點的畫法數（點排在圓周上的一段弧上，結構相同），M₀ = M₁ = 1。",
+          "看第 1 個點：若它不連弦，剩下 n − 1 個點各自畫法 Mₙ₋₁ 種。",
+          "若第 1 個點連到第 k 個點（2 ≤ k ≤ n），這條弦把其餘的點分成兩側：之間的 k − 2 個點、之外的 n − k 個點。弦不能相交，兩側互不影響，有 Mₖ₋₂ × Mₙ₋ₖ 種。",
+          "所以 Mₙ = Mₙ₋₁ + (M₀Mₙ₋₂ + M₁Mₙ₋₃ + ⋯ + Mₙ₋₂M₀)。依序算出 M₂ = 1 + 1 = 2，M₃ = 2 + (1 + 1) = 4，M₄ = 4 + (2 + 1 + 2) = 9，M₅ = 9 + (4 + 2 + 2 + 4) = 21。",
+          "M₆ = 21 + (M₀M₄ + M₁M₃ + M₂M₂ + M₃M₁ + M₄M₀) = 21 + (9 + 4 + 4 + 4 + 9) = 51。"
+        ],
+        "zh-Hans": [
+          "设 Mₙ 为依序排列的 n 个点的画法数（点排在圆周上的一段弧上，结构相同），M₀ = M₁ = 1。",
+          "看第 1 个点：若它不连弦，剩下 n − 1 个点各自画法 Mₙ₋₁ 种。",
+          "若第 1 个点连到第 k 个点（2 ≤ k ≤ n），这条弦把其余的点分成两侧：之间的 k − 2 个点、之外的 n − k 个点。弦不能相交，两侧互不影响，有 Mₖ₋₂ × Mₙ₋ₖ 种。",
+          "所以 Mₙ = Mₙ₋₁ + (M₀Mₙ₋₂ + M₁Mₙ₋₃ + ⋯ + Mₙ₋₂M₀)。依序算出 M₂ = 1 + 1 = 2，M₃ = 2 + (1 + 1) = 4，M₄ = 4 + (2 + 1 + 2) = 9，M₅ = 9 + (4 + 2 + 2 + 4) = 21。",
+          "M₆ = 21 + (M₀M₄ + M₁M₃ + M₂M₂ + M₃M₁ + M₄M₀) = 21 + (9 + 4 + 4 + 4 + 9) = 51。"
+        ],
+        "en": [
+          "Let Mₙ be the number of ways for n points in order (on an arc of the circle; the structure is the same), with M₀ = M₁ = 1.",
+          "Consider the first point. If it is not on a chord, the remaining n − 1 points can be done in Mₙ₋₁ ways.",
+          "If the first point is joined to the k-th point (2 ≤ k ≤ n), the chord splits the rest into the k − 2 points between them and the n − k points outside; chords cannot cross, so the two sides are independent: Mₖ₋₂ × Mₙ₋ₖ ways.",
+          "So Mₙ = Mₙ₋₁ + (M₀Mₙ₋₂ + M₁Mₙ₋₃ + ⋯ + Mₙ₋₂M₀). In turn: M₂ = 1 + 1 = 2, M₃ = 2 + (1 + 1) = 4, M₄ = 4 + (2 + 1 + 2) = 9, M₅ = 9 + (4 + 2 + 2 + 4) = 21.",
+          "M₆ = 21 + (M₀M₄ + M₁M₃ + M₂M₂ + M₃M₁ + M₄M₀) = 21 + (9 + 4 + 4 + 4 + 9) = 51."
+        ],
+        "ja": [
+          "順に並んだ n 個の点（円周上の弧の上にあるとみても構造は同じ）での引き方の数を Mₙ とする。M₀ = M₁ = 1。",
+          "1 番目の点に注目する。弦の端点でなければ、残り n − 1 個の点の引き方は Mₙ₋₁ 通り。",
+          "1 番目の点が k 番目の点（2 ≤ k ≤ n）と結ばれるなら、この弦は残りの点を間の k − 2 個と外側の n − k 個に分ける。弦は交われないので両側は独立で、Mₖ₋₂ × Mₙ₋ₖ 通り。",
+          "よって Mₙ = Mₙ₋₁ + (M₀Mₙ₋₂ + M₁Mₙ₋₃ + ⋯ + Mₙ₋₂M₀)。順に M₂ = 1 + 1 = 2、M₃ = 2 + (1 + 1) = 4、M₄ = 4 + (2 + 1 + 2) = 9、M₅ = 9 + (4 + 2 + 2 + 4) = 21。",
+          "M₆ = 21 + (M₀M₄ + M₁M₃ + M₂M₂ + M₃M₁ + M₄M₀) = 21 + (9 + 4 + 4 + 4 + 9) = 51。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "51"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "combinatorics-grade12-foundation",
+        "notes": "不相交的部分弦圖（Motzkin 數）：看第一點不連或連到第 k 點，遞推 Mₙ。掃過 /不相交.*弦|弦.*不相交|弦/（19 題）；最接近 combinatorics_grade12_foundation_010（4 對括號正確配對，Catalan 數 14），差異：Catalan 要求每點都配對；本題允許點不連弦，遞推多出 Mₙ₋₁ 一項，數值為 Motzkin 數"
+      }
     }
   ]
 }
