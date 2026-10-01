@@ -4353,6 +4353,316 @@
         "reference": "number_theory-grade11-foundation",
         "notes": "題型：等差級數＋排容原理求和。掃過 既不是|也不是|不是 3 的倍數 全庫；最接近 arithmetic_grade5_foundation_009（1 到 30 既非 2 也非 3 的倍數個數），本題求和，要用等差級數。"
       }
+    },
+    {
+      "id": "number_theory_grade11_foundation_047",
+      "reviewStatus": "ok",
+      "topic": "number_theory",
+      "subtopic": "square_divides_factorial",
+      "tags": [
+        "c:factor_multiple",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade11",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "在 2 到 100 的整數 n 之中，有幾個 n 使得 n² 能整除 n!？（n! 表示 1 × 2 × 3 × ⋯ × n。）",
+        "zh-Hans": "在 2 到 100 的整数 n 之中，有几个 n 使得 n² 能整除 n!？（n! 表示 1 × 2 × 3 × ⋯ × n。）",
+        "en": "For how many integers n from 2 to 100 does n² divide n!? (n! means 1 × 2 × 3 × ⋯ × n.)",
+        "ja": "2 から 100 までの整数 n のうち、n² が n! を割り切るものは何個あるか。（n! は 1 × 2 × 3 × ⋯ × n を表す。）"
+      },
+      "answer": {
+        "zh-Hant": "答案是 73。",
+        "zh-Hans": "答案是 73。",
+        "en": "The answer is 73.",
+        "ja": "答えは 73 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "n! = n × (n − 1)!，所以 n² 整除 n! ⟺ n 整除 (n − 1)!。",
+          "n 是質數 p：(p − 1)! 的每個乘數都小於 p，不含因數 p，所以 p 不整除 (p − 1)!，不成立。",
+          "n 是合數且能寫成 n = a × b、1 < a < b < n：a 和 b 是 (n − 1)! 中兩個不同的乘數，所以 a × b = n 整除 (n − 1)!，成立。",
+          "合數但寫不成兩個不同因數之積的，只有質數的平方 n = p²。p ≥ 3 時，p 與 2p 都不超過 p² − 1 且不相同，(n − 1)! 含有 p × 2p，被 p² 整除，成立；p = 2 即 n = 4 時，3! = 6 不被 4 整除，不成立。",
+          "2～100 共 99 個整數，其中質數 25 個、合數 74 個。成立的是除了 4 以外的所有合數：74 − 1 = 73 個。"
+        ],
+        "zh-Hans": [
+          "n! = n × (n − 1)!，所以 n² 整除 n! ⟺ n 整除 (n − 1)!。",
+          "n 是质数 p：(p − 1)! 的每个乘数都小于 p，不含因数 p，所以 p 不整除 (p − 1)!，不成立。",
+          "n 是合数且能写成 n = a × b、1 < a < b < n：a 和 b 是 (n − 1)! 中两个不同的乘数，所以 a × b = n 整除 (n − 1)!，成立。",
+          "合数但写不成两个不同因数之积的，只有质数的平方 n = p²。p ≥ 3 时，p 与 2p 都不超过 p² − 1 且不相同，(n − 1)! 含有 p × 2p，被 p² 整除，成立；p = 2 即 n = 4 时，3! = 6 不被 4 整除，不成立。",
+          "2～100 共 99 个整数，其中质数 25 个、合数 74 个。成立的是除了 4 以外的所有合数：74 − 1 = 73 个。"
+        ],
+        "en": [
+          "Since n! = n × (n − 1)!, n² divides n! exactly when n divides (n − 1)!.",
+          "If n is a prime p, every factor of (p − 1)! is less than p, so p does not divide (p − 1)!: fails.",
+          "If n is composite and n = a × b with 1 < a < b < n, then a and b are two different factors of (n − 1)!, so a × b = n divides (n − 1)!: works.",
+          "The only composites not of that form are squares of primes n = p². For p ≥ 3, p and 2p are distinct and at most p² − 1, so (n − 1)! contains p × 2p and is divisible by p²: works. For p = 2, i.e. n = 4, 3! = 6 is not divisible by 4: fails.",
+          "Of the 99 integers from 2 to 100, 25 are prime and 74 are composite. All composites except 4 work: 74 − 1 = 73."
+        ],
+        "ja": [
+          "n! = n × (n − 1)! なので、n² が n! を割り切ることは n が (n − 1)! を割り切ることと同値。",
+          "n が素数 p のとき：(p − 1)! の各因数は p より小さく因数 p を含まないので、p は (p − 1)! を割り切らない。不成立。",
+          "n が合成数で n = a × b（1 < a < b < n）と書けるとき：a と b は (n − 1)! の異なる 2 つの因数なので、a × b = n は (n − 1)! を割り切る。成立。",
+          "合成数でそのように書けないのは素数の 2 乗 n = p² だけ。p ≥ 3 なら p と 2p は異なり、どちらも p² − 1 以下なので (n − 1)! は p × 2p を含み p² で割り切れる。成立。p = 2 すなわち n = 4 のとき 3! = 6 は 4 で割り切れないので不成立。",
+          "2～100 の 99 個のうち素数は 25 個、合成数は 74 個。成立するのは 4 以外の合成数なので 74 − 1 = 73 個。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "73"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "number-theory-grade11-foundation",
+        "notes": "n² | n! ⟺ n | (n − 1)!：質數不成立、合數除 4 外都成立（p² 用 p 與 2p）。掃過 /n! ?能被|整除 ?n!|n!.*整除|階乘/（2 題）；最接近 number_theory_grade12_foundation_031（n! 被 3¹⁰ 整除的最小 n），差異：該題用 Legendre 求單一質數冪；本題是對所有 n 判斷 n | (n − 1)!，需質數／合數／質數平方分類"
+      }
+    },
+    {
+      "id": "number_theory_grade11_foundation_048",
+      "reviewStatus": "ok",
+      "topic": "number_theory",
+      "subtopic": "highest_power_of_two_dividing",
+      "tags": [
+        "c:exponent",
+        "c:factor_multiple",
+        "m:direct"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade11",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "求最大的正整數 k，使得 2ᵏ 能整除 7²⁰⁴⁸ − 1。",
+        "zh-Hans": "求最大的正整数 k，使得 2ᵏ 能整除 7²⁰⁴⁸ − 1。",
+        "en": "Find the largest positive integer k such that 2ᵏ divides 7²⁰⁴⁸ − 1.",
+        "ja": "2ᵏ が 7²⁰⁴⁸ − 1 を割り切るような最大の正の整数 k を求めなさい。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 14。",
+        "zh-Hans": "答案是 14。",
+        "en": "The answer is 14.",
+        "ja": "答えは 14 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "2048 = 2¹¹。反覆使用平方差公式 a² − 1 = (a − 1)(a + 1)：7²⁰⁴⁸ − 1 = (7¹⁰²⁴ − 1)(7¹⁰²⁴ + 1) = ⋯ = (7 − 1)(7 + 1)(7² + 1)(7⁴ + 1)(7⁸ + 1)⋯(7¹⁰²⁴ + 1)。",
+          "除了 7 − 1 與 7 + 1 之外，其餘因數是「7 的 2ʲ 次方再加 1」，j = 1、2、⋯、10，共 10 個。",
+          "7 − 1 = 6 = 2 × 3，含 2 的一次方；7 + 1 = 8 = 2³，含 2 的三次方。",
+          "對 j ≥ 1，7 的 2ʲ 次方是奇數的平方，除以 4 餘 1，所以再加 1 之後除以 4 餘 2，恰好只含一個因數 2。這 10 個因數共貢獻 2¹⁰。",
+          "合計 k = 1 + 3 + 10 = 14。"
+        ],
+        "zh-Hans": [
+          "2048 = 2¹¹。反复使用平方差公式 a² − 1 = (a − 1)(a + 1)：7²⁰⁴⁸ − 1 = (7¹⁰²⁴ − 1)(7¹⁰²⁴ + 1) = ⋯ = (7 − 1)(7 + 1)(7² + 1)(7⁴ + 1)(7⁸ + 1)⋯(7¹⁰²⁴ + 1)。",
+          "除了 7 − 1 与 7 + 1 之外，其余因数是「7 的 2ʲ 次方再加 1」，j = 1、2、⋯、10，共 10 个。",
+          "7 − 1 = 6 = 2 × 3，含 2 的一次方；7 + 1 = 8 = 2³，含 2 的三次方。",
+          "对 j ≥ 1，7 的 2ʲ 次方是奇数的平方，除以 4 余 1，所以再加 1 之后除以 4 余 2，恰好只含一个因数 2。这 10 个因数共贡献 2¹⁰。",
+          "合计 k = 1 + 3 + 10 = 14。"
+        ],
+        "en": [
+          "2048 = 2¹¹. Using a² − 1 = (a − 1)(a + 1) repeatedly: 7²⁰⁴⁸ − 1 = (7¹⁰²⁴ − 1)(7¹⁰²⁴ + 1) = ⋯ = (7 − 1)(7 + 1)(7² + 1)(7⁴ + 1)(7⁸ + 1)⋯(7¹⁰²⁴ + 1).",
+          "Besides 7 − 1 and 7 + 1, the remaining factors are 7 to the power 2ʲ plus 1, for j = 1, 2, …, 10: 10 factors.",
+          "7 − 1 = 6 = 2 × 3 contains one factor 2; 7 + 1 = 8 = 2³ contains three.",
+          "For j ≥ 1, 7 to the power 2ʲ is the square of an odd number, hence 1 mod 4, so adding 1 gives 2 mod 4: exactly one factor 2. These 10 factors contribute 2¹⁰.",
+          "Altogether k = 1 + 3 + 10 = 14."
+        ],
+        "ja": [
+          "2048 = 2¹¹。a² − 1 = (a − 1)(a + 1) をくり返し使うと、7²⁰⁴⁸ − 1 = (7¹⁰²⁴ − 1)(7¹⁰²⁴ + 1) = ⋯ = (7 − 1)(7 + 1)(7² + 1)(7⁴ + 1)(7⁸ + 1)⋯(7¹⁰²⁴ + 1)。",
+          "7 − 1 と 7 + 1 以外の因数は「7 の 2ʲ 乗に 1 を足したもの」（j = 1、2、…、10）の 10 個。",
+          "7 − 1 = 6 = 2 × 3 は 2 を 1 個、7 + 1 = 8 = 2³ は 2 を 3 個含む。",
+          "j ≥ 1 のとき、7 の 2ʲ 乗は奇数の 2 乗なので 4 で割って 1 余り、1 を足すと 4 で割って 2 余る。よって因数 2 をちょうど 1 個含み、この 10 個で 2¹⁰ となる。",
+          "合計 k = 1 + 3 + 10 = 14。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "14"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "number-theory-grade11-foundation",
+        "notes": "a 的 2ᵐ 次方減 1 反覆平方差分解，逐因數數 2 的冪（奇平方 + 1 恰含一個 2）。掃過 /2ᵏ|2 的.*次方.*整除|整除.*的最大/（7 題）；最接近 number_theory_grade10_foundation_046（7ⁿ − 6n − 1 恆被整除的最大 m），差異：該題找對所有 n 成立的公因數；本題對固定指數求 2 的最高次方，用連續平方差逐項計數"
+      }
+    },
+    {
+      "id": "number_theory_grade11_foundation_049",
+      "reviewStatus": "ok",
+      "topic": "number_theory",
+      "subtopic": "digit_sum_invariant_under_doubling",
+      "tags": [
+        "c:place_value",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade11",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "用 S(n) 表示正整數 n 的各位數字和，例如 S(507) = 12。在 1 到 1000 的正整數 n 之中，有幾個滿足 S(2n) = S(n)？",
+        "zh-Hans": "用 S(n) 表示正整数 n 的各位数字和，例如 S(507) = 12。在 1 到 1000 的正整数 n 之中，有几个满足 S(2n) = S(n)？",
+        "en": "Let S(n) denote the sum of the digits of a positive integer n; for example S(507) = 12. How many positive integers n from 1 to 1000 satisfy S(2n) = S(n)?",
+        "ja": "正の整数 n の各桁の数字の和を S(n) で表す。たとえば S(507) = 12。1 から 1000 までの正の整数 n のうち、S(2n) = S(n) を満たすものは何個あるか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 91。",
+        "zh-Hans": "答案是 91。",
+        "en": "The answer is 91.",
+        "ja": "答えは 91 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "把 n 乘以 2 時逐位計算：每一位數字 d 變成 2d，若 d ≥ 5 就向前進位一次。每次進位使該位少 10、前一位多 1，數字和淨減 9。所以 S(2n) = 2S(n) − 9c，c 是 n 中大於或等於 5 的數字個數。",
+          "因此 S(2n) = S(n) ⟺ S(n) = 9c。n = 1000 時 S = 1、c = 0，不成立；以下把 1～999 都寫成三位（前面補 0），S(n) ≤ 27。c = 0 時 S = 0，不是正整數，所以 c 是 1、2 或 3。",
+          "c = 1、S = 9：一位數字 d ≥ 5，另外兩位都 ≤ 4 且和為 9 − d。d = 5、6、7、8、9 時，另兩位的取法分別有 5、4、3、2、1 種，共 15 種；d 的位置有 3 種，共 45 個。",
+          "c = 2、S = 18：兩位數字 ≥ 5，第三位 t ≤ 4，兩個大數字的和是 18 − t，介於 14 和 18 之間；和為 14、15、16、17、18 的取法分別有 5、4、3、2、1 種，共 15 種（t 隨之確定）；t 的位置有 3 種，共 45 個。",
+          "c = 3、S = 27：只有 999。",
+          "合計 45 + 45 + 1 = 91 個。"
+        ],
+        "zh-Hans": [
+          "把 n 乘以 2 时逐位计算：每一位数字 d 变成 2d，若 d ≥ 5 就向前进位一次。每次进位使该位少 10、前一位多 1，数字和净减 9。所以 S(2n) = 2S(n) − 9c，c 是 n 中大于或等于 5 的数字个数。",
+          "因此 S(2n) = S(n) ⟺ S(n) = 9c。n = 1000 时 S = 1、c = 0，不成立；以下把 1～999 都写成三位（前面补 0），S(n) ≤ 27。c = 0 时 S = 0，不是正整数，所以 c 是 1、2 或 3。",
+          "c = 1、S = 9：一位数字 d ≥ 5，另外两位都 ≤ 4 且和为 9 − d。d = 5、6、7、8、9 时，另两位的取法分别有 5、4、3、2、1 种，共 15 种；d 的位置有 3 种，共 45 个。",
+          "c = 2、S = 18：两位数字 ≥ 5，第三位 t ≤ 4，两个大数字的和是 18 − t，介于 14 和 18 之间；和为 14、15、16、17、18 的取法分别有 5、4、3、2、1 种，共 15 种（t 随之确定）；t 的位置有 3 种，共 45 个。",
+          "c = 3、S = 27：只有 999。",
+          "合计 45 + 45 + 1 = 91 个。"
+        ],
+        "en": [
+          "When doubling n digit by digit, each digit d becomes 2d and produces a carry exactly when d ≥ 5. Each carry lowers that place by 10 and raises the next by 1, a net drop of 9 in the digit sum. So S(2n) = 2S(n) − 9c, where c is the number of digits of n that are at least 5.",
+          "Hence S(2n) = S(n) exactly when S(n) = 9c. For n = 1000, S = 1 and c = 0, which fails; write 1 to 999 as three digits with leading zeros, so S(n) ≤ 27. c = 0 would force S = 0, impossible, so c is 1, 2 or 3.",
+          "c = 1, S = 9: one digit d ≥ 5 and the other two are at most 4 with sum 9 − d. For d = 5, 6, 7, 8, 9 the other two can be chosen in 5, 4, 3, 2, 1 ways, 15 in all; d can be in 3 positions, giving 45 numbers.",
+          "c = 2, S = 18: two digits at least 5 and a third digit t ≤ 4, so the two large digits sum to 18 − t, between 14 and 18; sums 14, 15, 16, 17, 18 occur in 5, 4, 3, 2, 1 ways, 15 in all (t then determined); t can be in 3 positions, giving 45 numbers.",
+          "c = 3, S = 27: only 999.",
+          "In total 45 + 45 + 1 = 91."
+        ],
+        "ja": [
+          "n を 2 倍するとき桁ごとに見ると、各桁の数字 d は 2d になり、d ≥ 5 のときちょうど 1 回繰り上がる。繰り上がり 1 回ごとにその桁は 10 減り上の桁が 1 増えるので、各桁の和は差し引き 9 減る。よって S(2n) = 2S(n) − 9c（c は n の桁のうち 5 以上のものの個数）。",
+          "したがって S(2n) = S(n) ⇔ S(n) = 9c。n = 1000 は S = 1、c = 0 で不成立。1～999 を前に 0 を補って 3 桁とみると S(n) ≤ 27。c = 0 なら S = 0 で不可能なので、c は 1、2、3 のいずれか。",
+          "c = 1、S = 9：1 つの桁 d ≥ 5、残り 2 桁はともに 4 以下で和が 9 − d。d = 5、6、7、8、9 のとき残り 2 桁の選び方は 5、4、3、2、1 通りで計 15 通り。d の位置は 3 通りなので 45 個。",
+          "c = 2、S = 18：2 つの桁が 5 以上、残りの桁 t ≤ 4 で、大きい 2 桁の和は 18 − t で 14 以上 18 以下。和が 14、15、16、17、18 となる選び方は 5、4、3、2、1 通りで計 15 通り（t はそれで決まる）。t の位置は 3 通りなので 45 個。",
+          "c = 3、S = 27：999 のみ。",
+          "合計 45 + 45 + 1 = 91 個。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "91"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "number-theory-grade11-foundation",
+        "notes": "S(2n) = 2S(n) − 9 ×（≥5 的數字個數），化為 S(n) = 9c 再分類計數。掃過 /數字和.*(2 倍|兩倍)|兩倍.*數字和|各位數字和/（15 題）；最接近 number_theory_grade10_foundation_010（88…8 × 8 的數字和為 1000 求位數），差異：該題是單一數的數字和計算；本題用「進位一次減 9」建立 S(2n) 與 S(n) 的關係，再對 1～1000 分類計數"
+      }
+    },
+    {
+      "id": "number_theory_grade11_foundation_050",
+      "reviewStatus": "ok",
+      "topic": "number_theory",
+      "subtopic": "number_equals_multiple_of_digit_square_sum",
+      "tags": [
+        "c:place_value",
+        "c:modular",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade11",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "有些三位數 N 恰好等於「它的三個數字的平方和」的 11 倍。求所有這樣的三位數的總和。",
+        "zh-Hans": "有些三位数 N 恰好等于「它的三个数字的平方和」的 11 倍。求所有这样的三位数的总和。",
+        "en": "Some three-digit numbers N are exactly 11 times the sum of the squares of their three digits. Find the sum of all such three-digit numbers.",
+        "ja": "3 桁の数 N の中には、その 3 つの数字の 2 乗の和のちょうど 11 倍に等しいものがある。そのような 3 桁の数すべての和を求めなさい。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 1353。",
+        "zh-Hans": "答案是 1353。",
+        "en": "The answer is 1353.",
+        "ja": "答えは 1353 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "設 N 的百、十、個位是 a、b、c（a ≥ 1）。N 是 11 的倍數，由 11 的倍數判別法，a − b + c 是 11 的倍數；而 −9 ≤ a − b + c ≤ 18，所以 b = a + c 或 b = a + c − 11。",
+          "情形一 b = a + c：N = 100a + 10(a + c) + c = 11(10a + c)，條件變成 10a + c = a² + (a + c)² + c² = 2(a² + ac + c²)。右邊是偶數，所以 c 是偶數。",
+          "c = 0 時 10a = 2a²，a = 5，得 N = 550。c = 2、4、6 時分別化為 a² − 3a + 3 = 0、a² − a + 14 = 0、a² + a + 33 = 0，都沒有實數解；c = 8 時 a + c ≤ 9 只能 a = 1，左邊 18、右邊 146，不成立。",
+          "情形二 b = a + c − 11（需 a + c ≥ 11）：N = 11(10a + c − 10)，條件是 10a + c − 10 = a² + (a + c − 11)² + c²。比較奇偶（x² 與 x 同奇偶）：左邊與 c 同奇偶，右邊與 a + (a + c + 1) + c 同奇偶、是奇數，所以 c 是奇數，c 可以是 3、5、7、9。",
+          "c = 3（a = 8 或 9）：a = 8 時兩邊都是 73，成立，得 N = 803；a = 9 時 83 ≠ 91。c = 5（a = 6～9）：左邊 10a − 5、右邊 a² + (a − 6)² + 25，逐一代入 55 ≠ 61、65 ≠ 75、75 ≠ 93、85 ≠ 115。c = 7、9 時右邊減左邊分別是 2a² − 18a + 52、2a² − 14a + 86，判別式為負，恆正，不成立。",
+          "符合的三位數只有 550 與 803（檢查：5² + 5² + 0² = 50，50 × 11 = 550；8² + 0² + 3² = 73，73 × 11 = 803）。總和 = 550 + 803 = 1353。"
+        ],
+        "zh-Hans": [
+          "设 N 的百、十、个位是 a、b、c（a ≥ 1）。N 是 11 的倍数，由 11 的倍数判别法，a − b + c 是 11 的倍数；而 −9 ≤ a − b + c ≤ 18，所以 b = a + c 或 b = a + c − 11。",
+          "情形一 b = a + c：N = 100a + 10(a + c) + c = 11(10a + c)，条件变成 10a + c = a² + (a + c)² + c² = 2(a² + ac + c²)。右边是偶数，所以 c 是偶数。",
+          "c = 0 时 10a = 2a²，a = 5，得 N = 550。c = 2、4、6 时分别化为 a² − 3a + 3 = 0、a² − a + 14 = 0、a² + a + 33 = 0，都没有实数解；c = 8 时 a + c ≤ 9 只能 a = 1，左边 18、右边 146，不成立。",
+          "情形二 b = a + c − 11（需 a + c ≥ 11）：N = 11(10a + c − 10)，条件是 10a + c − 10 = a² + (a + c − 11)² + c²。比较奇偶（x² 与 x 同奇偶）：左边与 c 同奇偶，右边与 a + (a + c + 1) + c 同奇偶、是奇数，所以 c 是奇数，c 可以是 3、5、7、9。",
+          "c = 3（a = 8 或 9）：a = 8 时两边都是 73，成立，得 N = 803；a = 9 时 83 ≠ 91。c = 5（a = 6～9）：左边 10a − 5、右边 a² + (a − 6)² + 25，逐一代入 55 ≠ 61、65 ≠ 75、75 ≠ 93、85 ≠ 115。c = 7、9 时右边减左边分别是 2a² − 18a + 52、2a² − 14a + 86，判别式为负，恒正，不成立。",
+          "符合的三位数只有 550 与 803（检查：5² + 5² + 0² = 50，50 × 11 = 550；8² + 0² + 3² = 73，73 × 11 = 803）。总和 = 550 + 803 = 1353。"
+        ],
+        "en": [
+          "Let the digits of N be a, b, c (a ≥ 1). N is a multiple of 11, so by the divisibility rule a − b + c is a multiple of 11; since −9 ≤ a − b + c ≤ 18, either b = a + c or b = a + c − 11.",
+          "Case 1, b = a + c: N = 100a + 10(a + c) + c = 11(10a + c), and the condition becomes 10a + c = a² + (a + c)² + c² = 2(a² + ac + c²). The right side is even, so c is even.",
+          "c = 0 gives 10a = 2a², so a = 5 and N = 550. c = 2, 4, 6 lead to a² − 3a + 3 = 0, a² − a + 14 = 0, a² + a + 33 = 0, none with real solutions; c = 8 forces a = 1 (since a + c ≤ 9), giving 18 versus 146, which fails.",
+          "Case 2, b = a + c − 11 (needs a + c ≥ 11): N = 11(10a + c − 10), and the condition is 10a + c − 10 = a² + (a + c − 11)² + c². Compare parities (x² has the same parity as x): the left side has the parity of c, the right side that of a + (a + c + 1) + c, which is odd, so c is odd: 3, 5, 7 or 9.",
+          "c = 3 (a = 8 or 9): a = 8 gives 73 on both sides, so N = 803; a = 9 gives 83 ≠ 91. c = 5 (a = 6 to 9): left 10a − 5, right a² + (a − 6)² + 25, giving 55 ≠ 61, 65 ≠ 75, 75 ≠ 93, 85 ≠ 115. For c = 7 and 9 the right side minus the left is 2a² − 18a + 52 and 2a² − 14a + 86, which have negative discriminants and are always positive, so no solutions.",
+          "The only such numbers are 550 and 803 (check: 5² + 5² + 0² = 50 and 50 × 11 = 550; 8² + 0² + 3² = 73 and 73 × 11 = 803). Their sum is 550 + 803 = 1353."
+        ],
+        "ja": [
+          "N の百・十・一の位を a、b、c（a ≥ 1）とする。N は 11 の倍数なので、11 の倍数の判定法より a − b + c は 11 の倍数。−9 ≤ a − b + c ≤ 18 なので、b = a + c または b = a + c − 11。",
+          "場合 1：b = a + c。N = 100a + 10(a + c) + c = 11(10a + c) なので、条件は 10a + c = a² + (a + c)² + c² = 2(a² + ac + c²)。右辺は偶数なので c は偶数。",
+          "c = 0 なら 10a = 2a² より a = 5 で N = 550。c = 2、4、6 ではそれぞれ a² − 3a + 3 = 0、a² − a + 14 = 0、a² + a + 33 = 0 となり実数解なし。c = 8 なら a + c ≤ 9 より a = 1 で、左辺 18、右辺 146 となり不成立。",
+          "場合 2：b = a + c − 11（a + c ≥ 11 が必要）。N = 11(10a + c − 10) なので、条件は 10a + c − 10 = a² + (a + c − 11)² + c²。偶奇を比べる（x² と x は偶奇が同じ）と、左辺は c と同じ偶奇、右辺は a + (a + c + 1) + c と同じで奇数なので、c は奇数で 3、5、7、9 のいずれか。",
+          "c = 3（a = 8 か 9）：a = 8 なら両辺とも 73 で成立し N = 803、a = 9 なら 83 ≠ 91。c = 5（a = 6～9）：左辺 10a − 5、右辺 a² + (a − 6)² + 25 で、55 ≠ 61、65 ≠ 75、75 ≠ 93、85 ≠ 115。c = 7、9 では右辺 − 左辺がそれぞれ 2a² − 18a + 52、2a² − 14a + 86 で、判別式が負なので常に正となり不成立。",
+          "条件を満たすのは 550 と 803 だけ（確認：5² + 5² + 0² = 50、50 × 11 = 550。8² + 0² + 3² = 73、73 × 11 = 803）。和は 550 + 803 = 1353。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "1353"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 4
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "number-theory-grade11-foundation",
+        "notes": "三位數 = 11 × 數字平方和：用 11 的倍數判別法得 b = a + c 或 a + c − 11，再以奇偶與判別式篩選。掃過 /11 倍|11 乘|數字的平方和|平方和.*倍/（1 題）；最接近 number_theory_grade12_foundation_008（小於 1000 且等於數字和 6 倍的數），差異：該題是數字和的一次條件；本題是數字平方和，需先用 11 的判別法分兩型，再解二次條件"
+      }
     }
   ]
 }

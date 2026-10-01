@@ -6527,6 +6527,386 @@
         "reference": "combinatorics-grade11-foundation",
         "notes": "題型：三頂點隨機遊走，建立一階機率遞迴 pₙ₊₁ = (1 − pₙ)/2。掃過 螞蟻|回到出發|隨機.*頂點|遞迴.*機率 全庫：combinatorics_grade11_062 是賭徒破產（直線隨機遊走吸收機率），combinatorics_grade11_068 是數線遊走的 S² 期望值，algebra_grade12_084 是晴雨馬可夫鏈的長期比例；沒有有限步回到起點的機率遞迴。"
       }
+    },
+    {
+      "id": "combinatorics_grade11_foundation_074",
+      "reviewStatus": "ok",
+      "topic": "combinatorics",
+      "subtopic": "binary_strings_by_number_of_rises",
+      "tags": [
+        "c:basic_counting",
+        "c:permutation_combination",
+        "m:bijection"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade11",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "由 0 與 1 組成、長度為 10 的字串中，有幾個字串恰好出現 3 次「0 後面緊接著 1」（也就是相鄰兩位依序是 0、1 的位置恰有 3 處）？例如 0101100111 中這樣的位置有 3 處。",
+        "zh-Hans": "由 0 与 1 组成、长度为 10 的字串中，有几个字串恰好出现 3 次「0 后面紧接着 1」（也就是相邻两位依序是 0、1 的位置恰有 3 处）？例如 0101100111 中这样的位置有 3 处。",
+        "en": "Among the strings of length 10 made of 0s and 1s, how many contain exactly 3 places where a 0 is immediately followed by a 1 (that is, exactly 3 adjacent pairs reading 0 then 1)? For example, 0101100111 has 3 such places.",
+        "ja": "0 と 1 からなる長さ 10 の文字列のうち、「0 のすぐ後に 1 が続く」箇所（隣り合う 2 文字が順に 0、1 となる箇所）がちょうど 3 か所あるものは何個あるか。たとえば 0101100111 にはそのような箇所が 3 か所ある。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 330。",
+        "zh-Hans": "答案是 330。",
+        "en": "The answer is 330.",
+        "ja": "答えは 330 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "在字串最前面補一個 1、最後面補一個 0，得到長 12、以 1 開頭、以 0 結尾的字串。原字串中「0 接 1」的處數不變（補上的 1 在最前、0 在最後，不會造成新的「0 接 1」）。",
+          "在新字串中，相鄰兩位不同的地方稱為「變化點」。從 1 開始，變化依序是 1→0、0→1、1→0、⋯ 交替出現；又以 0 結尾，所以最後一次是 1→0。若「0→1」有 k 次，「1→0」就有 k + 1 次，變化點共 2k + 1 個。",
+          "新字串長 12，相鄰位置之間共有 11 個空隙。只要決定哪些空隙是變化點，從開頭的 1 出發，整個字串就唯一確定；反過來，任選奇數個空隙當變化點，得到的字串一定以 0 結尾。這是一一對應。",
+          "要恰好 3 次「0 接 1」，變化點要有 2 × 3 + 1 = 7 個，從 11 個空隙中選 7 個：C(11, 7) = 330。",
+          "所以共有 330 個字串。"
+        ],
+        "zh-Hans": [
+          "在字串最前面补一个 1、最后面补一个 0，得到长 12、以 1 开头、以 0 结尾的字串。原字串中「0 接 1」的处数不变（补上的 1 在最前、0 在最后，不会造成新的「0 接 1」）。",
+          "在新字串中，相邻两位不同的地方称为「变化点」。从 1 开始，变化依序是 1→0、0→1、1→0、⋯ 交替出现；又以 0 结尾，所以最后一次是 1→0。若「0→1」有 k 次，「1→0」就有 k + 1 次，变化点共 2k + 1 个。",
+          "新字串长 12，相邻位置之间共有 11 个空隙。只要决定哪些空隙是变化点，从开头的 1 出发，整个字串就唯一确定；反过来，任选奇数个空隙当变化点，得到的字串一定以 0 结尾。这是一一对应。",
+          "要恰好 3 次「0 接 1」，变化点要有 2 × 3 + 1 = 7 个，从 11 个空隙中选 7 个：C(11, 7) = 330。",
+          "所以共有 330 个字串。"
+        ],
+        "en": [
+          "Put an extra 1 at the front and an extra 0 at the end, giving a string of length 12 that starts with 1 and ends with 0. The number of places \"0 then 1\" is unchanged (the added 1 is at the very start and the added 0 at the very end, so they create no new \"0 then 1\").",
+          "In the new string call a place where two adjacent digits differ a \"change\". Starting from 1, changes alternate 1→0, 0→1, 1→0, …; since the string ends with 0, the last change is 1→0. If there are k changes 0→1, there are k + 1 changes 1→0, so 2k + 1 changes in all.",
+          "The new string has 11 gaps between adjacent positions. Choosing which gaps are changes determines the whole string, starting from the leading 1; conversely, any odd number of chosen gaps gives a string ending in 0. This is a one-to-one correspondence.",
+          "Exactly 3 occurrences of \"0 then 1\" means 2 × 3 + 1 = 7 changes, chosen from 11 gaps: C(11, 7) = 330.",
+          "So there are 330 such strings."
+        ],
+        "ja": [
+          "文字列の先頭に 1 を、末尾に 0 を付け加えると、1 で始まり 0 で終わる長さ 12 の文字列になる。「0 の後に 1」の箇所の数は変わらない（付け加えた 1 は最初、0 は最後にあるので、新しい「0 の後に 1」を作らない）。",
+          "新しい文字列で、隣り合う 2 文字が異なる箇所を「変化点」と呼ぶ。1 から始まるので変化は 1→0、0→1、1→0、… と交互に起こり、0 で終わるので最後の変化は 1→0。0→1 が k 回なら 1→0 は k + 1 回で、変化点は全部で 2k + 1 個。",
+          "新しい文字列は長さ 12 なので、隣り合う位置の間のすき間は 11 個。どのすき間を変化点にするかを決めれば、先頭の 1 から文字列全体がただ 1 つに決まる。逆に、奇数個のすき間を選べば必ず 0 で終わる文字列になる。これは一対一対応である。",
+          "「0 の後に 1」がちょうど 3 回なら変化点は 2 × 3 + 1 = 7 個で、11 個のすき間から 7 個を選ぶ：C(11, 7) = 330。",
+          "よって 330 個。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "330"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "combinatorics-grade11-foundation",
+        "notes": "0/1 字串中「01」出現次數：首補 1、尾補 0 後變化點數 = 2k + 1，轉為從 11 個空隙選變化點。掃過 /「01」|01 ?出現|出現.*01|0 ?緊接.*1|後面緊接|0 與 1 組成/（2 題）；最接近 combinatorics_grade10_foundation_046（擲 13 次硬幣「連正」次數的期望），差異：該題用指標求期望；本題要精確計數「01」恰 3 次的字串，靠補首尾後選變化點的一一對應"
+      }
+    },
+    {
+      "id": "combinatorics_grade11_foundation_075",
+      "reviewStatus": "ok",
+      "topic": "combinatorics",
+      "subtopic": "labeled_trees_on_five_vertices",
+      "tags": [
+        "c:graph_theory",
+        "c:permutation_combination",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade11",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "甲、乙、丙、丁、戊五個村莊之間要修建恰好 4 條道路，每條道路直接連接兩個村莊，任兩個村莊之間最多修一條。修好之後，任兩個村莊都要能沿著道路互相到達（可以經過別的村莊）。一共有幾種不同的修法？",
+        "zh-Hans": "甲、乙、丙、丁、戊五个村庄之间要修建恰好 4 条道路，每条道路直接连接两个村庄，任两个村庄之间最多修一条。修好之后，任两个村庄都要能沿着道路互相到达（可以经过别的村庄）。一共有几种不同的修法？",
+        "en": "Exactly 4 roads are to be built among five villages A, B, C, D, E; each road directly joins two villages, and any two villages get at most one road. After construction, every two villages must be reachable from each other along roads (possibly through other villages). How many different ways are there to build the roads?",
+        "ja": "5 つの村 A、B、C、D、E の間にちょうど 4 本の道路をつくる。各道路は 2 つの村を直接結び、どの 2 つの村の間にも道路は高々 1 本とする。完成後、どの 2 つの村も道路をたどって（他の村を経由してもよい）互いに行き来できなければならない。道路のつくり方は何通りあるか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 125。",
+        "zh-Hans": "答案是 125。",
+        "en": "The answer is 125.",
+        "ja": "答えは 125 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "5 個村莊、4 條路而且全部連通，路網不會有迴路（有迴路就會浪費一條路，剩下 3 條連不通 5 個村莊）。依各村莊連出的道路數（度數）分類，度數總和 = 2 × 4 = 8，每個至少 1，可能的度數組合只有 2、2、2、1、1；4、1、1、1、1；3、2、1、1、1 三種。",
+          "度數 2、2、2、1、1：路網是一條「鏈」，把 5 個村莊排成一列，正著排與倒著排是同一種，共 5!/2 = 60 種。",
+          "度數 4、1、1、1、1：一個中心連向其他 4 個村莊（星形），選中心有 5 種。",
+          "度數 3、2、1、1、1：中心連 3 條路，其中一個鄰居再往外接一個村莊。選中心 5 種、選度數 2 的村莊 4 種、再從剩下 3 個村莊選它往外接的那一個 3 種（另外兩個直接接中心），共 5 × 4 × 3 = 60 種。",
+          "合計 60 + 5 + 60 = 125 種。"
+        ],
+        "zh-Hans": [
+          "5 个村庄、4 条路而且全部连通，路网不会有回路（有回路就会浪费一条路，剩下 3 条连不通 5 个村庄）。依各村庄连出的道路数（度数）分类，度数总和 = 2 × 4 = 8，每个至少 1，可能的度数组合只有 2、2、2、1、1；4、1、1、1、1；3、2、1、1、1 三种。",
+          "度数 2、2、2、1、1：路网是一条「链」，把 5 个村庄排成一列，正着排与倒着排是同一种，共 5!/2 = 60 种。",
+          "度数 4、1、1、1、1：一个中心连向其他 4 个村庄（星形），选中心有 5 种。",
+          "度数 3、2、1、1、1：中心连 3 条路，其中一个邻居再往外接一个村庄。选中心 5 种、选度数 2 的村庄 4 种、再从剩下 3 个村庄选它往外接的那一个 3 种（另外两个直接接中心），共 5 × 4 × 3 = 60 种。",
+          "合计 60 + 5 + 60 = 125 种。"
+        ],
+        "en": [
+          "With 5 villages, 4 roads and everything connected, there can be no cycle (a cycle would waste a road, leaving only 3 roads to connect 5 villages). Classify by the number of roads at each village (its degree): the degrees sum to 2 × 4 = 8, each is at least 1, so the only degree patterns are 2, 2, 2, 1, 1; 4, 1, 1, 1, 1; and 3, 2, 1, 1, 1.",
+          "Degrees 2, 2, 2, 1, 1: the network is a path; line the 5 villages up in a row, where a row and its reverse are the same: 5!/2 = 60 ways.",
+          "Degrees 4, 1, 1, 1, 1: one centre joined to the other 4 (a star): 5 choices of centre.",
+          "Degrees 3, 2, 1, 1, 1: a centre with 3 roads, one of whose neighbours extends to one more village. Choose the centre (5), the degree-2 village (4), and the village it extends to from the remaining 3 (3), the other two joining the centre: 5 × 4 × 3 = 60 ways.",
+          "Total 60 + 5 + 60 = 125."
+        ],
+        "ja": [
+          "5 つの村を 4 本の道路ですべてつなぐので、道路網に閉路はない（閉路があると 1 本が無駄になり、残り 3 本では 5 つの村をつなげない）。各村から出る道路の本数（次数）で分類する。次数の和は 2 × 4 = 8 で各次数は 1 以上なので、次数の組は 2、2、2、1、1／4、1、1、1、1／3、2、1、1、1 の 3 種類だけ。",
+          "次数 2、2、2、1、1：道路網は一本道。5 つの村を一列に並べ、逆順は同じとみなして 5!/2 = 60 通り。",
+          "次数 4、1、1、1、1：1 つの中心が他の 4 つと結ばれる星形で、中心の選び方は 5 通り。",
+          "次数 3、2、1、1、1：中心から 3 本出て、その隣の 1 つがさらにもう 1 つの村につながる。中心 5 通り、次数 2 の村 4 通り、その先につながる村を残り 3 つから 3 通り（残る 2 つは中心に直接つながる）で、5 × 4 × 3 = 60 通り。",
+          "合計 60 + 5 + 60 = 125 通り。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "125"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "combinatorics-grade11-foundation",
+        "notes": "5 個標號點的生成樹計數，依度數序列分三型（鏈、星、T 形）。掃過 /條.*路.*連通|道路.*連|任兩個.*互相到達/（4 題）；最接近 logic_grade12_foundation_020（10 站點樹狀網路已知度數求葉子數），差異：該題用度數和求葉子數；本題要數所有不同的標號樹，依度數型態分類計數"
+      }
+    },
+    {
+      "id": "combinatorics_grade11_foundation_076",
+      "reviewStatus": "ok",
+      "topic": "combinatorics",
+      "subtopic": "antichain_of_subsets_max_size",
+      "tags": [
+        "c:permutation_combination",
+        "m:construction",
+        "m:estimate_bound"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade11",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "從集合 {1, 2, 3, 4, 5, 6} 的所有子集合中挑出若干個，要求挑出的任兩個子集合都沒有包含關係（也就是沒有一個是另一個的子集合）。最多能挑出幾個子集合？",
+        "zh-Hans": "从集合 {1, 2, 3, 4, 5, 6} 的所有子集合中挑出若干个，要求挑出的任两个子集合都没有包含关系（也就是没有一个是另一个的子集合）。最多能挑出几个子集合？",
+        "en": "Some subsets of {1, 2, 3, 4, 5, 6} are to be selected so that no selected subset contains another selected subset. What is the largest number of subsets that can be selected?",
+        "ja": "集合 {1, 2, 3, 4, 5, 6} の部分集合からいくつかを選ぶ。選んだどの 2 つも包含関係にない（一方が他方の部分集合にならない）ようにするとき、最大で何個選べるか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 20。",
+        "zh-Hans": "答案是 20。",
+        "en": "The answer is 20.",
+        "ja": "答えは 20 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "構造：取所有 3 個元素的子集合，共 C(6, 3) = 20 個。兩個不同的 3 元集合元素個數相同，不可能一個包含另一個，所以 20 個做得到。",
+          "證明不能更多。把 1～6 的每一種排列 (b₁, b₂, ⋯, b₆) 對應到一條「鏈」：∅ ⊂ {b₁} ⊂ {b₁, b₂} ⊂ ⋯ ⊂ {b₁, ⋯, b₆}，共 6! = 720 條鏈。",
+          "同一條鏈上的集合兩兩有包含關係，所以每條鏈上最多只有 1 個被挑中的集合。",
+          "一個 k 元子集合 A 出現在幾條鏈上？排列的前 k 個必須恰好是 A 的元素，有 k! × (6 − k)! 條。這個數在 k = 3 時最小，為 3! × 3! = 36。所以每個被挑中的集合至少佔用 36 條鏈，且不同集合佔用的鏈互不重疊。",
+          "被挑中的集合數 × 36 ≤ 720，即至多 20 個。因此最多可以挑出 20 個。"
+        ],
+        "zh-Hans": [
+          "构造：取所有 3 个元素的子集合，共 C(6, 3) = 20 个。两个不同的 3 元集合元素个数相同，不可能一个包含另一个，所以 20 个做得到。",
+          "证明不能更多。把 1～6 的每一种排列 (b₁, b₂, ⋯, b₆) 对应到一条「链」：∅ ⊂ {b₁} ⊂ {b₁, b₂} ⊂ ⋯ ⊂ {b₁, ⋯, b₆}，共 6! = 720 条链。",
+          "同一条链上的集合两两有包含关系，所以每条链上最多只有 1 个被挑中的集合。",
+          "一个 k 元子集合 A 出现在几条链上？排列的前 k 个必须恰好是 A 的元素，有 k! × (6 − k)! 条。这个数在 k = 3 时最小，为 3! × 3! = 36。所以每个被挑中的集合至少占用 36 条链，且不同集合占用的链互不重叠。",
+          "被挑中的集合数 × 36 ≤ 720，即至多 20 个。因此最多可以挑出 20 个。"
+        ],
+        "en": [
+          "Construction: take all 3-element subsets, C(6, 3) = 20 of them. Two different sets of the same size cannot contain one another, so 20 is achievable.",
+          "No more is possible. Map each ordering (b₁, b₂, …, b₆) of 1 to 6 to the chain ∅ ⊂ {b₁} ⊂ {b₁, b₂} ⊂ ⋯ ⊂ {b₁, …, b₆}; there are 6! = 720 chains.",
+          "Any two sets on one chain are nested, so each chain contains at most one selected set.",
+          "A k-element subset A lies on the chains whose first k entries are exactly the elements of A: k! × (6 − k)! of them. This is smallest at k = 3, namely 3! × 3! = 36. So each selected set uses at least 36 chains, and different selected sets use disjoint chains.",
+          "Thus (number selected) × 36 ≤ 720, so at most 20 sets. The maximum is 20."
+        ],
+        "ja": [
+          "構成：3 要素の部分集合をすべてとると C(6, 3) = 20 個。要素数が同じ異なる集合は互いに含みあえないので、20 個は可能。",
+          "それより多くはとれないことを示す。1～6 の各順列 (b₁, b₂, …, b₆) に鎖 ∅ ⊂ {b₁} ⊂ {b₁, b₂} ⊂ ⋯ ⊂ {b₁, …, b₆} を対応させる。鎖は 6! = 720 本。",
+          "同じ鎖の上の集合どうしは包含関係にあるので、各鎖には選んだ集合が高々 1 つしかない。",
+          "k 要素の部分集合 A が載る鎖は、順列の最初の k 個がちょうど A の要素であるもので k! × (6 − k)! 本ある。これは k = 3 のとき最小で 3! × 3! = 36。よって選んだ集合はそれぞれ 36 本以上の鎖を使い、異なる集合の使う鎖は重ならない。",
+          "よって（選んだ個数）× 36 ≤ 720 となり、高々 20 個。最大は 20。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "20"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "combinatorics-grade11-foundation",
+        "notes": "Sperner 定理：互不包含的子集族最大為 C(6, 3)，用排列鏈的雙重計數證上界。掃過 /互不包含|包含另|沒有.*包含|子集.*包含/（5 題）；最接近 logic_grade11_foundation_019（1～10 中任兩數之和不在集合內的最大子集），差異：該題是和不在集合內的極值；本題是集合族的包含關係，構造層 + 鏈計數上界"
+      }
+    },
+    {
+      "id": "combinatorics_grade11_foundation_077",
+      "reviewStatus": "ok",
+      "topic": "combinatorics",
+      "subtopic": "triangle_free_maximum_acquaintances",
+      "tags": [
+        "c:graph_theory",
+        "c:inequality",
+        "m:extremal"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade11",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一場聚會有 10 個人，其中某些人兩兩互相認識（認識是相互的）。已知在聚會中找不到 3 個人兩兩互相認識。聚會中「互相認識的兩人組」最多可能有幾組？",
+        "zh-Hans": "一场聚会有 10 个人，其中某些人两两互相认识（认识是相互的）。已知在聚会中找不到 3 个人两两互相认识。聚会中「互相认识的两人组」最多可能有几组？",
+        "en": "At a party of 10 people, some pairs know each other (acquaintance is mutual). It is known that there are no 3 people who all know each other. What is the largest possible number of pairs of people who know each other?",
+        "ja": "10 人が集まるパーティーで、何組かの 2 人は互いに知り合いである（知り合いの関係は相互的）。どの 3 人をとっても、3 人全員が互いに知り合いということはない。互いに知り合いである 2 人組は最大で何組ありうるか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 25。",
+        "zh-Hans": "答案是 25。",
+        "en": "The answer is 25.",
+        "ja": "答えは 25 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "構造：把 10 人分成兩組各 5 人，同組的人互不認識，不同組的人全都互相認識。共 5 × 5 = 25 組，而且任取 3 人必有兩人同組、互不認識，符合條件。",
+          "證明不能更多：設認識最多人的那位是 P，他認識 d 個人。這 d 個人之間兩兩互不認識，否則與 P 形成 3 人兩兩認識。",
+          "所以每一組互相認識的兩人中，至少有一人不在這 d 人之中，也就是至少有一人屬於其餘的 10 − d 人。",
+          "那 10 − d 人每人最多認識 d 人，所以認識的組數 ≤ (10 − d) × d。",
+          "(10 − d) × d ≤ 5 × 5 = 25（兩數和固定為 10，兩數相等時乘積最大）。所以最多 25 組。"
+        ],
+        "zh-Hans": [
+          "构造：把 10 人分成两组各 5 人，同组的人互不认识，不同组的人全都互相认识。共 5 × 5 = 25 组，而且任取 3 人必有两人同组、互不认识，符合条件。",
+          "证明不能更多：设认识最多人的那位是 P，他认识 d 个人。这 d 个人之间两两互不认识，否则与 P 形成 3 人两两认识。",
+          "所以每一组互相认识的两人中，至少有一人不在这 d 人之中，也就是至少有一人属于其余的 10 − d 人。",
+          "那 10 − d 人每人最多认识 d 人，所以认识的组数 ≤ (10 − d) × d。",
+          "(10 − d) × d ≤ 5 × 5 = 25（两数和固定为 10，两数相等时乘积最大）。所以最多 25 组。"
+        ],
+        "en": [
+          "Construction: split the 10 people into two groups of 5; nobody knows anyone in their own group and everybody knows everyone in the other group. That gives 5 × 5 = 25 pairs, and any 3 people include two from the same group who do not know each other, so the condition holds.",
+          "Upper bound: let P be a person with the most acquaintances, say d of them. Those d people pairwise do not know each other, or they would form a mutually acquainted trio with P.",
+          "So every acquainted pair has at least one member outside these d people, i.e. among the other 10 − d people.",
+          "Each of those 10 − d people knows at most d others, so the number of acquainted pairs is at most (10 − d) × d.",
+          "(10 − d) × d ≤ 5 × 5 = 25, since for a fixed sum 10 the product is largest when the two numbers are equal. So the maximum is 25."
+        ],
+        "ja": [
+          "構成：10 人を 5 人ずつの 2 グループに分け、同じグループの人どうしは知り合いでなく、異なるグループの人どうしは全員知り合いとする。知り合いの組は 5 × 5 = 25 組で、どの 3 人にも同じグループの 2 人が含まれ互いに知り合いでないので、条件を満たす。",
+          "これより多くできないこと：知り合いが最も多い人を P とし、その数を d とする。この d 人どうしは互いに知り合いでない（さもなくば P と合わせて 3 人全員が知り合いになる）。",
+          "よって知り合いの 2 人組には、この d 人以外、すなわち残りの 10 − d 人に属する人が少なくとも 1 人いる。",
+          "残りの 10 − d 人はそれぞれ高々 d 人としか知り合いでないので、知り合いの組の数は (10 − d) × d 以下。",
+          "和が 10 で一定の 2 数の積は等しいとき最大なので、(10 − d) × d ≤ 5 × 5 = 25。最大は 25 組。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "25"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "combinatorics-grade11-foundation",
+        "notes": "無三角形圖的最大邊數（Mantel）：完全二部圖構造，最大度數頂點的鄰居互不相連給上界。掃過 /互相認識|彼此認識|任三|三人.*兩兩/（2 題）；最接近 logic_grade11_foundation_015（保證 3 人兩兩認識或兩兩不認識的最少人數 6），差異：該題是 Ramsey 數；本題固定 10 人求不含三角形時最多的認識組數，用構造 + 度數上界"
+      }
+    },
+    {
+      "id": "combinatorics_grade11_foundation_078",
+      "reviewStatus": "ok",
+      "topic": "combinatorics",
+      "subtopic": "expected_position_of_first_red_card",
+      "tags": [
+        "c:expectation",
+        "c:probability",
+        "m:bijection"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade11",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一疊牌只有 10 張：3 張紅牌與 7 張黑牌。洗勻之後從最上面一張一張翻開，設第一張紅牌是第 X 張被翻開的。X 的期望值是最簡分數 m/n，求 m + n。",
+        "zh-Hans": "一叠牌只有 10 张：3 张红牌与 7 张黑牌。洗匀之后从最上面一张一张翻开，设第一张红牌是第 X 张被翻开的。X 的期望值是最简分数 m/n，求 m + n。",
+        "en": "A deck has only 10 cards: 3 red and 7 black. After shuffling, the cards are turned over one at a time from the top, and the first red card is the X-th card turned over. The expected value of X is the fraction m/n in lowest terms. Find m + n.",
+        "ja": "赤 3 枚と黒 7 枚の計 10 枚だけのカードの山がある。よく切ってから上から 1 枚ずつめくり、最初の赤のカードが X 枚目にめくられたとする。X の期待値が既約分数 m/n で表されるとき、m + n を求めなさい。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 15。",
+        "zh-Hans": "答案是 15。",
+        "en": "The answer is 15.",
+        "ja": "答えは 15 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "3 張紅牌把 7 張黑牌分隔成 4 段：第一張紅牌之前、第一與第二張紅牌之間、第二與第三張紅牌之間、第三張紅牌之後。",
+          "看任一張指定的黑牌與 3 張紅牌這 4 張牌的相對順序：洗勻後這 4 張的排列等可能，這張黑牌排在 4 個位置中任何一個的機率都是 1/4。所以它排在所有紅牌之前的機率是 1/4。",
+          "期望值可以逐張相加：排在第一張紅牌之前的黑牌張數，期望值是 7 × 1/4 = 7/4。",
+          "X 等於「第一張紅牌之前的黑牌張數」再加 1，所以 E[X] = 7/4 + 1 = 11/4。",
+          "11 與 4 互質，m + n = 11 + 4 = 15。"
+        ],
+        "zh-Hans": [
+          "3 张红牌把 7 张黑牌分隔成 4 段：第一张红牌之前、第一与第二张红牌之间、第二与第三张红牌之间、第三张红牌之后。",
+          "看任一张指定的黑牌与 3 张红牌这 4 张牌的相对顺序：洗匀后这 4 张的排列等可能，这张黑牌排在 4 个位置中任何一个的概率都是 1/4。所以它排在所有红牌之前的概率是 1/4。",
+          "期望值可以逐张相加：排在第一张红牌之前的黑牌张数，期望值是 7 × 1/4 = 7/4。",
+          "X 等于「第一张红牌之前的黑牌张数」再加 1，所以 E[X] = 7/4 + 1 = 11/4。",
+          "11 与 4 互质，m + n = 11 + 4 = 15。"
+        ],
+        "en": [
+          "The 3 red cards divide the 7 black cards into 4 gaps: before the first red, between the first and second, between the second and third, and after the third.",
+          "Consider a particular black card together with the 3 red cards: after shuffling, all orders of these 4 cards are equally likely, so the black card is equally likely to be in any of the 4 positions among them. Hence it comes before all red cards with probability 1/4.",
+          "Expectations add card by card: the expected number of black cards before the first red card is 7 × 1/4 = 7/4.",
+          "X equals the number of black cards before the first red card plus 1, so E[X] = 7/4 + 1 = 11/4.",
+          "11 and 4 are coprime, so m + n = 11 + 4 = 15."
+        ],
+        "ja": [
+          "3 枚の赤のカードは 7 枚の黒のカードを 4 つの区間に分ける：最初の赤の前、1 枚目と 2 枚目の赤の間、2 枚目と 3 枚目の赤の間、3 枚目の赤の後。",
+          "特定の黒のカード 1 枚と赤 3 枚の計 4 枚の相対的な順序を考えると、よく切ったのでどの順序も同様に確からしく、その黒のカードは 4 つの位置のどれにも確率 1/4 で来る。よってすべての赤より前にある確率は 1/4。",
+          "期待値はカードごとに足せるので、最初の赤より前にある黒のカードの枚数の期待値は 7 × 1/4 = 7/4。",
+          "X は「最初の赤より前の黒の枚数」に 1 を足したものなので、E[X] = 7/4 + 1 = 11/4。",
+          "11 と 4 は互いに素なので、m + n = 11 + 4 = 15。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "15"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "combinatorics-grade11-foundation",
+        "notes": "第一張紅牌位置的期望：每張黑牌落在 4 段的對稱性，期望 = 7/4 + 1。掃過 /第一張|最先.*出現|抽到第一|紅.*黑.*第/（6 題）；最接近 combinatorics_grade10_foundation_064（隨機試鑰匙次數的期望），差異：該題一把對的鑰匙、需處理「可確定就停」；本題 3 張紅牌，用黑牌與紅牌相對順序的對稱性"
+      }
     }
   ]
 }

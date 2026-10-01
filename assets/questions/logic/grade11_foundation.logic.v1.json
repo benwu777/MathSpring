@@ -4850,6 +4850,82 @@
         "reference": "logic-grade11-foundation",
         "notes": "題型：循環賽勝場的上界（計算「只能從哪些比賽得勝」）＋構造達成。掃過 循環賽|每兩隊|勝場 全庫：logic_grade10_015 是已知四隊勝場求第五隊（總和守恆），logic_grade6_076 是積分反推平手，combinatorics_grade11_057 是不含全勝隊的賽果數；沒有「高勝場隊數最多」的極值題。"
       }
+    },
+    {
+      "id": "logic_grade11_foundation_054",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "knights_knaves_row_left_right_count",
+      "tags": [
+        "c:logic_deduction",
+        "m:contradiction",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade11",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "2025 個人由左到右排成一列，每個人不是永遠說真話的誠實者，就是永遠說假話的說謊者。每個人都說了同一句話：「站在我左邊的說謊者人數，比站在我右邊的誠實者人數多。」（站在最左邊的人左邊沒有人，站在最右邊的人右邊沒有人。）求這 2025 人之中誠實者的人數。",
+        "zh-Hans": "2025 个人由左到右排成一列，每个人不是永远说真话的诚实者，就是永远说假话的说谎者。每个人都说了同一句话：「站在我左边的说谎者人数，比站在我右边的诚实者人数多。」（站在最左边的人左边没有人，站在最右边的人右边没有人。）求这 2025 人之中诚实者的人数。",
+        "en": "2025 people stand in a row from left to right. Each is either a truth-teller who always tells the truth or a liar who always lies. Every one of them says: \"The number of liars standing to my left is greater than the number of truth-tellers standing to my right.\" (Nobody stands to the left of the leftmost person or to the right of the rightmost person.) How many truth-tellers are among the 2025 people?",
+        "ja": "2025 人が左から右へ一列に並んでいる。各人は常に本当のことを言う正直者か、常にうそをつくうそつきのどちらかである。全員が同じことを言った：「私より左にいるうそつきの人数は、私より右にいる正直者の人数より多い。」（いちばん左の人の左、いちばん右の人の右には誰もいない。）2025 人のうち正直者は何人か。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 1012。",
+        "zh-Hans": "答案是 1012。",
+        "en": "The answer is 1012.",
+        "ja": "答えは 1012 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "先證明不會出現「誠實者緊接在說謊者左邊」。若第 i 人誠實、第 i + 1 人說謊：第 i + 1 人左邊的說謊者數和第 i 人一樣（多出來的第 i 人是誠實者），右邊的誠實者數也和第 i 人一樣（少掉的第 i + 1 人是說謊者），兩人說的話真假相同，與一誠一謊矛盾。",
+          "所以一旦出現誠實者，他右邊全是誠實者：隊伍是「左邊 a 個說謊者、右邊 b 個誠實者」，a + b = 2025。全是說謊者不行：最右邊那人左邊有 2024 個說謊者 > 0，說的是真話，矛盾。全是誠實者也不行：最左邊那人說 0 > 2024，是假話，矛盾。",
+          "第 a 人（最後一個說謊者）：左邊 a − 1 個說謊者、右邊 b 個誠實者，他的話必須是假的，所以 a − 1 ≤ b。第 a + 1 人（第一個誠實者）：左邊 a 個說謊者、右邊 b − 1 個誠實者，他的話是真的，所以 a > b − 1，即 a ≥ b。",
+          "其餘的人也都符合：越左邊的說謊者，左邊說謊者越少、右邊誠實者不變，話更假；越右邊的誠實者，右邊誠實者越少、左邊說謊者不變，話更真。",
+          "於是 b ≤ a ≤ b + 1，而 a + b = 2025 是奇數，所以 a = b + 1，b = 1012。誠實者有 1012 人。"
+        ],
+        "zh-Hans": [
+          "先证明不会出现「诚实者紧接在说谎者左边」。若第 i 人诚实、第 i + 1 人说谎：第 i + 1 人左边的说谎者数和第 i 人一样（多出来的第 i 人是诚实者），右边的诚实者数也和第 i 人一样（少掉的第 i + 1 人是说谎者），两人说的话真假相同，与一诚一谎矛盾。",
+          "所以一旦出现诚实者，他右边全是诚实者：队伍是「左边 a 个说谎者、右边 b 个诚实者」，a + b = 2025。全是说谎者不行：最右边那人左边有 2024 个说谎者 > 0，说的是真话，矛盾。全是诚实者也不行：最左边那人说 0 > 2024，是假话，矛盾。",
+          "第 a 人（最后一个说谎者）：左边 a − 1 个说谎者、右边 b 个诚实者，他的话必须是假的，所以 a − 1 ≤ b。第 a + 1 人（第一个诚实者）：左边 a 个说谎者、右边 b − 1 个诚实者，他的话是真的，所以 a > b − 1，即 a ≥ b。",
+          "其余的人也都符合：越左边的说谎者，左边说谎者越少、右边诚实者不变，话更假；越右边的诚实者，右边诚实者越少、左边说谎者不变，话更真。",
+          "于是 b ≤ a ≤ b + 1，而 a + b = 2025 是奇数，所以 a = b + 1，b = 1012。诚实者有 1012 人。"
+        ],
+        "en": [
+          "First, a truth-teller cannot stand immediately left of a liar. If person i is a truth-teller and person i + 1 a liar, then person i + 1 has the same number of liars to the left as person i (the extra person i is a truth-teller) and the same number of truth-tellers to the right (the dropped person i + 1 is a liar), so their statements have the same truth value — contradicting one truthful and one lying.",
+          "So once a truth-teller appears, everyone to his right is a truth-teller: the row is a liars followed by b truth-tellers, with a + b = 2025. All liars is impossible: the rightmost person has 2024 liars to his left > 0, so he would be telling the truth. All truth-tellers is impossible: the leftmost would be claiming 0 > 2024, a falsehood.",
+          "Person a (the last liar) has a − 1 liars on the left and b truth-tellers on the right; his statement must be false, so a − 1 ≤ b. Person a + 1 (the first truth-teller) has a liars on the left and b − 1 truth-tellers on the right; his statement is true, so a > b − 1, i.e. a ≥ b.",
+          "Everyone else is then consistent: liars further left have fewer liars to their left and the same truth-tellers to their right, so their statements are even more false; truth-tellers further right have fewer truth-tellers to their right and the same liars to their left, so their statements are even more true.",
+          "Hence b ≤ a ≤ b + 1, and since a + b = 2025 is odd, a = b + 1 and b = 1012. There are 1012 truth-tellers."
+        ],
+        "ja": [
+          "まず「正直者のすぐ右にうそつき」という並びはありえないことを示す。i 番目が正直者で i + 1 番目がうそつきなら、i + 1 番目の左のうそつきの数は i 番目と同じ（増えた i 番目は正直者）で、右の正直者の数も i 番目と同じ（減った i + 1 番目はうそつき）。よって 2 人の発言の真偽は同じになり、一方が正直者で他方がうそつきであることに矛盾する。",
+          "したがって正直者が現れたら、その右は全員正直者で、列は「左に a 人のうそつき、右に b 人の正直者」（a + b = 2025）。全員うそつきは不可：いちばん右の人の左にはうそつきが 2024 人 > 0 で本当のことになり矛盾。全員正直者も不可：いちばん左の人の発言 0 > 2024 はうそで矛盾。",
+          "a 番目（最後のうそつき）：左にうそつき a − 1 人、右に正直者 b 人で、発言はうそなので a − 1 ≤ b。a + 1 番目（最初の正直者）：左にうそつき a 人、右に正直者 b − 1 人で、発言は本当なので a > b − 1、すなわち a ≥ b。",
+          "残りの人も矛盾しない：より左のうそつきは左のうそつきが少なく右の正直者は同じなので発言はなおさらうそ。より右の正直者は右の正直者が少なく左のうそつきは同じなので発言はなおさら本当。",
+          "よって b ≤ a ≤ b + 1 で、a + b = 2025 は奇数なので a = b + 1、b = 1012。正直者は 1012 人。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "1012"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 4
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade11-foundation",
+        "notes": "誠實者／說謊者排成一列的單調結構：相鄰「誠、謊」兩人說法真假相同而矛盾，故先謊後誠，再由交界兩人定比例。掃過 /說謊|騎士|誠實/（18 題）；最接近 logic_grade10_foundation_029（10 人圍圈說「左邊的人說謊」），差異：該題圍圈、單一鄰居；本題排成一列、陳述比較左右兩側人數，需證先謊後誠的結構再由交界不等式定人數"
+      }
     }
   ]
 }
