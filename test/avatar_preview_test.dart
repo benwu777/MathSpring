@@ -1,5 +1,8 @@
 import 'dart:io';
+import 'dart:typed_data';
+import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mathspring/models/avatar_configuration.dart';
 import 'package:mathspring/services/avatar_asset_catalog.dart';
@@ -156,13 +159,15 @@ void main() {
       ),
     );
 
-    expect(
-      find.byType(ColorFiltered),
-      findsNWidgets(2),
-      reason: '只有臉部與鼻子皮膚圖層可以套用膚色濾鏡',
-    );
-    final List<ColorFiltered> skinFilters =
-        tester.widgetList<ColorFiltered>(find.byType(ColorFiltered)).toList();
+    final List<ColorFiltered> skinFilters = tester
+        .widgetList<ColorFiltered>(find.byType(ColorFiltered))
+        .where(
+          (ColorFiltered filter) =>
+              filter.colorFilter ==
+              const ColorFilter.mode(Color(0xFFB77B49), BlendMode.modulate),
+        )
+        .toList();
+    expect(skinFilters, hasLength(2), reason: '只有臉部與鼻子皮膚圖層可以套用膚色濾鏡');
     expect(
       skinFilters.map((ColorFiltered filter) => filter.colorFilter),
       everyElement(
@@ -170,6 +175,165 @@ void main() {
       ),
       reason: '臉部與鼻子都必須保留透明畫布，不能用 multiply 填滿背景',
     );
+  });
+
+  testWidgets('applies the selected girl hair tint to the front layer',
+      (WidgetTester tester) async {
+    final AvatarConfiguration girl = AvatarConfiguration.defaultFor(
+      AvatarPresentation.girl,
+    ).copyWith(hairColorId: 'girl_hair_color_03');
+
+    await tester.pumpWidget(
+      MaterialApp(home: Scaffold(body: AvatarPreview(configuration: girl))),
+    );
+
+    final ColorFiltered frontTint = tester.widget<ColorFiltered>(
+      find.byKey(const ValueKey<String>('avatar_hair_front_tint')),
+    );
+    expect(
+      frontTint.colorFilter,
+      ColorFilter.matrix(_hairTintMatrix(const Color(0xFF7B3F20))),
+    );
+  });
+
+  testWidgets('applies the selected girl hair tint to hair 06 back layer',
+      (WidgetTester tester) async {
+    final AvatarConfiguration girl = AvatarConfiguration.defaultFor(
+      AvatarPresentation.girl,
+    ).copyWith(
+      hairId: 'girl_hair_06',
+      hairColorId: 'girl_hair_color_03',
+    );
+
+    await tester.pumpWidget(
+      MaterialApp(home: Scaffold(body: AvatarPreview(configuration: girl))),
+    );
+
+    final ColorFiltered backTint = tester.widget<ColorFiltered>(
+      find.byKey(const ValueKey<String>('avatar_hair_back_tint')),
+    );
+    expect(
+      backTint.colorFilter,
+      ColorFilter.matrix(_hairTintMatrix(const Color(0xFF7B3F20))),
+    );
+  });
+
+  testWidgets('applies the selected shared hair tint to boy layers',
+      (WidgetTester tester) async {
+    final AvatarConfiguration boy = AvatarConfiguration.defaultFor(
+      AvatarPresentation.boy,
+    ).copyWith(hairColorId: 'girl_hair_color_03');
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Scaffold(
+          body: AvatarPreview(
+            configuration: boy,
+          ),
+        ),
+      ),
+    );
+
+    final ColorFiltered frontTint = tester.widget<ColorFiltered>(
+      find.byKey(const ValueKey<String>('avatar_hair_front_tint')),
+    );
+    expect(frontTint.colorFilter,
+        ColorFilter.matrix(_hairTintMatrix(const Color(0xFF7B3F20))));
+  });
+
+  testWidgets('renders tinted girl hair with a transparent canvas corner',
+      (WidgetTester tester) async {
+    final AvatarConfiguration girl = AvatarConfiguration.defaultFor(
+      AvatarPresentation.girl,
+    ).copyWith(hairColorId: 'girl_hair_color_03');
+    await tester.pumpWidget(
+      Directionality(
+        textDirection: TextDirection.ltr,
+        child: RepaintBoundary(
+          key: const ValueKey<String>('tinted_girl_hair_boundary'),
+          child: AvatarPreview(configuration: girl),
+        ),
+      ),
+    );
+
+    final ColorFiltered hairTreatment = tester.widget<ColorFiltered>(
+      find.byKey(const ValueKey<String>('avatar_hair_front_tint')),
+    );
+    final AvatarAssetBundle assets = AvatarAssetCatalog.resolve(girl);
+    expect(
+      hairTreatment.colorFilter,
+      ColorFilter.matrix(_hairTintMatrix(assets.hairTint!)),
+    );
+    final RenderRepaintBoundary boundary = tester.renderObject(
+      find.byKey(const ValueKey<String>('tinted_girl_hair_boundary')),
+    );
+    final (ui.Image, ByteData?) rendered =
+        await tester.runAsync<(ui.Image, ByteData?)>(() async {
+              final ui.Image image = await boundary.toImage();
+              return (
+                image,
+                await image.toByteData(format: ui.ImageByteFormat.rawRgba),
+              );
+            }) ??
+            (throw StateError('Unable to render tinted girl hair preview'));
+    expect(
+      rendered.$2!.getUint8((3 * rendered.$1.width + 3) * 4 + 3),
+      0,
+      reason: '預覽畫布內的角落必須維持透明',
+    );
+  });
+
+  testWidgets('renders visibly different pixels for different girl hair colours',
+      (WidgetTester tester) async {
+    final AvatarConfiguration base = AvatarConfiguration.defaultFor(
+      AvatarPresentation.girl,
+    );
+    await tester.pumpWidget(
+      Directionality(
+        textDirection: TextDirection.ltr,
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            RepaintBoundary(
+              key: const ValueKey<String>('black_hair_preview'),
+              child: AvatarPreview(
+                configuration: base.copyWith(
+                  hairColorId: 'girl_hair_color_01',
+                ),
+              ),
+            ),
+            RepaintBoundary(
+              key: const ValueKey<String>('silver_hair_preview'),
+              child: AvatarPreview(
+                configuration: base.copyWith(
+                  hairColorId: 'girl_hair_color_06',
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+
+    Future<ByteData> pixels(String key) async {
+      final RenderRepaintBoundary boundary = tester.renderObject(
+        find.byKey(ValueKey<String>(key)),
+      );
+      final ByteData? data = await tester.runAsync<ByteData>(() async {
+            final ui.Image image = await boundary.toImage();
+            return (await image.toByteData(
+              format: ui.ImageByteFormat.rawRgba,
+            ))!;
+          });
+      return data ?? (throw StateError('Unable to render $key'));
+    }
+
+    final ByteData black = await pixels('black_hair_preview');
+    final ByteData silver = await pixels('silver_hair_preview');
+    int changedChannels = 0;
+    for (int index = 0; index < black.lengthInBytes; index++) {
+      if (black.getUint8(index) != silver.getUint8(index)) changedChannels++;
+    }
+    expect(changedChannels, greaterThan(500));
   });
 
   testWidgets('renders glasses as part of the selected eyes layer',
@@ -391,21 +555,18 @@ void main() {
         'assets/avatars/girl/mouth/mouth-07.png');
   });
 
-  test('keeps the boy baseline hair on the shared face canvas', () {
+  test('raises the boy baseline hair over the shared face canvas', () {
     final AvatarAssetBundle assets = AvatarAssetCatalog.resolve(
       AvatarConfiguration.defaultFor(AvatarPresentation.boy),
     );
 
     expect(assets.hairScale, 1);
-    expect(assets.hairOffsetY, 0);
+    expect(assets.hairOffsetY, -.075);
   });
 
   test('keeps the new boy hairstyle artwork on its aligned canvas', () {
     for (final String hairId in <String>[
       'boy_hair_06',
-      'boy_hair_07',
-      'boy_hair_08',
-      'boy_hair_09',
     ]) {
       final AvatarAssetBundle assets = AvatarAssetCatalog.resolve(
         _withOption(AvatarPresentation.boy, 'hair', hairId),
@@ -423,15 +584,18 @@ void main() {
     expect(assets.hairScaleX, .9);
   });
 
-  test('keeps rebuilt boy hairstyles on the hair 01 canonical placement', () {
+  test('keeps rebuilt boy hairstyles on their intended vertical placement', () {
     for (final String hairId in <String>[
+      'boy_hair_01',
       'boy_hair_02',
       'boy_hair_03',
       'boy_hair_04',
+      'boy_hair_05',
       'boy_hair_06',
       'boy_hair_07',
       'boy_hair_08',
       'boy_hair_09',
+      'boy_hair_10',
     ]) {
       final AvatarAssetBundle assets = AvatarAssetCatalog.resolve(
         _withOption(AvatarPresentation.boy, 'hair', hairId),
@@ -440,7 +604,22 @@ void main() {
       expect(assets.hairScale, 1, reason: hairId);
       expect(assets.hairScaleX, 1, reason: hairId);
       expect(assets.hairOffsetX, 0, reason: hairId);
-      expect(assets.hairOffsetY, 0, reason: hairId);
+      expect(
+        assets.hairOffsetY,
+        const <String, double>{
+          'boy_hair_01': -.075,
+          'boy_hair_02': -.05,
+          'boy_hair_03': -.05,
+          'boy_hair_04': -.075,
+          'boy_hair_05': -.075,
+          'boy_hair_07': -.075,
+          'boy_hair_08': -.10,
+          'boy_hair_09': -.09,
+          'boy_hair_10': -.07,
+        }[hairId] ??
+            0,
+        reason: hairId,
+      );
     }
   });
 
@@ -578,6 +757,77 @@ void main() {
       expect(assets.mouthOffsetY, usesSmallNose ? .20 : .168, reason: id);
     }
   });
+
+  test('uses the redesigned first boy hairstyle for every boy face shape', () {
+    final AvatarConfiguration base = AvatarConfiguration.defaultFor(
+      AvatarPresentation.boy,
+    );
+
+    for (final String faceId in AvatarConfiguration.optionsFor(
+      AvatarPresentation.boy,
+      'face',
+    )) {
+      expect(
+        AvatarAssetCatalog.resolve(
+          base.copyWith(faceId: faceId, hairId: 'boy_hair_01'),
+        ).hairFrontAsset,
+        'assets/avatars/boy/hair/hair-01.png',
+        reason: faceId,
+      );
+    }
+  });
+
+  test('resolves the animated boy hairstyles 08 through 10', () {
+    final AvatarConfiguration base = AvatarConfiguration.defaultFor(
+      AvatarPresentation.boy,
+    );
+    final Set<String> resolvedAssets = <String>{
+      for (final String hairId in <String>[
+        'boy_hair_08',
+        'boy_hair_09',
+        'boy_hair_10',
+      ])
+        AvatarAssetCatalog.resolve(base.copyWith(hairId: hairId)).hairFrontAsset,
+    };
+
+    expect(resolvedAssets, <String>{
+      'assets/avatars/boy/hair/hair-08.png',
+      'assets/avatars/boy/hair/hair-09.png',
+      'assets/avatars/boy/hair/hair-10.png',
+    });
+  });
+
+  test('keeps the requested individual crown lifts for rebuilt boy hairstyles',
+      () {
+    final AvatarConfiguration base = AvatarConfiguration.defaultFor(
+      AvatarPresentation.boy,
+    );
+    const Map<String, double> expectedOffsets = <String, double>{
+      'boy_hair_01': -.075,
+      'boy_hair_02': -.05,
+      'boy_hair_03': -.05,
+      'boy_hair_04': -.075,
+      'boy_hair_05': -.075,
+      'boy_hair_07': -.075,
+      'boy_hair_08': -.10,
+      'boy_hair_09': -.09,
+      'boy_hair_10': -.07,
+    };
+
+    for (final MapEntry<String, double> expected in expectedOffsets.entries) {
+      expect(
+        AvatarAssetCatalog.resolve(base.copyWith(hairId: expected.key))
+            .hairOffsetY,
+        expected.value,
+        reason: expected.key,
+      );
+    }
+    expect(
+      AvatarAssetCatalog.resolve(base.copyWith(hairId: 'boy_hair_06'))
+          .hairOffsetY,
+      0,
+    );
+  });
 }
 
 const List<String> _categories = <String>[
@@ -626,3 +876,28 @@ String _signature(AvatarAssetBundle assets) => <Object?>[
       assets.mouthOffsetY,
       assets.mouthScaleX,
     ].join('|');
+
+List<double> _hairTintMatrix(Color tint) {
+  const double redLuma = .2126;
+  const double greenLuma = .7152;
+  const double blueLuma = .0722;
+  const double baseBrightness = .85;
+  const double detailBrightness = .15;
+  List<double> channel(double target) => <double>[
+        redLuma * target * detailBrightness,
+        greenLuma * target * detailBrightness,
+        blueLuma * target * detailBrightness,
+        0,
+        255 * target * baseBrightness,
+      ];
+  return <double>[
+    ...channel(tint.r),
+    ...channel(tint.g),
+    ...channel(tint.b),
+    0,
+    0,
+    0,
+    1,
+    0,
+  ];
+}

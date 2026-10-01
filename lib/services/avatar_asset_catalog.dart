@@ -15,6 +15,7 @@ class AvatarAssetBundle {
     this.mouthAsset,
     this.hairScale = 1,
     this.hairScaleX = 1,
+    this.hairScaleY = 1,
     this.hairOffsetX = 0,
     this.hairOffsetY = 0,
     this.eyesOffsetY = 0,
@@ -22,6 +23,7 @@ class AvatarAssetBundle {
     this.eyesScaleY = 1,
     this.skinTint,
     this.noseTint,
+    this.hairTint,
     this.noseScale = 1,
     this.noseOffsetY = 0,
     this.mouthOffsetY = 0,
@@ -42,6 +44,7 @@ class AvatarAssetBundle {
   final String? mouthAsset;
   final double hairScale;
   final double hairScaleX;
+  final double hairScaleY;
   final double hairOffsetX;
   final double hairOffsetY;
   final double eyesOffsetY;
@@ -49,6 +52,10 @@ class AvatarAssetBundle {
   final double eyesScaleY;
   final Color? skinTint;
   final Color? noseTint;
+
+  /// Girls share neutral hairstyle artwork; this tint supplies the selected
+  /// hair colour while keeping the image's transparent pixels and highlights.
+  final Color? hairTint;
   final double noseScale;
   final double noseOffsetY;
   final double mouthOffsetY;
@@ -62,24 +69,58 @@ class AvatarOptionTreatment {
     this.scale = 1,
     this.scaleX = 1,
     this.scaleY = 1,
+    this.offsetX = 0,
     this.offsetY = 0,
+    this.assetOverride,
     this.tint,
   });
 
   final double scale;
   final double scaleX;
   final double scaleY;
+  final double offsetX;
   final double offsetY;
+  final String? assetOverride;
   final Color? tint;
 
   bool get isNeutral =>
-      scale == 1 && scaleX == 1 && scaleY == 1 && offsetY == 0 && tint == null;
+      scale == 1 &&
+      scaleX == 1 &&
+      scaleY == 1 &&
+      offsetX == 0 &&
+      offsetY == 0 &&
+      assetOverride == null &&
+      tint == null;
 }
 
 class AvatarAssetCatalog {
   const AvatarAssetCatalog._();
 
   static const AvatarOptionTreatment _neutral = AvatarOptionTreatment();
+
+  /// Crown lifts for the rebuilt boy hair layers.  The compact styles need a
+  /// little more lift than the longer first three styles to hide the scalp.
+  static const Map<String, double> _boyHairCrownLifts = <String, double>{
+    'boy_hair_01': -.075,
+    'boy_hair_02': -.05,
+    'boy_hair_03': -.05,
+    'boy_hair_04': -.075,
+    'boy_hair_05': -.075,
+    'boy_hair_07': -.075,
+    'boy_hair_08': -.10,
+    'boy_hair_09': -.09,
+    'boy_hair_10': -.07,
+  };
+
+  /// Fixed display swatches and runtime tints for the shared hair colours.
+  static const Map<String, Color> girlHairColors = <String, Color>{
+    'girl_hair_color_01': Color(0xFF1B1B1B),
+    'girl_hair_color_02': Color(0xFF3A2418),
+    'girl_hair_color_03': Color(0xFF7B3F20),
+    'girl_hair_color_04': Color(0xFFA97142),
+    'girl_hair_color_05': Color(0xFF6F1D1B),
+    'girl_hair_color_06': Color(0xFF9EA3A8),
+  };
 
   /// Skin is never only a base swap: the nose layer receives the same tint so
   /// a deeper skin tone never carries a pale nose.
@@ -114,6 +155,68 @@ class AvatarAssetCatalog {
     'girl_hair_07': AvatarOptionTreatment(scale: .9, offsetY: -.05),
     'girl_hair_10': AvatarOptionTreatment(scaleX: .9),
   };
+
+  /// Fit records for the first three boy hairstyle samples.  Keys deliberately
+  /// include both the face and hair ID: a single scale cannot fit every head
+  /// outline, and this data is shared by the editor tile and main preview.
+  static const Map<String, AvatarOptionTreatment> _boyHairFits =
+      <String, AvatarOptionTreatment>{
+    'boy_face_01|boy_hair_01': AvatarOptionTreatment(),
+    'boy_face_02|boy_hair_01': AvatarOptionTreatment(),
+    'boy_face_03|boy_hair_01': AvatarOptionTreatment(),
+    'boy_face_04|boy_hair_01': AvatarOptionTreatment(),
+    'boy_face_05|boy_hair_01': AvatarOptionTreatment(),
+    'boy_face_01|boy_hair_04': AvatarOptionTreatment(),
+    'boy_face_02|boy_hair_04': AvatarOptionTreatment(
+      scaleX: 1.05,
+      scaleY: 1.02,
+      offsetX: .005,
+      offsetY: .005,
+    ),
+    'boy_face_03|boy_hair_04': AvatarOptionTreatment(
+      scale: .98,
+      scaleX: 1.02,
+      offsetX: -.004,
+      offsetY: .01,
+    ),
+    'boy_face_04|boy_hair_04': AvatarOptionTreatment(
+      scale: 1.02,
+      scaleX: 1.06,
+      offsetY: -.008,
+    ),
+    'boy_face_05|boy_hair_04': AvatarOptionTreatment(
+      scale: 1.03,
+      scaleX: 1.04,
+      offsetY: -.01,
+    ),
+    'boy_face_01|boy_hair_08': AvatarOptionTreatment(),
+    'boy_face_02|boy_hair_08': AvatarOptionTreatment(
+      scale: 1.01,
+      scaleX: 1.04,
+      offsetY: .006,
+    ),
+    'boy_face_03|boy_hair_08': AvatarOptionTreatment(
+      scale: .99,
+      scaleX: 1.01,
+      offsetY: .008,
+    ),
+    'boy_face_04|boy_hair_08': AvatarOptionTreatment(
+      scale: 1.02,
+      scaleX: 1.05,
+      offsetY: -.005,
+    ),
+    'boy_face_05|boy_hair_08': AvatarOptionTreatment(
+      scale: 1.04,
+      scaleX: 1.03,
+      offsetY: -.012,
+    ),
+  };
+
+  /// Returns a face-aware treatment when this pair has been visually fitted.
+  /// A null value means callers should use the option-level fallback.
+  static AvatarOptionTreatment? hairTreatmentFor(
+          String faceId, String hairId) =>
+      _boyHairFits['$faceId|$hairId'];
 
   static AvatarOptionTreatment treatmentFor(String optionId) {
     if (optionId.contains('_skin_')) {
@@ -161,8 +264,13 @@ class AvatarAssetCatalog {
   static AvatarAssetBundle resolve(AvatarConfiguration configuration) {
     final AvatarPresentation presentation = configuration.presentation;
     final bool isBoy = presentation == AvatarPresentation.boy;
+    final Color? hairTint = girlHairColors[configuration.hairColorId] ??
+        girlHairColors['girl_hair_color_02'];
     final AvatarOptionTreatment skin = treatmentFor(configuration.skinId);
-    final AvatarOptionTreatment hair = treatmentFor(configuration.hairId);
+    final AvatarOptionTreatment hair = isBoy
+        ? hairTreatmentFor(configuration.faceId, configuration.hairId) ??
+            treatmentFor(configuration.hairId)
+        : treatmentFor(configuration.hairId);
     final AvatarOptionTreatment eyes = treatmentFor(configuration.eyesId);
     final AvatarOptionTreatment nose = treatmentFor(configuration.noseId);
     final AvatarOptionTreatment mouth = treatmentFor(configuration.mouthId);
@@ -173,16 +281,21 @@ class AvatarAssetCatalog {
 
     return AvatarAssetBundle(
       baseAsset: optionAssetFor(presentation, configuration.faceId),
-      hairFrontAsset: optionAssetFor(presentation, configuration.hairId),
+      hairFrontAsset: hair.assetOverride ??
+          optionAssetFor(presentation, configuration.hairId),
       hairBackAsset: hairBackAssetFor(configuration.hairId),
       hairScale: hair.scale,
       hairScaleX: hair.scaleX,
-      hairOffsetY: hair.offsetY,
+      hairScaleY: hair.scaleY,
+      hairOffsetX: hair.offsetX,
+      hairOffsetY: hair.offsetY +
+          (isBoy ? _boyHairCrownLifts[configuration.hairId] ?? 0 : 0),
       eyesAsset: optionAssetFor(presentation, configuration.eyesId),
       eyesScaleX: (isBoy ? 1 : girlEyeSpread) * eyes.scaleX,
       eyesScaleY: eyes.scaleY,
       skinTint: skin.tint,
       noseTint: skin.tint,
+      hairTint: hairTint,
       noseAsset: noseAsset,
       noseScale: nose.scale,
       noseOffsetY: isBoy ? .092 : .1,

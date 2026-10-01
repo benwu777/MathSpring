@@ -9,9 +9,19 @@ class AvatarConfiguration {
     required this.eyesId,
     required this.noseId,
     required this.mouthId,
+    String hairColorId = _defaultGirlHairColorId,
     this.eyeColorId = 'eye_color_01',
     this.accessoryId = 'accessory_none',
-  });
+  })  : _hairColorId = hairColorId,
+        assert(
+          hairColorId == 'girl_hair_color_01' ||
+              hairColorId == _defaultGirlHairColorId ||
+              hairColorId == 'girl_hair_color_03' ||
+              hairColorId == 'girl_hair_color_04' ||
+              hairColorId == 'girl_hair_color_05' ||
+              hairColorId == 'girl_hair_color_06',
+          'Unknown shared hair colour',
+        );
 
   final AvatarPresentation presentation;
   final String skinId;
@@ -20,6 +30,16 @@ class AvatarConfiguration {
   final String eyesId;
   final String noseId;
   final String mouthId;
+
+  /// 男女共用的髮色。
+  final String _hairColorId;
+
+  String get hairColorId {
+    if (!_girlHairColorIds.contains(_hairColorId)) {
+      return _defaultGirlHairColorId;
+    }
+    return _hairColorId;
+  }
 
   /// 舊版儲存的眼珠顏色。保留欄位以讀取既有帳號，但不再用於顯示或編輯。
   final String eyeColorId;
@@ -59,6 +79,7 @@ class AvatarConfiguration {
         'girl_hair_09',
         'girl_hair_10',
       ],
+      'hair_color': _girlHairColorIds,
       'eyes': <String>[
         'girl_eyes_01',
         'girl_eyes_02',
@@ -113,7 +134,9 @@ class AvatarConfiguration {
         'boy_hair_07',
         'boy_hair_08',
         'boy_hair_09',
+        'boy_hair_10',
       ],
+      'hair_color': _girlHairColorIds,
       'eyes': <String>[
         'boy_eyes_01',
         'boy_eyes_02',
@@ -140,6 +163,17 @@ class AvatarConfiguration {
       ],
     },
   };
+
+  static const String _defaultGirlHairColorId = 'girl_hair_color_02';
+
+  static const List<String> _girlHairColorIds = <String>[
+    'girl_hair_color_01', // 黑
+    _defaultGirlHairColorId, // 深棕
+    'girl_hair_color_03', // 栗棕
+    'girl_hair_color_04', // 淺棕
+    'girl_hair_color_05', // 深紅棕
+    'girl_hair_color_06', // 銀灰
+  ];
 
   /// 舊版眼色值，以便從既有帳號資料恢復設定。
   static const List<String> _legacyEyeColorIds = <String>[
@@ -175,6 +209,7 @@ class AvatarConfiguration {
       eyesId: optionsFor(presentation, 'eyes').first,
       noseId: optionsFor(presentation, 'nose').first,
       mouthId: optionsFor(presentation, 'mouth').first,
+      hairColorId: _defaultGirlHairColorId,
       eyeColorId: 'eye_color_01',
       accessoryId: 'accessory_none',
     );
@@ -198,9 +233,23 @@ class AvatarConfiguration {
       eyesId: resolved('eyes', 'avatar_eyes_id'),
       noseId: resolved('nose', 'avatar_nose_id'),
       mouthId: resolved('mouth', 'avatar_mouth_id'),
+      hairColorId: _resolvedHairColor(
+        presentation,
+        map['avatar_hair_color_id'],
+      ),
       eyeColorId: _resolvedLegacyEyeColor(map['avatar_eye_color_id']),
       accessoryId: _resolvedLegacyAccessory(map['avatar_accessory_id']),
     );
+  }
+
+  static String _resolvedHairColor(
+    AvatarPresentation presentation,
+    Object? value,
+  ) {
+    final String candidate = value as String? ?? '';
+    return _girlHairColorIds.contains(candidate)
+        ? candidate
+        : _defaultGirlHairColorId;
   }
 
   static String _resolvedLegacyEyeColor(Object? value) {
@@ -225,6 +274,7 @@ class AvatarConfiguration {
     String? eyesId,
     String? noseId,
     String? mouthId,
+    String? hairColorId,
     String? eyeColorId,
     String? accessoryId,
   }) {
@@ -236,6 +286,10 @@ class AvatarConfiguration {
       eyesId: eyesId ?? this.eyesId,
       noseId: noseId ?? this.noseId,
       mouthId: mouthId ?? this.mouthId,
+      hairColorId: _resolvedHairColor(
+        presentation ?? this.presentation,
+        hairColorId ?? this.hairColorId,
+      ),
       eyeColorId: eyeColorId ?? this.eyeColorId,
       accessoryId: accessoryId ?? this.accessoryId,
     );
@@ -249,6 +303,7 @@ class AvatarConfiguration {
         'avatar_eyes_id': eyesId,
         'avatar_nose_id': noseId,
         'avatar_mouth_id': mouthId,
+        'avatar_hair_color_id': hairColorId,
         'avatar_eye_color_id': eyeColorId,
         'avatar_accessory_id': accessoryId,
       };

@@ -4,6 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mathspring/models/avatar_configuration.dart';
 import 'package:mathspring/services/avatar_asset_catalog.dart';
 import 'package:mathspring/widgets/avatar_editor.dart';
+import 'package:mathspring/widgets/avatar_preview.dart';
 
 void main() {
   testWidgets(
@@ -138,6 +139,46 @@ void main() {
         findsOneWidget);
   });
 
+  testWidgets(
+      'renders girl hair 06 thumbnail with the preview resolved hair layers',
+      (tester) async {
+    await tester.pumpWidget(
+      const MaterialApp(home: Scaffold(body: AvatarEditor())),
+    );
+
+    for (int step = 0; step < 3; step++) {
+      await tester
+          .tap(find.byKey(const ValueKey<String>('avatar_next_button')));
+      await tester.pump();
+    }
+
+    await tester.scrollUntilVisible(
+      find.byKey(const ValueKey<String>('avatar_option_girl_hair_06')),
+      120,
+      scrollable: find.byType(Scrollable).last,
+    );
+    final AvatarPreview thumbnail = tester.widget<AvatarPreview>(
+      find.descendant(
+        of: find.byKey(const ValueKey<String>('avatar_option_girl_hair_06')),
+        matching: find.byType(AvatarPreview),
+      ),
+    );
+    final AvatarAssetBundle thumbnailAssets =
+        AvatarAssetCatalog.resolve(thumbnail.configuration);
+    final AvatarAssetBundle previewAssets = AvatarAssetCatalog.resolve(
+      AvatarConfiguration.defaultFor(AvatarPresentation.girl)
+          .copyWith(hairId: 'girl_hair_06'),
+    );
+
+    expect(thumbnail.configuration.hairId, 'girl_hair_06');
+    expect(thumbnailAssets.hairBackAsset, previewAssets.hairBackAsset);
+    expect(thumbnailAssets.hairFrontAsset, previewAssets.hairFrontAsset);
+    expect(thumbnailAssets.hairScale, previewAssets.hairScale);
+    expect(thumbnailAssets.hairScaleX, previewAssets.hairScaleX);
+    expect(thumbnailAssets.hairOffsetX, previewAssets.hairOffsetX);
+    expect(thumbnailAssets.hairOffsetY, previewAssets.hairOffsetY);
+  });
+
   testWidgets('keeps hairstyle navigation visible with ten options',
       (tester) async {
     await tester.binding.setSurfaceSize(const Size(320, 600));
@@ -185,6 +226,10 @@ void main() {
 
     await tester.tap(find.byKey(const ValueKey<String>('avatar_next_button')));
     await tester.pump();
+    expect(find.text('Hair colour'), findsAtLeastNWidgets(1));
+
+    await tester.tap(find.byKey(const ValueKey<String>('avatar_next_button')));
+    await tester.pump();
     expect(columnCount(), 4, reason: '眼型');
 
     await tester.tap(find.byKey(const ValueKey<String>('avatar_next_button')));
@@ -204,7 +249,7 @@ void main() {
       const MaterialApp(home: Scaffold(body: AvatarEditor())),
     );
 
-    for (int step = 0; step < 4; step++) {
+    for (int step = 0; step < 5; step++) {
       await tester
           .tap(find.byKey(const ValueKey<String>('avatar_next_button')));
       await tester.pump();
@@ -222,7 +267,7 @@ void main() {
       const MaterialApp(home: Scaffold(body: AvatarEditor())),
     );
 
-    for (int step = 0; step < 6; step++) {
+    for (int step = 0; step < 7; step++) {
       await tester
           .tap(find.byKey(const ValueKey<String>('avatar_next_button')));
       await tester.pump();
@@ -280,6 +325,7 @@ void main() {
         'skin',
         'face',
         'hair',
+        'hair_color',
         'eyes',
         'nose',
         'mouth',
@@ -303,6 +349,17 @@ void main() {
           expect(
               find.byKey(ValueKey<String>('avatar_option_$id')), findsOneWidget,
               reason: '$id is missing from the $category step');
+          if (category == 'hair') {
+            final AvatarPreview thumbnail = tester.widget<AvatarPreview>(
+              find.descendant(
+                of: find.byKey(ValueKey<String>('avatar_option_$id')),
+                matching: find.byType(AvatarPreview),
+              ),
+            );
+            expect(thumbnail.configuration.hairId, id,
+                reason: '$id thumbnail must use the same preview resolver');
+            continue;
+          }
           expect(
             find.byKey(ValueKey<String>('avatar_option_treatment_$id')),
             AvatarAssetCatalog.treatmentFor(id).isNeutral
@@ -349,5 +406,124 @@ void main() {
         .tap(find.byKey(const ValueKey<String>('avatar_option_boy_hair_03')));
     await tester.pump();
     expect(requestedUnlockFor, 'boy_hair_03');
+  });
+
+  testWidgets('offers six girl hair-colour swatches after hairstyle',
+      (tester) async {
+    AvatarConfiguration? changedConfiguration;
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Scaffold(
+          body: AvatarEditor(
+            onChanged: (AvatarConfiguration value) =>
+                changedConfiguration = value,
+          ),
+        ),
+      ),
+    );
+
+    for (int step = 0; step < 4; step++) {
+      await tester
+          .tap(find.byKey(const ValueKey<String>('avatar_next_button')));
+      await tester.pump();
+    }
+
+    expect(find.text('Hair colour'), findsAtLeastNWidgets(1));
+    for (int index = 1; index <= 6; index++) {
+      final String id = 'girl_hair_color_${index.toString().padLeft(2, '0')}';
+      expect(find.byKey(ValueKey<String>('avatar_option_$id')), findsOneWidget);
+    }
+    expect(
+        find.byKey(const ValueKey<String>('avatar_option_girl_hair_color_07')),
+        findsNothing);
+
+    await tester.tap(
+      find.byKey(const ValueKey<String>('avatar_option_girl_hair_color_03')),
+    );
+    await tester.pump();
+
+    expect(changedConfiguration!.hairColorId, 'girl_hair_color_03');
+    expect(
+      tester
+          .widget<AvatarPreview>(find.byType(AvatarPreview).first)
+          .configuration
+          .hairColorId,
+      'girl_hair_color_03',
+    );
+
+    await tester.tap(find.byKey(const ValueKey<String>('avatar_back_button')));
+    await tester.pump();
+    final AvatarPreview hairTilePreview = tester.widget<AvatarPreview>(
+      find.descendant(
+        of: find.byKey(const ValueKey<String>('avatar_option_girl_hair_03')),
+        matching: find.byType(AvatarPreview),
+      ),
+    );
+    expect(hairTilePreview.configuration.hairColorId, 'girl_hair_color_03');
+  });
+
+  testWidgets('offers the shared hair-colour section for boys', (tester) async {
+    await tester.pumpWidget(
+      const MaterialApp(home: Scaffold(body: AvatarEditor())),
+    );
+
+    await tester
+        .tap(find.byKey(const ValueKey<String>('avatar_presentation_boy')));
+    await tester.pump();
+
+    expect(find.text('Hair colour'), findsAtLeastNWidgets(1));
+    for (int index = 0; index < 8; index++) {
+      expect(find.byKey(ValueKey<String>('avatar_section_tab_$index')),
+          findsOneWidget);
+    }
+    expect(find.byKey(const ValueKey<String>('avatar_section_tab_8')),
+        findsNothing);
+
+    for (int step = 0; step < 4; step++) {
+      await tester
+          .tap(find.byKey(const ValueKey<String>('avatar_next_button')));
+      await tester.pump();
+    }
+    expect(find.text('Hair colour'), findsAtLeastNWidgets(1));
+    for (int index = 1; index <= 6; index++) {
+      final String id = 'girl_hair_color_${index.toString().padLeft(2, '0')}';
+      expect(find.byKey(ValueKey<String>('avatar_option_$id')), findsOneWidget);
+    }
+  });
+
+  testWidgets('keeps girl hair colours selectable without a full unlock',
+      (tester) async {
+    AvatarConfiguration? changed;
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Scaffold(
+          body: AvatarEditor(
+            hasFullUnlock: false,
+            onChanged: (AvatarConfiguration value) => changed = value,
+          ),
+        ),
+      ),
+    );
+
+    for (int step = 0; step < 4; step++) {
+      await tester
+          .tap(find.byKey(const ValueKey<String>('avatar_next_button')));
+      await tester.pump();
+    }
+
+    await tester.tap(
+      find.byKey(
+        const ValueKey<String>('avatar_option_girl_hair_color_06'),
+      ),
+    );
+    await tester.pump();
+
+    expect(changed?.hairColorId, 'girl_hair_color_06');
+    expect(
+      find.byKey(
+        const ValueKey<String>('avatar_locked_option_girl_hair_color_06'),
+      ),
+      findsNothing,
+    );
   });
 }

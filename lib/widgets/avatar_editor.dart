@@ -6,6 +6,17 @@ import 'package:mathspring/widgets/avatar_preview.dart';
 
 enum AvatarSectionSelectorLayout { scrollable, wrap }
 
+enum _AvatarEditorSection {
+  presentation,
+  skin,
+  face,
+  hair,
+  hairColor,
+  eyes,
+  nose,
+  mouth,
+}
+
 class AvatarEditor extends StatefulWidget {
   const AvatarEditor({
     super.key,
@@ -36,7 +47,6 @@ class AvatarEditor extends StatefulWidget {
 class _AvatarEditorState extends State<AvatarEditor> {
   int _step = 0;
   late AvatarConfiguration _configuration;
-  static const int _sectionCount = 7;
   @override
   void initState() {
     super.initState();
@@ -45,54 +55,78 @@ class _AvatarEditorState extends State<AvatarEditor> {
   }
 
   void _set(AvatarConfiguration value) {
+    if (value.hairColorId != _configuration.hairColorId) {
+      debugPrint('[hair-color] state ${_configuration.hairColorId} -> '
+          '${value.hairColorId}');
+    }
     setState(() => _configuration = value);
     widget.onChanged?.call(value);
   }
 
+  List<_AvatarEditorSection> get _sections => <_AvatarEditorSection>[
+        _AvatarEditorSection.presentation,
+        _AvatarEditorSection.skin,
+        _AvatarEditorSection.face,
+        _AvatarEditorSection.hair,
+        _AvatarEditorSection.hairColor,
+        _AvatarEditorSection.eyes,
+        _AvatarEditorSection.nose,
+        _AvatarEditorSection.mouth,
+      ];
+
+  _AvatarEditorSection get _section => _sections[_step];
+
   List<String> get _options {
-    switch (_step) {
-      case 1:
+    switch (_section) {
+      case _AvatarEditorSection.skin:
         return AvatarCatalog.skinOptionsFor(_configuration.presentation);
-      case 2:
+      case _AvatarEditorSection.face:
         return AvatarCatalog.faceOptionsFor(_configuration.presentation);
-      case 3:
+      case _AvatarEditorSection.hair:
         return AvatarCatalog.hairOptionsFor(_configuration.presentation);
-      case 4:
+      case _AvatarEditorSection.hairColor:
+        return AvatarConfiguration.optionsFor(
+          _configuration.presentation,
+          'hair_color',
+        );
+      case _AvatarEditorSection.eyes:
         return AvatarCatalog.eyeOptionsFor(_configuration.presentation);
-      case 5:
+      case _AvatarEditorSection.nose:
         return AvatarCatalog.noseOptionsFor(_configuration.presentation);
-      case 6:
+      case _AvatarEditorSection.mouth:
         return AvatarCatalog.mouthOptionsFor(_configuration.presentation);
       default:
-        throw StateError('Unexpected avatar editor step: $_step');
+        throw StateError('Unexpected avatar editor section: $_section');
     }
   }
 
   String _selected() {
-    switch (_step) {
-      case 1:
+    switch (_section) {
+      case _AvatarEditorSection.skin:
         return _configuration.skinId;
-      case 2:
+      case _AvatarEditorSection.face:
         return _configuration.faceId;
-      case 3:
+      case _AvatarEditorSection.hair:
         return _configuration.hairId;
-      case 4:
+      case _AvatarEditorSection.hairColor:
+        return _configuration.hairColorId;
+      case _AvatarEditorSection.eyes:
         return _configuration.eyesId;
-      case 5:
+      case _AvatarEditorSection.nose:
         return _configuration.noseId;
-      case 6:
+      case _AvatarEditorSection.mouth:
         return _configuration.mouthId;
       default:
-        throw StateError('Unexpected avatar editor step: $_step');
+        throw StateError('Unexpected avatar editor section: $_section');
     }
   }
 
   int get _gridColumnCount {
-    switch (_step) {
-      case 4:
+    switch (_section) {
+      case _AvatarEditorSection.eyes:
         return 4;
-      case 5:
-      case 6:
+      case _AvatarEditorSection.nose:
+      case _AvatarEditorSection.mouth:
         return 5;
       default:
         return 3;
@@ -100,27 +134,30 @@ class _AvatarEditorState extends State<AvatarEditor> {
   }
 
   void _choose(String id) {
-    switch (_step) {
-      case 1:
+    switch (_section) {
+      case _AvatarEditorSection.skin:
         _set(_configuration.copyWith(skinId: id));
         break;
-      case 2:
+      case _AvatarEditorSection.face:
         _set(_configuration.copyWith(faceId: id));
         break;
-      case 3:
+      case _AvatarEditorSection.hair:
         _set(_configuration.copyWith(hairId: id));
         break;
-      case 4:
+      case _AvatarEditorSection.hairColor:
+        _set(_configuration.copyWith(hairColorId: id));
+        break;
+      case _AvatarEditorSection.eyes:
         _set(_configuration.copyWith(eyesId: id));
         break;
-      case 5:
+      case _AvatarEditorSection.nose:
         _set(_configuration.copyWith(noseId: id));
         break;
-      case 6:
+      case _AvatarEditorSection.mouth:
         _set(_configuration.copyWith(mouthId: id));
         break;
       default:
-        throw StateError('Unexpected avatar editor step: $_step');
+        throw StateError('Unexpected avatar editor section: $_section');
     }
   }
 
@@ -143,13 +180,13 @@ class _AvatarEditorState extends State<AvatarEditor> {
               ),
               const SizedBox(height: 12),
               _SectionSelector(
-                labels: labels.sectionTitles,
+                labels: labels.sectionTitlesFor(_configuration.presentation),
                 selectedIndex: _step,
                 onSelected: (int step) => setState(() => _step = step),
                 layout: widget.sectionSelectorLayout,
               ),
               const SizedBox(height: 8),
-              if (_step == 0)
+              if (_section == _AvatarEditorSection.presentation)
                 Wrap(
                     spacing: 10,
                     children: AvatarPresentation.values
@@ -163,6 +200,18 @@ class _AvatarEditorState extends State<AvatarEditor> {
                             onSelected: (_) =>
                                 _set(AvatarCatalog.defaultFor(p))))
                         .toList())
+              else if (_section == _AvatarEditorSection.hairColor)
+                SizedBox(
+                  height: 248,
+                  child: Center(
+                    child: Wrap(
+                      spacing: 16,
+                      runSpacing: 16,
+                      alignment: WrapAlignment.center,
+                      children: _options.map(_hairColorSwatch).toList(),
+                    ),
+                  ),
+                )
               else
                 SizedBox(
                   // Ten hairstyle tiles need four rows.  Keep navigation in the
@@ -193,7 +242,7 @@ class _AvatarEditorState extends State<AvatarEditor> {
                   Expanded(
                     child: FilledButton(
                       key: const ValueKey<String>('avatar_next_button'),
-                      onPressed: _step == _sectionCount - 1
+                      onPressed: _step == _sections.length - 1
                           ? null
                           : () => setState(() => _step++),
                       child: Text(labels.next),
@@ -213,6 +262,7 @@ class _AvatarEditorState extends State<AvatarEditor> {
     final bool locked =
         !widget.hasFullUnlock && !selected && !_isBasicOption(id);
     final bool isMouth = id.contains('_mouth_');
+    final bool isHair = id.contains('_hair_');
     final Color accent = Theme.of(context).colorScheme.primary;
     return Semantics(
       label: id.replaceAll('_', ' '),
@@ -222,6 +272,9 @@ class _AvatarEditorState extends State<AvatarEditor> {
         key: ValueKey<String>('avatar_option_$id'),
         borderRadius: BorderRadius.circular(12),
         onTap: () {
+          debugPrint(
+              '[hair-color] tap id=$id selected=$selected locked=$locked '
+              'hasFullUnlock=${widget.hasFullUnlock}');
           if (locked) {
             widget.onLockedOptionSelected?.call(id);
             return;
@@ -243,19 +296,25 @@ class _AvatarEditorState extends State<AvatarEditor> {
             children: <Widget>[
               Padding(
                 padding: const EdgeInsets.all(4),
-                child: _optionTreatment(
-                  id,
-                  Transform.scale(
-                    key: ValueKey<String>('avatar_option_image_$id'),
-                    scale: isMouth ? 3 : 1,
-                    child: Image.asset(
-                      AvatarAssetCatalog.optionAssetFor(
-                          _configuration.presentation, id),
-                      package: widget.assetPackage,
-                      fit: BoxFit.contain,
-                    ),
-                  ),
-                ),
+                child: isHair
+                    ? AvatarPreview(
+                        configuration: _configuration.copyWith(hairId: id),
+                        size: double.infinity,
+                        assetPackage: widget.assetPackage,
+                      )
+                    : _optionTreatment(
+                        id,
+                        Transform.scale(
+                          key: ValueKey<String>('avatar_option_image_$id'),
+                          scale: isMouth ? 3 : 1,
+                          child: Image.asset(
+                            AvatarAssetCatalog.optionAssetFor(
+                                _configuration.presentation, id),
+                            package: widget.assetPackage,
+                            fit: BoxFit.contain,
+                          ),
+                        ),
+                      ),
               ),
               if (selected)
                 Align(
@@ -311,6 +370,54 @@ class _AvatarEditorState extends State<AvatarEditor> {
                     ),
                   ),
                 ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _hairColorSwatch(String id) {
+    final bool selected = _selected() == id;
+    // Hair colour is a visual preference, not premium avatar artwork.  Keep
+    // all six swatches available in the standard learner flow.
+    const bool locked = false;
+    final Color accent = Theme.of(context).colorScheme.primary;
+    final Color swatchColor = AvatarAssetCatalog.girlHairColors[id]!;
+    return Semantics(
+      label: 'Hair colour ${id.replaceAll('_', ' ')}',
+      selected: selected,
+      button: true,
+      child: InkWell(
+        key: ValueKey<String>('avatar_option_$id'),
+        customBorder: const CircleBorder(),
+        onTap: () {
+          debugPrint('[hair-color] swatch tap id=$id selected=$selected '
+              'locked=$locked hasFullUnlock=${widget.hasFullUnlock}');
+          if (locked) {
+            widget.onLockedOptionSelected?.call(id);
+            return;
+          }
+          _choose(id);
+        },
+        child: Container(
+          key: ValueKey<String>('avatar_option_surface_$id'),
+          width: 52,
+          height: 52,
+          decoration: BoxDecoration(
+            color: swatchColor,
+            shape: BoxShape.circle,
+            border: Border.all(
+              color: selected ? accent : Theme.of(context).colorScheme.outline,
+              width: selected ? 4 : 1,
+            ),
+          ),
+          child: Stack(
+            alignment: Alignment.center,
+            children: <Widget>[
+              if (selected)
+                const Icon(Icons.check, color: Colors.white, size: 24),
+              if (locked) const Icon(Icons.lock, color: Colors.white, size: 20),
             ],
           ),
         ),
@@ -408,6 +515,7 @@ class _SectionSelector extends StatelessWidget {
 class _AvatarEditorLabels {
   const _AvatarEditorLabels({
     required this.sectionTitles,
+    required this.hairColor,
     required this.boy,
     required this.girl,
     required this.back,
@@ -415,6 +523,7 @@ class _AvatarEditorLabels {
   });
 
   final List<String> sectionTitles;
+  final String hairColor;
   final String boy;
   final String girl;
   final String back;
@@ -425,6 +534,7 @@ class _AvatarEditorLabels {
     if (locale.languageCode == 'zh' && locale.countryCode == 'CN') {
       return const _AvatarEditorLabels(
         sectionTitles: <String>['角色', '肤色', '脸型', '发型', '眼睛', '鼻子', '嘴巴'],
+        hairColor: '发色',
         boy: '男孩',
         girl: '女孩',
         back: '上一步',
@@ -434,6 +544,7 @@ class _AvatarEditorLabels {
     if (locale.languageCode == 'zh') {
       return const _AvatarEditorLabels(
         sectionTitles: <String>['角色', '膚色', '臉型', '髮型', '眼睛', '鼻子', '嘴巴'],
+        hairColor: '髮色',
         boy: '男生',
         girl: '女生',
         back: '上一步',
@@ -443,6 +554,7 @@ class _AvatarEditorLabels {
     if (locale.languageCode == 'ja') {
       return const _AvatarEditorLabels(
         sectionTitles: <String>['アバター', '肌色', '顔', '髪型', '目', '鼻', '口'],
+        hairColor: '髪の色',
         boy: '男の子',
         girl: '女の子',
         back: '戻る',
@@ -459,10 +571,17 @@ class _AvatarEditorLabels {
         'Nose',
         'Mouth',
       ],
+      hairColor: 'Hair colour',
       boy: 'Boy',
       girl: 'Girl',
       back: 'Back',
       next: 'Next',
     );
   }
+
+  List<String> sectionTitlesFor(AvatarPresentation presentation) => <String>[
+      ...sectionTitles.take(4),
+      hairColor,
+      ...sectionTitles.skip(4),
+    ];
 }

@@ -34,7 +34,7 @@ class AvatarPreview extends StatelessWidget {
               if (assets.hairBackAsset case final String path)
                 KeyedSubtree(
                   key: const ValueKey<String>('avatar_hair_back_layer'),
-                  child: _hairLayer(assets, path),
+                  child: _hairLayer(assets, path, isBack: true),
                 ),
               KeyedSubtree(
                 key: const ValueKey<String>('avatar_face_layer'),
@@ -95,14 +95,63 @@ class AvatarPreview extends StatelessWidget {
         ),
       );
 
-  Widget _hairLayer(AvatarAssetBundle assets, String asset) =>
-      FractionalTranslation(
-        translation: Offset(assets.hairOffsetX, assets.hairOffsetY),
-        child: Transform.scale(
-          scaleX: assets.hairScale * assets.hairScaleX,
-          scaleY: assets.hairScale,
-          alignment: Alignment.topCenter,
-          child: _layer(asset),
-        ),
-      );
+  Widget _hairLayer(
+    AvatarAssetBundle assets,
+    String asset, {
+    bool isBack = false,
+  }) {
+    final Widget layer = FractionalTranslation(
+      translation: Offset(assets.hairOffsetX, assets.hairOffsetY),
+      child: Transform.scale(
+        scaleX: assets.hairScale * assets.hairScaleX,
+        scaleY: assets.hairScale * assets.hairScaleY,
+        alignment: Alignment.topCenter,
+        child: _layer(asset),
+      ),
+    );
+    final Color? hairTint = assets.hairTint;
+    if (hairTint == null) {
+      return layer;
+    }
+    debugPrint('[hair-color] render ${isBack ? 'back' : 'front'} asset=$asset '
+        'tint=${hairTint.toARGB32().toRadixString(16)}');
+    return ColorFiltered(
+      key: ValueKey<String>(
+        isBack ? 'avatar_hair_back_tint' : 'avatar_hair_front_tint',
+      ),
+      // The matrix only transforms RGB; its alpha row passes source alpha
+      // through unchanged, preserving transparent canvas pixels and strands.
+      colorFilter: _hairTintFilter(hairTint),
+      child: layer,
+    );
+  }
+
+  ColorFilter _hairTintFilter(Color tint) {
+    // Rebuild RGB from the original luminance.  Multiplying the original
+    // brown channels only darkens/lightens brown, while this preserves strand
+    // shading yet gives every swatch its own visible hue.  Alpha passes
+    // through unchanged.
+    const double redLuma = .2126;
+    const double greenLuma = .7152;
+    const double blueLuma = .0722;
+    const double baseBrightness = .85;
+    const double detailBrightness = .15;
+    List<double> channel(double target) => <double>[
+          redLuma * target * detailBrightness,
+          greenLuma * target * detailBrightness,
+          blueLuma * target * detailBrightness,
+          0,
+          255 * target * baseBrightness,
+        ];
+    return ColorFilter.matrix(<double>[
+      ...channel(tint.r),
+      ...channel(tint.g),
+      ...channel(tint.b),
+      0,
+      0,
+      0,
+      1,
+      0,
+    ]);
+  }
 }
