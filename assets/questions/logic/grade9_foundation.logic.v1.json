@@ -5184,6 +5184,150 @@
         "reference": "logic-grade9-foundation",
         "notes": "4×4 放骨牌遊戲，後手以中心對稱策略必勝。python 以位元遮罩窮舉 4×4 所有局面確認先手必敗（verify.py dw）。掃「骨牌.{0,80}輪流」：無；對稱策略的既有博弈題是 logic_grade6_078（圓圈硬幣，後手對稱）與 logic_grade10_044（圓桌放硬幣，先手放中心），本題需要檢查「骨牌不會與自己的對應位置重疊」，且左右鏡射會失敗。"
       }
+    },
+    {
+      "id": "logic_grade9_foundation_058",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "clock_identical_hands_ambiguous_times",
+      "tags": [
+        "c:angle",
+        "c:linear_eq",
+        "m:bijection"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade9",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一個指針式時鐘的時針和分針做得一模一樣長，完全分辨不出哪根是哪根，而且兩根指針都是連續平順地轉動。從 0 點整到 12 點整（不含 12 點整）的這 12 小時中，有幾個時刻，光看兩根指針的位置無法確定當時的時間？",
+        "zh-Hans": "一个指针式时钟的时针和分针做得一模一样长，完全分辨不出哪根是哪根，而且两根指针都是连续平顺地转动。从 0 点整到 12 点整（不含 12 点整）的这 12 小时中，有几个时刻，光看两根指针的位置无法确定当时的时间？",
+        "en": "An analogue clock has hour and minute hands that look exactly alike, and both hands move smoothly. During the 12 hours from 0:00 up to (but not including) 12:00, at how many moments is it impossible to tell the time from the positions of the two hands?",
+        "ja": "アナログ時計の時針と分針がまったく同じ形で区別できず、どちらもなめらかに回ります。0 時ちょうどから 12 時ちょうど（12 時ちょうどはふくまない）までの 12 時間のうち、2 本の針の位置だけでは時刻が決まらない瞬間は何回ありますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 132。",
+        "zh-Hans": "答案是 132。",
+        "en": "The answer is 132.",
+        "ja": "答えは 132 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "以 0 點後經過 t 分鐘計（0 ≤ t < 720）。時針每分鐘轉 0.5°，分針每分鐘轉 6°，所以時針在 t/2 度、分針在 6t 度（都對 360 取餘）。看不出時間，表示把兩根針的角色對調，也是另一個真正會出現的時刻 s（s ≠ t）。",
+          "對調後要成立：s 時刻的時針 s/2 ≡ 6t，分針 6s ≡ t/2（都對 360 取餘）。由第一式 s ≡ 12t（對 720 取餘），代入第二式 72t ≡ t/2（對 360），即 143t/2 是 360 的倍數，t = 720k/143，k = 0、1、⋯、142，共 143 個時刻可以「對調」。",
+          "其中兩針重合時對調後還是同一個時刻，不算看不出：重合是 6t ≡ t/2，t = 720j/11，j = 0、1、⋯、10，共 11 個，它們也在上面 143 個之中（k 是 13 的倍數時）。",
+          "真正無法確定的時刻是 143 − 11 = 132 個。答案是 132。"
+        ],
+        "zh-Hans": [
+          "以 0 点后经过 t 分钟计（0 ≤ t < 720）。时针每分钟转 0.5°，分针每分钟转 6°，所以时针在 t/2 度、分针在 6t 度（都对 360 取余）。看不出时间，表示把两根针的角色对调，也是另一个真正会出现的时刻 s（s ≠ t）。",
+          "对调后要成立：s 时刻的时针 s/2 ≡ 6t，分针 6s ≡ t/2（都对 360 取余）。由第一式 s ≡ 12t（对 720 取余），代入第二式 72t ≡ t/2（对 360），即 143t/2 是 360 的倍数，t = 720k/143，k = 0、1、⋯、142，共 143 个时刻可以「对调」。",
+          "其中两针重合时对调后还是同一个时刻，不算看不出：重合是 6t ≡ t/2，t = 720j/11，j = 0、1、⋯、10，共 11 个，它们也在上面 143 个之中（k 是 13 的倍数时）。",
+          "真正无法确定的时刻是 143 − 11 = 132 个。答案是 132。"
+        ],
+        "en": [
+          "Measure time as t minutes after 0:00 (0 ≤ t < 720). The hour hand turns 0.5° per minute and the minute hand 6°, so they point at t/2 and 6t degrees (mod 360). The time is ambiguous when swapping the roles of the hands also gives a real moment s with s ≠ t.",
+          "The swap requires: hour hand at s is s/2 ≡ 6t and minute hand 6s ≡ t/2 (mod 360). The first gives s ≡ 12t (mod 720); substituting, 72t ≡ t/2 (mod 360), i.e. 143t/2 is a multiple of 360, so t = 720k/143 with k = 0, 1, …, 142: 143 swappable moments.",
+          "When the hands overlap, swapping gives the same moment, which is not ambiguous. Overlaps satisfy 6t ≡ t/2, t = 720j/11, j = 0, 1, …, 10: 11 moments, all among the 143 above (k a multiple of 13).",
+          "The truly ambiguous moments number 143 − 11 = 132. The answer is 132."
+        ],
+        "ja": [
+          "0 時から t 分後（0 ≤ t < 720）とします。時針は毎分 0.5°、分針は毎分 6° 回るので、時針は t/2 度、分針は 6t 度（360 で割った余り）を指します。時刻が決まらないのは、2 本の針の役割を入れかえても実際に起こる別の時刻 s（s ≠ t）になるときです。",
+          "入れかえが成り立つ条件は、時刻 s の時針 s/2 ≡ 6t、分針 6s ≡ t/2（360 を法として）です。前の式から s ≡ 12t（720 を法として）、後の式に代入して 72t ≡ t/2、つまり 143t/2 が 360 の倍数で、t = 720k/143（k = 0、1、⋯、142）の 143 回です。",
+          "2 本の針が重なるときは入れかえても同じ時刻なので、決まらないとはいえません。重なるのは 6t ≡ t/2、t = 720j/11（j = 0、1、⋯、10）の 11 回で、上の 143 回にふくまれます（k が 13 の倍数のとき）。",
+          "本当に時刻が決まらないのは 143 − 11 = 132 回です。答えは 132 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "132"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade9-foundation",
+        "notes": "時針分針對調仍合法的時刻 t = 720k/143，扣掉重合的 11 次。掃過「時針.*分針.*(一樣|相同|分不)|指針.*(一樣長|一模一樣)」（0 題）、「時針|分針」（48 題）；最接近 logic hands_overlap_in_hour 類（logic_grade11_foundation_004 求重合時刻）與 logic_grade8_foundation_020（鏡中時鐘），本題是兩針互換的方程組。"
+      }
+    },
+    {
+      "id": "logic_grade9_foundation_059",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "committee_locks_threshold_three_of_five",
+      "tags": [
+        "c:permutation_combination",
+        "m:contradiction",
+        "m:construction"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade9",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一個保險箱由 5 位委員共同保管。箱門上裝了若干把不同的鎖，每把鎖的鑰匙可以複製好幾把，分給不同的委員（每位委員可以拿好幾把不同鎖的鑰匙）。要求：任意 3 位委員到齊，就一定能把所有的鎖都打開；但任意 2 位委員在一起，一定有某一把鎖打不開。箱門上最少要裝幾把鎖？",
+        "zh-Hans": "一个保险箱由 5 位委员共同保管。箱门上装了若干把不同的锁，每把锁的钥匙可以复制好几把，分给不同的委员（每位委员可以拿好几把不同锁的钥匙）。要求：任意 3 位委员到齐，就一定能把所有的锁都打开；但任意 2 位委员在一起，一定有某一把锁打不开。箱门上最少要装几把锁？",
+        "en": "A safe is guarded by 5 committee members. Its door has several different locks; keys to each lock may be copied and given to several members (a member may hold keys to several locks). Any 3 members together must be able to open every lock, but any 2 members together must be unable to open at least one lock. What is the smallest number of locks needed?",
+        "ja": "金庫を 5 人の委員が共同で管理します。扉にはいくつかの異なる錠がついていて、各錠のかぎは何本も複製して別々の委員に配れます（1 人が何種類ものかぎを持ってもよい）。どの 3 人がそろってもすべての錠を開けられ、どの 2 人だけでは必ず開けられない錠が 1 つはあるようにします。錠は最少で何個必要ですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 10。",
+        "zh-Hans": "答案是 10。",
+        "en": "The answer is 10.",
+        "ja": "答えは 10 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "每一對委員（共 C(5, 2) = 10 對）都要有一把「他們兩人都沒有鑰匙」的鎖。",
+          "不同的兩對不能共用同一把這樣的鎖：若某把鎖兩對委員都打不開，這兩對合起來至少有 3 個不同的人，他們都沒有這把鎖的鑰匙，3 個人就打不開它，違反要求。",
+          "所以 10 對各需要一把不同的鎖，至少要 10 把。",
+          "10 把做得到：每一對委員對應一把鎖，這把鎖的鑰匙發給另外 3 位委員。任 2 人打不開對應他們那一對的鎖；任 3 人中，對每把鎖，沒有鑰匙的只有 2 人，3 人裡一定有人有鑰匙。答案是 10。"
+        ],
+        "zh-Hans": [
+          "每一对委员（共 C(5, 2) = 10 对）都要有一把「他们两人都没有钥匙」的锁。",
+          "不同的两对不能共用同一把这样的锁：若某把锁两对委员都打不开，这两对合起来至少有 3 个不同的人，他们都没有这把锁的钥匙，3 个人就打不开它，违反要求。",
+          "所以 10 对各需要一把不同的锁，至少要 10 把。",
+          "10 把做得到：每一对委员对应一把锁，这把锁的钥匙发给另外 3 位委员。任 2 人打不开对应他们那一对的锁；任 3 人中，对每把锁，没有钥匙的只有 2 人，3 人里一定有人有钥匙。答案是 10。"
+        ],
+        "en": [
+          "Each pair of members (there are C(5, 2) = 10 pairs) needs a lock for which neither of them has a key.",
+          "Two different pairs cannot share such a lock: if neither pair can open some lock, together they contain at least 3 different people with no key to it, and those 3 could not open it — contradicting the rule.",
+          "So the 10 pairs need 10 different locks: at least 10 locks.",
+          "10 locks suffice: give each pair its own lock and hand that lock’s keys to the other 3 members. Any 2 people cannot open their pair’s lock; for any 3 people and any lock, only 2 members lack its key, so one of the 3 has it. The answer is 10."
+        ],
+        "ja": [
+          "委員の 2 人組（C(5, 2) = 10 組）それぞれに、「その 2 人がどちらもかぎを持っていない錠」が必要です。",
+          "異なる 2 組が同じ錠を共有することはできません。ある錠を 2 組とも開けられないなら、2 組を合わせると少なくとも 3 人の異なる人がそのかぎを持たず、その 3 人では開けられないので、条件に反します。",
+          "よって 10 組それぞれに別の錠が必要で、少なくとも 10 個です。",
+          "10 個で実現できます。2 人組ごとに錠を 1 つ対応させ、そのかぎを残りの 3 人に配ります。どの 2 人も自分たちの組の錠を開けられず、どの 3 人も、どの錠についてもかぎを持たないのは 2 人だけなので、3 人の中にかぎを持つ人がいます。答えは 10 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "10"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade9-foundation",
+        "notes": "門檻共享：每對委員對應一把專屬鎖（兩對共用會讓 3 人打不開），鑰匙給其餘 3 人。掃過「鎖|鑰匙」（9 題）、「委員」；最接近 logic_grade7_foundation_025 與 combinatorics_grade10_foundation_064（試鑰匙的最壞／期望次數），本題是組合設計的上下界。"
+      }
     }
   ]
 }
