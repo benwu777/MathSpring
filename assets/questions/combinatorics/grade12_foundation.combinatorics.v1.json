@@ -6702,6 +6702,234 @@
         "reference": "combinatorics-grade12-foundation",
         "notes": "題型：只有部分人受限的錯排（排容原理）。掃過 坐回|原位|錯排|信封|不在第 全庫：combinatorics_grade11_002、_031、combinatorics_grade12_012、_045 都是「全體錯排」或「恰 k 封放對」；本題只有 3 人受限、另 3 人自由，排容的各項係數不同。"
       }
+    },
+    {
+      "id": "combinatorics_grade12_foundation_076",
+      "reviewStatus": "ok",
+      "topic": "combinatorics",
+      "subtopic": "subsets_with_sum_divisible_by_three",
+      "tags": [
+        "c:modular",
+        "c:permutation_combination",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "集合 {1, 2, 3, ⋯, 9} 共有 512 個子集合（包含空集合，空集合的元素和算 0）。其中元素和是 3 的倍數的子集合有幾個？",
+        "zh-Hans": "集合 {1, 2, 3, ⋯, 9} 共有 512 个子集合（包含空集合，空集合的元素和算 0）。其中元素和是 3 的倍数的子集合有几个？",
+        "en": "The set {1, 2, 3, …, 9} has 512 subsets (including the empty set, whose element sum is 0). How many of them have an element sum that is a multiple of 3?",
+        "ja": "集合 {1, 2, 3, …, 9} には部分集合が 512 個ある（空集合も含み、空集合の要素の和は 0 とする）。そのうち要素の和が 3 の倍数であるものは何個あるか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 176。",
+        "zh-Hans": "答案是 176。",
+        "en": "The answer is 176.",
+        "ja": "答えは 176 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "依除以 3 的餘數把 1～9 分成三類：餘 0 的 {3, 6, 9}、餘 1 的 {1, 4, 7}、餘 2 的 {2, 5, 8}，各 3 個。",
+          "餘 0 的元素不影響和的餘數，可以任意選或不選：2³ = 8 種。",
+          "設從餘 1 類選 a 個、從餘 2 類選 b 個（0 ≤ a, b ≤ 3），和除以 3 的餘數與 a + 2b、也就是 a − b 相同，所以要求 a − b 是 3 的倍數。",
+          "0 ≤ a, b ≤ 3 時 a − b 是 3 的倍數的情形：a = b（0、1、2、3），或 (a, b) = (3, 0)、(0, 3)。選法數 C(3, a) × C(3, b)：a = b 時 1 + 9 + 9 + 1 = 20；(3, 0) 與 (0, 3) 各 1 種；共 22 種。",
+          "總數 = 8 × 22 = 176。"
+        ],
+        "zh-Hans": [
+          "依除以 3 的余数把 1～9 分成三类：余 0 的 {3, 6, 9}、余 1 的 {1, 4, 7}、余 2 的 {2, 5, 8}，各 3 个。",
+          "余 0 的元素不影响和的余数，可以任意选或不选：2³ = 8 种。",
+          "设从余 1 类选 a 个、从余 2 类选 b 个（0 ≤ a, b ≤ 3），和除以 3 的余数与 a + 2b、也就是 a − b 相同，所以要求 a − b 是 3 的倍数。",
+          "0 ≤ a, b ≤ 3 时 a − b 是 3 的倍数的情形：a = b（0、1、2、3），或 (a, b) = (3, 0)、(0, 3)。选法数 C(3, a) × C(3, b)：a = b 时 1 + 9 + 9 + 1 = 20；(3, 0) 与 (0, 3) 各 1 种；共 22 种。",
+          "总数 = 8 × 22 = 176。"
+        ],
+        "en": [
+          "Split 1 to 9 by remainder mod 3: remainder 0: {3, 6, 9}; remainder 1: {1, 4, 7}; remainder 2: {2, 5, 8}, three numbers each.",
+          "Elements with remainder 0 do not affect the remainder of the sum, so they can be chosen freely: 2³ = 8 ways.",
+          "Choose a elements from the remainder-1 class and b from the remainder-2 class (0 ≤ a, b ≤ 3). The sum has the same remainder as a + 2b, i.e. as a − b, so a − b must be a multiple of 3.",
+          "With 0 ≤ a, b ≤ 3 this means a = b (0, 1, 2, 3) or (a, b) = (3, 0), (0, 3). The number of choices is C(3, a) × C(3, b): for a = b it is 1 + 9 + 9 + 1 = 20, plus 1 each for (3, 0) and (0, 3), 22 in all.",
+          "Total 8 × 22 = 176."
+        ],
+        "ja": [
+          "1～9 を 3 で割った余りで 3 つに分ける：余り 0 の {3, 6, 9}、余り 1 の {1, 4, 7}、余り 2 の {2, 5, 8}、各 3 個。",
+          "余り 0 の要素は和の余りに影響しないので自由に選べる：2³ = 8 通り。",
+          "余り 1 の組から a 個、余り 2 の組から b 個選ぶ（0 ≤ a, b ≤ 3）と、和の余りは a + 2b、すなわち a − b と同じなので、a − b が 3 の倍数であればよい。",
+          "0 ≤ a, b ≤ 3 でこれを満たすのは a = b（0、1、2、3）と (a, b) = (3, 0)、(0, 3)。選び方は C(3, a) × C(3, b) で、a = b のとき 1 + 9 + 9 + 1 = 20、(3, 0) と (0, 3) が 1 通りずつで、計 22 通り。",
+          "合計 8 × 22 = 176。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "176"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "combinatorics-grade12-foundation",
+        "notes": "子集合和 mod 3：按餘數分三類，餘 1、餘 2 選取個數須 a ≡ b (mod 3)。掃過 /子集.*和|子集合.*和/（4 題）；最接近 combinatorics_grade9_foundation_028（{1,…,5} 子集和為偶數的個數），差異：該題 mod 2 可用一個奇數元素配對；本題 mod 3 需按餘數分類並解 a ≡ b (mod 3)"
+      }
+    },
+    {
+      "id": "combinatorics_grade12_foundation_077",
+      "reviewStatus": "ok",
+      "topic": "combinatorics",
+      "subtopic": "even_degree_edge_subsets",
+      "tags": [
+        "c:graph_theory",
+        "m:bijection",
+        "m:invariant"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "平面上有 5 個點，任三點不共線，這 5 點之間一共可以畫 10 條線段。從這 10 條線段中挑選若干條畫出來（可以一條都不畫），要求每一個點連出的線段數都是偶數（0 也算偶數）。一共有幾種挑法？",
+        "zh-Hans": "平面上有 5 个点，任三点不共线，这 5 点之间一共可以画 10 条线段。从这 10 条线段中挑选若干条画出来（可以一条都不画），要求每一个点连出的线段数都是偶数（0 也算偶数）。一共有几种挑法？",
+        "en": "There are 5 points in the plane, no three collinear, so 10 segments can be drawn between them. Some of these 10 segments are to be drawn (possibly none) so that every point is an endpoint of an even number of drawn segments (0 counts as even). How many ways are there to choose the segments?",
+        "ja": "平面上に 3 点が一直線上にない 5 個の点があり、これらの間には線分が全部で 10 本引ける。この 10 本からいくつかを選んで引く（1 本も引かなくてもよい）とき、どの点からも偶数本（0 本も偶数とする）の線分が出ているようにしたい。選び方は何通りあるか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 64。",
+        "zh-Hans": "答案是 64。",
+        "en": "The answer is 64.",
+        "ja": "答えは 64 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "把 5 點記為 P₁～P₅。先看 P₁～P₄ 之間的 6 條線段，任意決定畫或不畫，有 2⁶ = 64 種。",
+          "對每一種決定，連到 P₅ 的 4 條線段被唯一決定：若 Pᵢ（i ≤ 4）此時連出的線段數是奇數，就畫 PᵢP₅，否則不畫。這樣 P₁～P₄ 都變成偶數。",
+          "P₅ 連出的線段數，等於 P₁～P₄ 之中「原本是奇數」的點數。在 P₁～P₄ 之間的圖中，各點線段數總和是線段數的 2 倍，是偶數，所以奇數的點有偶數個，P₅ 的線段數也是偶數，符合要求。",
+          "反過來，任何一種合乎要求的挑法，去掉連到 P₅ 的線段後，就是第一步的一種情形，而且由它可以還原。所以合乎要求的挑法與第一步的 64 種一一對應。",
+          "共 64 種。"
+        ],
+        "zh-Hans": [
+          "把 5 点记为 P₁～P₅。先看 P₁～P₄ 之间的 6 条线段，任意决定画或不画，有 2⁶ = 64 种。",
+          "对每一种决定，连到 P₅ 的 4 条线段被唯一决定：若 Pᵢ（i ≤ 4）此时连出的线段数是奇数，就画 PᵢP₅，否则不画。这样 P₁～P₄ 都变成偶数。",
+          "P₅ 连出的线段数，等于 P₁～P₄ 之中「原本是奇数」的点数。在 P₁～P₄ 之间的图中，各点线段数总和是线段数的 2 倍，是偶数，所以奇数的点有偶数个，P₅ 的线段数也是偶数，符合要求。",
+          "反过来，任何一种合乎要求的挑法，去掉连到 P₅ 的线段后，就是第一步的一种情形，而且由它可以还原。所以合乎要求的挑法与第一步的 64 种一一对应。",
+          "共 64 种。"
+        ],
+        "en": [
+          "Label the points P₁ to P₅. First decide freely, for each of the 6 segments among P₁ to P₄, whether to draw it: 2⁶ = 64 ways.",
+          "For each such decision, the 4 segments to P₅ are forced: draw PᵢP₅ (i ≤ 4) exactly when Pᵢ currently has an odd number of segments. Then P₁ to P₄ all become even.",
+          "The number of segments at P₅ equals the number of points among P₁ to P₄ that were odd. In the drawing among P₁ to P₄ the total count of segment ends is twice the number of segments, which is even, so an even number of points are odd; hence P₅ is even too, as required.",
+          "Conversely, removing the segments at P₅ from any valid choice gives one of the 64 cases, from which the choice is recovered. So valid choices correspond one-to-one with the 64 cases.",
+          "There are 64 ways."
+        ],
+        "ja": [
+          "5 点を P₁～P₅ とする。まず P₁～P₄ の間の 6 本について、引くか引かないかを自由に決める：2⁶ = 64 通り。",
+          "それぞれの決め方に対し、P₅ へ向かう 4 本はただ 1 通りに決まる：Pᵢ（i ≤ 4）から出ている本数がその時点で奇数なら PᵢP₅ を引き、偶数なら引かない。こうして P₁～P₄ はすべて偶数になる。",
+          "P₅ から出る本数は、P₁～P₄ のうち「もともと奇数だった」点の個数に等しい。P₁～P₄ の間の図では各点の本数の合計は線分の本数の 2 倍で偶数なので、奇数の点は偶数個。よって P₅ の本数も偶数で条件を満たす。",
+          "逆に、条件を満たす任意の選び方から P₅ へ向かう線分を取り除くと最初の 64 通りのどれかになり、そこから元に戻せる。よって条件を満たす選び方は 64 通りと一対一に対応する。",
+          "64 通り。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "64"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "combinatorics-grade12-foundation",
+        "notes": "每點度數皆偶的邊子集：前 4 點間任意，連到第 5 點的邊被迫決定，握手引理保證第 5 點也是偶數。掃過 /偶數條|度數|每一個點.*偶數|線段數.*偶數/（29 題）；最接近 combinatorics_grade9_foundation_046（6 人每人握手偶數次時的最多握手數），差異：該題求極值；本題計數所有偶度邊集，用「前 n − 1 點自由、最後一點被迫」的一一對應"
+      }
+    },
+    {
+      "id": "combinatorics_grade12_foundation_078",
+      "reviewStatus": "ok",
+      "topic": "combinatorics",
+      "subtopic": "binary_matrices_two_per_row_column",
+      "tags": [
+        "c:permutation_combination",
+        "c:matrix",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "在一個 4 × 4 的方格表中選出 8 格塗黑，要求每一橫列恰好有 2 格黑色，每一直行也恰好有 2 格黑色。一共有幾種塗法？",
+        "zh-Hans": "在一个 4 × 4 的方格表中选出 8 格涂黑，要求每一横列恰好有 2 格黑色，每一直行也恰好有 2 格黑色。一共有几种涂法？",
+        "en": "In a 4 × 4 grid, 8 cells are to be shaded black so that every row contains exactly 2 black cells and every column also contains exactly 2 black cells. How many ways are there to do this?",
+        "ja": "4 × 4 のマス目から 8 マスを選んで黒く塗る。どの横の行にもちょうど 2 マス、どの縦の列にもちょうど 2 マスの黒があるようにするとき、塗り方は何通りあるか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 90。",
+        "zh-Hans": "答案是 90。",
+        "en": "The answer is 90.",
+        "ja": "答えは 90 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "第 1 列選 2 個直行塗黑：C(4, 2) = 6 種。以下固定第 1 列的選法，依第 2 列與第 1 列的關係分類。",
+          "第 2 列與第 1 列選了完全相同的 2 行（1 種）：這 2 行已經滿了，第 3、4 列都只能選另外 2 行，1 種。",
+          "第 2 列與第 1 列完全不重疊（1 種）：此時每一行都恰有 1 格黑色，第 3、4 列要讓每行再多 1 格。第 3 列任選 2 行（6 種），第 4 列只能選剩下的 2 行，共 6 種。",
+          "第 2 列與第 1 列恰好重疊 1 行（2 × 2 = 4 種）：此時有 1 行已滿（2 格）、2 行各 1 格、1 行 0 格。0 格的那一行需要第 3、4 列都選它，兩個 1 格的行各需要再 1 格：第 3 列選「0 格那行 + 其中一個 1 格的行」有 2 種，第 4 列隨之確定。每種 2 個，共 4 × 2 = 8 種。",
+          "對每一種第 1 列的選法，共有 1 + 6 + 8 = 15 種；總數 = 6 × 15 = 90。"
+        ],
+        "zh-Hans": [
+          "第 1 列选 2 个直行涂黑：C(4, 2) = 6 种。以下固定第 1 列的选法，依第 2 列与第 1 列的关系分类。",
+          "第 2 列与第 1 列选了完全相同的 2 行（1 种）：这 2 行已经满了，第 3、4 列都只能选另外 2 行，1 种。",
+          "第 2 列与第 1 列完全不重叠（1 种）：此时每一行都恰有 1 格黑色，第 3、4 列要让每行再多 1 格。第 3 列任选 2 行（6 种），第 4 列只能选剩下的 2 行，共 6 种。",
+          "第 2 列与第 1 列恰好重叠 1 行（2 × 2 = 4 种）：此时有 1 行已满（2 格）、2 行各 1 格、1 行 0 格。0 格的那一行需要第 3、4 列都选它，两个 1 格的行各需要再 1 格：第 3 列选「0 格那行 + 其中一个 1 格的行」有 2 种，第 4 列随之确定。每种 2 个，共 4 × 2 = 8 种。",
+          "对每一种第 1 列的选法，共有 1 + 6 + 8 = 15 种；总数 = 6 × 15 = 90。"
+        ],
+        "en": [
+          "Row 1 chooses 2 columns: C(4, 2) = 6 ways. Fix this choice and classify by how row 2 relates to row 1.",
+          "Row 2 uses the same 2 columns as row 1 (1 way): those columns are full, so rows 3 and 4 must both use the other 2 columns: 1 way.",
+          "Row 2 is disjoint from row 1 (1 way): now every column has exactly 1 black cell and rows 3 and 4 must add one more to each. Row 3 picks any 2 columns (6 ways) and row 4 takes the other 2: 6 ways.",
+          "Row 2 shares exactly 1 column with row 1 (2 × 2 = 4 ways): then one column is full, two columns have 1 cell each and one column has 0. The empty column needs both rows 3 and 4, and each 1-cell column needs one more: row 3 takes the empty column plus one of the two 1-cell columns (2 ways), and row 4 is then forced. That gives 4 × 2 = 8 ways.",
+          "For each choice of row 1 there are 1 + 6 + 8 = 15 completions, so the total is 6 × 15 = 90."
+        ],
+        "ja": [
+          "1 行目で黒くする 2 列の選び方は C(4, 2) = 6 通り。これを固定し、2 行目と 1 行目の関係で場合分けする。",
+          "2 行目が 1 行目とまったく同じ 2 列（1 通り）：その 2 列はもう 2 マスずつ埋まったので、3 行目と 4 行目は残りの 2 列を選ぶしかなく 1 通り。",
+          "2 行目が 1 行目とまったく重ならない（1 通り）：どの列にも黒が 1 マスずつあり、3、4 行目で各列にもう 1 マス加える。3 行目は任意の 2 列（6 通り）、4 行目は残りの 2 列で、6 通り。",
+          "2 行目が 1 行目とちょうど 1 列だけ重なる（2 × 2 = 4 通り）：1 列は埋まり、2 列は 1 マスずつ、1 列は 0 マス。0 マスの列は 3、4 行目の両方が選ぶ必要があり、1 マスの 2 列はそれぞれあと 1 マス必要なので、3 行目は「0 マスの列＋1 マスの列の一方」で 2 通り、4 行目は自動的に決まる。4 × 2 = 8 通り。",
+          "1 行目の選び方ごとに 1 + 6 + 8 = 15 通りなので、合計 6 × 15 = 90 通り。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "90"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "combinatorics-grade12-foundation",
+        "notes": "4 × 4 的 0/1 矩陣每列每行恰兩個 1：固定第一列，按第二列重疊數分類。掃過 /每一(列|橫排|行).*恰好.*(2|兩)|恰好.*(2|兩)個.*每一|4 × 4.*塗/（1 題）；最接近 combinatorics_grade10_foundation_029（4 × 4 放 4 個互不攻擊的城堡），差異：該題每列每行恰 1 個（排列數 4!）；本題每列每行恰 2 個，需依前兩列重疊情形分類"
+      }
     }
   ]
 }

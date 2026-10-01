@@ -5127,6 +5127,82 @@
         "reference": "logic-grade12-foundation",
         "notes": "題型：孔多塞循環與議程操縱（兩兩多數決不遞移）。掃過 表決|投票|偏好|多數決 全庫：沒有社會選擇題；combinatorics_grade12_048 的非遞移骰子是同一種「不遞移」現象但在機率上。"
       }
+    },
+    {
+      "id": "logic_grade12_foundation_054",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "maximum_cyclic_triples_in_tournament",
+      "tags": [
+        "c:graph_theory",
+        "c:inequality",
+        "m:extremal"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "7 支球隊進行單循環賽，每兩隊恰好比賽一場，每場都分出勝負。若三支球隊彼此之間的三場比賽恰好形成「甲勝乙、乙勝丙、丙勝甲」這種循環，就稱這三隊為一個「循環三角」。比賽結束後，循環三角最多可能有幾個？",
+        "zh-Hans": "7 支球队进行单循环赛，每两队恰好比赛一场，每场都分出胜负。若三支球队彼此之间的三场比赛恰好形成「甲胜乙、乙胜丙、丙胜甲」这种循环，就称这三队为一个「循环三角」。比赛结束后，循环三角最多可能有几个？",
+        "en": "Seven teams play a round robin: every two teams play exactly once and every game has a winner. Three teams form a \"cyclic triangle\" if their three games against one another form a cycle: A beats B, B beats C, C beats A. What is the largest possible number of cyclic triangles after all games are played?",
+        "ja": "7 チームが総当たり戦を行い、どの 2 チームもちょうど 1 回対戦し、どの試合も勝敗がつく。3 チームの間の 3 試合が「A が B に勝ち、B が C に勝ち、C が A に勝つ」という循環になっているとき、この 3 チームを「循環三角」と呼ぶ。全試合終了後、循環三角は最大でいくつありうるか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 14。",
+        "zh-Hans": "答案是 14。",
+        "en": "The answer is 14.",
+        "ja": "答えは 14 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "任取三隊，它們之間有 3 場比賽。若不是循環三角，則恰好有一隊贏了另外兩隊（三隊的勝場依序是 2、1、0）。",
+          "設第 i 隊總共贏了 wᵢ 場。從它打敗的 wᵢ 隊中任選 2 隊，與它組成一個「它贏兩場」的非循環三隊；每個非循環三隊恰好被那支贏兩場的隊伍算到一次。所以非循環三隊的個數 = Σ C(wᵢ, 2)。",
+          "循環三角的個數 = C(7, 3) − Σ C(wᵢ, 2) = 35 − Σ wᵢ(wᵢ − 1)/2，而 Σ wᵢ = 總場數 21。",
+          "Σ wᵢ(wᵢ − 1)/2 = (Σ wᵢ² − 21)/2，且 Σ wᵢ² ≥ (Σ wᵢ)²/7 = 441/7 = 63（平方和在總和固定時，各數相等最小）。所以 Σ C(wᵢ, 2) ≥ (63 − 21)/2 = 21，循環三角 ≤ 35 − 21 = 14。",
+          "做得到：把 7 隊排成一圈，每隊都打敗順時針方向接下來的 3 隊，於是每隊恰好 3 勝，等號成立。最多 14 個。"
+        ],
+        "zh-Hans": [
+          "任取三队，它们之间有 3 场比赛。若不是循环三角，则恰好有一队赢了另外两队（三队的胜场依序是 2、1、0）。",
+          "设第 i 队总共赢了 wᵢ 场。从它打败的 wᵢ 队中任选 2 队，与它组成一个「它赢两场」的非循环三队；每个非循环三队恰好被那支赢两场的队伍算到一次。所以非循环三队的个数 = Σ C(wᵢ, 2)。",
+          "循环三角的个数 = C(7, 3) − Σ C(wᵢ, 2) = 35 − Σ wᵢ(wᵢ − 1)/2，而 Σ wᵢ = 总场数 21。",
+          "Σ wᵢ(wᵢ − 1)/2 = (Σ wᵢ² − 21)/2，且 Σ wᵢ² ≥ (Σ wᵢ)²/7 = 441/7 = 63（平方和在总和固定时，各数相等最小）。所以 Σ C(wᵢ, 2) ≥ (63 − 21)/2 = 21，循环三角 ≤ 35 − 21 = 14。",
+          "做得到：把 7 队排成一圈，每队都打败顺时针方向接下来的 3 队，于是每队恰好 3 胜，等号成立。最多 14 个。"
+        ],
+        "en": [
+          "Any three teams play 3 games among themselves. If they are not a cyclic triangle, exactly one of them beats the other two (their wins are 2, 1, 0).",
+          "Let team i win wᵢ games. Choosing any 2 of the wᵢ teams it beat forms a non-cyclic trio in which it wins twice, and each non-cyclic trio is counted exactly once, by its two-win team. So the number of non-cyclic trios is Σ C(wᵢ, 2).",
+          "The number of cyclic triangles is C(7, 3) − Σ C(wᵢ, 2) = 35 − Σ wᵢ(wᵢ − 1)/2, where Σ wᵢ = 21, the total number of games.",
+          "Σ wᵢ(wᵢ − 1)/2 = (Σ wᵢ² − 21)/2 and Σ wᵢ² ≥ (Σ wᵢ)²/7 = 441/7 = 63 (for a fixed total, the sum of squares is smallest when all are equal). So Σ C(wᵢ, 2) ≥ (63 − 21)/2 = 21 and the number of cyclic triangles is at most 35 − 21 = 14.",
+          "This is achieved: arrange the 7 teams in a circle and let each beat the next 3 teams clockwise; then every team has exactly 3 wins and equality holds. The maximum is 14."
+        ],
+        "ja": [
+          "任意の 3 チームの間には 3 試合ある。循環三角でなければ、ちょうど 1 チームが他の 2 チームに勝っている（3 チームの勝ち数は 2、1、0）。",
+          "チーム i の勝ち数を wᵢ とする。i が勝った wᵢ チームから 2 チームを選ぶと、i が 2 勝する非循環の 3 チームができ、各非循環の 3 チームは 2 勝したチームによってちょうど 1 回数えられる。よって非循環の 3 チームの個数は Σ C(wᵢ, 2)。",
+          "循環三角の個数 = C(7, 3) − Σ C(wᵢ, 2) = 35 − Σ wᵢ(wᵢ − 1)/2 で、Σ wᵢ = 総試合数 21。",
+          "Σ wᵢ(wᵢ − 1)/2 = (Σ wᵢ² − 21)/2 で、Σ wᵢ² ≥ (Σ wᵢ)²/7 = 441/7 = 63（和が一定なら平方和はすべて等しいとき最小）。よって Σ C(wᵢ, 2) ≥ (63 − 21)/2 = 21 となり、循環三角は 35 − 21 = 14 以下。",
+          "実現できる：7 チームを円形に並べ、各チームが時計回りに続く 3 チームに勝つようにすると、どのチームもちょうど 3 勝で等号が成り立つ。最大は 14。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "14"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade12-foundation",
+        "notes": "競賽圖循環三角數 = C(n,3) − Σ C(wᵢ,2)，以平方和下界與正則競賽圖達成極值。掃過 /循環三角|三隊|三支球隊|循環賽/（8 題）；最接近 logic_grade11_foundation_053（7 隊循環賽勝 5 場以上的隊最多幾隊），差異：該題用總勝場數限制；本題計數循環三隊，需建立「非循環三隊 = Σ C(wᵢ,2)」再求極值"
+      }
     }
   ]
 }

@@ -4620,6 +4620,313 @@
         "reference": "number-theory-grade12-rational-root-parameter",
         "notes": "整係數多項式的整數根必整除常數項，再反解參數並注意重複。掃過 algebra_grade11_137（2x³ + ax² + bx + 3 可能的有理根個數）、number_theory_grade12_002（三個正整數根求 b）、number_theory_grade11_002。137 數的是根的候選值，本題由候選根反推參數並去重。"
       }
+    },
+    {
+      "id": "number_theory_grade12_foundation_048",
+      "reviewStatus": "ok",
+      "topic": "number_theory",
+      "subtopic": "bases_where_number_is_palindrome",
+      "tags": [
+        "c:number_base",
+        "c:factor_multiple",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "把 2026 用 b 進位寫出來（b 是大於 1 的整數）。若在 b 進位下 2026 恰好是一個三位數，而且這個三位數從左讀到右與從右讀到左相同（例如 b 進位的 aca），就稱 b 是「好底數」。求所有好底數的和。",
+        "zh-Hans": "把 2026 用 b 进位写出来（b 是大于 1 的整数）。若在 b 进位下 2026 恰好是一个三位数，而且这个三位数从左读到右与从右读到左相同（例如 b 进位的 aca），就称 b 是「好底数」。求所有好底数的和。",
+        "en": "Write 2026 in base b (b an integer greater than 1). Call b a \"good base\" if in base b the number 2026 has exactly three digits and those digits read the same forwards and backwards (like aca in base b). Find the sum of all good bases.",
+        "ja": "2026 を b 進法（b は 1 より大きい整数）で表す。b 進法で 2026 がちょうど 3 桁になり、しかもその 3 桁が左から読んでも右から読んでも同じ（b 進法の aca のような形）とき、b を「よい底」と呼ぶ。よい底すべての和を求めなさい。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 72。",
+        "zh-Hans": "答案是 72。",
+        "en": "The answer is 72.",
+        "ja": "答えは 72 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "三位迴文 (a c a) 在 b 進位表示 2026 = ab² + cb + a，其中 1 ≤ a < b、0 ≤ c < b。三位數表示 b² ≤ 2026 < b³，所以 13 ≤ b ≤ 45；又 ab² ≤ 2026 且 b ≥ 13，得 a ≤ 11。",
+          "改寫成 2026 − a = b(ab + c)。由 0 ≤ c < b 得 ab² ≤ 2026 − a < (a + 1)b²，所以 b 是 2026 − a 的因數，而且 √((2026 − a)/(a + 1)) < b ≤ √((2026 − a)/a)。",
+          "a = 1：b 在 31.8 到 45 之間且整除 2025 = 3⁴ × 5²，只有 b = 45，c = 2025 ÷ 45 − 45 = 0，2026 寫成 (1, 0, 1)，成立。",
+          "a = 2 到 9：區間內的整數依序是 26～31、23～25、21～22、19～20、17～18、16、15、（a = 9 時沒有整數），而 2024 = 2³ × 11 × 23、2023 = 7 × 17²、2022 = 2 × 3 × 337、2021 = 43 × 47、2020 = 2² × 5 × 101、2019 = 3 × 673、2018 = 2 × 1009，都沒有落在對應區間的因數，無解。",
+          "a = 10：區間內只有 14，而 2016 = 14 × 144，c = 144 − 140 = 4，2026 寫成 (10, 4, 10)，成立。a = 11：區間內只有 13，而 2015 = 13 × 155，c = 155 − 143 = 12 < 13，2026 寫成 (11, 12, 11)，成立。",
+          "好底數是 13、14、45，和 = 13 + 14 + 45 = 72。"
+        ],
+        "zh-Hans": [
+          "三位回文 (a c a) 在 b 进位表示 2026 = ab² + cb + a，其中 1 ≤ a < b、0 ≤ c < b。三位数表示 b² ≤ 2026 < b³，所以 13 ≤ b ≤ 45；又 ab² ≤ 2026 且 b ≥ 13，得 a ≤ 11。",
+          "改写成 2026 − a = b(ab + c)。由 0 ≤ c < b 得 ab² ≤ 2026 − a < (a + 1)b²，所以 b 是 2026 − a 的因数，而且 √((2026 − a)/(a + 1)) < b ≤ √((2026 − a)/a)。",
+          "a = 1：b 在 31.8 到 45 之间且整除 2025 = 3⁴ × 5²，只有 b = 45，c = 2025 ÷ 45 − 45 = 0，2026 写成 (1, 0, 1)，成立。",
+          "a = 2 到 9：区间内的整数依序是 26～31、23～25、21～22、19～20、17～18、16、15、（a = 9 时没有整数），而 2024 = 2³ × 11 × 23、2023 = 7 × 17²、2022 = 2 × 3 × 337、2021 = 43 × 47、2020 = 2² × 5 × 101、2019 = 3 × 673、2018 = 2 × 1009，都没有落在对应区间的因数，无解。",
+          "a = 10：区间内只有 14，而 2016 = 14 × 144，c = 144 − 140 = 4，2026 写成 (10, 4, 10)，成立。a = 11：区间内只有 13，而 2015 = 13 × 155，c = 155 − 143 = 12 < 13，2026 写成 (11, 12, 11)，成立。",
+          "好底数是 13、14、45，和 = 13 + 14 + 45 = 72。"
+        ],
+        "en": [
+          "A three-digit palindrome (a c a) in base b means 2026 = ab² + cb + a with 1 ≤ a < b and 0 ≤ c < b. Three digits means b² ≤ 2026 < b³, so 13 ≤ b ≤ 45; also ab² ≤ 2026 with b ≥ 13 gives a ≤ 11.",
+          "Rewrite as 2026 − a = b(ab + c). From 0 ≤ c < b we get ab² ≤ 2026 − a < (a + 1)b², so b divides 2026 − a and √((2026 − a)/(a + 1)) < b ≤ √((2026 − a)/a).",
+          "a = 1: b lies between 31.8 and 45 and divides 2025 = 3⁴ × 5²; only b = 45 works, with c = 2025 ÷ 45 − 45 = 0, so 2026 = (1, 0, 1) in base 45.",
+          "a = 2 to 9: the integers in the intervals are 26–31, 23–25, 21–22, 19–20, 17–18, 16, 15, and none for a = 9; since 2024 = 2³ × 11 × 23, 2023 = 7 × 17², 2022 = 2 × 3 × 337, 2021 = 43 × 47, 2020 = 2² × 5 × 101, 2019 = 3 × 673, 2018 = 2 × 1009, none has a divisor in its interval: no solutions.",
+          "a = 10: the only integer in the interval is 14, and 2016 = 14 × 144, so c = 144 − 140 = 4 and 2026 = (10, 4, 10) in base 14. a = 11: the only integer is 13, and 2015 = 13 × 155, so c = 155 − 143 = 12 < 13 and 2026 = (11, 12, 11) in base 13.",
+          "The good bases are 13, 14, 45, with sum 13 + 14 + 45 = 72."
+        ],
+        "ja": [
+          "b 進法の 3 桁の回文 (a c a) なら 2026 = ab² + cb + a（1 ≤ a < b、0 ≤ c < b）。3 桁なので b² ≤ 2026 < b³ より 13 ≤ b ≤ 45。また ab² ≤ 2026 と b ≥ 13 から a ≤ 11。",
+          "2026 − a = b(ab + c) と書き直す。0 ≤ c < b より ab² ≤ 2026 − a < (a + 1)b² なので、b は 2026 − a の約数で、√((2026 − a)/(a + 1)) < b ≤ √((2026 − a)/a) を満たす。",
+          "a = 1：b は 31.8 より大きく 45 以下で 2025 = 3⁴ × 5² を割り切る。b = 45 だけで、c = 2025 ÷ 45 − 45 = 0。2026 は 45 進法で (1, 0, 1)。",
+          "a = 2～9：区間内の整数は順に 26～31、23～25、21～22、19～20、17～18、16、15、（a = 9 ではなし）。2024 = 2³ × 11 × 23、2023 = 7 × 17²、2022 = 2 × 3 × 337、2021 = 43 × 47、2020 = 2² × 5 × 101、2019 = 3 × 673、2018 = 2 × 1009 で、どれも対応する区間に約数をもたないので解なし。",
+          "a = 10：区間内の整数は 14 だけで 2016 = 14 × 144 なので c = 144 − 140 = 4、2026 は 14 進法で (10, 4, 10)。a = 11：区間内は 13 だけで 2015 = 13 × 155 なので c = 155 − 143 = 12 < 13、2026 は 13 進法で (11, 12, 11)。",
+          "よい底は 13、14、45 で、和は 13 + 14 + 45 = 72。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "72"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "number-theory-grade12-foundation",
+        "notes": "2026 為 b 進位三位迴文：2026 − a = b(ab + c)，依首位 a 定 b 的區間並用因數篩選。掃過 /迴文|回文|進位/（34 題）；最接近 number_theory_grade7_foundation_048（1～100 中的二進位迴文數個數），差異：該題固定二進位、數迴文數；本題固定數 2026、找使它成為迴文的底數，需按首位 a 分區間並用因數分解篩選"
+      }
+    },
+    {
+      "id": "number_theory_grade12_foundation_049",
+      "reviewStatus": "ok",
+      "topic": "number_theory",
+      "subtopic": "inverse_euler_totient",
+      "tags": [
+        "c:factor_multiple",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "用 φ(n) 表示 1 到 n 之中與 n 互質的正整數個數（例如 φ(9) = 6）。已知若 n 的質因數分解是 p₁^e₁ × p₂^e₂ × ⋯，則 φ(n) 等於各個 pᵢ^(eᵢ − 1) × (pᵢ − 1) 的乘積。求所有滿足 φ(n) = 12 的正整數 n 之和。",
+        "zh-Hans": "用 φ(n) 表示 1 到 n 之中与 n 互质的正整数个数（例如 φ(9) = 6）。已知若 n 的质因数分解是 p₁^e₁ × p₂^e₂ × ⋯，则 φ(n) 等于各个 pᵢ^(eᵢ − 1) × (pᵢ − 1) 的乘积。求所有满足 φ(n) = 12 的正整数 n 之和。",
+        "en": "Let φ(n) be the number of integers from 1 to n that are coprime to n (for example φ(9) = 6). It is known that if n = p₁^e₁ × p₂^e₂ × ⋯ is the prime factorization, then φ(n) is the product of the factors pᵢ^(eᵢ − 1) × (pᵢ − 1). Find the sum of all positive integers n with φ(n) = 12.",
+        "ja": "φ(n) を 1 から n までのうち n と互いに素な整数の個数とする（たとえば φ(9) = 6）。n の素因数分解が p₁^e₁ × p₂^e₂ × ⋯ のとき、φ(n) は各 pᵢ^(eᵢ − 1) × (pᵢ − 1) の積に等しいことが知られている。φ(n) = 12 を満たす正の整数 n すべての和を求めなさい。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 166。",
+        "zh-Hans": "答案是 166。",
+        "en": "The answer is 166.",
+        "ja": "答えは 166 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "n 的每個質因數 p 都在 φ(n) 中貢獻因數 p − 1，所以 p − 1 必須整除 12，p − 1 ∈ {1, 2, 3, 4, 6, 12}，而 p 要是質數：p ∈ {2, 3, 5, 7, 13}。",
+          "含 13：13 只能出現一次（13² 會貢獻 13 × 12），它已貢獻 12，其餘部分的 φ 值必須是 1，只能是 1 或 2：n = 13、26。",
+          "含 7 不含 13：7 只能出現一次，貢獻 6，其餘部分 φ 值須為 2，那部分只能是 3、4、6（5 會貢獻 4、9 會貢獻 6，都太大）：n = 21、28、42。",
+          "只含 2、3、5：5 只能出現一次（貢獻 4），3 的部分貢獻 2（3¹）或 6（3²），2 的部分貢獻 1、1、2、4、⋯（2⁰、2¹、2²、2³⋯）。要乘積恰為 12 = 4 × 3，必須有因數 3，只有 3² 貢獻的 6 含 3；6 × 2 = 12 需 2 的部分貢獻 2，即 2²。若再含 5 會多乘 4，太大。所以只有 n = 2² × 3² = 36。",
+          "所有 n 是 13、21、26、28、36、42，和 = 13 + 21 + 26 + 28 + 36 + 42 = 166。"
+        ],
+        "zh-Hans": [
+          "n 的每个质因数 p 都在 φ(n) 中贡献因数 p − 1，所以 p − 1 必须整除 12，p − 1 ∈ {1, 2, 3, 4, 6, 12}，而 p 要是质数：p ∈ {2, 3, 5, 7, 13}。",
+          "含 13：13 只能出现一次（13² 会贡献 13 × 12），它已贡献 12，其余部分的 φ 值必须是 1，只能是 1 或 2：n = 13、26。",
+          "含 7 不含 13：7 只能出现一次，贡献 6，其余部分 φ 值须为 2，那部分只能是 3、4、6（5 会贡献 4、9 会贡献 6，都太大）：n = 21、28、42。",
+          "只含 2、3、5：5 只能出现一次（贡献 4），3 的部分贡献 2（3¹）或 6（3²），2 的部分贡献 1、1、2、4、⋯（2⁰、2¹、2²、2³⋯）。要乘积恰为 12 = 4 × 3，必须有因数 3，只有 3² 贡献的 6 含 3；6 × 2 = 12 需 2 的部分贡献 2，即 2²。若再含 5 会多乘 4，太大。所以只有 n = 2² × 3² = 36。",
+          "所有 n 是 13、21、26、28、36、42，和 = 13 + 21 + 26 + 28 + 36 + 42 = 166。"
+        ],
+        "en": [
+          "Each prime factor p of n contributes a factor p − 1 to φ(n), so p − 1 divides 12, p − 1 ∈ {1, 2, 3, 4, 6, 12}, and p is prime: p ∈ {2, 3, 5, 7, 13}.",
+          "With 13: it appears only once (13² would contribute 13 × 12) and already contributes 12, so the rest has φ value 1, i.e. it is 1 or 2: n = 13, 26.",
+          "With 7 but not 13: 7 appears once, contributing 6, so the rest has φ value 2, which means the rest is 3, 4 or 6 (5 would contribute 4 and 9 would contribute 6, too much): n = 21, 28, 42.",
+          "Only 2, 3, 5: 5 can appear once (contributing 4), the 3-part contributes 2 (3¹) or 6 (3²), the 2-part contributes 1, 1, 2, 4, … (2⁰, 2¹, 2², 2³, …). To get exactly 12 = 4 × 3 we need a factor 3, which only 3² (contributing 6) provides; 6 × 2 = 12 requires the 2-part to contribute 2, i.e. 2². Including 5 would multiply by 4, too much. So only n = 2² × 3² = 36.",
+          "The values are 13, 21, 26, 28, 36, 42, with sum 13 + 21 + 26 + 28 + 36 + 42 = 166."
+        ],
+        "ja": [
+          "n の各素因数 p は φ(n) に因数 p − 1 を与えるので、p − 1 は 12 を割り切る。p − 1 ∈ {1, 2, 3, 4, 6, 12} で p は素数なので p ∈ {2, 3, 5, 7, 13}。",
+          "13 を含む場合：13 は 1 回しか現れず（13² なら 13 × 12 を与える）、すでに 12 を与えているので、残りの部分の φ の値は 1、つまり残りは 1 か 2：n = 13、26。",
+          "7 を含み 13 を含まない場合：7 は 1 回だけで 6 を与えるので、残りの φ の値は 2。残りは 3、4、6 のいずれか（5 なら 4、9 なら 6 を与えて大きすぎる）：n = 21、28、42。",
+          "2、3、5 だけの場合：5 は 1 回まで（4 を与える）、3 の部分は 2（3¹）か 6（3²）、2 の部分は 1、1、2、4、…（2⁰、2¹、2²、2³、…）を与える。積をちょうど 12 = 4 × 3 にするには因数 3 が必要で、それを与えるのは 6 を与える 3² だけ。6 × 2 = 12 となるには 2 の部分が 2、つまり 2²。5 を含めるとさらに 4 倍になり大きすぎる。よって n = 2² × 3² = 36 のみ。",
+          "n は 13、21、26、28、36、42 で、和は 13 + 21 + 26 + 28 + 36 + 42 = 166。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "166"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "number-theory-grade12-foundation",
+        "notes": "反解 φ(n) = 12：質因數 p 需 p − 1 | 12，依最大質因數分類組合。掃過 /φ\\(n\\)|歐拉函數|互質.*個數/（3 題）；最接近 number_theory_grade12_foundation_044（給定性質求 φ 相關選擇題），差異：該題是正向計算 φ；本題反解 φ(n) = 12 的所有 n，需由 p − 1 | 12 限定質因數再分類"
+      }
+    },
+    {
+      "id": "number_theory_grade12_foundation_050",
+      "reviewStatus": "ok",
+      "topic": "number_theory",
+      "subtopic": "sum_of_two_squares_mod_seven",
+      "tags": [
+        "c:modular",
+        "m:casework",
+        "m:contradiction"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "從 1 到 100 的正整數中依序選出 a 與 b（可以相同，(a, b) 與 (b, a) 若不同就算兩組），使得 a² + b² 是 7 的倍數。這樣的有序數對 (a, b) 共有幾組？",
+        "zh-Hans": "从 1 到 100 的正整数中依序选出 a 与 b（可以相同，(a, b) 与 (b, a) 若不同就算两组），使得 a² + b² 是 7 的倍数。这样的有序数对 (a, b) 共有几组？",
+        "en": "Choose a and b in order from the positive integers 1 to 100 (they may be equal; (a, b) and (b, a) count separately when different) so that a² + b² is a multiple of 7. How many such ordered pairs (a, b) are there?",
+        "ja": "1 から 100 までの正の整数から a と b を順に選ぶ（同じでもよく、(a, b) と (b, a) は異なれば別に数える）。a² + b² が 7 の倍数になるような順序対 (a, b) は何組あるか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 196。",
+        "zh-Hans": "答案是 196。",
+        "en": "The answer is 196.",
+        "ja": "答えは 196 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "平方數除以 7 的餘數只有 0、1、2、4 四種：0²、1²、2²、3² 依序餘 0、1、4、2，而 4²、5²、6² 分別與 3²、2²、1² 同餘。",
+          "若 a 不是 7 的倍數，a² 的餘數 r 是 1、2 或 4，此時需要 b² 餘 7 − r，也就是 6、5 或 3，都不在 {0, 1, 2, 4} 之中，不可能。",
+          "所以 a 必須是 7 的倍數；這時 b² 也必須是 7 的倍數，因為 7 是質數，b 也是 7 的倍數。反過來，a、b 都是 7 的倍數時 a² + b² 一定是 7 的倍數。",
+          "1 到 100 之中 7 的倍數有 14 個（7 × 14 = 98）。",
+          "有序數對共 14 × 14 = 196 組。"
+        ],
+        "zh-Hans": [
+          "平方数除以 7 的余数只有 0、1、2、4 四种：0²、1²、2²、3² 依序余 0、1、4、2，而 4²、5²、6² 分别与 3²、2²、1² 同余。",
+          "若 a 不是 7 的倍数，a² 的余数 r 是 1、2 或 4，此时需要 b² 余 7 − r，也就是 6、5 或 3，都不在 {0, 1, 2, 4} 之中，不可能。",
+          "所以 a 必须是 7 的倍数；这时 b² 也必须是 7 的倍数，因为 7 是质数，b 也是 7 的倍数。反过来，a、b 都是 7 的倍数时 a² + b² 一定是 7 的倍数。",
+          "1 到 100 之中 7 的倍数有 14 个（7 × 14 = 98）。",
+          "有序数对共 14 × 14 = 196 组。"
+        ],
+        "en": [
+          "Squares leave only the remainders 0, 1, 2, 4 mod 7: 0², 1², 2², 3² give 0, 1, 4, 2, and 4², 5², 6² match 3², 2², 1².",
+          "If a is not a multiple of 7, a² leaves remainder r = 1, 2 or 4, and b² would need remainder 7 − r = 6, 5 or 3, none of which is in {0, 1, 2, 4}: impossible.",
+          "So a must be a multiple of 7; then b² must be a multiple of 7, and since 7 is prime, so is b. Conversely, if both are multiples of 7 then a² + b² is a multiple of 7.",
+          "There are 14 multiples of 7 from 1 to 100 (7 × 14 = 98).",
+          "So there are 14 × 14 = 196 ordered pairs."
+        ],
+        "ja": [
+          "平方数を 7 で割った余りは 0、1、2、4 の 4 種類だけ：0²、1²、2²、3² の余りは順に 0、1、4、2 で、4²、5²、6² はそれぞれ 3²、2²、1² と同じ余り。",
+          "a が 7 の倍数でなければ a² の余り r は 1、2、4 のいずれかで、b² の余りは 7 − r、すなわち 6、5、3 が必要になるが、どれも {0, 1, 2, 4} にないので不可能。",
+          "よって a は 7 の倍数。このとき b² も 7 の倍数でなければならず、7 は素数なので b も 7 の倍数。逆に a、b がともに 7 の倍数なら a² + b² は 7 の倍数。",
+          "1 から 100 までに 7 の倍数は 14 個（7 × 14 = 98）。",
+          "順序対は 14 × 14 = 196 組。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "196"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "number-theory-grade12-foundation",
+        "notes": "mod 7 的平方剩餘 {0,1,2,4} 中任兩非零者相加不為 0，故 7 | a² + b² ⟹ 7 | a 且 7 | b。掃過 /平方和.*倍數|a² ?\\+ ?b².*(整除|倍數)|平方.*除以 7/（1 題）；最接近 number_theory_grade11_foundation_034（1～50 中可寫成兩正整數平方和的數），差異：該題是表示問題；本題用 mod 7 平方剩餘證明 a、b 都須是 7 的倍數再計數"
+      }
+    },
+    {
+      "id": "number_theory_grade12_foundation_051",
+      "reviewStatus": "ok",
+      "topic": "number_theory",
+      "subtopic": "differences_of_two_powers_of_two",
+      "tags": [
+        "c:exponent",
+        "c:factor_multiple",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "有些正整數可以寫成兩個 2 的次方之差，也就是寫成 2ᵃ − 2ᵇ 的形式（a、b 是非負整數）。例如 6 = 2³ − 2¹、7 = 2³ − 2⁰。小於 1000 的正整數中，有幾個可以這樣表示？",
+        "zh-Hans": "有些正整数可以写成两个 2 的次方之差，也就是写成 2ᵃ − 2ᵇ 的形式（a、b 是非负整数）。例如 6 = 2³ − 2¹、7 = 2³ − 2⁰。小于 1000 的正整数中，有几个可以这样表示？",
+        "en": "Some positive integers can be written as the difference of two powers of 2, that is, in the form 2ᵃ − 2ᵇ with a, b nonnegative integers; for example 6 = 2³ − 2¹ and 7 = 2³ − 2⁰. How many positive integers less than 1000 can be written this way?",
+        "ja": "正の整数の中には 2 の累乗 2 つの差、すなわち 2ᵃ − 2ᵇ（a、b は 0 以上の整数）の形に書けるものがある。たとえば 6 = 2³ − 2¹、7 = 2³ − 2⁰。1000 未満の正の整数のうち、このように表せるものは何個あるか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 50。",
+        "zh-Hans": "答案是 50。",
+        "en": "The answer is 50.",
+        "ja": "答えは 50 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "差要是正的，所以 a > b。令 k = a − b ≥ 1，2ᵃ − 2ᵇ = 2ᵇ × (2ᵏ − 1)。2ᵏ − 1 是奇數，所以這個數的奇數部分是 2ᵏ − 1、2 的次方部分是 2ᵇ，(k, b) 由數本身唯一決定，不同的 (k, b) 給出不同的數。",
+          "所以只要對每個 k 數有幾個 b 使 2ᵇ × (2ᵏ − 1) < 1000。",
+          "k = 1（奇數部分 1）：2ᵇ < 1000，b = 0～9，10 個；k = 2（3）：2ᵇ ≤ 256，9 個；k = 3（7）：2ᵇ ≤ 128，8 個；k = 4（15）：2ᵇ ≤ 64，7 個；k = 5（31）：2ᵇ ≤ 32（32 × 31 = 992），6 個。",
+          "k = 6（63）：2ᵇ ≤ 8（16 × 63 = 1008 太大），4 個；k = 7（127）：2ᵇ ≤ 4，3 個；k = 8（255）：2ᵇ ≤ 2，2 個；k = 9（511）：b = 0，1 個；k ≥ 10 時 2ᵏ − 1 ≥ 1023，沒有。",
+          "合計 10 + 9 + 8 + 7 + 6 + 4 + 3 + 2 + 1 = 50 個。"
+        ],
+        "zh-Hans": [
+          "差要是正的，所以 a > b。令 k = a − b ≥ 1，2ᵃ − 2ᵇ = 2ᵇ × (2ᵏ − 1)。2ᵏ − 1 是奇数，所以这个数的奇数部分是 2ᵏ − 1、2 的次方部分是 2ᵇ，(k, b) 由数本身唯一决定，不同的 (k, b) 给出不同的数。",
+          "所以只要对每个 k 数有几个 b 使 2ᵇ × (2ᵏ − 1) < 1000。",
+          "k = 1（奇数部分 1）：2ᵇ < 1000，b = 0～9，10 个；k = 2（3）：2ᵇ ≤ 256，9 个；k = 3（7）：2ᵇ ≤ 128，8 个；k = 4（15）：2ᵇ ≤ 64，7 个；k = 5（31）：2ᵇ ≤ 32（32 × 31 = 992），6 个。",
+          "k = 6（63）：2ᵇ ≤ 8（16 × 63 = 1008 太大），4 个；k = 7（127）：2ᵇ ≤ 4，3 个；k = 8（255）：2ᵇ ≤ 2，2 个；k = 9（511）：b = 0，1 个；k ≥ 10 时 2ᵏ − 1 ≥ 1023，没有。",
+          "合计 10 + 9 + 8 + 7 + 6 + 4 + 3 + 2 + 1 = 50 个。"
+        ],
+        "en": [
+          "The difference must be positive, so a > b. With k = a − b ≥ 1, 2ᵃ − 2ᵇ = 2ᵇ × (2ᵏ − 1). Since 2ᵏ − 1 is odd, the odd part of the number is 2ᵏ − 1 and its power-of-2 part is 2ᵇ, so (k, b) is determined by the number, and different (k, b) give different numbers.",
+          "So for each k we count the b with 2ᵇ × (2ᵏ − 1) < 1000.",
+          "k = 1 (odd part 1): 2ᵇ < 1000, b = 0 to 9, 10 values; k = 2 (3): 2ᵇ ≤ 256, 9; k = 3 (7): 2ᵇ ≤ 128, 8; k = 4 (15): 2ᵇ ≤ 64, 7; k = 5 (31): 2ᵇ ≤ 32 (32 × 31 = 992), 6.",
+          "k = 6 (63): 2ᵇ ≤ 8 (16 × 63 = 1008 is too big), 4; k = 7 (127): 2ᵇ ≤ 4, 3; k = 8 (255): 2ᵇ ≤ 2, 2; k = 9 (511): b = 0, 1; for k ≥ 10, 2ᵏ − 1 ≥ 1023, none.",
+          "Total 10 + 9 + 8 + 7 + 6 + 4 + 3 + 2 + 1 = 50."
+        ],
+        "ja": [
+          "差が正なので a > b。k = a − b ≥ 1 とすると 2ᵃ − 2ᵇ = 2ᵇ × (2ᵏ − 1)。2ᵏ − 1 は奇数なので、この数の奇数部分は 2ᵏ − 1、2 のべきの部分は 2ᵇ であり、(k, b) は数から一意に決まり、異なる (k, b) は異なる数を与える。",
+          "よって各 k について 2ᵇ × (2ᵏ − 1) < 1000 となる b の個数を数えればよい。",
+          "k = 1（奇数部分 1）：2ᵇ < 1000 で b = 0～9 の 10 個。k = 2（3）：2ᵇ ≤ 256 で 9 個。k = 3（7）：2ᵇ ≤ 128 で 8 個。k = 4（15）：2ᵇ ≤ 64 で 7 個。k = 5（31）：2ᵇ ≤ 32（32 × 31 = 992）で 6 個。",
+          "k = 6（63）：2ᵇ ≤ 8（16 × 63 = 1008 は大きすぎる）で 4 個。k = 7（127）：2ᵇ ≤ 4 で 3 個。k = 8（255）：2ᵇ ≤ 2 で 2 個。k = 9（511）：b = 0 の 1 個。k ≥ 10 では 2ᵏ − 1 ≥ 1023 でなし。",
+          "合計 10 + 9 + 8 + 7 + 6 + 4 + 3 + 2 + 1 = 50 個。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "50"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "number-theory-grade12-foundation",
+        "notes": "2ᵃ − 2ᵇ = 2ᵇ(2ᵏ − 1)，奇數部分決定 k、2 冪部分決定 b，表示唯一後逐 k 計數。掃過 /2 的.*次方.*差|兩個 2 的|2ᵃ ?− ?2ᵇ/（0 題）；最接近 number_theory_grade12_foundation_005（1～100 中可寫成平方差的數），差異：該題是平方差 a² − b²；本題是 2 的次方之差，關鍵是奇數部分 2ᵏ − 1 使表示唯一"
+      }
     }
   ]
 }
