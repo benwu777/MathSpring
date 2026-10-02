@@ -5110,6 +5110,403 @@
         "reference": "logic-grade7-foundation",
         "notes": "只有一個可能鄰居的數必在端點（度數 1 的頂點），不必整列構造即可定出兩端。掃過「相鄰.*完全平方|完全平方.*相鄰|兩數之和.*平方」（0 題）、「相鄰」（169 題，無此題型）；最接近 logic_grade5_foundation_053（V 字形填數）類的填數題，但推理骨架是圖的端點度數。"
       }
+    },
+    {
+      "id": "logic_grade7_foundation_059",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "greedy_coin_change_first_failure",
+      "tags": [
+        "c:logic_deduction",
+        "m:extremal",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade7",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "某個國家只發行 1 元、5 元、12 元三種硬幣。收銀員付錢時一律用「先拿大面額」的方法：能放 12 元就先放 12 元，剩下的錢再盡量放 5 元，最後用 1 元補足。這種方法有時用的硬幣並不是最少枚。在所有正整數金額中，這種方法沒有用到最少枚數的最小金額是幾元？",
+        "zh-Hans": "某个国家只发行 1 元、5 元、12 元三种硬币。收银员付钱时一律用“先拿大面额”的方法：能放 12 元就先放 12 元，剩下的钱再尽量放 5 元，最后用 1 元补足。这种方法有时用的硬币并不是最少枚。在所有正整数金额中，这种方法没有用到最少枚数的最小金额是几元？",
+        "en": "A country issues only three coins: 1 dollar, 5 dollars and 12 dollars. A cashier always pays with the \"largest coin first\" method: put down 12-dollar coins while possible, then as many 5-dollar coins as possible, and finish with 1-dollar coins. Sometimes this method does not use the fewest coins. What is the smallest whole-dollar amount for which this method fails to use the fewest coins?",
+        "ja": "ある国では 1 円、5 円、12 円の 3 種類の硬貨だけが発行されています。レジ係は支払いのとき、いつも「大きい硬貨から」の方法を使います。12 円を置けるだけ置き、残りに 5 円をできるだけ置き、最後に 1 円で足します。この方法は、使う枚数が最少にならないことがあります。正の整数の金額のうち、この方法で最少枚数にならない最小の金額は何円ですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 15 元。",
+        "zh-Hans": "答案是 15 元。",
+        "en": "The answer is 15 dollars.",
+        "ja": "答えは 15 円です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "金額小於 12 元時，只能用 5 元和 1 元。收銀員放了最多的 5 元；任何別的付法少用一枚 5 元，就要多用 5 枚 1 元，枚數只會變多。所以 1～11 元時他用的都是最少枚數。",
+          "金額是 12、13、14 元時，收銀員用 1 枚 12 元再加 0、1、2 枚 1 元，共 1、2、3 枚。若不用 12 元，最多只能放 2 枚 5 元（3 枚就是 15 元，超過了），剩下的 2、3、4 元要用 1 元補，共 4、5、6 枚，都比收銀員多。所以 12～14 元時他也用了最少枚數。",
+          "金額是 15 元時，收銀員先放 12 元，剩下 3 元只能用 3 枚 1 元，共 4 枚；但 5 + 5 + 5 只要 3 枚。所以 15 元時這種方法沒有用到最少枚數。",
+          "1～14 元都沒問題、15 元出問題，所以最小的金額是 15 元。"
+        ],
+        "zh-Hans": [
+          "金额小于 12 元时，只能用 5 元和 1 元。收银员放了最多的 5 元；任何别的付法少用一枚 5 元，就要多用 5 枚 1 元，枚数只会变多。所以 1～11 元时他用的都是最少枚数。",
+          "金额是 12、13、14 元时，收银员用 1 枚 12 元再加 0、1、2 枚 1 元，共 1、2、3 枚。若不用 12 元，最多只能放 2 枚 5 元（3 枚就是 15 元，超过了），剩下的 2、3、4 元要用 1 元补，共 4、5、6 枚，都比收银员多。所以 12～14 元时他也用了最少枚数。",
+          "金额是 15 元时，收银员先放 12 元，剩下 3 元只能用 3 枚 1 元，共 4 枚；但 5 + 5 + 5 只要 3 枚。所以 15 元时这种方法没有用到最少枚数。",
+          "1～14 元都没问题、15 元出问题，所以最小的金额是 15 元。"
+        ],
+        "en": [
+          "For amounts below 12, only 5s and 1s can be used. The cashier uses as many 5s as possible; any other way uses one fewer 5 and five more 1s for each 5 removed, so it uses more coins. Hence for 1 to 11 dollars the cashier uses the fewest coins.",
+          "For 12, 13, 14 dollars the cashier uses one 12 plus 0, 1, 2 ones: 1, 2, 3 coins. Without the 12, at most two 5s fit (three would be 15, too much), and the remaining 2, 3, 4 dollars need 1s, for 4, 5, 6 coins, all more than the cashier. So for 12 to 14 dollars the cashier also uses the fewest coins.",
+          "For 15 dollars the cashier puts down 12, and the remaining 3 needs three 1s: 4 coins. But 5 + 5 + 5 uses only 3 coins. So at 15 dollars the method does not use the fewest coins.",
+          "Every amount from 1 to 14 works and 15 fails, so the smallest amount is 15 dollars."
+        ],
+        "ja": [
+          "金額が 12 円より小さいときは 5 円と 1 円しか使えません。レジ係は 5 円をいちばん多く使っています。ほかの払い方で 5 円を 1 枚へらすと 1 円が 5 枚ふえるので、枚数は多くなるだけです。よって 1〜11 円では最少枚数です。",
+          "12、13、14 円では、レジ係は 12 円 1 枚に 1 円を 0、1、2 枚足して 1、2、3 枚です。12 円を使わないと、5 円は最大 2 枚（3 枚だと 15 円でこえる）で、残りの 2、3、4 円を 1 円で払って 4、5、6 枚となり、どれもレジ係より多くなります。よって 12〜14 円でも最少枚数です。",
+          "15 円では、レジ係は 12 円を置き、残り 3 円を 1 円 3 枚で払うので 4 枚です。しかし 5 + 5 + 5 なら 3 枚ですみます。よって 15 円ではこの方法は最少枚数になりません。",
+          "1〜14 円はすべて最少で、15 円で初めて最少にならないので、答えは 15 円です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "15"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade7-foundation",
+        "notes": "貪心找零在 {1, 5, 12} 下第一次失效於 15 = 5 + 5 + 5。掃過「找零|貪心」（3 題）、「枚.{0,10}最少|最少.{0,10}枚」（4 題）；最接近 logic_grade7_foundation_021（1、5、10、50 元湊 87 元最少枚數，貪心本身就最佳），本題是找貪心失效的第一個金額，需證明 1～14 元都沒失效。"
+      }
+    },
+    {
+      "id": "logic_grade7_foundation_060",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "round_robin_unique_leader_minimum_points",
+      "tags": [
+        "c:logic_deduction",
+        "m:extremal",
+        "m:construction"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade7",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "4 支球隊進行單循環賽，每兩隊恰好比賽一場。每場勝隊得 3 分、敗隊得 0 分；平手時兩隊各得 1 分。全部比完後，有一支球隊的積分比其他三隊都高（沒有和別隊同分）。這支積分最高的球隊最少可能得幾分？",
+        "zh-Hans": "4 支球队进行单循环赛，每两队恰好比赛一场。每场胜队得 3 分、败队得 0 分；平局时两队各得 1 分。全部比完后，有一支球队的积分比其他三队都高（没有和别队同分）。这支积分最高的球队最少可能得几分？",
+        "en": "Four teams play a round robin: every two teams play each other exactly once. A win gives 3 points and a loss 0; in a draw each team gets 1 point. When all games are over, one team has more points than each of the other three (no tie for first). What is the fewest points this top team could have?",
+        "ja": "4 チームが総当たり戦をします。どの 2 チームもちょうど 1 回ずつ試合をします。勝ちは 3 点、負けは 0 点、引き分けは両チーム 1 点ずつです。全試合が終わったとき、あるチームの得点がほかの 3 チームのどれよりも高くなりました（同点はありません）。この最高得点のチームの得点は、最も少なくて何点ですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 5 分。",
+        "zh-Hans": "答案是 5 分。",
+        "en": "The answer is 5 points.",
+        "ja": "答えは 5 点です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "共比 4 × 3 ÷ 2 = 6 場。分出勝負的一場共產生 3 分，平手的一場共產生 2 分。若有 d 場平手，四隊積分總和是 3 × (6 − d) + 2 × d = 18 − d，最少是 12 分（6 場全平）。",
+          "設最高分的球隊得 c 分，其他三隊都最多 c − 1 分，所以總分 ≤ c + 3 × (c − 1) = 4c − 3。若 c ≤ 3，總分 ≤ 9，比 12 小，不可能。",
+          "若 c = 4：總分 ≤ 4 × 4 − 3 = 13，所以 18 − d ≤ 13，平手至少 5 場。6 場全平時四隊都是 3 分，沒有唯一最高。恰好 5 場平手時，只有一場分出勝負，那場的勝隊另外兩場都平手，得 3 + 1 + 1 = 5 分，最高分是 5 分而不是 4 分。所以最高分不可能恰好是 4 分。",
+          "5 分做得到：讓甲勝乙，其餘 5 場都平手。甲得 3 + 1 + 1 = 5 分，乙得 0 + 1 + 1 = 2 分，丙、丁各得 1 + 1 + 1 = 3 分，甲唯一最高。",
+          "所以積分最高的球隊最少得 5 分。"
+        ],
+        "zh-Hans": [
+          "共比 4 × 3 ÷ 2 = 6 场。分出胜负的一场共产生 3 分，平局的一场共产生 2 分。若有 d 场平局，四队积分总和是 3 × (6 − d) + 2 × d = 18 − d，最少是 12 分（6 场全平）。",
+          "设最高分的球队得 c 分，其他三队都最多 c − 1 分，所以总分 ≤ c + 3 × (c − 1) = 4c − 3。若 c ≤ 3，总分 ≤ 9，比 12 小，不可能。",
+          "若 c = 4：总分 ≤ 4 × 4 − 3 = 13，所以 18 − d ≤ 13，平局至少 5 场。6 场全平时四队都是 3 分，没有唯一最高。恰好 5 场平局时，只有一场分出胜负，那场的胜队另外两场都平局，得 3 + 1 + 1 = 5 分，最高分是 5 分而不是 4 分。所以最高分不可能恰好是 4 分。",
+          "5 分做得到：让甲胜乙，其余 5 场都平局。甲得 3 + 1 + 1 = 5 分，乙得 0 + 1 + 1 = 2 分，丙、丁各得 1 + 1 + 1 = 3 分，甲唯一最高。",
+          "所以积分最高的球队最少得 5 分。"
+        ],
+        "en": [
+          "There are 4 × 3 ÷ 2 = 6 games. A decided game produces 3 points in total and a draw produces 2. With d draws, the four totals add up to 3 × (6 − d) + 2 × d = 18 − d, which is at least 12 (all 6 games drawn).",
+          "Let the top team have c points; each other team has at most c − 1, so the total is at most c + 3 × (c − 1) = 4c − 3. If c ≤ 3 the total is at most 9, less than 12, impossible.",
+          "If c = 4: the total is at most 4 × 4 − 3 = 13, so 18 − d ≤ 13 and there are at least 5 draws. With 6 draws every team has 3 points and there is no unique leader. With exactly 5 draws only one game is decided; its winner drew its other two games and has 3 + 1 + 1 = 5 points, so the top score is 5, not 4. Hence the top score cannot be exactly 4.",
+          "5 points is possible: let Jia beat Yi and draw all other 5 games. Jia has 3 + 1 + 1 = 5, Yi has 0 + 1 + 1 = 2, and Bing and Ding have 1 + 1 + 1 = 3 each, so Jia is the unique leader.",
+          "So the top team has at least 5 points. The answer is 5 points."
+        ],
+        "ja": [
+          "試合数は 4 × 3 ÷ 2 = 6 試合です。勝負がついた試合は合計 3 点、引き分けの試合は合計 2 点を生みます。引き分けが d 試合なら、4 チームの得点の合計は 3 × (6 − d) + 2 × d = 18 − d で、最も少なくて 12 点（6 試合すべて引き分け）です。",
+          "最高得点のチームを c 点とすると、ほかの 3 チームはどれも c − 1 点以下なので、合計 ≤ c + 3 × (c − 1) = 4c − 3 です。c ≤ 3 なら合計 ≤ 9 で 12 より小さく、ありえません。",
+          "c = 4 のとき：合計 ≤ 4 × 4 − 3 = 13 なので 18 − d ≤ 13、引き分けは 5 試合以上です。6 試合すべて引き分けなら全チーム 3 点で、ただ 1 チームの最高にはなりません。ちょうど 5 試合が引き分けなら勝負がつくのは 1 試合だけで、その勝ったチームはほかの 2 試合が引き分けなので 3 + 1 + 1 = 5 点となり、最高点は 4 点ではなく 5 点です。よって最高点がちょうど 4 点になることはありません。",
+          "5 点は実現できます。甲が乙に勝ち、残り 5 試合をすべて引き分けにすると、甲は 3 + 1 + 1 = 5 点、乙は 0 + 1 + 1 = 2 点、丙と丁は 1 + 1 + 1 = 3 点ずつで、甲だけが最高です。",
+          "したがって最高得点のチームは最も少なくて 5 点です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "5"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade7-foundation",
+        "notes": "總分 18 − d 與 4c − 3 夾出 c ≥ 4，再排除 c = 4，構造 5 分。掃過「循環賽|單循環」（7 題）、「冠軍」（4 題）；最接近 logic_grade6_foundation_076（6 隊 3/1/0 由總分 40 求平手場數），本題是唯一最高分的最小值，需上界論證加構造。"
+      }
+    },
+    {
+      "id": "logic_grade7_foundation_061",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "sparse_ruler_minimum_marks_length_13",
+      "tags": [
+        "c:logic_deduction",
+        "c:basic_counting",
+        "m:estimate_bound",
+        "m:construction"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade7",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一根長 13 公分的木條，兩端已經各有一個刻度（0 公分和 13 公分的位置）。現在要在木條上整數公分的位置再加刻一些刻度，使得 1、2、3、⋯、13 公分的每一種長度，都能直接用某兩個刻度之間的距離量出來（不可以移動木條接著量）。最少要再加刻幾個刻度？",
+        "zh-Hans": "一根长 13 厘米的木条，两端已经各有一个刻度（0 厘米和 13 厘米的位置）。现在要在木条上整数厘米的位置再加刻一些刻度，使得 1、2、3、⋯、13 厘米的每一种长度，都能直接用某两个刻度之间的距离量出来（不可以移动木条接着量）。最少要再加刻几个刻度？",
+        "en": "A stick 13 cm long already has a mark at each end (at 0 cm and 13 cm). More marks are to be added at whole-centimetre positions so that every length 1, 2, 3, …, 13 cm can be measured directly as the distance between two marks (the stick may not be moved to measure in pieces). What is the fewest number of marks that must be added?",
+        "ja": "長さ 13 cm の木の棒があり、両はし（0 cm と 13 cm の位置）にはすでに目もりが 1 つずつあります。棒の整数 cm の位置に目もりをいくつか追加して、1、2、3、⋯、13 cm のどの長さも、ある 2 つの目もりの間のきょりとして直接はかれるようにします（棒をずらしてつないではかることはできません）。追加する目もりは最も少なくて何個ですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 4 個。",
+        "zh-Hans": "答案是 4 个。",
+        "en": "The answer is 4 marks.",
+        "ja": "答えは 4 個です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "設木條上一共有 k 個刻度（包含兩端）。每一種長度都必須是某兩個刻度之間的距離，而從 k 個刻度中選兩個，只有 k × (k − 1) ÷ 2 種選法，所以最多只能量出這麼多種不同的長度。",
+          "要量出 13 種長度，需要 k × (k − 1) ÷ 2 ≥ 13。k = 5 時只有 5 × 4 ÷ 2 = 10 種，不夠；k 更小時更少。所以 k ≥ 6，也就是至少要加刻 6 − 2 = 4 個。",
+          "加刻 4 個做得到：加刻在 1、2、6、10 公分，刻度是 0、1、2、6、10、13。逐一找出每種長度：1 = 1 − 0，2 = 2 − 0，3 = 13 − 10，4 = 6 − 2，5 = 6 − 1，6 = 6 − 0，7 = 13 − 6，8 = 10 − 2，9 = 10 − 1，10 = 10 − 0，11 = 13 − 2，12 = 13 − 1，13 = 13 − 0。",
+          "至少要 4 個，而且 4 個做得到，所以最少要再加刻 4 個刻度。"
+        ],
+        "zh-Hans": [
+          "设木条上一共有 k 个刻度（包含两端）。每一种长度都必须是某两个刻度之间的距离，而从 k 个刻度中选两个，只有 k × (k − 1) ÷ 2 种选法，所以最多只能量出这么多种不同的长度。",
+          "要量出 13 种长度，需要 k × (k − 1) ÷ 2 ≥ 13。k = 5 时只有 5 × 4 ÷ 2 = 10 种，不够；k 更小时更少。所以 k ≥ 6，也就是至少要加刻 6 − 2 = 4 个。",
+          "加刻 4 个做得到：加刻在 1、2、6、10 厘米，刻度是 0、1、2、6、10、13。逐一找出每种长度：1 = 1 − 0，2 = 2 − 0，3 = 13 − 10，4 = 6 − 2，5 = 6 − 1，6 = 6 − 0，7 = 13 − 6，8 = 10 − 2，9 = 10 − 1，10 = 10 − 0，11 = 13 − 2，12 = 13 − 1，13 = 13 − 0。",
+          "至少要 4 个，而且 4 个做得到，所以最少要再加刻 4 个刻度。"
+        ],
+        "en": [
+          "Suppose the stick has k marks in total, including the ends. Each length must be the distance between some two marks, and two marks can be chosen from k in only k × (k − 1) ÷ 2 ways, so at most that many different lengths can be measured.",
+          "To measure 13 lengths we need k × (k − 1) ÷ 2 ≥ 13. For k = 5 there are only 5 × 4 ÷ 2 = 10 pairs, not enough, and smaller k gives even fewer. So k ≥ 6, which means at least 6 − 2 = 4 marks must be added.",
+          "Four added marks suffice: add marks at 1, 2, 6 and 10 cm, giving marks 0, 1, 2, 6, 10, 13. Each length: 1 = 1 − 0, 2 = 2 − 0, 3 = 13 − 10, 4 = 6 − 2, 5 = 6 − 1, 6 = 6 − 0, 7 = 13 − 6, 8 = 10 − 2, 9 = 10 − 1, 10 = 10 − 0, 11 = 13 − 2, 12 = 13 − 1, 13 = 13 − 0.",
+          "At least 4 are needed and 4 are enough, so the fewest number of added marks is 4."
+        ],
+        "ja": [
+          "棒の目もりが両はしもふくめて全部で k 個あるとします。どの長さも 2 つの目もりの間のきょりでなければならず、k 個から 2 個を選ぶ選び方は k × (k − 1) ÷ 2 通りしかないので、はかれる長さはそれ以下の種類しかありません。",
+          "13 種類の長さをはかるには k × (k − 1) ÷ 2 ≥ 13 が必要です。k = 5 では 5 × 4 ÷ 2 = 10 通りで足りず、k がもっと小さければさらに少なくなります。よって k ≥ 6 で、少なくとも 6 − 2 = 4 個追加する必要があります。",
+          "4 個で実現できます。1、2、6、10 cm に追加すると目もりは 0、1、2、6、10、13 で、1 = 1 − 0、2 = 2 − 0、3 = 13 − 10、4 = 6 − 2、5 = 6 − 1、6 = 6 − 0、7 = 13 − 6、8 = 10 − 2、9 = 10 − 1、10 = 10 − 0、11 = 13 − 2、12 = 13 − 1、13 = 13 − 0 とすべてはかれます。",
+          "少なくとも 4 個必要で、4 個で足りるので、答えは 4 個です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "4"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade7-foundation",
+        "notes": "k 個刻度最多 C(k, 2) 種距離 → k ≥ 6，再給 0、1、2、6、10、13 構造。掃過「刻度」（13 題）、「尺」；最接近 geometry_grade4_foundation_125（刻度只剩 0、1、4、6，問能量幾種長度），本題反過來求最少刻度，要下界論證加構造。"
+      }
+    },
+    {
+      "id": "logic_grade7_foundation_062",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "month_weekday_counts_extra_days",
+      "tags": [
+        "c:modular",
+        "c:logic_deduction",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade7",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "某一年的某一個月裡，星期一出現的次數比星期二多，星期日出現的次數也比星期六多。這個月的 20 日是星期幾？",
+        "zh-Hans": "某一年的某一个月里，星期一出现的次数比星期二多，星期日出现的次数也比星期六多。这个月的 20 日是星期几？",
+        "en": "In a certain month of some year, Monday occurs more times than Tuesday, and Sunday occurs more times than Saturday. What day of the week is the 20th of that month?",
+        "ja": "ある年のある月では、月曜日の回数が火曜日より多く、日曜日の回数も土曜日より多くなっています。この月の 20 日は何曜日ですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 C：星期五。",
+        "zh-Hans": "答案是 C：星期五。",
+        "en": "The answer is C: Friday.",
+        "ja": "答えは C：金曜日です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "一個月有 28～31 天。前 28 天剛好是 4 個完整的星期，每個星期幾都出現 4 次；多出來的 0～3 天，是從 1 日那天的星期幾開始、連續往後的幾天，這幾個星期幾各多出現 1 次。",
+          "星期一比星期二多，表示星期一在多出來的天裡、星期二不在；星期日比星期六多，表示星期日在、星期六不在。",
+          "多出來的天是從 1 日開始連續的幾天。星期日在裡面而它的前一天星期六不在，所以星期日必須是第一天，也就是 1 日是星期日；星期一在裡面而它的後一天星期二不在，所以星期一是最後一天。多出來的恰好是星期日、星期一這 2 天，這個月有 30 天。",
+          "20 日是 1 日之後再過 19 天，19 = 7 × 2 + 5，所以 20 日是星期日往後數 5 天，也就是星期五。",
+          "20 日只能是星期五，所以星期三、星期四、星期六、星期日都不對。答案是 C。"
+        ],
+        "zh-Hans": [
+          "一个月有 28～31 天。前 28 天刚好是 4 个完整的星期，每个星期几都出现 4 次；多出来的 0～3 天，是从 1 日那天的星期几开始、连续往后的几天，这几个星期几各多出现 1 次。",
+          "星期一比星期二多，表示星期一在多出来的天里、星期二不在；星期日比星期六多，表示星期日在、星期六不在。",
+          "多出来的天是从 1 日开始连续的几天。星期日在里面而它的前一天星期六不在，所以星期日必须是第一天，也就是 1 日是星期日；星期一在里面而它的后一天星期二不在，所以星期一是最后一天。多出来的恰好是星期日、星期一这 2 天，这个月有 30 天。",
+          "20 日是 1 日之后再过 19 天，19 = 7 × 2 + 5，所以 20 日是星期日往后数 5 天，也就是星期五。",
+          "20 日只能是星期五，所以星期三、星期四、星期六、星期日都不对。答案是 C。"
+        ],
+        "en": [
+          "A month has 28 to 31 days. The first 28 days are exactly 4 full weeks, so each weekday occurs 4 times there; the extra 0 to 3 days are consecutive weekdays starting from the weekday of the 1st, and each of those weekdays occurs one extra time.",
+          "Monday occurring more than Tuesday means Monday is among the extra days and Tuesday is not; Sunday occurring more than Saturday means Sunday is among them and Saturday is not.",
+          "The extra days are consecutive, starting from the 1st. Sunday is included but the day before it, Saturday, is not, so Sunday must be the first extra day, i.e. the 1st is a Sunday. Monday is included but the day after it, Tuesday, is not, so Monday is the last extra day. The extra days are exactly Sunday and Monday, and the month has 30 days.",
+          "The 20th is 19 days after the 1st, and 19 = 7 × 2 + 5, so the 20th is 5 days after a Sunday, which is a Friday.",
+          "The 20th can only be a Friday, so Wednesday, Thursday, Saturday and Sunday are all wrong. The answer is C."
+        ],
+        "ja": [
+          "1 か月は 28〜31 日です。はじめの 28 日はちょうど 4 週間なので、どの曜日も 4 回ずつあります。残りの 0〜3 日は 1 日の曜日から始まって続く何日かで、その曜日だけが 1 回ずつ多くなります。",
+          "月曜日が火曜日より多いので、月曜日は残りの日にふくまれ、火曜日はふくまれません。日曜日が土曜日より多いので、日曜日はふくまれ、土曜日はふくまれません。",
+          "残りの日は 1 日から続く何日かです。日曜日がふくまれ、その前日の土曜日がふくまれないので、日曜日が最初の日、つまり 1 日は日曜日です。月曜日がふくまれ、その翌日の火曜日がふくまれないので、月曜日が最後の日です。残りの日はちょうど日曜日と月曜日の 2 日で、この月は 30 日あります。",
+          "20 日は 1 日の 19 日後で、19 = 7 × 2 + 5 なので、20 日は日曜日から 5 日後の金曜日です。",
+          "20 日は金曜日しかありえないので、水曜日、木曜日、土曜日、日曜日はどれもちがいます。答えは C です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "multiple_choice",
+      "options": {
+        "A": {
+          "zh-Hant": "星期三",
+          "zh-Hans": "星期三",
+          "en": "Wednesday",
+          "ja": "水曜日"
+        },
+        "B": {
+          "zh-Hant": "星期四",
+          "zh-Hans": "星期四",
+          "en": "Thursday",
+          "ja": "木曜日"
+        },
+        "C": {
+          "zh-Hant": "星期五",
+          "zh-Hans": "星期五",
+          "en": "Friday",
+          "ja": "金曜日"
+        },
+        "D": {
+          "zh-Hant": "星期六",
+          "zh-Hans": "星期六",
+          "en": "Saturday",
+          "ja": "土曜日"
+        },
+        "E": {
+          "zh-Hant": "星期日",
+          "zh-Hans": "星期日",
+          "en": "Sunday",
+          "ja": "日曜日"
+        }
+      },
+      "correctAnswer": {
+        "type": "choice",
+        "value": "C"
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade7-foundation",
+        "notes": "28 天外多出的 0～3 天是從 1 日起的連續星期，用「含星期日不含星期六、含星期一不含星期二」鎖定 1 日是星期日、共 30 天。掃過「星期一.{0,30}星期二|比星期」（4 題）、「星期」（40 題）；最接近 logic_grade1_foundation_126（已告知多出的是星期一、二，求 30 號），本題要從兩組不等關係反推多出的天與月長。"
+      }
+    },
+    {
+      "id": "logic_grade7_foundation_063",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "number_pyramid_five_base_maximum_top",
+      "tags": [
+        "c:pattern",
+        "c:logic_deduction",
+        "m:extremal"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade7",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "把 1、2、3、4、5 各用一次，填在數塔最底層的一排 5 格裡。往上每一層都比下一層少一格，每一格的數等於它下方相鄰兩格的數相加，一直算到最上面只剩一格。最上面那一格的數最大可能是多少？",
+        "zh-Hans": "把 1、2、3、4、5 各用一次，填在数塔最底层的一排 5 格里。往上每一层都比下一层少一格，每一格的数等于它下方相邻两格的数相加，一直算到最上面只剩一格。最上面那一格的数最大可能是多少？",
+        "en": "Use each of 1, 2, 3, 4, 5 once to fill the 5 boxes in the bottom row of a number tower. Each row above has one box fewer than the row below, and each box holds the sum of the two boxes just below it, until only one box is left at the top. What is the largest possible number in the top box?",
+        "ja": "1、2、3、4、5 を 1 回ずつ使って、数のピラミッドのいちばん下の段の 5 マスに入れます。上の段はすぐ下の段より 1 マス少なく、各マスにはすぐ下でとなり合う 2 マスの数の和を入れ、いちばん上が 1 マスになるまで続けます。いちばん上のマスの数は最大でいくつですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 61。",
+        "zh-Hans": "答案是 61。",
+        "en": "The answer is 61.",
+        "ja": "答えは 61 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "設底層由左到右是 a、b、c、d、e。第二層是 a + b、b + c、c + d、d + e；第三層是 a + 2b + c、b + 2c + d、c + 2d + e；第四層是 a + 3b + 3c + d、b + 3c + 3d + e；最上面是 a + 4b + 6c + 4d + e。",
+          "所以最上面 = 1 × a + 4 × b + 6 × c + 4 × d + 1 × e：正中間的數乘 6，第 2、第 4 格乘 4，兩端乘 1。",
+          "要讓總和最大，乘數大的位置要放大的數：如果某個乘數較大的位置放的數比某個乘數較小的位置的數小，把兩個數交換，總和會增加（乘數的差 × 兩數的差，兩者都是正數），所以那不會是最大。因此最大時中間 c = 5，第 2、4 格放 4 和 3，兩端放 2 和 1。",
+          "最大值 = 6 × 5 + 4 × (4 + 3) + 1 × (2 + 1) = 30 + 28 + 3 = 61。答案是 61。"
+        ],
+        "zh-Hans": [
+          "设底层由左到右是 a、b、c、d、e。第二层是 a + b、b + c、c + d、d + e；第三层是 a + 2b + c、b + 2c + d、c + 2d + e；第四层是 a + 3b + 3c + d、b + 3c + 3d + e；最上面是 a + 4b + 6c + 4d + e。",
+          "所以最上面 = 1 × a + 4 × b + 6 × c + 4 × d + 1 × e：正中间的数乘 6，第 2、第 4 格乘 4，两端乘 1。",
+          "要让总和最大，乘数大的位置要放大的数：如果某个乘数较大的位置放的数比某个乘数较小的位置的数小，把两个数交换，总和会增加（乘数的差 × 两数的差，两者都是正数），所以那不会是最大。因此最大时中间 c = 5，第 2、4 格放 4 和 3，两端放 2 和 1。",
+          "最大值 = 6 × 5 + 4 × (4 + 3) + 1 × (2 + 1) = 30 + 28 + 3 = 61。答案是 61。"
+        ],
+        "en": [
+          "Let the bottom row be a, b, c, d, e from left to right. The second row is a + b, b + c, c + d, d + e; the third row is a + 2b + c, b + 2c + d, c + 2d + e; the fourth row is a + 3b + 3c + d, b + 3c + 3d + e; and the top is a + 4b + 6c + 4d + e.",
+          "So the top = 1 × a + 4 × b + 6 × c + 4 × d + 1 × e: the middle number counts 6 times, the 2nd and 4th count 4 times, and the two ends count once.",
+          "To make the total largest, larger multipliers must get larger numbers: if a position with a larger multiplier held a smaller number than a position with a smaller multiplier, swapping the two numbers would increase the total (by the difference of multipliers times the difference of numbers, both positive), so that could not be the maximum. Hence at the maximum c = 5, the 2nd and 4th boxes hold 4 and 3, and the ends hold 2 and 1.",
+          "The maximum is 6 × 5 + 4 × (4 + 3) + 1 × (2 + 1) = 30 + 28 + 3 = 61. The answer is 61."
+        ],
+        "ja": [
+          "いちばん下の段を左から a、b、c、d、e とします。2 段目は a + b、b + c、c + d、d + e、3 段目は a + 2b + c、b + 2c + d、c + 2d + e、4 段目は a + 3b + 3c + d、b + 3c + 3d + e、いちばん上は a + 4b + 6c + 4d + e です。",
+          "つまり、いちばん上 = 1 × a + 4 × b + 6 × c + 4 × d + 1 × e で、まん中の数が 6 倍、2 番目と 4 番目が 4 倍、両はしが 1 倍されます。",
+          "合計を最大にするには、かける数が大きい位置ほど大きい数を入れます。もし、かける数が大きい位置の数が、かける数が小さい位置の数より小さければ、2 つを入れかえると合計が（かける数の差）×（2 数の差）だけふえるので、それは最大ではありません。よって最大のとき c = 5、2 番目と 4 番目は 4 と 3、両はしは 2 と 1 です。",
+          "最大値は 6 × 5 + 4 × (4 + 3) + 1 × (2 + 1) = 30 + 28 + 3 = 61 です。答えは 61 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "61"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade7-foundation",
+        "notes": "頂端 = a + 4b + 6c + 4d + e，用交換論證把大數放大係數位置。掃過「數塔|金字塔|上面一層」（3 題，皆堆疊數量）、「下方.{0,10}相加」；最接近 algebra_grade8_foundation_024（圓木塔總數，等差數列），本題是加法數塔的係數與排序極值。"
+      }
     }
   ]
 }
