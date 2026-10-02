@@ -7006,6 +7006,237 @@
         "reference": "combinatorics-grade12-foundation",
         "notes": "不相交的部分弦圖（Motzkin 數）：看第一點不連或連到第 k 點，遞推 Mₙ。掃過 /不相交.*弦|弦.*不相交|弦/（19 題）；最接近 combinatorics_grade12_foundation_010（4 對括號正確配對，Catalan 數 14），差異：Catalan 要求每點都配對；本題允許點不連弦，遞推多出 Mₙ₋₁ 一項，數值為 Motzkin 數"
       }
+    },
+    {
+      "id": "combinatorics_grade12_foundation_080",
+      "reviewStatus": "ok",
+      "topic": "combinatorics",
+      "subtopic": "permutations_with_exactly_k_left_to_right_maxima",
+      "tags": [
+        "c:permutation_combination",
+        "c:recurrence",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "把 1、2、3、4、5、6 排成一列。從左往右看，若某個數比它左邊所有的數都大，就稱它是一個「新高」（最左邊的數一定算新高）。例如 2、1、4、3、6、5 的新高是 2、4、6，共 3 個。恰好有 3 個新高的排列共有幾種？",
+        "zh-Hans": "把 1、2、3、4、5、6 排成一列。从左往右看，若某个数比它左边所有的数都大，就称它是一个「新高」（最左边的数一定算新高）。例如 2、1、4、3、6、5 的新高是 2、4、6，共 3 个。恰好有 3 个新高的排列共有几种？",
+        "en": "Arrange 1, 2, 3, 4, 5, 6 in a row. Reading left to right, a number is a new high if it is larger than every number to its left (the leftmost number always counts). For example, in 2, 1, 4, 3, 6, 5 the new highs are 2, 4, 6 — three of them. How many arrangements have exactly 3 new highs?",
+        "ja": "1、2、3、4、5、6 を 1 列に並べる。左から見て、ある数がそれより左にあるすべての数より大きいとき、それを「新記録」と呼ぶ（いちばん左の数は必ず新記録）。たとえば 2、1、4、3、6、5 の新記録は 2、4、6 の 3 個である。新記録がちょうど 3 個である並べ方は何通りあるか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 225。",
+        "zh-Hans": "答案是 225。",
+        "en": "The answer is 225.",
+        "ja": "答えは 225 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "把 n 個不同的數排成一列、恰有 k 個新高的排法數記為 c(n, k)（只和數的大小順序有關）。看最小的數放在哪裡：",
+          "若最小的數排在最左邊，它是一個新高；它比其他數都小，不影響其餘的數是不是新高，所以其餘 n − 1 個數要恰有 k − 1 個新高：c(n − 1, k − 1) 種。",
+          "若最小的數不在最左邊，它左邊有比它大的數，不是新高；拿掉它也不改變其他數是不是新高。其餘 n − 1 個數排好、恰有 k 個新高後，最小的數可以插在除了最左端以外的 n − 1 個位置：(n − 1) × c(n − 1, k) 種。所以 c(n, k) = c(n − 1, k − 1) + (n − 1) × c(n − 1, k)。",
+          "起始值 c(1, 1) = 1，k = 0 或 k > n 時為 0。依序算：c(2, 1) = 1、c(2, 2) = 1；c(3, 1) = 2、c(3, 2) = 3、c(3, 3) = 1；c(4, 1) = 6、c(4, 2) = 2 + 3 × 3 = 11、c(4, 3) = 3 + 3 × 1 = 6。",
+          "c(5, 2) = c(4, 1) + 4 × c(4, 2) = 6 + 44 = 50，c(5, 3) = c(4, 2) + 4 × c(4, 3) = 11 + 24 = 35。",
+          "c(6, 3) = c(5, 2) + 5 × c(5, 3) = 50 + 175 = 225。"
+        ],
+        "zh-Hans": [
+          "把 n 个不同的数排成一列、恰有 k 个新高的排法数记为 c(n, k)（只和数的大小顺序有关）。看最小的数放在哪里：",
+          "若最小的数排在最左边，它是一个新高；它比其他数都小，不影响其余的数是不是新高，所以其余 n − 1 个数要恰有 k − 1 个新高：c(n − 1, k − 1) 种。",
+          "若最小的数不在最左边，它左边有比它大的数，不是新高；拿掉它也不改变其他数是不是新高。其余 n − 1 个数排好、恰有 k 个新高后，最小的数可以插在除了最左端以外的 n − 1 个位置：(n − 1) × c(n − 1, k) 种。所以 c(n, k) = c(n − 1, k − 1) + (n − 1) × c(n − 1, k)。",
+          "起始值 c(1, 1) = 1，k = 0 或 k > n 时为 0。依序算：c(2, 1) = 1、c(2, 2) = 1；c(3, 1) = 2、c(3, 2) = 3、c(3, 3) = 1；c(4, 1) = 6、c(4, 2) = 2 + 3 × 3 = 11、c(4, 3) = 3 + 3 × 1 = 6。",
+          "c(5, 2) = c(4, 1) + 4 × c(4, 2) = 6 + 44 = 50，c(5, 3) = c(4, 2) + 4 × c(4, 3) = 11 + 24 = 35。",
+          "c(6, 3) = c(5, 2) + 5 × c(5, 3) = 50 + 175 = 225。"
+        ],
+        "en": [
+          "Let c(n, k) be the number of arrangements of n distinct numbers with exactly k new highs (it depends only on their order). Look at where the smallest number goes:",
+          "If the smallest number is leftmost, it is a new high; being smaller than all others it does not affect whether the others are new highs, so the other n − 1 numbers need exactly k − 1 new highs: c(n − 1, k − 1) ways.",
+          "If it is not leftmost, some larger number is to its left, so it is not a new high, and removing it changes nothing for the others. Once the other n − 1 numbers are arranged with k new highs, the smallest can be inserted in any of the n − 1 positions other than the far left: (n − 1) × c(n − 1, k) ways. So c(n, k) = c(n − 1, k − 1) + (n − 1) × c(n − 1, k).",
+          "Start with c(1, 1) = 1, and 0 when k = 0 or k > n. Then c(2, 1) = 1, c(2, 2) = 1; c(3, 1) = 2, c(3, 2) = 3, c(3, 3) = 1; c(4, 1) = 6, c(4, 2) = 2 + 3 × 3 = 11, c(4, 3) = 3 + 3 × 1 = 6.",
+          "c(5, 2) = c(4, 1) + 4 × c(4, 2) = 6 + 44 = 50 and c(5, 3) = c(4, 2) + 4 × c(4, 3) = 11 + 24 = 35.",
+          "c(6, 3) = c(5, 2) + 5 × c(5, 3) = 50 + 175 = 225."
+        ],
+        "ja": [
+          "異なる n 個の数を並べて新記録がちょうど k 個になる並べ方の数を c(n, k) とする（数の大小関係だけで決まる）。最小の数をどこに置くかで考える。",
+          "最小の数がいちばん左なら、それは新記録で、ほかのどの数より小さいので他の数が新記録かどうかに影響しない。よって残り n − 1 個の新記録がちょうど k − 1 個：c(n − 1, k − 1) 通り。",
+          "最小の数がいちばん左でなければ、左により大きい数があるので新記録ではなく、取り除いても他の数に影響しない。残り n − 1 個を新記録 k 個になるように並べた後、最小の数はいちばん左以外の n − 1 か所のどこにでも入れられる：(n − 1) × c(n − 1, k) 通り。よって c(n, k) = c(n − 1, k − 1) + (n − 1) × c(n − 1, k)。",
+          "初期値 c(1, 1) = 1、k = 0 または k > n なら 0。順に c(2, 1) = 1、c(2, 2) = 1、c(3, 1) = 2、c(3, 2) = 3、c(3, 3) = 1、c(4, 1) = 6、c(4, 2) = 2 + 3 × 3 = 11、c(4, 3) = 3 + 3 × 1 = 6。",
+          "c(5, 2) = c(4, 1) + 4 × c(4, 2) = 6 + 44 = 50、c(5, 3) = c(4, 2) + 4 × c(4, 3) = 11 + 24 = 35。",
+          "c(6, 3) = c(5, 2) + 5 × c(5, 3) = 50 + 175 = 225。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "225"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "combinatorics-grade12-foundation",
+        "notes": "看最小數是否在最左端，得 c(n,k)=c(n−1,k−1)+(n−1)c(n−1,k)（第一類 Stirling 數）。掃過 /新高|紀錄|比.*左邊.*都大/（11 題）；最接近 combinatorics_grade12_foundation_049，差異：該題求「刷新紀錄」次數的期望值；本題要恰有 3 個新高的排列數，需建立 c(n,k) 遞推"
+      }
+    },
+    {
+      "id": "combinatorics_grade12_foundation_081",
+      "reviewStatus": "ok",
+      "topic": "combinatorics",
+      "subtopic": "total_of_alternating_sums_over_all_subsets",
+      "tags": [
+        "c:basic_counting",
+        "c:add_sub",
+        "m:bijection"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "對集合 {1, 2, 3, 4, 5, 6, 7} 的每一個非空子集合，把其中的數由大到小排好，再從最大的數開始交錯地加、減，得到這個子集合的「交錯和」。例如 {1, 2, 4, 6} 的交錯和是 6 − 4 + 2 − 1 = 3，{5} 的交錯和是 5。求所有非空子集合的交錯和的總和。",
+        "zh-Hans": "对集合 {1, 2, 3, 4, 5, 6, 7} 的每一个非空子集合，把其中的数由大到小排好，再从最大的数开始交错地加、减，得到这个子集合的「交错和」。例如 {1, 2, 4, 6} 的交错和是 6 − 4 + 2 − 1 = 3，{5} 的交错和是 5。求所有非空子集合的交错和的总和。",
+        "en": "For each nonempty subset of {1, 2, 3, 4, 5, 6, 7}, arrange its numbers in decreasing order and then alternately add and subtract them starting from the largest; this is the alternating sum of the subset. For example, the alternating sum of {1, 2, 4, 6} is 6 − 4 + 2 − 1 = 3, and that of {5} is 5. Find the total of the alternating sums of all nonempty subsets.",
+        "ja": "集合 {1, 2, 3, 4, 5, 6, 7} の空でない各部分集合について、要素を大きい順に並べ、最大のものから交互に足したり引いたりした値をその部分集合の「交代和」とする。たとえば {1, 2, 4, 6} の交代和は 6 − 4 + 2 − 1 = 3、{5} の交代和は 5 である。空でないすべての部分集合の交代和の総和を求めよ。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 448。",
+        "zh-Hans": "答案是 448。",
+        "en": "The answer is 448.",
+        "ja": "答えは 448 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "規定空集合的交錯和是 0，加進總和不影響答案。把每個不含 7 的子集合 S（包含空集合）和 S ∪ {7} 配成一對。不含 7 的子集合有 2⁶ = 64 個，所以恰好配成 64 對，所有子集合都恰好出現在一對中。",
+          "在 S ∪ {7} 中 7 最大，排第一位、帶正號；S 原有的數各往後移一位，正負號全部相反。所以 S ∪ {7} 的交錯和 = 7 − （S 的交錯和）。",
+          "因此每一對的兩個交錯和加起來恰好是 7。",
+          "64 對的總和是 64 × 7 = 448。"
+        ],
+        "zh-Hans": [
+          "规定空集合的交错和是 0，加进总和不影响答案。把每个不含 7 的子集合 S（包含空集合）和 S ∪ {7} 配成一对。不含 7 的子集合有 2⁶ = 64 个，所以恰好配成 64 对，所有子集合都恰好出现在一对中。",
+          "在 S ∪ {7} 中 7 最大，排第一位、带正号；S 原有的数各往后移一位，正负号全部相反。所以 S ∪ {7} 的交错和 = 7 − （S 的交错和）。",
+          "因此每一对的两个交错和加起来恰好是 7。",
+          "64 对的总和是 64 × 7 = 448。"
+        ],
+        "en": [
+          "Let the empty set have alternating sum 0; adding it does not change the total. Pair each subset S not containing 7 (the empty set included) with S ∪ {7}. There are 2⁶ = 64 subsets without 7, so this gives exactly 64 pairs covering every subset once.",
+          "In S ∪ {7} the number 7 is largest, comes first and gets a plus sign; each element of S shifts one place back, so all its signs flip. Hence the alternating sum of S ∪ {7} equals 7 minus the alternating sum of S.",
+          "So the two alternating sums in each pair add up to exactly 7.",
+          "The total over 64 pairs is 64 × 7 = 448."
+        ],
+        "ja": [
+          "空集合の交代和を 0 と定めても総和は変わらない。7 を含まない部分集合 S（空集合も含む）と S ∪ {7} を組にする。7 を含まない部分集合は 2⁶ = 64 個なので、ちょうど 64 組ができ、すべての部分集合がちょうど 1 回現れる。",
+          "S ∪ {7} では 7 が最大で先頭に来て符号はプラス、S の要素はそれぞれ 1 つ後ろへずれるので符号がすべて逆になる。よって S ∪ {7} の交代和 = 7 − （S の交代和）。",
+          "したがって各組の 2 つの交代和の和はちょうど 7。",
+          "64 組の総和は 64 × 7 = 448。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "448"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "combinatorics-grade12-foundation",
+        "notes": "S 與 S∪{7} 配對，兩者交錯和相加恆為 7。掃過 /交錯|交替|子集/（20 題）；最接近 combinatorics_grade10_foundation_113，差異：該題數最大加最小為 11 的子集；本題求所有子集交錯和總和，用 S 與 S∪{7} 配對"
+      }
+    },
+    {
+      "id": "combinatorics_grade12_foundation_082",
+      "reviewStatus": "ok",
+      "topic": "combinatorics",
+      "subtopic": "strings_with_even_A_runs_and_odd_B_runs",
+      "tags": [
+        "c:recurrence",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一個只由字母 A 和 B 組成的字串，可以切成若干段「由同一個字母連成、而且不能再往兩邊延長」的段落，例如 AABAAAB 切成 AA、B、AAA、B。若一個字串中每一段 A 的長度都是偶數，每一段 B 的長度都是奇數，就稱它是「好字串」（例如 AABAAAAB 是好字串，AABAAAB 不是）。長度為 14 的好字串共有幾個？",
+        "zh-Hans": "一个只由字母 A 和 B 组成的字串，可以切成若干段「由同一个字母连成、而且不能再往两边延长」的段落，例如 AABAAAB 切成 AA、B、AAA、B。若一个字串中每一段 A 的长度都是偶数，每一段 B 的长度都是奇数，就称它是「好字串」（例如 AABAAAAB 是好字串，AABAAAB 不是）。长度为 14 的好字串共有几个？",
+        "en": "A string of the letters A and B splits into maximal blocks of equal letters; for example AABAAAB splits into AA, B, AAA, B. A string is good if every block of A has even length and every block of B has odd length (for example AABAAAAB is good, AABAAAB is not). How many good strings of length 14 are there?",
+        "ja": "文字 A と B だけからなる文字列は、「同じ文字が続き、それ以上両側に延ばせない」ブロックに切り分けられる。たとえば AABAAAB は AA、B、AAA、B に分かれる。A のブロックの長さがすべて偶数、B のブロックの長さがすべて奇数である文字列を「よい文字列」と呼ぶ（たとえば AABAAAAB はよい文字列、AABAAAB はそうでない）。長さ 14 のよい文字列はいくつあるか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 172。",
+        "zh-Hans": "答案是 172。",
+        "en": "The answer is 172.",
+        "ja": "答えは 172 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "令 aₙ、bₙ 分別為長度 n、以 A 結尾和以 B 結尾的好字串個數。",
+          "以 A 結尾的好字串，最後一段 A 長度是至少 2 的偶數。去掉最後兩個 A：若那段長度是 2，剩下的是以 B 結尾的好字串或空字串；若長度至少 4，剩下的仍以 A 結尾，最後一段長度少 2，仍是正偶數，還是好字串。反過來，在以 A 或 B 結尾的好字串（或空字串）後面接上 AA，都得到以 A 結尾的好字串。所以 n ≥ 3 時 aₙ = aₙ₋₂ + bₙ₋₂。",
+          "以 B 結尾的好字串，最後一段 B 長度是奇數。若長度是 1，去掉這個 B 剩下以 A 結尾的好字串（或空字串）；若長度至少 3，去掉最後兩個 B，剩下仍以 B 結尾的好字串。反過來的接法也成立，所以 n ≥ 3 時 bₙ = aₙ₋₁ + bₙ₋₂。",
+          "起始值：長度 1 只有 B 是好的，a₁ = 0、b₁ = 1；長度 2 只有 AA 是好的（AB、BA 有長度 1 的 A，BB 是長度 2 的 B），a₂ = 1、b₂ = 0。",
+          "依遞推式算 (aₙ, bₙ)：n = 3：(1, 2)；4：(1, 1)；5：(3, 3)；6：(2, 4)；7：(6, 5)；8：(6, 10)；9：(11, 11)；10：(16, 21)；11：(22, 27)；12：(37, 43)；13：(49, 64)；14：(80, 92)。",
+          "長度 14 的好字串共 80 + 92 = 172 個。"
+        ],
+        "zh-Hans": [
+          "令 aₙ、bₙ 分别为长度 n、以 A 结尾和以 B 结尾的好字串个数。",
+          "以 A 结尾的好字串，最后一段 A 长度是至少 2 的偶数。去掉最后两个 A：若那段长度是 2，剩下的是以 B 结尾的好字串或空字串；若长度至少 4，剩下的仍以 A 结尾，最后一段长度少 2，仍是正偶数，还是好字串。反过来，在以 A 或 B 结尾的好字串（或空字串）后面接上 AA，都得到以 A 结尾的好字串。所以 n ≥ 3 时 aₙ = aₙ₋₂ + bₙ₋₂。",
+          "以 B 结尾的好字串，最后一段 B 长度是奇数。若长度是 1，去掉这个 B 剩下以 A 结尾的好字串（或空字串）；若长度至少 3，去掉最后两个 B，剩下仍以 B 结尾的好字串。反过来的接法也成立，所以 n ≥ 3 时 bₙ = aₙ₋₁ + bₙ₋₂。",
+          "起始值：长度 1 只有 B 是好的，a₁ = 0、b₁ = 1；长度 2 只有 AA 是好的（AB、BA 有长度 1 的 A，BB 是长度 2 的 B），a₂ = 1、b₂ = 0。",
+          "依递推式算 (aₙ, bₙ)：n = 3：(1, 2)；4：(1, 1)；5：(3, 3)；6：(2, 4)；7：(6, 5)；8：(6, 10)；9：(11, 11)；10：(16, 21)；11：(22, 27)；12：(37, 43)；13：(49, 64)；14：(80, 92)。",
+          "长度 14 的好字串共 80 + 92 = 172 个。"
+        ],
+        "en": [
+          "Let aₙ and bₙ be the numbers of good strings of length n ending in A and in B.",
+          "A good string ending in A ends with an A-block of even length at least 2. Remove its last two A’s: if the block had length 2, what remains is a good string ending in B or the empty string; if it had length at least 4, what remains still ends in A with a block shorter by 2, still positive and even, so it is good. Conversely, appending AA to a good string ending in A or B (or to the empty string) gives a good string ending in A. So aₙ = aₙ₋₂ + bₙ₋₂ for n ≥ 3.",
+          "A good string ending in B ends with a B-block of odd length. If that length is 1, removing the B leaves a good string ending in A (or the empty string); if it is at least 3, removing the last two B’s leaves a good string ending in B. The reverse constructions also work, so bₙ = aₙ₋₁ + bₙ₋₂ for n ≥ 3.",
+          "Initial values: of length 1 only B is good, so a₁ = 0, b₁ = 1; of length 2 only AA is good (AB and BA contain an A-block of length 1, BB is a B-block of length 2), so a₂ = 1, b₂ = 0.",
+          "The recurrences give (aₙ, bₙ): n = 3: (1, 2); 4: (1, 1); 5: (3, 3); 6: (2, 4); 7: (6, 5); 8: (6, 10); 9: (11, 11); 10: (16, 21); 11: (22, 27); 12: (37, 43); 13: (49, 64); 14: (80, 92).",
+          "There are 80 + 92 = 172 good strings of length 14."
+        ],
+        "ja": [
+          "長さ n で A で終わるよい文字列の個数を aₙ、B で終わるものの個数を bₙ とする。",
+          "A で終わるよい文字列は、長さ 2 以上の偶数の A ブロックで終わる。最後の 2 つの A を除くと、ブロックの長さが 2 なら B で終わるよい文字列か空文字列が残り、4 以上なら A で終わり最後のブロックが 2 短くなっても正の偶数なので、やはりよい文字列が残る。逆に、A または B で終わるよい文字列（または空文字列）の後ろに AA をつなぐと A で終わるよい文字列になる。よって n ≥ 3 で aₙ = aₙ₋₂ + bₙ₋₂。",
+          "B で終わるよい文字列は奇数の長さの B ブロックで終わる。長さが 1 ならその B を除くと A で終わるよい文字列（または空文字列）が残り、3 以上なら最後の 2 つの B を除くと B で終わるよい文字列が残る。逆のつなぎ方も成り立つので、n ≥ 3 で bₙ = aₙ₋₁ + bₙ₋₂。",
+          "初期値：長さ 1 では B だけがよいので a₁ = 0、b₁ = 1。長さ 2 では AA だけがよい（AB、BA は長さ 1 の A を含み、BB は長さ 2 の B）ので a₂ = 1、b₂ = 0。",
+          "漸化式で (aₙ, bₙ) を求める：n = 3：(1, 2)、4：(1, 1)、5：(3, 3)、6：(2, 4)、7：(6, 5)、8：(6, 10)、9：(11, 11)、10：(16, 21)、11：(22, 27)、12：(37, 43)、13：(49, 64)、14：(80, 92)。",
+          "長さ 14 のよい文字列は 80 + 92 = 172 個。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "172"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "combinatorics-grade12-foundation",
+        "notes": "依結尾字母分兩個遞推：aₙ = aₙ₋₂ + bₙ₋₂、bₙ = aₙ₋₁ + bₙ₋₂。掃過 /字串|連續.*(偶數|奇數)/（17 題）；最接近 combinatorics_grade12_foundation_004，差異：該題要求數字 1 出現偶數次；本題要求 A 段長偶、B 段長奇，依結尾字母建兩條遞推"
+      }
     }
   ]
 }

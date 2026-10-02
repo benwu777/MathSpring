@@ -5203,6 +5203,318 @@
         "reference": "logic-grade12-foundation",
         "notes": "競賽圖循環三角數 = C(n,3) − Σ C(wᵢ,2)，以平方和下界與正則競賽圖達成極值。掃過 /循環三角|三隊|三支球隊|循環賽/（8 題）；最接近 logic_grade11_foundation_053（7 隊循環賽勝 5 場以上的隊最多幾隊），差異：該題用總勝場數限制；本題計數循環三隊，需建立「非循環三隊 = Σ C(wᵢ,2)」再求極值"
       }
+    },
+    {
+      "id": "logic_grade12_foundation_055",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "max_rooks_each_attacked_by_at_most_one",
+      "tags": [
+        "c:logic_deduction",
+        "m:estimate_bound",
+        "m:construction"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "在 8 × 8 的西洋棋盤（8 橫排、8 直行）上放一些城堡，每格最多放一個。城堡沿著所在的橫排與直行攻擊，但會被中間的城堡擋住：同一橫排（或同一直行）上的兩個城堡，若它們之間沒有別的城堡，就互相攻擊。若要求每一個城堡最多只被一個城堡攻擊，最多可以放幾個城堡？",
+        "zh-Hans": "在 8 × 8 的西洋棋盘（8 横排、8 直行）上放一些城堡，每格最多放一个。城堡沿着所在的横排与直行攻击，但会被中间的城堡挡住：同一横排（或同一直行）上的两个城堡，若它们之间没有别的城堡，就互相攻击。若要求每一个城堡最多只被一个城堡攻击，最多可以放几个城堡？",
+        "en": "Rooks are placed on an 8 × 8 chessboard (8 rows, 8 columns), at most one per square. A rook attacks along its row and column but is blocked by other rooks: two rooks in the same row (or column) with no rook between them attack each other. If every rook may be attacked by at most one other rook, what is the largest possible number of rooks?",
+        "ja": "8 × 8 のチェス盤（横 8 行、縦 8 列）に、1 マスに 1 個以下でルークを置く。ルークは自分の行と列に沿って攻撃するが、間にある他のルークでさえぎられる：同じ行（または同じ列）の 2 つのルークの間に他のルークがなければ、互いに攻撃し合う。どのルークも高々 1 つのルークからしか攻撃されないようにするとき、ルークは最大でいくつ置けるか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 10。",
+        "zh-Hans": "答案是 10。",
+        "en": "The answer is 10.",
+        "ja": "答えは 10 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "若某一橫排有 3 個以上城堡，排在中間的城堡會同時被左右兩個攻擊，不行；所以每一橫排、每一直行都最多 2 個城堡。若某城堡在同一橫排有別的城堡，同一直行也有別的城堡，它會被兩個攻擊，也不行。",
+          "因此每個城堡要嘛是「單獨的」（所在橫排與直行都沒有別的城堡），要嘛與恰好一個城堡組成「一對」（同排或同行），而這一對各自所在的另一個方向的線上都沒有別的城堡。",
+          "數棋盤上的 16 條線（8 條橫排、8 條直行）。單獨的城堡獨占 1 條橫排與 1 條直行，共 2 條線；一對城堡（例如在同一橫排）占用這條橫排與 2 條直行，共 3 條線，而且這些線上沒有其他城堡。所以不同的單獨城堡、不同的對，用到的線互不相同。",
+          "設有 p 對、s 個單獨的城堡，則 3p + 2s ≤ 16，城堡數 k = 2p + s。於是 3k = 6p + 3s = 2(3p + 2s) − s ≤ 32，k ≤ 32/3，k ≤ 10。",
+          "10 個做得到（以「第 r 橫排第 c 直行」記為 (r, c)）：(1, 1)、(1, 2)；(2, 3)、(3, 3)；(4, 4)、(4, 5)；(5, 6)、(6, 6)；(7, 7)、(7, 8)。每一對所在的共同線上只有這兩個，各自的另一條線上沒有別的城堡，所以每個城堡恰好被一個城堡攻擊。",
+          "最多可以放 10 個城堡。"
+        ],
+        "zh-Hans": [
+          "若某一横排有 3 个以上城堡，排在中间的城堡会同时被左右两个攻击，不行；所以每一横排、每一直行都最多 2 个城堡。若某城堡在同一横排有别的城堡，同一直行也有别的城堡，它会被两个攻击，也不行。",
+          "因此每个城堡要嘛是「单独的」（所在横排与直行都没有别的城堡），要嘛与恰好一个城堡组成「一对」（同排或同行），而这一对各自所在的另一个方向的线上都没有别的城堡。",
+          "数棋盘上的 16 条线（8 条横排、8 条直行）。单独的城堡独占 1 条横排与 1 条直行，共 2 条线；一对城堡（例如在同一横排）占用这条横排与 2 条直行，共 3 条线，而且这些线上没有其他城堡。所以不同的单独城堡、不同的对，用到的线互不相同。",
+          "设有 p 对、s 个单独的城堡，则 3p + 2s ≤ 16，城堡数 k = 2p + s。于是 3k = 6p + 3s = 2(3p + 2s) − s ≤ 32，k ≤ 32/3，k ≤ 10。",
+          "10 个做得到（以「第 r 横排第 c 直行」记为 (r, c)）：(1, 1)、(1, 2)；(2, 3)、(3, 3)；(4, 4)、(4, 5)；(5, 6)、(6, 6)；(7, 7)、(7, 8)。每一对所在的共同线上只有这两个，各自的另一条线上没有别的城堡，所以每个城堡恰好被一个城堡攻击。",
+          "最多可以放 10 个城堡。"
+        ],
+        "en": [
+          "If a row held 3 or more rooks, a rook in the middle would be attacked from both sides, so each row and each column holds at most 2 rooks. If a rook had another rook in its row and another in its column, it would be attacked twice, which is also forbidden.",
+          "So each rook is either single (no other rook in its row or column) or forms a pair with exactly one rook (same row or same column), and neither rook of the pair has another rook in its other line.",
+          "Count the 16 lines (8 rows, 8 columns). A single rook uses 1 row and 1 column, 2 lines; a pair (say in one row) uses that row and 2 columns, 3 lines, with no other rooks on them. So different singles and pairs use disjoint sets of lines.",
+          "With p pairs and s singles, 3p + 2s ≤ 16 and the number of rooks is k = 2p + s. Then 3k = 6p + 3s = 2(3p + 2s) − s ≤ 32, so k ≤ 32/3, i.e. k ≤ 10.",
+          "10 is achievable (write (r, c) for row r, column c): (1, 1), (1, 2); (2, 3), (3, 3); (4, 4), (4, 5); (5, 6), (6, 6); (7, 7), (7, 8). Each pair is alone on its shared line and each rook is alone on its other line, so every rook is attacked by exactly one rook.",
+          "The maximum is 10 rooks."
+        ],
+        "ja": [
+          "ある行に 3 個以上あると真ん中のルークが両側から攻撃されるので不可。よって各行・各列のルークは高々 2 個。また、あるルークの行にも列にも他のルークがあると 2 つから攻撃されるので、これも不可。",
+          "したがって各ルークは「単独」（行にも列にも他のルークがない）か、ちょうど 1 つのルークと「ペア」（同じ行または同じ列）をなし、ペアのそれぞれのもう一方の線には他のルークがない。",
+          "盤の 16 本の線（8 行と 8 列）を数える。単独のルークは 1 行と 1 列の 2 本を占め、ペア（たとえば同じ行）はその行と 2 列の 3 本を占め、それらの線に他のルークはない。よって異なる単独ルーク・ペアが使う線は互いに異なる。",
+          "ペアが p 組、単独が s 個なら 3p + 2s ≤ 16 で、ルークの数は k = 2p + s。3k = 6p + 3s = 2(3p + 2s) − s ≤ 32 より k ≤ 32/3、すなわち k ≤ 10。",
+          "10 個は実現できる（第 r 行第 c 列を (r, c) と書く）：(1, 1)、(1, 2)；(2, 3)、(3, 3)；(4, 4)、(4, 5)；(5, 6)、(6, 6)；(7, 7)、(7, 8)。各ペアは共有する線上に 2 つだけで、それぞれのもう一方の線には他のルークがないので、どのルークもちょうど 1 つから攻撃される。",
+          "最大は 10 個。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "10"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade12-foundation",
+        "notes": "每個城堡是單獨（占 2 條線）或成對（兩個占 3 條線），16 條線給 3k ≤ 32。掃過 /城堡|車/（85 題）；最接近 logic_grade4_foundation_088，差異：該題是國王不互攻的最大數；本題城堡可被擋、每個至多被攻擊一次，用線數計數 3k ≤ 32 並構造"
+      }
+    },
+    {
+      "id": "logic_grade12_foundation_056",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "monotone_subsequence_guarantee_erdos_szekeres",
+      "tags": [
+        "c:sequence",
+        "m:pigeonhole",
+        "m:construction"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "把 n 個互不相同的實數排成一列。從中依照原來的先後順序挑出若干個數（不必相鄰）：若挑出的數一個比一個大，稱為「遞增子列」；若一個比一個小，稱為「遞減子列」。若要保證不論這 n 個數怎麼排，一定存在長度至少 11 的遞增子列或長度至少 11 的遞減子列，n 最小是多少？",
+        "zh-Hans": "把 n 个互不相同的实数排成一列。从中依照原来的先后顺序挑出若干个数（不必相邻）：若挑出的数一个比一个大，称为「递增子列」；若一个比一个小，称为「递减子列」。若要保证不论这 n 个数怎么排，一定存在长度至少 11 的递增子列或长度至少 11 的递减子列，n 最小是多少？",
+        "en": "n distinct real numbers are written in a row. Picking some of them while keeping their original order (not necessarily adjacent), we get an increasing subsequence if each picked number is larger than the previous one, and a decreasing subsequence if each is smaller. What is the smallest n that guarantees, however the n numbers are arranged, an increasing subsequence of length at least 11 or a decreasing subsequence of length at least 11?",
+        "ja": "互いに異なる n 個の実数を 1 列に並べる。もとの順序を保ったままいくつかを選ぶ（隣り合っていなくてよい）とき、選んだ数が次々に大きくなるものを「増加部分列」、次々に小さくなるものを「減少部分列」と呼ぶ。n 個の数をどのように並べても、長さ 11 以上の増加部分列か長さ 11 以上の減少部分列が必ず存在することを保証できる最小の n はいくつか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 101。",
+        "zh-Hans": "答案是 101。",
+        "en": "The answer is 101.",
+        "ja": "答えは 101 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "對第 i 個數，令 aᵢ 為以它結尾的最長遞增子列長度，dᵢ 為以它結尾的最長遞減子列長度。",
+          "若 i < j，則數對 (aᵢ, dᵢ) 與 (aⱼ, dⱼ) 不同：若第 j 個數比第 i 個大，把它接在以第 i 個數結尾的最長遞增子列後面，得 aⱼ ≥ aᵢ + 1；若比較小，同理 dⱼ ≥ dᵢ + 1。",
+          "若沒有長度 11 的遞增子列也沒有長度 11 的遞減子列，所有 aᵢ、dᵢ 都在 1 到 10 之間，數對至多 10 × 10 = 100 種，而 n 個數的數對兩兩不同，所以 n ≤ 100。因此 n = 101 時一定有長度 11 的遞增或遞減子列。",
+          "n = 100 不夠：依序寫下 10、9、⋯、1，再寫 20、19、⋯、11，依此類推，最後寫 100、99、⋯、91。共 10 段，每段 10 個數遞減，而且後一段的數全都比前一段的大。",
+          "在這個排法中，遞增子列在每一段最多取一個數，長度至多 10；遞減子列不能跨段（後面段的數都比較大），長度至多 10。",
+          "所以 n 最小是 101。"
+        ],
+        "zh-Hans": [
+          "对第 i 个数，令 aᵢ 为以它结尾的最长递增子列长度，dᵢ 为以它结尾的最长递减子列长度。",
+          "若 i < j，则数对 (aᵢ, dᵢ) 与 (aⱼ, dⱼ) 不同：若第 j 个数比第 i 个大，把它接在以第 i 个数结尾的最长递增子列后面，得 aⱼ ≥ aᵢ + 1；若比较小，同理 dⱼ ≥ dᵢ + 1。",
+          "若没有长度 11 的递增子列也没有长度 11 的递减子列，所有 aᵢ、dᵢ 都在 1 到 10 之间，数对至多 10 × 10 = 100 种，而 n 个数的数对两两不同，所以 n ≤ 100。因此 n = 101 时一定有长度 11 的递增或递减子列。",
+          "n = 100 不够：依序写下 10、9、⋯、1，再写 20、19、⋯、11，依此类推，最后写 100、99、⋯、91。共 10 段，每段 10 个数递减，而且后一段的数全都比前一段的大。",
+          "在这个排法中，递增子列在每一段最多取一个数，长度至多 10；递减子列不能跨段（后面段的数都比较大），长度至多 10。",
+          "所以 n 最小是 101。"
+        ],
+        "en": [
+          "For the i-th number let aᵢ be the length of the longest increasing subsequence ending at it, and dᵢ the length of the longest decreasing subsequence ending at it.",
+          "If i < j then (aᵢ, dᵢ) ≠ (aⱼ, dⱼ): if the j-th number is larger, appending it to the longest increasing subsequence ending at the i-th gives aⱼ ≥ aᵢ + 1; if smaller, similarly dⱼ ≥ dᵢ + 1.",
+          "If there is no increasing or decreasing subsequence of length 11, all aᵢ and dᵢ lie between 1 and 10, so there are at most 10 × 10 = 100 possible pairs; since the n pairs are distinct, n ≤ 100. Hence n = 101 forces such a subsequence.",
+          "n = 100 is not enough: write 10, 9, …, 1, then 20, 19, …, 11, and so on, ending with 100, 99, …, 91 — 10 blocks, each decreasing, every block entirely larger than the previous one.",
+          "Here an increasing subsequence takes at most one number from each block, so its length is at most 10; a decreasing subsequence cannot cross blocks (later blocks are larger), so its length is at most 10.",
+          "So the smallest n is 101."
+        ],
+        "ja": [
+          "i 番目の数について、それで終わる最長の増加部分列の長さを aᵢ、それで終わる最長の減少部分列の長さを dᵢ とする。",
+          "i < j なら (aᵢ, dᵢ) ≠ (aⱼ, dⱼ)：j 番目の数が大きければ、i 番目で終わる最長増加部分列の後ろにつなげて aⱼ ≥ aᵢ + 1。小さければ同様に dⱼ ≥ dᵢ + 1。",
+          "長さ 11 の増加部分列も減少部分列もなければ、aᵢ、dᵢ はすべて 1〜10 なので組は高々 10 × 10 = 100 通り。n 個の組はすべて異なるので n ≤ 100。よって n = 101 なら必ず長さ 11 の増加または減少部分列がある。",
+          "n = 100 では足りない：10、9、…、1、次に 20、19、…、11、と続けて最後に 100、99、…、91 と書く。各ブロックは減少し、後のブロックの数は前のブロックの数より全部大きい、10 ブロックの並びである。",
+          "この並びでは、増加部分列は各ブロックから高々 1 つしか取れないので長さは 10 以下。減少部分列はブロックをまたげない（後のブロックのほうが大きい）ので長さは 10 以下。",
+          "よって最小の n は 101。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "101"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade12-foundation",
+        "notes": "每個位置標上 (以它結尾的最長遞增長, 最長遞減長)，兩兩不同給上界，10 段遞減塊給反例。掃過 /子列|子數列|遞增|遞減/（9 題）；最接近 logic_grade10_foundation_010，差異：該題是倍數關係的鴿籠；本題是單調子列的 Erdős–Szekeres，用 (aᵢ,dᵢ) 數對互異加 10 段反例"
+      }
+    },
+    {
+      "id": "logic_grade12_foundation_057",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "max_straight_tetrominoes_on_ten_by_ten_by_diagonal_colouring",
+      "tags": [
+        "c:area",
+        "c:modular",
+        "m:coloring"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一個 10 × 10 的方格棋盤（10 橫排，每排 10 格）。要在棋盤上放 1 × 4 的長條積木，每一塊恰好蓋住同一橫排或同一直行上連續的 4 格；積木之間不能重疊，也不能超出棋盤。最多可以放幾塊？",
+        "zh-Hans": "一个 10 × 10 的方格棋盘（10 横排，每排 10 格）。要在棋盘上放 1 × 4 的长条积木，每一块恰好盖住同一横排或同一直行上连续的 4 格；积木之间不能重叠，也不能超出棋盘。最多可以放几块？",
+        "en": "On a 10 × 10 board (10 rows of 10 squares) we place 1 × 4 bars, each covering 4 consecutive squares of one row or one column; bars may not overlap or stick out of the board. What is the largest number of bars that can be placed?",
+        "ja": "10 × 10 のマス目の盤（横 10 行、各行 10 マス）に 1 × 4 の細長いブロックを置く。各ブロックは同じ横の行または同じ縦の列の連続する 4 マスをちょうど覆い、ブロックどうしは重ならず、盤からはみ出さない。最大で何個置けるか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 24。",
+        "zh-Hans": "答案是 24。",
+        "en": "The answer is 24.",
+        "ja": "答えは 24 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "把第 i 橫排、第 j 直行的格子（i、j 都從 1 數到 10）標上 i + j 除以 4 的餘數。同一橫排或直行上連續 4 格的 i + j 是 4 個連續整數，餘數 0、1、2、3 各出現一次，所以每塊積木恰好蓋住標號 1 的格子一格。",
+          "數標號 1 的格子：i + j 可能是 5、9、13、17。i + j = s 的格子數在 s ≤ 11 時是 s − 1，在 s ≥ 11 時是 21 − s，所以分別有 4、8、8、4 格，共 24 格。",
+          "每塊積木用掉一個標號 1 的格子，而且積木不重疊，所以最多 24 塊。",
+          "24 塊做得到：把中央 2 × 2（第 5、6 橫排與第 5、6 直行交會的 4 格）留空，其餘 96 格分成四個 4 × 6 的長方形：第 1–4 橫排與第 1–6 直行、第 1–6 橫排與第 7–10 直行、第 7–10 橫排與第 5–10 直行、第 5–10 橫排與第 1–4 直行。這四塊互不重疊、恰好蓋滿中央以外的格子。",
+          "每個 4 × 6 長方形沿著長度 4 的方向放 6 塊積木就能鋪滿，四個共 24 塊。所以最多可以放 24 塊。"
+        ],
+        "zh-Hans": [
+          "把第 i 横排、第 j 直行的格子（i、j 都从 1 数到 10）标上 i + j 除以 4 的余数。同一横排或直行上连续 4 格的 i + j 是 4 个连续整数，余数 0、1、2、3 各出现一次，所以每块积木恰好盖住标号 1 的格子一格。",
+          "数标号 1 的格子：i + j 可能是 5、9、13、17。i + j = s 的格子数在 s ≤ 11 时是 s − 1，在 s ≥ 11 时是 21 − s，所以分别有 4、8、8、4 格，共 24 格。",
+          "每块积木用掉一个标号 1 的格子，而且积木不重叠，所以最多 24 块。",
+          "24 块做得到：把中央 2 × 2（第 5、6 横排与第 5、6 直行交会的 4 格）留空，其余 96 格分成四个 4 × 6 的长方形：第 1–4 横排与第 1–6 直行、第 1–6 横排与第 7–10 直行、第 7–10 横排与第 5–10 直行、第 5–10 横排与第 1–4 直行。这四块互不重叠、恰好盖满中央以外的格子。",
+          "每个 4 × 6 长方形沿着长度 4 的方向放 6 块积木就能铺满，四个共 24 块。所以最多可以放 24 块。"
+        ],
+        "en": [
+          "Label the square in row i, column j (i, j from 1 to 10) with the remainder of i + j mod 4. Four consecutive squares in a row or column have four consecutive values of i + j, so each remainder 0, 1, 2, 3 appears once; every bar covers exactly one square labelled 1.",
+          "Count squares labelled 1: i + j is 5, 9, 13 or 17. The number of squares with i + j = s is s − 1 for s ≤ 11 and 21 − s for s ≥ 11, giving 4, 8, 8, 4 — 24 squares.",
+          "Each bar uses up one square labelled 1 and bars do not overlap, so at most 24 bars fit.",
+          "24 is achievable: leave the central 2 × 2 (rows 5–6, columns 5–6) empty and split the other 96 squares into four 4 × 6 rectangles: rows 1–4 × columns 1–6, rows 1–6 × columns 7–10, rows 7–10 × columns 5–10, rows 5–10 × columns 1–4. They do not overlap and cover everything except the centre.",
+          "Each 4 × 6 rectangle is filled by 6 bars laid along its side of length 4, giving 24 bars in all. So the maximum is 24."
+        ],
+        "ja": [
+          "第 i 行・第 j 列のマス（i、j は 1〜10）に、i + j を 4 で割った余りを書く。同じ行または列の連続 4 マスでは i + j が連続する 4 整数なので余り 0、1、2、3 が 1 回ずつ現れ、どのブロックも「1」のマスをちょうど 1 つ覆う。",
+          "「1」のマスを数える：i + j は 5、9、13、17。i + j = s のマスの数は s ≤ 11 なら s − 1、s ≥ 11 なら 21 − s なので、4、8、8、4 個、合計 24 個。",
+          "各ブロックが「1」のマスを 1 つずつ使い、ブロックは重ならないので、高々 24 個。",
+          "24 個は実現できる：中央の 2 × 2（第 5・6 行と第 5・6 列の交わる 4 マス）を空け、残り 96 マスを 4 つの 4 × 6 の長方形に分ける：第 1〜4 行×第 1〜6 列、第 1〜6 行×第 7〜10 列、第 7〜10 行×第 5〜10 列、第 5〜10 行×第 1〜4 列。これらは重ならず、中央以外をちょうど覆う。",
+          "各 4 × 6 の長方形は長さ 4 の辺の方向にブロックを 6 個並べれば埋まるので、合計 24 個。最大は 24 個。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "24"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade12-foundation",
+        "notes": "以 (i+j) mod 4 著色，每塊 1×4 各色一格，最少的顏色只有 24 格；風車形構造達成。掃過 /1 × 4|長條|積木/（38 題）；最接近 geometry_grade2_foundation_067，差異：該題是 3×3 放骨牌最多幾塊；本題是 10×10 放 1×4，需 (i+j) mod 4 著色上界與風車構造"
+      }
+    },
+    {
+      "id": "logic_grade12_foundation_058",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "four_integers_with_sum_divisible_by_four",
+      "tags": [
+        "c:modular",
+        "m:pigeonhole",
+        "m:construction"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "任意寫下 m 個整數（數值可以重複）。若要保證不論寫的是哪些整數，一定能從中挑出 4 個（取自 4 個不同的位置），使這 4 個數的和是 4 的倍數，m 最小是多少？",
+        "zh-Hans": "任意写下 m 个整数（数值可以重复）。若要保证不论写的是哪些整数，一定能从中挑出 4 个（取自 4 个不同的位置），使这 4 个数的和是 4 的倍数，m 最小是多少？",
+        "en": "Any m integers are written down (values may repeat). What is the smallest m that guarantees, whatever the integers are, that one can choose 4 of them (from 4 different positions) whose sum is a multiple of 4?",
+        "ja": "任意に m 個の整数を書く（値は重複してもよい）。どんな整数が書かれても、その中から 4 個（異なる 4 つの位置から）を選んで、その和を 4 の倍数にできることを保証できる最小の m はいくつか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 7。",
+        "zh-Hans": "答案是 7。",
+        "en": "The answer is 7.",
+        "ja": "答えは 7 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "m = 6 不夠：寫 0、0、0、1、1、1。挑 4 個時，因為 0 和 1 各只有 3 個，挑到的 1 的個數 t 滿足 1 ≤ t ≤ 3，和等於 t，不是 4 的倍數。",
+          "引理：任意 3 個整數中，一定有 2 個的和是偶數。因為只有奇、偶兩種，三個數中必有兩個奇偶相同，它們的和是偶數。",
+          "m = 7 一定可以。由引理，從 7 個數中挑出一對和為偶數的，拿開；剩下 5 個再挑一對；剩下 3 個再挑一對。得到互不重疊的三對，和分別記為 2u、2v、2w。",
+          "再對 u、v、w 用引理：其中有兩個的和是偶數，例如 u + v = 2s。這兩對共 4 個數，和是 2u + 2v = 4s，是 4 的倍數。",
+          "所以 m 最小是 7。"
+        ],
+        "zh-Hans": [
+          "m = 6 不够：写 0、0、0、1、1、1。挑 4 个时，因为 0 和 1 各只有 3 个，挑到的 1 的个数 t 满足 1 ≤ t ≤ 3，和等于 t，不是 4 的倍数。",
+          "引理：任意 3 个整数中，一定有 2 个的和是偶数。因为只有奇、偶两种，三个数中必有两个奇偶相同，它们的和是偶数。",
+          "m = 7 一定可以。由引理，从 7 个数中挑出一对和为偶数的，拿开；剩下 5 个再挑一对；剩下 3 个再挑一对。得到互不重叠的三对，和分别记为 2u、2v、2w。",
+          "再对 u、v、w 用引理：其中有两个的和是偶数，例如 u + v = 2s。这两对共 4 个数，和是 2u + 2v = 4s，是 4 的倍数。",
+          "所以 m 最小是 7。"
+        ],
+        "en": [
+          "m = 6 is not enough: write 0, 0, 0, 1, 1, 1. Any 4 chosen numbers contain t ones with 1 ≤ t ≤ 3 (there are only three 0s and three 1s), and their sum t is not a multiple of 4.",
+          "Lemma: among any 3 integers, two have an even sum — two of them share the same parity, and their sum is even.",
+          "m = 7 always works. By the lemma, pick from the 7 numbers a pair with even sum and set it aside; from the remaining 5 pick another; from the remaining 3 a third. This gives three disjoint pairs with sums 2u, 2v, 2w.",
+          "Apply the lemma to u, v, w: two of them, say u and v, have even sum u + v = 2s. These two pairs are 4 numbers with sum 2u + 2v = 4s, a multiple of 4.",
+          "So the smallest m is 7."
+        ],
+        "ja": [
+          "m = 6 では足りない：0、0、0、1、1、1 と書く。0 と 1 は 3 個ずつしかないので、4 個選ぶと 1 の個数 t は 1 ≤ t ≤ 3 で、和は t となり 4 の倍数でない。",
+          "補題：任意の 3 つの整数のうち、和が偶数になる 2 つが必ずある。偶奇は 2 種類しかないので、同じ偶奇の 2 つがあり、その和は偶数。",
+          "m = 7 なら必ずできる。補題により 7 個から和が偶数の 2 個を選んで取りのけ、残り 5 個からもう 1 組、残り 3 個からさらに 1 組選ぶ。重ならない 3 組ができ、それぞれの和を 2u、2v、2w とする。",
+          "u、v、w に補題を使うと、2 つ、たとえば u + v = 2s が偶数。この 2 組の 4 個の和は 2u + 2v = 4s で 4 の倍数。",
+          "よって最小の m は 7。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "7"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade12-foundation",
+        "notes": "先用「三數必有兩數和為偶」配出三對，再對三個半和重用一次，得 4 數和為 4 的倍數；000111 為反例。掃過 /4 的倍數|任.*個整數/（24 題）；最接近 logic_grade11_foundation_014，差異：該題是連續段和被 10 整除的鴿籠；本題是任取 4 數和為 4 的倍數（EGZ n=4），兩次用奇偶配對"
+      }
     }
   ]
 }

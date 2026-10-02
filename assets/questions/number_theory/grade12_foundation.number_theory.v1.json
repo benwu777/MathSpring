@@ -4852,6 +4852,390 @@
         "reference": "number-theory-grade12-foundation",
         "notes": "2ᵃ − 2ᵇ = 2ᵇ(2ᵏ − 1)，奇數部分決定 k、2 冪部分決定 b，表示唯一後逐 k 計數。掃過 /2 的.*次方.*差|兩個 2 的|2ᵃ ?− ?2ᵇ/（0 題）；最接近 number_theory_grade12_foundation_005（1～100 中可寫成平方差的數），差異：該題是平方差 a² − b²；本題是 2 的次方之差，關鍵是奇數部分 2ᵏ − 1 使表示唯一"
       }
+    },
+    {
+      "id": "number_theory_grade12_foundation_051",
+      "reviewStatus": "ok",
+      "topic": "number_theory",
+      "subtopic": "carry_free_addition_of_consecutive_integers",
+      "tags": [
+        "c:place_value",
+        "c:add_sub",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "考慮 1000、1001、1002、⋯、2000 這些整數。相鄰的兩個數 n 與 n + 1 一共組成 1000 對：(1000, 1001)、(1001, 1002)、⋯、(1999, 2000)。若把 n 與 n + 1 用直式相加時，每一位都不需要進位，就稱這一對是「好的」。好的數對共有幾對？",
+        "zh-Hans": "考虑 1000、1001、1002、⋯、2000 这些整数。相邻的两个数 n 与 n + 1 一共组成 1000 对：(1000, 1001)、(1001, 1002)、⋯、(1999, 2000)。若把 n 与 n + 1 用直式相加时，每一位都不需要进位，就称这一对是「好的」。好的数对共有几对？",
+        "en": "Consider the integers 1000, 1001, 1002, …, 2000. Consecutive numbers n and n + 1 form 1000 pairs: (1000, 1001), (1001, 1002), …, (1999, 2000). A pair is called good if adding n and n + 1 in column form requires no carrying in any place. How many good pairs are there?",
+        "ja": "整数 1000、1001、1002、…、2000 を考える。隣り合う 2 数 n と n + 1 は (1000, 1001)、(1001, 1002)、…、(1999, 2000) の 1000 組をつくる。n と n + 1 を筆算で足したとき、どの位でも繰り上がりが起こらないとき、その組を「よい組」と呼ぶ。よい組は何組あるか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 156。",
+        "zh-Hans": "答案是 156。",
+        "en": "The answer is 156.",
+        "ja": "答えは 156 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "寫 n = 1abc（千位是 1，a、b、c 依序是百位、十位、個位）。千位相加是 1 + 1 或 1 + 2，不會進位，所以只要看百位、十位、個位。依 n 的末尾有幾個 9 分成四類。",
+          "第一類：c ≠ 9。這時 n + 1 只是個位加 1，其他位不變，三個位相加分別是 2a、2b、2c + 1。不進位需要 2a ≤ 9、2b ≤ 9、2c + 1 ≤ 9，也就是 a、b、c 都在 0 到 4 之間：5 × 5 × 5 = 125 對。",
+          "第二類：c = 9、b ≠ 9。n + 1 的個位是 0、十位是 b + 1、百位不變。個位 9 + 0 = 9 不進位；十位需要 b + (b + 1) = 2b + 1 ≤ 9，即 b ≤ 4；百位需要 2a ≤ 9，即 a ≤ 4：5 × 5 = 25 對。",
+          "第三類：c = b = 9、a ≠ 9。n + 1 的十位、個位都是 0，百位是 a + 1。十位、個位相加都是 9，不進位；百位需要 2a + 1 ≤ 9，即 a ≤ 4：5 對。",
+          "第四類：a = b = c = 9，即 n = 1999、n + 1 = 2000，相加得 3999，每一位都不進位：1 對。",
+          "好的數對共有 125 + 25 + 5 + 1 = 156 對。"
+        ],
+        "zh-Hans": [
+          "写 n = 1abc（千位是 1，a、b、c 依序是百位、十位、个位）。千位相加是 1 + 1 或 1 + 2，不会进位，所以只要看百位、十位、个位。依 n 的末尾有几个 9 分成四类。",
+          "第一类：c ≠ 9。这时 n + 1 只是个位加 1，其他位不变，三个位相加分别是 2a、2b、2c + 1。不进位需要 2a ≤ 9、2b ≤ 9、2c + 1 ≤ 9，也就是 a、b、c 都在 0 到 4 之间：5 × 5 × 5 = 125 对。",
+          "第二类：c = 9、b ≠ 9。n + 1 的个位是 0、十位是 b + 1、百位不变。个位 9 + 0 = 9 不进位；十位需要 b + (b + 1) = 2b + 1 ≤ 9，即 b ≤ 4；百位需要 2a ≤ 9，即 a ≤ 4：5 × 5 = 25 对。",
+          "第三类：c = b = 9、a ≠ 9。n + 1 的十位、个位都是 0，百位是 a + 1。十位、个位相加都是 9，不进位；百位需要 2a + 1 ≤ 9，即 a ≤ 4：5 对。",
+          "第四类：a = b = c = 9，即 n = 1999、n + 1 = 2000，相加得 3999，每一位都不进位：1 对。",
+          "好的数对共有 125 + 25 + 5 + 1 = 156 对。"
+        ],
+        "en": [
+          "Write n = 1abc (thousands digit 1; a, b, c are the hundreds, tens and units digits). The thousands digits add to 1 + 1 or 1 + 2, never carrying, so only the last three places matter. Split by how many 9s n ends with.",
+          "Case 1: c ≠ 9. Then n + 1 only raises the units digit by 1, and the three places add to 2a, 2b, 2c + 1. No carry requires 2a ≤ 9, 2b ≤ 9, 2c + 1 ≤ 9, i.e. a, b, c all between 0 and 4: 5 × 5 × 5 = 125 pairs.",
+          "Case 2: c = 9, b ≠ 9. In n + 1 the units digit is 0, the tens digit is b + 1 and the hundreds digit is unchanged. Units: 9 + 0 = 9, no carry; tens: b + (b + 1) = 2b + 1 ≤ 9 gives b ≤ 4; hundreds: 2a ≤ 9 gives a ≤ 4: 5 × 5 = 25 pairs.",
+          "Case 3: c = b = 9, a ≠ 9. In n + 1 the tens and units digits are 0 and the hundreds digit is a + 1. Tens and units both add to 9, no carry; hundreds: 2a + 1 ≤ 9 gives a ≤ 4: 5 pairs.",
+          "Case 4: a = b = c = 9, i.e. n = 1999 and n + 1 = 2000, whose sum 3999 has no carry: 1 pair.",
+          "Total good pairs: 125 + 25 + 5 + 1 = 156."
+        ],
+        "ja": [
+          "n = 1abc（千の位は 1、a、b、c は百・十・一の位）と書く。千の位の和は 1 + 1 または 1 + 2 で繰り上がらないので、下 3 けただけを調べればよい。n の末尾に 9 がいくつ続くかで場合分けする。",
+          "場合 1：c ≠ 9。n + 1 は一の位が 1 増えるだけで、3 つの位の和は 2a、2b、2c + 1。繰り上がらない条件は 2a ≤ 9、2b ≤ 9、2c + 1 ≤ 9、すなわち a、b、c がすべて 0〜4：5 × 5 × 5 = 125 組。",
+          "場合 2：c = 9、b ≠ 9。n + 1 の一の位は 0、十の位は b + 1、百の位はそのまま。一の位は 9 + 0 = 9 で繰り上がらない。十の位は b + (b + 1) = 2b + 1 ≤ 9 より b ≤ 4、百の位は 2a ≤ 9 より a ≤ 4：5 × 5 = 25 組。",
+          "場合 3：c = b = 9、a ≠ 9。n + 1 の十・一の位は 0、百の位は a + 1。十・一の位の和はともに 9 で繰り上がらない。百の位は 2a + 1 ≤ 9 より a ≤ 4：5 組。",
+          "場合 4：a = b = c = 9、つまり n = 1999、n + 1 = 2000。和 3999 はどの位も繰り上がらない：1 組。",
+          "よい組は 125 + 25 + 5 + 1 = 156 組。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "156"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "number-theory-grade12-foundation",
+        "notes": "n 與 n+1 的末尾 9 個數決定各位相加的形式，分四類計數。掃過 /進位/（33 題）；最接近 number_theory_grade7_foundation_074，差異：該題找 n 與 n+1 數字和皆為 7 的倍數的最小 n；本題數 n 與 n+1 直式相加不進位的對數，依末尾 9 的個數分類"
+      }
+    },
+    {
+      "id": "number_theory_grade12_foundation_052",
+      "reviewStatus": "ok",
+      "topic": "number_theory",
+      "subtopic": "divisors_of_at_least_one_of_three_powers_inclusion_exclusion",
+      "tags": [
+        "c:factor_multiple",
+        "c:inclusion_exclusion",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "有多少個正整數，至少是 10¹⁰、15⁷、18¹¹ 這三個數之中某一個數的正因數？",
+        "zh-Hans": "有多少个正整数，至少是 10¹⁰、15⁷、18¹¹ 这三个数之中某一个数的正因数？",
+        "en": "How many positive integers are divisors of at least one of the three numbers 10¹⁰, 15⁷, 18¹¹?",
+        "ja": "10¹⁰、15⁷、18¹¹ の 3 つの数の少なくとも 1 つの正の約数になっている正の整数はいくつあるか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 435。",
+        "zh-Hans": "答案是 435。",
+        "en": "The answer is 435.",
+        "ja": "答えは 435 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "質因數分解：10¹⁰ = 2¹⁰ × 5¹⁰，15⁷ = 3⁷ × 5⁷，18¹¹ = 2¹¹ × 3²²。設 A、B、C 分別是這三個數的正因數所成的集合，所求是 A ∪ B ∪ C 的元素個數，用排容原理計算。",
+          "因數個數：|A| = 11 × 11 = 121，|B| = 8 × 8 = 64，|C| = 12 × 23 = 276。",
+          "一個數同時整除兩個數 ⇔ 它整除這兩個數的最大公因數。gcd(10¹⁰, 15⁷) = 5⁷，有 8 個因數；gcd(10¹⁰, 18¹¹) = 2¹⁰，有 11 個因數；gcd(15⁷, 18¹¹) = 3⁷，有 8 個因數；三個數的最大公因數是 1，只有 1 個因數。",
+          "|A ∪ B ∪ C| = 121 + 64 + 276 − 8 − 11 − 8 + 1 = 435。"
+        ],
+        "zh-Hans": [
+          "质因数分解：10¹⁰ = 2¹⁰ × 5¹⁰，15⁷ = 3⁷ × 5⁷，18¹¹ = 2¹¹ × 3²²。设 A、B、C 分别是这三个数的正因数所成的集合，所求是 A ∪ B ∪ C 的元素个数，用排容原理计算。",
+          "因数个数：|A| = 11 × 11 = 121，|B| = 8 × 8 = 64，|C| = 12 × 23 = 276。",
+          "一个数同时整除两个数 ⇔ 它整除这两个数的最大公约数。gcd(10¹⁰, 15⁷) = 5⁷，有 8 个因数；gcd(10¹⁰, 18¹¹) = 2¹⁰，有 11 个因数；gcd(15⁷, 18¹¹) = 3⁷，有 8 个因数；三个数的最大公约数是 1，只有 1 个因数。",
+          "|A ∪ B ∪ C| = 121 + 64 + 276 − 8 − 11 − 8 + 1 = 435。"
+        ],
+        "en": [
+          "Factor: 10¹⁰ = 2¹⁰ × 5¹⁰, 15⁷ = 3⁷ × 5⁷, 18¹¹ = 2¹¹ × 3²². Let A, B, C be their sets of positive divisors; we want |A ∪ B ∪ C|, by inclusion–exclusion.",
+          "Divisor counts: |A| = 11 × 11 = 121, |B| = 8 × 8 = 64, |C| = 12 × 23 = 276.",
+          "A number divides two given numbers iff it divides their gcd. gcd(10¹⁰, 15⁷) = 5⁷ has 8 divisors; gcd(10¹⁰, 18¹¹) = 2¹⁰ has 11; gcd(15⁷, 18¹¹) = 3⁷ has 8; the gcd of all three is 1, with 1 divisor.",
+          "|A ∪ B ∪ C| = 121 + 64 + 276 − 8 − 11 − 8 + 1 = 435."
+        ],
+        "ja": [
+          "素因数分解すると 10¹⁰ = 2¹⁰ × 5¹⁰、15⁷ = 3⁷ × 5⁷、18¹¹ = 2¹¹ × 3²²。それぞれの正の約数の集合を A、B、C とし、A ∪ B ∪ C の要素の個数を包除原理で求める。",
+          "約数の個数：|A| = 11 × 11 = 121、|B| = 8 × 8 = 64、|C| = 12 × 23 = 276。",
+          "ある数が 2 つの数をともに割り切る ⇔ その最大公約数を割り切る。gcd(10¹⁰, 15⁷) = 5⁷ の約数は 8 個、gcd(10¹⁰, 18¹¹) = 2¹⁰ は 11 個、gcd(15⁷, 18¹¹) = 3⁷ は 8 個、3 数の最大公約数は 1 で 1 個。",
+          "|A ∪ B ∪ C| = 121 + 64 + 276 − 8 − 11 − 8 + 1 = 435。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "435"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "number-theory-grade12-foundation",
+        "notes": "三個冪次的因數集合取聯集，交集等於最大公因數的因數，用排容。掃過 /因數/（82 題）；最接近 combinatorics_grade10_foundation_095，差異：該題是 1..1000 中恰為 2、3、5 之一倍數的排容；本題是三個大冪次的因數集合聯集，交集化為最大公因數的因數"
+      }
+    },
+    {
+      "id": "number_theory_grade12_foundation_053",
+      "reviewStatus": "ok",
+      "topic": "number_theory",
+      "subtopic": "largest_n_divisible_by_all_integers_below_cube_root",
+      "tags": [
+        "c:factor_multiple",
+        "c:inequality",
+        "m:estimate_bound"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "求最大的正整數 n，使得每一個滿足 k³ < n 的正整數 k 都能整除 n。",
+        "zh-Hans": "求最大的正整数 n，使得每一个满足 k³ < n 的正整数 k 都能整除 n。",
+        "en": "Find the largest positive integer n such that every positive integer k with k³ < n divides n.",
+        "ja": "k³ < n をみたすすべての正の整数 k で割り切れるような正の整数 n のうち、最大のものを求めよ。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 420。",
+        "zh-Hans": "答案是 420。",
+        "en": "The answer is 420.",
+        "ja": "答えは 420 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "設 k 是滿足 k³ < n 的最大正整數，則 k³ < n ≤ (k + 1)³，而且 1、2、⋯、k 都整除 n，所以它們的最小公倍數 L(k) 整除 n，特別有 L(k) ≤ n ≤ (k + 1)³。",
+          "k ≤ 7 時：k ≤ 6 則 n ≤ 7³ = 343；k = 7 則 343 < n ≤ 512，且 L(7) = 420 整除 n，而 420 的下一個倍數 840 > 512，所以 n = 420。檢查 420：滿足 k³ < 420 的 k 是 1 到 7，都整除 420。",
+          "k = 8 到 27 都不可能：L(8) = 840 > 9³ = 729；L(9) = L(10) = 2520 > 11³ = 1331；L(11) = L(12) = 27720 > 13³ = 2197；k ≥ 13 時 L(k) ≥ L(13) = 360360 > 28³ = 21952 ≥ (k + 1)³。每一種都與 L(k) ≤ (k + 1)³ 矛盾。",
+          "k ≥ 28 也不可能。k(k − 1) 除以 k − 2 餘 2·1 = 2，所以 k(k − 1) 與 k − 2 的最大公因數至多 2，lcm(k, k − 1, k − 2) ≥ k(k − 1)(k − 2)/2；同理 k(k − 1)(k − 2) 除以 k − 3 餘 3·2·1 = 6，最大公因數至多 6，所以 L(k) ≥ k(k − 1)(k − 2)(k − 3)/12 ≥ (k − 3)⁴/12。",
+          "又 k ≥ 28 時 (k + 1)/(k − 3) ≤ 29/25 < 1.26，所以 (k + 1)³ < 2(k − 3)³，而 k − 3 ≥ 25 > 24 給出 (k − 3)⁴/12 > 2(k − 3)³ > (k + 1)³，同樣與 L(k) ≤ (k + 1)³ 矛盾。",
+          "所以符合條件的 n 都不超過 420，而 420 符合，最大的 n 是 420。"
+        ],
+        "zh-Hans": [
+          "设 k 是满足 k³ < n 的最大正整数，则 k³ < n ≤ (k + 1)³，而且 1、2、⋯、k 都整除 n，所以它们的最小公倍数 L(k) 整除 n，特别有 L(k) ≤ n ≤ (k + 1)³。",
+          "k ≤ 7 时：k ≤ 6 则 n ≤ 7³ = 343；k = 7 则 343 < n ≤ 512，且 L(7) = 420 整除 n，而 420 的下一个倍数 840 > 512，所以 n = 420。检查 420：满足 k³ < 420 的 k 是 1 到 7，都整除 420。",
+          "k = 8 到 27 都不可能：L(8) = 840 > 9³ = 729；L(9) = L(10) = 2520 > 11³ = 1331；L(11) = L(12) = 27720 > 13³ = 2197；k ≥ 13 时 L(k) ≥ L(13) = 360360 > 28³ = 21952 ≥ (k + 1)³。每一种都与 L(k) ≤ (k + 1)³ 矛盾。",
+          "k ≥ 28 也不可能。k(k − 1) 除以 k − 2 余 2·1 = 2，所以 k(k − 1) 与 k − 2 的最大公约数至多 2，lcm(k, k − 1, k − 2) ≥ k(k − 1)(k − 2)/2；同理 k(k − 1)(k − 2) 除以 k − 3 余 3·2·1 = 6，最大公约数至多 6，所以 L(k) ≥ k(k − 1)(k − 2)(k − 3)/12 ≥ (k − 3)⁴/12。",
+          "又 k ≥ 28 时 (k + 1)/(k − 3) ≤ 29/25 < 1.26，所以 (k + 1)³ < 2(k − 3)³，而 k − 3 ≥ 25 > 24 给出 (k − 3)⁴/12 > 2(k − 3)³ > (k + 1)³，同样与 L(k) ≤ (k + 1)³ 矛盾。",
+          "所以符合条件的 n 都不超过 420，而 420 符合，最大的 n 是 420。"
+        ],
+        "en": [
+          "Let k be the largest positive integer with k³ < n, so k³ < n ≤ (k + 1)³, and 1, 2, …, k all divide n. Hence their least common multiple L(k) divides n, and in particular L(k) ≤ n ≤ (k + 1)³.",
+          "If k ≤ 7: for k ≤ 6, n ≤ 7³ = 343; for k = 7, 343 < n ≤ 512 and L(7) = 420 divides n, while the next multiple 840 exceeds 512, so n = 420. Check: the k with k³ < 420 are 1 to 7, and all divide 420.",
+          "k = 8 to 27 is impossible: L(8) = 840 > 9³ = 729; L(9) = L(10) = 2520 > 11³ = 1331; L(11) = L(12) = 27720 > 13³ = 2197; for k ≥ 13, L(k) ≥ L(13) = 360360 > 28³ = 21952 ≥ (k + 1)³. Each contradicts L(k) ≤ (k + 1)³.",
+          "k ≥ 28 is impossible too. k(k − 1) leaves remainder 2·1 = 2 on division by k − 2, so gcd(k(k − 1), k − 2) ≤ 2 and lcm(k, k − 1, k − 2) ≥ k(k − 1)(k − 2)/2; likewise k(k − 1)(k − 2) leaves remainder 3·2·1 = 6 on division by k − 3, so the gcd is at most 6, and L(k) ≥ k(k − 1)(k − 2)(k − 3)/12 ≥ (k − 3)⁴/12.",
+          "For k ≥ 28, (k + 1)/(k − 3) ≤ 29/25 < 1.26, so (k + 1)³ < 2(k − 3)³; and k − 3 ≥ 25 > 24 gives (k − 3)⁴/12 > 2(k − 3)³ > (k + 1)³, again contradicting L(k) ≤ (k + 1)³.",
+          "So every valid n is at most 420, and 420 works; the largest n is 420."
+        ],
+        "ja": [
+          "k³ < n をみたす最大の正の整数を k とすると k³ < n ≤ (k + 1)³ で、1、2、…、k はすべて n を割り切る。よってその最小公倍数 L(k) が n を割り切り、特に L(k) ≤ n ≤ (k + 1)³。",
+          "k ≤ 7 のとき：k ≤ 6 なら n ≤ 7³ = 343。k = 7 なら 343 < n ≤ 512 で L(7) = 420 が n を割り切り、次の倍数 840 は 512 を超えるので n = 420。確認：k³ < 420 となる k は 1〜7 で、すべて 420 を割り切る。",
+          "k = 8〜27 は不可能：L(8) = 840 > 9³ = 729、L(9) = L(10) = 2520 > 11³ = 1331、L(11) = L(12) = 27720 > 13³ = 2197、k ≥ 13 では L(k) ≥ L(13) = 360360 > 28³ = 21952 ≥ (k + 1)³。いずれも L(k) ≤ (k + 1)³ に反する。",
+          "k ≥ 28 も不可能。k(k − 1) を k − 2 で割った余りは 2·1 = 2 なので最大公約数は 2 以下、lcm(k, k − 1, k − 2) ≥ k(k − 1)(k − 2)/2。同様に k(k − 1)(k − 2) を k − 3 で割った余りは 3·2·1 = 6 で最大公約数は 6 以下なので、L(k) ≥ k(k − 1)(k − 2)(k − 3)/12 ≥ (k − 3)⁴/12。",
+          "k ≥ 28 では (k + 1)/(k − 3) ≤ 29/25 < 1.26 より (k + 1)³ < 2(k − 3)³。さらに k − 3 ≥ 25 > 24 より (k − 3)⁴/12 > 2(k − 3)³ > (k + 1)³ となり、やはり L(k) ≤ (k + 1)³ に反する。",
+          "よって条件をみたす n はすべて 420 以下で、420 は条件をみたすので、最大の n は 420。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "420"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "number-theory-grade12-foundation",
+        "notes": "1..k 的最小公倍數須 ≤ (k+1)³，分段排除 k ≥ 8 後得 420。掃過 /立方根|k³ <|都能整除/（1 題）；最接近 number_theory_grade10_foundation_060，差異：該題數 1..n 最小公倍數改變的次數；本題用 L(k) ≤ (k+1)³ 的上下界夾出最大 n"
+      }
+    },
+    {
+      "id": "number_theory_grade12_foundation_054",
+      "reviewStatus": "ok",
+      "topic": "number_theory",
+      "subtopic": "last_two_digits_of_power_tower",
+      "tags": [
+        "c:modular",
+        "c:exponent",
+        "m:direct"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "考慮 7 的 (7⁷) 次方，也就是把 7 自己連乘 7⁷ = 823543 次的結果。求這個數的末兩位數字所組成的兩位數。",
+        "zh-Hans": "考虑 7 的 (7⁷) 次方，也就是把 7 自己连乘 7⁷ = 823543 次的结果。求这个数的末两位数字所组成的两位数。",
+        "en": "Consider 7 raised to the power 7⁷, that is, 7 multiplied by itself 7⁷ = 823543 times. Find the two-digit number formed by its last two digits.",
+        "ja": "7 の (7⁷) 乗、つまり 7 を 7⁷ = 823543 回掛け合わせた数を考える。この数の下 2 けたがつくる 2 けたの数を求めよ。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 43。",
+        "zh-Hans": "答案是 43。",
+        "en": "The answer is 43.",
+        "ja": "答えは 43 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "末兩位數字就是除以 100 的餘數。7² = 49，7⁴ = 49² = 2401，除以 100 餘 1。所以 7 的次方除以 100 的餘數每 4 次方循環一次，只需要知道指數除以 4 的餘數。",
+          "指數是 7⁷。7 除以 4 餘 3，3 的平方 9 除以 4 餘 1，所以 7 的偶數次方除以 4 餘 1、奇數次方除以 4 餘 3；7⁷ 是奇數次方，除以 4 餘 3（也可直接驗算 823543 = 4 × 205885 + 3）。",
+          "寫 7⁷ = 4q + 3，則 7 的 (7⁷) 次方 = (7⁴)^q × 7³。(7⁴)^q 除以 100 餘 1，7³ = 343 除以 100 餘 43。",
+          "所以這個數除以 100 餘 43，末兩位數字組成的兩位數是 43。"
+        ],
+        "zh-Hans": [
+          "末两位数字就是除以 100 的余数。7² = 49，7⁴ = 49² = 2401，除以 100 余 1。所以 7 的次方除以 100 的余数每 4 次方循环一次，只需要知道指数除以 4 的余数。",
+          "指数是 7⁷。7 除以 4 余 3，3 的平方 9 除以 4 余 1，所以 7 的偶数次方除以 4 余 1、奇数次方除以 4 余 3；7⁷ 是奇数次方，除以 4 余 3（也可直接验算 823543 = 4 × 205885 + 3）。",
+          "写 7⁷ = 4q + 3，则 7 的 (7⁷) 次方 = (7⁴)^q × 7³。(7⁴)^q 除以 100 余 1，7³ = 343 除以 100 余 43。",
+          "所以这个数除以 100 余 43，末两位数字组成的两位数是 43。"
+        ],
+        "en": [
+          "The last two digits are the remainder mod 100. 7² = 49 and 7⁴ = 49² = 2401 ≡ 1 (mod 100), so powers of 7 repeat mod 100 with period 4; only the exponent mod 4 matters.",
+          "The exponent is 7⁷. 7 ≡ 3 (mod 4) and 3² = 9 ≡ 1 (mod 4), so odd powers of 7 are ≡ 3 (mod 4); hence 7⁷ ≡ 3 (mod 4) (indeed 823543 = 4 × 205885 + 3).",
+          "Write 7⁷ = 4q + 3. Then 7 to the power 7⁷ equals (7⁴)^q × 7³, where (7⁴)^q ≡ 1 and 7³ = 343 ≡ 43 (mod 100).",
+          "So the number is ≡ 43 (mod 100), and its last two digits form 43."
+        ],
+        "ja": [
+          "下 2 けたは 100 で割った余りである。7² = 49、7⁴ = 49² = 2401 は 100 で割って 1 余るので、7 のべきを 100 で割った余りは 4 乗ごとに繰り返す。指数を 4 で割った余りだけ分かればよい。",
+          "指数は 7⁷。7 は 4 で割って 3 余り、3² = 9 は 4 で割って 1 余るので、7 の奇数乗は 4 で割って 3 余る。7⁷ は奇数乗なので 4 で割って 3 余る（823543 = 4 × 205885 + 3 でも確かめられる）。",
+          "7⁷ = 4q + 3 とおくと、7 の (7⁷) 乗 = (7⁴)^q × 7³。(7⁴)^q は 100 で割って 1 余り、7³ = 343 は 100 で割って 43 余る。",
+          "よってこの数を 100 で割った余りは 43 で、下 2 けたがつくる数は 43。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "43"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "number-theory-grade12-foundation",
+        "notes": "7⁴ ≡ 1 (mod 100) 使指數只看 mod 4，再由 7⁷ ≡ 3 (mod 4) 得 7³ 的末兩位。掃過 /末兩位|最後兩位|次方的/（12 題）；最接近 number_theory_grade10_foundation_042，差異：該題是 21¹⁰ 的末三位；本題是指數塔 7 的 7⁷ 次方，需先求指數 mod 4"
+      }
+    },
+    {
+      "id": "number_theory_grade12_foundation_055",
+      "reviewStatus": "ok",
+      "topic": "number_theory",
+      "subtopic": "hyperbinary_representations_count_by_recursion",
+      "tags": [
+        "c:number_base",
+        "c:recurrence",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "把 100 寫成若干個 2 的次方（1、2、4、8、16、32、64）的和，規定每一個 2 的次方最多只能用兩次，加數的順序不計。例如 100 = 64 + 32 + 4 和 100 = 32 + 32 + 16 + 16 + 4 是兩種不同的寫法。共有幾種寫法？",
+        "zh-Hans": "把 100 写成若干个 2 的次方（1、2、4、8、16、32、64）的和，规定每一个 2 的次方最多只能用两次，加数的顺序不计。例如 100 = 64 + 32 + 4 和 100 = 32 + 32 + 16 + 16 + 4 是两种不同的写法。共有几种写法？",
+        "en": "Write 100 as a sum of powers of 2 (1, 2, 4, 8, 16, 32, 64), where each power of 2 may be used at most twice and the order of the terms does not matter. For example, 100 = 64 + 32 + 4 and 100 = 32 + 32 + 16 + 16 + 4 are two different ways. How many ways are there?",
+        "ja": "100 をいくつかの 2 のべき（1、2、4、8、16、32、64）の和で表す。ただし、どの 2 のべきも高々 2 回までしか使えず、項の順序は区別しない。たとえば 100 = 64 + 32 + 4 と 100 = 32 + 32 + 16 + 16 + 4 は異なる 2 通りである。表し方は全部で何通りあるか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 19。",
+        "zh-Hans": "答案是 19。",
+        "en": "The answer is 19.",
+        "ja": "答えは 19 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "設 b(n) 為把 n 寫成這種和的方法數，規定 b(0) = 1（什麼都不用）。",
+          "若 n = 2m + 1 是奇數：1 若用 0 次或 2 次，和都是偶數，所以 1 恰好用 1 次。拿掉這個 1 後，其餘加數都是偶數，全部除以 2 就得到 m 的一種寫法，反之亦然，所以 b(2m + 1) = b(m)。",
+          "若 n = 2m 是偶數（m ≥ 1）：1 用 0 次或 2 次。用 0 次時全部加數除以 2 得到 m 的寫法；用 2 次時其餘加數的和是 2m − 2，除以 2 得到 m − 1 的寫法。所以 b(2m) = b(m) + b(m − 1)。",
+          "起始值：b(0) = 1，b(1) = b(0) = 1，b(2) = b(1) + b(0) = 2，b(3) = b(1) = 1。往上算：b(5) = b(2) = 2，b(6) = b(3) + b(2) = 3，b(11) = b(5) = 2，b(12) = b(6) + b(5) = 5。",
+          "再往上：b(24) = b(12) + b(11) = 7，b(25) = b(12) = 5，b(49) = b(24) = 7，b(50) = b(25) + b(24) = 12，b(100) = b(50) + b(49) = 12 + 7 = 19。",
+          "所以共有 19 種寫法。"
+        ],
+        "zh-Hans": [
+          "设 b(n) 为把 n 写成这种和的方法数，规定 b(0) = 1（什么都不用）。",
+          "若 n = 2m + 1 是奇数：1 若用 0 次或 2 次，和都是偶数，所以 1 恰好用 1 次。拿掉这个 1 后，其余加数都是偶数，全部除以 2 就得到 m 的一种写法，反之亦然，所以 b(2m + 1) = b(m)。",
+          "若 n = 2m 是偶数（m ≥ 1）：1 用 0 次或 2 次。用 0 次时全部加数除以 2 得到 m 的写法；用 2 次时其余加数的和是 2m − 2，除以 2 得到 m − 1 的写法。所以 b(2m) = b(m) + b(m − 1)。",
+          "起始值：b(0) = 1，b(1) = b(0) = 1，b(2) = b(1) + b(0) = 2，b(3) = b(1) = 1。往上算：b(5) = b(2) = 2，b(6) = b(3) + b(2) = 3，b(11) = b(5) = 2，b(12) = b(6) + b(5) = 5。",
+          "再往上：b(24) = b(12) + b(11) = 7，b(25) = b(12) = 5，b(49) = b(24) = 7，b(50) = b(25) + b(24) = 12，b(100) = b(50) + b(49) = 12 + 7 = 19。",
+          "所以共有 19 种写法。"
+        ],
+        "en": [
+          "Let b(n) be the number of such representations of n, with b(0) = 1 (the empty sum).",
+          "If n = 2m + 1 is odd: using 1 zero or two times gives an even sum, so 1 is used exactly once. Removing it leaves even terms; halving them all gives a representation of m, and conversely. So b(2m + 1) = b(m).",
+          "If n = 2m is even (m ≥ 1): 1 is used zero or two times. With zero times, halving gives a representation of m; with two times, the other terms sum to 2m − 2, and halving gives a representation of m − 1. So b(2m) = b(m) + b(m − 1).",
+          "Start: b(0) = 1, b(1) = b(0) = 1, b(2) = b(1) + b(0) = 2, b(3) = b(1) = 1. Then b(5) = b(2) = 2, b(6) = b(3) + b(2) = 3, b(11) = b(5) = 2, b(12) = b(6) + b(5) = 5.",
+          "Further: b(24) = b(12) + b(11) = 7, b(25) = b(12) = 5, b(49) = b(24) = 7, b(50) = b(25) + b(24) = 12, b(100) = b(50) + b(49) = 12 + 7 = 19.",
+          "So there are 19 ways."
+        ],
+        "ja": [
+          "n をこのような和で表す方法の数を b(n) とし、b(0) = 1（何も使わない）と定める。",
+          "n = 2m + 1 が奇数のとき：1 を 0 回または 2 回使うと和は偶数なので、1 はちょうど 1 回使う。それを除くと残りはすべて偶数で、全部を 2 で割ると m の表し方になり、逆も成り立つ。よって b(2m + 1) = b(m)。",
+          "n = 2m が偶数（m ≥ 1）のとき：1 は 0 回か 2 回。0 回なら全部を 2 で割って m の表し方、2 回なら残りの和は 2m − 2 で、2 で割って m − 1 の表し方になる。よって b(2m) = b(m) + b(m − 1)。",
+          "初期値：b(0) = 1、b(1) = b(0) = 1、b(2) = b(1) + b(0) = 2、b(3) = b(1) = 1。続けて b(5) = b(2) = 2、b(6) = b(3) + b(2) = 3、b(11) = b(5) = 2、b(12) = b(6) + b(5) = 5。",
+          "さらに b(24) = b(12) + b(11) = 7、b(25) = b(12) = 5、b(49) = b(24) = 7、b(50) = b(25) + b(24) = 12、b(100) = b(50) + b(49) = 12 + 7 = 19。",
+          "よって 19 通り。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "19"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "number-theory-grade12-foundation",
+        "notes": "看 1 用幾次再整體除以 2，得 b(2m+1)=b(m)、b(2m)=b(m)+b(m−1)。掃過 /2 的次方|最多.*兩次|至多.*兩次/（3 題）；最接近 number_theory_grade12_foundation_028，差異：該題是費氏數的唯一表示；本題是每個 2 的次方至多用兩次的表示數，用 b(2m)=b(m)+b(m−1) 遞推"
+      }
     }
   ]
 }
