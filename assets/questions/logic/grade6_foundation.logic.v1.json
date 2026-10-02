@@ -9232,6 +9232,435 @@
         "reference": "logic-grade6-foundation",
         "notes": "四個角落互不重疊的 2×2 給出下界 4；塗第 2、4 排與第 2、4 格的交叉點，任何相鄰兩排兩格都含其一。掃過 2 × 2.*至少|任何一個 2 × 2|每一個 2 × 2（0 題）、塗黑（9 題）、最少要塗（1 題）；最接近 logic_grade3_foundation_086，差異：那題是 3×3 中塗黑格不可共邊求最多格數；本題是 5×5 中讓每個 2×2 都含黑格求最少格數（不重疊區塊給下界）"
       }
+    },
+    {
+      "id": "logic_grade6_foundation_115",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "kitten_moves_to_adjacent_box_search_sequence",
+      "tags": [
+        "c:logic_deduction",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade6",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "5 個紙箱排成一排，從左到右編號 1 到 5。一隻小貓躲在其中一個箱子裡，小安不知道是哪一個。每天晚上，小貓一定會換到隔壁的箱子（左邊或右邊相鄰的那一個，不會留在原地）。每天早上，小安可以打開一個箱子看看，沒看到就蓋回去。下面哪一種「每天早上打開的箱子號碼」，不論小貓一開始在哪裡、晚上怎麼換，都能保證在 6 天之內找到小貓？",
+        "zh-Hans": "5 个纸箱排成一排，从左到右编号 1 到 5。一只小猫躲在其中一个箱子里，小安不知道是哪一个。每天晚上，小猫一定会换到隔壁的箱子（左边或右边相邻的那一个，不会留在原地）。每天早上，小安可以打开一个箱子看看，没看到就盖回去。下面哪一种「每天早上打开的箱子号码」，不论小猫一开始在哪里、晚上怎么换，都能保证在 6 天之内找到小猫？",
+        "en": "Five boxes stand in a row, numbered 1 to 5 from left to right. A kitten hides in one of them, and An does not know which. Every night the kitten must move to a neighbouring box (the one just to its left or right; it never stays put). Every morning An may open one box and look; if the kitten is not there she closes it again. Which of the following lists of boxes to open, one per morning, guarantees finding the kitten within 6 days, wherever it starts and however it moves?",
+        "ja": "5 つの箱が 1 列に並び、左から 1〜5 の番号がついています。子ねこがどれか 1 つの箱にかくれていますが、アンさんにはどれかわかりません。子ねこは毎晩かならずとなりの箱（すぐ左かすぐ右）に移り、同じ箱にとどまることはありません。アンさんは毎朝 1 つの箱を開けて中を見て、いなければふたを閉じます。毎朝開ける箱の番号を次のように決めるとき、子ねこがどこから始めてどう動いても、6 日以内に必ず見つけられるのはどれですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 C：2、3、4、2、3、4。",
+        "zh-Hans": "答案是 C：2、3、4、2、3、4。",
+        "en": "The answer is C: 2, 3, 4, 2, 3, 4.",
+        "ja": "答えは C：2、3、4、2、3、4。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "用「小貓可能在的箱子」逐日追蹤 C 的開法。一開始 1 到 5 號都有可能。第 1 天早上開 2 號沒看到，可能在 1、3、4、5 號；晚上換到隔壁：1 號只能到 2，3 號到 2 或 4，4 號到 3 或 5，5 號只能到 4，所以可能在 2、3、4、5 號。",
+          "第 2 天開 3 號沒看到，可能在 2、4、5 號；晚上後可能在 1、3、4、5 號（2 到 1 或 3，4 到 3 或 5，5 到 4）。第 3 天開 4 號沒看到，可能在 1、3、5 號；晚上後只可能在 2、4 號（1 到 2，3 到 2 或 4，5 到 4）。",
+          "第 4 天開 2 號沒看到，只可能在 4 號；晚上後在 3 或 5 號。第 5 天開 3 號沒看到，只可能在 5 號；晚上後一定在 4 號。第 6 天開 4 號，一定找到。所以 C 保證 6 天內找到。",
+          "其他開法都有小貓逃得掉的走法（括號內是小貓每天早上所在的箱子）：A 開 2、3、4、3、2、3，小貓在 1、2、1、2、1、2，每天都和打開的箱子不同；B 開 1、2、3、4、5、4，小貓在 2、1、2、1、2、1；D 開 2、4、2、4、2、4，小貓在 1、2、1、2、1、2；E 每天開 3 號，小貓在 1、2、1、2、1、2 就從不在 3 號。",
+          "所以只有 C 能保證找到，答案是 C。"
+        ],
+        "zh-Hans": [
+          "用「小猫可能在的箱子」逐日追踪 C 的开法。一开始 1 到 5 号都有可能。第 1 天早上开 2 号没看到，可能在 1、3、4、5 号；晚上换到隔壁：1 号只能到 2，3 号到 2 或 4，4 号到 3 或 5，5 号只能到 4，所以可能在 2、3、4、5 号。",
+          "第 2 天开 3 号没看到，可能在 2、4、5 号；晚上后可能在 1、3、4、5 号（2 到 1 或 3，4 到 3 或 5，5 到 4）。第 3 天开 4 号没看到，可能在 1、3、5 号；晚上后只可能在 2、4 号（1 到 2，3 到 2 或 4，5 到 4）。",
+          "第 4 天开 2 号没看到，只可能在 4 号；晚上后在 3 或 5 号。第 5 天开 3 号没看到，只可能在 5 号；晚上后一定在 4 号。第 6 天开 4 号，一定找到。所以 C 保证 6 天内找到。",
+          "其他开法都有小猫逃得掉的走法（括号内是小猫每天早上所在的箱子）：A 开 2、3、4、3、2、3，小猫在 1、2、1、2、1、2，每天都和打开的箱子不同；B 开 1、2、3、4、5、4，小猫在 2、1、2、1、2、1；D 开 2、4、2、4、2、4，小猫在 1、2、1、2、1、2；E 每天开 3 号，小猫在 1、2、1、2、1、2 就从不在 3 号。",
+          "所以只有 C 能保证找到，答案是 C。"
+        ],
+        "en": [
+          "Track the set of boxes where the kitten could be, using list C. At first it could be in any of 1 to 5. Day 1: open 2, not there, so it is in 1, 3, 4 or 5; overnight 1 can only go to 2, 3 goes to 2 or 4, 4 goes to 3 or 5, 5 can only go to 4, so it is now in 2, 3, 4 or 5.",
+          "Day 2: open 3, not there, so it is in 2, 4 or 5; overnight it moves to 1, 3, 4 or 5 (2 to 1 or 3, 4 to 3 or 5, 5 to 4). Day 3: open 4, not there, so it is in 1, 3 or 5; overnight it can only be in 2 or 4 (1 to 2, 3 to 2 or 4, 5 to 4).",
+          "Day 4: open 2, not there, so it must be in 4; overnight it goes to 3 or 5. Day 5: open 3, not there, so it is in 5; overnight it must go to 4. Day 6: open 4 and find it. So list C always works within 6 days.",
+          "Every other list can be dodged (the kitten's box each morning is in brackets): A opens 2, 3, 4, 3, 2, 3 while the kitten is at (1, 2, 1, 2, 1, 2), always a different box; B opens 1, 2, 3, 4, 5, 4 with the kitten at (2, 1, 2, 1, 2, 1); D opens 2, 4, 2, 4, 2, 4 with the kitten at (1, 2, 1, 2, 1, 2); E always opens 3, and the kitten at (1, 2, 1, 2, 1, 2) is never in box 3.",
+          "So only C guarantees finding the kitten; the answer is C."
+        ],
+        "ja": [
+          "C の開け方で、「子ねこがいるかもしれない箱」を 1 日ずつ追います。はじめは 1〜5 番のどれでもありえます。1 日目の朝 2 番を開けていなければ、1、3、4、5 番のどれかです。夜にとなりへ移ると、1 番は 2 番へ、3 番は 2 番か 4 番へ、4 番は 3 番か 5 番へ、5 番は 4 番へしか行けないので、2、3、4、5 番のどれかになります。",
+          "2 日目に 3 番を開けていなければ 2、4、5 番のどれかで、夜のあとは 1、3、4、5 番のどれか（2 番は 1 か 3 へ、4 番は 3 か 5 へ、5 番は 4 へ）です。3 日目に 4 番を開けていなければ 1、3、5 番のどれかで、夜のあとは 2 番か 4 番だけ（1 番は 2 へ、3 番は 2 か 4 へ、5 番は 4 へ）です。",
+          "4 日目に 2 番を開けていなければ 4 番にしかおらず、夜のあとは 3 番か 5 番です。5 日目に 3 番を開けていなければ 5 番にいて、夜のあとはかならず 4 番です。6 日目に 4 番を開ければ必ず見つかります。よって C なら 6 日以内に必ず見つかります。",
+          "ほかの開け方には、子ねこがにげ切れる動き方があります（かっこ内は毎朝子ねこがいる箱）。A は 2、3、4、3、2、3 を開けますが子ねこが（1、2、1、2、1、2）にいれば毎日ちがう箱です。B は 1、2、3、4、5、4 で子ねこが（2、1、2、1、2、1）、D は 2、4、2、4、2、4 で子ねこが（1、2、1、2、1、2）、E は毎日 3 番で子ねこが（1、2、1、2、1、2）なら一度も 3 番にいません。",
+          "したがって必ず見つけられるのは C だけで、答えは C です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "multiple_choice",
+      "options": {
+        "A": {
+          "zh-Hant": "2、3、4、3、2、3",
+          "zh-Hans": "2、3、4、3、2、3",
+          "en": "2, 3, 4, 3, 2, 3",
+          "ja": "2、3、4、3、2、3"
+        },
+        "B": {
+          "zh-Hant": "1、2、3、4、5、4",
+          "zh-Hans": "1、2、3、4、5、4",
+          "en": "1, 2, 3, 4, 5, 4",
+          "ja": "1、2、3、4、5、4"
+        },
+        "C": {
+          "zh-Hant": "2、3、4、2、3、4",
+          "zh-Hans": "2、3、4、2、3、4",
+          "en": "2, 3, 4, 2, 3, 4",
+          "ja": "2、3、4、2、3、4"
+        },
+        "D": {
+          "zh-Hant": "2、4、2、4、2、4",
+          "zh-Hans": "2、4、2、4、2、4",
+          "en": "2, 4, 2, 4, 2, 4",
+          "ja": "2、4、2、4、2、4"
+        },
+        "E": {
+          "zh-Hant": "3、3、3、3、3、3",
+          "zh-Hans": "3、3、3、3、3、3",
+          "en": "3, 3, 3, 3, 3, 3",
+          "ja": "3、3、3、3、3、3"
+        }
+      },
+      "correctAnswer": {
+        "type": "choice",
+        "value": "C"
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade6-foundation",
+        "notes": "逐日追蹤小貓可能所在的箱子集合，2、3、4、2、3、4 使集合縮到空；其他序列各給一條逃脫路徑。掃過 /躲|藏/（10 題）、/每(晚|天|夜).{0,30}(隔壁|相鄰)/（0 題）、/箱子.{0,40}打開/（0 題）；最接近 logic_grade10_foundation_060，差異：那題是甲蟲同時斜走後最少空格（著色計數）；本題是追捕移動目標的搜尋序列，要用可能位置集合逐日更新證明有效、並為每個誘答構造逃脫路徑"
+      }
+    },
+    {
+      "id": "logic_grade6_foundation_116",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "keypad_knight_move_four_digit_codes",
+      "tags": [
+        "c:basic_counting",
+        "c:recurrence",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade6",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一個數字鍵盤的排法和電話一樣：第 1 橫排是 1、2、3，第 2 橫排是 4、5、6，第 3 橫排是 7、8、9，第 4 橫排只有 0，在 8 的正下方。每個按鍵都是一樣大的正方形，緊緊排在一起。小安要設一組 4 位數的密碼（第一位可以是 0），規定相鄰兩位數字的按鍵，要像西洋棋的「騎士」那樣相關：一個方向差 2 格、另一個方向差 1 格（例如 1 和 6、1 和 8）。這樣的密碼一共有幾組？",
+        "zh-Hans": "一个数字键盘的排法和电话一样：第 1 横排是 1、2、3，第 2 横排是 4、5、6，第 3 横排是 7、8、9，第 4 横排只有 0，在 8 的正下方。每个按键都是一样大的正方形，紧紧排在一起。小安要设一组 4 位数的密码（第一位可以是 0），规定相邻两位数字的按键，要像西洋棋的「骑士」那样相关：一个方向差 2 格、另一个方向差 1 格（例如 1 和 6、1 和 8）。这样的密码一共有几组？",
+        "en": "A keypad is laid out like a phone: the 1st row is 1, 2, 3, the 2nd row 4, 5, 6, the 3rd row 7, 8, 9, and the 4th row has only 0, directly below 8. All keys are equal squares packed together. An sets a 4-digit code (the first digit may be 0) in which the keys of any two neighbouring digits are a chess knight's move apart: 2 keys in one direction and 1 key in the other (for example 1 and 6, or 1 and 8). How many such codes are there?",
+        "ja": "数字のキーボードは電話と同じ並びで、1 段目が 1、2、3、2 段目が 4、5、6、3 段目が 7、8、9、4 段目は 0 だけで 8 の真下にあります。キーはどれも同じ大きさの正方形で、すき間なく並んでいます。アンさんは 4 けたの暗証番号（1 けた目が 0 でもよい）を決めます。となり合う 2 つの数字のキーは、チェスの「ナイト」の動きの関係、つまり一方の向きに 2 つ、もう一方の向きに 1 つずれていなければなりません（たとえば 1 と 6、1 と 8）。このような暗証番号は全部で何通りありますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 104。",
+        "zh-Hans": "答案是 104。",
+        "en": "The answer is 104.",
+        "ja": "答えは 104 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "先列出每個鍵可以接哪些鍵：1 → 6、8；3 → 4、8；7 → 2、6；9 → 2、4；2 → 7、9；8 → 1、3；4 → 3、9、0；6 → 1、7、0；0 → 4、6。5 往任何方向走「差 2 差 1」都會跑出鍵盤，所以 5 接不到任何鍵，4 位數密碼裡不會有 5。",
+          "把鍵分成四類：角落鍵 1、3、7、9；上下中間鍵 2、8；左右中間鍵 4、6；還有 0。由上面的表：每個角落鍵的前一位，可以是 2、8 中的一個和 4、6 中的一個；2（或 8）的前一位是兩個角落鍵；4（或 6）的前一位是兩個角落鍵和 0；0 的前一位是 4 和 6。",
+          "用「到第 n 位為止、最後一位是某一個鍵」的組數一步一步算。設一個角落鍵是 c 組、2 或 8 是 a 組、4 或 6 是 b 組、0 是 z 組。第 1 位：c = a = b = z = 1。下一位的組數是：c = a + b，a = 2 × c，b = 2 × c + z，z = 2 × b（右邊都用前一位的數）。",
+          "第 2 位：c = 2，a = 2，b = 3，z = 2。第 3 位：c = 2 + 3 = 5，a = 4，b = 4 + 2 = 6，z = 6。第 4 位：c = 4 + 6 = 10，a = 10，b = 10 + 6 = 16，z = 12。",
+          "4 位數密碼一共有：4 個角落鍵 4 × 10 = 40，2、8 共 2 × 10 = 20，4、6 共 2 × 16 = 32，0 有 12，合計 40 + 20 + 32 + 12 = 104 組。"
+        ],
+        "zh-Hans": [
+          "先列出每个键可以接哪些键：1 → 6、8；3 → 4、8；7 → 2、6；9 → 2、4；2 → 7、9；8 → 1、3；4 → 3、9、0；6 → 1、7、0；0 → 4、6。5 往任何方向走「差 2 差 1」都会跑出键盘，所以 5 接不到任何键，4 位数密码里不会有 5。",
+          "把键分成四类：角落键 1、3、7、9；上下中间键 2、8；左右中间键 4、6；还有 0。由上面的表：每个角落键的前一位，可以是 2、8 中的一个和 4、6 中的一个；2（或 8）的前一位是两个角落键；4（或 6）的前一位是两个角落键和 0；0 的前一位是 4 和 6。",
+          "用「到第 n 位为止、最后一位是某一个键」的组数一步一步算。设一个角落键是 c 组、2 或 8 是 a 组、4 或 6 是 b 组、0 是 z 组。第 1 位：c = a = b = z = 1。下一位的组数是：c = a + b，a = 2 × c，b = 2 × c + z，z = 2 × b（右边都用前一位的数）。",
+          "第 2 位：c = 2，a = 2，b = 3，z = 2。第 3 位：c = 2 + 3 = 5，a = 4，b = 4 + 2 = 6，z = 6。第 4 位：c = 4 + 6 = 10，a = 10，b = 10 + 6 = 16，z = 12。",
+          "4 位数密码一共有：4 个角落键 4 × 10 = 40，2、8 共 2 × 10 = 20，4、6 共 2 × 16 = 32，0 有 12，合计 40 + 20 + 32 + 12 = 104 组。"
+        ],
+        "en": [
+          "First list which keys can follow each key: 1 → 6, 8; 3 → 4, 8; 7 → 2, 6; 9 → 2, 4; 2 → 7, 9; 8 → 1, 3; 4 → 3, 9, 0; 6 → 1, 7, 0; 0 → 4, 6. From 5 every knight move leaves the keypad, so 5 connects to nothing and never appears in a code.",
+          "Group the keys: corners 1, 3, 7, 9; top/bottom middles 2, 8; side middles 4, 6; and 0. From the table, the digit before a corner can be one of 2, 8 and one of 4, 6; before 2 (or 8) come two corners; before 4 (or 6) come two corners and 0; before 0 come 4 and 6.",
+          "Count step by step the codes of length n ending at a given key: c for one corner, a for 2 or 8, b for 4 or 6, z for 0. Length 1: c = a = b = z = 1. Next length: c = a + b, a = 2 × c, b = 2 × c + z, z = 2 × b (using the previous values on the right).",
+          "Length 2: c = 2, a = 2, b = 3, z = 2. Length 3: c = 2 + 3 = 5, a = 4, b = 4 + 2 = 6, z = 6. Length 4: c = 4 + 6 = 10, a = 10, b = 10 + 6 = 16, z = 12.",
+          "Total 4-digit codes: corners 4 × 10 = 40, keys 2 and 8 give 2 × 10 = 20, keys 4 and 6 give 2 × 16 = 32, key 0 gives 12; 40 + 20 + 32 + 12 = 104."
+        ],
+        "ja": [
+          "まず、それぞれのキーの次に来られるキーを書き出します。1 → 6、8；3 → 4、8；7 → 2、6；9 → 2、4；2 → 7、9；8 → 1、3；4 → 3、9、0；6 → 1、7、0；0 → 4、6。5 からナイトの動きをするとどの向きでもキーボードの外に出るので、5 はどのキーにもつながらず、暗証番号に 5 は出てきません。",
+          "キーを 4 種類に分けます。角のキー 1、3、7、9、上下のまん中 2、8、左右のまん中 4、6、そして 0 です。表から、角のキーの前には 2、8 のうち 1 つと 4、6 のうち 1 つ、2（または 8）の前には角のキー 2 つ、4（または 6）の前には角のキー 2 つと 0、0 の前には 4 と 6 が来られます。",
+          "「n けた目までで、最後があるキーになる」通り数を順に数えます。角のキー 1 つについて c 通り、2 か 8 について a 通り、4 か 6 について b 通り、0 について z 通りとします。1 けた目は c = a = b = z = 1 です。次のけたでは c = a + b、a = 2 × c、b = 2 × c + z、z = 2 × b です（右辺は前のけたの数）。",
+          "2 けた目：c = 2、a = 2、b = 3、z = 2。3 けた目：c = 2 + 3 = 5、a = 4、b = 4 + 2 = 6、z = 6。4 けた目：c = 4 + 6 = 10、a = 10、b = 10 + 6 = 16、z = 12。",
+          "4 けたの暗証番号は、角のキー 4 × 10 = 40、2 と 8 で 2 × 10 = 20、4 と 6 で 2 × 16 = 32、0 で 12、合計 40 + 20 + 32 + 12 = 104 通りです。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "104"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade6-foundation",
+        "notes": "鍵盤上的騎士步圖分成角、2/8、4/6、0 四類，按最後一位分類遞推長度 4 的走法數。掃過 /鍵盤|按鍵|數字鍵/（2 題）、/騎士|日字/（3 題）、/密碼.{0,40}(相鄰|下一位)/（0 題）；最接近 logic_grade6_foundation_082，差異：那題是 3×3 棋盤上騎士交換位置的最少步數；本題是電話鍵盤上騎士步連成的 4 位密碼計數，用按鍵分類的遞推表"
+      }
+    },
+    {
+      "id": "logic_grade6_foundation_117",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "lock_turning_adjacent_dial_pairs_invariant",
+      "tags": [
+        "c:modular",
+        "m:invariant"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade6",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一個密碼鎖有 3 個轉輪，由左到右排成一排，每個轉輪上的數字 0、1、2、……、9 排成一圈，9 往上轉一格就回到 0，0 往下轉一格就回到 9。這個鎖有點特別：每次操作必須同時轉「相鄰的兩個」轉輪（左邊和中間，或中間和右邊），兩個都往上轉 1 格，或兩個都往下轉 1 格。現在三個轉輪是 0、0、0。轉了很多次之後，下面哪一個號碼有可能出現？",
+        "zh-Hans": "一个密码锁有 3 个转轮，由左到右排成一排，每个转轮上的数字 0、1、2、……、9 排成一圈，9 往上转一格就回到 0，0 往下转一格就回到 9。这个锁有点特别：每次操作必须同时转「相邻的两个」转轮（左边和中间，或中间和右边），两个都往上转 1 格，或两个都往下转 1 格。现在三个转轮是 0、0、0。转了很多次之后，下面哪一个号码有可能出现？",
+        "en": "A lock has 3 dials in a row. On each dial the digits 0, 1, 2, …, 9 go round in a circle: turning 9 up one step gives 0, and turning 0 down one step gives 9. This lock is unusual: each move must turn two neighbouring dials together (left and middle, or middle and right), both up one step or both down one step. The dials now read 0, 0, 0. After many moves, which of the following readings could appear?",
+        "ja": "ある暗証錠には 3 つのダイヤルが左から 1 列に並んでいます。どのダイヤルも 0、1、2、……、9 が輪のように並び、9 を 1 つ上に回すと 0 に、0 を 1 つ下に回すと 9 になります。この錠は少し変わっていて、1 回の操作でかならず「となり合う 2 つ」のダイヤル（左とまん中、またはまん中と右）を同時に、2 つとも 1 つ上か 2 つとも 1 つ下に回します。いま 3 つのダイヤルは 0、0、0 です。何回も回したあと、次のうち現れることがある番号はどれですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 D：3、5、2。",
+        "zh-Hans": "答案是 D：3、5、2。",
+        "en": "The answer is D: 3, 5, 2.",
+        "ja": "答えは D：3、5、2。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "看「左 − 中 + 右」這個數除以 10 的餘數。轉左和中兩個：左、中同時加 1（或減 1），左 − 中不變，右也不變；轉中和右兩個：中、右同時加 1（或減 1），− 中 + 右不變，左也不變。轉輪從 9 跳到 0 或從 0 跳到 9，是差了 10，不影響除以 10 的餘數。",
+          "所以不論怎麼轉，「左 − 中 + 右」除以 10 的餘數都和一開始一樣：0 − 0 + 0 = 0，餘數一直是 0。",
+          "檢查各選項：A 1 − 2 + 3 = 2，B 4 − 4 + 4 = 4，C 9 − 0 + 5 = 14，餘 4，E 7 − 7 + 7 = 7，餘數都不是 0，不可能出現。D 3 − 5 + 2 = 0，餘數是 0。",
+          "D 確實做得到：把左和中一起往上轉 3 次，變成 3、3、0；再把中和右一起往上轉 2 次，變成 3、5、2。",
+          "答案是 D。"
+        ],
+        "zh-Hans": [
+          "看「左 − 中 + 右」这个数除以 10 的余数。转左和中两个：左、中同时加 1（或减 1），左 − 中不变，右也不变；转中和右两个：中、右同时加 1（或减 1），− 中 + 右不变，左也不变。转轮从 9 跳到 0 或从 0 跳到 9，是差了 10，不影响除以 10 的余数。",
+          "所以不论怎么转，「左 − 中 + 右」除以 10 的余数都和一开始一样：0 − 0 + 0 = 0，余数一直是 0。",
+          "检查各选项：A 1 − 2 + 3 = 2，B 4 − 4 + 4 = 4，C 9 − 0 + 5 = 14，余 4，E 7 − 7 + 7 = 7，余数都不是 0，不可能出现。D 3 − 5 + 2 = 0，余数是 0。",
+          "D 确实做得到：把左和中一起往上转 3 次，变成 3、3、0；再把中和右一起往上转 2 次，变成 3、5、2。",
+          "答案是 D。"
+        ],
+        "en": [
+          "Look at the remainder of (left − middle + right) when divided by 10. Turning left and middle together adds 1 (or subtracts 1) to both, so left − middle is unchanged and right is untouched; turning middle and right together adds 1 (or subtracts 1) to both, so − middle + right is unchanged and left is untouched. A dial jumping from 9 to 0 or 0 to 9 changes by 10, which does not affect the remainder on division by 10.",
+          "So however the dials are turned, the remainder of (left − middle + right) on division by 10 stays as at the start: 0 − 0 + 0 = 0, so it is always 0.",
+          "Check the options: A 1 − 2 + 3 = 2, B 4 − 4 + 4 = 4, C 9 − 0 + 5 = 14 with remainder 4, E 7 − 7 + 7 = 7; none of these has remainder 0, so they can never appear. D 3 − 5 + 2 = 0, remainder 0.",
+          "D can really be reached: turn left and middle up together 3 times to get 3, 3, 0; then turn middle and right up together 2 times to get 3, 5, 2.",
+          "The answer is D."
+        ],
+        "ja": [
+          "「左 − まん中 + 右」を 10 でわった余りを見ます。左とまん中を回すと、どちらにも 1 たす（または 1 ひく）ので、左 − まん中は変わらず、右もそのままです。まん中と右を回すと、どちらにも 1 たす（または 1 ひく）ので、− まん中 + 右は変わらず、左もそのままです。9 から 0、0 から 9 にとぶのは 10 のちがいなので、10 でわった余りには影響しません。",
+          "だから、どう回しても「左 − まん中 + 右」を 10 でわった余りははじめと同じ 0 − 0 + 0 = 0 で、いつも 0 です。",
+          "選択肢を調べると、A 1 − 2 + 3 = 2、B 4 − 4 + 4 = 4、C 9 − 0 + 5 = 14 で余り 4、E 7 − 7 + 7 = 7 で、どれも余りが 0 ではないので現れません。D 3 − 5 + 2 = 0 で余りは 0 です。",
+          "D は実際にできます。左とまん中をいっしょに 3 回上に回して 3、3、0 にし、次にまん中と右をいっしょに 2 回上に回すと 3、5、2 になります。",
+          "答えは D です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "multiple_choice",
+      "options": {
+        "A": {
+          "zh-Hant": "1、2、3",
+          "zh-Hans": "1、2、3",
+          "en": "1, 2, 3",
+          "ja": "1、2、3"
+        },
+        "B": {
+          "zh-Hant": "4、4、4",
+          "zh-Hans": "4、4、4",
+          "en": "4, 4, 4",
+          "ja": "4、4、4"
+        },
+        "C": {
+          "zh-Hant": "9、0、5",
+          "zh-Hans": "9、0、5",
+          "en": "9, 0, 5",
+          "ja": "9、0、5"
+        },
+        "D": {
+          "zh-Hant": "3、5、2",
+          "zh-Hans": "3、5、2",
+          "en": "3, 5, 2",
+          "ja": "3、5、2"
+        },
+        "E": {
+          "zh-Hant": "7、7、7",
+          "zh-Hans": "7、7、7",
+          "en": "7, 7, 7",
+          "ja": "7、7、7"
+        }
+      },
+      "correctAnswer": {
+        "type": "choice",
+        "value": "D"
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade6-foundation",
+        "notes": "每次同轉相鄰兩輪，「左−中+右」除以 10 的餘數不變（恆為 0），以此排除誘答並構造 3、5、2。掃過 /轉輪|密碼鎖|撥盤/（7 題）、/同時轉.{0,20}(兩個|相鄰)/（1 題）、/不論怎麼(轉|操作)/（0 題）；最接近 arithmetic_grade2_foundation_119，差異：那題是單獨轉每個轉輪求最少次數；本題每次必須同轉相鄰兩輪，用「左−中+右」的餘數不變判斷哪個號碼可達"
+      }
+    },
+    {
+      "id": "logic_grade6_foundation_118",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "min_decreasing_piles_equals_longest_increasing_run",
+      "tags": [
+        "c:compare_order",
+        "m:extremal",
+        "m:construction"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade6",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "小安把寫著 1 到 9 的 9 張牌依序一張一張發出來，順序是 6、2、8、4、1、9、5、7、3。每發一張，他可以把它疊在某一疊的最上面，但那一疊最上面的牌必須比這張大；也可以把它放在桌上另外開一疊新的。牌放下後就不再移動。9 張牌都放完，最少要開幾疊？",
+        "zh-Hans": "小安把写着 1 到 9 的 9 张牌依序一张一张发出来，顺序是 6、2、8、4、1、9、5、7、3。每发一张，他可以把它叠在某一叠的最上面，但那一叠最上面的牌必须比这张大；也可以把它放在桌上另外开一叠新的。牌放下后就不再移动。9 张牌都放完，最少要开几叠？",
+        "en": "An deals 9 cards numbered 1 to 9 one at a time in the order 6, 2, 8, 4, 1, 9, 5, 7, 3. Each card may be placed on top of an existing pile only if that pile's top card is larger than it; otherwise (or by choice) it starts a new pile. Cards are never moved after being placed. When all 9 cards are placed, what is the smallest possible number of piles?",
+        "ja": "アンさんは 1 から 9 の数が書かれた 9 枚のカードを、6、2、8、4、1、9、5、7、3 の順に 1 枚ずつ配ります。配ったカードは、いちばん上のカードがそれより大きい山の上になら重ねられます。重ねずに新しい山を作ってもかまいません。置いたカードはもう動かしません。9 枚すべて置き終えたとき、山の数は最も少なくていくつですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 4。",
+        "zh-Hans": "答案是 4。",
+        "en": "The answer is 4.",
+        "ja": "答えは 4 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "同一疊裡，後放的牌一定比當時最上面的牌小，所以每一疊從下往上的數字越來越小；某張牌上面的牌，全都比它小。",
+          "發牌順序裡，2、4、5、7 是依序出現而且越來越大的四張。假設其中兩張在同一疊，例如 2 和 4：4 比 2 晚發，會在 2 的上面，但 2 上面的牌都比 2 小，而 4 比 2 大，矛盾。所以這四張必須在四個不同的疊，至少要開 4 疊。",
+          "4 疊做得到：6 開第 1 疊；2 放在 6 上；8 開第 2 疊；4 放在 8 上；1 放在 2 上；9 開第 3 疊；5 放在 9 上；7 開第 4 疊；3 放在 4 上。結果四疊由下往上是 6、2、1；8、4、3；9、5；7，每次都符合規定。",
+          "所以最少要開 4 疊。"
+        ],
+        "zh-Hans": [
+          "同一叠里，后放的牌一定比当时最上面的牌小，所以每一叠从下往上的数字越来越小；某张牌上面的牌，全都比它小。",
+          "发牌顺序里，2、4、5、7 是依序出现而且越来越大的四张。假设其中两张在同一叠，例如 2 和 4：4 比 2 晚发，会在 2 的上面，但 2 上面的牌都比 2 小，而 4 比 2 大，矛盾。所以这四张必须在四个不同的叠，至少要开 4 叠。",
+          "4 叠做得到：6 开第 1 叠；2 放在 6 上；8 开第 2 叠；4 放在 8 上；1 放在 2 上；9 开第 3 叠；5 放在 9 上；7 开第 4 叠；3 放在 4 上。结果四叠由下往上是 6、2、1；8、4、3；9、5；7，每次都符合规定。",
+          "所以最少要开 4 叠。"
+        ],
+        "en": [
+          "Within a pile, each newly placed card is smaller than the top card at that moment, so every pile decreases from bottom to top: every card above a given card is smaller than it.",
+          "In the dealing order, 2, 4, 5, 7 appear in this order and keep getting larger. If two of them, say 2 and 4, were in the same pile, then 4 (dealt later) would lie above 2, but every card above 2 is smaller than 2 while 4 is larger, a contradiction. So these four cards need four different piles: at least 4 piles.",
+          "4 piles are enough: 6 starts pile 1; 2 goes on 6; 8 starts pile 2; 4 goes on 8; 1 goes on 2; 9 starts pile 3; 5 goes on 9; 7 starts pile 4; 3 goes on 4. The piles, bottom to top, are 6, 2, 1; 8, 4, 3; 9, 5; 7, and every placement follows the rule.",
+          "So the smallest number of piles is 4."
+        ],
+        "ja": [
+          "同じ山では、あとから置くカードはそのときいちばん上のカードより小さいので、どの山も下から上へ数がだんだん小さくなります。あるカードより上にあるカードはすべてそれより小さいです。",
+          "配る順番の中で、2、4、5、7 はこの順に出てきて、だんだん大きくなる 4 枚です。もしこのうち 2 枚、たとえば 2 と 4 が同じ山にあると、4 はあとで配られるので 2 の上にありますが、2 より上のカードはすべて 2 より小さいのに 4 は 2 より大きく、矛盾します。よってこの 4 枚は別々の山に入り、山は少なくとも 4 つ必要です。",
+          "4 つでできます。6 で 1 つ目の山を作り、2 を 6 の上、8 で 2 つ目の山、4 を 8 の上、1 を 2 の上、9 で 3 つ目の山、5 を 9 の上、7 で 4 つ目の山、3 を 4 の上に置きます。山は下から 6、2、1；8、4、3；9、5；7 で、どれも決まりを守っています。",
+          "よって山は最も少なくて 4 つです。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "4"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade6-foundation",
+        "notes": "每疊由下往上遞減，依序遞增的四張 2、4、5、7 必須分在不同疊，得下界 4，再構造 4 疊。掃過 /疊.{0,40}(比.{0,10}(小|大)).{0,40}(幾疊|幾堆)/（0 題）、/最少.{0,10}(幾疊|幾堆)/（0 題）、/發牌|一張一張/（6 題）；最接近 logic_grade3_foundation_087，差異：那題是插入排序最少移動幾張（9−最長遞增）；本題是發牌疊成遞減的疊、求最少疊數，下界來自一組遞增的牌必須分在不同疊"
+      }
+    },
+    {
+      "id": "logic_grade6_foundation_119",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "two_by_two_sliding_tiles_cyclic_order_invariant",
+      "tags": [
+        "c:basic_counting",
+        "m:invariant"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade6",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一個 2 × 2 的小框裡有 4 個格子，放著標 1、2、3 的三塊方塊，另外一格是空的。每一次可以把一塊和空格上下或左右相鄰的方塊推進空格。一開始的樣子是：左上 1、右上 2、左下 3、右下是空格。一直推下去，框裡一共可能出現幾種不同的樣子（包括一開始的樣子）？",
+        "zh-Hans": "一个 2 × 2 的小框里有 4 个格子，放着标 1、2、3 的三块方块，另外一格是空的。每一次可以把一块和空格上下或左右相邻的方块推进空格。一开始的样子是：左上 1、右上 2、左下 3、右下是空格。一直推下去，框里一共可能出现几种不同的样子（包括一开始的样子）？",
+        "en": "A small 2 × 2 frame has 4 cells holding three tiles marked 1, 2, 3 and one empty cell. A move slides a tile that is next to the empty cell (above, below, left or right) into it. At the start: top-left 1, top-right 2, bottom-left 3, bottom-right empty. Sliding again and again, how many different arrangements can appear in the frame (including the starting one)?",
+        "ja": "2 × 2 の小さなわくに 4 つのマスがあり、1、2、3 と書かれた 3 枚の板と、空いているマスが 1 つあります。1 回の操作で、空きマスと上下左右にとなり合う板を 1 枚、空きマスにすべらせます。はじめは左上 1、右上 2、左下 3、右下が空きマスです。すべらせ続けると、わくの中には全部で何通りの並び方が現れることがありますか（はじめの並び方もふくみます）。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 12。",
+        "zh-Hans": "答案是 12。",
+        "en": "The answer is 12.",
+        "ja": "答えは 12 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "4 個格子繞成一圈：左上 → 右上 → 右下 → 左下 → 回到左上，相鄰的格子在圈上也相鄰。每推一次，就是把一塊方塊沿著這個圈移到旁邊的空格，它不會越過別的方塊。",
+          "沿這個圈順時針讀方塊（跳過空格），一開始是 1、2、3（左上 1、右上 2、跳過右下、左下 3）。推動時只有一塊方塊移進旁邊的空格，三塊方塊在圈上的先後次序不變，所以順時針讀到的永遠是 1 → 2 → 3 → 1 的循環次序。",
+          "因此可能出現的樣子，只有「順時針次序是 1、2、3」的那些：空格有 4 個位置可選，1 在其餘 3 格中的任一格，2 和 3 就跟著決定，最多 4 × 3 = 12 種（全部 4 × 3 × 2 = 24 種樣子中只有一半）。",
+          "這 12 種都推得到：每次都把空格逆時針方向旁邊的那塊方塊推進空格，空格就沿圈一格一格往逆時針方向走。例如一開始依序推 2、1、3、2，空格繞一圈回到右下，樣子變成左上 3、右上 1、左下 2：其餘三格裡的方塊整體輪轉了一格。再繞第 2、第 3 圈，又各輪轉一格。這 3 圈共推 12 次，空格在每一圈都經過 4 個位置，而同一個空格位置在 3 圈中，1 分別落在其餘 3 格的不同一格，所以 12 種樣子都出現。",
+          "答案是 12 種。"
+        ],
+        "zh-Hans": [
+          "4 个格子绕成一圈：左上 → 右上 → 右下 → 左下 → 回到左上，相邻的格子在圈上也相邻。每推一次，就是把一块方块沿着这个圈移到旁边的空格，它不会越过别的方块。",
+          "沿这个圈顺时针读方块（跳过空格），一开始是 1、2、3（左上 1、右上 2、跳过右下、左下 3）。推动时只有一块方块移进旁边的空格，三块方块在圈上的先后次序不变，所以顺时针读到的永远是 1 → 2 → 3 → 1 的循环次序。",
+          "因此可能出现的样子，只有「顺时针次序是 1、2、3」的那些：空格有 4 个位置可选，1 在其余 3 格中的任一格，2 和 3 就跟着决定，最多 4 × 3 = 12 种（全部 4 × 3 × 2 = 24 种样子中只有一半）。",
+          "这 12 种都推得到：每次都把空格逆时针方向旁边的那块方块推进空格，空格就沿圈一格一格往逆时针方向走。例如一开始依序推 2、1、3、2，空格绕一圈回到右下，样子变成左上 3、右上 1、左下 2：其余三格里的方块整体轮转了一格。再绕第 2、第 3 圈，又各轮转一格。这 3 圈共推 12 次，空格在每一圈都经过 4 个位置，而同一个空格位置在 3 圈中，1 分别落在其余 3 格的不同一格，所以 12 种样子都出现。",
+          "答案是 12 种。"
+        ],
+        "en": [
+          "The 4 cells form a ring: top-left → top-right → bottom-right → bottom-left → back to top-left, and neighbouring cells are neighbours on the ring. Each move slides one tile along this ring into the empty cell beside it; it never jumps over another tile.",
+          "Read the tiles clockwise around the ring, skipping the empty cell: at the start this gives 1, 2, 3 (top-left 1, top-right 2, skip bottom-right, bottom-left 3). A move only shifts one tile into the neighbouring empty cell, so the order of the three tiles around the ring never changes: reading clockwise always gives the cycle 1 → 2 → 3 → 1.",
+          "So only arrangements with clockwise order 1, 2, 3 can appear: the empty cell can be in 4 places, tile 1 in any of the other 3 cells, and then 2 and 3 are fixed, at most 4 × 3 = 12 arrangements (half of all 4 × 3 × 2 = 24).",
+          "All 12 can be reached: each time, slide the tile that is anticlockwise of the empty cell into it, so the empty cell walks anticlockwise around the ring one cell at a time. For example, sliding 2, 1, 3, 2 in turn brings the empty cell round to bottom-right again with top-left 3, top-right 1, bottom-left 2: the tiles in the other three cells have rotated by one place. Laps 2 and 3 rotate them by one place each again. In these 3 laps (12 moves) the empty cell passes all 4 places in every lap, and for the same empty place tile 1 sits in a different one of the other 3 cells in each lap, so all 12 arrangements appear.",
+          "The answer is 12."
+        ],
+        "ja": [
+          "4 つのマスは輪になっています。左上 → 右上 → 右下 → 左下 → 左上にもどる、で、となり合うマスは輪の上でもとなりです。1 回の操作は、1 枚の板を輪にそってとなりの空きマスへ動かすだけで、ほかの板をとびこえることはありません。",
+          "輪にそって時計回りに板を読みます（空きマスはとばす）。はじめは 1、2、3（左上 1、右上 2、右下をとばして左下 3）です。操作では 1 枚がとなりの空きマスへ移るだけなので、3 枚の板の輪の上での順番は変わらず、時計回りに読むといつも 1 → 2 → 3 → 1 の順です。",
+          "よって現れるのは「時計回りの順が 1、2、3」の並び方だけです。空きマスの場所が 4 通り、1 の場所が残り 3 マスのどれかで、2 と 3 は自動的に決まるので、多くても 4 × 3 = 12 通りです（全部の 4 × 3 × 2 = 24 通りの半分）。",
+          "この 12 通りはすべて作れます。毎回、空きマスの反時計回り側にある板を空きマスへすべらせると、空きマスは輪を反時計回りに 1 マスずつ進みます。たとえば 2、1、3、2 の順にすべらせると空きマスは 1 周して右下にもどり、左上 3、右上 1、左下 2 となって、残り 3 マスの板が全体で 1 つずつ回っています。2 周目、3 周目でもさらに 1 つずつ回ります。この 3 周（12 回）で、空きマスは毎周 4 か所すべてを通り、同じ空きマスの場所では 3 周それぞれで 1 が残り 3 マスのちがうマスに来るので、12 通りすべてが現れます。",
+          "答えは 12 通りです。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "12"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade6-foundation",
+        "notes": "2×2 滑塊框是一個環，滑動不改變三塊方塊的順時針循環次序，可達樣子為 4×3 = 12 並構造遍歷。掃過 /滑|推進空格|空格.{0,20}(移|推)/（16 題）、/方塊.{0,40}(空格|空的)/（2 題）、/可能出現.{0,10}幾種/（2 題）；最接近 logic_grade12_foundation_049，差異：那題是 4×4 十五格拼圖用排列奇偶判斷不可解；本題是 2×2 三塊方塊，關鍵觀察是環上的循環次序不變，並數出可達的 12 種"
+      }
     }
   ]
 }

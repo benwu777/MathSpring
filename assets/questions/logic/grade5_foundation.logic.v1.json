@@ -7621,6 +7621,472 @@
         "reference": "logic-grade5-foundation",
         "notes": "反覆劃掉奇數位置：每輪後倖存者是 2、4、8、… 的倍數，最後是不超過 100 的最大 2 的連乘 64。掃過 劃掉|劃去|刪去|消去（4 題）、奇數位置|第 1、3、5（5 題）；最接近 logic_grade5_foundation_044，差異：那題劃掉 2 的倍數再劃掉 3 的倍數數剩幾個；本題反覆劃掉奇數位置，倖存者依序是 2、4、8、… 的倍數"
       }
+    },
+    {
+      "id": "logic_grade5_foundation_098",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "fewest_shots_to_surely_hit_hidden_1x3_ship",
+      "tags": [
+        "c:modular",
+        "m:pigeonhole",
+        "m:construction"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade5",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一塊 5 × 5 的方格板（5 個橫排，每排 5 格）上，小美偷偷藏了一艘「1 × 3 的船」：它佔用同一橫排相鄰的 3 格，或同一直排相鄰的 3 格。小安每次可以指定一格射擊，只要射中船所佔的任何一格就算打中。小安事先決定好要射哪些格子，最少要射幾格，才能保證不論船藏在哪裡都一定打中？",
+        "zh-Hans": "一块 5 × 5 的方格板（5 个横排，每排 5 格）上，小美偷偷藏了一艘「1 × 3 的船」：它占用同一横排相邻的 3 格，或同一竖排相邻的 3 格。小安每次可以指定一格射击，只要射中船所占的任何一格就算打中。小安事先决定好要射哪些格子，最少要射几格，才能保证不论船藏在哪里都一定打中？",
+        "en": "On a 5 × 5 board (5 rows of 5 squares), Mei secretly hides a \"1 × 3 ship\": it occupies 3 neighbouring squares in one row or 3 neighbouring squares in one column. Each shot An fires is aimed at one square, and it is a hit if that square is part of the ship. An chooses his target squares in advance. What is the smallest number of squares he must shoot at to be sure of hitting the ship wherever it is hidden?",
+        "ja": "5 × 5 のマス目の板（横に 5 段、各段 5 マス）に、メイさんが「1 × 3 の船」をこっそりかくしました。船は同じ段のとなりあう 3 マスか、同じ列のとなりあう 3 マスをしめます。アンさんは 1 回に 1 マスをねらってうち、船のしめるマスのどれかに当たれば命中です。うつマスは前もって決めておきます。船がどこにかくれていても必ず命中させるには、最も少なくて何マスうてばよいですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 8。",
+        "zh-Hans": "答案是 8。",
+        "en": "The answer is 8.",
+        "ja": "答えは 8 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "先證明 7 格不夠。把板子分成 8 艘互不重疊的船的位置：第 1、2 橫排的第 1～3 格（兩艘橫船）；第 4、5 直排的第 1～3 格（兩艘直船）；第 4、5 橫排的第 3～5 格（兩艘橫船）；第 1、2 直排的第 3～5 格（兩艘直船）。這 8 個位置用掉中央以外的 24 格，彼此沒有共用的格子。",
+          "射一格最多只能打到這 8 個位置中的 1 個。如果只射 7 格，至少有一個位置完全沒被射到，船剛好藏在那裡就打不中。所以至少要射 8 格。",
+          "8 格做得到：射「橫排號碼加直排號碼，除以 3 餘 2」的格子，也就是（第 1 排第 1 格）、（第 1 排第 4 格）、（第 2 排第 3 格）、（第 3 排第 2 格）、（第 4 排第 1 格）、（第 3 排第 5 格）、（第 4 排第 4 格）、（第 5 排第 3 格），共 8 格。",
+          "船佔同一橫排相鄰 3 格時，這 3 格的「排號加格號」是 3 個連續整數；3 個連續整數中一定有一個除以 3 餘 2，所以船一定有一格被射到。直船同理。",
+          "所以最少要射 8 格。"
+        ],
+        "zh-Hans": [
+          "先证明 7 格不够。把板子分成 8 艘互不重叠的船的位置：第 1、2 横排的第 1～3 格（两艘横船）；第 4、5 竖排的第 1～3 格（两艘直船）；第 4、5 横排的第 3～5 格（两艘横船）；第 1、2 竖排的第 3～5 格（两艘直船）。这 8 个位置用掉中央以外的 24 格，彼此没有共用的格子。",
+          "射一格最多只能打到这 8 个位置中的 1 个。如果只射 7 格，至少有一个位置完全没被射到，船刚好藏在那里就打不中。所以至少要射 8 格。",
+          "8 格做得到：射「横排号码加竖排号码，除以 3 余 2」的格子，也就是（第 1 排第 1 格）、（第 1 排第 4 格）、（第 2 排第 3 格）、（第 3 排第 2 格）、（第 4 排第 1 格）、（第 3 排第 5 格）、（第 4 排第 4 格）、（第 5 排第 3 格），共 8 格。",
+          "船占同一横排相邻 3 格时，这 3 格的「排号加格号」是 3 个连续整数；3 个连续整数中一定有一个除以 3 余 2，所以船一定有一格被射到。直船同理。",
+          "所以最少要射 8 格。"
+        ],
+        "en": [
+          "First, 7 shots are not enough. Mark 8 non-overlapping ship positions: in rows 1 and 2, squares 1–3 (two horizontal ships); in columns 4 and 5, squares 1–3 (two vertical ships); in rows 4 and 5, squares 3–5 (two horizontal ships); in columns 1 and 2, squares 3–5 (two vertical ships). They use the 24 squares other than the centre and share no square.",
+          "One shot can hit at most 1 of these 8 positions. With only 7 shots, some position is never shot at, and if the ship is there it is missed. So at least 8 shots are needed.",
+          "8 shots suffice: shoot the squares whose row number plus column number leaves remainder 2 when divided by 3: (row 1, col 1), (row 1, col 4), (row 2, col 3), (row 3, col 2), (row 4, col 1), (row 3, col 5), (row 4, col 4), (row 5, col 3), 8 squares in all.",
+          "If the ship lies in a row, its 3 squares have row + column equal to 3 consecutive whole numbers, and among 3 consecutive whole numbers one leaves remainder 2 when divided by 3, so one of its squares is shot. A vertical ship works the same way.",
+          "So the smallest number is 8."
+        ],
+        "ja": [
+          "まず 7 マスでは足りないことを示します。板の中に、重ならない船の置き方を 8 つとります。1・2 段目の 1〜3 マス目（横の船 2 つ）、4・5 列目の 1〜3 マス目（たての船 2 つ）、4・5 段目の 3〜5 マス目（横の船 2 つ）、1・2 列目の 3〜5 マス目（たての船 2 つ）です。この 8 つはまん中以外の 24 マスを使い、共通のマスはありません。",
+          "1 マスうっても、この 8 つの置き方のうち 1 つにしか当たりません。7 マスしかうたないと、まったくうたれない置き方が残り、船がそこにあれば命中しません。よって少なくとも 8 マス必要です。",
+          "8 マスでできます。「段の番号 + 列の番号」を 3 でわると 2 あまるマス、つまり（1 段 1 列）（1 段 4 列）（2 段 3 列）（3 段 2 列）（4 段 1 列）（3 段 5 列）（4 段 4 列）（5 段 3 列）の 8 マスをうちます。",
+          "船が同じ段にあるとき、その 3 マスの「段の番号 + 列の番号」は 3 つの連続した整数で、その中には 3 でわると 2 あまるものが必ず 1 つあるので、どれかがうたれます。たての船も同じです。",
+          "よって、最も少なくて 8 マスです。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "8"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade5-foundation",
+        "notes": "用 8 個互不重疊的船位證下界，用「排號加格號除以 3 餘 2」的 8 格保證命中。掃過 /船.{0,30}格|保證.{0,10}(打中|射中|擊中)/（0 題）、/戰艦|潛艇/（0 題）；最接近 logic_grade6_foundation_114，差異：那題是讓每個 2 × 2 小正方形都含黑格（四個不重疊角落塊證下界）；本題是保證射中藏起來的 1 × 3 船，用 8 個不重疊船位與「除以 3 餘 2」的著色構造，形狀與構造都不同"
+      }
+    },
+    {
+      "id": "logic_grade5_foundation_099",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "exactly_two_adjacent_divisibility_claims_false",
+      "tags": [
+        "c:factor_multiple",
+        "c:logic_deduction",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade5",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "老師心裡想了一個正整數。號碼 2 到 8 號的七位同學各說了一句話：2 號說「它是 2 的倍數」，3 號說「它是 3 的倍數」，……，8 號說「它是 8 的倍數」（每人說的數就是自己的號碼）。老師說：「你們之中恰好有兩個人說錯，而且這兩個人的號碼是相連的。」老師心裡想的數最小是多少？",
+        "zh-Hans": "老师心里想了一个正整数。号码 2 到 8 号的七位同学各说了一句话：2 号说「它是 2 的倍数」，3 号说「它是 3 的倍数」，……，8 号说「它是 8 的倍数」（每人说的数就是自己的号码）。老师说：「你们之中恰好有两个人说错，而且这两个人的号码是相连的。」老师心里想的数最小是多少？",
+        "en": "The teacher thinks of a positive whole number. Seven pupils with seat numbers 2 to 8 each make a statement: pupil 2 says \"it is a multiple of 2\", pupil 3 says \"it is a multiple of 3\", …, pupil 8 says \"it is a multiple of 8\" (each names his or her own seat number). The teacher says: \"Exactly two of you are wrong, and their seat numbers are consecutive.\" What is the smallest number the teacher could be thinking of?",
+        "ja": "先生が正の整数を 1 つ思いうかべています。出席番号 2 番から 8 番の 7 人がそれぞれ言いました。2 番「それは 2 の倍数です」、3 番「それは 3 の倍数です」、……、8 番「それは 8 の倍数です」（言う数は自分の番号です）。先生は「この中でちょうど 2 人がまちがっていて、その 2 人の番号はとなりあっています」と言いました。先生が思いうかべた数は、最も小さくていくつですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 60。",
+        "zh-Hans": "答案是 60。",
+        "en": "The answer is 60.",
+        "ja": "答えは 60 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "說錯的兩人號碼相連，可能是 (2, 3)、(3, 4)、(4, 5)、(5, 6)、(6, 7)、(7, 8)。其他人都說對。逐一檢查：",
+          "(2, 3)：4 號說對，數是 4 的倍數，就一定是 2 的倍數，2 號不會錯，矛盾。(3, 4)：6 號說對，數是 6 的倍數，就一定是 3 的倍數，矛盾。(4, 5)：8 號說對，數是 8 的倍數，就一定是 4 的倍數，矛盾。",
+          "(5, 6)：2 號和 3 號說對，數是 2 的倍數也是 3 的倍數，就是 6 的倍數，6 號不會錯，矛盾。(6, 7)：同樣 2 號、3 號說對，數一定是 6 的倍數，矛盾。",
+          "只剩 (7, 8)：數要是 2、3、4、5、6 的倍數，但不是 7 和 8 的倍數。2、3、4、5、6 的最小公倍數是 60，所以數是 60 的倍數。",
+          "60 不是 7 的倍數，也不是 8 的倍數（60 ÷ 8 = 7 餘 4），正好只有 7 號、8 號說錯。所以最小是 60。"
+        ],
+        "zh-Hans": [
+          "说错的两人号码相连，可能是 (2, 3)、(3, 4)、(4, 5)、(5, 6)、(6, 7)、(7, 8)。其他人都说对。逐一检查：",
+          "(2, 3)：4 号说对，数是 4 的倍数，就一定是 2 的倍数，2 号不会错，矛盾。(3, 4)：6 号说对，数是 6 的倍数，就一定是 3 的倍数，矛盾。(4, 5)：8 号说对，数是 8 的倍数，就一定是 4 的倍数，矛盾。",
+          "(5, 6)：2 号和 3 号说对，数是 2 的倍数也是 3 的倍数，就是 6 的倍数，6 号不会错，矛盾。(6, 7)：同样 2 号、3 号说对，数一定是 6 的倍数，矛盾。",
+          "只剩 (7, 8)：数要是 2、3、4、5、6 的倍数，但不是 7 和 8 的倍数。2、3、4、5、6 的最小公倍数是 60，所以数是 60 的倍数。",
+          "60 不是 7 的倍数，也不是 8 的倍数（60 ÷ 8 = 7 余 4），正好只有 7 号、8 号说错。所以最小是 60。"
+        ],
+        "en": [
+          "The two wrong pupils have consecutive numbers: (2, 3), (3, 4), (4, 5), (5, 6), (6, 7) or (7, 8). Everyone else is right. Check each case:",
+          "(2, 3): pupil 4 is right, so the number is a multiple of 4, hence of 2, so pupil 2 is not wrong — contradiction. (3, 4): pupil 6 is right, so it is a multiple of 6, hence of 3 — contradiction. (4, 5): pupil 8 is right, so it is a multiple of 8, hence of 4 — contradiction.",
+          "(5, 6): pupils 2 and 3 are right, so the number is a multiple of both 2 and 3, i.e. of 6, so pupil 6 is not wrong — contradiction. (6, 7): again pupils 2 and 3 are right, so it is a multiple of 6 — contradiction.",
+          "Only (7, 8) remains: the number is a multiple of 2, 3, 4, 5 and 6 but not of 7 or 8. The least common multiple of 2, 3, 4, 5, 6 is 60, so the number is a multiple of 60.",
+          "60 is not a multiple of 7 and not of 8 (60 ÷ 8 = 7 remainder 4), so exactly pupils 7 and 8 are wrong. The smallest number is 60."
+        ],
+        "ja": [
+          "まちがえた 2 人の番号はとなりあうので、(2, 3)、(3, 4)、(4, 5)、(5, 6)、(6, 7)、(7, 8) のどれかで、ほかの人は正しいです。順に調べます。",
+          "(2, 3)：4 番が正しいので 4 の倍数で、それなら 2 の倍数でもあり、2 番はまちがえていないので矛盾です。(3, 4)：6 番が正しいので 6 の倍数で、3 の倍数でもあり矛盾です。(4, 5)：8 番が正しいので 8 の倍数で、4 の倍数でもあり矛盾です。",
+          "(5, 6)：2 番と 3 番が正しいので、2 の倍数でも 3 の倍数でもあり、つまり 6 の倍数なので 6 番は正しく、矛盾です。(6, 7)：同じく 2 番・3 番が正しいので 6 の倍数になり、矛盾です。",
+          "残るのは (7, 8) だけです。数は 2、3、4、5、6 の倍数で、7 と 8 の倍数ではありません。2、3、4、5、6 の最小公倍数は 60 なので、数は 60 の倍数です。",
+          "60 は 7 の倍数でも 8 の倍数でもない（60 ÷ 8 = 7 あまり 4）ので、まちがえたのはちょうど 7 番と 8 番です。最も小さい数は 60 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "60"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade5-foundation",
+        "notes": "相連兩人說錯時，除 (7, 8) 外都會被「較大倍數說對推出較小倍數也對」推翻，故為 2～6 的公倍數 60。掃過 /(說錯|錯了|說謊).{0,30}(相鄰|連續|緊挨)|恰好.{0,10}兩.{0,10}(說錯|錯)/（1 題）、/的倍數.{0,40}的倍數.{0,40}的倍數.{0,40}說/（0 題）；最接近 logic_grade5_foundation_024，差異：那題是三句話恰一句假、從四個候選數挑；本題是七句倍數宣稱恰兩句錯且號碼相連，用「大倍數推小倍數」逐一排除錯的組合，再取最小公倍數"
+      }
+    },
+    {
+      "id": "logic_grade5_foundation_100",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "max_non_attacking_bishops_on_5x5",
+      "tags": [
+        "c:logic_deduction",
+        "m:extremal",
+        "m:construction"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade5",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "西洋棋的「主教」只能斜著走，一次可以沿斜線走任意多格，所以同一條斜線上的兩個主教會互相攻擊（不管中間隔幾格）。在一塊 5 × 5 的棋盤上，最多可以放幾個主教，使任何兩個都不會互相攻擊？",
+        "zh-Hans": "西洋棋的「主教」只能斜着走，一次可以沿斜线走任意多格，所以同一条斜线上的两个主教会互相攻击（不管中间隔几格）。在一块 5 × 5 的棋盘上，最多可以放几个主教，使任何两个都不会互相攻击？",
+        "en": "A chess bishop moves only diagonally, any number of squares, so two bishops on the same diagonal line attack each other (however far apart). What is the largest number of bishops that can be placed on a 5 × 5 board so that no two attack each other?",
+        "ja": "チェスの「ビショップ」はななめにしか動けず、ななめの線にそって何マスでも進めるので、同じななめの線の上にある 2 つのビショップはたがいにねらいあいます（間が何マスあっても同じです）。5 × 5 の盤に、どの 2 つもねらいあわないようにビショップを置くとき、最も多くて何個置けますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 8。",
+        "zh-Hans": "答案是 8。",
+        "en": "The answer is 8.",
+        "ja": "答えは 8 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "看「從左上往右下」方向的斜線：5 × 5 的棋盤上這種斜線一共有 9 條（長度依序是 1、2、3、4、5、4、3、2、1 格），每一格恰好在其中一條上。同一條斜線上最多只能放 1 個主教，所以最多 9 個。",
+          "但其中只有 1 格長的兩條，一條是右上角那一格，一條是左下角那一格；這兩格在同一條「從右上往左下」的斜線（最長的那條）上，不能同時放。所以這兩條短斜線最多只能用掉 1 條，主教最多 9 − 1 = 8 個。",
+          "8 個做得到：第 1 橫排的 5 格全放，再放第 5 橫排的第 2、3、4 格。同一橫排的兩格不在同一斜線上；第 1 排第 a 格和第 5 排第 b 格在同一斜線上，必須左右相差 4 格，也就是 (1, 5) 或 (5, 1) 這兩種，但第 5 排沒有放第 1 格和第 5 格，所以都不互相攻擊。",
+          "所以最多可以放 8 個主教。"
+        ],
+        "zh-Hans": [
+          "看「从左上往右下」方向的斜线：5 × 5 的棋盘上这种斜线一共有 9 条（长度依序是 1、2、3、4、5、4、3、2、1 格），每一格恰好在其中一条上。同一条斜线上最多只能放 1 个主教，所以最多 9 个。",
+          "但其中只有 1 格长的两条，一条是右上角那一格，一条是左下角那一格；这两格在同一条「从右上往左下」的斜线（最长的那条）上，不能同时放。所以这两条短斜线最多只能用掉 1 条，主教最多 9 − 1 = 8 个。",
+          "8 个做得到：第 1 横排的 5 格全放，再放第 5 横排的第 2、3、4 格。同一横排的两格不在同一斜线上；第 1 排第 a 格和第 5 排第 b 格在同一斜线上，必须左右相差 4 格，也就是 (1, 5) 或 (5, 1) 这两种，但第 5 排没有放第 1 格和第 5 格，所以都不互相攻击。",
+          "所以最多可以放 8 个主教。"
+        ],
+        "en": [
+          "Look at the diagonals running from top-left to bottom-right: on a 5 × 5 board there are 9 of them (of lengths 1, 2, 3, 4, 5, 4, 3, 2, 1 squares), and every square is on exactly one. Each can hold at most 1 bishop, so at most 9.",
+          "But the two diagonals of length 1 are the top-right corner square and the bottom-left corner square, and these two squares lie on the same top-right-to-bottom-left diagonal (the longest one), so they cannot both be used. At most 1 of these two short diagonals is used, giving at most 9 − 1 = 8 bishops.",
+          "8 is possible: fill all 5 squares of row 1, and squares 2, 3, 4 of row 5. Two squares in one row are never on a common diagonal; square a of row 1 and square b of row 5 are on a common diagonal only if they are 4 columns apart, i.e. (1, 5) or (5, 1), but row 5 has no bishop in squares 1 or 5, so no two attack each other.",
+          "So the largest number is 8."
+        ],
+        "ja": [
+          "「左上から右下」向きのななめの線を考えます。5 × 5 の盤にはこの向きの線が 9 本あり（長さは順に 1、2、3、4、5、4、3、2、1 マス）、どのマスもちょうど 1 本の上にあります。1 本の線には 1 個までしか置けないので、多くても 9 個です。",
+          "ところが長さ 1 の 2 本は右上の角のマスと左下の角のマスで、この 2 マスは同じ「右上から左下」向きの線（いちばん長い線）の上にあるので、両方には置けません。この 2 本のうち使えるのは多くても 1 本なので、ビショップは多くても 9 − 1 = 8 個です。",
+          "8 個は置けます。1 段目の 5 マス全部と、5 段目の 2・3・4 マス目に置きます。同じ段の 2 マスは同じななめの線にありません。1 段目の a マス目と 5 段目の b マス目が同じななめの線にあるのは左右に 4 マスはなれるとき、つまり (1, 5) か (5, 1) のときだけですが、5 段目の 1・5 マス目には置いていないので、ねらいあう組はありません。",
+          "よって、最も多くて 8 個です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "8"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade5-foundation",
+        "notes": "同向 9 條斜線各至多 1 個，且兩條單格斜線（兩個對角角落）互相攻擊只能用一條，得上界 8 並構造。掃過 /主教|斜.{0,10}(攻擊|吃)/（1 題）、/互相攻擊|互不攻擊/（6 題）；最接近 combinatorics_grade12_foundation_024，差異：那題是 4 × 4 放 2 個不互攻主教的放法數；本題是 5 × 5 最多能放幾個，用斜線分類證上界再構造（logic_grade4_foundation_071 國王、logic_grade11_foundation_020 騎士是不同棋子的走法）"
+      }
+    },
+    {
+      "id": "logic_grade5_foundation_101",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "shortest_button_sequence_covering_all_two_digit_codes",
+      "tags": [
+        "c:basic_counting",
+        "m:pigeonhole",
+        "m:construction"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade5",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一扇門的密碼鎖只有 1、2、3 三個按鈕。密碼是兩位數，每一位都是 1、2、3 之一（兩位可以相同，例如 22）。這個鎖只看「最後按的兩個按鈕」：只要最後按的兩個按鈕依序和密碼一樣，門就立刻打開。小安不知道密碼，他一個接一個地按按鈕。最少要按幾下，才能保證不論密碼是哪一個，門一定會打開？",
+        "zh-Hans": "一扇门的密码锁只有 1、2、3 三个按钮。密码是两位数，每一位都是 1、2、3 之一（两位可以相同，例如 22）。这个锁只看「最后按的两个按钮」：只要最后按的两个按钮依序和密码一样，门就立刻打开。小安不知道密码，他一个接一个地按按钮。最少要按几下，才能保证不论密码是哪一个，门一定会打开？",
+        "en": "A door lock has only three buttons, 1, 2 and 3. The code has two digits, each 1, 2 or 3 (they may be equal, e.g. 22). The lock only checks the last two buttons pressed: as soon as the last two presses match the code in order, the door opens. An does not know the code and presses buttons one after another. What is the smallest number of presses that guarantees the door opens, whatever the code is?",
+        "ja": "あるドアの暗証ロックには 1、2、3 の 3 つのボタンしかありません。暗証番号は 2 けたで、どの位も 1、2、3 のどれかです（22 のように同じでもかまいません）。このロックは「最後におした 2 つのボタン」だけを見ます。最後におした 2 つが順番どおり暗証番号と同じになると、すぐにドアが開きます。アンさんは暗証番号を知らず、ボタンを 1 つずつおしていきます。暗証番号がどれであっても必ずドアが開くには、最も少なくて何回おせばよいですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 10。",
+        "zh-Hans": "答案是 10。",
+        "en": "The answer is 10.",
+        "ja": "答えは 10 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "可能的密碼一共有 3 × 3 = 9 種：11、12、13、21、22、23、31、32、33。",
+          "按了第 1 下時還湊不成兩位；之後每按 1 下，「最後兩下」只會形成 1 組兩位數。按 k 下最多只能試到 k − 1 種密碼。要保證 9 種都試到，k − 1 至少是 9，所以至少要按 10 下。",
+          "10 下做得到：依序按 1、1、2、1、3、2、2、3、3、1。每相鄰兩下組成的兩位數依序是 11、12、21、13、32、22、23、33、31，正好是 9 種密碼各一次，沒有重複。",
+          "所以不論密碼是哪一種，按完這 10 下之前門一定已經打開。最少要按 10 下。"
+        ],
+        "zh-Hans": [
+          "可能的密码一共有 3 × 3 = 9 种：11、12、13、21、22、23、31、32、33。",
+          "按了第 1 下时还凑不成两位；之后每按 1 下，「最后两下」只会形成 1 组两位数。按 k 下最多只能试到 k − 1 种密码。要保证 9 种都试到，k − 1 至少是 9，所以至少要按 10 下。",
+          "10 下做得到：依序按 1、1、2、1、3、2、2、3、3、1。每相邻两下组成的两位数依序是 11、12、21、13、32、22、23、33、31，正好是 9 种密码各一次，没有重复。",
+          "所以不论密码是哪一种，按完这 10 下之前门一定已经打开。最少要按 10 下。"
+        ],
+        "en": [
+          "There are 3 × 3 = 9 possible codes: 11, 12, 13, 21, 22, 23, 31, 32, 33.",
+          "After the 1st press there is no pair yet; each later press creates exactly 1 new \"last two\" pair. So k presses test at most k − 1 codes. To be sure of testing all 9, k − 1 must be at least 9, so at least 10 presses are needed.",
+          "10 presses suffice: press 1, 1, 2, 1, 3, 2, 2, 3, 3, 1. The pairs of neighbouring presses are 11, 12, 21, 13, 32, 22, 23, 33, 31, exactly the 9 codes once each with no repeat.",
+          "So whatever the code, the door has opened by the end of these 10 presses. The smallest number is 10."
+        ],
+        "ja": [
+          "ありうる暗証番号は 3 × 3 = 9 通りで、11、12、13、21、22、23、31、32、33 です。",
+          "1 回目をおしたときはまだ 2 けたになりません。そのあとは 1 回おすごとに「最後の 2 つ」が 1 組だけできます。k 回おしても試せる番号は多くて k − 1 通りです。9 通りすべてを必ず試すには k − 1 が 9 以上、つまり少なくとも 10 回必要です。",
+          "10 回でできます。1、1、2、1、3、2、2、3、3、1 の順におすと、となりあう 2 回でできる番号は 11、12、21、13、32、22、23、33、31 で、9 通りがちょうど 1 回ずつ、重なりなく出てきます。",
+          "だから暗証番号がどれでも、この 10 回をおし終わるまでにドアは開きます。最も少なくて 10 回です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "10"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade5-foundation",
+        "notes": "每按一下最多新試一組「最後兩位」，9 組密碼需至少 10 下；構造 1121322331 使 9 組相鄰兩位各出現一次。掃過 /密碼鎖|暗證/（6 題）、/最後(兩|2)(個|下).{0,20}(按|數字)/（0 題）；最接近 combinatorics_grade12_foundation_047，差異：那題是 8 位 0-1 環上每段三位字串都不同（環形 de Bruijn）時求 1 的個數；本題是三按鈕兩位密碼鎖的最少按鍵次數，用「每下最多多試一組」證下界並構造 10 下的序列"
+      }
+    },
+    {
+      "id": "logic_grade5_foundation_102",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "longest_route_visiting_six_houses_on_a_line",
+      "tags": [
+        "c:logic_deduction",
+        "m:extremal",
+        "m:estimate_bound"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade5",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一條筆直的路旁有 6 戶人家，分別在路上第 1、2、3、4、5、6 公里的地方。郵差從第 1 公里那一戶出發，沿著這條路把其他 5 戶每一戶都恰好拜訪一次（拜訪的先後由他決定，走到最後一戶就結束），途中可以經過別戶人家門口而不拜訪。郵差最多可能走幾公里？",
+        "zh-Hans": "一条笔直的路旁有 6 户人家，分别在路上第 1、2、3、4、5、6 千米的地方。邮差从第 1 千米那一户出发，沿着这条路把其他 5 户每一户都恰好拜访一次（拜访的先后由他决定，走到最后一户就结束），途中可以经过别户人家门口而不拜访。邮差最多可能走几千米？",
+        "en": "Six houses stand beside a straight road at kilometre 1, 2, 3, 4, 5 and 6. The postman starts at the house at kilometre 1 and visits each of the other 5 houses exactly once along the road (he chooses the order and stops at the last house); he may pass other houses without visiting them. What is the greatest distance, in kilometres, he can walk?",
+        "ja": "まっすぐな道ぞいに 6 軒の家が、道の 1、2、3、4、5、6 km の地点にあります。郵便屋さんは 1 km の家から出発し、道にそって残りの 5 軒をちょうど 1 回ずつ訪ねます（訪ねる順番は自分で決め、最後の家で終わります）。とちゅうでほかの家の前を通りすぎてもかまいません。郵便屋さんが歩く道のりは、最も長くて何 km ですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 15。",
+        "zh-Hans": "答案是 15。",
+        "en": "The answer is 15.",
+        "ja": "答えは 15 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "把路分成 5 段，每段 1 公里：第 1–2、2–3、3–4、4–5、5–6 公里。總路程等於每一段被走過的次數加起來。看第 k 段（在第 k 公里和第 k + 1 公里之間），它左邊有 k 戶、右邊有 6 − k 戶。",
+          "每走過這段一次，就換到另一邊，而且換過去之後一定是為了去拜訪那一邊還沒去過的人家（不然就不必過去），所以每一次「往右過」都對應右邊一戶新的人家，往右過最多 6 − k 次；每一次「往左過」都對應左邊一戶新的人家，但第 1 公里那戶出發時已經拜訪過，所以往左過最多 k − 1 次。",
+          "郵差從左邊出發，所以「往右過」和「往左過」輪流發生，往左的次數不會超過往右的次數。總次數 ≤ 2 ×（往右次數）≤ 2 × (6 − k)，也 ≤ 2 ×（往左次數）+ 1 ≤ 2 × (k − 1) + 1。",
+          "各段最多次數：第 1 段 ≤ 2 × 0 + 1 = 1；第 2 段 ≤ 2 × 1 + 1 = 3；第 3 段 ≤ 2 × 2 + 1 = 5；第 4 段 ≤ 2 × 2 = 4；第 5 段 ≤ 2 × 1 = 2。所以總路程最多 1 + 3 + 5 + 4 + 2 = 15 公里。",
+          "15 公里做得到：依序拜訪第 6、2、5、3、4 公里的人家，走 5 + 4 + 3 + 2 + 1 = 15 公里。所以最多是 15 公里。"
+        ],
+        "zh-Hans": [
+          "把路分成 5 段，每段 1 千米：第 1–2、2–3、3–4、4–5、5–6 千米。总路程等于每一段被走过的次数加起来。看第 k 段（在第 k 千米和第 k + 1 千米之间），它左边有 k 户、右边有 6 − k 户。",
+          "每走过这段一次，就换到另一边，而且换过去之后一定是为了去拜访那一边还没去过的人家（不然就不必过去），所以每一次「往右过」都对应右边一户新的人家，往右过最多 6 − k 次；每一次「往左过」都对应左边一户新的人家，但第 1 千米那户出发时已经拜访过，所以往左过最多 k − 1 次。",
+          "邮差从左边出发，所以「往右过」和「往左过」轮流发生，往左的次数不会超过往右的次数。总次数 ≤ 2 ×（往右次数）≤ 2 × (6 − k)，也 ≤ 2 ×（往左次数）+ 1 ≤ 2 × (k − 1) + 1。",
+          "各段最多次数：第 1 段 ≤ 2 × 0 + 1 = 1；第 2 段 ≤ 2 × 1 + 1 = 3；第 3 段 ≤ 2 × 2 + 1 = 5；第 4 段 ≤ 2 × 2 = 4；第 5 段 ≤ 2 × 1 = 2。所以总路程最多 1 + 3 + 5 + 4 + 2 = 15 千米。",
+          "15 千米做得到：依序拜访第 6、2、5、3、4 千米的人家，走 5 + 4 + 3 + 2 + 1 = 15 千米。所以最多是 15 千米。"
+        ],
+        "en": [
+          "Split the road into 5 stretches of 1 km: km 1–2, 2–3, 3–4, 4–5, 5–6. The total distance is the sum of how many times each stretch is walked. Take stretch k (between km k and km k + 1): k houses are on its left and 6 − k on its right.",
+          "Each time he walks this stretch he changes side, and he only crosses in order to visit a house on the other side not yet visited (otherwise there is no need to cross). So each crossing to the right matches a new house on the right: at most 6 − k crossings to the right. Each crossing to the left matches a new house on the left, but the house at km 1 was visited at the start, so at most k − 1 crossings to the left.",
+          "He starts on the left, so right and left crossings alternate, and there are never more left crossings than right ones. Hence the number of crossings is ≤ 2 × (right crossings) ≤ 2 × (6 − k), and also ≤ 2 × (left crossings) + 1 ≤ 2 × (k − 1) + 1.",
+          "Largest counts per stretch: stretch 1 ≤ 2 × 0 + 1 = 1; stretch 2 ≤ 2 × 1 + 1 = 3; stretch 3 ≤ 2 × 2 + 1 = 5; stretch 4 ≤ 2 × 2 = 4; stretch 5 ≤ 2 × 1 = 2. So the total is at most 1 + 3 + 5 + 4 + 2 = 15 km.",
+          "15 km is possible: visit the houses at km 6, 2, 5, 3, 4 in that order, walking 5 + 4 + 3 + 2 + 1 = 15 km. So the greatest distance is 15 km."
+        ],
+        "ja": [
+          "道を 1 km ずつの 5 つの区間、1–2、2–3、3–4、4–5、5–6 km に分けます。歩く道のりは、各区間を通った回数の合計です。k 番目の区間（k km と k + 1 km の間）を考えると、その左に k 軒、右に 6 − k 軒あります。",
+          "この区間を通るたびに反対側へ移り、移るのはそちら側のまだ訪ねていない家を訪ねるためです（そうでなければ渡る必要がありません）。だから「右へ渡る」1 回ごとに右側の新しい家が 1 軒対応し、右へ渡るのは多くても 6 − k 回です。「左へ渡る」1 回ごとに左側の新しい家が 1 軒対応しますが、1 km の家は出発のときに訪ねているので、左へ渡るのは多くても k − 1 回です。",
+          "左側から出発するので右へ・左へは交互に起こり、左へ渡る回数は右へ渡る回数をこえません。よって通る回数は 2 ×（右へ渡る回数）≦ 2 × (6 − k) 以下で、また 2 ×（左へ渡る回数）+ 1 ≦ 2 × (k − 1) + 1 以下です。",
+          "区間ごとの最大回数は、1 番目 ≦ 2 × 0 + 1 = 1、2 番目 ≦ 2 × 1 + 1 = 3、3 番目 ≦ 2 × 2 + 1 = 5、4 番目 ≦ 2 × 2 = 4、5 番目 ≦ 2 × 1 = 2 です。よって道のりは多くても 1 + 3 + 5 + 4 + 2 = 15 km です。",
+          "15 km はできます。6、2、5、3、4 km の家の順に訪ねると、5 + 4 + 3 + 2 + 1 = 15 km 歩きます。よって最も長くて 15 km です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "15"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade5-foundation",
+        "notes": "每一公里路段被走過的次數受兩側未拜訪的戶數限制（往右 ≤ 右側戶數、往左 ≤ 左側戶數 − 1、兩者交替），逐段上界相加得 15 並構造。掃過 /(最長|最遠|最多).{0,20}(公里|公尺).{0,20}(路|走)|走遍.{0,40}最(長|遠)/（0 題）、/郵差/（2 題）；最接近 logic_grade6_foundation_077，差異：那題是四村兩兩相連、走遍每條路回原地的最短路程（中國郵差問題）；本題是直線上拜訪每戶一次的最長路程，用每段被走次數的上界相加"
+      }
+    },
+    {
+      "id": "logic_grade5_foundation_103",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "two_consecutive_lucky_tickets_impossible",
+      "tags": [
+        "c:place_value",
+        "c:logic_deduction",
+        "m:contradiction"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade5",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "公車票上印著從 000000 到 999999 的六位號碼。如果一張票號碼的前三個數字加起來，等於後三個數字加起來，就叫它「幸運票」，例如 123060（1 + 2 + 3 = 0 + 6 + 0）。小安買了兩張號碼相連的票（後一張的號碼比前一張大 1）。這兩張有沒有可能都是幸運票？",
+        "zh-Hans": "公车票上印着从 000000 到 999999 的六位号码。如果一张票号码的前三个数字加起来，等于后三个数字加起来，就叫它「幸运票」，例如 123060（1 + 2 + 3 = 0 + 6 + 0）。小安买了两张号码相连的票（后一张的号码比前一张大 1）。这两张有没有可能都是幸运票？",
+        "en": "Bus tickets carry six-digit numbers from 000000 to 999999. A ticket is \"lucky\" if the sum of its first three digits equals the sum of its last three digits, e.g. 123060 (1 + 2 + 3 = 0 + 6 + 0). An buys two tickets with consecutive numbers (the second number is 1 more than the first). Can both tickets be lucky?",
+        "ja": "バスの切符には 000000 から 999999 までの 6 けたの番号が印刷されています。番号の前の 3 つの数字の和と後ろの 3 つの数字の和が等しい切符を「ラッキー切符」とよびます。たとえば 123060（1 + 2 + 3 = 0 + 6 + 0）です。アンさんは番号が続いている 2 枚の切符（後の番号が前の番号より 1 大きい）を買いました。2 枚ともラッキー切符になることはありますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 C：不可能，號碼相連的兩張票，前後三個數字和的差一定會改變，不會兩張都是。",
+        "zh-Hans": "答案是 C：不可能，号码相连的两张票，前后三个数字和的差一定会改变，不会两张都是。",
+        "en": "The answer is C: No; for two consecutive numbers the difference between the two sums always changes.",
+        "ja": "答えは C：ありえない。続いた 2 つの番号では、前後の和の差が必ず変わるので 2 枚ともはならない。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "設前一張號碼是 N，後一張是 N + 1。只要沒有進位到前三位，前三個數字完全不變，所以兩張都是幸運票，就表示後三個數字的和也不能變。分情形看後三位：",
+          "個位不是 9：加 1 只讓個位多 1，後三位的和多 1，一定變了，不可能兩張都是。個位是 9、十位不是 9：個位 9 變 0、十位多 1，後三位的和變化 1 − 9 = −8，也變了。末兩位是 99、百位不是 9：兩個 9 變 0、百位多 1，和變化 1 − 18 = −17，也變了。",
+          "末三位是 999：後三位的和是 27，前一張若是幸運票，前三位的和也要是 27，前三位只能是 999，N 就是 999999，它沒有下一張號碼（1000000 不是六位號碼）。所以任何情形都不可能兩張都是幸運票，C 正確。",
+          "A 錯：109019 是幸運票（10 = 10），但 109020 的前三和 10、後三和 2，不是。D 錯：120099 的前三和 3、後三和 18，本身就不是幸運票，120100 也不是（3 和 1）。B 錯：999999 是幸運票，但它後面沒有號碼相連的六位票。"
+        ],
+        "zh-Hans": [
+          "设前一张号码是 N，后一张是 N + 1。只要没有进位到前三位，前三个数字完全不变，所以两张都是幸运票，就表示后三个数字的和也不能变。分情形看后三位：",
+          "个位不是 9：加 1 只让个位多 1，后三位的和多 1，一定变了，不可能两张都是。个位是 9、十位不是 9：个位 9 变 0、十位多 1，后三位的和变化 1 − 9 = −8，也变了。末两位是 99、百位不是 9：两个 9 变 0、百位多 1，和变化 1 − 18 = −17，也变了。",
+          "末三位是 999：后三位的和是 27，前一张若是幸运票，前三位的和也要是 27，前三位只能是 999，N 就是 999999，它没有下一张号码（1000000 不是六位号码）。所以任何情形都不可能两张都是幸运票，C 正确。",
+          "A 错：109019 是幸运票（10 = 10），但 109020 的前三和 10、后三和 2，不是。D 错：120099 的前三和 3、后三和 18，本身就不是幸运票，120100 也不是（3 和 1）。B 错：999999 是幸运票，但它后面没有号码相连的六位票。"
+        ],
+        "en": [
+          "Let the first number be N and the second N + 1. Unless a carry reaches the first three digits, those digits stay the same, so for both to be lucky the sum of the last three digits must not change either. Look at the last three digits:",
+          "Units digit not 9: adding 1 raises the units digit by 1, so the last-three sum goes up by 1 — it changes, so not both lucky. Units 9, tens not 9: the 9 becomes 0 and the tens digit rises by 1, change 1 − 9 = −8 — it changes. Last two digits 99, hundreds not 9: two 9s become 0 and the hundreds digit rises by 1, change 1 − 18 = −17 — it changes.",
+          "Last three digits 999: their sum is 27, so if N is lucky its first three digits also sum to 27, i.e. they are 999 and N is 999999, which has no next ticket (1000000 is not a six-digit number). So in no case can both be lucky: C is correct.",
+          "A is wrong: 109019 is lucky (10 = 10), but 109020 has sums 10 and 2. D is wrong: 120099 has sums 3 and 18 so it is not even lucky, nor is 120100 (3 and 1). B is wrong: 999999 is lucky, but no six-digit ticket follows it."
+        ],
+        "ja": [
+          "前の番号を N、後の番号を N + 1 とします。前の 3 けたまでくり上がらなければ前の 3 つの数字は変わらないので、2 枚ともラッキーなら後ろの 3 つの数字の和も変わってはいけません。後ろの 3 けたで場合分けします。",
+          "一の位が 9 でない：1 たすと一の位だけ 1 ふえ、後ろの和は 1 ふえて変わるので、2 枚ともにはなりません。一の位が 9 で十の位が 9 でない：9 が 0 になり十の位が 1 ふえて、和の変化は 1 − 9 = −8 で変わります。下 2 けたが 99 で百の位が 9 でない：9 が 2 つ 0 になり百の位が 1 ふえて、変化は 1 − 18 = −17 で変わります。",
+          "下 3 けたが 999：後ろの和は 27 なので、N がラッキーなら前の 3 けたの和も 27 で、前の 3 けたは 999、N は 999999 です。これには次の番号がありません（1000000 は 6 けたではない）。よってどの場合も 2 枚ともラッキーにはならず、C が正しいです。",
+          "A はまちがい：109019 はラッキー（10 = 10）ですが、109020 は前が 10、後ろが 2 です。D はまちがい：120099 は前が 3、後ろが 18 でそもそもラッキーではなく、120100 も（3 と 1）ちがいます。B はまちがい：999999 はラッキーですが、その後に続く 6 けたの切符はありません。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "multiple_choice",
+      "options": {
+        "A": {
+          "zh-Hant": "有可能，只要前一張的個位是 9，例如 109019 和 109020 兩張都是幸運票。",
+          "zh-Hans": "有可能，只要前一张的个位是 9，例如 109019 和 109020 两张都是幸运票。",
+          "en": "Yes, whenever the first ends in 9; for example 109019 and 109020 are both lucky.",
+          "ja": "ありえる。前の番号の一の位が 9 ならよく、たとえば 109019 と 109020 は両方ラッキー切符だ。"
+        },
+        "B": {
+          "zh-Hant": "有可能，只要前一張的末三位是 999，例如 999999 和它的下一張都是幸運票。",
+          "zh-Hans": "有可能，只要前一张的末三位是 999，例如 999999 和它的下一张都是幸运票。",
+          "en": "Yes, whenever the first ends in 999; for example 999999 and the next ticket are both lucky.",
+          "ja": "ありえる。前の番号の下 3 けたが 999 ならよく、たとえば 999999 とその次は両方ラッキー切符だ。"
+        },
+        "C": {
+          "zh-Hant": "不可能，號碼相連的兩張票，前後三個數字和的差一定會改變，不會兩張都是。",
+          "zh-Hans": "不可能，号码相连的两张票，前后三个数字和的差一定会改变，不会两张都是。",
+          "en": "No; for two consecutive numbers the difference between the two sums always changes.",
+          "ja": "ありえない。続いた 2 つの番号では、前後の和の差が必ず変わるので 2 枚ともはならない。"
+        },
+        "D": {
+          "zh-Hant": "有可能，只要前一張的十位和個位都是 9，例如 120099 和 120100 兩張都是。",
+          "zh-Hans": "有可能，只要前一张的十位和个位都是 9，例如 120099 和 120100 两张都是。",
+          "en": "Yes, whenever the first ends in 99; for example 120099 and 120100 are both lucky.",
+          "ja": "ありえる。前の番号の下 2 けたが 99 ならよく、たとえば 120099 と 120100 は両方ラッキー切符だ。"
+        }
+      },
+      "correctAnswer": {
+        "type": "choice",
+        "value": "C"
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade5-foundation",
+        "notes": "N 到 N+1 時後三位數字和的變化只可能是 +1、−8、−17，或末三位為 999 時被迫 N=999999，故相連兩張不可能都是幸運票。掃過 /幸運|前三(個|位).{0,30}後三(個|位)/（0 題）、/(相鄰|連續).{0,10}(兩個|二個).{0,30}數字和/（1 題）；最接近 number_theory_grade7_foundation_074，差異：那題求 n 與 n+1 的數字和都是 7 的倍數的最小 n；本題是六位票前三和等於後三和，分析 N+1 時後三位數字和的變化（+1、−8、−17）證明不可能"
+      }
     }
   ]
 }

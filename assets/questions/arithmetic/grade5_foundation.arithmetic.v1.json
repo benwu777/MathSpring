@@ -14505,6 +14505,82 @@
         "reference": "arithmetic-grade5-foundation",
         "notes": "只顯示十位的秤：兩次讀數各給出一個重量範圍，取交集得唯一整數重量。掃過 無條件捨去|電子秤|秤.{0,10}顯示（5 題）、個位.{0,10}捨（0 題）；最接近 arithmetic_grade4_foundation_167，差異：那題是乘積四捨五入到千位反推最大的數；本題是秤捨去個位的兩次讀數各給出範圍，取交集"
       }
+    },
+    {
+      "id": "arithmetic_grade5_foundation_196",
+      "reviewStatus": "ok",
+      "topic": "arithmetic",
+      "subtopic": "six_digit_prefix_divisible_by_its_length",
+      "tags": [
+        "c:factor_multiple",
+        "c:place_value",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade5",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "用 1、2、3、4、5、6 這六個數字各用一次，排成一個六位數，而且要符合：前 1 位組成的數是 1 的倍數，前 2 位組成的兩位數是 2 的倍數，前 3 位組成的三位數是 3 的倍數，前 4 位組成的四位數是 4 的倍數，前 5 位組成的五位數是 5 的倍數，整個六位數是 6 的倍數。把所有符合條件的六位數加起來，總和是多少？",
+        "zh-Hans": "用 1、2、3、4、5、6 这六个数字各用一次，排成一个六位数，而且要符合：前 1 位组成的数是 1 的倍数，前 2 位组成的两位数是 2 的倍数，前 3 位组成的三位数是 3 的倍数，前 4 位组成的四位数是 4 的倍数，前 5 位组成的五位数是 5 的倍数，整个六位数是 6 的倍数。把所有符合条件的六位数加起来，总和是多少？",
+        "en": "Use each of the digits 1, 2, 3, 4, 5, 6 exactly once to make a six-digit number such that: its first 1 digit forms a multiple of 1, its first 2 digits form a multiple of 2, its first 3 digits form a multiple of 3, its first 4 digits form a multiple of 4, its first 5 digits form a multiple of 5, and the whole number is a multiple of 6. What is the sum of all such six-digit numbers?",
+        "ja": "1、2、3、4、5、6 の 6 つの数字を 1 回ずつ使って 6 けたの数を作ります。ただし、上から 1 けたの数は 1 の倍数、上から 2 けたの数は 2 の倍数、上から 3 けたの数は 3 の倍数、上から 4 けたの数は 4 の倍数、上から 5 けたの数は 5 の倍数、6 けた全体は 6 の倍数になるようにします。条件に合う 6 けたの数をすべてたすと、いくつになりますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 445308。",
+        "zh-Hans": "答案是 445308。",
+        "en": "The answer is 445308.",
+        "ja": "答えは 445308 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "把六位數的數字由左到右叫第 1 到第 6 位。前 5 位是 5 的倍數，所以第 5 位是 5（沒有 0）。",
+          "前 2 位、前 4 位、整個數都是 2 的倍數，所以第 2、4、6 位是偶數，也就是 2、4、6；剩下第 1、3 位是 1 和 3（順序未定）。",
+          "前 3 位是 3 的倍數：它的數字和是 1 + 3 + 第 2 位 = 4 + 第 2 位，要是 3 的倍數。第 2 位是 2、4、6 時和是 6、8、10，只有 2 可以，所以第 2 位是 2。",
+          "前 4 位是 4 的倍數：因為 100 是 4 的倍數，只要看第 3、4 位組成的兩位數。第 3 位是 1 或 3，第 4 位是 4 或 6：14、16、34、36 中是 4 的倍數的只有 16 和 36，所以第 4 位是 6，第 6 位就是 4。整個數的數字和是 21，是 3 的倍數，又是偶數，所以一定是 6 的倍數。",
+          "第 1、3 位可以是 1、3 或 3、1，得到 123654 和 321654 兩個數，都符合所有條件。總和 = 123654 + 321654 = 445308。"
+        ],
+        "zh-Hans": [
+          "把六位数的数字由左到右叫第 1 到第 6 位。前 5 位是 5 的倍数，所以第 5 位是 5（没有 0）。",
+          "前 2 位、前 4 位、整个数都是 2 的倍数，所以第 2、4、6 位是偶数，也就是 2、4、6；剩下第 1、3 位是 1 和 3（顺序未定）。",
+          "前 3 位是 3 的倍数：它的数字和是 1 + 3 + 第 2 位 = 4 + 第 2 位，要是 3 的倍数。第 2 位是 2、4、6 时和是 6、8、10，只有 2 可以，所以第 2 位是 2。",
+          "前 4 位是 4 的倍数：因为 100 是 4 的倍数，只要看第 3、4 位组成的两位数。第 3 位是 1 或 3，第 4 位是 4 或 6：14、16、34、36 中是 4 的倍数的只有 16 和 36，所以第 4 位是 6，第 6 位就是 4。整个数的数字和是 21，是 3 的倍数，又是偶数，所以一定是 6 的倍数。",
+          "第 1、3 位可以是 1、3 或 3、1，得到 123654 和 321654 两个数，都符合所有条件。总和 = 123654 + 321654 = 445308。"
+        ],
+        "en": [
+          "Call the digits positions 1 to 6 from the left. The first 5 digits form a multiple of 5, so position 5 is 5 (there is no 0).",
+          "The first 2 digits, first 4 digits and the whole number are multiples of 2, so positions 2, 4, 6 are even, i.e. 2, 4, 6; positions 1 and 3 are 1 and 3 in some order.",
+          "The first 3 digits form a multiple of 3: their digit sum 1 + 3 + (position 2) = 4 + (position 2) must be a multiple of 3. With position 2 equal to 2, 4, 6 the sums are 6, 8, 10, so only 2 works: position 2 is 2.",
+          "The first 4 digits form a multiple of 4: since 100 is a multiple of 4, only the two-digit number from positions 3 and 4 matters. Position 3 is 1 or 3 and position 4 is 4 or 6: among 14, 16, 34, 36 only 16 and 36 are multiples of 4, so position 4 is 6 and position 6 is 4. The whole digit sum is 21, a multiple of 3, and the number is even, so it is a multiple of 6.",
+          "Positions 1 and 3 can be 1, 3 or 3, 1, giving 123654 and 321654, both satisfying every condition. Sum = 123654 + 321654 = 445308."
+        ],
+        "ja": [
+          "6 けたの数の数字を左から 1 番目〜6 番目とよびます。上から 5 けたが 5 の倍数なので、5 番目は 5 です（0 はありません）。",
+          "上から 2 けた、4 けた、全体が 2 の倍数なので、2・4・6 番目は偶数、つまり 2、4、6 で、1・3 番目は 1 と 3（順番は未定）です。",
+          "上から 3 けたが 3 の倍数：各位の和 1 + 3 + (2 番目) = 4 + (2 番目) が 3 の倍数でなければなりません。2 番目が 2、4、6 のとき和は 6、8、10 で、よいのは 2 だけなので、2 番目は 2 です。",
+          "上から 4 けたが 4 の倍数：100 は 4 の倍数なので、3・4 番目でできる 2 けたの数だけを見ればよいです。3 番目は 1 か 3、4 番目は 4 か 6 で、14、16、34、36 のうち 4 の倍数は 16 と 36 だけなので、4 番目は 6、6 番目は 4 です。全体の数字の和は 21 で 3 の倍数、しかも偶数なので 6 の倍数です。",
+          "1・3 番目は 1、3 か 3、1 で、123654 と 321654 の 2 つができ、どちらも条件をすべて満たします。和は 123654 + 321654 = 445308 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "445308"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 6
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "arithmetic-grade5-foundation",
+        "notes": "第 5 位為 5、偶數位放 2、4、6；用 3 的倍數定第 2 位、用末兩位判 4 的倍數定第 4 位，得 123654 與 321654。掃過 /前 ?(兩|2|三|3) ?位.{0,40}(整除|倍數)/（1 題）、/1、2、3、4、5、6.{0,40}各用一次/（2 題）；最接近 arithmetic_grade5_foundation_045，差異：那題只要求前兩位是 3 的倍數、後三位是 4 的倍數並求最大；本題要求前 k 位都是 k 的倍數（k = 1～6），逐位用整除規則推出全部兩個解"
+      }
     }
   ]
 }
