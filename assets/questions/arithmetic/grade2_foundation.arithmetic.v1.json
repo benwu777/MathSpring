@@ -14366,6 +14366,86 @@
         "reference": "arithmetic-grade2-foundation",
         "notes": "「先減再乘 2」等於減掉兩個 3，「先乘 2 再減」只減一個 3，所以差固定為 3（運算順序的不變差）。掃過 先(減|加|乘|變成).{0,30}(另一|反過來|順序|先(減|加|乘|變成))（0 題）、機器（28 題）；最接近 arithmetic_grade3_foundation_193（乘 2、加 10、除以 2、減原數的結果固定），差異：這題比較兩種運算順序的差，要說明為什麼差永遠是 3。"
       }
+    },
+    {
+      "id": "arithmetic_grade2_foundation_195",
+      "reviewStatus": "ok",
+      "topic": "arithmetic",
+      "subtopic": "number_machine_reverse_preimages",
+      "tags": [
+        "c:mul_div",
+        "m:reverse",
+        "m:enumeration"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade2",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "有一台數字機器：放進去一個數，如果它是雙數，跑出來的是它的一半；如果它是單數，跑出來的是它加 1。小安放進去一個大於 0 的整數，再把跑出來的數放回機器，這樣一共放了 4 次，第 4 次跑出來的數是 1。小安一開始放進去的數，一共有幾種可能？",
+        "zh-Hans": "有一台数字机器：放进去一个数，如果它是双数，跑出来的是它的一半；如果它是单数，跑出来的是它加 1。小安放进去一个大于 0 的整数，再把跑出来的数放回机器，这样一共放了 4 次，第 4 次跑出来的数是 1。小安一开始放进去的数，一共有几种可能？",
+        "en": "A number machine works like this: if you put in an even number, out comes half of it; if you put in an odd number, out comes that number plus 1. An puts in a whole number greater than 0, then puts each result back into the machine, 4 times in all. The 4th result is 1. How many different numbers could An have put in at the start?",
+        "ja": "数のきかいがあります。入れた数がぐう数なら、その半分が出てきます。き数なら、それに 1 をたした数が出てきます。アンさんは 0 より大きい整数を入れ、出てきた数をまたきかいに入れることを、全部で 4 回しました。4 回目に出てきた数は 1 でした。アンさんがさいしょに入れた数は、何通り考えられますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 5。",
+        "zh-Hans": "答案是 5。",
+        "en": "The answer is 5.",
+        "ja": "答えは 5 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "從最後往前推。某個數放進去會跑出 Y，只有兩種可能：它是雙數，而且是 Y 的 2 倍；或它是單數，而且是 Y 減 1（這時 Y 減 1 必須真的是單數，而且大於 0）。",
+          "第 4 次跑出 1：雙數的可能是 2；單數的可能是 1 − 1 = 0，不大於 0，不行。所以第 4 次放進去的是 2。",
+          "第 3 次跑出 2：雙數的可能是 4；單數的可能是 2 − 1 = 1，1 是單數，可以。所以第 3 次放進去的是 4 或 1。",
+          "第 2 次跑出 4 或 1：跑出 4 的有 8（雙數）和 3（單數，3 + 1 = 4）；跑出 1 的只有 2。所以第 2 次放進去的是 8、3、2。",
+          "第 1 次跑出 8、3 或 2：跑出 8 的有 16 和 7；跑出 3 的只有 6（3 − 1 = 2 是雙數，不能當單數的那一種）；跑出 2 的有 4 和 1。",
+          "所以一開始放進去的數可能是 16、7、6、4、1，一共 5 種（例如 7 → 8 → 4 → 2 → 1）。"
+        ],
+        "zh-Hans": [
+          "从最后往前推。某个数放进去会跑出 Y，只有两种可能：它是双数，而且是 Y 的 2 倍；或它是单数，而且是 Y 减 1（这时 Y 减 1 必须真的是单数，而且大于 0）。",
+          "第 4 次跑出 1：双数的可能是 2；单数的可能是 1 − 1 = 0，不大于 0，不行。所以第 4 次放进去的是 2。",
+          "第 3 次跑出 2：双数的可能是 4；单数的可能是 2 − 1 = 1，1 是单数，可以。所以第 3 次放进去的是 4 或 1。",
+          "第 2 次跑出 4 或 1：跑出 4 的有 8（双数）和 3（单数，3 + 1 = 4）；跑出 1 的只有 2。所以第 2 次放进去的是 8、3、2。",
+          "第 1 次跑出 8、3 或 2：跑出 8 的有 16 和 7；跑出 3 的只有 6（3 − 1 = 2 是双数，不能当单数的那一种）；跑出 2 的有 4 和 1。",
+          "所以一开始放进去的数可能是 16、7、6、4、1，一共 5 种（例如 7 → 8 → 4 → 2 → 1）。"
+        ],
+        "en": [
+          "Work backwards. A number that comes out as Y can only be: an even number equal to 2 times Y, or an odd number equal to Y minus 1 (this only works if Y minus 1 really is odd and greater than 0).",
+          "The 4th result is 1: the even choice is 2; the odd choice would be 1 − 1 = 0, which is not greater than 0. So the 4th input was 2.",
+          "The 3rd result is 2: the even choice is 4; the odd choice is 2 − 1 = 1, which is odd, so it works. So the 3rd input was 4 or 1.",
+          "The 2nd result is 4 or 1: 4 comes from 8 (even) or 3 (odd, 3 + 1 = 4); 1 comes only from 2. So the 2nd input was 8, 3 or 2.",
+          "The 1st result is 8, 3 or 2: 8 comes from 16 or 7; 3 comes only from 6 (3 − 1 = 2 is even, so the odd choice fails); 2 comes from 4 or 1.",
+          "So the starting number could be 16, 7, 6, 4 or 1: 5 possibilities (for example 7 → 8 → 4 → 2 → 1)."
+        ],
+        "ja": [
+          "後ろから考えます。きかいから Y が出てくる数は 2 通りしかありません。ぐう数で Y の 2 倍の数か、き数で Y から 1 をひいた数です（このとき Y − 1 が本当にき数で、0 より大きくなければなりません）。",
+          "4 回目に 1 が出た：ぐう数なら 2、き数なら 1 − 1 = 0 で、0 より大きくないのでだめです。4 回目に入れたのは 2 です。",
+          "3 回目に 2 が出た：ぐう数なら 4、き数なら 2 − 1 = 1 で、1 はき数なのでよいです。3 回目に入れたのは 4 か 1 です。",
+          "2 回目に 4 か 1 が出た：4 が出るのは 8（ぐう数）と 3（き数で 3 + 1 = 4）、1 が出るのは 2 だけです。2 回目に入れたのは 8、3、2 です。",
+          "1 回目に 8、3、2 のどれかが出た：8 が出るのは 16 と 7、3 が出るのは 6 だけ（3 − 1 = 2 はぐう数なので、き数の場合になりません）、2 が出るのは 4 と 1 です。",
+          "だから、さいしょに入れた数は 16、7、6、4、1 の 5 通りです（たとえば 7 → 8 → 4 → 2 → 1）。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "5"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "arithmetic-grade2-foundation",
+        "notes": "從結果 1 逆推每一步的所有前像：2 倍一定可，減 1 必須是單數。掃過 機器|跑出來（29 題）；最接近 arithmetic_grade4_foundation_100，差異：那題 ×2／+1 鍵求最少按幾次，本題是「雙數減半、單數加 1」四步逆推前像個數。"
+      }
     }
   ]
 }
