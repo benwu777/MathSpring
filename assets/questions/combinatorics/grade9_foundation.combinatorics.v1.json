@@ -6000,6 +6000,238 @@
         "reference": "combinatorics-grade9-foundation",
         "notes": "稜上走一步 = 翻轉一個坐標，5 步到對角頂點需三坐標翻轉 3、1、1 次。掃過 regex「正方體.{0,40}(爬|走)|螞蟻.{0,30}正方體」（全庫 4 題，並讀最接近者原文）；最接近 combinatorics_grade12_foundation_022，差異：該題數走遍 8 頂點的哈密頓路徑；本題可重複走，固定 5 步到對角頂點，用坐標翻轉次數與多重排列。"
       }
+    },
+    {
+      "id": "combinatorics_grade9_foundation_070",
+      "reviewStatus": "ok",
+      "topic": "combinatorics",
+      "subtopic": "parallelograms_in_triangular_grid",
+      "tags": [
+        "c:basic_counting",
+        "c:quadrilateral",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade9",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一個邊長 5 公分的正三角形，用平行於三邊、間隔 1 公分的直線分割成許多邊長 1 公分的小正三角形（每條邊都被分成 5 等分）。四個頂點都是交點、四條邊都落在這些格線上的平行四邊形（菱形也算）一共有幾個？",
+        "zh-Hans": "一个边长 5 厘米的等边三角形，用平行于三边、间隔 1 厘米的直线分割成许多边长 1 厘米的小等边三角形（每条边都被分成 5 等份）。四个顶点都是交点、四条边都落在这些格线上的平行四边形（菱形也算）一共有几个？",
+        "en": "An equilateral triangle with side 5 cm is cut by lines parallel to its sides, 1 cm apart, into many small equilateral triangles of side 1 cm (each side is divided into 5 equal parts). How many parallelograms (rhombuses included) have all four vertices at intersection points and all four sides along these grid lines?",
+        "ja": "1 辺 5 cm の正三角形を、各辺に平行で 1 cm 間隔の直線で区切り、1 辺 1 cm の小さな正三角形にたくさん分けます（各辺は 5 等分されます）。4 つの頂点がすべて交点で、4 つの辺がすべてこの格子の線の上にある平行四辺形（ひし形も含む）は全部で何個ありますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 105 個。",
+        "zh-Hans": "答案是 105 个。",
+        "en": "The answer is 105.",
+        "ja": "答えは 105 個です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "格線只有三種方向。平行四邊形的兩組對邊各平行於其中一種方向，而且兩組方向不同，所以平行四邊形依「用到哪兩種方向」分成三類。把大三角形繞中心旋轉 120°，格線圖形不變，三種方向輪流互換，所以三類的個數一樣多，只要數其中一類再乘以 3。",
+          "數「邊平行於大三角形左下角那兩條邊」的一類。以左下角為起點 O，沿底邊往右走 1 格叫一步 u、沿左邊往上走 1 格叫一步 v。每個交點都可以從 O 走 i 步 u、j 步 v 到達，記成 (i, j)；大三角形裡的交點恰好是 i ≥ 0、j ≥ 0、i + j ≤ 5 的點（i + j = 5 就是第三條邊）。",
+          "這一類平行四邊形的四個頂點是 (i₁, j₁)、(i₂, j₁)、(i₁, j₂)、(i₂, j₂)，其中 i₁ < i₂、j₁ < j₂。四個頂點都在大三角形內，整個平行四邊形就在裡面；四個頂點中 i + j 最大的是 (i₂, j₂)，所以條件就是 i₂ + j₂ ≤ 5。",
+          "固定 (i₂, j₂)（i₂、j₂ 至少是 1），i₁ 可以是 0～i₂ − 1 共 i₂ 種，j₁ 可以是 0～j₂ − 1 共 j₂ 種，所以有 i₂ × j₂ 個。",
+          "把所有 i₂ + j₂ ≤ 5 的 i₂ × j₂ 加起來：i₂ + j₂ = 2 時是 1；= 3 時是 1 × 2 + 2 × 1 = 4；= 4 時是 1 × 3 + 2 × 2 + 3 × 1 = 10；= 5 時是 1 × 4 + 2 × 3 + 3 × 2 + 4 × 1 = 20。這一類共 1 + 4 + 10 + 20 = 35 個。",
+          "三類合計 35 × 3 = 105 個。答案是 105 個。"
+        ],
+        "zh-Hans": [
+          "格线只有三种方向。平行四边形的两组对边各平行于其中一种方向，而且两组方向不同，所以平行四边形按“用到哪两种方向”分成三类。把大三角形绕中心旋转 120°，格线图形不变，三种方向轮流互换，所以三类的个数一样多，只要数其中一类再乘以 3。",
+          "数“边平行于大三角形左下角那两条边”的一类。以左下角为起点 O，沿底边往右走 1 格叫一步 u、沿左边往上走 1 格叫一步 v。每个交点都可以从 O 走 i 步 u、j 步 v 到达，记成 (i, j)；大三角形里的交点恰好是 i ≥ 0、j ≥ 0、i + j ≤ 5 的点（i + j = 5 就是第三条边）。",
+          "这一类平行四边形的四个顶点是 (i₁, j₁)、(i₂, j₁)、(i₁, j₂)、(i₂, j₂)，其中 i₁ < i₂、j₁ < j₂。四个顶点都在大三角形内，整个平行四边形就在里面；四个顶点中 i + j 最大的是 (i₂, j₂)，所以条件就是 i₂ + j₂ ≤ 5。",
+          "固定 (i₂, j₂)（i₂、j₂ 至少是 1），i₁ 可以是 0～i₂ − 1 共 i₂ 种，j₁ 可以是 0～j₂ − 1 共 j₂ 种，所以有 i₂ × j₂ 个。",
+          "把所有 i₂ + j₂ ≤ 5 的 i₂ × j₂ 加起来：i₂ + j₂ = 2 时是 1；= 3 时是 1 × 2 + 2 × 1 = 4；= 4 时是 1 × 3 + 2 × 2 + 3 × 1 = 10；= 5 时是 1 × 4 + 2 × 3 + 3 × 2 + 4 × 1 = 20。这一类共 1 + 4 + 10 + 20 = 35 个。",
+          "三类合计 35 × 3 = 105 个。答案是 105 个。"
+        ],
+        "en": [
+          "The grid lines have only three directions. The two pairs of opposite sides of such a parallelogram are parallel to two different directions, so the parallelograms split into three classes according to which two directions they use. Rotating the big triangle by 120° about its centre maps the grid to itself and permutes the three directions, so the three classes have the same size; we count one class and multiply by 3.",
+          "Count the class whose sides are parallel to the two sides meeting at the bottom-left corner. Let that corner be O; call one step to the right along the base u and one step up along the left side v. Every intersection point is reached from O by i steps u and j steps v; write it (i, j). The points inside the big triangle are exactly those with i ≥ 0, j ≥ 0, i + j ≤ 5 (i + j = 5 is the third side).",
+          "A parallelogram of this class has vertices (i₁, j₁), (i₂, j₁), (i₁, j₂), (i₂, j₂) with i₁ < i₂ and j₁ < j₂. If its four vertices are inside the big triangle, so is the whole parallelogram; among the four vertices, (i₂, j₂) has the largest i + j, so the condition is simply i₂ + j₂ ≤ 5.",
+          "Fix (i₂, j₂) (with i₂, j₂ ≥ 1): i₁ can be 0 to i₂ − 1 (i₂ choices) and j₁ can be 0 to j₂ − 1 (j₂ choices), giving i₂ × j₂ parallelograms.",
+          "Add i₂ × j₂ over all i₂ + j₂ ≤ 5: for i₂ + j₂ = 2 it is 1; for 3 it is 1 × 2 + 2 × 1 = 4; for 4 it is 1 × 3 + 2 × 2 + 3 × 1 = 10; for 5 it is 1 × 4 + 2 × 3 + 3 × 2 + 4 × 1 = 20. This class has 1 + 4 + 10 + 20 = 35 parallelograms.",
+          "All three classes together give 35 × 3 = 105. The answer is 105."
+        ],
+        "ja": [
+          "格子の線の向きは 3 種類だけです。平行四辺形の 2 組の向かい合う辺はそれぞれ異なる 2 つの向きに平行なので、「どの 2 つの向きを使うか」で 3 種類に分かれます。大きな三角形を中心のまわりに 120° 回すと格子は変わらず 3 つの向きが入れかわるので、3 種類の個数は等しく、1 種類を数えて 3 倍すればよいです。",
+          "大きな三角形の左下の角で交わる 2 辺に平行な辺をもつ種類を数えます。左下の角を O とし、底辺に沿って右へ 1 目盛り進むことを u、左の辺に沿って上へ 1 目盛り進むことを v とします。どの交点も O から u を i 回、v を j 回進んで到達でき、それを (i, j) と書くと、大きな三角形の中の交点はちょうど i ≥ 0、j ≥ 0、i + j ≤ 5 の点です（i + j = 5 が 3 つ目の辺）。",
+          "この種類の平行四辺形の頂点は (i₁, j₁)、(i₂, j₁)、(i₁, j₂)、(i₂, j₂)（i₁ < i₂、j₁ < j₂）です。4 頂点が大きな三角形の中にあれば平行四辺形全体も中にあり、4 頂点のうち i + j が最大なのは (i₂, j₂) なので、条件は i₂ + j₂ ≤ 5 だけです。",
+          "(i₂, j₂)（i₂、j₂ は 1 以上）を固定すると、i₁ は 0～i₂ − 1 の i₂ 通り、j₁ は 0～j₂ − 1 の j₂ 通りで、i₂ × j₂ 個です。",
+          "i₂ + j₂ ≤ 5 のすべてについて i₂ × j₂ を足すと、i₂ + j₂ = 2 で 1、3 で 1 × 2 + 2 × 1 = 4、4 で 1 × 3 + 2 × 2 + 3 × 1 = 10、5 で 1 × 4 + 2 × 3 + 3 × 2 + 4 × 1 = 20、この種類は 1 + 4 + 10 + 20 = 35 個です。",
+          "3 種類で 35 × 3 = 105 個です。答えは 105 個です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "105"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "combinatorics-grade9-foundation",
+        "notes": "三角格中的平行四邊形：按方向分三類，每類 Σ i₂j₂（i₂ + j₂ ≤ 5）= 35。掃過「平行四邊形」（24 題）；最接近 combinatorics_grade11_foundation_018，差異：既有題數三角格中的正三角形；本題數平行四邊形，用斜座標與求和。"
+      }
+    },
+    {
+      "id": "combinatorics_grade9_foundation_071",
+      "reviewStatus": "ok",
+      "topic": "combinatorics",
+      "subtopic": "lattice_paths_within_diagonal_band",
+      "tags": [
+        "c:basic_counting",
+        "c:recurrence",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade9",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "座標平面上，從原點 (0, 0) 走到 (5, 5)，每一步只能向右走 1 格（橫座標加 1）或向上走 1 格（縱座標加 1）。要求整個過程中經過的每一個點 (x, y) 都滿足 |x − y| ≤ 2。符合要求的走法一共有幾種？",
+        "zh-Hans": "坐标平面上，从原点 (0, 0) 走到 (5, 5)，每一步只能向右走 1 格（横坐标加 1）或向上走 1 格（纵坐标加 1）。要求整个过程中经过的每一个点 (x, y) 都满足 |x − y| ≤ 2。符合要求的走法一共有几种？",
+        "en": "In the coordinate plane, walk from the origin (0, 0) to (5, 5); each step goes 1 unit right (x increases by 1) or 1 unit up (y increases by 1). Every point (x, y) visited along the way must satisfy |x − y| ≤ 2. How many such walks are there?",
+        "ja": "座標平面上で原点 (0, 0) から (5, 5) まで進みます。1 歩ごとに右へ 1（x 座標が 1 増える）か上へ 1（y 座標が 1 増える）だけ進めます。途中で通るすべての点 (x, y) が |x − y| ≤ 2 を満たすようにします。このような進み方は全部で何通りありますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 162 種。",
+        "zh-Hans": "答案是 162 种。",
+        "en": "The answer is 162.",
+        "ja": "答えは 162 通りです。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "記 d = x − y。向右走 d 加 1，向上走 d 減 1；一開始 d = 0，走完 10 步時 d = 0，而且過程中 d 只能是 −2～2。走了偶數步時 d 是偶數，只能是 −2、0、2。",
+          "把 10 步分成 5 段，每段 2 步，看每段從哪一個 d 走到哪一個 d。從 d = 0 出發：右右到 2、上上到 −2、右上或上右回到 0（2 種）。從 d = 2 出發：先向右會到 3，不行，只能先向上到 1，再向右回到 2，或再向上到 0，各 1 種。從 d = −2 出發的情形對稱：各 1 種回到 −2 或到 0。",
+          "設走完 k 段時在 d = 0 的走法有 aₖ 種、在 d = 2 的有 cₖ 種（由對稱，在 d = −2 的也是 cₖ 種）。由上一步得 aₖ₊₁ = 2aₖ + cₖ + cₖ = 2(aₖ + cₖ)，cₖ₊₁ = aₖ + cₖ。",
+          "一開始 a₀ = 1、c₀ = 0。依序算：a₁ = 2、c₁ = 1；a₂ = 6、c₂ = 3；a₃ = 18、c₃ = 9；a₄ = 54、c₄ = 27；a₅ = 2 × (54 + 27) = 162。（也可以看出從第 1 段起 aₖ = 2cₖ，於是 aₖ₊₁ = 3aₖ。）",
+          "走到 (5, 5) 就是走完 5 段時 d = 0，共 162 種。答案是 162 種。"
+        ],
+        "zh-Hans": [
+          "记 d = x − y。向右走 d 加 1，向上走 d 减 1；一开始 d = 0，走完 10 步时 d = 0，而且过程中 d 只能是 −2～2。走了偶数步时 d 是偶数，只能是 −2、0、2。",
+          "把 10 步分成 5 段，每段 2 步，看每段从哪一个 d 走到哪一个 d。从 d = 0 出发：右右到 2、上上到 −2、右上或上右回到 0（2 种）。从 d = 2 出发：先向右会到 3，不行，只能先向上到 1，再向右回到 2，或再向上到 0，各 1 种。从 d = −2 出发的情形对称：各 1 种回到 −2 或到 0。",
+          "设走完 k 段时在 d = 0 的走法有 aₖ 种、在 d = 2 的有 cₖ 种（由对称，在 d = −2 的也是 cₖ 种）。由上一步得 aₖ₊₁ = 2aₖ + cₖ + cₖ = 2(aₖ + cₖ)，cₖ₊₁ = aₖ + cₖ。",
+          "一开始 a₀ = 1、c₀ = 0。依次算：a₁ = 2、c₁ = 1；a₂ = 6、c₂ = 3；a₃ = 18、c₃ = 9；a₄ = 54、c₄ = 27；a₅ = 2 × (54 + 27) = 162。（也可以看出从第 1 段起 aₖ = 2cₖ，于是 aₖ₊₁ = 3aₖ。）",
+          "走到 (5, 5) 就是走完 5 段时 d = 0，共 162 种。答案是 162 种。"
+        ],
+        "en": [
+          "Let d = x − y. A step right increases d by 1 and a step up decreases it by 1; d = 0 at the start and after all 10 steps, and d must stay between −2 and 2. After an even number of steps d is even, so it is −2, 0 or 2.",
+          "Split the 10 steps into 5 segments of 2 steps and see which d each segment goes from and to. From d = 0: right-right goes to 2, up-up to −2, and right-up or up-right back to 0 (2 ways). From d = 2: going right first would reach 3, not allowed, so it must go up to 1, then right back to 2 or up to 0 (1 way each). From d = −2 it is symmetric: 1 way back to −2 and 1 way to 0.",
+          "Let aₖ be the number of ways to be at d = 0 after k segments and cₖ the number at d = 2 (by symmetry also cₖ at d = −2). Then aₖ₊₁ = 2aₖ + cₖ + cₖ = 2(aₖ + cₖ) and cₖ₊₁ = aₖ + cₖ.",
+          "Start with a₀ = 1, c₀ = 0. Then a₁ = 2, c₁ = 1; a₂ = 6, c₂ = 3; a₃ = 18, c₃ = 9; a₄ = 54, c₄ = 27; a₅ = 2 × (54 + 27) = 162. (Also, from segment 1 on aₖ = 2cₖ, so aₖ₊₁ = 3aₖ.)",
+          "Reaching (5, 5) means d = 0 after 5 segments, so there are 162 walks. The answer is 162."
+        ],
+        "ja": [
+          "d = x − y とします。右へ進むと d は 1 増え、上へ進むと 1 減ります。はじめと 10 歩後は d = 0 で、途中の d は −2～2 でなければなりません。偶数歩進んだときの d は偶数なので、−2、0、2 のどれかです。",
+          "10 歩を 2 歩ずつ 5 区間に分け、各区間で d がどこからどこへ移るかを見ます。d = 0 からは、右右で 2、上上で −2、右上か上右で 0 に戻る（2 通り）。d = 2 からは、先に右へ進むと 3 になってだめなので、まず上へ進んで 1、次に右で 2 に戻るか上で 0 に行くかの各 1 通り。d = −2 からも対称で、−2 に戻るのと 0 に行くのが各 1 通りです。",
+          "k 区間進んだとき d = 0 にいる進み方を aₖ 通り、d = 2 にいる進み方を cₖ 通り（対称性より d = −2 も cₖ 通り）とすると、aₖ₊₁ = 2aₖ + cₖ + cₖ = 2(aₖ + cₖ)、cₖ₊₁ = aₖ + cₖ です。",
+          "a₀ = 1、c₀ = 0 から順に計算すると、a₁ = 2、c₁ = 1、a₂ = 6、c₂ = 3、a₃ = 18、c₃ = 9、a₄ = 54、c₄ = 27、a₅ = 2 × (54 + 27) = 162 です。（1 区間目以降 aₖ = 2cₖ なので aₖ₊₁ = 3aₖ ともわかります。）",
+          "(5, 5) に着くのは 5 区間後に d = 0 のときなので 162 通りです。答えは 162 通りです。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "162"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "combinatorics-grade9-foundation",
+        "notes": "對角帶 |x − y| ≤ 2 內的格路：兩步一段的狀態遞推 aₖ₊₁ = 2(aₖ + cₖ)，得 162。掃過「向右|向上」（49 題）；最接近 combinatorics_grade9_foundation_005，差異：既有題是避開 (2,2)、(3,3) 的格路；本題限制在對角帶內，用狀態遞推。"
+      }
+    },
+    {
+      "id": "combinatorics_grade9_foundation_072",
+      "reviewStatus": "ok",
+      "topic": "combinatorics",
+      "subtopic": "second_die_matching_standard_sum_distribution",
+      "tags": [
+        "c:basic_counting",
+        "c:probability",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade9",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "兩顆普通骰子（六面是 1～6）一起擲，共 36 種情形，點數和是 2、3、4、⋯、12 的情形數依序是 1、2、3、4、5、6、5、4、3、2、1。現在有一顆特製的甲骰，六面是 1、2、2、3、3、4；另有一顆乙骰，六面各寫一個正整數。已知甲、乙兩骰一起擲時，點數和是 2、3、⋯、12 的情形數，和兩顆普通骰子完全一樣。求乙骰六個面上的數的乘積。",
+        "zh-Hans": "两颗普通骰子（六面是 1～6）一起掷，共 36 种情形，点数和是 2、3、4、⋯、12 的情形数依次是 1、2、3、4、5、6、5、4、3、2、1。现在有一颗特制的甲骰，六面是 1、2、2、3、3、4；另有一颗乙骰，六面各写一个正整数。已知甲、乙两骰一起掷时，点数和是 2、3、⋯、12 的情形数，和两颗普通骰子完全一样。求乙骰六个面上的数的乘积。",
+        "en": "When two ordinary dice (faces 1 to 6) are rolled, there are 36 outcomes, and the numbers of outcomes with sum 2, 3, 4, …, 12 are 1, 2, 3, 4, 5, 6, 5, 4, 3, 2, 1. Now there is a special die P with faces 1, 2, 2, 3, 3, 4, and another die Q with a positive integer on each of its six faces. When P and Q are rolled together, the numbers of outcomes with sum 2, 3, …, 12 are exactly the same as for two ordinary dice. Find the product of the six numbers on Q.",
+        "ja": "普通のさいころ（面は 1～6）を 2 つ同時に投げると 36 通りの場合があり、目の和が 2、3、4、⋯、12 になる場合の数は順に 1、2、3、4、5、6、5、4、3、2、1 です。いま、面が 1、2、2、3、3、4 の特別なさいころ甲と、6 つの面にそれぞれ正の整数が書かれたさいころ乙があります。甲と乙を同時に投げたとき、目の和が 2、3、⋯、12 になる場合の数は、普通のさいころ 2 つのときとまったく同じでした。乙の 6 つの面の数の積を求めなさい。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 2880。",
+        "zh-Hans": "答案是 2880。",
+        "en": "The answer is 2880.",
+        "ja": "答えは 2880 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "記乙骰上寫著 k 的面有 nₖ 個。甲骰寫 1 的有 1 面、寫 2 的有 2 面、寫 3 的有 2 面、寫 4 的有 1 面。",
+          "最小的和是 2，只能是甲的 1 加乙的 1，所以乙最小的數是 1，而且和為 2 的情形數 1 × n₁ = 1，得 n₁ = 1。最大的和是 12，只能是甲的 4 加乙的 8，所以乙最大的數是 8，1 × n₈ = 1，得 n₈ = 1。",
+          "依序看和為 3～7 的情形數：和 3：n₂ + 2n₁ = 2，得 n₂ = 0。和 4：n₃ + 2n₂ + 2n₁ = 3，得 n₃ = 1。和 5：n₄ + 2n₃ + 2n₂ + n₁ = 4，得 n₄ = 1。和 6：n₅ + 2n₄ + 2n₃ + n₂ = 5，得 n₅ = 1。和 7：n₆ + 2n₅ + 2n₄ + n₃ = 6，得 n₆ = 1。",
+          "已經找到 1、3、4、5、6、8 共 6 面，所以乙骰就是 1、3、4、5、6、8。驗算其餘的和：和 8 是 n₇ + 2n₆ + 2n₅ + n₄ = 0 + 2 + 2 + 1 = 5；和 9 是 2n₇ + 2n₆ + n₅ + n₈ = 0 + 2 + 1 + 1 = 4；和 10 是 2n₈ + 2n₇ + n₆ = 2 + 0 + 1 = 3；和 11 是 2n₈ + n₇ = 2；和 12 是 n₈ = 1，全部相符。",
+          "乘積是 1 × 3 × 4 × 5 × 6 × 8 = 2880。答案是 2880。"
+        ],
+        "zh-Hans": [
+          "记乙骰上写着 k 的面有 nₖ 个。甲骰写 1 的有 1 面、写 2 的有 2 面、写 3 的有 2 面、写 4 的有 1 面。",
+          "最小的和是 2，只能是甲的 1 加乙的 1，所以乙最小的数是 1，而且和为 2 的情形数 1 × n₁ = 1，得 n₁ = 1。最大的和是 12，只能是甲的 4 加乙的 8，所以乙最大的数是 8，1 × n₈ = 1，得 n₈ = 1。",
+          "依次看和为 3～7 的情形数：和 3：n₂ + 2n₁ = 2，得 n₂ = 0。和 4：n₃ + 2n₂ + 2n₁ = 3，得 n₃ = 1。和 5：n₄ + 2n₃ + 2n₂ + n₁ = 4，得 n₄ = 1。和 6：n₅ + 2n₄ + 2n₃ + n₂ = 5，得 n₅ = 1。和 7：n₆ + 2n₅ + 2n₄ + n₃ = 6，得 n₆ = 1。",
+          "已经找到 1、3、4、5、6、8 共 6 面，所以乙骰就是 1、3、4、5、6、8。验算其余的和：和 8 是 n₇ + 2n₆ + 2n₅ + n₄ = 0 + 2 + 2 + 1 = 5；和 9 是 2n₇ + 2n₆ + n₅ + n₈ = 0 + 2 + 1 + 1 = 4；和 10 是 2n₈ + 2n₇ + n₆ = 2 + 0 + 1 = 3；和 11 是 2n₈ + n₇ = 2；和 12 是 n₈ = 1，全部相符。",
+          "乘积是 1 × 3 × 4 × 5 × 6 × 8 = 2880。答案是 2880。"
+        ],
+        "en": [
+          "Let nₖ be the number of faces of Q showing k. Die P has one face 1, two faces 2, two faces 3 and one face 4.",
+          "The smallest sum, 2, can only be 1 on P plus 1 on Q, so the smallest number on Q is 1, and the count for sum 2 is 1 × n₁ = 1, so n₁ = 1. The largest sum, 12, can only be 4 on P plus 8 on Q, so the largest number on Q is 8, and 1 × n₈ = 1 gives n₈ = 1.",
+          "Now use the counts for sums 3 to 7. Sum 3: n₂ + 2n₁ = 2, so n₂ = 0. Sum 4: n₃ + 2n₂ + 2n₁ = 3, so n₃ = 1. Sum 5: n₄ + 2n₃ + 2n₂ + n₁ = 4, so n₄ = 1. Sum 6: n₅ + 2n₄ + 2n₃ + n₂ = 5, so n₅ = 1. Sum 7: n₆ + 2n₅ + 2n₄ + n₃ = 6, so n₆ = 1.",
+          "We have found the 6 faces 1, 3, 4, 5, 6, 8, so Q is exactly 1, 3, 4, 5, 6, 8. Check the remaining sums: sum 8 is n₇ + 2n₆ + 2n₅ + n₄ = 0 + 2 + 2 + 1 = 5; sum 9 is 2n₇ + 2n₆ + n₅ + n₈ = 0 + 2 + 1 + 1 = 4; sum 10 is 2n₈ + 2n₇ + n₆ = 2 + 0 + 1 = 3; sum 11 is 2n₈ + n₇ = 2; sum 12 is n₈ = 1, all matching.",
+          "The product is 1 × 3 × 4 × 5 × 6 × 8 = 2880. The answer is 2880."
+        ],
+        "ja": [
+          "乙で k が書かれた面の数を nₖ とします。甲は 1 が 1 面、2 が 2 面、3 が 2 面、4 が 1 面です。",
+          "最小の和 2 は甲の 1 と乙の 1 でしか作れないので、乙の最小の数は 1 で、和 2 の場合の数 1 × n₁ = 1 より n₁ = 1 です。最大の和 12 は甲の 4 と乙の 8 でしか作れないので、乙の最大の数は 8 で、1 × n₈ = 1 より n₈ = 1 です。",
+          "和 3～7 の場合の数を順に見ます。和 3：n₂ + 2n₁ = 2 より n₂ = 0。和 4：n₃ + 2n₂ + 2n₁ = 3 より n₃ = 1。和 5：n₄ + 2n₃ + 2n₂ + n₁ = 4 より n₄ = 1。和 6：n₅ + 2n₄ + 2n₃ + n₂ = 5 より n₅ = 1。和 7：n₆ + 2n₅ + 2n₄ + n₃ = 6 より n₆ = 1。",
+          "これで 1、3、4、5、6、8 の 6 面が決まったので、乙は 1、3、4、5、6、8 です。残りの和も確かめます。和 8 は n₇ + 2n₆ + 2n₅ + n₄ = 0 + 2 + 2 + 1 = 5、和 9 は 2n₇ + 2n₆ + n₅ + n₈ = 0 + 2 + 1 + 1 = 4、和 10 は 2n₈ + 2n₇ + n₆ = 2 + 0 + 1 = 3、和 11 は 2n₈ + n₇ = 2、和 12 は n₈ = 1 で、すべて一致します。",
+          "積は 1 × 3 × 4 × 5 × 6 × 8 = 2880 です。答えは 2880 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "2880"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 4
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "combinatorics-grade9-foundation",
+        "notes": "由點數和分布反推乙骰（Sicherman 骰）：最小、最大和定 1、8，再依序由和 3～7 求各面。掃過「骰」（75 題）；最接近 arithmetic_grade4_foundation_150，差異：既有題是特製骰求某和的機率；本題反過來由整個分布求另一顆骰的點數。"
+      }
     }
   ]
 }

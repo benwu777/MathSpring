@@ -5383,6 +5383,166 @@
         "reference": "number_theory-grade9-foundation",
         "notes": "連乘 1!×2!×⋯×20! 的末尾 0 個數 = Σ⌊k/5⌋，5 是瓶頸。掃過 regex「末尾|連續.{0,6}0|個 0」（全庫 20 題，並讀最接近者原文）；最接近 number_theory_grade10_foundation_004，差異：該題是單一階乘 n! 的末尾 0 反求 n；本題是 20 個階乘連乘，要逐個 k! 累加 5 的個數。"
       }
+    },
+    {
+      "id": "number_theory_grade9_foundation_064",
+      "reviewStatus": "ok",
+      "topic": "number_theory",
+      "subtopic": "three_digit_number_and_reversal_both_multiples_of_seven",
+      "tags": [
+        "c:modular",
+        "c:place_value",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade9",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "三位數 N 的個位數字不是 0。把 N 的三個數字順序倒過來寫，會得到另一個三位數（例如 123 倒過來是 321）。如果 N 和它倒過來的數都是 7 的倍數，這樣的 N 一共有幾個？",
+        "zh-Hans": "三位数 N 的个位数字不是 0。把 N 的三个数字顺序倒过来写，会得到另一个三位数（例如 123 倒过来是 321）。如果 N 和它倒过来的数都是 7 的倍数，这样的 N 一共有几个？",
+        "en": "A three-digit number N has a nonzero units digit. Writing the three digits of N in reverse order gives another three-digit number (for example, 123 reversed is 321). How many such N are there for which both N and its reversal are multiples of 7?",
+        "ja": "3 けたの数 N の一の位は 0 ではありません。N の 3 つの数字を逆の順に書くと、別の 3 けたの数になります（たとえば 123 を逆にすると 321）。N とそれを逆にした数がどちらも 7 の倍数であるような N は全部で何個ありますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 16 個。",
+        "zh-Hans": "答案是 16 个。",
+        "en": "The answer is 16.",
+        "ja": "答えは 16 個です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "設 N = 100a + 10b + c，其中 a、c 是 1～9，b 是 0～9；倒過來的數是 M = 100c + 10b + a，兩者相差 M − N = 99c − 99a = 99(c − a)。",
+          "若 N、M 都是 7 的倍數，則 99(c − a) 是 7 的倍數；99 = 9 × 11 不含因數 7，所以 c − a 是 7 的倍數。a、c 在 1～9，所以 a = c，或 (a, c) 是 (1, 8)、(8, 1)、(2, 9)、(9, 2)。反過來，當 c − a 是 7 的倍數時，M − N 是 7 的倍數，只要 N 是 7 的倍數，M 也是。所以條件等價於：c − a 是 7 的倍數，而且 N 是 7 的倍數。",
+          "100 = 98 + 2、10 = 7 + 3，而 98、7 都是 7 的倍數，所以 N 除以 7 的餘數和 2a + 3b + c 相同。",
+          "這時 c 和 a 除以 7 的餘數相同，所以 2a + 3b + c 和 3a + 3b = 3(a + b) 除以 7 的餘數相同。3 不是 7 的倍數，所以 N 是 7 的倍數，等價於 a + b 是 7 的倍數。",
+          "對每個 a 數 b（0～9）：a = 1 時 b = 6；a = 2 時 b = 5；a = 3 時 b = 4；a = 4 時 b = 3；a = 5 時 b = 2 或 9；a = 6 時 b = 1 或 8；a = 7 時 b = 0 或 7；a = 8 時 b = 6；a = 9 時 b = 5。對應的 c：a = 1、2、8、9 時各有 2 種（例如 a = 1 時 c = 1 或 8），a = 3～7 時只有 c = a 一種。",
+          "個數 = 1 × 2 + 1 × 2 + 1 + 1 + 2 + 2 + 2 + 1 × 2 + 1 × 2 = 16，例如 168 = 7 × 24、861 = 7 × 123。答案是 16 個。"
+        ],
+        "zh-Hans": [
+          "设 N = 100a + 10b + c，其中 a、c 是 1～9，b 是 0～9；倒过来的数是 M = 100c + 10b + a，两者相差 M − N = 99c − 99a = 99(c − a)。",
+          "若 N、M 都是 7 的倍数，则 99(c − a) 是 7 的倍数；99 = 9 × 11 不含因数 7，所以 c − a 是 7 的倍数。a、c 在 1～9，所以 a = c，或 (a, c) 是 (1, 8)、(8, 1)、(2, 9)、(9, 2)。反过来，当 c − a 是 7 的倍数时，M − N 是 7 的倍数，只要 N 是 7 的倍数，M 也是。所以条件等价于：c − a 是 7 的倍数，而且 N 是 7 的倍数。",
+          "100 = 98 + 2、10 = 7 + 3，而 98、7 都是 7 的倍数，所以 N 除以 7 的余数和 2a + 3b + c 相同。",
+          "这时 c 和 a 除以 7 的余数相同，所以 2a + 3b + c 和 3a + 3b = 3(a + b) 除以 7 的余数相同。3 不是 7 的倍数，所以 N 是 7 的倍数，等价于 a + b 是 7 的倍数。",
+          "对每个 a 数 b（0～9）：a = 1 时 b = 6；a = 2 时 b = 5；a = 3 时 b = 4；a = 4 时 b = 3；a = 5 时 b = 2 或 9；a = 6 时 b = 1 或 8；a = 7 时 b = 0 或 7；a = 8 时 b = 6；a = 9 时 b = 5。对应的 c：a = 1、2、8、9 时各有 2 种（例如 a = 1 时 c = 1 或 8），a = 3～7 时只有 c = a 一种。",
+          "个数 = 1 × 2 + 1 × 2 + 1 + 1 + 2 + 2 + 2 + 1 × 2 + 1 × 2 = 16，例如 168 = 7 × 24、861 = 7 × 123。答案是 16 个。"
+        ],
+        "en": [
+          "Let N = 100a + 10b + c with a, c from 1 to 9 and b from 0 to 9; the reversal is M = 100c + 10b + a, and M − N = 99c − 99a = 99(c − a).",
+          "If N and M are both multiples of 7, then 99(c − a) is a multiple of 7; 99 = 9 × 11 has no factor 7, so c − a is a multiple of 7. With a, c in 1 to 9, either a = c or (a, c) is (1, 8), (8, 1), (2, 9), (9, 2). Conversely, when c − a is a multiple of 7, M − N is a multiple of 7, so M is a multiple of 7 whenever N is. So the condition is: c − a is a multiple of 7 and N is a multiple of 7.",
+          "100 = 98 + 2 and 10 = 7 + 3, with 98 and 7 multiples of 7, so N leaves the same remainder mod 7 as 2a + 3b + c.",
+          "Now c and a leave the same remainder mod 7, so 2a + 3b + c leaves the same remainder as 3a + 3b = 3(a + b). Since 3 is not a multiple of 7, N is a multiple of 7 exactly when a + b is.",
+          "Count b (0 to 9) for each a: a = 1: b = 6; a = 2: b = 5; a = 3: b = 4; a = 4: b = 3; a = 5: b = 2 or 9; a = 6: b = 1 or 8; a = 7: b = 0 or 7; a = 8: b = 6; a = 9: b = 5. The choices of c: 2 each for a = 1, 2, 8, 9 (for example c = 1 or 8 when a = 1), and only c = a for a = 3 to 7.",
+          "The count is 1 × 2 + 1 × 2 + 1 + 1 + 2 + 2 + 2 + 1 × 2 + 1 × 2 = 16; for example 168 = 7 × 24 and 861 = 7 × 123. The answer is 16."
+        ],
+        "ja": [
+          "N = 100a + 10b + c（a、c は 1～9、b は 0～9）とすると、逆にした数は M = 100c + 10b + a で、M − N = 99c − 99a = 99(c − a) です。",
+          "N、M がともに 7 の倍数なら 99(c − a) は 7 の倍数で、99 = 9 × 11 は因数 7 を含まないので c − a は 7 の倍数です。a、c は 1～9 なので a = c か、(a, c) が (1, 8)、(8, 1)、(2, 9)、(9, 2) です。逆に c − a が 7 の倍数なら M − N は 7 の倍数なので、N が 7 の倍数なら M も 7 の倍数です。よって条件は「c − a が 7 の倍数で、N が 7 の倍数」と同じです。",
+          "100 = 98 + 2、10 = 7 + 3 で、98 と 7 は 7 の倍数なので、N を 7 で割った余りは 2a + 3b + c と同じです。",
+          "このとき c と a の 7 で割った余りは同じなので、2a + 3b + c は 3a + 3b = 3(a + b) と同じ余りです。3 は 7 の倍数ではないので、N が 7 の倍数であることは a + b が 7 の倍数であることと同じです。",
+          "各 a について b（0～9）を数えると、a = 1 で b = 6、a = 2 で b = 5、a = 3 で b = 4、a = 4 で b = 3、a = 5 で b = 2 か 9、a = 6 で b = 1 か 8、a = 7 で b = 0 か 7、a = 8 で b = 6、a = 9 で b = 5 です。c は a = 1、2、8、9 のとき各 2 通り（たとえば a = 1 なら c = 1 か 8）、a = 3～7 のときは c = a の 1 通りです。",
+          "個数は 1 × 2 + 1 × 2 + 1 + 1 + 2 + 2 + 2 + 1 × 2 + 1 × 2 = 16 で、たとえば 168 = 7 × 24、861 = 7 × 123 です。答えは 16 個です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "16"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "number_theory-grade9-foundation",
+        "notes": "N 與倒序數都是 7 的倍數：M − N = 99(c − a) 逼 a ≡ c (mod 7)，再要 a + b ≡ 0 (mod 7)。掃過「倒過來|反過來」（14 題）；最接近 number_theory_grade9_foundation_007，差異：既有題要倒序數是 5 的倍數（只看首位）；本題兩者都要是 7 的倍數，需要 mod 7 位值。"
+      }
+    },
+    {
+      "id": "number_theory_grade9_foundation_065",
+      "reviewStatus": "ok",
+      "topic": "number_theory",
+      "subtopic": "distinct_remainders_mod_two_through_six",
+      "tags": [
+        "c:modular",
+        "c:logic_deduction",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade9",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一個正整數 n 分別除以 2、3、4、5、6，得到 5 個餘數。如果這 5 個餘數兩兩都不相同，就說 n 是「好數」。小於 1000 的好數一共有幾個？",
+        "zh-Hans": "一个正整数 n 分别除以 2、3、4、5、6，得到 5 个余数。如果这 5 个余数两两都不相同，就说 n 是“好数”。小于 1000 的好数一共有几个？",
+        "en": "A positive integer n is divided by 2, 3, 4, 5 and 6, giving 5 remainders. If these 5 remainders are all different, call n \"good\". How many good numbers are less than 1000?",
+        "ja": "正の整数 n を 2、3、4、5、6 でそれぞれ割ると、5 つの余りが得られます。この 5 つの余りがどれも互いに異なるとき、n を「よい数」と呼びます。1000 より小さいよい数は全部で何個ありますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 49 個。",
+        "zh-Hans": "答案是 49 个。",
+        "en": "The answer is 49.",
+        "ja": "答えは 49 個です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "把五個餘數記為 r₂、r₃、r₄、r₅、r₆。n 除以 4 餘 r₄，而 4 是 2 的倍數，所以 r₄ 和 r₂ 的奇偶相同；同理 r₆ 和 r₂ 的奇偶相同，而且 r₆ 除以 3 的餘數就是 r₃。",
+          "若 r₂ = 0：r₄ 是 0～3 的偶數且不等於 0，所以 r₄ = 2；r₆ 是 0～5 的偶數且不等於 0、2，所以 r₆ = 4，於是 r₃ = 1；r₅ 不能是 0、1、2、4，所以 r₅ = 3。",
+          "若 r₂ = 1：r₄ 是奇數且不等於 1，所以 r₄ = 3；r₆ 是奇數且不等於 1、3，所以 r₆ = 5，於是 r₃ = 2；r₅ 不能是 1、2、3、5，所以 r₅ = 0 或 4。",
+          "換回 n 的條件：第一種是 n 除以 4 餘 2、除以 6 餘 4、除以 5 餘 3。除以 6 餘 4 的數 4、10、16、22、⋯ 中，除以 4 餘 2 的是 10、22、34、46、58、⋯（每 12 一個），其中除以 5 餘 3 的最小是 58，所以 n 除以 60 餘 58。第二種是 n 除以 4 餘 3、除以 6 餘 5，也就是 11、23、35、47、59、⋯（每 12 一個）；再要除以 5 餘 0 得 n 除以 60 餘 35，除以 5 餘 4 得 n 除以 60 餘 59。反過來，這三類數的餘數依 r₂、r₃、r₄、r₅、r₆ 的順序分別是 1、2、3、0、5（餘 35）、0、1、2、3、4（餘 58）、1、2、3、4、5（餘 59），都兩兩不同。",
+          "所以好數就是除以 60 餘 35、58、59 的正整數。1～960 是 16 段連續的 60 個數，每段恰有 3 個，共 48 個；961～999 之中只有 995（= 960 + 35）是好數。",
+          "小於 1000 的好數共 48 + 1 = 49 個。答案是 49 個。"
+        ],
+        "zh-Hans": [
+          "把五个余数记为 r₂、r₃、r₄、r₅、r₆。n 除以 4 余 r₄，而 4 是 2 的倍数，所以 r₄ 和 r₂ 的奇偶相同；同理 r₆ 和 r₂ 的奇偶相同，而且 r₆ 除以 3 的余数就是 r₃。",
+          "若 r₂ = 0：r₄ 是 0～3 的偶数且不等于 0，所以 r₄ = 2；r₆ 是 0～5 的偶数且不等于 0、2，所以 r₆ = 4，于是 r₃ = 1；r₅ 不能是 0、1、2、4，所以 r₅ = 3。",
+          "若 r₂ = 1：r₄ 是奇数且不等于 1，所以 r₄ = 3；r₆ 是奇数且不等于 1、3，所以 r₆ = 5，于是 r₃ = 2；r₅ 不能是 1、2、3、5，所以 r₅ = 0 或 4。",
+          "换回 n 的条件：第一种是 n 除以 4 余 2、除以 6 余 4、除以 5 余 3。除以 6 余 4 的数 4、10、16、22、⋯ 中，除以 4 余 2 的是 10、22、34、46、58、⋯（每 12 一个），其中除以 5 余 3 的最小是 58，所以 n 除以 60 余 58。第二种是 n 除以 4 余 3、除以 6 余 5，也就是 11、23、35、47、59、⋯（每 12 一个）；再要除以 5 余 0 得 n 除以 60 余 35，除以 5 余 4 得 n 除以 60 余 59。反过来，这三类数的余数按 r₂、r₃、r₄、r₅、r₆ 的顺序分别是 1、2、3、0、5（余 35）、0、1、2、3、4（余 58）、1、2、3、4、5（余 59），都两两不同。",
+          "所以好数就是除以 60 余 35、58、59 的正整数。1～960 是 16 段连续的 60 个数，每段恰有 3 个，共 48 个；961～999 之中只有 995（= 960 + 35）是好数。",
+          "小于 1000 的好数共 48 + 1 = 49 个。答案是 49 个。"
+        ],
+        "en": [
+          "Write the remainders as r₂, r₃, r₄, r₅, r₆. n leaves remainder r₄ on division by 4, and 4 is a multiple of 2, so r₄ has the same parity as r₂; likewise r₆ has the same parity as r₂, and r₆ leaves remainder r₃ on division by 3.",
+          "If r₂ = 0: r₄ is an even number in 0–3 other than 0, so r₄ = 2; r₆ is an even number in 0–5 other than 0, 2, so r₆ = 4 and hence r₃ = 1; r₅ cannot be 0, 1, 2, 4, so r₅ = 3.",
+          "If r₂ = 1: r₄ is odd and not 1, so r₄ = 3; r₆ is odd and not 1, 3, so r₆ = 5 and hence r₃ = 2; r₅ cannot be 1, 2, 3, 5, so r₅ = 0 or 4.",
+          "Back to n. Type 1: n ≡ 2 (mod 4), n ≡ 4 (mod 6), n ≡ 3 (mod 5). Among 4, 10, 16, 22, … (remainder 4 mod 6), those with remainder 2 mod 4 are 10, 22, 34, 46, 58, … (one every 12), and the smallest with remainder 3 mod 5 is 58, so n leaves remainder 58 mod 60. Type 2: n ≡ 3 (mod 4) and n ≡ 5 (mod 6), i.e. 11, 23, 35, 47, 59, … (one every 12); remainder 0 mod 5 gives n ≡ 35 (mod 60), and remainder 4 mod 5 gives n ≡ 59 (mod 60). Conversely, in the order r₂, r₃, r₄, r₅, r₆ these three classes have remainders 1, 2, 3, 0, 5 (for 35), 0, 1, 2, 3, 4 (for 58) and 1, 2, 3, 4, 5 (for 59), all different.",
+          "So the good numbers are exactly the positive integers leaving remainder 35, 58 or 59 mod 60. 1 to 960 consists of 16 blocks of 60 consecutive numbers, each containing exactly 3, giving 48; among 961 to 999 only 995 (= 960 + 35) is good.",
+          "There are 48 + 1 = 49 good numbers less than 1000. The answer is 49."
+        ],
+        "ja": [
+          "5 つの余りを r₂、r₃、r₄、r₅、r₆ とします。n を 4 で割った余りが r₄ で、4 は 2 の倍数なので r₄ と r₂ の偶奇は同じです。同様に r₆ と r₂ の偶奇も同じで、r₆ を 3 で割った余りが r₃ です。",
+          "r₂ = 0 のとき：r₄ は 0～3 の偶数で 0 でないので r₄ = 2、r₆ は 0～5 の偶数で 0、2 でないので r₆ = 4、よって r₃ = 1。r₅ は 0、1、2、4 にはなれないので r₅ = 3 です。",
+          "r₂ = 1 のとき：r₄ は奇数で 1 でないので r₄ = 3、r₆ は奇数で 1、3 でないので r₆ = 5、よって r₃ = 2。r₅ は 1、2、3、5 にはなれないので r₅ = 0 か 4 です。",
+          "n の条件に直します。1 つ目は n を 4 で割ると 2 余り、6 で割ると 4 余り、5 で割ると 3 余る数です。6 で割って 4 余る数 4、10、16、22、⋯ のうち 4 で割って 2 余るのは 10、22、34、46、58、⋯（12 ごとに 1 つ）で、5 で割って 3 余る最小のものは 58 なので、n は 60 で割って 58 余ります。2 つ目は 4 で割ると 3 余り 6 で割ると 5 余る数、つまり 11、23、35、47、59、⋯（12 ごとに 1 つ）で、さらに 5 で割って 0 余るなら 60 で割って 35 余り、4 余るなら 59 余ります。逆にこの 3 種類の数の余りを r₂、r₃、r₄、r₅、r₆ の順に書くと、1、2、3、0、5（35 余り）、0、1、2、3、4（58 余り）、1、2、3、4、5（59 余り）で、どれも互いに異なります。",
+          "よってよい数は、60 で割って 35、58、59 余る正の整数です。1～960 は 60 個ずつ連続する 16 区間で、各区間にちょうど 3 個ずつ、計 48 個です。961～999 では 995（= 960 + 35）だけがよい数です。",
+          "1000 より小さいよい数は 48 + 1 = 49 個です。答えは 49 個です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "49"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "number_theory-grade9-foundation",
+        "notes": "除以 2～6 的餘數兩兩不同：由 r₂ 的奇偶推出 n ≡ 35、58、59 (mod 60)。掃過「餘數」（53 題）；最接近 logic_grade10_foundation_002，差異：既有題是除以 2、3、4 都餘 1；本題要求五個餘數兩兩相異，需分案與中國剩餘。"
+      }
     }
   ]
 }

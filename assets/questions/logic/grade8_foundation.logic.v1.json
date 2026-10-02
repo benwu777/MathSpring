@@ -4886,6 +4886,186 @@
         "reference": "logic-grade8-foundation",
         "notes": "感染區域周長不增，最後 32、每格最多 4，故至少 8；對角線 8 格可在 7 分鐘內感染全部。掃過「感染|傳染|生病」（1 題，為毒藥老鼠題）；最接近 logic_grade11_foundation_022（4 × 4 每個 2 × 2 至多一子的極值），差異：本題用周長單調量給下界並構造。"
       }
+    },
+    {
+      "id": "logic_grade8_foundation_057",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "complement_doubling_string_position",
+      "tags": [
+        "c:pattern",
+        "c:number_base",
+        "m:reverse"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade8",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "從字串「1」開始，反覆做同一個動作：把目前的整個字串抄一份，把抄本裡的 1 全部換成 2、2 全部換成 1，再把抄本接在原字串的後面。所以字串依序變成 1 → 12 → 1221 → 12212112 → ⋯，長度每次加倍，而且前面已經寫好的部分永遠不再改變。一直做下去，這個長字串的第 2026 個、第 2027 個、第 2028 個數字依序是 a、b、c。求三位數 abc。",
+        "zh-Hans": "从字符串“1”开始，反复做同一个动作：把当前的整个字符串抄一份，把抄本里的 1 全部换成 2、2 全部换成 1，再把抄本接在原字符串的后面。所以字符串依次变成 1 → 12 → 1221 → 12212112 → ⋯，长度每次加倍，而且前面已经写好的部分永远不再改变。一直做下去，这个长字符串的第 2026 个、第 2027 个、第 2028 个数字依次是 a、b、c。求三位数 abc。",
+        "en": "Start with the string \"1\" and repeat the same action: copy the whole current string, in the copy change every 1 into 2 and every 2 into 1, and attach the copy to the end of the original. So the string becomes 1 → 12 → 1221 → 12212112 → ⋯; its length doubles each time, and the part already written never changes again. Continuing forever, let the 2026th, 2027th and 2028th digits of this long string be a, b, c. Find the three-digit number abc.",
+        "ja": "文字列「1」から始めて、同じ操作をくり返します。今の文字列全体を写し、写しの中の 1 をすべて 2 に、2 をすべて 1 に置きかえ、その写しをもとの文字列の後ろにつなげます。すると文字列は 1 → 12 → 1221 → 12212112 → ⋯ と変わり、長さは毎回 2 倍になり、すでに書かれた前の部分は二度と変わりません。これを続けてできる長い文字列の 2026 番目、2027 番目、2028 番目の数字を順に a、b、c とします。3 けたの数 abc を求めなさい。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 112。",
+        "zh-Hans": "答案是 112。",
+        "en": "The answer is 112.",
+        "ja": "答えは 112 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "把位置改用「編號」表示：第 k 個數字的編號是 k − 1，所以第一個數字（1）的編號是 0。",
+          "當字串長度是 2ᵐ 時，做一次動作後，編號 2ᵐ 到 2ᵐ⁺¹ − 1 的那一半，是把編號 0 到 2ᵐ − 1 的數字照順序 1、2 互換抄過來的。所以編號 n（n ≥ 1）的數字，等於編號 n − 2ᵐ 的數字再互換一次，其中 2ᵐ 是不超過 n 的最大的 2 的次方。",
+          "一直這樣做，每次減去「不超過它的最大 2 的次方」，直到編號變成 0（數字是 1）。減了偶數次，數字就是 1；減了奇數次，數字就是 2。這個次數就是 n 寫成二進位時 1 的個數。",
+          "第 2026 個數字的編號是 2025：2025 − 1024 = 1001，1001 − 512 = 489，489 − 256 = 233，233 − 128 = 105，105 − 64 = 41，41 − 32 = 9，9 − 8 = 1，1 − 1 = 0，共減 8 次（2025 = 11111101001₂ 有 8 個 1），是偶數次，所以 a = 1。",
+          "第 2027 個數字的編號是 2026 = 1024 + 512 + 256 + 128 + 64 + 32 + 8 + 2，也要減 8 次，所以 b = 1；第 2028 個數字的編號是 2027 = 2026 + 1，要減 9 次，所以 c = 2。",
+          "所以 abc = 112。答案是 112。"
+        ],
+        "zh-Hans": [
+          "把位置改用“编号”表示：第 k 个数字的编号是 k − 1，所以第一个数字（1）的编号是 0。",
+          "当字符串长度是 2ᵐ 时，做一次动作后，编号 2ᵐ 到 2ᵐ⁺¹ − 1 的那一半，是把编号 0 到 2ᵐ − 1 的数字按顺序 1、2 互换抄过来的。所以编号 n（n ≥ 1）的数字，等于编号 n − 2ᵐ 的数字再互换一次，其中 2ᵐ 是不超过 n 的最大的 2 的幂。",
+          "一直这样做，每次减去“不超过它的最大的 2 的幂”，直到编号变成 0（数字是 1）。减了偶数次，数字就是 1；减了奇数次，数字就是 2。这个次数就是 n 写成二进制时 1 的个数。",
+          "第 2026 个数字的编号是 2025：2025 − 1024 = 1001，1001 − 512 = 489，489 − 256 = 233，233 − 128 = 105，105 − 64 = 41，41 − 32 = 9，9 − 8 = 1，1 − 1 = 0，共减 8 次（2025 = 11111101001₂ 有 8 个 1），是偶数次，所以 a = 1。",
+          "第 2027 个数字的编号是 2026 = 1024 + 512 + 256 + 128 + 64 + 32 + 8 + 2，也要减 8 次，所以 b = 1；第 2028 个数字的编号是 2027 = 2026 + 1，要减 9 次，所以 c = 2。",
+          "所以 abc = 112。答案是 112。"
+        ],
+        "en": [
+          "Use position numbers: the k-th digit gets number k − 1, so the first digit (1) has number 0.",
+          "When the string has length 2ᵐ, one action creates positions 2ᵐ to 2ᵐ⁺¹ − 1, which copy positions 0 to 2ᵐ − 1 in order with 1 and 2 swapped. So the digit at position n (n ≥ 1) equals the digit at position n − 2ᵐ swapped once, where 2ᵐ is the largest power of 2 not exceeding n.",
+          "Repeat this, each time subtracting the largest power of 2 not exceeding the current number, until the position becomes 0 (whose digit is 1). After an even number of subtractions the digit is 1; after an odd number it is 2. This number of subtractions is the number of 1s in the binary form of n.",
+          "The 2026th digit has position 2025: 2025 − 1024 = 1001, 1001 − 512 = 489, 489 − 256 = 233, 233 − 128 = 105, 105 − 64 = 41, 41 − 32 = 9, 9 − 8 = 1, 1 − 1 = 0, which is 8 subtractions (2025 = 11111101001₂ has eight 1s), an even number, so a = 1.",
+          "The 2027th digit has position 2026 = 1024 + 512 + 256 + 128 + 64 + 32 + 8 + 2, also 8 subtractions, so b = 1; the 2028th digit has position 2027 = 2026 + 1, 9 subtractions, so c = 2.",
+          "So abc = 112. The answer is 112."
+        ],
+        "ja": [
+          "位置を「番号」で表し、k 番目の数字の番号を k − 1 とします。最初の数字（1）の番号は 0 です。",
+          "文字列の長さが 2ᵐ のとき、1 回の操作でできる番号 2ᵐ～2ᵐ⁺¹ − 1 の部分は、番号 0～2ᵐ − 1 の数字を順に 1 と 2 を入れかえて写したものです。よって番号 n（n ≥ 1）の数字は、番号 n − 2ᵐ の数字をもう一度入れかえたものです。ここで 2ᵐ は n 以下の最大の 2 のべき乗です。",
+          "これをくり返し、毎回「その数以下の最大の 2 のべき乗」を引いて番号が 0（数字は 1）になるまで続けます。引いた回数が偶数なら数字は 1、奇数なら 2 です。この回数は n を 2 進法で書いたときの 1 の個数です。",
+          "2026 番目の数字の番号は 2025 です。2025 − 1024 = 1001、1001 − 512 = 489、489 − 256 = 233、233 − 128 = 105、105 − 64 = 41、41 − 32 = 9、9 − 8 = 1、1 − 1 = 0 で 8 回（2025 = 11111101001₂ には 1 が 8 個）、偶数回なので a = 1 です。",
+          "2027 番目の番号は 2026 = 1024 + 512 + 256 + 128 + 64 + 32 + 8 + 2 で、やはり 8 回なので b = 1。2028 番目の番号は 2027 = 2026 + 1 で 9 回なので c = 2 です。",
+          "よって abc = 112 です。答えは 112 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "112"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade8-foundation",
+        "notes": "倍增互補字串（Thue–Morse）：第 n 位由 n − 1 的二進位 1 的個數奇偶決定。掃過「抄|互換|字串」（18 題）；最接近 mixed_grade6_foundation_019，差異：既有題是倍數連寫的第 k 位；本題是倍增互補規則，要用減去最大 2 的次方追溯。"
+      }
+    },
+    {
+      "id": "logic_grade8_foundation_058",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "sum_of_squares_invariant_under_replacement",
+      "tags": [
+        "c:algebraic_identity",
+        "c:logic_deduction",
+        "m:invariant"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade8",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "黑板上寫著三個數 3、4、12。每一次操作：任選其中兩個數，把先選的記為 a、後選的記為 b，擦掉這兩個數，換成 (3a + 4b) ÷ 5 和 (4a − 3b) ÷ 5 兩個數，第三個數不動。操作可以做任意多次。下列哪一組三個數，有可能在某個時候同時出現在黑板上？（不計順序）",
+        "zh-Hans": "黑板上写着三个数 3、4、12。每一次操作：任选其中两个数，把先选的记为 a、后选的记为 b，擦掉这两个数，换成 (3a + 4b) ÷ 5 和 (4a − 3b) ÷ 5 两个数，第三个数不动。操作可以做任意多次。下列哪一组三个数，有可能在某个时候同时出现在黑板上？（不计顺序）",
+        "en": "The numbers 3, 4, 12 are written on a board. In each move, choose two of them, calling the first one chosen a and the second b, erase them and write the two numbers (3a + 4b) ÷ 5 and (4a − 3b) ÷ 5 instead; the third number stays. Any number of moves may be made. Which of the following triples could appear on the board at some moment (order does not matter)?",
+        "ja": "黒板に 3 つの数 3、4、12 が書いてあります。1 回の操作では、そのうち 2 つを選び、先に選んだ方を a、後に選んだ方を b として、その 2 つを消して (3a + 4b) ÷ 5 と (4a − 3b) ÷ 5 の 2 つの数を書きます。3 つ目の数はそのままです。操作は何回でも行えます。次のうち、ある時点で黒板に同時に現れる可能性がある 3 つの数の組はどれですか（順序は問いません）。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 (B)：0、5、12。",
+        "zh-Hans": "答案是 (B)：0、5、12。",
+        "en": "The answer is (B): 0, 5, 12.",
+        "ja": "答えは (B)：0、5、12 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "計算新寫上的兩個數的平方和：[(3a + 4b) ÷ 5]² + [(4a − 3b) ÷ 5]² = (9a² + 24ab + 16b² + 16a² − 24ab + 9b²) ÷ 25 = (25a² + 25b²) ÷ 25 = a² + b²，等於擦掉的兩個數的平方和。",
+          "所以每次操作後，黑板上三個數的平方和都不變，永遠等於一開始的 3² + 4² + 12² = 9 + 16 + 144 = 169。",
+          "五個選項的平方和：(A) 16 + 36 + 121 = 173；(B) 0 + 25 + 144 = 169；(C) 4 + 49 + 121 = 174；(D) 36 + 64 + 81 = 181；(E) 1 + 64 + 100 = 165。只有 (B) 是 169，其他四組都不可能出現。",
+          "(B) 確實做得到：選 a = 3、b = 4，得到 (9 + 16) ÷ 5 = 5 和 (12 − 12) ÷ 5 = 0，一次操作後黑板上就是 5、0、12。答案是 (B)。"
+        ],
+        "zh-Hans": [
+          "计算新写上的两个数的平方和：[(3a + 4b) ÷ 5]² + [(4a − 3b) ÷ 5]² = (9a² + 24ab + 16b² + 16a² − 24ab + 9b²) ÷ 25 = (25a² + 25b²) ÷ 25 = a² + b²，等于擦掉的两个数的平方和。",
+          "所以每次操作后，黑板上三个数的平方和都不变，永远等于一开始的 3² + 4² + 12² = 9 + 16 + 144 = 169。",
+          "五个选项的平方和：(A) 16 + 36 + 121 = 173；(B) 0 + 25 + 144 = 169；(C) 4 + 49 + 121 = 174；(D) 36 + 64 + 81 = 181；(E) 1 + 64 + 100 = 165。只有 (B) 是 169，其他四组都不可能出现。",
+          "(B) 确实做得到：选 a = 3、b = 4，得到 (9 + 16) ÷ 5 = 5 和 (12 − 12) ÷ 5 = 0，一次操作后黑板上就是 5、0、12。答案是 (B)。"
+        ],
+        "en": [
+          "Compute the sum of squares of the two new numbers: [(3a + 4b) ÷ 5]² + [(4a − 3b) ÷ 5]² = (9a² + 24ab + 16b² + 16a² − 24ab + 9b²) ÷ 25 = (25a² + 25b²) ÷ 25 = a² + b², which equals the sum of squares of the two erased numbers.",
+          "So after every move the sum of the squares of the three numbers on the board is unchanged; it always equals the initial value 3² + 4² + 12² = 9 + 16 + 144 = 169.",
+          "The sums of squares of the options: (A) 16 + 36 + 121 = 173; (B) 0 + 25 + 144 = 169; (C) 4 + 49 + 121 = 174; (D) 36 + 64 + 81 = 181; (E) 1 + 64 + 100 = 165. Only (B) gives 169, so the other four can never appear.",
+          "(B) really occurs: choosing a = 3, b = 4 gives (9 + 16) ÷ 5 = 5 and (12 − 12) ÷ 5 = 0, so after one move the board shows 5, 0, 12. The answer is (B)."
+        ],
+        "ja": [
+          "新しく書く 2 つの数の 2 乗の和を計算すると、[(3a + 4b) ÷ 5]² + [(4a − 3b) ÷ 5]² = (9a² + 24ab + 16b² + 16a² − 24ab + 9b²) ÷ 25 = (25a² + 25b²) ÷ 25 = a² + b² で、消した 2 つの数の 2 乗の和に等しくなります。",
+          "よって操作をしても黒板の 3 つの数の 2 乗の和は変わらず、いつも最初の 3² + 4² + 12² = 9 + 16 + 144 = 169 です。",
+          "各選択肢の 2 乗の和は、(A) 16 + 36 + 121 = 173、(B) 0 + 25 + 144 = 169、(C) 4 + 49 + 121 = 174、(D) 36 + 64 + 81 = 181、(E) 1 + 64 + 100 = 165 です。169 になるのは (B) だけなので、ほかの 4 つは決して現れません。",
+          "(B) は実際に現れます。a = 3、b = 4 を選ぶと (9 + 16) ÷ 5 = 5 と (12 − 12) ÷ 5 = 0 になり、1 回の操作で黒板は 5、0、12 になります。答えは (B) です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "multiple_choice",
+      "options": {
+        "A": {
+          "zh-Hant": "4、6、11",
+          "zh-Hans": "4、6、11",
+          "en": "4, 6, 11",
+          "ja": "4、6、11"
+        },
+        "B": {
+          "zh-Hant": "0、5、12",
+          "zh-Hans": "0、5、12",
+          "en": "0, 5, 12",
+          "ja": "0、5、12"
+        },
+        "C": {
+          "zh-Hant": "2、7、11",
+          "zh-Hans": "2、7、11",
+          "en": "2, 7, 11",
+          "ja": "2、7、11"
+        },
+        "D": {
+          "zh-Hant": "6、8、9",
+          "zh-Hans": "6、8、9",
+          "en": "6, 8, 9",
+          "ja": "6、8、9"
+        },
+        "E": {
+          "zh-Hant": "1、8、10",
+          "zh-Hans": "1、8、10",
+          "en": "1, 8, 10",
+          "ja": "1、8、10"
+        }
+      },
+      "correctAnswer": {
+        "type": "choice",
+        "value": "B"
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade8-foundation",
+        "notes": "換成 (3a + 4b)/5、(4a − 3b)/5 保持平方和，169 不變，只有 0、5、12 可達。掃過「黑板|擦掉」（23 題）；最接近 logic_grade11_foundation_043，差異：既有題不變量是「和減個數」；本題不變量是平方和（旋轉），還要構造出可達的一組。"
+      }
     }
   ]
 }

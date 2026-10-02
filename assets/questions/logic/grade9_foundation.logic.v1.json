@@ -5627,6 +5627,162 @@
         "reference": "logic-grade9-foundation",
         "notes": "1～9 分成三手和都是 15，含 1、2、3 的三元組逐一列出，只有兩種分法，再用最大牌條件定案。掃過 regex「三張|每人.{0,6}張」（全庫 31 題，並讀最接近者原文）；最接近 logic_grade9_foundation_028，差異：該題問 1～12 分成和相等的組最多幾組；本題是三人各拿三張、和都相等，再由手上的小牌與最大牌比較推出唯一分法。"
       }
+    },
+    {
+      "id": "logic_grade9_foundation_064",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "two_colouring_without_monochromatic_three_term_progression",
+      "tags": [
+        "c:sequence",
+        "c:logic_deduction",
+        "m:contradiction"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade9",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "把 1、2、3、⋯、n 這 n 個整數各塗上紅色或藍色。規定：不可以有三個同色的數成等差數列（例如 2、5、8 不可以都塗紅色，4、5、6 也不可以都塗藍色）。要讓這樣的塗法存在，n 最大可以是多少？",
+        "zh-Hans": "把 1、2、3、⋯、n 这 n 个整数各涂上红色或蓝色。规定：不可以有三个同色的数成等差数列（例如 2、5、8 不可以都涂红色，4、5、6 也不可以都涂蓝色）。要让这样的涂法存在，n 最大可以是多少？",
+        "en": "Each of the n integers 1, 2, 3, …, n is coloured red or blue. Rule: no three numbers of the same colour may form an arithmetic sequence (for example, 2, 5, 8 may not all be red, and 4, 5, 6 may not all be blue). What is the largest n for which such a colouring exists?",
+        "ja": "1、2、3、⋯、n の n 個の整数をそれぞれ赤か青でぬります。決まり：同じ色の 3 つの数が等差数列になってはいけません（たとえば 2、5、8 をすべて赤にしてはいけないし、4、5、6 をすべて青にしてもいけない）。このようなぬり方が存在する n は最大でいくつですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 8。",
+        "zh-Hans": "答案是 8。",
+        "en": "The answer is 8.",
+        "ja": "答えは 8 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "n = 8 做得到：1、2、5、6 塗紅，3、4、7、8 塗藍。紅色的四個數任取三個由小到大是 1、2、5（相鄰差 1、3），1、2、6（1、4），1、5、6（4、1），2、5、6（3、1），相鄰差都不相等，不成等差數列；藍色的四個數是紅色每個數加 2，相鄰差和紅色一樣，也不成等差數列。",
+          "接著證明 n = 9 做不到。假設 1～9 有合格的塗法，看 4 和 6 的顏色。",
+          "情形一：4、6 同色，設為紅色。因為 4、5、6 不能全紅，5 是藍；2、4、6 不能全紅，2 是藍；4、6、8 不能全紅，8 是藍。但 2、5、8 是公差 3 的等差數列而且全藍，矛盾。",
+          "情形二：4、6 不同色，不妨設 4 紅、6 藍（否則把兩種顏色的名稱對調）。若 5 是紅色：由 3、4、5 得 3 藍；由 3、6、9 得 9 紅；由 1、5、9 得 1 藍；由 1、2、3 得 2 紅；由 2、5、8 得 8 藍；由 6、7、8 得 7 紅；這時 5、7、9 全紅，矛盾。",
+          "若 5 是藍色：把每個數 k 換成 10 − k 的顏色再把紅藍對調，得到的新塗法仍然合格（三個數成等差數列，換成 10 − k 後仍成等差數列）。新塗法裡 4 拿的是原本 6 的顏色對調，是紅；6 是藍；5 是原本的藍對調，是紅。這正是上一段已證明不可能的情形，矛盾。",
+          "所以 1～9 不論怎麼塗都做不到，n 最大是 8。答案是 8。"
+        ],
+        "zh-Hans": [
+          "n = 8 做得到：1、2、5、6 涂红，3、4、7、8 涂蓝。红色的四个数任取三个从小到大是 1、2、5（相邻差 1、3），1、2、6（1、4），1、5、6（4、1），2、5、6（3、1），相邻差都不相等，不成等差数列；蓝色的四个数是红色每个数加 2，相邻差和红色一样，也不成等差数列。",
+          "接着证明 n = 9 做不到。假设 1～9 有合格的涂法，看 4 和 6 的颜色。",
+          "情形一：4、6 同色，设为红色。因为 4、5、6 不能全红，5 是蓝；2、4、6 不能全红，2 是蓝；4、6、8 不能全红，8 是蓝。但 2、5、8 是公差 3 的等差数列而且全蓝，矛盾。",
+          "情形二：4、6 不同色，不妨设 4 红、6 蓝（否则把两种颜色的名称对调）。若 5 是红色：由 3、4、5 得 3 蓝；由 3、6、9 得 9 红；由 1、5、9 得 1 蓝；由 1、2、3 得 2 红；由 2、5、8 得 8 蓝；由 6、7、8 得 7 红；这时 5、7、9 全红，矛盾。",
+          "若 5 是蓝色：把每个数 k 换成 10 − k 的颜色再把红蓝对调，得到的新涂法仍然合格（三个数成等差数列，换成 10 − k 后仍成等差数列）。新涂法里 4 拿的是原本 6 的颜色对调，是红；6 是蓝；5 是原本的蓝对调，是红。这正是上一段已证明不可能的情形，矛盾。",
+          "所以 1～9 不论怎么涂都做不到，n 最大是 8。答案是 8。"
+        ],
+        "en": [
+          "n = 8 works: colour 1, 2, 5, 6 red and 3, 4, 7, 8 blue. Any three red numbers in increasing order are 1, 2, 5 (gaps 1, 3), 1, 2, 6 (1, 4), 1, 5, 6 (4, 1) or 2, 5, 6 (3, 1); the gaps are never equal, so there is no arithmetic sequence. The blue numbers are the red ones plus 2, with the same gaps, so they contain none either.",
+          "Now show n = 9 is impossible. Suppose 1 to 9 has a valid colouring and look at the colours of 4 and 6.",
+          "Case 1: 4 and 6 have the same colour, say red. Since 4, 5, 6 cannot all be red, 5 is blue; since 2, 4, 6 cannot, 2 is blue; since 4, 6, 8 cannot, 8 is blue. But 2, 5, 8 is an arithmetic sequence with difference 3 and all blue — a contradiction.",
+          "Case 2: 4 and 6 have different colours; say 4 red and 6 blue (otherwise swap the names of the colours). If 5 is red: from 3, 4, 5, 3 is blue; from 3, 6, 9, 9 is red; from 1, 5, 9, 1 is blue; from 1, 2, 3, 2 is red; from 2, 5, 8, 8 is blue; from 6, 7, 8, 7 is red; now 5, 7, 9 are all red — a contradiction.",
+          "If 5 is blue: give each number k the colour of 10 − k and then swap red and blue; this new colouring is still valid (an arithmetic sequence stays one after replacing each k by 10 − k). In the new colouring 4 gets the swapped colour of the old 6, i.e. red; 6 is blue; 5 gets the swapped old blue, i.e. red. This is exactly the situation just shown to be impossible — a contradiction.",
+          "So 1 to 9 can never be coloured, and the largest n is 8. The answer is 8."
+        ],
+        "ja": [
+          "n = 8 は可能です。1、2、5、6 を赤、3、4、7、8 を青にします。赤の 4 つから 3 つを小さい順にとると 1、2、5（差 1、3）、1、2、6（1、4）、1、5、6（4、1）、2、5、6（3、1）で、差はどれも等しくないので等差数列になりません。青の 4 つは赤の各数に 2 を足したもので差も同じなので、やはり等差数列はありません。",
+          "次に n = 9 は不可能であることを示します。1～9 に決まりに合うぬり方があるとして、4 と 6 の色を見ます。",
+          "場合 1：4 と 6 が同じ色、たとえば赤のとき。4、5、6 がすべて赤にはなれないので 5 は青、2、4、6 より 2 は青、4、6、8 より 8 は青です。しかし 2、5、8 は公差 3 の等差数列ですべて青となり、矛盾です。",
+          "場合 2：4 と 6 が異なる色で、4 が赤、6 が青とします（逆なら 2 色の名前を入れかえる）。5 が赤なら、3、4、5 より 3 は青、3、6、9 より 9 は赤、1、5、9 より 1 は青、1、2、3 より 2 は赤、2、5、8 より 8 は青、6、7、8 より 7 は赤となり、5、7、9 がすべて赤で矛盾です。",
+          "5 が青なら、各数 k に 10 − k の色を与えてから赤と青を入れかえると、新しいぬり方も決まりに合います（等差数列は k を 10 − k に変えても等差数列）。新しいぬり方では 4 はもとの 6 の色を入れかえた赤、6 は青、5 はもとの青を入れかえた赤になり、すでに不可能と示した場合になって矛盾です。",
+          "よって 1～9 はどうぬっても決まりに合わず、n の最大は 8 です。答えは 8 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "8"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade9-foundation",
+        "notes": "1～n 二染色避免同色三項等差，最大 n = 8（W(2,3) = 9），依 4、6、5 的顏色分案。掃過「等差」（23 題）；最接近 logic_grade12_foundation_043，差異：既有題是 3×n 方格的四角同色長方形；本題是一維等差數列的 van der Waerden 型問題。"
+      }
+    },
+    {
+      "id": "logic_grade9_foundation_065",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "mediant_insertion_largest_denominator",
+      "tags": [
+        "c:fraction",
+        "c:recurrence",
+        "m:estimate_bound"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade9",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "黑板上先寫著兩個分數 0/1 和 1/1。每一輪，都在每兩個相鄰的分數 a/b 與 c/d 之間，插入一個新的分數 (a + c)/(b + d)（分子加分子、分母加分母）。例如第 1 輪後是 0/1、1/2、1/1，第 2 輪後是 0/1、1/3、1/2、2/3、1/1。做完第 6 輪後，黑板上所有分數的分母中，最大的是多少？",
+        "zh-Hans": "黑板上先写着两个分数 0/1 和 1/1。每一轮，都在每两个相邻的分数 a/b 与 c/d 之间，插入一个新的分数 (a + c)/(b + d)（分子加分子、分母加分母）。例如第 1 轮后是 0/1、1/2、1/1，第 2 轮后是 0/1、1/3、1/2、2/3、1/1。做完第 6 轮后，黑板上所有分数的分母中，最大的是多少？",
+        "en": "The board starts with the two fractions 0/1 and 1/1. In each round, between every two neighbouring fractions a/b and c/d, a new fraction (a + c)/(b + d) is inserted (numerators added, denominators added). For example, after round 1 the board shows 0/1, 1/2, 1/1, and after round 2 it shows 0/1, 1/3, 1/2, 2/3, 1/1. After round 6, what is the largest denominator among all the fractions on the board?",
+        "ja": "黒板にはじめ 2 つの分数 0/1 と 1/1 が書いてあります。毎回、となり合うどの 2 つの分数 a/b と c/d の間にも、新しい分数 (a + c)/(b + d)（分子どうし、分母どうしを足したもの）を書き入れます。たとえば 1 回目のあとは 0/1、1/2、1/1、2 回目のあとは 0/1、1/3、1/2、2/3、1/1 です。6 回目を終えたとき、黒板の分数の分母のうち最大のものはいくつですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 21。",
+        "zh-Hans": "答案是 21。",
+        "en": "The answer is 21.",
+        "ja": "答えは 21 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "設做完第 k 輪後，黑板上最大的分母是 Mₖ。一開始 M₀ = 1，第 1 輪後 M₁ = 2。",
+          "做完第 k 輪（k ≥ 1）後，每一對相鄰分數中，恰好有一個是第 k 輪才插進去的：因為第 k 輪在原本每一對相鄰分數中間都插了一個新的。另一個則是更早就在黑板上的。",
+          "第 k + 1 輪插入的新分數，分母等於一對相鄰分數的分母相加：其中第 k 輪新插的那個，分母不超過 Mₖ；較早的那個，分母不超過 Mₖ₋₁。所以 Mₖ₊₁ ≤ Mₖ + Mₖ₋₁。由此 M₂ ≤ 3、M₃ ≤ 5、M₄ ≤ 8、M₅ ≤ 13、M₆ ≤ 21。",
+          "而 21 真的會出現：第 1 輪有 1/2，第 2 輪在 1/2 與 1/1 之間插入 2/3，第 3 輪在 1/2 與 2/3 之間插入 3/5，第 4 輪在 3/5 與 2/3 之間插入 5/8，第 5 輪在 3/5 與 5/8 之間插入 8/13，第 6 輪在 8/13 與 5/8 之間插入 13/21，每次用到的兩個分數在當時都相鄰。",
+          "所以做完第 6 輪後，最大的分母是 21。答案是 21。"
+        ],
+        "zh-Hans": [
+          "设做完第 k 轮后，黑板上最大的分母是 Mₖ。一开始 M₀ = 1，第 1 轮后 M₁ = 2。",
+          "做完第 k 轮（k ≥ 1）后，每一对相邻分数中，恰好有一个是第 k 轮才插进去的：因为第 k 轮在原本每一对相邻分数中间都插了一个新的。另一个则是更早就在黑板上的。",
+          "第 k + 1 轮插入的新分数，分母等于一对相邻分数的分母相加：其中第 k 轮新插的那个，分母不超过 Mₖ；较早的那个，分母不超过 Mₖ₋₁。所以 Mₖ₊₁ ≤ Mₖ + Mₖ₋₁。由此 M₂ ≤ 3、M₃ ≤ 5、M₄ ≤ 8、M₅ ≤ 13、M₆ ≤ 21。",
+          "而 21 真的会出现：第 1 轮有 1/2，第 2 轮在 1/2 与 1/1 之间插入 2/3，第 3 轮在 1/2 与 2/3 之间插入 3/5，第 4 轮在 3/5 与 2/3 之间插入 5/8，第 5 轮在 3/5 与 5/8 之间插入 8/13，第 6 轮在 8/13 与 5/8 之间插入 13/21，每次用到的两个分数在当时都相邻。",
+          "所以做完第 6 轮后，最大的分母是 21。答案是 21。"
+        ],
+        "en": [
+          "Let Mₖ be the largest denominator on the board after round k. At the start M₀ = 1, and after round 1, M₁ = 2.",
+          "After round k (k ≥ 1), in every pair of neighbouring fractions exactly one was inserted in round k, because round k put a new fraction between every pair of neighbours; the other one was already on the board earlier.",
+          "A fraction inserted in round k + 1 has denominator equal to the sum of the denominators of a neighbouring pair: the one inserted in round k has denominator at most Mₖ, and the older one at most Mₖ₋₁. So Mₖ₊₁ ≤ Mₖ + Mₖ₋₁, giving M₂ ≤ 3, M₃ ≤ 5, M₄ ≤ 8, M₅ ≤ 13, M₆ ≤ 21.",
+          "21 really appears: round 1 gives 1/2; round 2 inserts 2/3 between 1/2 and 1/1; round 3 inserts 3/5 between 1/2 and 2/3; round 4 inserts 5/8 between 3/5 and 2/3; round 5 inserts 8/13 between 3/5 and 5/8; round 6 inserts 13/21 between 8/13 and 5/8 — each time the two fractions used are neighbours at that moment.",
+          "So after round 6 the largest denominator is 21. The answer is 21."
+        ],
+        "ja": [
+          "k 回目を終えたときの黒板の分母の最大値を Mₖ とします。はじめ M₀ = 1、1 回目のあと M₁ = 2 です。",
+          "k 回目（k ≥ 1）を終えたとき、となり合うどの 2 つの分数も、ちょうど一方が k 回目に書き入れられたものです。k 回目に、それまでのとなり合うすべての組の間に新しい分数を入れたからです。もう一方はそれより前からある分数です。",
+          "k + 1 回目に入れる分数の分母は、となり合う 2 つの分母の和です。k 回目に入れた方の分母は Mₖ 以下、古い方の分母は Mₖ₋₁ 以下なので、Mₖ₊₁ ≤ Mₖ + Mₖ₋₁ です。よって M₂ ≤ 3、M₃ ≤ 5、M₄ ≤ 8、M₅ ≤ 13、M₆ ≤ 21 です。",
+          "21 は実際に現れます。1 回目で 1/2、2 回目に 1/2 と 1/1 の間に 2/3、3 回目に 1/2 と 2/3 の間に 3/5、4 回目に 3/5 と 2/3 の間に 5/8、5 回目に 3/5 と 5/8 の間に 8/13、6 回目に 8/13 と 5/8 の間に 13/21 が入り、使う 2 つの分数はその時点でいつもとなり合っています。",
+          "よって 6 回目のあとの最大の分母は 21 です。答えは 21 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "21"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade9-foundation",
+        "notes": "反覆插入中間分數：每對相鄰數恰一新一舊，Mₖ₊₁ ≤ Mₖ + Mₖ₋₁，並構造 13/21。掃過「插入|分數」（103 題）；最接近 number_theory_grade7_foundation_062，差異：既有題找兩分數間分母最小的分數；本題是反覆插中間分數的最大分母上界與構造。"
+      }
     }
   ]
 }

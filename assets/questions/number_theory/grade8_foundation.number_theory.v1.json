@@ -5705,6 +5705,342 @@
         "reference": "number_theory-grade8-foundation",
         "notes": "去掉千位 a 剩 x，9x = 1000a + x 得 x = 125a，a ≤ 7。掃過「(去掉|拿掉|刪掉|擦掉).*最左|最左邊.*數字.*(去掉|拿掉|刪)」（0 題）；最接近 number_theory_grade8_foundation_041（三位數等於數字和的 17 倍），差異：本題是刪首位後的位值方程。"
       }
+    },
+    {
+      "id": "number_theory_grade8_foundation_070",
+      "reviewStatus": "ok",
+      "topic": "number_theory",
+      "subtopic": "anomalous_cancellation_two_digit_fractions",
+      "tags": [
+        "c:fraction",
+        "c:place_value",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade8",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "小安算 16/64 時，把分子、分母都有的數字 6「劃掉」，得到 1/4，結果竟然是對的（16/64 確實等於 1/4）。現在考慮這樣的分數：分子是兩位數，十位、個位依序是 a、b；分母也是兩位數，十位、個位依序是 b、c（a、b、c 都是 1～9 的數字）；分數小於 1；而且劃掉兩個 b 之後得到的 a/c 恰好等於原來的分數。這樣的分數一共有幾個（16/64 也算在內）？",
+        "zh-Hans": "小安算 16/64 时，把分子、分母都有的数字 6“划掉”，得到 1/4，结果竟然是对的（16/64 确实等于 1/4）。现在考虑这样的分数：分子是两位数，十位、个位依次是 a、b；分母也是两位数，十位、个位依次是 b、c（a、b、c 都是 1～9 的数字）；分数小于 1；而且划掉两个 b 之后得到的 a/c 恰好等于原来的分数。这样的分数一共有几个（16/64 也算在内）？",
+        "en": "When An computed 16/64, he \"cancelled\" the digit 6 that appears in both the numerator and the denominator and got 1/4 — and surprisingly this is correct (16/64 really equals 1/4). Now consider fractions like this: the numerator is a two-digit number with tens digit a and units digit b; the denominator is a two-digit number with tens digit b and units digit c (a, b, c are digits from 1 to 9); the fraction is less than 1; and cancelling the two b's gives a/c, which equals the original fraction. How many such fractions are there (16/64 included)?",
+        "ja": "アンさんは 16/64 を計算するとき、分子と分母の両方にある数字 6 を「消して」1/4 としましたが、なんと正しい結果でした（16/64 は本当に 1/4 に等しい）。そこで次のような分数を考えます。分子は十の位が a、一の位が b の 2 けたの数、分母は十の位が b、一の位が c の 2 けたの数（a、b、c は 1～9 の数字）で、分数は 1 より小さく、2 つの b を消してできる a/c がもとの分数にちょうど等しいものです。このような分数は全部で何個ありますか（16/64 も含めます）。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 4 個。",
+        "zh-Hans": "答案是 4 个。",
+        "en": "The answer is 4.",
+        "ja": "答えは 4 個です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "條件是 (10a + b) ÷ (10b + c) = a ÷ c，交叉相乘得 c(10a + b) = a(10b + c)，也就是 10ac + bc = 10ab + ac，整理成 9ac = b(10a − c)。",
+          "分數小於 1，而它等於 a/c，所以 a < c，特別是 a ≠ c。",
+          "若 b 不是 3 的倍數：b 和 9 沒有公因數，而 b(10a − c) = 9ac 是 9 的倍數，所以 10a − c = 9a + (a − c) 是 9 的倍數，也就是 a − c 是 9 的倍數。a、c 都在 1～9，相差最多 8，只能 a = c，與 a < c 矛盾。所以 b 只能是 3、6、9。",
+          "b = 9：9ac = 9(10a − c)，即 c(a + 1) = 10a。a = 1～9 時 10a ÷ (a + 1) 依序是 5、20/3、30/4、8、50/6、60/7、70/8、80/9、9，整數只有 a = 1（c = 5）、a = 4（c = 8）、a = 9（c = 9，但 a = c 不行）。得到 19/95、49/98。",
+          "b = 3：9ac = 3(10a − c)，即 c(3a + 1) = 10a。a = 1～9 時 10a ÷ (3a + 1) 依序是 10/4、20/7、3、40/13、50/16、60/19、70/22、80/25、90/28，整數只有 a = 3（c = 3，a = c 不行），沒有符合的分數。",
+          "b = 6：9ac = 6(10a − c)，即 c(3a + 2) = 20a。a = 1～9 時 20a ÷ (3a + 2) 依序是 4、5、60/11、80/14、100/17、6、140/23、160/26、180/29，整數有 a = 1（c = 4）、a = 2（c = 5）、a = 6（c = 6，a = c 不行）。得到 16/64、26/65。",
+          "符合的分數是 16/64、26/65、19/95、49/98，共 4 個。答案是 4 個。"
+        ],
+        "zh-Hans": [
+          "条件是 (10a + b) ÷ (10b + c) = a ÷ c，交叉相乘得 c(10a + b) = a(10b + c)，也就是 10ac + bc = 10ab + ac，整理成 9ac = b(10a − c)。",
+          "分数小于 1，而它等于 a/c，所以 a < c，特别是 a ≠ c。",
+          "若 b 不是 3 的倍数：b 和 9 没有公因数，而 b(10a − c) = 9ac 是 9 的倍数，所以 10a − c = 9a + (a − c) 是 9 的倍数，也就是 a − c 是 9 的倍数。a、c 都在 1～9，相差最多 8，只能 a = c，与 a < c 矛盾。所以 b 只能是 3、6、9。",
+          "b = 9：9ac = 9(10a − c)，即 c(a + 1) = 10a。a = 1～9 时 10a ÷ (a + 1) 依次是 5、20/3、30/4、8、50/6、60/7、70/8、80/9、9，整数只有 a = 1（c = 5）、a = 4（c = 8）、a = 9（c = 9，但 a = c 不行）。得到 19/95、49/98。",
+          "b = 3：9ac = 3(10a − c)，即 c(3a + 1) = 10a。a = 1～9 时 10a ÷ (3a + 1) 依次是 10/4、20/7、3、40/13、50/16、60/19、70/22、80/25、90/28，整数只有 a = 3（c = 3，a = c 不行），没有符合的分数。",
+          "b = 6：9ac = 6(10a − c)，即 c(3a + 2) = 20a。a = 1～9 时 20a ÷ (3a + 2) 依次是 4、5、60/11、80/14、100/17、6、140/23、160/26、180/29，整数有 a = 1（c = 4）、a = 2（c = 5）、a = 6（c = 6，a = c 不行）。得到 16/64、26/65。",
+          "符合的分数是 16/64、26/65、19/95、49/98，共 4 个。答案是 4 个。"
+        ],
+        "en": [
+          "The condition is (10a + b) ÷ (10b + c) = a ÷ c. Cross-multiplying gives c(10a + b) = a(10b + c), i.e. 10ac + bc = 10ab + ac, which rearranges to 9ac = b(10a − c).",
+          "The fraction is less than 1 and equals a/c, so a < c; in particular a ≠ c.",
+          "If b is not a multiple of 3: b has no common factor with 9, and b(10a − c) = 9ac is a multiple of 9, so 10a − c = 9a + (a − c) is a multiple of 9, i.e. a − c is a multiple of 9. Since a and c are 1 to 9 and differ by at most 8, a = c, contradicting a < c. So b can only be 3, 6 or 9.",
+          "b = 9: 9ac = 9(10a − c), i.e. c(a + 1) = 10a. For a = 1 to 9, 10a ÷ (a + 1) is 5, 20/3, 30/4, 8, 50/6, 60/7, 70/8, 80/9, 9; it is an integer only for a = 1 (c = 5), a = 4 (c = 8) and a = 9 (c = 9, but a = c is not allowed). This gives 19/95 and 49/98.",
+          "b = 3: 9ac = 3(10a − c), i.e. c(3a + 1) = 10a. For a = 1 to 9, 10a ÷ (3a + 1) is 10/4, 20/7, 3, 40/13, 50/16, 60/19, 70/22, 80/25, 90/28; it is an integer only for a = 3 (c = 3, a = c not allowed), so there is no fraction here.",
+          "b = 6: 9ac = 6(10a − c), i.e. c(3a + 2) = 20a. For a = 1 to 9, 20a ÷ (3a + 2) is 4, 5, 60/11, 80/14, 100/17, 6, 140/23, 160/26, 180/29; it is an integer for a = 1 (c = 4), a = 2 (c = 5) and a = 6 (c = 6, not allowed). This gives 16/64 and 26/65.",
+          "The fractions are 16/64, 26/65, 19/95 and 49/98, four in all. The answer is 4."
+        ],
+        "ja": [
+          "条件は (10a + b) ÷ (10b + c) = a ÷ c です。たすきがけをすると c(10a + b) = a(10b + c)、つまり 10ac + bc = 10ab + ac で、整理すると 9ac = b(10a − c) です。",
+          "分数は 1 より小さく a/c に等しいので a < c、特に a ≠ c です。",
+          "b が 3 の倍数でないとき：b と 9 に共通の約数はなく、b(10a − c) = 9ac は 9 の倍数なので、10a − c = 9a + (a − c) は 9 の倍数、つまり a − c は 9 の倍数です。a、c は 1～9 で差は 8 以下なので a = c となり、a < c に反します。よって b は 3、6、9 のどれかです。",
+          "b = 9 のとき：9ac = 9(10a − c)、すなわち c(a + 1) = 10a です。a = 1～9 で 10a ÷ (a + 1) は順に 5、20/3、30/4、8、50/6、60/7、70/8、80/9、9 で、整数になるのは a = 1（c = 5）、a = 4（c = 8）、a = 9（c = 9 だが a = c は不可）だけです。19/95、49/98 が得られます。",
+          "b = 3 のとき：9ac = 3(10a − c)、すなわち c(3a + 1) = 10a です。a = 1～9 で 10a ÷ (3a + 1) は順に 10/4、20/7、3、40/13、50/16、60/19、70/22、80/25、90/28 で、整数は a = 3（c = 3 で a = c は不可）だけなので、条件を満たす分数はありません。",
+          "b = 6 のとき：9ac = 6(10a − c)、すなわち c(3a + 2) = 20a です。a = 1～9 で 20a ÷ (3a + 2) は順に 4、5、60/11、80/14、100/17、6、140/23、160/26、180/29 で、整数は a = 1（c = 4）、a = 2（c = 5）、a = 6（c = 6 で不可）です。16/64、26/65 が得られます。",
+          "条件を満たす分数は 16/64、26/65、19/95、49/98 の 4 個です。答えは 4 個です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "4"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "number_theory-grade8-foundation",
+        "notes": "異常約分 ab/bc = a/c：9ac = b(10a − c)，b 必為 3 的倍數，分 b = 3、6、9 討論。掃過「劃掉|約分|消去」（8 題）；最接近 arithmetic_grade4_foundation_175，差異：既有題是劃掉末尾 0 算錯餘數；本題是「錯誤約分恰好正確」的兩位數分數計數。"
+      }
+    },
+    {
+      "id": "number_theory_grade8_foundation_071",
+      "reviewStatus": "ok",
+      "topic": "number_theory",
+      "subtopic": "not_sum_of_three_squares_mod_eight",
+      "tags": [
+        "c:modular",
+        "c:exponent",
+        "m:contradiction"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade8",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "有些正整數可以寫成三個完全平方數的和（平方數可以是 0，也可以重複，例如 6 = 1² + 1² + 2²、9 = 3² + 0² + 0²）。下列五個數之中，哪一個「不能」寫成三個完全平方數的和？",
+        "zh-Hans": "有些正整数可以写成三个完全平方数的和（平方数可以是 0，也可以重复，例如 6 = 1² + 1² + 2²、9 = 3² + 0² + 0²）。下列五个数之中，哪一个“不能”写成三个完全平方数的和？",
+        "en": "Some positive integers can be written as the sum of three perfect squares (a square may be 0 and squares may repeat; for example 6 = 1² + 1² + 2² and 9 = 3² + 0² + 0²). Which of the following five numbers can NOT be written as the sum of three perfect squares?",
+        "ja": "正の整数の中には、3 つの平方数の和で表せるものがあります（平方数は 0 でもよく、同じものをくり返してもよい。たとえば 6 = 1² + 1² + 2²、9 = 3² + 0² + 0²）。次の 5 つの数のうち、3 つの平方数の和で「表せない」ものはどれですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 (C)：2023。",
+        "zh-Hans": "答案是 (C)：2023。",
+        "en": "The answer is (C): 2023.",
+        "ja": "答えは (C)：2023 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "先看平方數除以 8 的餘數。偶數 2k 的平方是 4k²：k 是偶數時除以 8 餘 0，k 是奇數時餘 4。奇數 2k + 1 的平方是 4k(k + 1) + 1，k(k + 1) 是兩個連續整數的積，一定是偶數，所以 4k(k + 1) 是 8 的倍數，平方除以 8 餘 1。所以平方數除以 8 只會餘 0、1 或 4。",
+          "三個平方數相加，除以 8 的餘數就是從 0、1、4 中取三個（可重複）相加再除以 8：0、1、2、3、4、5、6、8、9、12，除以 8 的餘數分別是 0、1、2、3、4、5、6、0、1、4，永遠不會是 7。",
+          "2023 = 8 × 252 + 7，除以 8 餘 7，所以 2023 不能寫成三個平方數的和。",
+          "其他四個都寫得出來：2021 = 44² + 9² + 2²（1936 + 81 + 4），2022 = 43² + 13² + 2²（1849 + 169 + 4），2024 = 42² + 16² + 2²（1764 + 256 + 4），2025 = 45² + 0² + 0²。答案是 (C)。"
+        ],
+        "zh-Hans": [
+          "先看平方数除以 8 的余数。偶数 2k 的平方是 4k²：k 是偶数时除以 8 余 0，k 是奇数时余 4。奇数 2k + 1 的平方是 4k(k + 1) + 1，k(k + 1) 是两个连续整数的积，一定是偶数，所以 4k(k + 1) 是 8 的倍数，平方除以 8 余 1。所以平方数除以 8 只会余 0、1 或 4。",
+          "三个平方数相加，除以 8 的余数就是从 0、1、4 中取三个（可重复）相加再除以 8：0、1、2、3、4、5、6、8、9、12，除以 8 的余数分别是 0、1、2、3、4、5、6、0、1、4，永远不会是 7。",
+          "2023 = 8 × 252 + 7，除以 8 余 7，所以 2023 不能写成三个平方数的和。",
+          "其他四个都写得出来：2021 = 44² + 9² + 2²（1936 + 81 + 4），2022 = 43² + 13² + 2²（1849 + 169 + 4），2024 = 42² + 16² + 2²（1764 + 256 + 4），2025 = 45² + 0² + 0²。答案是 (C)。"
+        ],
+        "en": [
+          "First look at squares modulo 8. The square of an even number 2k is 4k², which leaves remainder 0 when k is even and 4 when k is odd. The square of an odd number 2k + 1 is 4k(k + 1) + 1; k(k + 1) is a product of two consecutive integers, hence even, so 4k(k + 1) is a multiple of 8 and the square leaves remainder 1. So a square leaves remainder 0, 1 or 4 when divided by 8.",
+          "For a sum of three squares, the remainder mod 8 comes from adding three of 0, 1, 4 (repetition allowed): 0, 1, 2, 3, 4, 5, 6, 8, 9, 12, whose remainders mod 8 are 0, 1, 2, 3, 4, 5, 6, 0, 1, 4 — never 7.",
+          "2023 = 8 × 252 + 7 leaves remainder 7 when divided by 8, so 2023 is not a sum of three squares.",
+          "The other four are: 2021 = 44² + 9² + 2² (1936 + 81 + 4), 2022 = 43² + 13² + 2² (1849 + 169 + 4), 2024 = 42² + 16² + 2² (1764 + 256 + 4), 2025 = 45² + 0² + 0². The answer is (C)."
+        ],
+        "ja": [
+          "まず平方数を 8 で割った余りを調べます。偶数 2k の 2 乗は 4k² で、k が偶数なら余り 0、k が奇数なら余り 4 です。奇数 2k + 1 の 2 乗は 4k(k + 1) + 1 で、k(k + 1) は連続する 2 つの整数の積なので偶数、よって 4k(k + 1) は 8 の倍数で、2 乗の余りは 1 です。つまり平方数を 8 で割った余りは 0、1、4 のどれかです。",
+          "3 つの平方数の和を 8 で割った余りは、0、1、4 から 3 つ（重複可）を足して 8 で割った余りで、和は 0、1、2、3、4、5、6、8、9、12、その余りは 0、1、2、3、4、5、6、0、1、4 です。7 になることはありません。",
+          "2023 = 8 × 252 + 7 は 8 で割ると 7 余るので、3 つの平方数の和では表せません。",
+          "ほかの 4 つは表せます。2021 = 44² + 9² + 2²（1936 + 81 + 4）、2022 = 43² + 13² + 2²（1849 + 169 + 4）、2024 = 42² + 16² + 2²（1764 + 256 + 4）、2025 = 45² + 0² + 0² です。答えは (C) です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "multiple_choice",
+      "options": {
+        "A": {
+          "zh-Hant": "2021",
+          "zh-Hans": "2021",
+          "en": "2021",
+          "ja": "2021"
+        },
+        "B": {
+          "zh-Hant": "2022",
+          "zh-Hans": "2022",
+          "en": "2022",
+          "ja": "2022"
+        },
+        "C": {
+          "zh-Hant": "2023",
+          "zh-Hans": "2023",
+          "en": "2023",
+          "ja": "2023"
+        },
+        "D": {
+          "zh-Hant": "2024",
+          "zh-Hans": "2024",
+          "en": "2024",
+          "ja": "2024"
+        },
+        "E": {
+          "zh-Hant": "2025",
+          "zh-Hans": "2025",
+          "en": "2025",
+          "ja": "2025"
+        }
+      },
+      "correctAnswer": {
+        "type": "choice",
+        "value": "C"
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "number_theory-grade8-foundation",
+        "notes": "平方數除以 8 只餘 0、1、4，三個相加不會餘 7，2023 ≡ 7。掃過「平方數.*和|寫成.*平方」（16 題）；最接近 number_theory_grade11_foundation_025，差異：既有題是兩個平方數之和的最小反例；本題是三個平方數，用 mod 8 判斷。"
+      }
+    },
+    {
+      "id": "number_theory_grade8_foundation_072",
+      "reviewStatus": "ok",
+      "topic": "number_theory",
+      "subtopic": "three_squares_in_arithmetic_progression_difference_120",
+      "tags": [
+        "c:factor_multiple",
+        "c:sequence",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade8",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "三個完全平方數 a²、b²、c²（a、b、c 是整數，0 ≤ a < b < c）由小到大成等差數列，公差是 120，也就是 b² − a² = 120、c² − b² = 120。求 b²。",
+        "zh-Hans": "三个完全平方数 a²、b²、c²（a、b、c 是整数，0 ≤ a < b < c）从小到大成等差数列，公差是 120，也就是 b² − a² = 120、c² − b² = 120。求 b²。",
+        "en": "Three perfect squares a², b², c² (a, b, c integers with 0 ≤ a < b < c) form an arithmetic sequence in increasing order with common difference 120, that is, b² − a² = 120 and c² − b² = 120. Find b².",
+        "ja": "3 つの平方数 a²、b²、c²（a、b、c は整数で 0 ≤ a < b < c）が小さい順に等差数列になっていて、公差は 120 です。つまり b² − a² = 120、c² − b² = 120 です。b² を求めなさい。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 169。",
+        "zh-Hans": "答案是 169。",
+        "en": "The answer is 169.",
+        "ja": "答えは 169 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "a = 0 時 b² = 120 不是平方數，所以 a ≥ 1。b² − a² = (b − a)(b + a) = 120，而且 0 < b − a < b + a。",
+          "b − a 和 b + a 相差 2a，是偶數，所以兩者奇偶相同；乘積 120 是偶數，所以兩者都必須是偶數。",
+          "把 120 寫成兩個偶數相乘、小的在前：2 × 60、4 × 30、6 × 20、10 × 12。由 b = (兩數和) ÷ 2、a = (兩數差) ÷ 2，得到 (a, b) = (29, 31)、(13, 17)、(7, 13)、(1, 11)。",
+          "再檢查 c² = b² + 120 是不是平方數：31² + 120 = 1081，介於 32² = 1024 和 33² = 1089 之間，不是；17² + 120 = 409，介於 20² = 400 和 21² = 441 之間，不是；13² + 120 = 289 = 17²，是；11² + 120 = 241，介於 15² = 225 和 16² = 256 之間，不是。",
+          "唯一的一組是 49、169、289（7²、13²、17²），所以 b² = 169。答案是 169。"
+        ],
+        "zh-Hans": [
+          "a = 0 时 b² = 120 不是平方数，所以 a ≥ 1。b² − a² = (b − a)(b + a) = 120，而且 0 < b − a < b + a。",
+          "b − a 和 b + a 相差 2a，是偶数，所以两者奇偶相同；乘积 120 是偶数，所以两者都必须是偶数。",
+          "把 120 写成两个偶数相乘、小的在前：2 × 60、4 × 30、6 × 20、10 × 12。由 b = (两数和) ÷ 2、a = (两数差) ÷ 2，得到 (a, b) = (29, 31)、(13, 17)、(7, 13)、(1, 11)。",
+          "再检查 c² = b² + 120 是不是平方数：31² + 120 = 1081，介于 32² = 1024 和 33² = 1089 之间，不是；17² + 120 = 409，介于 20² = 400 和 21² = 441 之间，不是；13² + 120 = 289 = 17²，是；11² + 120 = 241，介于 15² = 225 和 16² = 256 之间，不是。",
+          "唯一的一组是 49、169、289（7²、13²、17²），所以 b² = 169。答案是 169。"
+        ],
+        "en": [
+          "If a = 0 then b² = 120, not a square, so a ≥ 1. b² − a² = (b − a)(b + a) = 120 with 0 < b − a < b + a.",
+          "b − a and b + a differ by 2a, an even number, so they have the same parity; their product 120 is even, so both must be even.",
+          "Write 120 as a product of two even numbers, smaller first: 2 × 60, 4 × 30, 6 × 20, 10 × 12. From b = (sum of the two) ÷ 2 and a = (difference) ÷ 2 we get (a, b) = (29, 31), (13, 17), (7, 13), (1, 11).",
+          "Now check whether c² = b² + 120 is a square: 31² + 120 = 1081, between 32² = 1024 and 33² = 1089, no; 17² + 120 = 409, between 20² = 400 and 21² = 441, no; 13² + 120 = 289 = 17², yes; 11² + 120 = 241, between 15² = 225 and 16² = 256, no.",
+          "The only triple is 49, 169, 289 (7², 13², 17²), so b² = 169. The answer is 169."
+        ],
+        "ja": [
+          "a = 0 なら b² = 120 で平方数ではないので、a ≥ 1 です。b² − a² = (b − a)(b + a) = 120 で、0 < b − a < b + a です。",
+          "b − a と b + a の差は 2a で偶数なので、2 つの偶奇は同じです。積 120 は偶数なので、どちらも偶数でなければなりません。",
+          "120 を 2 つの偶数の積で、小さい方を先に書くと 2 × 60、4 × 30、6 × 20、10 × 12 です。b =（2 数の和）÷ 2、a =（2 数の差）÷ 2 より、(a, b) = (29, 31)、(13, 17)、(7, 13)、(1, 11) です。",
+          "次に c² = b² + 120 が平方数か調べます。31² + 120 = 1081 は 32² = 1024 と 33² = 1089 の間で平方数でない。17² + 120 = 409 は 20² = 400 と 21² = 441 の間で平方数でない。13² + 120 = 289 = 17² で平方数。11² + 120 = 241 は 15² = 225 と 16² = 256 の間で平方数でない。",
+          "ただ一つの組は 49、169、289（7²、13²、17²）なので b² = 169 です。答えは 169 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "169"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "number_theory-grade8-foundation",
+        "notes": "三平方數等差、公差 120：b² − a² = 120 拆同奇偶因數對，再檢查 b² + 120。掃過「平方數|等差」（54 題）；最接近 number_theory_grade12_foundation_036，差異：既有題只數 a² − b² = 96 的組數；本題要三個平方數成等差，第二個差把四組篩到只剩 7²、13²、17²。"
+      }
+    },
+    {
+      "id": "number_theory_grade8_foundation_073",
+      "reviewStatus": "ok",
+      "topic": "number_theory",
+      "subtopic": "three_cyclic_repeating_decimals_sum_to_two",
+      "tags": [
+        "c:decimal",
+        "c:place_value",
+        "m:enumeration"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade8",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "a、b、c 都是 0～9 的數字（可以相同）。把三個循環小數 0.abcabcabc⋯、0.bcabcabca⋯、0.cabcabcab⋯ 相加（每個都是三個數字一組不斷重複），結果恰好等於 2。這樣的有序數組 (a, b, c) 一共有幾組？",
+        "zh-Hans": "a、b、c 都是 0～9 的数字（可以相同）。把三个循环小数 0.abcabcabc⋯、0.bcabcabca⋯、0.cabcabcab⋯ 相加（每个都是三个数字一组不断重复），结果恰好等于 2。这样的有序数组 (a, b, c) 一共有几组？",
+        "en": "a, b, c are digits from 0 to 9 (they may be equal). Add the three repeating decimals 0.abcabcabc…, 0.bcabcabca… and 0.cabcabcab… (each repeats its three digits forever); the result is exactly 2. How many ordered triples (a, b, c) are there?",
+        "ja": "a、b、c は 0～9 の数字です（同じでもかまいません）。3 つの循環小数 0.abcabcabc⋯、0.bcabcabca⋯、0.cabcabcab⋯（どれも 3 つの数字のまとまりが限りなくくり返される）を足すと、ちょうど 2 になりました。このような順序つきの組 (a, b, c) は全部で何組ありますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 55 組。",
+        "zh-Hans": "答案是 55 组。",
+        "en": "The answer is 55.",
+        "ja": "答えは 55 組です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "三位一組重複的循環小數 0.pqrpqr⋯ 等於 (100p + 10q + r) ÷ 999：設它是 t，則 1000t = pqr.pqrpqr⋯，相減得 999t = 100p + 10q + r。",
+          "三個小數的和 = [(100a + 10b + c) + (100b + 10c + a) + (100c + 10a + b)] ÷ 999 = 111(a + b + c) ÷ 999 = (a + b + c) ÷ 9。",
+          "和等於 2，就是 a + b + c = 18。所以只要數有幾組數字 (a, b, c)（各是 0～9）的和是 18。",
+          "固定 a，b + c = 18 − a。b、c 都不超過 9，所以 b + c 最多 18，a 可以是 0～9。當 b + c = s（9 ≤ s ≤ 18）時，b 可以是 s − 9～9，共 19 − s 種，c 隨之確定。s = 18 − a，所以有 19 − (18 − a) = a + 1 種。",
+          "合計 1 + 2 + 3 + ⋯ + 10 = 55 組（例如 a = b = c = 6 時，三個小數都是 0.666⋯ = 2/3，和是 2）。答案是 55 組。"
+        ],
+        "zh-Hans": [
+          "三位一组重复的循环小数 0.pqrpqr⋯ 等于 (100p + 10q + r) ÷ 999：设它是 t，则 1000t = pqr.pqrpqr⋯，相减得 999t = 100p + 10q + r。",
+          "三个小数的和 = [(100a + 10b + c) + (100b + 10c + a) + (100c + 10a + b)] ÷ 999 = 111(a + b + c) ÷ 999 = (a + b + c) ÷ 9。",
+          "和等于 2，就是 a + b + c = 18。所以只要数有几组数字 (a, b, c)（各是 0～9）的和是 18。",
+          "固定 a，b + c = 18 − a。b、c 都不超过 9，所以 b + c 最多 18，a 可以是 0～9。当 b + c = s（9 ≤ s ≤ 18）时，b 可以是 s − 9～9，共 19 − s 种，c 随之确定。s = 18 − a，所以有 19 − (18 − a) = a + 1 种。",
+          "合计 1 + 2 + 3 + ⋯ + 10 = 55 组（例如 a = b = c = 6 时，三个小数都是 0.666⋯ = 2/3，和是 2）。答案是 55 组。"
+        ],
+        "en": [
+          "A decimal repeating a block of three digits, 0.pqrpqr…, equals (100p + 10q + r) ÷ 999: if it is t, then 1000t = pqr.pqrpqr…, and subtracting gives 999t = 100p + 10q + r.",
+          "The sum of the three decimals is [(100a + 10b + c) + (100b + 10c + a) + (100c + 10a + b)] ÷ 999 = 111(a + b + c) ÷ 999 = (a + b + c) ÷ 9.",
+          "The sum equals 2 exactly when a + b + c = 18. So we count triples of digits (each 0 to 9) with sum 18.",
+          "Fix a; then b + c = 18 − a. Since b, c ≤ 9, b + c is at most 18, so a can be 0 to 9. When b + c = s (9 ≤ s ≤ 18), b can be s − 9 to 9, which is 19 − s choices, and c is then determined. With s = 18 − a this is 19 − (18 − a) = a + 1 choices.",
+          "In total 1 + 2 + 3 + ⋯ + 10 = 55 triples (for example a = b = c = 6 gives three copies of 0.666… = 2/3, summing to 2). The answer is 55."
+        ],
+        "ja": [
+          "3 けたずつくり返す循環小数 0.pqrpqr⋯ は (100p + 10q + r) ÷ 999 に等しくなります。それを t とすると 1000t = pqr.pqrpqr⋯ で、引くと 999t = 100p + 10q + r です。",
+          "3 つの小数の和は [(100a + 10b + c) + (100b + 10c + a) + (100c + 10a + b)] ÷ 999 = 111(a + b + c) ÷ 999 = (a + b + c) ÷ 9 です。",
+          "和が 2 になるのは a + b + c = 18 のときです。よって和が 18 になる数字の組 (a, b, c)（各 0～9）を数えればよいです。",
+          "a を固定すると b + c = 18 − a です。b、c は 9 以下なので b + c は 18 以下で、a は 0～9 です。b + c = s（9 ≤ s ≤ 18）のとき b は s − 9～9 の 19 − s 通りで、c は決まります。s = 18 − a なので 19 − (18 − a) = a + 1 通りです。",
+          "合計 1 + 2 + 3 + ⋯ + 10 = 55 組です（たとえば a = b = c = 6 なら 3 つとも 0.666⋯ = 2/3 で和は 2）。答えは 55 組です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "55"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "number_theory-grade8-foundation",
+        "notes": "三個輪換循環小數和 = (a + b + c)/9 = 2，數字和 18 的有序三數組 55 組。掃過「循環小數|⋯」（206 題）；最接近 number_theory_grade8_foundation_033，差異：既有題是把 0.3636⋯ 化成分數；本題三個輪換循環小數相加，再數數字和 18 的組數。"
+      }
     }
   ]
 }

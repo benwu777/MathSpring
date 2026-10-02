@@ -6822,6 +6822,158 @@
         "reference": "number_theory-grade7-foundation",
         "notes": "恰一件 = |A| + |B| − 2|A∩B|，交集是 lcm 12 的倍數（陷阱：不是 24）。掃過「恰好.{0,10}其中一個|只能被.{0,10}其中一」（0 題）、「的倍數.{0,20}的倍數」；最接近 number_theory_grade8_foundation_047（3 的倍數或平方數，聯集），本題是「恰一件」且兩數不互質。"
       }
+    },
+    {
+      "id": "number_theory_grade7_foundation_085",
+      "reviewStatus": "ok",
+      "topic": "number_theory",
+      "subtopic": "four_digit_number_equal_to_cube_of_digit_sum",
+      "tags": [
+        "c:modular",
+        "c:exponent",
+        "m:estimate_bound"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade7",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "有些四位數 N 恰好等於它自己的各位數字和 s 的立方，也就是 N = s × s × s。所有這樣的四位數加起來是多少？",
+        "zh-Hans": "有些四位数 N 恰好等于它自己的各位数字和 s 的立方，也就是 N = s × s × s。所有这样的四位数加起来是多少？",
+        "en": "Some four-digit numbers N are exactly the cube of their own digit sum s, that is, N = s × s × s. What is the sum of all such four-digit numbers?",
+        "ja": "ある 4 けたの数 N は、自分自身の各位の数字の和 s の 3 乗にちょうど等しくなっています。つまり N = s × s × s です。このような 4 けたの数をすべて足すといくつになりますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 10745。",
+        "zh-Hans": "答案是 10745。",
+        "en": "The answer is 10745.",
+        "ja": "答えは 10745 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "N = s³ 是四位數，所以 1000 ≤ s³ ≤ 9999。因為 10³ = 1000、21³ = 9261、22³ = 10648，所以 s 只能是 10～21。",
+          "10、100、1000 除以 9 都餘 1，所以一個數除以 9 的餘數和它的各位數字和除以 9 的餘數相同。N = s³ 的各位數字和是 s，所以 s³ 和 s 除以 9 的餘數相同，也就是 s³ − s = (s − 1) × s × (s + 1) 是 9 的倍數。",
+          "s − 1、s、s + 1 是三個連續整數，其中恰好只有一個是 3 的倍數，另外兩個不含因數 3。所以乘積要是 9 的倍數，那一個 3 的倍數本身就必須是 9 的倍數。在 s = 10～21 之中，s − 1、s、s + 1 裡有 9 的倍數的只有 s = 10（含 9）、s = 17（含 18）、s = 18、s = 19（含 18）。",
+          "逐一檢查：10³ = 1000，數字和是 1，不是 10；17³ = 4913，4 + 9 + 1 + 3 = 17，符合；18³ = 5832，5 + 8 + 3 + 2 = 18，符合；19³ = 6859，6 + 8 + 5 + 9 = 28，不是 19。",
+          "符合的四位數只有 4913 和 5832，和是 4913 + 5832 = 10745。答案是 10745。"
+        ],
+        "zh-Hans": [
+          "N = s³ 是四位数，所以 1000 ≤ s³ ≤ 9999。因为 10³ = 1000、21³ = 9261、22³ = 10648，所以 s 只能是 10～21。",
+          "10、100、1000 除以 9 都余 1，所以一个数除以 9 的余数和它的各位数字和除以 9 的余数相同。N = s³ 的各位数字和是 s，所以 s³ 和 s 除以 9 的余数相同，也就是 s³ − s = (s − 1) × s × (s + 1) 是 9 的倍数。",
+          "s − 1、s、s + 1 是三个连续整数，其中恰好只有一个是 3 的倍数，另外两个不含因数 3。所以乘积要是 9 的倍数，那一个 3 的倍数本身就必须是 9 的倍数。在 s = 10～21 之中，s − 1、s、s + 1 里有 9 的倍数的只有 s = 10（含 9）、s = 17（含 18）、s = 18、s = 19（含 18）。",
+          "逐一检查：10³ = 1000，数字和是 1，不是 10；17³ = 4913，4 + 9 + 1 + 3 = 17，符合；18³ = 5832，5 + 8 + 3 + 2 = 18，符合；19³ = 6859，6 + 8 + 5 + 9 = 28，不是 19。",
+          "符合的四位数只有 4913 和 5832，和是 4913 + 5832 = 10745。答案是 10745。"
+        ],
+        "en": [
+          "N = s³ is a four-digit number, so 1000 ≤ s³ ≤ 9999. Since 10³ = 1000, 21³ = 9261 and 22³ = 10648, s must be between 10 and 21.",
+          "10, 100 and 1000 all leave remainder 1 when divided by 9, so a number and its digit sum leave the same remainder when divided by 9. The digit sum of N = s³ is s, so s³ and s leave the same remainder, i.e. s³ − s = (s − 1) × s × (s + 1) is a multiple of 9.",
+          "s − 1, s, s + 1 are three consecutive integers; exactly one of them is a multiple of 3 and the other two have no factor 3. So for the product to be a multiple of 9, that multiple of 3 must itself be a multiple of 9. For s = 10 to 21, this happens only for s = 10 (contains 9), s = 17 (contains 18), s = 18 and s = 19 (contains 18).",
+          "Check each: 10³ = 1000 has digit sum 1, not 10; 17³ = 4913 and 4 + 9 + 1 + 3 = 17, works; 18³ = 5832 and 5 + 8 + 3 + 2 = 18, works; 19³ = 6859 and 6 + 8 + 5 + 9 = 28, not 19.",
+          "The only such numbers are 4913 and 5832, with sum 4913 + 5832 = 10745. The answer is 10745."
+        ],
+        "ja": [
+          "N = s³ は 4 けたなので 1000 ≤ s³ ≤ 9999 です。10³ = 1000、21³ = 9261、22³ = 10648 なので、s は 10～21 に限られます。",
+          "10、100、1000 を 9 で割るといずれも 1 余るので、ある数とその各位の数字の和は 9 で割った余りが等しくなります。N = s³ の各位の数字の和は s なので、s³ と s の 9 で割った余りは等しく、s³ − s = (s − 1) × s × (s + 1) は 9 の倍数です。",
+          "s − 1、s、s + 1 は連続する 3 つの整数で、3 の倍数はちょうど 1 つだけ、残りの 2 つは因数 3 を含みません。したがって積が 9 の倍数になるには、その 3 の倍数自身が 9 の倍数でなければなりません。s = 10～21 で s − 1、s、s + 1 に 9 の倍数が含まれるのは s = 10（9 を含む）、s = 17（18 を含む）、s = 18、s = 19（18 を含む）だけです。",
+          "順に調べると、10³ = 1000 は数字の和が 1 で 10 ではない。17³ = 4913 は 4 + 9 + 1 + 3 = 17 で条件を満たす。18³ = 5832 は 5 + 8 + 3 + 2 = 18 で満たす。19³ = 6859 は 6 + 8 + 5 + 9 = 28 で 19 ではない。",
+          "条件を満たすのは 4913 と 5832 だけで、和は 4913 + 5832 = 10745 です。答えは 10745 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "10745"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 5
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "number_theory-grade7-foundation",
+        "notes": "N = (數字和)³：用除以 9 同餘得 (s − 1)s(s + 1) 是 9 的倍數，s 只剩 10、17、18、19。掃過「立方|各位數字(的)?和」（96 題）；最接近 number_theory_grade10_foundation_023，差異：既有題是三位數等於各位數字立方和（阿姆斯壯數）；本題是等於數字和的立方，靠 mod 9 篩選。"
+      }
+    },
+    {
+      "id": "number_theory_grade7_foundation_086",
+      "reviewStatus": "ok",
+      "topic": "number_theory",
+      "subtopic": "two_digit_number_times_reversal_palindrome",
+      "tags": [
+        "c:place_value",
+        "c:factor_multiple",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade7",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一個兩位數的個位數字不是 0。把它和「十位、個位數字對調後的兩位數」相乘，例如 13 × 31 = 403。如果乘積從左讀到右和從右讀到左完全一樣（例如 252、4884 這種數），就說這個兩位數是「好數」。好數一共有幾個？",
+        "zh-Hans": "一个两位数的个位数字不是 0。把它和“十位、个位数字对调后的两位数”相乘，例如 13 × 31 = 403。如果乘积从左读到右和从右读到左完全一样（例如 252、4884 这种数），就说这个两位数是“好数”。好数一共有几个？",
+        "en": "A two-digit number has a nonzero units digit. Multiply it by the two-digit number obtained by swapping its tens and units digits; for example, 13 × 31 = 403. If the product reads the same from left to right as from right to left (like 252 or 4884), call the two-digit number \"nice\". How many nice numbers are there?",
+        "ja": "一の位が 0 でない 2 けたの数があります。これと「十の位と一の位を入れかえた 2 けたの数」をかけます。たとえば 13 × 31 = 403 です。積が左から読んでも右から読んでも同じ数（252 や 4884 のような数）になるとき、もとの 2 けたの数を「よい数」と呼びます。よい数は全部で何個ありますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 4 個。",
+        "zh-Hans": "答案是 4 个。",
+        "en": "The answer is 4.",
+        "ja": "答えは 4 個です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "設兩位數的十位、個位數字是 a、b（都是 1～9），記 p = a × b、s = a² + b²。乘積 P = (10a + b)(10b + a) = 100ab + 10(a² + b²) + ab = 100p + 10s + p。又 s − 2p = (a − b)² ≥ 0，所以 s ≥ 2p，P ≥ 121p。",
+          "若 s ≤ 9：這時 p ≤ s ÷ 2 < 5，P 的三位數字依序是 p、s、p，左右對稱，是好數。a² + b² ≤ 9 的只有 (a, b) = (1, 1)、(1, 2)、(2, 1)、(2, 2)，得到 11、12、21、22（11 × 11 = 121、12 × 21 = 252、21 × 12 = 252、22 × 22 = 484）。",
+          "若 s ≥ 10 而 P 是三位數：P < 1000 且 P ≥ 121p，所以 p ≤ 8，P 的個位數字就是 p。另一方面 P = 100p + (10s + p)，而 10s + p ≥ 100，所以 P 的百位數字至少是 p + 1，和個位數字不同，不是好數。",
+          "若 P 是四位數：從左讀到右和從右讀到左一樣的四位數形如 1001 × 千位 + 110 × 百位，一定是 11 的倍數。P = 101p + 10s，101 = 99 + 2、10 = 11 − 1，所以 P 除以 11 的餘數與 2p − s 相同。要 P 是 11 的倍數，s − 2p = (a − b)² 必須是 11 的倍數，只能 a = b。這時 P = (11a)²，四位數的有 1089、1936、3025、4356、5929、7744、9801，都不是左右對稱。",
+          "所以好數只有 11、12、21、22，共 4 個。答案是 4 個。"
+        ],
+        "zh-Hans": [
+          "设两位数的十位、个位数字是 a、b（都是 1～9），记 p = a × b、s = a² + b²。乘积 P = (10a + b)(10b + a) = 100ab + 10(a² + b²) + ab = 100p + 10s + p。又 s − 2p = (a − b)² ≥ 0，所以 s ≥ 2p，P ≥ 121p。",
+          "若 s ≤ 9：这时 p ≤ s ÷ 2 < 5，P 的三位数字依次是 p、s、p，左右对称，是好数。a² + b² ≤ 9 的只有 (a, b) = (1, 1)、(1, 2)、(2, 1)、(2, 2)，得到 11、12、21、22（11 × 11 = 121、12 × 21 = 252、21 × 12 = 252、22 × 22 = 484）。",
+          "若 s ≥ 10 而 P 是三位数：P < 1000 且 P ≥ 121p，所以 p ≤ 8，P 的个位数字就是 p。另一方面 P = 100p + (10s + p)，而 10s + p ≥ 100，所以 P 的百位数字至少是 p + 1，和个位数字不同，不是好数。",
+          "若 P 是四位数：从左读到右和从右读到左一样的四位数形如 1001 × 千位 + 110 × 百位，一定是 11 的倍数。P = 101p + 10s，101 = 99 + 2、10 = 11 − 1，所以 P 除以 11 的余数与 2p − s 相同。要 P 是 11 的倍数，s − 2p = (a − b)² 必须是 11 的倍数，只能 a = b。这时 P = (11a)²，四位数的有 1089、1936、3025、4356、5929、7744、9801，都不是左右对称。",
+          "所以好数只有 11、12、21、22，共 4 个。答案是 4 个。"
+        ],
+        "en": [
+          "Let the tens and units digits be a and b (both 1 to 9), and write p = a × b and s = a² + b². The product is P = (10a + b)(10b + a) = 100ab + 10(a² + b²) + ab = 100p + 10s + p. Also s − 2p = (a − b)² ≥ 0, so s ≥ 2p and P ≥ 121p.",
+          "If s ≤ 9: then p ≤ s ÷ 2 < 5, and the three digits of P are p, s, p, which is symmetric, so the number is nice. a² + b² ≤ 9 only for (a, b) = (1, 1), (1, 2), (2, 1), (2, 2), giving 11, 12, 21, 22 (11 × 11 = 121, 12 × 21 = 252, 21 × 12 = 252, 22 × 22 = 484).",
+          "If s ≥ 10 and P has three digits: P < 1000 and P ≥ 121p, so p ≤ 8 and the units digit of P is p. On the other hand P = 100p + (10s + p) with 10s + p ≥ 100, so the hundreds digit of P is at least p + 1, different from the units digit; not nice.",
+          "If P has four digits: a four-digit number that reads the same both ways has the form 1001 × (thousands digit) + 110 × (hundreds digit), so it is a multiple of 11. P = 101p + 10s, and 101 = 99 + 2, 10 = 11 − 1, so P leaves the same remainder mod 11 as 2p − s. For P to be a multiple of 11, s − 2p = (a − b)² must be a multiple of 11, which forces a = b. Then P = (11a)², and the four-digit values 1089, 1936, 3025, 4356, 5929, 7744, 9801 are not symmetric.",
+          "So the nice numbers are exactly 11, 12, 21, 22, four of them. The answer is 4."
+        ],
+        "ja": [
+          "十の位を a、一の位を b（どちらも 1～9）とし、p = a × b、s = a² + b² とおきます。積は P = (10a + b)(10b + a) = 100ab + 10(a² + b²) + ab = 100p + 10s + p です。また s − 2p = (a − b)² ≥ 0 なので s ≥ 2p、P ≥ 121p です。",
+          "s ≤ 9 のとき：p ≤ s ÷ 2 < 5 で、P の 3 つの数字は順に p、s、p となり左右対称なので、よい数です。a² + b² ≤ 9 となるのは (a, b) = (1, 1)、(1, 2)、(2, 1)、(2, 2) だけで、11、12、21、22 が得られます（11 × 11 = 121、12 × 21 = 252、21 × 12 = 252、22 × 22 = 484）。",
+          "s ≥ 10 で P が 3 けたのとき：P < 1000 かつ P ≥ 121p なので p ≤ 8 で、P の一の位は p です。一方 P = 100p + (10s + p) で 10s + p ≥ 100 なので、P の百の位は p + 1 以上となり一の位と異なり、よい数ではありません。",
+          "P が 4 けたのとき：左右対称な 4 けたの数は 1001 ×（千の位）+ 110 ×（百の位）の形で、必ず 11 の倍数です。P = 101p + 10s で、101 = 99 + 2、10 = 11 − 1 なので、P を 11 で割った余りは 2p − s と同じです。P が 11 の倍数となるには s − 2p = (a − b)² が 11 の倍数でなければならず、a = b に限られます。このとき P = (11a)² で、4 けたのものは 1089、1936、3025、4356、5929、7744、9801 ですが、どれも左右対称ではありません。",
+          "よってよい数は 11、12、21、22 の 4 個だけです。答えは 4 個です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "4"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "number_theory-grade7-foundation",
+        "notes": "ab × ba 為迴文：p = ab、s = a² + b²，不進位時才對稱；四位迴文是 11 的倍數逼 a = b 再逐一排除。掃過「對調|倒過來|迴文」（36 題）；最接近 arithmetic_grade4_foundation_191，差異：既有題是原數加對調數成迴文；本題是相乘，要用不進位與 11 的倍數論證。"
+      }
     }
   ]
 }
