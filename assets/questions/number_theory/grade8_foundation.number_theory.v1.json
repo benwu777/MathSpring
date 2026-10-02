@@ -5103,6 +5103,608 @@
         "reference": "number_theory-grade8-foundation",
         "notes": "最長整除鏈 1,2,4,…,32 給下界，依 2 的冪區間分組給構造（Mirsky 型）。掃過「整除另一|顏色.*倍數|分成.*組.*整除」（1 題）；最接近 logic_grade10_foundation_010（1～100 取幾個保證有倍數關係，用奇數部分鴿籠），那是反鏈大小，本題是最少分組數＝最長鏈長，方向相反。"
       }
+    },
+    {
+      "id": "number_theory_grade8_foundation_062",
+      "reviewStatus": "ok",
+      "topic": "number_theory",
+      "subtopic": "sum_of_gcd_with_36_grouped_by_divisor",
+      "tags": [
+        "c:factor_multiple",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade8",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "對 n = 1、2、3、⋯、36 這 36 個正整數，分別求出 n 與 36 的最大公因數，一共得到 36 個數。把這 36 個數全部加起來，總和是多少？",
+        "zh-Hans": "对 n = 1、2、3、⋯、36 这 36 个正整数，分别求出 n 与 36 的最大公约数，一共得到 36 个数。把这 36 个数全部加起来，总和是多少？",
+        "en": "For each of the 36 positive integers n = 1, 2, 3, …, 36, find the greatest common divisor of n and 36. Add up all 36 of these numbers. What is the total?",
+        "ja": "n = 1、2、3、⋯、36 の 36 個の正の整数それぞれについて、n と 36 の最大公約数を求めると 36 個の数が得られます。この 36 個の数をすべて足すといくつになりますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 168。",
+        "zh-Hans": "答案是 168。",
+        "en": "The answer is 168.",
+        "ja": "答えは 168 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "36 = 2² × 3²。n 與 36 的最大公因數一定是 36 的因數，只可能是 1、2、3、4、6、9、12、18、36。依照最大公因數 d 把 n 分組，算出每一組有幾個 n。",
+          "若 n 與 36 的最大公因數是 d，n 是 d 的倍數，可寫成 n = d × m，m 介於 1 到 36 ÷ d 之間。因為 n 與 36 的最大公因數 = d × (m 與 36 ÷ d 的最大公因數)，所以條件等價於「m 與 36 ÷ d 互質」。",
+          "36 ÷ d 只含質因數 2 或 3，所以只要數 1 到 36 ÷ d 之中「不被 36 ÷ d 的質因數整除」的 m 有幾個。例如 36 ÷ d = 36 時，1～36 中不是 2 的倍數也不是 3 的倍數的有 36 − 18 − 12 + 6 = 12 個；36 ÷ d = 18 時有 18 − 9 − 6 + 3 = 6 個；36 ÷ d = 12 時有 12 − 6 − 4 + 2 = 4 個；36 ÷ d = 9 時（只看 3）有 9 − 3 = 6 個；36 ÷ d = 6 時有 6 − 3 − 2 + 1 = 2 個；36 ÷ d = 4 時（只看 2）有 2 個；36 ÷ d = 3 時有 2 個；36 ÷ d = 2 時有 1 個；36 ÷ d = 1 時有 1 個。",
+          "所以最大公因數是 1、2、3、4、6、9、12、18、36 的 n 依序有 12、6、4、6、2、2、2、1、1 個，合計 36 個，正好是全部的 n。",
+          "總和 = 1 × 12 + 2 × 6 + 3 × 4 + 4 × 6 + 6 × 2 + 9 × 2 + 12 × 2 + 18 × 1 + 36 × 1 = 12 + 12 + 12 + 24 + 12 + 18 + 24 + 18 + 36 = 168。答案是 168。"
+        ],
+        "zh-Hans": [
+          "36 = 2² × 3²。n 与 36 的最大公约数一定是 36 的因数，只可能是 1、2、3、4、6、9、12、18、36。依照最大公约数 d 把 n 分组，算出每一组有几个 n。",
+          "若 n 与 36 的最大公约数是 d，n 是 d 的倍数，可写成 n = d × m，m 介于 1 到 36 ÷ d 之间。因为 n 与 36 的最大公约数 = d × (m 与 36 ÷ d 的最大公约数)，所以条件等价于「m 与 36 ÷ d 互质」。",
+          "36 ÷ d 只含质因数 2 或 3，所以只要数 1 到 36 ÷ d 之中「不被 36 ÷ d 的质因数整除」的 m 有几个。例如 36 ÷ d = 36 时，1～36 中不是 2 的倍数也不是 3 的倍数的有 36 − 18 − 12 + 6 = 12 个；36 ÷ d = 18 时有 18 − 9 − 6 + 3 = 6 个；36 ÷ d = 12 时有 12 − 6 − 4 + 2 = 4 个；36 ÷ d = 9 时（只看 3）有 9 − 3 = 6 个；36 ÷ d = 6 时有 6 − 3 − 2 + 1 = 2 个；36 ÷ d = 4 时（只看 2）有 2 个；36 ÷ d = 3 时有 2 个；36 ÷ d = 2 时有 1 个；36 ÷ d = 1 时有 1 个。",
+          "所以最大公约数是 1、2、3、4、6、9、12、18、36 的 n 依序有 12、6、4、6、2、2、2、1、1 个，合计 36 个，正好是全部的 n。",
+          "总和 = 1 × 12 + 2 × 6 + 3 × 4 + 4 × 6 + 6 × 2 + 9 × 2 + 12 × 2 + 18 × 1 + 36 × 1 = 12 + 12 + 12 + 24 + 12 + 18 + 24 + 18 + 36 = 168。答案是 168。"
+        ],
+        "en": [
+          "36 = 2² × 3². The gcd of n and 36 must divide 36, so it is one of 1, 2, 3, 4, 6, 9, 12, 18, 36. Group the values of n by their gcd d and count each group.",
+          "If gcd(n, 36) = d, then n is a multiple of d: n = d × m with 1 ≤ m ≤ 36 ÷ d. Since gcd(n, 36) = d × gcd(m, 36 ÷ d), the condition is exactly that m and 36 ÷ d are coprime.",
+          "36 ÷ d has no prime factors other than 2 and 3, so we count m from 1 to 36 ÷ d not divisible by the prime factors of 36 ÷ d. For 36 ÷ d = 36: 36 − 18 − 12 + 6 = 12; for 18: 18 − 9 − 6 + 3 = 6; for 12: 12 − 6 − 4 + 2 = 4; for 9 (only 3 matters): 9 − 3 = 6; for 6: 6 − 3 − 2 + 1 = 2; for 4 (only 2 matters): 2; for 3: 2; for 2: 1; for 1: 1.",
+          "So the numbers of n with gcd 1, 2, 3, 4, 6, 9, 12, 18, 36 are 12, 6, 4, 6, 2, 2, 2, 1, 1, which add up to 36, accounting for every n.",
+          "Total = 1 × 12 + 2 × 6 + 3 × 4 + 4 × 6 + 6 × 2 + 9 × 2 + 12 × 2 + 18 × 1 + 36 × 1 = 12 + 12 + 12 + 24 + 12 + 18 + 24 + 18 + 36 = 168. The answer is 168."
+        ],
+        "ja": [
+          "36 = 2² × 3² です。n と 36 の最大公約数は 36 の約数なので、1、2、3、4、6、9、12、18、36 のどれかです。最大公約数 d ごとに n を分け、それぞれ何個あるかを数えます。",
+          "n と 36 の最大公約数が d なら n は d の倍数で、n = d × m（1 ≤ m ≤ 36 ÷ d）と書けます。n と 36 の最大公約数 = d × （m と 36 ÷ d の最大公約数）なので、条件は「m と 36 ÷ d が互いに素」と同じです。",
+          "36 ÷ d の素因数は 2 か 3 だけなので、1 から 36 ÷ d までで 36 ÷ d の素因数で割り切れない m を数えます。36 ÷ d = 36 のとき 36 − 18 − 12 + 6 = 12 個、18 のとき 18 − 9 − 6 + 3 = 6 個、12 のとき 12 − 6 − 4 + 2 = 4 個、9 のとき（3 だけ考える）9 − 3 = 6 個、6 のとき 6 − 3 − 2 + 1 = 2 個、4 のとき（2 だけ考える）2 個、3 のとき 2 個、2 のとき 1 個、1 のとき 1 個です。",
+          "よって最大公約数が 1、2、3、4、6、9、12、18、36 となる n はそれぞれ 12、6、4、6、2、2、2、1、1 個で、合計 36 個となり、すべての n がちょうど数えられています。",
+          "総和 = 1 × 12 + 2 × 6 + 3 × 4 + 4 × 6 + 6 × 2 + 9 × 2 + 12 × 2 + 18 × 1 + 36 × 1 = 12 + 12 + 12 + 24 + 12 + 18 + 24 + 18 + 36 = 168。答えは 168 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "168"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "number_theory-grade8-foundation",
+        "notes": "依 gcd(n, 36) = d 分組，每組個數是 1～36/d 中與 36/d 互質的個數，再加權求和。掃過「gcd|最大公因數.*(和|總和)」（6 題）、「最簡分數」（38 題）；最接近 arithmetic_grade6_foundation_130（分母 60 的最簡分數個數，只數一個分母的互質數），差異：本題對所有 n 求 gcd 總和，需依 gcd 值分組再加權。"
+      }
+    },
+    {
+      "id": "number_theory_grade8_foundation_063",
+      "reviewStatus": "ok",
+      "topic": "number_theory",
+      "subtopic": "floor_of_square_root_divides_n",
+      "tags": [
+        "c:factor_multiple",
+        "c:radical",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade8",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "對每一個正整數 n，令 k 是不超過 √n 的最大整數（例如 n = 10 時，√10 約是 3.16，所以 k = 3）。在 n = 1、2、3、⋯、100 之中，有幾個 n 能被它自己對應的 k 整除？",
+        "zh-Hans": "对每一个正整数 n，令 k 是不超过 √n 的最大整数（例如 n = 10 时，√10 约是 3.16，所以 k = 3）。在 n = 1、2、3、⋯、100 之中，有几个 n 能被它自己对应的 k 整除？",
+        "en": "For each positive integer n, let k be the largest integer not exceeding √n (for example, when n = 10, √10 ≈ 3.16, so k = 3). Among n = 1, 2, 3, …, 100, how many n are divisible by their own k?",
+        "ja": "正の整数 n に対して、√n を超えない最大の整数を k とします（たとえば n = 10 のとき √10 は約 3.16 なので k = 3）。n = 1、2、3、⋯、100 のうち、自分に対応する k で割り切れる n は何個ありますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 28 個。",
+        "zh-Hans": "答案是 28 个。",
+        "en": "The answer is 28.",
+        "ja": "答えは 28 個です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "k 是不超過 √n 的最大整數，等價於 k² ≤ n < (k + 1)²。因為 (k + 1)² − 1 = k² + 2k，所以 k 相同的 n 恰好是 k²、k² + 1、⋯、k² + 2k 這一段。",
+          "把 1 到 100 依 k 分段：k = 1 時 n 是 1～3，k = 2 時 n 是 4～8，⋯，k = 9 時 n 是 81～99，k = 10 時只剩 n = 100（下一段從 100 開始，但題目只到 100）。",
+          "在 k² 到 k² + 2k 這一段裡，k 的倍數有 k²、k² + k、k² + 2k 三個：k² 是 k 的倍數，相鄰的 k 的倍數相差 k，而下一個 k² + 3k 已經超出這一段。所以每一段恰好有 3 個 n 符合。",
+          "k = 1 到 9 這 9 段都完整落在 1～99 之內，共 9 × 3 = 27 個；k = 10 的那一段只有 n = 100，100 能被 10 整除，再加 1 個。",
+          "合計 27 + 1 = 28 個。答案是 28 個。"
+        ],
+        "zh-Hans": [
+          "k 是不超过 √n 的最大整数，等价于 k² ≤ n < (k + 1)²。因为 (k + 1)² − 1 = k² + 2k，所以 k 相同的 n 恰好是 k²、k² + 1、⋯、k² + 2k 这一段。",
+          "把 1 到 100 依 k 分段：k = 1 时 n 是 1～3，k = 2 时 n 是 4～8，⋯，k = 9 时 n 是 81～99，k = 10 时只剩 n = 100（下一段从 100 开始，但题目只到 100）。",
+          "在 k² 到 k² + 2k 这一段里，k 的倍数有 k²、k² + k、k² + 2k 三个：k² 是 k 的倍数，相邻的 k 的倍数相差 k，而下一个 k² + 3k 已经超出这一段。所以每一段恰好有 3 个 n 符合。",
+          "k = 1 到 9 这 9 段都完整落在 1～99 之内，共 9 × 3 = 27 个；k = 10 的那一段只有 n = 100，100 能被 10 整除，再加 1 个。",
+          "合计 27 + 1 = 28 个。答案是 28 个。"
+        ],
+        "en": [
+          "k is the largest integer not exceeding √n exactly when k² ≤ n < (k + 1)². Since (k + 1)² − 1 = k² + 2k, the values of n with the same k form the block k², k² + 1, …, k² + 2k.",
+          "Split 1 to 100 by k: for k = 1, n is 1–3; for k = 2, n is 4–8; …; for k = 9, n is 81–99; for k = 10 only n = 100 remains (that block starts at 100, but we stop at 100).",
+          "In the block from k² to k² + 2k, the multiples of k are k², k² + k, k² + 2k: k² is a multiple of k, consecutive multiples differ by k, and the next one, k² + 3k, lies beyond the block. So each block contains exactly 3 valid n.",
+          "The 9 blocks for k = 1 to 9 lie completely inside 1–99, giving 9 × 3 = 27 values; the block for k = 10 contains only n = 100, which is divisible by 10, adding 1 more.",
+          "In total 27 + 1 = 28. The answer is 28."
+        ],
+        "ja": [
+          "k が √n を超えない最大の整数であることは、k² ≤ n < (k + 1)² と同じです。(k + 1)² − 1 = k² + 2k なので、k が同じになる n はちょうど k²、k² + 1、⋯、k² + 2k の区間です。",
+          "1 から 100 を k ごとに区切ると、k = 1 のとき n は 1～3、k = 2 のとき 4～8、⋯、k = 9 のとき 81～99、k = 10 のときは n = 100 だけが残ります（その区間は 100 から始まりますが、問題は 100 までです）。",
+          "k² から k² + 2k の区間にある k の倍数は k²、k² + k、k² + 2k の 3 つです。k² は k の倍数で、となりあう k の倍数の差は k、次の k² + 3k は区間の外にあるからです。よって各区間にはちょうど 3 個あります。",
+          "k = 1 から 9 の 9 つの区間はすべて 1～99 に収まるので 9 × 3 = 27 個、k = 10 の区間は n = 100 だけで、100 は 10 で割り切れるので 1 個加わります。",
+          "合計 27 + 1 = 28 個。答えは 28 個です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "28"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "number_theory-grade8-foundation",
+        "notes": "⌊√n⌋ = k 的 n 恰是 k² 到 k² + 2k，其中 k 的倍數恰 3 個。掃過「⌊|整數部分|無條件捨去|高斯」（10 題）；最接近 number_theory_grade9_foundation_053（⌊√n⌋ 為奇數的個數，同樣分段），差異：該題數段長，本題數每段內被 k 整除的 n。"
+      }
+    },
+    {
+      "id": "number_theory_grade8_foundation_064",
+      "reviewStatus": "ok",
+      "topic": "number_theory",
+      "subtopic": "two_digit_numbers_divisible_by_each_digit",
+      "tags": [
+        "c:factor_multiple",
+        "c:place_value",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade8",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一個兩位數如果兩個數字都不是 0，而且它能同時被自己的十位數字和個位數字整除，就叫做「自除數」。例如 24 能被 2 和 4 整除，是自除數；26 不能被 6 整除，不是自除數。兩位數的自除數一共有幾個？",
+        "zh-Hans": "一个两位数如果两个数字都不是 0，而且它能同时被自己的十位数字和个位数字整除，就叫做「自除数」。例如 24 能被 2 和 4 整除，是自除数；26 不能被 6 整除，不是自除数。两位数的自除数一共有几个？",
+        "en": "Call a two-digit number \"self-dividing\" if neither of its digits is 0 and it is divisible by both its tens digit and its units digit. For example, 24 is divisible by 2 and by 4, so it is self-dividing; 26 is not divisible by 6, so it is not. How many two-digit self-dividing numbers are there?",
+        "ja": "2 けたの数で、どちらの数字も 0 でなく、十の位の数字でも一の位の数字でも割り切れるものを「自己割り数」と呼びます。たとえば 24 は 2 でも 4 でも割り切れるので自己割り数ですが、26 は 6 で割り切れないので自己割り数ではありません。2 けたの自己割り数は全部で何個ありますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 14 個。",
+        "zh-Hans": "答案是 14 个。",
+        "en": "The answer is 14.",
+        "ja": "答えは 14 個です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "設這個兩位數是 10a + b，十位數字 a 與個位數字 b 都是 1～9。",
+          "「a 整除 10a + b」：a 一定整除 10a，所以這等價於 a 整除 b。於是可以寫成 b = a × t，t 是正整數，而且 a × t ≤ 9。",
+          "「b 整除 10a + b」：b 一定整除 b，所以這等價於 b 整除 10a，也就是 a × t 整除 10 × a；兩邊都約掉 a，等價於 t 整除 10。t 只能是 1、2、5、10，又 a × t ≤ 9 使 t ≤ 9，所以 t 是 1、2 或 5。",
+          "逐一數：t = 1 時 b = a，a 可以是 1～9，得 11、22、⋯、99 共 9 個；t = 2 時 b = 2a ≤ 9，a 是 1～4，得 12、24、36、48 共 4 個；t = 5 時 b = 5a ≤ 9，只有 a = 1，得 15 共 1 個。",
+          "合計 9 + 4 + 1 = 14 個。答案是 14 個。"
+        ],
+        "zh-Hans": [
+          "设这个两位数是 10a + b，十位数字 a 与个位数字 b 都是 1～9。",
+          "「a 整除 10a + b」：a 一定整除 10a，所以这等价于 a 整除 b。于是可以写成 b = a × t，t 是正整数，而且 a × t ≤ 9。",
+          "「b 整除 10a + b」：b 一定整除 b，所以这等价于 b 整除 10a，也就是 a × t 整除 10 × a；两边都约掉 a，等价于 t 整除 10。t 只能是 1、2、5、10，又 a × t ≤ 9 使 t ≤ 9，所以 t 是 1、2 或 5。",
+          "逐一数：t = 1 时 b = a，a 可以是 1～9，得 11、22、⋯、99 共 9 个；t = 2 时 b = 2a ≤ 9，a 是 1～4，得 12、24、36、48 共 4 个；t = 5 时 b = 5a ≤ 9，只有 a = 1，得 15 共 1 个。",
+          "合计 9 + 4 + 1 = 14 个。答案是 14 个。"
+        ],
+        "en": [
+          "Write the number as 10a + b, where the tens digit a and the units digit b are both 1–9.",
+          "\"a divides 10a + b\": a always divides 10a, so this is the same as a dividing b. Write b = a × t with t a positive integer and a × t ≤ 9.",
+          "\"b divides 10a + b\": b always divides b, so this is the same as b dividing 10a, i.e. a × t divides 10 × a; cancelling a, this means t divides 10. So t is 1, 2, 5 or 10, and since a × t ≤ 9 forces t ≤ 9, t is 1, 2 or 5.",
+          "Count: t = 1 gives b = a with a = 1–9: 11, 22, …, 99, which is 9 numbers; t = 2 gives b = 2a ≤ 9, so a = 1–4: 12, 24, 36, 48, which is 4 numbers; t = 5 gives b = 5a ≤ 9, so only a = 1: 15, which is 1 number.",
+          "In total 9 + 4 + 1 = 14. The answer is 14."
+        ],
+        "ja": [
+          "この 2 けたの数を 10a + b とし、十の位の数字 a と一の位の数字 b はどちらも 1～9 とします。",
+          "「a が 10a + b を割り切る」について、a は必ず 10a を割り切るので、これは a が b を割り切ることと同じです。そこで b = a × t（t は正の整数、a × t ≤ 9）と書けます。",
+          "「b が 10a + b を割り切る」について、b は必ず b を割り切るので、これは b が 10a を割り切ること、つまり a × t が 10 × a を割り切ることと同じです。両方から a を約分すると t が 10 を割り切ることになり、t は 1、2、5、10 のどれかですが、a × t ≤ 9 より t ≤ 9 なので t は 1、2、5 のどれかです。",
+          "順に数えます。t = 1 なら b = a で a = 1～9 の 11、22、⋯、99 の 9 個、t = 2 なら b = 2a ≤ 9 より a = 1～4 の 12、24、36、48 の 4 個、t = 5 なら b = 5a ≤ 9 より a = 1 だけで 15 の 1 個です。",
+          "合計 9 + 4 + 1 = 14 個。答えは 14 個です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "14"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "number_theory-grade8-foundation",
+        "notes": "10a + b 被 a、b 整除 ⇔ b = at 且 t | 10。掃過「整除這個|能被.*每.*數字」（0 題）、「數字和」（41 題）；最接近 number_theory_grade8_foundation_045（年份被數字和整除），差異：本題要被每一個數字整除，化成 t | 10 的分類。"
+      }
+    },
+    {
+      "id": "number_theory_grade8_foundation_065",
+      "reviewStatus": "ok",
+      "topic": "number_theory",
+      "subtopic": "triangular_numbers_ending_in_zero",
+      "tags": [
+        "c:modular",
+        "c:sequence",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade8",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "1、3、6、10、15、⋯ 這些數叫做三角形數，第 n 個三角形數是 1 + 2 + ⋯ + n = n(n + 1)/2。在前 100 個三角形數之中，個位數字是 0 的有幾個？",
+        "zh-Hans": "1、3、6、10、15、⋯ 这些数叫做三角形数，第 n 个三角形数是 1 + 2 + ⋯ + n = n(n + 1)/2。在前 100 个三角形数之中，个位数字是 0 的有几个？",
+        "en": "The numbers 1, 3, 6, 10, 15, … are called triangular numbers; the n-th triangular number is 1 + 2 + … + n = n(n + 1)/2. Among the first 100 triangular numbers, how many have units digit 0?",
+        "ja": "1、3、6、10、15、⋯ のような数を三角数といい、n 番目の三角数は 1 + 2 + ⋯ + n = n(n + 1)/2 です。最初の 100 個の三角数のうち、一の位が 0 のものは何個ありますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 20 個。",
+        "zh-Hans": "答案是 20 个。",
+        "en": "The answer is 20.",
+        "ja": "答えは 20 個です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "個位數字是 0 ⇔ n(n + 1)/2 是 10 的倍數 ⇔ n(n + 1) 是 20 的倍數。20 = 4 × 5 且 4 和 5 互質，所以等價於 n(n + 1) 同時是 4 的倍數和 5 的倍數。",
+          "4 的部分：n 和 n + 1 一奇一偶，奇數不含因數 2，所以 n(n + 1) 是 4 的倍數 ⇔ 其中的偶數是 4 的倍數 ⇔ n 是 4 的倍數或 n + 1 是 4 的倍數，也就是 n 除以 4 餘 0 或餘 3。",
+          "5 的部分：5 是質數，n(n + 1) 是 5 的倍數 ⇔ n 或 n + 1 是 5 的倍數，也就是 n 除以 5 餘 0 或餘 4。",
+          "兩個條件只和 n 除以 20 的餘數有關。在餘數 0～19 之中，除以 4 餘 0 或 3 的是 0、3、4、7、8、11、12、15、16、19；其中除以 5 餘 0 或 4 的只有 0、4、15、19。所以每連續 20 個 n 恰好有 4 個符合。",
+          "n = 1～100 正好是 5 段連續的 20 個數，共 5 × 4 = 20 個（例如 n = 4、15、19、20 對應的三角形數是 10、120、190、210）。答案是 20 個。"
+        ],
+        "zh-Hans": [
+          "个位数字是 0 ⇔ n(n + 1)/2 是 10 的倍数 ⇔ n(n + 1) 是 20 的倍数。20 = 4 × 5 且 4 和 5 互质，所以等价于 n(n + 1) 同时是 4 的倍数和 5 的倍数。",
+          "4 的部分：n 和 n + 1 一奇一偶，奇数不含因数 2，所以 n(n + 1) 是 4 的倍数 ⇔ 其中的偶数是 4 的倍数 ⇔ n 是 4 的倍数或 n + 1 是 4 的倍数，也就是 n 除以 4 余 0 或余 3。",
+          "5 的部分：5 是质数，n(n + 1) 是 5 的倍数 ⇔ n 或 n + 1 是 5 的倍数，也就是 n 除以 5 余 0 或余 4。",
+          "两个条件只和 n 除以 20 的余数有关。在余数 0～19 之中，除以 4 余 0 或 3 的是 0、3、4、7、8、11、12、15、16、19；其中除以 5 余 0 或 4 的只有 0、4、15、19。所以每连续 20 个 n 恰好有 4 个符合。",
+          "n = 1～100 正好是 5 段连续的 20 个数，共 5 × 4 = 20 个（例如 n = 4、15、19、20 对应的三角形数是 10、120、190、210）。答案是 20 个。"
+        ],
+        "en": [
+          "Units digit 0 ⇔ n(n + 1)/2 is a multiple of 10 ⇔ n(n + 1) is a multiple of 20. Since 20 = 4 × 5 with 4 and 5 coprime, this means n(n + 1) is a multiple of both 4 and 5.",
+          "The factor 4: one of n, n + 1 is odd and contains no factor 2, so n(n + 1) is a multiple of 4 ⇔ the even one is a multiple of 4 ⇔ n or n + 1 is a multiple of 4, i.e. n leaves remainder 0 or 3 when divided by 4.",
+          "The factor 5: 5 is prime, so n(n + 1) is a multiple of 5 ⇔ n or n + 1 is a multiple of 5, i.e. n leaves remainder 0 or 4 when divided by 5.",
+          "Both conditions depend only on the remainder of n divided by 20. Among remainders 0–19, those with remainder 0 or 3 mod 4 are 0, 3, 4, 7, 8, 11, 12, 15, 16, 19; of these, only 0, 4, 15, 19 have remainder 0 or 4 mod 5. So every 20 consecutive values of n contain exactly 4 valid ones.",
+          "n = 1–100 is exactly 5 runs of 20 consecutive numbers, giving 5 × 4 = 20 (for example n = 4, 15, 19, 20 give 10, 120, 190, 210). The answer is 20."
+        ],
+        "ja": [
+          "一の位が 0 ⇔ n(n + 1)/2 が 10 の倍数 ⇔ n(n + 1) が 20 の倍数です。20 = 4 × 5 で 4 と 5 は互いに素なので、n(n + 1) が 4 の倍数かつ 5 の倍数であることと同じです。",
+          "4 について：n と n + 1 は一方が奇数で、奇数は因数 2 を含みません。よって n(n + 1) が 4 の倍数 ⇔ 偶数の方が 4 の倍数 ⇔ n または n + 1 が 4 の倍数、つまり n を 4 で割った余りが 0 または 3 です。",
+          "5 について：5 は素数なので、n(n + 1) が 5 の倍数 ⇔ n または n + 1 が 5 の倍数、つまり n を 5 で割った余りが 0 または 4 です。",
+          "どちらの条件も n を 20 で割った余りだけで決まります。余り 0～19 のうち 4 で割って 0 か 3 余るのは 0、3、4、7、8、11、12、15、16、19 で、そのうち 5 で割って 0 か 4 余るのは 0、4、15、19 だけです。よって連続する 20 個の n にはちょうど 4 個あります。",
+          "n = 1～100 は連続する 20 個がちょうど 5 組なので、5 × 4 = 20 個です（たとえば n = 4、15、19、20 の三角数は 10、120、190、210）。答えは 20 個です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "20"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "number_theory-grade8-foundation",
+        "notes": "三角形數個位為 0 ⇔ 20 | n(n + 1) ⇔ n 除以 4 餘 0、3 且除以 5 餘 0、4，每 20 個有 4 個。掃過「三角形數」（2 題）、「n\\(n \\+ 1\\)/2」（0 題）；最接近 number_theory_grade12_foundation_013（三角形數又是平方數），差異：本題是 4 與 5 的餘數條件合併（中國剩餘式計數）。"
+      }
+    },
+    {
+      "id": "number_theory_grade8_foundation_066",
+      "reviewStatus": "ok",
+      "topic": "number_theory",
+      "subtopic": "smallest_multiple_of_45_with_all_even_digits",
+      "tags": [
+        "c:factor_multiple",
+        "c:place_value",
+        "m:extremal"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade8",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "求最小的正整數 N，使得 N 是 45 的倍數，而且 N 的每一位數字都是偶數（0、2、4、6、8 之一）。",
+        "zh-Hans": "求最小的正整数 N，使得 N 是 45 的倍数，而且 N 的每一位数字都是偶数（0、2、4、6、8 之一）。",
+        "en": "Find the smallest positive integer N such that N is a multiple of 45 and every digit of N is even (one of 0, 2, 4, 6, 8).",
+        "ja": "45 の倍数であり、どの位の数字も偶数（0、2、4、6、8 のどれか）であるような最小の正の整数 N を求めなさい。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 2880。",
+        "zh-Hans": "答案是 2880。",
+        "en": "The answer is 2880.",
+        "ja": "答えは 2880 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "45 = 5 × 9，而 5 與 9 互質，所以 N 是 45 的倍數 ⇔ N 同時是 5 的倍數和 9 的倍數。",
+          "5 的倍數的個位數字是 0 或 5；個位數字必須是偶數，所以只能是 0。",
+          "9 的倍數的各位數字和是 9 的倍數。每一位都是偶數，所以數字和也是偶數，因此數字和是 18 的倍數；N 是正整數，數字和不是 0，所以數字和至少是 18。",
+          "個位是 0 時，兩位數的數字和最多 8，三位數 □□0 的數字和最多 8 + 8 = 16，都不到 18，所以 N 至少是四位數 □□□0。千位不能是 0 而且是偶數，最小是 2；千位是 2 時，百位與十位的和要至少 16，而兩者都是不超過 8 的偶數，只能都是 8，得 2880。",
+          "千位已經取到最小的 2，而千位是 2 的符合數只有 2880，所以 N 最小是 2880。驗算：2880 = 45 × 64。答案是 2880。"
+        ],
+        "zh-Hans": [
+          "45 = 5 × 9，而 5 与 9 互质，所以 N 是 45 的倍数 ⇔ N 同时是 5 的倍数和 9 的倍数。",
+          "5 的倍数的个位数字是 0 或 5；个位数字必须是偶数，所以只能是 0。",
+          "9 的倍数的各位数字和是 9 的倍数。每一位都是偶数，所以数字和也是偶数，因此数字和是 18 的倍数；N 是正整数，数字和不是 0，所以数字和至少是 18。",
+          "个位是 0 时，两位数的数字和最多 8，三位数 □□0 的数字和最多 8 + 8 = 16，都不到 18，所以 N 至少是四位数 □□□0。千位不能是 0 而且是偶数，最小是 2；千位是 2 时，百位与十位的和要至少 16，而两者都是不超过 8 的偶数，只能都是 8，得 2880。",
+          "千位已经取到最小的 2，而千位是 2 的符合数只有 2880，所以 N 最小是 2880。验算：2880 = 45 × 64。答案是 2880。"
+        ],
+        "en": [
+          "45 = 5 × 9 with 5 and 9 coprime, so N is a multiple of 45 ⇔ N is a multiple of both 5 and 9.",
+          "A multiple of 5 ends in 0 or 5; the last digit must be even, so it is 0.",
+          "A multiple of 9 has digit sum a multiple of 9. All digits are even, so the digit sum is even, hence a multiple of 18; since N is positive the digit sum is not 0, so it is at least 18.",
+          "With last digit 0, a two-digit number has digit sum at most 8 and a three-digit number □□0 at most 8 + 8 = 16, both below 18, so N has at least four digits, □□□0. The thousands digit is even and nonzero, so it is at least 2; with thousands digit 2, the hundreds and tens digits must sum to at least 16, and as even digits at most 8 they must both be 8, giving 2880.",
+          "The thousands digit is already the smallest possible, 2, and the only valid number with thousands digit 2 is 2880, so the minimum is 2880. Check: 2880 = 45 × 64. The answer is 2880."
+        ],
+        "ja": [
+          "45 = 5 × 9 で 5 と 9 は互いに素なので、N が 45 の倍数 ⇔ N が 5 の倍数かつ 9 の倍数です。",
+          "5 の倍数の一の位は 0 か 5 で、一の位は偶数でなければならないので 0 です。",
+          "9 の倍数は各位の数字の和が 9 の倍数です。どの位も偶数なので数字の和も偶数となり、18 の倍数です。N は正なので数字の和は 0 でなく、18 以上です。",
+          "一の位が 0 だと、2 けたの数の数字の和は最大 8、3 けたの数 □□0 は最大 8 + 8 = 16 で、どちらも 18 に届きません。よって N は 4 けた以上の □□□0 です。千の位は 0 でない偶数なので最小で 2 で、千の位が 2 のとき百の位と十の位の和は 16 以上が必要ですが、どちらも 8 以下の偶数なので両方 8 となり、2880 になります。",
+          "千の位はすでに最小の 2 で、千の位が 2 の数で条件を満たすのは 2880 だけなので、N の最小値は 2880 です。確認：2880 = 45 × 64。答えは 2880 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "2880"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 4
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "number_theory-grade8-foundation",
+        "notes": "45 = 5 × 9：個位只能是 0，數字和是偶數故為 18 的倍數，千位最小 2 只能 2880。掃過「都是偶數|每一位都是偶」（2 題）、「45 的倍數」（0 題）；最接近 number_theory_grade10_foundation_057（數字乘積 3600 的最小數），差異：本題用 5 與 9 的整除判別配合「數字全偶」求最小。"
+      }
+    },
+    {
+      "id": "number_theory_grade8_foundation_067",
+      "reviewStatus": "ok",
+      "topic": "number_theory",
+      "subtopic": "sum_of_three_digit_numbers_with_all_odd_digits",
+      "tags": [
+        "c:place_value",
+        "m:bijection"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade8",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "三個數字都是奇數的三位數，例如 135、779、999。把所有這樣的三位數全部加起來，總和是多少？",
+        "zh-Hans": "三个数字都是奇数的三位数，例如 135、779、999。把所有这样的三位数全部加起来，总和是多少？",
+        "en": "Consider all three-digit numbers whose three digits are all odd, such as 135, 779 and 999. What is the sum of all such numbers?",
+        "ja": "3 つの数字がすべて奇数である 3 けたの数、たとえば 135、779、999 などを考えます。このような 3 けたの数をすべて足すといくつになりますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 69375。",
+        "zh-Hans": "答案是 69375。",
+        "en": "The answer is 69375.",
+        "ja": "答えは 69375 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "每一位都從 1、3、5、7、9 中選，這樣的三位數共有 5 × 5 × 5 = 125 個。",
+          "把一個這樣的數 n 的每一位數字 d 都換成 10 − d（1 和 9 互換、3 和 7 互換、5 不變），得到的 n′ 仍然是三個數字都是奇數的三位數，而且再換一次就回到 n。所以這 125 個數一一對應到它們自己的「配對數」。",
+          "n 和 n′ 的同一位數字加起來都是 10，所以 n + n′ = 10 × 100 + 10 × 10 + 10 × 1 = 1110。",
+          "把 125 個數照原來的順序加一遍，再照「每個數換成它的配對數」的順序加一遍，兩遍的和相同；把兩遍對應的項相加，每一對都是 n + n′ = 1110，所以兩遍合計 125 × 1110 = 138750。",
+          "總和是 138750 ÷ 2 = 69375。答案是 69375。"
+        ],
+        "zh-Hans": [
+          "每一位都从 1、3、5、7、9 中选，这样的三位数共有 5 × 5 × 5 = 125 个。",
+          "把一个这样的数 n 的每一位数字 d 都换成 10 − d（1 和 9 互换、3 和 7 互换、5 不变），得到的 n′ 仍然是三个数字都是奇数的三位数，而且再换一次就回到 n。所以这 125 个数一一对应到它们自己的「配对数」。",
+          "n 和 n′ 的同一位数字加起来都是 10，所以 n + n′ = 10 × 100 + 10 × 10 + 10 × 1 = 1110。",
+          "把 125 个数照原来的顺序加一遍，再照「每个数换成它的配对数」的顺序加一遍，两遍的和相同；把两遍对应的项相加，每一对都是 n + n′ = 1110，所以两遍合计 125 × 1110 = 138750。",
+          "总和是 138750 ÷ 2 = 69375。答案是 69375。"
+        ],
+        "en": [
+          "Each digit is chosen from 1, 3, 5, 7, 9, so there are 5 × 5 × 5 = 125 such numbers.",
+          "Replace every digit d of such a number n by 10 − d (swap 1 and 9, swap 3 and 7, keep 5). The result n′ is again a three-digit number with all odd digits, and doing it twice gives back n. So the 125 numbers are matched with their \"partners\".",
+          "In each place, the digits of n and n′ add to 10, so n + n′ = 10 × 100 + 10 × 10 + 10 × 1 = 1110.",
+          "Add the 125 numbers once in the original order and once with each number replaced by its partner; both sums are equal. Adding the two lists term by term gives n + n′ = 1110 each time, so the two sums together are 125 × 1110 = 138750.",
+          "The total is 138750 ÷ 2 = 69375. The answer is 69375."
+        ],
+        "ja": [
+          "各位を 1、3、5、7、9 から選ぶので、このような 3 けたの数は 5 × 5 × 5 = 125 個あります。",
+          "このような数 n の各位の数字 d をすべて 10 − d に置きかえます（1 と 9、3 と 7 を入れかえ、5 はそのまま）。できた n′ も 3 つの数字がすべて奇数の 3 けたの数で、もう一度置きかえると n に戻ります。よって 125 個の数はそれぞれ「相手」と 1 対 1 に対応します。",
+          "n と n′ は同じ位の数字の和がどれも 10 なので、n + n′ = 10 × 100 + 10 × 10 + 10 × 1 = 1110 です。",
+          "125 個の数を元の順に 1 回足し、各数をその相手に置きかえた順にもう 1 回足すと、2 つの和は等しくなります。対応する項どうしを足すとどれも n + n′ = 1110 なので、2 回分の合計は 125 × 1110 = 138750 です。",
+          "求める総和は 138750 ÷ 2 = 69375 です。答えは 69375 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "69375"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 5
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "number_theory-grade8-foundation",
+        "notes": "把每位數字 d 換成 10 − d 配對，每對和 1110，總和 = 125 × 1110 ÷ 2。掃過「數字都是奇數|每一位.*奇數|都是奇數」（2 題）；最接近 arithmetic_grade2_foundation_078（1、2、3 排出的 6 個三位數總和，字面 0.45），差異：本題 125 個數，用配對（雙射）求和。"
+      }
+    },
+    {
+      "id": "number_theory_grade8_foundation_068",
+      "reviewStatus": "ok",
+      "topic": "number_theory",
+      "subtopic": "consecutive_odd_numbers_sum_representations",
+      "tags": [
+        "c:factor_multiple",
+        "c:sequence",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade8",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "2025 可以寫成幾個「連續的正奇數」相加，例如 2025 = 1 + 3 + 5 + ⋯ + 89（從 1 到 89，共 45 個奇數）。若規定至少要用 2 個奇數，2025 一共有幾種不同的寫法？",
+        "zh-Hans": "2025 可以写成几个「连续的正奇数」相加，例如 2025 = 1 + 3 + 5 + ⋯ + 89（从 1 到 89，共 45 个奇数）。若规定至少要用 2 个奇数，2025 一共有几种不同的写法？",
+        "en": "2025 can be written as a sum of consecutive positive odd numbers, for example 2025 = 1 + 3 + 5 + … + 89 (the 45 odd numbers from 1 to 89). If at least 2 odd numbers must be used, in how many different ways can 2025 be written like this?",
+        "ja": "2025 は「連続する正の奇数」の和で表すことができます。たとえば 2025 = 1 + 3 + 5 + ⋯ + 89（1 から 89 までの 45 個の奇数）です。少なくとも 2 個の奇数を使うとき、2025 の表し方は全部で何通りありますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 7 種。",
+        "zh-Hans": "答案是 7 种。",
+        "en": "The answer is 7.",
+        "ja": "答えは 7 通りです。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "設從奇數 a 開始，連續寫 k 個正奇數：a、a + 2、⋯、a + 2(k − 1)。這是公差 2 的等差數列，和 = k × (頭 + 尾) ÷ 2 = k × (a + k − 1)。記 m = a + k − 1，總和就是 k × m。",
+          "a 是奇數，所以 m − k = a − 1 是偶數，m 和 k 的奇偶相同；又 a ≥ 1，所以 m ≥ k。反過來，只要 2025 = k × m、m ≥ k、m 和 k 奇偶相同，取 a = m − k + 1 就是一個正奇數，得到一種寫法；而且不同的 k 給出不同的寫法。所以寫法的數目等於這樣的 (k, m) 的組數。",
+          "2025 = 3⁴ × 5² 是奇數，它的因數都是奇數，奇偶相同的條件自動成立。2025 共有 (4 + 1) × (2 + 1) = 15 個因數，寫成 k × m 且 k ≤ m 的有：(1, 2025)、(3, 675)、(5, 405)、(9, 225)、(15, 135)、(25, 81)、(27, 75)、(45, 45)，共 8 組。",
+          "k = 1 只用了 1 個奇數（就是 2025 本身），不算。所以共有 8 − 1 = 7 種（例如 k = 3 時 m = 675，a = 673，673 + 675 + 677 = 2025）。答案是 7 種。"
+        ],
+        "zh-Hans": [
+          "设从奇数 a 开始，连续写 k 个正奇数：a、a + 2、⋯、a + 2(k − 1)。这是公差 2 的等差数列，和 = k × (头 + 尾) ÷ 2 = k × (a + k − 1)。记 m = a + k − 1，总和就是 k × m。",
+          "a 是奇数，所以 m − k = a − 1 是偶数，m 和 k 的奇偶相同；又 a ≥ 1，所以 m ≥ k。反过来，只要 2025 = k × m、m ≥ k、m 和 k 奇偶相同，取 a = m − k + 1 就是一个正奇数，得到一种写法；而且不同的 k 给出不同的写法。所以写法的数目等于这样的 (k, m) 的组数。",
+          "2025 = 3⁴ × 5² 是奇数，它的因数都是奇数，奇偶相同的条件自动成立。2025 共有 (4 + 1) × (2 + 1) = 15 个因数，写成 k × m 且 k ≤ m 的有：(1, 2025)、(3, 675)、(5, 405)、(9, 225)、(15, 135)、(25, 81)、(27, 75)、(45, 45)，共 8 组。",
+          "k = 1 只用了 1 个奇数（就是 2025 本身），不算。所以共有 8 − 1 = 7 种（例如 k = 3 时 m = 675，a = 673，673 + 675 + 677 = 2025）。答案是 7 种。"
+        ],
+        "en": [
+          "Suppose the sum starts at the odd number a and uses k consecutive odd numbers: a, a + 2, …, a + 2(k − 1). This is an arithmetic sequence with difference 2, so the sum is k × (first + last) ÷ 2 = k × (a + k − 1). Writing m = a + k − 1, the sum is k × m.",
+          "Since a is odd, m − k = a − 1 is even, so m and k have the same parity; and a ≥ 1 gives m ≥ k. Conversely, whenever 2025 = k × m with m ≥ k and m, k of the same parity, a = m − k + 1 is a positive odd number and gives one way; different k give different ways. So we count such pairs (k, m).",
+          "2025 = 3⁴ × 5² is odd, so all its divisors are odd and the parity condition holds automatically. 2025 has (4 + 1) × (2 + 1) = 15 divisors, and the pairs k × m with k ≤ m are (1, 2025), (3, 675), (5, 405), (9, 225), (15, 135), (25, 81), (27, 75), (45, 45) — 8 pairs.",
+          "k = 1 uses only one odd number (2025 itself) and does not count. So there are 8 − 1 = 7 ways (e.g. k = 3 gives m = 675, a = 673, and 673 + 675 + 677 = 2025). The answer is 7."
+        ],
+        "ja": [
+          "奇数 a から始めて k 個の連続する正の奇数 a、a + 2、⋯、a + 2(k − 1) を足すとします。これは公差 2 の等差数列なので、和 = k × (初項 + 末項) ÷ 2 = k × (a + k − 1) です。m = a + k − 1 とおくと、和は k × m です。",
+          "a は奇数なので m − k = a − 1 は偶数で、m と k の偶奇は同じです。また a ≥ 1 より m ≥ k です。逆に 2025 = k × m、m ≥ k、m と k の偶奇が同じなら、a = m − k + 1 は正の奇数で 1 つの表し方が得られ、k が違えば表し方も違います。よってこのような (k, m) の組の数を数えればよいです。",
+          "2025 = 3⁴ × 5² は奇数なので約数はすべて奇数で、偶奇の条件は自動的に成り立ちます。2025 の約数は (4 + 1) × (2 + 1) = 15 個あり、k × m（k ≤ m）の組は (1, 2025)、(3, 675)、(5, 405)、(9, 225)、(15, 135)、(25, 81)、(27, 75)、(45, 45) の 8 組です。",
+          "k = 1 は奇数を 1 個（2025 自身）しか使わないので数えません。よって 8 − 1 = 7 通りです（たとえば k = 3 なら m = 675、a = 673 で 673 + 675 + 677 = 2025）。答えは 7 通りです。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "7"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "number_theory-grade8-foundation",
+        "notes": "k 個連續奇數之和 = k × m（m = 平均數），需 m ≥ k 且同奇偶；2025 的 8 組因數對扣掉 k = 1。掃過「連續.*奇數」（5 題）、「連續.*正整數.*和|連續.*整數.*和」（15 題）；最接近 number_theory_grade8_foundation_039（15 寫成連續正整數之和的方法數），差異：本題是連續「奇數」，條件變成 k、m 同奇偶且 m ≥ k。"
+      }
+    },
+    {
+      "id": "number_theory_grade8_foundation_069",
+      "reviewStatus": "ok",
+      "topic": "number_theory",
+      "subtopic": "remove_leading_digit_leaves_one_ninth",
+      "tags": [
+        "c:place_value",
+        "c:linear_eq",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade8",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "有些四位數 N 有這樣的性質：把 N 最左邊的那個數字去掉，剩下的三個數字照原來的順序組成的數（允許以 0 開頭，例如 2050 去掉 2 剩下 050，也就是 50），恰好等於 N 的九分之一。這樣的四位數一共有幾個？",
+        "zh-Hans": "有些四位数 N 有这样的性质：把 N 最左边的那个数字去掉，剩下的三个数字照原来的顺序组成的数（允许以 0 开头，例如 2050 去掉 2 剩下 050，也就是 50），恰好等于 N 的九分之一。这样的四位数一共有几个？",
+        "en": "Some four-digit numbers N have this property: if the leftmost digit of N is removed, the number formed by the remaining three digits in their original order (a leading 0 is allowed; e.g. removing 2 from 2050 leaves 050, which is 50) is exactly one ninth of N. How many such four-digit numbers are there?",
+        "ja": "ある 4 けたの数 N は次の性質をもちます：N のいちばん左の数字を取り去ると、残った 3 つの数字を元の順に並べた数（0 から始まってもよく、たとえば 2050 から 2 を取ると 050、つまり 50）が、ちょうど N の 9 分の 1 になります。このような 4 けたの数は全部で何個ありますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 7 個。",
+        "zh-Hans": "答案是 7 个。",
+        "en": "The answer is 7.",
+        "ja": "答えは 7 個です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "設 N 的千位數字是 a（1～9），去掉它之後剩下的數是 x（0 ≤ x ≤ 999），則 N = 1000a + x。",
+          "條件是 x = N ÷ 9，也就是 9x = 1000a + x。整理得 8x = 1000a，所以 x = 125a。",
+          "x 必須不超過 999，所以 125a ≤ 999；因為 125 × 7 = 875、125 × 8 = 1000，a 只能是 1～7。",
+          "a = 1～7 各給出一個 N：1125、2250、3375、4500、5625、6750、7875。驗算其中一個：1125 ÷ 9 = 125，正好是去掉 1 之後剩下的 125。",
+          "所以共有 7 個。答案是 7 個。"
+        ],
+        "zh-Hans": [
+          "设 N 的千位数字是 a（1～9），去掉它之后剩下的数是 x（0 ≤ x ≤ 999），则 N = 1000a + x。",
+          "条件是 x = N ÷ 9，也就是 9x = 1000a + x。整理得 8x = 1000a，所以 x = 125a。",
+          "x 必须不超过 999，所以 125a ≤ 999；因为 125 × 7 = 875、125 × 8 = 1000，a 只能是 1～7。",
+          "a = 1～7 各给出一个 N：1125、2250、3375、4500、5625、6750、7875。验算其中一个：1125 ÷ 9 = 125，正好是去掉 1 之后剩下的 125。",
+          "所以共有 7 个。答案是 7 个。"
+        ],
+        "en": [
+          "Let the thousands digit of N be a (1–9) and let x (0 ≤ x ≤ 999) be the number left after removing it, so N = 1000a + x.",
+          "The condition is x = N ÷ 9, i.e. 9x = 1000a + x, which simplifies to 8x = 1000a, so x = 125a.",
+          "x must be at most 999, so 125a ≤ 999; since 125 × 7 = 875 and 125 × 8 = 1000, a can only be 1–7.",
+          "Each a = 1–7 gives one N: 1125, 2250, 3375, 4500, 5625, 6750, 7875. Check one: 1125 ÷ 9 = 125, which is exactly what remains after removing the 1.",
+          "So there are 7. The answer is 7."
+        ],
+        "ja": [
+          "N の千の位の数字を a（1～9）、それを取り去った残りの数を x（0 ≤ x ≤ 999）とすると、N = 1000a + x です。",
+          "条件は x = N ÷ 9、つまり 9x = 1000a + x です。整理すると 8x = 1000a となり、x = 125a です。",
+          "x は 999 以下なので 125a ≤ 999 です。125 × 7 = 875、125 × 8 = 1000 なので、a は 1～7 に限られます。",
+          "a = 1～7 のそれぞれから N が 1 つずつ得られます：1125、2250、3375、4500、5625、6750、7875。1 つ確かめると、1125 ÷ 9 = 125 で、1 を取り去った残りの 125 にちょうど等しくなります。",
+          "よって 7 個です。答えは 7 個です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "7"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "number_theory-grade8-foundation",
+        "notes": "去掉千位 a 剩 x，9x = 1000a + x 得 x = 125a，a ≤ 7。掃過「(去掉|拿掉|刪掉|擦掉).*最左|最左邊.*數字.*(去掉|拿掉|刪)」（0 題）；最接近 number_theory_grade8_foundation_041（三位數等於數字和的 17 倍），差異：本題是刪首位後的位值方程。"
+      }
     }
   ]
 }
