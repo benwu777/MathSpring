@@ -95,7 +95,7 @@ void main() {
       }
     });
 
-    test('第一款男生髮型以共用畫布對齊基準臉', () {
+    test('第一款男生髮型以共用畫布的皇冠補償對齊基準臉', () {
       final AvatarAssetBundle reference = AvatarAssetCatalog.resolve(
         AvatarConfiguration.defaultFor(AvatarPresentation.boy),
       );
@@ -105,7 +105,7 @@ void main() {
       expect(reference.hairScale, 1);
       expect(reference.hairScaleX, 1);
       expect(reference.hairOffsetX, 0);
-      expect(reference.hairOffsetY, 0);
+      expect(reference.hairOffsetY, -.075);
     });
   });
 

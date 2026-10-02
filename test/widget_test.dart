@@ -20,6 +20,8 @@ void main() {
   test('application visual tokens use indigo primary and teal progress', () {
     expect(AppVisualTokens.brand, const Color(0xFF273B78));
     expect(AppVisualTokens.progress, const Color(0xFF168A82));
+    expect(AppVisualTokens.warmAccent, const Color(0xFFFFA87D));
+    expect(AppVisualTokens.celebrationSoft, const Color(0xFFFFF1E8));
     expect(AppVisualTokens.primary, AppVisualTokens.brand);
   });
 
@@ -169,6 +171,40 @@ void main() {
       },
     });
   }
+
+  testWidgets('home hero presents the welcoming otter companion',
+      (WidgetTester tester) async {
+    await tester.pumpWidget(
+      MathSpringApp(
+        services: createTestServices(),
+        monetizationService: NoopMonetizationService(),
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    expect(
+      find.byKey(const ValueKey<String>('otter_companion_welcoming')),
+      findsOneWidget,
+    );
+  });
+
+  testWidgets('review tab presents the reflecting otter companion',
+      (WidgetTester tester) async {
+    await tester.pumpWidget(
+      MathSpringApp(
+        services: createTestServices(),
+        monetizationService: NoopMonetizationService(),
+      ),
+    );
+    await tester.pumpAndSettle();
+    await tester.tap(find.byIcon(Icons.history_edu_outlined));
+    await tester.pumpAndSettle();
+
+    expect(
+      find.byKey(const ValueKey<String>('otter_companion_reflecting')),
+      findsOneWidget,
+    );
+  });
 
   testWidgets('我的收藏會顯示空狀態並可從學習回顧開啟', (WidgetTester tester) async {
     final AppServices services = createTestServices();
@@ -942,7 +978,7 @@ void main() {
       findsOneWidget,
     );
     expect(find.text('Allen'), findsOneWidget);
-    expect(find.text('Grade 4'), findsOneWidget);
+    expect(find.bySemanticsLabel(RegExp(r'^Allen, Grades ')), findsOneWidget);
     expect(find.byType(AvatarPreview), findsOneWidget);
 
     await tester.pumpWidget(
@@ -970,7 +1006,7 @@ void main() {
       findsOneWidget,
     );
     expect(find.text('Allen'), findsOneWidget);
-    expect(find.text('Grade 4'), findsOneWidget);
+    expect(find.bySemanticsLabel(RegExp(r'^Allen, Grades ')), findsOneWidget);
     expect(find.byType(AvatarPreview), findsOneWidget);
 
     await tester.pumpWidget(
@@ -3185,23 +3221,23 @@ void main() {
         Theme.of(tester.element(find.byType(Scaffold).first));
     expect(theme.scaffoldBackgroundColor, const Color(0xFFF8F8F5));
     expect(theme.colorScheme.primary, AppVisualTokens.brand);
-    expect(theme.navigationBarTheme.indicatorColor,
-        AppVisualTokens.brandSoft);
+    expect(theme.navigationBarTheme.indicatorColor, AppVisualTokens.brandSoft);
 
     final RoundedRectangleBorder cardShape =
         theme.cardTheme.shape! as RoundedRectangleBorder;
     expect(cardShape.borderRadius, BorderRadius.circular(14));
   });
 
-  testWidgets('home shell avoids decorative glows and filled navigation icons',
+  testWidgets(
+      'home shell uses rounded filled icons for the selected destination',
       (WidgetTester tester) async {
     await tester.pumpWidget(MathSpringApp(services: createTestServices()));
     await tester.pumpAndSettle();
 
     expect(find.byKey(const ValueKey<String>('home_background_glow')),
         findsNothing);
-    expect(find.byIcon(Icons.play_circle_fill), findsNothing);
-    expect(find.byIcon(Icons.play_circle_outline), findsOneWidget);
+    expect(find.byIcon(Icons.play_circle_rounded), findsOneWidget);
+    expect(find.byIcon(Icons.play_circle_outline), findsNothing);
   });
 
   testWidgets('home primary actions use the shared indigo accent',

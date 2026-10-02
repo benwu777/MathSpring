@@ -29,6 +29,7 @@ import 'package:mathspring/ui/content_scroll_view.dart';
 import 'package:mathspring/ui/layout_spec.dart';
 import 'package:mathspring/widgets/avatar_editor.dart';
 import 'package:mathspring/widgets/avatar_preview.dart';
+import 'package:mathspring/widgets/otter_companion.dart';
 
 const String appSupportUrl = 'https://benwu777.github.io/MathSpring/support/';
 const String appPrivacyPolicyUrl =
@@ -46,6 +47,8 @@ abstract final class AppVisualTokens {
   static const Color brandSoft = Color(0xFFE7EBF8);
   static const Color progress = Color(0xFF168A82);
   static const Color progressSoft = Color(0xFFDDF3F0);
+  static const Color warmAccent = Color(0xFFFFA87D);
+  static const Color celebrationSoft = Color(0xFFFFF1E8);
   static const Color primary = brand;
   static const Color primarySoft = brandSoft;
   static const Color danger = Color(0xFFB54747);
@@ -541,22 +544,22 @@ class _MathSpringHomePageState extends State<MathSpringHomePage> {
                   destinations: [
                     NavigationDestination(
                       icon: const Icon(Icons.play_circle_outline),
-                      selectedIcon: const Icon(Icons.play_circle_outline),
+                      selectedIcon: const Icon(Icons.play_circle_rounded),
                       label: strings.navPractice,
                     ),
                     NavigationDestination(
                       icon: const Icon(Icons.fact_check_outlined),
-                      selectedIcon: const Icon(Icons.fact_check_outlined),
+                      selectedIcon: const Icon(Icons.fact_check_rounded),
                       label: strings.navQuiz,
                     ),
                     NavigationDestination(
                       icon: const Icon(Icons.history_edu_outlined),
-                      selectedIcon: const Icon(Icons.history_edu_outlined),
+                      selectedIcon: const Icon(Icons.history_edu_rounded),
                       label: strings.navReview,
                     ),
                     NavigationDestination(
                       icon: const Icon(Icons.settings_outlined),
-                      selectedIcon: const Icon(Icons.settings_outlined),
+                      selectedIcon: const Icon(Icons.settings_rounded),
                       label: strings.navSettings,
                     ),
                   ],
@@ -984,6 +987,7 @@ class _LearningReviewSectionState extends State<_LearningReviewSection> {
               title: strings.reviewTitle,
               subtitle: strings.reviewSubtitle,
               icon: Icons.history_edu_rounded,
+              otterPose: OtterPose.reflecting,
             ),
             const SizedBox(height: 18),
             _SectionCard(
@@ -1980,48 +1984,67 @@ class _HeroPanel extends StatelessWidget {
         ],
       ),
       padding: const EdgeInsets.all(24),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      child: Stack(
         children: [
-          Text(
-            strings.dashboardFocusTitle,
-            style: TextStyle(
-              color: const Color(0xB3FFFFFF),
-              fontSize: layoutSpec.scaleText(12),
-              fontWeight: FontWeight.w600,
+          Positioned(
+            right: -4,
+            bottom: -8,
+            child: Opacity(
+              opacity: .96,
+              child: OtterCompanion(
+                pose: OtterPose.welcoming,
+                size: layoutSpec.widthClass == WidthClass.compact ? 98 : 118,
+              ),
             ),
           ),
-          const SizedBox(height: 14),
-          Text(
-            strings.dashboardFocusBody,
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: layoutSpec.headingText,
-              height: 1.4,
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-          const SizedBox(height: 24),
-          Container(
-            padding: const EdgeInsets.all(14),
-            decoration: BoxDecoration(
-              color: const Color(0x1FFFFFFF),
-              borderRadius: BorderRadius.circular(10),
-              border: Border.all(color: const Color(0x2FFFFFFF)),
-            ),
-            child: Row(
+          Padding(
+            padding: const EdgeInsets.only(right: 68),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Expanded(
-                  child: Text(
-                    '${strings.dashboardPathTitle}\n${strings.dashboardPathValue}',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: layoutSpec.captionText,
-                      height: 1.5,
-                    ),
+                Text(
+                  strings.dashboardFocusTitle,
+                  style: TextStyle(
+                    color: const Color(0xB3FFFFFF),
+                    fontSize: layoutSpec.scaleText(12),
+                    fontWeight: FontWeight.w600,
                   ),
                 ),
-                const Icon(Icons.arrow_outward, color: Colors.white, size: 18),
+                const SizedBox(height: 14),
+                Text(
+                  strings.dashboardFocusBody,
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: layoutSpec.headingText,
+                    height: 1.4,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                const SizedBox(height: 24),
+                Container(
+                  padding: const EdgeInsets.all(14),
+                  decoration: BoxDecoration(
+                    color: const Color(0x1FFFFFFF),
+                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(color: const Color(0x2FFFFFFF)),
+                  ),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Text(
+                          '${strings.dashboardPathTitle}\n${strings.dashboardPathValue}',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: layoutSpec.captionText,
+                            height: 1.5,
+                          ),
+                        ),
+                      ),
+                      const Icon(Icons.arrow_outward,
+                          color: Colors.white, size: 18),
+                    ],
+                  ),
+                ),
               ],
             ),
           ),
@@ -2036,11 +2059,13 @@ class _CompactHeroBanner extends StatelessWidget {
     required this.title,
     required this.subtitle,
     required this.icon,
+    this.otterPose,
   });
 
   final String title;
   final String subtitle;
   final IconData icon;
+  final OtterPose? otterPose;
 
   @override
   Widget build(BuildContext context) {
@@ -2088,6 +2113,10 @@ class _CompactHeroBanner extends StatelessWidget {
               ],
             ),
           ),
+          if (otterPose != null) ...[
+            const SizedBox(width: 8),
+            OtterCompanion(pose: otterPose!, size: 58),
+          ],
         ],
       ),
     );
@@ -4033,18 +4062,33 @@ class _PracticeReviewCard extends StatelessWidget {
       width: double.infinity,
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: AppVisualTokens.surfaceMuted,
+        color: record.isCorrect
+            ? AppVisualTokens.celebrationSoft
+            : AppVisualTokens.surfaceMuted,
         borderRadius: BorderRadius.circular(14),
         border: Border.all(color: AppVisualTokens.outline),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _ResultStatusBadge(
-            label: record.isCorrect
-                ? strings.correctLabel
-                : strings.incorrectLabel,
-            isCorrect: record.isCorrect,
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                child: _ResultStatusBadge(
+                  label: record.isCorrect
+                      ? strings.correctLabel
+                      : strings.incorrectLabel,
+                  isCorrect: record.isCorrect,
+                ),
+              ),
+              OtterCompanion(
+                pose: record.isCorrect
+                    ? OtterPose.celebrating
+                    : OtterPose.thinking,
+                size: 64,
+              ),
+            ],
           ),
           const SizedBox(height: 12),
           if (record.question.figure.kind != 'none') ...[
