@@ -66,11 +66,18 @@ void main() {
 
   testWidgets('星期標題與日期欄位對齊', (WidgetTester tester) async {
     await openReview(tester);
-    // 2026 年 9 月 1 日是星期二，應該落在「Tue」那一欄
-    final double tueCenter = tester.getRect(find.text('Tue')).center.dx;
+    // 月曆顯示的是當月，所以要用當月 1 號實際的星期來對欄；
+    // 寫死某一天（例如「9/1 是週二」）會在換月後失敗。
+    const List<String> headers = <String>[
+      'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat',
+    ];
+    final DateTime now = DateTime.now();
+    final String expected =
+        headers[DateTime(now.year, now.month, 1).weekday % 7];
+    final double headerCenter = tester.getRect(find.text(expected)).center.dx;
     final double day1Center = tester.getRect(find.text('1')).center.dx;
-    expect(day1Center, closeTo(tueCenter, 2.0),
-        reason: '9/1 是週二，應對齊 Tue 欄');
+    expect(day1Center, closeTo(headerCenter, 2.0),
+        reason: '${now.month}/1 是 $expected，應對齊 $expected 欄');
   });
 
   testWidgets('月曆的日期仍然完整顯示且可點', (WidgetTester tester) async {

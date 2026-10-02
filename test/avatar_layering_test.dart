@@ -105,7 +105,9 @@ void main() {
       expect(reference.hairScale, 1);
       expect(reference.hairScaleX, 1);
       expect(reference.hairOffsetX, 0);
-      expect(reference.hairOffsetY, 0);
+      // 2026-09-28 重做男生髮型時，刻意為各款加上頭頂上移量（第一款 −0.075），
+      // 完整數值鎖在 avatar_preview_test 的「requested individual crown lifts」。
+      expect(reference.hairOffsetY, -.075);
     });
   });
 
