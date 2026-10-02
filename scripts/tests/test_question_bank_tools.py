@@ -477,6 +477,17 @@ class SimplifiedTermsTest(unittest.TestCase):
         msgs = vqp.check_simplified_terms(self._q('单数和双数', grade='grade5'))
         self.assertTrue(any('奇数' in m for m in msgs), msgs)
 
+    def test_taiwan_logic_and_sequence_terms_are_reported(self):
+        msgs = vqp.check_simplified_terms(self._q('若且唯若 n 是质数；由递回式可得'))
+        self.assertEqual(len(msgs), 1)
+        self.assertIn('当且仅当', msgs[0])
+        self.assertIn('递推', msgs[0])
+
+    def test_mistranslated_equation_is_reported(self):
+        """繁轉簡把「方程式」的「程式」轉成「程序」，變成「方程序」。"""
+        msgs = vqp.check_simplified_terms(self._q('解二次方程序 x² = 4'))
+        self.assertTrue(any('方程序' in m for m in msgs), msgs)
+
     def test_traditional_field_is_not_inspected(self):
         q = {'levelStage': 'grade6',
              'prompt': {'zh-Hant': '邊長 4 公分', 'zh-Hans': '边长 4 厘米', 'en': 'Q', 'ja': '問題'}}
