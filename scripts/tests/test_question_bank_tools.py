@@ -423,6 +423,98 @@ class ValidatorReportsSimplifiedInTraditionalTest(unittest.TestCase):
         self.assertIn('簡體', r.stdout)
 
 
+class SimplifiedTermsTest(unittest.TestCase):
+    """validate_question_packs.check_simplified_terms：zh-Hans 不得用台灣用語。
+
+    題庫的 zh-Hans 多由繁中轉換而來，沿用「公分」「机率」等台灣用語。
+    2026-10-02 統一成大陸用法（docs/plans/2026-10-02-zh-hans-terms-design.md），
+    這條檢查擋住之後補題又寫回去。
+    """
+
+    def _q(self, hans, grade='grade6', field='prompt'):
+        q = {'levelStage': grade,
+             'prompt': {'zh-Hant': '題目', 'zh-Hans': '题目', 'en': 'Q', 'ja': '問題'}}
+        if field == 'solutionSteps':
+            q['solutionSteps'] = {'zh-Hant': ['步驟'], 'zh-Hans': [hans], 'en': ['s'], 'ja': ['s']}
+        elif field == 'options':
+            q['options'] = {'A': {'zh-Hant': '選項', 'zh-Hans': hans, 'en': 'o', 'ja': 'o'}}
+        else:
+            q[field] = {'zh-Hant': '題目', 'zh-Hans': hans, 'en': 'Q', 'ja': '問題'}
+        return q
+
+    def test_mainland_terms_report_nothing(self):
+        q = self._q('长 5 厘米、宽 3 米，重 2 千克，概率是 1/2，坐标 (1, 2)。')
+        self.assertEqual(vqp.check_simplified_terms(q), [])
+
+    def test_taiwan_unit_is_reported_with_its_replacement(self):
+        msgs = vqp.check_simplified_terms(self._q('边长 4 公分。'))
+        self.assertEqual(len(msgs), 1)
+        self.assertIn('公分', msgs[0])
+        self.assertIn('厘米', msgs[0])
+
+    def test_taiwan_math_term_is_reported(self):
+        self.assertTrue(vqp.check_simplified_terms(self._q('抽到红球的机率是多少？')))
+
+    def test_term_in_solution_steps_is_reported(self):
+        msgs = vqp.check_simplified_terms(self._q('在座标平面上', field='solutionSteps'))
+        self.assertEqual(len(msgs), 1)
+        self.assertIn('solutionSteps', msgs[0])
+
+    def test_term_in_options_is_reported(self):
+        msgs = vqp.check_simplified_terms(self._q('3 公尺', field='options'))
+        self.assertEqual(len(msgs), 1)
+        self.assertIn('options', msgs[0])
+
+    def test_words_shared_with_mainland_are_not_reported(self):
+        """公里、公顷、毫升、方程式、最大公约数在大陸也這樣寫。"""
+        q = self._q('走了 3 公里，2 公顷，5 毫升，解方程式，最大公约数是 6。')
+        self.assertEqual(vqp.check_simplified_terms(q), [])
+
+    def test_odd_even_colloquial_words_allowed_up_to_grade4(self):
+        self.assertEqual(vqp.check_simplified_terms(self._q('单数和双数', grade='grade4')), [])
+
+    def test_odd_even_colloquial_words_reported_from_grade5(self):
+        msgs = vqp.check_simplified_terms(self._q('单数和双数', grade='grade5'))
+        self.assertTrue(any('奇数' in m for m in msgs), msgs)
+
+    def test_traditional_field_is_not_inspected(self):
+        q = {'levelStage': 'grade6',
+             'prompt': {'zh-Hant': '邊長 4 公分', 'zh-Hans': '边长 4 厘米', 'en': 'Q', 'ja': '問題'}}
+        self.assertEqual(vqp.check_simplified_terms(q), [])
+
+
+class SimplifiedTermsOnRealPacksTest(unittest.TestCase):
+    """整合測試：真實題庫每一題的 zh-Hans 都不可含台灣用語。"""
+
+    def test_no_real_question_uses_taiwan_terms_in_simplified(self):
+        import glob
+        offenders = []
+        for path in sorted(glob.glob('assets/questions/*/*.json')):
+            with open(path) as fh:
+                pack = json.load(fh)
+            for q in pack['questions']:
+                offenders.extend('%s: %s' % (q['id'], e)
+                                 for e in vqp.check_simplified_terms(q))
+        self.assertEqual(offenders, [], '\n'.join(offenders[:20]))
+
+
+class ValidatorReportsSimplifiedTermsTest(unittest.TestCase):
+    """整合測試：驗證器本身要把 zh-Hans 的台灣用語當成錯誤擋下來。"""
+
+    def test_validator_flags_taiwan_term_in_simplified_field(self):
+        helper = ValidatorReportsOptionLengthLeakTest()
+        q = helper._real_question('geometry_grade4_foundation_001')
+        q['prompt']['zh-Hans'] = q['prompt']['zh-Hans'] + '（单位：公分）'
+        with tempfile.TemporaryDirectory() as tmp:
+            helper._build_tree(tmp, q)
+            r = subprocess.run(
+                [sys.executable, os.path.join(ROOT, 'scripts',
+                                              'validate_question_packs.py')],
+                capture_output=True, text=True, cwd=tmp)
+        self.assertNotEqual(r.returncode, 0, r.stdout)
+        self.assertIn('公分', r.stdout)
+
+
 class CheckFigureParamsTest(unittest.TestCase):
     """validate_question_packs.check_figure_params：三種 kind 的 params 過去完全沒被檢查。
 

@@ -106,6 +106,37 @@ def check_simplified_in_traditional(q, simplified_chars):
     return errs
 
 
+# zh-Hans 要用大陸用語（docs/plans/2026-10-02-zh-hans-terms-design.md）。
+# 公里、公顷、毫升、方程式在大陸也這樣寫，不列入。
+TAIWAN_TERMS_IN_HANS = {
+    '公分': '厘米', '公尺': '米', '公厘': '毫米', '公斤': '千克', '公克': '克', '公升': '升',
+    '机率': '概率', '座标': '坐标', '最大公因数': '最大公约数',
+    '影片': '视频', '档案': '文件', '网路': '网络', '脚踏车': '自行车',
+    '原子笔': '圆珠笔', '资讯': '信息', '计程车': '出租车',
+}
+# 大陸課本五年級才教「奇数／偶数」，低年級沿用「单数／双数」。
+ODD_EVEN_COLLOQUIAL = {'单数': '奇数', '双数': '偶数'}
+ODD_EVEN_FORMAL_FROM_GRADE = 5
+
+
+def check_simplified_terms(q):
+    """回傳 zh-Hans 使用台灣用語的錯誤訊息清單；合格時回傳空清單。"""
+    terms = dict(TAIWAN_TERMS_IN_HANS)
+    n = (q.get('levelStage') or '').replace('grade', '')
+    if n.isdigit() and int(n) >= ODD_EVEN_FORMAL_FROM_GRADE:
+        terms.update(ODD_EVEN_COLLOQUIAL)
+    errs = []
+    for fld in ('prompt', 'answer', 'options', 'solutionSteps', 'hint'):
+        if fld not in q:
+            continue
+        text = '\n'.join(iter_lang_text(q[fld], 'zh-Hans'))
+        found = [t for t in terms if t in text]
+        if found:
+            errs.append('%s 的 zh-Hans 用了台灣用語: %s'
+                        % (fld, '、'.join('%s→%s' % (t, terms[t]) for t in found)))
+    return errs
+
+
 # 小數部分結尾有 ≥2 個零 = 把程式的浮點輸出直接貼上來。
 # 這條剛好放行真正的近似值（6.7082、4.429、3.818182）與步長（0.0001），
 # 它們的小數部分都不是以零結尾；也放行 12.50 這種正常的兩位小數。
@@ -638,6 +669,9 @@ def main():
                 err(msg)
 
             for msg in check_simplified_in_traditional(q, SIMPLIFIED):
+                err(msg)
+
+            for msg in check_simplified_terms(q):
                 err(msg)
 
             for msg in check_caret_power(q):
