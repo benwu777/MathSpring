@@ -10538,6 +10538,461 @@
         "reference": "geometry-grade4-foundation",
         "notes": "邊長 n 分割的正三角形中，尖端朝下的小三角形每層比朝上少 1，總數 0 + 1 + … + (n − 1)。掃過 朝下|尖端（16 題）、小正三角形（6 題）；最接近 geometry_grade10_foundation_050，差異：那題已告知 4 等分時朝上 10、朝下 6，求菱形磁磚最多幾塊；本題就是要數出朝下的個數，推理是逐層計數"
       }
+    },
+    {
+      "id": "geometry_grade4_foundation_131",
+      "reviewStatus": "ok",
+      "topic": "geometry",
+      "subtopic": "fewest_matchsticks_to_break_all_unit_squares",
+      "tags": [
+        "c:quadrilateral",
+        "m:estimate_bound",
+        "m:construction"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade4",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "小安用 24 根一樣長的火柴棒排成一個 3 × 3 的方格：一共 9 個小正方形，相鄰兩個小正方形共用中間那一根火柴棒。他要拿走一些火柴棒，讓 9 個小正方形每一個都不再完整（至少少了一條邊）。比較大的正方形不用管。他最少要拿走幾根火柴棒？",
+        "zh-Hans": "小安用 24 根一样长的火柴棒排成一个 3 × 3 的方格：一共 9 个小正方形，相邻两个小正方形共用中间那一根火柴棒。他要拿走一些火柴棒，让 9 个小正方形每一个都不再完整（至少少了一条边）。比较大的正方形不用管。他最少要拿走几根火柴棒？",
+        "en": "An lays out 24 equal matchsticks as a 3 × 3 grid: 9 small squares, where two neighbouring small squares share the matchstick between them. He wants to take away some matchsticks so that none of the 9 small squares is complete any more (each is missing at least one side). Larger squares do not matter. What is the smallest number of matchsticks he must take away?",
+        "ja": "アンさんは同じ長さのマッチぼう 24 本で 3 × 3 のます目をつくりました。小さな正方形が 9 個あり、となり合う 2 つの小さな正方形は間のマッチぼうを共有しています。何本かのマッチぼうを取りのぞいて、9 個の小さな正方形がどれも完全でない（少なくとも 1 辺が欠けている）ようにします。大きな正方形は考えなくてかまいません。少なくとも何本取りのぞけばよいですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 5。",
+        "zh-Hans": "答案是 5。",
+        "en": "The answer is 5.",
+        "ja": "答えは 5 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "每一根火柴棒最多是 2 個小正方形的邊：在方格裡面的那些火柴棒，兩邊各有一個小正方形；在外框上的火柴棒只屬於 1 個小正方形。",
+          "拿走 1 根火柴棒，最多讓 2 個小正方形變得不完整。拿走 4 根，最多只破壞 4 × 2 = 8 個，9 個中至少還有 1 個完整，所以至少要拿 5 根。",
+          "5 根做得到。用（第幾橫排, 第幾個）表示小正方形，都從 1 編到 3。拿走以下 4 根裡面的火柴棒：（1, 1）和（1, 2）之間的、（1, 3）和（2, 3）之間的、（2, 1）和（3, 1）之間的、（2, 2）和（3, 2）之間的。這 4 根各破壞 2 個小正方形，一共破壞 8 個，而且沒有重複。",
+          "只剩（3, 3）還完整，再拿走它在外框上的一根火柴棒。這樣一共拿走 5 根，9 個小正方形都不完整了。",
+          "所以最少要拿走 5 根火柴棒。"
+        ],
+        "zh-Hans": [
+          "每一根火柴棒最多是 2 个小正方形的边：在方格里面的那些火柴棒，两边各有一个小正方形；在外框上的火柴棒只属于 1 个小正方形。",
+          "拿走 1 根火柴棒，最多让 2 个小正方形变得不完整。拿走 4 根，最多只破坏 4 × 2 = 8 个，9 个中至少还有 1 个完整，所以至少要拿 5 根。",
+          "5 根做得到。用（第几横排, 第几个）表示小正方形，都从 1 编到 3。拿走以下 4 根里面的火柴棒：（1, 1）和（1, 2）之间的、（1, 3）和（2, 3）之间的、（2, 1）和（3, 1）之间的、（2, 2）和（3, 2）之间的。这 4 根各破坏 2 个小正方形，一共破坏 8 个，而且没有重复。",
+          "只剩（3, 3）还完整，再拿走它在外框上的一根火柴棒。这样一共拿走 5 根，9 个小正方形都不完整了。",
+          "所以最少要拿走 5 根火柴棒。"
+        ],
+        "en": [
+          "Each matchstick is a side of at most 2 small squares: an inside matchstick has a small square on each side, while a matchstick on the outer frame belongs to only 1 small square.",
+          "Taking away 1 matchstick breaks at most 2 small squares. Taking away 4 breaks at most 4 × 2 = 8, so at least 1 of the 9 stays complete. At least 5 must be taken.",
+          "5 is enough. Name the small squares (row, position), both from 1 to 3. Take away these 4 inside matchsticks: the one between (1, 1) and (1, 2), between (1, 3) and (2, 3), between (2, 1) and (3, 1), and between (2, 2) and (3, 2). Each breaks 2 small squares, 8 different squares in all.",
+          "Only (3, 3) is still complete; take away one of its matchsticks on the outer frame. That is 5 matchsticks in total and no small square is complete.",
+          "So the smallest number is 5 matchsticks."
+        ],
+        "ja": [
+          "どのマッチぼうも、多くて 2 つの小さな正方形の辺です。ます目の内側のマッチぼうは両側に小さな正方形があり、外わくのマッチぼうは 1 つの小さな正方形にしか属しません。",
+          "マッチぼう 1 本を取ると、こわれる小さな正方形は多くて 2 つです。4 本では多くて 4 × 2 = 8 個で、9 個のうち少なくとも 1 つは完全なまま残ります。だから少なくとも 5 本必要です。",
+          "5 本でできます。小さな正方形を（何番目の横の列, 左から何番目）で表し、どちらも 1 から 3 とします。次の内側の 4 本を取ります：（1, 1）と（1, 2）の間、（1, 3）と（2, 3）の間、（2, 1）と（3, 1）の間、（2, 2）と（3, 2）の間。どれも 2 つずつ、合わせて重ならずに 8 個の小さな正方形をこわします。",
+          "完全なのは（3, 3）だけなので、その外わくのマッチぼうを 1 本取ります。合わせて 5 本で、どの小さな正方形も完全ではなくなります。",
+          "よって少なくとも 5 本です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "5"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "geometry-grade4-foundation",
+        "notes": "每根火柴至多屬於 2 個小正方形，9 個至少要 5 根；4 根內部配對 + 1 根外框。掃過 火柴（4 題）、拿走.*根|移走.*根|拿掉.*根（1 題）；最接近 algebra_grade7_foundation_156，差異：那題數排出 n × n 方格要用幾根火柴；本題要拿走最少火柴破壞所有小正方形，用「一根最多屬於兩格」下界 + 配對構造"
+      }
+    },
+    {
+      "id": "geometry_grade4_foundation_132",
+      "reviewStatus": "ok",
+      "topic": "geometry",
+      "subtopic": "fewest_red_edges_touching_every_cube_face",
+      "tags": [
+        "c:solid",
+        "m:estimate_bound",
+        "m:construction"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade4",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一個正方體有 12 條稜和 6 個面。小安要把其中一些稜塗成紅色，使得 6 個面的每一個面上都至少有 1 條紅色的稜。他最少要塗幾條稜？",
+        "zh-Hans": "一个正方体有 12 条棱和 6 个面。小安要把其中一些棱涂成红色，使得 6 个面的每一个面上都至少有 1 条红色的棱。他最少要涂几条棱？",
+        "en": "A cube has 12 edges and 6 faces. An wants to paint some of the edges red so that each of the 6 faces has at least 1 red edge on it. What is the smallest number of edges he must paint?",
+        "ja": "立方体には 12 本の辺と 6 つの面があります。アンさんは何本かの辺を赤くぬり、6 つの面のどの面にも赤い辺が少なくとも 1 本あるようにしたいと思っています。少なくとも何本ぬればよいですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 3。",
+        "zh-Hans": "答案是 3。",
+        "en": "The answer is 3.",
+        "ja": "答えは 3 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "每一條稜都是兩個面交接的地方，恰好是 2 個面的邊，所以塗紅 1 條稜，最多讓 2 個面有紅稜。",
+          "6 個面都要有紅稜。只塗 2 條，最多只照顧到 2 × 2 = 4 個面，不夠，所以至少要塗 3 條。",
+          "3 條做得到：把正方體放在桌上，塗紅「上面和前面交接的稜」、「下面和左面交接的稜」、「後面和右面交接的稜」。上、前、下、左、後、右 6 個面各分到 1 條紅稜。",
+          "所以最少要塗 3 條稜。"
+        ],
+        "zh-Hans": [
+          "每一条棱都是两个面交接的地方，恰好是 2 个面的边，所以涂红 1 条棱，最多让 2 个面有红棱。",
+          "6 个面都要有红棱。只涂 2 条，最多只照顾到 2 × 2 = 4 个面，不够，所以至少要涂 3 条。",
+          "3 条做得到：把正方体放在桌上，涂红「上面和前面交接的棱」、「下面和左面交接的棱」、「后面和右面交接的棱」。上、前、下、左、后、右 6 个面各分到 1 条红棱。",
+          "所以最少要涂 3 条棱。"
+        ],
+        "en": [
+          "Each edge is where exactly 2 faces meet, so one red edge serves at most 2 faces.",
+          "All 6 faces need a red edge. With only 2 red edges at most 2 × 2 = 4 faces are served, which is not enough, so at least 3 edges are needed.",
+          "3 edges work: with the cube on a table, paint the edge where the top meets the front, the edge where the bottom meets the left, and the edge where the back meets the right. Top, front, bottom, left, back and right each get one red edge.",
+          "So the smallest number is 3 edges."
+        ],
+        "ja": [
+          "どの辺も 2 つの面が出会うところで、ちょうど 2 つの面の辺になっています。だから赤い辺 1 本で赤い辺をもつ面は多くて 2 つです。",
+          "6 つの面すべてに赤い辺が必要です。2 本だけでは多くて 2 × 2 = 4 面にしか届かないので足りません。少なくとも 3 本必要です。",
+          "3 本でできます。立方体を机に置き、「上の面と前の面の境の辺」「下の面と左の面の境の辺」「後ろの面と右の面の境の辺」を赤くぬると、上・前・下・左・後ろ・右の 6 面にそれぞれ赤い辺が 1 本ずつあります。",
+          "よって少なくとも 3 本です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "3"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "geometry-grade4-foundation",
+        "notes": "每條稜恰屬兩面，6 面至少 3 條，再配對相鄰面構造。掃過 稜（29 題）、塗.*稜|稜.*塗（1 題）；最接近 geometry_grade1_foundation_084，差異：那題數兩旁都是黃面的稜有幾條；本題求讓每面都有紅稜的最少稜數，用「一稜管兩面」下界加構造"
+      }
+    },
+    {
+      "id": "geometry_grade4_foundation_133",
+      "reviewStatus": "ok",
+      "topic": "geometry",
+      "subtopic": "domino_tiling_5x5_after_removing_one_cell",
+      "tags": [
+        "c:area",
+        "m:coloring",
+        "m:construction"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade4",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一塊 5 × 5 的方格板有 25 格（5 個橫排，每排 5 格）。小安先挖掉其中 1 格，再想用 12 塊 1 × 2 的骨牌把剩下的 24 格完全蓋滿：每塊骨牌蓋住上下或左右相鄰的 2 格，骨牌不重疊、不超出方格板。在 25 格之中，挖掉哪些格子以後做得到？這樣的格子一共有幾格？",
+        "zh-Hans": "一块 5 × 5 的方格板有 25 格（5 个横排，每排 5 格）。小安先挖掉其中 1 格，再想用 12 块 1 × 2 的骨牌把剩下的 24 格完全盖满：每块骨牌盖住上下或左右相邻的 2 格，骨牌不重叠、不超出方格板。在 25 格之中，挖掉哪些格子以后做得到？这样的格子一共有几格？",
+        "en": "A 5 × 5 board has 25 cells (5 rows of 5). An first removes 1 cell and then wants to cover the remaining 24 cells exactly with 12 dominoes of size 1 × 2: each domino covers 2 cells that are side by side (left-right or up-down), with no overlaps and nothing sticking out. For which cells does this work after removing them? How many such cells are there among the 25?",
+        "ja": "5 × 5 のます目の板があり、25 ます（横の列が 5 つ、1 列 5 ます）です。アンさんはまず 1 ますを取りのぞき、残りの 24 ますを 1 × 2 のドミノ 12 枚でぴったりおおいたいと考えています。ドミノは上下か左右にとなり合う 2 ますをおおい、重なったりはみ出したりしてはいけません。25 ますのうち、どのますを取りのぞけばうまくいきますか。そのようなますは全部で何ますですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 13。",
+        "zh-Hans": "答案是 13。",
+        "en": "The answer is 13.",
+        "ja": "答えは 13 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "把方格板像西洋棋盤那樣黑白相間塗色，四個角塗黑。每一橫排是「黑白黑白黑」或「白黑白黑白」，數一數：黑格 3 × 3 + 2 × 2 = 13 格，白格 12 格。",
+          "每塊骨牌蓋住的兩格一定相鄰，所以一定是一黑一白，12 塊骨牌剛好蓋 12 黑、12 白。",
+          "如果挖掉的是白格，剩下 13 黑、11 白，黑白不一樣多，不可能蓋滿。所以挖掉的必須是黑格。",
+          "黑格都做得到。用（第幾橫排, 第幾格）表示位置，都從 1 編到 5；黑格就是兩個號碼加起來是雙數的格子。若挖掉的格子兩個號碼都是單數：它上面和下面的橫排數都是雙數（0、2 或 4 排），每兩排一組用 5 塊直放的骨牌蓋滿；它所在的那一橫排，左邊和右邊剩下的格數也都是雙數，用橫放的骨牌蓋滿。",
+          "若挖掉的格子兩個號碼都是雙數，例如（2, 2）：左上角 3 × 3 的區域挖掉正中間後剩 8 格，排成一圈，可以用 4 塊骨牌沿著這一圈蓋滿；它右邊 3 排、每排 2 格的區域用 3 塊橫放骨牌蓋滿；下面 2 排、每排 5 格的區域用 5 塊直放骨牌蓋滿。（2, 4）、（4, 2）、（4, 4）把方格板轉個方向，做法一樣。",
+          "所以挖掉 13 個黑格中的任何一格都做得到，挖掉白格都做不到，答案是 13 格。"
+        ],
+        "zh-Hans": [
+          "把方格板像西洋棋盘那样黑白相间涂色，四个角涂黑。每一横排是「黑白黑白黑」或「白黑白黑白」，数一数：黑格 3 × 3 + 2 × 2 = 13 格，白格 12 格。",
+          "每块骨牌盖住的两格一定相邻，所以一定是一黑一白，12 块骨牌刚好盖 12 黑、12 白。",
+          "如果挖掉的是白格，剩下 13 黑、11 白，黑白不一样多，不可能盖满。所以挖掉的必须是黑格。",
+          "黑格都做得到。用（第几横排, 第几格）表示位置，都从 1 编到 5；黑格就是两个号码加起来是双数的格子。若挖掉的格子两个号码都是单数：它上面和下面的横排数都是双数（0、2 或 4 排），每两排一组用 5 块直放的骨牌盖满；它所在的那一横排，左边和右边剩下的格数也都是双数，用横放的骨牌盖满。",
+          "若挖掉的格子两个号码都是双数，例如（2, 2）：左上角 3 × 3 的区域挖掉正中间后剩 8 格，排成一圈，可以用 4 块骨牌沿着这一圈盖满；它右边 3 排、每排 2 格的区域用 3 块横放骨牌盖满；下面 2 排、每排 5 格的区域用 5 块直放骨牌盖满。（2, 4）、（4, 2）、（4, 4）把方格板转个方向，做法一样。",
+          "所以挖掉 13 个黑格中的任何一格都做得到，挖掉白格都做不到，答案是 13 格。"
+        ],
+        "en": [
+          "Colour the board like a chessboard with black corners. Each row is black-white-black-white-black or white-black-white-black-white, so there are 3 × 3 + 2 × 2 = 13 black cells and 12 white cells.",
+          "A domino always covers two neighbouring cells, one black and one white, so 12 dominoes cover exactly 12 black and 12 white cells.",
+          "If a white cell is removed, 13 black and 11 white cells remain, which is impossible. So the removed cell must be black.",
+          "Every black cell works. Write a cell as (row, position), both numbered 1 to 5; black cells are those whose two numbers add to an even number. If both numbers are odd, the rows above and below it come in even numbers (0, 2 or 4 rows); cover each pair of rows with 5 upright dominoes. In its own row the cells to its left and to its right are also even in number; cover them with lying dominoes.",
+          "If both numbers are even, say (2, 2): the top-left 3 × 3 block without its centre is a ring of 8 cells, covered by 4 dominoes around the ring; the block to its right (3 rows of 2 cells) takes 3 lying dominoes; the bottom 2 rows of 5 cells take 5 upright dominoes. For (2, 4), (4, 2), (4, 4) turn the board and do the same.",
+          "So removing any of the 13 black cells works and removing a white cell never works. The answer is 13 cells."
+        ],
+        "ja": [
+          "板をチェス盤のように白黒にぬり、4 すみを黒にします。どの横の列も「黒白黒白黒」か「白黒白黒白」なので、黒は 3 × 3 + 2 × 2 = 13 ます、白は 12 ますです。",
+          "ドミノがおおう 2 ますはとなり合っているので必ず黒 1 つと白 1 つで、12 枚では黒 12、白 12 をおおいます。",
+          "白いますを取りのぞくと黒 13、白 11 が残り、数が合わないのでおおえません。取りのぞくのは黒いますでなければなりません。",
+          "黒いますならどれでもできます。ますを（何番目の横の列, 左から何番目）で表すと、黒いますは 2 つの番号の和が偶数のますです。2 つとも奇数のときは、その上と下の列の数がどちらも偶数（0、2、4 列）なので、2 列ずつたて置きのドミノ 5 枚でうめます。そのますのある列の左と右の残りも偶数ますなので、横置きでうめます。",
+          "2 つとも偶数のとき、たとえば（2, 2）なら、左上の 3 × 3 から真ん中をぬいた 8 ますは輪になっていて、ドミノ 4 枚で輪にそってうめられます。その右の 3 列 × 2 ますは横置き 3 枚、下の 2 列 × 5 ますはたて置き 5 枚でうめます。（2, 4）、（4, 2）、（4, 4）は板の向きを変えれば同じです。",
+          "よって 13 個の黒いますのどれを取ってもでき、白いますではできません。答えは 13 ますです。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "13"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "geometry-grade4-foundation",
+        "notes": "黑白染色：13 黑 12 白，只能挖黑格；黑格分奇奇、偶偶兩類各給構造。掃過 骨牌（13 題）、黑白相間|棋盤那樣（3 題）；最接近 logic_grade5_foundation_045，差異：那題是 8 × 8 剪掉兩個同色角只問能否鋪滿；本題 5 × 5 挖一格，要數出可行格數，除了黑白計數排除白格，還要對兩類黑格各給鋪法"
+      }
+    },
+    {
+      "id": "geometry_grade4_foundation_134",
+      "reviewStatus": "ok",
+      "topic": "geometry",
+      "subtopic": "squares_side_1_to_4_in_a_row_min_perimeter",
+      "tags": [
+        "c:perimeter",
+        "m:estimate_bound",
+        "m:construction"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade4",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "小安有 4 張正方形紙片，邊長分別是 1 公分、2 公分、3 公分、4 公分。他把它們排成一排：下緣都對齊在同一條直線上，相鄰兩張的側邊貼在一起（不重疊、不留縫），排列的先後順序可以自己決定。排好的整個圖形外圍一圈的周長，最小是幾公分？",
+        "zh-Hans": "小安有 4 张正方形纸片，边长分别是 1 厘米、2 厘米、3 厘米、4 厘米。他把它们排成一排：下缘都对齐在同一条直线上，相邻两张的侧边贴在一起（不重叠、不留缝），排列的先后顺序可以自己决定。排好的整个图形外围一圈的周长，最小是几厘米？",
+        "en": "An has 4 square pieces of paper with sides 1 cm, 2 cm, 3 cm and 4 cm. He puts them in a row: their bottom edges lie on one straight line and neighbouring squares touch side to side (no overlap, no gap); he may choose the order. What is the smallest possible perimeter of the whole figure, in centimetres?",
+        "ja": "アンさんは 1 辺が 1 cm、2 cm、3 cm、4 cm の正方形の紙を 1 枚ずつ持っています。下の辺を 1 本の直線にそろえ、となりどうしの側面をぴったりくっつけて（重ならず、すき間なく）横一列にならべます。ならべる順番は自由です。できた図形のまわりの長さは、いちばん短くて何 cm ですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 28。",
+        "zh-Hans": "答案是 28。",
+        "en": "The answer is 28.",
+        "ja": "答えは 28 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "沿著圖形外圍走一圈，經過的邊分成橫的和直的兩種。",
+          "橫的部分：最下面是 1 + 2 + 3 + 4 = 10 公分。每張紙的上邊都露在外面（旁邊的紙只貼在它的側邊，不會蓋到它上面），所以上面也是 10 公分。橫的合計 20 公分，不論怎麼排都一樣。",
+          "直的部分：從最下面的直線出發走一圈，途中一定要爬到最高的 4 公分，再回到下面，所以往上走的直邊加起來至少 4 公分，往下走的也至少 4 公分，直的合計至少 8 公分。",
+          "所以周長至少是 20 + 8 = 28 公分。",
+          "照 1、2、3、4 公分由矮到高排：左邊直邊 1 公分，中間三個台階各高 1 公分，右邊直邊 4 公分，直的合計 1 + 1 + 1 + 1 + 4 = 8 公分，周長剛好 28 公分。所以最小是 28 公分。"
+        ],
+        "zh-Hans": [
+          "沿着图形外围走一圈，经过的边分成横的和直的两种。",
+          "横的部分：最下面是 1 + 2 + 3 + 4 = 10 厘米。每张纸的上边都露在外面（旁边的纸只贴在它的侧边，不会盖到它上面），所以上面也是 10 厘米。横的合计 20 厘米，不论怎么排都一样。",
+          "直的部分：从最下面的直线出发走一圈，途中一定要爬到最高的 4 厘米，再回到下面，所以往上走的直边加起来至少 4 厘米，往下走的也至少 4 厘米，直的合计至少 8 厘米。",
+          "所以周长至少是 20 + 8 = 28 厘米。",
+          "照 1、2、3、4 厘米由矮到高排：左边直边 1 厘米，中间三个台阶各高 1 厘米，右边直边 4 厘米，直的合计 1 + 1 + 1 + 1 + 4 = 8 厘米，周长刚好 28 厘米。所以最小是 28 厘米。"
+        ],
+        "en": [
+          "Walking once around the figure, the sides are either horizontal or vertical.",
+          "Horizontal: the bottom is 1 + 2 + 3 + 4 = 10 cm. The top edge of every square is exposed (neighbours only touch its sides), so the top also totals 10 cm. Horizontal total 20 cm in every order.",
+          "Vertical: starting on the bottom line and going round, you must climb to the greatest height 4 cm and come back down, so the upward vertical pieces total at least 4 cm and the downward ones at least 4 cm: at least 8 cm.",
+          "So the perimeter is at least 20 + 8 = 28 cm.",
+          "In the order 1, 2, 3, 4 cm: left side 1 cm, three steps of 1 cm each, right side 4 cm, vertical total 1 + 1 + 1 + 1 + 4 = 8 cm, perimeter exactly 28 cm. So the smallest perimeter is 28 cm."
+        ],
+        "ja": [
+          "図形のまわりを 1 周すると、通る辺は横の辺とたての辺に分かれます。",
+          "横の辺：下は 1 + 2 + 3 + 4 = 10 cm です。どの正方形の上の辺も外に出ています（となりの紙は横にくっつくだけで上にはかぶらない）ので、上も 10 cm です。横は合わせて 20 cm で、どうならべても変わりません。",
+          "たての辺：下の直線から出発して 1 周すると、いちばん高い 4 cm まで登ってまた下りてこなければならないので、上る部分の合計は少なくとも 4 cm、下る部分も少なくとも 4 cm、たては合わせて少なくとも 8 cm です。",
+          "よってまわりの長さは少なくとも 20 + 8 = 28 cm です。",
+          "1、2、3、4 cm の順に低いほうからならべると、左のたての辺 1 cm、間の 3 つの段がそれぞれ 1 cm、右のたての辺 4 cm で、たては 1 + 1 + 1 + 1 + 4 = 8 cm、まわりはちょうど 28 cm です。いちばん短くて 28 cm です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "28"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "geometry-grade4-foundation",
+        "notes": "橫邊總長固定，直邊至少上 4 下 4，由矮到高排達成。掃過 正方形.*周長（36 題）、排成一排.*正方形|正方形.*排成一排（1 題）；最接近 geometry_grade3_foundation_042，差異：那題是兩個長方形並排算固定周長；本題四個不同大小的正方形可任意排序求最小周長，橫邊總和固定、直邊至少爬上爬下最高點"
+      }
+    },
+    {
+      "id": "geometry_grade4_foundation_135",
+      "reviewStatus": "ok",
+      "topic": "geometry",
+      "subtopic": "four_stations_six_distances_find_middle_gap",
+      "tags": [
+        "c:add_sub",
+        "c:logic_deduction",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade4",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一條筆直的公路上依序有甲、乙、丙、丁四個車站。任兩站之間的距離一共有 6 個，量出來分別是 2、3、4、5、7、9 公里（6 個距離都不一樣）。乙站和丙站之間相距幾公里？",
+        "zh-Hans": "一条笔直的公路上依序有甲、乙、丙、丁四个车站。任两站之间的距离一共有 6 个，量出来分别是 2、3、4、5、7、9 千米（6 个距离都不一样）。乙站和丙站之间相距几千米？",
+        "en": "Four stations P, Q, R, S lie in this order along a straight road. The 6 distances between pairs of stations are 2, 3, 4, 5, 7 and 9 km (all different). How many kilometres apart are stations Q and R?",
+        "ja": "まっすぐな道路に甲・乙・丙・丁の 4 つの駅がこの順にならんでいます。2 つの駅の間のきょりは全部で 6 つあり、2、3、4、5、7、9 km でした（6 つともちがいます）。乙駅と丙駅は何 km はなれていますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 3。",
+        "zh-Hans": "答案是 3。",
+        "en": "The answer is 3.",
+        "ja": "答えは 3 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "甲、丁在兩端，甲到丁的距離最長，是 9 公里。",
+          "甲乙、乙丙、丙丁三段接起來就是甲丁，所以這三段加起來是 9 公里。另外兩個距離是甲丙（甲乙 + 乙丙）和乙丁（乙丙 + 丙丁）。",
+          "甲乙、乙丙、丙丁是 2、3、4、5、7 裡面的三個數，加起來要是 9。如果含 7，另外兩數加起來只剩 2，不可能；如果含 5，另外兩數加起來是 4，只能是 2 和 2，但距離都不一樣，也不行。所以這三段是 2、3、4，甲丙和乙丁就是 5 和 7。",
+          "甲丙 + 乙丁 = 甲乙 + 乙丙 + 乙丙 + 丙丁 = 9 + 乙丙。而甲丙 + 乙丁 = 5 + 7 = 12，所以乙丙 = 12 − 9 = 3 公里。",
+          "檢查：甲乙 2、乙丙 3、丙丁 4（或倒過來 4、3、2），甲丙 5、乙丁 7、甲丁 9，六個距離正好是 2、3、4、5、7、9。所以乙丙相距 3 公里。"
+        ],
+        "zh-Hans": [
+          "甲、丁在两端，甲到丁的距离最长，是 9 千米。",
+          "甲乙、乙丙、丙丁三段接起来就是甲丁，所以这三段加起来是 9 千米。另外两个距离是甲丙（甲乙 + 乙丙）和乙丁（乙丙 + 丙丁）。",
+          "甲乙、乙丙、丙丁是 2、3、4、5、7 里面的三个数，加起来要是 9。如果含 7，另外两数加起来只剩 2，不可能；如果含 5，另外两数加起来是 4，只能是 2 和 2，但距离都不一样，也不行。所以这三段是 2、3、4，甲丙和乙丁就是 5 和 7。",
+          "甲丙 + 乙丁 = 甲乙 + 乙丙 + 乙丙 + 丙丁 = 9 + 乙丙。而甲丙 + 乙丁 = 5 + 7 = 12，所以乙丙 = 12 − 9 = 3 千米。",
+          "检查：甲乙 2、乙丙 3、丙丁 4（或倒过来 4、3、2），甲丙 5、乙丁 7、甲丁 9，六个距离正好是 2、3、4、5、7、9。所以乙丙相距 3 千米。"
+        ],
+        "en": [
+          "P and S are the ends, so PS is the longest distance, 9 km.",
+          "The pieces PQ, QR, RS together make PS, so they add up to 9 km. The other two distances are PR (PQ + QR) and QS (QR + RS).",
+          "PQ, QR, RS are three of the numbers 2, 3, 4, 5, 7 with sum 9. With 7 the other two would add to 2, impossible; with 5 the other two would add to 4, only 2 and 2, but the distances are all different. So the three pieces are 2, 3, 4, and PR and QS are 5 and 7.",
+          "PR + QS = PQ + QR + QR + RS = 9 + QR. Also PR + QS = 5 + 7 = 12, so QR = 12 − 9 = 3 km.",
+          "Check: PQ 2, QR 3, RS 4 (or 4, 3, 2), PR 5, QS 7, PS 9: exactly 2, 3, 4, 5, 7, 9. So Q and R are 3 km apart."
+        ],
+        "ja": [
+          "甲と丁が両はしなので、甲丁がいちばん長く 9 km です。",
+          "甲乙・乙丙・丙丁の 3 つをつなぐと甲丁なので、この 3 つの和は 9 km です。残りの 2 つは甲丙（甲乙 + 乙丙）と乙丁（乙丙 + 丙丁）です。",
+          "甲乙・乙丙・丙丁は 2、3、4、5、7 のうちの 3 つで、和が 9 です。7 をふくむと残り 2 つの和は 2 で無理、5 をふくむと残りの和は 4 で 2 と 2 しかなく、きょりがすべてちがうことに反します。だから 3 つは 2、3、4 で、甲丙と乙丁は 5 と 7 です。",
+          "甲丙 + 乙丁 = 甲乙 + 乙丙 + 乙丙 + 丙丁 = 9 + 乙丙 です。一方、甲丙 + 乙丁 = 5 + 7 = 12 なので、乙丙 = 12 − 9 = 3 km です。",
+          "確かめ：甲乙 2、乙丙 3、丙丁 4（または逆に 4、3、2）、甲丙 5、乙丁 7、甲丁 9 で、ちょうど 2、3、4、5、7、9 です。乙丙は 3 km です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "3"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "geometry-grade4-foundation",
+        "notes": "三小段和為最長距離 9，只能是 2、3、4；甲丙 + 乙丁 = 9 + 乙丙。掃過 車站|站之間（11 題）、兩兩.*距離|任兩.*距離|距離.*分別（2 題）；最接近 geometry_grade4_foundation_121，差異：那題已知各段長求所有線段總和；本題反過來由 6 個兩兩距離還原各段，利用「三段和 = 最長」與「兩個跨兩段距離之和 = 全長 + 中段」"
+      }
+    },
+    {
+      "id": "geometry_grade4_foundation_136",
+      "reviewStatus": "ok",
+      "topic": "geometry",
+      "subtopic": "three_d_checkerboard_cube_black_count",
+      "tags": [
+        "c:solid",
+        "m:coloring"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade4",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "小安用 27 個一樣大的小正方體堆成一個 3 × 3 × 3 的大正方體，小正方體只有黑、白兩種顏色。他讓任何兩個「面貼著面」的小正方體顏色都不同，而且大正方體的 8 個角都是黑色。這 27 個小正方體中，黑色的有幾個？",
+        "zh-Hans": "小安用 27 个一样大的小正方体堆成一个 3 × 3 × 3 的大正方体，小正方体只有黑、白两种颜色。他让任何两个「面贴着面」的小正方体颜色都不同，而且大正方体的 8 个角都是黑色。这 27 个小正方体中，黑色的有几个？",
+        "en": "An builds a 3 × 3 × 3 cube from 27 equal small cubes, each black or white. Any two small cubes that touch face to face have different colours, and the 8 corner cubes of the big cube are black. How many of the 27 small cubes are black?",
+        "ja": "アンさんは同じ大きさの小さな立方体 27 個で 3 × 3 × 3 の大きな立方体をつくりました。小さな立方体は黒か白のどちらかです。面と面がくっついている 2 つの小さな立方体はいつも色がちがい、大きな立方体の 8 つのかどは黒です。27 個のうち黒は何個ですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 14。",
+        "zh-Hans": "答案是 14。",
+        "en": "The answer is 14.",
+        "ja": "答えは 14 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "把大正方體分成上、中、下三層，每層是 3 × 3 = 9 個。",
+          "上層的四個角是黑色。同一層裡左右、前後相鄰的顏色不同，所以上層像棋盤一樣黑白相間：四個角和正中間是黑色（5 個），四條邊的中間是白色（4 個）。",
+          "中層的每一個都在上層同一位置那一個的正下方，面貼著面，顏色要相反：中層的四個角和正中間是白色，四條邊的中間是黑色（4 個）。",
+          "下層又在中層的正下方，顏色再反過來，和上層一樣，黑色 5 個；它的四個角是大正方體的角，確實是黑色。",
+          "黑色一共 5 + 4 + 5 = 14 個。"
+        ],
+        "zh-Hans": [
+          "把大正方体分成上、中、下三层，每层是 3 × 3 = 9 个。",
+          "上层的四个角是黑色。同一层里左右、前后相邻的颜色不同，所以上层像棋盘一样黑白相间：四个角和正中间是黑色（5 个），四条边的中间是白色（4 个）。",
+          "中层的每一个都在上层同一位置那一个的正下方，面贴着面，颜色要相反：中层的四个角和正中间是白色，四条边的中间是黑色（4 个）。",
+          "下层又在中层的正下方，颜色再反过来，和上层一样，黑色 5 个；它的四个角是大正方体的角，确实是黑色。",
+          "黑色一共 5 + 4 + 5 = 14 个。"
+        ],
+        "en": [
+          "Split the big cube into top, middle and bottom layers of 3 × 3 = 9 cubes each.",
+          "The four corners of the top layer are black. Neighbours in a layer differ, so the top layer is a chessboard: the four corners and the centre are black (5), the four edge-middles are white (4).",
+          "Each middle-layer cube sits directly under the top-layer cube in the same place, face to face, so the colours flip: corners and centre white, the four edge-middles black (4).",
+          "The bottom layer sits under the middle layer, so the colours flip back and match the top: 5 black; its corners are corners of the big cube and are indeed black.",
+          "Black cubes: 5 + 4 + 5 = 14."
+        ],
+        "ja": [
+          "大きな立方体を上・中・下の 3 つの段に分けると、1 段は 3 × 3 = 9 個です。",
+          "上の段の 4 すみは黒です。同じ段で前後左右にとなり合うものは色がちがうので、上の段はチェス盤のようになり、4 すみと真ん中が黒（5 個）、4 つの辺の真ん中が白（4 個）です。",
+          "中の段はどれも上の段の同じ位置の真下にあって面がくっついているので、色が反対になります。4 すみと真ん中が白、4 つの辺の真ん中が黒（4 個）です。",
+          "下の段は中の段の真下なので、また反対になり上の段と同じで黒 5 個です。その 4 すみは大きな立方体のかどで、たしかに黒です。",
+          "黒は全部で 5 + 4 + 5 = 14 個です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "14"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "geometry-grade4-foundation",
+        "notes": "立體棋盤著色，逐層顏色互換：5 + 4 + 5。掃過 小正方體.*黑|黑.*小正方體（0 題）、黑白相間|相間（5 題）；最接近 geometry_grade5_foundation_050，差異：那題是塗外表面後數三面有色的小正方體；本題是立體黑白相間（面貼面不同色），逐層翻轉顏色計數"
+      }
     }
   ]
 }
