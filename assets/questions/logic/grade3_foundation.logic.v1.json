@@ -7820,6 +7820,839 @@
         "reference": "logic-grade3-foundation",
         "notes": "兩台機器分配不同長度的工作：總時間的一半是下界，再把時間分成兩組相等的和來達成。掃過 烤箱|一次只能(烤|放|洗)（2 題：餅乾平均、洗衣烘衣流程）、電鍋|兩台.{0,20}同時（arithmetic_grade3_155 兩個電鍋煮飯，每鍋時間相同）；最接近 arithmetic_grade3_155，差異：每件工作時間不同，要做等和分組。"
       }
+    },
+    {
+      "id": "logic_grade3_foundation_101",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "joining_chain_pieces_fewest_opened_rings",
+      "tags": [
+        "c:logic_deduction",
+        "m:construction",
+        "m:estimate_bound"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade3",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "小安有 5 段金屬鏈，每一段都是 3 個圓環一個扣一個串成的。他想把這 5 段全部接成一條長長的鏈子（頭尾不用接起來）。他可以把任何一個圓環打開，套進別的圓環以後再合起來；打開一個圓環算 1 次。他最少要打開幾個圓環？",
+        "zh-Hans": "小安有 5 段金属链，每一段都是 3 个圆环一个扣一个串成的。他想把这 5 段全部接成一条长长的链子（头尾不用接起来）。他可以把任何一个圆环打开，套进别的圆环以后再合起来；打开一个圆环算 1 次。他最少要打开几个圆环？",
+        "en": "An has 5 short pieces of metal chain; each piece is 3 rings linked one after another. He wants to join all 5 pieces into one long chain (the two ends do not need to be joined). He may open any ring, hook it through other rings and close it again; opening one ring counts as 1 time. What is the smallest number of rings he must open?",
+        "ja": "アンさんは金ぞくのくさりを 5 本持っています。どれも 3 個の輪が 1 つずつつながったものです。この 5 本を全部つないで、1 本の長いくさりにしたいと考えています（両はしはつながなくてよい）。どの輪でも開いて、ほかの輪に通してからとじることができ、輪を 1 個開くと 1 回と数えます。少なくとも何個の輪を開かなければなりませんか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 3。",
+        "zh-Hans": "答案是 3。",
+        "en": "The answer is 3.",
+        "ja": "答えは 3 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "先說明 3 個做得到：把其中一段的 3 個圓環全部打開，拿來當「扣子」。剩下的 4 段排成一排，相鄰兩段之間有 3 個接口；每個接口用 1 個打開的圓環把兩段扣在一起再合上，3 個圓環剛好用完，就接成一整條長鏈。",
+          "再說明少於 3 個做不到。沒有被打開的圓環，原本和誰扣在一起，最後也一直扣在一起；所以每一段裡沒被打開的圓環，最後會在長鏈裡連成一塊。長鏈中相鄰的兩塊之間，一定要靠至少 1 個被打開過的圓環才能接上。",
+          "如果打開的圓環不到 3 個，就不可能把某一段的 3 個圓環全部打開，所以 5 段每一段都至少留下一塊沒被打開的圓環（打開中間的環還會把一段分成更多塊），長鏈裡至少有 5 塊，中間至少有 4 個接口，就至少要打開 4 個圓環，和「不到 3 個」矛盾。",
+          "所以最少要打開 3 個圓環。"
+        ],
+        "zh-Hans": [
+          "先说明 3 个做得到：把其中一段的 3 个圆环全部打开，拿来当「扣子」。剩下的 4 段排成一排，相邻两段之间有 3 个接口；每个接口用 1 个打开的圆环把两段扣在一起再合上，3 个圆环刚好用完，就接成一整条长链。",
+          "再说明少于 3 个做不到。没有被打开的圆环，原本和谁扣在一起，最后也一直扣在一起；所以每一段里没被打开的圆环，最后会在长链里连成一块。长链中相邻的两块之间，一定要靠至少 1 个被打开过的圆环才能接上。",
+          "如果打开的圆环不到 3 个，就不可能把某一段的 3 个圆环全部打开，所以 5 段每一段都至少留下一块没被打开的圆环（打开中间的环还会把一段分成更多块），长链里至少有 5 块，中间至少有 4 个接口，就至少要打开 4 个圆环，和「不到 3 个」矛盾。",
+          "所以最少要打开 3 个圆环。"
+        ],
+        "en": [
+          "First, 3 rings are enough: open all 3 rings of one piece and use them as \"clasps\". Line up the other 4 pieces; there are 3 gaps between neighbouring pieces. Close one opened ring through the two pieces at each gap; the 3 rings are used up exactly and the chain is complete.",
+          "Next, fewer than 3 is impossible. A ring that is never opened stays linked to whatever it was linked to, so the unopened rings of each piece stay together as one block in the final chain. Between two neighbouring blocks of the long chain there must be at least 1 ring that was opened.",
+          "If fewer than 3 rings are opened, no piece can have all 3 of its rings opened, so each of the 5 pieces leaves at least one block of unopened rings (opening a middle ring would only split a piece into more blocks). Then the chain has at least 5 blocks and at least 4 gaps, so at least 4 rings must be opened — contradicting \"fewer than 3\".",
+          "So the smallest number of rings to open is 3."
+        ],
+        "ja": [
+          "まず、3 個でできることを示します。1 本の 3 個の輪を全部開いて「つなぎ金具」にします。残りの 4 本を一列にならべると、となりどうしの間は 3 か所です。それぞれに開いた輪を 1 個ずつ通してとじれば、3 個をちょうど使いきって 1 本の長いくさりになります。",
+          "次に、3 個より少ないとできないことを示します。開かなかった輪は、もとつながっていた輪とずっとつながったままです。だから、各くさりの開かなかった輪は、長いくさりの中でひとかたまりになります。となり合うかたまりの間には、開いた輪が少なくとも 1 個いります。",
+          "開く輪が 3 個より少ないと、どの 1 本も 3 個全部を開くことはできないので、5 本それぞれに開かなかった輪のかたまりが少なくとも 1 つ残ります（まん中の輪を開くと、かたまりはかえってふえます）。かたまりは 5 つ以上、つなぎ目は 4 か所以上になり、開く輪は 4 個以上いるので、「3 個より少ない」ことと合いません。",
+          "したがって、開く輪は少なくとも 3 個です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "3"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade3-foundation",
+        "notes": "把一段鏈子的環全部打開當扣子：上界 3 用構造，下界用「未打開的環自成一塊、塊與塊之間要一個開過的環」。掃過 鏈|環|圓環|扣（約 45 題）；最接近 logic_grade10_foundation_034（7 環金鏈剪環付工資）與 logic_grade10_foundation_011，差異：那兩題是剪環找零、付天數，本題是把多段鏈接成一條的最少開環數。"
+      }
+    },
+    {
+      "id": "logic_grade3_foundation_102",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "stopped_clock_versus_slow_clock",
+      "tags": [
+        "c:logic_deduction",
+        "c:rate_speed",
+        "m:direct"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade3",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "家裡有兩個指針式時鐘，鐘面都只有 1 到 12。甲鐘壞了，兩根指針一直停在 3 點整，完全不動。乙鐘會走，但每天固定慢 1 分鐘，而且是慢慢地、平均地變慢。今天中午 12 點整，小安把乙鐘調成正確的時間，之後再也不調。從今天中午 12 點之後算起（12 點那一刻不算），接下來的 365 天裡，甲鐘顯示正確時間的次數，比乙鐘多幾次？",
+        "zh-Hans": "家里有两个指针式时钟，钟面都只有 1 到 12。甲钟坏了，两根指针一直停在 3 点整，完全不动。乙钟会走，但每天固定慢 1 分钟，而且是慢慢地、平均地变慢。今天中午 12 点整，小安把乙钟调成正确的时间，之后再也不调。从今天中午 12 点之后算起（12 点那一刻不算），接下来的 365 天里，甲钟显示正确时间的次数，比乙钟多几次？",
+        "en": "At home there are two clocks with hands; each face shows only 1 to 12. Clock A is broken: its hands are stuck at exactly 3 o'clock and never move. Clock B runs, but it loses exactly 1 minute every day, losing it gradually and evenly. Today at exactly 12 noon, An sets clock B to the correct time and never adjusts it again. Counting from just after 12 noon today (the moment 12:00 itself does not count), during the next 365 days, how many more times does clock A show the correct time than clock B?",
+        "ja": "家に、文字ばんが 1 から 12 までしかないはりの時計が 2 つあります。時計アはこわれていて、2 本のはりが 3 時ちょうどで止まったまま、まったく動きません。時計イは動きますが、1 日に 1 分ずつ、少しずつ同じ速さでおくれます。今日の正午 12 時ちょうどに、アンさんは時計イを正しい時こくに合わせ、そのあとは一度も合わせ直しません。今日の正午 12 時よりあと（12 時ちょうどは数えない）から数えて、このあとの 365 日の間に、時計アが正しい時こくを指す回数は、時計イより何回多いですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 730。",
+        "zh-Hans": "答案是 730。",
+        "en": "The answer is 730.",
+        "ja": "答えは 730 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "甲鐘一直顯示 3 點整。真正的時間每天會經過 3 點整兩次：下午 3 點和凌晨 3 點。到了這兩個時刻，甲鐘剛好是對的。",
+          "從今天中午 12 點之後，把每一段「某天中午到隔天中午」當成一天，365 段裡每一段都剛好有一次下午 3 點和一次凌晨 3 點，所以甲鐘一共對了 365 × 2 = 730 次。",
+          "乙鐘從中午起每天慢 1 分鐘，過了幾天就慢了幾分鐘。鐘面走一圈是 12 小時，也就是 720 分鐘；乙鐘要剛好慢掉 720 分鐘，指針才會再指出正確的時間，這要經過 720 天。",
+          "365 天裡乙鐘最多只慢了 365 分鐘，比 720 分鐘少，而且一直都有慢，所以這 365 天裡乙鐘一次也不對，是 0 次。",
+          "甲鐘比乙鐘多 730 − 0 = 730 次。"
+        ],
+        "zh-Hans": [
+          "甲钟一直显示 3 点整。真正的时间每天会经过 3 点整两次：下午 3 点和凌晨 3 点。到了这两个时刻，甲钟刚好是对的。",
+          "从今天中午 12 点之后，把每一段「某天中午到隔天中午」当成一天，365 段里每一段都刚好有一次下午 3 点和一次凌晨 3 点，所以甲钟一共对了 365 × 2 = 730 次。",
+          "乙钟从中午起每天慢 1 分钟，过了几天就慢了几分钟。钟面走一圈是 12 小时，也就是 720 分钟；乙钟要刚好慢掉 720 分钟，指针才会再指出正确的时间，这要经过 720 天。",
+          "365 天里乙钟最多只慢了 365 分钟，比 720 分钟少，而且一直都有慢，所以这 365 天里乙钟一次也不对，是 0 次。",
+          "甲钟比乙钟多 730 − 0 = 730 次。"
+        ],
+        "en": [
+          "Clock A always shows 3:00. Each day the real time passes 3:00 twice: 3 p.m. and 3 a.m. At those two moments clock A is exactly right.",
+          "After 12 noon today, treat each stretch \"from noon one day to noon the next day\" as one day. Each of the 365 stretches contains exactly one 3 p.m. and one 3 a.m., so clock A is right 365 × 2 = 730 times.",
+          "Clock B loses 1 minute per day from noon on, so after some number of days it is that many minutes slow. One full turn of the face is 12 hours = 720 minutes; clock B shows the correct time again only when it is exactly 720 minutes slow, which takes 720 days.",
+          "Within 365 days clock B is at most 365 minutes slow — less than 720 minutes, and never 0 — so it is never right during these 365 days: 0 times.",
+          "Clock A is right 730 − 0 = 730 more times than clock B."
+        ],
+        "ja": [
+          "時計アはいつも 3 時ちょうどを指しています。本当の時こくは 1 日に 2 回、午後 3 時と午前 3 時に 3 時ちょうどを通ります。そのとき時計アは正しくなります。",
+          "今日の正午よりあとを、「ある日の正午から次の日の正午まで」を 1 日として区切ると、365 個の区切りのどれにも午後 3 時と午前 3 時がちょうど 1 回ずつあるので、時計アは 365 × 2 = 730 回正しくなります。",
+          "時計イは正午から 1 日に 1 分ずつおくれるので、何日かたつとその日数の分だけおくれています。文字ばん 1 まわりは 12 時間、つまり 720 分です。時計イがちょうど 720 分おくれたとき、はじめてまた正しい時こくを指し、それには 720 日かかります。",
+          "365 日の間、時計イのおくれは多くても 365 分で 720 分より少なく、0 分にもならないので、この 365 日では一度も正しくなりません。0 回です。",
+          "時計アは時計イより 730 − 0 = 730 回多く正しくなります。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "730"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade3-foundation",
+        "notes": "停擺的鐘一天對兩次，每天慢 1 分的鐘要慢滿 720 分（720 天）才再對一次。掃過 停|不走|停擺|每天.{0,4}(慢|快)|慢.{0,3}分鐘（約 15 題）；最接近 arithmetic_grade4_foundation_122（每天快 5 分鐘，問幾天後再指對），差異：本題重點是「停擺的鐘反而比慢鐘常對」的比較，慢鐘部分只用來判斷一年內 0 次。"
+      }
+    },
+    {
+      "id": "logic_grade3_foundation_103",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "rainy_half_days_count_days",
+      "tags": [
+        "c:logic_deduction",
+        "c:add_sub",
+        "m:direct"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade3",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "小安放了一段假期，假期裡每一天都分成上午和下午兩個時段。這段假期中：下了雨的時段一共有 7 個（同一天不會上午、下午都下雨）；沒有下雨的上午一共有 5 個；沒有下雨的下午一共有 6 個。這段假期一共有幾天？",
+        "zh-Hans": "小安放了一段假期，假期里每一天都分成上午和下午两个时段。这段假期中：下了雨的时段一共有 7 个（同一天不会上午、下午都下雨）；没有下雨的上午一共有 5 个；没有下雨的下午一共有 6 个。这段假期一共有几天？",
+        "en": "An had a holiday, and every day of it is split into a morning and an afternoon. During the holiday it rained in 7 of these half-days in total (it never rained in both the morning and the afternoon of the same day); there were 5 mornings without rain and 6 afternoons without rain. How many days long was the holiday?",
+        "ja": "アンさんの休みの間、毎日を午前と午後の 2 つの時間帯に分けて考えます。この休みの間に、雨がふった時間帯は全部で 7 つありました（同じ日の午前と午後の両方に雨がふることはありません）。雨がふらなかった午前は 5 つ、雨がふらなかった午後は 6 つありました。この休みは全部で何日でしたか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 9。",
+        "zh-Hans": "答案是 9。",
+        "en": "The answer is 9.",
+        "ja": "答えは 9 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "每一天都剛好有 1 個上午和 1 個下午，所以整段假期的時段總數，是天數的 2 倍。",
+          "每一個時段不是下了雨，就是沒下雨；沒下雨的時段又分成上午和下午。所以時段總數 = 下雨的 7 個 + 沒下雨的上午 5 個 + 沒下雨的下午 6 個 = 18 個。",
+          "天數 = 18 ÷ 2 = 9 天。",
+          "檢查：9 天裡下雨的上午有 9 − 5 = 4 個，下雨的下午有 9 − 6 = 3 個，合起來 4 + 3 = 7 個，和題目相符；這 7 個下雨時段可以落在 7 個不同的日子，9 天放得下，所以答案是 9 天。"
+        ],
+        "zh-Hans": [
+          "每一天都刚好有 1 个上午和 1 个下午，所以整段假期的时段总数，是天数的 2 倍。",
+          "每一个时段不是下了雨，就是没下雨；没下雨的时段又分成上午和下午。所以时段总数 = 下雨的 7 个 + 没下雨的上午 5 个 + 没下雨的下午 6 个 = 18 个。",
+          "天数 = 18 ÷ 2 = 9 天。",
+          "检查：9 天里下雨的上午有 9 − 5 = 4 个，下雨的下午有 9 − 6 = 3 个，合起来 4 + 3 = 7 个，和题目相符；这 7 个下雨时段可以落在 7 个不同的日子，9 天放得下，所以答案是 9 天。"
+        ],
+        "en": [
+          "Every day has exactly 1 morning and 1 afternoon, so the total number of half-days in the holiday is 2 times the number of days.",
+          "Each half-day either had rain or had no rain, and the dry ones are either mornings or afternoons. So the total number of half-days = 7 rainy + 5 dry mornings + 6 dry afternoons = 18.",
+          "Number of days = 18 ÷ 2 = 9.",
+          "Check: in 9 days there are 9 − 5 = 4 rainy mornings and 9 − 6 = 3 rainy afternoons, 4 + 3 = 7 in all, matching the problem; these 7 rainy half-days can fall on 7 different days, which fits in 9 days. So the holiday was 9 days long."
+        ],
+        "ja": [
+          "どの日にも午前と午後がちょうど 1 つずつあるので、休み全体の時間帯の数は日数の 2 倍です。",
+          "どの時間帯も、雨がふったか、ふらなかったかのどちらかで、ふらなかった時間帯は午前か午後です。だから時間帯の数 = 雨の 7 つ + ふらなかった午前 5 つ + ふらなかった午後 6 つ = 18 個です。",
+          "日数 = 18 ÷ 2 = 9 日です。",
+          "たしかめ：9 日のうち雨の午前は 9 − 5 = 4 つ、雨の午後は 9 − 6 = 3 つで、合わせて 4 + 3 = 7 つとなり、問題と合います。この 7 つの雨の時間帯は 7 つのちがう日におさまり、9 日の中に入るので、答えは 9 日です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "9"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade3-foundation",
+        "notes": "把每天拆成兩個時段來數，時段總數 = 雨 + 晴上午 + 晴下午，再除以 2。掃過 下雨|雨|晴天|上午.{0,20}下午（約 30 題）；最接近 combinatorics_grade10_foundation_043（上午下午降雨機率），差異：本題不是機率，而是用「每天恰 2 個時段」反推天數的計數。"
+      }
+    },
+    {
+      "id": "logic_grade3_foundation_104",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "weekday_shift_next_year_february",
+      "tags": [
+        "c:modular",
+        "m:reverse"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade3",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "某一年的 3 月 1 日是星期四，下一年的 3 月 1 日是星期六。下一年的 2 月一共有幾天？",
+        "zh-Hans": "某一年的 3 月 1 日是星期四，下一年的 3 月 1 日是星期六。下一年的 2 月一共有几天？",
+        "en": "In a certain year, March 1 is a Thursday, and in the following year, March 1 is a Saturday. How many days does February have in the following year?",
+        "ja": "ある年の 3 月 1 日は木曜日で、その次の年の 3 月 1 日は土曜日です。次の年の 2 月は何日ありますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 29。",
+        "zh-Hans": "答案是 29。",
+        "en": "The answer is 29.",
+        "ja": "答えは 29 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "從某一年的 3 月 1 日到下一年的 3 月 1 日，經過的天數是：這一年 3 月到 12 月，再加上下一年的 1 月和 2 月。所以會影響天數的，是下一年的 2 月。",
+          "其他月份的天數都固定，合起來是 337 天。下一年的 2 月有 28 天時，一共經過 337 + 28 = 365 天；有 29 天時，一共經過 366 天。",
+          "每經過 7 天，星期幾就回到一樣。365 = 52 × 7 + 1，經過 365 天，星期幾往後挪 1 天，星期四變成星期五；366 = 52 × 7 + 2，往後挪 2 天，星期四變成星期六。",
+          "題目說下一年的 3 月 1 日是星期六，所以經過了 366 天，下一年的 2 月有 29 天。"
+        ],
+        "zh-Hans": [
+          "从某一年的 3 月 1 日到下一年的 3 月 1 日，经过的天数是：这一年 3 月到 12 月，再加上下一年的 1 月和 2 月。所以会影响天数的，是下一年的 2 月。",
+          "其他月份的天数都固定，合起来是 337 天。下一年的 2 月有 28 天时，一共经过 337 + 28 = 365 天；有 29 天时，一共经过 366 天。",
+          "每经过 7 天，星期几就回到一样。365 = 52 × 7 + 1，经过 365 天，星期几往后挪 1 天，星期四变成星期五；366 = 52 × 7 + 2，往后挪 2 天，星期四变成星期六。",
+          "题目说下一年的 3 月 1 日是星期六，所以经过了 366 天，下一年的 2 月有 29 天。"
+        ],
+        "en": [
+          "From March 1 of one year to March 1 of the next year we pass March to December of the first year plus January and February of the next year. So the month that can change the count is February of the following year.",
+          "All the other months have fixed lengths, adding up to 337 days. If next February has 28 days, the total is 337 + 28 = 365 days; if it has 29 days, the total is 366 days.",
+          "Every 7 days the weekday repeats. 365 = 52 × 7 + 1, so after 365 days the weekday moves 1 day later: Thursday becomes Friday. 366 = 52 × 7 + 2, so it moves 2 days: Thursday becomes Saturday.",
+          "The problem says next March 1 is a Saturday, so 366 days passed, and February of the following year has 29 days."
+        ],
+        "ja": [
+          "ある年の 3 月 1 日から次の年の 3 月 1 日までにすぎる日数は、その年の 3 月から 12 月までと、次の年の 1 月と 2 月です。だから日数が変わるかどうかを決めるのは、次の年の 2 月です。",
+          "ほかの月の日数は決まっていて、合わせて 337 日です。次の年の 2 月が 28 日なら全部で 337 + 28 = 365 日、29 日なら全部で 366 日です。",
+          "7 日たつと曜日は元にもどります。365 = 52 × 7 + 1 なので、365 日たつと曜日は 1 つ後ろにずれて、木曜日が金曜日になります。366 = 52 × 7 + 2 なので、2 つずれて木曜日が土曜日になります。",
+          "次の年の 3 月 1 日は土曜日なので、366 日たったことになり、次の年の 2 月は 29 日あります。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "29"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade3-foundation",
+        "notes": "一年 365 天 = 52 週 + 1 天、366 天 = 52 週 + 2 天，由星期幾的位移反推閏年。掃過 星期.{0,60}(隔年|下一年|第二年|明年)（0 題）、閏年|2 月有 29 天（約 6 題）；最接近 logic_grade4_foundation_089（找月曆和 2026 年完全相同的年份），差異：本題只看一年的位移量 1 或 2 天，從星期幾反推 2 月天數。"
+      }
+    },
+    {
+      "id": "logic_grade3_foundation_105",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "elevator_trips_heavy_boxes_pigeonhole",
+      "tags": [
+        "c:logic_deduction",
+        "m:pigeonhole",
+        "m:construction"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade3",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一部載貨電梯每趟最多只能載 100 公斤（剛好 100 公斤可以）。有 7 個箱子要從 1 樓運到 5 樓，重量分別是 60、55、52、51、40、30、10 公斤。箱子不能拆開，每趟可以放好幾個箱子。最少要運幾趟？",
+        "zh-Hans": "一部载货电梯每趟最多只能载 100 千克（刚好 100 千克可以）。有 7 个箱子要从 1 楼运到 5 楼，重量分别是 60、55、52、51、40、30、10 千克。箱子不能拆开，每趟可以放好几个箱子。最少要运几趟？",
+        "en": "A goods lift can carry at most 100 kg per trip (exactly 100 kg is allowed). Seven boxes must go from the 1st floor to the 5th floor; they weigh 60, 55, 52, 51, 40, 30 and 10 kg. Boxes cannot be split, and a trip may carry several boxes. What is the smallest number of trips?",
+        "ja": "荷物用エレベーターは 1 回に 100 kg までしか運べません（ちょうど 100 kg はだいじょうぶです）。重さが 60、55、52、51、40、30、10 kg の 7 個の箱を、1 階から 5 階へ運びます。箱は分けられませんが、1 回に何個のせてもかまいません。少なくとも何回運ばなければなりませんか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 4。",
+        "zh-Hans": "答案是 4。",
+        "en": "The answer is 4.",
+        "ja": "答えは 4 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "先看最重的四個箱子 60、55、52、51 公斤：其中任何兩個放在一起都超過 100 公斤（連最輕的兩個 52 + 51 = 103 都超過），所以這四個箱子每一個都必須在不同的一趟，至少要 4 趟。",
+          "只看總重量會以為 3 趟就夠：7 個箱子一共 60 + 55 + 52 + 51 + 40 + 30 + 10 = 298 公斤，沒有超過 3 × 100 = 300 公斤；但上一步已經說明，3 趟一定放不下這四個大箱子，所以 3 趟不行。",
+          "4 趟做得到：第 1 趟 60 + 40 = 100 公斤，第 2 趟 55 + 30 + 10 = 95 公斤，第 3 趟 52 公斤，第 4 趟 51 公斤，每趟都沒有超過 100 公斤。",
+          "所以最少要運 4 趟。"
+        ],
+        "zh-Hans": [
+          "先看最重的四个箱子 60、55、52、51 千克：其中任何两个放在一起都超过 100 千克（连最轻的两个 52 + 51 = 103 都超过），所以这四个箱子每一个都必须在不同的一趟，至少要 4 趟。",
+          "只看总重量会以为 3 趟就够：7 个箱子一共 60 + 55 + 52 + 51 + 40 + 30 + 10 = 298 千克，没有超过 3 × 100 = 300 千克；但上一步已经说明，3 趟一定放不下这四个大箱子，所以 3 趟不行。",
+          "4 趟做得到：第 1 趟 60 + 40 = 100 千克，第 2 趟 55 + 30 + 10 = 95 千克，第 3 趟 52 千克，第 4 趟 51 千克，每趟都没有超过 100 千克。",
+          "所以最少要运 4 趟。"
+        ],
+        "en": [
+          "Look at the four heaviest boxes, 60, 55, 52 and 51 kg: any two of them together exceed 100 kg (even the lightest two, 52 + 51 = 103). So each of these four must go on a different trip: at least 4 trips.",
+          "The total weight alone suggests 3 trips: 60 + 55 + 52 + 51 + 40 + 30 + 10 = 298 kg, not more than 3 × 100 = 300 kg. But the previous step shows 3 trips cannot hold those four big boxes, so 3 trips are impossible.",
+          "4 trips work: trip 1: 60 + 40 = 100 kg; trip 2: 55 + 30 + 10 = 95 kg; trip 3: 52 kg; trip 4: 51 kg. No trip exceeds 100 kg.",
+          "So the smallest number of trips is 4."
+        ],
+        "ja": [
+          "まず重い 4 個の箱、60、55、52、51 kg を見ます。このうちどの 2 個をいっしょにしても 100 kg をこえます（いちばん軽い 2 個でも 52 + 51 = 103）。だからこの 4 個はみんなべつべつの回に運ぶしかなく、少なくとも 4 回いります。",
+          "重さの合計だけを見ると 3 回で足りそうです。7 個で 60 + 55 + 52 + 51 + 40 + 30 + 10 = 298 kg で、3 × 100 = 300 kg をこえません。でも前の説明のとおり、3 回ではこの大きい 4 個がおさまらないので、3 回ではできません。",
+          "4 回ならできます。1 回目 60 + 40 = 100 kg、2 回目 55 + 30 + 10 = 95 kg、3 回目 52 kg、4 回目 51 kg で、どの回も 100 kg をこえません。",
+          "したがって、少なくとも 4 回運ぶ必要があります。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "4"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade3-foundation",
+        "notes": "總重量只給出下界 3，但四個兩兩相加超重的箱子逼出 4 趟（鴿籠），再構造 4 趟。掃過 電梯|載重|最多.{0,6}公斤|箱子.{0,40}公斤（約 15 題）；最接近 arithmetic_grade2_foundation_170（電梯一次載 5 人往返時間）與 logic_grade3_foundation_098（背包挑寶物求最大價值），差異：本題是裝箱趟數下界，關鍵在「兩兩放不進同一趟」而非價值或往返時間。"
+      }
+    },
+    {
+      "id": "logic_grade3_foundation_106",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "all_but_two_pets_each_kind",
+      "tags": [
+        "c:logic_deduction",
+        "m:direct"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade3",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "小安家只養狗、貓、鸚鵡三種寵物，每一種至少養 1 隻。小安說：「我家的寵物，除了 2 隻以外全部都是狗；除了 2 隻以外全部都是貓；除了 2 隻以外全部都是鸚鵡。」他說的都是真話。小安家一共養了幾隻寵物？",
+        "zh-Hans": "小安家只养狗、猫、鹦鹉三种宠物，每一种至少养 1 只。小安说：「我家的宠物，除了 2 只以外全部都是狗；除了 2 只以外全部都是猫；除了 2 只以外全部都是鹦鹉。」他说的都是真话。小安家一共养了几只宠物？",
+        "en": "An's family keeps only three kinds of pets — dogs, cats and parrots — with at least 1 of each kind. An says: \"All our pets except 2 are dogs; all our pets except 2 are cats; all our pets except 2 are parrots.\" Everything he says is true. How many pets does An's family have in total?",
+        "ja": "アンさんの家では、犬、ねこ、オウムの 3 種類のペットだけをかっていて、どの種類も少なくとも 1 ぴきいます。アンさんは「うちのペットは、2 ひきをのぞいて全部犬です。2 ひきをのぞいて全部ねこです。2 ひきをのぞいて全部オウムです。」と言いました。言ったことはすべて本当です。アンさんの家のペットは全部で何びきですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 3。",
+        "zh-Hans": "答案是 3。",
+        "en": "The answer is 3.",
+        "ja": "答えは 3 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "「除了 2 隻以外全部都是狗」的意思是：不是狗的寵物剛好有 2 隻，也就是貓和鸚鵡合起來 2 隻。",
+          "同樣地，「除了 2 隻以外全部都是貓」表示狗和鸚鵡合起來 2 隻；「除了 2 隻以外全部都是鸚鵡」表示狗和貓合起來 2 隻。",
+          "貓和鸚鵡合起來 2 隻，而且每一種至少 1 隻，所以貓 1 隻、鸚鵡 1 隻；再由狗和貓合起來 2 隻，得到狗也是 1 隻。檢查：狗和鸚鵡合起來 1 + 1 = 2 隻，也對。",
+          "小安家一共養了 1 + 1 + 1 = 3 隻寵物。"
+        ],
+        "zh-Hans": [
+          "「除了 2 只以外全部都是狗」的意思是：不是狗的宠物刚好有 2 只，也就是猫和鹦鹉合起来 2 只。",
+          "同样地，「除了 2 只以外全部都是猫」表示狗和鹦鹉合起来 2 只；「除了 2 只以外全部都是鹦鹉」表示狗和猫合起来 2 只。",
+          "猫和鹦鹉合起来 2 只，而且每一种至少 1 只，所以猫 1 只、鹦鹉 1 只；再由狗和猫合起来 2 只，得到狗也是 1 只。检查：狗和鹦鹉合起来 1 + 1 = 2 只，也对。",
+          "小安家一共养了 1 + 1 + 1 = 3 只宠物。"
+        ],
+        "en": [
+          "\"All except 2 are dogs\" means exactly 2 pets are not dogs, i.e. cats and parrots together number 2.",
+          "Likewise \"all except 2 are cats\" means dogs and parrots together number 2, and \"all except 2 are parrots\" means dogs and cats together number 2.",
+          "Cats and parrots together are 2, with at least 1 of each, so there is 1 cat and 1 parrot; then dogs and cats together are 2 gives 1 dog. Check: dogs and parrots together are 1 + 1 = 2, also correct.",
+          "An's family has 1 + 1 + 1 = 3 pets in total."
+        ],
+        "ja": [
+          "「2 ひきをのぞいて全部犬」とは、犬でないペットがちょうど 2 ひき、つまりねことオウムを合わせて 2 ひきということです。",
+          "同じように、「2 ひきをのぞいて全部ねこ」は犬とオウムを合わせて 2 ひき、「2 ひきをのぞいて全部オウム」は犬とねこを合わせて 2 ひきということです。",
+          "ねことオウムで 2 ひき、どちらも少なくとも 1 ぴきなので、ねこ 1 ぴき、オウム 1 わです。犬とねこで 2 ひきなので、犬も 1 ぴきです。たしかめ：犬とオウムで 1 + 1 = 2 ひきになり、合っています。",
+          "アンさんの家のペットは全部で 1 + 1 + 1 = 3 びきです。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "3"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade3-foundation",
+        "notes": "「除了 2 隻以外都是某種」＝其餘兩種合計 2，三式聯立（用語言推，不設未知數）。掃過 寵物|除了.{0,4}隻|都是狗|鸚鵡（2 題，皆為寵物配對邏輯）；最接近 mixed_grade5_foundation_010（三人各養一種寵物配對），差異：本題是數量條件的轉譯與推算，不是一對一配對。"
+      }
+    },
+    {
+      "id": "logic_grade3_foundation_107",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "lost_socks_remaining_pairs_range",
+      "tags": [
+        "c:logic_deduction",
+        "m:extremal"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade3",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "抽屜裡有 10 雙襪子，每一雙的顏色都和別雙不一樣（10 種顏色，每種剛好 2 隻）。洗衣服的時候，小安弄丟了其中 6 隻襪子。剩下的襪子裡，能配成同色一雙的，最多可能有幾雙？最少可能有幾雙？請回答最多和最少相差幾雙。",
+        "zh-Hans": "抽屉里有 10 双袜子，每一双的颜色都和别双不一样（10 种颜色，每种刚好 2 只）。洗衣服的时候，小安弄丢了其中 6 只袜子。剩下的袜子里，能配成同色一双的，最多可能有几双？最少可能有几双？请回答最多和最少相差几双。",
+        "en": "A drawer holds 10 pairs of socks, each pair a different colour from the others (10 colours, exactly 2 socks of each). While doing the laundry, An lost 6 of the socks. Among the socks left, what is the largest possible number of complete same-colour pairs, and what is the smallest possible number? Give the difference between the largest and the smallest.",
+        "ja": "ひきだしにくつ下が 10 足あり、どの足もほかの足と色がちがいます（10 色で、どの色もちょうど 2 まい）。せんたくのとき、アンさんはこのうち 6 まいをなくしました。のこったくつ下で、同じ色の 1 足がそろうのは、いちばん多くて何足、いちばん少なくて何足になりえますか。いちばん多いときと少ないときの差は何足ですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 3。",
+        "zh-Hans": "答案是 3。",
+        "en": "The answer is 3.",
+        "ja": "答えは 3 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "每弄丟 1 隻襪子，最多只會把 1 雙拆散；6 隻最多拆散 6 雙，所以完整的至少還有 10 − 6 = 4 雙。如果弄丟的 6 隻剛好是 6 種不同顏色，就真的只剩 4 雙，所以最少是 4 雙。",
+          "一雙被拆散，至少要丟掉它的 1 隻。6 隻襪子最多兩兩同色，所以至少會碰到 6 ÷ 2 = 3 雙，完整的最多剩 10 − 3 = 7 雙。如果弄丟的剛好是 3 整雙，就剩 7 雙，所以最多是 7 雙。",
+          "最多和最少相差 7 − 4 = 3 雙。"
+        ],
+        "zh-Hans": [
+          "每弄丢 1 只袜子，最多只会把 1 双拆散；6 只最多拆散 6 双，所以完整的至少还有 10 − 6 = 4 双。如果弄丢的 6 只刚好是 6 种不同颜色，就真的只剩 4 双，所以最少是 4 双。",
+          "一双被拆散，至少要丢掉它的 1 只。6 只袜子最多两两同色，所以至少会碰到 6 ÷ 2 = 3 双，完整的最多剩 10 − 3 = 7 双。如果弄丢的刚好是 3 整双，就剩 7 双，所以最多是 7 双。",
+          "最多和最少相差 7 − 4 = 3 双。"
+        ],
+        "en": [
+          "Each lost sock can break at most 1 pair, so 6 lost socks break at most 6 pairs, leaving at least 10 − 6 = 4 complete pairs. If the 6 lost socks are 6 different colours, exactly 4 pairs remain, so the smallest is 4.",
+          "To break a pair, at least 1 of its socks must be lost. The 6 socks can share colours at most two at a time, so they touch at least 6 ÷ 2 = 3 pairs, leaving at most 10 − 3 = 7 complete pairs. If the lost socks are exactly 3 whole pairs, 7 pairs remain, so the largest is 7.",
+          "The difference is 7 − 4 = 3 pairs."
+        ],
+        "ja": [
+          "くつ下を 1 まいなくすと、こわれる足は多くても 1 足です。6 まいなら多くても 6 足こわれるので、そろった足は少なくとも 10 − 6 = 4 足のこります。なくした 6 まいがみんなちがう色なら本当に 4 足になるので、いちばん少ないのは 4 足です。",
+          "1 足がこわれるには、そのうち少なくとも 1 まいをなくす必要があります。6 まいは同じ色が多くても 2 まいずつなので、少なくとも 6 ÷ 2 = 3 足にかかわり、そろった足は多くても 10 − 3 = 7 足です。なくしたのがちょうど 3 足まるごとなら 7 足のこるので、いちばん多いのは 7 足です。",
+          "差は 7 − 4 = 3 足です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "3"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade3-foundation",
+        "notes": "丟 6 隻：每隻最多拆一雙 → 至少剩 4；6 隻至少涵蓋 3 雙 → 至多剩 7，兩端都可達。掃過 襪|手套|弄丟|遺失|不見（約 15 題，多為抽襪子保證成雙）；最接近 logic_grade4_foundation_091（摸手套保證配對），差異：本題不是抽取保證，而是遺失後剩餘雙數的上下界。"
+      }
+    },
+    {
+      "id": "logic_grade3_foundation_108",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "balance_two_weights_both_pans",
+      "tags": [
+        "c:balance",
+        "c:add_sub",
+        "m:enumeration"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade3",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "小安有一台天平，但只有兩個砝碼：一個 3 公克、一個 5 公克。砝碼可以放在任何一邊的盤子裡，也可以和要秤的東西放在同一個盤子。只秤一次，天平剛好平衡時，就能知道東西的重量。用這兩個砝碼，他一共能直接秤出幾種不同的重量？",
+        "zh-Hans": "小安有一台天平，但只有两个砝码：一个 3 克、一个 5 克。砝码可以放在任何一边的盘子里，也可以和要秤的东西放在同一个盘子。只秤一次，天平刚好平衡时，就能知道东西的重量。用这两个砝码，他一共能直接秤出几种不同的重量？",
+        "en": "An has a balance scale but only two weights: one of 3 g and one of 5 g. A weight may go in either pan, including the same pan as the object being weighed. With one weighing, when the scale balances exactly, he knows the object's weight. Using these two weights, how many different weights can he measure directly?",
+        "ja": "アンさんは天びんを持っていますが、分銅は 3 g と 5 g の 2 こしかありません。分銅はどちらのさらにおいてもよく、はかりたい物と同じさらにおいてもかまいません。1 回はかって天びんがちょうどつり合えば、物の重さがわかります。この 2 この分銅で、全部で何通りのちがう重さをはかることができますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 4。",
+        "zh-Hans": "答案是 4。",
+        "en": "The answer is 4.",
+        "ja": "答えは 4 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "每個砝碼有三種用法：不用、放在東西的對面、和東西放在同一邊。天平平衡時，東西的重量 = 對面砝碼的重量 − 同一邊砝碼的重量。",
+          "只用一個砝碼放在對面：可以秤 3 公克、5 公克。兩個都放在對面：可以秤 3 + 5 = 8 公克。",
+          "一個放對面、一個和東西放同一邊：5 公克放對面、3 公克放同一邊，可以秤 5 − 3 = 2 公克；反過來 3 公克放對面、5 公克放同一邊，同一邊已經比對面重，不可能平衡。兩個都不放在對面時，對面是空的，也秤不出東西。",
+          "能秤出的重量是 2、3、5、8 公克，一共 4 種。"
+        ],
+        "zh-Hans": [
+          "每个砝码有三种用法：不用、放在东西的对面、和东西放在同一边。天平平衡时，东西的重量 = 对面砝码的重量 − 同一边砝码的重量。",
+          "只用一个砝码放在对面：可以秤 3 克、5 克。两个都放在对面：可以秤 3 + 5 = 8 克。",
+          "一个放对面、一个和东西放同一边：5 克放对面、3 克放同一边，可以秤 5 − 3 = 2 克；反过来 3 克放对面、5 克放同一边，同一边已经比对面重，不可能平衡。两个都不放在对面时，对面是空的，也秤不出东西。",
+          "能秤出的重量是 2、3、5、8 克，一共 4 种。"
+        ],
+        "en": [
+          "Each weight can be used in three ways: not used, in the pan opposite the object, or in the same pan as the object. When balanced, object's weight = weights opposite − weights on the object's side.",
+          "One weight opposite: 3 g or 5 g. Both opposite: 3 + 5 = 8 g.",
+          "One opposite and one with the object: 5 g opposite and 3 g with the object measures 5 − 3 = 2 g; the other way round (3 g opposite, 5 g with the object) the object's side is already heavier, so it can never balance. If no weight is opposite, that pan is empty and nothing can be measured.",
+          "The measurable weights are 2, 3, 5 and 8 g: 4 different weights."
+        ],
+        "ja": [
+          "どの分銅にも 3 つの使い方があります。使わない、物と反対のさらにおく、物と同じさらにおく、です。つり合ったとき、物の重さ = 反対のさらの分銅 − 同じさらの分銅 です。",
+          "分銅 1 こだけを反対のさらにおくと、3 g と 5 g がはかれます。2 こ とも反対におくと 3 + 5 = 8 g です。",
+          "1 こを反対、1 こを物と同じさらにおく場合：5 g を反対、3 g を同じさらにすると 5 − 3 = 2 g がはかれます。逆に 3 g を反対、5 g を同じさらにすると、物のがわがもう重いので、つり合いません。反対のさらに分銅が 1 こもないと、そのさらは空なので何もはかれません。",
+          "はかれる重さは 2、3、5、8 g の 4 通りです。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "4"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade3-foundation",
+        "notes": "兩個砝碼可放兩盤：重量 = 對面和 − 同側和，列出 2、3、5、8。掃過 砝碼|天平（約 40 題）；最接近 logic_grade5_foundation_082（很多 5 g、7 g 砝碼秤 1 g 最少用幾個）與 logic_grade4_foundation_076（1–6 g 砝碼拿走一個後兩盤平衡），差異：本題是只有兩個砝碼時可測重量的完整列舉。"
+      }
+    },
+    {
+      "id": "logic_grade3_foundation_109",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "milk_coffee_spoon_exchange",
+      "tags": [
+        "c:mixture",
+        "c:logic_deduction",
+        "m:invariant"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade3",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "甲杯裝了 200 毫升牛奶，乙杯裝了 200 毫升咖啡。小安先用湯匙從甲杯舀 1 匙牛奶（10 毫升）倒進乙杯，攪一攪；再從乙杯舀 1 匙（10 毫升）倒回甲杯。這時候，比較「甲杯裡的咖啡」和「乙杯裡的牛奶」，下面哪一句話正確？",
+        "zh-Hans": "甲杯装了 200 毫升牛奶，乙杯装了 200 毫升咖啡。小安先用汤匙从甲杯舀 1 匙牛奶（10 毫升）倒进乙杯，搅一搅；再从乙杯舀 1 匙（10 毫升）倒回甲杯。这时候，比较「甲杯里的咖啡」和「乙杯里的牛奶」，下面哪一句话正确？",
+        "en": "Cup A holds 200 mL of milk and cup B holds 200 mL of coffee. An takes 1 spoonful (10 mL) of milk from cup A, pours it into cup B and stirs; then he takes 1 spoonful (10 mL) from cup B and pours it back into cup A. Now compare \"the coffee in cup A\" with \"the milk in cup B\". Which statement is correct?",
+        "ja": "コップアには牛にゅうが 200 mL、コップイにはコーヒーが 200 mL 入っています。アンさんは、まずスプーンでコップアの牛にゅうを 1 ぱい（10 mL）すくってコップイに入れ、かきまぜます。次にコップイから 1 ぱい（10 mL）すくってコップアにもどします。このとき、「コップアの中のコーヒー」と「コップイの中の牛にゅう」をくらべると、正しいのはどれですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 C：兩個一樣多。",
+        "zh-Hans": "答案是 C：两个一样多。",
+        "en": "The answer is C: The two amounts are equal.",
+        "ja": "答えは C：2 つは同じ量 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "舀過去 10 毫升、又舀回來 10 毫升，所以最後兩杯都還是 200 毫升。",
+          "甲杯的 200 毫升由兩部分組成：還留在甲杯的牛奶，和跑進甲杯的咖啡。原本甲杯有 200 毫升牛奶，有多少牛奶跑到乙杯，甲杯就少了多少牛奶，這個空缺剛好由咖啡補上。",
+          "所以「甲杯裡的咖啡」和「跑到乙杯的牛奶」一樣多，答案是 C。",
+          "A 說甲杯的咖啡比較多、B 說乙杯的牛奶比較多，都和上面的結果不合。D 也不對：上面只用到「兩杯最後都是 200 毫升」，不管攪拌得均不均勻，兩者都一樣多。"
+        ],
+        "zh-Hans": [
+          "舀过去 10 毫升、又舀回来 10 毫升，所以最后两杯都还是 200 毫升。",
+          "甲杯的 200 毫升由两部分组成：还留在甲杯的牛奶，和跑进甲杯的咖啡。原本甲杯有 200 毫升牛奶，有多少牛奶跑到乙杯，甲杯就少了多少牛奶，这个空缺刚好由咖啡补上。",
+          "所以「甲杯里的咖啡」和「跑到乙杯的牛奶」一样多，答案是 C。",
+          "A 说甲杯的咖啡比较多、B 说乙杯的牛奶比较多，都和上面的结果不合。D 也不对：上面只用到「两杯最后都是 200 毫升」，不管搅拌得均不均匀，两者都一样多。"
+        ],
+        "en": [
+          "10 mL went over and 10 mL came back, so each cup ends with 200 mL.",
+          "The 200 mL in cup A has two parts: the milk still in cup A and the coffee that came into cup A. Cup A started with 200 mL of milk; however much milk went to cup B is exactly how much milk cup A is missing, and that gap is filled by coffee.",
+          "So \"the coffee in cup A\" equals \"the milk that went to cup B\": they are the same amount. The answer is C.",
+          "A (more coffee in cup A) and B (more milk in cup B) contradict this. D is also wrong: the argument only used \"both cups end with 200 mL\", so the two amounts are equal however well or badly it was stirred."
+        ],
+        "ja": [
+          "10 mL 入れて 10 mL もどしたので、最後はどちらのコップも 200 mL です。",
+          "コップアの 200 mL は、コップアにのこった牛にゅうと、コップアに入ってきたコーヒーの 2 つでできています。はじめコップアには牛にゅうが 200 mL あったので、コップイへ行った牛にゅうの分だけコップアの牛にゅうがへり、そのへった分をちょうどコーヒーがうめています。",
+          "だから「コップアの中のコーヒー」と「コップイへ行った牛にゅう」は同じ量で、答えは C です。",
+          "A（コップアのコーヒーが多い）と B（コップイの牛にゅうが多い）は、この結果と合いません。D もまちがいです。上の考えでは「最後はどちらも 200 mL」しか使っていないので、よくかきまぜてもまぜなくても、2 つは同じ量です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "multiple_choice",
+      "options": {
+        "A": {
+          "zh-Hant": "甲杯裡的咖啡比較多",
+          "zh-Hans": "甲杯里的咖啡比较多",
+          "en": "There is more coffee in cup A",
+          "ja": "コップアの中のコーヒーのほうが多い"
+        },
+        "B": {
+          "zh-Hant": "乙杯裡的牛奶比較多",
+          "zh-Hans": "乙杯里的牛奶比较多",
+          "en": "There is more milk in cup B",
+          "ja": "コップイの中の牛にゅうのほうが多い"
+        },
+        "C": {
+          "zh-Hant": "兩個一樣多",
+          "zh-Hans": "两个一样多",
+          "en": "The two amounts are equal",
+          "ja": "2 つは同じ量"
+        },
+        "D": {
+          "zh-Hant": "要看攪得夠不夠均勻",
+          "zh-Hans": "要看搅得够不够均匀",
+          "en": "It depends on how well it was stirred",
+          "ja": "よくかきまぜたかどうかで変わる"
+        }
+      },
+      "correctAnswer": {
+        "type": "choice",
+        "value": "C"
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade3-foundation",
+        "notes": "兩杯最後體積相同 → 甲杯的咖啡恰好填補流失的牛奶（守恆／不變量）。掃過 咖啡|牛奶|湯匙|舀（約 5 題）；最接近 arithmetic_grade6_foundation_161（牛奶喝掉再加水算喝下的水），差異：本題是兩杯互換一匙後的比較，與攪拌程度無關。"
+      }
+    },
+    {
+      "id": "logic_grade3_foundation_110",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "twins_birthday_across_new_year",
+      "tags": [
+        "c:logic_deduction",
+        "c:compare_order",
+        "m:direct"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade3",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一對雙胞胎，哥哥比弟弟早 20 分鐘出生。奇怪的是，每一年都是弟弟先過生日：在同一年的日曆上，弟弟生日的日期比哥哥生日的日期早。下面哪一種出生時間，會發生這種事？",
+        "zh-Hans": "一对双胞胎，哥哥比弟弟早 20 分钟出生。奇怪的是，每一年都是弟弟先过生日：在同一年的日历上，弟弟生日的日期比哥哥生日的日期早。下面哪一种出生时间，会发生这种事？",
+        "en": "In a pair of twins, the older brother was born 20 minutes before the younger one. Strangely, every year the younger brother has his birthday first: on each year's calendar, the younger brother's birthday date comes earlier than the older brother's. Which of the following birth times makes this happen?",
+        "ja": "ふたごの兄は、弟より 20 分早く生まれました。ふしぎなことに、毎年弟のほうが先にたん生日をむかえます。同じ年のカレンダーで、弟のたん生日の日付が兄のたん生日の日付より前にあるのです。次のどの生まれた時こくなら、このようなことが起こりますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 B：哥哥 12 月 31 日 23 點 50 分出生，弟弟 1 月 1 日 0 點 10 分出生。",
+        "zh-Hans": "答案是 B：哥哥 12 月 31 日 23 点 50 分出生，弟弟 1 月 1 日 0 点 10 分出生。",
+        "en": "The answer is B: Older at 11:50 p.m. on December 31, younger at 0:10 a.m. on January 1.",
+        "ja": "答えは B：兄は 12 月 31 日の午後 11 時 50 分、弟は 1 月 1 日の午前 0 時 10 分に生まれた です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "A：兩人在同一天出生，生日日期一樣，弟弟並沒有比較早過生日，不對。",
+          "C：哥哥在 3 月 31 日出生、弟弟在 4 月 1 日出生；D：哥哥在 2 月 28 日出生、弟弟在 3 月 1 日出生。這兩種都是弟弟的日期在同一年日曆上比較晚，每年都是哥哥先過生日，不對。",
+          "B：哥哥在某一年 12 月 31 日晚上 11 點 50 分出生，20 分鐘後跨年，弟弟在下一年 1 月 1 日凌晨 0 點 10 分出生。每一年的日曆上，1 月 1 日都排在最前面，12 月 31 日排在最後面，所以弟弟每年都比哥哥先過生日。",
+          "答案是 B。"
+        ],
+        "zh-Hans": [
+          "A：两人在同一天出生，生日日期一样，弟弟并没有比较早过生日，不对。",
+          "C：哥哥在 3 月 31 日出生、弟弟在 4 月 1 日出生；D：哥哥在 2 月 28 日出生、弟弟在 3 月 1 日出生。这两种都是弟弟的日期在同一年日历上比较晚，每年都是哥哥先过生日，不对。",
+          "B：哥哥在某一年 12 月 31 日晚上 11 点 50 分出生，20 分钟后跨年，弟弟在下一年 1 月 1 日凌晨 0 点 10 分出生。每一年的日历上，1 月 1 日都排在最前面，12 月 31 日排在最后面，所以弟弟每年都比哥哥先过生日。",
+          "答案是 B。"
+        ],
+        "en": [
+          "A: both were born on the same day, so their birthday dates are the same and the younger brother is not earlier. Wrong.",
+          "C: older on March 31, younger on April 1; D: older on February 28, younger on March 1. In both, the younger brother's date is later in the year, so the older brother celebrates first every year. Wrong.",
+          "B: the older brother is born at 11:50 p.m. on December 31; 20 minutes later the year changes and the younger brother is born at 0:10 a.m. on January 1 of the next year. On every year's calendar January 1 is the first day and December 31 the last, so the younger brother has his birthday first every year.",
+          "The answer is B."
+        ],
+        "ja": [
+          "A：2 人は同じ日に生まれたので、たん生日の日付も同じで、弟のほうが先ではありません。ちがいます。",
+          "C は兄が 3 月 31 日、弟が 4 月 1 日、D は兄が 2 月 28 日、弟が 3 月 1 日に生まれています。どちらも同じ年のカレンダーでは弟の日付のほうがあとなので、毎年兄が先にたん生日をむかえます。ちがいます。",
+          "B：兄はある年の 12 月 31 日の夜 11 時 50 分に生まれ、20 分後に年がかわって、弟は次の年の 1 月 1 日の午前 0 時 10 分に生まれました。どの年のカレンダーでも 1 月 1 日がいちばん前、12 月 31 日がいちばん後ろなので、弟は毎年兄より先にたん生日をむかえます。",
+          "答えは B です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "multiple_choice",
+      "options": {
+        "A": {
+          "zh-Hant": "哥哥 7 月 1 日 0 點 10 分出生，弟弟 7 月 1 日 0 點 30 分出生",
+          "zh-Hans": "哥哥 7 月 1 日 0 点 10 分出生，弟弟 7 月 1 日 0 点 30 分出生",
+          "en": "Older at 0:10 a.m. on July 1, younger at 0:30 a.m. on July 1",
+          "ja": "兄は 7 月 1 日の午前 0 時 10 分、弟は 7 月 1 日の午前 0 時 30 分に生まれた"
+        },
+        "B": {
+          "zh-Hant": "哥哥 12 月 31 日 23 點 50 分出生，弟弟 1 月 1 日 0 點 10 分出生",
+          "zh-Hans": "哥哥 12 月 31 日 23 点 50 分出生，弟弟 1 月 1 日 0 点 10 分出生",
+          "en": "Older at 11:50 p.m. on December 31, younger at 0:10 a.m. on January 1",
+          "ja": "兄は 12 月 31 日の午後 11 時 50 分、弟は 1 月 1 日の午前 0 時 10 分に生まれた"
+        },
+        "C": {
+          "zh-Hant": "哥哥 3 月 31 日 23 點 50 分出生，弟弟 4 月 1 日 0 點 10 分出生",
+          "zh-Hans": "哥哥 3 月 31 日 23 点 50 分出生，弟弟 4 月 1 日 0 点 10 分出生",
+          "en": "Older at 11:50 p.m. on March 31, younger at 0:10 a.m. on April 1",
+          "ja": "兄は 3 月 31 日の午後 11 時 50 分、弟は 4 月 1 日の午前 0 時 10 分に生まれた"
+        },
+        "D": {
+          "zh-Hant": "哥哥 2 月 28 日 23 點 50 分出生，弟弟 3 月 1 日 0 點 10 分出生",
+          "zh-Hans": "哥哥 2 月 28 日 23 点 50 分出生，弟弟 3 月 1 日 0 点 10 分出生",
+          "en": "Older at 11:50 p.m. on February 28, younger at 0:10 a.m. on March 1",
+          "ja": "兄は 2 月 28 日の午後 11 時 50 分、弟は 3 月 1 日の午前 0 時 10 分に生まれた"
+        }
+      },
+      "correctAnswer": {
+        "type": "choice",
+        "value": "B"
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade3-foundation",
+        "notes": "雙胞胎跨年出生：年底出生者的生日日期在日曆上反而最晚。掃過 雙胞胎|午夜|半夜|跨年|生日.{0,20}(早|晚)（約 8 題）；最接近 logic_grade2_foundation_117（說謊的雙胞胎），差異：本題是日期在年曆中的先後比較，與說謊無關。"
+      }
+    },
+    {
+      "id": "logic_grade3_foundation_111",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "keys_locked_in_boxes_cycles",
+      "tags": [
+        "c:logic_deduction",
+        "m:estimate_bound",
+        "m:construction"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade3",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "桌上有 8 個上了鎖的盒子，編號 1 到 8，每個盒子只能用自己的鑰匙打開，而 8 把鑰匙全都鎖在盒子裡：1 號盒裡放著 3 號盒的鑰匙，2 號盒裡放著 5 號盒的鑰匙，3 號盒裡放著 6 號盒的鑰匙，4 號盒裡放著 8 號盒的鑰匙，5 號盒裡放著 2 號盒的鑰匙，6 號盒裡放著 1 號盒的鑰匙，7 號盒裡放著 4 號盒的鑰匙，8 號盒裡放著 7 號盒的鑰匙。小安可以把盒子撬開（不用鑰匙打開），打開的盒子裡的鑰匙就能拿來用。他想打開全部 8 個盒子，最少要撬開幾個？",
+        "zh-Hans": "桌上有 8 个上了锁的盒子，编号 1 到 8，每个盒子只能用自己的钥匙打开，而 8 把钥匙全都锁在盒子里：1 号盒里放着 3 号盒的钥匙，2 号盒里放着 5 号盒的钥匙，3 号盒里放着 6 号盒的钥匙，4 号盒里放着 8 号盒的钥匙，5 号盒里放着 2 号盒的钥匙，6 号盒里放着 1 号盒的钥匙，7 号盒里放着 4 号盒的钥匙，8 号盒里放着 7 号盒的钥匙。小安可以把盒子撬开（不用钥匙打开），打开的盒子里的钥匙就能拿来用。他想打开全部 8 个盒子，最少要撬开几个？",
+        "en": "There are 8 locked boxes numbered 1 to 8; each box opens only with its own key, and all 8 keys are locked inside the boxes: box 1 holds the key to box 3, box 2 holds the key to box 5, box 3 holds the key to box 6, box 4 holds the key to box 8, box 5 holds the key to box 2, box 6 holds the key to box 1, box 7 holds the key to box 4, and box 8 holds the key to box 7. An may force a box open (without its key), and any key found in an opened box can then be used. To open all 8 boxes, what is the smallest number of boxes he must force open?",
+        "ja": "つくえの上に、1 から 8 までの番号がついた、かぎのかかった箱が 8 こあります。どの箱も自分のかぎでしか開かず、8 本のかぎは全部箱の中に入っています。1 番の箱には 3 番の箱のかぎ、2 番には 5 番のかぎ、3 番には 6 番のかぎ、4 番には 8 番のかぎ、5 番には 2 番のかぎ、6 番には 1 番のかぎ、7 番には 4 番のかぎ、8 番には 7 番のかぎが入っています。アンさんは箱をこじ開ける（かぎを使わずに開ける）ことができ、開けた箱の中のかぎはそのあと使えます。8 この箱を全部開けるには、少なくとも何こをこじ開けなければなりませんか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 3。",
+        "zh-Hans": "答案是 3。",
+        "en": "The answer is 3.",
+        "ja": "答えは 3 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "跟著鑰匙走：打開 1 號盒拿到 3 號的鑰匙，打開 3 號盒拿到 6 號的鑰匙，打開 6 號盒拿到 1 號的鑰匙，又回到 1 號。所以 1、3、6 號這三個盒子的鑰匙，全都鎖在這三個盒子裡面，算成一組。",
+          "同樣地，2 號和 5 號互相鎖著對方的鑰匙，是一組；4 號 → 8 號 → 7 號 → 4 號，也是一組。8 個盒子剛好分成 3 組，每個盒子只屬於一組。",
+          "每一組的鑰匙都鎖在自己這一組的盒子裡，打開別組的盒子拿不到這一組的鑰匙；一開始手上沒有任何鑰匙，所以每一組至少要撬開 1 個盒子，三組至少要撬開 3 個。",
+          "每組撬開 1 個就夠了：例如撬開 1 號、2 號、4 號，再沿著拿到的鑰匙，把同一組的其他盒子一個一個打開。所以最少要撬開 3 個。"
+        ],
+        "zh-Hans": [
+          "跟着钥匙走：打开 1 号盒拿到 3 号的钥匙，打开 3 号盒拿到 6 号的钥匙，打开 6 号盒拿到 1 号的钥匙，又回到 1 号。所以 1、3、6 号这三个盒子的钥匙，全都锁在这三个盒子里面，算成一组。",
+          "同样地，2 号和 5 号互相锁着对方的钥匙，是一组；4 号 → 8 号 → 7 号 → 4 号，也是一组。8 个盒子刚好分成 3 组，每个盒子只属于一组。",
+          "每一组的钥匙都锁在自己这一组的盒子里，打开别组的盒子拿不到这一组的钥匙；一开始手上没有任何钥匙，所以每一组至少要撬开 1 个盒子，三组至少要撬开 3 个。",
+          "每组撬开 1 个就够了：例如撬开 1 号、2 号、4 号，再沿着拿到的钥匙，把同一组的其他盒子一个一个打开。所以最少要撬开 3 个。"
+        ],
+        "en": [
+          "Follow the keys: opening box 1 gives the key to box 3, box 3 gives the key to box 6, box 6 gives the key to box 1 — back to the start. So the keys of boxes 1, 3 and 6 are all locked inside these same three boxes; call them one group.",
+          "Likewise boxes 2 and 5 hold each other's keys — another group; and 4 → 8 → 7 → 4 is a third group. The 8 boxes split into exactly 3 groups, each box in exactly one group.",
+          "Each group's keys are locked inside that group's own boxes, so opening boxes of other groups never gives a key for this group. He starts with no keys, so in every group at least 1 box must be forced: at least 3 boxes in all.",
+          "Forcing 1 box per group is enough: for example force boxes 1, 2 and 4, then follow the keys to open the rest of each group one by one. So the minimum is 3."
+        ],
+        "ja": [
+          "かぎをたどります。1 番を開けると 3 番のかぎ、3 番を開けると 6 番のかぎ、6 番を開けると 1 番のかぎが出てきて、1 番にもどります。だから 1、3、6 番の 3 この箱のかぎは、全部この 3 この中に入っていて、1 つのグループになります。",
+          "同じように、2 番と 5 番はおたがいのかぎを持っていて 1 つのグループ、4 番 → 8 番 → 7 番 → 4 番も 1 つのグループです。8 この箱はちょうど 3 つのグループに分かれ、どの箱も 1 つのグループだけに入ります。",
+          "どのグループのかぎも、そのグループの箱の中にしかないので、ほかのグループの箱を開けても、このグループのかぎは手に入りません。はじめはかぎを 1 本も持っていないので、どのグループでも少なくとも 1 こはこじ開ける必要があり、全部で少なくとも 3 こです。",
+          "各グループで 1 こずつこじ開ければ十分です。たとえば 1 番、2 番、4 番をこじ開け、出てきたかぎで同じグループのほかの箱を順に開けていきます。だから少なくとも 3 こです。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "3"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade3-foundation",
+        "notes": "鑰匙指向形成置換的循環，每個循環至少撬一個、每個循環撬一個即可。掃過 鑰匙|鎖|盒子.{0,20}鑰匙|鑰匙.{0,20}(盒|箱)（約 10 題，多為試鑰匙次數、密碼鎖）；最接近 logic_grade7_foundation_025（5 把鑰匙 5 個鎖最壞試幾次），差異：本題不是試配，而是鑰匙鎖在盒中形成的循環分組。"
+      }
     }
   ]
 }
