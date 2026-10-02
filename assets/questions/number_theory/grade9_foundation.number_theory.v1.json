@@ -5011,6 +5011,378 @@
         "reference": "number_theory-grade9-foundation",
         "notes": "n² ≡ 1 (mod 105) 拆成模 3、5、7 各兩解，中國剩餘定理相乘得 8。掃過「² − 1」（5 題）、「105」、「除以 3.*除以 5.*除以 7」；最接近 number_theory simultaneous_congruence／simultaneous_remainders 類（給定餘數求數）與 number_theory_grade9 square_plus_one_div5 類（n² + 1 被 5 整除），本題是計數平方根個數。"
       }
+    },
+    {
+      "id": "number_theory_grade9_foundation_059",
+      "reviewStatus": "ok",
+      "topic": "number_theory",
+      "subtopic": "product_of_all_divisors_recover_number",
+      "tags": [
+        "c:factor_multiple",
+        "c:exponent",
+        "m:reverse"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade9",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一個正整數 N 的所有正因數全部乘起來，乘積恰好是 2³⁰ × 3¹⁵。求 N。",
+        "zh-Hans": "一个正整数 N 的所有正因数全部乘起来，乘积恰好是 2³⁰ × 3¹⁵。求 N。",
+        "en": "Multiplying together all the positive divisors of a positive integer N gives exactly 2³⁰ × 3¹⁵. Find N.",
+        "ja": "正の整数 N の正の約数をすべて掛け合わせると、積はちょうど 2³⁰ × 3¹⁵ になりました。N を求めなさい。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 144。",
+        "zh-Hans": "答案是 144。",
+        "en": "The answer is 144.",
+        "ja": "答えは 144 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "若 N 有 2、3 以外的質因數 p，p 本身就是 N 的因數，乘積裡就會含有 p，不合。所以 N = 2ᵃ × 3ᵇ（a、b 是非負整數），N 共有 d = (a + 1)(b + 1) 個正因數。",
+          "設所有正因數的乘積是 P。當 k 跑遍 N 的所有因數時，N ÷ k 也恰好跑遍所有因數，所以 P 也等於所有 N ÷ k 的乘積。把兩種寫法相乘，每一對 k 與 N ÷ k 的乘積都是 N，共 d 對，得 P² = Nᵈ = 2ᵃᵈ × 3ᵇᵈ。",
+          "又 P² = 2⁶⁰ × 3³⁰，比較指數得 a × d = 60、b × d = 30，所以 a = 2b，而且 b ≥ 1。代入 d = (2b + 1)(b + 1)，得到 b × (2b + 1) × (b + 1) = 30。",
+          "左邊隨 b 增大而變大：b = 1 時是 1 × 3 × 2 = 6；b = 2 時是 2 × 5 × 3 = 30；b ≥ 3 時至少 3 × 7 × 4 = 84。所以 b = 2，a = 4。",
+          "N = 2⁴ × 3² = 144。驗算：144 有 5 × 3 = 15 個正因數，P² = 144¹⁵ = 2⁶⁰ × 3³⁰，所以 P = 2³⁰ × 3¹⁵。答案是 144。"
+        ],
+        "zh-Hans": [
+          "若 N 有 2、3 以外的质因数 p，p 本身就是 N 的因数，乘积里就会含有 p，不合。所以 N = 2ᵃ × 3ᵇ（a、b 是非负整数），N 共有 d = (a + 1)(b + 1) 个正因数。",
+          "设所有正因数的乘积是 P。当 k 跑遍 N 的所有因数时，N ÷ k 也恰好跑遍所有因数，所以 P 也等于所有 N ÷ k 的乘积。把两种写法相乘，每一对 k 与 N ÷ k 的乘积都是 N，共 d 对，得 P² = Nᵈ = 2ᵃᵈ × 3ᵇᵈ。",
+          "又 P² = 2⁶⁰ × 3³⁰，比较指数得 a × d = 60、b × d = 30，所以 a = 2b，而且 b ≥ 1。代入 d = (2b + 1)(b + 1)，得到 b × (2b + 1) × (b + 1) = 30。",
+          "左边随 b 增大而变大：b = 1 时是 1 × 3 × 2 = 6；b = 2 时是 2 × 5 × 3 = 30；b ≥ 3 时至少 3 × 7 × 4 = 84。所以 b = 2，a = 4。",
+          "N = 2⁴ × 3² = 144。验算：144 有 5 × 3 = 15 个正因数，P² = 144¹⁵ = 2⁶⁰ × 3³⁰，所以 P = 2³⁰ × 3¹⁵。答案是 144。"
+        ],
+        "en": [
+          "If N had a prime factor p other than 2 and 3, then p itself would be a divisor of N and the product would contain p — impossible. So N = 2ᵃ × 3ᵇ with a, b nonnegative integers, and N has d = (a + 1)(b + 1) positive divisors.",
+          "Let P be the product of all positive divisors. As k runs over all divisors of N, so does N ÷ k, so P is also the product of all the N ÷ k. Multiplying the two expressions, each pair k and N ÷ k multiplies to N, and there are d pairs, so P² = Nᵈ = 2ᵃᵈ × 3ᵇᵈ.",
+          "Also P² = 2⁶⁰ × 3³⁰. Comparing exponents: a × d = 60 and b × d = 30, so a = 2b and b ≥ 1. With d = (2b + 1)(b + 1) we get b × (2b + 1) × (b + 1) = 30.",
+          "The left side grows with b: b = 1 gives 1 × 3 × 2 = 6; b = 2 gives 2 × 5 × 3 = 30; b ≥ 3 gives at least 3 × 7 × 4 = 84. So b = 2 and a = 4.",
+          "N = 2⁴ × 3² = 144. Check: 144 has 5 × 3 = 15 positive divisors, P² = 144¹⁵ = 2⁶⁰ × 3³⁰, so P = 2³⁰ × 3¹⁵. The answer is 144."
+        ],
+        "ja": [
+          "N が 2、3 以外の素因数 p をもつと、p 自身が N の約数なので積に p が含まれてしまい、不適です。よって N = 2ᵃ × 3ᵇ（a、b は 0 以上の整数）で、正の約数は d = (a + 1)(b + 1) 個です。",
+          "正の約数すべての積を P とします。k が N の約数全体を動くとき、N ÷ k も約数全体を動くので、P は N ÷ k すべての積にも等しいです。2 つの表し方を掛けると、k と N ÷ k の組の積はどれも N で、それが d 組あるので P² = Nᵈ = 2ᵃᵈ × 3ᵇᵈ です。",
+          "一方 P² = 2⁶⁰ × 3³⁰ なので、指数を比べて a × d = 60、b × d = 30。よって a = 2b、b ≥ 1 です。d = (2b + 1)(b + 1) を代入すると b × (2b + 1) × (b + 1) = 30。",
+          "左辺は b が大きいほど大きくなります。b = 1 なら 1 × 3 × 2 = 6、b = 2 なら 2 × 5 × 3 = 30、b ≥ 3 なら少なくとも 3 × 7 × 4 = 84。したがって b = 2、a = 4 です。",
+          "N = 2⁴ × 3² = 144。確認：144 の正の約数は 5 × 3 = 15 個で、P² = 144¹⁵ = 2⁶⁰ × 3³⁰ より P = 2³⁰ × 3¹⁵。答えは 144 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "144"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "number_theory-grade9-foundation",
+        "notes": "所有正因數的乘積 P 滿足 P² = Nᵈ，由指數反推 N。掃過 regex「因數.{0,12}(乘起來|乘積)|所有.{0,4}因數.{0,8}乘」（全庫 3 題，並讀最接近者原文）；最接近 number_theory_grade9_foundation_005，差異：該題數 N 的平方數因數個數；本題是由「所有因數的乘積」反推 N，用 P² = Nᵈ 配對。"
+      }
+    },
+    {
+      "id": "number_theory_grade9_foundation_060",
+      "reviewStatus": "ok",
+      "topic": "number_theory",
+      "subtopic": "two_digit_divisible_by_digit_product",
+      "tags": [
+        "c:factor_multiple",
+        "c:place_value",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade9",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "有些兩位數能被「它的十位數字與個位數字的乘積」整除，例如 24 能被 2 × 4 = 8 整除。（個位數字是 0 的兩位數不算，因為乘積是 0。）求所有這樣的兩位數之和。",
+        "zh-Hans": "有些两位数能被「它的十位数字与个位数字的乘积」整除，例如 24 能被 2 × 4 = 8 整除。（个位数字是 0 的两位数不算，因为乘积是 0。）求所有这样的两位数之和。",
+        "en": "Some two-digit numbers are divisible by the product of their tens digit and units digit; for example, 24 is divisible by 2 × 4 = 8. (Numbers ending in 0 do not count, since the product is 0.) Find the sum of all such two-digit numbers.",
+        "ja": "2 けたの数の中には、「十の位の数字と一の位の数字の積」で割り切れるものがあります。たとえば 24 は 2 × 4 = 8 で割り切れます。（一の位が 0 の数は、積が 0 になるので数えません。）このような 2 けたの数をすべて足すといくつですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 98。",
+        "zh-Hans": "答案是 98。",
+        "en": "The answer is 98.",
+        "ja": "答えは 98 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "設這個兩位數是 10a + b，a、b 都是 1 到 9 的數字，條件是 a × b 整除 10a + b。",
+          "a 整除 a × b，所以 a 也整除 10a + b；而 a 整除 10a，因此 a 整除 b。寫成 b = k × a，k 是正整數。",
+          "同理 b 整除 10a + b，所以 b 整除 10a，也就是 k × a 整除 10 × a，得 k 整除 10。k 可能是 1、2、5、10，但 k = 10 會讓 b = 10a 超過 9，所以 k 只能是 1、2、5。",
+          "原條件 a × (k × a) 整除 10a + k × a，兩邊同除以 a，變成 k × a 整除 10 + k。k = 1：a 整除 11 且 a ≤ 9，a = 1，得 11。k = 2：2a 整除 12，a 整除 6，又 b = 2a ≤ 9 使 a ≤ 4，a = 1、2、3，得 12、24、36。k = 5：5a 整除 15，a 整除 3，又 b = 5a ≤ 9 使 a = 1，得 15。",
+          "符合的兩位數是 11、12、15、24、36，總和 11 + 12 + 15 + 24 + 36 = 98。答案是 98。"
+        ],
+        "zh-Hans": [
+          "设这个两位数是 10a + b，a、b 都是 1 到 9 的数字，条件是 a × b 整除 10a + b。",
+          "a 整除 a × b，所以 a 也整除 10a + b；而 a 整除 10a，因此 a 整除 b。写成 b = k × a，k 是正整数。",
+          "同理 b 整除 10a + b，所以 b 整除 10a，也就是 k × a 整除 10 × a，得 k 整除 10。k 可能是 1、2、5、10，但 k = 10 会让 b = 10a 超过 9，所以 k 只能是 1、2、5。",
+          "原条件 a × (k × a) 整除 10a + k × a，两边同除以 a，变成 k × a 整除 10 + k。k = 1：a 整除 11 且 a ≤ 9，a = 1，得 11。k = 2：2a 整除 12，a 整除 6，又 b = 2a ≤ 9 使 a ≤ 4，a = 1、2、3，得 12、24、36。k = 5：5a 整除 15，a 整除 3，又 b = 5a ≤ 9 使 a = 1，得 15。",
+          "符合的两位数是 11、12、15、24、36，总和 11 + 12 + 15 + 24 + 36 = 98。答案是 98。"
+        ],
+        "en": [
+          "Write the number as 10a + b with digits a, b from 1 to 9. The condition is that a × b divides 10a + b.",
+          "a divides a × b, so a divides 10a + b; since a divides 10a, a divides b. Write b = k × a with k a positive integer.",
+          "Likewise b divides 10a + b, so b divides 10a, i.e. k × a divides 10 × a, so k divides 10. k could be 1, 2, 5, 10, but k = 10 makes b = 10a larger than 9, so k is 1, 2 or 5.",
+          "The condition a × (k × a) divides 10a + k × a becomes, after dividing by a, that k × a divides 10 + k. k = 1: a divides 11 with a ≤ 9, so a = 1, giving 11. k = 2: 2a divides 12, so a divides 6, and b = 2a ≤ 9 forces a ≤ 4, so a = 1, 2, 3, giving 12, 24, 36. k = 5: 5a divides 15, so a divides 3, and b = 5a ≤ 9 forces a = 1, giving 15.",
+          "The numbers are 11, 12, 15, 24, 36, with sum 11 + 12 + 15 + 24 + 36 = 98. The answer is 98."
+        ],
+        "ja": [
+          "この数を 10a + b（a、b は 1 から 9 の数字）とおくと、条件は a × b が 10a + b を割り切ることです。",
+          "a は a × b を割り切るので 10a + b も割り切ります。a は 10a を割り切るので、a は b を割り切ります。b = k × a（k は正の整数）とおきます。",
+          "同様に b は 10a + b を割り切るので 10a を割り切ります。つまり k × a が 10 × a を割り切り、k は 10 の約数です。k = 1、2、5、10 が候補ですが、k = 10 だと b = 10a が 9 を超えるので、k は 1、2、5 のどれかです。",
+          "条件 a × (k × a) が 10a + k × a を割り切ることは、a で割ると「k × a が 10 + k を割り切る」となります。k = 1：a が 11 を割り切り a ≤ 9 なので a = 1、数は 11。k = 2：2a が 12 を割り切るので a は 6 の約数、b = 2a ≤ 9 より a ≤ 4 なので a = 1、2、3、数は 12、24、36。k = 5：5a が 15 を割り切るので a は 3 の約数、b = 5a ≤ 9 より a = 1、数は 15。",
+          "条件をみたす数は 11、12、15、24、36 で、和は 11 + 12 + 15 + 24 + 36 = 98。答えは 98 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "98"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "number_theory-grade9-foundation",
+        "notes": "ab | 10a + b 推出 a | b、k | 10，再逐類檢查。掃過 regex「數字的乘積|數字乘積|各位數字.{0,6}乘」（全庫 8 題，並讀最接近者原文）；最接近 number_theory_grade9_foundation_051，差異：該題是「數 = 數字和 + 數字積」的方程；本題是「數字積整除原數」的整除條件，推理走 a | b、k | 10。"
+      }
+    },
+    {
+      "id": "number_theory_grade9_foundation_061",
+      "reviewStatus": "ok",
+      "topic": "number_theory",
+      "subtopic": "coprime_splits_of_factorial_as_fractions",
+      "tags": [
+        "c:factor_multiple",
+        "c:fraction",
+        "m:bijection"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade9",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "有些分數 m/n 同時滿足：m、n 都是正整數，而且 m < n；m/n 已經是最簡分數（m、n 互質）；m × n = 12!（12! = 1 × 2 × 3 × ⋯ × 12）。這樣的分數共有幾個？",
+        "zh-Hans": "有些分数 m/n 同时满足：m、n 都是正整数，而且 m < n；m/n 已经是最简分数（m、n 互质）；m × n = 12!（12! = 1 × 2 × 3 × ⋯ × 12）。这样的分数共有几个？",
+        "en": "Count the fractions m/n such that m and n are positive integers with m < n, the fraction is in lowest terms (m and n are coprime), and m × n = 12! (where 12! = 1 × 2 × 3 × ⋯ × 12). How many such fractions are there?",
+        "ja": "分数 m/n で、次の条件をすべてみたすものを考えます：m、n は正の整数で m < n；m/n は既約分数（m と n は互いに素）；m × n = 12!（12! = 1 × 2 × 3 × ⋯ × 12）。このような分数は何個ありますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 16。",
+        "zh-Hans": "答案是 16。",
+        "en": "The answer is 16.",
+        "ja": "答えは 16 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "先把 12! 做質因數分解。1 到 12 中，2 的倍數有 6 個、4 的倍數有 3 個、8 的倍數有 1 個，所以 2 的指數是 6 + 3 + 1 = 10；3 的倍數有 4 個、9 的倍數有 1 個，3 的指數是 5；5 的指數是 2；7、11 各 1。所以 12! = 2¹⁰ × 3⁵ × 5² × 7 × 11，有 5 個不同的質因數。",
+          "m、n 互質，所以同一個質因數不能同時出現在 m 與 n 裡：2¹⁰ 只能整塊給 m 或整塊給 n，3⁵、5²、7、11 也一樣。反過來，每一種這樣的分配都得到一組互質、而且 m × n = 12! 的 (m, n)。",
+          "每個質因數有 2 種去向，所以有序的 (m, n) 共有 2⁵ = 32 組。",
+          "m 不會等於 n（若 m = n 且互質，只能 m = n = 1，乘積不是 12!）。把 (m, n) 和 (n, m) 配成一對，每一對中恰好有一組 m < n，所以符合的分數有 32 ÷ 2 = 16 個。答案是 16。"
+        ],
+        "zh-Hans": [
+          "先把 12! 做质因数分解。1 到 12 中，2 的倍数有 6 个、4 的倍数有 3 个、8 的倍数有 1 个，所以 2 的指数是 6 + 3 + 1 = 10；3 的倍数有 4 个、9 的倍数有 1 个，3 的指数是 5；5 的指数是 2；7、11 各 1。所以 12! = 2¹⁰ × 3⁵ × 5² × 7 × 11，有 5 个不同的质因数。",
+          "m、n 互质，所以同一个质因数不能同时出现在 m 与 n 里：2¹⁰ 只能整块给 m 或整块给 n，3⁵、5²、7、11 也一样。反过来，每一种这样的分配都得到一组互质、而且 m × n = 12! 的 (m, n)。",
+          "每个质因数有 2 种去向，所以有序的 (m, n) 共有 2⁵ = 32 组。",
+          "m 不会等于 n（若 m = n 且互质，只能 m = n = 1，乘积不是 12!）。把 (m, n) 和 (n, m) 配成一对，每一对中恰好有一组 m < n，所以符合的分数有 32 ÷ 2 = 16 个。答案是 16。"
+        ],
+        "en": [
+          "Factor 12!. Among 1 to 12 there are 6 multiples of 2, 3 multiples of 4 and 1 multiple of 8, so the exponent of 2 is 6 + 3 + 1 = 10; there are 4 multiples of 3 and 1 multiple of 9, so the exponent of 3 is 5; the exponent of 5 is 2; 7 and 11 appear once each. So 12! = 2¹⁰ × 3⁵ × 5² × 7 × 11, with 5 distinct primes.",
+          "Since m and n are coprime, no prime can appear in both: 2¹⁰ goes entirely to m or entirely to n, and the same holds for 3⁵, 5², 7 and 11. Conversely, every such assignment gives a coprime pair (m, n) with m × n = 12!.",
+          "Each prime has 2 choices, so there are 2⁵ = 32 ordered pairs (m, n).",
+          "m never equals n (coprime and equal would force m = n = 1, whose product is not 12!). Pairing (m, n) with (n, m), exactly one of each pair has m < n, so there are 32 ÷ 2 = 16 fractions. The answer is 16."
+        ],
+        "ja": [
+          "12! を素因数分解します。1 から 12 のうち 2 の倍数は 6 個、4 の倍数は 3 個、8 の倍数は 1 個なので 2 の指数は 6 + 3 + 1 = 10。3 の倍数は 4 個、9 の倍数は 1 個なので 3 の指数は 5。5 の指数は 2、7 と 11 は 1 ずつ。よって 12! = 2¹⁰ × 3⁵ × 5² × 7 × 11 で、異なる素因数は 5 個です。",
+          "m と n は互いに素なので、同じ素因数が両方に入ることはありません。2¹⁰ は丸ごと m か丸ごと n に入り、3⁵、5²、7、11 も同様です。逆に、そのような振り分け方 1 つごとに、互いに素で m × n = 12! となる (m, n) が 1 組決まります。",
+          "各素因数の行き先は 2 通りなので、順序をつけた (m, n) は 2⁵ = 32 組です。",
+          "m = n にはなりません（互いに素で等しいなら m = n = 1 で、積が 12! になりません）。(m, n) と (n, m) を組にすると各組でちょうど一方が m < n なので、分数は 32 ÷ 2 = 16 個。答えは 16 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "16"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "number_theory-grade9-foundation",
+        "notes": "m、n 互質且 mn = 12!，每個質因數的整塊冪只能整塊給一方，2⁵ 組再除以 2。掃過 regex「互質|最簡分數.{0,30}乘」（全庫 11 題，並讀最接近者原文）；最接近 number_theory_grade11_foundation_042，差異：該題數區間內分母不超過 10 的最簡分數；本題是「分子 × 分母 = 12!」，每個質因數整塊分配。"
+      }
+    },
+    {
+      "id": "number_theory_grade9_foundation_062",
+      "reviewStatus": "ok",
+      "topic": "number_theory",
+      "subtopic": "difference_of_cubes_factor_cases",
+      "tags": [
+        "c:factor_multiple",
+        "c:algebraic_identity",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade9",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "正整數 x、y 滿足 x³ − y³ = 721。把所有可能的 x 加起來，和是多少？",
+        "zh-Hans": "正整数 x、y 满足 x³ − y³ = 721。把所有可能的 x 加起来，和是多少？",
+        "en": "Positive integers x and y satisfy x³ − y³ = 721. What is the sum of all possible values of x?",
+        "ja": "正の整数 x、y が x³ − y³ = 721 をみたします。考えられる x の値をすべて足すといくつですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 25。",
+        "zh-Hans": "答案是 25。",
+        "en": "The answer is 25.",
+        "ja": "答えは 25 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "x³ − y³ = (x − y)(x² + xy + y²)。因為 721 > 0，所以 x > y，令 d = x − y，d 是正整數。",
+          "x² + xy + y² = (x − y)² + 3xy = d² + 3xy，所以 d × (d² + 3xy) = 721 = 7 × 103。103 不能被 2、3、5、7 整除，而 11² = 121 > 103，所以 103 是質數，721 的正因數只有 1、7、103、721。",
+          "d 是 721 的因數，而且 d³ < d × (d² + 3xy) = 721，所以 d < 9，只能是 d = 1 或 d = 7。",
+          "d = 1：1 + 3xy = 721，xy = 240，又 x = y + 1，得 y(y + 1) = 240。y(y + 1) 隨 y 增大而增大，而 15 × 16 = 240，所以 y = 15、x = 16。d = 7：49 + 3xy = 103，xy = 18，又 x = y + 7，得 y² + 7y − 18 = 0，即 (y + 9)(y − 2) = 0，y = 2、x = 9。",
+          "驗算：16³ − 15³ = 4096 − 3375 = 721；9³ − 2³ = 729 − 8 = 721。所有 x 的和是 16 + 9 = 25。答案是 25。"
+        ],
+        "zh-Hans": [
+          "x³ − y³ = (x − y)(x² + xy + y²)。因为 721 > 0，所以 x > y，令 d = x − y，d 是正整数。",
+          "x² + xy + y² = (x − y)² + 3xy = d² + 3xy，所以 d × (d² + 3xy) = 721 = 7 × 103。103 不能被 2、3、5、7 整除，而 11² = 121 > 103，所以 103 是质数，721 的正因数只有 1、7、103、721。",
+          "d 是 721 的因数，而且 d³ < d × (d² + 3xy) = 721，所以 d < 9，只能是 d = 1 或 d = 7。",
+          "d = 1：1 + 3xy = 721，xy = 240，又 x = y + 1，得 y(y + 1) = 240。y(y + 1) 随 y 增大而增大，而 15 × 16 = 240，所以 y = 15、x = 16。d = 7：49 + 3xy = 103，xy = 18，又 x = y + 7，得 y² + 7y − 18 = 0，即 (y + 9)(y − 2) = 0，y = 2、x = 9。",
+          "验算：16³ − 15³ = 4096 − 3375 = 721；9³ − 2³ = 729 − 8 = 721。所有 x 的和是 16 + 9 = 25。答案是 25。"
+        ],
+        "en": [
+          "x³ − y³ = (x − y)(x² + xy + y²). Since 721 > 0, x > y; let d = x − y, a positive integer.",
+          "x² + xy + y² = (x − y)² + 3xy = d² + 3xy, so d × (d² + 3xy) = 721 = 7 × 103. 103 is not divisible by 2, 3, 5 or 7, and 11² = 121 > 103, so 103 is prime and the positive divisors of 721 are 1, 7, 103, 721.",
+          "d divides 721 and d³ < d × (d² + 3xy) = 721, so d < 9: d = 1 or d = 7.",
+          "d = 1: 1 + 3xy = 721, so xy = 240 with x = y + 1, i.e. y(y + 1) = 240. y(y + 1) increases with y and 15 × 16 = 240, so y = 15, x = 16. d = 7: 49 + 3xy = 103, so xy = 18 with x = y + 7, i.e. y² + 7y − 18 = 0, (y + 9)(y − 2) = 0, so y = 2, x = 9.",
+          "Check: 16³ − 15³ = 4096 − 3375 = 721 and 9³ − 2³ = 729 − 8 = 721. The sum of the x values is 16 + 9 = 25. The answer is 25."
+        ],
+        "ja": [
+          "x³ − y³ = (x − y)(x² + xy + y²)。721 > 0 なので x > y で、d = x − y とおくと d は正の整数です。",
+          "x² + xy + y² = (x − y)² + 3xy = d² + 3xy なので、d × (d² + 3xy) = 721 = 7 × 103。103 は 2、3、5、7 で割り切れず、11² = 121 > 103 なので素数です。よって 721 の正の約数は 1、7、103、721 だけです。",
+          "d は 721 の約数で、d³ < d × (d² + 3xy) = 721 なので d < 9。よって d = 1 または d = 7 です。",
+          "d = 1 のとき：1 + 3xy = 721 より xy = 240、x = y + 1 なので y(y + 1) = 240。y(y + 1) は y とともに増え、15 × 16 = 240 なので y = 15、x = 16。d = 7 のとき：49 + 3xy = 103 より xy = 18、x = y + 7 なので y² + 7y − 18 = 0、(y + 9)(y − 2) = 0 から y = 2、x = 9。",
+          "確認：16³ − 15³ = 4096 − 3375 = 721、9³ − 2³ = 729 − 8 = 721。x の和は 16 + 9 = 25。答えは 25 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "25"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "number_theory-grade9-foundation",
+        "notes": "x³ − y³ = d(d² + 3xy)，d 是 721 的因數且 d³ < 721，兩種情形各解一次。掃過 regex「³ −|³ - |立方差」（全庫 24 題，並讀最接近者原文）；最接近 algebra_grade10_foundation_094，差異：該題用立方差恆等式直接求值；本題要把 721 分解並用 d³ < 721 限制因數，解出兩組正整數解。"
+      }
+    },
+    {
+      "id": "number_theory_grade9_foundation_063",
+      "reviewStatus": "ok",
+      "topic": "number_theory",
+      "subtopic": "trailing_zeros_of_product_of_factorials",
+      "tags": [
+        "c:factor_multiple",
+        "c:place_value",
+        "m:enumeration"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade9",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "把 1!、2!、3!、⋯、20! 這 20 個數全部乘起來（n! = 1 × 2 × ⋯ × n）。乘積的末尾共有幾個連續的 0？",
+        "zh-Hans": "把 1!、2!、3!、⋯、20! 这 20 个数全部乘起来（n! = 1 × 2 × ⋯ × n）。乘积的末尾共有几个连续的 0？",
+        "en": "Multiply together the 20 numbers 1!, 2!, 3!, …, 20! (where n! = 1 × 2 × ⋯ × n). How many zeros does the product end with?",
+        "ja": "1!、2!、3!、…、20! の 20 個の数をすべて掛け合わせます（n! = 1 × 2 × ⋯ × n）。その積の末尾には 0 が何個続きますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 34。",
+        "zh-Hans": "答案是 34。",
+        "en": "The answer is 34.",
+        "ja": "答えは 34 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "末尾每一個 0 來自一個因數 10 = 2 × 5，所以末尾 0 的個數等於乘積中質因數 2 的個數與質因數 5 的個數中較小的那一個。",
+          "在每一個 k! 中，2 的個數是 ⌊k/2⌋ + ⌊k/4⌋ + ⌊k/8⌋ + ⋯，5 的個數是 ⌊k/5⌋ + ⌊k/25⌋ + ⋯，逐項比較前者都不小於後者，所以整個乘積中 2 的個數不少於 5 的個數，只要數 5 的個數。",
+          "k ≤ 20 < 25，所以 k! 中 5 的個數就是 ⌊k/5⌋：k = 1～4 時是 0；k = 5～9 時各 1；k = 10～14 時各 2；k = 15～19 時各 3；k = 20 時是 4。",
+          "合計 0 × 4 + 1 × 5 + 2 × 5 + 3 × 5 + 4 × 1 = 0 + 5 + 10 + 15 + 4 = 34。乘積末尾恰有 34 個連續的 0。答案是 34。"
+        ],
+        "zh-Hans": [
+          "末尾每一个 0 来自一个因数 10 = 2 × 5，所以末尾 0 的个数等于乘积中质因数 2 的个数与质因数 5 的个数中较小的那一个。",
+          "在每一个 k! 中，2 的个数是 ⌊k/2⌋ + ⌊k/4⌋ + ⌊k/8⌋ + ⋯，5 的个数是 ⌊k/5⌋ + ⌊k/25⌋ + ⋯，逐项比较前者都不小于后者，所以整个乘积中 2 的个数不少于 5 的个数，只要数 5 的个数。",
+          "k ≤ 20 < 25，所以 k! 中 5 的个数就是 ⌊k/5⌋：k = 1～4 时是 0；k = 5～9 时各 1；k = 10～14 时各 2；k = 15～19 时各 3；k = 20 时是 4。",
+          "合计 0 × 4 + 1 × 5 + 2 × 5 + 3 × 5 + 4 × 1 = 0 + 5 + 10 + 15 + 4 = 34。乘积末尾恰有 34 个连续的 0。答案是 34。"
+        ],
+        "en": [
+          "Each trailing zero comes from a factor 10 = 2 × 5, so the number of trailing zeros is the smaller of the number of factors 2 and the number of factors 5 in the product.",
+          "In each k!, the number of factors 2 is ⌊k/2⌋ + ⌊k/4⌋ + ⌊k/8⌋ + ⋯ and the number of factors 5 is ⌊k/5⌋ + ⌊k/25⌋ + ⋯; term by term the first is at least the second, so the whole product has at least as many 2s as 5s, and we only count the 5s.",
+          "Since k ≤ 20 < 25, k! contains exactly ⌊k/5⌋ factors 5: 0 for k = 1–4; 1 each for k = 5–9; 2 each for k = 10–14; 3 each for k = 15–19; 4 for k = 20.",
+          "Total: 0 × 4 + 1 × 5 + 2 × 5 + 3 × 5 + 4 × 1 = 0 + 5 + 10 + 15 + 4 = 34. The product ends with exactly 34 zeros. The answer is 34."
+        ],
+        "ja": [
+          "末尾の 0 は 1 個ごとに因数 10 = 2 × 5 から生じるので、末尾の 0 の個数は、積に含まれる素因数 2 の個数と 5 の個数の小さいほうです。",
+          "各 k! で、2 の個数は ⌊k/2⌋ + ⌊k/4⌋ + ⌊k/8⌋ + ⋯、5 の個数は ⌊k/5⌋ + ⌊k/25⌋ + ⋯ で、項ごとに比べると前者は後者以上です。よって積全体でも 2 は 5 より少なくないので、5 の個数だけを数えればよいです。",
+          "k ≤ 20 < 25 なので、k! に含まれる 5 の個数は ⌊k/5⌋ です。k = 1～4 は 0、k = 5～9 はそれぞれ 1、k = 10～14 はそれぞれ 2、k = 15～19 はそれぞれ 3、k = 20 は 4。",
+          "合計は 0 × 4 + 1 × 5 + 2 × 5 + 3 × 5 + 4 × 1 = 0 + 5 + 10 + 15 + 4 = 34。積の末尾にはちょうど 34 個の 0 が続きます。答えは 34 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "34"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "number_theory-grade9-foundation",
+        "notes": "連乘 1!×2!×⋯×20! 的末尾 0 個數 = Σ⌊k/5⌋，5 是瓶頸。掃過 regex「末尾|連續.{0,6}0|個 0」（全庫 20 題，並讀最接近者原文）；最接近 number_theory_grade10_foundation_004，差異：該題是單一階乘 n! 的末尾 0 反求 n；本題是 20 個階乘連乘，要逐個 k! 累加 5 的個數。"
+      }
     }
   ]
 }

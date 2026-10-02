@@ -5780,6 +5780,226 @@
         "reference": "combinatorics-grade9-foundation",
         "notes": "交錯排列（up-down permutation）：最大數只能在峰位，依 5 的位置分類。掃過「高低|交錯|起伏|一上一下」（4 題）、「遞增|遞減」；最接近 combinatorics_grade12_foundation_062（先遞增後遞減的單峰排列 2ⁿ⁻¹）與 combinatorics_grade10_foundation_076（小山頭期望），本題是 2 個峰的交錯排列計數。"
       }
+    },
+    {
+      "id": "combinatorics_grade9_foundation_067",
+      "reviewStatus": "ok",
+      "topic": "combinatorics",
+      "subtopic": "distinct_books_to_three_children_each_nonempty",
+      "tags": [
+        "c:permutation_combination",
+        "c:inclusion_exclusion",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade9",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "把 5 本不同的書全部分給甲、乙、丙三位小朋友，每本書只給一個人，而且每人至少分到 1 本。共有幾種分法？",
+        "zh-Hans": "把 5 本不同的书全部分给甲、乙、丙三位小朋友，每本书只给一个人，而且每人至少分到 1 本。共有几种分法？",
+        "en": "Five different books are all given to three children, Jia, Yi and Bing; each book goes to one child, and each child gets at least 1 book. In how many ways can this be done?",
+        "ja": "5 冊の異なる本を、甲、乙、丙の 3 人の子どもに全部配ります。1 冊の本は 1 人だけに渡し、どの子も少なくとも 1 冊もらいます。配り方は何通りありますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 150。",
+        "zh-Hans": "答案是 150。",
+        "en": "The answer is 150.",
+        "ja": "答えは 150 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "三人的本數加起來是 5，每人至少 1 本，本數的組合只有兩種型態：一人 3 本、另兩人各 1 本；或兩人各 2 本、一人 1 本。",
+          "型態「3、1、1」：選誰拿 3 本有 3 種，選哪 3 本給他有 C(5, 3) = 10 種，剩下 2 本分給另外兩人各 1 本有 2 種，共 3 × 10 × 2 = 60 種。",
+          "型態「2、2、1」：選誰只拿 1 本有 3 種，選哪 1 本給他有 5 種；剩下 4 本，另外兩人中依甲、乙、丙順序排在前面的那一位拿哪 2 本有 C(4, 2) = 6 種，其餘 2 本給最後一位，共 3 × 5 × 6 = 90 種。",
+          "兩種型態互不重疊，合計 60 + 90 = 150 種。也可以用排容驗算：不限制時有 3⁵ = 243 種，指定某一人沒拿到的有 2⁵ = 32 種，指定某兩人都沒拿到的有 1 種，243 − 3 × 32 + 3 × 1 = 150。答案是 150。"
+        ],
+        "zh-Hans": [
+          "三人的本数加起来是 5，每人至少 1 本，本数的组合只有两种型态：一人 3 本、另两人各 1 本；或两人各 2 本、一人 1 本。",
+          "型态「3、1、1」：选谁拿 3 本有 3 种，选哪 3 本给他有 C(5, 3) = 10 种，剩下 2 本分给另外两人各 1 本有 2 种，共 3 × 10 × 2 = 60 种。",
+          "型态「2、2、1」：选谁只拿 1 本有 3 种，选哪 1 本给他有 5 种；剩下 4 本，另外两人中依甲、乙、丙顺序排在前面的那一位拿哪 2 本有 C(4, 2) = 6 种，其余 2 本给最后一位，共 3 × 5 × 6 = 90 种。",
+          "两种型态互不重叠，合计 60 + 90 = 150 种。也可以用排容验算：不限制时有 3⁵ = 243 种，指定某一人没拿到的有 2⁵ = 32 种，指定某两人都没拿到的有 1 种，243 − 3 × 32 + 3 × 1 = 150。答案是 150。"
+        ],
+        "en": [
+          "The three counts add up to 5 with each at least 1, so there are only two patterns: one child gets 3 and the others 1 each; or two children get 2 each and one gets 1.",
+          "Pattern 3, 1, 1: choose who gets 3 books (3 ways), which 3 books (C(5, 3) = 10 ways), then give the remaining 2 books one each to the other two (2 ways): 3 × 10 × 2 = 60.",
+          "Pattern 2, 2, 1: choose who gets only 1 book (3 ways) and which book (5 ways); of the other two children, the one earlier in the order Jia, Yi, Bing takes 2 of the remaining 4 books (C(4, 2) = 6 ways), and the last child gets the other 2: 3 × 5 × 6 = 90.",
+          "The patterns do not overlap, so the total is 60 + 90 = 150. Check by inclusion–exclusion: 3⁵ = 243 assignments without restriction, 2⁵ = 32 missing a given child, 1 missing two given children: 243 − 3 × 32 + 3 × 1 = 150. The answer is 150."
+        ],
+        "ja": [
+          "3 人の冊数の和は 5 で、各自 1 冊以上なので、冊数の型は「1 人が 3 冊、ほかの 2 人が 1 冊ずつ」と「2 人が 2 冊ずつ、1 人が 1 冊」の 2 つだけです。",
+          "型「3、1、1」：3 冊もらう人の選び方 3 通り、その 3 冊の選び方 C(5, 3) = 10 通り、残り 2 冊をほかの 2 人に 1 冊ずつ渡す方法 2 通りで、3 × 10 × 2 = 60 通り。",
+          "型「2、2、1」：1 冊だけの人の選び方 3 通り、その 1 冊の選び方 5 通り。残り 4 冊のうち、ほかの 2 人のうち甲、乙、丙の順で先の人がもらう 2 冊の選び方が C(4, 2) = 6 通りで、残り 2 冊は最後の人へ。3 × 5 × 6 = 90 通り。",
+          "2 つの型は重ならないので合計 60 + 90 = 150 通り。包除原理でも確認できます：制限なしで 3⁵ = 243 通り、特定の 1 人がもらわないのが 2⁵ = 32 通り、特定の 2 人がもらわないのが 1 通りで、243 − 3 × 32 + 3 × 1 = 150。答えは 150 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "150"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "combinatorics-grade9-foundation",
+        "notes": "5 本不同書分給 3 人每人至少 1 本：{3,1,1} 與 {2,2,1} 兩型，排容驗算。掃過 regex「不同的書|本不同|每人至少」（全庫 5 題，並讀最接近者原文）；最接近 combinatorics_grade8_foundation_024，差異：該題把 5 本書分成兩堆、堆不分名稱；本題分給 3 位有名字的小朋友且每人至少 1 本，要分本數型態。"
+      }
+    },
+    {
+      "id": "combinatorics_grade9_foundation_068",
+      "reviewStatus": "ok",
+      "topic": "combinatorics",
+      "subtopic": "meeting_problem_geometric_probability_square",
+      "tags": [
+        "c:probability",
+        "c:area",
+        "m:direct"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade9",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "小安和小美約好下午 1 點到 2 點之間在車站見面。兩人各自在這一小時內的一個隨機時刻到達（每一時刻機會相同，兩人互不影響）。先到的人最多等 20 分鐘，對方還沒來就離開。兩人能見到面的機率寫成最簡分數 m/n，求 m + n。",
+        "zh-Hans": "小安和小美约好下午 1 点到 2 点之间在车站见面。两人各自在这一小时内的一个随机时刻到达（每一时刻机会相同，两人互不影响）。先到的人最多等 20 分钟，对方还没来就离开。两人能见到面的概率写成最简分数 m/n，求 m + n。",
+        "en": "An and Mei agree to meet at the station between 1 p.m. and 2 p.m. Each arrives at a random moment within that hour (all moments equally likely, independently). Whoever arrives first waits at most 20 minutes and then leaves. The probability that they meet, in lowest terms, is m/n. Find m + n.",
+        "ja": "アンさんとメイさんは午後 1 時から 2 時の間に駅で会う約束をしました。2 人はそれぞれこの 1 時間のうちのでたらめな時刻に着きます（どの時刻も同様に確からしく、互いに独立）。先に着いた人は最大 20 分待ち、相手が来なければ帰ります。2 人が会える確率を既約分数 m/n で表すとき、m + n を求めなさい。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 14。",
+        "zh-Hans": "答案是 14。",
+        "en": "The answer is 14.",
+        "ja": "答えは 14 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "以 1 點為 0，用分鐘計時，設小安在 x 分、小美在 y 分到達，0 ≤ x ≤ 60、0 ≤ y ≤ 60。點 (x, y) 均勻地落在邊長 60 的正方形中，機率等於面積比。",
+          "兩人能見面 ⇔ 先到的人等待的時間不超過 20 分鐘 ⇔ |x − y| ≤ 20。",
+          "見不到面的部分是 y > x + 20 與 x > y + 20 兩塊，各是兩股都等於 60 − 20 = 40 的直角三角形，面積各 40 × 40 ÷ 2 = 800，合計 1600。",
+          "正方形面積 3600，見面的區域面積 3600 − 1600 = 2000，機率 2000/3600 = 5/9。",
+          "m/n = 5/9，m + n = 14。答案是 14。"
+        ],
+        "zh-Hans": [
+          "以 1 点为 0，用分钟计时，设小安在 x 分、小美在 y 分到达，0 ≤ x ≤ 60、0 ≤ y ≤ 60。点 (x, y) 均匀地落在边长 60 的正方形中，概率等于面积比。",
+          "两人能见面 ⇔ 先到的人等待的时间不超过 20 分钟 ⇔ |x − y| ≤ 20。",
+          "见不到面的部分是 y > x + 20 与 x > y + 20 两块，各是两股都等于 60 − 20 = 40 的直角三角形，面积各 40 × 40 ÷ 2 = 800，合计 1600。",
+          "正方形面积 3600，见面的区域面积 3600 − 1600 = 2000，概率 2000/3600 = 5/9。",
+          "m/n = 5/9，m + n = 14。答案是 14。"
+        ],
+        "en": [
+          "Measure time in minutes after 1 p.m.: An arrives at x and Mei at y, with 0 ≤ x ≤ 60 and 0 ≤ y ≤ 60. The point (x, y) is uniform in a square of side 60, so probabilities are area ratios.",
+          "They meet ⇔ the first to arrive waits no more than 20 minutes ⇔ |x − y| ≤ 20.",
+          "The region where they miss each other consists of y > x + 20 and x > y + 20: two right triangles with legs 60 − 20 = 40, each of area 40 × 40 ÷ 2 = 800, total 1600.",
+          "The square has area 3600, so the meeting region has area 3600 − 1600 = 2000 and the probability is 2000/3600 = 5/9.",
+          "m/n = 5/9, so m + n = 14. The answer is 14."
+        ],
+        "ja": [
+          "午後 1 時を 0 として分で測り、アンさんが x 分、メイさんが y 分に着くとすると 0 ≤ x ≤ 60、0 ≤ y ≤ 60。点 (x, y) は 1 辺 60 の正方形に一様に分布するので、確率は面積の比です。",
+          "2 人が会える ⇔ 先に着いた人の待ち時間が 20 分以下 ⇔ |x − y| ≤ 20。",
+          "会えない部分は y > x + 20 と x > y + 20 の 2 つで、どちらも直角をはさむ 2 辺が 60 − 20 = 40 の直角三角形、面積は 40 × 40 ÷ 2 = 800 ずつ、合計 1600 です。",
+          "正方形の面積は 3600 なので、会える部分は 3600 − 1600 = 2000、確率は 2000/3600 = 5/9。",
+          "m/n = 5/9 なので m + n = 14。答えは 14 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "14"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "combinatorics-grade9-foundation",
+        "notes": "兩人到達時刻 (x, y) 均勻落在正方形，見面 ⇔ |x − y| ≤ 20，面積比 1 − (2/3)²。掃過 regex「見面|約好|約在」（全庫 3 題，並讀最接近者原文）；最接近 combinatorics_grade9_foundation_062，差異：該題是三角形內取點落在內切圓的面積比；本題把兩人的到達時刻當成正方形中的點，見面區域是去掉兩個角的帶狀區域。"
+      }
+    },
+    {
+      "id": "combinatorics_grade9_foundation_069",
+      "reviewStatus": "ok",
+      "topic": "combinatorics",
+      "subtopic": "cube_edge_walks_fixed_length_to_opposite_vertex",
+      "tags": [
+        "c:permutation_combination",
+        "c:solid",
+        "m:bijection"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade9",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一隻螞蟻在正方體的稜上爬行。牠從頂點 A 出發，每一步沿一條稜爬到相鄰的頂點（可以走回頭路，也可以重複經過同一個頂點）。牠恰好爬了 5 步，最後停在離 A 最遠的頂點 G（A、G 是一條體對角線的兩端）。牠的爬法共有幾種？",
+        "zh-Hans": "一只蚂蚁在正方体的棱上爬行。它从顶点 A 出发，每一步沿一条棱爬到相邻的顶点（可以走回头路，也可以重复经过同一个顶点）。它恰好爬了 5 步，最后停在离 A 最远的顶点 G（A、G 是一条体对角线的两端）。它的爬法共有几种？",
+        "en": "An ant crawls along the edges of a cube. Starting at vertex A, each step it moves along one edge to an adjacent vertex (it may turn back and may revisit vertices). After exactly 5 steps it stops at vertex G, the vertex farthest from A (A and G are the ends of a space diagonal). How many different routes are there?",
+        "ja": "アリが立方体の辺の上をはって進みます。頂点 A から出発し、1 歩ごとに 1 本の辺を通って隣の頂点へ移ります（引き返しても、同じ頂点を何度通ってもかまいません）。ちょうど 5 歩進んで、A から最も遠い頂点 G（A と G は対角線の両端）で止まりました。進み方は何通りありますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 60。",
+        "zh-Hans": "答案是 60。",
+        "en": "The answer is 60.",
+        "ja": "答えは 60 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "把正方體放進坐標系，令 A = (0, 0, 0)、G = (1, 1, 1)，每個頂點的三個坐標都是 0 或 1。沿一條稜爬一步，恰好把其中一個坐標由 0 改成 1 或由 1 改成 0。所以一種爬法對應一串 5 個記號，每個記號記下這一步改的是 x、y 還是 z；反過來每一串記號也唯一決定一種爬法。",
+          "從 (0, 0, 0) 到 (1, 1, 1)，每個坐標都必須被改奇數次。三個正奇數加起來等於 5：若有一個是 5，另兩個就是 0，不合；所以只能是 3、1、1。",
+          "選哪一個坐標被改 3 次有 3 種。5 步中，另外兩個坐標各被改 1 次：先從 5 步中選一步給第二個坐標，有 5 種，再從剩下 4 步中選一步給第三個坐標，有 4 種，其餘 3 步都改第一個坐標，共 5 × 4 = 20 種。",
+          "總共 3 × 20 = 60 種爬法。答案是 60。"
+        ],
+        "zh-Hans": [
+          "把正方体放进坐标系，令 A = (0, 0, 0)、G = (1, 1, 1)，每个顶点的三个坐标都是 0 或 1。沿一条棱爬一步，恰好把其中一个坐标由 0 改成 1 或由 1 改成 0。所以一种爬法对应一串 5 个记号，每个记号记下这一步改的是 x、y 还是 z；反过来每一串记号也唯一决定一种爬法。",
+          "从 (0, 0, 0) 到 (1, 1, 1)，每个坐标都必须被改奇数次。三个正奇数加起来等于 5：若有一个是 5，另两个就是 0，不合；所以只能是 3、1、1。",
+          "选哪一个坐标被改 3 次有 3 种。5 步中，另外两个坐标各被改 1 次：先从 5 步中选一步给第二个坐标，有 5 种，再从剩下 4 步中选一步给第三个坐标，有 4 种，其余 3 步都改第一个坐标，共 5 × 4 = 20 种。",
+          "总共 3 × 20 = 60 种爬法。答案是 60。"
+        ],
+        "en": [
+          "Place the cube in coordinates with A = (0, 0, 0) and G = (1, 1, 1); every vertex has coordinates 0 or 1. One step along an edge changes exactly one coordinate (0 to 1 or 1 to 0). So a route corresponds to a string of 5 symbols recording whether each step changes x, y or z, and every such string determines exactly one route.",
+          "To get from (0, 0, 0) to (1, 1, 1), each coordinate must be changed an odd number of times. Three positive odd numbers summing to 5: if one were 5 the others would be 0, impossible; so they are 3, 1, 1.",
+          "Choose which coordinate is changed 3 times: 3 ways. Among the 5 steps, pick the one for the second coordinate (5 ways), then the one for the third coordinate from the remaining 4 (4 ways); the other 3 steps change the first coordinate: 5 × 4 = 20 ways.",
+          "In total 3 × 20 = 60 routes. The answer is 60."
+        ],
+        "ja": [
+          "立方体を座標空間に置き、A = (0, 0, 0)、G = (1, 1, 1) とすると、各頂点の座標は 0 か 1 です。辺に沿って 1 歩進むと、ちょうど 1 つの座標が 0 から 1、または 1 から 0 に変わります。よって進み方は、各歩で x、y、z のどれを変えたかを記録した 5 個の記号の列に対応し、逆にどの列からも進み方がただ 1 つ決まります。",
+          "(0, 0, 0) から (1, 1, 1) へ行くには、各座標を奇数回変える必要があります。和が 5 になる 3 つの正の奇数は、1 つが 5 だと残りが 0 になり不適なので、3、1、1 だけです。",
+          "3 回変える座標の選び方は 3 通り。5 歩のうち 2 つ目の座標を変える歩の選び方が 5 通り、残り 4 歩から 3 つ目の座標を変える歩の選び方が 4 通りで、残りの 3 歩は 1 つ目の座標を変えます。5 × 4 = 20 通り。",
+          "合計 3 × 20 = 60 通り。答えは 60 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "60"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "combinatorics-grade9-foundation",
+        "notes": "稜上走一步 = 翻轉一個坐標，5 步到對角頂點需三坐標翻轉 3、1、1 次。掃過 regex「正方體.{0,40}(爬|走)|螞蟻.{0,30}正方體」（全庫 4 題，並讀最接近者原文）；最接近 combinatorics_grade12_foundation_022，差異：該題數走遍 8 頂點的哈密頓路徑；本題可重複走，固定 5 步到對角頂點，用坐標翻轉次數與多重排列。"
+      }
     }
   ]
 }
