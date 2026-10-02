@@ -4926,6 +4926,241 @@
         "reference": "logic-grade11-foundation",
         "notes": "誠實者／說謊者排成一列的單調結構：相鄰「誠、謊」兩人說法真假相同而矛盾，故先謊後誠，再由交界兩人定比例。掃過 /說謊|騎士|誠實/（18 題）；最接近 logic_grade10_foundation_029（10 人圍圈說「左邊的人說謊」），差異：該題圍圈、單一鄰居；本題排成一列、陳述比較左右兩側人數，需證先謊後誠的結構再由交界不等式定人數"
       }
+    },
+    {
+      "id": "logic_grade11_foundation_055",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "wythoff_game_winning_first_moves",
+      "tags": [
+        "c:game_theory",
+        "m:reverse"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade11",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "桌上有兩堆石子，分別是 10 顆和 13 顆。甲、乙兩人輪流操作，甲先。每次操作只能二選一：(1) 從其中一堆拿走任意顆（至少 1 顆）；(2) 從兩堆各拿走同樣多顆（每堆至少拿 1 顆）。拿走最後一顆石子的人獲勝。甲的第一步有很多種拿法（拿哪一堆、拿幾顆都算不同拿法），其中能保證甲獲勝的拿法共有幾種？",
+        "zh-Hans": "桌上有两堆石子，分别是 10 颗和 13 颗。甲、乙两人轮流操作，甲先。每次操作只能二选一：(1) 从其中一堆拿走任意颗（至少 1 颗）；(2) 从两堆各拿走同样多颗（每堆至少拿 1 颗）。拿走最后一颗石子的人获胜。甲的第一步有很多种拿法（拿哪一堆、拿几颗都算不同拿法），其中能保证甲获胜的拿法共有几种？",
+        "en": "There are two piles of stones on a table, with 10 and 13 stones. Jia and Yi take turns, Jia first. On each turn a player must do exactly one of: (1) remove any number (at least 1) of stones from one pile; (2) remove the same number (at least 1) of stones from both piles. Whoever takes the last stone wins. Jia has many possible first moves (which pile and how many count as different moves). How many of them guarantee that Jia wins?",
+        "ja": "机の上に 10 個と 13 個の 2 つの石の山がある。甲と乙が交互に操作し、甲が先手である。各回の操作は次のどちらか一方だけ：(1) 一方の山から好きな個数（1 個以上）を取る；(2) 両方の山から同じ個数（それぞれ 1 個以上）を取る。最後の石を取った人の勝ちである。甲の最初の手は何通りもある（どの山から何個取るかが違えば別の手）が、そのうち甲の勝ちを保証する手は何通りか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 3。",
+        "zh-Hans": "答案是 3。",
+        "en": "The answer is 3.",
+        "ja": "答えは 3 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "把兩堆的顆數記成 (x, y)。若輪到某人時面對的局面，不論怎麼拿對手都有辦法贏，稱為「必敗局」；(0, 0) 是必敗局（已無石子可拿，上一手的人拿走了最後一顆）。考慮清單 L：(0, 0)、(1, 2)、(3, 5)、(4, 7)、(6, 10)、(8, 13)、(9, 15)、(11, 18)、(12, 20)（以及兩數對調）。造法是：每組較小的數取「前面各組都沒用過的最小非負整數」，兩數之差依序是 0、1、2、⋯、8。",
+          "從 L 中的局面走一步，不可能到 L 中另一個局面：只動一堆時另一堆的數不變，但 0 到 20 的每個數在 L 中只出現在一組；兩堆各拿同樣多時差不變，但 L 中各組的差都不同。",
+          "從不在 L 中、兩數都不超過 13 的局面 (x, y)（x ≤ y），一步可以走到 L：x 一定出現在 L 的某一組。若 x 是某組 (w, x) 的較大數，把 y 那堆拿到剩 w；若 x 是某組 (x, x′) 的較小數，當 y > x′ 時把 y 那堆拿到剩 x′；當 y < x′ 時，差 y − x 比該組的差小，而 L 中差為 y − x 的那一組 (w, w + y − x) 的較小數 w 比 x 小，兩堆各拿 x − w 顆即可。",
+          "所以 L 中的局面都是必敗局（走一步必離開 L，對手又能走回 L，最後是對手拿到 (0, 0) 前的最後一顆），其餘局面都是必勝局。甲的第一步必須走到 L 中的局面，而且這樣走就必勝。",
+          "從 (10, 13) 出發：只動 10 那堆，要成為 (x, 13) 且在 L 中，只有 x = 8（拿 2 顆）；只動 13 那堆，要成為 (10, y)、y < 13 且在 L 中，只有 y = 6（拿 7 顆，(6, 10) 在 L 中）；兩堆各拿 k 顆，差仍是 3，L 中差為 3 的只有 (4, 7)，k = 6。",
+          "能保證甲獲勝的拿法共 3 種。"
+        ],
+        "zh-Hans": [
+          "把两堆的颗数记成 (x, y)。若轮到某人时面对的局面，不论怎么拿对手都有办法赢，称为「必败局」；(0, 0) 是必败局（已无石子可拿，上一手的人拿走了最后一颗）。考虑清单 L：(0, 0)、(1, 2)、(3, 5)、(4, 7)、(6, 10)、(8, 13)、(9, 15)、(11, 18)、(12, 20)（以及两数对调）。造法是：每组较小的数取「前面各组都没用过的最小非负整数」，两数之差依序是 0、1、2、⋯、8。",
+          "从 L 中的局面走一步，不可能到 L 中另一个局面：只动一堆时另一堆的数不变，但 0 到 20 的每个数在 L 中只出现在一组；两堆各拿同样多时差不变，但 L 中各组的差都不同。",
+          "从不在 L 中、两数都不超过 13 的局面 (x, y)（x ≤ y），一步可以走到 L：x 一定出现在 L 的某一组。若 x 是某组 (w, x) 的较大数，把 y 那堆拿到剩 w；若 x 是某组 (x, x′) 的较小数，当 y > x′ 时把 y 那堆拿到剩 x′；当 y < x′ 时，差 y − x 比该组的差小，而 L 中差为 y − x 的那一组 (w, w + y − x) 的较小数 w 比 x 小，两堆各拿 x − w 颗即可。",
+          "所以 L 中的局面都是必败局（走一步必离开 L，对手又能走回 L，最后是对手拿到 (0, 0) 前的最后一颗），其余局面都是必胜局。甲的第一步必须走到 L 中的局面，而且这样走就必胜。",
+          "从 (10, 13) 出发：只动 10 那堆，要成为 (x, 13) 且在 L 中，只有 x = 8（拿 2 颗）；只动 13 那堆，要成为 (10, y)、y < 13 且在 L 中，只有 y = 6（拿 7 颗，(6, 10) 在 L 中）；两堆各拿 k 颗，差仍是 3，L 中差为 3 的只有 (4, 7)，k = 6。",
+          "能保证甲获胜的拿法共 3 种。"
+        ],
+        "en": [
+          "Write a position as (x, y). Call a position losing if whoever must move from it loses against best play; (0, 0) is losing (the previous player took the last stone). Consider the list L: (0, 0), (1, 2), (3, 5), (4, 7), (6, 10), (8, 13), (9, 15), (11, 18), (12, 20) (and the swapped pairs). It is built so that each smaller entry is the least nonnegative integer not used before, and the differences are 0, 1, 2, …, 8 in order.",
+          "From a position in L, one move can never reach another position in L: a one-pile move keeps the other pile’s number, but each number from 0 to 20 appears in only one pair of L; a both-piles move keeps the difference, but the pairs in L all have different differences.",
+          "From a position (x, y) not in L with x ≤ y ≤ 13, one move reaches L: x appears in some pair of L. If x is the larger entry of (w, x), reduce pile y to w. If x is the smaller entry of (x, x′): when y > x′, reduce pile y to x′; when y < x′, the difference y − x is smaller than that pair’s difference, and the pair of L with difference y − x, say (w, w + y − x), has w < x, so remove x − w from both piles.",
+          "Hence the positions in L are losing (any move leaves L and the opponent can return to L, eventually taking the last stone), and all other positions are winning. Jia must move into L, and doing so wins.",
+          "From (10, 13): changing only the 10-pile to get (x, 13) in L forces x = 8 (remove 2); changing only the 13-pile to get (10, y) in L with y < 13 forces y = 6 (remove 7, since (6, 10) is in L); removing k from both keeps difference 3, and the only pair of L with difference 3 is (4, 7), so k = 6.",
+          "So exactly 3 first moves guarantee a win."
+        ],
+        "ja": [
+          "局面を (x, y) と書く。その局面で手番の人が最善を尽くしても負ける局面を「負け局面」と呼ぶ。(0, 0) は負け局面である（直前の人が最後の石を取った）。リスト L：(0, 0)、(1, 2)、(3, 5)、(4, 7)、(6, 10)、(8, 13)、(9, 15)、(11, 18)、(12, 20)（と入れ替えたもの）を考える。小さい方の数は「それまでに使われていない最小の 0 以上の整数」とし、2 数の差は順に 0、1、2、…、8 である。",
+          "L の局面から 1 手で L の別の局面には行けない：片方の山だけ動かすと他方の数は変わらないが、0〜20 の各数は L のただ 1 組にしか現れない。両方から同数取ると差は変わらないが、L の各組の差はすべて異なる。",
+          "L になく、2 数とも 13 以下の局面 (x, y)（x ≤ y）からは 1 手で L に行ける：x は L のどこかの組に現れる。x が組 (w, x) の大きい方なら、y の山を w まで減らす。x が組 (x, x′) の小さい方なら、y > x′ のときは y の山を x′ まで減らし、y < x′ のときは差 y − x がその組の差より小さく、差が y − x の組 (w, w + y − x) の w は x より小さいので、両方の山から x − w 個ずつ取ればよい。",
+          "よって L の局面は負け局面（どう動いても L の外に出て、相手が L に戻せ、最後の石は相手が取る）、それ以外は勝ち局面である。甲は最初の手で L の局面に移らねばならず、そうすれば必ず勝てる。",
+          "(10, 13) から：10 の山だけ動かして (x, 13) を L にするには x = 8（2 個取る）のみ。13 の山だけ動かして (10, y)（y < 13）を L にするには y = 6（7 個取る。(6, 10) は L にある）のみ。両方から k 個取ると差は 3 のままで、差 3 の組は (4, 7) だけなので k = 6。",
+          "甲の勝ちを保証する手は 3 通り。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "3"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade11-foundation",
+        "notes": "Wythoff 遊戲：用「每數只出現一次、差值遞增」刻畫必敗局，再數走到必敗局的步數。掃過 /兩堆|石子/（21 題）；最接近 logic_grade9_foundation_034，差異：該題是普通兩堆 Nim（只能從一堆拿）；本題允許兩堆同取，必敗局換成 Wythoff 數對"
+      }
+    },
+    {
+      "id": "logic_grade11_foundation_056",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "triples_pairwise_meeting_at_most_once",
+      "tags": [
+        "c:permutation_combination",
+        "m:extremal",
+        "m:construction"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade11",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "從 1、2、3、4、5、6、7 這七個數中，選出若干個「三數組」（每組由 3 個不同的數組成，組內不分順序；不同的組不可以完全相同）。要求任兩組最多只有一個共同的數。最多能選出幾組？",
+        "zh-Hans": "从 1、2、3、4、5、6、7 这七个数中，选出若干个「三数组」（每组由 3 个不同的数组成，组内不分顺序；不同的组不可以完全相同）。要求任两组最多只有一个共同的数。最多能选出几组？",
+        "en": "From the seven numbers 1, 2, 3, 4, 5, 6, 7, choose some “triples” (each triple consists of 3 different numbers, order within a triple does not matter, and no two triples are identical). Any two triples must have at most one number in common. What is the largest possible number of triples?",
+        "ja": "1、2、3、4、5、6、7 の 7 つの数から「3 数組」（3 つの異なる数からなり、組の中の順序は区別しない。同じ組を 2 度選ぶことはできない）をいくつか選ぶ。どの 2 組も共通の数は多くとも 1 つでなければならない。最大で何組選べるか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 7。",
+        "zh-Hans": "答案是 7。",
+        "en": "The answer is 7.",
+        "ja": "答えは 7 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "每個三數組含有 3 個「兩數對」（例如 {1, 2, 3} 含 {1, 2}、{1, 3}、{2, 3}）。若兩組含有同一個兩數對，它們就有兩個共同的數，不允許；所以每個兩數對最多只出現在一組中。",
+          "七個數一共只有 7 × 6 ÷ 2 = 21 個兩數對。選了 k 組就用掉 3k 個不同的兩數對，所以 3k ≤ 21，k ≤ 7。",
+          "7 組做得到：{1, 2, 3}、{1, 4, 5}、{1, 6, 7}、{2, 4, 6}、{2, 5, 7}、{3, 4, 7}、{3, 5, 6}。",
+          "檢查：每個數恰好出現在 3 組中，而且在這 3 組裡，它的同伴恰好是其餘 6 個數各一次（例如 1 的同伴是 2、3／4、5／6、7；4 的同伴是 1、5／2、6／3、7）。所以每個兩數對恰好出現一次，任兩組最多只有一個共同的數。",
+          "最多能選 7 組。"
+        ],
+        "zh-Hans": [
+          "每个三数组含有 3 个「两数对」（例如 {1, 2, 3} 含 {1, 2}、{1, 3}、{2, 3}）。若两组含有同一个两数对，它们就有两个共同的数，不允许；所以每个两数对最多只出现在一组中。",
+          "七个数一共只有 7 × 6 ÷ 2 = 21 个两数对。选了 k 组就用掉 3k 个不同的两数对，所以 3k ≤ 21，k ≤ 7。",
+          "7 组做得到：{1, 2, 3}、{1, 4, 5}、{1, 6, 7}、{2, 4, 6}、{2, 5, 7}、{3, 4, 7}、{3, 5, 6}。",
+          "检查：每个数恰好出现在 3 组中，而且在这 3 组里，它的同伴恰好是其余 6 个数各一次（例如 1 的同伴是 2、3／4、5／6、7；4 的同伴是 1、5／2、6／3、7）。所以每个两数对恰好出现一次，任两组最多只有一个共同的数。",
+          "最多能选 7 组。"
+        ],
+        "en": [
+          "Each triple contains 3 pairs (e.g. {1, 2, 3} contains {1, 2}, {1, 3}, {2, 3}). If two triples contained the same pair they would share two numbers, which is not allowed; so each pair lies in at most one triple.",
+          "The seven numbers form only 7 × 6 ÷ 2 = 21 pairs. Choosing k triples uses 3k different pairs, so 3k ≤ 21 and k ≤ 7.",
+          "Seven triples are possible: {1, 2, 3}, {1, 4, 5}, {1, 6, 7}, {2, 4, 6}, {2, 5, 7}, {3, 4, 7}, {3, 5, 6}.",
+          "Check: each number lies in exactly 3 triples, and its partners in those triples are the other 6 numbers once each (e.g. 1 is with 2, 3 / 4, 5 / 6, 7; 4 is with 1, 5 / 2, 6 / 3, 7). So every pair appears exactly once and any two triples share at most one number.",
+          "The maximum is 7 triples."
+        ],
+        "ja": [
+          "各 3 数組は 3 つの「2 数の組」を含む（例えば {1, 2, 3} は {1, 2}、{1, 3}、{2, 3} を含む）。2 つの 3 数組が同じ 2 数の組を含むと共通の数が 2 つになり許されないので、各 2 数の組は多くとも 1 つの 3 数組にしか現れない。",
+          "7 つの数からできる 2 数の組は 7 × 6 ÷ 2 = 21 個しかない。k 組選ぶと異なる 2 数の組を 3k 個使うので 3k ≤ 21、k ≤ 7。",
+          "7 組は実現できる：{1, 2, 3}、{1, 4, 5}、{1, 6, 7}、{2, 4, 6}、{2, 5, 7}、{3, 4, 7}、{3, 5, 6}。",
+          "確認：各数はちょうど 3 組に現れ、その 3 組での相手は残り 6 つの数がちょうど 1 回ずつ（例えば 1 の相手は 2、3／4、5／6、7、4 の相手は 1、5／2、6／3、7）。よってどの 2 数の組もちょうど 1 回現れ、どの 2 組も共通の数は多くとも 1 つ。",
+          "最大は 7 組。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "7"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade11-foundation",
+        "notes": "數兩數對得上界 21/3，再給 Fano 構造達到。掃過 /三數組|三人一組|每兩人|兩兩.*共同/（6 題）；最接近 combinatorics_grade11_foundation_076，差異：該題是無包含關係子集族（Sperner）；本題限制兩兩交集至多 1，用兩數對計數"
+      }
+    },
+    {
+      "id": "logic_grade11_foundation_057",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "twenty_questions_with_one_lie",
+      "tags": [
+        "c:logic_deduction",
+        "c:number_base",
+        "m:estimate_bound"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade11",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "小安心裡想好 1 到 16 之間的一個整數。小美可以一題一題問任何只能回答「是」或「否」的問題（例如「這個數是偶數嗎？」），而且可以根據之前的回答決定下一題問什麼。小安每題都會回答，但在整個過程中他最多可以說謊一次（也可能完全不說謊）。小美最少要問幾題，才能保證確定這個數？",
+        "zh-Hans": "小安心里想好 1 到 16 之间的一个整数。小美可以一题一题问任何只能回答「是」或「否」的问题（例如「这个数是偶数吗？」），而且可以根据之前的回答决定下一题问什么。小安每题都会回答，但在整个过程中他最多可以说谎一次（也可能完全不说谎）。小美最少要问几题，才能保证确定这个数？",
+        "en": "An thinks of an integer from 1 to 16. Mei may ask any yes-or-no questions one at a time (for example, “Is the number even?”), and may choose each question based on earlier answers. An answers every question, but during the whole game he may lie at most once (possibly never). What is the minimum number of questions Mei needs in order to be sure of the number?",
+        "ja": "安さんは 1 から 16 までの整数を 1 つ心に決める。美さんは「はい」か「いいえ」で答える質問（例えば「その数は偶数ですか」）を 1 問ずつ、前の答えを見て次の質問を決めながら聞くことができる。安さんは毎回答えるが、全体を通して多くとも 1 回だけうそをついてよい（1 回もつかないこともある）。美さんが確実に数を当てるには、最少で何問必要か。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 7。",
+        "zh-Hans": "答案是 7。",
+        "en": "The answer is 7.",
+        "ja": "答えは 7 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "下界：假設某種問法 q 題一定能確定答案。把「小安想的數」與「在第幾題說謊（或沒說謊）」合起來稱為一種情況，共 16 × (q + 1) 種。照這種問法，每種情況會產生一串 q 個「是／否」的回答。",
+          "同一個數的不同情況，回答串一定不同：「第 i 題說謊」與「沒說謊」在第 i 題之前完全一樣，第 i 題問的是同一題但答案相反；「第 i 題說謊」與「第 j 題說謊」（i < j）也在第 i 題分開。不同的數若出現相同的回答串，小美就無法分辨，所以 16 × (q + 1) 種情況的回答串兩兩不同。",
+          "每題只有 2 種回答，q 題的回答串最多有「2 的 q 次方」種，所以 16 × (q + 1) 不超過 2 的 q 次方。q = 4、5、6 時 2 的 q 次方分別是 16、32、64，而 16 × (q + 1) 分別是 80、96、112，都不成立；q ≤ 3 時 2 的 q 次方不超過 8，比 16 小，也不成立。所以 q ≥ 7（q = 7 時 16 × 8 = 128 = 2⁷，恰好可能）。",
+          "7 題做得到：把「這個數減 1」寫成 4 位二進位 d₁d₂d₃d₄（0 到 15）。前 4 題依序問「d₁ 是 1 嗎？」⋯「d₄ 是 1 嗎？」；後 3 題問「d₁ + d₂ + d₄ 是奇數嗎？」「d₁ + d₃ + d₄ 是奇數嗎？」「d₂ + d₃ + d₄ 是奇數嗎？」。",
+          "用前 4 題的回答算出這三個和的奇偶，與後 3 題的回答比對，記下哪幾題「對不上」：沒說謊時都對得上；若謊在第 1、2、3、4 題，對不上的分別是 {5, 6}、{5, 7}、{6, 7}、{5, 6, 7}；若謊在第 5、6、7 題，只有那一題對不上。這 8 種結果兩兩不同，所以小美能找出哪一題說謊（或沒說謊），更正後得到 d₁d₂d₃d₄。",
+          "所以最少要問 7 題。"
+        ],
+        "zh-Hans": [
+          "下界：假设某种问法 q 题一定能确定答案。把「小安想的数」与「在第几题说谎（或没说谎）」合起来称为一种情况，共 16 × (q + 1) 种。照这种问法，每种情况会产生一串 q 个「是／否」的回答。",
+          "同一个数的不同情况，回答串一定不同：「第 i 题说谎」与「没说谎」在第 i 题之前完全一样，第 i 题问的是同一题但答案相反；「第 i 题说谎」与「第 j 题说谎」（i < j）也在第 i 题分开。不同的数若出现相同的回答串，小美就无法分辨，所以 16 × (q + 1) 种情况的回答串两两不同。",
+          "每题只有 2 种回答，q 题的回答串最多有「2 的 q 次方」种，所以 16 × (q + 1) 不超过 2 的 q 次方。q = 4、5、6 时 2 的 q 次方分别是 16、32、64，而 16 × (q + 1) 分别是 80、96、112，都不成立；q ≤ 3 时 2 的 q 次方不超过 8，比 16 小，也不成立。所以 q ≥ 7（q = 7 时 16 × 8 = 128 = 2⁷，恰好可能）。",
+          "7 题做得到：把「这个数减 1」写成 4 位二进制 d₁d₂d₃d₄（0 到 15）。前 4 题依序问「d₁ 是 1 吗？」⋯「d₄ 是 1 吗？」；后 3 题问「d₁ + d₂ + d₄ 是奇数吗？」「d₁ + d₃ + d₄ 是奇数吗？」「d₂ + d₃ + d₄ 是奇数吗？」。",
+          "用前 4 题的回答算出这三个和的奇偶，与后 3 题的回答比对，记下哪几题「对不上」：没说谎时都对得上；若谎在第 1、2、3、4 题，对不上的分别是 {5, 6}、{5, 7}、{6, 7}、{5, 6, 7}；若谎在第 5、6、7 题，只有那一题对不上。这 8 种结果两两不同，所以小美能找出哪一题说谎（或没说谎），更正后得到 d₁d₂d₃d₄。",
+          "所以最少要问 7 题。"
+        ],
+        "en": [
+          "Lower bound: suppose some strategy always succeeds in q questions. Call a pair (An’s number, which question he lies on, or no lie) a case; there are 16 × (q + 1) cases, and under the strategy each case produces a string of q yes/no answers.",
+          "Different cases with the same number give different strings: “lie on question i” and “no lie” agree before question i, then question i is the same but the answers are opposite; “lie on i” and “lie on j” (i < j) also split at question i. If two different numbers gave the same string, Mei could not tell them apart, so all 16 × (q + 1) strings are different.",
+          "Each question has 2 possible answers, so there are at most 2 to the power q answer strings, and 16 × (q + 1) cannot exceed 2 to the power q. For q = 4, 5, 6 these powers are 16, 32, 64 while 16 × (q + 1) is 80, 96, 112 — impossible; for q ≤ 3 the power is at most 8, less than 16 — impossible. So q ≥ 7 (for q = 7, 16 × 8 = 128 = 2⁷, exactly enough).",
+          "7 questions suffice: write (the number − 1) in 4-bit binary d₁d₂d₃d₄ (0 to 15). Questions 1–4 ask “Is d₁ equal to 1?” … “Is d₄ equal to 1?”; questions 5–7 ask “Is d₁ + d₂ + d₄ odd?”, “Is d₁ + d₃ + d₄ odd?”, “Is d₂ + d₃ + d₄ odd?”.",
+          "Compute the three parities from answers 1–4 and compare with answers 5–7, noting which checks fail: with no lie none fail; a lie on question 1, 2, 3, 4 makes {5, 6}, {5, 7}, {6, 7}, {5, 6, 7} fail respectively; a lie on question 5, 6 or 7 makes only that one fail. These 8 outcomes are all different, so Mei finds which answer (if any) was a lie, corrects it, and reads off d₁d₂d₃d₄.",
+          "Hence the minimum is 7 questions."
+        ],
+        "ja": [
+          "下界：ある質問の仕方で q 問あれば必ず当てられるとする。「安さんの数」と「何問目でうそをつくか（またはつかない）」の組を 1 つの場合とすると、場合は 16 × (q + 1) 通りあり、その質問の仕方のもとで各場合は q 個の「はい／いいえ」の答えの列を生む。",
+          "同じ数の異なる場合は答えの列が必ず異なる：「i 問目でうそ」と「うそなし」は i 問目の前まで同じで、i 問目は同じ質問なのに答えが逆になる。「i 問目でうそ」と「j 問目でうそ」（i < j）も i 問目で分かれる。異なる数が同じ答えの列を生めば美さんは区別できないので、16 × (q + 1) 通りの答えの列はすべて異なる。",
+          "各問の答えは 2 通りなので答えの列は多くとも 2 の q 乗通りで、16 × (q + 1) は 2 の q 乗を超えられない。q = 4、5、6 では 2 の q 乗は 16、32、64 だが 16 × (q + 1) は 80、96、112 で不可能。q ≤ 3 では 2 の q 乗は 8 以下で 16 未満なので不可能。よって q ≥ 7（q = 7 では 16 × 8 = 128 = 2⁷ でちょうど足りる）。",
+          "7 問で可能：（数 − 1）を 4 桁の 2 進数 d₁d₂d₃d₄（0〜15）で表す。1〜4 問目は「d₁ は 1 ですか」…「d₄ は 1 ですか」、5〜7 問目は「d₁ + d₂ + d₄ は奇数ですか」「d₁ + d₃ + d₄ は奇数ですか」「d₂ + d₃ + d₄ は奇数ですか」と聞く。",
+          "1〜4 問目の答えから 3 つの和の偶奇を計算し、5〜7 問目の答えと照合して「合わない」問を記録する：うそがなければどれも合う。1、2、3、4 問目のうそなら合わないのはそれぞれ {5, 6}、{5, 7}、{6, 7}、{5, 6, 7}。5、6、7 問目のうそならその 1 問だけが合わない。この 8 通りはすべて異なるので、美さんはどの答えがうそか（うそがないか）を特定して訂正し、d₁d₂d₃d₄ を読み取れる。",
+          "よって最少 7 問。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "7"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade11-foundation",
+        "notes": "容許一次說謊的是非題猜數：體積界 16(q+1) ≤ 2 的 q 次方 與 Hamming(7,4) 構造。掃過 /說謊|撒謊|是非/（21 題）；最接近 logic_grade7_foundation_055，差異：該題是一次性二進位編碼找毒瓶（無錯誤）；本題答案可能有一次說謊，需容錯界與校驗題構造"
+      }
     }
   ]
 }

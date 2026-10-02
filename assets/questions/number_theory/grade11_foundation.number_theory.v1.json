@@ -4663,6 +4663,305 @@
         "reference": "number-theory-grade11-foundation",
         "notes": "三位數 = 11 × 數字平方和：用 11 的倍數判別法得 b = a + c 或 a + c − 11，再以奇偶與判別式篩選。掃過 /11 倍|11 乘|數字的平方和|平方和.*倍/（1 題）；最接近 number_theory_grade12_foundation_008（小於 1000 且等於數字和 6 倍的數），差異：該題是數字和的一次條件；本題是數字平方和，需先用 11 的判別法分兩型，再解二次條件"
       }
+    },
+    {
+      "id": "number_theory_grade11_foundation_051",
+      "reviewStatus": "ok",
+      "topic": "number_theory",
+      "subtopic": "power_remainder_mod_product_of_two_primes",
+      "tags": [
+        "c:modular",
+        "c:exponent",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade11",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "341 = 11 × 31。求 3³⁴⁰ 除以 341 的餘數。",
+        "zh-Hans": "341 = 11 × 31。求 3³⁴⁰ 除以 341 的余数。",
+        "en": "341 = 11 × 31. Find the remainder when 3³⁴⁰ is divided by 341.",
+        "ja": "341 = 11 × 31 である。3³⁴⁰ を 341 で割った余りを求めよ。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 56。",
+        "zh-Hans": "答案是 56。",
+        "en": "The answer is 56.",
+        "ja": "答えは 56 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "費馬小定理：p 是質數、a 不是 p 的倍數時，a 的 (p − 1) 次方除以 p 餘 1。11 與 31 都是質數，3 不是它們的倍數。",
+          "除以 11：3¹⁰ 除以 11 餘 1，而 340 = 10 × 34，所以 3³⁴⁰ = (3¹⁰)³⁴ 除以 11 餘 1。",
+          "除以 31：3³⁰ 除以 31 餘 1，而 340 = 30 × 11 + 10，所以 3³⁴⁰ 與 3¹⁰ 除以 31 同餘。3³ = 27，相當於 −4；3⁹ 相當於 (−4)³ = −64 = −93 + 29，即 29，也就是 −2；3¹⁰ 相當於 −2 × 3 = −6，即 25。",
+          "設所求餘數是 x（0 ≤ x ≤ 340）：x 除以 11 餘 1、除以 31 餘 25。寫 x = 25 + 31t（t = 0 到 10），31 除以 11 餘 9、25 除以 11 餘 3，條件變成 3 + 9t 除以 11 餘 1，即 9t − 9 = 9(t − 1) 是 11 的倍數，得 t = 1。",
+          "所以 x = 25 + 31 = 56。驗算：56 = 5 × 11 + 1，56 = 31 + 25。答案是 56。"
+        ],
+        "zh-Hans": [
+          "费马小定理：p 是质数、a 不是 p 的倍数时，a 的 (p − 1) 次方除以 p 余 1。11 与 31 都是质数，3 不是它们的倍数。",
+          "除以 11：3¹⁰ 除以 11 余 1，而 340 = 10 × 34，所以 3³⁴⁰ = (3¹⁰)³⁴ 除以 11 余 1。",
+          "除以 31：3³⁰ 除以 31 余 1，而 340 = 30 × 11 + 10，所以 3³⁴⁰ 与 3¹⁰ 除以 31 同余。3³ = 27，相当于 −4；3⁹ 相当于 (−4)³ = −64 = −93 + 29，即 29，也就是 −2；3¹⁰ 相当于 −2 × 3 = −6，即 25。",
+          "设所求余数是 x（0 ≤ x ≤ 340）：x 除以 11 余 1、除以 31 余 25。写 x = 25 + 31t（t = 0 到 10），31 除以 11 余 9、25 除以 11 余 3，条件变成 3 + 9t 除以 11 余 1，即 9t − 9 = 9(t − 1) 是 11 的倍数，得 t = 1。",
+          "所以 x = 25 + 31 = 56。验算：56 = 5 × 11 + 1，56 = 31 + 25。答案是 56。"
+        ],
+        "en": [
+          "Fermat’s little theorem: if p is prime and a is not a multiple of p, then a to the power (p − 1) leaves remainder 1 mod p. Both 11 and 31 are prime and 3 is a multiple of neither.",
+          "Mod 11: 3¹⁰ ≡ 1, and 340 = 10 × 34, so 3³⁴⁰ = (3¹⁰)³⁴ ≡ 1 (mod 11).",
+          "Mod 31: 3³⁰ ≡ 1, and 340 = 30 × 11 + 10, so 3³⁴⁰ ≡ 3¹⁰ (mod 31). 3³ = 27 ≡ −4; 3⁹ ≡ (−4)³ = −64 = −93 + 29 ≡ 29 ≡ −2; 3¹⁰ ≡ −2 × 3 = −6 ≡ 25.",
+          "Let the remainder be x (0 ≤ x ≤ 340) with x ≡ 1 (mod 11) and x ≡ 25 (mod 31). Write x = 25 + 31t (t = 0 to 10). Since 31 ≡ 9 and 25 ≡ 3 (mod 11), we need 3 + 9t ≡ 1, i.e. 9(t − 1) is a multiple of 11, so t = 1.",
+          "Hence x = 25 + 31 = 56. Check: 56 = 5 × 11 + 1 and 56 = 31 + 25. The answer is 56."
+        ],
+        "ja": [
+          "フェルマーの小定理：p が素数で a が p の倍数でないとき、a の (p − 1) 乗を p で割った余りは 1。11 と 31 はともに素数で、3 はどちらの倍数でもない。",
+          "11 で割る：3¹⁰ を 11 で割ると 1 余り、340 = 10 × 34 なので 3³⁴⁰ = (3¹⁰)³⁴ を 11 で割った余りは 1。",
+          "31 で割る：3³⁰ を 31 で割ると 1 余り、340 = 30 × 11 + 10 なので 3³⁴⁰ と 3¹⁰ は 31 で割った余りが等しい。3³ = 27 は −4 に相当、3⁹ は (−4)³ = −64 = −93 + 29 より 29、すなわち −2 に相当、3¹⁰ は −2 × 3 = −6、すなわち 25 に相当する。",
+          "求める余りを x（0 ≤ x ≤ 340）とすると、x は 11 で割って 1 余り、31 で割って 25 余る。x = 25 + 31t（t = 0〜10）とおくと、31 を 11 で割った余りは 9、25 は 3 なので、3 + 9t を 11 で割った余りが 1、つまり 9(t − 1) が 11 の倍数となり t = 1。",
+          "よって x = 25 + 31 = 56。検算：56 = 5 × 11 + 1、56 = 31 + 25。答えは 56。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "56"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "number-theory-grade11-foundation",
+        "notes": "合數模數拆成兩質數：各用費馬小定理，再用中國剩餘定理合併。掃過 /除以 ?341|341|費馬/（1 題）；最接近 number_theory_grade11_foundation_032，差異：該題是質數模 2027 直接用費馬小定理；本題模數 341 是合數，需分別對 11、31 求餘再合併"
+      }
+    },
+    {
+      "id": "number_theory_grade11_foundation_052",
+      "reviewStatus": "ok",
+      "topic": "number_theory",
+      "subtopic": "bases_in_which_number_ends_in_one",
+      "tags": [
+        "c:number_base",
+        "c:factor_multiple",
+        "m:enumeration"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade11",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "把十進位的 2026 改用 b 進位寫出來（b 是大於 1 的整數）。有幾個 b 能使寫出來的數，最右邊一位數字是 1？",
+        "zh-Hans": "把十进制的 2026 改用 b 进制写出来（b 是大于 1 的整数）。有几个 b 能使写出来的数，最右边一位数字是 1？",
+        "en": "Write the (decimal) number 2026 in base b, where b is an integer greater than 1. For how many values of b does the written numeral end in the digit 1?",
+        "ja": "10 進法の 2026 を b 進法（b は 1 より大きい整数）で書き表す。書いた数のいちばん右の桁の数字が 1 になるような b はいくつあるか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 14。",
+        "zh-Hans": "答案是 14。",
+        "en": "The answer is 14.",
+        "ja": "答えは 14 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "若 b ≤ 2026，2026 在 b 進位下寫成 dₖ⋯d₁d₀，其中 2026 = dₖbᵏ + ⋯ + d₁b + d₀、0 ≤ d₀ < b。除了 d₀ 以外每一項都是 b 的倍數，所以最右邊一位 d₀ 就是 2026 除以 b 的餘數。",
+          "若 b > 2026，2026 只有一位，就是「2026」這個數字本身，不是 1。",
+          "所以要找 2 ≤ b ≤ 2026 中，2026 除以 b 餘 1 的 b，也就是 b 整除 2026 − 1 = 2025，而且 b ≥ 2（b 整除 2025 時 b ≤ 2025，自動不超過 2026）。",
+          "2025 = 3⁴ × 5²，正因數個數是 (4 + 1)(2 + 1) = 15，去掉 b = 1 剩 14 個：3、5、9、15、25、27、45、75、81、135、225、405、675、2025。",
+          "共有 14 個 b。"
+        ],
+        "zh-Hans": [
+          "若 b ≤ 2026，2026 在 b 进制下写成 dₖ⋯d₁d₀，其中 2026 = dₖbᵏ + ⋯ + d₁b + d₀、0 ≤ d₀ < b。除了 d₀ 以外每一项都是 b 的倍数，所以最右边一位 d₀ 就是 2026 除以 b 的余数。",
+          "若 b > 2026，2026 只有一位，就是「2026」这个数字本身，不是 1。",
+          "所以要找 2 ≤ b ≤ 2026 中，2026 除以 b 余 1 的 b，也就是 b 整除 2026 − 1 = 2025，而且 b ≥ 2（b 整除 2025 时 b ≤ 2025，自动不超过 2026）。",
+          "2025 = 3⁴ × 5²，正因数个数是 (4 + 1)(2 + 1) = 15，去掉 b = 1 剩 14 个：3、5、9、15、25、27、45、75、81、135、225、405、675、2025。",
+          "共有 14 个 b。"
+        ],
+        "en": [
+          "If b ≤ 2026, write 2026 in base b as dₖ⋯d₁d₀ with 2026 = dₖbᵏ + ⋯ + d₁b + d₀ and 0 ≤ d₀ < b. Every term except d₀ is a multiple of b, so the last digit d₀ is the remainder of 2026 divided by b.",
+          "If b > 2026, the numeral has a single digit whose value is 2026, not 1.",
+          "So we need 2 ≤ b ≤ 2026 with 2026 ≡ 1 (mod b), i.e. b divides 2026 − 1 = 2025 and b ≥ 2 (a divisor of 2025 is at most 2025, so b ≤ 2026 automatically).",
+          "2025 = 3⁴ × 5² has (4 + 1)(2 + 1) = 15 positive divisors; removing b = 1 leaves 14: 3, 5, 9, 15, 25, 27, 45, 75, 81, 135, 225, 405, 675, 2025.",
+          "There are 14 values of b."
+        ],
+        "ja": [
+          "b ≤ 2026 のとき、2026 を b 進法で dₖ⋯d₁d₀ と書くと 2026 = dₖbᵏ + ⋯ + d₁b + d₀、0 ≤ d₀ < b。d₀ 以外の項はすべて b の倍数なので、いちばん右の桁 d₀ は 2026 を b で割った余りである。",
+          "b > 2026 のときは 1 桁で、その数字の値は 2026 なので 1 ではない。",
+          "よって 2 ≤ b ≤ 2026 で 2026 を b で割ると 1 余る b、すなわち b が 2026 − 1 = 2025 を割り切り b ≥ 2 であるものを数えればよい（2025 の約数は 2025 以下なので b ≤ 2026 は自動的に成り立つ）。",
+          "2025 = 3⁴ × 5² の正の約数は (4 + 1)(2 + 1) = 15 個で、b = 1 を除くと 14 個：3、5、9、15、25、27、45、75、81、135、225、405、675、2025。",
+          "b は 14 個。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "14"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "number-theory-grade11-foundation",
+        "notes": "b 進位末位＝除以 b 的餘數，化成數 2025 的因數。掃過 /進位/（32 題）；最接近 number_theory_grade8_foundation_050，差異：該題是 7 進位計數器顯示；本題反求哪些進位使 2026 末位為 1，化成因數計數"
+      }
+    },
+    {
+      "id": "number_theory_grade11_foundation_053",
+      "reviewStatus": "ok",
+      "topic": "number_theory",
+      "subtopic": "count_coprime_ordered_pairs_up_to_twenty",
+      "tags": [
+        "c:factor_multiple",
+        "m:enumeration"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade11",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "求有序數對 (a, b) 的個數，其中 a、b 都是 1 到 20 之間的整數（可以相同，(2, 3) 與 (3, 2) 算不同的兩組），而且 a 與 b 互質（最大公因數是 1）。",
+        "zh-Hans": "求有序数对 (a, b) 的个数，其中 a、b 都是 1 到 20 之间的整数（可以相同，(2, 3) 与 (3, 2) 算不同的两组），而且 a 与 b 互质（最大公约数是 1）。",
+        "en": "Count the ordered pairs (a, b) where a and b are integers from 1 to 20 (they may be equal; (2, 3) and (3, 2) are different pairs) and a and b are coprime (greatest common divisor 1).",
+        "ja": "a、b がともに 1 以上 20 以下の整数（等しくてもよい。(2, 3) と (3, 2) は別の組とする）で、a と b が互いに素（最大公約数が 1）であるような順序対 (a, b) の個数を求めよ。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 255。",
+        "zh-Hans": "答案是 255。",
+        "en": "The answer is 255.",
+        "ja": "答えは 255 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "a = b 時，最大公因數就是 a，只有 (1, 1) 符合。a ≠ b 時，(a, b) 與 (b, a) 成對出現，所以只要數 a < b 的組數再乘以 2。",
+          "固定較大的 b（2 ≤ b ≤ 20），符合的 a 是 1 到 b − 1 中與 b 互質的數，個數記為 φ(b)。例如 b = 12 時，與 12 互質的是 1、5、7、11，φ(12) = 4。",
+          "逐一計算 b = 2 到 20：φ = 1、2、2、4、2、6、4、6、4、10、4、12、6、8、8、16、6、18、8（質數 p 時是 p − 1；4、8、16 時是一半；其餘例如 φ(15) = 15 − 5 − 3 + 1 = 8、φ(18) = 6、φ(20) = 8）。總和是 127。",
+          "所以 a < b 的有 127 組，a > b 的也是 127 組，再加上 (1, 1)，共 2 × 127 + 1 = 255 組。"
+        ],
+        "zh-Hans": [
+          "a = b 时，最大公约数就是 a，只有 (1, 1) 符合。a ≠ b 时，(a, b) 与 (b, a) 成对出现，所以只要数 a < b 的组数再乘以 2。",
+          "固定较大的 b（2 ≤ b ≤ 20），符合的 a 是 1 到 b − 1 中与 b 互质的数，个数记为 φ(b)。例如 b = 12 时，与 12 互质的是 1、5、7、11，φ(12) = 4。",
+          "逐一计算 b = 2 到 20：φ = 1、2、2、4、2、6、4、6、4、10、4、12、6、8、8、16、6、18、8（质数 p 时是 p − 1；4、8、16 时是一半；其余例如 φ(15) = 15 − 5 − 3 + 1 = 8、φ(18) = 6、φ(20) = 8）。总和是 127。",
+          "所以 a < b 的有 127 组，a > b 的也是 127 组，再加上 (1, 1)，共 2 × 127 + 1 = 255 组。"
+        ],
+        "en": [
+          "If a = b, the gcd is a itself, so only (1, 1) works. If a ≠ b, the pairs (a, b) and (b, a) come together, so count the pairs with a < b and double.",
+          "Fix the larger number b (2 ≤ b ≤ 20); the valid a are the numbers from 1 to b − 1 coprime to b, and we call their count φ(b). For example, for b = 12 they are 1, 5, 7, 11, so φ(12) = 4.",
+          "For b = 2 to 20: φ = 1, 2, 2, 4, 2, 6, 4, 6, 4, 10, 4, 12, 6, 8, 8, 16, 6, 18, 8 (p − 1 for a prime p; half of 4, 8, 16; and e.g. φ(15) = 15 − 5 − 3 + 1 = 8, φ(18) = 6, φ(20) = 8). The total is 127.",
+          "So 127 pairs have a < b and 127 have a > b; adding (1, 1) gives 2 × 127 + 1 = 255."
+        ],
+        "ja": [
+          "a = b のとき最大公約数は a なので、条件を満たすのは (1, 1) だけ。a ≠ b のときは (a, b) と (b, a) が対になるので、a < b の組を数えて 2 倍すればよい。",
+          "大きい方 b（2 ≤ b ≤ 20）を固定すると、条件を満たす a は 1〜b − 1 のうち b と互いに素な数で、その個数を φ(b) と書く。例えば b = 12 なら 1、5、7、11 で φ(12) = 4。",
+          "b = 2〜20 について順に φ = 1、2、2、4、2、6、4、6、4、10、4、12、6、8、8、16、6、18、8（素数 p なら p − 1、4、8、16 はその半分、他は例えば φ(15) = 15 − 5 − 3 + 1 = 8、φ(18) = 6、φ(20) = 8）。合計は 127。",
+          "よって a < b の組が 127、a > b の組も 127 で、(1, 1) を加えて 2 × 127 + 1 = 255 組。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "255"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "number-theory-grade11-foundation",
+        "notes": "互質有序對＝2×Σφ(b) + 1（對角只有 (1,1)）。掃過 /互質/（10 題）；最接近 number_theory_grade11_foundation_033，差異：該題只求 φ(36)；本題要對 b = 2..20 累加 φ 並處理有序與對角"
+      }
+    },
+    {
+      "id": "number_theory_grade11_foundation_054",
+      "reviewStatus": "ok",
+      "topic": "number_theory",
+      "subtopic": "repdigit_remainder_mod_thirteen",
+      "tags": [
+        "c:modular",
+        "c:place_value",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade11",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "把數字 7 連寫 2026 次，得到一個 2026 位數 777⋯7。求這個數除以 13 的餘數。",
+        "zh-Hans": "把数字 7 连写 2026 次，得到一个 2026 位数 777⋯7。求这个数除以 13 的余数。",
+        "en": "Write the digit 7 a total of 2026 times to form the 2026-digit number 777⋯7. Find its remainder when divided by 13.",
+        "ja": "数字 7 を 2026 回並べて 2026 桁の数 777⋯7 をつくる。この数を 13 で割った余りを求めよ。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 3。",
+        "zh-Hans": "答案是 3。",
+        "en": "The answer is 3.",
+        "ja": "答えは 3 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "記 Rₙ 為 n 個 1 組成的數，所求的數是 7 × R₂₀₂₆。",
+          "111111 = 13 × 8547，所以 R₆ 是 13 的倍數。2022 = 6 × 337，而 R₂₀₂₂ = R₆ × (1 + 10⁶ + 10¹² + ⋯ + 10²⁰¹⁶)（337 項），所以 R₂₀₂₂ 也是 13 的倍數。",
+          "R₂₀₂₆ = R₂₀₂₂ × 10⁴ + R₄（前 2022 個 1 往左移 4 位，後面接 1111），所以 R₂₀₂₆ 與 R₄ = 1111 除以 13 的餘數相同。1111 = 13 × 85 + 6，餘 6。",
+          "因此 7 × R₂₀₂₆ 與 7 × 6 = 42 除以 13 的餘數相同，42 = 13 × 3 + 3。",
+          "餘數是 3。"
+        ],
+        "zh-Hans": [
+          "记 Rₙ 为 n 个 1 组成的数，所求的数是 7 × R₂₀₂₆。",
+          "111111 = 13 × 8547，所以 R₆ 是 13 的倍数。2022 = 6 × 337，而 R₂₀₂₂ = R₆ × (1 + 10⁶ + 10¹² + ⋯ + 10²⁰¹⁶)（337 项），所以 R₂₀₂₂ 也是 13 的倍数。",
+          "R₂₀₂₆ = R₂₀₂₂ × 10⁴ + R₄（前 2022 个 1 往左移 4 位，后面接 1111），所以 R₂₀₂₆ 与 R₄ = 1111 除以 13 的余数相同。1111 = 13 × 85 + 6，余 6。",
+          "因此 7 × R₂₀₂₆ 与 7 × 6 = 42 除以 13 的余数相同，42 = 13 × 3 + 3。",
+          "余数是 3。"
+        ],
+        "en": [
+          "Let Rₙ be the number made of n ones; the number in question is 7 × R₂₀₂₆.",
+          "111111 = 13 × 8547, so R₆ is a multiple of 13. Since 2022 = 6 × 337 and R₂₀₂₂ = R₆ × (1 + 10⁶ + 10¹² + ⋯ + 10²⁰¹⁶) (337 terms), R₂₀₂₂ is also a multiple of 13.",
+          "R₂₀₂₆ = R₂₀₂₂ × 10⁴ + R₄ (the first 2022 ones shifted left by 4 places, followed by 1111), so R₂₀₂₆ leaves the same remainder as R₄ = 1111. Since 1111 = 13 × 85 + 6, the remainder is 6.",
+          "Hence 7 × R₂₀₂₆ leaves the same remainder as 7 × 6 = 42 = 13 × 3 + 3.",
+          "The remainder is 3."
+        ],
+        "ja": [
+          "n 個の 1 を並べた数を Rₙ とすると、求める数は 7 × R₂₀₂₆ である。",
+          "111111 = 13 × 8547 なので R₆ は 13 の倍数。2022 = 6 × 337 で、R₂₀₂₂ = R₆ × (1 + 10⁶ + 10¹² + ⋯ + 10²⁰¹⁶)（337 項）なので R₂₀₂₂ も 13 の倍数。",
+          "R₂₀₂₆ = R₂₀₂₂ × 10⁴ + R₄（最初の 2022 個の 1 を 4 桁左にずらし、後ろに 1111 を続けたもの）なので、R₂₀₂₆ と R₄ = 1111 は 13 で割った余りが等しい。1111 = 13 × 85 + 6 より余りは 6。",
+          "よって 7 × R₂₀₂₆ は 7 × 6 = 42 = 13 × 3 + 3 と同じ余りをもつ。",
+          "余りは 3。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "3"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "number-theory-grade11-foundation",
+        "notes": "111111 是 13 的倍數，重複數字按 6 位分段只剩尾段。掃過 /個 1|連寫|777|1111/（43 題）；最接近 number_theory_grade7_foundation_064，差異：該題是 1 到 50 連寫除以 9（數字和）；本題是 2026 個 7 除以 13，用 111111 = 13 × 8547 分段"
+      }
     }
   ]
 }

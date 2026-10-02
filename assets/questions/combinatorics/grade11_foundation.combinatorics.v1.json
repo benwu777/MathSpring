@@ -6907,6 +6907,301 @@
         "reference": "combinatorics-grade11-foundation",
         "notes": "第一張紅牌位置的期望：每張黑牌落在 4 段的對稱性，期望 = 7/4 + 1。掃過 /第一張|最先.*出現|抽到第一|紅.*黑.*第/（6 題）；最接近 combinatorics_grade10_foundation_064（隨機試鑰匙次數的期望），差異：該題一把對的鑰匙、需處理「可確定就停」；本題 3 張紅牌，用黑牌與紅牌相對順序的對稱性"
       }
+    },
+    {
+      "id": "combinatorics_grade11_foundation_079",
+      "reviewStatus": "ok",
+      "topic": "combinatorics",
+      "subtopic": "expected_median_of_three_dice_by_symmetry",
+      "tags": [
+        "c:expectation",
+        "c:median_mode",
+        "m:bijection"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade11",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "擲三顆公正的六面骰子，把三個點數由小到大排好，排在中間的那個數（中位數）的期望值是最簡分數 a/b，求 a + b。",
+        "zh-Hans": "掷三颗公正的六面骰子，把三个点数由小到大排好，排在中间的那个数（中位数）的期望值是最简分数 a/b，求 a + b。",
+        "en": "Three fair six-sided dice are rolled and the three numbers are sorted from smallest to largest. The expected value of the middle number (the median) is a/b in lowest terms. Find a + b.",
+        "ja": "公正な 6 面のさいころを 3 個投げ、3 つの目を小さい順に並べる。真ん中の数（中央値）の期待値を既約分数 a/b とするとき、a + b を求めよ。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 9。",
+        "zh-Hans": "答案是 9。",
+        "en": "The answer is 9.",
+        "ja": "答えは 9 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "把每一種結果 (x, y, z) 對應到 (7 − x, 7 − y, 7 − z)。點數 1 到 6 被換成 6 到 1，這是所有 216 種結果之間的一一對應，而且每種結果機率都是 1/216。",
+          "每個數換成 7 減它之後，大小順序整個顛倒，原本排在中間的數仍然排在中間；所以若原來的中位數是 m，對應結果的中位數是 7 − m。",
+          "因此中位數 M 與 7 − M 的機率分布完全相同，期望值相等：E(M) = E(7 − M) = 7 − E(M)，得 E(M) = 7/2。",
+          "7/2 已是最簡分數，a + b = 7 + 2 = 9。"
+        ],
+        "zh-Hans": [
+          "把每一种结果 (x, y, z) 对应到 (7 − x, 7 − y, 7 − z)。点数 1 到 6 被换成 6 到 1，这是所有 216 种结果之间的一一对应，而且每种结果概率都是 1/216。",
+          "每个数换成 7 减它之后，大小顺序整个颠倒，原本排在中间的数仍然排在中间；所以若原来的中位数是 m，对应结果的中位数是 7 − m。",
+          "因此中位数 M 与 7 − M 的概率分布完全相同，期望值相等：E(M) = E(7 − M) = 7 − E(M)，得 E(M) = 7/2。",
+          "7/2 已是最简分数，a + b = 7 + 2 = 9。"
+        ],
+        "en": [
+          "Send each outcome (x, y, z) to (7 − x, 7 − y, 7 − z). This replaces 1–6 by 6–1 and is a one-to-one correspondence among all 216 outcomes, each of probability 1/216.",
+          "Replacing every number by 7 minus it reverses the order, so the middle number stays in the middle: if the median was m, the median of the image is 7 − m.",
+          "Hence the median M and 7 − M have the same distribution and the same expectation: E(M) = E(7 − M) = 7 − E(M), giving E(M) = 7/2.",
+          "7/2 is in lowest terms, so a + b = 7 + 2 = 9."
+        ],
+        "ja": [
+          "各結果 (x, y, z) を (7 − x, 7 − y, 7 − z) に対応させる。これは目 1〜6 を 6〜1 に置き換えるもので、216 通りの結果の間の 1 対 1 対応であり、どの結果の確率も 1/216。",
+          "各数を 7 から引いた数に置き換えると大小の順序がそっくり逆になり、真ん中の数は真ん中のまま。よってもとの中央値が m なら、対応する結果の中央値は 7 − m。",
+          "したがって中央値 M と 7 − M は分布が同じで期待値も等しい：E(M) = E(7 − M) = 7 − E(M) より E(M) = 7/2。",
+          "7/2 は既約なので a + b = 7 + 2 = 9。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "9"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "combinatorics-grade11-foundation",
+        "notes": "點數 x ↦ 7−x 的對稱使中位數期望值為 7/2，免去分布計算。掃過 /中位數|由小到大.*中間/（36 題）；最接近 combinatorics_grade10_foundation_106，差異：該題用指示量求空盒期望；本題用對稱對應求三骰中位數期望"
+      }
+    },
+    {
+      "id": "combinatorics_grade11_foundation_080",
+      "reviewStatus": "ok",
+      "topic": "combinatorics",
+      "subtopic": "lost_boarding_pass_kth_passenger",
+      "tags": [
+        "c:probability",
+        "m:bijection"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade11",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一班飛機有 100 個座位，100 位乘客各持一張不同座位的票，依編號 1 到 100 的順序登機。第 1 位乘客弄丟了票，就在 100 個座位中隨機挑一個坐下。之後每位乘客登機時：若自己的座位空著就坐自己的座位；若已被占用，就在當時所有空位中隨機挑一個坐下（每個空位機會均等）。第 98 位乘客坐到自己座位的機率是最簡分數 a/b，求 a + b。",
+        "zh-Hans": "一班飞机有 100 个座位，100 位乘客各持一张不同座位的票，依编号 1 到 100 的顺序登机。第 1 位乘客弄丢了票，就在 100 个座位中随机挑一个坐下。之后每位乘客登机时：若自己的座位空着就坐自己的座位；若已被占用，就在当时所有空位中随机挑一个坐下（每个空位机会均等）。第 98 位乘客坐到自己座位的概率是最简分数 a/b，求 a + b。",
+        "en": "A plane has 100 seats and 100 passengers, each holding a ticket for a different seat, who board in order 1 to 100. Passenger 1 has lost his ticket and sits in a seat chosen at random among all 100. Each later passenger sits in his own seat if it is free; otherwise he picks a seat uniformly at random among the free seats at that moment. The probability that passenger 98 gets his own seat is a/b in lowest terms. Find a + b.",
+        "ja": "座席が 100 ある飛行機に、それぞれ異なる座席の券をもつ 100 人の乗客が番号 1〜100 の順に乗り込む。1 番の乗客は券をなくし、100 席の中から無作為に 1 席選んで座る。その後の乗客は、自分の席が空いていればそこに座り、ふさがっていればその時点の空席の中から等確率で 1 席選んで座る。98 番の乗客が自分の席に座れる確率を既約分数 a/b とするとき、a + b を求めよ。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 7。",
+        "zh-Hans": "答案是 7。",
+        "en": "The answer is 7.",
+        "ja": "答えは 7 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "把「隨機挑座位」的人稱為隨機者：第 1 位一定是，之後只有自己的座位被占的人才會是。注意座位 1、98、99、100 這四個：第 2 到 97 位乘客坐自己的座位時不會占到它們，所以在第 98 位登機前，這四個座位只可能被隨機者占走；在其中有一個被占之前，四個都是空的。",
+          "每個隨機者都在所有空位中等機率挑選，所以「隨機者第一次挑中這四個座位之一」時，挑中的是座位 1、98、99、100 的機率各為 1/4。",
+          "在第 98 位登機前這件事一定已經發生：若第 97 位坐好時四個座位都還空著，那麼已坐好的 97 個人全坐在第 2 到 97 號這 96 個座位上，不可能。",
+          "若先被挑中的是座位 1：連鎖中每個被占座位的主人都已登機，所以這時被占的座位恰好是已登機者各自的票上座位，之後每個人的座位都空著，第 98 位坐到自己的座位。若先被挑中的是 99 或 100：之後要等第 99 或 100 位登機才會再出現隨機者，所以第 98 位登機時座位 98 仍空著。只有先被挑中的是座位 98 時，第 98 位才坐不到自己的座位。",
+          "所以所求機率是 1 − 1/4 = 3/4，a + b = 3 + 4 = 7。"
+        ],
+        "zh-Hans": [
+          "把「随机挑座位」的人称为随机者：第 1 位一定是，之后只有自己的座位被占的人才会是。注意座位 1、98、99、100 这四个：第 2 到 97 位乘客坐自己的座位时不会占到它们，所以在第 98 位登机前，这四个座位只可能被随机者占走；在其中有一个被占之前，四个都是空的。",
+          "每个随机者都在所有空位中等概率挑选，所以「随机者第一次挑中这四个座位之一」时，挑中的是座位 1、98、99、100 的概率各为 1/4。",
+          "在第 98 位登机前这件事一定已经发生：若第 97 位坐好时四个座位都还空着，那么已坐好的 97 个人全坐在第 2 到 97 号这 96 个座位上，不可能。",
+          "若先被挑中的是座位 1：连锁中每个被占座位的主人都已登机，所以这时被占的座位恰好是已登机者各自的票上座位，之后每个人的座位都空着，第 98 位坐到自己的座位。若先被挑中的是 99 或 100：之后要等第 99 或 100 位登机才会再出现随机者，所以第 98 位登机时座位 98 仍空着。只有先被挑中的是座位 98 时，第 98 位才坐不到自己的座位。",
+          "所以所求概率是 1 − 1/4 = 3/4，a + b = 3 + 4 = 7。"
+        ],
+        "en": [
+          "Call anyone who picks a seat at random a random chooser: passenger 1 is one, and later only passengers whose seat is taken become one. Consider seats 1, 98, 99, 100. Passengers 2 to 97 sitting in their own seats never take these, so before passenger 98 boards these four seats can only be taken by random choosers, and until one of them is taken all four are free.",
+          "Every random chooser picks uniformly among all free seats, so at the first time a random chooser picks one of these four seats, it is seat 1, 98, 99 or 100 with probability 1/4 each.",
+          "This must happen before passenger 98 boards: if all four were still free after passenger 97 sat down, the 97 seated passengers would all be in the 96 seats 2 to 97 — impossible.",
+          "If seat 1 is picked first: every owner of a seat taken in the chain has already boarded, so the occupied seats are now exactly the ticketed seats of those who have boarded; every later passenger finds his seat free, including passenger 98. If seat 99 or 100 is picked first, no new random chooser appears until passenger 99 or 100 boards, so seat 98 is still free when passenger 98 boards. Only if seat 98 is picked first does passenger 98 miss his seat.",
+          "So the probability is 1 − 1/4 = 3/4, and a + b = 3 + 4 = 7."
+        ],
+        "ja": [
+          "無作為に席を選ぶ人を「ランダム者」と呼ぶ。1 番の乗客は必ずそうで、その後は自分の席がふさがっていた人だけがそうなる。座席 1、98、99、100 の 4 つに注目すると、2〜97 番の乗客が自分の席に座ってもこれらはふさがらないので、98 番が乗る前にこの 4 席をふさぐのはランダム者だけであり、どれか 1 つがふさがるまで 4 席とも空いている。",
+          "ランダム者は空席の中から等確率で選ぶので、「ランダム者が初めてこの 4 席のどれかを選ぶ」とき、それが座席 1、98、99、100 である確率はそれぞれ 1/4。",
+          "これは 98 番が乗る前に必ず起こる：97 番が座った時点で 4 席とも空いていれば、座った 97 人が 2〜97 番の 96 席に収まることになり不可能。",
+          "最初に選ばれたのが座席 1 なら、連鎖でふさがった席の持ち主はみな搭乗済みなので、ふさがっている席はちょうど搭乗済みの人の券の席になり、以後の乗客は全員自分の席が空いていて、98 番も座れる。99 か 100 なら、99 番か 100 番が乗るまで新しいランダム者は現れないので、98 番が乗るとき座席 98 は空いている。最初に選ばれたのが座席 98 のときだけ、98 番は自分の席に座れない。",
+          "よって求める確率は 1 − 1/4 = 3/4、a + b = 3 + 4 = 7。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "7"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "combinatorics-grade11-foundation",
+        "notes": "遺失登機證：首個被隨機選中的關鍵座位在 {1,98,99,100} 中等可能。掃過 /登機|機位|乘客|座位.*隨機|隨機.*座位/（3 題）；最接近 combinatorics_grade11_foundation_044，差異：該題是圓桌隨機入座的混合相鄰對期望；本題是登機連鎖占位，用對稱性求第 98 位的機率"
+      }
+    },
+    {
+      "id": "combinatorics_grade11_foundation_081",
+      "reviewStatus": "ok",
+      "topic": "combinatorics",
+      "subtopic": "two_people_in_same_cycle_of_random_permutation",
+      "tags": [
+        "c:probability",
+        "c:permutation_combination",
+        "m:bijection"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade11",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "10 個人玩交換禮物：把 10 個人的名字各寫在一張紙條上，充分混合後每人隨機抽一張（可能抽到自己），所有抽法機會均等。從小安開始，小安把禮物送給他抽到的人，那個人再把禮物送給自己抽到的人，⋯⋯ 如此一直傳下去，直到禮物回到小安手上為止；這段過程中拿過禮物的人（含小安）稱為小安所在的「圈」。小美在小安所在的圈裡的機率是百分之幾？",
+        "zh-Hans": "10 个人玩交换礼物：把 10 个人的名字各写在一张纸条上，充分混合后每人随机抽一张（可能抽到自己），所有抽法机会均等。从小安开始，小安把礼物送给他抽到的人，那个人再把礼物送给自己抽到的人，⋯⋯ 如此一直传下去，直到礼物回到小安手上为止；这段过程中拿过礼物的人（含小安）称为小安所在的「圈」。小美在小安所在的圈里的概率是百分之几？",
+        "en": "Ten people do a gift exchange: each person’s name is written on a slip, the slips are mixed, and everyone draws one at random (possibly their own); all outcomes are equally likely. Starting with An, An gives a gift to the person he drew, that person passes it to the person they drew, and so on until the gift returns to An; everyone who held the gift (including An) forms An’s cycle. What is the probability, as a percentage, that Mei is in An’s cycle?",
+        "ja": "10 人でプレゼント交換をする。10 人の名前を 1 枚ずつ紙に書き、よく混ぜて各自が 1 枚ずつ無作為に引く（自分を引くこともある）。引き方はすべて同様に確からしい。安さんから始め、安さんは自分が引いた人にプレゼントを渡し、その人は自分が引いた人に渡し……と、プレゼントが安さんに戻るまで続ける。この間にプレゼントを持った人（安さんを含む）を安さんの「輪」と呼ぶ。美さんが安さんの輪に入っている確率は何パーセントか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 50。",
+        "zh-Hans": "答案是 50。",
+        "en": "The answer is 50.",
+        "ja": "答えは 50 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "一步一步揭曉紙條：先看小安抽到誰，再看那個人抽到誰，⋯⋯。每揭曉一張，寫在上面的名字是「還沒在前面揭曉的紙條上出現過的名字」之中的一個，而且每一個機會均等（所有抽法機會均等）。",
+          "在禮物回到小安、或傳到小美之前，「小安」與「小美」這兩個名字都還沒有被揭曉過，所以每一步揭曉到「小安」與揭曉到「小美」的機率相同。",
+          "禮物終究會回到小安。小美在圈裡，恰好當「小美」的名字比「小安」的名字先被揭曉。由上一步，每一步兩者先發生的機會都相等，所以「小美先」與「小安先」的機率相同，各為 1/2。",
+          "所求機率是 1/2，也就是百分之 50。"
+        ],
+        "zh-Hans": [
+          "一步一步揭晓纸条：先看小安抽到谁，再看那个人抽到谁，⋯⋯。每揭晓一张，写在上面的名字是「还没在前面揭晓的纸条上出现过的名字」之中的一个，而且每一个机会均等（所有抽法机会均等）。",
+          "在礼物回到小安、或传到小美之前，「小安」与「小美」这两个名字都还没有被揭晓过，所以每一步揭晓到「小安」与揭晓到「小美」的概率相同。",
+          "礼物终究会回到小安。小美在圈里，恰好当「小美」的名字比「小安」的名字先被揭晓。由上一步，每一步两者先发生的机会都相等，所以「小美先」与「小安先」的概率相同，各为 1/2。",
+          "所求概率是 1/2，也就是百分之 50。"
+        ],
+        "en": [
+          "Reveal the slips one at a time: first whom An drew, then whom that person drew, and so on. Each revealed slip shows one of the names not yet revealed, each equally likely (since all outcomes are equally likely).",
+          "Before the gift returns to An or reaches Mei, neither the name “An” nor “Mei” has been revealed, so at every step revealing “An” and revealing “Mei” have the same probability.",
+          "The gift eventually returns to An. Mei is in the cycle exactly when “Mei” is revealed before “An”. By the previous step the two are equally likely to come first at every step, so “Mei first” and “An first” each have probability 1/2.",
+          "The probability is 1/2, i.e. 50 percent."
+        ],
+        "ja": [
+          "紙を 1 枚ずつ明かしていく：まず安さんが誰を引いたか、次にその人が誰を引いたか、……。明かされる紙に書かれた名前は「それまでに明かされていない名前」のどれかで、どれも同様に確からしい（引き方がすべて同様に確からしいから）。",
+          "プレゼントが安さんに戻るか美さんに届くまでは、「安」「美」の名前はどちらもまだ明かされていないので、各段階で「安」が明かされる確率と「美」が明かされる確率は等しい。",
+          "プレゼントはいずれ安さんに戻る。美さんが輪に入るのは、「美」が「安」より先に明かされるときちょうどである。前の段階より、各段階で両者が先に起こる確率は等しいので、「美が先」と「安が先」の確率はどちらも 1/2。",
+          "求める確率は 1/2、すなわち 50 パーセント。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "50"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "combinatorics-grade11-foundation",
+        "notes": "隨機排列中兩人同圈機率 1/2：逐步揭曉時兩名字對稱。掃過 /循環|圈.*(同一|一起)|交換禮物|抽.*紙條/（36 題）；最接近 combinatorics_grade10_foundation_004，差異：該題是錯排計數；本題是隨機排列的循環結構與對稱機率"
+      }
+    },
+    {
+      "id": "combinatorics_grade11_foundation_082",
+      "reviewStatus": "ok",
+      "topic": "combinatorics",
+      "subtopic": "cube_vertex_coloring_two_black_per_face",
+      "tags": [
+        "c:solid",
+        "c:permutation_combination",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade11",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "把一個正方體的 8 個頂點各塗成黑色或白色（正方體固定不動，不同的頂點塗色不同就算不同的塗法）。要求正方體 6 個面中的每一個面，四個頂點裡都恰好有 2 個黑色。塗法共有幾種？",
+        "zh-Hans": "把一个正方体的 8 个顶点各涂成黑色或白色（正方体固定不动，不同的顶点涂色不同就算不同的涂法）。要求正方体 6 个面中的每一个面，四个顶点里都恰好有 2 个黑色。涂法共有几种？",
+        "en": "Each of the 8 vertices of a cube is colored black or white (the cube is fixed in place; colorings differing at any vertex are different). Every one of the 6 faces must have exactly 2 black vertices among its 4 vertices. How many colorings are there?",
+        "ja": "立方体の 8 つの頂点をそれぞれ黒か白に塗る（立方体は固定し、どこか 1 つの頂点の色が違えば別の塗り方とする）。6 つの面のどれについても、その 4 頂点のうちちょうど 2 つが黒でなければならない。塗り方は何通りか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 8。",
+        "zh-Hans": "答案是 8。",
+        "en": "The answer is 8.",
+        "ja": "答えは 8 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "把上面四個頂點依序記為 T₁、T₂、T₃、T₄，正下方的底面頂點依序為 B₁、B₂、B₃、B₄。令 tᵢ、bᵢ 表示 Tᵢ、Bᵢ 是否黑（黑記 1、白記 0），並令 sᵢ = tᵢ + bᵢ（第 i 條直立稜上的黑點數，0、1 或 2）。",
+          "四個側面分別是 TᵢTᵢ₊₁Bᵢ₊₁Bᵢ（i = 1 到 4，T₅ 指 T₁、B₅ 指 B₁），條件是 sᵢ + sᵢ₊₁ = 2。所以 s₁ = s₃ = u、s₂ = s₄ = 2 − u，u 是 0、1 或 2。另外上下兩面各要恰有 2 個黑：t₁ + t₂ + t₃ + t₄ = 2，b₁ + b₂ + b₃ + b₄ = 2。",
+          "u = 1：每條直立稜恰有一個黑點，每條稜選上或下，但上面要恰有 2 個黑，所以是從 4 條稜中選 2 條「黑在上」，有 C(4, 2) = 6 種；這時底面也自動恰有 2 個黑。",
+          "u = 0：第 1、3 條稜全白，第 2、4 條稜全黑，上下面各恰有 2 個黑，符合，1 種。u = 2：第 1、3 條稜全黑、第 2、4 條稜全白，同樣符合，1 種。",
+          "共 6 + 1 + 1 = 8 種。"
+        ],
+        "zh-Hans": [
+          "把上面四个顶点依序记为 T₁、T₂、T₃、T₄，正下方的底面顶点依序为 B₁、B₂、B₃、B₄。令 tᵢ、bᵢ 表示 Tᵢ、Bᵢ 是否黑（黑记 1、白记 0），并令 sᵢ = tᵢ + bᵢ（第 i 条直立棱上的黑点数，0、1 或 2）。",
+          "四个侧面分别是 TᵢTᵢ₊₁Bᵢ₊₁Bᵢ（i = 1 到 4，T₅ 指 T₁、B₅ 指 B₁），条件是 sᵢ + sᵢ₊₁ = 2。所以 s₁ = s₃ = u、s₂ = s₄ = 2 − u，u 是 0、1 或 2。另外上下两面各要恰有 2 个黑：t₁ + t₂ + t₃ + t₄ = 2，b₁ + b₂ + b₃ + b₄ = 2。",
+          "u = 1：每条直立棱恰有一个黑点，每条棱选上或下，但上面要恰有 2 个黑，所以是从 4 条棱中选 2 条「黑在上」，有 C(4, 2) = 6 种；这时底面也自动恰有 2 个黑。",
+          "u = 0：第 1、3 条棱全白，第 2、4 条棱全黑，上下面各恰有 2 个黑，符合，1 种。u = 2：第 1、3 条棱全黑、第 2、4 条棱全白，同样符合，1 种。",
+          "共 6 + 1 + 1 = 8 种。"
+        ],
+        "en": [
+          "Label the top vertices T₁, T₂, T₃, T₄ in order and the bottom vertices directly below them B₁, B₂, B₃, B₄. Let tᵢ, bᵢ be 1 if Tᵢ, Bᵢ is black and 0 if white, and let sᵢ = tᵢ + bᵢ (black vertices on the i-th vertical edge: 0, 1 or 2).",
+          "The side faces are TᵢTᵢ₊₁Bᵢ₊₁Bᵢ (i = 1 to 4, with T₅ = T₁, B₅ = B₁), and the condition is sᵢ + sᵢ₊₁ = 2. So s₁ = s₃ = u and s₂ = s₄ = 2 − u with u = 0, 1 or 2. The top and bottom faces also need exactly 2 black: t₁ + t₂ + t₃ + t₄ = 2 and b₁ + b₂ + b₃ + b₄ = 2.",
+          "u = 1: each vertical edge has exactly one black vertex, top or bottom, and the top must have exactly 2 black, so choose 2 of the 4 edges to have black on top: C(4, 2) = 6 ways; the bottom then automatically has exactly 2 black.",
+          "u = 0: edges 1 and 3 are all white and edges 2 and 4 all black; top and bottom each have 2 black — 1 way. u = 2: edges 1, 3 all black and edges 2, 4 all white — also valid, 1 way.",
+          "In total 6 + 1 + 1 = 8."
+        ],
+        "ja": [
+          "上面の頂点を順に T₁、T₂、T₃、T₄、その真下の底面の頂点を B₁、B₂、B₃、B₄ とする。Tᵢ、Bᵢ が黒なら 1、白なら 0 として tᵢ、bᵢ とおき、sᵢ = tᵢ + bᵢ（i 番目の縦の辺上の黒の個数で 0、1、2 のいずれか）とする。",
+          "側面は TᵢTᵢ₊₁Bᵢ₊₁Bᵢ（i = 1〜4、T₅ = T₁、B₅ = B₁）で、条件は sᵢ + sᵢ₊₁ = 2。よって s₁ = s₃ = u、s₂ = s₄ = 2 − u（u は 0、1、2）。さらに上面と底面にもちょうど 2 つの黒が必要：t₁ + t₂ + t₃ + t₄ = 2、b₁ + b₂ + b₃ + b₄ = 2。",
+          "u = 1：各縦の辺に黒がちょうど 1 つで上か下かを選ぶが、上面の黒はちょうど 2 つなので、4 本のうち「上が黒」の 2 本を選び C(4, 2) = 6 通り。このとき底面も自動的に黒が 2 つ。",
+          "u = 0：1、3 番の辺は 2 頂点とも白、2、4 番は 2 頂点とも黒で、上下の面もそれぞれ黒 2 つで条件を満たし 1 通り。u = 2：1、3 番が黒、2、4 番が白で同様に 1 通り。",
+          "合計 6 + 1 + 1 = 8 通り。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "8"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "combinatorics-grade11-foundation",
+        "notes": "以直立稜黑點數 sᵢ 表示側面條件 sᵢ+sᵢ₊₁=2，分 u=0,1,2 計數。掃過 /正方體.*頂點|頂點.*(塗|黑)/（20 題）；最接近 combinatorics_grade11_foundation_019，差異：該題是正方體面著色在旋轉下的種類；本題固定正方體、塗頂點且每面恰 2 黑"
+      }
     }
   ]
 }
