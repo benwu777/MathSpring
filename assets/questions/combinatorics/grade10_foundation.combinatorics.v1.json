@@ -9369,6 +9369,443 @@
         "reference": "combinatorics-grade10-foundation",
         "notes": "正方體 4 頂點共面的分類：6 個面 + 6 個對角面。掃過 /共面|正方體.*頂點/（14 題）；最接近 combinatorics_grade12_foundation_025（正八邊形取 4 點成矩形），差異：該題是平面上的矩形計數；本題是立體頂點共面分類並求機率"
       }
+    },
+    {
+      "id": "combinatorics_grade10_foundation_110",
+      "reviewStatus": "ok",
+      "topic": "combinatorics",
+      "subtopic": "permutations_with_exactly_one_descent",
+      "tags": [
+        "c:permutation_combination",
+        "m:bijection"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "把 1、2、3、4、5、6 排成一排 a₁, a₂, a₃, a₄, a₅, a₆。在五組相鄰的兩數 (a₁, a₂)、(a₂, a₃)、⋯、(a₅, a₆) 之中，恰好只有一組是「前面的數比後面的數大」（例如 2, 4, 5, 1, 3, 6 只有 5 > 1 這一組）。這樣的排法共有幾種？",
+        "zh-Hans": "把 1、2、3、4、5、6 排成一排 a₁, a₂, a₃, a₄, a₅, a₆。在五组相邻的两数 (a₁, a₂)、(a₂, a₃)、⋯、(a₅, a₆) 之中，恰好只有一组是「前面的数比后面的数大」（例如 2, 4, 5, 1, 3, 6 只有 5 > 1 这一组）。这样的排法共有几种？",
+        "en": "Arrange 1, 2, 3, 4, 5, 6 in a row a₁, a₂, a₃, a₄, a₅, a₆. Among the five adjacent pairs (a₁, a₂), (a₂, a₃), …, (a₅, a₆), exactly one pair has the first number larger than the second (for example, 2, 4, 5, 1, 3, 6 has only the pair 5 > 1). How many such arrangements are there?",
+        "ja": "1、2、3、4、5、6 を一列に並べて a₁, a₂, a₃, a₄, a₅, a₆ とする。隣り合う 5 組 (a₁, a₂)、(a₂, a₃)、…、(a₅, a₆) のうち、「前の数が後ろの数より大きい」組がちょうど 1 組だけである（たとえば 2, 4, 5, 1, 3, 6 では 5 > 1 の 1 組だけ）。このような並べ方は何通りあるか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 57。",
+        "zh-Hans": "答案是 57。",
+        "en": "The answer is 57.",
+        "ja": "答えは 57 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "若唯一的「前大後小」發生在 aᵢ > aᵢ₊₁，則 a₁ < ⋯ < aᵢ 且 aᵢ₊₁ < ⋯ < a₆。所以這個排列由「前段的數組成的集合 A」完全決定：A 由小到大排在前，其餘的數由小到大排在後。",
+          "反過來，任取一個集合 A（可以是空集合或全部），把 A 由小到大放前面、其餘由小到大放後面，得到的排列除了兩段的接縫處以外都是前小後大，所以「前大後小」至多一組；恰好一組若且唯若 A 的最大數大於其餘數中的最小數。",
+          "接縫處不出現「前大後小」的情形，就是 A 的數全部小於其餘的數，也就是 A 是 {1, 2, ⋯, k}（k = 0、1、⋯、6），共 7 種集合，它們都給出 1, 2, 3, 4, 5, 6 這個排列。",
+          "不同的 A（不屬於上述 7 種）給出的排列不同，因為從排列可以讀回 A（接縫前的那些數）。{1, ⋯, 6} 的子集合共 2⁶ = 64 個，扣掉 7 個，恰有一組前大後小的排法共 64 − 7 = 57 種。"
+        ],
+        "zh-Hans": [
+          "若唯一的「前大后小」发生在 aᵢ > aᵢ₊₁，则 a₁ < ⋯ < aᵢ 且 aᵢ₊₁ < ⋯ < a₆。所以这个排列由「前段的数组成的集合 A」完全决定：A 由小到大排在前，其余的数由小到大排在后。",
+          "反过来，任取一个集合 A（可以是空集合或全部），把 A 由小到大放前面、其余由小到大放后面，得到的排列除了两段的接缝处以外都是前小后大，所以「前大后小」至多一组；恰好一组若且唯若 A 的最大数大于其余数中的最小数。",
+          "接缝处不出现「前大后小」的情形，就是 A 的数全部小于其余的数，也就是 A 是 {1, 2, ⋯, k}（k = 0、1、⋯、6），共 7 种集合，它们都给出 1, 2, 3, 4, 5, 6 这个排列。",
+          "不同的 A（不属于上述 7 种）给出的排列不同，因为从排列可以读回 A（接缝前的那些数）。{1, ⋯, 6} 的子集合共 2⁶ = 64 个，扣掉 7 个，恰有一组前大后小的排法共 64 − 7 = 57 种。"
+        ],
+        "en": [
+          "If the only \"larger then smaller\" pair is aᵢ > aᵢ₊₁, then a₁ < ⋯ < aᵢ and aᵢ₊₁ < ⋯ < a₆. So the arrangement is determined by the set A of numbers in the front part: A in increasing order first, then the rest in increasing order.",
+          "Conversely, take any set A (possibly empty or everything), put A in increasing order first and the rest in increasing order after it. Every adjacent pair except the one at the junction increases, so there is at most one \"larger then smaller\" pair, and there is exactly one when the largest number of A exceeds the smallest of the rest.",
+          "The junction has no \"larger then smaller\" pair exactly when every number of A is smaller than every other number, i.e. A = {1, 2, …, k} (k = 0, 1, …, 6): 7 sets, all giving the arrangement 1, 2, 3, 4, 5, 6.",
+          "Different sets A outside these 7 give different arrangements, since A can be read back from the arrangement (the numbers before the junction). {1, …, 6} has 2⁶ = 64 subsets; removing those 7 leaves 64 − 7 = 57 arrangements with exactly one such pair."
+        ],
+        "ja": [
+          "ただ 1 つの「前が大きい」組が aᵢ > aᵢ₊₁ なら、a₁ < ⋯ < aᵢ かつ aᵢ₊₁ < ⋯ < a₆。よって並べ方は「前半の数の集合 A」で完全に決まる：A を小さい順に前に置き、残りを小さい順に後ろに置く。",
+          "逆に、任意の集合 A（空集合や全体でもよい）について、A を小さい順に前、残りを小さい順に後ろに並べると、つなぎ目以外の隣り合う組はすべて増加なので「前が大きい」組は多くても 1 つ。ちょうど 1 つになるのは、A の最大数が残りの最小数より大きいときに限る。",
+          "つなぎ目でも増加になるのは、A のどの数も残りのどの数より小さいとき、すなわち A = {1, 2, …, k}（k = 0、1、…、6）の 7 通りで、どれも 1, 2, 3, 4, 5, 6 という並びになる。",
+          "この 7 通り以外の異なる A は異なる並べ方を与える（並べ方からつなぎ目より前の数として A を読み取れる）。{1, …, 6} の部分集合は 2⁶ = 64 個なので、ちょうど 1 組の並べ方は 64 − 7 = 57 通り。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "57"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "combinatorics-grade10-foundation",
+        "notes": "恰一個下降的排列 ↔ 前段集合 A（扣除 A = {1..k} 的 7 種），得 2ⁿ − (n+1)。掃過 /前面的數比後面|前大後小|比後面的數大|下降/（5 題）；最接近 combinatorics_grade10_foundation_085（隨機排列超過位置數的期望），差異：該題算期望值；本題用「前段集合」一一對應數出恰好一個下降的排列"
+      }
+    },
+    {
+      "id": "combinatorics_grade10_foundation_111",
+      "reviewStatus": "ok",
+      "topic": "combinatorics",
+      "subtopic": "subsets_avoiding_difference_three",
+      "tags": [
+        "c:recurrence",
+        "c:basic_counting",
+        "m:bijection"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "從集合 {1, 2, 3, ⋯, 15} 中選出一個子集合（可以是空集合），要求子集合中任兩個數的差都不等於 3。這樣的子集合共有幾個？",
+        "zh-Hans": "从集合 {1, 2, 3, ⋯, 15} 中选出一个子集合（可以是空集合），要求子集合中任两个数的差都不等于 3。这样的子集合共有几个？",
+        "en": "Choose a subset of {1, 2, 3, …, 15} (the empty set is allowed) such that no two of its elements differ by 3. How many such subsets are there?",
+        "ja": "集合 {1, 2, 3, …, 15} から部分集合を選ぶ（空集合でもよい）。部分集合のどの 2 数の差も 3 にならないようにする。このような部分集合は何個あるか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 2197。",
+        "zh-Hans": "答案是 2197。",
+        "en": "The answer is 2197.",
+        "ja": "答えは 2197 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "相差 3 的兩數除以 3 的餘數相同，所以把 1～15 依除以 3 的餘數分成三串：1, 4, 7, 10, 13；2, 5, 8, 11, 14；3, 6, 9, 12, 15。不同串的數相差不會是 3，三串的選法互不影響。",
+          "每一串 5 個數中，相鄰的兩個相差 3，不相鄰的相差至少 6。所以每一串要做的事是：在一排 5 個位置中選若干個，任兩個選中的位置不相鄰。",
+          "設一排 k 個位置的選法有 fₖ 種。f₁ = 2（選或不選），f₂ = 3（都不選、只選第 1 個、只選第 2 個）。k ≥ 3 時看最後一個位置：不選，前 k − 1 個任意符合，有 fₖ₋₁ 種；選了，第 k − 1 個不能選，前 k − 2 個任意符合，有 fₖ₋₂ 種。所以 fₖ = fₖ₋₁ + fₖ₋₂。",
+          "f₃ = 3 + 2 = 5，f₄ = 5 + 3 = 8，f₅ = 8 + 5 = 13。",
+          "三串各 13 種，互相獨立，共 13 × 13 × 13 = 2197 個子集合。"
+        ],
+        "zh-Hans": [
+          "相差 3 的两数除以 3 的余数相同，所以把 1～15 依除以 3 的余数分成三串：1, 4, 7, 10, 13；2, 5, 8, 11, 14；3, 6, 9, 12, 15。不同串的数相差不会是 3，三串的选法互不影响。",
+          "每一串 5 个数中，相邻的两个相差 3，不相邻的相差至少 6。所以每一串要做的事是：在一排 5 个位置中选若干个，任两个选中的位置不相邻。",
+          "设一排 k 个位置的选法有 fₖ 种。f₁ = 2（选或不选），f₂ = 3（都不选、只选第 1 个、只选第 2 个）。k ≥ 3 时看最后一个位置：不选，前 k − 1 个任意符合，有 fₖ₋₁ 种；选了，第 k − 1 个不能选，前 k − 2 个任意符合，有 fₖ₋₂ 种。所以 fₖ = fₖ₋₁ + fₖ₋₂。",
+          "f₃ = 3 + 2 = 5，f₄ = 5 + 3 = 8，f₅ = 8 + 5 = 13。",
+          "三串各 13 种，互相独立，共 13 × 13 × 13 = 2197 个子集合。"
+        ],
+        "en": [
+          "Two numbers differing by 3 leave the same remainder mod 3, so split 1–15 into three chains by remainder: 1, 4, 7, 10, 13; 2, 5, 8, 11, 14; 3, 6, 9, 12, 15. Numbers in different chains never differ by 3, so the choices in the three chains are independent.",
+          "Within a chain of 5 numbers, neighbors differ by 3 and non-neighbors differ by at least 6. So for each chain we must choose some of 5 positions in a row with no two chosen positions adjacent.",
+          "Let fₖ be the number of choices for k positions in a row. f₁ = 2 (choose or not) and f₂ = 3 (none, only the 1st, only the 2nd). For k ≥ 3 look at the last position: if unchosen, the first k − 1 are any valid choice, fₖ₋₁ ways; if chosen, position k − 1 is unchosen and the first k − 2 are any valid choice, fₖ₋₂ ways. So fₖ = fₖ₋₁ + fₖ₋₂.",
+          "f₃ = 3 + 2 = 5, f₄ = 5 + 3 = 8, f₅ = 8 + 5 = 13.",
+          "Each of the three chains has 13 choices independently, giving 13 × 13 × 13 = 2197 subsets."
+        ],
+        "ja": [
+          "差が 3 の 2 数は 3 で割った余りが等しいので、1～15 を余りで 3 つの列に分ける：1, 4, 7, 10, 13；2, 5, 8, 11, 14；3, 6, 9, 12, 15。異なる列の数の差は 3 にならないので、3 つの列の選び方は互いに影響しない。",
+          "各列の 5 数では、隣どうしの差が 3、隣でないものの差は 6 以上。よって各列では、一列に並んだ 5 か所からいくつかを選び、選んだ 2 か所が隣り合わないようにすればよい。",
+          "一列 k か所での選び方を fₖ 通りとする。f₁ = 2（選ぶか選ばないか）、f₂ = 3（どちらも選ばない、1 番目だけ、2 番目だけ）。k ≥ 3 では最後の位置を見る：選ばなければ前の k − 1 か所は任意の適する選び方で fₖ₋₁ 通り、選べば k − 1 番目は選べず前の k − 2 か所は任意で fₖ₋₂ 通り。よって fₖ = fₖ₋₁ + fₖ₋₂。",
+          "f₃ = 3 + 2 = 5、f₄ = 5 + 3 = 8、f₅ = 8 + 5 = 13。",
+          "3 つの列がそれぞれ独立に 13 通りなので、13 × 13 × 13 = 2197 個。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "2197"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 4
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "combinatorics-grade10-foundation",
+        "notes": "差為 3 的限制按模 3 拆成三條互不干擾的鏈，每條是「不選相鄰」的費氏計數。掃過 /差.*不等於|差都不|兩數之差|相差 3/（5 題）；最接近 combinatorics_grade10_foundation_044（開關不相鄰關閉），差異：該題直接是一排不相鄰的費氏計數；本題差為 3 要先按餘數拆成三條鏈、再相乘"
+      }
+    },
+    {
+      "id": "combinatorics_grade10_foundation_112",
+      "reviewStatus": "ok",
+      "topic": "combinatorics",
+      "subtopic": "sum_of_minimum_over_three_subsets",
+      "tags": [
+        "c:permutation_combination",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "從 {1, 2, 3, ⋯, 10} 中選出 3 個不同的數，共有 120 種選法。把每一種選法中最小的那個數記下來，這 120 個數的總和是多少？",
+        "zh-Hans": "从 {1, 2, 3, ⋯, 10} 中选出 3 个不同的数，共有 120 种选法。把每一种选法中最小的那个数记下来，这 120 个数的总和是多少？",
+        "en": "There are 120 ways to choose 3 different numbers from {1, 2, 3, …, 10}. For each choice, write down the smallest of the three numbers. What is the sum of these 120 numbers?",
+        "ja": "{1, 2, 3, …, 10} から異なる 3 つの数を選ぶ方法は 120 通りある。それぞれの選び方で、3 つの数のうち最小のものを書き出す。これら 120 個の数の和はいくつか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 330。",
+        "zh-Hans": "答案是 330。",
+        "en": "The answer is 330.",
+        "ja": "答えは 330 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "最小數是 m 的選法：另外兩個數要從比 m 大的 m + 1、⋯、10 這 10 − m 個數中選，有 C(10 − m, 2) 種。最小數至多是 8（還要有兩個更大的數）。",
+          "m = 1～8 對應的選法數：C(9, 2) = 36、C(8, 2) = 28、C(7, 2) = 21、C(6, 2) = 15、C(5, 2) = 10、C(4, 2) = 6、C(3, 2) = 3、C(2, 2) = 1。檢查：36 + 28 + 21 + 15 + 10 + 6 + 3 + 1 = 120，正好是全部的選法。",
+          "總和 = 1 × 36 + 2 × 28 + 3 × 21 + 4 × 15 + 5 × 10 + 6 × 6 + 7 × 3 + 8 × 1 = 36 + 56 + 63 + 60 + 50 + 36 + 21 + 8 = 330。",
+          "所以這 120 個最小數的總和是 330。"
+        ],
+        "zh-Hans": [
+          "最小数是 m 的选法：另外两个数要从比 m 大的 m + 1、⋯、10 这 10 − m 个数中选，有 C(10 − m, 2) 种。最小数至多是 8（还要有两个更大的数）。",
+          "m = 1～8 对应的选法数：C(9, 2) = 36、C(8, 2) = 28、C(7, 2) = 21、C(6, 2) = 15、C(5, 2) = 10、C(4, 2) = 6、C(3, 2) = 3、C(2, 2) = 1。检查：36 + 28 + 21 + 15 + 10 + 6 + 3 + 1 = 120，正好是全部的选法。",
+          "总和 = 1 × 36 + 2 × 28 + 3 × 21 + 4 × 15 + 5 × 10 + 6 × 6 + 7 × 3 + 8 × 1 = 36 + 56 + 63 + 60 + 50 + 36 + 21 + 8 = 330。",
+          "所以这 120 个最小数的总和是 330。"
+        ],
+        "en": [
+          "Choices whose smallest number is m: the other two come from the 10 − m numbers m + 1, …, 10, in C(10 − m, 2) ways. The smallest number is at most 8 (two larger numbers are still needed).",
+          "For m = 1 to 8 the counts are C(9, 2) = 36, C(8, 2) = 28, C(7, 2) = 21, C(6, 2) = 15, C(5, 2) = 10, C(4, 2) = 6, C(3, 2) = 3, C(2, 2) = 1. Check: 36 + 28 + 21 + 15 + 10 + 6 + 3 + 1 = 120, exactly all the choices.",
+          "Sum = 1 × 36 + 2 × 28 + 3 × 21 + 4 × 15 + 5 × 10 + 6 × 6 + 7 × 3 + 8 × 1 = 36 + 56 + 63 + 60 + 50 + 36 + 21 + 8 = 330.",
+          "So the 120 smallest numbers add up to 330."
+        ],
+        "ja": [
+          "最小の数が m である選び方：残り 2 つは m より大きい m + 1、…、10 の 10 − m 個から選ぶので C(10 − m, 2) 通り。最小の数は多くても 8（さらに大きい数が 2 つ必要）。",
+          "m = 1～8 に対する選び方の数は C(9, 2) = 36、C(8, 2) = 28、C(7, 2) = 21、C(6, 2) = 15、C(5, 2) = 10、C(4, 2) = 6、C(3, 2) = 3、C(2, 2) = 1。確認：36 + 28 + 21 + 15 + 10 + 6 + 3 + 1 = 120 で全体と一致する。",
+          "和 = 1 × 36 + 2 × 28 + 3 × 21 + 4 × 15 + 5 × 10 + 6 × 6 + 7 × 3 + 8 × 1 = 36 + 56 + 63 + 60 + 50 + 36 + 21 + 8 = 330。",
+          "よって 120 個の最小値の和は 330。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "330"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "combinatorics-grade10-foundation",
+        "notes": "依最小數分類，最小為 m 的三元子集有 C(10−m, 2) 個，加權求和。掃過 /最小的.*總和|最小.*數.*和|最小的那個/（16 題）；最接近 combinatorics_grade11_foundation_048（曲棍球棒恆等式 C(4,4)+C(5,4)+⋯），差異：該題給出恆等式直接求和；本題要自己依最小值分類並加權（未用到恆等式）"
+      }
+    },
+    {
+      "id": "combinatorics_grade10_foundation_113",
+      "reviewStatus": "ok",
+      "topic": "combinatorics",
+      "subtopic": "subsets_with_given_min_plus_max",
+      "tags": [
+        "c:basic_counting",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "集合 {1, 2, 3, ⋯, 10} 的非空子集合之中，最大的元素與最小的元素加起來恰好等於 11 的，共有幾個？",
+        "zh-Hans": "集合 {1, 2, 3, ⋯, 10} 的非空子集合之中，最大的元素与最小的元素加起来恰好等于 11 的，共有几个？",
+        "en": "Among the nonempty subsets of {1, 2, 3, …, 10}, how many have their largest and smallest elements adding up to exactly 11?",
+        "ja": "集合 {1, 2, 3, …, 10} の空でない部分集合のうち、最大の要素と最小の要素の和がちょうど 11 になるものはいくつあるか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 341。",
+        "zh-Hans": "答案是 341。",
+        "en": "The answer is 341.",
+        "ja": "答えは 341 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "設最小元素是 m、最大元素是 11 − m。若子集合只有一個元素，最大等於最小，m + m = 11 不可能是整數，所以 m < 11 − m，m 可以是 1、2、3、4、5。",
+          "固定 m 時，m 和 11 − m 都一定要選，介於兩者之間的 m + 1、⋯、10 − m 共 10 − 2m 個數可選可不選，有 2¹⁰⁻²ᵐ 種；比 m 小或比 11 − m 大的數都不能選。",
+          "m = 1、2、3、4、5 時分別是 2⁸ = 256、2⁶ = 64、2⁴ = 16、2² = 4、2⁰ = 1。",
+          "合計 256 + 64 + 16 + 4 + 1 = 341 個。"
+        ],
+        "zh-Hans": [
+          "设最小元素是 m、最大元素是 11 − m。若子集合只有一个元素，最大等于最小，m + m = 11 不可能是整数，所以 m < 11 − m，m 可以是 1、2、3、4、5。",
+          "固定 m 时，m 和 11 − m 都一定要选，介于两者之间的 m + 1、⋯、10 − m 共 10 − 2m 个数可选可不选，有 2¹⁰⁻²ᵐ 种；比 m 小或比 11 − m 大的数都不能选。",
+          "m = 1、2、3、4、5 时分别是 2⁸ = 256、2⁶ = 64、2⁴ = 16、2² = 4、2⁰ = 1。",
+          "合计 256 + 64 + 16 + 4 + 1 = 341 个。"
+        ],
+        "en": [
+          "Let the smallest element be m and the largest 11 − m. A one-element subset has largest = smallest, and m + m = 11 has no integer solution, so m < 11 − m and m is 1, 2, 3, 4 or 5.",
+          "For fixed m, both m and 11 − m must be chosen; the 10 − 2m numbers m + 1, …, 10 − m in between may be chosen or not, in 2¹⁰⁻²ᵐ ways; nothing smaller than m or larger than 11 − m may be chosen.",
+          "For m = 1, 2, 3, 4, 5 this gives 2⁸ = 256, 2⁶ = 64, 2⁴ = 16, 2² = 4, 2⁰ = 1.",
+          "In total 256 + 64 + 16 + 4 + 1 = 341 subsets."
+        ],
+        "ja": [
+          "最小の要素を m、最大の要素を 11 − m とする。要素が 1 個なら最大と最小が等しく、m + m = 11 は整数解をもたないので m < 11 − m、m は 1、2、3、4、5 のどれか。",
+          "m を固定すると m と 11 − m は必ず選び、その間の m + 1、…、10 − m の 10 − 2m 個は選んでも選ばなくてもよいので 2¹⁰⁻²ᵐ 通り。m より小さい数や 11 − m より大きい数は選べない。",
+          "m = 1、2、3、4、5 のときそれぞれ 2⁸ = 256、2⁶ = 64、2⁴ = 16、2² = 4、2⁰ = 1。",
+          "合計 256 + 64 + 16 + 4 + 1 = 341 個。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "341"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "combinatorics-grade10-foundation",
+        "notes": "固定最小元 m 與最大元 11 − m，中間元素自由取捨得 2¹⁰⁻²ᵐ，再對 m 求和。掃過 /最大.*最小.*和|最小.*最大.*和|最大的元素/（7 題）；最接近 combinatorics_grade10_foundation_091（元素和至少 28 的子集合數），差異：該題看元素總和、用補集對稱；本題只看最大與最小元素，按兩端點分類後中間自由取捨"
+      }
+    },
+    {
+      "id": "combinatorics_grade10_foundation_114",
+      "reviewStatus": "ok",
+      "topic": "combinatorics",
+      "subtopic": "edges_forcing_graph_connectivity",
+      "tags": [
+        "c:graph_theory",
+        "m:extremal",
+        "m:construction"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "8 座城市之間要修若干條雙向道路，每條道路直接連接兩座城市，任兩座城市之間最多修一條。工程隊不告訴你修了哪幾條，只告訴你一共修了幾條。總條數至少要是多少，才能保證不論修的是哪幾條，任兩座城市都能沿著道路互相到達（可以經過其他城市）？",
+        "zh-Hans": "8 坐城市之间要修若干条双向道路，每条道路直接连接两坐城市，任两坐城市之间最多修一条。工程队不告诉你修了哪几条，只告诉你一共修了几条。总条数至少要是多少，才能保证不论修的是哪几条，任两坐城市都能沿着道路互相到达（可以经过其他城市）？",
+        "en": "Some two-way roads are to be built among 8 cities; each road joins two cities directly, and at most one road joins any two cities. The builders do not say which roads were built, only how many. At least how many roads must there be to guarantee that, whichever roads were built, any two cities can reach each other along roads (possibly through other cities)?",
+        "ja": "8 つの都市の間に双方向の道路を何本か作る。各道路は 2 つの都市を直接結び、どの 2 都市の間にも道路は多くても 1 本。工事班はどの道路を作ったかは教えず、全部で何本作ったかだけを教える。どの道路を作った場合でも、任意の 2 都市が道路をたどって（他の都市を経由してもよい）行き来できることを保証するには、道路は少なくとも何本必要か。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 22。",
+        "zh-Hans": "答案是 22。",
+        "en": "The answer is 22.",
+        "ja": "答えは 22 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "21 條不夠保證：讓其中 7 座城市兩兩之間全部修路，共 C(7, 2) = 21 條，第 8 座城市一條路也沒有，它和其他城市不能互通。",
+          "22 條一定夠：假設修了 22 條卻有兩座城市不能互通。取其中一座城市能到達的所有城市（含它自己）為第一組，共 s 座，其餘 8 − s 座為第二組，1 ≤ s ≤ 7。兩組之間沒有任何道路（否則第一組會再擴大）。",
+          "所以道路總數最多是 C(s, 2) + C(8 − s, 2)。s = 1 或 7 時是 0 + 21 = 21；s = 2 或 6 時是 1 + 15 = 16；s = 3 或 5 時是 3 + 10 = 13；s = 4 時是 6 + 6 = 12。最大也只有 21 < 22，矛盾。",
+          "因此最少要 22 條才能保證任兩座城市互通。"
+        ],
+        "zh-Hans": [
+          "21 条不够保证：让其中 7 坐城市两两之间全部修路，共 C(7, 2) = 21 条，第 8 坐城市一条路也没有，它和其他城市不能互通。",
+          "22 条一定够：假设修了 22 条却有两坐城市不能互通。取其中一坐城市能到达的所有城市（含它自己）为第一组，共 s 坐，其余 8 − s 坐为第二组，1 ≤ s ≤ 7。两组之间没有任何道路（否则第一组会再扩大）。",
+          "所以道路总数最多是 C(s, 2) + C(8 − s, 2)。s = 1 或 7 时是 0 + 21 = 21；s = 2 或 6 时是 1 + 15 = 16；s = 3 或 5 时是 3 + 10 = 13；s = 4 时是 6 + 6 = 12。最大也只有 21 < 22，矛盾。",
+          "因此最少要 22 条才能保证任两坐城市互通。"
+        ],
+        "en": [
+          "21 roads do not guarantee it: build all C(7, 2) = 21 roads among 7 of the cities and none at the 8th city, which then cannot reach any other city.",
+          "22 roads always suffice: suppose 22 roads were built but some two cities cannot reach each other. Let the first group be all cities reachable from one of them (including itself), s cities, and the second group the other 8 − s cities, with 1 ≤ s ≤ 7. No road joins the two groups (otherwise the first group would be larger).",
+          "So the number of roads is at most C(s, 2) + C(8 − s, 2). For s = 1 or 7 this is 0 + 21 = 21; for s = 2 or 6, 1 + 15 = 16; for s = 3 or 5, 3 + 10 = 13; for s = 4, 6 + 6 = 12. The maximum is only 21 < 22, a contradiction.",
+          "Hence at least 22 roads are needed to guarantee that any two cities are connected."
+        ],
+        "ja": [
+          "21 本では保証できない：7 つの都市の間にすべての道路 C(7, 2) = 21 本を作り、8 つ目の都市には 1 本も作らなければ、その都市は他と行き来できない。",
+          "22 本なら必ず足りる：22 本作ったのに行き来できない 2 都市があると仮定する。その一方から行けるすべての都市（自身を含む）を第 1 グループ（s 都市）、残りの 8 − s 都市を第 2 グループとする（1 ≤ s ≤ 7）。2 つのグループを結ぶ道路はない（あれば第 1 グループがさらに広がる）。",
+          "よって道路の本数は多くても C(s, 2) + C(8 − s, 2)。s = 1 または 7 で 0 + 21 = 21、s = 2 または 6 で 1 + 15 = 16、s = 3 または 5 で 3 + 10 = 13、s = 4 で 6 + 6 = 12。最大でも 21 < 22 で矛盾。",
+          "したがって、任意の 2 都市が行き来できることを保証するには少なくとも 22 本必要。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "22"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "combinatorics-grade10-foundation",
+        "notes": "不連通圖的邊數上限 max C(s,2)+C(8−s,2) = 21，故 22 條邊保證連通。掃過 /連通|互相到達|互通|道路/（17 題）；最接近 logic_grade10_foundation_045（20 村 14 條無環道路分成幾個連通塊），差異：該題由森林邊數推連通塊數；本題求保證連通的最少邊數，需極端構造加分組上界"
+      }
+    },
+    {
+      "id": "combinatorics_grade10_foundation_115",
+      "reviewStatus": "ok",
+      "topic": "combinatorics",
+      "subtopic": "knockout_tournament_two_players_meet",
+      "tags": [
+        "c:probability",
+        "c:expectation",
+        "m:invariant"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "16 位實力相當的選手參加單淘汰賽：第一輪隨機兩兩配對比賽，輸的人淘汰；之後每一輪都把剩下的人重新隨機兩兩配對，直到剩下冠軍為止。每場比賽兩人獲勝的機率都是 1/2，各場互相獨立。小安與小美在整個比賽中彼此對戰過的機率是 1/k，求 k。",
+        "zh-Hans": "16 位实力相当的选手参加单淘汰赛：第一轮随机两两配对比赛，输的人淘汰；之后每一轮都把剩下的人重新随机两两配对，直到剩下冠军为止。每场比赛两人获胜的概率都是 1/2，各场互相独立。小安与小美在整个比赛中彼此对战过的概率是 1/k，求 k。",
+        "en": "Sixteen equally strong players enter a knockout tournament: in the first round they are paired at random and each loser is eliminated; in every later round the remaining players are paired at random again, until a champion remains. In each match each player wins with probability 1/2, independently. The probability that An and Mei face each other at some point in the tournament is 1/k. Find k.",
+        "ja": "実力の等しい 16 人の選手が勝ち抜き戦を行う。1 回戦ではランダムに 2 人ずつ組んで対戦し、負けた人は脱落する。その後も各回戦で残った人をランダムに組み直し、優勝者が決まるまで続ける。各試合でどちらが勝つ確率も 1/2 で、試合ごとに独立である。安さんと美さんが大会中に対戦する確率は 1/k である。k を求めなさい。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 8。",
+        "zh-Hans": "答案是 8。",
+        "en": "The answer is 8.",
+        "ja": "答えは 8 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "每場比賽恰好淘汰一人，最後剩下冠軍，所以不論結果如何，總共一定進行 16 − 1 = 15 場比賽。",
+          "16 人中的兩人組共有 C(16, 2) = 120 組。每場比賽恰好由一組兩人對戰，而同一組兩人最多對戰一次（輸的人已淘汰），所以「有對戰過的兩人組」的個數恰好等於比賽場數 15。",
+          "選手實力相當、配對隨機，任兩人的處境完全一樣，所以每一組兩人對戰過的機率都相同，設為 p。對戰過的組數的期望值是 120 組各自機率的和 = 120p。",
+          "但對戰過的組數永遠是 15，期望值就是 15，所以 120p = 15，p = 1/8。",
+          "小安與小美對戰過的機率是 1/8，k = 8。"
+        ],
+        "zh-Hans": [
+          "每场比赛恰好淘汰一人，最后剩下冠军，所以不论结果如何，总共一定进行 16 − 1 = 15 场比赛。",
+          "16 人中的两人组共有 C(16, 2) = 120 组。每场比赛恰好由一组两人对战，而同一组两人最多对战一次（输的人已淘汰），所以「有对战过的两人组」的个数恰好等于比赛场数 15。",
+          "选手实力相当、配对随机，任两人的处境完全一样，所以每一组两人对战过的概率都相同，设为 p。对战过的组数的期望值是 120 组各自概率的和 = 120p。",
+          "但对战过的组数永远是 15，期望值就是 15，所以 120p = 15，p = 1/8。",
+          "小安与小美对战过的概率是 1/8，k = 8。"
+        ],
+        "en": [
+          "Each match eliminates exactly one player and a champion remains, so whatever happens there are always 16 − 1 = 15 matches.",
+          "There are C(16, 2) = 120 pairs of players. Each match is played by exactly one pair, and a pair meets at most once (the loser is eliminated), so the number of pairs that meet is exactly the number of matches, 15.",
+          "The players are equally strong and pairings are random, so every pair is in exactly the same situation and all pairs meet with the same probability p. The expected number of pairs that meet is the sum of the 120 probabilities, 120p.",
+          "But the number of pairs that meet is always 15, so its expectation is 15: 120p = 15 and p = 1/8.",
+          "An and Mei meet with probability 1/8, so k = 8."
+        ],
+        "ja": [
+          "各試合でちょうど 1 人が脱落し、最後に優勝者が残るので、結果にかかわらず試合数は必ず 16 − 1 = 15 試合。",
+          "16 人から 2 人の組は C(16, 2) = 120 組。各試合はちょうど 1 組が戦い、同じ 2 人が対戦するのは多くても 1 回（負けた人は脱落する）なので、「対戦した 2 人組」の数は試合数 15 とちょうど等しい。",
+          "選手の実力は等しく組み合わせはランダムなので、どの 2 人組も全く同じ立場にあり、対戦する確率はすべて等しい。これを p とする。対戦した組の数の期待値は 120 組の確率の和 120p。",
+          "ところが対戦した組の数はいつも 15 なので期待値も 15。よって 120p = 15、p = 1/8。",
+          "安さんと美さんが対戦する確率は 1/8 で、k = 8。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "8"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "combinatorics-grade10-foundation",
+        "notes": "比賽場數恆為 15、每對對稱，用期望值線性：120p = 15。掃過 /淘汰賽|對戰.*機率|遇到.*機率|單淘汰/（4 題）；最接近 logic_grade10_foundation_018（64 隊單淘汰共幾場），差異：該題只算場數；本題把固定場數與對稱性結合，用期望值線性求特定兩人相遇機率"
+      }
     }
   ]
 }

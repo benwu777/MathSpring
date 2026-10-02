@@ -5009,6 +5009,457 @@
         "reference": "number-theory-grade10-foundation",
         "notes": "nⁿ 為平方數：n 偶數必成立；n 奇數時指數 e × n 的奇偶由 e 決定，故 n 須為平方數。掃過 /ⁿ.*完全平方|完全平方.*ⁿ|的 n 次方/（2 題）；最接近 number_theory_grade9_foundation_020（1～100 中因數個數為奇數的數），差異：該題就是數平方數；本題需分 n 的奇偶，並以質因數指數乘積的奇偶判斷"
       }
+    },
+    {
+      "id": "number_theory_grade10_foundation_057",
+      "reviewStatus": "ok",
+      "topic": "number_theory",
+      "subtopic": "smallest_number_with_given_digit_product",
+      "tags": [
+        "c:place_value",
+        "c:factor_multiple",
+        "m:extremal"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一個正整數的各位數字全部相乘，乘積恰好是 3600。在所有這樣的正整數之中，最小的是多少？",
+        "zh-Hans": "一个正整数的各位数字全部相乘，乘积恰好是 3600。在所有这样的正整数之中，最小的是多少？",
+        "en": "The product of all the digits of a positive integer is exactly 3600. Among all such positive integers, what is the smallest?",
+        "ja": "ある正の整数の各位の数字をすべて掛け合わせると、積がちょうど 3600 になる。このような正の整数のうち、最小のものはいくつか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 25589。",
+        "zh-Hans": "答案是 25589。",
+        "en": "The answer is 25589.",
+        "ja": "答えは 25589 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "3600 = 2⁴ × 3² × 5²。任何一位都不能是 0（否則乘積是 0）；數字 1 不改變乘積、只會多佔一位，而位數越少的數越小，所以最小的數不會用到 1。",
+          "質因數 5 只能由數字 5 提供（1～9 之中只有 5 是 5 的倍數），而 5² 表示恰好要有兩個數字是 5。",
+          "其餘數字的乘積是 2⁴ × 3² = 144，只能從 2、3、4、6、8、9 中選。兩個數字的乘積最多是 9 × 9 = 81 < 144，所以其餘數字至少要 3 個，整個數至少 5 位；而任何 5 位數都比 6 位以上的數小，所以只要找 5 位的。",
+          "用 3 個數字湊出 144：若有 9，另兩個的乘積是 16，得 {2, 8, 9} 或 {4, 4, 9}；若沒有 9，因數 3² 要由兩個含 3 的數字（3 或 6）分攤：3 和 3 剩下 16 不是一位數；3 和 6 剩下 8，得 {3, 6, 8}；6 和 6 剩下 4，得 {4, 6, 6}。",
+          "加上兩個 5 之後，四組數字由小到大排列（同一組數字這樣排最小）：25589、44559、35568、45566。比較最高位，最小的是 25589。"
+        ],
+        "zh-Hans": [
+          "3600 = 2⁴ × 3² × 5²。任何一位都不能是 0（否则乘积是 0）；数字 1 不改变乘积、只会多占一位，而位数越少的数越小，所以最小的数不会用到 1。",
+          "质因数 5 只能由数字 5 提供（1～9 之中只有 5 是 5 的倍数），而 5² 表示恰好要有两个数字是 5。",
+          "其余数字的乘积是 2⁴ × 3² = 144，只能从 2、3、4、6、8、9 中选。两个数字的乘积最多是 9 × 9 = 81 < 144，所以其余数字至少要 3 个，整个数至少 5 位；而任何 5 位数都比 6 位以上的数小，所以只要找 5 位的。",
+          "用 3 个数字凑出 144：若有 9，另两个的乘积是 16，得 {2, 8, 9} 或 {4, 4, 9}；若没有 9，因数 3² 要由两个含 3 的数字（3 或 6）分摊：3 和 3 剩下 16 不是一位数；3 和 6 剩下 8，得 {3, 6, 8}；6 和 6 剩下 4，得 {4, 6, 6}。",
+          "加上两个 5 之后，四组数字由小到大排列（同一组数字这样排最小）：25589、44559、35568、45566。比较最高位，最小的是 25589。"
+        ],
+        "en": [
+          "3600 = 2⁴ × 3² × 5². No digit can be 0 (the product would be 0); a digit 1 does not change the product but adds a digit, and fewer digits means a smaller number, so the smallest number uses no 1.",
+          "The prime factor 5 can only come from the digit 5 (among 1–9 only 5 is a multiple of 5), and 5² means exactly two digits are 5.",
+          "The remaining digits multiply to 2⁴ × 3² = 144 and must come from 2, 3, 4, 6, 8, 9. Two digits multiply to at most 9 × 9 = 81 < 144, so at least 3 more digits are needed and the number has at least 5 digits; any 5-digit number is smaller than any number with 6 or more digits, so we look for 5 digits.",
+          "Three digits with product 144: with a 9, the other two multiply to 16, giving {2, 8, 9} or {4, 4, 9}; without a 9, the factor 3² must be shared by two digits containing 3 (that is, 3 or 6): 3 and 3 leave 16, not a digit; 3 and 6 leave 8, giving {3, 6, 8}; 6 and 6 leave 4, giving {4, 6, 6}.",
+          "Adding the two 5s and writing each set in increasing order (the smallest arrangement of a given set of digits): 25589, 44559, 35568, 45566. Comparing leading digits, the smallest is 25589."
+        ],
+        "ja": [
+          "3600 = 2⁴ × 3² × 5²。どの位も 0 ではいけない（積が 0 になる）。数字 1 は積を変えずに桁を増やすだけで、桁数が少ないほど数は小さいので、最小の数は 1 を使わない。",
+          "素因数 5 は数字 5 からしか得られない（1～9 で 5 の倍数は 5 だけ）。5² なので、5 はちょうど 2 個必要である。",
+          "残りの数字の積は 2⁴ × 3² = 144 で、2、3、4、6、8、9 から選ぶ。2 つの数字の積は最大でも 9 × 9 = 81 < 144 なので残りは少なくとも 3 個、全体で少なくとも 5 桁。5 桁の数は 6 桁以上のどの数よりも小さいので、5 桁で探せばよい。",
+          "3 つの数字で 144 を作る：9 を含むなら残り 2 つの積は 16 で {2, 8, 9} か {4, 4, 9}。9 を含まないなら、3² は 3 を含む 2 つの数字（3 か 6）で分け合う。3 と 3 なら残り 16 で 1 桁にならない。3 と 6 なら残り 8 で {3, 6, 8}。6 と 6 なら残り 4 で {4, 6, 6}。",
+          "5 を 2 つ加え、各組を小さい順に並べる（同じ数字の組ではこれが最小）と 25589、44559、35568、45566。最上位を比べて、最小は 25589。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "25589"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 5
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "number-theory-grade10-foundation",
+        "notes": "數字乘積固定時，先由質因數 5 定出兩個 5，再用「兩位數字乘積 ≤ 81」定最少位數，列舉三數字組合求最小排列。掃過 /數字.*乘積|乘積.*數字|各位數字相乘/（16 題）；最接近 number_theory_grade8_foundation_008（兩位數的數字乘積加數字和等於本身），差異：該題是兩位數的一條方程；本題是給定數字乘積求最小數，要用質因數分配與位數下界"
+      }
+    },
+    {
+      "id": "number_theory_grade10_foundation_058",
+      "reviewStatus": "ok",
+      "topic": "number_theory",
+      "subtopic": "prime_factor_of_central_binomial_coefficient",
+      "tags": [
+        "c:factor_multiple",
+        "c:binomial",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "C(200, 100) 表示從 200 個不同物件中取 100 個的方法數，它等於 200! ÷ (100! × 100!)，其中 n! = 1 × 2 × ⋯ × n。在 C(200, 100) 的質因數之中，最大的兩位數質數是多少？",
+        "zh-Hans": "C(200, 100) 表示从 200 个不同物件中取 100 个的方法数，它等于 200! ÷ (100! × 100!)，其中 n! = 1 × 2 × ⋯ × n。在 C(200, 100) 的质因数之中，最大的两位数质数是多少？",
+        "en": "C(200, 100) denotes the number of ways to choose 100 objects from 200 distinct objects; it equals 200! ÷ (100! × 100!), where n! = 1 × 2 × ⋯ × n. What is the largest two-digit prime that is a prime factor of C(200, 100)?",
+        "ja": "C(200, 100) は異なる 200 個のものから 100 個を選ぶ方法の数で、200! ÷ (100! × 100!) に等しい（n! = 1 × 2 × ⋯ × n）。C(200, 100) の素因数のうち、最大の 2 桁の素数はいくつか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 61。",
+        "zh-Hans": "答案是 61。",
+        "en": "The answer is 61.",
+        "ja": "答えは 61 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "質數 p 在 n! 裡出現的次數是 ⌊n/p⌋ + ⌊n/p²⌋ + ⋯（⌊t⌋ 表示不超過 t 的最大整數）：1 到 n 中有 ⌊n/p⌋ 個 p 的倍數各貢獻一個 p，其中 p² 的倍數再多貢獻一個，依此類推。",
+          "當 p ≥ 17 時 p² ≥ 289 > 200，所以 p 在 200! 中出現 ⌊200/p⌋ 次、在 100! 中出現 ⌊100/p⌋ 次，p 在 C(200, 100) 中出現 ⌊200/p⌋ − 2⌊100/p⌋ 次；這個數大於 0 時 p 才是質因數。",
+          "從大的兩位數質數檢查：97、89、83、79、73、71、67 都大於 200 ÷ 3 ≈ 66.7，所以 2p ≤ 200 < 3p，⌊200/p⌋ = 2；又 p ≤ 100 < 2p，⌊100/p⌋ = 1。次數 2 − 2 × 1 = 0，它們都不整除 C(200, 100)。",
+          "p = 61：61 × 3 = 183 ≤ 200 < 244，所以 ⌊200/61⌋ = 3；⌊100/61⌋ = 1。次數 3 − 2 = 1 > 0，所以 61 整除 C(200, 100)。",
+          "因此最大的兩位數質因數是 61。"
+        ],
+        "zh-Hans": [
+          "质数 p 在 n! 里出现的次数是 ⌊n/p⌋ + ⌊n/p²⌋ + ⋯（⌊t⌋ 表示不超过 t 的最大整数）：1 到 n 中有 ⌊n/p⌋ 个 p 的倍数各贡献一个 p，其中 p² 的倍数再多贡献一个，依此类推。",
+          "当 p ≥ 17 时 p² ≥ 289 > 200，所以 p 在 200! 中出现 ⌊200/p⌋ 次、在 100! 中出现 ⌊100/p⌋ 次，p 在 C(200, 100) 中出现 ⌊200/p⌋ − 2⌊100/p⌋ 次；这个数大于 0 时 p 才是质因数。",
+          "从大的两位数质数检查：97、89、83、79、73、71、67 都大于 200 ÷ 3 ≈ 66.7，所以 2p ≤ 200 < 3p，⌊200/p⌋ = 2；又 p ≤ 100 < 2p，⌊100/p⌋ = 1。次数 2 − 2 × 1 = 0，它们都不整除 C(200, 100)。",
+          "p = 61：61 × 3 = 183 ≤ 200 < 244，所以 ⌊200/61⌋ = 3；⌊100/61⌋ = 1。次数 3 − 2 = 1 > 0，所以 61 整除 C(200, 100)。",
+          "因此最大的两位数质因数是 61。"
+        ],
+        "en": [
+          "The number of times a prime p appears in n! is ⌊n/p⌋ + ⌊n/p²⌋ + ⋯ (⌊t⌋ is the greatest integer not exceeding t): the ⌊n/p⌋ multiples of p in 1 to n contribute one p each, multiples of p² contribute one more, and so on.",
+          "For p ≥ 17, p² ≥ 289 > 200, so p appears ⌊200/p⌋ times in 200! and ⌊100/p⌋ times in 100!; hence p appears ⌊200/p⌋ − 2⌊100/p⌋ times in C(200, 100), and p is a prime factor exactly when this is positive.",
+          "Check the large two-digit primes: 97, 89, 83, 79, 73, 71, 67 all exceed 200 ÷ 3 ≈ 66.7, so 2p ≤ 200 < 3p and ⌊200/p⌋ = 2; also p ≤ 100 < 2p, so ⌊100/p⌋ = 1. The count is 2 − 2 × 1 = 0, so none of them divides C(200, 100).",
+          "p = 61: 61 × 3 = 183 ≤ 200 < 244, so ⌊200/61⌋ = 3, and ⌊100/61⌋ = 1. The count is 3 − 2 = 1 > 0, so 61 divides C(200, 100).",
+          "Therefore the largest two-digit prime factor is 61."
+        ],
+        "ja": [
+          "素数 p が n! に現れる回数は ⌊n/p⌋ + ⌊n/p²⌋ + ⋯ である（⌊t⌋ は t を超えない最大の整数）。1 から n までの p の倍数 ⌊n/p⌋ 個がそれぞれ p を 1 つ与え、p² の倍数はさらに 1 つ与え、以下同様である。",
+          "p ≥ 17 では p² ≥ 289 > 200 なので、p は 200! に ⌊200/p⌋ 回、100! に ⌊100/p⌋ 回現れる。よって C(200, 100) には ⌊200/p⌋ − 2⌊100/p⌋ 回現れ、これが正のときに限り p は素因数である。",
+          "大きい 2 桁の素数から調べる。97、89、83、79、73、71、67 はどれも 200 ÷ 3 ≈ 66.7 より大きいので 2p ≤ 200 < 3p、⌊200/p⌋ = 2。また p ≤ 100 < 2p なので ⌊100/p⌋ = 1。回数は 2 − 2 × 1 = 0 で、どれも C(200, 100) を割り切らない。",
+          "p = 61：61 × 3 = 183 ≤ 200 < 244 なので ⌊200/61⌋ = 3、⌊100/61⌋ = 1。回数は 3 − 2 = 1 > 0 なので、61 は C(200, 100) を割り切る。",
+          "よって最大の 2 桁の素因数は 61。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "61"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "number-theory-grade10-foundation",
+        "notes": "用勒讓德公式比較 200! 與 (100!)² 中 p 的次數，p > 200/3 時次數相消為 0。掃過 /C\\(200|200!|二項係數.*質因數|組合數.*質因數/（0 題）；最接近 number_theory_grade12_foundation_012（100! 中 3 的最高次方），差異：該題只算一個階乘中的次數；本題要比較分子分母次數，並用 p 與 200/3 的大小一次排除一整段質數"
+      }
+    },
+    {
+      "id": "number_theory_grade10_foundation_059",
+      "reviewStatus": "ok",
+      "topic": "number_theory",
+      "subtopic": "power_of_ten_factor_pairs_contain_zero",
+      "tags": [
+        "c:factor_multiple",
+        "c:place_value",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "求最小的正整數 n，使得不論把 10ⁿ 怎樣寫成兩個正整數的乘積，這兩個因數之中至少有一個含有數字 0。",
+        "zh-Hans": "求最小的正整数 n，使得不论把 10ⁿ 怎样写成两个正整数的乘积，这两个因数之中至少有一个含有数字 0。",
+        "en": "Find the smallest positive integer n such that, no matter how 10ⁿ is written as a product of two positive integers, at least one of the two factors contains the digit 0.",
+        "ja": "10ⁿ を 2 つの正の整数の積としてどのように表しても、2 つの因数の少なくとも一方が数字 0 を含むようになる最小の正の整数 n を求めなさい。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 8。",
+        "zh-Hans": "答案是 8。",
+        "en": "The answer is 8.",
+        "ja": "答えは 8 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "10ⁿ = 2ⁿ × 5ⁿ，所以任一個因數都是 2ˣ × 5ʸ（0 ≤ x、y ≤ n），另一個是 2ⁿ⁻ˣ × 5ⁿ⁻ʸ。一個數若同時含因數 2 和 5，就是 10 的倍數，個位是 0。",
+          "要讓兩個因數都不是 10 的倍數：第一個因數若 x ≥ 1 則必須 y = 0，這時第二個因數含 5ⁿ，必須不含 2，所以 x = n；若 x = 0，則第二個因數含 2ⁿ，必須不含 5，所以 y = n。兩種情形都是把 10ⁿ 拆成 2ⁿ 與 5ⁿ。",
+          "其他拆法至少有一個因數是 10 的倍數，一定含 0。所以題目的條件等價於：2ⁿ 或 5ⁿ 裡含有數字 0。",
+          "逐一檢查：n = 1 到 8 時 2ⁿ 是 2、4、8、16、32、64、128、256，都不含 0；5ⁿ 是 5、25、125、625、3125、15625、78125、390625。n ≤ 7 時兩者都不含 0，所以 10ⁿ = 2ⁿ × 5ⁿ 是一組兩個因數都不含 0 的拆法；n = 8 時 5⁸ = 390625 含 0。",
+          "所以最小的 n 是 8。"
+        ],
+        "zh-Hans": [
+          "10ⁿ = 2ⁿ × 5ⁿ，所以任一个因数都是 2ˣ × 5ʸ（0 ≤ x、y ≤ n），另一个是 2ⁿ⁻ˣ × 5ⁿ⁻ʸ。一个数若同时含因数 2 和 5，就是 10 的倍数，个位是 0。",
+          "要让两个因数都不是 10 的倍数：第一个因数若 x ≥ 1 则必须 y = 0，这时第二个因数含 5ⁿ，必须不含 2，所以 x = n；若 x = 0，则第二个因数含 2ⁿ，必须不含 5，所以 y = n。两种情形都是把 10ⁿ 拆成 2ⁿ 与 5ⁿ。",
+          "其他拆法至少有一个因数是 10 的倍数，一定含 0。所以题目的条件等价于：2ⁿ 或 5ⁿ 里含有数字 0。",
+          "逐一检查：n = 1 到 8 时 2ⁿ 是 2、4、8、16、32、64、128、256，都不含 0；5ⁿ 是 5、25、125、625、3125、15625、78125、390625。n ≤ 7 时两者都不含 0，所以 10ⁿ = 2ⁿ × 5ⁿ 是一组两个因数都不含 0 的拆法；n = 8 时 5⁸ = 390625 含 0。",
+          "所以最小的 n 是 8。"
+        ],
+        "en": [
+          "10ⁿ = 2ⁿ × 5ⁿ, so each factor is 2ˣ × 5ʸ (0 ≤ x, y ≤ n) and the other is 2ⁿ⁻ˣ × 5ⁿ⁻ʸ. A number containing both factors 2 and 5 is a multiple of 10 and ends in 0.",
+          "For neither factor to be a multiple of 10: if x ≥ 1 in the first factor then y = 0, so the second factor contains 5ⁿ and must contain no 2, giving x = n; if x = 0, the second factor contains 2ⁿ and must contain no 5, giving y = n. Either way 10ⁿ is split as 2ⁿ and 5ⁿ.",
+          "Every other split has a factor that is a multiple of 10, which contains 0. So the condition is equivalent to: 2ⁿ or 5ⁿ contains the digit 0.",
+          "Check in turn: for n = 1 to 8, 2ⁿ is 2, 4, 8, 16, 32, 64, 128, 256, none containing 0; 5ⁿ is 5, 25, 125, 625, 3125, 15625, 78125, 390625. For n ≤ 7 neither contains 0, so 10ⁿ = 2ⁿ × 5ⁿ is a split with no 0 in either factor; for n = 8, 5⁸ = 390625 contains 0.",
+          "So the smallest n is 8."
+        ],
+        "ja": [
+          "10ⁿ = 2ⁿ × 5ⁿ なので、一方の因数は 2ˣ × 5ʸ（0 ≤ x、y ≤ n）、もう一方は 2ⁿ⁻ˣ × 5ⁿ⁻ʸ。因数 2 と 5 を両方含む数は 10 の倍数で、一の位が 0 になる。",
+          "どちらの因数も 10 の倍数でないためには：1 つ目で x ≥ 1 なら y = 0 で、2 つ目は 5ⁿ を含むので 2 を含んではならず x = n。x = 0 なら 2 つ目は 2ⁿ を含むので 5 を含んではならず y = n。どちらの場合も 10ⁿ を 2ⁿ と 5ⁿ に分ける形である。",
+          "それ以外の分け方では一方の因数が 10 の倍数となり必ず 0 を含む。よって条件は「2ⁿ か 5ⁿ が数字 0 を含む」と同値。",
+          "順に調べる：n = 1 から 8 で 2ⁿ は 2、4、8、16、32、64、128、256 でどれも 0 を含まない。5ⁿ は 5、25、125、625、3125、15625、78125、390625。n ≤ 7 では両方とも 0 を含まないので 10ⁿ = 2ⁿ × 5ⁿ が 0 を含まない分け方になる。n = 8 では 5⁸ = 390625 が 0 を含む。",
+          "よって最小の n は 8。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "8"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "number-theory-grade10-foundation",
+        "notes": "10ⁿ 的拆法中只有 2ⁿ × 5ⁿ 可能兩個因數都不是 10 的倍數，於是只需找 2ⁿ 或 5ⁿ 首次出現數字 0。掃過 /數字 0|含有 0|10ⁿ/（8 題）；最接近 number_theory_grade10_foundation_013（n/2 為平方數、n/3 為立方數的最小 n），差異：該題是指數同餘條件；本題要先論證唯一可能不含 0 的拆法是 2ⁿ × 5ⁿ，再逐次檢查數字"
+      }
+    },
+    {
+      "id": "number_theory_grade10_foundation_060",
+      "reviewStatus": "ok",
+      "topic": "number_theory",
+      "subtopic": "lcm_of_first_n_changes_at_prime_powers",
+      "tags": [
+        "c:factor_multiple",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "用 L(n) 表示 1、2、3、⋯、n 這 n 個數的最小公倍數。在 n = 2、3、4、⋯、100 之中，有幾個 n 使得 L(n) 不等於 L(n − 1)？",
+        "zh-Hans": "用 L(n) 表示 1、2、3、⋯、n 这 n 个数的最小厘倍数。在 n = 2、3、4、⋯、100 之中，有几个 n 使得 L(n) 不等于 L(n − 1)？",
+        "en": "Let L(n) denote the least common multiple of 1, 2, 3, …, n. For how many n among 2, 3, 4, …, 100 is L(n) different from L(n − 1)?",
+        "ja": "L(n) を 1、2、3、…、n の最小公倍数とする。n = 2、3、4、…、100 のうち、L(n) が L(n − 1) と異なるものはいくつあるか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 35。",
+        "zh-Hans": "答案是 35。",
+        "en": "The answer is 35.",
+        "ja": "答えは 35 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "L(n) 是 L(n − 1) 與 n 的最小公倍數，所以 L(n) ≠ L(n − 1) 若且唯若 n 不整除 L(n − 1)。",
+          "若 n 至少有兩個不同的質因數，可以寫成 n = a × b，a、b 互質且都大於 1，於是 a、b 都小於 n，都整除 L(n − 1)；互質的兩數都整除 L(n − 1)，乘積 n 也整除，所以 L(n) = L(n − 1)。",
+          "若 n = pᵏ（p 是質數，k ≥ 1），比 n 小的正整數都不是 pᵏ 的倍數，所以它們所含 p 的次數都小於 k，L(n − 1) 所含 p 的次數也小於 k，n 不整除 L(n − 1)，L(n) ≠ L(n − 1)。",
+          "所以要數 2 到 100 的質數次方：質數 25 個；平方 4、9、25、49 共 4 個；立方 8、27 共 2 個；四次方 16、81 共 2 個；五次方 32、六次方 64 各 1 個（2⁷ = 128 已超過 100）。",
+          "合計 25 + 4 + 2 + 2 + 1 + 1 = 35 個。"
+        ],
+        "zh-Hans": [
+          "L(n) 是 L(n − 1) 与 n 的最小厘倍数，所以 L(n) ≠ L(n − 1) 若且唯若 n 不整除 L(n − 1)。",
+          "若 n 至少有两个不同的质因数，可以写成 n = a × b，a、b 互质且都大于 1，于是 a、b 都小于 n，都整除 L(n − 1)；互质的两数都整除 L(n − 1)，乘积 n 也整除，所以 L(n) = L(n − 1)。",
+          "若 n = pᵏ（p 是质数，k ≥ 1），比 n 小的正整数都不是 pᵏ 的倍数，所以它们所含 p 的次数都小于 k，L(n − 1) 所含 p 的次数也小于 k，n 不整除 L(n − 1)，L(n) ≠ L(n − 1)。",
+          "所以要数 2 到 100 的质数次方：质数 25 个；平方 4、9、25、49 共 4 个；立方 8、27 共 2 个；四次方 16、81 共 2 个；五次方 32、六次方 64 各 1 个（2⁷ = 128 已超过 100）。",
+          "合计 25 + 4 + 2 + 2 + 1 + 1 = 35 个。"
+        ],
+        "en": [
+          "L(n) is the lcm of L(n − 1) and n, so L(n) ≠ L(n − 1) exactly when n does not divide L(n − 1).",
+          "If n has at least two different prime factors, write n = a × b with a, b coprime and both greater than 1; then a, b are less than n and both divide L(n − 1); two coprime numbers dividing L(n − 1) means their product n divides it, so L(n) = L(n − 1).",
+          "If n = pᵏ (p prime, k ≥ 1), no positive integer smaller than n is a multiple of pᵏ, so each contains p to a power less than k, hence so does L(n − 1); n does not divide L(n − 1) and L(n) ≠ L(n − 1).",
+          "So we count prime powers from 2 to 100: 25 primes; squares 4, 9, 25, 49 (4); cubes 8, 27 (2); fourth powers 16, 81 (2); the fifth power 32 and sixth power 64 (1 each; 2⁷ = 128 exceeds 100).",
+          "In total 25 + 4 + 2 + 2 + 1 + 1 = 35."
+        ],
+        "ja": [
+          "L(n) は L(n − 1) と n の最小公倍数なので、L(n) ≠ L(n − 1) となるのは n が L(n − 1) を割り切らないときに限る。",
+          "n が異なる素因数を 2 つ以上もつなら、n = a × b（a、b は互いに素で 1 より大きい）と書け、a、b は n より小さいのでどちらも L(n − 1) を割り切る。互いに素な 2 数が L(n − 1) を割り切るので積 n も割り切り、L(n) = L(n − 1)。",
+          "n = pᵏ（p は素数、k ≥ 1）なら、n より小さい正の整数は pᵏ の倍数ではないので、含む p の個数はどれも k 未満で、L(n − 1) に含まれる p の個数も k 未満。よって n は L(n − 1) を割り切らず L(n) ≠ L(n − 1)。",
+          "したがって 2 から 100 の素数の累乗を数える：素数 25 個、平方 4、9、25、49 の 4 個、3 乗 8、27 の 2 個、4 乗 16、81 の 2 個、5 乗 32 と 6 乗 64 が 1 個ずつ（2⁷ = 128 は 100 を超える）。",
+          "合計 25 + 4 + 2 + 2 + 1 + 1 = 35 個。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "35"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "number-theory-grade10-foundation",
+        "notes": "lcm(1..n) 只在 n 是質數次方時改變，數 2～100 的質數次方。掃過 /最小公倍數/（9 題）；最接近 number_theory_grade9_foundation_029（lcm(a, b) = 12 的有序數對數），差異：該題是固定 lcm 數數對；本題研究 lcm(1..n) 何時增大，關鍵是質數次方的判別"
+      }
+    },
+    {
+      "id": "number_theory_grade10_foundation_061",
+      "reviewStatus": "ok",
+      "topic": "number_theory",
+      "subtopic": "power_tower_exponents_mod_seven",
+      "tags": [
+        "c:modular",
+        "c:exponent",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "設 S = 10¹⁰ + 10¹⁰⁰ + 10¹⁰⁰⁰ + ⋯，一共 10 項，第 k 項是 10 的 (10ᵏ) 次方（k = 1、2、⋯、10，最後一項是 10 的 10¹⁰ 次方）。求 S 除以 7 的餘數。",
+        "zh-Hans": "设 S = 10¹⁰ + 10¹⁰⁰ + 10¹⁰⁰⁰ + ⋯，一共 10 项，第 k 项是 10 的 (10ᵏ) 次方（k = 1、2、⋯、10，最后一项是 10 的 10¹⁰ 次方）。求 S 除以 7 的余数。",
+        "en": "Let S = 10¹⁰ + 10¹⁰⁰ + 10¹⁰⁰⁰ + ⋯ with 10 terms in all, where the k-th term is 10 raised to the power 10ᵏ (k = 1, 2, …, 10; the last term is 10 to the power 10¹⁰). Find the remainder when S is divided by 7.",
+        "ja": "S = 10¹⁰ + 10¹⁰⁰ + 10¹⁰⁰⁰ + ⋯ とし、項は全部で 10 個、第 k 項は 10 の (10ᵏ) 乗とする（k = 1、2、…、10。最後の項は 10 の 10¹⁰ 乗）。S を 7 で割った余りを求めなさい。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 5。",
+        "zh-Hans": "答案是 5。",
+        "en": "The answer is 5.",
+        "ja": "答えは 5 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "10 的次方除以 7 的餘數：10¹ 餘 3、10² 餘 2、10³ 餘 6、10⁴ 餘 4、10⁵ 餘 5、10⁶ 餘 1（每次把上一個餘數乘 3 再除以 7）。因為 10⁶ 餘 1，乘上 10⁶ 不改變餘數，所以 10 的 m 次方除以 7 的餘數只由 m 除以 6 的餘數決定。",
+          "每一項的指數 10ᵏ（k ≥ 1）是偶數；又 10 除以 3 餘 1，所以 10ᵏ 除以 3 也餘 1。除以 6 的餘數中，是偶數且除以 3 餘 1 的只有 4，所以每個指數 10ᵏ 除以 6 都餘 4。",
+          "因此每一項除以 7 的餘數都和 10⁴ 一樣，是 4（10⁴ = 10000 = 7 × 1428 + 4）。",
+          "10 項的餘數總和是 10 × 4 = 40，40 = 5 × 7 + 5，所以 S 除以 7 餘 5。"
+        ],
+        "zh-Hans": [
+          "10 的次方除以 7 的余数：10¹ 余 3、10² 余 2、10³ 余 6、10⁴ 余 4、10⁵ 余 5、10⁶ 余 1（每次把上一个余数乘 3 再除以 7）。因为 10⁶ 余 1，乘上 10⁶ 不改变余数，所以 10 的 m 次方除以 7 的余数只由 m 除以 6 的余数决定。",
+          "每一项的指数 10ᵏ（k ≥ 1）是偶数；又 10 除以 3 余 1，所以 10ᵏ 除以 3 也余 1。除以 6 的余数中，是偶数且除以 3 余 1 的只有 4，所以每个指数 10ᵏ 除以 6 都余 4。",
+          "因此每一项除以 7 的余数都和 10⁴ 一样，是 4（10⁴ = 10000 = 7 × 1428 + 4）。",
+          "10 项的余数总和是 10 × 4 = 40，40 = 5 × 7 + 5，所以 S 除以 7 余 5。"
+        ],
+        "en": [
+          "Remainders of powers of 10 mod 7: 10¹ → 3, 10² → 2, 10³ → 6, 10⁴ → 4, 10⁵ → 5, 10⁶ → 1 (each time multiply the previous remainder by 3 and reduce mod 7). Since 10⁶ leaves 1, multiplying by 10⁶ does not change the remainder, so the remainder of 10ᵐ mod 7 depends only on m mod 6.",
+          "Each exponent 10ᵏ (k ≥ 1) is even; also 10 leaves remainder 1 mod 3, so 10ᵏ leaves 1 mod 3. Among remainders mod 6, the only one that is even and leaves 1 mod 3 is 4, so every exponent 10ᵏ leaves remainder 4 mod 6.",
+          "Hence every term leaves the same remainder as 10⁴ when divided by 7, namely 4 (10⁴ = 10000 = 7 × 1428 + 4).",
+          "The 10 remainders add up to 10 × 4 = 40 = 5 × 7 + 5, so S leaves remainder 5 when divided by 7."
+        ],
+        "ja": [
+          "10 の累乗を 7 で割った余り：10¹ は 3、10² は 2、10³ は 6、10⁴ は 4、10⁵ は 5、10⁶ は 1（前の余りに 3 を掛けて 7 で割る）。10⁶ の余りが 1 なので、10⁶ を掛けても余りは変わらず、10 の m 乗の余りは m を 6 で割った余りだけで決まる。",
+          "各項の指数 10ᵏ（k ≥ 1）は偶数である。また 10 を 3 で割ると 1 余るので、10ᵏ を 3 で割っても 1 余る。6 で割った余りのうち偶数で 3 で割ると 1 余るものは 4 だけなので、どの指数 10ᵏ も 6 で割ると 4 余る。",
+          "よってどの項も 7 で割った余りは 10⁴ と同じ 4 である（10⁴ = 10000 = 7 × 1428 + 4）。",
+          "10 項の余りの和は 10 × 4 = 40 = 5 × 7 + 5 なので、S を 7 で割った余りは 5。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "5"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "number-theory-grade10-foundation",
+        "notes": "10 的次方模 7 週期 6，指數 10ᵏ 模 6 恆為 4，所以每項同餘。掃過 /除以 7 的餘數|10¹⁰|次方.*除以 7/（6 題）；最接近 number_theory_grade12_foundation_006（2⁰ + ⋯ + 2¹⁰⁰ 除以 7），差異：該題指數連續、按週期分組；本題指數本身是 10 的次方，要再算指數模 6 的餘數（兩層週期）"
+      }
+    },
+    {
+      "id": "number_theory_grade10_foundation_062",
+      "reviewStatus": "ok",
+      "topic": "number_theory",
+      "subtopic": "pandigital_multiples_of_eleven",
+      "tags": [
+        "c:modular",
+        "c:permutation_combination",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "把 1、2、3、⋯、9 這九個數字各用一次，排成一個九位數。這樣的九位數之中，是 11 的倍數的共有幾個？",
+        "zh-Hans": "把 1、2、3、⋯、9 这九个数字各用一次，排成一个九位数。这样的九位数之中，是 11 的倍数的共有几个？",
+        "en": "Using each of the nine digits 1, 2, 3, …, 9 exactly once, form a nine-digit number. How many of these nine-digit numbers are multiples of 11?",
+        "ja": "1、2、3、…、9 の 9 個の数字を 1 回ずつ使って 9 桁の数を作る。このような 9 桁の数のうち、11 の倍数はいくつあるか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 31680。",
+        "zh-Hans": "答案是 31680。",
+        "en": "The answer is 31680.",
+        "ja": "答えは 31680 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "10 除以 11 餘 10，也就是比 11 的倍數少 1，所以 10、10³、10⁵、⋯ 除以 11 的效果像 −1，10²、10⁴、⋯ 像 +1。因此一個數除以 11 的餘數，和「從個位起的奇數位數字和減去偶數位數字和」相同。九位數的個位是由左數第 9 位，所以令 A = 由左數第 1、3、5、7、9 位這 5 個數字的和，B = 第 2、4、6、8 位這 4 個數字的和，這個數是 11 的倍數若且唯若 A − B 是 11 的倍數。",
+          "A + B = 1 + 2 + ⋯ + 9 = 45，所以 A − B = 45 − 2B 是奇數。B 是 4 個不同數字之和，介於 1 + 2 + 3 + 4 = 10 與 6 + 7 + 8 + 9 = 30 之間，A − B 介於 −15 與 25 之間。這範圍內是 11 的倍數的奇數只有 −11 與 11，對應 B = 28 或 B = 17。",
+          "B = 17 的 4 個數字：最小數是 1 時，另三個從 2～9 中選、和為 16：{2, 5, 9}、{2, 6, 8}、{3, 4, 9}、{3, 5, 8}、{3, 6, 7}、{4, 5, 7}，6 組；最小數是 2 時，另三個從 3～9 中選、和為 15：{3, 4, 8}、{3, 5, 7}、{4, 5, 6}，3 組；最小數是 3 以上時，另三個至少 4 + 5 + 6 = 15，總和超過 17，不可能。共 9 組。",
+          "B = 28 時，其餘 5 個數字和為 17，而 5 個不同數字的和最小是 1 + 2 + 3 + 4 + 5 = 15，只能是 {1, 2, 3, 4, 7} 或 {1, 2, 3, 5, 6}，所以偶數位的 4 個數字是 {5, 6, 8, 9} 或 {4, 7, 8, 9}，共 2 組。",
+          "選定偶數位的 4 個數字後，它們在 4 個偶數位有 4! = 24 種排法，其餘 5 個數字在奇數位有 5! = 120 種排法。總數是 (9 + 2) × 24 × 120 = 31680。"
+        ],
+        "zh-Hans": [
+          "10 除以 11 余 10，也就是比 11 的倍数少 1，所以 10、10³、10⁵、⋯ 除以 11 的效果像 −1，10²、10⁴、⋯ 像 +1。因此一个数除以 11 的余数，和「从个位起的奇数位数字和减去偶数位数字和」相同。九位数的个位是由左数第 9 位，所以令 A = 由左数第 1、3、5、7、9 位这 5 个数字的和，B = 第 2、4、6、8 位这 4 个数字的和，这个数是 11 的倍数若且唯若 A − B 是 11 的倍数。",
+          "A + B = 1 + 2 + ⋯ + 9 = 45，所以 A − B = 45 − 2B 是奇数。B 是 4 个不同数字之和，介于 1 + 2 + 3 + 4 = 10 与 6 + 7 + 8 + 9 = 30 之间，A − B 介于 −15 与 25 之间。这范围内是 11 的倍数的奇数只有 −11 与 11，对应 B = 28 或 B = 17。",
+          "B = 17 的 4 个数字：最小数是 1 时，另三个从 2～9 中选、和为 16：{2, 5, 9}、{2, 6, 8}、{3, 4, 9}、{3, 5, 8}、{3, 6, 7}、{4, 5, 7}，6 组；最小数是 2 时，另三个从 3～9 中选、和为 15：{3, 4, 8}、{3, 5, 7}、{4, 5, 6}，3 组；最小数是 3 以上时，另三个至少 4 + 5 + 6 = 15，总和超过 17，不可能。共 9 组。",
+          "B = 28 时，其余 5 个数字和为 17，而 5 个不同数字的和最小是 1 + 2 + 3 + 4 + 5 = 15，只能是 {1, 2, 3, 4, 7} 或 {1, 2, 3, 5, 6}，所以偶数位的 4 个数字是 {5, 6, 8, 9} 或 {4, 7, 8, 9}，共 2 组。",
+          "选定偶数位的 4 个数字后，它们在 4 个偶数位有 4! = 24 种排法，其余 5 个数字在奇数位有 5! = 120 种排法。总数是 (9 + 2) × 24 × 120 = 31680。"
+        ],
+        "en": [
+          "10 leaves remainder 10 mod 11, one less than a multiple of 11, so 10, 10³, 10⁵, … act like −1 mod 11 and 10², 10⁴, … act like +1. Hence a number leaves the same remainder mod 11 as (sum of digits in odd places counted from the units) minus (sum in even places). The units digit of a nine-digit number is the 9th from the left, so let A be the sum of the 5 digits in places 1, 3, 5, 7, 9 from the left and B the sum of the 4 digits in places 2, 4, 6, 8; the number is a multiple of 11 exactly when A − B is.",
+          "A + B = 1 + 2 + ⋯ + 9 = 45, so A − B = 45 − 2B is odd. B is a sum of 4 different digits, between 1 + 2 + 3 + 4 = 10 and 6 + 7 + 8 + 9 = 30, so A − B lies between −15 and 25. The only odd multiples of 11 in this range are −11 and 11, giving B = 28 or B = 17.",
+          "Four digits with B = 17: if the smallest is 1, the other three come from 2–9 with sum 16: {2, 5, 9}, {2, 6, 8}, {3, 4, 9}, {3, 5, 8}, {3, 6, 7}, {4, 5, 7}: 6 sets; if the smallest is 2, the other three come from 3–9 with sum 15: {3, 4, 8}, {3, 5, 7}, {4, 5, 6}: 3 sets; if the smallest is 3 or more, the other three are at least 4 + 5 + 6 = 15 and the total exceeds 17, impossible. 9 sets in all.",
+          "For B = 28 the other 5 digits sum to 17, while 5 different digits sum to at least 1 + 2 + 3 + 4 + 5 = 15, so they are {1, 2, 3, 4, 7} or {1, 2, 3, 5, 6}, and the even-place digits are {5, 6, 8, 9} or {4, 7, 8, 9}: 2 sets.",
+          "Once the 4 even-place digits are chosen, they can be arranged in the 4 even places in 4! = 24 ways and the other 5 digits in the odd places in 5! = 120 ways. The total is (9 + 2) × 24 × 120 = 31680."
+        ],
+        "ja": [
+          "10 を 11 で割ると 10 余り、11 の倍数より 1 小さいので、10、10³、10⁵、… は 11 で割ると −1 のように、10²、10⁴、… は +1 のようにふるまう。よってある数を 11 で割った余りは「一の位から数えて奇数番目の位の数字の和 − 偶数番目の位の数字の和」と同じである。9 桁の数の一の位は左から 9 番目なので、左から 1、3、5、7、9 番目の 5 つの数字の和を A、2、4、6、8 番目の 4 つの数字の和を B とすると、11 の倍数であるのは A − B が 11 の倍数のときに限る。",
+          "A + B = 1 + 2 + ⋯ + 9 = 45 なので A − B = 45 − 2B は奇数。B は異なる 4 つの数字の和で 1 + 2 + 3 + 4 = 10 から 6 + 7 + 8 + 9 = 30 の間なので、A − B は −15 から 25 の間。この範囲で 11 の倍数である奇数は −11 と 11 だけで、B = 28 または B = 17。",
+          "B = 17 となる 4 つの数字：最小が 1 なら残り 3 つは 2～9 から和 16 で {2, 5, 9}、{2, 6, 8}、{3, 4, 9}、{3, 5, 8}、{3, 6, 7}、{4, 5, 7} の 6 組。最小が 2 なら残り 3 つは 3～9 から和 15 で {3, 4, 8}、{3, 5, 7}、{4, 5, 6} の 3 組。最小が 3 以上なら残り 3 つは少なくとも 4 + 5 + 6 = 15 で合計が 17 を超え不可能。合計 9 組。",
+          "B = 28 のとき残り 5 つの数字の和は 17。異なる 5 つの数字の和は最小で 1 + 2 + 3 + 4 + 5 = 15 なので、{1, 2, 3, 4, 7} か {1, 2, 3, 5, 6} しかなく、偶数番目の 4 つの数字は {5, 6, 8, 9} か {4, 7, 8, 9} の 2 組。",
+          "偶数番目の 4 つの数字を決めると、それらを 4 つの偶数番目の位に並べる方法が 4! = 24 通り、残り 5 つを奇数番目の位に並べる方法が 5! = 120 通り。合計 (9 + 2) × 24 × 120 = 31680 個。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "31680"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 5
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "number-theory-grade10-foundation",
+        "notes": "11 的倍數判別法化為奇偶位數字和差，45 的奇偶與範圍限定 B = 17 或 28，再數子集合乘排列。掃過 /11 的倍數|各用一次|1、2、3、⋯、9/（15 題）；最接近 arithmetic_grade6_foundation_133（1、3、4、6 四張卡排成 11 的倍數），差異：該題 4 張卡直接列舉；本題九位全數字，要用和為 45 的奇偶與範圍鎖定 B，再數和為 17、28 的子集合"
+      }
     }
   ]
 }
