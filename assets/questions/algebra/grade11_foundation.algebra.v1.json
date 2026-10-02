@@ -12537,6 +12537,161 @@
         "reference": "algebra-grade11-foundation",
         "notes": "對數邊長的三角不等式化成乘積不等式。掃過 /log.*三角形|三角形.*log/（0 題）；最接近 geometry_grade10_foundation_008，差異：該題是整數邊四邊形的最大邊；本題是對數邊長的三角不等式化成 7 ≤ n ≤ 899"
       }
+    },
+    {
+      "id": "algebra_grade11_foundation_154",
+      "reviewStatus": "ok",
+      "topic": "algebra",
+      "subtopic": "square_minus_two_recurrence_product_identity",
+      "tags": [
+        "c:recurrence",
+        "c:algebraic_identity",
+        "m:invariant"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade11",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "數列 a₁、a₂、a₃、⋯ 滿足 a₁ = 3，而且對每個正整數 n 都有 aₙ₊₁ = aₙ² − 2，所以 a₂ = 7、a₃ = 47。已知存在常數 k 與 c，使得對每一個正整數 n，都有 aₙ₊₁² − k × (a₁ × a₂ × ⋯ × aₙ)² = c。求 k + c。",
+        "zh-Hans": "数列 a₁、a₂、a₃、⋯ 满足 a₁ = 3，而且对每个正整数 n 都有 aₙ₊₁ = aₙ² − 2，所以 a₂ = 7、a₃ = 47。已知存在常数 k 与 c，使得对每一个正整数 n，都有 aₙ₊₁² − k × (a₁ × a₂ × ⋯ × aₙ)² = c。求 k + c。",
+        "en": "A sequence a₁, a₂, a₃, … has a₁ = 3 and aₙ₊₁ = aₙ² − 2 for every positive integer n, so a₂ = 7 and a₃ = 47. There are constants k and c such that for every positive integer n, aₙ₊₁² − k × (a₁ × a₂ × ⋯ × aₙ)² = c. Find k + c.",
+        "ja": "数列 a₁、a₂、a₃、⋯ は a₁ = 3 で、すべての正の整数 n について aₙ₊₁ = aₙ² − 2 を満たす。よって a₂ = 7、a₃ = 47 である。定数 k と c があって、すべての正の整数 n について aₙ₊₁² − k × (a₁ × a₂ × ⋯ × aₙ)² = c が成り立つ。k + c を求めよ。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 9。",
+        "zh-Hans": "答案是 9。",
+        "en": "The answer is 9.",
+        "ja": "答えは 9 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "先看 aₙ₊₁² − 4：aₙ₊₁² − 4 = (aₙ² − 2)² − 4 = aₙ⁴ − 4aₙ² = aₙ² × (aₙ² − 4)。",
+          "把這個關係一直往前代：aₙ₊₁² − 4 = aₙ²(aₙ² − 4) = aₙ² aₙ₋₁²(aₙ₋₁² − 4) = ⋯ = aₙ² aₙ₋₁² ⋯ a₁² × (a₁² − 4)。",
+          "a₁² − 4 = 9 − 4 = 5，所以對每個 n 都有 aₙ₊₁² − 4 = 5 × (a₁a₂⋯aₙ)²，也就是 aₙ₊₁² − 5(a₁a₂⋯aₙ)² = 4。k = 5、c = 4 符合要求。",
+          "這組 k、c 是唯一的：n = 1 時是 7² − 3²k = 49 − 9k = c；n = 2 時是 47² − (3 × 7)²k = 2209 − 441k = c。兩式相減得 432k = 2160，k = 5，再得 c = 49 − 45 = 4。",
+          "所以 k + c = 9。"
+        ],
+        "zh-Hans": [
+          "先看 aₙ₊₁² − 4：aₙ₊₁² − 4 = (aₙ² − 2)² − 4 = aₙ⁴ − 4aₙ² = aₙ² × (aₙ² − 4)。",
+          "把这个关系一直往前代：aₙ₊₁² − 4 = aₙ²(aₙ² − 4) = aₙ² aₙ₋₁²(aₙ₋₁² − 4) = ⋯ = aₙ² aₙ₋₁² ⋯ a₁² × (a₁² − 4)。",
+          "a₁² − 4 = 9 − 4 = 5，所以对每个 n 都有 aₙ₊₁² − 4 = 5 × (a₁a₂⋯aₙ)²，也就是 aₙ₊₁² − 5(a₁a₂⋯aₙ)² = 4。k = 5、c = 4 符合要求。",
+          "这组 k、c 是唯一的：n = 1 时是 7² − 3²k = 49 − 9k = c；n = 2 时是 47² − (3 × 7)²k = 2209 − 441k = c。两式相减得 432k = 2160，k = 5，再得 c = 49 − 45 = 4。",
+          "所以 k + c = 9。"
+        ],
+        "en": [
+          "Look at aₙ₊₁² − 4: aₙ₊₁² − 4 = (aₙ² − 2)² − 4 = aₙ⁴ − 4aₙ² = aₙ² × (aₙ² − 4).",
+          "Apply this repeatedly: aₙ₊₁² − 4 = aₙ²(aₙ² − 4) = aₙ² aₙ₋₁²(aₙ₋₁² − 4) = ⋯ = aₙ² aₙ₋₁² ⋯ a₁² × (a₁² − 4).",
+          "Since a₁² − 4 = 9 − 4 = 5, for every n we get aₙ₊₁² − 4 = 5 × (a₁a₂⋯aₙ)², i.e. aₙ₊₁² − 5(a₁a₂⋯aₙ)² = 4. So k = 5 and c = 4 work.",
+          "They are the only such constants: n = 1 gives 7² − 3²k = 49 − 9k = c, and n = 2 gives 47² − (3 × 7)²k = 2209 − 441k = c. Subtracting, 432k = 2160, so k = 5 and then c = 49 − 45 = 4.",
+          "Hence k + c = 9."
+        ],
+        "ja": [
+          "まず aₙ₊₁² − 4 を調べる。aₙ₊₁² − 4 = (aₙ² − 2)² − 4 = aₙ⁴ − 4aₙ² = aₙ² × (aₙ² − 4)。",
+          "この関係をくり返し使うと aₙ₊₁² − 4 = aₙ²(aₙ² − 4) = aₙ² aₙ₋₁²(aₙ₋₁² − 4) = ⋯ = aₙ² aₙ₋₁² ⋯ a₁² × (a₁² − 4)。",
+          "a₁² − 4 = 9 − 4 = 5 なので、すべての n で aₙ₊₁² − 4 = 5 × (a₁a₂⋯aₙ)²、すなわち aₙ₊₁² − 5(a₁a₂⋯aₙ)² = 4。k = 5、c = 4 が条件を満たす。",
+          "この k、c はただ 1 つに決まる。n = 1 では 7² − 3²k = 49 − 9k = c、n = 2 では 47² − (3 × 7)²k = 2209 − 441k = c。2 式を引くと 432k = 2160 で k = 5、さらに c = 49 − 45 = 4。",
+          "よって k + c = 9。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "9"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "algebra-grade11-foundation",
+        "notes": "aₙ₊₁² − 4 = aₙ²(aₙ² − 4) 連乘得 aₙ₊₁² − 5(a₁⋯aₙ)² = 4。掃過 /² − 2|aₙ₊₁ = aₙ²/（12 題）；最接近 algebra_grade11_foundation_104，差異：該題是 aₙ₊₁ = aₙ² − aₙ + 1 的倒數和裂項；本題是 aₙ² − 2 遞迴的平方差恆等式"
+      }
+    },
+    {
+      "id": "algebra_grade11_foundation_155",
+      "reviewStatus": "ok",
+      "topic": "algebra",
+      "subtopic": "integer_2x2_matrices_squaring_to_minus_identity",
+      "tags": [
+        "c:matrix",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade11",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "設 I 是 2 × 2 單位矩陣。一個 2 × 2 矩陣 A 的四個元素都是 −5 到 5 之間的整數（包含 −5 與 5，可以重複）。若 A² = −I，也就是 A 自乘後左上、右下兩個元素都是 −1，另外兩個元素都是 0，這樣的矩陣 A 一共有幾個？",
+        "zh-Hans": "设 I 是 2 × 2 单位矩阵。一个 2 × 2 矩阵 A 的四个元素都是 −5 到 5 之间的整数（包含 −5 与 5，可以重复）。若 A² = −I，也就是 A 自乘后左上、右下两个元素都是 −1，另外两个元素都是 0，这样的矩阵 A 一共有几个？",
+        "en": "Let I be the 2 × 2 identity matrix. A 2 × 2 matrix A has four entries that are integers from −5 to 5 inclusive (repetition allowed). If A² = −I, that is, the square of A has top-left and bottom-right entries −1 and the other two entries 0, how many such matrices A are there?",
+        "ja": "I を 2 × 2 の単位行列とする。2 × 2 行列 A の 4 つの成分はどれも −5 以上 5 以下の整数である（同じ値でもよい）。A² = −I、すなわち A の 2 乗の左上と右下の成分が −1、残り 2 つの成分が 0 となるような A は全部でいくつあるか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 26。",
+        "zh-Hans": "答案是 26。",
+        "en": "The answer is 26.",
+        "ja": "答えは 26 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "設 A 的上排是 a、b，下排是 c、d。計算 A²：上排是 a² + bc、b(a + d)，下排是 c(a + d)、d² + bc。",
+          "A² = −I 等於要求 a² + bc = −1、d² + bc = −1、b(a + d) = 0、c(a + d) = 0。",
+          "若 a + d ≠ 0，則 b = c = 0，代入第一式得 a² = −1，不可能。所以 d = −a，這時後兩式自動成立，前兩式都變成 bc = −1 − a²。反過來，只要 d = −a 且 bc = −1 − a²，就有 A² = −I。所以只要數 (a, b, c) 的個數。",
+          "依 a 分類（b、c 都在 −5 到 5 之間）：a = 0 時 bc = −1，(b, c) = (1, −1)、(−1, 1)，共 2 個；a = 1 或 −1 時 bc = −2，(b, c) = (1, −2)、(−1, 2)、(2, −1)、(−2, 1)，各 4 個，共 8 個；a = 2 或 −2 時 bc = −5，(b, c) = (1, −5)、(−1, 5)、(5, −1)、(−5, 1)，各 4 個，共 8 個。",
+          "a = 3 或 −3 時 bc = −10，在範圍內只有 (2, −5)、(−2, 5)、(5, −2)、(−5, 2)，各 4 個，共 8 個；a = 4 或 −4 時 bc = −17，a = 5 或 −5 時 bc = −26，都無法寫成兩個絕對值不超過 5 的整數的乘積（17 是質數，26 = 1 × 26 = 2 × 13，都有一個因數超過 5）。",
+          "所以共有 2 + 8 + 8 + 8 = 26 個。"
+        ],
+        "zh-Hans": [
+          "设 A 的上排是 a、b，下排是 c、d。计算 A²：上排是 a² + bc、b(a + d)，下排是 c(a + d)、d² + bc。",
+          "A² = −I 等于要求 a² + bc = −1、d² + bc = −1、b(a + d) = 0、c(a + d) = 0。",
+          "若 a + d ≠ 0，则 b = c = 0，代入第一式得 a² = −1，不可能。所以 d = −a，这时后两式自动成立，前两式都变成 bc = −1 − a²。反过来，只要 d = −a 且 bc = −1 − a²，就有 A² = −I。所以只要数 (a, b, c) 的个数。",
+          "依 a 分类（b、c 都在 −5 到 5 之间）：a = 0 时 bc = −1，(b, c) = (1, −1)、(−1, 1)，共 2 个；a = 1 或 −1 时 bc = −2，(b, c) = (1, −2)、(−1, 2)、(2, −1)、(−2, 1)，各 4 个，共 8 个；a = 2 或 −2 时 bc = −5，(b, c) = (1, −5)、(−1, 5)、(5, −1)、(−5, 1)，各 4 个，共 8 个。",
+          "a = 3 或 −3 时 bc = −10，在范围内只有 (2, −5)、(−2, 5)、(5, −2)、(−5, 2)，各 4 个，共 8 个；a = 4 或 −4 时 bc = −17，a = 5 或 −5 时 bc = −26，都无法写成两个绝对值不超过 5 的整数的乘积（17 是质数，26 = 1 × 26 = 2 × 13，都有一个因数超过 5）。",
+          "所以共有 2 + 8 + 8 + 8 = 26 个。"
+        ],
+        "en": [
+          "Let A have top row a, b and bottom row c, d. Then A² has top row a² + bc, b(a + d) and bottom row c(a + d), d² + bc.",
+          "A² = −I means a² + bc = −1, d² + bc = −1, b(a + d) = 0 and c(a + d) = 0.",
+          "If a + d ≠ 0, then b = c = 0 and the first equation gives a² = −1, impossible. So d = −a; then the last two equations hold automatically and the first two both become bc = −1 − a². Conversely, d = −a and bc = −1 − a² give A² = −I. So we count triples (a, b, c).",
+          "By cases on a (with b, c from −5 to 5): a = 0 gives bc = −1, (b, c) = (1, −1), (−1, 1): 2; a = ±1 gives bc = −2, (b, c) = (1, −2), (−1, 2), (2, −1), (−2, 1): 4 each, 8 in all; a = ±2 gives bc = −5, (b, c) = (1, −5), (−1, 5), (5, −1), (−5, 1): 4 each, 8 in all.",
+          "a = ±3 gives bc = −10, and within range only (2, −5), (−2, 5), (5, −2), (−5, 2): 4 each, 8 in all; a = ±4 gives bc = −17 and a = ±5 gives bc = −26, neither a product of two integers of absolute value at most 5 (17 is prime; 26 = 1 × 26 = 2 × 13, each with a factor above 5).",
+          "So there are 2 + 8 + 8 + 8 = 26 matrices."
+        ],
+        "ja": [
+          "A の上の行を a、b、下の行を c、d とする。A² の上の行は a² + bc、b(a + d)、下の行は c(a + d)、d² + bc である。",
+          "A² = −I は a² + bc = −1、d² + bc = −1、b(a + d) = 0、c(a + d) = 0 と同じである。",
+          "a + d ≠ 0 なら b = c = 0 で、第 1 式から a² = −1 となり不可能。よって d = −a で、このとき後の 2 式は自動的に成り立ち、前の 2 式はどちらも bc = −1 − a² になる。逆に d = −a かつ bc = −1 − a² なら A² = −I。したがって (a, b, c) の個数を数えればよい。",
+          "a で場合分けする（b、c は −5 から 5）。a = 0 なら bc = −1 で (b, c) = (1, −1)、(−1, 1) の 2 個。a = ±1 なら bc = −2 で (1, −2)、(−1, 2)、(2, −1)、(−2, 1) の各 4 個、計 8 個。a = ±2 なら bc = −5 で (1, −5)、(−1, 5)、(5, −1)、(−5, 1) の各 4 個、計 8 個。",
+          "a = ±3 なら bc = −10 で、範囲内では (2, −5)、(−2, 5)、(5, −2)、(−5, 2) の各 4 個、計 8 個。a = ±4 なら bc = −17、a = ±5 なら bc = −26 で、どちらも絶対値 5 以下の 2 整数の積にはならない（17 は素数、26 = 1 × 26 = 2 × 13 でどれも 5 を超える因数を含む）。",
+          "よって全部で 2 + 8 + 8 + 8 = 26 個。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "26"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "algebra-grade11-foundation",
+        "notes": "A² = −I ⇔ d = −a 且 bc = −1 − a²，依 a 計數。掃過 /矩陣/（27 題）；最接近 algebra_grade11_foundation_085，差異：該題是 A² = I 求行列式；本題是限定整數範圍內 A² = −I 的矩陣個數"
+      }
     }
   ]
 }

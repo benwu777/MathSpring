@@ -5460,6 +5460,154 @@
         "reference": "number-theory-grade10-foundation",
         "notes": "11 的倍數判別法化為奇偶位數字和差，45 的奇偶與範圍限定 B = 17 或 28，再數子集合乘排列。掃過 /11 的倍數|各用一次|1、2、3、⋯、9/（15 題）；最接近 arithmetic_grade6_foundation_133（1、3、4、6 四張卡排成 11 的倍數），差異：該題 4 張卡直接列舉；本題九位全數字，要用和為 45 的奇偶與範圍鎖定 B，再數和為 17、28 的子集合"
       }
+    },
+    {
+      "id": "number_theory_grade10_foundation_063",
+      "reviewStatus": "ok",
+      "topic": "number_theory",
+      "subtopic": "binary_ones_count_equal_for_n_and_n_plus_one",
+      "tags": [
+        "c:number_base",
+        "c:modular",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "把正整數寫成二進位（只用 0 和 1 表示，例如 6 = 110₂、7 = 111₂）。設 n 是 1 到 2026 之間的正整數，而且 n 與 n + 1 的二進位寫法裡，數字 1 的個數一樣多。這樣的 n 有幾個？",
+        "zh-Hans": "把正整数写成二进制（只用 0 和 1 表示，例如 6 = 110₂、7 = 111₂）。设 n 是 1 到 2026 之间的正整数，而且 n 与 n + 1 的二进制写法里，数字 1 的个数一样多。这样的 n 有几个？",
+        "en": "Write positive integers in binary (using only 0 and 1, e.g. 6 = 110₂, 7 = 111₂). For how many positive integers n from 1 to 2026 do n and n + 1 have the same number of 1s in their binary representations?",
+        "ja": "正の整数を 2 進法で書く（0 と 1 だけで表す。たとえば 6 = 110₂、7 = 111₂）。1 から 2026 までの正の整数 n のうち、n と n + 1 の 2 進法表示に含まれる 1 の個数が等しいものはいくつあるか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 507。",
+        "zh-Hans": "答案是 507。",
+        "en": "The answer is 507.",
+        "ja": "答えは 507 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "設 n 的二進位寫法最右邊連續有 t 個 1（t ≥ 0），在它們左邊的那一位是 0（必要時在最前面補一個 0）。例如 n = 1011₂ 時 t = 2。",
+          "n 加 1 時，最右邊這 t 個 1 全部變成 0，它們左邊那個 0 變成 1，更左邊的各位不變（例如 1011₂ + 1 = 1100₂）。所以 n + 1 的 1 的個數 = n 的 1 的個數 − t + 1。",
+          "兩者相等恰好是 t = 1，也就是 n 的二進位最後兩位是 01。二進位最後兩位是 01，等於 n 除以 4 餘 1。",
+          "1 到 2026 中除以 4 餘 1 的數是 1、5、9、⋯、2025，共 (2025 − 1) ÷ 4 + 1 = 507 個。"
+        ],
+        "zh-Hans": [
+          "设 n 的二进制写法最右边连续有 t 个 1（t ≥ 0），在它们左边的那一位是 0（必要时在最前面补一个 0）。例如 n = 1011₂ 时 t = 2。",
+          "n 加 1 时，最右边这 t 个 1 全部变成 0，它们左边那个 0 变成 1，更左边的各位不变（例如 1011₂ + 1 = 1100₂）。所以 n + 1 的 1 的个数 = n 的 1 的个数 − t + 1。",
+          "两者相等恰好是 t = 1，也就是 n 的二进制最后两位是 01。二进制最后两位是 01，等于 n 除以 4 余 1。",
+          "1 到 2026 中除以 4 余 1 的数是 1、5、9、⋯、2025，共 (2025 − 1) ÷ 4 + 1 = 507 个。"
+        ],
+        "en": [
+          "Let the binary form of n end in exactly t consecutive 1s (t ≥ 0), with a 0 just to their left (put a 0 in front if needed). For example, n = 1011₂ has t = 2.",
+          "Adding 1 turns those t trailing 1s into 0s and the 0 to their left into a 1, leaving the higher digits unchanged (e.g. 1011₂ + 1 = 1100₂). So the number of 1s in n + 1 equals the number in n minus t plus 1.",
+          "They are equal exactly when t = 1, i.e. the binary form of n ends in 01, which means n leaves remainder 1 when divided by 4.",
+          "From 1 to 2026 these are 1, 5, 9, …, 2025, which is (2025 − 1) ÷ 4 + 1 = 507 numbers."
+        ],
+        "ja": [
+          "n の 2 進法表示の右端にちょうど t 個の 1 が続き（t ≥ 0）、その左隣の桁は 0 であるとする（必要なら先頭に 0 を補う）。たとえば n = 1011₂ なら t = 2。",
+          "n に 1 を足すと、右端の t 個の 1 はすべて 0 になり、その左隣の 0 が 1 になり、それより左の桁は変わらない（例：1011₂ + 1 = 1100₂）。よって n + 1 の 1 の個数 = n の 1 の個数 − t + 1。",
+          "両者が等しいのはちょうど t = 1、つまり n の 2 進法の下 2 桁が 01 のときで、これは n を 4 で割った余りが 1 であることと同じである。",
+          "1 から 2026 のうち 4 で割って 1 余る数は 1、5、9、⋯、2025 で、(2025 − 1) ÷ 4 + 1 = 507 個。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "507"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "number-theory-grade10-foundation",
+        "notes": "n + 1 的 1 的個數 = n 的個數 − t + 1（t 為末尾連續 1 的個數），相等 ⇔ n ≡ 1 (mod 4)。掃過 /二進位/（9 題）；最接近 number_theory_grade12_foundation_045，差異：該題是數恰好有 3 個 1 的數；本題比較 n 與 n + 1 的 1 的個數，關鍵是加 1 的進位"
+      }
+    },
+    {
+      "id": "number_theory_grade10_foundation_064",
+      "reviewStatus": "ok",
+      "topic": "number_theory",
+      "subtopic": "four_digit_number_and_reverse_both_multiples_of_4",
+      "tags": [
+        "c:factor_multiple",
+        "c:place_value",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一個四位數是 4 的倍數。把它的四個數字順序倒過來寫，得到的數也是一個四位數（也就是原數的個位數字不是 0），而且也是 4 的倍數。例如 2112 倒過來還是 2112，就符合條件。這樣的四位數有幾個？",
+        "zh-Hans": "一个四位数是 4 的倍数。把它的四个数字顺序倒过来写，得到的数也是一个四位数（也就是原数的个位数字不是 0），而且也是 4 的倍数。例如 2112 倒过来还是 2112，就符合条件。这样的四位数有几个？",
+        "en": "A four-digit number is a multiple of 4. Writing its four digits in reverse order gives another four-digit number (so the original's units digit is not 0), which is also a multiple of 4. For example, 2112 reversed is still 2112, so it qualifies. How many such four-digit numbers are there?",
+        "ja": "ある 4 桁の数は 4 の倍数である。その 4 つの数字を逆順に書いた数も 4 桁の数で（つまりもとの数の一の位は 0 でない）、やはり 4 の倍数である。たとえば 2112 は逆に書いても 2112 なので条件を満たす。このような 4 桁の数はいくつあるか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 400。",
+        "zh-Hans": "答案是 400。",
+        "en": "The answer is 400.",
+        "ja": "答えは 400 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "因為 100 是 4 的倍數，一個整數是 4 的倍數，恰好是它最後兩位組成的兩位數是 4 的倍數。設原數的數字依序是 a、b、c、d，條件是：兩位數 cd 是 4 的倍數；倒過來的數 dcba 的最後兩位 ba 是 4 的倍數；而且 a ≠ 0、d ≠ 0。",
+          "兩位數 10x + y 除以 4 的餘數與 2x + y 相同。要是 4 的倍數，y 必須是偶數；y 是 0、4、8 時，x 必須是偶數；y 是 2、6 時，x 必須是奇數。",
+          "看 cd：d ≠ 0，所以 d 是 2、4、6、8 之一。d = 4 或 8 時 c 是偶數（0、2、4、6、8，5 種）；d = 2 或 6 時 c 是奇數（5 種）。所以 (c, d) 共 4 × 5 = 20 種。",
+          "看 ba：a ≠ 0，同理 a 是 2、4、6、8 之一，(b, a) 也有 20 種。這兩部分用到的是不同的數字位置，可以任意搭配。",
+          "所以這樣的四位數共有 20 × 20 = 400 個。"
+        ],
+        "zh-Hans": [
+          "因为 100 是 4 的倍数，一个整数是 4 的倍数，恰好是它最后两位组成的两位数是 4 的倍数。设原数的数字依次是 a、b、c、d，条件是：两位数 cd 是 4 的倍数；倒过来的数 dcba 的最后两位 ba 是 4 的倍数；而且 a ≠ 0、d ≠ 0。",
+          "两位数 10x + y 除以 4 的余数与 2x + y 相同。要是 4 的倍数，y 必须是偶数；y 是 0、4、8 时，x 必须是偶数；y 是 2、6 时，x 必须是奇数。",
+          "看 cd：d ≠ 0，所以 d 是 2、4、6、8 之一。d = 4 或 8 时 c 是偶数（0、2、4、6、8，5 种）；d = 2 或 6 时 c 是奇数（5 种）。所以 (c, d) 共 4 × 5 = 20 种。",
+          "看 ba：a ≠ 0，同理 a 是 2、4、6、8 之一，(b, a) 也有 20 种。这两部分用到的是不同的数字位置，可以任意搭配。",
+          "所以这样的四位数共有 20 × 20 = 400 个。"
+        ],
+        "en": [
+          "Since 100 is a multiple of 4, an integer is a multiple of 4 exactly when the two-digit number formed by its last two digits is. Let the digits be a, b, c, d. The conditions are: the two-digit number cd is a multiple of 4; the last two digits ba of the reversed number dcba form a multiple of 4; and a ≠ 0, d ≠ 0.",
+          "A two-digit number 10x + y has the same remainder mod 4 as 2x + y. For it to be a multiple of 4, y must be even; if y is 0, 4 or 8 then x must be even, and if y is 2 or 6 then x must be odd.",
+          "For cd: d ≠ 0, so d is 2, 4, 6 or 8. If d = 4 or 8, c is even (0, 2, 4, 6, 8: 5 choices); if d = 2 or 6, c is odd (5 choices). So (c, d) has 4 × 5 = 20 possibilities.",
+          "For ba: a ≠ 0, so likewise a is 2, 4, 6 or 8 and (b, a) has 20 possibilities. The two parts use different digit positions and combine freely.",
+          "So there are 20 × 20 = 400 such numbers."
+        ],
+        "ja": [
+          "100 は 4 の倍数なので、整数が 4 の倍数であることは下 2 桁の 2 桁の数が 4 の倍数であることと同じである。数字を順に a、b、c、d とすると、条件は「2 桁の数 cd が 4 の倍数」「逆順の数 dcba の下 2 桁 ba が 4 の倍数」「a ≠ 0、d ≠ 0」である。",
+          "2 桁の数 10x + y を 4 で割った余りは 2x + y を 4 で割った余りと同じである。4 の倍数になるには y が偶数で、y が 0、4、8 なら x は偶数、y が 2、6 なら x は奇数でなければならない。",
+          "cd について：d ≠ 0 より d は 2、4、6、8 のどれか。d = 4、8 なら c は偶数（0、2、4、6、8 の 5 通り）、d = 2、6 なら c は奇数（5 通り）。よって (c, d) は 4 × 5 = 20 通り。",
+          "ba について：a ≠ 0 なので同様に a は 2、4、6、8 のどれかで、(b, a) も 20 通り。2 つの部分は別の桁を使うので自由に組み合わせられる。",
+          "よってこのような 4 桁の数は 20 × 20 = 400 個。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "400"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "number-theory-grade10-foundation",
+        "notes": "4 的倍數只看末兩位，10x + y 與 2x + y 同餘，頭尾兩對各 20 種。掃過 /倒過來|反過來|反序|倒寫/（13 題）；最接近 number_theory_grade7_foundation_053，差異：該題是 ABCD × 9 = DCBA 的數字謎；本題是原數與倒寫數都被 4 整除的計數"
+      }
     }
   ]
 }

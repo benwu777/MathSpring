@@ -5363,6 +5363,158 @@
         "reference": "logic-grade10-foundation",
         "notes": "斜走必換排的奇偶，奇數排 15 格只能收偶數排 10 隻，得空格下界 5 並構造。掃過 /甲蟲|斜對角|每一格.*一隻|同時.*爬/（8 題）；最接近 combinatorics_grade10_foundation_051（T 形四格板棋盤著色計奇數），差異：該題用黑白著色判斷能否鋪滿；本題按排的奇偶分兩類，用容量差得最少空格並給出構造"
       }
+    },
+    {
+      "id": "logic_grade10_foundation_061",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "maximum_disjoint_talks_count_optimal_schedules",
+      "tags": [
+        "c:logic_deduction",
+        "m:extremal",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "研討會有 11 場演講，時間如下：第 1 場 8:00–9:30，第 2 場 9:00–10:00，第 3 場 9:30–11:00，第 4 場 10:00–12:30，第 5 場 10:30–11:30，第 6 場 11:30–13:00，第 7 場 12:00–14:00，第 8 場 13:00–14:30，第 9 場 14:00–15:00，第 10 場 14:30–16:00，第 11 場 15:30–17:00。小安每一場都要從頭聽到尾，同一時間只能聽一場；一場結束的時刻剛好是另一場開始的時刻，兩場都可以聽。小安想聽的場數越多越好。能讓他聽到最多場數的選法（只看選了哪幾場）一共有幾種？",
+        "zh-Hans": "研讨会有 11 场演讲，时间如下：第 1 场 8:00–9:30，第 2 场 9:00–10:00，第 3 场 9:30–11:00，第 4 场 10:00–12:30，第 5 场 10:30–11:30，第 6 场 11:30–13:00，第 7 场 12:00–14:00，第 8 场 13:00–14:30，第 9 场 14:00–15:00，第 10 场 14:30–16:00，第 11 场 15:30–17:00。小安每一场都要从头听到尾，同一时间只能听一场；一场结束的时刻刚好是另一场开始的时刻，两场都可以听。小安想听的场数越多越好。能让他听到最多场数的选法（只看选了哪几场）一共有几种？",
+        "en": "A conference has 11 talks at these times: talk 1 8:00–9:30, talk 2 9:00–10:00, talk 3 9:30–11:00, talk 4 10:00–12:30, talk 5 10:30–11:30, talk 6 11:30–13:00, talk 7 12:00–14:00, talk 8 13:00–14:30, talk 9 14:00–15:00, talk 10 14:30–16:00, talk 11 15:30–17:00. An must attend each chosen talk from start to finish and can attend only one talk at a time; if one talk ends exactly when another begins, both can be attended. An wants to attend as many talks as possible. How many different selections of talks (only which talks matter) achieve the maximum number?",
+        "ja": "研究会で 11 の講演があり、時間は次のとおりである。第 1 講演 8:00–9:30、第 2 講演 9:00–10:00、第 3 講演 9:30–11:00、第 4 講演 10:00–12:30、第 5 講演 10:30–11:30、第 6 講演 11:30–13:00、第 7 講演 12:00–14:00、第 8 講演 13:00–14:30、第 9 講演 14:00–15:00、第 10 講演 14:30–16:00、第 11 講演 15:30–17:00。アンは選んだ講演を最初から最後まで聞き、同時に 2 つは聞けない。ある講演の終了時刻がちょうど別の講演の開始時刻なら両方聞ける。アンはできるだけ多くの講演を聞きたい。最多の数を聞ける講演の選び方（どの講演を選ぶかだけを考える）は全部で何通りあるか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 12。",
+        "zh-Hans": "答案是 12。",
+        "en": "The answer is 12.",
+        "ja": "答えは 12 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "先找出最多能聽幾場。看五個時刻 9:20、10:50、12:50、14:20、15:50：第 1、2 場都包含 9:20；第 3、4、5 場都包含 10:50；第 6、7 場都包含 12:50；第 8、9 場都包含 14:20；第 10、11 場都包含 15:50。每一場都至少包含其中一個時刻。",
+          "小安聽的任兩場時間不重疊，不可能同時包含同一個時刻，所以他聽的場數不超過時刻的個數 5。另一方面，第 1、3、6、8、10 場（8:00–9:30、9:30–11:00、11:30–13:00、13:00–14:30、14:30–16:00）可以全部聽到，所以最多是 5 場。",
+          "要聽滿 5 場，這 5 場必須在上面五組中各選一場（每場恰好包含一個時刻，五個時刻都要用到）。再依時間先後檢查相鄰兩組能不能接上：第 2 場結束於 10:00，接不上第 3 場；第 4 場結束於 12:30，第 6、7 場都接不上，所以第 4 場不能選；第 7 場結束於 14:00，接不上第 8 場；第 9 場結束於 15:00，接不上第 10 場；其他相鄰組合都接得上。",
+          "依序計算到每一場為止的接法數：第 1 場 1 種、第 2 場 1 種；第 3 場只能接第 1 場，1 種；第 5 場可接第 1、2 場，2 種；第 6 場可接第 3、5 場，1 + 2 = 3 種；第 7 場同樣 3 種；第 8 場只能接第 6 場，3 種；第 9 場可接第 6、7 場，3 + 3 = 6 種；第 10 場只能接第 8 場，3 種；第 11 場可接第 8、9 場，3 + 6 = 9 種。",
+          "所以聽滿 5 場的選法共有 3 + 9 = 12 種。"
+        ],
+        "zh-Hans": [
+          "先找出最多能听几场。看五个时刻 9:20、10:50、12:50、14:20、15:50：第 1、2 场都包含 9:20；第 3、4、5 场都包含 10:50；第 6、7 场都包含 12:50；第 8、9 场都包含 14:20；第 10、11 场都包含 15:50。每一场都至少包含其中一个时刻。",
+          "小安听的任两场时间不重叠，不可能同时包含同一个时刻，所以他听的场数不超过时刻的个数 5。另一方面，第 1、3、6、8、10 场（8:00–9:30、9:30–11:00、11:30–13:00、13:00–14:30、14:30–16:00）可以全部听到，所以最多是 5 场。",
+          "要听满 5 场，这 5 场必须在上面五组中各选一场（每场恰好包含一个时刻，五个时刻都要用到）。再依时间先后检查相邻两组能不能接上：第 2 场结束于 10:00，接不上第 3 场；第 4 场结束于 12:30，第 6、7 场都接不上，所以第 4 场不能选；第 7 场结束于 14:00，接不上第 8 场；第 9 场结束于 15:00，接不上第 10 场；其他相邻组合都接得上。",
+          "依次计算到每一场为止的接法数：第 1 场 1 种、第 2 场 1 种；第 3 场只能接第 1 场，1 种；第 5 场可接第 1、2 场，2 种；第 6 场可接第 3、5 场，1 + 2 = 3 种；第 7 场同样 3 种；第 8 场只能接第 6 场，3 种；第 9 场可接第 6、7 场，3 + 3 = 6 种；第 10 场只能接第 8 场，3 种；第 11 场可接第 8、9 场，3 + 6 = 9 种。",
+          "所以听满 5 场的选法共有 3 + 9 = 12 种。"
+        ],
+        "en": [
+          "First find the maximum. Consider the five moments 9:20, 10:50, 12:50, 14:20 and 15:50: talks 1 and 2 contain 9:20; talks 3, 4, 5 contain 10:50; talks 6, 7 contain 12:50; talks 8, 9 contain 14:20; talks 10, 11 contain 15:50. Every talk contains at least one of these moments.",
+          "Two talks An attends do not overlap, so they cannot both contain the same moment; hence he attends at most 5 talks. On the other hand, talks 1, 3, 6, 8, 10 (8:00–9:30, 9:30–11:00, 11:30–13:00, 13:00–14:30, 14:30–16:00) can all be attended, so the maximum is 5.",
+          "To attend 5 talks, he must take exactly one talk from each of the five groups above (each talk contains exactly one moment, and all five moments must be used). Now check which talks in consecutive groups fit together: talk 2 ends at 10:00, too late for talk 3; talk 4 ends at 12:30, too late for both talks 6 and 7, so talk 4 cannot be used; talk 7 ends at 14:00, too late for talk 8; talk 9 ends at 15:00, too late for talk 10; all other consecutive combinations fit.",
+          "Count the ways to reach each talk in order: talk 1: 1, talk 2: 1; talk 3 only after talk 1: 1; talk 5 after talk 1 or 2: 2; talk 6 after talk 3 or 5: 1 + 2 = 3; talk 7 likewise 3; talk 8 only after talk 6: 3; talk 9 after talk 6 or 7: 3 + 3 = 6; talk 10 only after talk 8: 3; talk 11 after talk 8 or 9: 3 + 6 = 9.",
+          "So there are 3 + 9 = 12 selections of 5 talks."
+        ],
+        "ja": [
+          "まず最多で何講演聞けるかを求める。9:20、10:50、12:50、14:20、15:50 の 5 つの時刻を考えると、第 1、2 講演は 9:20 を、第 3、4、5 講演は 10:50 を、第 6、7 講演は 12:50 を、第 8、9 講演は 14:20 を、第 10、11 講演は 15:50 を含む。どの講演も少なくとも 1 つの時刻を含む。",
+          "アンが聞く 2 つの講演は時間が重ならないので、同じ時刻を両方が含むことはない。よって聞ける数は時刻の数 5 以下である。一方、第 1、3、6、8、10 講演（8:00–9:30、9:30–11:00、11:30–13:00、13:00–14:30、14:30–16:00）はすべて聞けるので、最多は 5 である。",
+          "5 つ聞くには、上の 5 つの組から 1 つずつ選ぶ必要がある（各講演はちょうど 1 つの時刻を含み、5 つの時刻をすべて使う）。時間順に隣り合う組の講演がつながるか調べる。第 2 講演は 10:00 に終わるので第 3 講演に間に合わない。第 4 講演は 12:30 に終わるので第 6、7 講演のどちらにも間に合わず、第 4 講演は選べない。第 7 講演は 14:00 に終わるので第 8 講演に間に合わない。第 9 講演は 15:00 に終わるので第 10 講演に間に合わない。その他の組み合わせはつながる。",
+          "各講演までのつなぎ方の数を順に数える。第 1 講演 1 通り、第 2 講演 1 通り。第 3 講演は第 1 講演の後だけで 1 通り。第 5 講演は第 1、2 講演の後で 2 通り。第 6 講演は第 3、5 講演の後で 1 + 2 = 3 通り。第 7 講演も 3 通り。第 8 講演は第 6 講演の後だけで 3 通り。第 9 講演は第 6、7 講演の後で 3 + 3 = 6 通り。第 10 講演は第 8 講演の後だけで 3 通り。第 11 講演は第 8、9 講演の後で 3 + 6 = 9 通り。",
+          "よって 5 講演を聞く選び方は 3 + 9 = 12 通り。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "12"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade10-foundation",
+        "notes": "用 5 個時刻證明最多聽 5 場，再逐組接續數出 12 種最佳選法。掃過 /演講|同一時間只能|場.*開始.*結束/（5 題）；最接近 logic_grade3_foundation_069，差異：該題是洗衣、烘衣兩機流水線的最短總時間；本題是區間不重疊的最大選法（以點覆蓋證上界）與最佳選法計數"
+      }
+    },
+    {
+      "id": "logic_grade10_foundation_062",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "repeated_turning_program_robot_period_four",
+      "tags": [
+        "c:coordinate",
+        "c:modular",
+        "m:invariant"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一台機器人站在平地上，一開始面向北方。它看得懂三種指令：F 是向前走 1 公尺，R 是原地向右轉 90°，L 是原地向左轉 90°。它的程式是 FFFRFLFR 這 8 個指令，執行完就從頭再執行一次，一共把整個程式執行了 2026 次。最後機器人與出發點的直線距離是 d 公尺。求 d²。",
+        "zh-Hans": "一台机器人站在平地上，一开始面向北方。它看得懂三种指令：F 是向前走 1 米，R 是原地向右转 90°，L 是原地向左转 90°。它的程序是 FFFRFLFR 这 8 个指令，执行完就从头再执行一次，一共把整个程序执行了 2026 次。最后机器人与出发点的直线距离是 d 米。求 d²。",
+        "en": "A robot stands on flat ground, initially facing north. It understands three commands: F means walk forward 1 metre, R means turn right 90° on the spot, and L means turn left 90° on the spot. Its program is the 8 commands FFFRFLFR; after finishing, it starts the program again, running the whole program 2026 times in total. At the end the robot is d metres (in a straight line) from its starting point. Find d².",
+        "ja": "平らな地面にロボットが立っていて、最初は北を向いている。ロボットは 3 種類の命令がわかる。F は前に 1 m 進む、R はその場で右に 90° 回る、L はその場で左に 90° 回る。プログラムは FFFRFLFR の 8 個の命令で、終わるとまた最初から実行し、プログラム全体を合計 2026 回実行した。最後にロボットと出発点の直線距離は d m であった。d² を求めよ。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 34。",
+        "zh-Hans": "答案是 34。",
+        "en": "The answer is 34.",
+        "ja": "答えは 34 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "以出發點為原點、東為 x 軸正向、北為 y 軸正向。先看第 1 次執行：面向北走 FFF 到 (0, 3)；R 後面向東，F 到 (1, 3)；L 後面向北，F 到 (1, 4)；最後 R 面向東。所以第 1 次位移是 (1, 4)，而且結束時的朝向比開始時向右轉了 90°。",
+          "每次執行程式時，相對於「開始那一刻的朝向」動作完全一樣，所以每一次的位移都是上一次的位移再向右轉 90°：第 1 次 (1, 4)，第 2 次（開始時面向東）(4, −1)，第 3 次（面向南）(−1, −4)，第 4 次（面向西）(−4, 1)。",
+          "這四次位移加起來是 (0, 0)，而且第 4 次結束後又面向北，回到一開始的狀態。所以每執行 4 次，機器人就回到出發點並面向北。",
+          "2026 = 4 × 506 + 2。執行 2024 次後回到原點、面向北，再執行 2 次，位置是 (1, 4) + (4, −1) = (5, 3)。",
+          "d² = 5² + 3² = 34。"
+        ],
+        "zh-Hans": [
+          "以出发点为原点、东为 x 轴正向、北为 y 轴正向。先看第 1 次执行：面向北走 FFF 到 (0, 3)；R 后面向东，F 到 (1, 3)；L 后面向北，F 到 (1, 4)；最后 R 面向东。所以第 1 次位移是 (1, 4)，而且结束时的朝向比开始时向右转了 90°。",
+          "每次执行程序时，相对于“开始那一刻的朝向”动作完全一样，所以每一次的位移都是上一次的位移再向右转 90°：第 1 次 (1, 4)，第 2 次（开始时面向东）(4, −1)，第 3 次（面向南）(−1, −4)，第 4 次（面向西）(−4, 1)。",
+          "这四次位移加起来是 (0, 0)，而且第 4 次结束后又面向北，回到一开始的状态。所以每执行 4 次，机器人就回到出发点并面向北。",
+          "2026 = 4 × 506 + 2。执行 2024 次后回到原点、面向北，再执行 2 次，位置是 (1, 4) + (4, −1) = (5, 3)。",
+          "d² = 5² + 3² = 34。"
+        ],
+        "en": [
+          "Put the start at the origin with east as the positive x-axis and north as the positive y-axis. First run: facing north, FFF reaches (0, 3); after R it faces east and F reaches (1, 3); after L it faces north and F reaches (1, 4); the final R leaves it facing east. So the first run moves it by (1, 4), and it ends turned 90° to the right of how it started.",
+          "Each run does the same moves relative to the direction it faces at the start of that run, so each run's displacement is the previous one turned 90° to the right: run 1 (1, 4), run 2 (starting east) (4, −1), run 3 (starting south) (−1, −4), run 4 (starting west) (−4, 1).",
+          "These four displacements add up to (0, 0), and after run 4 it faces north again, back in its initial state. So every 4 runs it returns to the start facing north.",
+          "2026 = 4 × 506 + 2. After 2024 runs it is at the origin facing north; two more runs bring it to (1, 4) + (4, −1) = (5, 3).",
+          "d² = 5² + 3² = 34."
+        ],
+        "ja": [
+          "出発点を原点、東を x 軸の正の向き、北を y 軸の正の向きとする。1 回目の実行：北向きで FFF により (0, 3)、R で東向きになり F で (1, 3)、L で北向きになり F で (1, 4)、最後の R で東向きになる。よって 1 回目の移動は (1, 4) で、終わったときの向きは始めより右に 90° 回っている。",
+          "毎回の実行は「その回の最初の向き」に対して同じ動きをするので、各回の移動は前の回の移動を右に 90° 回したものになる。1 回目 (1, 4)、2 回目（東向きで開始）(4, −1)、3 回目（南向き）(−1, −4)、4 回目（西向き）(−4, 1)。",
+          "この 4 回の移動の和は (0, 0) で、4 回目の後は再び北向きになり最初の状態に戻る。したがって 4 回ごとに出発点に北向きで戻る。",
+          "2026 = 4 × 506 + 2。2024 回実行した後は原点で北向き、さらに 2 回実行すると位置は (1, 4) + (4, −1) = (5, 3)。",
+          "d² = 5² + 3² = 34。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "34"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade10-foundation",
+        "notes": "一次程式位移 (1, 4) 並右轉 90°，每 4 次回到原點，2026 次等於 2 次。掃過 /機器人|指令|右轉/（13 題）；最接近 geometry_grade5_foundation_096，差異：該題重複的指令只有平移；本題程式含轉向，每次位移旋轉 90°，要找週期"
+      }
     }
   ]
 }

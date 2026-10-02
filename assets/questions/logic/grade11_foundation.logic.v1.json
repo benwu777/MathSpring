@@ -5161,6 +5161,86 @@
         "reference": "logic-grade11-foundation",
         "notes": "容許一次說謊的是非題猜數：體積界 16(q+1) ≤ 2 的 q 次方 與 Hamming(7,4) 構造。掃過 /說謊|撒謊|是非/（21 題）；最接近 logic_grade7_foundation_055，差異：該題是一次性二進位編碼找毒瓶（無錯誤）；本題答案可能有一次說謊，需容錯界與校驗題構造"
       }
+    },
+    {
+      "id": "logic_grade11_foundation_058",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "stable_matching_count_cyclic_preferences",
+      "tags": [
+        "c:logic_deduction",
+        "m:enumeration",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade11",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "社團要把三位學長甲、乙、丙和三位學弟子、丑、寅配成三組，每組一位學長、一位學弟，一共有 6 種配法。每個人心中對另一方的三個人都有喜好順序（越前面越想同組）：甲：子 > 丑 > 寅；乙：丑 > 寅 > 子；丙：寅 > 子 > 丑；子：乙 > 丙 > 甲；丑：丙 > 甲 > 乙；寅：甲 > 乙 > 丙。對某一種配法，如果有一位學長和一位學弟沒有被配在一起，但兩人都比較想和對方同組、勝過和自己目前的搭檔同組，就說這種配法「不穩定」；否則稱為「穩定」。6 種配法之中，穩定的有幾種？",
+        "zh-Hans": "社团要把三位学长甲、乙、丙和三位学弟子、丑、寅配成三组，每组一位学长、一位学弟，一共有 6 种配法。每个人心中对另一方的三个人都有喜好顺序（越前面越想同组）：甲：子 > 丑 > 寅；乙：丑 > 寅 > 子；丙：寅 > 子 > 丑；子：乙 > 丙 > 甲；丑：丙 > 甲 > 乙；寅：甲 > 乙 > 丙。对某一种配法，如果有一位学长和一位学弟没有被配在一起，但两人都比较想和对方同组、胜过和自己目前的搭档同组，就说这种配法“不稳定”；否则称为“稳定”。6 种配法之中，稳定的有几种？",
+        "en": "A club pairs three seniors Jia, Yi, Bing with three juniors Zi, Chou, Yin into three pairs of one senior and one junior, so there are 6 possible pairings. Each person ranks the three people on the other side (earlier means more preferred): Jia: Zi > Chou > Yin; Yi: Chou > Yin > Zi; Bing: Yin > Zi > Chou; Zi: Yi > Bing > Jia; Chou: Bing > Jia > Yi; Yin: Jia > Yi > Bing. A pairing is called unstable if some senior and some junior who are not paired together both prefer each other to their current partners; otherwise it is stable. How many of the 6 pairings are stable?",
+        "ja": "部で 3 人の先輩 甲・乙・丙 と 3 人の後輩 子・丑・寅 を、先輩 1 人と後輩 1 人の組 3 つに分ける。組み方は全部で 6 通りある。各人は相手側の 3 人に希望順位をつけている（前ほど組みたい）。甲：子 > 丑 > 寅、乙：丑 > 寅 > 子、丙：寅 > 子 > 丑、子：乙 > 丙 > 甲、丑：丙 > 甲 > 乙、寅：甲 > 乙 > 丙。ある組み方で、組になっていない先輩と後輩が、どちらも今の相手より互いを好むような 2 人がいるとき、その組み方は「不安定」、そうでなければ「安定」という。6 通りのうち安定な組み方は何通りか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 3。",
+        "zh-Hans": "答案是 3。",
+        "en": "The answer is 3.",
+        "ja": "答えは 3 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "把配法寫成「甲、乙、丙的搭檔依序是誰」：(子, 丑, 寅)、(丑, 寅, 子)、(寅, 子, 丑)、(子, 寅, 丑)、(丑, 子, 寅)、(寅, 丑, 子)。逐一檢查有沒有「互相更想同組」的一對。",
+          "(子, 丑, 寅)：甲、乙、丙都和自己的第一志願同組，沒有學長想換人，因此不會有互相更想同組的一對，穩定。(寅, 子, 丑)：子、丑、寅的搭檔依序是乙、丙、甲，都是各自的第一志願，沒有學弟想換人，同理穩定。",
+          "(丑, 寅, 子)：每個人都和自己的第二志願同組，學長只會想換成第一志願。甲想要子，但子比起甲更想要目前的丙；乙想要丑，但丑比起乙更想要目前的甲；丙想要寅，但寅比起丙更想要目前的乙。沒有互相更想同組的一對，穩定。",
+          "(子, 寅, 丑)：丙的順序是寅 > 子 > 丑，比起目前的丑更想要子；子的順序是乙 > 丙 > 甲，比起目前的甲更想要丙。丙與子互相更想同組，不穩定。",
+          "(丑, 子, 寅)：乙比起目前的子更想要寅，寅比起目前的丙更想要乙，不穩定。(寅, 丑, 子)：甲比起目前的寅更想要丑，丑比起目前的乙更想要甲，不穩定。",
+          "所以穩定的配法有 3 種。"
+        ],
+        "zh-Hans": [
+          "把配法写成“甲、乙、丙的搭档依次是谁”：(子, 丑, 寅)、(丑, 寅, 子)、(寅, 子, 丑)、(子, 寅, 丑)、(丑, 子, 寅)、(寅, 丑, 子)。逐一检查有没有“互相更想同组”的一对。",
+          "(子, 丑, 寅)：甲、乙、丙都和自己的第一志愿同组，没有学长想换人，因此不会有互相更想同组的一对，稳定。(寅, 子, 丑)：子、丑、寅的搭档依次是乙、丙、甲，都是各自的第一志愿，没有学弟想换人，同理稳定。",
+          "(丑, 寅, 子)：每个人都和自己的第二志愿同组，学长只会想换成第一志愿。甲想要子，但子比起甲更想要目前的丙；乙想要丑，但丑比起乙更想要目前的甲；丙想要寅，但寅比起丙更想要目前的乙。没有互相更想同组的一对，稳定。",
+          "(子, 寅, 丑)：丙的顺序是寅 > 子 > 丑，比起目前的丑更想要子；子的顺序是乙 > 丙 > 甲，比起目前的甲更想要丙。丙与子互相更想同组，不稳定。",
+          "(丑, 子, 寅)：乙比起目前的子更想要寅，寅比起目前的丙更想要乙，不稳定。(寅, 丑, 子)：甲比起目前的寅更想要丑，丑比起目前的乙更想要甲，不稳定。",
+          "所以稳定的配法有 3 种。"
+        ],
+        "en": [
+          "Write each pairing as the partners of Jia, Yi, Bing in order: (Zi, Chou, Yin), (Chou, Yin, Zi), (Yin, Zi, Chou), (Zi, Yin, Chou), (Chou, Zi, Yin), (Yin, Chou, Zi). Check each for a pair who prefer each other.",
+          "(Zi, Chou, Yin): every senior has his first choice, so no senior wants to switch and no such pair exists: stable. (Yin, Zi, Chou): the partners of Zi, Chou, Yin are Yi, Bing, Jia, each junior's first choice, so likewise stable.",
+          "(Chou, Yin, Zi): everyone has his second choice, so a senior would only want his first choice. Jia wants Zi, but Zi prefers her current Bing to Jia; Yi wants Chou, but Chou prefers his current Jia to Yi; Bing wants Yin, but Yin prefers her current Yi to Bing. No blocking pair: stable.",
+          "(Zi, Yin, Chou): Bing ranks Yin > Zi > Chou, so prefers Zi to his current Chou; Zi ranks Yi > Bing > Jia, so prefers Bing to her current Jia. Bing and Zi block: unstable.",
+          "(Chou, Zi, Yin): Yi prefers Yin to his current Zi, and Yin prefers Yi to her current Bing: unstable. (Yin, Chou, Zi): Jia prefers Chou to his current Yin, and Chou prefers Jia to his current Yi: unstable.",
+          "So 3 of the pairings are stable."
+        ],
+        "ja": [
+          "組み方を「甲・乙・丙の相手を順に並べたもの」で表す：(子, 丑, 寅)、(丑, 寅, 子)、(寅, 子, 丑)、(子, 寅, 丑)、(丑, 子, 寅)、(寅, 丑, 子)。それぞれについて「互いに相手を好む 2 人」がいるか調べる。",
+          "(子, 丑, 寅)：甲・乙・丙はみな第 1 希望と組んでいるので、相手を替えたい先輩はおらず、そのような 2 人はいない。安定。(寅, 子, 丑)：子・丑・寅の相手は順に乙・丙・甲で、どれも各自の第 1 希望なので、同様に安定。",
+          "(丑, 寅, 子)：全員が第 2 希望と組んでいて、先輩が替えたいのは第 1 希望だけである。甲は子を望むが、子は甲より今の丙を好む。乙は丑を望むが、丑は乙より今の甲を好む。丙は寅を望むが、寅は丙より今の乙を好む。互いに好む 2 人はおらず安定。",
+          "(子, 寅, 丑)：丙の順位は寅 > 子 > 丑 なので今の丑より子を好み、子の順位は乙 > 丙 > 甲 なので今の甲より丙を好む。丙と子が互いに好むので不安定。",
+          "(丑, 子, 寅)：乙は今の子より寅を好み、寅は今の丙より乙を好むので不安定。(寅, 丑, 子)：甲は今の寅より丑を好み、丑は今の乙より甲を好むので不安定。",
+          "よって安定な組み方は 3 通り。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "3"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade11-foundation",
+        "notes": "逐一檢查 6 種配法有無互相更想同組的一對，循環偏好下恰 3 種穩定。掃過 /偏好|喜好順序|志願|穩定/（2 題）；最接近 logic_grade12_foundation_053，差異：該題是多數決議程順序操縱；本題是雙方偏好下的穩定配對計數"
+      }
     }
   ]
 }

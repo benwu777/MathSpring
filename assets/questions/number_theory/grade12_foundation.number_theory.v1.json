@@ -5236,6 +5236,157 @@
         "reference": "number-theory-grade12-foundation",
         "notes": "看 1 用幾次再整體除以 2，得 b(2m+1)=b(m)、b(2m)=b(m)+b(m−1)。掃過 /2 的次方|最多.*兩次|至多.*兩次/（3 題）；最接近 number_theory_grade12_foundation_028，差異：該題是費氏數的唯一表示；本題是每個 2 的次方至多用兩次的表示數，用 b(2m)=b(m)+b(m−1) 遞推"
       }
+    },
+    {
+      "id": "number_theory_grade12_foundation_056",
+      "reviewStatus": "ok",
+      "topic": "number_theory",
+      "subtopic": "ordered_triples_with_prescribed_pairwise_lcms",
+      "tags": [
+        "c:factor_multiple",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "以 lcm(x, y) 表示正整數 x 與 y 的最小公倍數。求滿足 lcm(a, b) = 1000、lcm(b, c) = 2000、lcm(c, a) = 2000 的正整數有序三元組 (a, b, c) 的個數。",
+        "zh-Hans": "以 lcm(x, y) 表示正整数 x 与 y 的最小公倍数。求满足 lcm(a, b) = 1000、lcm(b, c) = 2000、lcm(c, a) = 2000 的正整数有序三元组 (a, b, c) 的个数。",
+        "en": "Let lcm(x, y) denote the least common multiple of positive integers x and y. Find the number of ordered triples (a, b, c) of positive integers with lcm(a, b) = 1000, lcm(b, c) = 2000 and lcm(c, a) = 2000.",
+        "ja": "正の整数 x、y の最小公倍数を lcm(x, y) で表す。lcm(a, b) = 1000、lcm(b, c) = 2000、lcm(c, a) = 2000 を満たす正の整数の順序つき三つ組 (a, b, c) の個数を求めよ。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 70。",
+        "zh-Hans": "答案是 70。",
+        "en": "The answer is 70.",
+        "ja": "答えは 70 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "1000 = 2³ × 5³，2000 = 2⁴ × 5³。a、b、c 都整除 2000，所以只含質因數 2 與 5。設 a、b、c 的質因數分解中 2 的指數依序是 x、y、z，5 的指數依序是 u、v、w。",
+          "兩數的最小公倍數中，每個質因數的指數等於兩數該指數中較大的那一個。以 max(p, q) 表示 p、q 中較大者，條件變成：max(x, y) = 3、max(y, z) = 4、max(z, x) = 4，以及 max(u, v) = max(v, w) = max(w, u) = 3。",
+          "2 的指數：若 z ≤ 3，則 max(y, z) = 4 迫使 y = 4，與 max(x, y) = 3 矛盾，所以 z = 4。這時後兩條自動成立，只剩 max(x, y) = 3：x、y 都在 0 到 3 之間而且至少一個是 3，有 4 × 4 − 3 × 3 = 7 種。",
+          "5 的指數：u、v、w 都不超過 3，而且任兩個之中至少一個是 3，也就是三個之中至少兩個是 3。三個都是 3 有 1 種；恰有兩個是 3 時，選出不是 3 的那一個有 3 種、它的值是 0、1、2 有 3 種，共 9 種。合計 10 種。",
+          "2 的指數與 5 的指數可以獨立選擇，所以有序三元組共有 7 × 10 = 70 個。"
+        ],
+        "zh-Hans": [
+          "1000 = 2³ × 5³，2000 = 2⁴ × 5³。a、b、c 都整除 2000，所以只含质因数 2 与 5。设 a、b、c 的质因数分解中 2 的指数依次是 x、y、z，5 的指数依次是 u、v、w。",
+          "两数的最小公倍数中，每个质因数的指数等于两数该指数中较大的那一个。以 max(p, q) 表示 p、q 中较大者，条件变成：max(x, y) = 3、max(y, z) = 4、max(z, x) = 4，以及 max(u, v) = max(v, w) = max(w, u) = 3。",
+          "2 的指数：若 z ≤ 3，则 max(y, z) = 4 迫使 y = 4，与 max(x, y) = 3 矛盾，所以 z = 4。这时后两条自动成立，只剩 max(x, y) = 3：x、y 都在 0 到 3 之间而且至少一个是 3，有 4 × 4 − 3 × 3 = 7 种。",
+          "5 的指数：u、v、w 都不超过 3，而且任两个之中至少一个是 3，也就是三个之中至少两个是 3。三个都是 3 有 1 种；恰有两个是 3 时，选出不是 3 的那一个有 3 种、它的值是 0、1、2 有 3 种，共 9 种。合计 10 种。",
+          "2 的指数与 5 的指数可以独立选择，所以有序三元组共有 7 × 10 = 70 个。"
+        ],
+        "en": [
+          "1000 = 2³ × 5³ and 2000 = 2⁴ × 5³. Each of a, b, c divides 2000, so only the primes 2 and 5 occur. Let the exponents of 2 in a, b, c be x, y, z and the exponents of 5 be u, v, w.",
+          "In an lcm, each prime's exponent is the larger of the two exponents. Writing max(p, q) for the larger of p and q, the conditions become max(x, y) = 3, max(y, z) = 4, max(z, x) = 4, and max(u, v) = max(v, w) = max(w, u) = 3.",
+          "Exponents of 2: if z ≤ 3, then max(y, z) = 4 forces y = 4, contradicting max(x, y) = 3; so z = 4. Then the last two conditions hold, and we need max(x, y) = 3: x, y in 0 to 3 with at least one equal to 3, which is 4 × 4 − 3 × 3 = 7 ways.",
+          "Exponents of 5: u, v, w are at most 3 and among any two at least one is 3, i.e. at least two of the three equal 3. All three equal 3: 1 way; exactly two: choose which one is not 3 (3 ways) and its value 0, 1 or 2 (3 ways), 9 ways. Total 10.",
+          "The two primes are independent, so there are 7 × 10 = 70 ordered triples."
+        ],
+        "ja": [
+          "1000 = 2³ × 5³、2000 = 2⁴ × 5³。a、b、c はどれも 2000 を割り切るので、素因数は 2 と 5 だけである。a、b、c の素因数分解における 2 の指数を順に x、y、z、5 の指数を順に u、v、w とする。",
+          "最小公倍数では、各素因数の指数は 2 数のその指数の大きい方になる。p、q の大きい方を max(p, q) と書くと、条件は max(x, y) = 3、max(y, z) = 4、max(z, x) = 4、および max(u, v) = max(v, w) = max(w, u) = 3 となる。",
+          "2 の指数：z ≤ 3 なら max(y, z) = 4 より y = 4 となり、max(x, y) = 3 に矛盾する。よって z = 4。このとき後の 2 条件は自動的に成り立ち、残るのは max(x, y) = 3、つまり x、y が 0 から 3 で少なくとも一方が 3 の場合で、4 × 4 − 3 × 3 = 7 通り。",
+          "5 の指数：u、v、w はどれも 3 以下で、どの 2 つも少なくとも一方が 3、つまり 3 つのうち少なくとも 2 つが 3 である。3 つとも 3 は 1 通り。ちょうど 2 つが 3 のときは、3 でないものの選び方 3 通りとその値 0、1、2 の 3 通りで 9 通り。計 10 通り。",
+          "2 の指数と 5 の指数は独立に選べるので、三つ組は 7 × 10 = 70 個。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "70"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "number-theory-grade12-foundation",
+        "notes": "2 的指數迫使 z = 4、max(x, y) = 3 有 7 種；5 的指數至少兩個是 3 有 10 種。掃過 /最小公倍數|lcm/（10 題）；最接近 number_theory_grade9_foundation_029，差異：該題是 lcm(a, b) = 12 的有序數對；本題是三對 lcm 同時給定的三元組，要分質因數討論指數的最大值"
+      }
+    },
+    {
+      "id": "number_theory_grade12_foundation_057",
+      "reviewStatus": "ok",
+      "topic": "number_theory",
+      "subtopic": "two_bit_numbers_divisible_by_9_probability",
+      "tags": [
+        "c:number_base",
+        "c:modular",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "在 1 到 1024 的整數中，把二進位寫法恰好有兩個數字 1 的數全部找出來（例如 5 = 101₂、12 = 1100₂）。從這些數中隨機選一個，每個被選到的機會相同。選到 9 的倍數的機率寫成最簡分數 m/n，求 m + n。",
+        "zh-Hans": "在 1 到 1024 的整数中，把二进制写法恰好有两个数字 1 的数全部找出来（例如 5 = 101₂、12 = 1100₂）。从这些数中随机选一个，每个被选到的机会相同。选到 9 的倍数的概率写成最简分数 m/n，求 m + n。",
+        "en": "Among the integers from 1 to 1024, list all those whose binary representation contains exactly two 1s (e.g. 5 = 101₂, 12 = 1100₂). One of them is chosen at random, each equally likely. The probability that it is a multiple of 9 is m/n in lowest terms. Find m + n.",
+        "ja": "1 から 1024 までの整数のうち、2 進法で書いたとき 1 がちょうど 2 個現れるものをすべて挙げる（たとえば 5 = 101₂、12 = 1100₂）。その中から 1 つを等確率で選ぶとき、9 の倍数を選ぶ確率を既約分数 m/n で表す。m + n を求めよ。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 53。",
+        "zh-Hans": "答案是 53。",
+        "en": "The answer is 53.",
+        "ja": "答えは 53 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "二進位恰有兩個 1 的數是 2ᵃ + 2ᵇ，a > b ≥ 0。1024 = 2¹⁰ 只有一個 1；若 a ≥ 10 則 2ᵃ + 2ᵇ > 1024，所以 a ≤ 9。a、b 是從 0 到 9 中選出的兩個數，共 C(10, 2) = 45 個。",
+          "2ᵃ + 2ᵇ = 2ᵇ × (2ᵈ + 1)，其中 d = a − b，1 ≤ d ≤ 9。2ᵇ 與 9 互質，所以它是 9 的倍數，恰好是 9 整除 2ᵈ + 1。",
+          "2¹、2²、2³、⋯ 除以 9 的餘數依序是 2、4、8、7、5、1，之後每 6 個重複一次。2ᵈ + 1 是 9 的倍數，即 2ᵈ 除以 9 餘 8，恰好是 d 除以 6 餘 3。在 1 到 9 之間只有 d = 3 與 d = 9。",
+          "d = 3：(b, a) = (0, 3)、(1, 4)、⋯、(6, 9)，共 7 個；d = 9：只有 (0, 9)，1 個。合計 8 個。",
+          "機率是 8/45，已是最簡分數，所以 m + n = 8 + 45 = 53。"
+        ],
+        "zh-Hans": [
+          "二进制恰有两个 1 的数是 2ᵃ + 2ᵇ，a > b ≥ 0。1024 = 2¹⁰ 只有一个 1；若 a ≥ 10 则 2ᵃ + 2ᵇ > 1024，所以 a ≤ 9。a、b 是从 0 到 9 中选出的两个数，共 C(10, 2) = 45 个。",
+          "2ᵃ + 2ᵇ = 2ᵇ × (2ᵈ + 1)，其中 d = a − b，1 ≤ d ≤ 9。2ᵇ 与 9 互质，所以它是 9 的倍数，恰好是 9 整除 2ᵈ + 1。",
+          "2¹、2²、2³、⋯ 除以 9 的余数依次是 2、4、8、7、5、1，之后每 6 个重复一次。2ᵈ + 1 是 9 的倍数，即 2ᵈ 除以 9 余 8，恰好是 d 除以 6 余 3。在 1 到 9 之间只有 d = 3 与 d = 9。",
+          "d = 3：(b, a) = (0, 3)、(1, 4)、⋯、(6, 9)，共 7 个；d = 9：只有 (0, 9)，1 个。合计 8 个。",
+          "概率是 8/45，已是最简分数，所以 m + n = 8 + 45 = 53。"
+        ],
+        "en": [
+          "A number with exactly two 1s in binary is 2ᵃ + 2ᵇ with a > b ≥ 0. 1024 = 2¹⁰ has a single 1, and if a ≥ 10 then 2ᵃ + 2ᵇ > 1024, so a ≤ 9. So a, b are two of 0 to 9: C(10, 2) = 45 numbers.",
+          "2ᵃ + 2ᵇ = 2ᵇ × (2ᵈ + 1) with d = a − b, 1 ≤ d ≤ 9. Since 2ᵇ is coprime to 9, the number is a multiple of 9 exactly when 9 divides 2ᵈ + 1.",
+          "The remainders of 2¹, 2², 2³, … mod 9 are 2, 4, 8, 7, 5, 1 and then repeat every 6. 2ᵈ + 1 is a multiple of 9 when 2ᵈ ≡ 8 (mod 9), which happens exactly when d ≡ 3 (mod 6). Between 1 and 9 that means d = 3 or d = 9.",
+          "d = 3: (b, a) = (0, 3), (1, 4), …, (6, 9), 7 numbers; d = 9: only (0, 9), 1 number. Total 8.",
+          "The probability is 8/45, already in lowest terms, so m + n = 8 + 45 = 53."
+        ],
+        "ja": [
+          "2 進法で 1 がちょうど 2 個の数は 2ᵃ + 2ᵇ（a > b ≥ 0）である。1024 = 2¹⁰ は 1 が 1 個だけで、a ≥ 10 なら 2ᵃ + 2ᵇ > 1024 なので a ≤ 9。a、b は 0 から 9 のうちの 2 つで、C(10, 2) = 45 個。",
+          "2ᵃ + 2ᵇ = 2ᵇ × (2ᵈ + 1)（d = a − b、1 ≤ d ≤ 9）。2ᵇ は 9 と互いに素なので、これが 9 の倍数になるのはちょうど 9 が 2ᵈ + 1 を割り切るときである。",
+          "2¹、2²、2³、⋯ を 9 で割った余りは順に 2、4、8、7、5、1 で、その後 6 個ごとにくり返す。2ᵈ + 1 が 9 の倍数、つまり 2ᵈ を 9 で割った余りが 8 になるのは、d を 6 で割った余りが 3 のときに限る。1 から 9 では d = 3 と d = 9。",
+          "d = 3 のとき (b, a) = (0, 3)、(1, 4)、⋯、(6, 9) の 7 個、d = 9 のとき (0, 9) の 1 個。計 8 個。",
+          "確率は 8/45 で既約なので m + n = 8 + 45 = 53。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "53"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "number-theory-grade12-foundation",
+        "notes": "2ᵃ + 2ᵇ = 2ᵇ(2ᵈ + 1)，9 整除 2ᵈ + 1 ⇔ d 除以 6 餘 3。掃過 /二進位/（9 題）；最接近 number_theory_grade12_foundation_045，差異：該題是數恰有 3 個 1 的數；本題是恰有 2 個 1 的數中 9 的倍數的機率，用 2 模 9 的週期"
+      }
     }
   ]
 }

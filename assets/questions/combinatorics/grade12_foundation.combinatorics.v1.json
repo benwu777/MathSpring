@@ -7237,6 +7237,310 @@
         "reference": "combinatorics-grade12-foundation",
         "notes": "依結尾字母分兩個遞推：aₙ = aₙ₋₂ + bₙ₋₂、bₙ = aₙ₋₁ + bₙ₋₂。掃過 /字串|連續.*(偶數|奇數)/（17 題）；最接近 combinatorics_grade12_foundation_004，差異：該題要求數字 1 出現偶數次；本題要求 A 段長偶、B 段長奇，依結尾字母建兩條遞推"
       }
+    },
+    {
+      "id": "combinatorics_grade12_foundation_083",
+      "reviewStatus": "ok",
+      "topic": "combinatorics",
+      "subtopic": "reflecting_random_walk_expected_hitting_time",
+      "tags": [
+        "c:expectation",
+        "c:recurrence",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "數線上有一枚棋子，一開始在 0。之後每一秒移動一次：棋子在 0 時，一定往右移到 1；棋子在其他位置時，擲一枚公正的硬幣，正面就往右移 1 格，反面就往左移 1 格。求棋子第一次到達 20 所需秒數的期望值。",
+        "zh-Hans": "数轴上有一枚棋子，一开始在 0。之后每一秒移动一次：棋子在 0 时，一定往右移到 1；棋子在其他位置时，掷一枚公正的硬币，正面就往右移 1 格，反面就往左移 1 格。求棋子第一次到达 20 所需秒数的期望值。",
+        "en": "A token starts at 0 on the number line. Every second it moves once: at 0 it always moves right to 1; elsewhere a fair coin is tossed, and it moves right 1 on heads and left 1 on tails. Find the expected number of seconds until the token first reaches 20.",
+        "ja": "数直線上の 0 にこまがある。その後 1 秒ごとに 1 回動く。こまが 0 にあるときは必ず右の 1 に動く。それ以外の位置では公正な硬貨を投げ、表なら右に 1、裏なら左に 1 動く。こまが初めて 20 に着くまでの秒数の期待値を求めよ。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 400。",
+        "zh-Hans": "答案是 400。",
+        "en": "The answer is 400.",
+        "ja": "答えは 400 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "設 Tₖ 是棋子從 k 出發、第一次到達 k + 1 所需秒數的期望值（k = 0, 1, ⋯, 19）。棋子每次只移動一格，從 0 到 20 必須依序第一次到達 1、2、⋯、20，所以所求的期望值是 T₀ + T₁ + ⋯ + T₁₉。",
+          "從 0 出發一秒後一定在 1，所以 T₀ = 1。",
+          "k ≥ 1 時，先走 1 秒：有 1/2 的機率直接到 k + 1；另外 1/2 的機率到 k − 1，這時平均還要 Tₖ₋₁ 秒回到 k，回到 k 之後情況和一開始一樣，平均再花 Tₖ 秒到 k + 1。所以 Tₖ = 1 + (1/2) × (Tₖ₋₁ + Tₖ)。",
+          "整理得 (1/2)Tₖ = 1 + (1/2)Tₖ₋₁，即 Tₖ = Tₖ₋₁ + 2。由 T₀ = 1 得 T₁ = 3、T₂ = 5、⋯，一般地 Tₖ = 2k + 1。",
+          "所求期望值 = 1 + 3 + 5 + ⋯ + 39 = 20² = 400 秒。"
+        ],
+        "zh-Hans": [
+          "设 Tₖ 是棋子从 k 出发、第一次到达 k + 1 所需秒数的期望值（k = 0, 1, ⋯, 19）。棋子每次只移动一格，从 0 到 20 必须依次第一次到达 1、2、⋯、20，所以所求的期望值是 T₀ + T₁ + ⋯ + T₁₉。",
+          "从 0 出发一秒后一定在 1，所以 T₀ = 1。",
+          "k ≥ 1 时，先走 1 秒：有 1/2 的概率直接到 k + 1；另外 1/2 的概率到 k − 1，这时平均还要 Tₖ₋₁ 秒回到 k，回到 k 之后情况和一开始一样，平均再花 Tₖ 秒到 k + 1。所以 Tₖ = 1 + (1/2) × (Tₖ₋₁ + Tₖ)。",
+          "整理得 (1/2)Tₖ = 1 + (1/2)Tₖ₋₁，即 Tₖ = Tₖ₋₁ + 2。由 T₀ = 1 得 T₁ = 3、T₂ = 5、⋯，一般地 Tₖ = 2k + 1。",
+          "所求期望值 = 1 + 3 + 5 + ⋯ + 39 = 20² = 400 秒。"
+        ],
+        "en": [
+          "Let Tₖ be the expected time to first reach k + 1 starting from k (k = 0, 1, …, 19). The token moves one step at a time, so to get from 0 to 20 it must first reach 1, 2, …, 20 in order; the answer is T₀ + T₁ + ⋯ + T₁₉.",
+          "From 0 it is at 1 after one second, so T₀ = 1.",
+          "For k ≥ 1, take one step: with probability 1/2 it reaches k + 1; with probability 1/2 it goes to k − 1, then needs on average Tₖ₋₁ more seconds to return to k, after which the situation is as at the start and it needs on average Tₖ more seconds. So Tₖ = 1 + (1/2) × (Tₖ₋₁ + Tₖ).",
+          "Rearranging, (1/2)Tₖ = 1 + (1/2)Tₖ₋₁, i.e. Tₖ = Tₖ₋₁ + 2. With T₀ = 1 we get T₁ = 3, T₂ = 5, …, and in general Tₖ = 2k + 1.",
+          "The expected time is 1 + 3 + 5 + ⋯ + 39 = 20² = 400 seconds."
+        ],
+        "ja": [
+          "k から出発して初めて k + 1 に着くまでの秒数の期待値を Tₖ とする（k = 0, 1, ⋯, 19）。こまは 1 マスずつしか動かないので、0 から 20 へ行くには 1、2、⋯、20 に順に初めて着く必要があり、求める期待値は T₀ + T₁ + ⋯ + T₁₉ である。",
+          "0 からは 1 秒後に必ず 1 にいるので T₀ = 1。",
+          "k ≥ 1 のとき、まず 1 秒動く。確率 1/2 でそのまま k + 1 に着く。確率 1/2 で k − 1 に行き、平均 Tₖ₋₁ 秒かけて k に戻り、戻った後は最初と同じ状況なので平均 Tₖ 秒で k + 1 に着く。よって Tₖ = 1 + (1/2) × (Tₖ₋₁ + Tₖ)。",
+          "整理すると (1/2)Tₖ = 1 + (1/2)Tₖ₋₁、つまり Tₖ = Tₖ₋₁ + 2。T₀ = 1 から T₁ = 3、T₂ = 5、⋯ で、一般に Tₖ = 2k + 1。",
+          "求める期待値は 1 + 3 + 5 + ⋯ + 39 = 20² = 400 秒。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "400"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "combinatorics-grade12-foundation",
+        "notes": "Tₖ = 1 + (Tₖ₋₁ + Tₖ)/2 得 Tₖ = 2k + 1，總和 20²。掃過 /第一次.*到達|首次到達|數線上.*棋子/（0 題）；最接近 combinatorics_grade11_foundation_068，差異：該題是固定 10 步後位置平方的期望；本題是有反射壁的隨機漫步首次到達時間"
+      }
+    },
+    {
+      "id": "combinatorics_grade12_foundation_084",
+      "reviewStatus": "ok",
+      "topic": "combinatorics",
+      "subtopic": "two_dice_point_game_winning_probability",
+      "tags": [
+        "c:probability",
+        "c:sequence",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一種擲骰遊戲用兩顆公正的六面骰子，每次同時擲兩顆，看點數和。第一次擲：和是 7 或 11 立刻獲勝；和是 2、3 或 12 立刻落敗；和是其他數（4、5、6、8、9、10）時，把這個和記為「目標」，接著一直重擲，直到擲出目標或 7 為止：先擲出目標就獲勝，先擲出 7 就落敗（擲出其他的和不算，繼續擲）。獲勝的機率寫成最簡分數 m/n，求 m + n。",
+        "zh-Hans": "一种掷骰游戏用两颗公正的六面骰子，每次同时掷两颗，看点数和。第一次掷：和是 7 或 11 立刻获胜；和是 2、3 或 12 立刻落败；和是其他数（4、5、6、8、9、10）时，把这个和记为“目标”，接着一直重掷，直到掷出目标或 7 为止：先掷出目标就获胜，先掷出 7 就落败（掷出其他的和不算，继续掷）。获胜的概率写成最简分数 m/n，求 m + n。",
+        "en": "A dice game uses two fair six-sided dice, rolled together each time, and looks at the sum. On the first roll, a sum of 7 or 11 wins at once and a sum of 2, 3 or 12 loses at once; any other sum (4, 5, 6, 8, 9, 10) becomes the target, and the dice are rolled again and again until the target or a 7 appears: the target first means a win, a 7 first means a loss (other sums are ignored). The probability of winning is m/n in lowest terms. Find m + n.",
+        "ja": "2 個の公正な 6 面さいころを同時に振り、目の和を見るゲームがある。1 回目に和が 7 か 11 ならすぐ勝ち、2、3、12 ならすぐ負け、それ以外（4、5、6、8、9、10）ならその和を「目標」とし、目標か 7 が出るまで振り続ける。目標が先に出れば勝ち、7 が先に出れば負けである（ほかの和は無視して振り続ける）。勝つ確率を既約分数 m/n で表すとき、m + n を求めよ。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 739。",
+        "zh-Hans": "答案是 739。",
+        "en": "The answer is 739.",
+        "ja": "答えは 739 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "兩顆骰子共 36 種等可能結果，和為 2、3、4、⋯、12 的種數依序是 1、2、3、4、5、6、5、4、3、2、1。",
+          "第一次就獲勝：和為 7（6 種）或 11（2 種），機率 8/36 = 2/9。",
+          "若目標是 s，每次擲出 s 的機率是 p，擲出 7 的機率是 q = 6/36。先擲出 s 的機率是 p + (1 − p − q)p + (1 − p − q)²p + ⋯ = p ÷ (p + q)。所以目標是 4 或 10 時贏的機率是 3/(3 + 6) = 1/3；是 5 或 9 時是 4/(4 + 6) = 2/5；是 6 或 8 時是 5/(5 + 6) = 5/11。",
+          "經由目標再獲勝的機率：2 × (3/36 × 1/3) + 2 × (4/36 × 2/5) + 2 × (5/36 × 5/11) = 1/18 + 4/45 + 25/198。",
+          "通分到 990：2/9 = 220/990，1/18 = 55/990，4/45 = 88/990，25/198 = 125/990，合計 488/990 = 244/495。",
+          "244 = 2² × 61 與 495 = 3² × 5 × 11 沒有公因數，已是最簡分數，所以 m + n = 244 + 495 = 739。"
+        ],
+        "zh-Hans": [
+          "两颗骰子共 36 种等可能结果，和为 2、3、4、⋯、12 的种数依次是 1、2、3、4、5、6、5、4、3、2、1。",
+          "第一次就获胜：和为 7（6 种）或 11（2 种），概率 8/36 = 2/9。",
+          "若目标是 s，每次掷出 s 的概率是 p，掷出 7 的概率是 q = 6/36。先掷出 s 的概率是 p + (1 − p − q)p + (1 − p − q)²p + ⋯ = p ÷ (p + q)。所以目标是 4 或 10 时赢的概率是 3/(3 + 6) = 1/3；是 5 或 9 时是 4/(4 + 6) = 2/5；是 6 或 8 时是 5/(5 + 6) = 5/11。",
+          "经由目标再获胜的概率：2 × (3/36 × 1/3) + 2 × (4/36 × 2/5) + 2 × (5/36 × 5/11) = 1/18 + 4/45 + 25/198。",
+          "通分到 990：2/9 = 220/990，1/18 = 55/990，4/45 = 88/990，25/198 = 125/990，合计 488/990 = 244/495。",
+          "244 = 2² × 61 与 495 = 3² × 5 × 11 没有公因数，已是最简分数，所以 m + n = 244 + 495 = 739。"
+        ],
+        "en": [
+          "Two dice give 36 equally likely outcomes; the sums 2, 3, 4, …, 12 occur in 1, 2, 3, 4, 5, 6, 5, 4, 3, 2, 1 ways.",
+          "Winning on the first roll: sum 7 (6 ways) or 11 (2 ways), probability 8/36 = 2/9.",
+          "If the target is s, each roll gives s with probability p and 7 with probability q = 6/36. The chance that s comes first is p + (1 − p − q)p + (1 − p − q)²p + ⋯ = p ÷ (p + q). So with target 4 or 10 the chance of winning is 3/(3 + 6) = 1/3; with 5 or 9 it is 4/(4 + 6) = 2/5; with 6 or 8 it is 5/(5 + 6) = 5/11.",
+          "Winning via a target: 2 × (3/36 × 1/3) + 2 × (4/36 × 2/5) + 2 × (5/36 × 5/11) = 1/18 + 4/45 + 25/198.",
+          "Over 990: 2/9 = 220/990, 1/18 = 55/990, 4/45 = 88/990, 25/198 = 125/990, total 488/990 = 244/495.",
+          "244 = 2² × 61 and 495 = 3² × 5 × 11 share no factor, so the fraction is in lowest terms and m + n = 244 + 495 = 739."
+        ],
+        "ja": [
+          "2 個のさいころの出方は同様に確からしい 36 通りで、和が 2、3、4、⋯、12 になるのは順に 1、2、3、4、5、6、5、4、3、2、1 通り。",
+          "1 回目で勝つのは和が 7（6 通り）か 11（2 通り）で、確率 8/36 = 2/9。",
+          "目標が s のとき、1 回で s が出る確率を p、7 が出る確率を q = 6/36 とする。s が先に出る確率は p + (1 − p − q)p + (1 − p − q)²p + ⋯ = p ÷ (p + q)。よって目標が 4 か 10 なら勝つ確率は 3/(3 + 6) = 1/3、5 か 9 なら 4/(4 + 6) = 2/5、6 か 8 なら 5/(5 + 6) = 5/11。",
+          "目標を経て勝つ確率は 2 × (3/36 × 1/3) + 2 × (4/36 × 2/5) + 2 × (5/36 × 5/11) = 1/18 + 4/45 + 25/198。",
+          "990 に通分すると 2/9 = 220/990、1/18 = 55/990、4/45 = 88/990、25/198 = 125/990 で、合計 488/990 = 244/495。",
+          "244 = 2² × 61 と 495 = 3² × 5 × 11 は共通の因数をもたないので既約で、m + n = 244 + 495 = 739。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "739"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "combinatorics-grade12-foundation",
+        "notes": "目標 s 先於 7 出現的機率是 p/(p + q)，加總得 244/495。掃過 /點數和|擲兩顆/（21 題）；最接近 combinatorics_grade12_foundation_056，差異：該題是輪流擲先出 6 的人獲勝；本題是兩顆骰子的目標點數規則，要對每個目標算先後機率"
+      }
+    },
+    {
+      "id": "combinatorics_grade12_foundation_085",
+      "reviewStatus": "ok",
+      "topic": "combinatorics",
+      "subtopic": "three_nonattacking_rooks_avoiding_main_diagonal",
+      "tags": [
+        "c:inclusion_exclusion",
+        "c:permutation_combination",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一個 5 × 5 的棋盤（5 個橫排，每排 5 格），從左上角到右下角的那條對角線經過其中 5 格。要在棋盤上放 3 個相同的城堡（西洋棋中的 rook），每格最多一個，任兩個不能在同一橫排、也不能在同一直行，而且都不能放在這條對角線的 5 格上。放法一共有幾種？",
+        "zh-Hans": "一个 5 × 5 的棋盘（5 个横排，每排 5 格），从左上角到右下角的那条对角线经过其中 5 格。要在棋盘上放 3 个相同的车（国际象棋中的 rook），每格最多一个，任两个不能在同一横排、也不能在同一竖排，而且都不能放在这条对角线的 5 格上。放法一共有几种？",
+        "en": "On a 5 × 5 board (5 rows of 5 squares), the diagonal from the top-left corner to the bottom-right corner passes through 5 squares. Three identical rooks are to be placed, at most one per square, with no two in the same row or the same column, and none on any of these 5 diagonal squares. How many placements are there?",
+        "ja": "5 × 5 の盤（横 5 段、各段 5 マス）で、左上の角から右下の角への対角線は 5 マスを通る。同じルーク 3 個を、1 マスに高々 1 個、どの 2 個も同じ横の段にも同じ縦の列にもなく、どれもこの対角線上の 5 マスにないように置く。置き方は全部で何通りあるか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 320。",
+        "zh-Hans": "答案是 320。",
+        "en": "The answer is 320.",
+        "ja": "答えは 320 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "先不管對角線。選 3 個橫排有 C(5, 3) = 10 種，選 3 個直行有 10 種，再把選定的橫排與直行一一配對有 3! = 6 種，共 10 × 10 × 6 = 600 種。",
+          "用排容原理扣掉用到對角線格子的放法。指定某一個對角線格子放了城堡，其餘 2 個放在去掉該橫排與該直行後的 4 × 4 棋盤上，有 C(4, 2) × C(4, 2) × 2! = 72 種；對角線有 5 格，合計 5 × 72 = 360。",
+          "指定兩個對角線格子都放了城堡（它們不同排也不同行），第 3 個放在剩下的 3 × 3 棋盤上有 9 種；選兩格有 C(5, 2) = 10 種，合計 90。指定三個對角線格子都放，只有 1 種，選三格有 C(5, 3) = 10 種，合計 10。",
+          "所以不碰對角線的放法有 600 − 360 + 90 − 10 = 320 種。"
+        ],
+        "zh-Hans": [
+          "先不管对角线。选 3 个横排有 C(5, 3) = 10 种，选 3 个竖排有 10 种，再把选定的横排与竖排一一配对有 3! = 6 种，共 10 × 10 × 6 = 600 种。",
+          "用容斥原理扣掉用到对角线格子的放法。指定某一个对角线格子放了车，其余 2 个放在去掉该横排与该竖排后的 4 × 4 棋盘上，有 C(4, 2) × C(4, 2) × 2! = 72 种；对角线有 5 格，合计 5 × 72 = 360。",
+          "指定两个对角线格子都放了车（它们不同横排也不同竖排），第 3 个放在剩下的 3 × 3 棋盘上有 9 种；选两格有 C(5, 2) = 10 种，合计 90。指定三个对角线格子都放，只有 1 种，选三格有 C(5, 3) = 10 种，合计 10。",
+          "所以不碰对角线的放法有 600 − 360 + 90 − 10 = 320 种。"
+        ],
+        "en": [
+          "Ignore the diagonal first: choose 3 rows (C(5, 3) = 10 ways), 3 columns (10 ways), and match them up (3! = 6 ways): 10 × 10 × 6 = 600 placements.",
+          "Use inclusion–exclusion to remove placements using diagonal squares. If a given diagonal square holds a rook, the other 2 go on the 4 × 4 board left after deleting its row and column: C(4, 2) × C(4, 2) × 2! = 72 ways; with 5 diagonal squares this is 5 × 72 = 360.",
+          "If two given diagonal squares both hold rooks (they are in different rows and columns), the third rook goes on the remaining 3 × 3 board in 9 ways; there are C(5, 2) = 10 such pairs, giving 90. If three given diagonal squares hold rooks there is 1 way, and C(5, 3) = 10 such triples, giving 10.",
+          "So the placements avoiding the diagonal number 600 − 360 + 90 − 10 = 320."
+        ],
+        "ja": [
+          "まず対角線を無視する。横の段 3 つの選び方 C(5, 3) = 10 通り、縦の列 3 つの選び方 10 通り、それらの対応のさせ方 3! = 6 通りで、10 × 10 × 6 = 600 通り。",
+          "包除原理で対角線のマスを使う置き方を除く。ある対角線のマスにルークがあると指定すると、残り 2 個はその段と列を除いた 4 × 4 の盤に置くので C(4, 2) × C(4, 2) × 2! = 72 通り。対角線は 5 マスなので計 5 × 72 = 360。",
+          "対角線の 2 マスにルークがあると指定すると（その 2 マスは段も列も異なる）、3 個目は残りの 3 × 3 の盤に 9 通り。2 マスの選び方は C(5, 2) = 10 通りで計 90。3 マスを指定すると 1 通りで、選び方 C(5, 3) = 10 通り、計 10。",
+          "よって対角線を使わない置き方は 600 − 360 + 90 − 10 = 320 通り。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "320"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "combinatorics-grade12-foundation",
+        "notes": "排容：600 − 5 × 72 + 10 × 9 − 10 = 320。掃過 /城堡|rook|車/（87 題）；最接近 combinatorics_grade10_foundation_029，差異：該題是 4 × 4 放 4 城堡無禁格（4!）；本題是 3 城堡避開整條對角線，用排容"
+      }
+    },
+    {
+      "id": "combinatorics_grade12_foundation_086",
+      "reviewStatus": "ok",
+      "topic": "combinatorics",
+      "subtopic": "five_subsets_of_1_to_13_sum_divisible_rotation_orbits",
+      "tags": [
+        "c:modular",
+        "c:permutation_combination",
+        "m:bijection"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "從 1、2、3、⋯、13 中選出 5 個不同的數（只看選了哪些數，不計順序），使這 5 個數的和是 13 的倍數。這樣的選法有幾種？",
+        "zh-Hans": "从 1、2、3、⋯、13 中选出 5 个不同的数（只看选了哪些数，不计顺序），使这 5 个数的和是 13 的倍数。这样的选法有几种？",
+        "en": "Choose 5 different numbers from 1, 2, 3, …, 13 (only which numbers are chosen matters, not the order) so that their sum is a multiple of 13. How many such choices are there?",
+        "ja": "1、2、3、⋯、13 から異なる 5 個の数を選ぶ（どの数を選んだかだけを考え、順序は考えない）。5 個の和が 13 の倍数になる選び方は何通りあるか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 99。",
+        "zh-Hans": "答案是 99。",
+        "en": "The answer is 99.",
+        "ja": "答えは 99 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "全部的選法有 C(13, 5) = 1287 種。",
+          "把 1 到 13 排成一圈，13 的下一個是 1。對一組選法 S，定義「轉一格」：把 S 中每個數換成圈上的下一個數。轉完仍是 5 個不同的數，而且每個數除以 13 的餘數都加 1，所以和除以 13 的餘數加 5。轉 13 格就回到 S，而且「轉一格」可以反過來做，所以全部選法可以分成一群一群：每群是某個 S 連續轉 0、1、2、⋯、12 格得到的 13 組。",
+          "設 S 的和除以 13 餘 r，則轉 j 格後的和與 r + 5j 同餘（j = 0 到 12）。因為 5 與 13 互質，5 × 0、5 × 1、⋯、5 × 12 除以 13 的餘數兩兩不同，所以同一群的 13 組選法的和，除以 13 的餘數恰好是 0 到 12 各一次；特別地，這 13 組兩兩不同，每群確實有 13 組。",
+          "所以 1287 組選法分成 1287 ÷ 13 = 99 群，每群恰有一組的和是 13 的倍數。",
+          "答案是 99 種。"
+        ],
+        "zh-Hans": [
+          "全部的选法有 C(13, 5) = 1287 种。",
+          "把 1 到 13 排成一圈，13 的下一个是 1。对一组选法 S，定义“转一格”：把 S 中每个数换成圈上的下一个数。转完仍是 5 个不同的数，而且每个数除以 13 的余数都加 1，所以和除以 13 的余数加 5。转 13 格就回到 S，而且“转一格”可以反过来做，所以全部选法可以分成一群一群：每群是某个 S 连续转 0、1、2、⋯、12 格得到的 13 组。",
+          "设 S 的和除以 13 余 r，则转 j 格后的和与 r + 5j 同余（j = 0 到 12）。因为 5 与 13 互质，5 × 0、5 × 1、⋯、5 × 12 除以 13 的余数两两不同，所以同一群的 13 组选法的和，除以 13 的余数恰好是 0 到 12 各一次；特别地，这 13 组两两不同，每群确实有 13 组。",
+          "所以 1287 组选法分成 1287 ÷ 13 = 99 群，每群恰有一组的和是 13 的倍数。",
+          "答案是 99 种。"
+        ],
+        "en": [
+          "There are C(13, 5) = 1287 choices in all.",
+          "Arrange 1 to 13 in a circle, with 1 after 13. For a choice S, rotating by one step replaces each number in S by the next number on the circle. The result is again 5 different numbers, each remainder mod 13 goes up by 1, so the remainder of the sum goes up by 5. Rotating 13 steps returns to S, and a rotation can be undone, so all choices split into groups, each consisting of the 13 choices obtained from some S by rotating 0, 1, 2, …, 12 steps.",
+          "If S has sum ≡ r (mod 13), rotating j steps gives sum ≡ r + 5j (j = 0 to 12). Since 5 is coprime to 13, the numbers 5 × 0, 5 × 1, …, 5 × 12 have different remainders mod 13, so within a group the 13 sums take each remainder 0 to 12 exactly once; in particular the 13 choices are all different, so each group really has 13 members.",
+          "So the 1287 choices form 1287 ÷ 13 = 99 groups, and each group contains exactly one choice with sum divisible by 13.",
+          "The answer is 99."
+        ],
+        "ja": [
+          "選び方は全部で C(13, 5) = 1287 通り。",
+          "1 から 13 を円形に並べ、13 の次を 1 とする。選び方 S に対し「1 つ回す」とは、S の各数を円上の次の数に置き換えることとする。回した後も異なる 5 個の数で、各数を 13 で割った余りは 1 ずつ増えるので、和の余りは 5 増える。13 回回すと S に戻り、回す操作は逆にもできるので、すべての選び方は、ある S を 0、1、2、⋯、12 回回して得られる 13 個ずつのグループに分かれる。",
+          "S の和を 13 で割った余りを r とすると、j 回回した後の和は r + 5j と合同である（j = 0 から 12）。5 と 13 は互いに素なので 5 × 0、5 × 1、⋯、5 × 12 を 13 で割った余りはすべて異なり、同じグループの 13 個の和の余りは 0 から 12 がちょうど 1 回ずつ現れる。特にこの 13 個はすべて異なり、各グループは確かに 13 個からなる。",
+          "したがって 1287 個の選び方は 1287 ÷ 13 = 99 個のグループに分かれ、各グループに和が 13 の倍数になるものがちょうど 1 つある。",
+          "答えは 99 通り。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "99"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "combinatorics-grade12-foundation",
+        "notes": "沿 1 到 13 的圈轉一格和的餘數加 5，每 13 組成一群各恰有一組和為 13 的倍數。掃過 /13 的倍數|子集.*和/（7 題）；最接近 combinatorics_grade12_foundation_076，差異：該題是 1 到 9 所有子集和為 3 的倍數（單位根）；本題是固定 5 元子集，用旋轉軌道均分"
+      }
     }
   ]
 }

@@ -7202,6 +7202,314 @@
         "reference": "combinatorics-grade11-foundation",
         "notes": "以直立稜黑點數 sᵢ 表示側面條件 sᵢ+sᵢ₊₁=2，分 u=0,1,2 計數。掃過 /正方體.*頂點|頂點.*(塗|黑)/（20 題）；最接近 combinatorics_grade11_foundation_019，差異：該題是正方體面著色在旋轉下的種類；本題固定正方體、塗頂點且每面恰 2 黑"
       }
+    },
+    {
+      "id": "combinatorics_grade11_foundation_083",
+      "reviewStatus": "ok",
+      "topic": "combinatorics",
+      "subtopic": "standard_fillings_3x3_increasing_rows_columns",
+      "tags": [
+        "c:permutation_combination",
+        "c:recurrence",
+        "m:bijection"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade11",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "把 1、2、3、⋯、9 這九個數各用一次，填進一個 3 × 3 的方格表（3 個橫排，每排 3 格）。要求每一個橫排的三個數由左到右越來越大，每一個直排的三個數由上到下也越來越大。填法一共有幾種？",
+        "zh-Hans": "把 1、2、3、⋯、9 这九个数各用一次，填进一个 3 × 3 的方格表（3 个横排，每排 3 格）。要求每一个横排的三个数从左到右越来越大，每一个竖排的三个数从上到下也越来越大。填法一共有几种？",
+        "en": "Place each of the numbers 1, 2, 3, …, 9 exactly once into a 3 × 3 grid (3 rows of 3 cells). Each row must increase from left to right and each column must increase from top to bottom. How many ways are there?",
+        "ja": "1、2、3、⋯、9 の 9 個の数を 1 回ずつ使って 3 × 3 のマス目（横 3 段、各段 3 マス）に書き入れる。どの横の段も左から右へ増加し、どの縦の列も上から下へ増加するようにする。書き入れ方は全部で何通りあるか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 42。",
+        "zh-Hans": "答案是 42。",
+        "en": "The answer is 42.",
+        "ja": "答えは 42 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "想像依照 1、2、⋯、9 的順序一個一個填進去。因為每排、每列都遞增，一格左邊與上面的格子（如果有）都比它小，一定比它先填。所以任何時刻已填的格子是：第 1 排從左起連續 a 格、第 2 排從左起連續 b 格、第 3 排從左起連續 c 格，而且 3 ≥ a ≥ b ≥ c ≥ 0。",
+          "反過來，只要每一步都把下一個數填在某一排已填部分的右邊一格，並且保持 a ≥ b ≥ c，填出來的就合乎要求。所以填法數等於：從 (0, 0, 0) 出發，每一步把 a、b、c 其中一個加 1、始終保持 a ≥ b ≥ c，走到 (3, 3, 3) 的走法數。設 f(a, b, c) 為走到 (a, b, c) 的走法數，它等於所有合法前一狀態的 f 值之和。",
+          "c = 0 時：f(1, 0, 0) = f(2, 0, 0) = f(3, 0, 0) = 1，f(1, 1, 0) = 1，f(2, 1, 0) = 2，f(2, 2, 0) = 2，f(3, 1, 0) = 3，f(3, 2, 0) = f(3, 1, 0) + f(2, 2, 0) = 5，f(3, 3, 0) = f(3, 2, 0) = 5。",
+          "c = 1 時：f(1, 1, 1) = 1，f(2, 1, 1) = f(1, 1, 1) + f(2, 1, 0) = 3，f(2, 2, 1) = f(2, 1, 1) + f(2, 2, 0) = 5，f(3, 1, 1) = f(2, 1, 1) + f(3, 1, 0) = 6，f(3, 2, 1) = f(2, 2, 1) + f(3, 1, 1) + f(3, 2, 0) = 16，f(3, 3, 1) = f(3, 2, 1) + f(3, 3, 0) = 21。",
+          "c = 2、3 時：f(2, 2, 2) = f(2, 2, 1) = 5，f(3, 2, 2) = f(2, 2, 2) + f(3, 2, 1) = 21，f(3, 3, 2) = f(3, 2, 2) + f(3, 3, 1) = 42，f(3, 3, 3) = f(3, 3, 2) = 42。",
+          "所以填法共有 42 種。"
+        ],
+        "zh-Hans": [
+          "想象依照 1、2、⋯、9 的顺序一个一个填进去。因为每排、每列都递增，一格左边与上面的格子（如果有）都比它小，一定比它先填。所以任何时刻已填的格子是：第 1 排从左起连续 a 格、第 2 排从左起连续 b 格、第 3 排从左起连续 c 格，而且 3 ≥ a ≥ b ≥ c ≥ 0。",
+          "反过来，只要每一步都把下一个数填在某一排已填部分的右边一格，并且保持 a ≥ b ≥ c，填出来的就合乎要求。所以填法数等于：从 (0, 0, 0) 出发，每一步把 a、b、c 其中一个加 1、始终保持 a ≥ b ≥ c，走到 (3, 3, 3) 的走法数。设 f(a, b, c) 为走到 (a, b, c) 的走法数，它等于所有合法前一状态的 f 值之和。",
+          "c = 0 时：f(1, 0, 0) = f(2, 0, 0) = f(3, 0, 0) = 1，f(1, 1, 0) = 1，f(2, 1, 0) = 2，f(2, 2, 0) = 2，f(3, 1, 0) = 3，f(3, 2, 0) = f(3, 1, 0) + f(2, 2, 0) = 5，f(3, 3, 0) = f(3, 2, 0) = 5。",
+          "c = 1 时：f(1, 1, 1) = 1，f(2, 1, 1) = f(1, 1, 1) + f(2, 1, 0) = 3，f(2, 2, 1) = f(2, 1, 1) + f(2, 2, 0) = 5，f(3, 1, 1) = f(2, 1, 1) + f(3, 1, 0) = 6，f(3, 2, 1) = f(2, 2, 1) + f(3, 1, 1) + f(3, 2, 0) = 16，f(3, 3, 1) = f(3, 2, 1) + f(3, 3, 0) = 21。",
+          "c = 2、3 时：f(2, 2, 2) = f(2, 2, 1) = 5，f(3, 2, 2) = f(2, 2, 2) + f(3, 2, 1) = 21，f(3, 3, 2) = f(3, 2, 2) + f(3, 3, 1) = 42，f(3, 3, 3) = f(3, 3, 2) = 42。",
+          "所以填法共有 42 种。"
+        ],
+        "en": [
+          "Imagine filling in 1, 2, …, 9 in order. Since rows and columns increase, the cells to the left of and above a cell are smaller and are filled earlier. So at any moment the filled cells are the leftmost a cells of row 1, the leftmost b of row 2 and the leftmost c of row 3, with 3 ≥ a ≥ b ≥ c ≥ 0.",
+          "Conversely, if each next number goes just to the right of the filled part of some row and a ≥ b ≥ c is kept, the result is valid. So the answer is the number of ways to go from (0, 0, 0) to (3, 3, 3) by adding 1 to one of a, b, c each step while keeping a ≥ b ≥ c. Let f(a, b, c) be the number of ways to reach (a, b, c); it is the sum of f over the legal previous states.",
+          "For c = 0: f(1, 0, 0) = f(2, 0, 0) = f(3, 0, 0) = 1, f(1, 1, 0) = 1, f(2, 1, 0) = 2, f(2, 2, 0) = 2, f(3, 1, 0) = 3, f(3, 2, 0) = f(3, 1, 0) + f(2, 2, 0) = 5, f(3, 3, 0) = f(3, 2, 0) = 5.",
+          "For c = 1: f(1, 1, 1) = 1, f(2, 1, 1) = f(1, 1, 1) + f(2, 1, 0) = 3, f(2, 2, 1) = f(2, 1, 1) + f(2, 2, 0) = 5, f(3, 1, 1) = f(2, 1, 1) + f(3, 1, 0) = 6, f(3, 2, 1) = f(2, 2, 1) + f(3, 1, 1) + f(3, 2, 0) = 16, f(3, 3, 1) = f(3, 2, 1) + f(3, 3, 0) = 21.",
+          "For c = 2, 3: f(2, 2, 2) = f(2, 2, 1) = 5, f(3, 2, 2) = f(2, 2, 2) + f(3, 2, 1) = 21, f(3, 3, 2) = f(3, 2, 2) + f(3, 3, 1) = 42, f(3, 3, 3) = f(3, 3, 2) = 42.",
+          "So there are 42 ways."
+        ],
+        "ja": [
+          "1、2、⋯、9 を小さい順に 1 つずつ書き入れると考える。各段・各列が増加するので、あるマスの左と上のマス（あれば）はそれより小さく、先に書かれる。よってどの時点でも書かれたマスは、1 段目の左から a マス、2 段目の左から b マス、3 段目の左から c マスで、3 ≥ a ≥ b ≥ c ≥ 0 となる。",
+          "逆に、毎回次の数をある段の書かれた部分のすぐ右に書き、a ≥ b ≥ c を保てば条件を満たす。したがって求める数は、(0, 0, 0) から始めて毎回 a、b、c のどれかに 1 を足し、常に a ≥ b ≥ c を保って (3, 3, 3) に至る方法の数である。(a, b, c) に至る方法の数を f(a, b, c) とすると、それは可能な直前の状態の f の和である。",
+          "c = 0 のとき：f(1, 0, 0) = f(2, 0, 0) = f(3, 0, 0) = 1、f(1, 1, 0) = 1、f(2, 1, 0) = 2、f(2, 2, 0) = 2、f(3, 1, 0) = 3、f(3, 2, 0) = f(3, 1, 0) + f(2, 2, 0) = 5、f(3, 3, 0) = f(3, 2, 0) = 5。",
+          "c = 1 のとき：f(1, 1, 1) = 1、f(2, 1, 1) = f(1, 1, 1) + f(2, 1, 0) = 3、f(2, 2, 1) = f(2, 1, 1) + f(2, 2, 0) = 5、f(3, 1, 1) = f(2, 1, 1) + f(3, 1, 0) = 6、f(3, 2, 1) = f(2, 2, 1) + f(3, 1, 1) + f(3, 2, 0) = 16、f(3, 3, 1) = f(3, 2, 1) + f(3, 3, 0) = 21。",
+          "c = 2、3 のとき：f(2, 2, 2) = f(2, 2, 1) = 5、f(3, 2, 2) = f(2, 2, 2) + f(3, 2, 1) = 21、f(3, 3, 2) = f(3, 2, 2) + f(3, 3, 1) = 42、f(3, 3, 3) = f(3, 3, 2) = 42。",
+          "よって書き入れ方は 42 通り。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "42"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "combinatorics-grade11-foundation",
+        "notes": "依 1 到 9 的順序填入，已填形狀 (a, b, c) 滿足 a ≥ b ≥ c，遞推得 42。掃過 /越來越大|由上到下|方格表/（18 題）；最接近 combinatorics_grade12_foundation_078，差異：該題是每列每行恰 2 個黑格的塗法；本題是 1 到 9 填 3 × 3 使行列都遞增的填法"
+      }
+    },
+    {
+      "id": "combinatorics_grade11_foundation_084",
+      "reviewStatus": "ok",
+      "topic": "combinatorics",
+      "subtopic": "compositions_into_1_2_3_adjacent_parts_distinct",
+      "tags": [
+        "c:recurrence",
+        "c:basic_counting",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade11",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "把 12 寫成若干個正整數依序相加（加數的先後順序不同就算不同的寫法，例如 1 + 2 與 2 + 1 不同），規定每個加數只能是 1、2 或 3，而且相鄰的兩個加數不能相等。例如 12 = 3 + 1 + 3 + 2 + 3 符合規定。這樣的寫法有幾種？",
+        "zh-Hans": "把 12 写成若干个正整数依次相加（加数的先后顺序不同就算不同的写法，例如 1 + 2 与 2 + 1 不同），规定每个加数只能是 1、2 或 3，而且相邻的两个加数不能相等。例如 12 = 3 + 1 + 3 + 2 + 3 符合规定。这样的写法有几种？",
+        "en": "Write 12 as an ordered sum of positive integers (different orders count as different, e.g. 1 + 2 and 2 + 1), where each term is 1, 2 or 3 and no two adjacent terms are equal. For example, 12 = 3 + 1 + 3 + 2 + 3 is allowed. How many such ways are there?",
+        "ja": "12 をいくつかの正の整数の和として順に書き表す（加える順序が違えば別の書き方とする。たとえば 1 + 2 と 2 + 1 は別）。ただし各項は 1、2、3 のどれかで、隣り合う 2 項は等しくてはならない。たとえば 12 = 3 + 1 + 3 + 2 + 3 は条件を満たす。このような書き方は何通りあるか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 58。",
+        "zh-Hans": "答案是 58。",
+        "en": "The answer is 58.",
+        "ja": "答えは 58 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "對每個 n，設 aₙ、bₙ、cₙ 分別是把 n 寫成合乎規定的和、而且最後一項是 1、2、3 的寫法數。",
+          "最後一項是 1 時，拿掉它剩下 n − 1 的合乎規定的寫法，而且那個寫法的最後一項不能是 1（或者剩下的是空的，即 n = 1）。所以 aₙ = bₙ₋₁ + cₙ₋₁（n = 1 時另加 1）；同理 bₙ = aₙ₋₂ + cₙ₋₂（n = 2 時另加 1），cₙ = aₙ₋₃ + bₙ₋₃（n = 3 時另加 1）。",
+          "依序計算 (aₙ, bₙ, cₙ)：n = 1：(1, 0, 0)；n = 2：(0, 1, 0)；n = 3：(1, 1, 1)；n = 4：(2, 0, 1)；n = 5：(1, 2, 1)；n = 6：(3, 3, 2)。",
+          "n = 7：(5, 2, 2)；n = 8：(4, 5, 3)；n = 9：(8, 7, 6)；n = 10：(13, 7, 7)；n = 11：(14, 14, 9)；n = 12：(23, 20, 15)。",
+          "所以 12 的寫法共有 23 + 20 + 15 = 58 種。"
+        ],
+        "zh-Hans": [
+          "对每个 n，设 aₙ、bₙ、cₙ 分别是把 n 写成合乎规定的和、而且最后一项是 1、2、3 的写法数。",
+          "最后一项是 1 时，拿掉它剩下 n − 1 的合乎规定的写法，而且那个写法的最后一项不能是 1（或者剩下的是空的，即 n = 1）。所以 aₙ = bₙ₋₁ + cₙ₋₁（n = 1 时另加 1）；同理 bₙ = aₙ₋₂ + cₙ₋₂（n = 2 时另加 1），cₙ = aₙ₋₃ + bₙ₋₃（n = 3 时另加 1）。",
+          "依次计算 (aₙ, bₙ, cₙ)：n = 1：(1, 0, 0)；n = 2：(0, 1, 0)；n = 3：(1, 1, 1)；n = 4：(2, 0, 1)；n = 5：(1, 2, 1)；n = 6：(3, 3, 2)。",
+          "n = 7：(5, 2, 2)；n = 8：(4, 5, 3)；n = 9：(8, 7, 6)；n = 10：(13, 7, 7)；n = 11：(14, 14, 9)；n = 12：(23, 20, 15)。",
+          "所以 12 的写法共有 23 + 20 + 15 = 58 种。"
+        ],
+        "en": [
+          "For each n let aₙ, bₙ, cₙ be the numbers of allowed ways to write n whose last term is 1, 2, 3 respectively.",
+          "If the last term is 1, removing it leaves an allowed way to write n − 1 whose last term is not 1 (or nothing at all, when n = 1). So aₙ = bₙ₋₁ + cₙ₋₁ (plus 1 when n = 1); likewise bₙ = aₙ₋₂ + cₙ₋₂ (plus 1 when n = 2) and cₙ = aₙ₋₃ + bₙ₋₃ (plus 1 when n = 3).",
+          "Computing (aₙ, bₙ, cₙ) in order: n = 1: (1, 0, 0); n = 2: (0, 1, 0); n = 3: (1, 1, 1); n = 4: (2, 0, 1); n = 5: (1, 2, 1); n = 6: (3, 3, 2).",
+          "n = 7: (5, 2, 2); n = 8: (4, 5, 3); n = 9: (8, 7, 6); n = 10: (13, 7, 7); n = 11: (14, 14, 9); n = 12: (23, 20, 15).",
+          "So 12 can be written in 23 + 20 + 15 = 58 ways."
+        ],
+        "ja": [
+          "各 n について、条件を満たす n の書き方のうち最後の項が 1、2、3 であるものの数をそれぞれ aₙ、bₙ、cₙ とする。",
+          "最後の項が 1 なら、それを取り除くと n − 1 の条件を満たす書き方で最後の項が 1 でないもの（n = 1 なら何も残らない）が残る。よって aₙ = bₙ₋₁ + cₙ₋₁（n = 1 のときはさらに 1 を加える）。同様に bₙ = aₙ₋₂ + cₙ₋₂（n = 2 のとき 1 を加える）、cₙ = aₙ₋₃ + bₙ₋₃（n = 3 のとき 1 を加える）。",
+          "(aₙ, bₙ, cₙ) を順に計算する。n = 1：(1, 0, 0)、n = 2：(0, 1, 0)、n = 3：(1, 1, 1)、n = 4：(2, 0, 1)、n = 5：(1, 2, 1)、n = 6：(3, 3, 2)。",
+          "n = 7：(5, 2, 2)、n = 8：(4, 5, 3)、n = 9：(8, 7, 6)、n = 10：(13, 7, 7)、n = 11：(14, 14, 9)、n = 12：(23, 20, 15)。",
+          "よって 12 の書き方は 23 + 20 + 15 = 58 通り。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "58"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "combinatorics-grade11-foundation",
+        "notes": "依最後一項是 1、2、3 分三組遞推 aₙ、bₙ、cₙ。掃過 /依序相加|加數/（10 題）；最接近 combinatorics_grade10_foundation_104，差異：該題是 12 寫成相異正整數之和、不計順序；本題是有序且相鄰加數不同、只用 1、2、3"
+      }
+    },
+    {
+      "id": "combinatorics_grade11_foundation_085",
+      "reviewStatus": "ok",
+      "topic": "combinatorics",
+      "subtopic": "roll_until_six_all_rolls_even_probability",
+      "tags": [
+        "c:probability",
+        "c:sequence",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade11",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "擲一顆公正的六面骰子，一直擲到第一次出現 6 點為止。所有擲出的點數（包含最後那個 6）都是偶數的機率是百分之幾？",
+        "zh-Hans": "掷一颗公正的六面骰子，一直掷到第一次出现 6 点为止。所有掷出的点数（包含最后那个 6）都是偶数的概率是百分之几？",
+        "en": "A fair six-sided die is rolled until a 6 appears for the first time. What is the probability, as a percentage, that every number rolled (including the final 6) is even?",
+        "ja": "公正な 6 面のさいころを、初めて 6 の目が出るまで振り続ける。出た目（最後の 6 も含む）がすべて偶数である確率は何パーセントか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 25。",
+        "zh-Hans": "答案是 25。",
+        "en": "The answer is 25.",
+        "ja": "答えは 25 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "設第一次出現 6 點是在第 k 次（k = 1, 2, 3, ⋯）。所有點數都是偶數，表示前 k − 1 次都是 2 或 4（不能是 6，因為 6 第一次出現在第 k 次），第 k 次是 6。",
+          "這件事的機率是 (2/6)ᵏ⁻¹ × (1/6) = (1/3)ᵏ⁻¹ × (1/6)。",
+          "對所有 k 相加：(1/6) × (1 + 1/3 + 1/9 + ⋯) = (1/6) × 1 ÷ (1 − 1/3) = (1/6) × (3/2) = 1/4。",
+          "換個角度檢查：擲出 2 或 4 時遊戲不會結束、也不會破壞條件，可以略過不看；第一次擲出 1、3、5、6 其中之一時，結果就決定了，它是 6 的機率是 1/4，結果一致。",
+          "所以機率是 25%。"
+        ],
+        "zh-Hans": [
+          "设第一次出现 6 点是在第 k 次（k = 1, 2, 3, ⋯）。所有点数都是偶数，表示前 k − 1 次都是 2 或 4（不能是 6，因为 6 第一次出现在第 k 次），第 k 次是 6。",
+          "这件事的概率是 (2/6)ᵏ⁻¹ × (1/6) = (1/3)ᵏ⁻¹ × (1/6)。",
+          "对所有 k 相加：(1/6) × (1 + 1/3 + 1/9 + ⋯) = (1/6) × 1 ÷ (1 − 1/3) = (1/6) × (3/2) = 1/4。",
+          "换个角度检查：掷出 2 或 4 时游戏不会结束、也不会破坏条件，可以略过不看；第一次掷出 1、3、5、6 其中之一时，结果就决定了，它是 6 的概率是 1/4，结果一致。",
+          "所以概率是 25%。"
+        ],
+        "en": [
+          "Suppose the first 6 comes on roll k (k = 1, 2, 3, …). All numbers are even exactly when rolls 1 to k − 1 are each 2 or 4 (not 6, since the first 6 is on roll k) and roll k is 6.",
+          "This has probability (2/6)ᵏ⁻¹ × (1/6) = (1/3)ᵏ⁻¹ × (1/6).",
+          "Summing over all k: (1/6) × (1 + 1/3 + 1/9 + ⋯) = (1/6) × 1 ÷ (1 − 1/3) = (1/6) × (3/2) = 1/4.",
+          "Check another way: rolls of 2 or 4 neither end the game nor spoil the condition, so ignore them; the outcome is decided by the first roll among 1, 3, 5, 6, and that roll is a 6 with probability 1/4. Same result.",
+          "So the probability is 25%."
+        ],
+        "ja": [
+          "初めて 6 が出るのが k 回目（k = 1, 2, 3, ⋯）とする。目がすべて偶数であるのは、1 回目から k − 1 回目までがどれも 2 か 4 で（6 は k 回目に初めて出るので 6 ではない）、k 回目が 6 のときである。",
+          "その確率は (2/6)ᵏ⁻¹ × (1/6) = (1/3)ᵏ⁻¹ × (1/6)。",
+          "すべての k について足すと (1/6) × (1 + 1/3 + 1/9 + ⋯) = (1/6) × 1 ÷ (1 − 1/3) = (1/6) × (3/2) = 1/4。",
+          "別の見方で確かめる。2 や 4 が出てもゲームは終わらず条件も壊れないので無視してよい。結果は 1、3、5、6 のどれかが初めて出た回で決まり、それが 6 である確率は 1/4 で、同じ結果になる。",
+          "よって確率は 25%。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "25"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "combinatorics-grade11-foundation",
+        "notes": "第一次 6 在第 k 次且前 k − 1 次都是 2 或 4，等比級數和為 1/4。掃過 /第一次出現 6|直到.*6 點/（2 題）；最接近 combinatorics_grade12_foundation_042，差異：該題是擲到 6 的期望次數；本題是所有點數都是偶數的機率"
+      }
+    },
+    {
+      "id": "combinatorics_grade11_foundation_086",
+      "reviewStatus": "ok",
+      "topic": "combinatorics",
+      "subtopic": "random_inscribed_triangle_contains_center",
+      "tags": [
+        "c:probability",
+        "c:circle",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade11",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "在一個圓周上，獨立而且均勻地隨機取三個點 P、Q、R。以這三點為頂點的三角形，它的內部包含圓心的機率是 1/k。求 k。",
+        "zh-Hans": "在一个圆周上，独立而且均匀地随机取三个点 P、Q、R。以这三点为顶点的三角形，它的内部包含圆心的概率是 1/k。求 k。",
+        "en": "Three points P, Q, R are chosen independently and uniformly at random on a circle. The probability that the triangle with these vertices contains the centre of the circle in its interior is 1/k. Find k.",
+        "ja": "円周上に 3 点 P、Q、R を独立かつ一様にランダムにとる。この 3 点を頂点とする三角形の内部に円の中心が含まれる確率は 1/k である。k を求めよ。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 4。",
+        "zh-Hans": "答案是 4。",
+        "en": "The answer is 4.",
+        "ja": "答えは 4 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "若三點都落在某一個半圓（含端點）上，三角形整個在那條直徑的同一側，內部不含圓心。反之，若三點不在任何一個半圓上，相鄰兩點之間的三段弧都小於半圓，三角形每個內角等於所對弧的圓心角的一半，都小於 90°，是銳角三角形，而外心（就是圓心）在銳角三角形的內部。所以只要求「三點落在某個半圓上」的機率。",
+          "對 P 定義事件 E_P：從 P 出發沿順時針方向的半圓包含 Q 與 R。Q、R 各自落在這個半圓的機率是 1/2，而且互相獨立，所以 E_P 的機率是 1/4；同理 E_Q、E_R 的機率也都是 1/4。",
+          "若三點在某個半圓上，沿順時針方向排在這個半圓最前面的那一點 X 會使 E_X 成立。而且兩個事件不會同時成立（不計機率為 0 的情形）：若 E_P 與 E_Q 同時成立，則從 P 順時針到 Q 不到半圈，從 Q 順時針到 P 也不到半圈，兩段合起來是一整圈，矛盾。",
+          "所以三個事件互斥，三點在某個半圓上的機率是 1/4 + 1/4 + 1/4 = 3/4。",
+          "三角形包含圓心的機率是 1 − 3/4 = 1/4，所以 k = 4。"
+        ],
+        "zh-Hans": [
+          "若三点都落在某一个半圆（含端点）上，三角形整个在那条直径的同一侧，内部不含圆心。反之，若三点不在任何一个半圆上，相邻两点之间的三段弧都小于半圆，三角形每个内角等于所对弧的圆心角的一半，都小于 90°，是锐角三角形，而外心（就是圆心）在锐角三角形的内部。所以只要求“三点落在某个半圆上”的概率。",
+          "对 P 定义事件 E_P：从 P 出发沿顺时针方向的半圆包含 Q 与 R。Q、R 各自落在这个半圆的概率是 1/2，而且互相独立，所以 E_P 的概率是 1/4；同理 E_Q、E_R 的概率也都是 1/4。",
+          "若三点在某个半圆上，沿顺时针方向排在这个半圆最前面的那一点 X 会使 E_X 成立。而且两个事件不会同时成立（不计概率为 0 的情形）：若 E_P 与 E_Q 同时成立，则从 P 顺时针到 Q 不到半圈，从 Q 顺时针到 P 也不到半圈，两段合起来是一整圈，矛盾。",
+          "所以三个事件互斥，三点在某个半圆上的概率是 1/4 + 1/4 + 1/4 = 3/4。",
+          "三角形包含圆心的概率是 1 − 3/4 = 1/4，所以 k = 4。"
+        ],
+        "en": [
+          "If all three points lie on some semicircle (endpoints included), the triangle lies on one side of that diameter and its interior misses the centre. Conversely, if they lie on no semicircle, each of the three arcs between consecutive points is less than a semicircle, so each angle of the triangle (half the central angle of the opposite arc) is less than 90°; the triangle is acute and its circumcentre, the centre, is inside. So we need the probability that the points lie on a semicircle.",
+          "Let E_P be the event that the clockwise semicircle starting at P contains Q and R. Q and R each land in it with probability 1/2, independently, so E_P has probability 1/4; likewise E_Q and E_R.",
+          "If the points lie on a semicircle, the point X that comes first clockwise within it makes E_X happen. Two of these events never happen together (ignoring probability-0 cases): if E_P and E_Q both held, going clockwise from P to Q would be less than half a turn and from Q to P also less than half a turn, yet together they make a full turn, a contradiction.",
+          "So the events are mutually exclusive and the points lie on a semicircle with probability 1/4 + 1/4 + 1/4 = 3/4.",
+          "The triangle contains the centre with probability 1 − 3/4 = 1/4, so k = 4."
+        ],
+        "ja": [
+          "3 点がどれも同じ半円（端を含む）の上にあれば、三角形はその直径の片側にあり、内部に中心を含まない。逆に 3 点がどの半円にも収まらなければ、隣り合う 2 点の間の 3 つの弧はどれも半円より短く、三角形の各内角は向かい合う弧の中心角の半分なので 90° 未満である。よって鋭角三角形であり、外心（円の中心）は内部にある。したがって「3 点がある半円上にある」確率を求めればよい。",
+          "P について、事象 E_P を「P から時計回りの半円が Q と R を含む」と定める。Q、R がそれぞれこの半円に入る確率は 1/2 で独立なので、E_P の確率は 1/4。同様に E_Q、E_R の確率も 1/4。",
+          "3 点がある半円上にあるとき、その半円の中で時計回りにいちばん先頭にある点 X について E_X が成り立つ。また 2 つの事象が同時に成り立つことはない（確率 0 の場合を除く）。E_P と E_Q が同時に成り立てば、P から時計回りに Q まで半周未満、Q から時計回りに P まで半周未満となるが、2 つを合わせると 1 周なので矛盾する。",
+          "よって 3 つの事象は互いに排反で、3 点がある半円上にある確率は 1/4 + 1/4 + 1/4 = 3/4。",
+          "三角形が中心を含む確率は 1 − 3/4 = 1/4 なので k = 4。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "4"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "combinatorics-grade11-foundation",
+        "notes": "三點在某半圓上 ⇔ 不含圓心；三個互斥事件各 1/4，合計 3/4。掃過 /圓周上|圓上.*隨機/（16 題）；最接近 combinatorics_grade9_foundation_064，差異：該題是正十二邊形頂點的離散計數；本題是圓周上連續均勻取點的機率"
+      }
     }
   ]
 }
