@@ -8489,6 +8489,749 @@
         "reference": "logic-grade6-foundation",
         "notes": "4 個物品比較排序的最少次數：24 種排列 > 2⁴ = 16 得下界 5，再用兩兩比較加插入給出 5 次的方法。掃過 天平（38 題）、由輕到重|排好|排序（21 題）；最接近 logic_grade3_foundation_075，差異：那題只要找出最重的一盒（淘汰賽，n − 1 次）；本題要完整排序，需要資訊量下界與插入策略"
       }
+    },
+    {
+      "id": "logic_grade6_foundation_105",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "three_stamp_values_two_stamps_longest_run",
+      "tags": [
+        "c:add_sub",
+        "m:extremal",
+        "m:construction"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade6",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "郵局要發行 3 種不同面額的郵票，面額都是正整數元。規定一封信最多只能貼 2 張郵票（可以只貼 1 張，也可以貼 2 張同一種）。郵局希望從 1 元開始，1 元、2 元、3 元、⋯⋯一直到某個金額 n 元，每一個金額都能剛好貼出來。3 種面額選得好的話，n 最大可以是多少？",
+        "zh-Hans": "邮局要发行 3 种不同面额的邮票，面额都是正整数元。规定一封信最多只能贴 2 张邮票（可以只贴 1 张，也可以贴 2 张同一种）。邮局希望从 1 元开始，1 元、2 元、3 元、⋯⋯一直到某个金额 n 元，每一个金额都能刚好贴出来。3 种面额选得好的话，n 最大可以是多少？",
+        "en": "A post office will issue stamps of 3 different values, each a whole number of dollars. A letter may carry at most 2 stamps (it may carry just 1, or 2 of the same kind). The post office wants every amount 1, 2, 3, … dollars up to some amount n to be paid exactly. If the 3 values are chosen well, what is the largest possible n?",
+        "ja": "郵便局が、3 種類のちがう額面の切手を発行します。額面はどれも正の整数（元）です。1 通の手紙には切手を 2 枚までしかはれません（1 枚だけでも、同じ種類を 2 枚でもかまいません）。郵便局は、1 元、2 元、3 元、……とある金額 n 元まで、どの金額もちょうどはれるようにしたいと考えています。3 種類の額面をうまく選ぶと、n は最大でいくつにできますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 8。",
+        "zh-Hans": "答案是 8。",
+        "en": "The answer is 8.",
+        "ja": "答えは 8 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "先數最多能貼出幾種金額：只貼 1 張有 3 種；貼 2 張時，兩張同種有 3 種、兩張不同種有 3 種。一共最多 3 + 3 + 3 = 9 種不同的金額，所以 n 不可能超過 9。",
+          "檢查 n = 9 行不行：這時 9 種貼法必須剛好貼出 1 到 9，而且互不重複。要貼出 1 元只能用面額 1，所以最小面額是 1；設另兩種是 a < b，9 個金額是 1、2（= 1 + 1）、a、a + 1、2a、b、b + 1、a + b、2b。a 不能是 2（會和 1 + 1 重複），所以 a ≥ 3、b ≥ 4；要貼出 3 元只能是 a = 3。",
+          "這時已有 1、2、3、4、6，還缺 5：b + 1 = 5 會讓 b = 4 和 a + 1 = 4 重複；b + 3 至少是 7；2b = 5 不可能；所以只能 b = 5，但這樣 b + 1 = 6 又和 2a = 6 重複。矛盾，所以 n ≤ 8。",
+          "n = 8 做得到：面額選 1、3、4 元。1 = 1，2 = 1 + 1，3 = 3，4 = 4，5 = 1 + 4，6 = 3 + 3，7 = 3 + 4，8 = 4 + 4。所以 n 最大是 8。"
+        ],
+        "zh-Hans": [
+          "先数最多能贴出几种金额：只贴 1 张有 3 种；贴 2 张时，两张同种有 3 种、两张不同种有 3 种。一共最多 3 + 3 + 3 = 9 种不同的金额，所以 n 不可能超过 9。",
+          "检查 n = 9 行不行：这时 9 种贴法必须刚好贴出 1 到 9，而且互不重复。要贴出 1 元只能用面额 1，所以最小面额是 1；设另两种是 a < b，9 个金额是 1、2（= 1 + 1）、a、a + 1、2a、b、b + 1、a + b、2b。a 不能是 2（会和 1 + 1 重复），所以 a ≥ 3、b ≥ 4；要贴出 3 元只能是 a = 3。",
+          "这时已有 1、2、3、4、6，还缺 5：b + 1 = 5 会让 b = 4 和 a + 1 = 4 重复；b + 3 至少是 7；2b = 5 不可能；所以只能 b = 5，但这样 b + 1 = 6 又和 2a = 6 重复。矛盾，所以 n ≤ 8。",
+          "n = 8 做得到：面额选 1、3、4 元。1 = 1，2 = 1 + 1，3 = 3，4 = 4，5 = 1 + 4，6 = 3 + 3，7 = 3 + 4，8 = 4 + 4。所以 n 最大是 8。"
+        ],
+        "en": [
+          "First count how many amounts can possibly be made: 1 stamp gives 3 amounts; 2 stamps give 3 amounts with equal stamps and 3 with different stamps. That is at most 3 + 3 + 3 = 9 different amounts, so n cannot exceed 9.",
+          "Test n = 9: then the 9 ways must give exactly 1 to 9 with no repeats. Paying 1 needs a 1-dollar stamp, so the smallest value is 1; call the others a < b. The 9 amounts are 1, 2 (= 1 + 1), a, a + 1, 2a, b, b + 1, a + b, 2b. a cannot be 2 (it would repeat 1 + 1), so a ≥ 3 and b ≥ 4; then 3 dollars can only come from a = 3.",
+          "Now 1, 2, 3, 4, 6 are present and 5 is missing: b + 1 = 5 gives b = 4, repeating a + 1 = 4; b + 3 is at least 7; 2b = 5 is impossible; so b = 5, but then b + 1 = 6 repeats 2a = 6. Contradiction, so n ≤ 8.",
+          "n = 8 is possible with values 1, 3, 4: 1 = 1, 2 = 1 + 1, 3 = 3, 4 = 4, 5 = 1 + 4, 6 = 3 + 3, 7 = 3 + 4, 8 = 4 + 4. So the largest n is 8."
+        ],
+        "ja": [
+          "まず、はれる金額が最大で何通りあるか数えます。1 枚だけなら 3 通り、2 枚なら同じ種類 3 通りとちがう種類 3 通りです。全部で多くても 3 + 3 + 3 = 9 通りなので、n は 9 をこえません。",
+          "n = 9 ができるか調べます。このとき 9 通りのはり方がちょうど 1〜9 を重複なく作る必要があります。1 元をはるには額面 1 が必要なので最小の額面は 1、残りを a < b とすると、9 つの金額は 1、2（= 1 + 1）、a、a + 1、2a、b、b + 1、a + b、2b です。a = 2 だと 1 + 1 と重なるので a ≥ 3、b ≥ 4 で、3 元を作れるのは a = 3 だけです。",
+          "すると 1、2、3、4、6 があり、5 がありません。b + 1 = 5 なら b = 4 で a + 1 = 4 と重なり、b + 3 は 7 以上、2b = 5 はありえないので b = 5 ですが、b + 1 = 6 が 2a = 6 と重なります。矛盾なので n ≤ 8 です。",
+          "n = 8 は額面 1、3、4 でできます：1 = 1、2 = 1 + 1、3 = 3、4 = 4、5 = 1 + 4、6 = 3 + 3、7 = 3 + 4、8 = 4 + 4。よって n の最大は 8 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "8"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade6-foundation",
+        "notes": "最多 9 種貼法給出上界 9，排除 9 需逐步推出面額 1、3 後 5 無法補上；1、3、4 達到 8。掃過 郵票（9 題）、最多.*貼|貼.*2 張|兩張郵票（5 題）、面額（7 題）；最接近 arithmetic_grade2_foundation_102，差異：那題給定 2、5、8 元問哪個金額貼不出；本題要自己設計三種面額，讓「最多兩張」能連續貼出的金額最長，需證明上界"
+      }
+    },
+    {
+      "id": "logic_grade6_foundation_106",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "round_robin_points_that_guarantee_top_two",
+      "tags": [
+        "c:logic_deduction",
+        "m:extremal",
+        "m:construction"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade6",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "4 支球隊進行單循環賽，每兩隊比賽一場。勝隊得 3 分、敗隊得 0 分，平手兩隊各得 1 分。全部比完後，積分前兩名晉級；如果因為同分而分不出前兩名，就用抽籤決定。甲隊希望「不管其他比賽的結果怎樣，也不必靠抽籤，就一定能晉級」。甲隊至少要得到幾分才能保證做到？",
+        "zh-Hans": "4 支球队进行单循环赛，每两队比赛一场。胜队得 3 分、败队得 0 分，平手两队各得 1 分。全部比完后，积分前两名晋级；如果因为同分而分不出前两名，就用抽签决定。甲队希望「不管其他比赛的结果怎样，也不必靠抽签，就一定能晋级」。甲队至少要得到几分才能保证做到？",
+        "en": "Four teams play a round robin: every two teams play once. A win gets 3 points, a loss 0, and a draw 1 point for each team. At the end the top two teams by points advance; if tied points make the top two unclear, lots are drawn. Team Jia wants to be sure of advancing no matter how the other games go and without needing a draw of lots. What is the smallest number of points that guarantees this?",
+        "ja": "4 チームが総当たり戦をし、どの 2 チームも 1 回ずつ試合をします。勝ちは 3 点、負けは 0 点、引き分けは両チーム 1 点ずつです。全試合のあと、勝ち点の上位 2 チームが勝ち上がります。同点のため上位 2 チームが決まらないときは、くじで決めます。甲チームは「ほかの試合の結果がどうなっても、くじにたよらずに必ず勝ち上がる」ようにしたいと考えています。そのためには最低何点とればよいですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 7。",
+        "zh-Hans": "答案是 7。",
+        "en": "The answer is 7.",
+        "ja": "答えは 7 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "一共有 6 場比賽，每一場兩隊合計得 3 分（分出勝負）或 2 分（平手），所以 4 隊的總分最多是 6 × 3 = 18 分。",
+          "得 7 分一定晉級：如果甲得 7 分卻沒有穩進前兩名，就至少要有另外 2 隊的分數都不少於 7 分，這三隊合計至少 21 分，超過 18 分，不可能。",
+          "得 6 分不保證：例如甲勝乙、乙勝丙、丙勝甲，三隊又都贏丁，甲、乙、丙都是 6 分，丁 0 分，三隊同分要抽籤，甲可能出局。",
+          "得 5 分或更少也不保證：甲最多只贏 1 場，就安排那一場是贏丁；甲對乙、對丙不會贏，乙、丙從甲身上各至少拿 1 分。再讓乙、丙都贏丁、彼此平手，乙、丙各至少 3 + 1 + 1 = 5 分，都不少於甲，甲不保證晉級。",
+          "所以甲至少要得 7 分。"
+        ],
+        "zh-Hans": [
+          "一共有 6 场比赛，每一场两队合计得 3 分（分出胜负）或 2 分（平手），所以 4 队的总分最多是 6 × 3 = 18 分。",
+          "得 7 分一定晋级：如果甲得 7 分却没有稳进前两名，就至少要有另外 2 队的分数都不少于 7 分，这三队合计至少 21 分，超过 18 分，不可能。",
+          "得 6 分不保证：例如甲胜乙、乙胜丙、丙胜甲，三队又都赢丁，甲、乙、丙都是 6 分，丁 0 分，三队同分要抽签，甲可能出局。",
+          "得 5 分或更少也不保证：甲最多只赢 1 场，就安排那一场是赢丁；甲对乙、对丙不会赢，乙、丙从甲身上各至少拿 1 分。再让乙、丙都赢丁、彼此平手，乙、丙各至少 3 + 1 + 1 = 5 分，都不少于甲，甲不保证晋级。",
+          "所以甲至少要得 7 分。"
+        ],
+        "en": [
+          "There are 6 games, and each game gives the two teams 3 points in total (a win) or 2 points (a draw), so the four teams have at most 6 × 3 = 18 points altogether.",
+          "7 points always suffice: if Jia had 7 points and were not safely in the top two, at least 2 other teams would have 7 points or more, making at least 21 points for these three teams, more than 18. Impossible.",
+          "6 points do not suffice: say Jia beats Yi, Yi beats Bing, Bing beats Jia, and all three beat Ding. Then Jia, Yi and Bing have 6 points each and Ding has 0; the three-way tie needs a draw of lots, and Jia may go out.",
+          "5 points or fewer do not suffice either: Jia wins at most 1 game, so let that game be against Ding; Jia does not beat Yi or Bing, so each of them takes at least 1 point from Jia. Let Yi and Bing both beat Ding and draw with each other; then each has at least 3 + 1 + 1 = 5 points, not fewer than Jia, so Jia is not guaranteed to advance.",
+          "Therefore Jia needs at least 7 points."
+        ],
+        "ja": [
+          "試合は全部で 6 試合あり、1 試合で 2 チームが得る点の合計は 3 点（勝負がつく）か 2 点（引き分け）なので、4 チームの合計は多くても 6 × 3 = 18 点です。",
+          "7 点なら必ず勝ち上がれます。7 点なのに上位 2 チームに確定しないなら、ほかに 7 点以上のチームが少なくとも 2 つあり、この 3 チームで 21 点以上になって 18 点をこえるので、ありえません。",
+          "6 点では保証されません。たとえば甲が乙に、乙が丙に、丙が甲に勝ち、3 チームとも丁に勝つと、甲・乙・丙は 6 点、丁は 0 点で、3 チームが同点になりくじになるので、甲は敗退するかもしれません。",
+          "5 点以下でも保証されません。甲の勝ちは多くても 1 試合なので、それを丁との試合にします。甲は乙にも丙にも勝たないので、乙と丙は甲との試合で少なくとも 1 点ずつとります。さらに乙と丙がどちらも丁に勝ち、乙と丙が引き分けると、乙と丙はそれぞれ少なくとも 3 + 1 + 1 = 5 点で甲以上になり、甲は勝ち上がりが保証されません。",
+          "よって甲は最低 7 点必要です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "7"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade6-foundation",
+        "notes": "總分上限 18 分，使三隊同時 ≥7 不可能；6 分有三隊循環同分的反例，5 分以下也可構造兩隊不少於甲。掃過 循環賽（9 題）、晉級|出線（3 題）、積分|勝.*得 3 分（20 題）；最接近 logic_grade7_foundation_060，差異：那題問「積分單獨最高」的最低分；本題問「保證進前兩名不必抽籤」的門檻，關鍵是總分上限 18 的反證"
+      }
+    },
+    {
+      "id": "logic_grade6_foundation_107",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "vote_count_leader_always_ahead_paths",
+      "tags": [
+        "c:permutation_combination",
+        "m:enumeration"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade6",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "班長選舉只有小安和小美兩位候選人，一共 8 張票，結果小安 5 票、小美 3 票。老師一張一張唱票。只看「安」和「美」出現的先後順序，8 張票的唱票順序一共有 56 種。在這 56 種順序中，有幾種是「從唱第 1 張票開始，每唱完一張，小安的票數都比小美多」？",
+        "zh-Hans": "班长选举只有小安和小美两位候选人，一共 8 张票，结果小安 5 票、小美 3 票。老师一张一张唱票。只看「安」和「美」出现的先后顺序，8 张票的唱票顺序一共有 56 种。在这 56 种顺序中，有几种是「从唱第 1 张票开始，每唱完一张，小安的票数都比小美多」？",
+        "en": "In a class election there are only two candidates, An and Mei. There are 8 votes in all: An gets 5 and Mei gets 3. The teacher reads the votes out one by one. Looking only at the order in which \"An\" and \"Mei\" appear, there are 56 possible reading orders. In how many of these 56 orders is An strictly ahead of Mei after every vote is read, starting from the first one?",
+        "ja": "学級委員の選挙で、候補者はアンさんとメイさんの 2 人だけです。票は全部で 8 票で、アンさん 5 票、メイさん 3 票でした。先生は 1 票ずつ読み上げます。「アン」と「メイ」が出てくる順番だけを見ると、読み上げの順番は全部で 56 通りあります。この 56 通りのうち、1 票目から、1 票読み上げるごとにいつもアンさんの票数がメイさんより多いのは何通りですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 14。",
+        "zh-Hans": "答案是 14。",
+        "en": "The answer is 14.",
+        "ja": "答えは 14 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "用 (安的票數, 美的票數) 記錄唱到某一張時的情形，從 (0, 0) 開始，每唱一張，其中一個數加 1，最後到 (5, 3)。題目要求唱完每一張之後都是「安 > 美」，所以第 1 張一定是安，到 (1, 0)；而且途中不能經過安 = 美的情形，例如 (1, 1)、(2, 2)、(3, 3)。",
+          "從 (1, 0) 開始，計算走到每一個「安 > 美」的情形有幾種走法：一個情形的走法數 = 從「美少 1 票」那裡走來的走法數 + 從「安少 1 票」那裡走來的走法數，不合規定的情形算 0。美 = 0 的一排都只有 1 種：(1, 0)、(2, 0)、(3, 0)、(4, 0)、(5, 0) 各 1 種。",
+          "美 = 1：(2, 1) 只能從 (2, 0) 來，1 種；(3, 1) = 1 + 1 = 2；(4, 1) = 2 + 1 = 3；(5, 1) = 3 + 1 = 4。美 = 2：(3, 2) 只能從 (3, 1) 來，2 種；(4, 2) = 2 + 3 = 5；(5, 2) = 5 + 4 = 9。美 = 3：(4, 3) 只能從 (4, 2) 來，5 種；(5, 3) = 5 + 9 = 14。",
+          "所以符合條件的唱票順序有 14 種。"
+        ],
+        "zh-Hans": [
+          "用 (安的票数, 美的票数) 记录唱到某一张时的情形，从 (0, 0) 开始，每唱一张，其中一个数加 1，最后到 (5, 3)。题目要求唱完每一张之后都是「安 > 美」，所以第 1 张一定是安，到 (1, 0)；而且途中不能经过安 = 美的情形，例如 (1, 1)、(2, 2)、(3, 3)。",
+          "从 (1, 0) 开始，计算走到每一个「安 > 美」的情形有几种走法：一个情形的走法数 = 从「美少 1 票」那里走来的走法数 + 从「安少 1 票」那里走来的走法数，不合规定的情形算 0。美 = 0 的一排都只有 1 种：(1, 0)、(2, 0)、(3, 0)、(4, 0)、(5, 0) 各 1 种。",
+          "美 = 1：(2, 1) 只能从 (2, 0) 来，1 种；(3, 1) = 1 + 1 = 2；(4, 1) = 2 + 1 = 3；(5, 1) = 3 + 1 = 4。美 = 2：(3, 2) 只能从 (3, 1) 来，2 种；(4, 2) = 2 + 3 = 5；(5, 2) = 5 + 4 = 9。美 = 3：(4, 3) 只能从 (4, 2) 来，5 种；(5, 3) = 5 + 9 = 14。",
+          "所以符合条件的唱票顺序有 14 种。"
+        ],
+        "en": [
+          "Record the state after each vote as (An's votes, Mei's votes). It starts at (0, 0), each vote adds 1 to one number, and it ends at (5, 3). We need An > Mei after every vote, so the first vote must be An's, giving (1, 0), and the count may never pass through a tie such as (1, 1), (2, 2) or (3, 3).",
+          "Starting from (1, 0), count the ways to reach each state with An > Mei: the number of ways to reach a state = ways to reach the state with one fewer Mei vote + ways to reach the state with one fewer An vote, where forbidden states count 0. On the row Mei = 0 there is 1 way each: (1, 0), (2, 0), (3, 0), (4, 0), (5, 0).",
+          "Mei = 1: (2, 1) can only come from (2, 0), 1 way; (3, 1) = 1 + 1 = 2; (4, 1) = 2 + 1 = 3; (5, 1) = 3 + 1 = 4. Mei = 2: (3, 2) only from (3, 1), 2 ways; (4, 2) = 2 + 3 = 5; (5, 2) = 5 + 4 = 9. Mei = 3: (4, 3) only from (4, 2), 5 ways; (5, 3) = 5 + 9 = 14.",
+          "So 14 reading orders satisfy the condition."
+        ],
+        "ja": [
+          "読み上げのとちゅうの様子を（アンの票数, メイの票数）で表します。(0, 0) から始まり、1 票ごとにどちらかが 1 増え、最後は (5, 3) です。毎回「アン > メイ」である必要があるので、1 票目は必ずアンで (1, 0) になり、(1, 1)、(2, 2)、(3, 3) のような同数の状態は通れません。",
+          "(1, 0) から、「アン > メイ」の各状態へ行く方法の数を数えます。ある状態への行き方の数 = メイが 1 票少ない状態への行き方の数 + アンが 1 票少ない状態への行き方の数で、条件に合わない状態は 0 とします。メイ = 0 の段は (1, 0)、(2, 0)、(3, 0)、(4, 0)、(5, 0) がどれも 1 通りです。",
+          "メイ = 1：(2, 1) は (2, 0) からだけで 1 通り、(3, 1) = 1 + 1 = 2、(4, 1) = 2 + 1 = 3、(5, 1) = 3 + 1 = 4。メイ = 2：(3, 2) は (3, 1) からだけで 2 通り、(4, 2) = 2 + 3 = 5、(5, 2) = 5 + 4 = 9。メイ = 3：(4, 3) は (4, 2) からだけで 5 通り、(5, 3) = 5 + 9 = 14。",
+          "よって条件に合う読み上げ順は 14 通りです。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "14"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade6-foundation",
+        "notes": "唱票過程看成格子路徑，禁止經過平手點，用標數法逐格相加得 14。掃過 唱票|開票（4 題）、一直.*比.*多|都比.*多|始終領先（30 題）、選舉（3 題）；最接近 logic_grade5_foundation_067，差異：那題是開票中途求保證當選的票數；本題是固定最終票數，數「唱票全程領先」的順序個數（標數法）"
+      }
+    },
+    {
+      "id": "logic_grade6_foundation_108",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "circle_arrangement_min_largest_three_consecutive_sum",
+      "tags": [
+        "c:add_sub",
+        "m:extremal",
+        "m:construction"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade6",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "把 1、2、3、⋯、10 這十個數排成一個圓圈，每個數用一次。圓圈上每連續相鄰的 3 個數可以加出一個和，一共有 10 個這樣的和。小安想讓這 10 個和裡最大的那一個盡量小。最大的那個和最小可以是多少？",
+        "zh-Hans": "把 1、2、3、⋯、10 这十个数排成一个圆圈，每个数用一次。圆圈上每连续相邻的 3 个数可以加出一个和，一共有 10 个这样的和。小安想让这 10 个和里最大的那一个尽量小。最大的那个和最小可以是多少？",
+        "en": "The numbers 1, 2, 3, …, 10 are placed around a circle, each used once. Every 3 consecutive numbers on the circle give a sum, so there are 10 such sums. An wants the largest of these 10 sums to be as small as possible. What is the smallest possible value of the largest sum?",
+        "ja": "1、2、3、……、10 の 10 個の数を、1 回ずつ使って円形に並べます。円の上でとなりあって続く 3 つの数の和が全部で 10 個できます。アンさんは、この 10 個の和のうち最も大きいものをできるだけ小さくしたいと考えています。最も大きい和は、最小でいくつにできますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 18。",
+        "zh-Hans": "答案是 18。",
+        "en": "The answer is 18.",
+        "ja": "答えは 18 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "先證明最大的和至少是 18：找到寫著 1 的位置，從 1 的下一個數開始沿著圓圈往前，把其餘 9 個數依序分成 3 組，每組都是連續相鄰的 3 個數。",
+          "這 3 組的和加起來是 2 + 3 + ⋯ + 10 = 54，所以 3 組之中至少有一組的和不小於 54 ÷ 3 = 18。這一組本身就是 10 個和之一，所以不論怎麼排，最大的和都至少是 18。",
+          "再排出最大和剛好是 18 的例子：沿著圓圈依序排 1、4、9、5、3、7、8、2、6、10（10 後面接回 1）。10 個和依序是 1 + 4 + 9 = 14、4 + 9 + 5 = 18、9 + 5 + 3 = 17、5 + 3 + 7 = 15、3 + 7 + 8 = 18、7 + 8 + 2 = 17、8 + 2 + 6 = 16、2 + 6 + 10 = 18、6 + 10 + 1 = 17、10 + 1 + 4 = 15，最大是 18。",
+          "所以最大的和最小可以是 18。"
+        ],
+        "zh-Hans": [
+          "先证明最大的和至少是 18：找到写着 1 的位置，从 1 的下一个数开始沿着圆圈往前，把其余 9 个数依序分成 3 组，每组都是连续相邻的 3 个数。",
+          "这 3 组的和加起来是 2 + 3 + ⋯ + 10 = 54，所以 3 组之中至少有一组的和不小于 54 ÷ 3 = 18。这一组本身就是 10 个和之一，所以不论怎么排，最大的和都至少是 18。",
+          "再排出最大和刚好是 18 的例子：沿着圆圈依序排 1、4、9、5、3、7、8、2、6、10（10 后面接回 1）。10 个和依序是 1 + 4 + 9 = 14、4 + 9 + 5 = 18、9 + 5 + 3 = 17、5 + 3 + 7 = 15、3 + 7 + 8 = 18、7 + 8 + 2 = 17、8 + 2 + 6 = 16、2 + 6 + 10 = 18、6 + 10 + 1 = 17、10 + 1 + 4 = 15，最大是 18。",
+          "所以最大的和最小可以是 18。"
+        ],
+        "en": [
+          "First show the largest sum is at least 18: find where 1 is, start from the number after 1 and go around the circle, splitting the other 9 numbers in order into 3 groups of 3 consecutive numbers.",
+          "These 3 groups add up to 2 + 3 + … + 10 = 54, so at least one group has a sum of at least 54 ÷ 3 = 18. That group is one of the 10 sums, so in every arrangement the largest sum is at least 18.",
+          "Now an arrangement whose largest sum is exactly 18: around the circle place 1, 4, 9, 5, 3, 7, 8, 2, 6, 10 (then back to 1). The 10 sums are 1 + 4 + 9 = 14, 4 + 9 + 5 = 18, 9 + 5 + 3 = 17, 5 + 3 + 7 = 15, 3 + 7 + 8 = 18, 7 + 8 + 2 = 17, 8 + 2 + 6 = 16, 2 + 6 + 10 = 18, 6 + 10 + 1 = 17, 10 + 1 + 4 = 15; the largest is 18.",
+          "So the smallest possible largest sum is 18."
+        ],
+        "ja": [
+          "まず、最も大きい和は 18 以上であることを示します。1 の位置を見つけ、1 の次の数から円にそって進み、残りの 9 個の数を順に 3 個ずつの 3 つの組に分けます。どの組もとなりあって続く 3 つの数です。",
+          "この 3 組の和を合わせると 2 + 3 + … + 10 = 54 なので、少なくとも 1 組の和は 54 ÷ 3 = 18 以上です。その組は 10 個の和の 1 つなので、どう並べても最も大きい和は 18 以上です。",
+          "次に、最も大きい和がちょうど 18 になる並べ方です。円にそって 1、4、9、5、3、7、8、2、6、10（10 の次は 1 にもどる）と並べると、10 個の和は 1 + 4 + 9 = 14、4 + 9 + 5 = 18、9 + 5 + 3 = 17、5 + 3 + 7 = 15、3 + 7 + 8 = 18、7 + 8 + 2 = 17、8 + 2 + 6 = 16、2 + 6 + 10 = 18、6 + 10 + 1 = 17、10 + 1 + 4 = 15 で、最大は 18 です。",
+          "よって最も大きい和は最小で 18 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "18"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade6-foundation",
+        "notes": "拿掉 1 後其餘 9 數切成 3 段相鄰三數，和 54 平均 18 給下界；再構造最大和為 18 的排法。掃過 圍成一圈|排成一個圓圈|圓圈（25 題）、連續.*3 個|相鄰.*3 個|連續三個（13 題）、和.*最大.*最小|最大.*盡量小（4 題）；最接近 logic_grade5_foundation_093，差異：那題是 1～6 圍圈使相鄰兩數和都是質數；本題是 1～10 圍圈讓相鄰三數和的最大值最小，用「拿掉 1 分三段」求下界"
+      }
+    },
+    {
+      "id": "logic_grade6_foundation_109",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "up_and_down_same_place_same_time",
+      "tags": [
+        "c:logic_deduction",
+        "m:construction"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade6",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一位登山客早上 6 點從山腳出發，沿著唯一的一條山路往上走，途中走走停停、速度忽快忽慢，但不會往回走，下午 6 點到達山頂，在山頂過夜。第二天早上 6 點，他沿著同一條山路往下走，同樣走走停停、不往回走，下午 2 點回到山腳。山路上有沒有某一個地點，是他兩天經過時的時刻（幾點幾分）完全相同的？下列哪一句正確？",
+        "zh-Hans": "一位登山客早上 6 点从山脚出发，沿着唯一的一条山路往上走，途中走走停停、速度忽快忽慢，但不会往回走，下午 6 点到达山顶，在山顶过夜。第二天早上 6 点，他沿着同一条山路往下走，同样走走停停、不往回走，下午 2 点回到山脚。山路上有没有某一个地点，是他两天经过时的时刻（几点几分）完全相同的？下列哪一句正确？",
+        "en": "A hiker leaves the foot of a mountain at 6 a.m. and walks up the only path, stopping now and then and changing speed, but never turning back; he reaches the top at 6 p.m. and spends the night there. The next day at 6 a.m. he walks down the same path, again stopping and changing speed without turning back, and reaches the foot at 2 p.m. Is there a place on the path that he passes at exactly the same clock time on both days? Which statement is correct?",
+        "ja": "ある登山者が朝 6 時に山のふもとを出発し、ただ 1 本の山道を登りました。とちゅうで止まったり速さを変えたりしましたが、引き返すことはなく、午後 6 時に山頂に着いて山頂でとまりました。次の日の朝 6 時、同じ山道を下り、同じように止まったり速さを変えたりしながら引き返さずに歩き、午後 2 時にふもとに着きました。山道の上に、2 日とも同じ時刻（何時何分）に通った地点はありますか。正しいものはどれですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 C：一定有，但這個地點不一定在山路長度的正中間。",
+        "zh-Hans": "答案是 C：一定有，但这个地点不一定在山路长度的正中间。",
+        "en": "The answer is C: Yes, always, but that place need not be halfway along the path.",
+        "ja": "答えは C：必ずある。ただしその地点は山道のまん中とは限らない。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "把兩天疊在同一天來想：假設第二天另外有一個替身，從早上 6 點起完全照第一天的方式上山，每個時刻都在第一天的同一個位置；登山客本人則照第二天的方式下山。",
+          "早上 6 點時，替身在山腳、登山客在山頂，登山客比較高；下午 2 點時，登山客已經回到山腳，替身則在山腳或比山腳高的地方，不會比登山客低。兩人在同一條路上，一個只往上、一個只往下，「登山客比替身高」的情形到下午 2 點已經不成立，所以中間一定有某個時刻兩人走到同一個地點。那個地點和那個時刻，就是登山客兩天在同一時刻經過的地點，所以一定有，A、D 都錯。D 的理由也不對：下山快慢不影響兩人會在路上碰面。",
+          "這個地點在哪裡要看兩天怎麼走：例如第一天他早上 7 點前就快步走到離山頂很近的地方，之後一直慢慢走，而第二天一開始也走得很慢，兩人會在靠近山頂的地方相遇，不是正中間。所以 B 錯。",
+          "正確的是 C：一定有這樣的地點，但不一定在正中間。"
+        ],
+        "zh-Hans": [
+          "把两天叠在同一天来想：假设第二天另外有一个替身，从早上 6 点起完全照第一天的方式上山，每个时刻都在第一天的同一个位置；登山客本人则照第二天的方式下山。",
+          "早上 6 点时，替身在山脚、登山客在山顶，登山客比较高；下午 2 点时，登山客已经回到山脚，替身则在山脚或比山脚高的地方，不会比登山客低。两人在同一条路上，一个只往上、一个只往下，「登山客比替身高」的情形到下午 2 点已经不成立，所以中间一定有某个时刻两人走到同一个地点。那个地点和那个时刻，就是登山客两天在同一时刻经过的地点，所以一定有，A、D 都错。D 的理由也不对：下山快慢不影响两人会在路上碰面。",
+          "这个地点在哪里要看两天怎么走：例如第一天他早上 7 点前就快步走到离山顶很近的地方，之后一直慢慢走，而第二天一开始也走得很慢，两人会在靠近山顶的地方相遇，不是正中间。所以 B 错。",
+          "正确的是 C：一定有这样的地点，但不一定在正中间。"
+        ],
+        "en": [
+          "Put both days onto one day: imagine that on the second day a double starts at 6 a.m. and climbs exactly as the hiker did on day one, being at each moment where the hiker was at that moment on day one, while the hiker himself walks down as he did on day two.",
+          "At 6 a.m. the double is at the foot and the hiker at the top, so the hiker is higher. At 2 p.m. the hiker is back at the foot, while the double is at the foot or higher, never lower than the hiker. On the same path, one only going up and one only coming down, \"the hiker is higher\" has stopped being true by 2 p.m., so at some moment in between they must be at the same place. That place and moment are where the hiker passed at the same clock time on both days. So such a place always exists, and A and D are wrong. D's reason fails too: how fast he came down does not stop the two from meeting.",
+          "Where it is depends on how he walked: for instance, if on day one he hurried to a spot near the top before 7 a.m. and then walked slowly, and on day two he started very slowly, the two would meet near the top, not at the middle. So B is wrong.",
+          "The correct statement is C: such a place always exists, but it need not be halfway."
+        ],
+        "ja": [
+          "2 日分を同じ 1 日に重ねて考えます。2 日目に、もう 1 人の分身が朝 6 時から 1 日目とまったく同じように登り、どの時刻にも 1 日目のその時刻と同じ位置にいるとします。登山者本人は 2 日目のとおりに下ります。",
+          "朝 6 時、分身はふもと、登山者は山頂にいて、登山者のほうが高い位置です。午後 2 時、登山者はふもとにもどっていて、分身はふもとかそれより高い所にいるので、登山者より低くはありません。同じ道を一方は登るだけ、一方は下るだけなので、「登山者のほうが高い」は午後 2 時にはもう成り立たず、そのとちゅうのある時刻に 2 人は必ず同じ地点にいます。その地点とその時刻こそ、登山者が 2 日とも同じ時刻に通った地点です。だから必ずあり、A と D はまちがいです。D の理由も正しくありません。下りの速さに関係なく 2 人は道の上で出会います。",
+          "その地点がどこかは歩き方によります。たとえば 1 日目に朝 7 時前に山頂近くまで急いで登り、あとはゆっくり歩き、2 日目のはじめもゆっくり下ると、2 人は山頂の近くで出会い、まん中ではありません。だから B もまちがいです。",
+          "正しいのは C で、そのような地点は必ずあるが、まん中とは限りません。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "multiple_choice",
+      "options": {
+        "A": {
+          "zh-Hant": "不一定有，要看他兩天各在哪裡停下來休息才知道",
+          "zh-Hans": "不一定有，要看他两天各在哪里停下来休息才知道",
+          "en": "Not necessarily; it depends on where he stopped to rest on each day",
+          "ja": "あるとは限らない。2 日それぞれどこで休んだかによって決まる"
+        },
+        "B": {
+          "zh-Hant": "一定有，而且這個地點一定在山路長度的正中間",
+          "zh-Hans": "一定有，而且这个地点一定在山路长度的正中间",
+          "en": "Yes, always, and that place must be exactly halfway along the path",
+          "ja": "必ずある。しかもその地点は必ず山道のちょうどまん中にある"
+        },
+        "C": {
+          "zh-Hant": "一定有，但這個地點不一定在山路長度的正中間",
+          "zh-Hans": "一定有，但这个地点不一定在山路长度的正中间",
+          "en": "Yes, always, but that place need not be halfway along the path",
+          "ja": "必ずある。ただしその地点は山道のまん中とは限らない"
+        },
+        "D": {
+          "zh-Hant": "一定沒有，因為下山比上山整整少花了 4 小時",
+          "zh-Hans": "一定没有，因为下山比上山整整少花了 4 小时",
+          "en": "Never, because going down took a full 4 hours less than going up",
+          "ja": "必ずない。下りは上りよりまる 4 時間短かったから"
+        }
+      },
+      "correctAnswer": {
+        "type": "choice",
+        "value": "C"
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade6-foundation",
+        "notes": "把兩天疊成同一天一上一下兩人，上下位置互換必相遇，故必有同時刻同地點，但位置不固定。掃過 上山|下山|登山（0 題）、山頂（1 題）、同一個時刻|同樣的時刻|時刻.*相同（3 題）；最接近 logic_grade9_foundation_023，差異：那題是繩梯隨船上浮的陷阱題；本題是登山客兩天同一路線的「必有同時刻同地點」存在性論證（疊合成兩人相遇）"
+      }
+    },
+    {
+      "id": "logic_grade6_foundation_110",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "two_bus_lines_offset_from_choice_frequency",
+      "tags": [
+        "c:ratio",
+        "c:probability",
+        "m:reverse"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade6",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "公車站有兩條路線：開往外婆家的甲線，和開往姑姑家的乙線。兩條路線都是每 10 分鐘來一班，班次時刻固定不變；每一班乙線開走以後，過一段固定的時間就會來一班甲線。小安每個星期天都在隨機的時刻走到站牌，搭上最先來的那一班車，車開往誰家她就去誰家。很多個星期天下來，她去外婆家的次數大約是去姑姑家的 4 倍。每一班乙線開走以後，過幾分鐘會來甲線？",
+        "zh-Hans": "公交车站有两条路线：开往外婆家的甲线，和开往姑姑家的乙线。两条路线都是每 10 分钟来一班，班次时刻固定不变；每一班乙线开走以后，过一段固定的时间就会来一班甲线。小安每个星期天都在随机的时刻走到站牌，搭上最先来的那一班车，车开往谁家她就去谁家。很多个星期天下来，她去外婆家的次数大约是去姑姑家的 4 倍。每一班乙线开走以后，过几分钟会来甲线？",
+        "en": "At a bus stop there are two routes: route Jia goes to Grandma's house and route Yi goes to Aunt's house. Each route has a bus every 10 minutes on a fixed timetable, and every route Yi bus is followed, after the same fixed time, by a route Jia bus. Every Sunday An walks to the stop at a random time and takes the first bus that comes, visiting whichever house it goes to. Over many Sundays she visits Grandma about 4 times as often as Aunt. How many minutes after each route Yi bus leaves does a route Jia bus come?",
+        "ja": "バス停に 2 つの路線があります。おばあちゃんの家へ行く甲線と、おばさんの家へ行く乙線です。どちらも 10 分ごとに 1 本来て、時刻表は決まっています。乙線のバスが出たあと、いつも同じ時間がたつと甲線のバスが来ます。アンさんは毎週日曜日、でたらめな時刻にバス停へ行き、最初に来たバスに乗って、行き先の家をたずねます。たくさんの日曜日を通して見ると、おばあちゃんの家へ行った回数は、おばさんの家へ行った回数のおよそ 4 倍でした。乙線のバスが出てから何分後に甲線のバスが来ますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 8。",
+        "zh-Hans": "答案是 8。",
+        "en": "The answer is 8.",
+        "ja": "答えは 8 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "把每 10 分鐘看成一個循環：設乙線開走後過 x 分鐘來甲線，那麼甲線開走後過 10 − x 分鐘才來下一班乙線。",
+          "小安如果在「乙線開走後、甲線來之前」這 x 分鐘內走到站牌，最先來的是甲線，她去外婆家；如果在「甲線開走後、下一班乙線來之前」這 10 − x 分鐘內走到，最先來的是乙線，她去姑姑家。",
+          "她到站的時刻是隨機的，落在這兩段時間裡的次數，大約和兩段時間的長短成正比，所以去外婆家和去姑姑家的次數比約是 x : (10 − x)。題目說這個比是 4 : 1。",
+          "把 10 分鐘分成 4 : 1，x = 10 × 4/5 = 8。所以乙線開走 8 分鐘後來甲線（甲線開走 2 分鐘後就來乙線）。雖然兩條線班次一樣多，她卻常去外婆家，原因就在這個時間差。"
+        ],
+        "zh-Hans": [
+          "把每 10 分钟看成一个循环：设乙线开走后过 x 分钟来甲线，那么甲线开走后过 10 − x 分钟才来下一班乙线。",
+          "小安如果在「乙线开走后、甲线来之前」这 x 分钟内走到站牌，最先来的是甲线，她去外婆家；如果在「甲线开走后、下一班乙线来之前」这 10 − x 分钟内走到，最先来的是乙线，她去姑姑家。",
+          "她到站的时刻是随机的，落在这两段时间里的次数，大约和两段时间的长短成正比，所以去外婆家和去姑姑家的次数比约是 x : (10 − x)。题目说这个比是 4 : 1。",
+          "把 10 分钟分成 4 : 1，x = 10 × 4/5 = 8。所以乙线开走 8 分钟后来甲线（甲线开走 2 分钟后就来乙线）。虽然两条线班次一样多，她却常去外婆家，原因就在这个时间差。"
+        ],
+        "en": [
+          "Think of each 10 minutes as one cycle: say a Jia bus comes x minutes after a Yi bus leaves; then the next Yi bus comes 10 − x minutes after the Jia bus leaves.",
+          "If An arrives during the x minutes after a Yi bus and before the Jia bus, the first bus is Jia and she visits Grandma; if she arrives during the 10 − x minutes after a Jia bus and before the next Yi bus, the first bus is Yi and she visits Aunt.",
+          "Her arrival time is random, so the numbers of visits are roughly proportional to the lengths of the two waiting windows: Grandma : Aunt ≈ x : (10 − x). This ratio is 4 : 1.",
+          "Splitting 10 minutes in the ratio 4 : 1 gives x = 10 × 4/5 = 8. So a Jia bus comes 8 minutes after each Yi bus leaves (and a Yi bus comes only 2 minutes after a Jia bus). Both routes are equally frequent, but this time gap explains why she visits Grandma more often."
+        ],
+        "ja": [
+          "10 分間を 1 つの周期と考えます。乙線が出てから x 分後に甲線が来るとすると、甲線が出てから次の乙線が来るまでは 10 − x 分です。",
+          "アンさんが「乙線が出たあと、甲線が来る前」の x 分間にバス停に着けば、最初に来るのは甲線で、おばあちゃんの家へ行きます。「甲線が出たあと、次の乙線が来る前」の 10 − x 分間に着けば、最初に来るのは乙線で、おばさんの家へ行きます。",
+          "着く時刻はでたらめなので、2 つの時間帯に入る回数は時間の長さにほぼ比例し、おばあちゃん : おばさん ≈ x : (10 − x) です。この比が 4 : 1 です。",
+          "10 分を 4 : 1 に分けると x = 10 × 4/5 = 8 です。よって乙線が出てから 8 分後に甲線が来ます（甲線が出て 2 分後には乙線が来ます）。2 つの路線の本数は同じでも、この時間差のためにおばあちゃんの家へ行くことが多いのです。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "8"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade6-foundation",
+        "notes": "同班距兩路線的相位差決定各自「先到」的時段長，隨機到站時去向比等於兩時段長之比。掃過 公車（14 題）、每 10 分鐘（1 題）、先來|最先來（0 題）、隨機.*到（28 題）；最接近 logic_grade6_foundation_100，差異：那題是雙向發車的會車次數；本題是同站兩條同頻路線，由「先到」選擇的頻率比反推兩線的時間差"
+      }
+    },
+    {
+      "id": "logic_grade6_foundation_111",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "two_work_rest_cycles_common_rest_days",
+      "tags": [
+        "c:modular",
+        "c:factor_multiple",
+        "m:enumeration"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade6",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "小安的爸爸上班 3 天、休息 1 天，一直這樣輪下去；媽媽上班 5 天、休息 2 天，也一直這樣輪下去。某一天剛好是兩人都開始上班的第 1 天，把這一天叫做第 1 天。從第 1 天到第 100 天（含這兩天），爸爸和媽媽在同一天休息的日子一共有幾天？",
+        "zh-Hans": "小安的爸爸上班 3 天、休息 1 天，一直这样轮下去；妈妈上班 5 天、休息 2 天，也一直这样轮下去。某一天刚好是两人都开始上班的第 1 天，把这一天叫做第 1 天。从第 1 天到第 100 天（含这两天），爸爸和妈妈在同一天休息的日子一共有几天？",
+        "en": "An's father works 3 days and then rests 1 day, repeating this forever; his mother works 5 days and then rests 2 days, also repeating. On a certain day both of them start a working stretch; call it day 1. From day 1 to day 100 (both included), on how many days do the father and the mother both rest?",
+        "ja": "アンさんのお父さんは 3 日働いて 1 日休むことをずっとくり返し、お母さんは 5 日働いて 2 日休むことをずっとくり返します。ある日、2 人ともちょうど働き始めの 1 日目でした。この日を 1 日目とします。1 日目から 100 日目まで（両方の日をふくむ）で、お父さんとお母さんが同じ日に休む日は全部で何日ありますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 6。",
+        "zh-Hans": "答案是 6。",
+        "en": "The answer is 6.",
+        "ja": "答えは 6 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "爸爸 4 天一個循環，休息的是第 4、8、12、⋯ 天，也就是天數是 4 的倍數的日子。媽媽 7 天一個循環，休息的是每個循環的第 6、7 天，也就是天數除以 7 餘 6 或整除的日子。",
+          "兩人的安排合起來，每 28 天（4 和 7 的最小公倍數）重複一次。在第 1～28 天中，爸爸休息的是 4、8、12、16、20、24、28，它們除以 7 的餘數依序是 4、1、5、2、6、3、0，其中餘 6 或整除的只有第 20 天和第 28 天，共 2 天。",
+          "100 = 28 × 3 + 16。前 84 天是 3 個完整循環，共 3 × 2 = 6 天；第 85～100 天對應循環中的第 1～16 天，裡面沒有第 20、28 天，所以沒有。",
+          "一共有 6 天兩人同一天休息（第 20、28、48、56、76、84 天）。"
+        ],
+        "zh-Hans": [
+          "爸爸 4 天一个循环，休息的是第 4、8、12、⋯ 天，也就是天数是 4 的倍数的日子。妈妈 7 天一个循环，休息的是每个循环的第 6、7 天，也就是天数除以 7 余 6 或整除的日子。",
+          "两人的安排合起来，每 28 天（4 和 7 的最小公倍数）重复一次。在第 1～28 天中，爸爸休息的是 4、8、12、16、20、24、28，它们除以 7 的余数依序是 4、1、5、2、6、3、0，其中余 6 或整除的只有第 20 天和第 28 天，共 2 天。",
+          "100 = 28 × 3 + 16。前 84 天是 3 个完整循环，共 3 × 2 = 6 天；第 85～100 天对应循环中的第 1～16 天，里面没有第 20、28 天，所以没有。",
+          "一共有 6 天两人同一天休息（第 20、28、48、56、76、84 天）。"
+        ],
+        "en": [
+          "The father has a 4-day cycle and rests on days 4, 8, 12, …, the multiples of 4. The mother has a 7-day cycle and rests on the 6th and 7th day of each cycle, the days whose number leaves remainder 6 or 0 when divided by 7.",
+          "Together the schedule repeats every 28 days (the least common multiple of 4 and 7). In days 1–28 the father rests on 4, 8, 12, 16, 20, 24, 28, whose remainders when divided by 7 are 4, 1, 5, 2, 6, 3, 0; only days 20 and 28 have remainder 6 or 0, so 2 days.",
+          "100 = 28 × 3 + 16. The first 84 days are 3 full cycles, giving 3 × 2 = 6 days; days 85–100 correspond to days 1–16 of a cycle, which contain neither day 20 nor day 28, so none.",
+          "In total both rest on 6 days (days 20, 28, 48, 56, 76, 84)."
+        ],
+        "ja": [
+          "お父さんは 4 日で 1 周期で、休むのは 4、8、12、……日目、つまり 4 の倍数の日です。お母さんは 7 日で 1 周期で、各周期の 6 日目と 7 日目に休むので、日数を 7 でわったあまりが 6 か 0 の日です。",
+          "2 人の予定は合わせて 28 日（4 と 7 の最小公倍数）ごとにくり返します。1〜28 日目でお父さんが休むのは 4、8、12、16、20、24、28 日目で、7 でわったあまりは順に 4、1、5、2、6、3、0 なので、あまりが 6 か 0 なのは 20 日目と 28 日目の 2 日です。",
+          "100 = 28 × 3 + 16 です。はじめの 84 日は 3 周期分で 3 × 2 = 6 日、85〜100 日目は周期の 1〜16 日目にあたり、20 日目も 28 日目もふくまないので 0 日です。",
+          "全部で 6 日（20、28、48、56、76、84 日目）、2 人そろって休みます。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "6"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade6-foundation",
+        "notes": "兩個工作休息循環以最小公倍數 28 天為週期，在一週期內用餘數找共同休假日再乘週期數。掃過 休息（12 題）、上班|輪班（1 題）、同一天（5 題）；最接近 arithmetic_grade6_foundation_021，差異：那題是兩鐘每 4、5 分鐘同時敲的最小公倍數；本題兩個循環各有連續的休息日，要在 28 天週期內用餘數篩出重疊，再處理不完整週期"
+      }
+    },
+    {
+      "id": "logic_grade6_foundation_112",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "desert_crossing_minimum_helpers",
+      "tags": [
+        "c:logic_deduction",
+        "m:extremal",
+        "m:construction"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade6",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一位探險家要徒步穿越一片沙漠，需要走 6 天。每個人最多只能背 4 天份的食物和水，每人每天都要用掉 1 天份。探險家可以找幾位助手和他同時出發、陪他走一段，助手可以把自己背的食物和水分給探險家或其他助手，但每位助手都必須留夠食物和水，自己走回出發點。沙漠中途沒有任何補給，大家只在每天結束時交換食物和水，而且每個人背的量隨時都不能超過 4 天份。最少要找幾位助手，探險家才能穿越沙漠？",
+        "zh-Hans": "一位探险家要徒步穿越一片沙漠，需要走 6 天。每个人最多只能背 4 天份的食物和水，每人每天都要用掉 1 天份。探险家可以找几位助手和他同时出发、陪他走一段，助手可以把自己背的食物和水分给探险家或其他助手，但每位助手都必须留够食物和水，自己走回出发点。沙漠中途没有任何补给，大家只在每天结束时交换食物和水，而且每个人背的量随时都不能超过 4 天份。最少要找几位助手，探险家才能穿越沙漠？",
+        "en": "An explorer wants to cross a desert on foot, which takes 6 days. Each person can carry at most 4 days' worth of food and water and uses up 1 day's worth each day. The explorer may take some helpers who set out with him and walk part of the way; a helper may hand his food and water to the explorer or to other helpers, but every helper must keep enough to walk back to the start by himself. There are no supplies in the desert, supplies are exchanged only at the end of a day, and nobody may ever carry more than 4 days' worth. What is the smallest number of helpers that lets the explorer cross the desert?",
+        "ja": "ある探検家が砂漠を歩いて横断します。6 日かかります。1 人が運べる食料と水は最大 4 日分で、1 人 1 日に 1 日分を使います。探検家は何人かの助手と同時に出発し、とちゅうまでいっしょに歩いてもらえます。助手は自分の食料と水を探検家やほかの助手に分けてもよいですが、どの助手も自分で出発点まで歩いて帰れるだけの分を残さなければなりません。砂漠のとちゅうに補給はなく、食料と水の受けわたしは 1 日の終わりにだけ行い、だれもどんなときも 4 日分より多くは運べません。探検家が砂漠を横断するには、最少で何人の助手が必要ですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 2。",
+        "zh-Hans": "答案是 2。",
+        "en": "The answer is 2.",
+        "ja": "答えは 2 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "只有 1 位助手做不到：設助手陪走 k 天後回頭。他出發背 4 天份，走了 k 天剩 4 − k，回程還要 k 天份，最多只能分出 4 − 2k；k 是 2 或更多時一點也分不出來，所以要分食物只能在第 1 天結束時（k = 1）。這時探險家剩 3 天份，最多只能補到 4 天份（再多背不下），卻還要走 5 天，不夠。助手若不分食物，探險家只有 4 天份，更不夠。",
+          "2 位助手做得到：三人都背 4 天份出發。第 1 天結束，三人各剩 3 天份。助手甲給探險家 1 天份、給助手乙 1 天份，自己留 1 天份，正好走 1 天回到出發點。這時探險家和助手乙又都是 4 天份。",
+          "第 2 天結束，探險家和助手乙各剩 3 天份。助手乙給探險家 1 天份，探險家又是 4 天份；助手乙自己留 2 天份，正好走 2 天回到出發點。",
+          "探險家帶著 4 天份走完剩下的第 3 到第 6 天，剛好穿越沙漠。所以最少要 2 位助手。"
+        ],
+        "zh-Hans": [
+          "只有 1 位助手做不到：设助手陪走 k 天后回头。他出发背 4 天份，走了 k 天剩 4 − k，回程还要 k 天份，最多只能分出 4 − 2k；k 是 2 或更多时一点也分不出来，所以要分食物只能在第 1 天结束时（k = 1）。这时探险家剩 3 天份，最多只能补到 4 天份（再多背不下），却还要走 5 天，不够。助手若不分食物，探险家只有 4 天份，更不够。",
+          "2 位助手做得到：三人都背 4 天份出发。第 1 天结束，三人各剩 3 天份。助手甲给探险家 1 天份、给助手乙 1 天份，自己留 1 天份，正好走 1 天回到出发点。这时探险家和助手乙又都是 4 天份。",
+          "第 2 天结束，探险家和助手乙各剩 3 天份。助手乙给探险家 1 天份，探险家又是 4 天份；助手乙自己留 2 天份，正好走 2 天回到出发点。",
+          "探险家带着 4 天份走完剩下的第 3 到第 6 天，刚好穿越沙漠。所以最少要 2 位助手。"
+        ],
+        "en": [
+          "One helper is not enough: say the helper turns back after k days. He starts with 4 days' worth, has 4 − k left after k days, needs k for the way back, and so can give away at most 4 − 2k; for k = 2 or more he can give nothing, so any handover must be at the end of day 1 (k = 1). Then the explorer has 3 days' worth and can be topped up only to 4 (he cannot carry more), but still has 5 days to go: not enough. Without any handover he has only 4 days' worth, which is even worse.",
+          "Two helpers are enough: all three start with 4 days' worth. At the end of day 1 each has 3 left. Helper Jia gives 1 to the explorer and 1 to helper Yi and keeps 1, exactly enough to walk 1 day back. Now the explorer and helper Yi have 4 each again.",
+          "At the end of day 2 the explorer and helper Yi have 3 each. Helper Yi gives 1 to the explorer, who has 4 again, and keeps 2, exactly enough to walk 2 days back.",
+          "With 4 days' worth the explorer walks days 3 to 6 and just crosses the desert. So the minimum is 2 helpers."
+        ],
+        "ja": [
+          "助手 1 人ではできません。助手が k 日いっしょに歩いて引き返すとします。出発時 4 日分で、k 日歩くと 4 − k 日分残り、帰りに k 日分必要なので、わたせるのは多くても 4 − 2k 日分です。k が 2 以上だと何もわたせないので、わたせるのは 1 日目の終わり（k = 1）だけです。そのとき探検家は 3 日分残っていて、4 日分までしか補えません（それ以上は運べない）が、まだ 5 日歩く必要があり足りません。何もわたさなければ探検家は 4 日分しかなく、もっと足りません。",
+          "助手 2 人ならできます。3 人とも 4 日分を持って出発します。1 日目の終わりに 3 人とも 3 日分残ります。助手甲は探検家に 1 日分、助手乙に 1 日分わたし、自分は 1 日分残してちょうど 1 日歩いて帰ります。探検家と助手乙はまた 4 日分ずつになります。",
+          "2 日目の終わりに探検家と助手乙は 3 日分ずつです。助手乙は探検家に 1 日分わたして探検家は 4 日分になり、自分は 2 日分残してちょうど 2 日歩いて帰ります。",
+          "探検家は 4 日分を持って 3 日目から 6 日目まで歩き、ちょうど横断できます。よって助手は最少 2 人です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "2"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade6-foundation",
+        "notes": "一位助手回頭第 k 天最多分出 4−2k 且探險家受背負上限 4 限制，故不足；兩位助手分兩段接力補給可成。掃過 沙漠|糧食|補給（1 題）、背.*天份|天份（0 題）、助手（0 題）；最接近 arithmetic_grade5_foundation_123，差異：那題是備胎輪換讓總里程最大；本題是補給接力，助手必須留回程糧、且每人背負有上限，求最少助手人數"
+      }
+    },
+    {
+      "id": "logic_grade6_foundation_113",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "reconstruct_line_from_taller_in_front_counts",
+      "tags": [
+        "c:logic_deduction",
+        "m:reverse"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade6",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "6 個身高都不一樣的小朋友排成一直排，全部面向前方。每個人數一數「排在自己前面、而且比自己高」的有幾個人，從排頭到排尾依序報出：0、1、0、3、1、3。從排頭數過來第 2 個小朋友，是這 6 個人裡面第幾高的？（最高的叫第 1 高。）",
+        "zh-Hans": "6 个身高都不一样的小朋友排成一竖排，全部面向前方。每个人数一数「排在自己前面、而且比自己高」的有几个人，从排头到排尾依序报出：0、1、0、3、1、3。从排头数过来第 2 个小朋友，是这 6 个人里面第几高的？（最高的叫第 1 高。）",
+        "en": "Six children, all of different heights, stand in a single line facing forward. Each child counts how many children standing in front of him or her are taller, and from the front of the line to the back they report: 0, 1, 0, 3, 1, 3. The 2nd child from the front is the how-manyth tallest of the six? (The tallest is the 1st tallest.)",
+        "ja": "身長がみんなちがう 6 人の子どもが、前を向いて 1 列に並んでいます。それぞれが「自分より前にいて、自分より背が高い人」の人数を数え、先頭から順に 0、1、0、3、1、3 と言いました。先頭から数えて 2 番目の子どもは、6 人の中で何番目に背が高いですか。（いちばん高い人を 1 番目とします。）"
+      },
+      "answer": {
+        "zh-Hant": "答案是 5。",
+        "zh-Hans": "答案是 5。",
+        "en": "The answer is 5.",
+        "ja": "答えは 5 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "從排尾往前推。排尾那個人前面就是其他 5 個人全部，他報 3，表示 6 個人中恰好有 3 人比他高，所以他是第 4 高。",
+          "把他拿掉，還沒確定的名次是 1、2、3、5、6。排在第 5 個的人，前面就是其餘 4 人，他報 1，表示在這 5 人中他是第 2 高，也就是名次 2。",
+          "再拿掉他，剩名次 1、3、5、6：第 4 個人報 3，在這 4 人中是第 4 高，名次 6。剩 1、3、5：第 3 個人報 0，是其中最高，名次 1。剩 3、5：第 2 個人報 1，是其中第 2 高，名次 5；排頭就是名次 3。每一步都只有一種可能。",
+          "檢查：由前到後名次是 3、5、1、6、2、4，每人前面比自己高的人數依序是 0、1、0、3、1、3，相符。第 2 個小朋友是第 5 高。"
+        ],
+        "zh-Hans": [
+          "从排尾往前推。排尾那个人前面就是其他 5 个人全部，他报 3，表示 6 个人中恰好有 3 人比他高，所以他是第 4 高。",
+          "把他拿掉，还没确定的名次是 1、2、3、5、6。排在第 5 个的人，前面就是其余 4 人，他报 1，表示在这 5 人中他是第 2 高，也就是名次 2。",
+          "再拿掉他，剩名次 1、3、5、6：第 4 个人报 3，在这 4 人中是第 4 高，名次 6。剩 1、3、5：第 3 个人报 0，是其中最高，名次 1。剩 3、5：第 2 个人报 1，是其中第 2 高，名次 5；排头就是名次 3。每一步都只有一种可能。",
+          "检查：由前到后名次是 3、5、1、6、2、4，每人前面比自己高的人数依序是 0、1、0、3、1、3，相符。第 2 个小朋友是第 5 高。"
+        ],
+        "en": [
+          "Work from the back. Everyone else stands in front of the last child, who reports 3, so exactly 3 of the six are taller than this child: the last child is the 4th tallest.",
+          "Remove that child; the ranks still to place are 1, 2, 3, 5, 6. The 5th child has the other 4 in front and reports 1, so among these 5 the child is the 2nd tallest: rank 2.",
+          "Remove that child too, leaving 1, 3, 5, 6: the 4th child reports 3, so is the shortest of these 4, rank 6. Leaving 1, 3, 5: the 3rd child reports 0, the tallest of them, rank 1. Leaving 3, 5: the 2nd child reports 1, the 2nd tallest of them, rank 5; the front child is rank 3. Every step has only one possibility.",
+          "Check: from front to back the ranks are 3, 5, 1, 6, 2, 4, and the numbers of taller children in front are 0, 1, 0, 3, 1, 3, as reported. The 2nd child is the 5th tallest."
+        ],
+        "ja": [
+          "うしろから順に考えます。最後尾の子の前にはほかの 5 人全員がいて、その子は 3 と言ったので、6 人の中でちょうど 3 人がその子より高く、その子は 4 番目に高いです。",
+          "その子を除くと、まだ決まっていない順位は 1、2、3、5、6 です。5 番目の子の前には残りの 4 人がいて 1 と言ったので、この 5 人の中で 2 番目に高く、順位は 2 です。",
+          "さらに除くと 1、3、5、6 が残り、4 番目の子は 3 と言ったのでこの 4 人で最も低く順位 6。1、3、5 が残り、3 番目の子は 0 なので最も高く順位 1。3、5 が残り、2 番目の子は 1 なので 2 番目に高く順位 5、先頭は順位 3 です。どの段階も 1 通りに決まります。",
+          "確認：前から順位は 3、5、1、6、2、4 で、前にいる自分より高い人数は 0、1、0、3、1、3 となり一致します。2 番目の子は 5 番目に高いです。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "5"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade6-foundation",
+        "notes": "從排尾倒推：每人前面就是尚未定位的所有人，報數 c 即在剩餘者中排第 c+1 高，逐一確定。掃過 身高.*排|排.*身高（9 題）、比自己高|比.*高的（6 題）、排頭|排尾（0 題）；最接近 logic_grade8_foundation_028，差異：那題由幾個兩兩比較推出某人的高矮名次；本題由每人「前面比自己高的人數」從排尾倒推重建整排順序"
+      }
+    },
+    {
+      "id": "logic_grade6_foundation_114",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "min_black_cells_hitting_every_2x2_block",
+      "tags": [
+        "c:basic_counting",
+        "m:extremal",
+        "m:construction"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade6",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一塊方格板有 5 個橫排，每排 5 格，一共 25 格。小安要把其中一些格子塗黑，使得板上任何一個 2 × 2 的小正方形（由上下相鄰的兩個橫排、左右相鄰的兩格組成，一共有 16 個這樣的小正方形）裡面，都至少有一格是黑的。小安最少要塗黑幾格？",
+        "zh-Hans": "一块方格板有 5 个横排，每排 5 格，一共 25 格。小安要把其中一些格子涂黑，使得板上任何一个 2 × 2 的小正方形（由上下相邻的两个横排、左右相邻的两格组成，一共有 16 个这样的小正方形）里面，都至少有一格是黑的。小安最少要涂黑几格？",
+        "en": "A board has 5 rows of 5 squares, 25 squares in all. An wants to paint some squares black so that every 2 × 2 block on the board (formed by two neighbouring rows and two neighbouring columns; there are 16 such blocks) contains at least one black square. What is the smallest number of squares he must paint?",
+        "ja": "横に 5 段、各段 5 マスで、全部で 25 マスの板があります。アンさんはいくつかのマスを黒くぬり、板の上のどの 2 × 2 の小さな正方形（上下にとなりあう 2 段と左右にとなりあう 2 マスでできるもの。全部で 16 個あります）にも、少なくとも 1 マスは黒いマスが入るようにします。最も少なくて何マスぬればよいですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 4。",
+        "zh-Hans": "答案是 4。",
+        "en": "The answer is 4.",
+        "ja": "答えは 4 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "先看四個角落的 2 × 2 小正方形：左上（第 1、2 排的第 1、2 格）、右上（第 1、2 排的第 4、5 格）、左下（第 4、5 排的第 1、2 格）、右下（第 4、5 排的第 4、5 格）。這四個小正方形彼此沒有共用的格子。",
+          "每一個都至少要有一格黑的，而且一格黑的不可能同時在兩個不重疊的小正方形裡，所以至少要塗黑 4 格。",
+          "4 格做得到：塗黑第 2 排第 2 格、第 2 排第 4 格、第 4 排第 2 格、第 4 排第 4 格。任何一個 2 × 2 小正方形用到相鄰的兩排，其中一定有一排是第 2 排或第 4 排；它也用到相鄰的兩格，其中一定有一格是第 2 格或第 4 格；兩者交叉的那一格就是黑的。",
+          "所以最少要塗黑 4 格。"
+        ],
+        "zh-Hans": [
+          "先看四个角落的 2 × 2 小正方形：左上（第 1、2 排的第 1、2 格）、右上（第 1、2 排的第 4、5 格）、左下（第 4、5 排的第 1、2 格）、右下（第 4、5 排的第 4、5 格）。这四个小正方形彼此没有共用的格子。",
+          "每一个都至少要有一格黑的，而且一格黑的不可能同时在两个不重叠的小正方形里，所以至少要涂黑 4 格。",
+          "4 格做得到：涂黑第 2 排第 2 格、第 2 排第 4 格、第 4 排第 2 格、第 4 排第 4 格。任何一个 2 × 2 小正方形用到相邻的两排，其中一定有一排是第 2 排或第 4 排；它也用到相邻的两格，其中一定有一格是第 2 格或第 4 格；两者交叉的那一格就是黑的。",
+          "所以最少要涂黑 4 格。"
+        ],
+        "en": [
+          "Look at the four corner 2 × 2 blocks: top-left (rows 1–2, columns 1–2), top-right (rows 1–2, columns 4–5), bottom-left (rows 4–5, columns 1–2) and bottom-right (rows 4–5, columns 4–5). No two of them share a square.",
+          "Each needs at least one black square, and one black square cannot lie in two non-overlapping blocks, so at least 4 squares must be painted.",
+          "4 squares suffice: paint row 2 column 2, row 2 column 4, row 4 column 2 and row 4 column 4. Any 2 × 2 block uses two neighbouring rows, one of which must be row 2 or row 4, and two neighbouring columns, one of which must be column 2 or column 4; the square where they cross is black.",
+          "So the minimum is 4 squares."
+        ],
+        "ja": [
+          "まず 4 すみの 2 × 2 の小さな正方形を見ます。左上（1・2 段目の 1・2 マス目）、右上（1・2 段目の 4・5 マス目）、左下（4・5 段目の 1・2 マス目）、右下（4・5 段目の 4・5 マス目）です。この 4 つはどの 2 つも同じマスを使っていません。",
+          "どれにも少なくとも 1 マス黒が必要で、1 つの黒マスが重ならない 2 つの小さな正方形に同時に入ることはないので、少なくとも 4 マスぬる必要があります。",
+          "4 マスでできます。2 段目の 2 マス目と 4 マス目、4 段目の 2 マス目と 4 マス目をぬります。どの 2 × 2 もとなりあう 2 段を使い、そのどちらかは必ず 2 段目か 4 段目です。また、となりあう 2 マスを使い、そのどちらかは必ず 2 マス目か 4 マス目です。その交わるマスが黒です。",
+          "よって最少 4 マスです。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "4"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade6-foundation",
+        "notes": "四個角落互不重疊的 2×2 給出下界 4；塗第 2、4 排與第 2、4 格的交叉點，任何相鄰兩排兩格都含其一。掃過 2 × 2.*至少|任何一個 2 × 2|每一個 2 × 2（0 題）、塗黑（9 題）、最少要塗（1 題）；最接近 logic_grade3_foundation_086，差異：那題是 3×3 中塗黑格不可共邊求最多格數；本題是 5×5 中讓每個 2×2 都含黑格求最少格數（不重疊區塊給下界）"
+      }
     }
   ]
 }
