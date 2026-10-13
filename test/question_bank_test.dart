@@ -1953,6 +1953,37 @@ void main() {
     expect(grade12TrapezoidDiagonalQuestion.figure.kind, 'none');
   });
 
+  test('grade9 equilateral point-distance area question has an illustrated exact answer',
+      () async {
+    TestWidgetsFlutterBinding.ensureInitialized();
+
+    final BundledQuestionBankRepository repository =
+        BundledQuestionBankRepository();
+    final QuestionBank grade9Pack = await repository.loadPack(
+      'assets/questions/geometry/grade9_foundation.geometry.v1.json',
+    );
+
+    final Question question = grade9Pack.questions.firstWhere(
+      (Question item) =>
+          item.id ==
+          'geometry_grade9_foundation_equilateral_point_distance_area_001',
+    );
+
+    expect(question.levelStage, 'grade9');
+    expect(question.challengeTier, 'foundation');
+    expect(question.answerMode, AnswerMode.multipleChoice);
+    expect(question.figure.kind, 'geometry_scene');
+    expect(question.correctAnswer.value, 'C');
+    expect(
+      question.optionDisplayLabel('C', 'zh-Hant'),
+      contains('(175√3 + 72√7)/28'),
+    );
+    expect(question.localizedSolutionSteps('zh-Hant').join('\n'), contains('60°'));
+    expect(question.figure.params['points'], isNotEmpty);
+    expect(question.figure.params['segments'], isNotEmpty);
+    expect(question.figure.params['angleMarks'], isNotEmpty);
+  });
+
   test('number theory packs include rewritten public competition sources',
       () async {
     TestWidgetsFlutterBinding.ensureInitialized();

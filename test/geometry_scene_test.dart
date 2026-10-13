@@ -61,6 +61,23 @@ void main() {
     expect(scene.pointIsVisible['A'], isTrue);
   });
 
+  test('keeps an optional display label separate from a point name', () {
+    final Map<String, dynamic> params = sampleParams();
+    (params['points'] as List).add(
+      {
+        'name': 'apLength',
+        'label': 'AP = 3',
+        'x': 2,
+        'y': 3,
+        'visible': false,
+      },
+    );
+
+    final GeometryScene scene = GeometryScene.fromParams(params);
+
+    expect(scene.pointLabels['apLength'], 'AP = 3');
+  });
+
   test('parses all primitive collections', () {
     final GeometryScene scene = GeometryScene.fromParams(sampleParams());
     expect(scene.segments, hasLength(1));

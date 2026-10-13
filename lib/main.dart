@@ -6775,14 +6775,25 @@ class GeometryScenePainter extends CustomPainter {
       ..strokeWidth = 2
       ..style = PaintingStyle.stroke;
     scene.points.forEach((String name, Offset _) {
-      if (scene.pointIsVisible[name] == false) return;
       final Offset o = _p(name, size);
+      final Offset dir = _labelDir(scene.pointLabelPos[name] ?? 'r');
+      final String label = scene.pointLabels[name] ?? name;
+      if (scene.pointIsVisible[name] == false) {
+        _text(
+          canvas,
+          label,
+          o + dir * 11,
+          size,
+          color: _accent,
+          sizePx: 13,
+        );
+        return;
+      }
       canvas.drawCircle(o, 4.5, ptFill);
       canvas.drawCircle(o, 4.5, ptStroke);
-      final Offset dir = _labelDir(scene.pointLabelPos[name] ?? 'r');
       _text(
         canvas,
-        name,
+        label,
         o + dir * 15,
         size,
         color: _ink,

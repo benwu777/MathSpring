@@ -73,6 +73,7 @@ class GeometryScene {
   GeometryScene({
     required this.points,
     required this.pointLabelPos,
+    required this.pointLabels,
     required this.pointIsVisible,
     required this.segments,
     required this.polygons,
@@ -88,6 +89,7 @@ class GeometryScene {
 
   final Map<String, Offset> points; // 數學座標
   final Map<String, String> pointLabelPos; // 標籤方位 t/b/l/r/tl/...
+  final Map<String, String> pointLabels; // 顯示文字；未指定時使用點名
   final Map<String, bool> pointIsVisible;
   final List<GeometrySegment> segments;
   final List<GeometryPolygon> polygons;
@@ -105,12 +107,14 @@ class GeometryScene {
         Map<String, dynamic>.from(params['bounds'] as Map? ?? const {});
     final Map<String, Offset> pts = <String, Offset>{};
     final Map<String, String> labelPos = <String, String>{};
+    final Map<String, String> labels = <String, String>{};
     final Map<String, bool> pointIsVisible = <String, bool>{};
     for (final Object? raw in (params['points'] as List? ?? const [])) {
       final Map<String, dynamic> p = Map<String, dynamic>.from(raw as Map);
       final String name = p['name'] as String;
       pts[name] = Offset(_toDouble(p['x']), _toDouble(p['y']));
       labelPos[name] = (p['pos'] as String?) ?? 'r';
+      labels[name] = (p['label'] as String?) ?? name;
       pointIsVisible[name] = p['visible'] as bool? ?? true;
     }
 
@@ -122,6 +126,7 @@ class GeometryScene {
     return GeometryScene(
       points: pts,
       pointLabelPos: labelPos,
+      pointLabels: labels,
       pointIsVisible: pointIsVisible,
       segments: maps('segments')
           .map((m) => GeometrySegment(
