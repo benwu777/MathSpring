@@ -1976,12 +1976,39 @@ void main() {
     expect(question.correctAnswer.value, 'C');
     expect(
       question.optionDisplayLabel('C', 'zh-Hant'),
-      contains('(175√3 + 72√7)/28'),
+      contains('(25√3 + 36)/4'),
     );
     expect(question.localizedSolutionSteps('zh-Hant').join('\n'), contains('60°'));
     expect(question.figure.params['points'], isNotEmpty);
     expect(question.figure.params['segments'], isNotEmpty);
     expect(question.figure.params['angleMarks'], isNotEmpty);
+  });
+
+  test('grade9 equilateral point-distance area uses the interior solution',
+      () async {
+    TestWidgetsFlutterBinding.ensureInitialized();
+
+    final QuestionBank grade9Pack = await BundledQuestionBankRepository()
+        .loadPack('assets/questions/geometry/grade9_foundation.geometry.v1.json');
+    final Question question = grade9Pack.questions.firstWhere(
+      (Question item) =>
+          item.id ==
+          'geometry_grade9_foundation_equilateral_point_distance_area_001',
+    );
+
+    expect(question.correctAnswer.value, 'C');
+    expect(
+      question.optionDisplayLabel('C', 'zh-Hant'),
+      contains('(25√3 + 36)/4'),
+    );
+    expect(
+      question.localizedSolutionSteps('zh-Hant').join('\n'),
+      contains('(s² − 25)/(2√3s)'),
+    );
+    expect(
+      question.localizedSolutionSteps('zh-Hant').join('\n'),
+      contains('解法二：60° 旋轉'),
+    );
   });
 
   test('number theory packs include rewritten public competition sources',
