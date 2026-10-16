@@ -5869,6 +5869,412 @@
         "reference": "logic-grade12-foundation",
         "notes": "勝場最多的隊伍若輸給 T，必有它打敗的某隊勝過 T，否則 T 勝場更多；故「兩步可達」的王一定存在。掃過 /單循環/（9 題）、/每兩隊.*比賽一場/（9 題）；最接近 logic_grade12_foundation_054（循環賽循環三元組最多），差異：該題是計數極值；本題是存在性：勝場最多的隊伍一定在兩步之內「勝過」每一隊（循環賽之王），用極端原理反證"
       }
+    },
+    {
+      "id": "logic_grade12_foundation_063",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "two_machine_flow_shop_minimum_makespan_lower_bound",
+      "tags": [
+        "c:work_rate",
+        "c:logic_deduction",
+        "m:estimate_bound",
+        "m:construction"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "印刷廠有五本書要製作，每本都要先在印刷機上印刷，印完之後再到裝訂機上裝訂。兩台機器各自一次只能處理一本書，每本書的印刷或裝訂一旦開始就不能中斷。各書所需的時數（印刷、裝訂）是：甲 (3, 6)、乙 (7, 2)、丙 (4, 5)、丁 (1, 4)、戊 (6, 3)。從開始印第一本到最後一本裝訂完成，最少需要幾小時？",
+        "zh-Hans": "印刷厂有五本书要制作，每本都要先在印刷机上印刷，印完之后再到装订机上装订。两台机器各自一次只能处理一本书，每本书的印刷或装订一旦开始就不能中断。各书所需的时数（印刷、装订）是：甲 (3, 6)、乙 (7, 2)、丙 (4, 5)、丁 (1, 4)、戊 (6, 3)。从开始印第一本到最后一本装订完成，最少需要几小时？",
+        "en": "A print shop must produce five books. Each is first printed on the printing machine and, once printed, bound on the binding machine. Each machine handles one book at a time, and once a book's printing or binding starts it cannot be interrupted. The hours needed (printing, binding) are: A (3, 6), B (7, 2), C (4, 5), D (1, 4), E (6, 3). What is the minimum number of hours from the start of the first printing until the last binding is finished?",
+        "ja": "印刷所で 5 冊の本をつくる。どの本もまず印刷機で印刷し、印刷が終わってから製本機で製本する。2 台の機械はそれぞれ一度に 1 冊しか扱えず、印刷・製本はいったん始めたら中断できない。各本にかかる時間（印刷、製本）は、甲 (3, 6)、乙 (7, 2)、丙 (4, 5)、丁 (1, 4)、戊 (6, 3) である。最初の印刷開始から最後の製本完了まで、最短で何時間かかるか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 23。",
+        "zh-Hans": "答案是 23。",
+        "en": "The answer is 23.",
+        "ja": "答えは 23 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "下界：印刷機要把五本全部印完，共 3 + 7 + 4 + 1 + 6 = 21 小時；最後印完的那一本，印完之後還要裝訂，而裝訂最短的是乙的 2 小時。所以總時間至少 21 + 2 = 23 小時。",
+          "安排順序：裝訂比印刷久的書（丁、甲、丙）先做，依印刷時間由短到長；印刷比裝訂久的書（戊、乙）後做，依裝訂時間由長到短。得到順序 丁、甲、丙、戊、乙。這樣裝訂機一開始就有書可做，而裝訂最短的乙放在最後。",
+          "時間表：印刷機 丁 0–1、甲 1–4、丙 4–8、戊 8–14、乙 14–21；裝訂機 丁 1–5、甲 5–11、丙 11–16、戊 16–19、乙 21–23。每本都是印完才開始裝訂，兩台機器都沒有重疊，23 小時完成。",
+          "達到了下界，所以最少就是 23 小時。（若隨便排成 戊、乙、丙、甲、丁，要 32 小時。）答案是 23。"
+        ],
+        "zh-Hans": [
+          "下界：印刷机要把五本全部印完，共 3 + 7 + 4 + 1 + 6 = 21 小时；最后印完的那一本，印完之后还要装订，而装订最短的是乙的 2 小时。所以总时间至少 21 + 2 = 23 小时。",
+          "安排顺序：装订比印刷久的书（丁、甲、丙）先做，依印刷时间由短到长；印刷比装订久的书（戊、乙）后做，依装订时间由长到短。得到顺序 丁、甲、丙、戊、乙。这样装订机一开始就有书可做，而装订最短的乙放在最后。",
+          "时间表：印刷机 丁 0–1、甲 1–4、丙 4–8、戊 8–14、乙 14–21；装订机 丁 1–5、甲 5–11、丙 11–16、戊 16–19、乙 21–23。每本都是印完才开始装订，两台机器都没有重叠，23 小时完成。",
+          "达到了下界，所以最少就是 23 小时。（若随便排成 戊、乙、丙、甲、丁，要 32 小时。）答案是 23。"
+        ],
+        "en": [
+          "Lower bound: printing all five books takes 3 + 7 + 4 + 1 + 6 = 21 hours, and the last book printed still needs binding afterward, at least 2 hours (B has the shortest binding). So the total is at least 21 + 2 = 23 hours.",
+          "Order: books whose binding is longer than printing (D, A, C) go first, by increasing printing time; books whose printing is longer (E, B) go last, by decreasing binding time. This gives D, A, C, E, B, so the binder gets work immediately and B, with the shortest binding, is last.",
+          "Schedule: printer D 0–1, A 1–4, C 4–8, E 8–14, B 14–21; binder D 1–5, A 5–11, C 11–16, E 16–19, B 21–23. Each book is bound only after printing, and no machine overlaps; everything is done in 23 hours.",
+          "This meets the lower bound, so the minimum is 23 hours. (A careless order such as E, B, C, A, D takes 32 hours.) The answer is 23."
+        ],
+        "ja": [
+          "下限：5 冊すべての印刷に 3 + 7 + 4 + 1 + 6 = 21 時間かかり、最後に印刷した本はその後に製本が必要で、製本の最短は乙の 2 時間。よって全体は少なくとも 21 + 2 = 23 時間。",
+          "順序：製本のほうが長い本（丁、甲、丙）を先に印刷時間の短い順に、印刷のほうが長い本（戊、乙）を後に製本時間の長い順に並べる。丁、甲、丙、戊、乙 となり、製本機はすぐ仕事を始められ、製本の最も短い乙が最後になる。",
+          "時間割：印刷機 丁 0–1、甲 1–4、丙 4–8、戊 8–14、乙 14–21、製本機 丁 1–5、甲 5–11、丙 11–16、戊 16–19、乙 21–23。どの本も印刷後に製本し、機械の重なりもなく、23 時間で終わる。",
+          "下限に達しているので最短は 23 時間。（たとえば 戊、乙、丙、甲、丁 と雑に並べると 32 時間かかる。）答えは 23。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "23"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade12-foundation",
+        "notes": "兩機流水排程：下界＝印刷總時 21 加最短裝訂 2，再用強生法則排出 丁甲丙戊乙 達到 23。掃過 /印刷|裝訂/（0 題）、/兩台機器|先.*再.*機/（7 題）；最接近 logic_grade9_foundation_017（關鍵路徑的最短工期），差異：該題是單一資源下有先後限制的工序；本題是兩台機器的流水排序，要自己給出下界論證並構造達成下界的順序，順序不同總時數差到 32"
+      }
+    },
+    {
+      "id": "logic_grade12_foundation_064",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "maximum_flow_equals_minimum_cut_water_network",
+      "tags": [
+        "c:graph_theory",
+        "c:logic_deduction",
+        "m:estimate_bound",
+        "m:construction"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "自來水從水廠 S 經過管線送到市區 T，中間有四個加壓站 A、B、C、D。每條管線只能單向送水，每小時最多能送的水量（單位：萬公升）是：S→A 10、S→B 9、B→A 3、A→C 4、A→D 8、B→D 5、D→C 6、C→T 12、D→T 9。加壓站本身不能儲水（流進多少就流出多少）。從 S 到 T 每小時最多能送多少萬公升的水？",
+        "zh-Hans": "自来水从水厂 S 经过管线送到市区 T，中间有四个加压站 A、B、C、D。每条管线只能单向送水，每小时最多能送的水量（单位：万升）是：S→A 10、S→B 9、B→A 3、A→C 4、A→D 8、B→D 5、D→C 6、C→T 12、D→T 9。加压站本身不能储水（流进多少就流出多少）。从 S 到 T 每小时最多能送多少万升的水？",
+        "en": "Water flows from plant S to the city T through pipes, via four pumping stations A, B, C, D. Each pipe carries water one way only, with hourly capacity (in units of 10,000 liters): S→A 10, S→B 9, B→A 3, A→C 4, A→D 8, B→D 5, D→C 6, C→T 12, D→T 9. Stations store no water (what flows in flows out). What is the maximum amount, in units of 10,000 liters, that can be sent from S to T per hour?",
+        "ja": "浄水場 S から市街地 T へ、4 つの加圧所 A、B、C、D を経由して水を送る。各管は一方向にしか送れず、1 時間に送れる最大量（単位：万リットル）は S→A 10、S→B 9、B→A 3、A→C 4、A→D 8、B→D 5、D→C 6、C→T 12、D→T 9 である。加圧所は水をためられない（入った分だけ出る）。S から T へ 1 時間に最大何万リットル送れるか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 17。",
+        "zh-Hans": "答案是 17。",
+        "en": "The answer is 17.",
+        "ja": "答えは 17 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "找上界：把 S、A、B 看成一邊，C、D、T 看成另一邊。所有的水都必須經過從 {S, A, B} 通往 {C, D, T} 的管線，這些管線只有 A→C 4、A→D 8、B→D 5，容量合計 17。所以每小時最多 17 萬公升。",
+          "找送法：S→A 送 9、S→B 送 8；B 把 3 送往 A、5 送往 D；A 共收到 12，送 4 往 C、8 往 D；D 共收到 13，送 9 往 T、4 往 C；C 共收到 8，全部送往 T。",
+          "檢查：每條管線都沒超過容量（S→A 9 ≤ 10、S→B 8 ≤ 9、B→A 3、A→C 4、A→D 8、B→D 5、D→C 4 ≤ 6、C→T 8 ≤ 12、D→T 9），每個加壓站流進等於流出，送到 T 的共 8 + 9 = 17。",
+          "上界與實際送法都是 17，所以最大就是 17。（只看離開 S 的 19 或進入 T 的 21，都不是真正的瓶頸。）答案是 17。"
+        ],
+        "zh-Hans": [
+          "找上界：把 S、A、B 看成一边，C、D、T 看成另一边。所有的水都必须经过从 {S, A, B} 通往 {C, D, T} 的管线，这些管线只有 A→C 4、A→D 8、B→D 5，容量合计 17。所以每小时最多 17 万升。",
+          "找送法：S→A 送 9、S→B 送 8；B 把 3 送往 A、5 送往 D；A 共收到 12，送 4 往 C、8 往 D；D 共收到 13，送 9 往 T、4 往 C；C 共收到 8，全部送往 T。",
+          "检查：每条管线都没超过容量（S→A 9 ≤ 10、S→B 8 ≤ 9、B→A 3、A→C 4、A→D 8、B→D 5、D→C 4 ≤ 6、C→T 8 ≤ 12、D→T 9），每个加压站流进等于流出，送到 T 的共 8 + 9 = 17。",
+          "上界与实际送法都是 17，所以最大就是 17。（只看离开 S 的 19 或进入 T 的 21，都不是真正的瓶颈。）答案是 17。"
+        ],
+        "en": [
+          "Upper bound: put S, A, B on one side and C, D, T on the other. All water must pass through pipes from {S, A, B} to {C, D, T}, which are only A→C 4, A→D 8, B→D 5, total capacity 17. So at most 17 per hour.",
+          "A flow: send 9 on S→A and 8 on S→B; B sends 3 to A and 5 to D; A receives 12 and sends 4 to C and 8 to D; D receives 13 and sends 9 to T and 4 to C; C receives 8 and sends it all to T.",
+          "Check: no pipe exceeds its capacity (S→A 9 ≤ 10, S→B 8 ≤ 9, B→A 3, A→C 4, A→D 8, B→D 5, D→C 4 ≤ 6, C→T 8 ≤ 12, D→T 9), inflow equals outflow at every station, and T receives 8 + 9 = 17.",
+          "The bound and the flow are both 17, so the maximum is 17. (The 19 leaving S and the 21 entering T are not the real bottleneck.) The answer is 17."
+        ],
+        "ja": [
+          "上限：S、A、B を一方、C、D、T を他方とする。水はすべて {S, A, B} から {C, D, T} へ向かう管を通らなければならず、その管は A→C 4、A→D 8、B→D 5 だけで容量の合計は 17。よって 1 時間に最大 17 万リットル。",
+          "送り方：S→A に 9、S→B に 8 を送る。B は 3 を A へ、5 を D へ。A は計 12 を受け、4 を C へ、8 を D へ。D は計 13 を受け、9 を T へ、4 を C へ。C は計 8 を受け、すべて T へ。",
+          "確認：どの管も容量を超えず（S→A 9 ≤ 10、S→B 8 ≤ 9、B→A 3、A→C 4、A→D 8、B→D 5、D→C 4 ≤ 6、C→T 8 ≤ 12、D→T 9）、各加圧所で入る量と出る量は等しく、T に届くのは 8 + 9 = 17。",
+          "上限と実際の送り方がともに 17 なので最大は 17。（S から出る 19 や T に入る 21 は本当のボトルネックではない。）答えは 17。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "17"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade12-foundation",
+        "notes": "最大流＝最小割：找到容量 17 的割 {S, A, B} | {C, D, T} 當上界，再構造流量 17 的送法。掃過 /管線|水廠/（1 題）、/每小時最多/（0 題）；最接近 logic_grade12_foundation_022（最小頂點覆蓋），差異：該題是覆蓋所有邊的最少點；本題是網路流，要同時給出割的上界與達成的送法，關鍵是看出瓶頸不在起點或終點"
+      }
+    },
+    {
+      "id": "logic_grade12_foundation_065",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "optimal_prefix_code_total_bits_by_huffman_merging",
+      "tags": [
+        "c:graph_theory",
+        "c:logic_deduction",
+        "m:extremal"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一段訊息只用到 A、B、C、D、E、F 六個字母，出現次數分別是 40、20、15、12、8、5 次。要把每個字母編成一串 0 與 1，而且任何一個字母的編碼都不能是另一個字母編碼的開頭（這樣整段連在一起寫也能唯一解讀）。整段訊息編碼後，總共最少需要幾個位元（0 或 1 的個數）？",
+        "zh-Hans": "一段信息只用到 A、B、C、D、E、F 六个字母，出现次数分别是 40、20、15、12、8、5 次。要把每个字母编成一串 0 与 1，而且任何一个字母的编码都不能是另一个字母编码的开头（这样整段连在一起写也能唯一解读）。整段信息编码后，总共最少需要几个比特（0 或 1 的个数）？",
+        "en": "A message uses only the six letters A, B, C, D, E, F, appearing 40, 20, 15, 12, 8, and 5 times. Each letter is to be encoded as a string of 0s and 1s so that no letter's code is the beginning of another letter's code (so the whole message can be decoded uniquely when written together). What is the minimum total number of bits (0s and 1s) for the encoded message?",
+        "ja": "あるメッセージは A、B、C、D、E、F の 6 文字だけを使い、出現回数はそれぞれ 40、20、15、12、8、5 回である。各文字を 0 と 1 の列で符号化するが、どの文字の符号もほかの文字の符号の先頭部分になってはいけない（こうすると続けて書いても一通りに読める）。メッセージ全体を符号化したとき、ビット（0 または 1）の総数は最少でいくつか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 233。",
+        "zh-Hans": "答案是 233。",
+        "en": "The answer is 233.",
+        "ja": "答えは 233 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "這種編碼可以畫成一棵二元樹：從根出發，0 往左、1 往右，每個字母是一片葉子，編碼長度等於葉子的深度。總位元數 = Σ（次數 × 深度）。在最佳的樹裡，可以讓出現最少的兩個字母當兄弟、放在最深處：把較深的位置換給次數較少的字母，總數不會變大。",
+          "因此可以把這兩個字母合併成一個「次數為兩者之和」的新字母，問題縮小一個字母，而合併所增加的位元數正好是合併後的次數。反覆合併次數最小的兩個（霍夫曼法）：5 + 8 = 13；12 + 13 = 25；15 + 20 = 35；25 + 35 = 60；40 + 60 = 100。",
+          "總位元數 = 13 + 25 + 35 + 60 + 100 = 233。對應的編碼長度：A 1 位，B、C、D 各 3 位，E、F 各 4 位，檢查 40 × 1 + 20 × 3 + 15 × 3 + 12 × 3 + 8 × 4 + 5 × 4 = 233。",
+          "對照：六個字母都用 3 位元的固定長度編碼要 100 × 3 = 300 位元。答案是 233。"
+        ],
+        "zh-Hans": [
+          "这种编码可以画成一棵二叉树：从根出发，0 往左、1 往右，每个字母是一片叶子，编码长度等于叶子的深度。总比特数 = Σ（次数 × 深度）。在最佳的树里，可以让出现最少的两个字母当兄弟、放在最深处：把较深的位置换给次数较少的字母，总数不会变大。",
+          "因此可以把这两个字母合并成一个「次数为两者之和」的新字母，问题缩小一个字母，而合并所增加的比特数正好是合并后的次数。反复合并次数最小的两个（霍夫曼法）：5 + 8 = 13；12 + 13 = 25；15 + 20 = 35；25 + 35 = 60；40 + 60 = 100。",
+          "总比特数 = 13 + 25 + 35 + 60 + 100 = 233。对应的编码长度：A 1 位，B、C、D 各 3 位，E、F 各 4 位，检查 40 × 1 + 20 × 3 + 15 × 3 + 12 × 3 + 8 × 4 + 5 × 4 = 233。",
+          "对照：六个字母都用 3 比特的固定长度编码要 100 × 3 = 300 比特。答案是 233。"
+        ],
+        "en": [
+          "Such a code is a binary tree: from the root, 0 goes left and 1 goes right; each letter is a leaf, and its code length is the leaf's depth. Total bits = Σ (count × depth). In an optimal tree the two rarest letters can be siblings at the deepest level: giving deeper positions to rarer letters never increases the total.",
+          "So those two letters can be merged into one new letter whose count is their sum; the problem shrinks by one letter, and the merge adds exactly the merged count in bits. Repeatedly merge the two smallest counts (Huffman's method): 5 + 8 = 13; 12 + 13 = 25; 15 + 20 = 35; 25 + 35 = 60; 40 + 60 = 100.",
+          "Total bits = 13 + 25 + 35 + 60 + 100 = 233. The code lengths are A 1 bit, B, C, D 3 bits each, E, F 4 bits each; check: 40 × 1 + 20 × 3 + 15 × 3 + 12 × 3 + 8 × 4 + 5 × 4 = 233.",
+          "For comparison, a fixed 3-bit code for all six letters needs 100 × 3 = 300 bits. The answer is 233."
+        ],
+        "ja": [
+          "このような符号は二分木で表せる。根から 0 なら左、1 なら右へ進み、各文字が葉で、符号の長さは葉の深さ。総ビット数 = Σ（回数 × 深さ）。最適な木では、最も少ない 2 文字を兄弟として最も深い所に置ける。深い位置を回数の少ない文字に回しても総数は増えないからである。",
+          "そこでこの 2 文字を「回数が 2 つの和」の新しい 1 文字にまとめると、問題は 1 文字減り、まとめたことで増えるビット数はちょうどまとめた回数になる。回数の最小の 2 つを繰り返しまとめる（ハフマン法）：5 + 8 = 13、12 + 13 = 25、15 + 20 = 35、25 + 35 = 60、40 + 60 = 100。",
+          "総ビット数 = 13 + 25 + 35 + 60 + 100 = 233。符号の長さは A が 1 ビット、B、C、D が 3 ビットずつ、E、F が 4 ビットずつで、40 × 1 + 20 × 3 + 15 × 3 + 12 × 3 + 8 × 4 + 5 × 4 = 233 と一致する。",
+          "比較：6 文字すべてを 3 ビットの固定長符号にすると 100 × 3 = 300 ビット。答えは 233。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "233"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade12-foundation",
+        "notes": "前綴碼＝二元樹，最少位元數由霍夫曼法反覆合併最小兩項求得，總和 233。掃過 /編碼|前綴|位元/（0 題）、/0 與 1|0 和 1.*串/（7 題）；最接近 logic_grade7_foundation_055（以二進位編碼找出一瓶有藥的果汁），差異：該題是固定長度的二進位分組；本題是依頻率給不等長編碼，要論證「最少的兩個可作最深的兄弟」並用霍夫曼合併求最佳總長"
+      }
+    },
+    {
+      "id": "logic_grade12_foundation_066",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "shapley_shubik_power_index_weighted_voting",
+      "tags": [
+        "c:game_theory",
+        "c:ratio",
+        "m:enumeration"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "某委員會有三個政黨：甲黨 50 票、乙黨 30 票、丙黨 20 票，議案要有至少 51 票才通過。用「關鍵加入者」來衡量各黨的權力：把三黨以所有可能的順序一個一個加入聯盟（共 6 種順序，機會均等），使累計票數第一次達到 51 票的那一黨，稱為該順序的關鍵者。一黨成為關鍵者的機率稱為它的權力指數。下列哪一個正確？",
+        "zh-Hans": "某委员会有三个政党：甲党 50 票、乙党 30 票、丙党 20 票，议案要有至少 51 票才通过。用「关键加入者」来衡量各党的权力：把三党以所有可能的顺序一个一个加入联盟（共 6 种顺序，机会均等），使累计票数第一次达到 51 票的那一党，称为该顺序的关键者。一党成为关键者的概率称为它的权力指数。下列哪一个正确？",
+        "en": "A committee has three parties: A with 50 votes, B with 30, C with 20; a motion needs at least 51 votes. Measure power by the \"pivotal member\": the three parties join a coalition one at a time in a random order (6 orders, equally likely), and the party whose arrival first brings the total to 51 is the pivot for that order. A party's power index is its probability of being the pivot. Which is correct?",
+        "ja": "ある委員会に 3 つの政党があり、甲党 50 票、乙党 30 票、丙党 20 票で、議案の可決には 51 票以上が必要である。「決定的な加入者」で各党の力を測る：3 党がすべての順序で 1 つずつ連合に加わり（6 通り、同様に確からしい）、累計が初めて 51 票に達したときに加わった党をその順序の決定者とする。決定者になる確率をその党の権力指数とよぶ。正しいのはどれか。"
+      },
+      "options": {
+        "A": {
+          "zh-Hant": "甲 1/2、乙 3/10、丙 1/5：權力指數和票數比例相同",
+          "zh-Hans": "甲 1/2、乙 3/10、丙 1/5：权力指数和票数比例相同",
+          "en": "A 1/2, B 3/10, C 1/5: power is proportional to votes",
+          "ja": "甲 1/2、乙 3/10、丙 1/5：権力指数は票数の比と同じ"
+        },
+        "B": {
+          "zh-Hant": "甲 2/3、乙 1/6、丙 1/6：乙、丙票數不同，權力卻一樣",
+          "zh-Hans": "甲 2/3、乙 1/6、丙 1/6：乙、丙票数不同，权力却一样",
+          "en": "A 2/3, B 1/6, C 1/6: B and C differ in votes but not power",
+          "ja": "甲 2/3、乙 1/6、丙 1/6：乙と丙は票数が違うのに力は同じ"
+        },
+        "C": {
+          "zh-Hant": "甲 1/3、乙 1/3、丙 1/3：任兩黨聯合都能過半，權力相同",
+          "zh-Hans": "甲 1/3、乙 1/3、丙 1/3：任两党联合都能过半，权力相同",
+          "en": "A, B, C 1/3 each: any two parties together pass a motion",
+          "ja": "甲、乙、丙とも 1/3：どの 2 党が組んでも過半数になる"
+        },
+        "D": {
+          "zh-Hant": "甲 1/2、乙 1/2、丙 0：丙票數最少，永遠不會是關鍵者",
+          "zh-Hans": "甲 1/2、乙 1/2、丙 0：丙票数最少，永远不会是关键者",
+          "en": "A 1/2, B 1/2, C 0: C, the smallest, can never be pivotal",
+          "ja": "甲 1/2、乙 1/2、丙 0：丙は最も少なく決して決定者にならない"
+        }
+      },
+      "answer": {
+        "zh-Hant": "答案是 B：甲 2/3、乙 1/6、丙 1/6：乙、丙票數不同，權力卻一樣。",
+        "zh-Hans": "答案是 B：甲 2/3、乙 1/6、丙 1/6：乙、丙票数不同，权力却一样。",
+        "en": "The answer is B: A 2/3, B 1/6, C 1/6: B and C differ in votes but not power.",
+        "ja": "答えは B：甲 2/3、乙 1/6、丙 1/6：乙と丙は票数が違うのに力は同じ です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "列出 6 種順序：甲乙丙（甲 50 未達，加乙到 80，關鍵者乙）；甲丙乙（加丙到 70，丙）；乙甲丙（乙 30，加甲到 80，甲）；乙丙甲（乙丙 50 未達，加甲，甲）；丙甲乙（丙 20，加甲到 70，甲）；丙乙甲（丙乙 50 未達，加甲，甲）。",
+          "甲是 4 次關鍵者、乙 1 次、丙 1 次，權力指數分別是 4/6 = 2/3、1/6、1/6。",
+          "原因：沒有甲的聯盟（乙 + 丙 = 50）永遠到不了 51；有甲時只要再加乙或丙任何一黨就通過。乙和丙扮演完全相同的角色，30 票和 20 票的差別沒有作用。",
+          "A 以為權力和票數成正比；C 錯在乙、丙聯合只有 50 票不能通過；D 忽略了「甲丙乙」這個順序中丙是關鍵者。答案是 B。"
+        ],
+        "zh-Hans": [
+          "列出 6 种顺序：甲乙丙（甲 50 未达，加乙到 80，关键者乙）；甲丙乙（加丙到 70，丙）；乙甲丙（乙 30，加甲到 80，甲）；乙丙甲（乙丙 50 未达，加甲，甲）；丙甲乙（丙 20，加甲到 70，甲）；丙乙甲（丙乙 50 未达，加甲，甲）。",
+          "甲是 4 次关键者、乙 1 次、丙 1 次，权力指数分别是 4/6 = 2/3、1/6、1/6。",
+          "原因：没有甲的联盟（乙 + 丙 = 50）永远到不了 51；有甲时只要再加乙或丙任何一党就通过。乙和丙扮演完全相同的角色，30 票和 20 票的差别没有作用。",
+          "A 以为权力和票数成正比；C 错在乙、丙联合只有 50 票不能通过；D 忽略了「甲丙乙」这个顺序中丙是关键者。答案是 B。"
+        ],
+        "en": [
+          "List the 6 orders: ABC (A has 50, not enough; B brings it to 80, pivot B); ACB (C brings it to 70, pivot C); BAC (B 30, A brings 80, pivot A); BCA (B + C = 50, A arrives, pivot A); CAB (C 20, A brings 70, pivot A); CBA (C + B = 50, A arrives, pivot A).",
+          "A is pivotal 4 times, B once, C once: power indices 4/6 = 2/3, 1/6, 1/6.",
+          "Reason: without A, a coalition (B + C = 50) never reaches 51; with A, adding either B or C passes. B and C play exactly the same role, so the difference between 30 and 20 votes has no effect.",
+          "A assumes power is proportional to votes; C fails because B and C together have only 50; D ignores the order ACB, in which C is pivotal. The answer is B."
+        ],
+        "ja": [
+          "6 通りの順序を並べる：甲乙丙（甲 50 で未達、乙で 80、決定者は乙）、甲丙乙（丙で 70、丙）、乙甲丙（乙 30、甲で 80、甲）、乙丙甲（乙丙 50 で未達、甲が加わり甲）、丙甲乙（丙 20、甲で 70、甲）、丙乙甲（丙乙 50 で未達、甲が加わり甲）。",
+          "甲が 4 回、乙が 1 回、丙が 1 回決定者になり、権力指数は 4/6 = 2/3、1/6、1/6。",
+          "理由：甲のいない連合（乙 + 丙 = 50）は決して 51 に届かず、甲がいれば乙か丙のどちらか一方が加わるだけで可決される。乙と丙の役割はまったく同じで、30 票と 20 票の差は効いていない。",
+          "A は権力が票数に比例すると考えている。C は乙と丙を合わせても 50 票で可決できない点を見落としている。D は「甲丙乙」の順序で丙が決定者になることを見落としている。答えは B。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "multiple_choice",
+      "correctAnswer": {
+        "type": "choice",
+        "value": "B"
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade12-foundation",
+        "notes": "夏普利—舒比克權力指數：列 6 種加入順序找關鍵者，甲 2/3、乙丙各 1/6，票數比例不等於權力。掃過 /權力指數|關鍵/（0 題）、/政黨|議案/（0 題）；最接近 logic_grade12_foundation_053（康多塞循環與議程操縱），差異：該題是偏好循環下議程順序影響結果；本題是加權投票的權力衡量，列舉加入順序計算關鍵次數，結論是 30 票與 20 票權力相同"
+      }
+    },
+    {
+      "id": "logic_grade12_foundation_067",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "second_price_sealed_bid_auction_truthful_bidding_weakly_dominant",
+      "tags": [
+        "c:game_theory",
+        "c:logic_deduction",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一件古董用「密封第二高價拍賣」：每位競標者把一個出價寫進信封，出價最高的人得標，但只要付所有出價中第二高的那個金額（同價時抽籤）。小安認為這件古董對他值 100 萬元；得標時他的好處是 100 萬元減去實際付出的錢，沒得標好處是 0。不論其他人怎麼出價，小安的下列哪一種出價方式一定不會比任何其他出價差？",
+        "zh-Hans": "一件古董用「密封第二高价拍卖」：每位竞标者把一个出价写进信封，出价最高的人得标，但只要付所有出价中第二高的那个金额（同价时抽签）。小安认为这件古董对他值 100 万元；得标时他的好处是 100 万元减去实际付出的钱，没得标好处是 0。不论其他人怎么出价，小安的下列哪一种出价方式一定不会比任何其他出价差？",
+        "en": "An antique is sold by a sealed-bid second-price auction: each bidder writes one bid in an envelope, the highest bidder wins but pays only the second-highest of all the bids (ties are settled by lot). An values the antique at 1 million dollars; if he wins, his gain is 1 million minus what he pays, and if he loses, his gain is 0. Whatever the others bid, which way of bidding is never worse for An than any other bid?",
+        "ja": "ある骨董品を「封印入札の第 2 価格オークション」で売る。各入札者は封筒に 1 つの入札額を書き、最高額の人が落札するが、支払うのは全入札額のうち 2 番目に高い金額である（同額なら抽選）。アンさんにとってこの骨董品の価値は 100 万元で、落札したときの得は 100 万元から支払額を引いたもの、落札しなければ得は 0 である。他の人がどう入札しても、アンさんにとってほかのどの入札額より悪くならない入札の仕方はどれか。"
+      },
+      "options": {
+        "A": {
+          "zh-Hant": "出價 90 萬元：壓低一點，得標時就可以少付一些錢",
+          "zh-Hans": "出价 90 万元：压低一点，得标时就可以少付一些钱",
+          "en": "Bid 0.9 million: shading down means paying less on a win",
+          "ja": "90 万元と入札：少し下げれば落札したとき支払いが減る"
+        },
+        "B": {
+          "zh-Hant": "出價 120 萬元：抬高一點，比較容易得標又不會吃虧",
+          "zh-Hans": "出价 120 万元：抬高一点，比较容易得标又不会吃亏",
+          "en": "Bid 1.2 million: bidding up wins more often at no cost",
+          "ja": "120 万元と入札：少し上げれば落札しやすく損もしない"
+        },
+        "C": {
+          "zh-Hant": "照實出價 100 萬元：付多少由別人決定，出價只影響能否得標",
+          "zh-Hans": "照实出价 100 万元：付多少由别人决定，出价只影响能否得标",
+          "en": "Bid exactly 1 million: others set the price; a bid only decides winning",
+          "ja": "正直に 100 万元と入札：支払額は他人が決め、入札は落札の可否だけを決める"
+        },
+        "D": {
+          "zh-Hant": "沒有這種出價：最好的出價永遠要看別人出多少而定",
+          "zh-Hans": "没有这种出价：最好的出价永远要看别人出多少而定",
+          "en": "No such bid exists: the best bid always depends on the others",
+          "ja": "そのような入札はない：最善の入札はつねに他人の入札しだい"
+        }
+      },
+      "answer": {
+        "zh-Hant": "答案是 C：照實出價 100 萬元：付多少由別人決定，出價只影響能否得標。",
+        "zh-Hans": "答案是 C：照实出价 100 万元：付多少由别人决定，出价只影响能否得标。",
+        "en": "The answer is C: Bid exactly 1 million: others set the price; a bid only decides winning.",
+        "ja": "答えは C：正直に 100 万元と入札：支払額は他人が決め、入札は落札の可否だけを決める です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "設其他人之中的最高出價是 M。小安若得標，付的是 M，跟自己寫多少無關；他的出價只決定「是否得標」：出價高於 M 就得標，好處是 100 − M；低於 M 就沒得標，好處是 0。",
+          "照實出價 100：當 M < 100 時他得標，好處 100 − M > 0，比不得標好；當 M > 100 時他不得標，好處 0，比得標後虧損 M − 100 好；M = 100 時兩者都是 0。所以每一種情況他都拿到「得標」與「不得標」之中較好的那一個。",
+          "出價 90：當 90 < M < 100 時會錯過一個有賺頭的得標機會，比照實出價差，而且得標時付的仍是 M，並沒有少付。出價 120：當 100 < M < 120 時會得標並虧損 M − 100，比照實出價差。",
+          "因此照實出價在任何情況下都不比其他出價差，D 不對；A、B 在上述情況會吃虧。答案是 C。"
+        ],
+        "zh-Hans": [
+          "设其他人之中的最高出价是 M。小安若得标，付的是 M，跟自己写多少无关；他的出价只决定「是否得标」：出价高于 M 就得标，好处是 100 − M；低于 M 就没得标，好处是 0。",
+          "照实出价 100：当 M < 100 时他得标，好处 100 − M > 0，比不得标好；当 M > 100 时他不得标，好处 0，比得标后亏损 M − 100 好；M = 100 时两者都是 0。所以每一种情况他都拿到「得标」与「不得标」之中较好的那一个。",
+          "出价 90：当 90 < M < 100 时会错过一个有赚头的得标机会，比照实出价差，而且得标时付的仍是 M，并没有少付。出价 120：当 100 < M < 120 时会得标并亏损 M − 100，比照实出价差。",
+          "因此照实出价在任何情况下都不比其他出价差，D 不对；A、B 在上述情况会吃亏。答案是 C。"
+        ],
+        "en": [
+          "Let M be the highest bid among the others. If An wins he pays M, regardless of his own bid; his bid only decides whether he wins: bidding above M wins with gain 100 − M (in ten-thousands), bidding below M loses with gain 0.",
+          "Bidding the true value 100: if M < 100 he wins with gain 100 − M > 0, better than losing; if M > 100 he loses with gain 0, better than winning at a loss of M − 100; if M = 100 both give 0. So in every case he gets the better of \"win\" and \"lose\".",
+          "Bidding 90: when 90 < M < 100 he misses a profitable win, which is worse than bidding truthfully, and when he does win he still pays M, not less. Bidding 120: when 100 < M < 120 he wins and loses M − 100, worse than bidding truthfully.",
+          "So truthful bidding is never worse than any other bid, and D is wrong; A and B lose out in the cases above. The answer is C."
+        ],
+        "ja": [
+          "ほかの人の最高入札額を M とする。アンさんが落札すれば支払いは M で、自分の入札額とは関係ない。入札額が決めるのは「落札するかどうか」だけで、M より高ければ落札して得は 100 − M、低ければ落札できず得は 0。",
+          "正直に 100 と入札すると、M < 100 なら落札して得は 100 − M > 0 で、落札しないよりよい。M > 100 なら落札せず得は 0 で、落札して M − 100 損するよりよい。M = 100 ならどちらも 0。よってどの場合も「落札」と「不落札」のよいほうが得られる。",
+          "90 と入札すると、90 < M < 100 のとき得をする落札を逃し、正直な入札より悪い。しかも落札したときの支払いは M のままで減らない。120 と入札すると、100 < M < 120 のとき落札して M − 100 の損をし、正直な入札より悪い。",
+          "したがって正直な入札はどんな場合もほかの入札より悪くならず、D は誤り。A、B は上の場合に損をする。答えは C。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "multiple_choice",
+      "correctAnswer": {
+        "type": "choice",
+        "value": "C"
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade12-foundation",
+        "notes": "第二高價拍賣：付款金額與自己出價無關，照實出價在每種情況都取得得標與否中較好的結果（弱優勢策略）。掃過 /拍賣|競標/（0 題）、/出價/（0 題）；最接近 logic_grade12_foundation_060（價格戰的純策略納許均衡），差異：該題是找雙方的均衡；本題是單一玩家的弱優勢策略，要對其他人的最高價 M 分情況說明照實出價永不吃虧，並具體指出壓價與抬價各在哪個區間吃虧"
+      }
     }
   ]
 }

@@ -5703,6 +5703,297 @@
         "reference": "number_theory-grade12-foundation",
         "notes": "gcd 整除差 2n + 1，再消去 n 得整除 401（質數），n = 200 時取到 401。掃過 /最大公因數.*最大|最大.*最大公因數/（1 題）、/n² \\+ 100|\\(n \\+ 1\\)²/（1 題）；最接近 number_theory_grade12_foundation_017（費氏數列的最大公因數性質），差異：該題用 gcd(Fₘ, Fₙ) = F_gcd(m, n)；本題用輾轉相減把 gcd 逼到常數 401，再找 n = 200 使它達到"
       }
+    },
+    {
+      "id": "number_theory_grade12_foundation_062",
+      "reviewStatus": "ok",
+      "topic": "number_theory",
+      "subtopic": "iterated_digit_sum_of_huge_power_by_bounds_and_mod_nine",
+      "tags": [
+        "c:place_value",
+        "c:modular",
+        "c:logarithm",
+        "m:estimate_bound"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "設 N = 4444⁴⁴⁴⁴（4444 的 4444 次方）。令 A 是 N 的各位數字和，B 是 A 的各位數字和，C 是 B 的各位數字和。已知 log 4444 < 3.65（log 以 10 為底）。求 C。",
+        "zh-Hans": "设 N = 4444⁴⁴⁴⁴（4444 的 4444 次方）。令 A 是 N 的各位数字和，B 是 A 的各位数字和，C 是 B 的各位数字和。已知 log 4444 < 3.65（log 以 10 为底）。求 C。",
+        "en": "Let N = 4444⁴⁴⁴⁴ (4444 to the power 4444). Let A be the sum of the digits of N, B the sum of the digits of A, and C the sum of the digits of B. Given log 4444 < 3.65 (base 10), find C.",
+        "ja": "N = 4444⁴⁴⁴⁴（4444 の 4444 乗）とする。N の各位の数字の和を A、A の各位の数字の和を B、B の各位の数字の和を C とする。log 4444 < 3.65（底は 10）として、C を求めよ。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 7。",
+        "zh-Hans": "答案是 7。",
+        "en": "The answer is 7.",
+        "ja": "答えは 7 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "估計大小：N 的位數 = ⌊4444 × log 4444⌋ + 1 ≤ ⌊4444 × 3.65⌋ + 1 = 16221，每一位最多是 9，所以 A ≤ 9 × 16221 = 145989。",
+          "A ≤ 145989：不超過 145989 的正整數中，數字和最大的是 99999 的 45，所以 B ≤ 45。不超過 45 的正整數中，數字和最大的是 39 的 12，所以 C ≤ 12。",
+          "一個數和它的數字和除以 9 的餘數相同，所以 C ≡ B ≡ A ≡ N (mod 9)。4444 = 9 × 493 + 7，N ≡ 7⁴⁴⁴⁴ (mod 9)；7³ = 343 = 9 × 38 + 1 ≡ 1，4444 = 3 × 1481 + 1，所以 N ≡ 7 (mod 9)。",
+          "C 是 1 到 12 之間、除以 9 餘 7 的數，只能是 7。答案是 7。"
+        ],
+        "zh-Hans": [
+          "估计大小：N 的位数 = ⌊4444 × log 4444⌋ + 1 ≤ ⌊4444 × 3.65⌋ + 1 = 16221，每一位最多是 9，所以 A ≤ 9 × 16221 = 145989。",
+          "A ≤ 145989：不超过 145989 的正整数中，数字和最大的是 99999 的 45，所以 B ≤ 45。不超过 45 的正整数中，数字和最大的是 39 的 12，所以 C ≤ 12。",
+          "一个数和它的数字和除以 9 的余数相同，所以 C ≡ B ≡ A ≡ N (mod 9)。4444 = 9 × 493 + 7，N ≡ 7⁴⁴⁴⁴ (mod 9)；7³ = 343 = 9 × 38 + 1 ≡ 1，4444 = 3 × 1481 + 1，所以 N ≡ 7 (mod 9)。",
+          "C 是 1 到 12 之间、除以 9 余 7 的数，只能是 7。答案是 7。"
+        ],
+        "en": [
+          "Size: N has ⌊4444 × log 4444⌋ + 1 ≤ ⌊4444 × 3.65⌋ + 1 = 16221 digits, each at most 9, so A ≤ 9 × 16221 = 145989.",
+          "Among positive integers up to 145989 the largest digit sum is 45 (for 99999), so B ≤ 45. Among positive integers up to 45 the largest digit sum is 12 (for 39), so C ≤ 12.",
+          "A number and its digit sum leave the same remainder mod 9, so C ≡ B ≡ A ≡ N (mod 9). 4444 = 9 × 493 + 7, so N ≡ 7⁴⁴⁴⁴ (mod 9); 7³ = 343 = 9 × 38 + 1 ≡ 1 and 4444 = 3 × 1481 + 1, so N ≡ 7 (mod 9).",
+          "C is between 1 and 12 and leaves remainder 7 mod 9, so C = 7. The answer is 7."
+        ],
+        "ja": [
+          "大きさの見積もり：N の桁数は ⌊4444 × log 4444⌋ + 1 ≤ ⌊4444 × 3.65⌋ + 1 = 16221 で、各位は 9 以下なので A ≤ 9 × 16221 = 145989。",
+          "145989 以下の正の整数で数字の和が最大なのは 99999 の 45 なので B ≤ 45。45 以下の正の整数で数字の和が最大なのは 39 の 12 なので C ≤ 12。",
+          "数とその数字の和は 9 で割った余りが等しいので C ≡ B ≡ A ≡ N (mod 9)。4444 = 9 × 493 + 7 より N ≡ 7⁴⁴⁴⁴ (mod 9)。7³ = 343 = 9 × 38 + 1 ≡ 1、4444 = 3 × 1481 + 1 なので N ≡ 7 (mod 9)。",
+          "C は 1 以上 12 以下で 9 で割って 7 余る数なので 7 しかない。答えは 7。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "7"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "number_theory-grade12-foundation",
+        "notes": "三層數字和先用位數估計夾到 C ≤ 12，再用「數字和保持 mod 9」定出 C ≡ 7。掃過 /數字和的數字和|各位數字和.*各位數字和/（2 題）、/4444/（0 題）；最接近 number_theory_grade12_foundation_008（數字和與倍數），差異：該題處理一般數的數字和整除；本題對天文數字反覆取數字和，需要兩層估計把範圍縮到 12 以內，再用 mod 9 鎖定唯一值"
+      }
+    },
+    {
+      "id": "number_theory_grade12_foundation_063",
+      "reviewStatus": "ok",
+      "topic": "number_theory",
+      "subtopic": "toy_rsa_decrypt_by_inverse_exponent_and_crt",
+      "tags": [
+        "c:modular",
+        "c:exponent",
+        "c:factor_multiple",
+        "m:reverse"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一種簡化的 RSA 加密：公開 n = 55 與 e = 3。把明文 m（0 < m < 55 的整數）加密成密文 c，c 是 m³ 除以 55 的餘數。解密時先找私密指數 d，使 3d 除以 40 的餘數是 1（40 = (5 − 1) × (11 − 1)），再把 c 的 d 次方除以 55，餘數就是 m。已知某段密文 c = 17，求明文 m。",
+        "zh-Hans": "一种简化的 RSA 加密：公开 n = 55 与 e = 3。把明文 m（0 < m < 55 的整数）加密成密文 c，c 是 m³ 除以 55 的余数。解密时先找私密指数 d，使 3d 除以 40 的余数是 1（40 = (5 − 1) × (11 − 1)），再把 c 的 d 次方除以 55，余数就是 m。已知某段密文 c = 17，求明文 m。",
+        "en": "A simplified RSA scheme publishes n = 55 and e = 3. A message m (an integer with 0 < m < 55) is encrypted as c, the remainder of m³ divided by 55. To decrypt, find the private exponent d with 3d leaving remainder 1 when divided by 40 (40 = (5 − 1) × (11 − 1)); then the remainder of c to the power d divided by 55 is m. Given the ciphertext c = 17, find m.",
+        "ja": "簡単な RSA 暗号で n = 55 と e = 3 を公開する。平文 m（0 < m < 55 の整数）は、m³ を 55 で割った余り c に暗号化される。復号では、3d を 40 で割った余りが 1 になる秘密の指数 d を求め（40 = (5 − 1) × (11 − 1)）、c の d 乗を 55 で割った余りが m になる。暗号文 c = 17 のとき、平文 m を求めよ。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 8。",
+        "zh-Hans": "答案是 8。",
+        "en": "The answer is 8.",
+        "ja": "答えは 8 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "求 d：要 3d ≡ 1 (mod 40)。3 × 27 = 81 = 2 × 40 + 1，所以 d = 27。",
+          "計算 17²⁷ 除以 55 的餘數，分成 mod 5 與 mod 11。mod 5：17 ≡ 2，2⁴ = 16 ≡ 1，2²⁷ = (2⁴)⁶ × 2³ ≡ 8 ≡ 3。mod 11：17 ≡ 6，6¹⁰ ≡ 1（費馬小定理），6²⁷ ≡ 6⁷；6² = 36 ≡ 3，6⁴ ≡ 9，6⁶ ≡ 27 ≡ 5，6⁷ ≡ 30 ≡ 8。",
+          "找 m：m ≡ 3 (mod 5) 且 m ≡ 8 (mod 11)。在 0 到 54 中除以 11 餘 8 的數是 8、19、30、41、52，其中除以 5 餘 3 的只有 8，所以 m = 8。",
+          "驗算：8³ = 512 = 9 × 55 + 17，密文確實是 17。答案是 8。"
+        ],
+        "zh-Hans": [
+          "求 d：要 3d ≡ 1 (mod 40)。3 × 27 = 81 = 2 × 40 + 1，所以 d = 27。",
+          "计算 17²⁷ 除以 55 的余数，分成 mod 5 与 mod 11。mod 5：17 ≡ 2，2⁴ = 16 ≡ 1，2²⁷ = (2⁴)⁶ × 2³ ≡ 8 ≡ 3。mod 11：17 ≡ 6，6¹⁰ ≡ 1（费马小定理），6²⁷ ≡ 6⁷；6² = 36 ≡ 3，6⁴ ≡ 9，6⁶ ≡ 27 ≡ 5，6⁷ ≡ 30 ≡ 8。",
+          "找 m：m ≡ 3 (mod 5) 且 m ≡ 8 (mod 11)。在 0 到 54 中除以 11 余 8 的数是 8、19、30、41、52，其中除以 5 余 3 的只有 8，所以 m = 8。",
+          "验算：8³ = 512 = 9 × 55 + 17，密文确实是 17。答案是 8。"
+        ],
+        "en": [
+          "Find d: we need 3d ≡ 1 (mod 40). Since 3 × 27 = 81 = 2 × 40 + 1, d = 27.",
+          "Compute 17²⁷ mod 55 by working mod 5 and mod 11. Mod 5: 17 ≡ 2, 2⁴ = 16 ≡ 1, so 2²⁷ = (2⁴)⁶ × 2³ ≡ 8 ≡ 3. Mod 11: 17 ≡ 6, 6¹⁰ ≡ 1 (Fermat's little theorem), so 6²⁷ ≡ 6⁷; 6² = 36 ≡ 3, 6⁴ ≡ 9, 6⁶ ≡ 27 ≡ 5, 6⁷ ≡ 30 ≡ 8.",
+          "Find m: m ≡ 3 (mod 5) and m ≡ 8 (mod 11). Among 0 to 54 the numbers ≡ 8 (mod 11) are 8, 19, 30, 41, 52, and only 8 is ≡ 3 (mod 5), so m = 8.",
+          "Check: 8³ = 512 = 9 × 55 + 17, so the ciphertext is indeed 17. The answer is 8."
+        ],
+        "ja": [
+          "d を求める：3d ≡ 1 (mod 40) が必要。3 × 27 = 81 = 2 × 40 + 1 なので d = 27。",
+          "17²⁷ を 55 で割った余りを mod 5 と mod 11 に分けて計算する。mod 5：17 ≡ 2、2⁴ = 16 ≡ 1 より 2²⁷ = (2⁴)⁶ × 2³ ≡ 8 ≡ 3。mod 11：17 ≡ 6、6¹⁰ ≡ 1（フェルマーの小定理）より 6²⁷ ≡ 6⁷。6² = 36 ≡ 3、6⁴ ≡ 9、6⁶ ≡ 27 ≡ 5、6⁷ ≡ 30 ≡ 8。",
+          "m を求める：m ≡ 3 (mod 5) かつ m ≡ 8 (mod 11)。0〜54 で 11 で割って 8 余る数は 8、19、30、41、52 で、5 で割って 3 余るのは 8 だけなので m = 8。",
+          "確認：8³ = 512 = 9 × 55 + 17 で、暗号文は確かに 17。答えは 8。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "8"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "number_theory-grade12-foundation",
+        "notes": "玩具 RSA：由 3d ≡ 1 (mod 40) 得 d = 27，再用 mod 5、mod 11 分算 17²⁷ 並以中國剩餘定理合併。掃過 /RSA|密文|加密/（1 題）、/私密|解密/（0 題）；最接近 algebra_grade12_foundation_145（希爾密碼的矩陣解密），差異：該題是線性的矩陣加密，解密靠反矩陣；本題是模冪加密，解密要先求模反指數，再用費馬小定理與中國剩餘定理算高次冪"
+      }
+    },
+    {
+      "id": "number_theory_grade12_foundation_064",
+      "reviewStatus": "ok",
+      "topic": "number_theory",
+      "subtopic": "common_leading_digit_of_two_to_n_and_five_to_n",
+      "tags": [
+        "c:place_value",
+        "c:exponent",
+        "c:inequality",
+        "m:estimate_bound"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "對某些正整數 n，2ⁿ 與 5ⁿ 寫成十進位後，最左邊那一位（最高位）的數字相同，例如 n = 5 時 2⁵ = 32、5⁵ = 3125，最高位都是 3。把所有這樣的 n 會出現的「共同最高位數字」都找出來（相同的數字只算一次），它們的和是多少？",
+        "zh-Hans": "对某些正整数 n，2ⁿ 与 5ⁿ 写成十进制后，最左边那一位（最高位）的数字相同，例如 n = 5 时 2⁵ = 32、5⁵ = 3125，最高位都是 3。把所有这样的 n 会出现的「共同最高位数字」都找出来（相同的数字只算一次），它们的和是多少？",
+        "en": "For some positive integers n, 2ⁿ and 5ⁿ written in decimal have the same leftmost (leading) digit; for example, for n = 5, 2⁵ = 32 and 5⁵ = 3125 both start with 3. Find all digits that can occur as such a common leading digit (each counted once). What is their sum?",
+        "ja": "ある正の整数 n では、2ⁿ と 5ⁿ を 10 進法で書いたときの最上位（いちばん左）の数字が同じになる。たとえば n = 5 では 2⁵ = 32、5⁵ = 3125 でどちらも 3 で始まる。このような n で現れうる「共通の最上位の数字」をすべて求め（同じ数字は 1 回だけ数える）、その和を答えよ。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 3。",
+        "zh-Hans": "答案是 3。",
+        "en": "The answer is 3.",
+        "ja": "答えは 3 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "設共同的最高位數字是 d（1 ≤ d ≤ 9），2ⁿ 有 a + 1 位、5ⁿ 有 b + 1 位，則 d × 10ᵃ ≤ 2ⁿ < (d + 1) × 10ᵃ，d × 10ᵇ ≤ 5ⁿ < (d + 1) × 10ᵇ。兩式相乘：d² × 10ᵃ⁺ᵇ ≤ 10ⁿ < (d + 1)² × 10ᵃ⁺ᵇ。令 k = n − a − b，得 d² ≤ 10ᵏ < (d + 1)²。",
+          "因為 (d + 1)² ≤ 100，所以 10ᵏ < 100，k 是 0 或 1。若 k = 0，則 d² ≤ 1，d = 1，而且左邊的不等式全部取等號：2ⁿ = 10ᵃ，但 n ≥ 1 時 2ⁿ 不是 10 的次方（2ⁿ 沒有因數 5，又大於 1），矛盾。",
+          "所以 k = 1：d² ≤ 10 < (d + 1)²，d² ≤ 10 得 d ≤ 3，10 < (d + 1)² 得 d ≥ 3，只能 d = 3。而 n = 5 時確實出現 3。",
+          "可能的共同最高位數字只有 3，和是 3。答案是 3。"
+        ],
+        "zh-Hans": [
+          "设共同的最高位数字是 d（1 ≤ d ≤ 9），2ⁿ 有 a + 1 位、5ⁿ 有 b + 1 位，则 d × 10ᵃ ≤ 2ⁿ < (d + 1) × 10ᵃ，d × 10ᵇ ≤ 5ⁿ < (d + 1) × 10ᵇ。两式相乘：d² × 10ᵃ⁺ᵇ ≤ 10ⁿ < (d + 1)² × 10ᵃ⁺ᵇ。令 k = n − a − b，得 d² ≤ 10ᵏ < (d + 1)²。",
+          "因为 (d + 1)² ≤ 100，所以 10ᵏ < 100，k 是 0 或 1。若 k = 0，则 d² ≤ 1，d = 1，而且左边的不等式全部取等号：2ⁿ = 10ᵃ，但 n ≥ 1 时 2ⁿ 不是 10 的次方（2ⁿ 没有因数 5，又大于 1），矛盾。",
+          "所以 k = 1：d² ≤ 10 < (d + 1)²，d² ≤ 10 得 d ≤ 3，10 < (d + 1)² 得 d ≥ 3，只能 d = 3。而 n = 5 时确实出现 3。",
+          "可能的共同最高位数字只有 3，和是 3。答案是 3。"
+        ],
+        "en": [
+          "Let the common leading digit be d (1 ≤ d ≤ 9), with 2ⁿ having a + 1 digits and 5ⁿ having b + 1 digits. Then d × 10ᵃ ≤ 2ⁿ < (d + 1) × 10ᵃ and d × 10ᵇ ≤ 5ⁿ < (d + 1) × 10ᵇ. Multiplying: d² × 10ᵃ⁺ᵇ ≤ 10ⁿ < (d + 1)² × 10ᵃ⁺ᵇ. With k = n − a − b, this says d² ≤ 10ᵏ < (d + 1)².",
+          "Since (d + 1)² ≤ 100, 10ᵏ < 100, so k is 0 or 1. If k = 0 then d² ≤ 1, so d = 1, and the left inequalities must all be equalities: 2ⁿ = 10ᵃ, but for n ≥ 1, 2ⁿ is not a power of 10 (it has no factor 5 and exceeds 1), a contradiction.",
+          "So k = 1: d² ≤ 10 < (d + 1)². d² ≤ 10 gives d ≤ 3 and 10 < (d + 1)² gives d ≥ 3, so d = 3. And n = 5 does produce 3.",
+          "The only possible common leading digit is 3, so the sum is 3. The answer is 3."
+        ],
+        "ja": [
+          "共通の最上位の数字を d（1 ≤ d ≤ 9）、2ⁿ を a + 1 桁、5ⁿ を b + 1 桁とすると、d × 10ᵃ ≤ 2ⁿ < (d + 1) × 10ᵃ、d × 10ᵇ ≤ 5ⁿ < (d + 1) × 10ᵇ。辺々掛けて d² × 10ᵃ⁺ᵇ ≤ 10ⁿ < (d + 1)² × 10ᵃ⁺ᵇ。k = n − a − b とおくと d² ≤ 10ᵏ < (d + 1)²。",
+          "(d + 1)² ≤ 100 なので 10ᵏ < 100 で、k は 0 か 1。k = 0 なら d² ≤ 1 で d = 1、しかも左側の不等式はすべて等号でなければならず 2ⁿ = 10ᵃ となるが、n ≥ 1 では 2ⁿ は 10 の累乗でない（因数 5 をもたず、1 より大きい）ので矛盾。",
+          "よって k = 1 で d² ≤ 10 < (d + 1)²。d² ≤ 10 から d ≤ 3、10 < (d + 1)² から d ≥ 3 で d = 3。実際 n = 5 で 3 が現れる。",
+          "共通の最上位の数字は 3 だけで、和は 3。答えは 3。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "3"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "number_theory-grade12-foundation",
+        "notes": "2ⁿ × 5ⁿ = 10ⁿ：兩個最高位夾擠相乘得 d² ≤ 10ᵏ < (d + 1)²，排除 k = 0 後唯一 d = 3。掃過 /最高位|最左邊/（48 題）、/2ⁿ.*5ⁿ|5ⁿ/（0 題）；最接近 algebra_grade11_foundation_071（以常用對數求 6²⁰ 的最高位數字），差異：該題用對數算單一數的最高位；本題不需要任何對數值，利用 2ⁿ × 5ⁿ = 10ⁿ 把兩個最高位的不等式相乘，證明共同最高位只能是 3，並處理等號情形"
+      }
+    },
+    {
+      "id": "number_theory_grade12_foundation_065",
+      "reviewStatus": "ok",
+      "topic": "number_theory",
+      "subtopic": "floor_sum_of_squares_over_prime_via_quadratic_residue_pairing",
+      "tags": [
+        "c:modular",
+        "c:sequence",
+        "m:bijection"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "求 ⌊1²/101⌋ + ⌊2²/101⌋ + ⌊3²/101⌋ + ⋯ + ⌊100²/101⌋ 的值。（⌊t⌋ 表示不超過 t 的最大整數。）",
+        "zh-Hans": "求 ⌊1²/101⌋ + ⌊2²/101⌋ + ⌊3²/101⌋ + ⋯ + ⌊100²/101⌋ 的值。（⌊t⌋ 表示不超过 t 的最大整数。）",
+        "en": "Find ⌊1²/101⌋ + ⌊2²/101⌋ + ⌊3²/101⌋ + ⋯ + ⌊100²/101⌋. (⌊t⌋ denotes the greatest integer not exceeding t.)",
+        "ja": "⌊1²/101⌋ + ⌊2²/101⌋ + ⌊3²/101⌋ + ⋯ + ⌊100²/101⌋ の値を求めよ。（⌊t⌋ は t を超えない最大の整数を表す。）"
+      },
+      "answer": {
+        "zh-Hant": "答案是 3300。",
+        "zh-Hans": "答案是 3300。",
+        "en": "The answer is 3300.",
+        "ja": "答えは 3300 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "對每個 k，k² = 101 × ⌊k²/101⌋ + rₖ，rₖ 是 k² 除以 101 的餘數。所以所求 = (Σk² − Σrₖ) ÷ 101，其中 Σk²（k = 1 到 100）= 100 × 101 × 201 ÷ 6 = 338350。",
+          "101 是質數。k 與 101 − k 的平方除以 101 的餘數相同；而 1 到 50 的平方餘數兩兩不同：若 a² ≡ b²（1 ≤ a < b ≤ 50），則 101 整除 (b − a)(b + a)，但兩因數都介於 1 與 100 之間，不可能。所以 r₁、⋯、r₁₀₀ 恰好是 50 個不同的「平方餘數」，每個出現兩次。",
+          "因為 10² = 100 ≡ −1 (mod 101)，−1 是平方餘數；若 r ≡ x²，則 101 − r ≡ (10x)² 也是平方餘數，而且 r ≠ 101 − r（101 是奇數）。所以 50 個平方餘數兩兩配成和為 101 的 25 對，總和 25 × 101 = 2525，Σrₖ = 2 × 2525 = 5050。",
+          "所求 = (338350 − 5050) ÷ 101 = 333300 ÷ 101 = 3300。答案是 3300。"
+        ],
+        "zh-Hans": [
+          "对每个 k，k² = 101 × ⌊k²/101⌋ + rₖ，rₖ 是 k² 除以 101 的余数。所以所求 = (Σk² − Σrₖ) ÷ 101，其中 Σk²（k = 1 到 100）= 100 × 101 × 201 ÷ 6 = 338350。",
+          "101 是质数。k 与 101 − k 的平方除以 101 的余数相同；而 1 到 50 的平方余数两两不同：若 a² ≡ b²（1 ≤ a < b ≤ 50），则 101 整除 (b − a)(b + a)，但两因数都介于 1 与 100 之间，不可能。所以 r₁、⋯、r₁₀₀ 恰好是 50 个不同的「平方剩余」，每个出现两次。",
+          "因为 10² = 100 ≡ −1 (mod 101)，−1 是平方剩余；若 r ≡ x²，则 101 − r ≡ (10x)² 也是平方剩余，而且 r ≠ 101 − r（101 是奇数）。所以 50 个平方剩余两两配成和为 101 的 25 对，总和 25 × 101 = 2525，Σrₖ = 2 × 2525 = 5050。",
+          "所求 = (338350 − 5050) ÷ 101 = 333300 ÷ 101 = 3300。答案是 3300。"
+        ],
+        "en": [
+          "For each k, k² = 101 × ⌊k²/101⌋ + rₖ, where rₖ is the remainder of k² mod 101. So the sum is (Σk² − Σrₖ) ÷ 101, with Σk² (k = 1 to 100) = 100 × 101 × 201 ÷ 6 = 338350.",
+          "101 is prime. k and 101 − k have squares with the same remainder, and the squares of 1 to 50 have distinct remainders: if a² ≡ b² with 1 ≤ a < b ≤ 50, then 101 divides (b − a)(b + a), but both factors lie between 1 and 100, impossible. So r₁, …, r₁₀₀ are exactly 50 distinct quadratic residues, each appearing twice.",
+          "Since 10² = 100 ≡ −1 (mod 101), −1 is a quadratic residue; if r ≡ x² then 101 − r ≡ (10x)² is also one, and r ≠ 101 − r (101 is odd). So the 50 residues pair up into 25 pairs summing to 101, total 25 × 101 = 2525, and Σrₖ = 2 × 2525 = 5050.",
+          "The sum is (338350 − 5050) ÷ 101 = 333300 ÷ 101 = 3300. The answer is 3300."
+        ],
+        "ja": [
+          "各 k について k² = 101 × ⌊k²/101⌋ + rₖ（rₖ は k² を 101 で割った余り）。よって求める和は (Σk² − Σrₖ) ÷ 101 で、Σk²（k = 1〜100）= 100 × 101 × 201 ÷ 6 = 338350。",
+          "101 は素数。k と 101 − k の平方は 101 で割った余りが等しい。また 1〜50 の平方の余りはすべて異なる。a² ≡ b²（1 ≤ a < b ≤ 50）なら 101 が (b − a)(b + a) を割り切るが、2 つの因数はともに 1 以上 100 以下なので不可能。よって r₁、⋯、r₁₀₀ はちょうど 50 個の異なる平方剰余がそれぞれ 2 回ずつ現れたもの。",
+          "10² = 100 ≡ −1 (mod 101) なので −1 は平方剰余で、r ≡ x² なら 101 − r ≡ (10x)² も平方剰余、しかも r ≠ 101 − r（101 は奇数）。よって 50 個の平方剰余は和が 101 になる 25 組に分かれ、合計は 25 × 101 = 2525、Σrₖ = 2 × 2525 = 5050。",
+          "求める和は (338350 − 5050) ÷ 101 = 333300 ÷ 101 = 3300。答えは 3300。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "3300"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 4
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "number_theory-grade12-foundation",
+        "notes": "高斯取整和 = (Σk² − Σ餘數)/101；平方餘數各出現兩次，又因 −1 是平方餘數而兩兩配成和 101，Σ餘數 = 5050。掃過 /⌊/（4 題）、/101/（21 題）；最接近 algebra_grade10_foundation_121（⌊k²/100⌋ 有幾個不同的值），差異：該題數取整後有幾個不同值；本題求取整和，要把它轉成平方餘數的總和，並用 101 ≡ 1 (mod 4) 時 −1 是平方餘數的配對論證"
+      }
     }
   ]
 }

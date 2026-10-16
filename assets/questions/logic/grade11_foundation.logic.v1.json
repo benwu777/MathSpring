@@ -5657,6 +5657,246 @@
         "reference": "logic-grade11-foundation",
         "notes": "長度 4 的封閉走法從中點切開，等於 2 步走法數的平方和 3² + 1² + 2² + 1² = 15。掃過 /捷運|路段/（4 題）、/走.*段.*回到|回到.*出發/（10 題）；最接近 combinatorics_grade11_foundation_073，差異：該題是三角形上隨機走回原點的機率；本題是不對稱圖上的封閉走法計數，從中點切開得 Σ w(X)²"
       }
+    },
+    {
+      "id": "logic_grade11_foundation_064",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "borda_count_winner_differs_from_plurality",
+      "tags": [
+        "c:logic_deduction",
+        "c:compare_order",
+        "m:direct"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade11",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "班上 9 人選班長，候選人是甲、乙、丙。每人交一張把三人排出第一、二、三志願的選票：4 張是「甲 > 乙 > 丙」，3 張是「乙 > 丙 > 甲」，2 張是「丙 > 乙 > 甲」。若改用「波達計分法」：每張票的第一志願得 2 分、第二志願得 1 分、第三志願得 0 分，總分最高者當選。下列敘述何者正確？",
+        "zh-Hans": "班上 9 人选班长，候选人是甲、乙、丙。每人交一张把三人排出第一、二、三志愿的选票：4 张是「甲 > 乙 > 丙」，3 张是「乙 > 丙 > 甲」，2 张是「丙 > 乙 > 甲」。若改用「波达计分法」：每张票的第一志愿得 2 分、第二志愿得 1 分、第三志愿得 0 分，总分最高者当选。下列叙述何者正确？",
+        "en": "Nine students elect a class leader from A, B, C. Each hands in a ballot ranking all three: 4 ballots are \"A > B > C\", 3 are \"B > C > A\", and 2 are \"C > B > A\". Under the Borda count, each ballot gives 2 points to its first choice, 1 to its second, and 0 to its third; the highest total wins. Which statement is correct?",
+        "ja": "クラスの 9 人が甲、乙、丙から学級委員を選ぶ。各自 3 人に第 1、第 2、第 3 志望の順位をつけた票を出し、4 票が「甲 > 乙 > 丙」、3 票が「乙 > 丙 > 甲」、2 票が「丙 > 乙 > 甲」だった。ボルダ得点法では、各票の第 1 志望に 2 点、第 2 志望に 1 点、第 3 志望に 0 点を与え、合計が最も高い人が当選する。正しいのはどれか。"
+      },
+      "options": {
+        "A": {
+          "zh-Hant": "甲當選：甲的第一志願票最多，波達計分也是甲最高",
+          "zh-Hans": "甲当选：甲的第一志愿票最多，波达计分也是甲最高",
+          "en": "A wins: A has the most first choices and also the top Borda score",
+          "ja": "甲が当選：第 1 志望が最も多く、ボルダ得点も最高"
+        },
+        "B": {
+          "zh-Hant": "乙當選：乙得 12 分最高，雖然第一志願票不是最多",
+          "zh-Hans": "乙当选：乙得 12 分最高，虽然第一志愿票不是最多",
+          "en": "B wins: B scores 12, the most, despite fewer first choices",
+          "ja": "乙が当選：第 1 志望は最多でないが 12 点で最高"
+        },
+        "C": {
+          "zh-Hant": "丙當選：丙在五張票裡排在甲前面，所以總分最高",
+          "zh-Hans": "丙当选：丙在五张票里排在甲前面，所以总分最高",
+          "en": "C wins: C beats A on five ballots, so C has the top total",
+          "ja": "丙が当選：5 票で甲より上なので合計が最高"
+        },
+        "D": {
+          "zh-Hant": "甲、乙同分：兩人總分都是 8 分，必須另外抽籤",
+          "zh-Hans": "甲、乙同分：两人总分都是 8 分，必须另外抽签",
+          "en": "A and B tie: both have 8 points, so a draw is needed",
+          "ja": "甲と乙が同点：どちらも 8 点で抽選が必要"
+        }
+      },
+      "answer": {
+        "zh-Hant": "答案是 B：乙當選：乙得 12 分最高，雖然第一志願票不是最多。",
+        "zh-Hans": "答案是 B：乙当选：乙得 12 分最高，虽然第一志愿票不是最多。",
+        "en": "The answer is B: B wins: B scores 12, the most, despite fewer first choices.",
+        "ja": "答えは B：乙が当選：第 1 志望は最多でないが 12 点で最高 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "甲：4 張排第一，得 4 × 2 = 8 分；其餘 5 張都排第三，得 0 分。甲共 8 分。",
+          "乙：4 張排第二得 4 分，3 張排第一得 6 分，2 張排第二得 2 分，共 12 分。丙：3 張排第二得 3 分，2 張排第一得 4 分，共 7 分。（檢查：每張票共發出 3 分，9 張共 27 = 8 + 12 + 7。）",
+          "乙 12 分最高，當選。若只看第一志願，甲 4 票最多會當選；乙的第一志願雖少，卻幾乎人人把他排在前兩位，兩種制度選出不同的人。",
+          "A 只看第一志願；C 的丙只有 7 分；D 把乙算成 8 分，其實是 12 分。答案是 B。"
+        ],
+        "zh-Hans": [
+          "甲：4 张排第一，得 4 × 2 = 8 分；其余 5 张都排第三，得 0 分。甲共 8 分。",
+          "乙：4 张排第二得 4 分，3 张排第一得 6 分，2 张排第二得 2 分，共 12 分。丙：3 张排第二得 3 分，2 张排第一得 4 分，共 7 分。（检查：每张票共发出 3 分，9 张共 27 = 8 + 12 + 7。）",
+          "乙 12 分最高，当选。若只看第一志愿，甲 4 票最多会当选；乙的第一志愿虽少，却几乎人人把他排在前两位，两种制度选出不同的人。",
+          "A 只看第一志愿；C 的丙只有 7 分；D 把乙算成 8 分，其实是 12 分。答案是 B。"
+        ],
+        "en": [
+          "A: first on 4 ballots, 4 × 2 = 8 points; last on the other 5, 0 points. A has 8.",
+          "B: second on 4 ballots (4 points), first on 3 (6 points), second on 2 (2 points), total 12. C: second on 3 (3 points), first on 2 (4 points), total 7. (Check: each ballot gives out 3 points, 27 in all = 8 + 12 + 7.)",
+          "B has the top score 12 and wins. Counting only first choices, A (4) would win; B has fewer first choices but is in nearly everyone's top two, so the two systems pick different winners.",
+          "A looks only at first choices; C has only 7 points; D gives B 8 points, but B has 12. The answer is B."
+        ],
+        "ja": [
+          "甲：4 票で第 1 位なので 4 × 2 = 8 点、残り 5 票では第 3 位で 0 点。甲は 8 点。",
+          "乙：4 票で第 2 位（4 点）、3 票で第 1 位（6 点）、2 票で第 2 位（2 点）、計 12 点。丙：3 票で第 2 位（3 点）、2 票で第 1 位（4 点）、計 7 点。（確認：1 票につき 3 点、9 票で 27 = 8 + 12 + 7。）",
+          "乙が 12 点で最高、当選。第 1 志望だけなら 4 票の甲が当選するが、乙は第 1 志望が少なくてもほぼ全員の上位 2 人に入っており、2 つの制度で当選者が変わる。",
+          "A は第 1 志望だけを見ている。C の丙は 7 点しかない。D は乙を 8 点としたが実際は 12 点。答えは B。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "multiple_choice",
+      "correctAnswer": {
+        "type": "choice",
+        "value": "B"
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade11-foundation",
+        "notes": "同一組排序選票，簡單多數選甲、波達計分選乙：計分制度改變結果。掃過 /波達|計分法/（0 題）、/志願.*選票|選票.*志願/（1 題）；最接近 logic_grade7_foundation_057（淘汰制選舉的非單調悖論），差異：該題是逐輪淘汰制在票數變化下的悖論；本題是同一份偏好在多數制與波達計分法下得出不同當選人，並用總分守恆 27 檢查"
+      }
+    },
+    {
+      "id": "logic_grade11_foundation_065",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "assignment_problem_minimum_cost_column_lower_bound",
+      "tags": [
+        "c:logic_deduction",
+        "c:compare_order",
+        "m:extremal",
+        "m:estimate_bound"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade11",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "甲、乙、丙、丁四位工人要分別完成工作一、二、三、四，每人恰做一項、每項恰由一人做。每人完成各項工作所需的分鐘數（依序是工作一到工作四）如下：甲：7、2、9、7；乙：4、3、9、2；丙：5、6、4、5；丁：8、8、9、3。怎麼分配可使四人花的總時間最少？求這個最少的總分鐘數。",
+        "zh-Hans": "甲、乙、丙、丁四位工人要分别完成工作一、二、三、四，每人恰做一项、每项恰由一人做。每人完成各项工作所需的分钟数（依次是工作一到工作四）如下：甲：7、2、9、7；乙：4、3、9、2；丙：5、6、4、5；丁：8、8、9、3。怎么分配可使四人花的总时间最少？求这个最少的总分钟数。",
+        "en": "Workers A, B, C, D must do jobs 1, 2, 3, 4, one job each and each job by one worker. The minutes each needs for jobs 1 to 4 are: A: 7, 2, 9, 7; B: 4, 3, 9, 2; C: 5, 6, 4, 5; D: 8, 8, 9, 3. What is the minimum possible total number of minutes?",
+        "ja": "作業員甲、乙、丙、丁が仕事 1、2、3、4 を 1 人 1 つずつ担当する（どの仕事もちょうど 1 人）。各人が仕事 1〜4 にかかる時間（分）は、甲：7、2、9、7、乙：4、3、9、2、丙：5、6、4、5、丁：8、8、9、3 である。合計時間を最小にするように割り当てたとき、その最小の合計は何分か。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 13。",
+        "zh-Hans": "答案是 13。",
+        "en": "The answer is 13.",
+        "ja": "答えは 13 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "下界：每項工作至少要花它那一欄的最小值。工作一最少 4（乙）、工作二最少 2（甲）、工作三最少 4（丙）、工作四最少 2（乙），合計 12。",
+          "但工作一與工作四的最小值都來自乙，乙只能做其中一項：若乙不做工作一，工作一至少要 5（下一小的是丙）；若乙不做工作四，工作四至少要 3（丁）。兩種情形總時間都比 12 多至少 1，所以至少 13 分鐘。",
+          "13 做得到：甲做工作二（2）、乙做工作一（4）、丙做工作三（4）、丁做工作四（3），共 2 + 4 + 4 + 3 = 13。",
+          "對照：若先讓乙做他最快的工作四（2）、甲做工作二（2），剩下丙、丁分工作一與三，最好是丙做三（4）、丁做一（8），總共 16，可見一項一項挑最小值不一定最好。答案是 13。"
+        ],
+        "zh-Hans": [
+          "下界：每项工作至少要花它那一列的最小值。工作一最少 4（乙）、工作二最少 2（甲）、工作三最少 4（丙）、工作四最少 2（乙），合计 12。",
+          "但工作一与工作四的最小值都来自乙，乙只能做其中一项：若乙不做工作一，工作一至少要 5（下一小的是丙）；若乙不做工作四，工作四至少要 3（丁）。两种情形总时间都比 12 多至少 1，所以至少 13 分钟。",
+          "13 做得到：甲做工作二（2）、乙做工作一（4）、丙做工作三（4）、丁做工作四（3），共 2 + 4 + 4 + 3 = 13。",
+          "对照：若先让乙做他最快的工作四（2）、甲做工作二（2），剩下丙、丁分工作一与三，最好是丙做三（4）、丁做一（8），总共 16，可见一项一项挑最小值不一定最好。答案是 13。"
+        ],
+        "en": [
+          "Lower bound: each job costs at least the smallest number in its column: job 1 at least 4 (B), job 2 at least 2 (A), job 3 at least 4 (C), job 4 at least 2 (B), total 12.",
+          "But the minima for jobs 1 and 4 both come from B, who can do only one of them. If B does not do job 1, job 1 costs at least 5 (C is next); if B does not do job 4, job 4 costs at least 3 (D). Either way the total is at least 1 more than 12, so at least 13.",
+          "13 is achievable: A does job 2 (2), B job 1 (4), C job 3 (4), D job 4 (3), total 2 + 4 + 4 + 3 = 13.",
+          "Compare: giving B his fastest job 4 (2) and A job 2 (2) first leaves C and D with jobs 1 and 3, best 4 + 8, total 16; picking minima one at a time is not optimal. The answer is 13."
+        ],
+        "ja": [
+          "下限：各仕事にはその列の最小値以上かかる。仕事 1 は 4（乙）以上、仕事 2 は 2（甲）以上、仕事 3 は 4（丙）以上、仕事 4 は 2（乙）以上で、計 12。",
+          "ところが仕事 1 と仕事 4 の最小値はどちらも乙で、乙はどちらか一方しかできない。乙が仕事 1 をしなければ仕事 1 は 5（次に小さい丙）以上、乙が仕事 4 をしなければ仕事 4 は 3（丁）以上。どちらでも 12 より 1 以上多く、合計は 13 以上。",
+          "13 は実現できる：甲が仕事 2（2）、乙が仕事 1（4）、丙が仕事 3（4）、丁が仕事 4（3）で 2 + 4 + 4 + 3 = 13。",
+          "比較：先に乙に最速の仕事 4（2）、甲に仕事 2（2）を与えると、丙と丁に残る仕事 1 と 3 は最善でも 4 + 8 で合計 16。1 つずつ最小を選ぶ方法は最適とは限らない。答えは 13。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "13"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade11-foundation",
+        "notes": "指派問題：以各欄最小值得下界 12，因兩個最小值都落在乙身上而加 1，再構造出 13。掃過 /分配.*工作|工作.*分配/（2 題）、/每人恰.*一項|每人恰好負責一項/（1 題）；最接近 combinatorics_grade11_foundation_091（資格限制下的完美配對計數），差異：該題是數可行的配對有幾種；本題是有成本的最佳指派，要給出下界論證（欄最小值衝突）並構造達成，貪婪法得 16 作對照"
+      }
+    },
+    {
+      "id": "logic_grade11_foundation_066",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "dhondt_seat_allocation_votes_needed_for_a_seat",
+      "tags": [
+        "c:ratio",
+        "c:compare_order",
+        "c:logic_deduction",
+        "m:extremal"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade11",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "某議會用「頓特法」分配 8 個席次：把每個政黨的得票數分別除以 1、2、3、4、⋯，在所有政黨得到的這些商之中，挑出最大的 8 個，每一個商就給它所屬的政黨 1 席。四個政黨的得票數是：甲 4800 票、乙 3300 票、丙 2100 票、丁 900 票。若其他三黨的票數不變，丁黨至少要再多得幾票，才能分到 1 席？（規定丁黨的商要嚴格大於被它擠掉的那一個商，不考慮同分。）",
+        "zh-Hans": "某议会用「顿特法」分配 8 个席位：把每个政党的得票数分别除以 1、2、3、4、⋯，在所有政党得到的这些商之中，挑出最大的 8 个，每一个商就给它所属的政党 1 席。四个政党的得票数是：甲 4800 票、乙 3300 票、丙 2100 票、丁 900 票。若其他三党的票数不变，丁党至少要再多得几票，才能分到 1 席？（规定丁党的商要严格大于被它挤掉的那一个商，不考虑同分。）",
+        "en": "A council allocates 8 seats by the D'Hondt method: divide each party's vote count by 1, 2, 3, 4, …, take the 8 largest of all these quotients, and give one seat to the party owning each. The votes are: A 4800, B 3300, C 2100, D 900. With the other three parties' votes unchanged, at least how many more votes does party D need to win a seat? (D's quotient must be strictly greater than the quotient it pushes out; ignore ties.)",
+        "ja": "ある議会はドント方式で 8 議席を配分する。各政党の得票数を 1、2、3、4、⋯ で割り、すべての政党の商の中から大きい順に 8 つを選び、その商の属する政党に 1 議席ずつ与える。得票数は甲 4800 票、乙 3300 票、丙 2100 票、丁 900 票である。他の 3 党の票数が変わらないとき、丁党が 1 議席を得るには少なくとも何票多く必要か。（丁党の商は押し出す商より真に大きくなければならず、同数は考えない。）"
+      },
+      "answer": {
+        "zh-Hant": "答案是 201。",
+        "zh-Hans": "答案是 201。",
+        "en": "The answer is 201.",
+        "ja": "答えは 201 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "列出各黨較大的商：甲 4800、2400、1600、1200、960；乙 3300、1650、1100、825；丙 2100、1050、700；丁 900、450。",
+          "由大到小取 8 個：4800、3300、2400、2100、1650、1600、1200、1100。甲 4 席、乙 3 席、丙 1 席；丁的 900 排不進去，目前第 8 名是乙的 1100。",
+          "丁的票數 V 增加時只有丁的商改變。丁要得到席次，最大的商 V 必須擠進前 8：其他三黨的商之中第 7 大是 1200、第 8 大是 1100，所以只要 V > 1100，前 8 名就是 4800、⋯、1200 這 7 個加上 V；若 V ≤ 1100 則排不進。",
+          "所以 V 至少 1101，丁黨至少要再多 1101 − 900 = 201 票，此時丁搶走的是乙的第 3 席。答案是 201。"
+        ],
+        "zh-Hans": [
+          "列出各党较大的商：甲 4800、2400、1600、1200、960；乙 3300、1650、1100、825；丙 2100、1050、700；丁 900、450。",
+          "由大到小取 8 个：4800、3300、2400、2100、1650、1600、1200、1100。甲 4 席、乙 3 席、丙 1 席；丁的 900 排不进去，目前第 8 名是乙的 1100。",
+          "丁的票数 V 增加时只有丁的商改变。丁要得到席位，最大的商 V 必须挤进前 8：其他三党的商之中第 7 大是 1200、第 8 大是 1100，所以只要 V > 1100，前 8 名就是 4800、⋯、1200 这 7 个加上 V；若 V ≤ 1100 则排不进。",
+          "所以 V 至少 1101，丁党至少要再多 1101 − 900 = 201 票，此时丁抢走的是乙的第 3 席。答案是 201。"
+        ],
+        "en": [
+          "List the larger quotients: A 4800, 2400, 1600, 1200, 960; B 3300, 1650, 1100, 825; C 2100, 1050, 700; D 900, 450.",
+          "The 8 largest are 4800, 3300, 2400, 2100, 1650, 1600, 1200, 1100: A gets 4 seats, B 3, C 1; D's 900 does not make it, and the 8th place is B's 1100.",
+          "As D's vote count V grows, only D's quotients change. To win a seat, D's largest quotient V must enter the top 8. Among the other parties' quotients the 7th largest is 1200 and the 8th is 1100, so if V > 1100 the top 8 are the seven from 4800 to 1200 plus V; if V ≤ 1100 it stays out.",
+          "So V must be at least 1101, i.e. at least 1101 − 900 = 201 more votes, and D takes B's third seat. The answer is 201."
+        ],
+        "ja": [
+          "各党の大きいほうの商を並べる：甲 4800、2400、1600、1200、960、乙 3300、1650、1100、825、丙 2100、1050、700、丁 900、450。",
+          "大きい順に 8 つ選ぶと 4800、3300、2400、2100、1650、1600、1200、1100 で、甲 4 議席、乙 3 議席、丙 1 議席。丁の 900 は入らず、現在の 8 位は乙の 1100。",
+          "丁の得票 V が増えても変わるのは丁の商だけ。丁が議席を得るには最大の商 V が上位 8 つに入る必要がある。他の 3 党の商の 7 番目は 1200、8 番目は 1100 なので、V > 1100 なら上位 8 つは 4800〜1200 の 7 つと V になり、V ≤ 1100 なら入らない。",
+          "よって V は 1101 以上で、少なくとも 1101 − 900 = 201 票多く必要。このとき丁は乙の 3 議席目を奪う。答えは 201。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "201"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 4
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade11-foundation",
+        "notes": "頓特法＝取全部商的前 8 名；丁要入選，其最大商必須超過其他黨的第 8 大商 1100。掃過 /席次|席位|議會/（0 題）、/頓特|除以 1、2、3/（0 題）；最接近 logic_grade5_foundation_067（保證當選的最少票數），差異：該題是單一席位的多數決；本題是比例代表制的商排序，要辨認「其他黨第 8 大商」才是門檻，而不是目前最後入選者以外的任何數"
+      }
     }
   ]
 }

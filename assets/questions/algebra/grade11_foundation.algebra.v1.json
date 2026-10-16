@@ -13018,6 +13018,391 @@
         "reference": "algebra-grade11-foundation",
         "notes": "有界且平均固定時，平方和在端點取最大，變異數最大是 24。掃過 /變異數.*最大|最大.*變異數/（2 題）、/介於 0 與 10/（0 題）；最接近 algebra_grade12_foundation_059，差異：該題是給定變異數求單一數的最大值；本題是數值有上下界、平均固定，求變異數最大，關鍵是「推到端點」的調整論證"
       }
+    },
+    {
+      "id": "algebra_grade11_foundation_160",
+      "reviewStatus": "ok",
+      "topic": "algebra",
+      "subtopic": "geometric_decay_pumping_cumulative_threshold_by_log",
+      "tags": [
+        "c:work_rate",
+        "c:sequence",
+        "c:logarithm",
+        "m:estimate_bound"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade11",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一座池塘裡有 1600 公升的水，用一台抽水機把它抽乾。抽水機越抽越慢：第 1 小時抽出 540 公升，之後每一小時抽出的水量都是前一小時的 2/3。已知 log 2 ≈ 0.3010、log 3 ≈ 0.4771（log 以 10 為底）。從開始抽水算起，至少要經過幾個整小時，池塘裡的水才會被抽乾？",
+        "zh-Hans": "一座池塘里有 1600 升的水，用一台抽水机把它抽干。抽水机越抽越慢：第 1 小时抽出 540 升，之后每一小时抽出的水量都是前一小时的 2/3。已知 log 2 ≈ 0.3010、log 3 ≈ 0.4771（log 以 10 为底）。从开始抽水算起，至少要经过几个整小时，池塘里的水才会被抽干？",
+        "en": "A pond holds 1600 liters of water, and a pump is used to empty it. The pump slows down: it removes 540 liters in the 1st hour, and in each later hour it removes 2/3 of the amount removed in the previous hour. Given log 2 ≈ 0.3010 and log 3 ≈ 0.4771 (base 10), at least how many whole hours after the start will the pond be empty?",
+        "ja": "池に 1600 リットルの水があり、ポンプで空にする。ポンプはだんだん遅くなり、最初の 1 時間で 540 リットルをくみ出し、その後の各 1 時間でくみ出す量は直前の 1 時間の 2/3 になる。log 2 ≈ 0.3010、log 3 ≈ 0.4771（底は 10）とする。くみ始めてから少なくとも何時間（整数）たてば池は空になるか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 11。",
+        "zh-Hans": "答案是 11。",
+        "en": "The answer is 11.",
+        "ja": "答えは 11 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "前 n 小時共抽出 540 × [1 − (2/3)ⁿ] ÷ (1 − 2/3) = 1620 × [1 − (2/3)ⁿ] 公升。不論抽多久總量都小於 1620 公升，但會越來越接近 1620，所以 1600 公升終究抽得完。",
+          "要 1620 × [1 − (2/3)ⁿ] ≥ 1600，也就是 (2/3)ⁿ ≤ 20/1620 = 1/81，等價於 (3/2)ⁿ ≥ 81。",
+          "取 log：n × (log 3 − log 2) ≥ log 81 = 4 log 3，n ≥ 4 × 0.4771 ÷ 0.1761 ≈ 10.84。",
+          "驗證：(2/3)¹⁰ = 1024/59049 ≈ 0.0173 大於 1/81 ≈ 0.0123，10 小時還不夠；(2/3)¹¹ = 2048/177147 ≈ 0.0116 小於 1/81，11 小時就夠了。答案是 11。"
+        ],
+        "zh-Hans": [
+          "前 n 小时共抽出 540 × [1 − (2/3)ⁿ] ÷ (1 − 2/3) = 1620 × [1 − (2/3)ⁿ] 升。不论抽多久总量都小于 1620 升，但会越来越接近 1620，所以 1600 升终究抽得完。",
+          "要 1620 × [1 − (2/3)ⁿ] ≥ 1600，也就是 (2/3)ⁿ ≤ 20/1620 = 1/81，等价于 (3/2)ⁿ ≥ 81。",
+          "取 log：n × (log 3 − log 2) ≥ log 81 = 4 log 3，n ≥ 4 × 0.4771 ÷ 0.1761 ≈ 10.84。",
+          "验证：(2/3)¹⁰ = 1024/59049 ≈ 0.0173 大于 1/81 ≈ 0.0123，10 小时还不够；(2/3)¹¹ = 2048/177147 ≈ 0.0116 小于 1/81，11 小时就够了。答案是 11。"
+        ],
+        "en": [
+          "In the first n hours the pump removes 540 × [1 − (2/3)ⁿ] ÷ (1 − 2/3) = 1620 × [1 − (2/3)ⁿ] liters. The total always stays below 1620 but gets closer and closer to it, so 1600 liters can eventually be removed.",
+          "We need 1620 × [1 − (2/3)ⁿ] ≥ 1600, i.e. (2/3)ⁿ ≤ 20/1620 = 1/81, which is equivalent to (3/2)ⁿ ≥ 81.",
+          "Taking logs: n × (log 3 − log 2) ≥ log 81 = 4 log 3, so n ≥ 4 × 0.4771 ÷ 0.1761 ≈ 10.84.",
+          "Check: (2/3)¹⁰ = 1024/59049 ≈ 0.0173 is greater than 1/81 ≈ 0.0123, so 10 hours are not enough; (2/3)¹¹ = 2048/177147 ≈ 0.0116 is less than 1/81, so 11 hours suffice. The answer is 11."
+        ],
+        "ja": [
+          "最初の n 時間でくみ出す量は 540 × [1 − (2/3)ⁿ] ÷ (1 − 2/3) = 1620 × [1 − (2/3)ⁿ] リットル。いくらくんでも合計は 1620 未満だが 1620 にいくらでも近づくので、1600 リットルはいずれくみ出せる。",
+          "1620 × [1 − (2/3)ⁿ] ≥ 1600、すなわち (2/3)ⁿ ≤ 20/1620 = 1/81 が必要で、これは (3/2)ⁿ ≥ 81 と同じ。",
+          "対数をとると n × (log 3 − log 2) ≥ log 81 = 4 log 3 より n ≥ 4 × 0.4771 ÷ 0.1761 ≈ 10.84。",
+          "確認：(2/3)¹⁰ = 1024/59049 ≈ 0.0173 は 1/81 ≈ 0.0123 より大きいので 10 時間では足りず、(2/3)¹¹ = 2048/177147 ≈ 0.0116 は 1/81 より小さいので 11 時間で足りる。答えは 11。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "11"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "algebra-grade11-foundation",
+        "notes": "每小時抽水量成等比遞減，累計趨近 1620 公升，用對數解 (3/2)ⁿ ≥ 81 再逐項驗證邊界。掃過 /抽水|抽乾/（1 題）、/前一小時的|每一小時.*前一/（1 題）；最接近 algebra_grade11_foundation_157（反覆以稀溶液置換求濃度門檻），差異：該題是濃度每次乘固定倍數直接降到門檻；本題是效率遞減的累計工作量，要先看出總量有上限 1620、再把「抽完 1600」轉成剩餘比例 1/81，最後在 10.84 附近驗證整數邊界"
+      }
+    },
+    {
+      "id": "algebra_grade11_foundation_161",
+      "reviewStatus": "ok",
+      "topic": "algebra",
+      "subtopic": "traffic_flow_network_underdetermined_system_capacity_bound",
+      "tags": [
+        "c:linear_eq",
+        "c:inequality",
+        "m:extremal"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade11",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "市區有四個路口 A、B、C、D，四段單行道依序圍成一圈：A→B、B→C、C→D、D→A。每小時有 400 輛車從外面開進路口 A，有 300 輛車從路口 B 開出這個區域，有 200 輛車從外面開進路口 C，有 300 輛車從路口 D 開出這個區域。車子不會停在路口，所以每個路口每小時開進來的車數等於開出去的車數。另外，A→B 這段路每小時最多只能通過 450 輛車。在這些條件下，C→D 這段路每小時的車流量最多是幾輛？",
+        "zh-Hans": "市区有四个路口 A、B、C、D，四段单行道依次围成一圈：A→B、B→C、C→D、D→A。每小时有 400 辆车从外面开进路口 A，有 300 辆车从路口 B 开出这个区域，有 200 辆车从外面开进路口 C，有 300 辆车从路口 D 开出这个区域。车子不会停在路口，所以每个路口每小时开进来的车数等于开出去的车数。另外，A→B 这段路每小时最多只能通过 450 辆车。在这些条件下，C→D 这段路每小时的车流量最多是几辆？",
+        "en": "Four intersections A, B, C, D are joined by four one-way streets forming a loop: A→B, B→C, C→D, D→A. Each hour 400 cars enter the area at A, 300 cars leave the area at B, 200 cars enter at C, and 300 cars leave at D. Cars never stop at an intersection, so at each intersection the number of cars arriving per hour equals the number leaving. Also, the street A→B can carry at most 450 cars per hour. Under these conditions, what is the largest possible number of cars per hour on the street C→D?",
+        "ja": "市街に交差点 A、B、C、D があり、4 本の一方通行路 A→B、B→C、C→D、D→A が輪をなしている。1 時間あたり、外から A に 400 台が入り、B から 300 台がこの地域を出て、外から C に 200 台が入り、D から 300 台が出る。車は交差点にとどまらないので、各交差点で 1 時間に入る台数と出る台数は等しい。また、A→B の道は 1 時間に最大 450 台しか通れない。このとき、C→D の道の 1 時間あたりの交通量は最大で何台か。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 350。",
+        "zh-Hans": "答案是 350。",
+        "en": "The answer is 350.",
+        "ja": "答えは 350 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "設四段路每小時的車流量是 x₁（A→B）、x₂（B→C）、x₃（C→D）、x₄（D→A），都不是負數。",
+          "路口守恆：A：400 + x₄ = x₁；B：x₁ = x₂ + 300；C：x₂ + 200 = x₃；D：x₃ = x₄ + 300。四式相加兩邊恆等，只有三式獨立，解有無限多組，用 x₄ 表示：x₁ = 400 + x₄、x₂ = 100 + x₄、x₃ = 300 + x₄。",
+          "限制 x₁ ≤ 450 得 x₄ ≤ 50；又 x₄ ≥ 0。此時 x₁、x₂、x₃ 自動都是正數。",
+          "x₃ = 300 + x₄ 在 x₄ = 50 時最大，是 350（此時 x₁ = 450、x₂ = 150）。答案是 350。"
+        ],
+        "zh-Hans": [
+          "设四段路每小时的车流量是 x₁（A→B）、x₂（B→C）、x₃（C→D）、x₄（D→A），都不是负数。",
+          "路口守恒：A：400 + x₄ = x₁；B：x₁ = x₂ + 300；C：x₂ + 200 = x₃；D：x₃ = x₄ + 300。四式相加两边恒等，只有三式独立，解有无限多组，用 x₄ 表示：x₁ = 400 + x₄、x₂ = 100 + x₄、x₃ = 300 + x₄。",
+          "限制 x₁ ≤ 450 得 x₄ ≤ 50；又 x₄ ≥ 0。此时 x₁、x₂、x₃ 自动都是正数。",
+          "x₃ = 300 + x₄ 在 x₄ = 50 时最大，是 350（此时 x₁ = 450、x₂ = 150）。答案是 350。"
+        ],
+        "en": [
+          "Let the hourly flows be x₁ (A→B), x₂ (B→C), x₃ (C→D), x₄ (D→A), all nonnegative.",
+          "Conservation: A: 400 + x₄ = x₁; B: x₁ = x₂ + 300; C: x₂ + 200 = x₃; D: x₃ = x₄ + 300. Adding all four gives an identity, so only three are independent and there are infinitely many solutions. In terms of x₄: x₁ = 400 + x₄, x₂ = 100 + x₄, x₃ = 300 + x₄.",
+          "The limit x₁ ≤ 450 gives x₄ ≤ 50, and x₄ ≥ 0. Then x₁, x₂, x₃ are automatically positive.",
+          "x₃ = 300 + x₄ is largest when x₄ = 50, giving 350 (with x₁ = 450, x₂ = 150). The answer is 350."
+        ],
+        "ja": [
+          "4 本の道の 1 時間あたりの交通量を x₁（A→B）、x₂（B→C）、x₃（C→D）、x₄（D→A）とおく。どれも 0 以上。",
+          "保存則：A：400 + x₄ = x₁、B：x₁ = x₂ + 300、C：x₂ + 200 = x₃、D：x₃ = x₄ + 300。4 式を足すと恒等式になるので独立なのは 3 式だけで、解は無数にある。x₄ で表すと x₁ = 400 + x₄、x₂ = 100 + x₄、x₃ = 300 + x₄。",
+          "制限 x₁ ≤ 450 から x₄ ≤ 50、また x₄ ≥ 0。このとき x₁、x₂、x₃ は自動的に正。",
+          "x₃ = 300 + x₄ は x₄ = 50 のとき最大で 350（このとき x₁ = 450、x₂ = 150）。答えは 350。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "350"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "algebra-grade11-foundation",
+        "notes": "四路口守恆方程組秩為 3、有一個自由參數，用道路容量限制參數範圍再求另一段流量的最大值。掃過 /路口/（13 題）、/單行道|車流/（2 題）；最接近 algebra_grade11_foundation_098（三元一次方程組有無限多解的條件），差異：該題是判斷係數使方程組有無限多解；本題由實際網路列出必然相依的守恆方程，自由參數受非負與容量不等式限制，求的是可行範圍內的最大流量"
+      }
+    },
+    {
+      "id": "algebra_grade11_foundation_162",
+      "reviewStatus": "ok",
+      "topic": "algebra",
+      "subtopic": "progressive_tax_average_rate_bracket_check",
+      "tags": [
+        "c:percent",
+        "c:function",
+        "c:linear_eq",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade11",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "某國的所得稅採累進稅率：年所得中不超過 50 萬元的部分課 5%，超過 50 萬元到 120 萬元的部分課 12%，超過 120 萬元的部分課 20%。小安今年繳的所得稅恰好是他年所得的 10%。小安的年所得是多少萬元？",
+        "zh-Hans": "某国的所得税采用累进税率：年收入中不超过 50 万元的部分课 5%，超过 50 万元到 120 万元的部分课 12%，超过 120 万元的部分课 20%。小安今年缴的所得税恰好是他年收入的 10%。小安的年收入是多少万元？",
+        "en": "A country taxes income progressively: the part of annual income up to 500 thousand dollars is taxed at 5%, the part above 500 thousand up to 1.2 million at 12%, and the part above 1.2 million at 20%. This year An paid tax equal to exactly 10% of his annual income. What is his annual income, in units of 10 thousand dollars?",
+        "ja": "ある国の所得税は累進課税で、年収のうち 50 万元以下の部分に 5%、50 万元を超え 120 万元までの部分に 12%、120 万元を超える部分に 20% が課される。アンさんの今年の所得税は、ちょうど年収の 10% だった。アンさんの年収は何万元か。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 131。",
+        "zh-Hans": "答案是 131。",
+        "en": "The answer is 131.",
+        "ja": "答えは 131 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "先算級距端點的稅：所得 50 萬元時稅 2.5 萬元（平均 5%）；所得 120 萬元時稅 2.5 + 70 × 12% = 10.9 萬元（平均約 9.1%）。設所得為 x 萬元。",
+          "若 x ≤ 50，平均稅率只有 5%，不合。若 50 < x ≤ 120：2.5 + 0.12(x − 50) = 0.1x，得 0.02x = 3.5，x = 175，不在這一段，不合。",
+          "所以 x > 120：10.9 + 0.2(x − 120) = 0.1x，得 0.1x = 13.1，x = 131，確實大於 120。",
+          "驗算：稅 = 2.5 + 8.4 + 0.2 × 11 = 13.1 萬元，正好是 131 萬元的 10%。答案是 131。"
+        ],
+        "zh-Hans": [
+          "先算级距端点的税：收入 50 万元时税 2.5 万元（平均 5%）；收入 120 万元时税 2.5 + 70 × 12% = 10.9 万元（平均约 9.1%）。设收入为 x 万元。",
+          "若 x ≤ 50，平均税率只有 5%，不合。若 50 < x ≤ 120：2.5 + 0.12(x − 50) = 0.1x，得 0.02x = 3.5，x = 175，不在这一段，不合。",
+          "所以 x > 120：10.9 + 0.2(x − 120) = 0.1x，得 0.1x = 13.1，x = 131，确实大于 120。",
+          "验算：税 = 2.5 + 8.4 + 0.2 × 11 = 13.1 万元，正好是 131 万元的 10%。答案是 131。"
+        ],
+        "en": [
+          "Work in units of 10 thousand dollars. At income 50 the tax is 2.5 (average 5%); at income 120 the tax is 2.5 + 70 × 12% = 10.9 (average about 9.1%). Let the income be x.",
+          "If x ≤ 50 the average rate is only 5%, impossible. If 50 < x ≤ 120: 2.5 + 0.12(x − 50) = 0.1x gives 0.02x = 3.5, x = 175, which is not in this range, so it is rejected.",
+          "So x > 120: 10.9 + 0.2(x − 120) = 0.1x gives 0.1x = 13.1, x = 131, which is indeed above 120.",
+          "Check: tax = 2.5 + 8.4 + 0.2 × 11 = 13.1, exactly 10% of 131. The answer is 131."
+        ],
+        "ja": [
+          "単位は万元。年収 50 のとき税は 2.5（平均 5%）、年収 120 のとき税は 2.5 + 70 × 12% = 10.9（平均約 9.1%）。年収を x とおく。",
+          "x ≤ 50 なら平均税率は 5% しかなく不適。50 < x ≤ 120 なら 2.5 + 0.12(x − 50) = 0.1x より 0.02x = 3.5、x = 175 となりこの範囲外なので不適。",
+          "よって x > 120 で、10.9 + 0.2(x − 120) = 0.1x より 0.1x = 13.1、x = 131。確かに 120 より大きい。",
+          "確認：税 = 2.5 + 8.4 + 0.2 × 11 = 13.1 で、ちょうど 131 の 10%。答えは 131。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "131"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "algebra-grade11-foundation",
+        "notes": "累進稅是分段一次函數，平均稅率 10% 落在哪一段要先判斷，中段方程的解 175 超出區間必須捨去。掃過 /稅率|所得稅|累進/（0 題）、/超過.*的部分/（3 題）；最接近 algebra_grade12_foundation_073（學分加權門檻），差異：該題是加權平均的門檻；本題是分段線性的稅額函數，用「平均稅率 = 10%」反求所得，關鍵在逐段檢查並捨去落在區間外的假解"
+      }
+    },
+    {
+      "id": "algebra_grade11_foundation_163",
+      "reviewStatus": "ok",
+      "topic": "algebra",
+      "subtopic": "compare_roots_by_common_power",
+      "tags": [
+        "c:compare_order",
+        "c:exponent",
+        "c:radical",
+        "m:direct"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade11",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "設 a = √2、b = ∛3、c = ⁵√5（分別是 2 的平方根、3 的立方根、5 的五次方根）。下列哪一個是這三個數由大到小的正確順序？",
+        "zh-Hans": "设 a = √2、b = ∛3、c = ⁵√5（分别是 2 的平方根、3 的立方根、5 的五次方根）。下列哪一个是这三个数由大到小的正确顺序？",
+        "en": "Let a = √2, b = ∛3, c = ⁵√5 (the square root of 2, the cube root of 3, and the fifth root of 5). Which is the correct order of these three numbers from largest to smallest?",
+        "ja": "a = √2、b = ∛3、c = ⁵√5（それぞれ 2 の平方根、3 の立方根、5 の 5 乗根）とする。この 3 数を大きい順に並べたものとして正しいのはどれか。"
+      },
+      "options": {
+        "A": {
+          "zh-Hant": "a > b > c：根號裡的數越小、開的次方越少，值就越大",
+          "zh-Hans": "a > b > c：根号里的数越小、开的次方越少，值就越大",
+          "en": "a > b > c: the smaller the number and the lower the root, the larger the value",
+          "ja": "a > b > c：根号の中の数が小さく、累乗根の次数が低いほど値は大きい"
+        },
+        "B": {
+          "zh-Hant": "b > a > c：同乘到 6 次方與 10 次方兩兩比較的結果",
+          "zh-Hans": "b > a > c：同乘到 6 次方与 10 次方两两比较的结果",
+          "en": "b > a > c: what pairwise comparison of 6th and 10th powers gives",
+          "ja": "b > a > c：6 乗どうし、10 乗どうしで 2 つずつ比べた結果"
+        },
+        "C": {
+          "zh-Hant": "c > b > a：根號裡的數越大，開出來的值就越大",
+          "zh-Hans": "c > b > a：根号里的数越大，开出来的值就越大",
+          "en": "c > b > a: the larger the number under the root, the larger the value",
+          "ja": "c > b > a：根号の中の数が大きいほど値も大きい"
+        },
+        "D": {
+          "zh-Hant": "b > c > a：開的次方越高的數越大，所以 c 排在 a 前面",
+          "zh-Hans": "b > c > a：开的次方越高的数越大，所以 c 排在 a 前面",
+          "en": "b > c > a: a higher root gives a larger number, so c comes before a",
+          "ja": "b > c > a：累乗根の次数が高いほど大きいので c が a より前"
+        }
+      },
+      "answer": {
+        "zh-Hant": "答案是 B：b > a > c：同乘到 6 次方與 10 次方兩兩比較的結果。",
+        "zh-Hans": "答案是 B：b > a > c：同乘到 6 次方与 10 次方两两比较的结果。",
+        "en": "The answer is B: b > a > c: what pairwise comparison of 6th and 10th powers gives.",
+        "ja": "答えは B：b > a > c：6 乗どうし、10 乗どうしで 2 つずつ比べた結果 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "比較 a 與 b：同乘到 6 次方，a⁶ = (√2)⁶ = 2³ = 8，b⁶ = (∛3)⁶ = 3² = 9。正數的 6 次方越大，原數越大，所以 b > a。",
+          "比較 a 與 c：同乘到 10 次方，a¹⁰ = 2⁵ = 32，c¹⁰ = 5² = 25，所以 a > c。",
+          "因此 b > a > c（數值約為 1.442、1.414、1.380）。",
+          "A 把 a、b 的順序弄反；C 以為底數大值就大，忽略了開的次方也變高；D 把 c 排在 a 前面，但 c¹⁰ = 25 < 32 = a¹⁰。答案是 B。"
+        ],
+        "zh-Hans": [
+          "比较 a 与 b：同乘到 6 次方，a⁶ = (√2)⁶ = 2³ = 8，b⁶ = (∛3)⁶ = 3² = 9。正数的 6 次方越大，原数越大，所以 b > a。",
+          "比较 a 与 c：同乘到 10 次方，a¹⁰ = 2⁵ = 32，c¹⁰ = 5² = 25，所以 a > c。",
+          "因此 b > a > c（数值约为 1.442、1.414、1.380）。",
+          "A 把 a、b 的顺序弄反；C 以为底数大值就大，忽略了开的次方也变高；D 把 c 排在 a 前面，但 c¹⁰ = 25 < 32 = a¹⁰。答案是 B。"
+        ],
+        "en": [
+          "Compare a and b by raising both to the 6th power: a⁶ = (√2)⁶ = 2³ = 8 and b⁶ = (∛3)⁶ = 3² = 9. For positive numbers a larger 6th power means a larger number, so b > a.",
+          "Compare a and c using 10th powers: a¹⁰ = 2⁵ = 32 and c¹⁰ = 5² = 25, so a > c.",
+          "Hence b > a > c (about 1.442, 1.414, 1.380).",
+          "A reverses a and b; C assumes a larger base gives a larger value, ignoring the higher root; D puts c before a, but c¹⁰ = 25 < 32 = a¹⁰. The answer is B."
+        ],
+        "ja": [
+          "a と b は 6 乗して比べる：a⁶ = (√2)⁶ = 2³ = 8、b⁶ = (∛3)⁶ = 3² = 9。正の数では 6 乗が大きいほうが大きいので b > a。",
+          "a と c は 10 乗して比べる：a¹⁰ = 2⁵ = 32、c¹⁰ = 5² = 25 なので a > c。",
+          "よって b > a > c（値はおよそ 1.442、1.414、1.380）。",
+          "A は a と b の順を逆にしている。C は底が大きいほど大きいと考え、累乗根の次数も上がることを無視している。D は c を a より前に置くが c¹⁰ = 25 < 32 = a¹⁰。答えは B。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "multiple_choice",
+      "correctAnswer": {
+        "type": "choice",
+        "value": "B"
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "algebra-grade11-foundation",
+        "notes": "不同次方根比大小，取兩數根指數的最小公倍數同乘次方，化成整數比較。掃過 /立方根|五次方根/（1 題）、/√2.*∛3|∛3.*√2/（1 題）；最接近 algebra_grade11_foundation_001（對數比大小），差異：該題比較的是對數值；本題是不同次方根，兩兩取 6 次方與 10 次方化成 8 vs 9、32 vs 25，誘答針對「底數大就大」與「根次高就大」兩種直覺"
+      }
+    },
+    {
+      "id": "algebra_grade11_foundation_164",
+      "reviewStatus": "ok",
+      "topic": "algebra",
+      "subtopic": "balance_chemical_equation_homogeneous_system_smallest_integers",
+      "tags": [
+        "c:linear_eq",
+        "c:ratio",
+        "m:direct"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade11",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "乙烷燃燒的化學反應式是 a C₂H₆ + b O₂ → c CO₂ + d H₂O。配平時要讓反應式兩邊的碳（C）、氫（H）、氧（O）原子個數各自相等，而且 a、b、c、d 取最小的一組正整數。求 a + b + c + d。",
+        "zh-Hans": "乙烷燃烧的化学反应式是 a C₂H₆ + b O₂ → c CO₂ + d H₂O。配平时要让反应式两边的碳（C）、氢（H）、氧（O）原子个数各自相等，而且 a、b、c、d 取最小的一组正整数。求 a + b + c + d。",
+        "en": "The combustion of ethane is a C₂H₆ + b O₂ → c CO₂ + d H₂O. To balance it, the numbers of carbon (C), hydrogen (H), and oxygen (O) atoms must be equal on both sides, and a, b, c, d are the smallest positive integers that work. Find a + b + c + d.",
+        "ja": "エタンの燃焼の反応式は a C₂H₆ + b O₂ → c CO₂ + d H₂O である。両辺で炭素（C）、水素（H）、酸素（O）の原子の個数をそれぞれ等しくし、a、b、c、d を最小の正の整数の組にする。a + b + c + d を求めよ。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 19。",
+        "zh-Hans": "答案是 19。",
+        "en": "The answer is 19.",
+        "ja": "答えは 19 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "依原子守恆列式：碳 2a = c；氫 6a = 2d；氧 2b = 2c + d。",
+          "四個未知數只有三個方程式，解有無限多組，而且彼此成比例。用 a 表示：c = 2a、d = 3a、b = (2c + d) ÷ 2 = 7a/2。",
+          "要 b 也是整數，a 必須是偶數，最小取 a = 2，得 b = 7、c = 4、d = 6：2 C₂H₆ + 7 O₂ → 4 CO₂ + 6 H₂O。",
+          "驗算：碳 4 = 4；氫 12 = 12；氧 14 = 8 + 6。所以 a + b + c + d = 2 + 7 + 4 + 6 = 19。答案是 19。"
+        ],
+        "zh-Hans": [
+          "依原子守恒列式：碳 2a = c；氢 6a = 2d；氧 2b = 2c + d。",
+          "四个未知数只有三个方程，解有无限多组，而且彼此成比例。用 a 表示：c = 2a、d = 3a、b = (2c + d) ÷ 2 = 7a/2。",
+          "要 b 也是整数，a 必须是偶数，最小取 a = 2，得 b = 7、c = 4、d = 6：2 C₂H₆ + 7 O₂ → 4 CO₂ + 6 H₂O。",
+          "验算：碳 4 = 4；氢 12 = 12；氧 14 = 8 + 6。所以 a + b + c + d = 2 + 7 + 4 + 6 = 19。答案是 19。"
+        ],
+        "en": [
+          "Atom balance gives: carbon 2a = c; hydrogen 6a = 2d; oxygen 2b = 2c + d.",
+          "There are four unknowns and only three equations, so there are infinitely many solutions, all proportional. In terms of a: c = 2a, d = 3a, b = (2c + d) ÷ 2 = 7a/2.",
+          "For b to be an integer, a must be even; the smallest choice is a = 2, giving b = 7, c = 4, d = 6: 2 C₂H₆ + 7 O₂ → 4 CO₂ + 6 H₂O.",
+          "Check: carbon 4 = 4; hydrogen 12 = 12; oxygen 14 = 8 + 6. So a + b + c + d = 2 + 7 + 4 + 6 = 19. The answer is 19."
+        ],
+        "ja": [
+          "原子の保存から：炭素 2a = c、水素 6a = 2d、酸素 2b = 2c + d。",
+          "未知数 4 つに対し式は 3 つなので解は無数にあり、すべて比例する。a で表すと c = 2a、d = 3a、b = (2c + d) ÷ 2 = 7a/2。",
+          "b も整数にするには a は偶数で、最小は a = 2。このとき b = 7、c = 4、d = 6 で、2 C₂H₆ + 7 O₂ → 4 CO₂ + 6 H₂O。",
+          "確認：炭素 4 = 4、水素 12 = 12、酸素 14 = 8 + 6。よって a + b + c + d = 2 + 7 + 4 + 6 = 19。答えは 19。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "19"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "algebra-grade11-foundation",
+        "notes": "配平是齊次一次方程組，解成比例，取讓所有係數為整數的最小倍數。掃過 /化學|反應式/（0 題）、/原子/（4 題）；最接近 algebra_grade11_foundation_076（三種合金成分方程組），差異：該題是非齊次方程組有唯一解；本題是齊次方程組必有無限多組成比例的解，推理點在 b = 7a/2 迫使 a 取偶數"
+      }
     }
   ]
 }

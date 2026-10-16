@@ -7882,6 +7882,316 @@
         "reference": "combinatorics-grade11-foundation",
         "notes": "二部圖完美配對計數：從只有兩人會的工作 1 切入分類，共 8 種。掃過 /分派|指派|分配.*工作/（0 題）、/只會|會做/（8 題）；最接近 logic_grade6_foundation_093（田忌賽馬配對），差異：該題是最佳化配對；本題是在「會做」的二部圖中數完美配對的個數，靠「只有某人會」的強迫步驟分類"
       }
+    },
+    {
+      "id": "combinatorics_grade11_foundation_092",
+      "reviewStatus": "ok",
+      "topic": "combinatorics",
+      "subtopic": "coupon_collector_three_types_expected_packs",
+      "tags": [
+        "c:expectation",
+        "c:probability",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade11",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "某品牌零食每包附一張卡片，卡片共有 3 種，每包附哪一種完全隨機、三種的機率都是 1/3，各包互相獨立。小美一包一包地買，直到 3 種卡片都收集到為止。她買的包數的期望值是多少？",
+        "zh-Hans": "某品牌零食每包附一张卡片，卡片共有 3 种，每包附哪一种完全随机、三种的概率都是 1/3，各包互相独立。小美一包一包地买，直到 3 种卡片都收集到为止。她买的包数的期望值是多少？",
+        "en": "Each bag of a snack comes with one card. There are 3 kinds of cards; each bag gets a kind at random with probability 1/3 each, independently. Mei buys bags one at a time until she has all 3 kinds. What is the expected number of bags she buys?",
+        "ja": "あるお菓子は 1 袋に 1 枚カードが入っている。カードは 3 種類で、どの袋にどれが入るかは完全にランダムで各 1/3、袋どうしは独立である。メイさんは 3 種類すべてがそろうまで 1 袋ずつ買う。買う袋の数の期待値はいくらか。"
+      },
+      "options": {
+        "A": {
+          "zh-Hant": "3：三種卡片各需要一包，所以剛好買 3 包",
+          "zh-Hans": "3：三种卡片各需要一包，所以刚好买 3 包",
+          "en": "3: each kind needs one bag, so exactly 3 bags",
+          "ja": "3：各種類に 1 袋ずつ必要なのでちょうど 3 袋"
+        },
+        "B": {
+          "zh-Hant": "11/2：依序等待第 1、2、3 種新卡，1 + 3/2 + 3",
+          "zh-Hans": "11/2：依序等待第 1、2、3 种新卡，1 + 3/2 + 3",
+          "en": "11/2: wait for the 1st, 2nd, 3rd new kind, 1 + 3/2 + 3",
+          "ja": "11/2：1、2、3 種類目の新しいカードを順に待ち 1 + 3/2 + 3"
+        },
+        "C": {
+          "zh-Hant": "6：最後一種平均要等 3 包，再加上前面的 3 包",
+          "zh-Hans": "6：最后一种平均要等 3 包，再加上前面的 3 包",
+          "en": "6: the last kind takes 3 bags on average, plus 3 earlier",
+          "ja": "6：最後の種類に平均 3 袋、それまでの 3 袋を足す"
+        },
+        "D": {
+          "zh-Hant": "9：每種卡片平均 3 包才出現一次，三種共 3 × 3",
+          "zh-Hans": "9：每种卡片平均 3 包才出现一次，三种共 3 × 3",
+          "en": "9: each kind appears once per 3 bags, so 3 × 3 in all",
+          "ja": "9：各種類は平均 3 袋に 1 回出るので 3 × 3"
+        }
+      },
+      "answer": {
+        "zh-Hant": "答案是 B：11/2：依序等待第 1、2、3 種新卡，1 + 3/2 + 3。",
+        "zh-Hans": "答案是 B：11/2：依序等待第 1、2、3 种新卡，1 + 3/2 + 3。",
+        "en": "The answer is B: 11/2: wait for the 1st, 2nd, 3rd new kind, 1 + 3/2 + 3.",
+        "ja": "答えは B：11/2：1、2、3 種類目の新しいカードを順に待ち 1 + 3/2 + 3 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "把過程分成三段：等到第 1 種、第 2 種、第 3 種「新」卡片。第一包一定是新卡，這一段的包數就是 1。",
+          "已有 1 種時，每包是新卡的機率是 2/3。每次成功機率為 p 的獨立試驗，等到第一次成功的期望次數是 1/p，所以這一段期望 1 ÷ (2/3) = 3/2 包。",
+          "已有 2 種時，新卡機率是 1/3，期望再買 3 包。期望值可以分段相加：1 + 3/2 + 3 = 11/2，也就是 5.5 包。",
+          "A 是最少需要的包數，不是期望值；C 以為收齊前兩種要 3 包，其實只要 1 + 3/2 = 5/2 包；D 以為每一種都要等 3 包，但第一段只要 1 包、第二段只要 3/2 包。答案是 B。"
+        ],
+        "zh-Hans": [
+          "把过程分成三段：等到第 1 种、第 2 种、第 3 种「新」卡片。第一包一定是新卡，这一段的包数就是 1。",
+          "已有 1 种时，每包是新卡的概率是 2/3。每次成功概率为 p 的独立试验，等到第一次成功的期望次数是 1/p，所以这一段期望 1 ÷ (2/3) = 3/2 包。",
+          "已有 2 种时，新卡概率是 1/3，期望再买 3 包。期望值可以分段相加：1 + 3/2 + 3 = 11/2，也就是 5.5 包。",
+          "A 是最少需要的包数，不是期望值；C 以为收齐前两种要 3 包，其实只要 1 + 3/2 = 5/2 包；D 以为每一种都要等 3 包，但第一段只要 1 包、第二段只要 3/2 包。答案是 B。"
+        ],
+        "en": [
+          "Split the process into three stages: waiting for the 1st, 2nd, and 3rd new kind. The first bag is always new, so that stage takes 1 bag.",
+          "With 1 kind in hand, each bag is new with probability 2/3. For independent trials with success probability p, the expected number of trials until the first success is 1/p, so this stage takes 1 ÷ (2/3) = 3/2 bags on average.",
+          "With 2 kinds in hand, a new card has probability 1/3, so 3 more bags on average. Expectations add: 1 + 3/2 + 3 = 11/2, i.e. 5.5 bags.",
+          "A is the minimum number of bags, not the expectation; C thinks the first two kinds take 3 bags, but they take only 1 + 3/2 = 5/2; D waits 3 bags for every kind, but the first stage takes 1 bag and the second only 3/2. The answer is B."
+        ],
+        "ja": [
+          "過程を 3 段階に分ける：1 種類目、2 種類目、3 種類目の「新しい」カードを待つ。最初の袋は必ず新しいので、この段階は 1 袋。",
+          "1 種類持っているとき、各袋が新しい確率は 2/3。成功確率 p の独立な試行で初めて成功するまでの回数の期待値は 1/p なので、この段階は平均 1 ÷ (2/3) = 3/2 袋。",
+          "2 種類持っているとき、新しい確率は 1/3 で平均あと 3 袋。期待値は足し合わせてよく、1 + 3/2 + 3 = 11/2、つまり 5.5 袋。",
+          "A は最少の袋数で期待値ではない。C は最初の 2 種類をそろえるのに 3 袋かかるとしたが、実際は 1 + 3/2 = 5/2 袋。D はどの種類も 3 袋ずつ待つとしたが、第 1 段階は 1 袋、第 2 段階は 3/2 袋でよい。答えは B。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "multiple_choice",
+      "correctAnswer": {
+        "type": "choice",
+        "value": "B"
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "combinatorics-grade11-foundation",
+        "notes": "集卡問題：把等待拆成三段幾何分布，期望值 1 + 3/2 + 3 相加。掃過 /收集|集齊|集滿/（2 題）、/每包.*卡|附.*卡片/（1 題）；最接近 combinatorics_grade11_foundation_090（以指示變數算擲骰出現幾種點數的期望），差異：該題固定擲骰次數、求出現種類數的期望；本題反過來是隨機停時，求集滿所需次數的期望，用分段幾何分布 1/p 相加"
+      }
+    },
+    {
+      "id": "combinatorics_grade11_foundation_093",
+      "reviewStatus": "ok",
+      "topic": "combinatorics",
+      "subtopic": "dice_matrix_positive_determinant_by_row_swap_symmetry",
+      "tags": [
+        "c:matrix",
+        "c:basic_counting",
+        "m:bijection"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade11",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "連續擲一顆公正骰子 4 次，依序得到 a、b、c、d，排成 2 × 2 矩陣 [[a, b], [c, d]]（第一列是 a、b，第二列是 c、d）。在全部 6⁴ = 1296 種可能的結果中，有幾種會使這個矩陣的行列式 ad − bc 大於 0？",
+        "zh-Hans": "连续掷一颗公正骰子 4 次，依次得到 a、b、c、d，排成 2 × 2 矩阵 [[a, b], [c, d]]（第一行是 a、b，第二行是 c、d）。在全部 6⁴ = 1296 种可能的结果中，有几种会使这个矩阵的行列式 ad − bc 大于 0？",
+        "en": "A fair die is rolled 4 times, giving a, b, c, d in order, which form the 2 × 2 matrix [[a, b], [c, d]] (first row a, b; second row c, d). Of all 6⁴ = 1296 possible outcomes, how many make the determinant ad − bc greater than 0?",
+        "ja": "公正なさいころを 4 回続けて振り、順に a、b、c、d を得て 2 × 2 行列 [[a, b], [c, d]]（第 1 行が a、b、第 2 行が c、d）をつくる。起こりうる 6⁴ = 1296 通りの結果のうち、行列式 ad − bc が 0 より大きくなるのは何通りか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 605。",
+        "zh-Hans": "答案是 605。",
+        "en": "The answer is 605.",
+        "ja": "答えは 605 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "把結果 (a, b, c, d) 對應到 (c, d, a, b)，也就是把矩陣的兩列對調，行列式變成 cb − da = −(ad − bc)。這個對應是一一對應，所以行列式為正與為負的結果一樣多。",
+          "因此所求 = (1296 − 行列式為 0 的個數) ÷ 2，而行列式為 0 就是 ad = bc。",
+          "設 N(k) 是兩顆骰子點數乘積為 k 的有序情形數，ad = bc 的情形數就是所有 N(k)² 的和。k = 1、9、16、25、36 時 N(k) = 1；k = 2、3、5、8、10、15、18、20、24、30 時 N(k) = 2；k = 4 時 N(k) = 3（1×4、2×2、4×1）；k = 6、12 時 N(k) = 4。",
+          "平方和 = 5 × 1 + 10 × 4 + 9 + 2 × 16 = 86。所求 = (1296 − 86) ÷ 2 = 605。答案是 605。"
+        ],
+        "zh-Hans": [
+          "把结果 (a, b, c, d) 对应到 (c, d, a, b)，也就是把矩阵的两行对调，行列式变成 cb − da = −(ad − bc)。这个对应是一一对应，所以行列式为正与为负的结果一样多。",
+          "因此所求 = (1296 − 行列式为 0 的个数) ÷ 2，而行列式为 0 就是 ad = bc。",
+          "设 N(k) 是两颗骰子点数乘积为 k 的有序情形数，ad = bc 的情形数就是所有 N(k)² 的和。k = 1、9、16、25、36 时 N(k) = 1；k = 2、3、5、8、10、15、18、20、24、30 时 N(k) = 2；k = 4 时 N(k) = 3（1×4、2×2、4×1）；k = 6、12 时 N(k) = 4。",
+          "平方和 = 5 × 1 + 10 × 4 + 9 + 2 × 16 = 86。所求 = (1296 − 86) ÷ 2 = 605。答案是 605。"
+        ],
+        "en": [
+          "Map each outcome (a, b, c, d) to (c, d, a, b), i.e. swap the two rows; the determinant becomes cb − da = −(ad − bc). This is a one-to-one correspondence, so positive and negative determinants occur equally often.",
+          "Hence the count is (1296 − number with determinant 0) ÷ 2, and determinant 0 means ad = bc.",
+          "Let N(k) be the number of ordered pairs of die values with product k; the number of outcomes with ad = bc is the sum of N(k)². N(k) = 1 for k = 1, 9, 16, 25, 36; N(k) = 2 for k = 2, 3, 5, 8, 10, 15, 18, 20, 24, 30; N(4) = 3 (1×4, 2×2, 4×1); N(k) = 4 for k = 6, 12.",
+          "The sum of squares is 5 × 1 + 10 × 4 + 9 + 2 × 16 = 86. The count is (1296 − 86) ÷ 2 = 605. The answer is 605."
+        ],
+        "ja": [
+          "結果 (a, b, c, d) を (c, d, a, b) に対応させる、つまり行列の 2 つの行を入れ替えると、行列式は cb − da = −(ad − bc) になる。この対応は一対一なので、行列式が正の結果と負の結果は同じ数だけある。",
+          "よって求める数 = (1296 − 行列式が 0 の数) ÷ 2 で、行列式が 0 とは ad = bc のこと。",
+          "2 つの目の積が k になる順序つきの組の数を N(k) とすると、ad = bc となる数は N(k)² の総和。k = 1、9、16、25、36 で N(k) = 1、k = 2、3、5、8、10、15、18、20、24、30 で N(k) = 2、k = 4 で N(k) = 3（1×4、2×2、4×1）、k = 6、12 で N(k) = 4。",
+          "平方の和は 5 × 1 + 10 × 4 + 9 + 2 × 16 = 86。求める数は (1296 − 86) ÷ 2 = 605。答えは 605。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "605"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 4
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "combinatorics-grade11-foundation",
+        "notes": "兩列對調讓行列式變號，正負一樣多，只需數 ad = bc 的情形（乘積分布的平方和）。掃過 /行列式/（6 題）、/擲.*骰子.*4 次|骰子 4 次/（1 題）；最接近 algebra_grade11_foundation_080（0/1 二階矩陣不可逆的個數），差異：該題元素只有 0、1，直接數 16 個矩陣；本題用列對調的對稱把「行列式 > 0」化成 (總數 − 零行列式)/2，再以乘積分布 ΣN(k)² 數 ad = bc"
+      }
+    },
+    {
+      "id": "combinatorics_grade11_foundation_094",
+      "reviewStatus": "ok",
+      "topic": "combinatorics",
+      "subtopic": "repairing_four_couples_no_original_pair_inclusion_exclusion",
+      "tags": [
+        "c:inclusion_exclusion",
+        "c:permutation_combination",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade11",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "4 對舞伴共 8 個人。下一首曲子要把這 8 個人重新兩兩配成 4 對（每對兩人不分先後，4 對之間也不分順序），規定原本的任何一對舞伴都不可以再配在一起。共有幾種配法？",
+        "zh-Hans": "4 对舞伴共 8 个人。下一首曲子要把这 8 个人重新两两配成 4 对（每对两人不分先后，4 对之间也不分顺序），规定原本的任何一对舞伴都不可以再配在一起。共有几种配法？",
+        "en": "Eight people form 4 dance pairs. For the next song they must be re-paired into 4 pairs (order within a pair and order of the pairs do not matter), and no original pair may dance together again. How many ways are there?",
+        "ja": "4 組のダンスペア、計 8 人がいる。次の曲では 8 人をあらためて 2 人ずつ 4 組に分ける（組の中の順序も組どうしの順序も区別しない）。もとのペアが再び組になってはいけない。分け方は何通りか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 60。",
+        "zh-Hans": "答案是 60。",
+        "en": "The answer is 60.",
+        "ja": "答えは 60 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "不加限制時，8 人兩兩配對的方法數：號碼最小的人選搭檔有 7 種，剩下號碼最小的人有 5 種，再來 3 種、最後 1 種，共 7 × 5 × 3 × 1 = 105 種。同理 6 人有 15 種、4 人有 3 種、2 人有 1 種。",
+          "用排容原理。指定某 k 對原舞伴仍配在一起（從 4 對中選 k 對有 C(4, k) 種），其餘 8 − 2k 人任意配對：k = 1 時 4 × 15 = 60，k = 2 時 6 × 3 = 18，k = 3 時 4 × 1 = 4，k = 4 時 1 × 1 = 1。",
+          "沒有任何原舞伴在一起的配法 = 105 − 60 + 18 − 4 + 1 = 60。",
+          "答案是 60。"
+        ],
+        "zh-Hans": [
+          "不加限制时，8 人两两配对的方法数：号码最小的人选搭档有 7 种，剩下号码最小的人有 5 种，再来 3 种、最后 1 种，共 7 × 5 × 3 × 1 = 105 种。同理 6 人有 15 种、4 人有 3 种、2 人有 1 种。",
+          "用容斥原理。指定某 k 对原舞伴仍配在一起（从 4 对中选 k 对有 C(4, k) 种），其余 8 − 2k 人任意配对：k = 1 时 4 × 15 = 60，k = 2 时 6 × 3 = 18，k = 3 时 4 × 1 = 4，k = 4 时 1 × 1 = 1。",
+          "没有任何原舞伴在一起的配法 = 105 − 60 + 18 − 4 + 1 = 60。",
+          "答案是 60。"
+        ],
+        "en": [
+          "Without restrictions, 8 people can be paired in 7 × 5 × 3 × 1 = 105 ways (the lowest-numbered person picks a partner in 7 ways, the next lowest remaining in 5, then 3, then 1). Likewise 6 people give 15, 4 people give 3, and 2 people give 1.",
+          "Use inclusion–exclusion. Fixing k original pairs to stay together (C(4, k) choices) and pairing the other 8 − 2k people freely gives: k = 1: 4 × 15 = 60; k = 2: 6 × 3 = 18; k = 3: 4 × 1 = 4; k = 4: 1 × 1 = 1.",
+          "Pairings with no original pair = 105 − 60 + 18 − 4 + 1 = 60.",
+          "The answer is 60."
+        ],
+        "ja": [
+          "制限がなければ、8 人を 2 人ずつ組にする方法は、番号最小の人の相手が 7 通り、残りの番号最小の人が 5 通り、次に 3 通り、最後に 1 通りで 7 × 5 × 3 × 1 = 105 通り。同様に 6 人なら 15 通り、4 人なら 3 通り、2 人なら 1 通り。",
+          "包除原理を使う。もとのペアのうち指定した k 組がそのまま組になり（4 組から k 組を選ぶのは C(4, k) 通り）、残り 8 − 2k 人は自由に組む：k = 1 で 4 × 15 = 60、k = 2 で 6 × 3 = 18、k = 3 で 4 × 1 = 4、k = 4 で 1 × 1 = 1。",
+          "もとのペアが 1 組もない分け方は 105 − 60 + 18 − 4 + 1 = 60。",
+          "答えは 60。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "60"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "combinatorics-grade11-foundation",
+        "notes": "對「兩兩配對」做排容：全部 105 種，扣掉保留原配對的情形，交錯加減得 60。掃過 /舞伴|重新.*配/（1 題）、/兩兩配.*對|配成.*對/（5 題）；最接近 combinatorics_grade12_foundation_030（8 人兩兩分組的總數），差異：該題只數無限制的分組數 105；本題在配對結構上做排容，每項的剩餘人數配對數 15、3、1 也要用同一方法算，推理點是「禁止原配對」的錯排型計數"
+      }
+    },
+    {
+      "id": "combinatorics_grade11_foundation_095",
+      "reviewStatus": "ok",
+      "topic": "combinatorics",
+      "subtopic": "ordered_factorizations_into_three_factors_by_exponent_distribution",
+      "tags": [
+        "c:factor_multiple",
+        "c:basic_counting",
+        "m:bijection"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade11",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "有幾組有序的正整數 (x, y, z) 滿足 x × y × z = 360？（例如 (1, 1, 360) 與 (1, 360, 1) 算不同的兩組。）",
+        "zh-Hans": "有几组有序的正整数 (x, y, z) 满足 x × y × z = 360？（例如 (1, 1, 360) 与 (1, 360, 1) 算不同的两组。）",
+        "en": "How many ordered triples of positive integers (x, y, z) satisfy x × y × z = 360? (For example, (1, 1, 360) and (1, 360, 1) count as different triples.)",
+        "ja": "x × y × z = 360 を満たす正の整数の順序つきの組 (x, y, z) は何組あるか。（たとえば (1, 1, 360) と (1, 360, 1) は別の組と数える。）"
+      },
+      "answer": {
+        "zh-Hant": "答案是 180。",
+        "zh-Hans": "答案是 180。",
+        "en": "The answer is 180.",
+        "ja": "答えは 180 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "360 = 2³ × 3² × 5。x、y、z 都是 360 的因數，各自的質因數只能是 2、3、5，而且三數中 2 的次方加起來是 3、3 的次方加起來是 2、5 的次方加起來是 1。",
+          "把 2 的 3 次方分給三個數，就是求 e₁ + e₂ + e₃ = 3 的非負整數解，有 C(5, 2) = 10 種；3 的 2 次方有 C(4, 2) = 6 種；5 的 1 次方有 3 種。",
+          "三種質因數的分法互相獨立；而由質因數分解的唯一性，每一種分法恰好決定一組 (x, y, z)，反之亦然。",
+          "共 10 × 6 × 3 = 180 組。答案是 180。"
+        ],
+        "zh-Hans": [
+          "360 = 2³ × 3² × 5。x、y、z 都是 360 的因数，各自的质因数只能是 2、3、5，而且三数中 2 的次方加起来是 3、3 的次方加起来是 2、5 的次方加起来是 1。",
+          "把 2 的 3 次方分给三个数，就是求 e₁ + e₂ + e₃ = 3 的非负整数解，有 C(5, 2) = 10 种；3 的 2 次方有 C(4, 2) = 6 种；5 的 1 次方有 3 种。",
+          "三种质因数的分法互相独立；而由质因数分解的唯一性，每一种分法恰好决定一组 (x, y, z)，反之亦然。",
+          "共 10 × 6 × 3 = 180 组。答案是 180。"
+        ],
+        "en": [
+          "360 = 2³ × 3² × 5. Each of x, y, z divides 360, so its prime factors are only 2, 3, 5, and the exponents of 2 in the three numbers add to 3, those of 3 add to 2, and those of 5 add to 1.",
+          "Distributing the exponent 3 of 2 means solving e₁ + e₂ + e₃ = 3 in nonnegative integers: C(5, 2) = 10 ways; for 3 squared, C(4, 2) = 6 ways; for 5, 3 ways.",
+          "The three distributions are independent, and by unique factorization each choice gives exactly one triple (x, y, z), and vice versa.",
+          "In total 10 × 6 × 3 = 180 triples. The answer is 180."
+        ],
+        "ja": [
+          "360 = 2³ × 3² × 5。x、y、z はどれも 360 の約数で、素因数は 2、3、5 だけであり、3 数の 2 の指数の和は 3、3 の指数の和は 2、5 の指数の和は 1。",
+          "2 の指数 3 を 3 数に配るのは e₁ + e₂ + e₃ = 3 の 0 以上の整数解で C(5, 2) = 10 通り、3 の指数 2 は C(4, 2) = 6 通り、5 の指数 1 は 3 通り。",
+          "3 つの素因数の配り方は独立で、素因数分解の一意性から、配り方 1 つにつき組 (x, y, z) がちょうど 1 つ決まり、その逆も成り立つ。",
+          "全部で 10 × 6 × 3 = 180 組。答えは 180。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "180"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "combinatorics-grade11-foundation",
+        "notes": "有序三因數分解：每個質因數的次方獨立地用隔板法分給三數，再相乘。掃過 /x × y × z|xyz/（1 題）、/乘積.*360|360.*乘積/（1 題）；最接近 combinatorics_grade12_foundation_034（正整數解計數），差異：該題是加法方程 x + y + z = n 的隔板法；本題是乘法方程，要先質因數分解，把每個質數的次方分別做隔板再相乘，利用分解唯一性建立一一對應"
+      }
     }
   ]
 }
