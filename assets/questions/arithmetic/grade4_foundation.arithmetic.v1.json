@@ -14231,6 +14231,717 @@
         "reference": "arithmetic-grade4-foundation",
         "notes": "末尾 0 的個數 = 能配成的 2×5 對數；5 有 12 個但 2 只有 8 個，故 8 個 0（與 n! 的「5 比較少」相反）。掃過 /末尾.{0,10}(幾個|多少個|連續).{0,4}0/（4 題）、/最後面.{0,20}(幾個|連續).{0,6}0/（0 題）、/(全部|都)乘起來/（5 題）；最接近 number_theory_grade7_foundation_026，差異：那題直接給 2⁵ × 5⁸ 數末尾 0；本題要自己把 10 個 5 的倍數拆成 2 與 5，關鍵是這裡 2 比 5 少（與階乘末尾 0 由 5 決定相反）"
       }
+    },
+    {
+      "id": "arithmetic_grade4_foundation_193",
+      "reviewStatus": "ok",
+      "topic": "arithmetic",
+      "subtopic": "median_kept_after_erasing_two_numbers",
+      "tags": [
+        "c:median_mode",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade4",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "黑板上寫著 1、2、3、⋯、11 這 11 個整數，現在正中間的數是 6。小安要擦掉其中兩個數，剩下 9 個數。他希望剩下的 9 個數由小到大排好後，排在正中間（第 5 個）的數仍然是 6。他有幾種不同的擦法？（只看擦掉哪兩個數，不管先後順序。）",
+        "zh-Hans": "黑板上写着 1、2、3、⋯、11 这 11 个整数，现在正中间的数是 6。小安要擦掉其中两个数，剩下 9 个数。他希望剩下的 9 个数由小到大排好后，排在正中间（第 5 个）的数仍然是 6。他有几种不同的擦法？（只看擦掉哪两个数，不管先后顺序。）",
+        "en": "The 11 integers 1, 2, 3, ⋯, 11 are written on the board; the middle one is 6. An will erase two of them, leaving 9 numbers. He wants the middle number (the 5th) of the remaining 9, sorted from smallest to largest, to still be 6. How many different ways can he choose the two numbers to erase? (Only which two numbers matter, not the order.)",
+        "ja": "黒板に 1、2、3、⋯、11 の 11 個の整数が書いてあり、いま真ん中の数は 6 です。アンさんはこのうち 2 つの数を消して、9 個を残します。残った 9 個を小さい順にならべたとき、真ん中（5 番目）の数がやはり 6 になるようにしたいです。消し方は何通りありますか。（どの 2 つを消すかだけを考え、順番は考えません。）"
+      },
+      "answer": {
+        "zh-Hant": "答案是 25。",
+        "zh-Hans": "答案是 25。",
+        "en": "The answer is 25.",
+        "ja": "答えは 25 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "剩下 9 個數時，正中間是第 5 個。要它是 6，6 本身不能被擦掉，而且比 6 小的數要剛好剩 4 個、比 6 大的數也要剛好剩 4 個。",
+          "比 6 小的數原本有 1、2、3、4、5 共 5 個，要剩 4 個，就得剛好擦掉其中 1 個；比 6 大的數原本有 7、8、9、10、11 共 5 個，也要剛好擦掉 1 個。",
+          "如果兩個都擦小的（或兩個都擦大的），比 6 小的只剩 3 個（或剩 5 個），第 5 個就會變成 7（或 5），不符合。",
+          "所以小的那邊有 5 種選法、大的那邊有 5 種選法，一共 5 × 5 = 25 種擦法。"
+        ],
+        "zh-Hans": [
+          "剩下 9 个数时，正中间是第 5 个。要它是 6，6 本身不能被擦掉，而且比 6 小的数要刚好剩 4 个、比 6 大的数也要刚好剩 4 个。",
+          "比 6 小的数原本有 1、2、3、4、5 共 5 个，要剩 4 个，就得刚好擦掉其中 1 个；比 6 大的数原本有 7、8、9、10、11 共 5 个，也要刚好擦掉 1 个。",
+          "如果两个都擦小的（或两个都擦大的），比 6 小的只剩 3 个（或剩 5 个），第 5 个就会变成 7（或 5），不符合。",
+          "所以小的那边有 5 种选法、大的那边有 5 种选法，一共 5 × 5 = 25 种擦法。"
+        ],
+        "en": [
+          "With 9 numbers left, the middle one is the 5th. For it to be 6, the number 6 must stay, and exactly 4 numbers smaller than 6 and exactly 4 numbers larger than 6 must remain.",
+          "The numbers below 6 are 1, 2, 3, 4, 5 (5 of them); to keep 4, exactly 1 of them is erased. The numbers above 6 are 7, 8, 9, 10, 11 (5 of them); exactly 1 of them is erased too.",
+          "If both erased numbers are small (or both large), only 3 (or 5) numbers below 6 remain and the 5th number becomes 7 (or 5), which fails.",
+          "So there are 5 choices on the small side and 5 on the large side: 5 × 5 = 25 ways."
+        ],
+        "ja": [
+          "9 個残ると真ん中は 5 番目です。それが 6 になるには、6 は消さずに、6 より小さい数が 4 個、6 より大きい数も 4 個ちょうど残る必要があります。",
+          "6 より小さい数は 1、2、3、4、5 の 5 個なので、そのうちちょうど 1 個を消します。6 より大きい数も 7、8、9、10、11 の 5 個なので、ちょうど 1 個を消します。",
+          "2 個とも小さい数（または 2 個とも大きい数）を消すと、6 より小さい数が 3 個（または 5 個）になり、5 番目は 7（または 5）になってしまいます。",
+          "よって小さい側の選び方が 5 通り、大きい側が 5 通りで、5 × 5 = 25 通りです。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "25"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "arithmetic-grade4-foundation",
+        "notes": "中位數保持不變等於「比 6 小、比 6 大的各擦一個」，5 × 5 = 25。掃過 /擦掉.{0,10}兩個數|中位.{0,30}(擦掉|去掉)/（1 題）、/剩下.{0,20}中位/（0 題）；最接近 algebra_grade7_foundation_092，差異：那題擦三個數並同時給平均與中位求乘積；本題只看中位數，用「兩側各剩 4 個」把擦法拆成兩邊相乘計數"
+      }
+    },
+    {
+      "id": "arithmetic_grade4_foundation_194",
+      "reviewStatus": "ok",
+      "topic": "arithmetic",
+      "subtopic": "closed_days_sundays_or_multiples_of_three",
+      "tags": [
+        "c:inclusion_exclusion",
+        "c:modular",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade4",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "某年的 3 月有 31 天，3 月 1 日是星期日。社區圖書館規定：每個星期日休館，另外日期是 3 的倍數的日子（3 日、6 日、9 日……）也休館，其他日子都開館。這一年的 3 月，圖書館開館幾天？",
+        "zh-Hans": "某年的 3 月有 31 天，3 月 1 日是星期日。社区图书馆规定：每个星期日休馆，另外日期是 3 的倍数的日子（3 日、6 日、9 日……）也休馆，其他日子都开馆。这一年的 3 月，图书馆开馆几天？",
+        "en": "In a certain year, March has 31 days and March 1 is a Sunday. The community library is closed every Sunday, and also on every date that is a multiple of 3 (the 3rd, 6th, 9th, …); it is open on all other days. On how many days in March of that year is the library open?",
+        "ja": "ある年の 3 月は 31 日あり、3 月 1 日は日曜日です。地域の図書館は毎週日曜日が休館で、さらに日付が 3 の倍数の日（3 日、6 日、9 日……）も休館です。それ以外の日は開館します。この年の 3 月に、図書館は何日開館しますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 17。",
+        "zh-Hans": "答案是 17。",
+        "en": "The answer is 17.",
+        "ja": "答えは 17 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "3 月 1 日是星期日，每 7 天又是星期日，所以星期日是 1、8、15、22、29 日，共 5 天。",
+          "日期是 3 的倍數的有 3、6、9、⋯、30 日，共 30 ÷ 3 = 10 天。",
+          "兩種都算到的日子要扣掉一次：星期日裡面只有 15 日是 3 的倍數。所以休館的天數是 5 + 10 − 1 = 14 天。",
+          "開館天數是 31 − 14 = 17 天。"
+        ],
+        "zh-Hans": [
+          "3 月 1 日是星期日，每 7 天又是星期日，所以星期日是 1、8、15、22、29 日，共 5 天。",
+          "日期是 3 的倍数的有 3、6、9、⋯、30 日，共 30 ÷ 3 = 10 天。",
+          "两种都算到的日子要扣掉一次：星期日里面只有 15 日是 3 的倍数。所以休馆的天数是 5 + 10 − 1 = 14 天。",
+          "开馆天数是 31 − 14 = 17 天。"
+        ],
+        "en": [
+          "March 1 is a Sunday and Sundays repeat every 7 days, so the Sundays are the 1st, 8th, 15th, 22nd and 29th: 5 days.",
+          "The dates that are multiples of 3 are the 3rd, 6th, 9th, ⋯, 30th: 30 ÷ 3 = 10 days.",
+          "Days counted in both lists must be subtracted once: among the Sundays only the 15th is a multiple of 3. So the library is closed on 5 + 10 − 1 = 14 days.",
+          "It is open on 31 − 14 = 17 days."
+        ],
+        "ja": [
+          "3 月 1 日が日曜日で、日曜日は 7 日ごとなので、1、8、15、22、29 日の 5 日です。",
+          "日付が 3 の倍数の日は 3、6、9、⋯、30 日で、30 ÷ 3 = 10 日です。",
+          "両方に数えた日は 1 回ひきます。日曜日のうち 3 の倍数なのは 15 日だけです。よって休館日は 5 + 10 − 1 = 14 日です。",
+          "開館日は 31 − 14 = 17 日です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "17"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "arithmetic-grade4-foundation",
+        "notes": "星期日 5 天、3 的倍數 10 天、重疊 1 天（15 日），休館 14 天、開館 17 天。掃過 /星期日.{0,40}3 的倍數|3 的倍數.{0,40}星期/（0 題）、/休館|休息.{0,20}(倍數|星期)/（0 題）；最接近 arithmetic_grade5_foundation_047（2、3、5 倍數的櫃子），差異：那題是三個倍數條件的排容；本題把「星期日」轉成日期間隔 7 的數列，再和 3 的倍數做兩集合排容並找重疊日"
+      }
+    },
+    {
+      "id": "arithmetic_grade4_foundation_195",
+      "reviewStatus": "ok",
+      "topic": "arithmetic",
+      "subtopic": "double_plus_one_list_multiples_of_three",
+      "tags": [
+        "c:recurrence",
+        "c:modular",
+        "m:invariant"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade4",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "小安從 1 開始寫數：每次把剛寫下的數乘以 2 再加 1，寫在後面，得到 1、3、7、15、31、⋯。他一共寫了 20 個數。這 20 個數之中，有幾個是 3 的倍數？",
+        "zh-Hans": "小安从 1 开始写数：每次把刚写下的数乘以 2 再加 1，写在后面，得到 1、3、7、15、31、⋯。他一共写了 20 个数。这 20 个数之中，有几个是 3 的倍数？",
+        "en": "An starts with 1 and keeps writing: each time he doubles the number he just wrote and adds 1, getting 1, 3, 7, 15, 31, ⋯. He writes 20 numbers in all. How many of these 20 numbers are multiples of 3?",
+        "ja": "アンさんは 1 から始めて、書いたばかりの数を 2 倍して 1 をたした数を次に書いていき、1、3、7、15、31、⋯ となります。全部で 20 個書きました。この 20 個のうち、3 の倍数は何個ありますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 10。",
+        "zh-Hans": "答案是 10。",
+        "en": "The answer is 10.",
+        "ja": "答えは 10 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "不必算出很大的數，只要看每個數除以 3 的餘數。",
+          "如果一個數除以 3 餘 1，乘以 2 再加 1 之後：餘數變成 1 × 2 + 1 = 3，也就是整除（餘 0），例如 1 → 3、7 → 15。",
+          "如果一個數是 3 的倍數（餘 0），乘以 2 再加 1 之後餘 0 × 2 + 1 = 1，例如 3 → 7、15 → 31。所以餘數照「1、0、1、0、⋯」交替出現。",
+          "第 1 個數 1 餘 1，所以第 2、4、6、⋯、20 個數是 3 的倍數，一共 20 ÷ 2 = 10 個。"
+        ],
+        "zh-Hans": [
+          "不必算出很大的数，只要看每个数除以 3 的余数。",
+          "如果一个数除以 3 余 1，乘以 2 再加 1 之后：余数变成 1 × 2 + 1 = 3，也就是整除（余 0），例如 1 → 3、7 → 15。",
+          "如果一个数是 3 的倍数（余 0），乘以 2 再加 1 之后余 0 × 2 + 1 = 1，例如 3 → 7、15 → 31。所以余数照「1、0、1、0、⋯」交替出现。",
+          "第 1 个数 1 余 1，所以第 2、4、6、⋯、20 个数是 3 的倍数，一共 20 ÷ 2 = 10 个。"
+        ],
+        "en": [
+          "There is no need to compute the big numbers; just follow each number's remainder when divided by 3.",
+          "If a number leaves remainder 1, doubling and adding 1 gives remainder 1 × 2 + 1 = 3, that is, divisible (remainder 0): for example 1 → 3 and 7 → 15.",
+          "If a number is a multiple of 3 (remainder 0), doubling and adding 1 gives remainder 0 × 2 + 1 = 1: for example 3 → 7 and 15 → 31. So the remainders alternate 1, 0, 1, 0, ⋯.",
+          "The 1st number, 1, leaves remainder 1, so the 2nd, 4th, 6th, ⋯, 20th numbers are multiples of 3: 20 ÷ 2 = 10 of them."
+        ],
+        "ja": [
+          "大きな数を計算しなくても、それぞれの数を 3 でわったあまりだけを見ればよいです。",
+          "3 でわって 1 あまる数を 2 倍して 1 をたすと、あまりは 1 × 2 + 1 = 3、つまりわり切れます（あまり 0）。たとえば 1 → 3、7 → 15 です。",
+          "3 の倍数（あまり 0）を 2 倍して 1 をたすと、あまりは 0 × 2 + 1 = 1 です。たとえば 3 → 7、15 → 31 です。だからあまりは「1、0、1、0、⋯」と交互になります。",
+          "1 番目の 1 はあまり 1 なので、2、4、6、⋯、20 番目が 3 の倍数で、20 ÷ 2 = 10 個です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "10"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "arithmetic-grade4-foundation",
+        "notes": "追蹤除以 3 的餘數：餘 1 經「×2+1」變餘 0，餘 0 變餘 1，交替出現，偶數項皆為 3 的倍數，共 10 個。掃過 /乘以 ?2 ?再加 ?1/（0 題）、/一串數.{0,60}3 的倍數/（0 題）；最接近 logic_grade5_foundation_065（前兩數乘積的個位循環），差異：那題看個位數字的週期；本題看除以 3 的餘數，由「餘數的變化規則」直接得出交替"
+      }
+    },
+    {
+      "id": "arithmetic_grade4_foundation_196",
+      "reviewStatus": "ok",
+      "topic": "arithmetic",
+      "subtopic": "two_clubs_least_possible_overlap",
+      "tags": [
+        "c:inclusion_exclusion",
+        "m:extremal"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade4",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "某班有 32 位學生，其中 20 人參加游泳課，17 人參加畫畫課（有人兩種都參加，也可能有人兩種都沒參加）。兩種課都參加的學生，最少有幾人？",
+        "zh-Hans": "某班有 32 位学生，其中 20 人参加游泳课，17 人参加画画课（有人两种都参加，也可能有人两种都没参加）。两种课都参加的学生，最少有几人？",
+        "en": "A class has 32 students. 20 take the swimming class and 17 take the drawing class (some may take both, and some may take neither). What is the smallest possible number of students who take both classes?",
+        "ja": "あるクラスには 32 人の生徒がいます。そのうち 20 人が水泳教室に、17 人が絵の教室に参加しています（両方に参加する人も、どちらにも参加しない人もいるかもしれません）。両方に参加している生徒は、最も少なくて何人ですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 5。",
+        "zh-Hans": "答案是 5。",
+        "en": "The answer is 5.",
+        "ja": "答えは 5 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "把參加游泳的 20 人和參加畫畫的 17 人加起來，是 20 + 17 = 37 人次。",
+          "全班只有 32 人，就算每個人都至少參加一種，也只能放進 32 人；多出來的 37 − 32 = 5 人次，一定是有人被算了兩次，也就是兩種都參加。所以兩種都參加的至少有 5 人。",
+          "5 人做得到：讓 5 人兩種都參加，15 人只游泳，12 人只畫畫，15 + 12 + 5 = 32，剛好全班，每個人都參加至少一種。游泳是 15 + 5 = 20 人，畫畫是 12 + 5 = 17 人，都符合。",
+          "所以兩種都參加的最少是 5 人。"
+        ],
+        "zh-Hans": [
+          "把参加游泳的 20 人和参加画画的 17 人加起来，是 20 + 17 = 37 人次。",
+          "全班只有 32 人，就算每个人都至少参加一种，也只能放进 32 人；多出来的 37 − 32 = 5 人次，一定是有人被算了两次，也就是两种都参加。所以两种都参加的至少有 5 人。",
+          "5 人做得到：让 5 人两种都参加，15 人只游泳，12 人只画画，15 + 12 + 5 = 32，刚好全班，每个人都参加至少一种。游泳是 15 + 5 = 20 人，画画是 12 + 5 = 17 人，都符合。",
+          "所以两种都参加的最少是 5 人。"
+        ],
+        "en": [
+          "Adding the 20 swimmers and the 17 drawers gives 20 + 17 = 37 sign-ups.",
+          "The class has only 32 students; even if everyone takes at least one class, that covers only 32 people. The extra 37 − 32 = 5 sign-ups must come from students counted twice, that is, taking both. So at least 5 take both.",
+          "5 is possible: 5 take both, 15 only swim and 12 only draw, 15 + 12 + 5 = 32, the whole class, each taking at least one. Swimming has 15 + 5 = 20 and drawing has 12 + 5 = 17, as required.",
+          "So the smallest number taking both is 5."
+        ],
+        "ja": [
+          "水泳の 20 人と絵の 17 人をたすと、20 + 17 = 37 人分です。",
+          "クラスは 32 人しかいないので、全員が少なくとも 1 つに参加しても 32 人分にしかなりません。多い 37 − 32 = 5 人分は、2 回数えられた人、つまり両方に参加した人です。よって両方に参加した人は少なくとも 5 人です。",
+          "5 人にできます。5 人が両方、15 人が水泳だけ、12 人が絵だけにすると、15 + 12 + 5 = 32 でクラス全員がどれかに参加し、水泳は 15 + 5 = 20 人、絵は 12 + 5 = 17 人で条件に合います。",
+          "よって両方に参加した人は最も少なくて 5 人です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "5"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "arithmetic-grade4-foundation",
+        "notes": "兩集合最小交集＝人次和減總人數：20 + 17 − 32 = 5，並構造全班都至少參加一種的分配。掃過 /兩種都.{0,20}(最少|至少)|(最少|至少).{0,20}兩種都/（0 題）、/參加.{0,30}課.{0,40}都參加/（排容 2 題）；最接近 arithmetic_grade6_foundation 的 minimum_overlap_of_three_percentages，差異：那題是三個百分比求三者共同的下界；本題是兩個人數集合的最小交集並要構造達到"
+      }
+    },
+    {
+      "id": "arithmetic_grade4_foundation_197",
+      "reviewStatus": "ok",
+      "topic": "arithmetic",
+      "subtopic": "contains_digit_five_or_multiple_of_five",
+      "tags": [
+        "c:inclusion_exclusion",
+        "c:place_value",
+        "m:enumeration"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade4",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "在 1 到 100 這 100 個整數中，「寫出來至少有一個數字 5」或「是 5 的倍數」的數（兩個條件符合一個就算）一共有幾個？",
+        "zh-Hans": "在 1 到 100 这 100 个整数中，「写出来至少有一个数字 5」或「是 5 的倍数」的数（两个条件符合一个就算）一共有几个？",
+        "en": "Among the 100 integers from 1 to 100, how many either contain at least one digit 5 or are multiples of 5 (meeting either condition is enough)?",
+        "ja": "1 から 100 までの 100 個の整数のうち、「数字 5 を少なくとも 1 つふくむ」または「5 の倍数である」数（どちらか一方を満たせばよい）は全部で何個ありますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 28。",
+        "zh-Hans": "答案是 28。",
+        "en": "The answer is 28.",
+        "ja": "答えは 28 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "含有數字 5 的數：個位是 5 的有 5、15、25、⋯、95 共 10 個；十位是 5 的有 50 到 59 共 10 個；55 被算了兩次，所以共有 10 + 10 − 1 = 19 個。",
+          "5 的倍數：5、10、15、⋯、100，共 100 ÷ 5 = 20 個。",
+          "兩個條件都符合的數：個位是 5 的 10 個本來就是 5 的倍數，再加上 50（55 已算過），共 11 個。",
+          "所以一共有 19 + 20 − 11 = 28 個。"
+        ],
+        "zh-Hans": [
+          "含有数字 5 的数：个位是 5 的有 5、15、25、⋯、95 共 10 个；十位是 5 的有 50 到 59 共 10 个；55 被算了两次，所以共有 10 + 10 − 1 = 19 个。",
+          "5 的倍数：5、10、15、⋯、100，共 100 ÷ 5 = 20 个。",
+          "两个条件都符合的数：个位是 5 的 10 个本来就是 5 的倍数，再加上 50（55 已算过），共 11 个。",
+          "所以一共有 19 + 20 − 11 = 28 个。"
+        ],
+        "en": [
+          "Numbers containing a 5: those ending in 5 are 5, 15, 25, ⋯, 95 (10 numbers); those with tens digit 5 are 50 to 59 (10 numbers); 55 is counted twice, so there are 10 + 10 − 1 = 19.",
+          "Multiples of 5: 5, 10, 15, ⋯, 100, which is 100 ÷ 5 = 20 numbers.",
+          "Numbers meeting both conditions: the 10 numbers ending in 5 are all multiples of 5, plus 50 (55 is already counted): 11 numbers.",
+          "So the total is 19 + 20 − 11 = 28."
+        ],
+        "ja": [
+          "数字 5 をふくむ数：一の位が 5 なのは 5、15、25、⋯、95 の 10 個、十の位が 5 なのは 50 から 59 の 10 個で、55 を 2 回数えているので 10 + 10 − 1 = 19 個です。",
+          "5 の倍数：5、10、15、⋯、100 で 100 ÷ 5 = 20 個です。",
+          "両方を満たす数：一の位が 5 の 10 個はすべて 5 の倍数で、さらに 50 があり（55 は数えずみ）、合わせて 11 個です。",
+          "よって全部で 19 + 20 − 11 = 28 個です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "28"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "arithmetic-grade4-foundation",
+        "notes": "含 5 的 19 個、5 的倍數 20 個、重疊 11 個，28。掃過 /數字 ?5.{0,30}5 的倍數|5 的倍數.{0,30}數字 ?5/（0 題）、/至少有一個數字|含有數字/（頁碼互補類）；最接近 arithmetic_grade5_foundation_047（2、3、5 倍數排容），差異：本題一個條件是數字外觀、一個是整除，重疊部分要靠位值逐類找出"
+      }
+    },
+    {
+      "id": "arithmetic_grade4_foundation_198",
+      "reviewStatus": "ok",
+      "topic": "arithmetic",
+      "subtopic": "median_after_adding_one_low_one_high",
+      "tags": [
+        "c:median_mode",
+        "m:invariant"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade4",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "小美記錄了 7 天的氣溫（都是整數度），由低到高排好之後，排在正中間（第 4 個）的是 25 度。後來她又補記了兩天：一天是 18 度，一天是 31 度，而且原來 7 天中最低的是 20 度、最高的是 29 度。把 9 天的氣溫重新由低到高排好，正中間（第 5 個）的氣溫是多少？",
+        "zh-Hans": "小美记录了 7 天的气温（都是整数度），由低到高排好之后，排在正中间（第 4 个）的是 25 度。后来她又补记了两天：一天是 18 度，一天是 31 度，而且原来 7 天中最低的是 20 度、最高的是 29 度。把 9 天的气温重新由低到高排好，正中间（第 5 个）的气温是多少？",
+        "en": "Mei recorded the temperature (whole degrees) on 7 days. Sorted from lowest to highest, the middle one (the 4th) is 25 degrees. Later she added two more days, one at 18 degrees and one at 31 degrees; among the original 7 days the lowest was 20 degrees and the highest 29 degrees. Sorting all 9 temperatures from lowest to highest, what is the middle one (the 5th)?",
+        "ja": "メイさんは 7 日間の気温（どれも整数の度）を記録しました。低い順にならべると、真ん中（4 番目）は 25 度でした。あとで 2 日分をつけ加えました。1 日は 18 度、もう 1 日は 31 度で、もとの 7 日のうち最低は 20 度、最高は 29 度でした。9 日分の気温を低い順にならべ直したとき、真ん中（5 番目）は何度ですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 C：仍然是 25 度，因為新加的一個在最前面、一個在最後面。",
+        "zh-Hans": "答案是 C：仍然是 25 度，因为新加的一个在最前面、一个在最后面。",
+        "en": "The answer is C: It is still 25, because one new value goes first and the other goes last.",
+        "ja": "答えは C：25 度のまま。新しい 1 つは先頭に、もう 1 つは最後に入るから。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "原來 7 個數由低到高是 第1、第2、第3、25、第5、第6、第7，25 前面有 3 個、後面有 3 個。",
+          "新加的 18 度比原來最低的 20 度還低，一定排在最前面；31 度比原來最高的 29 度還高，一定排在最後面。",
+          "9 個數裡，25 前面變成 3 + 1 = 4 個、後面也是 3 + 1 = 4 個，所以 25 剛好排第 5 個，正中間仍然是 25 度，答案是 C。",
+          "A 錯：只有一個數比中間低、一個比中間高時，中間數不會被拉低。B 錯：中間數不是平均數，18 和 31 的平均不影響排位。D 錯：兩個新數的位置都確定了，算得出來。"
+        ],
+        "zh-Hans": [
+          "原来 7 个数由低到高是 第1、第2、第3、25、第5、第6、第7，25 前面有 3 个、后面有 3 个。",
+          "新加的 18 度比原来最低的 20 度还低，一定排在最前面；31 度比原来最高的 29 度还高，一定排在最后面。",
+          "9 个数里，25 前面变成 3 + 1 = 4 个、后面也是 3 + 1 = 4 个，所以 25 刚好排第 5 个，正中间仍然是 25 度，答案是 C。",
+          "A 错：只有一个数比中间低、一个比中间高时，中间数不会被拉低。B 错：中间数不是平均数，18 和 31 的平均不影响排位。D 错：两个新数的位置都确定了，算得出来。"
+        ],
+        "en": [
+          "The original 7 numbers sorted are 1st, 2nd, 3rd, 25, 5th, 6th, 7th: 3 numbers before 25 and 3 after.",
+          "The new 18 is below the old lowest (20), so it goes first; the new 31 is above the old highest (29), so it goes last.",
+          "Among the 9 numbers there are 3 + 1 = 4 before 25 and 3 + 1 = 4 after it, so 25 is exactly 5th: the middle is still 25 degrees, answer C.",
+          "A is wrong: one new value below and one above cannot pull the middle down. B is wrong: the middle value is not an average, and the average of 18 and 31 does not change positions. D is wrong: the places of both new values are known, so it can be found."
+        ],
+        "ja": [
+          "もとの 7 個を低い順に 1 番目、2 番目、3 番目、25、5 番目、6 番目、7 番目 とすると、25 の前に 3 個、後ろに 3 個あります。",
+          "新しい 18 度はもとの最低 20 度より低いので必ず先頭、31 度はもとの最高 29 度より高いので必ず最後になります。",
+          "9 個の中で 25 の前は 3 + 1 = 4 個、後ろも 3 + 1 = 4 個なので、25 はちょうど 5 番目で、真ん中は 25 度のままです。答えは C です。",
+          "A はまちがい：真ん中より低い数と高い数が 1 つずつ入っても、真ん中は下がりません。B はまちがい：真ん中の値は平均ではなく、18 と 31 の平均は順位に関係ありません。D はまちがい：新しい 2 つの位置は決まっているので求められます。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "multiple_choice",
+      "options": {
+        "A": {
+          "zh-Hant": "會變成 20 度，因為加進一個比 20 度還低的 18 度，正中間被往下拉。",
+          "zh-Hans": "会变成 20 度，因为加进一个比 20 度还低的 18 度，正中间被往下拉。",
+          "en": "It becomes 20, because adding 18, lower than 20, pulls the middle down.",
+          "ja": "20 度になる。20 度より低い 18 度が入って、真ん中が下に引っぱられるから。"
+        },
+        "B": {
+          "zh-Hant": "會變成 24.5 度，因為要把 18 和 31 的平均加進來重新算一次。",
+          "zh-Hans": "会变成 24.5 度，因为要把 18 和 31 的平均加进来重新算一次。",
+          "en": "It becomes 24.5, because the average of 18 and 31 must be mixed in.",
+          "ja": "24.5 度になる。18 と 31 の平均を入れて計算し直す必要があるから。"
+        },
+        "C": {
+          "zh-Hant": "仍然是 25 度，因為新加的一個在最前面、一個在最後面。",
+          "zh-Hans": "仍然是 25 度，因为新加的一个在最前面、一个在最后面。",
+          "en": "It is still 25, because one new value goes first and the other goes last.",
+          "ja": "25 度のまま。新しい 1 つは先頭に、もう 1 つは最後に入るから。"
+        },
+        "D": {
+          "zh-Hant": "無法確定，因為不知道原來 7 天裡其他 4 天的氣溫是幾度。",
+          "zh-Hans": "无法确定，因为不知道原来 7 天里其他 4 天的气温是几度。",
+          "en": "It cannot be found, because the other 4 original temperatures are unknown.",
+          "ja": "決まらない。もとの 7 日のうちほかの 4 日の気温がわからないから。"
+        }
+      },
+      "correctAnswer": {
+        "type": "choice",
+        "value": "C"
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "arithmetic-grade4-foundation",
+        "notes": "一個新值低於原最小、一個高於原最大，中位數兩側各多一個，中位數不變。掃過 /中位數.{0,60}(加入|再加|多了|補)/（0 題）、/正中間.{0,40}(加入|又加入)/（1 題）；最接近 arithmetic_grade3_foundation_093（合唱團加入 6 人後正中間是第幾位），差異：那題只問位置編號；本題問中位數的值，關鍵是新值落在兩端而使兩側各增一個、值不受其他未知數影響"
+      }
+    },
+    {
+      "id": "arithmetic_grade4_foundation_199",
+      "reviewStatus": "ok",
+      "topic": "arithmetic",
+      "subtopic": "one_decimal_number_from_rounding_and_digit_sum",
+      "tags": [
+        "c:decimal",
+        "c:place_value",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade4",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "有一個一位小數（小數點後只有一位，例如 3.8），它四捨五入到整數是 7。把它的小數點拿掉，會變成一個兩位數，這個兩位數的兩個數字加起來是 13。這個一位小數是多少？",
+        "zh-Hans": "有一个一位小数（小数点后只有一位，例如 3.8），它四舍五入到整数是 7。把它的小数点拿掉，会变成一个两位数，这个两位数的两个数字加起来是 13。这个一位小数是多少？",
+        "en": "A number has exactly one digit after the decimal point (like 3.8). Rounded to the nearest whole number it is 7. If you remove its decimal point you get a two-digit number whose two digits add up to 13. What is the number?",
+        "ja": "小数第 1 位までの小数（たとえば 3.8）があります。四捨五入して整数にすると 7 になります。小数点をとると 2 けたの数になり、その 2 つの数字の和は 13 です。この小数はいくつですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 D：6.7，因為它在 6.5 到 7.4 之間，數字和 13",
+        "zh-Hans": "答案是 D：6.7，因为它在 6.5 到 7.4 之间，数字和 13",
+        "en": "The answer is D: 6.7, since it lies from 6.5 to 7.4 with sum 13",
+        "ja": "答えは D：6.7。6.5 から 7.4 の間にあり、和が 13 だから"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "四捨五入到整數是 7 的一位小數，從 6.5 到 7.4：6.5、6.6、6.7、6.8、6.9、7.0、7.1、7.2、7.3、7.4。",
+          "整數部分是 6 時，兩個數字和是 6 + 小數那一位 = 13，小數那一位要是 7，得到 6.7（6.7 在範圍內）。",
+          "整數部分是 7 時，小數那一位要是 13 − 7 = 6，得到 7.6，但 7.6 四捨五入是 8，不符合。所以答案是 6.7，選 D。",
+          "A 錯：7.6 四捨五入是 8。B 錯：5.8 四捨五入是 6。C 錯：8.5 四捨五入是 9。三個的數字和雖然都是 13，但只有 6.7 四捨五入是 7。"
+        ],
+        "zh-Hans": [
+          "四舍五入到整数是 7 的一位小数，从 6.5 到 7.4：6.5、6.6、6.7、6.8、6.9、7.0、7.1、7.2、7.3、7.4。",
+          "整数部分是 6 时，两个数字和是 6 + 小数那一位 = 13，小数那一位要是 7，得到 6.7（6.7 在范围内）。",
+          "整数部分是 7 时，小数那一位要是 13 − 7 = 6，得到 7.6，但 7.6 四舍五入是 8，不符合。所以答案是 6.7，选 D。",
+          "A 错：7.6 四舍五入是 8。B 错：5.8 四舍五入是 6。C 错：8.5 四舍五入是 9。三个的数字和虽然都是 13，但只有 6.7 四舍五入是 7。"
+        ],
+        "en": [
+          "The one-decimal numbers that round to 7 run from 6.5 to 7.4: 6.5, 6.6, 6.7, 6.8, 6.9, 7.0, 7.1, 7.2, 7.3, 7.4.",
+          "If the whole-number part is 6, the digit sum is 6 + (tenths digit) = 13, so the tenths digit is 7: the number 6.7, which is in the range.",
+          "If the whole-number part is 7, the tenths digit is 13 − 7 = 6: 7.6, but 7.6 rounds to 8, so it fails. The answer is 6.7, choice D.",
+          "A is wrong: 7.6 rounds to 8. B is wrong: 5.8 rounds to 6. C is wrong: 8.5 rounds to 9. All three have digit sum 13, but only 6.7 rounds to 7."
+        ],
+        "ja": [
+          "四捨五入して 7 になる小数第 1 位までの小数は 6.5 から 7.4 まで、つまり 6.5、6.6、6.7、6.8、6.9、7.0、7.1、7.2、7.3、7.4 です。",
+          "整数の部分が 6 のとき、数字の和は 6 + 小数第 1 位 = 13 なので小数第 1 位は 7 で、6.7 です（範囲に入っています）。",
+          "整数の部分が 7 のとき、小数第 1 位は 13 − 7 = 6 で 7.6 ですが、7.6 は四捨五入すると 8 なので合いません。答えは 6.7 で、D です。",
+          "A はまちがい：7.6 は四捨五入すると 8。B はまちがい：5.8 は 6。C はまちがい：8.5 は 9。どれも数字の和は 13 ですが、四捨五入して 7 になるのは 6.7 だけです。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "multiple_choice",
+      "options": {
+        "A": {
+          "zh-Hant": "7.6，因為整數部分是 7，數字和 7 + 6 = 13",
+          "zh-Hans": "7.6，因为整数部分是 7，数字和 7 + 6 = 13",
+          "en": "7.6, since its whole part is 7 and 7 + 6 = 13",
+          "ja": "7.6。整数の部分が 7 で、7 + 6 = 13 だから"
+        },
+        "B": {
+          "zh-Hant": "5.8，因為拿掉小數點是 58，數字和 13",
+          "zh-Hans": "5.8，因为拿掉小数点是 58，数字和 13",
+          "en": "5.8, since removing the point gives 58, sum 13",
+          "ja": "5.8。小数点をとると 58 で、和が 13 だから"
+        },
+        "C": {
+          "zh-Hant": "8.5，因為拿掉小數點是 85，數字和 13",
+          "zh-Hans": "8.5，因为拿掉小数点是 85，数字和 13",
+          "en": "8.5, since removing the point gives 85, sum 13",
+          "ja": "8.5。小数点をとると 85 で、和が 13 だから"
+        },
+        "D": {
+          "zh-Hant": "6.7，因為它在 6.5 到 7.4 之間，數字和 13",
+          "zh-Hans": "6.7，因为它在 6.5 到 7.4 之间，数字和 13",
+          "en": "6.7, since it lies from 6.5 to 7.4 with sum 13",
+          "ja": "6.7。6.5 から 7.4 の間にあり、和が 13 だから"
+        }
+      },
+      "correctAnswer": {
+        "type": "choice",
+        "value": "D"
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "arithmetic-grade4-foundation",
+        "notes": "先由四捨五入定出 6.5～7.4 的範圍，再用數字和 13 篩出 6.7（7.6 是陷阱）。掃過 /四捨五入.{0,40}一位小數|一位小數.{0,40}四捨五入/（0 題）、/四捨五入/（rounding 類 5 題）；最接近 arithmetic_grade4_foundation 的 place_decimal_point_closest_to_five，差異：那題擺小數點求最接近 5；本題反過來由四捨五入範圍和數字和兩條件交集定數，關鍵陷阱是整數部分 7 時會超出範圍"
+      }
+    },
+    {
+      "id": "arithmetic_grade4_foundation_200",
+      "reviewStatus": "ok",
+      "topic": "arithmetic",
+      "subtopic": "compare_long_run_average_points_two_games",
+      "tags": [
+        "c:expectation",
+        "c:probability",
+        "m:enumeration"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade4",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "遊戲甲：轉一個平均分成 4 格的轉盤，4 格分別寫著 0 分、0 分、6 分、10 分，指針停在哪格就得幾分。遊戲乙：擲一顆骰子，擲出幾點就得幾分（1 到 6 分）。每個結果出現的機會都一樣。如果兩個遊戲都玩很多很多次，哪一個遊戲平均每次得到的分數比較多？",
+        "zh-Hans": "游戏甲：转一个平均分成 4 格的转盘，4 格分别写着 0 分、0 分、6 分、10 分，指针停在哪格就得几分。游戏乙：掷一颗骰子，掷出几点就得几分（1 到 6 分）。每个结果出现的机会都一样。如果两个游戏都玩很多很多次，哪一个游戏平均每次得到的分数比较多？",
+        "en": "Game A: spin a spinner split into 4 equal parts marked 0, 0, 6 and 10 points; you score the number where the pointer stops. Game B: roll a die and score the number rolled (1 to 6 points). Every outcome is equally likely. If each game is played very many times, which game gives more points per play on average?",
+        "ja": "ゲーム甲：4 つの同じ大きさに分かれたルーレットを回します。4 つのますには 0 点、0 点、6 点、10 点と書いてあり、針が止まったますの点がもらえます。ゲーム乙：さいころを 1 回ふり、出た目の数（1 から 6）の点がもらえます。どの結果も同じくらい起こります。どちらのゲームもとてもたくさん遊ぶと、1 回あたりの平均の点数が多いのはどちらですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 D：遊戲甲，因為甲平均每次約 4 分，比乙平均每次約 3.5 分多。",
+        "zh-Hans": "答案是 D：游戏甲，因为甲平均每次约 4 分，比乙平均每次约 3.5 分多。",
+        "en": "The answer is D: Game A, because A averages about 4 points per play, more than B's 3.5.",
+        "ja": "答えは D：ゲーム甲。甲は 1 回平均約 4 点で、乙の約 3.5 点より多いから。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "遊戲甲：轉 4 次的話，平均每格各出現 1 次，得 0 + 0 + 6 + 10 = 16 分，所以平均每次 16 ÷ 4 = 4 分。",
+          "遊戲乙：擲 6 次的話，平均每個點數各出現 1 次，得 1 + 2 + 3 + 4 + 5 + 6 = 21 分，所以平均每次 21 ÷ 6 = 3.5 分。",
+          "4 分比 3.5 分多，所以遊戲甲平均每次得分比較多。例如各玩 120 次，甲大約得 480 分，乙大約得 420 分。答案是 D。",
+          "A 錯：甲常常得 0 分，但偶爾得 10 分，平均起來反而比較多。B 錯：甲平均是 4 分，不是 2.5 分。C 錯：兩個遊戲的平均是 4 分和 3.5 分，不一樣。"
+        ],
+        "zh-Hans": [
+          "游戏甲：转 4 次的话，平均每格各出现 1 次，得 0 + 0 + 6 + 10 = 16 分，所以平均每次 16 ÷ 4 = 4 分。",
+          "游戏乙：掷 6 次的话，平均每个点数各出现 1 次，得 1 + 2 + 3 + 4 + 5 + 6 = 21 分，所以平均每次 21 ÷ 6 = 3.5 分。",
+          "4 分比 3.5 分多，所以游戏甲平均每次得分比较多。例如各玩 120 次，甲大约得 480 分，乙大约得 420 分。答案是 D。",
+          "A 错：甲常常得 0 分，但偶尔得 10 分，平均起来反而比较多。B 错：甲平均是 4 分，不是 2.5 分。C 错：两个游戏的平均是 4 分和 3.5 分，不一样。"
+        ],
+        "en": [
+          "Game A: in 4 spins each part comes up about once, scoring 0 + 0 + 6 + 10 = 16 points, so on average 16 ÷ 4 = 4 points per play.",
+          "Game B: in 6 rolls each face comes up about once, scoring 1 + 2 + 3 + 4 + 5 + 6 = 21 points, so on average 21 ÷ 6 = 3.5 points per play.",
+          "4 is more than 3.5, so Game A gives more per play on average. For example, in 120 plays each, A gives about 480 points and B about 420. The answer is D.",
+          "A is wrong: Game A often scores 0, but the occasional 10 makes its average higher. B is wrong: A averages 4, not 2.5. C is wrong: the averages are 4 and 3.5, which differ."
+        ],
+        "ja": [
+          "ゲーム甲：4 回回すと、平均して各ますが 1 回ずつ出て 0 + 0 + 6 + 10 = 16 点なので、1 回あたり 16 ÷ 4 = 4 点です。",
+          "ゲーム乙：6 回ふると、平均して各目が 1 回ずつ出て 1 + 2 + 3 + 4 + 5 + 6 = 21 点なので、1 回あたり 21 ÷ 6 = 3.5 点です。",
+          "4 点は 3.5 点より多いので、ゲーム甲のほうが 1 回あたりの平均が多いです。たとえば 120 回ずつ遊ぶと、甲は約 480 点、乙は約 420 点です。答えは D です。",
+          "A はまちがい：甲はよく 0 点になりますが、ときどき 10 点が出るので平均はかえって多くなります。B はまちがい：甲の平均は 4 点で 2.5 点ではありません。C はまちがい：平均は 4 点と 3.5 点で、同じではありません。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "multiple_choice",
+      "options": {
+        "A": {
+          "zh-Hant": "遊戲乙，因為擲骰子每次至少得 1 分，遊戲甲有一半的機會得 0 分。",
+          "zh-Hans": "游戏乙，因为掷骰子每次至少得 1 分，游戏甲有一半的机会得 0 分。",
+          "en": "Game B, because a die always gives at least 1 point while A scores 0 half the time.",
+          "ja": "ゲーム乙。さいころは毎回 1 点以上で、甲は半分の確率で 0 点だから。"
+        },
+        "B": {
+          "zh-Hant": "遊戲乙，因為乙平均每次約 3.5 分，甲平均每次只有約 2.5 分。",
+          "zh-Hans": "游戏乙，因为乙平均每次约 3.5 分，甲平均每次只有约 2.5 分。",
+          "en": "Game B, because B averages about 3.5 points per play and A only about 2.5.",
+          "ja": "ゲーム乙。乙は 1 回平均約 3.5 点、甲は約 2.5 点しかないから。"
+        },
+        "C": {
+          "zh-Hant": "兩個一樣多，因為兩個遊戲的最低分和最高分加起來都差不多。",
+          "zh-Hans": "两个一样多，因为两个游戏的最低分和最高分加起来都差不多。",
+          "en": "They are the same, because the lowest plus highest score is about equal in both.",
+          "ja": "同じ。どちらのゲームも最低点と最高点をたすとだいたい同じだから。"
+        },
+        "D": {
+          "zh-Hant": "遊戲甲，因為甲平均每次約 4 分，比乙平均每次約 3.5 分多。",
+          "zh-Hans": "游戏甲，因为甲平均每次约 4 分，比乙平均每次约 3.5 分多。",
+          "en": "Game A, because A averages about 4 points per play, more than B's 3.5.",
+          "ja": "ゲーム甲。甲は 1 回平均約 4 点で、乙の約 3.5 点より多いから。"
+        }
+      },
+      "correctAnswer": {
+        "type": "choice",
+        "value": "D"
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "arithmetic-grade4-foundation",
+        "notes": "長期平均＝所有等可能結果的平均：甲 16/4 = 4、乙 21/6 = 3.5。掃過 /轉盤.{0,60}(一半|二分之一)|指針.{0,40}0 分/（0 題）、/平均每次.{0,20}分/（期望類 1 題）；最接近 arithmetic_grade5_foundation 的 expected_spins_from_ratio，差異：那題由比例求期望轉幾次；本題比較兩種遊戲的長期平均得分，破除「常得 0 分就比較差」的直覺"
+      }
+    },
+    {
+      "id": "arithmetic_grade4_foundation_201",
+      "reviewStatus": "ok",
+      "topic": "arithmetic",
+      "subtopic": "two_machines_rates_common_time_block",
+      "tags": [
+        "c:work_rate",
+        "c:factor_multiple",
+        "m:direct"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade4",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "甲機器每 2 分鐘做出 3 個玩具，乙機器每 3 分鐘做出 5 個玩具。兩台機器同時開始一起做，速度都不變。要做好 76 個玩具，需要幾分鐘？",
+        "zh-Hans": "甲机器每 2 分钟做出 3 个玩具，乙机器每 3 分钟做出 5 个玩具。两台机器同时开始一起做，速度都不变。要做好 76 个玩具，需要几分钟？",
+        "en": "Machine A makes 3 toys every 2 minutes and machine B makes 5 toys every 3 minutes. Both start together and keep the same pace. How many minutes does it take to make 76 toys?",
+        "ja": "機械甲は 2 分ごとにおもちゃを 3 個、機械乙は 3 分ごとに 5 個作ります。2 台は同時に作り始め、速さは変わりません。おもちゃを 76 個作るのに何分かかりますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 24。",
+        "zh-Hans": "答案是 24。",
+        "en": "The answer is 24.",
+        "ja": "答えは 24 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "甲每 2 分鐘一批、乙每 3 分鐘一批，取 2 和 3 的最小公倍數 6 分鐘來看：6 分鐘裡甲做 3 批，共 3 × 3 = 9 個；乙做 2 批，共 2 × 5 = 10 個。",
+          "兩台合起來每 6 分鐘做 9 + 10 = 19 個。",
+          "76 ÷ 19 = 4，剛好是 4 個 6 分鐘，所以要 4 × 6 = 24 分鐘，而且第 24 分鐘時兩台都剛好做完一批。",
+          "檢查：24 分鐘甲做 24 ÷ 2 × 3 = 36 個，乙做 24 ÷ 3 × 5 = 40 個，36 + 40 = 76。答案是 24。"
+        ],
+        "zh-Hans": [
+          "甲每 2 分钟一批、乙每 3 分钟一批，取 2 和 3 的最小公倍数 6 分钟来看：6 分钟里甲做 3 批，共 3 × 3 = 9 个；乙做 2 批，共 2 × 5 = 10 个。",
+          "两台合起来每 6 分钟做 9 + 10 = 19 个。",
+          "76 ÷ 19 = 4，刚好是 4 个 6 分钟，所以要 4 × 6 = 24 分钟，而且第 24 分钟时两台都刚好做完一批。",
+          "检查：24 分钟甲做 24 ÷ 2 × 3 = 36 个，乙做 24 ÷ 3 × 5 = 40 个，36 + 40 = 76。答案是 24。"
+        ],
+        "en": [
+          "A finishes a batch every 2 minutes and B every 3, so look at 6 minutes (the least common multiple of 2 and 3): in 6 minutes A makes 3 batches, 3 × 3 = 9 toys, and B makes 2 batches, 2 × 5 = 10 toys.",
+          "Together they make 9 + 10 = 19 toys every 6 minutes.",
+          "76 ÷ 19 = 4, exactly four 6-minute blocks, so it takes 4 × 6 = 24 minutes, and at minute 24 both machines have just finished a batch.",
+          "Check: in 24 minutes A makes 24 ÷ 2 × 3 = 36 and B makes 24 ÷ 3 × 5 = 40, and 36 + 40 = 76. The answer is 24."
+        ],
+        "ja": [
+          "甲は 2 分ごと、乙は 3 分ごとに 1 回分できるので、2 と 3 の最小公倍数の 6 分で考えます。6 分で甲は 3 回分の 3 × 3 = 9 個、乙は 2 回分の 2 × 5 = 10 個を作ります。",
+          "2 台合わせて 6 分ごとに 9 + 10 = 19 個です。",
+          "76 ÷ 19 = 4 で、ちょうど 6 分が 4 回分なので 4 × 6 = 24 分かかり、24 分のとき 2 台ともちょうど 1 回分を作り終えています。",
+          "たしかめ：24 分で甲は 24 ÷ 2 × 3 = 36 個、乙は 24 ÷ 3 × 5 = 40 個、36 + 40 = 76 です。答えは 24 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "24"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "arithmetic-grade4-foundation",
+        "notes": "兩台機器的批次週期不同，取最小公倍數 6 分鐘為一個區塊（共 19 個），76 = 4 × 19，需 24 分鐘。掃過 /每 ?\\d+ ?分鐘.{0,10}(做|生產).{0,30}每 ?\\d+ ?分鐘/（0 題）、/機器.{0,30}玩具/（1 題，單機休息）；最接近 arithmetic_grade3_foundation_152（單台機器做 5 分鐘 4 個、做 20 休 5），差異：那題是一台機器加休息時段；本題是兩台不同週期機器合作，要用公倍數區塊合併效率"
+      }
     }
   ]
 }

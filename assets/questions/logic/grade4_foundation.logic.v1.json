@@ -8541,6 +8541,529 @@
         "reference": "logic-grade4-foundation",
         "notes": "6 的鄰居和只能是 6，排除 {2,4} 後由 6→5→4→3 逐一被迫，唯一排法是 1 到 6 依序，1 的對面是 4。掃過 /圍成一圈|排成一個圓/（23 題）、/鄰居.{0,30}(和|加起來)/（3 題）、/兩(旁|邊).{0,10}(的數)?.{0,10}(和|加起來).{0,10}倍數/（0 題）；最接近 logic_grade5_foundation_093，差異：那題同樣是 1–6 圍一圈，但條件是相鄰兩數和為質數（用奇偶交錯）；本題條件是每個數整除兩鄰之和，從 6 的鄰居和只能是 6 出發逐步被迫出唯一排法"
       }
+    },
+    {
+      "id": "logic_grade4_foundation_107",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "triangle_vertices_midpoints_equal_side_sums",
+      "tags": [
+        "c:add_sub",
+        "c:logic_deduction",
+        "m:enumeration"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade4",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一個三角形有 3 個頂點和 3 條邊的中點，一共 6 個位置。要把 1、2、3、4、5、6 這六個數各填進一個位置，而且每一條邊上的 3 個數（兩個頂點加上這條邊的中點）加起來都一樣大，這個和叫做「邊和」。所有填法之中，邊和一共可能是幾種不同的數？",
+        "zh-Hans": "一个三角形有 3 个顶点和 3 条边的中点，一共 6 个位置。要把 1、2、3、4、5、6 这六个数各填进一个位置，而且每一条边上的 3 个数（两个顶点加上这条边的中点）加起来都一样大，这个和叫做「边和」。所有填法之中，边和一共可能是几种不同的数？",
+        "en": "A triangle has 3 vertices and 3 midpoints of its sides: 6 places in all. The numbers 1, 2, 3, 4, 5, 6 are placed one in each place so that the 3 numbers on each side (its two vertices and its midpoint) have the same sum, called the side sum. Over all such arrangements, how many different values can the side sum take?",
+        "ja": "三角形の 3 つの頂点と 3 つの辺の真ん中の点、合わせて 6 か所に、1、2、3、4、5、6 を 1 つずつ書き入れます。どの辺の上の 3 つの数（2 つの頂点とその辺の真ん中の点）の和も等しくなるようにし、その和を「辺の和」とよびます。すべての書き入れ方の中で、辺の和は何通りの数になりえますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 4。",
+        "zh-Hans": "答案是 4。",
+        "en": "The answer is 4.",
+        "ja": "答えは 4 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "把三條邊的邊和加起來是 3 × 邊和。每個中點只在一條邊上，算一次；每個頂點在兩條邊上，算兩次。所以 3 × 邊和 = (1 + 2 + 3 + 4 + 5 + 6) + 頂點三數的和 = 21 + 頂點和。",
+          "頂點和最小是 1 + 2 + 3 = 6，最大是 4 + 5 + 6 = 15；而且 21 + 頂點和要能被 3 整除，頂點和只能是 6、9、12、15，邊和分別是 9、10、11、12。",
+          "四種都做得到：頂點 1、2、3，中點填 6、4、5，邊和 9；頂點 1、3、5，中點填 6、2、4，邊和 10；頂點 2、4、6，中點填 5、1、3，邊和 11；頂點 4、5、6，中點填 3、1、2，邊和 12。（中點依序放在 1–2、2–3、3–1 這種相鄰兩頂點之間。）",
+          "所以邊和可能是 9、10、11、12，一共 4 種。"
+        ],
+        "zh-Hans": [
+          "把三条边的边和加起来是 3 × 边和。每个中点只在一条边上，算一次；每个顶点在两条边上，算两次。所以 3 × 边和 = (1 + 2 + 3 + 4 + 5 + 6) + 顶点三数的和 = 21 + 顶点和。",
+          "顶点和最小是 1 + 2 + 3 = 6，最大是 4 + 5 + 6 = 15；而且 21 + 顶点和要能被 3 整除，顶点和只能是 6、9、12、15，边和分别是 9、10、11、12。",
+          "四种都做得到：顶点 1、2、3，中点填 6、4、5，边和 9；顶点 1、3、5，中点填 6、2、4，边和 10；顶点 2、4、6，中点填 5、1、3，边和 11；顶点 4、5、6，中点填 3、1、2，边和 12。（中点依序放在 1–2、2–3、3–1 这种相邻两顶点之间。）",
+          "所以边和可能是 9、10、11、12，一共 4 种。"
+        ],
+        "en": [
+          "Adding the three side sums gives 3 × side sum. Each midpoint lies on one side and is counted once; each vertex lies on two sides and is counted twice. So 3 × side sum = (1 + 2 + 3 + 4 + 5 + 6) + vertex total = 21 + vertex total.",
+          "The vertex total is at least 1 + 2 + 3 = 6 and at most 4 + 5 + 6 = 15, and 21 + vertex total must be divisible by 3, so the vertex total is 6, 9, 12 or 15, giving side sums 9, 10, 11, 12.",
+          "All four occur: vertices 1, 2, 3 with midpoints 6, 4, 5 give 9; vertices 1, 3, 5 with midpoints 6, 2, 4 give 10; vertices 2, 4, 6 with midpoints 5, 1, 3 give 11; vertices 4, 5, 6 with midpoints 3, 1, 2 give 12. (The midpoints are listed for sides 1st–2nd, 2nd–3rd, 3rd–1st vertex.)",
+          "So the side sum can be 9, 10, 11 or 12: 4 different values."
+        ],
+        "ja": [
+          "3 つの辺の和をたすと 3 × 辺の和です。真ん中の点は 1 つの辺だけにあるので 1 回、頂点は 2 つの辺にあるので 2 回数えます。よって 3 × 辺の和 = (1 + 2 + 3 + 4 + 5 + 6) + 頂点の 3 数の和 = 21 + 頂点の和 です。",
+          "頂点の和は最小 1 + 2 + 3 = 6、最大 4 + 5 + 6 = 15 で、21 + 頂点の和は 3 でわり切れなければならないので、頂点の和は 6、9、12、15、辺の和はそれぞれ 9、10、11、12 です。",
+          "4 つとも作れます。頂点 1、2、3 で真ん中 6、4、5 なら 9、頂点 1、3、5 で真ん中 6、2、4 なら 10、頂点 2、4、6 で真ん中 5、1、3 なら 11、頂点 4、5、6 で真ん中 3、1、2 なら 12 です。（真ん中の数は 1 番目–2 番目、2 番目–3 番目、3 番目–1 番目の頂点の間の順です。）",
+          "よって辺の和は 9、10、11、12 の 4 通りです。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "4"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade4-foundation",
+        "notes": "三邊和相加時頂點重複一次：3S = 21 + 頂點和，頂點和 ∈ {6,9,12,15}，S ∈ {9,10,11,12} 皆可構造。掃過 /三角形.{0,60}(1、2、3、4、5、6|1 到 6)/（0 題）、/每(一)?邊.{0,20}(和|加起來).{0,10}(相等|一樣)/（0 題）；最接近 logic_grade5_foundation 的 magic_v_vertex_parity（V 形數陣），差異：那題是兩臂共用一個頂點；本題三角形三個頂點各被兩邊共用，用重複計數求所有可能邊和"
+      }
+    },
+    {
+      "id": "logic_grade4_foundation_108",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "doubling_pours_to_equalize_three_cups",
+      "tags": [
+        "c:logic_deduction",
+        "m:enumeration",
+        "m:extremal"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade4",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "桌上有甲、乙、丙三個杯子，分別裝了 11 毫升、7 毫升、6 毫升的水。每一步可以從一個杯子倒水到另一個杯子，但倒進去的水量必須剛好等於那個杯子原本有的水量（也就是讓那個杯子的水變成 2 倍），倒出來的杯子要有足夠的水。最少要幾步，才能讓三個杯子的水一樣多？",
+        "zh-Hans": "桌上有甲、乙、丙三个杯子，分别装了 11 毫升、7 毫升、6 毫升的水。每一步可以从一个杯子倒水到另一个杯子，但倒进去的水量必须刚好等于那个杯子原本有的水量（也就是让那个杯子的水变成 2 倍），倒出来的杯子要有足够的水。最少要几步，才能让三个杯子的水一样多？",
+        "en": "Three cups A, B, C hold 11 ml, 7 ml and 6 ml of water. In each step you pour from one cup into another, and the amount poured must equal what the receiving cup already holds (so that cup doubles); the pouring cup must have enough water. What is the smallest number of steps to make all three cups hold the same amount?",
+        "ja": "テーブルに甲、乙、丙の 3 つのコップがあり、それぞれ 11 mL、7 mL、6 mL の水が入っています。1 回の操作では、あるコップから別のコップへ水を注ぎますが、注ぐ量は受け取るコップにもともと入っていた量とちょうど同じ（つまり受け取るコップの水が 2 倍になる）でなければならず、注ぐ側には足りるだけの水が必要です。3 つのコップの水を同じ量にするには、最も少なくて何回の操作が必要ですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 3。",
+        "zh-Hans": "答案是 3。",
+        "en": "The answer is 3.",
+        "ja": "答えは 3 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "水的總量一直是 11 + 7 + 6 = 24 毫升，一樣多時每杯是 24 ÷ 3 = 8 毫升。下面用（甲, 乙, 丙）記錄。",
+          "1 步能到的情形：甲倒給乙 (4, 14, 6)、甲倒給丙 (5, 7, 12)、乙倒給丙 (11, 1, 12)，都不是 (8, 8, 8)。再從這 3 種各走 1 步，2 步能到的是 (8, 10, 6)、(4, 8, 12)、(8, 14, 2)、(10, 2, 12)、(10, 7, 7)、(5, 14, 5)、(22, 1, 1)、(11, 2, 11)，也都不是。所以至少要 3 步。",
+          "3 步做得到：甲倒 7 毫升給乙，得 (4, 14, 6)；乙倒 6 毫升給丙，得 (4, 8, 12)；丙倒 4 毫升給甲，得 (8, 8, 8)。",
+          "最少要 3 步。"
+        ],
+        "zh-Hans": [
+          "水的总量一直是 11 + 7 + 6 = 24 毫升，一样多时每杯是 24 ÷ 3 = 8 毫升。下面用（甲, 乙, 丙）记录。",
+          "1 步能到的情形：甲倒给乙 (4, 14, 6)、甲倒给丙 (5, 7, 12)、乙倒给丙 (11, 1, 12)，都不是 (8, 8, 8)。再从这 3 种各走 1 步，2 步能到的是 (8, 10, 6)、(4, 8, 12)、(8, 14, 2)、(10, 2, 12)、(10, 7, 7)、(5, 14, 5)、(22, 1, 1)、(11, 2, 11)，也都不是。所以至少要 3 步。",
+          "3 步做得到：甲倒 7 毫升给乙，得 (4, 14, 6)；乙倒 6 毫升给丙，得 (4, 8, 12)；丙倒 4 毫升给甲，得 (8, 8, 8)。",
+          "最少要 3 步。"
+        ],
+        "en": [
+          "The total is always 11 + 7 + 6 = 24 ml, so equal cups hold 24 ÷ 3 = 8 ml each. Record the cups as (A, B, C).",
+          "After 1 step: A into B gives (4, 14, 6), A into C gives (5, 7, 12), B into C gives (11, 1, 12); none is (8, 8, 8). One more step from these gives (8, 10, 6), (4, 8, 12), (8, 14, 2), (10, 2, 12), (10, 7, 7), (5, 14, 5), (22, 1, 1), (11, 2, 11); none works either. So at least 3 steps are needed.",
+          "3 steps work: A pours 7 ml into B, giving (4, 14, 6); B pours 6 ml into C, giving (4, 8, 12); C pours 4 ml into A, giving (8, 8, 8).",
+          "The smallest number of steps is 3."
+        ],
+        "ja": [
+          "水の合計はいつも 11 + 7 + 6 = 24 mL なので、同じになるとき 1 つは 24 ÷ 3 = 8 mL です。以下（甲, 乙, 丙）で表します。",
+          "1 回でなれるのは、甲から乙 (4, 14, 6)、甲から丙 (5, 7, 12)、乙から丙 (11, 1, 12) で、どれも (8, 8, 8) ではありません。そこからもう 1 回でなれるのは (8, 10, 6)、(4, 8, 12)、(8, 14, 2)、(10, 2, 12)、(10, 7, 7)、(5, 14, 5)、(22, 1, 1)、(11, 2, 11) で、これもちがいます。だから少なくとも 3 回必要です。",
+          "3 回でできます。甲から乙へ 7 mL 注いで (4, 14, 6)、乙から丙へ 6 mL 注いで (4, 8, 12)、丙から甲へ 4 mL 注いで (8, 8, 8) です。",
+          "最も少なくて 3 回です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "3"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade4-foundation",
+        "notes": "「倒入量＝對方原有量」的加倍倒水；總量 24 每杯 8，列出 1 步與 2 步的所有情形皆不成，3 步可達。已 BFS 驗證。掃過 /倒入.{0,20}(一樣多|加倍|2 倍)|(加倍|2 倍).{0,20}倒/（0 題）、/三個杯子.{0,40}一樣多/（0 題）；最接近 logic_grade9_foundation_006（3、5 公升壺量 4 公升），差異：那題是裝滿倒空的量水；本題倒水量受「讓對方加倍」限制，要在三杯之間搜尋最少步數"
+      }
+    },
+    {
+      "id": "logic_grade4_foundation_109",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "cut_one_sheet_into_four_possible_counts",
+      "tags": [
+        "c:modular",
+        "m:invariant"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade4",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "小安手上有 1 張紙。每一次，他從手上的紙裡挑出 1 張，把它剪成 4 張小紙（其他的紙不動）。他這樣剪了好多次以後，數一數手上一共有幾張紙。下面哪一個數，有可能是他數到的張數？",
+        "zh-Hans": "小安手上有 1 张纸。每一次，他从手上的纸里挑出 1 张，把它剪成 4 张小纸（其他的纸不动）。他这样剪了好多次以后，数一数手上一共有几张纸。下面哪一个数，有可能是他数到的张数？",
+        "en": "An has 1 sheet of paper. Each time, he picks 1 of his sheets and cuts it into 4 smaller sheets (the others are left alone). After doing this many times, he counts how many sheets he has. Which of these could be the number he counts?",
+        "ja": "アンさんは紙を 1 枚持っています。毎回、持っている紙から 1 枚を選んで 4 枚の小さな紙に切ります（ほかの紙はそのまま）。これを何回もくり返したあと、紙が全部で何枚あるか数えました。数えた枚数としてありえるのはどれですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 B：2026 張，因為它除以 3 剛好餘 1",
+        "zh-Hans": "答案是 B：2026 张，因为它除以 3 刚好余 1",
+        "en": "The answer is B: 2026 sheets, since it leaves remainder 1 when divided by 3",
+        "ja": "答えは B：2026 枚。3 でわるとちょうど 1 あまるから"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "每剪一次，拿掉 1 張、多出 4 張，張數一共增加 4 − 1 = 3 張。",
+          "一開始是 1 張，剪了幾次以後張數是 1 + 3 + 3 + ⋯，也就是「1 加上 3 的倍數」：除以 3 一定餘 1。",
+          "看選項：2026 − 1 = 2025 = 3 × 675，所以剪 675 次就剛好有 2026 張，答案是 B。",
+          "A 錯：2027 除以 3 餘 2。C 錯：2025 是 3 的倍數，除以 3 餘 0。D 錯：2024 除以 3 餘 2。這三個都不是「除以 3 餘 1」，永遠剪不出來。"
+        ],
+        "zh-Hans": [
+          "每剪一次，拿掉 1 张、多出 4 张，张数一共增加 4 − 1 = 3 张。",
+          "一开始是 1 张，剪了几次以后张数是 1 + 3 + 3 + ⋯，也就是「1 加上 3 的倍数」：除以 3 一定余 1。",
+          "看选项：2026 − 1 = 2025 = 3 × 675，所以剪 675 次就刚好有 2026 张，答案是 B。",
+          "A 错：2027 除以 3 余 2。C 错：2025 是 3 的倍数，除以 3 余 0。D 错：2024 除以 3 余 2。这三个都不是「除以 3 余 1」，永远剪不出来。"
+        ],
+        "en": [
+          "Each cut removes 1 sheet and adds 4, so the count goes up by 4 − 1 = 3.",
+          "Starting from 1 sheet, after some cuts the count is 1 + 3 + 3 + ⋯, that is 1 plus a multiple of 3: it always leaves remainder 1 when divided by 3.",
+          "Check the choices: 2026 − 1 = 2025 = 3 × 675, so after 675 cuts there are exactly 2026 sheets. The answer is B.",
+          "A is wrong: 2027 leaves remainder 2 when divided by 3. C is wrong: 2025 is a multiple of 3, remainder 0. D is wrong: 2024 leaves remainder 2. None of these leaves remainder 1, so they can never occur."
+        ],
+        "ja": [
+          "1 回切るごとに、1 枚がなくなって 4 枚ふえるので、枚数は 4 − 1 = 3 枚ふえます。",
+          "はじめは 1 枚なので、何回か切ったあとの枚数は 1 + 3 + 3 + ⋯、つまり「1 に 3 の倍数をたした数」で、3 でわると必ず 1 あまります。",
+          "選たくしを見ると、2026 − 1 = 2025 = 3 × 675 なので、675 回切るとちょうど 2026 枚になります。答えは B です。",
+          "A はまちがい：2027 は 3 でわると 2 あまる。C はまちがい：2025 は 3 の倍数で、あまり 0。D はまちがい：2024 は 3 でわると 2 あまる。どれも「3 でわると 1 あまる」数ではないので、決してできません。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "multiple_choice",
+      "options": {
+        "A": {
+          "zh-Hant": "2027 張，因為每次剪都會多出 3 張",
+          "zh-Hans": "2027 张，因为每次剪都会多出 3 张",
+          "en": "2027 sheets, since each cut adds 3 sheets",
+          "ja": "2027 枚。1 回切るごとに 3 枚ふえるから"
+        },
+        "B": {
+          "zh-Hant": "2026 張，因為它除以 3 剛好餘 1",
+          "zh-Hans": "2026 张，因为它除以 3 刚好余 1",
+          "en": "2026 sheets, since it leaves remainder 1 when divided by 3",
+          "ja": "2026 枚。3 でわるとちょうど 1 あまるから"
+        },
+        "C": {
+          "zh-Hant": "2025 張，因為它剛好是 3 的倍數",
+          "zh-Hans": "2025 张，因为它刚好是 3 的倍数",
+          "en": "2025 sheets, since it is exactly a multiple of 3",
+          "ja": "2025 枚。ちょうど 3 の倍数だから"
+        },
+        "D": {
+          "zh-Hant": "2024 張，因為它剛好是 4 的倍數",
+          "zh-Hans": "2024 张，因为它刚好是 4 的倍数",
+          "en": "2024 sheets, since it is exactly a multiple of 4",
+          "ja": "2024 枚。ちょうど 4 の倍数だから"
+        }
+      },
+      "correctAnswer": {
+        "type": "choice",
+        "value": "B"
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade4-foundation",
+        "notes": "每剪一次張數加 3，張數恆為 3k + 1，只有 2026 符合。掃過 /剪成.{0,4}(塊|張)/（11 題，皆幾何剪法）、/每(一)?次.{0,20}剪成.{0,10}(張|塊).{0,40}(可能|有沒有)/（0 題）；最接近 logic_grade3_foundation_044（7 個杯子每次翻 2 個），差異：那題是奇偶不變量判不可能；本題是「除以 3 的餘數」不變，並要從四個大數中挑出可能值"
+      }
+    },
+    {
+      "id": "logic_grade4_foundation_110",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "shortest_closed_route_three_houses_not_greedy",
+      "tags": [
+        "c:graph_theory",
+        "m:enumeration",
+        "m:extremal"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade4",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "郵差要從郵局 P 出發，把信送到 A、B、C 三戶人家，送完再回到郵局。各地點之間的路程是：P 到 A 2 公里、P 到 B 4 公里、P 到 C 7 公里、A 到 B 3 公里、A 到 C 4 公里、B 到 C 6 公里（來回同樣遠）。郵差每次都走兩地之間的這條路。他最少要走幾公里？",
+        "zh-Hans": "邮差要从邮局 P 出发，把信送到 A、B、C 三户人家，送完再回到邮局。各地点之间的路程是：P 到 A 2 千米、P 到 B 4 千米、P 到 C 7 千米、A 到 B 3 千米、A 到 C 4 千米、B 到 C 6 千米（来回同样远）。邮差每次都走两地之间的这条路。他最少要走几千米？",
+        "en": "A postman starts at post office P, delivers letters to houses A, B and C, and then returns to the post office. The distances are: P to A 2 km, P to B 4 km, P to C 7 km, A to B 3 km, A to C 4 km, B to C 6 km (the same both ways). He always uses these direct roads between places. What is the least distance he must walk, in km?",
+        "ja": "郵便屋さんが郵便局 P を出発して、A、B、C の 3 けんの家に手紙を配り、郵便局にもどります。道のりは、P から A 2 km、P から B 4 km、P から C 7 km、A から B 3 km、A から C 4 km、B から C 6 km です（行きも帰りも同じ）。2 か所の間はいつもこの道を通ります。最も短くて何 km 歩けばよいですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 16。",
+        "zh-Hans": "答案是 16。",
+        "en": "The answer is 16.",
+        "ja": "答えは 16 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "送信的順序共有 3 × 2 × 1 = 6 種，但一條路線倒過來走路程一樣（例如 P→A→B→C→P 和 P→C→B→A→P），所以只要比較 3 種圈：",
+          "P→A→B→C→P：2 + 3 + 6 + 7 = 18 公里。P→A→C→B→P：2 + 4 + 6 + 4 = 16 公里。P→B→A→C→P：4 + 3 + 4 + 7 = 18 公里。",
+          "最短是 P→A→C→B→P（或倒過來走），共 16 公里。",
+          "注意「每次都先去最近的地方」行不通：P 最近是 A（2），A 再去最近的 B（3），B 只剩 C（6），C 回 P（7），共 18 公里，比 16 公里多。答案是 16。"
+        ],
+        "zh-Hans": [
+          "送信的顺序共有 3 × 2 × 1 = 6 种，但一条路线倒过来走路程一样（例如 P→A→B→C→P 和 P→C→B→A→P），所以只要比较 3 种圈：",
+          "P→A→B→C→P：2 + 3 + 6 + 7 = 18 千米。P→A→C→B→P：2 + 4 + 6 + 4 = 16 千米。P→B→A→C→P：4 + 3 + 4 + 7 = 18 千米。",
+          "最短是 P→A→C→B→P（或倒过来走），共 16 千米。",
+          "注意「每次都先去最近的地方」行不通：P 最近是 A（2），A 再去最近的 B（3），B 只剩 C（6），C 回 P（7），共 18 千米，比 16 千米多。答案是 16。"
+        ],
+        "en": [
+          "There are 3 × 2 × 1 = 6 delivery orders, but a route walked backwards has the same length (for example P→A→B→C→P and P→C→B→A→P), so only 3 loops need comparing:",
+          "P→A→B→C→P: 2 + 3 + 6 + 7 = 18 km. P→A→C→B→P: 2 + 4 + 6 + 4 = 16 km. P→B→A→C→P: 4 + 3 + 4 + 7 = 18 km.",
+          "The shortest is P→A→C→B→P (or the reverse), 16 km.",
+          "Note that \"always go to the nearest place next\" fails: from P the nearest is A (2), from A the nearest is B (3), then only C (6), then back to P (7), 18 km in all, more than 16. The answer is 16."
+        ],
+        "ja": [
+          "配る順番は 3 × 2 × 1 = 6 通りですが、同じ道を逆に回っても道のりは同じ（たとえば P→A→B→C→P と P→C→B→A→P）なので、3 通りの回り方を比べれば十分です。",
+          "P→A→B→C→P：2 + 3 + 6 + 7 = 18 km。P→A→C→B→P：2 + 4 + 6 + 4 = 16 km。P→B→A→C→P：4 + 3 + 4 + 7 = 18 km。",
+          "いちばん短いのは P→A→C→B→P（または逆回り）で 16 km です。",
+          "「いつもいちばん近い所へ行く」方法はうまくいきません。P から近いのは A（2）、A から近いのは B（3）、残りは C（6）、C から P（7）で 18 km になり、16 km より長いです。答えは 16 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "16"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade4-foundation",
+        "notes": "4 個地點的回路只有 3 種，逐一計算得 16；「每次走最近」的貪心法得 18 是陷阱。掃過 /(郵差|送貨|拜訪|繞一圈).{0,60}(最短|最少|最小)/（2 題）、/送.{0,10}(信|貨).{0,40}回到/（1 題）；最接近 logic_grade6_foundation_077（郵差走遍 K4 每條路），差異：那題要走遍每條「路」（中國郵差問題）；本題要拜訪每個「地點」一次（旅行推銷員），比較 3 種回路並破除貪心法"
+      }
+    },
+    {
+      "id": "logic_grade4_foundation_111",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "trains_met_en_route_hourly_departures",
+      "tags": [
+        "c:rate_speed",
+        "m:enumeration"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade4",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "甲站和乙站之間有一條鐵路。每天從早上 6 點到晚上 10 點，每個整點時，甲站和乙站都同時各開出一班火車開往對方的車站，每班火車都要開 5 小時才到站，車速都一樣而且固定。中午 12 點從甲站開出的那一班火車，在路上（不算在車站裡遇到的）會和從乙站開出的火車相遇幾次？",
+        "zh-Hans": "甲站和乙站之间有一条铁路。每天从早上 6 点到晚上 10 点，每个整点时，甲站和乙站都同时各开出一班火车开往对方的车站，每班火车都要开 5 小时才到站，车速都一样而且固定。中午 12 点从甲站开出的那一班火车，在路上（不算在车站里遇到的）会和从乙站开出的火车相遇几次？",
+        "en": "A railway joins Station A and Station B. Every day, on every hour from 6 a.m. to 10 p.m., one train leaves A for B and one train leaves B for A at the same moment. Every trip takes 5 hours, all at the same steady speed. The train that leaves A at 12 noon meets how many trains from B on the way (meetings inside a station do not count)?",
+        "ja": "甲駅と乙駅の間に線路があります。毎日、朝 6 時から夜 10 時まで、毎正時に甲駅と乙駅から同時に 1 本ずつ列車が相手の駅に向けて出発し、どの列車も一定の同じ速さで 5 時間かかって着きます。昼の 12 時に甲駅を出た列車は、途中で（駅の中で出会うのは数えない）乙駅を出た列車と何回すれちがいますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 9。",
+        "zh-Hans": "答案是 9。",
+        "en": "The answer is 9.",
+        "ja": "答えは 9 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "這班火車 12 點從甲站出發、17 點到乙站，路上的時間是 12 點到 17 點之間。從乙站開出的火車，只要在這段時間裡也在路上、而且還沒到站，就一定會和它迎面相遇。",
+          "乙站 7 點開出的火車，12 點剛好到甲站，兩車在甲站碰面，不算。乙站 17 點開出的火車，剛好在我們這班到乙站時才出發，也是在車站碰面，不算。",
+          "乙站 8 點、9 點、⋯、16 點開出的火車，在 12 點到 17 點之間一定有一段時間和我們這班同時在路上，而且方向相反，會在路上相遇。",
+          "8 點到 16 點一共有 16 − 8 + 1 = 9 班，所以在路上相遇 9 次。"
+        ],
+        "zh-Hans": [
+          "这班火车 12 点从甲站出发、17 点到乙站，路上的时间是 12 点到 17 点之间。从乙站开出的火车，只要在这段时间里也在路上、而且还没到站，就一定会和它迎面相遇。",
+          "乙站 7 点开出的火车，12 点刚好到甲站，两车在甲站碰面，不算。乙站 17 点开出的火车，刚好在我们这班到乙站时才出发，也是在车站碰面，不算。",
+          "乙站 8 点、9 点、⋯、16 点开出的火车，在 12 点到 17 点之间一定有一段时间和我们这班同时在路上，而且方向相反，会在路上相遇。",
+          "8 点到 16 点一共有 16 − 8 + 1 = 9 班，所以在路上相遇 9 次。"
+        ],
+        "en": [
+          "Our train leaves A at 12 and reaches B at 17 (5 p.m.), so it is on the way from 12 to 17. Any train from B that is also on the way during this time will meet it head-on.",
+          "The train leaving B at 7 reaches A exactly at 12, so they meet in Station A: not counted. The train leaving B at 17 starts just as ours arrives, also a meeting in a station: not counted.",
+          "The trains leaving B at 8, 9, ⋯, 16 are each on the way at the same time as ours for a while, going the opposite way, so each meets ours on the way.",
+          "From 8 to 16 there are 16 − 8 + 1 = 9 trains, so there are 9 meetings on the way."
+        ],
+        "ja": [
+          "この列車は 12 時に甲駅を出て 17 時に乙駅に着くので、途中にいるのは 12 時から 17 時の間です。乙駅を出た列車がこの間に線路上にいれば、必ず向かい合ってすれちがいます。",
+          "乙駅を 7 時に出た列車はちょうど 12 時に甲駅に着くので、甲駅で出会い、数えません。乙駅を 17 時に出る列車は、こちらが乙駅に着いたときに出発するので、これも駅で出会い、数えません。",
+          "乙駅を 8 時、9 時、⋯、16 時に出た列車は、12 時から 17 時の間にこちらと同時に線路上にいる時間が必ずあり、向きが反対なので途中ですれちがいます。",
+          "8 時から 16 時までは 16 − 8 + 1 = 9 本なので、途中で 9 回すれちがいます。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "9"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade4-foundation",
+        "notes": "對向列車只要與本班在 12–17 點同時在路上就相遇；7 點與 17 點班在站內碰面不算，8–16 點共 9 班。掃過 /每(個)?小時.{0,20}(一班|發車|開出)|整點.{0,20}(發車|開出)/（1 題）、/迎面.{0,10}(開來|而來)|對面開來/（0 題）；最接近 logic_grade6_foundation 的 passenger_sees_oncoming_train_pass，差異：那題是乘客看對向車經過的時間長度；本題是定時發車班表下的相遇次數計數，關鍵在端點兩班於站內相遇不算"
+      }
+    },
+    {
+      "id": "logic_grade4_foundation_112",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "one_weighing_find_fake_coin_bag",
+      "tags": [
+        "c:logic_deduction",
+        "c:mul_div",
+        "m:bijection"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade4",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "有 10 袋硬幣，袋子編號 1 到 10，每袋都有很多枚。其中剛好有 1 袋全部是假幣，每枚重 9 公克；其他 9 袋都是真幣，每枚重 10 公克。小安從第 1 袋拿 1 枚、第 2 袋拿 2 枚、第 3 袋拿 3 枚……第 10 袋拿 10 枚，把拿出來的硬幣全部放上電子秤一起秤，秤出來是 543 公克。假幣是第幾袋？",
+        "zh-Hans": "有 10 袋硬币，袋子编号 1 到 10，每袋都有很多枚。其中刚好有 1 袋全部是假币，每枚重 9 克；其他 9 袋都是真币，每枚重 10 克。小安从第 1 袋拿 1 枚、第 2 袋拿 2 枚、第 3 袋拿 3 枚……第 10 袋拿 10 枚，把拿出来的硬币全部放上电子秤一起称，称出来是 543 克。假币是第几袋？",
+        "en": "There are 10 bags of coins numbered 1 to 10, each with many coins. Exactly 1 bag is all fake coins of 9 g each; the other 9 bags are all real coins of 10 g each. An takes 1 coin from bag 1, 2 coins from bag 2, 3 from bag 3, …, 10 from bag 10, and weighs all the coins he took together on a scale: 543 g. Which bag holds the fake coins?",
+        "ja": "1 から 10 の番号がついた硬貨のふくろが 10 ふくろあり、どれにも硬貨がたくさん入っています。そのうちちょうど 1 ふくろはすべてにせ物で 1 枚 9 グラム、ほかの 9 ふくろは本物で 1 枚 10 グラムです。アンさんは 1 番から 1 枚、2 番から 2 枚、3 番から 3 枚……10 番から 10 枚取り出し、取り出した硬貨を全部いっしょにはかりにのせると 543 グラムでした。にせ物は何番のふくろですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 7。",
+        "zh-Hans": "答案是 7。",
+        "en": "The answer is 7.",
+        "ja": "答えは 7 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "拿出來的硬幣一共有 1 + 2 + 3 + ⋯ + 10 = 55 枚。",
+          "如果全部都是真幣，應該重 55 × 10 = 550 公克。實際是 543 公克，少了 550 − 543 = 7 公克。",
+          "每一枚假幣比真幣輕 1 公克，所以少了 7 公克表示拿出來的硬幣裡有 7 枚假幣。",
+          "只有第 7 袋拿了 7 枚，而且假幣全在同一袋，所以假幣是第 7 袋。每一袋拿的枚數都不同，少幾公克就對應到唯一的一袋。"
+        ],
+        "zh-Hans": [
+          "拿出来的硬币一共有 1 + 2 + 3 + ⋯ + 10 = 55 枚。",
+          "如果全部都是真币，应该重 55 × 10 = 550 克。实际是 543 克，少了 550 − 543 = 7 克。",
+          "每一枚假币比真币轻 1 克，所以少了 7 克表示拿出来的硬币里有 7 枚假币。",
+          "只有第 7 袋拿了 7 枚，而且假币全在同一袋，所以假币是第 7 袋。每一袋拿的枚数都不同，少几克就对应到唯一的一袋。"
+        ],
+        "en": [
+          "The coins taken number 1 + 2 + 3 + ⋯ + 10 = 55.",
+          "If all were real they would weigh 55 × 10 = 550 g. The scale shows 543 g, which is 550 − 543 = 7 g less.",
+          "Each fake coin is 1 g lighter than a real one, so 7 g less means 7 of the coins taken are fake.",
+          "Only bag 7 gave 7 coins, and all fakes are in one bag, so the fake bag is bag 7. Each bag gave a different number of coins, so the missing grams point to exactly one bag."
+        ],
+        "ja": [
+          "取り出した硬貨は全部で 1 + 2 + 3 + ⋯ + 10 = 55 枚です。",
+          "すべて本物なら 55 × 10 = 550 グラムのはずです。実際は 543 グラムなので、550 − 543 = 7 グラム軽いです。",
+          "にせ物は本物より 1 枚 1 グラム軽いので、7 グラム軽いということは、取り出した中ににせ物が 7 枚あるということです。",
+          "7 枚取ったのは 7 番のふくろだけで、にせ物は 1 つのふくろにまとまっているので、にせ物は 7 番です。どのふくろからも取った枚数がちがうので、軽い分のグラム数がちょうど 1 つのふくろを指します。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "7"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade4-foundation",
+        "notes": "第 k 袋取 k 枚，總重比 550 少幾公克就是第幾袋。掃過 /第 ?k ?袋|一袋.{0,40}(拿|取)出 ?1 ?枚.{0,30}(拿|取)出 ?2 ?枚/（0 題）、/假幣|偽幣/（4 題）；最接近 logic_grade11_foundation_050（5 袋取 1、2、4、8、16 枚、假幣袋數不定），差異：那題要用 2 的次方分辨多袋組合；本題只有一袋假幣，取 1 到 10 枚即可，是國小版的「少幾公克對應第幾袋」"
+      }
+    },
+    {
+      "id": "logic_grade4_foundation_113",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "two_people_four_chores_min_finish_time",
+      "tags": [
+        "c:logic_deduction",
+        "m:extremal"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade4",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "打掃教室有四件工作：擦桌子要 6 分鐘、洗抹布要 8 分鐘、掃地要 5 分鐘、拖地要 4 分鐘，而且拖地一定要等掃地全部做完才能開始。小安和小美兩個人一起做：每件工作只能由一個人從頭做到尾，一個人同一時間只能做一件工作。四件工作全部做完，最少要幾分鐘？",
+        "zh-Hans": "打扫教室有四件工作：擦桌子要 6 分钟、洗抹布要 8 分钟、扫地要 5 分钟、拖地要 4 分钟，而且拖地一定要等扫地全部做完才能开始。小安和小美两个人一起做：每件工作只能由一个人从头做到尾，一个人同一时间只能做一件工作。四件工作全部做完，最少要几分钟？",
+        "en": "Cleaning the classroom has four jobs: wiping desks takes 6 minutes, washing cloths 8 minutes, sweeping 5 minutes and mopping 4 minutes, and mopping can only start after sweeping is completely done. An and Mei work together: each job is done by one person from start to finish, and a person can do only one job at a time. What is the least number of minutes needed to finish all four jobs?",
+        "ja": "教室のそうじには 4 つの仕事があります。つくえふきは 6 分、ぞうきん洗いは 8 分、はきそうじは 5 分、モップがけは 4 分かかり、モップがけははきそうじが全部終わってからでないと始められません。アンさんとメイさんの 2 人でします。どの仕事も 1 人が最初から最後までし、1 人が同時にできる仕事は 1 つだけです。4 つの仕事を全部終えるのに、最も少なくて何分かかりますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 12。",
+        "zh-Hans": "答案是 12。",
+        "en": "The answer is 12.",
+        "ja": "答えは 12 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "四件工作一共要 6 + 8 + 5 + 4 = 23 分鐘的工作量。分給兩個人，兩人的工作量是兩個整數，加起來是 23，所以比較多的那個人至少要做 12 分鐘。全部做完至少要 12 分鐘。",
+          "試著排出 12 分鐘：小美先掃地（第 0 到第 5 分鐘），再擦桌子（第 5 到第 11 分鐘）。",
+          "小安先洗抹布（第 0 到第 8 分鐘），這時地已經在第 5 分鐘掃好了，他接著拖地（第 8 到第 12 分鐘）。",
+          "第 12 分鐘四件工作全部做完，而且不可能比 12 分鐘更快，所以最少要 12 分鐘。"
+        ],
+        "zh-Hans": [
+          "四件工作一共要 6 + 8 + 5 + 4 = 23 分钟的工作量。分给两个人，两人的工作量是两个整数，加起来是 23，所以比较多的那个人至少要做 12 分钟。全部做完至少要 12 分钟。",
+          "试着排出 12 分钟：小美先扫地（第 0 到第 5 分钟），再擦桌子（第 5 到第 11 分钟）。",
+          "小安先洗抹布（第 0 到第 8 分钟），这时地已经在第 5 分钟扫好了，他接着拖地（第 8 到第 12 分钟）。",
+          "第 12 分钟四件工作全部做完，而且不可能比 12 分钟更快，所以最少要 12 分钟。"
+        ],
+        "en": [
+          "The four jobs total 6 + 8 + 5 + 4 = 23 minutes of work. Split between two people, the two loads are whole numbers adding to 23, so the larger load is at least 12 minutes. Finishing everything takes at least 12 minutes.",
+          "Try to fit 12 minutes: Mei sweeps first (minutes 0 to 5), then wipes the desks (minutes 5 to 11).",
+          "An washes the cloths first (minutes 0 to 8); the floor was swept by minute 5, so he then mops (minutes 8 to 12).",
+          "All four jobs are done at minute 12, and nothing faster is possible, so the least time is 12 minutes."
+        ],
+        "ja": [
+          "4 つの仕事の量は合わせて 6 + 8 + 5 + 4 = 23 分です。2 人に分けると、2 人の仕事の量は整数で合計 23 なので、多いほうの人は少なくとも 12 分します。全部終えるには少なくとも 12 分かかります。",
+          "12 分で終える組み方をさがします。メイさんがまずはきそうじ（0 分から 5 分）、次につくえふき（5 分から 11 分）をします。",
+          "アンさんはまずぞうきん洗い（0 分から 8 分）をします。はきそうじは 5 分に終わっているので、続けてモップがけ（8 分から 12 分）をします。",
+          "12 分で 4 つの仕事が全部終わり、12 分より早くはできないので、最も少なくて 12 分です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "12"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade4-foundation",
+        "notes": "總工作量 23 分鐘由兩人分攤，較多者至少 12；再排出掃地先做、拖地接在洗抹布後的 12 分鐘方案。掃過 /(分工|兩個人.{0,10}同時).{0,60}最少.{0,10}分鐘/（0 題）、/一定要等.{0,20}(做完|完成).{0,20}才能/（1 題，泡茶單人）；最接近 logic_grade7_foundation_020（泡茶的最少時間），差異：那題一人做事、靠燒水空檔；本題兩人分工，要用總量下界加上先後限制排出最佳安排"
+      }
     }
   ]
 }
