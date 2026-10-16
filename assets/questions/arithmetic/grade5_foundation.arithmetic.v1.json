@@ -14581,6 +14581,698 @@
         "reference": "arithmetic-grade5-foundation",
         "notes": "第 5 位為 5、偶數位放 2、4、6；用 3 的倍數定第 2 位、用末兩位判 4 的倍數定第 4 位，得 123654 與 321654。掃過 /前 ?(兩|2|三|3) ?位.{0,40}(整除|倍數)/（1 題）、/1、2、3、4、5、6.{0,40}各用一次/（2 題）；最接近 arithmetic_grade5_foundation_045，差異：那題只要求前兩位是 3 的倍數、後三位是 4 的倍數並求最大；本題要求前 k 位都是 k 的倍數（k = 1～6），逐位用整除規則推出全部兩個解"
       }
+    },
+    {
+      "id": "arithmetic_grade5_foundation_197",
+      "reviewStatus": "ok",
+      "topic": "arithmetic",
+      "subtopic": "binary_clock_most_lights_count_times",
+      "tags": [
+        "c:number_base",
+        "m:extremal",
+        "m:enumeration"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade5",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一個「二進位時鐘」用燈來顯示時刻。「時」用 4 盞燈，從右到左分別代表 1、2、4、8；「分」用 6 盞燈，從右到左分別代表 1、2、4、8、16、32。亮著的燈代表的數加起來，就是幾時、幾分，例如 5 時是 4 和 1 的燈亮。這個時鐘只顯示 1 時到 12 時、0 分到 59 分。在 12 小時裡，十盞燈中同時亮著的燈數最多是 8 盞。剛好亮 8 盞燈的時刻一共有幾個？",
+        "zh-Hans": "一个「二进制时钟」用灯来显示时刻。「时」用 4 盏灯，从右到左分别代表 1、2、4、8；「分」用 6 盏灯，从右到左分别代表 1、2、4、8、16、32。亮着的灯代表的数加起来，就是几时、几分，例如 5 时是 4 和 1 的灯亮。这个时钟只显示 1 时到 12 时、0 分到 59 分。在 12 小时里，十盏灯中同时亮着的灯数最多是 8 盏。刚好亮 8 盏灯的时刻一共有几个？",
+        "en": "A \"binary clock\" shows the time with lights. The hour uses 4 lights worth 1, 2, 4, 8 from right to left; the minute uses 6 lights worth 1, 2, 4, 8, 16, 32 from right to left. The values of the lit lights add up to the hour and the minute; for example, hour 5 lights the 4 and the 1. The clock shows hours 1 to 12 and minutes 0 to 59. Over 12 hours, the largest number of the ten lights lit at once is 8. At how many different times are exactly 8 lights lit?",
+        "ja": "「2 進法時計」はランプで時刻を表します。「時」は 4 個のランプで、右から 1、2、4、8 を表し、「分」は 6 個のランプで、右から 1、2、4、8、16、32 を表します。ついているランプの数をたしたものが何時何分で、たとえば 5 時は 4 と 1 のランプがつきます。この時計は 1 時から 12 時、0 分から 59 分を表示します。12 時間のうちで、10 個のランプが同時につく数は最大 8 個です。ちょうど 8 個つく時刻は何通りありますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 8。",
+        "zh-Hans": "答案是 8。",
+        "en": "The answer is 8.",
+        "ja": "答えは 8 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "「時」只有 4 盞燈，1 到 12 之中 4 盞全亮是 15，超過 12，所以「時」最多亮 3 盞：亮 3 盞的有 7 = 4 + 2 + 1 和 11 = 8 + 2 + 1，共 2 個。",
+          "「分」有 6 盞燈，全亮是 63，超過 59，所以「分」最多亮 5 盞。5 盞亮就是 63 少掉其中一盞：63 − 32 = 31、63 − 16 = 47、63 − 8 = 55、63 − 4 = 59 都在 0 到 59 之內；63 − 2 = 61、63 − 1 = 62 太大。共 4 個。",
+          "所以最多是 3 + 5 = 8 盞，而且要剛好亮 8 盞，「時」必須亮 3 盞、「分」必須亮 5 盞。",
+          "時有 2 種、分有 4 種，一共 2 × 4 = 8 個時刻（例如 7:31、11:59）。"
+        ],
+        "zh-Hans": [
+          "「时」只有 4 盏灯，1 到 12 之中 4 盏全亮是 15，超过 12，所以「时」最多亮 3 盏：亮 3 盏的有 7 = 4 + 2 + 1 和 11 = 8 + 2 + 1，共 2 个。",
+          "「分」有 6 盏灯，全亮是 63，超过 59，所以「分」最多亮 5 盏。5 盏亮就是 63 少掉其中一盏：63 − 32 = 31、63 − 16 = 47、63 − 8 = 55、63 − 4 = 59 都在 0 到 59 之内；63 − 2 = 61、63 − 1 = 62 太大。共 4 个。",
+          "所以最多是 3 + 5 = 8 盏，而且要刚好亮 8 盏，「时」必须亮 3 盏、「分」必须亮 5 盏。",
+          "时有 2 种、分有 4 种，一共 2 × 4 = 8 个时刻（例如 7:31、11:59）。"
+        ],
+        "en": [
+          "The hour has only 4 lights; all 4 lit means 15, more than 12, so at most 3 hour lights are lit. Those with 3 lit are 7 = 4 + 2 + 1 and 11 = 8 + 2 + 1: 2 hours.",
+          "The minute has 6 lights; all lit means 63, more than 59, so at most 5 are lit. Five lit means 63 minus one light: 63 − 32 = 31, 63 − 16 = 47, 63 − 8 = 55, 63 − 4 = 59 are within 0 to 59; 63 − 2 = 61 and 63 − 1 = 62 are too big. That is 4 minutes.",
+          "So the maximum is 3 + 5 = 8 lights, and exactly 8 lights needs 3 hour lights and 5 minute lights.",
+          "There are 2 hours and 4 minutes, so 2 × 4 = 8 times (for example 7:31 and 11:59)."
+        ],
+        "ja": [
+          "「時」のランプは 4 個で、4 個全部つくと 15 になり 12 をこえるので、「時」は多くて 3 個です。3 個つくのは 7 = 4 + 2 + 1 と 11 = 8 + 2 + 1 の 2 通りです。",
+          "「分」のランプは 6 個で、全部つくと 63 になり 59 をこえるので、多くて 5 個です。5 個つくのは 63 から 1 個をひいた数で、63 − 32 = 31、63 − 16 = 47、63 − 8 = 55、63 − 4 = 59 は 0 から 59 に入り、63 − 2 = 61、63 − 1 = 62 は大きすぎます。4 通りです。",
+          "よって最大は 3 + 5 = 8 個で、ちょうど 8 個つくには「時」が 3 個、「分」が 5 個つかなければなりません。",
+          "時が 2 通り、分が 4 通りなので、2 × 4 = 8 通りの時刻です（たとえば 7:31、11:59）。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "8"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "arithmetic-grade5-foundation",
+        "notes": "時燈最多 3 盞（7、11）、分燈最多 5 盞（31、47、55、59），8 盞的時刻 2 × 4 = 8。掃過 /LED|二進位.{0,20}燈|燈.{0,20}二進位/（0 題）、/二進位/（多為高年級位數計數）；最接近 logic_grade6_foundation_085（燈列計數器總切換次數），差異：那題算二進位加 1 時的翻轉次數；本題在時、分的範圍限制下找「1 的個數」最多的數並計數"
+      }
+    },
+    {
+      "id": "arithmetic_grade5_foundation_198",
+      "reviewStatus": "ok",
+      "topic": "arithmetic",
+      "subtopic": "three_pipes_from_pairwise_fill_times",
+      "tags": [
+        "c:work_rate",
+        "c:fraction",
+        "m:direct"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade5",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一個水池裝了甲、乙、丙三根進水管。只開甲、乙兩根，6 小時可以把空池注滿；只開乙、丙兩根，10 小時注滿；只開甲、丙兩根，7.5 小時注滿。如果三根一起開，從空池開始幾小時可以注滿？",
+        "zh-Hans": "一个水池装了甲、乙、丙三根进水管。只开甲、乙两根，6 小时可以把空池注满；只开乙、丙两根，10 小时注满；只开甲、丙两根，7.5 小时注满。如果三根一起开，从空池开始几小时可以注满？",
+        "en": "A pool has three inlet pipes A, B and C. Pipes A and B together fill the empty pool in 6 hours; B and C together in 10 hours; A and C together in 7.5 hours. If all three are opened together, how many hours does it take to fill the empty pool?",
+        "ja": "プールに甲、乙、丙の 3 本の給水管があります。甲と乙の 2 本だけ開けると空のプールが 6 時間で満水になり、乙と丙だけなら 10 時間、甲と丙だけなら 7.5 時間で満水になります。3 本とも開けると、空のプールは何時間で満水になりますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 5。",
+        "zh-Hans": "答案是 5。",
+        "en": "The answer is 5.",
+        "ja": "答えは 5 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "把整池水看成 1。甲乙每小時注 1/6 池，乙丙每小時注 1/10 池，甲丙每小時注 1/7.5 = 2/15 池。",
+          "把三組加起來：1/6 + 1/10 + 2/15 = 5/30 + 3/30 + 4/30 = 12/30 = 2/5。這裡甲、乙、丙每一根都被算了兩次。",
+          "所以三根一起開每小時注 2/5 ÷ 2 = 1/5 池。",
+          "注滿一池要 1 ÷ 1/5 = 5 小時。"
+        ],
+        "zh-Hans": [
+          "把整池水看成 1。甲乙每小时注 1/6 池，乙丙每小时注 1/10 池，甲丙每小时注 1/7.5 = 2/15 池。",
+          "把三组加起来：1/6 + 1/10 + 2/15 = 5/30 + 3/30 + 4/30 = 12/30 = 2/5。这里甲、乙、丙每一根都被算了两次。",
+          "所以三根一起开每小时注 2/5 ÷ 2 = 1/5 池。",
+          "注满一池要 1 ÷ 1/5 = 5 小时。"
+        ],
+        "en": [
+          "Call the full pool 1. A and B fill 1/6 of the pool per hour, B and C 1/10, and A and C 1/7.5 = 2/15.",
+          "Add the three pairs: 1/6 + 1/10 + 2/15 = 5/30 + 3/30 + 4/30 = 12/30 = 2/5. Here each of A, B, C is counted twice.",
+          "So all three together fill 2/5 ÷ 2 = 1/5 of the pool per hour.",
+          "Filling the pool takes 1 ÷ 1/5 = 5 hours."
+        ],
+        "ja": [
+          "プール全体を 1 とします。甲乙は 1 時間に 1/6、乙丙は 1/10、甲丙は 1/7.5 = 2/15 だけ入れます。",
+          "3 組をたすと 1/6 + 1/10 + 2/15 = 5/30 + 3/30 + 4/30 = 12/30 = 2/5 です。ここでは甲、乙、丙がそれぞれ 2 回ずつ数えられています。",
+          "よって 3 本いっしょだと 1 時間に 2/5 ÷ 2 = 1/5 入ります。",
+          "満水まで 1 ÷ 1/5 = 5 時間です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "5"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "arithmetic-grade5-foundation",
+        "notes": "三組兩兩合作的效率相加，每根管被算兩次，除以 2 得三管合效率 1/5。掃過 /甲乙.{0,20}(一起|合).{0,40}乙丙/（0 題）、/三根.{0,10}(進水管|水管)/（1 題，兩進一排）；最接近 logic_grade9_foundation_024（兩進水管一排水管同開），差異：那題直接給每根管單獨時間；本題只給兩兩合作時間，要用「每根被算兩次」整體相加"
+      }
+    },
+    {
+      "id": "arithmetic_grade5_foundation_199",
+      "reviewStatus": "ok",
+      "topic": "arithmetic",
+      "subtopic": "sum_of_one_decimal_place_numbers_pairing",
+      "tags": [
+        "c:decimal",
+        "c:sequence",
+        "m:bijection"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade5",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "把 0.1、0.2、0.3、⋯、9.8、9.9 這些數（從 0.1 開始，每次多 0.1，一直到 9.9）全部加起來，和是多少？",
+        "zh-Hans": "把 0.1、0.2、0.3、⋯、9.8、9.9 这些数（从 0.1 开始，每次多 0.1，一直到 9.9）全部加起来，和是多少？",
+        "en": "Add up all the numbers 0.1, 0.2, 0.3, ⋯, 9.8, 9.9 (starting at 0.1 and going up by 0.1 each time until 9.9). What is the sum?",
+        "ja": "0.1、0.2、0.3、⋯、9.8、9.9 の数（0.1 から始めて 0.1 ずつふやし、9.9 まで）をすべてたすと、いくつですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 495。",
+        "zh-Hans": "答案是 495。",
+        "en": "The answer is 495.",
+        "ja": "答えは 495 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "這些數是 0.1 的 1 倍、2 倍、⋯、99 倍，一共有 99 個。",
+          "頭尾配對：0.1 + 9.9 = 10，0.2 + 9.8 = 10，⋯，每一對的和都是 10。99 個數可以配成 49 對，中間剩下 0.1 的 50 倍，也就是 5.0。",
+          "總和 = 49 × 10 + 5 = 490 + 5 = 495。",
+          "另一種想法：1 + 2 + ⋯ + 99 = 99 × 100 ÷ 2 = 4950，每個數都是它的 0.1 倍，4950 × 0.1 = 495。答案是 495。"
+        ],
+        "zh-Hans": [
+          "这些数是 0.1 的 1 倍、2 倍、⋯、99 倍，一共有 99 个。",
+          "头尾配对：0.1 + 9.9 = 10，0.2 + 9.8 = 10，⋯，每一对的和都是 10。99 个数可以配成 49 对，中间剩下 0.1 的 50 倍，也就是 5.0。",
+          "总和 = 49 × 10 + 5 = 490 + 5 = 495。",
+          "另一种想法：1 + 2 + ⋯ + 99 = 99 × 100 ÷ 2 = 4950，每个数都是它的 0.1 倍，4950 × 0.1 = 495。答案是 495。"
+        ],
+        "en": [
+          "These numbers are 1, 2, ⋯, 99 times 0.1: 99 numbers in all.",
+          "Pair the ends: 0.1 + 9.9 = 10, 0.2 + 9.8 = 10, ⋯, each pair sums to 10. The 99 numbers form 49 pairs with the middle one, 50 × 0.1 = 5.0, left over.",
+          "Sum = 49 × 10 + 5 = 490 + 5 = 495.",
+          "Another way: 1 + 2 + ⋯ + 99 = 99 × 100 ÷ 2 = 4950, and every number is 0.1 times one of these, so 4950 × 0.1 = 495. The answer is 495."
+        ],
+        "ja": [
+          "これらの数は 0.1 の 1 倍、2 倍、⋯、99 倍で、全部で 99 個です。",
+          "はしどうしを組にすると 0.1 + 9.9 = 10、0.2 + 9.8 = 10、⋯ で、どの組も和は 10 です。99 個は 49 組できて、真ん中に 0.1 の 50 倍、つまり 5.0 が残ります。",
+          "合計 = 49 × 10 + 5 = 490 + 5 = 495 です。",
+          "別の考え方：1 + 2 + ⋯ + 99 = 99 × 100 ÷ 2 = 4950 で、どの数もその 0.1 倍なので 4950 × 0.1 = 495 です。答えは 495 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "495"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "arithmetic-grade5-foundation",
+        "notes": "0.1 到 9.9 共 99 項，頭尾配對和 10 共 49 對加中間 5，得 495。掃過 /0\\.1、0\\.2/（0 題）、/小數.{0,20}(全部)?加起來/（0 題）；最接近 arithmetic_grade5_foundation 的 sequence_sum（整數等差和），差異：本題項是小數且需先數出 99 項、處理奇數項的中間數"
+      }
+    },
+    {
+      "id": "arithmetic_grade5_foundation_200",
+      "reviewStatus": "ok",
+      "topic": "arithmetic",
+      "subtopic": "smallest_number_with_exactly_ten_divisors",
+      "tags": [
+        "c:factor_multiple",
+        "m:extremal",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade5",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "有些正整數剛好有 10 個因數（包括 1 和它自己）。這樣的數之中，最小的是多少？",
+        "zh-Hans": "有些正整数刚好有 10 个因数（包括 1 和它自己）。这样的数之中，最小的是多少？",
+        "en": "Some positive integers have exactly 10 divisors (counting 1 and the number itself). What is the smallest such number?",
+        "ja": "ちょうど 10 個の約数（1 とその数自身をふくむ）をもつ正の整数があります。そのような数のうち、最も小さいものはいくつですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 48。",
+        "zh-Hans": "答案是 48。",
+        "en": "The answer is 48.",
+        "ja": "答えは 48 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "把數寫成質數的乘積。例如 48 = 2 × 2 × 2 × 2 × 3：它的因數是「2 的 0 到 4 個」乘上「3 的 0 到 1 個」，共 5 × 2 = 10 種。一般來說，因數個數等於每個質數「可用的個數加 1」相乘。",
+          "10 只能拆成 10 或 5 × 2。拆成 10：數是某個質數連乘 9 次，最小是 2 連乘 9 次 = 512。",
+          "拆成 5 × 2：數是「某質數連乘 4 次」再乘「另一個質數 1 次」。讓次數多的用最小的質數 2：2 × 2 × 2 × 2 × 3 = 48；如果反過來 3 × 3 × 3 × 3 × 2 = 162，比較大。",
+          "比較 512、48、162，最小的是 48。檢查：48 的因數是 1、2、3、4、6、8、12、16、24、48，剛好 10 個。"
+        ],
+        "zh-Hans": [
+          "把数写成质数的乘积。例如 48 = 2 × 2 × 2 × 2 × 3：它的因数是「2 的 0 到 4 个」乘上「3 的 0 到 1 个」，共 5 × 2 = 10 种。一般来说，因数个数等于每个质数「可用的个数加 1」相乘。",
+          "10 只能拆成 10 或 5 × 2。拆成 10：数是某个质数连乘 9 次，最小是 2 连乘 9 次 = 512。",
+          "拆成 5 × 2：数是「某质数连乘 4 次」再乘「另一个质数 1 次」。让次数多的用最小的质数 2：2 × 2 × 2 × 2 × 3 = 48；如果反过来 3 × 3 × 3 × 3 × 2 = 162，比较大。",
+          "比较 512、48、162，最小的是 48。检查：48 的因数是 1、2、3、4、6、8、12、16、24、48，刚好 10 个。"
+        ],
+        "en": [
+          "Write the number as a product of primes. For example 48 = 2 × 2 × 2 × 2 × 3: its divisors are \"0 to 4 twos\" times \"0 to 1 three\", 5 × 2 = 10 of them. In general, the number of divisors is the product of (how many times each prime appears + 1).",
+          "10 can only be split as 10 or 5 × 2. As 10: the number is one prime multiplied 9 times, smallest 2 multiplied 9 times = 512.",
+          "As 5 × 2: one prime used 4 times times another prime once. Give the bigger count to the smallest prime 2: 2 × 2 × 2 × 2 × 3 = 48; the other way, 3 × 3 × 3 × 3 × 2 = 162, is bigger.",
+          "Of 512, 48 and 162 the smallest is 48. Check: the divisors of 48 are 1, 2, 3, 4, 6, 8, 12, 16, 24, 48, exactly 10."
+        ],
+        "ja": [
+          "数を素数のかけ算で表します。たとえば 48 = 2 × 2 × 2 × 2 × 3 の約数は「2 を 0 から 4 個」と「3 を 0 から 1 個」の組み合わせで 5 × 2 = 10 個です。一般に、約数の個数は各素数の「使われている個数 + 1」をかけたものです。",
+          "10 は 10 か 5 × 2 にしか分けられません。10 のとき：ある素数を 9 回かけた数で、最小は 2 を 9 回かけた 512 です。",
+          "5 × 2 のとき：ある素数を 4 回かけたものに、別の素数を 1 回かけます。回数の多いほうを最小の素数 2 にすると 2 × 2 × 2 × 2 × 3 = 48、逆の 3 × 3 × 3 × 3 × 2 = 162 は大きいです。",
+          "512、48、162 のうち最小は 48 です。たしかめ：48 の約数は 1、2、3、4、6、8、12、16、24、48 でちょうど 10 個です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "48"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "arithmetic-grade5-foundation",
+        "notes": "因數個數＝各質因數次數加 1 的乘積；10 = 10 或 5×2，最小為 2⁴ × 3 = 48。掃過 /恰好有.{0,6}個因數|剛好有.{0,6}個因數/（0 題）、/因數.{0,20}個數/（因數計數 3 題）；最接近 arithmetic_grade5_foundation 的 smallest_abundant_number，差異：那題比較因數和；本題由因數個數公式反推最小的數，需比較 512、48、162 三種形式"
+      }
+    },
+    {
+      "id": "arithmetic_grade5_foundation_201",
+      "reviewStatus": "ok",
+      "topic": "arithmetic",
+      "subtopic": "weekday_after_power_of_two_days",
+      "tags": [
+        "c:modular",
+        "c:exponent",
+        "m:invariant"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade5",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "今天是星期一。從今天起再過 2 的 100 次方天（也就是 100 個 2 相乘那麼多天），那一天是星期幾？",
+        "zh-Hans": "今天是星期一。从今天起再过 2 的 100 次方天（也就是 100 个 2 相乘那么多天），那一天是星期几？",
+        "en": "Today is Monday. What day of the week will it be 2 to the power 100 days from today (that is, 100 twos multiplied together)?",
+        "ja": "今日は月曜日です。今日から 2 の 100 乗日後（2 を 100 個かけた日数）は何曜日ですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 C：星期三，因為 2 的 100 次方除以 7 會餘 2",
+        "zh-Hans": "答案是 C：星期三，因为 2 的 100 次方除以 7 会余 2",
+        "en": "The answer is C: Wednesday, because 2 to the power 100 leaves remainder 2 when divided by 7",
+        "ja": "答えは C：水曜日。2 の 100 乗を 7 でわると 2 あまるから"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "星期每 7 天循環，只要知道 2 的 100 次方除以 7 的餘數。",
+          "2 的次方除以 7 的餘數：2¹ 餘 2，2² = 4 餘 4，2³ = 8 餘 1，2⁴ = 16 餘 2，2⁵ = 32 餘 4，2⁶ = 64 餘 1……每 3 個一循環：2、4、1。（前一個餘數乘 2 再除以 7，就是下一個餘數。）",
+          "100 = 3 × 33 + 1，所以 2¹⁰⁰ 除以 7 的餘數和 2¹ 一樣，是 2。再過 2¹⁰⁰ 天，就像再過 2 天：星期一往後 2 天是星期三，答案是 C。",
+          "A 錯：餘數是 2，不是 0（2 的次方都不是 7 的倍數）。B 錯：那是餘數 1 的情形，是 2 的 99 次方。D 錯：那是餘數 4 的情形，是 2 的 98 次方或 101 次方的結果。"
+        ],
+        "zh-Hans": [
+          "星期每 7 天循环，只要知道 2 的 100 次方除以 7 的余数。",
+          "2 的次方除以 7 的余数：2¹ 余 2，2² = 4 余 4，2³ = 8 余 1，2⁴ = 16 余 2，2⁵ = 32 余 4，2⁶ = 64 余 1……每 3 个一循环：2、4、1。（前一个余数乘 2 再除以 7，就是下一个余数。）",
+          "100 = 3 × 33 + 1，所以 2¹⁰⁰ 除以 7 的余数和 2¹ 一样，是 2。再过 2¹⁰⁰ 天，就像再过 2 天：星期一往后 2 天是星期三，答案是 C。",
+          "A 错：余数是 2，不是 0（2 的次方都不是 7 的倍数）。B 错：那是余数 1 的情形，是 2 的 99 次方。D 错：那是余数 4 的情形，是 2 的 98 次方或 101 次方的结果。"
+        ],
+        "en": [
+          "Weekdays repeat every 7 days, so we only need the remainder of 2 to the power 100 divided by 7.",
+          "Remainders of powers of 2 divided by 7: 2¹ leaves 2, 2² = 4 leaves 4, 2³ = 8 leaves 1, 2⁴ = 16 leaves 2, 2⁵ = 32 leaves 4, 2⁶ = 64 leaves 1, … repeating every 3: 2, 4, 1. (Doubling the previous remainder and dividing by 7 gives the next one.)",
+          "100 = 3 × 33 + 1, so 2¹⁰⁰ leaves the same remainder as 2¹, namely 2. Waiting 2¹⁰⁰ days is like waiting 2 days: 2 days after Monday is Wednesday, answer C.",
+          "A is wrong: the remainder is 2, not 0 (no power of 2 is a multiple of 7). B is wrong: that is remainder 1, the case of 2 to the power 99. D is wrong: that is remainder 4, the case of 2 to the power 98 or 101."
+        ],
+        "ja": [
+          "曜日は 7 日ごとにくり返すので、2 の 100 乗を 7 でわったあまりがわかればよいです。",
+          "2 の累乗を 7 でわったあまりは、2¹ が 2、2² = 4 が 4、2³ = 8 が 1、2⁴ = 16 が 2、2⁵ = 32 が 4、2⁶ = 64 が 1……と、2、4、1 の 3 つでくり返します。（前のあまりを 2 倍して 7 でわると次のあまりになります。）",
+          "100 = 3 × 33 + 1 なので、2¹⁰⁰ を 7 でわったあまりは 2¹ と同じ 2 です。2¹⁰⁰ 日後は 2 日後と同じで、月曜日の 2 日後は水曜日、答えは C です。",
+          "A はまちがい：あまりは 0 ではなく 2 です（2 の累乗は 7 の倍数になりません）。B はまちがい：それはあまり 1 の場合で、2 の 99 乗のときです。D はまちがい：それはあまり 4 の場合で、2 の 98 乗や 101 乗のときです。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "multiple_choice",
+      "options": {
+        "A": {
+          "zh-Hant": "星期一，因為 2 的 100 次方天一定是整整好幾個星期",
+          "zh-Hans": "星期一，因为 2 的 100 次方天一定是整整好几个星期",
+          "en": "Monday, because 2 to the power 100 days must be whole weeks",
+          "ja": "月曜日。2 の 100 乗日は必ずちょうど何週間かになるから"
+        },
+        "B": {
+          "zh-Hant": "星期二，因為 2 的 100 次方除以 7 會餘 1",
+          "zh-Hans": "星期二，因为 2 的 100 次方除以 7 会余 1",
+          "en": "Tuesday, because 2 to the power 100 leaves remainder 1 when divided by 7",
+          "ja": "火曜日。2 の 100 乗を 7 でわると 1 あまるから"
+        },
+        "C": {
+          "zh-Hant": "星期三，因為 2 的 100 次方除以 7 會餘 2",
+          "zh-Hans": "星期三，因为 2 的 100 次方除以 7 会余 2",
+          "en": "Wednesday, because 2 to the power 100 leaves remainder 2 when divided by 7",
+          "ja": "水曜日。2 の 100 乗を 7 でわると 2 あまるから"
+        },
+        "D": {
+          "zh-Hant": "星期五，因為 2 的 100 次方除以 7 會餘 4",
+          "zh-Hans": "星期五，因为 2 的 100 次方除以 7 会余 4",
+          "en": "Friday, because 2 to the power 100 leaves remainder 4 when divided by 7",
+          "ja": "金曜日。2 の 100 乗を 7 でわると 4 あまるから"
+        }
+      },
+      "correctAnswer": {
+        "type": "choice",
+        "value": "C"
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "arithmetic-grade5-foundation",
+        "notes": "2 的次方除以 7 的餘數以 2、4、1 循環，100 ≡ 1 (mod 3)，餘數 2，星期一後 2 天為星期三。掃過 /次方天|天以後.{0,10}星期|天後.{0,10}星期/（1 題）、/2 的 ?100 ?次方/（0 題）；最接近 mixed_grade5_foundation_015（再過 100 天是星期幾），差異：那題 100 天直接除以 7；本題天數是 2¹⁰⁰，要先找 2 的次方除以 7 的餘數循環"
+      }
+    },
+    {
+      "id": "arithmetic_grade5_foundation_202",
+      "reviewStatus": "ok",
+      "topic": "arithmetic",
+      "subtopic": "two_tenths_numbers_given_sum_and_product",
+      "tags": [
+        "c:decimal",
+        "c:mul_div",
+        "m:invariant"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade5",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "兩個一位小數（小數點後只有一位）加起來是 10，相乘是 24.75。這兩個數相差多少？",
+        "zh-Hans": "两个一位小数（小数点后只有一位）加起来是 10，相乘是 24.75。这两个数相差多少？",
+        "en": "Two numbers, each with one digit after the decimal point, add up to 10 and multiply to 24.75. What is their difference?",
+        "ja": "小数第 1 位までの数が 2 つあり、たすと 10、かけると 24.75 です。この 2 つの数の差はいくつですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 1。",
+        "zh-Hans": "答案是 1。",
+        "en": "The answer is 1.",
+        "ja": "答えは 1 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "和是 10 的兩個數，可以寫成「5 減某數」和「5 加某數」，例如 4.9 和 5.1、4.5 和 5.5。",
+          "試幾組：5 × 5 = 25，4.9 × 5.1 = 24.99，4.8 × 5.2 = 24.96，4.7 × 5.3 = 24.91，4.6 × 5.4 = 24.84，4.5 × 5.5 = 24.75。規律是：離 5 的距離是多少，乘積就比 25 少「那個距離自己乘自己」，例如 0.2 × 0.2 = 0.04、25 − 0.04 = 24.96。",
+          "乘積 24.75 比 25 少 0.25 = 0.5 × 0.5，所以兩數離 5 都是 0.5，就是 4.5 和 5.5。",
+          "兩數相差 5.5 − 4.5 = 1。"
+        ],
+        "zh-Hans": [
+          "和是 10 的两个数，可以写成「5 减某数」和「5 加某数」，例如 4.9 和 5.1、4.5 和 5.5。",
+          "试几组：5 × 5 = 25，4.9 × 5.1 = 24.99，4.8 × 5.2 = 24.96，4.7 × 5.3 = 24.91，4.6 × 5.4 = 24.84，4.5 × 5.5 = 24.75。规律是：离 5 的距离是多少，乘积就比 25 少「那个距离自己乘自己」，例如 0.2 × 0.2 = 0.04、25 − 0.04 = 24.96。",
+          "乘积 24.75 比 25 少 0.25 = 0.5 × 0.5，所以两数离 5 都是 0.5，就是 4.5 和 5.5。",
+          "两数相差 5.5 − 4.5 = 1。"
+        ],
+        "en": [
+          "Two numbers with sum 10 can be written as \"5 minus something\" and \"5 plus the same\", for example 4.9 and 5.1, or 4.5 and 5.5.",
+          "Try some: 5 × 5 = 25, 4.9 × 5.1 = 24.99, 4.8 × 5.2 = 24.96, 4.7 × 5.3 = 24.91, 4.6 × 5.4 = 24.84, 4.5 × 5.5 = 24.75. The pattern: the product is 25 minus the distance from 5 multiplied by itself, for example 0.2 × 0.2 = 0.04 and 25 − 0.04 = 24.96.",
+          "24.75 is 0.25 = 0.5 × 0.5 less than 25, so both numbers are 0.5 away from 5: they are 4.5 and 5.5.",
+          "Their difference is 5.5 − 4.5 = 1."
+        ],
+        "ja": [
+          "和が 10 の 2 つの数は「5 − ある数」と「5 + 同じ数」と書けます。たとえば 4.9 と 5.1、4.5 と 5.5 です。",
+          "いくつか試すと 5 × 5 = 25、4.9 × 5.1 = 24.99、4.8 × 5.2 = 24.96、4.7 × 5.3 = 24.91、4.6 × 5.4 = 24.84、4.5 × 5.5 = 24.75 です。きまりは、5 からのはなれ方を 2 回かけた分だけ積が 25 より小さくなることで、たとえば 0.2 × 0.2 = 0.04、25 − 0.04 = 24.96 です。",
+          "24.75 は 25 より 0.25 = 0.5 × 0.5 小さいので、2 つの数はどちらも 5 から 0.5 はなれていて、4.5 と 5.5 です。",
+          "2 つの数の差は 5.5 − 4.5 = 1 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "1"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "arithmetic-grade5-foundation",
+        "notes": "和固定為 10 時兩數寫成 5 ± d，積 = 25 − d²；24.75 = 25 − 0.25 得 d = 0.5，兩數 4.5、5.5，差 1。掃過 /加起來是 ?10.{0,20}相乘/（0 題）、/一位小數.{0,30}(相乘|乘積)/（0 題）；最接近 arithmetic_grade5_foundation 的 square_minus_product_symmetric_offset，差異：那題用整數驗證「平方減乘積」；本題在小數情境下由和與積反求兩數，需觀察對稱差的規律"
+      }
+    },
+    {
+      "id": "arithmetic_grade5_foundation_203",
+      "reviewStatus": "ok",
+      "topic": "arithmetic",
+      "subtopic": "two_card_number_multiple_of_four_chance",
+      "tags": [
+        "c:probability",
+        "c:factor_multiple",
+        "m:enumeration"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade5",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "有 1、2、3、4 四張數字卡。閉著眼睛先抽一張當十位數字，再從剩下的三張抽一張當個位數字，組成一個兩位數。這個兩位數是 4 的倍數的機會是多少？",
+        "zh-Hans": "有 1、2、3、4 四张数字卡。闭着眼睛先抽一张当十位数字，再从剩下的三张抽一张当个位数字，组成一个两位数。这个两位数是 4 的倍数的机会是多少？",
+        "en": "There are four number cards 1, 2, 3, 4. With eyes closed, one card is drawn for the tens digit, then one of the remaining three for the units digit, making a two-digit number. What is the chance that this number is a multiple of 4?",
+        "ja": "1、2、3、4 の 4 枚の数字カードがあります。目をつぶってまず 1 枚引いて十の位にし、残りの 3 枚から 1 枚引いて一の位にして、2 けたの数を作ります。この数が 4 の倍数になる確率はいくつですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 B：1/4，因為 12 個兩位數中有 3 個是 4 的倍數",
+        "zh-Hans": "答案是 B：1/4，因为 12 个两位数中有 3 个是 4 的倍数",
+        "en": "The answer is B: 1/4, because 3 of the 12 numbers are multiples of 4",
+        "ja": "答えは B：1/4。12 個の数のうち 3 個が 4 の倍数だから"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "十位有 4 種、個位有 3 種，一共 4 × 3 = 12 個等可能的兩位數：12、13、14、21、23、24、31、32、34、41、42、43。",
+          "4 的倍數：個位是奇數的一定不是（4 的倍數是偶數），只要檢查個位是 2 或 4 的：12 = 4 × 3 是；32 = 4 × 8 是；42 不是；14 不是；24 = 4 × 6 是；34 不是。",
+          "共 3 個（12、24、32），機會是 3/12 = 1/4，答案是 B。",
+          "A 錯：1/2 只看「個位是偶數」的 6 個，沒有檢查是不是 4 的倍數。C 錯：1/3 是誤以為 12 個中有 4 個。D 錯：1/6 少算了一個，只數到 12 和 24。"
+        ],
+        "zh-Hans": [
+          "十位有 4 种、个位有 3 种，一共 4 × 3 = 12 个等可能的两位数：12、13、14、21、23、24、31、32、34、41、42、43。",
+          "4 的倍数：个位是奇数的一定不是（4 的倍数是偶数），只要检查个位是 2 或 4 的：12 = 4 × 3 是；32 = 4 × 8 是；42 不是；14 不是；24 = 4 × 6 是；34 不是。",
+          "共 3 个（12、24、32），机会是 3/12 = 1/4，答案是 B。",
+          "A 错：1/2 只看「个位是偶数」的 6 个，没有检查是不是 4 的倍数。C 错：1/3 是误以为 12 个中有 4 个。D 错：1/6 少算了一个，只数到 12 和 24。"
+        ],
+        "en": [
+          "There are 4 choices for the tens digit and 3 for the units, 4 × 3 = 12 equally likely numbers: 12, 13, 14, 21, 23, 24, 31, 32, 34, 41, 42, 43.",
+          "Multiples of 4 are even, so check only units digit 2 or 4: 12 = 4 × 3 yes; 32 = 4 × 8 yes; 42 no; 14 no; 24 = 4 × 6 yes; 34 no.",
+          "That is 3 numbers (12, 24, 32), a chance of 3/12 = 1/4: the answer is B.",
+          "A is wrong: 1/2 counts the 6 even numbers without checking for multiples of 4. C is wrong: 1/3 assumes 4 of the 12 work. D is wrong: 1/6 misses one, counting only 12 and 24."
+        ],
+        "ja": [
+          "十の位は 4 通り、一の位は 3 通りで、4 × 3 = 12 個の同じように起こる 2 けたの数ができます：12、13、14、21、23、24、31、32、34、41、42、43。",
+          "4 の倍数は偶数なので、一の位が 2 か 4 のものだけ調べます。12 = 4 × 3 はそう、32 = 4 × 8 はそう、42 はちがう、14 はちがう、24 = 4 × 6 はそう、34 はちがいます。",
+          "3 個（12、24、32）なので、確率は 3/12 = 1/4 で、答えは B です。",
+          "A はまちがい：1/2 は偶数の 6 個を数えただけで、4 の倍数かどうか調べていない。C はまちがい：1/3 は 12 個のうち 4 個と思いこんだもの。D はまちがい：1/6 は 12 と 24 だけで 1 つ足りない。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "multiple_choice",
+      "options": {
+        "A": {
+          "zh-Hant": "1/2，因為個位是 2 或 4 的兩位數有 6 個",
+          "zh-Hans": "1/2，因为个位是 2 或 4 的两位数有 6 个",
+          "en": "1/2, because 6 of the numbers end in 2 or 4",
+          "ja": "1/2。一の位が 2 か 4 の数が 6 個あるから"
+        },
+        "B": {
+          "zh-Hant": "1/4，因為 12 個兩位數中有 3 個是 4 的倍數",
+          "zh-Hans": "1/4，因为 12 个两位数中有 3 个是 4 的倍数",
+          "en": "1/4, because 3 of the 12 numbers are multiples of 4",
+          "ja": "1/4。12 個の数のうち 3 個が 4 の倍数だから"
+        },
+        "C": {
+          "zh-Hant": "1/3，因為 12 個兩位數中有 4 個是 4 的倍數",
+          "zh-Hans": "1/3，因为 12 个两位数中有 4 个是 4 的倍数",
+          "en": "1/3, because 4 of the 12 numbers are multiples of 4",
+          "ja": "1/3。12 個の数のうち 4 個が 4 の倍数だから"
+        },
+        "D": {
+          "zh-Hant": "1/6，因為 12 個兩位數中只有 12 和 24 符合",
+          "zh-Hans": "1/6，因为 12 个两位数中只有 12 和 24 符合",
+          "en": "1/6, because only 12 and 24 of the 12 numbers qualify",
+          "ja": "1/6。12 個の数のうち 12 と 24 だけが合うから"
+        }
+      },
+      "correctAnswer": {
+        "type": "choice",
+        "value": "B"
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "arithmetic-grade5-foundation",
+        "notes": "4 × 3 = 12 個兩位數，4 的倍數為 12、24、32，機會 1/4；誘答分別對應只看偶數、多算、漏算。掃過 /數字卡.{0,40}(機會|機率).{0,20}倍數/（0 題）、/抽.{0,10}當十位/（0 題）；最接近 combinatorics_grade10_foundation_062（因數中 100 的倍數的機率），差異：那題在因數集合中算機率；本題是卡片排兩位數，用 4 的倍數判斷逐一檢查"
+      }
+    },
+    {
+      "id": "arithmetic_grade5_foundation_204",
+      "reviewStatus": "ok",
+      "topic": "arithmetic",
+      "subtopic": "two_drains_at_different_heights_empty_time",
+      "tags": [
+        "c:work_rate",
+        "c:rate_speed",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade5",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一個長方體水箱裝了 60 公分深的水。箱底有甲排水口，打開後水面每分鐘下降 3 公分。水箱側面離箱底 30 公分高的地方有乙排水口：只有水面高於 30 公分時，乙才排得出水，這時打開乙會讓水面每分鐘再多下降 2 公分。兩個排水口一起打開，水箱的水要幾分鐘才排完？",
+        "zh-Hans": "一个长方体水箱装了 60 厘米深的水。箱底有甲排水口，打开后水面每分钟下降 3 厘米。水箱侧面离箱底 30 厘米高的地方有乙排水口：只有水面高于 30 厘米时，乙才排得出水，这时打开乙会让水面每分钟再多下降 2 厘米。两个排水口一起打开，水箱的水要几分钟才排完？",
+        "en": "A box-shaped tank holds water 60 cm deep. Drain A at the bottom lowers the water level 3 cm per minute. Drain B is in a side wall 30 cm above the bottom: it lets water out only while the level is above 30 cm, and then it lowers the level a further 2 cm per minute. With both drains open, how many minutes does it take to empty the tank?",
+        "ja": "直方体の水そうに深さ 60 cm の水が入っています。底にある排水口甲を開けると、水面は 1 分に 3 cm 下がります。側面の、底から 30 cm の高さに排水口乙があり、水面が 30 cm より高いときだけ水が出て、そのとき水面はさらに 1 分に 2 cm 下がります。2 つの排水口を両方開けると、水そうの水がなくなるまで何分かかりますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 16。",
+        "zh-Hans": "答案是 16。",
+        "en": "The answer is 16.",
+        "ja": "答えは 16 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "水面在 30 公分以上時，甲、乙兩個都在排水，每分鐘下降 3 + 2 = 5 公分。從 60 公分降到 30 公分，要 30 ÷ 5 = 6 分鐘。",
+          "水面降到 30 公分以後，乙的位置已經露出水面，排不出水了，只剩甲每分鐘下降 3 公分。",
+          "從 30 公分降到 0，要 30 ÷ 3 = 10 分鐘。",
+          "一共 6 + 10 = 16 分鐘。（如果以為兩個口全程都在排，會誤算成 60 ÷ 5 = 12 分鐘。）"
+        ],
+        "zh-Hans": [
+          "水面在 30 厘米以上时，甲、乙两个都在排水，每分钟下降 3 + 2 = 5 厘米。从 60 厘米降到 30 厘米，要 30 ÷ 5 = 6 分钟。",
+          "水面降到 30 厘米以后，乙的位置已经露出水面，排不出水了，只剩甲每分钟下降 3 厘米。",
+          "从 30 厘米降到 0，要 30 ÷ 3 = 10 分钟。",
+          "一共 6 + 10 = 16 分钟。（如果以为两个口全程都在排，会误算成 60 ÷ 5 = 12 分钟。）"
+        ],
+        "en": [
+          "While the level is above 30 cm both drains work, lowering it 3 + 2 = 5 cm per minute. Going from 60 cm down to 30 cm takes 30 ÷ 5 = 6 minutes.",
+          "Once the level reaches 30 cm, drain B is above the water and lets nothing out; only A works, 3 cm per minute.",
+          "Going from 30 cm down to 0 takes 30 ÷ 3 = 10 minutes.",
+          "In all 6 + 10 = 16 minutes. (Assuming both drains work the whole time would wrongly give 60 ÷ 5 = 12 minutes.)"
+        ],
+        "ja": [
+          "水面が 30 cm より高いあいだは甲も乙も水を出し、1 分に 3 + 2 = 5 cm 下がります。60 cm から 30 cm までは 30 ÷ 5 = 6 分です。",
+          "水面が 30 cm まで下がると乙は水面より上に出てしまい、水が出なくなります。甲だけで 1 分に 3 cm 下がります。",
+          "30 cm から 0 までは 30 ÷ 3 = 10 分です。",
+          "全部で 6 + 10 = 16 分です。（2 つともずっと水を出すと考えると、まちがって 60 ÷ 5 = 12 分になります。）"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "16"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "arithmetic-grade5-foundation",
+        "notes": "高處排水口只在水面高於它時作用：60→30 cm 每分鐘 5 cm 要 6 分，30→0 每分鐘 3 cm 要 10 分，共 16 分。掃過 /排水口|出水口/（0 題）、/排水.{0,30}(高|公分處)/（0 題）；最接近 logic_grade9_foundation_024（兩進水管一排水管同開，rates_with_drain），差異：那題各管全程以固定速率工作；本題一個排水口的作用取決於水位，需按高度分段"
+      }
+    },
+    {
+      "id": "arithmetic_grade5_foundation_205",
+      "reviewStatus": "ok",
+      "topic": "arithmetic",
+      "subtopic": "add_points_to_one_raise_mean_keep_median",
+      "tags": [
+        "c:median_mode",
+        "c:mean",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade5",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "7 位同學的分數由低到高是 60、65、70、75、80、85、90 分。老師只能幫其中「一位」同學加分。他想讓 7 人的平均分數提高 3 分，同時 7 人分數的中位數仍然是 75 分。老師可以選的同學一共有幾位？",
+        "zh-Hans": "7 位同学的分数由低到高是 60、65、70、75、80、85、90 分。老师只能帮其中「一位」同学加分。他想让 7 人的平均分数提高 3 分，同时 7 人分数的中位数仍然是 75 分。老师可以选的同学一共有几位？",
+        "en": "Seven pupils scored 60, 65, 70, 75, 80, 85, 90 (lowest to highest). The teacher may add points to only one pupil. She wants the average of the 7 scores to rise by 3 while the median of the 7 scores stays 75. How many pupils could she choose?",
+        "ja": "7 人の点数は低い順に 60、65、70、75、80、85、90 点です。先生は 1 人だけに点を加えられます。7 人の平均点を 3 点上げ、しかも 7 人の点数の中央値は 75 点のままにしたいです。先生が選べる生徒は何人ですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 3。",
+        "zh-Hans": "答案是 3。",
+        "en": "The answer is 3.",
+        "ja": "答えは 3 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "平均提高 3 分，7 人的總分要多 7 × 3 = 21 分。只能加給一個人，所以那個人要加 21 分。",
+          "中位數是第 4 高（第 4 低）的分數。加給 80、85、90 分的同學，變成 101、106、111，仍然在 75 的上面，75 以下的 3 個和 75 都沒動，中位數還是 75。",
+          "加給 75 分的同學，他變成 96 分，第 4 個變成 80，中位數變 80。加給 60、65、70 分其中一位，他會跳到 75 以上（81、86、91），75 以下只剩 2 個，第 4 個變成 80，中位數也變了。",
+          "只有 80、85、90 分這 3 位同學可以選，答案是 3。"
+        ],
+        "zh-Hans": [
+          "平均提高 3 分，7 人的总分要多 7 × 3 = 21 分。只能加给一个人，所以那个人要加 21 分。",
+          "中位数是第 4 高（第 4 低）的分数。加给 80、85、90 分的同学，变成 101、106、111，仍然在 75 的上面，75 以下的 3 个和 75 都没动，中位数还是 75。",
+          "加给 75 分的同学，他变成 96 分，第 4 个变成 80，中位数变 80。加给 60、65、70 分其中一位，他会跳到 75 以上（81、86、91），75 以下只剩 2 个，第 4 个变成 80，中位数也变了。",
+          "只有 80、85、90 分这 3 位同学可以选，答案是 3。"
+        ],
+        "en": [
+          "Raising the average by 3 means the total of 7 scores rises by 7 × 3 = 21. Only one pupil gets points, so that pupil gets 21.",
+          "The median is the 4th score. Giving 21 to the pupil with 80, 85 or 90 makes 101, 106 or 111, still above 75; the three scores below 75 and the 75 itself are unchanged, so the median stays 75.",
+          "Giving it to the pupil with 75 makes 96, and the 4th score becomes 80, so the median becomes 80. Giving it to 60, 65 or 70 lifts that pupil above 75 (to 81, 86 or 91), leaving only 2 scores below 75, so the 4th score becomes 80 and the median changes.",
+          "Only the 3 pupils with 80, 85, 90 can be chosen: the answer is 3."
+        ],
+        "ja": [
+          "平均点を 3 点上げるには、7 人の合計点を 7 × 3 = 21 点ふやします。1 人にしか加えられないので、その人に 21 点加えます。",
+          "中央値は 4 番目の点数です。80、85、90 点の人に加えると 101、106、111 点になり、75 より上のままで、75 より下の 3 人と 75 点は変わらないので、中央値は 75 のままです。",
+          "75 点の人に加えると 96 点になり、4 番目が 80 になって中央値は 80 に変わります。60、65、70 点のだれかに加えると、その人は 75 より上（81、86、91 点）になり、75 より下が 2 人になって 4 番目が 80 になり、中央値が変わります。",
+          "選べるのは 80、85、90 点の 3 人だけで、答えは 3 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "3"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "arithmetic-grade5-foundation",
+        "notes": "平均提高 3 需總分多 21，只能加給一人；加給中位數以上的人中位數不動，加給 75 或以下的人都會把中位數推到 80，只有 3 人可選。已逐一驗算。掃過 /中位數.{0,30}(不變|維持)/（0 題）、/幫.{0,10}同學加分/（1 題，加分抬高中位數）；最接近 arithmetic_grade4_foundation 的 raise_scores_to_lift_median，差異：那題要用加分把中位數抬高；本題要提高平均但中位數不能動，需判斷加分對象相對於中位數的位置"
+      }
     }
   ]
 }

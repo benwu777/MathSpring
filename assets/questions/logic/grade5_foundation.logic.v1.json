@@ -8087,6 +8087,483 @@
         "reference": "logic-grade5-foundation",
         "notes": "N 到 N+1 時後三位數字和的變化只可能是 +1、−8、−17，或末三位為 999 時被迫 N=999999，故相連兩張不可能都是幸運票。掃過 /幸運|前三(個|位).{0,30}後三(個|位)/（0 題）、/(相鄰|連續).{0,10}(兩個|二個).{0,30}數字和/（1 題）；最接近 number_theory_grade7_foundation_074，差異：那題求 n 與 n+1 的數字和都是 7 的倍數的最小 n；本題是六位票前三和等於後三和，分析 N+1 時後三位數字和的變化（+1、−8、−17）證明不可能"
       }
+    },
+    {
+      "id": "logic_grade5_foundation_104",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "circle_numbers_no_double_or_half_game",
+      "tags": [
+        "c:game_theory",
+        "m:casework",
+        "m:invariant"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade5",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "黑板上寫著 1 到 12。甲、乙兩人輪流圈一個還沒被圈的數，由甲先圈。規定：不可以圈「已經被圈的某個數的 2 倍」，也不可以圈「已經被圈的某個數的一半」。輪到的人如果沒有數可以圈，就輸了。甲第一步只有圈某一個數才能保證獲勝，這個數是多少？",
+        "zh-Hans": "黑板上写着 1 到 12。甲、乙两人轮流圈一个还没被圈的数，由甲先圈。规定：不可以圈「已经被圈的某个数的 2 倍」，也不可以圈「已经被圈的某个数的一半」。轮到的人如果没有数可以圈，就输了。甲第一步只有圈某一个数才能保证获胜，这个数是多少？",
+        "en": "The numbers 1 to 12 are on the board. A and B take turns circling a number not yet circled, A first. A number may not be circled if it is double, or half, of a number already circled. A player who has no number to circle loses. Only one first move guarantees that A wins. Which number must A circle first?",
+        "ja": "黒板に 1 から 12 が書いてあります。甲と乙が交互に、まだ丸をつけていない数に丸をつけます。甲が先です。すでに丸をつけたどれかの数の 2 倍の数や、半分の数には丸をつけられません。丸をつける数がない人の負けです。甲が必ず勝つための最初の一手はただ 1 つです。甲は最初にどの数に丸をつければよいですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 6。",
+        "zh-Hans": "答案是 6。",
+        "en": "The answer is 6.",
+        "ja": "答えは 6 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "只有「2 倍」關係的數會互相影響，把 1 到 12 分成幾串：1、2、4、8；3、6、12；5、10；7；9；11。不同串之間互不影響。",
+          "每一串最後會被圈幾個數？7、9、11 各 1 個；5、10 只能圈其中 1 個；1、2、4、8 不論怎麼圈，最後都剛好圈 2 個（例如先圈 1 就不能圈 2，之後 4、8 裡只能再圈 1 個；先圈 2 就擋掉 1 和 4，只剩 8）。這些部分一共固定是 1 + 1 + 1 + 1 + 2 = 6 個。",
+          "只有 3、6、12 這串會變：先圈中間的 6，就擋掉 3 和 12，這串只圈 1 個；先圈 3 或 12，之後還能再圈另一端，這串圈 2 個。所以總共被圈的個數是 6 + 1 = 7 或 6 + 2 = 8。",
+          "甲希望總數是奇數（第 1、3、5、7 個都是甲圈的，圈到第 7 個後乙沒數可圈）。甲第一步就圈 6，總數固定是 7，甲一定贏；甲若先圈別的數，乙可以去圈 3 或 12，讓總數變成 8，甲就輸了。答案是 6。"
+        ],
+        "zh-Hans": [
+          "只有「2 倍」关系的数会互相影响，把 1 到 12 分成几串：1、2、4、8；3、6、12；5、10；7；9；11。不同串之间互不影响。",
+          "每一串最后会被圈几个数？7、9、11 各 1 个；5、10 只能圈其中 1 个；1、2、4、8 不论怎么圈，最后都刚好圈 2 个（例如先圈 1 就不能圈 2，之后 4、8 里只能再圈 1 个；先圈 2 就挡掉 1 和 4，只剩 8）。这些部分一共固定是 1 + 1 + 1 + 1 + 2 = 6 个。",
+          "只有 3、6、12 这串会变：先圈中间的 6，就挡掉 3 和 12，这串只圈 1 个；先圈 3 或 12，之后还能再圈另一端，这串圈 2 个。所以总共被圈的个数是 6 + 1 = 7 或 6 + 2 = 8。",
+          "甲希望总数是奇数（第 1、3、5、7 个都是甲圈的，圈到第 7 个后乙没数可圈）。甲第一步就圈 6，总数固定是 7，甲一定赢；甲若先圈别的数，乙可以去圈 3 或 12，让总数变成 8，甲就输了。答案是 6。"
+        ],
+        "en": [
+          "Only numbers related by doubling affect each other, so split 1 to 12 into chains: 1, 2, 4, 8; 3, 6, 12; 5, 10; 7; 9; 11. Different chains do not affect each other.",
+          "How many numbers end up circled in each chain? 7, 9, 11 give 1 each; 5, 10 gives exactly 1; and 1, 2, 4, 8 always ends with exactly 2 however it is played (circling 1 blocks 2, then only one of 4, 8 can follow; circling 2 blocks 1 and 4, leaving only 8). These parts always total 1 + 1 + 1 + 1 + 2 = 6.",
+          "Only the chain 3, 6, 12 can vary: circling the middle 6 blocks 3 and 12, giving 1; circling 3 or 12 first lets the other end be circled later, giving 2. So the total number circled is 6 + 1 = 7 or 6 + 2 = 8.",
+          "A wants an odd total (A circles the 1st, 3rd, 5th, 7th numbers, and after the 7th B has none). Circling 6 first fixes the total at 7, so A wins; if A starts elsewhere, B can circle 3 or 12 to make the total 8 and A loses. The answer is 6."
+        ],
+        "ja": [
+          "2 倍の関係にある数だけがたがいに影響するので、1 から 12 を列に分けます：1、2、4、8；3、6、12；5、10；7；9；11。ちがう列どうしは影響しません。",
+          "各列で最後に丸がつく数はいくつか。7、9、11 は 1 個ずつ、5、10 はどちらか 1 個、1、2、4、8 はどうつけても最後はちょうど 2 個です（1 をつけると 2 はだめで、4、8 のどちらか 1 個だけ。2 をつけると 1 と 4 がだめで 8 だけ残る）。これらは合わせていつも 1 + 1 + 1 + 1 + 2 = 6 個です。",
+          "変わるのは 3、6、12 の列だけです。真ん中の 6 を先につけると 3 と 12 がだめになり 1 個、3 か 12 を先につけるとあとでもう一方のはしもつけられて 2 個です。だから丸の総数は 6 + 1 = 7 か 6 + 2 = 8 です。",
+          "甲は総数が奇数になってほしいです（1、3、5、7 個目は甲がつけ、7 個目のあと乙はつけられない）。甲が最初に 6 をつければ総数は 7 に決まり、甲が必ず勝ちます。ほかから始めると、乙が 3 か 12 をつけて総数を 8 にでき、甲は負けます。答えは 6 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "6"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade5-foundation",
+        "notes": "依 2 倍關係分串，除 3–6–12 外各串被圈個數固定（共 6），甲先圈 6 使總數為奇數 7。已用 DP 驗證甲唯一必勝首步是 6。掃過 /圈.{0,30}(2 倍|兩倍|一半)/（0 題）、/輪流.{0,20}圈/（0 題）；最接近 logic_grade5_foundation_073（擦數字剩下單雙決勝），差異：那題看最後剩下的數的奇偶；本題要把數依倍數關係拆成獨立的串，找出唯一能控制總步數奇偶的那一串"
+      }
+    },
+    {
+      "id": "logic_grade5_foundation_105",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "round_robin_equal_wins_possible_or_not",
+      "tags": [
+        "c:logic_deduction",
+        "c:mul_div",
+        "m:construction",
+        "m:contradiction"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade5",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一場球類大會中，每兩支隊伍都要互相比一場，而且每一場都一定有輸有贏、不會打成平手。大會想知道：全部比完之後，會不會出現「每一隊贏的場數都一樣」的結果？如果參加的是 5 隊，或是 6 隊，下面哪一句話對？",
+        "zh-Hans": "一场球类大会中，每两支队伍都要互相比一场，而且每一场都一定有输有赢、不会打成平手。大会想知道：全部比完之后，会不会出现「每一队赢的场数都一样」的结果？如果参加的是 5 队，或是 6 队，下面哪一句话对？",
+        "en": "At a tournament, every two teams play each other once, and every game has a winner and a loser (no draws). Could it end with every team having won the same number of games? If 5 teams take part, or if 6 teams do, which statement is true?",
+        "ja": "ある大会では、どの 2 チームもおたがいに 1 回ずつ試合をし、どの試合も必ず勝ち負けがつき、引き分けはありません。全部終わったとき、「どのチームも勝った試合の数が同じ」という結果になることはありますか。参加が 5 チームのとき、6 チームのときについて、正しいのはどれですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 B：5 隊有可能（每隊 2 勝），6 隊不可能（要 2.5 勝）。",
+        "zh-Hans": "答案是 B：5 队有可能（每队 2 胜），6 队不可能（要 2.5 胜）。",
+        "en": "The answer is B: Possible for 5 teams (2 wins each), impossible for 6 (2.5 each).",
+        "ja": "答えは B：5 チームはありえる（2 勝ずつ）、6 チームはありえない（2.5 勝）。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "每場比賽剛好產生 1 場勝，所以所有球隊的勝場數加起來等於比賽場數。5 隊共比 5 × 4 ÷ 2 = 10 場；6 隊共比 6 × 5 ÷ 2 = 15 場。",
+          "6 隊：如果每隊勝場一樣多，每隊要贏 15 ÷ 6 = 2.5 場，不是整數，不可能。",
+          "5 隊：每隊要贏 10 ÷ 5 = 2 場，而且排得出來：讓 5 隊圍成一圈，每隊都贏它順時針方向的下兩隊、輸給逆時針方向的兩隊，每兩隊剛好比一場，每隊 2 勝 2 敗。所以答案是 B。",
+          "A 錯：6 隊時平均 2.5 場不是整數。C 錯：剛好相反。D 錯：5 隊可以用上面的方法排出每隊都 2 勝。"
+        ],
+        "zh-Hans": [
+          "每场比赛刚好产生 1 场胜，所以所有球队的胜场数加起来等于比赛场数。5 队共比 5 × 4 ÷ 2 = 10 场；6 队共比 6 × 5 ÷ 2 = 15 场。",
+          "6 队：如果每队胜场一样多，每队要赢 15 ÷ 6 = 2.5 场，不是整数，不可能。",
+          "5 队：每队要赢 10 ÷ 5 = 2 场，而且排得出来：让 5 队围成一圈，每队都赢它顺时针方向的下两队、输给逆时针方向的两队，每两队刚好比一场，每队 2 胜 2 败。所以答案是 B。",
+          "A 错：6 队时平均 2.5 场不是整数。C 错：刚好相反。D 错：5 队可以用上面的方法排出每队都 2 胜。"
+        ],
+        "en": [
+          "Every game produces exactly 1 win, so the total of all teams' wins equals the number of games. 5 teams play 5 × 4 ÷ 2 = 10 games; 6 teams play 6 × 5 ÷ 2 = 15 games.",
+          "6 teams: equal wins would mean 15 ÷ 6 = 2.5 wins each, not a whole number, so it is impossible.",
+          "5 teams: each would need 10 ÷ 5 = 2 wins, and this can be arranged: put the 5 teams in a circle and let each beat the next two clockwise and lose to the two counter-clockwise; every pair plays once and each team is 2 wins, 2 losses. So the answer is B.",
+          "A is wrong: with 6 teams the average 2.5 is not whole. C is wrong: it is exactly the reverse. D is wrong: with 5 teams the circle arrangement gives each team 2 wins."
+        ],
+        "ja": [
+          "どの試合でも勝ちがちょうど 1 つ生まれるので、全チームの勝ち数の合計は試合数と同じです。5 チームでは 5 × 4 ÷ 2 = 10 試合、6 チームでは 6 × 5 ÷ 2 = 15 試合です。",
+          "6 チーム：勝ち数が同じなら 1 チーム 15 ÷ 6 = 2.5 勝で、整数でないのでありえません。",
+          "5 チーム：1 チーム 10 ÷ 5 = 2 勝で、実際に作れます。5 チームを輪にならべ、どのチームも時計回りの次の 2 チームに勝ち、反時計回りの 2 チームに負けるようにすると、どの 2 チームも 1 回ずつ試合をし、どのチームも 2 勝 2 敗です。答えは B です。",
+          "A はまちがい：6 チームでは平均 2.5 勝で整数でない。C はまちがい：ちょうど逆。D はまちがい：5 チームは上の方法でどのチームも 2 勝にできる。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "multiple_choice",
+      "options": {
+        "A": {
+          "zh-Hant": "5 隊和 6 隊都有可能，只要安排好每一場誰贏就做得到。",
+          "zh-Hans": "5 队和 6 队都有可能，只要安排好每一场谁赢就做得到。",
+          "en": "Possible for both 5 and 6 teams, by choosing the winners well.",
+          "ja": "5 チームでも 6 チームでもありえる。勝ち負けをうまく決めればよい。"
+        },
+        "B": {
+          "zh-Hant": "5 隊有可能（每隊 2 勝），6 隊不可能（要 2.5 勝）。",
+          "zh-Hans": "5 队有可能（每队 2 胜），6 队不可能（要 2.5 胜）。",
+          "en": "Possible for 5 teams (2 wins each), impossible for 6 (2.5 each).",
+          "ja": "5 チームはありえる（2 勝ずつ）、6 チームはありえない（2.5 勝）。"
+        },
+        "C": {
+          "zh-Hant": "6 隊有可能（每隊 3 勝），5 隊不可能（要 2.5 勝）。",
+          "zh-Hans": "6 队有可能（每队 3 胜），5 队不可能（要 2.5 胜）。",
+          "en": "Possible for 6 teams (3 wins each), impossible for 5 (2.5 each).",
+          "ja": "6 チームはありえる（3 勝ずつ）、5 チームはありえない（2.5 勝）。"
+        },
+        "D": {
+          "zh-Hant": "5 隊和 6 隊都不可能，總有一隊一定贏得比別隊多。",
+          "zh-Hans": "5 队和 6 队都不可能，总有一队一定赢得比别队多。",
+          "en": "Impossible for both; some team must always win more than others.",
+          "ja": "5 チームでも 6 チームでもありえない。必ずどこかのチームが多く勝つ。"
+        }
+      },
+      "correctAnswer": {
+        "type": "choice",
+        "value": "B"
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade5-foundation",
+        "notes": "總勝場數＝比賽場數：5 隊 10 場平均 2 勝（環狀安排可行），6 隊 15 場平均 2.5 勝不可能。掃過 /勝場.{0,30}(一樣|相同|都是)/（0 題）、/單循環賽/（9 題，多為已知勝場推論）；最接近 logic_grade10_foundation_015（已知四隊勝場求第五隊），差異：那題用總勝場求一個未知數；本題判斷全部相等是否可能，需同時給出不可能的整除論證與可能時的環狀構造"
+      }
+    },
+    {
+      "id": "logic_grade5_foundation_106",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "two_level_mobile_unequal_arms_total_weight",
+      "tags": [
+        "c:balance",
+        "c:ratio",
+        "m:reverse"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade5",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一個吊飾有兩根橫桿。最上面那根橫桿的吊繩把它分成左邊 10 公分、右邊 20 公分；左端掛一顆星星，右端掛著第二根橫桿。第二根橫桿的吊繩把它分成左邊 15 公分、右邊 5 公分；左端掛一個月亮，右端掛一個太陽。太陽重 6 公克，桿子和繩子的重量不計，兩根桿子都保持水平。（桿子平衡時，左邊的「重量 × 長度」等於右邊的「重量 × 長度」。）整個吊飾掛的東西一共重幾公克？",
+        "zh-Hans": "一个吊饰有两根横杆。最上面那根横杆的吊绳把它分成左边 10 厘米、右边 20 厘米；左端挂一颗星星，右端挂着第二根横杆。第二根横杆的吊绳把它分成左边 15 厘米、右边 5 厘米；左端挂一个月亮，右端挂一个太阳。太阳重 6 克，杆子和绳子的重量不计，两根杆子都保持水平。（杆子平衡时，左边的「重量 × 长度」等于右边的「重量 × 长度」。）整个吊饰挂的东西一共重几克？",
+        "en": "A mobile has two bars. The string on the top bar divides it into 10 cm on the left and 20 cm on the right; a star hangs from the left end and the second bar from the right end. The string on the second bar divides it into 15 cm on the left and 5 cm on the right; a moon hangs from the left end and a sun from the right end. The sun weighs 6 g; the bars and strings weigh nothing, and both bars hang level. (A bar balances when weight × length on the left equals weight × length on the right.) What is the total weight of the hanging objects, in grams?",
+        "ja": "モビールに 2 本の横棒があります。上の横棒はつりひもで左 10 cm、右 20 cm に分かれ、左はしに星、右はしに 2 本目の横棒がつるしてあります。2 本目の横棒はつりひもで左 15 cm、右 5 cm に分かれ、左はしに月、右はしに太陽がつるしてあります。太陽は 6 グラムで、棒とひもの重さは考えず、2 本とも水平につり合っています。（棒がつり合うとき、左の「重さ × 長さ」と右の「重さ × 長さ」は等しい。）つるしてあるもの全部で何グラムですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 24。",
+        "zh-Hans": "答案是 24。",
+        "en": "The answer is 24.",
+        "ja": "答えは 24 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "先看下面的第二根桿：月亮 × 15 = 太陽 × 5 = 6 × 5 = 30，所以月亮 = 30 ÷ 15 = 2 公克。",
+          "第二根桿下面掛的東西一共 2 + 6 = 8 公克，它整體掛在上面那根桿的右端。",
+          "上面那根桿：星星 × 10 = 8 × 20 = 160，所以星星 = 160 ÷ 10 = 16 公克。",
+          "全部一共 16 + 2 + 6 = 24 公克。（注意：短的那一邊要掛比較重的東西才會平衡。）"
+        ],
+        "zh-Hans": [
+          "先看下面的第二根杆：月亮 × 15 = 太阳 × 5 = 6 × 5 = 30，所以月亮 = 30 ÷ 15 = 2 克。",
+          "第二根杆下面挂的东西一共 2 + 6 = 8 克，它整体挂在上面那根杆的右端。",
+          "上面那根杆：星星 × 10 = 8 × 20 = 160，所以星星 = 160 ÷ 10 = 16 克。",
+          "全部一共 16 + 2 + 6 = 24 克。（注意：短的那一边要挂比较重的东西才会平衡。）"
+        ],
+        "en": [
+          "Start with the lower bar: moon × 15 = sun × 5 = 6 × 5 = 30, so the moon weighs 30 ÷ 15 = 2 g.",
+          "Everything on the lower bar weighs 2 + 6 = 8 g, and it all hangs from the right end of the top bar.",
+          "Top bar: star × 10 = 8 × 20 = 160, so the star weighs 160 ÷ 10 = 16 g.",
+          "Total 16 + 2 + 6 = 24 g. (Note: the shorter side must carry the heavier load to balance.)"
+        ],
+        "ja": [
+          "まず下の 2 本目の棒：月 × 15 = 太陽 × 5 = 6 × 5 = 30 なので、月 = 30 ÷ 15 = 2 グラムです。",
+          "2 本目の棒にさがっているものは合わせて 2 + 6 = 8 グラムで、まとめて上の棒の右はしにさがっています。",
+          "上の棒：星 × 10 = 8 × 20 = 160 なので、星 = 160 ÷ 10 = 16 グラムです。",
+          "全部で 16 + 2 + 6 = 24 グラムです。（短い側のほうに重いものをつるさないとつり合いません。）"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "24"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade5-foundation",
+        "notes": "由下往上用「重量 × 臂長」相等：月 2 公克、下層 8 公克、星 16 公克，共 24。掃過 /吊飾|懸吊|掛著/（5 題）、/(橫桿|木棒).{0,40}(平衡|水平)/（2 題）；最接近 logic_grade3_foundation_076（等臂吊飾），差異：那題每根桿從正中間吊、兩邊相等；本題兩根桿臂長都不相等，要用槓桿比例由下往上逐層推算"
+      }
+    },
+    {
+      "id": "logic_grade5_foundation_107",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "jump_one_or_two_with_missing_pad_count",
+      "tags": [
+        "c:recurrence",
+        "c:permutation_combination",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade5",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "池塘裡有編號 1 到 10 的 10 片荷葉排成一直排。青蛙站在第 1 片，每次往前跳 1 片或 2 片（往編號大的方向），要剛好跳到第 10 片。可是第 5 片荷葉已經沉下去了，青蛙不能停在第 5 片上。青蛙從第 1 片跳到第 10 片，一共有幾種不同的跳法？",
+        "zh-Hans": "池塘里有编号 1 到 10 的 10 片荷叶排成一直排。青蛙站在第 1 片，每次往前跳 1 片或 2 片（往编号大的方向），要刚好跳到第 10 片。可是第 5 片荷叶已经沉下去了，青蛙不能停在第 5 片上。青蛙从第 1 片跳到第 10 片，一共有几种不同的跳法？",
+        "en": "In a pond, 10 lily pads numbered 1 to 10 lie in a straight line. A frog sits on pad 1 and each time jumps forward 1 or 2 pads (towards higher numbers), aiming to land exactly on pad 10. But pad 5 has sunk, so the frog cannot land on pad 5. How many different ways can the frog get from pad 1 to pad 10?",
+        "ja": "池に 1 から 10 の番号のハスの葉が 10 枚、一直線にならんでいます。カエルは 1 番の葉にいて、1 回に 1 枚か 2 枚前（番号の大きいほう）へ跳び、ちょうど 10 番に着きたいです。ところが 5 番の葉はしずんでいて、5 番には止まれません。カエルが 1 番から 10 番まで行く跳び方は全部で何通りですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 15。",
+        "zh-Hans": "答案是 15。",
+        "en": "The answer is 15.",
+        "ja": "答えは 15 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "不能停在第 5 片，要越過它只能從第 4 片跳 2 片到第 6 片。所以每一種跳法都一定先到第 4 片，再一步跳到第 6 片，再從第 6 片到第 10 片。",
+          "從第 1 片到第 4 片（往前 3 片）：1+1+1、1+2、2+1，共 3 種。",
+          "從第 6 片到第 10 片（往前 4 片）：1+1+1+1；兩個 1 和一個 2 有 3 種排法；2+2；共 1 + 3 + 1 = 5 種。",
+          "前後兩段互不影響，跳法共 3 × 1 × 5 = 15 種。"
+        ],
+        "zh-Hans": [
+          "不能停在第 5 片，要越过它只能从第 4 片跳 2 片到第 6 片。所以每一种跳法都一定先到第 4 片，再一步跳到第 6 片，再从第 6 片到第 10 片。",
+          "从第 1 片到第 4 片（往前 3 片）：1+1+1、1+2、2+1，共 3 种。",
+          "从第 6 片到第 10 片（往前 4 片）：1+1+1+1；两个 1 和一个 2 有 3 种排法；2+2；共 1 + 3 + 1 = 5 种。",
+          "前后两段互不影响，跳法共 3 × 1 × 5 = 15 种。"
+        ],
+        "en": [
+          "The frog cannot land on pad 5, and the only way past it is to jump 2 from pad 4 to pad 6. So every route reaches pad 4, jumps straight to pad 6, then goes from pad 6 to pad 10.",
+          "From pad 1 to pad 4 (3 pads forward): 1+1+1, 1+2, 2+1, which is 3 ways.",
+          "From pad 6 to pad 10 (4 pads forward): 1+1+1+1; two 1s and one 2 in 3 orders; 2+2; in all 1 + 3 + 1 = 5 ways.",
+          "The two parts are independent, so there are 3 × 1 × 5 = 15 ways."
+        ],
+        "ja": [
+          "5 番には止まれないので、そこをこえるには 4 番から 2 枚跳んで 6 番に行くしかありません。だからどの跳び方も、まず 4 番に着き、1 回で 6 番に跳び、6 番から 10 番へ行きます。",
+          "1 番から 4 番（3 枚前）：1+1+1、1+2、2+1 の 3 通りです。",
+          "6 番から 10 番（4 枚前）：1+1+1+1、1 が 2 つと 2 が 1 つの順番が 3 通り、2+2 で、1 + 3 + 1 = 5 通りです。",
+          "前と後ろは別々に決められるので、3 × 1 × 5 = 15 通りです。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "15"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade5-foundation",
+        "notes": "沉掉的第 5 片迫使每條路線經過「4 → 6」，跳法 = (1→4 的 3 種) × (6→10 的 5 種) = 15。已 DP 驗證。掃過 /荷葉|跳.{0,20}(沉|壞掉|不能踩)/（2 題）、/每次.{0,10}(跳|走) ?1.{0,6}2.{0,40}不能(停|踩)/（0 題）；最接近 arithmetic_grade4_foundation 的 staircase_counting（一次走 1 或 2 階），差異：那些題是完整樓梯計數；本題中間缺一格，關鍵是發現必經 4 → 6 而把問題切成兩段相乘"
+      }
+    },
+    {
+      "id": "logic_grade5_foundation_108",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "random_two_socks_form_a_pair_chance",
+      "tags": [
+        "c:probability",
+        "c:basic_counting",
+        "m:enumeration"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade5",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "抽屜裡有 4 雙不同顏色的襪子，全部拆開混在一起，一共 8 隻（同一雙的兩隻顏色一樣，不同雙的顏色不一樣）。閉著眼睛一次拿出 2 隻，剛好是同一雙的機會是多少？",
+        "zh-Hans": "抽屉里有 4 双不同颜色的袜子，全部拆开混在一起，一共 8 只（同一双的两只颜色一样，不同双的颜色不一样）。闭着眼睛一次拿出 2 只，刚好是同一双的机会是多少？",
+        "en": "A drawer holds 4 pairs of socks in 4 different colours, all separated and mixed: 8 socks (the two socks of a pair match, different pairs differ). With eyes closed, 2 socks are taken out at once. What is the chance that they are a matching pair?",
+        "ja": "引き出しに色のちがうくつ下が 4 足あり、全部ばらばらにまぜて 8 本になっています（同じ足の 2 本は同じ色、ちがう足はちがう色）。目をつぶって一度に 2 本取り出すとき、ちょうど同じ足の 2 本になる確率はいくつですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 C：1/7，因為 28 種拿法中只有 4 種是同一雙",
+        "zh-Hans": "答案是 C：1/7，因为 28 种拿法中只有 4 种是同一双",
+        "en": "The answer is C: 1/7, because only 4 of the 28 ways give a pair",
+        "ja": "答えは C：1/7。28 通りの取り方のうち 4 通りだけがそろうから"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "把 8 隻襪子都當成不同的。一次拿 2 隻的拿法：第一隻 8 種、第二隻 7 種，但先後不計，所以有 8 × 7 ÷ 2 = 28 種，每一種機會一樣。",
+          "剛好是同一雙的拿法：4 雙各 1 種，共 4 種。",
+          "機會是 4/28 = 1/7，答案是 C。",
+          "A 錯：1/4 是把「4 雙」誤當成機會的分母。B 錯：1/8 只是拿到某一隻特定襪子的機會。D 錯：1/2 是以為不是同雙就是不同雙、各占一半。"
+        ],
+        "zh-Hans": [
+          "把 8 只袜子都当成不同的。一次拿 2 只的拿法：第一只 8 种、第二只 7 种，但先后不计，所以有 8 × 7 ÷ 2 = 28 种，每一种机会一样。",
+          "刚好是同一双的拿法：4 双各 1 种，共 4 种。",
+          "机会是 4/28 = 1/7，答案是 C。",
+          "A 错：1/4 是把「4 双」误当成机会的分母。B 错：1/8 只是拿到某一只特定袜子的机会。D 错：1/2 是以为不是同双就是不同双、各占一半。"
+        ],
+        "en": [
+          "Treat the 8 socks as all different. Taking 2 at once: 8 choices for one and 7 for the other, but order does not matter, so 8 × 7 ÷ 2 = 28 equally likely pairs.",
+          "Matching pairs: 1 for each of the 4 colours, 4 in all.",
+          "The chance is 4/28 = 1/7: the answer is C.",
+          "A is wrong: 1/4 wrongly uses \"4 pairs\" as the denominator. B is wrong: 1/8 is just the chance of getting one particular sock. D is wrong: 1/2 assumes \"match\" and \"no match\" are equally likely."
+        ],
+        "ja": [
+          "8 本のくつ下をすべて区別します。一度に 2 本取る取り方は、1 本目 8 通り、2 本目 7 通りですが順番は考えないので 8 × 7 ÷ 2 = 28 通りで、どれも同じように起こります。",
+          "ちょうど同じ足になる取り方は、4 足それぞれ 1 通りで 4 通りです。",
+          "確率は 4/28 = 1/7 で、答えは C です。",
+          "A はまちがい：1/4 は「4 足」を分母にしてしまったもの。B はまちがい：1/8 は特定の 1 本を取る確率にすぎない。D はまちがい：1/2 は「そろう」と「そろわない」が半分ずつだと思いこんだもの。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "multiple_choice",
+      "options": {
+        "A": {
+          "zh-Hant": "1/4，因為一共有 4 雙襪子，拿到其中一雙",
+          "zh-Hans": "1/4，因为一共有 4 双袜子，拿到其中一双",
+          "en": "1/4, because there are 4 pairs and one is picked",
+          "ja": "1/4。くつ下は 4 足あり、そのうち 1 足が取れるから"
+        },
+        "B": {
+          "zh-Hant": "1/8，因為一共有 8 隻襪子，各有一次機會",
+          "zh-Hans": "1/8，因为一共有 8 只袜子，各有一次机会",
+          "en": "1/8, because there are 8 socks, each with one chance",
+          "ja": "1/8。くつ下は 8 本あり、それぞれ 1 回ずつのチャンスだから"
+        },
+        "C": {
+          "zh-Hant": "1/7，因為 28 種拿法中只有 4 種是同一雙",
+          "zh-Hans": "1/7，因为 28 种拿法中只有 4 种是同一双",
+          "en": "1/7, because only 4 of the 28 ways give a pair",
+          "ja": "1/7。28 通りの取り方のうち 4 通りだけがそろうから"
+        },
+        "D": {
+          "zh-Hant": "1/2，因為拿到的不是同一雙，就是不同雙",
+          "zh-Hans": "1/2，因为拿到的不是同一双，就是不同双",
+          "en": "1/2, because the two socks either match or do not",
+          "ja": "1/2。取った 2 本はそろうか、そろわないかのどちらかだから"
+        }
+      },
+      "correctAnswer": {
+        "type": "choice",
+        "value": "C"
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade5-foundation",
+        "notes": "8 隻取 2 隻共 28 種，同雙 4 種，機會 1/7。掃過 /襪子/（抽屜原理類 3 題）、/(拿|取)出 ?2 ?隻.{0,30}(同一雙|一雙)/（0 題）；最接近 logic_grade4_foundation_091（手套最少拿幾隻保證配成一雙），差異：那題是最壞情形的鴿籠；本題是隨機拿 2 隻配成一雙的機率"
+      }
+    },
+    {
+      "id": "logic_grade5_foundation_109",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "balance_with_subsets_of_five_weights",
+      "tags": [
+        "c:balance",
+        "c:basic_counting",
+        "m:enumeration"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade5",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "有 1 公克、2 公克、3 公克、4 公克、5 公克的砝碼各一個。從中挑一些放在天平的一邊、另一些放在另一邊（不必全部用上，但兩邊都至少要放一個），讓天平平衡。如果只是把兩邊對調，算同一種放法。一共有幾種不同的放法？",
+        "zh-Hans": "有 1 克、2 克、3 克、4 克、5 克的砝码各一个。从中挑一些放在天平的一边、另一些放在另一边（不必全部用上，但两边都至少要放一个），让天平平衡。如果只是把两边对调，算同一种放法。一共有几种不同的放法？",
+        "en": "There is one weight each of 1 g, 2 g, 3 g, 4 g and 5 g. Put some of them on one pan of a balance and some others on the other pan (not all need to be used, but each pan gets at least one) so that it balances. Swapping the two pans counts as the same arrangement. How many different arrangements are there?",
+        "ja": "1 グラム、2 グラム、3 グラム、4 グラム、5 グラムの分銅が 1 個ずつあります。いくつかを天びんの一方の皿に、別のいくつかをもう一方の皿にのせて、つり合わせます（全部使わなくてもよいが、どちらの皿にも 1 個以上のせる）。左右を入れかえただけのものは同じのせ方と数えます。ちがうのせ方は全部で何通りありますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 7。",
+        "zh-Hans": "答案是 7。",
+        "en": "The answer is 7.",
+        "ja": "答えは 7 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "平衡時兩邊重量相等。依「每邊的重量」分類，而且兩邊不能用到同一個砝碼。每邊最多是 (1 + 2 + 3 + 4 + 5) ÷ 2 = 7.5 公克，所以每邊重量是 3 到 7 公克。（每邊 1 或 2 公克時，另一邊湊不出不同的砝碼。）",
+          "每邊 3 公克：{1, 2} 對 {3}。每邊 4 公克：{1, 3} 對 {4}。每邊 5 公克：{1, 4} 對 {5}、{2, 3} 對 {5}、{2, 3} 對 {1, 4}，共 3 種。",
+          "每邊 6 公克：{1, 5} 對 {2, 4}（{1, 2, 3} 要配 6 公克，剩下的 4、5 湊不出 6）。每邊 7 公克：{2, 5} 對 {3, 4}（{1, 2, 4} 剩 3、5 湊不出 7）。",
+          "一共 1 + 1 + 3 + 1 + 1 = 7 種放法。"
+        ],
+        "zh-Hans": [
+          "平衡时两边重量相等。依「每边的重量」分类，而且两边不能用到同一个砝码。每边最多是 (1 + 2 + 3 + 4 + 5) ÷ 2 = 7.5 克，所以每边重量是 3 到 7 克。（每边 1 或 2 克时，另一边凑不出不同的砝码。）",
+          "每边 3 克：{1, 2} 对 {3}。每边 4 克：{1, 3} 对 {4}。每边 5 克：{1, 4} 对 {5}、{2, 3} 对 {5}、{2, 3} 对 {1, 4}，共 3 种。",
+          "每边 6 克：{1, 5} 对 {2, 4}（{1, 2, 3} 要配 6 克，剩下的 4、5 凑不出 6）。每边 7 克：{2, 5} 对 {3, 4}（{1, 2, 4} 剩 3、5 凑不出 7）。",
+          "一共 1 + 1 + 3 + 1 + 1 = 7 种放法。"
+        ],
+        "en": [
+          "In balance the two pans weigh the same. Sort by the weight on each pan; the pans may not share a weight. Each pan holds at most (1 + 2 + 3 + 4 + 5) ÷ 2 = 7.5 g, so each pan weighs 3 to 7 g. (With 1 or 2 g per pan, the other pan cannot be made from different weights.)",
+          "3 g each: {1, 2} vs {3}. 4 g each: {1, 3} vs {4}. 5 g each: {1, 4} vs {5}, {2, 3} vs {5}, {2, 3} vs {1, 4}, 3 ways.",
+          "6 g each: {1, 5} vs {2, 4} ({1, 2, 3} would need 6 g from 4 and 5, impossible). 7 g each: {2, 5} vs {3, 4} ({1, 2, 4} would need 7 g from 3 and 5, impossible).",
+          "In all 1 + 1 + 3 + 1 + 1 = 7 arrangements."
+        ],
+        "ja": [
+          "つり合うとき両方の皿の重さは同じです。「片方の皿の重さ」で分け、両方の皿で同じ分銅は使えません。片方は多くて (1 + 2 + 3 + 4 + 5) ÷ 2 = 7.5 グラムなので、片方の重さは 3 から 7 グラムです。（1 か 2 グラムだと、もう一方をちがう分銅で作れません。）",
+          "3 グラム：{1, 2} と {3}。4 グラム：{1, 3} と {4}。5 グラム：{1, 4} と {5}、{2, 3} と {5}、{2, 3} と {1, 4} の 3 通り。",
+          "6 グラム：{1, 5} と {2, 4}（{1, 2, 3} だと残りの 4、5 で 6 が作れない）。7 グラム：{2, 5} と {3, 4}（{1, 2, 4} だと残りの 3、5 で 7 が作れない）。",
+          "全部で 1 + 1 + 3 + 1 + 1 = 7 通りです。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "7"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade5-foundation",
+        "notes": "依每邊重量 3～7 分類列出不共用砝碼的等重兩組：1、1、3、1、1 種，共 7。已窮舉驗證。掃過 /砝碼.{0,60}(平衡|一樣重).{0,30}(幾種|放法)/（0 題）、/分成兩組.{0,30}(相等|一樣)/（grouping_balance 4 題，皆須全部用上）；最接近 logic_grade4_foundation_045（1～8 全部分成兩組等和的分法），差異：那題每個數都要用；本題可以不用某些砝碼，要按重量分類找不相交的等和子集"
+      }
     }
   ]
 }
