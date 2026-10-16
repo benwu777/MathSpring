@@ -7541,6 +7541,396 @@
         "reference": "combinatorics-grade12-foundation",
         "notes": "沿 1 到 13 的圈轉一格和的餘數加 5，每 13 組成一群各恰有一組和為 13 的倍數。掃過 /13 的倍數|子集.*和/（7 題）；最接近 combinatorics_grade12_foundation_076，差異：該題是 1 到 9 所有子集和為 3 的倍數（單位根）；本題是固定 5 元子集，用旋轉軌道均分"
       }
+    },
+    {
+      "id": "combinatorics_grade12_foundation_087",
+      "reviewStatus": "ok",
+      "topic": "combinatorics",
+      "subtopic": "edge_subsets_without_isolated_vertex_inclusion_exclusion",
+      "tags": [
+        "c:inclusion_exclusion",
+        "c:graph_theory",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "甲、乙、丙、丁四個村莊，任兩村之間都可以決定修或不修一條直通的道路（共 6 條可能的道路，各自獨立決定）。要求每一個村莊都至少有一條修好的道路連到別的村莊。符合要求的修路方案一共有幾種？",
+        "zh-Hans": "甲、乙、丙、丁四个村庄，任两村之间都可以决定修或不修一条直通的道路（共 6 条可能的道路，各自独立决定）。要求每一个村庄都至少有一条修好的道路连到别的村庄。符合要求的修路方案一共有几种？",
+        "en": "Four villages P, Q, R, S: between any two, a direct road may or may not be built (6 possible roads, each decided independently). Every village must have at least one built road leading to another village. How many building plans meet this requirement?",
+        "ja": "甲、乙、丙、丁の 4 つの村があり、どの 2 村の間にも直通の道路を造るか造らないかを決められる（造りうる道路は 6 本で、それぞれ独立に決める）。どの村にも、ほかの村へ通じる造った道路が少なくとも 1 本あるようにしたい。条件を満たす道路の造り方は何通りか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 41。",
+        "zh-Hans": "答案是 41。",
+        "en": "The answer is 41.",
+        "ja": "答えは 41 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "不加限制時，每條路修或不修，共 2⁶ = 64 種方案。用排容扣掉「有村莊沒有路」的方案。",
+          "指定某一個村莊沒有路：與它相連的 3 條路都不修，另外 3 條（其餘三村之間）任意，共 2³ = 8 種；有 4 個村莊可指定。指定某兩個村莊都沒有路：只剩它們以外兩村之間那 1 條路任意，共 2¹ = 2 種；有 C(4, 2) = 6 組。",
+          "指定三個村莊都沒有路：所有路都不能修（剩下的一村也只能孤立），共 1 種，有 4 組；四個都沒有路：1 種。",
+          "排容：64 − 4 × 8 + 6 × 2 − 4 × 1 + 1 = 64 − 32 + 12 − 4 + 1 = 41 種。"
+        ],
+        "zh-Hans": [
+          "不加限制时，每条路修或不修，共 2⁶ = 64 种方案。用容斥扣掉「有村庄没有路」的方案。",
+          "指定某一个村庄没有路：与它相连的 3 条路都不修，另外 3 条（其余三村之间）任意，共 2³ = 8 种；有 4 个村庄可指定。指定某两个村庄都没有路：只剩它们以外两村之间那 1 条路任意，共 2¹ = 2 种；有 C(4, 2) = 6 组。",
+          "指定三个村庄都没有路：所有路都不能修（剩下的一村也只能孤立），共 1 种，有 4 组；四个都没有路：1 种。",
+          "容斥：64 − 4 × 8 + 6 × 2 − 4 × 1 + 1 = 64 − 32 + 12 − 4 + 1 = 41 种。"
+        ],
+        "en": [
+          "Without restrictions each road is built or not: 2⁶ = 64 plans. Use inclusion–exclusion to remove plans in which some village has no road.",
+          "A given village with no road: its 3 roads are not built and the other 3 roads (among the other villages) are free, 2³ = 8 plans; 4 villages to choose. Two given villages with no road: only the road between the other two is free, 2¹ = 2 plans; C(4, 2) = 6 pairs.",
+          "Three given villages with no road: no road can be built at all (the fourth is then isolated too), 1 plan, 4 triples; all four with no road: 1 plan.",
+          "Inclusion–exclusion: 64 − 4 × 8 + 6 × 2 − 4 × 1 + 1 = 64 − 32 + 12 − 4 + 1 = 41 plans."
+        ],
+        "ja": [
+          "制限がなければ各道路を造るか造らないかで 2⁶ = 64 通り。包除原理で「道路のない村がある」造り方を除く。",
+          "特定の 1 村に道路がない：その村につながる 3 本は造らず、残り 3 本（ほかの 3 村の間）は自由で 2³ = 8 通り。村の選び方は 4 通り。特定の 2 村に道路がない：残り 2 村の間の 1 本だけが自由で 2¹ = 2 通り。組は C(4, 2) = 6 通り。",
+          "特定の 3 村に道路がない：どの道路も造れず（残る 1 村も孤立）1 通りで、組は 4 通り。4 村とも道路がない：1 通り。",
+          "包除原理より 64 − 4 × 8 + 6 × 2 − 4 × 1 + 1 = 64 − 32 + 12 − 4 + 1 = 41 通り。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "41"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "combinatorics-grade12-foundation",
+        "notes": "對孤立頂點集合排容：2⁶ − 4·2³ + 6·2¹ − 4·2⁰ + 1 = 41。掃過 /修.*道路|道路.*修/（6 題）、/至少有一條.*(路|道路)/（0 題）；最接近 combinatorics_grade11_foundation_075（五村恰修 4 條路的樹），差異：該題數生成樹；本題是 K4 的邊子集中「沒有孤立點」的個數，對孤立村莊集合做排容，每項是 2 的（剩餘邊數）次方"
+      }
+    },
+    {
+      "id": "combinatorics_grade12_foundation_088",
+      "reviewStatus": "ok",
+      "topic": "combinatorics",
+      "subtopic": "variance_of_fixed_points_of_random_permutation",
+      "tags": [
+        "c:stdev",
+        "c:expectation",
+        "m:bijection"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "6 封不同的信隨機裝進 6 個寫好地址的信封，每個信封裝一封，所有裝法機率相同。設 X 是裝對信封的信的封數。X 的變異數是多少？",
+        "zh-Hans": "6 封不同的信随机装进 6 个写好地址的信封，每个信封装一封，所有装法概率相同。设 X 是装对信封的信的封数。X 的方差是多少？",
+        "en": "Six different letters are put at random into six addressed envelopes, one per envelope, all arrangements equally likely. Let X be the number of letters in their correct envelopes. What is the variance of X?",
+        "ja": "6 通の異なる手紙を、あて名を書いた 6 枚の封筒に 1 通ずつでたらめに入れる（どの入れ方も同様に確からしい）。正しい封筒に入った手紙の数を X とする。X の分散はいくらか。"
+      },
+      "options": {
+        "A": {
+          "zh-Hant": "5/6，因為 X 是 n = 6、p = 1/6 的二項分布",
+          "zh-Hans": "5/6，因为 X 是 n = 6、p = 1/6 的二项分布",
+          "en": "5/6, since X is binomial with n = 6, p = 1/6",
+          "ja": "5/6。X は n = 6、p = 1/6 の二項分布だから"
+        },
+        "B": {
+          "zh-Hant": "1，因為 E(X²) = 2 而 E(X) = 1",
+          "zh-Hans": "1，因为 E(X²) = 2 而 E(X) = 1",
+          "en": "1, since E(X²) = 2 and E(X) = 1",
+          "ja": "1。E(X²) = 2、E(X) = 1 だから"
+        },
+        "C": {
+          "zh-Hant": "1/6，因為每封信裝對的機率都是 1/6",
+          "zh-Hans": "1/6，因为每封信装对的概率都是 1/6",
+          "en": "1/6, since each letter is correct with probability 1/6",
+          "ja": "1/6。各手紙が正しく入る確率が 1/6 だから"
+        },
+        "D": {
+          "zh-Hant": "6，因為一共有 6 封信可以裝對或裝錯",
+          "zh-Hans": "6，因为一共有 6 封信可以装对或装错",
+          "en": "6, since there are 6 letters that can be right or wrong",
+          "ja": "6。正しく入るかどうかの手紙が 6 通あるから"
+        }
+      },
+      "answer": {
+        "zh-Hant": "答案是 B：1，因為 E(X²) = 2 而 E(X) = 1。",
+        "zh-Hans": "答案是 B：1，因为 E(X²) = 2 而 E(X) = 1。",
+        "en": "The answer is B: 1, since E(X²) = 2 and E(X) = 1.",
+        "ja": "答えは B：1。E(X²) = 2、E(X) = 1 だから です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "令 Iₖ 在「第 k 封裝對」時為 1，否則為 0，則 X = I₁ + I₂ + ⋯ + I₆。每封信裝對的機率是 1/6，所以 E(X) = 6 × 1/6 = 1。",
+          "E(X²) = E((I₁ + ⋯ + I₆)²) = Σ E(Iₖ²) + Σ_{j≠k} E(IⱼIₖ)。因為 Iₖ² = Iₖ，第一部分是 6 × 1/6 = 1。",
+          "指定兩封 j、k 都裝對的機率是 (1/6) × (1/5) = 1/30（第 j 封裝對後，第 k 封要從剩下 5 個信封中裝對）。有序的 (j, k) 共 6 × 5 = 30 組，第二部分是 30 × 1/30 = 1。所以 E(X²) = 2。",
+          "Var(X) = E(X²) − (E(X))² = 2 − 1 = 1，答案是 B。（事實上不論信有幾封，只要至少 2 封，變異數都是 1。）",
+          "A 的 5/6 是把各封當成互相獨立、套二項分布 6 × 1/6 × 5/6 算出來的，但兩封是否裝對並不獨立；C 的 1/6 只是單封裝對的機率；D 的 6 是信的封數，不是變異數。"
+        ],
+        "zh-Hans": [
+          "令 Iₖ 在「第 k 封装对」时为 1，否则为 0，则 X = I₁ + I₂ + ⋯ + I₆。每封信装对的概率是 1/6，所以 E(X) = 6 × 1/6 = 1。",
+          "E(X²) = E((I₁ + ⋯ + I₆)²) = Σ E(Iₖ²) + Σ_{j≠k} E(IⱼIₖ)。因为 Iₖ² = Iₖ，第一部分是 6 × 1/6 = 1。",
+          "指定两封 j、k 都装对的概率是 (1/6) × (1/5) = 1/30（第 j 封装对后，第 k 封要从剩下 5 个信封中装对）。有序的 (j, k) 共 6 × 5 = 30 组，第二部分是 30 × 1/30 = 1。所以 E(X²) = 2。",
+          "Var(X) = E(X²) − (E(X))² = 2 − 1 = 1，答案是 B。（事实上不论信有几封，只要至少 2 封，方差都是 1。）",
+          "A 的 5/6 是把各封当成相互独立、套二项分布 6 × 1/6 × 5/6 算出来的，但两封是否装对并不独立；C 的 1/6 只是单封装对的概率；D 的 6 是信的封数，不是方差。"
+        ],
+        "en": [
+          "Let Iₖ be 1 if letter k is in its envelope and 0 otherwise, so X = I₁ + I₂ + ⋯ + I₆. Each letter is correct with probability 1/6, so E(X) = 6 × 1/6 = 1.",
+          "E(X²) = E((I₁ + ⋯ + I₆)²) = Σ E(Iₖ²) + Σ_{j≠k} E(IⱼIₖ). Since Iₖ² = Iₖ, the first part is 6 × 1/6 = 1.",
+          "Two given letters j, k are both correct with probability (1/6) × (1/5) = 1/30 (after j is correct, k must hit its envelope among the remaining 5). There are 6 × 5 = 30 ordered pairs (j, k), so the second part is 30 × 1/30 = 1. Hence E(X²) = 2.",
+          "Var(X) = E(X²) − (E(X))² = 2 − 1 = 1; the answer is B. (In fact the variance is 1 for any number of letters, as long as there are at least 2.)",
+          "A's 5/6 treats the letters as independent and uses the binomial formula 6 × 1/6 × 5/6, but whether two letters are correct is not independent; C's 1/6 is just the chance for one letter; D's 6 is the number of letters, not the variance."
+        ],
+        "ja": [
+          "k 番目の手紙が正しく入れば 1、そうでなければ 0 となる Iₖ を考えると X = I₁ + I₂ + ⋯ + I₆。各手紙が正しく入る確率は 1/6 なので E(X) = 6 × 1/6 = 1。",
+          "E(X²) = E((I₁ + ⋯ + I₆)²) = Σ E(Iₖ²) + Σ_{j≠k} E(IⱼIₖ)。Iₖ² = Iₖ なので第 1 の部分は 6 × 1/6 = 1。",
+          "指定した 2 通 j、k がともに正しく入る確率は (1/6) × (1/5) = 1/30（j が正しく入ったあと、k は残り 5 枚から正しい封筒に入る必要がある）。順序つきの (j, k) は 6 × 5 = 30 組なので、第 2 の部分は 30 × 1/30 = 1。よって E(X²) = 2。",
+          "Var(X) = E(X²) − (E(X))² = 2 − 1 = 1 で、答えは B。（実は手紙が 2 通以上なら何通でも分散は 1。）",
+          "A の 5/6 は各手紙を独立とみて二項分布の式 6 × 1/6 × 5/6 を使ったものだが、2 通が正しく入るかどうかは独立ではない。C の 1/6 は 1 通が正しく入る確率にすぎない。D の 6 は手紙の数で分散ではない。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "multiple_choice",
+      "correctAnswer": {
+        "type": "choice",
+        "value": "B"
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "combinatorics-grade12-foundation",
+        "notes": "X = ΣIₖ，E(X) = 1，E(X²) = 1 + 30 × 1/30 = 2，Var = 1（不是二項分布的 5/6）。掃過 /裝對|裝錯|信封/（7 題）、/變異數/（15 題）；最接近 combinatorics_grade12_foundation_075（部分錯排計數），差異：該題是排容數錯排；本題用指標變數求固定點個數的變異數，關鍵是兩封同時裝對的機率 1/30 不等於 (1/6)²"
+      }
+    },
+    {
+      "id": "combinatorics_grade12_foundation_089",
+      "reviewStatus": "ok",
+      "topic": "combinatorics",
+      "subtopic": "parity_of_heads_biased_coin_recurrence",
+      "tags": [
+        "c:recurrence",
+        "c:probability",
+        "m:invariant"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一枚不公正的硬幣，每次擲出正面的機率都是 1/3，各次互相獨立。連續擲 5 次，正面出現偶數次（包含 0 次）的機率寫成最簡分數 p/q，求 p + q。",
+        "zh-Hans": "一枚不公正的硬币，每次掷出正面的概率都是 1/3，各次相互独立。连续掷 5 次，正面出现偶数次（包含 0 次）的概率写成最简分数 p/q，求 p + q。",
+        "en": "A biased coin shows heads with probability 1/3 on each toss, independently. It is tossed 5 times. The probability that the number of heads is even (including 0) is p/q in lowest terms. Find p + q.",
+        "ja": "1 回ごとに表の出る確率が 1/3 のゆがんだ硬貨を、独立に 5 回投げる。表の出る回数が偶数（0 回を含む）である確率を既約分数 p/q で表すとき、p + q を求めよ。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 365。",
+        "zh-Hans": "答案是 365。",
+        "en": "The answer is 365.",
+        "ja": "答えは 365 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "設擲 n 次後正面次數為偶數的機率是 pₙ，p₀ = 1（還沒擲時 0 次是偶數）。第 n 次擲反面（機率 2/3）時奇偶不變，擲正面（機率 1/3）時奇偶改變。",
+          "所以 pₙ = (2/3)pₙ₋₁ + (1/3)(1 − pₙ₋₁) = 1/3 + (1/3)pₙ₋₁。",
+          "以 1/2 為基準：pₙ − 1/2 = (1/3)(pₙ₋₁ − 1/2)，因此 pₙ − 1/2 = (1/3)ⁿ(p₀ − 1/2) = (1/2)(1/3)ⁿ，pₙ = 1/2 + (1/2)(1/3)ⁿ。",
+          "p₅ = 1/2 + 1/(2 × 243) = 243/486 + 1/486 = 244/486 = 122/243。122 = 2 × 61，243 = 3⁵，已是最簡分數。",
+          "所以 p + q = 122 + 243 = 365。"
+        ],
+        "zh-Hans": [
+          "设掷 n 次后正面次数为偶数的概率是 pₙ，p₀ = 1（还没掷时 0 次是偶数）。第 n 次掷反面（概率 2/3）时奇偶不变，掷正面（概率 1/3）时奇偶改变。",
+          "所以 pₙ = (2/3)pₙ₋₁ + (1/3)(1 − pₙ₋₁) = 1/3 + (1/3)pₙ₋₁。",
+          "以 1/2 为基准：pₙ − 1/2 = (1/3)(pₙ₋₁ − 1/2)，因此 pₙ − 1/2 = (1/3)ⁿ(p₀ − 1/2) = (1/2)(1/3)ⁿ，pₙ = 1/2 + (1/2)(1/3)ⁿ。",
+          "p₅ = 1/2 + 1/(2 × 243) = 243/486 + 1/486 = 244/486 = 122/243。122 = 2 × 61，243 = 3⁵，已是最简分数。",
+          "所以 p + q = 122 + 243 = 365。"
+        ],
+        "en": [
+          "Let pₙ be the probability of an even number of heads after n tosses, with p₀ = 1 (zero heads is even). A tail (probability 2/3) keeps the parity; a head (probability 1/3) flips it.",
+          "So pₙ = (2/3)pₙ₋₁ + (1/3)(1 − pₙ₋₁) = 1/3 + (1/3)pₙ₋₁.",
+          "Measured from 1/2: pₙ − 1/2 = (1/3)(pₙ₋₁ − 1/2), so pₙ − 1/2 = (1/3)ⁿ(p₀ − 1/2) = (1/2)(1/3)ⁿ and pₙ = 1/2 + (1/2)(1/3)ⁿ.",
+          "p₅ = 1/2 + 1/(2 × 243) = 243/486 + 1/486 = 244/486 = 122/243. Since 122 = 2 × 61 and 243 = 3⁵, this is in lowest terms.",
+          "So p + q = 122 + 243 = 365."
+        ],
+        "ja": [
+          "n 回投げたあと表の回数が偶数である確率を pₙ とし、p₀ = 1（0 回は偶数）とする。裏（確率 2/3）が出れば偶奇は変わらず、表（確率 1/3）が出れば偶奇が入れかわる。",
+          "よって pₙ = (2/3)pₙ₋₁ + (1/3)(1 − pₙ₋₁) = 1/3 + (1/3)pₙ₋₁。",
+          "1/2 を基準にすると pₙ − 1/2 = (1/3)(pₙ₋₁ − 1/2) なので pₙ − 1/2 = (1/3)ⁿ(p₀ − 1/2) = (1/2)(1/3)ⁿ、pₙ = 1/2 + (1/2)(1/3)ⁿ。",
+          "p₅ = 1/2 + 1/(2 × 243) = 243/486 + 1/486 = 244/486 = 122/243。122 = 2 × 61、243 = 3⁵ なので既約。",
+          "よって p + q = 122 + 243 = 365。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "365"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "combinatorics-grade12-foundation",
+        "notes": "奇偶狀態遞迴 pₙ − 1/2 = (pₙ₋₁ − 1/2)/3，p₅ = 122/243。掃過 /偶數次/（2 題）、/不公正的硬幣|正面的機率/（4 題）；最接近 combinatorics_grade11_foundation_073（三角形上隨機走回原點），差異：該題狀態是三個頂點；本題只追蹤正面次數的奇偶，兩狀態遞迴 pₙ = 1/3 + pₙ₋₁/3 以 1/2 為不動點"
+      }
+    },
+    {
+      "id": "combinatorics_grade12_foundation_090",
+      "reviewStatus": "ok",
+      "topic": "combinatorics",
+      "subtopic": "probability_equal_heads_two_players_vandermonde",
+      "tags": [
+        "c:binomial",
+        "c:probability",
+        "m:bijection"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "甲、乙兩人各擲 4 枚公正的硬幣。兩人擲出的正面枚數相同的機率寫成最簡分數 p/q，求 p + q。",
+        "zh-Hans": "甲、乙两人各掷 4 枚公正的硬币。两人掷出的正面枚数相同的概率写成最简分数 p/q，求 p + q。",
+        "en": "P and Q each toss 4 fair coins. The probability that they get the same number of heads is p/q in lowest terms. Find p + q.",
+        "ja": "甲と乙がそれぞれ公正な硬貨を 4 枚ずつ投げる。2 人の表の枚数が等しくなる確率を既約分数 p/q で表すとき、p + q を求めよ。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 163。",
+        "zh-Hans": "答案是 163。",
+        "en": "The answer is 163.",
+        "ja": "答えは 163 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "8 枚硬幣的結果共 2⁸ = 256 種，機會相同。甲恰有 k 枚正面有 C(4, k) 種，乙也一樣，所以兩人都是 k 枚的結果有 C(4, k)² 種。",
+          "要算 Σ C(4, k)²（k = 0 到 4）。巧妙的對應：「甲正面數 = 乙正面數」等於「甲的正面數 + 乙的反面數 = 4」，也就是在 8 枚硬幣中，把甲的正面和乙的反面合起來恰好選 4 枚，共 C(8, 4) = 70 種。",
+          "直接加也一樣：1² + 4² + 6² + 4² + 1² = 1 + 16 + 36 + 16 + 1 = 70。",
+          "機率 = 70/256 = 35/128，所以 p + q = 35 + 128 = 163。"
+        ],
+        "zh-Hans": [
+          "8 枚硬币的结果共 2⁸ = 256 种，机会相同。甲恰有 k 枚正面有 C(4, k) 种，乙也一样，所以两人都是 k 枚的结果有 C(4, k)² 种。",
+          "要算 Σ C(4, k)²（k = 0 到 4）。巧妙的对应：「甲正面数 = 乙正面数」等于「甲的正面数 + 乙的反面数 = 4」，也就是在 8 枚硬币中，把甲的正面和乙的反面合起来恰好选 4 枚，共 C(8, 4) = 70 种。",
+          "直接加也一样：1² + 4² + 6² + 4² + 1² = 1 + 16 + 36 + 16 + 1 = 70。",
+          "概率 = 70/256 = 35/128，所以 p + q = 35 + 128 = 163。"
+        ],
+        "en": [
+          "The 8 coins have 2⁸ = 256 equally likely outcomes. P has exactly k heads in C(4, k) ways, and so does Q, so both have k heads in C(4, k)² ways.",
+          "We need Σ C(4, k)² (k = 0 to 4). A neat correspondence: \"P's heads = Q's heads\" is the same as \"P's heads + Q's tails = 4\", i.e. choosing exactly 4 of the 8 coins as P's heads together with Q's tails: C(8, 4) = 70 ways.",
+          "Direct addition agrees: 1² + 4² + 6² + 4² + 1² = 1 + 16 + 36 + 16 + 1 = 70.",
+          "The probability is 70/256 = 35/128, so p + q = 35 + 128 = 163."
+        ],
+        "ja": [
+          "8 枚の硬貨の結果は 2⁸ = 256 通りで同様に確からしい。甲の表がちょうど k 枚になるのは C(4, k) 通りで乙も同じなので、2 人とも k 枚になるのは C(4, k)² 通り。",
+          "Σ C(4, k)²（k = 0〜4）を求める。うまい対応：「甲の表の数 = 乙の表の数」は「甲の表の数 + 乙の裏の数 = 4」と同じで、8 枚から甲の表と乙の裏を合わせてちょうど 4 枚選ぶことにあたり、C(8, 4) = 70 通り。",
+          "直接足しても 1² + 4² + 6² + 4² + 1² = 1 + 16 + 36 + 16 + 1 = 70 で一致する。",
+          "確率は 70/256 = 35/128 で、p + q = 35 + 128 = 163。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "163"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "combinatorics-grade12-foundation",
+        "notes": "甲正面數 = 乙正面數 ⇔ 甲正面 + 乙反面 = 4，Σ C(4, k)² = C(8, 4) = 70，機率 35/128。掃過 /正面.*枚數|枚.*正面/（24 題）、/各擲/（2 題）；最接近 combinatorics_grade9_foundation_052（甲擲 3 枚、乙擲 2 枚，甲正面多的機率），差異：該題用「多一枚」的對稱論證得 1/2；本題求兩人正面數相等，用「甲正面 + 乙反面 = 4」的一一對應得 Σ C(4, k)² = C(8, 4)"
+      }
+    },
+    {
+      "id": "combinatorics_grade12_foundation_091",
+      "reviewStatus": "ok",
+      "topic": "combinatorics",
+      "subtopic": "probability_random_tournament_has_no_cyclic_triple",
+      "tags": [
+        "c:graph_theory",
+        "c:probability",
+        "m:bijection"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "甲、乙、丙、丁 4 隊進行單循環賽，共 6 場，每場兩隊勝負的機率各 1/2，各場互相獨立。賽後「沒有出現任何三隊循環」（也就是不存在三隊 X、Y、Z 使 X 勝 Y、Y 勝 Z、Z 勝 X）的機率寫成最簡分數 p/q，求 p + q。",
+        "zh-Hans": "甲、乙、丙、丁 4 队进行单循环赛，共 6 场，每场两队胜负的概率各 1/2，各场相互独立。赛后「没有出现任何三队循环」（也就是不存在三队 X、Y、Z 使 X 胜 Y、Y 胜 Z、Z 胜 X）的概率写成最简分数 p/q，求 p + q。",
+        "en": "Four teams play a round robin of 6 games; in each game either team wins with probability 1/2, independently. The probability that there is no \"cyclic triple\" (no three teams X, Y, Z with X beating Y, Y beating Z and Z beating X) is p/q in lowest terms. Find p + q.",
+        "ja": "甲、乙、丙、丁の 4 チームが総当たりで 6 試合を行い、各試合はどちらが勝つ確率も 1/2 で独立である。試合後に「3 チームの循環」（X が Y に、Y が Z に、Z が X に勝つような 3 チーム X、Y、Z）が 1 つもない確率を既約分数 p/q で表すとき、p + q を求めよ。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 11。",
+        "zh-Hans": "答案是 11。",
+        "en": "The answer is 11.",
+        "ja": "答えは 11 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "所有結果共 2⁶ = 64 種，機會相同。",
+          "若沒有三隊循環，「勝」就有遞移性：X 勝 Y、Y 勝 Z 時，X 與 Z 那場不能是 Z 勝（否則成循環），所以 X 勝 Z。於是勝場最多的隊贏了其他所有隊，去掉它後剩下的隊伍同理，四隊可以排成名次，每隊都贏了排在後面的所有隊，勝場數是 3、2、1、0。",
+          "反過來，任給四隊的一個名次順序，規定「排前面的贏排後面的」，就得到一個沒有循環的結果；不同的順序給出不同的結果（勝場數 3、2、1、0 可以把順序讀回來）。所以沒有循環的結果和四隊的排列一一對應，共 4! = 24 種。",
+          "機率 = 24/64 = 3/8，所以 p + q = 3 + 8 = 11。"
+        ],
+        "zh-Hans": [
+          "所有结果共 2⁶ = 64 种，机会相同。",
+          "若没有三队循环，「胜」就有传递性：X 胜 Y、Y 胜 Z 时，X 与 Z 那场不能是 Z 胜（否则成循环），所以 X 胜 Z。于是胜场最多的队赢了其他所有队，去掉它后剩下的队伍同理，四队可以排成名次，每队都赢了排在后面的所有队，胜场数是 3、2、1、0。",
+          "反过来，任给四队的一个名次顺序，规定「排前面的赢排后面的」，就得到一个没有循环的结果；不同的顺序给出不同的结果（胜场数 3、2、1、0 可以把顺序读回来）。所以没有循环的结果和四队的排列一一对应，共 4! = 24 种。",
+          "概率 = 24/64 = 3/8，所以 p + q = 3 + 8 = 11。"
+        ],
+        "en": [
+          "There are 2⁶ = 64 equally likely outcomes.",
+          "With no cyclic triple, \"beats\" is transitive: if X beats Y and Y beats Z, the X–Z game cannot be won by Z (that would be a cycle), so X beats Z. Then the team with the most wins beat everyone; removing it and repeating, the four teams can be ranked so each beats everyone ranked below it, with win counts 3, 2, 1, 0.",
+          "Conversely, any ranking of the four teams with \"higher beats lower\" gives an outcome without cycles, and different rankings give different outcomes (the win counts 3, 2, 1, 0 recover the ranking). So cycle-free outcomes correspond one-to-one with orderings of the teams: 4! = 24.",
+          "The probability is 24/64 = 3/8, so p + q = 3 + 8 = 11."
+        ],
+        "ja": [
+          "結果は全部で 2⁶ = 64 通りで、同様に確からしい。",
+          "循環がなければ「勝つ」は推移的になる：X が Y に、Y が Z に勝てば、X と Z の試合で Z が勝つと循環になるので X が勝つ。すると勝ち数最多のチームはほかの全チームに勝っており、それを除いて同様に考えると、4 チームを順位づけでき、各チームは自分より下の全チームに勝ち、勝ち数は 3、2、1、0 になる。",
+          "逆に、4 チームの順位を 1 つ決め「上位が下位に勝つ」とすれば循環のない結果になり、異なる順位は異なる結果を与える（勝ち数 3、2、1、0 から順位を読み取れる）。よって循環のない結果はチームの並べ方と 1 対 1 に対応し、4! = 24 通り。",
+          "確率は 24/64 = 3/8 で、p + q = 3 + 8 = 11。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "11"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "combinatorics-grade12-foundation",
+        "notes": "沒有三隊循環 ⇔ 勝負有遞移性 ⇔ 可排出名次，與 4! 種順序一一對應，機率 24/64 = 3/8。掃過 /循環賽.*機率|機率.*循環賽/（0 題）、/三隊循環|X 勝 Y/（0 題）；最接近 logic_grade12_foundation_054（循環賽中循環三元組最多），差異：該題求循環三元組的最大個數；本題求隨機結果完全沒有循環的機率，關鍵是「無循環 ⇔ 可排名次」與 4! 的一一對應"
+      }
     }
   ]
 }

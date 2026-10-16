@@ -7510,6 +7510,378 @@
         "reference": "combinatorics-grade11-foundation",
         "notes": "三點在某半圓上 ⇔ 不含圓心；三個互斥事件各 1/4，合計 3/4。掃過 /圓周上|圓上.*隨機/（16 題）；最接近 combinatorics_grade9_foundation_064，差異：該題是正十二邊形頂點的離散計數；本題是圓周上連續均勻取點的機率"
       }
+    },
+    {
+      "id": "combinatorics_grade11_foundation_087",
+      "reviewStatus": "ok",
+      "topic": "combinatorics",
+      "subtopic": "strip_tiling_two_colored_squares_and_domino_recurrence",
+      "tags": [
+        "c:recurrence",
+        "c:basic_counting",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade11",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一條 1 × 7 的長條由 7 個小方格排成一排。現在要用三種磚把它恰好鋪滿：紅色 1 × 1 方磚、藍色 1 × 1 方磚、灰色 1 × 2 長磚（每一種的數量都不限，磚不可重疊也不可超出長條）。一共有幾種不同的鋪法？",
+        "zh-Hans": "一条 1 × 7 的长条由 7 个小方格排成一排。现在要用三种砖把它恰好铺满：红色 1 × 1 方砖、蓝色 1 × 1 方砖、灰色 1 × 2 长砖（每一种的数量都不限，砖不可重叠也不可超出长条）。一共有几种不同的铺法？",
+        "en": "A 1 × 7 strip consists of 7 unit squares in a row. It is to be tiled exactly with three kinds of tiles: red 1 × 1 squares, blue 1 × 1 squares, and gray 1 × 2 tiles (unlimited supply; no overlaps and nothing sticking out). How many different tilings are there?",
+        "ja": "7 個の小さな正方形が 1 列に並んだ 1 × 7 の細長い板がある。これを赤の 1 × 1 タイル、青の 1 × 1 タイル、灰色の 1 × 2 タイルの 3 種類でちょうど敷きつめる（どれも何枚使ってもよく、重なりやはみ出しは不可）。敷き方は全部で何通りか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 408。",
+        "zh-Hans": "答案是 408。",
+        "en": "The answer is 408.",
+        "ja": "答えは 408 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "設 1 × n 長條的鋪法數是 aₙ，並令 a₀ = 1（空長條只有「什麼都不放」一種）。",
+          "看最右邊那一格被什麼蓋住：若是 1 × 1 方磚，顏色有紅、藍 2 種，左邊剩 1 × (n − 1)，共 2aₙ₋₁ 種；若是 1 × 2 長磚，它蓋住最右兩格，左邊剩 1 × (n − 2)，共 aₙ₋₂ 種。所以 aₙ = 2aₙ₋₁ + aₙ₋₂。",
+          "a₀ = 1，a₁ = 2（紅或藍）。依序算：a₂ = 2 × 2 + 1 = 5，a₃ = 2 × 5 + 2 = 12，a₄ = 2 × 12 + 5 = 29。",
+          "a₅ = 2 × 29 + 12 = 70，a₆ = 2 × 70 + 29 = 169，a₇ = 2 × 169 + 70 = 408。",
+          "所以一共有 408 種鋪法。"
+        ],
+        "zh-Hans": [
+          "设 1 × n 长条的铺法数是 aₙ，并令 a₀ = 1（空长条只有「什么都不放」一种）。",
+          "看最右边那一格被什么盖住：若是 1 × 1 方砖，颜色有红、蓝 2 种，左边剩 1 × (n − 1)，共 2aₙ₋₁ 种；若是 1 × 2 长砖，它盖住最右两格，左边剩 1 × (n − 2)，共 aₙ₋₂ 种。所以 aₙ = 2aₙ₋₁ + aₙ₋₂。",
+          "a₀ = 1，a₁ = 2（红或蓝）。依序算：a₂ = 2 × 2 + 1 = 5，a₃ = 2 × 5 + 2 = 12，a₄ = 2 × 12 + 5 = 29。",
+          "a₅ = 2 × 29 + 12 = 70，a₆ = 2 × 70 + 29 = 169，a₇ = 2 × 169 + 70 = 408。",
+          "所以一共有 408 种铺法。"
+        ],
+        "en": [
+          "Let aₙ be the number of tilings of a 1 × n strip, with a₀ = 1 (the empty strip has one tiling: place nothing).",
+          "Look at what covers the rightmost square. A 1 × 1 square can be red or blue (2 ways), leaving a 1 × (n − 1) strip: 2aₙ₋₁ ways. A 1 × 2 tile covers the last two squares, leaving a 1 × (n − 2) strip: aₙ₋₂ ways. So aₙ = 2aₙ₋₁ + aₙ₋₂.",
+          "a₀ = 1 and a₁ = 2 (red or blue). Then a₂ = 2 × 2 + 1 = 5, a₃ = 2 × 5 + 2 = 12, a₄ = 2 × 12 + 5 = 29.",
+          "a₅ = 2 × 29 + 12 = 70, a₆ = 2 × 70 + 29 = 169, a₇ = 2 × 169 + 70 = 408.",
+          "So there are 408 tilings."
+        ],
+        "ja": [
+          "1 × n の板の敷き方の数を aₙ とし、a₀ = 1（空の板は「何も置かない」の 1 通り）とする。",
+          "いちばん右のマスを覆うタイルで分ける。1 × 1 タイルなら色は赤か青の 2 通りで、左に 1 × (n − 1) が残るので 2aₙ₋₁ 通り。1 × 2 タイルなら右端 2 マスを覆い、左に 1 × (n − 2) が残るので aₙ₋₂ 通り。よって aₙ = 2aₙ₋₁ + aₙ₋₂。",
+          "a₀ = 1、a₁ = 2（赤か青）。順に a₂ = 2 × 2 + 1 = 5、a₃ = 2 × 5 + 2 = 12、a₄ = 2 × 12 + 5 = 29。",
+          "a₅ = 2 × 29 + 12 = 70、a₆ = 2 × 70 + 29 = 169、a₇ = 2 × 169 + 70 = 408。",
+          "よって敷き方は 408 通り。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "408"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "combinatorics-grade11-foundation",
+        "notes": "依最右端的磚分類，得 aₙ = 2aₙ₋₁ + aₙ₋₂（佩爾型遞迴），a₇ = 408。掃過 /1 × 2.*(鋪|磚)|(鋪|磚).*1 × 2/（3 題）、/紅色.*藍色.*(磚|格)/（4 題）；最接近 combinatorics_grade11_foundation_072，差異：該題是 3 列骨牌鋪法（要處理凸出狀態）；本題是 1 × n 長條、方磚有兩種顏色，遞迴係數變成 aₙ = 2aₙ₋₁ + aₙ₋₂"
+      }
+    },
+    {
+      "id": "combinatorics_grade11_foundation_088",
+      "reviewStatus": "ok",
+      "topic": "combinatorics",
+      "subtopic": "reseating_with_displacement_at_most_one_fibonacci",
+      "tags": [
+        "c:recurrence",
+        "c:permutation_combination",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade11",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "10 位同學原本坐在一排編號 1 到 10 的座位上，k 號同學坐 k 號座位。老師要重新安排座位（每個座位仍坐一人），規定每位同學的新座位號碼與原本的座位號碼相差不超過 1（也可以留在原位）。一共有幾種不同的安排方式？（所有人都不動也算一種）",
+        "zh-Hans": "10 位同学原本坐在一排编号 1 到 10 的座位上，k 号同学坐 k 号座位。老师要重新安排座位（每个座位仍坐一人），规定每位同学的新座位号码与原本的座位号码相差不超过 1（也可以留在原位）。一共有几种不同的安排方式？（所有人都不动也算一种）",
+        "en": "10 students sit in a row of seats numbered 1 to 10, student k in seat k. The teacher reassigns the seats (one student per seat) so that each student's new seat number differs from the old one by at most 1 (staying put is allowed). How many different arrangements are there? (Nobody moving counts as one.)",
+        "ja": "10 人の生徒が 1 から 10 の番号のついた 1 列の座席に座っていて、k 番の生徒は k 番の席にいる。先生は席替えをする（各席に 1 人）が、どの生徒も新しい席の番号ともとの席の番号の差が 1 以下（そのままでもよい）でなければならない。席替えの方法は全部で何通りか。（だれも動かないのも 1 通りとする）"
+      },
+      "answer": {
+        "zh-Hant": "答案是 89。",
+        "zh-Hans": "答案是 89。",
+        "en": "The answer is 89.",
+        "ja": "答えは 89 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "設 n 個人時的方法數是 aₙ。看最後一個座位（n 號座位）坐誰：只可能是 n 號或 n − 1 號同學。",
+          "若 n 號座位坐 n 號同學，前 n − 1 人在前 n − 1 個座位上照同樣規則排，共 aₙ₋₁ 種。",
+          "若 n 號座位坐 n − 1 號同學，那麼 n 號同學只能去 n − 1 號座位（它不能去 n + 1，也不能留在原位），兩人對調；前 n − 2 人照規則排，共 aₙ₋₂ 種。所以 aₙ = aₙ₋₁ + aₙ₋₂。",
+          "a₁ = 1，a₂ = 2（不動或對調）。依序：a₃ = 3，a₄ = 5，a₅ = 8，a₆ = 13，a₇ = 21，a₈ = 34，a₉ = 55，a₁₀ = 89。",
+          "所以共有 89 種安排方式。"
+        ],
+        "zh-Hans": [
+          "设 n 个人时的方法数是 aₙ。看最后一个座位（n 号座位）坐谁：只可能是 n 号或 n − 1 号同学。",
+          "若 n 号座位坐 n 号同学，前 n − 1 人在前 n − 1 个座位上照同样规则排，共 aₙ₋₁ 种。",
+          "若 n 号座位坐 n − 1 号同学，那么 n 号同学只能去 n − 1 号座位（它不能去 n + 1，也不能留在原位），两人对调；前 n − 2 人照规则排，共 aₙ₋₂ 种。所以 aₙ = aₙ₋₁ + aₙ₋₂。",
+          "a₁ = 1，a₂ = 2（不动或对调）。依序：a₃ = 3，a₄ = 5，a₅ = 8，a₆ = 13，a₇ = 21，a₈ = 34，a₉ = 55，a₁₀ = 89。",
+          "所以共有 89 种安排方式。"
+        ],
+        "en": [
+          "Let aₙ be the number of arrangements for n students. Seat n can only be taken by student n or student n − 1.",
+          "If student n stays in seat n, the first n − 1 students fill the first n − 1 seats under the same rule: aₙ₋₁ ways.",
+          "If student n − 1 takes seat n, then student n must take seat n − 1 (there is no seat n + 1 and seat n is taken), so the two swap; the first n − 2 students follow the rule: aₙ₋₂ ways. Hence aₙ = aₙ₋₁ + aₙ₋₂.",
+          "a₁ = 1, a₂ = 2 (stay or swap). Then a₃ = 3, a₄ = 5, a₅ = 8, a₆ = 13, a₇ = 21, a₈ = 34, a₉ = 55, a₁₀ = 89.",
+          "So there are 89 arrangements."
+        ],
+        "ja": [
+          "n 人のときの方法の数を aₙ とする。n 番の席に座れるのは n 番か n − 1 番の生徒だけである。",
+          "n 番の席に n 番の生徒が座るなら、残りの n − 1 人は前の n − 1 席に同じ規則で座るので aₙ₋₁ 通り。",
+          "n 番の席に n − 1 番の生徒が座るなら、n 番の生徒は n − 1 番の席に行くしかなく（n + 1 番の席はなく、n 番の席はふさがっている）、2 人が入れかわる。残りの n − 2 人は規則どおりで aₙ₋₂ 通り。よって aₙ = aₙ₋₁ + aₙ₋₂。",
+          "a₁ = 1、a₂ = 2（そのままか入れかえ）。順に a₃ = 3、a₄ = 5、a₅ = 8、a₆ = 13、a₇ = 21、a₈ = 34、a₉ = 55、a₁₀ = 89。",
+          "よって 89 通り。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "89"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "combinatorics-grade11-foundation",
+        "notes": "每人至多移一格的排列只能是「不動」與「相鄰對調」的組合，依最後座位分類得 aₙ = aₙ₋₁ + aₙ₋₂，a₁₀ = 89。掃過 /重新安排座位|重新排座位|換座位/（2 題）、/相差不超過 1|相差.*至多 1/（0 題）；最接近 combinatorics_grade10_foundation_105，差異：該題是圓桌重排、禁止與舊鄰居相鄰；本題是直排、每人位移至多 1，看最後一個座位得費氏遞迴"
+      }
+    },
+    {
+      "id": "combinatorics_grade11_foundation_089",
+      "reviewStatus": "ok",
+      "topic": "combinatorics",
+      "subtopic": "four_digit_numbers_containing_two_given_digits_inclusion_exclusion",
+      "tags": [
+        "c:inclusion_exclusion",
+        "c:place_value",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade11",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "在所有的四位數（1000 到 9999）之中，有多少個四位數的各位數字裡同時出現數字 1 和數字 2（各至少出現一次）？",
+        "zh-Hans": "在所有的四位数（1000 到 9999）之中，有多少个四位数的各位数字里同时出现数字 1 和数字 2（各至少出现一次）？",
+        "en": "Among all four-digit numbers (1000 to 9999), how many contain both the digit 1 and the digit 2 (each at least once)?",
+        "ja": "4 桁の整数（1000 から 9999）のうち、数字 1 と数字 2 の両方が（それぞれ少なくとも 1 回）現れるものはいくつあるか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 920。",
+        "zh-Hans": "答案是 920。",
+        "en": "The answer is 920.",
+        "ja": "答えは 920 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "四位數共有 9000 個。用排容：同時含 1 和 2 的個數 = 全部 − 不含 1 的 − 不含 2 的 + 1 和 2 都不含的。",
+          "不含 1：千位不能是 0 也不能是 1，有 8 種；其餘三位各有 9 種（0 到 9 去掉 1）。共 8 × 9 × 9 × 9 = 5832 個。同理不含 2 也是 5832 個。",
+          "1 和 2 都不含：千位不能是 0、1、2，只剩 3、4、5、6、7、8、9 共 7 種；其餘三位各有 8 種（0 到 9 去掉 1 和 2）。共 7 × 8 × 8 × 8 = 3584 個。",
+          "所以同時含 1 和 2 的四位數有 9000 − 5832 − 5832 + 3584 = 920 個。"
+        ],
+        "zh-Hans": [
+          "四位数共有 9000 个。用容斥：同时含 1 和 2 的个数 = 全部 − 不含 1 的 − 不含 2 的 + 1 和 2 都不含的。",
+          "不含 1：千位不能是 0 也不能是 1，有 8 种；其余三位各有 9 种（0 到 9 去掉 1）。共 8 × 9 × 9 × 9 = 5832 个。同理不含 2 也是 5832 个。",
+          "1 和 2 都不含：千位不能是 0、1、2，只剩 3、4、5、6、7、8、9 共 7 种；其余三位各有 8 种（0 到 9 去掉 1 和 2）。共 7 × 8 × 8 × 8 = 3584 个。",
+          "所以同时含 1 和 2 的四位数有 9000 − 5832 − 5832 + 3584 = 920 个。"
+        ],
+        "en": [
+          "There are 9000 four-digit numbers. By inclusion–exclusion: (contain both) = all − (no 1) − (no 2) + (neither 1 nor 2).",
+          "No 1: the thousands digit can be neither 0 nor 1, so 8 choices; each other digit has 9 choices (0–9 without 1). That is 8 × 9 × 9 × 9 = 5832. Likewise 5832 numbers have no 2.",
+          "Neither 1 nor 2: the thousands digit must be one of 3, 4, 5, 6, 7, 8, 9, so 7 choices; each other digit has 8 choices. That is 7 × 8 × 8 × 8 = 3584.",
+          "So 9000 − 5832 − 5832 + 3584 = 920 four-digit numbers contain both 1 and 2."
+        ],
+        "ja": [
+          "4 桁の整数は 9000 個。包除原理より、1 と 2 を両方含むもの = 全体 − 1 を含まないもの − 2 を含まないもの + 1 も 2 も含まないもの。",
+          "1 を含まない：千の位は 0 でも 1 でもない 8 通り、他の 3 桁は 0〜9 から 1 を除いた 9 通りずつ。8 × 9 × 9 × 9 = 5832 個。2 を含まないものも同様に 5832 個。",
+          "1 も 2 も含まない：千の位は 3、4、5、6、7、8、9 の 7 通り、他の 3 桁は 8 通りずつ。7 × 8 × 8 × 8 = 3584 個。",
+          "よって 1 と 2 を両方含む 4 桁の整数は 9000 − 5832 − 5832 + 3584 = 920 個。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "920"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "combinatorics-grade11-foundation",
+        "notes": "兩集合排容：9000 − 2 × 5832 + 3584 = 920，千位不能為 0 要分開算。掃過 /四位數.*(含有|出現).*數字|至少.*一個數字/（3 題）、/同時(出現|含有)/（2 題）；最接近 combinatorics_grade9_foundation_015，差異：該題只要求「至少含一個 3」，一次補集即可；本題要求兩個數字都出現，需兩集合排容，且千位不可為 0 使各項的計數不對稱"
+      }
+    },
+    {
+      "id": "combinatorics_grade11_foundation_090",
+      "reviewStatus": "ok",
+      "topic": "combinatorics",
+      "subtopic": "expected_number_of_distinct_faces_by_indicators",
+      "tags": [
+        "c:expectation",
+        "c:probability",
+        "m:bijection"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade11",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "擲一顆公正的六面骰子 4 次，令 X 表示這 4 次之中出現過的「不同點數」的個數（例如擲出 3、5、3、1 時 X = 3）。X 的期望值寫成最簡分數 p/q，求 p + q。",
+        "zh-Hans": "掷一颗公正的六面骰子 4 次，令 X 表示这 4 次之中出现过的「不同点数」的个数（例如掷出 3、5、3、1 时 X = 3）。X 的期望值写成最简分数 p/q，求 p + q。",
+        "en": "A fair six-sided die is rolled 4 times. Let X be the number of different faces that appear (e.g. rolls 3, 5, 3, 1 give X = 3). Write the expected value of X as a fraction p/q in lowest terms and find p + q.",
+        "ja": "公正な 6 面のさいころを 4 回投げ、出た目の種類の数を X とする（例えば 3、5、3、1 なら X = 3）。X の期待値を既約分数 p/q で表すとき、p + q を求めよ。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 887。",
+        "zh-Hans": "答案是 887。",
+        "en": "The answer is 887.",
+        "ja": "答えは 887 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "對每個點數 k = 1、2、⋯、6，令 Iₖ 在「k 點至少出現一次」時為 1，否則為 0。那麼 X = I₁ + I₂ + ⋯ + I₆，每一個不同的點數恰好被數一次。",
+          "期望值可以相加：E(X) = E(I₁) + ⋯ + E(I₆)，而 E(Iₖ) 就是 k 點至少出現一次的機率。",
+          "k 點一次都沒出現的機率是 (5/6)⁴ = 625/1296，所以 E(Iₖ) = 1 − 625/1296 = 671/1296。",
+          "E(X) = 6 × 671/1296 = 671/216。671 = 11 × 61，216 = 2³ × 3³，已經是最簡分數。",
+          "所以 p + q = 671 + 216 = 887。"
+        ],
+        "zh-Hans": [
+          "对每个点数 k = 1、2、⋯、6，令 Iₖ 在「k 点至少出现一次」时为 1，否则为 0。那么 X = I₁ + I₂ + ⋯ + I₆，每一个不同的点数恰好被数一次。",
+          "期望值可以相加：E(X) = E(I₁) + ⋯ + E(I₆)，而 E(Iₖ) 就是 k 点至少出现一次的概率。",
+          "k 点一次都没出现的概率是 (5/6)⁴ = 625/1296，所以 E(Iₖ) = 1 − 625/1296 = 671/1296。",
+          "E(X) = 6 × 671/1296 = 671/216。671 = 11 × 61，216 = 2³ × 3³，已经是最简分数。",
+          "所以 p + q = 671 + 216 = 887。"
+        ],
+        "en": [
+          "For each face k = 1, 2, ⋯, 6 let Iₖ be 1 if k appears at least once and 0 otherwise. Then X = I₁ + I₂ + ⋯ + I₆, each different face counted exactly once.",
+          "Expectation is additive: E(X) = E(I₁) + ⋯ + E(I₆), and E(Iₖ) is the probability that k appears at least once.",
+          "The probability that k never appears is (5/6)⁴ = 625/1296, so E(Iₖ) = 1 − 625/1296 = 671/1296.",
+          "E(X) = 6 × 671/1296 = 671/216. Since 671 = 11 × 61 and 216 = 2³ × 3³, this is in lowest terms.",
+          "So p + q = 671 + 216 = 887."
+        ],
+        "ja": [
+          "各目 k = 1、2、⋯、6 について、k が少なくとも 1 回出れば 1、そうでなければ 0 となる Iₖ を考える。すると X = I₁ + I₂ + ⋯ + I₆ で、出た目の種類がちょうど 1 回ずつ数えられる。",
+          "期待値は和に分けられる：E(X) = E(I₁) + ⋯ + E(I₆)。E(Iₖ) は k が少なくとも 1 回出る確率である。",
+          "k が 1 回も出ない確率は (5/6)⁴ = 625/1296 なので、E(Iₖ) = 1 − 625/1296 = 671/1296。",
+          "E(X) = 6 × 671/1296 = 671/216。671 = 11 × 61、216 = 2³ × 3³ なので既約。",
+          "よって p + q = 671 + 216 = 887。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "887"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "combinatorics-grade11-foundation",
+        "notes": "不同點數個數 = 六個指標變數之和，E = 6(1 − (5/6)⁴) = 671/216。掃過 /期望.*不同|不同.*期望/（3 題）、/擲.*骰子.*4 次|骰子.*四次/（0 題）；最接近 combinatorics_grade10_foundation_106，差異：該題是球放盒子的計數；本題把「不同點數個數」拆成六個指標變數，用期望值的可加性避開分配列表"
+      }
+    },
+    {
+      "id": "combinatorics_grade11_foundation_091",
+      "reviewStatus": "ok",
+      "topic": "combinatorics",
+      "subtopic": "counting_perfect_matchings_in_qualification_graph",
+      "tags": [
+        "c:graph_theory",
+        "c:permutation_combination",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade11",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "甲、乙、丙、丁、戊五位員工要分別負責工作 1、2、3、4、5，每人恰好負責一項、每項工作恰好一人。每位員工只能做自己會的工作：甲會 1、2；乙會 1、2、3；丙會 2、3、4；丁會 3、4、5；戊會 4、5。符合條件的分派方式一共有幾種？",
+        "zh-Hans": "甲、乙、丙、丁、戊五位员工要分别负责工作 1、2、3、4、5，每人恰好负责一项、每项工作恰好一人。每位员工只能做自己会的工作：甲会 1、2；乙会 1、2、3；丙会 2、3、4；丁会 3、4、5；戊会 4、5。符合条件的分派方式一共有几种？",
+        "en": "Five employees P, Q, R, S, T are to take jobs 1, 2, 3, 4, 5, one job each and one person per job. Each can only do jobs they know: P knows 1, 2; Q knows 1, 2, 3; R knows 2, 3, 4; S knows 3, 4, 5; T knows 4, 5. How many valid assignments are there?",
+        "ja": "甲、乙、丙、丁、戊の 5 人の社員に仕事 1、2、3、4、5 を 1 人 1 つずつ（各仕事も 1 人ずつ）割り当てる。各社員はできる仕事しか担当できない：甲は 1、2、乙は 1、2、3、丙は 2、3、4、丁は 3、4、5、戊は 4、5 ができる。条件を満たす割り当て方は全部で何通りか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 8。",
+        "zh-Hans": "答案是 8。",
+        "en": "The answer is 8.",
+        "ja": "答えは 8 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "工作 1 只有甲、乙會，所以依甲的工作分類。",
+          "甲做 1：乙做 2 或 3。乙做 2 時，丙、丁、戊分 3、4、5：丙做 3 則丁、戊分 4、5 有 2 種；丙做 4 則戊只能做 5、丁做 3，1 種，小計 3 種。乙做 3 時，剩 2、4、5：工作 2 只剩丙會，丙做 2，丁、戊分 4、5 有 2 種。甲做 1 共 3 + 2 = 5 種。",
+          "甲做 2：工作 1 只剩乙會，乙必須做 1；剩下丙、丁、戊分 3、4、5，和上一步一樣有 3 種（丙做 3 有 2 種，丙做 4 有 1 種）。",
+          "甲只會 1、2，所以共有 5 + 3 = 8 種分派方式。"
+        ],
+        "zh-Hans": [
+          "工作 1 只有甲、乙会，所以依甲的工作分类。",
+          "甲做 1：乙做 2 或 3。乙做 2 时，丙、丁、戊分 3、4、5：丙做 3 则丁、戊分 4、5 有 2 种；丙做 4 则戊只能做 5、丁做 3，1 种，小计 3 种。乙做 3 时，剩 2、4、5：工作 2 只剩丙会，丙做 2，丁、戊分 4、5 有 2 种。甲做 1 共 3 + 2 = 5 种。",
+          "甲做 2：工作 1 只剩乙会，乙必须做 1；剩下丙、丁、戊分 3、4、5，和上一步一样有 3 种（丙做 3 有 2 种，丙做 4 有 1 种）。",
+          "甲只会 1、2，所以共有 5 + 3 = 8 种分派方式。"
+        ],
+        "en": [
+          "Only P and Q can do job 1, so split by P's job.",
+          "P does 1: Q does 2 or 3. If Q does 2, then R, S, T share 3, 4, 5: R does 3 leaves S, T sharing 4, 5 in 2 ways; R does 4 forces T to 5 and S to 3, 1 way; 3 ways. If Q does 3, jobs 2, 4, 5 remain; only R can do 2, so R does 2 and S, T share 4, 5 in 2 ways. So 3 + 2 = 5 ways when P does 1.",
+          "P does 2: only Q can now do job 1, so Q does 1; R, S, T share 3, 4, 5 in 3 ways as before (R does 3: 2 ways; R does 4: 1 way).",
+          "P can only do 1 or 2, so there are 5 + 3 = 8 assignments."
+        ],
+        "ja": [
+          "仕事 1 ができるのは甲と乙だけなので、甲の仕事で場合分けする。",
+          "甲が 1 のとき：乙は 2 か 3。乙が 2 なら丙、丁、戊で 3、4、5 を分ける。丙が 3 なら丁と戊で 4、5 を 2 通り、丙が 4 なら戊は 5、丁は 3 の 1 通りで、計 3 通り。乙が 3 なら 2、4、5 が残り、2 ができるのは丙だけなので丙が 2、丁と戊で 4、5 を 2 通り。甲が 1 のときは 3 + 2 = 5 通り。",
+          "甲が 2 のとき：仕事 1 ができるのは乙だけなので乙が 1。丙、丁、戊で 3、4、5 を分けるのは前と同じく 3 通り（丙が 3 で 2 通り、丙が 4 で 1 通り）。",
+          "甲は 1 か 2 しかできないので、全部で 5 + 3 = 8 通り。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "8"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "combinatorics-grade11-foundation",
+        "notes": "二部圖完美配對計數：從只有兩人會的工作 1 切入分類，共 8 種。掃過 /分派|指派|分配.*工作/（0 題）、/只會|會做/（8 題）；最接近 logic_grade6_foundation_093（田忌賽馬配對），差異：該題是最佳化配對；本題是在「會做」的二部圖中數完美配對的個數，靠「只有某人會」的強迫步驟分類"
+      }
     }
   ]
 }

@@ -5241,6 +5241,422 @@
         "reference": "logic-grade11-foundation",
         "notes": "逐一檢查 6 種配法有無互相更想同組的一對，循環偏好下恰 3 種穩定。掃過 /偏好|喜好順序|志願|穩定/（2 題）；最接近 logic_grade12_foundation_053，差異：該題是多數決議程順序操縱；本題是雙方偏好下的穩定配對計數"
       }
+    },
+    {
+      "id": "logic_grade11_foundation_059",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "find_heaviest_and_lightest_with_pairwise_weighings",
+      "tags": [
+        "c:balance",
+        "c:logic_deduction",
+        "m:extremal"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade11",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "有 10 顆外觀一樣、重量兩兩不同的球。用一台沒有砝碼的等臂天平，每次只能在左右盤各放一顆球比較輕重。至少要秤幾次，才能保證同時找出最重的那一顆和最輕的那一顆？",
+        "zh-Hans": "有 10 颗外观一样、重量两两不同的球。用一台没有砝码的等臂天平，每次只能在左右盘各放一颗球比较轻重。至少要称几次，才能保证同时找出最重的那一颗和最轻的那一颗？",
+        "en": "There are 10 identical-looking balls with pairwise different weights. Using a balance without weights, each weighing compares one ball on the left pan with one ball on the right. What is the least number of weighings that guarantees finding both the heaviest and the lightest ball?",
+        "ja": "見た目が同じで重さがすべて異なる 10 個の球がある。分銅のない天びんで、1 回に左右の皿に 1 個ずつのせて重さを比べる。最も重い球と最も軽い球の両方を必ず見つけるには、少なくとも何回量ればよいか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 13。",
+        "zh-Hans": "答案是 13。",
+        "en": "The answer is 13.",
+        "ja": "答えは 13 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "做法：先把 10 顆兩兩配成 5 對各秤一次（5 次），每對較重的放進「重組」、較輕的放進「輕組」。最重的一定在重組，最輕的一定在輕組。",
+          "在重組 5 顆中用淘汰法找最重：每秤一次淘汰一顆，要 4 次；輕組同樣 4 次找最輕。總共 5 + 4 + 4 = 13 次就夠。",
+          "為什麼不能更少：每顆球一開始有兩個「嫌疑」——可能是最重、可能是最輕，共 20 個嫌疑；最後只能剩 2 個（最重的那顆的「最重嫌疑」、最輕的那顆的「最輕嫌疑」），所以要消去 18 個。一顆球只要贏過一次就不可能最輕，輸過一次就不可能最重。",
+          "一次秤重最多消去 2 個嫌疑，而且只有「兩顆都還沒秤過」時才一定消去 2 個；只要有一顆秤過，天平在最壞情況下可以給出只消去 1 個的結果（例如讓已經贏過的那顆再贏一次）。每顆球只能參加一次「兩顆都沒秤過」的比較，所以這種比較至多 5 次。",
+          "設共秤 k 次，消去的嫌疑至多 k + 5 個，要 k + 5 ≥ 18，所以 k ≥ 13。答案是 13。"
+        ],
+        "zh-Hans": [
+          "做法：先把 10 颗两两配成 5 对各称一次（5 次），每对较重的放进「重组」、较轻的放进「轻组」。最重的一定在重组，最轻的一定在轻组。",
+          "在重组 5 颗中用淘汰法找最重：每称一次淘汰一颗，要 4 次；轻组同样 4 次找最轻。总共 5 + 4 + 4 = 13 次就够。",
+          "为什么不能更少：每颗球一开始有两个「嫌疑」——可能是最重、可能是最轻，共 20 个嫌疑；最后只能剩 2 个（最重的那颗的「最重嫌疑」、最轻的那颗的「最轻嫌疑」），所以要消去 18 个。一颗球只要赢过一次就不可能最轻，输过一次就不可能最重。",
+          "一次称重最多消去 2 个嫌疑，而且只有「两颗都还没称过」时才一定消去 2 个；只要有一颗称过，天平在最坏情况下可以给出只消去 1 个的结果（例如让已经赢过的那颗再赢一次）。每颗球只能参加一次「两颗都没称过」的比较，所以这种比较至多 5 次。",
+          "设共称 k 次，消去的嫌疑至多 k + 5 个，要 k + 5 ≥ 18，所以 k ≥ 13。答案是 13。"
+        ],
+        "en": [
+          "Method: pair the 10 balls into 5 pairs and weigh each pair (5 weighings); put each heavier ball in the \"heavy group\" and each lighter one in the \"light group\". The heaviest is in the heavy group and the lightest in the light group.",
+          "Find the heaviest of the 5 heavy balls by knockout: each weighing eliminates one, so 4 weighings; likewise 4 for the lightest of the light group. In total 5 + 4 + 4 = 13 weighings suffice.",
+          "Why fewer cannot work: each ball starts with two \"suspicions\" — maybe heaviest, maybe lightest — 20 in all; at the end only 2 may remain (the heaviest ball's and the lightest ball's), so 18 must be removed. A ball that wins once cannot be lightest; a ball that loses once cannot be heaviest.",
+          "A weighing removes at most 2 suspicions, and is sure to remove 2 only when both balls are untested; if either ball has been weighed before, in the worst case the result removes just 1 (e.g. a ball that already won wins again). Each ball can be in only one weighing of two untested balls, so there are at most 5 such weighings.",
+          "With k weighings at most k + 5 suspicions are removed; we need k + 5 ≥ 18, so k ≥ 13. The answer is 13."
+        ],
+        "ja": [
+          "方法：まず 10 個を 5 組に分けて各組を 1 回ずつ量る（5 回）。重いほうを「重い組」、軽いほうを「軽い組」に入れる。最も重い球は重い組に、最も軽い球は軽い組にある。",
+          "重い組の 5 個から勝ち抜きで最も重いものを探すと、1 回で 1 個ずつ脱落するので 4 回。軽い組も同様に 4 回。合計 5 + 4 + 4 = 13 回で足りる。",
+          "これより少なくできない理由：各球ははじめ「最も重いかもしれない」「最も軽いかもしれない」という 2 つの疑いをもち、合計 20 個。最後に残ってよいのは 2 個（最も重い球と最も軽い球のもの）なので、18 個を消さなければならない。1 回でも勝った球は最も軽くなく、1 回でも負けた球は最も重くない。",
+          "1 回の計量で消える疑いは高々 2 個で、確実に 2 個消えるのは 2 個ともまだ量っていない球のときだけ。どちらかが量ったことのある球なら、最悪の場合は 1 個しか消えない結果になりうる（例えばすでに勝った球がまた勝つ）。各球は「2 個とも未計量」の比較に 1 回しか出られないので、その比較は高々 5 回。",
+          "k 回量ると消える疑いは高々 k + 5 個で、k + 5 ≥ 18 より k ≥ 13。答えは 13。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "13"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade11-foundation",
+        "notes": "兩兩配對後分別找最大、最小，共 3n/2 − 2 次；下界用每次至多消去兩個嫌疑、且這種比較至多 n/2 次。掃過 /最重.*最輕|最輕.*最重/（1 題）、/天平.*每次.*一顆|至少要秤/（0 題）；最接近 logic_grade11_foundation_011，差異：該題用淘汰賽找第二名（n + log n − 2）；本題要同時找最重與最輕，先兩兩配對分組，下界用「嫌疑數」計算得 3n/2 − 2 = 13"
+      }
+    },
+    {
+      "id": "logic_grade11_foundation_060",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "divisor_erasing_game_strategy_stealing",
+      "tags": [
+        "c:game_theory",
+        "c:factor_multiple",
+        "m:contradiction"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade11",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "黑板上寫著 1、2、3、⋯、2026 這些數。甲、乙兩人輪流操作，由甲先：每次選一個還在黑板上的數，把它以及它所有還在黑板上的因數一起擦掉（例如選 12，就把 1、2、3、4、6、12 中還在的都擦掉）。擦掉最後一個數的人獲勝。下列哪一個敘述正確？",
+        "zh-Hans": "黑板上写着 1、2、3、⋯、2026 这些数。甲、乙两人轮流操作，由甲先：每次选一个还在黑板上的数，把它以及它所有还在黑板上的因数一起擦掉（例如选 12，就把 1、2、3、4、6、12 中还在的都擦掉）。擦掉最后一个数的人获胜。下列哪一个叙述正确？",
+        "en": "The numbers 1, 2, 3, ⋯, 2026 are written on a board. Players P and Q alternate, P first: a move picks a number still on the board and erases it together with all of its divisors still on the board (e.g. picking 12 erases whichever of 1, 2, 3, 4, 6, 12 remain). Whoever erases the last number wins. Which statement is correct?",
+        "ja": "黒板に 1、2、3、⋯、2026 が書かれている。甲と乙が交互に操作し、甲が先手である。1 回の操作では黒板に残っている数を 1 つ選び、その数と、黒板に残っているその約数をすべて消す（例えば 12 を選ぶと、1、2、3、4、6、12 のうち残っているものを全部消す）。最後の数を消した人の勝ちである。正しいのはどれか。"
+      },
+      "options": {
+        "A": {
+          "zh-Hant": "乙有必勝策略：不論甲先擦哪個數，乙都能找到對應的回應",
+          "zh-Hans": "乙有必胜策略：不论甲先擦哪个数，乙都能找到对应的回应",
+          "en": "Q has a winning strategy: whatever P erases first, Q has a matching reply",
+          "ja": "乙に必勝法がある：甲が最初に何を消しても乙には対応する手がある"
+        },
+        "B": {
+          "zh-Hant": "甲有必勝策略，只是不容易具體寫出甲每一步該怎麼選",
+          "zh-Hans": "甲有必胜策略，只是不容易具体写出甲每一步该怎么选",
+          "en": "P has a winning strategy, though it is hard to say explicitly how to play",
+          "ja": "甲に必勝法がある。ただし甲が各手で何を選ぶかを具体的に書くのは難しい"
+        },
+        "C": {
+          "zh-Hant": "誰有必勝策略，要看黑板上所有數的總和是奇數還是偶數",
+          "zh-Hans": "谁有必胜策略，要看黑板上所有数的总和是奇数还是偶数",
+          "en": "who has a winning strategy depends on whether the sum of the numbers is odd or even",
+          "ja": "どちらに必勝法があるかは黒板の数の総和が奇数か偶数かで決まる"
+        },
+        "D": {
+          "zh-Hant": "兩人都沒有必勝策略，誰贏要看兩人當下的選擇與運氣",
+          "zh-Hans": "两人都没有必胜策略，谁赢要看两人当下的选择与运气",
+          "en": "neither player has a winning strategy; the result depends on choices and luck",
+          "ja": "どちらにも必勝法はなく、勝敗はその場の選択と運しだい"
+        }
+      },
+      "answer": {
+        "zh-Hant": "答案是 B：甲有必勝策略，只是不容易具體寫出甲每一步該怎麼選。",
+        "zh-Hans": "答案是 B：甲有必胜策略，只是不容易具体写出甲每一步该怎么选。",
+        "en": "The answer is B: P has a winning strategy, though it is hard to say explicitly how to play.",
+        "ja": "答えは B：甲に必勝法がある。ただし甲が各手で何を選ぶかを具体的に書くのは難しい です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "遊戲每一步至少擦掉一個數，一定會在有限步內結束，而且沒有平手，所以甲、乙之中恰有一人有必勝策略。D 錯。",
+          "假設乙有必勝策略。讓甲第一步只選 1（1 沒有其他因數，只擦掉 1）。這時黑板上還有數，乙依他的必勝策略選某個數 m，擦掉 m 和 m 的因數。",
+          "但甲第一步其實可以直接選 m：因為 m 的因數包含 1，結果黑板會變成「1 和 m 的所有因數都被擦掉」，和上面乙走完後的局面完全一樣，而且輪到乙。從此甲照抄乙的必勝策略就會贏，這和「乙必勝」矛盾。",
+          "所以乙沒有必勝策略，必勝的是甲，答案是 B。這種「偷策略」論證只證明甲必勝，並沒有具體說出甲第一步該選哪個數。",
+          "A 錯（剛證明乙不可能必勝）；C 錯：論證完全沒用到數的總和，不論總和奇偶都是甲必勝。"
+        ],
+        "zh-Hans": [
+          "游戏每一步至少擦掉一个数，一定会在有限步内结束，而且没有平局，所以甲、乙之中恰有一人有必胜策略。D 错。",
+          "假设乙有必胜策略。让甲第一步只选 1（1 没有其他因数，只擦掉 1）。这时黑板上还有数，乙依他的必胜策略选某个数 m，擦掉 m 和 m 的因数。",
+          "但甲第一步其实可以直接选 m：因为 m 的因数包含 1，结果黑板会变成「1 和 m 的所有因数都被擦掉」，和上面乙走完后的局面完全一样，而且轮到乙。从此甲照抄乙的必胜策略就会赢，这和「乙必胜」矛盾。",
+          "所以乙没有必胜策略，必胜的是甲，答案是 B。这种「偷策略」论证只证明甲必胜，并没有具体说出甲第一步该选哪个数。",
+          "A 错（刚证明乙不可能必胜）；C 错：论证完全没用到数的总和，不论总和奇偶都是甲必胜。"
+        ],
+        "en": [
+          "Every move erases at least one number, so the game ends in finitely many moves with no draw; hence exactly one of P and Q has a winning strategy. D is wrong.",
+          "Suppose Q has a winning strategy. Let P open by picking 1 (which has no other divisors, so only 1 is erased). Numbers remain, and Q answers with some number m by the strategy, erasing m and its divisors.",
+          "But P could have picked m as the first move: since 1 divides m, the board would then be \"1 and all divisors of m erased\", exactly the position after Q's answer above, with Q to move. From there P copies Q's winning strategy and wins, contradicting that Q always wins.",
+          "So Q has no winning strategy and P does; the answer is B. This strategy-stealing argument proves that P wins without saying which first move works.",
+          "A is wrong (we just showed Q cannot have a winning strategy); C is wrong: the argument never uses the sum of the numbers, so P wins regardless of its parity."
+        ],
+        "ja": [
+          "毎回少なくとも 1 つの数が消えるので、ゲームは有限回で終わり引き分けもない。よって甲と乙のちょうど一方が必勝法をもつ。D は誤り。",
+          "乙に必勝法があると仮定する。甲が最初に 1 を選ぶ（1 にはほかに約数がないので 1 だけが消える）。まだ数が残っているので、乙は必勝法に従ってある数 m を選び、m とその約数を消す。",
+          "しかし甲は最初から m を選ぶこともできた。1 は m の約数なので、黒板は「1 と m の約数がすべて消えた」状態になり、上で乙が指したあとの局面とまったく同じで、しかも乙の番である。そこから甲が乙の必勝法をまねれば甲が勝ち、「乙が必勝」に矛盾する。",
+          "よって乙には必勝法がなく、必勝なのは甲で、答えは B。この「戦略を盗む」論法は甲の必勝を示すだけで、最初にどの数を選べばよいかは教えてくれない。",
+          "A は誤り（乙が必勝でありえないことを示した）。C も誤り：論法では数の和を使っておらず、和の偶奇に関係なく甲が必勝。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "multiple_choice",
+      "correctAnswer": {
+        "type": "choice",
+        "value": "B"
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade11-foundation",
+        "notes": "有限無平手遊戲中，先手先擦 1 是「空步」，若後手必勝則先手可偷其策略，矛盾，故先手必勝。掃過 /因數.*擦掉|擦掉.*因數/（1 題）、/必勝/（15 題）；最接近 logic_grade6_foundation_066（兩排巧克力 Chomp），差異：該題規模小、可直接找出必勝第一步；本題規模大、用「偷策略」反證：若後手必勝，先手先擦 1 就能把後手的策略偷過來"
+      }
+    },
+    {
+      "id": "logic_grade11_foundation_061",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "two_room_assignment_bipartite_components",
+      "tags": [
+        "c:graph_theory",
+        "c:logic_deduction",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade11",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "編號 1 到 11 的 11 位同學要分到甲、乙兩間教室，每人去其中一間（教室可以沒有人）。下列每一對同學彼此不合，不能分在同一間：1 與 2、2 與 3、3 與 4、4 與 5、5 與 6、6 與 1、2 與 5、7 與 8、9 與 10。除此之外沒有其他限制。符合規定的分法一共有幾種？",
+        "zh-Hans": "编号 1 到 11 的 11 位同学要分到甲、乙两间教室，每人去其中一间（教室可以没有人）。下列每一对同学彼此不合，不能分在同一间：1 与 2、2 与 3、3 与 4、4 与 5、5 与 6、6 与 1、2 与 5、7 与 8、9 与 10。除此之外没有其他限制。符合规定的分法一共有几种？",
+        "en": "Eleven students numbered 1 to 11 are to be split between rooms A and B, each going to one room (a room may be empty). Each of the following pairs do not get along and must be in different rooms: 1 and 2, 2 and 3, 3 and 4, 4 and 5, 5 and 6, 6 and 1, 2 and 5, 7 and 8, 9 and 10. There are no other restrictions. How many valid splits are there?",
+        "ja": "1 から 11 の番号の 11 人の生徒を甲、乙 2 つの教室に分ける（各自どちらか一方に入り、だれもいない教室があってもよい）。次の各組の 2 人は仲が悪く、同じ教室には入れない：1 と 2、2 と 3、3 と 4、4 と 5、5 と 6、6 と 1、2 と 5、7 と 8、9 と 10。ほかに制限はない。分け方は全部で何通りか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 16。",
+        "zh-Hans": "答案是 16。",
+        "en": "The answer is 16.",
+        "ja": "答えは 16 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "把不合的兩人用線連起來，同學會分成幾群：{1, 2, 3, 4, 5, 6}、{7, 8}、{9, 10}、{11}，不同群之間沒有限制，可以分開決定。",
+          "同一群裡，只要決定其中一人去哪間，與他相連的人就必須去另一間，一路推下去整群都被決定，所以每群至多 2 種。",
+          "檢查第一群會不會矛盾：1 去甲，則 2 乙、3 甲、4 乙、5 甲、6 乙；再檢查 6 與 1（乙、甲）、2 與 5（乙、甲）都不同間，沒有矛盾。1 去乙時全部對調，同樣成立，所以這群有 2 種。（若有一圈奇數個人互相不合，就會矛盾而 0 種。）",
+          "{7, 8}、{9, 10} 各 2 種；11 號沒有限制，也是 2 種。",
+          "所以共有 2 × 2 × 2 × 2 = 16 種分法。"
+        ],
+        "zh-Hans": [
+          "把不合的两人用线连起来，同学会分成几群：{1, 2, 3, 4, 5, 6}、{7, 8}、{9, 10}、{11}，不同群之间没有限制，可以分开决定。",
+          "同一群里，只要决定其中一人去哪间，与他相连的人就必须去另一间，一路推下去整群都被决定，所以每群至多 2 种。",
+          "检查第一群会不会矛盾：1 去甲，则 2 乙、3 甲、4 乙、5 甲、6 乙；再检查 6 与 1（乙、甲）、2 与 5（乙、甲）都不同间，没有矛盾。1 去乙时全部对调，同样成立，所以这群有 2 种。（若有一圈奇数个人互相不合，就会矛盾而 0 种。）",
+          "{7, 8}、{9, 10} 各 2 种；11 号没有限制，也是 2 种。",
+          "所以共有 2 × 2 × 2 × 2 = 16 种分法。"
+        ],
+        "en": [
+          "Join each incompatible pair with a line. The students fall into groups {1, 2, 3, 4, 5, 6}, {7, 8}, {9, 10}, {11}, with no restrictions between groups, so each group is decided independently.",
+          "Within a group, once one student's room is chosen, everyone joined to them must go to the other room, and so on through the whole group, so each group has at most 2 choices.",
+          "Check the first group for contradictions: if 1 goes to A, then 2 B, 3 A, 4 B, 5 A, 6 B; the pairs 6 and 1 (B, A) and 2 and 5 (B, A) are in different rooms, so no contradiction. Sending 1 to B swaps everything and also works, giving 2 ways. (A cycle of an odd number of mutually incompatible students would force a contradiction and 0 ways.)",
+          "{7, 8} and {9, 10} have 2 ways each; student 11 is unrestricted, also 2 ways.",
+          "So there are 2 × 2 × 2 × 2 = 16 splits."
+        ],
+        "ja": [
+          "仲の悪い 2 人を線で結ぶと、生徒は {1, 2, 3, 4, 5, 6}、{7, 8}、{9, 10}、{11} のグループに分かれ、グループ間には制限がないので別々に決められる。",
+          "同じグループでは、1 人の教室を決めるとその人と結ばれた人はもう一方の教室に決まり、順にグループ全体が決まるので、各グループは高々 2 通り。",
+          "第 1 グループに矛盾がないか確かめる：1 が甲なら 2 は乙、3 は甲、4 は乙、5 は甲、6 は乙。6 と 1（乙、甲）、2 と 5（乙、甲）も別の教室で矛盾はない。1 が乙ならすべて入れかわり、これも成り立つので 2 通り。（奇数人が輪になって仲が悪いと矛盾が起き 0 通りになる。）",
+          "{7, 8}、{9, 10} はそれぞれ 2 通り、11 番は制限がないのでこれも 2 通り。",
+          "よって 2 × 2 × 2 × 2 = 16 通り。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "16"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade11-foundation",
+        "notes": "衝突圖每個連通塊若無奇圈恰有 2 種二著色，4 個連通塊得 16 種。掃過 /不合|不能.*同一間|分到.*兩間/（0 題）、/分成兩組|兩組.*不能/（8 題）；最接近 logic_grade10_foundation_049，差異：該題用二分圖判斷路徑長的奇偶；本題是二著色計數：每個連通塊恰 2 種（無奇圈時），總數 2^(連通塊數)"
+      }
+    },
+    {
+      "id": "logic_grade11_foundation_062",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "zero_sum_matrix_game_saddle_point",
+      "tags": [
+        "c:game_theory",
+        "c:logic_deduction",
+        "m:extremal"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade11",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "甲、乙兩人玩一個遊戲：每一局甲從 4 列中選一列、乙從 4 行中選一行，兩人同時亮出，乙就付給甲表中對應的錢（元）。表的內容是：第 1 列：5、1、7、3；第 2 列：6、4、5、7；第 3 列：8、0、9、2；第 4 列：3、2、6、6（每列的第 j 個數表示乙選第 j 行時的金額）。兩人都知道這張表，甲想保證自己至少拿到最多，乙想保證自己至多付出最少。下列哪一個是兩人都不會想單方面改變的選擇？",
+        "zh-Hans": "甲、乙两人玩一个游戏：每一局甲从 4 行中选一行、乙从 4 列中选一列，两人同时亮出，乙就付给甲表中对应的钱（元）。表的内容是：第 1 行：5、1、7、3；第 2 行：6、4、5、7；第 3 行：8、0、9、2；第 4 行：3、2、6、6（每行的第 j 个数表示乙选第 j 列时的金额）。两人都知道这张表，甲想保证自己至少拿到最多，乙想保证自己至多付出最少。下列哪一个是两人都不会想单方面改变的选择？",
+        "en": "P and Q play a game: each round P picks one of 4 rows and Q one of 4 columns, revealed at the same time, and Q pays P the amount (in dollars) in the table. The table is: row 1: 5, 1, 7, 3; row 2: 6, 4, 5, 7; row 3: 8, 0, 9, 2; row 4: 3, 2, 6, 6 (the j-th number in a row is the amount when Q picks column j). Both know the table; P wants the best guaranteed income and Q the smallest guaranteed payment. Which choice is one that neither player wants to change on their own?",
+        "ja": "甲と乙がゲームをする。各回、甲は 4 つの行から 1 つ、乙は 4 つの列から 1 つを同時に選び、乙は表の対応する金額（円）を甲に払う。表は、第 1 行：5、1、7、3、第 2 行：6、4、5、7、第 3 行：8、0、9、2、第 4 行：3、2、6、6（各行の j 番目の数は乙が第 j 列を選んだときの金額）である。2 人とも表を知っており、甲は最低限もらえる額をできるだけ大きく、乙は最大限払う額をできるだけ小さくしたい。2 人とも自分だけ選択を変えたいと思わない組はどれか。"
+      },
+      "options": {
+        "A": {
+          "zh-Hant": "甲選第 3 列、乙選第 2 行，甲每局得 0 元",
+          "zh-Hans": "甲选第 3 行、乙选第 2 列，甲每局得 0 元",
+          "en": "P picks row 3, Q picks column 2; P gets 0 per round",
+          "ja": "甲は第 3 行、乙は第 2 列で、甲は毎回 0 円"
+        },
+        "B": {
+          "zh-Hant": "甲選第 3 列、乙選第 3 行，甲每局得 9 元",
+          "zh-Hans": "甲选第 3 行、乙选第 3 列，甲每局得 9 元",
+          "en": "P picks row 3, Q picks column 3; P gets 9 per round",
+          "ja": "甲は第 3 行、乙は第 3 列で、甲は毎回 9 円"
+        },
+        "C": {
+          "zh-Hant": "甲選第 1 列、乙選第 3 行，甲每局得 7 元",
+          "zh-Hans": "甲选第 1 行、乙选第 3 列，甲每局得 7 元",
+          "en": "P picks row 1, Q picks column 3; P gets 7 per round",
+          "ja": "甲は第 1 行、乙は第 3 列で、甲は毎回 7 円"
+        },
+        "D": {
+          "zh-Hant": "甲選第 2 列、乙選第 2 行，甲每局得 4 元",
+          "zh-Hans": "甲选第 2 行、乙选第 2 列，甲每局得 4 元",
+          "en": "P picks row 2, Q picks column 2; P gets 4 per round",
+          "ja": "甲は第 2 行、乙は第 2 列で、甲は毎回 4 円"
+        }
+      },
+      "answer": {
+        "zh-Hant": "答案是 D：甲選第 2 列、乙選第 2 行，甲每局得 4 元。",
+        "zh-Hans": "答案是 D：甲选第 2 行、乙选第 2 列，甲每局得 4 元。",
+        "en": "The answer is D: P picks row 2, Q picks column 2; P gets 4 per round.",
+        "ja": "答えは D：甲は第 2 行、乙は第 2 列で、甲は毎回 4 円 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "甲看每一列最差的情況（最小值）：第 1 到第 4 列分別是 1、4、0、2。選第 2 列，不論乙怎麼選，甲至少拿 4 元，這是甲能保證的最大值。",
+          "乙看每一行最差的情況（最大值）：第 1 到第 4 行分別是 8、4、9、7。選第 2 行，不論甲怎麼選，乙至多付 4 元，這是乙能保證的最小值。",
+          "兩個保證值都是 4，交會在第 2 列第 2 行：這個 4 是第 2 列的最小值、也是第 2 行的最大值（鞍點）。乙選第 2 行時，甲改選其他列只能拿 1、0、2，比 4 少；甲選第 2 列時，乙改選其他行要付 6、5、7，比 4 多。所以兩人都不想改，甲每局得 4 元。",
+          "A：甲選第 3 列時乙確實會選第 2 行付 0 元，但甲發現後會改選第 2 列拿 4 元，不穩定。B：甲想拿 9 元，但乙知道甲選第 3 列就會改選第 2 行。C：乙不會選第 3 行，因為那一行最多要付 9 元。答案是 D。"
+        ],
+        "zh-Hans": [
+          "甲看每一行最差的情况（最小值）：第 1 到第 4 行分别是 1、4、0、2。选第 2 行，不论乙怎么选，甲至少拿 4 元，这是甲能保证的最大值。",
+          "乙看每一列最差的情况（最大值）：第 1 到第 4 列分别是 8、4、9、7。选第 2 列，不论甲怎么选，乙至多付 4 元，这是乙能保证的最小值。",
+          "两个保证值都是 4，交会在第 2 行第 2 列：这个 4 是第 2 行的最小值、也是第 2 列的最大值（鞍点）。乙选第 2 列时，甲改选其他行只能拿 1、0、2，比 4 少；甲选第 2 行时，乙改选其他列要付 6、5、7，比 4 多。所以两人都不想改，甲每局得 4 元。",
+          "A：甲选第 3 行时乙确实会选第 2 列付 0 元，但甲发现后会改选第 2 行拿 4 元，不稳定。B：甲想拿 9 元，但乙知道甲选第 3 行就会改选第 2 列。C：乙不会选第 3 列，因为那一列最多要付 9 元。答案是 D。"
+        ],
+        "en": [
+          "P looks at the worst case (minimum) of each row: rows 1 to 4 give 1, 4, 0, 2. Choosing row 2, P gets at least 4 whatever Q does, the best P can guarantee.",
+          "Q looks at the worst case (maximum) of each column: columns 1 to 4 give 8, 4, 9, 7. Choosing column 2, Q pays at most 4 whatever P does, the best Q can guarantee.",
+          "Both guarantees equal 4 and meet at row 2, column 2: this 4 is the minimum of row 2 and the maximum of column 2 (a saddle point). With Q on column 2, P switching rows gets only 1, 0 or 2; with P on row 2, Q switching columns pays 6, 5 or 7. So neither wants to change, and P gets 4 dollars per round.",
+          "A: if P picks row 3, Q would indeed pick column 2 and pay 0, but then P switches to row 2 for 4, so it is not stable. B: P hopes for 9, but Q, knowing P picks row 3, switches to column 2. C: Q never picks column 3, which can cost up to 9. The answer is D."
+        ],
+        "ja": [
+          "甲は各行の最悪の場合（最小値）を見る：第 1〜4 行はそれぞれ 1、4、0、2。第 2 行を選べば乙が何を選んでも少なくとも 4 円もらえ、これが甲の保証できる最大値。",
+          "乙は各列の最悪の場合（最大値）を見る：第 1〜4 列はそれぞれ 8、4、9、7。第 2 列を選べば甲が何を選んでも高々 4 円しか払わず、これが乙の保証できる最小値。",
+          "2 つの保証値はどちらも 4 で、第 2 行第 2 列で一致する。この 4 は第 2 行の最小値であり第 2 列の最大値でもある（鞍点）。乙が第 2 列のとき甲がほかの行に変えると 1、0、2 で 4 より少なく、甲が第 2 行のとき乙がほかの列に変えると 6、5、7 を払うことになり 4 より多い。よって 2 人とも変えたくなく、甲は毎回 4 円もらう。",
+          "A：甲が第 3 行なら乙は確かに第 2 列を選んで 0 円だが、それを知った甲は第 2 行に変えて 4 円もらうので安定しない。B：甲は 9 円をねらうが、乙は甲が第 3 行と知れば第 2 列に変える。C：乙は最大 9 円払うことになる第 3 列を選ばない。答えは D。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "multiple_choice",
+      "correctAnswer": {
+        "type": "choice",
+        "value": "D"
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade11-foundation",
+        "notes": "maximin（列最小值中最大）與 minimax（行最大值中最小）都是 4，交會處是鞍點。掃過 /乙.*付給甲|付給.*元.*表/（1 題）、/保證.*至少|最壞/（18 題）；最接近 logic_grade12_foundation_050，差異：該題沒有鞍點、要用混合策略讓對手無差別；本題有純策略鞍點：列最小值的最大＝行最大值的最小＝4"
+      }
+    },
+    {
+      "id": "logic_grade11_foundation_063",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "closed_walks_of_length_four_split_at_midpoint",
+      "tags": [
+        "c:graph_theory",
+        "c:basic_counting",
+        "m:bijection"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade11",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "某條捷運有 A、B、C、D 四個站，直接相連（可雙向行駛）的路段只有：A–B、B–C、C–D、D–A、A–C。一趟「4 段行程」是從某站出發，每一段都沿一條路段走到相鄰的站，共走 4 段（可以重複經過站或路段，也可以折返）。從 A 出發、走完 4 段後回到 A 的行程一共有幾種？",
+        "zh-Hans": "某条地铁有 A、B、C、D 四个站，直接相连（可双向行驶）的路段只有：A–B、B–C、C–D、D–A、A–C。一趟「4 段行程」是从某站出发，每一段都沿一条路段走到相邻的站，共走 4 段（可以重复经过站或路段，也可以折返）。从 A 出发、走完 4 段后回到 A 的行程一共有几种？",
+        "en": "A metro line has stations A, B, C, D, and the only direct (two-way) links are A–B, B–C, C–D, D–A, A–C. A \"4-leg trip\" starts at a station and each leg follows a link to a neighboring station, 4 legs in all (stations and links may repeat, and turning back is allowed). How many 4-leg trips start at A and end at A?",
+        "ja": "ある地下鉄に A、B、C、D の 4 駅があり、直接つながる（双方向の）区間は A–B、B–C、C–D、D–A、A–C だけである。「4 区間の旅」とは、ある駅から出発し、毎回 1 つの区間を通って隣の駅へ進むことを 4 回行うもの（駅や区間をくり返し通っても、折り返してもよい）。A から出発して 4 区間後に A に戻る旅は何通りあるか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 15。",
+        "zh-Hans": "答案是 15。",
+        "en": "The answer is 15.",
+        "ja": "答えは 15 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "把行程從中間切開：走完第 2 段時停在某站 X。前半是「A 走 2 段到 X」，後半是「X 走 2 段回 A」，把後半倒過來走就是「A 走 2 段到 X」，所以後半的種數和前半一樣。",
+          "設從 A 走 2 段到 X 的方法數是 w(X)。A 的鄰站是 B、C、D：回到 A 有 A→B→A、A→C→A、A→D→A，w(A) = 3；到 B 只能 A→C→B，w(B) = 1。",
+          "到 C 有 A→B→C、A→D→C，w(C) = 2；到 D 只能 A→C→D，w(D) = 1。（A 不能 A→A→⋯，因為沒有原地停留的路段。）",
+          "每個中點 X 貢獻 w(X) × w(X) 種，所以總數 = 3² + 1² + 2² + 1² = 9 + 1 + 4 + 1 = 15 種。（這也是相鄰矩陣四次方左上角的數。）"
+        ],
+        "zh-Hans": [
+          "把行程从中间切开：走完第 2 段时停在某站 X。前半是「A 走 2 段到 X」，后半是「X 走 2 段回 A」，把后半倒过来走就是「A 走 2 段到 X」，所以后半的种数和前半一样。",
+          "设从 A 走 2 段到 X 的方法数是 w(X)。A 的邻站是 B、C、D：回到 A 有 A→B→A、A→C→A、A→D→A，w(A) = 3；到 B 只能 A→C→B，w(B) = 1。",
+          "到 C 有 A→B→C、A→D→C，w(C) = 2；到 D 只能 A→C→D，w(D) = 1。（A 不能 A→A→⋯，因为没有原地停留的路段。）",
+          "每个中点 X 贡献 w(X) × w(X) 种，所以总数 = 3² + 1² + 2² + 1² = 9 + 1 + 4 + 1 = 15 种。（这也是邻接矩阵四次方左上角的数。）"
+        ],
+        "en": [
+          "Cut the trip in the middle: after leg 2 it is at some station X. The first half is \"A to X in 2 legs\" and the second half \"X back to A in 2 legs\"; reversing the second half gives \"A to X in 2 legs\", so both halves have the same count.",
+          "Let w(X) be the number of 2-leg routes from A to X. A's neighbors are B, C, D: back to A via A→B→A, A→C→A, A→D→A, so w(A) = 3; to B only A→C→B, so w(B) = 1.",
+          "To C via A→B→C or A→D→C, so w(C) = 2; to D only A→C→D, so w(D) = 1. (There is no link from a station to itself.)",
+          "Each midpoint X contributes w(X) × w(X) trips, so the total is 3² + 1² + 2² + 1² = 9 + 1 + 4 + 1 = 15. (This is the top-left entry of the fourth power of the adjacency matrix.)"
+        ],
+        "ja": [
+          "旅を真ん中で切る。2 区間進んだときにいる駅を X とする。前半は「A から 2 区間で X へ」、後半は「X から 2 区間で A へ」で、後半を逆にたどると「A から 2 区間で X へ」になるので、前半と後半の数は同じ。",
+          "A から 2 区間で X へ行く方法の数を w(X) とする。A の隣は B、C、D。A に戻るのは A→B→A、A→C→A、A→D→A で w(A) = 3、B へは A→C→B だけで w(B) = 1。",
+          "C へは A→B→C、A→D→C で w(C) = 2、D へは A→C→D だけで w(D) = 1。（同じ駅にとどまる区間はない。）",
+          "中間点 X ごとに w(X) × w(X) 通りなので、合計 3² + 1² + 2² + 1² = 9 + 1 + 4 + 1 = 15 通り。（隣接行列の 4 乗の左上の成分にあたる。）"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "15"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade11-foundation",
+        "notes": "長度 4 的封閉走法從中點切開，等於 2 步走法數的平方和 3² + 1² + 2² + 1² = 15。掃過 /捷運|路段/（4 題）、/走.*段.*回到|回到.*出發/（10 題）；最接近 combinatorics_grade11_foundation_073，差異：該題是三角形上隨機走回原點的機率；本題是不對稱圖上的封閉走法計數，從中點切開得 Σ w(X)²"
+      }
     }
   ]
 }

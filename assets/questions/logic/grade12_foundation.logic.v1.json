@@ -5515,6 +5515,360 @@
         "reference": "logic-grade12-foundation",
         "notes": "先用「三數必有兩數和為偶」配出三對，再對三個半和重用一次，得 4 數和為 4 的倍數；000111 為反例。掃過 /4 的倍數|任.*個整數/（24 題）；最接近 logic_grade11_foundation_014，差異：該題是連續段和被 10 整除的鴿籠；本題是任取 4 數和為 4 的倍數（EGZ n=4），兩次用奇偶配對"
       }
+    },
+    {
+      "id": "logic_grade12_foundation_059",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "optimal_stopping_up_to_three_dice_rolls",
+      "tags": [
+        "c:game_theory",
+        "c:expectation",
+        "m:reverse"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "小安玩擲骰遊戲：最多擲 3 次公正的六面骰子。每擲一次後，他可以決定停下來（得分就是這一次的點數），或放棄這次點數再擲；第 3 次擲完一定要停，得分就是第 3 次的點數。若他採用讓得分期望值最大的策略，得分期望值寫成最簡分數 p/q，求 p + q。",
+        "zh-Hans": "小安玩掷骰游戏：最多掷 3 次公正的六面骰子。每掷一次后，他可以决定停下来（得分就是这一次的点数），或放弃这次点数再掷；第 3 次掷完一定要停，得分就是第 3 次的点数。若他采用让得分期望值最大的策略，得分期望值写成最简分数 p/q，求 p + q。",
+        "en": "An plays a dice game: he may roll a fair six-sided die up to 3 times. After each roll he may stop (scoring that roll) or discard it and roll again; after the 3rd roll he must stop and scores the 3rd roll. Using the strategy that maximizes his expected score, the expected score is p/q in lowest terms. Find p + q.",
+        "ja": "アンさんはさいころゲームをする。公正な 6 面のさいころを最大 3 回投げられ、投げるたびに、やめてその目を得点にするか、その目を捨ててもう一度投げるかを選ぶ。3 回目を投げたら必ずやめ、3 回目の目が得点になる。得点の期待値を最大にする作戦をとるとき、その期待値を既約分数 p/q で表して p + q を求めよ。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 17。",
+        "zh-Hans": "答案是 17。",
+        "en": "The answer is 17.",
+        "ja": "答えは 17 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "從最後一步往回推。只剩最後一次可擲時，期望得分是 (1 + 2 + ⋯ + 6)/6 = 7/2。",
+          "第 2 次擲完：若點數大於 7/2（即 4、5、6）就停，否則再擲（期望 7/2）。第 2 次開始時的期望值 = (4 + 5 + 6)/6 + (3/6) × 7/2 = 5/2 + 7/4 = 17/4。",
+          "第 1 次擲完：若點數大於 17/4（即 5、6）就停，否則進入第 2 次（期望 17/4）。期望值 = (5 + 6)/6 + (4/6) × 17/4 = 11/6 + 17/6 = 28/6 = 14/3。",
+          "所以最佳策略是「第 1 次擲到 5 或 6 就停，第 2 次擲到 4 以上就停」，期望得分 14/3，p + q = 14 + 3 = 17。"
+        ],
+        "zh-Hans": [
+          "从最后一步往回推。只剩最后一次可掷时，期望得分是 (1 + 2 + ⋯ + 6)/6 = 7/2。",
+          "第 2 次掷完：若点数大于 7/2（即 4、5、6）就停，否则再掷（期望 7/2）。第 2 次开始时的期望值 = (4 + 5 + 6)/6 + (3/6) × 7/2 = 5/2 + 7/4 = 17/4。",
+          "第 1 次掷完：若点数大于 17/4（即 5、6）就停，否则进入第 2 次（期望 17/4）。期望值 = (5 + 6)/6 + (4/6) × 17/4 = 11/6 + 17/6 = 28/6 = 14/3。",
+          "所以最佳策略是「第 1 次掷到 5 或 6 就停，第 2 次掷到 4 以上就停」，期望得分 14/3，p + q = 14 + 3 = 17。"
+        ],
+        "en": [
+          "Work backwards. With only the last roll left, the expected score is (1 + 2 + ⋯ + 6)/6 = 7/2.",
+          "After the 2nd roll: stop if it beats 7/2 (i.e. 4, 5, 6), otherwise roll again (worth 7/2). The value at the start of roll 2 is (4 + 5 + 6)/6 + (3/6) × 7/2 = 5/2 + 7/4 = 17/4.",
+          "After the 1st roll: stop if it beats 17/4 (i.e. 5, 6), otherwise go on (worth 17/4). The value is (5 + 6)/6 + (4/6) × 17/4 = 11/6 + 17/6 = 28/6 = 14/3.",
+          "So the best strategy is \"stop on 5 or 6 at the first roll, on 4 or more at the second\", with expected score 14/3, and p + q = 14 + 3 = 17."
+        ],
+        "ja": [
+          "最後から逆にたどる。最後の 1 回だけが残っているときの期待値は (1 + 2 + ⋯ + 6)/6 = 7/2。",
+          "2 回目のあと：7/2 より大きい目（4、5、6）ならやめ、そうでなければもう一度投げる（期待値 7/2）。2 回目を投げる前の期待値は (4 + 5 + 6)/6 + (3/6) × 7/2 = 5/2 + 7/4 = 17/4。",
+          "1 回目のあと：17/4 より大きい目（5、6）ならやめ、そうでなければ 2 回目へ進む（期待値 17/4）。期待値は (5 + 6)/6 + (4/6) × 17/4 = 11/6 + 17/6 = 28/6 = 14/3。",
+          "よって最善の作戦は「1 回目は 5 か 6 でやめ、2 回目は 4 以上でやめる」で、期待値は 14/3、p + q = 14 + 3 = 17。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "17"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade12-foundation",
+        "notes": "最佳停止逆推：最後一擲 7/2，第二擲門檻 4 得 17/4，第一擲門檻 5 得 14/3。掃過 /最多擲|可以決定停|停下來/（12 題）、/期望.*策略|策略.*期望/（1 題）；最接近 logic_grade6_foundation_096（海盜分金逆推），差異：該題是確定性的逆向歸納；本題是含機率的最佳停止，每一步比較「現在的點數」與「繼續的期望值」逆推"
+      }
+    },
+    {
+      "id": "logic_grade12_foundation_060",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "pure_nash_equilibrium_pricing_dilemma",
+      "tags": [
+        "c:game_theory",
+        "c:logic_deduction",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "甲、乙兩家店賣同一種商品，各自同時決定定「高價」或「低價」，只決定一次。兩家的獲利（萬元）如下：兩家都高價，各得 8；甲高價、乙低價，甲得 2、乙得 10；甲低價、乙高價，甲得 10、乙得 2；兩家都低價，各得 4。若某一組選擇使得「任何一家單獨改變自己的決定都不會讓自己獲利增加」，就稱它是穩定的。下列哪一個敘述正確？",
+        "zh-Hans": "甲、乙两家店卖同一种商品，各自同时决定定「高价」或「低价」，只决定一次。两家的获利（万元）如下：两家都高价，各得 8；甲高价、乙低价，甲得 2、乙得 10；甲低价、乙高价，甲得 10、乙得 2；两家都低价，各得 4。若某一组选择使得「任何一家单独改变自己的决定都不会让自己获利增加」，就称它是稳定的。下列哪一个叙述正确？",
+        "en": "Shops P and Q sell the same product and simultaneously choose a \"high\" or \"low\" price, once. Profits (in ten-thousands of dollars): both high, 8 each; P high and Q low, P gets 2 and Q gets 10; P low and Q high, P gets 10 and Q gets 2; both low, 4 each. A pair of choices is called stable if neither shop can increase its own profit by changing its choice alone. Which statement is correct?",
+        "ja": "甲店と乙店が同じ商品を売り、それぞれ同時に「高値」か「安値」かを 1 回だけ決める。利益（万円）は、両店とも高値なら各 8、甲が高値で乙が安値なら甲 2・乙 10、甲が安値で乙が高値なら甲 10・乙 2、両店とも安値なら各 4 である。どちらの店も自分だけ決定を変えても利益が増えない組を「安定」とよぶ。正しいのはどれか。"
+      },
+      "options": {
+        "A": {
+          "zh-Hant": "兩家都定高價是穩定的，因為這時兩家合計獲利最多",
+          "zh-Hans": "两家都定高价是稳定的，因为这时两家合计获利最多",
+          "en": "both high is stable, because then the two shops earn the most in total",
+          "ja": "両店とも高値が安定。2 店の利益の合計が最大になるから"
+        },
+        "B": {
+          "zh-Hant": "一家定高價、一家定低價是穩定的，兩種情形都穩定",
+          "zh-Hans": "一家定高价、一家定低价是稳定的，两种情形都稳定",
+          "en": "one high and one low is stable, in both of those arrangements",
+          "ja": "一方が高値で他方が安値の組が安定で、2 通りともそうである"
+        },
+        "C": {
+          "zh-Hant": "只有兩家都定低價是穩定的，即使兩家各只得 4 萬元",
+          "zh-Hans": "只有两家都定低价是稳定的，即使两家各只得 4 万元",
+          "en": "only both low is stable, even though each then earns just 4",
+          "ja": "安定なのは両店とも安値の組だけで、そのとき各店は 4 万円しか得ない"
+        },
+        "D": {
+          "zh-Hant": "沒有任何一組是穩定的，總有一家會想改變自己的定價",
+          "zh-Hans": "没有任何一组是稳定的，总有一家会想改变自己的定价",
+          "en": "no pair is stable; some shop always wants to change its price",
+          "ja": "安定な組は 1 つもなく、いつもどちらかの店が値段を変えたくなる"
+        }
+      },
+      "answer": {
+        "zh-Hant": "答案是 C：只有兩家都定低價是穩定的，即使兩家各只得 4 萬元。",
+        "zh-Hans": "答案是 C：只有两家都定低价是稳定的，即使两家各只得 4 万元。",
+        "en": "The answer is C: only both low is stable, even though each then earns just 4.",
+        "ja": "答えは C：安定なのは両店とも安値の組だけで、そのとき各店は 4 万円しか得ない です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "先看甲：若乙定高價，甲定低價得 10 > 定高價得 8；若乙定低價，甲定低價得 4 > 定高價得 2。不論乙怎麼做，甲定低價都比較好。由對稱，乙也一樣。",
+          "檢查（低, 低）：甲單獨改成高價只得 2 < 4，乙單獨改也只得 2 < 4，都不會增加，所以是穩定的。",
+          "（高, 高）：甲單獨改成低價會從 8 變 10，有誘因改，不穩定。（高, 低）：甲改低價從 2 變 4，不穩定；（低, 高）同理乙會改，不穩定。所以唯一穩定的是兩家都定低價，答案是 C。",
+          "A 錯：兩家都高價對雙方合計最好，但每一家都有單獨降價的誘因，所以不穩定（這正是「囚犯困境」）。B 錯：定高價的一方會改成低價。D 錯：（低, 低）就是穩定的。"
+        ],
+        "zh-Hans": [
+          "先看甲：若乙定高价，甲定低价得 10 > 定高价得 8；若乙定低价，甲定低价得 4 > 定高价得 2。不论乙怎么做，甲定低价都比较好。由对称，乙也一样。",
+          "检查（低, 低）：甲单独改成高价只得 2 < 4，乙单独改也只得 2 < 4，都不会增加，所以是稳定的。",
+          "（高, 高）：甲单独改成低价会从 8 变 10，有诱因改，不稳定。（高, 低）：甲改低价从 2 变 4，不稳定；（低, 高）同理乙会改，不稳定。所以唯一稳定的是两家都定低价，答案是 C。",
+          "A 错：两家都高价对双方合计最好，但每一家都有单独降价的诱因，所以不稳定（这正是「囚徒困境」）。B 错：定高价的一方会改成低价。D 错：（低, 低）就是稳定的。"
+        ],
+        "en": [
+          "Look at P first: if Q is high, P gets 10 by going low versus 8 by going high; if Q is low, P gets 4 low versus 2 high. Whatever Q does, low is better for P. By symmetry the same holds for Q.",
+          "Check (low, low): P switching to high gets 2 < 4, and Q switching gets 2 < 4, so neither gains; it is stable.",
+          "(high, high): P switching to low goes from 8 to 10, so it is not stable. (high, low): P switching to low goes from 2 to 4, not stable; (low, high) likewise Q switches. So the only stable pair is both low; the answer is C.",
+          "A is wrong: both high is best for the pair together, but each shop gains by cutting its price alone, so it is not stable (the prisoner's dilemma). B is wrong: the high-price shop would switch to low. D is wrong: (low, low) is stable."
+        ],
+        "ja": [
+          "まず甲：乙が高値なら、甲は安値で 10 > 高値で 8。乙が安値なら、甲は安値で 4 > 高値で 2。乙がどうしても甲は安値のほうがよい。対称性から乙も同じ。",
+          "（安, 安）を調べる：甲だけ高値に変えると 2 < 4、乙だけ変えても 2 < 4 で、どちらも増えないので安定。",
+          "（高, 高）：甲だけ安値に変えると 8 から 10 に増えるので安定でない。（高, 安）：甲が安値に変えると 2 から 4 で安定でない。（安, 高）も同様に乙が変える。よって安定なのは両店とも安値の組だけで、答えは C。",
+          "A は誤り：両店とも高値は 2 店の合計では最もよいが、どちらも自分だけ値下げすると得をするので安定でない（囚人のジレンマ）。B は誤り：高値の店は安値に変える。D は誤り：（安, 安）は安定である。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "multiple_choice",
+      "correctAnswer": {
+        "type": "choice",
+        "value": "C"
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade12-foundation",
+        "notes": "低價對每家都是優勢策略，唯一穩定組是（低, 低），雖然（高, 高）對雙方更好。掃過 /高價.*低價|低價.*高價/（0 題）、/單獨改變|穩定/（1 題）；最接近 logic_grade12_foundation_050（藏硬幣混合策略），差異：該題是零和、無純策略均衡；本題是非零和的定價賽局，檢查四種組合找出唯一純策略納許均衡（囚犯困境）"
+      }
+    },
+    {
+      "id": "logic_grade12_foundation_061",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "identify_stable_matching_by_blocking_pairs",
+      "tags": [
+        "c:logic_deduction",
+        "c:graph_theory",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "甲、乙、丙三位畢業生要分配到 X、Y、Z 三家公司，每家公司收一人。畢業生的志願順序：甲 X > Y > Z；乙 X > Z > Y；丙 Y > X > Z。公司的偏好順序：X 丙 > 甲 > 乙；Y 甲 > 乙 > 丙；Z 甲 > 丙 > 乙。若存在一位畢業生和一家公司「沒有被分在一起，但彼此都比較喜歡對方勝過自己目前的分配」，這個分配就不穩定。下列哪一個分配是穩定的？",
+        "zh-Hans": "甲、乙、丙三位毕业生要分配到 X、Y、Z 三家公司，每家公司收一人。毕业生的志愿顺序：甲 X > Y > Z；乙 X > Z > Y；丙 Y > X > Z。公司的偏好顺序：X 丙 > 甲 > 乙；Y 甲 > 乙 > 丙；Z 甲 > 丙 > 乙。若存在一位毕业生和一家公司「没有被分在一起，但彼此都比较喜欢对方胜过自己目前的分配」，这个分配就不稳定。下列哪一个分配是稳定的？",
+        "en": "Graduates P, Q, R are to be assigned to companies X, Y, Z, one per company. Graduates' preferences: P: X > Y > Z; Q: X > Z > Y; R: Y > X > Z. Companies' preferences: X: R > P > Q; Y: P > Q > R; Z: P > R > Q. An assignment is unstable if some graduate and some company are not paired but each prefers the other to its current partner. Which assignment is stable?",
+        "ja": "卒業生の甲、乙、丙を X、Y、Z の 3 社に 1 人ずつ割り当てる。卒業生の希望順は、甲 X > Y > Z、乙 X > Z > Y、丙 Y > X > Z。会社の好みの順は、X 丙 > 甲 > 乙、Y 甲 > 乙 > 丙、Z 甲 > 丙 > 乙。組になっていない卒業生と会社で、互いに今の相手より相手のほうを好むものがあれば、その割り当ては不安定である。安定な割り当てはどれか。"
+      },
+      "options": {
+        "A": {
+          "zh-Hant": "甲—X、乙—Z、丙—Y",
+          "zh-Hans": "甲—X、乙—Z、丙—Y",
+          "en": "P–X, Q–Z, R–Y",
+          "ja": "甲—X、乙—Z、丙—Y"
+        },
+        "B": {
+          "zh-Hant": "甲—X、乙—Y、丙—Z",
+          "zh-Hans": "甲—X、乙—Y、丙—Z",
+          "en": "P–X, Q–Y, R–Z",
+          "ja": "甲—X、乙—Y、丙—Z"
+        },
+        "C": {
+          "zh-Hant": "甲—Y、乙—X、丙—Z",
+          "zh-Hans": "甲—Y、乙—X、丙—Z",
+          "en": "P–Y, Q–X, R–Z",
+          "ja": "甲—Y、乙—X、丙—Z"
+        },
+        "D": {
+          "zh-Hant": "甲—Z、乙—X、丙—Y",
+          "zh-Hans": "甲—Z、乙—X、丙—Y",
+          "en": "P–Z, Q–X, R–Y",
+          "ja": "甲—Z、乙—X、丙—Y"
+        }
+      },
+      "answer": {
+        "zh-Hant": "答案是 A：甲—X、乙—Z、丙—Y。",
+        "zh-Hans": "答案是 A：甲—X、乙—Z、丙—Y。",
+        "en": "The answer is A: P–X, Q–Z, R–Y.",
+        "ja": "答えは A：甲—X、乙—Z、丙—Y です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "逐一找「互相更喜歡對方」的一對（阻擋對）。A：甲—X、乙—Z、丙—Y。甲已拿到第一志願 X；丙已拿到第一志願 Y；只剩乙可能想換，乙比 Z 更喜歡 X，但 X 比較喜歡現在的甲勝過乙，所以沒有阻擋對，A 穩定。",
+          "B：甲—X、乙—Y、丙—Z。丙比 Z 更喜歡 X，而 X 最喜歡丙、勝過現在的甲，丙與 X 是阻擋對，不穩定。",
+          "C：甲—Y、乙—X、丙—Z。甲比 Y 更喜歡 X，而 X 比較喜歡甲勝過現在的乙，甲與 X 是阻擋對，不穩定。",
+          "D：甲—Z、乙—X、丙—Y。甲比 Z 更喜歡 Y，而 Y 最喜歡甲、勝過現在的丙，甲與 Y 是阻擋對，不穩定。所以答案是 A。"
+        ],
+        "zh-Hans": [
+          "逐一找「互相更喜欢对方」的一对（阻挡对）。A：甲—X、乙—Z、丙—Y。甲已拿到第一志愿 X；丙已拿到第一志愿 Y；只剩乙可能想换，乙比 Z 更喜欢 X，但 X 比较喜欢现在的甲胜过乙，所以没有阻挡对，A 稳定。",
+          "B：甲—X、乙—Y、丙—Z。丙比 Z 更喜欢 X，而 X 最喜欢丙、胜过现在的甲，丙与 X 是阻挡对，不稳定。",
+          "C：甲—Y、乙—X、丙—Z。甲比 Y 更喜欢 X，而 X 比较喜欢甲胜过现在的乙，甲与 X 是阻挡对，不稳定。",
+          "D：甲—Z、乙—X、丙—Y。甲比 Z 更喜欢 Y，而 Y 最喜欢甲、胜过现在的丙，甲与 Y 是阻挡对，不稳定。所以答案是 A。"
+        ],
+        "en": [
+          "Look for a \"blocking pair\" that prefer each other. A: P–X, Q–Z, R–Y. P has first choice X and R has first choice Y; only Q might want to move, and Q prefers X to Z, but X prefers its current P to Q. No blocking pair, so A is stable.",
+          "B: P–X, Q–Y, R–Z. R prefers X to Z, and X likes R best, above its current P: R and X block, so B is unstable.",
+          "C: P–Y, Q–X, R–Z. P prefers X to Y, and X prefers P to its current Q: P and X block, so C is unstable.",
+          "D: P–Z, Q–X, R–Y. P prefers Y to Z, and Y likes P best, above its current R: P and Y block, so D is unstable. The answer is A."
+        ],
+        "ja": [
+          "互いに相手のほうを好む組（ブロッキング・ペア）を探す。A：甲—X、乙—Z、丙—Y。甲は第 1 希望の X、丙は第 1 希望の Y を得ている。変えたいのは乙だけで、乙は Z より X を好むが、X は乙より今の甲を好む。ブロッキング・ペアはなく A は安定。",
+          "B：甲—X、乙—Y、丙—Z。丙は Z より X を好み、X は今の甲より丙を最も好むので、丙と X がブロッキング・ペアで不安定。",
+          "C：甲—Y、乙—X、丙—Z。甲は Y より X を好み、X は今の乙より甲を好むので、甲と X がブロッキング・ペアで不安定。",
+          "D：甲—Z、乙—X、丙—Y。甲は Z より Y を好み、Y は今の丙より甲を最も好むので、甲と Y がブロッキング・ペアで不安定。答えは A。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "multiple_choice",
+      "correctAnswer": {
+        "type": "choice",
+        "value": "A"
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade12-foundation",
+        "notes": "穩定配對＝不存在阻擋對；逐一檢查四個分配，只有甲—X、乙—Z、丙—Y 沒有阻擋對。掃過 /志願|偏好/（2 題）、/分配到.*公司|公司.*收一人/（0 題）；最接近 logic_grade12_foundation_053（孔多塞循環議程操縱），差異：該題是投票偏好的不遞移；本題是雙邊偏好的穩定配對，逐一檢查是否存在「互相更喜歡對方」的阻擋對"
+      }
+    },
+    {
+      "id": "logic_grade12_foundation_062",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "round_robin_king_exists_most_wins",
+      "tags": [
+        "c:graph_theory",
+        "c:logic_deduction",
+        "m:extremal"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "7 支球隊進行單循環賽，每兩隊恰好比賽一場，每場都分出勝負（沒有平手）。不論比賽結果如何，下列哪一個敘述一定成立？",
+        "zh-Hans": "7 支球队进行单循环赛，每两队恰好比赛一场，每场都分出胜负（没有平局）。不论比赛结果如何，下列哪一个叙述一定成立？",
+        "en": "Seven teams play a round robin: every two teams play exactly once and every game has a winner (no draws). Whatever the results, which statement must be true?",
+        "ja": "7 チームが総当たり戦を行い、どの 2 チームもちょうど 1 回対戦し、どの試合も勝敗がつく（引き分けなし）。結果がどうであっても必ず成り立つのはどれか。"
+      },
+      "options": {
+        "A": {
+          "zh-Hant": "一定有一支隊伍贏了其他 6 支隊伍，全勝結束這次循環賽",
+          "zh-Hans": "一定有一支队伍赢了其他 6 支队伍，全胜结束这次循环赛",
+          "en": "some team must beat all 6 other teams and finish the round robin unbeaten",
+          "ja": "ほかの 6 チームすべてに勝ち、全勝で終えるチームが必ずある"
+        },
+        "B": {
+          "zh-Hant": "一定有一隊對任何他隊 T，若沒直接贏 T，就贏了某支贏過 T 的隊",
+          "zh-Hans": "一定有一队对任何他队 T，若没直接赢 T，就赢了某支赢过 T 的队",
+          "en": "some team, for every other team T, either beat T or beat a team that beat T",
+          "ja": "どの他チーム T に対しても、T に勝つか T に勝ったチームに勝ったチームが必ずある"
+        },
+        "C": {
+          "zh-Hant": "勝場最多的那一隊，一定贏了每一支勝場比它少的隊伍",
+          "zh-Hans": "胜场最多的那一队，一定赢了每一支胜场比它少的队伍",
+          "en": "the team with the most wins must have beaten every team with fewer wins",
+          "ja": "勝ち数が最も多いチームは、勝ち数の少ないチームすべてに必ず勝っている"
+        },
+        "D": {
+          "zh-Hant": "一定有一支隊伍輸給了其他 6 支隊伍，全敗結束這次循環賽",
+          "zh-Hans": "一定有一支队伍输给了其他 6 支队伍，全负结束这次循环赛",
+          "en": "some team must lose to all 6 other teams and finish without a win",
+          "ja": "ほかの 6 チームすべてに負け、全敗で終えるチームが必ずある"
+        }
+      },
+      "answer": {
+        "zh-Hant": "答案是 B：一定有一隊對任何他隊 T，若沒直接贏 T，就贏了某支贏過 T 的隊。",
+        "zh-Hans": "答案是 B：一定有一队对任何他队 T，若没直接赢 T，就赢了某支赢过 T 的队。",
+        "en": "The answer is B: some team, for every other team T, either beat T or beat a team that beat T.",
+        "ja": "答えは B：どの他チーム T に対しても、T に勝つか T に勝ったチームに勝ったチームが必ずある です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "取勝場最多的隊伍 K（同分任取一隊）。對任何其他隊 T：若 K 贏了 T，條件直接成立。",
+          "若 T 贏了 K，假設 K 打敗的每一隊也都輸給 T，那麼 T 贏了 K 打敗的所有隊伍，再加上 K 本身，T 的勝場比 K 多，和 K 勝場最多矛盾。所以一定有某隊 S 被 K 打敗、但 S 贏了 T。B 一定成立。",
+          "A、D 不一定：把 7 隊排成一圈，每隊都贏它後面（順時針）3 隊、輸給前面 3 隊，每隊都是 3 勝 3 敗，既沒有全勝也沒有全敗的隊。",
+          "C 不一定：讓 1 號隊贏 2 到 6 號（5 勝）但輸給 7 號，7 號除了贏 1 號外全輸（1 勝）。1 號勝場最多，卻輸給勝場比它少的 7 號。答案是 B。"
+        ],
+        "zh-Hans": [
+          "取胜场最多的队伍 K（同分任取一队）。对任何其他队 T：若 K 赢了 T，条件直接成立。",
+          "若 T 赢了 K，假设 K 打败的每一队也都输给 T，那么 T 赢了 K 打败的所有队伍，再加上 K 本身，T 的胜场比 K 多，和 K 胜场最多矛盾。所以一定有某队 S 被 K 打败、但 S 赢了 T。B 一定成立。",
+          "A、D 不一定：把 7 队排成一圈，每队都赢它后面（顺时针）3 队、输给前面 3 队，每队都是 3 胜 3 负，既没有全胜也没有全负的队。",
+          "C 不一定：让 1 号队赢 2 到 6 号（5 胜）但输给 7 号，7 号除了赢 1 号外全输（1 胜）。1 号胜场最多，却输给胜场比它少的 7 号。答案是 B。"
+        ],
+        "en": [
+          "Take a team K with the most wins (any one if tied). For any other team T: if K beat T, the condition holds directly.",
+          "If T beat K, suppose every team K beat also lost to T; then T beat all the teams K beat plus K itself, so T has more wins than K, a contradiction. Hence some team S was beaten by K but beat T. B must hold.",
+          "A and D need not hold: place the 7 teams in a circle with each team beating the 3 teams after it (clockwise) and losing to the 3 before it; every team is 3–3, so no team wins or loses all its games.",
+          "C need not hold: let team 1 beat teams 2 to 6 (5 wins) but lose to team 7, and let team 7 lose every other game (1 win). Team 1 has the most wins yet lost to team 7, which has fewer. The answer is B."
+        ],
+        "ja": [
+          "勝ち数が最も多いチーム K をとる（同数ならどれでもよい）。ほかのチーム T について、K が T に勝っていれば条件はそのまま成り立つ。",
+          "T が K に勝った場合、K が勝ったチームがすべて T に負けていたとすると、T は K が勝ったチーム全部と K 自身に勝っていて、T の勝ち数が K より多くなり矛盾。よって K に負けたが T には勝ったチーム S が必ずある。B は必ず成り立つ。",
+          "A と D は成り立つとは限らない：7 チームを円形に並べ、各チームが時計回りに次の 3 チームに勝ち、前の 3 チームに負けるとすると、どのチームも 3 勝 3 敗で、全勝も全敗もいない。",
+          "C も成り立つとは限らない：1 番が 2〜6 番に勝ち（5 勝）7 番に負け、7 番は 1 番以外に全敗（1 勝）とする。1 番は勝ち数最多なのに、勝ち数の少ない 7 番に負けている。答えは B。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "multiple_choice",
+      "correctAnswer": {
+        "type": "choice",
+        "value": "B"
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade12-foundation",
+        "notes": "勝場最多的隊伍若輸給 T，必有它打敗的某隊勝過 T，否則 T 勝場更多；故「兩步可達」的王一定存在。掃過 /單循環/（9 題）、/每兩隊.*比賽一場/（9 題）；最接近 logic_grade12_foundation_054（循環賽循環三元組最多），差異：該題是計數極值；本題是存在性：勝場最多的隊伍一定在兩步之內「勝過」每一隊（循環賽之王），用極端原理反證"
+      }
     }
   ]
 }
