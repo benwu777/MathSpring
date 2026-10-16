@@ -5783,6 +5783,151 @@
         "reference": "logic-grade9-foundation",
         "notes": "反覆插入中間分數：每對相鄰數恰一新一舊，Mₖ₊₁ ≤ Mₖ + Mₖ₋₁，並構造 13/21。掃過「插入|分數」（103 題）；最接近 number_theory_grade7_foundation_062，差異：既有題找兩分數間分母最小的分數；本題是反覆插中間分數的最大分母上界與構造。"
       }
+    },
+    {
+      "id": "logic_grade9_foundation_066",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "route_covering_every_street_of_grid",
+      "tags": [
+        "c:graph_theory",
+        "m:extremal",
+        "m:construction"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade9",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "某個社區的街道是棋盤狀：4 條東西向的街道和 4 條南北向的街道互相交叉，形成 16 個路口，相鄰兩個路口之間的街道都是 1 公里，一共有 24 段這樣的街道。一輛清掃車從某個路口出發，要把每一段街道都至少走過一次，最後回到出發的路口。清掃車最少要走幾公里？",
+        "zh-Hans": "某个社区的街道是棋盘状：4 条东西向的街道和 4 条南北向的街道互相交叉，形成 16 个路口，相邻两个路口之间的街道都是 1 千米，一共有 24 段这样的街道。一辆清扫车从某个路口出发，要把每一段街道都至少走过一次，最后回到出发的路口。清扫车最少要走几千米？",
+        "en": "A neighbourhood has a grid of streets: 4 east–west streets cross 4 north–south streets, forming 16 intersections; each street segment between neighbouring intersections is 1 km, 24 segments in all. A street sweeper starts at some intersection, must travel along every segment at least once, and must finish where it started. What is the least distance, in km, it must travel?",
+        "ja": "ある町の道路は碁盤の目状で、東西方向の 4 本の道と南北方向の 4 本の道が交わって 16 個の交差点ができ、となり合う交差点の間の道はどれも 1 km、全部で 24 区間あります。清掃車がある交差点を出発し、すべての区間を少なくとも 1 回通って、出発した交差点にもどります。清掃車は最少で何 km 走らなければなりませんか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 28。",
+        "zh-Hans": "答案是 28。",
+        "en": "The answer is 28.",
+        "ja": "答えは 28 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "每一段至少走一次，所以至少 24 公里。問題是有沒有路段必須重複走。",
+          "路線要回到起點，每經過一個路口都是「走進去一次、走出來一次」，所以在每個路口，連著它的各段街道被走過的次數加起來一定是偶數。",
+          "外圍四邊上、不在角落的 8 個路口，每個都只連著 3 段街道。若 3 段各走一次，總次數是 3（奇數），不行；所以每個這樣的路口至少有 1 段要重複走。一段重複的街道最多連到 2 個這種路口，所以至少要重複 8 ÷ 2 = 4 公里，總長至少 24 + 4 = 28 公里。",
+          "28 公里做得到：外圍每一邊正中間那一段，兩端剛好就是該邊上兩個 3 段的路口。把這 4 段各多走一次，每個路口的次數都變成偶數；整個街道網是連通的，這時可以一筆走完全部路段（含重複的 4 段）並回到起點。共 28 公里。答案是 28。"
+        ],
+        "zh-Hans": [
+          "每一段至少走一次，所以至少 24 千米。问题是有没有路段必须重复走。",
+          "路线要回到起点，每经过一个路口都是“走进去一次、走出来一次”，所以在每个路口，连着它的各段街道被走过的次数加起来一定是偶数。",
+          "外围四边上、不在角落的 8 个路口，每个都只连着 3 段街道。若 3 段各走一次，总次数是 3（奇数），不行；所以每个这样的路口至少有 1 段要重复走。一段重复的街道最多连到 2 个这种路口，所以至少要重复 8 ÷ 2 = 4 千米，总长至少 24 + 4 = 28 千米。",
+          "28 千米做得到：外围每一边正中间那一段，两端刚好就是该边上两个 3 段的路口。把这 4 段各多走一次，每个路口的次数都变成偶数；整个街道网是连通的，这时可以一笔走完全部路段（含重复的 4 段）并回到起点。共 28 千米。答案是 28。"
+        ],
+        "en": [
+          "Every segment is used at least once, so at least 24 km. The question is which segments must be repeated.",
+          "Since the route returns to its start, every visit to an intersection is \"one way in, one way out\", so at each intersection the total number of traversals of its segments is even.",
+          "The 8 intersections on the outer boundary that are not corners each have only 3 segments. Using each once gives 3 (odd), impossible; so each such intersection needs at least one repeated segment. A repeated segment touches at most 2 of them, so at least 8 ÷ 2 = 4 km must be repeated, for a total of at least 24 + 4 = 28 km.",
+          "28 km is achievable: on each outer side, the middle segment joins exactly the two 3-segment intersections of that side. Walking these 4 segments twice makes every count even; the street network is connected, so all segments (with the 4 repeats) can be traversed in one closed route. That is 28 km. The answer is 28."
+        ],
+        "ja": [
+          "どの区間も少なくとも 1 回通るので、少なくとも 24 km です。問題は、くり返し通らなければならない区間があるかどうかです。",
+          "出発点にもどる道すじでは、交差点を通るたびに「入って 1 回、出て 1 回」なので、各交差点でそこにつながる区間を通った回数の合計は必ず偶数です。",
+          "外周の 4 辺上で角でない 8 個の交差点は、どれも 3 区間としかつながっていません。3 区間を 1 回ずつ通ると合計 3 回（奇数）で不可能なので、こうした交差点ではどれも少なくとも 1 区間をくり返し通る必要があります。くり返す 1 区間がつながるこうした交差点は最大 2 個なので、少なくとも 8 ÷ 2 = 4 km をくり返し、合計は少なくとも 24 + 4 = 28 km です。",
+          "28 km は実現できます。外周の各辺の真ん中の区間は、その辺にある 3 区間の交差点 2 つをちょうど結んでいます。この 4 区間を 1 回ずつ余分に通ると、どの交差点でも回数が偶数になり、道路網はつながっているので、くり返す 4 区間もふくめて全区間を一筆書きで回って出発点にもどれます。合計 28 km です。答えは 28 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "28"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade9-foundation",
+        "notes": "清掃路線（中國郵差問題）：8 個三岔路口兩兩配對，相鄰配對各補走 1 公里。掃過 /每一段街道|每一條(街|路)|每條路/（6 題）、/路口/（12 題）；最接近 logic_grade6_foundation_077，差異：該題是 4 個村莊兩兩相連（4 個奇點、補 2 條）；本題是 4 × 4 路口的棋盤街道，8 個奇點要找最短配對"
+      }
+    },
+    {
+      "id": "logic_grade9_foundation_067",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "three_digit_kaprekar_maximum_steps",
+      "tags": [
+        "c:place_value",
+        "c:logic_deduction",
+        "m:invariant",
+        "m:extremal"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade9",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "對一個三個數字不全相同的三位數做「重排相減」：把它的三個數字由大到小排成最大的數，減去由小到大排成的最小的數（前面是 0 也照排，例如數字 0、1、9 排成 019，就是 19）；結果若不足三位，前面補 0 當作三位數繼續做（例如 99 當作 099）。任何這樣的三位數一直做下去，最後都會得到 495，之後就停在 495。從所有可能的三位數出發，最多要做幾次「重排相減」才會第一次得到 495？",
+        "zh-Hans": "对一个三个数字不全相同的三位数做“重排相减”：把它的三个数字从大到小排成最大的数，减去从小到大排成的最小的数（前面是 0 也照排，例如数字 0、1、9 排成 019，就是 19）；结果若不足三位，前面补 0 当作三位数继续做（例如 99 当作 099）。任何这样的三位数一直做下去，最后都会得到 495，之后就停在 495。从所有可能的三位数出发，最多要做几次“重排相减”才会第一次得到 495？",
+        "en": "For a three-digit number whose digits are not all equal, a \"rearrange-and-subtract\" step takes the largest number formed by its digits minus the smallest (leading zeros allowed, e.g. digits 0, 1, 9 give 019 = 19); a result with fewer than three digits is padded with leading zeros (e.g. 99 is treated as 099). Repeating this, every such number eventually reaches 495 and then stays there. Over all starting three-digit numbers, what is the largest number of steps needed to reach 495 for the first time?",
+        "ja": "3 つの数字がすべて同じではない 3 けたの数に「並べかえ引き算」をします。3 つの数字を大きい順に並べた最大の数から、小さい順に並べた最小の数を引きます（先頭が 0 でもそのまま並べ、たとえば 0、1、9 なら 019 で 19）。結果が 3 けたに満たなければ先頭に 0 を補って 3 けたとして続けます（たとえば 99 は 099）。このような数はどれも、くり返すといずれ 495 になり、その後は 495 のままです。すべての 3 けたの数から始めるとき、初めて 495 になるまでに最大で何回の「並べかえ引き算」が必要ですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 6。",
+        "zh-Hans": "答案是 6。",
+        "en": "The answer is 6.",
+        "ja": "答えは 6 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "設三個數字由大到小是 a ≥ b ≥ c（a > c）。最大數減最小數 = (100a + 10b + c) − (100c + 10b + a) = 99(a − c)。所以做一次之後一定是 99 的倍數 99k，k = a − c 是 1 到 9：099、198、297、396、495、594、693、792、891。",
+          "對這 9 個數繼續做：099 → 990 − 099 = 891 → 981 − 189 = 792 → 972 − 279 = 693 → 963 − 369 = 594 → 954 − 459 = 495。另外 198 → 792、297 → 693、396 → 594，而 495 → 954 − 459 = 495 不變。",
+          "從這 9 個數到 495 還要的次數：099 要 5 次，891、198 要 4 次，792、297 要 3 次，693、396 要 2 次，594 要 1 次，495 要 0 次。最多是 099 的 5 次。",
+          "所以最多 1 + 5 = 6 次，在 a − c = 1 時發生，例如 100：100 → 099 → 891 → 792 → 693 → 594 → 495，恰好 6 次。答案是 6。"
+        ],
+        "zh-Hans": [
+          "设三个数字从大到小是 a ≥ b ≥ c（a > c）。最大数减最小数 = (100a + 10b + c) − (100c + 10b + a) = 99(a − c)。所以做一次之后一定是 99 的倍数 99k，k = a − c 是 1 到 9：099、198、297、396、495、594、693、792、891。",
+          "对这 9 个数继续做：099 → 990 − 099 = 891 → 981 − 189 = 792 → 972 − 279 = 693 → 963 − 369 = 594 → 954 − 459 = 495。另外 198 → 792、297 → 693、396 → 594，而 495 → 954 − 459 = 495 不变。",
+          "从这 9 个数到 495 还要的次数：099 要 5 次，891、198 要 4 次，792、297 要 3 次，693、396 要 2 次，594 要 1 次，495 要 0 次。最多是 099 的 5 次。",
+          "所以最多 1 + 5 = 6 次，在 a − c = 1 时发生，例如 100：100 → 099 → 891 → 792 → 693 → 594 → 495，恰好 6 次。答案是 6。"
+        ],
+        "en": [
+          "Let the digits in decreasing order be a ≥ b ≥ c (a > c). Largest minus smallest = (100a + 10b + c) − (100c + 10b + a) = 99(a − c). So after one step the number is 99k with k = a − c from 1 to 9: 099, 198, 297, 396, 495, 594, 693, 792, 891.",
+          "Continue from these 9 numbers: 099 → 990 − 099 = 891 → 981 − 189 = 792 → 972 − 279 = 693 → 963 − 369 = 594 → 954 − 459 = 495. Also 198 → 792, 297 → 693, 396 → 594, and 495 → 954 − 459 = 495 stays.",
+          "Further steps needed to reach 495: 099 needs 5; 891 and 198 need 4; 792 and 297 need 3; 693 and 396 need 2; 594 needs 1; 495 needs 0. The maximum is 5, from 099.",
+          "So the maximum is 1 + 5 = 6 steps, attained when a − c = 1, e.g. 100: 100 → 099 → 891 → 792 → 693 → 594 → 495, exactly 6 steps. The answer is 6."
+        ],
+        "ja": [
+          "数字を大きい順に a ≥ b ≥ c（a > c）とします。最大の数 − 最小の数 = (100a + 10b + c) − (100c + 10b + a) = 99(a − c) です。よって 1 回後は必ず 99k（k = a − c は 1～9）で、099、198、297、396、495、594、693、792、891 のどれかです。",
+          "この 9 つから続けると、099 → 990 − 099 = 891 → 981 − 189 = 792 → 972 − 279 = 693 → 963 − 369 = 594 → 954 − 459 = 495 です。また 198 → 792、297 → 693、396 → 594 で、495 → 954 − 459 = 495 は変わりません。",
+          "この 9 つから 495 までの回数は、099 が 5 回、891 と 198 が 4 回、792 と 297 が 3 回、693 と 396 が 2 回、594 が 1 回、495 が 0 回で、最大は 099 の 5 回です。",
+          "よって最大は 1 + 5 = 6 回で、a − c = 1 のとき、たとえば 100 では 100 → 099 → 891 → 792 → 693 → 594 → 495 とちょうど 6 回です。答えは 6 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "6"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade9-foundation",
+        "notes": "三位數重排相減第一步必得 99(a − c)，只需追蹤 9 個數的鏈，最長來自 a − c = 1。掃過 /重排相減|由大到小排/（5 題）、/495/（1 題）；最接近 arithmetic_grade4_foundation_168，差異：該題對給定的四位數直接做到 6174 數步數；本題對所有三位數求最多步數，關鍵是一步後只剩 99 的 9 個倍數"
+      }
     }
   ]
 }

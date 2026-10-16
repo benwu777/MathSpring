@@ -9886,6 +9886,342 @@
         "reference": "combinatorics-grade10-foundation",
         "notes": "依腰向量 (1, 0)、(2, 0)、(1, 1) 分類，(2, 1)、(2, 2) 型不可能。掃過 /點陣|格點/（10 題）；最接近 combinatorics_grade11_foundation_006，差異：該題是 4 × 4 格點中三點不共線的總數；本題只數 3 × 3 點陣中的等腰直角三角形，依腰長分類"
       }
+    },
+    {
+      "id": "combinatorics_grade10_foundation_117",
+      "reviewStatus": "ok",
+      "topic": "combinatorics",
+      "subtopic": "ternary_strings_without_adjacent_a",
+      "tags": [
+        "c:recurrence",
+        "c:basic_counting",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "用字母 A、B、C 寫出長度為 8 的字串（每個位置可以是三個字母中的任何一個，字母可以重複，也可以不出現）。要求字串中任何兩個 A 都不相鄰。這樣的字串一共有幾個？",
+        "zh-Hans": "用字母 A、B、C 写出长度为 8 的字符串（每个位置可以是三个字母中的任何一个，字母可以重复，也可以不出现）。要求字符串中任何两个 A 都不相邻。这样的字符串一共有几个？",
+        "en": "Strings of length 8 are written with the letters A, B, C (each position may be any of the three letters; letters may repeat or be absent). No two A's may be adjacent. How many such strings are there?",
+        "ja": "文字 A、B、C を使って長さ 8 の文字列をつくります（各位置は 3 文字のどれでもよく、くり返してもよく、使わない文字があってもよい）。ただし A どうしがとなり合ってはいけません。このような文字列は全部で何個ありますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 3344。",
+        "zh-Hans": "答案是 3344。",
+        "en": "The answer is 3344.",
+        "ja": "答えは 3344 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "設長度 n 的合格字串中，以 A 結尾的有 xₙ 個、以 B 或 C 結尾的有 yₙ 個。n = 1 時 x₁ = 1、y₁ = 2。",
+          "在長度 n − 1 的合格字串後面加一個字母：加 A 時前一個不能是 A，所以 xₙ = yₙ₋₁；加 B 或 C 都可以，所以 yₙ = 2(xₙ₋₁ + yₙ₋₁)。",
+          "依序計算 (xₙ, yₙ)：n = 2 為 (2, 6)，n = 3 為 (6, 16)，n = 4 為 (16, 44)，n = 5 為 (44, 120)，n = 6 為 (120, 328)，n = 7 為 (328, 896)，n = 8 為 (896, 2448)。",
+          "長度 8 的合格字串共 896 + 2448 = 3344 個。（驗算 n = 2：9 個字串扣掉 AA，剩 8 = 2 + 6。）答案是 3344。"
+        ],
+        "zh-Hans": [
+          "设长度 n 的合格字符串中，以 A 结尾的有 xₙ 个、以 B 或 C 结尾的有 yₙ 个。n = 1 时 x₁ = 1、y₁ = 2。",
+          "在长度 n − 1 的合格字符串后面加一个字母：加 A 时前一个不能是 A，所以 xₙ = yₙ₋₁；加 B 或 C 都可以，所以 yₙ = 2(xₙ₋₁ + yₙ₋₁)。",
+          "依次计算 (xₙ, yₙ)：n = 2 为 (2, 6)，n = 3 为 (6, 16)，n = 4 为 (16, 44)，n = 5 为 (44, 120)，n = 6 为 (120, 328)，n = 7 为 (328, 896)，n = 8 为 (896, 2448)。",
+          "长度 8 的合格字符串共 896 + 2448 = 3344 个。（验算 n = 2：9 个字符串扣掉 AA，剩 8 = 2 + 6。）答案是 3344。"
+        ],
+        "en": [
+          "Among valid strings of length n, let xₙ end in A and yₙ end in B or C. For n = 1, x₁ = 1 and y₁ = 2.",
+          "Append a letter to a valid string of length n − 1: appending A requires the previous letter not to be A, so xₙ = yₙ₋₁; appending B or C is always fine, so yₙ = 2(xₙ₋₁ + yₙ₋₁).",
+          "Computing (xₙ, yₙ) in turn: n = 2 gives (2, 6), n = 3 (6, 16), n = 4 (16, 44), n = 5 (44, 120), n = 6 (120, 328), n = 7 (328, 896), n = 8 (896, 2448).",
+          "There are 896 + 2448 = 3344 valid strings of length 8. (Check n = 2: 9 strings minus AA leaves 8 = 2 + 6.) The answer is 3344."
+        ],
+        "ja": [
+          "長さ n の条件を満たす文字列のうち、A で終わるものを xₙ 個、B か C で終わるものを yₙ 個とします。n = 1 では x₁ = 1、y₁ = 2 です。",
+          "長さ n − 1 の文字列の後ろに 1 文字加えます。A を加えるには直前が A でないことが必要なので xₙ = yₙ₋₁、B か C はいつでも加えられるので yₙ = 2(xₙ₋₁ + yₙ₋₁) です。",
+          "順に (xₙ, yₙ) を計算すると、n = 2 で (2, 6)、n = 3 で (6, 16)、n = 4 で (16, 44)、n = 5 で (44, 120)、n = 6 で (120, 328)、n = 7 で (328, 896)、n = 8 で (896, 2448) です。",
+          "長さ 8 では 896 + 2448 = 3344 個です。（n = 2 の確認：9 個から AA を除いて 8 = 2 + 6。）答えは 3344 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "3344"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 4
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "combinatorics-grade10-foundation",
+        "notes": "依結尾字母分兩類建立聯立遞迴 xₙ = yₙ₋₁、yₙ = 2(xₙ₋₁ + yₙ₋₁)。掃過 /字串/（12 題）、/不相鄰|不能相鄰/（22 題）；最接近 combinatorics_grade12_foundation_082，差異：該題是 A、B 字串依段落切分計數；本題是三字母字串禁止 AA，按結尾分類遞推"
+      }
+    },
+    {
+      "id": "combinatorics_grade10_foundation_118",
+      "reviewStatus": "ok",
+      "topic": "combinatorics",
+      "subtopic": "unlabeled_graphs_on_four_vertices",
+      "tags": [
+        "c:graph_theory",
+        "c:basic_counting",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "紙上有 4 個點，在某些點對之間畫線段（每一對點最多一條，也可以一條都不畫）。只看「哪些點和哪些點相連」的結構：如果把其中一個圖的點重新命名後，就能和另一個圖完全一樣，兩者算同一種。一共有幾種不同的圖？",
+        "zh-Hans": "纸上有 4 个点，在某些点对之间画线段（每一对点最多一条，也可以一条都不画）。只看“哪些点和哪些点相连”的结构：如果把其中一个图的点重新命名后，就能和另一个图完全一样，两者算同一种。一共有几种不同的图？",
+        "en": "Four points are drawn on paper, and segments are drawn between some pairs (at most one per pair, possibly none at all). Only the structure \"which points are joined to which\" matters: two drawings count as the same if renaming the points of one makes it identical to the other. How many different graphs are there?",
+        "ja": "紙に 4 つの点があり、いくつかの点の組の間に線分を引きます（1 組に多くて 1 本、1 本も引かなくてもよい）。「どの点とどの点が結ばれているか」という構造だけを見て、一方の点の名前をつけかえるともう一方とまったく同じになるなら同じ種類とします。異なる図は全部で何種類ありますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 (C)：11 種。",
+        "zh-Hans": "答案是 (C)：11 种。",
+        "en": "The answer is (C): 11.",
+        "ja": "答えは (C)：11 種類 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "4 個點之間最多 6 條線段。依線段數 e 分類；而「把連線與不連線對調」（補圖）把 e 條的圖一一對應到 6 − e 條的圖，所以 e 與 6 − e 的種數相同。",
+          "e = 0：1 種。e = 1：1 種。e = 2：兩條共用一點（一條折線）或兩條沒有公共點，2 種。",
+          "e = 3：若三條圍成三角形，第四點孤立，1 種；若沒有圍成三角形，3 條線段把 4 點連成一整塊，可能是一條串起 4 點的折線，或從一點向其他 3 點放射的星形，2 種。共 3 種。",
+          "由補圖對應：e = 4 有 2 種，e = 5 有 1 種，e = 6 有 1 種。總共 1 + 1 + 2 + 3 + 2 + 1 + 1 = 11 種。",
+          "其他選項：10 種是 e = 3 漏掉一種；12 種是把 e = 3 的折線依方向多算一次；64 種是 2⁶，沒有把重新命名後相同的圖合併。答案是 (C)，11 種。"
+        ],
+        "zh-Hans": [
+          "4 个点之间最多 6 条线段。依线段数 e 分类；而“把连线与不连线对调”（补图）把 e 条的图一一对应到 6 − e 条的图，所以 e 与 6 − e 的种数相同。",
+          "e = 0：1 种。e = 1：1 种。e = 2：两条共用一点（一条折线）或两条没有公共点，2 种。",
+          "e = 3：若三条围成三角形，第四点孤立，1 种；若没有围成三角形，3 条线段把 4 点连成一整块，可能是一条串起 4 点的折线，或从一点向其他 3 点放射的星形，2 种。共 3 种。",
+          "由补图对应：e = 4 有 2 种，e = 5 有 1 种，e = 6 有 1 种。总共 1 + 1 + 2 + 3 + 2 + 1 + 1 = 11 种。",
+          "其他选项：10 种是 e = 3 漏掉一种；12 种是把 e = 3 的折线依方向多算一次；64 种是 2⁶，没有把重新命名后相同的图合并。答案是 (C)，11 种。"
+        ],
+        "en": [
+          "There are at most 6 segments among 4 points. Classify by the number e of segments; swapping \"joined\" and \"not joined\" (the complement) matches graphs with e segments one-to-one with graphs with 6 − e, so e and 6 − e have the same count.",
+          "e = 0: 1. e = 1: 1. e = 2: the two segments share a point (a path) or share none: 2.",
+          "e = 3: if the three form a triangle, the fourth point is isolated: 1; otherwise the 3 segments connect all 4 points into one piece, either a path through all 4 points or a star from one point to the other 3: 2. Total 3.",
+          "By complements: e = 4 gives 2, e = 5 gives 1, e = 6 gives 1. In total 1 + 1 + 2 + 3 + 2 + 1 + 1 = 11.",
+          "Other options: 10 misses one kind with e = 3; 12 counts the e = 3 path twice by direction; 64 is 2⁶, without merging graphs that become identical after renaming. The answer is (C), 11."
+        ],
+        "ja": [
+          "4 点の間の線分は多くて 6 本です。線分の数 e で分類します。「結ぶ」と「結ばない」を入れかえる（補グラフ）と e 本の図と 6 − e 本の図が 1 対 1 に対応するので、e と 6 − e の種類数は同じです。",
+          "e = 0：1 種類。e = 1：1 種類。e = 2：2 本が 1 点を共有する（折れ線）か、共有点がないかの 2 種類。",
+          "e = 3：3 本が三角形をつくれば 4 つ目の点は孤立して 1 種類、三角形をつくらなければ 3 本で 4 点が 1 つにつながり、4 点を通る折れ線か、1 点から他の 3 点へ出る星形の 2 種類で、合計 3 種類。",
+          "補グラフの対応より e = 4 は 2 種類、e = 5 は 1 種類、e = 6 は 1 種類。合計 1 + 1 + 2 + 3 + 2 + 1 + 1 = 11 種類です。",
+          "ほかの選択肢：10 は e = 3 の 1 種類を落としたもの、12 は e = 3 の折れ線を向きで 2 回数えたもの、64 は 2⁶ で、名前をつけかえて同じになる図をまとめていません。答えは (C)、11 種類です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "multiple_choice",
+      "options": {
+        "A": {
+          "zh-Hant": "10 種",
+          "zh-Hans": "10 种",
+          "en": "10",
+          "ja": "10 種類"
+        },
+        "B": {
+          "zh-Hant": "12 種",
+          "zh-Hans": "12 种",
+          "en": "12",
+          "ja": "12 種類"
+        },
+        "C": {
+          "zh-Hant": "11 種",
+          "zh-Hans": "11 种",
+          "en": "11",
+          "ja": "11 種類"
+        },
+        "D": {
+          "zh-Hant": "64 種",
+          "zh-Hans": "64 种",
+          "en": "64",
+          "ja": "64 種類"
+        }
+      },
+      "correctAnswer": {
+        "type": "choice",
+        "value": "C"
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "combinatorics-grade10-foundation",
+        "notes": "4 點無標號簡單圖依邊數分類，利用補圖對稱 e ↔ 6 − e，關鍵在 3 條邊的三種形狀。掃過 /連通|互相連通/（8 題）、/4 個點/（7 題）；最接近 combinatorics_grade12_foundation_032，差異：該題數 4 個標號點的連通圖個數（標號）；本題是不計標號的圖的種類數，需判斷同構"
+      }
+    },
+    {
+      "id": "combinatorics_grade10_foundation_119",
+      "reviewStatus": "ok",
+      "topic": "combinatorics",
+      "subtopic": "cube_edges_pairing_all_vertices",
+      "tags": [
+        "c:graph_theory",
+        "c:solid",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "正方體有 8 個頂點、12 條稜。要從 12 條稜中選出 4 條，使 8 個頂點每一個都恰好是所選某一條稜的端點（也就是 4 條稜兩兩沒有公共頂點）。一共有幾種選法？",
+        "zh-Hans": "正方体有 8 个顶点、12 条棱。要从 12 条棱中选出 4 条，使 8 个顶点每一个都恰好是所选某一条棱的端点（也就是 4 条棱两两没有公共顶点）。一共有几种选法？",
+        "en": "A cube has 8 vertices and 12 edges. Four of the 12 edges are to be chosen so that each of the 8 vertices is an endpoint of exactly one chosen edge (that is, no two chosen edges share a vertex). How many ways are there?",
+        "ja": "立方体には頂点が 8 個、辺が 12 本あります。12 本の辺から 4 本を選び、8 個の頂点のどれもが選んだ辺のちょうど 1 本の端点になるようにします（つまり 4 本の辺はどの 2 本も頂点を共有しない）。選び方は全部で何通りありますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 9。",
+        "zh-Hans": "答案是 9。",
+        "en": "The answer is 9.",
+        "ja": "答えは 9 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "把正方體看成上底正方形 ABCD、下底正方形 EFGH，以及 4 條直立的稜 AE、BF、CG、DH。依選到的直立稜條數 k 分類。",
+          "上底剩下的 4 − k 個頂點只能用上底的稜兩兩配對，所以 4 − k 是偶數，k 只能是 0、2、4。k = 4：只有 1 種。k = 0：上底正方形用兩條對邊配對，有 2 種，下底也 2 種，共 2 × 2 = 4 種。",
+          "k = 2：上底剩下兩個頂點要由一條上底的稜連起來，所以它們必須相鄰；也就是兩條直立稜的上端點也相鄰（例如 AE、BF，剩下的 C、D 用 CD、G、H 用 GH）。正方形 ABCD 有 4 條邊，對應 4 種；若選的兩條直立稜在對角（如 AE、CG），剩下 B、D 不相鄰，不行。",
+          "合計 1 + 4 + 4 = 9 種。答案是 9。"
+        ],
+        "zh-Hans": [
+          "把正方体看成上底正方形 ABCD、下底正方形 EFGH，以及 4 条竖直的棱 AE、BF、CG、DH。依选到的竖直棱条数 k 分类。",
+          "上底剩下的 4 − k 个顶点只能用上底的棱两两配对，所以 4 − k 是偶数，k 只能是 0、2、4。k = 4：只有 1 种。k = 0：上底正方形用两条对边配对，有 2 种，下底也 2 种，共 2 × 2 = 4 种。",
+          "k = 2：上底剩下两个顶点要由一条上底的棱连起来，所以它们必须相邻；也就是两条竖直棱的上端点也相邻（例如 AE、BF，剩下的 C、D 用 CD、G、H 用 GH）。正方形 ABCD 有 4 条边，对应 4 种；若选的两条竖直棱在对角（如 AE、CG），剩下 B、D 不相邻，不行。",
+          "合计 1 + 4 + 4 = 9 种。答案是 9。"
+        ],
+        "en": [
+          "View the cube as a top square ABCD, a bottom square EFGH and 4 vertical edges AE, BF, CG, DH. Classify by the number k of vertical edges chosen.",
+          "The remaining 4 − k top vertices can only be paired by top edges, so 4 − k is even and k is 0, 2 or 4. k = 4: just 1 way. k = 0: the top square is paired by a pair of opposite sides, 2 ways, and the bottom likewise 2 ways: 2 × 2 = 4.",
+          "k = 2: the two remaining top vertices must be joined by a top edge, so they are adjacent; equivalently, the tops of the two vertical edges are adjacent (e.g. AE, BF, then C, D use CD and G, H use GH). The square ABCD has 4 sides, giving 4 ways; if the two vertical edges are at opposite corners (e.g. AE, CG), the remaining B, D are not adjacent — impossible.",
+          "In total 1 + 4 + 4 = 9 ways. The answer is 9."
+        ],
+        "ja": [
+          "立方体を上の正方形 ABCD、下の正方形 EFGH、縦の 4 本の辺 AE、BF、CG、DH と見て、選んだ縦の辺の本数 k で分類します。",
+          "上の面に残る 4 − k 個の頂点は上の面の辺でしか組にできないので 4 − k は偶数、k は 0、2、4 のどれかです。k = 4：1 通り。k = 0：上の正方形は向かい合う 2 辺の組で 2 通り、下も 2 通りで 2 × 2 = 4 通り。",
+          "k = 2：上に残る 2 頂点は上の面の辺で結ぶので隣り合っていなければならず、つまり 2 本の縦の辺の上端も隣り合います（たとえば AE、BF なら残りの C、D は CD、G、H は GH）。正方形 ABCD の辺は 4 本なので 4 通り。縦の辺が対角の位置（たとえば AE、CG）だと残りの B、D は隣り合わず不可です。",
+          "合計 1 + 4 + 4 = 9 通りです。答えは 9 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "9"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "combinatorics-grade10-foundation",
+        "notes": "正方體圖的完美配對：依直立稜數 k ∈ 0 題）、/兩兩配|配成/（16 題）；最接近 combinatorics_grade8_foundation_023，差異：該題 8 人任意兩兩分組（105 種，無限制）；本題只能沿正方體的稜配對，要依結構分類"
+      }
+    },
+    {
+      "id": "combinatorics_grade10_foundation_120",
+      "reviewStatus": "ok",
+      "topic": "combinatorics",
+      "subtopic": "triangulations_of_convex_hexagon",
+      "tags": [
+        "c:polygon",
+        "c:recurrence",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "在一個凸六邊形裡畫 3 條對角線，使這 3 條對角線除了在頂點處以外互不相交，於是六邊形被分成 4 個三角形。這樣的畫法一共有幾種？",
+        "zh-Hans": "在一个凸六边形里画 3 条对角线，使这 3 条对角线除了在顶点处以外互不相交，于是六边形被分成 4 个三角形。这样的画法一共有几种？",
+        "en": "In a convex hexagon, 3 diagonals are drawn that do not cross each other except at vertices, so the hexagon is cut into 4 triangles. How many ways are there to do this?",
+        "ja": "凸六角形に、頂点以外では互いに交わらない 3 本の対角線を引くと、六角形は 4 つの三角形に分かれます。このような引き方は全部で何通りありますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 (D)：14 種。",
+        "zh-Hans": "答案是 (D)：14 种。",
+        "en": "The answer is (D): 14.",
+        "ja": "答えは (D)：14 通り です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "設凸 n 邊形這樣切成三角形的方法數為 Tₙ。三角形 T₃ = 1；四邊形選一條對角線，T₄ = 2；五邊形的兩條對角線一定從同一頂點出發，選這個頂點有 5 種，T₅ = 5。",
+          "把六邊形頂點依序記為 1～6。邊 1–2 一定屬於某一個三角形 1–2–k，k 是 3、4、5、6 之一。",
+          "k = 3：剩下五邊形 1、3、4、5、6，有 T₅ = 5 種；k = 6：剩下五邊形 2、3、4、5、6，也是 5 種；k = 4：剩下三角形 2、3、4 與四邊形 1、4、5、6，有 1 × 2 = 2 種；k = 5：剩下四邊形 2、3、4、5 與三角形 5、6、1，有 2 × 1 = 2 種。",
+          "T₆ = 5 + 5 + 2 + 2 = 14。其他選項：12 是漏掉 k = 4 或 k = 5 其中一類；16 是把這兩類之一重複算；20 是從 6 個頂點選 3 個連成三角形的個數 C(6, 3)，不是切法數。答案是 (D)，14 種。"
+        ],
+        "zh-Hans": [
+          "设凸 n 边形这样切成三角形的方法数为 Tₙ。三角形 T₃ = 1；四边形选一条对角线，T₄ = 2；五边形的两条对角线一定从同一顶点出发，选这个顶点有 5 种，T₅ = 5。",
+          "把六边形顶点依次记为 1～6。边 1–2 一定属于某一个三角形 1–2–k，k 是 3、4、5、6 之一。",
+          "k = 3：剩下五边形 1、3、4、5、6，有 T₅ = 5 种；k = 6：剩下五边形 2、3、4、5、6，也是 5 种；k = 4：剩下三角形 2、3、4 与四边形 1、4、5、6，有 1 × 2 = 2 种；k = 5：剩下四边形 2、3、4、5 与三角形 5、6、1，有 2 × 1 = 2 种。",
+          "T₆ = 5 + 5 + 2 + 2 = 14。其他选项：12 是漏掉 k = 4 或 k = 5 其中一类；16 是把这两类之一重复算；20 是从 6 个顶点选 3 个连成三角形的个数 C(6, 3)，不是切法数。答案是 (D)，14 种。"
+        ],
+        "en": [
+          "Let Tₙ be the number of ways for a convex n-gon. A triangle has T₃ = 1; a quadrilateral picks one diagonal, T₄ = 2; in a pentagon the two diagonals must start from the same vertex, which can be chosen in 5 ways, T₅ = 5.",
+          "Label the hexagon's vertices 1 to 6 in order. Side 1–2 belongs to exactly one triangle 1–2–k, with k one of 3, 4, 5, 6.",
+          "k = 3 leaves pentagon 1, 3, 4, 5, 6: T₅ = 5 ways; k = 6 leaves pentagon 2, 3, 4, 5, 6: also 5; k = 4 leaves triangle 2, 3, 4 and quadrilateral 1, 4, 5, 6: 1 × 2 = 2; k = 5 leaves quadrilateral 2, 3, 4, 5 and triangle 5, 6, 1: 2 × 1 = 2.",
+          "T₆ = 5 + 5 + 2 + 2 = 14. Other options: 12 misses one of the classes k = 4, k = 5; 16 counts one of them twice; 20 is C(6, 3), the number of triangles with vertices among the 6 vertices, not the number of dissections. The answer is (D), 14."
+        ],
+        "ja": [
+          "凸 n 角形の分け方を Tₙ とします。三角形は T₃ = 1、四角形は対角線を 1 本選んで T₄ = 2、五角形の 2 本の対角線は必ず同じ頂点から出るので、その頂点の選び方で T₅ = 5 です。",
+          "六角形の頂点を順に 1～6 とします。辺 1–2 はちょうど 1 つの三角形 1–2–k に属し、k は 3、4、5、6 のどれかです。",
+          "k = 3 なら五角形 1、3、4、5、6 が残り T₅ = 5 通り、k = 6 なら五角形 2、3、4、5、6 で同じく 5 通り、k = 4 なら三角形 2、3、4 と四角形 1、4、5、6 で 1 × 2 = 2 通り、k = 5 なら四角形 2、3、4、5 と三角形 5、6、1 で 2 × 1 = 2 通りです。",
+          "T₆ = 5 + 5 + 2 + 2 = 14 です。ほかの選択肢：12 は k = 4 か k = 5 の一方を落としたもの、16 はその一方を 2 回数えたもの、20 は 6 頂点から 3 つ選んでできる三角形の個数 C(6, 3) で、分け方の数ではありません。答えは (D)、14 通りです。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "multiple_choice",
+      "options": {
+        "A": {
+          "zh-Hant": "12 種",
+          "zh-Hans": "12 种",
+          "en": "12",
+          "ja": "12 通り"
+        },
+        "B": {
+          "zh-Hant": "16 種",
+          "zh-Hans": "16 种",
+          "en": "16",
+          "ja": "16 通り"
+        },
+        "C": {
+          "zh-Hant": "20 種",
+          "zh-Hans": "20 种",
+          "en": "20",
+          "ja": "20 通り"
+        },
+        "D": {
+          "zh-Hant": "14 種",
+          "zh-Hans": "14 种",
+          "en": "14",
+          "ja": "14 通り"
+        }
+      },
+      "correctAnswer": {
+        "type": "choice",
+        "value": "D"
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "combinatorics-grade10-foundation",
+        "notes": "凸多邊形三角剖分：固定一邊所在的三角形分類，遞迴 T₆ = 2T₅ + 2T₄ = 14（卡塔蘭數）。掃過 /凸六邊形/（1 題）、/對角線/（102 題）；最接近 combinatorics_grade9_foundation_011，差異：該題數凸六邊形全部對角線的交點；本題選互不相交的 3 條對角線做三角剖分，用遞迴分類"
+      }
     }
   ]
 }

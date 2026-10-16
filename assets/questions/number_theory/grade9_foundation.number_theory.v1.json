@@ -5543,6 +5543,223 @@
         "reference": "number_theory-grade9-foundation",
         "notes": "除以 2～6 的餘數兩兩不同：由 r₂ 的奇偶推出 n ≡ 35、58、59 (mod 60)。掃過「餘數」（53 題）；最接近 logic_grade10_foundation_002，差異：既有題是除以 2、3、4 都餘 1；本題要求五個餘數兩兩相異，需分案與中國剩餘。"
       }
+    },
+    {
+      "id": "number_theory_grade9_foundation_066",
+      "reviewStatus": "ok",
+      "topic": "number_theory",
+      "subtopic": "balanced_ternary_weighing",
+      "tags": [
+        "c:balance",
+        "c:number_base",
+        "m:construction"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade9",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一台天平配有 1、3、9、27、81、243、729 公克的砝碼各一個。要秤一個 500 公克的物品：物品放在左盤，砝碼可以放在左盤，也可以放在右盤，每個砝碼最多用一次，最後天平剛好平衡。和物品放在同一盤（左盤）的砝碼，總重是幾公克？",
+        "zh-Hans": "一台天平配有 1、3、9、27、81、243、729 克的砝码各一个。要称一个 500 克的物品：物品放在左盘，砝码可以放在左盘，也可以放在右盘，每个砝码最多用一次，最后天平刚好平衡。和物品放在同一盘（左盘）的砝码，总重是几克？",
+        "en": "A balance comes with one weight each of 1, 3, 9, 27, 81, 243 and 729 g. An object of 500 g is placed on the left pan; weights may go on the left pan or the right pan, each used at most once, and the balance ends up level. What is the total mass, in grams, of the weights on the same pan as the object (the left pan)?",
+        "ja": "1、3、9、27、81、243、729 g の分銅が 1 個ずつある天びんがあります。500 g の品物を左の皿にのせ、分銅は左の皿にも右の皿にものせてよく、どの分銅も多くて 1 回しか使いません。最後に天びんはつり合いました。品物と同じ皿（左の皿）にのっている分銅の重さの合計は何 g ですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 256。",
+        "zh-Hans": "答案是 256。",
+        "en": "The answer is 256.",
+        "ja": "答えは 256 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "平衡時：500 + (左盤砝碼) = (右盤砝碼)。也就是 500 等於每個砝碼乘上 +1（右盤）、−1（左盤）或 0（不用）後的總和。",
+          "從最小的砝碼決定起。除了 1 公克，其他砝碼都是 3 的倍數，所以 1 公克的係數要和 500 除以 3 的餘數 2 相符；2 和 −1 除以 3 同餘，所以 1 公克放左盤。剩下的部分 (500 + 1) ÷ 3 = 167 由 3、9、27、⋯ 各除以 3 後來湊。",
+          "同樣做下去：167 除以 3 餘 2 → 3 公克放左盤，(167 + 1) ÷ 3 = 56；56 餘 2 → 9 公克放左盤，57 ÷ 3 = 19；19 餘 1 → 27 公克放右盤，(19 − 1) ÷ 3 = 6；6 餘 0 → 81 公克不用，6 ÷ 3 = 2；2 餘 2 → 243 公克放左盤，(2 + 1) ÷ 3 = 1；最後 729 公克放右盤。每一步都只有一種選法，所以放法是唯一的。",
+          "左盤砝碼：1 + 3 + 9 + 243 = 256 公克；右盤砝碼：27 + 729 = 756 公克。驗算 500 + 256 = 756，平衡。答案是 256。"
+        ],
+        "zh-Hans": [
+          "平衡时：500 + (左盘砝码) = (右盘砝码)。也就是 500 等于每个砝码乘上 +1（右盘）、−1（左盘）或 0（不用）后的总和。",
+          "从最小的砝码决定起。除了 1 克，其他砝码都是 3 的倍数，所以 1 克的系数要和 500 除以 3 的余数 2 相符；2 和 −1 除以 3 同余，所以 1 克放左盘。剩下的部分 (500 + 1) ÷ 3 = 167 由 3、9、27、⋯ 各除以 3 后来凑。",
+          "同样做下去：167 除以 3 余 2 → 3 克放左盘，(167 + 1) ÷ 3 = 56；56 余 2 → 9 克放左盘，57 ÷ 3 = 19；19 余 1 → 27 克放右盘，(19 − 1) ÷ 3 = 6；6 余 0 → 81 克不用，6 ÷ 3 = 2；2 余 2 → 243 克放左盘，(2 + 1) ÷ 3 = 1；最后 729 克放右盘。每一步都只有一种选法，所以放法是唯一的。",
+          "左盘砝码：1 + 3 + 9 + 243 = 256 克；右盘砝码：27 + 729 = 756 克。验算 500 + 256 = 756，平衡。答案是 256。"
+        ],
+        "en": [
+          "When level: 500 + (left weights) = (right weights). So 500 is the sum of the weights each multiplied by +1 (right pan), −1 (left pan) or 0 (unused).",
+          "Decide from the smallest weight up. All weights except 1 g are multiples of 3, so the coefficient of 1 g must match 500 mod 3, which is 2; since 2 and −1 are congruent mod 3, the 1 g weight goes on the left. The rest, (500 + 1) ÷ 3 = 167, must be made from 3, 9, 27, … each divided by 3.",
+          "Continue: 167 leaves remainder 2 → 3 g on the left, (167 + 1) ÷ 3 = 56; 56 leaves 2 → 9 g on the left, 57 ÷ 3 = 19; 19 leaves 1 → 27 g on the right, (19 − 1) ÷ 3 = 6; 6 leaves 0 → 81 g unused, 6 ÷ 3 = 2; 2 leaves 2 → 243 g on the left, (2 + 1) ÷ 3 = 1; finally 729 g on the right. Each step is forced, so the arrangement is unique.",
+          "Left-pan weights: 1 + 3 + 9 + 243 = 256 g; right-pan weights: 27 + 729 = 756 g. Check: 500 + 256 = 756, level. The answer is 256."
+        ],
+        "ja": [
+          "つり合うとき 500 +（左の分銅）=（右の分銅）です。つまり 500 は、各分銅に +1（右）、−1（左）、0（使わない）をかけた和です。",
+          "小さい分銅から決めます。1 g 以外の分銅はすべて 3 の倍数なので、1 g の係数は 500 を 3 で割った余り 2 と合わなければならず、2 と −1 は 3 で割った余りが等しいので 1 g は左です。残りは (500 + 1) ÷ 3 = 167 を、3、9、27、⋯ をそれぞれ 3 で割ったもので作ります。",
+          "同様に続けます。167 は余り 2 → 3 g は左、(167 + 1) ÷ 3 = 56。56 は余り 2 → 9 g は左、57 ÷ 3 = 19。19 は余り 1 → 27 g は右、(19 − 1) ÷ 3 = 6。6 は余り 0 → 81 g は使わず、6 ÷ 3 = 2。2 は余り 2 → 243 g は左、(2 + 1) ÷ 3 = 1。最後に 729 g は右。どの段階も選び方は 1 通りなので、のせ方はただ 1 つです。",
+          "左の分銅は 1 + 3 + 9 + 243 = 256 g、右の分銅は 27 + 729 = 756 g です。確認すると 500 + 256 = 756 でつり合います。答えは 256 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "256"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "number_theory-grade9-foundation",
+        "notes": "砝碼可放兩盤 ⇔ 係數取 −1、0、1 的平衡三進位，由低位逐次除以 3 決定且唯一。掃過 /砝碼/（20 題）、/三進位|3 進位/（2 題）；最接近 logic_grade3_foundation_108，差異：該題只有 3 克與 5 克兩個砝碼、數可秤的重量；本題要把 500 寫成平衡三進位，求同盤砝碼總重"
+      }
+    },
+    {
+      "id": "number_theory_grade9_foundation_067",
+      "reviewStatus": "ok",
+      "topic": "number_theory",
+      "subtopic": "three_consecutive_with_square_divisors",
+      "tags": [
+        "c:modular",
+        "c:factor_multiple",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade9",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "求最小的正整數 n，使得 n 是 9 的倍數、n + 1 是 16 的倍數，而且 n + 2 是 25 的倍數。",
+        "zh-Hans": "求最小的正整数 n，使得 n 是 9 的倍数、n + 1 是 16 的倍数，而且 n + 2 是 25 的倍数。",
+        "en": "Find the smallest positive integer n such that n is a multiple of 9, n + 1 is a multiple of 16, and n + 2 is a multiple of 25.",
+        "ja": "n が 9 の倍数、n + 1 が 16 の倍数、n + 2 が 25 の倍数となる最小の正の整数 n を求めなさい。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 2223。",
+        "zh-Hans": "答案是 2223。",
+        "en": "The answer is 2223.",
+        "ja": "答えは 2223 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "從最大的模數 25 開始：n + 2 是 25 的倍數，寫成 n = 25k − 2（k 是正整數）。",
+          "n + 1 = 25k − 1 要是 16 的倍數。25k − 1 = 16k + (9k − 1)，所以 9k − 1 要是 16 的倍數。試 k = 1、2、⋯：9k 除以 16 的餘數依序是 9、2、11、4、13、6、15、8、1，k = 9 時 9k − 1 = 80 = 16 × 5。所以 k 除以 16 餘 9，k = 16m + 9，n = 25(16m + 9) − 2 = 400m + 223。",
+          "n 要是 9 的倍數。400 除以 9 餘 4，223 除以 9 餘 7，所以 4m + 7 要是 9 的倍數。m = 0、1、2、3、4、5 時 4m + 7 = 7、11、15、19、23、27，第一次是 9 的倍數在 m = 5。",
+          "所以最小的 n = 400 × 5 + 223 = 2223。驗算：2223 = 9 × 247，2224 = 16 × 139，2225 = 25 × 89。答案是 2223。"
+        ],
+        "zh-Hans": [
+          "从最大的模数 25 开始：n + 2 是 25 的倍数，写成 n = 25k − 2（k 是正整数）。",
+          "n + 1 = 25k − 1 要是 16 的倍数。25k − 1 = 16k + (9k − 1)，所以 9k − 1 要是 16 的倍数。试 k = 1、2、⋯：9k 除以 16 的余数依次是 9、2、11、4、13、6、15、8、1，k = 9 时 9k − 1 = 80 = 16 × 5。所以 k 除以 16 余 9，k = 16m + 9，n = 25(16m + 9) − 2 = 400m + 223。",
+          "n 要是 9 的倍数。400 除以 9 余 4，223 除以 9 余 7，所以 4m + 7 要是 9 的倍数。m = 0、1、2、3、4、5 时 4m + 7 = 7、11、15、19、23、27，第一次是 9 的倍数在 m = 5。",
+          "所以最小的 n = 400 × 5 + 223 = 2223。验算：2223 = 9 × 247，2224 = 16 × 139，2225 = 25 × 89。答案是 2223。"
+        ],
+        "en": [
+          "Start with the largest modulus 25: n + 2 is a multiple of 25, so write n = 25k − 2 (k a positive integer).",
+          "n + 1 = 25k − 1 must be a multiple of 16. Since 25k − 1 = 16k + (9k − 1), 9k − 1 must be. Trying k = 1, 2, …: 9k leaves remainders 9, 2, 11, 4, 13, 6, 15, 8, 1 mod 16, and at k = 9, 9k − 1 = 80 = 16 × 5. So k leaves remainder 9 mod 16: k = 16m + 9 and n = 25(16m + 9) − 2 = 400m + 223.",
+          "n must be a multiple of 9. 400 leaves remainder 4 and 223 leaves 7 mod 9, so 4m + 7 must be a multiple of 9. For m = 0, 1, 2, 3, 4, 5, 4m + 7 = 7, 11, 15, 19, 23, 27; the first multiple of 9 is at m = 5.",
+          "So the smallest n = 400 × 5 + 223 = 2223. Check: 2223 = 9 × 247, 2224 = 16 × 139, 2225 = 25 × 89. The answer is 2223."
+        ],
+        "ja": [
+          "いちばん大きい 25 から始めます。n + 2 は 25 の倍数なので n = 25k − 2（k は正の整数）と書けます。",
+          "n + 1 = 25k − 1 は 16 の倍数です。25k − 1 = 16k + (9k − 1) なので 9k − 1 が 16 の倍数です。k = 1、2、⋯ と試すと 9k を 16 で割った余りは 9、2、11、4、13、6、15、8、1 で、k = 9 のとき 9k − 1 = 80 = 16 × 5 です。よって k = 16m + 9、n = 25(16m + 9) − 2 = 400m + 223 です。",
+          "n は 9 の倍数です。400 を 9 で割った余りは 4、223 は 7 なので、4m + 7 が 9 の倍数です。m = 0、1、2、3、4、5 で 4m + 7 = 7、11、15、19、23、27 となり、初めて 9 の倍数になるのは m = 5 です。",
+          "よって最小の n = 400 × 5 + 223 = 2223 です。確認：2223 = 9 × 247、2224 = 16 × 139、2225 = 25 × 89。答えは 2223 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "2223"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 4
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "number_theory-grade9-foundation",
+        "notes": "三個連續整數分別被 9、16、25 整除，從大模數起逐步合併同餘條件。掃過 /連續三個|連續的三個/（4 題）、/的倍數.*的倍數.*的倍數/（9 題）；最接近 number_theory_grade7_foundation_066，差異：該題只有一個模數 99；本題三個互質模數的同餘方程組，逐步代入求最小解"
+      }
+    },
+    {
+      "id": "number_theory_grade9_foundation_068",
+      "reviewStatus": "ok",
+      "topic": "number_theory",
+      "subtopic": "rectangle_fixed_perimeter_area_divisible",
+      "tags": [
+        "c:perimeter",
+        "c:factor_multiple",
+        "c:modular",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade9",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一個長方形的長和寬都是正整數（公分），周長是 100 公分，而且面積（平方公分）是 12 的倍數。長、寬對調算同一個長方形，正方形也算。這樣的長方形一共有幾種？",
+        "zh-Hans": "一个长方形的长和宽都是正整数（厘米），周长是 100 厘米，而且面积（平方厘米）是 12 的倍数。长、宽对调算同一个长方形，正方形也算。这样的长方形一共有几种？",
+        "en": "A rectangle has whole-number length and width (in cm), perimeter 100 cm, and area (in cm²) a multiple of 12. Swapping length and width gives the same rectangle, and squares count. How many such rectangles are there?",
+        "ja": "縦と横の長さがどちらも正の整数（cm）で、周の長さが 100 cm、面積（cm²）が 12 の倍数である長方形があります。縦と横を入れかえたものは同じとみなし、正方形もふくめます。このような長方形は何種類ありますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 8。",
+        "zh-Hans": "答案是 8。",
+        "en": "The answer is 8.",
+        "ja": "答えは 8 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "設寬 a、長 50 − a，1 ≤ a ≤ 25（a ≤ 50 − a）。面積 a(50 − a) 要同時是 4 的倍數和 3 的倍數。",
+          "a 與 50 − a 的和是偶數，兩者同奇同偶。若 a 是奇數，面積是奇數，不行；若 a 是偶數，50 − a 也是偶數，面積一定是 4 的倍數。所以 a 是 2 到 24 的偶數。",
+          "3 是質數，面積是 3 的倍數 ⇔ a 或 50 − a 是 3 的倍數。50 除以 3 餘 2，所以 50 − a 是 3 的倍數 ⇔ a 除以 3 餘 2。因此 a 除以 3 的餘數不能是 1。",
+          "偶數 2、4、⋯、24 共 12 個，其中除以 3 餘 1 的是 4、10、16、22，要去掉。剩 12 − 4 = 8 個：a = 2、6、8、12、14、18、20、24（例如 2 × 48 = 96 = 12 × 8）。答案是 8。"
+        ],
+        "zh-Hans": [
+          "设宽 a、长 50 − a，1 ≤ a ≤ 25（a ≤ 50 − a）。面积 a(50 − a) 要同时是 4 的倍数和 3 的倍数。",
+          "a 与 50 − a 的和是偶数，两者同奇同偶。若 a 是奇数，面积是奇数，不行；若 a 是偶数，50 − a 也是偶数，面积一定是 4 的倍数。所以 a 是 2 到 24 的偶数。",
+          "3 是质数，面积是 3 的倍数 ⇔ a 或 50 − a 是 3 的倍数。50 除以 3 余 2，所以 50 − a 是 3 的倍数 ⇔ a 除以 3 余 2。因此 a 除以 3 的余数不能是 1。",
+          "偶数 2、4、⋯、24 共 12 个，其中除以 3 余 1 的是 4、10、16、22，要去掉。剩 12 − 4 = 8 个：a = 2、6、8、12、14、18、20、24（例如 2 × 48 = 96 = 12 × 8）。答案是 8。"
+        ],
+        "en": [
+          "Let the width be a and the length 50 − a with 1 ≤ a ≤ 25 (a ≤ 50 − a). The area a(50 − a) must be a multiple of both 4 and 3.",
+          "a and 50 − a have an even sum, so they have the same parity. If a is odd, the area is odd — no good; if a is even, 50 − a is also even and the area is a multiple of 4. So a is an even number from 2 to 24.",
+          "3 is prime, so the area is a multiple of 3 ⇔ a or 50 − a is. Since 50 leaves remainder 2 on division by 3, 50 − a is a multiple of 3 ⇔ a leaves remainder 2. So a must not leave remainder 1 on division by 3.",
+          "The evens 2, 4, …, 24 are 12 numbers; those leaving remainder 1 are 4, 10, 16, 22, which are removed. That leaves 12 − 4 = 8: a = 2, 6, 8, 12, 14, 18, 20, 24 (e.g. 2 × 48 = 96 = 12 × 8). The answer is 8."
+        ],
+        "ja": [
+          "幅を a、長さを 50 − a（1 ≤ a ≤ 25、a ≤ 50 − a）とします。面積 a(50 − a) は 4 の倍数でも 3 の倍数でもなければなりません。",
+          "a と 50 − a の和は偶数なので、両方とも奇数か両方とも偶数です。a が奇数なら面積は奇数で不適、a が偶数なら 50 − a も偶数で面積は必ず 4 の倍数です。よって a は 2 から 24 までの偶数です。",
+          "3 は素数なので、面積が 3 の倍数 ⇔ a か 50 − a が 3 の倍数です。50 を 3 で割った余りは 2 なので、50 − a が 3 の倍数 ⇔ a を 3 で割った余りが 2 です。よって a を 3 で割った余りは 1 であってはいけません。",
+          "偶数 2、4、⋯、24 は 12 個で、そのうち 3 で割って 1 余るのは 4、10、16、22 なので除きます。残りは 12 − 4 = 8 個で、a = 2、6、8、12、14、18、20、24 です（たとえば 2 × 48 = 96 = 12 × 8）。答えは 8 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "8"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "number_theory-grade9-foundation",
+        "notes": "周長 100 給出 a + b = 50，面積被 12 整除拆成「兩邊同偶」與「a ≢ 1 (mod 3)」。掃過 /周長/（142 題）、/12 的倍數/（2 題）；最接近 number_theory_grade8_foundation_053，差異：該題是面積數值等於周長數值的直角三角形；本題固定周長，用奇偶與模 3 篩選面積的整除性"
+      }
     }
   ]
 }
