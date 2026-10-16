@@ -5066,6 +5066,328 @@
         "reference": "logic-grade8-foundation",
         "notes": "換成 (3a + 4b)/5、(4a − 3b)/5 保持平方和，169 不變，只有 0、5、12 可達。掃過「黑板|擦掉」（23 題）；最接近 logic_grade11_foundation_043，差異：既有題不變量是「和減個數」；本題不變量是平方和（旋轉），還要構造出可達的一組。"
       }
+    },
+    {
+      "id": "logic_grade8_foundation_059",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "calendar_race_to_december_31",
+      "tags": [
+        "c:game_theory",
+        "m:reverse",
+        "m:invariant"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade8",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "甲、乙兩人玩「日期遊戲」，用的是平年（2 月有 28 天）的日曆。一開始的日期是 1 月 1 日。兩人輪流把日期往後改，由甲先動：每次只能二選一，(1) 月份不變，把「日」改成同一個月裡更晚的某一天；或 (2)「日」不變，把月份改成更晚的某個月（改完的日期必須真的存在）。誰先把日期改成 12 月 31 日誰就獲勝。甲有必勝策略，而且他的第一步必須把日期改成 1 月的某一天。這一天是 1 月幾日？",
+        "zh-Hans": "甲、乙两人玩“日期游戏”，用的是平年（2 月有 28 天）的日历。一开始的日期是 1 月 1 日。两人轮流把日期往后改，由甲先动：每次只能二选一，(1) 月份不变，把“日”改成同一个月里更晚的某一天；或 (2)“日”不变，把月份改成更晚的某个月（改完的日期必须真的存在）。谁先把日期改成 12 月 31 日谁就获胜。甲有必胜策略，而且他的第一步必须把日期改成 1 月的某一天。这一天是 1 月几日？",
+        "en": "A and B play a date game using the calendar of a common year (February has 28 days). The date starts at January 1. They take turns moving the date later, A first; each move is one of: (1) keep the month and change the day to a later day of the same month; or (2) keep the day and change the month to a later month (the new date must exist). Whoever first reaches December 31 wins. A has a winning strategy, and his first move must change the date to a certain day in January. Which day of January?",
+        "ja": "甲と乙が平年（2 月は 28 日まで）のカレンダーで「日付ゲーム」をします。はじめの日付は 1 月 1 日です。甲から交互に日付を後ろへ変えます。1 回の手は次のどちらか一方です：(1) 月はそのままで、日を同じ月のもっと後の日に変える。(2) 日はそのままで、月をもっと後の月に変える（変えた日付が実際に存在すること）。先に 12 月 31 日にした人が勝ちです。甲には必勝法があり、最初の手では日付を 1 月のある日に変えなければなりません。それは 1 月何日ですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 1 月 20 日。",
+        "zh-Hans": "答案是 1 月 20 日。",
+        "en": "The answer is January 20.",
+        "ja": "答えは 1 月 20 日です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "從終點倒推。12 月 31 日的「日 − 月」= 31 − 12 = 19。考慮所有「日 − 月 = 19」的日期：1 月 20 日、2 月 21 日、3 月 22 日、⋯、11 月 30 日、12 月 31 日，它們在平年裡都存在。",
+          "每一步只改變月或日其中一個，而且只會變大，所以從「日 − 月 = 19」的日期出發，走一步之後「日 − 月」一定不再是 19。",
+          "反過來，從「日 − 月」不是 19 的日期，一定能一步走到「日 − 月 = 19」：如果日 − 月 < 19，就把日改成「月 + 19」（同一個月裡的那一天存在）；如果日 − 月 > 19，就把月改成「日 − 19」（比原來的月更晚，而且那個日期在上面的清單裡）。",
+          "所以只要每次都把日期改成「日 − 月 = 19」的日期，對方永遠改不到這種日期，最後的 12 月 31 日一定是自己改到的。",
+          "開始時 1 月 1 日的日 − 月 = 0，甲應把日期改成 1 月 20 日；改成其他日期（包括改月份）都不是「日 − 月 = 19」，乙就能反過來搶到。答案是 1 月 20 日。"
+        ],
+        "zh-Hans": [
+          "从终点倒推。12 月 31 日的“日 − 月”= 31 − 12 = 19。考虑所有“日 − 月 = 19”的日期：1 月 20 日、2 月 21 日、3 月 22 日、⋯、11 月 30 日、12 月 31 日，它们在平年里都存在。",
+          "每一步只改变月或日其中一个，而且只会变大，所以从“日 − 月 = 19”的日期出发，走一步之后“日 − 月”一定不再是 19。",
+          "反过来，从“日 − 月”不是 19 的日期，一定能一步走到“日 − 月 = 19”：如果日 − 月 < 19，就把日改成“月 + 19”（同一个月里的那一天存在）；如果日 − 月 > 19，就把月改成“日 − 19”（比原来的月更晚，而且那个日期在上面的清单里）。",
+          "所以只要每次都把日期改成“日 − 月 = 19”的日期，对方永远改不到这种日期，最后的 12 月 31 日一定是自己改到的。",
+          "开始时 1 月 1 日的日 − 月 = 0，甲应把日期改成 1 月 20 日；改成其他日期（包括改月份）都不是“日 − 月 = 19”，乙就能反过来抢到。答案是 1 月 20 日。"
+        ],
+        "en": [
+          "Work backwards. December 31 has day − month = 31 − 12 = 19. Consider all dates with day − month = 19: January 20, February 21, March 22, …, November 30, December 31; all exist in a common year.",
+          "Each move changes only the month or only the day, and only increases it, so from a date with day − month = 19, one move always leads to a date where day − month is no longer 19.",
+          "Conversely, from a date with day − month ≠ 19 one can always move to such a date: if day − month < 19, change the day to month + 19 (that day exists in the month); if day − month > 19, change the month to day − 19 (a later month, and that date is on the list above).",
+          "So a player who always moves to a date with day − month = 19 never lets the opponent reach one, and therefore is the one who reaches December 31.",
+          "At the start, January 1 has day − month = 0, so A should move to January 20; any other move (including changing the month) does not give day − month = 19, and B could then take over the strategy. The answer is January 20."
+        ],
+        "ja": [
+          "終わりから逆に考えます。12 月 31 日は「日 − 月」= 31 − 12 = 19 です。「日 − 月 = 19」の日付は 1 月 20 日、2 月 21 日、3 月 22 日、⋯、11 月 30 日、12 月 31 日で、平年にすべて存在します。",
+          "1 回の手では月か日の一方だけが、しかも大きくなるだけなので、「日 − 月 = 19」の日付から 1 手動くと「日 − 月」は必ず 19 でなくなります。",
+          "逆に、「日 − 月」が 19 でない日付からは 1 手で「日 − 月 = 19」にできます。日 − 月 < 19 なら日を「月 + 19」に変え（その月にその日はある）、日 − 月 > 19 なら月を「日 − 19」に変えます（もとの月より後の月で、その日付は上の一覧にある）。",
+          "だから毎回「日 − 月 = 19」の日付にし続ければ、相手はそのような日付にできず、最後の 12 月 31 日は自分が取ります。",
+          "はじめの 1 月 1 日は日 − 月 = 0 なので、甲は 1 月 20 日に変えるべきです。ほかの手（月を変える手もふくむ）では「日 − 月 = 19」にならず、乙に逆にこの戦略を使われます。答えは 1 月 20 日です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "20"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade8-foundation",
+        "notes": "日期遊戲的必敗位置是「日 − 月 = 19」的日期（1 月 20 日到 12 月 31 日），每一步都能保持這個不變量。掃過 /日期.{0,40}輪流|輪流.{0,40}日期/（0 題）、/12 月 31 日/（0 題）；最接近 logic_grade8_foundation_048，差異：既有題是棋子往右、上、右上移的角落競賽，以奇偶判勝負；本題兩個「座標」的上限不同（各月天數不一），必敗位置是日 − 月 = 19 這條斜線，還要確認每個月都有對應日期。"
+      }
+    },
+    {
+      "id": "logic_grade8_foundation_060",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "max_cities_degree_three_within_two_roads",
+      "tags": [
+        "c:graph_theory",
+        "m:estimate_bound",
+        "m:construction"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade8",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "某個國家有若干座城市，城市之間有一些雙向道路，每條道路直接連接兩座城市（同兩座城市之間最多一條）。已知每座城市最多連著 3 條道路，而且從任何一座城市出發，最多經過 2 條道路就能到達任何另一座城市。這個國家最多可能有幾座城市？",
+        "zh-Hans": "某个国家有若干座城市，城市之间有一些双向道路，每条道路直接连接两座城市（同两座城市之间最多一条）。已知每座城市最多连着 3 条道路，而且从任何一座城市出发，最多经过 2 条道路就能到达任何另一座城市。这个国家最多可能有几座城市？",
+        "en": "A country has some cities joined by two-way roads, each road directly linking two cities (at most one road between any two). Each city has at most 3 roads, and from any city one can reach any other city using at most 2 roads. What is the largest possible number of cities?",
+        "ja": "ある国にいくつかの都市があり、2 つの都市を直接結ぶ両方向の道路がいくつかあります（同じ 2 都市の間は多くても 1 本）。どの都市からも道路は多くても 3 本で、どの都市からも多くても 2 本の道路を通ればほかのどの都市にも行けます。都市の数は最大でいくつですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 10 座。",
+        "zh-Hans": "答案是 10 座。",
+        "en": "The answer is 10.",
+        "ja": "答えは 10 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "上界：任選一座城市 X。和 X 直接相連的城市最多 3 座；這 3 座城市除了連回 X 之外，各自最多再連 2 座城市，所以經過 2 條道路能到的新城市最多 3 × 2 = 6 座。",
+          "所有城市都要在 2 條道路之內到得了，所以城市總數最多是 1 + 3 + 6 = 10 座。",
+          "構造 10 座城市：外圈 A₁、A₂、A₃、A₄、A₅ 依序連成一個五邊形環（A₅ 連回 A₁）；內圈 B₁、B₂、B₃、B₄、B₅ 連成「隔一個連一個」的五角星：B₁–B₃、B₃–B₅、B₅–B₂、B₂–B₄、B₄–B₁；再把每個 Aᵢ 和 Bᵢ 連起來。每座城市恰好連 3 條路。",
+          "檢查距離：外圈兩城不相鄰時（例如 A₁、A₃）經由 A₂ 兩步可到；內圈兩城不相鄰時（例如 B₁、B₂）經由 B₄ 兩步可到；Aᵢ 到 Bⱼ（i ≠ j）：若 Bᵢ 與 Bⱼ 相鄰就走 Aᵢ → Bᵢ → Bⱼ，否則 Aᵢ 與 Aⱼ 相鄰，走 Aᵢ → Aⱼ → Bⱼ。所以任兩城最多 2 條路。",
+          "上界 10 可以達到，最多 10 座城市。答案是 10 座。"
+        ],
+        "zh-Hans": [
+          "上界：任选一座城市 X。和 X 直接相连的城市最多 3 座；这 3 座城市除了连回 X 之外，各自最多再连 2 座城市，所以经过 2 条道路能到的新城市最多 3 × 2 = 6 座。",
+          "所有城市都要在 2 条道路之内到得了，所以城市总数最多是 1 + 3 + 6 = 10 座。",
+          "构造 10 座城市：外圈 A₁、A₂、A₃、A₄、A₅ 依次连成一个五边形环（A₅ 连回 A₁）；内圈 B₁、B₂、B₃、B₄、B₅ 连成“隔一个连一个”的五角星：B₁–B₃、B₃–B₅、B₅–B₂、B₂–B₄、B₄–B₁；再把每个 Aᵢ 和 Bᵢ 连起来。每座城市恰好连 3 条路。",
+          "检查距离：外圈两城不相邻时（例如 A₁、A₃）经由 A₂ 两步可到；内圈两城不相邻时（例如 B₁、B₂）经由 B₄ 两步可到；Aᵢ 到 Bⱼ（i ≠ j）：若 Bᵢ 与 Bⱼ 相邻就走 Aᵢ → Bᵢ → Bⱼ，否则 Aᵢ 与 Aⱼ 相邻，走 Aᵢ → Aⱼ → Bⱼ。所以任两城最多 2 条路。",
+          "上界 10 可以达到，最多 10 座城市。答案是 10 座。"
+        ],
+        "en": [
+          "Upper bound: pick any city X. At most 3 cities are directly joined to X; besides the road back to X, each of these has at most 2 more roads, so at most 3 × 2 = 6 new cities are reachable in 2 roads.",
+          "Every city must be within 2 roads of X, so there are at most 1 + 3 + 6 = 10 cities.",
+          "A 10-city construction: outer cities A₁, A₂, A₃, A₄, A₅ joined in a pentagon ring (A₅ back to A₁); inner cities B₁, B₂, B₃, B₄, B₅ joined as a five-pointed star, each to the one two places on: B₁–B₃, B₃–B₅, B₅–B₂, B₂–B₄, B₄–B₁; and each Aᵢ joined to Bᵢ. Every city has exactly 3 roads.",
+          "Distances: two non-adjacent outer cities (e.g. A₁, A₃) meet through A₂; two non-adjacent inner cities (e.g. B₁, B₂) meet through B₄; from Aᵢ to Bⱼ (i ≠ j): if Bᵢ and Bⱼ are joined use Aᵢ → Bᵢ → Bⱼ, otherwise Aᵢ and Aⱼ are joined, use Aᵢ → Aⱼ → Bⱼ. So any two cities are within 2 roads.",
+          "The bound 10 is reached, so the maximum is 10 cities. The answer is 10."
+        ],
+        "ja": [
+          "上限：都市 X を 1 つ選びます。X と直接つながる都市は多くても 3 つで、その 3 つは X へもどる道以外に多くても 2 本ずつしか道がないので、道路 2 本で新しく行ける都市は多くても 3 × 2 = 6 です。",
+          "すべての都市に道路 2 本以内で行けるので、都市の数は多くても 1 + 3 + 6 = 10 です。",
+          "10 都市のつくり方：外側の A₁、A₂、A₃、A₄、A₅ を順に五角形の輪につなぎ（A₅ は A₁ へ）、内側の B₁、B₂、B₃、B₄、B₅ を 1 つおきに結ぶ星形 B₁–B₃、B₃–B₅、B₅–B₂、B₂–B₄、B₄–B₁ にし、さらに各 Aᵢ と Bᵢ を結びます。どの都市もちょうど 3 本です。",
+          "距離の確認：となり合わない外側の 2 都市（たとえば A₁、A₃）は A₂ 経由、となり合わない内側の 2 都市（たとえば B₁、B₂）は B₄ 経由で 2 本です。Aᵢ から Bⱼ（i ≠ j）へは、Bᵢ と Bⱼ がつながっていれば Aᵢ → Bᵢ → Bⱼ、そうでなければ Aᵢ と Aⱼ がつながっているので Aᵢ → Aⱼ → Bⱼ です。よってどの 2 都市も 2 本以内です。",
+          "上限の 10 が実現できるので、最大は 10 都市です。答えは 10 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "10"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade8-foundation",
+        "notes": "每城至多 3 條路、任兩城至多 2 步：從一城出發 1 + 3 + 3 × 2 = 10 為上界，用外五邊形、內五角星的構造達到。掃過 /最多.{0,30}(城市|村莊|車站)/（1 題）、/(最多|不超過).{0,6}(經過|走) ?2 條/（0 題）；最接近 combinatorics_grade10_foundation_114，差異：既有題討論 8 座城市修路的連通數量；本題同時限制度數與距離，先用「1 + 3 + 6」估上界，再給出每城 3 條路、任兩城兩步可達的 10 城構造。"
+      }
+    },
+    {
+      "id": "logic_grade8_foundation_061",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "consecutive_numbers_common_knowledge_dialogue",
+      "tags": [
+        "c:logic_deduction",
+        "m:casework",
+        "m:reverse"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade8",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "老師給甲、乙兩人各發一張卡片：甲拿到正整數 a，乙拿到正整數 b，兩人只看得到自己的數。兩人都知道 a、b 是兩個「相差 1」的正整數（不知道誰大）。接著有這段對話：甲：「我不知道你的數。」乙：「我也不知道你的數。」甲：「那我現在知道你的數了。」甲手上的數 a 可能是多少？",
+        "zh-Hans": "老师给甲、乙两人各发一张卡片：甲拿到正整数 a，乙拿到正整数 b，两人只看得到自己的数。两人都知道 a、b 是两个“相差 1”的正整数（不知道谁大）。接着有这段对话：甲：“我不知道你的数。”乙：“我也不知道你的数。”甲：“那我现在知道你的数了。”甲手上的数 a 可能是多少？",
+        "en": "A teacher gives A and B one card each: A gets a positive integer a and B gets a positive integer b; each sees only their own number. Both know that a and b are positive integers differing by 1 (but not which is larger). Then: A: \"I don't know your number.\" B: \"I don't know yours either.\" A: \"Now I know your number.\" What could A's number a be?",
+        "ja": "先生が甲と乙にカードを 1 枚ずつ配ります。甲は正の整数 a、乙は正の整数 b を受け取り、自分の数しか見えません。2 人とも a と b が「差が 1」の正の整数であることは知っています（どちらが大きいかは知らない）。次の会話がありました。甲「きみの数はわからない。」乙「ぼくもきみの数はわからない。」甲「それなら、いまきみの数がわかった。」甲の数 a はいくつである可能性がありますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 C：2 或 3。",
+        "zh-Hans": "答案是 C：2 或 3。",
+        "en": "The answer is C: 2 or 3.",
+        "ja": "答えは C：2 か 3 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "甲第一句「不知道」：如果 a = 1，b 只能是 2，甲就會知道。所以 a ≠ 1，而且乙也聽到了這件事。",
+          "乙第二句「也不知道」：如果 b = 1，a 只能是 2，乙會知道；如果 b = 2，a 是 1 或 3，但 a ≠ 1，乙也會知道 a = 3。乙說不知道，所以 b ≠ 1、b ≠ 2，也就是 b ≥ 3。",
+          "甲第三句「知道了」：甲知道 b 是 a − 1 或 a + 1，又知道 b ≥ 3。若 a = 2，候選 1、3 只剩 3；若 a = 3，候選 2、4 只剩 4，甲都能確定。若 a ≥ 4，候選 a − 1、a + 1 都至少是 3，甲仍然無法確定。",
+          "所以 a 只能是 2 或 3（a = 2 時 b = 3，a = 3 時 b = 4，兩種情形對話都說得通）。",
+          "A、B 都漏掉了另一種可能；D 把 a = 4 也算進去，但 a = 4 時 b 是 3 或 5，甲說不出答案。答案是 C。"
+        ],
+        "zh-Hans": [
+          "甲第一句“不知道”：如果 a = 1，b 只能是 2，甲就会知道。所以 a ≠ 1，而且乙也听到了这件事。",
+          "乙第二句“也不知道”：如果 b = 1，a 只能是 2，乙会知道；如果 b = 2，a 是 1 或 3，但 a ≠ 1，乙也会知道 a = 3。乙说不知道，所以 b ≠ 1、b ≠ 2，也就是 b ≥ 3。",
+          "甲第三句“知道了”：甲知道 b 是 a − 1 或 a + 1，又知道 b ≥ 3。若 a = 2，候选 1、3 只剩 3；若 a = 3，候选 2、4 只剩 4，甲都能确定。若 a ≥ 4，候选 a − 1、a + 1 都至少是 3，甲仍然无法确定。",
+          "所以 a 只能是 2 或 3（a = 2 时 b = 3，a = 3 时 b = 4，两种情形对话都说得通）。",
+          "A、B 都漏掉了另一种可能；D 把 a = 4 也算进去，但 a = 4 时 b 是 3 或 5，甲说不出答案。答案是 C。"
+        ],
+        "en": [
+          "A's first \"I don't know\": if a = 1, b would have to be 2 and A would know. So a ≠ 1, and B hears this too.",
+          "B's \"I don't know either\": if b = 1, a must be 2 and B would know; if b = 2, a is 1 or 3, but a ≠ 1, so B would know a = 3. Since B doesn't know, b ≠ 1 and b ≠ 2, i.e. b ≥ 3.",
+          "A's \"now I know\": A knows b is a − 1 or a + 1 and that b ≥ 3. If a = 2, of the candidates 1, 3 only 3 remains; if a = 3, of 2, 4 only 4 remains; A can decide either way. If a ≥ 4, both candidates a − 1 and a + 1 are at least 3 and A still cannot tell.",
+          "So a is 2 or 3 (a = 2 with b = 3, or a = 3 with b = 4; the dialogue fits both).",
+          "A and B each miss the other possibility; D includes a = 4, but then b is 3 or 5 and A could not tell. The answer is C."
+        ],
+        "ja": [
+          "甲の 1 回目「わからない」：a = 1 なら b は 2 しかなく甲にはわかるはずです。よって a ≠ 1 で、乙もこれを聞いています。",
+          "乙の「ぼくもわからない」：b = 1 なら a は 2 しかなく乙にはわかり、b = 2 なら a は 1 か 3 ですが a ≠ 1 なので a = 3 とわかります。乙はわからないので b ≠ 1、b ≠ 2、つまり b ≥ 3 です。",
+          "甲の「わかった」：甲は b が a − 1 か a + 1 で、b ≥ 3 であることを知っています。a = 2 なら候補 1、3 のうち 3 だけ、a = 3 なら候補 2、4 のうち 4 だけが残り、どちらも決まります。a ≥ 4 なら候補 a − 1、a + 1 はどちらも 3 以上で、まだ決まりません。",
+          "よって a は 2 か 3 です（a = 2 なら b = 3、a = 3 なら b = 4 で、どちらも会話に合います）。",
+          "A・B はもう一方の可能性を見落としています。D は a = 4 もふくめていますが、a = 4 なら b は 3 か 5 で甲には決められません。答えは C です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "multiple_choice",
+      "options": {
+        "A": {
+          "zh-Hant": "只可能是 2",
+          "zh-Hans": "只可能是 2",
+          "en": "Only 2",
+          "ja": "2 だけ"
+        },
+        "B": {
+          "zh-Hant": "只可能是 3",
+          "zh-Hans": "只可能是 3",
+          "en": "Only 3",
+          "ja": "3 だけ"
+        },
+        "C": {
+          "zh-Hant": "2 或 3",
+          "zh-Hans": "2 或 3",
+          "en": "2 or 3",
+          "ja": "2 か 3"
+        },
+        "D": {
+          "zh-Hant": "3 或 4",
+          "zh-Hans": "3 或 4",
+          "en": "3 or 4",
+          "ja": "3 か 4"
+        }
+      },
+      "correctAnswer": {
+        "type": "choice",
+        "value": "C"
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade8-foundation",
+        "notes": "相差 1 的兩數知識推理：每句「不知道」排除最小的情形（a ≠ 1，b ≥ 3），最後「知道」只在 a = 2 或 3 時成立。掃過 /相差 1.{0,60}(不知道|知道)|(不知道|知道).{0,60}相差 1/（0 題）、/不知道.{0,40}(現在|那我).{0,10}知道/（1 題）；最接近 logic_grade9_foundation_061，差異：既有題是十位、個位數字分給兩人的候選數表推理；本題沒有候選表，數字無上限，靠「相差 1」與每句話逐步排除最小的可能，結論是兩個可能值。"
+      }
+    },
+    {
+      "id": "logic_grade8_foundation_062",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "two_heavy_fakes_among_five_coins",
+      "tags": [
+        "c:balance",
+        "m:estimate_bound",
+        "m:construction"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade8",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "有 5 枚外觀相同的硬幣，其中 3 枚是真幣、2 枚是假幣；3 枚真幣一樣重，2 枚假幣也一樣重，而且假幣比真幣重。只有一台沒有砝碼的天平（兩邊可以各放好幾枚，只會顯示哪邊重或一樣重）。最少要秤幾次，才能保證找出兩枚假幣？",
+        "zh-Hans": "有 5 枚外观相同的硬币，其中 3 枚是真币、2 枚是假币；3 枚真币一样重，2 枚假币也一样重，而且假币比真币重。只有一台没有砝码的天平（两边可以各放好几枚，只会显示哪边重或一样重）。最少要称几次，才能保证找出两枚假币？",
+        "en": "There are 5 identical-looking coins: 3 genuine and 2 fake. The genuine coins all weigh the same, the 2 fakes weigh the same as each other, and a fake is heavier than a genuine coin. Using only a balance without weights (each pan may hold several coins; it shows which side is heavier or that they balance), what is the minimum number of weighings that guarantees finding both fakes?",
+        "ja": "見た目が同じ 5 枚の硬貨のうち、3 枚が本物、2 枚がにせ物です。本物 3 枚は同じ重さ、にせ物 2 枚も同じ重さで、にせ物のほうが重いです。分銅のない天びん（左右に何枚ずつでものせられ、どちらが重いか、つり合うかだけがわかる）だけを使うとき、2 枚のにせ物を必ず見つけるには最低何回はかればよいですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 3 次。",
+        "zh-Hans": "答案是 3 次。",
+        "en": "The answer is 3.",
+        "ja": "答えは 3 回です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "下界：兩枚假幣的可能組合有 5 × 4 ÷ 2 = 10 種。每秤一次只有「左重、右重、平衡」3 種結果，秤 2 次最多分出 3 × 3 = 9 種情況，少於 10，所以至少要 3 次。",
+          "做法：把硬幣編成 1～5 號。第 1 次秤 1 號對 2 號。若 1 號較重，1 號是假幣、2 號是真幣，另一枚假幣在 3、4、5 號中：第 2 次秤 3 號對 4 號，重的那枚是假幣，平衡就是 5 號。2 號較重時同理。",
+          "若 1、2 號平衡：要嘛 1、2 號都是假幣，要嘛都是真幣（假幣是 3、4、5 號中的兩枚）。第 2 次秤 1 號對 3 號：1 號重，則 1、2 號是假幣；平衡，則 1、3 號都是真幣，假幣是 4、5 號；3 號重，則 3 號是假幣，第 3 次秤 4 號對 5 號，重的那枚是另一枚假幣。",
+          "所以最多 3 次一定能找出，而 2 次不能保證。答案是 3 次。"
+        ],
+        "zh-Hans": [
+          "下界：两枚假币的可能组合有 5 × 4 ÷ 2 = 10 种。每称一次只有“左重、右重、平衡”3 种结果，称 2 次最多分出 3 × 3 = 9 种情况，少于 10，所以至少要 3 次。",
+          "做法：把硬币编成 1～5 号。第 1 次称 1 号对 2 号。若 1 号较重，1 号是假币、2 号是真币，另一枚假币在 3、4、5 号中：第 2 次称 3 号对 4 号，重的那枚是假币，平衡就是 5 号。2 号较重时同理。",
+          "若 1、2 号平衡：要么 1、2 号都是假币，要么都是真币（假币是 3、4、5 号中的两枚）。第 2 次称 1 号对 3 号：1 号重，则 1、2 号是假币；平衡，则 1、3 号都是真币，假币是 4、5 号；3 号重，则 3 号是假币，第 3 次称 4 号对 5 号，重的那枚是另一枚假币。",
+          "所以最多 3 次一定能找出，而 2 次不能保证。答案是 3 次。"
+        ],
+        "en": [
+          "Lower bound: the pair of fakes can be any of 5 × 4 ÷ 2 = 10 pairs. Each weighing has only 3 results (left heavier, right heavier, balance), so 2 weighings distinguish at most 3 × 3 = 9 cases, fewer than 10; at least 3 weighings are needed.",
+          "Method: number the coins 1–5. First weigh 1 against 2. If 1 is heavier, 1 is fake and 2 genuine, and the other fake is among 3, 4, 5: weigh 3 against 4; the heavier is fake, and if they balance it is 5. Likewise if 2 is heavier.",
+          "If 1 and 2 balance, either both are fake or both genuine (then the fakes are two of 3, 4, 5). Weigh 1 against 3: if 1 is heavier, 1 and 2 are the fakes; if they balance, 1 and 3 are genuine and the fakes are 4 and 5; if 3 is heavier, 3 is fake, and a third weighing of 4 against 5 shows the other fake as the heavier one.",
+          "So 3 weighings always suffice and 2 cannot be guaranteed. The answer is 3."
+        ],
+        "ja": [
+          "下限：にせ物 2 枚の組み合わせは 5 × 4 ÷ 2 = 10 通りあります。1 回はかると結果は「左が重い・右が重い・つり合う」の 3 通りだけなので、2 回では多くても 3 × 3 = 9 通りしか区別できず 10 より少ないので、少なくとも 3 回必要です。",
+          "方法：硬貨を 1～5 番とします。1 回目は 1 番と 2 番をはかります。1 番が重ければ 1 番がにせ物、2 番は本物で、もう 1 枚は 3、4、5 番のどれかです。2 回目に 3 番と 4 番をはかり、重いほうがにせ物、つり合えば 5 番です。2 番が重いときも同じです。",
+          "1 番と 2 番がつり合ったら、2 枚ともにせ物か 2 枚とも本物（にせ物は 3、4、5 番のうち 2 枚）です。2 回目に 1 番と 3 番をはかり、1 番が重ければ 1、2 番がにせ物、つり合えば 1、3 番は本物でにせ物は 4、5 番、3 番が重ければ 3 番がにせ物で、3 回目に 4 番と 5 番をはかって重いほうがもう 1 枚です。",
+          "よって 3 回あれば必ず見つかり、2 回では保証できません。答えは 3 回です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "3"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade8-foundation",
+        "notes": "兩枚等重假幣在 5 枚中：10 種可能 > 3² = 9，下界 3；先秤 1 對 2 分「一真一假」與「同真同假」兩類再處理，3 次可完成。掃過 /假(幣|硬幣).{0,40}(兩|2) ?枚/（0 題）、/天平.{0,80}(最少|至少).{0,20}次/（7 題）；最接近 logic_grade8_foundation_034，差異：既有題 9 枚中 1 枚較輕，用三分法；本題有 2 枚假幣，可能情形 10 種，下界用 3² < 10，而且第一次平衡時要分辨「兩枚都假」與「兩枚都真」。"
+      }
     }
   ]
 }

@@ -6974,6 +6974,374 @@
         "reference": "number_theory-grade7-foundation",
         "notes": "ab × ba 為迴文：p = ab、s = a² + b²，不進位時才對稱；四位迴文是 11 的倍數逼 a = b 再逐一排除。掃過「對調|倒過來|迴文」（36 題）；最接近 arithmetic_grade4_foundation_191，差異：既有題是原數加對調數成迴文；本題是相乘，要用不進位與 11 的倍數論證。"
       }
+    },
+    {
+      "id": "number_theory_grade7_foundation_087",
+      "reviewStatus": "ok",
+      "topic": "number_theory",
+      "subtopic": "powers_of_two_plus_one_divisible_by_nine",
+      "tags": [
+        "c:modular",
+        "c:exponent",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade7",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "在 n = 1、2、3、⋯、100 之中，有幾個 n 能使 2ⁿ + 1 是 9 的倍數？",
+        "zh-Hans": "在 n = 1、2、3、⋯、100 之中，有几个 n 能使 2ⁿ + 1 是 9 的倍数？",
+        "en": "For how many of n = 1, 2, 3, …, 100 is 2ⁿ + 1 a multiple of 9?",
+        "ja": "n = 1、2、3、⋯、100 のうち、2ⁿ + 1 が 9 の倍数になる n は何個ありますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 17 個。",
+        "zh-Hans": "答案是 17 个。",
+        "en": "The answer is 17.",
+        "ja": "答えは 17 個です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "2ⁿ + 1 是 9 的倍數，等於 2ⁿ 除以 9 的餘數是 8。只看 2ⁿ 除以 9 的餘數，每次乘 2 再取餘數即可。",
+          "n = 1、2、3、4、5、6 時，2ⁿ 除以 9 的餘數依序是 2、4、8、7、5、1。到 n = 6 餘數回到 1，之後就每 6 個重複一次。",
+          "一個循環裡只有第 3 個（餘數 8）符合，所以 n 必須是 3、9、15、⋯，也就是除以 6 餘 3 的數。",
+          "1 到 100 之中除以 6 餘 3 的數是 3、9、⋯、99，共 (99 − 3) ÷ 6 + 1 = 17 個。答案是 17 個。"
+        ],
+        "zh-Hans": [
+          "2ⁿ + 1 是 9 的倍数，等于 2ⁿ 除以 9 的余数是 8。只看 2ⁿ 除以 9 的余数，每次乘 2 再取余数即可。",
+          "n = 1、2、3、4、5、6 时，2ⁿ 除以 9 的余数依次是 2、4、8、7、5、1。到 n = 6 余数回到 1，之后就每 6 个重复一次。",
+          "一个循环里只有第 3 个（余数 8）符合，所以 n 必须是 3、9、15、⋯，也就是除以 6 余 3 的数。",
+          "1 到 100 之中除以 6 余 3 的数是 3、9、⋯、99，共 (99 − 3) ÷ 6 + 1 = 17 个。答案是 17 个。"
+        ],
+        "en": [
+          "2ⁿ + 1 is a multiple of 9 exactly when 2ⁿ leaves remainder 8 on division by 9. Track only the remainder of 2ⁿ, multiplying by 2 and reducing each time.",
+          "For n = 1, 2, 3, 4, 5, 6 the remainders are 2, 4, 8, 7, 5, 1. At n = 6 the remainder is back to 1, so the pattern repeats every 6.",
+          "In each cycle only the 3rd (remainder 8) works, so n must be 3, 9, 15, …, that is, leave remainder 3 on division by 6.",
+          "From 1 to 100 these are 3, 9, …, 99, numbering (99 − 3) ÷ 6 + 1 = 17. The answer is 17."
+        ],
+        "ja": [
+          "2ⁿ + 1 が 9 の倍数になるのは、2ⁿ を 9 で割った余りが 8 のときです。2ⁿ の余りだけを、毎回 2 をかけて 9 で割り直して追いかけます。",
+          "n = 1、2、3、4、5、6 のとき、2ⁿ を 9 で割った余りは順に 2、4、8、7、5、1 です。n = 6 で余りが 1 にもどるので、その後は 6 個ごとにくり返します。",
+          "1 つの循環で条件に合うのは 3 番目（余り 8）だけなので、n は 3、9、15、⋯、つまり 6 で割って 3 余る数です。",
+          "1 から 100 までのそのような数は 3、9、⋯、99 で、(99 − 3) ÷ 6 + 1 = 17 個です。答えは 17 個です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "17"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "number_theory-grade7-foundation",
+        "notes": "2ⁿ 除以 9 的餘數以 6 為週期（2、4、8、7、5、1），2ⁿ + 1 被 9 整除恰在 n 除以 6 餘 3 時。掃過 /2ⁿ|2 的 n 次方/（10 題）、/是 9 的倍數/（4 題）；最接近 number_theory_grade7_foundation_083，差異：既有題看 kᵏ 的個位數字（除以 10 的週期）；本題是 2ⁿ 除以 9 的餘數週期 6，再數出符合條件的 n。"
+      }
+    },
+    {
+      "id": "number_theory_grade7_foundation_088",
+      "reviewStatus": "ok",
+      "topic": "number_theory",
+      "subtopic": "base_five_digit_sum_divisible_by_four",
+      "tags": [
+        "c:number_base",
+        "c:modular",
+        "m:bijection"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade7",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "把正整數寫成五進位（只用數字 0～4，例如 13 寫成 23₅，因為 2 × 5 + 3 = 13）。在五進位下是四位數的正整數之中，各位數字的和是 4 的倍數的一共有幾個？",
+        "zh-Hans": "把正整数写成五进制（只用数字 0～4，例如 13 写成 23₅，因为 2 × 5 + 3 = 13）。在五进制下是四位数的正整数之中，各位数字的和是 4 的倍数的一共有几个？",
+        "en": "Write positive integers in base 5 (using only the digits 0–4; for example 13 is written 23₅, since 2 × 5 + 3 = 13). Among the positive integers that have four digits in base 5, how many have a digit sum that is a multiple of 4?",
+        "ja": "正の整数を 5 進法で書きます（数字 0～4 だけを使う。たとえば 2 × 5 + 3 = 13 なので 13 は 23₅）。5 進法で 4 けたになる正の整数のうち、各位の数字の和が 4 の倍数になるものは何個ありますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 125 個。",
+        "zh-Hans": "答案是 125 个。",
+        "en": "The answer is 125.",
+        "ja": "答えは 125 個です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "五進位四位數 abcd₅ 的值是 125a + 25b + 5c + d，最小是 1000₅ = 125，最大是 4444₅ = 624，共 624 − 125 + 1 = 500 個數。",
+          "125 = 124 + 1、25 = 24 + 1、5 = 4 + 1，而 124、24、4 都是 4 的倍數，所以 125a + 25b + 5c + d 和 a + b + c + d 除以 4 的餘數相同。",
+          "因此「數字和是 4 的倍數」等於「這個數本身是 4 的倍數」。就像十進位裡判斷 9 的倍數看數字和一樣，五進位裡可以用數字和判斷 4 的倍數。",
+          "125 到 624 之間 4 的倍數是 128、132、⋯、624，共 (624 − 128) ÷ 4 + 1 = 125 個。答案是 125 個。"
+        ],
+        "zh-Hans": [
+          "五进制四位数 abcd₅ 的值是 125a + 25b + 5c + d，最小是 1000₅ = 125，最大是 4444₅ = 624，共 624 − 125 + 1 = 500 个数。",
+          "125 = 124 + 1、25 = 24 + 1、5 = 4 + 1，而 124、24、4 都是 4 的倍数，所以 125a + 25b + 5c + d 和 a + b + c + d 除以 4 的余数相同。",
+          "因此“数字和是 4 的倍数”等于“这个数本身是 4 的倍数”。就像十进制里判断 9 的倍数看数字和一样，五进制里可以用数字和判断 4 的倍数。",
+          "125 到 624 之间 4 的倍数是 128、132、⋯、624，共 (624 − 128) ÷ 4 + 1 = 125 个。答案是 125 个。"
+        ],
+        "en": [
+          "A four-digit base-5 number abcd₅ has value 125a + 25b + 5c + d; the smallest is 1000₅ = 125 and the largest 4444₅ = 624, 624 − 125 + 1 = 500 numbers in all.",
+          "125 = 124 + 1, 25 = 24 + 1, 5 = 4 + 1, and 124, 24, 4 are multiples of 4, so 125a + 25b + 5c + d and a + b + c + d leave the same remainder when divided by 4.",
+          "So \"the digit sum is a multiple of 4\" is the same as \"the number itself is a multiple of 4\" — just as in base 10 the digit sum tests divisibility by 9, in base 5 it tests divisibility by 4.",
+          "The multiples of 4 from 125 to 624 are 128, 132, …, 624, numbering (624 − 128) ÷ 4 + 1 = 125. The answer is 125."
+        ],
+        "ja": [
+          "5 進法 4 けたの数 abcd₅ の値は 125a + 25b + 5c + d で、最小は 1000₅ = 125、最大は 4444₅ = 624、全部で 624 − 125 + 1 = 500 個です。",
+          "125 = 124 + 1、25 = 24 + 1、5 = 4 + 1 で、124、24、4 はどれも 4 の倍数なので、125a + 25b + 5c + d と a + b + c + d は 4 で割った余りが同じです。",
+          "したがって「数字の和が 4 の倍数」は「その数自身が 4 の倍数」と同じです。10 進法で 9 の倍数を数字の和で判定するのと同じように、5 進法では数字の和で 4 の倍数を判定できます。",
+          "125 から 624 までの 4 の倍数は 128、132、⋯、624 で、(624 − 128) ÷ 4 + 1 = 125 個です。答えは 125 個です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "125"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "number_theory-grade7-foundation",
+        "notes": "五進位下 5 ≡ 1 (mod 4)，數字和是 4 的倍數等價於數本身是 4 的倍數，轉成數 125～624 中 4 的倍數個數。掃過 /五進位|5 進位/（2 題）、/數字和.{0,30}進位|進位.{0,40}數字和/（2 題）；最接近 number_theory_grade9_foundation_008，差異：既有題求七進位數字和的最大值；本題用「底數減 1」的整除判別法，把數字和條件轉成數本身的整除條件再計數。"
+      }
+    },
+    {
+      "id": "number_theory_grade7_foundation_089",
+      "reviewStatus": "ok",
+      "topic": "number_theory",
+      "subtopic": "three_digit_number_eleven_times_digit_sum",
+      "tags": [
+        "c:place_value",
+        "c:linear_eq",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade7",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "有一個三位數，恰好等於它三個數字和的 11 倍。求這個三位數。",
+        "zh-Hans": "有一个三位数，恰好等于它三个数字和的 11 倍。求这个三位数。",
+        "en": "A three-digit number is exactly 11 times the sum of its three digits. Find this number.",
+        "ja": "ある 3 けたの数は、その 3 つの数字の和のちょうど 11 倍です。この 3 けたの数を求めなさい。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 198。",
+        "zh-Hans": "答案是 198。",
+        "en": "The answer is 198.",
+        "ja": "答えは 198 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "設這個數的百位、十位、個位數字是 a、b、c（a 是 1～9，b、c 是 0～9），數值是 100a + 10b + c。",
+          "條件：100a + 10b + c = 11(a + b + c) = 11a + 11b + 11c。整理得 89a = b + 10c。",
+          "右邊 b + 10c 最大是 9 + 90 = 99，所以 89a ≤ 99，a 只能是 1，於是 b + 10c = 89。",
+          "b 是一位數，b + 10c = 89 只能 c = 8、b = 9。這個數是 198。檢查：1 + 9 + 8 = 18，18 × 11 = 198。答案是 198。"
+        ],
+        "zh-Hans": [
+          "设这个数的百位、十位、个位数字是 a、b、c（a 是 1～9，b、c 是 0～9），数值是 100a + 10b + c。",
+          "条件：100a + 10b + c = 11(a + b + c) = 11a + 11b + 11c。整理得 89a = b + 10c。",
+          "右边 b + 10c 最大是 9 + 90 = 99，所以 89a ≤ 99，a 只能是 1，于是 b + 10c = 89。",
+          "b 是一位数，b + 10c = 89 只能 c = 8、b = 9。这个数是 198。检查：1 + 9 + 8 = 18，18 × 11 = 198。答案是 198。"
+        ],
+        "en": [
+          "Let the hundreds, tens and units digits be a, b, c (a from 1 to 9; b, c from 0 to 9); the number is 100a + 10b + c.",
+          "The condition: 100a + 10b + c = 11(a + b + c) = 11a + 11b + 11c, which simplifies to 89a = b + 10c.",
+          "The right side b + 10c is at most 9 + 90 = 99, so 89a ≤ 99 and a must be 1; then b + 10c = 89.",
+          "Since b is a single digit, b + 10c = 89 forces c = 8 and b = 9. The number is 198. Check: 1 + 9 + 8 = 18 and 18 × 11 = 198. The answer is 198."
+        ],
+        "ja": [
+          "百の位・十の位・一の位の数字を a、b、c（a は 1～9、b、c は 0～9）とすると、この数は 100a + 10b + c です。",
+          "条件は 100a + 10b + c = 11(a + b + c) = 11a + 11b + 11c で、整理すると 89a = b + 10c です。",
+          "右辺 b + 10c は最大でも 9 + 90 = 99 なので 89a ≤ 99 となり、a = 1 しかありません。すると b + 10c = 89 です。",
+          "b は 1 けたなので、b + 10c = 89 となるのは c = 8、b = 9 だけです。この数は 198 です。確かめ：1 + 9 + 8 = 18、18 × 11 = 198。答えは 198 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "198"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "number_theory-grade7-foundation",
+        "notes": "三位數等於數字和的 11 倍：位值展開得 89a = b + 10c，用右邊最大 99 鎖定 a = 1，再定 b、c。掃過 /倍.{0,10}(數字和|各位數字的和|數字的和)|(數字和|各位數字的和).{0,10}倍/（5 題）、/三位數.{0,30}等於.{0,20}(和|數字)/（3 題）；最接近 number_theory_grade7_foundation_085，差異：既有題是四位數等於數字和的立方，用估計範圍；本題是三位數等於數字和的 11 倍，用位值展開成 89a = b + 10c 的一次不定方程。"
+      }
+    },
+    {
+      "id": "number_theory_grade7_foundation_090",
+      "reviewStatus": "ok",
+      "topic": "number_theory",
+      "subtopic": "prime_triple_forced_by_remainders_mod_three",
+      "tags": [
+        "c:factor_multiple",
+        "c:modular",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade7",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "p 是質數，而且 p + 4 和 p + 14 也都是質數。求 p、p + 4、p + 14 這三個數的和。（這樣的 p 只有一個。）",
+        "zh-Hans": "p 是质数，而且 p + 4 和 p + 14 也都是质数。求 p、p + 4、p + 14 这三个数的和。（这样的 p 只有一个。）",
+        "en": "p is a prime, and p + 4 and p + 14 are also primes. Find the sum of the three numbers p, p + 4, p + 14. (There is only one such p.)",
+        "ja": "p は素数で、p + 4 と p + 14 も素数です。p、p + 4、p + 14 の 3 つの数の和を求めなさい。（このような p は 1 つしかありません。）"
+      },
+      "answer": {
+        "zh-Hant": "答案是 27。",
+        "zh-Hans": "答案是 27。",
+        "en": "The answer is 27.",
+        "ja": "答えは 27 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "看 p 除以 3 的餘數。p + 4 除以 3 的餘數比 p 多 1，p + 14 = p + 12 + 2 的餘數比 p 多 2（都要再除以 3 取餘數）。",
+          "若 p 除以 3 餘 1：p + 14 的餘數是 1 + 2 = 3，也就是 0，p + 14 是 3 的倍數而且大於 3，不是質數。",
+          "若 p 除以 3 餘 2：p + 4 的餘數是 2 + 1 = 3，也就是 0，p + 4 是 3 的倍數而且大於 3，不是質數。",
+          "所以 p 必須是 3 的倍數，而 p 是質數，只能 p = 3。這時 3、7、17 都是質數，符合條件。",
+          "三數的和是 3 + 7 + 17 = 27。答案是 27。"
+        ],
+        "zh-Hans": [
+          "看 p 除以 3 的余数。p + 4 除以 3 的余数比 p 多 1，p + 14 = p + 12 + 2 的余数比 p 多 2（都要再除以 3 取余数）。",
+          "若 p 除以 3 余 1：p + 14 的余数是 1 + 2 = 3，也就是 0，p + 14 是 3 的倍数而且大于 3，不是质数。",
+          "若 p 除以 3 余 2：p + 4 的余数是 2 + 1 = 3，也就是 0，p + 4 是 3 的倍数而且大于 3，不是质数。",
+          "所以 p 必须是 3 的倍数，而 p 是质数，只能 p = 3。这时 3、7、17 都是质数，符合条件。",
+          "三数的和是 3 + 7 + 17 = 27。答案是 27。"
+        ],
+        "en": [
+          "Look at the remainder of p when divided by 3. p + 4 has remainder 1 more than p, and p + 14 = p + 12 + 2 has remainder 2 more than p (reduced modulo 3).",
+          "If p leaves remainder 1: p + 14 has remainder 1 + 2 = 3, i.e. 0, so p + 14 is a multiple of 3 greater than 3, not prime.",
+          "If p leaves remainder 2: p + 4 has remainder 2 + 1 = 3, i.e. 0, so p + 4 is a multiple of 3 greater than 3, not prime.",
+          "So p must be a multiple of 3, and being prime, p = 3. Then 3, 7, 17 are all prime, as required.",
+          "The sum is 3 + 7 + 17 = 27. The answer is 27."
+        ],
+        "ja": [
+          "p を 3 で割った余りを考えます。p + 4 の余りは p より 1 大きく、p + 14 = p + 12 + 2 の余りは p より 2 大きくなります（3 で割り直した余り）。",
+          "p を 3 で割って 1 余るとき、p + 14 の余りは 1 + 2 = 3、つまり 0 で、p + 14 は 3 より大きい 3 の倍数なので素数ではありません。",
+          "p を 3 で割って 2 余るとき、p + 4 の余りは 2 + 1 = 3、つまり 0 で、p + 4 は 3 より大きい 3 の倍数なので素数ではありません。",
+          "よって p は 3 の倍数で、素数なので p = 3 です。このとき 3、7、17 はすべて素数で条件に合います。",
+          "3 つの和は 3 + 7 + 17 = 27 です。答えは 27 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "27"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "number_theory-grade7-foundation",
+        "notes": "p、p + 4、p + 14 除以 3 的餘數涵蓋 0、1、2 三種，必有一個是 3 的倍數，迫使 p = 3。掃過 /p \\+ [0-9]+.{0,30}質數/（1 題）、/(三|3) ?個.{0,10}都是質數/（1 題）；最接近 arithmetic_grade6_foundation_176，差異：既有題問 10 個連續整數中最多幾個質數；本題用除以 3 的餘數分三類，證明 p + 4、p + 14 之一必為 3 的倍數，唯一解 p = 3。"
+      }
+    },
+    {
+      "id": "number_theory_grade7_foundation_091",
+      "reviewStatus": "ok",
+      "topic": "number_theory",
+      "subtopic": "three_consecutive_integers_each_with_square_factor",
+      "tags": [
+        "c:factor_multiple",
+        "c:modular",
+        "m:enumeration"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade7",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "如果一個正整數能被某個大於 1 的完全平方數整除（例如 12 能被 4 整除、45 能被 9 整除），就叫它「含平方因數」。求最小的正整數 n，使得 n、n + 1、n + 2 三個數都含平方因數。",
+        "zh-Hans": "如果一个正整数能被某个大于 1 的完全平方数整除（例如 12 能被 4 整除、45 能被 9 整除），就叫它“含平方因数”。求最小的正整数 n，使得 n、n + 1、n + 2 三个数都含平方因数。",
+        "en": "Call a positive integer \"square-containing\" if it is divisible by some perfect square greater than 1 (for example 12 is divisible by 4 and 45 by 9). Find the smallest positive integer n such that n, n + 1 and n + 2 are all square-containing.",
+        "ja": "正の整数が 1 より大きいある平方数で割り切れるとき（たとえば 12 は 4 で、45 は 9 で割り切れる）、その数を「平方因数をもつ」数とよびます。n、n + 1、n + 2 の 3 つがすべて平方因数をもつような、最小の正の整数 n を求めなさい。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 48。",
+        "zh-Hans": "答案是 48。",
+        "en": "The answer is 48.",
+        "ja": "答えは 48 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "含平方因數，等於能被某個質數的平方整除：4、9、25、49、⋯。連續三個數裡，4 的倍數最多只有一個，所以另外兩個必須靠 9、25、49 等。",
+          "三個連續數裡至多一個是 9 的倍數，至多一個是 25 的倍數。所以最小的可能，是三個數分別被 4、9、25（或 49 等）整除。",
+          "所以只要把含平方因數的數由小到大列出來，找第一次出現三個連續整數的地方即可。",
+          "48 = 16 × 3（被 4 整除）、49 = 7²、50 = 25 × 2，三個都含平方因數。再確認更小的 n 都不行：100 以內含平方因數的數是 4、8、9、12、16、18、20、24、25、27、28、32、36、40、44、45、48、49、50、⋯，在 48 之前沒有三個連續的。",
+          "所以最小的 n 是 48。答案是 48。"
+        ],
+        "zh-Hans": [
+          "含平方因数，等于能被某个质数的平方整除：4、9、25、49、⋯。连续三个数里，4 的倍数最多只有一个，所以另外两个必须靠 9、25、49 等。",
+          "三个连续数里至多一个是 9 的倍数，至多一个是 25 的倍数。所以最小的可能，是三个数分别被 4、9、25（或 49 等）整除。",
+          "所以只要把含平方因数的数由小到大列出来，找第一次出现三个连续整数的地方即可。",
+          "48 = 16 × 3（被 4 整除）、49 = 7²、50 = 25 × 2，三个都含平方因数。再确认更小的 n 都不行：100 以内含平方因数的数是 4、8、9、12、16、18、20、24、25、27、28、32、36、40、44、45、48、49、50、⋯，在 48 之前没有三个连续的。",
+          "所以最小的 n 是 48。答案是 48。"
+        ],
+        "en": [
+          "Being square-containing means being divisible by the square of some prime: 4, 9, 25, 49, …. Among three consecutive numbers at most one is a multiple of 4, so the other two must rely on 9, 25, 49 and so on.",
+          "Among three consecutive numbers at most one is a multiple of 9 and at most one a multiple of 25. So in the smallest case the three numbers are divisible by 4, 9, 25 (or 49, …) respectively.",
+          "So it is enough to list the square-containing numbers in increasing order and find the first place where three consecutive integers appear.",
+          "48 = 16 × 3 (divisible by 4), 49 = 7², 50 = 25 × 2, so all three are square-containing. No smaller n works: the square-containing numbers up to 50 are 4, 8, 9, 12, 16, 18, 20, 24, 25, 27, 28, 32, 36, 40, 44, 45, 48, 49, 50, and there are no three consecutive ones before 48.",
+          "So the smallest n is 48. The answer is 48."
+        ],
+        "ja": [
+          "平方因数をもつことは、ある素数の 2 乗（4、9、25、49、⋯）で割り切れることと同じです。連続する 3 つの数のうち 4 の倍数は多くても 1 つなので、残りの 2 つは 9、25、49 などにたよる必要があります。",
+          "連続する 3 つの数のうち 9 の倍数も 25 の倍数も多くて 1 つずつです。だから最も小さい場合は、3 つがそれぞれ 4、9、25（または 49 など）で割り切れる形になります。",
+          "そこで平方因数をもつ数を小さい順に書き出し、連続する 3 つの整数がはじめて現れる所をさがせばよいです。",
+          "48 = 16 × 3（4 で割り切れる）、49 = 7²、50 = 25 × 2 で、3 つとも平方因数をもちます。これより小さい n はだめです：50 までの平方因数をもつ数は 4、8、9、12、16、18、20、24、25、27、28、32、36、40、44、45、48、49、50 で、48 より前に 3 つ連続するところはありません。",
+          "よって最小の n は 48 です。答えは 48 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "48"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "number_theory-grade7-foundation",
+        "notes": "三個連續數都被大於 1 的平方數整除：4 的倍數至多一個，必須搭配 9、25、49，列出 50 以內含平方因數的數找到 48、49、50。掃過 /完全平方數整除|平方因數/（1 題）、/連續.{0,6}(三|3) ?個.{0,40}(都|皆)/（0 題）；最接近 number_theory_grade8_foundation_015，差異：既有題找連續六個合數的最小起點；本題要連續三個數都含平方因數，條件更強，要用 4、9、25、49 的分配論證並列表檢查。"
+      }
     }
   ]
 }
