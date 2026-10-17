@@ -330,6 +330,7 @@ class _DailyMissionGateState extends State<_DailyMissionGate> {
               learner: widget.learner,
               mode: _SessionLaunchMode.practice,
               questionLimit: DailyMission.targetCount,
+              reviewMistakeCount: 1,
             );
             if (mounted) {
               setState(() => _version += 1);

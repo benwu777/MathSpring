@@ -111,6 +111,7 @@ Future<void> _openFirstEligiblePack({
   required _SessionLaunchMode mode,
   String? topicCode,
   int? questionLimit,
+  int reviewMistakeCount = 0,
   FormalExamPreset? formalExamPreset,
 }) async {
   final bundled.BundledQuestionBankRepository repository =
@@ -160,9 +161,30 @@ Future<void> _openFirstEligiblePack({
       SessionLaunchPlanBuilder.randomizeQuestionOrderForSession(
     prioritizedQuestions,
   );
+  final List<Question> reviewQuestions = <Question>[];
+  if (questionLimit != null && reviewMistakeCount > 0 && learnerId != null) {
+    final Map<String, Question> approvedById = <String, Question>{
+      for (final Question question in approvedQuestions) question.id: question,
+    };
+    for (final String id
+        in await services.getLearnerMistakeQuestionIds(learnerId)) {
+      final Question? question = approvedById[id];
+      if (question != null) {
+        reviewQuestions.add(question);
+      }
+    }
+    if (!context.mounted) {
+      return;
+    }
+  }
   final List<Question> sessionQuestions = questionLimit == null
       ? randomizedQuestions
-      : randomizedQuestions.take(questionLimit).toList(growable: false);
+      : SessionLaunchPlanBuilder.mixInReviewQuestions(
+          randomizedQuestions,
+          reviewQuestions: reviewQuestions,
+          limit: questionLimit,
+          reviewCount: reviewMistakeCount,
+        );
 
   final bundled.BundledQuestionPackInfo launchPack =
       SessionLaunchPlanBuilder.buildLaunchPack(
@@ -193,22 +215,48 @@ Future<void> _openFirstEligiblePack({
   );
 }
 
+/// 一次錯題再練最多幾題。
+const int _mistakePracticeLimit = 10;
+
+Future<void> _openMistakePractice({
+  required BuildContext context,
+  required AppServices services,
+  required List<String> mistakeQuestionIds,
+}) async {
+  final List<Question> questions = await bundled.BundledQuestionBankRepository()
+      .loadQuestionsByIds(
+          mistakeQuestionIds.take(_mistakePracticeLimit).toList());
+  if (!context.mounted || questions.isEmpty) {
+    return;
+  }
+  final LearnerProfile? learner = services.learnerProfiles
+      .where(
+          (LearnerProfile profile) => profile.id == services.currentLearnerId)
+      .firstOrNull;
+  await Navigator.of(context).push(
+    MaterialPageRoute<void>(
+      builder: (_) => PracticeSessionPage(
+        services: services,
+        pack: bundled.BundledQuestionPackInfo(
+          path: '',
+          topic: 'mixed',
+          topicCode: 'mixed',
+          levelStage: questions.first.levelStage,
+          challengeTier: 'foundation',
+          questionCount: questions.length,
+        ),
+        initialQuestions: questions,
+        learner: learner,
+      ),
+    ),
+  );
+}
+
 String _learnerGradeRangeLabel(LearnerProfile learner, AppStrings strings) {
   return strings.gradeRangeDisplay(
     levelStageNumber(learner.effectiveMinLevelStage),
     levelStageNumber(learner.effectiveMaxLevelStage),
   );
-}
-
-String _answerModeSubtitle(AppStrings strings, AnswerMode answerMode) {
-  switch (answerMode) {
-    case AnswerMode.multipleChoice:
-      return strings.chooseOneAnswer;
-    case AnswerMode.integerInput:
-      return strings.enterIntegerAnswer;
-    case AnswerMode.selfCheck:
-      return strings.selfCheckLabel;
-  }
 }
 
 String _localeCode(BuildContext context) {

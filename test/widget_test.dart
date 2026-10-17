@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mathspring/data/bundled/bundled_question_bank_repository.dart';
@@ -2941,6 +2942,102 @@ void main() {
     expect(find.text('Geometry'), findsAtLeastNWidgets(1));
     expect(find.text('8 / 10 correct'), findsOneWidget);
     expect(find.textContaining('Elapsed 5:00'), findsOneWidget);
+  });
+
+  testWidgets('review tab offers mistake practice for unfixed wrong answers',
+      (WidgetTester tester) async {
+    final TestWidgetsFlutterBinding binding =
+        TestWidgetsFlutterBinding.ensureInitialized();
+    binding.platformDispatcher.localeTestValue = const Locale('en');
+    final AppServices services = createTestServices(
+      initialProgress: const <QuestionProgress>[
+        QuestionProgress(
+          learnerId: 'learner_allen',
+          questionId: 'logic_grade5_foundation_003',
+          status: 'incorrect',
+          lastResult: 'multiple_choice:A',
+          updatedAtIso: '2026-10-16T08:00:00Z',
+        ),
+        QuestionProgress(
+          learnerId: 'learner_allen',
+          questionId: 'arithmetic_grade2_foundation_010',
+          status: 'correct',
+          lastResult: 'integer:1',
+          updatedAtIso: '2026-10-16T09:00:00Z',
+        ),
+      ],
+    );
+
+    await pumpApp(tester, services);
+    await tester.tap(find.text('Review'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('1 question to fix'), findsOneWidget);
+    final Finder start =
+        find.byKey(const ValueKey<String>('start_mistake_practice'));
+    await tester.ensureVisible(start);
+    await tester.tap(start);
+    await tester.runAsync(() async {
+      await Future<void>.delayed(const Duration(milliseconds: 500));
+    });
+    await tester.pumpAndSettle();
+
+    expect(find.text('Practice Mode'), findsOneWidget);
+    expect(find.textContaining('Five students sit evenly spaced'),
+        findsOneWidget);
+  });
+
+  testWidgets('daily mission includes one earlier mistake',
+      (WidgetTester tester) async {
+    // 前面的測試在別的 fake-async zone 讀過題庫，快取裡的 Future 在這裡不會完成
+    rootBundle.clear();
+    final AppServices services = createTestServices(
+      completeDailyMission: false,
+      initialProgress: const <QuestionProgress>[
+        QuestionProgress(
+          learnerId: 'learner_allen',
+          questionId: 'arithmetic_grade4_foundation_010',
+          status: 'incorrect',
+          lastResult: 'integer:1',
+          updatedAtIso: '2026-10-16T08:00:00Z',
+        ),
+      ],
+    );
+    await tester.pumpWidget(MathSpringApp(services: services));
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.byKey(const ValueKey<String>('start_daily_mission')));
+    for (int attempt = 0;
+        attempt < 50 && find.byType(PracticeSessionPage).evaluate().isEmpty;
+        attempt += 1) {
+      await tester.runAsync(() async {
+        await Future<void>.delayed(const Duration(milliseconds: 200));
+      });
+      await tester.pump();
+    }
+
+    final PracticeSessionPage page =
+        tester.widget<PracticeSessionPage>(find.byType(PracticeSessionPage));
+    final List<String> ids =
+        page.initialQuestions!.map((Question q) => q.id).toList();
+    expect(ids, hasLength(5));
+    expect(ids.last, 'arithmetic_grade4_foundation_010');
+  });
+
+  testWidgets('review tab says when there are no mistakes to fix',
+      (WidgetTester tester) async {
+    final TestWidgetsFlutterBinding binding =
+        TestWidgetsFlutterBinding.ensureInitialized();
+    binding.platformDispatcher.localeTestValue = const Locale('en');
+
+    await pumpApp(tester, createTestServices());
+    await tester.tap(find.text('Review'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('No mistakes to fix. Wrong answers will show up here.'),
+        findsOneWidget);
+    expect(find.byKey(const ValueKey<String>('start_mistake_practice')),
+        findsNothing);
   });
 
   testWidgets('review tab shows achievements and selects a practiced day',

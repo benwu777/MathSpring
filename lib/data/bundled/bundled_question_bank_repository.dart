@@ -96,6 +96,33 @@ class BundledQuestionBankRepository {
     return packs.first;
   }
 
+  /// 依 id 載入題目，回傳順序與 [questionIds] 相同；找不到的 id 略過。
+  ///
+  /// 題目 id 以 `<topicCode>_<levelStage>_<challengeTier>_` 開頭，
+  /// 所以只載入有用到的 pack。
+  Future<List<Question>> loadQuestionsByIds(List<String> questionIds) async {
+    final Set<String> wanted = questionIds.toSet();
+    final Map<String, Question> found = <String, Question>{};
+    final BundledQuestionManifest manifest = await loadManifest();
+    for (final BundledQuestionPackInfo packInfo in manifest.packs) {
+      final String prefix = '${packInfo.topicCode}_${packInfo.levelStage}_'
+          '${packInfo.challengeTier}_';
+      if (!wanted.any((String id) => id.startsWith(prefix))) {
+        continue;
+      }
+      for (final Question question
+          in (await loadPack(packInfo.path)).questions) {
+        if (wanted.contains(question.id)) {
+          found[question.id] = question;
+        }
+      }
+    }
+    return <Question>[
+      for (final String id in questionIds)
+        if (found[id] != null) found[id]!,
+    ];
+  }
+
   Future<Question?> loadQuestionForSession({
     required String topicCode,
     required String levelStage,
@@ -103,11 +130,14 @@ class BundledQuestionBankRepository {
     required String questionId,
   }) async {
     final BundledQuestionManifest manifest = await loadManifest();
-    final BundledQuestionPackInfo? packInfo = manifest.packs.where((item) {
-      return item.topicCode == topicCode &&
-          item.levelStage == levelStage &&
-          item.challengeTier == challengeTier;
-    }).cast<BundledQuestionPackInfo?>().firstWhere(
+    final BundledQuestionPackInfo? packInfo = manifest.packs
+        .where((item) {
+          return item.topicCode == topicCode &&
+              item.levelStage == levelStage &&
+              item.challengeTier == challengeTier;
+        })
+        .cast<BundledQuestionPackInfo?>()
+        .firstWhere(
           (item) => item != null,
           orElse: () => null,
         );

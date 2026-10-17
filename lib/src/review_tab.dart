@@ -68,6 +68,8 @@ class _LearningReviewSectionState extends State<_LearningReviewSection> {
               icon: Icons.history_edu_rounded,
             ),
             const SizedBox(height: 18),
+            _MistakeReviewSection(services: widget.services),
+            const SizedBox(height: 18),
             _SectionCard(
               title: strings.achievementsTitle,
               subtitle: strings.achievementsSubtitle,
@@ -123,6 +125,55 @@ class _LearningReviewSectionState extends State<_LearningReviewSection> {
               ),
             ),
           ],
+        );
+      },
+    );
+  }
+}
+
+/// 錯題再練：最近一次作答答錯、還沒訂正的題目。
+class _MistakeReviewSection extends StatelessWidget {
+  const _MistakeReviewSection({required this.services});
+
+  final AppServices services;
+
+  @override
+  Widget build(BuildContext context) {
+    final AppStrings strings = AppStrings.of(context);
+    final String? learnerId = services.currentLearnerId;
+    return FutureBuilder<List<String>>(
+      future: learnerId == null
+          ? Future<List<String>>.value(const <String>[])
+          : services.getLearnerMistakeQuestionIds(learnerId),
+      builder: (BuildContext context, AsyncSnapshot<List<String>> snapshot) {
+        final List<String> mistakeIds = snapshot.data ?? const <String>[];
+        return _SectionCard(
+          title: strings.mistakePracticeTitle,
+          subtitle: strings.mistakePracticeSubtitle,
+          child: mistakeIds.isEmpty
+              ? Text(strings.noMistakesToFix)
+              : Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      strings.mistakesToFix(mistakeIds.length),
+                      style: Theme.of(context).textTheme.titleMedium,
+                    ),
+                    const SizedBox(height: 12),
+                    SizedBox(
+                      width: double.infinity,
+                      child: FilledButton(
+                        key: const ValueKey<String>('start_mistake_practice'),
+                        onPressed: () => _openMistakePractice(
+                          context: context,
+                          services: services,
+                          mistakeQuestionIds: mistakeIds,
+                        ),
+                        child: Text(strings.startMistakePractice),
+                      ),
+                    ),
+                  ],
+                ),
         );
       },
     );

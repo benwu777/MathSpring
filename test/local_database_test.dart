@@ -818,4 +818,32 @@ void main() {
     expect(allowance.isUnlocked('q4'), isFalse);
     expect(allowance.remaining, 0);
   });
+
+  test(
+      'mistake list keeps questions whose latest answer is wrong, newest first',
+      () async {
+    final AppServices services = AppServices(
+      database: database,
+      questionProgressRepository: questionProgressRepository,
+      appPreferencesRepository: appPreferencesRepository,
+    );
+    Future<void> answer(String questionId, bool correct, String at) =>
+        services.saveQuestionProgress(QuestionProgress(
+          learnerId: 'learner_allen',
+          questionId: questionId,
+          status: correct ? 'correct' : 'incorrect',
+          lastResult: 'integer:1',
+          updatedAtIso: at,
+        ));
+
+    await answer('q_old_wrong', false, '2026-10-15T08:00:00Z');
+    await answer('q_fixed', false, '2026-10-15T09:00:00Z');
+    await answer('q_new_wrong', false, '2026-10-16T08:00:00Z');
+    await answer('q_right', true, '2026-10-16T09:00:00Z');
+    await answer('q_fixed', true, '2026-10-17T08:00:00Z');
+
+    expect(await services.getLearnerMistakeQuestionIds('learner_allen'),
+        <String>['q_new_wrong', 'q_old_wrong']);
+    expect(await services.getLearnerMistakeQuestionIds('learner_mia'), isEmpty);
+  });
 }

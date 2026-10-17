@@ -532,6 +532,19 @@ class AppServices {
           .map((QuestionProgress progress) => progress.questionId)
           .toSet();
 
+  /// 最近一次作答是答錯的題目（還沒訂正），最近答錯的排前面。
+  Future<List<String>> getLearnerMistakeQuestionIds(String learnerId) async {
+    final List<QuestionProgress> mistakes = (await _getLearnerQuestionProgress(
+            learnerId))
+        .where((QuestionProgress progress) => progress.status == 'incorrect')
+        .toList()
+      ..sort((QuestionProgress left, QuestionProgress right) =>
+          right.updatedAtIso.compareTo(left.updatedAtIso));
+    return mistakes
+        .map((QuestionProgress progress) => progress.questionId)
+        .toList(growable: false);
+  }
+
   Future<List<AnswerSession>> getLearnerAnswerSessions(String learnerId) async {
     if (answerSessionRepository != null) {
       return answerSessionRepository!.fetchByLearnerId(learnerId);

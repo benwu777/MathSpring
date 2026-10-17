@@ -614,6 +614,36 @@ class AppStrings {
         en: '$questionCount questions・$minutes min・100 pts',
         ja: '$questionCount 問・$minutes 分・満点 100',
       );
+  String get mistakePracticeTitle => _text(
+        zhHant: '錯題再練',
+        zhHans: '错题再练',
+        en: 'Fix your mistakes',
+        ja: 'まちがえた問題に再挑戦',
+      );
+  String get mistakePracticeSubtitle => _text(
+        zhHant: '上次答錯、還沒訂正的題目。答對一次就會從這裡移除。',
+        zhHans: '上次答错、还没订正的题目。答对一次就会从这里移除。',
+        en: 'Questions you got wrong last time. Answer one correctly and it leaves this list.',
+        ja: '前回まちがえて、まだ直していない問題です。一度正解するとここから消えます。',
+      );
+  String mistakesToFix(int count) => _text(
+        zhHant: '$count 題待訂正',
+        zhHans: '$count 题待订正',
+        en: count == 1 ? '1 question to fix' : '$count questions to fix',
+        ja: '直す問題 $count 問',
+      );
+  String get noMistakesToFix => _text(
+        zhHant: '目前沒有待訂正的錯題，答錯的題目會出現在這裡。',
+        zhHans: '目前没有待订正的错题，答错的题目会出现在这里。',
+        en: 'No mistakes to fix. Wrong answers will show up here.',
+        ja: '直す問題はありません。まちがえた問題はここに表示されます。',
+      );
+  String get startMistakePractice => _text(
+        zhHant: '開始錯題再練',
+        zhHans: '开始错题再练',
+        en: 'Practice my mistakes',
+        ja: 'まちがえた問題を練習する',
+      );
   String get dailyMissionTitle => _text(
         zhHant: '每日五題',
         zhHans: '每日五题',

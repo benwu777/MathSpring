@@ -103,6 +103,29 @@ class SessionLaunchPlanBuilder {
     return unanswered.isEmpty ? List<Question>.from(questions) : unanswered;
   }
 
+  /// Takes up to [reviewCount] questions from [reviewQuestions] (earlier
+  /// mistakes, most recent first) and fills the rest of [limit] from
+  /// [freshQuestions], skipping any question already chosen for review.
+  /// Review questions go last.
+  static List<Question> mixInReviewQuestions(
+    List<Question> freshQuestions, {
+    required List<Question> reviewQuestions,
+    required int limit,
+    required int reviewCount,
+  }) {
+    final List<Question> review =
+        reviewQuestions.take(math.min(reviewCount, limit)).toList();
+    final Set<String> reviewIds =
+        review.map((Question question) => question.id).toSet();
+    // 錯題放在最後，先用新題暖身
+    return <Question>[
+      ...freshQuestions
+          .where((Question question) => !reviewIds.contains(question.id))
+          .take(limit - review.length),
+      ...review,
+    ];
+  }
+
   static List<Question> filterApprovedQuestionsForLaunch(
     List<Question> questions,
   ) {
