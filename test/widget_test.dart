@@ -1229,6 +1229,67 @@ void main() {
     expect(find.text('言語'), findsOneWidget);
   });
 
+  testWidgets('settings shows a learners overview for families',
+      (WidgetTester tester) async {
+    final TestWidgetsFlutterBinding binding =
+        TestWidgetsFlutterBinding.ensureInitialized();
+    binding.platformDispatcher.localeTestValue = const Locale('en');
+
+    await pumpApp(tester, createTestServices());
+    await tester.tap(find.text('Settings').first);
+    for (int attempt = 0;
+        attempt < 30 && find.textContaining('5 questions').evaluate().isEmpty;
+        attempt += 1) {
+      await tester.runAsync(() async {
+        await Future<void>.delayed(const Duration(milliseconds: 100));
+      });
+      await tester.pump();
+    }
+
+    final Finder overview =
+        find.byKey(const ValueKey<String>('learners_overview'));
+    expect(overview, findsOneWidget);
+    expect(
+        find.descendant(
+            of: find.byKey(
+                const ValueKey<String>('learner_overview_learner_allen')),
+            matching:
+                find.text('Last 7 days: 1 day · 5 questions · 100% correct')),
+        findsOneWidget);
+    expect(
+        find.descendant(
+            of: find
+                .byKey(const ValueKey<String>('learner_overview_learner_mia')),
+            matching: find.text('No practice in the last 7 days')),
+        findsOneWidget);
+  });
+
+  testWidgets('settings hides the learners overview for a single learner',
+      (WidgetTester tester) async {
+    final TestWidgetsFlutterBinding binding =
+        TestWidgetsFlutterBinding.ensureInitialized();
+    binding.platformDispatcher.localeTestValue = const Locale('en');
+    final AppServices services = AppServices.forTesting(
+      learnerProfiles: const <LearnerProfile>[
+        LearnerProfile(
+          id: 'learner_allen',
+          displayName: 'Allen',
+          levelStage: 'grade4',
+          challengeTier: 'advanced',
+          createdAtIso: '2026-07-16T00:00:00Z',
+        ),
+      ],
+      currentLearnerId: 'learner_allen',
+    );
+
+    await pumpApp(tester, services);
+    await tester.tap(find.text('Settings').first);
+    await tester.pumpAndSettle();
+
+    expect(
+        find.byKey(const ValueKey<String>('learners_overview')), findsNothing);
+  });
+
   testWidgets('settings exposes support and privacy links in English',
       (WidgetTester tester) async {
     final TestWidgetsFlutterBinding binding =

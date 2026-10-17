@@ -668,6 +668,42 @@ class AppStrings {
         en: '$concept · $correct of $attempts correct',
         ja: '$concept · $attempts 問中 $correct 問正解',
       );
+  String get learnersOverviewTitle => _text(
+        zhHant: '孩子們的學習狀況',
+        zhHans: '孩子们的学习情况',
+        en: 'Learners at a glance',
+        ja: '学習者ごとの様子',
+      );
+  String get learnersOverviewSubtitle => _text(
+        zhHant: '每位學習者近 7 天的練習量、答對率，以及最需要加強的概念。',
+        zhHans: '每位学习者近 7 天的练习量、答对率，以及最需要加强的概念。',
+        en: 'Practice and accuracy over the last 7 days, plus the concept each learner most needs to work on.',
+        ja: '直近7日間の練習量と正答率、いちばん強化したい単元です。',
+      );
+  String overviewRecentPractice(int days, int answered, int percent) => _text(
+        zhHant: '近 7 天：練了 $days 天 · $answered 題 · 答對 $percent%',
+        zhHans: '近 7 天：练了 $days 天 · $answered 题 · 答对 $percent%',
+        en: 'Last 7 days: $days ${days == 1 ? 'day' : 'days'} · $answered ${answered == 1 ? 'question' : 'questions'} · $percent% correct',
+        ja: '直近7日：$days 日 · $answered 問 · 正答率 $percent%',
+      );
+  String get overviewNoRecentPractice => _text(
+        zhHant: '近 7 天沒有練習',
+        zhHans: '近 7 天没有练习',
+        en: 'No practice in the last 7 days',
+        ja: '直近7日間は練習していません',
+      );
+  String overviewWeakestConcept(String concept) => _text(
+        zhHant: '最需要加強：$concept',
+        zhHans: '最需要加强：$concept',
+        en: 'Needs the most work: $concept',
+        ja: 'いちばん強化したい単元：$concept',
+      );
+  String get overviewNoWeakConcept => _text(
+        zhHant: '還沒有明顯偏弱的概念',
+        zhHans: '还没有明显偏弱的概念',
+        en: 'No weak concept yet',
+        ja: '目立って苦手な単元はまだありません',
+      );
   String get dailyMissionTitle => _text(
         zhHant: '每日五題',
         zhHans: '每日五题',

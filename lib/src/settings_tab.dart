@@ -41,6 +41,16 @@ class _SettingsTab extends StatelessWidget {
             builder: (_) => _FullUnlockSheet(monetization: monetization),
           ),
         ),
+        if (services.learnerProfiles.length >= 2) ...[
+          const SizedBox(height: 16),
+          _LearnersOverviewSection(
+            // 新增或刪除學習者時重新統計
+            key: ValueKey<String>(services.learnerProfiles
+                .map((LearnerProfile learner) => learner.id)
+                .join(',')),
+            services: services,
+          ),
+        ],
         const SizedBox(height: 16),
         _FullUnlockSection(monetization: monetization),
         const SizedBox(height: 16),
@@ -433,6 +443,127 @@ class _CurrentLearnerIdentity extends StatelessWidget {
             ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+/// 給家長看的總覽：每位學習者近 7 天的練習量、答對率與最弱的概念。
+class _LearnersOverviewSection extends StatefulWidget {
+  const _LearnersOverviewSection({super.key, required this.services});
+
+  final AppServices services;
+
+  @override
+  State<_LearnersOverviewSection> createState() =>
+      _LearnersOverviewSectionState();
+}
+
+class _LearnersOverviewSectionState extends State<_LearnersOverviewSection> {
+  late final Future<Map<String, LearnerOverview>> _overviews = _load();
+
+  Future<Map<String, LearnerOverview>> _load() async {
+    final List<LearnerProfile> learners =
+        List<LearnerProfile>.from(widget.services.learnerProfiles);
+    final Map<String, List<SessionAnswerRecord>> recordsByLearner =
+        <String, List<SessionAnswerRecord>>{
+      for (final LearnerProfile learner in learners)
+        learner.id: await widget.services.getLearnerAnswerRecords(learner.id),
+    };
+    final List<Question> questions =
+        await bundled.BundledQuestionBankRepository()
+            .loadQuestionsByIds(<String>{
+      for (final List<SessionAnswerRecord> records in recordsByLearner.values)
+        for (final SessionAnswerRecord record in records) record.questionId,
+    }.toList());
+    final Map<String, List<String>> tags = <String, List<String>>{
+      for (final Question question in questions)
+        question.id: question.conceptTags,
+    };
+    final DateTime now = DateTime.now();
+    return <String, LearnerOverview>{
+      for (final MapEntry<String, List<SessionAnswerRecord>> entry
+          in recordsByLearner.entries)
+        entry.key: LearnerOverview.fromRecords(
+          entry.value,
+          now: now,
+          conceptTagsByQuestionId: tags,
+        ),
+    };
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final AppStrings strings = AppStrings.of(context);
+    final Locale locale = Localizations.localeOf(context);
+    final TextTheme textTheme = Theme.of(context).textTheme;
+    return _SectionCard(
+      cardKey: const ValueKey<String>('learners_overview'),
+      title: strings.learnersOverviewTitle,
+      subtitle: strings.learnersOverviewSubtitle,
+      child: FutureBuilder<Map<String, LearnerOverview>>(
+        future: _overviews,
+        builder: (BuildContext context,
+            AsyncSnapshot<Map<String, LearnerOverview>> snapshot) {
+          final Map<String, LearnerOverview>? overviews = snapshot.data;
+          if (overviews == null) {
+            return const Center(child: CircularProgressIndicator());
+          }
+          return Column(
+            children: [
+              for (final LearnerProfile learner
+                  in widget.services.learnerProfiles)
+                if (overviews[learner.id] case final LearnerOverview overview)
+                  Padding(
+                    key: ValueKey<String>('learner_overview_${learner.id}'),
+                    padding: const EdgeInsets.symmetric(vertical: 8),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        AvatarPreview(configuration: learner.avatar, size: 44),
+                        const SizedBox(width: 12),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                '${learner.displayName} · '
+                                '${_learnerGradeRangeLabel(learner, strings)}',
+                                style: textTheme.titleMedium,
+                              ),
+                              const SizedBox(height: 2),
+                              Text(
+                                overview.answeredCount == 0
+                                    ? strings.overviewNoRecentPractice
+                                    : strings.overviewRecentPractice(
+                                        overview.practiceDays,
+                                        overview.answeredCount,
+                                        (overview.correctCount *
+                                                100 /
+                                                overview.answeredCount)
+                                            .round(),
+                                      ),
+                              ),
+                              Text(
+                                overview.weakestConcept == null
+                                    ? strings.overviewNoWeakConcept
+                                    : strings.overviewWeakestConcept(
+                                        conceptLabel(
+                                            overview.weakestConcept!, locale),
+                                      ),
+                                style: textTheme.bodySmall?.copyWith(
+                                  color: AppVisualTokens.inkMuted,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+            ],
+          );
+        },
       ),
     );
   }
