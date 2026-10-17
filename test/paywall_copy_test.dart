@@ -17,4 +17,12 @@ void main() {
       }
     }
   });
+
+  // 免費版每天也看得到 3 題詳解，付費的差別是「全部」而不是「有沒有詳解」。
+  test('full unlock copy sells every solution, not solutions at all', () {
+    expect(AppStrings(const Locale('en')).fullUnlockDescription,
+        contains('every solution'));
+    expect(AppStrings(const Locale('zh', 'TW')).fullUnlockDescription,
+        contains('全部詳解'));
+  });
 }

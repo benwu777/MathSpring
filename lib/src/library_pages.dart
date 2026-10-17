@@ -534,17 +534,22 @@ class SessionDetailPage extends StatelessWidget {
                           const SizedBox(height: 8),
                           Text(question.localizedAnswer(_localeCode(context))),
                           const SizedBox(height: 10),
-                          if (MonetizationScope.of(context)
-                              .value
-                              .canViewSolutionSteps)
-                            for (final String step in question
-                                .localizedSolutionSteps(_localeCode(context)))
-                              Padding(
-                                padding: const EdgeInsets.only(bottom: 8),
-                                child: Text(step),
-                              )
-                          else
-                            const _LockedSolutionSteps(),
+                          _SolutionStepsGate(
+                            services: services,
+                            questionId: question.id,
+                            steps: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                for (final String step
+                                    in question.localizedSolutionSteps(
+                                        _localeCode(context)))
+                                  Padding(
+                                    padding: const EdgeInsets.only(bottom: 8),
+                                    child: Text(step),
+                                  ),
+                              ],
+                            ),
+                          ),
                         ],
                       ],
                     ),

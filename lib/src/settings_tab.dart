@@ -124,6 +124,81 @@ class _LockedSolutionSteps extends StatelessWidget {
   }
 }
 
+/// 免費版：每天可自選 [FreeSolutionAllowance.dailyLimit] 題看完整詳解；
+/// 完整版直接顯示。
+class _SolutionStepsGate extends StatefulWidget {
+  const _SolutionStepsGate({
+    required this.services,
+    required this.questionId,
+    required this.steps,
+  });
+
+  final AppServices services;
+  final String questionId;
+  final Widget steps;
+
+  @override
+  State<_SolutionStepsGate> createState() => _SolutionStepsGateState();
+}
+
+class _SolutionStepsGateState extends State<_SolutionStepsGate> {
+  late Future<FreeSolutionAllowance> _allowance =
+      widget.services.getFreeSolutionAllowance();
+
+  Future<void> _useFreeSolution() async {
+    await widget.services.unlockFreeSolution(widget.questionId);
+    if (!mounted) return;
+    setState(() {
+      _allowance = widget.services.getFreeSolutionAllowance();
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    if (MonetizationScope.of(context).value.canViewSolutionSteps) {
+      return widget.steps;
+    }
+    final AppStrings strings = AppStrings.of(context);
+    return FutureBuilder<FreeSolutionAllowance>(
+      future: _allowance,
+      builder: (BuildContext context,
+          AsyncSnapshot<FreeSolutionAllowance> snapshot) {
+        final FreeSolutionAllowance? allowance = snapshot.data;
+        if (allowance == null) {
+          return const SizedBox.shrink();
+        }
+        if (allowance.isUnlocked(widget.questionId)) {
+          return widget.steps;
+        }
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            if (allowance.remaining > 0)
+              Align(
+                alignment: Alignment.centerLeft,
+                child: FilledButton.tonalIcon(
+                  key: const ValueKey<String>('use_free_solution'),
+                  onPressed: _useFreeSolution,
+                  icon: const Icon(Icons.lightbulb_outline),
+                  label: Text(strings.useFreeSolution(allowance.remaining)),
+                ),
+              )
+            else
+              Text(
+                strings.freeSolutionsUsedUp(FreeSolutionAllowance.dailyLimit),
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      color: AppVisualTokens.inkMuted,
+                    ),
+              ),
+            const SizedBox(height: 8),
+            const _LockedSolutionSteps(),
+          ],
+        );
+      },
+    );
+  }
+}
+
 class _FullUnlockSheet extends StatelessWidget {
   const _FullUnlockSheet({required this.monetization});
 

@@ -6,8 +6,8 @@
 
 尚未加入 Apple Developer Program 不會阻塞產品開發。等到真機 QA、商店素材與隱私頁完成後，再申請帳號並執行簽署、TestFlight、送審。
 
-**變現方式已定稿**：免費層可作答全部題目並顯示答案，付費 NT$60（US$1.99）
-一次性解鎖完整詳解、移除廣告、紙娃娃全套樣式與 5 個角色；分類 Education、
+**變現方式已定稿**：免費層可作答全部題目並顯示答案，每天可自選 3 題看完整詳解；付費 NT$60（US$1.99）
+一次性解鎖全部詳解、紙娃娃全套樣式與 5 個角色（app 沒有廣告，App Store Connect 的購買項目說明也不要寫「無廣告」）；分類 Education、
 年齡分級 4+、**不進 Kids Category**。完整設計見
 `docs/plans/2026-09-10-freemium-monetization-design.md`，接入步驟見 `docs/monetization-handoff.md`。
 

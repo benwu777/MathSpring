@@ -15,6 +15,7 @@ import 'package:mathspring/models/avatar_configuration.dart';
 import 'package:mathspring/models/favorite_question.dart';
 import 'package:mathspring/models/question_progress.dart';
 import 'package:mathspring/models/session_answer_record.dart';
+import 'package:mathspring/services/free_solution_allowance.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 
 void main() {
@@ -776,5 +777,45 @@ void main() {
     }
 
     expect(services.learnerProfiles, hasLength(5));
+  });
+
+  test('free solution unlocks persist across app restarts on the same day',
+      () async {
+    final DateTime morning = DateTime(2026, 10, 17, 8);
+    final AppServices first = AppServices(
+      database: database,
+      appPreferencesRepository: appPreferencesRepository,
+    );
+
+    expect(await first.unlockFreeSolution('q1', now: morning), isTrue);
+    expect(await first.unlockFreeSolution('q2', now: morning), isTrue);
+
+    final AppServices restarted = AppServices(
+      database: database,
+      appPreferencesRepository: AppPreferencesRepository(database),
+    );
+    final FreeSolutionAllowance allowance = await restarted
+        .getFreeSolutionAllowance(now: morning.add(const Duration(hours: 3)));
+
+    expect(allowance.remaining, 1);
+    expect(allowance.isUnlocked('q1'), isTrue);
+    expect(allowance.isUnlocked('q2'), isTrue);
+  });
+
+  test('a fourth free solution is refused and not persisted', () async {
+    final DateTime now = DateTime(2026, 10, 17, 8);
+    final AppServices services = AppServices(
+      database: database,
+      appPreferencesRepository: appPreferencesRepository,
+    );
+    for (final String id in <String>['q1', 'q2', 'q3']) {
+      expect(await services.unlockFreeSolution(id, now: now), isTrue);
+    }
+
+    expect(await services.unlockFreeSolution('q4', now: now), isFalse);
+    final FreeSolutionAllowance allowance =
+        await services.getFreeSolutionAllowance(now: now);
+    expect(allowance.isUnlocked('q4'), isFalse);
+    expect(allowance.remaining, 0);
   });
 }

@@ -102,22 +102,34 @@ class AppStrings {
         ja: 'フル版を解除済み',
       );
   String get fullUnlockSubtitle => _text(
-        zhHant: '完整詳解、全套紙娃娃與最多五位角色。',
-        zhHans: '完整详解、全套纸娃娃与最多五位角色。',
-        en: 'Full solutions, all avatar styles, and up to five learners.',
-        ja: '詳しい解説、全アバタースタイル、学習者は最大5人。',
+        zhHant: '全部詳解、全套紙娃娃與最多五位角色。',
+        zhHans: '全部详解、全套纸娃娃与最多五位角色。',
+        en: 'Every solution, all avatar styles, and up to five learners.',
+        ja: 'すべての解説、全アバタースタイル、学習者は最大5人。',
       );
   String get fullUnlockUnlockedSubtitle => _text(
-        zhHant: '完整詳解、全套紙娃娃與最多五位角色已可使用。',
-        zhHans: '完整详解、全套纸娃娃与最多五位角色已可使用。',
-        en: 'Full solutions, all avatar styles, and up to five learners are active.',
-        ja: '詳しい解説、全アバタースタイル、最大5人の学習者を利用できます。',
+        zhHant: '全部詳解、全套紙娃娃與最多五位角色已可使用。',
+        zhHans: '全部详解、全套纸娃娃与最多五位角色已可使用。',
+        en: 'Every solution, all avatar styles, and up to five learners are active.',
+        ja: 'すべての解説、全アバタースタイル、最大5人の学習者を利用できます。',
       );
   String get fullUnlockDescription => _text(
-        zhHant: '一次解鎖完整詳解、全套紙娃娃樣式與最多五位學習者角色。',
-        zhHans: '一次解锁完整详解、全套纸娃娃样式与最多五位学习者角色。',
-        en: 'Unlock full solutions, all avatar styles, and up to five learners with one purchase.',
-        ja: '1回の購入で、詳しい解説、全アバタースタイル、最大5人の学習者を解除します。',
+        zhHant: '免費版每天可看 3 題詳解；一次解鎖全部詳解、全套紙娃娃樣式與最多五位學習者角色。',
+        zhHans: '免费版每天可看 3 题详解；一次解锁全部详解、全套纸娃娃样式与最多五位学习者角色。',
+        en: 'The free version shows 3 solutions a day. One purchase unlocks every solution, all avatar styles, and up to five learners.',
+        ja: '無料版では1日3問の解説を見られます。1回の購入で、すべての解説、全アバタースタイル、最大5人の学習者を解除します。',
+      );
+  String useFreeSolution(int remaining) => _text(
+        zhHant: '免費看這題詳解（今天還剩 $remaining 題）',
+        zhHans: '免费看这题详解（今天还剩 $remaining 题）',
+        en: 'View this solution free ($remaining left today)',
+        ja: 'この解説を無料で見る（今日はあと $remaining 問）',
+      );
+  String freeSolutionsUsedUp(int limit) => _text(
+        zhHant: '今天的 $limit 題免費詳解已用完，明天再來，或解鎖完整版看全部詳解。',
+        zhHans: '今天的 $limit 题免费详解已用完，明天再来，或解锁完整版看全部详解。',
+        en: "Today's $limit free solutions are used. Come back tomorrow, or unlock every solution.",
+        ja: '今日の無料解説 $limit 問を使い切りました。明日また見るか、フル版ですべての解説を見られます。',
       );
   String get unlockSolutionSteps => _text(
         zhHant: '解鎖完整詳解',

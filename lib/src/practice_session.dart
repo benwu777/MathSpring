@@ -215,6 +215,7 @@ class _PracticeSessionPageState extends State<PracticeSessionPage> {
                           const SizedBox(height: 20),
                           _PracticeReviewCard(
                             key: _reviewCardKey,
+                            services: widget.services,
                             record: _latestRecord!,
                             localeCode: _localeCode(context),
                             nextLabel: strings.nextQuestion,
@@ -497,12 +498,14 @@ class _PracticeAnswerSectionState extends State<_PracticeAnswerSection> {
 class _PracticeReviewCard extends StatelessWidget {
   const _PracticeReviewCard({
     super.key,
+    required this.services,
     required this.record,
     required this.localeCode,
     required this.nextLabel,
     required this.onNext,
   });
 
+  final AppServices services;
   final PracticeAnswerRecord record;
   final String localeCode;
   final String nextLabel;
@@ -538,18 +541,24 @@ class _PracticeReviewCard extends StatelessWidget {
             localeCode: localeCode,
           ),
           const SizedBox(height: 10),
-          if (MonetizationScope.of(context).value.canViewSolutionSteps)
-            for (final String step
-                in record.question.localizedSolutionSteps(localeCode))
-              Padding(
-                padding: const EdgeInsets.only(bottom: 8),
-                child: _QuestionBodyText(
-                  text: step,
-                  localeCode: localeCode,
-                ),
-              )
-          else
-            const _LockedSolutionSteps(),
+          _SolutionStepsGate(
+            services: services,
+            questionId: record.question.id,
+            steps: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                for (final String step
+                    in record.question.localizedSolutionSteps(localeCode))
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 8),
+                    child: _QuestionBodyText(
+                      text: step,
+                      localeCode: localeCode,
+                    ),
+                  ),
+              ],
+            ),
+          ),
           const SizedBox(height: 12),
           Align(
             alignment: Alignment.centerLeft,

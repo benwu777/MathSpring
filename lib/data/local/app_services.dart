@@ -12,6 +12,7 @@ import 'package:mathspring/models/question_progress.dart';
 import 'package:mathspring/models/session_answer_record.dart';
 import 'package:mathspring/services/learning_activity_summary.dart';
 import 'package:mathspring/services/daily_mission.dart';
+import 'package:mathspring/services/free_solution_allowance.dart';
 import 'package:sqflite/sqflite.dart';
 
 class AppServices {
@@ -58,6 +59,9 @@ class AppServices {
   final Map<String, Set<String>> _inMemoryFavoriteCollectionMemberships =
       <String, Set<String>>{};
   String? currentLearnerId;
+  String? _inMemoryFreeSolutions;
+
+  static const String _freeSolutionsKey = 'free_solution_unlocks';
 
   factory AppServices.forTesting({
     required List<LearnerProfile> learnerProfiles,
@@ -371,6 +375,30 @@ class AppServices {
     );
     _inMemoryFavoriteCollections.add(collection);
     return collection;
+  }
+
+  Future<FreeSolutionAllowance> getFreeSolutionAllowance(
+      {DateTime? now}) async {
+    final String? raw = appPreferencesRepository == null
+        ? _inMemoryFreeSolutions
+        : await appPreferencesRepository!.getValue(_freeSolutionsKey);
+    return FreeSolutionAllowance.decode(raw, now: now ?? DateTime.now());
+  }
+
+  /// 用掉一次今天的免費詳解；額度用完時回傳 false，不寫入。
+  Future<bool> unlockFreeSolution(String questionId, {DateTime? now}) async {
+    final FreeSolutionAllowance? next =
+        (await getFreeSolutionAllowance(now: now)).unlock(questionId);
+    if (next == null) {
+      return false;
+    }
+    if (appPreferencesRepository == null) {
+      _inMemoryFreeSolutions = next.encode();
+    } else {
+      await appPreferencesRepository!
+          .setValue(_freeSolutionsKey, next.encode());
+    }
+    return true;
   }
 
   Future<void> setCurrentLearner(String learnerId) async {

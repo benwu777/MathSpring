@@ -21,6 +21,7 @@ import 'package:mathspring/services/learning_activity_summary.dart';
 import 'package:mathspring/services/daily_mission.dart';
 import 'package:mathspring/services/formal_exam_preset.dart';
 import 'package:mathspring/services/formal_exam_scoring.dart';
+import 'package:mathspring/services/free_solution_allowance.dart';
 import 'package:mathspring/services/math_text_formatter.dart';
 import 'package:mathspring/services/monetization_service.dart';
 import 'package:mathspring/services/session_launch_plan_builder.dart';

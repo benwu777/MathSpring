@@ -2344,11 +2344,95 @@ void main() {
       ),
     );
     await tester.pump(const Duration(milliseconds: 300));
+    await tester.pump();
 
     expect(
       find.byKey(const ValueKey<String>('unlock_solution_steps')),
       findsOneWidget,
     );
+  });
+
+  Future<void> pumpPracticeAndAnswer(
+    WidgetTester tester,
+    AppServices services,
+  ) async {
+    final TestWidgetsFlutterBinding binding =
+        TestWidgetsFlutterBinding.ensureInitialized();
+    binding.platformDispatcher.localeTestValue = const Locale('en');
+    await tester.binding.setSurfaceSize(const Size(1200, 1600));
+    await tester.pumpWidget(
+      MaterialApp(
+        locale: const Locale('en'),
+        supportedLocales: AppStrings.supportedLocales,
+        localizationsDelegates: const [
+          GlobalMaterialLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+        ],
+        home: PracticeSessionPage(
+          services: services,
+          pack: const BundledQuestionPackInfo(
+            path:
+                'assets/questions/geometry/grade4_foundation.geometry.v1.json',
+            topic: '幾何',
+            topicCode: 'geometry',
+            levelStage: 'grade4',
+            challengeTier: 'foundation',
+            questionCount: 1,
+          ),
+          initialQuestions: [createDemoQuestion()],
+        ),
+      ),
+    );
+    await tester.runAsync(() async {
+      await Future<void>.delayed(const Duration(milliseconds: 50));
+    });
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 300));
+    await tester.tap(find.byKey(const ValueKey<String>(
+        'practice_option_geometry_grade4_foundation_001_B')));
+    await tester.pump();
+    await tester.pumpAndSettle();
+  }
+
+  testWidgets('free practice review can spend a daily free solution',
+      (WidgetTester tester) async {
+    final AppServices services = createTestServices();
+
+    await pumpPracticeAndAnswer(tester, services);
+
+    const String firstStep =
+        'Look at the highest point of the blue sin(x) curve.';
+    expect(find.text(firstStep), findsNothing);
+    expect(find.text('View this solution free (3 left today)'), findsOneWidget);
+
+    await tester.tap(find.byKey(const ValueKey<String>('use_free_solution')));
+    await tester.runAsync(() async {
+      await Future<void>.delayed(const Duration(milliseconds: 50));
+    });
+    await tester.pumpAndSettle();
+
+    expect(find.text(firstStep), findsOneWidget);
+    expect((await services.getFreeSolutionAllowance()).remaining, 2);
+  });
+
+  testWidgets('free practice review explains when free solutions run out',
+      (WidgetTester tester) async {
+    final AppServices services = createTestServices();
+    for (final String id in <String>['other_1', 'other_2', 'other_3']) {
+      await services.unlockFreeSolution(id);
+    }
+
+    await pumpPracticeAndAnswer(tester, services);
+
+    expect(
+        find.byKey(const ValueKey<String>('use_free_solution')), findsNothing);
+    expect(
+        find.text(
+            "Today's 3 free solutions are used. Come back tomorrow, or unlock every solution."),
+        findsOneWidget);
+    expect(find.byKey(const ValueKey<String>('unlock_solution_steps')),
+        findsOneWidget);
   });
 
   testWidgets('full unlock shows quiz solution steps',
@@ -2371,6 +2455,7 @@ void main() {
         home: MonetizationScope(
           service: monetization,
           child: QuizResultPage(
+            services: createTestServices(),
             result: QuizSessionResult(
               records: [
                 QuizAnswerRecord(
@@ -2526,6 +2611,7 @@ void main() {
       findsOneWidget,
     );
 
+    await tester.ensureVisible(find.text('Next question'));
     await tester.tap(find.text('Next question'));
     await tester.pump();
 

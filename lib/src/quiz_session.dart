@@ -469,6 +469,7 @@ class _QuizSessionPageState extends State<QuizSessionPage> {
     Navigator.of(context).pushReplacement(
       MaterialPageRoute<void>(
         builder: (_) => QuizResultPage(
+          services: widget.services,
           result: result,
           maxScore: widget.formalExamPreset == null ? null : 100,
           earnedScore: widget.formalExamPreset == null
@@ -672,11 +673,13 @@ class _QuizIntegerAnswerFieldsState extends State<_QuizIntegerAnswerFields> {
 class QuizResultPage extends StatelessWidget {
   const QuizResultPage({
     super.key,
+    required this.services,
     required this.result,
     this.maxScore,
     this.earnedScore,
   });
 
+  final AppServices services;
   final QuizSessionResult result;
   final int? maxScore;
   final int? earnedScore;
@@ -767,23 +770,26 @@ class QuizResultPage extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(height: 10),
-                        if (MonetizationScope.of(context)
-                            .value
-                            .canViewSolutionSteps)
-                          for (final String step in record.question
-                              .localizedSolutionSteps(_localeCode(context)))
-                            Padding(
-                              padding: const EdgeInsets.only(bottom: 8),
-                              child: Align(
-                                alignment: Alignment.centerLeft,
-                                child: _QuestionBodyText(
-                                  text: step,
-                                  localeCode: _localeCode(context),
+                        _SolutionStepsGate(
+                          services: services,
+                          questionId: record.question.id,
+                          steps: Column(
+                            children: [
+                              for (final String step in record.question
+                                  .localizedSolutionSteps(_localeCode(context)))
+                                Padding(
+                                  padding: const EdgeInsets.only(bottom: 8),
+                                  child: Align(
+                                    alignment: Alignment.centerLeft,
+                                    child: _QuestionBodyText(
+                                      text: step,
+                                      localeCode: _localeCode(context),
+                                    ),
+                                  ),
                                 ),
-                              ),
-                            )
-                        else
-                          const _LockedSolutionSteps(),
+                            ],
+                          ),
+                        ),
                       ],
                     ),
                   ),
