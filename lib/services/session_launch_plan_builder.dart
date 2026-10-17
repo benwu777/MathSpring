@@ -126,6 +126,36 @@ class SessionLaunchPlanBuilder {
     ];
   }
 
+  /// 弱概念題目被抽中的權重（一般題目是 1）。
+  static const double weakConceptWeight = 3;
+
+  /// Weighted random order (Efraimidis–Spirakis): a question touching any of
+  /// [weakConcepts] is [weakConceptWeight] times as likely to come earlier.
+  static List<Question> randomizeWithConceptWeights(
+    List<Question> questions, {
+    required Set<String> weakConcepts,
+    math.Random? random,
+  }) {
+    final math.Random rng = random ?? math.Random();
+    final List<(double, Question)> keyed = <(double, Question)>[
+      for (final Question question in questions)
+        (
+          math
+              .pow(
+                1 - rng.nextDouble(),
+                1 /
+                    (question.conceptTags.any(weakConcepts.contains)
+                        ? weakConceptWeight
+                        : 1),
+              )
+              .toDouble(),
+          question,
+        ),
+    ]..sort(((double, Question) left, (double, Question) right) =>
+        right.$1.compareTo(left.$1));
+    return <Question>[for (final (double, Question) item in keyed) item.$2];
+  }
+
   static List<Question> filterApprovedQuestionsForLaunch(
     List<Question> questions,
   ) {

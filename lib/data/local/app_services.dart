@@ -566,6 +566,23 @@ class AppServices {
         _sessionRecords[sessionId] ?? const []);
   }
 
+  /// 學習者所有練習與測驗的逐題作答紀錄。
+  Future<List<SessionAnswerRecord>> getLearnerAnswerRecords(
+    String learnerId,
+  ) async {
+    final List<AnswerSession> sessions =
+        await getLearnerAnswerSessions(learnerId);
+    final List<List<SessionAnswerRecord>> records = await Future.wait(
+      sessions.map(
+        (AnswerSession session) => getSessionAnswerRecords(session.id),
+      ),
+    );
+    return <SessionAnswerRecord>[
+      for (final List<SessionAnswerRecord> sessionRecords in records)
+        ...sessionRecords,
+    ];
+  }
+
   Future<LearningActivitySummary> getLearnerLearningActivitySummary(
     String learnerId,
   ) async {

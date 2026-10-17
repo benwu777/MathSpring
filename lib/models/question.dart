@@ -231,6 +231,7 @@ class Question {
     this.source,
     this.olympiadTaxonomy,
     this.reviewStatus,
+    this.tags = const <String>[],
   });
 
   final String id;
@@ -250,6 +251,12 @@ class Question {
   final QuestionOlympiadTaxonomy? olympiadTaxonomy;
   final String? reviewStatus;
 
+  /// 題庫標籤，`c:` 是概念、`m:` 是手法（詞彙表見 docs/question-bank-tags.json）。
+  final List<String> tags;
+
+  List<String> get conceptTags =>
+      tags.where((String tag) => tag.startsWith('c:')).toList(growable: false);
+
   bool get isReviewApproved {
     if (reviewStatus == null || reviewStatus!.trim().isEmpty) {
       return true;
@@ -261,6 +268,9 @@ class Question {
     return Question(
       id: json['id'] as String,
       topic: json['topic'] as String,
+      tags: (json['tags'] as List<dynamic>? ?? const <dynamic>[])
+          .cast<String>()
+          .toList(growable: false),
       difficulty: json['difficulty'] as String,
       levelStage: json['levelStage'] as String,
       challengeTier: json['challengeTier'] as String,

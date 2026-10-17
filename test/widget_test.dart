@@ -24,6 +24,10 @@ void main() {
     expect(AppVisualTokens.primary, AppVisualTokens.brand);
   });
 
+  // rootBundle 會快取讀檔的 Future；前一個測試在它自己的 fake-async zone 裡
+  // 開始讀的題庫，到下一個測試永遠不會完成，畫面就卡在載入中。
+  setUp(() => rootBundle.clear());
+
   tearDown(() {
     TestWidgetsFlutterBinding.ensureInitialized()
         .platformDispatcher
@@ -2983,14 +2987,12 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.text('Practice Mode'), findsOneWidget);
-    expect(find.textContaining('Five students sit evenly spaced'),
-        findsOneWidget);
+    expect(
+        find.textContaining('Five students sit evenly spaced'), findsOneWidget);
   });
 
   testWidgets('daily mission includes one earlier mistake',
       (WidgetTester tester) async {
-    // 前面的測試在別的 fake-async zone 讀過題庫，快取裡的 Future 在這裡不會完成
-    rootBundle.clear();
     final AppServices services = createTestServices(
       completeDailyMission: false,
       initialProgress: const <QuestionProgress>[
@@ -3022,6 +3024,137 @@ void main() {
         page.initialQuestions!.map((Question q) => q.id).toList();
     expect(ids, hasLength(5));
     expect(ids.last, 'arithmetic_grade4_foundation_010');
+  });
+
+  testWidgets('review tab lists concepts that need strengthening',
+      (WidgetTester tester) async {
+    final TestWidgetsFlutterBinding binding =
+        TestWidgetsFlutterBinding.ensureInitialized();
+    binding.platformDispatcher.localeTestValue = const Locale('en');
+    const List<String> fractionIds = <String>[
+      'arithmetic_grade4_foundation_012',
+      'arithmetic_grade4_foundation_035',
+      'arithmetic_grade4_foundation_037',
+    ];
+    final AppServices services = createTestServices(
+      initialSessions: const <AnswerSession>[
+        AnswerSession(
+          id: 'session_fractions',
+          learnerId: 'learner_allen',
+          mode: 'practice',
+          topicCode: 'arithmetic',
+          levelStage: 'grade4',
+          challengeTier: 'foundation',
+          startedAtIso: '2026-10-16T09:00:00Z',
+          endedAtIso: '2026-10-16T09:05:00Z',
+          elapsedSeconds: 300,
+          totalQuestions: 3,
+          correctCount: 0,
+        ),
+      ],
+      initialSessionRecords: <String, List<SessionAnswerRecord>>{
+        'session_fractions': <SessionAnswerRecord>[
+          for (int index = 0; index < fractionIds.length; index += 1)
+            SessionAnswerRecord(
+              sessionId: 'session_fractions',
+              questionId: fractionIds[index],
+              sequence: index + 1,
+              submittedAnswer: '1',
+              isCorrect: false,
+              answeredAtIso: '2026-10-16T09:0${index + 1}:00Z',
+            ),
+        ],
+      },
+    );
+
+    await pumpApp(tester, services);
+    await tester.tap(find.text('Review'));
+    for (int attempt = 0;
+        attempt < 50 && find.textContaining('Fractions').evaluate().isEmpty;
+        attempt += 1) {
+      await tester.runAsync(() async {
+        await Future<void>.delayed(const Duration(milliseconds: 100));
+      });
+      await tester.pump();
+    }
+
+    expect(find.text('Concepts to strengthen'), findsOneWidget);
+    expect(find.text('Fractions · 0 of 3 correct'), findsOneWidget);
+  });
+
+  testWidgets('practice puts weak-concept questions earlier',
+      (WidgetTester tester) async {
+    final TestWidgetsFlutterBinding binding =
+        TestWidgetsFlutterBinding.ensureInitialized();
+    binding.platformDispatcher.localeTestValue = const Locale('en');
+    const List<String> fractionIds = <String>[
+      'arithmetic_grade4_foundation_012',
+      'arithmetic_grade4_foundation_035',
+      'arithmetic_grade4_foundation_037',
+      'arithmetic_grade4_foundation_055',
+      'arithmetic_grade4_foundation_067',
+    ];
+    final String now = DateTime.now().toUtc().toIso8601String();
+    // 今天答錯 5 題分數：每日任務已完成，分數成為弱概念
+    final AppServices services = createTestServices(
+      initialSessions: <AnswerSession>[
+        AnswerSession(
+          id: 'session_fractions',
+          learnerId: 'learner_allen',
+          mode: 'practice',
+          topicCode: 'arithmetic',
+          levelStage: 'grade4',
+          challengeTier: 'foundation',
+          startedAtIso: now,
+          endedAtIso: now,
+          elapsedSeconds: 300,
+          totalQuestions: 5,
+          correctCount: 0,
+        ),
+      ],
+      initialSessionRecords: <String, List<SessionAnswerRecord>>{
+        'session_fractions': <SessionAnswerRecord>[
+          for (int index = 0; index < fractionIds.length; index += 1)
+            SessionAnswerRecord(
+              sessionId: 'session_fractions',
+              questionId: fractionIds[index],
+              sequence: index + 1,
+              submittedAnswer: '1',
+              isCorrect: false,
+              answeredAtIso: now,
+            ),
+        ],
+      },
+    );
+
+    await pumpApp(tester, services);
+    final Finder start =
+        find.byKey(const ValueKey<String>('open_start_practice'));
+    await tester.ensureVisible(start);
+    await tester.tap(start);
+    for (int attempt = 0;
+        attempt < 50 && find.byType(PracticeSessionPage).evaluate().isEmpty;
+        attempt += 1) {
+      await tester.runAsync(() async {
+        await Future<void>.delayed(const Duration(milliseconds: 200));
+      });
+      await tester.pump();
+    }
+
+    final List<Question> ordered = tester
+        .widget<PracticeSessionPage>(find.byType(PracticeSessionPage))
+        .initialQuestions!;
+    final List<int> fractionRanks = <int>[
+      for (int index = 0; index < ordered.length; index += 1)
+        if (ordered[index].conceptTags.contains('c:fraction')) index,
+    ];
+    expect(fractionRanks.length, greaterThan(20));
+    final double meanPercentile =
+        fractionRanks.reduce((int a, int b) => a + b) /
+            fractionRanks.length /
+            ordered.length;
+    // 權重 3 的題目平均落在約 25% 的位置；不加權時是 50%
+    expect(meanPercentile, lessThan(0.4));
   });
 
   testWidgets('review tab says when there are no mistakes to fix',

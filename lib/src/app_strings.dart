@@ -644,6 +644,30 @@ class AppStrings {
         en: 'Practice my mistakes',
         ja: 'まちがえた問題を練習する',
       );
+  String get weakConceptsTitle => _text(
+        zhHant: '需要加強的概念',
+        zhHans: '需要加强的概念',
+        en: 'Concepts to strengthen',
+        ja: '強化したい単元',
+      );
+  String get weakConceptsSubtitle => _text(
+        zhHant: '依作答紀錄找出答對率偏低的概念，練習時會多出這些題目。',
+        zhHans: '依作答记录找出答对率偏低的概念，练习时会多出这些题目。',
+        en: 'Concepts with low accuracy in your answers. Practice will show more of them.',
+        ja: '正答率が低めの単元です。練習ではこれらの問題が多めに出ます。',
+      );
+  String get noWeakConcepts => _text(
+        zhHant: '目前沒有明顯偏弱的概念。多練幾題後，這裡會列出需要加強的地方。',
+        zhHans: '目前没有明显偏弱的概念。多练几题后，这里会列出需要加强的地方。',
+        en: 'No weak concepts yet. After more practice, the ones to work on will show up here.',
+        ja: '今のところ苦手な単元はありません。練習を重ねると、ここに表示されます。',
+      );
+  String conceptAccuracy(String concept, int correct, int attempts) => _text(
+        zhHant: '$concept · $attempts 題答對 $correct 題',
+        zhHans: '$concept · $attempts 题答对 $correct 题',
+        en: '$concept · $correct of $attempts correct',
+        ja: '$concept · $attempts 問中 $correct 問正解',
+      );
   String get dailyMissionTitle => _text(
         zhHant: '每日五題',
         zhHans: '每日五题',

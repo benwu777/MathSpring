@@ -157,10 +157,28 @@ Future<void> _openFirstEligiblePack({
     approvedQuestions,
     answeredQuestionIds: answeredQuestionIds,
   );
-  final List<Question> randomizedQuestions =
-      SessionLaunchPlanBuilder.randomizeQuestionOrderForSession(
-    prioritizedQuestions,
-  );
+  // 練習多出弱概念的題目；測驗維持純隨機，成績才有可比性
+  final Set<String> weakConcepts =
+      mode == _SessionLaunchMode.practice && learnerId != null
+          ? ConceptMastery.fromRecords(
+              await services.getLearnerAnswerRecords(learnerId),
+              conceptTagsByQuestionId: <String, List<String>>{
+                for (final Question question in approvedQuestions)
+                  question.id: question.conceptTags,
+              },
+            ).weakConcepts.toSet()
+          : const <String>{};
+  if (!context.mounted) {
+    return;
+  }
+  final List<Question> randomizedQuestions = weakConcepts.isEmpty
+      ? SessionLaunchPlanBuilder.randomizeQuestionOrderForSession(
+          prioritizedQuestions,
+        )
+      : SessionLaunchPlanBuilder.randomizeWithConceptWeights(
+          prioritizedQuestions,
+          weakConcepts: weakConcepts,
+        );
   final List<Question> reviewQuestions = <Question>[];
   if (questionLimit != null && reviewMistakeCount > 0 && learnerId != null) {
     final Map<String, Question> approvedById = <String, Question>{
