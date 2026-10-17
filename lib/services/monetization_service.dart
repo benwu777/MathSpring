@@ -55,10 +55,8 @@ class MonetizationState {
   final String? errorMessage;
 
   bool get canViewSolutionSteps => hasFullUnlock;
-  bool get hasAdFreeEntitlement => hasFullUnlock;
   bool get canUsePremiumAvatarOptions => hasFullUnlock;
   int get maxLearnerProfiles => hasFullUnlock ? 5 : 1;
-  bool get shouldShowBanner => !hasAdFreeEntitlement;
 
   MonetizationState copyWith({
     MonetizationStatus? status,

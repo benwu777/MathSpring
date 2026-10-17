@@ -13,7 +13,6 @@ void main() {
 
     expect(unlocked.hasFullUnlock, isTrue);
     expect(unlocked.canViewSolutionSteps, isTrue);
-    expect(unlocked.hasAdFreeEntitlement, isTrue);
     expect(unlocked.canUsePremiumAvatarOptions, isTrue);
     expect(unlocked.maxLearnerProfiles, 5);
   });
