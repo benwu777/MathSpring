@@ -4969,6 +4969,223 @@
         "reference": "combinatorics-grade7-foundation",
         "notes": "3 × 3 黑白塗色至少有一條鏡射對稱軸：各對稱只能自由決定 6 格（64 種），兩者都成立只剩 4 組（16 種），排容得 112。掃過 /對稱.{0,40}(塗|著色|方格)/（3 題）、/(黑|白).{0,20}(塗|色).{0,40}對稱/（1 題）；最接近 geometry_grade3_foundation_069，差異：既有題是在九宮格上補塗幾格使圖形對稱；本題要數所有對稱塗法，用「對稱等於自由格變少」與排容。"
       }
+    },
+    {
+      "id": "combinatorics_grade7_foundation_061",
+      "reviewStatus": "ok",
+      "topic": "combinatorics",
+      "subtopic": "lamp_rows_with_exactly_two_lit_blocks",
+      "tags": [
+        "c:basic_counting",
+        "c:permutation_combination",
+        "m:bijection"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade7",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一排有 7 盞燈，每盞燈可以亮或暗。如果亮著的燈恰好連成兩段（每一段是相鄰的一盞或好幾盞亮燈，兩段之間至少隔著一盞暗燈），例如「亮亮暗暗亮暗暗」，就叫做「兩段亮」。「兩段亮」的亮暗情形一共有幾種？",
+        "zh-Hans": "一排有 7 盏灯，每盏灯可以亮或暗。如果亮着的灯恰好连成两段（每一段是相邻的一盏或好几盏亮灯，两段之间至少隔着一盏暗灯），例如“亮亮暗暗亮暗暗”，就叫做“两段亮”。“两段亮”的亮暗情形一共有几种？",
+        "en": "Seven lamps stand in a row; each is on or off. If the lit lamps form exactly two blocks (each block is one or more adjacent lit lamps, and the two blocks are separated by at least one unlit lamp), e.g. \"on on off off on off off\", the row is called \"two-block lit\". How many two-block lit patterns are there?",
+        "ja": "7 個の電灯が一列に並び、それぞれついているか消えています。ついている電灯がちょうど 2 つのかたまり（となり合う 1 個以上のついた電灯の集まりで、2 つのかたまりの間には消えた電灯が 1 個以上ある）になっているとき、たとえば「つ・つ・消・消・つ・消・消」のようなとき、「2 かたまり点灯」とよびます。「2 かたまり点灯」のつき方は全部で何通りありますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 70 種。",
+        "zh-Hans": "答案是 70 种。",
+        "en": "The answer is 70.",
+        "ja": "答えは 70 通りです。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "看「交界」：第 1 盞的左邊、每兩盞相鄰的燈之間、第 7 盞的右邊，一共有 8 個位置。把兩端外面都想成暗燈。",
+          "每一段亮燈都有一個「開始」交界（左暗右亮）和一個「結束」交界（左亮右暗）。兩段亮剛好用到 4 個不同的交界，由左到右依序是：第一段開始、第一段結束、第二段開始、第二段結束。",
+          "反過來，從 8 個交界任選 4 個，由左到右依序當成這四個交界，就畫出唯一一種兩段亮：兩個「開始、結束」之間至少有一盞亮燈，兩段之間至少有一盞暗燈。所以兩段亮的種數等於從 8 個位置選 4 個的種數。",
+          "從 8 個選 4 個有 8 × 7 × 6 × 5 ÷ (4 × 3 × 2 × 1) = 70 種。答案是 70 種。"
+        ],
+        "zh-Hans": [
+          "看“交界”：第 1 盏的左边、每两盏相邻的灯之间、第 7 盏的右边，一共有 8 个位置。把两端外面都想成暗灯。",
+          "每一段亮灯都有一个“开始”交界（左暗右亮）和一个“结束”交界（左亮右暗）。两段亮刚好用到 4 个不同的交界，由左到右依次是：第一段开始、第一段结束、第二段开始、第二段结束。",
+          "反过来，从 8 个交界任选 4 个，由左到右依次当成这四个交界，就画出唯一一种两段亮：两个“开始、结束”之间至少有一盏亮灯，两段之间至少有一盏暗灯。所以两段亮的种数等于从 8 个位置选 4 个的种数。",
+          "从 8 个选 4 个有 8 × 7 × 6 × 5 ÷ (4 × 3 × 2 × 1) = 70 种。答案是 70 种。"
+        ],
+        "en": [
+          "Look at the \"boundaries\": the gap left of lamp 1, the 6 gaps between neighbouring lamps, and the gap right of lamp 7, 8 positions in all. Imagine unlit lamps beyond both ends.",
+          "Each lit block has a \"start\" boundary (off on the left, on on the right) and an \"end\" boundary (on on the left, off on the right). A two-block pattern uses exactly 4 different boundaries, in order from left to right: start 1, end 1, start 2, end 2.",
+          "Conversely, any 4 of the 8 boundaries, read left to right as these four, give exactly one two-block pattern: each start–end pair encloses at least one lit lamp and the blocks are separated by at least one unlit lamp. So the count equals the number of ways to choose 4 of the 8 positions.",
+          "Choosing 4 of 8 gives 8 × 7 × 6 × 5 ÷ (4 × 3 × 2 × 1) = 70. The answer is 70."
+        ],
+        "ja": [
+          "「境目」を考えます。1 個目の左、となり合う電灯の間の 6 か所、7 個目の右の合計 8 か所です。両はしの外側には消えた電灯があると考えます。",
+          "かたまりにはそれぞれ「始まり」の境目（左が消・右がつ）と「終わり」の境目（左がつ・右が消）があります。2 かたまり点灯ではちょうど 4 か所のちがう境目が使われ、左から順に「1 つ目の始まり・1 つ目の終わり・2 つ目の始まり・2 つ目の終わり」です。",
+          "逆に、8 か所から 4 か所を選び、左から順にこの 4 つの境目とすれば、2 かたまり点灯がちょうどひとつ決まります（始まりと終わりの間には 1 個以上ついた電灯があり、かたまりの間には 1 個以上消えた電灯がある）。よって、8 か所から 4 か所を選ぶ方法の数と同じです。",
+          "8 か所から 4 か所を選ぶ方法は 8 × 7 × 6 × 5 ÷ (4 × 3 × 2 × 1) = 70 通りです。答えは 70 通りです。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "70"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "combinatorics-grade7-foundation",
+        "notes": "亮燈恰成兩段 ↔ 在 8 個交界中選 4 個（開始、結束、開始、結束），一一對應得 C(8, 4)。掃過 /連成.{0,6}段|段.{0,10}亮|亮.{0,20}段/（2 題）、/燈.{0,40}(亮|暗).{0,40}幾種/（0 題）；最接近 logic_grade9_foundation_037，差異：既有題是不相鄰放球；本題數亮燈恰成兩段，用 8 個交界選 4 個的一一對應。"
+      }
+    },
+    {
+      "id": "combinatorics_grade7_foundation_062",
+      "reviewStatus": "ok",
+      "topic": "combinatorics",
+      "subtopic": "king_shortest_paths_with_downward_steps",
+      "tags": [
+        "c:permutation_combination",
+        "c:position_direction",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade7",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "西洋棋的國王每一步可以走到周圍緊鄰的 8 格之一（上、下、左、右或斜著走一格），不能走出棋盤。在 8 × 8 的棋盤上，國王從最下面一排的最左邊那一格出發，要走到「往右數第 5 格、往上數第 3 格」的那一格（也就是向右 5 格、向上 3 格的位置），而且要用最少的步數。用最少步數走到的走法一共有幾種？",
+        "zh-Hans": "国际象棋的国王每一步可以走到周围紧邻的 8 格之一（上、下、左、右或斜着走一格），不能走出棋盘。在 8 × 8 的棋盘上，国王从最下面一排的最左边那一格出发，要走到“往右数第 5 格、往上数第 3 格”的那一格（也就是向右 5 格、向上 3 格的位置），而且要用最少的步数。用最少步数走到的走法一共有几种？",
+        "en": "A chess king moves to one of the 8 neighbouring squares (up, down, left, right or diagonally one square) and may not leave the board. On an 8 × 8 board the king starts at the bottom-left square and must reach the square 5 to the right and 3 up, using as few moves as possible. How many different shortest routes are there?",
+        "ja": "チェスのキングは 1 手で周りの 8 マスのどれか（上下左右またはななめに 1 マス）に動け、盤の外には出られません。8 × 8 の盤で、キングは最下段のいちばん左のマスから、右へ 5 マス・上へ 3 マス進んだマスへ、できるだけ少ない手数で行きます。最少手数で行く行き方は全部で何通りありますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 14 種。",
+        "zh-Hans": "答案是 14 种。",
+        "en": "The answer is 14.",
+        "ja": "答えは 14 通りです。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "國王每一步最多往右移一格，要往右 5 格至少要 5 步；而 5 步做得到（例如先斜走 3 步再往右 2 步），所以最少是 5 步。",
+          "用 5 步時，每一步都必須往右一格，同時上下方向可以是「上一格」「不動」「下一格」。5 步的上下變化加起來要是 +3：可以是 3 次上、2 次不動，或 4 次上、1 次下（要 5 次以上的上下移動才可能有其他組合，但只有 5 步）。",
+          "3 次上、2 次不動：從 5 步中選 3 步往上，有 5 × 4 × 3 ÷ (3 × 2 × 1) = 10 種。4 次上、1 次下：往下的那一步有 5 個位置，但若第 1 步就往下，國王會走出最下面一排，不行，所以只有 4 種。",
+          "共有 10 + 4 = 14 種最少步數的走法。答案是 14 種。"
+        ],
+        "zh-Hans": [
+          "国王每一步最多往右移一格，要往右 5 格至少要 5 步；而 5 步做得到（例如先斜走 3 步再往右 2 步），所以最少是 5 步。",
+          "用 5 步时，每一步都必须往右一格，同时上下方向可以是“上一格”“不动”“下一格”。5 步的上下变化加起来要是 +3：可以是 3 次上、2 次不动，或 4 次上、1 次下（要 5 次以上的上下移动才可能有其他组合，但只有 5 步）。",
+          "3 次上、2 次不动：从 5 步中选 3 步往上，有 5 × 4 × 3 ÷ (3 × 2 × 1) = 10 种。4 次上、1 次下：往下的那一步有 5 个位置，但若第 1 步就往下，国王会走出最下面一排，不行，所以只有 4 种。",
+          "共有 10 + 4 = 14 种最少步数的走法。答案是 14 种。"
+        ],
+        "en": [
+          "Each move shifts the king at most one column right, so moving 5 columns needs at least 5 moves; 5 moves suffice (e.g. 3 diagonal moves then 2 to the right), so the minimum is 5.",
+          "In 5 moves every move must go one column right, while vertically each move is \"up 1\", \"level\" or \"down 1\". The vertical changes must total +3: either 3 ups and 2 levels, or 4 ups and 1 down (no other mix fits in 5 moves).",
+          "3 ups and 2 levels: choose which 3 of the 5 moves go up, 5 × 4 × 3 ÷ (3 × 2 × 1) = 10 ways. 4 ups and 1 down: the down move can be any of 5 positions, but if it is the first move the king would leave the bottom row, so only 4 ways.",
+          "In total there are 10 + 4 = 14 shortest routes. The answer is 14."
+        ],
+        "ja": [
+          "キングは 1 手で右へ多くても 1 マスなので、右へ 5 マス進むには少なくとも 5 手必要です。5 手でできる（たとえばななめ 3 手、右 2 手）ので最少は 5 手です。",
+          "5 手のとき、どの手も右へ 1 マス進み、たて方向は「上へ 1」「そのまま」「下へ 1」のどれかです。5 手のたての変化の合計が +3 なので、上 3 回・そのまま 2 回か、上 4 回・下 1 回のどちらかです（5 手ではほかの組み合わせはない）。",
+          "上 3 回・そのまま 2 回：5 手から上がる 3 手を選んで 5 × 4 × 3 ÷ (3 × 2 × 1) = 10 通り。上 4 回・下 1 回：下がる手は 5 か所ありえますが、1 手目に下がると盤の外に出るのでだめで、4 通りです。",
+          "最少手数の行き方は 10 + 4 = 14 通りです。答えは 14 通りです。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "14"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "combinatorics-grade7-foundation",
+        "notes": "國王最短路徑計數：最少步數由橫向決定，每步必右移，再對上下變化 +1、0、−1 分類，並扣掉走出棋盤的情形。掃過 /國王.{0,60}(最少|最短).{0,30}(走法|幾種)/（0 題）、/國王.{0,40}步/（1 題）；最接近 logic_grade4_foundation_071，差異：既有題只問國王的最少步數；本題數最少步數的走法有幾種，要看出每步都右移，並處理可以往下斜走但不能走出棋盤的情形。"
+      }
+    },
+    {
+      "id": "combinatorics_grade7_foundation_063",
+      "reviewStatus": "ok",
+      "topic": "combinatorics",
+      "subtopic": "largest_subset_no_difference_five_up_to_30",
+      "tags": [
+        "c:basic_counting",
+        "c:modular",
+        "m:extremal",
+        "m:construction"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade7",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "從 1 到 30 這 30 個整數中選出一些數，要求任意兩個選出的數相差都不是 5。最多可以選出幾個數？",
+        "zh-Hans": "从 1 到 30 这 30 个整数中选出一些数，要求任意两个选出的数相差都不是 5。最多可以选出几个数？",
+        "en": "Some numbers are chosen from the integers 1 to 30 so that no two chosen numbers differ by exactly 5. What is the largest possible number of chosen numbers?",
+        "ja": "1 から 30 までの 30 個の整数からいくつかを選びます。選んだ数のどの 2 つも、差がちょうど 5 になってはいけません。最も多くて何個選べますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 15 個。",
+        "zh-Hans": "答案是 15 个。",
+        "en": "The answer is 15.",
+        "ja": "答えは 15 個です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "相差 5 的兩數除以 5 的餘數相同，所以依餘數把 1～30 排成 5 條鏈，每條鏈每次加 5：1、6、11、16、21、26；2、7、12、17、22、27；⋯；5、10、15、20、25、30，每條 6 個數。相差 5 的兩數正好是同一條鏈裡相鄰的兩個。",
+          "上界：每條鏈的 6 個數可以配成相鄰的 3 對（例如 1 和 6、11 和 16、21 和 26），每一對最多選 1 個，所以每條鏈最多選 3 個，5 條鏈合計最多 15 個。",
+          "構造：選 1～5、11～15、21～25 這 15 個數。同一段裡的數相差不到 5；不同段的數相差至少 6，所以任兩個數都不相差 5。",
+          "上界 15 做得到，所以最多選 15 個。答案是 15 個。"
+        ],
+        "zh-Hans": [
+          "相差 5 的两数除以 5 的余数相同，所以依余数把 1～30 排成 5 条链，每条链每次加 5：1、6、11、16、21、26；2、7、12、17、22、27；…；5、10、15、20、25、30，每条 6 个数。相差 5 的两数正好是同一条链里相邻的两个。",
+          "上界：每条链的 6 个数可以配成相邻的 3 对（例如 1 和 6、11 和 16、21 和 26），每一对最多选 1 个，所以每条链最多选 3 个，5 条链合计最多 15 个。",
+          "构造：选 1～5、11～15、21～25 这 15 个数。同一段里的数相差不到 5；不同段的数相差至少 6，所以任两个数都不相差 5。",
+          "上界 15 做得到，所以最多选 15 个。答案是 15 个。"
+        ],
+        "en": [
+          "Two numbers differing by 5 leave the same remainder on division by 5, so arrange 1–30 into 5 chains, each going up by 5: 1, 6, 11, 16, 21, 26; 2, 7, 12, 17, 22, 27; …; 5, 10, 15, 20, 25, 30, six numbers each. Numbers differing by 5 are exactly neighbours in the same chain.",
+          "Upper bound: the 6 numbers of a chain split into 3 neighbouring pairs (e.g. 1 and 6, 11 and 16, 21 and 26), and at most one of each pair can be chosen, so at most 3 per chain and at most 15 in total.",
+          "Construction: choose 1–5, 11–15 and 21–25, 15 numbers. Numbers in the same block differ by less than 5, and numbers in different blocks differ by at least 6, so no two differ by 5.",
+          "The bound 15 is attained, so the maximum is 15. The answer is 15."
+        ],
+        "ja": [
+          "差が 5 の 2 数は 5 でわった余りが同じなので、1〜30 を余りごとに 5 ずつ増える 5 本の鎖に並べます：1、6、11、16、21、26／2、7、12、17、22、27／…／5、10、15、20、25、30 で、各 6 個です。差が 5 の 2 数は、同じ鎖のとなり同士です。",
+          "上限：各鎖の 6 個はとなり同士の 3 組（たとえば 1 と 6、11 と 16、21 と 26）に分けられ、各組から多くても 1 個なので、1 本の鎖から多くても 3 個、5 本で多くても 15 個です。",
+          "構成：1〜5、11〜15、21〜25 の 15 個を選びます。同じかたまりの数の差は 5 未満、ちがうかたまりの数の差は 6 以上なので、差が 5 になる 2 数はありません。",
+          "上限の 15 個が実現できるので、最多は 15 個です。答えは 15 個です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "15"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "combinatorics-grade7-foundation",
+        "notes": "禁止相差 5：依除以 5 的餘數排成 5 條長 6 的鏈，鏈內相鄰配對得上界 15，取 1～5、11～15、21～25 構造。掃過 /相差.{0,6}(不是|不等於|不能是) ?5|任(意)?兩個.{0,10}(相)?差.{0,10}(不是|不能)/（1 題）、/最多.{0,10}選出.{0,6}幾個/（2 題）；最接近 arithmetic_grade6_foundation_101，差異：既有題限制任兩數和不是 3 的倍數（按餘數分類取最大類）；本題限制差不是 5，要按除以 5 的餘數排成 6 個數的鏈，鏈內不能取相鄰，配對給上界再構造。"
+      }
     }
   ]
 }

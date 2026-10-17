@@ -5909,6 +5909,265 @@
         "reference": "logic-grade7-foundation",
         "notes": "斜對角也算相鄰的 3 × 3 四色塗法：每個 2 × 2 必須四色全用，先定左上 24 種，再看右下角的相容條件，只有 3/4 的組合可行。掃過 /(角|頂點).{0,20}(碰|相鄰|接觸).{0,40}(顏色|塗)|公共頂點/（2 題）、/3 × 3.{0,40}(塗|著色).{0,40}(不同|不可以同色|不能同色)/（0 題）；最接近 combinatorics_grade12_foundation_065，差異：既有題只要求有公共邊的格子不同色（2 × 3、三色）；本題斜對角也算相鄰，關鍵觀察是每個 2 × 2 必須四色全用，計數方式完全不同。"
       }
+    },
+    {
+      "id": "logic_grade7_foundation_069",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "timetable_earliest_arrival_late_start",
+      "tags": [
+        "c:graph_theory",
+        "c:logic_deduction",
+        "m:enumeration"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade7",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "某鐵路網有 A、B、C、D 四站，當天只有下列班車（轉車不必額外花時間，只要到站時刻不晚於下一班車的開車時刻就能接上）：A→B 有 8:00 開 8:40 到、8:30 開 9:10 到、9:00 開 9:40 到；A→C 有 8:10 開 9:30 到；B→C 有 8:50 開 9:20 到、9:20 開 9:50 到；B→D 有 9:15 開 10:30 到；C→D 有 9:35 開 10:20 到、10:00 開 10:40 到。小安 8:20 才到 A 站，他最早可以在幾點抵達 D 站？",
+        "zh-Hans": "某铁路网有 A、B、C、D 四站，当天只有下列班车（转车不必额外花时间，只要到站时刻不晚于下一班车的开车时刻就能接上）：A→B 有 8:00 开 8:40 到、8:30 开 9:10 到、9:00 开 9:40 到；A→C 有 8:10 开 9:30 到；B→C 有 8:50 开 9:20 到、9:20 开 9:50 到；B→D 有 9:15 开 10:30 到；C→D 有 9:35 开 10:20 到、10:00 开 10:40 到。小安 8:20 才到 A 站，他最早可以在几点抵达 D 站？",
+        "en": "A rail network has stations A, B, C, D, and that day only these trains run (changing trains takes no extra time; you can connect if you arrive no later than the next train departs): A→B departs 8:00 arrives 8:40, departs 8:30 arrives 9:10, departs 9:00 arrives 9:40; A→C departs 8:10 arrives 9:30; B→C departs 8:50 arrives 9:20, departs 9:20 arrives 9:50; B→D departs 9:15 arrives 10:30; C→D departs 9:35 arrives 10:20, departs 10:00 arrives 10:40. An only reaches station A at 8:20. What is the earliest time he can arrive at D?",
+        "ja": "ある鉄道には A・B・C・D の 4 駅があり、その日は次の列車だけが走ります（乗りかえに余分な時間はかからず、到着時刻が次の列車の発車時刻より遅くなければ乗りつげる）。A→B は 8:00 発 8:40 着、8:30 発 9:10 着、9:00 発 9:40 着。A→C は 8:10 発 9:30 着。B→C は 8:50 発 9:20 着、9:20 発 9:50 着。B→D は 9:15 発 10:30 着。C→D は 9:35 発 10:20 着、10:00 発 10:40 着。安くんは 8:20 にやっと A 駅に着きました。D 駅に最も早く着けるのは何時何分ですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 C：10:30。",
+        "zh-Hans": "答案是 C：10:30。",
+        "en": "The answer is C: 10:30.",
+        "ja": "答えは C：10:30です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "8:20 才到 A 站，8:00 開往 B 和 8:10 開往 C 的車都趕不上，只能搭 8:30 開往 B（9:10 到）或 9:00 開往 B（9:40 到）。",
+          "搭 8:30 的車 9:10 到 B 之後有兩條路：轉 9:15 開往 D 的車，10:30 到；或轉 9:20 開往 C 的車，9:50 到 C，這時 9:35 的車已開走，只能轉 10:00 的車，10:40 到。",
+          "搭 9:00 的車 9:40 才到 B，往 D、往 C 的車都已開走，當天到不了 D。所以最早 10:30 抵達。",
+          "A 的 10:15 沒有任何班車在這個時刻抵達 D；B 的 10:20 要搭 8:00 或 8:10 從 A 出發的車才辦得到，小安趕不上；D 的 10:40 是經 C 轉車的走法，比在 B 直接轉往 D 晚。答案是 C。"
+        ],
+        "zh-Hans": [
+          "8:20 才到 A 站，8:00 开往 B 和 8:10 开往 C 的车都赶不上，只能搭 8:30 开往 B（9:10 到）或 9:00 开往 B（9:40 到）。",
+          "搭 8:30 的车 9:10 到 B 之后有两条路：转 9:15 开往 D 的车，10:30 到；或转 9:20 开往 C 的车，9:50 到 C，这时 9:35 的车已开走，只能转 10:00 的车，10:40 到。",
+          "搭 9:00 的车 9:40 才到 B，往 D、往 C 的车都已开走，当天到不了 D。所以最早 10:30 抵达。",
+          "A 的 10:15 没有任何班车在这个时刻抵达 D；B 的 10:20 要搭 8:00 或 8:10 从 A 出发的车才办得到，小安赶不上；D 的 10:40 是经 C 转车的走法，比在 B 直接转往 D 晚。答案是 C。"
+        ],
+        "en": [
+          "Arriving at A at 8:20, An misses the 8:00 to B and the 8:10 to C, so he can only take the 8:30 to B (arr. 9:10) or the 9:00 to B (arr. 9:40).",
+          "After the 8:30 train reaches B at 9:10 there are two options: change to the 9:15 to D, arriving 10:30; or change to the 9:20 to C, reaching C at 9:50, when the 9:35 has left, so only the 10:00 is possible, arriving 10:40.",
+          "Taking the 9:00 he reaches B only at 9:40, after every train to D or C has left, so he cannot reach D that day. The earliest arrival is therefore 10:30.",
+          "A (10:15): no train arrives at D at that time. B (10:20) needs the 8:00 or 8:10 departure from A, which An misses. D (10:40) is the route via C, later than changing at B straight to D. The answer is C."
+        ],
+        "ja": [
+          "8:20 に A 駅に着いたので、8:00 発の B 行きと 8:10 発の C 行きには間に合わず、乗れるのは 8:30 発 B 行き（9:10 着）か 9:00 発 B 行き（9:40 着）だけです。",
+          "8:30 発で 9:10 に B に着いたあとは 2 通りです。9:15 発の D 行きに乗りかえて 10:30 着、または 9:20 発の C 行きで 9:50 に C に着きますが 9:35 発はもう出ているので 10:00 発に乗るしかなく 10:40 着です。",
+          "9:00 発だと B 着は 9:40 で、D 行きも C 行きももう出ているので、その日は D に着けません。よって最も早いのは 10:30 着です。",
+          "A の 10:15 に D に着く列車はありません。B の 10:20 は A を 8:00 か 8:10 に出る必要があり、安くんは間に合いません。D の 10:40 は C で乗りかえる行き方で、B で直接 D 行きに乗りかえるより遅いです。答えは C です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "multiple_choice",
+      "options": {
+        "A": {
+          "zh-Hant": "10:15",
+          "zh-Hans": "10:15",
+          "en": "10:15",
+          "ja": "10:15"
+        },
+        "B": {
+          "zh-Hant": "10:20",
+          "zh-Hans": "10:20",
+          "en": "10:20",
+          "ja": "10:20"
+        },
+        "C": {
+          "zh-Hant": "10:30",
+          "zh-Hans": "10:30",
+          "en": "10:30",
+          "ja": "10:30"
+        },
+        "D": {
+          "zh-Hant": "10:40",
+          "zh-Hans": "10:40",
+          "en": "10:40",
+          "ja": "10:40"
+        }
+      },
+      "correctAnswer": {
+        "type": "choice",
+        "value": "C"
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade7-foundation",
+        "notes": "時刻表上的最早抵達：晚到起點後，直覺的「先到 C 再轉」反而較晚，需逐一列舉可接的班車。掃過 /最早.{0,10}(到達|抵達)|轉車|轉乘/（1 題）、/時刻表|班次|發車/（3 題）；最接近 arithmetic_grade4_foundation_141，差異：既有題是單一路線等車；本題是多站時刻表的最早抵達，晚到後要比較兩種轉乘。"
+      }
+    },
+    {
+      "id": "logic_grade7_foundation_070",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "knight_knave_spy_three_statements",
+      "tags": [
+        "c:logic_deduction",
+        "m:casework",
+        "m:contradiction"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade7",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "甲、乙、丙三人之中，一人是永遠說真話的「誠實者」，一人是永遠說謊的「說謊者」，另一人是「間諜」，間諜有時說真話、有時說謊。甲說：「我是間諜。」乙說：「甲說的是真話。」丙說：「我不是間諜。」誰是間諜？",
+        "zh-Hans": "甲、乙、丙三人之中，一人是永远说真话的“诚实者”，一人是永远说谎的“说谎者”，另一人是“间谍”，间谍有时说真话、有时说谎。甲说：“我是间谍。”乙说：“甲说的是真话。”丙说：“我不是间谍。”谁是间谍？",
+        "en": "Among A, B and C, one is a truth-teller who always tells the truth, one is a liar who always lies, and one is a spy who sometimes tells the truth and sometimes lies. A says: \"I am the spy.\" B says: \"A is telling the truth.\" C says: \"I am not the spy.\" Who is the spy?",
+        "ja": "甲・乙・丙の 3 人のうち、1 人はいつも本当のことを言う「正直者」、1 人はいつもうそをつく「うそつき」、残りの 1 人は「スパイ」で、本当のことを言うこともうそをつくこともあります。甲「わたしがスパイだ。」乙「甲は本当のことを言っている。」丙「わたしはスパイではない。」スパイはだれですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 B：乙。",
+        "zh-Hans": "答案是 B：乙。",
+        "en": "The answer is B: B.",
+        "ja": "答えは B：乙です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "甲不可能是誠實者：誠實者不會說自己是間諜。所以甲是說謊者或間諜。",
+          "若甲是間諜：甲的話是真的，乙說「甲說真話」也是真的，乙不能是說謊者，間諜又已經是甲，所以乙是誠實者、丙是說謊者。但丙說「我不是間諜」是真話，說謊者不能說真話，矛盾。",
+          "若甲是說謊者：甲的話是假的（甲確實不是間諜），乙說「甲說真話」是假話，乙不能是誠實者，只能是間諜；丙就是誠實者，「我不是間諜」是真話，全部吻合。",
+          "所以甲是說謊者、乙是間諜、丙是誠實者，而且這是唯一的可能。A 在第 2 步已被推翻；若丙是間諜，甲只能是說謊者、乙是誠實者，但乙說「甲說真話」就成了假話，矛盾，所以 C 不對；條件足以確定，D 也不對。答案是 B。"
+        ],
+        "zh-Hans": [
+          "甲不可能是诚实者：诚实者不会说自己是间谍。所以甲是说谎者或间谍。",
+          "若甲是间谍：甲的话是真的，乙说“甲说真话”也是真的，乙不能是说谎者，间谍又已经是甲，所以乙是诚实者、丙是说谎者。但丙说“我不是间谍”是真话，说谎者不能说真话，矛盾。",
+          "若甲是说谎者：甲的话是假的（甲确实不是间谍），乙说“甲说真话”是假话，乙不能是诚实者，只能是间谍；丙就是诚实者，“我不是间谍”是真话，全部吻合。",
+          "所以甲是说谎者、乙是间谍、丙是诚实者，而且这是唯一的可能。A 在第 2 步已被推翻；若丙是间谍，甲只能是说谎者、乙是诚实者，但乙说“甲说真话”就成了假话，矛盾，所以 C 不对；条件足以确定，D 也不对。答案是 B。"
+        ],
+        "en": [
+          "A cannot be the truth-teller, who would never claim to be the spy. So A is the liar or the spy.",
+          "If A is the spy, A’s statement is true, so B’s statement is true too; B cannot be the liar and the spy is taken, so B is the truth-teller and C the liar. But C’s \"I am not the spy\" would then be true, which a liar cannot say: contradiction.",
+          "If A is the liar, A’s statement is false (A is indeed not the spy), so B’s statement is false; B cannot be the truth-teller and must be the spy. Then C is the truth-teller and \"I am not the spy\" is true. Everything fits.",
+          "So A is the liar, B the spy and C the truth-teller, and this is the only possibility. Option A was ruled out in step 2; if C were the spy, A would be the liar and B the truth-teller, but then B’s statement would be false, a contradiction, so C is wrong; the facts do determine the spy, so D is wrong. The answer is B."
+        ],
+        "ja": [
+          "甲は正直者ではありえません。正直者は自分がスパイだとは言いません。よって甲はうそつきかスパイです。",
+          "甲がスパイなら甲の言葉は本当で、乙の「甲は本当のことを言っている」も本当です。乙はうそつきではなく、スパイは甲なので乙は正直者、丙はうそつきです。しかし丙の「わたしはスパイではない」は本当になり、うそつきが本当のことを言うことになって矛盾します。",
+          "甲がうそつきなら甲の言葉はうそ（甲はスパイではない）で、乙の言葉もうそです。乙は正直者ではなく、スパイしかありません。すると丙は正直者で、「わたしはスパイではない」は本当で、すべて合います。",
+          "よって甲がうそつき、乙がスパイ、丙が正直者で、これ以外の可能性はありません。A は手順 2 で否定されました。丙がスパイなら甲はうそつき、乙は正直者ですが、乙の言葉がうそになって矛盾するので C もちがいます。条件から決まるので D もちがいます。答えは B です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "multiple_choice",
+      "options": {
+        "A": {
+          "zh-Hant": "甲",
+          "zh-Hans": "甲",
+          "en": "A",
+          "ja": "甲"
+        },
+        "B": {
+          "zh-Hant": "乙",
+          "zh-Hans": "乙",
+          "en": "B",
+          "ja": "乙"
+        },
+        "C": {
+          "zh-Hant": "丙",
+          "zh-Hans": "丙",
+          "en": "C",
+          "ja": "丙"
+        },
+        "D": {
+          "zh-Hant": "條件不足，無法確定",
+          "zh-Hans": "条件不足，无法确定",
+          "en": "It cannot be determined",
+          "ja": "決められない"
+        }
+      },
+      "correctAnswer": {
+        "type": "choice",
+        "value": "B"
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade7-foundation",
+        "notes": "誠實者、說謊者、間諜三角色：先排除甲為誠實者，再對甲的兩種身分分類，間諜唯一確定為乙。掃過 /間諜/（0 題）、/永遠說真話.{0,40}永遠說謊|誠實者.{0,40}說謊者/（10 題）；最接近 logic_grade4_foundation_041，差異：既有題只有誠實者與說謊者；本題多了可真可假的間諜，三種身分各一人，要分類排除。"
+      }
+    },
+    {
+      "id": "logic_grade7_foundation_071",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "doubling_smaller_box_parity_never_equal",
+      "tags": [
+        "c:logic_deduction",
+        "m:invariant"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade7",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "30 顆彈珠分裝在甲、乙兩個盒子裡，兩盒都至少有 1 顆，而且兩盒的顆數不同。每一次操作：從比較多的那一盒拿出「和比較少的那一盒一樣多」的彈珠，放進比較少的那一盒（例如 12 顆和 18 顆，操作後變成 24 顆和 6 顆）。只要某一次操作後兩盒一樣多，就停止。甲盒一開始的顆數可以是 1 到 29 之中 15 以外的任何一個數。在這 28 種開始的情形之中，有幾種會在某一次操作後變成兩盒一樣多？",
+        "zh-Hans": "30 颗弹珠分装在甲、乙两个盒子里，两盒都至少有 1 颗，而且两盒的颗数不同。每一次操作：从比较多的那一盒拿出“和比较少的那一盒一样多”的弹珠，放进比较少的那一盒（例如 12 颗和 18 颗，操作后变成 24 颗和 6 颗）。只要某一次操作后两盒一样多，就停止。甲盒一开始的颗数可以是 1 到 29 之中 15 以外的任何一个数。在这 28 种开始的情形之中，有几种会在某一次操作后变成两盒一样多？",
+        "en": "30 marbles are split between boxes A and B; each box has at least 1 marble and the two counts are different. In each move, take from the fuller box exactly as many marbles as the other box holds and put them into the other box (e.g. 12 and 18 become 24 and 6). The process stops as soon as the two boxes are equal after a move. Box A may start with any number from 1 to 29 except 15. Of these 28 starting situations, in how many do the boxes become equal after some move?",
+        "ja": "30 個のビー玉を甲・乙 2 つの箱に分けて入れます。どちらの箱にも 1 個以上あり、個数はちがいます。1 回の操作では、多いほうの箱から「少ないほうの箱と同じ個数」のビー玉を取り出し、少ないほうの箱に入れます（たとえば 12 個と 18 個は 24 個と 6 個になる）。ある操作のあとで 2 つの箱が同じ個数になったら終わりです。甲の箱の最初の個数は 1 から 29 のうち 15 以外のどれでもよいとします。この 28 通りの始め方のうち、ある操作のあとで同じ個数になるものは何通りありますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 0 種。",
+        "zh-Hans": "答案是 0 种。",
+        "en": "The answer is 0.",
+        "ja": "答えは 0 通りです。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "兩盒一樣多時，每盒都是 30 ÷ 2 = 15 顆，是奇數。",
+          "看任何一次操作之後：比較少的那一盒變成原來的 2 倍，一定是偶數；總數 30 是偶數，所以另一盒是 30 減去一個偶數，也是偶數。",
+          "所以不管一開始是多少，每一次操作之後兩盒都是偶數顆，永遠不會出現奇數的 15 顆，也就永遠不會一樣多。",
+          "例如從 5 顆開始：(5, 25) → (10, 20) → (20, 10) → (10, 20) → ⋯ 一直循環。28 種開始情形全部都不會變成一樣多，答案是 0 種。"
+        ],
+        "zh-Hans": [
+          "两盒一样多时，每盒都是 30 ÷ 2 = 15 颗，是奇数。",
+          "看任何一次操作之后：比较少的那一盒变成原来的 2 倍，一定是偶数；总数 30 是偶数，所以另一盒是 30 减去一个偶数，也是偶数。",
+          "所以不管一开始是多少，每一次操作之后两盒都是偶数颗，永远不会出现奇数的 15 颗，也就永远不会一样多。",
+          "例如从 5 颗开始：(5, 25) → (10, 20) → (20, 10) → (10, 20) → … 一直循环。28 种开始情形全部都不会变成一样多，答案是 0 种。"
+        ],
+        "en": [
+          "If the boxes are equal, each holds 30 ÷ 2 = 15 marbles, an odd number.",
+          "Look at the result of any move: the smaller box is doubled, so it becomes even; the total 30 is even, so the other box, 30 minus an even number, is even too.",
+          "So whatever the start, after every move both boxes hold an even number of marbles; the odd count 15 never appears, so the boxes are never equal.",
+          "For example, starting from 5: (5, 25) → (10, 20) → (20, 10) → (10, 20) → ⋯ cycles forever. None of the 28 starts ever becomes equal, so the answer is 0."
+        ],
+        "ja": [
+          "2 つが同じ個数なら、どちらも 30 ÷ 2 = 15 個で、奇数です。",
+          "どの操作のあとでも、少ないほうの箱は 2 倍になるので必ず偶数です。全体の 30 は偶数なので、もう一方の箱も 30 から偶数を引いた偶数です。",
+          "よって始めがいくつでも、操作のあとは 2 つの箱がいつも偶数個で、奇数の 15 個にはならず、同じ個数になることはありません。",
+          "たとえば 5 個から始めると (5, 25) → (10, 20) → (20, 10) → (10, 20) → ⋯ とくり返します。28 通りすべてで同じ個数にはならないので、答えは 0 通りです。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "0"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade7-foundation",
+        "notes": "「把少的那盒加倍」之後兩盒必為偶數（總數 30 為偶數），奇數 15 永遠不會出現：奇偶不變量。掃過 /較少的.{0,30}(加倍|變成兩倍|變成 2 倍)|(兩倍|2 倍).{0,30}較多/（1 題）、/彈珠.{0,60}(操作|每一次)/（1 題）；最接近 arithmetic_grade3_foundation_006，差異：既有題是一次移動使兩盒相等；本題反覆把少的加倍，用奇偶不變量證明永遠不會相等。"
+      }
     }
   ]
 }

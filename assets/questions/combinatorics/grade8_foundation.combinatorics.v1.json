@@ -4847,6 +4847,316 @@
         "reference": "combinatorics-grade8-foundation",
         "notes": "數字嚴格遞增的四位偶數：等於從 1～9 選 4 個數字且最大者為偶數，依個位 4、6、8 分類計組合數。掃過 /遞增.{0,40}(偶數|奇數)|(一個比一個大).{0,40}(偶數|奇數)/（0 題）、/四位數.{0,40}(遞增|一個比一個大)/（1 題）；最接近 combinatorics_grade10_foundation_035，差異：既有題只數數字嚴格遞增的四位數（直接 C(9, 4)）；本題再要求是偶數，關鍵是偶數條件落在最大的數字上，要依個位分類並排除個位是 2。"
       }
+    },
+    {
+      "id": "combinatorics_grade8_foundation_058",
+      "reviewStatus": "ok",
+      "topic": "combinatorics",
+      "subtopic": "five_team_tournaments_all_two_wins",
+      "tags": [
+        "c:graph_theory",
+        "c:basic_counting",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade8",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "甲、乙、丙、丁、戊 5 支球隊進行單循環賽，每兩隊恰好比賽一場，每場都分出勝負（沒有平手）。比賽結束後，5 隊都恰好贏了 2 場。把 10 場比賽分別由誰獲勝都列出來，這樣的勝負結果一共有幾種？",
+        "zh-Hans": "甲、乙、丙、丁、戊 5 支球队进行单循环赛，每两队恰好比赛一场，每场都分出胜负（没有平局）。比赛结束后，5 队都恰好赢了 2 场。把 10 场比赛分别由谁获胜都列出来，这样的胜负结果一共有几种？",
+        "en": "Five teams A, B, C, D, E play a round robin: each pair meets exactly once and every match has a winner (no draws). At the end, every team has won exactly 2 matches. Listing the winner of each of the 10 matches, how many such sets of results are possible?",
+        "ja": "甲・乙・丙・丁・戊の 5 チームが総当たり戦を行い、どの 2 チームもちょうど 1 試合ずつ戦い、どの試合も勝敗がつきます（引き分けなし）。終わってみると、5 チームとも勝ちはちょうど 2 つでした。10 試合それぞれの勝者を並べた勝敗の結果は、全部で何通りありますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 24 種。",
+        "zh-Hans": "答案是 24 种。",
+        "en": "The answer is 24.",
+        "ja": "答えは 24 通りです。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "先看甲：甲贏 2 場、輸 2 場，從另外 4 隊中選出甲打贏的 2 隊，有 4 × 3 ÷ 2 = 6 種。以甲打贏乙、丙，輸給丁、戊為例，其他 5 種只是把隊名換一換，算法相同。",
+          "這時乙、丙各輸 1 場，在乙、丙、丁、戊之間的 6 場比賽裡要各再贏 2 場；丁、戊各贏 1 場，要各再贏 1 場。合計 2 + 2 + 1 + 1 = 6，正好是這 6 場。",
+          "看乙對丙。若乙贏，乙還要在對丁、對戊中再贏 1 場（2 種選法）；丙輸了這場，必須贏丁和戊。乙贏丁、輸戊時，丁已輸乙、丙，必須贏戊；乙贏戊、輸丁時，戊必須贏丁。兩種都檢查得通，所以乙贏丙有 2 種；同理丙贏乙也有 2 種，共 4 種。",
+          "每一種「甲打贏哪兩隊」都對應 4 種，共 6 × 4 = 24 種。答案是 24 種。"
+        ],
+        "zh-Hans": [
+          "先看甲：甲赢 2 场、输 2 场，从另外 4 队中选出甲打赢的 2 队，有 4 × 3 ÷ 2 = 6 种。以甲打赢乙、丙，输给丁、戊为例，其他 5 种只是把队名换一换，算法相同。",
+          "这时乙、丙各输 1 场，在乙、丙、丁、戊之间的 6 场比赛里要各再赢 2 场；丁、戊各赢 1 场，要各再赢 1 场。合计 2 + 2 + 1 + 1 = 6，正好是这 6 场。",
+          "看乙对丙。若乙赢，乙还要在对丁、对戊中再赢 1 场（2 种选法）；丙输了这场，必须赢丁和戊。乙赢丁、输戊时，丁已输乙、丙，必须赢戊；乙赢戊、输丁时，戊必须赢丁。两种都检查得通，所以乙赢丙有 2 种；同理丙赢乙也有 2 种，共 4 种。",
+          "每一种“甲打赢哪两队”都对应 4 种，共 6 × 4 = 24 种。答案是 24 种。"
+        ],
+        "en": [
+          "Start with A: A wins 2 and loses 2, and the 2 teams A beats can be chosen in 4 × 3 ÷ 2 = 6 ways. Take A beating B and C and losing to D and E; the other 5 cases are the same with the names relabelled.",
+          "Now B and C have one loss each and must each win 2 of the 6 matches among B, C, D, E; D and E have one win each and need 1 more each. The total 2 + 2 + 1 + 1 = 6 is exactly those 6 matches.",
+          "Consider B vs C. If B wins, B needs 1 more win against D or E (2 choices), and C, having lost, must beat both D and E. If B beats D and loses to E, then D (beaten by B and C) must beat E; if B beats E and loses to D, then E must beat D. Both check out, so \"B beats C\" gives 2 ways; likewise \"C beats B\" gives 2, for 4 in all.",
+          "Each of the 6 choices of the two teams A beats gives 4 completions, so there are 6 × 4 = 24 results. The answer is 24."
+        ],
+        "ja": [
+          "まず甲を見ます。甲は 2 勝 2 敗で、甲が勝つ 2 チームの選び方は 4 × 3 ÷ 2 = 6 通りです。甲が乙・丙に勝ち、丁・戊に負けた場合を考えます。ほかの 5 通りもチーム名を入れかえるだけで同じです。",
+          "このとき乙・丙は 1 敗ずつで、乙・丙・丁・戊の間の 6 試合でそれぞれあと 2 勝、丁・戊は 1 勝ずつでそれぞれあと 1 勝が必要です。合計 2 + 2 + 1 + 1 = 6 で、ちょうどこの 6 試合分です。",
+          "乙対丙を見ます。乙が勝つと、乙は丁戦・戊戦であと 1 勝（2 通り）、負けた丙は丁と戊の両方に勝たなければなりません。乙が丁に勝ち戊に負けるなら、乙・丙に負けた丁は戊に勝つ必要があり、乙が戊に勝ち丁に負けるなら戊が丁に勝つ必要があります。どちらも成り立つので乙の勝ちで 2 通り、同様に丙の勝ちで 2 通り、合わせて 4 通りです。",
+          "甲が勝つ 2 チームの選び方 6 通りのそれぞれに 4 通りあるので、6 × 4 = 24 通りです。答えは 24 通りです。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "24"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "combinatorics-grade8-foundation",
+        "notes": "5 隊各 2 勝的循環賽結果數：先定甲勝哪兩隊（6 種），剩下 6 場的勝場需求被迫決定，只剩乙丙勝負與一個選擇（4 種）。掃過 /單循環.{0,60}(勝|贏).{0,30}(幾種|多少種)/（0 題）、/都恰好(贏|勝)了? ?\\d ?場/（0 題）；最接近 logic_grade12_foundation_062，差異：既有題問循環賽一定成立的性質；本題計數 5 隊各 2 勝的勝負結果，6 × 4 = 24。"
+      }
+    },
+    {
+      "id": "combinatorics_grade8_foundation_059",
+      "reviewStatus": "ok",
+      "topic": "combinatorics",
+      "subtopic": "two_by_four_coloring_no_monochrome_block",
+      "tags": [
+        "c:inclusion_exclusion",
+        "c:basic_counting",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade8",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一個 2 列 4 行的方格表（2 個橫排，每排 4 格）共 8 格，每一格塗紅色或藍色。由相鄰兩行組成的 2 × 2 區塊一共有 3 個（第 1、2 行，第 2、3 行，第 3、4 行）。要求這 3 個區塊都不能 4 格同色。塗法一共有幾種？",
+        "zh-Hans": "一个 2 行 4 列的方格表（2 个横排，每排 4 格）共 8 格，每一格涂红色或蓝色。由相邻两列组成的 2 × 2 区块一共有 3 个（第 1、2 列，第 2、3 列，第 3、4 列）。要求这 3 个区块都不能 4 格同色。涂法一共有几种？",
+        "en": "A grid with 2 rows and 4 columns has 8 cells, each painted red or blue. There are 3 blocks of size 2 × 2 formed by two neighbouring columns (columns 1–2, 2–3, 3–4). None of these 3 blocks may have all 4 cells the same colour. How many colourings are there?",
+        "ja": "2 行 4 列（横 2 段、各段 4 マス）の 8 マスのマス目があり、各マスを赤か青でぬります。となり合う 2 列でできる 2 × 2 のブロックは 3 つ（1・2 列、2・3 列、3・4 列）あります。この 3 つのブロックのどれも 4 マスが同じ色になってはいけません。ぬり方は全部で何通りありますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 178 種。",
+        "zh-Hans": "答案是 178 种。",
+        "en": "The answer is 178.",
+        "ja": "答えは 178 通りです。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "不加限制共有 2⁸ = 256 種塗法。用排容原理扣掉「至少有一個區塊 4 格同色」的；設第 1、2、3 個區塊同色的情形分別是 A₁、A₂、A₃。",
+          "單一區塊同色：區塊的 4 格選一種顏色（2 種），其餘 4 格任意（2⁴ = 16 種），所以每個 Aᵢ 有 32 種，三個合計 96。",
+          "兩個區塊同色：相鄰的區塊（1 和 2、2 和 3）共用 2 格，連起來的 6 格必須同色，剩下 2 格任意，各 2 × 4 = 8 種；區塊 1 和 3 沒有共用格子，各自選顏色，2 × 2 = 4 種。三個區塊都同色就是 8 格全同色，2 種。",
+          "至少一個區塊同色的有 96 − (8 + 8 + 4) + 2 = 78 種，所以符合要求的有 256 − 78 = 178 種。答案是 178 種。"
+        ],
+        "zh-Hans": [
+          "不加限制共有 2⁸ = 256 种涂法。用容斥原理扣掉“至少有一个区块 4 格同色”的；设第 1、2、3 个区块同色的情形分别是 A₁、A₂、A₃。",
+          "单一区块同色：区块的 4 格选一种颜色（2 种），其余 4 格任意（2⁴ = 16 种），所以每个 Aᵢ 有 32 种，三个合计 96。",
+          "两个区块同色：相邻的区块（1 和 2、2 和 3）共用 2 格，连起来的 6 格必须同色，剩下 2 格任意，各 2 × 4 = 8 种；区块 1 和 3 没有共用格子，各自选颜色，2 × 2 = 4 种。三个区块都同色就是 8 格全同色，2 种。",
+          "至少一个区块同色的有 96 − (8 + 8 + 4) + 2 = 78 种，所以符合要求的有 256 − 78 = 178 种。答案是 178 种。"
+        ],
+        "en": [
+          "Without restriction there are 2⁸ = 256 colourings. Use inclusion–exclusion to remove those with at least one monochrome block; let A₁, A₂, A₃ be the colourings in which block 1, 2, 3 is monochrome.",
+          "One block monochrome: choose its colour (2 ways) and colour the other 4 cells freely (2⁴ = 16 ways), so each Aᵢ has 32 colourings, 96 in total.",
+          "Two blocks monochrome: neighbouring blocks (1 and 2, or 2 and 3) share 2 cells, so the 6 cells they cover must be one colour and the other 2 cells are free, 2 × 4 = 8 ways each; blocks 1 and 3 share nothing and pick colours independently, 2 × 2 = 4 ways. All three monochrome means all 8 cells one colour: 2 ways.",
+          "Colourings with at least one monochrome block: 96 − (8 + 8 + 4) + 2 = 78, so the valid colourings number 256 − 78 = 178. The answer is 178."
+        ],
+        "ja": [
+          "制限なしでは 2⁸ = 256 通りです。包除原理で「少なくとも 1 つのブロックが同じ色」のものを引きます。ブロック 1・2・3 が同じ色になる場合をそれぞれ A₁、A₂、A₃ とします。",
+          "1 つのブロックが同じ色：その色を選び（2 通り）、残り 4 マスは自由（2⁴ = 16 通り）なので、各 Aᵢ は 32 通り、3 つで 96 です。",
+          "2 つのブロックが同じ色：となり合うブロック（1 と 2、2 と 3）は 2 マスを共有するので、合わせた 6 マスが同じ色で残り 2 マスは自由、それぞれ 2 × 4 = 8 通りです。ブロック 1 と 3 は共有マスがなく、それぞれ色を選んで 2 × 2 = 4 通りです。3 つとも同じ色なら 8 マス全部同じ色で 2 通りです。",
+          "少なくとも 1 つのブロックが同じ色のものは 96 − (8 + 8 + 4) + 2 = 78 通りなので、条件に合うのは 256 − 78 = 178 通りです。答えは 178 通りです。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "178"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "combinatorics-grade8-foundation",
+        "notes": "禁止 2 × 2 區塊同色：三個區塊的排容，相鄰區塊共用格子、隔開的區塊不共用，交集大小不同。掃過 /2 × 2.{0,40}(同色|同一種顏色|顏色都一樣)/（0 題）、/區塊.{0,30}同色/（0 題）；最接近 combinatorics_grade11_foundation_005，差異：既有題要求每列每行至少一紅；本題禁止 2 × 2 區塊同色，三個區塊排容且交集大小不同。"
+      }
+    },
+    {
+      "id": "combinatorics_grade8_foundation_060",
+      "reviewStatus": "ok",
+      "topic": "combinatorics",
+      "subtopic": "three_white_balls_drawn_consecutively_probability",
+      "tags": [
+        "c:probability",
+        "c:permutation_combination",
+        "m:bijection"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade8",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "袋子裡有 4 顆紅球和 3 顆白球，除了顏色之外完全相同。把球一顆一顆隨機取出、不放回，直到全部取完。3 顆白球是「連續」取出的（中間沒有夾著紅球）的機率是多少？",
+        "zh-Hans": "袋子里有 4 个红球和 3 个白球，除了颜色之外完全相同。把球一个一个随机取出、不放回，直到全部取完。3 个白球是“连续”取出的（中间没有夹着红球）的概率是多少？",
+        "en": "A bag holds 4 red balls and 3 white balls, identical except for colour. The balls are drawn one at a time at random without replacement until the bag is empty. What is the probability that the 3 white balls are drawn consecutively (with no red ball between them)?",
+        "ja": "袋の中に赤玉 4 個と白玉 3 個が入っていて、色以外はまったく同じです。玉を 1 個ずつ無作為に取り出し、もどさずに全部取り出します。3 個の白玉が「続けて」（間に赤玉をはさまずに）取り出される確率はいくらですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 A：1/7。",
+        "zh-Hans": "答案是 A：1/7。",
+        "en": "The answer is A: 1/7.",
+        "ja": "答えは A：1/7です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "只看 7 次取球之中哪 3 次取到白球。從 7 個位置選 3 個給白球，有 7 × 6 × 5 ÷ (3 × 2 × 1) = 35 種，而且每一種的機會都一樣。",
+          "3 顆白球連續，就是佔了連續的 3 個位置：第 1～3、2～4、3～5、4～6、5～7 次，共 5 種。",
+          "所求機率是 5 ÷ 35 = 1/7。",
+          "B 的 1/35 只算了「前 3 次都是白球」這一種位置；C 的 6/35 把 3 顆白球的先後順序 3 × 2 × 1 = 6 乘在連續的情形上，總數卻沒有一起乘（若都乘就是 30/210 = 1/7）；D 的 5/7 把 5 種連續位置直接除以 7 次取球，分母用錯。答案是 A。"
+        ],
+        "zh-Hans": [
+          "只看 7 次取球之中哪 3 次取到白球。从 7 个位置选 3 个给白球，有 7 × 6 × 5 ÷ (3 × 2 × 1) = 35 种，而且每一种的机会都一样。",
+          "3 个白球连续，就是占了连续的 3 个位置：第 1～3、2～4、3～5、4～6、5～7 次，共 5 种。",
+          "所求概率是 5 ÷ 35 = 1/7。",
+          "B 的 1/35 只算了“前 3 次都是白球”这一种位置；C 的 6/35 把 3 个白球的先后顺序 3 × 2 × 1 = 6 乘在连续的情形上，总数却没有一起乘（若都乘就是 30/210 = 1/7）；D 的 5/7 把 5 种连续位置直接除以 7 次取球，分母用错。答案是 A。"
+        ],
+        "en": [
+          "Look only at which 3 of the 7 draws are white. Choosing 3 of 7 positions gives 7 × 6 × 5 ÷ (3 × 2 × 1) = 35 possibilities, all equally likely.",
+          "The 3 whites are consecutive when they occupy 3 consecutive positions: draws 1–3, 2–4, 3–5, 4–6 or 5–7, i.e. 5 possibilities.",
+          "The probability is 5 ÷ 35 = 1/7.",
+          "B (1/35) counts only the case \"first 3 draws white\"; C (6/35) multiplies the consecutive cases by the 3 × 2 × 1 = 6 orders of the whites but not the total (doing both gives 30/210 = 1/7); D (5/7) divides the 5 consecutive placements by the 7 draws, using the wrong denominator. The answer is A."
+        ],
+        "ja": [
+          "7 回の取り出しのうちどの 3 回が白かだけを考えます。7 か所から 3 か所を選ぶ方法は 7 × 6 × 5 ÷ (3 × 2 × 1) = 35 通りで、どれも同じ確からしさです。",
+          "3 個の白玉が続くのは、続いた 3 か所を占めるとき、つまり 1〜3、2〜4、3〜5、4〜6、5〜7 回目の 5 通りです。",
+          "求める確率は 5 ÷ 35 = 1/7 です。",
+          "B の 1/35 は「最初の 3 回が白」の 1 通りしか数えていません。C の 6/35 は白玉の順番 3 × 2 × 1 = 6 を続く場合にだけかけ、全体にはかけていません（両方にかければ 30/210 = 1/7）。D の 5/7 は 5 通りを取り出し回数の 7 でわっていて、分母がちがいます。答えは A です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "multiple_choice",
+      "options": {
+        "A": {
+          "zh-Hant": "1/7",
+          "zh-Hans": "1/7",
+          "en": "1/7",
+          "ja": "1/7"
+        },
+        "B": {
+          "zh-Hant": "1/35",
+          "zh-Hans": "1/35",
+          "en": "1/35",
+          "ja": "1/35"
+        },
+        "C": {
+          "zh-Hant": "6/35",
+          "zh-Hans": "6/35",
+          "en": "6/35",
+          "ja": "6/35"
+        },
+        "D": {
+          "zh-Hant": "5/7",
+          "zh-Hans": "5/7",
+          "en": "5/7",
+          "ja": "5/7"
+        }
+      },
+      "correctAnswer": {
+        "type": "choice",
+        "value": "A"
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "combinatorics-grade8-foundation",
+        "notes": "不放回取完：只看白球所在的 3 個位置（35 種等可能），連續的位置有 5 種。掃過 /白球.{0,40}連續|連續.{0,20}(摸出|取出)/（2 題）、/不放回.{0,40}(全部|取完)/（0 題）；最接近 combinatorics_grade9_foundation_048，差異：既有題用對稱性求第 3 次取紅；本題只看白球位置，求 3 顆白球相鄰的機率。"
+      }
+    },
+    {
+      "id": "combinatorics_grade8_foundation_061",
+      "reviewStatus": "ok",
+      "topic": "combinatorics",
+      "subtopic": "two_by_five_shading_no_shared_edge",
+      "tags": [
+        "c:recurrence",
+        "c:basic_counting",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade8",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一條 2 列 5 行的方格紙（2 個橫排，每排 5 格）共有 10 格。要把其中一些格子塗黑（也可以一格都不塗），但任何兩個塗黑的格子都不能有公共邊（只碰到角可以）。塗法一共有幾種？",
+        "zh-Hans": "一条 2 行 5 列的方格纸（2 个横排，每排 5 格）共有 10 格。要把其中一些格子涂黑（也可以一格都不涂），但任何两个涂黑的格子都不能有公共边（只碰到角可以）。涂法一共有几种？",
+        "en": "A strip of grid paper with 2 rows and 5 columns has 10 cells. Some cells (possibly none) are shaded black, but no two shaded cells may share an edge (touching at a corner is fine). How many shadings are there?",
+        "ja": "2 行 5 列（横 2 段、各段 5 マス）、全部で 10 マスの細長いマス目があります。いくつかのマスを黒くぬります（1 マスもぬらなくてもよい）が、黒いマスどうしが辺を共有してはいけません（角だけならよい）。ぬり方は全部で何通りありますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 99 種。",
+        "zh-Hans": "答案是 99 种。",
+        "en": "The answer is 99.",
+        "ja": "答えは 99 通りです。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "每一行（直的 2 格）上下相鄰，最多塗 1 格，所以每一行只有三種狀態：不塗、只塗上格、只塗下格。相鄰兩行之間，上格不能都塗、下格也不能都塗。",
+          "設前 n 行的塗法中，第 n 行分別是「不塗」「只塗上格」「只塗下格」的有 Eₙ、Tₙ、Bₙ 種。第 n 行不塗時前一行隨意：Eₙ = Eₙ₋₁ + Tₙ₋₁ + Bₙ₋₁；第 n 行塗上格時前一行不能塗上格：Tₙ = Eₙ₋₁ + Bₙ₋₁；同理 Bₙ = Eₙ₋₁ + Tₙ₋₁。",
+          "從第 1 行 (E, T, B) = (1, 1, 1) 開始依序算：第 2 行 (3, 2, 2)，第 3 行 (7, 5, 5)，第 4 行 (17, 12, 12)，第 5 行 (41, 29, 29)。",
+          "塗法共 41 + 29 + 29 = 99 種。答案是 99 種。"
+        ],
+        "zh-Hans": [
+          "每一列（竖的 2 格）上下相邻，最多涂 1 格，所以每一列只有三种状态：不涂、只涂上格、只涂下格。相邻两列之间，上格不能都涂、下格也不能都涂。",
+          "设前 n 列的涂法中，第 n 列分别是“不涂”“只涂上格”“只涂下格”的有 Eₙ、Tₙ、Bₙ 种。第 n 列不涂时前一列随意：Eₙ = Eₙ₋₁ + Tₙ₋₁ + Bₙ₋₁；第 n 列涂上格时前一列不能涂上格：Tₙ = Eₙ₋₁ + Bₙ₋₁；同理 Bₙ = Eₙ₋₁ + Tₙ₋₁。",
+          "从第 1 列 (E, T, B) = (1, 1, 1) 开始依次算：第 2 列 (3, 2, 2)，第 3 列 (7, 5, 5)，第 4 列 (17, 12, 12)，第 5 列 (41, 29, 29)。",
+          "涂法共 41 + 29 + 29 = 99 种。答案是 99 种。"
+        ],
+        "en": [
+          "The two cells of each column share an edge, so at most one is shaded: each column is in one of three states, empty, top only, or bottom only. For neighbouring columns, the two top cells cannot both be shaded, nor the two bottom cells.",
+          "Let Eₙ, Tₙ, Bₙ count the shadings of the first n columns whose n-th column is empty, top only, bottom only. If column n is empty the previous column is free: Eₙ = Eₙ₋₁ + Tₙ₋₁ + Bₙ₋₁; if it has the top cell, the previous column may not: Tₙ = Eₙ₋₁ + Bₙ₋₁; likewise Bₙ = Eₙ₋₁ + Tₙ₋₁.",
+          "Starting from column 1 with (E, T, B) = (1, 1, 1): column 2 gives (3, 2, 2), column 3 (7, 5, 5), column 4 (17, 12, 12), column 5 (41, 29, 29).",
+          "In total there are 41 + 29 + 29 = 99 shadings. The answer is 99."
+        ],
+        "ja": [
+          "各列（たての 2 マス）は上下がとなり合うので多くても 1 マスしかぬれず、状態は「ぬらない」「上だけ」「下だけ」の 3 通りです。となり合う列どうしでは、上どうし・下どうしを両方ぬってはいけません。",
+          "最初の n 列のぬり方のうち、n 列目が「ぬらない」「上だけ」「下だけ」のものを Eₙ、Tₙ、Bₙ 通りとします。n 列目をぬらないなら前の列は自由で Eₙ = Eₙ₋₁ + Tₙ₋₁ + Bₙ₋₁、上をぬるなら前の列は上をぬれず Tₙ = Eₙ₋₁ + Bₙ₋₁、同様に Bₙ = Eₙ₋₁ + Tₙ₋₁ です。",
+          "1 列目の (E, T, B) = (1, 1, 1) から順に計算すると、2 列目 (3, 2, 2)、3 列目 (7, 5, 5)、4 列目 (17, 12, 12)、5 列目 (41, 29, 29) です。",
+          "ぬり方は全部で 41 + 29 + 29 = 99 通りです。答えは 99 通りです。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "99"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "combinatorics-grade8-foundation",
+        "notes": "2 × n 不相鄰塗色：每行三種狀態，按「上、下不能連續」寫三條遞推，逐行算到第 5 行。掃過 /(公共邊|共用的邊).{0,30}(塗法|幾種)/（1 題）、/2 列 ?\\d+ ?行.{0,40}塗/（2 題）；最接近 logic_grade6_foundation_070，差異：既有題問 5 × 5 不相鄰放棋子的最多枚數；本題數 2 × 5 的所有不相鄰塗法，用每一行三種狀態的遞推。"
+      }
     }
   ]
 }
