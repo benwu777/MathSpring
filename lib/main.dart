@@ -796,25 +796,28 @@ class _DailyMissionLanding extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final AppStrings strings = AppStrings.of(context);
     final String learnerId = learner?.id ?? 'learner';
     return Column(
       key: const ValueKey<String>('daily_mission_landing'),
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _CompactHeroBanner(
-          title: '每日五題',
-          subtitle: DailyMission.encouragementFor(
+          title: strings.dailyMissionTitle,
+          subtitle: strings
+              .dailyMissionEncouragements[DailyMission.encouragementIndexFor(
             learnerId: learnerId,
             date: progress.date,
-          ),
+            optionCount: strings.dailyMissionEncouragements.length,
+          )],
           icon: Icons.wb_sunny_outlined,
         ),
         const SizedBox(height: 18),
         // 撐滿剩餘高度，首頁在 iPad 上不會只佔上方一小塊
         Expanded(
           child: _SectionCard(
-            title: '今天的任務',
-            subtitle: '一般練習作答五題即可完成，不限答對或答錯。',
+            title: strings.dailyMissionTaskTitle,
+            subtitle: strings.dailyMissionTaskSubtitle,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -829,13 +832,13 @@ class _DailyMissionLanding extends StatelessWidget {
                   style: FilledButton.styleFrom(
                     minimumSize: const Size.fromHeight(48),
                   ),
-                  child: const Text('開始今日任務'),
+                  child: Text(strings.dailyMissionStart),
                 ),
                 const SizedBox(height: 10),
                 TextButton(
                   key: const ValueKey<String>('open_regular_practice'),
                   onPressed: onOpenPractice,
-                  child: const Text('仍要自由練習？從這裡開始'),
+                  child: Text(strings.dailyMissionOpenRegular),
                 ),
               ],
             ),
@@ -3675,7 +3678,9 @@ class _PracticeSessionPageState extends State<PracticeSessionPage> {
     if (!mounted) return;
     setState(() => _isCurrentQuestionFavorite = value);
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-      content: Text(value ? '已加入收藏' : '已移除收藏'),
+      content: Text(value
+          ? AppStrings.of(context).favoriteAdded
+          : AppStrings.of(context).favoriteRemoved),
       duration: const Duration(seconds: 1),
     ));
   }
@@ -3752,7 +3757,7 @@ class _PracticeSessionPageState extends State<PracticeSessionPage> {
                       IconButton(
                         key: ValueKey<String>(
                             'bookmark_question_${question.id}'),
-                        tooltip: '收藏題目',
+                        tooltip: strings.bookmarkQuestion,
                         onPressed: () => _toggleFavorite(question),
                         icon: Icon(_isCurrentQuestionFavorite
                             ? Icons.bookmark
@@ -4412,7 +4417,11 @@ class _QuizSessionPageState extends State<QuizSessionPage> {
                                   _currentIndex + 1,
                                   questions.length,
                                 )
-                              : '第 ${_currentIndex + 1} / ${questions.length} 題 ・ ${scores[_currentIndex].maxScore} 分',
+                              : strings.formalExamQuestionCounter(
+                                  _currentIndex + 1,
+                                  questions.length,
+                                  scores[_currentIndex].maxScore,
+                                ),
                           style: Theme.of(context)
                               .textTheme
                               .headlineSmall
@@ -4422,7 +4431,7 @@ class _QuizSessionPageState extends State<QuizSessionPage> {
                       IconButton(
                         key: ValueKey<String>(
                             'bookmark_question_${question.id}'),
-                        tooltip: '收藏題目',
+                        tooltip: strings.bookmarkQuestion,
                         onPressed: () => _toggleQuizFavorite(question),
                         icon: Icon(_favoriteQuestionIds.contains(question.id)
                             ? Icons.bookmark
@@ -4453,7 +4462,8 @@ class _QuizSessionPageState extends State<QuizSessionPage> {
                 Text(
                   widget.formalExamPreset == null
                       ? '${strings.elapsedLabel} ${_formatElapsed(Duration(seconds: DateTime.now().difference(_startedAt).inSeconds))}'
-                      : '剩餘 ${_formatElapsed(_remainingExamTime)} ・ 總分 100',
+                      : strings.formalExamRemaining(
+                          _formatElapsed(_remainingExamTime)),
                   style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                         color: AppVisualTokens.inkMuted,
                       ),
@@ -4508,7 +4518,7 @@ class _QuizSessionPageState extends State<QuizSessionPage> {
                       scores: scores,
                     ),
                     icon: const Icon(Icons.grid_view_rounded),
-                    label: const Text('題目總覽'),
+                    label: Text(strings.questionOverview),
                   ),
                   const SizedBox(height: 12),
                 ],
@@ -4565,6 +4575,7 @@ class _QuizSessionPageState extends State<QuizSessionPage> {
     required List<Question> questions,
     required List<FormalExamQuestionScore> scores,
   }) async {
+    final AppStrings strings = AppStrings.of(context);
     await showModalBottomSheet<void>(
       context: context,
       showDragHandle: true,
@@ -4575,7 +4586,8 @@ class _QuizSessionPageState extends State<QuizSessionPage> {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('題目總覽', style: Theme.of(sheetContext).textTheme.titleLarge),
+              Text(strings.questionOverview,
+                  style: Theme.of(sheetContext).textTheme.titleLarge),
               const SizedBox(height: 14),
               Wrap(
                 spacing: 8,
@@ -4593,12 +4605,13 @@ class _QuizSessionPageState extends State<QuizSessionPage> {
                                 ? AppVisualTokens.primarySoft
                                 : AppVisualTokens.surface,
                       ),
-                      child: Text('${index + 1}・${scores[index].maxScore} 分'),
+                      child: Text(strings.questionOverviewItem(
+                          index + 1, scores[index].maxScore)),
                     ),
                 ],
               ),
               const SizedBox(height: 12),
-              const Text('藍色代表已作答，白色代表尚未作答。'),
+              Text(strings.questionOverviewLegend),
             ],
           ),
         ),
@@ -4948,12 +4961,14 @@ class QuizResultPage extends StatelessWidget {
                 title: strings.quizResult,
                 subtitle: maxScore == null
                     ? '${result.correctCount} / ${result.totalQuestions} ${strings.correctSuffix}'
-                    : '正式測驗成績：$earnedScore / $maxScore',
+                    : strings.formalExamScore(earnedScore ?? 0, maxScore!),
                 child: _StatRow(
                   leftValue: maxScore == null
                       ? '${result.correctCount}'
                       : '$earnedScore',
-                  leftLabel: maxScore == null ? strings.correctLabel : '總分',
+                  leftLabel: maxScore == null
+                      ? strings.correctLabel
+                      : strings.totalScore,
                   rightValue: _formatElapsed(result.elapsed),
                   rightLabel: strings.elapsedLabel,
                 ),
@@ -5291,6 +5306,24 @@ class AppStrings {
     }
     if (isJapanese) {
       return ja ?? en;
+    }
+    return en;
+  }
+
+  List<String> _textList({
+    required List<String> zhHant,
+    required List<String> zhHans,
+    required List<String> en,
+    required List<String> ja,
+  }) {
+    if (isTraditionalChinese) {
+      return zhHant;
+    }
+    if (isSimplifiedChinese) {
+      return zhHans;
+    }
+    if (isJapanese) {
+      return ja;
     }
     return en;
   }
@@ -5746,6 +5779,140 @@ class AppStrings {
       );
   String get startQuiz =>
       _text(zhHant: '開始測驗', zhHans: '开始测验', en: 'Start quiz', ja: 'テスト開始');
+  String get favoriteAdded => _text(
+        zhHant: '已加入收藏',
+        zhHans: '已加入收藏',
+        en: 'Saved to favorites',
+        ja: 'お気に入りに追加しました',
+      );
+  String get favoriteRemoved => _text(
+        zhHant: '已移除收藏',
+        zhHans: '已移除收藏',
+        en: 'Removed from favorites',
+        ja: 'お気に入りから外しました',
+      );
+  String get bookmarkQuestion => _text(
+        zhHant: '收藏題目',
+        zhHans: '收藏题目',
+        en: 'Save question',
+        ja: '問題をお気に入りに追加',
+      );
+  String formalExamQuestionCounter(int current, int total, int points) => _text(
+        zhHant: '第 $current / $total 題 ・ $points 分',
+        zhHans: '第 $current / $total 题 ・ $points 分',
+        en: 'Question $current / $total ・ $points pts',
+        ja: '第 $current / $total 問 ・ $points 点',
+      );
+  String formalExamRemaining(String remaining) => _text(
+        zhHant: '剩餘 $remaining ・ 總分 100',
+        zhHans: '剩余 $remaining ・ 总分 100',
+        en: '$remaining left ・ 100 pts total',
+        ja: '残り $remaining ・ 満点 100',
+      );
+  String get questionOverview => _text(
+        zhHant: '題目總覽',
+        zhHans: '题目总览',
+        en: 'Question overview',
+        ja: '問題一覧',
+      );
+  String questionOverviewItem(int number, int points) => _text(
+        zhHant: '$number・$points 分',
+        zhHans: '$number・$points 分',
+        en: '$number・$points pts',
+        ja: '$number・$points 点',
+      );
+  String get questionOverviewLegend => _text(
+        zhHant: '藍色代表已作答，白色代表尚未作答。',
+        zhHans: '蓝色代表已作答，白色代表尚未作答。',
+        en: 'Blue means answered; white means not answered yet.',
+        ja: '青は解答済み、白はまだ解答していない問題です。',
+      );
+  String formalExamScore(int earned, int max) => _text(
+        zhHant: '正式測驗成績：$earned / $max',
+        zhHans: '正式测验成绩：$earned / $max',
+        en: 'Formal exam score: $earned / $max',
+        ja: '本番テストの得点：$earned / $max',
+      );
+  String get totalScore => _text(
+        zhHant: '總分',
+        zhHans: '总分',
+        en: 'Score',
+        ja: '得点',
+      );
+  String get chooseFormalExam => _text(
+        zhHant: '選擇正式測驗',
+        zhHans: '选择正式测验',
+        en: 'Choose a formal exam',
+        ja: '本番テストを選ぶ',
+      );
+  String get chooseFormalExamBody => _text(
+        zhHant: '開始後題目與配分固定；可自由跳題，時間到會自動交卷。',
+        zhHans: '开始后题目与配分固定；可自由跳题，时间到会自动交卷。',
+        en: 'Questions and points are fixed once you start. You can jump between questions, and the exam submits itself when time runs out.',
+        ja: '開始後は問題と配点が固定されます。問題は自由に移動でき、時間になると自動で提出されます。',
+      );
+  String formalExamPresetLabel(int questionCount, int minutes) => _text(
+        zhHant: '$questionCount 題・$minutes 分鐘・總分 100',
+        zhHans: '$questionCount 题・$minutes 分钟・总分 100',
+        en: '$questionCount questions・$minutes min・100 pts',
+        ja: '$questionCount 問・$minutes 分・満点 100',
+      );
+  String get dailyMissionTitle => _text(
+        zhHant: '每日五題',
+        zhHans: '每日五题',
+        en: 'Daily 5',
+        ja: '毎日5問',
+      );
+  List<String> get dailyMissionEncouragements => _textList(
+        zhHant: const <String>[
+          '今天的任務做了嗎？從一題開始吧。',
+          '花一點時間，讓今天多一點進步。',
+          '準備好了嗎？完成今天的五題挑戰！',
+          '每一題都是新的思考練習，現在開始吧。',
+        ],
+        zhHans: const <String>[
+          '今天的任务做了吗？从一题开始吧。',
+          '花一点时间，让今天多一点进步。',
+          '准备好了吗？完成今天的五题挑战！',
+          '每一题都是新的思考练习，现在开始吧。',
+        ],
+        en: const <String>[
+          "Done today's mission yet? Start with one question.",
+          'Spend a little time and make today a bit better.',
+          "Ready? Take on today's five-question challenge!",
+          'Every question is a fresh thinking workout. Start now.',
+        ],
+        ja: const <String>[
+          '今日のミッションはもう終わった？まずは1問から始めよう。',
+          '少しの時間で、今日をもう一歩前へ。',
+          '準備はいい？今日の5問チャレンジに挑戦しよう！',
+          '1問1問が新しい思考の練習。さあ始めよう。',
+        ],
+      );
+  String get dailyMissionTaskTitle => _text(
+        zhHant: '今天的任務',
+        zhHans: '今天的任务',
+        en: "Today's mission",
+        ja: '今日のミッション',
+      );
+  String get dailyMissionTaskSubtitle => _text(
+        zhHant: '一般練習作答五題即可完成，不限答對或答錯。',
+        zhHans: '一般练习作答五题即可完成，不限答对或答错。',
+        en: 'Answer five practice questions to finish. Right or wrong both count.',
+        ja: '練習で5問答えれば達成です。正解でも不正解でも数えます。',
+      );
+  String get dailyMissionStart => _text(
+        zhHant: '開始今日任務',
+        zhHans: '开始今日任务',
+        en: "Start today's mission",
+        ja: '今日のミッションを始める',
+      );
+  String get dailyMissionOpenRegular => _text(
+        zhHant: '仍要自由練習？從這裡開始',
+        zhHans: '仍要自由练习？从这里开始',
+        en: 'Want free practice instead? Start here',
+        ja: '自由に練習したい場合はこちら',
+      );
   String get quizStartHint => _text(
         zhHant: '測驗會依目前年級範圍自動抽題，完成整份後再統一看分數與詳解。',
         zhHans: '测验会按当前年级范围自动抽题，完成整份后再统一看分数与详解。',
@@ -6976,6 +7143,7 @@ Future<String?> _showTopicPicker({
 Future<FormalExamPreset?> _showFormalExamPresetPicker(
   BuildContext context,
 ) {
+  final AppStrings strings = AppStrings.of(context);
   return showModalBottomSheet<FormalExamPreset>(
     context: context,
     showDragHandle: true,
@@ -6988,11 +7156,11 @@ Future<FormalExamPreset?> _showFormalExamPresetPicker(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              '選擇正式測驗',
+              strings.chooseFormalExam,
               style: Theme.of(sheetContext).textTheme.headlineSmall,
             ),
             const SizedBox(height: 8),
-            const Text('開始後題目與配分固定；可自由跳題，時間到會自動交卷。'),
+            Text(strings.chooseFormalExamBody),
             const SizedBox(height: 16),
             for (final FormalExamPreset preset in FormalExamPreset.standard)
               Padding(
@@ -7007,7 +7175,8 @@ Future<FormalExamPreset?> _showFormalExamPresetPicker(
                     alignment: Alignment.centerLeft,
                   ),
                   child: Text(
-                    '${preset.questionCount} 題・${preset.timeLimit.inMinutes} 分鐘・總分 100',
+                    strings.formalExamPresetLabel(
+                        preset.questionCount, preset.timeLimit.inMinutes),
                   ),
                 ),
               ),

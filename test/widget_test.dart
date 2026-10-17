@@ -1087,6 +1087,30 @@ void main() {
         findsOneWidget);
   });
 
+  testWidgets('daily mission landing follows the English locale',
+      (WidgetTester tester) async {
+    final TestWidgetsFlutterBinding binding =
+        TestWidgetsFlutterBinding.ensureInitialized();
+    binding.platformDispatcher.localeTestValue = const Locale('en');
+
+    await tester.pumpWidget(
+      MathSpringApp(services: createTestServices(completeDailyMission: false)),
+    );
+    await tester.pumpAndSettle();
+
+    final Finder landing =
+        find.byKey(const ValueKey<String>('daily_mission_landing'));
+    expect(find.descendant(of: landing, matching: find.text('Daily 5')),
+        findsOneWidget);
+    final Iterable<String> texts = tester
+        .widgetList<Text>(
+            find.descendant(of: landing, matching: find.byType(Text)))
+        .map((Text text) => text.data ?? text.textSpan?.toPlainText() ?? '');
+    for (final String text in texts) {
+      expect(text, isNot(matches(RegExp(r'[\u3040-\u30ff\u4e00-\u9fff]'))));
+    }
+  });
+
   testWidgets('shows Traditional Chinese home content when system locale is zh',
       (WidgetTester tester) async {
     final TestWidgetsFlutterBinding binding =
@@ -1314,8 +1338,51 @@ void main() {
     await tester.tap(navigatorButton);
     await tester.pump();
 
-    expect(find.text('題目總覽'), findsWidgets);
-    expect(find.textContaining('分'), findsWidgets);
+    expect(find.text('Question overview'), findsWidgets);
+    expect(find.textContaining('pts'), findsWidgets);
+  });
+
+  testWidgets('formal exam screens show no Chinese in English',
+      (WidgetTester tester) async {
+    const BundledQuestionPackInfo pack = BundledQuestionPackInfo(
+      path: 'unused',
+      topic: 'Mixed',
+      topicCode: 'mixed',
+      levelStage: 'grade4',
+      challengeTier: 'foundation',
+      questionCount: 2,
+    );
+    await tester.pumpWidget(MaterialApp(
+      home: QuizSessionPage(
+        services: createTestServices(),
+        pack: pack,
+        initialQuestions: <Question>[
+          createDemoQuestion(),
+          createSecondDemoQuestion()
+        ],
+        formalExamPreset: FormalExamPreset.standard.first,
+      ),
+    ));
+    await tester.pump();
+    final Finder navigatorButton =
+        find.byKey(const ValueKey<String>('open_exam_navigator'));
+    await tester.ensureVisible(navigatorButton);
+    await tester.tap(navigatorButton);
+    await tester.pump();
+
+    final RegExp cjk = RegExp(r'[\u4e00-\u9fff]');
+    final Iterable<String> labels = <String>[
+      for (final Text text in tester.widgetList<Text>(find.byType(Text)))
+        text.data ?? text.textSpan?.toPlainText() ?? '',
+      for (final IconButton button
+          in tester.widgetList<IconButton>(find.byType(IconButton)))
+        button.tooltip ?? '',
+    ];
+    final Iterable<String> chrome = labels.where((String label) =>
+        !createDemoQuestion().prompt.values.contains(label) &&
+        !createSecondDemoQuestion().prompt.values.contains(label));
+    expect(chrome.where(cjk.hasMatch), isEmpty);
+    expect(find.text('Question overview'), findsWidgets);
   });
 
   testWidgets('home page opens the trigonometry drawing demo',
@@ -3185,8 +3252,7 @@ void main() {
         Theme.of(tester.element(find.byType(Scaffold).first));
     expect(theme.scaffoldBackgroundColor, const Color(0xFFF8F8F5));
     expect(theme.colorScheme.primary, AppVisualTokens.brand);
-    expect(theme.navigationBarTheme.indicatorColor,
-        AppVisualTokens.brandSoft);
+    expect(theme.navigationBarTheme.indicatorColor, AppVisualTokens.brandSoft);
 
     final RoundedRectangleBorder cardShape =
         theme.cardTheme.shape! as RoundedRectangleBorder;

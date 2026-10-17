@@ -19,13 +19,6 @@ class DailyMission {
   const DailyMission._();
 
   static const int targetCount = 5;
-  static const List<String> _encouragements = <String>[
-    '今天的任務做了嗎？從一題開始吧。',
-    '花一點時間，讓今天多一點進步。',
-    '準備好了嗎？完成今天的五題挑戰！',
-    '每一題都是新的思考練習，現在開始吧。',
-  ];
-
   static DailyMissionProgress calculate({
     required String learnerId,
     required DateTime date,
@@ -48,16 +41,18 @@ class DailyMission {
     return DailyMissionProgress(date: day, answeredCount: answeredCount);
   }
 
-  static String encouragementFor({
+  /// Picks which encouragement line to show, stable for one learner and day.
+  static int encouragementIndexFor({
     required String learnerId,
     required DateTime date,
+    required int optionCount,
   }) {
     final String seed = '$learnerId-${_dayKey(date).toIso8601String()}';
     int hash = 0;
     for (final int codeUnit in seed.codeUnits) {
       hash = (hash * 31 + codeUnit) & 0x7fffffff;
     }
-    return _encouragements[hash % _encouragements.length];
+    return hash % optionCount;
   }
 
   static DateTime _dayKey(DateTime date) =>

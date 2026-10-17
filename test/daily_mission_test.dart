@@ -57,17 +57,19 @@ void main() {
   });
 
   test('chooses a stable encouragement for the learner and day', () {
-    final String first = DailyMission.encouragementFor(
+    final int first = DailyMission.encouragementIndexFor(
       learnerId: 'learner_1',
       date: DateTime(2026, 8, 27),
+      optionCount: 4,
     );
-    final String second = DailyMission.encouragementFor(
+    final int second = DailyMission.encouragementIndexFor(
       learnerId: 'learner_1',
       date: DateTime(2026, 8, 27),
+      optionCount: 4,
     );
 
     expect(first, second);
-    expect(first, isNotEmpty);
+    expect(first, inInclusiveRange(0, 3));
   });
 }
 
@@ -83,6 +85,7 @@ SessionAnswerRecord _record(
     sequence: sequence,
     submittedAnswer: isCorrect ? 'A' : 'B',
     isCorrect: isCorrect,
-    answeredAtIso: date.add(Duration(minutes: sequence)).toUtc().toIso8601String(),
+    answeredAtIso:
+        date.add(Duration(minutes: sequence)).toUtc().toIso8601String(),
   );
 }
