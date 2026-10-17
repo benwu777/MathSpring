@@ -238,7 +238,7 @@ def check_option_lengths(options, correct_value):
     return []
 
 
-# 每個 kind 的 renderer 實際會讀的 params 鍵（lib/main.dart 的 _buildFigureRenderSpec
+# 每個 kind 的 renderer 實際會讀的 params 鍵（lib/src/question_figures.dart 的 buildFigureRenderSpec
 # 與各 painter）。不在名單裡的鍵會被靜默丟掉，寫了等於沒寫。
 FIGURE_PARAM_KEYS = {
     'none': set(),

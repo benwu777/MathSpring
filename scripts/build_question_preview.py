@@ -109,7 +109,7 @@ svg.fig{display:block;background:#fff;border:1px solid var(--line);border-radius
 <script type="application/json" id="data">__DATA__</script>
 <script>
 const DATA = JSON.parse(document.getElementById('data').textContent);
-/* ── 圖形渲染：移植自 lib/main.dart 的五個 CustomPainter ──
+/* ── 圖形渲染：移植自 lib/src/question_figures.dart 與 lib/src/diagram_painters.dart 的 CustomPainter ──
    數值（padding、比例、半徑、顏色）都對齊 Dart 原始實作，
    讓這裡看到的和 app 裡畫出來的一致。                        */
 const AR = {shape_diagram:1.25, coordinate_plane:1.35, composite_grid_shape:1.1,

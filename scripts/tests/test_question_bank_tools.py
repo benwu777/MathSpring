@@ -533,7 +533,7 @@ class CheckFigureParamsTest(unittest.TestCase):
     composite_grid_shape 的 params 寫錯時，畫面只會靜默畫錯或一片空白，
     不報錯、不留 log。開放起草代理附圖之後這個缺口變得重要。
 
-    每條規則都對應 renderer 實際的行為（lib/main.dart 的三個 painter）。
+    每條規則都對應 renderer 實際的行為（lib/src/diagram_painters.dart 的 painter）。
     """
 
     def _fig(self, kind, **params):
@@ -812,7 +812,7 @@ class ValidatorKindsMatchRendererTest(unittest.TestCase):
     """
 
     def _renderer_kinds(self):
-        with open('lib/main.dart') as fh:
+        with open('lib/src/question_figures.dart') as fh:
             src = fh.read()
         start = src.index('FigureRenderSpec? buildFigureRenderSpec(')
         body = src[start:src.index('class _FigurePreviewDialog', start)]

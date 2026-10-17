@@ -96,7 +96,21 @@ Current local SQLite support for:
 
 ```text
 lib/
-  main.dart                  # current app shell and feature entry
+  main.dart                  # app entry, theme tokens, app state; declares the parts below
+  src/                       # parts of main.dart (one library, so private widgets stay shared)
+    home_tabs.dart           # home shell, practice/quiz tabs, daily mission
+    review_tab.dart          # learning review, achievements, calendar
+    settings_tab.dart        # settings, full unlock, language, support links
+    home_widgets.dart        # hero, section cards, topic grid
+    learner_profiles.dart    # learner list, create/edit learner
+    library_pages.dart       # favorites, answer history, session detail
+    practice_session.dart    # practice flow and summary
+    quiz_session.dart        # quiz / formal exam flow and result
+    question_text.dart       # prompt, body, option text widgets
+    app_strings.dart         # all UI strings (zh-Hant / zh-Hans / en / ja)
+    question_figures.dart    # figure view, render spec, geometry scene painter
+    session_helpers.dart     # pickers, launch helpers, answer formatting
+    diagram_painters.dart    # remaining CustomPainters for figures
   models/
     question.dart            # question schema and answer schema
     question_bank.dart       # question pack container
@@ -115,5 +129,4 @@ docs/
 
 1. Continue polishing practice and quiz interaction details.
 2. Keep expanding the bundled olympiad-style question packs by taxonomy.
-3. Split `main.dart` into feature-oriented files as the app grows.
-4. Improve remaining documentation so it matches the current competition-profile flow.
+3. Improve remaining documentation so it matches the current competition-profile flow.
