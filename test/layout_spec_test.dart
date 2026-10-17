@@ -53,14 +53,12 @@ void main() {
       }
     });
 
-    test('版面留白與觸控目標也隨寬度遞增（或持平）', () {
+    test('版面留白也隨寬度遞增（或持平）', () {
       for (final (String name, double a, double b, double d)
           in <(String, double, double, double)>[
         ('pagePadding', c.pagePadding, m.pagePadding, e.pagePadding),
         ('sectionGap', c.sectionGap, m.sectionGap, e.sectionGap),
         ('cardPadding', c.cardPadding, m.cardPadding, e.cardPadding),
-        ('optionGap', c.optionGap, m.optionGap, e.optionGap),
-        ('minTapTarget', c.minTapTarget, m.minTapTarget, e.minTapTarget),
       ]) {
         expect(a <= b, isTrue, reason: '$name: compact($a) 不應大於 medium($b)');
         expect(b <= d, isTrue, reason: '$name: medium($b) 不應大於 expanded($d)');
@@ -74,10 +72,9 @@ void main() {
       expect(e.contentMaxWidth, greaterThan(m.contentMaxWidth));
     });
 
-    test('compact 保持答題資訊緊湊但不縮小觸控目標', () {
+    test('compact 保持答題資訊緊湊', () {
       expect(c.sectionGap, 12);
       expect(c.cardPadding, 16);
-      expect(c.minTapTarget, 48);
     });
 
     test('compact 的字級與現況完全相同，iPhone 一個像素都不變', () {
@@ -93,12 +90,6 @@ void main() {
     test('題幹永遠不小於內文', () {
       for (final LayoutSpec l in <LayoutSpec>[c, m, e]) {
         expect(l.promptText, greaterThanOrEqualTo(l.bodyText));
-      }
-    });
-
-    test('觸控目標不低於 Apple HIG 的 44pt', () {
-      for (final LayoutSpec l in <LayoutSpec>[c, m, e]) {
-        expect(l.minTapTarget, greaterThanOrEqualTo(44));
       }
     });
   });
@@ -206,8 +197,6 @@ void main() {
       'pagePadding',
       'sectionGap',
       'cardPadding',
-      'optionGap',
-      'minTapTarget',
     ];
 
     test('每個代號都至少被 lib/ 底下的程式用到一次', () {

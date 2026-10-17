@@ -55,94 +55,6 @@ void main() {
   runApp(const MathSpringApp());
 }
 
-Question _buildTrigDemoQuestion() {
-  return Question.fromJson({
-    'id': 'geometry_demo_trig_plane_001',
-    'topic': 'geometry',
-    'difficulty': 'foundation',
-    'levelStage': 'grade4',
-    'challengeTier': 'foundation',
-    'prompt': {
-      'zh-Hant': '觀察圖形，在 0 到 2π 間，sin(x) 與 cos(x) 分別在何處達到最大值？',
-      'zh-Hans': '观察图形，在 0 到 2π 间，sin(x) 与 cos(x) 分别在何处达到最大值？',
-      'en':
-          'Inspect the graph. On the interval from 0 to 2π, where do sin(x) and cos(x) each reach their maximum value?',
-      'ja': 'グラフを見てください。0 から 2π の区間で、sin(x) と cos(x) はそれぞれどこで最大値をとりますか。',
-    },
-    'answer': {
-      'zh-Hant': 'sin(x) 在 π/2 取得最大值 1，cos(x) 在 0 取得最大值 1。',
-      'zh-Hans': 'sin(x) 在 π/2 取得最大值 1，cos(x) 在 0 取得最大值 1。',
-      'en':
-          'sin(x) reaches its maximum value 1 at π/2, and cos(x) reaches its maximum value 1 at 0.',
-      'ja': 'sin(x) は π/2 で最大値 1 をとり、cos(x) は 0 で最大値 1 をとります。',
-    },
-    'solutionSteps': {
-      'zh-Hant': [
-        '觀察藍色的 sin(x) 曲線，最高點出現在 x = π/2。',
-        '觀察紅色的 cos(x) 曲線，最高點出現在 x = 0。',
-      ],
-      'zh-Hans': [
-        '观察蓝色的 sin(x) 曲线，最高点出现在 x = π/2。',
-        '观察红色的 cos(x) 曲线，最高点出现在 x = 0。',
-      ],
-      'en': [
-        'The blue sin(x) curve reaches its peak at x = π/2.',
-        'The red cos(x) curve reaches its peak at x = 0.',
-      ],
-      'ja': [
-        '青い sin(x) の曲線は x = π/2 で頂点に達します。',
-        '赤い cos(x) の曲線は x = 0 で頂点に達します。',
-      ],
-    },
-    'figure': {
-      'type': 'custom',
-      'kind': 'trig_plane',
-      'params': {
-        'showGrid': true,
-        'showLegend': true,
-        'highlightInterval': ['pi/2', 'pi'],
-        'functions': ['sin', 'cos'],
-      },
-    },
-    'answerMode': 'multiple_choice',
-    'options': {
-      'A': {
-        'zh-Hant': 'sin(x) 在 0，cos(x) 在 π/2',
-        'zh-Hans': 'sin(x) 在 0，cos(x) 在 π/2',
-        'en': 'sin(x) at 0, cos(x) at π/2',
-        'ja': 'sin(x) は 0、cos(x) は π/2',
-      },
-      'B': {
-        'zh-Hant': 'sin(x) 在 π/2，cos(x) 在 0',
-        'zh-Hans': 'sin(x) 在 π/2，cos(x) 在 0',
-        'en': 'sin(x) at π/2, cos(x) at 0',
-        'ja': 'sin(x) は π/2、cos(x) は 0',
-      },
-      'C': {
-        'zh-Hant': '兩者都在 π',
-        'zh-Hans': '两者都在 π',
-        'en': 'Both at π',
-        'ja': 'どちらも π',
-      },
-      'D': {
-        'zh-Hant': '兩者都在 2π',
-        'zh-Hans': '两者都在 2π',
-        'en': 'Both at 2π',
-        'ja': 'どちらも 2π',
-      },
-    },
-    'correctAnswer': {
-      'type': 'choice',
-      'value': 'B',
-    },
-    'source': {
-      'type': 'official_reference',
-      'name': 'MathSpring Demo',
-      'displayText': 'MathSpring graph demo',
-    },
-  });
-}
-
 class MathSpringApp extends StatefulWidget {
   const MathSpringApp({super.key, this.services, this.monetizationService});
 
@@ -627,16 +539,7 @@ class _PracticeTabState extends State<_PracticeTab> {
       normalContent: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _HeroCard(
-            strings: strings,
-            onOpenDemo: () {
-              Navigator.of(context).push(
-                MaterialPageRoute<void>(
-                  builder: (_) => TrigGraphDemoPage(services: widget.services),
-                ),
-              );
-            },
-          ),
+          _HeroCard(strings: strings),
           const SizedBox(height: 18),
           _SectionCard(
             title: strings.practiceEntryTitle,
@@ -1842,10 +1745,9 @@ class _TopicActionButton extends StatelessWidget {
 }
 
 class _HeroCard extends StatelessWidget {
-  const _HeroCard({required this.strings, required this.onOpenDemo});
+  const _HeroCard({required this.strings});
 
   final AppStrings strings;
-  final VoidCallback onOpenDemo;
 
   @override
   Widget build(BuildContext context) {
@@ -1874,7 +1776,6 @@ class _HeroCard extends StatelessWidget {
                   Expanded(
                     child: _HeroCopy(
                       strings: strings,
-                      onOpenDemo: onOpenDemo,
                     ),
                   ),
                   const SizedBox(width: 24),
@@ -1884,7 +1785,7 @@ class _HeroCard extends StatelessWidget {
             : Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  _HeroCopy(strings: strings, onOpenDemo: onOpenDemo),
+                  _HeroCopy(strings: strings),
                   const SizedBox(height: 24),
                   const _HeroPanel(),
                 ],
@@ -1895,10 +1796,9 @@ class _HeroCard extends StatelessWidget {
 }
 
 class _HeroCopy extends StatelessWidget {
-  const _HeroCopy({required this.strings, required this.onOpenDemo});
+  const _HeroCopy({required this.strings});
 
   final AppStrings strings;
-  final VoidCallback onOpenDemo;
 
   @override
   Widget build(BuildContext context) {
@@ -1947,15 +1847,6 @@ class _HeroCopy extends StatelessWidget {
             _InfoPill(label: strings.pillProfiles),
             _InfoPill(label: strings.pillBilingual),
           ],
-        ),
-        const SizedBox(height: 18),
-        FilledButton(
-          key: const ValueKey<String>('hero_primary_cta'),
-          onPressed: onOpenDemo,
-          style: FilledButton.styleFrom(
-            padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 12),
-          ),
-          child: Text(strings.openDemoCta),
         ),
       ],
     );
@@ -5981,40 +5872,6 @@ class AppStrings {
         en: 'If two equal squares form one rectangle, how much does the perimeter change?',
         ja: '同じ正方形 2 つを長方形に並べると、周の長さはどれだけ増えますか。',
       );
-  String get openDemoCta => _text(
-        zhHant: '查看函數圖形示範',
-        zhHans: '查看函数图形示范',
-        en: 'View graph demo',
-        ja: '関数グラフのデモを見る',
-      );
-  String get demoTitle => _text(
-        zhHant: '座標平面上的正弦與餘弦',
-        zhHans: '坐标平面上的正弦与余弦',
-        en: 'Sine and cosine on the coordinate plane',
-        ja: '座標平面上の sin と cos',
-      );
-  String get demoSubtitle => _text(
-        zhHant: '這一頁完全由 Flutter 直接繪製，不是點陣圖。它包含座標軸、刻度、圖例與重點角度標示。',
-        zhHans: '这一页完全由 Flutter 直接绘制，不是位图。它包含坐标轴、刻度、图例与重点角度标示。',
-        en: 'This page is drawn directly by Flutter, not a bitmap. It includes axes, ticks, a legend, and highlighted key angles.',
-        ja: 'このページはビットマップではなく Flutter で直接描画しています。軸、目盛り、凡例、重要角度の表示を含みます。',
-      );
-  String get demoQuestion => _text(
-        zhHant: '觀察圖形，在區間 0 到 2π 之間，sin(x) 與 cos(x) 分別在何處達到最大值？',
-        zhHans: '观察图形，在区间 0 到 2π 之间，sin(x) 与 cos(x) 分别在何处达到最大值？',
-        en: 'Inspect the graph. On the interval from 0 to 2π, where do sin(x) and cos(x) each reach their maximum value?',
-        ja: '図を見て、0 から 2π の区間で sin(x) と cos(x) がそれぞれ最大になるのはどこですか。',
-      );
-  String get demoLegend =>
-      _text(zhHant: '圖例', zhHans: '图例', en: 'Graph Legend', ja: '凡例');
-  String get demoLegendSin => 'sin(x)';
-  String get demoLegendCos => 'cos(x)';
-  String get demoLegendBand => _text(
-        zhHant: '重點觀察區段',
-        zhHans: '重点观察区段',
-        en: 'Focus interval',
-        ja: '注目区間',
-      );
   String get demoNote => _text(
         zhHant: '可延伸成互動題：點選角度、逐步顯示輔助線、切換語言標籤。',
         zhHans: '可扩展为互动题：点击角度、逐步显示辅助线、切换语言标签。',
@@ -6206,373 +6063,6 @@ class AppStrings {
       default:
         return tier;
     }
-  }
-}
-
-class TrigGraphDemoPage extends StatelessWidget {
-  const TrigGraphDemoPage({
-    super.key,
-    required this.services,
-    this.initialQuestion,
-  });
-
-  final AppServices services;
-  final Question? initialQuestion;
-
-  @override
-  Widget build(BuildContext context) {
-    final AppStrings strings = AppStrings.of(context);
-    final bool wide = LayoutSpec.of(context).widthClass == WidthClass.expanded;
-
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(strings.demoTitle),
-        surfaceTintColor: Colors.transparent,
-        backgroundColor: Colors.white,
-      ),
-      body: FutureBuilder<Question>(
-        future: initialQuestion == null
-            ? Future<Question>.value(_buildTrigDemoQuestion())
-            : Future<Question>.value(initialQuestion),
-        builder: (context, snapshot) {
-          if (!snapshot.hasData) {
-            return const Center(child: CircularProgressIndicator());
-          }
-          final Question question = snapshot.data!;
-          return SingleChildScrollView(
-            padding: const EdgeInsets.all(24),
-            child: Center(
-              child: ConstrainedBox(
-                constraints: const BoxConstraints(maxWidth: 1180),
-                child: wide
-                    ? Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Expanded(
-                            flex: 7,
-                            child: _GraphPanel(
-                              strings: strings,
-                              question: question,
-                            ),
-                          ),
-                          const SizedBox(width: 24),
-                          Expanded(
-                            flex: 4,
-                            child: _DemoInfoPanel(
-                              strings: strings,
-                              question: question,
-                              services: services,
-                            ),
-                          ),
-                        ],
-                      )
-                    : Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          _GraphPanel(strings: strings, question: question),
-                          const SizedBox(height: 24),
-                          _DemoInfoPanel(
-                            strings: strings,
-                            question: question,
-                            services: services,
-                          ),
-                        ],
-                      ),
-              ),
-            ),
-          );
-        },
-      ),
-    );
-  }
-}
-
-class _GraphPanel extends StatelessWidget {
-  const _GraphPanel({required this.strings, required this.question});
-
-  final AppStrings strings;
-  final Question question;
-
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      child: Padding(
-        padding: const EdgeInsets.all(24),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(strings.demoTitle,
-                style: Theme.of(context).textTheme.headlineSmall),
-            const SizedBox(height: 10),
-            Text(question.localizedPrompt(_localeCode(context)),
-                style: Theme.of(context).textTheme.bodyLarge),
-            const SizedBox(height: 10),
-            Text(strings.demoSubtitle,
-                style: Theme.of(context).textTheme.bodyMedium),
-            const SizedBox(height: 20),
-            _QuestionFigureView(question: question),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class _DemoInfoPanel extends StatelessWidget {
-  const _DemoInfoPanel({
-    required this.strings,
-    required this.question,
-    required this.services,
-  });
-
-  final AppStrings strings;
-  final Question question;
-  final AppServices services;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        _SectionCard(
-          title: strings.demoLegend,
-          subtitle: question.localizedAnswer(_localeCode(context)),
-          child: Column(
-            children: [
-              _LegendTile(
-                label: strings.demoLegendSin,
-                color: const Color(0xFF2563EB),
-              ),
-              const SizedBox(height: 12),
-              _LegendTile(
-                label: strings.demoLegendCos,
-                color: const Color(0xFFDC2626),
-              ),
-              const SizedBox(height: 12),
-              _LegendTile(
-                label: strings.demoLegendBand,
-                color: const Color(0xFF0F766E),
-                isBand: true,
-              ),
-            ],
-          ),
-        ),
-        const SizedBox(height: 20),
-        _SectionCard(
-          title: strings.answerLabel,
-          subtitle: _answerModeSubtitle(strings, question.answerMode),
-          child: _AnswerComposer(
-            question: question,
-            localeCode: _localeCode(context),
-            strings: strings,
-            services: services,
-          ),
-        ),
-        const SizedBox(height: 20),
-        _SectionCard(
-          title: strings.vectorDrawingTitle,
-          subtitle: strings.demoNote,
-          child: _StatRow(
-            leftValue: '0',
-            leftLabel: strings.bitmapAssetsLabel,
-            rightValue: '1',
-            rightLabel: strings.customPainterLabel,
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-class _AnswerComposer extends StatelessWidget {
-  const _AnswerComposer({
-    required this.question,
-    required this.localeCode,
-    required this.strings,
-    required this.services,
-  });
-
-  final Question question;
-  final String localeCode;
-  final AppStrings strings;
-  final AppServices services;
-
-  @override
-  Widget build(BuildContext context) {
-    final LayoutSpec layoutSpec = LayoutSpec.of(context);
-    switch (question.answerMode) {
-      case AnswerMode.multipleChoice:
-        final List<String> keys = (question.options?.keys.toList() ?? [])
-          ..sort();
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(strings.chooseOneAnswer),
-            SizedBox(height: layoutSpec.optionGap + 2),
-            ...keys.map(
-              (key) => Padding(
-                padding: EdgeInsets.only(bottom: layoutSpec.optionGap),
-                child: OutlinedButton(
-                  key: ValueKey<String>('answer_option_${question.id}_$key'),
-                  onPressed: () async {
-                    final String? learnerId = services.currentLearnerId;
-                    if (learnerId == null) {
-                      return;
-                    }
-                    await services.saveQuestionProgress(
-                      QuestionProgress(
-                        learnerId: learnerId,
-                        questionId: question.id,
-                        status: key == question.correctAnswer.value
-                            ? 'correct'
-                            : 'incorrect',
-                        lastResult: 'multiple_choice:$key',
-                        updatedAtIso: DateTime.now().toUtc().toIso8601String(),
-                      ),
-                    );
-                  },
-                  style: OutlinedButton.styleFrom(
-                    // 選項列是主要的觸控目標，iPad 上要比 iPhone 大
-                    minimumSize: Size.fromHeight(layoutSpec.minTapTarget + 10),
-                    alignment: Alignment.centerLeft,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                  ),
-                  child: Text(
-                    question.optionDisplayLabel(key, localeCode),
-                  ),
-                ),
-              ),
-            ),
-          ],
-        );
-      case AnswerMode.integerInput:
-        return _IntegerAnswerField(
-          question: question,
-          localeCode: localeCode,
-          services: services,
-          strings: strings,
-        );
-      case AnswerMode.selfCheck:
-        return Text(strings.selfCheckLabel);
-    }
-  }
-}
-
-class _IntegerAnswerField extends StatefulWidget {
-  const _IntegerAnswerField({
-    required this.question,
-    required this.localeCode,
-    required this.services,
-    required this.strings,
-  });
-
-  final Question question;
-  final String localeCode;
-  final AppServices services;
-  final AppStrings strings;
-
-  @override
-  State<_IntegerAnswerField> createState() => _IntegerAnswerFieldState();
-}
-
-class _IntegerAnswerFieldState extends State<_IntegerAnswerField> {
-  late final List<TextEditingController> _controllers;
-
-  @override
-  void initState() {
-    super.initState();
-    _controllers = <TextEditingController>[
-      for (final String _ in widget.question.correctAnswer.orderedValues)
-        TextEditingController(),
-    ];
-  }
-
-  @override
-  void dispose() {
-    for (final TextEditingController controller in _controllers) {
-      controller.dispose();
-    }
-    super.dispose();
-  }
-
-  Future<void> _submit() async {
-    final String? learnerId = widget.services.currentLearnerId;
-    final List<String> values = <String>[
-      for (final TextEditingController controller in _controllers)
-        controller.text.trim(),
-    ];
-    if (learnerId == null || values.any((String value) => value.isEmpty)) {
-      return;
-    }
-    final String submittedAnswer = _encodeIntegerAnswers(values);
-
-    await widget.services.saveQuestionProgress(
-      QuestionProgress(
-        learnerId: learnerId,
-        questionId: widget.question.id,
-        status: _isCorrect(widget.question, submittedAnswer)
-            ? 'correct'
-            : 'incorrect',
-        lastResult: 'integer_input:$submittedAnswer',
-        updatedAtIso: DateTime.now().toUtc().toIso8601String(),
-      ),
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final List<String> labels =
-        widget.question.correctAnswer.localizedInputLabels(widget.localeCode);
-    final bool hasMultipleAnswers = _controllers.length > 1;
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(widget.strings.enterIntegerAnswer),
-        const SizedBox(height: 14),
-        for (int index = 0; index < _controllers.length; index++) ...[
-          if (hasMultipleAnswers) ...[
-            Text(
-              index < labels.length
-                  ? labels[index]
-                  : widget.strings.answerFieldLabel(index + 1),
-              style: Theme.of(context).textTheme.labelLarge,
-            ),
-            const SizedBox(height: 6),
-          ],
-          TextField(
-            key: ValueKey<String>(
-              hasMultipleAnswers
-                  ? 'practice_integer_input_${widget.question.id}_$index'
-                  : 'practice_integer_input_${widget.question.id}',
-            ),
-            controller: _controllers[index],
-            keyboardType: TextInputType.number,
-            decoration: InputDecoration(
-              hintText: widget.strings.integerHint,
-              filled: true,
-              fillColor: AppVisualTokens.surface,
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12),
-                borderSide: const BorderSide(color: AppVisualTokens.outline),
-              ),
-              enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12),
-                borderSide: const BorderSide(color: AppVisualTokens.outline),
-              ),
-            ),
-          ),
-          if (index < _controllers.length - 1) const SizedBox(height: 12),
-        ],
-        const SizedBox(height: 12),
-        FilledButton(
-          key: ValueKey<String>('submit_answer_${widget.question.id}'),
-          onPressed: _submit,
-          style: FilledButton.styleFrom(),
-          child: Text(widget.strings.submitAnswer),
-        ),
-      ],
-    );
   }
 }
 
@@ -7426,57 +6916,6 @@ String _displaySubmittedAnswer(
       return values.join('、');
     case AnswerMode.selfCheck:
       return submittedAnswer;
-  }
-}
-
-class _LegendTile extends StatelessWidget {
-  const _LegendTile({
-    required this.label,
-    required this.color,
-    this.isBand = false,
-  });
-
-  final String label;
-  final Color color;
-  final bool isBand;
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Container(
-          width: 42,
-          height: 18,
-          decoration: BoxDecoration(
-            color: isBand ? color.withOpacity(0.18) : null,
-            borderRadius: BorderRadius.circular(8),
-          ),
-          child: Center(
-            child: isBand
-                ? Container(
-                    width: 34,
-                    height: 2,
-                    color: color,
-                  )
-                : Container(
-                    width: 34,
-                    height: 3,
-                    color: color,
-                  ),
-          ),
-        ),
-        const SizedBox(width: 12),
-        Expanded(
-          child: Text(
-            label,
-            style: const TextStyle(
-              fontWeight: FontWeight.w600,
-              color: Color(0xFF0F172A),
-            ),
-          ),
-        ),
-      ],
-    );
   }
 }
 

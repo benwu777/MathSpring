@@ -34,8 +34,6 @@ class LayoutSpec {
     required this.pagePadding,
     required this.sectionGap,
     required this.cardPadding,
-    required this.optionGap,
-    required this.minTapTarget,
   });
 
   final WidthClass widthClass;
@@ -61,11 +59,6 @@ class LayoutSpec {
   final double pagePadding;
   final double sectionGap;
   final double cardPadding;
-  final double optionGap;
-
-  /// 最小觸控目標。iPad 通常擺在桌面上用整隻手指點，
-  /// Apple HIG 對 iPad 的建議比 iPhone 大，所以 medium 以上提到 56。
-  final double minTapTarget;
 
   /// compact 的字級與 2026-09-04 改造前的既有值完全相同，
   /// 讓 iPhone 的呈現一個像素都不變，改動風險全部集中在 medium / expanded。
@@ -82,8 +75,6 @@ class LayoutSpec {
     pagePadding: 16,
     sectionGap: 12,
     cardPadding: 16,
-    optionGap: 8,
-    minTapTarget: 48,
   );
 
   static const LayoutSpec _medium = LayoutSpec(
@@ -99,8 +90,6 @@ class LayoutSpec {
     pagePadding: 32,
     sectionGap: 24,
     cardPadding: 24,
-    optionGap: 12,
-    minTapTarget: 56,
   );
 
   static const LayoutSpec _expanded = LayoutSpec(
@@ -116,8 +105,6 @@ class LayoutSpec {
     pagePadding: 48,
     sectionGap: 28,
     cardPadding: 28,
-    optionGap: 14,
-    minTapTarget: 56,
   );
 
   /// 斷點的唯一真實來源。

@@ -843,9 +843,6 @@ void main() {
         findsOneWidget);
     expect(find.byKey(const ValueKey<String>('home_background_glow')),
         findsNothing);
-    expect(
-        find.byKey(const ValueKey<String>('hero_primary_cta')), findsOneWidget);
-
     await tester.tap(find.text('Settings').first);
     await tester.pumpAndSettle();
 
@@ -1385,53 +1382,17 @@ void main() {
     expect(find.text('Question overview'), findsWidgets);
   });
 
-  testWidgets('home page opens the trigonometry drawing demo',
+  testWidgets('home page offers no developer demo entry',
       (WidgetTester tester) async {
     final TestWidgetsFlutterBinding binding =
         TestWidgetsFlutterBinding.ensureInitialized();
     binding.platformDispatcher.localeTestValue = const Locale('en');
 
-    QuestionProgress? savedProgress;
-    final AppServices services = createTestServices(
-      onSaveQuestionProgress: (progress) async {
-        savedProgress = progress;
-      },
-    );
-
-    await pumpApp(tester, services);
-
-    expect(find.text('View graph demo'), findsOneWidget);
-
-    await tester.tap(find.text('View graph demo'));
-    await tester.runAsync(() async {
-      await Future<void>.delayed(const Duration(milliseconds: 50));
-    });
-    await tester.pump();
-    await tester.pump(const Duration(milliseconds: 300));
+    await pumpApp(tester, createTestServices());
 
     expect(
-      find.text('Sine and cosine on the coordinate plane'),
-      findsAtLeastNWidgets(1),
-    );
-    expect(find.text('Graph Legend'), findsOneWidget);
-    expect(find.text('Choose one answer'), findsAtLeastNWidgets(1));
-    expect(find.textContaining('B  sin(x) at π/2'), findsOneWidget);
-    expect(find.byType(CustomPaint), findsWidgets);
-
-    final optionFinder = find.byKey(
-      const ValueKey<String>('answer_option_geometry_demo_trig_plane_001_B'),
-    );
-    await pumpUntilFound(tester, optionFinder);
-    await tester.tap(optionFinder);
-    await tester.runAsync(() async {
-      await Future<void>.delayed(const Duration(milliseconds: 50));
-    });
-    await tester.pump(const Duration(milliseconds: 150));
-
-    expect(savedProgress, isNotNull);
-    expect(savedProgress!.learnerId, 'learner_allen');
-    expect(savedProgress!.questionId, 'geometry_demo_trig_plane_001');
-    expect(savedProgress!.lastResult, 'multiple_choice:B');
+        find.byKey(const ValueKey<String>('hero_primary_cta')), findsNothing);
+    expect(find.text('View graph demo'), findsNothing);
   });
 
   testWidgets('practice session renders a shape diagram figure',
@@ -1984,9 +1945,18 @@ void main() {
           GlobalCupertinoLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate,
         ],
-        home: TrigGraphDemoPage(
+        home: PracticeSessionPage(
           services: services,
-          initialQuestion: createDemoQuestion(),
+          pack: const BundledQuestionPackInfo(
+            path:
+                'assets/questions/geometry/grade4_foundation.geometry.v1.json',
+            topic: '幾何',
+            topicCode: 'geometry',
+            levelStage: 'grade4',
+            challengeTier: 'foundation',
+            questionCount: 1,
+          ),
+          initialQuestions: [createDemoQuestion()],
         ),
       ),
     );
@@ -1996,16 +1966,12 @@ void main() {
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 300));
 
-    expect(
-      find.text('Sine and cosine on the coordinate plane'),
-      findsAtLeastNWidgets(1),
+    await tester.tap(
+      find.byKey(
+        const ValueKey<String>(
+            'practice_option_geometry_grade4_foundation_001_B'),
+      ),
     );
-
-    final optionFinder = find.byKey(
-      const ValueKey<String>('answer_option_geometry_grade4_foundation_001_B'),
-    );
-    await pumpUntilFound(tester, optionFinder);
-    await tester.tap(optionFinder);
     await tester.runAsync(() async {
       await Future<void>.delayed(const Duration(milliseconds: 50));
     });
