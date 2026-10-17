@@ -14942,6 +14942,532 @@
         "reference": "arithmetic-grade4-foundation",
         "notes": "兩台機器的批次週期不同，取最小公倍數 6 分鐘為一個區塊（共 19 個），76 = 4 × 19，需 24 分鐘。掃過 /每 ?\\d+ ?分鐘.{0,10}(做|生產).{0,30}每 ?\\d+ ?分鐘/（0 題）、/機器.{0,30}玩具/（1 題，單機休息）；最接近 arithmetic_grade3_foundation_152（單台機器做 5 分鐘 4 個、做 20 休 5），差異：那題是一台機器加休息時段；本題是兩台不同週期機器合作，要用公倍數區塊合併效率"
       }
+    },
+    {
+      "id": "arithmetic_grade4_foundation_202",
+      "reviewStatus": "ok",
+      "topic": "arithmetic",
+      "subtopic": "three_phone_plans_range_where_middle_plan_cheapest",
+      "tags": [
+        "c:compare_order",
+        "c:add_sub",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade4",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "電信公司有三種手機月租方案：甲方案每月 199 元，可以講 300 分鐘，超過的部分每分鐘加收 1 元；乙方案每月 299 元，可以講 450 分鐘，超過的部分每分鐘加收 1 元；丙方案每月 399 元，講多久都不再加錢。通話時間都以整數分鐘計算。一個月講幾分鐘時，乙方案會比另外兩個方案都便宜？這樣的整數分鐘數一共有幾個？",
+        "zh-Hans": "电信公司有三种手机月租方案：甲方案每月 199 元，可以讲 300 分钟，超过的部分每分钟加收 1 元；乙方案每月 299 元，可以讲 450 分钟，超过的部分每分钟加收 1 元；丙方案每月 399 元，讲多久都不再加钱。通话时间都以整数分钟计算。一个月讲几分钟时，乙方案会比另外两个方案都便宜？这样的整数分钟数一共有几个？",
+        "en": "A phone company has three monthly plans. Plan A: 199 dollars a month for 300 minutes, then 1 dollar for each extra minute. Plan B: 299 dollars for 450 minutes, then 1 dollar for each extra minute. Plan C: 399 dollars with no extra charge however long you talk. Talk time is counted in whole minutes. For how many whole-minute monthly totals is plan B cheaper than both of the other plans?",
+        "ja": "携帯電話の月の料金プランが 3 つあります。甲プランは月 199 円で 300 分まで話せ、こえた分は 1 分ごとに 1 円加わります。乙プランは月 299 円で 450 分まで話せ、こえた分は 1 分ごとに 1 円加わります。丙プランは月 399 円で、何分話しても追加料金はありません。通話時間は分の整数で数えます。1 か月に話す時間が何分のとき、乙プランがほかの 2 つより安くなりますか。そのような分の数は全部で何こありますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 149。",
+        "zh-Hans": "答案是 149。",
+        "en": "The answer is 149.",
+        "ja": "答えは 149 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "設一個月講 m 分鐘。先比甲和乙：m 不超過 300 時甲只要 199 元，比乙便宜；m 在 301 到 450 之間時甲是 199 + (m − 300) 元、乙固定 299 元，要甲比乙貴就要 m − 300 > 100，也就是 m 至少 401；m 超過 450 時，兩者超過的部分一樣多，甲始終比乙貴 50 元。所以 m ≥ 401 時乙比甲便宜。",
+          "再比乙和丙：m 不超過 450 時乙是 299 元，比丙便宜；m 超過 450 時乙是 299 + (m − 450) 元，要比 399 便宜，就要 m − 450 < 100，也就是 m 最多 549（m = 550 時兩者一樣是 399 元）。所以 m ≤ 549 時乙比丙便宜。",
+          "兩個條件都要成立：m 從 401 到 549。",
+          "個數是 549 − 401 + 1 = 149 個。答案是 149。"
+        ],
+        "zh-Hans": [
+          "设一个月讲 m 分钟。先比甲和乙：m 不超过 300 时甲只要 199 元，比乙便宜；m 在 301 到 450 之间时甲是 199 + (m − 300) 元、乙固定 299 元，要甲比乙贵就要 m − 300 > 100，也就是 m 至少 401；m 超过 450 时，两者超过的部分一样多，甲始终比乙贵 50 元。所以 m ≥ 401 时乙比甲便宜。",
+          "再比乙和丙：m 不超过 450 时乙是 299 元，比丙便宜；m 超过 450 时乙是 299 + (m − 450) 元，要比 399 便宜，就要 m − 450 < 100，也就是 m 最多 549（m = 550 时两者一样是 399 元）。所以 m ≤ 549 时乙比丙便宜。",
+          "两个条件都要成立：m 从 401 到 549。",
+          "个数是 549 − 401 + 1 = 149 个。答案是 149。"
+        ],
+        "en": [
+          "Let the month's talk time be m minutes. A versus B: for m up to 300, A costs only 199, cheaper than B; for m from 301 to 450, A costs 199 + (m − 300) and B a fixed 299, so A is dearer when m − 300 > 100, that is m at least 401; above 450 both add the same extra, and A is always 50 dearer. So B beats A when m ≥ 401.",
+          "B versus C: for m up to 450, B costs 299, cheaper than C; above 450, B costs 299 + (m − 450), which is under 399 when m − 450 < 100, that is m at most 549 (at m = 550 both cost 399). So B beats C when m ≤ 549.",
+          "Both must hold: m from 401 to 549.",
+          "That is 549 − 401 + 1 = 149 values. The answer is 149."
+        ],
+        "ja": [
+          "1 か月に m 分話すとします。甲と乙：m が 300 以下なら甲は 199 円で乙より安いです。m が 301 から 450 なら甲は 199 + (m − 300) 円、乙は 299 円で、甲が高くなるのは m − 300 > 100、つまり m が 401 以上です。450 をこえると追加分は同じで、甲がいつも 50 円高いです。だから m ≥ 401 で乙が甲より安いです。",
+          "乙と丙：m が 450 以下なら乙は 299 円で丙より安いです。450 をこえると乙は 299 + (m − 450) 円で、399 より安いのは m − 450 < 100、つまり m が 549 以下です（m = 550 で両方 399 円）。だから m ≤ 549 で乙が丙より安いです。",
+          "両方が成り立つのは m が 401 から 549 のときです。",
+          "こ数は 549 − 401 + 1 = 149 こです。答えは 149 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "149"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "arithmetic-grade4-foundation",
+        "notes": "分段收費三方案比較：乙勝甲需 m ≥ 401、乙勝丙需 m ≤ 549，交集 149 個整數。掃過 /方案.{0,40}(便宜|划算)|月租/（1 題）、/超過的部分.{0,10}每分鐘/（0 題）；最接近 algebra_grade9_foundation_041，差異：那題是階梯電費由總額反推用量；本題是三個含免費額度的方案兩兩比較，要分段找出中間方案最便宜的區間並計數（注意相等時不算）"
+      }
+    },
+    {
+      "id": "arithmetic_grade4_foundation_203",
+      "reviewStatus": "ok",
+      "topic": "arithmetic",
+      "subtopic": "buses_needed_for_fixed_headway_round_trip",
+      "tags": [
+        "c:mul_div",
+        "c:modular",
+        "m:estimate_bound"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade4",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一條公車路線從 A 站開到 B 站要 42 分鐘。公車到了 B 站休息 8 分鐘，就馬上開回 A 站，回程也要 42 分鐘。公車回到 A 站後至少要休息 8 分鐘，而且只能在 A 站的班次時間出發：從早上 6:00 起，每 15 分鐘一班（6:00、6:15、6:30……），每一班都要有一輛公車準時發車。全天都照這樣跑，這條路線最少需要幾輛公車？",
+        "zh-Hans": "一条公交线路从 A 站开到 B 站要 42 分钟。公交车到了 B 站休息 8 分钟，就马上开回 A 站，回程也要 42 分钟。公交车回到 A 站后至少要休息 8 分钟，而且只能在 A 站的班次时间出发：从早上 6:00 起，每 15 分钟一班（6:00、6:15、6:30……），每一班都要有一辆公交车准时发车。全天都照这样跑，这条线路最少需要几辆公交车？",
+        "en": "A bus route takes 42 minutes from stop A to stop B. At B a bus rests 8 minutes and then drives straight back to A, which also takes 42 minutes. Back at A, a bus must rest at least 8 minutes and can leave only at A's scheduled times: every 15 minutes from 6:00 a.m. (6:00, 6:15, 6:30, …), and every scheduled time must have a bus leaving on time. Running like this all day, what is the fewest number of buses the route needs?",
+        "ja": "あるバス路線は、A 停留所から B 停留所まで 42 分かかります。バスは B で 8 分休むとすぐに A へもどり、帰りも 42 分かかります。A にもどったバスは少なくとも 8 分休み、しかも A の時刻表の時間にしか出発できません。時刻表は朝 6:00 から 15 分ごと（6:00、6:15、6:30……）で、どの時間にもかならず 1 台が時間どおりに出発します。一日中このように走らせるには、バスは最も少なくて何台いりますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 7。",
+        "zh-Hans": "答案是 7。",
+        "en": "The answer is 7.",
+        "ja": "答えは 7 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "一輛公車從 A 站出發後：去程 42 分鐘、在 B 站休息 8 分鐘、回程 42 分鐘、在 A 站至少休息 8 分鐘，最快 42 + 8 + 42 + 8 = 100 分鐘後才能再出發。",
+          "可是 A 站只在 15 的倍數分鐘發車：100 分鐘不是 15 的倍數，它要等到下一個班次，也就是出發後第 105 分鐘（15 × 7）才能再發車。所以每輛公車每 105 分鐘發車一次。",
+          "在一輛公車出發到它下一次出發的 105 分鐘裡，A 站有 105 ÷ 15 = 7 個班次，每個班次要不同的公車，所以至少要 7 輛。",
+          "7 輛也做得到：7 輛輪流負責 6:00、6:15、……、7:30 這 7 個班次，第 1 輛在 7:40 回到並休息好，剛好趕上 7:45 的班次，之後一直循環。（若用 100 ÷ 15 ≈ 6.7 無條件捨去成 6 輛就不夠。）答案是 7。"
+        ],
+        "zh-Hans": [
+          "一辆公交车从 A 站出发后：去程 42 分钟、在 B 站休息 8 分钟、回程 42 分钟、在 A 站至少休息 8 分钟，最快 42 + 8 + 42 + 8 = 100 分钟后才能再出发。",
+          "可是 A 站只在 15 的倍数分钟发车：100 分钟不是 15 的倍数，它要等到下一个班次，也就是出发后第 105 分钟（15 × 7）才能再发车。所以每辆公交车每 105 分钟发车一次。",
+          "在一辆公交车出发到它下一次出发的 105 分钟里，A 站有 105 ÷ 15 = 7 个班次，每个班次要不同的公交车，所以至少要 7 辆。",
+          "7 辆也做得到：7 辆轮流负责 6:00、6:15、……、7:30 这 7 个班次，第 1 辆在 7:40 回到并休息好，刚好赶上 7:45 的班次，之后一直循环。（若用 100 ÷ 15 ≈ 6.7 舍去成 6 辆就不够。）答案是 7。"
+        ],
+        "en": [
+          "After leaving A, a bus needs 42 minutes out, 8 minutes rest at B, 42 minutes back and at least 8 minutes rest at A: it can leave again after 42 + 8 + 42 + 8 = 100 minutes at the earliest.",
+          "But A only has departures at multiples of 15 minutes; 100 is not one, so the bus waits for the next slot, 105 minutes (15 × 7) after it left. So each bus leaves once every 105 minutes.",
+          "In the 105 minutes between one departure of a bus and its next, A has 105 ÷ 15 = 7 departures, each needing a different bus, so at least 7 buses.",
+          "7 buses work: they take the 7 departures 6:00, 6:15, …, 7:30 in turn, and bus 1 is back and rested at 7:40, in time for 7:45, and so on. (Rounding 100 ÷ 15 ≈ 6.7 down to 6 buses is not enough.) The answer is 7."
+        ],
+        "ja": [
+          "A を出たバスは、行き 42 分、B で 8 分休み、帰り 42 分、A で少なくとも 8 分休むので、早くて 42 + 8 + 42 + 8 = 100 分後にまた出発できます。",
+          "でも A は 15 の倍数の分にしか出発しません。100 は 15 の倍数ではないので、次の便の、出発から 105 分後（15 × 7）まで待ちます。だからどのバスも 105 分に 1 回出発します。",
+          "あるバスが出発してから次に出発するまでの 105 分に、A の便は 105 ÷ 15 = 7 便あり、どの便も別のバスがいるので、少なくとも 7 台です。",
+          "7 台でできます。7 台が 6:00、6:15、……、7:30 の 7 便を順にうけもち、1 台目は 7:40 にもどって休み終わり、7:45 の便に間に合い、これをくり返します。（100 ÷ 15 ≈ 6.7 を切り捨てて 6 台にすると足りません。）答えは 7 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "7"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "arithmetic-grade4-foundation",
+        "notes": "一輛車的週期 100 分鐘要對齊到班距 15 的倍數成 105 分，週期內有 7 個班次，需 7 輛。掃過 /(幾|多少)輛(公車|車).{0,30}(才能|才夠)|每隔.{0,10}分鐘.{0,20}發.{0,4}車.{0,40}(幾|多少)輛/（0 題）、/每 15 分鐘.{0,6}(一班|發車)/（1 題）；最接近 logic_grade4_foundation_111，差異：那題是每小時一班的火車途中會遇到幾班對向車；本題是由來回所需時間與固定班距反推最少車輛數，關鍵是週期要向上對齊到 15 的倍數"
+      }
+    },
+    {
+      "id": "arithmetic_grade4_foundation_204",
+      "reviewStatus": "ok",
+      "topic": "arithmetic",
+      "subtopic": "round_to_nearest_five_split_checkout",
+      "tags": [
+        "c:place_value",
+        "c:add_sub",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade4",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "某個國家的商店結帳時，每一張帳單的總金額都要調整到最接近的 5 的倍數再付錢：個位數字是 1、2 就往下調（例如 32 元付 30 元）；3、4 往上調到 5（例如 34 元付 35 元）；6、7 往下調到 5；8、9 往上調到下一個 10；0 和 5 不變。小安要買四樣東西，價錢是 23 元、34 元、41 元、12 元，她可以把東西分成好幾張帳單分開結帳。她最少要付幾元？",
+        "zh-Hans": "某个国家的商店结账时，每一张账单的总金额都要调整到最接近的 5 的倍数再付钱：个位数字是 1、2 就往下调（例如 32 元付 30 元）；3、4 往上调到 5（例如 34 元付 35 元）；6、7 往下调到 5；8、9 往上调到下一个 10；0 和 5 不变。小安要买四样东西，价钱是 23 元、34 元、41 元、12 元，她可以把东西分成好几张账单分开结账。她最少要付几元？",
+        "en": "In one country, every bill at a shop is adjusted to the nearest multiple of 5 before paying: if the units digit is 1 or 2 it goes down (32 is paid as 30); 3 or 4 goes up to 5 (34 is paid as 35); 6 or 7 goes down to 5; 8 or 9 goes up to the next 10; 0 and 5 stay. An buys four things priced 23, 34, 41 and 12 dollars, and she may split them into several separate bills. What is the least she must pay?",
+        "ja": "ある国のお店では、レシート 1 まいごとに合計金額をいちばん近い 5 の倍数に直してはらいます。一の位が 1、2 なら下げ（32 円は 30 円）、3、4 なら 5 に上げ（34 円は 35 円）、6、7 なら 5 に下げ、8、9 なら次の 10 に上げ、0 と 5 はそのままです。アンさんは 23 円、34 円、41 円、12 円の 4 つの品物を買い、何まいかのレシートに分けて会計できます。最も少なくて何円はらいますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 105。",
+        "zh-Hans": "答案是 105。",
+        "en": "The answer is 105.",
+        "ja": "答えは 105 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "每一張帳單最多被調低 2 元（個位 1、2、6、7 時），調高時就是多付。四樣東西加起來是 23 + 34 + 41 + 12 = 110 元，要讓付的錢少於 110，就要讓某些帳單被往下調。",
+          "41 元和 12 元個位是 1、2，各自單獨結帳就會往下調：41 → 40、12 → 10，各省 1 元、2 元。23 元和 34 元單獨結帳都會往上調（25、35），各多付 2 元、1 元；但兩樣合在一起是 57 元，個位是 7，會往下調成 55 元，反而省 2 元。",
+          "所以分成三張帳單：23 + 34 = 57 → 55 元、41 → 40 元、12 → 10 元，共 55 + 40 + 10 = 105 元，一共省了 2 + 1 + 2 = 5 元。",
+          "檢查其他分法都不會更少：全部一起是 110 元，四張各自是 25 + 35 + 40 + 10 = 110 元。最少是 105 元。答案是 105。"
+        ],
+        "zh-Hans": [
+          "每一张账单最多被调低 2 元（个位 1、2、6、7 时），调高时就是多付。四样东西加起来是 23 + 34 + 41 + 12 = 110 元，要让付的钱少于 110，就要让某些账单被往下调。",
+          "41 元和 12 元个位是 1、2，各自单独结账就会往下调：41 → 40、12 → 10，各省 1 元、2 元。23 元和 34 元单独结账都会往上调（25、35），各多付 2 元、1 元；但两样合在一起是 57 元，个位是 7，会往下调成 55 元，反而省 2 元。",
+          "所以分成三张账单：23 + 34 = 57 → 55 元、41 → 40 元、12 → 10 元，共 55 + 40 + 10 = 105 元，一共省了 2 + 1 + 2 = 5 元。",
+          "检查其他分法都不会更少：全部一起是 110 元，四张各自是 25 + 35 + 40 + 10 = 110 元。最少是 105 元。答案是 105。"
+        ],
+        "en": [
+          "Each bill can be adjusted down by at most 2 (units digit 1, 2, 6 or 7); adjusting up means paying more. The four prices total 23 + 34 + 41 + 12 = 110, so to pay under 110 some bills must be adjusted down.",
+          "41 and 12 end in 1 and 2, so on their own they go down: 41 → 40 and 12 → 10, saving 1 and 2. 23 and 34 on their own both go up (25 and 35), costing 2 and 1 extra; but together they make 57, ending in 7, which goes down to 55, saving 2.",
+          "So use three bills: 23 + 34 = 57 → 55, 41 → 40, 12 → 10, for 55 + 40 + 10 = 105 in total, saving 2 + 1 + 2 = 5.",
+          "No other split does better: all together is 110, and four separate bills are 25 + 35 + 40 + 10 = 110. The least is 105. The answer is 105."
+        ],
+        "ja": [
+          "レシート 1 まいで下がるのは多くて 2 円（一の位が 1、2、6、7 のとき）で、上がるときは多くはらいます。4 つの合計は 23 + 34 + 41 + 12 = 110 円なので、110 円より少なくするには、いくつかのレシートを下げる必要があります。",
+          "41 円と 12 円は一の位が 1、2 なので、1 つずつ会計すると 41 → 40、12 → 10 で、1 円と 2 円安くなります。23 円と 34 円は 1 つずつだとどちらも上がります（25、35）が、2 つ合わせると 57 円で一の位が 7 なので 55 円に下がり、2 円安くなります。",
+          "そこで 3 まいに分けます。23 + 34 = 57 → 55 円、41 → 40 円、12 → 10 円で、55 + 40 + 10 = 105 円、合わせて 2 + 1 + 2 = 5 円安くなります。",
+          "ほかの分け方ではこれより少なくなりません。全部まとめると 110 円、4 まい別々だと 25 + 35 + 40 + 10 = 110 円です。最も少ないのは 105 円です。答えは 105 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "105"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "arithmetic-grade4-foundation",
+        "notes": "以 5 為單位的四捨五入結帳：讓每張帳單的個位落在 1、2、6、7 才會被調低，把 23 與 34 合併成 57 是關鍵。掃過 /四捨五入.{0,40}(付|結帳)|結帳.{0,30}(四捨五入|調整)/（0 題）、/最接近的 5 的倍數/（0 題）；最接近 arithmetic_grade6_foundation_154，差異：那題是滿額折抵分張發票；本題是每張帳單取最接近 5 的倍數，要依個位數字決定往上或往下調，並把兩個「會被調高」的品項合併成「會被調低」"
+      }
+    },
+    {
+      "id": "arithmetic_grade4_foundation_205",
+      "reviewStatus": "ok",
+      "topic": "arithmetic",
+      "subtopic": "barbell_symmetric_plates_fewest",
+      "tags": [
+        "c:decimal",
+        "c:add_sub",
+        "m:extremal"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade4",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "健身房的槓鈴桿本身重 20 公斤。槓片有 20 公斤、10 公斤、5 公斤、2.5 公斤、1.25 公斤五種，每種都有很多片。槓片要套在桿子的兩端，而且兩端套的槓片必須完全一樣（片數和重量都相同），才不會歪。小安要讓整支槓鈴（桿子加槓片）剛好重 57.5 公斤。她最少要套幾片槓片？",
+        "zh-Hans": "健身房的杠铃杆本身重 20 千克。杠铃片有 20 千克、10 千克、5 千克、2.5 千克、1.25 千克五种，每种都有很多片。杠铃片要套在杆子的两端，而且两端套的杠铃片必须完全一样（片数和重量都相同），才不会歪。小安要让整支杠铃（杆子加杠铃片）刚好重 57.5 千克。她最少要套几片杠铃片？",
+        "en": "A gym barbell bar weighs 20 kg by itself. Plates come in 20 kg, 10 kg, 5 kg, 2.5 kg and 1.25 kg, with plenty of each. Plates go on both ends of the bar, and the two ends must carry exactly the same plates (same number and weights) so the bar stays level. An wants the whole barbell (bar plus plates) to weigh exactly 57.5 kg. What is the fewest number of plates she must load?",
+        "ja": "ジムのバーベルのバーは、それだけで 20 kg です。プレートは 20 kg、10 kg、5 kg、2.5 kg、1.25 kg の 5 種類があり、どれもたくさんあります。プレートはバーの両はしにつけ、かたむかないように両はしにはまったく同じプレート（まい数も重さも同じ）をつけます。アンさんはバーベル全体（バーとプレート）をちょうど 57.5 kg にしたいです。プレートは最も少なくて何まいつけますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 8。",
+        "zh-Hans": "答案是 8。",
+        "en": "The answer is 8.",
+        "ja": "答えは 8 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "先扣掉桿子：槓片一共要 57.5 − 20 = 37.5 公斤。兩端一樣重，每一端要 37.5 ÷ 2 = 18.75 公斤。",
+          "每一端用最少片數湊 18.75 公斤：20 公斤太重不能用；先放 10 公斤，剩 8.75；再放 5 公斤，剩 3.75；再放 2.5 公斤，剩 1.25；最後放 1.25 公斤，剛好。每端 4 片。",
+          "每端不能只用 3 片：18.75 的小數 .25 只有 1.25 公斤的槓片做得出來，所以一定有 1 片 1.25 公斤；剩下的 17.5 公斤若只用 2 片，可能的組合如 10 + 5 = 15、10 + 10 = 20、5 + 2.5 = 7.5 都湊不出 17.5。所以每端至少 4 片。",
+          "兩端共 4 × 2 = 8 片。（若忘了扣掉桿重或忘了兩端都要放，就會算錯。）答案是 8。"
+        ],
+        "zh-Hans": [
+          "先扣掉杆子：杠铃片一共要 57.5 − 20 = 37.5 千克。两端一样重，每一端要 37.5 ÷ 2 = 18.75 千克。",
+          "每一端用最少片数凑 18.75 千克：20 千克太重不能用；先放 10 千克，剩 8.75；再放 5 千克，剩 3.75；再放 2.5 千克，剩 1.25；最后放 1.25 千克，刚好。每端 4 片。",
+          "每端不能只用 3 片：18.75 的小数 .25 只有 1.25 千克的杠铃片做得出来，所以一定有 1 片 1.25 千克；剩下的 17.5 千克若只用 2 片，可能的组合如 10 + 5 = 15、10 + 10 = 20、5 + 2.5 = 7.5 都凑不出 17.5。所以每端至少 4 片。",
+          "两端共 4 × 2 = 8 片。（若忘了扣掉杆重或忘了两端都要放，就会算错。）答案是 8。"
+        ],
+        "en": [
+          "First remove the bar: the plates must total 57.5 − 20 = 37.5 kg. Both ends are equal, so each end carries 37.5 ÷ 2 = 18.75 kg.",
+          "Fewest plates for 18.75 kg on one end: 20 kg is too heavy; take 10, leaving 8.75; then 5, leaving 3.75; then 2.5, leaving 1.25; then 1.25, exactly. That is 4 plates per end.",
+          "3 plates per end are not enough: the .25 in 18.75 can only come from a 1.25 kg plate, so one 1.25 kg plate is needed; the remaining 17.5 kg cannot be made from just 2 plates (pairs such as 10 + 5 = 15, 10 + 10 = 20, 5 + 2.5 = 7.5 all miss 17.5). So at least 4 per end.",
+          "Both ends: 4 × 2 = 8 plates. (Forgetting to remove the bar or to load both ends gives a wrong count.) The answer is 8."
+        ],
+        "ja": [
+          "まずバーの分をひきます。プレートは全部で 57.5 − 20 = 37.5 kg、両はしは同じなので、片方は 37.5 ÷ 2 = 18.75 kg です。",
+          "片方の 18.75 kg をできるだけ少ないまい数で作ります。20 kg は重すぎます。10 kg をつけるとのこり 8.75、5 kg でのこり 3.75、2.5 kg でのこり 1.25、1.25 kg でちょうどです。片方 4 まいです。",
+          "片方 3 まいではできません。18.75 の .25 は 1.25 kg のプレートでしか作れないので 1.25 kg が 1 まいいります。のこりの 17.5 kg を 2 まいで作ろうとしても、10 + 5 = 15、10 + 10 = 20、5 + 2.5 = 7.5 などどれも 17.5 になりません。だから片方は少なくとも 4 まいです。",
+          "両はしで 4 × 2 = 8 まいです。（バーの重さをひきわすれたり、両はしにつけることをわすれたりすると数をまちがえます。）答えは 8 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "8"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "arithmetic-grade4-foundation",
+        "notes": "先扣桿重再兩端平分，每端 18.75 公斤，小數部分逼出 2.5 與 1.25，共 4 片 × 2 端 = 8 片。掃過 /槓鈴|槓片|啞鈴/（0 題）、/兩端.{0,20}(一樣|相同).{0,20}重/（1 題）；最接近 arithmetic_grade3_foundation_129，差異：那題是用最少的杯數湊出小數容量；本題多了「兩端對稱」與「扣掉桿重」兩層限制，要先換算成每一端的重量再湊"
+      }
+    },
+    {
+      "id": "arithmetic_grade4_foundation_206",
+      "reviewStatus": "ok",
+      "topic": "arithmetic",
+      "subtopic": "erase_one_digit_largest_multiple_of_three",
+      "tags": [
+        "c:factor_multiple",
+        "c:place_value",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade4",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "黑板上寫著七位數 8475136。小安要擦掉其中一個數字，剩下的六個數字照原來的順序排成一個六位數，而且這個六位數必須是 3 的倍數。在所有可能的擦法中，得到的六位數最大是多少？",
+        "zh-Hans": "黑板上写着七位数 8475136。小安要擦掉其中一个数字，剩下的六个数字照原来的顺序排成一个六位数，而且这个六位数必须是 3 的倍数。在所有可能的擦法中，得到的六位数最大是多少？",
+        "en": "The 7-digit number 8475136 is written on the board. An erases one digit, and the remaining six digits, in their original order, form a 6-digit number that must be a multiple of 3. Of all possible choices, what is the largest 6-digit number she can get?",
+        "ja": "黒板に 7 けたの数 8475136 が書いてあります。アンさんは数字を 1 つ消し、のこりの 6 つの数字をもとの順のままならべて 6 けたの数にします。その数は 3 の倍数でなければなりません。考えられる消し方のうち、できる 6 けたの数で最も大きいのはいくつですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 875136。",
+        "zh-Hans": "答案是 875136。",
+        "en": "The answer is 875136.",
+        "ja": "答えは 875136 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "一個數是 3 的倍數，要看它的數字和。8 + 4 + 7 + 5 + 1 + 3 + 6 = 34，34 除以 3 餘 1。",
+          "擦掉一個數字後，數字和要變成 3 的倍數，所以擦掉的數字本身除以 3 要餘 1，也就是 1、4 或 7。7 位數裡這樣的數字有 4、7、1 三個。",
+          "三種擦法：擦 4 得 875136，擦 7 得 845136，擦 1 得 847536。比較最高位都是 8；第二位擦 4 的是 7，其他兩個是 4，所以 875136 最大。",
+          "重點是「讓前面的位數盡量大」：擦掉 4 後，後面的 7 往前補上第二位。若直覺擦最小的 1，只得到 847536。答案是 875136。"
+        ],
+        "zh-Hans": [
+          "一个数是 3 的倍数，要看它的数字和。8 + 4 + 7 + 5 + 1 + 3 + 6 = 34，34 除以 3 余 1。",
+          "擦掉一个数字后，数字和要变成 3 的倍数，所以擦掉的数字本身除以 3 要余 1，也就是 1、4 或 7。7 位数里这样的数字有 4、7、1 三个。",
+          "三种擦法：擦 4 得 875136，擦 7 得 845136，擦 1 得 847536。比较最高位都是 8；第二位擦 4 的是 7，其他两个是 4，所以 875136 最大。",
+          "重点是“让前面的位数尽量大”：擦掉 4 后，后面的 7 往前补上第二位。若直觉擦最小的 1，只得到 847536。答案是 875136。"
+        ],
+        "en": [
+          "Whether a number is a multiple of 3 depends on its digit sum: 8 + 4 + 7 + 5 + 1 + 3 + 6 = 34, which leaves remainder 1 when divided by 3.",
+          "After erasing a digit the sum must be a multiple of 3, so the erased digit must itself leave remainder 1: 1, 4 or 7. The number has three such digits: 4, 7 and 1.",
+          "The three choices: erase 4 to get 875136, erase 7 to get 845136, erase 1 to get 847536. All start with 8; in the second place erasing 4 gives 7 while the others give 4, so 875136 is largest.",
+          "The key is to make the front digits as large as possible: erasing 4 lets the 7 move up into the second place. Instinctively erasing the smallest digit, 1, gives only 847536. The answer is 875136."
+        ],
+        "ja": [
+          "3 の倍数かどうかは、各位の数字の和で決まります。8 + 4 + 7 + 5 + 1 + 3 + 6 = 34 で、3 でわると 1 あまります。",
+          "1 つ消したあと和が 3 の倍数になるには、消す数字が 3 でわって 1 あまる数、つまり 1、4、7 でなければなりません。この数の中では 4、7、1 の 3 つです。",
+          "消し方は 3 通りで、4 を消すと 875136、7 を消すと 845136、1 を消すと 847536 です。どれも一番上の位は 8 で、2 番目の位が 4 を消したときだけ 7、ほかは 4 なので、875136 が最も大きいです。",
+          "大事なのは「前の位をできるだけ大きくする」ことで、4 を消すと後ろの 7 が 2 番目の位に上がります。いちばん小さい 1 を消すと 847536 にしかなりません。答えは 875136 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "875136"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 6
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "arithmetic-grade4-foundation",
+        "notes": "數字和 34 餘 1，只能擦 1、4、7；三個候選比較高位，擦掉 4 讓 7 前移最大。掃過 /(擦掉|去掉|刪掉).{0,10}一個數字.{0,30}(倍數|整除)/（0 題）、/3 的倍數.{0,30}最大/（1 題）；最接近 arithmetic_grade3_foundation_183，差異：那題是在兩位數中間插 0 變成 7 倍；本題要用數字和判斷能擦哪些數字，再用位值比較哪一種擦法最大，破除「擦最小的數字」的直覺"
+      }
+    },
+    {
+      "id": "arithmetic_grade4_foundation_207",
+      "reviewStatus": "ok",
+      "topic": "arithmetic",
+      "subtopic": "age_equals_digit_sum_of_birth_year",
+      "tags": [
+        "c:place_value",
+        "c:add_sub",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade4",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "小安說：「在 2026 年我過生日的那一天，我的歲數剛好等於我出生那一年的四個數字加起來的和。」（例如出生年是 2013，四個數字的和是 2 + 0 + 1 + 3 = 6。）小安在 2026 年生日那天是幾歲？",
+        "zh-Hans": "小安说：“在 2026 年我过生日的那一天，我的岁数刚好等于我出生那一年的四个数字加起来的和。”（例如出生年是 2013，四个数字的和是 2 + 0 + 1 + 3 = 6。）小安在 2026 年生日那天是几岁？",
+        "en": "An says: \"On my birthday in 2026, my age will be exactly the sum of the four digits of the year I was born.\" (For example, for the year 2013 the digit sum is 2 + 0 + 1 + 3 = 6.) How old is An on her birthday in 2026?",
+        "ja": "アンさんは「2026 年のたん生日に、わたしの年れいは、生まれた年の 4 つの数字をたした数とちょうど同じになる」と言いました。（たとえば 2013 年なら、2 + 0 + 1 + 3 = 6 です。）アンさんは 2026 年のたん生日に何才ですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 5。",
+        "zh-Hans": "答案是 5。",
+        "en": "The answer is 5.",
+        "ja": "答えは 5 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "歲數 = 2026 − 出生年。先排除 1999 年以前出生：那些年份的數字和最多是 1 + 9 + 9 + 9 = 28，可是 1997 年以前出生的人在 2026 年已經超過 28 歲；1998 年出生是 28 歲但數字和 27，1999 年出生是 27 歲但數字和 28，都不合。",
+          "2000 到 2009 年出生：數字和是 2 + 個位，歲數是 26 − 個位，要相等就是 2 + 個位 = 26 − 個位，個位 = 12，不可能。2010 到 2019 年出生：數字和是 3 + 個位，歲數是 16 − 個位，3 + 個位 = 16 − 個位，個位不是整數，也不可能。",
+          "2020 到 2026 年出生：數字和是 4 + 個位，歲數是 6 − 個位，4 + 個位 = 6 − 個位，個位 = 1，出生年是 2021。",
+          "檢查：2 + 0 + 2 + 1 = 5，2026 − 2021 = 5，正確，而且只有這一個年份符合。答案是 5。"
+        ],
+        "zh-Hans": [
+          "岁数 = 2026 − 出生年。先排除 1999 年以前出生：那些年份的数字和最多是 1 + 9 + 9 + 9 = 28，可是 1997 年以前出生的人在 2026 年已经超过 28 岁；1998 年出生是 28 岁但数字和 27，1999 年出生是 27 岁但数字和 28，都不合。",
+          "2000 到 2009 年出生：数字和是 2 + 个位，岁数是 26 − 个位，要相等就是 2 + 个位 = 26 − 个位，个位 = 12，不可能。2010 到 2019 年出生：数字和是 3 + 个位，岁数是 16 − 个位，3 + 个位 = 16 − 个位，个位不是整数，也不可能。",
+          "2020 到 2026 年出生：数字和是 4 + 个位，岁数是 6 − 个位，4 + 个位 = 6 − 个位，个位 = 1，出生年是 2021。",
+          "检查：2 + 0 + 2 + 1 = 5，2026 − 2021 = 5，正确，而且只有这一个年份符合。答案是 5。"
+        ],
+        "en": [
+          "Age = 2026 − birth year. First rule out births before 2000: those years have digit sum at most 1 + 9 + 9 + 9 = 28, but anyone born before 1998 is over 28 in 2026; born 1998 means age 28 with digit sum 27, born 1999 means age 27 with digit sum 28, so none fit.",
+          "Born 2000–2009: digit sum 2 + units, age 26 − units; equal means units = 12, impossible. Born 2010–2019: digit sum 3 + units, age 16 − units; equal means 2 × units = 13, not a whole number, impossible.",
+          "Born 2020–2026: digit sum 4 + units, age 6 − units; equal means units = 1, so the year is 2021.",
+          "Check: 2 + 0 + 2 + 1 = 5 and 2026 − 2021 = 5, and this is the only year that works. The answer is 5."
+        ],
+        "ja": [
+          "年れい = 2026 − 生まれた年です。まず 1999 年以前に生まれた場合をのぞきます。その年の数字の和は多くて 1 + 9 + 9 + 9 = 28 ですが、1997 年以前に生まれた人は 2026 年に 28 才をこえています。1998 年生まれは 28 才で和は 27、1999 年生まれは 27 才で和は 28 で、どれも合いません。",
+          "2000〜2009 年生まれ：和は 2 + 一の位、年れいは 26 − 一の位で、等しいなら一の位 = 12 となりありえません。2010〜2019 年生まれ：和は 3 + 一の位、年れいは 16 − 一の位で、一の位の 2 倍が 13 になり整数でないのでありえません。",
+          "2020〜2026 年生まれ：和は 4 + 一の位、年れいは 6 − 一の位で、等しいなら一の位 = 1、生まれた年は 2021 年です。",
+          "たしかめ：2 + 0 + 2 + 1 = 5、2026 − 2021 = 5 で正しく、合う年はこれだけです。答えは 5 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "5"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "arithmetic-grade4-foundation",
+        "notes": "數字和最多 28 排除 1999 年以前；2000 年後按十位分段列式，只有 2021 年使數字和＝歲數 5。掃過 /出生.{0,20}年份.{0,40}(數字和|數字加起來)|年齡.{0,30}數字(加起來|和)/（0 題）、/出生.{0,10}(那一)?年.{0,30}(加起來|和)/（2 題）；最接近 logic_grade4_foundation_065，差異：那題由「前天、明年生日」的說法推日期；本題是歲數與出生年份的數字和相等，要先用數字和上限排除舊年份，再按十位分段討論"
+      }
+    },
+    {
+      "id": "arithmetic_grade4_foundation_208",
+      "reviewStatus": "ok",
+      "topic": "arithmetic",
+      "subtopic": "repeatedly_subtract_digit_sum_multiples_of_nine",
+      "tags": [
+        "c:place_value",
+        "c:factor_multiple",
+        "m:invariant"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade4",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "小安從 2026 開始玩一個遊戲：每一步都把現在的數減去它自己的各位數字和，得到下一個數。例如 2026 的數字和是 10，下一個數是 2026 − 10 = 2016；2016 的數字和是 9，再下一個是 2007……一直做下去，直到得到 0 為止。下面四個數中，恰好有一個會出現在這一串數裡。是哪一個？",
+        "zh-Hans": "小安从 2026 开始玩一个游戏：每一步都把现在的数减去它自己的各位数字和，得到下一个数。例如 2026 的数字和是 10，下一个数是 2026 − 10 = 2016；2016 的数字和是 9，再下一个是 2007……一直做下去，直到得到 0 为止。下面四个数中，恰好有一个会出现在这一串数里。是哪一个？",
+        "en": "An plays a game starting from 2026: at each step she subtracts the sum of the current number's digits to get the next number. For example, 2026 has digit sum 10, so the next number is 2026 − 10 = 2016; 2016 has digit sum 9, so the next is 2007, and so on until she reaches 0. Exactly one of the four numbers below appears in this list. Which one?",
+        "ja": "アンさんは 2026 から遊びをはじめます。1 回ごとに、いまの数からその数の各位の数字の和をひいて次の数にします。たとえば 2026 の数字の和は 10 なので次は 2026 − 10 = 2016、2016 の和は 9 なのでその次は 2007……と、0 になるまで続けます。次の 4 つの数のうち、ちょうど 1 つだけがこの列に出てきます。どれですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 A：1620，它的數字和是 9 的倍數",
+        "zh-Hans": "答案是 A：1620，它的数字和是 9 的倍数",
+        "en": "The answer is A: 1620, whose digit sum is a multiple of 9",
+        "ja": "答えは A：1620。数字の和が 9 の倍数だから"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "任何數減去自己的數字和，結果一定是 9 的倍數。例如四位數 abcd = 1000a + 100b + 10c + d，減去 a + b + c + d 得到 999a + 99b + 9c，每一項都是 9 的倍數。",
+          "所以從第二個數 2016 開始，這一串裡的每一個數都是 9 的倍數。9 的倍數的數字和也是 9 的倍數。",
+          "看四個選項的數字和：1620 是 1 + 6 + 2 + 0 = 9，是 9 的倍數；1621 的數字和是 10、1622 是 11、1626 是 15，都不是 9 的倍數，不可能出現。題目說恰好有一個會出現，所以是 1620。答案是 A。",
+          "B、C、D 錯：1621、1622、1626 都不是 9 的倍數，而 2016 之後每一個數都是 9 的倍數。（實際一步步做下去，確實會經過 1638 → 1620。）"
+        ],
+        "zh-Hans": [
+          "任何数减去自己的数字和，结果一定是 9 的倍数。例如四位数 abcd = 1000a + 100b + 10c + d，减去 a + b + c + d 得到 999a + 99b + 9c，每一项都是 9 的倍数。",
+          "所以从第二个数 2016 开始，这一串里的每一个数都是 9 的倍数。9 的倍数的数字和也是 9 的倍数。",
+          "看四个选项的数字和：1620 是 1 + 6 + 2 + 0 = 9，是 9 的倍数；1621 的数字和是 10、1622 是 11、1626 是 15，都不是 9 的倍数，不可能出现。题目说恰好有一个会出现，所以是 1620。答案是 A。",
+          "B、C、D 错：1621、1622、1626 都不是 9 的倍数，而 2016 之后每一个数都是 9 的倍数。（实际一步步做下去，确实会经过 1638 → 1620。）"
+        ],
+        "en": [
+          "Any number minus its digit sum is a multiple of 9. For a 4-digit number abcd = 1000a + 100b + 10c + d, subtracting a + b + c + d leaves 999a + 99b + 9c, and every term is a multiple of 9.",
+          "So from the second number, 2016, on, every number in the list is a multiple of 9, and a multiple of 9 has a digit sum that is a multiple of 9.",
+          "Digit sums of the options: 1620 has 1 + 6 + 2 + 0 = 9, a multiple of 9; 1621 has 10, 1622 has 11, 1626 has 15, none multiples of 9, so they cannot appear. Since exactly one appears, it is 1620. The answer is A.",
+          "B, C and D are wrong: 1621, 1622 and 1626 are not multiples of 9, while every number after 2016 is. (Working step by step, the list really does pass 1638 → 1620.)"
+        ],
+        "ja": [
+          "どんな数でも、その数から数字の和をひくと 9 の倍数になります。4 けたの数 abcd = 1000a + 100b + 10c + d から a + b + c + d をひくと 999a + 99b + 9c で、どの項も 9 の倍数です。",
+          "だから 2 番目の 2016 からあとは、列の数はすべて 9 の倍数です。9 の倍数は数字の和も 9 の倍数です。",
+          "選たくしの数字の和は、1620 が 1 + 6 + 2 + 0 = 9 で 9 の倍数、1621 は 10、1622 は 11、1626 は 15 でどれも 9 の倍数ではないので出てきません。ちょうど 1 つ出てくるので 1620 です。答えは A です。",
+          "B、C、D はまちがい：1621、1622、1626 は 9 の倍数ではありませんが、2016 からあとはすべて 9 の倍数です。（実際に 1 つずつ計算すると、1638 → 1620 と通ります。）"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "multiple_choice",
+      "options": {
+        "A": {
+          "zh-Hant": "1620，它的數字和是 9 的倍數",
+          "zh-Hans": "1620，它的数字和是 9 的倍数",
+          "en": "1620, whose digit sum is a multiple of 9",
+          "ja": "1620。数字の和が 9 の倍数だから"
+        },
+        "B": {
+          "zh-Hant": "1621，它的數字和是 10 的倍數",
+          "zh-Hans": "1621，它的数字和是 10 的倍数",
+          "en": "1621, whose digit sum is a multiple of 10",
+          "ja": "1621。数字の和が 10 の倍数だから"
+        },
+        "C": {
+          "zh-Hant": "1622，它比 2026 剛好小 404",
+          "zh-Hans": "1622，它比 2026 刚好小 404",
+          "en": "1622, which is exactly 404 less than 2026",
+          "ja": "1622。2026 よりちょうど 404 小さいから"
+        },
+        "D": {
+          "zh-Hant": "1626，它和 2026 的末兩位相同",
+          "zh-Hans": "1626，它和 2026 的末两位相同",
+          "en": "1626, which ends in the same two digits as 2026",
+          "ja": "1626。2026 と下 2 けたが同じだから"
+        }
+      },
+      "correctAnswer": {
+        "type": "choice",
+        "value": "A"
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "arithmetic-grade4-foundation",
+        "notes": "n 減去數字和恆為 9 的倍數（999a + 99b + 9c），所以 2016 之後只會出現 9 的倍數。掃過 /減(去|掉).{0,10}(它的)?(各位)?數字(和|加起來)|數字和.{0,20}減/（0 題）、/9 的倍數.{0,30}數字和/（0 題）；最接近 logic_grade4_foundation_057，差異：那題是判斷哪一個整數敘述永遠成立；本題要用位值展開看出「減去數字和必為 9 的倍數」這個不變性，再用它從選項中排除不可能出現的數"
+      }
     }
   ]
 }

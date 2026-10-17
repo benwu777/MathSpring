@@ -9064,6 +9064,410 @@
         "reference": "logic-grade4-foundation",
         "notes": "總工作量 23 分鐘由兩人分攤，較多者至少 12；再排出掃地先做、拖地接在洗抹布後的 12 分鐘方案。掃過 /(分工|兩個人.{0,10}同時).{0,60}最少.{0,10}分鐘/（0 題）、/一定要等.{0,20}(做完|完成).{0,20}才能/（1 題，泡茶單人）；最接近 logic_grade7_foundation_020（泡茶的最少時間），差異：那題一人做事、靠燒水空檔；本題兩人分工，要用總量下界加上先後限制排出最佳安排"
       }
+    },
+    {
+      "id": "logic_grade4_foundation_114",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "nonogram_row_cells_certainly_filled",
+      "tags": [
+        "c:logic_deduction",
+        "c:position_direction",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade4",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "「數織」遊戲裡，有一橫排 10 個格子，從左到右編號 1 到 10。這一排的提示是「4　3」：表示這一排塗黑的格子，從左到右剛好是一段連續 4 格、和一段連續 3 格，兩段之間至少隔 1 個白格，其他格子都是白的。還不知道兩段的確切位置。哪些格子不論怎麼擺都一定是黑的？",
+        "zh-Hans": "“数织”游戏里，有一横排 10 个格子，从左到右编号 1 到 10。这一排的提示是“4　3”：表示这一排涂黑的格子，从左到右刚好是一段连续 4 格、和一段连续 3 格，两段之间至少隔 1 个白格，其他格子都是白的。还不知道两段的确切位置。哪些格子不论怎么摆都一定是黑的？",
+        "en": "In a nonogram puzzle, one row has 10 squares numbered 1 to 10 from left to right. Its clue is \"4 3\": the black squares in the row are, from left to right, exactly one block of 4 in a row and one block of 3 in a row, with at least 1 white square between them, and all other squares white. The exact positions are not yet known. Which squares are black no matter how the blocks are placed?",
+        "ja": "「ののぐらむ（お絵かきロジック）」で、横 1 列に 10 マスあり、左から 1 番から 10 番です。この列のヒントは「4　3」で、ぬりつぶすマスは左から、続いた 4 マスのかたまりと続いた 3 マスのかたまりがちょうど 1 つずつ、間に白いマスが少なくとも 1 つあり、ほかは白です。かたまりの正しい位置はまだわかりません。どのようにおいてもかならず黒になるマスはどれですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 A：第 3、4、8 格一定是黑的",
+        "zh-Hans": "答案是 A：第 3、4、8 格一定是黑的",
+        "en": "The answer is A: Squares 3, 4 and 8 are surely black",
+        "ja": "答えは A：3、4、8 番がかならず黒"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "兩段加中間的 1 個白格至少佔 4 + 1 + 3 = 8 格，10 格裡還多 2 格可以左右移動。",
+          "4 格那段：最靠左時是第 1 到 4 格，最靠右時是第 3 到 6 格。兩種擺法都塗到的是第 3、4 格，而且中間的擺法也都包含第 3、4 格，所以第 3、4 格一定黑。",
+          "3 格那段：最靠左時是第 6 到 8 格，最靠右時是第 8 到 10 格，一定都包含第 8 格。所以一定黑的是第 3、4、8 格。答案是 A。",
+          "B 漏了第 3 格。C 多了第 5 格：4 格段放在第 1 到 4 格時第 5 格是白的。D 錯：4 格段可以往右移到第 3 到 6 格，第 1、2 格不一定黑。"
+        ],
+        "zh-Hans": [
+          "两段加中间的 1 个白格至少占 4 + 1 + 3 = 8 格，10 格里还多 2 格可以左右移动。",
+          "4 格那段：最靠左时是第 1 到 4 格，最靠右时是第 3 到 6 格。两种摆法都涂到的是第 3、4 格，而且中间的摆法也都包含第 3、4 格，所以第 3、4 格一定黑。",
+          "3 格那段：最靠左时是第 6 到 8 格，最靠右时是第 8 到 10 格，一定都包含第 8 格。所以一定黑的是第 3、4、8 格。答案是 A。",
+          "B 漏了第 3 格。C 多了第 5 格：4 格段放在第 1 到 4 格时第 5 格是白的。D 错：4 格段可以往右移到第 3 到 6 格，第 1、2 格不一定黑。"
+        ],
+        "en": [
+          "The two blocks and the white square between them take at least 4 + 1 + 3 = 8 squares, so there are 2 spare squares to shift by.",
+          "Block of 4: furthest left it covers 1–4, furthest right 3–6. Both cover squares 3 and 4, and so does every position in between, so 3 and 4 are surely black.",
+          "Block of 3: furthest left it covers 6–8, furthest right 8–10, so square 8 is always covered. The surely black squares are 3, 4 and 8. The answer is A.",
+          "B misses square 3. C wrongly adds square 5: with the 4-block on 1–4, square 5 is white. D is wrong: the 4-block can move right to 3–6, so squares 1 and 2 need not be black."
+        ],
+        "ja": [
+          "2 つのかたまりと間の白 1 マスで少なくとも 4 + 1 + 3 = 8 マスなので、10 マスでは 2 マス分ずらせます。",
+          "4 マスのかたまり：いちばん左なら 1〜4、いちばん右なら 3〜6 です。どちらにも 3 と 4 が入り、その間のおき方でも 3 と 4 はかならず入るので、3 と 4 はかならず黒です。",
+          "3 マスのかたまり：いちばん左なら 6〜8、いちばん右なら 8〜10 で、8 はかならず入ります。かならず黒なのは 3、4、8 です。答えは A です。",
+          "B は 3 がぬけています。C は 5 がよけいです。4 マスを 1〜4 におくと 5 は白です。D はまちがい：4 マスは 3〜6 まで右へずらせるので、1 と 2 はかならず黒とはかぎりません。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "multiple_choice",
+      "options": {
+        "A": {
+          "zh-Hant": "第 3、4、8 格一定是黑的",
+          "zh-Hans": "第 3、4、8 格一定是黑的",
+          "en": "Squares 3, 4 and 8 are surely black",
+          "ja": "3、4、8 番がかならず黒"
+        },
+        "B": {
+          "zh-Hant": "只有第 4、8 格一定是黑的",
+          "zh-Hans": "只有第 4、8 格一定是黑的",
+          "en": "Only squares 4 and 8 are surely black",
+          "ja": "4、8 番だけがかならず黒"
+        },
+        "C": {
+          "zh-Hant": "第 3、4、5、8 格一定是黑的",
+          "zh-Hans": "第 3、4、5、8 格一定是黑的",
+          "en": "Squares 3, 4, 5 and 8 are surely black",
+          "ja": "3、4、5、8 番がかならず黒"
+        },
+        "D": {
+          "zh-Hant": "第 1、2、3、4 格一定是黑的",
+          "zh-Hans": "第 1、2、3、4 格一定是黑的",
+          "en": "Squares 1, 2, 3 and 4 are surely black",
+          "ja": "1、2、3、4 番がかならず黒"
+        }
+      },
+      "correctAnswer": {
+        "type": "choice",
+        "value": "A"
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade4-foundation",
+        "notes": "比較每段最靠左與最靠右兩種擺法，重疊部分一定黑：4 格段重疊 3、4，3 格段重疊 8。掃過 /數織|塗黑.{0,40}提示|提示.{0,20}格/（0 題）、/連續 (4|3) 格/（1 題）；最接近 logic_grade4_foundation_081，差異：那題是 4 × 4 數獨的排除推理；本題是數織的單排提示，用「最左與最右擺法的重疊」找出必定塗黑的格子"
+      }
+    },
+    {
+      "id": "logic_grade4_foundation_115",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "baseball_most_outs_in_nine_inning_home_win",
+      "tags": [
+        "c:logic_deduction",
+        "c:mul_div",
+        "m:extremal"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade4",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一場棒球賽打 9 局，每一局先由客隊進攻、再由主隊進攻，進攻的一方被抓到 3 個出局就換對方進攻。規則還有：如果第 9 局上半客隊打完時主隊已經領先，第 9 局下半就不打；如果主隊在第 9 局下半打到領先，比賽立刻結束；另外，某一方被抓到第 3 個出局的那一刻，這半局立刻結束，同一個動作裡的得分都不算。某場比賽在第 9 局結束，主隊獲勝（沒有延長賽）。這場比賽兩隊合計的出局數，最多是多少？",
+        "zh-Hans": "一场棒球赛打 9 局，每一局先由客队进攻、再由主队进攻，进攻的一方被抓到 3 个出局就换对方进攻。规则还有：如果第 9 局上半客队打完时主队已经领先，第 9 局下半就不打；如果主队在第 9 局下半打到领先，比赛立刻结束；另外，某一方被抓到第 3 个出局的那一刻，这半局立刻结束，同一个动作里的得分都不算。某场比赛在第 9 局结束，主队获胜（没有加时赛）。这场比赛两队合计的出局数，最多是多少？",
+        "en": "A baseball game has 9 innings. In each inning the visiting team bats first, then the home team; a team bats until it makes 3 outs. Also: if the home team is already ahead when the visitors finish the top of the 9th, the bottom of the 9th is not played; if the home team takes the lead during the bottom of the 9th, the game ends at once; and the moment a team makes its 3rd out, the half-inning ends and no run on that same play counts. A game ends in the 9th inning with the home team winning (no extra innings). At most how many outs are there in total for both teams?",
+        "ja": "野球の試合は 9 回まであり、各回は先にビジター、次にホームのチームがせめ、せめるチームはアウトが 3 つになると交代します。さらに、9 回表が終わったときにホームがリードしていれば 9 回裏は行わず、ホームが 9 回裏にリードしたらその場で試合終了です。また、3 つ目のアウトになったしゅん間にその回の攻げきは終わり、同じプレーでの得点は数えません。ある試合が 9 回で終わり、ホームのチームが勝ちました（延長はありません）。両チーム合わせたアウトの数は、最も多くていくつですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 B：53 個，因為第 9 局下半主隊最多只會被抓到 2 個出局",
+        "zh-Hans": "答案是 B：53 个，因为第 9 局下半主队最多只会被抓到 2 个出局",
+        "en": "The answer is B: 53, because the home team can make at most 2 outs in the bottom of the 9th",
+        "ja": "答えは B：53。9 回裏のホームのアウトは多くて 2 つだから"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "客隊：第 1 局到第 9 局的上半都打完，每次 3 個出局，一定是 9 × 3 = 27 個出局。",
+          "主隊：第 1 局到第 8 局的下半都打完，共 8 × 3 = 24 個出局。第 9 局下半如果有打，主隊是在打到領先時立刻結束；如果被抓滿 3 個出局還沒領先，比賽就不會在第 9 局以主隊獲勝結束。所以第 9 局下半最多只有 2 個出局。",
+          "最多 27 + 24 + 2 = 53 個出局。答案是 B。",
+          "A 錯：51 是第 9 局下半沒打（或 0 出局就再見）時的數目，是最少不是最多。C 錯：54 要第 9 局下半也有 3 個出局，那時主隊還沒領先就輸了或進入延長。D 錯：52 漏了第 9 局下半可以有 2 個出局。"
+        ],
+        "zh-Hans": [
+          "客队：第 1 局到第 9 局的上半都打完，每次 3 个出局，一定是 9 × 3 = 27 个出局。",
+          "主队：第 1 局到第 8 局的下半都打完，共 8 × 3 = 24 个出局。第 9 局下半如果有打，主队是在打到领先时立刻结束；如果被抓满 3 个出局还没领先，比赛就不会在第 9 局以主队获胜结束。所以第 9 局下半最多只有 2 个出局。",
+          "最多 27 + 24 + 2 = 53 个出局。答案是 B。",
+          "A 错：51 是第 9 局下半没打（或 0 出局就再见）时的数目，是最少不是最多。C 错：54 要第 9 局下半也有 3 个出局，那时主队还没领先就输了或进入加时。D 错：52 漏了第 9 局下半可以有 2 个出局。"
+        ],
+        "en": [
+          "Visitors: the tops of innings 1 to 9 are all completed with 3 outs each, always 9 × 3 = 27 outs.",
+          "Home: the bottoms of innings 1 to 8 are completed, 8 × 3 = 24 outs. If the bottom of the 9th is played, it ends the moment the home team takes the lead; if they reached 3 outs without leading, the game could not end in the 9th with a home win. So the bottom of the 9th has at most 2 outs.",
+          "At most 27 + 24 + 2 = 53 outs. The answer is B.",
+          "A is wrong: 51 is the count when the bottom of the 9th is not played (or is won with no outs), the least, not the most. C is wrong: 54 needs 3 outs in the bottom of the 9th, when the home team would not have taken the lead. D is wrong: 52 misses that the bottom of the 9th can have 2 outs."
+        ],
+        "ja": [
+          "ビジター：1 回から 9 回までの表はすべて終わり、毎回アウト 3 つなので、かならず 9 × 3 = 27 です。",
+          "ホーム：1 回から 8 回までの裏はすべて終わり、8 × 3 = 24 です。9 回裏があれば、ホームがリードした時点で終わります。アウト 3 つになってもリードしていなければ、9 回でホームが勝って終わることはありません。だから 9 回裏のアウトは多くて 2 つです。",
+          "最も多くて 27 + 24 + 2 = 53 です。答えは B です。",
+          "A はまちがい：51 は 9 回裏がない（またはノーアウトでサヨナラ）ときで、最も少ない場合です。C はまちがい：54 は 9 回裏にもアウト 3 つが必要で、そのときホームはリードしていません。D はまちがい：52 は 9 回裏にアウトが 2 つありうることを見落としています。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "multiple_choice",
+      "options": {
+        "A": {
+          "zh-Hant": "51 個，因為主隊第 9 局下半不用上場打擊，只算 17 個半局",
+          "zh-Hans": "51 个，因为主队第 9 局下半不用上场打击，只算 17 个半局",
+          "en": "51, because the home team never bats in the bottom of the 9th, only 17 half-innings",
+          "ja": "51。ホームは 9 回裏をせめないので、半分の回は 17 回だけだから"
+        },
+        "B": {
+          "zh-Hant": "53 個，因為第 9 局下半主隊最多只會被抓到 2 個出局",
+          "zh-Hans": "53 个，因为第 9 局下半主队最多只会被抓到 2 个出局",
+          "en": "53, because the home team can make at most 2 outs in the bottom of the 9th",
+          "ja": "53。9 回裏のホームのアウトは多くて 2 つだから"
+        },
+        "C": {
+          "zh-Hant": "54 個，因為 9 局一共 18 個半局，每個半局都是 3 個出局",
+          "zh-Hans": "54 个，因为 9 局一共 18 个半局，每个半局都是 3 个出局",
+          "en": "54, because 9 innings have 18 half-innings with 3 outs each",
+          "ja": "54。9 回で表と裏が 18 回、どれもアウト 3 つだから"
+        },
+        "D": {
+          "zh-Hant": "52 個，因為第 9 局下半主隊最多只會被抓到 1 個出局",
+          "zh-Hans": "52 个，因为第 9 局下半主队最多只会被抓到 1 个出局",
+          "en": "52, because the home team can make at most 1 out in the bottom of the 9th",
+          "ja": "52。9 回裏のホームのアウトは多くて 1 つだから"
+        }
+      },
+      "correctAnswer": {
+        "type": "choice",
+        "value": "B"
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade4-foundation",
+        "notes": "客隊必有 27 出局，主隊前 8 局 24 出局；第 9 局下半若打滿 3 出局主隊就沒贏，故最多 2，共 53。掃過 /棒球|出局/（4 題）、/第 9 局/（0 題）；最接近 logic_grade4_foundation_101，差異：那題是淘汰賽中亞軍最弱可能是第幾強；本題要依棒球規則判斷哪些半局一定打滿、最後半局最多幾個出局"
+      }
+    },
+    {
+      "id": "logic_grade4_foundation_116",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "two_blinking_lights_minutes_both_on",
+      "tags": [
+        "c:modular",
+        "c:factor_multiple",
+        "m:enumeration"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade4",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "節慶裝飾上有甲、乙兩串燈，都在 0 分時同時亮起。甲串燈亮 3 分鐘、暗 2 分鐘，接著又亮 3 分鐘、暗 2 分鐘，一直這樣重複；乙串燈亮 4 分鐘、暗 4 分鐘，一直重複。從 0 分到 40 分這 40 分鐘裡（以每一整分鐘為單位看），兩串燈同時亮著的時間一共有幾分鐘？",
+        "zh-Hans": "节庆装饰上有甲、乙两串灯，都在 0 分时同时亮起。甲串灯亮 3 分钟、暗 2 分钟，接着又亮 3 分钟、暗 2 分钟，一直这样重复；乙串灯亮 4 分钟、暗 4 分钟，一直重复。从 0 分到 40 分这 40 分钟里（以每一整分钟为单位看），两串灯同时亮着的时间一共有几分钟？",
+        "en": "A festival display has two strings of lights, A and B, both switched on at minute 0. A is on for 3 minutes, off for 2 minutes, then on 3, off 2, and so on; B is on 4 minutes, off 4 minutes, repeating. In the 40 minutes from minute 0 to minute 40 (looking at each whole minute), for how many minutes are both strings on at the same time?",
+        "ja": "お祭りのかざりに甲と乙の 2 本の電飾があり、0 分に同時につきます。甲は 3 分ついて 2 分消え、また 3 分ついて 2 分消え……とくり返します。乙は 4 分ついて 4 分消えるのをくり返します。0 分から 40 分までの 40 分間（1 分ずつ見ます）で、2 本が同時についている時間は全部で何分ですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 12。",
+        "zh-Hans": "答案是 12。",
+        "en": "The answer is 12.",
+        "ja": "答えは 12 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "把 40 分鐘分成第 1 到第 40 個一分鐘。甲每 5 分鐘一輪，亮的是每輪的前 3 分鐘；乙每 8 分鐘一輪，亮的是每輪的前 4 分鐘。5 和 8 的最小公倍數是 40，所以這 40 分鐘剛好是兩串燈一起重來一次的長度。",
+          "乙亮的時段是第 1～4、9～12、17～20、25～28、33～36 分鐘。甲亮的時段是第 1～3、6～8、11～13、16～18、21～23、26～28、31～33、36～38 分鐘。",
+          "逐段找重疊：第 1～4 分鐘中甲亮第 1～3 分鐘，3 分鐘；第 9～12 分鐘中甲亮第 11、12 分鐘，2 分鐘；第 17～20 分鐘中甲亮第 17、18 分鐘，2 分鐘；第 25～28 分鐘中甲亮第 26～28 分鐘，3 分鐘；第 33～36 分鐘中甲亮第 33、36 分鐘，2 分鐘。",
+          "一共 3 + 2 + 2 + 3 + 2 = 12 分鐘。答案是 12。"
+        ],
+        "zh-Hans": [
+          "把 40 分钟分成第 1 到第 40 个一分钟。甲每 5 分钟一轮，亮的是每轮的前 3 分钟；乙每 8 分钟一轮，亮的是每轮的前 4 分钟。5 和 8 的最小公倍数是 40，所以这 40 分钟刚好是两串灯一起重来一次的长度。",
+          "乙亮的时段是第 1～4、9～12、17～20、25～28、33～36 分钟。甲亮的时段是第 1～3、6～8、11～13、16～18、21～23、26～28、31～33、36～38 分钟。",
+          "逐段找重叠：第 1～4 分钟中甲亮第 1～3 分钟，3 分钟；第 9～12 分钟中甲亮第 11、12 分钟，2 分钟；第 17～20 分钟中甲亮第 17、18 分钟，2 分钟；第 25～28 分钟中甲亮第 26～28 分钟，3 分钟；第 33～36 分钟中甲亮第 33、36 分钟，2 分钟。",
+          "一共 3 + 2 + 2 + 3 + 2 = 12 分钟。答案是 12。"
+        ],
+        "en": [
+          "Number the 40 minutes 1 to 40. A repeats every 5 minutes and is on for the first 3 of each; B repeats every 8 minutes and is on for the first 4 of each. The least common multiple of 5 and 8 is 40, so these 40 minutes are exactly one shared cycle.",
+          "B is on in minutes 1–4, 9–12, 17–20, 25–28, 33–36. A is on in minutes 1–3, 6–8, 11–13, 16–18, 21–23, 26–28, 31–33, 36–38.",
+          "Overlaps, block by block: in 1–4, A is on 1–3, 3 minutes; in 9–12, A is on 11 and 12, 2 minutes; in 17–20, A is on 17 and 18, 2 minutes; in 25–28, A is on 26–28, 3 minutes; in 33–36, A is on 33 and 36, 2 minutes.",
+          "In total 3 + 2 + 2 + 3 + 2 = 12 minutes. The answer is 12."
+        ],
+        "ja": [
+          "40 分を 1 分目から 40 分目に分けます。甲は 5 分で 1 回り、はじめの 3 分つきます。乙は 8 分で 1 回り、はじめの 4 分つきます。5 と 8 の最小公倍数は 40 なので、この 40 分でちょうど 2 本そろって 1 回りします。",
+          "乙がつくのは 1〜4、9〜12、17〜20、25〜28、33〜36 分目です。甲がつくのは 1〜3、6〜8、11〜13、16〜18、21〜23、26〜28、31〜33、36〜38 分目です。",
+          "重なりをさがすと、1〜4 では甲は 1〜3 で 3 分、9〜12 では 11、12 で 2 分、17〜20 では 17、18 で 2 分、25〜28 では 26〜28 で 3 分、33〜36 では 33 と 36 で 2 分です。",
+          "合わせて 3 + 2 + 2 + 3 + 2 = 12 分です。答えは 12 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "12"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade4-foundation",
+        "notes": "兩個亮暗週期 5 與 8 的公倍數 40 內，逐段比對亮的時段求重疊共 12 分鐘。掃過 /(亮|閃).{0,10}\\d 分鐘.{0,20}(暗|熄)/（0 題）、/同時亮/（3 題）；最接近 arithmetic_grade3_foundation_182，差異：那題是三段給定時間區間的重疊；本題是兩個週期性亮暗的燈，要先用公倍數確定一個完整週期，再逐段找重疊"
+      }
+    },
+    {
+      "id": "logic_grade4_foundation_117",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "fewest_coins_paid_plus_change",
+      "tags": [
+        "c:add_sub",
+        "c:logic_deduction",
+        "m:extremal"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade4",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "小安要買一個 37 元的東西。錢只有 1 元、5 元、10 元硬幣和 50 元紙鈔四種，小安和店員手上每一種都有很多。小安付錢、店員找錢，兩邊經手的硬幣和紙鈔張數加起來要盡量少。最少一共是幾枚（張）？",
+        "zh-Hans": "小安要买一个 37 元的东西。钱只有 1 元、5 元、10 元硬币和 50 元纸币四种，小安和店员手上每一种都有很多。小安付钱、店员找钱，两边经手的硬币和纸币张数加起来要尽量少。最少一共是几枚（张）？",
+        "en": "An buys something for 37 dollars. Money comes only as 1-, 5- and 10-dollar coins and 50-dollar notes, and both An and the shopkeeper have plenty of each. An pays and the shopkeeper gives change, and they want the total number of coins and notes changing hands (paid plus change) to be as small as possible. What is the smallest total?",
+        "ja": "アンさんは 37 円の品物を買います。お金は 1 円玉、5 円玉、10 円玉と 50 円札の 4 種類だけで、アンさんも店員さんもどれもたくさん持っています。アンさんがはらい、店員さんがおつりをわたします。行き来するお金のまい数（はらった分とおつりの合計）をできるだけ少なくしたいです。最も少なくて何まいですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 5。",
+        "zh-Hans": "答案是 5。",
+        "en": "The answer is 5.",
+        "ja": "答えは 5 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "不找錢、剛好付清：37 = 10 + 10 + 10 + 5 + 1 + 1，要 6 枚。付 50 元找 13 元：13 = 10 + 1 + 1 + 1，共 1 + 4 = 5 枚。付 50 + 1 + 1 = 52 元找 15 元 = 10 + 5，共 3 + 2 = 5 枚。",
+          "把付出的錢算「加」、找回的錢算「減」。10 元和 50 元加減後一定是 10 的倍數，所以 37 的個位 7 只能靠 1 元和 5 元湊出來。只用 1 枚 1 元或 5 元，個位只能是 1、9、5；用 2 枚，個位只能是 2、8、6、4、0。所以 1 元和 5 元合起來至少要 3 枚。",
+          "3 枚 1 元、5 元加減起來最多只差 15 元，離 37 還遠，所以一定還要 10 元或 50 元。只加 1 枚 10 元或 50 元時，1 元、5 元那 3 枚要湊出 27 或 −13（50 − 13 = 37），3 枚都做不到。所以至少還要 2 枚 10 元或 50 元，總數至少 3 + 2 = 5 枚。",
+          "前面已經做到 5 枚，所以最少一共 5 枚（張）。答案是 5。"
+        ],
+        "zh-Hans": [
+          "不找钱、刚好付清：37 = 10 + 10 + 10 + 5 + 1 + 1，要 6 枚。付 50 元找 13 元：13 = 10 + 1 + 1 + 1，共 1 + 4 = 5 枚。付 50 + 1 + 1 = 52 元找 15 元 = 10 + 5，共 3 + 2 = 5 枚。",
+          "把付出的钱算“加”、找回的钱算“减”。10 元和 50 元加减后一定是 10 的倍数，所以 37 的个位 7 只能靠 1 元和 5 元凑出来。只用 1 枚 1 元或 5 元，个位只能是 1、9、5；用 2 枚，个位只能是 2、8、6、4、0。所以 1 元和 5 元合起来至少要 3 枚。",
+          "3 枚 1 元、5 元加减起来最多只差 15 元，离 37 还远，所以一定还要 10 元或 50 元。只加 1 枚 10 元或 50 元时，1 元、5 元那 3 枚要凑出 27 或 −13（50 − 13 = 37），3 枚都做不到。所以至少还要 2 枚 10 元或 50 元，总数至少 3 + 2 = 5 枚。",
+          "前面已经做到 5 枚，所以最少一共 5 枚（张）。答案是 5。"
+        ],
+        "en": [
+          "Paying exactly with no change: 37 = 10 + 10 + 10 + 5 + 1 + 1, 6 pieces. Paying 50 and getting 13 back: 13 = 10 + 1 + 1 + 1, total 1 + 4 = 5. Paying 50 + 1 + 1 = 52 and getting 15 = 10 + 5 back: 3 + 2 = 5.",
+          "Count money paid as plus and change as minus. 10s and 50s always combine to a multiple of 10, so the units digit 7 of 37 must come from 1s and 5s. One such coin gives a units digit of 1, 9 or 5; two give only 2, 8, 6, 4 or 0. So at least 3 coins of 1 or 5 are needed.",
+          "Three 1s and 5s change the total by at most 15, far from 37, so some 10s or 50s are needed. With just one 10 or 50, the three small coins would have to make 27 or −13 (50 − 13 = 37), which three coins cannot. So at least 2 more pieces of 10 or 50 are needed: at least 3 + 2 = 5 in all.",
+          "5 has already been achieved, so the smallest total is 5. The answer is 5."
+        ],
+        "ja": [
+          "おつりなしでちょうどはらうと、37 = 10 + 10 + 10 + 5 + 1 + 1 で 6 まいです。50 円をはらって 13 円もらうと、13 = 10 + 1 + 1 + 1 で、1 + 4 = 5 まいです。50 + 1 + 1 = 52 円はらって 15 円 = 10 + 5 もらっても、3 + 2 = 5 まいです。",
+          "はらうお金を「たす」、おつりを「ひく」と考えます。10 円と 50 円はたしひきしても 10 の倍数なので、37 の一の位の 7 は 1 円玉と 5 円玉で作るしかありません。1 まいだと一の位は 1、9、5 のどれか、2 まいだと 2、8、6、4、0 のどれかにしかならないので、1 円玉と 5 円玉は合わせて少なくとも 3 まいいります。",
+          "1 円玉・5 円玉 3 まいのたしひきは多くて 15 円で、37 にはとどかないので、10 円か 50 円がいります。10 円か 50 円が 1 まいだけだと、のこりの 3 まいで 27 か −13（50 − 13 = 37）を作る必要がありますが、3 まいではできません。だから 10 円か 50 円が少なくとも 2 まいいり、合計は少なくとも 3 + 2 = 5 まいです。",
+          "5 まいの方法はもう見つかっているので、最も少なくて 5 まいです。答えは 5 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "5"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade4-foundation",
+        "notes": "付出與找回的錢可正可負相加：個位的 7 至少用 3 枚、整十部分至少 2 枚，共 5 枚，並有 50 − 10 − 1 − 1 − 1 等構造。掃過 /(給出|付出).{0,20}(找回|找).{0,30}(硬幣|錢).{0,20}(最少|一共)|經手/（0 題）、/找錢.{0,30}最少/（3 題）；最接近 arithmetic_grade1_foundation_136，差異：那題是錢包硬幣有限、求最少要拿出多少元；本題是付出與找回的張數合計最少，要把找回看成減法，分個位與整十兩部分給下界"
+      }
+    },
+    {
+      "id": "logic_grade4_foundation_118",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "lift_trips_with_count_and_weight_limits",
+      "tags": [
+        "c:logic_deduction",
+        "c:add_sub",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade4",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一部載貨電梯每趟最多放 4 個箱子，而且箱子總重不能超過 300 公斤，兩個限制都要遵守。現在要運 8 個箱子：3 個大箱子各重 115 公斤，5 個小箱子各重 40 公斤。箱子不能拆開。最少要運幾趟？",
+        "zh-Hans": "一部载货电梯每趟最多放 4 个箱子，而且箱子总重不能超过 300 千克，两个限制都要遵守。现在要运 8 个箱子：3 个大箱子各重 115 千克，5 个小箱子各重 40 千克。箱子不能拆开。最少要运几趟？",
+        "en": "A goods lift can carry at most 4 boxes per trip, and the boxes' total weight may not exceed 300 kg; both limits must be kept. There are 8 boxes to move: 3 big ones of 115 kg each and 5 small ones of 40 kg each. Boxes cannot be split. What is the fewest number of trips?",
+        "ja": "荷物用エレベーターは 1 回に箱を 4 こまで、しかも合計 300 kg までしかのせられず、どちらのきまりも守ります。運ぶ箱は 8 こで、大きい箱 3 こが 1 こ 115 kg、小さい箱 5 こが 1 こ 40 kg です。箱は分けられません。最も少なくて何回運びますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 3。",
+        "zh-Hans": "答案是 3。",
+        "en": "The answer is 3.",
+        "ja": "答えは 3 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "先看每個限制各自要幾趟：8 個箱子每趟最多 4 個，至少 2 趟；總重 3 × 115 + 5 × 40 = 345 + 200 = 545 公斤，每趟最多 300 公斤，至少 2 趟。單看兩個限制，好像 2 趟就夠。",
+          "可是 2 趟要運 8 個箱子，每趟最多 4 個，所以兩趟都剛好 4 個。3 個大箱子分在兩趟，一定有一趟至少有 2 個大箱子，那一趟是 2 大 2 小：230 + 80 = 310 公斤，超過 300 公斤；3 大 1 小更重。所以 2 趟做不到。",
+          "3 趟做得到：第 1 趟 2 大 + 1 小 = 270 公斤（3 個箱子）；第 2 趟 1 大 + 4 小 = 但 5 個箱子太多，改成 1 大 + 3 小 = 235 公斤（4 個）；第 3 趟剩下 1 小 = 40 公斤。三趟都符合兩個限制。",
+          "所以最少要 3 趟。關鍵是兩個限制要「同時」看，不能各算各的。答案是 3。"
+        ],
+        "zh-Hans": [
+          "先看每个限制各自要几趟：8 个箱子每趟最多 4 个，至少 2 趟；总重 3 × 115 + 5 × 40 = 345 + 200 = 545 千克，每趟最多 300 千克，至少 2 趟。单看两个限制，好像 2 趟就够。",
+          "可是 2 趟要运 8 个箱子，每趟最多 4 个，所以两趟都刚好 4 个。3 个大箱子分在两趟，一定有一趟至少有 2 个大箱子，那一趟是 2 大 2 小：230 + 80 = 310 千克，超过 300 千克；3 大 1 小更重。所以 2 趟做不到。",
+          "3 趟做得到：第 1 趟 2 大 + 1 小 = 270 千克（3 个箱子）；第 2 趟 1 大 + 3 小 = 235 千克（4 个）；第 3 趟剩下 1 小 = 40 千克。三趟都符合两个限制。",
+          "所以最少要 3 趟。关键是两个限制要“同时”看，不能各算各的。答案是 3。"
+        ],
+        "en": [
+          "First each limit on its own: 8 boxes at most 4 per trip need at least 2 trips; the total weight 3 × 115 + 5 × 40 = 345 + 200 = 545 kg at most 300 per trip also needs at least 2 trips. Each limit alone suggests 2 trips.",
+          "But 2 trips for 8 boxes with at most 4 each means exactly 4 boxes on each trip. The 3 big boxes are split over two trips, so one trip has at least 2 big boxes: 2 big + 2 small = 230 + 80 = 310 kg, over 300; 3 big + 1 small is heavier still. So 2 trips are impossible.",
+          "3 trips work: trip 1 is 2 big + 1 small = 270 kg (3 boxes); trip 2 is 1 big + 3 small = 235 kg (4 boxes); trip 3 is the last small box, 40 kg. Every trip keeps both limits.",
+          "So the fewest is 3 trips. The key is to apply both limits at the same time, not separately. The answer is 3."
+        ],
+        "ja": [
+          "まずきまりを 1 つずつ見ます。8 こを 1 回 4 こまでなら少なくとも 2 回、合計の重さ 3 × 115 + 5 × 40 = 345 + 200 = 545 kg を 1 回 300 kg までなら少なくとも 2 回です。1 つずつ見ると 2 回でよさそうです。",
+          "しかし 2 回で 8 こ運ぶには、1 回 4 こまでなので 2 回ともちょうど 4 こです。大きい箱 3 こを 2 回に分けると、どちらかの回に少なくとも 2 こ入り、その回は大 2 こ小 2 こで 230 + 80 = 310 kg となり 300 kg をこえます。大 3 こ小 1 こはもっと重いです。だから 2 回ではできません。",
+          "3 回ならできます。1 回目は大 2 こ + 小 1 こ = 270 kg（3 こ）、2 回目は大 1 こ + 小 3 こ = 235 kg（4 こ）、3 回目はのこりの小 1 こ = 40 kg で、どの回も 2 つのきまりを守っています。",
+          "最も少なくて 3 回です。2 つのきまりを「同時に」考えるのが大事で、別々に計算してはいけません。答えは 3 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "3"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade4-foundation",
+        "notes": "兩個限制各自只要 2 趟，但 2 趟必須每趟 4 箱，鴿籠使某趟有 2 大箱而超重，故需 3 趟。掃過 /電梯.{0,60}(箱子|貨物).{0,60}(公斤|人)/（1 題）、/最多.{0,10}(放|載) 4 個.{0,30}公斤/（0 題）；最接近 logic_grade3_foundation_105，差異：那題只有重量限制、求最少趟數；本題同時有箱數與重量兩個限制，各自的下界都是 2，要用「2 趟必須每趟剛好 4 箱」加鴿籠推出矛盾"
+      }
     }
   ]
 }
