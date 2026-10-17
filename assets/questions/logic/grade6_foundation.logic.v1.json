@@ -10418,6 +10418,392 @@
         "reference": "logic-grade6-foundation",
         "notes": "列出和為 4 的有序組合並按機率加權：1/16 + 3/8 + 1/4 = 11/16（亦可用 f(n) = (f(n−1) + f(n−2))/2 遞推驗證）。掃過 /(總和|加起來).{0,20}(到達|超過|達到).{0,30}停|停止時.{0,20}(總和|剛好)/（0 題）、/轉盤.{0,40}(加起來|總和)/（轉兩次求和類）；最接近 arithmetic_grade4_foundation 的 most_likely_sum_of_two_dice，差異：那題固定轉兩次比和的機會；本題轉到停止條件為止，要列出不同長度的有序組合並按機率加權"
       }
+    },
+    {
+      "id": "logic_grade6_foundation_129",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "sports_day_points_find_number_of_events",
+      "tags": [
+        "c:logic_deduction",
+        "c:linear_eq",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade6",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "甲、乙、丙三人參加運動會的好幾個項目，每個項目三人都參加，而且名次沒有並列。每個項目的第一名得 x 分、第二名得 y 分、第三名得 z 分，x、y、z 是正整數而且 x > y > z，每個項目都照同樣的分數計分。最後甲總共得 22 分，乙得 9 分，丙得 9 分。已知乙在百米賽跑得第一名。這次運動會一共有幾個項目？",
+        "zh-Hans": "甲、乙、丙三人参加运动会的好几个项目，每个项目三人都参加，而且名次没有并列。每个项目的第一名得 x 分、第二名得 y 分、第三名得 z 分，x、y、z 是正整数而且 x > y > z，每个项目都照同样的分数计分。最后甲总共得 22 分，乙得 9 分，丙得 9 分。已知乙在百米赛跑得第一名。这次运动会一共有几个项目？",
+        "en": "A, B and C take part in several events at a sports day; all three enter every event and there are no ties. In every event 1st place scores x points, 2nd y points and 3rd z points, where x, y, z are positive whole numbers with x > y > z, the same for every event. In the end A has 22 points, B 9 and C 9. B won the 100 m race. How many events were there?",
+        "ja": "甲・乙・丙の 3 人が運動会のいくつかの種目に出ました。どの種目にも 3 人とも出て、同じ順位はありません。どの種目も 1 位 x 点、2 位 y 点、3 位 z 点で、x、y、z は正の整数で x > y > z、どの種目も同じ点数です。最後に甲は 22 点、乙は 9 点、丙は 9 点でした。乙は 100 m 走で 1 位でした。種目は全部でいくつありましたか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 5。",
+        "zh-Hans": "答案是 5。",
+        "en": "The answer is 5.",
+        "ja": "答えは 5 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "每個項目三人共得 x + y + z 分，總分 22 + 9 + 9 = 40，所以 項目數 × (x + y + z) = 40，而且 x + y + z 至少是 3 + 2 + 1 = 6。乙拿過一次第一名，所以 x ≤ 9；甲比乙多，所以不只 1 個項目。可能是 2 項（每項 20 分）、4 項（每項 10 分）或 5 項（每項 8 分）。",
+          "2 項：x + y + z = 20 而 x ≤ 9，則 y + z ≥ 11、y ≥ 6。甲最多拿另一項第一名加百米第二名：9 + 8 = 17 < 22，不行。",
+          "4 項：x + y + z = 10。乙百米得 x，另外 3 項至少各得 z，所以 x + 3 × z ≤ 9，z 只能是 1、x ≤ 6，可能是 (6, 3, 1) 或 (5, 4, 1)。甲最多是 3 個第一名加 1 個第二名：6 × 3 + 3 = 21 或 5 × 3 + 4 = 19，都不到 22，不行。",
+          "5 項：x + y + z = 8，可能是 (5, 2, 1) 或 (4, 3, 1)。(4, 3, 1) 時甲最多 4 × 4 + 3 = 19，不行；(5, 2, 1) 時甲拿另外 4 項第一名、百米第二名：5 × 4 + 2 = 22，乙 5 + 1 × 4 = 9，丙 2 × 4 + 1 = 9，完全符合。",
+          "所以一共有 5 個項目（第一名 5 分、第二名 2 分、第三名 1 分）。"
+        ],
+        "zh-Hans": [
+          "每个项目三人共得 x + y + z 分，总分 22 + 9 + 9 = 40，所以 项目数 × (x + y + z) = 40，而且 x + y + z 至少是 3 + 2 + 1 = 6。乙拿过一次第一名，所以 x ≤ 9；甲比乙多，所以不只 1 个项目。可能是 2 项（每项 20 分）、4 项（每项 10 分）或 5 项（每项 8 分）。",
+          "2 项：x + y + z = 20 而 x ≤ 9，则 y + z ≥ 11、y ≥ 6。甲最多拿另一项第一名加百米第二名：9 + 8 = 17 < 22，不行。",
+          "4 项：x + y + z = 10。乙百米得 x，另外 3 项至少各得 z，所以 x + 3 × z ≤ 9，z 只能是 1、x ≤ 6，可能是 (6, 3, 1) 或 (5, 4, 1)。甲最多是 3 个第一名加 1 个第二名：6 × 3 + 3 = 21 或 5 × 3 + 4 = 19，都不到 22，不行。",
+          "5 项：x + y + z = 8，可能是 (5, 2, 1) 或 (4, 3, 1)。(4, 3, 1) 时甲最多 4 × 4 + 3 = 19，不行；(5, 2, 1) 时甲拿另外 4 项第一名、百米第二名：5 × 4 + 2 = 22，乙 5 + 1 × 4 = 9，丙 2 × 4 + 1 = 9，完全符合。",
+          "所以一共有 5 个项目（第一名 5 分、第二名 2 分、第三名 1 分）。"
+        ],
+        "en": [
+          "Each event gives x + y + z points in all and the grand total is 22 + 9 + 9 = 40, so (number of events) × (x + y + z) = 40, with x + y + z at least 3 + 2 + 1 = 6. B won once, so x ≤ 9; A beat B, so there is more than 1 event. The options are 2 events (20 each), 4 events (10 each) or 5 events (8 each).",
+          "2 events: x + y + z = 20 with x ≤ 9 means y + z ≥ 11 and y ≥ 6. A can get at most first in the other event plus second in the 100 m: 9 + 8 = 17 < 22. Impossible.",
+          "4 events: x + y + z = 10. B gets x in the 100 m and at least z in each of the other 3, so x + 3 × z ≤ 9: z must be 1 and x ≤ 6, giving (6, 3, 1) or (5, 4, 1). A can get at most three firsts and one second: 6 × 3 + 3 = 21 or 5 × 3 + 4 = 19, both below 22. Impossible.",
+          "5 events: x + y + z = 8, so (5, 2, 1) or (4, 3, 1). With (4, 3, 1) A has at most 4 × 4 + 3 = 19, impossible; with (5, 2, 1), A wins the other 4 events and is second in the 100 m: 5 × 4 + 2 = 22, B gets 5 + 1 × 4 = 9 and C 2 × 4 + 1 = 9. Everything fits.",
+          "So there were 5 events (5 points for first, 2 for second, 1 for third)."
+        ],
+        "ja": [
+          "1 種目で 3 人の合計は x + y + z 点、全部で 22 + 9 + 9 = 40 点なので、種目数 × (x + y + z) = 40 で、x + y + z は少なくとも 3 + 2 + 1 = 6 です。乙は 1 回 1 位なので x ≤ 9、甲は乙より多いので種目は 1 つではありません。2 種目（1 種目 20 点）、4 種目（10 点）、5 種目（8 点）のどれかです。",
+          "2 種目：x + y + z = 20 で x ≤ 9 なので y + z ≥ 11、y ≥ 6。甲は多くてももう 1 種目の 1 位と 100 m の 2 位で 9 + 8 = 17 < 22 なので、だめです。",
+          "4 種目：x + y + z = 10。乙は 100 m で x、ほかの 3 種目で少なくとも z ずつなので x + 3 × z ≤ 9、z は 1、x ≤ 6 で、(6, 3, 1) か (5, 4, 1) です。甲は多くても 1 位 3 回と 2 位 1 回で、6 × 3 + 3 = 21 か 5 × 3 + 4 = 19 となり、22 に届かないのでだめです。",
+          "5 種目：x + y + z = 8 で、(5, 2, 1) か (4, 3, 1) です。(4, 3, 1) では甲は多くても 4 × 4 + 3 = 19 でだめ。(5, 2, 1) なら甲はほかの 4 種目で 1 位、100 m で 2 位で 5 × 4 + 2 = 22、乙は 5 + 1 × 4 = 9、丙は 2 × 4 + 1 = 9 で、すべて合います。",
+          "よって種目は 5 つです（1 位 5 点、2 位 2 点、3 位 1 点）。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "5"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade6-foundation",
+        "notes": "總分 40 = 項目數 × (x + y + z)、x + y + z ≥ 6、x ≤ 9 → 只可能 2、4、5 項；用甲的最大可能分數排除 2、4 項，5 項時 (5, 2, 1) 唯一成立；已窮舉驗證。掃過 /(第一名|第一).{0,10}得.{0,10}分.{0,30}(第二名|第二).{0,10}得/（1 題）、/運動會.{0,60}(項目|比賽).{0,40}(幾個|幾項)/（0 題）；最接近 logic_grade6_foundation_076（6 隊循環賽總積分 40 求平手場數），差異：那題由總積分直接列式；本題計分方式未知，要同時推出項目數與每名次的分數，並用甲、乙的分數上下限排除其他可能"
+      }
+    },
+    {
+      "id": "logic_grade6_foundation_130",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "three_two_sided_cards_seen_red_other_side",
+      "tags": [
+        "c:probability",
+        "c:logic_deduction",
+        "m:enumeration"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade6",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "盒子裡有三張卡片：一張兩面都是紅色，一張兩面都是白色，一張一面紅色、一面白色。小安閉著眼睛抽出一張，隨便放在桌上，張開眼睛看到朝上的那面是紅色。這張卡片朝下的那一面也是紅色的機會是多少？",
+        "zh-Hans": "盒子里有三张卡片：一张两面都是红色，一张两面都是白色，一张一面红色、一面白色。小安闭着眼睛抽出一张，随便放在桌上，张开眼睛看到朝上的那面是红色。这张卡片朝下的那一面也是红色的概率是多少？",
+        "en": "A box holds three cards: one red on both sides, one white on both sides, and one red on one side and white on the other. With eyes closed An draws a card and lays it on the table either way up; opening his eyes he sees a red face up. What is the chance that the face underneath is also red?",
+        "ja": "箱にカードが 3 枚あります。両面とも赤が 1 枚、両面とも白が 1 枚、片面が赤で片面が白が 1 枚です。アンさんは目をつぶって 1 枚引き、どちらかの面を上にして机に置き、目を開けると上の面は赤でした。下の面も赤である確率はいくらですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 A：2/3",
+        "zh-Hans": "答案是 A：2/3",
+        "en": "The answer is A: 2/3",
+        "ja": "答えは A：2/3"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "把每一面都看成一樣可能朝上：三張卡片共有 6 個面，抽卡再隨便放，每一個面朝上的機會都一樣。",
+          "紅色的面有 3 個：雙紅卡的第 1 面、雙紅卡的第 2 面、紅白卡的紅面。現在看到紅色，朝上的就是這 3 個面之一，機會一樣。",
+          "這 3 種之中，朝下也是紅色的是雙紅卡的兩面（2 種），紅白卡朝下是白色（1 種）。機會是 2/3，答案是 A。",
+          "B 錯：1/2 是以為「只剩雙紅卡和紅白卡兩張，各一半」，但雙紅卡朝上是紅的機會是紅白卡的 2 倍。C 錯：1/3 是只看三張卡片中有一張雙紅。D 錯：1/4 沒有根據，看到紅面後白白卡已經不可能。"
+        ],
+        "zh-Hans": [
+          "把每一面都看成一样可能朝上：三张卡片共有 6 个面，抽卡再随便放，每一个面朝上的机会都一样。",
+          "红色的面有 3 个：双红卡的第 1 面、双红卡的第 2 面、红白卡的红面。现在看到红色，朝上的就是这 3 个面之一，机会一样。",
+          "这 3 种之中，朝下也是红色的是双红卡的两面（2 种），红白卡朝下是白色（1 种）。概率是 2/3，答案是 A。",
+          "B 错：1/2 是以为「只剩双红卡和红白卡两张，各一半」，但双红卡朝上是红的机会是红白卡的 2 倍。C 错：1/3 是只看三张卡片中有一张双红。D 错：1/4 没有根据，看到红面后白白卡已经不可能。"
+        ],
+        "en": [
+          "Treat every face as equally likely to land up: the three cards have 6 faces, and drawing a card and placing it either way makes each face equally likely to be on top.",
+          "There are 3 red faces: side 1 of the red-red card, side 2 of the red-red card, and the red side of the red-white card. Seeing red means the top face is one of these 3, equally likely.",
+          "Of those 3, the face underneath is red for the two red-red faces (2 cases) and white for the red-white card (1 case). The chance is 2/3: the answer is A.",
+          "B is wrong: 1/2 assumes \"two cards remain, half each\", but the red-red card is twice as likely to show red as the red-white card. C is wrong: 1/3 just says one card of three is red-red. D is wrong: 1/4 has no basis; once red is seen, the white-white card is ruled out."
+        ],
+        "ja": [
+          "どの面も同じ見こみで上になると考えます。3 枚のカードには面が 6 つあり、引いてどちらかを上にして置くので、どの面が上になる見こみも同じです。",
+          "赤い面は 3 つ：両面赤のカードの 1 面目、両面赤のカードの 2 面目、赤白カードの赤い面です。赤が見えたので、上の面はこの 3 つのどれかで、見こみは同じです。",
+          "この 3 つのうち、下も赤なのは両面赤のカードの 2 つ、赤白カードは下が白の 1 つです。確率は 2/3 で、答えは A です。",
+          "B はまちがい：1/2 は「残ったのは両面赤と赤白の 2 枚で半分ずつ」と考えたものだが、両面赤のほうが赤を上にする見こみが 2 倍ある。C はまちがい：1/3 は 3 枚のうち両面赤が 1 枚というだけ。D はまちがい：1/4 には根拠がなく、赤が見えた時点で両面白はありえない。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "multiple_choice",
+      "options": {
+        "A": {
+          "zh-Hant": "2/3",
+          "zh-Hans": "2/3",
+          "en": "2/3",
+          "ja": "2/3"
+        },
+        "B": {
+          "zh-Hant": "1/2",
+          "zh-Hans": "1/2",
+          "en": "1/2",
+          "ja": "1/2"
+        },
+        "C": {
+          "zh-Hant": "1/3",
+          "zh-Hans": "1/3",
+          "en": "1/3",
+          "ja": "1/3"
+        },
+        "D": {
+          "zh-Hant": "1/4",
+          "zh-Hans": "1/4",
+          "en": "1/4",
+          "ja": "1/4"
+        }
+      },
+      "correctAnswer": {
+        "type": "choice",
+        "value": "A"
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade6-foundation",
+        "notes": "以「面」為等可能單位：3 個紅面中 2 個的背面是紅，機會 2/3；破解「剩兩張卡各一半」的直覺。掃過 /兩面.{0,30}(紅|白|黑)/（0 題）、/(朝上|朝下).{0,30}(另一面|那一面).{0,20}(機會|機率)/（0 題）；最接近 logic_grade6_foundation_063（three_cups_switch_after_a_hint，三杯遊戲提示後換杯），差異：那題是主持人提示後換選；本題是看到一面顏色後推另一面，要以「面」而不是「卡片」當等可能單位"
+      }
+    },
+    {
+      "id": "logic_grade6_foundation_131",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "row_column_toggle_buttons_possible_lit_counts",
+      "tags": [
+        "c:logic_deduction",
+        "c:basic_counting",
+        "m:invariant"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade6",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一個 4 × 4 的燈陣，16 盞燈一開始全部是暗的。每一橫列旁邊有一個按鈕，每一直行下面也有一個按鈕：按某一橫列的按鈕，那一列的 4 盞燈全部切換（暗變亮、亮變暗）；按某一直行的按鈕，那一行的 4 盞燈全部切換。按鈕可以按任意多次。包括全暗在內，亮著的燈的盞數一共可能有幾種不同的數目？",
+        "zh-Hans": "一个 4 × 4 的灯阵，16 盏灯一开始全部是暗的。每一横排旁边有一个按钮，每一竖排下面也有一个按钮：按某一横排的按钮，那一横排的 4 盏灯全部切换（暗变亮、亮变暗）；按某一竖排的按钮，那一竖排的 4 盏灯全部切换。按钮可以按任意多次。包括全暗在内，亮着的灯的盏数一共可能有几种不同的数目？",
+        "en": "A 4 × 4 panel of 16 lamps starts all dark. Beside each row is a button, and below each column is a button: pressing a row button switches all 4 lamps in that row (dark to lit, lit to dark), and pressing a column button switches all 4 lamps in that column. Buttons may be pressed any number of times. Counting the all-dark state, how many different numbers of lit lamps are possible?",
+        "ja": "4 × 4 に並んだ 16 個のランプがあり、はじめは全部消えています。どの横の列の横にもボタンが 1 つ、どのたての列の下にもボタンが 1 つあります。横の列のボタンをおすとその列の 4 個が全部切りかわり（消→点、点→消）、たての列のボタンをおすとその列の 4 個が全部切りかわります。ボタンは何回おしてもかまいません。全部消えている場合もふくめて、ついているランプの個数は何通り考えられますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 7。",
+        "zh-Hans": "答案是 7。",
+        "en": "The answer is 7.",
+        "ja": "答えは 7 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "同一個按鈕按兩次等於沒按，所以只要看每個按鈕被按了單數次還是雙數次。設有 a 個橫列、b 個直行被按了單數次（a、b 都是 0 到 4）。",
+          "一盞燈亮著，當且僅當它所在的橫列和直行之中「恰好一個」被按了單數次。所以亮燈數 = a × (4 − b) + (4 − a) × b。",
+          "逐一代入：a = 0 時是 0、4、8、12、16；a = 1 時是 4、6、8、10、12；a = 2 時都是 8；a = 3、a = 4 的結果和 a = 1、a = 0 一樣。",
+          "可能的亮燈數是 0、4、6、8、10、12、16，一共 7 種（像 1、2、3、5 盞都不可能）。"
+        ],
+        "zh-Hans": [
+          "同一个按钮按两次等于没按，所以只要看每个按钮被按了奇数次还是偶数次。设有 a 个横排、b 个竖排被按了奇数次（a、b 都是 0 到 4）。",
+          "一盏灯亮着，当且仅当它所在的横排和竖排之中「恰好一个」被按了奇数次。所以亮灯数 = a × (4 − b) + (4 − a) × b。",
+          "逐一代入：a = 0 时是 0、4、8、12、16；a = 1 时是 4、6、8、10、12；a = 2 时都是 8；a = 3、a = 4 的结果和 a = 1、a = 0 一样。",
+          "可能的亮灯数是 0、4、6、8、10、12、16，一共 7 种（像 1、2、3、5 盏都不可能）。"
+        ],
+        "en": [
+          "Pressing a button twice is the same as not pressing it, so only whether each button is pressed an odd or even number of times matters. Say a rows and b columns are pressed an odd number of times (a and b from 0 to 4).",
+          "A lamp is lit exactly when exactly one of its row and its column was pressed an odd number of times. So the number lit = a × (4 − b) + (4 − a) × b.",
+          "Try each value: a = 0 gives 0, 4, 8, 12, 16; a = 1 gives 4, 6, 8, 10, 12; a = 2 always gives 8; a = 3 and a = 4 give the same as a = 1 and a = 0.",
+          "The possible counts are 0, 4, 6, 8, 10, 12, 16: 7 in all (counts such as 1, 2, 3, 5 are impossible)."
+        ],
+        "ja": [
+          "同じボタンを 2 回おすとおさないのと同じなので、どのボタンを奇数回おしたかだけが問題です。奇数回おした横の列を a 本、たての列を b 本とします（a、b は 0 から 4）。",
+          "ランプがつくのは、その横の列とたての列のうち「ちょうど 1 つ」が奇数回おされたときだけです。だから、ついている数 = a × (4 − b) + (4 − a) × b です。",
+          "順に入れると、a = 0 で 0、4、8、12、16、a = 1 で 4、6、8、10、12、a = 2 ではいつも 8、a = 3、a = 4 は a = 1、a = 0 と同じです。",
+          "ありうる個数は 0、4、6、8、10、12、16 の 7 通りです（1、2、3、5 個などは不可能）。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "7"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade6-foundation",
+        "notes": "只看各按鈕奇偶：a 列 b 行被奇數次按，亮燈 = a(4 − b) + b(4 − a)，取值 {0, 4, 6, 8, 10, 12, 16} 共 7 種；已窮舉 2⁸ 驗證。掃過 /按.{0,30}(整排|整行|一整列|整列|那一列)/（0 題）、/燈.{0,40}(橫列|橫排).{0,40}(直行|豎排).{0,30}(切換|按)/（0 題）；最接近 logic_grade10_foundation_021（3 × 3 燈陣按一盞切換十字形，求全亮最少按幾次），差異：那題按單一燈影響十字；本題按整列或整行，用奇偶化簡成 a(4 − b) + b(4 − a) 列出所有可能的亮燈數"
+      }
+    },
+    {
+      "id": "logic_grade6_foundation_132",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "median_of_row_medians_guaranteed_shorter_count",
+      "tags": [
+        "c:median_mode",
+        "c:compare_order",
+        "m:extremal"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade6",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "9 位同學的身高都不一樣，排成 3 橫排、每排 3 人。老師先在每一排找出身高排在中間（第二高）的那個人，一共找出 3 人；再從這 3 人中找出身高排在中間的那一位，請他當小隊長。不管 9 個人一開始怎麼排，小隊長一定至少比幾位同學高？",
+        "zh-Hans": "9 位同学的身高都不一样，排成 3 横排、每排 3 人。老师先在每一横排找出身高排在中间（第二高）的那个人，一共找出 3 人；再从这 3 人中找出身高排在中间的那一位，请他当小队长。不管 9 个人一开始怎么排，小队长一定至少比几位同学高？",
+        "en": "Nine classmates, all of different heights, stand in 3 rows of 3. In each row the teacher picks the person of middle height (second tallest), 3 people in all; then from those 3 she picks the one of middle height to be team leader. However the 9 are arranged at the start, at least how many classmates is the leader guaranteed to be taller than?",
+        "ja": "身長が全員ちがう 9 人が、3 列に 3 人ずつ並びます。先生はまず各列で身長が真ん中（2 番目に高い）の人を 1 人ずつ、合わせて 3 人選び、その 3 人の中で身長が真ん中の人を班長にします。はじめにどう並んでも、班長は少なくとも何人より背が高いといえますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 3。",
+        "zh-Hans": "答案是 3。",
+        "en": "The answer is 3.",
+        "ja": "答えは 3 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "設小隊長是 L。他是 3 位「排中間的人」裡排中間的，所以另外 2 位之中有 1 位（叫 M）比 L 矮。",
+          "M 是他那一排的中間，那一排還有 1 個人比 M 矮，所以這一排有 2 個人比 L 矮（M 和比 M 矮的人）。",
+          "L 自己那一排也有 1 個人比 L 矮。所以至少有 2 + 1 = 3 位同學比 L 矮。",
+          "3 是做得到的最少：例如三排的身高名次（由矮到高的 1～9）是 {1, 2, 5}、{3, 4, 6}、{7, 8, 9}，三排中間的是 2、4、8，小隊長是第 4 矮的人，只比 1、2、3 號這 3 人高。答案是 3。"
+        ],
+        "zh-Hans": [
+          "设小队长是 L。他是 3 位「排中间的人」里排中间的，所以另外 2 位之中有 1 位（叫 M）比 L 矮。",
+          "M 是他那一横排的中间，那一横排还有 1 个人比 M 矮，所以这一横排有 2 个人比 L 矮（M 和比 M 矮的人）。",
+          "L 自己那一横排也有 1 个人比 L 矮。所以至少有 2 + 1 = 3 位同学比 L 矮。",
+          "3 是做得到的最少：例如三横排的身高名次（由矮到高的 1～9）是 {1, 2, 5}、{3, 4, 6}、{7, 8, 9}，三横排中间的是 2、4、8，小队长是第 4 矮的人，只比 1、2、3 号这 3 人高。答案是 3。"
+        ],
+        "en": [
+          "Call the leader L. L is the middle one of the 3 row-middles, so one of the other 2 (call them M) is shorter than L.",
+          "M is the middle of M's row, so that row has another person shorter than M: that row gives 2 people shorter than L (M and the one shorter than M).",
+          "L's own row also has 1 person shorter than L. So at least 2 + 1 = 3 classmates are shorter than L.",
+          "3 can actually happen: for example, with height ranks 1 to 9 (shortest first) in rows {1, 2, 5}, {3, 4, 6}, {7, 8, 9}, the row-middles are 2, 4, 8 and the leader is rank 4, taller than only 1, 2, 3. The answer is 3."
+        ],
+        "ja": [
+          "班長を L とします。L は 3 人の「真ん中の人」の中で真ん中なので、ほかの 2 人のうち 1 人（M とする）は L より背が低いです。",
+          "M は自分の列の真ん中なので、その列にはもう 1 人 M より低い人がいます。この列から L より低い人が 2 人（M と M より低い人）います。",
+          "L 自身の列にも L より低い人が 1 人います。よって L より低い人は少なくとも 2 + 1 = 3 人です。",
+          "3 人の場合は実際にあります。たとえば身長の順位（低いほうから 1～9）で列が {1, 2, 5}、{3, 4, 6}、{7, 8, 9} なら、各列の真ん中は 2、4、8 で、班長は 4 番の人、1、2、3 番の 3 人より高いだけです。答えは 3 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "3"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade6-foundation",
+        "notes": "中位數的中位數 L：較矮的那個列中位數及其列中最矮者共 2 人、L 本列最矮者 1 人，至少比 3 人高；給出恰好 3 人的排法；已窮舉 9! 驗證。掃過 /每一(排|列|橫排).{0,40}中位數|中位數.{0,30}中位數/（4 題）、/(每一排|每排).{0,30}(中間|第二高).{0,40}(再|又).{0,20}(中間|第二高)/（0 題）；最接近 logic_grade4_foundation_096（各排最矮者中最高 vs 各行最高者中最矮），差異：那題比較兩種 max-min；本題是「各排中間者的中間」，要從兩層中位數推出至少比幾人高並構造恰好的例子"
+      }
+    },
+    {
+      "id": "logic_grade6_foundation_133",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "weekly_two_per_day_duty_max_three_days_min_staff",
+      "tags": [
+        "c:logic_deduction",
+        "c:mul_div",
+        "m:extremal"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade6",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "醫院要排一週 7 天的護理師值班表：每一天都要有 2 位不同的護理師值班，每位護理師一週最多只能值 3 天。最少要有幾位護理師才排得出來？",
+        "zh-Hans": "医院要排一周 7 天的护士值班表：每一天都要有 2 位不同的护士值班，每位护士一周最多只能值 3 天。最少要有几位护士才排得出来？",
+        "en": "A hospital is planning a one-week, 7-day nurses' duty roster: every day needs 2 different nurses on duty, and each nurse may work at most 3 days a week. What is the least number of nurses needed?",
+        "ja": "病院で 1 週間 7 日の看護師の当番表を作ります。毎日 2 人のちがう看護師が当番をし、1 人の看護師は 1 週間に多くても 3 日しか当番ができません。看護師は少なくとも何人必要ですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 5。",
+        "zh-Hans": "答案是 5。",
+        "en": "The answer is 5.",
+        "ja": "答えは 5 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "一週一共有 7 × 2 = 14 個「人次」要排。每位護理師最多值 3 天，4 位最多只能排 4 × 3 = 12 個人次，不夠，所以至少要 5 位。",
+          "5 位最多可以排 5 × 3 = 15 個人次，夠用，還要確定排得出來（同一天的兩人不能是同一位）。",
+          "把 5 位護理師編號 1 到 5，依序輪流填：星期一 1、2，星期二 3、4，星期三 5、1，星期四 2、3，星期五 4、5，星期六 1、2，星期日 3、4。每天的兩人都不同。",
+          "數一數：1 號值星期一、三、六，2 號值一、四、六，3 號值二、四、日，4 號值二、五、日，5 號值三、五，都不超過 3 天。所以最少要 5 位護理師。"
+        ],
+        "zh-Hans": [
+          "一周一共有 7 × 2 = 14 个「人次」要排。每位护士最多值 3 天，4 位最多只能排 4 × 3 = 12 个人次，不够，所以至少要 5 位。",
+          "5 位最多可以排 5 × 3 = 15 个人次，够用，还要确定排得出来（同一天的两人不能是同一位）。",
+          "把 5 位护士编号 1 到 5，依次轮流填：星期一 1、2，星期二 3、4，星期三 5、1，星期四 2、3，星期五 4、5，星期六 1、2，星期日 3、4。每天的两人都不同。",
+          "数一数：1 号值星期一、三、六，2 号值一、四、六，3 号值二、四、日，4 号值二、五、日，5 号值三、五，都不超过 3 天。所以最少要 5 位护士。"
+        ],
+        "en": [
+          "The week needs 7 × 2 = 14 duty slots. Each nurse covers at most 3, so 4 nurses cover at most 4 × 3 = 12, not enough; at least 5 are needed.",
+          "5 nurses can cover up to 5 × 3 = 15 slots, which is enough; we still must check a roster exists (the two on a day must be different people).",
+          "Number the nurses 1 to 5 and fill in turn: Monday 1, 2; Tuesday 3, 4; Wednesday 5, 1; Thursday 2, 3; Friday 4, 5; Saturday 1, 2; Sunday 3, 4. Each day has two different nurses.",
+          "Count: nurse 1 works Mon, Wed, Sat; 2 works Mon, Thu, Sat; 3 works Tue, Thu, Sun; 4 works Tue, Fri, Sun; 5 works Wed, Fri, none over 3 days. So the least is 5 nurses."
+        ],
+        "ja": [
+          "1 週間で当番のわくは 7 × 2 = 14 です。1 人は多くても 3 日なので、4 人では多くても 4 × 3 = 12 で足りず、少なくとも 5 人いります。",
+          "5 人なら多くて 5 × 3 = 15 で足りますが、実際に組めるか（同じ日の 2 人が同じ人にならないか）確かめます。",
+          "看護師に 1 から 5 の番号をつけて順に入れます。月曜 1、2、火曜 3、4、水曜 5、1、木曜 2、3、金曜 4、5、土曜 1、2、日曜 3、4 で、どの日も 2 人はちがう人です。",
+          "数えると、1 番は月・水・土、2 番は月・木・土、3 番は火・木・日、4 番は火・金・日、5 番は水・金で、だれも 3 日をこえません。よって少なくとも 5 人です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "5"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade6-foundation",
+        "notes": "14 個人次、每人 ≤ 3 → 至少 ⌈14 ÷ 3⌉ = 5；1～5 循環填入得合法班表。掃過 /值班|輪班|排班/（0 題）、/每(一)?天.{0,20}(2|兩) ?(位|個|人).{0,40}最多.{0,10}(3|三) ?天/（0 題）；最接近 logic_grade4_foundation_087（minimum_platforms_interval_overlap，最少月台數），差異：那題是時間區間重疊的最大值；本題是總需求人次除以每人上限的下界，再用循環填表構造"
+      }
     }
   ]
 }

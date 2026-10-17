@@ -8564,6 +8564,366 @@
         "reference": "logic-grade5-foundation",
         "notes": "依每邊重量 3～7 分類列出不共用砝碼的等重兩組：1、1、3、1、1 種，共 7。已窮舉驗證。掃過 /砝碼.{0,60}(平衡|一樣重).{0,30}(幾種|放法)/（0 題）、/分成兩組.{0,30}(相等|一樣)/（grouping_balance 4 題，皆須全部用上）；最接近 logic_grade4_foundation_045（1～8 全部分成兩組等和的分法），差異：那題每個數都要用；本題可以不用某些砝碼，要按重量分類找不相交的等和子集"
       }
+    },
+    {
+      "id": "logic_grade5_foundation_110",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "saddle_stitched_booklet_pages_on_same_sheet",
+      "tags": [
+        "c:logic_deduction",
+        "c:pattern",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade5",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一本小冊子是這樣做的：把幾張紙疊齊，從正中間一起對摺，在摺線上釘起來。每張紙會變成 4 頁（前後兩面，摺線兩邊各一頁），整本從第 1 頁依序編到最後一頁。把釘書針拆開以後發現，第 7 頁和第 22 頁印在同一張紙上。這本小冊子一共有幾頁？",
+        "zh-Hans": "一本小册子是这样做的：把几张纸叠齐，从正中间一起对折，在折线上钉起来。每张纸会变成 4 页（前后两面，折线两边各一页），整本从第 1 页依次编到最后一页。把订书钉拆开以后发现，第 7 页和第 22 页印在同一张纸上。这本小册子一共有几页？",
+        "en": "A booklet is made like this: several sheets are stacked, folded together down the middle, and stapled on the fold. Each sheet becomes 4 pages (front and back, one page on each side of the fold), and the pages are numbered from 1 to the last page. After removing the staples, it turns out that pages 7 and 22 are printed on the same sheet. How many pages does the booklet have?",
+        "ja": "小冊子はこう作ります。何枚かの紙をそろえて重ね、まとめて真ん中で二つ折りにし、折り目をホチキスでとめます。紙 1 枚は 4 ページ（表と裏、折り目の両側に 1 ページずつ）になり、1 ページから最後のページまで順に番号をつけます。ホチキスを外すと、7 ページと 22 ページが同じ紙に印刷されていました。この小冊子は全部で何ページですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 28。",
+        "zh-Hans": "答案是 28。",
+        "en": "The answer is 28.",
+        "ja": "答えは 28 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "設共有 n 頁（n 是 4 的倍數）。最外面那張紙上是第 1、2 頁和最後的第 n − 1、n 頁；往裡面第 2 張是第 3、4 頁和第 n − 3、n − 2 頁，依此類推：每張紙上有兩個連續的前段頁碼和兩個連續的後段頁碼。",
+          "而且同一張紙上「前段的單數頁 + 後段的雙數頁 = n + 1」，例如第 1 頁配第 n 頁、第 3 頁配第 n − 2 頁。",
+          "第 7 頁是單數，所以它那張紙的前段是第 7、8 頁，後段兩頁是 n − 7 和 n − 6（第 7 頁配 n − 6，因為 7 + (n − 6) = n + 1）。第 22 頁就是其中一頁：若 22 = n − 6，n = 28；若 22 = n − 7，n = 29，不是 4 的倍數，不行。",
+          "所以小冊子有 28 頁。檢查：28 頁的小冊子，由外往裡第 4 張紙上是第 7、8、21、22 頁。"
+        ],
+        "zh-Hans": [
+          "设共有 n 页（n 是 4 的倍数）。最外面那张纸上是第 1、2 页和最后的第 n − 1、n 页；往里面第 2 张是第 3、4 页和第 n − 3、n − 2 页，依此类推：每张纸上有两个连续的前段页码和两个连续的后段页码。",
+          "而且同一张纸上「前段的奇数页 + 后段的偶数页 = n + 1」，例如第 1 页配第 n 页、第 3 页配第 n − 2 页。",
+          "第 7 页是奇数，所以它那张纸的前段是第 7、8 页，后段两页是 n − 7 和 n − 6（第 7 页配 n − 6，因为 7 + (n − 6) = n + 1）。第 22 页就是其中一页：若 22 = n − 6，n = 28；若 22 = n − 7，n = 29，不是 4 的倍数，不行。",
+          "所以小册子有 28 页。检查：28 页的小册子，由外往里第 4 张纸上是第 7、8、21、22 页。"
+        ],
+        "en": [
+          "Let there be n pages (n is a multiple of 4). The outermost sheet carries pages 1, 2 and the last pages n − 1, n; the 2nd sheet inward carries 3, 4 and n − 3, n − 2, and so on: each sheet has two consecutive early pages and two consecutive late pages.",
+          "Also, on one sheet \"odd early page + even late page = n + 1\", for example page 1 with page n, page 3 with page n − 2.",
+          "Page 7 is odd, so its sheet has early pages 7, 8 and late pages n − 7 and n − 6 (7 pairs with n − 6, since 7 + (n − 6) = n + 1). Page 22 is one of these: if 22 = n − 6 then n = 28; if 22 = n − 7 then n = 29, not a multiple of 4, impossible.",
+          "So the booklet has 28 pages. Check: in a 28-page booklet, the 4th sheet from the outside carries pages 7, 8, 21, 22."
+        ],
+        "ja": [
+          "全部で n ページ（n は 4 の倍数）とします。いちばん外の紙には 1、2 ページと最後の n − 1、n ページがあり、内側へ 2 枚目は 3、4 ページと n − 3、n − 2 ページ、というように、どの紙にも前半の続いた 2 ページと後半の続いた 2 ページがあります。",
+          "さらに同じ紙では「前半の奇数ページ + 後半の偶数ページ = n + 1」です。たとえば 1 ページと n ページ、3 ページと n − 2 ページです。",
+          "7 ページは奇数なので、その紙の前半は 7、8 ページ、後半は n − 7 と n − 6 ページです（7 + (n − 6) = n + 1 なので 7 と n − 6 が組）。22 ページはこのどちらかで、22 = n − 6 なら n = 28、22 = n − 7 なら n = 29 で 4 の倍数ではないのでだめです。",
+          "よって小冊子は 28 ページです。確かめ：28 ページの小冊子では、外から 4 枚目の紙に 7、8、21、22 ページがあります。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "28"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade5-foundation",
+        "notes": "騎馬釘小冊子 n 頁：第 k 張紙有 2k − 1、2k、n − 2k + 1、n − 2k + 2，第 7 頁那張是 7、8、n − 7、n − 6，22 = n − 6 得 n = 28（n − 7 給 29 非 4 倍數）。掃過 /裝訂|騎馬釘|對摺.{0,20}(頁|本子|冊)/（2 題）、/(同一張紙|同一張).{0,30}頁/（0 題）；最接近 arithmetic_grade4_foundation_073（頁碼共用幾個數字），差異：那題是頁碼的數字個數；本題是對摺裝訂時同一張紙上的頁碼配對規律（頭尾相加為 n + 1），由兩個頁碼反推總頁數"
+      }
+    },
+    {
+      "id": "logic_grade5_foundation_111",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "at_least_one_in_every_three_consecutive_minimum",
+      "tags": [
+        "c:logic_deduction",
+        "c:basic_counting",
+        "m:extremal"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade5",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "書架上有 20 本書排成一排。圖書館員規定：任何相鄰的連續 3 本書之中，至少要有 1 本是故事書。這 20 本書之中，故事書最少有幾本？",
+        "zh-Hans": "书架上有 20 本书排成一排。图书管理员规定：任何相邻的连续 3 本书之中，至少要有 1 本是故事书。这 20 本书之中，故事书最少有几本？",
+        "en": "Twenty books stand in a row on a shelf. The librarian's rule: among any 3 books standing next to one another, at least 1 must be a storybook. At least how many of the 20 books are storybooks?",
+        "ja": "本だなに本が 20 さつ 1 列に並んでいます。図書係の決まりでは、となり合って続いているどの 3 さつにも、物語の本が少なくとも 1 さつ入っていなければなりません。20 さつのうち、物語の本は少なくとも何さつですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 6。",
+        "zh-Hans": "答案是 6。",
+        "en": "The answer is 6.",
+        "ja": "答えは 6 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "把前 18 本分成不重疊的 6 組：第 1～3 本、第 4～6 本、⋯、第 16～18 本。每一組都是連續 3 本，各至少要有 1 本故事書，所以至少要 6 本。",
+          "6 本做得到：把故事書放在第 3、6、9、12、15、18 本。",
+          "檢查：任何連續 3 本是第 k、k + 1、k + 2 本（k 從 1 到 18），這三個連續的數裡一定有一個是 3 的倍數，而 3 到 18 的 3 的倍數都是故事書，最後一組第 18、19、20 本也有第 18 本。",
+          "所以故事書最少是 6 本。"
+        ],
+        "zh-Hans": [
+          "把前 18 本分成不重叠的 6 组：第 1～3 本、第 4～6 本、⋯、第 16～18 本。每一组都是连续 3 本，各至少要有 1 本故事书，所以至少要 6 本。",
+          "6 本做得到：把故事书放在第 3、6、9、12、15、18 本。",
+          "检查：任何连续 3 本是第 k、k + 1、k + 2 本（k 从 1 到 18），这三个连续的数里一定有一个是 3 的倍数，而 3 到 18 的 3 的倍数都是故事书，最后一组第 18、19、20 本也有第 18 本。",
+          "所以故事书最少是 6 本。"
+        ],
+        "en": [
+          "Split the first 18 books into 6 non-overlapping groups: books 1-3, 4-6, ..., 16-18. Each group is 3 books in a row and needs at least 1 storybook, so at least 6 are needed.",
+          "6 is possible: put storybooks in positions 3, 6, 9, 12, 15 and 18.",
+          "Check: any 3 in a row are books k, k + 1, k + 2 (k from 1 to 18); three consecutive numbers always include a multiple of 3, and every multiple of 3 from 3 to 18 is a storybook; the last group, books 18, 19, 20, contains book 18.",
+          "So the least number of storybooks is 6."
+        ],
+        "ja": [
+          "はじめの 18 さつを重ならない 6 組に分けます：1～3 さつ目、4～6 さつ目、⋯、16～18 さつ目。どの組も続いた 3 さつなので、それぞれ物語の本が 1 さつ以上いり、少なくとも 6 さつです。",
+          "6 さつでできます：物語の本を 3、6、9、12、15、18 さつ目に置きます。",
+          "確かめ：続いた 3 さつは k、k + 1、k + 2 さつ目（k は 1 から 18）で、続いた 3 つの数には必ず 3 の倍数があり、3 から 18 の 3 の倍数はどれも物語の本です。最後の 18、19、20 さつ目にも 18 さつ目があります。",
+          "よって物語の本は少なくとも 6 さつです。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "6"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade5-foundation",
+        "notes": "前 18 本切成 6 組不重疊的連續 3 本得下界 6，放在 3 的倍數位置達成；已窮舉驗證最小值。掃過 /任何(相鄰的)?連續 ?\\d+ ?(本|個|天|格)|任意連續 ?\\d+/（1 題）、/(連續|相鄰).{0,10}(3|三) ?(本|個).{0,30}至少.{0,10}(1|一)/（0 題）；最接近 combinatorics_grade12_foundation_055（任意連續 3 瓶與 5 瓶的果汁濃度條件），差異：那題同時有兩個窗口條件求最大長度；本題只有一個窗口，用不重疊分組得下界、等距放置達成，是基礎的覆蓋問題"
+      }
+    },
+    {
+      "id": "logic_grade5_foundation_112",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "clock_face_fixed_jump_visits_all_numbers",
+      "tags": [
+        "c:modular",
+        "c:factor_multiple",
+        "m:enumeration"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade5",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "鐘面上有 1 到 12 這 12 個數字。一隻青蛙從 12 出發，每次都沿順時針方向跳過固定的 k 格（例如 k = 2 時，會從 12 跳到 2、再跳到 4⋯⋯）。k 可以是 1 到 11 的任何一個整數。只要一直跳下去，青蛙最後能在全部 12 個數字上都落過腳的 k 一共有幾個？",
+        "zh-Hans": "钟面上有 1 到 12 这 12 个数字。一只青蛙从 12 出发，每次都沿顺时针方向跳过固定的 k 格（例如 k = 2 时，会从 12 跳到 2、再跳到 4⋯⋯）。k 可以是 1 到 11 的任何一个整数。只要一直跳下去，青蛙最后能在全部 12 个数字上都落过脚的 k 一共有几个？",
+        "en": "A clock face shows the numbers 1 to 12. A frog starts at 12 and each time jumps clockwise by the same k places (for k = 2 it goes from 12 to 2, then to 4, ...). k can be any whole number from 1 to 11. For how many values of k does the frog, jumping on and on, eventually land on all 12 numbers?",
+        "ja": "時計の文字ばんに 1 から 12 の 12 個の数があります。カエルが 12 から出発し、毎回時計回りに同じ k こ分ずつ跳びます（たとえば k = 2 なら 12 から 2、次に 4 ⋯⋯）。k は 1 から 11 のどれかの整数です。跳び続けると 12 個の数全部に着地する k は、全部で何個ありますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 4。",
+        "zh-Hans": "答案是 4。",
+        "en": "The answer is 4.",
+        "ja": "答えは 4 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "青蛙落腳的位置是 k、2 × k、3 × k、⋯ 除以 12 的餘數（餘 0 就是 12）。",
+          "如果 k 和 12 有大於 1 的公因數，例如 k = 8 和 12 都是 4 的倍數，青蛙就只會落在 4 的倍數上：8、4、12、8、⋯，永遠到不了其他數。",
+          "和 12 沒有大於 1 的公因數的 k 是 1、5、7、11。例如 k = 5：5、10、3、8、1、6、11、4、9、2、7、12，12 個數全部都落過；k = 7、11 也一樣（k = 1 就是一格一格跳）。",
+          "所以這樣的 k 一共有 4 個。"
+        ],
+        "zh-Hans": [
+          "青蛙落脚的位置是 k、2 × k、3 × k、⋯ 除以 12 的余数（余 0 就是 12）。",
+          "如果 k 和 12 有大于 1 的公因数，例如 k = 8 和 12 都是 4 的倍数，青蛙就只会落在 4 的倍数上：8、4、12、8、⋯，永远到不了其他数。",
+          "和 12 没有大于 1 的公因数的 k 是 1、5、7、11。例如 k = 5：5、10、3、8、1、6、11、4、9、2、7、12，12 个数全部都落过；k = 7、11 也一样（k = 1 就是一格一格跳）。",
+          "所以这样的 k 一共有 4 个。"
+        ],
+        "en": [
+          "The frog lands on the remainders of k, 2 × k, 3 × k, ... divided by 12 (remainder 0 means 12).",
+          "If k and 12 share a common factor greater than 1, for example k = 8 and 12 are both multiples of 4, the frog lands only on multiples of 4: 8, 4, 12, 8, ..., and never reaches the others.",
+          "The values of k sharing no factor greater than 1 with 12 are 1, 5, 7, 11. For k = 5: 5, 10, 3, 8, 1, 6, 11, 4, 9, 2, 7, 12, all 12 numbers; k = 7 and 11 work the same way (k = 1 goes one by one).",
+          "So there are 4 such values of k."
+        ],
+        "ja": [
+          "カエルが着地するのは、k、2 × k、3 × k、⋯ を 12 でわったあまり（あまり 0 は 12）です。",
+          "k と 12 に 1 より大きい公約数があると、たとえば k = 8 は 12 と同じく 4 の倍数なので、カエルは 4 の倍数 8、4、12、8、⋯ にしか着地せず、ほかの数には行けません。",
+          "12 と 1 より大きい公約数をもたない k は 1、5、7、11 です。k = 5 なら 5、10、3、8、1、6、11、4、9、2、7、12 で 12 個全部に着地し、k = 7、11 も同じです（k = 1 は 1 つずつ進む）。",
+          "よってそのような k は 4 個です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "4"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade5-foundation",
+        "notes": "落點為 k 的倍數除以 12 的餘數，與 12 有公因數 d 時只到 d 的倍數；和 12 互質的 k = 1、5、7、11 共 4 個。掃過 /鐘面.{0,40}跳|跳.{0,30}鐘面/（0 題）、/(圍成一圈|一圈).{0,40}每次.{0,20}(跳|數).{0,20}(格|個)/（2 題）；最接近 logic_grade5_foundation_022（circle_skip_pass_return，圍圈每次跳過幾人傳回起點），差異：那題給定跳法求回到起點的次數；本題要判斷哪些跳距能走遍全部 12 格，核心是 k 與 12 是否互質"
+      }
+    },
+    {
+      "id": "logic_grade5_foundation_113",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "combination_lock_reach_digit_sum_ten_fewest_turns",
+      "tags": [
+        "c:logic_deduction",
+        "c:modular",
+        "m:extremal"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade5",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "爸爸的行李箱用三位數字轉盤鎖，每個轉盤刻著 0 到 9 繞成一圈：轉過 9 會接回 0，從 0 反方向撥一格就是 9。每撥動一個轉盤一格（不論方向）算一次。三個轉盤現在都停在 0。爸爸只記得三個數字的和是 10。要撥出任何一組數字和是 10 的組合來試試看，最少要撥幾次？",
+        "zh-Hans": "爸爸的行李箱用三位数字转盘锁，每个转盘刻着 0 到 9 绕成一圈：转过 9 会接回 0，从 0 反方向拨一格就是 9。每拨动一个转盘一格（不论方向）算一次。三个转盘现在都停在 0。爸爸只记得三个数字的和是 10。要拨出任何一组数字和是 10 的组合来试试看，最少要拨几次？",
+        "en": "Dad's suitcase has a 3-dial number lock; each dial carries 0 to 9 around a circle: past 9 it returns to 0, and one click backwards from 0 is 9. Moving one dial by one click (either way) counts as one move. All three dials now rest on 0. Dad remembers only that the three digits add up to 10. To set any combination whose digits add up to 10 and try it, at least how many moves are needed?",
+        "ja": "お父さんのスーツケースには 3 けたのダイヤル錠がついていて、どのダイヤルにも 0 から 9 が 1 周に並んでいます。9 の次は 0 にもどり、0 から逆向きに 1 目もり動かすと 9 です。ダイヤル 1 つを 1 目もり動かすと（向きにかかわらず）1 回です。いま 3 つとも 0 です。お父さんは 3 つの数字の和が 10 だということだけ覚えています。和が 10 になる組み合わせをどれか 1 つ作って試すには、少なくとも何回動かせばよいですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 2。",
+        "zh-Hans": "答案是 2。",
+        "en": "The answer is 2.",
+        "ja": "答えは 2 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "只撥 1 次：某一個轉盤變成 1（順著撥）或 9（反著撥），數字和是 1 或 9，不是 10，所以至少要撥 2 次。",
+          "關鍵是 0 往下轉一格就變成 9，一次就讓數字和多 9。",
+          "轉 2 次就做得到：第一個轉輪往下轉 1 格變成 9，第二個轉輪往上轉 1 格變成 1，組合 9、1、0 的數字和是 10。",
+          "所以最少轉 2 次。（如果只想到往上轉，會以為要轉 10 次。）"
+        ],
+        "zh-Hans": [
+          "只拨 1 次：某一个转盘变成 1（顺着拨）或 9（反着拨），数字和是 1 或 9，不是 10，所以至少要拨 2 次。",
+          "关键是 0 往下转一格就变成 9，一次就让数字和多 9。",
+          "转 2 次就做得到：第一个转轮往下转 1 格变成 9，第二个转轮往上转 1 格变成 1，组合 9、1、0 的数字和是 10。",
+          "所以最少转 2 次。（如果只想到往上转，会以为要转 10 次。）"
+        ],
+        "en": [
+          "With 1 turn, one dial becomes 1 (up) or 9 (down), so the digit sum is 1 or 9, not 10; at least 2 turns are needed.",
+          "The key is that one step down from 0 gives 9, raising the digit sum by 9 in a single turn.",
+          "2 turns are enough: turn the first dial down once to 9 and the second up once to 1; the combination 9, 1, 0 has digit sum 10.",
+          "So the least is 2 turns. (Thinking only of turning up would suggest 10 turns.)"
+        ],
+        "ja": [
+          "1 回だけだと、どれか 1 つのダイヤルが 1（上）か 9（下）になり、和は 1 か 9 で 10 ではないので、少なくとも 2 回いります。",
+          "ポイントは、0 から 1 目もり下へ回すと 9 になり、1 回で和が 9 ふえることです。",
+          "2 回でできます：1 つ目のダイヤルを逆向きに 1 目もり動かして 9、2 つ目を順向きに 1 目もり回して 1 にすると、9、1、0 で和は 10 です。",
+          "よって少なくとも 2 回です（上に回すことだけ考えると 10 回いると思ってしまう）。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "2"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade5-foundation",
+        "notes": "轉輪成環：0 往下一格是 9，轉 1 次和只能是 1 或 9，轉 2 次得 9、1、0 和為 10；已窮舉所有和為 10 的組合驗證最少 2 次。掃過 /密碼鎖/（8 題）、/轉輪.{0,40}(加起來|數字和)/（0 題）；最接近 arithmetic_grade2_foundation_119（三個轉輪從 000 轉到 829 最少轉幾次），差異：那題目標組合固定，只要每輪選較短方向；本題目標是「數字和 10」的任一組合，要利用 0 往下即 9 的環狀結構找最省的目標"
+      }
+    },
+    {
+      "id": "logic_grade5_foundation_114",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "torn_pages_last_number_is_digit_rearrangement",
+      "tags": [
+        "c:logic_deduction",
+        "c:place_value",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade5",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "圖書館的一本舊書，中間有連續好幾張紙一起脫落了。這本書的頁碼從第 1 頁起依序編號，每張紙正面印單數頁、背面印緊接著的雙數頁。脫落的那一疊紙，第一頁是第 143 頁，最後一頁的頁碼恰好是把 1、4、3 換個順序排成的另一個三位數。脫落的紙一共有幾張？",
+        "zh-Hans": "图书馆的一本旧书，中间有连续好几张纸一起脱落了。这本书的页码从第 1 页起依次编号，每张纸正面印奇数页、背面印紧接着的偶数页。脱落的那一叠纸，第一页是第 143 页，最后一页的页码恰好是把 1、4、3 换个顺序排成的另一个三位数。脱落的纸一共有几张？",
+        "en": "In an old library book, a block of consecutive sheets has fallen out of the middle. The pages are numbered from page 1 in order; each sheet has an odd page on the front and the next even page on the back. The first page of the fallen block is page 143, and its last page is another three-digit number formed by rearranging the digits 1, 4, 3. How many sheets fell out?",
+        "ja": "図書館の古い本の真ん中から、続いた何枚かの紙がまとめてぬけ落ちました。この本は 1 ページから順に番号がつき、紙の表には奇数ページ、裏にはその次の偶数ページが印刷されています。ぬけ落ちた紙のたばの最初のページは 143 ページで、最後のページは 1、4、3 を並べかえた別の 3 けたの数でした。ぬけ落ちた紙は何枚ですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 86。",
+        "zh-Hans": "答案是 86。",
+        "en": "The answer is 86.",
+        "ja": "答えは 86 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "脫落的是整張的紙，第一頁 143 是單數（在紙的正面），最後一頁一定在某張紙的反面，所以是雙數。",
+          "用 1、4、3 排出的其他三位數：134、314、341、413、431。最後一頁要比 143 大，134 不行；要是雙數，341、413、431 都是單數，不行。",
+          "所以最後一頁是第 314 頁。脫落的頁是第 143 頁到第 314 頁，共 314 − 143 + 1 = 172 頁。",
+          "每張紙有 2 頁，所以脫落 172 ÷ 2 = 86 張紙。"
+        ],
+        "zh-Hans": [
+          "脱落的是整张的纸，第一页 143 是奇数（在纸的正面），最后一页一定在某张纸的反面，所以是偶数。",
+          "用 1、4、3 排出的其他三位数：134、314、341、413、431。最后一页要比 143 大，134 不行；要是偶数，341、413、431 都是奇数，不行。",
+          "所以最后一页是第 314 页。脱落的页是第 143 页到第 314 页，共 314 − 143 + 1 = 172 页。",
+          "每张纸有 2 页，所以脱落 172 ÷ 2 = 86 张纸。"
+        ],
+        "en": [
+          "Whole sheets fell out. The first page, 143, is odd (on a front), so the last page must be on the back of a sheet, which is even.",
+          "The other three-digit numbers from 1, 4, 3 are 134, 314, 341, 413, 431. The last page must exceed 143, ruling out 134, and must be even, ruling out 341, 413 and 431.",
+          "So the last page is 314. Pages 143 to 314 fell out: 314 − 143 + 1 = 172 pages.",
+          "Each sheet has 2 pages, so 172 ÷ 2 = 86 sheets fell out."
+        ],
+        "ja": [
+          "紙は 1 枚ごとぬけるので、最初の 143 ページは奇数（表）で、最後のページはどれかの紙の裏、つまり偶数です。",
+          "1、4、3 で作れるほかの 3 けたの数は 134、314、341、413、431 です。最後のページは 143 より大きいので 134 はだめ、偶数なので 341、413、431 もだめです。",
+          "よって最後のページは 314 ページで、ぬけたのは 143 ページから 314 ページまでの 314 − 143 + 1 = 172 ページです。",
+          "紙 1 枚に 2 ページなので、172 ÷ 2 = 86 枚です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "86"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade5-foundation",
+        "notes": "整張撕下：起頁 143 為單數則末頁必為雙數且大於 143，1、4、3 的排列只有 314 合格，頁數 172、張數 86。掃過 /撕.{0,40}頁/（2 題）、/頁碼.{0,40}(數字|排列).{0,20}(相同|一樣|不同)/（0 題）；最接近 arithmetic_grade3_foundation_214（撕下第 15 頁到第 28 頁共幾張），差異：那題頭尾頁都已知；本題末頁未知，要用「整張撕下末頁必雙數」與數字重排篩出 314"
+      }
     }
   ]
 }
