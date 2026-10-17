@@ -5760,6 +5760,244 @@
         "reference": "number_theory-grade9-foundation",
         "notes": "周長 100 給出 a + b = 50，面積被 12 整除拆成「兩邊同偶」與「a ≢ 1 (mod 3)」。掃過 /周長/（142 題）、/12 的倍數/（2 題）；最接近 number_theory_grade8_foundation_053，差異：該題是面積數值等於周長數值的直角三角形；本題固定周長，用奇偶與模 3 篩選面積的整除性"
       }
+    },
+    {
+      "id": "number_theory_grade9_foundation_069",
+      "reviewStatus": "ok",
+      "topic": "number_theory",
+      "subtopic": "euclidean_algorithm_max_steps_fibonacci",
+      "tags": [
+        "c:factor_multiple",
+        "c:recurrence",
+        "m:estimate_bound",
+        "m:extremal"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade9",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "用輾轉相除法求兩個正整數 a、b（a > b）的最大公因數：每一步把較大的數除以較小的數，再用「較小的數」和「餘數」取代原來的兩個數，一直做到餘數是 0 為止；每做一次除法算一步。例如 (10, 4)：10 = 2 × 4 + 2、4 = 2 × 2 + 0，共 2 步。在 100 ≥ a > b ≥ 1 的所有整數對中，需要步數最多的只有一對。求這一對的 a + b。",
+        "zh-Hans": "用辗转相除法求两个正整数 a、b（a > b）的最大公约数：每一步把较大的数除以较小的数，再用“较小的数”和“余数”取代原来的两个数，一直做到余数是 0 为止；每做一次除法算一步。例如 (10, 4)：10 = 2 × 4 + 2、4 = 2 × 2 + 0，共 2 步。在 100 ≥ a > b ≥ 1 的所有整数对中，需要步数最多的只有一对。求这一对的 a + b。",
+        "en": "The Euclidean algorithm finds the greatest common divisor of positive integers a > b: at each step, divide the larger number by the smaller, then replace the pair by the smaller number and the remainder, until the remainder is 0; each division counts as one step. For example, (10, 4): 10 = 2 × 4 + 2, 4 = 2 × 2 + 0, which is 2 steps. Among all integer pairs with 100 ≥ a > b ≥ 1, exactly one pair needs the most steps. Find a + b for that pair.",
+        "ja": "ユークリッドの互除法で正の整数 a、b（a > b）の最大公約数を求めます。各回で大きい方を小さい方でわり、「小さい方の数」と「余り」で 2 つの数をおきかえ、余りが 0 になるまで続けます。わり算 1 回を 1 回と数えます。たとえば (10, 4) では 10 = 2 × 4 + 2、4 = 2 × 2 + 0 で 2 回です。100 ≥ a > b ≥ 1 のすべての整数の組のうち、回数がいちばん多いのは 1 組だけです。その組の a + b を求めなさい。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 144。",
+        "zh-Hans": "答案是 144。",
+        "en": "The answer is 144.",
+        "ja": "答えは 144 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "倒過來看：最後一步是「某數 = 商 × 最大公因數 + 0」，最大公因數至少是 1，而這一步的被除數比除數大，商至少是 2，所以最後兩個數至少是 1 和 2。往前每一步「被除數 = 商 × 除數 + 餘數」，商至少是 1，所以被除數至少是「除數 + 餘數」。",
+          "因此從後往前，出現的數至少依序是 1、2、3、5、8、13、21、34、55、89、144、⋯（每一個至少是後面兩個的和）。若要做 k 步，b 至少是這串的第 k 個數、a 至少是第 k + 1 個數。做 10 步需要 a ≥ 144 > 100，不可能；做 9 步需要 b ≥ 55、a ≥ 89。",
+          "(89, 55) 確實要 9 步：89 = 1 × 55 + 34、55 = 1 × 34 + 21、34 = 1 × 21 + 13、21 = 1 × 13 + 8、13 = 1 × 8 + 5、8 = 1 × 5 + 3、5 = 1 × 3 + 2、3 = 1 × 2 + 1、2 = 2 × 1 + 0。",
+          "若 9 步中有任何一個商比上面更大，或最大公因數大於 1，往回推出的 a 都會超過 100（例如最大公因數是 2 時 a 至少是 178；其次的 9 步數對是 (123, 76)），所以最多 9 步，且唯一的一對是 (89, 55)，a + b = 144。答案是 144。"
+        ],
+        "zh-Hans": [
+          "倒过来看：最后一步是“某数 = 商 × 最大公约数 + 0”，最大公约数至少是 1，而这一步的被除数比除数大，商至少是 2，所以最后两个数至少是 1 和 2。往前每一步“被除数 = 商 × 除数 + 余数”，商至少是 1，所以被除数至少是“除数 + 余数”。",
+          "因此从后往前，出现的数至少依次是 1、2、3、5、8、13、21、34、55、89、144、⋯（每一个至少是后面两个的和）。若要做 k 步，b 至少是这串的第 k 个数、a 至少是第 k + 1 个数。做 10 步需要 a ≥ 144 > 100，不可能；做 9 步需要 b ≥ 55、a ≥ 89。",
+          "(89, 55) 确实要 9 步：89 = 1 × 55 + 34、55 = 1 × 34 + 21、34 = 1 × 21 + 13、21 = 1 × 13 + 8、13 = 1 × 8 + 5、8 = 1 × 5 + 3、5 = 1 × 3 + 2、3 = 1 × 2 + 1、2 = 2 × 1 + 0。",
+          "若 9 步中有任何一个商比上面更大，或最大公约数大于 1，往回推出的 a 都会超过 100（例如最大公约数是 2 时 a 至少是 178；其次的 9 步数对是 (123, 76)），所以最多 9 步，且唯一的一对是 (89, 55)，a + b = 144。答案是 144。"
+        ],
+        "en": [
+          "Work backwards. The last step is \"number = quotient × gcd + 0\"; the gcd is at least 1, and since the dividend exceeds the divisor this quotient is at least 2, so the last two numbers are at least 1 and 2. In each earlier step \"dividend = quotient × divisor + remainder\" the quotient is at least 1, so the dividend is at least divisor + remainder.",
+          "So, going backwards, the numbers are at least 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, … (each at least the sum of the next two). For k steps, b is at least the k-th number in this list and a at least the (k + 1)-th. Ten steps would need a ≥ 144 > 100, impossible; nine steps need b ≥ 55 and a ≥ 89.",
+          "(89, 55) does take 9 steps: 89 = 1 × 55 + 34, 55 = 1 × 34 + 21, 34 = 1 × 21 + 13, 21 = 1 × 13 + 8, 13 = 1 × 8 + 5, 8 = 1 × 5 + 3, 5 = 1 × 3 + 2, 3 = 1 × 2 + 1, 2 = 2 × 1 + 0.",
+          "If any quotient in a 9-step run were larger, or the gcd were more than 1, working back would make a exceed 100 (for gcd 2, a is at least 178; the next 9-step pair is (123, 76)). So the maximum is 9 steps, the only such pair is (89, 55), and a + b = 144. The answer is 144."
+        ],
+        "ja": [
+          "逆からたどります。最後の回は「ある数 = 商 × 最大公約数 + 0」で、最大公約数は 1 以上、わられる数はわる数より大きいので商は 2 以上です。よって最後の 2 つの数は少なくとも 1 と 2 です。それより前の各回「わられる数 = 商 × わる数 + 余り」では商が 1 以上なので、わられる数は「わる数 + 余り」以上です。",
+          "したがって後ろから見ると、出てくる数は少なくとも 1、2、3、5、8、13、21、34、55、89、144、⋯ です（どれも後ろの 2 つの和以上）。k 回かかるなら、b はこの列の k 番目以上、a は k + 1 番目以上です。10 回には a ≥ 144 > 100 が必要で不可能、9 回には b ≥ 55、a ≥ 89 が必要です。",
+          "(89, 55) はたしかに 9 回かかります：89 = 1 × 55 + 34、55 = 1 × 34 + 21、34 = 1 × 21 + 13、21 = 1 × 13 + 8、13 = 1 × 8 + 5、8 = 1 × 5 + 3、5 = 1 × 3 + 2、3 = 1 × 2 + 1、2 = 2 × 1 + 0。",
+          "9 回の中でどれかの商がこれより大きいか、最大公約数が 1 より大きいと、逆にたどった a は 100 をこえます（最大公約数が 2 なら a は 178 以上、次に小さい 9 回の組は (123, 76)）。よって最多は 9 回で、その組は (89, 55) だけ、a + b = 144 です。答えは 144 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "144"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "number_theory-grade9-foundation",
+        "notes": "輾轉相除法步數的下界由費氏數列給出（Lamé）：k 步需要 a ≥ F(k+2)，100 以內最多 9 步，唯一是 (89, 55)。掃過 /輾轉相除/（0 題）、/最大公因數.{0,30}(步|次)/（0 題）、/費氏|1、1、2、3、5/（2 題）；最接近 number_theory_grade9_foundation_015（gcd_linear_forms），差異：該題是用輾轉相除求線性式的公因數；本題研究演算法本身的步數極值，要倒推出費氏下界並給出唯一極值。"
+      }
+    },
+    {
+      "id": "number_theory_grade9_foundation_070",
+      "reviewStatus": "ok",
+      "topic": "number_theory",
+      "subtopic": "casting_out_nines_find_wrong_product",
+      "tags": [
+        "c:modular",
+        "c:place_value",
+        "m:invariant"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade9",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "小安算了四題四位數乘四位數的乘法，老師說其中恰好有一題算錯了。不必重新相乘，只要用「各位數字和除以 9 的餘數」來檢查，就能找出錯的那一題。是哪一題？",
+        "zh-Hans": "小安算了四题四位数乘四位数的乘法，老师说其中恰好有一题算错了。不必重新相乘，只要用“各位数字和除以 9 的余数”来检查，就能找出错的那一题。是哪一题？",
+        "en": "An did four multiplications of a four-digit number by a four-digit number, and the teacher says exactly one of them is wrong. Without redoing the multiplications, you can find the wrong one just by checking remainders of digit sums on division by 9. Which one is wrong?",
+        "ja": "アンさんは 4 けた × 4 けたのかけ算を 4 問しました。先生は、そのうちちょうど 1 問がまちがいだと言いました。かけ算をやり直さなくても、「各位の数字の和を 9 でわった余り」を調べるだけで、まちがった問題が見つかります。どれですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 B：6248 × 1937 = 12102576。",
+        "zh-Hans": "答案是 B：6248 × 1937 = 12102576。",
+        "en": "The answer is B: 6248 × 1937 = 12102576.",
+        "ja": "答えは B：6248 × 1937 = 12102576 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "一個數除以 9 的餘數，等於它各位數字和除以 9 的餘數（因為 10、100、1000、⋯ 除以 9 都餘 1）。所以正確的乘積，它的餘數必須等於「兩個因數的餘數相乘，再除以 9 的餘數」。",
+          "(A)：3725 的數字和 17 餘 8，4891 的數字和 22 餘 4，8 × 4 = 32 餘 5；18218975 的數字和 41 餘 5，相符。(C)：5079 的數字和 21 餘 3，8364 的數字和 21 餘 3，3 × 3 = 9 餘 0；42480756 的數字和 36 餘 0，相符。",
+          "(D)：2846 的數字和 20 餘 2，7153 的數字和 16 餘 7，2 × 7 = 14 餘 5；20357438 的數字和 32 餘 5，相符。(B)：6248 的數字和 20 餘 2，1937 的數字和 20 餘 2，2 × 2 = 4 餘 4；但 12102576 的數字和 24 餘 6，不相符，一定算錯（正確是 12102376）。",
+          "餘數相符不保證一定算對，但既然恰有一題錯，而 (A)、(C)、(D) 都通過檢查、只有 (B) 沒通過，錯的就是 (B)。答案是 B。"
+        ],
+        "zh-Hans": [
+          "一个数除以 9 的余数，等于它各位数字和除以 9 的余数（因为 10、100、1000、⋯ 除以 9 都余 1）。所以正确的乘积，它的余数必须等于“两个因数的余数相乘，再除以 9 的余数”。",
+          "(A)：3725 的数字和 17 余 8，4891 的数字和 22 余 4，8 × 4 = 32 余 5；18218975 的数字和 41 余 5，相符。(C)：5079 的数字和 21 余 3，8364 的数字和 21 余 3，3 × 3 = 9 余 0；42480756 的数字和 36 余 0，相符。",
+          "(D)：2846 的数字和 20 余 2，7153 的数字和 16 余 7，2 × 7 = 14 余 5；20357438 的数字和 32 余 5，相符。(B)：6248 的数字和 20 余 2，1937 的数字和 20 余 2，2 × 2 = 4 余 4；但 12102576 的数字和 24 余 6，不相符，一定算错（正确是 12102376）。",
+          "余数相符不保证一定算对，但既然恰有一题错，而 (A)、(C)、(D) 都通过检查、只有 (B) 没通过，错的就是 (B)。答案是 B。"
+        ],
+        "en": [
+          "A number leaves the same remainder on division by 9 as its digit sum (because 10, 100, 1000, … all leave remainder 1). So for a correct product, its remainder must equal the remainder of the product of the two factors' remainders.",
+          "(A): 3725 has digit sum 17, remainder 8; 4891 has 22, remainder 4; 8 × 4 = 32, remainder 5; 18218975 has digit sum 41, remainder 5 — consistent. (C): 5079 has 21, remainder 3; 8364 has 21, remainder 3; 3 × 3 = 9, remainder 0; 42480756 has 36, remainder 0 — consistent.",
+          "(D): 2846 has 20, remainder 2; 7153 has 16, remainder 7; 2 × 7 = 14, remainder 5; 20357438 has 32, remainder 5 — consistent. (B): 6248 has 20, remainder 2; 1937 has 20, remainder 2; 2 × 2 = 4; but 12102576 has digit sum 24, remainder 6 — inconsistent, so it must be wrong (the correct product is 12102376).",
+          "Matching remainders do not prove a product is right, but exactly one is wrong, and (A), (C), (D) pass while only (B) fails, so the wrong one is (B). The answer is B."
+        ],
+        "ja": [
+          "ある数を 9 でわった余りは、その各位の数字の和を 9 でわった余りに等しいです（10、100、1000、⋯ はどれも 9 でわると 1 余るから）。よって正しい積の余りは、「2 つの因数の余りをかけて 9 でわった余り」と等しくなければなりません。",
+          "(A)：3725 の数字の和 17 は余り 8、4891 の和 22 は余り 4、8 × 4 = 32 は余り 5。18218975 の和 41 は余り 5 で一致します。(C)：5079 の和 21 は余り 3、8364 の和 21 は余り 3、3 × 3 = 9 は余り 0。42480756 の和 36 は余り 0 で一致します。",
+          "(D)：2846 の和 20 は余り 2、7153 の和 16 は余り 7、2 × 7 = 14 は余り 5。20357438 の和 32 は余り 5 で一致します。(B)：6248 の和 20 は余り 2、1937 の和 20 は余り 2、2 × 2 = 4 ですが、12102576 の和 24 は余り 6 で一致せず、必ずまちがいです（正しくは 12102376）。",
+          "余りが一致しても正しいとは限りませんが、ちょうど 1 問がまちがいで、(A)、(C)、(D) は検査に通り (B) だけが通らないので、まちがいは (B) です。答えは B です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "multiple_choice",
+      "options": {
+        "A": {
+          "zh-Hant": "3725 × 4891 = 18218975",
+          "zh-Hans": "3725 × 4891 = 18218975",
+          "en": "3725 × 4891 = 18218975",
+          "ja": "3725 × 4891 = 18218975"
+        },
+        "B": {
+          "zh-Hant": "6248 × 1937 = 12102576",
+          "zh-Hans": "6248 × 1937 = 12102576",
+          "en": "6248 × 1937 = 12102576",
+          "ja": "6248 × 1937 = 12102576"
+        },
+        "C": {
+          "zh-Hant": "5079 × 8364 = 42480756",
+          "zh-Hans": "5079 × 8364 = 42480756",
+          "en": "5079 × 8364 = 42480756",
+          "ja": "5079 × 8364 = 42480756"
+        },
+        "D": {
+          "zh-Hant": "2846 × 7153 = 20357438",
+          "zh-Hans": "2846 × 7153 = 20357438",
+          "en": "2846 × 7153 = 20357438",
+          "ja": "2846 × 7153 = 20357438"
+        }
+      },
+      "correctAnswer": {
+        "type": "choice",
+        "value": "B"
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "number_theory-grade9-foundation",
+        "notes": "棄九驗算：數除以 9 的餘數等於數字和的餘數，且餘數對乘法相容；三題通過、一題不符即為錯題。掃過 /棄九|九去法|驗算/（0 題）、/數字和.{0,20}9/（5 題）、/除以 9 的餘數/（4 題）；最接近 logic_grade6_foundation_025（抄錯相鄰兩數字後的數字和），差異：該題問抄錯後數字和不變；本題用模 9 乘法相容性檢查乘積，找出唯一錯題。"
+      }
+    },
+    {
+      "id": "number_theory_grade9_foundation_071",
+      "reviewStatus": "ok",
+      "topic": "number_theory",
+      "subtopic": "divisible_by_all_but_two_consecutive",
+      "tags": [
+        "c:factor_multiple",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade9",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "正整數 n 有這樣的性質：在 1、2、3、⋯、15 這 15 個數中，恰好有兩個數不能整除 n，而且這兩個數是相鄰的兩個整數（相差 1）；其餘 13 個數都能整除 n。n 最小是多少？",
+        "zh-Hans": "正整数 n 有这样的性质：在 1、2、3、⋯、15 这 15 个数中，恰好有两个数不能整除 n，而且这两个数是相邻的两个整数（相差 1）；其余 13 个数都能整除 n。n 最小是多少？",
+        "en": "A positive integer n has this property: among the 15 numbers 1, 2, 3, …, 15, exactly two do not divide n, and these two are consecutive integers (they differ by 1); the other 13 numbers all divide n. What is the smallest such n?",
+        "ja": "正の整数 n は次の性質をもちます。1、2、3、⋯、15 の 15 個の数のうち、n をわり切れないものがちょうど 2 個あり、その 2 個はとなり合う整数（差が 1）で、残りの 13 個はすべて n をわり切ります。n の最小値はいくつですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 60060。",
+        "zh-Hans": "答案是 60060。",
+        "en": "The answer is 60060.",
+        "ja": "答えは 60060 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "設不能整除 n 的兩數是 k 和 k + 1。1 一定整除 n，所以 k ≥ 2。若 2 ≤ k ≤ 7，2k 在 4～14 之間，既不是 k 也不是 k + 1，所以 2k 必須整除 n，那麼 k 也整除 n，矛盾。所以 k ≥ 8，可能的兩數是 (8, 9)、(9, 10)、⋯、(14, 15)。",
+          "10 = 2 × 5、12 = 3 × 4、14 = 2 × 7、15 = 3 × 5，每個都是兩個互質且都小於 8 的數相乘。這些小數都整除 n，所以它們的乘積也整除 n，10、12、14、15 都不可能是不能整除的數。剩下 8、9、11、13，其中相鄰的只有 (8, 9)。",
+          "所以 n 要被 1～15 中除了 8、9 以外的 13 個數整除，它們的最小公倍數是 4 × 3 × 5 × 7 × 11 × 13 = 60060（2 只需要到 2²，3 只需要 1 次方）。",
+          "檢查：60060 ÷ 8 = 7507.5 不整除；60060 的數字和 12 不是 9 的倍數，9 也不整除；其餘 13 個數都整除。n 必須是 60060 的倍數，所以最小是 60060。答案是 60060。"
+        ],
+        "zh-Hans": [
+          "设不能整除 n 的两数是 k 和 k + 1。1 一定整除 n，所以 k ≥ 2。若 2 ≤ k ≤ 7，2k 在 4～14 之间，既不是 k 也不是 k + 1，所以 2k 必须整除 n，那么 k 也整除 n，矛盾。所以 k ≥ 8，可能的两数是 (8, 9)、(9, 10)、⋯、(14, 15)。",
+          "10 = 2 × 5、12 = 3 × 4、14 = 2 × 7、15 = 3 × 5，每个都是两个互质且都小于 8 的数相乘。这些小数都整除 n，所以它们的乘积也整除 n，10、12、14、15 都不可能是不能整除的数。剩下 8、9、11、13，其中相邻的只有 (8, 9)。",
+          "所以 n 要被 1～15 中除了 8、9 以外的 13 个数整除，它们的最小公倍数是 4 × 3 × 5 × 7 × 11 × 13 = 60060（2 只需要到 2²，3 只需要 1 次方）。",
+          "检查：60060 ÷ 8 = 7507.5 不整除；60060 的数字和 12 不是 9 的倍数，9 也不整除；其余 13 个数都整除。n 必须是 60060 的倍数，所以最小是 60060。答案是 60060。"
+        ],
+        "en": [
+          "Let the two non-divisors be k and k + 1. Since 1 divides n, k ≥ 2. If 2 ≤ k ≤ 7, then 2k is between 4 and 14 and is neither k nor k + 1, so 2k divides n, and then k divides n, a contradiction. So k ≥ 8, and the possible pairs are (8, 9), (9, 10), …, (14, 15).",
+          "10 = 2 × 5, 12 = 3 × 4, 14 = 2 × 7, 15 = 3 × 5, each a product of two coprime numbers smaller than 8. Those smaller numbers divide n, so their product does too; hence none of 10, 12, 14, 15 can be a non-divisor. That leaves 8, 9, 11, 13, and the only consecutive pair among them is (8, 9).",
+          "So n must be divisible by the 13 numbers from 1 to 15 other than 8 and 9, whose least common multiple is 4 × 3 × 5 × 7 × 11 × 13 = 60060 (2 is needed only up to 2², and 3 only to the first power).",
+          "Check: 60060 ÷ 8 = 7507.5, not an integer; 60060 has digit sum 12, not a multiple of 9, so 9 does not divide it; the other 13 numbers do divide it. Since n must be a multiple of 60060, the smallest n is 60060. The answer is 60060."
+        ],
+        "ja": [
+          "n をわり切れない 2 数を k と k + 1 とします。1 は必ず n をわり切るので k ≥ 2 です。2 ≤ k ≤ 7 なら 2k は 4～14 の数で k でも k + 1 でもないので n をわり切り、すると k も n をわり切って矛盾します。よって k ≥ 8 で、候補は (8, 9)、(9, 10)、⋯、(14, 15) です。",
+          "10 = 2 × 5、12 = 3 × 4、14 = 2 × 7、15 = 3 × 5 は、どれも 8 より小さくたがいに素な 2 数の積です。それらの小さい数は n をわり切るので積もわり切り、10、12、14、15 はわり切れない数にはなれません。残るのは 8、9、11、13 で、となり合うのは (8, 9) だけです。",
+          "よって n は 1～15 のうち 8、9 以外の 13 個でわり切れなければならず、その最小公倍数は 4 × 3 × 5 × 7 × 11 × 13 = 60060 です（2 は 2² まで、3 は 1 乗だけで足ります）。",
+          "確認：60060 ÷ 8 = 7507.5 でわり切れず、60060 の数字の和 12 は 9 の倍数でないので 9 でもわり切れません。残りの 13 個ではわり切れます。n は 60060 の倍数なので、最小は 60060 です。答えは 60060 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "60060"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 5
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "number_theory-grade9-foundation",
+        "notes": "能整除的數的倍數關係排除候選：k ≤ 7 時 2k 逼出矛盾，10、12、14、15 由互質因數逼出，只剩 (8, 9)。掃過 /除了.{0,20}連續|連續兩個數/（1 題）、/1 到 15|1、2、3、⋯、15/（7 題）、/最小公倍數/（11 題）；最接近 number_theory_grade10_foundation_060（lcm_of_first_n_changes_at_prime_powers），差異：該題問 1～n 的最小公倍數何時改變；本題反過來找哪兩個相鄰數可以同時被排除，要靠互質分解逐一排除。"
+      }
     }
   ]
 }

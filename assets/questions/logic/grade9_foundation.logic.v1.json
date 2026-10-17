@@ -5928,6 +5928,173 @@
         "reference": "logic-grade9-foundation",
         "notes": "三位數重排相減第一步必得 99(a − c)，只需追蹤 9 個數的鏈，最長來自 a − c = 1。掃過 /重排相減|由大到小排/（5 題）、/495/（1 題）；最接近 arithmetic_grade4_foundation_168，差異：該題對給定的四位數直接做到 6174 數步數；本題對所有三位數求最多步數，關鍵是一步後只剩 99 的 9 個倍數"
       }
+    },
+    {
+      "id": "logic_grade9_foundation_068",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "cryptarithm_send_more_money",
+      "tags": [
+        "c:logic_deduction",
+        "c:place_value",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade9",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "在直式加法 SEND + MORE = MONEY 中，每個英文字母代表一個數字，相同的字母代表相同的數字，不同的字母代表不同的數字，而且 S 和 M 都不是 0（SEND、MORE 是四位數，MONEY 是五位數）。MONEY 代表的五位數是多少？",
+        "zh-Hans": "在竖式加法 SEND + MORE = MONEY 中，每个英文字母代表一个数字，相同的字母代表相同的数字，不同的字母代表不同的数字，而且 S 和 M 都不是 0（SEND、MORE 是四位数，MONEY 是五位数）。MONEY 代表的五位数是多少？",
+        "en": "In the column addition SEND + MORE = MONEY, each letter stands for a digit; equal letters are equal digits and different letters are different digits, and neither S nor M is 0 (SEND and MORE are four-digit numbers and MONEY is a five-digit number). What five-digit number is MONEY?",
+        "ja": "筆算のたし算 SEND + MORE = MONEY で、各アルファベットは 1 つの数字を表し、同じ文字は同じ数字、ちがう文字はちがう数字を表します。また S と M は 0 ではありません（SEND と MORE は 4 けた、MONEY は 5 けたの数です）。MONEY が表す 5 けたの数はいくつですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 10652。",
+        "zh-Hans": "答案是 10652。",
+        "en": "The answer is 10652.",
+        "ja": "答えは 10652 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "兩個四位數相加小於 20000，所以 M = 1。千位：S + M 再加上百位進來的進位（0 或 1），必須進位到萬位，而得到的千位數字 O 只能是 0 或 1（S 最大 9，9 + 1 + 1 = 11）；O ≠ M = 1，所以 O = 0。",
+          "百位：E + O + 十位進位 = E + 十位進位，結果的個位是 N。若沒有十位進位，N = E，矛盾；所以十位進位是 1，N = E + 1；又 E ≠ 9（否則 N = 0 = O），所以百位不會再進位到千位。於是千位是 S + 1 = 10 + O = 10，S = 9。",
+          "十位：N + R + 個位進位 = E + 10（要進位給百位）。把 N = E + 1 代入得 R = 9 − 個位進位。R ≠ 9（S = 9），所以個位進位是 1，R = 8。個位：D + E = Y + 10，Y ≥ 2（0、1 已用）。剩下可用的數字是 2～7，且 N = E + 1 也要沒用過。",
+          "逐一檢查 E：E = 2、3、4 時，D 要 ≥ 10、≥ 9、≥ 8（但 8 已用），都不行；E = 5、N = 6 時，D = Y + 5，只有 D = 7、Y = 2 可用；E = 6、N = 7 時 D = Y + 4 ≤ 5，Y ≤ 1，不行；E = 7 時 N = 8 已用。所以 9567 + 1085 = 10652，MONEY = 10652。答案是 10652。"
+        ],
+        "zh-Hans": [
+          "两个四位数相加小于 20000，所以 M = 1。千位：S + M 再加上百位进来的进位（0 或 1），必须进位到万位，而得到的千位数字 O 只能是 0 或 1（S 最大 9，9 + 1 + 1 = 11）；O ≠ M = 1，所以 O = 0。",
+          "百位：E + O + 十位进位 = E + 十位进位，结果的个位是 N。若没有十位进位，N = E，矛盾；所以十位进位是 1，N = E + 1；又 E ≠ 9（否则 N = 0 = O），所以百位不会再进位到千位。于是千位是 S + 1 = 10 + O = 10，S = 9。",
+          "十位：N + R + 个位进位 = E + 10（要进位给百位）。把 N = E + 1 代入得 R = 9 − 个位进位。R ≠ 9（S = 9），所以个位进位是 1，R = 8。个位：D + E = Y + 10，Y ≥ 2（0、1 已用）。剩下可用的数字是 2～7，且 N = E + 1 也要没用过。",
+          "逐一检查 E：E = 2、3、4 时，D 要 ≥ 10、≥ 9、≥ 8（但 8 已用），都不行；E = 5、N = 6 时，D = Y + 5，只有 D = 7、Y = 2 可用；E = 6、N = 7 时 D = Y + 4 ≤ 5，Y ≤ 1，不行；E = 7 时 N = 8 已用。所以 9567 + 1085 = 10652，MONEY = 10652。答案是 10652。"
+        ],
+        "en": [
+          "Two four-digit numbers add to less than 20000, so M = 1. Thousands column: S + M plus the carry from the hundreds (0 or 1) must carry into the ten-thousands, and the resulting digit O can only be 0 or 1 (at most 9 + 1 + 1 = 11); since O ≠ M = 1, O = 0.",
+          "Hundreds column: E + O + carry from the tens = E + carry, with units digit N. With no carry we would get N = E, a contradiction; so the tens carry is 1 and N = E + 1; also E ≠ 9 (otherwise N = 0 = O), so the hundreds column does not carry into the thousands. Then the thousands column gives S + 1 = 10 + O = 10, so S = 9.",
+          "Tens column: N + R + carry from the units = E + 10 (it must carry into the hundreds). Substituting N = E + 1 gives R = 9 − (units carry). R ≠ 9 (S = 9), so the units carry is 1 and R = 8. Units column: D + E = Y + 10 with Y ≥ 2 (0 and 1 are used). The digits still free are 2 to 7, and N = E + 1 must also be unused.",
+          "Check E one by one: for E = 2, 3, 4, D would need to be at least 10, 9, 8 (8 is used), impossible; for E = 5, N = 6, D = Y + 5, and only D = 7, Y = 2 works; for E = 6, N = 7, D = Y + 4 ≤ 5 forces Y ≤ 1, impossible; for E = 7, N = 8 is used. So 9567 + 1085 = 10652, and MONEY = 10652. The answer is 10652."
+        ],
+        "ja": [
+          "4 けたの数 2 つの和は 20000 より小さいので M = 1 です。千の位：S + M に百の位からのくり上がり（0 か 1）をたすと万の位にくり上がり、千の位の数字 O は 0 か 1 しかありません（最大でも 9 + 1 + 1 = 11）。O ≠ M = 1 なので O = 0 です。",
+          "百の位：E + O + 十の位からのくり上がり = E + くり上がり で、その一の位が N です。くり上がりがなければ N = E で矛盾するので、くり上がりは 1 で N = E + 1 です。また E ≠ 9（そうでないと N = 0 = O）なので、千の位へはくり上がりません。すると千の位は S + 1 = 10 + O = 10 で S = 9 です。",
+          "十の位：N + R + 一の位からのくり上がり = E + 10（百の位へくり上がる必要があります）。N = E + 1 を代入すると R = 9 − くり上がり です。R ≠ 9（S = 9）なので一の位からのくり上がりは 1 で R = 8 です。一の位：D + E = Y + 10 で、Y ≥ 2（0 と 1 は使用ずみ）です。残っている数字は 2～7 で、N = E + 1 も未使用でなければなりません。",
+          "E を順に調べると、E = 2、3、4 では D が 10 以上、9 以上、8 以上（8 は使用ずみ）となり不可能、E = 5、N = 6 では D = Y + 5 で D = 7、Y = 2 だけが使え、E = 6、N = 7 では D = Y + 4 ≤ 5 から Y ≤ 1 で不可能、E = 7 では N = 8 が使用ずみです。よって 9567 + 1085 = 10652 で、MONEY = 10652 です。答えは 10652 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "10652"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 5
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade9-foundation",
+        "notes": "覆面算：由位數與進位依序定出 M = 1、O = 0、S = 9、R = 8，最後對 E 逐一檢查得唯一解（程式窮舉確認唯一）。掃過 /MONEY|代表不同的數字|不同的字母代表不同/（1 題）、/覆面算|算式.{0,20}字母/（1 題）、/進位/（47 題）；最接近 arithmetic_grade6_foundation_081（AB × 3 = CCC），差異：該題是兩位數乘法的小覆面算；本題是五位數加法，要逐位追蹤進位並分情形排除。"
+      }
+    },
+    {
+      "id": "logic_grade9_foundation_069",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "deficient_8x8_board_l_tromino_tiling",
+      "tags": [
+        "c:logic_deduction",
+        "c:quadrilateral",
+        "m:construction",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade9",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一塊 8 × 8 的方格板拿掉任意一格，剩下 63 格。要用 21 塊 L 形三格板（一個 2 × 2 正方形拿掉一格的形狀，可以旋轉）把剩下的格子剛好鋪滿，不重疊、不超出。下列哪一個敘述正確？",
+        "zh-Hans": "一块 8 × 8 的方格板拿掉任意一格，剩下 63 格。要用 21 块 L 形三格板（一个 2 × 2 正方形拿掉一格的形状，可以旋转）把剩下的格子刚好铺满，不重叠、不超出。下列哪一个叙述正确？",
+        "en": "One cell, any cell, is removed from an 8 × 8 board, leaving 63 cells. These are to be covered exactly, without overlap or overhang, by 21 L-trominoes (the shape of a 2 × 2 square with one cell removed, rotations allowed). Which statement is correct?",
+        "ja": "8 × 8 のマス目の板からどれか 1 マスを取りのぞき、63 マスを残します。L 字形の 3 マス板（2 × 2 の正方形から 1 マスを除いた形、回転してよい）21 枚で、残りのマスを重ならず、はみ出さずにちょうどしきつめます。正しいものはどれですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 B：不論拿掉哪一格，剩下的 63 格都一定可以用 21 塊 L 形鋪滿。",
+        "zh-Hans": "答案是 B：不论拿掉哪一格，剩下的 63 格都一定可以用 21 块 L 形铺满。",
+        "en": "The answer is B: Whichever cell is removed, the 63 cells can always be tiled by 21 L-trominoes.",
+        "ja": "答えは B：どのマスを除いても、残り 63 マスは必ず L 字形 21 枚でしきつめられる です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "2 × 2 拿掉一格，剩下的正好是一塊 L 形，鋪得滿。",
+          "4 × 4 拿掉一格：把它切成四個 2 × 2。拿掉的格子在其中一塊；在板子正中央放一塊 L 形，剛好蓋住另外三塊 2 × 2 各自靠中心的那一格。這樣四塊 2 × 2 都各少一格，各用一塊 L 形補滿。所以 4 × 4 不論拿掉哪一格都鋪得滿。",
+          "8 × 8 拿掉一格：切成四個 4 × 4，拿掉的格子在其中一塊；在正中央放一塊 L 形，蓋住另外三塊 4 × 4 靠中心的那一格。四塊 4 × 4 都各少一格，由上一步都鋪得滿。所以不論拿掉哪一格都一定鋪得滿，(B) 正確。",
+          "(A)、(C) 錯：上面的做法對任何位置都成立，不只角落，也和顏色無關；(D) 錯：黑白相間時一塊 L 形蓋 2 格同色、1 格異色，21 塊可以把黑白差調成 1，正好對應拿掉一格的情形，看不出矛盾。答案是 B。"
+        ],
+        "zh-Hans": [
+          "2 × 2 拿掉一格，剩下的正好是一块 L 形，铺得满。",
+          "4 × 4 拿掉一格：把它切成四个 2 × 2。拿掉的格子在其中一块；在板子正中央放一块 L 形，刚好盖住另外三块 2 × 2 各自靠中心的那一格。这样四块 2 × 2 都各少一格，各用一块 L 形补满。所以 4 × 4 不论拿掉哪一格都铺得满。",
+          "8 × 8 拿掉一格：切成四个 4 × 4，拿掉的格子在其中一块；在正中央放一块 L 形，盖住另外三块 4 × 4 靠中心的那一格。四块 4 × 4 都各少一格，由上一步都铺得满。所以不论拿掉哪一格都一定铺得满，(B) 正确。",
+          "(A)、(C) 错：上面的做法对任何位置都成立，不只角落，也和颜色无关；(D) 错：黑白相间时一块 L 形盖 2 格同色、1 格异色，21 块可以把黑白差调成 1，正好对应拿掉一格的情形，看不出矛盾。答案是 B。"
+        ],
+        "en": [
+          "A 2 × 2 square with one cell removed is exactly one L-tromino, so it can be covered.",
+          "A 4 × 4 board with one cell removed: cut it into four 2 × 2 squares. The missing cell is in one of them; place one L-tromino at the centre of the board covering the central cell of each of the other three 2 × 2 squares. Now each 2 × 2 square is missing one cell and is covered by one more L-tromino. So a 4 × 4 board with any cell removed can be tiled.",
+          "An 8 × 8 board with one cell removed: cut it into four 4 × 4 boards; the missing cell is in one; place an L-tromino at the centre covering the central cell of each of the other three. Now every 4 × 4 board is missing one cell, and each can be tiled by the previous step. So the tiling always exists, whichever cell is removed: (B) is correct.",
+          "(A) and (C) are wrong: the construction works for any position, not just corners, and has nothing to do with colour. (D) is wrong: in a chessboard colouring an L-tromino covers 2 cells of one colour and 1 of the other, and 21 of them can produce a difference of exactly 1, matching one removed cell, so no contradiction arises. The answer is B."
+        ],
+        "ja": [
+          "2 × 2 から 1 マス除くと、残りはちょうど L 字形 1 枚でしきつめられます。",
+          "4 × 4 から 1 マス除く場合：4 つの 2 × 2 に分けると、除いたマスはそのうち 1 つにあります。板のまん中に L 字形を 1 枚置き、ほかの 3 つの 2 × 2 の中心よりのマスを 1 つずつおおいます。すると 4 つの 2 × 2 はどれも 1 マス欠けた形になり、L 字形 1 枚ずつでうまります。よって 4 × 4 はどのマスを除いてもしきつめられます。",
+          "8 × 8 から 1 マス除く場合：4 つの 4 × 4 に分け、除いたマスはそのうち 1 つにあります。まん中に L 字形を置いてほかの 3 つの 4 × 4 の中心よりのマスをおおうと、4 つの 4 × 4 はどれも 1 マス欠けた形になり、前の段階よりしきつめられます。よってどのマスを除いても必ずしきつめられ、(B) が正しいです。",
+          "(A) と (C) は誤り：この作り方はどの位置でも使え、角だけでなく色とも関係ありません。(D) は誤り：白黒交互にぬると L 字形は同じ色 2 マスとちがう色 1 マスをおおい、21 枚で黒白の差をちょうど 1 にできるので、1 マス除いた状況と矛盾しません。答えは B です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "multiple_choice",
+      "options": {
+        "A": {
+          "zh-Hant": "只有拿掉角落的格子時才鋪得滿，拿掉其他位置的格子就鋪不滿",
+          "zh-Hans": "只有拿掉角落的格子时才铺得满，拿掉其他位置的格子就铺不满",
+          "en": "Only if a corner cell is removed can it be tiled; other positions fail",
+          "ja": "角のマスを除いたときだけしきつめられ、ほかの位置ではできない"
+        },
+        "B": {
+          "zh-Hant": "不論拿掉哪一格，剩下的 63 格都一定可以用 21 塊 L 形鋪滿",
+          "zh-Hans": "不论拿掉哪一格，剩下的 63 格都一定可以用 21 块 L 形铺满",
+          "en": "Whichever cell is removed, the 63 cells can always be tiled by 21 L-trominoes",
+          "ja": "どのマスを除いても、残り 63 マスは必ず L 字形 21 枚でしきつめられる"
+        },
+        "C": {
+          "zh-Hant": "拿掉的格子必須和角落格同色（黑白相間著色）才鋪得滿，否則鋪不滿",
+          "zh-Hans": "拿掉的格子必须和角落格同色（黑白相间着色）才铺得满，否则铺不满",
+          "en": "It can be tiled only if the removed cell has the same chessboard colour as a corner",
+          "ja": "除いたマスが角と同じ色（白黒交互のぬり分け）のときだけしきつめられる"
+        },
+        "D": {
+          "zh-Hant": "一定鋪不滿：黑白相間著色後，L 形蓋的黑白格數不平均，湊不出 63 格",
+          "zh-Hans": "一定铺不满：黑白相间着色后，L 形盖的黑白格数不平均，凑不出 63 格",
+          "en": "Never: with chessboard colouring, L-trominoes cover colours unevenly and cannot fit",
+          "ja": "必ずできない：白黒交互にぬると L 字形がおおう色がかたよるので 63 マスにならない"
+        }
+      },
+      "correctAnswer": {
+        "type": "choice",
+        "value": "B"
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade9-foundation",
+        "notes": "缺一格的 2ⁿ × 2ⁿ 板用 L 形三格板鋪滿：切成四塊、中央放一塊 L 形製造三個新缺口，逐層遞推到 8 × 8。掃過 /L ?形.{0,40}(缺|挖|拿掉|去掉)|(缺|挖|拿掉|去掉).{0,40}L ?形/（1 題）、/三格.{0,10}(板|骨牌)/（0 題）、/8 ?× ?8.{0,30}(拿掉|去掉)/（2 題）；最接近 geometry_grade4_foundation_128（2 × 6 方格板用 L 形積木鋪滿的方法數），差異：該題計數固定長方形的鋪法；本題是任意缺一格的 8 × 8，要用分四塊遞推構造證明一定鋪得滿。"
+      }
     }
   ]
 }
