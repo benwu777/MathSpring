@@ -6043,26 +6043,26 @@
       },
       "solutionSteps": {
         "zh-Hant": [
-          "這種編碼可以畫成一棵二元樹：從根出發，0 往左、1 往右，每個字母是一片葉子，編碼長度等於葉子的深度。總位元數 = Σ（次數 × 深度）。在最佳的樹裡，可以讓出現最少的兩個字母當兄弟、放在最深處：把較深的位置換給次數較少的字母，總數不會變大。",
-          "因此可以把這兩個字母合併成一個「次數為兩者之和」的新字母，問題縮小一個字母，而合併所增加的位元數正好是合併後的次數。反覆合併次數最小的兩個（霍夫曼法）：5 + 8 = 13；12 + 13 = 25；15 + 20 = 35；25 + 35 = 60；40 + 60 = 100。",
+          "這種編碼可以畫成一棵二元樹：從根出發，0 往左、1 往右，每個字母是一片葉子，編碼長度等於葉子的深度。總位元數 = Σ（次數 × 深度）。在最佳的樹裡，每個分岔點都有左右兩個分支（若只有一個分支，把下面整個往上提一層，編碼都變短），所以最深的葉子一定有兄弟，而且兄弟也是葉子（否則下面還有更深的葉子）。把這兩個最深的位置換給出現最少的兩個字母（較深的位置換給次數較少的字母，總數不會變大），所以一定有一棵最佳的樹，讓最少的兩個字母當兄弟、放在最深處。",
+          "因此可以把這兩個字母合併成一個「次數為兩者之和」的新字母：讓這兩個字母當兄弟的樹，和少一個字母的樹一一對應，總位元數正好相差合併後的次數，所以原問題的最少位元數 = 縮小後問題的最少位元數 + 合併後的次數。反覆合併次數最小的兩個（霍夫曼法）：5 + 8 = 13；12 + 13 = 25；15 + 20 = 35；25 + 35 = 60；40 + 60 = 100。",
           "總位元數 = 13 + 25 + 35 + 60 + 100 = 233。對應的編碼長度：A 1 位，B、C、D 各 3 位，E、F 各 4 位，檢查 40 × 1 + 20 × 3 + 15 × 3 + 12 × 3 + 8 × 4 + 5 × 4 = 233。",
           "對照：六個字母都用 3 位元的固定長度編碼要 100 × 3 = 300 位元。答案是 233。"
         ],
         "zh-Hans": [
-          "这种编码可以画成一棵二叉树：从根出发，0 往左、1 往右，每个字母是一片叶子，编码长度等于叶子的深度。总比特数 = Σ（次数 × 深度）。在最佳的树里，可以让出现最少的两个字母当兄弟、放在最深处：把较深的位置换给次数较少的字母，总数不会变大。",
-          "因此可以把这两个字母合并成一个「次数为两者之和」的新字母，问题缩小一个字母，而合并所增加的比特数正好是合并后的次数。反复合并次数最小的两个（霍夫曼法）：5 + 8 = 13；12 + 13 = 25；15 + 20 = 35；25 + 35 = 60；40 + 60 = 100。",
+          "这种编码可以画成一棵二叉树：从根出发，0 往左、1 往右，每个字母是一片叶子，编码长度等于叶子的深度。总比特数 = Σ（次数 × 深度）。在最佳的树里，每个分岔点都有左右两个分支（若只有一个分支，把下面整个往上提一层，编码都变短），所以最深的叶子一定有兄弟，而且兄弟也是叶子（否则下面还有更深的叶子）。把这两个最深的位置换给出现最少的两个字母（较深的位置换给次数较少的字母，总数不会变大），所以一定有一棵最佳的树，让最少的两个字母当兄弟、放在最深处。",
+          "因此可以把这两个字母合并成一个「次数为两者之和」的新字母：让这两个字母当兄弟的树，和少一个字母的树一一对应，总比特数正好相差合并后的次数，所以原问题的最少比特数 = 缩小后问题的最少比特数 + 合并后的次数。反复合并次数最小的两个（霍夫曼法）：5 + 8 = 13；12 + 13 = 25；15 + 20 = 35；25 + 35 = 60；40 + 60 = 100。",
           "总比特数 = 13 + 25 + 35 + 60 + 100 = 233。对应的编码长度：A 1 位，B、C、D 各 3 位，E、F 各 4 位，检查 40 × 1 + 20 × 3 + 15 × 3 + 12 × 3 + 8 × 4 + 5 × 4 = 233。",
           "对照：六个字母都用 3 比特的固定长度编码要 100 × 3 = 300 比特。答案是 233。"
         ],
         "en": [
-          "Such a code is a binary tree: from the root, 0 goes left and 1 goes right; each letter is a leaf, and its code length is the leaf's depth. Total bits = Σ (count × depth). In an optimal tree the two rarest letters can be siblings at the deepest level: giving deeper positions to rarer letters never increases the total.",
-          "So those two letters can be merged into one new letter whose count is their sum; the problem shrinks by one letter, and the merge adds exactly the merged count in bits. Repeatedly merge the two smallest counts (Huffman's method): 5 + 8 = 13; 12 + 13 = 25; 15 + 20 = 35; 25 + 35 = 60; 40 + 60 = 100.",
+          "Such a code is a binary tree: from the root, 0 goes left and 1 goes right; each letter is a leaf, and its code length is the leaf's depth. Total bits = Σ (count × depth). In an optimal tree every branching point has two branches (if one had only one branch, lifting everything below it up one level would shorten codes), so a deepest leaf has a sibling, and that sibling is also a leaf (otherwise there would be an even deeper leaf). Give these two deepest positions to the two rarest letters (giving deeper positions to rarer letters never increases the total), so some optimal tree has the two rarest letters as siblings at the deepest level.",
+          "So those two letters can be merged into one new letter whose count is their sum: trees in which the two are siblings correspond one-to-one with trees for one letter fewer, and their totals differ by exactly the merged count, so the minimum for the original problem = the minimum for the smaller problem + the merged count. Repeatedly merge the two smallest counts (Huffman's method): 5 + 8 = 13; 12 + 13 = 25; 15 + 20 = 35; 25 + 35 = 60; 40 + 60 = 100.",
           "Total bits = 13 + 25 + 35 + 60 + 100 = 233. The code lengths are A 1 bit, B, C, D 3 bits each, E, F 4 bits each; check: 40 × 1 + 20 × 3 + 15 × 3 + 12 × 3 + 8 × 4 + 5 × 4 = 233.",
           "For comparison, a fixed 3-bit code for all six letters needs 100 × 3 = 300 bits. The answer is 233."
         ],
         "ja": [
-          "このような符号は二分木で表せる。根から 0 なら左、1 なら右へ進み、各文字が葉で、符号の長さは葉の深さ。総ビット数 = Σ（回数 × 深さ）。最適な木では、最も少ない 2 文字を兄弟として最も深い所に置ける。深い位置を回数の少ない文字に回しても総数は増えないからである。",
-          "そこでこの 2 文字を「回数が 2 つの和」の新しい 1 文字にまとめると、問題は 1 文字減り、まとめたことで増えるビット数はちょうどまとめた回数になる。回数の最小の 2 つを繰り返しまとめる（ハフマン法）：5 + 8 = 13、12 + 13 = 25、15 + 20 = 35、25 + 35 = 60、40 + 60 = 100。",
+          "このような符号は二分木で表せる。根から 0 なら左、1 なら右へ進み、各文字が葉で、符号の長さは葉の深さ。総ビット数 = Σ（回数 × 深さ）。最適な木では、どの分かれ目にも左右 2 本の枝がある（1 本しかなければ、その下を全部 1 段上げると符号が短くなる）ので、最も深い葉には必ず兄弟があり、その兄弟も葉である（そうでなければさらに深い葉がある）。この 2 つの最も深い位置を最も少ない 2 文字に回せば（深い位置を回数の少ない文字に回しても総数は増えない）、最も少ない 2 文字が兄弟として最も深い所にある最適な木が必ずある。",
+          "そこでこの 2 文字を「回数が 2 つの和」の新しい 1 文字にまとめる。2 文字が兄弟になっている木と、1 文字少ない問題の木は 1 対 1 に対応し、総ビット数の差はちょうどまとめた回数なので、もとの問題の最小ビット数 = 縮めた問題の最小ビット数 + まとめた回数。回数の最小の 2 つを繰り返しまとめる（ハフマン法）：5 + 8 = 13、12 + 13 = 25、15 + 20 = 35、25 + 35 = 60、40 + 60 = 100。",
           "総ビット数 = 13 + 25 + 35 + 60 + 100 = 233。符号の長さは A が 1 ビット、B、C、D が 3 ビットずつ、E、F が 4 ビットずつで、40 × 1 + 20 × 3 + 15 × 3 + 12 × 3 + 8 × 4 + 5 × 4 = 233 と一致する。",
           "比較：6 文字すべてを 3 ビットの固定長符号にすると 100 × 3 = 300 ビット。答えは 233。"
         ]
