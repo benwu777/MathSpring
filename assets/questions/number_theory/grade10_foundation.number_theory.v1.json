@@ -5844,6 +5844,222 @@
         "reference": "number_theory-grade10-foundation",
         "notes": "二進位無相鄰 1 的個數是費氏數：長度 11 的合格字串 233 個扣掉 0，並說明 2027～2047 都以 11 開頭。掃過 /二進位/（11 題）、/相鄰/（212 題）；最接近 number_theory_grade12_foundation_045，差異：該題數 1～100 二進位恰有 3 個 1 的數（組合數）；本題限制「沒有相鄰的 1」，用遞迴得費氏數再處理上界 2026"
       }
+    },
+    {
+      "id": "number_theory_grade10_foundation_068",
+      "reviewStatus": "ok",
+      "topic": "number_theory",
+      "subtopic": "odd_number_of_odd_divisors_count",
+      "tags": [
+        "c:factor_multiple",
+        "m:bijection",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "在 1 到 1000 的正整數中，有幾個數的「正奇因數」個數是奇數？（例如 12 的正奇因數是 1、3，共 2 個；18 的正奇因數是 1、3、9，共 3 個。）",
+        "zh-Hans": "在 1 到 1000 的正整数中，有几个数的“正奇因数”个数是奇数？（例如 12 的正奇因数是 1、3，共 2 个；18 的正奇因数是 1、3、9，共 3 个。）",
+        "en": "Among the integers from 1 to 1000, how many have an odd number of positive odd divisors? (For example, 12 has odd divisors 1, 3 — 2 of them; 18 has 1, 3, 9 — 3 of them.)",
+        "ja": "1 から 1000 までの正の整数のうち、正の奇数の約数の個数が奇数であるものはいくつありますか。（たとえば 12 の正の奇数の約数は 1、3 の 2 個、18 は 1、3、9 の 3 個です。）"
+      },
+      "answer": {
+        "zh-Hant": "答案是 53。",
+        "zh-Hans": "答案是 53。",
+        "en": "The answer is 53.",
+        "ja": "答えは 53 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "把 n 寫成 2ᵃ × m（m 是奇數）。n 的奇因數就是 m 的因數，所以奇因數個數是 d(m)。因數會兩兩配成 (e, m/e)，只有 e = m/e 時落單，所以 d(m) 是奇數 ⇔ m 是完全平方數。",
+          "因此條件是 n = 2ᵃ × k²（k 是奇數）。a 是偶數時 n = (2^(a/2) × k)² 是完全平方數；a 是奇數時 n = 2 × (2^((a−1)/2) × k)² 是「平方數的 2 倍」。反過來，平方數或平方數的 2 倍，去掉所有因數 2 後剩下的奇數部分都是平方數。所以 n 符合 ⇔ n 是平方數或平方數的 2 倍。",
+          "1～1000 的平方數：1², 2², ⋯, 31²（31² = 961，32² = 1024），共 31 個；平方數的 2 倍：2k² ≤ 1000，k² ≤ 500，k = 1～22（22² = 484，23² = 529），共 22 個。兩類不會重複（若 x² = 2y²，√2 會是有理數）。",
+          "共 31 + 22 = 53 個。答案是 53。"
+        ],
+        "zh-Hans": [
+          "把 n 写成 2ᵃ × m（m 是奇数）。n 的奇因数就是 m 的因数，所以奇因数个数是 d(m)。因数会两两配成 (e, m/e)，只有 e = m/e 时落单，所以 d(m) 是奇数 ⇔ m 是完全平方数。",
+          "因此条件是 n = 2ᵃ × k²（k 是奇数）。a 是偶数时 n = (2^(a/2) × k)² 是完全平方数；a 是奇数时 n = 2 × (2^((a−1)/2) × k)² 是“平方数的 2 倍”。反过来，平方数或平方数的 2 倍，去掉所有因数 2 后剩下的奇数部分都是平方数。所以 n 符合 ⇔ n 是平方数或平方数的 2 倍。",
+          "1～1000 的平方数：1², 2², ⋯, 31²（31² = 961，32² = 1024），共 31 个；平方数的 2 倍：2k² ≤ 1000，k² ≤ 500，k = 1～22（22² = 484，23² = 529），共 22 个。两类不会重复（若 x² = 2y²，√2 会是有理数）。",
+          "共 31 + 22 = 53 个。答案是 53。"
+        ],
+        "en": [
+          "Write n = 2ᵃ × m with m odd. The odd divisors of n are exactly the divisors of m, so their number is d(m). Divisors pair up as (e, m/e), with a lone one only when e = m/e, so d(m) is odd exactly when m is a perfect square.",
+          "So the condition is n = 2ᵃ × k² with k odd. If a is even, n = (2^(a/2) × k)² is a perfect square; if a is odd, n = 2 × (2^((a−1)/2) × k)² is twice a square. Conversely, removing all factors of 2 from a square or twice a square leaves a square odd part. So n qualifies exactly when it is a square or twice a square.",
+          "Squares up to 1000: 1², 2², …, 31² (31² = 961, 32² = 1024), 31 of them. Twice squares: 2k² ≤ 1000, k² ≤ 500, k = 1 to 22 (22² = 484, 23² = 529), 22 of them. No overlap (x² = 2y² would make √2 rational).",
+          "Total 31 + 22 = 53. The answer is 53."
+        ],
+        "ja": [
+          "n = 2ᵃ × m（m は奇数）と書きます。n の奇数の約数はちょうど m の約数なので、その個数は d(m) です。約数は (e, m/e) と組になり、e = m/e のときだけ 1 つ余るので、d(m) が奇数 ⇔ m が完全平方数です。",
+          "よって条件は n = 2ᵃ × k²（k は奇数）です。a が偶数なら n = (2^(a/2) × k)² は平方数、a が奇数なら n = 2 × (2^((a−1)/2) × k)² は「平方数の 2 倍」です。逆に、平方数や平方数の 2 倍から 2 の因数をすべて除くと、残る奇数部分は平方数です。よって n が条件を満たす ⇔ n は平方数か平方数の 2 倍です。",
+          "1～1000 の平方数は 1², 2², ⋯, 31²（31² = 961、32² = 1024）の 31 個、平方数の 2 倍は 2k² ≤ 1000、k² ≤ 500 より k = 1～22（22² = 484、23² = 529）の 22 個です。両者は重なりません（x² = 2y² なら √2 が有理数になる）。",
+          "合計 31 + 22 = 53 個です。答えは 53 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "53"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "number_theory-grade10-foundation",
+        "notes": "奇因數個數 = 奇數部分的因數個數，為奇 ⇔ 奇數部分是平方數 ⇔ n 是平方數或其 2 倍（雙向論證，程式驗證 53）。掃過 /奇因數.{0,30}(個數|奇數個)|奇數個奇因數/（0 題）、/正因數個數是奇數/（1 題）、/平方數的 2 倍/（0 題）；最接近 number_theory_grade11_foundation_027（因數個數為奇數的最小數 > 100），差異：該題直接用「因數個數奇 ⇔ 平方數」；本題只看奇因數，需把 2 的次方拆開，答案變成平方數與平方數 2 倍的聯集。"
+      }
+    },
+    {
+      "id": "number_theory_grade10_foundation_069",
+      "reviewStatus": "ok",
+      "topic": "number_theory",
+      "subtopic": "factorial_base_representation_digit_sum",
+      "tags": [
+        "c:number_base",
+        "c:place_value",
+        "m:direct"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "每個正整數都可以唯一地寫成 aₖ × k! + ⋯ + a₂ × 2! + a₁ × 1! 的形式，其中每個 aᵢ 都是 0 到 i 之間的整數（例如 5 = 2 × 2! + 1 × 1!）。把 2026 這樣寫出來，所有係數 aᵢ 的和是多少？",
+        "zh-Hans": "每个正整数都可以唯一地写成 aₖ × k! + ⋯ + a₂ × 2! + a₁ × 1! 的形式，其中每个 aᵢ 都是 0 到 i 之间的整数（例如 5 = 2 × 2! + 1 × 1!）。把 2026 这样写出来，所有系数 aᵢ 的和是多少？",
+        "en": "Every positive integer can be written uniquely as aₖ × k! + ⋯ + a₂ × 2! + a₁ × 1!, where each aᵢ is an integer from 0 to i (for example, 5 = 2 × 2! + 1 × 1!). Writing 2026 this way, what is the sum of all the coefficients aᵢ?",
+        "ja": "どの正の整数も aₖ × k! + ⋯ + a₂ × 2! + a₁ × 1! の形にただ 1 通りに書けます。ここで各 aᵢ は 0 以上 i 以下の整数です（たとえば 5 = 2 × 2! + 1 × 1!）。2026 をこの形に書いたとき、係数 aᵢ の和はいくつですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 13。",
+        "zh-Hans": "答案是 13。",
+        "en": "The answer is 13.",
+        "ja": "答えは 13 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "為什麼可以「從最大的階乘開始取」：1 × 1! + 2 × 2! + ⋯ + i × i! = (i + 1)! − 1（因為 i × i! = (i + 1)! − i!，逐項相消），所以較低的各項全部取到最大，也還比下一個階乘小 1，係數只能由上往下逐一決定。",
+          "6! = 720 ≤ 2026 < 7! = 5040。2026 = 2 × 720 + 586，a₆ = 2；586 = 4 × 120 + 106，a₅ = 4；106 = 4 × 24 + 10，a₄ = 4。",
+          "10 = 1 × 6 + 4，a₃ = 1；4 = 2 × 2 + 0，a₂ = 2；a₁ = 0。每個係數都在允許的範圍內。驗算：1440 + 480 + 96 + 6 + 4 = 2026。",
+          "係數和是 2 + 4 + 4 + 1 + 2 + 0 = 13。答案是 13。"
+        ],
+        "zh-Hans": [
+          "为什么可以“从最大的阶乘开始取”：1 × 1! + 2 × 2! + ⋯ + i × i! = (i + 1)! − 1（因为 i × i! = (i + 1)! − i!，逐项相消），所以较低的各项全部取到最大，也还比下一个阶乘小 1，系数只能由上往下逐一决定。",
+          "6! = 720 ≤ 2026 < 7! = 5040。2026 = 2 × 720 + 586，a₆ = 2；586 = 4 × 120 + 106，a₅ = 4；106 = 4 × 24 + 10，a₄ = 4。",
+          "10 = 1 × 6 + 4，a₃ = 1；4 = 2 × 2 + 0，a₂ = 2；a₁ = 0。每个系数都在允许的范围内。验算：1440 + 480 + 96 + 6 + 4 = 2026。",
+          "系数和是 2 + 4 + 4 + 1 + 2 + 0 = 13。答案是 13。"
+        ],
+        "en": [
+          "Why we may \"take the largest factorial first\": 1 × 1! + 2 × 2! + ⋯ + i × i! = (i + 1)! − 1 (since i × i! = (i + 1)! − i!, the sum telescopes), so even the largest possible lower terms fall 1 short of the next factorial, and the coefficients are fixed one by one from the top.",
+          "6! = 720 ≤ 2026 < 7! = 5040. 2026 = 2 × 720 + 586, so a₆ = 2; 586 = 4 × 120 + 106, a₅ = 4; 106 = 4 × 24 + 10, a₄ = 4.",
+          "10 = 1 × 6 + 4, a₃ = 1; 4 = 2 × 2 + 0, a₂ = 2; a₁ = 0. Every coefficient is within its allowed range. Check: 1440 + 480 + 96 + 6 + 4 = 2026.",
+          "The coefficient sum is 2 + 4 + 4 + 1 + 2 + 0 = 13. The answer is 13."
+        ],
+        "ja": [
+          "「大きい階乘から順にとる」ことができる理由：1 × 1! + 2 × 2! + ⋯ + i × i! = (i + 1)! − 1（i × i! = (i + 1)! − i! なので順に打ち消し合う）なので、下の項をすべて最大にしても次の階乗に 1 足りず、係数は上から順に 1 つずつ決まります。",
+          "6! = 720 ≤ 2026 < 7! = 5040 です。2026 = 2 × 720 + 586 で a₆ = 2、586 = 4 × 120 + 106 で a₅ = 4、106 = 4 × 24 + 10 で a₄ = 4 です。",
+          "10 = 1 × 6 + 4 で a₃ = 1、4 = 2 × 2 + 0 で a₂ = 2、a₁ = 0 です。どの係数も許される範囲にあります。確認：1440 + 480 + 96 + 6 + 4 = 2026。",
+          "係数の和は 2 + 4 + 4 + 1 + 2 + 0 = 13 です。答えは 13 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "13"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "number_theory-grade10-foundation",
+        "notes": "階乘進位制：由 Σ i × i! = (i + 1)! − 1 說明貪婪取法唯一，2026 = 2·6! + 4·5! + 4·4! + 1·3! + 2·2!。掃過 /階乘進位|k ?× ?k!/（0 題）、/進位制/（4 題）、/!.{0,6}\\+.{0,6}!/（4 題）；最接近 algebra_grade12_foundation_015（1 × 1! + ⋯ + 6 × 6! 求值），差異：該題只算這個望遠鏡和；本題把它當成「每位上限」的理由，實際做階乘進位的表示。"
+      }
+    },
+    {
+      "id": "number_theory_grade10_foundation_070",
+      "reviewStatus": "ok",
+      "topic": "number_theory",
+      "subtopic": "divisor_count_equals_n_over_three",
+      "tags": [
+        "c:factor_multiple",
+        "m:estimate_bound",
+        "m:enumeration"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "設 d(n) 表示正整數 n 的正因數個數（例如 d(6) = 4）。求所有滿足 d(n) = n/3 的正整數 n 的總和。",
+        "zh-Hans": "设 d(n) 表示正整数 n 的正因数个数（例如 d(6) = 4）。求所有满足 d(n) = n/3 的正整数 n 的总和。",
+        "en": "Let d(n) be the number of positive divisors of a positive integer n (for example, d(6) = 4). Find the sum of all positive integers n with d(n) = n/3.",
+        "ja": "正の整数 n の正の約数の個数を d(n) と表します（たとえば d(6) = 4）。d(n) = n/3 を満たす正の整数 n をすべて求め、その和を答えなさい。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 51。",
+        "zh-Hans": "答案是 51。",
+        "en": "The answer is 51.",
+        "ja": "答えは 51 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "n 的正因數可以兩兩配成 (m, n/m)，每一對中較小的 m 都 ≤ √n，所以 d(n) ≤ 2√n。",
+          "由 n/3 = d(n) ≤ 2√n 得 √n ≤ 6，n ≤ 36；又 n/3 是整數，所以 n 是 3、6、⋯、36 之一。",
+          "逐一比較 (d(n), n/3)：3（2, 1）、6（4, 2）、9（3, 3）相等、12（6, 4）、15（4, 5）、18（6, 6）相等、21（4, 7）、24（8, 8）相等、27（4, 9）、30（8, 10）、33（4, 11）、36（9, 12）。",
+          "符合的是 9、18、24，總和 9 + 18 + 24 = 51。答案是 51。"
+        ],
+        "zh-Hans": [
+          "n 的正因数可以两两配成 (m, n/m)，每一对中较小的 m 都 ≤ √n，所以 d(n) ≤ 2√n。",
+          "由 n/3 = d(n) ≤ 2√n 得 √n ≤ 6，n ≤ 36；又 n/3 是整数，所以 n 是 3、6、⋯、36 之一。",
+          "逐一比较 (d(n), n/3)：3（2, 1）、6（4, 2）、9（3, 3）相等、12（6, 4）、15（4, 5）、18（6, 6）相等、21（4, 7）、24（8, 8）相等、27（4, 9）、30（8, 10）、33（4, 11）、36（9, 12）。",
+          "符合的是 9、18、24，总和 9 + 18 + 24 = 51。答案是 51。"
+        ],
+        "en": [
+          "Divisors of n pair up as (m, n/m), and the smaller member of each pair is at most √n, so d(n) ≤ 2√n.",
+          "From n/3 = d(n) ≤ 2√n we get √n ≤ 6, so n ≤ 36; also n/3 is an integer, so n is one of 3, 6, …, 36.",
+          "Compare (d(n), n/3): 3 (2, 1), 6 (4, 2), 9 (3, 3) equal, 12 (6, 4), 15 (4, 5), 18 (6, 6) equal, 21 (4, 7), 24 (8, 8) equal, 27 (4, 9), 30 (8, 10), 33 (4, 11), 36 (9, 12).",
+          "The solutions are 9, 18 and 24, with sum 9 + 18 + 24 = 51. The answer is 51."
+        ],
+        "ja": [
+          "n の正の約数は (m, n/m) と 2 つずつ組にでき、各組の小さい方 m は √n 以下なので、d(n) ≤ 2√n です。",
+          "n/3 = d(n) ≤ 2√n より √n ≤ 6、n ≤ 36 です。また n/3 は整数なので、n は 3、6、⋯、36 のどれかです。",
+          "(d(n), n/3) を順にくらべると、3（2, 1）、6（4, 2）、9（3, 3）等しい、12（6, 4）、15（4, 5）、18（6, 6）等しい、21（4, 7）、24（8, 8）等しい、27（4, 9）、30（8, 10）、33（4, 11）、36（9, 12）です。",
+          "条件を満たすのは 9、18、24 で、和は 9 + 18 + 24 = 51 です。答えは 51 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "51"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "number_theory-grade10-foundation",
+        "notes": "用 d(n) ≤ 2√n 把 n 限制在 36 以內，再對 3 的倍數逐一檢查。掃過 /因數個數.{0,30}(三分之一|1/3|等於)|d\\(n\\)/（0 題）、/正因數(的)?個數/（8 題）、/≤ ?2√n/（0 題）；最接近 number_theory_grade8_foundation_032（恰有 12 個因數的最小數），差異：該題由因數個數公式構造最小數；本題是方程 d(n) = n/3，要先用配對估出上界再窮舉。"
+      }
     }
   ]
 }

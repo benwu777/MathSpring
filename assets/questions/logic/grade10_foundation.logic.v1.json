@@ -5775,6 +5775,361 @@
         "reference": "logic-grade10-foundation",
         "notes": "三階幻方：中心必為 5、9 不在角落，再由 9 的位置與 2、4 的順序得 8 種。掃過 /3 ?× ?3/（50 題）、/和都相等/（8 題）；最接近 logic_grade7_foundation_013，差異：該題只問中心數字 5；本題還要證 9 不在角、數出全部 8 種填法"
       }
+    },
+    {
+      "id": "logic_grade10_foundation_066",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "one_by_four_tiling_10x10_coloring",
+      "tags": [
+        "c:logic_deduction",
+        "c:modular",
+        "m:coloring",
+        "m:contradiction"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "能不能用 25 塊 1 × 4 的長方形木板（可以橫放或直放，不重疊、不超出）把 10 × 10 的方格板剛好鋪滿？下列哪一個說法正確？",
+        "zh-Hans": "能不能用 25 块 1 × 4 的长方形木板（可以横放或竖放，不重叠、不超出）把 10 × 10 的方格板刚好铺满？下列哪一个说法正确？",
+        "en": "Can a 10 × 10 board be exactly covered by 25 rectangular 1 × 4 tiles (placed horizontally or vertically, without overlap or overhang)? Which statement is correct?",
+        "ja": "1 × 4 の長方形の板 25 枚（横向きでも縦向きでもよく、重ならず、はみ出さない）で、10 × 10 のマス目の板をちょうどしきつめられますか。正しいものはどれですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 C：不行，用 (列號 + 行號) 除以 4 的餘數把格子塗成四色，四色格數不相等。",
+        "zh-Hans": "答案是 C：不行，用 (行号 + 列号) 除以 4 的余数把格子涂成四色，四色格数不相等。",
+        "en": "The answer is C: No: colour cells by (row + column) mod 4; the four colours are unequal in number.",
+        "ja": "答えは C：できない。(段の番号 + 列の番号) を 4 でわった余りで 4 色にぬると、各色の数が等しくない です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "把第 i 列、第 j 行的格子（i、j 都是 1～10）塗上「(i + j) 除以 4 的餘數」這種顏色，共 4 色。一塊 1 × 4 木板不論橫放或直放，蓋住的 4 格 i + j 是 4 個連續整數，除以 4 的餘數 0、1、2、3 各一次，所以每塊恰好蓋住四色各一格。",
+          "若能鋪滿，25 塊木板會讓四種顏色各被蓋 25 格，四色格數都必須是 25。實際數一數：i + j 從 2 到 20，餘數 0 的格有 25 個、餘數 1 的有 24 個、餘數 2 的有 25 個、餘數 3 的有 26 個，並不相等。",
+          "所以不可能鋪滿，(C) 正確。",
+          "(A) 錯：任何鋪法都做不到；(B) 錯：100 = 4 × 25，格數本身沒有問題；(D) 錯：10 × 10 黑白相間時黑、白各 50 格，而且每塊木板蓋 2 黑 2 白，這種塗色看不出矛盾。答案是 C。"
+        ],
+        "zh-Hans": [
+          "把第 i 行、第 j 列的格子（i、j 都是 1～10）涂上“(i + j) 除以 4 的余数”这种颜色，共 4 色。一块 1 × 4 木板不论横放或竖放，盖住的 4 格 i + j 是 4 个连续整数，除以 4 的余数 0、1、2、3 各一次，所以每块恰好盖住四色各一格。",
+          "若能铺满，25 块木板会让四种颜色各被盖 25 格，四色格数都必须是 25。实际数一数：i + j 从 2 到 20，余数 0 的格有 25 个、余数 1 的有 24 个、余数 2 的有 25 个、余数 3 的有 26 个，并不相等。",
+          "所以不可能铺满，(C) 正确。",
+          "(A) 错：任何铺法都做不到；(B) 错：100 = 4 × 25，格数本身没有问题；(D) 错：10 × 10 黑白相间时黑、白各 50 格，而且每块木板盖 2 黑 2 白，这种涂色看不出矛盾。答案是 C。"
+        ],
+        "en": [
+          "Colour the cell in row i, column j (i, j from 1 to 10) with colour \"(i + j) mod 4\", 4 colours in all. A 1 × 4 tile, horizontal or vertical, covers 4 cells whose i + j are 4 consecutive integers, so it covers one cell of each remainder 0, 1, 2, 3.",
+          "A complete tiling by 25 tiles would cover exactly 25 cells of each colour, so each colour would need 25 cells. Counting, with i + j from 2 to 20: remainder 0 has 25 cells, remainder 1 has 24, remainder 2 has 25 and remainder 3 has 26 — not equal.",
+          "So no tiling exists, and (C) is correct.",
+          "(A) is wrong: no tiling works at all. (B) is wrong: 100 = 4 × 25, so the cell count is fine. (D) is wrong: a 10 × 10 chessboard colouring has 50 black and 50 white cells and each tile covers 2 of each, so that colouring shows no contradiction. The answer is C."
+        ],
+        "ja": [
+          "i 段目 j 列目のマス（i、j は 1～10）を「(i + j) を 4 でわった余り」の色でぬり、4 色にします。1 × 4 の板は横でも縦でも、おおう 4 マスの i + j が連続する 4 つの整数なので、余り 0、1、2、3 のマスを 1 つずつおおいます。",
+          "しきつめられるなら 25 枚で各色を 25 マスずつおおうので、4 色のマスはどれも 25 個のはずです。数えると、i + j は 2 から 20 で、余り 0 のマスは 25 個、余り 1 は 24 個、余り 2 は 25 個、余り 3 は 26 個で、等しくありません。",
+          "よってしきつめられず、(C) が正しいです。",
+          "(A) は誤り：どんなしき方でもできません。(B) は誤り：100 = 4 × 25 でマスの数に問題はありません。(D) は誤り：10 × 10 を白黒交互にぬると黒白 50 個ずつで、どの板も黒 2・白 2 をおおうので、このぬり方では矛盾は出ません。答えは C です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "multiple_choice",
+      "options": {
+        "A": {
+          "zh-Hant": "可以，先在每一列鋪兩塊橫的木板，剩下的格子再用直的木板補滿",
+          "zh-Hans": "可以，先在每一行铺两块横的木板，剩下的格子再用竖的木板补满",
+          "en": "Yes: lay two horizontal tiles in each row, then fill the rest with vertical tiles",
+          "ja": "できる。各段に横向きの板を 2 枚ずつ置き、残りを縦向きの板でうめればよい"
+        },
+        "B": {
+          "zh-Hant": "不行，因為 100 個格子不是 4 的倍數，25 塊木板湊不出 100 格",
+          "zh-Hans": "不行，因为 100 个格子不是 4 的倍数，25 块木板凑不出 100 格",
+          "en": "No, because 100 cells is not a multiple of 4, so 25 tiles cannot make 100",
+          "ja": "できない。100 マスは 4 の倍数ではなく、25 枚では 100 マスにならないから"
+        },
+        "C": {
+          "zh-Hant": "不行，用 (列號 + 行號) 除以 4 的餘數把格子塗成四色，四色格數不相等",
+          "zh-Hans": "不行，用 (行号 + 列号) 除以 4 的余数把格子涂成四色，四色格数不相等",
+          "en": "No: colour cells by (row + column) mod 4; the four colours are unequal in number",
+          "ja": "できない。(段の番号 + 列の番号) を 4 でわった余りで 4 色にぬると、各色の数が等しくない"
+        },
+        "D": {
+          "zh-Hant": "不行，因為黑白相間塗色之後，黑格和白格的個數不相等",
+          "zh-Hans": "不行，因为黑白相间涂色之后，黑格和白格的个数不相等",
+          "en": "No, because a black-and-white chessboard colouring has unequal colour counts",
+          "ja": "できない。白黒交互にぬると、黒マスと白マスの数が等しくないから"
+        }
+      },
+      "correctAnswer": {
+        "type": "choice",
+        "value": "C"
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade10-foundation",
+        "notes": "四色著色（i + j 模 4）：每塊 1 × 4 蓋四色各一，但 10 × 10 四色格數是 25、24、25、26。掃過 /1 ?× ?4.{0,40}(10 ?× ?10|鋪)/（0 題）、/塗成.{0,10}色.{0,30}(鋪|骨牌)/（0 題）、/黑白相間/（3 題）；最接近 combinatorics_grade10_foundation_051（T 形四格骨牌棋盤染色奇偶論證），差異：該題用黑白染色數奇偶；本題黑白染色無效，必須改用模 4 的四色染色。"
+      }
+    },
+    {
+      "id": "logic_grade10_foundation_067",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "skyscraper_visibility_puzzle",
+      "tags": [
+        "c:logic_deduction",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "在 4 × 4 的方格中，每格放一棟大樓，高度是 1、2、3、4 層之一，而且每一列（橫）與每一行（直）的四棟高度都互不相同。從某一行的上方（或下方）沿著這一行看過去，較矮的樓會被它前面較高的樓擋住，只看得到「比前面所有樓都高」的那幾棟。已知：從上方看，第 1、2、3 行分別看得到 2、3、1 棟；從下方看，第 2、3 行分別看得到 2、4 棟（行由左到右編號）。把最上面一列由左到右四棟樓的層數連起來，寫成一個四位數，是多少？",
+        "zh-Hans": "在 4 × 4 的方格中，每格放一栋大楼，高度是 1、2、3、4 层之一，而且每一行（横）与每一列（竖）的四栋高度都互不相同。从某一列的上方（或下方）沿着这一列看过去，较矮的楼会被它前面较高的楼挡住，只看得到“比前面所有楼都高”的那几栋。已知：从上方看，第 1、2、3 列分别看得到 2、3、1 栋；从下方看，第 2、3 列分别看得到 2、4 栋（列从左到右编号）。把最上面一行从左到右四栋楼的层数连起来，写成一个四位数，是多少？",
+        "en": "Each cell of a 4 × 4 grid holds a building of height 1, 2, 3 or 4 storeys, and the four heights in every row and every column are all different. Looking along a column from above (or below), a shorter building is hidden behind a taller one in front of it, so you see only the buildings taller than all those before them. Seen from above, columns 1, 2, 3 (numbered left to right) show 2, 3, 1 buildings; seen from below, columns 2 and 3 show 2 and 4 buildings. Write the heights in the top row, from left to right, as a four-digit number. What is it?",
+        "ja": "4 × 4 のマス目の各マスに、高さ 1、2、3、4 階のどれかのビルを 1 つずつ建て、どの横の段にも、どの縦の列にも同じ高さはありません。ある列を上（または下）から見ると、低いビルは手前の高いビルにかくれ、「手前のどのビルよりも高い」ビルだけが見えます。上から見ると 1、2、3 列目（左から番号）でそれぞれ 2、3、1 棟、下から見ると 2、3 列目でそれぞれ 2、4 棟見えます。いちばん上の段の 4 棟の階数を左から並べて 4 けたの数にすると、いくつですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 3142。",
+        "zh-Hans": "答案是 3142。",
+        "en": "The answer is 3142.",
+        "ja": "答えは 3142 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "第 3 行：從上方只看得到 1 棟，最上面那棟必須是最高的 4；從下方看得到 4 棟，由下往上必須是 1、2、3、4。所以第 3 行由上到下是 4、3、2、1。",
+          "第 2 行：4 層樓若在最上或最下，那一側只看得到 1 棟；若在第 2 格，從上方最多看到 2 棟。所以 4 在第 3 格，從下方剛好看到 2 棟；從上方要看到 3 棟，第 1、2 格必須由小到大。可能是 1、2、4、3，或 1、3、4、2，或 2、3、4、1。後兩種第 2 列的第 2 行是 3，和第 3 行的 3 同列重複，所以第 2 行是 1、2、4、3。",
+          "各列已知第 2、3 行：第 1 列 1、4，第 2 列 2、3，第 3 列 4、2，第 4 列 3、1。所以第 1、4 行可用的數是：第 1 列 {2, 3}、第 2 列 {1, 4}、第 3 列 {1, 3}、第 4 列 {2, 4}。若第 1 列第 1 行是 2，則第 4 列只能 4、第 2 列只能 1、第 3 列是 3，第 1 行是 2、1、3、4，從上方看得到 2、3、4 共 3 棟，不合。",
+          "所以第 1 列第 1 行是 3，於是第 3 列是 1、第 2 列是 4、第 4 列是 2，第 1 行 3、4、1、2 從上方看得到 3、4 兩棟，符合；第 4 行依序是 2、1、3、4。最上面一列是 3、1、4、2，連起來是 3142。答案是 3142。"
+        ],
+        "zh-Hans": [
+          "第 3 列：从上方只看得到 1 栋，最上面那栋必须是最高的 4；从下方看得到 4 栋，由下往上必须是 1、2、3、4。所以第 3 列由上到下是 4、3、2、1。",
+          "第 2 列：4 层楼若在最上或最下，那一侧只看得到 1 栋；若在第 2 格，从上方最多看到 2 栋。所以 4 在第 3 格，从下方刚好看到 2 栋；从上方要看到 3 栋，第 1、2 格必须由小到大。可能是 1、2、4、3，或 1、3、4、2，或 2、3、4、1。后两种第 2 行的第 2 列是 3，和第 3 列的 3 同行重复，所以第 2 列是 1、2、4、3。",
+          "各行已知第 2、3 列：第 1 行 1、4，第 2 行 2、3，第 3 行 4、2，第 4 行 3、1。所以第 1、4 列可用的数是：第 1 行 {2, 3}、第 2 行 {1, 4}、第 3 行 {1, 3}、第 4 行 {2, 4}。若第 1 行第 1 列是 2，则第 4 行只能 4、第 2 行只能 1、第 3 行是 3，第 1 列是 2、1、3、4，从上方看得到 2、3、4 共 3 栋，不合。",
+          "所以第 1 行第 1 列是 3，于是第 3 行是 1、第 2 行是 4、第 4 行是 2，第 1 列 3、4、1、2 从上方看得到 3、4 两栋，符合；第 4 列依次是 2、1、3、4。最上面一行是 3、1、4、2，连起来是 3142。答案是 3142。"
+        ],
+        "en": [
+          "Column 3: only 1 building is seen from above, so its top building is the tallest, 4; 4 are seen from below, so from bottom to top it is 1, 2, 3, 4. So column 3 reads 4, 3, 2, 1 from top to bottom.",
+          "Column 2: if the 4 were at the top or bottom, only 1 building would be seen from that side; in the second cell, at most 2 would be seen from above. So 4 is in the third cell, giving exactly 2 from below; to see 3 from above, the first two cells must increase. The options are 1, 2, 4, 3 or 1, 3, 4, 2 or 2, 3, 4, 1. The last two put 3 in row 2 of column 2, repeating the 3 of column 3 in that row, so column 2 is 1, 2, 4, 3.",
+          "Rows now have columns 2, 3 known: row 1 has 1, 4; row 2 has 2, 3; row 3 has 4, 2; row 4 has 3, 1. So columns 1 and 4 must use row 1 {2, 3}, row 2 {1, 4}, row 3 {1, 3}, row 4 {2, 4}. If row 1, column 1 were 2, then row 4 must be 4, row 2 must be 1 and row 3 is 3: column 1 = 2, 1, 3, 4, which shows 2, 3, 4 = 3 buildings from above — wrong.",
+          "So row 1, column 1 is 3; then row 3 is 1, row 2 is 4, row 4 is 2, and column 1 = 3, 4, 1, 2 shows 3, 4 — 2 buildings, as required; column 4 is 2, 1, 3, 4. The top row is 3, 1, 4, 2, i.e. 3142. The answer is 3142."
+        ],
+        "ja": [
+          "3 列目：上から 1 棟しか見えないので、いちばん上は最も高い 4 です。下から 4 棟見えるので、下から 1、2、3、4 の順です。よって 3 列目は上から 4、3、2、1 です。",
+          "2 列目：4 階が上はしか下はしなら、その側からは 1 棟しか見えず、上から 2 マス目なら上からは多くて 2 棟です。よって 4 は 3 マス目で、下からはちょうど 2 棟見えます。上から 3 棟見えるには 1、2 マス目が小さい順でなければならず、候補は 1、2、4、3 か 1、3、4、2 か 2、3、4、1 です。後の 2 つは 2 段目の 2 列目が 3 で、同じ段の 3 列目の 3 と重なるので、2 列目は 1、2、4、3 です。",
+          "各段の 2、3 列目がわかったので（1 段目 1、4、2 段目 2、3、3 段目 4、2、4 段目 3、1）、1、4 列目に使える数は 1 段目 {2, 3}、2 段目 {1, 4}、3 段目 {1, 3}、4 段目 {2, 4} です。1 段目 1 列目が 2 なら、4 段目は 4、2 段目は 1、3 段目は 3 で、1 列目は 2、1、3、4 となり上から 2、3、4 の 3 棟が見えて不適です。",
+          "よって 1 段目 1 列目は 3 で、3 段目は 1、2 段目は 4、4 段目は 2 となり、1 列目 3、4、1、2 は上から 3、4 の 2 棟が見えて条件どおり、4 列目は 2、1、3、4 です。いちばん上の段は 3、1、4、2 で、3142 です。答えは 3142 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "3142"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 4
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade10-foundation",
+        "notes": "摩天樓（Skyscrapers）謎題：由「看得到 1 棟／4 棟」定出整行，再用能見數限制 4 層樓的位置、配合拉丁方排除，盤面唯一（程式窮舉 576 個拉丁方確認）。掃過 /(大樓|高樓|建築).{0,40}(看得到|看見|擋住)/（0 題）、/數織|數獨/（1 題）、/每一列.{0,20}每一行.{0,20}(互不相同|都不同)/（1 題）；最接近 logic_grade10_foundation_065（count_three_by_three_magic_squares），差異：該題數幻方個數；本題是單一盤面的視線推理，靠能見數與拉丁方條件逐步排除。"
+      }
+    },
+    {
+      "id": "logic_grade10_foundation_068",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "league_elimination_remaining_games",
+      "tags": [
+        "c:logic_deduction",
+        "m:contradiction",
+        "m:construction"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "甲、乙、丙、丁四隊的聯賽還剩最後 5 場：甲對乙 1 場、甲對丁 2 場、乙對丙 1 場、乙對丁 1 場，每場一定分出勝負。目前的勝場數是：甲 9、乙 8、丙 8、丁 7。賽季結束後勝場最多的隊伍奪冠（並列也算奪冠）。下列哪一個說法正確？",
+        "zh-Hans": "甲、乙、丙、丁四队的联赛还剩最后 5 场：甲对乙 1 场、甲对丁 2 场、乙对丙 1 场、乙对丁 1 场，每场一定分出胜负。目前的胜场数是：甲 9、乙 8、丙 8、丁 7。赛季结束后胜场最多的队伍夺冠（并列也算夺冠）。下列哪一个说法正确？",
+        "en": "Four teams A, B, C, D have 5 league games left: A vs B once, A vs D twice, B vs C once, B vs D once; every game has a winner. Current wins: A 9, B 8, C 8, D 7. After the season, the team(s) with the most wins are champions (ties count). Which statement is correct?",
+        "ja": "甲、乙、丙、丁の 4 チームのリーグ戦は残り 5 試合で、甲対乙 1 試合、甲対丁 2 試合、乙対丙 1 試合、乙対丁 1 試合です。どの試合も必ず勝敗がつきます。現在の勝ち数は甲 9、乙 8、丙 8、丁 7 です。シーズン終了時に勝ち数がいちばん多いチームが優勝です（同数で並んでも優勝とします）。正しいものはどれですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 B：只有丙隊已經不可能奪冠，其他三隊都還有機會。",
+        "zh-Hans": "答案是 B：只有丙队已经不可能夺冠，其他三队都还有机会。",
+        "en": "The answer is B: Only C is eliminated; the other three can still be champions.",
+        "ja": "答えは B：丙だけが優勝の可能性がなく、ほかの 3 チームにはまだ可能性がある です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "丙只剩對乙 1 場，最多 9 勝。要丙奪冠，所有隊都不能超過 9 勝：甲已有 9 勝，剩下的 3 場（對乙 1、對丁 2）必須全輸，於是乙至少 9 勝、丁至少 9 勝；丙還得贏乙。這時乙對丁那一場不論誰贏，贏的一隊都有 10 勝，超過丙。所以丙不可能奪冠。",
+          "丁可以：乙贏甲、丙贏乙、丁贏甲兩場、丁贏乙，最後甲 9、乙 9、丙 9、丁 10，丁奪冠。甲可以：甲贏剩下 3 場，甲 12 勝，其他隊最多 11 勝以下（乙最多 8 + 2 = 10），甲奪冠。",
+          "乙可以：乙贏甲、贏丙、贏丁，乙 11 勝；丁贏甲兩場，甲 9、丙 8、丁 9，乙奪冠。所以只有丙已經不可能奪冠，(B) 正確。",
+          "(A) 錯：丁目前最少，但最多可到 10 勝，而且上面有實際奪冠的情形；(C) 錯在丁還有機會；(D) 錯在丙已被淘汰：丙最多 9 勝雖然不輸甲現在的 9 勝，但甲要全輸時，乙、丁之間必有一隊超過 9。答案是 B。"
+        ],
+        "zh-Hans": [
+          "丙只剩对乙 1 场，最多 9 胜。要丙夺冠，所有队都不能超过 9 胜：甲已有 9 胜，剩下的 3 场（对乙 1、对丁 2）必须全输，于是乙至少 9 胜、丁至少 9 胜；丙还得赢乙。这时乙对丁那一场不论谁赢，赢的一队都有 10 胜，超过丙。所以丙不可能夺冠。",
+          "丁可以：乙赢甲、丙赢乙、丁赢甲两场、丁赢乙，最后甲 9、乙 9、丙 9、丁 10，丁夺冠。甲可以：甲赢剩下 3 场，甲 12 胜，其他队最多 11 胜以下（乙最多 8 + 2 = 10），甲夺冠。",
+          "乙可以：乙赢甲、赢丙、赢丁，乙 11 胜；丁赢甲两场，甲 9、丙 8、丁 9，乙夺冠。所以只有丙已经不可能夺冠，(B) 正确。",
+          "(A) 错：丁目前最少，但最多可到 10 胜，而且上面有实际夺冠的情形；(C) 错在丁还有机会；(D) 错在丙已被淘汰：丙最多 9 胜虽然不输甲现在的 9 胜，但甲要全输时，乙、丁之间必有一队超过 9。答案是 B。"
+        ],
+        "en": [
+          "C has only the game against B left, so at most 9 wins. For C to be champion nobody may exceed 9: A already has 9, so A must lose all 3 remaining games (1 vs B, 2 vs D), giving B at least 9 and D at least 9; C must also beat B. Then whoever wins B vs D reaches 10, more than C. So C cannot be champion.",
+          "D can: B beats A, C beats B, D beats A twice and beats B, ending A 9, B 9, C 9, D 10, so D is champion. A can: A wins its 3 games and has 12 wins, while B can reach at most 8 + 2 = 10, so A is champion.",
+          "B can: B beats A, C and D for 11 wins, and D beats A twice, ending A 9, C 8, D 9, so B is champion. So only C is already eliminated: (B) is correct.",
+          "(A) is wrong: D has the fewest wins now, but can reach 10 and the scenario above makes D champion. (C) is wrong because D still has a chance. (D) is wrong because C is eliminated: although C's maximum of 9 is not below A's current 9, if A loses everything one of B and D must exceed 9. The answer is B."
+        ],
+        "ja": [
+          "丙は乙との 1 試合だけなので最大 9 勝です。丙が優勝するにはどのチームも 9 勝以下でなければならず、すでに 9 勝の甲は残り 3 試合（乙と 1、丁と 2）に全敗、すると乙も丁も 9 勝以上、さらに丙は乙に勝つ必要があります。このとき乙対丁はどちらが勝っても勝った方が 10 勝となり丙をこえます。よって丙は優勝できません。",
+          "丁はできます：乙が甲に、丙が乙に、丁が甲に 2 勝、丁が乙に勝つと、甲 9、乙 9、丙 9、丁 10 で丁が優勝です。甲もできます：甲が残り 3 試合に全勝すると 12 勝で、乙は多くても 8 + 2 = 10 勝なので甲が優勝です。",
+          "乙もできます：乙が甲、丙、丁に勝って 11 勝、丁が甲に 2 勝すると、甲 9、丙 8、丁 9 で乙が優勝です。よってすでに優勝の可能性がないのは丙だけで、(B) が正しいです。",
+          "(A) は誤り：丁は今いちばん少ないが最大 10 勝で、上のように優勝できる場合があります。(C) は丁にまだ可能性があるので誤り、(D) は丙がすでに脱落しているので誤りです。丙の最大 9 勝は甲の現在の 9 勝より少なくはありませんが、甲が全敗すると乙か丁のどちらかが必ず 9 をこえます。答えは B です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "multiple_choice",
+      "options": {
+        "A": {
+          "zh-Hant": "只有丁隊已經不可能奪冠，因為丁隊目前的勝場最少",
+          "zh-Hans": "只有丁队已经不可能夺冠，因为丁队目前的胜场最少",
+          "en": "Only D is eliminated, because D currently has the fewest wins",
+          "ja": "丁だけが優勝の可能性がない。丁は今の勝ち数がいちばん少ないから"
+        },
+        "B": {
+          "zh-Hant": "只有丙隊已經不可能奪冠，其他三隊都還有機會",
+          "zh-Hans": "只有丙队已经不可能夺冠，其他三队都还有机会",
+          "en": "Only C is eliminated; the other three can still be champions",
+          "ja": "丙だけが優勝の可能性がなく、ほかの 3 チームにはまだ可能性がある"
+        },
+        "C": {
+          "zh-Hant": "丙隊和丁隊都已經不可能奪冠，只剩甲、乙兩隊有機會",
+          "zh-Hans": "丙队和丁队都已经不可能夺冠，只剩甲、乙两队有机会",
+          "en": "Both C and D are eliminated; only A and B can still win",
+          "ja": "丙と丁はどちらも優勝の可能性がなく、甲と乙だけに可能性がある"
+        },
+        "D": {
+          "zh-Hant": "四隊都還有機會奪冠，因為每隊的最多勝場都不少於甲現在的 9 場",
+          "zh-Hans": "四队都还有机会夺冠，因为每队的最多胜场都不少于甲现在的 9 场",
+          "en": "All four can still win, since each team's maximum is at least A's current 9",
+          "ja": "4 チームとも可能性がある。どのチームも最大勝ち数が甲の今の 9 以上だから"
+        }
+      },
+      "correctAnswer": {
+        "type": "choice",
+        "value": "B"
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade10-foundation",
+        "notes": "聯賽淘汰判斷：丙的最多勝場不低於領先者，但要它奪冠必須甲全敗，連帶讓乙、丁之一超過 9 勝；其餘三隊各給出奪冠構造（已窮舉 2⁵ 種結果驗證）。掃過 /(還有|仍有).{0,10}(機會|可能).{0,20}(冠軍|第一)/（0 題）、/勝場/（2 題）、/剩下.{0,10}場/（1 題）；最接近 logic_grade10_foundation_015（5 隊單循環已知四隊勝場求第五隊），差異：該題用總勝場數守恆；本題看剩餘賽程的互相牽制，判斷誰被淘汰並給出構造。"
+      }
+    },
+    {
+      "id": "logic_grade10_foundation_069",
+      "reviewStatus": "ok",
+      "topic": "logic",
+      "subtopic": "domino_tiling_fault_line_6x6",
+      "tags": [
+        "c:logic_deduction",
+        "c:basic_counting",
+        "m:invariant",
+        "m:contradiction"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "用 18 塊 1 × 2 的骨牌把 6 × 6 的方格板鋪滿。方格板內部有 10 條貫穿整個板子的格線（5 條橫的、5 條直的）。關於「是否一定有一條內部格線，完全沒有切過任何一塊骨牌」，下列哪一個敘述正確？",
+        "zh-Hans": "用 18 块 1 × 2 的骨牌把 6 × 6 的方格板铺满。方格板内部有 10 条贯穿整个板子的格线（5 条横的、5 条竖的）。关于“是否一定有一条内部格线，完全没有切过任何一块骨牌”，下列哪一个叙述正确？",
+        "en": "A 6 × 6 board is completely covered by 18 dominoes (1 × 2). Inside the board there are 10 grid lines running all the way across (5 horizontal, 5 vertical). Regarding whether there must always be an interior grid line that cuts through no domino at all, which statement is correct?",
+        "ja": "6 × 6 の板を 1 × 2 のドミノ 18 枚でしきつめます。板の内部には、板を端から端まで横切る格子線が 10 本（横 5 本、縦 5 本）あります。「どのドミノも切らない内部の格子線が必ずあるか」について、正しいものはどれですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 B：一定有：若每條線都切過骨牌，每條至少要切 2 塊，共需 20 塊，超過 18 塊。",
+        "zh-Hans": "答案是 B：一定有：若每条线都切过骨牌，每条至少要切 2 块，共需 20 块，超过 18 块。",
+        "en": "The answer is B: Yes, always: else each line cuts at least 2 dominoes, needing 20 > 18.",
+        "ja": "答えは B：必ずある。どの線も切るなら各線 2 枚以上で計 20 枚必要となり、18 枚をこえる です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "一塊骨牌最多只會被一條內部格線切過（就是它跨過的那條線），或者完全不被切。",
+          "任取一條內部格線，它把板子分成兩部分，格數是 6k 和 36 − 6k，都是偶數。完全在某一側的骨牌在那一側蓋 2 格，被這條線切過的骨牌在這一側只蓋 1 格，所以「被切過的骨牌數」= 這一側的格數 − 2 ×（完全在這一側的骨牌數），一定是偶數。",
+          "若每一條格線都至少切過一塊骨牌，因為是偶數，每條至少切過 2 塊；10 條線共需要至少 20 塊不同的骨牌（每塊只被一條線切過），但只有 18 塊，矛盾。所以一定有一條內部格線沒有切過任何骨牌。(B) 正確。",
+          "(A) 錯：上面證明了任何鋪法都辦不到；(C) 錯：只比較 18 和 10 的個數推不出結論，關鍵是每條線被切的次數一定是偶數；(D) 和正確結論剛好相反。答案是 B。"
+        ],
+        "zh-Hans": [
+          "一块骨牌最多只会被一条内部格线切过（就是它跨过的那条线），或者完全不被切。",
+          "任取一条内部格线，它把板子分成两部分，格数是 6k 和 36 − 6k，都是偶数。完全在某一侧的骨牌在那一侧盖 2 格，被这条线切过的骨牌在这一侧只盖 1 格，所以“被切过的骨牌数”= 这一侧的格数 − 2 ×（完全在这一侧的骨牌数），一定是偶数。",
+          "若每一条格线都至少切过一块骨牌，因为是偶数，每条至少切过 2 块；10 条线共需要至少 20 块不同的骨牌（每块只被一条线切过），但只有 18 块，矛盾。所以一定有一条内部格线没有切过任何骨牌。(B) 正确。",
+          "(A) 错：上面证明了任何铺法都办不到；(C) 错：只比较 18 和 10 的个数推不出结论，关键是每条线被切的次数一定是偶数；(D) 和正确结论刚好相反。答案是 B。"
+        ],
+        "en": [
+          "A domino is cut by at most one interior grid line (the one it straddles), or by none.",
+          "Take any interior line; it splits the board into parts of 6k and 36 − 6k cells, both even. A domino lying entirely on one side covers 2 cells there, while a domino cut by the line covers just 1 cell on that side, so (number of cut dominoes) = (cells on that side) − 2 × (dominoes entirely on that side), which is even.",
+          "If every line cut at least one domino, then, being even, each would cut at least 2; the 10 lines would need at least 20 different dominoes (each domino is cut by only one line), but there are only 18 — a contradiction. So some interior line cuts no domino: (B) is correct.",
+          "(A) is wrong: the argument shows no tiling achieves it. (C) is wrong: comparing 18 with 10 alone proves nothing; the key is that each line cuts an even number. (D) states the opposite of the truth. The answer is B."
+        ],
+        "ja": [
+          "1 枚のドミノを切る内部の格子線は多くても 1 本（またいでいる線）で、切られないこともあります。",
+          "内部の線を 1 本とると、板は 6k マスと 36 − 6k マスに分かれ、どちらも偶数です。片側に完全に入るドミノはその側を 2 マス、線に切られるドミノはその側を 1 マスだけおおうので、「切られるドミノの数」=（その側のマス数）− 2 ×（その側に完全に入るドミノの数）で、必ず偶数です。",
+          "どの線も少なくとも 1 枚切るとすると、偶数なので各線は少なくとも 2 枚切り、10 本で少なくとも 20 枚のちがうドミノが必要です（どのドミノも 1 本にしか切られない）。しかしドミノは 18 枚しかなく矛盾します。よってどのドミノも切らない内部の線が必ずあり、(B) が正しいです。",
+          "(A) は誤り：どんなしき方でもできないことを示しました。(C) は誤り：18 と 10 の個数だけでは結論は出ず、要点は各線が切る枚数が偶数であることです。(D) は正しい結論の逆です。答えは B です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "none",
+        "params": {}
+      },
+      "answerMode": "multiple_choice",
+      "options": {
+        "A": {
+          "zh-Hant": "不一定，只要骨牌橫直交錯著擺，就能讓每一條內部格線都切過骨牌",
+          "zh-Hans": "不一定，只要骨牌横竖交错着摆，就能让每一条内部格线都切过骨牌",
+          "en": "Not necessarily: mixing horizontal and vertical dominoes can make every line cut one",
+          "ja": "必ずとはいえない。ドミノを縦横まぜて置けば、どの内部の線もドミノを切るようにできる"
+        },
+        "B": {
+          "zh-Hant": "一定有：若每條線都切過骨牌，每條至少要切 2 塊，共需 20 塊，超過 18 塊",
+          "zh-Hans": "一定有：若每条线都切过骨牌，每条至少要切 2 块，共需 20 块，超过 18 块",
+          "en": "Yes, always: else each line cuts at least 2 dominoes, needing 20 > 18",
+          "ja": "必ずある。どの線も切るなら各線 2 枚以上で計 20 枚必要となり、18 枚をこえる"
+        },
+        "C": {
+          "zh-Hant": "一定有：因為骨牌有 18 塊而格線只有 10 條，抽屜原理保證有格線空著",
+          "zh-Hans": "一定有：因为骨牌有 18 块而格线只有 10 条，抽屉原理保证有格线空着",
+          "en": "Yes, always: with 18 dominoes and only 10 lines, pigeonhole leaves a line empty",
+          "ja": "必ずある。ドミノ 18 枚に対し線は 10 本しかなく、鳩の巣原理で空く線がある"
+        },
+        "D": {
+          "zh-Hant": "一定沒有：任何鋪法下，每一條內部格線都至少會切過一塊骨牌",
+          "zh-Hans": "一定没有：任何铺法下，每一条内部格线都至少会切过一块骨牌",
+          "en": "Never: in every tiling, each interior line cuts at least one domino",
+          "ja": "必ずない。どんなしき方でも、どの内部の線も少なくとも 1 枚のドミノを切る"
+        }
+      },
+      "correctAnswer": {
+        "type": "choice",
+        "value": "B"
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring Editorial",
+        "reference": "logic-grade10-foundation",
+        "notes": "斷層線論證：每條內部格線兩側格數皆偶，被切骨牌數必為偶數，若全被切需 ≥ 20 塊 > 18。掃過 /(不切到|不穿過|不會切斷).{0,10}(骨牌|任何)/（0 題）、/6 ?× ?6.{0,40}骨牌/（0 題）、/骨牌.{0,30}格線/（0 題）；最接近 logic_grade12_foundation_033（缺角 8 × 8 棋盤鋪骨牌的染色不可能），差異：該題用黑白染色證明鋪不滿；本題鋪得滿，要用每條線被切次數為偶數的不變量證明斷層線必存在。"
+      }
     }
   ]
 }
