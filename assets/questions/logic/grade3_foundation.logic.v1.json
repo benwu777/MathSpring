@@ -10189,6 +10189,870 @@
         "reference": "logic-grade3-foundation",
         "notes": "鍵盤黑白相間塗色，相鄰鍵顏色交替；5 走 3 步只能停在白鍵，9 是黑鍵，故 0 種。掃過 /按鍵.{0,40}(相鄰|旁邊|上下左右)|數字鍵/（1 題）、/鍵盤.{0,40}密碼/（0 題）；最接近 logic_grade6_foundation_116，差異：那題是按鍵依馬步移動數 4 位密碼；本題是上下左右一步一步走，用黑白塗色看出步數奇偶決定終點顏色，因而一種都沒有"
       }
+    },
+    {
+      "id": "logic_grade3_foundation_131",
+      "topic": "logic",
+      "subtopic": "no_left_turn_car_fewest_moves",
+      "tags": [
+        "c:position_direction",
+        "c:logic_deduction",
+        "m:extremal"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade3",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "如圖是 3 × 3 的方格街區，玩具車在 S 格，車頭朝右。車子每次往前開一格；在格子裡可以直走或向右轉，但不能向左轉，也不能迴轉。車子要開到 E 格（E 在 S 的右上方，斜對角那一格），最少要開幾格？",
+        "zh-Hans": "如图是 3 × 3 的方格街区，玩具车在 S 格，车头朝右。车子每次往前开一格；在格子里可以直走或向右转，但不能向左转，也不能掉头。车子要开到 E 格（E 在 S 的右上方，斜对角那一格），最少要开几格？",
+        "en": "The picture is a 3 × 3 grid of blocks. A toy car is in square S facing right. It moves one square at a time; in each square it may go straight or turn right, but it may not turn left or make a U-turn. What is the fewest number of squares it must move to reach square E (the square diagonally up and to the right of S)?",
+        "ja": "図は 3 × 3 のマスの町で、おもちゃの車は S のマスで右を向いています。車は 1 マスずつ進み、マスの中でまっすぐか右に曲がることはできますが、左に曲がったり U ターンしたりはできません。E のマス（S の右ななめ上）まで、少なくとも何マス進みますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 6。",
+        "zh-Hans": "答案是 6。",
+        "en": "The answer is 6.",
+        "ja": "答えは 6 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "如果可以左轉，往右一格、再左轉往上一格，2 格就到了。可是不能左轉，車子只能「往右繞」。",
+          "想法：一次左轉可以用三次右轉代替，也就是繞一個小方塊。例如：往右開到正中間那格（第 1 格），右轉往下到第三排中間（第 2 格），右轉往左到左下角（第 3 格），右轉往上回到 S（第 4 格）。",
+          "繼續往上開到左上角（第 5 格），右轉往右就到 E（第 6 格）。另一種繞法（先開到第二排最右邊再往下繞回中間格往上）也是 6 格。",
+          "能不能更少？前 1 格只能到中間格；之後每次只能直走或右轉，車子只能順時針繞，檢查所有 5 格以內的走法都到不了 E。所以最少 6 格。"
+        ],
+        "zh-Hans": [
+          "如果可以左转，往右一格、再左转往上一格，2 格就到了。可是不能左转，车子只能“往右绕”。",
+          "想法：一次左转可以用三次右转代替，也就是绕一个小方块。例如：往右开到正中间那格（第 1 格），右转往下到第三排中间（第 2 格），右转往左到左下角（第 3 格），右转往上回到 S（第 4 格）。",
+          "继续往上开到左上角（第 5 格），右转往右就到 E（第 6 格）。另一种绕法（先开到第二排最右边再往下绕回中间格往上）也是 6 格。",
+          "能不能更少？第 1 格只能到中间格；之后每次只能直走或右转，车子只能顺时针绕，检查所有 5 格以内的走法都到不了 E。所以最少 6 格。"
+        ],
+        "en": [
+          "With a left turn it would take 2 squares: right one, then turn left and go up one. Without left turns the car can only circle to the right.",
+          "Idea: one left turn can be replaced by three right turns, circling a small block. For example: right to the centre square (1), turn right and go down to the middle of row 3 (2), turn right and go left to the bottom-left corner (3), turn right and go up back to S (4).",
+          "Keep going up to the top-left corner (5), then turn right into E (6). Another loop (to the right end of row 2, down, back left to the centre, then up) also takes 6.",
+          "Could it be fewer? The first move can only reach the centre; after that the car can only go straight or turn right, circling clockwise, and checking every route of 5 or fewer squares shows none reaches E. So the fewest is 6."
+        ],
+        "ja": [
+          "左に曲がれれば、右へ 1 マス、左に曲がって上へ 1 マスの 2 マスで着きます。でも左に曲がれないので、車は右回りにしか回れません。",
+          "考え方：左に 1 回曲がるかわりに、右に 3 回曲がって小さな四角をひと回りします。たとえば右へまん中のマス（1）、右に曲がって下へ 3 列目のまん中（2）、右に曲がって左へ左下（3）、右に曲がって上へ S にもどる（4）。",
+          "そのまま上へ左上のかど（5）、右に曲がって E（6）。べつの回り方（2 列目の右はしへ行き、下・左・上と回る）でも 6 マスです。",
+          "もっと少なくできるでしょうか。1 マス目はまん中しか行けず、そのあとはまっすぐか右だけで時計回りにしか回れません。5 マス以内の行き方を全部調べても E には着かないので、少なくとも 6 マスです。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "composite_grid_shape",
+        "params": {
+          "rows": 3,
+          "cols": 3,
+          "filledCells": [],
+          "cellLabels": {
+            "1,0": "S",
+            "0,1": "E"
+          }
+        }
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "6"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "方格／座標圖形題（本輪圖形題補題，題型參考袋鼠盃 3–4 年級圖形題風格）",
+        "notes": "設計依據：只能直走或右轉時，左轉要用三次右轉繞一圈代替，2 格的路變 6 格；已用狀態搜尋（位置＋車頭方向）驗證最少 6 格。最接近的既有題：geometry_grade2_foundation_007／031（原地轉向後面向哪裡）、geometry_grade3_foundation_071（螺旋指令）；本題是有轉向限制的最短路，推理不同。圖只標 S、E，不畫路線。",
+        "displayText": "改寫題（不能左轉的車最少走幾格）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "邏輯",
+        "topicCode": "logic",
+        "subtopic": "不能左轉的車最少走幾格",
+        "subtopicCode": "no_left_turn_car_fewest_moves"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "logic_grade3_foundation_132",
+      "topic": "logic",
+      "subtopic": "two_by_two_windows_exactly_two_shaded",
+      "tags": [
+        "c:basic_counting",
+        "c:logic_deduction",
+        "m:enumeration"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade3",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "如圖，4 × 5 的方格中塗了一些格子。方格裡由相鄰兩排、相鄰兩行組成的 2 × 2 小方塊一共有 12 個（可以互相重疊）。其中剛好有 2 格塗色的小方塊有幾個？",
+        "zh-Hans": "如图，4 × 5 的方格中涂了一些格子。方格里由相邻两排、相邻两竖排组成的 2 × 2 小方块一共有 12 个（可以互相重叠）。其中刚好有 2 格涂色的小方块有几个？",
+        "en": "Some squares of the 4 × 5 grid are shaded. There are 12 blocks of 2 × 2 made from two neighbouring rows and two neighbouring columns (they may overlap). How many of these blocks contain exactly 2 shaded squares?",
+        "ja": "4 × 5 のマスにいくつか色がぬってあります。となりあう 2 列と、となりあう 2 つのたての列でできる 2 × 2 の小さな四角は全部で 12 こ（重なってもよい）あります。そのうち、色のついたマスがちょうど 2 つの四角はいくつありますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 7。",
+        "zh-Hans": "答案是 7。",
+        "en": "The answer is 7.",
+        "ja": "答えは 7 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "有系統地數：先看第 1、2 排組成的 4 個小方塊，由左到右塗色格數是 3、1、2、2，剛好 2 格的有 2 個。",
+          "第 2、3 排組成的 4 個小方塊：由左到右是 3、2、1、2，剛好 2 格的有 2 個。",
+          "第 3、4 排組成的 4 個小方塊：由左到右是 1、2、2、2，剛好 2 格的有 3 個。",
+          "一共 2 + 2 + 3 = 7 個。"
+        ],
+        "zh-Hans": [
+          "有系统地数：先看第 1、2 排组成的 4 个小方块，由左到右涂色格数是 3、1、2、2，刚好 2 格的有 2 个。",
+          "第 2、3 排组成的 4 个小方块：由左到右是 3、2、1、2，刚好 2 格的有 2 个。",
+          "第 3、4 排组成的 4 个小方块：由左到右是 1、2、2、2，刚好 2 格的有 3 个。",
+          "一共 2 + 2 + 3 = 7 个。"
+        ],
+        "en": [
+          "Count systematically. The 4 blocks in rows 1–2 have, from left to right, 3, 1, 2, 2 shaded squares: 2 blocks with exactly 2.",
+          "The 4 blocks in rows 2–3 have 3, 2, 1, 2: 2 blocks with exactly 2.",
+          "The 4 blocks in rows 3–4 have 1, 2, 2, 2: 3 blocks with exactly 2.",
+          "Total 2 + 2 + 3 = 7."
+        ],
+        "ja": [
+          "順番に数えます。1・2 列目の 4 この四角は、左から色のマスが 3、1、2、2 こで、ちょうど 2 こは 2 つ。",
+          "2・3 列目の 4 こは 3、2、1、2 こで、2 つ。",
+          "3・4 列目の 4 こは 1、2、2、2 こで、3 つ。",
+          "全部で 2 + 2 + 3 = 7 こです。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "composite_grid_shape",
+        "params": {
+          "rows": 4,
+          "cols": 5,
+          "filledCells": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              3
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              1,
+              3
+            ],
+            [
+              2,
+              1
+            ],
+            [
+              2,
+              4
+            ],
+            [
+              3,
+              2
+            ],
+            [
+              3,
+              3
+            ]
+          ],
+          "cellLabels": {}
+        }
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "7"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "方格／座標圖形題（本輪圖形題補題，題型參考袋鼠盃 3–4 年級圖形題風格）",
+        "notes": "設計依據：在重疊的 12 個 2 × 2 視窗中逐一數塗色格，考有系統地枚舉；已用程式逐窗驗證。最接近的既有題：logic_grade4_foundation_104（3 × 3 黑白每個 2 × 2 條件的塗法數）、logic_grade6_foundation_114（最少塗黑幾格使每個 2 × 2 都有黑）；本題是在給定圖上計數，推理不同。圖只畫塗色格。",
+        "displayText": "改寫題（剛好兩格塗色的 2×2 方塊）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "邏輯",
+        "topicCode": "logic",
+        "subtopic": "剛好兩格塗色的 2×2 方塊",
+        "subtopicCode": "two_by_two_windows_exactly_two_shaded"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "logic_grade3_foundation_133",
+      "topic": "logic",
+      "subtopic": "mini_nonogram_first_row",
+      "tags": [
+        "c:logic_deduction",
+        "c:position_direction",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade3",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "如圖是一個 4 × 4 的塗黑謎題。左邊的數字告訴你那一橫排有幾格連在一起的黑格；上面的數字告訴你那一直行的黑格情形，「1 1」表示有兩段各 1 格的黑格，中間至少隔 1 個白格；「0」表示整排都是白的。照提示塗完以後，第一排（最上面一排）塗黑的是哪兩格？",
+        "zh-Hans": "如图是一个 4 × 4 的涂黑谜题。左边的数字告诉你那一横排有几格连在一起的黑格；上面的数字告诉你那一竖排的黑格情形，“1 1”表示有两段各 1 格的黑格，中间至少隔 1 个白格；“0”表示整排都是白的。照提示涂完以后，第一排（最上面一排）涂黑的是哪两格？",
+        "en": "The picture is a 4 × 4 shading puzzle. A number on the left tells how many black squares in a connected run that row has; the numbers on top describe each column, where \"1 1\" means two separate single black squares with at least one white square between them, and \"0\" means the whole row is white. After shading by the clues, which two squares of the top row are black?",
+        "ja": "図は 4 × 4 のぬりつぶしパズルです。左の数はその横の列でつながった黒いマスの数、上の数はたての列の黒いマスのようすを表します。「1 1」は 1 マスずつの黒が 2 か所あって、間に白が 1 マス以上あること、「0」は全部白であることです。ヒントどおりにぬると、いちばん上の列で黒いのはどの 2 マスですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 B：第 2 格和第 3 格。",
+        "zh-Hans": "答案是 B：第 2 格和第 3 格。",
+        "en": "The answer is B: squares 2 and 3.",
+        "ja": "答えは B：2 マス目と 3 マス目 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "第三排提示 4：整排 4 格都黑；第四排提示 0：整排都白。",
+          "第 1 行提示 1：第三排已經是黑的，所以第一、二排的第 1 格都是白的。第 4 行提示 2：第三排是黑的，第四排是白的，所以要接上面第二排第 4 格，也是黑的。",
+          "第二排提示 2，而且第 4 格是黑的，所以第二排是第 3、4 格黑。第 2 行提示「1 1」：第三排第 2 格黑，第二排第 2 格白，另一格黑就在第一排第 2 格。",
+          "第一排提示 2，第 1 格白、第 2 格黑，所以第一排塗黑的是第 2、3 格（第 3 行提示 3 也剛好是第一、二、三排）。答案是 B。"
+        ],
+        "zh-Hans": [
+          "第三排提示 4：整排 4 格都黑；第四排提示 0：整排都白。",
+          "第 1 竖排提示 1：第三排已经是黑的，所以第一、二排的第 1 格都是白的。第 4 竖排提示 2：第三排是黑的，第四排是白的，所以要接上面第二排第 4 格，也是黑的。",
+          "第二排提示 2，而且第 4 格是黑的，所以第二排是第 3、4 格黑。第 2 竖排提示“1 1”：第三排第 2 格黑，第二排第 2 格白，另一格黑就在第一排第 2 格。",
+          "第一排提示 2，第 1 格白、第 2 格黑，所以第一排涂黑的是第 2、3 格（第 3 竖排提示 3 也刚好是第一、二、三排）。答案是 B。"
+        ],
+        "en": [
+          "Row 3 says 4: all 4 squares black. Row 4 says 0: all white.",
+          "Column 1 says 1: row 3 is already black, so rows 1 and 2 of column 1 are white. Column 4 says 2: row 3 is black and row 4 white, so row 2 of column 4 must be black too.",
+          "Row 2 says 2 and square 4 is black, so row 2 has squares 3 and 4 black. Column 2 says \"1 1\": row 3 is black and row 2 white, so the other black is row 1, square 2.",
+          "Row 1 says 2 with square 1 white and square 2 black, so the black squares are 2 and 3 (and column 3's clue 3 matches rows 1, 2, 3). The answer is B."
+        ],
+        "ja": [
+          "3 列目は 4 なので全部黒、4 列目は 0 なので全部白。",
+          "1 番目のたての列は 1：3 列目がもう黒なので、1・2 列目の 1 マス目は白。4 番目のたての列は 2：3 列目が黒で 4 列目が白なので、上の 2 列目の 4 マス目も黒。",
+          "2 列目は 2 で 4 マス目が黒なので、3・4 マス目が黒。2 番目のたての列は「1 1」：3 列目が黒、2 列目が白なので、もう 1 つの黒は 1 列目の 2 マス目。",
+          "1 列目は 2 で、1 マス目が白、2 マス目が黒なので、黒は 2・3 マス目（3 番目のたての列の 3 とも合う）。答えは B です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "composite_grid_shape",
+        "params": {
+          "rows": 5,
+          "cols": 5,
+          "filledCells": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              0,
+              3
+            ],
+            [
+              0,
+              4
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              2,
+              0
+            ],
+            [
+              3,
+              0
+            ],
+            [
+              4,
+              0
+            ]
+          ],
+          "cellLabels": {
+            "0,1": "1",
+            "0,2": "1 1",
+            "0,3": "3",
+            "0,4": "2",
+            "1,0": "2",
+            "2,0": "2",
+            "3,0": "4",
+            "4,0": "0"
+          }
+        }
+      },
+      "answerMode": "multiple_choice",
+      "options": {
+        "A": {
+          "zh-Hant": "第 1 格和第 2 格",
+          "zh-Hans": "第 1 格和第 2 格",
+          "en": "squares 1 and 2",
+          "ja": "1 マス目と 2 マス目"
+        },
+        "B": {
+          "zh-Hant": "第 2 格和第 3 格",
+          "zh-Hans": "第 2 格和第 3 格",
+          "en": "squares 2 and 3",
+          "ja": "2 マス目と 3 マス目"
+        },
+        "C": {
+          "zh-Hant": "第 3 格和第 4 格",
+          "zh-Hans": "第 3 格和第 4 格",
+          "en": "squares 3 and 4",
+          "ja": "3 マス目と 4 マス目"
+        },
+        "D": {
+          "zh-Hant": "第 1 格和第 4 格",
+          "zh-Hans": "第 1 格和第 4 格",
+          "en": "squares 1 and 4",
+          "ja": "1 マス目と 4 マス目"
+        }
+      },
+      "correctAnswer": {
+        "type": "choice",
+        "value": "B"
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "方格／座標圖形題（本輪圖形題補題，題型參考袋鼠盃 3–4 年級圖形題風格）",
+        "notes": "設計依據：4 × 4 數織（行列提示），從確定的排出發一步步推理；已用程式窮舉確認唯一解。最接近的既有題：logic_grade2_foundation_109／110（一排 7 格的數織，一維計數）；本題是二維、要行列交互推理，推理不同。圖給提示，謎題格空白。",
+        "displayText": "改寫題（數織謎題的第一排）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "邏輯",
+        "topicCode": "logic",
+        "subtopic": "數織謎題的第一排",
+        "subtopicCode": "mini_nonogram_first_row"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "logic_grade3_foundation_134",
+      "topic": "logic",
+      "subtopic": "stars_one_per_line_not_touching",
+      "tags": [
+        "c:logic_deduction",
+        "c:position_direction",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade3",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "如圖的 4 × 4 方格，要放 4 顆星星：每一橫排剛好 1 顆、每一直行剛好 1 顆，任兩顆星星所在的格子不能相鄰（連斜斜碰到角也不行），而且塗色的格子不能放星星。最下面一排的星星在從左邊數第幾格？",
+        "zh-Hans": "如图的 4 × 4 方格，要放 4 颗星星：每一横排刚好 1 颗、每一竖排刚好 1 颗，任两颗星星所在的格子不能相邻（连斜斜碰到角也不行），而且涂色的格子不能放星星。最下面一排的星星在从左边数第几格？",
+        "en": "Four stars go into the 4 × 4 grid: exactly 1 in each row and exactly 1 in each column, no two stars in touching squares (not even at a corner), and none in the shaded square. In which square, counting from the left, is the star in the bottom row?",
+        "ja": "4 × 4 のマスに星を 4 こおきます。どの横の列にもちょうど 1 こ、どのたての列にもちょうど 1 こで、星のマスどうしはとなりあってはいけません（ななめにかどがふれるのもだめ）。色のついたマスにはおけません。いちばん下の列の星は左から何マス目ですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 2。",
+        "zh-Hans": "答案是 2。",
+        "en": "The answer is 2.",
+        "ja": "答えは 2 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "上下相鄰兩排的星星，左右至少要差 2 格，否則會碰到。",
+          "從上往下一排一排試：例如第一排放第 1 格，第二排只能放第 3 或第 4 格，再往下就會卡住。全部試完，只有兩種排法（由上到下）：「第 2、4、1、3 格」和「第 3、1、4、2 格」。",
+          "第一種排法的第一排星星在第 2 格，但那一格塗了色，不能放。",
+          "所以只能是第二種：由上到下是第 3、1、4、2 格，最下面一排的星星在第 2 格。"
+        ],
+        "zh-Hans": [
+          "上下相邻两排的星星，左右至少要差 2 格，否则会碰到。",
+          "从上往下一排一排试：例如第一排放第 1 格，第二排只能放第 3 或第 4 格，再往下就会卡住。全部试完，只有两种排法（由上到下）：“第 2、4、1、3 格”和“第 3、1、4、2 格”。",
+          "第一种排法的第一排星星在第 2 格，但那一格涂了色，不能放。",
+          "所以只能是第二种：由上到下是第 3、1、4、2 格，最下面一排的星星在第 2 格。"
+        ],
+        "en": [
+          "Stars in neighbouring rows must be at least 2 columns apart, or they would touch.",
+          "Listing the positions row by row shows there are only two arrangements (top to bottom): squares 2, 4, 1, 3 and squares 3, 1, 4, 2.",
+          "The first has the top-row star in square 2, which is shaded, so it is not allowed.",
+          "So it must be 3, 1, 4, 2 from top to bottom, and the bottom-row star is in square 2."
+        ],
+        "ja": [
+          "上下のとなりの列の星は、左右に 2 マス以上はなれていないとふれてしまいます。",
+          "列ごとに位置を調べると、上から「2、4、1、3 マス目」と「3、1、4、2 マス目」の 2 通りしかありません。",
+          "1 つ目は、いちばん上の星が 2 マス目で、そこは色がついているのでおけません。",
+          "だから上から 3、1、4、2 マス目で、いちばん下の星は 2 マス目です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "composite_grid_shape",
+        "params": {
+          "rows": 4,
+          "cols": 4,
+          "filledCells": [
+            [
+              0,
+              1
+            ]
+          ],
+          "cellLabels": {}
+        }
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "2"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "方格／座標圖形題（本輪圖形題補題，題型參考袋鼠盃 3–4 年級圖形題風格）",
+        "notes": "設計依據：每排每行一顆且互不相鄰（四皇后的簡化版），4 × 4 只有兩種排法，再用一個塗色格排除其一；已用程式窮舉驗證。最接近的既有題：logic_grade2_foundation_103（3 × 3 每排每行一枚硬幣、中間不能放的放法數）、logic_grade6_foundation_070（5 × 5 不相鄰最多放幾枚）；本題加入斜角也不相鄰並求位置，推理不同。圖只畫一個禁放格。",
+        "displayText": "改寫題（每排每行一顆星且不相碰）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "邏輯",
+        "topicCode": "logic",
+        "subtopic": "每排每行一顆星且不相碰",
+        "subtopicCode": "stars_one_per_line_not_touching"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "logic_grade3_foundation_135",
+      "topic": "logic",
+      "subtopic": "half_black_half_white_grid_puzzle",
+      "tags": [
+        "c:logic_deduction",
+        "c:position_direction",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade3",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "如圖的 4 × 4 方格，有些格子已經放了 ● 或 ○。要把其他格子都放上 ● 或 ○，讓每一橫排和每一直行都剛好有 2 個 ● 和 2 個 ○。放好以後，最下面一排的兩個 ● 在哪兩格（從左邊數）？",
+        "zh-Hans": "如图的 4 × 4 方格，有些格子已经放了 ● 或 ○。要把其他格子都放上 ● 或 ○，让每一横排和每一竖排都刚好有 2 个 ● 和 2 个 ○。放好以后，最下面一排的两个 ● 在哪两格（从左边数）？",
+        "en": "Some squares of the 4 × 4 grid already hold ● or ○. Fill every other square with ● or ○ so that each row and each column has exactly 2 ● and 2 ○. When finished, which two squares (counting from the left) of the bottom row hold ●?",
+        "ja": "4 × 4 のマスのいくつかには、もう ● か ○ が入っています。のこりのマスにも ● か ○ を入れて、どの横の列にもたての列にも ● と ○ がちょうど 2 こずつになるようにします。入れ終わったとき、いちばん下の列の ● は左から何マス目と何マス目ですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 B：第 3 格和第 4 格。",
+        "zh-Hans": "答案是 B：第 3 格和第 4 格。",
+        "en": "The answer is B: squares 3 and 4.",
+        "ja": "答えは B：3 マス目と 4 マス目 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "第一排已經有 2 個 ●，剩下兩格都是 ○。第二排已經有 2 個 ○（第 2、3 格），剩下的第 1、4 格都是 ●。",
+          "第 1 行：第一、二排都是 ●，所以第三、四排的第 1 格都是 ○。第 2 行：已經有 ●（第一排）、○（第二排）、●（第三排），所以第四排第 2 格是 ○。",
+          "第四排的第 1、2 格都是 ○，所以第 3、4 格都是 ●。",
+          "檢查第 3 行：第一、二排是 ○、○，第四排是 ●，第三排就要是 ●，第三排變成「○ ● ● ○」，剛好 2 個 ●；第 4 行是「○ ● ○ ●」也對。答案是 B。"
+        ],
+        "zh-Hans": [
+          "第一排已经有 2 个 ●，剩下两格都是 ○。第二排已经有 2 个 ○（第 2、3 格），剩下的第 1、4 格都是 ●。",
+          "第 1 竖排：第一、二排都是 ●，所以第三、四排的第 1 格都是 ○。第 2 竖排：已经有 ●（第一排）、○（第二排）、●（第三排），所以第四排第 2 格是 ○。",
+          "第四排的第 1、2 格都是 ○，所以第 3、4 格都是 ●。",
+          "检查第 3 竖排：第一、二排是 ○、○，第四排是 ●，第三排就要是 ●，第三排变成“○ ● ● ○”，刚好 2 个 ●；第 4 竖排是“○ ● ○ ●”也对。答案是 B。"
+        ],
+        "en": [
+          "Row 1 already has 2 ●, so its other two squares are ○. Row 2 already has 2 ○ (squares 2 and 3), so squares 1 and 4 are ●.",
+          "Column 1: rows 1 and 2 are both ●, so rows 3 and 4 of column 1 are ○. Column 2 already has ● (row 1), ○ (row 2), ● (row 3), so row 4 of column 2 is ○.",
+          "Row 4 has ○ in squares 1 and 2, so squares 3 and 4 are ●.",
+          "Check column 3: rows 1 and 2 are ○, row 4 is ●, so row 3 is ●, making row 3 \"○ ● ● ○\" with exactly 2 ●; column 4 is \"○ ● ○ ●\", also fine. The answer is B."
+        ],
+        "ja": [
+          "1 列目はもう ● が 2 こなので、のこり 2 マスは ○。2 列目はもう ○ が 2 こ（2・3 マス目）なので、1・4 マス目は ●。",
+          "1 番目のたての列：1・2 列目が ● なので、3・4 列目は ○。2 番目のたての列：● （1 列目）、○（2 列目）、●（3 列目）があるので、4 列目は ○。",
+          "4 列目は 1・2 マス目が ○ なので、3・4 マス目が ●。",
+          "たしかめ：3 番目のたての列は 1・2 列目が ○、4 列目が ● なので 3 列目は ●。3 列目は「○ ● ● ○」で ● が 2 こ。4 番目のたての列は「○ ● ○ ●」で OK。答えは B です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "composite_grid_shape",
+        "params": {
+          "rows": 4,
+          "cols": 4,
+          "filledCells": [],
+          "cellLabels": {
+            "0,0": "●",
+            "0,1": "●",
+            "1,1": "○",
+            "1,2": "○",
+            "2,1": "●"
+          }
+        }
+      },
+      "answerMode": "multiple_choice",
+      "options": {
+        "A": {
+          "zh-Hant": "第 1 格和第 2 格",
+          "zh-Hans": "第 1 格和第 2 格",
+          "en": "squares 1 and 2",
+          "ja": "1 マス目と 2 マス目"
+        },
+        "B": {
+          "zh-Hant": "第 3 格和第 4 格",
+          "zh-Hans": "第 3 格和第 4 格",
+          "en": "squares 3 and 4",
+          "ja": "3 マス目と 4 マス目"
+        },
+        "C": {
+          "zh-Hant": "第 2 格和第 4 格",
+          "zh-Hans": "第 2 格和第 4 格",
+          "en": "squares 2 and 4",
+          "ja": "2 マス目と 4 マス目"
+        },
+        "D": {
+          "zh-Hant": "第 1 格和第 3 格",
+          "zh-Hans": "第 1 格和第 3 格",
+          "en": "squares 1 and 3",
+          "ja": "1 マス目と 3 マス目"
+        }
+      },
+      "correctAnswer": {
+        "type": "choice",
+        "value": "B"
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "方格／座標圖形題（本輪圖形題補題，題型參考袋鼠盃 3–4 年級圖形題風格）",
+        "notes": "設計依據：每排每行黑白各半的二元謎題，只給 5 格，靠排、行輪流推出整張圖；已用程式窮舉確認唯一解。最接近的既有題：logic_grade2_foundation_151（每排每行硬幣雙數最多放幾枚）、logic_grade3_foundation_095（4 × 4 翻牌奇偶）；本題是由已知格逐步推定，推理不同。圖只畫 5 個已知符號。",
+        "displayText": "改寫題（每排每行黑白各半）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "邏輯",
+        "topicCode": "logic",
+        "subtopic": "每排每行黑白各半",
+        "subtopicCode": "half_black_half_white_grid_puzzle"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "logic_grade3_foundation_136",
+      "topic": "logic",
+      "subtopic": "cells_on_every_shortest_route",
+      "tags": [
+        "c:logic_deduction",
+        "c:position_direction",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade3",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "如圖，深色的格子是牆。從 S 格走到 E 格，每一步走到上、下、左、右緊鄰的白格。所有「步數最少」的走法之中，一定都會經過的白色格子（不算 S 和 E）一共有幾格？",
+        "zh-Hans": "如图，深色的格子是墙。从 S 格走到 E 格，每一步走到上、下、左、右紧邻的白格。所有“步数最少”的走法之中，一定都会经过的白色格子（不算 S 和 E）一共有几格？",
+        "en": "Dark squares are walls. Going from S to E, each step moves to a white square directly above, below, left or right. Among all the routes with the fewest steps, how many white squares (not counting S and E) are passed by every one of them?",
+        "ja": "色のこいマスはかべです。S から E まで、1 歩ごとに上・下・左・右のとなりの白いマスへ進みます。歩数がいちばん少ない行き方のすべてが、かならず通る白いマス（S と E はのぞく）はいくつありますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 5。",
+        "zh-Hans": "答案是 5。",
+        "en": "The answer is 5.",
+        "ja": "答えは 5 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "正中間那一直行（第 3 行）只有第三排是白的，所以從左半邊到右半邊一定要經過第三排的第 2、3、4 格這條「通道」。",
+          "要進通道的第 2 格（第三排第 2 格），它左邊是牆，只能從上面的第二排第 2 格進來；所以第二排第 2 格也一定會經過。",
+          "出了通道（第三排第 4 格），右邊是牆，只能往下到第四排第 4 格，再往右或往下一步、再一步到 E。最短是 2 + 1 + 1 + 1 + 1 + 2 = 8 步。",
+          "其他地方都有兩種走法（S 先往右或先往下；第四排第 4 格之後先往右或先往下），所以一定經過的是第二排第 2 格、第三排第 2、3、4 格、第四排第 4 格，一共 5 格。"
+        ],
+        "zh-Hans": [
+          "正中间那一竖排（第 3 竖排）只有第三排是白的，所以从左半边到右半边一定要经过第三排的第 2、3、4 格这条“通道”。",
+          "要进通道的第 2 格（第三排第 2 格），它左边是墙，只能从上面的第二排第 2 格进来；所以第二排第 2 格也一定会经过。",
+          "出了通道（第三排第 4 格），右边是墙，只能往下到第四排第 4 格，再往右或往下一步、再一步到 E。最短是 2 + 1 + 1 + 1 + 1 + 2 = 8 步。",
+          "其他地方都有两种走法（S 先往右或先往下；第四排第 4 格之后先往右或先往下），所以一定经过的是第二排第 2 格、第三排第 2、3、4 格、第四排第 4 格，一共 5 格。"
+        ],
+        "en": [
+          "In the middle column (column 3) only row 3 is white, so getting from the left half to the right half must use the \"corridor\" of row 3, squares 2, 3 and 4.",
+          "The corridor's first square (row 3, square 2) has a wall on its left, so it can only be entered from row 2, square 2 above it; that square is also always used.",
+          "Leaving the corridor at row 3, square 4, the right is a wall, so go down to row 4, square 4, then one step right or down and one more step to E. The shortest route has 2 + 1 + 1 + 1 + 1 + 2 = 8 steps.",
+          "Everywhere else there are two choices (S first goes right or down; after row 4 square 4, right or down first), so the squares every shortest route uses are row 2 square 2, row 3 squares 2, 3, 4, and row 4 square 4: 5 squares."
+        ],
+        "ja": [
+          "まん中のたての列（3 番目）は 3 列目だけが白いので、左半分から右半分へは、3 列目の 2・3・4 マス目の「通路」をかならず通ります。",
+          "通路の入り口（3 列目 2 マス目）は左がかべなので、上の 2 列目 2 マス目からしか入れません。そこもかならず通ります。",
+          "通路の出口（3 列目 4 マス目）は右がかべなので、下の 4 列目 4 マス目へ行き、右か下へ 1 歩、さらに 1 歩で E。いちばん短いのは 2 + 1 + 1 + 1 + 1 + 2 = 8 歩です。",
+          "ほかの所は 2 通りずつ（S から右か下、4 列目 4 マス目のあと右か下）あるので、かならず通るのは 2 列目 2 マス目、3 列目 2・3・4 マス目、4 列目 4 マス目の 5 マスです。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "composite_grid_shape",
+        "params": {
+          "rows": 5,
+          "cols": 5,
+          "filledCells": [
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              2
+            ],
+            [
+              2,
+              0
+            ],
+            [
+              2,
+              4
+            ],
+            [
+              3,
+              2
+            ],
+            [
+              4,
+              2
+            ]
+          ],
+          "cellLabels": {
+            "0,0": "S",
+            "4,4": "E"
+          }
+        }
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "5"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "方格／座標圖形題（本輪圖形題補題，題型參考袋鼠盃 3–4 年級圖形題風格）",
+        "notes": "設計依據：找出所有最短路都必經的「瓶頸」格子；已用雙向 BFS 驗證最短 8 步、4 條最短路、必經 5 格。最接近的既有題：本批 A_g1_18（迷宮最少步數）、logic_grade2_foundation_091（一封就斷的橋）；本題問所有最短路的交集，推理不同。圖只畫牆與 S、E。",
+        "displayText": "改寫題（每條最短路都經過的格子）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "邏輯",
+        "topicCode": "logic",
+        "subtopic": "每條最短路都經過的格子",
+        "subtopicCode": "cells_on_every_shortest_route"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "logic_grade3_foundation_137",
+      "topic": "logic",
+      "subtopic": "skyscraper_left_view_three_by_three",
+      "tags": [
+        "c:logic_deduction",
+        "c:compare_order",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade3",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "如圖是 3 × 3 的街區，每一格要蓋一棟 1 層、2 層或 3 層的大樓，每一橫排和每一直行都剛好各有 1 層、2 層、3 層的大樓一棟。站在每一排最左邊往右看，高的大樓會擋住它後面比較矮的大樓；左邊的數字就是那一排看得到的大樓棟數。第二排最右邊那一棟大樓有幾層？",
+        "zh-Hans": "如图是 3 × 3 的街区，每一格要盖一栋 1 层、2 层或 3 层的大楼，每一横排和每一竖排都刚好各有 1 层、2 层、3 层的大楼一栋。站在每一排最左边往右看，高的大楼会挡住它后面比较矮的大楼；左边的数字就是那一排看得到的大楼栋数。第二排最右边那一栋大楼有几层？",
+        "en": "Each square of the 3 × 3 block gets a building with 1, 2 or 3 floors, and each row and each column has exactly one building of each height. Looking along each row from the left, a taller building hides any shorter one behind it; the number on the left is how many buildings can be seen in that row. How many floors does the rightmost building in row 2 have?",
+        "ja": "3 × 3 の町の 1 マスずつに、1 階・2 階・3 階のビルを 1 つずつ建てます。どの横の列、どのたての列にも 1 階・2 階・3 階のビルが 1 つずつあります。それぞれの列の左はしから右を見ると、高いビルのうしろの低いビルは見えません。左の数は、その列で見えるビルの数です。2 列目の右はしのビルは何階ですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 1。",
+        "zh-Hans": "答案是 1。",
+        "en": "The answer is 1.",
+        "ja": "答えは 1 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "看得到 3 棟的第一排，只能由矮到高排：1、2、3。看得到 1 棟的第三排，最左邊一定是最高的 3 層。",
+          "第 1 行已經有第一排的 1 和第三排的 3，所以第二排第 1 格是 2。",
+          "第二排是 2 開頭，剩下 1 和 3。如果排成「2、1、3」，第 2 行會有第一排的 2 和第二排的 1，第三排第 2 格就要是 3，但第三排第 1 格已經是 3，不行。",
+          "所以第二排是「2、3、1」（從左邊看得到 2、3 兩棟，符合提示 2），最右邊那棟是 1 層。第三排就是「3、1、2」。答案是 1。"
+        ],
+        "zh-Hans": [
+          "看得到 3 栋的第一排，只能由矮到高排：1、2、3。看得到 1 栋的第三排，最左边一定是最高的 3 层。",
+          "第 1 竖排已经有第一排的 1 和第三排的 3，所以第二排第 1 格是 2。",
+          "第二排是 2 开头，剩下 1 和 3。如果排成“2、1、3”，第 2 竖排会有第一排的 2 和第二排的 1，第三排第 2 格就要是 3，但第三排第 1 格已经是 3，不行。",
+          "所以第二排是“2、3、1”（从左边看得到 2、3 两栋，符合提示 2），最右边那栋是 1 层。第三排就是“3、1、2”。答案是 1。"
+        ],
+        "en": [
+          "Row 1 shows all 3 buildings, so it must rise from short to tall: 1, 2, 3. Row 3 shows only 1, so its leftmost building is the tallest, 3.",
+          "Column 1 already has 1 (row 1) and 3 (row 3), so row 2 starts with 2.",
+          "Row 2 starts with 2, leaving 1 and 3. If it were \"2, 1, 3\", column 2 would have 2 (row 1) and 1 (row 2), so row 3 square 2 would be 3, but row 3 already has 3 in square 1. Not allowed.",
+          "So row 2 is \"2, 3, 1\" (from the left you see 2 and 3, matching the clue 2), and its rightmost building has 1 floor. Row 3 is then \"3, 1, 2\". The answer is 1."
+        ],
+        "ja": [
+          "3 つ見える 1 列目は、低い順に 1、2、3 しかありません。1 つしか見えない 3 列目は、左はしがいちばん高い 3 階です。",
+          "1 番目のたての列には 1 列目の 1 と 3 列目の 3 があるので、2 列目の左はしは 2 です。",
+          "2 列目は 2 から始まり、のこりは 1 と 3。「2、1、3」だと、2 番目のたての列に 1 列目の 2 と 2 列目の 1 があり、3 列目の 2 マス目は 3 になりますが、3 列目には左はしにもう 3 があるのでだめです。",
+          "だから 2 列目は「2、3、1」（左から 2 と 3 の 2 つが見えて、ヒントの 2 と合う）で、右はしは 1 階。3 列目は「3、1、2」です。答えは 1 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "composite_grid_shape",
+        "params": {
+          "rows": 3,
+          "cols": 4,
+          "filledCells": [
+            [
+              0,
+              0
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              2,
+              0
+            ]
+          ],
+          "cellLabels": {
+            "0,0": "3",
+            "1,0": "2",
+            "2,0": "1"
+          }
+        }
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "1"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "方格／座標圖形題（本輪圖形題補題，題型參考袋鼠盃 3–4 年級圖形題風格）",
+        "notes": "設計依據：3 × 3 的「摩天樓」謎題，只給左側 3 個提示，靠每行不重複推出唯一解；已用程式窮舉 12 種拉丁方陣驗證。最接近的既有題：logic_grade2_foundation_113（一排 4 棟大樓左右看得到幾棟，一維）、logic_grade3_foundation_096（3 × 3 拉丁方加大小關係）；本題結合可見數與行不重複，推理不同，但兩個元素都有既有題，列為自評較弱。圖的最左一行是提示數字。",
+        "displayText": "改寫題（從左邊看得到幾棟大樓）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "邏輯",
+        "topicCode": "logic",
+        "subtopic": "從左邊看得到幾棟大樓",
+        "subtopicCode": "skyscraper_left_view_three_by_three"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "logic_grade3_foundation_138",
+      "topic": "logic",
+      "subtopic": "frogs_jump_by_arrows_empty_pads",
+      "tags": [
+        "c:position_direction",
+        "c:basic_counting",
+        "m:pigeonhole"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade3",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "如圖，9 片荷葉排成 3 × 3，每片荷葉上都有一隻青蛙，荷葉上的箭頭是那隻青蛙要跳的方向。聽到口令，9 隻青蛙同時往自己的箭頭方向跳到緊鄰的那一片荷葉（一片荷葉可以擠好幾隻）。跳完以後，有幾片荷葉上沒有青蛙？",
+        "zh-Hans": "如图，9 片荷叶排成 3 × 3，每片荷叶上都有一只青蛙，荷叶上的箭头是那只青蛙要跳的方向。听到口令，9 只青蛙同时往自己的箭头方向跳到紧邻的那一片荷叶（一片荷叶可以挤好几只）。跳完以后，有几片荷叶上没有青蛙？",
+        "en": "Nine lily pads form a 3 × 3 grid, each with one frog, and the arrow on each pad shows where its frog will jump. On the signal, all 9 frogs jump at the same time to the neighbouring pad in their arrow's direction (a pad may hold several frogs). After the jump, how many pads have no frog?",
+        "ja": "3 × 3 にならんだ 9 まいのハスの葉に 1 ぴきずつカエルがいて、葉の矢じるしはそのカエルがとぶ向きです。合図で 9 ひきが同時に、矢じるしの向きのとなりの葉へとびます（1 まいの葉に何びきいてもよい）。とんだあと、カエルのいない葉は何まいですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 3。",
+        "zh-Hans": "答案是 3。",
+        "en": "The answer is 3.",
+        "ja": "答えは 3 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "一隻一隻看牠跳到哪一片：第一排：左邊的跳到中間、中間的往下跳到正中間、右邊的跳到中間。",
+          "第二排：左邊的往下跳到左下、中間的跳到右邊、右邊的往上跳到右上。第三排：左邊的跳到中間、中間的往上跳到正中間、右邊的跳到中間。",
+          "被跳到的荷葉：第一排中間（2 隻）、正中間（2 隻）、第三排中間（2 隻）、左下（1 隻）、第二排右邊（1 隻）、右上（1 隻），一共 6 片。",
+          "9 片之中沒有青蛙的是 9 − 6 = 3 片（左上、第二排左邊、右下）。也可以這樣想：有 3 片各擠了 2 隻，多出 3 隻，就一定空出 3 片。"
+        ],
+        "zh-Hans": [
+          "一只一只看它跳到哪一片：第一排：左边的跳到中间、中间的往下跳到正中间、右边的跳到中间。",
+          "第二排：左边的往下跳到左下、中间的跳到右边、右边的往上跳到右上。第三排：左边的跳到中间、中间的往上跳到正中间、右边的跳到中间。",
+          "被跳到的荷叶：第一排中间（2 只）、正中间（2 只）、第三排中间（2 只）、左下（1 只）、第二排右边（1 只）、右上（1 只），一共 6 片。",
+          "9 片之中没有青蛙的是 9 − 6 = 3 片（左上、第二排左边、右下）。也可以这样想：有 3 片各挤了 2 只，多出 3 只，就一定空出 3 片。"
+        ],
+        "en": [
+          "Follow each frog. Row 1: the left one goes to the middle, the middle one goes down to the centre, the right one goes to the middle.",
+          "Row 2: the left one goes down to the bottom-left, the middle one goes right, the right one goes up to the top-right. Row 3: the left one goes to the middle, the middle one goes up to the centre, the right one goes to the middle.",
+          "Pads that receive frogs: middle of row 1 (2 frogs), centre (2), middle of row 3 (2), bottom-left (1), right of row 2 (1), top-right (1), which is 6 pads.",
+          "So 9 − 6 = 3 pads are empty (top-left, left of row 2, bottom-right). Another view: 3 pads each hold 2 frogs, 3 frogs too many, so exactly 3 pads must be empty."
+        ],
+        "ja": [
+          "1 ぴきずつ追います。1 列目：左は中へ、中は下のまん中へ、右は中へ。",
+          "2 列目：左は下の左下へ、中は右へ、右は上の右上へ。3 列目：左は中へ、中は上のまん中へ、右は中へ。",
+          "カエルが来る葉：1 列目の中（2 ひき）、まん中（2 ひき）、3 列目の中（2 ひき）、左下（1 ぴき）、2 列目の右（1 ぴき）、右上（1 ぴき）の 6 まい。",
+          "いない葉は 9 − 6 = 3 まい（左上、2 列目の左、右下）です。2 ひきずついる葉が 3 まいあって 3 びきあまるので、3 まい空くと考えてもよいです。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "composite_grid_shape",
+        "params": {
+          "rows": 3,
+          "cols": 3,
+          "filledCells": [],
+          "cellLabels": {
+            "0,0": "→",
+            "0,1": "↓",
+            "0,2": "←",
+            "1,0": "↓",
+            "1,1": "→",
+            "1,2": "↑",
+            "2,0": "→",
+            "2,1": "↑",
+            "2,2": "←"
+          }
+        }
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "3"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "方格／座標圖形題（本輪圖形題補題，題型參考袋鼠盃 3–4 年級圖形題風格）",
+        "notes": "設計依據：所有青蛙同時移動，被重複跳到的荷葉數決定空出幾片（多一隻擠就空一片）；已用程式模擬驗證。最接近的既有題：logic_grade3_foundation_061（每人換到鄰座是否可能）、logic_grade2_foundation_096（箭頭指向的循環）；本題是同時移動後計數空位，推理不同。圖只畫箭頭。",
+        "displayText": "改寫題（青蛙照箭頭跳後空出幾片葉）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "邏輯",
+        "topicCode": "logic",
+        "subtopic": "青蛙照箭頭跳後空出幾片葉",
+        "subtopicCode": "frogs_jump_by_arrows_empty_pads"
+      },
+      "reviewStatus": "ok"
     }
   ]
 }
