@@ -890,7 +890,7 @@
           "兩步相乘：10 × 8 = 80 個。",
           "常見錯誤有兩種：一是忘記限制剩下的位置不能是 A，算成 10 × 3³ = 270；二是漏掉第二步，只答 C(5, 2) = 10。",
           "另一種算法可以互相驗證：把字串看成 A、A 與另外三個字母的排列，也會得到相同結果。",
-          "驗算：程式窮舉全部 3⁵ = 243 個長度 5 的字串，逐一數 A 的出現次數，恰好出現 2 次的有 80 個 ✓。"
+          "驗算：用同樣的方法按 A 出現的次數 k = 0、1、2、3、4、5 分類，個數依序是 C(5, k) × 2^(5−k) = 32、80、80、40、10、1，加起來 32 + 80 + 80 + 40 + 10 + 1 = 243 = 3⁵ ✓，恰好是全部長度 5 字串的個數，而其中 k = 2 的正是 80 個。"
         ],
         "zh-Hans": [
           "把「排出一个合格字符串」拆成两个互相独立的步骤，再把方法数相乘。",
@@ -900,7 +900,7 @@
           "两步相乘：10 × 8 = 80 个。",
           "常见错误有两种：一是忘记限制剩下的位置不能是 A，算成 10 × 3³ = 270；二是漏掉第二步，只答 C(5, 2) = 10。",
           "另一种算法可以互相验证：把字符串看成 A、A 与另外三个字母的排列，也会得到相同结果。",
-          "验算：程序穷举全部 3⁵ = 243 个长度 5 的字符串，逐一数 A 的出现次数，恰好出现 2 次的有 80 个 ✓。"
+          "验算：用同样的方法按 A 出现的次数 k = 0、1、2、3、4、5 分类，个数依次是 C(5, k) × 2^(5−k) = 32、80、80、40、10、1，加起来 32 + 80 + 80 + 40 + 10 + 1 = 243 = 3⁵ ✓，恰好是全部长度 5 字符串的个数，而其中 k = 2 的正是 80 个。"
         ],
         "en": [
           "Split the construction of a valid string into two independent steps and multiply the counts.",
@@ -910,7 +910,7 @@
           "Multiplying the steps: 10 × 8 = 80 strings.",
           "Two common errors: forgetting that the remaining positions cannot be A, giving 10 × 3³ = 270; and omitting step two entirely, answering just C(5, 2) = 10.",
           "An alternative route treats the string as an arrangement of A, A and three other letters, giving the same result as a cross-check.",
-          "Check: enumerating all 3⁵ = 243 strings of length 5 and counting occurrences of A finds exactly 80 with A appearing twice."
+          "Check: classifying by the number k = 0, 1, 2, 3, 4, 5 of A's in the same way gives C(5, k) × 2^(5−k) = 32, 80, 80, 40, 10, 1 strings, and 32 + 80 + 80 + 40 + 10 + 1 = 243 = 3⁵, exactly the total number of length-5 strings; the k = 2 case is the 80."
         ],
         "ja": [
           "「条件を満たす文字列をつくる」作業を独立な 2 段階に分け、それぞれの場合の数を掛けます。",
@@ -920,7 +920,7 @@
           "掛け合わせて 10 × 8 = 80 個です。",
           "よくある誤りは 2 つ：残りの位置に A を許して 10 × 3³ = 270 とすること、第 2 段階を忘れて C(5, 2) = 10 と答えることです。",
           "別解として、文字列を A、A と他の 3 文字の並べ方とみても同じ結果が得られ、相互検証になります。",
-          "検算：長さ 5 の文字列 3⁵ = 243 個をすべて調べ A の出現回数を数えると、ちょうど 2 回のものが 80 個あります ✓。"
+          "検算：同じ方法で A の出現回数 k = 0、1、2、3、4、5 ごとに分けると、個数は C(5, k) × 2^(5−k) = 32、80、80、40、10、1 で、合計 32 + 80 + 80 + 40 + 10 + 1 = 243 = 3⁵ ✓ となり長さ 5 の文字列全体の数と一致します。そのうち k = 2 がちょうど 80 個です。"
         ]
       },
       "figure": {
@@ -984,7 +984,7 @@
           "但這樣扣過頭了：**同時漏掉兩個元素**的函數在上一步被扣了兩次，必須加回來一次。",
           "指定兩個元素都不被用到時，只剩 1 個元素可用，這樣的函數有 1⁴ = 1 個；選兩個元素的方法有 C(3, 2) = 3 種，所以加回 3 × 1 = 3 個。",
           "同時漏掉三個元素是不可能的（那就沒有函數值可用了），不必再處理。所以答案 = 81 − 48 + 3 = 36 個。",
-          "驗算：程式窮舉全部 3⁴ = 81 個函數，逐一檢查像集是否恰為 B 的全部 3 個元素，符合的有 36 個 ✓。"
+          "驗算：也可以直接數——4 個元素對到 3 個元素且每個都用到，必定是某一個元素被對到 2 次、另兩個各 1 次。先選哪個 B 元素被對到 2 次（3 種），再從 A 選出對到它的 2 個元素（C(4, 2) = 6 種），剩下 2 個 A 元素分給另外 2 個 B 元素（2 × 1 = 2 種），共 3 × 6 × 2 = 36 個 ✓。"
         ],
         "zh-Hans": [
           "「每一个元素都至少被对应到一次」是个「至少」型条件，直接数会很麻烦，改用**补集加容斥**。",
@@ -994,7 +994,7 @@
           "但这样扣过头了：**同时漏掉两个元素**的函数在上一步被扣了两次，必须加回来一次。",
           "指定两个元素都不被用到时，只剩 1 个元素可用，这样的函数有 1⁴ = 1 个；选两个元素的方法有 C(3, 2) = 3 种，所以加回 3 × 1 = 3 个。",
           "同时漏掉三个元素是不可能的（那就没有函数值可用了），不必再处理。所以答案 = 81 − 48 + 3 = 36 个。",
-          "验算：程序穷举全部 3⁴ = 81 个函数，逐一检查像集是否恰为 B 的全部 3 个元素，符合的有 36 个 ✓。"
+          "验算：也可以直接数——4 个元素对到 3 个元素且每个都用到，必定是某一个元素被对到 2 次、另两个各 1 次。先选哪个 B 元素被对到 2 次（3 种），再从 A 选出对到它的 2 个元素（C(4, 2) = 6 种），剩下 2 个 A 元素分给另外 2 个 B 元素（2 × 1 = 2 种），共 3 × 6 × 2 = 36 个 ✓。"
         ],
         "en": [
           "\"Every element is hit at least once\" is an \"at least\" condition, awkward to count directly, so use the complement together with inclusion-exclusion.",
@@ -1004,7 +1004,7 @@
           "But that oversubtracts: functions missing two elements at once were removed twice and must be added back once.",
           "With two specified elements unused only 1 target remains, giving 1⁴ = 1 function, and there are C(3, 2) = 3 choices of the pair, so add back 3 × 1 = 3.",
           "Missing all three elements is impossible, since no values would remain, so nothing further is needed. The answer is 81 − 48 + 3 = 36.",
-          "Check: enumerating all 3⁴ = 81 functions and testing whether the image is all of B gives exactly 36."
+          "Check: count directly — mapping 4 elements onto 3 with every one used means one element of B is hit twice and the other two once each. Choose which element of B is hit twice (3 ways), choose the 2 elements of A mapping to it (C(4, 2) = 6 ways), and send the remaining 2 elements of A to the other 2 elements of B (2 × 1 = 2 ways), giving 3 × 6 × 2 = 36."
         ],
         "ja": [
           "「どの要素も少なくとも 1 回は対応づけられる」は「少なくとも」型の条件で直接数えるのは面倒なので、**補集合と包除原理**を使います。",
@@ -1014,7 +1014,7 @@
           "しかしこれは引きすぎです。**2 要素が同時に漏れる**関数は 2 回引かれているので、1 回足し戻さなければなりません。",
           "2 要素が使われないとき残るのは 1 要素だけで、そのような関数は 1⁴ = 1 個。2 要素の選び方は C(3, 2) = 3 通りなので 3 × 1 = 3 個を足し戻します。",
           "3 要素すべてが漏れることは（対応先がなくなるので）ありえず、これ以上の処理は不要です。よって 81 − 48 + 3 = 36 個。",
-          "検算：3⁴ = 81 個の関数をすべて調べ、像が B 全体になるものを数えると、ちょうど 36 個です ✓。"
+          "検算：直接数えることもできます——4 個を 3 個へ全部使って対応させるには、B のある 1 個に 2 回、残り 2 個に 1 回ずつ対応させるしかありません。2 回対応する B の元を選び（3 通り）、それに対応する A の 2 元を選び（C(4, 2) = 6 通り）、残る A の 2 元を B の残り 2 元に割り当てる（2 × 1 = 2 通り）と、3 × 6 × 2 = 36 個 ✓。"
         ]
       },
       "figure": {
@@ -1077,8 +1077,7 @@
           "第二步：4 位男生坐定後，他們之間恰好形成 4 個空隙，而男女相間的要求正是每個空隙各坐一位女生。",
           "這 4 個空隙的位置已經被男生固定住了，彼此可以區分，所以 4 位女生排進去的方法數是 4! = 24 種。",
           "兩步相乘：6 × 24 = 144 種。",
-          "常見錯誤是女生也除以旋轉，算成 3! × 3! = 36——但男生坐定之後旋轉自由度已經用掉了，空隙不再是可旋轉的，女生必須用完整的 4!。",
-          "驗算：程式固定一位男生後窮舉其餘 3 位男生與 4 位女生的所有排法，並逐一檢查相鄰兩人性別不同，符合的恰好 144 種 ✓。"
+          "常見錯誤是女生也除以旋轉，算成 3! × 3! = 36——但男生坐定之後旋轉自由度已經用掉了，空隙不再是可旋轉的，女生必須用完整的 4!。"
         ],
         "zh-Hans": [
           "圆桌问题的第一个关键是处理旋转：因为旋转后视为相同，必须先**固定一个人的位置**当作参考点，才不会重复计算。",
@@ -1087,8 +1086,7 @@
           "第二步：4 位男生坐定后，他们之间恰好形成 4 个空隙，而男女相间的要求正是每个空隙各坐一位女生。",
           "这 4 个空隙的位置已经被男生固定住了，彼此可以区分，所以 4 位女生排进去的方法数是 4! = 24 种。",
           "两步相乘：6 × 24 = 144 种。",
-          "常见错误是女生也除以旋转，算成 3! × 3! = 36——但男生坐定之后旋转自由度已经用掉了，空隙不再是可旋转的，女生必须用完整的 4!。",
-          "验算：程序固定一位男生后穷举其余 3 位男生与 4 位女生的所有排法，并逐一检查相邻两人性别不同，符合的恰好 144 种 ✓。"
+          "常见错误是女生也除以旋转，算成 3! × 3! = 36——但男生坐定之后旋转自由度已经用掉了，空隙不再是可旋转的，女生必须用完整的 4!。"
         ],
         "en": [
           "The first key point in a round-table problem is handling rotations: since rotations count as the same, one person's position must be fixed as a reference to avoid overcounting.",
@@ -1097,8 +1095,7 @@
           "Step two: once the boys are seated they create exactly 4 gaps, and the alternating requirement means each gap holds exactly one girl.",
           "Those 4 gaps are now pinned down by the boys and are distinguishable from one another, so the girls can be placed in 4! = 24 ways.",
           "Multiplying the steps: 6 × 24 = 144.",
-          "A common error is to divide out rotations for the girls as well, giving 3! × 3! = 36 — but the rotational freedom was already used up when the boys sat down, so the gaps are no longer rotatable and the girls need the full 4!.",
-          "Check: fixing one boy and enumerating all arrangements of the remaining 3 boys and 4 girls, then testing that adjacent seats differ in gender, gives exactly 144."
+          "A common error is to divide out rotations for the girls as well, giving 3! × 3! = 36 — but the rotational freedom was already used up when the boys sat down, so the gaps are no longer rotatable and the girls need the full 4!."
         ],
         "ja": [
           "円卓問題でまず重要なのは回転の扱いです。回転して一致するものを同じとみなすので、重複を避けるために**1 人の位置を固定**して基準にします。",
@@ -1107,8 +1104,7 @@
           "第 2 段階：男子が座るとちょうど 4 つのすきまができ、男女交互という条件は各すきまに女子が 1 人ずつ入ることを意味します。",
           "これら 4 つのすきまは男子によって位置が確定し互いに区別できるので、女子の入れ方は 4! = 24 通りです。",
           "掛け合わせて 6 × 24 = 144 通り。",
-          "よくある誤りは女子についても回転で割って 3! × 3! = 36 とすることです。男子が座った時点で回転の自由度は使い切られており、すきまはもう回転できないので、女子には 4! をそのまま使います。",
-          "検算：男子 1 人を固定して残り 3 人の男子と 4 人の女子の並べ方をすべて列挙し、隣り合う 2 人の性別が異なるか確認すると、ちょうど 144 通りです ✓。"
+          "よくある誤りは女子についても回転で割って 3! × 3! = 36 とすることです。男子が座った時点で回転の自由度は使い切られており、すきまはもう回転できないので、女子には 4! をそのまま使います。"
         ]
       },
       "figure": {
@@ -1173,7 +1169,7 @@
           "重複組合的公式是 C(n + k − 1, k)，其中 n = 6 種點數、k = 3 顆骰子。",
           "代入得 C(6 + 3 − 1, 3) = C(8, 3) = (8 × 7 × 6) ÷ (3 × 2 × 1) = 56 種。",
           "對照一下常見誤答：若骰子可以區分則是 6³ = 216 種；若要求三個點數互不相同則是 C(6, 3) = 20 種，兩者都不是本題所問。",
-          "驗算：程式窮舉 6³ = 216 種有序結果，把每組點數排序後去除重複，剩下 56 種 ✓。"
+          "驗算：按點數相同的情形分類——三顆點數都相同有 6 種；恰有兩顆相同時，重複的點數有 6 種、另一顆有 5 種，共 6 × 5 = 30 種；三顆都不同有 C(6, 3) = 20 種。合計 6 + 30 + 20 = 56 種 ✓。"
         ],
         "zh-Hans": [
           "骰子无法区分，所以顺序不重要，重要的只有「哪些点数各出现几次」——这是一个可重复的组合问题，不是排列问题。",
@@ -1183,7 +1179,7 @@
           "重复组合的公式是 C(n + k − 1, k)，其中 n = 6 种点数、k = 3 颗骰子。",
           "代入得 C(6 + 3 − 1, 3) = C(8, 3) = (8 × 7 × 6) ÷ (3 × 2 × 1) = 56 种。",
           "对照一下常见误答：若骰子可以区分则是 6³ = 216 种；若要求三个点数互不相同则是 C(6, 3) = 20 种，两者都不是本题所问。",
-          "验算：程序穷举 6³ = 216 种有序结果，把每组点数排序后去除重复，剩下 56 种 ✓。"
+          "验算：按点数相同的情形分类——三颗点数都相同有 6 种；恰有两颗相同时，重复的点数有 6 种、另一颗有 5 种，共 6 × 5 = 30 种；三颗都不同有 C(6, 3) = 20 种。合计 6 + 30 + 20 = 56 种 ✓。"
         ],
         "en": [
           "The dice are indistinguishable, so order does not matter and only the multiset of values counts — this is a combination with repetition, not a permutation.",
@@ -1193,7 +1189,7 @@
           "The formula is C(n + k − 1, k) with n = 6 faces and k = 3 dice.",
           "Substituting: C(6 + 3 − 1, 3) = C(8, 3) = (8 × 7 × 6) ÷ (3 × 2 × 1) = 56.",
           "Compare the common wrong answers: distinguishable dice would give 6³ = 216, and requiring all values different would give C(6, 3) = 20; neither is what this problem asks.",
-          "Check: enumerating all 6³ = 216 ordered outcomes, sorting each and removing duplicates leaves exactly 56."
+          "Check by cases: all three equal gives 6; exactly two equal gives 6 choices for the repeated value and 5 for the other, 6 × 5 = 30; all different gives C(6, 3) = 20. In total 6 + 30 + 20 = 56."
         ],
         "ja": [
           "さいころは区別できないので順序は関係なく、重要なのは「どの目が何回出たか」だけです。これは重複を許す組合せであり、順列ではありません。",
@@ -1203,7 +1199,7 @@
           "重複組合せの公式は C(n + k − 1, k) で、n = 6 種類、k = 3 個です。",
           "代入すると C(6 + 3 − 1, 3) = C(8, 3) = (8 × 7 × 6) ÷ (3 × 2 × 1) = 56 通り。",
           "よくある誤答と比べます：さいころを区別すれば 6³ = 216 通り、3 つの目がすべて異なるとすれば C(6, 3) = 20 通りで、いずれも本問の答えではありません。",
-          "検算：6³ = 216 通りの順序つき結果をすべて列挙し、各組をソートして重複を除くと 56 通り残ります ✓。"
+          "検算：目の重なり方で分類します——3 個とも同じ目は 6 通り、ちょうど 2 個が同じなら重なる目が 6 通り・残り 1 個が 5 通りで 6 × 5 = 30 通り、3 個とも異なるのは C(6, 3) = 20 通り。合計 6 + 30 + 20 = 56 通り ✓。"
         ]
       },
       "figure": {
@@ -1268,8 +1264,7 @@
           "對固定的 d，a 的範圍是 1 ≤ a ≤ 20 − 2d，所以有 20 − 2d 種選擇。",
           "d 的範圍：需要 20 − 2d ≥ 1，也就是 d ≤ 9.5，因此 d 只能是 1 到 9。",
           "把各個 d 的個數列出來：d = 1 有 18 種、d = 2 有 16 種、d = 3 有 14 種，⋯、d = 9 有 2 種。",
-          "這是一個公差為 −2 的等差數列，相加得 18 + 16 + 14 + 12 + 10 + 8 + 6 + 4 + 2 = 90 種。",
-          "驗算：程式窮舉全部 C(20, 3) 個三元組並檢查是否成等差，符合的有 90 個 ✓，且依公差分類的個數恰為 18、16、14、12、10、8、6、4、2，與推導完全一致。"
+          "這是一個公差為 −2 的等差數列，相加得 18 + 16 + 14 + 12 + 10 + 8 + 6 + 4 + 2 = 90 種。"
         ],
         "zh-Hans": [
           "等差数列由「首项」和「公差」两个量决定，所以**依公差分类**来数是最有系统的做法。",
@@ -1278,8 +1273,7 @@
           "对固定的 d，a 的范围是 1 ≤ a ≤ 20 − 2d，所以有 20 − 2d 种选择。",
           "d 的范围：需要 20 − 2d ≥ 1，也就是 d ≤ 9.5，因此 d 只能是 1 到 9。",
           "把各个 d 的个数列出来：d = 1 有 18 种、d = 2 有 16 种、d = 3 有 14 种，⋯、d = 9 有 2 种。",
-          "这是一个公差为 −2 的等差数列，相加得 18 + 16 + 14 + 12 + 10 + 8 + 6 + 4 + 2 = 90 种。",
-          "验算：程序穷举全部 C(20, 3) 个三元组并检查是否成等差，符合的有 90 个 ✓，且依公差分类的个数恰为 18、16、14、12、10、8、6、4、2，与推导完全一致。"
+          "这是一个公差为 −2 的等差数列，相加得 18 + 16 + 14 + 12 + 10 + 8 + 6 + 4 + 2 = 90 种。"
         ],
         "en": [
           "An arithmetic progression is determined by its first term and its common difference, so classifying by the common difference is the systematic way to count.",
@@ -1288,8 +1282,7 @@
           "For a fixed d the range is 1 ≤ a ≤ 20 − 2d, giving 20 − 2d choices.",
           "For d itself: 20 − 2d ≥ 1 requires d ≤ 9.5, so d runs from 1 to 9.",
           "Listing the counts: d = 1 gives 18, d = 2 gives 16, d = 3 gives 14, and so on down to d = 9 giving 2.",
-          "These form an arithmetic sequence with difference −2, summing to 18 + 16 + 14 + 12 + 10 + 8 + 6 + 4 + 2 = 90.",
-          "Check: enumerating all C(20, 3) triples and testing for arithmetic progression finds 90, with the per-difference counts exactly 18, 16, 14, 12, 10, 8, 6, 4 and 2, matching the derivation."
+          "These form an arithmetic sequence with difference −2, summing to 18 + 16 + 14 + 12 + 10 + 8 + 6 + 4 + 2 = 90."
         ],
         "ja": [
           "等差数列は「初項」と「公差」で決まるので、**公差ごとに分類**して数えるのが最も体系的です。",
@@ -1298,8 +1291,7 @@
           "d を固定すると a の範囲は 1 ≤ a ≤ 20 − 2d なので、選び方は 20 − 2d 通りです。",
           "d の範囲は 20 − 2d ≥ 1 より d ≤ 9.5、したがって d は 1 から 9 までです。",
           "各 d の個数を並べると d = 1 で 18、d = 2 で 16、d = 3 で 14、⋯、d = 9 で 2 通りです。",
-          "これは公差 −2 の等差数列なので、和は 18 + 16 + 14 + 12 + 10 + 8 + 6 + 4 + 2 = 90 通り。",
-          "検算：C(20, 3) 通りの 3 数組をすべて調べて等差かどうか確認すると 90 個で ✓、公差別の個数も 18、16、14、12、10、8、6、4、2 とちょうど一致します。"
+          "これは公差 −2 の等差数列なので、和は 18 + 16 + 14 + 12 + 10 + 8 + 6 + 4 + 2 = 90 通り。"
         ]
       },
       "figure": {
@@ -1363,7 +1355,7 @@
           "x = 2 時，y 必須滿足 2 < y < z = 8 − y，也就是 y < 4，所以 y 只能是 3，得到 (2,3,5)。（y = 4 會使 z = 4，與 y < z 牴觸）",
           "x = 3 時，最小的可能是 3 + 4 + 5 = 12 > 10，已經超過總和，所以 x 不可能再大。",
           "因此全部解是 (1,2,7)、(1,3,6)、(1,4,5)、(2,3,5)，共 4 組。",
-          "驗算：程式窮舉全部滿足 0 < x < y < z 的三元組並檢查和是否為 10，找到的正是這 4 組 ✓。若把條件放寬成 x ≤ y ≤ z，答案會變成 8 組；若允許任意順序（只要求正整數）則是 C(9,2) = 36 組，可見「相異且遞增」這個條件影響很大。"
+          "附註：若把條件放寬成 x ≤ y ≤ z，答案會變成 8 組；若允許任意順序（只要求正整數）則是 C(9,2) = 36 組，可見「相異且遞增」這個條件影響很大。"
         ],
         "zh-Hans": [
           "严格递增的条件 x < y < z 表示三个数互不相同，而且顺序已经被固定，所以每一组解只会被算一次。",
@@ -1373,7 +1365,7 @@
           "x = 2 时，y 必须满足 2 < y < z = 8 − y，也就是 y < 4，所以 y 只能是 3，得到 (2,3,5)。（y = 4 会使 z = 4，与 y < z 抵触）",
           "x = 3 时，最小的可能是 3 + 4 + 5 = 12 > 10，已经超过总和，所以 x 不可能再大。",
           "因此全部解是 (1,2,7)、(1,3,6)、(1,4,5)、(2,3,5)，共 4 组。",
-          "验算：程序穷举全部满足 0 < x < y < z 的三元组并检查和是否为 10，找到的正是这 4 组 ✓。若把条件放宽成 x ≤ y ≤ z，答案会变成 8 组；若允许任意顺序（只要求正整数）则是 C(9,2) = 36 组，可见「相异且递增」这个条件影响很大。"
+          "附注：若把条件放宽成 x ≤ y ≤ z，答案会变成 8 组；若允许任意顺序（只要求正整数）则是 C(9,2) = 36 组，可见「相异且递增」这个条件影响很大。"
         ],
         "en": [
           "The strict inequalities x < y < z force the three numbers to be distinct and fix their order, so each solution is counted exactly once.",
@@ -1383,7 +1375,7 @@
           "For x = 2, y must satisfy 2 < y < z = 8 − y, that is y < 4, so y can only be 3, giving (2,3,5). Taking y = 4 would make z = 4, contradicting y < z.",
           "For x = 3, the smallest possible total is 3 + 4 + 5 = 12 > 10, already exceeding the sum, so x cannot grow further.",
           "The complete solution set is therefore (1,2,7), (1,3,6), (1,4,5) and (2,3,5) — 4 solutions.",
-          "Check: enumerating all triples with 0 < x < y < z and testing the sum finds exactly those 4. Relaxing to x ≤ y ≤ z would give 8, and allowing any order with only positivity required would give C(9,2) = 36, showing how much the distinct-and-increasing condition matters."
+          "Remark: relaxing to x ≤ y ≤ z would give 8, and allowing any order with only positivity required would give C(9,2) = 36, showing how much the distinct-and-increasing condition matters."
         ],
         "ja": [
           "厳密な不等式 x < y < z は 3 数が相異なり順序も固定されることを意味するので、各解はちょうど 1 回だけ数えられます。",
@@ -1393,7 +1385,7 @@
           "x = 2 のとき、y は 2 < y < z = 8 − y すなわち y < 4 を満たす必要があり、y は 3 のみで (2,3,5) が得られます（y = 4 だと z = 4 となり y < z に反します）。",
           "x = 3 のとき、最小でも 3 + 4 + 5 = 12 > 10 で総和を超えるため、x はこれ以上大きくできません。",
           "したがって解は (1,2,7)、(1,3,6)、(1,4,5)、(2,3,5) の 4 組です。",
-          "検算：0 < x < y < z を満たす 3 数組をすべて列挙して和を確認すると、ちょうどこの 4 組です ✓。条件を x ≤ y ≤ z に緩めると 8 組、順序を問わず正整数だけを要求すると C(9,2) = 36 組となり、「相異かつ増加」という条件の影響が大きいことが分かります。"
+          "補足：条件を x ≤ y ≤ z に緩めると 8 組、順序を問わず正整数だけを要求すると C(9,2) = 36 組となり、「相異かつ増加」という条件の影響が大きいことが分かります。"
         ]
       },
       "figure": {
@@ -1457,7 +1449,7 @@
           "三種情形**互斥且窮盡**（最後一步必是其中之一），所以 **f(n) = f(n − 1) + f(n − 2) + f(n − 3)**。",
           "起始值：f(1) = 1（只能走 1 階）；f(2) = 2（1+1 或 2）；f(3) = 4（1+1+1、1+2、2+1、3）。**f(3) 要小心，1+2 與 2+1 是不同的走法**。",
           "依序遞推：f(4) = 4 + 2 + 1 = 7；f(5) = 7 + 4 + 2 = 13；f(6) = 13 + 7 + 4 = 24。",
-          "驗算：程式用遞迴實際計算，得到數列 1、2、4、7、13、24 ✓，f(6) = 24。",
+          "驗算：直接列出走 4 階的走法來核對遞推——1+1+1+1、1+1+2、1+2+1、2+1+1、2+2、1+3、3+1，共 7 種，正是 f(4) = 7 ✓，所以遞推式可信，f(6) = 24。",
           "附註：**每次可走的步幅種類數決定了遞迴要往回看幾項**。若只能走 1 或 2 階，遞迴就是 f(n) = f(n−1) + f(n−2)（費波那契），走 6 階只有 13 種；多了「3 階」這個選項，走法數就從 13 增加到 24。"
         ],
         "zh-Hans": [
@@ -1468,7 +1460,7 @@
           "三种情形**互斥且穷尽**（最后一步必是其中之一），所以 **f(n) = f(n − 1) + f(n − 2) + f(n − 3)**。",
           "起始值：f(1) = 1（只能走 1 阶）；f(2) = 2（1+1 或 2）；f(3) = 4（1+1+1、1+2、2+1、3）。**f(3) 要小心，1+2 与 2+1 是不同的走法**。",
           "依序递推：f(4) = 4 + 2 + 1 = 7；f(5) = 7 + 4 + 2 = 13；f(6) = 13 + 7 + 4 = 24。",
-          "验算：程序用递归实际计算，得到数列 1、2、4、7、13、24 ✓，f(6) = 24。",
+          "验算：直接列出走 4 阶的走法来核对递推——1+1+1+1、1+1+2、1+2+1、2+1+1、2+2、1+3、3+1，共 7 种，正是 f(4) = 7 ✓，所以递推式可信，f(6) = 24。",
           "附注：**每次可走的步幅种类数决定了递归要往回看几项**。若只能走 1 或 2 阶，递归就是 f(n) = f(n−1) + f(n−2)（斐波那契），走 6 阶只有 13 种；多了「3 阶」这个选项，走法数就从 13 增加到 24。"
         ],
         "en": [
@@ -1479,7 +1471,7 @@
           "The three cases are mutually exclusive and exhaustive, since the last stride must be one of them, so f(n) = f(n − 1) + f(n − 2) + f(n − 3).",
           "Initial values: f(1) = 1, only a single step; f(2) = 2, either 1+1 or 2; and f(3) = 4, namely 1+1+1, 1+2, 2+1 and 3. Note that 1+2 and 2+1 are different routes.",
           "Iterating: f(4) = 4 + 2 + 1 = 7, f(5) = 7 + 4 + 2 = 13, and f(6) = 13 + 7 + 4 = 24.",
-          "Check: computing the recursion gives the sequence 1, 2, 4, 7, 13, 24, so f(6) = 24.",
+          "Check: listing the ways to climb 4 steps directly — 1+1+1+1, 1+1+2, 1+2+1, 2+1+1, 2+2, 1+3, 3+1 — gives 7, exactly f(4) = 7, so the recursion holds up and f(6) = 24.",
           "Remark: the number of available stride sizes determines how far back the recursion reaches. With only 1 and 2 available, the recursion is f(n) = f(n−1) + f(n−2), the Fibonacci rule, and 6 steps admit only 13 routes; adding the 3-step option raises the count from 13 to 24."
         ],
         "ja": [
@@ -1490,7 +1482,7 @@
           "3 つの場合は**排反かつ網羅的**（最後の 1 歩は必ずいずれか）なので、**f(n) = f(n − 1) + f(n − 2) + f(n − 3)**。",
           "初期値：f(1) = 1（1 段のみ）、f(2) = 2（1+1 か 2）、f(3) = 4（1+1+1、1+2、2+1、3）。**f(3) は注意が必要で、1+2 と 2+1 は別の上り方**です。",
           "順に計算します：f(4) = 4 + 2 + 1 = 7、f(5) = 7 + 4 + 2 = 13、f(6) = 13 + 7 + 4 = 24。",
-          "検算：漸化式を実際に計算すると数列 1、2、4、7、13、24 ✓ が得られ、f(6) = 24 です。",
+          "検算：4 段の上り方を直接書き出して漸化式を確かめると、1+1+1+1、1+1+2、1+2+1、2+1+1、2+2、1+3、3+1 の 7 通りで、ちょうど f(4) = 7 ✓。漸化式は正しく、f(6) = 24 です。",
           "補足：**使える歩幅の種類数が、漸化式で何項さかのぼるかを決めます**。1 段と 2 段だけなら f(n) = f(n−1) + f(n−2)（フィボナッチ）で 6 段は 13 通りですが、「3 段」が加わると 13 から 24 に増えます。"
         ]
       },
@@ -1555,7 +1547,6 @@
           "再算「四位全不相同」的個數。第一位有 9 種選擇；第二位不能與第一位相同，剩 8 種；第三位不能與前兩位相同，剩 7 種；第四位剩 6 種。",
           "所以全不相同的有 9 × 8 × 7 × 6 = 3024 個。",
           "兩者相減：至少有兩位相同的個數 = 6561 − 3024 = 3537 個。",
-          "驗算：程式列出 1 到 9 的四位組合全部 6561 種，逐一檢查是否有重複數字，符合的恰好是 3537 個 ✓。",
           "**注意題目排除了數字 0**，所以不必另外處理「首位不能為 0」的問題——若數字改成 0 到 9，全部的個數會變成 9 × 10³ = 9000（首位只有 9 種），而不是 10⁴。"
         ],
         "zh-Hans": [
@@ -1566,7 +1557,6 @@
           "再算「四位全不相同」的个数。第一位有 9 种选择；第二位不能与第一位相同，剩 8 种；第三位不能与前两位相同，剩 7 种；第四位剩 6 种。",
           "所以全不相同的有 9 × 8 × 7 × 6 = 3024 个。",
           "两者相减：至少有两位相同的个数 = 6561 − 3024 = 3537 个。",
-          "验算：程序列出 1 到 9 的四位组合全部 6561 种，逐一检查是否有重复数字，符合的恰好是 3537 个 ✓。",
           "**注意题目排除了数字 0**，所以不必另外处理「首位不能为 0」的问题——若数字改成 0 到 9，全部的个数会变成 9 × 10³ = 9000（首位只有 9 种），而不是 10⁴。"
         ],
         "en": [
@@ -1577,7 +1567,6 @@
           "Now count those with all digits distinct. The first position has 9 choices, the second cannot repeat the first leaving 8, the third cannot match either of the first two leaving 7, and the fourth leaves 6.",
           "So the all-distinct count is 9 × 8 × 7 × 6 = 3024.",
           "Subtracting: the numbers with at least two digits alike total 6561 − 3024 = 3537.",
-          "Check: enumerating all 6561 four-digit strings over 1 to 9 and testing for a repeated digit gives exactly 3537.",
           "Note that the problem excludes the digit 0, so no separate leading-zero adjustment is needed. Allowing digits 0 to 9 would make the total 9 × 10³ = 9000, since the leading position would have only 9 choices, rather than 10⁴."
         ],
         "ja": [
@@ -1588,7 +1577,6 @@
           "次に「4 桁すべて異なる」個数を数えます。1 桁目は 9 通り、2 桁目は 1 桁目と同じにできず 8 通り、3 桁目は前 2 桁と異なり 7 通り、4 桁目は 6 通りです。",
           "したがってすべて異なるのは 9 × 8 × 7 × 6 = 3024 個。",
           "引き算します：少なくとも 2 桁が同じものは 6561 − 3024 = 3537 個。",
-          "検算：1〜9 からなる 4 桁の並び 6561 通りをすべて列挙して重複する数字があるか調べると、ちょうど 3537 個 ✓。",
           "**問題は数字 0 を除いている**ので、「先頭が 0 になれない」という調整は不要です。0〜9 を許すと全体は 10⁴ ではなく 9 × 10³ = 9000（先頭が 9 通り）になります。"
         ]
       },
@@ -1654,7 +1642,6 @@
           "例如順序 x → y → z 對應路線 (0,0,0) → (1,0,0) → (1,1,0) → (1,1,1)；順序 y → x → z 則是另一條不同的路線。",
           "所以路線數 = 三個方向的排列數 = 3 × 2 × 1 = 6 條。",
           "全部列出來就是：xyz、xzy、yxz、yzx、zxy、zyx，共 6 種順序 ✓。",
-          "驗算：程式列出 x、y、z 三個方向的所有排列，共 6 種，每一種對應一條不重複的最短路線 ✓。",
           "附註：**這個做法可以直接推廣**——在四維的「超立方體」上，從一個頂點走到相對頂點的最短路線有 4! = 24 條；而若立方體的三個方向長度不同（變成長方體），路線數仍然是 6，因為路線數只取決於方向的順序，與邊長無關。"
         ],
         "zh-Hans": [
@@ -1665,7 +1652,6 @@
           "例如顺序 x → y → z 对应路线 (0,0,0) → (1,0,0) → (1,1,0) → (1,1,1)；顺序 y → x → z 则是另一条不同的路线。",
           "所以路线数 = 三个方向的排列数 = 3 × 2 × 1 = 6 条。",
           "全部列出来就是：xyz、xzy、yxz、yzx、zxy、zyx，共 6 种顺序 ✓。",
-          "验算：程序列出 x、y、z 三个方向的所有排列，共 6 种，每一种对应一条不重复的最短路线 ✓。",
           "附注：**这个做法可以直接推广**——在四维的「超立方体」上，从一个顶点走到相对顶点的最短路线有 4! = 24 条；而若立方体的三个方向长度不同（变成长方体），路线数仍然是 6，因为路线数只取决于方向的顺序，与边长无关。"
         ],
         "en": [
@@ -1676,7 +1662,6 @@
           "For instance the order x, y, z gives (0,0,0) → (1,0,0) → (1,1,0) → (1,1,1), while y, x, z gives a different route.",
           "So the number of routes equals the number of orderings of three directions: 3 × 2 × 1 = 6.",
           "Listing them all: xyz, xzy, yxz, yzx, zxy and zyx, six orderings.",
-          "Check: enumerating all permutations of x, y and z gives 6, each corresponding to a distinct shortest route.",
           "Remark: the method generalises directly — on a four-dimensional hypercube there are 4! = 24 shortest routes to the opposite vertex; and if the cube's three dimensions had different lengths, becoming a box, the count would still be 6, since it depends only on the order of directions and not on the edge lengths."
         ],
         "ja": [
@@ -1687,7 +1672,6 @@
           "たとえば順序 x → y → z は (0,0,0) → (1,0,0) → (1,1,0) → (1,1,1)、順序 y → x → z は別の経路になります。",
           "したがって経路数 = 3 方向の並べ方の数 = 3 × 2 × 1 = 6 通り。",
           "すべて挙げると xyz、xzy、yxz、yzx、zxy、zyx の 6 通りです ✓。",
-          "検算：x、y、z の順列をすべて列挙すると 6 通りで、それぞれが重複しない最短経路に対応します ✓。",
           "補足：**この方法はそのまま一般化できます**——4 次元の超立方体では対角の頂点への最短経路は 4! = 24 通りです。また 3 方向の長さが異なる直方体でも経路数は 6 のままです。経路数は方向の順序だけで決まり、辺の長さには依らないからです。"
         ]
       },
@@ -1752,7 +1736,6 @@
           "**第二步：在每個選中的家庭裡挑一個人**。每個家庭有夫、妻兩人，各有 2 種選擇。",
           "三個家庭彼此獨立，所以這一步有 2 × 2 × 2 = 2³ = 8 種。",
           "兩個步驟依序完成，所以總數 = 10 × 8 = 80 種。",
-          "驗算：程式把 10 個人標成 (家庭編號, 性別)，列出從 10 人取 3 人的全部 120 種選法，逐一檢查三人的家庭編號是否互異，符合的恰好是 80 種 ✓。",
           "**也可以用補集核對**：全部選法 120 種，扣掉「含有至少一對夫妻」的。含夫妻的情形是：先選 1 對夫妻（5 種），第三人從剩下 8 人中任選（8 種），共 5 × 8 = 40 種——**因為只選 3 人，不可能同時含兩對夫妻，所以沒有重複計算**。120 − 40 = 80 ✓，兩種方法一致。"
         ],
         "zh-Hans": [
@@ -1763,7 +1746,6 @@
           "**第二步：在每个选中的家庭里挑一个人**。每个家庭有夫、妻两人，各有 2 种选择。",
           "三个家庭彼此独立，所以这一步有 2 × 2 × 2 = 2³ = 8 种。",
           "两个步骤依序完成，所以总数 = 10 × 8 = 80 种。",
-          "验算：程序把 10 个人标成 (家庭编号, 性别)，列出从 10 人取 3 人的全部 120 种选法，逐一检查三人的家庭编号是否互异，符合的恰好是 80 种 ✓。",
           "**也可以用补集核对**：全部选法 120 种，扣掉「含有至少一对夫妻」的。含夫妻的情形是：先选 1 对夫妻（5 种），第三人从剩下 8 人中任选（8 种），共 5 × 8 = 40 种——**因为只选 3 人，不可能同时含两对夫妻，所以没有重复计算**。120 − 40 = 80 ✓，两种方法一致。"
         ],
         "en": [
@@ -1774,7 +1756,6 @@
           "Second step: pick one person from each chosen household. Each household offers the husband or the wife, 2 choices.",
           "The three households are independent, so this step gives 2 × 2 × 2 = 2³ = 8 ways.",
           "The two steps happen in sequence, so the total is 10 × 8 = 80.",
-          "Check: labelling the ten people by household and role, enumerating all 120 selections of 3 from 10 and testing whether the three household labels are distinct gives exactly 80.",
           "The complement confirms it: from 120 total selections, subtract those containing at least one couple. Such a selection picks a couple, 5 ways, and a third person from the remaining 8, giving 5 × 8 = 40 — and since only 3 people are chosen, two couples cannot both appear, so nothing is double-counted. Then 120 − 40 = 80, agreeing with the first method."
         ],
         "ja": [
@@ -1785,7 +1766,6 @@
           "**第 2 段階：選んだ各世帯から 1 人を選ぶ**。各世帯には夫と妻がいるので 2 通りずつです。",
           "3 世帯は互いに独立なので、この段階は 2 × 2 × 2 = 2³ = 8 通り。",
           "2 段階は順に行われるので、総数 = 10 × 8 = 80 通り。",
-          "検算：10 人を（世帯番号, 役割）で表し、10 人から 3 人を選ぶ全 120 通りを列挙して世帯番号が互いに異なるか調べると、ちょうど 80 通り ✓。",
           "**補集合でも確認できます**：全 120 通りから「夫婦を少なくとも 1 組含む」ものを引きます。夫婦を 1 組選び（5 通り）、3 人目を残り 8 人から選ぶ（8 通り）ので 5 × 8 = 40 通り——**3 人しか選ばないので 2 組の夫婦を同時に含むことはなく、重複計算は生じません**。120 − 40 = 80 ✓ で 2 つの方法が一致します。"
         ]
       },
@@ -1852,7 +1832,7 @@
           "方法數 = (4 × 3) ÷ (2 × 1) = 6 種。",
           "3 的指數分配完全同型，也是 6 種。",
           "兩者獨立，所以總數 = 6 × 6 = 36 組。",
-          "驗算：程式對 1 ≤ a, b, c ≤ 36 逐一檢查 abc = 36，符合的恰好是 36 組 ✓。**注意這裡答案 36 與被分解的數 36 相同純屬巧合**——若改成 abc = 12 = 2² × 3，則答案是 6 × 3 = 18 組，與 12 不同。附註：若改問不計順序的三元組，就要再處理重複，例如 (1,4,9) 的 6 種排列算一組，而 (1,6,6) 只有 3 種排列，不能單純除以 6。"
+          "**注意這裡答案 36 與被分解的數 36 相同純屬巧合**——若改成 abc = 12 = 2² × 3，則答案是 6 × 3 = 18 組，與 12 不同。附註：若改問不計順序的三元組，就要再處理重複，例如 (1,4,9) 的 6 種排列算一組，而 (1,6,6) 只有 3 種排列，不能單純除以 6。"
         ],
         "zh-Hans": [
           "**先做质因数分解**：36 = 4 × 9 = 2² × 3²。",
@@ -1863,7 +1843,7 @@
           "方法数 = (4 × 3) ÷ (2 × 1) = 6 种。",
           "3 的指数分配完全同型，也是 6 种。",
           "两者独立，所以总数 = 6 × 6 = 36 组。",
-          "验算：程序对 1 ≤ a, b, c ≤ 36 逐一检查 abc = 36，符合的恰好是 36 组 ✓。**注意这里答案 36 与被分解的数 36 相同纯属巧合**——若改成 abc = 12 = 2² × 3，则答案是 6 × 3 = 18 组，与 12 不同。附注：若改问不计顺序的三元组，就要再处理重复，例如 (1,4,9) 的 6 种排列算一组，而 (1,6,6) 只有 3 种排列，不能单纯除以 6。"
+          "**注意这里答案 36 与被分解的数 36 相同纯属巧合**——若改成 abc = 12 = 2² × 3，则答案是 6 × 3 = 18 组，与 12 不同。附注：若改问不计顺序的三元组，就要再处理重复，例如 (1,4,9) 的 6 种排列算一组，而 (1,6,6) 只有 3 种排列，不能单纯除以 6。"
         ],
         "en": [
           "Factorise first: 36 = 4 × 9 = 2² × 3².",
@@ -1874,7 +1854,7 @@
           "The count is (4 × 3) ÷ (2 × 1) = 6.",
           "The exponents of 3 follow the identical pattern, also giving 6.",
           "Being independent, the total is 6 × 6 = 36 triples.",
-          "Check: testing all 1 ≤ a, b, c ≤ 36 against abc = 36 gives exactly 36 triples. Note that the answer coinciding with 36 is pure accident — for abc = 12 = 2² × 3 the answer would be 6 × 3 = 18, unlike 12. Remark: counting unordered triples would require handling repetitions, since (1,4,9) has 6 arrangements while (1,6,6) has only 3, so simply dividing by 6 would be wrong."
+          "Note that the answer coinciding with 36 is pure accident — for abc = 12 = 2² × 3 the answer would be 6 × 3 = 18, unlike 12. Remark: counting unordered triples would require handling repetitions, since (1,4,9) has 6 arrangements while (1,6,6) has only 3, so simply dividing by 6 would be wrong."
         ],
         "ja": [
           "**まず素因数分解します**：36 = 4 × 9 = 2² × 3²。",
@@ -1885,7 +1865,7 @@
           "方法数 = (4 × 3) ÷ (2 × 1) = 6 通り。",
           "3 の指数の配分もまったく同型で 6 通りです。",
           "独立なので総数 = 6 × 6 = 36 組。",
-          "検算：1 ≤ a, b, c ≤ 36 について abc = 36 を調べると、ちょうど 36 組 ✓。**答えが 36 と一致するのは偶然**です——abc = 12 = 2² × 3 なら答えは 6 × 3 = 18 で 12 とは異なります。補足：順序を区別しない三つ組を問うなら重複の処理が必要で、(1,4,9) は 6 通りの並べ方をもつ一方 (1,6,6) は 3 通りしかなく、単純に 6 で割ることはできません。"
+          "**答えが 36 と一致するのは偶然**です——abc = 12 = 2² × 3 なら答えは 6 × 3 = 18 で 12 とは異なります。補足：順序を区別しない三つ組を問うなら重複の処理が必要で、(1,4,9) は 6 通りの並べ方をもつ一方 (1,6,6) は 3 通りしかなく、単純に 6 で割ることはできません。"
         ]
       },
       "figure": {
@@ -1948,7 +1928,6 @@
           "R₁ 可以配 4 行中的任一行，有 4 種選擇；R₂ 不能與 R₁ 同行，剩 3 種；R₃ 不能與前兩者同行，剩 2 種。",
           "所以配行的方法有 4 × 3 × 2 = 24 種。**注意這裡是有順序的（行要分配給特定的列），所以不必除以任何數**。",
           "兩個步驟相乘：總數 = 4 × 24 = 96 種。",
-          "驗算：程式列出所有「選 3 列 × 為它們指派 3 個相異行」的組合，總數正是 96 ✓。",
           "**一個常見的錯誤是把行與列都用組合數算**，寫成 C(4,3) × C(4,3) = 4 × 4 = 16——那只算出「用哪三列、用哪三行」，卻沒有決定**哪一列配哪一行**，漏掉了 3! = 6 倍的配對方式，16 × 6 = 96 ✓ 才是正確的。",
           "附註：**若改成選 4 個格子**（用滿所有行與列），第一步只有 1 種選法，第二步是 4! = 24 種，總數就是 24——這正是「4 × 4 棋盤上放 4 個互不攻擊的城堡」的答案。"
         ],
@@ -1959,7 +1938,6 @@
           "R₁ 可以配 4 个列中的任一个，有 4 种选择；R₂ 不能与 R₁ 同列，剩 3 种；R₃ 不能与前两者同列，剩 2 种。",
           "所以配列的方法有 4 × 3 × 2 = 24 种。**注意这里是有顺序的（列要分配给特定的行），所以不必除以任何数**。",
           "两个步骤相乘：总数 = 4 × 24 = 96 种。",
-          "验算：程序列出所有「选 3 行 × 为它们指派 3 个相异列」的组合，总数正是 96 ✓。",
           "**一个常见的错误是把行与列都用组合数算**，写成 C(4,3) × C(4,3) = 4 × 4 = 16——那只算出「用哪三行、用哪三列」，却没有决定**哪一行配哪一列**，漏掉了 3! = 6 倍的配对方式，16 × 6 = 96 ✓ 才是正确的。",
           "附注：**若改成选 4 个格子**（用满所有行与列），第一步只有 1 种选法，第二步是 4! = 24 种，总数就是 24——这正是「4 × 4 棋盘上放 4 个互不攻击的城堡」的答案。"
         ],
@@ -1970,7 +1948,6 @@
           "R₁ may take any of the 4 columns, giving 4 choices; R₂ cannot repeat R₁'s column, leaving 3; and R₃ leaves 2.",
           "So the assignments number 4 × 3 × 2 = 24. Note that this step is ordered, since columns are assigned to specific rows, so no division is needed.",
           "Multiplying the steps: the total is 4 × 24 = 96.",
-          "Check: enumerating every choice of 3 rows together with an assignment of 3 distinct columns gives exactly 96.",
           "A common error uses combinations for both, writing C(4,3) × C(4,3) = 4 × 4 = 16 — but that only settles which rows and which columns, without deciding which row pairs with which column, losing a factor of 3! = 6. Indeed 16 × 6 = 96 gives the correct value.",
           "Remark: choosing 4 cells instead, using every row and column, leaves only 1 way for the first step and 4! = 24 for the second, totalling 24 — precisely the count of non-attacking rooks on a 4 × 4 board."
         ],
@@ -1981,7 +1958,6 @@
           "R₁ は 4 列のどれでもよく 4 通り、R₂ は R₁ と同じ列にできず 3 通り、R₃ は前 2 つと異なり 2 通りです。",
           "したがって割り当ては 4 × 3 × 2 = 24 通り。**ここは順序つき（特定の行に列を割り当てる）なので何かで割る必要はありません**。",
           "2 段階を掛け合わせて、総数 = 4 × 24 = 96 通り。",
-          "検算：「3 行を選ぶ × 相異なる 3 列を割り当てる」組み合わせをすべて列挙すると、ちょうど 96 ✓。",
           "**よくある誤りは行も列も組合せで数えて** C(4,3) × C(4,3) = 4 × 4 = 16 とすることです——それは「どの 3 行・どの 3 列を使うか」を決めただけで、**どの行にどの列を対応させるか**を決めておらず、3! = 6 倍を落としています。16 × 6 = 96 ✓ が正しい値です。",
           "補足：**4 マスを選ぶ場合**（全行・全列を使う）は第 1 段階が 1 通り、第 2 段階が 4! = 24 通りで総数 24——これはまさに「4 × 4 盤に互いに攻撃しない 4 つのルークを置く」場合の数です。"
         ]
@@ -2048,7 +2024,7 @@
           "後半段：從 (2, 2) 到 (5, 4) 需向右 3 步、向上 2 步共 5 步，路線數 = (5 × 4) ÷ (2 × 1) = 10 條。",
           "**前後兩段可以自由搭配**（前半段怎麼走不影響後半段的選擇），所以經過 (2, 2) 的路線有 6 × 10 = 60 條。",
           "相減得答案：126 − 60 = 66 條。",
-          "驗算：程式列出全部 126 條路線並逐一檢查是否經過 (2, 2)，不經過的恰好是 66 條 ✓。**注意「經過該點」的路線數是用乘法而非加法**——若誤算成 6 + 10 = 16，答案會變成 110，差距很大。附註：若禁止經過的點恰好是起點或終點，那麼所有路線都會被排除，答案為 0；而若該點根本不在任何路線上（例如 (6, 1)，因為 x 座標已超過 5），則沒有路線被排除，答案仍是 126。"
+          "**注意「經過該點」的路線數是用乘法而非加法**——若誤算成 6 + 10 = 16，答案會變成 110，差距很大。附註：若禁止經過的點恰好是起點或終點，那麼所有路線都會被排除，答案為 0；而若該點根本不在任何路線上（例如 (6, 1)，因為 x 座標已超過 5），則沒有路線被排除，答案仍是 126。"
         ],
         "zh-Hans": [
           "**带有「不可以经过」的限制时，用补集比正面计数容易得多**：先算全部的路线，再扣掉「经过该点」的路线。",
@@ -2059,7 +2035,7 @@
           "后半段：从 (2, 2) 到 (5, 4) 需向右 3 步、向上 2 步共 5 步，路线数 = (5 × 4) ÷ (2 × 1) = 10 条。",
           "**前后两段可以自由搭配**（前半段怎么走不影响后半段的选择），所以经过 (2, 2) 的路线有 6 × 10 = 60 条。",
           "相减得答案：126 − 60 = 66 条。",
-          "验算：程序列出全部 126 条路线并逐一检查是否经过 (2, 2)，不经过的恰好是 66 条 ✓。**注意「经过该点」的路线数是用乘法而非加法**——若误算成 6 + 10 = 16，答案会变成 110，差距很大。附注：若禁止经过的点恰好是起点或终点，那么所有路线都会被排除，答案为 0；而若该点根本不在任何路线上（例如 (6, 1)，因为 x 坐标已超过 5），则没有路线被排除，答案仍是 126。"
+          "**注意「经过该点」的路线数是用乘法而非加法**——若误算成 6 + 10 = 16，答案会变成 110，差距很大。附注：若禁止经过的点恰好是起点或终点，那么所有路线都会被排除，答案为 0；而若该点根本不在任何路线上（例如 (6, 1)，因为 x 坐标已超过 5），则没有路线被排除，答案仍是 126。"
         ],
         "en": [
           "With a forbidden point, the complement is far easier than counting directly: count all paths, then subtract those passing through the point.",
@@ -2070,7 +2046,7 @@
           "Second leg: from (2, 2) to (5, 4) needs 3 right and 2 up, 5 steps, giving (5 × 4) ÷ (2 × 1) = 10 paths.",
           "The two legs combine freely, since the first does not constrain the second, so paths through (2, 2) number 6 × 10 = 60.",
           "Subtracting: 126 − 60 = 66.",
-          "Check: enumerating all 126 paths and testing each for passing through (2, 2) leaves exactly 66. Note that the legs multiply rather than add — computing 6 + 10 = 16 would give 110, far off. Remark: if the forbidden point were the start or the end, every path would be excluded and the answer would be 0; and if it lay on no path at all, such as (6, 1) whose x-coordinate exceeds 5, nothing would be excluded and the answer would remain 126."
+          "Note that the legs multiply rather than add — computing 6 + 10 = 16 would give 110, far off. Remark: if the forbidden point were the start or the end, every path would be excluded and the answer would be 0; and if it lay on no path at all, such as (6, 1) whose x-coordinate exceeds 5, nothing would be excluded and the answer would remain 126."
         ],
         "ja": [
           "**「通ってはいけない」制約があるときは、正面から数えるより補集合が簡単です**：全経路を数え、その点を通る経路を引きます。",
@@ -2081,7 +2057,7 @@
           "後半：(2, 2) から (5, 4) へは右 3 歩・上 2 歩の計 5 歩で、経路数 = (5 × 4) ÷ (2 × 1) = 10 通り。",
           "**前半と後半は自由に組み合わせられる**（前半の進み方は後半の選択に影響しない）ので、(2, 2) を通る経路は 6 × 10 = 60 通り。",
           "引き算して 126 − 60 = 66 通り。",
-          "検算：全 126 経路を列挙して (2, 2) を通るか調べると、通らないのはちょうど 66 通り ✓。**2 区間は足すのではなく掛ける**点に注意します——6 + 10 = 16 と誤ると答えは 110 となり大きくずれます。補足：禁止する点が始点や終点なら全経路が除かれ答えは 0、どの経路上にもない点（たとえば x 座標が 5 を超える (6, 1)）なら何も除かれず答えは 126 のままです。"
+          "**2 区間は足すのではなく掛ける**点に注意します——6 + 10 = 16 と誤ると答えは 110 となり大きくずれます。補足：禁止する点が始点や終点なら全経路が除かれ答えは 0、どの経路上にもない点（たとえば x 座標が 5 を超える (6, 1)）なら何も除かれず答えは 126 のままです。"
         ]
       },
       "figure": {
@@ -2145,7 +2121,6 @@
           "但其中有兩種不合格：**全部 5 個球都放進第一個盒子**（第二個盒子空了），以及**全部放進第二個盒子**。這兩種會使空盒變成兩個，不符合「恰好一個空」。",
           "所以第二步合格的放法有 32 − 2 = 30 種。",
           "兩步相乘：總數 = 3 × 30 = 90 種。",
-          "驗算：程式列出 5 個球各自選 3 個盒子之一的全部 3⁵ = 243 種放法，逐一數出被使用的盒子個數，恰好用到 2 個盒子（即恰有一個空盒）的正是 90 種 ✓。",
           "**要注意第二步為什麼要扣掉 2 種**：若不扣，算出來的 3 × 32 = 96 會把「兩個盒子都空、球全在一個盒子」的情形重複算到——那種情形其實有 2 個空盒，而且在第一步的 3 種選擇中會被算到 2 次。附註：作為對照，**三個盒子都不空**的放法有 3⁵ − 3 × 2⁵ + 3 = 243 − 96 + 3 = 150 種，而**恰有兩個空盒**的只有 3 種（球全在某一盒），三者相加 150 + 90 + 3 = 243 ✓ 正好是全部。"
         ],
         "zh-Hans": [
@@ -2156,7 +2131,6 @@
           "但其中有两种不合格：**全部 5 个球都放进第一个盒子**（第二个盒子空了），以及**全部放进第二个盒子**。这两种会使空盒变成两个，不符合「恰好一个空」。",
           "所以第二步合格的放法有 32 − 2 = 30 种。",
           "两步相乘：总数 = 3 × 30 = 90 种。",
-          "验算：程序列出 5 个球各自选 3 个盒子之一的全部 3⁵ = 243 种放法，逐一数出被使用的盒子个数，恰好用到 2 个盒子（即恰有一个空盒）的正是 90 种 ✓。",
           "**要注意第二步为什么要扣掉 2 种**：若不扣，算出来的 3 × 32 = 96 会把「两个盒子都空、球全在一个盒子」的情形重复算到——那种情形其实有 2 个空盒，而且在第一步的 3 种选择中会被算到 2 次。附注：作为对照，**三个盒子都不空**的放法有 3⁵ − 3 × 2⁵ + 3 = 243 − 96 + 3 = 150 种，而**恰有两个空盒**的只有 3 种（球全在某一盒），三者相加 150 + 90 + 3 = 243 ✓ 正好是全部。"
         ],
         "en": [
@@ -2167,7 +2141,6 @@
           "Two of those fail: all 5 balls in the first box, leaving the second empty, and all 5 in the second. Either would create a second empty box, violating the requirement of exactly one.",
           "So the second step admits 32 − 2 = 30 arrangements.",
           "Multiplying: the total is 3 × 30 = 90.",
-          "Check: enumerating all 3⁵ = 243 assignments of 5 balls to 3 boxes and counting how many boxes are used, exactly 90 use precisely 2 boxes, that is have exactly one empty box.",
           "Note why the 2 must be subtracted: without it, 3 × 32 = 96 would double-count the cases where all balls sit in one box, since those have two empty boxes and would be reached from 2 of the 3 first-step choices. Remark: for comparison, arrangements with no empty box number 3⁵ − 3 × 2⁵ + 3 = 243 − 96 + 3 = 150, and those with exactly two empty boxes number just 3, and 150 + 90 + 3 = 243 accounts for everything."
         ],
         "ja": [
@@ -2178,7 +2151,6 @@
           "そのうち 2 通りは不適です：**5 個すべてを 1 つ目の箱に入れる**（2 つ目が空）と、**すべてを 2 つ目に入れる**。どちらも空の箱が 2 つになり「ちょうど 1 つ」に反します。",
           "したがって第 2 段階で適合するのは 32 − 2 = 30 通りです。",
           "2 段階を掛けて、総数 = 3 × 30 = 90 通り。",
-          "検算：5 個のボールが 3 箱のいずれかを選ぶ全 3⁵ = 243 通りを列挙し、使われた箱の個数を数えると、ちょうど 2 箱（すなわち空の箱が 1 つ）なのは 90 通り ✓。",
           "**第 2 段階で 2 を引く理由**：引かないと 3 × 32 = 96 となり、「すべてのボールが 1 箱に入る」場合を重複して数えます。その場合は空の箱が 2 つあり、第 1 段階の 3 通りのうち 2 通りから到達されるからです。補足：対照として、**空の箱がない**入れ方は 3⁵ − 3 × 2⁵ + 3 = 243 − 96 + 3 = 150 通り、**空が 2 つ**は 3 通りで、150 + 90 + 3 = 243 ✓ と全体に一致します。"
         ]
       },
@@ -2243,7 +2215,6 @@
           "**情形一：沒有任何配對**，三個元素全部不動。這樣的 f 只有 1 個，就是恆等函數 f(1)=1、f(2)=2、f(3)=3。",
           "**情形二：恰有一組配對**，剩下的那一個元素不動。配對的選法就是從 3 個元素中選 2 個，有 (3 × 2) ÷ (2 × 1) = 3 種：{1,2}、{1,3}、{2,3}。",
           "兩種情形互斥，相加得 1 + 3 = 4 個。",
-          "驗算：程式列出從 S 到 S 的全部 3³ = 27 個函數，逐一檢查是否滿足 f(f(x)) = x，符合的恰好是 4 個 ✓，分別是恆等函數與三個「交換兩個元素、固定一個」的函數。",
           "附註：**這類函數稱為對合**。若 S 有 4 個元素，情形會多一種——可以有兩組配對，個數變成 1（全不動）+ 6（一組配對）+ 3（兩組配對）= 10 個。"
         ],
         "zh-Hans": [
@@ -2254,7 +2225,6 @@
           "**情形一：没有任何配对**，三个元素全部不动。这样的 f 只有 1 个，就是恒等函数 f(1)=1、f(2)=2、f(3)=3。",
           "**情形二：恰有一组配对**，剩下的那一个元素不动。配对的选法就是从 3 个元素中选 2 个，有 (3 × 2) ÷ (2 × 1) = 3 种：{1,2}、{1,3}、{2,3}。",
           "两种情形互斥，相加得 1 + 3 = 4 个。",
-          "验算：程序列出从 S 到 S 的全部 3³ = 27 个函数，逐一检查是否满足 f(f(x)) = x，符合的恰好是 4 个 ✓，分别是恒等函数与三个「交换两个元素、固定一个」的函数。",
           "附注：**这类函数称为对合**。若 S 有 4 个元素，情形会多一种——可以有两组配对，个数变成 1（全不动）+ 6（一组配对）+ 3（两组配对）= 10 个。"
         ],
         "en": [
@@ -2265,7 +2235,6 @@
           "Case one, no pairs at all, with all three elements fixed. There is exactly 1 such f, the identity with f(1)=1, f(2)=2 and f(3)=3.",
           "Case two, exactly one pair, with the remaining element fixed. Choosing the pair means choosing 2 of the 3 elements, giving (3 × 2) ÷ (2 × 1) = 3 ways: {1,2}, {1,3} and {2,3}.",
           "The cases are exclusive, so the total is 1 + 3 = 4.",
-          "Check: enumerating all 3³ = 27 functions from S to S and testing f(f(x)) = x leaves exactly 4 — the identity and the three functions swapping two elements while fixing the third.",
           "Remark: such functions are called involutions. With four elements a further case appears, two disjoint pairs, giving 1 fixed-only + 6 one-pair + 3 two-pair = 10."
         ],
         "ja": [
@@ -2276,7 +2245,6 @@
           "**場合 1：ペアなし**で 3 要素すべてが不動。この f は 1 つだけ、恒等関数 f(1)=1、f(2)=2、f(3)=3 です。",
           "**場合 2：ペアがちょうど 1 組**で、残る 1 要素は不動。ペアの選び方は 3 要素から 2 つ選ぶ (3 × 2) ÷ (2 × 1) = 3 通り：{1,2}、{1,3}、{2,3}。",
           "2 つの場合は排反なので、足して 1 + 3 = 4 個。",
-          "検算：S から S への全 3³ = 27 個の関数を列挙し f(f(x)) = x を調べると、該当するのはちょうど 4 個 ✓——恒等関数と、2 要素を入れ替えて 1 つを固定する 3 個です。",
           "補足：**この種の関数を対合といいます**。S が 4 要素なら場合が 1 つ増え、2 組のペアが可能になり、1（全不動）+ 6（1 組）+ 3（2 組）= 10 個になります。"
         ]
       },
@@ -2341,7 +2309,6 @@
           "從 4 個數中選 2 個的方法有 (4 × 3) ÷ (2 × 1) = 6 種。**這個數目與 m 是多少無關**。",
           "接著看 m 可以取哪些值。需要 m ≥ 1 且 m + 5 ≤ 10，所以 1 ≤ m ≤ 5，共 5 種選擇。",
           "兩者相乘：總數 = 5 × 6 = 30 種。",
-          "驗算：程式列出從 1 到 10 取 4 個的全部 210 種組合，逐一計算最大與最小之差，恰好等於 5 的正是 30 種 ✓。",
           "**注意「恰好相差 5」與「相差不超過 5」不同**：後者還要加上差為 3 與 4 的情形（差小於 3 時中間不夠 2 個數，不可能）。附註：也可以檢查一下極端情形——m = 5 時最大是 10，中間可選的是 6、7、8、9 ✓ 剛好在範圍內；若 m = 6 則最大要 11，已超出 1 到 10 的範圍，所以 m 確實最多到 5。"
         ],
         "zh-Hans": [
@@ -2352,7 +2319,6 @@
           "从 4 个数中选 2 个的方法有 (4 × 3) ÷ (2 × 1) = 6 种。**这个数目与 m 是多少无关**。",
           "接着看 m 可以取哪些值。需要 m ≥ 1 且 m + 5 ≤ 10，所以 1 ≤ m ≤ 5，共 5 种选择。",
           "两者相乘：总数 = 5 × 6 = 30 种。",
-          "验算：程序列出从 1 到 10 取 4 个的全部 210 种组合，逐一计算最大与最小之差，恰好等于 5 的正是 30 种 ✓。",
           "**注意「恰好相差 5」与「相差不超过 5」不同**：后者还要加上差为 3 与 4 的情形（差小于 3 时中间不够 2 个数，不可能）。附注：也可以检查一下极端情形——m = 5 时最大是 10，中间可选的是 6、7、8、9 ✓ 刚好在范围内；若 m = 6 则最大要 11，已超出 1 到 10 的范围，所以 m 确实最多到 5。"
         ],
         "en": [
@@ -2363,7 +2329,6 @@
           "Choosing 2 from 4 gives (4 × 3) ÷ (2 × 1) = 6 ways, a count that does not depend on m.",
           "Now find the possible values of m. It needs m ≥ 1 and m + 5 ≤ 10, so 1 ≤ m ≤ 5, giving 5 choices.",
           "Multiplying: the total is 5 × 6 = 30.",
-          "Check: enumerating all 210 four-element subsets of 1 to 10 and computing the range gives exactly 30 with range 5.",
           "Note that a range of exactly 5 differs from a range of at most 5, which would also include ranges of 3 and 4; a range below 3 is impossible, since there would not be 2 numbers strictly between. Remark: check the extremes — at m = 5 the largest is 10 with candidates 6, 7, 8 and 9 all in range, while m = 6 would need a largest of 11, outside 1 to 10, so m indeed stops at 5."
         ],
         "ja": [
@@ -2374,7 +2339,6 @@
           "4 個から 2 個を選ぶ方法は (4 × 3) ÷ (2 × 1) = 6 通りで、**この数は m の値に依りません**。",
           "次に m のとりうる値を見ます。m ≥ 1 かつ m + 5 ≤ 10 が必要なので 1 ≤ m ≤ 5 の 5 通りです。",
           "掛け合わせて、総数 = 5 × 6 = 30 通り。",
-          "検算：1 から 10 の 4 要素の組合せ 210 通りをすべて列挙し最大と最小の差を計算すると、差が 5 なのはちょうど 30 通り ✓。",
           "**「差がちょうど 5」と「差が 5 以下」は異なります**：後者には差 3 と 4 の場合も加わります（差が 3 未満では間に 2 個入らず不可能）。補足：端も確認します——m = 5 なら最大は 10 で候補は 6、7、8、9 ✓ とちょうど範囲内、m = 6 なら最大が 11 で 1〜10 を超えるため、m は確かに 5 までです。"
         ]
       },
@@ -2439,7 +2403,6 @@
           "甲已佔一個名額，乙被排除在外，所以剩下的 3 個名額必須從**其餘 8 人**（10 人扣掉甲與乙）中選出。",
           "選法有 (8 × 7 × 6) ÷ (3 × 2 × 1) = 336 ÷ 6 = 56 種。",
           "相減得答案：210 − 56 = 154 種。",
-          "驗算：程式列出從 10 人取 4 人的全部 210 種選法，逐一檢查「甲在其中」是否蘊涵「乙也在其中」，符合的恰好是 154 種 ✓。",
           "**也可以正面分三種情形核對**：甲乙都入選（再從 8 人選 2 人，C(8,2) = 28 種）、只有乙入選（甲排除，再從 8 人選 3 人，C(8,3) = 56 種）、兩人都不入選（從 8 人選 4 人，C(8,4) = 70 種）。相加 28 + 56 + 70 = 154 ✓，與補集法一致。",
           "**注意這個條件不是對稱的**：它並不要求「乙入選則甲也入選」。若條件改成「甲乙必須同時入選或同時不入選」，答案會是 28 + 70 = 98 種，比 154 少。"
         ],
@@ -2451,7 +2414,6 @@
           "甲已占一个名额，乙被排除在外，所以剩下的 3 个名额必须从**其余 8 人**（10 人扣掉甲与乙）中选出。",
           "选法有 (8 × 7 × 6) ÷ (3 × 2 × 1) = 336 ÷ 6 = 56 种。",
           "相减得答案：210 − 56 = 154 种。",
-          "验算：程序列出从 10 人取 4 人的全部 210 种选法，逐一检查「甲在其中」是否蕴涵「乙也在其中」，符合的恰好是 154 种 ✓。",
           "**也可以正面分三种情形核对**：甲乙都入选（再从 8 人选 2 人，C(8,2) = 28 种）、只有乙入选（甲排除，再从 8 人选 3 人，C(8,3) = 56 种）、两人都不入选（从 8 人选 4 人，C(8,4) = 70 种）。相加 28 + 56 + 70 = 154 ✓，与补集法一致。",
           "**注意这个条件不是对称的**：它并不要求「乙入选则甲也入选」。若条件改成「甲乙必须同时入选或同时不入选」，答案会是 28 + 70 = 98 种，比 154 少。"
         ],
@@ -2463,7 +2425,6 @@
           "A occupies one place and B is excluded, so the remaining 3 places must come from the other 8 candidates, the 10 less A and B.",
           "That gives (8 × 7 × 6) ÷ (3 × 2 × 1) = 336 ÷ 6 = 56.",
           "Subtracting: 210 − 56 = 154.",
-          "Check: enumerating all 210 selections of 4 from 10 and testing whether A's presence implies B's leaves exactly 154.",
           "A direct three-case count confirms it: both chosen, with 2 more from 8 giving C(8,2) = 28; only B chosen, excluding A and taking 3 from 8 giving C(8,3) = 56; and neither chosen, taking 4 from 8 giving C(8,4) = 70. Adding gives 28 + 56 + 70 = 154, matching the complement.",
           "Note the condition is not symmetric: it does not require B's presence to force A's. Changing it to require both or neither would give 28 + 70 = 98, fewer than 154."
         ],
@@ -2475,7 +2436,6 @@
           "甲が 1 枠を占め乙は除外されるので、残る 3 枠は**他の 8 人**（10 人から甲と乙を除く）から選ぶことになります。",
           "選び方は (8 × 7 × 6) ÷ (3 × 2 × 1) = 336 ÷ 6 = 56 通り。",
           "引き算して 210 − 56 = 154 通り。",
-          "検算：10 人から 4 人を選ぶ全 210 通りを列挙し、「甲がいるなら乙もいる」を満たすか調べると、ちょうど 154 通り ✓。",
           "**正面から 3 つの場合で確認**もできます：両方入る（残り 8 人から 2 人、C(8,2) = 28 通り）、乙だけ入る（甲を除き 8 人から 3 人、C(8,3) = 56 通り）、どちらも入らない（8 人から 4 人、C(8,4) = 70 通り）。足すと 28 + 56 + 70 = 154 ✓ で補集合の結果と一致します。",
           "**この条件は対称ではない**点に注意します：「乙が入るなら甲も入る」ことは要求していません。「両方入るか両方入らないか」に変えると答えは 28 + 70 = 98 通りとなり 154 より少なくなります。"
         ]
@@ -2542,7 +2502,7 @@
           "下邊界必須在水平線 1 或更下面，也就是可以選 1、2、3、4，共 **4 種**選擇。",
           "右邊界必須在鉛直線 1 或更右邊，也就是可以選 1、2、3、4，同樣是 **4 種**。",
           "兩者獨立，所以總數 = 4 × 4 = 16 個。",
-          "驗算：程式列出 4 × 4 方格表中的全部長方形（由選兩條水平線與兩條鉛直線決定，共 C(5,2)² = 100 個），逐一檢查是否包含左上角那一格，符合的恰好是 16 個 ✓。**對照之下，全部 100 個長方形中只有 16 個含左上角**，因為左上角是最偏的位置；若換成中央附近的格子，可選的邊界會多得多。"
+          "**對照之下，全部 C(5,2)² = 100 個長方形中只有 16 個含左上角**，因為左上角是最偏的位置；若換成中央附近的格子，可選的邊界會多得多。"
         ],
         "zh-Hans": [
           "**一个长方形完全由「上下两条边界线」与「左右两条边界线」决定**。4 × 4 的方格表有 5 条水平线与 5 条铅直线，由上而下、由左而右编号为 0 到 4。",
@@ -2553,7 +2513,7 @@
           "下边界必须在水平线 1 或更下面，也就是可以选 1、2、3、4，共 **4 种**选择。",
           "右边界必须在铅直线 1 或更右边，也就是可以选 1、2、3、4，同样是 **4 种**。",
           "两者独立，所以总数 = 4 × 4 = 16 个。",
-          "验算：程序列出 4 × 4 方格表中的全部长方形（由选两条水平线与两条铅直线决定，共 C(5,2)² = 100 个），逐一检查是否包含左上角那一格，符合的恰好是 16 个 ✓。**对照之下，全部 100 个长方形中只有 16 个含左上角**，因为左上角是最偏的位置；若换成中央附近的格子，可选的边界会多得多。"
+          "**对照之下，全部 C(5,2)² = 100 个长方形中只有 16 个含左上角**，因为左上角是最偏的位置；若换成中央附近的格子，可选的边界会多得多。"
         ],
         "en": [
           "A rectangle is determined entirely by its two horizontal boundary lines and its two vertical ones. A 4 × 4 grid has 5 horizontal and 5 vertical lines, numbered 0 to 4 from top to bottom and left to right.",
@@ -2564,7 +2524,7 @@
           "The bottom boundary must be at horizontal line 1 or below, so it may be 1, 2, 3 or 4 — four choices.",
           "The right boundary must be at vertical line 1 or beyond, again 1, 2, 3 or 4 — four choices.",
           "Being independent, the total is 4 × 4 = 16.",
-          "Check: enumerating all rectangles in the grid, determined by choosing two horizontal and two vertical lines for C(5,2)² = 100 in total, and testing each for containing the top-left cell gives exactly 16. By comparison, only 16 of the 100 rectangles contain that cell, since the top-left corner is the most extreme position; a cell nearer the centre would admit far more boundary choices."
+          "By comparison, only 16 of the C(5,2)² = 100 rectangles in the grid contain that cell, since the top-left corner is the most extreme position; a cell nearer the centre would admit far more boundary choices."
         ],
         "ja": [
           "**長方形は「上下 2 本の境界線」と「左右 2 本の境界線」で完全に決まります**。4 × 4 のマス目には水平線が 5 本、鉛直線が 5 本あり、上から・左から 0〜4 と番号をつけます。",
@@ -2575,7 +2535,7 @@
           "下の境界は水平線 1 以下でなければならず、1、2、3、4 の **4 通り**です。",
           "右の境界は鉛直線 1 以右でなければならず、同じく 1、2、3、4 の **4 通り**です。",
           "互いに独立なので、総数 = 4 × 4 = 16 個。",
-          "検算：マス目のすべての長方形（水平線 2 本と鉛直線 2 本の選び方で C(5,2)² = 100 個）を列挙し、左上のマスを含むか調べると、ちょうど 16 個 ✓。**全 100 個のうち左上を含むのは 16 個だけ**で、左上が最も端の位置だからです。中央付近のマスなら選べる境界はずっと多くなります。"
+          "**全 C(5,2)² = 100 個の長方形のうち左上を含むのは 16 個だけ**で、左上が最も端の位置だからです。中央付近のマスなら選べる境界はずっと多くなります。"
         ]
       },
       "figure": {
@@ -2641,7 +2601,6 @@
           "**第二類：兩半點數相同的骨牌**（俗稱對子）。點數可以是 0 到 6 中的任一個，所以有 7 張：0-0、1-1、2-2、3-3、4-4、5-5、6-6。",
           "**這一類不能被除以 2**——因為「3 和 3」轉過來還是「3 和 3」，本來就只有一種寫法，沒有重複可扣。",
           "兩類互斥且涵蓋全部，所以總張數 = 21 + 7 = 28 張。",
-          "驗算：程式列出所有滿足 a ≤ b 的數對 (a, b)（其中 a、b 都在 0 到 6 之間），總數正是 28 ✓。",
           "**常見的錯誤是直接把 49 除以 2**，得到 24.5——這個非整數本身就顯示做法有問題。原因正是對子沒有配對的另一半，不能一併除。正確的關係是 (49 + 7) ÷ 2 = 28 ✓：把 7 張對子「補算一次」湊成偶數再對半分。",
           "附註：**若骨牌的點數上限改成 9**（0 到 9 共 10 種），則張數會是 (10 × 9) ÷ 2 + 10 = 45 + 10 = 55 張。"
         ],
@@ -2653,7 +2612,6 @@
           "**第二类：两半点数相同的骨牌**（俗称对子）。点数可以是 0 到 6 中的任一个，所以有 7 张：0-0、1-1、2-2、3-3、4-4、5-5、6-6。",
           "**这一类不能被除以 2**——因为「3 和 3」转过来还是「3 和 3」，本来就只有一种写法，没有重复可扣。",
           "两类互斥且涵盖全部，所以总张数 = 21 + 7 = 28 张。",
-          "验算：程序列出所有满足 a ≤ b 的数对 (a, b)（其中 a、b 都在 0 到 6 之间），总数正是 28 ✓。",
           "**常见的错误是直接把 49 除以 2**，得到 24.5——这个非整数本身就显示做法有问题。原因正是对子没有配对的另一半，不能一并除。正确的关系是 (49 + 7) ÷ 2 = 28 ✓：把 7 张对子「补算一次」凑成偶数再对半分。",
           "附注：**若骨牌的点数上限改成 9**（0 到 9 共 10 种），则张数会是 (10 × 9) ÷ 2 + 10 = 45 + 10 = 55 张。"
         ],
@@ -2665,7 +2623,6 @@
           "Second kind: doubles, whose halves match. The value may be any of 0 to 6, giving 7 tiles: 0-0, 1-1, 2-2, 3-3, 4-4, 5-5 and 6-6.",
           "These must not be divided by 2, since 3-with-3 rotated is still 3-with-3 and was never written two ways, so there is no duplication to remove.",
           "The two kinds are exclusive and exhaustive, so the set has 21 + 7 = 28 tiles.",
-          "Check: enumerating all pairs (a, b) with a ≤ b and both between 0 and 6 gives exactly 28.",
           "A common error divides 49 by 2, giving 24.5 — a non-integer that itself signals the mistake. The cause is precisely that doubles have no partner to pair with. The correct relation is (49 + 7) ÷ 2 = 28, counting the 7 doubles once more to make the total even before halving.",
           "Remark: raising the highest value to 9, giving 10 values, would yield (10 × 9) ÷ 2 + 10 = 45 + 10 = 55 tiles."
         ],
@@ -2677,7 +2634,6 @@
           "**第 2 種：両半の目が同じ牌**（ゾロ目）。目は 0〜6 のいずれでもよいので 7 枚：0-0、1-1、2-2、3-3、4-4、5-5、6-6。",
           "**こちらは 2 で割ってはいけません**——「3 と 3」は回しても「3 と 3」で、もともと 1 通りの書き方しかなく、除くべき重複がないからです。",
           "2 種類は排反で全体を尽くすので、総数 = 21 + 7 = 28 枚。",
-          "検算：a ≤ b を満たす組 (a, b)（a、b は 0〜6）をすべて列挙すると、ちょうど 28 ✓。",
           "**よくある誤りは 49 をそのまま 2 で割る**ことで、24.5 という非整数になります。この非整数自体が誤りの合図です。原因はゾロ目に相方がないことで、正しい関係は (49 + 7) ÷ 2 = 28 ✓——ゾロ目 7 枚をもう一度数えて偶数にしてから半分にします。",
           "補足：**目の上限を 9 にする**（0〜9 の 10 種類）と、枚数は (10 × 9) ÷ 2 + 10 = 45 + 10 = 55 枚になります。"
         ]
@@ -2743,7 +2699,6 @@
           "第 2 列不能與第 1 列同行，所以剩 3 種選擇。",
           "第 3 列不能與前兩列同行，剩 2 種；第 4 列只剩最後 1 行，有 1 種。",
           "所以總放法 = 4 × 3 × 2 × 1 = 24 種。",
-          "驗算：程式列出 (1, 2, 3, 4) 的所有排列（每個排列代表「第 i 列的城堡放在第幾行」），共 24 種 ✓，每一種都對應一個合法的放置方式。",
           "**這個對應是一一的**：每一種合法放置都給出一個排列，而每一個排列也都給出一種合法放置，沒有重複也沒有遺漏。所以答案就是 4 個元素的排列數 4! = 24。",
           "附註：**同樣的推理對 n × n 棋盤放 n 個城堡都成立，答案是 n!**。但若改成放 4 個**皇后**（可以額外沿對角線攻擊），限制就嚴格得多——4 × 4 棋盤上互不攻擊的四皇后只有 2 種放法，遠少於 24。"
         ],
@@ -2755,7 +2710,6 @@
           "第 2 行不能与第 1 行同列，所以剩 3 种选择。",
           "第 3 行不能与前两行同列，剩 2 种；第 4 行只剩最后 1 个列，有 1 种。",
           "所以总放法 = 4 × 3 × 2 × 1 = 24 种。",
-          "验算：程序列出 (1, 2, 3, 4) 的所有排列（每个排列代表「第 i 行的城堡放在第几列」），共 24 种 ✓，每一种都对应一个合法的放置方式。",
           "**这个对应是一一的**：每一种合法放置都给出一个排列，而每一个排列也都给出一种合法放置，没有重复也没有遗漏。所以答案就是 4 个元素的排列数 4! = 24。",
           "附注：**同样的推理对 n × n 棋盘放 n 个城堡都成立，答案是 n!**。但若改成放 4 个**皇后**（可以额外沿对角线攻击），限制就严格得多——4 × 4 棋盘上互不攻击的四皇后只有 2 种放法，远少于 24。"
         ],
@@ -2767,7 +2721,6 @@
           "Row 2 cannot repeat row 1's column, leaving 3 choices.",
           "Row 3 avoids the first two columns, leaving 2; and row 4 has only the last column, giving 1.",
           "So the total is 4 × 3 × 2 × 1 = 24.",
-          "Check: enumerating all permutations of (1, 2, 3, 4), each recording which column holds the rook in row i, gives 24, each corresponding to a valid placement.",
           "The correspondence is one to one: every valid placement yields a permutation and every permutation yields a valid placement, with no repeats or omissions. So the answer is the number of permutations of 4 elements, 4! = 24.",
           "Remark: the same reasoning gives n! for n rooks on an n × n board. Replacing them with queens, which also attack diagonally, tightens the constraint sharply — only 2 placements of four non-attacking queens exist on a 4 × 4 board, far fewer than 24."
         ],
@@ -2779,7 +2732,6 @@
           "2 行目は 1 行目と同じ列にできないので 3 通り。",
           "3 行目は前 2 行と異なり 2 通り、4 行目は残る 1 列だけで 1 通りです。",
           "したがって総数 = 4 × 3 × 2 × 1 = 24 通り。",
-          "検算：(1, 2, 3, 4) の順列（各順列が「i 行目のルークが何列目か」を表す）をすべて列挙すると 24 通り ✓ で、それぞれが有効な配置に対応します。",
           "**この対応は 1 対 1** です：どの有効な配置も 1 つの順列を与え、どの順列も 1 つの有効な配置を与え、重複も漏れもありません。したがって答えは 4 要素の順列の数 4! = 24 です。",
           "補足：**同じ推論は n × n 盤に n 個のルークでも成り立ち、答えは n!** です。しかし 4 つの**クイーン**（斜めにも攻撃）に変えると制約がはるかに厳しくなり、4 × 4 盤で互いに攻撃しない 4 クイーンの置き方は 2 通りだけ、24 よりずっと少なくなります。"
         ]
@@ -2845,7 +2797,6 @@
           "**但要小心：有沒有「互換後仍是自己」的情形？**若兩個盒子的內容互換後完全相同，那它就只被算了一次。",
           "這裡有 4 個球，若要互換後不變，兩個盒子必須裝著相同的球——但球互不相同，這不可能發生（除非兩盒都空，而球必須放進去）。",
           "**所以 16 種情形全部都是成對重複的，沒有例外**，直接除以 2 即可：16 ÷ 2 = 8 種。",
-          "驗算：程式列出 4 個球的所有子集，把每個子集與它的補集視為同一種分法後去重，得到的相異分法數正是 8 ✓。",
           "把 8 種實際列出來會更清楚：{全部 4 球在一起, 另一盒空}、{1 球 | 其餘 3 球} 有 4 種（看哪一球被單獨放）、{2 球 | 2 球} 有 3 種（(4 選 2) ÷ 2 = 6 ÷ 2 = 3）。合計 1 + 4 + 3 = 8 ✓，與除法的結果一致。",
           "附註：**若規定兩個盒子都不能空**，就要扣掉「全部在同一盒」那 1 種，答案變成 7 種。"
         ],
@@ -2856,7 +2807,6 @@
           "**但要小心：有没有「互换后仍是自己」的情形？**若两个盒子的内容互换后完全相同，那它就只被算了一次。",
           "这里有 4 个球，若要互换后不变，两个盒子必须装着相同的球——但球互不相同，这不可能发生（除非两盒都空，而球必须放进去）。",
           "**所以 16 种情形全部都是成对重复的，没有例外**，直接除以 2 即可：16 ÷ 2 = 8 种。",
-          "验算：程序列出 4 个球的所有子集，把每个子集与它的补集视为同一种分法后去重，得到的相异分法数正是 8 ✓。",
           "把 8 种实际列出来会更清楚：{全部 4 球在一起, 另一盒空}、{1 球 | 其余 3 球} 有 4 种（看哪一球被单独放）、{2 球 | 2 球} 有 3 种（(4 选 2) ÷ 2 = 6 ÷ 2 = 3）。合计 1 + 4 + 3 = 8 ✓，与除法的结果一致。",
           "附注：**若规定两个盒子都不能空**，就要扣掉「全部在同一盒」那 1 种，答案变成 7 种。"
         ],
@@ -2867,7 +2817,6 @@
           "But take care: is there any case that maps to itself under the swap? Such a case would have been counted only once.",
           "With 4 distinct balls, invariance under the swap would require both boxes to hold the same balls, which is impossible unless both were empty — and the balls must be placed.",
           "So all 16 cases pair up with no exceptions, and dividing by 2 gives 16 ÷ 2 = 8.",
-          "Check: listing all subsets of the 4 balls and identifying each with its complement leaves exactly 8 distinct arrangements.",
           "Listing the 8 makes it concrete: all four together with one box empty; one ball alone against the other three, in 4 ways depending on which ball is alone; and two against two, in 3 ways since choosing 2 of 4 gives 6 and halving gives 3. Altogether 1 + 4 + 3 = 8, matching the division.",
           "Remark: requiring both boxes to be non-empty would remove the single all-in-one case, giving 7."
         ],
@@ -2878,7 +2827,6 @@
           "**ただし注意：入れ替えても自分自身になる場合はあるか。**そのような場合は 1 回しか数えられていません。",
           "ここではボールが 4 個で互いに異なるので、入れ替えて不変であるには両箱が同じボールを持つ必要があり、これは（両方空でない限り）不可能です。ボールは必ず入れるので該当しません。",
           "**したがって 16 通りはすべて例外なく 2 つずつ対をなし**、そのまま 2 で割って 16 ÷ 2 = 8 通りです。",
-          "検算：4 個のボールのすべての部分集合を列挙し、各部分集合をその補集合と同一視して重複を除くと、異なる分け方はちょうど 8 通り ✓。",
           "8 通りを実際に挙げるとより明確です：{4 個すべて一緒、もう一方は空}、{1 個 | 残り 3 個} が 4 通り（どのボールを単独にするか）、{2 個 | 2 個} が 3 通り（4 個から 2 個を選ぶ 6 通り ÷ 2）。合計 1 + 4 + 3 = 8 ✓ で割り算の結果と一致します。",
           "補足：**両方の箱を空にできない**という条件なら「すべて同じ箱」の 1 通りを除き、答えは 7 通りになります。"
         ]
@@ -4924,7 +4872,7 @@
           "甲–丙（2）：修，甲與丙相通。乙–丙（3）：修，甲、乙、丙相通。甲–乙（4）：跳過，甲與乙已經相通，修了只是多花 4 萬元。",
           "丙–丁（5）：修，甲、乙、丙、丁相通。乙–丁（6）：跳過，兩端已相通。丁–戊（7）：修，戊終於接上，五個村莊全部相通，可以收工。丙–戊（8）不必再修。",
           "選中的是甲–丙、乙–丙、丙–丁、丁–戊四條，總造價 2 + 3 + 5 + 7 = 17 萬元。",
-          "驗算：用程式列出全部 2⁷ = 128 種修路方案，逐一判斷五個村莊是否連通，其中連通方案的最低總造價正是 17 萬元 ✓。另外注意戊只有丁–戊（7）與丙–戊（8）兩條路可以接上，所以任何合格方案都得付出至少 7 萬元，這就是答案高於「最便宜四條」的原因。"
+          "**為什麼 17 萬元已經是最少？**任何合格方案都必須有一條路碰到戊。若用丁–戊（7），其餘的路還要把「甲」「乙」「丙」「丁戊」這四塊接成一片，至少要 3 條；甲–丙（2）、乙–丙（3）、甲–乙（4）三條都在甲乙丙之間繞成一圈、碰不到丁戊，不可能三條全選，所以這 3 條最便宜是 2 + 3 + 5 = 10，合計至少 7 + 10 = 17。若不用丁–戊，就只能用丙–戊（8），其餘至少 3 條要把甲、乙、丙、丁接起來，最便宜同樣是 2 + 3 + 5 = 10，合計至少 18。所以 17 萬元確實是最低 ✓。這也說明了答案為何高於「最便宜四條」：戊只有丁–戊（7）與丙–戊（8）兩條路可以接上，任何合格方案都得為戊付出至少 7 萬元。"
         ],
         "zh-Hans": [
           "五个村庄要全部连通，至少得修 4 条道路：一开始有 5 个各自孤立的区块，每修一条道路最多只能把两个区块并成一个，区块数最多减 1，要从 5 块变成 1 块就得修 4 条。",
@@ -4933,7 +4881,7 @@
           "甲–丙（2）：修，甲与丙相通。乙–丙（3）：修，甲、乙、丙相通。甲–乙（4）：跳过，甲与乙已经相通，修了只是多花 4 万元。",
           "丙–丁（5）：修，甲、乙、丙、丁相通。乙–丁（6）：跳过，两端已相通。丁–戊（7）：修，戊终于接上，五个村庄全部相通，可以收工。丙–戊（8）不必再修。",
           "选中的是甲–丙、乙–丙、丙–丁、丁–戊四条，总造价 2 + 3 + 5 + 7 = 17 万元。",
-          "验算：用程序列出全部 2⁷ = 128 种修路方案，逐一判断五个村庄是否连通，其中连通方案的最低总造价正是 17 万元 ✓。另外注意戊只有丁–戊（7）与丙–戊（8）两条路可以接上，所以任何合格方案都得付出至少 7 万元，这就是答案高于“最便宜四条”的原因。"
+          "**为什么 17 万元已经是最少？**任何合格方案都必须有一条路碰到戊。若用丁–戊（7），其余的路还要把“甲”“乙”“丙”“丁戊”这四块接成一片，至少要 3 条；甲–丙（2）、乙–丙（3）、甲–乙（4）三条都在甲乙丙之间绕成一圈、碰不到丁戊，不可能三条全选，所以这 3 条最便宜是 2 + 3 + 5 = 10，合计至少 7 + 10 = 17。若不用丁–戊，就只能用丙–戊（8），其余至少 3 条要把甲、乙、丙、丁接起来，最便宜同样是 2 + 3 + 5 = 10，合计至少 18。所以 17 万元确实是最低 ✓。这也说明了答案为何高于“最便宜四条”：戊只有丁–戊（7）与丙–戊（8）两条路可以接上，任何合格方案都得为戊付出至少 7 万元。"
         ],
         "en": [
           "Connecting all five villages needs at least 4 roads: at the start there are 5 separate blocks, and each new road merges at most two blocks into one, cutting the block count by at most 1, so going from 5 blocks to 1 requires 4 roads.",
@@ -4942,7 +4890,7 @@
           "P-R (2): build, P and R are joined. Q-R (3): build, P, Q, R are joined. P-Q (4): skip, since P and Q are already connected and this link would only waste 4.",
           "R-S (5): build, P, Q, R, S are joined. Q-S (6): skip, both ends already connected. S-T (7): build, T is finally attached and all five villages are connected, so we can stop. R-T (8) is not needed.",
           "The chosen links are P-R, Q-R, R-S and S-T, with total cost 2 + 3 + 5 + 7 = 17.",
-          "Check: enumerating all 2⁷ = 128 subsets of links by computer and testing each for connectivity, the cheapest connected plan costs exactly 17. Note also that T can only be reached through S-T (7) or R-T (8), so every valid plan must spend at least 7 on T alone, which is why the answer exceeds the cost of the four cheapest links."
+          "Why is 17 truly the minimum? Every valid plan needs a link touching T. If it uses S-T (7), the remaining links must join the four blocks P, Q, R and {S, T} into one, which takes at least 3 links; P-R (2), Q-R (3) and P-Q (4) form a closed loop among P, Q, R and never reach {S, T}, so all three cannot be chosen, and the cheapest 3 links cost 2 + 3 + 5 = 10, for a total of at least 7 + 10 = 17. If it does not use S-T, it must use R-T (8), and at least 3 more links must join P, Q, R and S, again costing at least 2 + 3 + 5 = 10, for a total of at least 18. So 17 is indeed the minimum. This also explains why the answer exceeds the cost of the four cheapest links: T can only be reached through S-T (7) or R-T (8), so every valid plan must spend at least 7 on T alone."
         ],
         "ja": [
           "5 つの村をすべてつなぐには少なくとも 4 本の道路が必要です。最初は 5 個の孤立したかたまりがあり、道路を 1 本引くとかたまりは高々 1 つ減るので、5 個を 1 個にするには 4 本要ります。",
@@ -4951,7 +4899,7 @@
           "P-R（2）：建設、P と R がつながる。Q-R（3）：建設、P、Q、R がつながる。P-Q（4）：スキップ、P と Q はすでに連結で、建てても 4 を無駄にするだけ。",
           "R-S（5）：建設、P、Q、R、S がつながる。Q-S（6）：スキップ、両端はすでに連結。S-T（7）：建設、ついに T がつながり 5 村すべて連結したので終了。R-T（8）は不要です。",
           "選ばれたのは P-R、Q-R、R-S、S-T の 4 本で、総費用は 2 + 3 + 5 + 7 = 17 です。",
-          "検算：7 本の部分集合 2⁷ = 128 通りをすべて列挙して連結性を判定すると、連結になる案の最小費用はちょうど 17 ✓。また T につながる道は S-T（7）と R-T（8）しかないので、どの正しい案でも T のために最低 7 を払う必要があり、これが「安い 4 本」より高くなる理由です。"
+          "**なぜ 17 が最小なのか？**どの正しい案にも T につながる道が必要です。S-T（7）を使う場合、残りの道で「P」「Q」「R」「S と T」の 4 つのかたまりを 1 つにつなぐ必要があり、少なくとも 3 本要ります。P-R（2）、Q-R（3）、P-Q（4）の 3 本は P、Q、R の間で輪になるだけで S、T に届かないので 3 本すべては選べず、この 3 本は最安でも 2 + 3 + 5 = 10、合計は少なくとも 7 + 10 = 17 です。S-T を使わない場合は R-T（8）を使うしかなく、残り少なくとも 3 本で P、Q、R、S をつなぐのにやはり最安 2 + 3 + 5 = 10、合計は少なくとも 18 です。よって 17 が最小です ✓。これは答えが「安い 4 本」より高くなる理由でもあります：T につながる道は S-T（7）と R-T（8）しかないので、どの正しい案でも T のために最低 7 を払う必要があります。"
         ]
       },
       "figure": {
@@ -10347,7 +10295,7 @@
           "從一個兩座標都是偶數的點出發。若走到 x 是奇數、y 是偶數的點（例如 (1, 0)），下一步不能向上（會到 x、y 都奇數），只能再向右，到達下一個兩座標都偶數的點；y 是奇數時同理只能再向上。",
           "所以合法的走法必定是「每次連走兩步同方向」：從偶數點 (2i, 2j) 走到 (2i + 2, 2j) 或 (2i, 2j + 2)。反過來，任何這樣「兩步一組」的走法都不會碰到 x、y 都奇數的點。",
           "把每組兩步看成一大步，問題就變成從 (0, 0) 走到 (3, 3)、每次向右或向上 1 大步：共 3 次向右、3 次向上，排列方式有 C(6, 3) = 20 種。",
-          "所以符合規定的走法共有 20 種（程式逐點遞推也得到 20）。答案是 20。"
+          "所以符合規定的走法共有 20 種。答案是 20。"
         ],
         "zh-Hans": [
           "从一个两坐标都是偶数的点出发。若走到 x 是奇数、y 是偶数的点（例如 (1, 0)），下一步不能向上（会到 x、y 都奇数），只能再向右，到达下一个两坐标都偶数的点；y 是奇数时同理只能再向上。",

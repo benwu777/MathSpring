@@ -1025,3 +1025,33 @@ class PreviewNewestFirstTest(unittest.TestCase):
         # logic_grade7_foundation_072 是第十輪才補的圖形題，001 是最早的題
         self.assertLess(order.index('logic_grade7_foundation_072'),
                         order.index('logic_grade7_foundation_001'))
+
+
+class CheckProgramMentionsTest(unittest.TestCase):
+    """validate_question_packs.check_program_mentions：詳解不得出現「用程式驗算」。
+
+    學生看不到也跑不了程式，這類句子是起草時留下的驗算紀錄（2026-10-24 清掉 354 題）。
+    """
+
+    def _q(self, zh='先列出所有情形，共 8 種。', en='List every case: 8 in all.'):
+        return {'solutionSteps': {'zh-Hant': [zh], 'zh-Hans': [zh], 'en': [en], 'ja': ['全部で 8 通り。']}}
+
+    def test_accepts_plain_solution(self):
+        self.assertEqual(vqp.check_program_mentions(self._q()), [])
+
+    def test_equation_word_is_not_a_program(self):
+        self.assertEqual(vqp.check_program_mentions(self._q(zh='列出方程式 2x + 1 = 9，得 x = 4。')), [])
+
+    def test_rejects_chinese_program_check(self):
+        msgs = vqp.check_program_mentions(self._q(zh='用程式窮舉也得到 8 種 ✓。'))
+        self.assertTrue(any('zh-Hant' in m for m in msgs))
+        self.assertTrue(any('zh-Hans' in m for m in msgs))
+
+    def test_rejects_english_computer_check(self):
+        self.assertTrue(vqp.check_program_mentions(self._q(en='A computer search also gives 8.')))
+
+    def test_whole_bank_is_clean(self):
+        import glob
+        for path in glob.glob('assets/questions/*/*.json'):
+            for q in json.load(open(path))['questions']:
+                self.assertEqual(vqp.check_program_mentions(q), [], q['id'])

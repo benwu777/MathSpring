@@ -168,6 +168,31 @@ def check_trailing_zero_decimal(q):
     return errs
 
 
+PROGRAM_MENTION = {
+    'zh-Hant': re.compile(r'(?<!方)程式|電腦'),
+    'zh-Hans': re.compile(r'(?<!方)程式|电脑|程序'),
+    'en': re.compile(r'\b(program|programs|computer)\b', re.I),
+    'ja': re.compile(r'プログラム|コンピュータ'),
+}
+
+
+def check_program_mentions(q):
+    """回傳詳解提到「用程式／電腦驗算」的錯誤訊息清單；合格時回傳空清單。
+
+    學生看不到也跑不了程式，「驗算：程式窮舉……✓」是起草時留下的驗算紀錄，
+    對學生是多餘的字（2026-10-24 一次清掉 354 題）。要驗算就寫人手做得到的方法。
+    「方程式」不算。
+    """
+    errs = []
+    for lang, pat in PROGRAM_MENTION.items():
+        for s in (q.get('solutionSteps') or {}).get(lang, []):
+            if pat.search(s):
+                errs.append('solutionSteps[%s] 提到程式／電腦驗算，學生看不到程式，請改成手算說法或刪掉: %s'
+                            % (lang, s[:40]))
+                break
+    return errs
+
+
 CARET_NUMERIC_POWER = re.compile(r'\S\^\d')
 
 
@@ -681,6 +706,9 @@ def main():
                 err(msg)
 
             for msg in check_trailing_zero_decimal(q):
+                err(msg)
+
+            for msg in check_program_mentions(q):
                 err(msg)
 
             src = q.get('source', {})
