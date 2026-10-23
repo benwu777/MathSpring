@@ -6130,6 +6130,127 @@
         "reference": "logic-grade10-foundation",
         "notes": "斷層線論證：每條內部格線兩側格數皆偶，被切骨牌數必為偶數，若全被切需 ≥ 20 塊 > 18。掃過 /(不切到|不穿過|不會切斷).{0,10}(骨牌|任何)/（0 題）、/6 ?× ?6.{0,40}骨牌/（0 題）、/骨牌.{0,30}格線/（0 題）；最接近 logic_grade12_foundation_033（缺角 8 × 8 棋盤鋪骨牌的染色不可能），差異：該題用黑白染色證明鋪不滿；本題鋪得滿，要用每條線被切次數為偶數的不變量證明斷層線必存在。"
       }
+    },
+    {
+      "id": "logic_grade10_foundation_070",
+      "topic": "logic",
+      "subtopic": "mini_sudoku_four_clues",
+      "tags": [
+        "c:logic_deduction",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "如圖是一個 4 × 4 的數獨：每一個橫列、每一個直行，以及四個 2 × 2 的區塊（圖中用塗色與白色交錯標出）都要恰好填入 1、2、3、4 各一次。圖中已經給了 4 個數字，而這個數獨的填法是唯一的。把最下面一個橫列由左到右讀成一個四位數，這個四位數是多少？",
+        "zh-Hans": "如图是一个 4 × 4 的数独：每一个横行、每一个直列，以及四个 2 × 2 的区块（图中用涂色与白色交错标出）都要恰好填入 1、2、3、4 各一次。图中已经给了 4 个数字，而这个数独的填法是唯一的。把最下面一个横行由左到右读成一个四位数，这个四位数是多少？",
+        "en": "The figure is a 4 × 4 sudoku: every row, every column and each of the four 2 × 2 blocks (shown by alternating shaded and white blocks) must contain 1, 2, 3, 4 exactly once each. Four digits are given, and the solution is unique. Reading the bottom row from left to right as a four-digit number, what is that number?",
+        "ja": "図は 4 × 4 の数独です。各行、各列、そして 4 つの 2 × 2 のブロック（色つきと白で交互に示しています）には 1、2、3、4 がちょうど 1 回ずつ入ります。4 つの数字が与えられていて、解はただ 1 通りです。いちばん下の行を左から読んだ 4 けたの数を求めなさい。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 2314。",
+        "zh-Hans": "答案是 2314。",
+        "en": "The answer is 2314.",
+        "ja": "答えは 2314 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "第 2 列已有 3 與 1，中間兩格是 2 和 4。第 2 行在第 3 列已有 4，所以第 2 列第 2 行不能是 4，只能是 2，第 2 列第 3 行是 4。",
+          "第 3 列已有 4 與 2，兩端是 1 和 3。第 1 行在第 2 列已有 3，所以第 3 列第 1 行是 1，第 3 列第 4 行是 3。",
+          "左上區塊已有 3、2，第 1 列前兩格是 1 和 4；第 1 行已有 3、1，所以第 1 列第 1 行是 4、第 1 列第 2 行是 1。右上區塊已有 4、1，第 1 列後兩格是 2 和 3；第 3 行已有 4、2，所以第 1 列第 3 行是 3、第 1 列第 4 行是 2。",
+          "最後每個直行只缺一個數：第 1 行缺 2、第 2 行缺 3、第 3 行缺 1、第 4 行缺 4。最下面一列是 2、3、1、4，讀成 2314。"
+        ],
+        "zh-Hans": [
+          "第 2 行已有 3 与 1，中间两格是 2 和 4。第 2 列在第 3 行已有 4，所以第 2 行第 2 列不能是 4，只能是 2，第 2 行第 3 列是 4。",
+          "第 3 行已有 4 与 2，两端是 1 和 3。第 1 列在第 2 行已有 3，所以第 3 行第 1 列是 1，第 3 行第 4 列是 3。",
+          "左上区块已有 3、2，第 1 行前两格是 1 和 4；第 1 列已有 3、1，所以第 1 行第 1 列是 4、第 1 行第 2 列是 1。右上区块已有 4、1，第 1 行后两格是 2 和 3；第 3 列已有 4、2，所以第 1 行第 3 列是 3、第 1 行第 4 列是 2。",
+          "最后每个直列只缺一个数：第 1 列缺 2、第 2 列缺 3、第 3 列缺 1、第 4 列缺 4。最下面一行是 2、3、1、4，读成 2314。"
+        ],
+        "en": [
+          "Row 2 already has 3 and 1, so its middle cells are 2 and 4. Column 2 has a 4 in row 3, so row 2 column 2 cannot be 4: it is 2, and row 2 column 3 is 4.",
+          "Row 3 has 4 and 2, so its ends are 1 and 3. Column 1 has a 3 in row 2, so row 3 column 1 is 1 and row 3 column 4 is 3.",
+          "The top-left block has 3 and 2, so the first two cells of row 1 are 1 and 4; column 1 already has 3 and 1, so row 1 column 1 is 4 and row 1 column 2 is 1. The top-right block has 4 and 1, so the last two cells of row 1 are 2 and 3; column 3 already has 4 and 2, so row 1 column 3 is 3 and row 1 column 4 is 2.",
+          "Now each column is missing exactly one digit: column 1 misses 2, column 2 misses 3, column 3 misses 1, column 4 misses 4. The bottom row is 2, 3, 1, 4, read as 2314."
+        ],
+        "ja": [
+          "2 行目にはすでに 3 と 1 があるので、真ん中の 2 マスは 2 と 4。2 列目の 3 行目に 4 があるので 2 行目 2 列目は 4 になれず 2、2 行目 3 列目は 4。",
+          "3 行目には 4 と 2 があるので両端は 1 と 3。1 列目の 2 行目に 3 があるので、3 行目 1 列目は 1、3 行目 4 列目は 3。",
+          "左上のブロックには 3、2 があるので 1 行目の前 2 マスは 1 と 4。1 列目にはすでに 3、1 があるので 1 行目 1 列目は 4、2 列目は 1。右上のブロックには 4、1 があるので 1 行目の後ろ 2 マスは 2 と 3。3 列目にはすでに 4、2 があるので 1 行目 3 列目は 3、4 列目は 2。",
+          "最後に各列には 1 つずつ数字が欠けています：1 列目は 2、2 列目は 3、3 列目は 1、4 列目は 4。いちばん下の行は 2、3、1、4 で、2314。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "composite_grid_shape",
+        "params": {
+          "rows": 4,
+          "cols": 4,
+          "filledCells": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              2,
+              2
+            ],
+            [
+              2,
+              3
+            ],
+            [
+              3,
+              2
+            ],
+            [
+              3,
+              3
+            ]
+          ],
+          "cellLabels": {
+            "1,0": "3",
+            "1,3": "1",
+            "2,1": "4",
+            "2,2": "2"
+          }
+        }
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "2314"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 4
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "4 × 4 數獨的邏輯推理：由列、行、區塊三種限制逐格確定",
+        "notes": "設計依據：數獨式的唯一推理。全庫搜尋「數獨」無結果；最接近的是 combinatorics_grade9_foundation_079（數 4 × 4 拉丁方陣的總數 288）與 logic_grade10_foundation_067（摩天樓），前者是計數、後者用的是視線提示，本題是只有 4 個提示的唯一填法推理。圖用塗色／白色交錯標出四個 2 × 2 區塊並寫上 4 個提示；答案在最下面一列，圖上那一列是空的。已用程式窮舉 288 種 4 × 4 數獨確認解唯一、最下列為 2314。",
+        "displayText": "改寫題（4 × 4 數獨）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "邏輯",
+        "topicCode": "logic",
+        "subtopic": "4 × 4 數獨",
+        "subtopicCode": "mini_sudoku_four_clues"
+      },
+      "reviewStatus": "ok"
     }
   ]
 }

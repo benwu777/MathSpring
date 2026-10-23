@@ -8192,6 +8192,742 @@
         "reference": "combinatorics-grade11-foundation",
         "notes": "有序三因數分解：每個質因數的次方獨立地用隔板法分給三數，再相乘。掃過 /x × y × z|xyz/（1 題）、/乘積.*360|360.*乘積/（1 題）；最接近 combinatorics_grade12_foundation_034（正整數解計數），差異：該題是加法方程 x + y + z = n 的隔板法；本題是乘法方程，要先質因數分解，把每個質數的次方分別做隔板再相乘，利用分解唯一性建立一一對應"
       }
+    },
+    {
+      "id": "combinatorics_grade11_foundation_096",
+      "topic": "combinatorics",
+      "subtopic": "strip_tiling_dominoes_and_squares",
+      "tags": [
+        "c:recurrence",
+        "c:basic_counting",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade11",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "要把一條 2 × 8 的長條方格完全鋪滿，可以用 1 × 2 的骨牌（橫放或直放）和 2 × 2 的方磚，不重疊也不超出。圖中是一種鋪法：同一個字母的格子屬於同一塊，塗色的是 2 × 2 方磚。一共有幾種不同的鋪法？",
+        "zh-Hans": "要把一条 2 × 8 的长条方格完全铺满，可以用 1 × 2 的骨牌（横放或直放）和 2 × 2 的方砖，不重叠也不超出。图中是一种铺法：同一个字母的格子属于同一块，涂色的是 2 × 2 方砖。一共有几种不同的铺法？",
+        "en": "A 2 × 8 strip of cells is to be covered completely, without overlaps or overhang, by 1 × 2 dominoes (horizontal or vertical) and 2 × 2 tiles. The figure shows one tiling: cells with the same letter belong to the same piece, and the shaded pieces are 2 × 2 tiles. How many different tilings are there?",
+        "ja": "2 × 8 の細長いマス目を、1 × 2 のドミノ（横置き・縦置き）と 2 × 2 のタイルで、重ならず、はみ出さずに敷きつめます。図は敷き方の一例で、同じ文字のマスは同じピース、色のついたピースは 2 × 2 のタイルです。敷き方は全部で何通りですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 171。",
+        "zh-Hans": "答案是 171。",
+        "en": "The answer is 171.",
+        "ja": "答えは 171 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "設 2 × n 長條的鋪法有 tₙ 種。看最左邊那一行怎麼被蓋住。",
+          "若是一塊直放骨牌，剩下 2 × (n − 1)，有 tₙ₋₁ 種。否則最左邊的 2 × 2 一定被兩塊橫放骨牌或一塊方磚蓋住（兩種），剩下 2 × (n − 2)，有 2tₙ₋₂ 種。",
+          "所以 tₙ = tₙ₋₁ + 2tₙ₋₂，t₁ = 1、t₂ = 3（兩直、兩橫、一方磚）。",
+          "依序：t₃ = 3 + 2 = 5，t₄ = 5 + 6 = 11，t₅ = 11 + 10 = 21，t₆ = 21 + 22 = 43，t₇ = 43 + 42 = 85，t₈ = 85 + 86 = 171。",
+          "所以 2 × 8 長條共有 171 種鋪法。"
+        ],
+        "zh-Hans": [
+          "设 2 × n 长条的铺法有 tₙ 种。看最左边那一列怎么被盖住。",
+          "若是一块直放骨牌，剩下 2 × (n − 1)，有 tₙ₋₁ 种。否则最左边的 2 × 2 一定被两块横放骨牌或一块方砖盖住（两种），剩下 2 × (n − 2)，有 2tₙ₋₂ 种。",
+          "所以 tₙ = tₙ₋₁ + 2tₙ₋₂，t₁ = 1、t₂ = 3（两直、两横、一方砖）。",
+          "依序：t₃ = 3 + 2 = 5，t₄ = 5 + 6 = 11，t₅ = 11 + 10 = 21，t₆ = 21 + 22 = 43，t₇ = 43 + 42 = 85，t₈ = 85 + 86 = 171。",
+          "所以 2 × 8 长条共有 171 种铺法。"
+        ],
+        "en": [
+          "Let tₙ be the number of tilings of a 2 × n strip, and look at how the leftmost column is covered.",
+          "If it is one vertical domino, a 2 × (n − 1) strip remains: tₙ₋₁ ways. Otherwise the leftmost 2 × 2 block is covered either by two horizontal dominoes or by one 2 × 2 tile (two options), leaving a 2 × (n − 2) strip: 2tₙ₋₂ ways.",
+          "So tₙ = tₙ₋₁ + 2tₙ₋₂ with t₁ = 1 and t₂ = 3 (two vertical, two horizontal, or one tile).",
+          "In turn: t₃ = 3 + 2 = 5, t₄ = 5 + 6 = 11, t₅ = 11 + 10 = 21, t₆ = 21 + 22 = 43, t₇ = 43 + 42 = 85, t₈ = 85 + 86 = 171.",
+          "So the 2 × 8 strip has 171 tilings."
+        ],
+        "ja": [
+          "2 × n のマス目の敷き方を tₙ 通りとし、いちばん左の列がどう覆われるかを見ます。",
+          "縦のドミノ 1 枚なら残りは 2 × (n − 1) で tₙ₋₁ 通り。そうでなければ左端の 2 × 2 は横のドミノ 2 枚か 2 × 2 のタイル 1 枚（2 通り）で覆われ、残りは 2 × (n − 2) で 2tₙ₋₂ 通り。",
+          "よって tₙ = tₙ₋₁ + 2tₙ₋₂、t₁ = 1、t₂ = 3（縦 2 枚、横 2 枚、タイル 1 枚）。",
+          "順に t₃ = 3 + 2 = 5、t₄ = 5 + 6 = 11、t₅ = 11 + 10 = 21、t₆ = 21 + 22 = 43、t₇ = 43 + 42 = 85、t₈ = 85 + 86 = 171。",
+          "よって 2 × 8 のマス目の敷き方は 171 通り。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "composite_grid_shape",
+        "params": {
+          "rows": 2,
+          "cols": 8,
+          "filledCells": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              0,
+              5
+            ],
+            [
+              0,
+              6
+            ],
+            [
+              1,
+              5
+            ],
+            [
+              1,
+              6
+            ]
+          ],
+          "cellLabels": {
+            "0,0": "A",
+            "0,1": "A",
+            "1,0": "A",
+            "1,1": "A",
+            "0,2": "B",
+            "1,2": "B",
+            "0,3": "C",
+            "0,4": "C",
+            "1,3": "D",
+            "1,4": "D",
+            "0,5": "E",
+            "0,6": "E",
+            "1,5": "E",
+            "1,6": "E",
+            "0,7": "F",
+            "1,7": "F"
+          }
+        }
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "171"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "長條鋪磚：依最左一行的覆蓋方式分類，得 tₙ = tₙ₋₁ + 2tₙ₋₂",
+        "notes": "設計依據：鋪磚遞迴（Jacobsthal 型）。最接近的既有題 combinatorics_grade11_foundation_072（只用 1 × 2 骨牌鋪 3 × 6）與 combinatorics_grade11_foundation_087（1 × 7 長條用三種磚）；本題加入 2 × 2 方磚使左端出現「兩種」2 × 2 覆蓋，遞迴係數變成 2，推理不同。圖畫出 2 × 8 長條與一種示範鋪法（字母標出每一塊、方磚塗色），只說明規則；總數不在圖上。答案 171 已用遞迴與程式驗算。",
+        "displayText": "改寫題（骨牌與方磚）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "組合",
+        "topicCode": "combinatorics",
+        "subtopic": "骨牌與方磚",
+        "subtopicCode": "strip_tiling_dominoes_and_squares"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "combinatorics_grade11_foundation_097",
+      "topic": "combinatorics",
+      "subtopic": "random_lattice_path_hits_points",
+      "tags": [
+        "c:probability",
+        "c:inclusion_exclusion",
+        "c:permutation_combination",
+        "m:direct"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade11",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "如圖，在座標方格上從 A(1, 1) 走到 B(6, 5)，每一步向右或向上走一格。從所有最短路線中隨機選一條（每條機會相同），這條路線經過 X(3, 2) 或 Y(4, 4)（至少經過其中一點）的機率是多少？",
+        "zh-Hans": "如图，在坐标方格上从 A(1, 1) 走到 B(6, 5)，每一步向右或向上走一格。从所有最短路线中随机选一条（每条机会相同），这条路线经过 X(3, 2) 或 Y(4, 4)（至少经过其中一点）的概率是多少？",
+        "en": "In the figure, a path on the grid goes from A(1, 1) to B(6, 5), each step one unit right or one unit up. One of all such shortest paths is chosen at random (all equally likely). What is the probability that it passes through X(3, 2) or Y(4, 4) (at least one of them)?",
+        "ja": "図の座標の方眼で A(1, 1) から B(6, 5) まで、1 歩ごとに右か上に 1 マス進みます。すべての最短経路から 1 本を無作為に選ぶとき（どれも同様に確からしい）、その経路が X(3, 2) か Y(4, 4)（少なくとも一方）を通る確率はいくらですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 C：31/42。",
+        "zh-Hans": "答案是 C：31/42。",
+        "en": "The answer is C: 31/42.",
+        "ja": "答えは C：31/42 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "最短路線共 C(9, 4) = 126 條（9 步中選 4 步向上）。",
+          "經過 X：A 到 X 有 C(3, 1) = 3 條，X 到 B 有 C(6, 3) = 20 條，共 60 條。經過 Y：A 到 Y 有 C(6, 3) = 20 條，Y 到 B 有 C(3, 1) = 3 條，共 60 條。",
+          "兩點都經過：A 到 X 有 3 條、X 到 Y（右 1 上 2）有 C(3, 1) = 3 條、Y 到 B 有 3 條，共 27 條。",
+          "排容：60 + 60 − 27 = 93 條，機率 = 93/126 = 31/42。"
+        ],
+        "zh-Hans": [
+          "最短路线共 C(9, 4) = 126 条（9 步中选 4 步向上）。",
+          "经过 X：A 到 X 有 C(3, 1) = 3 条，X 到 B 有 C(6, 3) = 20 条，共 60 条。经过 Y：A 到 Y 有 C(6, 3) = 20 条，Y 到 B 有 C(3, 1) = 3 条，共 60 条。",
+          "两点都经过：A 到 X 有 3 条、X 到 Y（右 1 上 2）有 C(3, 1) = 3 条、Y 到 B 有 3 条，共 27 条。",
+          "排容：60 + 60 − 27 = 93 条，概率 = 93/126 = 31/42。"
+        ],
+        "en": [
+          "There are C(9, 4) = 126 shortest paths (choose which 4 of the 9 steps go up).",
+          "Through X: C(3, 1) = 3 paths from A to X and C(6, 3) = 20 from X to B, so 60. Through Y: C(6, 3) = 20 from A to Y and C(3, 1) = 3 from Y to B, so 60.",
+          "Through both: 3 paths from A to X, C(3, 1) = 3 from X to Y (1 right, 2 up), and 3 from Y to B, so 27.",
+          "Inclusion–exclusion: 60 + 60 − 27 = 93 paths, so the probability is 93/126 = 31/42."
+        ],
+        "ja": [
+          "最短経路は C(9, 4) = 126 本（9 歩のうち上に進む 4 歩を選ぶ）。",
+          "X を通る：A から X が C(3, 1) = 3 本、X から B が C(6, 3) = 20 本で 60 本。Y を通る：A から Y が C(6, 3) = 20 本、Y から B が C(3, 1) = 3 本で 60 本。",
+          "両方を通る：A から X が 3 本、X から Y（右 1、上 2）が C(3, 1) = 3 本、Y から B が 3 本で 27 本。",
+          "包除原理より 60 + 60 − 27 = 93 本で、確率は 93/126 = 31/42。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "coordinate_plane",
+        "params": {
+          "minX": 0,
+          "maxX": 7,
+          "minY": 0,
+          "maxY": 6,
+          "showGrid": true,
+          "points": [
+            {
+              "x": 1,
+              "y": 1,
+              "label": "A"
+            },
+            {
+              "x": 6,
+              "y": 5,
+              "label": "B"
+            },
+            {
+              "x": 3,
+              "y": 2,
+              "label": "X"
+            },
+            {
+              "x": 4,
+              "y": 4,
+              "label": "Y"
+            }
+          ]
+        }
+      },
+      "answerMode": "multiple_choice",
+      "options": {
+        "A": {
+          "zh-Hant": "10/21",
+          "zh-Hans": "10/21",
+          "en": "10/21",
+          "ja": "10/21"
+        },
+        "B": {
+          "zh-Hant": "9/14",
+          "zh-Hans": "9/14",
+          "en": "9/14",
+          "ja": "9/14"
+        },
+        "C": {
+          "zh-Hant": "31/42",
+          "zh-Hans": "31/42",
+          "en": "31/42",
+          "ja": "31/42"
+        },
+        "D": {
+          "zh-Hant": "20/21",
+          "zh-Hans": "20/21",
+          "en": "20/21",
+          "ja": "20/21"
+        }
+      },
+      "correctAnswer": {
+        "type": "choice",
+        "value": "C"
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "格線最短路徑的計數與排容，轉成機率",
+        "notes": "設計依據：路徑計數＋排容。最接近的既有題 combinatorics_grade9_foundation_005、combinatorics_grade9_foundation_071（數經過或避開某一點的路徑數）與 combinatorics_grade10_foundation_022（送貨員路線）；本題同時涉及兩個點、要算同時經過兩點的路徑並排容，最後轉成機率，推理多一層。圖畫出方格與 A、B、X、Y 四點；選項是機率，圖上無法讀出。誘答 10/21 只算 X、20/21 忘了扣重複、9/14 是扣重複時算錯（扣 39）。答案已用程式驗算。",
+        "displayText": "改寫題（隨機路徑的機率）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "組合",
+        "topicCode": "combinatorics",
+        "subtopic": "隨機路徑的機率",
+        "subtopicCode": "random_lattice_path_hits_points"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "combinatorics_grade11_foundation_098",
+      "topic": "combinatorics",
+      "subtopic": "expected_shaded_cells_random_window",
+      "tags": [
+        "c:expectation",
+        "c:basic_counting",
+        "m:bijection"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade11",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "如圖是一個 4 列 5 行的方格表，其中 5 格塗了色。從表中所有的 2 × 2 正方形區塊（由相鄰的 2 列 2 行組成）中隨機選一個，每一個被選中的機會都相同。被選中的區塊裡塗色格數的期望值是多少？",
+        "zh-Hans": "如图是一个 4 行 5 列的方格表，其中 5 格涂了色。从表中所有的 2 × 2 正方形区块（由相邻的 2 行 2 列组成）中随机选一个，每一个被选中的机会都相同。被选中的区块里涂色格数的期望值是多少？",
+        "en": "The figure shows a grid of 4 rows and 5 columns in which 5 cells are shaded. One of all the 2 × 2 blocks (made of 2 adjacent rows and 2 adjacent columns) is chosen at random, each equally likely. What is the expected number of shaded cells in the chosen block?",
+        "ja": "図は 4 行 5 列のマス目で、5 マスに色がついています。表の中のすべての 2 × 2 のブロック（隣り合う 2 行 2 列）から 1 つを無作為に選ぶとき（どれも同様に確からしい）、選んだブロックに含まれる色つきマスの個数の期待値はいくらですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 C：13/12。",
+        "zh-Hans": "答案是 C：13/12。",
+        "en": "The answer is C: 13/12.",
+        "ja": "答えは C：13/12 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "2 × 2 區塊的左上角可以在前 3 列、前 4 行，共 3 × 4 = 12 個區塊。",
+          "期望值的線性：期望塗色格數 = 每一個塗色格「落在隨機區塊中」的機率加總。一格被幾個區塊包含：角落格 1 個、邊上（非角落）格 2 個、內部格 4 個。",
+          "對照圖：左上角那格 1 個；第 1 列第 3 行在上邊 2 個；第 2 列第 2 行、第 3 列第 4 行都是內部各 4 個；第 4 列第 2 行在下邊 2 個。合計 1 + 2 + 4 + 4 + 2 = 13。",
+          "期望值 = 13/12。（若誤以為「每格機會一樣」而算 5 × 4/20 = 1，就忽略了邊角格較少被包含。）"
+        ],
+        "zh-Hans": [
+          "2 × 2 区块的左上角可以在前 3 行、前 4 列，共 3 × 4 = 12 个区块。",
+          "期望值的线性：期望涂色格数 = 每一个涂色格「落在随机区块中」的概率加总。一格被几个区块包含：角落格 1 个、边上（非角落）格 2 个、内部格 4 个。",
+          "对照图：左上角那格 1 个；第 1 行第 3 列在上边 2 个；第 2 行第 2 列、第 3 行第 4 列都是内部各 4 个；第 4 行第 2 列在下边 2 个。合计 1 + 2 + 4 + 4 + 2 = 13。",
+          "期望值 = 13/12。（若误以为「每格机会一样」而算 5 × 4/20 = 1，就忽略了边角格较少被包含。）"
+        ],
+        "en": [
+          "The top-left cell of a 2 × 2 block can be in the first 3 rows and first 4 columns, so there are 3 × 4 = 12 blocks.",
+          "By linearity of expectation, the expected count is the sum over shaded cells of the probability that the cell lies in the random block. A cell lies in 1 block if it is a corner, 2 if it is on an edge (not a corner), and 4 if it is interior.",
+          "From the figure: the top-left corner cell lies in 1 block; row 1 column 3 is on the top edge (2); row 2 column 2 and row 3 column 4 are interior (4 each); row 4 column 2 is on the bottom edge (2). Total 1 + 2 + 4 + 4 + 2 = 13.",
+          "Expected value = 13/12. (Assuming every cell is equally likely to be covered would give 5 × 4/20 = 1, ignoring that edge and corner cells are covered less often.)"
+        ],
+        "ja": [
+          "2 × 2 のブロックの左上のマスは最初の 3 行・最初の 4 列にあるので、ブロックは 3 × 4 = 12 個。",
+          "期待値の線形性より、期待値は「各色つきマスがランダムなブロックに入る確率」の和です。マスが含まれるブロックの数は、隅のマスなら 1、辺（隅以外）のマスなら 2、内部のマスなら 4。",
+          "図より：左上隅のマスは 1、1 行目 3 列目は上の辺で 2、2 行目 2 列目と 3 行目 4 列目は内部で 4 ずつ、4 行目 2 列目は下の辺で 2。合計 1 + 2 + 4 + 4 + 2 = 13。",
+          "期待値 = 13/12。（どのマスも同じ確率と誤解すると 5 × 4/20 = 1 となり、辺や隅のマスが含まれにくいことを見落とします。）"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "composite_grid_shape",
+        "params": {
+          "rows": 4,
+          "cols": 5,
+          "filledCells": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              2,
+              3
+            ],
+            [
+              3,
+              1
+            ]
+          ],
+          "cellLabels": {}
+        }
+      },
+      "answerMode": "multiple_choice",
+      "options": {
+        "A": {
+          "zh-Hant": "11/12",
+          "zh-Hans": "11/12",
+          "en": "11/12",
+          "ja": "11/12"
+        },
+        "B": {
+          "zh-Hant": "1",
+          "zh-Hans": "1",
+          "en": "1",
+          "ja": "1"
+        },
+        "C": {
+          "zh-Hant": "13/12",
+          "zh-Hans": "13/12",
+          "en": "13/12",
+          "ja": "13/12"
+        },
+        "D": {
+          "zh-Hant": "5/4",
+          "zh-Hans": "5/4",
+          "en": "5/4",
+          "ja": "5/4"
+        }
+      },
+      "correctAnswer": {
+        "type": "choice",
+        "value": "C"
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "期望值線性：把總數拆成每一格的貢獻，按格子被幾個窗格包含加權",
+        "notes": "設計依據：期望值的線性與位置權重。最接近的既有題 combinatorics_grade10_foundation_063（沒人去的餐廳家數期望值）與 combinatorics_grade11_foundation_043（擲硬幣得分期望值）；本題要把期望拆到每一格並依位置（角、邊、內部）給權重，塗色格的位置只能從圖讀出，推理不同。圖畫出 4 × 5 方格與 5 個塗色格；答案不在圖上。誘答 1 是「每格機會相同」的常見錯誤。答案 13/12 已用程式窮舉 12 個區塊驗算。",
+        "displayText": "改寫題（隨機窗格的期望值）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "組合",
+        "topicCode": "combinatorics",
+        "subtopic": "隨機窗格的期望值",
+        "subtopicCode": "expected_shaded_cells_random_window"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "combinatorics_grade11_foundation_099",
+      "topic": "combinatorics",
+      "subtopic": "regular_hexagon_diagonal_regions",
+      "tags": [
+        "c:polygon",
+        "c:basic_counting",
+        "m:invariant"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade11",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "如圖，在正六邊形 ABCDEF 中畫出全部 9 條對角線。這些對角線把正六邊形內部分成幾個區域？",
+        "zh-Hans": "如图，在正六边形 ABCDEF 中画出全部 9 条对角线。这些对角线把正六边形内部分成几个区域？",
+        "en": "In the figure, all 9 diagonals of the regular hexagon ABCDEF are drawn. Into how many regions do they divide the interior of the hexagon?",
+        "ja": "図のように、正六角形 ABCDEF のすべての対角線 9 本をかきます。これらの対角線は正六角形の内部をいくつの部分に分けますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 24。",
+        "zh-Hans": "答案是 24。",
+        "en": "The answer is 24.",
+        "ja": "答えは 24 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "逐條加畫對角線：每加一條線，它被已畫的線切成幾段，就多出幾個區域。若沒有三線共點，區域數 = 1 + (對角線數) + (內部交點數)。",
+          "任取 4 個頂點，它們圍成的四邊形的兩條對角線恰好交於內部一點，所以「交叉的對角線對」有 C(6, 4) = 15 對。",
+          "若 15 個交點都不重合，區域數是 1 + 9 + 15 = 25。但正六邊形的三條最長對角線 AD、BE、CF 交於中心同一點：本來兩兩相交的 3 個點合成 1 點，那裡本來會圍出的一個小三角形消失，區域少 1 個。",
+          "所以共有 25 − 1 = 24 個區域。（用尤拉公式驗算：頂點 6 + 13 = 19 個、邊 6 + 36 = 42 條，內部區域 = 42 − 19 + 1 = 24。）"
+        ],
+        "zh-Hans": [
+          "逐条加画对角线：每加一条线，它被已画的线切成几段，就多出几个区域。若没有三线共点，区域数 = 1 + (对角线数) + (内部交点数)。",
+          "任取 4 个顶点，它们围成的四边形的两条对角线恰好交于内部一点，所以「交叉的对角线对」有 C(6, 4) = 15 对。",
+          "若 15 个交点都不重合，区域数是 1 + 9 + 15 = 25。但正六边形的三条最长对角线 AD、BE、CF 交于中心同一点：本来两两相交的 3 个点合成 1 点，那里本来会围出的一个小三角形消失，区域少 1 个。",
+          "所以共有 25 − 1 = 24 个区域。（用尤拉公式验算：顶点 6 + 13 = 19 个、边 6 + 36 = 42 条，内部区域 = 42 − 19 + 1 = 24。）"
+        ],
+        "en": [
+          "Add the diagonals one at a time: a new line cut into k pieces by earlier lines adds k regions. If no three lines meet at a point, regions = 1 + (number of diagonals) + (number of interior crossing points).",
+          "Any 4 vertices form a quadrilateral whose two diagonals cross at one interior point, so there are C(6, 4) = 15 crossing pairs of diagonals.",
+          "If the 15 crossings were all distinct, the count would be 1 + 9 + 15 = 25. But in the regular hexagon the three long diagonals AD, BE, CF all pass through the centre: their 3 pairwise crossings merge into 1 point, and the small triangle they would have enclosed disappears, so there is 1 region fewer.",
+          "So there are 25 − 1 = 24 regions. (Check with Euler’s formula: 6 + 13 = 19 vertices and 6 + 36 = 42 edges, so interior regions = 42 − 19 + 1 = 24.)"
+        ],
+        "ja": [
+          "対角線を 1 本ずつ加えます。新しい線が既にある線で k 個に切られると、領域は k 個増えます。3 本が 1 点で交わらなければ、領域の数 = 1 +（対角線の本数）+（内部の交点の数）。",
+          "任意の 4 頂点がつくる四角形の 2 本の対角線は内部の 1 点で交わるので、交わる対角線の組は C(6, 4) = 15 組。",
+          "15 個の交点がすべて異なれば 1 + 9 + 15 = 25。しかし正六角形では長い対角線 AD、BE、CF が中心の 1 点を通り、本来 3 つある交点が 1 点に重なって、囲まれるはずの小さい三角形が消えるので 1 つ減ります。",
+          "よって 25 − 1 = 24 個。（オイラーの公式で検算：頂点 6 + 13 = 19 個、辺 6 + 36 = 42 本で、内部の領域 = 42 − 19 + 1 = 24。）"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "geometry_scene",
+        "params": {
+          "bounds": {
+            "minX": -3.7,
+            "minY": -3.2981,
+            "maxX": 3.7,
+            "maxY": 3.2981
+          },
+          "points": [
+            {
+              "name": "A",
+              "x": 3,
+              "y": 0,
+              "pos": "r"
+            },
+            {
+              "name": "B",
+              "x": 1.5,
+              "y": 2.5981,
+              "pos": "tr"
+            },
+            {
+              "name": "C",
+              "x": -1.5,
+              "y": 2.5981,
+              "pos": "tl"
+            },
+            {
+              "name": "D",
+              "x": -3,
+              "y": 0,
+              "pos": "l"
+            },
+            {
+              "name": "E",
+              "x": -1.5,
+              "y": -2.5981,
+              "pos": "bl"
+            },
+            {
+              "name": "F",
+              "x": 1.5,
+              "y": -2.5981,
+              "pos": "br"
+            }
+          ],
+          "segments": [
+            {
+              "from": "A",
+              "to": "B",
+              "style": "solid"
+            },
+            {
+              "from": "B",
+              "to": "C",
+              "style": "solid"
+            },
+            {
+              "from": "C",
+              "to": "D",
+              "style": "solid"
+            },
+            {
+              "from": "D",
+              "to": "E",
+              "style": "solid"
+            },
+            {
+              "from": "E",
+              "to": "F",
+              "style": "solid"
+            },
+            {
+              "from": "F",
+              "to": "A",
+              "style": "solid"
+            },
+            {
+              "from": "A",
+              "to": "C",
+              "style": "construction"
+            },
+            {
+              "from": "A",
+              "to": "D",
+              "style": "construction"
+            },
+            {
+              "from": "A",
+              "to": "E",
+              "style": "construction"
+            },
+            {
+              "from": "B",
+              "to": "D",
+              "style": "construction"
+            },
+            {
+              "from": "B",
+              "to": "E",
+              "style": "construction"
+            },
+            {
+              "from": "B",
+              "to": "F",
+              "style": "construction"
+            },
+            {
+              "from": "C",
+              "to": "E",
+              "style": "construction"
+            },
+            {
+              "from": "C",
+              "to": "F",
+              "style": "construction"
+            },
+            {
+              "from": "D",
+              "to": "F",
+              "style": "construction"
+            }
+          ]
+        }
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "24"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "凸多邊形對角線分區：區域數 = 1 + 對角線數 + 交點數，正六邊形中心三線共點要扣 1",
+        "notes": "設計依據：區域計數公式與共點修正。全庫搜尋「對角線＋區域」無同型題；最接近的是 combinatorics_grade9_foundation_077（正五邊形五條對角線的交點與三角形）與 logic_grade10_foundation_028（圓分平面）。本題的關鍵是正六邊形特有的三線共點，必須看圖才會注意到，一般公式會得到錯誤的 25。圖畫出正六邊形與全部 9 條對角線（虛線），三條長對角線確實交於中心；區域數必須推算。答案 24 已用尤拉公式驗算。",
+        "displayText": "改寫題（正六邊形的對角線分區）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "組合",
+        "topicCode": "combinatorics",
+        "subtopic": "正六邊形的對角線分區",
+        "subtopicCode": "regular_hexagon_diagonal_regions"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "combinatorics_grade11_foundation_100",
+      "topic": "combinatorics",
+      "subtopic": "rectangles_in_staircase_shape",
+      "tags": [
+        "c:basic_counting",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade11",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "如圖的階梯形由 15 個小方格組成：由上而下各列分別有 5、4、3、2、1 格，而且全部靠左對齊。沿著格線畫長方形（正方形也算），要求整個長方形都落在階梯形內。這樣的長方形一共有幾個？",
+        "zh-Hans": "如图的阶梯形由 15 个小方格组成：由上而下各行分别有 5、4、3、2、1 格，而且全部靠左对齐。沿着格线画长方形（正方形也算），要求整个长方形都落在阶梯形内。这样的长方形一共有几个？",
+        "en": "The staircase in the figure consists of 15 unit cells: from top to bottom the rows have 5, 4, 3, 2, 1 cells, all aligned on the left. Rectangles (squares included) are drawn along the grid lines, lying entirely inside the staircase. How many such rectangles are there?",
+        "ja": "図の階段形は 15 個の小さい正方形からなり、上から各行に 5、4、3、2、1 マスがあり、すべて左にそろっています。マス目の線に沿って、全体が階段形に入る長方形（正方形も含む）をかきます。このような長方形は全部でいくつありますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 70。",
+        "zh-Hans": "答案是 70。",
+        "en": "The answer is 70.",
+        "ja": "答えは 70 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "以長方形「最下面那一列」分類。若長方形的最下面一列是第 k 列（由上數），它往上可以延伸到第 1 到第 k 列中的任一列，共 k 種高度選擇。",
+          "因為越上面的列越長，長方形的寬度只受最下面一列限制：第 k 列有 6 − k 格，左右邊界從 7 − k 條直線中選 2 條，有 C(7 − k, 2) 種。",
+          "總數 = 1 × C(6, 2) + 2 × C(5, 2) + 3 × C(4, 2) + 4 × C(3, 2) + 5 × C(2, 2) = 15 + 20 + 18 + 12 + 5 = 70。"
+        ],
+        "zh-Hans": [
+          "以长方形「最下面那一行」分类。若长方形的最下面一行是第 k 行（由上数），它往上可以延伸到第 1 到第 k 行中的任一行，共 k 种高度选择。",
+          "因为越上面的行越长，长方形的宽度只受最下面一行限制：第 k 行有 6 − k 格，左右边界从 7 − k 条直线中选 2 条，有 C(7 − k, 2) 种。",
+          "总数 = 1 × C(6, 2) + 2 × C(5, 2) + 3 × C(4, 2) + 4 × C(3, 2) + 5 × C(2, 2) = 15 + 20 + 18 + 12 + 5 = 70。"
+        ],
+        "en": [
+          "Classify rectangles by their bottom row. If the bottom row is row k (from the top), the top row can be any of rows 1 to k: k choices of height.",
+          "Higher rows are longer, so the width is limited only by the bottom row: row k has 6 − k cells, and the left and right sides are 2 of its 7 − k vertical lines, giving C(7 − k, 2) choices.",
+          "Total = 1 × C(6, 2) + 2 × C(5, 2) + 3 × C(4, 2) + 4 × C(3, 2) + 5 × C(2, 2) = 15 + 20 + 18 + 12 + 5 = 70."
+        ],
+        "ja": [
+          "長方形をいちばん下の行で分類します。いちばん下が上から k 行目なら、上端は 1〜k 行目のどれでもよく、高さの選び方は k 通り。",
+          "上の行ほど長いので、幅はいちばん下の行だけで制限されます。k 行目は 6 − k マスで、左右の辺はその 7 − k 本の縦線から 2 本選び、C(7 − k, 2) 通り。",
+          "合計 = 1 × C(6, 2) + 2 × C(5, 2) + 3 × C(4, 2) + 4 × C(3, 2) + 5 × C(2, 2) = 15 + 20 + 18 + 12 + 5 = 70。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "composite_grid_shape",
+        "params": {
+          "rows": 5,
+          "cols": 5,
+          "filledCells": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              0,
+              3
+            ],
+            [
+              0,
+              4
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              1,
+              2
+            ],
+            [
+              1,
+              3
+            ],
+            [
+              2,
+              0
+            ],
+            [
+              2,
+              1
+            ],
+            [
+              2,
+              2
+            ],
+            [
+              3,
+              0
+            ],
+            [
+              3,
+              1
+            ],
+            [
+              4,
+              0
+            ]
+          ],
+          "cellLabels": {}
+        }
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "70"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "不規則區域中的長方形計數：以最下一列分類，寬度只受該列限制",
+        "notes": "設計依據：選對分類基準（最下一列）讓限制只剩一個。最接近的既有題 combinatorics_grade8_foundation_053（5 × 5 方格中的長方形）與 combinatorics_grade10_foundation_027（含角落格的長方形）；那些在完整方格裡用 C(m, 2)C(n, 2)，本題區域是階梯形，必須找到合適的分類方式，推理不同。圖畫出塗色的階梯形（5、4、3、2、1 格）；答案不在圖上。答案 70 已用程式窮舉驗算。",
+        "displayText": "改寫題（階梯形中的長方形）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "組合",
+        "topicCode": "combinatorics",
+        "subtopic": "階梯形中的長方形",
+        "subtopicCode": "rectangles_in_staircase_shape"
+      },
+      "reviewStatus": "ok"
     }
   ]
 }

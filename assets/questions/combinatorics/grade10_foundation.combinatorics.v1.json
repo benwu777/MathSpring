@@ -10460,6 +10460,1038 @@
         "reference": "combinatorics-grade10-foundation",
         "notes": "每列每行恰 2 黑的 4 × 4 塗法：固定第 1 列後，依第 2 列與第 1 列重疊 2、0、1 格分三類（1 + 6 + 8）。掃過 /每一(列|行|橫排).{0,20}(恰好|剛好)?(有)?兩個/（0 題）、/每一列.{0,30}每一行.{0,30}(恰好|都)/（2 題）、/塗黑.{0,20}(每一列|每一行)/（0 題）；最接近 combinatorics_grade10_foundation_021（4 × 4 選 3 格不同列不同行），差異：該題每列每行至多一格，是排列計數；本題每列每行恰兩格，要依前兩列的重疊情形分類。"
       }
+    },
+    {
+      "id": "combinatorics_grade10_foundation_124",
+      "topic": "combinatorics",
+      "subtopic": "rectangles_containing_marked_cells",
+      "tags": [
+        "c:basic_counting",
+        "c:inclusion_exclusion",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "如圖是一個 4 列 6 行的方格表，其中兩個塗色的格子分別標著 X 與 Y。沿著格線可以畫出許多長方形（正方形也算）。這些長方形之中，至少包含 X、Y 其中一格的有幾個？",
+        "zh-Hans": "如图是一个 4 行 6 列的方格表，其中两个涂色的格子分别标着 X 与 Y。沿着格线可以画出许多长方形（正方形也算）。这些长方形之中，至少包含 X、Y 其中一格的有几个？",
+        "en": "The figure shows a grid of 4 rows and 6 columns with two shaded cells marked X and Y. Many rectangles (squares included) can be drawn along the grid lines. How many of them contain at least one of the cells X and Y?",
+        "ja": "図は 4 行 6 列のマス目で、色のついた 2 マスに X と Y が書かれています。マス目の線に沿って長方形（正方形も含む）がたくさんかけます。そのうち X と Y の少なくとも一方のマスを含むものはいくつありますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 104。",
+        "zh-Hans": "答案是 104。",
+        "en": "The answer is 104.",
+        "ja": "答えは 104 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "長方形由上、下兩條橫線與左、右兩條直線決定。橫線由上而下編 0 到 4、直線由左而右編 0 到 6；X 在第 2 列第 2 行，Y 在第 3 列第 5 行。",
+          "含 X：上線取 0 或 1（2 種）、下線取 2、3、4（3 種）、左線取 0 或 1（2 種）、右線取 2 到 6（5 種），共 2 × 3 × 2 × 5 = 60 個。",
+          "含 Y：上線取 0、1、2（3 種）、下線取 3 或 4（2 種）、左線取 0 到 4（5 種）、右線取 5 或 6（2 種），共 3 × 2 × 5 × 2 = 60 個。",
+          "同時含 X 與 Y：上線 0 或 1、下線 3 或 4、左線 0 或 1、右線 5 或 6，共 2 × 2 × 2 × 2 = 16 個。",
+          "排容原理：60 + 60 − 16 = 104 個。"
+        ],
+        "zh-Hans": [
+          "长方形由上、下两条横线与左、右两条直线决定。横线由上而下编 0 到 4、直线由左而右编 0 到 6；X 在第 2 行第 2 列，Y 在第 3 行第 5 列。",
+          "含 X：上线取 0 或 1（2 种）、下线取 2、3、4（3 种）、左线取 0 或 1（2 种）、右线取 2 到 6（5 种），共 2 × 3 × 2 × 5 = 60 个。",
+          "含 Y：上线取 0、1、2（3 种）、下线取 3 或 4（2 种）、左线取 0 到 4（5 种）、右线取 5 或 6（2 种），共 3 × 2 × 5 × 2 = 60 个。",
+          "同时含 X 与 Y：上线 0 或 1、下线 3 或 4、左线 0 或 1、右线 5 或 6，共 2 × 2 × 2 × 2 = 16 个。",
+          "排容原理：60 + 60 − 16 = 104 个。"
+        ],
+        "en": [
+          "A rectangle is fixed by a top and bottom grid line and a left and right grid line. Number the horizontal lines 0 to 4 from the top and the vertical lines 0 to 6 from the left; X is in row 2, column 2 and Y is in row 3, column 5.",
+          "Containing X: top line 0 or 1 (2 ways), bottom line 2, 3 or 4 (3), left line 0 or 1 (2), right line 2 to 6 (5): 2 × 3 × 2 × 5 = 60.",
+          "Containing Y: top line 0, 1 or 2 (3), bottom line 3 or 4 (2), left line 0 to 4 (5), right line 5 or 6 (2): 3 × 2 × 5 × 2 = 60.",
+          "Containing both: top 0 or 1, bottom 3 or 4, left 0 or 1, right 5 or 6: 2 × 2 × 2 × 2 = 16.",
+          "Inclusion–exclusion: 60 + 60 − 16 = 104."
+        ],
+        "ja": [
+          "長方形は上下 2 本の横線と左右 2 本の縦線で決まります。横線を上から 0〜4、縦線を左から 0〜6 と番号づけると、X は 2 行目 2 列目、Y は 3 行目 5 列目です。",
+          "X を含む：上の線は 0 か 1（2 通り）、下の線は 2、3、4（3 通り）、左の線は 0 か 1（2 通り）、右の線は 2〜6（5 通り）で 2 × 3 × 2 × 5 = 60 個。",
+          "Y を含む：上の線は 0、1、2（3 通り）、下の線は 3 か 4（2 通り）、左の線は 0〜4（5 通り）、右の線は 5 か 6（2 通り）で 3 × 2 × 5 × 2 = 60 個。",
+          "両方を含む：上 0 か 1、下 3 か 4、左 0 か 1、右 5 か 6 で 2 × 2 × 2 × 2 = 16 個。",
+          "包除原理より 60 + 60 − 16 = 104 個。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "composite_grid_shape",
+        "params": {
+          "rows": 4,
+          "cols": 6,
+          "filledCells": [
+            [
+              1,
+              1
+            ],
+            [
+              2,
+              4
+            ]
+          ],
+          "cellLabels": {
+            "1,1": "X",
+            "2,4": "Y"
+          }
+        }
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "104"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "長方形由兩條橫線與兩條直線決定；含指定格的計數相乘，兩格用排容",
+        "notes": "設計依據：長方形的線對計數＋排容。最接近的既有題 combinatorics_grade10_foundation_027（4 × 4 方格中包含左上角那一格的長方形，答 16）；那題只有一格且在角落，本題兩格都在內部、還要算同時包含兩格的情形做排容，多了一層推理。圖畫出 4 × 6 方格與兩個標字的塗色格，格子位置只能從圖讀出；圖上沒有數字結果。答案 104 已用程式窮舉驗算。",
+        "displayText": "改寫題（包含指定格的長方形）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "組合",
+        "topicCode": "combinatorics",
+        "subtopic": "包含指定格的長方形",
+        "subtopicCode": "rectangles_containing_marked_cells"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "combinatorics_grade10_foundation_125",
+      "topic": "combinatorics",
+      "subtopic": "adjacent_cells_probability_polyomino",
+      "tags": [
+        "c:probability",
+        "c:basic_counting",
+        "m:enumeration"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "如圖，8 個邊長 1 的小正方形拼成一個塗色的十字形圖形。從這 8 個小正方形中隨機選出 2 個（每一種選法的機會都相同），這 2 個小正方形有一條公共邊的機率是多少？",
+        "zh-Hans": "如图，8 个边长 1 的小正方形拼成一个涂色的十字形图形。从这 8 个小正方形中随机选出 2 个（每一种选法的机会都相同），这 2 个小正方形有一条公共边的概率是多少？",
+        "en": "In the figure, 8 unit squares form the shaded cross-shaped figure. Two of the 8 squares are chosen at random (every pair equally likely). What is the probability that the two chosen squares share a side?",
+        "ja": "図のように、1 辺 1 の小さい正方形 8 個が色のついた十字形をつくっています。この 8 個から 2 個を無作為に選ぶとき（どの選び方も同様に確からしい）、選んだ 2 個が 1 辺を共有する確率はいくらですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 C：9/28。",
+        "zh-Hans": "答案是 C：9/28。",
+        "en": "The answer is C: 9/28.",
+        "ja": "答えは C：9/28 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "所有選法：C(8, 2) = 28 種。",
+          "數「有公共邊」的配對，也就是圖形內部的格線段數。橫向相鄰：第 1 列兩格之間 1 對、第 2 列四格之間 3 對、第 3 列兩格之間 1 對，共 5 對。",
+          "直向相鄰：中間兩個直行各有上下三格，各貢獻 2 對，共 4 對；最左、最右的格子上下都沒有鄰居。",
+          "有公共邊的配對共 5 + 4 = 9 對，機率 = 9/28。"
+        ],
+        "zh-Hans": [
+          "所有选法：C(8, 2) = 28 种。",
+          "数「有公共边」的配对，也就是图形内部的格线段数。横向相邻：第 1 行两格之间 1 对、第 2 行四格之间 3 对、第 3 行两格之间 1 对，共 5 对。",
+          "直向相邻：中间两个直列各有上下三格，各贡献 2 对，共 4 对；最左、最右的格子上下都没有邻居。",
+          "有公共边的配对共 5 + 4 = 9 对，概率 = 9/28。"
+        ],
+        "en": [
+          "Total number of pairs: C(8, 2) = 28.",
+          "Count the pairs sharing a side, i.e. the interior grid segments. Horizontally adjacent: 1 pair in row 1, 3 pairs in the 4-cell row 2, 1 pair in row 3 — 5 pairs.",
+          "Vertically adjacent: each of the two middle columns has three stacked cells and gives 2 pairs, so 4 pairs; the leftmost and rightmost cells have no vertical neighbours.",
+          "There are 5 + 4 = 9 such pairs, so the probability is 9/28."
+        ],
+        "ja": [
+          "選び方の総数は C(8, 2) = 28 通り。",
+          "辺を共有する組、つまり図形内部の格子線の本数を数えます。横に隣り合う組：1 行目に 1 組、4 マスの 2 行目に 3 組、3 行目に 1 組で 5 組。",
+          "縦に隣り合う組：真ん中の 2 列はそれぞれ 3 マス縦に並び 2 組ずつで 4 組。左端と右端のマスには上下の隣がありません。",
+          "辺を共有する組は 5 + 4 = 9 組で、確率は 9/28。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "composite_grid_shape",
+        "params": {
+          "rows": 3,
+          "cols": 4,
+          "filledCells": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              1,
+              2
+            ],
+            [
+              1,
+              3
+            ],
+            [
+              2,
+              1
+            ],
+            [
+              2,
+              2
+            ]
+          ],
+          "cellLabels": {}
+        }
+      },
+      "answerMode": "multiple_choice",
+      "options": {
+        "A": {
+          "zh-Hant": "1/4",
+          "zh-Hans": "1/4",
+          "en": "1/4",
+          "ja": "1/4"
+        },
+        "B": {
+          "zh-Hant": "2/7",
+          "zh-Hans": "2/7",
+          "en": "2/7",
+          "ja": "2/7"
+        },
+        "C": {
+          "zh-Hant": "9/28",
+          "zh-Hans": "9/28",
+          "en": "9/28",
+          "ja": "9/28"
+        },
+        "D": {
+          "zh-Hant": "5/14",
+          "zh-Hans": "5/14",
+          "en": "5/14",
+          "ja": "5/14"
+        }
+      },
+      "correctAnswer": {
+        "type": "choice",
+        "value": "C"
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "古典機率：相鄰配對數＝圖形內部格線段數，除以 C(n, 2)",
+        "notes": "設計依據：把「相鄰」轉成數內部邊。全庫搜尋「相鄰＋機率＋格」無同型題；最接近的是 combinatorics_grade10_foundation_067（正方體頂點距離的機率）。本題的圖形形狀只在圖上，必須逐{R}逐{C}數內部邊。圖畫出 3 × 4 方格中塗色的 8 格十字形；答案 9/28 是比例，圖上無法直接讀出。誘答 1/4、2/7、5/14 分別對應少數或多數 1、2 對的結果（7、8、10 對）。答案已用程式窮舉驗算。",
+        "displayText": "改寫題（相鄰兩格的機率）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "組合",
+        "topicCode": "combinatorics",
+        "subtopic": "相鄰兩格的機率",
+        "subtopicCode": "adjacent_cells_probability_polyomino"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "combinatorics_grade10_foundation_126",
+      "topic": "combinatorics",
+      "subtopic": "squares_in_plus_shape_inclusion_exclusion",
+      "tags": [
+        "c:basic_counting",
+        "c:inclusion_exclusion",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "如圖，在 7 × 7 的方格紙上塗出一個十字形：中間 3 個橫列整列塗色，中間 3 個直行也整行塗色，共 33 格。沿著格線畫正方形，要求整個正方形都落在塗色區域內。這樣的正方形（各種大小都算）一共有幾個？",
+        "zh-Hans": "如图，在 7 × 7 的方格纸上涂出一个十字形：中间 3 个横行整行涂色，中间 3 个直列也整列涂色，共 33 格。沿着格线画正方形，要求整个正方形都落在涂色区域内。这样的正方形（各种大小都算）一共有几个？",
+        "en": "In the figure, a plus shape is shaded on a 7 × 7 grid: the middle 3 rows are fully shaded and so are the middle 3 columns, 33 cells in all. Squares are drawn along grid lines so that the whole square lies inside the shaded region. How many such squares (of all sizes) are there?",
+        "ja": "図のように 7 × 7 の方眼に十字形を塗ります。真ん中の 3 行をすべて、真ん中の 3 列もすべて塗り、全部で 33 マスです。マス目の線に沿って、正方形全体が色の部分に入るように正方形をかきます。このような正方形（すべての大きさ）は全部でいくつありますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 62。",
+        "zh-Hans": "答案是 62。",
+        "en": "The answer is 62.",
+        "ja": "答えは 62 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "十字形 = 橫條（3 × 7）∪ 直條（7 × 3），兩條重疊在中央的 3 × 3。邊長 ≥ 2 的正方形若落在十字形內，一定整個落在某一條裡（它最多跨 3 列或 3 行，跨不出條帶），可以用排容。",
+          "邊長 1：就是 33 個格子。",
+          "邊長 2：橫條內有 2 × 6 = 12 個，直條內也 12 個，中央 3 × 3 內有 2 × 2 = 4 個被算了兩次，共 12 + 12 − 4 = 20 個。",
+          "邊長 3：橫條內 1 × 5 = 5 個，直條內 5 個，中央 1 個重複，共 5 + 5 − 1 = 9 個。邊長 4 以上放不下。",
+          "總數 = 33 + 20 + 9 = 62。"
+        ],
+        "zh-Hans": [
+          "十字形 = 横条（3 × 7）∪ 直条（7 × 3），两条重叠在中央的 3 × 3。边长 ≥ 2 的正方形若落在十字形内，一定整个落在某一条里（它最多跨 3 行或 3 列，跨不出条带），可以用排容。",
+          "边长 1：就是 33 个格子。",
+          "边长 2：横条内有 2 × 6 = 12 个，直条内也 12 个，中央 3 × 3 内有 2 × 2 = 4 个被算了两次，共 12 + 12 − 4 = 20 个。",
+          "边长 3：横条内 1 × 5 = 5 个，直条内 5 个，中央 1 个重复，共 5 + 5 − 1 = 9 个。边长 4 以上放不下。",
+          "总数 = 33 + 20 + 9 = 62。"
+        ],
+        "en": [
+          "The plus = horizontal bar (3 × 7) ∪ vertical bar (7 × 3), overlapping in the central 3 × 3. A square of side ≥ 2 inside the plus must lie entirely in one of the bars, so inclusion–exclusion applies.",
+          "Side 1: just the 33 cells.",
+          "Side 2: 2 × 6 = 12 in the horizontal bar, 12 in the vertical bar, and 2 × 2 = 4 in the central 3 × 3 counted twice: 12 + 12 − 4 = 20.",
+          "Side 3: 1 × 5 = 5 in each bar, with the central one counted twice: 5 + 5 − 1 = 9. Side 4 or more does not fit.",
+          "Total = 33 + 20 + 9 = 62."
+        ],
+        "ja": [
+          "十字形 = 横の帯（3 × 7）∪ 縦の帯（7 × 3）で、重なりは中央の 3 × 3。1 辺 2 以上の正方形が十字形に入るなら、どちらかの帯にまるごと入るので包除原理が使えます。",
+          "1 辺 1：マスそのもので 33 個。",
+          "1 辺 2：横の帯に 2 × 6 = 12 個、縦の帯にも 12 個、中央の 3 × 3 にある 2 × 2 = 4 個は二重に数えたので 12 + 12 − 4 = 20 個。",
+          "1 辺 3：それぞれの帯に 1 × 5 = 5 個、中央の 1 個が重複なので 5 + 5 − 1 = 9 個。1 辺 4 以上は入りません。",
+          "合計 = 33 + 20 + 9 = 62。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "composite_grid_shape",
+        "params": {
+          "rows": 7,
+          "cols": 7,
+          "filledCells": [
+            [
+              0,
+              2
+            ],
+            [
+              0,
+              3
+            ],
+            [
+              0,
+              4
+            ],
+            [
+              1,
+              2
+            ],
+            [
+              1,
+              3
+            ],
+            [
+              1,
+              4
+            ],
+            [
+              2,
+              0
+            ],
+            [
+              2,
+              1
+            ],
+            [
+              2,
+              2
+            ],
+            [
+              2,
+              3
+            ],
+            [
+              2,
+              4
+            ],
+            [
+              2,
+              5
+            ],
+            [
+              2,
+              6
+            ],
+            [
+              3,
+              0
+            ],
+            [
+              3,
+              1
+            ],
+            [
+              3,
+              2
+            ],
+            [
+              3,
+              3
+            ],
+            [
+              3,
+              4
+            ],
+            [
+              3,
+              5
+            ],
+            [
+              3,
+              6
+            ],
+            [
+              4,
+              0
+            ],
+            [
+              4,
+              1
+            ],
+            [
+              4,
+              2
+            ],
+            [
+              4,
+              3
+            ],
+            [
+              4,
+              4
+            ],
+            [
+              4,
+              5
+            ],
+            [
+              4,
+              6
+            ],
+            [
+              5,
+              2
+            ],
+            [
+              5,
+              3
+            ],
+            [
+              5,
+              4
+            ],
+            [
+              6,
+              2
+            ],
+            [
+              6,
+              3
+            ],
+            [
+              6,
+              4
+            ]
+          ],
+          "cellLabels": {}
+        }
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "62"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "數正方形：把十字形拆成兩條長方形帶，依邊長分類並對中央重疊做排容",
+        "notes": "設計依據：分類計數＋排容。最接近的既有題 combinatorics_grade12_foundation_015（4 × 4 方格中的正方形總數 30）與 combinatorics_grade8_foundation_053（5 × 5 中的長方形）；那些是完整方格，用公式 Σk² 即可，本題區域是十字形，要先論證正方形必落在某一條帶內，再對中央重疊做排容，推理不同。圖畫出 7 × 7 方格中塗色的十字形（33 格）；圖上沒有數字。答案 62 已用程式窮舉驗算。",
+        "displayText": "改寫題（十字形中的正方形）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "組合",
+        "topicCode": "combinatorics",
+        "subtopic": "十字形中的正方形",
+        "subtopicCode": "squares_in_plus_shape_inclusion_exclusion"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "combinatorics_grade10_foundation_127",
+      "topic": "combinatorics",
+      "subtopic": "triangular_lattice_monotone_paths",
+      "tags": [
+        "c:basic_counting",
+        "c:recurrence",
+        "m:enumeration"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "如圖，一個大正三角形被平行於三邊的直線分成邊長 1 的小正三角形，每邊分成 4 段。一隻螞蟻從左下角的 A 出發，沿著圖中的線段走到頂點 B。每一步走一條小線段，而且只能朝三個方向走：向右（水平）、向右上、向左上（不能向左、也不能往下）。螞蟻從 A 走到 B 一共有幾種不同的路線？",
+        "zh-Hans": "如图，一个大正三角形被平行于三边的直线分成边长 1 的小正三角形，每边分成 4 段。一只蚂蚁从左下角的 A 出发，沿着图中的线段走到顶点 B。每一步走一条小线段，而且只能朝三个方向走：向右（水平）、向右上、向左上（不能向左、也不能往下）。蚂蚁从 A 走到 B 一共有几种不同的路线？",
+        "en": "In the figure, a large equilateral triangle with each side divided into 4 parts is cut by lines parallel to its sides into small equilateral triangles of side 1. An ant starts at the bottom-left corner A and walks along the segments to the top vertex B. Each step follows one small segment and must go in one of three directions: right (horizontal), up-right, or up-left (never left and never downward). How many different routes from A to B are there?",
+        "ja": "図のように、各辺を 4 等分した大きな正三角形が、辺に平行な直線で 1 辺 1 の小さい正三角形に分けられています。アリが左下の A から線分に沿って頂点 B まで歩きます。1 歩で小さい線分を 1 本進み、向きは右（水平）、右上、左上の 3 つだけです（左や下には進めません）。A から B までの道順は何通りありますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 90。",
+        "zh-Hans": "答案是 90。",
+        "en": "The answer is 90.",
+        "ja": "答えは 90 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "到達某點的路線數 = 從它左邊來的 + 從它左下來的 + 從它右下來的（三個前一點的路線數相加）。由下往上、由左往右逐點填數。",
+          "最下面一列（5 個點）：只能一路向右，全是 1、1、1、1、1。",
+          "第 2 列（4 個點）：最左點 = 1 + 1 = 2，接著 2 + 1 + 1 = 4、4 + 1 + 1 = 6、6 + 1 + 1 = 8。",
+          "第 3 列（3 個點）：2 + 4 = 6，6 + 4 + 6 = 16，16 + 6 + 8 = 30。第 4 列（2 個點）：6 + 16 = 22，22 + 16 + 30 = 68。",
+          "頂點 B 只能從下面兩點走上來：22 + 68 = 90。所以共有 90 種路線。"
+        ],
+        "zh-Hans": [
+          "到达某点的路线数 = 从它左边来的 + 从它左下来的 + 从它右下来的（三个前一点的路线数相加）。由下往上、由左往右逐点填数。",
+          "最下面一行（5 个点）：只能一路向右，全是 1、1、1、1、1。",
+          "第 2 行（4 个点）：最左点 = 1 + 1 = 2，接着 2 + 1 + 1 = 4、4 + 1 + 1 = 6、6 + 1 + 1 = 8。",
+          "第 3 行（3 个点）：2 + 4 = 6，6 + 4 + 6 = 16，16 + 6 + 8 = 30。第 4 行（2 个点）：6 + 16 = 22，22 + 16 + 30 = 68。",
+          "顶点 B 只能从下面两点走上来：22 + 68 = 90。所以共有 90 种路线。"
+        ],
+        "en": [
+          "Routes to a point = routes to the point on its left + to the point down-left + to the point down-right. Fill in values row by row from the bottom, left to right.",
+          "Bottom row (5 points): you can only keep going right, so all values are 1, 1, 1, 1, 1.",
+          "Second row (4 points): leftmost = 1 + 1 = 2, then 2 + 1 + 1 = 4, 4 + 1 + 1 = 6, 6 + 1 + 1 = 8.",
+          "Third row (3 points): 2 + 4 = 6, 6 + 4 + 6 = 16, 16 + 6 + 8 = 30. Fourth row (2 points): 6 + 16 = 22, 22 + 16 + 30 = 68.",
+          "B can only be reached from the two points below it: 22 + 68 = 90. So there are 90 routes."
+        ],
+        "ja": [
+          "ある点への道順の数 =（左の点）+（左下の点）+（右下の点）の道順の数の和。下の段から、左から右へ順に書き込みます。",
+          "いちばん下の段（5 点）：右へ進むしかないので 1、1、1、1、1。",
+          "2 段目（4 点）：左端 = 1 + 1 = 2、続いて 2 + 1 + 1 = 4、4 + 1 + 1 = 6、6 + 1 + 1 = 8。",
+          "3 段目（3 点）：2 + 4 = 6、6 + 4 + 6 = 16、16 + 6 + 8 = 30。4 段目（2 点）：6 + 16 = 22、22 + 16 + 30 = 68。",
+          "B へは下の 2 点からしか来られないので 22 + 68 = 90。よって 90 通り。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "geometry_scene",
+        "params": {
+          "bounds": {
+            "minX": -0.5,
+            "minY": -0.5,
+            "maxX": 4.5,
+            "maxY": 3.9641
+          },
+          "points": [
+            {
+              "name": "A",
+              "x": 0,
+              "y": 0,
+              "pos": "bl"
+            },
+            {
+              "name": "p1_0",
+              "x": 1,
+              "y": 0,
+              "visible": false
+            },
+            {
+              "name": "p2_0",
+              "x": 2,
+              "y": 0,
+              "visible": false
+            },
+            {
+              "name": "p3_0",
+              "x": 3,
+              "y": 0,
+              "visible": false
+            },
+            {
+              "name": "p4_0",
+              "x": 4,
+              "y": 0,
+              "visible": false
+            },
+            {
+              "name": "p0_1",
+              "x": 0.5,
+              "y": 0.866,
+              "visible": false
+            },
+            {
+              "name": "p1_1",
+              "x": 1.5,
+              "y": 0.866,
+              "visible": false
+            },
+            {
+              "name": "p2_1",
+              "x": 2.5,
+              "y": 0.866,
+              "visible": false
+            },
+            {
+              "name": "p3_1",
+              "x": 3.5,
+              "y": 0.866,
+              "visible": false
+            },
+            {
+              "name": "p0_2",
+              "x": 1,
+              "y": 1.7321,
+              "visible": false
+            },
+            {
+              "name": "p1_2",
+              "x": 2,
+              "y": 1.7321,
+              "visible": false
+            },
+            {
+              "name": "p2_2",
+              "x": 3,
+              "y": 1.7321,
+              "visible": false
+            },
+            {
+              "name": "p0_3",
+              "x": 1.5,
+              "y": 2.5981,
+              "visible": false
+            },
+            {
+              "name": "p1_3",
+              "x": 2.5,
+              "y": 2.5981,
+              "visible": false
+            },
+            {
+              "name": "B",
+              "x": 2,
+              "y": 3.4641,
+              "pos": "t"
+            }
+          ],
+          "segments": [
+            {
+              "from": "A",
+              "to": "p1_0",
+              "style": "solid"
+            },
+            {
+              "from": "A",
+              "to": "p0_1",
+              "style": "solid"
+            },
+            {
+              "from": "p1_0",
+              "to": "p2_0",
+              "style": "solid"
+            },
+            {
+              "from": "p1_0",
+              "to": "p1_1",
+              "style": "solid"
+            },
+            {
+              "from": "p1_0",
+              "to": "p0_1",
+              "style": "solid"
+            },
+            {
+              "from": "p2_0",
+              "to": "p3_0",
+              "style": "solid"
+            },
+            {
+              "from": "p2_0",
+              "to": "p2_1",
+              "style": "solid"
+            },
+            {
+              "from": "p2_0",
+              "to": "p1_1",
+              "style": "solid"
+            },
+            {
+              "from": "p3_0",
+              "to": "p4_0",
+              "style": "solid"
+            },
+            {
+              "from": "p3_0",
+              "to": "p3_1",
+              "style": "solid"
+            },
+            {
+              "from": "p3_0",
+              "to": "p2_1",
+              "style": "solid"
+            },
+            {
+              "from": "p4_0",
+              "to": "p3_1",
+              "style": "solid"
+            },
+            {
+              "from": "p0_1",
+              "to": "p1_1",
+              "style": "solid"
+            },
+            {
+              "from": "p0_1",
+              "to": "p0_2",
+              "style": "solid"
+            },
+            {
+              "from": "p1_1",
+              "to": "p2_1",
+              "style": "solid"
+            },
+            {
+              "from": "p1_1",
+              "to": "p1_2",
+              "style": "solid"
+            },
+            {
+              "from": "p1_1",
+              "to": "p0_2",
+              "style": "solid"
+            },
+            {
+              "from": "p2_1",
+              "to": "p3_1",
+              "style": "solid"
+            },
+            {
+              "from": "p2_1",
+              "to": "p2_2",
+              "style": "solid"
+            },
+            {
+              "from": "p2_1",
+              "to": "p1_2",
+              "style": "solid"
+            },
+            {
+              "from": "p3_1",
+              "to": "p2_2",
+              "style": "solid"
+            },
+            {
+              "from": "p0_2",
+              "to": "p1_2",
+              "style": "solid"
+            },
+            {
+              "from": "p0_2",
+              "to": "p0_3",
+              "style": "solid"
+            },
+            {
+              "from": "p1_2",
+              "to": "p2_2",
+              "style": "solid"
+            },
+            {
+              "from": "p1_2",
+              "to": "p1_3",
+              "style": "solid"
+            },
+            {
+              "from": "p1_2",
+              "to": "p0_3",
+              "style": "solid"
+            },
+            {
+              "from": "p2_2",
+              "to": "p1_3",
+              "style": "solid"
+            },
+            {
+              "from": "p0_3",
+              "to": "p1_3",
+              "style": "solid"
+            },
+            {
+              "from": "p0_3",
+              "to": "B",
+              "style": "solid"
+            },
+            {
+              "from": "p1_3",
+              "to": "B",
+              "style": "solid"
+            }
+          ]
+        }
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "90"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "三角形格子上限定三個方向的路徑計數，逐點遞推（結果為大施羅德數）",
+        "notes": "設計依據：遞推填數（與方格路徑不同，每點有三個來源）。最接近的既有題 combinatorics_grade12_foundation_005（座標平面上可向右、向上、斜向右上走到 (4, 4)，Delannoy 型）與 combinatorics_grade9_foundation_070（數三角形格子裡的三角形）；本題在三角形區域內、三個方向不同、邊界形狀讓每列點數遞減，遞推表不同。圖畫出邊長 4 的三角形格子全部線段，只標 A、B，其餘頂點不標；圖上沒有數字。答案 90 已用程式驗算（邊長 1 到 5 依序為 2、6、22、90、394）。",
+        "displayText": "改寫題（三角形格子的路徑）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "組合",
+        "topicCode": "combinatorics",
+        "subtopic": "三角形格子的路徑",
+        "subtopicCode": "triangular_lattice_monotone_paths"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "combinatorics_grade10_foundation_128",
+      "topic": "combinatorics",
+      "subtopic": "tilted_squares_dot_lattice",
+      "tags": [
+        "c:basic_counting",
+        "c:coordinate",
+        "m:bijection"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "如圖是 5 × 5 共 25 個點排成的正方形點陣，相鄰兩點距離是 1。以點陣中的 4 個點為頂點可以畫出正方形，正方形可以是正放的，也可以是斜放的（例如圖中以 (1, 0)、(4, 1)、(3, 4)、(0, 3) 為頂點的正方形）。這樣的正方形一共有幾個？",
+        "zh-Hans": "如图是 5 × 5 共 25 个点排成的正方形点阵，相邻两点距离是 1。以点阵中的 4 个点为顶点可以画出正方形，正方形可以是正放的，也可以是斜放的（例如图中以 (1, 0)、(4, 1)、(3, 4)、(0, 3) 为顶点的正方形）。这样的正方形一共有几个？",
+        "en": "The figure shows a 5 × 5 square array of 25 dots with neighbouring dots 1 apart. Squares can be drawn with 4 of the dots as vertices; they may be upright or tilted (for example the square with vertices (1, 0), (4, 1), (3, 4), (0, 3) in the figure). How many such squares are there?",
+        "ja": "図は 5 × 5 の 25 個の点が正方形に並んだ点の配列で、隣り合う点の間隔は 1 です。4 つの点を頂点とする正方形をかきます。正方形はまっすぐでも傾いていてもかまいません（たとえば図の (1, 0)、(4, 1)、(3, 4)、(0, 3) を頂点とする正方形）。このような正方形は全部でいくつありますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 50。",
+        "zh-Hans": "答案是 50。",
+        "en": "The answer is 50.",
+        "ja": "答えは 50 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "每個正方形（不論正放或斜放）都恰好內接在一個「正放的外框正方形」裡：外框邊長 k，正方形的四個頂點分別在外框的四條邊上，且把每條邊分成 a 與 k − a。",
+          "a 可以取 0、1、…、k − 1（a = 0 就是外框本身），所以每個邊長 k 的外框對應 k 個正方形。",
+          "點陣中邊長 k 的正放正方形有 (5 − k)² 個（k = 1、2、3、4）。",
+          "總數 = 16 × 1 + 9 × 2 + 4 × 3 + 1 × 4 = 16 + 18 + 12 + 4 = 50。",
+          "對照圖中的例子：它的外框是 0 ≤ x ≤ 4、0 ≤ y ≤ 4（k = 4），頂點把底邊分成 1 與 3，正是 a = 1 的情形。"
+        ],
+        "zh-Hans": [
+          "每个正方形（不论正放或斜放）都恰好内接在一个「正放的外框正方形」里：外框边长 k，正方形的四个顶点分别在外框的四条边上，且把每条边分成 a 与 k − a。",
+          "a 可以取 0、1、…、k − 1（a = 0 就是外框本身），所以每个边长 k 的外框对应 k 个正方形。",
+          "点阵中边长 k 的正放正方形有 (5 − k)² 个（k = 1、2、3、4）。",
+          "总数 = 16 × 1 + 9 × 2 + 4 × 3 + 1 × 4 = 16 + 18 + 12 + 4 = 50。",
+          "对照图中的例子：它的外框是 0 ≤ x ≤ 4、0 ≤ y ≤ 4（k = 4），顶点把底边分成 1 与 3，正是 a = 1 的情形。"
+        ],
+        "en": [
+          "Every square, upright or tilted, sits inside exactly one upright bounding square: if the bounding square has side k, the four vertices lie on its four sides, each splitting a side into a and k − a.",
+          "a can be 0, 1, …, k − 1 (a = 0 is the bounding square itself), so each bounding square of side k carries k squares.",
+          "The array contains (5 − k)² upright squares of side k (k = 1, 2, 3, 4).",
+          "Total = 16 × 1 + 9 × 2 + 4 × 3 + 1 × 4 = 16 + 18 + 12 + 4 = 50.",
+          "Compare with the example in the figure: its bounding square is 0 ≤ x ≤ 4, 0 ≤ y ≤ 4 (k = 4), and the vertex splits the bottom side into 1 and 3 — the case a = 1."
+        ],
+        "ja": [
+          "どの正方形も（まっすぐでも傾いていても）、ちょうど 1 つのまっすぐな外枠の正方形に内接します。外枠の 1 辺を k とすると、4 頂点は外枠の 4 辺上にあり、各辺を a と k − a に分けます。",
+          "a は 0、1、…、k − 1 をとれるので（a = 0 は外枠そのもの）、1 辺 k の外枠ごとに k 個の正方形があります。",
+          "配列の中に 1 辺 k のまっすぐな正方形は (5 − k)² 個あります（k = 1、2、3、4）。",
+          "合計 = 16 × 1 + 9 × 2 + 4 × 3 + 1 × 4 = 16 + 18 + 12 + 4 = 50。",
+          "図の例と照合：外枠は 0 ≤ x ≤ 4、0 ≤ y ≤ 4（k = 4）で、頂点は底辺を 1 と 3 に分けており、a = 1 の場合です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "coordinate_plane",
+        "params": {
+          "minX": 0,
+          "maxX": 4,
+          "minY": 0,
+          "maxY": 4,
+          "showGrid": true,
+          "points": [
+            {
+              "x": 0,
+              "y": 0,
+              "label": ""
+            },
+            {
+              "x": 0,
+              "y": 1,
+              "label": ""
+            },
+            {
+              "x": 0,
+              "y": 2,
+              "label": ""
+            },
+            {
+              "x": 0,
+              "y": 3,
+              "label": ""
+            },
+            {
+              "x": 0,
+              "y": 4,
+              "label": ""
+            },
+            {
+              "x": 1,
+              "y": 0,
+              "label": ""
+            },
+            {
+              "x": 1,
+              "y": 1,
+              "label": ""
+            },
+            {
+              "x": 1,
+              "y": 2,
+              "label": ""
+            },
+            {
+              "x": 1,
+              "y": 3,
+              "label": ""
+            },
+            {
+              "x": 1,
+              "y": 4,
+              "label": ""
+            },
+            {
+              "x": 2,
+              "y": 0,
+              "label": ""
+            },
+            {
+              "x": 2,
+              "y": 1,
+              "label": ""
+            },
+            {
+              "x": 2,
+              "y": 2,
+              "label": ""
+            },
+            {
+              "x": 2,
+              "y": 3,
+              "label": ""
+            },
+            {
+              "x": 2,
+              "y": 4,
+              "label": ""
+            },
+            {
+              "x": 3,
+              "y": 0,
+              "label": ""
+            },
+            {
+              "x": 3,
+              "y": 1,
+              "label": ""
+            },
+            {
+              "x": 3,
+              "y": 2,
+              "label": ""
+            },
+            {
+              "x": 3,
+              "y": 3,
+              "label": ""
+            },
+            {
+              "x": 3,
+              "y": 4,
+              "label": ""
+            },
+            {
+              "x": 4,
+              "y": 0,
+              "label": ""
+            },
+            {
+              "x": 4,
+              "y": 1,
+              "label": ""
+            },
+            {
+              "x": 4,
+              "y": 2,
+              "label": ""
+            },
+            {
+              "x": 4,
+              "y": 3,
+              "label": ""
+            },
+            {
+              "x": 4,
+              "y": 4,
+              "label": ""
+            }
+          ],
+          "path": [
+            {
+              "x": 1,
+              "y": 0
+            },
+            {
+              "x": 4,
+              "y": 1
+            },
+            {
+              "x": 3,
+              "y": 4
+            },
+            {
+              "x": 0,
+              "y": 3
+            },
+            {
+              "x": 1,
+              "y": 0
+            }
+          ]
+        }
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "50"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "格點正方形計數：每個斜放正方形對應唯一的正放外框，邊長 k 的外框含 k 個正方形",
+        "notes": "設計依據：以外框建立對應（雙射）把斜放正方形納入計數。最接近的既有題 combinatorics_grade12_foundation_015（4 × 4 方格中「由格線圍成」的正方形 30 個，只算正放）與 geometry_grade8_foundation_144（5 × 5 點陣中長度 5 的線段）；本題要把斜放的也算進去，關鍵是外框對應，推理不同。圖畫出 25 個點與一個斜放正方形的例子（只示範「斜放」的意思，這個例子在題幹中寫明）；總數無法從圖上讀出。答案 50 已用程式窮舉驗算。",
+        "displayText": "改寫題（點陣中的斜放正方形）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "組合",
+        "topicCode": "combinatorics",
+        "subtopic": "點陣中的斜放正方形",
+        "subtopicCode": "tilted_squares_dot_lattice"
+      },
+      "reviewStatus": "ok"
     }
   ]
 }

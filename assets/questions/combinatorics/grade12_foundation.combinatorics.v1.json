@@ -8432,6 +8432,1057 @@
         "reference": "combinatorics-grade12-foundation",
         "notes": "首步分析得 r = 1/3 + (2/3)r²，兩根 1/2 與 1，用「n 步內到達機率 ≤ 1/2」的歸納排除 1。掃過 /數線.*出發|從 0 出發/（3 題）、/曾經到達|到達 \\+1/（0 題）；最接近 combinatorics_grade11_foundation_062（公平賭局的破產機率），差異：該題是有兩端吸收的公平遊戲，答案由線性關係給出；本題是無限數線上的偏移隨機漫步，方程有兩個根，關鍵是證明要取較小的根"
       }
+    },
+    {
+      "id": "combinatorics_grade12_foundation_098",
+      "topic": "combinatorics",
+      "subtopic": "hexagon_random_walk_hitting_time",
+      "tags": [
+        "c:expectation",
+        "c:recurrence",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "如圖，一隻青蛙站在正六邊形 ABCDEF 的頂點 A。每一秒牠都跳到相鄰兩個頂點之一，兩個方向機會各半，每次互相獨立。青蛙第一次跳到正對面的頂點 D，平均需要幾秒（期望值）？",
+        "zh-Hans": "如图，一只青蛙站在正六边形 ABCDEF 的顶点 A。每一秒牠都跳到相邻两个顶点之一，两个方向机会各半，每次互相独立。青蛙第一次跳到正对面的顶点 D，平均需要几秒（期望值）？",
+        "en": "In the figure, a frog sits at vertex A of regular hexagon ABCDEF. Every second it jumps to one of the two neighbouring vertices, each with probability 1/2, independently. What is the expected number of seconds until it first reaches the opposite vertex D?",
+        "ja": "図のように、カエルが正六角形 ABCDEF の頂点 A にいます。毎秒、隣り合う 2 頂点のどちらかへ確率 1/2 ずつ独立に跳びます。カエルが向かい側の頂点 D に初めて着くまでの時間（秒）の期待値はいくらですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 9。",
+        "zh-Hans": "答案是 9。",
+        "en": "The answer is 9.",
+        "ja": "答えは 9 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "只需看青蛙到 D 的「距離」（沿邊數）：A 是 3，B、F 是 2，C、E 是 1，D 是 0。設 eₖ 是從距離 k 出發到 D 的期望秒數，e₀ = 0。",
+          "從 A（距離 3）兩邊都走到距離 2：e₃ = 1 + e₂。從距離 2：e₂ = 1 + (e₃ + e₁)/2。從距離 1：e₁ = 1 + (e₂ + e₀)/2 = 1 + e₂/2。",
+          "代入：e₂ = 1 + (1 + e₂ + 1 + e₂/2)/2 = 2 + (3/4)e₂，所以 e₂ = 8，e₃ = 9（e₁ = 5）。",
+          "所以平均需要 9 秒。（一般地，在 n 邊形上從距離 k 走到目標的期望是 k(n − k)，這裡 3 × 3 = 9。）"
+        ],
+        "zh-Hans": [
+          "只需看青蛙到 D 的「距离」（沿边数）：A 是 3，B、F 是 2，C、E 是 1，D 是 0。设 eₖ 是从距离 k 出发到 D 的期望秒数，e₀ = 0。",
+          "从 A（距离 3）两边都走到距离 2：e₃ = 1 + e₂。从距离 2：e₂ = 1 + (e₃ + e₁)/2。从距离 1：e₁ = 1 + (e₂ + e₀)/2 = 1 + e₂/2。",
+          "代入：e₂ = 1 + (1 + e₂ + 1 + e₂/2)/2 = 2 + (3/4)e₂，所以 e₂ = 8，e₃ = 9（e₁ = 5）。",
+          "所以平均需要 9 秒。（一般地，在 n 边形上从距离 k 走到目标的期望是 k(n − k)，这里 3 × 3 = 9。）"
+        ],
+        "en": [
+          "Only the frog’s distance from D (along edges) matters: A is at 3, B and F at 2, C and E at 1, D at 0. Let eₖ be the expected time from distance k, with e₀ = 0.",
+          "From A (distance 3) both moves lead to distance 2: e₃ = 1 + e₂. From distance 2: e₂ = 1 + (e₃ + e₁)/2. From distance 1: e₁ = 1 + (e₂ + e₀)/2 = 1 + e₂/2.",
+          "Substituting: e₂ = 1 + (1 + e₂ + 1 + e₂/2)/2 = 2 + (3/4)e₂, so e₂ = 8 and e₃ = 9 (e₁ = 5).",
+          "So the expected time is 9 seconds. (In general, on an n-cycle the expected time from distance k is k(n − k); here 3 × 3 = 9.)"
+        ],
+        "ja": [
+          "D までの距離（辺の数）だけを見ればよく、A は 3、B と F は 2、C と E は 1、D は 0。距離 k から D までの期待秒数を eₖ とし、e₀ = 0。",
+          "A（距離 3）からはどちらに跳んでも距離 2：e₃ = 1 + e₂。距離 2 から：e₂ = 1 + (e₃ + e₁)/2。距離 1 から：e₁ = 1 + (e₂ + e₀)/2 = 1 + e₂/2。",
+          "代入すると e₂ = 1 + (1 + e₂ + 1 + e₂/2)/2 = 2 + (3/4)e₂ で e₂ = 8、e₃ = 9（e₁ = 5）。",
+          "よって期待値は 9 秒（一般に n 角形上で距離 k からの期待値は k(n − k) で、ここでは 3 × 3 = 9）。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "geometry_scene",
+        "params": {
+          "bounds": {
+            "minX": -3.1981,
+            "minY": -3.6,
+            "maxX": 3.1981,
+            "maxY": 3.6
+          },
+          "points": [
+            {
+              "name": "A",
+              "x": 0,
+              "y": 3,
+              "pos": "t"
+            },
+            {
+              "name": "B",
+              "x": -2.5981,
+              "y": 1.5,
+              "pos": "tl"
+            },
+            {
+              "name": "C",
+              "x": -2.5981,
+              "y": -1.5,
+              "pos": "bl"
+            },
+            {
+              "name": "D",
+              "x": 0,
+              "y": -3,
+              "pos": "b"
+            },
+            {
+              "name": "E",
+              "x": 2.5981,
+              "y": -1.5,
+              "pos": "br"
+            },
+            {
+              "name": "F",
+              "x": 2.5981,
+              "y": 1.5,
+              "pos": "tr"
+            }
+          ],
+          "segments": [
+            {
+              "from": "A",
+              "to": "B",
+              "style": "solid"
+            },
+            {
+              "from": "B",
+              "to": "C",
+              "style": "solid"
+            },
+            {
+              "from": "C",
+              "to": "D",
+              "style": "solid"
+            },
+            {
+              "from": "D",
+              "to": "E",
+              "style": "solid"
+            },
+            {
+              "from": "E",
+              "to": "F",
+              "style": "solid"
+            },
+            {
+              "from": "F",
+              "to": "A",
+              "style": "solid"
+            },
+            {
+              "from": "A",
+              "to": "D",
+              "style": "construction"
+            }
+          ]
+        }
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "9"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "環上隨機漫步的期望到達時間：依距離分狀態，解線性方程組",
+        "notes": "設計依據：馬可夫鏈的期望步數。最接近的既有題 combinatorics_grade12_foundation_074（螞蟻在正方體頂點隨機爬到對角頂點的期望）與 combinatorics_grade11_foundation_073（三角形三頂點間的隨機爬行機率）；本題是正六邊形（6 環），狀態與方程不同，答案 9 也與正方體的 10 不同。圖畫出正六邊形與 A、D（虛線表示正對面）；期望值不在圖上。答案 9 已用分數解方程驗算。",
+        "displayText": "改寫題（六邊形上的隨機漫步）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "組合",
+        "topicCode": "combinatorics",
+        "subtopic": "六邊形上的隨機漫步",
+        "subtopicCode": "hexagon_random_walk_hitting_time"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "combinatorics_grade12_foundation_099",
+      "topic": "combinatorics",
+      "subtopic": "regular_nonagon_triangle_contains_center",
+      "tags": [
+        "c:probability",
+        "c:polygon",
+        "c:basic_counting",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "如圖，正九邊形的 9 個頂點中隨機選出 3 個（每一種選法機會相同），連成一個三角形。這個三角形把正九邊形的中心 O 包在內部的機率是 m/n（最簡分數），求 m + n。",
+        "zh-Hans": "如图，正九边形的 9 个顶点中随机选出 3 个（每一种选法机会相同），连成一个三角形。这个三角形把正九边形的中心 O 包在内部的概率是 m/n（最简分数），求 m + n。",
+        "en": "In the figure, 3 of the 9 vertices of a regular nonagon are chosen at random (all choices equally likely) and joined into a triangle. The probability that the triangle contains the centre O in its interior is m/n in lowest terms. Find m + n.",
+        "ja": "図のように、正九角形の 9 頂点から 3 つを無作為に選び（どの選び方も同様に確からしい）、三角形をつくります。この三角形が正九角形の中心 O を内部に含む確率は m/n（既約分数）です。m + n を求めなさい。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 19。",
+        "zh-Hans": "答案是 19。",
+        "en": "The answer is 19.",
+        "ja": "答えは 19 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "選法共 C(9, 3) = 84 種。三角形包含中心 ⇔ 三角形是銳角三角形 ⇔ 三個頂點不全在某個半圓內（9 是奇數，中心不會落在邊上）。",
+          "數「不包含中心」的三角形：以三角形中「按順時針方向第一個」頂點 P 來分類，另外兩點都必須落在 P 順時針方向接下來的 4 個頂點中（共占不到半圈），有 C(4, 2) = 6 種。",
+          "每個不含中心的三角形恰好對應一個這樣的 P，所以不含中心的有 9 × 6 = 54 個，含中心的有 84 − 54 = 30 個。",
+          "機率 = 30/84 = 5/14，m + n = 19。"
+        ],
+        "zh-Hans": [
+          "选法共 C(9, 3) = 84 种。三角形包含中心 ⇔ 三角形是锐角三角形 ⇔ 三个顶点不全在某个半圆内（9 是奇数，中心不会落在边上）。",
+          "数「不包含中心」的三角形：以三角形中「按顺时针方向第一个」顶点 P 来分类，另外两点都必须落在 P 顺时针方向接下来的 4 个顶点中（共占不到半圈），有 C(4, 2) = 6 种。",
+          "每个不含中心的三角形恰好对应一个这样的 P，所以不含中心的有 9 × 6 = 54 个，含中心的有 84 − 54 = 30 个。",
+          "概率 = 30/84 = 5/14，m + n = 19。"
+        ],
+        "en": [
+          "There are C(9, 3) = 84 choices. The triangle contains the centre ⇔ it is acute ⇔ its three vertices are not all within some half of the circle (9 is odd, so the centre never lies on a side).",
+          "Count the triangles that do not contain the centre. Classify by the vertex P from which the other two lie clockwise within the next 4 vertices (less than half the circle): there are C(4, 2) = 6 ways to choose them.",
+          "Each such triangle corresponds to exactly one such P, so 9 × 6 = 54 triangles miss the centre and 84 − 54 = 30 contain it.",
+          "Probability = 30/84 = 5/14, so m + n = 19."
+        ],
+        "ja": [
+          "選び方は C(9, 3) = 84 通り。三角形が中心を含む ⇔ 鋭角三角形 ⇔ 3 頂点がある半円の中にそろわない（9 は奇数なので中心が辺上にくることはない）。",
+          "中心を含まない三角形を数えます。残りの 2 点が時計回りに続く 4 頂点（半周未満）の中にある頂点 P で分類すると、その 2 点の選び方は C(4, 2) = 6 通り。",
+          "中心を含まない三角形はそれぞれちょうど 1 つの P に対応するので 9 × 6 = 54 個、中心を含むのは 84 − 54 = 30 個。",
+          "確率 = 30/84 = 5/14 で m + n = 19。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "geometry_scene",
+        "params": {
+          "bounds": {
+            "minX": -3.5544,
+            "minY": -3.4191,
+            "maxX": 3.5544,
+            "maxY": 3.6
+          },
+          "points": [
+            {
+              "name": "A",
+              "x": 0,
+              "y": 3,
+              "pos": "t"
+            },
+            {
+              "name": "B",
+              "x": 1.9284,
+              "y": 2.2981,
+              "pos": "t"
+            },
+            {
+              "name": "C",
+              "x": 2.9544,
+              "y": 0.5209,
+              "pos": "r"
+            },
+            {
+              "name": "D",
+              "x": 2.5981,
+              "y": -1.5,
+              "pos": "r"
+            },
+            {
+              "name": "E",
+              "x": 1.0261,
+              "y": -2.8191,
+              "pos": "b"
+            },
+            {
+              "name": "F",
+              "x": -1.0261,
+              "y": -2.8191,
+              "pos": "b"
+            },
+            {
+              "name": "G",
+              "x": -2.5981,
+              "y": -1.5,
+              "pos": "l"
+            },
+            {
+              "name": "H",
+              "x": -2.9544,
+              "y": 0.5209,
+              "pos": "l"
+            },
+            {
+              "name": "I",
+              "x": -1.9284,
+              "y": 2.2981,
+              "pos": "t"
+            },
+            {
+              "name": "O",
+              "x": 0,
+              "y": 0,
+              "pos": "b"
+            }
+          ],
+          "segments": [
+            {
+              "from": "A",
+              "to": "B",
+              "style": "solid"
+            },
+            {
+              "from": "B",
+              "to": "C",
+              "style": "solid"
+            },
+            {
+              "from": "C",
+              "to": "D",
+              "style": "solid"
+            },
+            {
+              "from": "D",
+              "to": "E",
+              "style": "solid"
+            },
+            {
+              "from": "E",
+              "to": "F",
+              "style": "solid"
+            },
+            {
+              "from": "F",
+              "to": "G",
+              "style": "solid"
+            },
+            {
+              "from": "G",
+              "to": "H",
+              "style": "solid"
+            },
+            {
+              "from": "H",
+              "to": "I",
+              "style": "solid"
+            },
+            {
+              "from": "I",
+              "to": "A",
+              "style": "solid"
+            },
+            {
+              "from": "A",
+              "to": "D",
+              "style": "construction"
+            },
+            {
+              "from": "D",
+              "to": "G",
+              "style": "construction"
+            },
+            {
+              "from": "G",
+              "to": "A",
+              "style": "construction"
+            }
+          ]
+        }
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "19"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "正 n 邊形頂點三角形含中心：補集是三點落在半圓內，以「最前面的頂點」分類計數",
+        "notes": "設計依據：補集計數＋唯一代表元。最接近的既有題 combinatorics_grade11_foundation_086（圓周上連續隨機三點含圓心，答 1/4）與 combinatorics_grade12_foundation_003（正六邊形的鈍角三角形）；本題是離散的正九邊形（奇數，無直角三角形），要以代表頂點分類數半圓內的三點，推理不同。圖畫出正九邊形、中心 O 與一個示範三角形 ADG（虛線，它恰好包含中心）；機率不在圖上。答案已用程式窮舉 84 種驗算。",
+        "displayText": "改寫題（正九邊形的三角形）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "組合",
+        "topicCode": "combinatorics",
+        "subtopic": "正九邊形的三角形",
+        "subtopicCode": "regular_nonagon_triangle_contains_center"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "combinatorics_grade12_foundation_100",
+      "topic": "combinatorics",
+      "subtopic": "wheel_map_four_colourings",
+      "tags": [
+        "c:graph_theory",
+        "c:basic_counting",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "如圖，一個圓形圖案由中央的小圓區域與外圈 6 塊扇環區域組成（扇環依序標 1～6，每塊和左右兩塊相鄰，也都和中央相鄰）。用 4 種顏色給這 7 個區域塗色，有公共邊界的區域必須不同色（顏色不必全用）。一共有幾種塗法？",
+        "zh-Hans": "如图，一个圆形图案由中央的小圆区域与外圈 6 块扇环区域组成（扇环依序标 1～6，每块和左右两块相邻，也都和中央相邻）。用 4 种颜色给这 7 个区域涂色，有公共边界的区域必须不同色（颜色不必全用）。一共有几种涂法？",
+        "en": "In the figure, a circular design consists of a small central disc and an outer ring of 6 regions numbered 1 to 6 (each ring region borders its two neighbours and also the centre). The 7 regions are coloured with 4 colours so that regions sharing a boundary get different colours (not every colour need be used). How many colourings are there?",
+        "ja": "図の円形の模様は、中央の小さい円の領域と外側の 6 つの領域（1〜6 と番号、各領域は左右の 2 つと中央に接する）からなります。4 色で 7 つの領域を塗り、境界を共有する領域は異なる色にします（使わない色があってもよい）。塗り方は何通りですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 264。",
+        "zh-Hans": "答案是 264。",
+        "en": "The answer is 264.",
+        "ja": "答えは 264 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "先塗中央：4 種。外圈 6 塊都和中央相鄰，只能用其餘 3 色，而且外圈相鄰兩塊不同色——這是「6 塊排成一圈、3 色、相鄰不同」的問題。",
+          "n 塊排成一圈用 c 色、相鄰不同的塗法數是 (c − 1)ⁿ + (−1)ⁿ(c − 1)。理由：排成一排有 c(c − 1)ⁿ⁻¹ 種，扣掉首尾同色的（首尾同色相當於 n − 1 塊的圈），遞推得此公式。",
+          "n = 6、c = 3：2⁶ + 2 = 66 種。",
+          "總數 = 4 × 66 = 264 種。"
+        ],
+        "zh-Hans": [
+          "先涂中央：4 种。外圈 6 块都和中央相邻，只能用其余 3 色，而且外圈相邻两块不同色——这是「6 块排成一圈、3 色、相邻不同」的问题。",
+          "n 块排成一圈用 c 色、相邻不同的涂法数是 (c − 1)ⁿ + (−1)ⁿ(c − 1)。理由：排成一排有 c(c − 1)ⁿ⁻¹ 种，扣掉首尾同色的（首尾同色相当于 n − 1 块的圈），递推得此公式。",
+          "n = 6、c = 3：2⁶ + 2 = 66 种。",
+          "总数 = 4 × 66 = 264 种。"
+        ],
+        "en": [
+          "Colour the centre first: 4 ways. All 6 ring regions border the centre, so they use the remaining 3 colours, with neighbours in the ring different — a cycle of 6 regions with 3 colours.",
+          "The number of ways to colour a ring of n regions with c colours, neighbours different, is (c − 1)ⁿ + (−1)ⁿ(c − 1). Reason: a row has c(c − 1)ⁿ⁻¹ colourings; subtracting those whose ends match (which are colourings of a ring of n − 1) gives this formula by recursion.",
+          "With n = 6 and c = 3: 2⁶ + 2 = 66.",
+          "Total = 4 × 66 = 264."
+        ],
+        "ja": [
+          "まず中央を塗ります：4 通り。外側の 6 領域はすべて中央と接するので残りの 3 色を使い、隣どうしは異なる色——「6 つが輪に並び 3 色で隣が異なる」問題です。",
+          "n 個が輪に並ぶとき c 色で隣が異なる塗り方は (c − 1)ⁿ + (−1)ⁿ(c − 1)。理由：一列なら c(c − 1)ⁿ⁻¹ 通りで、両端が同色のもの（n − 1 個の輪と同じ）を引くと漸化式からこの式が得られます。",
+          "n = 6、c = 3 で 2⁶ + 2 = 66 通り。",
+          "合計 = 4 × 66 = 264 通り。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "geometry_scene",
+        "params": {
+          "bounds": {
+            "minX": -3.4,
+            "minY": -3.4,
+            "maxX": 3.4,
+            "maxY": 3.4
+          },
+          "points": [
+            {
+              "name": "i0",
+              "x": 0.866,
+              "y": 0.5,
+              "visible": false
+            },
+            {
+              "name": "o0",
+              "x": 2.5981,
+              "y": 1.5,
+              "visible": false
+            },
+            {
+              "name": "i1",
+              "x": 0,
+              "y": 1,
+              "visible": false
+            },
+            {
+              "name": "o1",
+              "x": 0,
+              "y": 3,
+              "visible": false
+            },
+            {
+              "name": "i2",
+              "x": -0.866,
+              "y": 0.5,
+              "visible": false
+            },
+            {
+              "name": "o2",
+              "x": -2.5981,
+              "y": 1.5,
+              "visible": false
+            },
+            {
+              "name": "i3",
+              "x": -0.866,
+              "y": -0.5,
+              "visible": false
+            },
+            {
+              "name": "o3",
+              "x": -2.5981,
+              "y": -1.5,
+              "visible": false
+            },
+            {
+              "name": "i4",
+              "x": 0,
+              "y": -1,
+              "visible": false
+            },
+            {
+              "name": "o4",
+              "x": 0,
+              "y": -3,
+              "visible": false
+            },
+            {
+              "name": "i5",
+              "x": 0.866,
+              "y": -0.5,
+              "visible": false
+            },
+            {
+              "name": "o5",
+              "x": 2.5981,
+              "y": -1.5,
+              "visible": false
+            },
+            {
+              "name": "1",
+              "x": 2,
+              "y": 0,
+              "pos": "r"
+            },
+            {
+              "name": "2",
+              "x": 1,
+              "y": 1.7321,
+              "pos": "r"
+            },
+            {
+              "name": "3",
+              "x": -1,
+              "y": 1.7321,
+              "pos": "r"
+            },
+            {
+              "name": "4",
+              "x": -2,
+              "y": 0,
+              "pos": "r"
+            },
+            {
+              "name": "5",
+              "x": -1,
+              "y": -1.7321,
+              "pos": "r"
+            },
+            {
+              "name": "6",
+              "x": 1,
+              "y": -1.7321,
+              "pos": "r"
+            }
+          ],
+          "segments": [
+            {
+              "from": "i0",
+              "to": "o0",
+              "style": "solid"
+            },
+            {
+              "from": "i1",
+              "to": "o1",
+              "style": "solid"
+            },
+            {
+              "from": "i2",
+              "to": "o2",
+              "style": "solid"
+            },
+            {
+              "from": "i3",
+              "to": "o3",
+              "style": "solid"
+            },
+            {
+              "from": "i4",
+              "to": "o4",
+              "style": "solid"
+            },
+            {
+              "from": "i5",
+              "to": "o5",
+              "style": "solid"
+            }
+          ],
+          "arcs": [
+            {
+              "cx": 0,
+              "cy": 0,
+              "r": 1,
+              "from": 0,
+              "to": 360
+            },
+            {
+              "cx": 0,
+              "cy": 0,
+              "r": 3,
+              "from": 0,
+              "to": 360
+            }
+          ]
+        }
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "264"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "輪形地圖塗色：中心先塗，外圈是環形塗色 (c − 1)ⁿ + (−1)ⁿ(c − 1)",
+        "notes": "設計依據：環形塗色公式＋乘法原理。最接近的既有題 logic_grade4_foundation_098（中央圓圃與外圈 5 塊花圃，問最少幾色）與 combinatorics_grade12_foundation_038（正五邊形頂點 3 色塗法）；本題要計數而非求最少色數，且中心與外圈 6 塊的組合使外圈只剩 3 色，推理不同。圖畫出中央小圓、外圈與 6 條分隔線，外圈區域標 1–6；答案不在圖上。答案 264 已用公式驗算。",
+        "displayText": "改寫題（輪形地圖塗色）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "組合",
+        "topicCode": "combinatorics",
+        "subtopic": "輪形地圖塗色",
+        "subtopicCode": "wheel_map_four_colourings"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "combinatorics_grade12_foundation_101",
+      "topic": "combinatorics",
+      "subtopic": "rook_paths_any_length_moves",
+      "tags": [
+        "c:recurrence",
+        "c:basic_counting",
+        "m:enumeration"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "如圖是一個 4 × 4 的棋盤，一個城堡從左下角的 S 出發，要走到右上角的 T。每一步可以向右或向上走任意格數（至少 1 格），但不能向左或向下。從 S 到 T 一共有幾種不同的走法？（走的步驟不同就算不同，例如「右 3、上 3」和「右 1、右 2、上 3」不同。）",
+        "zh-Hans": "如图是一个 4 × 4 的棋盘，一个城堡从左下角的 S 出发，要走到右上角的 T。每一步可以向右或向上走任意格数（至少 1 格），但不能向左或向下。从 S 到 T 一共有几种不同的走法？（走的步骤不同就算不同，例如「右 3、上 3」和「右 1、右 2、上 3」不同。）",
+        "en": "The figure shows a 4 × 4 board. A rook starts at S in the bottom-left corner and must reach T in the top-right corner. Each move goes right or up by any number of squares (at least 1), never left or down. How many different ways are there from S to T? (Different sequences of moves count as different; e.g. \"right 3, up 3\" differs from \"right 1, right 2, up 3\".)",
+        "ja": "図は 4 × 4 の盤で、ルークが左下の S から右上の T まで進みます。1 回の移動では右か上へ何マスでも（1 マス以上）進め、左や下には進めません。S から T までの進み方は何通りですか（移動の手順が違えば別とし、たとえば「右 3、上 3」と「右 1、右 2、上 3」は別）。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 106。",
+        "zh-Hans": "答案是 106。",
+        "en": "The answer is 106.",
+        "ja": "答えは 106 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "設 f(x, y) 是走到「往右第 x 格、往上第 y 格」的方法數，f(0, 0) = 1。最後一步要嘛從同一列左邊某格跳來，要嘛從同一行下面某格跳來，所以 f(x, y) = 左邊同列所有格的 f 之和 + 下面同行所有格的 f 之和。",
+          "最下面一列（y = 0）：1、1、2、4。第二列（y = 1）：1、2、5、12。",
+          "第三列（y = 2）：2、5、14、37。例如 f(2, 2) = (2 + 5) + (2 + 5) = 14。",
+          "最上面一列（y = 3）：4、12、37、106。最後 f(3, 3) = (4 + 12 + 37) + (4 + 12 + 37) = 106。"
+        ],
+        "zh-Hans": [
+          "设 f(x, y) 是走到「往右第 x 格、往上第 y 格」的方法数，f(0, 0) = 1。最后一步要嘛从同一行左边某格跳来，要嘛从同一列下面某格跳来，所以 f(x, y) = 左边同行所有格的 f 之和 + 下面同列所有格的 f 之和。",
+          "最下面一行（y = 0）：1、1、2、4。第二行（y = 1）：1、2、5、12。",
+          "第三行（y = 2）：2、5、14、37。例如 f(2, 2) = (2 + 5) + (2 + 5) = 14。",
+          "最上面一行（y = 3）：4、12、37、106。最后 f(3, 3) = (4 + 12 + 37) + (4 + 12 + 37) = 106。"
+        ],
+        "en": [
+          "Let f(x, y) be the number of ways to reach the square x to the right and y up, with f(0, 0) = 1. The last move comes from some square to the left in the same row or below in the same column, so f(x, y) = (sum of f over squares to its left in the row) + (sum of f over squares below it in the column).",
+          "Bottom row (y = 0): 1, 1, 2, 4. Second row (y = 1): 1, 2, 5, 12.",
+          "Third row (y = 2): 2, 5, 14, 37. For example f(2, 2) = (2 + 5) + (2 + 5) = 14.",
+          "Top row (y = 3): 4, 12, 37, 106. Finally f(3, 3) = (4 + 12 + 37) + (4 + 12 + 37) = 106."
+        ],
+        "ja": [
+          "f(x, y) を右へ x、上へ y のマスへの進み方の数とし、f(0, 0) = 1。最後の移動は同じ行の左のどこか、または同じ列の下のどこかから来るので、f(x, y) =（同じ行の左側の f の和）+（同じ列の下側の f の和）。",
+          "いちばん下の行（y = 0）：1、1、2、4。2 行目（y = 1）：1、2、5、12。",
+          "3 行目（y = 2）：2、5、14、37。たとえば f(2, 2) = (2 + 5) + (2 + 5) = 14。",
+          "いちばん上の行（y = 3）：4、12、37、106。最後に f(3, 3) = (4 + 12 + 37) + (4 + 12 + 37) = 106。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "composite_grid_shape",
+        "params": {
+          "rows": 4,
+          "cols": 4,
+          "filledCells": [
+            [
+              3,
+              0
+            ],
+            [
+              0,
+              3
+            ]
+          ],
+          "cellLabels": {
+            "3,0": "S",
+            "0,3": "T"
+          }
+        }
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "106"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "步長任意的單調路徑計數：每格的走法數等於同列左側與同行下方所有格之和",
+        "notes": "設計依據：累加型遞推。最接近的既有題 combinatorics_grade12_foundation_005（可向右、向上、斜走一格到 (4, 4)）與本代理的 D_g10_14（每步一格的方格路徑）；本題每步可走任意格，遞推要把整列、整行的值都加起來，表格與推理不同。圖畫出 4 × 4 棋盤與 S、T；答案不在圖上。答案 106 已用程式驗算。",
+        "displayText": "改寫題（城堡的走法）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "組合",
+        "topicCode": "combinatorics",
+        "subtopic": "城堡的走法",
+        "subtopicCode": "rook_paths_any_length_moves"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "combinatorics_grade12_foundation_102",
+      "topic": "combinatorics",
+      "subtopic": "bridge_network_switch_states",
+      "tags": [
+        "c:graph_theory",
+        "c:basic_counting",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "如圖的電路中，A 到 B 之間有 5 個開關，分別裝在 AC、AD、CB、DB、CD 五段線路上。每個開關可以開或關，共有 2⁵ = 32 種狀態。電流能從 A 流到 B（存在一條全部開關都接通的路線）的狀態有幾種？",
+        "zh-Hans": "如图的电路中，A 到 B 之间有 5 个开关，分别装在 AC、AD、CB、DB、CD 五段线路上。每个开关可以开或关，共有 2⁵ = 32 种状态。电流能从 A 流到 B（存在一条全部开关都接通的路线）的状态有几种？",
+        "en": "In the circuit in the figure there are 5 switches between A and B, on the lines AC, AD, CB, DB and CD. Each switch is open or closed, giving 2⁵ = 32 states. In how many states can current flow from A to B (i.e. there is a route whose switches are all closed)?",
+        "ja": "図の回路では A と B の間に 5 個のスイッチがあり、AC、AD、CB、DB、CD の各線にあります。各スイッチは入か切で、状態は 2⁵ = 32 通り。A から B へ電流が流れる（すべて入のスイッチだけでつながる道がある）状態は何通りですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 16。",
+        "zh-Hans": "答案是 16。",
+        "en": "The answer is 16.",
+        "ja": "答えは 16 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "以中間的開關 CD 分類（「接通」指開關閉合、可導電）。",
+          "CD 接通：C、D 等於同一點。A 能到這一點 ⇔ AC 或 AD 至少一個通（4 − 1 = 3 種）；這一點能到 B ⇔ CB 或 DB 至少一個通（3 種）。共 3 × 3 = 9 種。",
+          "CD 斷開：只有上路 A–C–B 或下路 A–D–B。上路通的狀態（AC、CB 都通）有 4 種組合中的 1 種，不通的有 3 種；兩路都不通是 3 × 3 = 9 種，所以至少一路通是 16 − 9 = 7 種。",
+          "合計 9 + 7 = 16 種（恰好是全部的一半）。"
+        ],
+        "zh-Hans": [
+          "以中间的开关 CD 分类（「接通」指开关闭合、可导电）。",
+          "CD 接通：C、D 等于同一点。A 能到这一点 ⇔ AC 或 AD 至少一个通（4 − 1 = 3 种）；这一点能到 B ⇔ CB 或 DB 至少一个通（3 种）。共 3 × 3 = 9 种。",
+          "CD 断开：只有上路 A–C–B 或下路 A–D–B。上路通的状态（AC、CB 都通）有 4 种组合中的 1 种，不通的有 3 种；两路都不通是 3 × 3 = 9 种，所以至少一路通是 16 − 9 = 7 种。",
+          "合计 9 + 7 = 16 种（恰好是全部的一半）。"
+        ],
+        "en": [
+          "Split by the middle switch CD (\"on\" means the switch is closed and conducts).",
+          "CD on: C and D act as one point. A reaches it ⇔ at least one of AC, AD is on (4 − 1 = 3 ways); it reaches B ⇔ at least one of CB, DB is on (3 ways). That gives 3 × 3 = 9 states.",
+          "CD off: only the upper route A–C–B or the lower route A–D–B. Each route is closed in 1 of its 4 switch combinations and broken in 3; both broken happens in 3 × 3 = 9 of the 16, so at least one works in 16 − 9 = 7 states.",
+          "Total 9 + 7 = 16 states (exactly half of all)."
+        ],
+        "ja": [
+          "真ん中のスイッチ CD で場合分けします（「入」は閉じて電気が通る状態）。",
+          "CD が入：C と D は同じ点とみなせます。A からそこへ行ける ⇔ AC、AD の少なくとも一方が入（4 − 1 = 3 通り）、そこから B へ ⇔ CB、DB の少なくとも一方が入（3 通り）。3 × 3 = 9 通り。",
+          "CD が切：上の道 A–C–B か下の道 A–D–B だけ。各道は 4 通りのうち 1 通りで通じ 3 通りで切れます。両方とも切れるのは 3 × 3 = 9 通りなので、少なくとも一方が通じるのは 16 − 9 = 7 通り。",
+          "合計 9 + 7 = 16 通り（ちょうど全体の半分）。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "geometry_scene",
+        "params": {
+          "bounds": {
+            "minX": -0.6,
+            "minY": -2.6,
+            "maxX": 6.6,
+            "maxY": 2.6
+          },
+          "points": [
+            {
+              "name": "A",
+              "x": 0,
+              "y": 0,
+              "pos": "l"
+            },
+            {
+              "name": "C",
+              "x": 3,
+              "y": 2,
+              "pos": "t"
+            },
+            {
+              "name": "D",
+              "x": 3,
+              "y": -2,
+              "pos": "b"
+            },
+            {
+              "name": "B",
+              "x": 6,
+              "y": 0,
+              "pos": "r"
+            }
+          ],
+          "segments": [
+            {
+              "from": "A",
+              "to": "C",
+              "style": "solid"
+            },
+            {
+              "from": "A",
+              "to": "D",
+              "style": "solid"
+            },
+            {
+              "from": "C",
+              "to": "B",
+              "style": "solid"
+            },
+            {
+              "from": "D",
+              "to": "B",
+              "style": "solid"
+            },
+            {
+              "from": "C",
+              "to": "D",
+              "style": "solid"
+            }
+          ]
+        }
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "16"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "網路可靠度計數：以中間的橋接開關分類，各情形用串並聯計數",
+        "notes": "設計依據：以橋接邊分類（刪除–收縮的手算版）。全庫搜尋「開關＋導通」無同型題；最接近的是 combinatorics_grade12_foundation_032（4 點連通的圖數）與 combinatorics_grade12_foundation_087（村莊道路連通）。本題是兩點之間的導通而非全圖連通，且以 CD 為分界的串並聯分析是關鍵，推理不同。圖畫出 A、C、D、B 與五段線路（菱形加中間橫桿）；答案不在圖上。答案 16 已用程式窮舉 32 種狀態驗算。",
+        "displayText": "改寫題（橋式電路）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "組合",
+        "topicCode": "combinatorics",
+        "subtopic": "橋式電路",
+        "subtopicCode": "bridge_network_switch_states"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "combinatorics_grade12_foundation_103",
+      "topic": "combinatorics",
+      "subtopic": "count_triangles_two_cevian_fans",
+      "tags": [
+        "c:triangle",
+        "c:basic_counting",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "如圖，在三角形 ABC 中，從頂點 A 畫 3 條線段到對邊 BC 上的點，從頂點 B 畫 4 條線段到對邊 CA 上的點（這些點都不是頂點，任三條線段除了在 A 或 B 以外不交於同一點）。圖中所有線段（含三角形的三邊）一共圍出幾個三角形？",
+        "zh-Hans": "如图，在三角形 ABC 中，从顶点 A 画 3 条线段到对边 BC 上的点，从顶点 B 画 4 条线段到对边 CA 上的点（这些点都不是顶点，任三条线段除了在 A 或 B 以外不交于同一点）。图中所有线段（含三角形的三边）一共围出几个三角形？",
+        "en": "In the figure, inside triangle ABC, 3 segments are drawn from vertex A to points on side BC and 4 segments from vertex B to points on side CA (none of these points is a vertex, and apart from at A or B no three segments meet at a point). How many triangles in total are formed by all the segments in the figure (including the three sides)?",
+        "ja": "図の三角形 ABC で、頂点 A から辺 BC 上の点へ 3 本、頂点 B から辺 CA 上の点へ 4 本の線分をひきます（これらの点は頂点ではなく、A、B 以外で 3 本の線分が 1 点で交わることはない）。図のすべての線分（三角形の 3 辺を含む）でできる三角形は全部でいくつありますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 90。",
+        "zh-Hans": "答案是 90。",
+        "en": "The answer is 90.",
+        "ja": "答えは 90 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "圖中每條線都通過 A 或 B（BC、CA 也分別通過 B、A）。任選三條線構成三角形時，若有兩條通過同一點，那一點就是三角形的頂點。所以每個三角形的頂點至少包含 A 或 B，依此分類。",
+          "同時以 A、B 為頂點：第三個頂點由「A 出發的一條線（3 條線段或 AC，共 4 條）」與「B 出發的一條線（4 條線段或 BC，共 5 條）」的交點決定：4 × 5 = 20 個。",
+          "以 A 為頂點、不含 B：兩邊取自 A 出發的 4 條線（不含 AB），C(4, 2) = 6 種；第三邊是 B 出發、不過 A 的 5 條線之一。共 6 × 5 = 30 個。以 B 為頂點、不含 A：兩邊取自 B 出發的 5 條線（不含 BA），C(5, 2) = 10 種；第三邊是 A 出發的 4 條線之一，共 10 × 4 = 40 個。",
+          "總數 = 20 + 30 + 40 = 90 個。"
+        ],
+        "zh-Hans": [
+          "图中每条线都通过 A 或 B（BC、CA 也分别通过 B、A）。任选三条线构成三角形时，若有两条通过同一点，那一点就是三角形的顶点。所以每个三角形的顶点至少包含 A 或 B，依此分类。",
+          "同时以 A、B 为顶点：第三个顶点由「A 出发的一条线（3 条线段或 AC，共 4 条）」与「B 出发的一条线（4 条线段或 BC，共 5 条）」的交点决定：4 × 5 = 20 个。",
+          "以 A 为顶点、不含 B：两边取自 A 出发的 4 条线（不含 AB），C(4, 2) = 6 种；第三边是 B 出发、不过 A 的 5 条线之一。共 6 × 5 = 30 个。以 B 为顶点、不含 A：两边取自 B 出发的 5 条线（不含 BA），C(5, 2) = 10 种；第三边是 A 出发的 4 条线之一，共 10 × 4 = 40 个。",
+          "总数 = 20 + 30 + 40 = 90 个。"
+        ],
+        "en": [
+          "Every line in the figure passes through A or B (BC through B and CA through A). If two of a triangle’s three sides pass through the same point, that point is a vertex, so every triangle has A or B as a vertex. Classify accordingly.",
+          "Both A and B are vertices: the third vertex is where a line from A (the 3 segments or AC, 4 choices) meets a line from B (the 4 segments or BC, 5 choices): 4 × 5 = 20.",
+          "A a vertex but not B: two sides from the 4 lines through A other than AB, C(4, 2) = 6 ways; the third side is one of the 5 lines through B other than BA: 6 × 5 = 30. B a vertex but not A: two sides from the 5 lines through B other than BA, C(5, 2) = 10 ways; the third side is one of the 4 lines through A: 10 × 4 = 40.",
+          "Total = 20 + 30 + 40 = 90."
+        ],
+        "ja": [
+          "図の線はどれも A か B を通ります（BC は B、CA は A を通る）。三角形の 3 辺のうち 2 本が同じ点を通ればその点が頂点になるので、どの三角形も A か B を頂点にもちます。これで分類します。",
+          "A と B の両方が頂点：3 つ目の頂点は A からの線（3 本の線分か AC、4 通り）と B からの線（4 本の線分か BC、5 通り）の交点で決まり 4 × 5 = 20 個。",
+          "A を頂点にもち B を含まない：AB 以外の A を通る 4 本から 2 辺、C(4, 2) = 6 通り、3 辺目は BA 以外の B を通る 5 本のどれかで 6 × 5 = 30 個。B を頂点にもち A を含まない：BA 以外の B を通る 5 本から 2 辺、C(5, 2) = 10 通り、3 辺目は A を通る 4 本のどれかで 10 × 4 = 40 個。",
+          "合計 = 20 + 30 + 40 = 90 個。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "geometry_scene",
+        "params": {
+          "bounds": {
+            "minX": -0.6,
+            "minY": -0.6,
+            "maxX": 9.6,
+            "maxY": 7.6
+          },
+          "points": [
+            {
+              "name": "A",
+              "x": 2,
+              "y": 7,
+              "pos": "t"
+            },
+            {
+              "name": "B",
+              "x": 0,
+              "y": 0,
+              "pos": "bl"
+            },
+            {
+              "name": "C",
+              "x": 9,
+              "y": 0,
+              "pos": "br"
+            },
+            {
+              "name": "D1",
+              "x": 2.25,
+              "y": 0,
+              "visible": false
+            },
+            {
+              "name": "D2",
+              "x": 4.5,
+              "y": 0,
+              "visible": false
+            },
+            {
+              "name": "D3",
+              "x": 6.75,
+              "y": 0,
+              "visible": false
+            },
+            {
+              "name": "E1",
+              "x": 7.6,
+              "y": 1.4,
+              "visible": false
+            },
+            {
+              "name": "E2",
+              "x": 6.2,
+              "y": 2.8,
+              "visible": false
+            },
+            {
+              "name": "E3",
+              "x": 4.8,
+              "y": 4.2,
+              "visible": false
+            },
+            {
+              "name": "E4",
+              "x": 3.4,
+              "y": 5.6,
+              "visible": false
+            }
+          ],
+          "segments": [
+            {
+              "from": "A",
+              "to": "B",
+              "style": "solid"
+            },
+            {
+              "from": "B",
+              "to": "C",
+              "style": "solid"
+            },
+            {
+              "from": "C",
+              "to": "A",
+              "style": "solid"
+            },
+            {
+              "from": "A",
+              "to": "D1",
+              "style": "solid"
+            },
+            {
+              "from": "A",
+              "to": "D2",
+              "style": "solid"
+            },
+            {
+              "from": "A",
+              "to": "D3",
+              "style": "solid"
+            },
+            {
+              "from": "B",
+              "to": "E1",
+              "style": "solid"
+            },
+            {
+              "from": "B",
+              "to": "E2",
+              "style": "solid"
+            },
+            {
+              "from": "B",
+              "to": "E3",
+              "style": "solid"
+            },
+            {
+              "from": "B",
+              "to": "E4",
+              "style": "solid"
+            }
+          ]
+        }
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "90"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "數圖中三角形：所有線都過 A 或 B，依三角形是否以 A、B 為頂點分三類",
+        "notes": "設計依據：以「線束的頂點」分類計數。最接近的既有題 combinatorics_grade9_foundation_070（三角形格子中的三角形總數 105）與 combinatorics_grade11_foundation_018（三等分格子中的三角形）；那些是三組平行線，本題是兩組過頂點的線束，分類方式完全不同（一般公式 (m + 1)(n + 1)(m + n + 2)/2）。圖畫出三角形與 3 + 4 條線段；三角形個數不在圖上。答案 90 已用程式以精確座標窮舉驗算。",
+        "displayText": "改寫題（數三角形）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "組合",
+        "topicCode": "combinatorics",
+        "subtopic": "數三角形",
+        "subtopicCode": "count_triangles_two_cevian_fans"
+      },
+      "reviewStatus": "ok"
     }
   ]
 }

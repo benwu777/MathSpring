@@ -5503,6 +5503,211 @@
         "reference": "number_theory-grade11-foundation",
         "notes": "依 p + q 分組，每組最簡分數個數是 φ(s)（因 gcd(p, s − p) = gcd(p, s)），前綴和加組內位置。掃過 /1/1、1/2|1/2、2/1/（1 題）、/最簡.*分數.*排|分數.*排成一列/（1 題）；最接近 number_theory_grade11_foundation_042（兩值之間的最簡分數個數），差異：該題數某區間內的最簡分數；本題是康托式對角線列舉只留最簡分數，關鍵在把每條對角線的個數化成 φ(s)，再累加定位"
       }
+    },
+    {
+      "id": "number_theory_grade11_foundation_062",
+      "topic": "number_theory",
+      "subtopic": "crt_table_lookup",
+      "tags": [
+        "c:modular",
+        "m:construction"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade11",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "如圖是一個 5 列 7 行的表格，由上而下各列依序代表「除以 5 的餘數是 0、1、2、3、4」，由左而右各行依序代表「除以 7 的餘數是 0、1、…、6」。把 0 到 34 這 35 個整數，各自填進符合它兩個餘數的那一格，每格恰好一個數（圖中已經填了幾個）。標 N 的格子裡是哪一個數？",
+        "zh-Hans": "如图是一个 5 行 7 列的表格，由上而下各行依序代表「除以 5 的余数是 0、1、2、3、4」，由左而右各列依序代表「除以 7 的余数是 0、1、…、6」。把 0 到 34 这 35 个整数，各自填进符合它两个余数的那一格，每格恰好一个数（图中已经填了几个）。标 N 的格子里是哪一个数？",
+        "en": "The figure shows a table with 5 rows and 7 columns. From top to bottom the rows stand for \"remainder 0, 1, 2, 3, 4 when divided by 5\", and from left to right the columns stand for \"remainder 0, 1, …, 6 when divided by 7\". Each of the 35 integers 0 to 34 is written in the cell matching its two remainders, one number per cell (a few are already filled in). Which number belongs in the cell marked N?",
+        "ja": "図は 5 行 7 列の表です。上から順に各行は「5 で割った余りが 0、1、2、3、4」、左から順に各列は「7 で割った余りが 0、1、…、6」を表します。0〜34 の 35 個の整数を、2 つの余りに合うマスに 1 つずつ書き入れます（いくつかは記入済み）。N のマスに入る数は何ですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 33。",
+        "zh-Hans": "答案是 33。",
+        "en": "The answer is 33.",
+        "ja": "答えは 33 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "N 所在的格子是第 4 列、第 6 行，所以 N 除以 5 餘 3、除以 7 餘 5，而且 0 ≤ N ≤ 34。",
+          "除以 7 餘 5 的數：5、12、19、26、33。其中除以 5 餘 3 的只有 33。",
+          "另一種看法（利用圖上的數）：15 在第 1 列第 2 行、21 在第 2 列第 1 行。往右一格的「位移」是加 15、往下一格是加 21（都再取除以 35 的餘數）。從 0 往下 3 格、往右 5 格：3 × 21 + 5 × 15 = 138，138 除以 35 餘 33。",
+          "所以 N = 33。（這張表的每一格恰好一個數，正是中國剩餘定理：5 與 7 互質時，餘數組合與 0 到 34 一一對應。）"
+        ],
+        "zh-Hans": [
+          "N 所在的格子是第 4 行、第 6 列，所以 N 除以 5 余 3、除以 7 余 5，而且 0 ≤ N ≤ 34。",
+          "除以 7 余 5 的数：5、12、19、26、33。其中除以 5 余 3 的只有 33。",
+          "另一种看法（利用图上的数）：15 在第 1 行第 2 列、21 在第 2 行第 1 列。往右一格的「位移」是加 15、往下一格是加 21（都再取除以 35 的余数）。从 0 往下 3 格、往右 5 格：3 × 21 + 5 × 15 = 138，138 除以 35 余 33。",
+          "所以 N = 33。（这张表的每一格恰好一个数，正是中国剩余定理：5 与 7 互质时，余数组合与 0 到 34 一一对应。）"
+        ],
+        "en": [
+          "N is in row 4, column 6, so N leaves remainder 3 when divided by 5 and remainder 5 when divided by 7, with 0 ≤ N ≤ 34.",
+          "Numbers with remainder 5 mod 7: 5, 12, 19, 26, 33. Of these, only 33 leaves remainder 3 mod 5.",
+          "Another view using the numbers in the figure: 15 is in row 1, column 2 and 21 is in row 2, column 1. One step right means adding 15 and one step down means adding 21 (then reducing mod 35). From 0, go 3 down and 5 right: 3 × 21 + 5 × 15 = 138, and 138 leaves remainder 33 mod 35.",
+          "So N = 33. (That every cell gets exactly one number is the Chinese remainder theorem: since 5 and 7 are coprime, remainder pairs correspond one-to-one with 0 to 34.)"
+        ],
+        "ja": [
+          "N は 4 行目 6 列目なので、5 で割ると 3 余り、7 で割ると 5 余る数で、0 ≤ N ≤ 34。",
+          "7 で割って 5 余る数は 5、12、19、26、33。このうち 5 で割って 3 余るのは 33 だけ。",
+          "図の数を使う見方：15 は 1 行目 2 列目、21 は 2 行目 1 列目にあります。右へ 1 マスは 15 を足すこと、下へ 1 マスは 21 を足すこと（そのあと 35 で割った余りをとる）。0 から下へ 3、右へ 5 進むと 3 × 21 + 5 × 15 = 138 で、138 を 35 で割った余りは 33。",
+          "よって N = 33。（どのマスにもちょうど 1 つの数が入るのは中国剰余定理によります。5 と 7 は互いに素なので、余りの組と 0〜34 が 1 対 1 に対応します。）"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "composite_grid_shape",
+        "params": {
+          "rows": 5,
+          "cols": 7,
+          "filledCells": [
+            [
+              0,
+              0
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              2,
+              2
+            ],
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "cellLabels": {
+            "0,0": "0",
+            "1,1": "1",
+            "2,2": "2",
+            "0,1": "15",
+            "1,0": "21",
+            "3,5": "N"
+          }
+        }
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "33"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "中國剩餘定理的表格化：同時滿足兩個餘數的數；也可用表格的「位移」15 與 21 組合",
+        "notes": "設計依據：中國剩餘定理（兩個同餘的組合）。最接近的既有題 number_theory_grade12_foundation_033（除以 3、5、7 的餘數求最小數）與 number_theory_grade10_foundation_047（兩條同餘的數求和）；本題把剩餘組合排成二維表格，N 的位置只能從圖讀出，並可用表上的 15、21 當作「單位位移」推得答案，推理角度不同。圖畫出 5 × 7 表格、5 個已填的數（塗色）與 N；答案 33 不在圖上。已用程式驗算。",
+        "displayText": "改寫題（剩餘定理的表格）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "數論",
+        "topicCode": "number_theory",
+        "subtopic": "剩餘定理的表格",
+        "subtopicCode": "crt_table_lookup"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "number_theory_grade11_foundation_063",
+      "topic": "number_theory",
+      "subtopic": "crossnumber_square_cube_prime",
+      "tags": [
+        "c:exponent",
+        "c:place_value",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade11",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "如圖是一個 3 × 3 的「數字填字」：每格填一個數字，橫向讀出三個三位數、直向讀出三個三位數（都不以 0 開頭）。格子裡的小編號標出每個數的起點。提示——橫 1：完全平方數；橫 4：完全立方數；橫 5：完全平方數；直 1：2 的整數次方；直 2：迴文數（正讀反讀相同）；直 3：質數。答案唯一。橫 5 是多少？",
+        "zh-Hans": "如图是一个 3 × 3 的「数字填字」：每格填一个数字，横向读出三个三位数、直向读出三个三位数（都不以 0 开头）。格子里的小编号标出每个数的起点。提示——横 1：完全平方数；横 4：完全立方数；横 5：完全平方数；直 1：2 的整数次方；直 2：回文数（正读反读相同）；直 3：质数。答案唯一。横 5 是多少？",
+        "en": "The figure is a 3 × 3 cross-number puzzle: each cell gets one digit, giving three 3-digit numbers across and three down (none starting with 0). The small numbers mark where each entry starts. Clues — Across 1: a perfect square; Across 4: a perfect cube; Across 5: a perfect square; Down 1: a power of 2; Down 2: a palindrome (reads the same both ways); Down 3: a prime. The solution is unique. What is Across 5?",
+        "ja": "図は 3 × 3 の「数字クロスワード」です。各マスに数字を 1 つ入れ、横に 3 つ、縦に 3 つの 3 けたの数ができます（どれも 0 で始まらない）。マスの小さな番号は各数の始まりです。ヒント——横 1：平方数、横 4：立方数、横 5：平方数、縦 1：2 の累乗、縦 2：回文数（前から読んでも後ろから読んでも同じ）、縦 3：素数。答えはただ 1 通りです。横 5 はいくつですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 841。",
+        "zh-Hans": "答案是 841。",
+        "en": "The answer is 841.",
+        "ja": "答えは 841 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "直 1 是三位數的 2 的次方：128、256、512。它的中間數字就是橫 4 的首位；三位數的立方數有 125、216、343、512、729，首位只能是 1、2、5，所以（直 1, 橫 4）只有三種：(512, 125)、(128, 216)、(256, 512)。",
+          "情形 (512, 125)：橫 1 是 5 開頭的平方數 529 或 576，橫 5 是 2 開頭的 225、256 或 289。直 2 的首尾要相同，只能取第二位都是 2：橫 1 = 529、橫 5 = 225。但直 3 = 955 = 5 × 191 不是質數，不行。",
+          "情形 (256, 512)：橫 1 ∈ {225, 256, 289}、橫 5 ∈ {625, 676}，直 2 首尾相同迫使兩者第二位都是 2：橫 1 = 225、橫 5 = 625，但直 3 = 525 不是質數，不行。",
+          "情形 (128, 216)：橫 1 ∈ {144, 169, 196}，橫 5 是 8 開頭的平方數，只有 841。直 2 = (橫 1 第二位, 1, 4) 要是迴文數，所以橫 1 的第二位是 4，橫 1 = 144，直 2 = 414 ✓；直 3 = 461 是質數 ✓。",
+          "唯一的填法是 144／216／841，所以橫 5 = 841。"
+        ],
+        "zh-Hans": [
+          "直 1 是三位数的 2 的次方：128、256、512。它的中间数字就是横 4 的首位；三位数的立方数有 125、216、343、512、729，首位只能是 1、2、5，所以（直 1, 横 4）只有三种：(512, 125)、(128, 216)、(256, 512)。",
+          "情形 (512, 125)：横 1 是 5 开头的平方数 529 或 576，横 5 是 2 开头的 225、256 或 289。直 2 的首尾要相同，只能取第二位都是 2：横 1 = 529、横 5 = 225。但直 3 = 955 = 5 × 191 不是质数，不行。",
+          "情形 (256, 512)：横 1 ∈ {225, 256, 289}、横 5 ∈ {625, 676}，直 2 首尾相同迫使两者第二位都是 2：横 1 = 225、横 5 = 625，但直 3 = 525 不是质数，不行。",
+          "情形 (128, 216)：横 1 ∈ {144, 169, 196}，横 5 是 8 开头的平方数，只有 841。直 2 = (横 1 第二位, 1, 4) 要是回文数，所以横 1 的第二位是 4，横 1 = 144，直 2 = 414 ✓；直 3 = 461 是质数 ✓。",
+          "唯一的填法是 144／216／841，所以横 5 = 841。"
+        ],
+        "en": [
+          "Down 1 is a 3-digit power of 2: 128, 256 or 512. Its middle digit is the first digit of Across 4; the 3-digit cubes are 125, 216, 343, 512, 729, so that first digit must be 1, 2 or 5. Hence (Down 1, Across 4) is (512, 125), (128, 216) or (256, 512).",
+          "Case (512, 125): Across 1 is a square starting with 5 (529 or 576) and Across 5 a square starting with 2 (225, 256, 289). Down 2 must start and end with the same digit, forcing both second digits to be 2: Across 1 = 529, Across 5 = 225. But then Down 3 = 955 = 5 × 191 is not prime. Rejected.",
+          "Case (256, 512): Across 1 ∈ {225, 256, 289} and Across 5 ∈ {625, 676}; Down 2 forces both second digits to be 2, so Across 1 = 225 and Across 5 = 625, but Down 3 = 525 is not prime. Rejected.",
+          "Case (128, 216): Across 1 ∈ {144, 169, 196} and Across 5 is a square starting with 8, which can only be 841. Down 2 = (second digit of Across 1, 1, 4) must be a palindrome, so that digit is 4: Across 1 = 144 and Down 2 = 414 ✓; Down 3 = 461 is prime ✓.",
+          "The unique filling is 144 / 216 / 841, so Across 5 = 841."
+        ],
+        "ja": [
+          "縦 1 は 3 けたの 2 の累乗で 128、256、512。その真ん中の数字が横 4 の先頭です。3 けたの立方数は 125、216、343、512、729 なので先頭は 1、2、5 のいずれか。よって（縦 1, 横 4）は (512, 125)、(128, 216)、(256, 512) の 3 通り。",
+          "場合 (512, 125)：横 1 は 5 で始まる平方数 529 か 576、横 5 は 2 で始まる 225、256、289。縦 2 の最初と最後が等しいので 2 けた目はどちらも 2 で、横 1 = 529、横 5 = 225。しかし縦 3 = 955 = 5 × 191 は素数でないので不可。",
+          "場合 (256, 512)：横 1 ∈ {225, 256, 289}、横 5 ∈ {625, 676}。縦 2 から 2 けた目はどちらも 2 で横 1 = 225、横 5 = 625 ですが、縦 3 = 525 は素数でなく不可。",
+          "場合 (128, 216)：横 1 ∈ {144, 169, 196}、横 5 は 8 で始まる平方数で 841 だけ。縦 2 =（横 1 の 2 けた目, 1, 4）が回文数なのでその数字は 4、横 1 = 144、縦 2 = 414 ✓。縦 3 = 461 は素数 ✓。",
+          "ただ 1 通りの埋め方は 144／216／841 で、横 5 = 841。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "composite_grid_shape",
+        "params": {
+          "rows": 3,
+          "cols": 3,
+          "filledCells": [],
+          "cellLabels": {
+            "0,0": "1",
+            "0,1": "2",
+            "0,2": "3",
+            "1,0": "4",
+            "2,0": "5"
+          }
+        }
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "841"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "數字填字謎：用 2 的次方與立方數的稀少性先鎖定兩條，再分三種情形用平方數、迴文、質數排除",
+        "notes": "設計依據：小集合交集＋分類排除。全庫搜尋無數字填字題；最接近的是 logic_grade6_foundation_116（電話鍵盤數字）與 number_theory_grade10_foundation_023（三位數各位數字立方和），都不是交叉約束。圖畫出 3 × 3 格子與起點編號，提示寫在題幹；答案的數字不在圖上。已用程式窮舉所有三位平方數、立方數組合確認解唯一（144、216、841）。",
+        "displayText": "改寫題（數字填字謎）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "數論",
+        "topicCode": "number_theory",
+        "subtopic": "數字填字謎",
+        "subtopicCode": "crossnumber_square_cube_prime"
+      },
+      "reviewStatus": "ok"
     }
   ]
 }

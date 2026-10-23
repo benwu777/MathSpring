@@ -5994,6 +5994,112 @@
         "reference": "number_theory-grade12-foundation",
         "notes": "高斯取整和 = (Σk² − Σ餘數)/101；平方餘數各出現兩次，又因 −1 是平方餘數而兩兩配成和 101，Σ餘數 = 5050。掃過 /⌊/（4 題）、/101/（21 題）；最接近 algebra_grade10_foundation_121（⌊k²/100⌋ 有幾個不同的值），差異：該題數取整後有幾個不同值；本題求取整和，要把它轉成平方餘數的總和，並用 101 ≡ 1 (mod 4) 時 −1 是平方餘數的配對論證"
       }
+    },
+    {
+      "id": "number_theory_grade12_foundation_066",
+      "topic": "number_theory",
+      "subtopic": "torus_grid_orbit_lcm",
+      "tags": [
+        "c:modular",
+        "c:factor_multiple",
+        "m:invariant"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "如圖是一個 6 列 10 行的方格，一枚棋子從左上角標 0 的格子出發。每一步向右移 4 格、向下移 2 格；走出右邊界就從左邊同一列接回來，走出下邊界就從上邊同一行接回來（圖中 1、2、3 是前三步的位置）。棋子一直走下去，一共會停過幾個不同的格子（含起點）？",
+        "zh-Hans": "如图是一个 6 行 10 列的方格，一枚棋子从左上角标 0 的格子出发。每一步向右移 4 格、向下移 2 格；走出右边界就从左边同一行接回来，走出下边界就从上边同一列接回来（图中 1、2、3 是前三步的位置）。棋子一直走下去，一共会停过几个不同的格子（含起点）？",
+        "en": "The figure shows a grid of 6 rows and 10 columns. A token starts at the top-left cell marked 0. Each move goes 4 cells right and 2 cells down; leaving the right edge it re-enters on the left of the same row, and leaving the bottom it re-enters at the top of the same column (1, 2, 3 mark the first three positions). If the token keeps moving forever, how many different cells does it ever stop on (including the start)?",
+        "ja": "図は 6 行 10 列のマス目で、コマは左上の 0 のマスから出発します。1 回ごとに右へ 4 マス、下へ 2 マス進み、右端を出たら同じ行の左端から、下端を出たら同じ列の上端から戻ってきます（1、2、3 は最初の 3 回の位置）。コマが動き続けるとき、止まる異なるマスは全部で何個ですか（出発点を含む）。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 15。",
+        "zh-Hans": "答案是 15。",
+        "en": "The answer is 15.",
+        "ja": "答えは 15 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "走 k 步後的位置：行號是 4k 除以 10 的餘數，列號是 2k 除以 6 的餘數（都從 0 起算）。",
+          "回到起點需要 10 | 4k 且 6 | 2k，即 5 | k 且 3 | k，所以第一次回到起點是 k = 15。",
+          "若第 i 步與第 j 步（0 ≤ i < j < 15）停在同一格，則 j − i 步會回到原處，也必須是 15 的倍數，不可能。所以前 15 步的位置互不相同，之後開始重複。",
+          "共停過 15 個不同的格子（= lcm(10 ÷ gcd(10, 4), 6 ÷ gcd(6, 2)) = lcm(5, 3)）。"
+        ],
+        "zh-Hans": [
+          "走 k 步后的位置：列号是 4k 除以 10 的余数，行号是 2k 除以 6 的余数（都从 0 起算）。",
+          "回到起点需要 10 | 4k 且 6 | 2k，即 5 | k 且 3 | k，所以第一次回到起点是 k = 15。",
+          "若第 i 步与第 j 步（0 ≤ i < j < 15）停在同一格，则 j − i 步会回到原处，也必须是 15 的倍数，不可能。所以前 15 步的位置互不相同，之后开始重复。",
+          "共停过 15 个不同的格子（= lcm(10 ÷ gcd(10, 4), 6 ÷ gcd(6, 2)) = lcm(5, 3)）。"
+        ],
+        "en": [
+          "After k moves the column is 4k mod 10 and the row is 2k mod 6 (both counted from 0).",
+          "Returning to the start needs 10 | 4k and 6 | 2k, i.e. 5 | k and 3 | k, so the first return is at k = 15.",
+          "If moves i and j (0 ≤ i < j < 15) landed on the same cell, then j − i moves would return to the same place, so j − i would be a multiple of 15 — impossible. So the first 15 positions are distinct, and after that they repeat.",
+          "It stops on 15 different cells (= lcm(10 ÷ gcd(10, 4), 6 ÷ gcd(6, 2)) = lcm(5, 3))."
+        ],
+        "ja": [
+          "k 回後の位置は、列番号が 4k を 10 で割った余り、行番号が 2k を 6 で割った余り（どちらも 0 から数える）。",
+          "出発点に戻るには 10 | 4k かつ 6 | 2k、つまり 5 | k かつ 3 | k が必要で、初めて戻るのは k = 15。",
+          "i 回目と j 回目（0 ≤ i < j < 15）が同じマスなら、j − i 回で元に戻ることになり j − i は 15 の倍数でなければならず不可能。よって最初の 15 個の位置はすべて異なり、その後は繰り返します。",
+          "止まる異なるマスは 15 個（= lcm(10 ÷ gcd(10, 4), 6 ÷ gcd(6, 2)) = lcm(5, 3)）。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "composite_grid_shape",
+        "params": {
+          "rows": 6,
+          "cols": 10,
+          "filledCells": [
+            [
+              0,
+              0
+            ],
+            [
+              2,
+              4
+            ],
+            [
+              4,
+              8
+            ],
+            [
+              0,
+              2
+            ]
+          ],
+          "cellLabels": {
+            "0,0": "0",
+            "2,4": "1",
+            "4,8": "2",
+            "0,2": "3"
+          }
+        }
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "15"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "環面上的平移軌道：回到起點的最小步數是兩個方向週期的最小公倍數",
+        "notes": "設計依據：同餘與最小公倍數（二維）。最接近的既有題 number_theory_grade11_foundation_008（十匹馬回到起點的最小公倍數）與本代理的 D_g10_12（圓上跳點，一維 gcd）；本題是二維環繞方格，要同時處理兩個方向的週期並論證前 15 步互不重複，推理不同。圖畫出 6 × 10 方格與前 4 個位置 0–3（塗色），說明環繞規則；總數不在圖上。答案 15 已用程式驗算。",
+        "displayText": "改寫題（環繞方格的跳躍）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "數論",
+        "topicCode": "number_theory",
+        "subtopic": "環繞方格的跳躍",
+        "subtopicCode": "torus_grid_orbit_lcm"
+      },
+      "reviewStatus": "ok"
     }
   ]
 }

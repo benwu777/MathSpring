@@ -6060,6 +6060,700 @@
         "reference": "number_theory-grade10-foundation",
         "notes": "用 d(n) ≤ 2√n 把 n 限制在 36 以內，再對 3 的倍數逐一檢查。掃過 /因數個數.{0,30}(三分之一|1/3|等於)|d\\(n\\)/（0 題）、/正因數(的)?個數/（8 題）、/≤ ?2√n/（0 題）；最接近 number_theory_grade8_foundation_032（恰有 12 個因數的最小數），差異：該題由因數個數公式構造最小數；本題是方程 d(n) = n/3，要先用配對估出上界再窮舉。"
       }
+    },
+    {
+      "id": "number_theory_grade10_foundation_071",
+      "topic": "number_theory",
+      "subtopic": "visible_lattice_points",
+      "tags": [
+        "c:factor_multiple",
+        "c:coordinate",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "座標平面上考慮 1 ≤ x ≤ 6、1 ≤ y ≤ 6 的 36 個格點（x、y 都是整數）。站在原點往某個格點看，如果原點到這個格點的線段上還夾著別的格點，視線就會被擋住，看不到它。例如圖中 A(4, 2) 被 B(2, 1) 擋住了。這 36 個格點之中，從原點看得到的有幾個？",
+        "zh-Hans": "坐标平面上考虑 1 ≤ x ≤ 6、1 ≤ y ≤ 6 的 36 个格点（x、y 都是整数）。站在原点往某个格点看，如果原点到这个格点的线段上还夹着别的格点，视线就会被挡住，看不到它。例如图中 A(4, 2) 被 B(2, 1) 挡住了。这 36 个格点之中，从原点看得到的有几个？",
+        "en": "Consider the 36 lattice points (x, y) with 1 ≤ x ≤ 6 and 1 ≤ y ≤ 6 (x, y integers). Looking from the origin toward one of them, if the segment from the origin to that point contains another lattice point, the view is blocked and the point cannot be seen. For example, in the figure A(4, 2) is blocked by B(2, 1). How many of these 36 lattice points can be seen from the origin?",
+        "ja": "座標平面上で 1 ≤ x ≤ 6、1 ≤ y ≤ 6 を満たす 36 個の格子点（x、y は整数）を考えます。原点からある格子点を見るとき、原点とその点を結ぶ線分上に別の格子点があると視線がさえぎられ、見えません。たとえば図の A(4, 2) は B(2, 1) にさえぎられています。この 36 個のうち、原点から見える格子点はいくつですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 23。",
+        "zh-Hans": "答案是 23。",
+        "en": "The answer is 23.",
+        "ja": "答えは 23 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "設 d = gcd(x, y)。若 d > 1，點 (x/d, y/d) 也是格點，且落在原點與 (x, y) 之間，所以 (x, y) 被擋住；若 d = 1，線段上 0 與 1 之間不可能再有格點。",
+          "所以只要數 1 到 6 之中 x、y 互質的數對。按 x 逐列數：x = 1 時 y 有 6 個；x = 2 時 y = 1、3、5，3 個；x = 3 時 y = 1、2、4、5，4 個。",
+          "x = 4 時 y = 1、3、5，3 個；x = 5 時除了 y = 5 以外都可以，5 個；x = 6 時 y = 1、5，2 個。",
+          "合計 6 + 3 + 4 + 3 + 5 + 2 = 23 個。"
+        ],
+        "zh-Hans": [
+          "设 d = gcd(x, y)。若 d > 1，点 (x/d, y/d) 也是格点，且落在原点与 (x, y) 之间，所以 (x, y) 被挡住；若 d = 1，线段上 0 与 1 之间不可能再有格点。",
+          "所以只要数 1 到 6 之中 x、y 互质的数对。按 x 逐列数：x = 1 时 y 有 6 个；x = 2 时 y = 1、3、5，3 个；x = 3 时 y = 1、2、4、5，4 个。",
+          "x = 4 时 y = 1、3、5，3 个；x = 5 时除了 y = 5 以外都可以，5 个；x = 6 时 y = 1、5，2 个。",
+          "合计 6 + 3 + 4 + 3 + 5 + 2 = 23 个。"
+        ],
+        "en": [
+          "Let d = gcd(x, y). If d > 1, then (x/d, y/d) is a lattice point between the origin and (x, y), so (x, y) is blocked; if d = 1, no lattice point lies strictly inside the segment.",
+          "So we count pairs with gcd(x, y) = 1 for x, y from 1 to 6. By x: x = 1 gives 6 values of y; x = 2 gives y = 1, 3, 5 (3); x = 3 gives y = 1, 2, 4, 5 (4).",
+          "x = 4 gives y = 1, 3, 5 (3); x = 5 gives every y except 5 (5); x = 6 gives y = 1, 5 (2).",
+          "Total: 6 + 3 + 4 + 3 + 5 + 2 = 23."
+        ],
+        "ja": [
+          "d = gcd(x, y) とします。d > 1 なら (x/d, y/d) も格子点で原点と (x, y) の間にあるので見えません。d = 1 なら線分の内部に格子点はありません。",
+          "つまり 1〜6 の中で x、y が互いに素な組を数えればよいです。x ごとに：x = 1 で y は 6 個、x = 2 で y = 1、3、5 の 3 個、x = 3 で y = 1、2、4、5 の 4 個。",
+          "x = 4 で y = 1、3、5 の 3 個、x = 5 で y = 5 以外の 5 個、x = 6 で y = 1、5 の 2 個。",
+          "合計 6 + 3 + 4 + 3 + 5 + 2 = 23 個。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "coordinate_plane",
+        "params": {
+          "minX": 0,
+          "maxX": 6,
+          "minY": 0,
+          "maxY": 6,
+          "showGrid": true,
+          "points": [
+            {
+              "x": 4,
+              "y": 2,
+              "label": "A"
+            },
+            {
+              "x": 2,
+              "y": 1,
+              "label": "B"
+            }
+          ],
+          "path": [
+            {
+              "x": 0,
+              "y": 0
+            },
+            {
+              "x": 4,
+              "y": 2
+            }
+          ]
+        }
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "23"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "格點 (x, y) 從原點看得見 ⇔ gcd(x, y) = 1，在 6 × 6 範圍內數互質數對",
+        "notes": "設計依據：看得見的格點與互質的對應。全庫搜尋「看得見／擋住／互質」：geometry_grade10_foundation_046 是「一條線段上的格點數」（用 gcd 求線段內部格點），number_theory_grade11_foundation_033 是「與 36 互質的數」；本題要先把「被擋住」翻譯成 gcd > 1，再在二維範圍內逐列計數，推理不同。圖畫出格線、A(4, 2)、B(2, 1) 與原點到 A 的視線，只是示範「擋住」的意思，不顯示任何計數結果。答案 23 已用程式窮舉驗算。",
+        "displayText": "改寫題（看得見的格點）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "數論",
+        "topicCode": "number_theory",
+        "subtopic": "看得見的格點",
+        "subtopicCode": "visible_lattice_points"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "number_theory_grade10_foundation_072",
+      "topic": "number_theory",
+      "subtopic": "star_polygon_gcd_sum",
+      "tags": [
+        "c:factor_multiple",
+        "c:modular",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "如圖，圓周上等距排著 12 個點，依順時針方向編號 0 到 11。從 0 號點出發，每次都沿順時針方向前進 k 個位置，並用一條弦連到新的點，一直做到回到 0 號點為止。圖中畫的是 k = 5 的情形，它經過了全部 12 個點。對 k = 1、2、3、…、11 各做一次，把每一次「經過的相異點個數」全部加起來，總和是多少？",
+        "zh-Hans": "如图，圆周上等距排着 12 个点，依顺时针方向编号 0 到 11。从 0 号点出发，每次都沿顺时针方向前进 k 个位置，并用一条弦连到新的点，一直做到回到 0 号点为止。图中画的是 k = 5 的情形，它经过了全部 12 个点。对 k = 1、2、3、…、11 各做一次，把每一次「经过的相异点个数」全部加起来，总和是多少？",
+        "en": "In the figure, 12 equally spaced points on a circle are numbered 0 to 11 clockwise. Starting at point 0, repeatedly move k positions clockwise, joining each new point by a chord, until you return to point 0. The figure shows k = 5, which visits all 12 points. Do this once for each k = 1, 2, 3, …, 11 and add up the numbers of distinct points visited. What is the total?",
+        "ja": "図のように、円周上に等間隔に 12 個の点があり、時計回りに 0〜11 と番号がついています。0 番から出発し、時計回りに k 個ずつ進んでは弦で結ぶことを、0 番に戻るまで続けます。図は k = 5 の場合で、12 個すべての点を通ります。k = 1、2、3、…、11 のそれぞれで行い、「通った異なる点の個数」をすべて足すといくつですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 76。",
+        "zh-Hans": "答案是 76。",
+        "en": "The answer is 76.",
+        "ja": "答えは 76 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "走了 m 步後位置是 mk 除以 12 的餘數。回到 0 號點需要 12 整除 mk，最小的 m 是 12 ÷ gcd(12, k)，而這之前經過的點互不相同，所以經過的相異點數是 12 ÷ gcd(12, k)。",
+          "依 gcd(12, k) 分類：gcd = 1 的 k 是 1、5、7、11（各 12 點）；gcd = 2 的是 2、10（各 6 點）；gcd = 3 的是 3、9（各 4 點）；gcd = 4 的是 4、8（各 3 點）；gcd = 6 的是 6（2 點）。",
+          "總和 = 4 × 12 + 2 × 6 + 2 × 4 + 2 × 3 + 1 × 2 = 48 + 12 + 8 + 6 + 2 = 76。",
+          "對照圖：k = 5 與 12 互質，所以一筆畫出經過全部 12 點的星形，和公式 12 ÷ 1 = 12 一致。"
+        ],
+        "zh-Hans": [
+          "走了 m 步后位置是 mk 除以 12 的余数。回到 0 号点需要 12 整除 mk，最小的 m 是 12 ÷ gcd(12, k)，而这之前经过的点互不相同，所以经过的相异点数是 12 ÷ gcd(12, k)。",
+          "依 gcd(12, k) 分类：gcd = 1 的 k 是 1、5、7、11（各 12 点）；gcd = 2 的是 2、10（各 6 点）；gcd = 3 的是 3、9（各 4 点）；gcd = 4 的是 4、8（各 3 点）；gcd = 6 的是 6（2 点）。",
+          "总和 = 4 × 12 + 2 × 6 + 2 × 4 + 2 × 3 + 1 × 2 = 48 + 12 + 8 + 6 + 2 = 76。",
+          "对照图：k = 5 与 12 互质，所以一笔画出经过全部 12 点的星形，和公式 12 ÷ 1 = 12 一致。"
+        ],
+        "en": [
+          "After m moves the position is mk mod 12. Returning to 0 needs 12 | mk, and the least such m is 12 ÷ gcd(12, k); the points before that are all different, so the number of distinct points visited is 12 ÷ gcd(12, k).",
+          "Group by gcd(12, k): gcd 1 for k = 1, 5, 7, 11 (12 points each); gcd 2 for k = 2, 10 (6 each); gcd 3 for k = 3, 9 (4 each); gcd 4 for k = 4, 8 (3 each); gcd 6 for k = 6 (2 points).",
+          "Total = 4 × 12 + 2 × 6 + 2 × 4 + 2 × 3 + 1 × 2 = 48 + 12 + 8 + 6 + 2 = 76.",
+          "Compare with the figure: k = 5 is coprime to 12, so the star passes through all 12 points, matching 12 ÷ 1 = 12."
+        ],
+        "ja": [
+          "m 回進んだ位置は mk を 12 で割った余りです。0 に戻るには 12 が mk を割り切る必要があり、最小の m は 12 ÷ gcd(12, k)。それまでの点はすべて異なるので、通る点の数は 12 ÷ gcd(12, k)。",
+          "gcd(12, k) で分類：gcd = 1 は k = 1、5、7、11（各 12 点）、gcd = 2 は k = 2、10（各 6 点）、gcd = 3 は k = 3、9（各 4 点）、gcd = 4 は k = 4、8（各 3 点）、gcd = 6 は k = 6（2 点）。",
+          "合計 = 4 × 12 + 2 × 6 + 2 × 4 + 2 × 3 + 1 × 2 = 48 + 12 + 8 + 6 + 2 = 76。",
+          "図と照合：k = 5 は 12 と互いに素なので、星形は 12 点すべてを通り、12 ÷ 1 = 12 と一致します。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "geometry_scene",
+        "params": {
+          "bounds": {
+            "minX": -6,
+            "minY": -6,
+            "maxX": 6,
+            "maxY": 6
+          },
+          "points": [
+            {
+              "name": "0",
+              "x": 0,
+              "y": 5,
+              "pos": "t"
+            },
+            {
+              "name": "1",
+              "x": 2.5,
+              "y": 4.3301,
+              "pos": "tr"
+            },
+            {
+              "name": "2",
+              "x": 4.3301,
+              "y": 2.5,
+              "pos": "tr"
+            },
+            {
+              "name": "3",
+              "x": 5,
+              "y": 0,
+              "pos": "r"
+            },
+            {
+              "name": "4",
+              "x": 4.3301,
+              "y": -2.5,
+              "pos": "br"
+            },
+            {
+              "name": "5",
+              "x": 2.5,
+              "y": -4.3301,
+              "pos": "br"
+            },
+            {
+              "name": "6",
+              "x": 0,
+              "y": -5,
+              "pos": "b"
+            },
+            {
+              "name": "7",
+              "x": -2.5,
+              "y": -4.3301,
+              "pos": "bl"
+            },
+            {
+              "name": "8",
+              "x": -4.3301,
+              "y": -2.5,
+              "pos": "bl"
+            },
+            {
+              "name": "9",
+              "x": -5,
+              "y": 0,
+              "pos": "l"
+            },
+            {
+              "name": "10",
+              "x": -4.3301,
+              "y": 2.5,
+              "pos": "tl"
+            },
+            {
+              "name": "11",
+              "x": -2.5,
+              "y": 4.3301,
+              "pos": "tl"
+            }
+          ],
+          "segments": [
+            {
+              "from": "0",
+              "to": "5",
+              "style": "solid"
+            },
+            {
+              "from": "1",
+              "to": "6",
+              "style": "solid"
+            },
+            {
+              "from": "2",
+              "to": "7",
+              "style": "solid"
+            },
+            {
+              "from": "3",
+              "to": "8",
+              "style": "solid"
+            },
+            {
+              "from": "4",
+              "to": "9",
+              "style": "solid"
+            },
+            {
+              "from": "5",
+              "to": "10",
+              "style": "solid"
+            },
+            {
+              "from": "6",
+              "to": "11",
+              "style": "solid"
+            },
+            {
+              "from": "7",
+              "to": "0",
+              "style": "solid"
+            },
+            {
+              "from": "8",
+              "to": "1",
+              "style": "solid"
+            },
+            {
+              "from": "9",
+              "to": "2",
+              "style": "solid"
+            },
+            {
+              "from": "10",
+              "to": "3",
+              "style": "solid"
+            },
+            {
+              "from": "11",
+              "to": "4",
+              "style": "solid"
+            }
+          ],
+          "arcs": [
+            {
+              "cx": 0,
+              "cy": 0,
+              "r": 5,
+              "from": 0,
+              "to": 360
+            }
+          ]
+        }
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "76"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "圓上等距 n 點每次前進 k 格，經過的點數為 n/gcd(n, k)；對 k 分類加總",
+        "notes": "設計依據：星形多邊形與最大公因數。全庫搜尋「圓周上 12 個點／每隔」無同型題；number_theory_grade11_foundation_033 只問與 36 互質的個數。本題要先把「回到起點」轉成 12 | mk，推出 n/gcd(n, k)，再分類加總，推理不同。圖畫出 12 個編號點與 k = 5 的星形（12 條弦），只示範規則；其他 k 的點數不在圖上。答案 76 已用程式驗算。",
+        "displayText": "改寫題（圓上跳點）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "數論",
+        "topicCode": "number_theory",
+        "subtopic": "圓上跳點",
+        "subtopicCode": "star_polygon_gcd_sum"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "number_theory_grade10_foundation_073",
+      "topic": "number_theory",
+      "subtopic": "greedy_square_dissection_euclid",
+      "tags": [
+        "c:factor_multiple",
+        "m:invariant"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "如圖，有一張 13 × 8 的長方形紙。每次都從剩下的長方形紙上，切下一個盡可能大的正方形，直到剩下的部分本身就是正方形為止（最後那個也算一個）。13 × 8 的紙依序切出邊長 8、5、3、2、1、1 的正方形，共 6 個。如果改用一張 100 × 37 的長方形紙照同樣的方法切，一共會得到幾個正方形？",
+        "zh-Hans": "如图，有一张 13 × 8 的长方形纸。每次都从剩下的长方形纸上，切下一个尽可能大的正方形，直到剩下的部分本身就是正方形为止（最后那个也算一个）。13 × 8 的纸依序切出边长 8、5、3、2、1、1 的正方形，共 6 个。如果改用一张 100 × 37 的长方形纸照同样的方法切，一共会得到几个正方形？",
+        "en": "In the figure, a 13 × 8 rectangle of paper is cut repeatedly: each time the largest possible square is cut off the remaining rectangle, until what is left is itself a square (that last piece counts too). The 13 × 8 sheet gives squares of sides 8, 5, 3, 2, 1, 1 — six squares. If a 100 × 37 rectangle is cut the same way, how many squares are obtained in total?",
+        "ja": "図のように 13 × 8 の長方形の紙があります。残った長方形からできるだけ大きい正方形を切り取ることを、残りが正方形になるまで繰り返します（最後の正方形も 1 個と数えます）。13 × 8 の紙からは 1 辺 8、5、3、2、1、1 の正方形が順に切り取れて、合計 6 個です。100 × 37 の長方形の紙を同じ方法で切ると、正方形は全部で何個できますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 11。",
+        "zh-Hans": "答案是 11。",
+        "en": "The answer is 11.",
+        "ja": "答えは 11 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "長方形 a × b（a ≥ b）上能連續切下 q 個邊長 b 的正方形，其中 q 是 a 除以 b 的商；剩下的是 b × r，r 是餘數。這正是輾轉相除法的一步。",
+          "所以正方形總數等於輾轉相除法中所有商的和。驗證 13 × 8：13 = 1 × 8 + 5、8 = 1 × 5 + 3、5 = 1 × 3 + 2、3 = 1 × 2 + 1、2 = 2 × 1，商的和 1 + 1 + 1 + 1 + 2 = 6 ✓。",
+          "對 100 × 37：100 = 2 × 37 + 26、37 = 1 × 26 + 11、26 = 2 × 11 + 4、11 = 2 × 4 + 3、4 = 1 × 3 + 1、3 = 3 × 1。",
+          "商的和 = 2 + 1 + 2 + 2 + 1 + 3 = 11，所以共切出 11 個正方形（最小的邊長是 gcd(100, 37) = 1）。"
+        ],
+        "zh-Hans": [
+          "长方形 a × b（a ≥ b）上能连续切下 q 个边长 b 的正方形，其中 q 是 a 除以 b 的商；剩下的是 b × r，r 是余数。这正是辗转相除法的一步。",
+          "所以正方形总数等于辗转相除法中所有商的和。验证 13 × 8：13 = 1 × 8 + 5、8 = 1 × 5 + 3、5 = 1 × 3 + 2、3 = 1 × 2 + 1、2 = 2 × 1，商的和 1 + 1 + 1 + 1 + 2 = 6 ✓。",
+          "对 100 × 37：100 = 2 × 37 + 26、37 = 1 × 26 + 11、26 = 2 × 11 + 4、11 = 2 × 4 + 3、4 = 1 × 3 + 1、3 = 3 × 1。",
+          "商的和 = 2 + 1 + 2 + 2 + 1 + 3 = 11，所以共切出 11 个正方形（最小的边长是 gcd(100, 37) = 1）。"
+        ],
+        "en": [
+          "From an a × b rectangle (a ≥ b) you can cut q squares of side b in a row, where q is the quotient of a ÷ b; what remains is b × r with r the remainder. This is exactly one step of the Euclidean algorithm.",
+          "So the number of squares is the sum of all quotients in the Euclidean algorithm. Check 13 × 8: 13 = 1 × 8 + 5, 8 = 1 × 5 + 3, 5 = 1 × 3 + 2, 3 = 1 × 2 + 1, 2 = 2 × 1, and 1 + 1 + 1 + 1 + 2 = 6 ✓.",
+          "For 100 × 37: 100 = 2 × 37 + 26, 37 = 1 × 26 + 11, 26 = 2 × 11 + 4, 11 = 2 × 4 + 3, 4 = 1 × 3 + 1, 3 = 3 × 1.",
+          "The quotients add to 2 + 1 + 2 + 2 + 1 + 3 = 11, so 11 squares are cut (the smallest has side gcd(100, 37) = 1)."
+        ],
+        "ja": [
+          "a × b（a ≥ b）の長方形からは 1 辺 b の正方形が q 個続けて切れます。q は a ÷ b の商で、残りは b × r（r は余り）。これはユークリッドの互除法の 1 ステップそのものです。",
+          "よって正方形の個数は互除法のすべての商の和です。13 × 8 で確認：13 = 1 × 8 + 5、8 = 1 × 5 + 3、5 = 1 × 3 + 2、3 = 1 × 2 + 1、2 = 2 × 1 で、1 + 1 + 1 + 1 + 2 = 6 ✓。",
+          "100 × 37 では 100 = 2 × 37 + 26、37 = 1 × 26 + 11、26 = 2 × 11 + 4、11 = 2 × 4 + 3、4 = 1 × 3 + 1、3 = 3 × 1。",
+          "商の和は 2 + 1 + 2 + 2 + 1 + 3 = 11 なので、正方形は 11 個（最小の 1 辺は gcd(100, 37) = 1）。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "geometry_scene",
+        "params": {
+          "bounds": {
+            "minX": -0.6,
+            "minY": -0.6,
+            "maxX": 13.6,
+            "maxY": 8.6
+          },
+          "points": [
+            {
+              "name": "A",
+              "x": 0,
+              "y": 0,
+              "pos": "bl"
+            },
+            {
+              "name": "B",
+              "x": 13,
+              "y": 0,
+              "pos": "br"
+            },
+            {
+              "name": "C",
+              "x": 13,
+              "y": 8,
+              "pos": "tr"
+            },
+            {
+              "name": "D",
+              "x": 0,
+              "y": 8,
+              "pos": "tl"
+            },
+            {
+              "name": "u1",
+              "x": 8,
+              "y": 0,
+              "visible": false
+            },
+            {
+              "name": "u2",
+              "x": 8,
+              "y": 8,
+              "visible": false
+            },
+            {
+              "name": "u3",
+              "x": 8,
+              "y": 5,
+              "visible": false
+            },
+            {
+              "name": "u4",
+              "x": 13,
+              "y": 5,
+              "visible": false
+            },
+            {
+              "name": "u5",
+              "x": 11,
+              "y": 5,
+              "visible": false
+            },
+            {
+              "name": "u6",
+              "x": 11,
+              "y": 8,
+              "visible": false
+            },
+            {
+              "name": "u7",
+              "x": 11,
+              "y": 7,
+              "visible": false
+            },
+            {
+              "name": "u8",
+              "x": 13,
+              "y": 7,
+              "visible": false
+            },
+            {
+              "name": "u9",
+              "x": 12,
+              "y": 7,
+              "visible": false
+            },
+            {
+              "name": "u10",
+              "x": 12,
+              "y": 8,
+              "visible": false
+            }
+          ],
+          "segments": [
+            {
+              "from": "A",
+              "to": "B",
+              "style": "solid"
+            },
+            {
+              "from": "B",
+              "to": "C",
+              "style": "solid"
+            },
+            {
+              "from": "C",
+              "to": "D",
+              "style": "solid"
+            },
+            {
+              "from": "D",
+              "to": "A",
+              "style": "solid"
+            },
+            {
+              "from": "u1",
+              "to": "u2",
+              "style": "solid"
+            },
+            {
+              "from": "u3",
+              "to": "u4",
+              "style": "solid"
+            },
+            {
+              "from": "u5",
+              "to": "u6",
+              "style": "solid"
+            },
+            {
+              "from": "u7",
+              "to": "u8",
+              "style": "solid"
+            },
+            {
+              "from": "u9",
+              "to": "u10",
+              "style": "solid"
+            }
+          ]
+        }
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "11"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "每次切最大正方形＝輾轉相除；正方形個數是各步商的總和",
+        "notes": "設計依據：幾何化的輾轉相除。全庫搜尋「切下正方形」只有 algebra_grade10_foundation_041（切一個正方形後剩下的長方形與原來相似，黃金比）；本題要把切割過程對應到輾轉相除並把商相加，推理不同。圖畫出 13 × 8 的實際切法（6 個正方形的分割線，比例正確）當作示範；所問的 100 × 37 不在圖上，圖不洩題。答案 11 已用程式驗算。",
+        "displayText": "改寫題（切正方形與輾轉相除）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "數論",
+        "topicCode": "number_theory",
+        "subtopic": "切正方形與輾轉相除",
+        "subtopicCode": "greedy_square_dissection_euclid"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "number_theory_grade10_foundation_074",
+      "topic": "number_theory",
+      "subtopic": "lattice_generated_by_two_jumps",
+      "tags": [
+        "c:modular",
+        "c:vector",
+        "m:invariant"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade10",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "如圖，一隻青蛙停在原點 O。圖中畫出兩種跳法：從 O 到 A(3, 5) 與從 O 到 B(5, 3)。青蛙每一跳可以把自己的座標加上 (3, 5)、減去 (3, 5)、加上 (5, 3) 或減去 (5, 3)，跳的次數不限。下列哪一個點是青蛙跳得到的？",
+        "zh-Hans": "如图，一只青蛙停在原点 O。图中画出两种跳法：从 O 到 A(3, 5) 与从 O 到 B(5, 3)。青蛙每一跳可以把自己的坐标加上 (3, 5)、减去 (3, 5)、加上 (5, 3) 或减去 (5, 3)，跳的次数不限。下列哪一个点是青蛙跳得到的？",
+        "en": "In the figure, a frog sits at the origin O. Two jumps are drawn: from O to A(3, 5) and from O to B(5, 3). Each jump adds (3, 5), subtracts (3, 5), adds (5, 3) or subtracts (5, 3) from the frog’s coordinates, and any number of jumps is allowed. Which of the following points can the frog reach?",
+        "ja": "図のように、カエルが原点 O にいます。図には 2 種類の跳び方、O から A(3, 5) と O から B(5, 3) が描かれています。カエルは 1 回の跳びで座標に (3, 5) を足すか引くか、(5, 3) を足すか引くかでき、回数は自由です。次のうち、カエルが到達できる点はどれですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 C：(1, 7)。",
+        "zh-Hans": "答案是 C：(1, 7)。",
+        "en": "The answer is C: (1, 7).",
+        "ja": "答えは C：(1, 7) です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "跳了若干次後，位置一定能寫成 a(3, 5) + b(5, 3)，a、b 是整數（正負表示加或減的淨次數）。即 x = 3a + 5b、y = 5a + 3b。",
+          "兩式相加、相減：x + y = 8(a + b)，y − x = 2(a − b)。所以必要條件是 x + y 是 8 的倍數、y − x 是偶數，而且 (x + y)/8 與 (y − x)/2 同奇偶（因為 a + b 與 a − b 同奇偶）。反過來，滿足這些條件就能解出整數 a、b。",
+          "(6, 6)：x + y = 12 不是 8 的倍數，不行。(4, 4)：(x + y)/8 = 1 是奇數，(y − x)/2 = 0 是偶數，不行。(2, 6)：1 與 2 奇偶不同，不行。",
+          "(1, 7)：a + b = 1、a − b = 3，得 a = 2、b = −1：2(3, 5) − (5, 3) = (1, 7) ✓。例如先加兩次 (3, 5) 再減一次 (5, 3)。"
+        ],
+        "zh-Hans": [
+          "跳了若干次后，位置一定能写成 a(3, 5) + b(5, 3)，a、b 是整数（正负表示加或减的净次数）。即 x = 3a + 5b、y = 5a + 3b。",
+          "两式相加、相减：x + y = 8(a + b)，y − x = 2(a − b)。所以必要条件是 x + y 是 8 的倍数、y − x 是偶数，而且 (x + y)/8 与 (y − x)/2 同奇偶（因为 a + b 与 a − b 同奇偶）。反过来，满足这些条件就能解出整数 a、b。",
+          "(6, 6)：x + y = 12 不是 8 的倍数，不行。(4, 4)：(x + y)/8 = 1 是奇数，(y − x)/2 = 0 是偶数，不行。(2, 6)：1 与 2 奇偶不同，不行。",
+          "(1, 7)：a + b = 1、a − b = 3，得 a = 2、b = −1：2(3, 5) − (5, 3) = (1, 7) ✓。例如先加两次 (3, 5) 再减一次 (5, 3)。"
+        ],
+        "en": [
+          "After some jumps the position is a(3, 5) + b(5, 3) with integers a and b (net numbers of additions minus subtractions): x = 3a + 5b and y = 5a + 3b.",
+          "Adding and subtracting: x + y = 8(a + b) and y − x = 2(a − b). So x + y must be a multiple of 8, y − x must be even, and (x + y)/8 and (y − x)/2 must have the same parity (since a + b and a − b do). Conversely these conditions give integer a and b.",
+          "(6, 6): x + y = 12 is not a multiple of 8 — impossible. (4, 4): (x + y)/8 = 1 is odd but (y − x)/2 = 0 is even — impossible. (2, 6): 1 and 2 differ in parity — impossible.",
+          "(1, 7): a + b = 1 and a − b = 3 give a = 2, b = −1, and 2(3, 5) − (5, 3) = (1, 7) ✓ — for instance add (3, 5) twice and subtract (5, 3) once."
+        ],
+        "ja": [
+          "何回か跳んだ後の位置は a(3, 5) + b(5, 3)（a、b は整数で、足した回数から引いた回数を引いたもの）と書けます。つまり x = 3a + 5b、y = 5a + 3b。",
+          "足し引きすると x + y = 8(a + b)、y − x = 2(a − b)。よって x + y は 8 の倍数、y − x は偶数で、さらに (x + y)/8 と (y − x)/2 の偶奇が一致すること（a + b と a − b は偶奇が同じ）が必要です。逆にこれらを満たせば整数 a、b が求まります。",
+          "(6, 6)：x + y = 12 は 8 の倍数でないので不可。(4, 4)：(x + y)/8 = 1 は奇数、(y − x)/2 = 0 は偶数で不可。(2, 6)：1 と 2 で偶奇が違うので不可。",
+          "(1, 7)：a + b = 1、a − b = 3 から a = 2、b = −1 で、2(3, 5) − (5, 3) = (1, 7) ✓。たとえば (3, 5) を 2 回足して (5, 3) を 1 回引けばよい。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "coordinate_plane",
+        "params": {
+          "minX": -1,
+          "maxX": 6,
+          "minY": -1,
+          "maxY": 6,
+          "showGrid": true,
+          "points": [
+            {
+              "x": 0,
+              "y": 0,
+              "label": ""
+            },
+            {
+              "x": 3,
+              "y": 5,
+              "label": "A"
+            },
+            {
+              "x": 5,
+              "y": 3,
+              "label": "B"
+            }
+          ],
+          "path": [
+            {
+              "x": 3,
+              "y": 5
+            },
+            {
+              "x": 0,
+              "y": 0
+            },
+            {
+              "x": 5,
+              "y": 3
+            }
+          ]
+        }
+      },
+      "answerMode": "multiple_choice",
+      "options": {
+        "A": {
+          "zh-Hant": "(4, 4)",
+          "zh-Hans": "(4, 4)",
+          "en": "(4, 4)",
+          "ja": "(4, 4)"
+        },
+        "B": {
+          "zh-Hant": "(2, 6)",
+          "zh-Hans": "(2, 6)",
+          "en": "(2, 6)",
+          "ja": "(2, 6)"
+        },
+        "C": {
+          "zh-Hant": "(1, 7)",
+          "zh-Hans": "(1, 7)",
+          "en": "(1, 7)",
+          "ja": "(1, 7)"
+        },
+        "D": {
+          "zh-Hant": "(6, 6)",
+          "zh-Hans": "(6, 6)",
+          "en": "(6, 6)",
+          "ja": "(6, 6)"
+        }
+      },
+      "correctAnswer": {
+        "type": "choice",
+        "value": "C"
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "兩個向量生成的格子：用 x + y、y − x 的整除與奇偶不變量判斷可達點",
+        "notes": "設計依據：生成格的不變量。最接近的既有題 geometry_grade5_foundation_092（青蛙只能往右上兩種跳法、數跳了幾次）與 geometry_grade11_foundation_050（四隻青蛙互跳的不變量）；本題允許正反跳、要判斷可達點，需要同時用模 8 與奇偶兩層條件，推理不同。圖畫出原點與 A、B 兩個跳躍向量（以折線 A–O–B 表示），只用來說明兩種跳法；四個選項點都沒有畫出。誘答 (6, 6) 違反模 8、(4, 4) 與 (2, 6) 只違反奇偶配對，是常見漏掉第二層條件的結果。已用程式窮舉驗證只有 (1, 7) 可達。",
+        "displayText": "改寫題（青蛙跳得到哪裡）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "數論",
+        "topicCode": "number_theory",
+        "subtopic": "青蛙跳得到哪裡",
+        "subtopicCode": "lattice_generated_by_two_jumps"
+      },
+      "reviewStatus": "ok"
     }
   ]
 }
