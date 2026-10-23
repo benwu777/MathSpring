@@ -9468,6 +9468,773 @@
         "reference": "logic-grade4-foundation",
         "notes": "兩個限制各自只要 2 趟，但 2 趟必須每趟 4 箱，鴿籠使某趟有 2 大箱而超重，故需 3 趟。掃過 /電梯.{0,60}(箱子|貨物).{0,60}(公斤|人)/（1 題）、/最多.{0,10}(放|載) 4 個.{0,30}公斤/（0 題）；最接近 logic_grade3_foundation_105，差異：那題只有重量限制、求最少趟數；本題同時有箱數與重量兩個限制，各自的下界都是 2，要用「2 趟必須每趟剛好 4 箱」加鴿籠推出矛盾"
       }
+    },
+    {
+      "id": "logic_grade4_foundation_119",
+      "topic": "logic",
+      "subtopic": "minesweeper_grid_deduction",
+      "tags": [
+        "c:logic_deduction",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade4",
+      "challengeTier": "foundation",
+      "reviewStatus": "ok",
+      "prompt": {
+        "zh-Hant": "如圖是一個「踩地雷」遊戲的盤面，共 4 個橫排、每排 5 格。寫著數字的格子已經打開，裡面沒有地雷；數字表示這一格周圍 8 個相鄰格子（上、下、左、右和 4 個斜角）裡一共有幾顆地雷。塗色的格子還沒打開，裡面可能有地雷，也可能沒有。根據這些數字，可以完全判斷出每一個塗色格子有沒有地雷。塗色的格子中，沒有地雷的有幾格？",
+        "zh-Hans": "如图是一个“扫雷”游戏的盘面，共 4 个横排、每排 5 格。写着数字的格子已经打开，里面没有地雷；数字表示这一格周围 8 个相邻格子（上、下、左、右和 4 个斜角）里一共有几颗地雷。涂色的格子还没打开，里面可能有地雷，也可能没有。根据这些数字，可以完全判断出每一个涂色格子有没有地雷。涂色的格子中，没有地雷的有几格？",
+        "en": "The figure shows a Minesweeper board with 4 rows of 5 cells. Cells with numbers are already open and contain no mine; each number tells how many mines are in the 8 surrounding cells (up, down, left, right and the 4 diagonal neighbours). The shaded cells are still closed and may or may not hide a mine. The numbers are enough to decide exactly which shaded cells have mines. How many of the shaded cells have no mine?",
+        "ja": "図はマインスイーパーの盤面で、横の段が4段、各段5マスあります。数字が書かれたマスはすでに開いていて地雷はありません。その数字は、まわりの8マス（上下左右と斜めの4マス）にある地雷の数を表します。色のついたマスはまだ開いておらず、地雷があるかもしれないし、ないかもしれません。数字から、色のついたどのマスに地雷があるかを完全に決めることができます。色のついたマスのうち、地雷がないマスは何マスですか。"
+      },
+      "answer": {
+        "zh-Hant": "塗色的格子中沒有地雷的有 6 格。",
+        "zh-Hans": "涂色的格子中没有地雷的有 6 格。",
+        "en": "6 of the shaded cells have no mine.",
+        "ja": "地雷がない色つきのマスは 6 マスです。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "把橫排由上往下叫第 1～4 排，每排的格子由左往右叫第 1～5 格。第 4 排第 1 格寫 1，它周圍沒打開的只有第 3 排第 1 格，所以那一格是地雷。",
+          "第 2 排第 1 格寫 1，周圍沒打開的是第 1 排第 1、2 格和第 3 排第 1 格；地雷已經是第 3 排第 1 格，所以第 1 排第 1、2 格都安全。",
+          "第 3 排第 2 格寫 1，周圍沒打開的是第 3 排第 1 格（地雷）、第 2 排第 3 格、第 3 排第 3 格，所以後面兩格安全。再看第 2 排第 2 格寫 2：周圍除了第 3 排第 1 格以外，只剩第 1 排第 3 格還沒確定，所以它是地雷。",
+          "第 1 排第 4 格寫 3：周圍沒打開的是第 1 排第 3、5 格和第 2 排第 3、5 格，其中第 2 排第 3 格安全，所以另外三格都是地雷：第 1 排第 3 格、第 1 排第 5 格、第 2 排第 5 格。",
+          "第 2 排第 4 格寫 4：周圍已知 3 顆地雷（第 1 排第 3、5 格、第 2 排第 5 格），第 2 排第 3 格和第 3 排第 3 格安全，所以剩下的第 3 排第 4 格一定是地雷。",
+          "第 3 排第 5 格寫 2：周圍已經有第 2 排第 5 格和第 3 排第 4 格兩顆，所以第 4 排第 4、5 格都安全。檢查其他數字也都吻合。",
+          "地雷一共 5 顆。塗色的格子有 11 格，沒有地雷的有 11 − 5 = 6 格。"
+        ],
+        "zh-Hans": [
+          "把横排由上往下叫第 1～4 排，每排的格子由左往右叫第 1～5 格。第 4 排第 1 格写 1，它周围没打开的只有第 3 排第 1 格，所以那一格是地雷。",
+          "第 2 排第 1 格写 1，周围没打开的是第 1 排第 1、2 格和第 3 排第 1 格；地雷已经是第 3 排第 1 格，所以第 1 排第 1、2 格都安全。",
+          "第 3 排第 2 格写 1，周围没打开的是第 3 排第 1 格（地雷）、第 2 排第 3 格、第 3 排第 3 格，所以后面两格安全。再看第 2 排第 2 格写 2：周围除了第 3 排第 1 格以外，只剩第 1 排第 3 格还没确定，所以它是地雷。",
+          "第 1 排第 4 格写 3：周围没打开的是第 1 排第 3、5 格和第 2 排第 3、5 格，其中第 2 排第 3 格安全，所以另外三格都是地雷：第 1 排第 3 格、第 1 排第 5 格、第 2 排第 5 格。",
+          "第 2 排第 4 格写 4：周围已知 3 颗地雷（第 1 排第 3、5 格、第 2 排第 5 格），第 2 排第 3 格和第 3 排第 3 格安全，所以剩下的第 3 排第 4 格一定是地雷。",
+          "第 3 排第 5 格写 2：周围已经有第 2 排第 5 格和第 3 排第 4 格两颗，所以第 4 排第 4、5 格都安全。检查其他数字也都吻合。",
+          "地雷一共 5 颗。涂色的格子有 11 格，没有地雷的有 11 − 5 = 6 格。"
+        ],
+        "en": [
+          "Call the rows 1–4 from top to bottom and the cells 1–5 from left to right. Row 4, cell 1 shows 1, and its only closed neighbour is row 3, cell 1, so that cell is a mine.",
+          "Row 2, cell 1 shows 1; its closed neighbours are row 1 cells 1 and 2 and row 3 cell 1. The mine is already row 3 cell 1, so row 1 cells 1 and 2 are safe.",
+          "Row 3, cell 2 shows 1; its closed neighbours are row 3 cell 1 (mine), row 2 cell 3 and row 3 cell 3, so the last two are safe. Now row 2, cell 2 shows 2: apart from row 3 cell 1, the only undecided neighbour is row 1 cell 3, so it is a mine.",
+          "Row 1, cell 4 shows 3; its closed neighbours are row 1 cells 3 and 5 and row 2 cells 3 and 5. Row 2 cell 3 is safe, so the other three are mines: row 1 cell 3, row 1 cell 5 and row 2 cell 5.",
+          "Row 2, cell 4 shows 4: three mines are known (row 1 cells 3 and 5, row 2 cell 5) and row 2 cell 3 and row 3 cell 3 are safe, so the remaining neighbour, row 3 cell 4, must be a mine.",
+          "Row 3, cell 5 shows 2 and already touches two mines (row 2 cell 5 and row 3 cell 4), so row 4 cells 4 and 5 are safe. All other numbers check out.",
+          "There are 5 mines in total. There are 11 shaded cells, so 11 − 5 = 6 of them have no mine."
+        ],
+        "ja": [
+          "横の段を上から1～4段目、各段のマスを左から1～5マス目とよびます。4段目1マス目は1で、まわりの開いていないマスは3段目1マス目だけなので、そこが地雷です。",
+          "2段目1マス目は1で、まわりの開いていないマスは1段目1・2マス目と3段目1マス目です。地雷は3段目1マス目なので、1段目1・2マス目は安全です。",
+          "3段目2マス目は1で、まわりの開いていないマスは3段目1マス目（地雷）、2段目3マス目、3段目3マス目なので、後の2マスは安全です。次に2段目2マス目は2で、3段目1マス目以外に決まっていないのは1段目3マス目だけなので、そこが地雷です。",
+          "1段目4マス目は3で、まわりの開いていないマスは1段目3・5マス目と2段目3・5マス目です。2段目3マス目は安全なので、残りの3マス（1段目3マス目、1段目5マス目、2段目5マス目）はすべて地雷です。",
+          "2段目4マス目は4です。地雷は3個（1段目3・5マス目、2段目5マス目）わかっていて、2段目3マス目と3段目3マス目は安全なので、残る3段目4マス目が地雷です。",
+          "3段目5マス目は2で、すでに2段目5マス目と3段目4マス目の2個に接しているので、4段目4・5マス目は安全です。ほかの数字も合っています。",
+          "地雷は全部で5個です。色のついたマスは11マスなので、地雷がないのは 11 − 5 = 6 マスです。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "composite_grid_shape",
+        "params": {
+          "rows": 4,
+          "cols": 5,
+          "filledCells": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              0,
+              4
+            ],
+            [
+              1,
+              2
+            ],
+            [
+              1,
+              4
+            ],
+            [
+              2,
+              0
+            ],
+            [
+              2,
+              2
+            ],
+            [
+              2,
+              3
+            ],
+            [
+              3,
+              3
+            ],
+            [
+              3,
+              4
+            ]
+          ],
+          "cellLabels": {
+            "0,3": "3",
+            "1,0": "1",
+            "1,1": "2",
+            "1,3": "4",
+            "2,1": "1",
+            "2,4": "2",
+            "3,0": "1",
+            "3,1": "1",
+            "3,2": "1"
+          }
+        }
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "6"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "agent-B-figure-round10-2026-10-23",
+        "notes": "設計依據：踩地雷盤面推理（改寫自常見的 Minesweeper 推理謎題）。最接近既有題 logic_grade2_foundation_112（3×3 只看四個角）與 logic_grade2_foundation_111（一排 6 格）；本題是 4×5 二維盤面，要依序用 6 個數字連鎖推出 5 顆地雷，推理骨架不同。圖：4×5 方格，打開的格寫數字、未打開的格塗色；圖上沒有標出任何地雷，答案要推理才得到。程式窮舉確認地雷位置唯一。",
+        "displayText": "MathSpring 改寫題（附圖）"
+      }
+    },
+    {
+      "id": "logic_grade4_foundation_120",
+      "topic": "logic",
+      "subtopic": "number_path_consecutive_adjacent",
+      "tags": [
+        "c:logic_deduction",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade4",
+      "challengeTier": "foundation",
+      "reviewStatus": "ok",
+      "prompt": {
+        "zh-Hant": "如圖，要把 1 到 16 這 16 個數填進 4 × 4 的方格，每格一個數，而且任何兩個連續的數（例如 3 和 4、10 和 11）所在的兩格，一定要有共用的邊（上下或左右相鄰）。圖中已經填好 6 個數。標 ? 的格子應該填多少？",
+        "zh-Hans": "如图，要把 1 到 16 这 16 个数填进 4 × 4 的方格，每格一个数，而且任何两个连续的数（例如 3 和 4、10 和 11）所在的两格，一定要有共用的边（上下或左右相邻）。图中已经填好 6 个数。标 ? 的格子应该填多少？",
+        "en": "The numbers 1 to 16 are to be written in the 4 × 4 grid, one per cell, so that any two consecutive numbers (such as 3 and 4, or 10 and 11) are in cells sharing a side (up–down or left–right neighbours). Six numbers are already filled in, as shown. What number goes in the cell marked ?",
+        "ja": "図の 4 × 4 のマスに 1 から 16 までの数を1マスに1つずつ入れます。ただし、続いている2つの数（たとえば3と4、10と11）が入るマスは、必ず辺を共有して（上下か左右にとなり合って）いなければなりません。図には6つの数がすでに入っています。? のマスに入る数はいくつですか。"
+      },
+      "answer": {
+        "zh-Hant": "標 ? 的格子填 6。",
+        "zh-Hans": "标 ? 的格子填 6。",
+        "en": "The cell marked ? holds 6.",
+        "ja": "? のマスに入る数は 6 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "橫排由上往下叫第 1～4 排、格子由左往右叫第 1～4 格。除了 1 和 16，每個數 k 的兩個鄰格裡必須分別有 k − 1 和 k + 1。",
+          "15 在第 4 排第 1 格，它的鄰格只有第 4 排第 2 格（14）和第 3 排第 1 格，所以 16 在第 3 排第 1 格。",
+          "第 1 排第 1 格只有兩個鄰格：第 1 排第 2 格（1）和第 2 排第 1 格。它不是 1 也不是 16，所以前一個數和後一個數都要在這兩格裡，只能是 2（前一個是 1），而 3 在第 2 排第 1 格。",
+          "4 要同時和 3（第 2 排第 1 格）和 5（第 3 排第 2 格）相鄰，兩者共同的鄰格是第 2 排第 2 格和第 3 排第 1 格，後者已經是 16，所以 4 在第 2 排第 2 格。",
+          "6 要和 5 相鄰。5 的鄰格是第 2 排第 2 格（4）、第 3 排第 1 格（16）、第 4 排第 2 格（14）和第 3 排第 3 格，所以 6 只能在第 3 排第 3 格，也就是 ? 的位置。",
+          "驗算：7 放第 2 排第 3 格接到 8；10、11、12、13 依序放第 2 排第 4 格、第 3 排第 4 格、第 4 排第 4 格、第 4 排第 3 格，再接到 14，16 格剛好填滿。所以 ? 是 6。"
+        ],
+        "zh-Hans": [
+          "横排由上往下叫第 1～4 排、格子由左往右叫第 1～4 格。除了 1 和 16，每个数 k 的两个邻格里必须分别有 k − 1 和 k + 1。",
+          "15 在第 4 排第 1 格，它的邻格只有第 4 排第 2 格（14）和第 3 排第 1 格，所以 16 在第 3 排第 1 格。",
+          "第 1 排第 1 格只有两个邻格：第 1 排第 2 格（1）和第 2 排第 1 格。它不是 1 也不是 16，所以前一个数和后一个数都要在这两格里，只能是 2（前一个是 1），而 3 在第 2 排第 1 格。",
+          "4 要同时和 3（第 2 排第 1 格）和 5（第 3 排第 2 格）相邻，两者共同的邻格是第 2 排第 2 格和第 3 排第 1 格，后者已经是 16，所以 4 在第 2 排第 2 格。",
+          "6 要和 5 相邻。5 的邻格是第 2 排第 2 格（4）、第 3 排第 1 格（16）、第 4 排第 2 格（14）和第 3 排第 3 格，所以 6 只能在第 3 排第 3 格，也就是 ? 的位置。",
+          "验算：7 放第 2 排第 3 格接到 8；10、11、12、13 依序放第 2 排第 4 格、第 3 排第 4 格、第 4 排第 4 格、第 4 排第 3 格，再接到 14，16 格刚好填满。所以 ? 是 6。"
+        ],
+        "en": [
+          "Call the rows 1–4 from the top and the cells 1–4 from the left. Every number k other than 1 and 16 must have k − 1 in one neighbouring cell and k + 1 in another.",
+          "15 is in row 4, cell 1. Its only neighbours are row 4 cell 2 (14) and row 3 cell 1, so 16 is in row 3, cell 1.",
+          "Row 1, cell 1 has only two neighbours: row 1 cell 2 (which is 1) and row 2 cell 1. It is neither 1 nor 16, so both its predecessor and successor must be in those two cells. It must be 2 (predecessor 1), and 3 is in row 2, cell 1.",
+          "4 must touch both 3 (row 2, cell 1) and 5 (row 3, cell 2). Their common neighbours are row 2 cell 2 and row 3 cell 1, and the latter is 16, so 4 is in row 2, cell 2.",
+          "6 must touch 5. The neighbours of 5 are row 2 cell 2 (4), row 3 cell 1 (16), row 4 cell 2 (14) and row 3 cell 3, so 6 is in row 3, cell 3 — the cell marked ?.",
+          "Check: 7 goes in row 2 cell 3 and leads to 8; 10, 11, 12, 13 go in row 2 cell 4, row 3 cell 4, row 4 cell 4, row 4 cell 3, leading to 14. All 16 cells are filled, so ? is 6."
+        ],
+        "ja": [
+          "横の段を上から1～4段目、マスを左から1～4マス目とよびます。1と16以外の数 k は、となりのマスに k − 1 と k + 1 がそれぞれなければなりません。",
+          "15 は4段目1マス目にあり、となりは4段目2マス目（14）と3段目1マス目だけなので、16 は3段目1マス目です。",
+          "1段目1マス目のとなりは1段目2マス目（1）と2段目1マス目の2つだけです。ここは1でも16でもないので、前後の数がこの2マスに入るしかなく、2（前が1）となり、3は2段目1マス目です。",
+          "4 は 3（2段目1マス目）と 5（3段目2マス目）の両方にとなり合います。共通のとなりは2段目2マス目と3段目1マス目で、後者は16なので、4は2段目2マス目です。",
+          "6 は 5 のとなりです。5 のとなりは2段目2マス目（4）、3段目1マス目（16）、4段目2マス目（14）、3段目3マス目なので、6 は3段目3マス目、つまり ? のマスです。",
+          "確かめ：7 は2段目3マス目で8につながり、10、11、12、13 を2段目4マス目、3段目4マス目、4段目4マス目、4段目3マス目と入れると14につながり、16マスすべて埋まります。よって ? は 6 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "composite_grid_shape",
+        "params": {
+          "rows": 4,
+          "cols": 4,
+          "filledCells": [
+            [
+              2,
+              2
+            ]
+          ],
+          "cellLabels": {
+            "0,1": "1",
+            "2,1": "5",
+            "0,2": "8",
+            "0,3": "9",
+            "3,1": "14",
+            "3,0": "15",
+            "2,2": "?"
+          }
+        }
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "6"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "agent-B-figure-round10-2026-10-23",
+        "notes": "設計依據：數字連路謎題（Hidato／Numbrix 型）。全庫查無「連續數必須相鄰」的填數題；最接近的是 logic_grade3_foundation_113（4×4 每格走一次的路徑，用黑白塗色談奇偶），本題是由已知數推出路徑，骨架不同。圖：4×4 方格標出 6 個已知數與 ?（塗色），答案 6 沒有出現在圖上。程式窮舉 552 條 4×4 漢米爾頓路徑，確認唯一解。",
+        "displayText": "MathSpring 改寫題（附圖）"
+      }
+    },
+    {
+      "id": "logic_grade4_foundation_121",
+      "topic": "logic",
+      "subtopic": "shikaku_rectangle_division",
+      "tags": [
+        "c:logic_deduction",
+        "c:area",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade4",
+      "challengeTier": "foundation",
+      "reviewStatus": "ok",
+      "prompt": {
+        "zh-Hant": "如圖，要沿著格線把 5 × 5 的方格切成 7 個長方形（正方形也算長方形），規定：每個長方形裡剛好有一個數，而且這個數就等於這個長方形的格子數。照規則切好以後，這 7 個長方形中有幾個是正方形？",
+        "zh-Hans": "如图，要沿着格线把 5 × 5 的方格切成 7 个长方形（正方形也算长方形），规定：每个长方形里刚好有一个数，而且这个数就等于这个长方形的格子数。照规则切好以后，这 7 个长方形中有几个是正方形？",
+        "en": "The 5 × 5 grid shown is to be cut along the grid lines into 7 rectangles (squares count as rectangles) so that each rectangle contains exactly one number, and that number equals the number of cells in the rectangle. After cutting by these rules, how many of the 7 rectangles are squares?",
+        "ja": "図の 5 × 5 のマスを、マス目の線にそって7つの長方形（正方形も長方形とみなす）に切り分けます。どの長方形にも数がちょうど1つ入り、その数が長方形のマスの数と等しくなるようにします。このように切り分けたとき、7つの長方形のうち正方形はいくつありますか。"
+      },
+      "answer": {
+        "zh-Hant": "有 2 個是正方形。",
+        "zh-Hans": "有 2 个是正方形。",
+        "en": "2 of them are squares.",
+        "ja": "正方形は 2 つです。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "橫排由上往下叫第 1～5 排、格子由左往右叫第 1～5 格。第 1 排第 5 格的 5：5 格的長方形只能是一整排或一整行；第 1 排還有別的數，所以它是第 5 直行整行。",
+          "第 1 排第 2 格的 3：往下 3 格會碰到第 3 排第 2 格的 4，往左又碰到另一個 3，所以只能是第 1 排第 2～4 格。於是第 1 排第 1 格的 3 只能往下，是第 1 直行的第 1～3 排。",
+          "第 4 排第 1 格的 4：第 1 直行上面已被佔走，橫的 4 格又會碰到別的數，所以是第 4、5 排的第 1、2 格組成的 2 × 2 正方形。",
+          "第 5 排第 3 格這一格只能被第 4 排第 3 格的 2 蓋到，所以那個 2 是第 4、5 排的第 3 格。第 3 排第 2 格的 4 只剩第 2、3 排的第 2、3 格這個 2 × 2 正方形可以用；最後第 4 直行的第 2～5 排由第 4 排第 4 格的 4 蓋住。",
+          "7 個長方形是：1 × 3（兩個）、1 × 5、2 × 2（兩個）、1 × 2、1 × 4。其中是正方形的有 2 個。"
+        ],
+        "zh-Hans": [
+          "横排由上往下叫第 1～5 排、格子由左往右叫第 1～5 格。第 1 排第 5 格的 5：5 格的长方形只能是一整排或一整列；第 1 排还有别的数，所以它是第 5 竖排整排。",
+          "第 1 排第 2 格的 3：往下 3 格会碰到第 3 排第 2 格的 4，往左又碰到另一个 3，所以只能是第 1 排第 2～4 格。于是第 1 排第 1 格的 3 只能往下，是第 1 竖排的第 1～3 排。",
+          "第 4 排第 1 格的 4：第 1 竖排上面已被占走，横的 4 格又会碰到别的数，所以是第 4、5 排的第 1、2 格组成的 2 × 2 正方形。",
+          "第 5 排第 3 格这一格只能被第 4 排第 3 格的 2 盖到，所以那个 2 是第 4、5 排的第 3 格。第 3 排第 2 格的 4 只剩第 2、3 排的第 2、3 格这个 2 × 2 正方形可以用；最后第 4 竖排的第 2～5 排由第 4 排第 4 格的 4 盖住。",
+          "7 个长方形是：1 × 3（两个）、1 × 5、2 × 2（两个）、1 × 2、1 × 4。其中是正方形的有 2 个。"
+        ],
+        "en": [
+          "Call the rows 1–5 from the top and the cells 1–5 from the left. The 5 in row 1, cell 5: a 5-cell rectangle is a whole row or a whole column, and row 1 contains other numbers, so it is the whole of column 5.",
+          "The 3 in row 1, cell 2: going down 3 cells would include the 4 in row 3, cell 2, and going left would include the other 3, so it must be row 1, cells 2–4. Then the 3 in row 1, cell 1 can only go down: column 1, rows 1–3.",
+          "The 4 in row 4, cell 1: the top of column 1 is taken and a horizontal 1 × 4 would include other numbers, so it is the 2 × 2 square made of rows 4–5, cells 1–2.",
+          "Row 5, cell 3 can only be covered by the 2 in row 4, cell 3, so that 2 is rows 4–5 of column 3. The 4 in row 3, cell 2 can then only be the 2 × 2 square of rows 2–3, cells 2–3, and finally rows 2–5 of column 4 belong to the 4 in row 4, cell 4.",
+          "The 7 rectangles are 1 × 3 (twice), 1 × 5, 2 × 2 (twice), 1 × 2 and 1 × 4. Exactly 2 of them are squares."
+        ],
+        "ja": [
+          "横の段を上から1～5段目、マスを左から1～5マス目とよびます。1段目5マス目の5：5マスの長方形は1段まるごとか1列まるごとで、1段目にはほかの数があるので、5列目まるごとです。",
+          "1段目2マス目の3：下に3マスだと3段目2マス目の4を含み、左へ行くともう1つの3を含むので、1段目2～4マス目しかありません。すると1段目1マス目の3は下へのびるしかなく、1列目の1～3段目です。",
+          "4段目1マス目の4：1列目の上は使われていて、横に4マスだとほかの数を含むので、4・5段目の1・2マス目でできる 2 × 2 の正方形です。",
+          "5段目3マス目をおおえるのは4段目3マス目の2だけなので、その2は3列目の4・5段目です。3段目2マス目の4は2・3段目の2・3マス目の 2 × 2 の正方形しか残らず、最後に4列目の2～5段目が4段目4マス目の4になります。",
+          "7つの長方形は 1 × 3（2つ）、1 × 5、2 × 2（2つ）、1 × 2、1 × 4 で、正方形は 2 つです。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "composite_grid_shape",
+        "params": {
+          "rows": 5,
+          "cols": 5,
+          "filledCells": [],
+          "cellLabels": {
+            "0,0": "3",
+            "0,1": "3",
+            "0,4": "5",
+            "2,1": "4",
+            "3,0": "4",
+            "3,2": "2",
+            "3,3": "4"
+          }
+        }
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "2"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "agent-B-figure-round10-2026-10-23",
+        "notes": "設計依據：「四角切分（Shikaku）」謎題。最接近既有題 geometry_grade4_foundation_147（2×4 巧克力切成兩塊全等，計算切法數），本題是依數字線索唯一決定切法再判斷形狀，推理骨架不同；全庫查無 Shikaku 題。圖：5×5 方格與 7 個數字線索，圖上沒有畫出切線，答案必須推理。程式窮舉確認切法唯一。",
+        "displayText": "MathSpring 改寫題（附圖）"
+      }
+    },
+    {
+      "id": "logic_grade4_foundation_122",
+      "topic": "logic",
+      "subtopic": "tents_and_trees_deduction",
+      "tags": [
+        "c:logic_deduction",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade4",
+      "challengeTier": "foundation",
+      "reviewStatus": "ok",
+      "prompt": {
+        "zh-Hant": "如圖，5 × 5 的營地裡，塗色的 5 格是樹。要在空格裡搭 5 頂帳篷：每棵樹配一頂帳篷，帳篷要在它那棵樹的上、下、左或右緊鄰的格子；任兩頂帳篷都不可以相鄰，連斜對角也不行。右邊的數字是每一橫排的帳篷數，下面的數字是每一直行的帳篷數。標著 A、B、C、D 的四格中，哪一格一定搭著帳篷？",
+        "zh-Hans": "如图，5 × 5 的营地里，涂色的 5 格是树。要在空格里搭 5 顶帐篷：每棵树配一顶帐篷，帐篷要在它那棵树的上、下、左或右紧邻的格子；任两顶帐篷都不可以相邻，连斜对角也不行。右边的数字是每一横排的帐篷数，下面的数字是每一竖排的帐篷数。标着 A、B、C、D 的四格中，哪一格一定搭着帐篷？",
+        "en": "In the 5 × 5 campsite shown, the 5 shaded cells are trees. Five tents are to be pitched in empty cells: each tree gets its own tent in a cell directly above, below, left or right of it, and no two tents may touch, not even diagonally. The numbers on the right give the number of tents in each row, and the numbers below give the number of tents in each column. Of the cells marked A, B, C and D, which one must contain a tent?",
+        "ja": "図の 5 × 5 のキャンプ場で、色のついた5マスは木です。空いたマスにテントを5つ張ります。どの木にもテントが1つずつ対応し、そのテントは木の上下左右のとなりのマスにあります。また、テントどうしはとなり合ってはいけません（ななめも不可）。右の数は各段のテントの数、下の数は各列のテントの数です。A、B、C、D のマスのうち、必ずテントがあるのはどれですか。"
+      },
+      "answer": {
+        "zh-Hant": "一定搭著帳篷的是 B。",
+        "zh-Hans": "一定搭着帐篷的是 B。",
+        "en": "Cell B must contain a tent.",
+        "ja": "必ずテントがあるのは B です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "橫排由上往下叫第 1～5 排、格子由左往右叫第 1～5 格。第 5 排的帳篷數是 0，所以第 5 排第 2 格那棵樹的帳篷只能在它上面：第 4 排第 2 格。第 4 排和第 2 直行的帳篷數都已用完。",
+          "第 1 排要有 2 頂帳篷。第 1 排第 4 格旁邊沒有樹，不能搭；所以兩頂要從第 1、3、5 格裡挑。",
+          "假設第 1 排第 1 格有帳篷：它要配第 1 排第 2 格的樹，第 2 排第 1 格就因為碰到它而不能搭，第 2 排第 2 格那棵樹只能用第 2 排第 3 格；再來第 3 排第 3 格的樹只能用第 3 排第 4 格，但它斜碰第 2 排第 3 格，矛盾。所以第 1 排的兩頂是第 3 格和第 5 格，也就是 A 沒有帳篷。",
+          "第 2 排第 3 格（C）正好在第 1 排第 3 格帳篷的下方，會相碰，不能搭；第 4 排第 3 格（D）在第 4 排，而第 4 排的帳篷已經是第 2 格，也不能搭。",
+          "第 3 排第 3 格那棵樹的鄰格中，第 2 排第 3 格與第 4 排第 3 格都不行、第 3 排第 2 格又碰到第 4 排第 2 格的帳篷，只剩第 3 排第 4 格，也就是 B。",
+          "驗算：帳篷在第 1 排第 3、5 格、第 2 排第 1 格、第 3 排第 4 格、第 4 排第 2 格，每排、每直行的數量都對，帳篷互不相碰。答案是 B。"
+        ],
+        "zh-Hans": [
+          "横排由上往下叫第 1～5 排、格子由左往右叫第 1～5 格。第 5 排的帐篷数是 0，所以第 5 排第 2 格那棵树的帐篷只能在它上面：第 4 排第 2 格。第 4 排和第 2 竖排的帐篷数都已用完。",
+          "第 1 排要有 2 顶帐篷。第 1 排第 4 格旁边没有树，不能搭；所以两顶要从第 1、3、5 格里挑。",
+          "假设第 1 排第 1 格有帐篷：它要配第 1 排第 2 格的树，第 2 排第 1 格就因为碰到它而不能搭，第 2 排第 2 格那棵树只能用第 2 排第 3 格；再来第 3 排第 3 格的树只能用第 3 排第 4 格，但它斜碰第 2 排第 3 格，矛盾。所以第 1 排的两顶是第 3 格和第 5 格，也就是 A 没有帐篷。",
+          "第 2 排第 3 格（C）正好在第 1 排第 3 格帐篷的下方，会相碰，不能搭；第 4 排第 3 格（D）在第 4 排，而第 4 排的帐篷已经是第 2 格，也不能搭。",
+          "第 3 排第 3 格那棵树的邻格中，第 2 排第 3 格与第 4 排第 3 格都不行、第 3 排第 2 格又碰到第 4 排第 2 格的帐篷，只剩第 3 排第 4 格，也就是 B。",
+          "验算：帐篷在第 1 排第 3、5 格、第 2 排第 1 格、第 3 排第 4 格、第 4 排第 2 格，每排、每竖排的数量都对，帐篷互不相碰。答案是 B。"
+        ],
+        "en": [
+          "Call the rows 1–5 from the top and the cells 1–5 from the left. Row 5 has 0 tents, so the tree in row 5 cell 2 must have its tent above it, in row 4 cell 2. That uses up the tents of row 4 and of column 2.",
+          "Row 1 needs 2 tents. Row 1 cell 4 has no neighbouring tree, so it cannot hold a tent; the two tents are chosen from cells 1, 3 and 5.",
+          "Suppose row 1 cell 1 had a tent (for the tree in row 1 cell 2). Then row 2 cell 1 would touch it, so the tree in row 2 cell 2 would need row 2 cell 3; then the tree in row 3 cell 3 could only use row 3 cell 4, which touches row 2 cell 3 diagonally — a contradiction. So row 1’s tents are in cells 3 and 5, and A has no tent.",
+          "Row 2 cell 3 (C) is directly below the tent in row 1 cell 3, so it cannot hold a tent. Row 4 cell 3 (D) is in row 4, whose only tent is in cell 2, so it is empty too.",
+          "The tree in row 3 cell 3 cannot use row 2 cell 3 or row 4 cell 3, and row 3 cell 2 touches the tent in row 4 cell 2, so its tent is in row 3 cell 4 — cell B.",
+          "Check: tents in row 1 cells 3 and 5, row 2 cell 1, row 3 cell 4, row 4 cell 2 give the right counts for every row and column, and no two touch. The answer is B."
+        ],
+        "ja": [
+          "横の段を上から1～5段目、マスを左から1～5マス目とよびます。5段目のテントは0なので、5段目2マス目の木のテントは上の4段目2マス目しかありません。これで4段目と2列目のテントは使い切りました。",
+          "1段目にはテントが2つ必要です。1段目4マス目のとなりには木がないので張れず、2つは1・3・5マス目から選びます。",
+          "もし1段目1マス目にテントがあると、2段目1マス目はそれにふれるので使えず、2段目2マス目の木は2段目3マス目を使うしかありません。すると3段目3マス目の木は3段目4マス目しか使えず、それは2段目3マス目とななめにふれて矛盾します。よって1段目のテントは3マス目と5マス目で、A にはテントはありません。",
+          "2段目3マス目（C）は1段目3マス目のテントの真下でふれるので不可。4段目3マス目（D）は4段目にあり、4段目のテントは2マス目だけなので不可です。",
+          "3段目3マス目の木は、2段目3マス目も4段目3マス目も使えず、3段目2マス目は4段目2マス目のテントにふれるので、テントは3段目4マス目、つまり B です。",
+          "確かめ：テントは1段目3・5マス目、2段目1マス目、3段目4マス目、4段目2マス目で、どの段・列の数も合い、ふれ合うテントもありません。答えは B です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "composite_grid_shape",
+        "params": {
+          "rows": 6,
+          "cols": 6,
+          "filledCells": [
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              1,
+              4
+            ],
+            [
+              2,
+              2
+            ],
+            [
+              4,
+              1
+            ]
+          ],
+          "cellLabels": {
+            "0,5": "2",
+            "1,5": "1",
+            "2,5": "1",
+            "3,5": "1",
+            "4,5": "0",
+            "5,0": "1",
+            "5,1": "1",
+            "5,2": "1",
+            "5,3": "1",
+            "5,4": "1",
+            "0,0": "A",
+            "2,3": "B",
+            "1,2": "C",
+            "3,2": "D"
+          }
+        }
+      },
+      "answerMode": "multiple_choice",
+      "options": {
+        "A": {
+          "zh-Hant": "A",
+          "zh-Hans": "A",
+          "en": "A",
+          "ja": "A"
+        },
+        "B": {
+          "zh-Hant": "B",
+          "zh-Hans": "B",
+          "en": "B",
+          "ja": "B"
+        },
+        "C": {
+          "zh-Hant": "C",
+          "zh-Hans": "C",
+          "en": "C",
+          "ja": "C"
+        },
+        "D": {
+          "zh-Hant": "D",
+          "zh-Hans": "D",
+          "en": "D",
+          "ja": "D"
+        }
+      },
+      "correctAnswer": {
+        "type": "choice",
+        "value": "B"
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "agent-B-figure-round10-2026-10-23",
+        "notes": "設計依據：「樹與帳篷（Tents）」謎題。全庫查無此類；最接近的是 logic_grade3_foundation_121（4×4 藏一艘船），但本題要同時滿足樹帳配對、不相鄰與行列計數，需用反證排除一種情形，骨架不同。圖：5×5 營地，樹塗色，右側與下方寫帳篷數，四個候選格標 A–D；圖上沒有畫帳篷。程式窮舉確認帳篷位置唯一。",
+        "displayText": "MathSpring 改寫題（附圖）"
+      }
+    },
+    {
+      "id": "logic_grade4_foundation_123",
+      "topic": "logic",
+      "subtopic": "domino_tiling_fixed_pair_sum",
+      "tags": [
+        "c:logic_deduction",
+        "c:add_sub",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade4",
+      "challengeTier": "foundation",
+      "reviewStatus": "ok",
+      "prompt": {
+        "zh-Hant": "如圖的 4 × 4 方格，每格寫著一個數。要沿著格線把它切成 8 塊 1 × 2 的骨牌（每塊蓋住上下或左右相鄰的兩格），而且每一塊骨牌上的兩個數加起來都要是 9。照這樣切，直放（蓋住上下兩格）的骨牌有幾塊？",
+        "zh-Hans": "如图的 4 × 4 方格，每格写着一个数。要沿着格线把它切成 8 块 1 × 2 的骨牌（每块盖住上下或左右相邻的两格），而且每一块骨牌上的两个数加起来都要是 9。照这样切，竖放（盖住上下两格）的骨牌有几块？",
+        "en": "Each cell of the 4 × 4 grid shown contains a number. The grid is to be cut along the grid lines into 8 dominoes of size 1 × 2 (each covering two cells that are side by side or one above the other) so that the two numbers on every domino add up to 9. How many of the dominoes are vertical (covering one cell above another)?",
+        "ja": "図の 4 × 4 のマスには、それぞれ数が書いてあります。マス目の線にそって 1 × 2 のドミノ8枚に切り分けます（1枚は上下か左右にとなり合う2マス）。どのドミノでも、2つの数の和が9になるようにします。このとき、縦向き（上下の2マス）のドミノは何枚ありますか。"
+      },
+      "answer": {
+        "zh-Hant": "直放的骨牌有 6 塊。",
+        "zh-Hans": "竖放的骨牌有 6 块。",
+        "en": "6 of the dominoes are vertical.",
+        "ja": "縦向きのドミノは 6 枚です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "把橫排由上往下叫第 1～4 排、格子由左往右叫第 1～4 格。先找「只有一種配法」的格子：左上角的 4，右邊是 7（和 11），下面是 5（和 9），所以它和下面的 5 是一塊直放骨牌。",
+          "右上角的 7：下面是 1（和 8），左邊是 2（和 9），所以第 1 排第 3、4 格是一塊橫放骨牌。於是第 1 排第 2 格的 7 只能和下面的 2 配，又是直放。",
+          "第 2 排第 4 格的 1：上面已被用掉，左邊的 4 和為 5，只能配下面的 8，直放。第 2 排第 3 格的 4：左邊、上面都用掉了，右邊也用掉，只能配下面的 5，直放。",
+          "第 3 排第 1 格的 4：右邊的 7 和為 11，只能配下面的 5，直放；第 3 排第 2 格的 7 只能配下面的 2，直放。最後第 4 排第 3、4 格的 5 和 4 和是 9，是橫放。",
+          "每一步都只有一種選擇，切法唯一：直放 6 塊、橫放 2 塊。答案是 6。"
+        ],
+        "zh-Hans": [
+          "把横排由上往下叫第 1～4 排、格子由左往右叫第 1～4 格。先找“只有一种配法”的格子：左上角的 4，右边是 7（和 11），下面是 5（和 9），所以它和下面的 5 是一块竖放骨牌。",
+          "右上角的 7：下面是 1（和 8），左边是 2（和 9），所以第 1 排第 3、4 格是一块横放骨牌。于是第 1 排第 2 格的 7 只能和下面的 2 配，又是竖放。",
+          "第 2 排第 4 格的 1：上面已被用掉，左边的 4 和为 5，只能配下面的 8，竖放。第 2 排第 3 格的 4：左边、上面都用掉了，右边也用掉，只能配下面的 5，竖放。",
+          "第 3 排第 1 格的 4：右边的 7 和为 11，只能配下面的 5，竖放；第 3 排第 2 格的 7 只能配下面的 2，竖放。最后第 4 排第 3、4 格的 5 和 4 和是 9，是横放。",
+          "每一步都只有一种选择，切法唯一：竖放 6 块、横放 2 块。答案是 6。"
+        ],
+        "en": [
+          "Call the rows 1–4 from the top and the cells 1–4 from the left. Start with cells that have only one possible partner. The top-left 4 has 7 to its right (sum 11) and 5 below (sum 9), so it forms a vertical domino with the 5.",
+          "The top-right 7 has 1 below (sum 8) and 2 to its left (sum 9), so row 1 cells 3 and 4 form a horizontal domino. Then the 7 in row 1 cell 2 can only pair with the 2 below it — vertical again.",
+          "The 1 in row 2 cell 4: the cell above is used and the 4 to its left gives 5, so it pairs with the 8 below — vertical. The 4 in row 2 cell 3 now has its left, upper and right neighbours used, so it pairs with the 5 below — vertical.",
+          "The 4 in row 3 cell 1 gives 11 with the 7 to its right, so it pairs with the 5 below — vertical; the 7 in row 3 cell 2 pairs with the 2 below — vertical. Finally the 5 and 4 in row 4 cells 3 and 4 add to 9 — horizontal.",
+          "Every step was forced, so the cutting is unique: 6 vertical dominoes and 2 horizontal ones. The answer is 6."
+        ],
+        "ja": [
+          "横の段を上から1～4段目、マスを左から1～4マス目とよびます。相手が1通りしかないマスから決めます。左上の4は、右の7だと和11、下の5だと和9なので、下の5と縦のドミノになります。",
+          "右上の7は、下の1だと和8、左の2だと和9なので、1段目3・4マス目が横のドミノです。すると1段目2マス目の7は下の2と組むしかなく、縦です。",
+          "2段目4マス目の1は、上は使われ、左の4だと和5なので、下の8と縦。2段目3マス目の4は、左・上・右が使われているので、下の5と縦です。",
+          "3段目1マス目の4は、右の7だと和11なので下の5と縦。3段目2マス目の7は下の2と縦。最後に4段目3・4マス目の5と4（和9）が横です。",
+          "どの手順も1通りに決まるので切り方はただ1つで、縦6枚・横2枚です。答えは 6 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "composite_grid_shape",
+        "params": {
+          "rows": 4,
+          "cols": 4,
+          "filledCells": [],
+          "cellLabels": {
+            "0,0": "4",
+            "0,1": "7",
+            "0,2": "2",
+            "0,3": "7",
+            "1,0": "5",
+            "1,1": "2",
+            "1,2": "4",
+            "1,3": "1",
+            "2,0": "4",
+            "2,1": "7",
+            "2,2": "5",
+            "2,3": "8",
+            "3,0": "5",
+            "3,1": "2",
+            "3,2": "5",
+            "3,3": "4"
+          }
+        }
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "6"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "agent-B-figure-round10-2026-10-23",
+        "notes": "設計依據：骨牌配對謎題（每塊骨牌兩數和固定），由「只有一種配法」的格子連鎖決定鋪法。最接近既有題 geometry_grade4_foundation_128（2×6 用 L 形積木鋪滿的方法數）與 logic_grade4_foundation_081；本題不是數方法，而是用數值條件唯一決定鋪法，骨架不同。圖：4×4 數字方格，沒有畫出任何切線。程式窮舉 36 種鋪法，確認只有一種符合。",
+        "displayText": "MathSpring 改寫題（附圖）"
+      }
+    },
+    {
+      "id": "logic_grade4_foundation_124",
+      "topic": "logic",
+      "subtopic": "battleship_row_column_counts",
+      "tags": [
+        "c:logic_deduction",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade4",
+      "challengeTier": "foundation",
+      "reviewStatus": "ok",
+      "prompt": {
+        "zh-Hant": "如圖，塗色的 5 × 5 海面上藏著 4 艘船：1 艘長 3 格、1 艘長 2 格、2 艘長 1 格。每艘船佔同一橫排或同一直行裡相鄰的格子；任兩艘船都不相碰，連斜對角也不能碰。右邊的數字是每一橫排被船佔的格數，下面的數字是每一直行被船佔的格數。兩艘長 1 格的小船在從上面數第幾橫排？",
+        "zh-Hans": "如图，涂色的 5 × 5 海面上藏着 4 艘船：1 艘长 3 格、1 艘长 2 格、2 艘长 1 格。每艘船占同一横排或同一竖排里相邻的格子；任两艘船都不相碰，连斜对角也不能碰。右边的数字是每一横排被船占的格数，下面的数字是每一竖排被船占的格数。两艘长 1 格的小船在从上面数第几横排？",
+        "en": "Four ships are hidden in the shaded 5 × 5 sea: one ship of length 3, one of length 2 and two of length 1. Each ship occupies adjacent cells in one row or one column, and no two ships touch, not even diagonally. The numbers on the right tell how many cells in each row are occupied by ships, and the numbers below tell the same for each column. In which row, counting from the top, are the two ships of length 1?",
+        "ja": "図の色のついた 5 × 5 の海に、長さ3の船1そう、長さ2の船1そう、長さ1の船2そう、合わせて4そうがかくれています。船は同じ横の段か同じ縦の列のとなり合うマスをしめ、どの2そうもふれ合いません（ななめも不可）。右の数は各段で船がしめるマスの数、下の数は各列で船がしめるマスの数です。長さ1の2そうの船は、上から何段目にありますか。"
+      },
+      "answer": {
+        "zh-Hant": "兩艘小船都在第 5 橫排（最下面一排）。",
+        "zh-Hans": "两艘小船都在第 5 横排（最下面一排）。",
+        "en": "Both small ships are in row 5 (the bottom row).",
+        "ja": "2そうとも 5 段目（いちばん下の段）にあります。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "橫排由上往下叫第 1～5 排、直行由左往右叫第 1～5 行。沒有任何橫排的數字到 3，所以長 3 的船是直的，而且只能放在數字是 3 的第 4 行，把第 4 行的 3 格全部佔滿。",
+          "長 2 的船若是橫放，需要兩個相鄰的直行都有船；但第 4 行的格子都被長船用掉，第 2 行是 0，所以它只能直放，而且只能放在數字是 2 的第 1 行，佔滿第 1 行的 2 格。",
+          "剩下兩艘小船分別在第 3 行和第 5 行。第 3、5 行都緊貼第 4 行，所以小船所在的橫排不能和長 3 的船同排，也不能在它的上一排或下一排。",
+          "長 3 的船佔連續 3 排，若是第 2～4 排，第 1～5 排全都被「擋住」，小船無處可放；若是第 3～5 排，小船只能在第 1 排，但第 1 排只能有 1 格船，放不下兩艘，不行。",
+          "所以長 3 的船在第 1～3 排，兩艘小船都在第 5 排（第 3 行、第 5 行），第 5 排正好 2 格。再由各排數字，長 2 的船在第 1 行的第 3、4 排，全部吻合。答案是第 5 排。"
+        ],
+        "zh-Hans": [
+          "横排由上往下叫第 1～5 排、竖排由左往右叫第 1～5 列。没有任何横排的数字到 3，所以长 3 的船是竖的，而且只能放在数字是 3 的第 4 列，把第 4 列的 3 格全部占满。",
+          "长 2 的船若是横放，需要两个相邻的竖排都有船；但第 4 列的格子都被长船用掉，第 2 列是 0，所以它只能竖放，而且只能放在数字是 2 的第 1 列，占满第 1 列的 2 格。",
+          "剩下两艘小船分别在第 3 列和第 5 列。第 3、5 列都紧贴第 4 列，所以小船所在的横排不能和长 3 的船同排，也不能在它的上一排或下一排。",
+          "长 3 的船占连续 3 排，若是第 2～4 排，第 1～5 排全都被“挡住”，小船无处可放；若是第 3～5 排，小船只能在第 1 排，但第 1 排只能有 1 格船，放不下两艘，不行。",
+          "所以长 3 的船在第 1～3 排，两艘小船都在第 5 排（第 3 列、第 5 列），第 5 排正好 2 格。再由各排数字，长 2 的船在第 1 列的第 3、4 排，全部吻合。答案是第 5 排。"
+        ],
+        "en": [
+          "Call the rows 1–5 from the top and the columns 1–5 from the left. No row has a count of 3, so the length-3 ship is vertical, and it can only be in column 4 (count 3), filling all 3 of that column’s ship cells.",
+          "A horizontal length-2 ship would need two neighbouring columns with ship cells, but column 4 is used up by the long ship and column 2 has 0. So it is vertical, in column 1 (count 2), filling that column’s 2 cells.",
+          "The two small ships are then in columns 3 and 5. Both columns touch column 4, so a small ship’s row cannot be one of the long ship’s rows or the row just above or below it.",
+          "The long ship covers 3 consecutive rows. If rows 2–4, every row 1–5 is blocked. If rows 3–5, the small ships would both need row 1, whose count is only 1. Both are impossible.",
+          "So the long ship is in rows 1–3 and both small ships are in row 5 (columns 3 and 5), matching row 5’s count of 2. The row counts then put the length-2 ship in rows 3–4 of column 1, and everything checks. The answer is row 5."
+        ],
+        "ja": [
+          "横の段を上から1～5段目、縦の列を左から1～5列目とよびます。3以上の数の段はないので、長さ3の船は縦向きで、数が3の4列目に入り、4列目の3マスをすべて使います。",
+          "長さ2の船が横向きなら、となり合う2列に船が必要ですが、4列目は長い船で使い切り、2列目は0です。よって縦向きで、数が2の1列目に入り、その2マスを使います。",
+          "残る小さい船2そうは3列目と5列目にあります。どちらも4列目ととなり合うので、小さい船の段は、長さ3の船の段やその1つ上・1つ下であってはいけません。",
+          "長さ3の船は続いた3段をしめます。2～4段目なら1～5段目がすべてふさがり、小さい船を置けません。3～5段目なら小さい船は2そうとも1段目になりますが、1段目の数は1なので置けません。",
+          "よって長さ3の船は1～3段目で、小さい船は2そうとも5段目（3列目と5列目）です。5段目の数2とも合い、長さ2の船は1列目の3・4段目となって、すべて合います。答えは5段目です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "composite_grid_shape",
+        "params": {
+          "rows": 6,
+          "cols": 6,
+          "filledCells": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              0,
+              3
+            ],
+            [
+              0,
+              4
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              1,
+              2
+            ],
+            [
+              1,
+              3
+            ],
+            [
+              1,
+              4
+            ],
+            [
+              2,
+              0
+            ],
+            [
+              2,
+              1
+            ],
+            [
+              2,
+              2
+            ],
+            [
+              2,
+              3
+            ],
+            [
+              2,
+              4
+            ],
+            [
+              3,
+              0
+            ],
+            [
+              3,
+              1
+            ],
+            [
+              3,
+              2
+            ],
+            [
+              3,
+              3
+            ],
+            [
+              3,
+              4
+            ],
+            [
+              4,
+              0
+            ],
+            [
+              4,
+              1
+            ],
+            [
+              4,
+              2
+            ],
+            [
+              4,
+              3
+            ],
+            [
+              4,
+              4
+            ]
+          ],
+          "cellLabels": {
+            "0,5": "1",
+            "1,5": "1",
+            "2,5": "2",
+            "3,5": "1",
+            "4,5": "2",
+            "5,0": "2",
+            "5,1": "0",
+            "5,2": "1",
+            "5,3": "3",
+            "5,4": "1"
+          }
+        }
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "5"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "agent-B-figure-round10-2026-10-23",
+        "notes": "設計依據：「海戰（Battleships）」謎題，用行列計數與不相碰條件推船位。最接近既有題 logic_grade5_foundation_098（5×5 藏 1×3 船，問最少射擊幾次保證打中）與 logic_grade3_foundation_121；那兩題是保證策略與位置計數，本題是由線索唯一還原整個船隊，骨架不同。圖：5×5 海面塗色，右側與下方寫數字；圖上沒有畫船。程式窮舉 8712 種船隊擺法，確認這組線索只有一解。",
+        "displayText": "MathSpring 改寫題（附圖）"
+      }
     }
   ]
 }

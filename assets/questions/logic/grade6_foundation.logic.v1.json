@@ -10804,6 +10804,808 @@
         "reference": "logic-grade6-foundation",
         "notes": "14 個人次、每人 ≤ 3 → 至少 ⌈14 ÷ 3⌉ = 5；1～5 循環填入得合法班表。掃過 /值班|輪班|排班/（0 題）、/每(一)?天.{0,20}(2|兩) ?(位|個|人).{0,40}最多.{0,10}(3|三) ?天/（0 題）；最接近 logic_grade4_foundation_087（minimum_platforms_interval_overlap，最少月台數），差異：那題是時間區間重疊的最大值；本題是總需求人次除以每人上限的下界，再用循環填表構造"
       }
+    },
+    {
+      "id": "logic_grade6_foundation_134",
+      "topic": "logic",
+      "subtopic": "round_robin_table_missing_results",
+      "tags": [
+        "c:logic_deduction",
+        "c:add_sub",
+        "m:reverse"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade6",
+      "challengeTier": "foundation",
+      "reviewStatus": "ok",
+      "prompt": {
+        "zh-Hant": "A、B、C、D 四隊進行單循環賽（每兩隊比一場），贏一場得 3 分、平手各得 1 分、輸了得 0 分。如圖的成績表中，每一格是「左邊那一隊」對「上面那一隊」那一場所得的分數，有些格子被墨水弄髒了（標 ?）；塗色的格子不用填，最右邊一行是各隊的總分。四隊的 6 場比賽中，一共有幾場平手？",
+        "zh-Hans": "A、B、C、D 四队进行单循环赛（每两队比一场），赢一场得 3 分、平手各得 1 分、输了得 0 分。如图的成绩表中，每一格是“左边那一队”对“上面那一队”那一场所得的分数，有些格子被墨水弄脏了（标 ?）；涂色的格子不用填，最右边一竖排是各队的总分。四队的 6 场比赛中，一共有几场平手？",
+        "en": "Teams A, B, C, D play a round robin (each pair meets once); a win scores 3, a draw 1 each, a loss 0. In the table shown, each cell gives the points the team on the left got against the team on top; some cells are smudged (marked ?), shaded cells are unused, and the rightmost column gives each team’s total. How many of the 6 matches were draws?",
+        "ja": "A、B、C、D の4チームが総当たり戦（どの2チームも1回対戦）を行い、勝ちは3点、引き分けは両チーム1点、負けは0点です。図の成績表で、各マスは「左のチーム」が「上のチーム」との試合で得た点です。いくつかのマスはよごれて読めず（?）、色のついたマスは使いません。いちばん右の列は各チームの合計点です。6試合のうち引き分けは何試合ありましたか。"
+      },
+      "answer": {
+        "zh-Hant": "一共有 2 場平手。",
+        "zh-Hans": "一共有 2 场平手。",
+        "en": "2 matches were draws.",
+        "ja": "引き分けは 2 試合です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "A 的總分 7：對 B 得 3、對 C 得 1，所以對 D 得 7 − 3 − 1 = 3，A 贏 D，D 對 A 得 0。",
+          "B 的總分 3：對 A 得 0、對 D 得 3，所以對 C 得 3 − 0 − 3 = 0，B 輸給 C，C 對 B 得 3。",
+          "C 的總分 5：對 A 得 1、對 B 得 3，所以對 D 得 5 − 1 − 3 = 1，C 和 D 平手。",
+          "檢查 D：對 A 得 0、對 B 得 0、對 C 得 1，總分 1，正確。",
+          "平手的場次是 A 對 C、C 對 D，共 2 場。"
+        ],
+        "zh-Hans": [
+          "A 的总分 7：对 B 得 3、对 C 得 1，所以对 D 得 7 − 3 − 1 = 3，A 赢 D，D 对 A 得 0。",
+          "B 的总分 3：对 A 得 0、对 D 得 3，所以对 C 得 3 − 0 − 3 = 0，B 输给 C，C 对 B 得 3。",
+          "C 的总分 5：对 A 得 1、对 B 得 3，所以对 D 得 5 − 1 − 3 = 1，C 和 D 平手。",
+          "检查 D：对 A 得 0、对 B 得 0、对 C 得 1，总分 1，正确。",
+          "平手的场次是 A 对 C、C 对 D，共 2 场。"
+        ],
+        "en": [
+          "A has 7: 3 against B and 1 against C, so 7 − 3 − 1 = 3 against D — A beat D, and D got 0 against A.",
+          "B has 3: 0 against A and 3 against D, so 3 − 0 − 3 = 0 against C — B lost to C, and C got 3 against B.",
+          "C has 5: 1 against A and 3 against B, so 5 − 1 − 3 = 1 against D — C and D drew.",
+          "Check D: 0 against A, 0 against B, 1 against C, total 1 — correct.",
+          "The draws were A vs C and C vs D: 2 matches."
+        ],
+        "ja": [
+          "A の合計は7で、B に3、C に1なので、D には 7 − 3 − 1 = 3、A は D に勝ち、D は A に0点です。",
+          "B の合計は3で、A に0、D に3なので、C には 3 − 0 − 3 = 0、B は C に負け、C は B に3点です。",
+          "C の合計は5で、A に1、B に3なので、D には 5 − 1 − 3 = 1、C と D は引き分けです。",
+          "D を確かめると、A に0、B に0、C に1で合計1、合っています。",
+          "引き分けは A 対 C と C 対 D の 2 試合です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "composite_grid_shape",
+        "params": {
+          "rows": 5,
+          "cols": 6,
+          "filledCells": [
+            [
+              1,
+              1
+            ],
+            [
+              2,
+              2
+            ],
+            [
+              3,
+              3
+            ],
+            [
+              4,
+              4
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              5
+            ]
+          ],
+          "cellLabels": {
+            "0,1": "A",
+            "0,2": "B",
+            "0,3": "C",
+            "0,4": "D",
+            "1,0": "A",
+            "2,0": "B",
+            "3,0": "C",
+            "4,0": "D",
+            "1,2": "3",
+            "1,3": "1",
+            "1,4": "?",
+            "2,1": "0",
+            "2,3": "?",
+            "2,4": "3",
+            "3,1": "1",
+            "3,2": "?",
+            "3,4": "?",
+            "4,1": "?",
+            "4,2": "0",
+            "4,3": "?",
+            "1,5": "7",
+            "2,5": "3",
+            "3,5": "5",
+            "4,5": "1"
+          }
+        }
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "2"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "agent-B-figure-round10-2026-10-23",
+        "notes": "設計依據：循環賽成績表部分格子缺漏，由各隊總分逐隊推回並數平手場次。最接近既有題 logic_grade10_foundation_015（5 隊勝場數求第五隊）與 combinatorics_grade8_foundation_058，那些只有勝負、用總場數平衡；本題有平手計分、要從表格逐列推出缺格，骨架不同。圖：4×4 對戰表＋總分欄，缺格標 ?；答案 2 不在圖上。",
+        "displayText": "MathSpring 改寫題（附圖）"
+      }
+    },
+    {
+      "id": "logic_grade6_foundation_135",
+      "topic": "logic",
+      "subtopic": "round_table_seating_clues",
+      "tags": [
+        "c:logic_deduction",
+        "c:position_direction",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade6",
+      "challengeTier": "foundation",
+      "reviewStatus": "ok",
+      "prompt": {
+        "zh-Hant": "如圖，一張圓桌旁有 6 個座位，依順時針方向編號 1 到 6。A、B、C、D、E、F 六人各坐一個座位，已知：①A 坐 1 號；②D 坐在 A 的正對面；③E 不和 A 相鄰；④B 坐在 C 順時針方向的下一個座位；⑤C 不和 D 相鄰。6 號座位坐的是誰？",
+        "zh-Hans": "如图，一张圆桌旁有 6 个座位，依顺时针方向编号 1 到 6。A、B、C、D、E、F 六人各坐一个座位，已知：①A 坐 1 号；②D 坐在 A 的正对面；③E 不和 A 相邻；④B 坐在 C 顺时针方向的下一个座位；⑤C 不和 D 相邻。6 号座位坐的是谁？",
+        "en": "Six seats around a round table are numbered 1 to 6 clockwise, as shown. A, B, C, D, E, F each take one seat, and: ① A sits in seat 1; ② D sits directly opposite A; ③ E is not next to A; ④ B sits in the next seat clockwise from C; ⑤ C is not next to D. Who sits in seat 6?",
+        "ja": "図のように、丸いテーブルのまわりに6つの席があり、時計回りに1～6の番号がついています。A、B、C、D、E、F の6人が1つずつ席にすわり、①A は1番、②D は A の真向かい、③E は A のとなりではない、④B は C の時計回りで次の席、⑤C は D のとなりではない、ことがわかっています。6番の席にすわっているのはだれですか。"
+      },
+      "answer": {
+        "zh-Hant": "6 號座位坐的是 F。",
+        "zh-Hans": "6 号座位坐的是 F。",
+        "en": "F sits in seat 6.",
+        "ja": "6番の席は F です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "由①②：A 在 1 號，正對面是 4 號，所以 D 在 4 號。",
+          "由③：和 1 號相鄰的是 2 號和 6 號，E 不能坐那裡，又不能坐 1、4 號，所以 E 在 3 號或 5 號。",
+          "由⑤：和 4 號相鄰的是 3 號和 5 號，C 不能坐那裡，所以 C 在 2 號或 6 號。",
+          "由④：若 C 在 6 號，順時針下一個是 1 號，但那是 A，不行；所以 C 在 2 號，B 在 3 號。",
+          "於是 E 只能在 5 號，剩下的 F 在 6 號。"
+        ],
+        "zh-Hans": [
+          "由①②：A 在 1 号，正对面是 4 号，所以 D 在 4 号。",
+          "由③：和 1 号相邻的是 2 号和 6 号，E 不能坐那里，又不能坐 1、4 号，所以 E 在 3 号或 5 号。",
+          "由⑤：和 4 号相邻的是 3 号和 5 号，C 不能坐那里，所以 C 在 2 号或 6 号。",
+          "由④：若 C 在 6 号，顺时针下一个是 1 号，但那是 A，不行；所以 C 在 2 号，B 在 3 号。",
+          "于是 E 只能在 5 号，剩下的 F 在 6 号。"
+        ],
+        "en": [
+          "From ① and ②: A is in seat 1, and the seat opposite is 4, so D is in seat 4.",
+          "From ③: seats next to 1 are 2 and 6, which E cannot take, and 1 and 4 are taken, so E is in seat 3 or 5.",
+          "From ⑤: seats next to 4 are 3 and 5, which C cannot take, so C is in seat 2 or 6.",
+          "From ④: if C were in seat 6, the next seat clockwise is 1, which is A’s — impossible. So C is in seat 2 and B in seat 3.",
+          "Then E must be in seat 5, and the remaining person, F, is in seat 6."
+        ],
+        "ja": [
+          "①②より、A は1番で、真向かいは4番なので D は4番です。",
+          "③より、1番のとなりは2番と6番で E はそこにすわれず、1・4番もうまっているので、E は3番か5番です。",
+          "⑤より、4番のとなりは3番と5番で C はそこにすわれないので、C は2番か6番です。",
+          "④より、C が6番だと時計回りの次は1番で A の席なので不可。よって C は2番、B は3番です。",
+          "すると E は5番しかなく、残りの F が6番です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "geometry_scene",
+        "params": {
+          "bounds": {
+            "minX": -4.6,
+            "minY": -4.6,
+            "maxX": 4.6,
+            "maxY": 4.6
+          },
+          "points": [
+            {
+              "name": "1",
+              "x": 0.0,
+              "y": 3.0,
+              "pos": "t"
+            },
+            {
+              "name": "2",
+              "x": 2.598076,
+              "y": 1.5,
+              "pos": "tr"
+            },
+            {
+              "name": "3",
+              "x": 2.598076,
+              "y": -1.5,
+              "pos": "br"
+            },
+            {
+              "name": "4",
+              "x": 0.0,
+              "y": -3.0,
+              "pos": "b"
+            },
+            {
+              "name": "5",
+              "x": -2.598076,
+              "y": -1.5,
+              "pos": "bl"
+            },
+            {
+              "name": "6",
+              "x": -2.598076,
+              "y": 1.5,
+              "pos": "tl"
+            }
+          ],
+          "segments": [],
+          "polygons": [],
+          "arcs": [
+            {
+              "cx": 0,
+              "cy": 0,
+              "r": 3,
+              "from": 0,
+              "to": 360
+            }
+          ],
+          "angleMarks": [],
+          "rightAngles": [],
+          "equalTicks": []
+        }
+      },
+      "answerMode": "multiple_choice",
+      "options": {
+        "A": {
+          "zh-Hant": "B",
+          "zh-Hans": "B",
+          "en": "B",
+          "ja": "B"
+        },
+        "B": {
+          "zh-Hant": "C",
+          "zh-Hans": "C",
+          "en": "C",
+          "ja": "C"
+        },
+        "C": {
+          "zh-Hant": "E",
+          "zh-Hans": "E",
+          "en": "E",
+          "ja": "E"
+        },
+        "D": {
+          "zh-Hant": "F",
+          "zh-Hans": "F",
+          "en": "F",
+          "ja": "F"
+        }
+      },
+      "correctAnswer": {
+        "type": "choice",
+        "value": "D"
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "agent-B-figure-round10-2026-10-23",
+        "notes": "設計依據：圓桌座位推理（相鄰、正對面、順時針下一位）。最接近既有題 combinatorics_grade10_foundation_105（重新坐使原相鄰者不相鄰的計數）與 logic_grade2_foundation_143（每輪右移 2 位），本題是由五條線索唯一定位，骨架不同。圖：圓桌與順時針編號 1～6 的座位，讓「相鄰、正對面、順時針」可以直接看出；圖上沒有人名。程式窮舉 6! 種坐法確認唯一。",
+        "displayText": "MathSpring 改寫題（附圖）"
+      }
+    },
+    {
+      "id": "logic_grade6_foundation_136",
+      "topic": "logic",
+      "subtopic": "tic_tac_toe_forced_double_threat",
+      "tags": [
+        "c:game_theory",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade6",
+      "challengeTier": "foundation",
+      "reviewStatus": "ok",
+      "prompt": {
+        "zh-Hant": "如圖是一盤進行到一半的井字遊戲（3 × 3 方格，先把自己的 3 個記號連成一直線、一橫線或一斜線的人獲勝）。現在輪到 X 下。標著 A、B、C、D 的四個空格中，X 下在哪一格，才能保證最後一定獲勝？",
+        "zh-Hans": "如图是一盘进行到一半的井字游戏（3 × 3 方格，先把自己的 3 个记号连成一竖线、一横线或一斜线的人获胜）。现在轮到 X 下。标着 A、B、C、D 的四个空格中，X 下在哪一格，才能保证最后一定获胜？",
+        "en": "The figure shows a tic-tac-toe game in progress (3 × 3 grid; the first player to get three of their marks in a row, column or diagonal wins). It is X’s turn. Of the empty cells marked A, B, C, D, where must X play to be sure of winning?",
+        "ja": "図は途中まで進んだ三目ならべ（3 × 3 のマスで、自分の印3つを縦・横・ななめの一列に先にならべた人の勝ち）です。いまは X の番です。A、B、C、D の空いたマスのうち、X がどこに置けば必ず勝てますか。"
+      },
+      "answer": {
+        "zh-Hant": "X 要下在 A。",
+        "zh-Hans": "X 要下在 A。",
+        "en": "X must play at A.",
+        "ja": "X は A に置けばよいです。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "先看 O 的威脅：O 在右上角和正中央，右上到左下的斜線只差左下角（A）。如果 X 不下 A，O 下一步就下在 A 連成一線獲勝。所以 X 一定要下 A。",
+          "X 下在 A 之後，X 有左上、右下、左下三個記號：左邊一直行（左上、左中、左下）只差左中（B）；最下面一橫排（左下、中下、右下）只差中下（D）。",
+          "X 同時有兩個「只差一格」的威脅，O 一次只能擋一個，下一步 X 一定能連成一線。",
+          "所以 X 下在 A 保證獲勝；下在 B、C、D 都會讓 O 在 A 連線而輸掉。"
+        ],
+        "zh-Hans": [
+          "先看 O 的威胁：O 在右上角和正中央，右上到左下的斜线只差左下角（A）。如果 X 不下 A，O 下一步就下在 A 连成一线获胜。所以 X 一定要下 A。",
+          "X 下在 A 之后，X 有左上、右下、左下三个记号：左边一竖排（左上、左中、左下）只差左中（B）；最下面一横排（左下、中下、右下）只差中下（D）。",
+          "X 同时有两个“只差一格”的威胁，O 一次只能挡一个，下一步 X 一定能连成一线。",
+          "所以 X 下在 A 保证获胜；下在 B、C、D 都会让 O 在 A 连线而输掉。"
+        ],
+        "en": [
+          "First O’s threat: O holds the top-right corner and the centre, so the diagonal from top-right to bottom-left is missing only the bottom-left corner (A). If X does not take A, O plays there and wins. So X must play A.",
+          "After X plays A, X has top-left, bottom-right and bottom-left: the left column is missing only the middle-left cell (B), and the bottom row is missing only the bottom-middle cell (D).",
+          "X now has two threats at once; O can block only one, so X completes a line next turn.",
+          "Hence X wins by playing A; playing B, C or D lets O complete the diagonal at A and win."
+        ],
+        "ja": [
+          "まず O のねらい：O は右上と中央にあり、右上から左下へのななめの列は左下（A）だけが空いています。X が A に置かないと、O が A に置いて勝ちます。だから X は A に置くしかありません。",
+          "X が A に置くと、X は左上・右下・左下の3つになり、左の縦の列は左中（B）だけ、下の横の段は下中（D）だけが空いています。",
+          "X は同時に2か所でリーチになり、O は1か所しかふさげないので、次に X が一列をつくれます。",
+          "よって A に置けば必ず勝ち、B・C・D に置くと O が A で一列になって負けます。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "composite_grid_shape",
+        "params": {
+          "rows": 3,
+          "cols": 3,
+          "filledCells": [],
+          "cellLabels": {
+            "0,0": "X",
+            "0,2": "O",
+            "1,1": "O",
+            "2,2": "X",
+            "2,0": "A",
+            "1,0": "B",
+            "0,1": "C",
+            "2,1": "D"
+          }
+        }
+      },
+      "answerMode": "multiple_choice",
+      "options": {
+        "A": {
+          "zh-Hant": "A",
+          "zh-Hans": "A",
+          "en": "A",
+          "ja": "A"
+        },
+        "B": {
+          "zh-Hant": "B",
+          "zh-Hans": "B",
+          "en": "B",
+          "ja": "B"
+        },
+        "C": {
+          "zh-Hant": "C",
+          "zh-Hans": "C",
+          "en": "C",
+          "ja": "C"
+        },
+        "D": {
+          "zh-Hant": "D",
+          "zh-Hans": "D",
+          "en": "D",
+          "ja": "D"
+        }
+      },
+      "correctAnswer": {
+        "type": "choice",
+        "value": "A"
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "agent-B-figure-round10-2026-10-23",
+        "notes": "設計依據：井字遊戲殘局，「先擋對方的威脅，同時形成雙重威脅」。最接近既有題 logic_grade12_foundation_007（第 3 子獲勝的對局數計數），本題是單一局面的必勝著法分析，骨架不同。圖：3×3 棋盤上的 X、O 與四個候選空格 A–D。程式以完整搜尋確認只有 A 能保證獲勝（B、C、D 都必輸）。",
+        "displayText": "MathSpring 改寫題（附圖）"
+      }
+    },
+    {
+      "id": "logic_grade6_foundation_137",
+      "topic": "logic",
+      "subtopic": "adjacent_swaps_min_inversions",
+      "tags": [
+        "c:logic_deduction",
+        "m:invariant"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade6",
+      "challengeTier": "foundation",
+      "reviewStatus": "ok",
+      "prompt": {
+        "zh-Hant": "如圖，6 張數字卡排成一排：3、1、5、2、6、4。每一次可以把相鄰的兩張卡交換位置。最少要交換幾次，才能把卡片由左到右排成 1、2、3、4、5、6？",
+        "zh-Hans": "如图，6 张数字卡排成一排：3、1、5、2、6、4。每一次可以把相邻的两张卡交换位置。最少要交换几次，才能把卡片由左到右排成 1、2、3、4、5、6？",
+        "en": "Six number cards lie in a row as shown: 3, 1, 5, 2, 6, 4. In one move you may swap two neighbouring cards. What is the smallest number of moves needed to put them in the order 1, 2, 3, 4, 5, 6 from left to right?",
+        "ja": "図のように、6枚の数字カードが 3、1、5、2、6、4 の順にならんでいます。1回に、となり合う2枚を入れかえることができます。左から 1、2、3、4、5、6 の順にするには、少なくとも何回入れかえればよいですか。"
+      },
+      "answer": {
+        "zh-Hant": "最少要交換 5 次。",
+        "zh-Hans": "最少要交换 5 次。",
+        "en": "At least 5 swaps.",
+        "ja": "少なくとも 5 回です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "把「大的數排在小的數左邊」的一對叫做「順序顛倒的一對」。排好時這種對數是 0。",
+          "數一數：3 在 1、2 的左邊（2 對）；5 在 2、4 的左邊（2 對）；6 在 4 的左邊（1 對）；其他都沒有。共 5 對。",
+          "每交換一次相鄰的兩張，只會改變這兩張之間的先後，其他所有的對都不變，所以顛倒的對數每次最多減少 1。至少要 5 次。",
+          "5 次做得到：交換 3、1 → 1、3、5、2、6、4；交換 5、2 → 1、3、2、5、6、4；交換 3、2 → 1、2、3、5、6、4；交換 6、4 → 1、2、3、5、4、6；交換 5、4 → 1、2、3、4、5、6。",
+          "最少 5 次。"
+        ],
+        "zh-Hans": [
+          "把“大的数排在小的数左边”的一对叫做“顺序颠倒的一对”。排好时这种对数是 0。",
+          "数一数：3 在 1、2 的左边（2 对）；5 在 2、4 的左边（2 对）；6 在 4 的左边（1 对）；其他都没有。共 5 对。",
+          "每交换一次相邻的两张，只会改变这两张之间的先后，其他所有的对都不变，所以颠倒的对数每次最多减少 1。至少要 5 次。",
+          "5 次做得到：交换 3、1 → 1、3、5、2、6、4；交换 5、2 → 1、3、2、5、6、4；交换 3、2 → 1、2、3、5、6、4；交换 6、4 → 1、2、3、5、4、6；交换 5、4 → 1、2、3、4、5、6。",
+          "最少 5 次。"
+        ],
+        "en": [
+          "Call a pair “out of order” if the larger number is to the left of the smaller. When sorted there are 0 such pairs.",
+          "Count them: 3 is left of 1 and 2 (2 pairs); 5 is left of 2 and 4 (2 pairs); 6 is left of 4 (1 pair); no others. 5 pairs.",
+          "Swapping two neighbours changes only the order of those two cards; every other pair is unchanged, so each swap reduces the count by at most 1. At least 5 swaps are needed.",
+          "5 swaps suffice: swap 3, 1 → 1, 3, 5, 2, 6, 4; swap 5, 2 → 1, 3, 2, 5, 6, 4; swap 3, 2 → 1, 2, 3, 5, 6, 4; swap 6, 4 → 1, 2, 3, 5, 4, 6; swap 5, 4 → 1, 2, 3, 4, 5, 6.",
+          "The minimum is 5."
+        ],
+        "ja": [
+          "「大きい数が小さい数の左にある」2枚の組を「逆になっている組」とよびます。正しくならぶと、その数は0です。",
+          "数えると、3は1・2の左（2組）、5は2・4の左（2組）、6は4の左（1組）で、ほかにはなく、合計5組です。",
+          "となりの2枚を入れかえても、変わるのはその2枚の順番だけで、ほかの組は変わらないので、逆の組は1回で多くても1つしか減りません。少なくとも5回必要です。",
+          "5回でできます：3と1 → 1、3、5、2、6、4、5と2 → 1、3、2、5、6、4、3と2 → 1、2、3、5、6、4、6と4 → 1、2、3、5、4、6、5と4 → 1、2、3、4、5、6。",
+          "最少は5回です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "composite_grid_shape",
+        "params": {
+          "rows": 1,
+          "cols": 6,
+          "filledCells": [],
+          "cellLabels": {
+            "0,0": "3",
+            "0,1": "1",
+            "0,2": "5",
+            "0,3": "2",
+            "0,4": "6",
+            "0,5": "4"
+          }
+        }
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "5"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "agent-B-figure-round10-2026-10-23",
+        "notes": "設計依據：相鄰交換排序的最少次數 = 逆序對數（每次最多消去一對）。全庫查無相鄰交換排序題；最接近的是 logic_grade6_foundation_119（2×2 滑塊的循環順序不變量），本題是數逆序對並證明下限、再構造達成，骨架不同。圖：一排 6 張數字卡。答案不能從圖直接讀出。",
+        "displayText": "MathSpring 改寫題（附圖）"
+      }
+    },
+    {
+      "id": "logic_grade6_foundation_138",
+      "topic": "logic",
+      "subtopic": "die_rolling_along_grid_path",
+      "tags": [
+        "c:solid",
+        "c:position_direction",
+        "m:direct"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade6",
+      "challengeTier": "foundation",
+      "reviewStatus": "ok",
+      "prompt": {
+        "zh-Hant": "一顆骰子相對兩面的點數加起來都是 7。把它放在圖中 S 那一格：1 點朝上、2 點朝向圖的下方、3 點朝向圖的右方。骰子沿著塗色的路線，依照格子裡 1、2、3、4、5 的順序，一次翻滾一格（以貼著桌面的一條邊為軸翻過去），從 S 翻到 ★。到達 ★ 時，朝上的是幾點？",
+        "zh-Hans": "一颗骰子相对两面的点数加起来都是 7。把它放在图中 S 那一格：1 点朝上、2 点朝向图的下方、3 点朝向图的右方。骰子沿着涂色的路线，按照格子里 1、2、3、4、5 的顺序，一次翻滚一格（以贴着桌面的一条边为轴翻过去），从 S 翻到 ★。到达 ★ 时，朝上的是几点？",
+        "en": "On a die, opposite faces add up to 7. It is placed on cell S in the figure with 1 on top, 2 facing the bottom of the figure and 3 facing the right of the figure. It rolls along the shaded path through the cells numbered 1, 2, 3, 4, 5 in order, one cell at a time (tipping over an edge that touches the table) from S to ★. Which number is on top when it reaches ★?",
+        "ja": "さいころは向かい合う面の目の和がどれも7です。図の S のマスに、1の目が上、2の目が図の下側、3の目が図の右側を向くように置きます。さいころを色のついた道にそって、マスの数字 1、2、3、4、5 の順に1マスずつ（机にふれている辺を軸にして）転がし、S から ★ まで進めます。★ に着いたとき、上を向いている目はいくつですか。"
+      },
+      "answer": {
+        "zh-Hant": "到達 ★ 時朝上的是 2 點。",
+        "zh-Hans": "到达 ★ 时朝上的是 2 点。",
+        "en": "2 is on top at ★.",
+        "ja": "★ に着いたとき上は 2 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "記錄三個面：上、下方（朝圖的下方）、右方。對面的點數是 7 減它。路線依序是：右、右、上、上、右、下。",
+          "往右滾：左面翻到上面、上面翻到右面。開始 (上 1, 下方 2, 右 3) → 右滾 (上 4, 下方 2, 右 1) → 右滾 (上 6, 下方 2, 右 4)。",
+          "往上（往圖的上方）滾：朝下方的面翻到上面、上面翻到朝上方。(上 6, 下方 2, 右 4) → (上 2, 下方 1, 右 4) → (上 1, 下方 5, 右 4)。",
+          "再往右滾：(上 7 − 4 = 3, 下方 5, 右 1)。最後往下（往圖的下方）滾：朝上方的面翻到上面，(上 7 − 5 = 2, 下方 3, 右 1)。",
+          "到達 ★ 時朝上的是 2 點。"
+        ],
+        "zh-Hans": [
+          "记录三个面：上、下方（朝图的下方）、右方。对面的点数是 7 减它。路线依序是：右、右、上、上、右、下。",
+          "往右滚：左面翻到上面、上面翻到右面。开始 (上 1, 下方 2, 右 3) → 右滚 (上 4, 下方 2, 右 1) → 右滚 (上 6, 下方 2, 右 4)。",
+          "往上（往图的上方）滚：朝下方的面翻到上面、上面翻到朝上方。(上 6, 下方 2, 右 4) → (上 2, 下方 1, 右 4) → (上 1, 下方 5, 右 4)。",
+          "再往右滚：(上 7 − 4 = 3, 下方 5, 右 1)。最后往下（往图的下方）滚：朝上方的面翻到上面，(上 7 − 5 = 2, 下方 3, 右 1)。",
+          "到达 ★ 时朝上的是 2 点。"
+        ],
+        "en": [
+          "Track three faces: top, the face toward the bottom of the figure, and the face toward the right. The opposite face is always 7 minus it. The path goes: right, right, up, up, right, down.",
+          "Rolling right: the left face comes to the top and the top goes to the right. Start (top 1, bottom-side 2, right 3) → right (top 4, bottom-side 2, right 1) → right (top 6, bottom-side 2, right 4).",
+          "Rolling up (toward the top of the figure): the bottom-side face comes to the top and the top goes to the far side. (6, 2, 4) → (top 2, bottom-side 1, right 4) → (top 1, bottom-side 5, right 4).",
+          "Rolling right again: (top 7 − 4 = 3, bottom-side 5, right 1). Finally rolling down: the face on the far side comes to the top: (top 7 − 5 = 2, bottom-side 3, right 1).",
+          "At ★ the top shows 2."
+        ],
+        "ja": [
+          "上・図の下側・図の右側の3つの面を記録します。反対の面は7からひいた数です。道は 右、右、上、上、右、下 の順です。",
+          "右へ転がすと、左の面が上に、上の面が右に来ます。はじめ（上1、下側2、右3）→ 右（上4、下側2、右1）→ 右（上6、下側2、右4）。",
+          "上（図の上側）へ転がすと、下側の面が上に、上の面が奥に行きます。（6、2、4）→（上2、下側1、右4）→（上1、下側5、右4）。",
+          "また右へ：（上 7 − 4 = 3、下側5、右1）。最後に下へ転がすと、奥の面が上に来て（上 7 − 5 = 2、下側3、右1）です。",
+          "★ に着いたとき上は 2 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "composite_grid_shape",
+        "params": {
+          "rows": 5,
+          "cols": 5,
+          "filledCells": [
+            [
+              4,
+              0
+            ],
+            [
+              4,
+              1
+            ],
+            [
+              4,
+              2
+            ],
+            [
+              3,
+              2
+            ],
+            [
+              2,
+              2
+            ],
+            [
+              2,
+              3
+            ],
+            [
+              3,
+              3
+            ]
+          ],
+          "cellLabels": {
+            "4,0": "S",
+            "4,1": "1",
+            "4,2": "2",
+            "3,2": "3",
+            "2,2": "4",
+            "2,3": "5",
+            "3,3": "★"
+          }
+        }
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "2"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "agent-B-figure-round10-2026-10-23",
+        "notes": "設計依據：骰子沿著有轉彎的方格路線翻滾，追蹤上、前、右三個面。最接近既有題 geometry_grade1_foundation_080（骰子一直往同一方向翻）與 geometry_grade4_foundation_085（三次觀察推相對面），本題路線有往右、往上、往下三種方向，需要分別處理兩種翻滾規則，骨架不同。圖：5×5 方格上的塗色路線、起點 S 與終點 ★。程式模擬確認結果 2。",
+        "displayText": "MathSpring 改寫題（附圖）"
+      }
+    },
+    {
+      "id": "logic_grade6_foundation_139",
+      "topic": "logic",
+      "subtopic": "cube_edge_shortest_route_count",
+      "tags": [
+        "c:solid",
+        "c:basic_counting",
+        "m:enumeration"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade6",
+      "challengeTier": "foundation",
+      "reviewStatus": "ok",
+      "prompt": {
+        "zh-Hant": "如圖是一個正方體（虛線是被擋住、看不到的稜）。一隻螞蟻只能沿著正方體的稜爬，要從頂點 A 爬到離它最遠的頂點 G，而且要走最短的路線（經過的稜最少）。這樣的最短路線一共有幾條？",
+        "zh-Hans": "如图是一个正方体（虚线是被挡住、看不到的棱）。一只蚂蚁只能沿着正方体的棱爬，要从顶点 A 爬到离它最远的顶点 G，而且要走最短的路线（经过的棱最少）。这样的最短路线一共有几条？",
+        "en": "The figure shows a cube (dashed edges are hidden from view). An ant can crawl only along the edges and wants to go from vertex A to the farthest vertex G by a shortest route (using the fewest edges). How many such shortest routes are there?",
+        "ja": "図は立方体です（点線は見えない辺）。アリは辺にそってしか進めず、頂点 A から最も遠い頂点 G まで、通る辺がいちばん少ない道すじで行きます。そのような最短の道すじは全部で何通りありますか。"
+      },
+      "answer": {
+        "zh-Hant": "最短路線一共有 6 條。",
+        "zh-Hans": "最短路线一共有 6 条。",
+        "en": "There are 6 shortest routes.",
+        "ja": "最短の道すじは 6 通りです。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "從 A 到 G，「左右」「上下」「前後」三個方向都要各走一次，所以最短路線剛好走 3 條稜，每個方向的稜各一條。",
+          "第 1 步：從 A 出發有 3 條稜（往 B、往 D、往 E），可以選任何一個方向，3 種選擇。",
+          "第 2 步：剩下的兩個方向選一個，2 種選擇；第 3 步：只剩最後一個方向，1 種。",
+          "一共 3 × 2 × 1 = 6 條。列出來是：A→B→C→G、A→B→F→G、A→D→C→G、A→D→H→G、A→E→F→G、A→E→H→G。"
+        ],
+        "zh-Hans": [
+          "从 A 到 G，“左右”“上下”“前后”三个方向都要各走一次，所以最短路线刚好走 3 条棱，每个方向的棱各一条。",
+          "第 1 步：从 A 出发有 3 条棱（往 B、往 D、往 E），可以选任何一个方向，3 种选择。",
+          "第 2 步：剩下的两个方向选一个，2 种选择；第 3 步：只剩最后一个方向，1 种。",
+          "一共 3 × 2 × 1 = 6 条。列出来是：A→B→C→G、A→B→F→G、A→D→C→G、A→D→H→G、A→E→F→G、A→E→H→G。"
+        ],
+        "en": [
+          "To get from A to G the ant must move once in each of the three directions (left–right, up–down, front–back), so a shortest route uses exactly 3 edges, one in each direction.",
+          "Step 1: from A there are 3 edges (to B, D or E) — 3 choices of direction.",
+          "Step 2: choose one of the remaining 2 directions — 2 choices; step 3: the last direction — 1 choice.",
+          "Total 3 × 2 × 1 = 6 routes: A→B→C→G, A→B→F→G, A→D→C→G, A→D→H→G, A→E→F→G, A→E→H→G."
+        ],
+        "ja": [
+          "A から G へは「左右」「上下」「前後」の3つの向きにそれぞれ1回ずつ進むので、最短の道すじはちょうど3本の辺を通り、どの向きの辺も1本ずつです。",
+          "1歩目：A から出る辺は3本（B、D、E へ）で、3通り。",
+          "2歩目：残り2つの向きから1つで2通り、3歩目：最後の向きで1通りです。",
+          "全部で 3 × 2 × 1 = 6 通りで、A→B→C→G、A→B→F→G、A→D→C→G、A→D→H→G、A→E→F→G、A→E→H→G です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "geometry_scene",
+        "params": {
+          "bounds": {
+            "minX": -0.6,
+            "minY": -0.6,
+            "maxX": 6.4,
+            "maxY": 6.0
+          },
+          "points": [
+            {
+              "name": "A",
+              "x": 0,
+              "y": 0,
+              "pos": "bl"
+            },
+            {
+              "name": "B",
+              "x": 4,
+              "y": 0,
+              "pos": "br"
+            },
+            {
+              "name": "C",
+              "x": 4,
+              "y": 4,
+              "pos": "r"
+            },
+            {
+              "name": "D",
+              "x": 0,
+              "y": 4,
+              "pos": "l"
+            },
+            {
+              "name": "E",
+              "x": 1.6,
+              "y": 1.2,
+              "pos": "tr"
+            },
+            {
+              "name": "F",
+              "x": 5.6,
+              "y": 1.2,
+              "pos": "br"
+            },
+            {
+              "name": "G",
+              "x": 5.6,
+              "y": 5.2,
+              "pos": "tr"
+            },
+            {
+              "name": "H",
+              "x": 1.6,
+              "y": 5.2,
+              "pos": "tl"
+            }
+          ],
+          "segments": [
+            {
+              "from": "A",
+              "to": "B",
+              "style": "solid"
+            },
+            {
+              "from": "B",
+              "to": "C",
+              "style": "solid"
+            },
+            {
+              "from": "C",
+              "to": "D",
+              "style": "solid"
+            },
+            {
+              "from": "D",
+              "to": "A",
+              "style": "solid"
+            },
+            {
+              "from": "B",
+              "to": "F",
+              "style": "solid"
+            },
+            {
+              "from": "F",
+              "to": "G",
+              "style": "solid"
+            },
+            {
+              "from": "G",
+              "to": "H",
+              "style": "solid"
+            },
+            {
+              "from": "H",
+              "to": "D",
+              "style": "solid"
+            },
+            {
+              "from": "C",
+              "to": "G",
+              "style": "solid"
+            },
+            {
+              "from": "A",
+              "to": "E",
+              "style": "construction"
+            },
+            {
+              "from": "E",
+              "to": "F",
+              "style": "construction"
+            },
+            {
+              "from": "E",
+              "to": "H",
+              "style": "construction"
+            }
+          ],
+          "polygons": [],
+          "arcs": [],
+          "angleMarks": [],
+          "rightAngles": [],
+          "equalTicks": []
+        }
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "6"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "agent-B-figure-round10-2026-10-23",
+        "notes": "設計依據：正方體稜上從一頂點到對角頂點的最短路線數（三個方向的排列 3!）。最接近既有題 geometry_grade4_foundation_042（最少爬幾條稜，答案 3）；本題在最短的前提下數路線，並用三個方向的排列說明，求量與推理不同。圖：正方體斜投影，看不見的稜用虛線，8 個頂點標字母；圖上沒有畫路線。",
+        "displayText": "MathSpring 改寫題（附圖）"
+      }
     }
   ]
 }
