@@ -993,3 +993,35 @@ class TrailingZeroDecimalOnRealPacksTest(unittest.TestCase):
                 for msg in vqp.check_trailing_zero_decimal(q):
                     offenders.append('%s: %s' % (q['id'], msg))
         self.assertEqual(offenders, [], '\n'.join(offenders[:20]))
+
+
+import build_question_preview as bqp
+
+
+class PreviewNewestFirstTest(unittest.TestCase):
+    """build_question_preview：依題目第一次出現在 git 的時間，新題排最前面。"""
+
+    LOG = '\n'.join([
+        '__C 100',
+        '+      "id": "logic_grade1_foundation_001",',
+        '__C 200',
+        '+      "id": "logic_grade1_foundation_001",',
+        '+      "id": "logic_grade1_foundation_002",',
+        '-      "id": "logic_grade1_foundation_003",',
+    ])
+
+    def test_parse_keeps_earliest_time_for_reappearing_id(self):
+        added = bqp.parse_first_added(self.LOG)
+        self.assertEqual(added['logic_grade1_foundation_001'], 100)
+        self.assertEqual(added['logic_grade1_foundation_002'], 200)
+
+    def test_parse_ignores_removed_lines(self):
+        self.assertNotIn('logic_grade1_foundation_003', bqp.parse_first_added(self.LOG))
+
+    def test_real_bank_lists_newest_questions_first(self):
+        rows = bqp.load()
+        self.assertEqual(rows[0]['ad'], max(r['ad'] for r in rows))
+        order = [r['id'] for r in rows]
+        # logic_grade7_foundation_072 是第十輪才補的圖形題，001 是最早的題
+        self.assertLess(order.index('logic_grade7_foundation_072'),
+                        order.index('logic_grade7_foundation_001'))

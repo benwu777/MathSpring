@@ -16,6 +16,7 @@ import html
 import json
 import os
 import re
+import subprocess
 import sys
 
 ROOT = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
@@ -23,7 +24,37 @@ ROOT = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
 LANGS = ['zh-Hant', 'zh-Hans', 'en', 'ja']
 
 
+ID_LINE = re.compile(r'^\+\s*"id": "([a-z_]+_grade\d+_foundation_\d{3})"')
+
+
+def parse_first_added(log_text):
+    """從 `git log -p` 的輸出找出每個題號第一次被加進來的時間（unix 秒）。
+
+    題號可能因為重排、重新格式化而在後來的 commit 再「新增」一次，所以取最早的。
+    """
+    added = {}
+    ts = None
+    for line in log_text.splitlines():
+        if line.startswith('__C '):
+            ts = int(line[4:])
+            continue
+        m = ID_LINE.match(line)
+        if m and ts is not None:
+            qid = m.group(1)
+            added[qid] = min(ts, added.get(qid, ts))
+    return added
+
+
+def first_added_times():
+    out = subprocess.run(
+        ['git', 'log', '-p', '--format=__C %ct', '--', 'assets/questions'],
+        cwd=os.path.dirname(os.path.dirname(ROOT)), capture_output=True, text=True,
+    ).stdout
+    return parse_first_added(out)
+
+
 def load():
+    added = first_added_times()
     rows = []
     for path in sorted(glob.glob(os.path.join(ROOT, '*', '*.json'))):
         if os.path.basename(path) == 'manifest.json':
@@ -46,8 +77,10 @@ def load():
                 'st': q['solutionSteps'],
                 'o': q.get('options'),
                 'src': (q.get('source') or {}).get('notes', ''),
+                'ad': added.get(q['id'], 0),
             })
-    rows.sort(key=lambda r: (r['g'], r['t'], r['id']))
+    # 新題在前；同一批再依年級、主題、題號排
+    rows.sort(key=lambda r: (-r['ad'], r['g'], r['t'], r['id']))
     return rows
 
 
@@ -380,6 +413,7 @@ function card(r){
       <span class="chip g">grade${r.g}</span><span class="chip">${esc(r.t)}</span>
       <span class="chip">${esc(r.s)}</span><span class="chip">${r.m==='multiple_choice'?'選擇':'填答'}</span>
       ${r.f!=='none'?`<span class="chip">${esc(r.f)}</span>`:''}
+      ${r.ad?`<span class="chip">新增 ${new Date(r.ad*1000).toISOString().slice(0,10)}</span>`:''}
       <span class="qid">${esc(r.id)}</span>
     </div>
     <p class="prompt">${esc(r.p[lang]??r.p['zh-Hant'])}</p>
