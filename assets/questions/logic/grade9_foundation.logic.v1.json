@@ -6095,6 +6095,258 @@
         "reference": "logic-grade9-foundation",
         "notes": "缺一格的 2ⁿ × 2ⁿ 板用 L 形三格板鋪滿：切成四塊、中央放一塊 L 形製造三個新缺口，逐層遞推到 8 × 8。掃過 /L ?形.{0,40}(缺|挖|拿掉|去掉)|(缺|挖|拿掉|去掉).{0,40}L ?形/（1 題）、/三格.{0,10}(板|骨牌)/（0 題）、/8 ?× ?8.{0,30}(拿掉|去掉)/（2 題）；最接近 geometry_grade4_foundation_128（2 × 6 方格板用 L 形積木鋪滿的方法數），差異：該題計數固定長方形的鋪法；本題是任意缺一格的 8 × 8，要用分四塊遞推構造證明一定鋪得滿。"
       }
+    },
+    {
+      "id": "logic_grade9_foundation_070",
+      "topic": "logic",
+      "subtopic": "grid_truth_tellers_neighbor_liar_counts",
+      "tags": [
+        "c:logic_deduction",
+        "m:casework",
+        "m:contradiction"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade9",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "如圖，9 個人站在 3 × 3 的方格中，每格一人。每個人不是永遠說真話的誠實者，就是永遠說謊的說謊者。每個人都說了一句話：「和我上下左右相鄰的人之中，說謊者恰好有 k 個。」每一格裡的數字就是那個人說的 k。這 9 個人之中有幾個說謊者？",
+        "zh-Hans": "如图，9 个人站在 3 × 3 的方格中，每格一人。每个人不是永远说真话的诚实者，就是永远说谎的说谎者。每个人都说了一句话：「和我上下左右相邻的人之中，说谎者恰好有 k 个。」每一格里的数字就是那个人说的 k。这 9 个人之中有几个说谎者？",
+        "en": "In the figure, 9 people stand in a 3 × 3 grid, one per square. Each is either a truth-teller who always tells the truth or a liar who always lies. Each person says: \"Among the people next to me (up, down, left, right), exactly k are liars.\" The number in each square is the k that person says. How many liars are there among the 9?",
+        "ja": "図のように、9 人が 3 × 3 のマスに 1 人ずつ立っています。それぞれ、いつも本当のことを言う正直者か、いつもうそをつくうそつきです。全員が「わたしの上下左右のとなりの人のうち、うそつきはちょうど k 人」と言いました。各マスの数字がその人の言った k です。9 人のうちうそつきは何人ですか。"
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "3"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "answer": {
+        "zh-Hant": "答案是 3。",
+        "zh-Hans": "答案是 3。",
+        "en": "The answer is 3.",
+        "ja": "答えは 3 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "用 (橫列, 直行) 表示位置。先假設左上角 (1, 1)（說「0」）是誠實者：它的鄰居 (1, 2)、(2, 1) 都是誠實者。(2, 1) 說「0」也是真話，所以 (3, 1)、(2, 2) 也是誠實者。",
+          "(1, 2) 說 1：鄰居 (1, 1)、(2, 2) 誠實，所以 (1, 3) 是說謊者。(3, 1) 說 1：鄰居 (2, 1) 誠實，所以 (3, 2) 是說謊者。(2, 2) 說 1：鄰居中 (3, 2) 已經是說謊者，所以 (2, 3) 是誠實者。(2, 3) 說 2：鄰居 (1, 3) 說謊、(2, 2) 誠實，所以 (3, 3) 是說謊者。",
+          "檢查三個說謊者的話都是假的：(1, 3) 說 2，但鄰居 (1, 2)、(2, 3) 都誠實（實際 0）✓；(3, 2) 說 3，實際只有 (3, 3) 一個 ✓；(3, 3) 說 0，實際有 (3, 2) 一個 ✓。這是一組合理的答案，說謊者 3 人。",
+          "若假設 (1, 1) 是說謊者，逐步推下去會出現矛盾；用程式檢查全部 2⁹ = 512 種誠實／說謊的分配，符合所有人說法的只有上面這一組 ✓。所以說謊者有 3 個。"
+        ],
+        "zh-Hans": [
+          "用 (行, 列) 表示位置。先假设左上角 (1, 1)（说「0」）是诚实者：它的邻居 (1, 2)、(2, 1) 都是诚实者。(2, 1) 说「0」也是真话，所以 (3, 1)、(2, 2) 也是诚实者。",
+          "(1, 2) 说 1：邻居 (1, 1)、(2, 2) 诚实，所以 (1, 3) 是说谎者。(3, 1) 说 1：邻居 (2, 1) 诚实，所以 (3, 2) 是说谎者。(2, 2) 说 1：邻居中 (3, 2) 已经是说谎者，所以 (2, 3) 是诚实者。(2, 3) 说 2：邻居 (1, 3) 说谎、(2, 2) 诚实，所以 (3, 3) 是说谎者。",
+          "检查三个说谎者的话都是假的：(1, 3) 说 2，但邻居 (1, 2)、(2, 3) 都诚实（实际 0）✓；(3, 2) 说 3，实际只有 (3, 3) 一个 ✓；(3, 3) 说 0，实际有 (3, 2) 一个 ✓。这是一组合理的答案，说谎者 3 人。",
+          "若假设 (1, 1) 是说谎者，逐步推下去会出现矛盾；用程序检查全部 2⁹ = 512 种诚实／说谎的分配，符合所有人说法的只有上面这一组 ✓。所以说谎者有 3 个。"
+        ],
+        "en": [
+          "Write positions as (row, column). First suppose the top-left person (1, 1), who says 0, is truthful: then the neighbours (1, 2) and (2, 1) are truthful. (2, 1) also says 0 truthfully, so (3, 1) and (2, 2) are truthful.",
+          "(1, 2) says 1: its neighbours (1, 1), (2, 2) are truthful, so (1, 3) is a liar. (3, 1) says 1: its neighbour (2, 1) is truthful, so (3, 2) is a liar. (2, 2) says 1: (3, 2) is already a liar, so (2, 3) is truthful. (2, 3) says 2: (1, 3) lies and (2, 2) is truthful, so (3, 3) is a liar.",
+          "Check that the three liars' statements are false: (1, 3) says 2 but its neighbours (1, 2), (2, 3) are truthful (actually 0); (3, 2) says 3 but only (3, 3) is a liar; (3, 3) says 0 but (3, 2) is a liar. This is a consistent assignment with 3 liars.",
+          "Supposing (1, 1) is a liar leads to a contradiction; a computer check of all 2⁹ = 512 assignments finds only the one above. So there are 3 liars."
+        ],
+        "ja": [
+          "(段, 列) で位置を表します。まず左上 (1, 1)（「0」と言う）が正直者と仮定すると、となりの (1, 2)、(2, 1) は正直者。(2, 1) の「0」も本当なので (3, 1)、(2, 2) も正直者。",
+          "(1, 2) は 1 と言い、となりの (1, 1)、(2, 2) は正直者なので (1, 3) はうそつき。(3, 1) は 1 と言い、(2, 1) は正直者なので (3, 2) はうそつき。(2, 2) は 1 と言い、(3, 2) がすでにうそつきなので (2, 3) は正直者。(2, 3) は 2 と言い、(1, 3) がうそつき、(2, 2) が正直者なので (3, 3) はうそつき。",
+          "3 人のうそつきの発言が本当にうそか確認：(1, 3) は 2 と言うが、となり (1, 2)、(2, 3) は正直者で実際は 0 ✓。(3, 2) は 3 と言うが実際は (3, 3) の 1 人 ✓。(3, 3) は 0 と言うが実際は (3, 2) の 1 人 ✓。うそつき 3 人の矛盾のない割り当てです。",
+          "(1, 1) がうそつきと仮定すると矛盾が出ます。2⁹ = 512 通りの割り当てをプログラムですべて調べても、条件に合うのは上の 1 通りだけ ✓。うそつきは 3 人。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "composite_grid_shape",
+        "params": {
+          "rows": 3,
+          "cols": 3,
+          "filledCells": [],
+          "cellLabels": {
+            "0,0": "0",
+            "0,1": "1",
+            "0,2": "2",
+            "1,0": "0",
+            "1,1": "1",
+            "1,2": "2",
+            "2,0": "1",
+            "2,1": "3",
+            "2,2": "0"
+          }
+        }
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "誠實者／說謊者方格推理（鄰居計數）",
+        "notes": "題型出處：益智書的「騎士與無賴」方格版：每人報告鄰居中說謊者人數。圖畫出 3 × 3 方格與每人所說的數字，鄰居關係必須看圖。最接近的既有題：logic_grade12_036（10 人圍圈說「左邊是說謊者」）、logic_grade8_054（12 人圍圈說「兩邊都是說謊者」）、logic_grade7_022（一排 5 人），三者都是一維排列且說法相同；本題是二維方格、每人說的數字不同，需要從一個假設逐格推出整盤。答案 3 以推理與程式窮舉 512 種（唯一解）驗算。",
+        "displayText": "改寫題（方格中誠實者與說謊者）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "邏輯",
+        "topicCode": "logic",
+        "subtopic": "方格中誠實者與說謊者",
+        "subtopicCode": "grid_truth_tellers_neighbor_liar_counts"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "logic_grade9_foundation_071",
+      "topic": "logic",
+      "subtopic": "magic_triangle_1_to_9_side_sum_17",
+      "tags": [
+        "c:logic_deduction",
+        "m:invariant"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade9",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "如圖，三角形的三個頂點 A、B、C 和每條邊上的兩個點（D、E、F、G、H、I）一共 9 個點。把 1 到 9 各填在一個點上，使每一條邊上的 4 個數（兩個頂點和邊上兩點）加起來都等於 17。三個頂點 A、B、C 上的數加起來是多少？",
+        "zh-Hans": "如图，三角形的三个顶点 A、B、C 和每条边上的两个点（D、E、F、G、H、I）一共 9 个点。把 1 到 9 各填在一个点上，使每一条边上的 4 个数（两个顶点和边上两点）加起来都等于 17。三个顶点 A、B、C 上的数加起来是多少？",
+        "en": "In the figure there are 9 points: the vertices A, B, C of a triangle and two points on each side (D, E, F, G, H, I). The numbers 1 to 9 are placed one at each point so that the 4 numbers on each side (two vertices and the two side points) add up to 17. What is the sum of the numbers at the vertices A, B, C?",
+        "ja": "図のように、三角形の頂点 A、B、C と各辺の上の 2 点（D、E、F、G、H、I）の合わせて 9 点があります。1 から 9 を 1 つずつ置き、どの辺の 4 つの数（2 つの頂点と辺上の 2 点）の和も 17 になるようにします。頂点 A、B、C の数の和はいくらですか。"
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "6"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "answer": {
+        "zh-Hant": "答案是 6。",
+        "zh-Hans": "答案是 6。",
+        "en": "The answer is 6.",
+        "ja": "答えは 6 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "把三條邊的和加起來：3 × 17 = 51。每個頂點同時在兩條邊上，被算了兩次；邊上的點只算一次。",
+          "所以 51 = (1 + 2 + ⋯ + 9) + (A + B + C) = 45 + (A + B + C)，得 A + B + C = 6。",
+          "三個不同的正整數和為 6，只能是 1、2、3，所以頂點一定是 1、2、3（順序不限）。",
+          "確實做得到，例如 A = 1、B = 2、C = 3，邊 AB 放 6、8（1 + 6 + 8 + 2 = 17），邊 BC 放 5、7（2 + 5 + 7 + 3 = 17），邊 CA 放 4、9（3 + 4 + 9 + 1 = 17）✓。答案是 6。"
+        ],
+        "zh-Hans": [
+          "把三条边的和加起来：3 × 17 = 51。每个顶点同时在两条边上，被算了两次；边上的点只算一次。",
+          "所以 51 = (1 + 2 + ⋯ + 9) + (A + B + C) = 45 + (A + B + C)，得 A + B + C = 6。",
+          "三个不同的正整数和为 6，只能是 1、2、3，所以顶点一定是 1、2、3（顺序不限）。",
+          "确实做得到，例如 A = 1、B = 2、C = 3，边 AB 放 6、8（1 + 6 + 8 + 2 = 17），边 BC 放 5、7（2 + 5 + 7 + 3 = 17），边 CA 放 4、9（3 + 4 + 9 + 1 = 17）✓。答案是 6。"
+        ],
+        "en": [
+          "Add the three side sums: 3 × 17 = 51. Each vertex lies on two sides and is counted twice; each side point is counted once.",
+          "So 51 = (1 + 2 + ⋯ + 9) + (A + B + C) = 45 + (A + B + C), giving A + B + C = 6.",
+          "Three different positive integers with sum 6 can only be 1, 2, 3, so the vertices hold 1, 2, 3 in some order.",
+          "It can be done, for example A = 1, B = 2, C = 3 with 6, 8 on side AB (1 + 6 + 8 + 2 = 17), 5, 7 on side BC (2 + 5 + 7 + 3 = 17) and 4, 9 on side CA (3 + 4 + 9 + 1 = 17). The answer is 6."
+        ],
+        "ja": [
+          "3 辺の和を足すと 3 × 17 = 51。頂点はそれぞれ 2 つの辺にふくまれるので 2 回数え、辺の上の点は 1 回だけ数えます。",
+          "よって 51 = (1 + 2 + ⋯ + 9) + (A + B + C) = 45 + (A + B + C)、A + B + C = 6。",
+          "異なる 3 つの正の整数で和が 6 になるのは 1、2、3 だけなので、頂点は 1、2、3（順番は自由）。",
+          "実際にできます。たとえば A = 1、B = 2、C = 3 で、辺 AB に 6、8（1 + 6 + 8 + 2 = 17）、辺 BC に 5、7（2 + 5 + 7 + 3 = 17）、辺 CA に 4、9（3 + 4 + 9 + 1 = 17）✓。答えは 6。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "geometry_scene",
+        "params": {
+          "bounds": {
+            "minX": -1,
+            "minY": -1,
+            "maxX": 9,
+            "maxY": 7.928203230275509
+          },
+          "points": [
+            {
+              "name": "A",
+              "x": 4,
+              "y": 6.9282,
+              "pos": "t"
+            },
+            {
+              "name": "B",
+              "x": 0,
+              "y": 0,
+              "pos": "bl"
+            },
+            {
+              "name": "C",
+              "x": 8,
+              "y": 0,
+              "pos": "br"
+            },
+            {
+              "name": "D",
+              "x": 2.6667,
+              "y": 4.6188,
+              "pos": "l"
+            },
+            {
+              "name": "E",
+              "x": 1.3333,
+              "y": 2.3094,
+              "pos": "l"
+            },
+            {
+              "name": "F",
+              "x": 2.6667,
+              "y": 0.0,
+              "pos": "b"
+            },
+            {
+              "name": "G",
+              "x": 5.3333,
+              "y": 0.0,
+              "pos": "b"
+            },
+            {
+              "name": "H",
+              "x": 6.6667,
+              "y": 2.3094,
+              "pos": "r"
+            },
+            {
+              "name": "I",
+              "x": 5.3333,
+              "y": 4.6188,
+              "pos": "r"
+            }
+          ],
+          "segments": [
+            {
+              "from": "A",
+              "to": "B",
+              "style": "solid"
+            },
+            {
+              "from": "B",
+              "to": "C",
+              "style": "solid"
+            },
+            {
+              "from": "C",
+              "to": "A",
+              "style": "solid"
+            }
+          ]
+        }
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "魔術三角形（1～9，邊和 17）：重複計數求頂點和",
+        "notes": "題型出處：益智書經典「三角形每邊四數等和」。圖畫出三角形與 9 個點，哪些點在同一條邊上、頂點被兩條邊共用，都必須看圖。最接近的既有題：logic_grade7_013（1～9 幻方中心）、logic_grade3_094（數字三角形相減）；主流程提到 4～6 年級新增了「數字加總謎題」，類型可能相近，列入疑慮。本題的推理是「頂點重複計數」導出 A + B + C = 6，再構造驗證。答案 6 以論證與程式窮舉（頂點和唯一為 6）驗算。",
+        "displayText": "改寫題（1～9 填三角形邊和 17）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "邏輯",
+        "topicCode": "logic",
+        "subtopic": "1～9 填三角形邊和 17",
+        "subtopicCode": "magic_triangle_1_to_9_side_sum_17"
+      },
+      "reviewStatus": "ok"
     }
   ]
 }

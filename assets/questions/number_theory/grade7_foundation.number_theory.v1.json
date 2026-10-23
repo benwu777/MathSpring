@@ -7703,6 +7703,260 @@
         "reference": "number_theory-grade7-foundation",
         "notes": "三種週期「恰好兩個」同時發生：兩兩取最小公倍數計數，再各扣掉三者共同的 60 的倍數。掃過 /(燈|鐘).{0,30}每 ?\\d+ ?秒.{0,40}每 ?\\d+ ?秒.{0,40}每 ?\\d+ ?秒/（0 題）、/恰好(有)?兩(盞|個).{0,10}同時/（0 題）；最接近 number_theory_grade7_foundation_030，差異：既有題只有兩盞燈、數同時閃的次數；本題三盞燈，要「恰好兩盞」同時亮，需用三組最小公倍數再扣掉三盞齊亮的時刻。"
       }
+    },
+    {
+      "id": "number_theory_grade7_foundation_097",
+      "topic": "number_theory",
+      "subtopic": "two_by_two_two_digit_primes",
+      "tags": [
+        "c:factor_multiple",
+        "c:place_value",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade7",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "如圖，在 2 × 2 的方格中，每格填一個數字（0 到 9，可以重複），左上角已經填了 2，另外三格記為 b、c、d。兩個橫列由左往右讀、兩個直行由上往下讀，會得到四個兩位數：2b、cd、2c、bd。要讓這四個兩位數全部都是質數，一共有幾種填法？",
+        "zh-Hans": "如图，在 2 × 2 的方格中，每格填一个数字（0 到 9，可以重复），左上角已经填了 2，另外三格记为 b、c、d。两个行由左往右读、两个列由上往下读，会得到四个两位数：2b、cd、2c、bd。要让这四个两位数全部都是质数，一共有几种填法？",
+        "en": "In the 2 × 2 grid shown, each square gets one digit (0 to 9, repeats allowed). The top-left square already holds 2 and the other three are called b, c, d. Reading the two rows left to right and the two columns top to bottom gives four two-digit numbers: 2b, cd, 2c and bd. In how many ways can the grid be filled so that all four of these two-digit numbers are prime?",
+        "ja": "図の 2 × 2 のマスに数字（0 から 9、同じ数字を使ってもよい）を 1 つずつ入れます。左上にはすでに 2 が入っていて、ほかの 3 マスを b、c、d とします。2 つの段を左から右へ、2 つの列を上から下へ読むと、4 つの 2 けたの数 2b、cd、2c、bd ができます。この 4 つがすべて素数になる入れ方は何通りありますか。"
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "5"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "answer": {
+        "zh-Hant": "答案是 5。",
+        "zh-Hans": "答案是 5。",
+        "en": "The answer is 5.",
+        "ja": "答えは 5 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "先看含 2 的兩個數：2b 和 2c 都要是 20 多的質數。20～29 之間的質數只有 23 和 29，所以 b、c 都只能是 3 或 9。",
+          "再看 cd 和 bd：它們的十位是 3 或 9，個位都是 d。30 多的質數是 31、37，90 多的質數只有 97。",
+          "分四種情況：(b, c) = (3, 3) 時，3d 是質數，d = 1 或 7，有 2 種；(3, 9) 時，3d 與 9d 都要是質數，只有 d = 7（37、97），1 種；(9, 3) 同理 1 種；(9, 9) 時 9d 是質數，d = 7，1 種。",
+          "一共 2 + 1 + 1 + 1 = 5 種：2 3 / 3 1、2 3 / 3 7、2 3 / 9 7、2 9 / 3 7、2 9 / 9 7。",
+          "逐一檢查，例如 2 9 / 3 7：29、37、23、97 都是質數 ✓。用程式窮舉 b、c、d 的 1000 種組合，也恰好 5 種 ✓。"
+        ],
+        "zh-Hans": [
+          "先看含 2 的两个数：2b 和 2c 都要是 20 多的质数。20～29 之间的质数只有 23 和 29，所以 b、c 都只能是 3 或 9。",
+          "再看 cd 和 bd：它们的十位是 3 或 9，个位都是 d。30 多的质数是 31、37，90 多的质数只有 97。",
+          "分四种情况：(b, c) = (3, 3) 时，3d 是质数，d = 1 或 7，有 2 种；(3, 9) 时，3d 与 9d 都要是质数，只有 d = 7（37、97），1 种；(9, 3) 同理 1 种；(9, 9) 时 9d 是质数，d = 7，1 种。",
+          "一共 2 + 1 + 1 + 1 = 5 种：2 3 / 3 1、2 3 / 3 7、2 3 / 9 7、2 9 / 3 7、2 9 / 9 7。",
+          "逐一检查，例如 2 9 / 3 7：29、37、23、97 都是质数 ✓。用程序穷举 b、c、d 的 1000 种组合，也恰好 5 种 ✓。"
+        ],
+        "en": [
+          "First the two numbers containing the 2: 2b and 2c must be primes in the twenties. The only primes from 20 to 29 are 23 and 29, so b and c are each 3 or 9.",
+          "Next cd and bd: their tens digits are 3 or 9 and both end in d. The primes in the thirties are 31 and 37; the only prime in the nineties is 97.",
+          "Four cases. (b, c) = (3, 3): 3d prime, so d = 1 or 7, 2 ways. (3, 9): 3d and 9d both prime forces d = 7 (37, 97), 1 way. (9, 3): likewise 1 way. (9, 9): 9d prime, d = 7, 1 way.",
+          "In total 2 + 1 + 1 + 1 = 5 grids: 2 3 / 3 1, 2 3 / 3 7, 2 3 / 9 7, 2 9 / 3 7, 2 9 / 9 7.",
+          "Check one, say 2 9 / 3 7: 29, 37, 23, 97 are all prime. A computer search over all 1000 choices of b, c, d also finds exactly 5."
+        ],
+        "ja": [
+          "まず 2 をふくむ 2 つの数：2b と 2c は 20 台の素数です。20～29 の素数は 23 と 29 だけなので、b、c はどちらも 3 か 9。",
+          "次に cd と bd：十の位が 3 か 9 で、一の位はどちらも d です。30 台の素数は 31、37、90 台の素数は 97 だけです。",
+          "4 つの場合に分けます。(b, c) = (3, 3) のとき 3d が素数で d = 1 か 7 の 2 通り。(3, 9) のとき 3d と 9d がどちらも素数で d = 7（37、97）の 1 通り。(9, 3) も同様に 1 通り。(9, 9) のとき 9d が素数で d = 7 の 1 通り。",
+          "合計 2 + 1 + 1 + 1 = 5 通り：2 3 / 3 1、2 3 / 3 7、2 3 / 9 7、2 9 / 3 7、2 9 / 9 7。",
+          "たとえば 2 9 / 3 7 は 29、37、23、97 がすべて素数 ✓。b、c、d の 1000 通りをプログラムで調べてもちょうど 5 通り ✓。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "composite_grid_shape",
+        "params": {
+          "rows": 2,
+          "cols": 2,
+          "filledCells": [
+            [
+              0,
+              0
+            ]
+          ],
+          "cellLabels": {
+            "0,0": "2",
+            "0,1": "b",
+            "1,0": "c",
+            "1,1": "d"
+          }
+        }
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "方格讀數的質數條件計數",
+        "notes": "題型出處：數字填字（cross-number）式的質數方格小題。圖畫出 2 × 2 方格，左上填 2（塗色）、其餘標 b、c、d，說明讀數方向；答案需分類計數。最接近的既有題：number_theory_grade7_080 與 number_theory_grade8_044（兩位數質數對調後仍為質數，求總和或個數），本題是四個兩位數在方格中共用數字、由 2 開頭逐格限制，推理是「先定 b、c 再定 d」的分類，與對調質數骨架不同。答案 5 以分類與程式窮舉雙重驗算。",
+        "displayText": "改寫題（2 × 2 方格的兩位數質數）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "數論",
+        "topicCode": "number_theory",
+        "subtopic": "2 × 2 方格的兩位數質數",
+        "subtopicCode": "two_by_two_two_digit_primes"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "number_theory_grade7_foundation_098",
+      "topic": "number_theory",
+      "subtopic": "product_pyramid_trailing_zeros",
+      "tags": [
+        "c:factor_multiple",
+        "c:exponent",
+        "m:bijection"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade7",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "如圖是一座「乘法數塔」（塗色的格子是磚塊）：最下面一層的 5 塊磚寫著 4、15、6、5、8，往上每一塊磚上的數，等於它左下與右下兩塊磚上的數相乘，一直算到最上面那一塊「?」。最上面那個數的末尾連續有幾個 0？",
+        "zh-Hans": "如图是一座「乘法数塔」（涂色的格子是砖块）：最下面一层的 5 块砖写着 4、15、6、5、8，往上每一块砖上的数，等于它左下与右下两块砖上的数相乘，一直算到最上面那一块「?」。最上面那个数的末尾连续有几个 0？",
+        "en": "The figure is a \"product pyramid\" (the shaded squares are the bricks). The bottom layer reads 4, 15, 6, 5, 8, and every brick above holds the product of the two bricks below it (lower-left and lower-right), up to the top brick \"?\". How many zeros does the number on the top brick end with?",
+        "ja": "図は「かけ算のピラミッド」です（色のついたマスがブロック）。いちばん下の 5 つのブロックには 4、15、6、5、8 が書かれ、上のブロックの数はその左下と右下のブロックの数をかけたものです。いちばん上の「?」まで計算するとき、いちばん上の数の末尾には 0 がいくつ続きますか。"
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "8"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "answer": {
+        "zh-Hant": "答案是 8。",
+        "zh-Hans": "答案是 8。",
+        "en": "The answer is 8.",
+        "ja": "答えは 8 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "末尾的 0 是由一個 2 和一個 5 配成一個 10 而來，所以只要知道最上面那個數裡有幾個質因數 2、幾個質因數 5，取較少的那個。",
+          "最下面每塊磚的數，在最上面的乘積裡會被乘幾次？往上相乘時，乘的次數會像巴斯卡三角形一樣累加：由左到右分別被乘 1、4、6、4、1 次（等於從那塊磚走到頂端的路線數）。所以頂端 = 4¹ × 15⁴ × 6⁶ × 5⁴ × 8¹。",
+          "數 2 的個數：4 = 2² 給 2 個；6 = 2 × 3 被乘 6 次給 6 個；8 = 2³ 給 3 個；15、5 沒有 2。共 2 + 6 + 3 = 11 個。",
+          "數 5 的個數：15 = 3 × 5 被乘 4 次給 4 個；5 被乘 4 次給 4 個；其他沒有 5。共 8 個。",
+          "能配成 10 的只有 min(11, 8) = 8 對，所以末尾有 8 個 0。驗算：頂端 = 2¹¹ × 3¹⁰ × 5⁸ = 2³ × 3¹⁰ × 10⁸，2³ × 3¹⁰ = 472392 的個位不是 0，所以恰好 8 個 0 ✓。"
+        ],
+        "zh-Hans": [
+          "末尾的 0 是由一个 2 和一个 5 配成一个 10 而来，所以只要知道最上面那个数里有几个质因数 2、几个质因数 5，取较少的那个。",
+          "最下面每块砖的数，在最上面的乘积里会被乘几次？往上相乘时，乘的次数会像杨辉三角一样累加：由左到右分别被乘 1、4、6、4、1 次（等于从那块砖走到顶端的路线数）。所以顶端 = 4¹ × 15⁴ × 6⁶ × 5⁴ × 8¹。",
+          "数 2 的个数：4 = 2² 给 2 个；6 = 2 × 3 被乘 6 次给 6 个；8 = 2³ 给 3 个；15、5 没有 2。共 2 + 6 + 3 = 11 个。",
+          "数 5 的个数：15 = 3 × 5 被乘 4 次给 4 个；5 被乘 4 次给 4 个；其他没有 5。共 8 个。",
+          "能配成 10 的只有 min(11, 8) = 8 对，所以末尾有 8 个 0。验算：顶端 = 2¹¹ × 3¹⁰ × 5⁸ = 2³ × 3¹⁰ × 10⁸，2³ × 3¹⁰ = 472392 的个位不是 0，所以恰好 8 个 0 ✓。"
+        ],
+        "en": [
+          "Trailing zeros come from pairing a factor 2 with a factor 5 to make 10, so we only need the number of prime factors 2 and 5 in the top number, and take the smaller.",
+          "How many times does each bottom number get multiplied into the top? Going upward, the counts add up like Pascal's triangle: from left to right the bottom bricks are used 1, 4, 6, 4, 1 times (the number of routes from that brick to the top). So the top is 4¹ × 15⁴ × 6⁶ × 5⁴ × 8¹.",
+          "Factors 2: 4 = 2² gives 2; 6 = 2 × 3 used 6 times gives 6; 8 = 2³ gives 3; 15 and 5 have none. Total 2 + 6 + 3 = 11.",
+          "Factors 5: 15 = 3 × 5 used 4 times gives 4; 5 used 4 times gives 4; none elsewhere. Total 8.",
+          "Only min(11, 8) = 8 pairs make a 10, so the top ends in 8 zeros. Check: top = 2¹¹ × 3¹⁰ × 5⁸ = 2³ × 3¹⁰ × 10⁸, and 2³ × 3¹⁰ = 472392 does not end in 0, so there are exactly 8 zeros."
+        ],
+        "ja": [
+          "末尾の 0 は 2 と 5 が 1 つずつ組になって 10 になることでできるので、いちばん上の数にふくまれる素因数 2 と 5 の個数を調べ、少ないほうをとればよいです。",
+          "下の段の各数は、いちばん上の積に何回かけられるでしょうか。上へかけていくと、回数はパスカルの三角形のように足されていき、左から 1、4、6、4、1 回になります（そのブロックからてっぺんまでの道すじの数）。よっててっぺん = 4¹ × 15⁴ × 6⁶ × 5⁴ × 8¹。",
+          "2 の個数：4 = 2² で 2 個、6 = 2 × 3 が 6 回で 6 個、8 = 2³ で 3 個、15 と 5 には 2 はありません。合計 2 + 6 + 3 = 11 個。",
+          "5 の個数：15 = 3 × 5 が 4 回で 4 個、5 が 4 回で 4 個、ほかにはありません。合計 8 個。",
+          "10 の組は min(11, 8) = 8 組なので、末尾の 0 は 8 個。検算：てっぺん = 2¹¹ × 3¹⁰ × 5⁸ = 2³ × 3¹⁰ × 10⁸ で、2³ × 3¹⁰ = 472392 の一の位は 0 ではないので、ちょうど 8 個 ✓。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "composite_grid_shape",
+        "params": {
+          "rows": 5,
+          "cols": 9,
+          "filledCells": [
+            [
+              0,
+              4
+            ],
+            [
+              1,
+              3
+            ],
+            [
+              1,
+              5
+            ],
+            [
+              2,
+              2
+            ],
+            [
+              2,
+              4
+            ],
+            [
+              2,
+              6
+            ],
+            [
+              3,
+              1
+            ],
+            [
+              3,
+              3
+            ],
+            [
+              3,
+              5
+            ],
+            [
+              3,
+              7
+            ],
+            [
+              4,
+              0
+            ],
+            [
+              4,
+              2
+            ],
+            [
+              4,
+              4
+            ],
+            [
+              4,
+              6
+            ],
+            [
+              4,
+              8
+            ]
+          ],
+          "cellLabels": {
+            "4,0": "4",
+            "4,2": "15",
+            "4,4": "6",
+            "4,6": "5",
+            "4,8": "8",
+            "0,4": "?"
+          }
+        }
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "乘法數塔：底層權重為巴斯卡係數＋末尾 0 的 2、5 配對",
+        "notes": "題型出處：「加法數塔」常見題的乘法版本，結合質因數 2、5 的配對。圖以方格排出 5 層磚塊（塗色）並寫出底層數字與頂端「?」，結構必須看圖才清楚「左下與右下」。最接近的既有題：logic_grade7_063（加法數塔，1～5 排列求頂端最大值）與 number_theory_grade9_063（1! 到 20! 連乘的末尾 0），前者是加法權重最佳化、後者是階乘中 5 的個數；本題核心是「乘法塔的指數按 1、4、6、4、1 累加」再取 2 與 5 的較小者。答案 8 以直接計算頂端數 2¹¹ × 3¹⁰ × 5⁸ 驗算。",
+        "displayText": "改寫題（乘法數塔末尾的 0）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "數論",
+        "topicCode": "number_theory",
+        "subtopic": "乘法數塔末尾的 0",
+        "subtopicCode": "product_pyramid_trailing_zeros"
+      },
+      "reviewStatus": "ok"
     }
   ]
 }
