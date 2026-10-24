@@ -381,7 +381,6 @@ class _AvatarEditorState extends State<AvatarEditor> {
     final bool selected = _selected() == id;
     // Hair colour is a visual preference, not premium avatar artwork.  Keep
     // all six swatches available in the standard learner flow.
-    const bool locked = false;
     final Color accent = Theme.of(context).colorScheme.primary;
     final Color swatchColor = AvatarAssetCatalog.girlHairColors[id]!;
     return Semantics(
@@ -393,11 +392,7 @@ class _AvatarEditorState extends State<AvatarEditor> {
         customBorder: const CircleBorder(),
         onTap: () {
           debugPrint('[hair-color] swatch tap id=$id selected=$selected '
-              'locked=$locked hasFullUnlock=${widget.hasFullUnlock}');
-          if (locked) {
-            widget.onLockedOptionSelected?.call(id);
-            return;
-          }
+              'hasFullUnlock=${widget.hasFullUnlock}');
           _choose(id);
         },
         child: Container(
@@ -417,7 +412,6 @@ class _AvatarEditorState extends State<AvatarEditor> {
             children: <Widget>[
               if (selected)
                 const Icon(Icons.check, color: Colors.white, size: 24),
-              if (locked) const Icon(Icons.lock, color: Colors.white, size: 20),
             ],
           ),
         ),

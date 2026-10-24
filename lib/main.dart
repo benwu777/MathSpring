@@ -3030,7 +3030,7 @@ class _FavoritesPageState extends State<FavoritesPage> {
               if (collections.isNotEmpty)
                 DropdownButtonFormField<String>(
                   key: const ValueKey<String>('favorite_collection_picker'),
-                  value: selectedId,
+                  initialValue: selectedId,
                   decoration:
                       InputDecoration(labelText: strings.favoritesTitle),
                   items: collections
@@ -3114,7 +3114,7 @@ class _FavoriteEmptyState extends StatelessWidget {
           padding: const EdgeInsets.symmetric(vertical: 80, horizontal: 28),
           child: Column(
             children: <Widget>[
-              Icon(Icons.bookmark_border_rounded,
+              const Icon(Icons.bookmark_border_rounded,
                   size: 48, color: AppVisualTokens.primary),
               const SizedBox(height: 14),
               Text(message, textAlign: TextAlign.center),
@@ -7238,7 +7238,7 @@ class _LegendTile extends StatelessWidget {
           width: 42,
           height: 18,
           decoration: BoxDecoration(
-            color: isBand ? color.withOpacity(0.18) : null,
+            color: isBand ? color.withValues(alpha: 0.18) : null,
             borderRadius: BorderRadius.circular(8),
           ),
           child: Center(
@@ -7311,7 +7311,7 @@ class TrigGraphPainter extends CustomPainter {
       ..strokeWidth = 3
       ..style = PaintingStyle.stroke;
     final Paint bandPaint = Paint()
-      ..color = const Color(0xFF0F766E).withOpacity(0.10)
+      ..color = const Color(0xFF0F766E).withValues(alpha: 0.10)
       ..style = PaintingStyle.fill;
     final Paint markerPaint = Paint()
       ..color = const Color(0xFF0F172A)
@@ -7914,9 +7914,10 @@ class CoordinatePlanePainter extends CustomPainter {
         final double dy = mapY(y);
         canvas.drawLine(
             Offset(plot.left, dy), Offset(plot.right, dy), gridPaint);
-        if (y != 0)
+        if (y != 0) {
           _paintText(canvas, '$y', Offset(plot.left - 14, dy),
               fontFamily: labelFontFamily);
+        }
       }
     }
 

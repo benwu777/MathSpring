@@ -283,7 +283,7 @@ class AppServices {
     final List<FavoriteQuestionCollection> collections =
         await getFavoriteCollections(learnerId);
     if (collections.length >= FavoriteQuestionRepository.maxCollections) {
-      throw FavoriteCollectionLimitReached(
+      throw const FavoriteCollectionLimitReached(
           FavoriteQuestionRepository.maxCollections);
     }
     final FavoriteQuestionCollection collection = FavoriteQuestionCollection(
