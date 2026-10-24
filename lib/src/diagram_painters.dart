@@ -41,7 +41,7 @@ class TrigGraphPainter extends CustomPainter {
       ..strokeWidth = 3
       ..style = PaintingStyle.stroke;
     final Paint bandPaint = Paint()
-      ..color = const Color(0xFF0F766E).withOpacity(0.10)
+      ..color = const Color(0xFF0F766E).withValues(alpha: 0.10)
       ..style = PaintingStyle.fill;
     final Paint markerPaint = Paint()
       ..color = const Color(0xFF0F172A)
@@ -644,9 +644,10 @@ class CoordinatePlanePainter extends CustomPainter {
         final double dy = mapY(y);
         canvas.drawLine(
             Offset(plot.left, dy), Offset(plot.right, dy), gridPaint);
-        if (y != 0)
+        if (y != 0) {
           _paintText(canvas, '$y', Offset(plot.left - 14, dy),
               fontFamily: labelFontFamily);
+        }
       }
     }
 

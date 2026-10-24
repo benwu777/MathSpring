@@ -36,8 +36,9 @@ class FavoriteQuestionRepository {
       {required String learnerId, required String name}) async {
     final List<FavoriteQuestionCollection> collections =
         await ensureDefaultCollections(learnerId);
-    if (collections.length >= maxCollections)
-      throw FavoriteCollectionLimitReached(maxCollections);
+    if (collections.length >= maxCollections) {
+      throw const FavoriteCollectionLimitReached(maxCollections);
+    }
     final String now = DateTime.now().toUtc().toIso8601String();
     final FavoriteQuestionCollection collection = FavoriteQuestionCollection(
       id: 'favorite_collection_${DateTime.now().toUtc().microsecondsSinceEpoch}',

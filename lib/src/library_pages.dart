@@ -202,7 +202,7 @@ class _FavoritesPageState extends State<FavoritesPage> {
               if (collections.isNotEmpty)
                 DropdownButtonFormField<String>(
                   key: const ValueKey<String>('favorite_collection_picker'),
-                  value: selectedId,
+                  initialValue: selectedId,
                   decoration:
                       InputDecoration(labelText: strings.favoritesTitle),
                   items: collections
@@ -292,7 +292,7 @@ class _FavoriteEmptyState extends StatelessWidget {
           padding: const EdgeInsets.symmetric(vertical: 80, horizontal: 28),
           child: Column(
             children: <Widget>[
-              Icon(Icons.bookmark_border_rounded,
+              const Icon(Icons.bookmark_border_rounded,
                   size: 48, color: AppVisualTokens.primary),
               const SizedBox(height: 14),
               Text(message, textAlign: TextAlign.center),
