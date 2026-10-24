@@ -6064,6 +6064,487 @@
         "subtopicCode": "torus_grid_orbit_lcm"
       },
       "reviewStatus": "ok"
+    },
+    {
+      "id": "number_theory_grade12_foundation_067",
+      "topic": "number_theory",
+      "subtopic": "multiplication_mod13_cycle_count",
+      "tags": [
+        "c:modular",
+        "c:factor_multiple",
+        "m:enumeration"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "如圖，圓周上依順時針排著 1～12 這 12 個點。選定一個 m（1 ≤ m ≤ 12），把每個點 k 用線段連到「m × k 除以 13 的餘數」那一點。這些連線會把 12 個點分成若干個封閉的循環（連到自己的點也算一個循環）。例如 m = 3 時得到圖中 4 個三角形：1 → 3 → 9 → 1、2 → 6 → 5 → 2、4 → 12 → 10 → 4、7 → 8 → 11 → 7。對 m = 1、2、⋯、12 各做一次，把每次得到的循環個數全部加起來，總和是多少？",
+        "zh-Hans": "如图，圆周上依顺时针排着 1～12 这 12 个点。选定一个 m（1 ≤ m ≤ 12），把每个点 k 用线段连到「m × k 除以 13 的余数」那一点。这些连线会把 12 个点分成若干个封闭的循环（连到自己的点也算一个循环）。例如 m = 3 时得到图中 4 个三角形：1 → 3 → 9 → 1、2 → 6 → 5 → 2、4 → 12 → 10 → 4、7 → 8 → 11 → 7。对 m = 1、2、⋯、12 各做一次，把每次得到的循环个数全部加起来，总和是多少？",
+        "en": "In the figure, the points 1–12 are arranged clockwise on a circle. Choose m (1 ≤ m ≤ 12) and join each point k to the point \"remainder of m × k divided by 13\". These joins split the 12 points into closed cycles (a point joined to itself counts as a cycle). For m = 3 we get the 4 triangles shown: 1 → 3 → 9 → 1, 2 → 6 → 5 → 2, 4 → 12 → 10 → 4, 7 → 8 → 11 → 7. Doing this for each m = 1, 2, …, 12 and adding up the numbers of cycles, what is the total?",
+        "ja": "図のように、円周上に 1～12 の 12 個の点が時計回りに並んでいます。m（1 ≤ m ≤ 12）を 1 つ決め、各点 k を「m × k を 13 で割った余り」の点と線分で結びます。これで 12 個の点はいくつかの閉じたサイクルに分かれます（自分自身と結ばれる点も 1 つのサイクル）。たとえば m = 3 では図の 4 つの三角形 1 → 3 → 9 → 1、2 → 6 → 5 → 2、4 → 12 → 10 → 4、7 → 8 → 11 → 7 になります。m = 1、2、⋯、12 のそれぞれでサイクルの個数を求めて合計するといくつですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 40。",
+        "zh-Hans": "答案是 40。",
+        "en": "The answer is 40.",
+        "ja": "答えは 40 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "13 是質數，k ↦ mk（mod 13）把 1～12 一對一地對應到 1～12。從 k 出發走 t 步回到 k ⇔ mᵗk ≡ k ⇔ mᵗ ≡ 1（mod 13）（k 與 13 互質，可以約掉），所以每個循環的長度都是 m 的「階」d（使 mᵈ ≡ 1 的最小正整數），循環個數 = 12/d。",
+          "2 的冪除以 13 的餘數依序是 2、4、8、3、6、12、11、9、5、10、7、1，所以每個 m 都是某個 2ʲ（j = 1～12），而 2ʲ 的階是 12/gcd(j, 12)。",
+          "於是：m = 1 階 1；m = 12 階 2；m = 3、9 階 3；m = 5、8 階 4；m = 4、10 階 6；m = 2、6、7、11 階 12。循環個數分別是 12、6、4、4、3、3、2、2、1、1、1、1。",
+          "總和 = 12 + 6 + 4 × 2 + 3 × 2 + 2 × 2 + 1 × 4 = 40。"
+        ],
+        "zh-Hans": [
+          "13 是质数，k ↦ mk（mod 13）把 1～12 一对一地对应到 1～12。从 k 出发走 t 步回到 k ⇔ mᵗk ≡ k ⇔ mᵗ ≡ 1（mod 13）（k 与 13 互质，可以约掉），所以每个循环的长度都是 m 的「阶」d（使 mᵈ ≡ 1 的最小正整数），循环个数 = 12/d。",
+          "2 的幂除以 13 的余数依序是 2、4、8、3、6、12、11、9、5、10、7、1，所以每个 m 都是某个 2ʲ（j = 1～12），而 2ʲ 的阶是 12/gcd(j, 12)。",
+          "于是：m = 1 阶 1；m = 12 阶 2；m = 3、9 阶 3；m = 5、8 阶 4；m = 4、10 阶 6；m = 2、6、7、11 阶 12。循环个数分别是 12、6、4、4、3、3、2、2、1、1、1、1。",
+          "总和 = 12 + 6 + 4 × 2 + 3 × 2 + 2 × 2 + 1 × 4 = 40。"
+        ],
+        "en": [
+          "13 is prime, so k ↦ mk (mod 13) maps 1–12 one-to-one onto 1–12. Starting from k, we return after t steps ⇔ mᵗk ≡ k ⇔ mᵗ ≡ 1 (mod 13) (k is coprime to 13 and cancels). So every cycle has length equal to the order d of m (the least positive d with mᵈ ≡ 1), and there are 12/d cycles.",
+          "The powers of 2 mod 13 are 2, 4, 8, 3, 6, 12, 11, 9, 5, 10, 7, 1, so every m is some 2ʲ (j = 1–12), and 2ʲ has order 12/gcd(j, 12).",
+          "Thus m = 1 has order 1; m = 12 order 2; m = 3, 9 order 3; m = 5, 8 order 4; m = 4, 10 order 6; m = 2, 6, 7, 11 order 12. The cycle counts are 12, 6, 4, 4, 3, 3, 2, 2, 1, 1, 1, 1.",
+          "Total = 12 + 6 + 4 × 2 + 3 × 2 + 2 × 2 + 1 × 4 = 40."
+        ],
+        "ja": [
+          "13 は素数なので、k ↦ mk（mod 13）は 1～12 を 1～12 に 1 対 1 に移します。k から t 回で k にもどる ⇔ mᵗk ≡ k ⇔ mᵗ ≡ 1（mod 13）（k は 13 と互いに素で約せる）。よってどのサイクルの長さも m の位数 d（mᵈ ≡ 1 となる最小の正の整数）で、サイクルの個数は 12/d。",
+          "2 の累乗を 13 で割った余りは 2、4、8、3、6、12、11、9、5、10、7、1 なので、どの m もある 2ʲ（j = 1～12）で、2ʲ の位数は 12/gcd(j, 12)。",
+          "よって m = 1 は位数 1、m = 12 は 2、m = 3、9 は 3、m = 5、8 は 4、m = 4、10 は 6、m = 2、6、7、11 は 12。サイクルの個数は 12、6、4、4、3、3、2、2、1、1、1、1。",
+          "合計 = 12 + 6 + 4 × 2 + 3 × 2 + 2 × 2 + 1 × 4 = 40。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "geometry_scene",
+        "params": {
+          "bounds": {
+            "minX": -4.9,
+            "minY": -4.9,
+            "maxX": 4.9,
+            "maxY": 4.9
+          },
+          "points": [
+            {
+              "name": "1",
+              "x": 2.0,
+              "y": 3.4641,
+              "pos": "t"
+            },
+            {
+              "name": "2",
+              "x": 3.4641,
+              "y": 2.0,
+              "pos": "r"
+            },
+            {
+              "name": "3",
+              "x": 4.0,
+              "y": 0.0,
+              "pos": "r"
+            },
+            {
+              "name": "4",
+              "x": 3.4641,
+              "y": -2.0,
+              "pos": "r"
+            },
+            {
+              "name": "5",
+              "x": 2.0,
+              "y": -3.4641,
+              "pos": "b"
+            },
+            {
+              "name": "6",
+              "x": 0.0,
+              "y": -4.0,
+              "pos": "b"
+            },
+            {
+              "name": "7",
+              "x": -2.0,
+              "y": -3.4641,
+              "pos": "b"
+            },
+            {
+              "name": "8",
+              "x": -3.4641,
+              "y": -2.0,
+              "pos": "l"
+            },
+            {
+              "name": "9",
+              "x": -4.0,
+              "y": -0.0,
+              "pos": "l"
+            },
+            {
+              "name": "10",
+              "x": -3.4641,
+              "y": 2.0,
+              "pos": "l"
+            },
+            {
+              "name": "11",
+              "x": -2.0,
+              "y": 3.4641,
+              "pos": "t"
+            },
+            {
+              "name": "12",
+              "x": -0.0,
+              "y": 4.0,
+              "pos": "t"
+            }
+          ],
+          "segments": [
+            {
+              "from": "1",
+              "to": "3",
+              "style": "solid"
+            },
+            {
+              "from": "3",
+              "to": "9",
+              "style": "solid"
+            },
+            {
+              "from": "9",
+              "to": "1",
+              "style": "solid"
+            },
+            {
+              "from": "2",
+              "to": "6",
+              "style": "solid"
+            },
+            {
+              "from": "6",
+              "to": "5",
+              "style": "solid"
+            },
+            {
+              "from": "5",
+              "to": "2",
+              "style": "solid"
+            },
+            {
+              "from": "4",
+              "to": "12",
+              "style": "solid"
+            },
+            {
+              "from": "12",
+              "to": "10",
+              "style": "solid"
+            },
+            {
+              "from": "10",
+              "to": "4",
+              "style": "solid"
+            },
+            {
+              "from": "7",
+              "to": "8",
+              "style": "solid"
+            },
+            {
+              "from": "8",
+              "to": "11",
+              "style": "solid"
+            },
+            {
+              "from": "11",
+              "to": "7",
+              "style": "solid"
+            }
+          ],
+          "arcs": [
+            {
+              "cx": 0,
+              "cy": 0,
+              "r": 4,
+              "from": 0,
+              "to": 360
+            }
+          ]
+        }
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "40"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "k ↦ mk (mod 13) 的循環長度都等於 m 的階，循環數 12/ord(m)，再用原根 2 分類",
+        "notes": "設計依據：乘法群的階與原根。全庫搜「除以 13 的餘數」：number_theory_grade11_foundation_054、_055 是求某個大數除以 13 的餘數；number_theory_grade10_foundation_072 是圓周上「加 k」的跳點（加法，gcd 決定）。本題是乘法置換，要論證每個循環長度都是 m 的階，再用原根 2 一次求出 12 個 m 的階，推理不同。圖畫出 12 個點與 m = 3 的 4 個三角形（題幹的例子）；總和不在圖上。答案 40 已用程式驗算。",
+        "displayText": "改寫題（乘法同餘的循環數）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "數論",
+        "topicCode": "number_theory",
+        "subtopic": "乘法同餘的循環數",
+        "subtopicCode": "multiplication_mod13_cycle_count"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "number_theory_grade12_foundation_068",
+      "topic": "number_theory",
+      "subtopic": "gcd_table_sum_by_value",
+      "tags": [
+        "c:factor_multiple",
+        "c:basic_counting",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "如圖是一張 8 × 8 的表，第 i 橫列、第 j 直行的格子寫 i 與 j 的最大公因數 gcd(i, j)（i、j 都是 1～8），圖中只填了一部分。把 64 格全部填好後，所有數的總和是多少？",
+        "zh-Hans": "如图是一张 8 × 8 的表，第 i 行、第 j 列的格子写 i 与 j 的最大厘约数 gcd(i, j)（i、j 都是 1～8），图中只填了一部分。把 64 格全部填好后，所有数的总和是多少？",
+        "en": "The figure is an 8 × 8 table whose cell in row i, column j holds gcd(i, j) (i, j from 1 to 8); only some cells are filled in. When all 64 cells are filled, what is the sum of all the numbers?",
+        "ja": "図は 8 × 8 の表で、i 行 j 列のマスには i と j の最大公約数 gcd(i, j)（i、j は 1～8）を書きます。図では一部だけ書いてあります。64 マスすべてを書いたとき、数の総和はいくらですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 112。",
+        "zh-Hans": "答案是 112。",
+        "en": "The answer is 112.",
+        "ja": "答えは 112 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "按格子裡的值 g 分類。gcd(i, j) = g ⇔ i = ga、j = gb，a、b 互質，且 a、b ≤ ⌊8/g⌋。所以值為 g 的格數 = c(⌊8/g⌋)，c(n) 表示 1～n 中互質的有序數對 (a, b) 的個數。",
+          "計算 c(n)：a < b 而且互質的有 φ(2) + φ(3) + ⋯ + φ(n) 對（φ(b) 是 1～b 中與 b 互質的個數），a > b 同樣多，a = b 只有 (1, 1)。φ(1)～φ(8) = 1、1、2、2、4、2、6、4，得 c(1) = 1、c(2) = 3、c(4) = 2 × (1 + 2 + 2) + 1 = 11、c(8) = 2 × (1 + 2 + 2 + 4 + 2 + 6 + 4) + 1 = 43。",
+          "值為 1 的有 c(8) = 43 格；值為 2 的有 c(4) = 11 格；值為 3、4 的各 c(2) = 3 格；值為 5、6、7、8 的各 c(1) = 1 格（共 43 + 11 + 3 + 3 + 4 = 64，正好全部）。",
+          "總和 = 1 × 43 + 2 × 11 + 3 × 3 + 4 × 3 + 5 + 6 + 7 + 8 = 43 + 22 + 9 + 12 + 26 = 112。"
+        ],
+        "zh-Hans": [
+          "按格子里的值 g 分类。gcd(i, j) = g ⇔ i = ga、j = gb，a、b 互质，且 a、b ≤ ⌊8/g⌋。所以值为 g 的格数 = c(⌊8/g⌋)，c(n) 表示 1～n 中互质的有序数对 (a, b) 的个数。",
+          "计算 c(n)：a < b 而且互质的有 φ(2) + φ(3) + ⋯ + φ(n) 对（φ(b) 是 1～b 中与 b 互质的个数），a > b 同样多，a = b 只有 (1, 1)。φ(1)～φ(8) = 1、1、2、2、4、2、6、4，得 c(1) = 1、c(2) = 3、c(4) = 2 × (1 + 2 + 2) + 1 = 11、c(8) = 2 × (1 + 2 + 2 + 4 + 2 + 6 + 4) + 1 = 43。",
+          "值为 1 的有 c(8) = 43 格；值为 2 的有 c(4) = 11 格；值为 3、4 的各 c(2) = 3 格；值为 5、6、7、8 的各 c(1) = 1 格（共 43 + 11 + 3 + 3 + 4 = 64，正好全部）。",
+          "总和 = 1 × 43 + 2 × 11 + 3 × 3 + 4 × 3 + 5 + 6 + 7 + 8 = 43 + 22 + 9 + 12 + 26 = 112。"
+        ],
+        "en": [
+          "Group cells by their value g. gcd(i, j) = g ⇔ i = ga, j = gb with a, b coprime and a, b ≤ ⌊8/g⌋. So the number of cells with value g is c(⌊8/g⌋), where c(n) is the number of ordered coprime pairs (a, b) with 1 ≤ a, b ≤ n.",
+          "Computing c(n): coprime pairs with a < b number φ(2) + φ(3) + ⋯ + φ(n) (φ(b) counts numbers 1–b coprime to b), those with a > b are as many, and a = b gives only (1, 1). With φ(1)–φ(8) = 1, 1, 2, 2, 4, 2, 6, 4: c(1) = 1, c(2) = 3, c(4) = 2 × (1 + 2 + 2) + 1 = 11, c(8) = 2 × (1 + 2 + 2 + 4 + 2 + 6 + 4) + 1 = 43.",
+          "Value 1: c(8) = 43 cells; value 2: c(4) = 11; values 3 and 4: c(2) = 3 each; values 5, 6, 7, 8: c(1) = 1 each (43 + 11 + 3 + 3 + 4 = 64, all cells).",
+          "Sum = 1 × 43 + 2 × 11 + 3 × 3 + 4 × 3 + 5 + 6 + 7 + 8 = 43 + 22 + 9 + 12 + 26 = 112."
+        ],
+        "ja": [
+          "マスの値 g で分類します。gcd(i, j) = g ⇔ i = ga、j = gb で a、b は互いに素、a、b ≤ ⌊8/g⌋。よって値が g のマスの数は c(⌊8/g⌋)。ここで c(n) は 1～n の互いに素な順序対 (a, b) の個数。",
+          "c(n) の計算：a < b で互いに素な組は φ(2) + φ(3) + ⋯ + φ(n) 組（φ(b) は 1～b で b と互いに素な数の個数）、a > b も同数、a = b は (1, 1) だけ。φ(1)～φ(8) = 1、1、2、2、4、2、6、4 より c(1) = 1、c(2) = 3、c(4) = 2 × (1 + 2 + 2) + 1 = 11、c(8) = 2 × (1 + 2 + 2 + 4 + 2 + 6 + 4) + 1 = 43。",
+          "値 1 は c(8) = 43 マス、値 2 は c(4) = 11 マス、値 3、4 はそれぞれ c(2) = 3 マス、値 5、6、7、8 はそれぞれ c(1) = 1 マス（43 + 11 + 3 + 3 + 4 = 64 で全部）。",
+          "総和 = 1 × 43 + 2 × 11 + 3 × 3 + 4 × 3 + 5 + 6 + 7 + 8 = 43 + 22 + 9 + 12 + 26 = 112。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "composite_grid_shape",
+        "params": {
+          "rows": 8,
+          "cols": 8,
+          "filledCells": [],
+          "cellLabels": {
+            "0,0": "1",
+            "1,0": "1",
+            "0,1": "1",
+            "1,1": "2",
+            "0,2": "1",
+            "1,2": "1",
+            "0,3": "1",
+            "1,3": "2",
+            "0,4": "1",
+            "1,4": "1",
+            "0,5": "1",
+            "1,5": "2",
+            "0,6": "1",
+            "1,6": "1",
+            "0,7": "1",
+            "1,7": "2",
+            "2,0": "1",
+            "2,2": "3",
+            "3,0": "1",
+            "3,3": "4",
+            "4,0": "1",
+            "4,4": "5",
+            "5,0": "1",
+            "5,5": "6",
+            "6,0": "1",
+            "6,6": "7",
+            "7,0": "1",
+            "7,7": "8",
+            "3,5": "2",
+            "5,2": "3"
+          }
+        }
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "112"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "最大公因數表按值分類：值為 g 的格數 = ⌊8/g⌋ 範圍內的互質數對數，用 φ 求和",
+        "notes": "設計依據：gcd 的分層計數與歐拉函數。全庫搜「最大公因數＋表」無同型；number_theory_grade9_foundation_072 是 10 × 10 表中 a | b 塗色的格數，number_theory_grade9_foundation_074 是 i/j 表的不同值個數（約分），number_theory_grade10_foundation_071 是看得見的格點（互質數對）。本題要把每個值 g 的格數化成較小範圍的互質數對個數，再用 φ 的和計數並加權，推理不同。圖填了第 1、2 橫列、第 1 直行、對角線與兩個示範格，總和不在圖上。答案 112 已用程式驗算。",
+        "displayText": "改寫題（最大公因數表的總和）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "數論",
+        "topicCode": "number_theory",
+        "subtopic": "最大公因數表的總和",
+        "subtopicCode": "gcd_table_sum_by_value"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "number_theory_grade12_foundation_069",
+      "topic": "number_theory",
+      "subtopic": "binary_lamp_count_sum",
+      "tags": [
+        "c:number_base",
+        "c:basic_counting",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一塊顯示板有 7 盞燈，分別代表 64、32、16、8、4、2、1；亮著的燈所代表的數加起來，就是顯示的數（也就是把這個數寫成二進位）。圖中是顯示 1～6 時的亮燈情形（塗色表示亮）。依序顯示 1、2、3、⋯、100，每顯示一個數就數一次亮著的燈。全部加起來，一共數到幾盞亮燈？",
+        "zh-Hans": "一块显示板有 7 盏灯，分别代表 64、32、16、8、4、2、1；亮着的灯所代表的数加起来，就是显示的数（也就是把这个数写成二进位）。图中是显示 1～6 时的亮灯情形（涂色表示亮）。依序显示 1、2、3、⋯、100，每显示一个数就数一次亮着的灯。全部加起来，一共数到几盏亮灯？",
+        "en": "A display board has 7 lamps standing for 64, 32, 16, 8, 4, 2, 1; the lamps that are on add up to the number shown (that is, the number written in binary). The figure shows the lamps for 1–6 (shaded = on). The numbers 1, 2, 3, …, 100 are shown in turn, and each time the lit lamps are counted. What is the total count?",
+        "ja": "表示板に 64、32、16、8、4、2、1 を表す 7 個のランプがあり、点いているランプの数をたしたものが表示される数です（つまりその数の 2 進法）。図は 1～6 を表示したときのようすです（色 = 点灯）。1、2、3、⋯、100 を順に表示し、そのたびに点いているランプを数えます。数えた合計はいくつですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 319。",
+        "zh-Hans": "答案是 319。",
+        "en": "The answer is 319.",
+        "ja": "答えは 319 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "換個方向數：每一盞燈在 1～100 中亮了幾次，再全部相加。代表 2ᵏ 的燈亮著 ⇔ n 除以 2ᵏ⁺¹ 的餘數在 2ᵏ 到 2ᵏ⁺¹ − 1 之間，這種情形每連續 2ᵏ⁺¹ 個數出現 2ᵏ 次。",
+          "「1」燈：奇數，50 次。「2」燈：100 = 25 × 4，25 × 2 = 50 次。「4」燈：100 = 12 × 8 + 4，12 × 4 = 48，再加最後 97～100 中餘數為 4 的 100，共 49 次。「8」燈：100 = 6 × 16 + 4，最後 4 個數（97～100）餘數 1～4 都不亮，48 次。",
+          "「16」燈：100 = 3 × 32 + 4，3 × 16 = 48 次。「32」燈：1～64 中有 32 次，65～100 中除以 64 餘 1～36，其中 32～36 有 5 次，共 37 次。「64」燈：64～100 共 37 次。",
+          "總數 = 50 + 50 + 49 + 48 + 48 + 37 + 37 = 319。"
+        ],
+        "zh-Hans": [
+          "换个方向数：每一盏灯在 1～100 中亮了几次，再全部相加。代表 2ᵏ 的灯亮着 ⇔ n 除以 2ᵏ⁺¹ 的余数在 2ᵏ 到 2ᵏ⁺¹ − 1 之间，这种情形每连续 2ᵏ⁺¹ 个数出现 2ᵏ 次。",
+          "「1」灯：奇数，50 次。「2」灯：100 = 25 × 4，25 × 2 = 50 次。「4」灯：100 = 12 × 8 + 4，12 × 4 = 48，再加最后 97～100 中余数为 4 的 100，共 49 次。「8」灯：100 = 6 × 16 + 4，最后 4 个数（97～100）余数 1～4 都不亮，48 次。",
+          "「16」灯：100 = 3 × 32 + 4，3 × 16 = 48 次。「32」灯：1～64 中有 32 次，65～100 中除以 64 余 1～36，其中 32～36 有 5 次，共 37 次。「64」灯：64～100 共 37 次。",
+          "总数 = 50 + 50 + 49 + 48 + 48 + 37 + 37 = 319。"
+        ],
+        "en": [
+          "Count the other way: how many times each lamp is on for 1–100, then add. The 2ᵏ lamp is on ⇔ n mod 2ᵏ⁺¹ lies between 2ᵏ and 2ᵏ⁺¹ − 1, which happens 2ᵏ times in every 2ᵏ⁺¹ consecutive numbers.",
+          "Lamp 1: odd numbers, 50. Lamp 2: 100 = 25 × 4, so 25 × 2 = 50. Lamp 4: 100 = 12 × 8 + 4, 12 × 4 = 48 plus 100 (remainder 4) among 97–100: 49. Lamp 8: 100 = 6 × 16 + 4, and 97–100 have remainders 1–4, none lit: 48.",
+          "Lamp 16: 100 = 3 × 32 + 4: 3 × 16 = 48. Lamp 32: 32 times in 1–64, and in 65–100 the remainders mod 64 are 1–36, of which 32–36 give 5 more: 37. Lamp 64: 64–100, 37 times.",
+          "Total = 50 + 50 + 49 + 48 + 48 + 37 + 37 = 319."
+        ],
+        "ja": [
+          "数え方を変えて、各ランプが 1～100 で何回点くかを求めてたします。2ᵏ のランプが点く ⇔ n を 2ᵏ⁺¹ で割った余りが 2ᵏ 以上 2ᵏ⁺¹ − 1 以下で、連続する 2ᵏ⁺¹ 個の数のうち 2ᵏ 個がこれにあたります。",
+          "「1」：奇数で 50 回。「2」：100 = 25 × 4 で 25 × 2 = 50 回。「4」：100 = 12 × 8 + 4 で 12 × 4 = 48、最後の 97～100 で余り 4 の 100 を加えて 49 回。「8」：100 = 6 × 16 + 4、97～100 の余りは 1～4 で点かず 48 回。",
+          "「16」：100 = 3 × 32 + 4 で 3 × 16 = 48 回。「32」：1～64 で 32 回、65～100 は 64 で割った余りが 1～36 でそのうち 32～36 の 5 回、合計 37 回。「64」：64～100 の 37 回。",
+          "合計 = 50 + 50 + 49 + 48 + 48 + 37 + 37 = 319。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "composite_grid_shape",
+        "params": {
+          "rows": 7,
+          "cols": 8,
+          "filledCells": [
+            [
+              1,
+              7
+            ],
+            [
+              2,
+              6
+            ],
+            [
+              3,
+              6
+            ],
+            [
+              3,
+              7
+            ],
+            [
+              4,
+              5
+            ],
+            [
+              5,
+              5
+            ],
+            [
+              5,
+              7
+            ],
+            [
+              6,
+              5
+            ],
+            [
+              6,
+              6
+            ]
+          ],
+          "cellLabels": {
+            "0,1": "64",
+            "0,2": "32",
+            "0,3": "16",
+            "0,4": "8",
+            "0,5": "4",
+            "0,6": "2",
+            "0,7": "1",
+            "1,0": "1",
+            "2,0": "2",
+            "3,0": "3",
+            "4,0": "4",
+            "5,0": "5",
+            "6,0": "6"
+          }
+        }
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "319"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "二進位數字和的總和：改成逐盞燈（逐位）計數，每位以 2ᵏ⁺¹ 為週期",
+        "notes": "設計依據：交換計數順序（Σ 二進位數字和）。全庫搜「二進位」：多為進位制換算；本輪排除的「七段顯示器」是十進位數字的線段數。本題要把「每個數亮幾盞」改成「每盞燈亮幾次」，並處理 1～100 不是整週期的尾段，推理不同。圖示範 1～6 的亮燈情形（第一列是各燈代表的數）；總數不在圖上。答案 319 已用程式驗算。",
+        "displayText": "改寫題（二進位燈板的亮燈總數）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "數論",
+        "topicCode": "number_theory",
+        "subtopic": "二進位燈板的亮燈總數",
+        "subtopicCode": "binary_lamp_count_sum"
+      },
+      "reviewStatus": "ok"
     }
   ]
 }

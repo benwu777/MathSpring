@@ -9431,6 +9431,393 @@
         "subtopicCode": "count_triangles_two_cevian_fans"
       },
       "reviewStatus": "ok"
+    },
+    {
+      "id": "combinatorics_grade12_foundation_104",
+      "topic": "combinatorics",
+      "subtopic": "rooks_avoiding_staircase_cells",
+      "tags": [
+        "c:permutation_combination",
+        "c:inclusion_exclusion",
+        "m:bijection"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "如圖是 5 × 5 的棋盤，塗色的 9 格是「從左上到右下的對角線」以及「緊貼在它右邊的那一排斜格」。要放 5 個相同的城堡（車），任兩個不在同一橫列、也不在同一直行，而且都不能放在塗色格上。一共有幾種放法？",
+        "zh-Hans": "如图是 5 × 5 的棋盘，涂色的 9 格是「从左上到右下的对角线」以及「紧贴在它右边的那一排斜格」。要放 5 个相同的城堡（车），任两个不在同一行、也不在同一列，而且都不能放在涂色格上。一共有几种放法？",
+        "en": "The figure shows a 5 × 5 board; the 9 shaded cells are the main diagonal (top-left to bottom-right) and the diagonal just to its right. Five identical rooks are placed so that no two share a row or a column and none stands on a shaded cell. How many placements are there?",
+        "ja": "図は 5 × 5 の盤で、色のついた 9 マスは「左上から右下への対角線」と「そのすぐ右どなりの斜めの列」です。同じ飛車（ルーク）を 5 個、どの 2 個も同じ行・同じ列にないように、しかも色のマスには置かないように置きます。置き方は何通りありますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 16。",
+        "zh-Hans": "答案是 16。",
+        "en": "The answer is 16.",
+        "ja": "答えは 16 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "5 個城堡、每一橫列與每一直行各一個，就是排列 σ：第 i 橫列的城堡放在第 σ(i) 直行。條件是 σ(i) ≠ i 且 σ(i) ≠ i + 1。用排容：設 rₖ = 在塗色格上放 k 個互不攻擊城堡的方法數，則答案 = Σ (−1)ᵏ rₖ (5 − k)!。",
+          "把 9 個塗色格依 (1,1)、(1,2)、(2,2)、(2,3)、⋯、(5,5) 排成一串，相鄰兩格同列或同行，不相鄰的兩格既不同列也不同行。所以 rₖ = 從一排 9 格選 k 個互不相鄰的格子 = C(10 − k, k)：r₀ = 1、r₁ = 9、r₂ = 28、r₃ = 35、r₄ = 15、r₅ = 1。",
+          "答案 = 1 × 120 − 9 × 24 + 28 × 6 − 35 × 2 + 15 × 1 − 1 × 1 = 120 − 216 + 168 − 70 + 15 − 1。",
+          "= 16。"
+        ],
+        "zh-Hans": [
+          "5 个城堡、每一行与每一列各一个，就是排列 σ：第 i 行的城堡放在第 σ(i) 列。条件是 σ(i) ≠ i 且 σ(i) ≠ i + 1。用容斥：设 rₖ = 在涂色格上放 k 个互不攻击城堡的方法数，则答案 = Σ (−1)ᵏ rₖ (5 − k)!。",
+          "把 9 个涂色格依 (1,1)、(1,2)、(2,2)、(2,3)、⋯、(5,5) 排成一串，相邻两格同列或同行，不相邻的两格既不同列也不同行。所以 rₖ = 从一排 9 格选 k 个互不相邻的格子 = C(10 − k, k)：r₀ = 1、r₁ = 9、r₂ = 28、r₃ = 35、r₄ = 15、r₅ = 1。",
+          "答案 = 1 × 120 − 9 × 24 + 28 × 6 − 35 × 2 + 15 × 1 − 1 × 1 = 120 − 216 + 168 − 70 + 15 − 1。",
+          "= 16。"
+        ],
+        "en": [
+          "Five rooks with one per row and column form a permutation σ: the rook in row i is in column σ(i). The condition is σ(i) ≠ i and σ(i) ≠ i + 1. By inclusion–exclusion, with rₖ = the number of ways to put k non-attacking rooks on shaded cells, the answer is Σ (−1)ᵏ rₖ (5 − k)!.",
+          "List the 9 shaded cells as (1,1), (1,2), (2,2), (2,3), …, (5,5): consecutive cells share a row or column, non-consecutive ones share neither. So rₖ = ways to choose k pairwise non-adjacent cells from a row of 9 = C(10 − k, k): r₀ = 1, r₁ = 9, r₂ = 28, r₃ = 35, r₄ = 15, r₅ = 1.",
+          "Answer = 1 × 120 − 9 × 24 + 28 × 6 − 35 × 2 + 15 × 1 − 1 × 1 = 120 − 216 + 168 − 70 + 15 − 1.",
+          "= 16."
+        ],
+        "ja": [
+          "各行各列に 1 個ずつの 5 個の飛車は順列 σ（i 行目の飛車は σ(i) 列目）で、条件は σ(i) ≠ i かつ σ(i) ≠ i + 1。包除原理を使い、rₖ = 色のマスに互いに取り合わない k 個を置く方法の数とすると、答え = Σ (−1)ᵏ rₖ (5 − k)!。",
+          "色の 9 マスを (1,1)、(1,2)、(2,2)、(2,3)、⋯、(5,5) の順に並べると、となり同士は同じ行か列、となり合わない 2 マスは行も列も違う。よって rₖ = 9 マスの列から互いにとなり合わない k 個を選ぶ数 = C(10 − k, k)：r₀ = 1、r₁ = 9、r₂ = 28、r₃ = 35、r₄ = 15、r₅ = 1。",
+          "答え = 1 × 120 − 9 × 24 + 28 × 6 − 35 × 2 + 15 × 1 − 1 × 1 = 120 − 216 + 168 − 70 + 15 − 1。",
+          "= 16。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "composite_grid_shape",
+        "params": {
+          "rows": 5,
+          "cols": 5,
+          "filledCells": [
+            [
+              0,
+              0
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              2,
+              2
+            ],
+            [
+              3,
+              3
+            ],
+            [
+              4,
+              4
+            ],
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              2
+            ],
+            [
+              2,
+              3
+            ],
+            [
+              3,
+              4
+            ]
+          ],
+          "cellLabels": {}
+        }
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "16"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "禁格排列的排容：禁格連成一條鏈，rₖ 就是在鏈上選不相鄰格",
+        "notes": "設計依據：棋盤多項式（rook polynomial）＋排容。全庫搜「城堡／錯排」：combinatorics_grade12_foundation_085 是 5 × 5 對角線上的城堡放法（只放 3 個、對角線限制不同），combinatorics_grade8_foundation_062 是階梯形棋盤放 3 個車；本題是兩條相鄰斜線的禁格，要看出禁格成一條鏈而得 rₖ = C(10 − k, k)，推理不同。圖畫出 5 × 5 棋盤與塗色的 9 個禁格；答案不在圖上。答案 16 已用程式窮舉 120 個排列驗算。",
+        "displayText": "改寫題（避開階梯格的城堡放法）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "組合",
+        "topicCode": "combinatorics",
+        "subtopic": "避開階梯格的城堡放法",
+        "subtopicCode": "rooks_avoiding_staircase_cells"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "combinatorics_grade12_foundation_105",
+      "topic": "combinatorics",
+      "subtopic": "closer_to_center_than_sides_probability",
+      "tags": [
+        "c:probability",
+        "c:calculus",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "如圖，正方形 ABCD 的邊長是 2，中心是 O。在正方形內部隨機取一點 P（每一點機會相同），PH 是 P 到最近那一條邊的垂線段。PO < PH 的機率可以寫成 (a√2 − b)/c，其中 a、b、c 是正整數且 c 盡量小。求 a + b + c。",
+        "zh-Hans": "如图，正方形 ABCD 的边长是 2，中心是 O。在正方形内部随機取一点 P（每一点機会相同），PH 是 P 到最近那一条边的垂线段。PO < PH 的概率可以写成 (a√2 − b)/c，其中 a、b、c 是正整数且 c 尽量小。求 a + b + c。",
+        "en": "In the figure, square ABCD has side 2 and centre O. A point P is chosen at random inside the square (all points equally likely), and PH is the perpendicular from P to the nearest side. The probability that PO < PH can be written as (a√2 − b)/c with positive integers a, b, c and c as small as possible. Find a + b + c.",
+        "ja": "図のように、正方形 ABCD の 1 辺は 2、中心は O です。正方形の内部から点 P を無作為に選び（どの点も同様に確からしい）、PH を P から最も近い辺への垂線とします。PO < PH となる確率は (a√2 − b)/c（a、b、c は正の整数で c はできるだけ小さい）と表せます。a + b + c を求めなさい。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 12。",
+        "zh-Hans": "答案是 12。",
+        "en": "The answer is 12.",
+        "ja": "答えは 12 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "以 O 為原點，正方形是 −1 ≤ x, y ≤ 1。由對稱，正方形被兩條對角線與兩條中線分成 8 個全等的三角形，只看 0 ≤ y ≤ x ≤ 1 那一塊（面積 1/2），這裡最近的邊是 x = 1，PH = 1 − x。",
+          "PO < PH ⇔ x² + y² < (1 − x)² ⇔ x < (1 − y²)/2。和 y ≤ x 一起，要 y < (1 − y²)/2，即 y² + 2y − 1 < 0，y < √2 − 1。",
+          "這一塊裡合乎條件的面積 = ∫₀^(√2−1) [(1 − y²)/2 − y] dy = [y/2 − y³/6 − y²/2]，代入 s = √2 − 1（s² = 3 − 2√2、s³ = 5√2 − 7）得 (3s − s³ − 3s²)/6 = (4√2 − 5)/6。",
+          "機率 = 8 × (4√2 − 5)/6 ÷ 4 = (4√2 − 5)/3，a + b + c = 4 + 5 + 3 = 12。"
+        ],
+        "zh-Hans": [
+          "以 O 为原点，正方形是 −1 ≤ x, y ≤ 1。由对称，正方形被两条对角线与两条中线分成 8 个全等的三角形，只看 0 ≤ y ≤ x ≤ 1 那一块（面积 1/2），这里最近的边是 x = 1，PH = 1 − x。",
+          "PO < PH ⇔ x² + y² < (1 − x)² ⇔ x < (1 − y²)/2。和 y ≤ x 一起，要 y < (1 − y²)/2，即 y² + 2y − 1 < 0，y < √2 − 1。",
+          "这一块里合乎条件的面积 = ∫₀^(√2−1) [(1 − y²)/2 − y] dy = [y/2 − y³/6 − y²/2]，代入 s = √2 − 1（s² = 3 − 2√2、s³ = 5√2 − 7）得 (3s − s³ − 3s²)/6 = (4√2 − 5)/6。",
+          "概率 = 8 × (4√2 − 5)/6 ÷ 4 = (4√2 − 5)/3，a + b + c = 4 + 5 + 3 = 12。"
+        ],
+        "en": [
+          "Put O at the origin, so the square is −1 ≤ x, y ≤ 1. By symmetry the diagonals and midlines cut it into 8 congruent triangles; take 0 ≤ y ≤ x ≤ 1 (area 1/2), where the nearest side is x = 1 and PH = 1 − x.",
+          "PO < PH ⇔ x² + y² < (1 − x)² ⇔ x < (1 − y²)/2. Together with y ≤ x this needs y < (1 − y²)/2, i.e. y² + 2y − 1 < 0, y < √2 − 1.",
+          "The favourable area in this piece = ∫₀^(√2−1) [(1 − y²)/2 − y] dy = [y/2 − y³/6 − y²/2]; with s = √2 − 1 (s² = 3 − 2√2, s³ = 5√2 − 7) this is (3s − s³ − 3s²)/6 = (4√2 − 5)/6.",
+          "Probability = 8 × (4√2 − 5)/6 ÷ 4 = (4√2 − 5)/3, so a + b + c = 4 + 5 + 3 = 12."
+        ],
+        "ja": [
+          "O を原点にとると正方形は −1 ≤ x, y ≤ 1。対称性から対角線と中線で 8 個の合同な三角形に分かれるので、0 ≤ y ≤ x ≤ 1 の部分（面積 1/2）だけ考えます。ここで最も近い辺は x = 1 で PH = 1 − x。",
+          "PO < PH ⇔ x² + y² < (1 − x)² ⇔ x < (1 − y²)/2。y ≤ x と合わせると y < (1 − y²)/2、つまり y² + 2y − 1 < 0 で y < √2 − 1。",
+          "この部分で条件を満たす面積 = ∫₀^(√2−1) [(1 − y²)/2 − y] dy = [y/2 − y³/6 − y²/2]。s = √2 − 1（s² = 3 − 2√2、s³ = 5√2 − 7）を代入すると (3s − s³ − 3s²)/6 = (4√2 − 5)/6。",
+          "確率 = 8 × (4√2 − 5)/6 ÷ 4 = (4√2 − 5)/3 で、a + b + c = 4 + 5 + 3 = 12。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "geometry_scene",
+        "params": {
+          "bounds": {
+            "minX": -1.4,
+            "minY": -1.4,
+            "maxX": 1.5,
+            "maxY": 1.4
+          },
+          "points": [
+            {
+              "name": "A",
+              "x": -1,
+              "y": -1,
+              "pos": "bl"
+            },
+            {
+              "name": "B",
+              "x": 1,
+              "y": -1,
+              "pos": "br"
+            },
+            {
+              "name": "C",
+              "x": 1,
+              "y": 1,
+              "pos": "tr"
+            },
+            {
+              "name": "D",
+              "x": -1,
+              "y": 1,
+              "pos": "tl"
+            },
+            {
+              "name": "O",
+              "x": 0,
+              "y": 0,
+              "pos": "bl"
+            },
+            {
+              "name": "P",
+              "x": 0.45,
+              "y": 0.2,
+              "pos": "t"
+            },
+            {
+              "name": "H",
+              "x": 1,
+              "y": 0.2,
+              "pos": "r"
+            }
+          ],
+          "segments": [
+            {
+              "from": "A",
+              "to": "B",
+              "style": "solid"
+            },
+            {
+              "from": "B",
+              "to": "C",
+              "style": "solid"
+            },
+            {
+              "from": "C",
+              "to": "D",
+              "style": "solid"
+            },
+            {
+              "from": "D",
+              "to": "A",
+              "style": "solid"
+            },
+            {
+              "from": "P",
+              "to": "O",
+              "style": "construction"
+            },
+            {
+              "from": "P",
+              "to": "H",
+              "style": "construction"
+            }
+          ],
+          "rightAngles": [
+            {
+              "at": "H",
+              "from": "P",
+              "to": "C"
+            }
+          ]
+        }
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "12"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "離中心比離邊近的區域由四段拋物線圍成：切成 8 塊、積分一塊",
+        "notes": "設計依據：幾何機率＋定積分（拋物線是到點與到線等距的軌跡）。全庫搜「中心＋邊＋近」無同型；combinatorics_grade9_foundation_080 是「離中心比離最近頂點近」（邊界是直線，答案 1/2），combinatorics_grade9_foundation_059 是鈍角三角形（半圓）。本題的邊界是拋物線，必須用對稱分塊再積分，推理不同。圖畫出正方形、O、示範點 P、PO 與 PH（直角記號），沒有畫出區域。答案已用程式模擬 20 萬點驗算（約 0.219）。",
+        "displayText": "改寫題（離中心比離邊近的機率）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "組合",
+        "topicCode": "combinatorics",
+        "subtopic": "離中心比離邊近的機率",
+        "subtopicCode": "closer_to_center_than_sides_probability"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "combinatorics_grade12_foundation_106",
+      "topic": "combinatorics",
+      "subtopic": "grid_neighbor_swap_count_matchings",
+      "tags": [
+        "c:permutation_combination",
+        "c:graph_theory",
+        "m:bijection"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "教室的 12 個座位排成 3 個橫列、4 個直行（如圖），每個座位坐一人。老師要全班同時換座位：每個人都必須換到與原座位前、後、左、右相鄰的座位，換完後每個座位仍恰好坐一人。圖中箭頭是一種換法（箭頭指向該座位的人要去的座位）。一共有幾種換法？",
+        "zh-Hans": "教室的 12 个座位排成 3 个行、4 个列（如图），每个座位坐一人。老师要全班同时换座位：每个人都必须换到与原座位前、后、左、右相邻的座位，换完后每个座位仍恰好坐一人。图中箭头是一种换法（箭头指向该座位的人要去的座位）。一共有几种换法？",
+        "en": "The 12 seats of a classroom form 3 rows and 4 columns (see figure), one person per seat. Everyone moves at once to a seat adjacent to their own (front, back, left or right), and afterwards every seat again holds exactly one person. The arrows show one possible move (each arrow points to where that seat's person goes). How many ways are there?",
+        "ja": "教室の 12 席は横 3 行・縦 4 列に並び（図）、各席に 1 人ずつ座っています。全員がいっせいに、もとの席の前後左右にとなり合う席へ移り、移動後も各席にちょうど 1 人いるようにします。図の矢印はその一例です（矢印はその席の人の行き先）。移り方は全部で何通りありますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 121。",
+        "zh-Hans": "答案是 121。",
+        "en": "The answer is 121.",
+        "ja": "答えは 121 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "把座位像棋盤一樣塗黑白兩色，各 6 個。相鄰座位顏色不同，所以黑座位的人都換到白座位，白座位的人都換到黑座位。",
+          "黑座位 6 人的去處，把 6 個黑座位與 6 個白座位一一配成相鄰的對，等於用 6 塊骨牌（1 × 2）鋪滿 3 × 4；白座位 6 人的去處也是一種鋪法。兩種鋪法可以獨立任選（同一塊骨牌被選兩次就是兩人互換），反過來任一對鋪法都給出合法換法。所以換法數 = （3 × 4 的骨牌鋪法數）²。",
+          "3 × 4 的鋪法：看第 2、3 直行之間的分界，左邊 3 × 2 有 6 格，跨界骨牌數必須是偶數，即 0 或 2。0 塊時左右各是 3 × 2，各 3 種，共 9 種；2 塊時只能跨在第 1、2 橫列或第 2、3 橫列（跨第 1、3 橫列會讓左邊第 2 橫列的格子無法配對），各只有 1 種補法，共 2 種。合計 11 種。",
+          "換法數 = 11² = 121。"
+        ],
+        "zh-Hans": [
+          "把座位像棋盘一样涂黑白两色，各 6 个。相邻座位颜色不同，所以黑座位的人都换到白座位，白座位的人都换到黑座位。",
+          "黑座位 6 人的去处，把 6 个黑座位与 6 个白座位一一配成相邻的对，等于用 6 块骨牌（1 × 2）铺满 3 × 4；白座位 6 人的去处也是一种铺法。两种铺法可以独立任选（同一块骨牌被选两次就是两人互换），反过来任一对铺法都给出合法换法。所以换法数 = （3 × 4 的骨牌铺法数）²。",
+          "3 × 4 的铺法：看第 2、3 列之间的分界，左边 3 × 2 有 6 格，跨界骨牌数必须是偶数，即 0 或 2。0 块时左右各是 3 × 2，各 3 种，共 9 种；2 块时只能跨在第 1、2 行或第 2、3 行（跨第 1、3 行会让左边第 2 行的格子无法配对），各只有 1 种补法，共 2 种。合计 11 种。",
+          "换法数 = 11² = 121。"
+        ],
+        "en": [
+          "Colour the seats like a chessboard: 6 black, 6 white. Adjacent seats differ in colour, so people on black seats move to white seats and vice versa.",
+          "Where the 6 black-seat people go pairs each black seat with an adjacent white seat — a tiling of 3 × 4 by 6 dominoes; the white-seat people give another tiling. The two tilings can be chosen independently (a domino chosen twice means two people swap), and every pair of tilings gives a valid move. So the count is (number of domino tilings of 3 × 4)².",
+          "Tilings of 3 × 4: look at the line between columns 2 and 3. The left 3 × 2 has 6 cells, so an even number of dominoes cross the line: 0 or 2. With 0, each side is 3 × 2 with 3 tilings: 9 ways. With 2, they cross in rows 1–2 or rows 2–3 (rows 1 and 3 would leave the left cell of row 2 unpaired), each completing in 1 way: 2 ways. Total 11.",
+          "Number of moves = 11² = 121."
+        ],
+        "ja": [
+          "席を市松模様に黒白でぬると黒 6、白 6。となり合う席は色が違うので、黒の席の人は白の席へ、白の席の人は黒の席へ移ります。",
+          "黒の席の 6 人の行き先は、黒の席と白の席をとなり同士で 1 対 1 に組むこと、つまり 3 × 4 をドミノ 6 枚でしきつめることです。白の席の 6 人の行き先も 1 つのしきつめ。2 つのしきつめは独立に選べ（同じドミノを 2 回選べば 2 人が入れかわる）、逆にどの組も正しい移り方になります。よって移り方 =（3 × 4 のドミノのしきつめ方）²。",
+          "3 × 4 のしきつめ方：2 列目と 3 列目の境目を見ると、左の 3 × 2 は 6 マスなので境目をまたぐドミノは偶数個で 0 か 2。0 個なら左右それぞれ 3 × 2 で 3 通りずつ、9 通り。2 個なら 1・2 行目か 2・3 行目（1・3 行目だと左の 2 行目のマスが組めない）で、それぞれ残りは 1 通り、2 通り。合計 11 通り。",
+          "移り方は 11² = 121 通り。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "composite_grid_shape",
+        "params": {
+          "rows": 3,
+          "cols": 4,
+          "filledCells": [],
+          "cellLabels": {
+            "0,0": "→",
+            "0,1": "↓",
+            "1,1": "←",
+            "1,0": "↑",
+            "0,2": "→",
+            "0,3": "←",
+            "1,2": "→",
+            "1,3": "←",
+            "2,0": "→",
+            "2,1": "←",
+            "2,2": "→",
+            "2,3": "←"
+          }
+        }
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "121"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "鄰座置換 = 兩個獨立的骨牌鋪法（二部圖上兩組完美配對），答案是鋪法數的平方",
+        "notes": "設計依據：二部圖上「每點移到鄰點」的置換與完美配對的對應。全庫搜「換座位＋相鄰」：logic_grade10_foundation_050 問哪些 m × n 教室「辦得到」（奇偶），logic_grade6_foundation_115 是貓換箱子；本題要計數，關鍵是把置換拆成黑→白、白→黑兩組獨立的骨牌鋪法，再數 3 × 4 的鋪法 11，推理不同。圖畫出 3 × 4 座位與一種合法換法的箭頭（含一個 4 人輪換與幾對互換）；總數不在圖上。答案 121 已用程式回溯窮舉驗算。",
+        "displayText": "改寫題（座位全換到鄰座的方法數）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "組合",
+        "topicCode": "combinatorics",
+        "subtopic": "座位全換到鄰座的方法數",
+        "subtopicCode": "grid_neighbor_swap_count_matchings"
+      },
+      "reviewStatus": "ok"
     }
   ]
 }
