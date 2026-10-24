@@ -17,8 +17,8 @@
 
 ## 發布驗收（必須全部完成）
 
-- [ ] `flutter analyze` 為 0 issues。（每次送審候選 build 都要重跑。）
-- [ ] `flutter test` 全數通過。（每次送審候選 build 都要重跑。）
+- [x] `flutter analyze` 為 0 issues（2026-10-25；每次送審候選 build 都要重跑）。
+- [x] `flutter test` 全數通過（2026-10-25；每次送審候選 build 都要重跑）。
 - [ ] 完成 [iPhone／iPad 發布前 QA](ios-release-qa.md) 的必測流程。
 - [x] 支援頁與隱私政策已公開：<https://benwu777.github.io/MathSpring/support/>、<https://benwu777.github.io/MathSpring/privacy/> 在 2026-10-24 回傳 HTTP 200。
 - [ ] 以 release archive 在實機驗證 App 內的支援與隱私入口可開啟上述公開網址。
