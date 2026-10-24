@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mathspring/main.dart';
@@ -16,6 +18,14 @@ void main() {
             reason: '$locale: $copy');
       }
     }
+  });
+
+  test('StoreKit full unlock copy never sells ad-free as a benefit', () {
+    final String storeKit =
+        File('ios/Runner/Products.storekit').readAsStringSync();
+
+    expect(storeKit,
+        isNot(matches(RegExp(r'移除廣告|無廣告|无广告|広告なし|[Aa]d-free'))));
   });
 
   // 免費版每天也看得到 3 題詳解，付費的差別是「全部」而不是「有沒有詳解」。
