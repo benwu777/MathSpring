@@ -1055,3 +1055,25 @@ class CheckProgramMentionsTest(unittest.TestCase):
         for path in glob.glob('assets/questions/*/*.json'):
             for q in json.load(open(path))['questions']:
                 self.assertEqual(vqp.check_program_mentions(q), [], q['id'])
+
+
+class SimplifiedGongToLiMisconversionTest(unittest.TestCase):
+    """繁轉簡把「公」一律轉成「厘」：公分→厘米是對的，但公共→厘共、公斤→厘克、公約數→厘约数是錯的。
+
+    2026-10-24 第十一輪複審抓到 4 題（6 處）。
+    """
+
+    def _q(self, hans):
+        return {'levelStage': 'grade10', 'prompt': {'zh-Hans': hans}}
+
+    def test_flags_li_gong_edge(self):
+        self.assertTrue(vqp.check_simplified_terms(self._q('两格有厘共边就不能同色。')))
+
+    def test_flags_li_ke(self):
+        self.assertTrue(vqp.check_simplified_terms(self._q('放 3 厘克的重物。')))
+
+    def test_flags_li_gcd(self):
+        self.assertTrue(vqp.check_simplified_terms(self._q('求最大厘约数。')))
+
+    def test_allows_centimetre_and_clarify(self):
+        self.assertEqual(vqp.check_simplified_terms(self._q('长 5 厘米，先厘清题意。')), [])
