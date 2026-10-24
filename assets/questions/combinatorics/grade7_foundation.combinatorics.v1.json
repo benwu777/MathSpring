@@ -5879,6 +5879,229 @@
         "subtopicCode": "lattice_paths_below_diagonal_catalan"
       },
       "reviewStatus": "ok"
+    },
+    {
+      "id": "combinatorics_grade7_foundation_068",
+      "topic": "combinatorics",
+      "subtopic": "nonadjacent_pair_board_with_obstacles",
+      "tags": [
+        "c:basic_counting",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade7",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "如圖，4 × 4 的棋盤上，塗色的 4 格不能放棋子。要在白色格子上放 2 枚一模一樣的棋子（每格最多放 1 枚），而且兩枚棋子所在的格子不能有公共邊（只有一個角碰在一起可以）。一共有幾種放法？",
+        "zh-Hans": "如图，4 × 4 的棋盘上，涂色的 4 格不能放棋子。要在白色格子上放 2 枚一模一样的棋子（每格最多放 1 枚），而且两枚棋子所在的格子不能有公共边（只有一个角碰在一起可以）。一共有几种放法？",
+        "en": "In the figure, the 4 shaded squares of a 4 × 4 board cannot hold pieces. Two identical pieces are to be placed on white squares (at most one per square) so that their squares do not share a side (touching only at a corner is fine). How many placements are there?",
+        "ja": "図のように、4 × 4 の盤で色のついた 4 マスにはこまを置けません。白いマスに同じこまを 2 個置きます（1 マスに 1 個まで）。ただし、2 個のこまのマスは辺を共有してはいけません（角だけで接するのはかまいません）。置き方は何通りありますか。"
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "54"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "answer": {
+        "zh-Hant": "答案是 54。",
+        "zh-Hans": "答案是 54。",
+        "en": "The answer is 54.",
+        "ja": "答えは 54 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "白色格子有 16 − 4 = 12 格。先不管相鄰，任選 2 格的方法有 12 × 11 ÷ 2 = 66 種。",
+          "再扣掉「兩格有公共邊」的選法，也就是數圖中有幾對白格左右相鄰或上下相鄰。",
+          "左右相鄰：由上往下四個橫列分別有 1、1、3、1 對，共 6 對。上下相鄰：由左往右四個直行分別有 1、2、2、1 對，共 6 對。",
+          "放法 = 66 − 12 = 54 種。"
+        ],
+        "zh-Hans": [
+          "白色格子有 16 − 4 = 12 格。先不管相邻，任选 2 格的方法有 12 × 11 ÷ 2 = 66 种。",
+          "再扣掉“两格有公共边”的选法，也就是数图中有几对白格左右相邻或上下相邻。",
+          "左右相邻：由上往下四个横行分别有 1、1、3、1 对，共 6 对。上下相邻：由左往右四个竖列分别有 1、2、2、1 对，共 6 对。",
+          "放法 = 66 − 12 = 54 种。"
+        ],
+        "en": [
+          "There are 16 − 4 = 12 white squares. Ignoring adjacency, there are 12 × 11 ÷ 2 = 66 ways to choose 2 of them.",
+          "Subtract the choices where the two squares share a side, i.e. count pairs of white squares next to each other horizontally or vertically.",
+          "Horizontal pairs: the four rows (top to bottom) have 1, 1, 3, 1, total 6. Vertical pairs: the four columns (left to right) have 1, 2, 2, 1, total 6.",
+          "Placements = 66 − 12 = 54."
+        ],
+        "ja": [
+          "白いマスは 16 − 4 = 12 マス。となりを気にしなければ 2 マスの選び方は 12 × 11 ÷ 2 = 66 通り。",
+          "そこから「2 マスが辺を共有する」選び方、つまり左右または上下にとなり合う白マスの組の数を引きます。",
+          "左右のとなり：上から 4 つの行で 1、1、3、1 組、計 6 組。上下のとなり：左から 4 つの列で 1、2、2、1 組、計 6 組。",
+          "置き方 = 66 − 12 = 54 通り。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "composite_grid_shape",
+        "params": {
+          "rows": 4,
+          "cols": 4,
+          "filledCells": [
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              1,
+              3
+            ],
+            [
+              3,
+              1
+            ]
+          ],
+          "cellLabels": {}
+        }
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "有障礙格的棋盤放兩枚不相鄰棋子（補集計數）",
+        "notes": "設計依據：補集計數「全部 − 相鄰對」，用障礙格讓相鄰對必須看圖一列一行數。圖是必要資訊（障礙位置只畫在圖上），答案沒有畫出。最接近的既有題：combinatorics_grade8_foundation_047（4 × 4 放兩個不互攻的國王，含斜鄰、無障礙）與 combinatorics_grade8_foundation_061（2 × 5 塗黑不相鄰格的總方法數），前者規則與棋盤都不同、後者是任意多格的遞推；本題是兩枚棋子 + 障礙格的補集計數。答案 54 以逐格數相鄰對與窮舉兩法核對。",
+        "displayText": "改寫題（障礙棋盤上的不相鄰放法）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "組合",
+        "topicCode": "combinatorics",
+        "subtopic": "有障礙格的棋盤放兩枚不相鄰棋子",
+        "subtopicCode": "nonadjacent_pair_board_with_obstacles"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "combinatorics_grade7_foundation_069",
+      "topic": "combinatorics",
+      "subtopic": "venn_diagram_region_coloring",
+      "tags": [
+        "c:basic_counting",
+        "c:graph_theory",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade7",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "如圖，三個圓兩兩相交，把三個圓裡面的部分分成 7 塊區域。要用紅、黃、藍三種顏色替這 7 塊上色，每塊塗一種顏色；有一段公共邊界（不只是碰在一個點）的兩塊不能同色，三種顏色不必全部用到。一共有幾種塗法？",
+        "zh-Hans": "如图，三个圆两两相交，把三个圆里面的部分分成 7 块区域。要用红、黄、蓝三种颜色给这 7 块上色，每块涂一种颜色；有一段公共边界（不只是碰在一个点）的两块不能同色，三种颜色不必全部用到。一共有几种涂法？",
+        "en": "In the figure, three circles overlap pairwise and divide the inside of the circles into 7 regions. Each region is to be painted red, yellow or blue; two regions sharing a stretch of boundary (not just a single point) must get different colours, and not every colour has to be used. How many colourings are there?",
+        "ja": "図のように、3 つの円がたがいに交わり、円の内側が 7 つの部分に分かれています。この 7 つの部分を赤・黄・青の 3 色でぬり分けます。各部分は 1 色でぬり、境界線を共有する（1 点で接するだけではない）2 つの部分は違う色にします。3 色すべてを使う必要はありません。ぬり方は何通りありますか。"
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "84"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "answer": {
+        "zh-Hant": "答案是 84。",
+        "zh-Hans": "答案是 84。",
+        "en": "The answer is 84.",
+        "ja": "答えは 84 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "把三圓共有的中間那塊叫「中心」，恰好屬於兩個圓的三塊叫「花瓣」，只屬於一個圓的三塊叫「外塊」。看圖：中心和三片花瓣都有公共邊界；每片花瓣還和它兩側的兩個外塊相鄰；兩片花瓣之間、兩個外塊之間都只碰在一個點，不算相鄰。",
+          "中心有 3 種塗法。三片花瓣都不能和中心同色，各有 2 種，共 8 種；其中「三片同色」有 2 種，「兩片同色、一片不同」有 6 種。",
+          "每個外塊夾在兩片花瓣之間：這兩片同色時，外塊有 2 種塗法；不同色時，外塊只剩 1 種。",
+          "三片花瓣同色時，三個外塊各 2 種，共 2 × 2 × 2 = 8，這一類有 2 × 8 = 16 種。兩片同色、一片不同時，只有一個外塊夾在兩片同色花瓣之間（2 種），另兩個外塊各 1 種，這一類有 6 × 2 = 12 種。",
+          "總數 = 3 × (16 + 12) = 84 種。"
+        ],
+        "zh-Hans": [
+          "把三圆共有的中间那块叫“中心”，恰好属于两个圆的三块叫“花瓣”，只属于一个圆的三块叫“外块”。看图：中心和三片花瓣都有公共边界；每片花瓣还和它两侧的两个外块相邻；两片花瓣之间、两个外块之间都只碰在一个点，不算相邻。",
+          "中心有 3 种涂法。三片花瓣都不能和中心同色，各有 2 种，共 8 种；其中“三片同色”有 2 种，“两片同色、一片不同”有 6 种。",
+          "每个外块夹在两片花瓣之间：这两片同色时，外块有 2 种涂法；不同色时，外块只剩 1 种。",
+          "三片花瓣同色时，三个外块各 2 种，共 2 × 2 × 2 = 8，这一类有 2 × 8 = 16 种。两片同色、一片不同时，只有一个外块夹在两片同色花瓣之间（2 种），另两个外块各 1 种，这一类有 6 × 2 = 12 种。",
+          "总数 = 3 × (16 + 12) = 84 种。"
+        ],
+        "en": [
+          "Call the region inside all three circles the \"centre\", the three regions inside exactly two circles \"petals\", and the three regions inside exactly one circle \"outer pieces\". From the figure: the centre borders all three petals; each petal also borders the two outer pieces on either side of it; two petals, or two outer pieces, meet only at a point and are not adjacent.",
+          "The centre has 3 choices. Each petal must differ from the centre, so 2 choices each, 8 in all: 2 with all petals the same colour and 6 with two petals alike and one different.",
+          "Each outer piece lies between two petals: if those two petals match, it has 2 choices; if they differ, only 1.",
+          "All petals alike: each outer piece has 2 choices, 2 × 2 × 2 = 8, giving 2 × 8 = 16. Two alike, one different: only one outer piece sits between the matching petals (2 choices), the other two have 1 each, giving 6 × 2 = 12.",
+          "Total = 3 × (16 + 12) = 84."
+        ],
+        "ja": [
+          "3 つの円すべての内側の部分を「中心」、ちょうど 2 つの円の内側の 3 つを「花びら」、1 つの円だけの内側の 3 つを「外側」とよびます。図から、中心は 3 枚の花びらと境界を共有し、各花びらは両どなりの 2 つの外側とも接します。花びらどうし、外側どうしは 1 点で接するだけで、となりではありません。",
+          "中心は 3 通り。花びらは中心と違う色で各 2 通り、計 8 通りで、そのうち「3 枚同色」が 2 通り、「2 枚同色・1 枚違う」が 6 通り。",
+          "外側の部分は 2 枚の花びらにはさまれています。その 2 枚が同色なら 2 通り、違う色なら 1 通り。",
+          "3 枚同色のとき外側は各 2 通りで 8 通り、合計 2 × 8 = 16。2 枚同色・1 枚違うときは、同色の 2 枚にはさまれた外側だけが 2 通り、他の 2 つは各 1 通りで、合計 6 × 2 = 12。",
+          "全部で 3 × (16 + 12) = 84 通り。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "geometry_scene",
+        "params": {
+          "bounds": {
+            "minX": -2.8,
+            "minY": -1.8,
+            "maxX": 2.8,
+            "maxY": 3.5
+          },
+          "points": [
+            {
+              "name": "Z",
+              "x": 0,
+              "y": 0.58,
+              "pos": "t",
+              "visible": false
+            }
+          ],
+          "segments": [],
+          "arcs": [
+            {
+              "cx": -1.0,
+              "cy": 0.0,
+              "r": 1.6,
+              "from": 0,
+              "to": 360
+            },
+            {
+              "cx": 1.0,
+              "cy": 0.0,
+              "r": 1.6,
+              "from": 0,
+              "to": 360
+            },
+            {
+              "cx": 0.0,
+              "cy": 1.732,
+              "r": 1.6,
+              "from": 0,
+              "to": 360
+            }
+          ]
+        }
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "三圓文氏圖區域塗色計數",
+        "notes": "設計依據：地圖著色計數，區域相鄰關係取自三圓文氏圖（花瓣之間只交於一點的細節要看圖）。圖畫出三個圓，沒有任何標註或塗色，不洩答案。最接近的既有題：combinatorics_grade10_foundation_007（文字描述 5 區相鄰表、5 色）、combinatorics_grade12_foundation_100（中心圓 + 6 扇環、4 色）與 combinatorics_grade9_foundation_006（5 格環 3 色），本題的相鄰圖是「中心—三花瓣—三外塊」的兩層結構，要依花瓣顏色是否相同分類，計算流程不同。答案 84 以分類計數與窮舉核對。",
+        "displayText": "改寫題（三圓圖區域塗色）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "組合",
+        "topicCode": "combinatorics",
+        "subtopic": "三圓文氏圖七區塗色",
+        "subtopicCode": "venn_diagram_region_coloring"
+      },
+      "reviewStatus": "ok"
     }
   ]
 }
