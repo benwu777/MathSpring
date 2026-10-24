@@ -16091,6 +16091,939 @@
         "notes": "設計依據：小型 Kakuro（數字加總謎題）。全庫查無 Kakuro；最接近的是 logic_grade3_foundation_096（拉丁方陣加大小關係），本題靠「兩格和為 3 或 4 只有一種拆法」定位交叉格再連鎖，骨架不同。圖：4×4 方格，線索格塗色並寫 n→／↓n，白格 7 格、? 標在左上白格；答案不在圖上。程式窮舉 9⁷ 種填法確認唯一解。",
         "displayText": "MathSpring 改寫題（附圖）"
       }
+    },
+    {
+      "id": "arithmetic_grade4_foundation_214",
+      "topic": "arithmetic",
+      "subtopic": "cross_out_to_target_sums",
+      "tags": [
+        "c:add_sub",
+        "c:logic_deduction",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade4",
+      "challengeTier": "foundation",
+      "reviewStatus": "ok",
+      "prompt": {
+        "zh-Hant": "如圖，白色的 4 × 4 方格裡每格寫著一個數。要劃掉其中一些數，使得每一橫排留下來的數加起來，等於那一排最右邊塗色格子裡的數；每一直行留下來的數加起來，等於那一行最下面塗色格子裡的數。劃法只有一種。被劃掉的數加起來是多少？",
+        "zh-Hans": "如图，白色的 4 × 4 方格里每格写着一个数。要划掉其中一些数，使得每一横排留下来的数加起来，等于那一排最右边涂色格子里的数；每一竖排留下来的数加起来，等于那一竖排最下面涂色格子里的数。划法只有一种。被划掉的数加起来是多少？",
+        "en": "Each cell of the white 4 × 4 grid in the figure holds a number. Some numbers are to be crossed out so that the numbers left in each row add up to the number in the shaded cell at the right end of that row, and the numbers left in each column add up to the number in the shaded cell at the bottom of that column. There is exactly one way to do this. What is the sum of the crossed-out numbers?",
+        "ja": "図の白い 4 × 4 のマスには数が書いてあります。いくつかの数を消して、各段に残った数の和がその段の右はしの色のついたマスの数に、各列に残った数の和がその列のいちばん下の色のついたマスの数になるようにします。消し方は1通りです。消した数の和はいくつですか。"
+      },
+      "answer": {
+        "zh-Hant": "被劃掉的數加起來是 18。",
+        "zh-Hans": "被划掉的数加起来是 18。",
+        "en": "The crossed-out numbers add up to 18.",
+        "ja": "消した数の和は 18 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "第 3 排是 1 + 3 + 7 + 7 = 18，剛好等於目標 18，所以第 3 排一個都不劃。第 4 排是 9 + 6 + 9 + 8 = 32，要少 6，而第 4 排裡能湊出 6 的只有 6 這個數本身（9、8 都比 6 大），所以劃掉第 4 排的 6。",
+          "第 2 直行（由上往下是 2、5、3、6）目標是 3：第 3 排的 3 一定留著，6 已劃掉，所以第 1 排的 2 和第 2 排的 5 都要劃掉。",
+          "第 1 排是 1 + 2 + 2 + 6 = 11，目標 8，要少 3；已經劃掉第 2 格的 2，還要再少 1，只能劃掉 1。第 2 排是 3 + 5 + 5 + 4 = 17，目標 8，要少 9；已經劃掉第 2 格的 5，還要再少 4，剩下的 3、5、4 中只有 4 本身是 4，所以劃掉 4。",
+          "檢查各直行：第 1 行 3 + 1 + 9 = 13，第 3 行 2 + 5 + 7 + 9 = 23，第 4 行 6 + 7 + 8 = 21，全部符合。每一步都沒有別的選擇，所以劃法唯一。",
+          "被劃掉的數是 1、2、5、4、6，加起來是 18。"
+        ],
+        "zh-Hans": [
+          "第 3 排是 1 + 3 + 7 + 7 = 18，刚好等于目标 18，所以第 3 排一个都不划。第 4 排是 9 + 6 + 9 + 8 = 32，要少 6，而第 4 排里能凑出 6 的只有 6 这个数本身（9、8 都比 6 大），所以划掉第 4 排的 6。",
+          "第 2 竖排（由上往下是 2、5、3、6）目标是 3：第 3 排的 3 一定留着，6 已划掉，所以第 1 排的 2 和第 2 排的 5 都要划掉。",
+          "第 1 排是 1 + 2 + 2 + 6 = 11，目标 8，要少 3；已经划掉第 2 格的 2，还要再少 1，只能划掉 1。第 2 排是 3 + 5 + 5 + 4 = 17，目标 8，要少 9；已经划掉第 2 格的 5，还要再少 4，剩下的 3、5、4 中只有 4 本身是 4，所以划掉 4。",
+          "检查各竖排：第 1 竖排 3 + 1 + 9 = 13，第 3 竖排 2 + 5 + 7 + 9 = 23，第 4 竖排 6 + 7 + 8 = 21，全部符合。每一步都没有别的选择，所以划法唯一。",
+          "被划掉的数是 1、2、5、4、6，加起来是 18。"
+        ],
+        "en": [
+          "Row 3 is 1 + 3 + 7 + 7 = 18, exactly its target, so nothing in row 3 is crossed out. Row 4 is 9 + 6 + 9 + 8 = 32 and must lose 6; the only way to make 6 from row 4 is the 6 itself (9 and 8 are too big), so the 6 is crossed out.",
+          "Column 2 (2, 5, 3, 6 from top to bottom) has target 3: the 3 in row 3 stays and the 6 is gone, so the 2 in row 1 and the 5 in row 2 must both be crossed out.",
+          "Row 1 is 1 + 2 + 2 + 6 = 11 with target 8, so it must lose 3; the 2 in cell 2 is gone, so it must lose 1 more — only the 1 works. Row 2 is 3 + 5 + 5 + 4 = 17 with target 8, so it must lose 9; the 5 in cell 2 is gone, so it must lose 4 more, and among the remaining 3, 5, 4 only the 4 itself gives 4.",
+          "Check the columns: column 1: 3 + 1 + 9 = 13; column 3: 2 + 5 + 7 + 9 = 23; column 4: 6 + 7 + 8 = 21. All match, and no step had another choice, so the solution is unique.",
+          "The crossed-out numbers are 1, 2, 5, 4 and 6, which add up to 18."
+        ],
+        "ja": [
+          "3段目は 1 + 3 + 7 + 7 = 18 で、ちょうど目標の 18 なので、何も消しません。4段目は 9 + 6 + 9 + 8 = 32 で 6 へらす必要があり、6 をつくれるのは 6 そのものだけ（9、8 は大きすぎる）なので、4段目の 6 を消します。",
+          "2列目（上から 2、5、3、6）の目標は 3 です。3段目の 3 は残り、6 は消えたので、1段目の 2 と2段目の 5 をどちらも消します。",
+          "1段目は 1 + 2 + 2 + 6 = 11 で目標 8、3 へらします。2マス目の 2 を消したので、あと 1 へらすには 1 を消すしかありません。2段目は 3 + 5 + 5 + 4 = 17 で目標 8、9 へらします。2マス目の 5 を消したので、あと 4 へらします。残る 3、5、4 のうち 4 になるのは 4 だけなので、4 を消します。",
+          "列を確かめると、1列目 3 + 1 + 9 = 13、3列目 2 + 5 + 7 + 9 = 23、4列目 6 + 7 + 8 = 21 で、すべて合います。どの段階でもほかの選び方はなかったので、消し方は1通りです。",
+          "消した数は 1、2、5、4、6 で、和は 18 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "composite_grid_shape",
+        "params": {
+          "rows": 5,
+          "cols": 5,
+          "filledCells": [
+            [
+              0,
+              4
+            ],
+            [
+              1,
+              4
+            ],
+            [
+              2,
+              4
+            ],
+            [
+              3,
+              4
+            ],
+            [
+              4,
+              0
+            ],
+            [
+              4,
+              1
+            ],
+            [
+              4,
+              2
+            ],
+            [
+              4,
+              3
+            ]
+          ],
+          "cellLabels": {
+            "0,0": "1",
+            "0,1": "2",
+            "0,2": "2",
+            "0,3": "6",
+            "1,0": "3",
+            "1,1": "5",
+            "1,2": "5",
+            "1,3": "4",
+            "2,0": "1",
+            "2,1": "3",
+            "2,2": "7",
+            "2,3": "7",
+            "3,0": "9",
+            "3,1": "6",
+            "3,2": "9",
+            "3,3": "8",
+            "0,4": "8",
+            "1,4": "8",
+            "2,4": "18",
+            "3,4": "26",
+            "4,0": "13",
+            "4,1": "3",
+            "4,2": "23",
+            "4,3": "21"
+          }
+        }
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "18"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "agent-B-figure-round11-2026-10-24",
+        "notes": "設計依據：網路益智遊戲「Sumplete（劃數湊和）」。全庫查無「劃掉數字讓各排各行湊到指定和」的題；最接近的是 arithmetic_grade2_foundation_211（圖案代表數、排和行和求值）與 logic_grade4_foundation_123（骨牌和為 9），本題是選擇要刪去哪些數、用行列總和互相限制，骨架不同。圖：4 × 4 數字格，右邊與下面的塗色格是目標和；圖上沒有任何劃記。程式窮舉 2¹⁶ 種劃法確認唯一。",
+        "displayText": "MathSpring 改寫題（附圖）"
+      }
+    },
+    {
+      "id": "arithmetic_grade4_foundation_215",
+      "topic": "arithmetic",
+      "subtopic": "two_level_number_line_decimal",
+      "tags": [
+        "c:decimal",
+        "c:place_value",
+        "m:direct"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade4",
+      "challengeTier": "foundation",
+      "reviewStatus": "ok",
+      "prompt": {
+        "zh-Hant": "如圖，上面那條數線從 5 到 7，中間的刻度把它平均分成 10 小段。把上面數線上第 6 個刻度到第 7 個刻度之間的那一小段（從左邊的 5 算第 0 個刻度）放大，畫成下面那條線，下面那條線也被刻度平均分成 10 小段。P 點表示的數是多少？",
+        "zh-Hans": "如图，上面那条数轴从 5 到 7，中间的刻度把它平均分成 10 小段。把上面数轴上第 6 个刻度到第 7 个刻度之间的那一小段（从左边的 5 算第 0 个刻度）放大，画成下面那条线，下面那条线也被刻度平均分成 10 小段。P 点表示的数是多少？",
+        "en": "In the figure, the upper number line runs from 5 to 7 and its tick marks divide it into 10 equal parts. The part between the 6th and 7th tick marks of the upper line (counting the 5 at the left as tick 0) is magnified and drawn as the lower line, which is also divided into 10 equal parts. What number does point P represent?",
+        "ja": "図の上の数直線は 5 から 7 までで、目もりで 10 等分されています。上の数直線の6番目の目もりから7番目の目もりまでの部分（左はしの 5 を0番目とします）を拡大したのが下の線で、下の線も目もりで 10 等分されています。点 P が表す数はいくつですか。"
+      },
+      "answer": {
+        "zh-Hant": "P 表示 6.26，選 A。",
+        "zh-Hans": "P 表示 6.26，选 A。",
+        "en": "P represents 6.26 — option A.",
+        "ja": "P は 6.26 を表します。答えは A です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "上面那條數線從 5 到 7，長度是 2，平均分成 10 小段，每一小段是 2 ÷ 10 = 0.2。",
+          "第 6 個刻度表示 5 + 6 × 0.2 = 6.2，第 7 個刻度表示 5 + 7 × 0.2 = 6.4。下面那條線就是從 6.2 到 6.4 的放大。",
+          "下面那條線長 6.4 − 6.2 = 0.2，平均分成 10 小段，每一小段是 0.2 ÷ 10 = 0.02。P 在左端往右第 3 個刻度。",
+          "P 表示 6.2 + 3 × 0.02 = 6.2 + 0.06 = 6.26，答案是 A。"
+        ],
+        "zh-Hans": [
+          "上面那条数轴从 5 到 7，长度是 2，平均分成 10 小段，每一小段是 2 ÷ 10 = 0.2。",
+          "第 6 个刻度表示 5 + 6 × 0.2 = 6.2，第 7 个刻度表示 5 + 7 × 0.2 = 6.4。下面那条线就是从 6.2 到 6.4 的放大。",
+          "下面那条线长 6.4 − 6.2 = 0.2，平均分成 10 小段，每一小段是 0.2 ÷ 10 = 0.02。P 在左端往右第 3 个刻度。",
+          "P 表示 6.2 + 3 × 0.02 = 6.2 + 0.06 = 6.26，答案是 A。"
+        ],
+        "en": [
+          "The upper line goes from 5 to 7, a length of 2, split into 10 equal parts, so each part is 2 ÷ 10 = 0.2.",
+          "Tick 6 stands for 5 + 6 × 0.2 = 6.2 and tick 7 for 5 + 7 × 0.2 = 6.4, so the lower line is a magnified copy of 6.2 to 6.4.",
+          "The lower line has length 6.4 − 6.2 = 0.2 split into 10 equal parts, so each part is 0.2 ÷ 10 = 0.02. P is on the 3rd tick from the left end.",
+          "P represents 6.2 + 3 × 0.02 = 6.2 + 0.06 = 6.26: option A."
+        ],
+        "ja": [
+          "上の数直線は 5 から 7 までで長さは 2、10 等分しているので1目もりは 2 ÷ 10 = 0.2 です。",
+          "6番目の目もりは 5 + 6 × 0.2 = 6.2、7番目は 5 + 7 × 0.2 = 6.4 を表すので、下の線は 6.2 から 6.4 までを拡大したものです。",
+          "下の線の長さは 6.4 − 6.2 = 0.2 で、10 等分しているので1目もりは 0.2 ÷ 10 = 0.02 です。P は左はしから3つ目の目もりです。",
+          "P は 6.2 + 3 × 0.02 = 6.2 + 0.06 = 6.26 を表します。答えは A です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "geometry_scene",
+        "params": {
+          "bounds": {
+            "minX": -0.8,
+            "minY": -1.3,
+            "maxX": 10.8,
+            "maxY": 5.3
+          },
+          "points": [
+            {
+              "name": "5",
+              "x": 0,
+              "y": 4,
+              "pos": "tl"
+            },
+            {
+              "name": "7",
+              "x": 10,
+              "y": 4,
+              "pos": "tr"
+            },
+            {
+              "name": "_1",
+              "x": 0,
+              "y": 3.7,
+              "visible": false
+            },
+            {
+              "name": "_2",
+              "x": 0,
+              "y": 4.3,
+              "visible": false
+            },
+            {
+              "name": "_3",
+              "x": 1,
+              "y": 3.7,
+              "visible": false
+            },
+            {
+              "name": "_4",
+              "x": 1,
+              "y": 4.3,
+              "visible": false
+            },
+            {
+              "name": "_5",
+              "x": 2,
+              "y": 3.7,
+              "visible": false
+            },
+            {
+              "name": "_6",
+              "x": 2,
+              "y": 4.3,
+              "visible": false
+            },
+            {
+              "name": "_7",
+              "x": 3,
+              "y": 3.7,
+              "visible": false
+            },
+            {
+              "name": "_8",
+              "x": 3,
+              "y": 4.3,
+              "visible": false
+            },
+            {
+              "name": "_9",
+              "x": 4,
+              "y": 3.7,
+              "visible": false
+            },
+            {
+              "name": "_10",
+              "x": 4,
+              "y": 4.3,
+              "visible": false
+            },
+            {
+              "name": "_11",
+              "x": 5,
+              "y": 3.7,
+              "visible": false
+            },
+            {
+              "name": "_12",
+              "x": 5,
+              "y": 4.3,
+              "visible": false
+            },
+            {
+              "name": "_13",
+              "x": 6,
+              "y": 3.7,
+              "visible": false
+            },
+            {
+              "name": "_14",
+              "x": 6,
+              "y": 4.3,
+              "visible": false
+            },
+            {
+              "name": "_15",
+              "x": 7,
+              "y": 3.7,
+              "visible": false
+            },
+            {
+              "name": "_16",
+              "x": 7,
+              "y": 4.3,
+              "visible": false
+            },
+            {
+              "name": "_17",
+              "x": 8,
+              "y": 3.7,
+              "visible": false
+            },
+            {
+              "name": "_18",
+              "x": 8,
+              "y": 4.3,
+              "visible": false
+            },
+            {
+              "name": "_19",
+              "x": 9,
+              "y": 3.7,
+              "visible": false
+            },
+            {
+              "name": "_20",
+              "x": 9,
+              "y": 4.3,
+              "visible": false
+            },
+            {
+              "name": "_21",
+              "x": 10,
+              "y": 3.7,
+              "visible": false
+            },
+            {
+              "name": "_22",
+              "x": 10,
+              "y": 4.3,
+              "visible": false
+            },
+            {
+              "name": "_u6",
+              "x": 6,
+              "y": 4,
+              "visible": false
+            },
+            {
+              "name": "_u7",
+              "x": 7,
+              "y": 4,
+              "visible": false
+            },
+            {
+              "name": "_l0",
+              "x": 0,
+              "y": 0,
+              "visible": false
+            },
+            {
+              "name": "_l10",
+              "x": 10,
+              "y": 0,
+              "visible": false
+            },
+            {
+              "name": "_23",
+              "x": 0,
+              "y": -0.4,
+              "visible": false
+            },
+            {
+              "name": "_24",
+              "x": 0,
+              "y": 0.4,
+              "visible": false
+            },
+            {
+              "name": "_25",
+              "x": 1,
+              "y": -0.25,
+              "visible": false
+            },
+            {
+              "name": "_26",
+              "x": 1,
+              "y": 0.25,
+              "visible": false
+            },
+            {
+              "name": "_27",
+              "x": 2,
+              "y": -0.25,
+              "visible": false
+            },
+            {
+              "name": "_28",
+              "x": 2,
+              "y": 0.25,
+              "visible": false
+            },
+            {
+              "name": "_29",
+              "x": 3,
+              "y": -0.25,
+              "visible": false
+            },
+            {
+              "name": "_30",
+              "x": 3,
+              "y": 0.25,
+              "visible": false
+            },
+            {
+              "name": "_31",
+              "x": 4,
+              "y": -0.25,
+              "visible": false
+            },
+            {
+              "name": "_32",
+              "x": 4,
+              "y": 0.25,
+              "visible": false
+            },
+            {
+              "name": "_33",
+              "x": 5,
+              "y": -0.25,
+              "visible": false
+            },
+            {
+              "name": "_34",
+              "x": 5,
+              "y": 0.25,
+              "visible": false
+            },
+            {
+              "name": "_35",
+              "x": 6,
+              "y": -0.25,
+              "visible": false
+            },
+            {
+              "name": "_36",
+              "x": 6,
+              "y": 0.25,
+              "visible": false
+            },
+            {
+              "name": "_37",
+              "x": 7,
+              "y": -0.25,
+              "visible": false
+            },
+            {
+              "name": "_38",
+              "x": 7,
+              "y": 0.25,
+              "visible": false
+            },
+            {
+              "name": "_39",
+              "x": 8,
+              "y": -0.25,
+              "visible": false
+            },
+            {
+              "name": "_40",
+              "x": 8,
+              "y": 0.25,
+              "visible": false
+            },
+            {
+              "name": "_41",
+              "x": 9,
+              "y": -0.25,
+              "visible": false
+            },
+            {
+              "name": "_42",
+              "x": 9,
+              "y": 0.25,
+              "visible": false
+            },
+            {
+              "name": "_43",
+              "x": 10,
+              "y": -0.4,
+              "visible": false
+            },
+            {
+              "name": "_44",
+              "x": 10,
+              "y": 0.4,
+              "visible": false
+            },
+            {
+              "name": "P",
+              "x": 3,
+              "y": 0,
+              "pos": "b"
+            }
+          ],
+          "segments": [
+            {
+              "from": "5",
+              "to": "7",
+              "style": "solid"
+            },
+            {
+              "from": "_1",
+              "to": "_2",
+              "style": "solid"
+            },
+            {
+              "from": "_3",
+              "to": "_4",
+              "style": "solid"
+            },
+            {
+              "from": "_5",
+              "to": "_6",
+              "style": "solid"
+            },
+            {
+              "from": "_7",
+              "to": "_8",
+              "style": "solid"
+            },
+            {
+              "from": "_9",
+              "to": "_10",
+              "style": "solid"
+            },
+            {
+              "from": "_11",
+              "to": "_12",
+              "style": "solid"
+            },
+            {
+              "from": "_13",
+              "to": "_14",
+              "style": "solid"
+            },
+            {
+              "from": "_15",
+              "to": "_16",
+              "style": "solid"
+            },
+            {
+              "from": "_17",
+              "to": "_18",
+              "style": "solid"
+            },
+            {
+              "from": "_19",
+              "to": "_20",
+              "style": "solid"
+            },
+            {
+              "from": "_21",
+              "to": "_22",
+              "style": "solid"
+            },
+            {
+              "from": "_l0",
+              "to": "_l10",
+              "style": "solid"
+            },
+            {
+              "from": "_23",
+              "to": "_24",
+              "style": "solid"
+            },
+            {
+              "from": "_25",
+              "to": "_26",
+              "style": "solid"
+            },
+            {
+              "from": "_27",
+              "to": "_28",
+              "style": "solid"
+            },
+            {
+              "from": "_29",
+              "to": "_30",
+              "style": "solid"
+            },
+            {
+              "from": "_31",
+              "to": "_32",
+              "style": "solid"
+            },
+            {
+              "from": "_33",
+              "to": "_34",
+              "style": "solid"
+            },
+            {
+              "from": "_35",
+              "to": "_36",
+              "style": "solid"
+            },
+            {
+              "from": "_37",
+              "to": "_38",
+              "style": "solid"
+            },
+            {
+              "from": "_39",
+              "to": "_40",
+              "style": "solid"
+            },
+            {
+              "from": "_41",
+              "to": "_42",
+              "style": "solid"
+            },
+            {
+              "from": "_43",
+              "to": "_44",
+              "style": "solid"
+            },
+            {
+              "from": "_u6",
+              "to": "_l0",
+              "style": "construction"
+            },
+            {
+              "from": "_u7",
+              "to": "_l10",
+              "style": "construction"
+            }
+          ],
+          "polygons": [],
+          "arcs": [],
+          "angleMarks": [],
+          "rightAngles": [],
+          "equalTicks": []
+        }
+      },
+      "answerMode": "multiple_choice",
+      "options": {
+        "A": {
+          "zh-Hant": "6.26",
+          "zh-Hans": "6.26",
+          "en": "6.26",
+          "ja": "6.26"
+        },
+        "B": {
+          "zh-Hant": "6.23",
+          "zh-Hans": "6.23",
+          "en": "6.23",
+          "ja": "6.23"
+        },
+        "C": {
+          "zh-Hant": "6.53",
+          "zh-Hans": "6.53",
+          "en": "6.53",
+          "ja": "6.53"
+        },
+        "D": {
+          "zh-Hant": "6.13",
+          "zh-Hans": "6.13",
+          "en": "6.13",
+          "ja": "6.13"
+        }
+      },
+      "correctAnswer": {
+        "type": "choice",
+        "value": "A"
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "agent-B-figure-round11-2026-10-24",
+        "notes": "設計依據：數線「局部放大」讀小數（兩層刻度，每層一小格的值不同）。最接近既有題 arithmetic_grade4_foundation_170（0 到 1 億分 20 大格、每格 10 小格，讀第 73 小格）與 arithmetic_grade3_foundation_228（線段刻度求幾分之幾），本題上層一小格是 0.2 而不是 0.1，還要先找出放大的是哪一段，再算第二層每格 0.02，骨架不同。誘答：6.23（把小格當 0.01）、6.53（把每格當 0.1 數到第 3 格再加 0.5）、6.13。圖：上線 5～7 十等分，第 6～7 刻度用虛線連到下方放大線，下方十等分，P 在第 3 刻度；圖上沒有寫出 6.2、6.4。",
+        "displayText": "MathSpring 改寫題（附圖）"
+      }
+    },
+    {
+      "id": "arithmetic_grade4_foundation_216",
+      "topic": "arithmetic",
+      "subtopic": "one_per_row_column_max_sum",
+      "tags": [
+        "c:add_sub",
+        "m:enumeration",
+        "m:extremal"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade4",
+      "challengeTier": "foundation",
+      "reviewStatus": "ok",
+      "prompt": {
+        "zh-Hant": "如圖的 3 × 3 方格，每格寫著一個數。要圈出 3 個數，而且任兩個圈起來的數不能在同一橫排，也不能在同一直行。圈起來的 3 個數加起來，最大是多少？",
+        "zh-Hans": "如图的 3 × 3 方格，每格写着一个数。要圈出 3 个数，而且任两个圈起来的数不能在同一横排，也不能在同一竖排。圈起来的 3 个数加起来，最大是多少？",
+        "en": "Each cell of the 3 × 3 grid shown contains a number. Three numbers are to be circled so that no two circled numbers are in the same row or in the same column. What is the largest possible sum of the three circled numbers?",
+        "ja": "図の 3 × 3 のマスには数が書いてあります。3つの数を丸で囲みますが、どの2つも同じ横の段にも同じ縦の列にもあってはいけません。囲んだ3つの数の和は、いちばん大きくていくつですか。"
+      },
+      "answer": {
+        "zh-Hant": "最大是 17。",
+        "zh-Hans": "最大是 17。",
+        "en": "The largest sum is 17.",
+        "ja": "いちばん大きい和は 17 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "每一橫排、每一直行都剛好圈一個數。中間那一直行是 7、8、9，都很大，可是只能圈其中一個——所以不能只挑最大的數。",
+          "依中間直行圈哪一個分三種情形，剩下的兩排只能用第 1、3 直行，各有兩種圈法：圈 7（第 1 排）時，第 2、3 排是 1 + 5 = 6 或 2 + 3 = 5，總和 13 或 12。",
+          "圈 8（第 2 排）時，第 1、3 排是 4 + 5 = 9 或 1 + 3 = 4，總和 17 或 12。圈 9（第 3 排）時，第 1、2 排是 4 + 2 = 6 或 1 + 1 = 2，總和 15 或 11。",
+          "六種圈法全部列出了，最大的是 4 + 8 + 5 = 17。注意：圈了全表最大的 9 反而最多只有 15。"
+        ],
+        "zh-Hans": [
+          "每一横排、每一竖排都刚好圈一个数。中间那一竖排是 7、8、9，都很大，可是只能圈其中一个——所以不能只挑最大的数。",
+          "依中间竖排圈哪一个分三种情形，剩下的两排只能用第 1、3 竖排，各有两种圈法：圈 7（第 1 排）时，第 2、3 排是 1 + 5 = 6 或 2 + 3 = 5，总和 13 或 12。",
+          "圈 8（第 2 排）时，第 1、3 排是 4 + 5 = 9 或 1 + 3 = 4，总和 17 或 12。圈 9（第 3 排）时，第 1、2 排是 4 + 2 = 6 或 1 + 1 = 2，总和 15 或 11。",
+          "六种圈法全部列出了，最大的是 4 + 8 + 5 = 17。注意：圈了全表最大的 9 反而最多只有 15。"
+        ],
+        "en": [
+          "Each row and each column gets exactly one circle. The middle column holds 7, 8 and 9, all large, but only one of them can be circled — so simply taking the biggest numbers does not work.",
+          "Split by which middle-column number is circled; the other two rows must use columns 1 and 3, in two ways. Circling 7 (row 1): rows 2 and 3 give 1 + 5 = 6 or 2 + 3 = 5, totals 13 or 12.",
+          "Circling 8 (row 2): rows 1 and 3 give 4 + 5 = 9 or 1 + 3 = 4, totals 17 or 12. Circling 9 (row 3): rows 1 and 2 give 4 + 2 = 6 or 1 + 1 = 2, totals 15 or 11.",
+          "All six choices are listed, and the largest is 4 + 8 + 5 = 17. Note that circling the biggest number, 9, gives at most 15."
+        ],
+        "ja": [
+          "どの段・どの列でもちょうど1つずつ囲みます。真ん中の列は 7、8、9 とどれも大きいですが、囲めるのは1つだけなので、大きい数を順に選ぶだけではうまくいきません。",
+          "真ん中の列でどれを囲むかで3つに分けます。残り2段は1列目と3列目を使い、それぞれ2通りです。7（1段目）を囲むと、2・3段目は 1 + 5 = 6 か 2 + 3 = 5 で、合計 13 か 12 です。",
+          "8（2段目）を囲むと、1・3段目は 4 + 5 = 9 か 1 + 3 = 4 で、合計 17 か 12 です。9（3段目）を囲むと、1・2段目は 4 + 2 = 6 か 1 + 1 = 2 で、合計 15 か 11 です。",
+          "6通りをすべて調べたので、いちばん大きいのは 4 + 8 + 5 = 17 です。表でいちばん大きい 9 を囲むと、かえって 15 までにしかなりません。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "composite_grid_shape",
+        "params": {
+          "rows": 3,
+          "cols": 3,
+          "filledCells": [],
+          "cellLabels": {
+            "0,0": "4",
+            "0,1": "7",
+            "0,2": "1",
+            "1,0": "1",
+            "1,1": "8",
+            "1,2": "2",
+            "2,0": "3",
+            "2,1": "9",
+            "2,2": "5"
+          }
+        }
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "17"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "agent-B-figure-round11-2026-10-24",
+        "notes": "設計依據：「每排每行各選一個數，使和最大」（指派問題）的 3 × 3 入門版。全庫查無此題；最接近的是 combinatorics_grade8_foundation_062（階梯棋盤放 3 個車的放法數）與 combinatorics_grade7_foundation_066（右下走法路徑和最大），前者只數放法、後者是路徑，本題是在車的放法中找數值最大，並設計「最大的 9 不在最佳解」的陷阱，骨架不同。圖：3 × 3 數字格，沒有任何圈記。程式列舉 6 種圈法確認 17 唯一最大。",
+        "displayText": "MathSpring 改寫題（附圖）"
+      }
+    },
+    {
+      "id": "arithmetic_grade4_foundation_217",
+      "topic": "arithmetic",
+      "subtopic": "timetable_transfer_earliest_arrival",
+      "tags": [
+        "c:add_sub",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade4",
+      "challengeTier": "foundation",
+      "reviewStatus": "ok",
+      "prompt": {
+        "zh-Hant": "如圖是一條鐵路的時刻表。火車都從 A 站開往 D 站，最上面一排是車次 1～4，表裡是每班車在各站開車的時間（到 D 站的是到站時間）；「—」表示這班車不停這一站，直接開過去。小安在 7:20 走進 B 站，要搭車到 D 站，可以在中途的站下車換車（換車時間不計，但只能搭還沒開走的車）。他最早幾點幾分可以到 D 站？",
+        "zh-Hans": "如图是一条铁路的时刻表。火车都从 A 站开往 D 站，最上面一排是车次 1～4，表里是每班车在各站开车的时间（到 D 站的是到站时间）；“—”表示这班车不停这一站，直接开过去。小安在 7:20 走进 B 站，要搭车到 D 站，可以在中途的站下车换车（换车时间不计，但只能搭还没开走的车）。他最早几点几分可以到 D 站？",
+        "en": "The figure is a railway timetable. All trains run from station A to station D; the top row gives train numbers 1–4, and the table gives each train's departure time at each station (arrival time at D). A dash means the train does not stop at that station. An walks into station B at 7:20 and wants to reach D. He may get off at a station on the way and change trains (changing takes no time, but he can only board a train that has not yet left). What is the earliest time he can reach D?",
+        "ja": "図は鉄道の時刻表です。列車はすべて A 駅から D 駅へ走ります。いちばん上の段は列車番号 1～4、表の中は各駅を出る時刻（D 駅は着く時刻）で、「—」はその駅に止まらず通過することを表します。アンさんは 7:20 に B 駅に入り、D 駅へ行きます。とちゅうの駅で乗りかえてもかまいません（乗りかえの時間はかからないが、まだ出ていない列車にしか乗れない）。いちばん早くて何時何分に D 駅に着けますか。"
+      },
+      "answer": {
+        "zh-Hant": "最早 8:18 到 D 站，選 B。",
+        "zh-Hans": "最早 8:18 到 D 站，选 B。",
+        "en": "At 8:18 at the earliest — option B.",
+        "ja": "いちばん早くて 8:18 で、答えは B です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "7:20 時，1 號車已經在 7:15 開出 B 站，搭不到；2 號、4 號車不停 B 站，也不能在 B 站上車。所以在 B 站只能搭 3 號車（7:45 開）。",
+          "3 號車 8:05 開出 C 站、8:20 到 D 站。如果一路坐到底，8:20 到。",
+          "但 3 號車在 8:05 離開 C 站之前就已經到了 C 站；4 號車 8:10 才從 C 站開，比 3 號車晚，所以小安可以在 C 站下車，改搭 4 號車。4 號車 8:18 到 D 站，比 8:20 早。",
+          "沒有更早的方法（在 B 站能上的車只有 3 號，而從 C 站開往 D 的車中，3 號之後最早到 D 的是 4 號）。所以最早 8:18 到 D 站，答案是 B。"
+        ],
+        "zh-Hans": [
+          "7:20 时，1 号车已经在 7:15 开出 B 站，搭不到；2 号、4 号车不停 B 站，也不能在 B 站上车。所以在 B 站只能搭 3 号车（7:45 开）。",
+          "3 号车 8:05 开出 C 站、8:20 到 D 站。如果一路坐到底，8:20 到。",
+          "但 3 号车在 8:05 离开 C 站之前就已经到了 C 站；4 号车 8:10 才从 C 站开，比 3 号车晚，所以小安可以在 C 站下车，改搭 4 号车。4 号车 8:18 到 D 站，比 8:20 早。",
+          "没有更早的方法（在 B 站能上的车只有 3 号，而从 C 站开往 D 的车中，3 号之后最早到 D 的是 4 号）。所以最早 8:18 到 D 站，答案是 B。"
+        ],
+        "en": [
+          "At 7:20 train 1 has already left B (7:15), and trains 2 and 4 do not stop at B. So at B the only train he can take is train 3 (7:45).",
+          "Train 3 leaves C at 8:05 and reaches D at 8:20, so staying on gives 8:20.",
+          "But train 3 is already at C before 8:05, and train 4 leaves C later, at 8:10, so he can get off at C and change to train 4, which reaches D at 8:18 — earlier than 8:20.",
+          "Nothing is earlier: train 3 is the only train he can board at B, and of the trains leaving C after it, train 4 reaches D first. So the earliest arrival is 8:18: option B."
+        ],
+        "ja": [
+          "7:20 には1番の列車はもう 7:15 に B 駅を出ていて乗れません。2番と4番は B 駅に止まらないので、ここでは乗れません。だから B 駅で乗れるのは3番（7:45 発）だけです。",
+          "3番は C 駅を 8:05 に出て、D 駅に 8:20 に着きます。そのまま乗っていれば 8:20 です。",
+          "しかし3番は 8:05 より前に C 駅に着いていて、4番は C 駅を 8:10 に出るので、C 駅で降りて4番に乗りかえられます。4番は D 駅に 8:18 に着き、8:20 より早いです。",
+          "これより早い方法はありません（B 駅で乗れるのは3番だけで、そのあと C 駅から乗れる列車で D に最も早く着くのは4番）。よっていちばん早くて 8:18 で、答えは B です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "composite_grid_shape",
+        "params": {
+          "rows": 5,
+          "cols": 5,
+          "filledCells": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              0,
+              3
+            ],
+            [
+              0,
+              4
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              2,
+              0
+            ],
+            [
+              3,
+              0
+            ],
+            [
+              4,
+              0
+            ]
+          ],
+          "cellLabels": {
+            "0,0": "",
+            "0,1": "1",
+            "0,2": "2",
+            "0,3": "3",
+            "0,4": "4",
+            "1,0": "A",
+            "2,0": "B",
+            "3,0": "C",
+            "4,0": "D",
+            "1,1": "7:00",
+            "2,1": "7:15",
+            "3,1": "7:35",
+            "4,1": "7:50",
+            "1,2": "7:20",
+            "2,2": "—",
+            "3,2": "—",
+            "4,2": "7:55",
+            "1,3": "7:30",
+            "2,3": "7:45",
+            "3,3": "8:05",
+            "4,3": "8:20",
+            "1,4": "7:50",
+            "2,4": "—",
+            "3,4": "8:10",
+            "4,4": "8:18"
+          }
+        }
+      },
+      "answerMode": "multiple_choice",
+      "options": {
+        "A": {
+          "zh-Hant": "7:55",
+          "zh-Hans": "7:55",
+          "en": "7:55",
+          "ja": "7:55"
+        },
+        "B": {
+          "zh-Hant": "8:18",
+          "zh-Hans": "8:18",
+          "en": "8:18",
+          "ja": "8:18"
+        },
+        "C": {
+          "zh-Hant": "8:20",
+          "zh-Hans": "8:20",
+          "en": "8:20",
+          "ja": "8:20"
+        },
+        "D": {
+          "zh-Hant": "8:12",
+          "zh-Hans": "8:12",
+          "en": "8:12",
+          "ja": "8:12"
+        }
+      },
+      "correctAnswer": {
+        "type": "choice",
+        "value": "B"
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "agent-B-figure-round11-2026-10-24",
+        "notes": "設計依據：讀時刻表並判斷「中途換乘較快的車」。全庫查無讀時刻表換車的題；最接近的是 arithmetic_grade4_foundation_203（公車來回班次數）與 logic_grade10_foundation_061（演講時段排教室），前者是循環班次計數、後者是區間重疊，本題要從表中排除不停靠的快車、找出在 C 站換乘，骨架不同。誘答 7:55（2 號快車，但它不停 B）、8:20（不換車）、8:12。圖：5 × 5 表格，車次與站名格塗色。",
+        "displayText": "MathSpring 改寫題（附圖）"
+      }
     }
   ]
 }

@@ -10235,6 +10235,362 @@
         "notes": "設計依據：「海戰（Battleships）」謎題，用行列計數與不相碰條件推船位。最接近既有題 logic_grade5_foundation_098（5×5 藏 1×3 船，問最少射擊幾次保證打中）與 logic_grade3_foundation_121；那兩題是保證策略與位置計數，本題是由線索唯一還原整個船隊，骨架不同。圖：5×5 海面塗色，右側與下方寫數字；圖上沒有畫船。程式窮舉 8712 種船隊擺法，確認這組線索只有一解。",
         "displayText": "MathSpring 改寫題（附圖）"
       }
+    },
+    {
+      "id": "logic_grade4_foundation_125",
+      "topic": "logic",
+      "subtopic": "shade_out_duplicates_puzzle",
+      "tags": [
+        "c:logic_deduction",
+        "m:contradiction"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade4",
+      "challengeTier": "foundation",
+      "reviewStatus": "ok",
+      "prompt": {
+        "zh-Hant": "如圖的 4 × 4 方格，每格寫著一個數。要把其中一些格子整格塗掉，規則是：① 每一橫排、每一直行裡，沒被塗掉的格子不能有相同的數；② 塗掉的格子不能上下或左右緊鄰；③ 沒被塗掉的格子要全部連成一整塊（上下或左右緊鄰才算連著）。照規則只有一種塗法。塗好以後，沒被塗掉的格子裡的數加起來是多少？",
+        "zh-Hans": "如图的 4 × 4 方格，每格写着一个数。要把其中一些格子整格涂掉，规则是：① 每一横排、每一竖排里，没被涂掉的格子不能有相同的数；② 涂掉的格子不能上下或左右紧邻；③ 没被涂掉的格子要全部连成一整块（上下或左右紧邻才算连着）。照规则只有一种涂法。涂好以后，没被涂掉的格子里的数加起来是多少？",
+        "en": "Each cell of the 4 × 4 grid shown contains a number. Some cells are to be blacked out so that: ① in every row and every column, the cells that are not blacked out contain no repeated number; ② no two blacked-out cells share a side; ③ all cells that are not blacked out form one connected piece (cells sharing a side count as connected). There is exactly one way to do this. After it is done, what is the sum of the numbers in the cells that are not blacked out?",
+        "ja": "図の 4 × 4 のマスには、それぞれ数が書いてあります。いくつかのマスをぬりつぶします。きまりは、① どの横の段・縦の列でも、ぬりつぶしていないマスに同じ数があってはいけない、② ぬりつぶしたマスどうしは上下左右でとなり合ってはいけない、③ ぬりつぶしていないマスは全部ひとつながり（上下左右でとなり合えばつながっている）でなければならない、です。ぬり方は1通りしかありません。ぬったあと、ぬりつぶしていないマスの数の和はいくつですか。"
+      },
+      "answer": {
+        "zh-Hant": "沒被塗掉的數加起來是 28。",
+        "zh-Hans": "没被涂掉的数加起来是 28。",
+        "en": "The sum is 28.",
+        "ja": "和は 28 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "橫排由上往下叫第 1～4 排，格子由左往右叫第 1～4 格。第 1 排有三個 4（第 1、2、4 格），要塗掉兩個；第 1、2 格相鄰不能都塗，所以第 4 格一定塗掉，第 1、2 格再塗掉其中一個。",
+          "如果塗掉第 1 排第 2 格：第 1 直行上面兩格都是 4，第 1 排第 1 格留下，就要塗掉第 2 排第 1 格。這時第 1 排第 1 格的右邊和下面都塗掉了，它和其他格子斷開，違反規則③。所以塗掉的是第 1 排第 1 格，第 1 排第 2 格、第 2 排第 1 格都留下。",
+          "第 1 直行下面兩格都是 3，要塗掉一個。如果塗掉第 4 排第 1 格：第 3 排第 1 格和它相鄰不能塗，第 3 排的兩個 3 只好塗掉第 2 格；第 3 直行下面兩個 4 要塗一個，第 3 排第 3 格和剛塗的第 3 排第 2 格相鄰，只能塗第 4 排第 3 格。這樣第 4 排第 2 格的上、左、右全被塗掉，斷開了，違反規則③。所以塗掉的是第 3 排第 1 格，第 4 排第 1 格留下。",
+          "第 4 排第 1 格的 3 留下，第 4 排的另一個 3（第 4 格）就要塗掉。第 3 直行的兩個 4 要塗一個，第 4 排第 3 格緊鄰剛塗掉的第 4 排第 4 格，不行，所以塗掉第 3 排第 3 格。檢查：每排每行都沒有重複，塗掉的格子互不相鄰，留下的 11 格連成一塊。",
+          "塗掉的是第 1 排的兩個 4、第 3 排第 1 格的 3、第 3 排第 3 格的 4、第 4 排第 4 格的 3，和是 4 + 4 + 3 + 4 + 3 = 18。16 格全部的和是 46，所以留下的數加起來是 46 − 18 = 28。"
+        ],
+        "zh-Hans": [
+          "横排由上往下叫第 1～4 排，格子由左往右叫第 1～4 格。第 1 排有三个 4（第 1、2、4 格），要涂掉两个；第 1、2 格相邻不能都涂，所以第 4 格一定涂掉，第 1、2 格再涂掉其中一个。",
+          "如果涂掉第 1 排第 2 格：第 1 竖排上面两格都是 4，第 1 排第 1 格留下，就要涂掉第 2 排第 1 格。这时第 1 排第 1 格的右边和下面都涂掉了，它和其他格子断开，违反规则③。所以涂掉的是第 1 排第 1 格，第 1 排第 2 格、第 2 排第 1 格都留下。",
+          "第 1 竖排下面两格都是 3，要涂掉一个。如果涂掉第 4 排第 1 格：第 3 排第 1 格和它相邻不能涂，第 3 排的两个 3 只好涂掉第 2 格；第 3 竖排下面两个 4 要涂一个，第 3 排第 3 格和刚涂的第 3 排第 2 格相邻，只能涂第 4 排第 3 格。这样第 4 排第 2 格的上、左、右全被涂掉，断开了，违反规则③。所以涂掉的是第 3 排第 1 格，第 4 排第 1 格留下。",
+          "第 4 排第 1 格的 3 留下，第 4 排的另一个 3（第 4 格）就要涂掉。第 3 竖排的两个 4 要涂一个，第 4 排第 3 格紧邻刚涂掉的第 4 排第 4 格，不行，所以涂掉第 3 排第 3 格。检查：每排每竖排都没有重复，涂掉的格子互不相邻，留下的 11 格连成一块。",
+          "涂掉的是第 1 排的两个 4、第 3 排第 1 格的 3、第 3 排第 3 格的 4、第 4 排第 4 格的 3，和是 4 + 4 + 3 + 4 + 3 = 18。16 格全部的和是 46，所以留下的数加起来是 46 − 18 = 28。"
+        ],
+        "en": [
+          "Call the rows 1–4 from the top and the cells 1–4 from the left. Row 1 has three 4s (cells 1, 2, 4), so two must be blacked out; cells 1 and 2 share a side and cannot both be blacked out, so cell 4 is blacked out together with one of cells 1 and 2.",
+          "Suppose row 1, cell 2 were blacked out. Then row 1, cell 1 stays, and since column 1 starts with two 4s, row 2, cell 1 must be blacked out. Now row 1, cell 1 has both its right and lower neighbours blacked out and is cut off, breaking rule ③. So row 1, cell 1 is blacked out, and row 1 cell 2 and row 2 cell 1 stay.",
+          "Column 1 ends with two 3s; one is blacked out. Suppose it were row 4, cell 1. Then row 3, cell 1 (its neighbour) stays, so row 3 must black out its other 3, cell 2; column 3 has two 4s at the bottom, and row 3, cell 3 touches the blacked-out row 3, cell 2, so row 4, cell 3 is blacked out. Then row 4, cell 2 has its upper, left and right neighbours blacked out and is cut off — impossible. So row 3, cell 1 is blacked out and row 4, cell 1 stays.",
+          "With row 4, cell 1 kept, the other 3 in row 4 (cell 4) is blacked out. Column 3 still has two 4s; row 4, cell 3 touches the blacked-out row 4, cell 4, so row 3, cell 3 is blacked out. Check: no row or column repeats, no two blacked-out cells touch, and the 11 remaining cells are connected.",
+          "The blacked-out numbers are the two 4s in row 1, the 3 and the 4 in row 3, and the 3 in row 4: 4 + 4 + 3 + 4 + 3 = 18. All 16 numbers add up to 46, so the remaining numbers add up to 46 − 18 = 28."
+        ],
+        "ja": [
+          "横の段を上から1～4段目、マスを左から1～4マス目とよびます。1段目には4が3つ（1・2・4マス目）あるので2つぬります。1・2マス目はとなり合うので両方はぬれず、4マス目は必ずぬり、1・2マス目のどちらかをぬります。",
+          "もし1段目2マス目をぬると、1段目1マス目が残ります。1列目の上2マスはどちらも4なので、2段目1マス目をぬることになります。すると1段目1マス目は右も下もぬられて切りはなされ、きまり③に反します。よってぬるのは1段目1マス目で、1段目2マス目と2段目1マス目は残ります。",
+          "1列目の下2マスはどちらも3で、1つぬります。もし4段目1マス目をぬると、となりの3段目1マス目はぬれないので、3段目の3は2マス目をぬります。3列目の下2つの4のうち、3段目3マス目はぬった3段目2マス目ととなり合うので、4段目3マス目をぬります。すると4段目2マス目は上・左・右がぬられて切りはなされ、だめです。よって3段目1マス目をぬり、4段目1マス目は残ります。",
+          "4段目1マス目の3を残すので、4段目のもう1つの3（4マス目）をぬります。3列目の2つの4のうち、4段目3マス目はぬった4段目4マス目ととなり合うので、3段目3マス目をぬります。確かめると、どの段・列にも重なりがなく、ぬったマスはとなり合わず、残る11マスはひとつながりです。",
+          "ぬったのは1段目の2つの4、3段目の3と4、4段目の3で、和は 4 + 4 + 3 + 4 + 3 = 18 です。16マス全部の和は 46 なので、残った数の和は 46 − 18 = 28 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "composite_grid_shape",
+        "params": {
+          "rows": 4,
+          "cols": 4,
+          "filledCells": [],
+          "cellLabels": {
+            "0,0": "4",
+            "0,1": "4",
+            "0,2": "1",
+            "0,3": "4",
+            "1,0": "4",
+            "1,1": "2",
+            "1,2": "3",
+            "1,3": "1",
+            "2,0": "3",
+            "2,1": "3",
+            "2,2": "4",
+            "2,3": "2",
+            "3,0": "3",
+            "3,1": "1",
+            "3,2": "4",
+            "3,3": "3"
+          }
+        }
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "28"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "agent-B-figure-round11-2026-10-24",
+        "notes": "設計依據：日本「Hitori（數字塗塊）」謎題的 4 × 4 版本。全庫查無「塗掉重複數字、塗塊不相鄰、留白連通」的題；最接近的是 logic_grade4_foundation_123（本庫：切成和為 9 的骨牌）與 logic_grade1_foundation_175（關鍵格），本題用兩次「會把格子切斷」的反證排除錯誤塗法，骨架不同。圖：4 × 4 方格只寫數字、沒有任何塗色，答案必須推理。程式窮舉所有塗法確認唯一。",
+        "displayText": "MathSpring 改寫題（附圖）"
+      }
+    },
+    {
+      "id": "logic_grade4_foundation_126",
+      "topic": "logic",
+      "subtopic": "fewest_stations_cover_neighbors",
+      "tags": [
+        "c:graph_theory",
+        "c:logic_deduction",
+        "m:extremal"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade4",
+      "challengeTier": "foundation",
+      "reviewStatus": "ok",
+      "prompt": {
+        "zh-Hant": "如圖，12 個村子 A～L 之間有道路（線段）相連。要在某些村子蓋消防站，規定：每一個村子，要嘛自己有消防站，要嘛和某個有消防站的村子之間有一條道路直接相連。蓋最少座消防站時，蓋法只有一種。應該蓋在哪些村子？",
+        "zh-Hans": "如图，12 个村子 A～L 之间有道路（线段）相连。要在某些村子盖消防站，规定：每一个村子，要么自己有消防站，要么和某个有消防站的村子之间有一条道路直接相连。盖最少座消防站时，盖法只有一种。应该盖在哪些村子？",
+        "en": "In the figure, 12 villages A–L are joined by roads (the segments). Fire stations are to be built in some villages so that every village either has a fire station or is joined by a single road directly to a village that has one. When the smallest possible number of stations is built, there is only one way to place them. In which villages are they built?",
+        "ja": "図のように、12 の村 A～L が道（線分）で結ばれています。いくつかの村に消防署を建てます。どの村も、自分の村に消防署があるか、消防署のある村と1本の道で直接つながっているようにします。消防署の数をいちばん少なくすると、建て方は1通りだけです。どの村に建てますか。"
+      },
+      "answer": {
+        "zh-Hant": "蓋在 A、D、G 三個村子，選 A。",
+        "zh-Hans": "盖在 A、D、G 三个村子，选 A。",
+        "en": "In A, D and G — option A.",
+        "ja": "A、D、G の3つの村で、答えは A です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "J 只和 A 相連，所以 J 或 A 一定要有消防站；同樣，K 或 D 一定要有、L 或 G 一定要有。這三組 {J, A}、{K, D}、{L, G} 沒有共同的村子，所以至少要蓋 3 座。",
+          "看起來最「熱鬧」的 B、E、H（各連 4 條路）是陷阱：蓋在 B、E、H 雖然照顧到 A～I，但 J、K、L 都沒有被照顧到，3 座不夠。",
+          "如果只蓋 3 座，就是三組各選一個。假設 J 那一組選了 J（不選 A），J 只照顧 J 和 A；另外兩座從 {K, D}、{L, G} 中各選一個，最多是 D（照顧 C、D、E、K）和 G（照顧 F、G、H、L），B 和 I 仍然沒人照顧。所以一定要選 A；同理（圖形繞中心轉三分之一圈會和自己重合）也一定要選 D 和 G。",
+          "檢查 A、D、G：A 照顧 A、B、I、J；D 照顧 C、D、E、K；G 照顧 F、G、H、L，12 個村子都照顧到了。所以最少 3 座，而且只能蓋在 A、D、G，答案是 A。"
+        ],
+        "zh-Hans": [
+          "J 只和 A 相连，所以 J 或 A 一定要有消防站；同样，K 或 D 一定要有、L 或 G 一定要有。这三组 {J, A}、{K, D}、{L, G} 没有共同的村子，所以至少要盖 3 座。",
+          "看起来最“热闹”的 B、E、H（各连 4 条路）是陷阱：盖在 B、E、H 虽然照顾到 A～I，但 J、K、L 都没有被照顾到，3 座不够。",
+          "如果只盖 3 座，就是三组各选一个。假设 J 那一组选了 J（不选 A），J 只照顾 J 和 A；另外两座从 {K, D}、{L, G} 中各选一个，最多是 D（照顾 C、D、E、K）和 G（照顾 F、G、H、L），B 和 I 仍然没人照顾。所以一定要选 A；同理（图形绕中心转三分之一圈会和自己重合）也一定要选 D 和 G。",
+          "检查 A、D、G：A 照顾 A、B、I、J；D 照顾 C、D、E、K；G 照顾 F、G、H、L，12 个村子都照顾到了。所以最少 3 座，而且只能盖在 A、D、G，答案是 A。"
+        ],
+        "en": [
+          "J is joined only to A, so J or A must have a station; likewise K or D, and L or G. The three groups {J, A}, {K, D}, {L, G} share no village, so at least 3 stations are needed.",
+          "The busiest villages B, E, H (4 roads each) are a trap: stations there cover A–I but not J, K or L, so those 3 are not enough.",
+          "With only 3 stations, one is chosen from each group. If J were chosen instead of A, it would cover only J and A; the best choices from {K, D} and {L, G} are D (covering C, D, E, K) and G (covering F, G, H, L), and B and I would still be uncovered. So A must be chosen, and in the same way (the map looks the same after a one-third turn about its centre) D and G must be chosen.",
+          "Check A, D, G: A covers A, B, I, J; D covers C, D, E, K; G covers F, G, H, L — all 12 villages. So the minimum is 3 stations, and they must be in A, D and G: option A."
+        ],
+        "ja": [
+          "J は A としかつながっていないので、J か A には必ず消防署が必要です。同じように K か D、L か G にも必要です。{J, A}、{K, D}、{L, G} の3組には共通の村がないので、少なくとも3つ必要です。",
+          "いちばんにぎやかに見える B、E、H（それぞれ4本の道）はわなです。B、E、H に建てると A～I は大丈夫ですが、J、K、L が守られず、3つでは足りません。",
+          "3つだけ建てるなら、3組から1つずつ選びます。もし J の組で J を選ぶと（A を選ばないと）、J が守るのは J と A だけです。残りを {K, D}、{L, G} から選んでも、いちばんよいのは D（C、D、E、K を守る）と G（F、G、H、L を守る）で、B と I が守られません。だから A を選ぶしかなく、同じ理由で（図は中心のまわりに3分の1回転すると重なる）D と G も選ぶしかありません。",
+          "A、D、G を確かめると、A は A、B、I、J、D は C、D、E、K、G は F、G、H、L を守り、12 の村すべてが守られます。よって最少は3つで、A、D、G に建てます。答えは A です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "geometry_scene",
+        "params": {
+          "bounds": {
+            "minX": -4.9,
+            "minY": -3.3,
+            "maxX": 4.9,
+            "maxY": 5.3
+          },
+          "points": [
+            {
+              "name": "A",
+              "x": 0.0,
+              "y": 3.0,
+              "pos": "tl"
+            },
+            {
+              "name": "B",
+              "x": 1.928363,
+              "y": 2.298133,
+              "pos": "tr"
+            },
+            {
+              "name": "C",
+              "x": 2.954423,
+              "y": 0.520945,
+              "pos": "r"
+            },
+            {
+              "name": "D",
+              "x": 2.598076,
+              "y": -1.5,
+              "pos": "tr"
+            },
+            {
+              "name": "E",
+              "x": 1.02606,
+              "y": -2.819078,
+              "pos": "b"
+            },
+            {
+              "name": "F",
+              "x": -1.02606,
+              "y": -2.819078,
+              "pos": "b"
+            },
+            {
+              "name": "G",
+              "x": -2.598076,
+              "y": -1.5,
+              "pos": "tl"
+            },
+            {
+              "name": "H",
+              "x": -2.954423,
+              "y": 0.520945,
+              "pos": "l"
+            },
+            {
+              "name": "I",
+              "x": -1.928363,
+              "y": 2.298133,
+              "pos": "tl"
+            },
+            {
+              "name": "J",
+              "x": 0,
+              "y": 4.6,
+              "pos": "r"
+            },
+            {
+              "name": "K",
+              "x": 3.983717,
+              "y": -2.3,
+              "pos": "r"
+            },
+            {
+              "name": "L",
+              "x": -3.983717,
+              "y": -2.3,
+              "pos": "l"
+            }
+          ],
+          "segments": [
+            {
+              "from": "A",
+              "to": "B",
+              "style": "solid"
+            },
+            {
+              "from": "B",
+              "to": "C",
+              "style": "solid"
+            },
+            {
+              "from": "C",
+              "to": "D",
+              "style": "solid"
+            },
+            {
+              "from": "D",
+              "to": "E",
+              "style": "solid"
+            },
+            {
+              "from": "E",
+              "to": "F",
+              "style": "solid"
+            },
+            {
+              "from": "F",
+              "to": "G",
+              "style": "solid"
+            },
+            {
+              "from": "G",
+              "to": "H",
+              "style": "solid"
+            },
+            {
+              "from": "H",
+              "to": "I",
+              "style": "solid"
+            },
+            {
+              "from": "I",
+              "to": "A",
+              "style": "solid"
+            },
+            {
+              "from": "B",
+              "to": "E",
+              "style": "solid"
+            },
+            {
+              "from": "E",
+              "to": "H",
+              "style": "solid"
+            },
+            {
+              "from": "H",
+              "to": "B",
+              "style": "solid"
+            },
+            {
+              "from": "A",
+              "to": "J",
+              "style": "solid"
+            },
+            {
+              "from": "D",
+              "to": "K",
+              "style": "solid"
+            },
+            {
+              "from": "G",
+              "to": "L",
+              "style": "solid"
+            }
+          ],
+          "polygons": [],
+          "arcs": [],
+          "angleMarks": [],
+          "rightAngles": [],
+          "equalTicks": []
+        }
+      },
+      "answerMode": "multiple_choice",
+      "options": {
+        "A": {
+          "zh-Hant": "A、D、G",
+          "zh-Hans": "A、D、G",
+          "en": "A, D, G",
+          "ja": "A、D、G"
+        },
+        "B": {
+          "zh-Hant": "B、E、H",
+          "zh-Hans": "B、E、H",
+          "en": "B, E, H",
+          "ja": "B、E、H"
+        },
+        "C": {
+          "zh-Hant": "J、K、L",
+          "zh-Hans": "J、K、L",
+          "en": "J, K, L",
+          "ja": "J、K、L"
+        },
+        "D": {
+          "zh-Hant": "A、E、H",
+          "zh-Hans": "A、E、H",
+          "en": "A, E, H",
+          "ja": "A、E、H"
+        }
+      },
+      "correctAnswer": {
+        "type": "choice",
+        "value": "A"
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "agent-B-figure-round11-2026-10-24",
+        "notes": "設計依據：圖論的「支配集」（最少據點讓每個點自己或鄰居有據點）。全庫查無支配集題；最接近的是 logic_grade12_foundation_022（每條路兩端至少一端設監視器，是點覆蓋）與 logic_grade6_foundation_102（封路使兩村不通），本題要照顧的是「點」而不是「邊」，用三組互不相交的「葉子＋鄰居」證下界，並排除看似最熱鬧的 B、E、H，骨架不同。圖：九邊形外圈 A～I、內部三角形 B–E–H、三個葉子 J、K、L 掛在 A、D、G；圖上沒有標出任何消防站。程式窮舉 2¹² 種蓋法確認最少 3 座且唯一。",
+        "displayText": "MathSpring 改寫題（附圖）"
+      }
     }
   ]
 }

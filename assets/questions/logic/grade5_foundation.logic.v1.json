@@ -9175,6 +9175,352 @@
         "notes": "設計依據：三線共點的填數（中心被重複計算 3 次）。最接近既有題 logic_grade3_foundation_067（三角形頂點與邊中點填 1～6 求邊和最大），本題是三線交於一點、用「總和 = 28 + 2c 必須是 3 的倍數」篩中心值再構造，推理骨架不同；也與魔方陣不同。圖：三條直線、7 個圓點（中心 O 與 A～F），沒有任何數字。程式窮舉 7! 種填法確認中心只能是 1、4、7。",
         "displayText": "MathSpring 改寫題（附圖）"
       }
+    },
+    {
+      "id": "logic_grade5_foundation_117",
+      "topic": "logic",
+      "subtopic": "max_non_adjacent_points_triangle_array",
+      "tags": [
+        "c:graph_theory",
+        "m:extremal",
+        "m:pigeonhole"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade5",
+      "challengeTier": "foundation",
+      "reviewStatus": "ok",
+      "prompt": {
+        "zh-Hant": "如圖，10 個點 A～J 排成三角形，相鄰的點用線段連起來。要從中選出一些點插上旗子，規定任兩面旗子所在的點，不可以被一條線段直接連著。最多可以插幾面旗子？",
+        "zh-Hans": "如图，10 个点 A～J 排成三角形，相邻的点用线段连起来。要从中选出一些点插上旗子，规定任两面旗子所在的点，不可以被一条线段直接连着。最多可以插几面旗子？",
+        "en": "In the figure, 10 points A–J are arranged in a triangle and neighbouring points are joined by segments. Flags are to be placed on some of the points so that no two flagged points are joined directly by a segment. What is the largest number of flags that can be placed?",
+        "ja": "図のように、10 個の点 A～J が三角形に並び、となり合う点は線分で結ばれています。いくつかの点に旗を立てますが、旗を立てた2点が1本の線分で直接結ばれていてはいけません。旗は最大で何本立てられますか。"
+      },
+      "answer": {
+        "zh-Hant": "最多可以插 4 面旗子。",
+        "zh-Hans": "最多可以插 4 面旗子。",
+        "en": "At most 4 flags.",
+        "ja": "最大で 4 本です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "把 10 個點分成 4 組：A、B、C 三點兩兩相連；D、G、H 三點兩兩相連；F、I、J 三點兩兩相連；最後剩下 E 一個點。",
+          "同一組裡（例如 A、B、C）任兩點都被線段連著，所以一組最多只能插 1 面旗子。4 組合起來，旗子最多 4 面。",
+          "4 面做得到：插在三個角 A、G、J 和中間的 E。A、G、J 兩兩不相鄰；E 連著的是 B、C、D、F、H、I，也不包含 A、G、J，符合規定。",
+          "所以最多可以插 4 面旗子。（插在連線最多的 E 之外，看起來還可以多插，但用上面的分組可以證明不可能超過 4 面。）"
+        ],
+        "zh-Hans": [
+          "把 10 个点分成 4 组：A、B、C 三点两两相连；D、G、H 三点两两相连；F、I、J 三点两两相连；最后剩下 E 一个点。",
+          "同一组里（例如 A、B、C）任两点都被线段连着，所以一组最多只能插 1 面旗子。4 组合起来，旗子最多 4 面。",
+          "4 面做得到：插在三个角 A、G、J 和中间的 E。A、G、J 两两不相邻；E 连着的是 B、C、D、F、H、I，也不包含 A、G、J，符合规定。",
+          "所以最多可以插 4 面旗子。（插在连线最多的 E 之外，看起来还可以多插，但用上面的分组可以证明不可能超过 4 面。）"
+        ],
+        "en": [
+          "Split the 10 points into 4 groups: A, B, C are joined to each other; D, G, H are joined to each other; F, I, J are joined to each other; and E is left on its own.",
+          "In each group of three every two points are joined, so each group can hold at most 1 flag. With 4 groups there are at most 4 flags.",
+          "4 flags are possible: the three corners A, G, J and the middle point E. A, G and J are not joined to each other, and E is joined to B, C, D, F, H, I, none of which is flagged.",
+          "So the largest number of flags is 4. (It may look as if more fit, but the grouping proves that more than 4 is impossible.)"
+        ],
+        "ja": [
+          "10 個の点を4組に分けます。A、B、C の3点はどの2点も結ばれ、D、G、H もどの2点も結ばれ、F、I、J もどの2点も結ばれています。残るのは E の1点です。",
+          "3点の組ではどの2点も線分で結ばれているので、1組に立てられる旗は多くても1本です。4組なので、旗は多くても4本です。",
+          "4本は立てられます。3つのかど A、G、J と真ん中の E です。A、G、J はたがいに結ばれておらず、E と結ばれているのは B、C、D、F、H、I で、旗を立てた点はふくまれません。",
+          "よって最大で 4 本です（もっと立てられそうに見えても、上の組分けから4本をこえられないことがわかります）。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "geometry_scene",
+        "params": {
+          "bounds": {
+            "minX": -0.9,
+            "minY": -0.9,
+            "maxX": 6.9,
+            "maxY": 6.096152422706632
+          },
+          "points": [
+            {
+              "name": "A",
+              "x": 3,
+              "y": 5.196152,
+              "pos": "t"
+            },
+            {
+              "name": "B",
+              "x": 2,
+              "y": 3.464102,
+              "pos": "l"
+            },
+            {
+              "name": "C",
+              "x": 4,
+              "y": 3.464102,
+              "pos": "r"
+            },
+            {
+              "name": "D",
+              "x": 1,
+              "y": 1.732051,
+              "pos": "l"
+            },
+            {
+              "name": "E",
+              "x": 3,
+              "y": 1.732051,
+              "pos": "t"
+            },
+            {
+              "name": "F",
+              "x": 5,
+              "y": 1.732051,
+              "pos": "r"
+            },
+            {
+              "name": "G",
+              "x": 0,
+              "y": 0.0,
+              "pos": "b"
+            },
+            {
+              "name": "H",
+              "x": 2,
+              "y": 0.0,
+              "pos": "b"
+            },
+            {
+              "name": "I",
+              "x": 4,
+              "y": 0.0,
+              "pos": "b"
+            },
+            {
+              "name": "J",
+              "x": 6,
+              "y": 0.0,
+              "pos": "b"
+            }
+          ],
+          "segments": [
+            {
+              "from": "A",
+              "to": "B",
+              "style": "solid"
+            },
+            {
+              "from": "A",
+              "to": "C",
+              "style": "solid"
+            },
+            {
+              "from": "B",
+              "to": "C",
+              "style": "solid"
+            },
+            {
+              "from": "B",
+              "to": "D",
+              "style": "solid"
+            },
+            {
+              "from": "B",
+              "to": "E",
+              "style": "solid"
+            },
+            {
+              "from": "C",
+              "to": "E",
+              "style": "solid"
+            },
+            {
+              "from": "C",
+              "to": "F",
+              "style": "solid"
+            },
+            {
+              "from": "D",
+              "to": "E",
+              "style": "solid"
+            },
+            {
+              "from": "D",
+              "to": "G",
+              "style": "solid"
+            },
+            {
+              "from": "D",
+              "to": "H",
+              "style": "solid"
+            },
+            {
+              "from": "E",
+              "to": "F",
+              "style": "solid"
+            },
+            {
+              "from": "E",
+              "to": "H",
+              "style": "solid"
+            },
+            {
+              "from": "E",
+              "to": "I",
+              "style": "solid"
+            },
+            {
+              "from": "F",
+              "to": "I",
+              "style": "solid"
+            },
+            {
+              "from": "F",
+              "to": "J",
+              "style": "solid"
+            },
+            {
+              "from": "G",
+              "to": "H",
+              "style": "solid"
+            },
+            {
+              "from": "H",
+              "to": "I",
+              "style": "solid"
+            },
+            {
+              "from": "I",
+              "to": "J",
+              "style": "solid"
+            }
+          ],
+          "polygons": [],
+          "arcs": [],
+          "angleMarks": [],
+          "rightAngles": [],
+          "equalTicks": []
+        }
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "4"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "agent-B-figure-round11-2026-10-24",
+        "notes": "設計依據：圖論的「最大獨立集」，用「分成 4 個兩兩相連的小組」證上界、再給構造。全庫查無此題；最接近的是 logic_grade3_foundation_134（4 × 4 放星星互不相鄰，是方格謎題）與 logic_grade11_foundation_018（3 × 3 格點選點任三點不共線），本題是三角點陣的不相鄰選點，用團覆蓋（三點組）證明，骨架不同。圖：10 點正三角點陣，相距 2 的點連線，共 18 條；圖上沒有標旗子。程式窮舉 2¹⁰ 種選法確認最大 4。",
+        "displayText": "MathSpring 改寫題（附圖）"
+      }
+    },
+    {
+      "id": "logic_grade5_foundation_118",
+      "topic": "logic",
+      "subtopic": "two_per_region_domino_shading",
+      "tags": [
+        "c:logic_deduction",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade5",
+      "challengeTier": "foundation",
+      "reviewStatus": "ok",
+      "prompt": {
+        "zh-Hant": "如圖的 5 × 5 方格分成 A～E 五區，寫著同一個字母的格子屬於同一區。要把一些格子塗黑，規則是：① 每一區剛好塗黑 2 格；② 每一個塗黑的格子，上下左右緊鄰的格子中剛好有 1 格也是黑的（也就是黑格兩兩配成一塊塊 1 × 2 的骨牌，骨牌之間不相鄰）。照規則只有一種塗法。最上面一橫排有幾格被塗黑？",
+        "zh-Hans": "如图的 5 × 5 方格分成 A～E 五区，写着同一个字母的格子属于同一区。要把一些格子涂黑，规则是：① 每一区刚好涂黑 2 格；② 每一个涂黑的格子，上下左右紧邻的格子中刚好有 1 格也是黑的（也就是黑格两两配成一块块 1 × 2 的骨牌，骨牌之间不相邻）。照规则只有一种涂法。最上面一横排有几格被涂黑？",
+        "en": "The 5 × 5 grid shown is divided into five regions A–E; cells with the same letter are in the same region. Some cells are to be blacked out so that: ① each region has exactly 2 black cells; ② every black cell has exactly 1 black cell among its up/down/left/right neighbours (so the black cells form separate 1 × 2 dominoes that do not touch each other side by side). There is exactly one way to do this. How many cells of the top row are black?",
+        "ja": "図の 5 × 5 のマスは A～E の5つの区画に分かれていて、同じ文字のマスが同じ区画です。いくつかのマスを黒くぬります。きまりは、① どの区画もちょうど2マスぬる、② ぬったマスの上下左右のとなりには、ぬったマスがちょうど1つある（ぬったマスは 1 × 2 のドミノの形に2つずつ組になり、ドミノどうしは辺でとなり合わない）、です。ぬり方は1通りです。いちばん上の段でぬったマスはいくつですか。"
+      },
+      "answer": {
+        "zh-Hant": "最上面一橫排有 3 格被塗黑。",
+        "zh-Hans": "最上面一横排有 3 格被涂黑。",
+        "en": "3 cells of the top row are black.",
+        "ja": "いちばん上の段でぬったマスは 3 つです。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "橫排由上往下叫第 1～5 排，格子由左往右叫第 1～5 格。E 區只有 2 格（第 1、2 排的第 1 格），A 區也只有 2 格（第 5 排的第 1、2 格），這四格全部塗黑，而且各自配成一塊骨牌，所以它們上下左右的鄰格都不能塗：第 1 排第 2 格、第 2 排第 2 格、第 3 排第 1 格、第 4 排第 1、2 格、第 5 排第 3 格都是白的。",
+          "D 區有 6 格（第 1 排第 2、3 格，第 2 排第 2 格，第 3 排第 1、2 格，第 4 排第 1 格），其中 4 格已經確定是白的，只剩第 1 排第 3 格和第 3 排第 2 格，所以這兩格都塗黑。",
+          "第 3 排第 2 格要找一個黑的鄰居：上、左、下都是白的，只能是右邊的第 3 排第 3 格（C 區）。這塊骨牌配好了，所以它旁邊的第 2 排第 3 格、第 4 排第 3 格都是白的。",
+          "B 區（第 4 排第 2、3、4 格和第 5 排第 3、4 格）中，第 4 排第 2、3 格和第 5 排第 3 格已經是白的，只剩第 4 排第 4 格和第 5 排第 4 格，兩格都塗黑，正好上下配成骨牌。",
+          "C 區已經有第 3 排第 3 格，還要 1 格，而且要給第 1 排第 3 格當鄰居：第 1 排第 3 格的鄰居只剩第 1 排第 4 格（第 2 排第 3 格是白的），所以塗第 1 排第 4 格，C 區其他格都白。第 1 排塗黑的是第 1、3、4 格，共 3 格。"
+        ],
+        "zh-Hans": [
+          "横排由上往下叫第 1～5 排，格子由左往右叫第 1～5 格。E 区只有 2 格（第 1、2 排的第 1 格），A 区也只有 2 格（第 5 排的第 1、2 格），这四格全部涂黑，而且各自配成一块骨牌，所以它们上下左右的邻格都不能涂：第 1 排第 2 格、第 2 排第 2 格、第 3 排第 1 格、第 4 排第 1、2 格、第 5 排第 3 格都是白的。",
+          "D 区有 6 格（第 1 排第 2、3 格，第 2 排第 2 格，第 3 排第 1、2 格，第 4 排第 1 格），其中 4 格已经确定是白的，只剩第 1 排第 3 格和第 3 排第 2 格，所以这两格都涂黑。",
+          "第 3 排第 2 格要找一个黑的邻居：上、左、下都是白的，只能是右边的第 3 排第 3 格（C 区）。这块骨牌配好了，所以它旁边的第 2 排第 3 格、第 4 排第 3 格都是白的。",
+          "B 区（第 4 排第 2、3、4 格和第 5 排第 3、4 格）中，第 4 排第 2、3 格和第 5 排第 3 格已经是白的，只剩第 4 排第 4 格和第 5 排第 4 格，两格都涂黑，正好上下配成骨牌。",
+          "C 区已经有第 3 排第 3 格，还要 1 格，而且要给第 1 排第 3 格当邻居：第 1 排第 3 格的邻居只剩第 1 排第 4 格（第 2 排第 3 格是白的），所以涂第 1 排第 4 格，C 区其他格都白。第 1 排涂黑的是第 1、3、4 格，共 3 格。"
+        ],
+        "en": [
+          "Call the rows 1–5 from the top and the cells 1–5 from the left. Region E has only 2 cells (cell 1 of rows 1 and 2) and region A has only 2 cells (cells 1 and 2 of row 5), so all four are black, each pair forming a domino; hence their other neighbours are white: row 1 cell 2, row 2 cell 2, row 3 cell 1, row 4 cells 1 and 2, row 5 cell 3.",
+          "Region D has 6 cells (row 1 cells 2, 3; row 2 cell 2; row 3 cells 1, 2; row 4 cell 1). Four of them are already white, leaving row 1 cell 3 and row 3 cell 2, so both are black.",
+          "Row 3 cell 2 needs a black neighbour: above, left and below are white, so it must be row 3 cell 3 (region C). That domino is complete, so its neighbours row 2 cell 3 and row 4 cell 3 are white.",
+          "Region B (row 4 cells 2, 3, 4; row 5 cells 3, 4): row 4 cells 2, 3 and row 5 cell 3 are white, leaving row 4 cell 4 and row 5 cell 4, both black — a vertical domino.",
+          "Region C already has row 3 cell 3 and needs 1 more, which must partner row 1 cell 3: its only remaining possible neighbour is row 1 cell 4 (row 2 cell 3 is white). So row 1 cell 4 is black and the rest of C is white. The black cells in row 1 are cells 1, 3 and 4: 3 cells."
+        ],
+        "ja": [
+          "横の段を上から1～5段目、マスを左から1～5マス目とよびます。E 区画は2マス（1・2段目の1マス目）、A 区画も2マス（5段目の1・2マス目）しかないので、この4マスはすべてぬり、それぞれドミノになります。だからそのほかのとなりのマスはぬれず、1段目2マス目、2段目2マス目、3段目1マス目、4段目1・2マス目、5段目3マス目は白です。",
+          "D 区画は6マス（1段目2・3マス目、2段目2マス目、3段目1・2マス目、4段目1マス目）で、4マスはもう白なので、残る1段目3マス目と3段目2マス目をぬります。",
+          "3段目2マス目には黒いとなりが必要です。上・左・下は白なので、右の3段目3マス目（C 区画）です。このドミノができたので、となりの2段目3マス目と4段目3マス目は白です。",
+          "B 区画（4段目2・3・4マス目と5段目3・4マス目）では、4段目2・3マス目と5段目3マス目はもう白なので、4段目4マス目と5段目4マス目をぬり、たてのドミノになります。",
+          "C 区画は3段目3マス目のほかにもう1マス必要で、それは1段目3マス目の相手でなければなりません。1段目3マス目のとなりで残っているのは1段目4マス目だけ（2段目3マス目は白）なので、そこをぬり、C のほかのマスは白です。1段目でぬったのは1・3・4マス目の 3 つです。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "composite_grid_shape",
+        "params": {
+          "rows": 5,
+          "cols": 5,
+          "filledCells": [],
+          "cellLabels": {
+            "0,0": "E",
+            "0,1": "D",
+            "0,2": "D",
+            "0,3": "C",
+            "0,4": "C",
+            "1,0": "E",
+            "1,1": "D",
+            "1,2": "C",
+            "1,3": "C",
+            "1,4": "C",
+            "2,0": "D",
+            "2,1": "D",
+            "2,2": "C",
+            "2,3": "C",
+            "2,4": "C",
+            "3,0": "D",
+            "3,1": "B",
+            "3,2": "B",
+            "3,3": "B",
+            "3,4": "C",
+            "4,0": "A",
+            "4,1": "A",
+            "4,2": "B",
+            "4,3": "B",
+            "4,4": "C"
+          }
+        }
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "3"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "agent-B-figure-round11-2026-10-24",
+        "notes": "設計依據：日本「Norinori（骨牌塗格）」謎題的 5 × 5 版本。全庫查無此謎題；最接近的是 combinatorics_grade8_foundation_065 與 A 批 A_g3_13（骨牌鋪滿的鋪法），那些是用骨牌蓋滿區域，本題是每區恰 2 黑格、黑格自成不相鄰骨牌的推理，骨架不同。圖：5 × 5 方格每格寫所屬區的字母（A～E），沒有任何塗色。程式窮舉確認唯一，且每一步都是單純的強迫推理。",
+        "displayText": "MathSpring 改寫題（附圖）"
+      }
     }
   ]
 }
