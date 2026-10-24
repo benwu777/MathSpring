@@ -22,8 +22,8 @@
 
 ## 程式與產品驗收
 
-- [ ] 執行 `flutter analyze`，結果為 0 issues。
-- [ ] 執行完整 `flutter test`，全部通過。
+- [x] 執行 `flutter analyze`，結果為 0 issues（2026-10-24）。
+- [x] 執行完整 `flutter test`，371 passed、1 skipped（2026-10-24）。
 - [ ] 執行 `flutter build ipa --release`（具備簽署後），確認 archive 可被 Xcode Organizer／Transporter 驗證並上傳。
 - [ ] 在至少一台實體 iPhone、iPhone Simulator、iPad Simulator 完成 QA：首次啟動、離線題庫、四語系、建立／切換／刪除學習者、練習／測驗／歷史紀錄、所有圖形題、直橫向、Dynamic Type、VoiceOver。
 - [ ] 以 Sandbox 測試購買、取消、購買失敗、重新開啟後 restore，以及不同 Apple ID 的恢復行為；交易完成後確實解鎖且不重複扣款。
