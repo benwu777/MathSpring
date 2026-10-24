@@ -4,7 +4,7 @@
 
 ## 送審阻擋項（先處理）
 
-- [ ] **發布支援頁與隱私政策頁。** App 內與 metadata 指向 `https://benwu777.github.io/MathSpring/support/` 及 `/privacy/`，但 2026-10-24 兩者皆回傳 HTTP 404。將 `docs/site` 部署到公開 GitHub Pages（或更新為其他已公開網址）後，使用未登入的瀏覽器重新驗證兩個 URL。
+- [x] **發布支援頁與隱私政策頁。** 已以 GitHub Pages 從 `main` 部署；2026-10-24 已驗證 `https://benwu777.github.io/MathSpring/support/` 及 `/privacy/` 均回傳 HTTP 200。
 - [ ] **統一一次性解鎖的宣稱。** 首發沒有廣告，但 UI 仍把「無廣告／ad-free」當作付費解鎖內容；這和隱私頁、App Store metadata 及產品政策不一致。改為只宣稱「完整詳解、完整紙娃娃樣式、最多五位學習者」，並確認沒有任何商店素材保留移除廣告的說法。
 - [ ] **取得每一題、圖片與素材的可商業發布權利。** 題庫含 AMC、AIME、IMC 等競賽來源。公開可查閱或附來源連結不等於可重製、翻譯、改寫或商業散布；逐來源保存授權、適用條款或以自製／已取得授權的題目替換。App Store Connect 的 Content Rights 聲明只能在此項完成後據實勾選。
 - [ ] **建立正式 IAP。** 在 App Store Connect 建立 non-consumable 產品 `com.benwu.mathspring.full_unlock`，名稱、描述與顯示內容須和 App 一致，並將它附加到首個版本送審。`ios/Runner/Products.storekit` 只是本機 StoreKit 測試設定，不會建立商店商品。
