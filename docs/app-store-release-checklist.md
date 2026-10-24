@@ -1,6 +1,6 @@
 # MathSpring App Store 送審與發布清單
 
-最後更新：2026-08-30。
+最後更新：2026-10-24。
 
 ## 現階段原則
 
@@ -17,19 +17,20 @@
 
 ## 發布驗收（必須全部完成）
 
-- [ ] `flutter analyze` 為 0 issues。
-- [ ] `flutter test` 全數通過。
+- [ ] `flutter analyze` 為 0 issues。（每次送審候選 build 都要重跑。）
+- [ ] `flutter test` 全數通過。（每次送審候選 build 都要重跑。）
 - [ ] 完成 [iPhone／iPad 發布前 QA](ios-release-qa.md) 的必測流程。
-- [ ] App 內的支援與隱私入口可開啟公開網址。
+- [x] 支援頁與隱私政策已公開：<https://benwu777.github.io/MathSpring/support/>、<https://benwu777.github.io/MathSpring/privacy/> 在 2026-10-24 回傳 HTTP 200。
+- [ ] 以 release archive 在實機驗證 App 內的支援與隱私入口可開啟上述公開網址。
 - [ ] 支援頁、隱私頁、App Store Connect 的 App Privacy 與 app 實際行為一致。
 - [ ] 截圖均為實際 app 畫面，且繁中、英文 metadata 已完成校對。
 
 ## 開發完成前
 
-- [ ] 修正 iOS 與 macOS 的正式 Bundle ID：目前皆為 `com.example.mathspring`。
+- [x] iOS 正式 Bundle ID 為 `com.benwu.mathspring`。
 - [ ] 將 app 顯示名稱、macOS copyright 與品牌文字改為正式資料。
 - [ ] 在 app 內提供易於找到的「隱私政策」與「支援」頁面或外部連結。
-- [ ] 建立公開、免登入可開啟的支援網址與隱私政策網址；可使用 GitHub Pages、Cloudflare Pages、Netlify、Vercel、Notion 或 Google Sites，不需要自建 server。
+- [x] 已建立公開、免登入可開啟的支援與隱私網址（GitHub Pages）。
 - [ ] 完成 iPhone、iPad 與 macOS 的真機 QA：首次開啟、題庫載入、四語系、答題、作答紀錄、離線狀態、旋轉與字級。
 - [ ] 針對所有使用者看得到的題目做最後內容抽查；確認題目、圖形、答案、選項與解法一致。
 - [ ] 清除 placeholder、測試用內容與無法使用的入口。
