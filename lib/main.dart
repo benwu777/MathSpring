@@ -5278,22 +5278,22 @@ class AppStrings {
         ja: 'フル版を解除済み',
       );
   String get fullUnlockSubtitle => _text(
-        zhHant: '完整詳解、無廣告、全套紙娃娃與最多五位角色。',
-        zhHans: '完整详解、无广告、全套纸娃娃与最多五位角色。',
-        en: 'Full solutions, ad-free learning, all avatar styles, and up to five learners.',
-        ja: '詳しい解説、広告なし、全アバタースタイル、学習者は最大5人。',
+        zhHant: '完整詳解、全套紙娃娃與最多五位角色。',
+        zhHans: '完整详解、全套纸娃娃与最多五位角色。',
+        en: 'Full solutions, all avatar styles, and up to five learners.',
+        ja: '詳しい解説、全アバタースタイル、学習者は最大5人。',
       );
   String get fullUnlockUnlockedSubtitle => _text(
-        zhHant: '完整詳解、無廣告、全套紙娃娃與最多五位角色已可使用。',
-        zhHans: '完整详解、无广告、全套纸娃娃与最多五位角色已可使用。',
-        en: 'Full solutions, ad-free learning, all avatar styles, and up to five learners are active.',
-        ja: '詳しい解説、広告なし、全アバタースタイル、最大5人の学習者を利用できます。',
+        zhHant: '完整詳解、全套紙娃娃與最多五位角色已可使用。',
+        zhHans: '完整详解、全套纸娃娃与最多五位角色已可使用。',
+        en: 'Full solutions, all avatar styles, and up to five learners are active.',
+        ja: '詳しい解説、全アバタースタイル、最大5人の学習者を利用できます。',
       );
   String get fullUnlockDescription => _text(
-        zhHant: '一次解鎖完整詳解、無廣告、全套紙娃娃樣式與最多五位學習者角色。',
-        zhHans: '一次解锁完整详解、无广告、全套纸娃娃样式与最多五位学习者角色。',
-        en: 'Unlock full solutions, ad-free learning, all avatar styles, and up to five learners with one purchase.',
-        ja: '1回の購入で、詳しい解説、広告なし、全アバタースタイル、最大5人の学習者を解除します。',
+        zhHant: '一次解鎖完整詳解、全套紙娃娃樣式與最多五位學習者角色。',
+        zhHans: '一次解锁完整详解、全套纸娃娃样式与最多五位学习者角色。',
+        en: 'Unlock full solutions, all avatar styles, and up to five learners with one purchase.',
+        ja: '1回の購入で、詳しい解説、全アバタースタイル、最大5人の学習者を解除します。',
       );
   String get unlockSolutionSteps => _text(
         zhHant: '解鎖完整詳解',

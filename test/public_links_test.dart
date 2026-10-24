@@ -48,4 +48,20 @@ void main() {
     expect(workflow, contains('path: docs/site'));
     expect(workflow, contains('actions/deploy-pages@v4'));
   });
+
+  test('full unlock only describes benefits available in the first release', () {
+    final String purchaseCopy = <String>[
+      File('lib/main.dart').readAsStringSync(),
+      File('ios/Runner/Products.storekit').readAsStringSync(),
+    ].join('\n');
+
+    expect(purchaseCopy, isNot(contains('無廣告')));
+    expect(purchaseCopy, isNot(contains('无广告')));
+    expect(purchaseCopy, isNot(contains('ad-free')));
+    expect(purchaseCopy, isNot(contains('広告なし')));
+    expect(purchaseCopy, isNot(contains('移除廣告')));
+    expect(purchaseCopy, contains('完整詳解'));
+    expect(purchaseCopy, contains('avatar styles'));
+    expect(purchaseCopy, contains('five learner'));
+  });
 }
