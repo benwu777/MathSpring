@@ -102,7 +102,7 @@ void main() {
     );
   }
 
-  Question createDemoQuestion() {
+  Question createDemoQuestion({List<String>? englishSolutionSteps}) {
     return Question.fromJson({
       'id': 'geometry_grade4_foundation_001',
       'topic': 'geometry',
@@ -126,12 +126,13 @@ void main() {
           '再觀察紅色 cos(x) 曲線的最高點。',
           '最高點位於 y = 1，對應的 x 為 0。',
         ],
-        'en': [
-          'Look at the highest point of the blue sin(x) curve.',
-          'Its peak is at y = 1, which occurs at x = π/2.',
-          'Then inspect the highest point of the red cos(x) curve.',
-          'Its peak is at y = 1, which occurs at x = 0.',
-        ],
+        'en': englishSolutionSteps ??
+            [
+              'Look at the highest point of the blue sin(x) curve.',
+              'Its peak is at y = 1, which occurs at x = π/2.',
+              'Then inspect the highest point of the red cos(x) curve.',
+              'Its peak is at y = 1, which occurs at x = 0.',
+            ],
       },
       'figure': {
         'type': 'custom',
@@ -190,7 +191,7 @@ void main() {
       ),
     );
 
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 300));
 
     expect(find.text('我的收藏'), findsWidgets);
     expect(find.text('從答題畫面收藏題目，它們會出現在這裡。'), findsOneWidget);
@@ -1498,7 +1499,7 @@ void main() {
       await Future<void>.delayed(const Duration(milliseconds: 50));
     });
     await tester.pump();
-    await tester.pump(const Duration(milliseconds: 300));
+    await tester.pumpAndSettle();
 
     expect(find.byKey(const ValueKey<String>('figure_shape_diagram')),
         findsOneWidget);
@@ -2420,8 +2421,9 @@ void main() {
 
   Future<void> pumpPracticeAndAnswer(
     WidgetTester tester,
-    AppServices services,
-  ) async {
+    AppServices services, {
+    Question? question,
+  }) async {
     final TestWidgetsFlutterBinding binding =
         TestWidgetsFlutterBinding.ensureInitialized();
     binding.platformDispatcher.localeTestValue = const Locale('en');
@@ -2446,7 +2448,7 @@ void main() {
             challengeTier: 'foundation',
             questionCount: 1,
           ),
-          initialQuestions: [createDemoQuestion()],
+          initialQuestions: [question ?? createDemoQuestion()],
         ),
       ),
     );
@@ -2480,6 +2482,41 @@ void main() {
 
     expect(find.text(firstStep), findsOneWidget);
     expect((await services.getFreeSolutionAllowance()).remaining, 2);
+  });
+
+  testWidgets('free practice reveal scrolls the first solution step into view',
+      (WidgetTester tester) async {
+    final AppServices services = createTestServices();
+    const String firstStep =
+        'Look at the highest point of the blue sin(x) curve.';
+
+    await pumpPracticeAndAnswer(
+      tester,
+      services,
+      question: createDemoQuestion(
+        englishSolutionSteps: <String>[
+          firstStep,
+          for (int index = 0; index < 80; index += 1)
+            'This extra explanation keeps the solution scrollable ($index).',
+        ],
+      ),
+    );
+    await tester.binding.setSurfaceSize(const Size(390, 700));
+    await tester.pumpAndSettle();
+
+    final Finder reveal =
+        find.byKey(const ValueKey<String>('use_free_solution'));
+    await tester.ensureVisible(reveal);
+    await tester.tap(reveal);
+    await tester.runAsync(() async {
+      await Future<void>.delayed(const Duration(milliseconds: 50));
+    });
+    await tester.pump();
+    await tester.pumpAndSettle();
+
+    final Rect stepBounds = tester.getRect(find.text(firstStep));
+    expect(stepBounds.top, greaterThanOrEqualTo(0));
+    expect(stepBounds.top, lessThanOrEqualTo(140));
   });
 
   testWidgets('free practice review explains when free solutions run out',

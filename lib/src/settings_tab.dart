@@ -152,16 +152,62 @@ class _SolutionStepsGate extends StatefulWidget {
 }
 
 class _SolutionStepsGateState extends State<_SolutionStepsGate> {
-  late Future<FreeSolutionAllowance> _allowance =
-      widget.services.getFreeSolutionAllowance();
+  FreeSolutionAllowance? _allowance;
+  final GlobalKey _stepsKey = GlobalKey();
+
+  @override
+  void initState() {
+    super.initState();
+    _loadAllowance();
+  }
+
+  @override
+  void didUpdateWidget(covariant _SolutionStepsGate oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.questionId != widget.questionId) {
+      _allowance = null;
+      _loadAllowance();
+    }
+  }
+
+  Future<void> _loadAllowance() async {
+    final FreeSolutionAllowance allowance =
+        await widget.services.getFreeSolutionAllowance();
+    if (!mounted) return;
+    setState(() => _allowance = allowance);
+  }
 
   Future<void> _useFreeSolution() async {
-    await widget.services.unlockFreeSolution(widget.questionId);
+    final bool unlocked =
+        await widget.services.unlockFreeSolution(widget.questionId);
     if (!mounted) return;
-    setState(() {
-      _allowance = widget.services.getFreeSolutionAllowance();
+    if (!unlocked) {
+      await _loadAllowance();
+      return;
+    }
+    final FreeSolutionAllowance allowance =
+        await widget.services.getFreeSolutionAllowance();
+    if (!mounted) return;
+    setState(() => _allowance = allowance);
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final BuildContext? stepsContext = _stepsKey.currentContext;
+      if (stepsContext == null) return;
+      Scrollable.ensureVisible(
+        stepsContext,
+        alignment: 0.1,
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.easeOutCubic,
+      );
     });
   }
+
+  Widget _visibleSteps() => Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          SizedBox(key: _stepsKey),
+          widget.steps,
+        ],
+      );
 
   @override
   Widget build(BuildContext context) {
@@ -169,42 +215,36 @@ class _SolutionStepsGateState extends State<_SolutionStepsGate> {
       return widget.steps;
     }
     final AppStrings strings = AppStrings.of(context);
-    return FutureBuilder<FreeSolutionAllowance>(
-      future: _allowance,
-      builder: (BuildContext context,
-          AsyncSnapshot<FreeSolutionAllowance> snapshot) {
-        final FreeSolutionAllowance? allowance = snapshot.data;
-        if (allowance == null) {
-          return const SizedBox.shrink();
-        }
-        if (allowance.isUnlocked(widget.questionId)) {
-          return widget.steps;
-        }
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            if (allowance.remaining > 0)
-              Align(
-                alignment: Alignment.centerLeft,
-                child: FilledButton.tonalIcon(
-                  key: const ValueKey<String>('use_free_solution'),
-                  onPressed: _useFreeSolution,
-                  icon: const Icon(Icons.lightbulb_outline),
-                  label: Text(strings.useFreeSolution(allowance.remaining)),
+    final FreeSolutionAllowance? allowance = _allowance;
+    if (allowance == null) {
+      return const SizedBox.shrink();
+    }
+    if (allowance.isUnlocked(widget.questionId)) {
+      return _visibleSteps();
+    }
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        if (allowance.remaining > 0)
+          Align(
+            alignment: Alignment.centerLeft,
+            child: FilledButton.tonalIcon(
+              key: const ValueKey<String>('use_free_solution'),
+              onPressed: _useFreeSolution,
+              icon: const Icon(Icons.lightbulb_outline),
+              label: Text(strings.useFreeSolution(allowance.remaining)),
+            ),
+          )
+        else
+          Text(
+            strings.freeSolutionsUsedUp(FreeSolutionAllowance.dailyLimit),
+            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                  color: AppVisualTokens.inkMuted,
                 ),
-              )
-            else
-              Text(
-                strings.freeSolutionsUsedUp(FreeSolutionAllowance.dailyLimit),
-                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      color: AppVisualTokens.inkMuted,
-                    ),
-              ),
-            const SizedBox(height: 8),
-            const _LockedSolutionSteps(),
-          ],
-        );
-      },
+          ),
+        const SizedBox(height: 8),
+        const _LockedSolutionSteps(),
+      ],
     );
   }
 }
