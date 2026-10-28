@@ -694,27 +694,49 @@ class QuizResultPage extends StatelessWidget {
         backgroundColor: Colors.white,
       ),
       body: ContentScrollView(
-        fill: true,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // 撐滿剩餘高度，畫面不會依內容長短留下大片空白
-            Expanded(
-              child: _SectionCard(
-                title: strings.quizResult,
-                subtitle: maxScore == null
-                    ? '${result.correctCount} / ${result.totalQuestions} ${strings.correctSuffix}'
-                    : strings.formalExamScore(earnedScore ?? 0, maxScore!),
-                child: _StatRow(
-                  leftValue: maxScore == null
+            _SectionCard(
+              title: strings.quizResult,
+              subtitle: maxScore == null
+                  ? '${result.correctCount} / ${result.totalQuestions} ${strings.correctSuffix}'
+                  : strings.formalExamScore(earnedScore ?? 0, maxScore!),
+              child: Builder(
+                builder: (BuildContext context) {
+                  final LayoutSpec layoutSpec = LayoutSpec.of(context);
+                  final String resultValue = maxScore == null
                       ? '${result.correctCount}'
-                      : '$earnedScore',
-                  leftLabel: maxScore == null
+                      : '$earnedScore';
+                  final String resultLabel = maxScore == null
                       ? strings.correctLabel
-                      : strings.totalScore,
-                  rightValue: _formatElapsed(result.elapsed),
-                  rightLabel: strings.elapsedLabel,
-                ),
+                      : strings.totalScore;
+                  return Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        resultValue,
+                        style: TextStyle(
+                          fontSize: layoutSpec.scaleText(28),
+                          fontWeight: FontWeight.w700,
+                          color: AppVisualTokens.primary,
+                        ),
+                      ),
+                      Text(
+                        resultLabel,
+                        style: Theme.of(context).textTheme.bodySmall,
+                      ),
+                      const SizedBox(height: 4),
+                      Text(
+                        '${strings.elapsedLabel}: ${_formatElapsed(result.elapsed)}',
+                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                              color: AppVisualTokens.inkMuted,
+                            ),
+                      ),
+                    ],
+                  );
+                },
               ),
             ),
             const SizedBox(height: 18),

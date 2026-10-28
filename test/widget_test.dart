@@ -2593,6 +2593,46 @@ void main() {
     );
   });
 
+  testWidgets('quiz result summary fits on a phone',
+      (WidgetTester tester) async {
+    final DateTime startedAt = DateTime.utc(2026, 10, 28, 9);
+    await tester.binding.setSurfaceSize(const Size(390, 700));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+
+    await tester.pumpWidget(
+      MaterialApp(
+        locale: const Locale('en'),
+        supportedLocales: AppStrings.supportedLocales,
+        localizationsDelegates: const [
+          GlobalMaterialLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+        ],
+        home: QuizResultPage(
+          services: createTestServices(),
+          result: QuizSessionResult(
+            records: [
+              QuizAnswerRecord(
+                question: createDemoQuestion(),
+                submittedAnswer: 'B',
+                isCorrect: true,
+                answeredAt: startedAt.add(const Duration(minutes: 2)),
+              ),
+            ],
+            startedAt: startedAt,
+            submittedAt: startedAt.add(const Duration(minutes: 2)),
+          ),
+        ),
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    expect(find.text('1'), findsOneWidget);
+    expect(find.text('Correct'), findsAtLeastNWidgets(1));
+    expect(find.text('Elapsed: 2:00'), findsOneWidget);
+    expect(tester.takeException(), isNull);
+  });
+
   test('session launch picks packs from the learner grade range only', () {
     const LearnerProfile learner = LearnerProfile(
       id: 'learner_allen',
