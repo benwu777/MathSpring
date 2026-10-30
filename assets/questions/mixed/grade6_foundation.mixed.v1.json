@@ -668,53 +668,41 @@
       "levelStage": "grade6",
       "challengeTier": "foundation",
       "prompt": {
-        "zh-Hant": "有四張雙面卡片，四張卡片的兩面分別寫著 0/1、2/3、4/5、5/6。每張卡片選一面後排成四位數，首位不能是 0。這樣能組成多少個不同的四位數？",
-        "zh-Hans": "有四张双面卡片，四张卡片的两面分别写着 0/1、2/3、4/5、5/6。每张卡片选一面后排成四位数，首位不能是 0。这样能组成多少个不同的四位数？",
-        "en": "There are four double-sided cards labeled 0/1, 2/3, 4/5, and 5/6. Choose one side from each card and arrange the four chosen digits into a four-digit number, with the first digit not allowed to be 0. How many different four-digit numbers can be formed?",
-        "ja": "4枚の両面カードがあり、それぞれの表裏には 0/1、2/3、4/5、5/6 が書かれています。各カードから1つの数字を選び、4つの数字を並べて4桁の数を作ります。ただし先頭は 0 にできません。異なる4桁の数は全部で何個作れますか。"
+        "zh-Hant": "桌上有三張卡片，每張正面、背面各寫一個數字：第一張是 0 和 7，第二張是 2 和 8，第三張是 8 和 9。小安把三張卡片排成一排，每張可以自由決定翻哪一面朝上，讀出一個三位數（開頭的數字不能是 0）。他最多能讀出多少個不同的三位數？",
+        "zh-Hans": "桌上有三张卡片，每张正面、背面各写一个数字：第一张是 0 和 7，第二张是 2 和 8，第三张是 8 和 9。小安把三张卡片排成一排，每张可以自由决定翻哪一面朝上，读出一个三位数（开头的数字不能是 0）。他最多能读出多少个不同的三位数？",
+        "en": "Three tiles lie on a table, each marked on front and back: 0 and 7, 2 and 8, 8 and 9. Ann lines them up in any order, flipping each as she likes, and reads a three-place value (no leading 0). How many different values can she read?",
+        "ja": "机の上に 3 枚のカードがあり、表と裏に数字が 1 つずつ書かれています。1 枚目は 0 と 7、2 枚目は 2 と 8、3 枚目は 8 と 9 です。小安さんは 3 枚を好きな順に 1 列に並べ、どの面を上にするかも自由に決めて、3 けたの数を読みます（先頭の数字は 0 にできません）。異なる 3 けたの数は最大で何個読めますか。"
       },
       "answer": {
-        "zh-Hant": "答案是 294。",
-        "zh-Hans": "答案是 294。",
-        "en": "The answer is 294.",
-        "ja": "答えは 294 です。"
+        "zh-Hant": "答案是 35。",
+        "zh-Hans": "答案是 35。",
+        "en": "The answer is 35.",
+        "ja": "答えは 35 です。"
       },
       "solutionSteps": {
         "zh-Hant": [
-          "若先不管首位不能是 0，也不處理重複 5 的情況，4 張卡片每張有 2 面，排列有 2⁴ × 4! = 384 種。",
-          "首位若是 0，剩下三張卡排列有 2³ × 3! = 48 種，必須扣掉，得到 384 − 48 = **336**。",
-          "但 336 還不是答案，因為**第三張卡與第四張卡都可能翻出 5**。當兩張卡同時翻出 5 時，四個數字裡有兩個一樣，把這兩個 5 對調並不會產生新的數，**同一個數被算了兩次**。",
-          "先數這種選面方式有幾組：第三張、第四張都取 5 是固定的，第一張有 2 種（0 或 1）、第二張有 2 種（2 或 3），共 **4 組**。",
-          "再看每一組被多算了幾個。若第一張取 1，四個數字是 1、2（或 3）、5、5：排法 4! = 24 種，但實際只有 4! ÷ 2! = 12 個不同的數，**多算 12 個**。這樣的組有 2 組（第二張取 2 或 3），共多算 24 個。",
-          "若第一張取 0，四個數字是 0、2（或 3）、5、5：扣掉開頭是 0 的之後，原本算了 24 − 3! = 18 種，實際只有 12 − 3!÷2! = 9 個不同的數，**多算 9 個**。這樣的組也有 2 組，共多算 18 個。",
-          "所以總共多算了 24 + 18 = **42 個**，真正不同的四位數有 336 − 42 = **294 個**。"
+          "先不管限制：三張卡片排順序有 3 × 2 × 1 = 6 種，每張再選一面有 2 × 2 × 2 = 8 種，共 6 × 8 = 48 種擺法。",
+          "開頭是 0 的擺法：「0/7」卡放第一位且露出 0，其他兩張排列 2 種、各選一面 4 種，共 8 種。去掉後剩 48 − 8 = 40 種擺法。",
+          "但「2/8」和「8/9」兩張卡都露出 8 時，把這兩張對調得到的是同一個數，被算了兩次。這種擺法：「0/7」卡的位置 3 種 × 露出的面 2 種 × 兩張 8 的順序 2 種 = 12 種，去掉開頭是 0 的 2 種，剩 10 種擺法，只代表 5 個不同的數。",
+          "這 5 個數是 788、878、887、808、880，所以不同的三位數有 40 − 5 = 35 個。"
         ],
         "zh-Hans": [
-          "若先不管首位不能是 0，也不处理重复 5 的情况，4 张卡片每张有 2 面，排列有 2⁴ × 4! = 384 种。",
-          "首位若是 0，剩下三张卡排列有 2³ × 3! = 48 种，必须扣掉，得到 384 − 48 = **336**。",
-          "但 336 还不是答案，因为**第三张卡与第四张卡都可能翻出 5**。当两张卡同时翻出 5 时，四个数字里有两个一样，把这两个 5 对调并不会产生新的数，**同一个数被算了两次**。",
-          "先数这种选面方式有几组：第三张、第四张都取 5 是固定的，第一张有 2 种（0 或 1）、第二张有 2 种（2 或 3），共 **4 组**。",
-          "再看每一组被多算了几个。若第一张取 1，四个数字是 1、2（或 3）、5、5：排法 4! = 24 种，但实际只有 4! ÷ 2! = 12 个不同的数，**多算 12 个**。这样的组有 2 组（第二张取 2 或 3），共多算 24 个。",
-          "若第一张取 0，四个数字是 0、2（或 3）、5、5：扣掉开头是 0 的之后，原本算了 24 − 3! = 18 种，实际只有 12 − 3!÷2! = 9 个不同的数，**多算 9 个**。这样的组也有 2 组，共多算 18 个。",
-          "所以总共多算了 24 + 18 = **42 个**，真正不同的四位数有 336 − 42 = **294 个**。"
+          "先不管限制：三张卡片排顺序有 3 × 2 × 1 = 6 种，每张再选一面有 2 × 2 × 2 = 8 种，共 6 × 8 = 48 种摆法。",
+          "开头是 0 的摆法：“0/7”卡放第一位且露出 0，其他两张排列 2 种、各选一面 4 种，共 8 种。去掉后剩 48 − 8 = 40 种摆法。",
+          "但“2/8”和“8/9”两张卡都露出 8 时，把这两张对调得到的是同一个数，被算了两次。这种摆法：“0/7”卡的位置 3 种 × 露出的面 2 种 × 两张 8 的顺序 2 种 = 12 种，去掉开头是 0 的 2 种，剩 10 种摆法，只代表 5 个不同的数。",
+          "这 5 个数是 788、878、887、808、880，所以不同的三位数有 40 − 5 = 35 个。"
         ],
         "en": [
-          "Ignore for a moment the leading-zero restriction and the repeated digit 5. Then there are 2⁴ × 4! = 384 arrangements.",
-          "If the first digit is 0, the remaining three cards can be arranged in 2³ × 3! = 48 ways, so removing those leaves 384 − 48 = 336.",
-          "But 336 is not yet the answer, because the third and fourth cards can both show 5. When they do, two of the four digits are equal, swapping the two 5s produces no new number, and the same number has been counted twice.",
-          "Count how many face choices do this: the third and fourth cards are fixed at 5, the first card has 2 options (0 or 1) and the second has 2 (2 or 3), giving 4 such choices.",
-          "Now the overcount in each. With 1 on the first card the digits are 1, 2 (or 3), 5, 5: the 4! = 24 orderings give only 4! ÷ 2! = 12 distinct numbers, an overcount of 12. Two such choices give 24.",
-          "With 0 on the first card the digits are 0, 2 (or 3), 5, 5: after dropping the leading zeros, 24 − 3! = 18 orderings were counted but only 12 − 3!÷2! = 9 distinct numbers exist, an overcount of 9. Two such choices give 18.",
-          "The total overcount is 24 + 18 = 42, so the number of distinct four-digit numbers is 336 − 42 = 294."
+          "Ignoring the rules first: the cards can be ordered in 3 × 2 × 1 = 6 ways and faces chosen in 2 × 2 × 2 = 8 ways, giving 6 × 8 = 48 layouts.",
+          "Layouts starting with 0: the 0/7 card is first showing 0, the other two cards can be ordered 2 ways with 4 face choices, for 8 layouts. Removing them leaves 48 − 8 = 40.",
+          "But when the 2/8 and 8/9 cards both show 8, swapping them gives the same number, which was counted twice. Such layouts: 3 positions for the 0/7 card × 2 faces × 2 orders of the two 8s = 12, minus the 2 starting with 0, leaves 10 layouts that represent only 5 different numbers.",
+          "Those 5 numbers are 788, 878, 887, 808 and 880, so there are 40 − 5 = 35 different three-digit numbers."
         ],
         "ja": [
-          "まず、先頭が 0 になれない条件と、数字 5 の重複を一旦無視すると、4枚のカードにはそれぞれ2通りあり、並べ方は 2⁴ × 4! = 384 通りです。",
-          "先頭が 0 になる場合は、残り3枚の並べ方が 2³ × 3! = 48 通りあるので、これを引いて 384 − 48 = **336** です。",
-          "しかし 336 はまだ答えではありません。**3枚目と4枚目のカードはどちらも 5 を出しうる**からです。両方が 5 のとき 4つの数字のうち2つが同じになり、2つの 5 を入れ替えても新しい数にはならず、**同じ数を2回数えて**います。",
-          "その面の選び方が何組あるかを数えます：3枚目・4枚目は 5 で固定、1枚目は 2 通り（0 か 1）、2枚目は 2 通り（2 か 3）で、計 **4 組**です。",
-          "各組で何個多く数えたかを見ます。1枚目が 1 のとき、数字は 1、2（または 3）、5、5：並べ方 4! = 24 通りに対し、異なる数は 4! ÷ 2! = 12 個だけで、**12 個多い**。この組は2組（2枚目が 2 か 3）なので計 24 個。",
-          "1枚目が 0 のとき、数字は 0、2（または 3）、5、5：先頭が 0 のものを除くと 24 − 3! = 18 通り数えていますが、実際の異なる数は 12 − 3!÷2! = 9 個で、**9 個多い**。この組も2組なので計 18 個。",
-          "多く数えた分は合計 24 + 18 = **42 個**なので、異なる4けたの数は 336 − 42 = **294 個**です。"
+          "まず条件を考えずに数えると、カードの並べ方が 3 × 2 × 1 = 6 通り、面の選び方が 2 × 2 × 2 = 8 通りで、6 × 8 = 48 通りです。",
+          "先頭が 0 になるのは、0/7 のカードが先頭で 0 を出す場合で、残り 2 枚の並べ方 2 通り × 面の選び方 4 通りの 8 通りです。除くと 48 − 8 = 40 通りです。",
+          "ただし 2/8 と 8/9 のカードがどちらも 8 を出すときは、2 枚を入れかえても同じ数になり、2 回数えています。このような並べ方は、0/7 のカードの位置 3 通り × 面 2 通り × 8 の 2 枚の順 2 通り = 12 通りで、先頭が 0 の 2 通りを除くと 10 通り、これは 5 個の数にしかなりません。",
+          "その 5 個は 788、878、887、808、880 なので、異なる 3 けたの数は 40 − 5 = 35 個です。"
         ]
       },
       "figure": {
@@ -724,43 +712,40 @@
       },
       "answerMode": "multiple_choice",
       "source": {
-        "type": "official_reference",
-        "contest": "第二十一屆國際數學競賽台灣區複賽",
-        "year": "2025",
-        "division": "國小六年級",
-        "problemNumber": "選擇 8",
-        "displayText": "第二十一屆國際數學競賽台灣區複賽，國小六年級，選擇第 8 題",
-        "sourceUrl": "https://imcct.net/UserFiles/files/20250415095625_0.pdf"
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "雙面卡片組數，同時處理首位不為 0 與重複數字造成重複計數的題型",
+        "notes": "設計依據：兩張卡都有 8，對調會產生相同的數，要扣掉重複；誘答 40 是沒扣重複、48 是連首位 0 都沒扣，30 是把重複的 10 種擺法整個扣掉。"
       },
       "options": {
         "A": {
-          "zh-Hant": "266",
-          "zh-Hans": "266",
-          "en": "266",
-          "ja": "266"
+          "zh-Hant": "35",
+          "zh-Hans": "35",
+          "en": "35",
+          "ja": "35"
         },
         "B": {
-          "zh-Hant": "274",
-          "zh-Hans": "274",
-          "en": "274",
-          "ja": "274"
+          "zh-Hant": "40",
+          "zh-Hans": "40",
+          "en": "40",
+          "ja": "40"
         },
         "C": {
-          "zh-Hant": "286",
-          "zh-Hans": "286",
-          "en": "286",
-          "ja": "286"
+          "zh-Hant": "48",
+          "zh-Hans": "48",
+          "en": "48",
+          "ja": "48"
         },
         "D": {
-          "zh-Hant": "294",
-          "zh-Hans": "294",
-          "en": "294",
-          "ja": "294"
+          "zh-Hant": "30",
+          "zh-Hans": "30",
+          "en": "30",
+          "ja": "30"
         }
       },
       "correctAnswer": {
         "type": "choice",
-        "value": "D"
+        "value": "A"
       }
     },
     {

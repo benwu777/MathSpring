@@ -938,7 +938,7 @@ void main() {
     }
   });
 
-  test('grade6 geometry official figure questions expose direct-drawing kinds',
+  test('grade6 geometry circle questions expose direct-drawing kinds',
       () async {
     TestWidgetsFlutterBinding.ensureInitialized();
 
@@ -955,16 +955,14 @@ void main() {
     final Question circleRegionQuestion =
         findQuestion(geometryPack, 'geometry_grade6_foundation_014');
 
-    // 2026-09-04 從 shape_diagram 改成 geometry_scene：題目講的是圓內兩條互相
-    // 垂直的直徑連成的內接正方形，shape_diagram 只畫得出一個空圓，中間的「49」
-    // 反而像在說圓面積是 49。
+    // 圓內接正方形要畫出構造，shape_diagram 只畫得出一個空圓（2026-09-04 改用
+    // geometry_scene）。2026-10-30 兩題都已改寫成自製題，圖形種類維持不變。
     expect(circleSquareQuestion.figure.kind, 'geometry_scene');
-    expect(circleSquareQuestion.source?.type, 'official_reference');
     expect(circleRegionQuestion.figure.kind, 'circle_quadrants_point');
-    expect(circleRegionQuestion.correctAnswer.value, '23');
+    expect(circleRegionQuestion.correctAnswer.value, '18');
     expect(
       circleRegionQuestion.localizedPrompt('zh-Hant'),
-      contains('三部分的面積為 12、15、20'),
+      contains('右上那塊（P、A、B 之間）面積是 30'),
     );
   });
 
@@ -1359,171 +1357,6 @@ void main() {
         reason: '${entry.key} should contain at least ${entry.value} arithmetic questions',
       );
     }
-  });
-
-  test('grade4 packs include the first official IMC 2015 preliminary batch',
-      () async {
-    TestWidgetsFlutterBinding.ensureInitialized();
-
-    final BundledQuestionBankRepository repository = BundledQuestionBankRepository();
-    final QuestionBank arithmeticPack = await repository.loadPack(
-      'assets/questions/arithmetic/grade4_foundation.arithmetic.v1.json',
-    );
-
-    Question findQuestion(QuestionBank pack, String id) =>
-        pack.questions.firstWhere((Question question) => question.id == id);
-
-    final Question arithmeticQuestion = findQuestion(
-      arithmeticPack,
-      'arithmetic_grade4_foundation_051',
-    );
-    final Question arithmeticQuestion2 = findQuestion(
-      arithmeticPack,
-      'arithmetic_grade4_foundation_071',
-    );
-
-    expect(arithmeticQuestion.source?.type, 'official_reference');
-    expect(arithmeticQuestion.source?.problemNumber, '選擇 1');
-    expect(arithmeticQuestion2.source?.problemNumber, '選擇 25');
-    expect(arithmeticQuestion.source?.year, '2015');
-  });
-
-  test('grade5 packs include the first official IMC 2015 preliminary batch',
-      () async {
-    TestWidgetsFlutterBinding.ensureInitialized();
-
-    final BundledQuestionBankRepository repository = BundledQuestionBankRepository();
-    final QuestionBank arithmeticPack = await repository.loadPack(
-      'assets/questions/arithmetic/grade5_foundation.arithmetic.v1.json',
-    );
-    final QuestionBank logicPack = await repository.loadPack(
-      'assets/questions/logic/grade5_foundation.logic.v1.json',
-    );
-
-    Question findQuestion(QuestionBank pack, String id) =>
-        pack.questions.firstWhere((Question question) => question.id == id);
-
-    final Question arithmeticQuestion = findQuestion(
-      arithmeticPack,
-      'arithmetic_grade5_foundation_051',
-    );
-    final Question arithmeticQuestion2 = findQuestion(
-      arithmeticPack,
-      'arithmetic_grade5_foundation_062',
-    );
-    final Question logicQuestion = findQuestion(
-      logicPack,
-      'logic_grade5_foundation_041',
-    );
-
-    expect(arithmeticQuestion.source?.type, 'official_reference');
-    expect(arithmeticQuestion.source?.problemNumber, '選擇 1');
-    // 062 原本是 IMC 2015 選擇 21，與 logic_grade6_foundation_047（六年級卷同一題）
-    // 逐字重複，已改寫成不同的鴿籠題，只保留六年級那份官方題。
-    expect(arithmeticQuestion2.source?.type, 'rewritten_olympiad_style');
-    expect(
-      arithmeticQuestion2.localizedPrompt('zh-Hant'),
-      isNot(contains('生日')),
-    );
-    expect(logicQuestion.source?.type, 'official_reference');
-    expect(logicQuestion.source?.problemNumber, '選擇 24');
-    expect(logicQuestion.source?.year, '2015');
-  });
-
-  test('grade6 packs include the next official IMC 2015 preliminary batch',
-      () async {
-    TestWidgetsFlutterBinding.ensureInitialized();
-
-    final BundledQuestionBankRepository repository = BundledQuestionBankRepository();
-    final QuestionBank arithmeticPack = await repository.loadPack(
-      'assets/questions/arithmetic/grade6_foundation.arithmetic.v1.json',
-    );
-    final QuestionBank logicPack = await repository.loadPack(
-      'assets/questions/logic/grade6_foundation.logic.v1.json',
-    );
-
-    Question findQuestion(QuestionBank pack, String id) =>
-        pack.questions.firstWhere((Question question) => question.id == id);
-
-    final Question arithmeticQuestion = findQuestion(
-      arithmeticPack,
-      'arithmetic_grade6_foundation_055',
-    );
-    final Question arithmeticQuestion2 = findQuestion(
-      arithmeticPack,
-      'arithmetic_grade6_foundation_061',
-    );
-    final Question logicQuestion = findQuestion(
-      logicPack,
-      'logic_grade6_foundation_045',
-    );
-
-    expect(arithmeticQuestion.source?.type, 'official_reference');
-    expect(arithmeticQuestion.source?.problemNumber, '選擇 5');
-    expect(arithmeticQuestion2.source?.problemNumber, '選擇 20');
-    expect(logicQuestion.source?.type, 'official_reference');
-    expect(logicQuestion.source?.problemNumber, '選擇 3');
-    expect(logicQuestion.source?.year, '2015');
-  });
-
-  test('grade6 packs include the follow-up official IMC 2015 preliminary batch',
-      () async {
-    TestWidgetsFlutterBinding.ensureInitialized();
-
-    final BundledQuestionBankRepository repository = BundledQuestionBankRepository();
-    final QuestionBank arithmeticPack = await repository.loadPack(
-      'assets/questions/arithmetic/grade6_foundation.arithmetic.v1.json',
-    );
-    final QuestionBank logicPack = await repository.loadPack(
-      'assets/questions/logic/grade6_foundation.logic.v1.json',
-    );
-
-    Question findQuestion(QuestionBank pack, String id) =>
-        pack.questions.firstWhere((Question question) => question.id == id);
-
-    final Question arithmeticQuestion = findQuestion(
-      arithmeticPack,
-      'arithmetic_grade6_foundation_062',
-    );
-    final Question arithmeticQuestion2 = findQuestion(
-      arithmeticPack,
-      'arithmetic_grade6_foundation_063',
-    );
-    final Question logicQuestion = findQuestion(
-      logicPack,
-      'logic_grade6_foundation_047',
-    );
-    final Question logicQuestion2 = findQuestion(
-      logicPack,
-      'logic_grade6_foundation_048',
-    );
-
-    expect(arithmeticQuestion.source?.type, 'official_reference');
-    expect(arithmeticQuestion.source?.problemNumber, '選擇 1');
-    expect(arithmeticQuestion2.source?.problemNumber, '選擇 22');
-    expect(logicQuestion.source?.problemNumber, '選擇 21');
-    expect(logicQuestion2.source?.problemNumber, '選擇 24');
-    expect(logicQuestion2.source?.year, '2015');
-  });
-
-  test('grade6 arithmetic pack includes official IMC 2015 calculation input question',
-      () async {
-    TestWidgetsFlutterBinding.ensureInitialized();
-
-    final BundledQuestionBankRepository repository = BundledQuestionBankRepository();
-    final QuestionBank arithmeticPack = await repository.loadPack(
-      'assets/questions/arithmetic/grade6_foundation.arithmetic.v1.json',
-    );
-
-    final Question question = arithmeticPack.questions.firstWhere(
-      (Question item) => item.id == 'arithmetic_grade6_foundation_064',
-    );
-
-    expect(question.source?.type, 'official_reference');
-    expect(question.source?.problemNumber, '計算 1');
-    expect(question.answerMode, AnswerMode.integerInput);
-    expect(question.correctAnswer.type, 'integer');
-    expect(question.correctAnswer.value, '145');
   });
 
   test('grade7 packs load with olympiad taxonomy metadata', () async {
