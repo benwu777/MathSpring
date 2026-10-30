@@ -128,7 +128,7 @@ class _QuestionSourceText extends StatelessWidget {
   Widget build(BuildContext context) {
     final LayoutSpec layoutSpec = LayoutSpec.of(context);
     return Text(
-      'Source: $text',
+      '${AppStrings.of(context).questionSourcePrefix}$text',
       style: Theme.of(context).textTheme.bodySmall?.copyWith(
             fontSize: layoutSpec.scaleText(12),
             height: 1.5,

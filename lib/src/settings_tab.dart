@@ -99,9 +99,9 @@ class _FullUnlockSection extends StatelessWidget {
             ? const Icon(Icons.verified_rounded, color: AppVisualTokens.brand)
             : TextButton(
                 key: const ValueKey<String>('open_full_unlock'),
-                onPressed: state.status == MonetizationStatus.unavailable
-                    ? null
-                    : () => _showPaywall(context),
+                // Stays tappable without a product so the sheet's restore
+                // action is always reachable.
+                onPressed: () => _showPaywall(context),
                 child:
                     Text(state.product?.price ?? strings.purchaseUnavailable),
               ),
@@ -272,23 +272,29 @@ class _FullUnlockSheet extends StatelessWidget {
               Text(strings.fullUnlockDescription),
               const SizedBox(height: 20),
               if (state.errorMessage != null) ...[
-                Text(state.errorMessage!,
+                Text(strings.purchaseFailed,
                     style: const TextStyle(color: Colors.red)),
+                const SizedBox(height: 12),
+              ],
+              if (state.restoreFoundNothing) ...[
+                Text(strings.nothingToRestore),
                 const SizedBox(height: 12),
               ],
               if (state.hasFullUnlock)
                 Text(strings.fullUnlockAlreadyPurchased)
-              else if (state.product == null)
-                Text(strings.fullUnlockProductUnavailable)
               else ...[
-                FilledButton(
-                  key: const ValueKey<String>('purchase_full_unlock'),
-                  onPressed: state.status == MonetizationStatus.purchasing ||
-                          state.status == MonetizationStatus.restoring
-                      ? null
-                      : monetization.purchaseFullUnlock,
-                  child: Text(strings.purchaseFullUnlock(state.product!.price)),
-                ),
+                if (state.product == null)
+                  Text(strings.fullUnlockProductUnavailable)
+                else
+                  FilledButton(
+                    key: const ValueKey<String>('purchase_full_unlock'),
+                    onPressed: state.status == MonetizationStatus.purchasing ||
+                            state.status == MonetizationStatus.restoring
+                        ? null
+                        : monetization.purchaseFullUnlock,
+                    child:
+                        Text(strings.purchaseFullUnlock(state.product!.price)),
+                  ),
                 const SizedBox(height: 8),
                 TextButton(
                   key: const ValueKey<String>('restore_purchases'),

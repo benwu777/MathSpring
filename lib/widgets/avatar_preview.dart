@@ -113,8 +113,6 @@ class AvatarPreview extends StatelessWidget {
     if (hairTint == null) {
       return layer;
     }
-    debugPrint('[hair-color] render ${isBack ? 'back' : 'front'} asset=$asset '
-        'tint=${hairTint.toARGB32().toRadixString(16)}');
     return ColorFiltered(
       key: ValueKey<String>(
         isBack ? 'avatar_hair_back_tint' : 'avatar_hair_front_tint',

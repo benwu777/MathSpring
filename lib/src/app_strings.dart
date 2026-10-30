@@ -161,6 +161,24 @@ class AppStrings {
         en: 'Unlock for $price',
         ja: '$price で解除',
       );
+  String get purchaseFailed => _text(
+        zhHant: '購買沒有完成，請稍後再試。',
+        zhHans: '购买没有完成，请稍后再试。',
+        en: 'The purchase could not be completed. Please try again later.',
+        ja: '購入を完了できませんでした。しばらくしてからもう一度お試しください。',
+      );
+  String get nothingToRestore => _text(
+        zhHant: '此 Apple 帳號沒有可回復的購買紀錄。',
+        zhHans: '此 Apple 账户没有可恢复的购买记录。',
+        en: 'No previous purchase was found for this Apple Account.',
+        ja: 'この Apple Account に復元できる購入はありません。',
+      );
+  String get questionSourcePrefix => _text(
+        zhHant: '出處：',
+        zhHans: '出处：',
+        en: 'Source: ',
+        ja: '出典：',
+      );
   String get restorePurchases => _text(
         zhHant: '回復購買',
         zhHans: '恢复购买',

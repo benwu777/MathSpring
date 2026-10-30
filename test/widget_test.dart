@@ -15,6 +15,7 @@ import 'package:mathspring/models/session_answer_record.dart';
 import 'package:mathspring/services/session_launch_plan_builder.dart';
 import 'package:mathspring/services/formal_exam_preset.dart';
 import 'package:mathspring/services/monetization_service.dart';
+import 'package:mathspring/services/storekit_monetization_service.dart';
 import 'package:mathspring/widgets/avatar_preview.dart';
 
 void main() {
@@ -3663,6 +3664,138 @@ void main() {
         findsOneWidget);
   });
 
+  Future<void> openFullUnlockSheet(
+    WidgetTester tester,
+    MonetizationService monetization,
+  ) async {
+    await tester.pumpWidget(MathSpringApp(
+      services: createTestServices(),
+      monetizationService: monetization,
+    ));
+    await tester.pumpAndSettle();
+    await tester.tap(find.byIcon(Icons.settings_outlined));
+    await tester.pumpAndSettle();
+    final Finder fullUnlock =
+        find.byKey(const ValueKey<String>('open_full_unlock'));
+    await tester.ensureVisible(fullUnlock);
+    await tester.tap(fullUnlock);
+    await tester.pumpAndSettle();
+  }
+
+  testWidgets('restore stays reachable when the product cannot be loaded',
+      (tester) async {
+    final StoreKitMonetizationService monetization =
+        StoreKitMonetizationService(
+      gateway: _ScriptedStorefrontGateway(returnNoProducts: true),
+    );
+
+    await openFullUnlockSheet(tester, monetization);
+
+    expect(
+        find.text('The purchase product cannot be loaded right now. '
+            'Please try again later.'),
+        findsOneWidget);
+    expect(find.byKey(const ValueKey<String>('purchase_full_unlock')),
+        findsNothing);
+    expect(find.byKey(const ValueKey<String>('restore_purchases')),
+        findsOneWidget);
+  });
+
+  testWidgets('a failed purchase shows a friendly message, not the raw error',
+      (tester) async {
+    final StoreKitMonetizationService monetization =
+        StoreKitMonetizationService(
+      gateway: _ScriptedStorefrontGateway(throwOnPurchase: true),
+    );
+    await openFullUnlockSheet(tester, monetization);
+
+    await tester
+        .tap(find.byKey(const ValueKey<String>('purchase_full_unlock')));
+    await tester.pumpAndSettle();
+
+    expect(find.textContaining('Bad state'), findsNothing);
+    expect(
+      find.text('The purchase could not be completed. Please try again later.'),
+      findsOneWidget,
+    );
+  });
+
+  testWidgets('restore without a previous purchase tells the user',
+      (tester) async {
+    final StoreKitMonetizationService monetization =
+        StoreKitMonetizationService(gateway: _ScriptedStorefrontGateway());
+    await openFullUnlockSheet(tester, monetization);
+
+    await tester.tap(find.byKey(const ValueKey<String>('restore_purchases')));
+    await tester.pumpAndSettle();
+
+    expect(
+      find.text('No previous purchase was found for this Apple Account.'),
+      findsOneWidget,
+    );
+  });
+
+  testWidgets('question source label follows the app language',
+      (WidgetTester tester) async {
+    final AppServices services = createTestServices();
+    const String packPath =
+        'assets/questions/algebra/grade10_foundation.algebra.v1.json';
+    late final Question question;
+    await tester.runAsync(() async {
+      final QuestionBank pack =
+          await BundledQuestionBankRepository().loadPack(packPath);
+      question = pack.questions
+          .firstWhere((Question q) => q.id == 'algebra_grade10_foundation_001');
+    });
+
+    await tester.pumpWidget(
+      MaterialApp(
+        locale: const Locale('zh', 'Hant'),
+        supportedLocales: AppStrings.supportedLocales,
+        localizationsDelegates: const [
+          GlobalMaterialLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+        ],
+        home: PracticeSessionPage(
+          services: services,
+          pack: const BundledQuestionPackInfo(
+            path: packPath,
+            topic: '代數',
+            topicCode: 'algebra',
+            levelStage: 'grade10',
+            challengeTier: 'foundation',
+            questionCount: 1,
+          ),
+          initialQuestions: <Question>[question],
+        ),
+      ),
+    );
+    await tester.runAsync(() async {
+      await Future<void>.delayed(const Duration(milliseconds: 50));
+    });
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 300));
+
+    expect(find.textContaining('出處：IMC Taiwan 2026'), findsOneWidget);
+    expect(find.textContaining('Source:'), findsNothing);
+  });
+
+  test('purchase feedback strings cover every supported locale', () {
+    for (final Locale locale in const <Locale>[
+      Locale('zh', 'TW'),
+      Locale('zh', 'CN'),
+      Locale('en'),
+      Locale('ja'),
+    ]) {
+      final AppStrings strings = AppStrings(locale);
+      expect(strings.purchaseFailed, isNotEmpty);
+      expect(strings.nothingToRestore, isNotEmpty);
+    }
+    expect(AppStrings(const Locale('zh', 'TW')).questionSourcePrefix, '出處：');
+    expect(AppStrings(const Locale('en')).questionSourcePrefix, 'Source: ');
+  });
+
   testWidgets('app uses the compact indigo and teal learning-workspace theme',
       (WidgetTester tester) async {
     await tester.pumpWidget(MathSpringApp(services: createTestServices()));
@@ -3706,4 +3839,48 @@ void main() {
       AppVisualTokens.primary,
     );
   });
+}
+
+// StoreKit 只能在實機或模擬器的原生層執行，flutter test 叫不到，
+// 所以只替換最外層的 StorefrontGateway；購買狀態機與畫面都是真的。
+class _ScriptedStorefrontGateway implements StorefrontGateway {
+  _ScriptedStorefrontGateway({
+    this.returnNoProducts = false,
+    this.throwOnPurchase = false,
+  });
+
+  final bool returnNoProducts;
+  final bool throwOnPurchase;
+
+  @override
+  Stream<StorePurchaseEvent> get purchaseUpdates =>
+      const Stream<StorePurchaseEvent>.empty();
+
+  @override
+  Future<bool> isAvailable() async => true;
+
+  @override
+  Future<List<StorefrontProduct>> loadProducts(Set<String> productIds) async =>
+      returnNoProducts
+          ? const <StorefrontProduct>[]
+          : const <StorefrontProduct>[
+              StorefrontProduct(
+                id: 'com.benwu.mathspring.full_unlock',
+                title: 'MathSpring Full Unlock',
+                price: r'$1.99',
+              ),
+            ];
+
+  @override
+  Future<void> purchase(String productId) async {
+    if (throwOnPurchase) {
+      throw StateError('Product $productId is not loaded.');
+    }
+  }
+
+  @override
+  Future<void> restore() async {}
+
+  @override
+  Future<void> complete(String transactionId) async {}
 }
