@@ -480,15 +480,109 @@ class AppStrings {
         ja: '解答画面で保存した問題がここに表示されます。',
       );
   String get addCollection => _text(
-      zhHant: '新增書籤', zhHans: '新增书签', en: 'Add collection', ja: 'コレクションを追加');
+      zhHant: '新增分類', zhHans: '新增分类', en: 'Add collection', ja: 'コレクションを追加');
   String get organizeFavorite => _text(
-        zhHant: '整理收藏',
-        zhHans: '整理收藏',
-        en: 'Organize favorite',
-        ja: 'お気に入りに分類',
+        zhHant: '調整所屬分類',
+        zhHans: '调整所属分类',
+        en: 'Choose collections',
+        ja: 'コレクションを選ぶ',
       );
   String get collectionName => _text(
-      zhHant: '書籤名稱', zhHans: '书签名称', en: 'Collection name', ja: 'コレクション名');
+      zhHant: '分類名稱', zhHans: '分类名称', en: 'Collection name', ja: 'コレクション名');
+  String get manageCollections => _text(
+      zhHant: '管理分類',
+      zhHans: '管理分类',
+      en: 'Manage collections',
+      ja: 'コレクションを管理');
+  String get editCollection => _text(
+      zhHant: '編輯分類', zhHans: '编辑分类', en: 'Edit collection', ja: 'コレクションを編集');
+  String get deleteCollection => _text(
+      zhHant: '刪除分類', zhHans: '删除分类', en: 'Delete collection', ja: 'コレクションを削除');
+  String deleteCollectionConfirm(String name) => _text(
+        zhHant: '要刪除「$name」嗎？題目仍會保留在全部收藏。',
+        zhHans: '要删除「$name」吗？题目仍会保留在全部收藏。',
+        en: 'Delete "$name"? Its questions stay in All favorites.',
+        ja: '「$name」を削除しますか？問題はすべてのお気に入りに残ります。',
+      );
+  String get deleteLabel =>
+      _text(zhHant: '刪除', zhHans: '删除', en: 'Delete', ja: '削除');
+  String get fixedCollection =>
+      _text(zhHant: '固定', zhHans: '固定', en: 'Fixed', ja: '固定');
+  String favoriteQuestionCount(int count) => _text(
+        zhHant: '$count 題',
+        zhHans: '$count 题',
+        en: count == 1 ? '1 question' : '$count questions',
+        ja: '$count 問',
+      );
+  String collectionLimitReached(int max) => _text(
+        zhHant: '最多 $max 個自訂分類',
+        zhHans: '最多 $max 个自定义分类',
+        en: 'Up to $max custom collections',
+        ja: 'カスタムコレクションは最大 $max 個',
+      );
+  String get collectionColor =>
+      _text(zhHant: '顏色', zhHans: '颜色', en: 'Color', ja: '色');
+  String collectionNameError(FavoriteCollectionNameProblem problem) =>
+      switch (problem) {
+        FavoriteCollectionNameProblem.empty => _text(
+            zhHant: '請輸入分類名稱',
+            zhHans: '请输入分类名称',
+            en: 'Enter a collection name',
+            ja: 'コレクション名を入力してください'),
+        FavoriteCollectionNameProblem.tooLong => _text(
+            zhHant: '名稱最多 $maxFavoriteCollectionNameLength 字',
+            zhHans: '名称最多 $maxFavoriteCollectionNameLength 字',
+            en: 'Use at most $maxFavoriteCollectionNameLength characters',
+            ja: '名前は $maxFavoriteCollectionNameLength 文字以内です'),
+        FavoriteCollectionNameProblem.duplicate => _text(
+            zhHant: '已經有同名的分類',
+            zhHans: '已经有同名的分类',
+            en: 'A collection with this name already exists',
+            ja: '同じ名前のコレクションがあります'),
+      };
+  String collectionColorName(String key) => switch (key) {
+        'sage' => _text(zhHant: '灰綠', zhHans: '灰绿', en: 'Sage', ja: 'セージ'),
+        'teal' => _text(zhHant: '青綠', zhHans: '青绿', en: 'Teal', ja: 'ティール'),
+        'sky' => _text(zhHant: '天藍', zhHans: '天蓝', en: 'Sky', ja: 'スカイ'),
+        'lavender' =>
+          _text(zhHant: '薰衣草紫', zhHans: '薰衣草紫', en: 'Lavender', ja: 'ラベンダー'),
+        'rose' => _text(zhHant: '玫瑰', zhHans: '玫瑰', en: 'Rose', ja: 'ローズ'),
+        'apricot' =>
+          _text(zhHant: '杏橘', zhHans: '杏橘', en: 'Apricot', ja: 'アプリコット'),
+        'sand' => _text(zhHant: '沙黃', zhHans: '沙黄', en: 'Sand', ja: 'サンド'),
+        _ => _text(zhHant: '石板灰', zhHans: '石板灰', en: 'Slate', ja: 'スレート'),
+      };
+  String get editTagsAndNote => _text(
+        zhHant: '編輯標籤與筆記',
+        zhHans: '编辑标签与笔记',
+        en: 'Edit tags and note',
+        ja: 'タグとメモを編集',
+      );
+  String get removeFavorite => _text(
+      zhHant: '取消收藏',
+      zhHans: '取消收藏',
+      en: 'Remove from favorites',
+      ja: 'お気に入りから外す');
+  String get favoriteNote =>
+      _text(zhHant: '筆記', zhHans: '笔记', en: 'Note', ja: 'メモ');
+  String get favoriteTags =>
+      _text(zhHant: '標籤', zhHans: '标签', en: 'Tags', ja: 'タグ');
+  String get addFavoriteTagHint => _text(
+        zhHant: '輸入標籤後按 Enter',
+        zhHans: '输入标签后按 Enter',
+        en: 'Type a tag and press Enter',
+        ja: 'タグを入力して Enter',
+      );
+  String get addFavoriteTag =>
+      _text(zhHant: '新增', zhHans: '新增', en: 'Add', ja: '追加');
+  String get usedFavoriteTags =>
+      _text(zhHant: '用過的標籤', zhHans: '用过的标签', en: 'Used tags', ja: '使ったタグ');
+  String favoriteTagLimit(int max) => _text(
+        zhHant: '每題最多 $max 個標籤',
+        zhHans: '每题最多 $max 个标签',
+        en: 'Up to $max tags per question',
+        ja: '1問につきタグは最大 $max 個',
+      );
   String get saveLabel =>
       _text(zhHant: '儲存', zhHans: '保存', en: 'Save', ja: '保存');
   String get cancelLabel =>

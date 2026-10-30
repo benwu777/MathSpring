@@ -217,10 +217,15 @@ void main() {
     await tester.pumpAndSettle();
 
     await tester
+        .tap(find.byKey(const ValueKey<String>('manage_favorite_collections')));
+    await tester.pumpAndSettle();
+    await tester
         .tap(find.byKey(const ValueKey<String>('add_favorite_collection')));
     await tester.pumpAndSettle();
     await tester.enterText(find.byType(TextField), '問老師');
     await tester.tap(find.text('儲存'));
+    await tester.pumpAndSettle();
+    await tester.tapAt(const Offset(20, 20));
     await tester.pumpAndSettle();
 
     await tester

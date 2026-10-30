@@ -350,17 +350,113 @@ class AppServices {
     }
   }
 
+  Future<void> updateFavoriteCollection({
+    required FavoriteQuestionCollection collection,
+    required String name,
+    required String colorKey,
+  }) async {
+    final FavoriteQuestionRepository? repository = favoriteQuestionRepository;
+    if (repository != null) {
+      return repository.updateCollection(
+          collection: collection, name: name, colorKey: colorKey);
+    }
+    if (collection.isDefault) return;
+    final int index = _inMemoryFavoriteCollections
+        .indexWhere((FavoriteQuestionCollection c) => c.id == collection.id);
+    if (index < 0) return;
+    final String validName = validateFavoriteCollectionName(name,
+        existingNames: (await getFavoriteCollections(collection.learnerId))
+            .where((FavoriteQuestionCollection c) => c.id != collection.id)
+            .map((FavoriteQuestionCollection c) => c.name));
+    final FavoriteQuestionCollection current =
+        _inMemoryFavoriteCollections[index];
+    _inMemoryFavoriteCollections[index] = FavoriteQuestionCollection(
+      id: current.id,
+      learnerId: current.learnerId,
+      name: validName,
+      sortOrder: current.sortOrder,
+      isDefault: false,
+      createdAtIso: current.createdAtIso,
+      colorKey: colorKey,
+    );
+  }
+
+  Future<void> deleteFavoriteCollection(
+      FavoriteQuestionCollection collection) async {
+    final FavoriteQuestionRepository? repository = favoriteQuestionRepository;
+    if (repository != null) return repository.deleteCollection(collection);
+    if (collection.isDefault) return;
+    _inMemoryFavoriteCollections
+        .removeWhere((FavoriteQuestionCollection c) => c.id == collection.id);
+    _inMemoryFavoriteCollectionMemberships.remove(collection.id);
+  }
+
+  /// Question counts keyed by collection id, including all favorites.
+  Future<Map<String, int>> getFavoriteCollectionCounts(String learnerId) async {
+    final FavoriteQuestionRepository? repository = favoriteQuestionRepository;
+    if (repository != null) return repository.fetchCollectionCounts(learnerId);
+    final Set<String> questionIds = (await getFavoriteQuestions(learnerId))
+        .map((FavoriteQuestion favorite) => favorite.questionId)
+        .toSet();
+    return <String, int>{
+      'favorites_all_$learnerId': questionIds.length,
+      for (final FavoriteQuestionCollection collection
+          in await getFavoriteCollections(learnerId))
+        if (!collection.isDefault)
+          collection.id:
+              (_inMemoryFavoriteCollectionMemberships[collection.id] ??
+                      <String>{})
+                  .intersection(questionIds)
+                  .length,
+    };
+  }
+
+  Future<void> updateFavoriteDetails({
+    required String learnerId,
+    required String questionId,
+    required String note,
+    required List<String> tags,
+  }) async {
+    final FavoriteQuestionRepository? repository = favoriteQuestionRepository;
+    if (repository != null) {
+      return repository.updateFavoriteDetails(
+          learnerId: learnerId, questionId: questionId, note: note, tags: tags);
+    }
+    final int index = _inMemoryFavorites.indexWhere((FavoriteQuestion item) =>
+        item.learnerId == learnerId && item.questionId == questionId);
+    if (index < 0) return;
+    _inMemoryFavorites[index] = FavoriteQuestion(
+      learnerId: learnerId,
+      questionId: questionId,
+      note: normalizeFavoriteNote(note),
+      tags: normalizeFavoriteTags(tags),
+      createdAtIso: _inMemoryFavorites[index].createdAtIso,
+      updatedAtIso: DateTime.now().toUtc().toIso8601String(),
+    );
+  }
+
+  /// Tags across the learner's favorites, most used first.
+  Future<List<String>> getUsedFavoriteTags(String learnerId) async {
+    final FavoriteQuestionRepository? repository = favoriteQuestionRepository;
+    if (repository != null) return repository.fetchUsedTags(learnerId);
+    return rankFavoriteTags(await getFavoriteQuestions(learnerId));
+  }
+
   Future<FavoriteQuestionCollection?> createFavoriteCollection({
     required String learnerId,
     required String name,
+    String? colorKey,
   }) async {
-    if (name.trim().isEmpty) return null;
     final FavoriteQuestionRepository? repository = favoriteQuestionRepository;
     if (repository != null) {
-      return repository.createCollection(learnerId: learnerId, name: name);
+      return repository.createCollection(
+          learnerId: learnerId, name: name, colorKey: colorKey);
     }
     final List<FavoriteQuestionCollection> collections =
         await getFavoriteCollections(learnerId);
+    final String validName = validateFavoriteCollectionName(name,
+        existingNames:
+            collections.map((FavoriteQuestionCollection c) => c.name));
     if (collections.length >= FavoriteQuestionRepository.maxCollections) {
       throw const FavoriteCollectionLimitReached(
           FavoriteQuestionRepository.maxCollections);
@@ -368,10 +464,11 @@ class AppServices {
     final FavoriteQuestionCollection collection = FavoriteQuestionCollection(
       id: 'favorite_collection_${DateTime.now().toUtc().microsecondsSinceEpoch}',
       learnerId: learnerId,
-      name: name.trim(),
+      name: validName,
       sortOrder: collections.length,
       isDefault: false,
       createdAtIso: DateTime.now().toUtc().toIso8601String(),
+      colorKey: colorKey ?? nextFavoriteCollectionColor(collections),
     );
     _inMemoryFavoriteCollections.add(collection);
     return collection;

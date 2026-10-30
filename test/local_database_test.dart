@@ -260,6 +260,13 @@ void main() {
               avatar_accessory_id TEXT
             )
           ''');
+          // 真實的第 7 版資料庫也已經有收藏分類表，第 9 版的升級會用到它。
+          await db.execute('''
+            CREATE TABLE favorite_question_collections(
+              id TEXT PRIMARY KEY, learner_id TEXT NOT NULL, name TEXT NOT NULL,
+              sort_order INTEGER NOT NULL, is_default INTEGER NOT NULL,
+              created_at TEXT NOT NULL)
+          ''');
         },
       );
       await legacy.close();
