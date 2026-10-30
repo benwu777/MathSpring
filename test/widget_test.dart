@@ -1725,6 +1725,21 @@ void main() {
         findsOneWidget);
   });
 
+  testWidgets('bottom navigation bar stays compact', (WidgetTester tester) async {
+    // 2026-10-31 使用者：底部四個按鈕的區塊太高、佔太多空間。
+    // 模擬 iPhone 15 Pro Max（430×932 pt）；只改 setSurfaceSize 的話 MediaQuery
+    // 仍是預設寬度，版面會誤判成寬版。
+    tester.view.physicalSize = const Size(1290, 2796);
+    tester.view.devicePixelRatio = 3;
+    addTearDown(tester.view.reset);
+    await tester.pumpWidget(MathSpringApp(services: createTestServices()));
+    await tester.pumpAndSettle();
+
+    expect(tester.getSize(find.byType(NavigationBar)).height,
+        lessThanOrEqualTo(62));
+    expect(find.text('Settings'), findsWidgets);
+  });
+
   testWidgets('answer review card keeps the neutral style without the otter',
       (WidgetTester tester) async {
     // 2026-10-31 使用者：答對時的暖色底和右側水獺圖「不搭、太幼稚」，改回中性卡片。

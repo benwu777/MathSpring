@@ -278,6 +278,8 @@ class _MathSpringAppState extends State<MathSpringApp> {
           ),
         ),
         navigationBarTheme: const NavigationBarThemeData(
+          // Material 3 預設 80 太佔空間；60 仍容得下圖示加文字。
+          height: 60,
           backgroundColor: AppVisualTokens.surface,
           indicatorColor: AppVisualTokens.brandSoft,
           surfaceTintColor: Colors.transparent,
