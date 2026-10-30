@@ -8193,6 +8193,663 @@
         "subtopicCode": "strip_equal_three_sums_period"
       },
       "reviewStatus": "ok"
+    },
+    {
+      "id": "number_theory_grade7_foundation_101",
+      "topic": "number_theory",
+      "subtopic": "circle_jumps_visit_all_points_coprime",
+      "tags": [
+        "c:factor_multiple",
+        "c:modular",
+        "m:enumeration"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade7",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "如圖，圓周上平均排著 18 個點，依順時針編號 0 到 17。從 0 號點出發，每次順時針跳過 k 格到下一個點並畫線，一直跳到第一次回到 0 號點為止（圖中畫的是 k = 4：0 → 4 → 8 → 12 → 16 → 2 → ⋯ → 14 → 0，只經過 9 個點）。k 從 1 到 17 中，有幾個 k 能讓這條折線經過全部 18 個點？",
+        "zh-Hans": "如图，圆周上平均排着 18 个点，依顺时针编号 0 到 17。从 0 号点出发，每次顺时针跳过 k 格到下一个点并画线，一直跳到第一次回到 0 号点为止（图中画的是 k = 4：0 → 4 → 8 → 12 → 16 → 2 → ⋯ → 14 → 0，只经过 9 个点）。k 从 1 到 17 中，有几个 k 能让这条折线经过全部 18 个点？",
+        "en": "In the figure, 18 points are equally spaced on a circle and numbered 0 to 17 clockwise. Starting at point 0, jump k places clockwise to the next point each time and draw a segment, stopping the first time you return to point 0 (the figure shows k = 4: 0 → 4 → 8 → 12 → 16 → 2 → ⋯ → 14 → 0, which visits only 9 points). For how many k from 1 to 17 does the path visit all 18 points?",
+        "ja": "図のように、円周上に 18 個の点が等しい間かくで並び、時計回りに 0 から 17 の番号がついています。0 番の点から出発し、毎回時計回りに k 個先の点へとんで線を引き、はじめて 0 番にもどったら終わります（図は k = 4 の場合で、0 → 4 → 8 → 12 → 16 → 2 → ⋯ → 14 → 0 と 9 個の点しか通りません）。k が 1 から 17 のうち、18 個の点をすべて通るのは何個ですか。"
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "6"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "answer": {
+        "zh-Hant": "答案是 6。",
+        "zh-Hans": "答案是 6。",
+        "en": "The answer is 6.",
+        "ja": "答えは 6 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "跳了 m 次之後，所在點的編號是 m × k 除以 18 的餘數。第一次回到 0 號點，就是 m × k 第一次是 18 的倍數的時候。",
+          "設 d 是 k 和 18 的最大公因數。m × k 是 18 的倍數，等於 m × (k ÷ d) 是 18 ÷ d 的倍數；k ÷ d 和 18 ÷ d 沒有公因數，所以最少要 m = 18 ÷ d 次，這段過程只經過 18 ÷ d 個不同的點。例如 k = 4，d = 2，只經過 18 ÷ 2 = 9 個點，和圖一致。",
+          "要經過全部 18 個點，必須 18 ÷ d = 18，也就是 d = 1：k 和 18 互質。18 = 2 × 3²，所以 k 不能是 2 的倍數，也不能是 3 的倍數。",
+          "1 到 17 中既不是 2 的倍數、也不是 3 的倍數的有 1、5、7、11、13、17，一共 6 個。"
+        ],
+        "zh-Hans": [
+          "跳了 m 次之后，所在点的编号是 m × k 除以 18 的余数。第一次回到 0 号点，就是 m × k 第一次是 18 的倍数的时候。",
+          "设 d 是 k 和 18 的最大公约数。m × k 是 18 的倍数，等于 m × (k ÷ d) 是 18 ÷ d 的倍数；k ÷ d 和 18 ÷ d 没有公因数，所以最少要 m = 18 ÷ d 次，这段过程只经过 18 ÷ d 个不同的点。例如 k = 4，d = 2，只经过 18 ÷ 2 = 9 个点，和图一致。",
+          "要经过全部 18 个点，必须 18 ÷ d = 18，也就是 d = 1：k 和 18 互质。18 = 2 × 3²，所以 k 不能是 2 的倍数，也不能是 3 的倍数。",
+          "1 到 17 中既不是 2 的倍数、也不是 3 的倍数的有 1、5、7、11、13、17，一共 6 个。"
+        ],
+        "en": [
+          "After m jumps the current point is the remainder of m × k divided by 18. The path first returns to 0 when m × k is first a multiple of 18.",
+          "Let d be the greatest common divisor of k and 18. m × k is a multiple of 18 exactly when m × (k ÷ d) is a multiple of 18 ÷ d; since k ÷ d and 18 ÷ d share no factor, the smallest m is 18 ÷ d, and the path visits only 18 ÷ d different points. For k = 4, d = 2 and the path visits 18 ÷ 2 = 9 points, as in the figure.",
+          "To visit all 18 points we need 18 ÷ d = 18, i.e. d = 1: k and 18 are coprime. Since 18 = 2 × 3², k must be neither a multiple of 2 nor a multiple of 3.",
+          "From 1 to 17 these are 1, 5, 7, 11, 13, 17, which makes 6 values."
+        ],
+        "ja": [
+          "m 回とんだあとの点の番号は、m × k を 18 でわったあまりです。はじめて 0 番にもどるのは、m × k がはじめて 18 の倍数になるときです。",
+          "k と 18 の最大公約数を d とします。m × k が 18 の倍数になるのは、m × (k ÷ d) が 18 ÷ d の倍数になるときで、k ÷ d と 18 ÷ d は公約数をもたないので、いちばん少ない m は 18 ÷ d 回、通る点も 18 ÷ d 個です。k = 4 なら d = 2 で 18 ÷ 2 = 9 個となり、図と合います。",
+          "18 個すべてを通るには 18 ÷ d = 18、つまり d = 1（k と 18 が互いに素）が必要です。18 = 2 × 3² なので、k は 2 の倍数でも 3 の倍数でもいけません。",
+          "1 から 17 でそのような数は 1、5、7、11、13、17 の 6 個です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "geometry_scene",
+        "params": {
+          "bounds": {
+            "minX": -6.3,
+            "minY": -6.3,
+            "maxX": 6.3,
+            "maxY": 6.3
+          },
+          "points": [
+            {
+              "name": "p0",
+              "x": 0,
+              "y": 5,
+              "pos": "t",
+              "label": "0"
+            },
+            {
+              "name": "p1",
+              "x": 1.7101,
+              "y": 4.6985,
+              "pos": "tr",
+              "label": "1"
+            },
+            {
+              "name": "p2",
+              "x": 3.2139,
+              "y": 3.8302,
+              "pos": "tr",
+              "label": "2"
+            },
+            {
+              "name": "p3",
+              "x": 4.3301,
+              "y": 2.5,
+              "pos": "tr",
+              "label": "3"
+            },
+            {
+              "name": "p4",
+              "x": 4.924,
+              "y": 0.8682,
+              "pos": "tr",
+              "label": "4"
+            },
+            {
+              "name": "p5",
+              "x": 4.924,
+              "y": -0.8682,
+              "pos": "br",
+              "label": "5"
+            },
+            {
+              "name": "p6",
+              "x": 4.3301,
+              "y": -2.5,
+              "pos": "br",
+              "label": "6"
+            },
+            {
+              "name": "p7",
+              "x": 3.2139,
+              "y": -3.8302,
+              "pos": "br",
+              "label": "7"
+            },
+            {
+              "name": "p8",
+              "x": 1.7101,
+              "y": -4.6985,
+              "pos": "br",
+              "label": "8"
+            },
+            {
+              "name": "p9",
+              "x": 0,
+              "y": -5,
+              "pos": "b",
+              "label": "9"
+            },
+            {
+              "name": "p10",
+              "x": -1.7101,
+              "y": -4.6985,
+              "pos": "bl",
+              "label": "10"
+            },
+            {
+              "name": "p11",
+              "x": -3.2139,
+              "y": -3.8302,
+              "pos": "bl",
+              "label": "11"
+            },
+            {
+              "name": "p12",
+              "x": -4.3301,
+              "y": -2.5,
+              "pos": "bl",
+              "label": "12"
+            },
+            {
+              "name": "p13",
+              "x": -4.924,
+              "y": -0.8682,
+              "pos": "bl",
+              "label": "13"
+            },
+            {
+              "name": "p14",
+              "x": -4.924,
+              "y": 0.8682,
+              "pos": "tl",
+              "label": "14"
+            },
+            {
+              "name": "p15",
+              "x": -4.3301,
+              "y": 2.5,
+              "pos": "tl",
+              "label": "15"
+            },
+            {
+              "name": "p16",
+              "x": -3.2139,
+              "y": 3.8302,
+              "pos": "tl",
+              "label": "16"
+            },
+            {
+              "name": "p17",
+              "x": -1.7101,
+              "y": 4.6985,
+              "pos": "tl",
+              "label": "17"
+            }
+          ],
+          "segments": [
+            {
+              "from": "p0",
+              "to": "p4",
+              "style": "solid"
+            },
+            {
+              "from": "p4",
+              "to": "p8",
+              "style": "solid"
+            },
+            {
+              "from": "p8",
+              "to": "p12",
+              "style": "solid"
+            },
+            {
+              "from": "p12",
+              "to": "p16",
+              "style": "solid"
+            },
+            {
+              "from": "p16",
+              "to": "p2",
+              "style": "solid"
+            },
+            {
+              "from": "p2",
+              "to": "p6",
+              "style": "solid"
+            },
+            {
+              "from": "p6",
+              "to": "p10",
+              "style": "solid"
+            },
+            {
+              "from": "p10",
+              "to": "p14",
+              "style": "solid"
+            },
+            {
+              "from": "p14",
+              "to": "p0",
+              "style": "solid"
+            }
+          ],
+          "arcs": [
+            {
+              "cx": 0,
+              "cy": 0,
+              "r": 5,
+              "from": 0,
+              "to": 360
+            }
+          ]
+        }
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "圓周上等距跳格：步長與點數互質才走遍",
+        "notes": "設計：圓周 18 點每次跳 k 格，經過的點數 = 18 ÷ gcd(k, 18)，走遍全部點的 k 正是與 18 互質的數。圖示 k = 4 只走 9 點，提示「有公因數就提早回來」但不洩答案。全庫「每次跳＋圓周」0 筆；最接近的是 logic_grade4_102（10 個齒輪圍一圈的轉向奇偶）與 number_theory_grade8_043（兩齒輪記號重合，用最小公倍數），都不是「走遍所有點」的互質判準。",
+        "displayText": "改寫題（圓周上跳格連線）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "數論",
+        "topicCode": "number_theory",
+        "subtopic": "圓周上跳格連線",
+        "subtopicCode": "circle_jumps_visit_all_points_coprime"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "number_theory_grade7_foundation_102",
+      "topic": "number_theory",
+      "subtopic": "rectangle_cut_largest_squares_euclid",
+      "tags": [
+        "c:factor_multiple",
+        "m:direct"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade7",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "從一張長方形紙開始，每次都沿著格線剪下一個盡可能大的正方形（邊長等於剩下那張長方形的短邊），剩下的部分如果還是長方形就繼續剪，直到剩下的紙本身就是正方形為止，這最後一張也算一個。圖中是 7 × 5 的長方形剪成 5、2、2、1、1 共 5 個正方形。如果從一張 105 × 39 的長方形開始，一共會得到幾個正方形？",
+        "zh-Hans": "从一张长方形纸开始，每次都沿着格线剪下一个尽可能大的正方形（边长等于剩下那张长方形的短边），剩下的部分如果还是长方形就继续剪，直到剩下的纸本身就是正方形为止，这最后一张也算一个。图中是 7 × 5 的长方形剪成 5、2、2、1、1 共 5 个正方形。如果从一张 105 × 39 的长方形开始，一共会得到几个正方形？",
+        "en": "Starting from a rectangular sheet, each time cut off the largest possible square (side equal to the shorter side of the remaining rectangle); if what remains is still a non-square rectangle, keep cutting, until the remaining piece is itself a square, which also counts. The figure shows a 7 × 5 rectangle cut into squares of sides 5, 2, 2, 1, 1, that is 5 squares. Starting from a 105 × 39 rectangle, how many squares are obtained in total?",
+        "ja": "長方形の紙から、毎回できるだけ大きな正方形（残った長方形の短い辺を 1 辺とする正方形）を切り取ります。残りがまだ長方形なら同じことを続け、残りが正方形になったら終わりで、その最後の 1 枚も数えます。図は 7 × 5 の長方形を 5、2、2、1、1 の 5 個の正方形に切った例です。105 × 39 の長方形から始めると、正方形は全部で何個できますか。"
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "9"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "answer": {
+        "zh-Hant": "答案是 9。",
+        "zh-Hans": "答案是 9。",
+        "en": "The answer is 9.",
+        "ja": "答えは 9 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "每一步剪的都是以短邊為邊長的正方形，同一個短邊能剪幾次，就看長邊裡包含幾個短邊：這正是「長邊 ÷ 短邊」的商，剩下的長方形是「短邊 × 餘數」。（7 × 5：7 ÷ 5 商 1 餘 2，剪 1 個 5；5 ÷ 2 商 2 餘 1，剪 2 個 2；2 ÷ 1 商 2 餘 0，剪 2 個 1；共 1 + 2 + 2 = 5 個，和圖一致。）",
+          "105 × 39：105 ÷ 39 商 2 餘 27，剪下 2 個邊長 39 的正方形，剩 39 × 27。39 ÷ 27 商 1 餘 12，剪下 1 個邊長 27 的正方形，剩 27 × 12。",
+          "27 ÷ 12 商 2 餘 3，剪下 2 個邊長 12 的正方形，剩 12 × 3。12 ÷ 3 商 4 餘 0，最後剪成 4 個邊長 3 的正方形，剛好剪完。",
+          "一共 2 + 1 + 2 + 4 = 9 個正方形。最小的正方形邊長 3，正好是 105 和 39 的最大公因數（這就是輾轉相除法）。"
+        ],
+        "zh-Hans": [
+          "每一步剪的都是以短边为边长的正方形，同一个短边能剪几次，就看长边里包含几个短边：这正是「长边 ÷ 短边」的商，剩下的长方形是「短边 × 余数」。（7 × 5：7 ÷ 5 商 1 余 2，剪 1 个 5；5 ÷ 2 商 2 余 1，剪 2 个 2；2 ÷ 1 商 2 余 0，剪 2 个 1；共 1 + 2 + 2 = 5 个，和图一致。）",
+          "105 × 39：105 ÷ 39 商 2 余 27，剪下 2 个边长 39 的正方形，剩 39 × 27。39 ÷ 27 商 1 余 12，剪下 1 个边长 27 的正方形，剩 27 × 12。",
+          "27 ÷ 12 商 2 余 3，剪下 2 个边长 12 的正方形，剩 12 × 3。12 ÷ 3 商 4 余 0，最后剪成 4 个边长 3 的正方形，刚好剪完。",
+          "一共 2 + 1 + 2 + 4 = 9 个正方形。最小的正方形边长 3，正好是 105 和 39 的最大公约数（这就是辗转相除法）。"
+        ],
+        "en": [
+          "Each cut removes a square whose side is the shorter side, and the number of times the same shorter side is used is the number of short sides that fit in the long side: the quotient of long side ÷ short side; the leftover rectangle is short side × remainder. (For 7 × 5: 7 ÷ 5 = 1 remainder 2, one square of 5; 5 ÷ 2 = 2 remainder 1, two squares of 2; 2 ÷ 1 = 2 remainder 0, two squares of 1; 1 + 2 + 2 = 5, as in the figure.)",
+          "105 × 39: 105 ÷ 39 = 2 remainder 27, so 2 squares of side 39 are cut, leaving 39 × 27. 39 ÷ 27 = 1 remainder 12, so 1 square of side 27, leaving 27 × 12.",
+          "27 ÷ 12 = 2 remainder 3, so 2 squares of side 12, leaving 12 × 3. 12 ÷ 3 = 4 remainder 0, so the last piece splits into 4 squares of side 3 with nothing left.",
+          "In total 2 + 1 + 2 + 4 = 9 squares. The smallest square has side 3, which is exactly the greatest common divisor of 105 and 39 (this is the Euclidean algorithm)."
+        ],
+        "ja": [
+          "毎回切る正方形は短い辺を 1 辺とし、同じ短い辺で何枚切れるかは、長い辺に短い辺が何個入るか、つまり「長い辺 ÷ 短い辺」の商で、残りは「短い辺 × あまり」の長方形です。（7 × 5 なら 7 ÷ 5 = 1 あまり 2 で 5 の正方形 1 個、5 ÷ 2 = 2 あまり 1 で 2 の正方形 2 個、2 ÷ 1 = 2 あまり 0 で 1 の正方形 2 個、計 1 + 2 + 2 = 5 個で図と合います。）",
+          "105 × 39：105 ÷ 39 = 2 あまり 27 で 1 辺 39 の正方形 2 個、残り 39 × 27。39 ÷ 27 = 1 あまり 12 で 1 辺 27 の正方形 1 個、残り 27 × 12。",
+          "27 ÷ 12 = 2 あまり 3 で 1 辺 12 の正方形 2 個、残り 12 × 3。12 ÷ 3 = 4 あまり 0 で、最後は 1 辺 3 の正方形 4 個になります。",
+          "全部で 2 + 1 + 2 + 4 = 9 個です。いちばん小さい正方形の 1 辺 3 は、105 と 39 の最大公約数です（これがユークリッドの互除法です）。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "geometry_scene",
+        "params": {
+          "bounds": {
+            "minX": -1,
+            "minY": -1,
+            "maxX": 7.6,
+            "maxY": 5.6
+          },
+          "points": [
+            {
+              "name": "a",
+              "x": 0,
+              "y": 0,
+              "pos": "t",
+              "visible": false
+            },
+            {
+              "name": "b",
+              "x": 7,
+              "y": 0,
+              "pos": "t",
+              "visible": false
+            },
+            {
+              "name": "c",
+              "x": 7,
+              "y": 5,
+              "pos": "t",
+              "visible": false
+            },
+            {
+              "name": "d",
+              "x": 0,
+              "y": 5,
+              "pos": "t",
+              "visible": false
+            },
+            {
+              "name": "e",
+              "x": 5,
+              "y": 0,
+              "pos": "t",
+              "visible": false
+            },
+            {
+              "name": "f",
+              "x": 5,
+              "y": 5,
+              "pos": "t",
+              "visible": false
+            },
+            {
+              "name": "g",
+              "x": 5,
+              "y": 2,
+              "pos": "t",
+              "visible": false
+            },
+            {
+              "name": "h",
+              "x": 7,
+              "y": 2,
+              "pos": "t",
+              "visible": false
+            },
+            {
+              "name": "i",
+              "x": 5,
+              "y": 4,
+              "pos": "t",
+              "visible": false
+            },
+            {
+              "name": "j",
+              "x": 7,
+              "y": 4,
+              "pos": "t",
+              "visible": false
+            },
+            {
+              "name": "k",
+              "x": 6,
+              "y": 4,
+              "pos": "t",
+              "visible": false
+            },
+            {
+              "name": "l",
+              "x": 6,
+              "y": 5,
+              "pos": "t",
+              "visible": false
+            },
+            {
+              "name": "s5",
+              "x": 2.5,
+              "y": 2.7,
+              "pos": "b",
+              "visible": false,
+              "label": "5"
+            },
+            {
+              "name": "s2a",
+              "x": 6,
+              "y": 1.2,
+              "pos": "b",
+              "visible": false,
+              "label": "2"
+            },
+            {
+              "name": "s2b",
+              "x": 6,
+              "y": 3.2,
+              "pos": "b",
+              "visible": false,
+              "label": "2"
+            },
+            {
+              "name": "s1a",
+              "x": 5.5,
+              "y": 4.65,
+              "pos": "b",
+              "visible": false,
+              "label": "1"
+            },
+            {
+              "name": "s1b",
+              "x": 6.5,
+              "y": 4.65,
+              "pos": "b",
+              "visible": false,
+              "label": "1"
+            },
+            {
+              "name": "w",
+              "x": 3.5,
+              "y": -0.25,
+              "pos": "b",
+              "visible": false,
+              "label": "7"
+            },
+            {
+              "name": "hh",
+              "x": -0.25,
+              "y": 2.5,
+              "pos": "l",
+              "visible": false,
+              "label": "5"
+            }
+          ],
+          "segments": [
+            {
+              "from": "a",
+              "to": "b",
+              "style": "solid"
+            },
+            {
+              "from": "b",
+              "to": "c",
+              "style": "solid"
+            },
+            {
+              "from": "c",
+              "to": "d",
+              "style": "solid"
+            },
+            {
+              "from": "d",
+              "to": "a",
+              "style": "solid"
+            },
+            {
+              "from": "e",
+              "to": "f",
+              "style": "solid"
+            },
+            {
+              "from": "g",
+              "to": "h",
+              "style": "solid"
+            },
+            {
+              "from": "i",
+              "to": "j",
+              "style": "solid"
+            },
+            {
+              "from": "k",
+              "to": "l",
+              "style": "solid"
+            }
+          ]
+        }
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "剪最大正方形＝輾轉相除的各個商",
+        "notes": "設計：用「每次剪下最大正方形」把輾轉相除法的每一個商變成看得見的正方形個數，答案是各商之和 2 + 1 + 2 + 4，最小正方形邊長順帶是最大公因數。圖只畫 7 × 5 的示範，不畫 105 × 39。全庫「最大的正方形」只有 algebra_grade11_169（直角三角形內無限放正方形，等比級數）；求最大公因數的題都是直接計算，沒有用正方形個數問商的總和。",
+        "displayText": "改寫題（長方形一直剪下最大的正方形）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "數論",
+        "topicCode": "number_theory",
+        "subtopic": "長方形一直剪下最大的正方形",
+        "subtopicCode": "rectangle_cut_largest_squares_euclid"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "number_theory_grade7_foundation_103",
+      "topic": "number_theory",
+      "subtopic": "prime_only_grid_route",
+      "tags": [
+        "c:factor_multiple",
+        "m:enumeration"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade7",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "如圖，5 × 5 方格的每一格寫著一個數。小安要從左上角塗色的 2 走到右下角塗色的 11，每一步走到上、下、左、右相鄰的一格（不能斜走），而且只能踩在寫著質數的格子上（起點和終點都是質數）。這樣的路線只有一條（不重複經過同一格）。這條路線經過的所有格子（含起點和終點）裡的數加起來是多少？",
+        "zh-Hans": "如图，5 × 5 方格的每一格写着一个数。小安要从左上角涂色的 2 走到右下角涂色的 11，每一步走到上、下、左、右相邻的一格（不能斜走），而且只能踩在写着质数的格子上（起点和终点都是质数）。这样的路线只有一条（不重复经过同一格）。这条路线经过的所有格子（含起点和终点）里的数加起来是多少？",
+        "en": "In the figure, each cell of a 5 × 5 grid holds a number. Xiao An walks from the shaded 2 at the top-left to the shaded 11 at the bottom-right. Each step goes to the cell directly above, below, left or right (no diagonal moves), and he may only step on cells holding prime numbers (the start and end are prime). There is exactly one such route (not visiting any cell twice). What is the sum of the numbers in all the cells on this route, including the start and the end?",
+        "ja": "図の 5 × 5 のマスには数が 1 つずつ書いてあります。アンさんは左上の色のついた 2 から右下の色のついた 11 まで、上下左右のとなりのマスへ 1 歩ずつ進みます（ななめには進めません）。ただし、素数が書かれたマスしかふめません（出発と到着のマスは素数です）。このような道すじ（同じマスを 2 回通らないもの）は 1 通りだけです。通るマス（出発と到着をふくむ）の数の和はいくつですか。"
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "304"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
+      "answer": {
+        "zh-Hant": "答案是 304。",
+        "zh-Hans": "答案是 304。",
+        "en": "The answer is 304.",
+        "ja": "答えは 304 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "先把不是質數的格子找出來：1 不是質數；51 = 3 × 17、91 = 7 × 13、87 = 3 × 29、57 = 3 × 19、39 = 3 × 13、49 = 7 × 7、27 = 3 × 9、77 = 7 × 11、63 = 7 × 9，這些看起來像質數，其實都是合數。其餘的 2、7、31、3、17、59、41、5、23、13、19、29、73、37、11 都是質數。",
+          "從 2 出發：右邊 51 不能走，只能往下到 17，再到 5；5 的下面是 57，只能往右到 23、13。13 的下面 29 往下接的是 63、左右是 39、49，走不通；13 的右邊是 87，所以往上到 59，再往上到 7，往右到 31、3。",
+          "3 往下是 41、19、73，73 的下面就是終點 11。（另外 37 雖然是質數，但它的上、左都是合數，只連著終點，用不到。）所以路線是 2 → 17 → 5 → 23 → 13 → 59 → 7 → 31 → 3 → 41 → 19 → 73 → 11。",
+          "總和：2 + 17 + 5 + 23 + 13 + 59 + 7 + 31 + 3 + 41 + 19 + 73 + 11 = 304。"
+        ],
+        "zh-Hans": [
+          "先把不是质数的格子找出来：1 不是质数；51 = 3 × 17、91 = 7 × 13、87 = 3 × 29、57 = 3 × 19、39 = 3 × 13、49 = 7 × 7、27 = 3 × 9、77 = 7 × 11、63 = 7 × 9，这些看起来像质数，其实都是合数。其余的 2、7、31、3、17、59、41、5、23、13、19、29、73、37、11 都是质数。",
+          "从 2 出发：右边 51 不能走，只能往下到 17，再到 5；5 的下面是 57，只能往右到 23、13。13 的下面 29 往下接的是 63、左右是 39、49，走不通；13 的右边是 87，所以往上到 59，再往上到 7，往右到 31、3。",
+          "3 往下是 41、19、73，73 的下面就是终点 11。（另外 37 虽然是质数，但它的上、左都是合数，只连着终点，用不到。）所以路线是 2 → 17 → 5 → 23 → 13 → 59 → 7 → 31 → 3 → 41 → 19 → 73 → 11。",
+          "总和：2 + 17 + 5 + 23 + 13 + 59 + 7 + 31 + 3 + 41 + 19 + 73 + 11 = 304。"
+        ],
+        "en": [
+          "First find the cells that are not prime: 1 is not prime; 51 = 3 × 17, 91 = 7 × 13, 87 = 3 × 29, 57 = 3 × 19, 39 = 3 × 13, 49 = 7 × 7, 27 = 3 × 9, 77 = 7 × 11, 63 = 7 × 9. These look prime but are composite. The rest, 2, 7, 31, 3, 17, 59, 41, 5, 23, 13, 19, 29, 73, 37, 11, are primes.",
+          "From 2: the 51 to the right is blocked, so go down to 17 and then 5. Below 5 is 57, so go right to 23 and 13. Below 13 is 29, whose other neighbours 63, 39, 49 are composite, a dead end; to the right of 13 is 87, so go up to 59, up to 7, then right to 31 and 3.",
+          "From 3 go down through 41, 19, 73; below 73 is the end, 11. (37 is prime, but the cells above and left of it are composite, so it only touches the end and is never needed.) The route is 2 → 17 → 5 → 23 → 13 → 59 → 7 → 31 → 3 → 41 → 19 → 73 → 11.",
+          "Sum: 2 + 17 + 5 + 23 + 13 + 59 + 7 + 31 + 3 + 41 + 19 + 73 + 11 = 304."
+        ],
+        "ja": [
+          "まず素数でないマスを見つけます。1 は素数ではありません。51 = 3 × 17、91 = 7 × 13、87 = 3 × 29、57 = 3 × 19、39 = 3 × 13、49 = 7 × 7、27 = 3 × 9、77 = 7 × 11、63 = 7 × 9 は素数に見えますが合成数です。残りの 2、7、31、3、17、59、41、5、23、13、19、29、73、37、11 は素数です。",
+          "2 から：右の 51 は通れないので下の 17、5 と進みます。5 の下は 57 なので右の 23、13 へ。13 の下の 29 は、その先の 63、39、49 がすべて合成数で行き止まりです。13 の右は 87 なので、上の 59、さらに上の 7、右の 31、3 と進みます。",
+          "3 から下へ 41、19、73 と進み、73 の下が到着の 11 です。（37 は素数ですが、上と左が合成数で到着のマスにしかつながらないので使いません。）道すじは 2 → 17 → 5 → 23 → 13 → 59 → 7 → 31 → 3 → 41 → 19 → 73 → 11 です。",
+          "和は 2 + 17 + 5 + 23 + 13 + 59 + 7 + 31 + 3 + 41 + 19 + 73 + 11 = 304 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "composite_grid_shape",
+        "params": {
+          "rows": 5,
+          "cols": 5,
+          "filledCells": [
+            [
+              0,
+              0
+            ],
+            [
+              4,
+              4
+            ]
+          ],
+          "cellLabels": {
+            "0,0": "2",
+            "0,1": "51",
+            "0,2": "7",
+            "0,3": "31",
+            "0,4": "3",
+            "1,0": "17",
+            "1,1": "91",
+            "1,2": "59",
+            "1,3": "1",
+            "1,4": "41",
+            "2,0": "5",
+            "2,1": "23",
+            "2,2": "13",
+            "2,3": "87",
+            "2,4": "19",
+            "3,0": "57",
+            "3,1": "39",
+            "3,2": "29",
+            "3,3": "49",
+            "3,4": "73",
+            "4,0": "27",
+            "4,1": "77",
+            "4,2": "63",
+            "4,3": "37",
+            "4,4": "11"
+          }
+        }
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "質數迷宮：辨認「看起來像質數」的合數",
+        "notes": "設計：迷宮的牆全是長得像質數的合數（51、57、87、91、39、49、77、63）與 1，岔路 29、37 是走不通的死路，路線唯一（逐格搜尋所有不重複路線確認只有一條）。答案用路線總和，避免只靠猜方向。全庫「質數＋格＋路」0 筆；最接近的是 combinatorics_grade7_065（依序經過 2、0、2、6 的格子路線計數）與 number_theory 的質數判定文字題。",
+        "displayText": "改寫題（只走質數格的路線）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "數論",
+        "topicCode": "number_theory",
+        "subtopic": "只走質數格的路線",
+        "subtopicCode": "prime_only_grid_route"
+      },
+      "reviewStatus": "ok"
     }
   ]
 }
