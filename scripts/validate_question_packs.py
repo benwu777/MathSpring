@@ -202,10 +202,22 @@ TRACEABLE_SOURCE_KEYS = ('contest', 'year', 'round', 'division', 'problemNumber'
                          'sourceUrl', 'rightsStatus')
 
 
+# 文字欄位裡指名特定競賽、題庫網站或網址的字樣。「olympiad-style」「競賽常見題型」
+# 這類描述風格的泛稱不算來源，可以保留。
+NAMED_SOURCE = re.compile(
+    r'Kangaroo|袋鼠|AoPS|Art of Problem Solving|artofproblemsolving|\bAMC|\bAIME\b|AJHSME|'
+    r'\bIMC\b|\bIMO\b|MATHCOUNTS|HMMT|\bARML\b|USAMO|全俄|華杯|华杯|希望杯|imcct|https?://',
+    re.I)
+
+
 def check_source_provenance(q):
     """回傳 source 帶有競賽原題出處的錯誤訊息清單；合格時回傳空清單。"""
     src = q.get('source') or {}
     errs = []
+    for key in ('name', 'reference', 'notes', 'displayText'):
+        m = NAMED_SOURCE.search(str(src.get(key) or ''))
+        if m:
+            errs.append('source.%s 指名了來源「%s」，請刪掉' % (key, m.group(0)))
     if src.get('type') != 'rewritten_olympiad_style':
         errs.append('source.type 必須是 rewritten_olympiad_style，不得標示官方競賽出處: %s'
                     % src.get('type'))

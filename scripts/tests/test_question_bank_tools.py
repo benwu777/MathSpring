@@ -1103,6 +1103,22 @@ class CheckSourceProvenanceTest(unittest.TestCase):
             self.assertTrue(vqp.check_source_provenance(q), key)
 
 
+    def test_rejects_named_sources_in_free_text(self):
+        for text in ('改寫自 Math Kangaroo 2015 第 7 題', '題型取自 AoPS Wiki 的條目',
+                     '借自 1994 AIME 第 4 題', '袋鼠數學風格', '原 IMC 填充 7',
+                     'see https://example.org/problem'):
+            for key in ('reference', 'notes', 'displayText'):
+                q = {'source': {'type': 'rewritten_olympiad_style', 'name': 'MathSpring 改寫題',
+                                key: text}}
+                self.assertTrue(vqp.check_source_provenance(q), (key, text))
+
+    def test_allows_generic_style_words(self):
+        q = {'source': {'type': 'rewritten_olympiad_style', 'name': 'Original olympiad-style design',
+                        'reference': 'Competition-style authored content',
+                        'notes': '競賽常見的分組計數題型'}}
+        self.assertEqual(vqp.check_source_provenance(q), [])
+
+
 class ValidatorReportsSourceProvenanceTest(unittest.TestCase):
     """validate_question_packs 主程式要把官方出處列為錯誤。"""
 

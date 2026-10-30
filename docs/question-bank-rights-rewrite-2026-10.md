@@ -17,6 +17,14 @@
 7. 原題來源**只保留在這份文件**（不會打包進 App），作為內部追溯紀錄。
 8. 改寫後要跑完題庫既有閘門：`scripts/validate_question_packs.py`、相似度與模板掃描（避免撞到庫內其他題）、`flutter test`。
 
+## 改寫題備註裡的來源字樣（2026-10-30 清除）
+
+另有 353 題原本就是 `rewritten_olympiad_style`，但 `source.reference`／`notes`／`displayText` 仍寫著
+Kangaroo（袋鼠）、AoPS、AMC、AIME、IMC、IMO、全俄等來源名稱或網址。這些字樣已全部刪除
+（只刪指名來源的句子或括號，設計依據與去重紀錄保留；整段刪光的 29 題補上中性說明），題目內容未變動。
+驗證器 `check_source_provenance` 的 `NAMED_SOURCE` 會擋回歸；「olympiad-style」「競賽常見題型」這類描述風格的泛稱不受限。
+**注意**：這一步只清了備註文字，沒有逐題比對這 353 題的內容和原始競賽題是否改寫得夠徹底。
+
 ## 統計
 
 | 來源 | 題數 |
