@@ -594,7 +594,9 @@ phase 1 **只允許**兩種 `answerMode`，不得新增其他型別：
 
 ## source 填寫規則
 
-目前 shipping 題庫允許官方題與通過複審的同水準原創題並行收錄。
+> **2026-10-30 政策變更**：shipping 題庫**不再收錄官方競賽原題**。原本 283 題 `official_reference` 已全部實質改寫（清單與原出處見 [question-bank-rights-rewrite-2026-10.md](question-bank-rights-rewrite-2026-10.md)），驗證器 `check_source_provenance` 會擋 `official_reference` 與 `contest`／`year`／`sourceUrl` 等可追溯欄位。下方「官方題」一節僅保留作歷史紀錄。競賽題只能當出題靈感，改寫後放在原題旁不應看得出是同一題。
+
+（以下為舊規則）目前 shipping 題庫允許官方題與通過複審的同水準原創題並行收錄。
 
 - 不得在上架 pack 中出現 `MathSpring Editorial Original`
 - 不得用自製 editorial source 暫代正式出處

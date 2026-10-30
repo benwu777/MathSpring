@@ -1077,3 +1077,50 @@ class SimplifiedGongToLiMisconversionTest(unittest.TestCase):
 
     def test_allows_centimetre_and_clarify(self):
         self.assertEqual(vqp.check_simplified_terms(self._q('长 5 厘米，先厘清题意。')), [])
+
+
+class CheckSourceProvenanceTest(unittest.TestCase):
+    """validate_question_packs.check_source_provenance：題庫不得帶可追溯競賽原題的出處。
+
+    2026-10-30 起官方競賽題全部實質改寫，原題來源只記在
+    docs/question-bank-rights-rewrite-2026-10.md，不打包進 App。
+    """
+
+    def test_accepts_rewritten_source(self):
+        q = {'source': {'type': 'rewritten_olympiad_style', 'name': 'MathSpring 改寫題',
+                        'reference': '分組計數', 'notes': '設計依據'}}
+        self.assertEqual(vqp.check_source_provenance(q), [])
+
+    def test_rejects_official_reference_type(self):
+        q = {'source': {'type': 'official_reference', 'name': 'AMC 8'}}
+        self.assertTrue(vqp.check_source_provenance(q))
+
+    def test_rejects_traceable_fields_even_on_rewritten_source(self):
+        for key in ('contest', 'year', 'round', 'division', 'problemNumber',
+                    'sourceUrl', 'rightsStatus'):
+            q = {'source': {'type': 'rewritten_olympiad_style', 'name': 'MathSpring 改寫題',
+                            key: 'x'}}
+            self.assertTrue(vqp.check_source_provenance(q), key)
+
+
+class ValidatorReportsSourceProvenanceTest(unittest.TestCase):
+    """validate_question_packs 主程式要把官方出處列為錯誤。"""
+
+    def test_official_reference_question_fails_validation(self):
+        tmp = tempfile.mkdtemp()
+        self.addCleanup(shutil.rmtree, tmp)
+        shutil.copytree('assets/questions', os.path.join(tmp, 'assets/questions'))
+        shutil.copytree('docs', os.path.join(tmp, 'docs'))
+        path = os.path.join(tmp, 'assets/questions/algebra/grade10_foundation.algebra.v1.json')
+        with open(path) as fh:
+            pack = json.load(fh)
+        pack['questions'][0]['source'] = {'type': 'official_reference', 'name': 'AMC 10',
+                                          'contest': 'AMC 10'}
+        with open(path, 'w') as fh:
+            json.dump(pack, fh, ensure_ascii=False, indent=2)
+        result = subprocess.run(
+            [sys.executable, os.path.join(ROOT, 'scripts/validate_question_packs.py'), 'grade10'],
+            cwd=tmp, capture_output=True, text=True)
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn(pack['questions'][0]['id'], result.stdout)
+        self.assertIn('出處', result.stdout)

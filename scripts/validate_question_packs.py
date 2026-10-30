@@ -196,6 +196,25 @@ def check_program_mentions(q):
     return errs
 
 
+# 能指回特定競賽原題的欄位。2026-10-30 起官方競賽題全部實質改寫，
+# 原題來源只記在 docs/question-bank-rights-rewrite-2026-10.md，不打包進 App。
+TRACEABLE_SOURCE_KEYS = ('contest', 'year', 'round', 'division', 'problemNumber',
+                         'sourceUrl', 'rightsStatus')
+
+
+def check_source_provenance(q):
+    """回傳 source 帶有競賽原題出處的錯誤訊息清單；合格時回傳空清單。"""
+    src = q.get('source') or {}
+    errs = []
+    if src.get('type') != 'rewritten_olympiad_style':
+        errs.append('source.type 必須是 rewritten_olympiad_style，不得標示官方競賽出處: %s'
+                    % src.get('type'))
+    for key in TRACEABLE_SOURCE_KEYS:
+        if key in src:
+            errs.append('source.%s 會指回競賽原題出處，請移除' % key)
+    return errs
+
+
 CARET_NUMERIC_POWER = re.compile(r'\S\^\d')
 
 
@@ -714,9 +733,10 @@ def main():
             for msg in check_program_mentions(q):
                 err(msg)
 
+            for msg in check_source_provenance(q):
+                err(msg)
+
             src = q.get('source', {})
-            if src.get('type') not in ('official_reference', 'rewritten_olympiad_style'):
-                err('source.type 非法: %s' % src.get('type'))
             if 'Editorial Original' in json.dumps(src, ensure_ascii=False):
                 err('source 出現 MathSpring Editorial Original')
 
