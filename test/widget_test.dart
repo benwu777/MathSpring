@@ -1725,6 +1725,65 @@ void main() {
         findsOneWidget);
   });
 
+  testWidgets('answer review card keeps the neutral style without the otter',
+      (WidgetTester tester) async {
+    // 2026-10-31 使用者：答對時的暖色底和右側水獺圖「不搭、太幼稚」，改回中性卡片。
+    final TestWidgetsFlutterBinding binding =
+        TestWidgetsFlutterBinding.ensureInitialized();
+    binding.platformDispatcher.localeTestValue = const Locale('en');
+    await tester.binding.setSurfaceSize(const Size(430, 932));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+    await tester.pumpWidget(
+      MaterialApp(
+        locale: const Locale('en'),
+        supportedLocales: AppStrings.supportedLocales,
+        localizationsDelegates: const [
+          GlobalMaterialLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+        ],
+        home: PracticeSessionPage(
+          services: createTestServices(),
+          pack: const BundledQuestionPackInfo(
+            path:
+                'assets/questions/geometry/grade2_foundation.geometry.v1.json',
+            topic: '幾何',
+            topicCode: 'geometry',
+            levelStage: 'grade2',
+            challengeTier: 'foundation',
+            questionCount: 1,
+          ),
+          initialQuestions: [createShapeDiagramQuestion()],
+        ),
+      ),
+    );
+    await tester.runAsync(() async {
+      await Future<void>.delayed(const Duration(milliseconds: 50));
+    });
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 300));
+
+    await tester.enterText(
+      find.byKey(const ValueKey<String>(
+          'practice_integer_input_geometry_grade2_foundation_001')),
+      '16',
+    );
+    await tester.tap(find.byKey(const ValueKey<String>(
+        'submit_answer_geometry_grade2_foundation_001')));
+    await tester.pumpAndSettle();
+
+    expect(find.byKey(const ValueKey<String>('otter_companion_celebrating')),
+        findsNothing);
+    expect(find.byKey(const ValueKey<String>('otter_companion_thinking')),
+        findsNothing);
+    final Iterable<BoxDecoration> warmCards = tester
+        .widgetList<Container>(find.byType(Container))
+        .map((Container c) => c.decoration)
+        .whereType<BoxDecoration>()
+        .where((BoxDecoration d) => d.color == AppVisualTokens.celebrationSoft);
+    expect(warmCards, isEmpty);
+  });
+
   testWidgets('practice renders and checks ordered multiple integer answers',
       (WidgetTester tester) async {
     final TestWidgetsFlutterBinding binding =

@@ -518,33 +518,18 @@ class _PracticeReviewCard extends StatelessWidget {
       width: double.infinity,
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: record.isCorrect
-            ? AppVisualTokens.celebrationSoft
-            : AppVisualTokens.surfaceMuted,
+        color: AppVisualTokens.surfaceMuted,
         borderRadius: BorderRadius.circular(14),
         border: Border.all(color: AppVisualTokens.outline),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Expanded(
-                child: _ResultStatusBadge(
-                  label: record.isCorrect
-                      ? strings.correctLabel
-                      : strings.incorrectLabel,
-                  isCorrect: record.isCorrect,
-                ),
-              ),
-              OtterCompanion(
-                pose: record.isCorrect
-                    ? OtterPose.celebrating
-                    : OtterPose.thinking,
-                size: 64,
-              ),
-            ],
+          _ResultStatusBadge(
+            label: record.isCorrect
+                ? strings.correctLabel
+                : strings.incorrectLabel,
+            isCorrect: record.isCorrect,
           ),
           const SizedBox(height: 12),
           if (record.question.figure.kind != 'none') ...[
