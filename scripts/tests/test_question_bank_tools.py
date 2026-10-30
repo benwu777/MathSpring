@@ -398,6 +398,11 @@ class DeriveSimplifiedOnlyCharsTest(unittest.TestCase):
         qs = [{'prompt': {'zh-Hant': '長', 'zh-Hans': '长长'}}]
         self.assertEqual(dsoc.derive(qs, min_hans_count=5), [])
 
+    def test_known_shared_char_is_never_simplified_only(self):
+        """「摩」繁簡通用；只因繁中還沒用過就被收進字集，會擋住「摩天輪」寫進繁中。"""
+        qs = [{'prompt': {'zh-Hant': '觀景輪', 'zh-Hans': '摩' * 9}}]
+        self.assertEqual(dsoc.derive(qs, min_hans_count=5), [])
+
     def test_committed_char_file_matches_what_the_script_derives_now(self):
         self.assertEqual(sorted(vqp.load_simplified_only_chars()),
                          dsoc.derive(dsoc.load_questions()))

@@ -22,6 +22,10 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from validate_question_packs import iter_lang_text  # noqa: E402  走訪邏輯只留一份
 
 MIN_HANS_COUNT = 5
+
+# 繁簡通用、只是繁中題目碰巧還沒用過的字。推導法看不出這種字，收進字集會反過來
+# 擋住繁中正常使用（例如「摩天輪」），所以明列排除。
+SHARED_CHARS = frozenset('摩')
 OUT_PATH = 'docs/simplified-only-chars.txt'
 
 
@@ -45,7 +49,8 @@ def derive(questions, min_hans_count=MIN_HANS_COUNT):
     hans = count_chars(questions, 'zh-Hans')
     hant = count_chars(questions, 'zh-Hant')
     return sorted(ch for ch, n in hans.items()
-                  if n >= min_hans_count and hant[ch] == 0)
+                  if n >= min_hans_count and hant[ch] == 0
+                  and ch not in SHARED_CHARS)
 
 
 def main():
