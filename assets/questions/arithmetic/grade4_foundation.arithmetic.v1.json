@@ -17009,6 +17009,691 @@
         "notes": "設計依據：讀時刻表並判斷「中途換乘較快的車」。全庫查無讀時刻表換車的題；最接近的是 arithmetic_grade4_foundation_203（公車來回班次數）與 logic_grade10_foundation_061（演講時段排教室），前者是循環班次計數、後者是區間重疊，本題要從表中排除不停靠的快車、找出在 C 站換乘，骨架不同。誘答 7:55（2 號快車，但它不停 B）、8:20（不換車）、8:12。圖：5 × 5 表格，車次與站名格塗色。",
         "displayText": "MathSpring 改寫題（附圖）"
       }
+    },
+    {
+      "id": "arithmetic_grade4_foundation_218",
+      "topic": "arithmetic",
+      "subtopic": "lattice_multiplication_read_product",
+      "tags": [
+        "c:mul_div",
+        "c:place_value",
+        "m:direct"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade4",
+      "challengeTier": "foundation",
+      "reviewStatus": "ok",
+      "prompt": {
+        "zh-Hant": "「格子乘法」是這樣算乘法的：一個乘數的各位數字寫在格子上方，另一個乘數的各位數字由上往下寫在格子右邊；每一格填上「它上方的數字 × 它右邊的數字」，乘積的十位數字寫在斜線左上方，個位數字寫在斜線右下方。最後從右下角開始，把夾在同一條斜帶裡的數字加起來（滿 10 就進位到下一條斜帶），依序得到積的個位、十位、百位⋯⋯。如圖，一道「三位數 × 兩位數」的格子乘法，每一格都已經填好，但上方和右邊的乘數被擦掉了（標 ?）。這道乘法的積是多少？",
+        "zh-Hans": "“格子乘法”是这样算乘法的：一个乘数的各位数字写在格子上方，另一个乘数的各位数字由上往下写在格子右边；每一格填上“它上方的数字 × 它右边的数字”，乘积的十位数字写在斜线左上方，个位数字写在斜线右下方。最后从右下角开始，把夹在同一条斜带里的数字加起来（满 10 就进位到下一条斜带），依序得到积的个位、十位、百位⋯⋯。如图，一道“三位数 × 两位数”的格子乘法，每一格都已经填好，但上方和右边的乘数被擦掉了（标 ?）。这道乘法的积是多少？",
+        "en": "\"Lattice multiplication\" works like this: the digits of one factor are written above the grid, and the digits of the other factor are written down the right side. Each cell holds (the digit above it) × (the digit to its right): the tens digit goes above-left of the cell's diagonal and the ones digit goes below-right. Then, starting from the bottom-right corner, the digits inside each diagonal band are added (carrying 1 to the next band whenever the sum reaches 10), giving the ones, tens, hundreds, … digits of the product. In the figure, a lattice for a three-digit number × a two-digit number has every cell filled in, but both factors have been erased (marked ?). What is the product?",
+        "ja": "「格子かけ算」は次のように計算します。一方の数の各位の数字を格子の上に、もう一方の数の各位の数字を格子の右に上から順に書きます。各マスには「上の数字 × 右の数字」を書き、積の十の位を斜線の左上に、一の位を斜線の右下に書きます。最後に右下から、同じ斜めの帯にはさまれた数字をたし（10 以上になったら次の帯にくり上げ）、積の一の位、十の位、百の位……を順に求めます。図は「3けた × 2けた」の格子かけ算で、どのマスも書きこまれていますが、上と右のかける数は消されています（? の所）。このかけ算の積はいくつですか。"
+      },
+      "answer": {
+        "zh-Hant": "積是 25308。",
+        "zh-Hans": "积是 25308。",
+        "en": "The product is 25308.",
+        "ja": "積は 25308 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "從右下角開始看斜帶。第 1 條斜帶只有右下格的個位 8；第 2 條是右下格的十位 2、中下格的個位 6、右上格的個位 2；第 3 條是中下格的十位 5、左下格的個位 2、右上格的十位 1、中上格的個位 4；第 4 條是左下格的十位 4、中上格的十位 2、左上格的個位 8；第 5 條只有左上格的十位 1。",
+          "依序相加：第 1 條是 8，個位寫 8。第 2 條 2 + 6 + 2 = 10，十位寫 0，進 1。第 3 條 5 + 2 + 1 + 4 = 12，加上進位是 13，百位寫 3，進 1。",
+          "第 4 條 4 + 2 + 8 = 14，加上進位是 15，千位寫 5，進 1。第 5 條 1 + 1 = 2，萬位寫 2。所以積是 25308。",
+          "驗算：上面一排三格是 18、24、12，右邊的數字只能是 3 或 6；若是 6，上方的數字會是 3、4、2，下面一排的 42 ÷ 3 = 14 不是一位數，不合。所以右上是 3，上方是 6、8、4，右下是 42 ÷ 6 = 7。原來的算式是 684 × 37 = 25308，和上面的結果相同。"
+        ],
+        "zh-Hans": [
+          "从右下角开始看斜带。第 1 条斜带只有右下格的个位 8；第 2 条是右下格的十位 2、中下格的个位 6、右上格的个位 2；第 3 条是中下格的十位 5、左下格的个位 2、右上格的十位 1、中上格的个位 4；第 4 条是左下格的十位 4、中上格的十位 2、左上格的个位 8；第 5 条只有左上格的十位 1。",
+          "依序相加：第 1 条是 8，个位写 8。第 2 条 2 + 6 + 2 = 10，十位写 0，进 1。第 3 条 5 + 2 + 1 + 4 = 12，加上进位是 13，百位写 3，进 1。",
+          "第 4 条 4 + 2 + 8 = 14，加上进位是 15，千位写 5，进 1。第 5 条 1 + 1 = 2，万位写 2。所以积是 25308。",
+          "验算：上面一排三格是 18、24、12，右边的数字只能是 3 或 6；若是 6，上方的数字会是 3、4、2，下面一排的 42 ÷ 3 = 14 不是一位数，不合。所以右上是 3，上方是 6、8、4，右下是 42 ÷ 6 = 7。原来的算式是 684 × 37 = 25308，和上面的结果相同。"
+        ],
+        "en": [
+          "Read the diagonal bands from the bottom-right corner. Band 1 holds only the ones digit 8 of the bottom-right cell; band 2 holds the tens digit 2 of the bottom-right cell, the ones digit 6 of the bottom-middle cell and the ones digit 2 of the top-right cell; band 3 holds the tens digit 5 of the bottom-middle cell, the ones digit 2 of the bottom-left cell, the tens digit 1 of the top-right cell and the ones digit 4 of the top-middle cell; band 4 holds the tens digit 4 of the bottom-left cell, the tens digit 2 of the top-middle cell and the ones digit 8 of the top-left cell; band 5 holds only the tens digit 1 of the top-left cell.",
+          "Add them in order: band 1 is 8, so the ones digit is 8. Band 2: 2 + 6 + 2 = 10, write 0 in the tens place and carry 1. Band 3: 5 + 2 + 1 + 4 = 12, plus the carry is 13, write 3 in the hundreds place and carry 1.",
+          "Band 4: 4 + 2 + 8 = 14, plus the carry is 15, write 5 in the thousands place and carry 1. Band 5: 1 + 1 = 2 in the ten-thousands place. The product is 25308.",
+          "Check: the top row of cells is 18, 24, 12, so its right-hand digit is 3 or 6. If it were 6, the digits above would be 3, 4, 2, and then 42 ÷ 3 = 14 in the bottom row is not a digit — impossible. So the top-right digit is 3, the digits above are 6, 8, 4, and the bottom-right digit is 42 ÷ 6 = 7. The calculation was 684 × 37 = 25308, matching the answer."
+        ],
+        "ja": [
+          "右下から斜めの帯を見ます。1本目の帯は右下のマスの一の位 8 だけ。2本目は右下のマスの十の位 2、下の中央のマスの一の位 6、右上のマスの一の位 2。3本目は下の中央のマスの十の位 5、左下のマスの一の位 2、右上のマスの十の位 1、上の中央のマスの一の位 4。4本目は左下のマスの十の位 4、上の中央のマスの十の位 2、左上のマスの一の位 8。5本目は左上のマスの十の位 1 だけです。",
+          "順にたします。1本目は 8 なので一の位は 8。2本目は 2 + 6 + 2 = 10 で、十の位は 0、1 くり上げ。3本目は 5 + 2 + 1 + 4 = 12、くり上がりをたして 13 なので、百の位は 3、1 くり上げ。",
+          "4本目は 4 + 2 + 8 = 14、くり上がりをたして 15 なので、千の位は 5、1 くり上げ。5本目は 1 + 1 = 2 で一万の位は 2。積は 25308 です。",
+          "たしかめ：上の段の3マスは 18、24、12 なので、右の数字は 3 か 6 です。6 だと上の数字は 3、4、2 になり、下の段の 42 ÷ 3 = 14 は1けたにならないので不適。よって右上は 3、上の数字は 6、8、4、右下は 42 ÷ 6 = 7 で、もとの式は 684 × 37 = 25308 となり、答えと一致します。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "geometry_scene",
+        "params": {
+          "bounds": {
+            "minX": -0.3,
+            "minY": -0.4,
+            "maxX": 3.9,
+            "maxY": 2.7
+          },
+          "points": [
+            {
+              "name": "_h1",
+              "x": 0,
+              "y": 0,
+              "visible": false
+            },
+            {
+              "name": "_h2",
+              "x": 0,
+              "y": 2,
+              "visible": false
+            },
+            {
+              "name": "_h3",
+              "x": 1,
+              "y": 0,
+              "visible": false
+            },
+            {
+              "name": "_h4",
+              "x": 1,
+              "y": 2,
+              "visible": false
+            },
+            {
+              "name": "_h5",
+              "x": 2,
+              "y": 0,
+              "visible": false
+            },
+            {
+              "name": "_h6",
+              "x": 2,
+              "y": 2,
+              "visible": false
+            },
+            {
+              "name": "_h7",
+              "x": 3,
+              "y": 0,
+              "visible": false
+            },
+            {
+              "name": "_h8",
+              "x": 3,
+              "y": 2,
+              "visible": false
+            },
+            {
+              "name": "_h9",
+              "x": 0,
+              "y": 0,
+              "visible": false
+            },
+            {
+              "name": "_h10",
+              "x": 3,
+              "y": 0,
+              "visible": false
+            },
+            {
+              "name": "_h11",
+              "x": 0,
+              "y": 1,
+              "visible": false
+            },
+            {
+              "name": "_h12",
+              "x": 3,
+              "y": 1,
+              "visible": false
+            },
+            {
+              "name": "_h13",
+              "x": 0,
+              "y": 2,
+              "visible": false
+            },
+            {
+              "name": "_h14",
+              "x": 3,
+              "y": 2,
+              "visible": false
+            },
+            {
+              "name": "_h15",
+              "x": 0,
+              "y": 1,
+              "visible": false
+            },
+            {
+              "name": "_h16",
+              "x": 1,
+              "y": 2,
+              "visible": false
+            },
+            {
+              "name": "_h17",
+              "x": 0,
+              "y": 0,
+              "visible": false
+            },
+            {
+              "name": "_h18",
+              "x": 2,
+              "y": 2,
+              "visible": false
+            },
+            {
+              "name": "_h19",
+              "x": 1,
+              "y": 0,
+              "visible": false
+            },
+            {
+              "name": "_h20",
+              "x": 3,
+              "y": 2,
+              "visible": false
+            },
+            {
+              "name": "_h21",
+              "x": 2,
+              "y": 0,
+              "visible": false
+            },
+            {
+              "name": "_h22",
+              "x": 3,
+              "y": 1,
+              "visible": false
+            },
+            {
+              "name": "_t23",
+              "x": 0.3,
+              "y": 1.62,
+              "pos": "t",
+              "visible": false,
+              "label": "1"
+            },
+            {
+              "name": "_t24",
+              "x": 0.7,
+              "y": 1.22,
+              "pos": "t",
+              "visible": false,
+              "label": "8"
+            },
+            {
+              "name": "_t25",
+              "x": 1.3,
+              "y": 1.62,
+              "pos": "t",
+              "visible": false,
+              "label": "2"
+            },
+            {
+              "name": "_t26",
+              "x": 1.7,
+              "y": 1.22,
+              "pos": "t",
+              "visible": false,
+              "label": "4"
+            },
+            {
+              "name": "_t27",
+              "x": 2.3,
+              "y": 1.62,
+              "pos": "t",
+              "visible": false,
+              "label": "1"
+            },
+            {
+              "name": "_t28",
+              "x": 2.7,
+              "y": 1.22,
+              "pos": "t",
+              "visible": false,
+              "label": "2"
+            },
+            {
+              "name": "_t29",
+              "x": 0.3,
+              "y": 0.62,
+              "pos": "t",
+              "visible": false,
+              "label": "4"
+            },
+            {
+              "name": "_t30",
+              "x": 0.7,
+              "y": 0.22,
+              "pos": "t",
+              "visible": false,
+              "label": "2"
+            },
+            {
+              "name": "_t31",
+              "x": 1.3,
+              "y": 0.62,
+              "pos": "t",
+              "visible": false,
+              "label": "5"
+            },
+            {
+              "name": "_t32",
+              "x": 1.7,
+              "y": 0.22,
+              "pos": "t",
+              "visible": false,
+              "label": "6"
+            },
+            {
+              "name": "_t33",
+              "x": 2.3,
+              "y": 0.62,
+              "pos": "t",
+              "visible": false,
+              "label": "2"
+            },
+            {
+              "name": "_t34",
+              "x": 2.7,
+              "y": 0.22,
+              "pos": "t",
+              "visible": false,
+              "label": "8"
+            },
+            {
+              "name": "_t35",
+              "x": 0.5,
+              "y": 2.25,
+              "pos": "t",
+              "visible": false,
+              "label": "?"
+            },
+            {
+              "name": "_t36",
+              "x": 1.5,
+              "y": 2.25,
+              "pos": "t",
+              "visible": false,
+              "label": "?"
+            },
+            {
+              "name": "_t37",
+              "x": 2.5,
+              "y": 2.25,
+              "pos": "t",
+              "visible": false,
+              "label": "?"
+            },
+            {
+              "name": "_t38",
+              "x": 3.25,
+              "y": 1.38,
+              "pos": "t",
+              "visible": false,
+              "label": "?"
+            },
+            {
+              "name": "_t39",
+              "x": 3.25,
+              "y": 0.38,
+              "pos": "t",
+              "visible": false,
+              "label": "?"
+            }
+          ],
+          "segments": [
+            {
+              "from": "_h1",
+              "to": "_h2",
+              "style": "solid"
+            },
+            {
+              "from": "_h3",
+              "to": "_h4",
+              "style": "solid"
+            },
+            {
+              "from": "_h5",
+              "to": "_h6",
+              "style": "solid"
+            },
+            {
+              "from": "_h7",
+              "to": "_h8",
+              "style": "solid"
+            },
+            {
+              "from": "_h9",
+              "to": "_h10",
+              "style": "solid"
+            },
+            {
+              "from": "_h11",
+              "to": "_h12",
+              "style": "solid"
+            },
+            {
+              "from": "_h13",
+              "to": "_h14",
+              "style": "solid"
+            },
+            {
+              "from": "_h15",
+              "to": "_h16",
+              "style": "construction"
+            },
+            {
+              "from": "_h17",
+              "to": "_h18",
+              "style": "construction"
+            },
+            {
+              "from": "_h19",
+              "to": "_h20",
+              "style": "construction"
+            },
+            {
+              "from": "_h21",
+              "to": "_h22",
+              "style": "construction"
+            }
+          ]
+        }
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "25308"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 5
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "格子乘法讀出積",
+        "notes": "設計依據：圖上只有格子乘法的部分積，乘數被擦掉，要懂得「沿斜帶相加並進位」才能讀出積，也可以由部分積反推乘數再驗算。全庫搜尋「格子乘法」「斜線」無任何題；最接近的是 arithmetic_grade4_foundation_181（直式乘法第二行沒錯位），那題是直式位值錯誤，本題是另一種演算法的讀圖。已另行驗算 684 × 37 = 25308、各斜帶和 8、10、12、14、1。",
+        "displayText": "MathSpring 改寫題（附圖）"
+      }
+    },
+    {
+      "id": "arithmetic_grade4_foundation_219",
+      "topic": "arithmetic",
+      "subtopic": "elevator_line_graph_up_down_cost",
+      "tags": [
+        "c:add_sub",
+        "c:mul_div",
+        "m:direct"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade4",
+      "challengeTier": "foundation",
+      "reviewStatus": "ok",
+      "prompt": {
+        "zh-Hant": "如圖的折線表示一部電梯在 12 分鐘裡的位置：橫軸是經過的時間（分鐘），直軸是電梯在幾樓。這部電梯每往上升 1 層樓要用 3 度電，每往下降 1 層樓要用 1 度電，停著不動時不用電。這 12 分鐘裡，電梯一共用了幾度電？",
+        "zh-Hans": "如图的折线表示一部电梯在 12 分钟里的位置：横轴是经过的时间（分钟），纵轴是电梯在几楼。这部电梯每往上升 1 层楼要用 3 度电，每往下降 1 层楼要用 1 度电，停着不动时不用电。这 12 分钟里，电梯一共用了几度电？",
+        "en": "The line graph shows where an elevator was during 12 minutes: the horizontal axis is the time in minutes and the vertical axis is the floor the elevator is on. Going up 1 floor uses 3 units of electricity, going down 1 floor uses 1 unit, and standing still uses none. How many units of electricity did the elevator use in these 12 minutes?",
+        "ja": "図の折れ線は、あるエレベーターの12分間の位置を表しています。横軸は時間（分）、縦軸はエレベーターが何階にいるかです。このエレベーターは1階分上がるごとに電気を3単位、1階分下がるごとに1単位使い、止まっている間は使いません。この12分間で、エレベーターは電気を全部で何単位使いましたか。"
+      },
+      "answer": {
+        "zh-Hant": "一共用了 47 度電。",
+        "zh-Hans": "一共用了 47 度电。",
+        "en": "It used 47 units.",
+        "ja": "47 単位使いました。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "讀折線的轉折點：第 0 分在 1 樓，第 2 分到 7 樓，第 3 分仍在 7 樓，第 5 分到 3 樓，第 7 分仍在 3 樓，第 9 分到 9 樓，第 10 分仍在 9 樓，第 12 分到 2 樓。水平的那幾段是停著不動。",
+          "往上的兩段：1 樓到 7 樓上升 6 層，3 樓到 9 樓上升 6 層，一共上升 6 + 6 = 12 層，用電 12 × 3 = 36 度。",
+          "往下的兩段：7 樓到 3 樓下降 4 層，9 樓到 2 樓下降 7 層，一共下降 4 + 7 = 11 層，用電 11 × 1 = 11 度。",
+          "一共用電 36 + 11 = 47 度。注意不能只看起點 1 樓和終點 2 樓相差 1 層，上上下下的每一段都要算。"
+        ],
+        "zh-Hans": [
+          "读折线的转折点：第 0 分在 1 楼，第 2 分到 7 楼，第 3 分仍在 7 楼，第 5 分到 3 楼，第 7 分仍在 3 楼，第 9 分到 9 楼，第 10 分仍在 9 楼，第 12 分到 2 楼。水平的那几段是停着不动。",
+          "往上的两段：1 楼到 7 楼上升 6 层，3 楼到 9 楼上升 6 层，一共上升 6 + 6 = 12 层，用电 12 × 3 = 36 度。",
+          "往下的两段：7 楼到 3 楼下降 4 层，9 楼到 2 楼下降 7 层，一共下降 4 + 7 = 11 层，用电 11 × 1 = 11 度。",
+          "一共用电 36 + 11 = 47 度。注意不能只看起点 1 楼和终点 2 楼相差 1 层，上上下下的每一段都要算。"
+        ],
+        "en": [
+          "Read the corners of the graph: at minute 0 it is on floor 1, at minute 2 on floor 7, still on floor 7 at minute 3, on floor 3 at minute 5, still on floor 3 at minute 7, on floor 9 at minute 9, still on floor 9 at minute 10, and on floor 2 at minute 12. The flat parts are when it stands still.",
+          "The two upward parts: floor 1 to floor 7 is 6 floors and floor 3 to floor 9 is 6 floors, 6 + 6 = 12 floors up in total, using 12 × 3 = 36 units.",
+          "The two downward parts: floor 7 to floor 3 is 4 floors and floor 9 to floor 2 is 7 floors, 4 + 7 = 11 floors down in total, using 11 × 1 = 11 units.",
+          "Total: 36 + 11 = 47 units. Looking only at the start (floor 1) and the end (floor 2) would miss every trip up and down."
+        ],
+        "ja": [
+          "折れ線の曲がり角を読みます。0分に1階、2分に7階、3分もまだ7階、5分に3階、7分もまだ3階、9分に9階、10分もまだ9階、12分に2階です。水平な部分は止まっているところです。",
+          "上がった2つの部分：1階から7階で6階分、3階から9階で6階分、合わせて 6 + 6 = 12 階分上がり、電気は 12 × 3 = 36 単位です。",
+          "下がった2つの部分：7階から3階で4階分、9階から2階で7階分、合わせて 4 + 7 = 11 階分下がり、電気は 11 × 1 = 11 単位です。",
+          "全部で 36 + 11 = 47 単位です。はじめの1階と最後の2階の差だけを見てはいけません。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "coordinate_plane",
+        "params": {
+          "minX": 0,
+          "maxX": 12,
+          "minY": 1,
+          "maxY": 10,
+          "showGrid": true,
+          "points": [
+            {
+              "x": 0,
+              "y": 1,
+              "label": ""
+            },
+            {
+              "x": 2,
+              "y": 7,
+              "label": ""
+            },
+            {
+              "x": 3,
+              "y": 7,
+              "label": ""
+            },
+            {
+              "x": 5,
+              "y": 3,
+              "label": ""
+            },
+            {
+              "x": 7,
+              "y": 3,
+              "label": ""
+            },
+            {
+              "x": 9,
+              "y": 9,
+              "label": ""
+            },
+            {
+              "x": 10,
+              "y": 9,
+              "label": ""
+            },
+            {
+              "x": 12,
+              "y": 2,
+              "label": ""
+            }
+          ],
+          "path": [
+            {
+              "x": 0,
+              "y": 1
+            },
+            {
+              "x": 2,
+              "y": 7
+            },
+            {
+              "x": 3,
+              "y": 7
+            },
+            {
+              "x": 5,
+              "y": 3
+            },
+            {
+              "x": 7,
+              "y": 3
+            },
+            {
+              "x": 9,
+              "y": 9
+            },
+            {
+              "x": 10,
+              "y": 9
+            },
+            {
+              "x": 12,
+              "y": 2
+            }
+          ]
+        }
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "47"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "電梯樓層折線圖：上下分開計算用電",
+        "notes": "設計依據：從時間－樓層折線讀出每一段的升降層數，上升與下降單價不同，要分開加總；陷阱是只看起訖樓層差。最接近 logic_grade2_foundation_137（依停靠順序算電梯總共走幾層），那題是排程後求總距離、無圖；本題是讀折線圖並把上、下分開乘不同單價。另見 arithmetic_grade4_foundation_211（累計頁數折線找單日最大增量），讀圖目的不同。驗算：上 12 層、下 11 層，36 + 11 = 47。",
+        "displayText": "MathSpring 改寫題（附圖）"
+      }
+    },
+    {
+      "id": "arithmetic_grade4_foundation_220",
+      "topic": "arithmetic",
+      "subtopic": "two_way_table_missing_cells_chain",
+      "tags": [
+        "c:add_sub",
+        "m:direct"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade4",
+      "challengeTier": "foundation",
+      "reviewStatus": "ok",
+      "prompt": {
+        "zh-Hant": "如圖是 A、B、C 三個班上個月向圖書館借書的二維表格：●、▲、■ 是三種書，表裡每一格是那一班借那一種書的本數。最右邊塗色的那一直行是每一班借書的合計，最下面塗色的那一橫排是每一種書的合計，右下角是全部的合計。表裡有些格子被擦掉了（空白）。標 ? 的格子應該是多少本？",
+        "zh-Hans": "如图是 A、B、C 三个班上个月向图书馆借书的二维表格：●、▲、■ 是三种书，表里每一格是那一班借那一种书的本数。最右边涂色的那一竖排是每一班借书的合计，最下面涂色的那一横排是每一种书的合计，右下角是全部的合计。表里有些格子被擦掉了（空白）。标 ? 的格子应该是多少本？",
+        "en": "The figure is a two-way table of the books that classes A, B and C borrowed from the library last month: ●, ▲ and ■ are three kinds of books, and each cell is the number of that kind borrowed by that class. The shaded column on the right gives each class's total, the shaded row at the bottom gives each kind's total, and the bottom-right cell is the grand total. Some cells have been erased (left blank). How many books belong in the cell marked ?",
+        "ja": "図は、A 組、B 組、C 組の3つのクラスが先月図書館で借りた本の二次元の表です。●、▲、■ は3種類の本で、表の各マスはそのクラスがその種類の本を借りた冊数です。いちばん右の色のついた列は各クラスの合計、いちばん下の色のついた段は各種類の合計、右下のマスは全体の合計です。いくつかのマスは消えています（空白）。? のマスには何冊が入りますか。"
+      },
+      "answer": {
+        "zh-Hant": "標 ? 的格子是 96 本。",
+        "zh-Hans": "标 ? 的格子是 96 本。",
+        "en": "The cell marked ? is 96 books.",
+        "ja": "? のマスは 96 冊です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "C 班那一橫排只知道 ● 的 143 本，▲ 和合計都是空白，所以要先把 C 班的 ▲ 和合計找出來。",
+          "C 班的合計：全部 951 本減去 A 班 300 本和 B 班 310 本，是 951 − 300 − 310 = 341 本。",
+          "C 班的 ▲：先求 A 班的 ▲ 是 300 − 128 − 77 = 95 本；▲ 一共 281 本，B 班借了 84 本，所以 C 班的 ▲ 是 281 − 95 − 84 = 102 本。",
+          "C 班的 ■ 是 341 − 143 − 102 = 96 本。驗算：B 班的 ● 是 387 − 128 − 143 = 116 本，B 班的 ■ 是 310 − 116 − 84 = 110 本，■ 的合計 77 + 110 + 96 = 283 本，三種書的合計 387 + 281 + 283 = 951 本，和右下角相符。"
+        ],
+        "zh-Hans": [
+          "C 班那一横排只知道 ● 的 143 本，▲ 和合计都是空白，所以要先把 C 班的 ▲ 和合计找出来。",
+          "C 班的合计：全部 951 本减去 A 班 300 本和 B 班 310 本，是 951 − 300 − 310 = 341 本。",
+          "C 班的 ▲：先求 A 班的 ▲ 是 300 − 128 − 77 = 95 本；▲ 一共 281 本，B 班借了 84 本，所以 C 班的 ▲ 是 281 − 95 − 84 = 102 本。",
+          "C 班的 ■ 是 341 − 143 − 102 = 96 本。验算：B 班的 ● 是 387 − 128 − 143 = 116 本，B 班的 ■ 是 310 − 116 − 84 = 110 本，■ 的合计 77 + 110 + 96 = 283 本，三种书的合计 387 + 281 + 283 = 951 本，和右下角相符。"
+        ],
+        "en": [
+          "In class C's row only ● (143) is known; both ▲ and the row total are blank, so find those first.",
+          "Class C's total: the grand total 951 minus class A's 300 and class B's 310, which is 951 − 300 − 310 = 341.",
+          "Class C's ▲: class A's ▲ is 300 − 128 − 77 = 95; the ▲ total is 281 and class B borrowed 84, so class C's ▲ is 281 − 95 − 84 = 102.",
+          "Class C's ■ is 341 − 143 − 102 = 96. Check: class B's ● is 387 − 128 − 143 = 116, class B's ■ is 310 − 116 − 84 = 110, the ■ total is 77 + 110 + 96 = 283, and 387 + 281 + 283 = 951 matches the grand total."
+        ],
+        "ja": [
+          "C 組の段でわかっているのは ● の 143 冊だけで、▲ と合計が空白なので、まずそれを求めます。",
+          "C 組の合計：全体の 951 冊から A 組の 300 冊と B 組の 310 冊をひいて、951 − 300 − 310 = 341 冊。",
+          "C 組の ▲：A 組の ▲ は 300 − 128 − 77 = 95 冊。▲ の合計は 281 冊で B 組は 84 冊なので、C 組の ▲ は 281 − 95 − 84 = 102 冊。",
+          "C 組の ■ は 341 − 143 − 102 = 96 冊です。たしかめ：B 組の ● は 387 − 128 − 143 = 116 冊、B 組の ■ は 310 − 116 − 84 = 110 冊、■ の合計は 77 + 110 + 96 = 283 冊で、387 + 281 + 283 = 951 冊が右下と一致します。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "composite_grid_shape",
+        "params": {
+          "rows": 5,
+          "cols": 5,
+          "filledCells": [
+            [
+              1,
+              4
+            ],
+            [
+              2,
+              4
+            ],
+            [
+              3,
+              4
+            ],
+            [
+              4,
+              4
+            ],
+            [
+              4,
+              1
+            ],
+            [
+              4,
+              2
+            ],
+            [
+              4,
+              3
+            ]
+          ],
+          "cellLabels": {
+            "0,1": "●",
+            "0,2": "▲",
+            "0,3": "■",
+            "1,0": "A",
+            "2,0": "B",
+            "3,0": "C",
+            "1,1": "128",
+            "1,3": "77",
+            "1,4": "300",
+            "2,2": "84",
+            "2,4": "310",
+            "3,1": "143",
+            "3,3": "?",
+            "4,1": "387",
+            "4,2": "281",
+            "4,4": "951"
+          }
+        }
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "96"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "二維表格用合計推回空格",
+        "notes": "設計依據：四年級的二維表格，空格要沿著橫排合計、直行合計交替推出來（C 班的合計與 ▲ 都得先繞到別的格子才能求）。全庫搜尋「合計」「二維表格」沒有用表格合計推空格的題；最接近的是 arithmetic_grade4_foundation_214（劃掉數讓橫排、直行和符合），那是選子集，本題是加減推算。已另行驗算整張表（A 128/95/77、B 116/84/110、C 143/102/96）。",
+        "displayText": "MathSpring 改寫題（附圖）"
+      }
     }
   ]
 }

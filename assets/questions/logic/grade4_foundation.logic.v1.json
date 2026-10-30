@@ -10591,6 +10591,716 @@
         "notes": "設計依據：圖論的「支配集」（最少據點讓每個點自己或鄰居有據點）。全庫查無支配集題；最接近的是 logic_grade12_foundation_022（每條路兩端至少一端設監視器，是點覆蓋）與 logic_grade6_foundation_102（封路使兩村不通），本題要照顧的是「點」而不是「邊」，用三組互不相交的「葉子＋鄰居」證下界，並排除看似最熱鬧的 B、E、H，骨架不同。圖：九邊形外圈 A～I、內部三角形 B–E–H、三個葉子 J、K、L 掛在 A、D、G；圖上沒有標出任何消防站。程式窮舉 2¹² 種蓋法確認最少 3 座且唯一。",
         "displayText": "MathSpring 改寫題（附圖）"
       }
+    },
+    {
+      "id": "logic_grade4_foundation_127",
+      "topic": "logic",
+      "subtopic": "bridges_islands_count_double",
+      "tags": [
+        "c:logic_deduction",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade4",
+      "challengeTier": "foundation",
+      "reviewStatus": "ok",
+      "prompt": {
+        "zh-Hant": "如圖是一個「造橋」謎題：每個圓圈是一座小島，圈裡的數字是要接在這座島上的橋的座數。要照下面的規則在小島之間造橋：① 橋只能畫成橫的或直的直線，連接同一橫排或同一直行上、中間沒有別的島的兩座島；② 兩座島之間最多造 2 座橋；③ 橋不能互相交叉；④ 造好以後，所有的島都要能經過橋互相到達。照規則造好以後，有幾對島之間是造了 2 座橋的？",
+        "zh-Hans": "如图是一个“造桥”谜题：每个圆圈是一座小岛，圈里的数字是要接在这座岛上的桥的座数。要照下面的规则在小岛之间造桥：① 桥只能画成横的或直的直线，连接同一横排或同一竖排上、中间没有别的岛的两座岛；② 两座岛之间最多造 2 座桥；③ 桥不能互相交叉；④ 造好以后，所有的岛都要能经过桥互相到达。照规则造好以后，有几对岛之间是造了 2 座桥的？",
+        "en": "The figure is a \"Bridges\" puzzle: each circle is an island, and its number is how many bridges must end at that island. Build bridges by these rules: (1) a bridge is a horizontal or vertical straight line joining two islands in the same row or column with no island between them; (2) at most 2 bridges join the same two islands; (3) bridges may not cross; (4) when finished, every island can be reached from every other island over the bridges. In the solution, how many pairs of islands are joined by 2 bridges?",
+        "ja": "図は「橋をかけろ」パズルです。円はそれぞれ島で、中の数字はその島につながる橋の本数です。次のルールで島と島の間に橋をかけます：① 橋は縦か横のまっすぐな線で、同じ段か同じ列にあって間に別の島がない2つの島を結ぶ；② 同じ2つの島の間にかける橋は2本まで；③ 橋どうしは交差してはいけない；④ かけ終わったとき、どの島からどの島へも橋を通って行ける。ルールどおりにかけると、2本の橋で結ばれている島の組はいくつありますか。"
+      },
+      "answer": {
+        "zh-Hant": "有 3 對島之間造了 2 座橋。",
+        "zh-Hans": "有 3 对岛之间造了 2 座桥。",
+        "en": "3 pairs of islands are joined by 2 bridges.",
+        "ja": "2本の橋で結ばれた島の組は 3 組です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "把島叫做：最上面的「1」、左邊中間的「4」、右邊中間的「2」（上）和它下面的「2」（下）、左下角的「4」、下面中間的「5」、右下角的「2」。",
+          "右下角的「2」只能和它左邊的「5」連，所以它們之間造 2 座橋。最上面的「1」只能往下和左邊中間的「4」連 1 座橋。",
+          "左下角的「4」只能往上連左邊中間的「4」、往右連「5」，每邊最多 2 座，要湊滿 4 座只能兩邊各 2 座。",
+          "「5」已經有右邊 2 座、左邊 2 座，還差 1 座，只能往上連下面那個「2」，造 1 座。這個「2」還差 1 座，只能往上連上面那個「2」，造 1 座；上面那個「2」再差 1 座，只能往左連左邊中間的「4」，造 1 座。",
+          "檢查左邊中間的「4」：上 1 座、下 2 座、右 1 座，剛好 4 座；所有島也都連在一起，橋沒有交叉。造了 2 座橋的是「2 和 5」「左下 4 和 5」「左下 4 和左中 4」，一共 3 對。"
+        ],
+        "zh-Hans": [
+          "把岛叫做：最上面的“1”、左边中间的“4”、右边中间的“2”（上）和它下面的“2”（下）、左下角的“4”、下面中间的“5”、右下角的“2”。",
+          "右下角的“2”只能和它左边的“5”连，所以它们之间造 2 座桥。最上面的“1”只能往下和左边中间的“4”连 1 座桥。",
+          "左下角的“4”只能往上连左边中间的“4”、往右连“5”，每边最多 2 座，要凑满 4 座只能两边各 2 座。",
+          "“5”已经有右边 2 座、左边 2 座，还差 1 座，只能往上连下面那个“2”，造 1 座。这个“2”还差 1 座，只能往上连上面那个“2”，造 1 座；上面那个“2”再差 1 座，只能往左连左边中间的“4”，造 1 座。",
+          "检查左边中间的“4”：上 1 座、下 2 座、右 1 座，刚好 4 座；所有岛也都连在一起，桥没有交叉。造了 2 座桥的是“2 和 5”“左下 4 和 5”“左下 4 和左中 4”，一共 3 对。"
+        ],
+        "en": [
+          "Name the islands: the top \"1\"; the middle-left \"4\"; the upper \"2\" and lower \"2\" on the right; the bottom-left \"4\"; the bottom \"5\"; and the bottom-right \"2\".",
+          "The bottom-right \"2\" can only connect to the \"5\" on its left, so they get 2 bridges. The top \"1\" can only connect down to the middle-left \"4\", with 1 bridge.",
+          "The bottom-left \"4\" can only connect up to the middle-left \"4\" and right to the \"5\", at most 2 bridges each, so to reach 4 it needs 2 bridges on each side.",
+          "The \"5\" now has 2 on the right and 2 on the left and needs 1 more, which can only go up to the lower \"2\". That \"2\" needs 1 more, which can only go up to the upper \"2\"; the upper \"2\" then needs 1 more, which can only go left to the middle-left \"4\".",
+          "Check the middle-left \"4\": 1 up, 2 down, 1 right — exactly 4. All islands are connected and no bridges cross. The double bridges are \"2–5\", \"bottom-left 4–5\" and \"bottom-left 4–middle-left 4\": 3 pairs."
+        ],
+        "ja": [
+          "島をこうよびます：いちばん上の「1」、左の中ほどの「4」、右の上の「2」と下の「2」、左下の「4」、下の中ほどの「5」、右下の「2」。",
+          "右下の「2」は左の「5」としかつなげないので、2本かけます。いちばん上の「1」は下の左中ほどの「4」としかつなげないので、1本かけます。",
+          "左下の「4」は上の左中ほどの「4」と右の「5」としかつなげず、それぞれ2本までなので、4本にするには両方に2本ずつかけるしかありません。",
+          "「5」は右に2本、左に2本でまだ1本足りず、上の下側の「2」に1本かけるしかありません。その「2」はあと1本足りず、上の上側の「2」に1本、上側の「2」はさらにあと1本足りず、左の左中ほどの「4」に1本かけます。",
+          "たしかめ：左中ほどの「4」は上に1本、下に2本、右に1本でちょうど4本です。すべての島がつながっていて、橋は交差していません。2本かけたのは「2 と 5」「左下の 4 と 5」「左下の 4 と左中ほどの 4」の 3 組です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "geometry_scene",
+        "params": {
+          "bounds": {
+            "minX": -0.6,
+            "minY": -0.6,
+            "maxX": 4.6,
+            "maxY": 4.6
+          },
+          "points": [
+            {
+              "name": "_t1",
+              "x": 1,
+              "y": 3.8,
+              "pos": "t",
+              "visible": false,
+              "label": "1"
+            },
+            {
+              "name": "_t2",
+              "x": 1,
+              "y": 1.8,
+              "pos": "t",
+              "visible": false,
+              "label": "4"
+            },
+            {
+              "name": "_t3",
+              "x": 3,
+              "y": 1.8,
+              "pos": "t",
+              "visible": false,
+              "label": "2"
+            },
+            {
+              "name": "_t4",
+              "x": 3,
+              "y": 0.8,
+              "pos": "t",
+              "visible": false,
+              "label": "2"
+            },
+            {
+              "name": "_t5",
+              "x": 1,
+              "y": -0.2,
+              "pos": "t",
+              "visible": false,
+              "label": "4"
+            },
+            {
+              "name": "_t6",
+              "x": 3,
+              "y": -0.2,
+              "pos": "t",
+              "visible": false,
+              "label": "5"
+            },
+            {
+              "name": "_t7",
+              "x": 4,
+              "y": -0.2,
+              "pos": "t",
+              "visible": false,
+              "label": "2"
+            }
+          ],
+          "segments": [],
+          "arcs": [
+            {
+              "cx": 1,
+              "cy": 4,
+              "r": 0.36,
+              "from": 0,
+              "to": 360
+            },
+            {
+              "cx": 1,
+              "cy": 2,
+              "r": 0.36,
+              "from": 0,
+              "to": 360
+            },
+            {
+              "cx": 3,
+              "cy": 2,
+              "r": 0.36,
+              "from": 0,
+              "to": 360
+            },
+            {
+              "cx": 3,
+              "cy": 1,
+              "r": 0.36,
+              "from": 0,
+              "to": 360
+            },
+            {
+              "cx": 1,
+              "cy": 0,
+              "r": 0.36,
+              "from": 0,
+              "to": 360
+            },
+            {
+              "cx": 3,
+              "cy": 0,
+              "r": 0.36,
+              "from": 0,
+              "to": 360
+            },
+            {
+              "cx": 4,
+              "cy": 0,
+              "r": 0.36,
+              "from": 0,
+              "to": 360
+            }
+          ]
+        }
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "3"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "造橋謎題（島與橋數）",
+        "notes": "設計依據：「造橋」謎題，從只有一個鄰居的島、以及「兩個鄰居各最多 2 座剛好湊滿」的島逐步推出唯一造法。全庫搜尋「橋」只有過橋手電筒、七橋一筆畫、logic_grade3_foundation_088（最少橋數使任一橋壞仍連通）等，沒有數字島造橋謎題。問「雙橋有幾對」而不問總橋數（總數是數字和的一半，不必解題）。已另行窮舉確認造法唯一。",
+        "displayText": "MathSpring 改寫題（附圖）"
+      }
+    },
+    {
+      "id": "logic_grade4_foundation_128",
+      "topic": "logic",
+      "subtopic": "code_breaking_feedback_marks",
+      "tags": [
+        "c:logic_deduction",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade4",
+      "challengeTier": "foundation",
+      "reviewStatus": "ok",
+      "prompt": {
+        "zh-Hant": "小美心裡想了一個三位數密碼，三個數字都是 1 到 6 之中的數，而且互不相同。小安猜了 4 次，每一次小美都在右邊塗色的格子裡回覆：每一個 ● 表示「有一個數字猜對了，位置也對」，每一個 ○ 表示「有一個數字是密碼裡有的，但位置不對」，沒猜中的數字不做記號；記號不會告訴你是哪一個數字。如圖是 4 次猜測和回覆。密碼是多少？",
+        "zh-Hans": "小美心里想了一个三位数密码，三个数字都是 1 到 6 之中的数，而且互不相同。小安猜了 4 次，每一次小美都在右边涂色的格子里回覆：每一个 ● 表示“有一个数字猜对了，位置也对”，每一个 ○ 表示“有一个数字是密码里有的，但位置不对”，没猜中的数字不做记号；记号不会告诉你是哪一个数字。如图是 4 次猜测和回覆。密码是多少？",
+        "en": "Mei thinks of a three-digit code whose digits are three different numbers from 1 to 6. An guesses 4 times, and each time Mei replies in the shaded cell on the right: each ● means \"one digit is correct and in the correct place\", each ○ means \"one digit is in the code but in a different place\", and digits not in the code get no mark; the marks do not say which digit they refer to. The figure shows the 4 guesses and replies. What is the code?",
+        "ja": "メイさんは、1 から 6 のちがう数字3つでできた3けたの暗証番号を考えました。アンさんが4回予想し、そのたびにメイさんは右の色のついたマスで答えました。● は「数字も位置も合っているものが1つある」、○ は「番号にふくまれる数字だが位置がちがうものが1つある」ことを表し、ふくまれない数字には何もつけません。記号はどの数字のことかは教えてくれません。図は4回の予想と答えです。暗証番号はいくつですか。"
+      },
+      "answer": {
+        "zh-Hant": "密碼是 541。",
+        "zh-Hans": "密码是 541。",
+        "en": "The code is 541.",
+        "ja": "暗証番号は 541 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "第 1 次猜 561 得到 ●●：5（第 1 位）、6（第 2 位）、1（第 3 位）之中，剛好有兩個猜對而且位置也對。",
+          "假設 6 在第 2 位是對的。第 2 次猜 612 只有一個 ○，6 已經在密碼裡（猜在第 1 位，位置不對），所以 1 和 2 都不在密碼裡；那麼第 1 次的另一個 ● 只能是 5 在第 1 位，密碼是 56□。第 3 次猜 135 有兩個 ○，1 不在密碼裡，所以 3、5 都在，3 只能在第 3 位，密碼是 563。可是第 4 次猜 416 要有兩個數字在密碼裡，563 只有 6，矛盾。所以 6 不在第 2 位。",
+          "因此第 1 次的兩個 ● 是 5 在第 1 位、1 在第 3 位，密碼是 5□1。第 2 位不是 6，也不能是 5 或 1。第 4 次猜 416 有兩個 ○：1 在密碼裡，6 不在（第 1、3 位已經是 5 和 1，6 只能在第 2 位，前面已排除），所以 4 一定在密碼裡，只能在第 2 位。密碼是 541。",
+          "驗算：541 對 612 是 1 在但位置不對，6、2 不在，得 ○；對 135 是 1、5 在但位置都不對，3 不在，得 ○○；對 416 是 4、1 在但位置都不對，得 ○○；對 561 是 5、1 位置都對，得 ●●。全部符合。"
+        ],
+        "zh-Hans": [
+          "第 1 次猜 561 得到 ●●：5（第 1 位）、6（第 2 位）、1（第 3 位）之中，刚好有两个猜对而且位置也对。",
+          "假设 6 在第 2 位是对的。第 2 次猜 612 只有一个 ○，6 已经在密码里（猜在第 1 位，位置不对），所以 1 和 2 都不在密码里；那么第 1 次的另一个 ● 只能是 5 在第 1 位，密码是 56□。第 3 次猜 135 有两个 ○，1 不在密码里，所以 3、5 都在，3 只能在第 3 位，密码是 563。可是第 4 次猜 416 要有两个数字在密码里，563 只有 6，矛盾。所以 6 不在第 2 位。",
+          "因此第 1 次的两个 ● 是 5 在第 1 位、1 在第 3 位，密码是 5□1。第 2 位不是 6，也不能是 5 或 1。第 4 次猜 416 有两个 ○：1 在密码里，6 不在（第 1、3 位已经是 5 和 1，6 只能在第 2 位，前面已排除），所以 4 一定在密码里，只能在第 2 位。密码是 541。",
+          "验算：541 对 612 是 1 在但位置不对，6、2 不在，得 ○；对 135 是 1、5 在但位置都不对，3 不在，得 ○○；对 416 是 4、1 在但位置都不对，得 ○○；对 561 是 5、1 位置都对，得 ●●。全部符合。"
+        ],
+        "en": [
+          "Guess 1, 561, got ●●: of 5 (1st place), 6 (2nd place) and 1 (3rd place), exactly two are correct and in the correct place.",
+          "Suppose 6 in the 2nd place is correct. Guess 2, 612, got a single ○, and 6 is in the code (guessed in the 1st place, wrong place), so 1 and 2 are not in the code. Then the other ● of guess 1 must be 5 in the 1st place, so the code is 56□. Guess 3, 135, got ○○; 1 is not in the code, so 3 and 5 both are, and 3 must be in the 3rd place: the code would be 563. But guess 4, 416, needs two of its digits in the code, and 563 contains only 6 — a contradiction. So 6 is not in the 2nd place.",
+          "Therefore the two ● of guess 1 are 5 in the 1st place and 1 in the 3rd place: the code is 5□1. The 2nd digit is not 6, 5 or 1. Guess 4, 416, got ○○: 1 is in the code, and 6 is not (it could only be in the 2nd place, already ruled out), so 4 must be in the code, in the 2nd place. The code is 541.",
+          "Check: against 612, 1 is present but misplaced and 6, 2 are absent: ○. Against 135, 1 and 5 are present but misplaced, 3 absent: ○○. Against 416, 4 and 1 present but misplaced: ○○. Against 561, 5 and 1 in place: ●●. Everything matches."
+        ],
+        "ja": [
+          "1回目の 561 は ●● なので、5（1けた目）、6（2けた目）、1（3けた目）のうち、ちょうど2つが数字も位置も合っています。",
+          "6 が2けた目で合っていると仮定します。2回目の 612 は ○ が1つで、6 は番号にふくまれる（1けた目に予想したので位置ちがい）から、1 と 2 はふくまれません。すると1回目のもう1つの ● は 5 が1けた目で、番号は 56□。3回目の 135 は ○○ で、1 はふくまれないので 3 と 5 がふくまれ、3 は3けた目しかなく番号は 563 になります。しかし4回目の 416 では2つの数字がふくまれるはずなのに、563 には 6 しかなく矛盾します。よって 6 は2けた目ではありません。",
+          "したがって1回目の ●● は 5 が1けた目、1 が3けた目で、番号は 5□1 です。2けた目は 6 でも 5 でも 1 でもありません。4回目の 416 は ○○ で、1 はふくまれ、6 はふくまれない（入るなら2けた目しかなく、すでに否定）ので、4 がふくまれ、2けた目に入ります。番号は 541 です。",
+          "たしかめ：612 に対しては 1 が位置ちがい、6・2 はなしで ○。135 に対しては 1・5 が位置ちがい、3 はなしで ○○。416 に対しては 4・1 が位置ちがいで ○○。561 に対しては 5・1 が位置も合って ●●。すべて合います。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "composite_grid_shape",
+        "params": {
+          "rows": 4,
+          "cols": 4,
+          "filledCells": [
+            [
+              0,
+              3
+            ],
+            [
+              1,
+              3
+            ],
+            [
+              2,
+              3
+            ],
+            [
+              3,
+              3
+            ]
+          ],
+          "cellLabels": {
+            "0,0": "5",
+            "0,1": "6",
+            "0,2": "1",
+            "0,3": "●●",
+            "1,0": "6",
+            "1,1": "1",
+            "1,2": "2",
+            "1,3": "○",
+            "2,0": "1",
+            "2,1": "3",
+            "2,2": "5",
+            "2,3": "○○",
+            "3,0": "4",
+            "3,1": "1",
+            "3,2": "6",
+            "3,3": "○○"
+          }
+        }
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "541"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "猜密碼：位置對與數字對的記號推理",
+        "notes": "設計依據：猜數字遊戲的回覆記號（● 數字與位置都對、○ 數字對位置錯），先假設再找矛盾。全庫搜尋「幾A幾B」「猜…數字…位置」皆無；最接近的是 logic_grade2_foundation_063（只回答大於與否的二分搜尋），推理方式完全不同。圖：4 次猜測與回覆的表格。已另行窮舉 120 組密碼確認只有 541 符合，且任拿掉一次猜測都不唯一。",
+        "displayText": "MathSpring 改寫題（附圖）"
+      }
+    },
+    {
+      "id": "logic_grade4_foundation_129",
+      "topic": "logic",
+      "subtopic": "comparator_network_which_input_fails",
+      "tags": [
+        "c:logic_deduction",
+        "c:compare_order",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade4",
+      "challengeTier": "foundation",
+      "reviewStatus": "ok",
+      "prompt": {
+        "zh-Hant": "如圖是一台「排序機」：四條橫線由上往下是第 1～4 條，4 個不同的數從左邊各放進一條線，一起往右走。每碰到一根連接兩條線的直棒，就比較那兩條線上的數：比較小的換到上面那條線，比較大的換到下面那條線（本來就是這樣就不動）。小安希望數從右邊出來時，由上往下是從小到大。下面哪一組放進去的數（由上往下寫），出來時「沒有」排好？",
+        "zh-Hans": "如图是一台“排序機”：四条横线由上往下是第 1～4 条，4 个不同的数从左边各放进一条线，一起往右走。每碰到一根连接两条线的直棒，就比较那两条线上的数：比较小的换到上面那条线，比较大的换到下面那条线（本来就是这样就不动）。小安希望数从右边出来时，由上往下是从小到大。下面哪一组放进去的数（由上往下写），出来时“没有”排好？",
+        "en": "The figure is a \"sorting machine\": the four horizontal lines are lines 1–4 from top to bottom. Four different numbers enter from the left, one per line, and move to the right together. Whenever they reach a vertical bar joining two lines, the two numbers on those lines are compared: the smaller moves to the upper line and the larger to the lower line (if they are already that way, nothing changes). An wants the numbers to come out on the right in increasing order from top to bottom. Which of the following inputs (listed from top to bottom) does NOT come out sorted?",
+        "ja": "図は「ならべかえ機」です。4本の横線を上から1～4本目とします。ちがう4つの数を左から1本ずつに入れ、いっしょに右へ進めます。2本の線をつなぐ縦の棒に来るたびに、その2本の線の数をくらべ、小さいほうを上の線、大きいほうを下の線に入れかえます（すでにそうなっていれば動かさない）。アンさんは、右から出てくる数が上から小さい順になってほしいと思っています。次のうち、入れた数（上から順に書いたもの）が、出てきたときに小さい順に「ならない」のはどれですか。"
+      },
+      "answer": {
+        "zh-Hant": "選 C：放進 3、4、1、2，出來是 1、3、2、4，沒有排好。",
+        "zh-Hans": "选 C：放进 3、4、1、2，出来是 1、3、2、4，没有排好。",
+        "en": "C: input 3, 4, 1, 2 comes out as 1, 3, 2, 4, which is not sorted.",
+        "ja": "C です。3、4、1、2 を入れると 1、3、2、4 と出てきて、小さい順になりません。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "機器有三關：第一關同時比較第 1、2 條和第 3、4 條；第二關比較第 2、3 條；第三關再同時比較第 1、2 條和第 3、4 條。",
+          "C（3、4、1、2）：第一關 3 < 4、1 < 2 都不動；第二關比較 4 和 1，換成 3、1、4、2；第三關變成 1、3、2、4。第 2、3 條的 3 和 2 順序錯了，沒有排好。",
+          "其他四組都排好：A（2、4、1、3）→ 2、4、1、3 → 2、1、4、3 → 1、2、3、4；B（4、1、3、2）→ 1、4、2、3 → 1、2、4、3 → 1、2、3、4；D（1、4、3、2）→ 1、4、2、3 → 1、2、4、3 → 1、2、3、4；E（3、1、4、2）→ 1、3、2、4 → 1、2、3、4 → 1、2、3、4。",
+          "原因是：第二關之後，第 2、3 條之間再也沒有直棒。當最大的兩個數 3、4 一開始都在上面兩條線時，只有一個能在第二關換下去，另一個就卡在第 2 條了。所以答案是 C。"
+        ],
+        "zh-Hans": [
+          "機器有三关：第一关同时比较第 1、2 条和第 3、4 条；第二关比较第 2、3 条；第三关再同时比较第 1、2 条和第 3、4 条。",
+          "C（3、4、1、2）：第一关 3 < 4、1 < 2 都不动；第二关比较 4 和 1，换成 3、1、4、2；第三关变成 1、3、2、4。第 2、3 条的 3 和 2 顺序错了，没有排好。",
+          "其他四组都排好：A（2、4、1、3）→ 2、4、1、3 → 2、1、4、3 → 1、2、3、4；B（4、1、3、2）→ 1、4、2、3 → 1、2、4、3 → 1、2、3、4；D（1、4、3、2）→ 1、4、2、3 → 1、2、4、3 → 1、2、3、4；E（3、1、4、2）→ 1、3、2、4 → 1、2、3、4 → 1、2、3、4。",
+          "原因是：第二关之后，第 2、3 条之间再也没有直棒。当最大的两个数 3、4 一开始都在上面两条线时，只有一个能在第二关换下去，另一个就卡在第 2 条了。所以答案是 C。"
+        ],
+        "en": [
+          "The machine has three stages: stage 1 compares lines 1–2 and lines 3–4 at the same time; stage 2 compares lines 2–3; stage 3 again compares lines 1–2 and lines 3–4.",
+          "C (3, 4, 1, 2): in stage 1, 3 < 4 and 1 < 2, so nothing moves; stage 2 compares 4 and 1 and gives 3, 1, 4, 2; stage 3 gives 1, 3, 2, 4. The 3 and 2 on lines 2 and 3 are in the wrong order — not sorted.",
+          "The other four all come out sorted: A (2, 4, 1, 3) → 2, 4, 1, 3 → 2, 1, 4, 3 → 1, 2, 3, 4; B (4, 1, 3, 2) → 1, 4, 2, 3 → 1, 2, 4, 3 → 1, 2, 3, 4; D (1, 4, 3, 2) → 1, 4, 2, 3 → 1, 2, 4, 3 → 1, 2, 3, 4; E (3, 1, 4, 2) → 1, 3, 2, 4 → 1, 2, 3, 4 → 1, 2, 3, 4.",
+          "The reason: after stage 2 there is no bar between lines 2 and 3. When the two largest numbers 3 and 4 both start on the top two lines, only one of them can move down in stage 2 and the other gets stuck on line 2. So the answer is C."
+        ],
+        "ja": [
+          "機械には3つの段階があります。第1段階で1・2本目と3・4本目を同時にくらべ、第2段階で2・3本目をくらべ、第3段階でもう一度1・2本目と3・4本目を同時にくらべます。",
+          "C（3、4、1、2）：第1段階は 3 < 4、1 < 2 で動かず、第2段階で 4 と 1 をくらべて 3、1、4、2、第3段階で 1、3、2、4 になります。2・3本目の 3 と 2 の順が逆で、ならんでいません。",
+          "ほかの4つはならびます。A（2、4、1、3）→ 2、4、1、3 → 2、1、4、3 → 1、2、3、4。B（4、1、3、2）→ 1、4、2、3 → 1、2、4、3 → 1、2、3、4。D（1、4、3、2）→ 1、4、2、3 → 1、2、4、3 → 1、2、3、4。E（3、1、4、2）→ 1、3、2、4 → 1、2、3、4 → 1、2、3、4。",
+          "わけは、第2段階のあとに2・3本目の間の棒がないからです。大きい2つの数 3 と 4 がはじめに上の2本にあると、第2段階で下に移れるのは1つだけで、もう1つは2本目に残ってしまいます。答えは C です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "geometry_scene",
+        "params": {
+          "bounds": {
+            "minX": -0.3,
+            "minY": 0.4,
+            "maxX": 7.3,
+            "maxY": 4.6
+          },
+          "points": [
+            {
+              "name": "_h1",
+              "x": 0,
+              "y": 1,
+              "visible": false
+            },
+            {
+              "name": "_h2",
+              "x": 7,
+              "y": 1,
+              "visible": false
+            },
+            {
+              "name": "_h3",
+              "x": 0,
+              "y": 2,
+              "visible": false
+            },
+            {
+              "name": "_h4",
+              "x": 7,
+              "y": 2,
+              "visible": false
+            },
+            {
+              "name": "_h5",
+              "x": 0,
+              "y": 3,
+              "visible": false
+            },
+            {
+              "name": "_h6",
+              "x": 7,
+              "y": 3,
+              "visible": false
+            },
+            {
+              "name": "_h7",
+              "x": 0,
+              "y": 4,
+              "visible": false
+            },
+            {
+              "name": "_h8",
+              "x": 7,
+              "y": 4,
+              "visible": false
+            },
+            {
+              "name": "k1a",
+              "x": 1.5,
+              "y": 4,
+              "label": ""
+            },
+            {
+              "name": "k1b",
+              "x": 1.5,
+              "y": 3,
+              "label": ""
+            },
+            {
+              "name": "k2a",
+              "x": 1.5,
+              "y": 2,
+              "label": ""
+            },
+            {
+              "name": "k2b",
+              "x": 1.5,
+              "y": 1,
+              "label": ""
+            },
+            {
+              "name": "k3a",
+              "x": 3.5,
+              "y": 3,
+              "label": ""
+            },
+            {
+              "name": "k3b",
+              "x": 3.5,
+              "y": 2,
+              "label": ""
+            },
+            {
+              "name": "k4a",
+              "x": 5.5,
+              "y": 4,
+              "label": ""
+            },
+            {
+              "name": "k4b",
+              "x": 5.5,
+              "y": 3,
+              "label": ""
+            },
+            {
+              "name": "k5a",
+              "x": 5.5,
+              "y": 2,
+              "label": ""
+            },
+            {
+              "name": "k5b",
+              "x": 5.5,
+              "y": 1,
+              "label": ""
+            }
+          ],
+          "segments": [
+            {
+              "from": "_h1",
+              "to": "_h2",
+              "style": "solid"
+            },
+            {
+              "from": "_h3",
+              "to": "_h4",
+              "style": "solid"
+            },
+            {
+              "from": "_h5",
+              "to": "_h6",
+              "style": "solid"
+            },
+            {
+              "from": "_h7",
+              "to": "_h8",
+              "style": "solid"
+            },
+            {
+              "from": "k1a",
+              "to": "k1b",
+              "style": "solid"
+            },
+            {
+              "from": "k2a",
+              "to": "k2b",
+              "style": "solid"
+            },
+            {
+              "from": "k3a",
+              "to": "k3b",
+              "style": "solid"
+            },
+            {
+              "from": "k4a",
+              "to": "k4b",
+              "style": "solid"
+            },
+            {
+              "from": "k5a",
+              "to": "k5b",
+              "style": "solid"
+            }
+          ]
+        }
+      },
+      "answerMode": "multiple_choice",
+      "options": {
+        "A": {
+          "zh-Hant": "2、4、1、3",
+          "zh-Hans": "2、4、1、3",
+          "en": "2, 4, 1, 3",
+          "ja": "2、4、1、3"
+        },
+        "B": {
+          "zh-Hant": "4、1、3、2",
+          "zh-Hans": "4、1、3、2",
+          "en": "4, 1, 3, 2",
+          "ja": "4、1、3、2"
+        },
+        "C": {
+          "zh-Hant": "3、4、1、2",
+          "zh-Hans": "3、4、1、2",
+          "en": "3, 4, 1, 2",
+          "ja": "3、4、1、2"
+        },
+        "D": {
+          "zh-Hant": "1、4、3、2",
+          "zh-Hans": "1、4、3、2",
+          "en": "1, 4, 3, 2",
+          "ja": "1、4、3、2"
+        },
+        "E": {
+          "zh-Hant": "3、1、4、2",
+          "zh-Hans": "3、1、4、2",
+          "en": "3, 1, 4, 2",
+          "ja": "3、1、4、2"
+        }
+      },
+      "correctAnswer": {
+        "type": "choice",
+        "value": "C"
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "比較交換網路找出排序失敗的輸入",
+        "notes": "設計依據：比較器網路（每根直棒把小數換到上線），逐步模擬並看出「第 2、3 條之後沒有再比較」的缺陷：最大兩數同在上半部時會失敗。全庫搜尋「比較器」「較小的換到上」沒有同類題；最接近的是 logic_grade6_foundation_137（相鄰交換排序最少次數），問的是交換次數，不是網路模擬。已另行窮舉 24 種輸入，失敗的恰好是上兩條為 3、4 的 4 種，選項中只有 C 屬於這類。",
+        "displayText": "MathSpring 改寫題（附圖）"
+      }
+    },
+    {
+      "id": "logic_grade4_foundation_130",
+      "topic": "logic",
+      "subtopic": "map_coloring_wheel_min_colors",
+      "tags": [
+        "c:graph_theory",
+        "c:logic_deduction",
+        "m:contradiction"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade4",
+      "challengeTier": "foundation",
+      "reviewStatus": "ok",
+      "prompt": {
+        "zh-Hant": "如圖是一張地圖，分成 A、B、C、D、E、F 六區，寫著同一個字母的格子屬於同一區。要替每一區塗一種顏色，規定有一段共同邊界的兩區不能塗同一種顏色（只碰到一個角不算相鄰）。最少要準備幾種顏色？",
+        "zh-Hans": "如图是一张地图，分成 A、B、C、D、E、F 六区，写着同一个字母的格子属于同一区。要替每一区涂一种颜色，规定有一段共同边界的两区不能涂同一种颜色（只碰到一个角不算相邻）。最少要准备几种颜色？",
+        "en": "The figure is a map divided into six regions A, B, C, D, E and F; cells with the same letter belong to the same region. Each region is to be painted one colour, and two regions sharing a stretch of border may not have the same colour (touching only at a corner does not count). What is the smallest number of colours needed?",
+        "ja": "図は A、B、C、D、E、F の6つの区域に分かれた地図で、同じ文字のマスは同じ区域です。それぞれの区域を1色でぬり、境界線を共有する2つの区域は同じ色にしてはいけません（角だけでふれているのはとなりではない）。色は最も少なくて何色必要ですか。"
+      },
+      "answer": {
+        "zh-Hant": "最少要 4 種顏色。",
+        "zh-Hans": "最少要 4 种颜色。",
+        "en": "At least 4 colours are needed.",
+        "ja": "最も少なくて 4 色です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "先找出誰和誰相鄰：F 在正中間，和 A、B、C、D、E 五區都有共同邊界。外圈的五區依 A、B、C、D、E、再回到 A 的順序，一個接一個相鄰；A 和 C、A 和 D、B 和 D、B 和 E、C 和 E 都不相鄰。",
+          "F 和外圈每一區都相鄰，所以 F 的顏色不能出現在外圈，外圈只能用其他的顏色。",
+          "外圈五區排成一圈，相鄰的不能同色。如果外圈只用兩種顏色，就得一區一區交替塗，但一圈有 5 區（奇數），繞回 A 時，E 和 A 會同色，不行。所以外圈至少要 3 種顏色，加上 F 一共至少 4 種。",
+          "4 種做得到：F 塗紅；A 黃、B 藍、C 黃、D 藍、E 綠，相鄰的都不同色。所以最少要 4 種顏色。"
+        ],
+        "zh-Hans": [
+          "先找出谁和谁相邻：F 在正中间，和 A、B、C、D、E 五区都有共同边界。外圈的五区依 A、B、C、D、E、再回到 A 的顺序，一个接一个相邻；A 和 C、A 和 D、B 和 D、B 和 E、C 和 E 都不相邻。",
+          "F 和外圈每一区都相邻，所以 F 的颜色不能出现在外圈，外圈只能用其他的颜色。",
+          "外圈五区排成一圈，相邻的不能同色。如果外圈只用两种颜色，就得一区一区交替涂，但一圈有 5 区（奇数），绕回 A 时，E 和 A 会同色，不行。所以外圈至少要 3 种颜色，加上 F 一共至少 4 种。",
+          "4 种做得到：F 涂红；A 黄、B 蓝、C 黄、D 蓝、E 绿，相邻的都不同色。所以最少要 4 种颜色。"
+        ],
+        "en": [
+          "First list the neighbours: F is in the middle and shares a border with all five regions A, B, C, D, E. The outer five are neighbours in the order A, B, C, D, E and back to A; A–C, A–D, B–D, B–E and C–E are not neighbours.",
+          "F borders every outer region, so F's colour cannot appear in the outer ring; the ring must use other colours.",
+          "The five outer regions form a ring in which neighbours differ. With only two colours they would have to alternate, but the ring has 5 regions (an odd number), so going round back to A, E and A would get the same colour — impossible. So the ring needs at least 3 colours, and with F at least 4 in total.",
+          "4 colours suffice: F red; A yellow, B blue, C yellow, D blue, E green — neighbours all differ. So the minimum is 4."
+        ],
+        "ja": [
+          "まずとなり合う区域を調べます。F はまん中にあり、A、B、C、D、E の5区域すべてと境界を共有します。外側の5区域は A、B、C、D、E、そして A にもどる順につながってとなり合い、A と C、A と D、B と D、B と E、C と E はとなりではありません。",
+          "F は外側のどの区域ともとなりなので、F の色は外側には使えず、外側はほかの色でぬります。",
+          "外側の5区域は輪になっていて、となりどうしはちがう色です。2色だけなら交互にぬるしかありませんが、輪は5区域（奇数）なので、A にもどったとき E と A が同じ色になってしまいます。だから外側には少なくとも3色、F を合わせて少なくとも4色必要です。",
+          "4色でできます：F は赤、A 黄、B 青、C 黄、D 青、E 緑とすると、となりどうしはすべてちがいます。よって最も少なくて 4 色です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "composite_grid_shape",
+        "params": {
+          "rows": 5,
+          "cols": 5,
+          "filledCells": [
+            [
+              1,
+              1
+            ],
+            [
+              1,
+              2
+            ],
+            [
+              1,
+              3
+            ],
+            [
+              2,
+              1
+            ],
+            [
+              2,
+              2
+            ],
+            [
+              2,
+              3
+            ],
+            [
+              3,
+              1
+            ],
+            [
+              3,
+              2
+            ],
+            [
+              3,
+              3
+            ]
+          ],
+          "cellLabels": {
+            "0,0": "A",
+            "0,1": "A",
+            "0,2": "A",
+            "0,3": "B",
+            "0,4": "B",
+            "1,0": "E",
+            "1,1": "F",
+            "1,2": "F",
+            "1,3": "F",
+            "1,4": "B",
+            "2,0": "E",
+            "2,1": "F",
+            "2,2": "F",
+            "2,3": "F",
+            "2,4": "C",
+            "3,0": "E",
+            "3,1": "F",
+            "3,2": "F",
+            "3,3": "F",
+            "3,4": "C",
+            "4,0": "D",
+            "4,1": "D",
+            "4,2": "D",
+            "4,3": "C",
+            "4,4": "C"
+          }
+        }
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "4"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "中央區被奇數環包圍的地圖最少塗色數",
+        "notes": "設計依據：中央一區被 5 區（奇數）圍成一圈，外圈兩色交替會在繞回時衝突，再加上中央一色，下界 4、構造 4。最接近 logic_grade7_foundation_024（4 國兩兩相鄰需 4 色）與 logic_grade9_foundation_033（8 個扇形需 2 色），本題的下界來自「奇數環 + 中心」而不是兩兩相鄰。已另行窮舉確認 3 色不可行、4 色可行。",
+        "displayText": "MathSpring 改寫題（附圖）"
+      }
     }
   ]
 }

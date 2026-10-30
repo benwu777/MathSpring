@@ -12017,6 +12017,360 @@
         "notes": "設計依據：日本「Nurikabe（數字島）」謎題的 5 × 5 版本。全庫查無此謎題；最接近的是 logic_grade1_foundation_169（數島嶼個數，島已畫好）與 logic_grade4_foundation_121（Shikaku 切長方形），本題要同時滿足島格數、海連通、無 2 × 2 黑塊三條規則，用一次反證排除另一種島形，骨架不同。圖：5 × 5 方格只寫 4、3、3 三個數字；圖上沒有任何塗黑。程式窮舉所有塗法確認唯一。",
         "displayText": "MathSpring 改寫題（附圖）"
       }
+    },
+    {
+      "id": "logic_grade6_foundation_143",
+      "topic": "logic",
+      "subtopic": "rook_to_corner_game_winning_move",
+      "tags": [
+        "c:game_theory",
+        "m:invariant"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade6",
+      "challengeTier": "foundation",
+      "reviewStatus": "ok",
+      "prompt": {
+        "zh-Hant": "如圖是一個 4 橫排、6 直行的棋盤，棋子 ● 在右上角，★ 是左下角。小安和小美輪流移動同一顆棋子，小安先走：每次只能把棋子往左走任意格，或往下走任意格（至少走 1 格，不能出棋盤）。誰把棋子移到 ★ 誰就贏。小安第一步應該把棋子移到哪一格，才能保證自己一定贏？",
+        "zh-Hans": "如图是一个 4 横排、6 竖排的棋盘，棋子 ● 在右上角，★ 是左下角。小安和小美轮流移动同一颗棋子，小安先走：每次只能把棋子往左走任意格，或往下走任意格（至少走 1 格，不能出棋盘）。谁把棋子移到 ★ 谁就赢。小安第一步应该把棋子移到哪一格，才能保证自己一定赢？",
+        "en": "The figure is a board with 4 rows and 6 columns. The piece ● is in the top-right corner and ★ is the bottom-left corner. An and Mei take turns moving the same piece, An first: on each turn the piece moves any number of cells to the left or any number of cells down (at least 1 cell, staying on the board). Whoever moves the piece onto ★ wins. To which cell should An move on the first turn to be sure of winning?",
+        "ja": "図は横4段、縦6列の盤で、コマ ● は右上のすみ、★ は左下のすみです。アンさんとメイさんが同じコマを交互に動かし、アンさんが先です。1回に、コマを左に何マスでも、または下に何マスでも動かせます（1マス以上、盤の外には出ない）。コマを ★ に動かした人の勝ちです。アンさんが必ず勝つには、最初にどのマスへ動かせばよいですか。"
+      },
+      "answer": {
+        "zh-Hant": "移到 D 格。",
+        "zh-Hans": "移到 D 格。",
+        "en": "Move to cell D.",
+        "ja": "D のマスに動かします。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "用「離 ★ 還要往左幾格、往下幾格」描述位置。● 現在是往左 5 格、往下 3 格。D 格是往左 3 格、往下 3 格，兩個數一樣。",
+          "當兩個數一樣（在 ★ 往右上的那條斜線上）時，對手不管往左或往下走，都會讓兩個數變得不一樣；小安只要照著把另一個方向走同樣多格，又能讓兩個數相等。這樣一直保持下去，最後兩個數都變成 0，也就是小安把棋子送到 ★。",
+          "其他選擇都會輸：A 格是（1, 3）、B 格是（4, 3）、C 格是（5, 1），兩個數不一樣，換小美用同樣的方法把它們變相等，小美就贏了；E 格在最下面一排（5, 0），小美直接往左走到 ★ 就贏了。",
+          "所以小安第一步要移到 D 格（往左走 2 格）。"
+        ],
+        "zh-Hans": [
+          "用“离 ★ 还要往左几格、往下几格”描述位置。● 现在是往左 5 格、往下 3 格。D 格是往左 3 格、往下 3 格，两个数一样。",
+          "当两个数一样（在 ★ 往右上的那条斜线上）时，对手不管往左或往下走，都会让两个数变得不一样；小安只要照着把另一个方向走同样多格，又能让两个数相等。这样一直保持下去，最后两个数都变成 0，也就是小安把棋子送到 ★。",
+          "其他选择都会输：A 格是（1, 3）、B 格是（4, 3）、C 格是（5, 1），两个数不一样，换小美用同样的方法把它们变相等，小美就赢了；E 格在最下面一排（5, 0），小美直接往左走到 ★ 就赢了。",
+          "所以小安第一步要移到 D 格（往左走 2 格）。"
+        ],
+        "en": [
+          "Describe a position by how many cells it still is to the left and down from ★. The piece is now 5 left and 3 down. Cell D is 3 left and 3 down — the two numbers are equal.",
+          "When the two numbers are equal (on the diagonal up-right from ★), whatever the opponent does, moving left or down makes them unequal, and An can always move the same number of cells in the other direction to make them equal again. Keeping this up, both numbers eventually reach 0: An is the one who puts the piece on ★.",
+          "Every other choice loses: A is (1, 3), B is (4, 3) and C is (5, 1) — unequal numbers, so Mei uses the same strategy and wins; E is on the bottom row at (5, 0), and Mei simply moves left onto ★.",
+          "So An should move to cell D (2 cells to the left)."
+        ],
+        "ja": [
+          "位置を「★ まであと左に何マス、下に何マス」で表します。● は今、左 5、下 3 です。D のマスは左 3、下 3 で、2つの数が等しくなっています。",
+          "2つの数が等しいとき（★ から右上にのびる斜めの線上）、相手が左に動いても下に動いても数は等しくなくなり、アンさんはもう一方の向きに同じマス数だけ動かして、また等しくできます。これをくり返すと最後は 0 と 0、つまりアンさんがコマを ★ に置きます。",
+          "ほかのマスでは負けます。A は（1, 3）、B は（4, 3）、C は（5, 1）で数が等しくないので、メイさんが同じ方法で勝ちます。E はいちばん下の段の（5, 0）で、メイさんがそのまま左に動かして ★ に着きます。",
+          "よって最初は D のマス（左に 2 マス）へ動かします。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "composite_grid_shape",
+        "params": {
+          "rows": 4,
+          "cols": 6,
+          "filledCells": [],
+          "cellLabels": {
+            "0,5": "●",
+            "3,0": "★",
+            "0,1": "A",
+            "0,4": "B",
+            "2,5": "C",
+            "0,3": "D",
+            "3,5": "E"
+          }
+        }
+      },
+      "answerMode": "multiple_choice",
+      "options": {
+        "A": {
+          "zh-Hant": "A 格",
+          "zh-Hans": "A 格",
+          "en": "Cell A",
+          "ja": "A のマス"
+        },
+        "B": {
+          "zh-Hant": "B 格",
+          "zh-Hans": "B 格",
+          "en": "Cell B",
+          "ja": "B のマス"
+        },
+        "C": {
+          "zh-Hant": "C 格",
+          "zh-Hans": "C 格",
+          "en": "Cell C",
+          "ja": "C のマス"
+        },
+        "D": {
+          "zh-Hant": "D 格",
+          "zh-Hans": "D 格",
+          "en": "Cell D",
+          "ja": "D のマス"
+        },
+        "E": {
+          "zh-Hant": "E 格",
+          "zh-Hans": "E 格",
+          "en": "Cell E",
+          "ja": "E のマス"
+        }
+      },
+      "correctAnswer": {
+        "type": "choice",
+        "value": "D"
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "只能往左或往下的移棋遊戲：保持在對角線上",
+        "notes": "設計依據：只能往左或往下任意格、先到角落者勝，等價於兩堆取石子，必勝法是把「往左格數 = 往下格數」並模仿對手。最接近 logic_grade11_foundation_055（兩堆石子還可以兩堆同取的變形）與 logic_grade6_foundation_136（井字棋必勝著），前者規則多了「同時減」使必勝位置完全不同，後者是另一種遊戲。圖：棋盤上標出起點、終點與五個候選格。",
+        "displayText": "MathSpring 改寫題（附圖）"
+      }
+    },
+    {
+      "id": "logic_grade6_foundation_144",
+      "topic": "logic",
+      "subtopic": "visit_every_cell_once_endpoint_parity",
+      "tags": [
+        "c:logic_deduction",
+        "m:coloring"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade6",
+      "challengeTier": "foundation",
+      "reviewStatus": "ok",
+      "prompt": {
+        "zh-Hant": "如圖的 5 × 5 方格，正中間塗色的那一格是水池，不能走。小安從左上角的 S 格出發，每一步走到上、下、左、右緊鄰的一格，要把其他每一格都剛好走過一次（S 也只算一次），最後停在某一格。標著 A、B、C、D、E 的五格中，哪一格可能是最後停下的那一格？",
+        "zh-Hans": "如图的 5 × 5 方格，正中间涂色的那一格是水池，不能走。小安从左上角的 S 格出发，每一步走到上、下、左、右紧邻的一格，要把其他每一格都刚好走过一次（S 也只算一次），最后停在某一格。标着 A、B、C、D、E 的五格中，哪一格可能是最后停下的那一格？",
+        "en": "In the 5 × 5 grid in the figure, the shaded centre cell is a pond and cannot be entered. An starts at S in the top-left corner, and each step goes to the cell directly above, below, left or right. An must visit every other cell exactly once (S counts once too) and then stops. Of the five cells marked A, B, C, D, E, which one can be the cell where An stops?",
+        "ja": "図の 5 × 5 のマスで、まん中の色のついたマスは池で入れません。アンさんは左上の S から出発し、1歩ごとに上下左右のとなりのマスへ進み、ほかのすべてのマスをちょうど1回ずつ通って（S も1回と数える）、最後にどこかのマスで止まります。A、B、C、D、E の5マスのうち、最後に止まるマスになれるのはどれですか。"
+      },
+      "answer": {
+        "zh-Hant": "只有 A 格可能。",
+        "zh-Hans": "只有 A 格可能。",
+        "en": "Only cell A is possible.",
+        "ja": "A のマスだけです。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "把方格像西洋棋盤一樣黑白相間塗色，讓 S 是黑格。每走一步，顏色都會換一次：第 1、3、5、⋯⋯ 格是黑格，第 2、4、6、⋯⋯ 格是白格。",
+          "5 × 5 有 13 個黑格、12 個白格；正中間的水池是黑格（和 S 同色），扣掉後能走的有 12 黑、12 白，一共 24 格。走完 24 格，最後一格是第 24 格，是偶數，所以一定是白格。",
+          "看五個候選格（橫排由上往下、格由左往右數）：A 在第 5 排第 4 格，和 S 差 4 + 3 = 7 步，是白格；B（第 5 排第 5 格）、C（第 1 排第 5 格）、D（第 3 排第 5 格）、E（第 5 排第 1 格）和 S 都差偶數步，是黑格，不可能是終點。",
+          "A 真的做得到，例如：沿最左一行走到底，向右兩格，往上一格、向左一格，沿第 2 行往上到頂，向右一格、往下一格、向右一格、往上一格、向右一格，沿最右一行往下兩格，向左一格、往下一格、向右一格、往下一格，最後向左到 A。所以答案是 A 格。"
+        ],
+        "zh-Hans": [
+          "把方格像国际象棋盘一样黑白相间涂色，让 S 是黑格。每走一步，颜色都会换一次：第 1、3、5、⋯⋯ 格是黑格，第 2、4、6、⋯⋯ 格是白格。",
+          "5 × 5 有 13 个黑格、12 个白格；正中间的水池是黑格（和 S 同色），扣掉后能走的有 12 黑、12 白，一共 24 格。走完 24 格，最后一格是第 24 格，是偶数，所以一定是白格。",
+          "看五个候选格（横排由上往下、格由左往右数）：A 在第 5 排第 4 格，和 S 差 4 + 3 = 7 步，是白格；B（第 5 排第 5 格）、C（第 1 排第 5 格）、D（第 3 排第 5 格）、E（第 5 排第 1 格）和 S 都差偶数步，是黑格，不可能是终点。",
+          "A 真的做得到，例如：沿最左边一竖排走到底，向右两格，往上一格、向左一格，沿第 2 竖排往上到顶，向右一格、往下一格、向右一格、往上一格、向右一格，沿最右边一竖排往下两格，向左一格、往下一格、向右一格、往下一格，最后向左到 A。所以答案是 A 格。"
+        ],
+        "en": [
+          "Colour the grid like a chessboard with S black. Every step changes colour: the 1st, 3rd, 5th, … cells visited are black and the 2nd, 4th, 6th, … are white.",
+          "A 5 × 5 board has 13 black and 12 white cells; the pond in the centre is black (same colour as S), so 12 black and 12 white cells, 24 in all, are visited. The last cell is the 24th, an even position, so it must be white.",
+          "Check the candidates (rows from the top, cells from the left): A is row 5, cell 4, which is 4 + 3 = 7 steps from S, so it is white. B (row 5, cell 5), C (row 1, cell 5), D (row 3, cell 5) and E (row 5, cell 1) are an even number of steps from S, so they are black and cannot be the end.",
+          "A really works, e.g.: go down the left column to the bottom, right two, up one, left one, up column 2 to the top, right one, down one, right one, up one, right one, down the right column two cells, left one, down one, right one, down one, and finally left to A. So the answer is cell A."
+        ],
+        "ja": [
+          "マスをチェス盤のように黒白交互にぬり、S を黒にします。1歩進むごとに色が変わるので、1・3・5……番目に通るマスは黒、2・4・6……番目は白です。",
+          "5 × 5 には黒 13、白 12 マスあり、まん中の池は黒（S と同じ色）なので、通るのは黒 12、白 12 の 24 マスです。最後のマスは 24 番目で偶数番目なので、必ず白です。",
+          "候補を見ます（段は上から、マスは左から数える）。A は5段目4マス目で S から 4 + 3 = 7 歩、白です。B（5段目5マス目）、C（1段目5マス目）、D（3段目5マス目）、E（5段目1マス目）は S から偶数歩で黒なので、終わりにはなれません。",
+          "A は実際にできます。たとえば、左の列を下まで進み、右へ2つ、上へ1つ、左へ1つ、2列目を上まで、右へ1つ、下へ1つ、右へ1つ、上へ1つ、右へ1つ、右の列を下へ2つ、左へ1つ、下へ1つ、右へ1つ、下へ1つ、最後に左へ進んで A です。答えは A のマスです。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "composite_grid_shape",
+        "params": {
+          "rows": 5,
+          "cols": 5,
+          "filledCells": [
+            [
+              2,
+              2
+            ]
+          ],
+          "cellLabels": {
+            "0,0": "S",
+            "4,3": "A",
+            "4,4": "B",
+            "0,4": "C",
+            "2,4": "D",
+            "4,0": "E"
+          }
+        }
+      },
+      "answerMode": "multiple_choice",
+      "options": {
+        "A": {
+          "zh-Hant": "A 格",
+          "zh-Hans": "A 格",
+          "en": "Cell A",
+          "ja": "A のマス"
+        },
+        "B": {
+          "zh-Hant": "B 格",
+          "zh-Hans": "B 格",
+          "en": "Cell B",
+          "ja": "B のマス"
+        },
+        "C": {
+          "zh-Hant": "C 格",
+          "zh-Hans": "C 格",
+          "en": "Cell C",
+          "ja": "C のマス"
+        },
+        "D": {
+          "zh-Hant": "D 格",
+          "zh-Hans": "D 格",
+          "en": "Cell D",
+          "ja": "D のマス"
+        },
+        "E": {
+          "zh-Hant": "E 格",
+          "zh-Hans": "E 格",
+          "en": "Cell E",
+          "ja": "E のマス"
+        }
+      },
+      "correctAnswer": {
+        "type": "choice",
+        "value": "A"
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "走遍方格每一格的終點：黑白塗色奇偶",
+        "notes": "設計依據：棋盤黑白塗色，每步換色，扣掉同色的水池後黑白各 12 格，終點必為白格；五個候選中只有一個白格，再給出實際路線。全庫搜尋「每一格…恰好一次」無此題型；最接近 logic_grade10_foundation_014（4 × 4 從角到角最多經過幾格，也用塗色）與 logic_grade5_foundation_045（缺角棋盤骨牌），問的是可行終點，不同。已另行搜尋確認所有白格都可作終點、黑格都不行。",
+        "displayText": "MathSpring 改寫題（附圖）"
+      }
+    },
+    {
+      "id": "logic_grade6_foundation_145",
+      "topic": "logic",
+      "subtopic": "cage_sum_product_latin_square",
+      "tags": [
+        "c:factor_multiple",
+        "c:logic_deduction",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade6",
+      "challengeTier": "foundation",
+      "reviewStatus": "ok",
+      "prompt": {
+        "zh-Hant": "如圖的 4 × 4 方格要填 1、2、3、4：每一橫排、每一直行都剛好各有 1、2、3、4 一個。寫著同一個字母的格子是同一區，各區的條件是：A 區的數加起來是 3；B 區的數乘起來是 8；C 區的數加起來是 8；D 區的數乘起來是 18；E 區的數乘起來是 48；F 區的數加起來是 3。（同一區裡的數可以重複，只要不在同一橫排或同一直行。）把最上面一橫排的四個數由左到右讀成一個四位數，是多少？",
+        "zh-Hans": "如图的 4 × 4 方格要填 1、2、3、4：每一横排、每一竖排都刚好各有 1、2、3、4 一个。写着同一个字母的格子是同一区，各区的条件是：A 区的数加起来是 3；B 区的数乘起来是 8；C 区的数加起来是 8；D 区的数乘起来是 18；E 区的数乘起来是 48；F 区的数加起来是 3。（同一区里的数可以重复，只要不在同一横排或同一竖排。）把最上面一横排的四个数由左到右读成一个四位数，是多少？",
+        "en": "Fill the 4 × 4 grid in the figure with 1, 2, 3, 4 so that every row and every column contains each of 1, 2, 3, 4 exactly once. Cells with the same letter form a region, with these conditions: region A adds up to 3; region B multiplies to 8; region C adds up to 8; region D multiplies to 18; region E multiplies to 48; region F adds up to 3. (A number may repeat inside a region as long as not in the same row or column.) Reading the top row from left to right as a four-digit number, what is it?",
+        "ja": "図の 4 × 4 のマスに 1、2、3、4 を入れ、どの段にもどの列にも 1、2、3、4 が1つずつ入るようにします。同じ文字のマスは同じ区域で、条件は次のとおりです。A 区域の数の和は 3、B 区域の数の積は 8、C 区域の数の和は 8、D 区域の数の積は 18、E 区域の数の積は 48、F 区域の数の和は 3。（同じ段・列でなければ、区域の中で同じ数があってもよい。）いちばん上の段の4つの数を左から読んだ4けたの数はいくつですか。"
+      },
+      "answer": {
+        "zh-Hant": "是 2143。",
+        "zh-Hans": "是 2143。",
+        "en": "It is 2143.",
+        "ja": "2143 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "橫排由上往下叫第 1～4 排，直行由左往右叫第 1～4 行。C 區是第 4 行的上面三格，和是 8，而一整行的和是 1 + 2 + 3 + 4 = 10，所以第 4 行最下面那格是 2；F 區兩格和是 3，另一格（第 4 排第 3 格）是 1。",
+          "E 區三格乘積 48 = 4 × 4 × 3（1 到 4 之中只有這種），兩個 4 不能同排同行，只能在第 3 排第 1 格和第 4 排第 2 格，第 4 排第 1 格是 3。D 區乘積 18 = 3 × 3 × 2，同理兩個 3 在第 2 排第 2 格和第 3 排第 3 格，第 3 排第 2 格是 2。",
+          "第 4 排是 3、4、1、2；第 3 排已有 4、2、3，第 3 排第 4 格是 1。C 區另外兩格和是 8 − 1 = 7，是 3 和 4；第 2 排已經有 3，所以第 2 排第 4 格是 4、第 1 排第 4 格是 3。",
+          "第 2 行已有 3、2、4，第 1 排第 2 格是 1。B 區另外兩格（第 1 排第 3 格、第 2 排第 3 格）乘積是 8 ÷ 1 = 8，只能是 4 × 2，第 2 排已有 4，所以第 1 排第 3 格是 4、第 2 排第 3 格是 2。第 1 行剩下 1、2：第 1 排已有 1，所以第 1 排第 1 格是 2、第 2 排第 1 格是 1（A 區 2 + 1 = 3，符合）。",
+          "第 1 排是 2、1、4、3，讀成四位數 2143。"
+        ],
+        "zh-Hans": [
+          "横排由上往下叫第 1～4 排，竖排由左往右叫第 1～4 竖排。C 区是第 4 竖排的上面三格，和是 8，而一整竖排的和是 1 + 2 + 3 + 4 = 10，所以第 4 竖排最下面那格是 2；F 区两格和是 3，另一格（第 4 排第 3 格）是 1。",
+          "E 区三格乘积 48 = 4 × 4 × 3（1 到 4 之中只有这种），两个 4 不能同一横排或同一竖排，只能在第 3 排第 1 格和第 4 排第 2 格，第 4 排第 1 格是 3。D 区乘积 18 = 3 × 3 × 2，同理两个 3 在第 2 排第 2 格和第 3 排第 3 格，第 3 排第 2 格是 2。",
+          "第 4 排是 3、4、1、2；第 3 排已有 4、2、3，第 3 排第 4 格是 1。C 区另外两格和是 8 − 1 = 7，是 3 和 4；第 2 排已经有 3，所以第 2 排第 4 格是 4、第 1 排第 4 格是 3。",
+          "第 2 竖排已有 3、2、4，第 1 排第 2 格是 1。B 区另外两格（第 1 排第 3 格、第 2 排第 3 格）乘积是 8 ÷ 1 = 8，只能是 4 × 2，第 2 排已有 4，所以第 1 排第 3 格是 4、第 2 排第 3 格是 2。第 1 竖排剩下 1、2：第 1 排已有 1，所以第 1 排第 1 格是 2、第 2 排第 1 格是 1（A 区 2 + 1 = 3，符合）。",
+          "第 1 排是 2、1、4、3，读成四位数 2143。"
+        ],
+        "en": [
+          "Call the rows 1–4 from the top and the columns 1–4 from the left. Region C is the top three cells of column 4 with sum 8, and a whole column sums to 1 + 2 + 3 + 4 = 10, so the bottom cell of column 4 is 2; region F sums to 3, so its other cell (row 4, column 3) is 1.",
+          "Region E multiplies to 48 = 4 × 4 × 3 (the only way with 1–4); the two 4s cannot share a row or column, so they are at row 3, column 1 and row 4, column 2, and row 4, column 1 is 3. Region D multiplies to 18 = 3 × 3 × 2; likewise the two 3s are at row 2, column 2 and row 3, column 3, and row 3, column 2 is 2.",
+          "Row 4 is 3, 4, 1, 2. Row 3 already has 4, 2, 3, so row 3, column 4 is 1. The other two cells of region C add up to 8 − 1 = 7: they are 3 and 4, and since row 2 already has a 3, row 2, column 4 is 4 and row 1, column 4 is 3.",
+          "Column 2 already has 3, 2, 4, so row 1, column 2 is 1. The other two cells of region B (row 1, column 3 and row 2, column 3) multiply to 8 ÷ 1 = 8, which must be 4 × 2; row 2 already has 4, so row 1, column 3 is 4 and row 2, column 3 is 2. Column 1 still needs 1 and 2; row 1 already has 1, so row 1, column 1 is 2 and row 2, column 1 is 1 (region A: 2 + 1 = 3, correct).",
+          "Row 1 is 2, 1, 4, 3, which reads 2143."
+        ],
+        "ja": [
+          "段を上から1～4段目、列を左から1～4列目とします。C 区域は4列目の上の3マスで和が 8、1列全体の和は 1 + 2 + 3 + 4 = 10 なので、4列目のいちばん下は 2 です。F 区域の和は 3 なので、もう1マス（4段目3列目）は 1 です。",
+          "E 区域の積 48 = 4 × 4 × 3（1～4 ではこれだけ）。2つの 4 は同じ段・列に入れないので、3段目1列目と4段目2列目で、4段目1列目は 3 です。D 区域の積 18 = 3 × 3 × 2 で、同じように 3 は2段目2列目と3段目3列目、3段目2列目は 2 です。",
+          "4段目は 3、4、1、2。3段目にはすでに 4、2、3 があるので、3段目4列目は 1 です。C 区域の残り2マスの和は 8 − 1 = 7 で 3 と 4、2段目にはもう 3 があるので2段目4列目が 4、1段目4列目が 3 です。",
+          "2列目にはすでに 3、2、4 があるので、1段目2列目は 1。B 区域の残り2マス（1段目3列目、2段目3列目）の積は 8 ÷ 1 = 8 で 4 × 2、2段目にはもう 4 があるので1段目3列目が 4、2段目3列目が 2。1列目の残りは 1 と 2 で、1段目にはもう 1 があるので1段目1列目が 2、2段目1列目が 1（A 区域 2 + 1 = 3 で合う）。",
+          "いちばん上の段は 2、1、4、3 で、4けたの数は 2143 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "composite_grid_shape",
+        "params": {
+          "rows": 4,
+          "cols": 4,
+          "filledCells": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              2
+            ],
+            [
+              2,
+              0
+            ],
+            [
+              3,
+              0
+            ],
+            [
+              3,
+              1
+            ]
+          ],
+          "cellLabels": {
+            "0,0": "A",
+            "0,1": "B",
+            "0,2": "B",
+            "0,3": "C",
+            "1,0": "A",
+            "1,1": "D",
+            "1,2": "B",
+            "1,3": "C",
+            "2,0": "E",
+            "2,1": "D",
+            "2,2": "D",
+            "2,3": "C",
+            "3,0": "E",
+            "3,1": "E",
+            "3,2": "F",
+            "3,3": "F"
+          }
+        }
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "2143"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 4
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "分區和與積的四階拉丁方陣",
+        "notes": "設計依據：每排每行 1～4 各一，再加上分區的和或積條件；從「整行和是 10」與「48 = 4 × 4 × 3、18 = 3 × 3 × 2 中重複的數必須錯開」切入，一路推完。全庫搜尋「每一區…乘積／加起來」只有 logic_grade5_foundation_118（分區塗黑骨牌），沒有分區算式的拉丁方陣；logic_grade10_foundation_070 是一般數獨（給數字、無算式）。已另行窮舉 576 個四階拉丁方陣確認唯一。",
+        "displayText": "MathSpring 改寫題（附圖）"
+      }
     }
   ]
 }

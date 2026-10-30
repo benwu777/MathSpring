@@ -14552,6 +14552,932 @@
         "notes": "設計依據：由俯視高度圖推前視圖、右視圖的正方形個數（每行、每排取最大值）。最接近既有題 geometry_grade5_foundation_136（同類高度圖求表面積）與 geometry_grade2_foundation_092（兩排積木前視圖），前者要算所有外露面、後者只有一個方向且只有兩排；本題要分辨前、右兩個方向各取哪一組的最大值，並避開「總積木數」陷阱，問法不同（自評偏弱，同類圖形已有）。圖：3 × 3 高度數字格。",
         "displayText": "MathSpring 改寫題（附圖）"
       }
+    },
+    {
+      "id": "geometry_grade4_foundation_163",
+      "topic": "geometry",
+      "subtopic": "perpendicular_pairs_on_dot_grid",
+      "tags": [
+        "c:position_direction",
+        "c:quadrilateral",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade4",
+      "challengeTier": "foundation",
+      "reviewStatus": "ok",
+      "prompt": {
+        "zh-Hant": "如圖，方格點上畫了 a、b、c、d、e、f、g 七條線段，每條線段的兩端都在格子點上（上下、左右相鄰兩點的距離都一樣）。如果兩條線段所在的直線互相垂直，就算一組「互相垂直的線段」（兩條線段不一定要碰在一起）。圖中一共有幾組互相垂直的線段？",
+        "zh-Hans": "如图，方格点上画了 a、b、c、d、e、f、g 七条线段，每条线段的两端都在格子点上（上下、左右相邻两点的距离都一样）。如果两条线段所在的直线互相垂直，就算一组“互相垂直的线段”（两条线段不一定要碰在一起）。图中一共有几组互相垂直的线段？",
+        "en": "In the figure, seven segments a, b, c, d, e, f and g are drawn on a dot grid; both ends of every segment are grid points (neighbouring dots are equally spaced up–down and left–right). Two segments count as a \"perpendicular pair\" if the lines they lie on are perpendicular (the segments need not touch). How many perpendicular pairs are there?",
+        "ja": "図のように、点の並んだ方眼に a、b、c、d、e、f、g の7本の線分がかいてあり、どの線分も両はしが格子点にあります（上下・左右のとなりの点の間かくはすべて同じ）。2本の線分をのばした直線が垂直に交わるとき、「垂直な線分の組」と数えます（線分どうしがふれていなくてもよい）。垂直な線分の組は全部で何組ありますか。"
+      },
+      "answer": {
+        "zh-Hant": "一共有 2 組（a 和 b、c 和 d）。",
+        "zh-Hans": "一共有 2 组（a 和 b、c 和 d）。",
+        "en": "There are 2 pairs (a and b, c and d).",
+        "ja": "2 組です（a と b、c と d）。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "用「從一端走到另一端，往右（左）幾格、往上（下）幾格」來描述每條線段：a 是右 2 上 1；b 是左 1 上 2；c 是右 1 上 3；d 是右 3 下 1；e 是右 1 上 1；f 是右 2 下 1；g 是左 2 上 3。",
+          "把一條線段轉 90 度，「右 2 上 1」會變成「左 1 上 2」——兩個數交換位置，而且其中一個方向反過來。所以 a（右 2 上 1）和 b（左 1 上 2）互相垂直；c（右 1 上 3）轉 90 度是「右 3 下 1」，正好是 d，c 和 d 互相垂直。",
+          "e（右 1 上 1）要垂直的線段應該是「右 1 下 1」（或左 1 上 1），圖中沒有。f（右 2 下 1）要配「右 1 上 2」，g（左 2 上 3）要配「右 3 上 2」，圖中也都沒有。",
+          "看起來很接近的 a 和 g、c 和 f、e 和 f、e 和 g，數字都對不上，只是差一點點，並不垂直。所以一共有 2 組。"
+        ],
+        "zh-Hans": [
+          "用“从一端走到另一端，往右（左）几格、往上（下）几格”来描述每条线段：a 是右 2 上 1；b 是左 1 上 2；c 是右 1 上 3；d 是右 3 下 1；e 是右 1 上 1；f 是右 2 下 1；g 是左 2 上 3。",
+          "把一条线段转 90 度，“右 2 上 1”会变成“左 1 上 2”——两个数交换位置，而且其中一个方向反过来。所以 a（右 2 上 1）和 b（左 1 上 2）互相垂直；c（右 1 上 3）转 90 度是“右 3 下 1”，正好是 d，c 和 d 互相垂直。",
+          "e（右 1 上 1）要垂直的线段应该是“右 1 下 1”（或左 1 上 1），图中没有。f（右 2 下 1）要配“右 1 上 2”，g（左 2 上 3）要配“右 3 上 2”，图中也都没有。",
+          "看起来很接近的 a 和 g、c 和 f、e 和 f、e 和 g，数字都对不上，只是差一点点，并不垂直。所以一共有 2 组。"
+        ],
+        "en": [
+          "Describe each segment by how far you move from one end to the other: a is right 2, up 1; b is left 1, up 2; c is right 1, up 3; d is right 3, down 1; e is right 1, up 1; f is right 2, down 1; g is left 2, up 3.",
+          "Turning a segment through 90° turns \"right 2, up 1\" into \"left 1, up 2\": the two numbers swap and one direction flips. So a (right 2, up 1) and b (left 1, up 2) are perpendicular; c (right 1, up 3) turned through 90° is \"right 3, down 1\", which is exactly d, so c and d are perpendicular.",
+          "A segment perpendicular to e (right 1, up 1) would be \"right 1, down 1\" (or left 1, up 1) — there is none. f (right 2, down 1) would need \"right 1, up 2\", and g (left 2, up 3) would need \"right 3, up 2\"; neither is in the figure.",
+          "Pairs that look close — a and g, c and f, e and f, e and g — do not match the rule; they are only nearly perpendicular. So there are 2 pairs."
+        ],
+        "ja": [
+          "線分の一方のはしからもう一方へ「右（左）に何マス、上（下）に何マス」進むかで表します。a は右 2 上 1、b は左 1 上 2、c は右 1 上 3、d は右 3 下 1、e は右 1 上 1、f は右 2 下 1、g は左 2 上 3 です。",
+          "線分を 90 度回すと「右 2 上 1」は「左 1 上 2」になります。2つの数が入れかわり、片方の向きが逆になります。だから a（右 2 上 1）と b（左 1 上 2）は垂直です。c（右 1 上 3）を 90 度回すと「右 3 下 1」でちょうど d なので、c と d も垂直です。",
+          "e（右 1 上 1）と垂直なのは「右 1 下 1」（または左 1 上 1）ですが、図にはありません。f（右 2 下 1）には「右 1 上 2」、g（左 2 上 3）には「右 3 上 2」が必要ですが、どちらもありません。",
+          "a と g、c と f、e と f、e と g は垂直に近く見えますが、きまりに合わず、垂直ではありません。よって 2 組です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "geometry_scene",
+        "params": {
+          "bounds": {
+            "minX": -0.5,
+            "minY": -0.5,
+            "maxX": 8.5,
+            "maxY": 6.5
+          },
+          "points": [
+            {
+              "name": "p0_0",
+              "x": 0,
+              "y": 0,
+              "label": ""
+            },
+            {
+              "name": "p0_1",
+              "x": 0,
+              "y": 1,
+              "label": ""
+            },
+            {
+              "name": "p0_2",
+              "x": 0,
+              "y": 2,
+              "label": ""
+            },
+            {
+              "name": "p0_3",
+              "x": 0,
+              "y": 3,
+              "label": ""
+            },
+            {
+              "name": "p0_4",
+              "x": 0,
+              "y": 4,
+              "label": ""
+            },
+            {
+              "name": "p0_5",
+              "x": 0,
+              "y": 5,
+              "label": ""
+            },
+            {
+              "name": "p0_6",
+              "x": 0,
+              "y": 6,
+              "label": ""
+            },
+            {
+              "name": "p1_0",
+              "x": 1,
+              "y": 0,
+              "label": ""
+            },
+            {
+              "name": "p1_1",
+              "x": 1,
+              "y": 1,
+              "label": ""
+            },
+            {
+              "name": "p1_2",
+              "x": 1,
+              "y": 2,
+              "label": ""
+            },
+            {
+              "name": "p1_3",
+              "x": 1,
+              "y": 3,
+              "label": ""
+            },
+            {
+              "name": "p1_4",
+              "x": 1,
+              "y": 4,
+              "label": ""
+            },
+            {
+              "name": "p1_5",
+              "x": 1,
+              "y": 5,
+              "label": ""
+            },
+            {
+              "name": "p1_6",
+              "x": 1,
+              "y": 6,
+              "label": ""
+            },
+            {
+              "name": "p2_0",
+              "x": 2,
+              "y": 0,
+              "label": ""
+            },
+            {
+              "name": "p2_1",
+              "x": 2,
+              "y": 1,
+              "label": ""
+            },
+            {
+              "name": "p2_2",
+              "x": 2,
+              "y": 2,
+              "label": ""
+            },
+            {
+              "name": "p2_3",
+              "x": 2,
+              "y": 3,
+              "label": ""
+            },
+            {
+              "name": "p2_4",
+              "x": 2,
+              "y": 4,
+              "label": ""
+            },
+            {
+              "name": "p2_5",
+              "x": 2,
+              "y": 5,
+              "label": ""
+            },
+            {
+              "name": "p2_6",
+              "x": 2,
+              "y": 6,
+              "label": ""
+            },
+            {
+              "name": "p3_0",
+              "x": 3,
+              "y": 0,
+              "label": ""
+            },
+            {
+              "name": "p3_1",
+              "x": 3,
+              "y": 1,
+              "label": ""
+            },
+            {
+              "name": "p3_2",
+              "x": 3,
+              "y": 2,
+              "label": ""
+            },
+            {
+              "name": "p3_3",
+              "x": 3,
+              "y": 3,
+              "label": ""
+            },
+            {
+              "name": "p3_4",
+              "x": 3,
+              "y": 4,
+              "label": ""
+            },
+            {
+              "name": "p3_5",
+              "x": 3,
+              "y": 5,
+              "label": ""
+            },
+            {
+              "name": "p3_6",
+              "x": 3,
+              "y": 6,
+              "label": ""
+            },
+            {
+              "name": "p4_0",
+              "x": 4,
+              "y": 0,
+              "label": ""
+            },
+            {
+              "name": "p4_1",
+              "x": 4,
+              "y": 1,
+              "label": ""
+            },
+            {
+              "name": "p4_2",
+              "x": 4,
+              "y": 2,
+              "label": ""
+            },
+            {
+              "name": "p4_3",
+              "x": 4,
+              "y": 3,
+              "label": ""
+            },
+            {
+              "name": "p4_4",
+              "x": 4,
+              "y": 4,
+              "label": ""
+            },
+            {
+              "name": "p4_5",
+              "x": 4,
+              "y": 5,
+              "label": ""
+            },
+            {
+              "name": "p4_6",
+              "x": 4,
+              "y": 6,
+              "label": ""
+            },
+            {
+              "name": "p5_0",
+              "x": 5,
+              "y": 0,
+              "label": ""
+            },
+            {
+              "name": "p5_1",
+              "x": 5,
+              "y": 1,
+              "label": ""
+            },
+            {
+              "name": "p5_2",
+              "x": 5,
+              "y": 2,
+              "label": ""
+            },
+            {
+              "name": "p5_3",
+              "x": 5,
+              "y": 3,
+              "label": ""
+            },
+            {
+              "name": "p5_4",
+              "x": 5,
+              "y": 4,
+              "label": ""
+            },
+            {
+              "name": "p5_5",
+              "x": 5,
+              "y": 5,
+              "label": ""
+            },
+            {
+              "name": "p5_6",
+              "x": 5,
+              "y": 6,
+              "label": ""
+            },
+            {
+              "name": "p6_0",
+              "x": 6,
+              "y": 0,
+              "label": ""
+            },
+            {
+              "name": "p6_1",
+              "x": 6,
+              "y": 1,
+              "label": ""
+            },
+            {
+              "name": "p6_2",
+              "x": 6,
+              "y": 2,
+              "label": ""
+            },
+            {
+              "name": "p6_3",
+              "x": 6,
+              "y": 3,
+              "label": ""
+            },
+            {
+              "name": "p6_4",
+              "x": 6,
+              "y": 4,
+              "label": ""
+            },
+            {
+              "name": "p6_5",
+              "x": 6,
+              "y": 5,
+              "label": ""
+            },
+            {
+              "name": "p6_6",
+              "x": 6,
+              "y": 6,
+              "label": ""
+            },
+            {
+              "name": "p7_0",
+              "x": 7,
+              "y": 0,
+              "label": ""
+            },
+            {
+              "name": "p7_1",
+              "x": 7,
+              "y": 1,
+              "label": ""
+            },
+            {
+              "name": "p7_2",
+              "x": 7,
+              "y": 2,
+              "label": ""
+            },
+            {
+              "name": "p7_3",
+              "x": 7,
+              "y": 3,
+              "label": ""
+            },
+            {
+              "name": "p7_4",
+              "x": 7,
+              "y": 4,
+              "label": ""
+            },
+            {
+              "name": "p7_5",
+              "x": 7,
+              "y": 5,
+              "label": ""
+            },
+            {
+              "name": "p7_6",
+              "x": 7,
+              "y": 6,
+              "label": ""
+            },
+            {
+              "name": "p8_0",
+              "x": 8,
+              "y": 0,
+              "label": ""
+            },
+            {
+              "name": "p8_1",
+              "x": 8,
+              "y": 1,
+              "label": ""
+            },
+            {
+              "name": "p8_2",
+              "x": 8,
+              "y": 2,
+              "label": ""
+            },
+            {
+              "name": "p8_3",
+              "x": 8,
+              "y": 3,
+              "label": ""
+            },
+            {
+              "name": "p8_4",
+              "x": 8,
+              "y": 4,
+              "label": ""
+            },
+            {
+              "name": "p8_5",
+              "x": 8,
+              "y": 5,
+              "label": ""
+            },
+            {
+              "name": "p8_6",
+              "x": 8,
+              "y": 6,
+              "label": ""
+            },
+            {
+              "name": "_t1",
+              "x": 0.5,
+              "y": 5.6,
+              "pos": "t",
+              "visible": false,
+              "label": "a"
+            },
+            {
+              "name": "_t2",
+              "x": 3.2,
+              "y": 0.3,
+              "pos": "t",
+              "visible": false,
+              "label": "b"
+            },
+            {
+              "name": "_t3",
+              "x": 6.0,
+              "y": 2.3,
+              "pos": "t",
+              "visible": false,
+              "label": "c"
+            },
+            {
+              "name": "_t4",
+              "x": 5.5,
+              "y": 6.05,
+              "pos": "t",
+              "visible": false,
+              "label": "d"
+            },
+            {
+              "name": "_t5",
+              "x": 5.6,
+              "y": 0.3,
+              "pos": "t",
+              "visible": false,
+              "label": "e"
+            },
+            {
+              "name": "_t6",
+              "x": 2.5,
+              "y": 3.0,
+              "pos": "t",
+              "visible": false,
+              "label": "f"
+            },
+            {
+              "name": "_t7",
+              "x": 0.4,
+              "y": 1.3,
+              "pos": "t",
+              "visible": false,
+              "label": "g"
+            }
+          ],
+          "segments": [
+            {
+              "from": "p0_5",
+              "to": "p2_6",
+              "style": "solid"
+            },
+            {
+              "from": "p4_0",
+              "to": "p3_2",
+              "style": "solid"
+            },
+            {
+              "from": "p5_1",
+              "to": "p6_4",
+              "style": "solid"
+            },
+            {
+              "from": "p4_6",
+              "to": "p7_5",
+              "style": "solid"
+            },
+            {
+              "from": "p6_0",
+              "to": "p7_1",
+              "style": "solid"
+            },
+            {
+              "from": "p2_4",
+              "to": "p4_3",
+              "style": "solid"
+            },
+            {
+              "from": "p2_0",
+              "to": "p0_3",
+              "style": "solid"
+            }
+          ]
+        }
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "2"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "方格點上判斷線段互相垂直",
+        "notes": "設計依據：在方格點上用「橫走幾格、直走幾格」判斷垂直（兩數交換、一個方向相反），並放了 4 組看起來接近垂直、其實不垂直的誘答。全庫搜尋「垂直…幾組」只有 geometry_grade3_foundation_010（切開正方形數平行邊），沒有在格子點上判斷垂直的題。已另行用內積檢查 21 組線段，只有 a⊥b、c⊥d。",
+        "displayText": "MathSpring 改寫題（附圖）"
+      }
+    },
+    {
+      "id": "geometry_grade4_foundation_164",
+      "topic": "geometry",
+      "subtopic": "which_hexominoes_fold_into_cube",
+      "tags": [
+        "c:solid",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade4",
+      "challengeTier": "foundation",
+      "reviewStatus": "ok",
+      "prompt": {
+        "zh-Hant": "如圖，A、B、C、D、E 五個塗色的圖形，都是用 6 個一樣大的正方形沿著邊連成的（每個圖形在其中一格寫著它的字母）。沿著正方形之間的邊摺起來，能摺成一個正方體（6 個面剛好不重疊、沒有缺口）的圖形一共有幾個？",
+        "zh-Hans": "如图，A、B、C、D、E 五个涂色的图形，都是用 6 个一样大的正方形沿着边连成的（每个图形在其中一格写着它的字母）。沿着正方形之间的边折起来，能折成一个正方体（6 个面刚好不重叠、没有缺口）的图形一共有几个？",
+        "en": "In the figure, each of the five shaded shapes A, B, C, D and E is made of 6 equal squares joined edge to edge (each shape has its letter in one of its cells). How many of these shapes can be folded along the edges between squares into a cube (6 faces, no overlaps, no gaps)?",
+        "ja": "図の色のついた A、B、C、D、E の5つの図形は、どれも同じ大きさの正方形6つを辺でつないだものです（それぞれ1マスに記号が書いてあります）。正方形の間の辺で折って立方体（6つの面がちょうど重ならず、すき間もない）を作れる図形は、全部でいくつありますか。"
+      },
+      "answer": {
+        "zh-Hant": "一共有 3 個（A、C、D）。",
+        "zh-Hans": "一共有 3 个（A、C、D）。",
+        "en": "3 of them (A, C and D).",
+        "ja": "3 つです（A、C、D）。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "A：中間一排 4 格當側面圍成一圈，上下各一格當上蓋和底，可以摺成正方體。",
+          "B：一排 4 格圍成一圈當側面後，多出來的兩格都接在這一排的上方，摺起來兩格都會蓋到上面而重疊，底下卻缺一個面，不行。",
+          "C：上排 3 格、下排 3 格錯開兩格，中間只靠一條邊相連。把上排右端那格當底面：它左邊那格摺起來當左側面，最左那格再摺過去當上蓋；下排三格依序摺成前面、右側面和後面，可以摺成正方體。",
+          "D：像樓梯一樣 2 格、2 格、2 格錯開，依序往同一個方向摺，每兩格摺成相鄰的兩個面，6 個面剛好圍成正方體。",
+          "E：裡面有 4 格排成 2 × 2 的大正方形，這 4 格摺起來一定會有兩格疊在一起，所以不行。能摺成正方體的是 A、C、D，一共 3 個。"
+        ],
+        "zh-Hans": [
+          "A：中间一排 4 格当侧面围成一圈，上下各一格当上盖和底，可以折成正方体。",
+          "B：一排 4 格围成一圈当侧面后，多出来的两格都接在这一排的上方，折起来两格都会盖到上面而重叠，底下却缺一个面，不行。",
+          "C：上排 3 格、下排 3 格错开两格，中间只靠一条边相连。把上排右端那格当底面：它左边那格折起来当左侧面，最左那格再折过去当上盖；下排三格依序折成前面、右侧面和后面，可以折成正方体。",
+          "D：像楼梯一样 2 格、2 格、2 格错开，依序往同一个方向折，每两格折成相邻的两个面，6 个面刚好围成正方体。",
+          "E：里面有 4 格排成 2 × 2 的大正方形，这 4 格折起来一定会有两格叠在一起，所以不行。能折成正方体的是 A、C、D，一共 3 个。"
+        ],
+        "en": [
+          "A: the middle row of 4 wraps around as the four side faces, and the squares above and below become the top and bottom — it folds into a cube.",
+          "B: after the row of 4 wraps around as the sides, both extra squares are attached above the row, so both fold onto the top and overlap while the bottom is missing — no.",
+          "C: a row of 3 on top and a row of 3 below, offset by two and joined along one edge. Take the right-end square of the top row as the base: the square to its left folds up as the left side and the leftmost square folds over as the lid; the bottom row folds into the front, the right side and the back — it folds into a cube.",
+          "D: a staircase of 2, 2, 2; folding each step the same way turns every two squares into two neighbouring faces, and the 6 squares close up into a cube.",
+          "E: four of its squares form a 2 × 2 block, and folding such a block always makes two squares land on the same face — no. The cube nets are A, C and D: 3 shapes."
+        ],
+        "ja": [
+          "A：真ん中の4マスを側面としてぐるりと囲み、上と下の1マスずつをふたと底にすれば、立方体になります。",
+          "B：4マスを側面として囲むと、残りの2マスがどちらも列の上側についているので、2つとも上のふたになって重なり、底が足りません。できません。",
+          "C：上の3マスと下の3マスが2マスずれて1本の辺でつながっています。上の段の右はしを底にすると、その左のマスが左の側面、いちばん左のマスがふたになり、下の段の3マスが前・右・後ろの側面になって、立方体になります。",
+          "D：2マス・2マス・2マスの階段形で、同じ向きに順に折ると2マスずつがとなり合う面になり、6マスでちょうど立方体になります。",
+          "E：4マスが 2 × 2 の正方形になっていて、これを折ると必ず2マスが重なるので、できません。立方体になるのは A、C、D の 3 つです。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "composite_grid_shape",
+        "params": {
+          "rows": 7,
+          "cols": 14,
+          "filledCells": [
+            [
+              1,
+              0
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              1,
+              2
+            ],
+            [
+              1,
+              3
+            ],
+            [
+              0,
+              1
+            ],
+            [
+              2,
+              1
+            ],
+            [
+              1,
+              5
+            ],
+            [
+              1,
+              6
+            ],
+            [
+              1,
+              7
+            ],
+            [
+              1,
+              8
+            ],
+            [
+              0,
+              5
+            ],
+            [
+              0,
+              8
+            ],
+            [
+              4,
+              0
+            ],
+            [
+              4,
+              1
+            ],
+            [
+              4,
+              2
+            ],
+            [
+              5,
+              2
+            ],
+            [
+              5,
+              3
+            ],
+            [
+              5,
+              4
+            ],
+            [
+              4,
+              6
+            ],
+            [
+              4,
+              7
+            ],
+            [
+              5,
+              7
+            ],
+            [
+              5,
+              8
+            ],
+            [
+              6,
+              8
+            ],
+            [
+              6,
+              9
+            ],
+            [
+              0,
+              10
+            ],
+            [
+              0,
+              11
+            ],
+            [
+              0,
+              12
+            ],
+            [
+              1,
+              11
+            ],
+            [
+              1,
+              12
+            ],
+            [
+              1,
+              13
+            ]
+          ],
+          "cellLabels": {
+            "1,0": "A",
+            "1,5": "B",
+            "4,0": "C",
+            "4,6": "D",
+            "0,10": "E"
+          }
+        }
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "3"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "判斷哪些六連方是正方體展開圖",
+        "notes": "設計依據：五個六連方中挑出正方體展開圖，誘答是「同一側接兩格」與「含 2 × 2 方塊」兩種常見錯誤。最接近 geometry_grade6_foundation_103（正方體展開圖共有幾種，無圖）與 geometry_grade6_foundation_140（展開圖摺好後頂點重合），本題是逐一判斷給定圖形，推理不同。已另行用摺疊模擬確認 A、C、D 可摺、B、E 不可。",
+        "displayText": "MathSpring 改寫題（附圖）"
+      }
+    },
+    {
+      "id": "geometry_grade4_foundation_165",
+      "topic": "geometry",
+      "subtopic": "count_right_angles_rays_from_point",
+      "tags": [
+        "c:angle",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade4",
+      "challengeTier": "foundation",
+      "reviewStatus": "ok",
+      "prompt": {
+        "zh-Hant": "如圖，A、O、E 在同一條直線上，從 O 點畫出 OB、OC、OD 三條射線。已知 ∠AOB = 40°、∠DOE = 50°，而且 OC 和直線 AE 互相垂直。以 O 為頂點，用圖中任兩條射線（OA、OB、OC、OD、OE）組成的角之中（平角 ∠AOE 不算），一共有幾個直角？",
+        "zh-Hans": "如图，A、O、E 在同一条直线上，从 O 点画出 OB、OC、OD 三条射线。已知 ∠AOB = 40°、∠DOE = 50°，而且 OC 和直线 AE 互相垂直。以 O 为顶点，用图中任两条射线（OA、OB、OC、OD、OE）组成的角之中（平角 ∠AOE 不算），一共有几个直角？",
+        "en": "In the figure, A, O and E lie on one straight line, and three rays OB, OC and OD are drawn from O. ∠AOB = 40°, ∠DOE = 50°, and OC is perpendicular to line AE. Among the angles with vertex O formed by any two of the rays OA, OB, OC, OD, OE (not counting the straight angle ∠AOE), how many are right angles?",
+        "ja": "図のように、A、O、E は一直線上にあり、O から OB、OC、OD の3本の半直線がひいてあります。∠AOB = 40°、∠DOE = 50° で、OC は直線 AE と垂直です。O を頂点とし、OA、OB、OC、OD、OE のうち2本でできる角（一直線の角 ∠AOE はのぞく）の中に、直角はいくつありますか。"
+      },
+      "answer": {
+        "zh-Hant": "一共有 3 個直角：∠AOC、∠COE、∠BOD。",
+        "zh-Hans": "一共有 3 个直角：∠AOC、∠COE、∠BOD。",
+        "en": "There are 3 right angles: ∠AOC, ∠COE and ∠BOD.",
+        "ja": "直角は 3 つです：∠AOC、∠COE、∠BOD。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "從 OA 開始，按逆時針方向量每條射線轉過的角度：OA 是 0°，OB 是 40°，OC 是 90°（垂直），OE 是 180°，OD 是 180° − 50° = 130°。",
+          "任兩條射線夾的角，就是兩個度數相減。∠AOC = 90°、∠COE = 180° − 90° = 90°，這兩個直角圖上看得出來。",
+          "∠BOD = 130° − 40° = 90°，雖然圖上沒有標，也是直角。",
+          "其他的角：∠AOB = 40°、∠BOC = 50°、∠COD = 40°、∠DOE = 50°、∠AOD = 130°、∠BOE = 140°，都不是直角。所以一共有 3 個直角。"
+        ],
+        "zh-Hans": [
+          "从 OA 开始，按逆时针方向量每条射线转过的角度：OA 是 0°，OB 是 40°，OC 是 90°（垂直），OE 是 180°，OD 是 180° − 50° = 130°。",
+          "任两条射线夹的角，就是两个度数相减。∠AOC = 90°、∠COE = 180° − 90° = 90°，这两个直角图上看得出来。",
+          "∠BOD = 130° − 40° = 90°，虽然图上没有标，也是直角。",
+          "其他的角：∠AOB = 40°、∠BOC = 50°、∠COD = 40°、∠DOE = 50°、∠AOD = 130°、∠BOE = 140°，都不是直角。所以一共有 3 个直角。"
+        ],
+        "en": [
+          "Measure each ray counter-clockwise from OA: OA is 0°, OB is 40°, OC is 90° (perpendicular), OE is 180°, and OD is 180° − 50° = 130°.",
+          "The angle between two rays is the difference of their readings. ∠AOC = 90° and ∠COE = 180° − 90° = 90° are the right angles you can see.",
+          "∠BOD = 130° − 40° = 90° is also a right angle, even though it is not marked.",
+          "The others are ∠AOB = 40°, ∠BOC = 50°, ∠COD = 40°, ∠DOE = 50°, ∠AOD = 130°, ∠BOE = 140°, none of them right angles. So there are 3 right angles."
+        ],
+        "ja": [
+          "OA から反時計回りに、それぞれの半直線が何度のところにあるかを考えます。OA は 0°、OB は 40°、OC は 90°（垂直）、OE は 180°、OD は 180° − 50° = 130° です。",
+          "2本の半直線がつくる角は、2つの度数の差です。∠AOC = 90° と ∠COE = 180° − 90° = 90° は図で見てわかる直角です。",
+          "∠BOD = 130° − 40° = 90° も、図に印はありませんが直角です。",
+          "ほかの角は ∠AOB = 40°、∠BOC = 50°、∠COD = 40°、∠DOE = 50°、∠AOD = 130°、∠BOE = 140° で、直角ではありません。直角は 3 つです。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "geometry_scene",
+        "params": {
+          "bounds": {
+            "minX": -3.6,
+            "minY": -0.6,
+            "maxX": 3.6,
+            "maxY": 3.6
+          },
+          "points": [
+            {
+              "name": "O",
+              "x": 0,
+              "y": 0,
+              "pos": "b"
+            },
+            {
+              "name": "A",
+              "x": 3.0,
+              "y": 0.0,
+              "pos": "r"
+            },
+            {
+              "name": "B",
+              "x": 2.2981,
+              "y": 1.9284,
+              "pos": "tr"
+            },
+            {
+              "name": "C",
+              "x": 0.0,
+              "y": 3.0,
+              "pos": "t"
+            },
+            {
+              "name": "D",
+              "x": -1.9284,
+              "y": 2.2981,
+              "pos": "tl"
+            },
+            {
+              "name": "E",
+              "x": -3.0,
+              "y": 0.0,
+              "pos": "l"
+            }
+          ],
+          "segments": [
+            {
+              "from": "O",
+              "to": "A",
+              "style": "solid"
+            },
+            {
+              "from": "O",
+              "to": "B",
+              "style": "solid"
+            },
+            {
+              "from": "O",
+              "to": "C",
+              "style": "solid"
+            },
+            {
+              "from": "O",
+              "to": "D",
+              "style": "solid"
+            },
+            {
+              "from": "O",
+              "to": "E",
+              "style": "solid"
+            }
+          ],
+          "angleMarks": [
+            {
+              "at": "O",
+              "from": "A",
+              "to": "B",
+              "label": "40°"
+            },
+            {
+              "at": "O",
+              "from": "D",
+              "to": "E",
+              "label": "50°"
+            }
+          ],
+          "rightAngles": [
+            {
+              "at": "O",
+              "from": "A",
+              "to": "C"
+            }
+          ]
+        }
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "3"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "一點出發的射線中找出所有直角",
+        "notes": "設計依據：五條射線組成的角中數直角，兩個看得見，第三個 ∠BOD 要用 40° 和 50° 推算才發現。最接近 geometry_grade2_foundation_079（長方形格線數直角，都是看得見的直角）與 geometry_grade4_foundation_003（平角上相鄰角），本題是隱藏直角。已另行計算 9 個角的度數。",
+        "displayText": "MathSpring 改寫題（附圖）"
+      }
     }
   ]
 }
