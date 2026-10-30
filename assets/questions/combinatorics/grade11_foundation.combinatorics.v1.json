@@ -26,53 +26,41 @@
       "levelStage": "grade11",
       "challengeTier": "foundation",
       "prompt": {
-        "zh-Hant": "字母 AABBC 可排成多少個不同的五字母串？",
-        "zh-Hans": "字母 AABBC 可排成多少个不同的五字母串？",
-        "en": "How many distinct five-letter strings can be formed from the letters AABBC?",
-        "ja": "文字 AABBC から作れる異なる 5 文字列は何個ありますか。"
+        "zh-Hant": "用五張數字卡 0、0、3、3、7 全部排成一個五位數（最高位不能是 0）。可以排出多少個不同的五位數？",
+        "zh-Hans": "用五张数字卡 0、0、3、3、7 全部排成一个五位数（最高位不能是 0）。可以排出多少个不同的五位数？",
+        "en": "Lay down all five number cards 0, 0, 3, 3, 7 side by side to make a five-place number that does not begin with 0. Count the distinct numbers obtainable.",
+        "ja": "0、0、3、3、7 の 5 枚の数字カードをすべて並べて 5 けたの数をつくります（最高位は 0 にできません）。異なる 5 けたの数は何個できますか。"
       },
       "answer": {
-        "zh-Hant": "答案是 30。",
-        "zh-Hans": "答案是 30。",
-        "en": "The answer is 30.",
-        "ja": "答えは 30 です。"
+        "zh-Hant": "答案是 18。",
+        "zh-Hans": "答案是 18。",
+        "en": "The answer is 18.",
+        "ja": "答えは 18 です。"
       },
       "solutionSteps": {
         "zh-Hant": [
-          "先假裝五個字母全都不一樣，例如把它們標成 A₁、A₂、B₁、B₂、C，那麼排法有 5! = 120 種。",
-          "但實際上兩個 A 是完全一樣的，把 A₁ 與 A₂ 對調並不會產生新的字串。",
-          "也就是說每一個真正不同的字串，在上面的 120 種裡被重複數了 2! = 2 次（來自兩個 A 的互換）。",
-          "同理兩個 B 也一樣，又會再重複 2! = 2 次。",
-          "兩種重複互相獨立，所以每個字串總共被數了 2! × 2! = 4 次。",
-          "因此不同字串數 = 120 ÷ 4 = 30。",
-          "驗算：字母 C 只有 1 個不需除，公式 5! ÷ (2! × 2! × 1!) = 30，與逐一列舉的結果一致。"
+          "先不管最高位：5 張卡片中 0 有兩張、3 有兩張，不同排法有 5! ÷ (2! × 2!) = 120 ÷ 4 = 30 種。",
+          "最高位是 0 的排法：剩下 0、3、3、7 四張排在後面，有 4! ÷ 2! = 12 種，這些不是五位數。",
+          "所以五位數有 30 − 12 = 18 個。",
+          "分首位驗算：首位 3 時剩 0、0、3、7，有 12 種；首位 7 時剩 0、0、3、3，有 6 種；共 18 種。"
         ],
         "zh-Hans": [
-          "先假装五个字母全都不一样，例如把它们标成 A₁、A₂、B₁、B₂、C，那么排法有 5! = 120 种。",
-          "但实际上两个 A 是完全一样的，把 A₁ 与 A₂ 对调并不会产生新的字符串。",
-          "也就是说每一个真正不同的字符串，在上面的 120 种里被重复数了 2! = 2 次（来自两个 A 的互换）。",
-          "同理两个 B 也一样，又会再重复 2! = 2 次。",
-          "两种重复互相独立，所以每个字符串总共被数了 2! × 2! = 4 次。",
-          "因此不同字符串数 = 120 ÷ 4 = 30。",
-          "验算：字母 C 只有 1 个不需除，公式 5! ÷ (2! × 2! × 1!) = 30，与逐一列举的结果一致。"
+          "先不管最高位：5 张卡片中 0 有两张、3 有两张，不同排法有 5! ÷ (2! × 2!) = 120 ÷ 4 = 30 种。",
+          "最高位是 0 的排法：剩下 0、3、3、7 四张排在后面，有 4! ÷ 2! = 12 种，这些不是五位数。",
+          "所以五位数有 30 − 12 = 18 个。",
+          "分首位验算：首位 3 时剩 0、0、3、7，有 12 种；首位 7 时剩 0、0、3、3，有 6 种；共 18 种。"
         ],
         "en": [
-          "First pretend all five letters are distinct, labelling them A₁, A₂, B₁, B₂, C; then there are 5! = 120 arrangements.",
-          "In reality the two A's are identical, so swapping A₁ and A₂ does not produce a new string.",
-          "That means each genuinely different string was counted 2! = 2 times among those 120, from the swap of the two A's.",
-          "The same applies to the two B's, giving another factor of 2! = 2.",
-          "The two kinds of repetition are independent, so each string was counted 2! × 2! = 4 times.",
-          "Hence the number of distinct strings is 120 ÷ 4 = 30.",
-          "Check: the single C needs no division, and the formula 5! ÷ (2! × 2! × 1!) = 30 agrees with direct enumeration."
+          "Ignore the leading-digit rule first: with two 0s and two 3s among 5 cards there are 5! ÷ (2! × 2!) = 120 ÷ 4 = 30 arrangements.",
+          "Arrangements starting with 0: the remaining cards 0, 3, 3, 7 fill the other places in 4! ÷ 2! = 12 ways, and these are not five-digit numbers.",
+          "So there are 30 − 12 = 18 five-digit numbers.",
+          "Check by the leading digit: a leading 3 leaves 0, 0, 3, 7 with 12 arrangements; a leading 7 leaves 0, 0, 3, 3 with 6; total 18."
         ],
         "ja": [
-          "まず 5 文字がすべて異なると仮定し、A₁、A₂、B₁、B₂、C とラベルを付けると、並べ方は 5! = 120 通りです。",
-          "しかし実際には 2 つの A は同一で、A₁ と A₂ を入れ替えても新しい文字列にはなりません。",
-          "つまり本当に異なる各文字列は、この 120 通りの中で 2 つの A の入れ替えにより 2! = 2 回ずつ重複して数えられています。",
-          "2 つの B についても同様で、さらに 2! = 2 回の重複が生じます。",
-          "2 種類の重複は独立なので、各文字列は合計 2! × 2! = 4 回数えられています。",
-          "よって異なる文字列の個数は 120 ÷ 4 = 30。",
-          "検算：C は 1 個なので割る必要がなく、公式 5! ÷ (2! × 2! × 1!) = 30 は直接の列挙とも一致します。"
+          "まず最高位の条件を無視すると、0 が 2 枚、3 が 2 枚あるので並べ方は 5! ÷ (2! × 2!) = 120 ÷ 4 = 30 通りです。",
+          "最高位が 0 の並べ方：残りの 0、3、3、7 の並べ方は 4! ÷ 2! = 12 通りで、これらは 5 けたの数になりません。",
+          "よって 5 けたの数は 30 − 12 = 18 個です。",
+          "最高位で確認：3 なら残り 0、0、3、7 で 12 通り、7 なら残り 0、0、3、3 で 6 通り、合計 18 通りです。"
         ]
       },
       "figure": {
@@ -83,25 +71,17 @@
       "answerMode": "integer_input",
       "correctAnswer": {
         "type": "integer",
-        "value": "30"
+        "value": "18"
       },
       "inputConstraints": {
         "allowNegative": false,
         "maxDigits": 2
       },
       "source": {
-        "type": "official_reference",
-        "name": "IMC",
-        "contest": "IMC Taiwan",
-        "year": "2026",
-        "round": "複賽",
-        "division": "11 年級",
-        "problemNumber": "選擇 7",
-        "reference": "22nd IMC Taiwan semifinal grade 11 choice 7",
-        "displayText": "IMC Taiwan 2026 複賽 11年級 選擇 7",
-        "sourceUrl": "https://imcct.net/UserFiles/news/583/20260413110023_4.pdf",
-        "rightsStatus": "needs_review",
-        "notes": "Rewritten from the official public competition PDF."
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "含重複元素且首位不能為 0 的排列計數題型",
+        "notes": "設計依據：重複卡片要除以重複的排列數，還要扣掉首位為 0 的情形；誘答 30 是忘了扣首位 0，12 或 6 是只算某一種首位。"
       },
       "olympiadTaxonomy": {
         "topic": "組合",
@@ -123,49 +103,37 @@
       "levelStage": "grade11",
       "challengeTier": "foundation",
       "prompt": {
-        "zh-Hant": "4 封不同信件要放入 4 個已寫好姓名的信封，且沒有任何一封信放進對應的信封。共有多少種放法？",
-        "zh-Hans": "4 封不同信件要放入 4 个已写好姓名的信封，且没有任何一封信放进对应的信封。共有多少种放法？",
-        "en": "Four different letters are placed into four addressed envelopes, with no letter going into its matching envelope. How many placements are possible?",
-        "ja": "4 通の異なる手紙を 4 つの宛名付き封筒に入れます。どの手紙も対応する封筒に入らないとき、入れ方は何通りありますか。"
+        "zh-Hant": "甲、乙、丙、丁、戊五人各帶一份禮物來交換，每人再拿走一份，而且沒有人拿到自己帶來的禮物。另外規定：甲和乙不能「互相拿到對方的禮物」（甲拿乙的、同時乙拿甲的）。符合規定的拿法共有多少種？",
+        "zh-Hans": "甲、乙、丙、丁、戊五人各带一份礼物来交换，每人再拿走一份，而且没有人拿到自己带来的礼物。另外规定：甲和乙不能「互相拿到对方的礼物」（甲拿乙的、同时乙拿甲的）。符合规定的拿法共有多少种？",
+        "en": "Five friends each bring one gift to a swap and each takes one gift home, but nobody may take the gift they brought. One more rule: the first two friends may not simply trade with each other (the first taking the second one’s gift while the second takes the first one’s). How many ways can the gifts be taken?",
+        "ja": "甲、乙、丙、丁、戊の 5 人がプレゼントを 1 つずつ持ち寄って交換し、各自 1 つずつ持ち帰ります。ただし自分が持ってきたものは持ち帰れません。さらに、甲と乙が「互いに相手のプレゼントを持ち帰る」（甲が乙のものを、乙が甲のものを同時に持ち帰る）ことは禁止です。条件をみたす持ち帰り方は何通りありますか。"
       },
       "answer": {
-        "zh-Hant": "答案是 9。",
-        "zh-Hans": "答案是 9。",
-        "en": "The answer is 9.",
-        "ja": "答えは 9 です。"
+        "zh-Hant": "答案是 42。",
+        "zh-Hans": "答案是 42。",
+        "en": "The answer is 42.",
+        "ja": "答えは 42 です。"
       },
       "solutionSteps": {
         "zh-Hant": [
-          "設 Aᵢ 表示「第 i 封信剛好放進第 i 個信封」這個事件所對應的放法集合，i = 1, 2, 3, 4。",
-          "我們要算的是四個事件都不發生的放法數，用排容原理從全部 4! = 24 種放法扣起。",
-          "只固定 1 封信正確：選哪一封有 C(4,1) = 4 種，其餘 3 封任意排有 3! = 6 種，所以 Σ|Aᵢ| = 4 × 6 = 24。",
-          "固定 2 封正確：C(4,2) = 6 種選法，其餘 2! = 2 種，所以 Σ|Aᵢ ∩ Aⱼ| = 6 × 2 = 12。",
-          "固定 3 封正確：C(4,3) = 4 種，其餘 1! = 1 種，總共 4；固定 4 封正確只有 1 種。",
-          "由排容原理，錯排數 = 24 − 24 + 12 − 4 + 1 = 9。"
+          "先算「沒有人拿到自己禮物」的拿法數（錯排數）。用排容原理：全部 5! 種，扣掉至少一人拿到自己的，得 5! − 5 × 4! + 10 × 3! − 10 × 2! + 5 × 1! − 1 = 120 − 120 + 60 − 20 + 5 − 1 = 44 種。",
+          "再算這 44 種中「甲、乙互換」的拿法：甲拿乙的、乙拿甲的，剩下丙、丁、戊三人也都不能拿自己的。三人錯排只有 2 種（丙拿丁、丁拿戊、戊拿丙，或反方向）。",
+          "把互換的 2 種扣掉：44 − 2 = 42。"
         ],
         "zh-Hans": [
-          "设 Aᵢ 表示「第 i 封信刚好放进第 i 个信封」这个事件所对应的放法集合，i = 1, 2, 3, 4。",
-          "我们要算的是四个事件都不发生的放法数，用容斥原理从全部 4! = 24 种放法扣起。",
-          "只固定 1 封信正确：选哪一封有 C(4,1) = 4 种，其余 3 封任意排有 3! = 6 种，所以 Σ|Aᵢ| = 4 × 6 = 24。",
-          "固定 2 封正确：C(4,2) = 6 种选法，其余 2! = 2 种，所以 Σ|Aᵢ ∩ Aⱼ| = 6 × 2 = 12。",
-          "固定 3 封正确：C(4,3) = 4 种，其余 1! = 1 种，总共 4；固定 4 封正确只有 1 种。",
-          "由容斥原理，错排数 = 24 − 24 + 12 − 4 + 1 = 9。"
+          "先算「没有人拿到自己礼物」的拿法数（错排数）。用容斥原理：全部 5! 种，扣掉至少一人拿到自己的，得 5! − 5 × 4! + 10 × 3! − 10 × 2! + 5 × 1! − 1 = 120 − 120 + 60 − 20 + 5 − 1 = 44 种。",
+          "再算这 44 种中「甲、乙互换」的拿法：甲拿乙的、乙拿甲的，剩下丙、丁、戊三人也都不能拿自己的。三人错排只有 2 种（丙拿丁、丁拿戊、戊拿丙，或反方向）。",
+          "把互换的 2 种扣掉：44 − 2 = 42。"
         ],
         "en": [
-          "Let Aᵢ be the set of placements in which letter i goes into envelope i, for i = 1, 2, 3, 4.",
-          "We want the number of placements in which none of these events occurs, so apply inclusion–exclusion starting from all 4! = 24 placements.",
-          "Fixing exactly one letter: C(4,1) = 4 choices and 3! = 6 arrangements for the rest, so Σ|Aᵢ| = 4 × 6 = 24.",
-          "Fixing two letters: C(4,2) = 6 choices and 2! = 2 for the rest, so Σ|Aᵢ ∩ Aⱼ| = 6 × 2 = 12.",
-          "Fixing three letters: C(4,3) = 4 choices and 1! = 1 for the rest, giving 4; fixing all four gives 1.",
-          "By inclusion–exclusion the number of derangements is 24 − 24 + 12 − 4 + 1 = 9."
+          "First count the ways in which nobody gets their own gift (derangements). By inclusion–exclusion: 5! − 5 × 4! + 10 × 3! − 10 × 2! + 5 × 1! − 1 = 120 − 120 + 60 − 20 + 5 − 1 = 44.",
+          "Next count, among these 44, the ways where the first two friends trade: they take each other’s gifts, and the remaining three must also avoid their own. Three people can be deranged in only 2 ways (a cycle in one direction or the other).",
+          "Remove those 2 trades: 44 − 2 = 42."
         ],
         "ja": [
-          "Aᵢ を「i 番目の手紙が i 番目の封筒に入る」入れ方の集合とします（i = 1, 2, 3, 4）。",
-          "求めるのはこれらがどれも起きない入れ方の数なので、全部の 4! = 24 通りから包除原理で引いていきます。",
-          "1 通だけ固定する場合：どれを固定するかが C(4,1) = 4 通り、残り 3 通は 3! = 6 通りなので Σ|Aᵢ| = 4 × 6 = 24。",
-          "2 通固定する場合：C(4,2) = 6 通り、残りは 2! = 2 通りなので Σ|Aᵢ ∩ Aⱼ| = 6 × 2 = 12。",
-          "3 通固定する場合：C(4,3) = 4 通り、残りは 1! = 1 通りで計 4。4 通すべて固定は 1 通り。",
-          "包除原理より、完全順列の数は 24 − 24 + 12 − 4 + 1 = 9。"
+          "まず「誰も自分のものを持ち帰らない」方法（完全順列）を数えます。包除原理で 5! − 5 × 4! + 10 × 3! − 10 × 2! + 5 × 1! − 1 = 120 − 120 + 60 − 20 + 5 − 1 = 44 通りです。",
+          "次に、その 44 通りのうち甲と乙が交換する場合を数えます。甲と乙が互いのものを持ち帰り、残る丙、丁、戊も自分のものは取れません。3 人の完全順列は 2 通り（ぐるっと一方向か逆方向）だけです。",
+          "交換する 2 通りを除いて 44 − 2 = 42 通りです。"
         ]
       },
       "figure": {
@@ -176,25 +144,17 @@
       "answerMode": "integer_input",
       "correctAnswer": {
         "type": "integer",
-        "value": "9"
+        "value": "42"
       },
       "inputConstraints": {
         "allowNegative": false,
-        "maxDigits": 1
+        "maxDigits": 2
       },
       "source": {
-        "type": "official_reference",
-        "name": "IMC",
-        "contest": "IMC Taiwan",
-        "year": "2026",
-        "round": "複賽",
-        "division": "11 年級",
-        "problemNumber": "填充 3",
-        "reference": "22nd IMC Taiwan semifinal grade 11 fill-in 3",
-        "displayText": "IMC Taiwan 2026 複賽 11年級 填充 3",
-        "sourceUrl": "https://imcct.net/UserFiles/news/583/20260413110023_4.pdf",
-        "rightsStatus": "needs_review",
-        "notes": "Rewritten from the official public competition PDF."
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "錯排總數扣掉指定兩人互換情形的計數題型",
+        "notes": "設計依據：先用排容算出 5 人錯排 44，再扣掉甲乙互換時其餘 3 人的錯排；常見錯誤是扣成 3! = 6（忘了其餘三人也不能拿自己的）得 38，或直接答 44。"
       },
       "olympiadTaxonomy": {
         "topic": "組合",
@@ -628,57 +588,45 @@
       "levelStage": "grade11",
       "challengeTier": "foundation",
       "prompt": {
-        "zh-Hant": "把整數 1 到 14 分成 7 組，每組恰有 2 個數，並且每組中較大的數至少是較小的數的 2 倍。問共有多少種分組方式？",
-        "zh-Hans": "把整数 1 到 14 分成 7 组，每组恰有 2 个数，并且每组中较大的数至少是较小的数的 2 倍。问共有多少种分组方式？",
-        "en": "Split the integers 1 through 14 into 7 pairs so that in each pair, the larger number is at least twice the smaller. How many such pairings are there?",
-        "ja": "1 から 14 までの整数を 7 組のペアに分けます。ただし各ペアでは大きい数が小さい数の少なくとも 2 倍であるとします。何通りの分け方がありますか。"
+        "zh-Hant": "把 1、2、3、…、12 這十二個整數兩兩配成 6 對，要求每一對的兩數之和都至少是 12。共有多少種不同的配對方式？",
+        "zh-Hans": "把 1、2、3、…、12 这十二个整数两两配成 6 对，要求每一对的两数之和都至少是 12。共有多少种不同的配对方式？",
+        "en": "Sort 1, 2, …, 12 into 6 couples, each couple totalling 12 or more. Count the ways to do it.",
+        "ja": "1、2、3、…、12 の 12 個の整数を 2 つずつ 6 組に分けます。どの組も 2 数の和が 12 以上になるようにするとき、組の分け方は何通りありますか。"
       },
       "answer": {
-        "zh-Hant": "答案是 144。",
-        "zh-Hans": "答案是 144。",
-        "en": "The answer is 144.",
-        "ja": "答えは 144 です。"
+        "zh-Hant": "答案是 32。",
+        "zh-Hans": "答案是 32。",
+        "en": "The answer is 32.",
+        "ja": "答えは 32 です。"
       },
       "solutionSteps": {
         "zh-Hant": [
-          "先確認一件事：8 到 14 這 7 個數不可能兩兩配在一起。因為若兩個都取自 8 到 14，較小者至少是 8，它的 2 倍至少是 16，已超過 14。",
-          "所以 8 到 14 必須各自和 1 到 7 中的某個數配對，形成 7 組一大一小的配對。",
-          "接著從限制最緊的數開始排。7 的 2 倍是 14，所以 7 只能配 14，只有 1 種。",
-          "再看 6：需要配 12 以上，候選是 12、13、14，但 14 已被 7 佔走，所以有 12、13 兩種。",
-          "再看 5：需要配 10 以上，候選是 10、11、12、13、14。扣掉 14（給 7）與 6 佔走的那一個，還剩 3 種。",
-          "最後看 1、2、3、4：它們需要配的下限分別是 2、4、6、8，而剩下的 4 個大數全都在 8 到 14 之間，一定都 ≥ 8，所以任何配法都合法，共 4! = 24 種。",
-          "把各步相乘：1 × 2 × 3 × 24 = 144。",
-          "所以共有 144 種分組方式。"
+          "從最小的數開始依序替 1、2、3、4、5 找搭檔，因為小的數限制最多。",
+          "1 的搭檔要至少 11：只能是 11 或 12，有 2 種。",
+          "2 的搭檔要至少 10：候選 10、11、12，其中一個已被 1 用掉，剩 2 種。同理 3 的候選 9～12 去掉已用的 2 個剩 2 種；4 的候選 8～12 去掉 3 個剩 2 種；5 的候選 7～12 去掉 4 個剩 2 種。",
+          "每一步的候選都包含前面用掉的數，所以「剩 2 種」永遠成立。最後剩下 6 和 7～12 中沒被用到的那一個數，兩數和至少 6 + 7 = 13，自動合格，只有 1 種。",
+          "總數 = 2 × 2 × 2 × 2 × 2 = 32。"
         ],
         "zh-Hans": [
-          "先确认一件事：8 到 14 这 7 个数不可能两两配在一起。因为若两个都取自 8 到 14，较小者至少是 8，它的 2 倍至少是 16，已超过 14。",
-          "所以 8 到 14 必须各自和 1 到 7 中的某个数配对，形成 7 组一大一小的配对。",
-          "接着从限制最紧的数开始排。7 的 2 倍是 14，所以 7 只能配 14，只有 1 种。",
-          "再看 6：需要配 12 以上，候选是 12、13、14，但 14 已被 7 占走，所以有 12、13 两种。",
-          "再看 5：需要配 10 以上，候选是 10、11、12、13、14。扣掉 14（给 7）与 6 占走的那一个，还剩 3 种。",
-          "最后看 1、2、3、4：它们需要配的下限分别是 2、4、6、8，而剩下的 4 个大数全都在 8 到 14 之间，一定都 ≥ 8，所以任何配法都合法，共 4! = 24 种。",
-          "把各步相乘：1 × 2 × 3 × 24 = 144。",
-          "所以共有 144 种分组方式。"
+          "从最小的数开始依次替 1、2、3、4、5 找搭档，因为小的数限制最多。",
+          "1 的搭档要至少 11：只能是 11 或 12，有 2 种。",
+          "2 的搭档要至少 10：候选 10、11、12，其中一个已被 1 用掉，剩 2 种。同理 3 的候选 9～12 去掉已用的 2 个剩 2 种；4 的候选 8～12 去掉 3 个剩 2 种；5 的候选 7～12 去掉 4 个剩 2 种。",
+          "每一步的候选都包含前面用掉的数，所以「剩 2 种」永远成立。最后剩下 6 和 7～12 中没被用到的那一个数，两数和至少 6 + 7 = 13，自动合格，只有 1 种。",
+          "总数 = 2 × 2 × 2 × 2 × 2 = 32。"
         ],
         "en": [
-          "First note that no two of the numbers 8 through 14 can be paired together: if both came from 8 to 14, the smaller is at least 8 and twice it is at least 16, which exceeds 14.",
-          "So each of 8 through 14 must pair with one of 1 through 7, giving seven pairs each consisting of one small and one large number.",
-          "Now assign starting from the most constrained number. Twice 7 is 14, so 7 can only pair with 14 — exactly 1 way.",
-          "Next consider 6: it needs a partner of at least 12, so the candidates are 12, 13, 14; but 14 is taken by 7, leaving 12 and 13 — 2 ways.",
-          "Next consider 5: it needs at least 10, so candidates are 10, 11, 12, 13, 14. Removing 14 (taken by 7) and whichever 6 took leaves 3 ways.",
-          "Finally 1, 2, 3, 4 need partners of at least 2, 4, 6, 8 respectively, and the four remaining large numbers all lie in 8 to 14 and so are at least 8. Every assignment is therefore legal, giving 4! = 24 ways.",
-          "Multiplying the steps: 1 × 2 × 3 × 24 = 144.",
-          "So there are 144 groupings."
+          "Find partners for 1, 2, 3, 4, 5 in that order, because the small numbers are the most restricted.",
+          "The partner of 1 must be at least 11: either 11 or 12, so 2 choices.",
+          "The partner of 2 must be at least 10: candidates 10, 11, 12, one already taken by 1, so 2 choices. Likewise 3 has candidates 9 to 12 minus 2 used, 2 choices; 4 has 8 to 12 minus 3 used, 2 choices; 5 has 7 to 12 minus 4 used, 2 choices.",
+          "Each candidate list contains all numbers used before it, so there are always exactly 2 left. Finally 6 remains with the one unused number from 7 to 12; their sum is at least 6 + 7 = 13, so this last pair is forced and valid.",
+          "Total = 2 × 2 × 2 × 2 × 2 = 32."
         ],
         "ja": [
-          "まず 8 から 14 の 7 個は互いに組めないことを確認します。両方が 8 以上だと小さい方が 8 以上で、その 2 倍は 16 以上となり 14 を超えるからです。",
-          "したがって 8 から 14 はそれぞれ 1 から 7 のいずれかと組み、大小 1 個ずつの 7 組ができます。",
-          "次に制約の厳しい数から決めます。7 の 2 倍は 14 なので、7 は 14 としか組めず 1 通りです。",
-          "次に 6：12 以上と組む必要があり候補は 12、13、14 ですが、14 は 7 が取っているので 12 と 13 の 2 通り。",
-          "次に 5：10 以上と組む必要があり候補は 10、11、12、13、14。14（7 が使用）と 6 が取った 1 つを除いて 3 通り。",
-          "最後に 1、2、3、4 はそれぞれ 2、4、6、8 以上と組めばよく、残る 4 個の大きい数はすべて 8 以上なのでどう組んでも条件を満たし、4! = 24 通り。",
-          "各段階を掛けて 1 × 2 × 3 × 24 = 144。",
-          "よって分け方は 144 通りです。"
+          "制約の強い小さい数から順に、1、2、3、4、5 の相手を決めていきます。",
+          "1 の相手は 11 以上なので 11 か 12 の 2 通りです。",
+          "2 の相手は 10 以上：候補 10、11、12 のうち 1 つは 1 が使ったので 2 通り。同様に 3 は候補 9～12 から使用済み 2 個を除いて 2 通り、4 は 8～12 から 3 個除いて 2 通り、5 は 7～12 から 4 個除いて 2 通りです。",
+          "各段階の候補はそれまでに使った数をすべて含むので、常に 2 通り残ります。最後は 6 と 7～12 の残り 1 個で、和は 6 + 7 = 13 以上なので自動的に条件をみたし、1 通りです。",
+          "合計は 2 × 2 × 2 × 2 × 2 = 32 通りです。"
         ]
       },
       "figure": {
@@ -689,25 +637,17 @@
       "answerMode": "integer_input",
       "correctAnswer": {
         "type": "integer",
-        "value": "144"
+        "value": "32"
       },
       "inputConstraints": {
         "allowNegative": false,
-        "maxDigits": 3
+        "maxDigits": 2
       },
       "source": {
-        "type": "official_reference",
-        "name": "AMC 12",
-        "contest": "AMC 12",
-        "year": "2022",
-        "round": "A",
-        "division": "High School",
-        "problemNumber": "Problem 10",
-        "reference": "2022 AMC 12A Problem 10",
-        "displayText": "AMC 12A 2022 Problem 10",
-        "sourceUrl": "https://artofproblemsolving.com/wiki/index.php/2022_AMC_10A_Problems/Problem_14",
-        "rightsStatus": "needs_review",
-        "notes": "The public AoPS archive notes this is the same problem as 2022 AMC 12A Problem 10; wording rewritten for app use."
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "由限制最強的元素依序配對的配對計數題型",
+        "notes": "設計依據：從最小的數開始配，候選集合逐層包含，所以每層恰剩 2 種；常見錯誤是以為 6 也要另外選搭檔，或把配對順序重複計算。"
       },
       "olympiadTaxonomy": {
         "topic": "組合",
@@ -729,57 +669,45 @@
       "levelStage": "grade11",
       "challengeTier": "foundation",
       "prompt": {
-        "zh-Hant": "用數字 0、1、2、3、4 組成長度為 5 的字串。若對每個 j=1,2,3,4，都至少有 j 個位置上的數字小於 j，問這樣的字串共有多少個？",
-        "zh-Hans": "用数字 0、1、2、3、4 组成长度为 5 的字串。若对每个 j=1,2,3,4，都至少有 j 个位置上的数字小于 j，问这样的字串共有多少个？",
-        "en": "Form strings of length 5 using the digits 0, 1, 2, 3, and 4. For each j=1,2,3,4, at least j of the digits must be less than j. How many such strings are there?",
-        "ja": "0、1、2、3、4 を使って長さ 5 の文字列を作ります。各 j=1,2,3,4 について、j 未満の数字が少なくとも j 個含まれているとします。この条件を満たす文字列は何個ありますか。"
+        "zh-Hant": "一條單行道旁有三個車位，從入口往裡依序編號 1、2、3。三輛車一輛接一輛開進來，每位駕駛都有一個想停的車位號碼（可以和別人相同）。駕駛會先開到自己想停的車位；若已被占用，就繼續往裡停在第一個空位；如果往裡都沒有空位，只好離開。依進場順序記下三位駕駛想停的號碼，共有 27 種清單。其中有多少種清單能讓三輛車全部停好？",
+        "zh-Hans": "一条单行道旁有三个车位，从入口往里依次编号 1、2、3。三辆车一辆接一辆开进来，每位驾驶都有一个想停的车位号码（可以和别人相同）。驾驶会先开到自己想停的车位；若已被占用，就继续往里停在第一个空位；如果往里都没有空位，只好离开。依进场顺序记下三位驾驶想停的号码，共有 27 种清单。其中有多少种清单能让三辆车全部停好？",
+        "en": "Along a one-way lane are three parking bays, numbered 1, 2, 3 going inward from the entrance. Three cars arrive in turn, and every driver names a favourite bay (two drivers may name one bay). A driver goes to that bay; if occupied, the driver continues inward to the first free bay, and drives off if none is left. Recording favourites in arrival order gives 27 lists. Count the lists that let all three cars find a bay.",
+        "ja": "一方通行の道に駐車スペースが 3 つあり、入口から奥へ 1、2、3 と番号がついています。3 台の車が 1 台ずつ入ってきて、各運転手には停めたい番号があります（他の人と同じでもかまいません）。運転手はまず希望の場所へ行き、ふさがっていればさらに奥へ進んで最初の空きに停め、奥に空きがなければ出ていきます。到着順に希望番号を記録したリストは 27 通りあります。3 台すべてが停められるリストは何通りですか。"
       },
       "answer": {
-        "zh-Hant": "答案是 1296。",
-        "zh-Hans": "答案是 1296。",
-        "en": "The answer is 1296.",
-        "ja": "答えは 1296 です。"
+        "zh-Hant": "答案是 16。",
+        "zh-Hans": "答案是 16。",
+        "en": "The answer is 16.",
+        "ja": "答えは 16 です。"
       },
       "solutionSteps": {
         "zh-Hant": [
-          "先把條件讀清楚：對 j = 1, 2, 3, 4，字串中小於 j 的位置至少要有 j 個。",
-          "j = 1 時：至少 1 個位置的數字小於 1，也就是至少要有一個 0。",
-          "j = 2 時：至少 2 個位置的數字小於 2，也就是 0 與 1 合起來至少 2 個。",
-          "同理 j = 3 要求 0、1、2 合起來至少 3 個，j = 4 要求 0、1、2、3 合起來至少 4 個。",
-          "把字串的五個數字由小到大排序成 b₁ ≤ b₂ ≤ ⋯ ≤ b₅，上述條件恰好等價於 bⱼ ≤ j − 1 對 j = 1, 2, 3, 4 成立（b₅ 沒有限制，因為值域上限就是 4）。",
-          "這正是長度 5 的 parking function 的定義（把 0 到 4 平移成 1 到 5 即為標準形式）。",
-          "長度 n 的 parking function 個數是 (n + 1)ⁿ⁻¹，代入 n = 5 得 6⁴。",
-          "6⁴ = 1296。"
+          "把車道想成一圈：在 3 號後面加一個 4 號車位，4 號之後再接回 1 號。這時每位駕駛的想停號碼可以是 1～4，共 4 × 4 × 4 = 64 種清單；在圓圈上一定都停得到，最後恰好空出一個位子。",
+          "把清單上每個號碼都加 1（4 變回 1），每輛車停的位置也跟著往前轉一格，空位同樣轉一格。所以 64 種清單可以分成每組 4 種的「轉動組」，同一組裡空位恰好依次是 1、2、3、4 各一次。",
+          "原本直線車道全部停好，等價於在圓圈上空著的是 4 號：若 4 號最後空著，就沒有人想停 4 號、也沒有人經過 4 號繞回來，停法和直線車道完全相同；反過來，直線上全部停好的清單在圓圈上只會用到 1～3 號，4 號一定空著。",
+          "每個轉動組恰有一種清單空出 4 號，而且這種清單只含 1～3 的號碼，所以答案是 64 ÷ 4 = 16。",
+          "小規模可以直接核對：三個號碼排序後要滿足「最小的 ≤ 1、第二小的 ≤ 2」。排序後的組合有 111、112、113、122、123 五種，對應的清單分別有 1 + 3 + 3 + 3 + 6 = 16，結果一致。"
         ],
         "zh-Hans": [
-          "先把条件读清楚：对 j = 1, 2, 3, 4，字符串中小于 j 的位置至少要有 j 个。",
-          "j = 1 时：至少 1 个位置的数字小于 1，也就是至少要有一个 0。",
-          "j = 2 时：至少 2 个位置的数字小于 2，也就是 0 与 1 合起来至少 2 个。",
-          "同理 j = 3 要求 0、1、2 合起来至少 3 个，j = 4 要求 0、1、2、3 合起来至少 4 个。",
-          "把字符串的五个数字由小到大排序成 b₁ ≤ b₂ ≤ ⋯ ≤ b₅，上述条件恰好等价于 bⱼ ≤ j − 1 对 j = 1, 2, 3, 4 成立（b₅ 没有限制，因为值域上限就是 4）。",
-          "这正是长度 5 的 parking function 的定义（把 0 到 4 平移成 1 到 5 即为标准形式）。",
-          "长度 n 的 parking function 个数是 (n + 1)ⁿ⁻¹，代入 n = 5 得 6⁴。",
-          "6⁴ = 1296。"
+          "把车道想成一圈：在 3 号后面加一个 4 号车位，4 号之后再接回 1 号。这时每位驾驶的想停号码可以是 1～4，共 4 × 4 × 4 = 64 种清单；在圆圈上一定都停得到，最后恰好空出一个位子。",
+          "把清单上每个号码都加 1（4 变回 1），每辆车停的位置也跟着往前转一格，空位同样转一格。所以 64 种清单可以分成每组 4 种的「转动组」，同一组里空位恰好依次是 1、2、3、4 各一次。",
+          "原本直线车道全部停好，等价于在圆圈上空着的是 4 号：若 4 号最后空着，就没有人想停 4 号、也没有人经过 4 号绕回来，停法和直线车道完全相同；反过来，直线上全部停好的清单在圆圈上只会用到 1～3 号，4 号一定空着。",
+          "每个转动组恰有一种清单空出 4 号，而且这种清单只含 1～3 的号码，所以答案是 64 ÷ 4 = 16。",
+          "小规模可以直接核对：三个号码排序后要满足「最小的 ≤ 1、第二小的 ≤ 2」。排序后的组合有 111、112、113、122、123 五种，对应的清单分别有 1 + 3 + 3 + 3 + 6 = 16，结果一致。"
         ],
         "en": [
-          "First read the condition carefully: for j = 1, 2, 3, 4, at least j positions must hold a digit smaller than j.",
-          "For j = 1: at least one position holds a digit below 1, that is at least one 0.",
-          "For j = 2: at least two positions hold digits below 2, so the 0s and 1s together number at least 2.",
-          "Similarly j = 3 requires at least three digits among 0, 1, 2, and j = 4 requires at least four among 0, 1, 2, 3.",
-          "Sorting the five digits as b₁ ≤ b₂ ≤ ⋯ ≤ b₅, these conditions are exactly bⱼ ≤ j − 1 for j = 1, 2, 3, 4 (there is no condition on b₅ since 4 is already the largest allowed value).",
-          "This is precisely the definition of a parking function of length 5, after shifting the range 0–4 to the standard 1–5.",
-          "The number of parking functions of length n is (n + 1)ⁿ⁻¹, so with n = 5 we get 6⁴.",
-          "6⁴ = 1296."
+          "Picture the lane as a loop: add a bay 4 after bay 3, and let bay 4 lead back to bay 1. Now each favourite can be 1 to 4, giving 4 × 4 × 4 = 64 lists; on the loop everybody always parks, and exactly one bay stays empty.",
+          "Add 1 to every number on a list (4 becomes 1): every car parks one bay further round, and so does the empty bay. So the 64 lists split into rotation groups of 4, and within a group the empty bay is 1, 2, 3, 4, once each.",
+          "All cars parking on the straight lane is the same as bay 4 being the empty one on the loop: if 4 ends up empty, nobody wanted 4 and nobody drove past 4 back to the start, so everything happens exactly as on the straight lane; conversely, a list that works on the straight lane only ever uses bays 1 to 3 on the loop, leaving 4 empty.",
+          "Each rotation group contains exactly one list that leaves bay 4 empty, and such a list uses only the numbers 1 to 3, so the answer is 64 ÷ 4 = 16.",
+          "The small case can be checked directly: after sorting, the three favourites must satisfy smallest ≤ 1 and second smallest ≤ 2. The sorted patterns are 111, 112, 113, 122, 123, giving 1 + 3 + 3 + 3 + 6 = 16 lists, which agrees."
         ],
         "ja": [
-          "まず条件を正確に読みます：j = 1, 2, 3, 4 について、j より小さい数字が置かれた位置が少なくとも j 個必要です。",
-          "j = 1：1 より小さい数字が 1 箇所以上、すなわち 0 が少なくとも 1 個。",
-          "j = 2：2 より小さい数字が 2 箇所以上、つまり 0 と 1 を合わせて 2 個以上。",
-          "同様に j = 3 は 0、1、2 を合わせて 3 個以上、j = 4 は 0、1、2、3 を合わせて 4 個以上を要求します。",
-          "5 個の数字を小さい順に b₁ ≤ b₂ ≤ ⋯ ≤ b₅ と並べると、これらの条件は j = 1, 2, 3, 4 に対する bⱼ ≤ j − 1 とちょうど同値です（値域の上限が 4 なので b₅ には条件がありません）。",
-          "これは長さ 5 の parking function の定義そのものです（0〜4 を 1〜5 に平行移動すると標準形になります）。",
-          "長さ n の parking function の個数は (n + 1)ⁿ⁻¹ なので、n = 5 で 6⁴。",
-          "6⁴ = 1296。"
+          "道を輪にして考えます：3 番の奥に 4 番を足し、4 番の次は 1 番に戻るとします。希望番号は 1～4 で 4 × 4 × 4 = 64 通り、輪の上では必ず全員停められ、ちょうど 1 つ空きが残ります。",
+          "リストの番号をすべて 1 増やす（4 は 1 に戻す）と、各車の駐車位置も空きも 1 つずつ回ります。よって 64 通りは 4 通りずつの「回転グループ」に分かれ、各グループでは空きが 1、2、3、4 に 1 回ずつなります。",
+          "直線の道で全員停められることは、輪の上で 4 番が空くことと同じです：4 番が空いていれば誰も 4 番を希望せず、4 番を通り過ぎて戻った人もいないので直線の場合と全く同じ動きです。逆に直線で全員停められるリストは輪の上でも 1～3 番しか使わず、4 番が空きます。",
+          "各回転グループで 4 番が空くリストはちょうど 1 つで、そのリストは 1～3 の番号だけからなるので、答えは 64 ÷ 4 = 16 通りです。",
+          "小さい場合なので直接確認もできます：3 つの希望番号を小さい順に並べたとき「最小 ≤ 1、2 番目 ≤ 2」が必要十分です。並べた形は 111、112、113、122、123 の 5 種で、リスト数は 1 + 3 + 3 + 3 + 6 = 16 通りとなり一致します。"
         ]
       },
       "figure": {
@@ -790,25 +718,17 @@
       "answerMode": "integer_input",
       "correctAnswer": {
         "type": "integer",
-        "value": "1296"
+        "value": "16"
       },
       "inputConstraints": {
         "allowNegative": false,
-        "maxDigits": 4
+        "maxDigits": 2
       },
       "source": {
-        "type": "official_reference",
-        "name": "AMC 12",
-        "contest": "AMC 12",
-        "year": "2022",
-        "round": "A",
-        "division": "High School",
-        "problemNumber": "Problem 24",
-        "reference": "2022 AMC 12A Problem 24",
-        "displayText": "AMC 12A 2022 Problem 24",
-        "sourceUrl": "https://artofproblemsolving.com/wiki/index.php/2022_AMC_10A_Problems/Problem_24",
-        "rightsStatus": "needs_review",
-        "notes": "The public AoPS archive notes this is the same problem as 2022 AMC 10A Problem 24; wording rewritten for app use."
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "用加一格成圓的轉動論證計算停車清單的題型",
+        "notes": "設計依據：補上第 4 格變成圓圈，再用轉動把 64 種清單平分成 4 組，並以排序條件直接核對；常見錯誤是以為三個號碼必須互不相同而得 6，或把 27 種中「有人想停 3 號」的都刪掉。"
       },
       "olympiadTaxonomy": {
         "topic": "組合",
@@ -830,49 +750,41 @@
       "levelStage": "grade11",
       "challengeTier": "foundation",
       "prompt": {
-        "zh-Hant": "有多少個三位數由三個互不相同的數字組成，且其中一個數字恰好是另外兩個數字的平均數？",
-        "zh-Hans": "有多少个三位数由三个互不相同的数字组成，且其中一个数字恰好是另外两个数字的平均数？",
-        "en": "How many three-digit numbers have three distinct digits such that one of the digits is the average of the other two?",
-        "ja": "3 つの異なる数字からなる 3 桁の数で、そのうち 1 つの数字が他の 2 つの平均になっているものは何個ありますか。"
+        "zh-Hant": "一個四位數從左到右的四個數字中，中間兩個數字都恰好等於自己左右兩個鄰居的平均數，而且四個數字不全相同（例如 2468、9630）。這樣的四位數共有幾個？",
+        "zh-Hans": "一个四位数从左到右的四个数字中，中间两个数字都恰好等于自己左右两个邻居的平均数，而且四个数字不全相同（例如 2468、9630）。这样的四位数共有几个？",
+        "en": "Read left to right, a four-place number has each inner digit equal to the mean of its two neighbours, and its digits are not all equal (like 2468 or 9630). Count such numbers.",
+        "ja": "4 けたの数で、真ん中の 2 つの数字がどちらも左右の隣の数字の平均に等しく、4 つの数字がすべて同じではないもの（例：2468、9630）は何個ありますか。"
       },
       "answer": {
-        "zh-Hant": "答案是 112。",
-        "zh-Hans": "答案是 112。",
-        "en": "The answer is 112.",
-        "ja": "答えは 112 です。"
+        "zh-Hant": "答案是 21。",
+        "zh-Hans": "答案是 21。",
+        "en": "The answer is 21.",
+        "ja": "答えは 21 です。"
       },
       "solutionSteps": {
         "zh-Hant": [
-          "這三個數字必須形成長度為 3 的等差數列。",
-          "從 0 到 9 可形成的遞增等差三元組共有 8+6+4+2=20 組。",
-          "每組數字可排列成 3!=6 個三位數，所以先得到 20×6=120 個。",
-          "但若數字組含 0，則有些排列不能作為三位數。含 0 的等差三元組是 012、024、036、048，共 4 組。",
-          "每一組中，以 0 開頭的排列有 2!=2 個，所以要扣掉 4×2=8 個。",
-          "因此總數是 120-8=112。"
+          "中間數字等於左右平均，代表它和左鄰的差等於它和右鄰的差；兩個中間位置都這樣，四個數字就成等差數列 a、a + d、a + 2d、a + 3d，而「不全相同」就是 d ≠ 0。",
+          "d > 0（遞增）：首位 a ≥ 1 且末位 a + 3d ≤ 9。d = 1 時 a = 1～6，有 6 個；d = 2 時 a = 1～3，有 3 個；d ≥ 3 時 a + 3d ≥ 10，不行。共 9 個。",
+          "d < 0（遞減）：令 e = −d，數字是 a、a − e、a − 2e、a − 3e，需要 a ≤ 9 且 a − 3e ≥ 0。e = 1 時 a = 3～9，有 7 個；e = 2 時 a = 6～9，有 4 個；e = 3 時 a = 9，有 1 個。共 12 個（首位至少 3，不會是 0）。",
+          "合計 9 + 12 = 21 個。"
         ],
         "zh-Hans": [
-          "这三个数字必须形成长度为 3 的等差数列。",
-          "从 0 到 9 可形成的递增等差三元组共有 8+6+4+2=20 组。",
-          "每组数字可排列成 3!=6 个三位数，所以先得到 20×6=120 个。",
-          "但若数字组含 0，则有些排列不能作为三位数。含 0 的等差三元组是 012、024、036、048，共 4 组。",
-          "每一组中，以 0 开头的排列有 2!=2 个，所以要扣掉 4×2=8 个。",
-          "因此总数是 120-8=112。"
+          "中间数字等于左右平均，代表它和左邻的差等于它和右邻的差；两个中间位置都这样，四个数字就成等差数列 a、a + d、a + 2d、a + 3d，而「不全相同」就是 d ≠ 0。",
+          "d > 0（递增）：首位 a ≥ 1 且末位 a + 3d ≤ 9。d = 1 时 a = 1～6，有 6 个；d = 2 时 a = 1～3，有 3 个；d ≥ 3 时 a + 3d ≥ 10，不行。共 9 个。",
+          "d < 0（递减）：令 e = −d，数字是 a、a − e、a − 2e、a − 3e，需要 a ≤ 9 且 a − 3e ≥ 0。e = 1 时 a = 3～9，有 7 个；e = 2 时 a = 6～9，有 4 个；e = 3 时 a = 9，有 1 个。共 12 个（首位至少 3，不会是 0）。",
+          "合计 9 + 12 = 21 个。"
         ],
         "en": [
-          "The three digits must form a three-term arithmetic progression.",
-          "From 0 through 9, the increasing three-term arithmetic progressions are 20 in number.",
-          "Each set of three digits can be permuted in 3!=6 ways, giving 20×6=120 candidates.",
-          "But any arrangement starting with 0 is not a three-digit number. The progressions containing 0 are 012, 024, 036, and 048, four in total.",
-          "Each of these contributes 2 invalid arrangements starting with 0, so we subtract 4×2=8.",
-          "Thus the total is 120-8=112."
+          "A middle digit equal to the average of its neighbours means the step from the left neighbour equals the step to the right one; with both middle places like this, the digits form an arithmetic sequence a, a + d, a + 2d, a + 3d, and \"not all the same\" means d ≠ 0.",
+          "d > 0 (increasing): need a ≥ 1 and a + 3d ≤ 9. For d = 1, a = 1 to 6: 6 numbers; for d = 2, a = 1 to 3: 3 numbers; for d ≥ 3, a + 3d ≥ 10, impossible. Total 9.",
+          "d < 0 (decreasing): write e = −d, so the digits are a, a − e, a − 2e, a − 3e with a ≤ 9 and a − 3e ≥ 0. For e = 1, a = 3 to 9: 7 numbers; e = 2, a = 6 to 9: 4 numbers; e = 3, a = 9: 1 number. Total 12 (the leading digit is at least 3, never 0).",
+          "Altogether 9 + 12 = 21."
         ],
         "ja": [
-          "この 3 つの数字は長さ 3 の等差数列を作る必要があります。",
-          "0 から 9 までで作れる増加する 3 項等差数列は全部で 20 組あります。",
-          "各組の数字は 3!=6 通りに並べられるので、まず 20×6=120 個あります。",
-          "ただし 0 を含む組では、0 で始まる並びは 3 桁の数になりません。0 を含む等差数列は 012、024、036、048 の 4 組です。",
-          "各組につき 0 で始まる並びは 2 通りあるので、4×2=8 を引きます。",
-          "したがって合計は 120-8=112 です。"
+          "真ん中の数字が左右の平均に等しいとは、左との差と右との差が等しいことです。2 か所ともそうなので、4 つの数字は等差数列 a、a + d、a + 2d、a + 3d で、「すべて同じではない」は d ≠ 0 のことです。",
+          "d > 0（増加）：a ≥ 1 かつ a + 3d ≤ 9。d = 1 なら a = 1～6 の 6 個、d = 2 なら a = 1～3 の 3 個、d ≥ 3 なら a + 3d ≥ 10 で不可。計 9 個です。",
+          "d < 0（減少）：e = −d とおくと数字は a、a − e、a − 2e、a − 3e で、a ≤ 9 かつ a − 3e ≥ 0。e = 1 なら a = 3～9 の 7 個、e = 2 なら a = 6～9 の 4 個、e = 3 なら a = 9 の 1 個。計 12 個です（最高位は 3 以上で 0 になりません）。",
+          "合計 9 + 12 = 21 個です。"
         ]
       },
       "figure": {
@@ -883,25 +795,17 @@
       "answerMode": "integer_input",
       "correctAnswer": {
         "type": "integer",
-        "value": "112"
+        "value": "21"
       },
       "inputConstraints": {
         "allowNegative": false,
         "maxDigits": 3
       },
       "source": {
-        "type": "official_reference",
-        "name": "AMC 12",
-        "contest": "AMC 12",
-        "year": "2007",
-        "round": "A",
-        "division": "High School",
-        "problemNumber": "Problem 16",
-        "reference": "2007 AMC 12A Problem 16",
-        "displayText": "AMC 12A 2007 Problem 16",
-        "sourceUrl": "https://artofproblemsolving.com/wiki/index.php/2007_AMC_12A_Problems/Problem_16",
-        "rightsStatus": "needs_review",
-        "notes": "Rewritten from a publicly archived competition statement."
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "由「中間數是鄰數平均」轉成等差數字串的計數題型",
+        "notes": "設計依據：平均條件等於相鄰差相同，再分遞增、遞減討論首末位限制；常見錯誤是遞減時忘了末位可以是 0（如 9630），或遞增時誤把首位 0 算進去。"
       },
       "olympiadTaxonomy": {
         "topic": "組合",

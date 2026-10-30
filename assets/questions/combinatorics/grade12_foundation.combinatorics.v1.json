@@ -26,53 +26,41 @@
       "levelStage": "grade12",
       "challengeTier": "foundation",
       "prompt": {
-        "zh-Hant": "從標有 1 到 10 的 10 張卡片中任選 3 張，要求所選 3 數的和是偶數。共有多少種選法？",
-        "zh-Hans": "从标有 1 到 10 的 10 张卡片中任选 3 张，要求所选 3 数的和是偶数。共有多少种选法？",
-        "en": "Choose 3 cards from cards labeled 1 through 10 so that the sum of the chosen numbers is even. How many choices are there?",
-        "ja": "1 から 10 までの数が書かれた 10 枚のカードから 3 枚を選びます。選んだ 3 数の和が偶数になる選び方は何通りありますか。"
+        "zh-Hant": "有 12 張卡片，分別寫著 1 到 12。從中任意抽出三張（不計順序），要求這三張卡片上的數加起來是 4 的倍數。共有多少種抽法？",
+        "zh-Hans": "有 12 张卡片，分别写着 1 到 12。从中任意抽出三张（不计顺序），要求这三张卡片上的数加起来是 4 的倍数。共有多少种抽法？",
+        "en": "Draw a trio from a deck of twelve tickets printed 1, 2, …, 12, insisting that the trio's total be divisible by 4. Count the possible trios.",
+        "ja": "1 から 12 までの数が書かれた 12 枚のカードから 3 枚を同時に取り出します（順番は考えません）。3 枚の数の和が 4 の倍数になる取り出し方は何通りありますか。"
       },
       "answer": {
-        "zh-Hant": "答案是 60。",
-        "zh-Hans": "答案是 60。",
-        "en": "The answer is 60.",
-        "ja": "答えは 60 です。"
+        "zh-Hant": "答案是 55。",
+        "zh-Hans": "答案是 55。",
+        "en": "The answer is 55.",
+        "ja": "答えは 55 です。"
       },
       "solutionSteps": {
         "zh-Hant": [
-          "三個數相加為偶數，要看的是其中奇數的個數：奇數個奇數相加是奇數，偶數個奇數相加是偶數。",
-          "三個數中奇數的個數可能是 0、1、2、3。其中和為偶數的情形是「0 個奇數」與「2 個奇數」。",
-          "1 到 10 之中，奇數有 1、3、5、7、9 共 5 個，偶數有 2、4、6、8、10 也是 5 個。",
-          "情形一：三個都是偶數。從 5 個偶數選 3 個，有 C(5, 3) = 10 種。",
-          "情形二：兩個奇數加一個偶數。選兩個奇數有 C(5, 2) = 10 種，再選一個偶數有 C(5, 1) = 5 種，相乘得 50 種。",
-          "兩種情形互不重疊（奇數個數不同），所以直接相加。",
-          "總數 = 10 + 50 = 60 種。（已用窮舉 C(10,3) = 120 組逐一檢查和的奇偶驗證。）"
+          "依除以 4 的餘數把 1～12 分成四類，每類恰有 3 張：餘 0 的 4、8、12；餘 1 的 1、5、9；餘 2 的 2、6、10；餘 3 的 3、7、11。",
+          "三個餘數的和要是 4 的倍數。可能的餘數組合只有：(0, 0, 0)、(0, 1, 3)、(0, 2, 2)、(1, 1, 2)、(2, 3, 3)。",
+          "分別計數：(0, 0, 0) 是 3 張全取，1 種；(0, 1, 3) 每類各選一張，3 × 3 × 3 = 27 種；(0, 2, 2) 是 3 × 3 = 9 種（餘 2 那類選 2 張有 3 種）；(1, 1, 2) 同理 9 種；(2, 3, 3) 同理 9 種。",
+          "合計 1 + 27 + 9 + 9 + 9 = 55 種，恰好是全部 C(12, 3) = 220 種的四分之一。"
         ],
         "zh-Hans": [
-          "三个数相加为偶数，要看的是其中奇数的个数：奇数个奇数相加是奇数，偶数个奇数相加是偶数。",
-          "三个数中奇数的个数可能是 0、1、2、3。其中和为偶数的情形是「0 个奇数」与「2 个奇数」。",
-          "1 到 10 之中，奇数有 1、3、5、7、9 共 5 个，偶数有 2、4、6、8、10 也是 5 个。",
-          "情形一：三个都是偶数。从 5 个偶数选 3 个，有 C(5, 3) = 10 种。",
-          "情形二：两个奇数加一个偶数。选两个奇数有 C(5, 2) = 10 种，再选一个偶数有 C(5, 1) = 5 种，相乘得 50 种。",
-          "两种情形互不重叠（奇数个数不同），所以直接相加。",
-          "总数 = 10 + 50 = 60 种。（已用穷举 C(10,3) = 120 组逐一检查和的奇偶验证。）"
+          "依除以 4 的余数把 1～12 分成四类，每类恰有 3 张：余 0 的 4、8、12；余 1 的 1、5、9；余 2 的 2、6、10；余 3 的 3、7、11。",
+          "三个余数的和要是 4 的倍数。可能的余数组合只有：(0, 0, 0)、(0, 1, 3)、(0, 2, 2)、(1, 1, 2)、(2, 3, 3)。",
+          "分别计数：(0, 0, 0) 是 3 张全取，1 种；(0, 1, 3) 每类各选一张，3 × 3 × 3 = 27 种；(0, 2, 2) 是 3 × 3 = 9 种（余 2 那类选 2 张有 3 种）；(1, 1, 2) 同理 9 种；(2, 3, 3) 同理 9 种。",
+          "合计 1 + 27 + 9 + 9 + 9 = 55 种，恰好是全部 C(12, 3) = 220 种的四分之一。"
         ],
         "en": [
-          "For three numbers to sum to an even value, what matters is how many of them are odd: an odd count of odd numbers gives an odd sum, an even count gives an even sum.",
-          "Among three numbers the count of odd ones can be 0, 1, 2 or 3, and the even-sum cases are exactly 0 odd numbers and 2 odd numbers.",
-          "From 1 to 10 there are five odd numbers 1, 3, 5, 7, 9 and five even numbers 2, 4, 6, 8, 10.",
-          "Case one: all three even. Choosing 3 from the 5 evens gives C(5, 3) = 10 ways.",
-          "Case two: two odd and one even. Choosing the odds gives C(5, 2) = 10 and choosing the even gives C(5, 1) = 5, so 50 ways.",
-          "The two cases do not overlap since they have different odd counts, so simply add them.",
-          "The total is 10 + 50 = 60. (Verified by enumerating all C(10,3) = 120 triples and checking the parity of each sum.)"
+          "Sort 1 to 12 by remainder on division by 4; each class has exactly 3 cards: remainder 0: 4, 8, 12; remainder 1: 1, 5, 9; remainder 2: 2, 6, 10; remainder 3: 3, 7, 11.",
+          "The three remainders must total a multiple of 4. The only possible remainder patterns are (0, 0, 0), (0, 1, 3), (0, 2, 2), (1, 1, 2), (2, 3, 3).",
+          "Count each: (0, 0, 0) takes all three cards of that class, 1 way; (0, 1, 3) picks one from each class, 3 × 3 × 3 = 27 ways; (0, 2, 2) gives 3 × 3 = 9 ways (choosing 2 of the 3 remainder-2 cards has 3 ways); (1, 1, 2) likewise 9; (2, 3, 3) likewise 9.",
+          "Total 1 + 27 + 9 + 9 + 9 = 55, exactly one quarter of all C(12, 3) = 220 draws."
         ],
         "ja": [
-          "3 数の和が偶数になるかは、その中の奇数の個数で決まります。奇数が奇数個なら和は奇数、偶数個なら和は偶数です。",
-          "3 数のうち奇数の個数は 0、1、2、3 のいずれかで、和が偶数になるのは「奇数 0 個」と「奇数 2 個」の場合です。",
-          "1 から 10 のうち奇数は 1、3、5、7、9 の 5 個、偶数は 2、4、6、8、10 の 5 個です。",
-          "場合 1：3 つとも偶数。5 個の偶数から 3 個選ぶので C(5, 3) = 10 通り。",
-          "場合 2：奇数 2 個と偶数 1 個。奇数の選び方が C(5, 2) = 10、偶数が C(5, 1) = 5 で、掛けて 50 通り。",
-          "2 つの場合は奇数の個数が違うので重ならず、そのまま足せます。",
-          "合計は 10 + 50 = 60 通り。（C(10,3) = 120 組をすべて調べる全数検査でも確認済み。）"
+          "4 で割った余りで 1～12 を 4 つの組に分けると、どの組もちょうど 3 枚です：余り 0 は 4、8、12、余り 1 は 1、5、9、余り 2 は 2、6、10、余り 3 は 3、7、11。",
+          "3 つの余りの和が 4 の倍数でなければなりません。可能な余りの組は (0, 0, 0)、(0, 1, 3)、(0, 2, 2)、(1, 1, 2)、(2, 3, 3) だけです。",
+          "それぞれ数えます：(0, 0, 0) はその組を全部取るので 1 通り、(0, 1, 3) は各組から 1 枚ずつで 3 × 3 × 3 = 27 通り、(0, 2, 2) は 3 × 3 = 9 通り（余り 2 の組から 2 枚選ぶのは 3 通り）、(1, 1, 2) も 9 通り、(2, 3, 3) も 9 通りです。",
+          "合計 1 + 27 + 9 + 9 + 9 = 55 通りで、全体 C(12, 3) = 220 通りのちょうど 4 分の 1 です。"
         ]
       },
       "figure": {
@@ -83,25 +71,17 @@
       "answerMode": "integer_input",
       "correctAnswer": {
         "type": "integer",
-        "value": "60"
+        "value": "55"
       },
       "inputConstraints": {
         "allowNegative": false,
         "maxDigits": 2
       },
       "source": {
-        "type": "official_reference",
-        "name": "AMC 12",
-        "contest": "AMC 12",
-        "year": "2021",
-        "round": "A",
-        "division": "High School",
-        "problemNumber": "Problem 7",
-        "reference": "2021 AMC 12A Problem 7",
-        "displayText": "AMC 12A 2021 Problem 7",
-        "sourceUrl": "https://artofproblemsolving.com/wiki/index.php/2021_AMC_12A_Problems",
-        "rightsStatus": "needs_review",
-        "notes": "Rewritten from a publicly archived competition statement."
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "依餘數分類計算三數和為倍數的組合題型",
+        "notes": "設計依據：四個餘數類各 3 張，要列全五種餘數組合；常見錯誤是漏掉 (1, 1, 2) 或 (2, 3, 3) 這類兩張同餘的情形，或把 (0, 1, 3) 當成要再乘排列數。"
       },
       "olympiadTaxonomy": {
         "topic": "組合",
@@ -123,53 +103,41 @@
       "levelStage": "grade12",
       "challengeTier": "foundation",
       "prompt": {
-        "zh-Hant": "有多少個長度為 8 的 0-1 串，其相鄰兩位都不同？",
-        "zh-Hans": "有多少个长度为 8 的 0-1 串，其相邻两位都不同？",
-        "en": "How many binary strings of length 8 have no equal adjacent digits?",
-        "ja": "長さ 8 の 0-1 列で、隣り合う 2 文字がすべて異なるものは何個ありますか。"
+        "zh-Hant": "一盞燈連續 7 天、每天只記錄一次「開」或「關」。如果恰好有 3 天的狀態和前一天不同（第 1 天沒有前一天，不算），這 7 天的紀錄共有多少種可能？",
+        "zh-Hans": "一盏灯连续 7 天、每天只记录一次「开」或「关」。如果恰好有 3 天的状态和前一天不同（第 1 天没有前一天，不算），这 7 天的记录共有多少种可能？",
+        "en": "A lamp is logged once a day for 7 days as either ON or OFF. Exactly 3 of the days show a state different from the day before (day 1 has no day before and is not counted). How many 7-day logs are possible?",
+        "ja": "ある電灯の状態を 7 日間、毎日 1 回「オン」か「オフ」で記録します。前の日と状態が違う日がちょうど 3 日あるとき（1 日目には前の日がないので数えません）、7 日間の記録は何通りありますか。"
       },
       "answer": {
-        "zh-Hant": "答案是 2。",
-        "zh-Hans": "答案是 2。",
-        "en": "The answer is 2.",
-        "ja": "答えは 2 です。"
+        "zh-Hant": "答案是 40。",
+        "zh-Hans": "答案是 40。",
+        "en": "The answer is 40.",
+        "ja": "答えは 40 です。"
       },
       "solutionSteps": {
         "zh-Hant": [
-          "條件是「相鄰兩位都不同」，而每一位只能是 0 或 1，只有兩種選擇。",
-          "所以只要前一位確定了，下一位就必須是另一個值，完全沒有選擇餘地。",
-          "換句話說，整個字串被第一位完全決定。",
-          "第一位是 0 時，後面依序被迫是 1、0、1、0、1、0、1，得到 01010101。",
-          "第一位是 1 時，同理得到 10101010。",
-          "這兩個字串都確實滿足相鄰兩位不同，而且沒有其他可能。",
-          "所以符合條件的長度 8 的 0-1 字串恰好有 2 個。"
+          "相鄰兩天之間共有 6 個「交界」（第 1 與 2 天、第 2 與 3 天……第 6 與 7 天）。狀態改變的天數，就是發生切換的交界數。",
+          "從 6 個交界中選出恰好 3 個發生切換：C(6, 3) = 20 種。",
+          "第 1 天是開或關有 2 種；第 1 天和切換位置都定了，整串紀錄就完全確定。",
+          "總數 = 2 × 20 = 40。"
         ],
         "zh-Hans": [
-          "条件是「相邻两位都不同」，而每一位只能是 0 或 1，只有两种选择。",
-          "所以只要前一位确定了，下一位就必须是另一个值，完全没有选择余地。",
-          "换句话说，整个字符串被第一位完全决定。",
-          "第一位是 0 时，后面依序被迫是 1、0、1、0、1、0、1，得到 01010101。",
-          "第一位是 1 时，同理得到 10101010。",
-          "这两个字符串都确实满足相邻两位不同，而且没有其他可能。",
-          "所以符合条件的长度 8 的 0-1 字符串恰好有 2 个。"
+          "相邻两天之间共有 6 个「交界」（第 1 与 2 天、第 2 与 3 天……第 6 与 7 天）。状态改变的天数，就是发生切换的交界数。",
+          "从 6 个交界中选出恰好 3 个发生切换：C(6, 3) = 20 种。",
+          "第 1 天是开或关有 2 种；第 1 天和切换位置都定了，整串记录就完全确定。",
+          "总数 = 2 × 20 = 40。"
         ],
         "en": [
-          "The condition is that adjacent digits differ, and each digit can only be 0 or 1, giving just two choices.",
-          "So once one digit is fixed, the next is forced to be the other value with no freedom at all.",
-          "In other words, the entire string is completely determined by its first digit.",
-          "If the first digit is 0, the rest are forced to be 1, 0, 1, 0, 1, 0, 1, giving 01010101.",
-          "If the first digit is 1, the same reasoning gives 10101010.",
-          "Both strings do satisfy the adjacency condition, and no other string can.",
-          "So there are exactly 2 such binary strings of length 8."
+          "Between consecutive days there are 6 boundaries (days 1–2, 2–3, …, 6–7). The number of days whose state changes equals the number of boundaries where a switch happens.",
+          "Choose exactly 3 of the 6 boundaries to be switches: C(6, 3) = 20 ways.",
+          "Day 1 can be ON or OFF, 2 ways; once day 1 and the switch positions are fixed, the whole log is determined.",
+          "Total = 2 × 20 = 40."
         ],
         "ja": [
-          "条件は「隣り合う 2 桁が異なる」ことで、各桁は 0 か 1 の 2 通りしかありません。",
-          "したがって前の桁が決まれば次の桁はもう一方に強制され、選ぶ余地はまったくありません。",
-          "つまり文字列全体が最初の 1 桁だけで完全に決まります。",
-          "最初が 0 なら以降は 1、0、1、0、1、0、1 と強制され 01010101 になります。",
-          "最初が 1 なら同様に 10101010 になります。",
-          "どちらも条件を満たし、それ以外の文字列はあり得ません。",
-          "よって長さ 8 の条件を満たす 0-1 文字列はちょうど 2 個です。"
+          "隣り合う日の間には 6 つの「境目」があります（1–2 日目、2–3 日目、…、6–7 日目）。状態が変わった日の数は、切り替えが起きた境目の数と同じです。",
+          "6 つの境目から切り替えが起きる 3 つを選びます：C(6, 3) = 20 通りです。",
+          "1 日目はオンかオフの 2 通りで、1 日目と切り替え位置が決まれば記録全体が決まります。",
+          "合計は 2 × 20 = 40 通りです。"
         ]
       },
       "figure": {
@@ -180,25 +148,17 @@
       "answerMode": "integer_input",
       "correctAnswer": {
         "type": "integer",
-        "value": "2"
+        "value": "40"
       },
       "inputConstraints": {
         "allowNegative": false,
-        "maxDigits": 1
+        "maxDigits": 2
       },
       "source": {
-        "type": "official_reference",
-        "name": "AMC 12",
-        "contest": "AMC 12",
-        "year": "2021",
-        "round": "B",
-        "division": "High School",
-        "problemNumber": "Problem 10",
-        "reference": "2021 AMC 12B Problem 10",
-        "displayText": "AMC 12B 2021 Problem 10",
-        "sourceUrl": "https://artofproblemsolving.com/wiki/index.php/2021_AMC_12B_Problems",
-        "rightsStatus": "needs_review",
-        "notes": "Rewritten from a publicly archived competition statement."
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "以相鄰位切換次數計數 0-1 串的題型",
+        "notes": "設計依據：把「和前一天不同」轉成在 6 個交界中選切換點，再乘上首日的 2 種；常見錯誤是忘了乘 2 得 20，或用 7 個位置選 3 個得 35。"
       },
       "olympiadTaxonomy": {
         "topic": "組合",
@@ -220,61 +180,45 @@
       "levelStage": "grade12",
       "challengeTier": "foundation",
       "prompt": {
-        "zh-Hant": "在正六邊形的 6 個頂點中任選 3 點成三角形，問其中鈍角三角形有多少個？",
-        "zh-Hans": "在正六边形的 6 个顶点中任选 3 点成三角形，问其中钝角三角形有多少个？",
-        "en": "Choose 3 vertices of a regular hexagon to form a triangle. How many of these triangles are obtuse?",
-        "ja": "正六角形の 6 頂点から 3 点を選んで三角形を作ります。そのうち鈍角三角形はいくつありますか。"
+        "zh-Hant": "如圖，O 是正六邊形 ABCDEF 的中心。用 A～F 與 O 這七點中的某三點當頂點畫三角形（三點不能在同一直線上）。有多少個這樣的三角形，面積恰好是整個正六邊形面積的六分之一？",
+        "zh-Hans": "如图，O 是正六边形 ABCDEF 的中心。用 A～F 与 O 这七点中的某三点当顶点画三角形（三点不能在同一直线上）。有多少个这样的三角形，面积恰好是整个正六边形面积的六分之一？",
+        "en": "Point O sits at the middle of the six-sided figure ABCDEF drawn here (equal sides, equal angles). Pick 3 of the 7 labelled points, not in one straight line, and join them. Count the picks whose enclosed area is exactly one sixth of ABCDEF’s.",
+        "ja": "図のように、O は正六角形 ABCDEF の中心です。A～F と O の 7 点から 3 点を選んで三角形をつくります（3 点が一直線上にあってはいけません）。面積が正六角形全体の面積のちょうど 1/6 になる三角形は何個ありますか。"
       },
       "answer": {
-        "zh-Hant": "答案是 6 個。",
-        "zh-Hans": "答案是 6 个。",
-        "en": "The answer is 6.",
-        "ja": "答えは 6 個です。"
+        "zh-Hant": "答案是 18。",
+        "zh-Hans": "答案是 18。",
+        "en": "The answer is 18.",
+        "ja": "答えは 18 です。"
       },
       "solutionSteps": {
         "zh-Hant": [
-          "正六邊形的六個頂點都在同一個外接圓上，所以可以用「圓內接三角形」的性質來分類。",
-          "從 6 個頂點取 3 個，總共有 C(6, 3) = 20 個三角形。",
-          "先數正三角形：取相間隔的三個頂點，有 {1,3,5} 與 {2,4,6} 兩種，共 2 個，它們都是銳角三角形。",
-          "再數直角三角形。圓內接三角形是直角三角形的充要條件，是它有一邊為直徑。",
-          "正六邊形的直徑就是連接相對頂點的線段，共有 3 條（1-4、2-5、3-6）。",
-          "每一條直徑配上剩下 4 個頂點中的任何一個當第三頂點，都會得到一個直角三角形，所以直角三角形有 3 × 4 = 12 個。",
-          "這 12 個彼此不重複，因為一個三角形最多只能有一個直角，也就最多只含一條直徑。",
-          "所以鈍角三角形個數 = 20 − 2（正三角形）− 12（直角）= 6 個。",
-          "驗算：把六個頂點放在單位圓上逐一計算 20 個三角形的邊長平方並比較，得到銳角 2 個、直角 12 個、鈍角 6 個，與推理一致。"
+          "從 O 連到六個頂點，正六邊形被分成 6 個全等的正三角形，設每個面積為 T，正六邊形面積就是 6T，題目要找面積 T 的三角形。設邊長為 1，則 T = (1/2) × 1 × 1 × sin 60°。",
+          "含 O 的三角形：O 和兩個相鄰頂點（如 O、A、B）就是一個小正三角形，面積 T，有 6 個；O 和隔一個的頂點（如 O、A、C），面積 (1/2) × 1 × 1 × sin 120° = T，也有 6 個；O 和相對的頂點（如 O、A、D）三點共線，不算。",
+          "只用頂點的三角形：三個連續頂點（如 A、B、C），面積 (1/2) × 1 × 1 × sin 120° = T，有 6 個；含一條最長對角線的（如 A、B、D）是直角三角形，面積 2T，有 12 個；正三角形 A、C、E 與 B、D、F 面積 3T，有 2 個。",
+          "檢查總數：6 + 6 + 3 + 6 + 12 + 2 = 35 = C(7, 3)，所有取法都分類到了。",
+          "面積恰為 T 的有 6 + 6 + 6 = 18 個。"
         ],
         "zh-Hans": [
-          "正六边形的六个顶点都在同一个外接圆上，所以可以用「圆内接三角形」的性质来分类。",
-          "从 6 个顶点取 3 个，总共有 C(6, 3) = 20 个三角形。",
-          "先数正三角形：取相间隔的三个顶点，有 {1,3,5} 与 {2,4,6} 两种，共 2 个，它们都是锐角三角形。",
-          "再数直角三角形。圆内接三角形是直角三角形的充要条件，是它有一边为直径。",
-          "正六边形的直径就是连接相对顶点的线段，共有 3 条（1-4、2-5、3-6）。",
-          "每一条直径配上剩下 4 个顶点中的任何一个当第三顶点，都会得到一个直角三角形，所以直角三角形有 3 × 4 = 12 个。",
-          "这 12 个彼此不重复，因为一个三角形最多只能有一个直角，也就最多只含一条直径。",
-          "所以钝角三角形个数 = 20 − 2（正三角形）− 12（直角）= 6 个。",
-          "验算：把六个顶点放在单位圆上逐一计算 20 个三角形的边长平方并比较，得到锐角 2 个、直角 12 个、钝角 6 个，与推理一致。"
+          "从 O 连到六个顶点，正六边形被分成 6 个全等的正三角形，设每个面积为 T，正六边形面积就是 6T，题目要找面积 T 的三角形。设边长为 1，则 T = (1/2) × 1 × 1 × sin 60°。",
+          "含 O 的三角形：O 和两个相邻顶点（如 O、A、B）就是一个小正三角形，面积 T，有 6 个；O 和隔一个的顶点（如 O、A、C），面积 (1/2) × 1 × 1 × sin 120° = T，也有 6 个；O 和相对的顶点（如 O、A、D）三点共线，不算。",
+          "只用顶点的三角形：三个连续顶点（如 A、B、C），面积 (1/2) × 1 × 1 × sin 120° = T，有 6 个；含一条最长对角线的（如 A、B、D）是直角三角形，面积 2T，有 12 个；正三角形 A、C、E 与 B、D、F 面积 3T，有 2 个。",
+          "检查总数：6 + 6 + 3 + 6 + 12 + 2 = 35 = C(7, 3)，所有取法都分类到了。",
+          "面积恰为 T 的有 6 + 6 + 6 = 18 个。"
         ],
         "en": [
-          "The six vertices of a regular hexagon lie on a common circumcircle, so the triangles can be classified using inscribed-triangle properties.",
-          "Choosing 3 of the 6 vertices gives C(6, 3) = 20 triangles in total.",
-          "First count the equilateral ones: taking alternate vertices gives {1,3,5} and {2,4,6}, so 2 of them, and both are acute.",
-          "Next count the right triangles. An inscribed triangle is right exactly when one of its sides is a diameter.",
-          "The diameters of a regular hexagon are the segments joining opposite vertices, and there are 3 of them (1-4, 2-5, 3-6).",
-          "Each diameter combined with any of the remaining 4 vertices as the third point gives a right triangle, so there are 3 × 4 = 12 right triangles.",
-          "These 12 are all distinct, because a triangle can have at most one right angle and hence contains at most one diameter.",
-          "Therefore the number of obtuse triangles is 20 − 2 (equilateral) − 12 (right) = 6.",
-          "Check: placing the six vertices on a unit circle and comparing squared side lengths for all 20 triangles gives 2 acute, 12 right and 6 obtuse, matching the reasoning."
+          "Joining O to the six corners splits the hexagon into 6 congruent equilateral triangles; call each area T, so the hexagon has area 6T and we want triangles of area T. With side 1, T = (1/2) × 1 × 1 × sin 60°.",
+          "Triangles using O: O with two neighbouring corners (like O, A, B) is one small equilateral triangle, area T, 6 of them; O with two corners one apart (like O, A, C) has area (1/2) × 1 × 1 × sin 120° = T, another 6; O with opposite corners (like O, A, D) is collinear and does not count.",
+          "Triangles using only corners: three consecutive corners (like A, B, C) have area (1/2) × 1 × 1 × sin 120° = T, 6 of them; those containing a longest diagonal (like A, B, D) are right triangles of area 2T, 12 of them; the equilateral triangles A, C, E and B, D, F have area 3T, 2 of them.",
+          "Check the total: 6 + 6 + 3 + 6 + 12 + 2 = 35 = C(7, 3), so every choice has been classified.",
+          "The triangles of area exactly T number 6 + 6 + 6 = 18."
         ],
         "ja": [
-          "正六角形の 6 頂点は同一の外接円上にあるので、円に内接する三角形の性質で分類できます。",
-          "6 頂点から 3 点を選ぶ方法は C(6, 3) = 20 通りです。",
-          "まず正三角形を数えます。1 つおきに頂点を取ると {1,3,5} と {2,4,6} の 2 個で、どちらも鋭角三角形です。",
-          "次に直角三角形を数えます。円に内接する三角形が直角三角形であることは、1 辺が直径であることと同値です。",
-          "正六角形の直径は向かい合う頂点を結ぶ線分で、1-4、2-5、3-6 の 3 本あります。",
-          "各直径に対し残り 4 頂点のどれを第 3 頂点にしても直角三角形になるので、直角三角形は 3 × 4 = 12 個です。",
-          "この 12 個は重複しません。三角形の直角は高々 1 つなので、直径も高々 1 本しか含まないからです。",
-          "したがって鈍角三角形は 20 − 2（正三角形）− 12（直角）= 6 個。",
-          "検算：6 頂点を単位円上に置いて 20 個の三角形の辺の 2 乗を比較すると、鋭角 2 個・直角 12 個・鈍角 6 個となり推論と一致します。"
+          "O と 6 頂点を結ぶと正六角形は合同な正三角形 6 個に分かれます。1 個の面積を T とすると全体は 6T で、面積 T の三角形を探します。1 辺を 1 とすると T = (1/2) × 1 × 1 × sin 60° です。",
+          "O を含む三角形：O と隣り合う 2 頂点（例 O、A、B）は小さい正三角形で面積 T、6 個。O と 1 つおきの 2 頂点（例 O、A、C）は面積 (1/2) × 1 × 1 × sin 120° = T で、これも 6 個。O と向かい合う 2 頂点（例 O、A、D）は一直線上なので数えません。",
+          "頂点だけの三角形：連続する 3 頂点（例 A、B、C）は面積 (1/2) × 1 × 1 × sin 120° = T で 6 個、最も長い対角線を含むもの（例 A、B、D）は直角三角形で面積 2T、12 個、正三角形 A、C、E と B、D、F は面積 3T で 2 個です。",
+          "総数の確認：6 + 6 + 3 + 6 + 12 + 2 = 35 = C(7, 3) で、すべての選び方を分類できています。",
+          "面積がちょうど T のものは 6 + 6 + 6 = 18 個です。"
         ]
       },
       "figure": {
@@ -282,46 +226,52 @@
         "kind": "geometry_scene",
         "params": {
           "bounds": {
-            "minX": -2.7,
-            "minY": -2.7,
-            "maxX": 2.7,
-            "maxY": 2.7
+            "minX": -1.4,
+            "minY": -1.35,
+            "maxX": 1.4,
+            "maxY": 1.35
           },
           "points": [
             {
               "name": "A",
-              "x": 2.0,
+              "x": 1.0,
               "y": 0.0,
               "pos": "r"
             },
             {
               "name": "B",
-              "x": 1.0,
-              "y": 1.7321,
+              "x": 0.5,
+              "y": 0.866,
               "pos": "tr"
             },
             {
               "name": "C",
-              "x": -1.0,
-              "y": 1.7321,
+              "x": -0.5,
+              "y": 0.866,
               "pos": "tl"
             },
             {
               "name": "D",
-              "x": -2.0,
+              "x": -1.0,
               "y": 0.0,
               "pos": "l"
             },
             {
               "name": "E",
-              "x": -1.0,
-              "y": -1.7321,
+              "x": -0.5,
+              "y": -0.866,
               "pos": "bl"
             },
             {
               "name": "F",
-              "x": 1.0,
-              "y": -1.7321,
+              "x": 0.5,
+              "y": -0.866,
+              "pos": "br"
+            },
+            {
+              "name": "O",
+              "x": 0,
+              "y": 0,
               "pos": "br"
             }
           ],
@@ -355,6 +305,36 @@
               "from": "F",
               "to": "A",
               "style": "solid"
+            },
+            {
+              "from": "O",
+              "to": "A",
+              "style": "construction"
+            },
+            {
+              "from": "O",
+              "to": "B",
+              "style": "construction"
+            },
+            {
+              "from": "O",
+              "to": "C",
+              "style": "construction"
+            },
+            {
+              "from": "O",
+              "to": "D",
+              "style": "construction"
+            },
+            {
+              "from": "O",
+              "to": "E",
+              "style": "construction"
+            },
+            {
+              "from": "O",
+              "to": "F",
+              "style": "construction"
             }
           ]
         }
@@ -362,25 +342,17 @@
       "answerMode": "integer_input",
       "correctAnswer": {
         "type": "integer",
-        "value": "6"
+        "value": "18"
       },
       "inputConstraints": {
         "allowNegative": false,
         "maxDigits": 2
       },
       "source": {
-        "type": "official_reference",
-        "name": "AMC 12",
-        "contest": "AMC 12",
-        "year": "2021",
-        "round": "A",
-        "division": "High School",
-        "problemNumber": "Problem 23",
-        "reference": "2021 AMC 12A Problem 23",
-        "displayText": "AMC 12A 2021 Problem 23",
-        "sourceUrl": "https://artofproblemsolving.com/wiki/index.php/2021_AMC_12A_Problems/Problem_23",
-        "rightsStatus": "needs_review",
-        "notes": "Rewritten from a publicly archived competition statement."
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "正多邊形頂點與中心選點、依面積分類三角形的計數題型",
+        "notes": "設計依據：要把 35 種取法依「含不含中心、頂點間隔」分類，並看出 O、A、C 與 A、B、C 兩類面積也等於 T；常見錯誤是只數到含中心的相鄰型而答 6，或漏掉其中一類而答 12。"
       },
       "olympiadTaxonomy": {
         "topic": "組合",
@@ -716,45 +688,45 @@
       "levelStage": "grade12",
       "challengeTier": "foundation",
       "prompt": {
-        "zh-Hant": "把 n 顆標準六面骰同時擲出，所有可能出現的點數乘積一共會有 936 種不同數值。求 n。",
-        "zh-Hans": "把 n 颗标准六面骰同时掷出，所有可能出现的点数乘积一共会有 936 种不同数值。求 n。",
-        "en": "When n standard six-sided dice are rolled, the product of the rolled numbers can take exactly 936 distinct values. Find n.",
-        "ja": "n 個の標準的な 6 面サイコロを同時に振るとき、出た目の積として現れうる異なる値がちょうど 936 個あるとします。n を求めなさい。"
+        "zh-Hant": "一種四面骰擲出後會得到 1、2、3、4 其中一個點數。同時擲 n 顆這種骰子，把所有點數相乘。已知可能出現的乘積恰好有 121 種不同的值，求 n。",
+        "zh-Hans": "一种四面骰掷出后会得到 1、2、3、4 其中一个点数。同时掷 n 颗这种骰子，把所有点数相乘。已知可能出现的乘积恰好有 121 种不同的值，求 n。",
+        "en": "A tetrahedral die lands on 1, 2, 3 or 4. Toss n such dice together and multiply what they show; there turn out to be 121 possible results. Find n.",
+        "ja": "1、2、3、4 のいずれかの目が出る四面体のさいころがあります。これを n 個同時に投げ、出た目をすべて掛け合わせます。積としてありうる値がちょうど 121 種類のとき、n を求めなさい。"
       },
       "answer": {
-        "zh-Hant": "答案是 11。",
-        "zh-Hans": "答案是 11。",
-        "en": "The answer is 11.",
-        "ja": "答えは 11 です。"
+        "zh-Hant": "答案是 10。",
+        "zh-Hans": "答案是 10。",
+        "en": "The answer is 10.",
+        "ja": "答えは 10 です。"
       },
       "solutionSteps": {
         "zh-Hant": [
-          "每個乘積都可以寫成 2ʰ×3ⁱ×5ʲ，因為骰面 1 到 6 的質因數只涉及 2、3、5。",
-          "固定 i、j 後，2 的指數 h 可以從 0 一直到最大值 2n-i-2j，因此對每組 (i,j) 共有 2n+1-i-2j 種 h。",
-          "把所有滿足 i+j≤n 的情況加總，可得不同乘積總數是 ((n+1)²(n+2))/2。",
-          "令 ((n+1)²(n+2))/2 = 936，可得 (n+1)²(n+2)=1872。",
-          "分解 1872 = 12²×13，所以 n+1=12、n+2=13，得到 n=11。"
+          "每個點數的質因數只有 2 和 3，所以乘積一定是 2ᵃ × 3ᵇ 的形式；不同的 (a, b) 給出不同的乘積。",
+          "b 就是擲出 3 的骰子個數，可以是 0、1、…、n。",
+          "固定 b 之後，其餘 n − b 顆骰子只會擲出 1、2、4，各貢獻 2 的次數 0、1、2，所以 a 可以是 0 到 2(n − b) 之間的每一個整數，共 2(n − b) + 1 種。",
+          "把 b = n、n − 1、…、0 的情形加起來：1 + 3 + 5 + ⋯ + (2n + 1) = (n + 1)²。",
+          "(n + 1)² = 121，所以 n + 1 = 11，n = 10。"
         ],
         "zh-Hans": [
-          "每个乘积都可以写成 2ʰ×3ⁱ×5ʲ，因为骰面 1 到 6 的质因数只涉及 2、3、5。",
-          "固定 i、j 后，2 的指数 h 可以从 0 一直到最大值 2n-i-2j，因此对每组 (i,j) 共有 2n+1-i-2j 种 h。",
-          "把所有满足 i+j≤n 的情况加总，可得不同乘积总数是 ((n+1)²(n+2))/2。",
-          "令 ((n+1)²(n+2))/2 = 936，可得 (n+1)²(n+2)=1872。",
-          "分解 1872 = 12²×13，所以 n+1=12、n+2=13，得到 n=11。"
+          "每个点数的质因数只有 2 和 3，所以乘积一定是 2ᵃ × 3ᵇ 的形式；不同的 (a, b) 给出不同的乘积。",
+          "b 就是掷出 3 的骰子个数，可以是 0、1、…、n。",
+          "固定 b 之后，其余 n − b 颗骰子只会掷出 1、2、4，各贡献 2 的次数 0、1、2，所以 a 可以是 0 到 2(n − b) 之间的每一个整数，共 2(n − b) + 1 种。",
+          "把 b = n、n − 1、…、0 的情形加起来：1 + 3 + 5 + ⋯ + (2n + 1) = (n + 1)²。",
+          "(n + 1)² = 121，所以 n + 1 = 11，n = 10。"
         ],
         "en": [
-          "Any possible product can be written as 2ʰ·3ⁱ·5ʲ, since the faces 1 through 6 only involve the primes 2, 3, and 5.",
-          "For fixed i and j, the exponent h of 2 can range from 0 up to 2n-i-2j, giving 2n+1-i-2j possibilities.",
-          "Summing over all pairs (i,j) with i+j≤n gives the total number of distinct products as ((n+1)²(n+2))/2.",
-          "Setting this equal to 936 gives (n+1)²(n+2)=1872.",
-          "Since 1872 = 12²×13, we get n+1=12 and n+2=13, so n=11."
+          "Every face value uses only the primes 2 and 3, so each product has the form 2ᵃ × 3ᵇ, and different pairs (a, b) give different products.",
+          "b is the number of dice showing 3, which can be 0, 1, …, n.",
+          "With b fixed, the other n − b dice show 1, 2 or 4, contributing 0, 1 or 2 to the power of 2, so a can be every integer from 0 to 2(n − b): 2(n − b) + 1 values.",
+          "Adding over b = n, n − 1, …, 0 gives 1 + 3 + 5 + ⋯ + (2n + 1) = (n + 1)².",
+          "(n + 1)² = 121, so n + 1 = 11 and n = 10."
         ],
         "ja": [
-          "どの積も、サイコロの目 1 から 6 の素因数が 2、3、5 だけなので 2ʰ·3ⁱ·5ʲ の形に書けます。",
-          "i と j を固定すると、2 の指数 h は 0 から最大 2n-i-2j まで取りうるので、2n+1-i-2j 通りあります。",
-          "i+j≤n を満たすすべての組について足し合わせると、異なる積の個数は ((n+1)²(n+2))/2 になります。",
-          "これを 936 に等しいとすると (n+1)²(n+2)=1872。",
-          "1872 = 12²×13 だから n+1=12、n+2=13 となり、n=11 です。"
+          "どの目も素因数は 2 と 3 だけなので、積は必ず 2ᵃ × 3ᵇ の形で、異なる (a, b) は異なる積を与えます。",
+          "b は 3 が出たさいころの個数で、0、1、…、n のどれでもありえます。",
+          "b を固定すると、残りの n − b 個は 1、2、4 のどれかで 2 の指数に 0、1、2 を加えるので、a は 0 から 2(n − b) までのすべての整数をとり、2(n − b) + 1 通りです。",
+          "b = n、n − 1、…、0 について足すと 1 + 3 + 5 + ⋯ + (2n + 1) = (n + 1)² です。",
+          "(n + 1)² = 121 より n + 1 = 11、n = 10 です。"
         ]
       },
       "figure": {
@@ -765,25 +737,17 @@
       "answerMode": "integer_input",
       "correctAnswer": {
         "type": "integer",
-        "value": "11"
+        "value": "10"
       },
       "inputConstraints": {
         "allowNegative": false,
         "maxDigits": 2
       },
       "source": {
-        "type": "official_reference",
-        "name": "AMC 12",
-        "contest": "AMC 12",
-        "year": "2023",
-        "round": "B",
-        "division": "High School",
-        "problemNumber": "Problem 23",
-        "reference": "2023 AMC 12B Problem 23",
-        "displayText": "AMC 12B 2023 Problem 23",
-        "sourceUrl": "https://artofproblemsolving.com/wiki/index.php/2023_AMC_12B_Problems/Problem_23",
-        "rightsStatus": "needs_review",
-        "notes": "Rewritten from a publicly archived competition statement."
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "以質因數次數組合數不同乘積的骰子計數題型",
+        "notes": "設計依據：把乘積寫成 2ᵃ × 3ᵇ，固定 3 的個數後 2 的次數連續可取，總數是奇數和 (n + 1)²；常見錯誤是把 a、b 當成各自獨立取 0～2n 與 0～n 而得 (2n + 1)(n + 1)。"
       },
       "olympiadTaxonomy": {
         "topic": "組合",
@@ -805,45 +769,49 @@
       "levelStage": "grade12",
       "challengeTier": "foundation",
       "prompt": {
-        "zh-Hant": "稱一個正整數是「合格數」，如果它不含 0、每個數字至多出現一次，而且沒有任何一個數字同時夾在左右兩個比它更大的數字之間。問合格數共有多少個？",
-        "zh-Hans": "称一个正整数是“合格数”，如果它不含 0、每个数字至多出现一次，而且没有任何一个数字同时夹在左右两个比它更大的数字之间。问合格数共有多少个？",
-        "en": "Call a positive integer valid if it contains no 0, no digit is repeated, and no digit is adjacent to two larger digits at the same time. How many valid integers are there?",
-        "ja": "正の整数を「有効」と呼ぶことにします。ただし 0 を含まず、同じ数字は 2 回以上使わず、さらにどの数字も左右の 2 つの隣の数字の両方より小さくなることはありません。このような有効な整数は何個ありますか。"
+        "zh-Hant": "河面上一排 8 塊踏腳石，依序編號 1 到 8。小安從 1 號石出發，要把每一塊石頭都恰好踩一次（最後停在哪一塊都可以），而且每一步只能跳到編號相差 1 或 2 的石頭上。共有多少種不同的踩法？",
+        "zh-Hans": "河面上一排 8 块踏脚石，依次编号 1 到 8。小安从 1 号石出发，要把每一块石头都恰好踩一次（最后停在哪一块都可以），而且每一步只能跳到编号相差 1 或 2 的石头上。共有多少种不同的踩法？",
+        "en": "Eight stepping stones in a row across a stream are numbered 1 to 8. Starting on stone 1, An must land on every stone exactly once (finishing anywhere), and each hop may only go to a stone whose number differs by 1 or 2. In how many orders can An cross?",
+        "ja": "川に 1 から 8 までの番号がついた飛び石が順に並んでいます。アンさんは 1 番の石から出発し、すべての石をちょうど 1 回ずつ踏みます（最後はどの石でもかまいません）。1 回の跳びでは番号の差が 1 か 2 の石にしか移れません。踏み方は何通りありますか。"
       },
       "answer": {
-        "zh-Hant": "答案是 9841。",
-        "zh-Hans": "答案是 9841。",
-        "en": "The answer is 9841.",
-        "ja": "答えは 9841 です。"
+        "zh-Hant": "答案是 21。",
+        "zh-Hans": "答案是 21。",
+        "en": "The answer is 21.",
+        "ja": "答えは 21 です。"
       },
       "solutionSteps": {
         "zh-Hant": [
-          "先固定要用哪 n 個不同數字，從 1 到 9 中選，所以有 C(9,n) 種。",
-          "接著把這 n 個數字由大到小依序放入。最大的數先放好；之後每加入一個較小數字，只能放在目前串列的最左端或最右端，否則它會成為局部最小。",
-          "因此對固定的 n 個數字，合法排法有 2⁽ⁿ⁻¹⁾ 種。",
-          "總數是 Σ[C(9,n)·2⁽ⁿ⁻¹⁾]，n 從 1 到 9。",
-          "利用二項式定理可得這個和等於 ((1+2)⁹ - 1)/2 = (3⁹ - 1)/2 = 9841。"
+          "設 a(n) 是「石頭 1～n、從 1 號出發、每塊恰踩一次」的踩法數。從 1 號出發的第一步只能到 2 號或 3 號。",
+          "第一步到 2 號：1 號已用不到了，剩下就是「石頭 2～n、從 2 號出發」的同一個問題，有 a(n − 1) 種。",
+          "第一步到 3 號：這時 2 號還沒踩，它能連到的只有 1、3、4 號。若下一步立刻從 3 跳回 2，接著只能去 4，剩下是「石頭 4～n、從 4 號出發」的問題，有 a(n − 3) 種。",
+          "若沒有立刻回 2，2 號之後只能由 4 號跳進來，而且跳進去就出不來，所以 2 號必須是最後一塊，4 號是倒數第二塊。因此從 3 號不能先踩 4 號，只能跳到 5 號；5 號一用掉，4 號的前一步就只能是 6 號；依此類推，路線只能先沿奇數號一路往上，再沿偶數號一路往下，只有 1 種（8 塊石頭時是 1、3、5、7、8、6、4、2）。",
+          "所以 a(n) = a(n − 1) + a(n − 3) + 1。由 a(1) = 1、a(2) = 1、a(3) = 2（1、2、3 或 1、3、2）往上算：a(4) = 2 + 1 + 1 = 4，a(5) = 4 + 1 + 1 = 6，a(6) = 6 + 2 + 1 = 9，a(7) = 9 + 4 + 1 = 14，a(8) = 14 + 6 + 1 = 21。",
+          "共有 21 種踩法。"
         ],
         "zh-Hans": [
-          "先固定要用哪 n 个不同数字，从 1 到 9 中选，所以有 C(9,n) 种。",
-          "接着把这 n 个数字由大到小依次放入。最大的数先放好；之后每加入一个较小数字，只能放在目前串列的最左端或最右端，否则它会成为局部最小。",
-          "因此对固定的 n 个数字，合法排法有 2⁽ⁿ⁻¹⁾ 种。",
-          "总数是 Σ[C(9,n)·2⁽ⁿ⁻¹⁾]，n 从 1 到 9。",
-          "利用二项式定理可得这个和等于 ((1+2)⁹ - 1)/2 = (3⁹ - 1)/2 = 9841。"
+          "设 a(n) 是「石头 1～n、从 1 号出发、每块恰踩一次」的踩法数。从 1 号出发的第一步只能到 2 号或 3 号。",
+          "第一步到 2 号：1 号已用不到了，剩下就是「石头 2～n、从 2 号出发」的同一个问题，有 a(n − 1) 种。",
+          "第一步到 3 号：这时 2 号还没踩，它能连到的只有 1、3、4 号。若下一步立刻从 3 跳回 2，接着只能去 4，剩下是「石头 4～n、从 4 号出发」的问题，有 a(n − 3) 种。",
+          "若没有立刻回 2，2 号之后只能由 4 号跳进来，而且跳进去就出不来，所以 2 号必须是最后一块，4 号是倒数第二块。因此从 3 号不能先踩 4 号，只能跳到 5 号；5 号一用掉，4 号的前一步就只能是 6 号；依此类推，路线只能先沿奇数号一路往上，再沿偶数号一路往下，只有 1 种（8 块石头时是 1、3、5、7、8、6、4、2）。",
+          "所以 a(n) = a(n − 1) + a(n − 3) + 1。由 a(1) = 1、a(2) = 1、a(3) = 2（1、2、3 或 1、3、2）往上算：a(4) = 2 + 1 + 1 = 4，a(5) = 4 + 1 + 1 = 6，a(6) = 6 + 2 + 1 = 9，a(7) = 9 + 4 + 1 = 14，a(8) = 14 + 6 + 1 = 21。",
+          "共有 21 种踩法。"
         ],
         "en": [
-          "First choose which n distinct digits from 1 through 9 will be used, giving C(9,n) choices.",
-          "Now insert these chosen digits from largest to smallest. The largest digit is placed first. Each smaller digit must be added either at the far left or the far right; otherwise it would become a local minimum.",
-          "So for any fixed set of n digits, there are 2⁽ⁿ⁻¹⁾ valid arrangements.",
-          "Summing over n=1 to 9 gives Σ[C(9,n)·2⁽ⁿ⁻¹⁾].",
-          "By the binomial theorem this equals ((1+2)⁹ - 1)/2 = (3⁹ - 1)/2 = 9841."
+          "Let a(n) be the number of ways for stones 1 to n, starting on stone 1 and landing on each once. From stone 1 the first hop goes to stone 2 or stone 3.",
+          "First hop to 2: stone 1 is finished, and what remains is the same problem on stones 2 to n starting at 2, giving a(n − 1) ways.",
+          "First hop to 3: stone 2 is still unvisited, and its only possible neighbours are stones 1, 3, 4. If the next hop goes straight back to 2, the one after must be 4, leaving the problem on stones 4 to n starting at 4: a(n − 3) ways.",
+          "If the hop back to 2 is not immediate, stone 2 can later be entered only from 4 and cannot be left, so 2 must be last and 4 second to last. So from 3 the path cannot step on 4 early and must hop to 5; once 5 is used, 4 can only be reached from 6; continuing this way, the path must climb through the odd stones and then come down through the even stones, which is exactly 1 way (for 8 stones: 1, 3, 5, 7, 8, 6, 4, 2).",
+          "Hence a(n) = a(n − 1) + a(n − 3) + 1. Starting from a(1) = 1, a(2) = 1, a(3) = 2 (1, 2, 3 or 1, 3, 2): a(4) = 2 + 1 + 1 = 4, a(5) = 4 + 1 + 1 = 6, a(6) = 6 + 2 + 1 = 9, a(7) = 9 + 4 + 1 = 14, a(8) = 14 + 6 + 1 = 21.",
+          "So there are 21 ways to cross."
         ],
         "ja": [
-          "まず、使う異なる n 個の数字を 1 から 9 の中から選ぶので C(9,n) 通りあります。",
-          "次にそれらの数字を大きい方から順に入れていきます。最大の数字を最初に置いたあと、次に小さい数字は列のいちばん左端か右端にしか置けません。そうでないと局所的な最小になります。",
-          "したがって、固定した n 個の数字に対して有効な並べ方は 2⁽ⁿ⁻¹⁾ 通りです。",
-          "これを n=1 から 9 まで足すと Σ[C(9,n)·2⁽ⁿ⁻¹⁾] になります。",
-          "二項定理よりこれは ((1+2)⁹ - 1)/2 = (3⁹ - 1)/2 = 9841 です。"
+          "石 1～n で 1 番から出発し各石を 1 回ずつ踏む方法の数を a(n) とします。1 番からの最初の跳びは 2 番か 3 番です。",
+          "最初に 2 番へ：1 番はもう使えず、残りは「石 2～n、2 番から出発」という同じ問題なので a(n − 1) 通りです。",
+          "最初に 3 番へ：2 番はまだ踏んでおらず、つながれるのは 1、3、4 番だけです。すぐに 3 から 2 に戻ると次は 4 しかなく、残りは「石 4～n、4 番から出発」の問題で a(n − 3) 通りです。",
+          "すぐに 2 に戻らない場合、2 番には後で 4 番からしか入れず、入ると出られないので 2 番は最後、4 番は最後から 2 番目です。よって 3 番から先に 4 番は踏めず 5 番へ跳ぶしかなく、5 番を使うと 4 番へは 6 番からしか来られません。これをくり返すと、奇数番を上ってから偶数番を下る 1 通りだけです（8 個なら 1、3、5、7、8、6、4、2）。",
+          "よって a(n) = a(n − 1) + a(n − 3) + 1 です。a(1) = 1、a(2) = 1、a(3) = 2（1、2、3 か 1、3、2）から順に、a(4) = 2 + 1 + 1 = 4、a(5) = 4 + 1 + 1 = 6、a(6) = 6 + 2 + 1 = 9、a(7) = 9 + 4 + 1 = 14、a(8) = 14 + 6 + 1 = 21 です。",
+          "よって踏み方は 21 通りです。"
         ]
       },
       "figure": {
@@ -854,25 +822,17 @@
       "answerMode": "integer_input",
       "correctAnswer": {
         "type": "integer",
-        "value": "9841"
+        "value": "21"
       },
       "inputConstraints": {
         "allowNegative": false,
-        "maxDigits": 4
+        "maxDigits": 2
       },
       "source": {
-        "type": "official_reference",
-        "name": "AMC 12",
-        "contest": "AMC 12",
-        "year": "2025",
-        "round": "A",
-        "division": "High School",
-        "problemNumber": "Problem 23",
-        "reference": "2025 AMC 12A Problem 23",
-        "displayText": "AMC 12A 2025 Problem 23",
-        "sourceUrl": "https://artofproblemsolving.com/wiki/index.php?title=2025_AMC_12A_Problems%2FProblem_23",
-        "rightsStatus": "needs_review",
-        "notes": "Rewritten from a publicly archived competition statement."
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "鄰接差受限的排列以第一步分類建立遞迴的計數題型",
+        "notes": "設計依據：關鍵是第一步跳到 3 號時，2 號要嘛立刻回踩、要嘛只能留到最後，得到 a(n) = a(n − 1) + a(n − 3) + 1；常見錯誤是漏掉「2 號留到最後」那 1 種而得到類似費氏數列的 13，或把終點固定在 8 號。"
       },
       "olympiadTaxonomy": {
         "topic": "組合",
@@ -894,49 +854,41 @@
       "levelStage": "grade12",
       "challengeTier": "foundation",
       "prompt": {
-        "zh-Hant": "若排列 (a1,a2,a3,a4,a5) 是 1,2,3,4,5 的一個重排，且滿足 a1+a2<a4+a5，則稱它為 heavy-tailed。問共有多少個 heavy-tailed 排列？",
-        "zh-Hans": "若排列 (a1,a2,a3,a4,a5) 是 1,2,3,4,5 的一个重排，且满足 a1+a2<a4+a5，则称它为 heavy-tailed。问共有多少个 heavy-tailed 排列？",
-        "en": "A permutation (a1,a2,a3,a4,a5) of 1,2,3,4,5 is called heavy-tailed if a1+a2<a4+a5. How many heavy-tailed permutations are there?",
-        "ja": "1,2,3,4,5 の順列 (a1,a2,a3,a4,a5) が a1+a2<a4+a5 を満たすとき、この順列を heavy-tailed と呼びます。heavy-tailed な順列は何個ありますか。"
+        "zh-Hant": "把 1 到 6 這六個數排成一列 (b₁, b₂, b₃, b₄, b₅, b₆)。如果最前面兩個數的和大於最後面兩個數的和（b₁ + b₂ > b₅ + b₆），就稱這個排列「前重」。前重的排列共有多少個？",
+        "zh-Hans": "把 1 到 6 这六个数排成一排 (b₁, b₂, b₃, b₄, b₅, b₆)。如果最前面两个数的和大于最后面两个数的和（b₁ + b₂ > b₅ + b₆），就称这个排列「前重」。前重的排列共有多少个？",
+        "en": "Arrange 1, 2, 3, 4, 5, 6 in a row (b₁, b₂, b₃, b₄, b₅, b₆). Call the row front-loaded when its first two entries outweigh its last two: b₁ + b₂ > b₅ + b₆. Count the front-loaded rows.",
+        "ja": "1 から 6 までの 6 つの数を 1 列に並べて (b₁, b₂, b₃, b₄, b₅, b₆) とします。先頭 2 つの和が末尾 2 つの和より大きい（b₁ + b₂ > b₅ + b₆）とき「前が重い」並びとよびます。前が重い並びは何個ありますか。"
       },
       "answer": {
-        "zh-Hant": "答案是 48。",
-        "zh-Hans": "答案是 48。",
-        "en": "The answer is 48.",
-        "ja": "答えは 48 です。"
+        "zh-Hant": "答案是 304。",
+        "zh-Hans": "答案是 304。",
+        "en": "The answer is 304.",
+        "ja": "答えは 304 です。"
       },
       "solutionSteps": {
         "zh-Hant": [
-          "總共有 5!=120 個排列。",
-          "若把一個排列的前兩項與後兩項交換，則不等式 a1+a2<a4+a5 會變成相反方向，這建立了小於與大於兩類的一一對應。",
-          "所以只要算出等號情形的個數，再從 120 中扣掉後平分即可。",
-          "滿足 a1+a2=a4+a5 的兩組數字只有 {1,4} 對 {2,3}、{1,5} 對 {2,4}、{2,5} 對 {3,4}，共有 3 種。",
-          "每一種可決定哪一組放左邊、哪一組放右邊，共 2 種；左右兩組內部分別可交換，故共有 2×2×2=8 種。",
-          "因此等號情形有 3×8=24 種，故 heavy-tailed 排列數是 (120-24)/2=48。"
+          "把整列倒過來寫，前兩個和後兩個互換，「前重」變成「後重」。這是一一對應，所以前重和後重一樣多，答案 = (全部 − 前後一樣重) ÷ 2。全部有 6! = 720 個。",
+          "算前後一樣重的情形：要從 1～6 選出兩組不重疊、和相同的數對。和為 5：{1, 4} 與 {2, 3}；和為 6：{1, 5} 與 {2, 4}；和為 7：{1, 6}、{2, 5}、{3, 4} 中任選兩組，有 3 種；和為 8：{2, 6} 與 {3, 5}；和為 9：{3, 6} 與 {4, 5}。共 1 + 1 + 3 + 1 + 1 = 7 種。",
+          "每一種選法：哪一對放前面有 2 種，前面兩數的順序 2 種、後面兩數的順序 2 種，中間剩下兩數的順序 2 種，共 16 種排列。一樣重的排列有 7 × 16 = 112 個。",
+          "前重的排列 = (720 − 112) ÷ 2 = 304 個。"
         ],
         "zh-Hans": [
-          "总共有 5!=120 个排列。",
-          "若把一个排列的前两项与后两项交换，则不等式 a1+a2<a4+a5 会变成相反方向，这建立了小于与大于两类的一一对应。",
-          "所以只要算出等号情形的个数，再从 120 中扣掉后平分即可。",
-          "满足 a1+a2=a4+a5 的两组数字只有 {1,4} 对 {2,3}、{1,5} 对 {2,4}、{2,5} 对 {3,4}，共有 3 种。",
-          "每一种可决定哪一组放左边、哪一组放右边，共 2 种；左右两组内部分别可交换，故共有 2×2×2=8 种。",
-          "因此等号情形有 3×8=24 种，故 heavy-tailed 排列数是 (120-24)/2=48。"
+          "把整列倒过来写，前两个和后两个互换，「前重」变成「后重」。这是一一对应，所以前重和后重一样多，答案 = (全部 − 前后一样重) ÷ 2。全部有 6! = 720 个。",
+          "算前后一样重的情形：要从 1～6 选出两组不重叠、和相同的数对。和为 5：{1, 4} 与 {2, 3}；和为 6：{1, 5} 与 {2, 4}；和为 7：{1, 6}、{2, 5}、{3, 4} 中任选两组，有 3 种；和为 8：{2, 6} 与 {3, 5}；和为 9：{3, 6} 与 {4, 5}。共 1 + 1 + 3 + 1 + 1 = 7 种。",
+          "每一种选法：哪一对放前面有 2 种，前面两数的顺序 2 种、后面两数的顺序 2 种，中间剩下两数的顺序 2 种，共 16 种排列。一样重的排列有 7 × 16 = 112 个。",
+          "前重的排列 = (720 − 112) ÷ 2 = 304 个。"
         ],
         "en": [
-          "There are 5!=120 permutations in total.",
-          "If we swap the first two positions with the last two positions, then any permutation with a1+a2<a4+a5 pairs with one having a1+a2>a4+a5.",
-          "So it is enough to count the equality cases and then split the rest equally.",
-          "The only equal-sum pairs are {1,4} with {2,3}, {1,5} with {2,4}, and {2,5} with {3,4}.",
-          "For each case, we can choose which pair goes on the left and which on the right in 2 ways, and arrange each pair internally in 2 ways, giving 2×2×2=8 permutations.",
-          "Thus there are 3×8=24 equality cases, so the number of heavy-tailed permutations is (120-24)/2=48."
+          "Writing a row backwards swaps the front pair and the back pair, turning front-loaded into back-loaded. This is a one-to-one match, so both kinds are equally many: answer = (all − ties) ÷ 2, with 6! = 720 rows in all.",
+          "Count ties: pick two disjoint pairs from 1–6 with equal sums. Sum 5: {1, 4} and {2, 3}; sum 6: {1, 5} and {2, 4}; sum 7: any two of {1, 6}, {2, 5}, {3, 4}, giving 3 choices; sum 8: {2, 6} and {3, 5}; sum 9: {3, 6} and {4, 5}. Total 1 + 1 + 3 + 1 + 1 = 7.",
+          "For each choice: which pair goes in front (2 ways), order within the front pair (2), within the back pair (2), and the two leftover numbers in the middle (2): 16 rows. So there are 7 × 16 = 112 tied rows.",
+          "Front-loaded rows = (720 − 112) ÷ 2 = 304."
         ],
         "ja": [
-          "順列は全部で 5!=120 個あります。",
-          "前 2 項と後ろ 2 項を入れ替えると、a1+a2<a4+a5 の順列は a1+a2>a4+a5 の順列と 1 対 1 に対応します。",
-          "したがって等号の場合だけ数えれば、残りはちょうど半分ずつです。",
-          "a1+a2=a4+a5 となる数字の組は {1,4} と {2,3}、{1,5} と {2,4}、{2,5} と {3,4} の 3 通りだけです。",
-          "各場合でどちらの組を左に置くかが 2 通り、さらに左右それぞれの組内の並べ方が 2 通りずつあるので 2×2×2=8 通りです。",
-          "よって等号の場合は 3×8=24 通りで、heavy-tailed な順列は (120-24)/2=48 通りです。"
+          "並びを逆順にすると先頭 2 つと末尾 2 つが入れ替わり、「前が重い」が「後ろが重い」になります。これは一対一の対応なので両者は同数で、答え =（全体 − 等しい場合）÷ 2、全体は 6! = 720 個です。",
+          "等しい場合を数えます：1～6 から重ならない和の等しい 2 組を選びます。和 5：{1, 4} と {2, 3}、和 6：{1, 5} と {2, 4}、和 7：{1, 6}、{2, 5}、{3, 4} から 2 組で 3 通り、和 8：{2, 6} と {3, 5}、和 9：{3, 6} と {4, 5}。計 1 + 1 + 3 + 1 + 1 = 7 通りです。",
+          "それぞれについて、どちらの組を前にするか 2 通り、前の 2 数の順 2 通り、後ろの 2 数の順 2 通り、真ん中に残る 2 数の順 2 通りで 16 通り。等しい並びは 7 × 16 = 112 個です。",
+          "前が重い並びは (720 − 112) ÷ 2 = 304 個です。"
         ]
       },
       "figure": {
@@ -947,25 +899,17 @@
       "answerMode": "integer_input",
       "correctAnswer": {
         "type": "integer",
-        "value": "48"
+        "value": "304"
       },
       "inputConstraints": {
         "allowNegative": false,
-        "maxDigits": 2
+        "maxDigits": 3
       },
       "source": {
-        "type": "official_reference",
-        "name": "AMC 12",
-        "contest": "AMC 12",
-        "year": "2008",
-        "round": "A",
-        "division": "High School",
-        "problemNumber": "Problem 21",
-        "reference": "2008 AMC 12A Problem 21",
-        "displayText": "AMC 12A 2008 Problem 21",
-        "sourceUrl": "https://artofproblemsolving.com/wiki/index.php/2008_AMC_12A_Problems/Problem_21",
-        "rightsStatus": "needs_review",
-        "notes": "Rewritten from a publicly archived competition statement."
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "以倒序對應配合扣除相等情形的排列計數題型",
+        "notes": "設計依據：倒序把前重與後重一一對應，只需數出前後和相等的 112 個；常見錯誤是忽略相等情形直接答 360，或和為 7 時只算一種配對。"
       },
       "olympiadTaxonomy": {
         "topic": "組合",

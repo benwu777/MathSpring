@@ -26,53 +26,41 @@
       "levelStage": "grade11",
       "challengeTier": "foundation",
       "prompt": {
-        "zh-Hant": "桌上有 21 枚硬幣，兩人輪流拿 1 枚、2 枚或 3 枚，拿到最後一枚的人獲勝。若先手必勝，第一步應拿幾枚？",
-        "zh-Hans": "桌上有 21 枚硬币，两人轮流拿 1 枚、2 枚或 3 枚，拿到最后一枚的人获胜。若先手必胜，第一步应拿几枚？",
-        "en": "There are 21 coins on a table. Two players alternate taking 1, 2, or 3 coins, and the player taking the last coin wins. What should the first player take first to guarantee a win?",
-        "ja": "机の上に硬貨が 21 枚あります。2 人が交互に 1 枚、2 枚、3 枚のいずれかを取り、最後の 1 枚を取った人が勝ちです。先手が必ず勝つには最初に何枚取ればよいですか。"
+        "zh-Hant": "盒子裡有 30 根火柴。甲、乙兩人輪流取火柴，每次至少取 1 根、最多取 5 根，由甲先取；被迫取走最後一根火柴的人輸。甲若要確保獲勝，第一次應該取幾根？",
+        "zh-Hans": "盒子里有 30 根火柴。甲、乙两人轮流取火柴，每次至少取 1 根、最多取 5 根，由甲先取；被迫取走最后一根火柴的人输。甲若要确保获胜，第一次应该取几根？",
+        "en": "Thirty matchsticks lie in a box. On each go, a player removes from 1 up to 5 of them; the opener goes first, and whoever must remove the final stick is beaten. How many sticks should the opener remove at once to be sure of victory?",
+        "ja": "箱にマッチ棒が 30 本入っています。甲と乙が交互に 1 本以上 5 本以下を取り、甲から始めます。最後の 1 本を取らされた人が負けです。甲が確実に勝つには、最初に何本取ればよいですか。"
       },
       "answer": {
-        "zh-Hant": "答案是 1 枚。",
-        "zh-Hans": "答案是 1 枚。",
-        "en": "The answer is 1 coin.",
-        "ja": "答えは 1 枚です。"
+        "zh-Hant": "答案是 5。",
+        "zh-Hans": "答案是 5。",
+        "en": "The answer is 5.",
+        "ja": "答えは 5 です。"
       },
       "solutionSteps": {
         "zh-Hant": [
-          "這種「輪流取、取到最後獲勝」的遊戲，要從終點往回想：誰面對 0 枚就輸了。",
-          "若某人面對 4 枚，不論他取 1、2 或 3 枚，剩下 3、2、1 枚都會讓對手一次取完獲勝，所以面對 4 枚的人必敗。",
-          "同理面對 8、12、16、20 枚的人也必敗——因為對手總能把每一回合的取量補成 4 枚，維持 4 的倍數。",
-          "所以必敗位置就是 4 的倍數，先手的目標是「取完之後留給對手 4 的倍數」。",
-          "21 除以 4 餘 1，所以先手只要取走 1 枚，就留下 20 枚給對手。",
-          "之後對手取 k 枚（k = 1、2 或 3），先手就取 4 − k 枚，每一輪合計恰好減少 4 枚，剩餘數依序是 16、12、8、4。",
-          "最後對手面對 4 枚必敗，先手取到最後一枚獲勝。所以第一步應取 1 枚。"
+          "想讓對手輸，就要讓他面對「只剩 1 根」：他必須拿走最後一根。",
+          "如果留給對手 7 根：不論他取 k 根（k 是 1 到 5），我就取 6 − k 根，剛好又剩 1 根給他。同理，留下 13、19、25 根也都能每輪補成 6 根，一路逼到剩 1 根。",
+          "這些必勝的「留下數」是除以 6 餘 1 的數：1、7、13、19、25。30 − 25 = 5，所以甲第一次取 5 根。",
+          "若第一次取 1～4 根，會留下 26～29 根，對手就能取到剩 25 根，反過來掌握必勝；所以只有取 5 根才行。"
         ],
         "zh-Hans": [
-          "这种「轮流取、取到最后获胜」的游戏，要从终点往回想：谁面对 0 枚就输了。",
-          "若某人面对 4 枚，不论他取 1、2 或 3 枚，剩下 3、2、1 枚都会让对手一次取完获胜，所以面对 4 枚的人必败。",
-          "同理面对 8、12、16、20 枚的人也必败——因为对手总能把每一回合的取量补成 4 枚，维持 4 的倍数。",
-          "所以必败位置就是 4 的倍数，先手的目标是「取完之后留给对手 4 的倍数」。",
-          "21 除以 4 余 1，所以先手只要取走 1 枚，就留下 20 枚给对手。",
-          "之后对手取 k 枚（k = 1、2 或 3），先手就取 4 − k 枚，每一轮合计恰好减少 4 枚，剩余数依序是 16、12、8、4。",
-          "最后对手面对 4 枚必败，先手取到最后一枚获胜。所以第一步应取 1 枚。"
+          "想让对手输，就要让他面对「只剩 1 根」：他必须拿走最后一根。",
+          "如果留给对手 7 根：不论他取 k 根（k 是 1 到 5），我就取 6 − k 根，刚好又剩 1 根给他。同理，留下 13、19、25 根也都能每轮补成 6 根，一路逼到剩 1 根。",
+          "这些必胜的「留下数」是除以 6 余 1 的数：1、7、13、19、25。30 − 25 = 5，所以甲第一次取 5 根。",
+          "若第一次取 1～4 根，会留下 26～29 根，对手就能取到剩 25 根，反过来掌握必胜；所以只有取 5 根才行。"
         ],
         "en": [
-          "For a take-away game where the player taking the last coin wins, reason backwards from the end: whoever faces 0 coins has lost.",
-          "If a player faces 4 coins, taking 1, 2 or 3 leaves 3, 2 or 1, and the opponent takes them all and wins, so facing 4 coins is a losing position.",
-          "The same applies to 8, 12, 16 and 20 coins, because the opponent can always top up each round to exactly 4 and preserve the multiple of 4.",
-          "So the losing positions are the multiples of 4, and the first player aims to leave the opponent a multiple of 4.",
-          "Since 21 leaves remainder 1 on division by 4, the first player takes 1 coin and leaves 20.",
-          "Thereafter, whenever the opponent takes k coins (k = 1, 2 or 3), the first player takes 4 − k, so each full round removes exactly 4 and the totals go 16, 12, 8, 4.",
-          "Finally the opponent faces 4 coins and loses, so the first player takes the last coin. The first move is to take 1 coin."
+          "To make the opponent lose, leave exactly 1 stick on their turn: they must take the last one.",
+          "If the opponent faces 7 sticks: whatever k they take (1 to 5), I take 6 − k, leaving exactly 1 for them. In the same way, leaving 13, 19 or 25 lets me top every round up to 6 until only 1 is left for them.",
+          "These winning amounts to leave are the numbers that are 1 more than a multiple of 6: 1, 7, 13, 19, 25. Since 30 − 25 = 5, the first player takes 5 sticks.",
+          "Taking 1 to 4 would leave 26 to 29, and the opponent could bring it down to 25 and seize the win; so 5 is the only correct opening."
         ],
         "ja": [
-          "「交互に取り、最後の 1 枚を取った方が勝ち」の game は終点から逆に考えます。0 枚に直面した人が負けです。",
-          "4 枚に直面すると、1、2、3 枚のどれを取っても残り 3、2、1 枚を相手が取り切って勝つので、4 枚は負けの局面です。",
-          "同様に 8、12、16、20 枚も負けの局面です。相手は各ラウンドの合計をちょうど 4 枚に補って 4 の倍数を保てるからです。",
-          "したがって負けの局面は 4 の倍数であり、先手の目標は「取った後に相手へ 4 の倍数を残す」ことです。",
-          "21 を 4 で割ると余りは 1 なので、先手は 1 枚取って 20 枚を残します。",
-          "以後、相手が k 枚（k = 1、2、3）取るたびに先手は 4 − k 枚取れば、1 ラウンドでちょうど 4 枚減り、残りは 16、12、8、4 と進みます。",
-          "最後に相手が 4 枚に直面して負け、先手が最後の 1 枚を取ります。よって第一手は 1 枚です。"
+          "相手を負けにするには、相手の番に「残り 1 本」にすればよく、相手は最後の 1 本を取るしかありません。",
+          "相手に 7 本を残すと、相手が k 本（1～5）取れば自分は 6 − k 本取り、ちょうど 1 本を残せます。同様に 13、19、25 本を残せば、毎回合計 6 本になるように取って最後に 1 本を残せます。",
+          "この必勝の「残す本数」は 6 で割って 1 余る数 1、7、13、19、25 です。30 − 25 = 5 なので、甲は最初に 5 本取ります。",
+          "最初に 1～4 本取ると 26～29 本が残り、相手が 25 本にして必勝の立場を奪えます。よって 5 本だけが正解です。"
         ]
       },
       "figure": {
@@ -83,25 +71,17 @@
       "answerMode": "integer_input",
       "correctAnswer": {
         "type": "integer",
-        "value": "1"
+        "value": "5"
       },
       "inputConstraints": {
         "allowNegative": false,
         "maxDigits": 1
       },
       "source": {
-        "type": "official_reference",
-        "name": "IMC",
-        "contest": "IMC Taiwan",
-        "year": "2026",
-        "round": "複賽",
-        "division": "11 年級",
-        "problemNumber": "選擇 9",
-        "reference": "22nd IMC Taiwan semifinal grade 11 choice 9",
-        "displayText": "IMC Taiwan 2026 複賽 11年級 選擇 9",
-        "sourceUrl": "https://imcct.net/UserFiles/news/583/20260413110023_4.pdf",
-        "rightsStatus": "needs_review",
-        "notes": "Rewritten from the official public competition PDF."
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "取最後一個者輸的取物遊戲中以週期找必勝留數的題型",
+        "notes": "設計依據：「拿到最後一根者輸」要讓對手面對 1 根，必勝留數是除以 6 餘 1；常見錯誤是套用「拿最後者贏」的規則而取 0 或留 24。"
       },
       "olympiadTaxonomy": {
         "topic": "邏輯",
@@ -123,53 +103,41 @@
       "levelStage": "grade11",
       "challengeTier": "foundation",
       "prompt": {
-        "zh-Hant": "四個數字卡 1、2、3、4 分別放在四個格子中，每格一張。已知 A 格不是 1，B 格比 A 格大，C 格不是最大的數，D 格是偶數。若 A 格是最小可能值，問 D 格是多少？",
-        "zh-Hans": "四个数字卡 1、2、3、4 分别放在四个格子中，每格一张。已知 A 格不是 1，B 格比 A 格大，C 格不是最大的数，D 格是偶数。若 A 格是最小可能值，问 D 格是多少？",
-        "en": "Place the number cards 1, 2, 3, and 4 into boxes A, B, C, and D, one per box. A is not 1, B is greater than A, C is not the largest number, and D is even. If A is as small as possible, what is D?",
-        "ja": "数字カード 1、2、3、4 を A、B、C、D の 4 つのマスに 1 枚ずつ入れます。A は 1 ではなく、B は A より大きく、C は最大の数ではなく、D は偶数です。A をできるだけ小さくするとき、D は何ですか。"
+        "zh-Hant": "把 1 到 5 的五張數字卡各放進一個盒子 P、Q、R、S、T，每盒恰一張。已知：P × Q 的積等於 S + T 的和；R 裡是偶數；P 比 Q 小；T 比 S 大。在 P 盡可能大的情況下，T 盒裡是哪一張卡？",
+        "zh-Hans": "把 1 到 5 的五张数字卡各放进一个盒子 P、Q、R、S、T，每盒恰一张。已知：P × Q 的积等于 S + T 的和；R 里是偶数；P 比 Q 小；T 比 S 大。在 P 尽可能大的情况下，T 盒里是哪一张卡？",
+        "en": "Cards bearing 1 to 5 are dealt into slots P, Q, R, S, T, exactly one apiece. Known: P × Q equals S + T; R holds an even card; P < Q; T > S. Making P as big as possible, which card lands in slot T?",
+        "ja": "1 から 5 までの 5 枚の数字カードを箱 P、Q、R、S、T に 1 枚ずつ入れます。手がかり：P × Q は S + T に等しい、R は偶数、P は Q より小さい、T は S より大きい。P ができるだけ大きいとき、T に入っているカードは何ですか。"
       },
       "answer": {
-        "zh-Hant": "答案是 4。",
-        "zh-Hans": "答案是 4。",
-        "en": "The answer is 4.",
-        "ja": "答えは 4 です。"
+        "zh-Hant": "答案是 5。",
+        "zh-Hans": "答案是 5。",
+        "en": "The answer is 5.",
+        "ja": "答えは 5 です。"
       },
       "solutionSteps": {
         "zh-Hant": [
-          "四個條件分別是：A ≠ 1、B > A、C 不是最大的數（即 C ≠ 4）、D 是偶數（即 D ∈ {2, 4}）。",
-          "題目要「A 是最小可能值」，所以先確認哪些 A 值能配出完整合法的擺法，再取最小的那個。",
-          "A = 1 直接被排除。試 A = 2：此時 D 是偶數但 2 已被 A 用掉，所以 D = 4。",
-          "剩下 1 與 3 要給 B 與 C。B > A = 2 所以 B = 3，於是 C = 1，而 C ≠ 4 也滿足。配置 (A,B,C,D) = (2,3,1,4) 完全合法。",
-          "所以 A 的最小可能值確實是 2，不需要再試更大的 A。",
-          "在 A = 2 的情況下，四個條件已把每一格逼到唯一，因此 D = 4。",
-          "驗算：窮舉 1、2、3、4 的全部 24 種排列，符合四個條件的只有 (2,3,1,4) 與 (3,4,1,2) 兩組；A 最小的是前者，其 D = 4。"
+          "S + T 是兩張不同卡片的和，最小 1 + 2 = 3，最大 4 + 5 = 9，所以 P × Q 介於 3 和 9 之間。",
+          "P < Q 時，若 P ≥ 3，P × Q ≥ 3 × 4 = 12 太大，所以 P 只能是 1 或 2。",
+          "先試 P = 2。若 Q = 4，積 8，剩下的卡是 1、3、5，沒有偶數可以放進 R，不行。若 Q = 3，積 6，剩下 1、4、5：R 放 4，S、T 是 1 和 5，和正好是 6；T 比 S 大，所以 T = 5、S = 1。Q = 5 時積 10 太大。",
+          "所以 P 最大是 2，此時唯一的放法是 P = 2、Q = 3、R = 4、S = 1、T = 5，T 盒裡是 5。"
         ],
         "zh-Hans": [
-          "四个条件分别是：A ≠ 1、B > A、C 不是最大的数（即 C ≠ 4）、D 是偶数（即 D ∈ {2, 4}）。",
-          "题目要「A 是最小可能值」，所以先确认哪些 A 值能配出完整合法的摆法，再取最小的那个。",
-          "A = 1 直接被排除。试 A = 2：此时 D 是偶数但 2 已被 A 用掉，所以 D = 4。",
-          "剩下 1 与 3 要给 B 与 C。B > A = 2 所以 B = 3，于是 C = 1，而 C ≠ 4 也满足。配置 (A,B,C,D) = (2,3,1,4) 完全合法。",
-          "所以 A 的最小可能值确实是 2，不需要再试更大的 A。",
-          "在 A = 2 的情况下，四个条件已把每一格逼到唯一，因此 D = 4。",
-          "验算：穷举 1、2、3、4 的全部 24 种排列，符合四个条件的只有 (2,3,1,4) 与 (3,4,1,2) 两组；A 最小的是前者，其 D = 4。"
+          "S + T 是两张不同卡片的和，最小 1 + 2 = 3，最大 4 + 5 = 9，所以 P × Q 介于 3 和 9 之间。",
+          "P < Q 时，若 P ≥ 3，P × Q ≥ 3 × 4 = 12 太大，所以 P 只能是 1 或 2。",
+          "先试 P = 2。若 Q = 4，积 8，剩下的卡是 1、3、5，没有偶数可以放进 R，不行。若 Q = 3，积 6，剩下 1、4、5：R 放 4，S、T 是 1 和 5，和正好是 6；T 比 S 大，所以 T = 5、S = 1。Q = 5 时积 10 太大。",
+          "所以 P 最大是 2，此时唯一的放法是 P = 2、Q = 3、R = 4、S = 1、T = 5，T 盒里是 5。"
         ],
         "en": [
-          "The four conditions are: A ≠ 1, B > A, C is not the largest number (so C ≠ 4), and D is even (so D ∈ {2, 4}).",
-          "The problem asks for the case where A takes its smallest possible value, so first check which values of A admit a complete legal arrangement, then take the smallest.",
-          "A = 1 is excluded outright. Try A = 2: then D must be even, but 2 is already used by A, so D = 4.",
-          "That leaves 1 and 3 for B and C. Since B > A = 2 we get B = 3 and hence C = 1, which also satisfies C ≠ 4. The arrangement (A,B,C,D) = (2,3,1,4) is fully legal.",
-          "So the smallest possible value of A really is 2, and larger values need not be tried.",
-          "With A = 2 the four conditions force every cell uniquely, so D = 4.",
-          "Check: enumerating all 24 permutations of 1, 2, 3, 4, only (2,3,1,4) and (3,4,1,2) satisfy all four conditions; the one with the smaller A is the former, giving D = 4."
+          "S + T is the sum of two different cards, at least 1 + 2 = 3 and at most 4 + 5 = 9, so P × Q is between 3 and 9.",
+          "With P < Q, if P ≥ 3 then P × Q ≥ 3 × 4 = 12, too big, so P can only be 1 or 2.",
+          "Try P = 2. If Q = 4, the product is 8 and the leftover cards 1, 3, 5 have no even card for R, so that fails. If Q = 3, the product is 6 and the leftovers are 1, 4, 5: R gets 4, S and T are 1 and 5 with sum exactly 6, and T > S gives T = 5, S = 1. Q = 5 would give 10, too big.",
+          "So the largest possible P is 2, and then the only arrangement is P = 2, Q = 3, R = 4, S = 1, T = 5. Box T holds 5."
         ],
         "ja": [
-          "4 つの条件は、A ≠ 1、B > A、C は最大でない（すなわち C ≠ 4）、D は偶数（すなわち D ∈ {2, 4}）です。",
-          "問題は「A が最小の場合」を求めているので、まずどの A なら完全に条件を満たす配置が作れるかを確認し、その最小をとります。",
-          "A = 1 は除外されます。A = 2 を試すと、D は偶数ですが 2 は A が使っているので D = 4。",
-          "残る 1 と 3 を B と C に割り当てます。B > A = 2 より B = 3、したがって C = 1 で C ≠ 4 も満たします。配置 (A,B,C,D) = (2,3,1,4) は完全に条件を満たします。",
-          "よって A の最小値は確かに 2 であり、より大きい A を試す必要はありません。",
-          "A = 2 のとき 4 つの条件で各マスが一意に決まるので D = 4。",
-          "検算：1、2、3、4 の 24 通りの並べ方をすべて調べると条件を満たすのは (2,3,1,4) と (3,4,1,2) の 2 つだけで、A が小さいのは前者、その D = 4 です。"
+          "S + T は異なる 2 枚の和なので最小 1 + 2 = 3、最大 4 + 5 = 9、よって P × Q は 3 以上 9 以下です。",
+          "P < Q のとき P ≥ 3 なら P × Q ≥ 3 × 4 = 12 で大きすぎるので、P は 1 か 2 です。",
+          "P = 2 を試します。Q = 4 なら積は 8 で、残りの 1、3、5 には R に入れる偶数がなく不可。Q = 3 なら積は 6 で、残りは 1、4、5：R に 4、S と T は 1 と 5 で和はちょうど 6、T > S より T = 5、S = 1。Q = 5 なら積 10 で大きすぎます。",
+          "よって P の最大は 2 で、そのときの入れ方は P = 2、Q = 3、R = 4、S = 1、T = 5 の 1 通りだけなので、T は 5 です。"
         ]
       },
       "figure": {
@@ -180,25 +148,17 @@
       "answerMode": "integer_input",
       "correctAnswer": {
         "type": "integer",
-        "value": "4"
+        "value": "5"
       },
       "inputConstraints": {
         "allowNegative": false,
         "maxDigits": 1
       },
       "source": {
-        "type": "official_reference",
-        "name": "IMC",
-        "contest": "IMC Taiwan",
-        "year": "2026",
-        "round": "複賽",
-        "division": "11 年級",
-        "problemNumber": "填充 5",
-        "reference": "22nd IMC Taiwan semifinal grade 11 fill-in 5",
-        "displayText": "IMC Taiwan 2026 複賽 11年級 填充 5",
-        "sourceUrl": "https://imcct.net/UserFiles/news/583/20260413110023_4.pdf",
-        "rightsStatus": "needs_review",
-        "notes": "Rewritten from the official public competition PDF."
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "多條件數字卡配置中先求極值再推定唯一解的邏輯推理題型",
+        "notes": "設計依據：先用積與和的範圍把 P 限制在 1、2，再逐一檢查 P = 2 的情形；常見錯誤是忽略 R 必須是偶數而接受 Q = 4，或沒用 T > S 而答 1。"
       },
       "olympiadTaxonomy": {
         "topic": "邏輯",
@@ -597,45 +557,45 @@
       "levelStage": "grade11",
       "challengeTier": "foundation",
       "prompt": {
-        "zh-Hant": "先選一個 0 到 999 之間的整數 N 給 Bernardo。每當 Bernardo 拿到一個數，就把它乘以 2 再交給 Silvia；每當 Silvia 拿到一個數，就把它加 50 再交還給 Bernardo。最後一個還能產生小於 1000 數字的人獲勝。若要讓 Bernardo 獲勝，最小的起始數 N 的各位數字和是多少？",
-        "zh-Hans": "先选一个 0 到 999 之间的整数 N 给 Bernardo。每当 Bernardo 拿到一个数，就把它乘以 2 再交给 Silvia；每当 Silvia 拿到一个数，就把它加 50 再交还给 Bernardo。最后一个还能产生小于 1000 数字的人获胜。若要让 Bernardo 获胜，最小的起始数 N 的各位数字和是多少？",
-        "en": "Choose an integer N between 0 and 999 and give it to Bernardo. Each time Bernardo receives a number, he doubles it and passes it to Silvia. Each time Silvia receives a number, she adds 50 and passes it back to Bernardo. The winner is the last person who produces a number less than 1000. If Bernardo is to win, what is the sum of the digits of the smallest possible starting value N?",
-        "ja": "0 から 999 までの整数 N を Bernardo に渡します。Bernardo は数を受け取るたびに 2 倍して Silvia に渡し、Silvia は受け取るたびに 50 を足して Bernardo に返します。1000 未満の数を最後に作れた人が勝ちです。Bernardo が勝つような最小の初期値 N の各位の和はいくつですか。"
+        "zh-Hant": "小安和小宇玩數字接力。先選一個非負整數 N（N 小於 1500）交給小安。小安每次拿到數，就乘以 3 傳給小宇；小宇每次拿到數，就加上 20 傳回給小安。誰先算出大於或等於 1500 的數誰就輸，也就是說，最後一個算出小於 1500 的人獲勝。要讓小安獲勝，N 最小是多少？",
+        "zh-Hans": "小安和小宇玩数字接力。先选一个非负整数 N（N 小于 1500）交给小安。小安每次拿到数，就乘以 3 传给小宇；小宇每次拿到数，就加上 20 传回给小安。谁先算出大于或等于 1500 的数谁就输，也就是说，最后一个算出小于 1500 的人获胜。要让小安获胜，N 最小是多少？",
+        "en": "An and Yu run a relay: An is handed a whole number N below 1500 to start. An’s job is to multiply by 3 and hand over to Yu; Yu’s job is to add 20 and hand back to An; they keep going. Whoever first produces 1500 or more loses. Find the least N with which An wins.",
+        "ja": "アンさんとユウさんが数のリレーをします。1500 未満の 0 以上の整数 N をまずアンさんに渡します。アンさんは受け取った数を 3 倍してユウさんに渡し、ユウさんは受け取った数に 20 を足してアンさんに返します。先に 1500 以上の数を作った人が負けです。アンさんが勝つような N のうち最小のものを求めなさい。"
       },
       "answer": {
-        "zh-Hant": "答案是 7。",
-        "zh-Hans": "答案是 7。",
-        "en": "The answer is 7.",
-        "ja": "答えは 7 です。"
+        "zh-Hant": "答案是 46。",
+        "zh-Hans": "答案是 46。",
+        "en": "The answer is 46.",
+        "ja": "答えは 46 です。"
       },
       "solutionSteps": {
         "zh-Hant": [
-          "Bernardo 最後一次出手後的數必須落在 950 到 999 之間，因為 Silvia 再加 50 就會至少到 1000。",
-          "從起始數 N 往前推，經過一輪『乘 2、加 50』，數會依序變成 2N、2N+50、4N+100、4N+150、8N+300、8N+350、16N+700。",
-          "要讓 Bernardo 這一步仍小於 1000，但 Silvia 再加 50 就超過 999，因此需滿足 950 ≤ 16N + 700 ≤ 999。",
-          "解得 250 ≤ 16N ≤ 299，所以最小整數 N 是 16。",
-          "16 的各位數字和是 1 + 6 = 7。"
+          "從結局往回推。小安獲勝的最後一步：小安算出的數要小於 1500，而小宇加 20 後要 ≥ 1500，所以小安算出的數在 1480～1499 之間。",
+          "小安的結果是拿到的數乘以 3，所以這時小安拿到的數 y 要滿足 3y 在 1480～1499 之間，即 y 是 494～499。",
+          "y 是小宇加 20 得到的，小宇拿到的是 474～479；那是小安乘 3 的結果，只有 474 = 3 × 158 和 477 = 3 × 159 可能，所以小安前一輪拿到 158 或 159。",
+          "再往前一輪：小宇拿到 138 或 139，其中只有 138 = 3 × 46 是 3 的倍數，所以小安更早拿到 46。再往前，46 − 20 = 26 不是 3 的倍數，鏈條到此為止。",
+          "小安獲勝時，他每次拿到的數都必須落在 46、{158, 159}、494～499 這幾組之中，而開局的 N 就是他第一次拿到的數，所以最小的 N 是 46。驗算：46 → 138 → 158 → 474 → 494 → 1482 → 1502，小宇先超過 1500，小安獲勝。"
         ],
         "zh-Hans": [
-          "Bernardo 最后一次出手后的数必须落在 950 到 999 之间，因为 Silvia 再加 50 就会至少到 1000。",
-          "从起始数 N 往前推，经过一轮『乘 2、加 50』，数会依序变成 2N、2N+50、4N+100、4N+150、8N+300、8N+350、16N+700。",
-          "要让 Bernardo 这一步仍小于 1000，但 Silvia 再加 50 就超过 999，因此需满足 950 ≤ 16N + 700 ≤ 999。",
-          "解得 250 ≤ 16N ≤ 299，所以最小整数 N 是 16。",
-          "16 的各位数字和是 1 + 6 = 7。"
+          "从结局往回推。小安获胜的最后一步：小安算出的数要小于 1500，而小宇加 20 后要 ≥ 1500，所以小安算出的数在 1480～1499 之间。",
+          "小安的结果是拿到的数乘以 3，所以这时小安拿到的数 y 要满足 3y 在 1480～1499 之间，即 y 是 494～499。",
+          "y 是小宇加 20 得到的，小宇拿到的是 474～479；那是小安乘 3 的结果，只有 474 = 3 × 158 和 477 = 3 × 159 可能，所以小安前一轮拿到 158 或 159。",
+          "再往前一轮：小宇拿到 138 或 139，其中只有 138 = 3 × 46 是 3 的倍数，所以小安更早拿到 46。再往前，46 − 20 = 26 不是 3 的倍数，链条到此为止。",
+          "小安获胜时，他每次拿到的数都必须落在 46、{158, 159}、494～499 这几组之中，而开局的 N 就是他第一次拿到的数，所以最小的 N 是 46。验算：46 → 138 → 158 → 474 → 494 → 1482 → 1502，小宇先超过 1500，小安获胜。"
         ],
         "en": [
-          "Bernardo's final output must lie between 950 and 999, because Silvia would then add 50 and reach at least 1000.",
-          "Starting from N, the sequence of outputs is 2N, 2N+50, 4N+100, 4N+150, 8N+300, 8N+350, 16N+700.",
-          "So we need 950 ≤ 16N + 700 ≤ 999 so that Bernardo's number is still below 1000 but Silvia's next number is not.",
-          "This gives 250 ≤ 16N ≤ 299, so the smallest integer N is 16.",
-          "The sum of its digits is 1 + 6 = 7."
+          "Work back from the end. In An’s winning final move, An’s result is below 1500 but Yu’s +20 pushes it to 1500 or more, so An’s result is between 1480 and 1499.",
+          "An’s result is 3 times what An received, so An must receive y with 3y between 1480 and 1499, i.e. y from 494 to 499.",
+          "Yu made y by adding 20, so Yu received 474 to 479; that came from An tripling, and only 474 = 3 × 158 and 477 = 3 × 159 work, so An previously received 158 or 159.",
+          "One more round back: Yu received 138 or 139, and only 138 = 3 × 46 is a multiple of 3, so An received 46 earlier still. Going further, 46 − 20 = 26 is not a multiple of 3, so the chain stops.",
+          "In any game An wins, every value An receives lies in one of the groups 46, {158, 159}, 494 to 499, and the starting N is the first of them, so the least N is 46. Check: 46 → 138 → 158 → 474 → 494 → 1482 → 1502, and Yu is the first to reach 1500, so An wins."
         ],
         "ja": [
-          "Bernardo が最後に作る数は 950 から 999 の間でなければなりません。そうすれば Silvia が 50 を足すと 1000 以上になります。",
-          "初期値 N から進めると、数列は 2N、2N+50、4N+100、4N+150、8N+300、8N+350、16N+700 となります。",
-          "したがって 950 ≤ 16N + 700 ≤ 999 を満たせば、Bernardo の数は 1000 未満で、次に Silvia は 1000 以上にしてしまいます。",
-          "これより 250 ≤ 16N ≤ 299 なので、最小の整数 N は 16 です。",
-          "各位の和は 1 + 6 = 7 です。"
+          "終わりから逆にたどります。アンさんが勝つ最後の一手では、アンさんの結果は 1500 未満で、ユウさんが 20 を足すと 1500 以上になるので、アンさんの結果は 1480～1499 です。",
+          "アンさんの結果は受け取った数の 3 倍なので、受け取った数 y は 3y が 1480～1499 になる 494～499 です。",
+          "y はユウさんが 20 を足したものなので、ユウさんが受け取ったのは 474～479 で、これはアンさんの 3 倍の結果なので 474 = 3 × 158 と 477 = 3 × 159 だけが可能、よってアンさんはその前に 158 か 159 を受け取っています。",
+          "さらに 1 回さかのぼると、ユウさんは 138 か 139 を受け取り、3 の倍数は 138 = 3 × 46 だけなので、アンさんはその前に 46 を受け取っています。46 − 20 = 26 は 3 の倍数でないので、ここで終わります。",
+          "アンさんが勝つ場合、アンさんが受け取る数はすべて 46、{158, 159}、494～499 のいずれかの組に入り、最初の N はその最初の数なので、最小の N は 46 です。確認：46 → 138 → 158 → 474 → 494 → 1482 → 1502 で、先に 1500 を超えるのはユウさんなので、アンさんの勝ちです。"
         ]
       },
       "figure": {
@@ -646,25 +606,17 @@
       "answerMode": "integer_input",
       "correctAnswer": {
         "type": "integer",
-        "value": "7"
+        "value": "46"
       },
       "inputConstraints": {
         "allowNegative": false,
         "maxDigits": 2
       },
       "source": {
-        "type": "official_reference",
-        "name": "AMC 12",
-        "contest": "AMC 12",
-        "year": "2012",
-        "round": "B",
-        "division": "High School",
-        "problemNumber": "Problem 14",
-        "reference": "2012 AMC 12B Problem 14",
-        "displayText": "AMC 12B 2012 Problem 14",
-        "sourceUrl": "https://artofproblemsolving.com/wiki/index.php/2012_AMC_12B_Problems/Problem_14",
-        "rightsStatus": "needs_review",
-        "notes": "Rewritten from a publicly archived competition statement."
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "兩人輪流做不同運算、由終局範圍逆推起始值的題型",
+        "notes": "設計依據：從「小安最後一次的結果落在 1480～1499」一路逆推，每一輪都要檢查是否為 3 的倍數，範圍會縮成單一值 46；常見錯誤是忘了檢查倍數而得到 45 或 47，或從小宇的視角逆推。"
       },
       "olympiadTaxonomy": {
         "topic": "邏輯",
@@ -686,53 +638,41 @@
       "levelStage": "grade11",
       "challengeTier": "foundation",
       "prompt": {
-        "zh-Hant": "幾位學生圍坐成一圈，桌上有 100 顆糖。糖袋依序傳遞，每個人拿到袋子時都取走 1 顆，再傳給下一位。若 Chris 拿走了第 1 顆糖，也拿走了最後 1 顆糖，則學生人數可能是多少？",
-        "zh-Hans": "几位学生围坐成一圈，桌上有 100 颗糖。糖袋依序传递，每个人拿到袋子时都取走 1 颗，再传给下一位。若 Chris 拿走了第 1 颗糖，也拿走了最后 1 颗糖，则学生人数可能是多少？",
-        "en": "Several students sit around a circle with a bag of 100 candies. Each time a student receives the bag, that student takes 1 candy and passes the bag to the next student. If Chris takes the first candy and also the last candy, how many students could there be?",
-        "ja": "何人かの生徒が円形に座り、100 個のキャンディーの入った袋を順に回します。袋を受け取った人は 1 個取り、次の人に渡します。Chris が最初の 1 個と最後の 1 個の両方を取ったとすると、生徒の人数としてありうるのは何人ですか。"
+        "zh-Hant": "社團安排值日：所有社員依固定順序每天輪一人，全部輪完一遍後再從頭開始。社長小安負責第 7 天的值日，第 91 天又輪到小安值日；整段期間沒有人調班或缺席。社員人數可能是下列哪一個？",
+        "zh-Hans": "社团安排值日：所有社员依固定顺序每天轮一人，全部轮完一遍后再从头开始。社长小安负责第 7 天的值日，第 91 天又轮到小安值日；整段期间没有人调班或缺席。社员人数可能是下列哪一个？",
+        "en": "A club keeps a daily duty rota: members serve one per day in a fixed order, starting over once everyone has served. The leader serves on day 7 and serves again on day 91, with no swaps or absences in between. Which of these could be the size of the club?",
+        "ja": "あるクラブでは、全員が決まった順番で毎日 1 人ずつ当番をし、一巡したら最初に戻ります。部長は 7 日目の当番で、91 日目にもまた当番になりました。その間に交代や欠席はありません。クラブの人数として考えられるものはどれですか。"
       },
       "answer": {
-        "zh-Hant": "答案是 11。",
-        "zh-Hans": "答案是 11。",
-        "en": "The answer is 11.",
-        "ja": "答えは 11 です。"
+        "zh-Hant": "答案是 12。",
+        "zh-Hans": "答案是 12。",
+        "en": "The answer is 12.",
+        "ja": "答えは 12 です。"
       },
       "solutionSteps": {
         "zh-Hant": [
-          "Chris 拿走第 1 顆糖，之後糖袋每繞一圈就回到 Chris 一次。設學生人數是 n。",
-          "Chris 拿的糖分別是第 1、第 n+1、第 2n+1、⋯ 顆，也就是所有除以 n 餘 1 的編號。",
-          "題目說 Chris 也拿走了第 100 顆，所以 100 除以 n 要餘 1，等價於 n 整除 100 − 1 = 99。",
-          "99 = 3² × 11，正因數是 1、3、9、11、33、99。",
-          "n = 1 表示只有 Chris 一個人，與「幾位學生圍坐成一圈」不符，其餘 3、9、11、33、99 在數學上都可行。",
-          "因此要靠選項來確定：四個選項 10、11、12、15 之中，只有 11 是 99 的因數。",
-          "所以學生人數是 11。驗算：100 = 11 × 9 + 1，餘數確實是 1，Chris 拿的是第 1、12、23、⋯、100 顆。"
+          "設社員有 n 人。輪完一遍要 n 天，所以小安值日的日子是第 7 天、第 7 + n 天、第 7 + 2n 天……",
+          "第 91 天也輪到小安，所以 91 − 7 = 84 必須是 n 的倍數。",
+          "84 = 2² × 3 × 7。逐一檢查：84 ÷ 8 = 10.5、84 ÷ 16 = 5.25、84 ÷ 18 約 4.67，都不是整數；84 ÷ 12 = 7，是整數。",
+          "所以社員可能有 12 人（第 91 天時恰好輪完 7 遍）。"
         ],
         "zh-Hans": [
-          "Chris 拿走第 1 颗糖，之后糖袋每绕一圈就回到 Chris 一次。设学生人数是 n。",
-          "Chris 拿的糖分别是第 1、第 n+1、第 2n+1、⋯ 颗，也就是所有除以 n 余 1 的编号。",
-          "题目说 Chris 也拿走了第 100 颗，所以 100 除以 n 要余 1，等价于 n 整除 100 − 1 = 99。",
-          "99 = 3² × 11，正因数是 1、3、9、11、33、99。",
-          "n = 1 表示只有 Chris 一个人，与「几位学生围坐成一圈」不符，其余 3、9、11、33、99 在数学上都可行。",
-          "因此要靠选项来确定：四个选项 10、11、12、15 之中，只有 11 是 99 的因数。",
-          "所以学生人数是 11。验算：100 = 11 × 9 + 1，余数确实是 1，Chris 拿的是第 1、12、23、⋯、100 颗。"
+          "设社员有 n 人。轮完一遍要 n 天，所以小安值日的日子是第 7 天、第 7 + n 天、第 7 + 2n 天……",
+          "第 91 天也轮到小安，所以 91 − 7 = 84 必须是 n 的倍数。",
+          "84 = 2² × 3 × 7。逐一检查：84 ÷ 8 = 10.5、84 ÷ 16 = 5.25、84 ÷ 18 约 4.67，都不是整数；84 ÷ 12 = 7，是整数。",
+          "所以社员可能有 12 人（第 91 天时恰好轮完 7 遍）。"
         ],
         "en": [
-          "Chris takes the first candy, and thereafter the bag returns to Chris once per full lap. Let n be the number of students.",
-          "Chris takes candies numbered 1, n+1, 2n+1, …, that is exactly those numbers leaving remainder 1 on division by n.",
-          "Chris also takes the 100th candy, so 100 leaves remainder 1 modulo n, which is equivalent to n dividing 100 − 1 = 99.",
-          "Since 99 = 3² × 11, its positive divisors are 1, 3, 9, 11, 33 and 99.",
-          "n = 1 would mean Chris is alone, contradicting a circle of students, while 3, 9, 11, 33 and 99 are all mathematically possible.",
-          "The answer choices settle it: among 10, 11, 12 and 15, only 11 divides 99.",
-          "So there are 11 students. Check: 100 = 11 × 9 + 1, so the remainder is indeed 1 and Chris takes candies 1, 12, 23, …, 100."
+          "Let the club have n members. One full round takes n days, so the leader serves on days 7, 7 + n, 7 + 2n, and so on.",
+          "Day 91 is also the leader’s, so 91 − 7 = 84 must be a multiple of n.",
+          "84 = 2² × 3 × 7. Check each: 84 ÷ 8 = 10.5, 84 ÷ 16 = 5.25 and 84 ÷ 18 is about 4.67, none whole; 84 ÷ 12 = 7 is whole.",
+          "So the club could have 12 members (by day 91 exactly 7 rounds have passed)."
         ],
         "ja": [
-          "Chris が最初の 1 個を取り、以後は袋が 1 周するごとに Chris に戻ります。生徒の人数を n とします。",
-          "Chris が取るのは第 1、第 n+1、第 2n+1、… 個、すなわち n で割って 1 余る番号のものです。",
-          "Chris は第 100 個も取ったので、100 を n で割った余りが 1、すなわち n が 100 − 1 = 99 を割り切る必要があります。",
-          "99 = 3² × 11 なので、正の約数は 1、3、9、11、33、99 です。",
-          "n = 1 は Chris 一人となり「輪になって座る生徒たち」に反しますが、3、9、11、33、99 は数学的にはいずれも可能です。",
-          "そこで選択肢で決まります：10、11、12、15 のうち 99 の約数は 11 だけです。",
-          "よって生徒は 11 人。検算：100 = 11 × 9 + 1 で余りは確かに 1、Chris は第 1、12、23、…、100 個を取ります。"
+          "人数を n 人とすると一巡に n 日かかるので、部長の当番は 7 日目、7 + n 日目、7 + 2n 日目……です。",
+          "91 日目も部長なので、91 − 7 = 84 は n の倍数でなければなりません。",
+          "84 = 2² × 3 × 7。順に調べると 84 ÷ 8 = 10.5、84 ÷ 16 = 5.25、84 ÷ 18 は約 4.67 で整数にならず、84 ÷ 12 = 7 は整数です。",
+          "よって人数は 12 人が考えられます（91 日目でちょうど 7 巡）。"
         ]
       },
       "figure": {
@@ -743,28 +683,28 @@
       "answerMode": "multiple_choice",
       "options": {
         "A": {
-          "zh-Hant": "10",
-          "zh-Hans": "10",
-          "en": "10",
-          "ja": "10"
+          "zh-Hant": "8",
+          "zh-Hans": "8",
+          "en": "8",
+          "ja": "8"
         },
         "B": {
-          "zh-Hant": "11",
-          "zh-Hans": "11",
-          "en": "11",
-          "ja": "11"
-        },
-        "C": {
           "zh-Hant": "12",
           "zh-Hans": "12",
           "en": "12",
           "ja": "12"
         },
+        "C": {
+          "zh-Hant": "16",
+          "zh-Hans": "16",
+          "en": "16",
+          "ja": "16"
+        },
         "D": {
-          "zh-Hant": "15",
-          "zh-Hans": "15",
-          "en": "15",
-          "ja": "15"
+          "zh-Hant": "18",
+          "zh-Hans": "18",
+          "en": "18",
+          "ja": "18"
         }
       },
       "correctAnswer": {
@@ -772,18 +712,10 @@
         "value": "B"
       },
       "source": {
-        "type": "official_reference",
-        "name": "AJHSME",
-        "contest": "AJHSME",
-        "year": "1990",
-        "round": "",
-        "division": "Middle School",
-        "problemNumber": "Problem 22",
-        "reference": "1990 AJHSME Problem 22",
-        "displayText": "AJHSME 1990 Problem 22",
-        "sourceUrl": "https://artofproblemsolving.com/wiki/index.php/1990_AJHSME_Problems/Problem_22",
-        "rightsStatus": "needs_review",
-        "notes": "Rewritten from a publicly archived competition statement."
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "循環輪值中由兩次輪到同一人的間隔判斷人數的題型",
+        "notes": "設計依據：兩次值日相隔 84 天，人數必須整除 84；誘答 8、16 是 84 的近似因數或 2 的次方，18 是誤把 91 − 7 看成 90 的因數。"
       },
       "olympiadTaxonomy": {
         "topic": "邏輯",
@@ -806,53 +738,45 @@
       "levelStage": "grade11",
       "challengeTier": "foundation",
       "prompt": {
-        "zh-Hant": "Jones 先生有 8 個年齡各不相同的孩子，最大的 9 歲。某天他們看到一個四位數車牌，這個車牌只用了兩種不同數字，而且每種數字各出現兩次。Jones 先生說，這個四位數可以被每一個孩子的年齡整除，而且車牌最後兩位剛好是他的年齡。下列哪一個年齡不可能是 Jones 先生孩子的年齡？",
-        "zh-Hans": "Jones 先生有 8 个年龄各不相同的孩子，最大的 9 岁。某天他们看到一个四位数车牌，这个车牌只用了两种不同数字，而且每种数字各出现两次。Jones 先生说，这个四位数可以被每一个孩子的年龄整除，而且车牌最后两位刚好是他的年龄。下列哪一个年龄不可能是 Jones 先生孩子的年龄？",
-        "en": "Mr. Jones has 8 children of different ages, and the oldest is 9 years old. They see a 4-digit license plate made from exactly two distinct digits, each used twice. Mr. Jones says that this number is divisible by each child's age, and the last two digits happen to be his own age. Which of the following cannot be one of the children's ages?",
-        "ja": "Jones さんには年齢がすべて異なる 8 人の子どもがいて、最年長は 9 歳です。ある日、2 種類の異なる数字をそれぞれ 2 回ずつ使った 4 桁のナンバープレートを見ました。Jones さんは、その数は子どもたち全員の年齢で割り切れ、さらに下 2 桁は自分の年齢だと言いました。次のうち、子どもの年齢ではありえないものはどれですか。"
+        "zh-Hant": "保險箱的密碼是一個四位數（千位不是 0），它恰好由兩種不同的數字組成，每種數字各用兩次，而且這個四位數是 72 的倍數。所有符合條件的密碼中，最大的是哪一個？",
+        "zh-Hans": "保险箱的密码是一个四位数（千位不是 0），它恰好由两种不同的数字组成，每种数字各用两次，而且这个四位数是 72 的倍数。所有符合条件的密码中，最大的是哪一个？",
+        "en": "Mia sets her lock combination: it has 4 places and cannot open with 0; only 2 unlike numerals occur, both of them showing up exactly 2 times; also 72 must go into it evenly. Out of every combination fitting those rules, find the biggest.",
+        "ja": "金庫の暗証番号は 4 けたの数（千の位は 0 でない）で、ちょうど 2 種類の異なる数字を 2 回ずつ使っており、72 の倍数です。条件に合う番号のうち、最大のものはどれですか。"
       },
       "answer": {
-        "zh-Hant": "答案是 5。",
-        "zh-Hans": "答案是 5。",
-        "en": "The answer is 5.",
-        "ja": "答えは 5 です。"
+        "zh-Hant": "答案是 7272。",
+        "zh-Hans": "答案是 7272。",
+        "en": "The answer is 7272.",
+        "ja": "答えは 7272 です。"
       },
       "solutionSteps": {
         "zh-Hant": [
-          "8 個孩子年齡互不相同、最大是 9 歲，所以年齡集合是 1 到 9 中去掉恰好一個數；題目要找被去掉的那個。",
-          "車牌是四位數，只用兩種數字且各出現兩次，設這兩個數字為 a 與 b。",
-          "因為 9 一定是某個孩子的年齡，車牌必須被 9 整除，所以各位數字和 2a + 2b = 2(a + b) 要被 9 整除，因此 a + b 必須是 9 的倍數。",
-          "由於 a、b 都是 0 到 9 的數字且互異，a + b 只能是 9（0 + 18 不可能，a + b = 18 需 a = b = 9）。",
-          "把 a + b = 9 的所有情形配上「各出現兩次、首位不為 0」的排法逐一檢查，能同時被 8 個不同年齡整除的車牌**只有 5544** 這一個。",
-          "5544 = 2³ × 3² × 7 × 11，可被 1、2、3、4、6、7、8、9 整除，但不能被 5 整除（末位不是 0 或 5）。",
-          "所以孩子的年齡是 1、2、3、4、6、7、8、9，唯一不可能的年齡就是 5。（末兩位 44 即 Jones 先生的年齡，與題意相符。）"
+          "72 = 8 × 9，而且 8 與 9 互質，所以密碼要同時是 9 的倍數與 8 的倍數。",
+          "9 的倍數：設兩種數字是 a、b，數字和 2(a + b) 要是 9 的倍數，所以 a + b 是 9 的倍數；a ≠ b 時 a + b ≤ 17，只能 a + b = 9。可能的數字對是 {9, 0}、{8, 1}、{7, 2}、{6, 3}、{5, 4}。",
+          "8 的倍數看末三位。{9, 0}：千位只能是 9，候選 9900、9090、9009，末三位 900、090、009 都不是 8 的倍數。{8, 1}：要是偶數只能以 8 結尾，候選 1188、1818、8118，末三位 188、818、118 都不是 8 的倍數。",
+          "{7, 2}：由大往小試，7722 的末三位 722 不是 8 的倍數；7272 的末三位 272 = 8 × 34，可以。其餘 {6, 3}、{5, 4} 組成的數都小於 7000。",
+          "所以最大的密碼是 7272（驗算：7272 = 72 × 101）。"
         ],
         "zh-Hans": [
-          "8 个孩子年龄互不相同、最大是 9 岁，所以年龄集合是 1 到 9 中去掉恰好一个数；题目要找被去掉的那个。",
-          "车牌是四位数，只用两种数字且各出现两次，设这两个数字为 a 与 b。",
-          "因为 9 一定是某个孩子的年龄，车牌必须被 9 整除，所以各位数字和 2a + 2b = 2(a + b) 要被 9 整除，因此 a + b 必须是 9 的倍数。",
-          "由于 a、b 都是 0 到 9 的数字且互异，a + b 只能是 9（a + b = 18 需 a = b = 9，与互异矛盾）。",
-          "把 a + b = 9 的所有情形配上「各出现两次、首位不为 0」的排法逐一检查，能同时被 8 个不同年龄整除的车牌**只有 5544** 这一个。",
-          "5544 = 2³ × 3² × 7 × 11，可被 1、2、3、4、6、7、8、9 整除，但不能被 5 整除（末位不是 0 或 5）。",
-          "所以孩子的年龄是 1、2、3、4、6、7、8、9，唯一不可能的年龄就是 5。（末两位 44 即 Jones 先生的年龄，与题意相符。）"
+          "72 = 8 × 9，而且 8 与 9 互质，所以密码要同时是 9 的倍数与 8 的倍数。",
+          "9 的倍数：设两种数字是 a、b，数字和 2(a + b) 要是 9 的倍数，所以 a + b 是 9 的倍数；a ≠ b 时 a + b ≤ 17，只能 a + b = 9。可能的数字对是 {9, 0}、{8, 1}、{7, 2}、{6, 3}、{5, 4}。",
+          "8 的倍数看末三位。{9, 0}：千位只能是 9，候选 9900、9090、9009，末三位 900、090、009 都不是 8 的倍数。{8, 1}：要是偶数只能以 8 结尾，候选 1188、1818、8118，末三位 188、818、118 都不是 8 的倍数。",
+          "{7, 2}：由大往小试，7722 的末三位 722 不是 8 的倍数；7272 的末三位 272 = 8 × 34，可以。其余 {6, 3}、{5, 4} 组成的数都小于 7000。",
+          "所以最大的密码是 7272（验算：7272 = 72 × 101）。"
         ],
         "en": [
-          "The eight children have distinct ages with the oldest being 9, so their ages are 1 through 9 with exactly one value removed; the problem asks which one.",
-          "The licence plate is a four-digit number using only two distinct digits, each appearing twice; call them a and b.",
-          "Since 9 must be one of the ages, the plate is divisible by 9, so its digit sum 2a + 2b = 2(a + b) is divisible by 9, forcing a + b to be a multiple of 9.",
-          "As a and b are distinct digits from 0 to 9, the only possibility is a + b = 9 (a + b = 18 would require a = b = 9, contradicting distinctness).",
-          "Checking every arrangement with a + b = 9, each digit twice and a non-zero leading digit, the only plate divisible by eight different ages is 5544.",
-          "Indeed 5544 = 2³ × 3² × 7 × 11 is divisible by 1, 2, 3, 4, 6, 7, 8 and 9, but not by 5 since its last digit is neither 0 nor 5.",
-          "So the ages are 1, 2, 3, 4, 6, 7, 8, 9 and the only impossible age is 5. (The last two digits, 44, are Mr. Jones's age, as the problem requires.)"
+          "72 = 8 × 9 with 8 and 9 sharing no factor, so the code must be a multiple of both 9 and 8.",
+          "Multiple of 9: with digits a and b, the digit sum 2(a + b) must be a multiple of 9, so a + b is a multiple of 9; with a ≠ b, a + b ≤ 17, so a + b = 9. The possible pairs are {9, 0}, {8, 1}, {7, 2}, {6, 3}, {5, 4}.",
+          "For 8, look at the last three digits. {9, 0}: the first digit must be 9, giving 9900, 9090, 9009, whose last three digits 900, 090, 009 are not multiples of 8. {8, 1}: to be even it must end in 8, giving 1188, 1818, 8118, with endings 188, 818, 118, none a multiple of 8.",
+          "{7, 2}: try from the top. 7722 ends in 722, not a multiple of 8; 7272 ends in 272 = 8 × 34, which works. Numbers made from {6, 3} or {5, 4} are all below 7000.",
+          "So the largest code is 7272 (check: 7272 = 72 × 101)."
         ],
         "ja": [
-          "8 人の子どもの年齢はすべて異なり最年長は 9 歳なので、年齢の集合は 1 から 9 のうちちょうど 1 つを除いたものです。問題はその除かれた数を求めるものです。",
-          "ナンバープレートは 4 桁で、異なる 2 種類の数字がそれぞれ 2 回ずつ現れます。これを a、b とします。",
-          "9 は必ず誰かの年齢なのでプレートは 9 で割り切れ、各位の和 2a + 2b = 2(a + b) が 9 の倍数、つまり a + b が 9 の倍数でなければなりません。",
-          "a、b は 0 から 9 の相異なる数字なので、可能なのは a + b = 9 だけです（a + b = 18 は a = b = 9 となり相異なることに反します）。",
-          "a + b = 9 で各数字が 2 回ずつ、先頭が 0 でない並べ方をすべて調べると、8 つの異なる年齢で割り切れるプレートは 5544 ただ 1 つです。",
-          "実際 5544 = 2³ × 3² × 7 × 11 で 1、2、3、4、6、7、8、9 で割り切れますが、末尾が 0 でも 5 でもないので 5 では割り切れません。",
-          "したがって年齢は 1、2、3、4、6、7、8、9 であり、あり得ない年齢は 5 だけです。（下 2 桁の 44 が Jones 氏の年齢で、題意と一致します。）"
+          "72 = 8 × 9 で 8 と 9 は互いに素なので、番号は 9 の倍数かつ 8 の倍数です。",
+          "9 の倍数：2 種類の数字を a、b とすると数字の和 2(a + b) が 9 の倍数なので a + b は 9 の倍数で、a ≠ b なら a + b ≤ 17 より a + b = 9。数字の組は {9, 0}、{8, 1}、{7, 2}、{6, 3}、{5, 4} です。",
+          "8 の倍数は下 3 けたで判定します。{9, 0}：千の位は 9 で、候補 9900、9090、9009 の下 3 けた 900、090、009 はどれも 8 の倍数でない。{8, 1}：偶数なので 8 で終わり、候補 1188、1818、8118 の下 3 けた 188、818、118 もどれも 8 の倍数でない。",
+          "{7, 2}：大きい順に試すと、7722 の下 3 けた 722 は 8 の倍数でなく、7272 の下 3 けた 272 = 8 × 34 は条件をみたします。{6, 3}、{5, 4} からできる数はすべて 7000 未満です。",
+          "よって最大の番号は 7272 です（確認：7272 = 72 × 101）。"
         ]
       },
       "figure": {
@@ -863,53 +787,45 @@
       "answerMode": "multiple_choice",
       "options": {
         "A": {
-          "zh-Hant": "4",
-          "zh-Hans": "4",
-          "en": "4",
-          "ja": "4"
+          "zh-Hant": "9900",
+          "zh-Hans": "9900",
+          "en": "9900",
+          "ja": "9900"
         },
         "B": {
-          "zh-Hant": "5",
-          "zh-Hans": "5",
-          "en": "5",
-          "ja": "5"
+          "zh-Hant": "8811",
+          "zh-Hans": "8811",
+          "en": "8811",
+          "ja": "8811"
         },
         "C": {
-          "zh-Hant": "6",
-          "zh-Hans": "6",
-          "en": "6",
-          "ja": "6"
+          "zh-Hant": "7722",
+          "zh-Hans": "7722",
+          "en": "7722",
+          "ja": "7722"
         },
         "D": {
-          "zh-Hant": "7",
-          "zh-Hans": "7",
-          "en": "7",
-          "ja": "7"
+          "zh-Hant": "7272",
+          "zh-Hans": "7272",
+          "en": "7272",
+          "ja": "7272"
         },
         "E": {
-          "zh-Hant": "8",
-          "zh-Hans": "8",
-          "en": "8",
-          "ja": "8"
+          "zh-Hant": "6336",
+          "zh-Hans": "6336",
+          "en": "6336",
+          "ja": "6336"
         }
       },
       "correctAnswer": {
         "type": "choice",
-        "value": "B"
+        "value": "D"
       },
       "source": {
-        "type": "official_reference",
-        "name": "AMC 12",
-        "contest": "AMC 12",
-        "year": "2006",
-        "round": "B",
-        "division": "High School",
-        "problemNumber": "Problem 19",
-        "reference": "2006 AMC 12B Problem 19",
-        "displayText": "AMC 12B 2006 Problem 19",
-        "sourceUrl": "https://artofproblemsolving.com/wiki/index.php?title=2006_AMC_12B_Problems%2FProblem_19",
-        "rightsStatus": "needs_review",
-        "notes": "Rewritten from a publicly archived competition statement."
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "用 8 與 9 的整除判別法篩選特殊形式四位數的推理題型",
+        "notes": "設計依據：把 72 拆成 8 × 9，先用數字和鎖定 a + b = 9，再用末三位逐組排除；誘答 9900、8811、7722 各自只滿足其中一部分條件，6336 合格但不是最大。"
       },
       "olympiadTaxonomy": {
         "topic": "邏輯",
