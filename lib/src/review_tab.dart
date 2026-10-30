@@ -66,6 +66,7 @@ class _LearningReviewSectionState extends State<_LearningReviewSection> {
               title: strings.reviewTitle,
               subtitle: strings.reviewSubtitle,
               icon: Icons.history_edu_rounded,
+              otterPose: OtterPose.reflecting,
             ),
             const SizedBox(height: 18),
             _MistakeReviewSection(services: widget.services),

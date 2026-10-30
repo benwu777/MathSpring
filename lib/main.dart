@@ -33,6 +33,7 @@ import 'package:mathspring/ui/content_scroll_view.dart';
 import 'package:mathspring/ui/layout_spec.dart';
 import 'package:mathspring/widgets/avatar_editor.dart';
 import 'package:mathspring/widgets/avatar_preview.dart';
+import 'package:mathspring/widgets/otter_companion.dart';
 
 part 'src/home_tabs.dart';
 part 'src/review_tab.dart';
@@ -57,6 +58,8 @@ abstract final class AppVisualTokens {
   static const Color canvas = Color(0xFFF8F8F5);
   static const Color surface = Color(0xFFFFFFFF);
   static const Color surfaceMuted = Color(0xFFF1F3F1);
+  static const Color warmAccent = Color(0xFFFFA87D);
+  static const Color celebrationSoft = Color(0xFFFFF1E8);
   static const Color ink = Color(0xFF17201D);
   static const Color inkMuted = Color(0xFF5E6E69);
   static const Color outline = Color(0xFFD9DEE8);

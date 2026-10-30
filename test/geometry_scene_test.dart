@@ -61,6 +61,35 @@ void main() {
     expect(scene.pointIsVisible['A'], isTrue);
   });
 
+  test('hidden helper points without a label get no display text', () {
+    // develop 有 120 張附圖用隱藏點當輔助點；沒給 label 的不可以冒出點名。
+    final Map<String, dynamic> params = sampleParams();
+    (params['points'] as List).add(
+      {'name': 'helper', 'x': 2, 'y': 3, 'visible': false},
+    );
+
+    final GeometryScene scene = GeometryScene.fromParams(params);
+
+    expect(scene.pointLabels.containsKey('helper'), isFalse);
+  });
+
+  test('keeps an optional display label separate from a point name', () {
+    final Map<String, dynamic> params = sampleParams();
+    (params['points'] as List).add(
+      {
+        'name': 'apLength',
+        'label': 'AP = 3',
+        'x': 2,
+        'y': 3,
+        'visible': false,
+      },
+    );
+
+    final GeometryScene scene = GeometryScene.fromParams(params);
+
+    expect(scene.pointLabels['apLength'], 'AP = 3');
+  });
+
   test('parses all primitive collections', () {
     final GeometryScene scene = GeometryScene.fromParams(sampleParams());
     expect(scene.segments, hasLength(1));

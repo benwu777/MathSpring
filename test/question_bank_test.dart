@@ -31,6 +31,33 @@ void main() {
     expect(labelled, isEmpty);
   });
 
+  test('grade9 equilateral point-distance area question shows both solutions',
+      () async {
+    TestWidgetsFlutterBinding.ensureInitialized();
+
+    final QuestionBank grade9Pack = await BundledQuestionBankRepository()
+        .loadPack('assets/questions/geometry/grade9_foundation.geometry.v1.json');
+    final Question question = grade9Pack.questions.firstWhere(
+      (Question item) => item.id == 'geometry_grade9_foundation_160',
+    );
+
+    expect(question.answerMode, AnswerMode.multipleChoice);
+    expect(question.figure.kind, 'geometry_scene');
+    expect(question.correctAnswer.value, 'C');
+    expect(
+      question.optionDisplayLabel('C', 'zh-Hant'),
+      contains('(25√3 + 36)/4'),
+    );
+    for (final String lang in <String>['zh-Hant', 'zh-Hans', 'en', 'ja']) {
+      expect(question.localizedSolutionSteps(lang), hasLength(9), reason: lang);
+    }
+    expect(
+      question.localizedSolutionSteps('zh-Hant').join('\n'),
+      contains('解法二：60° 旋轉'),
+    );
+    expect(question.figure.params['angleMarks'], isNotEmpty);
+  });
+
   test('parses a custom figure question with multilingual fields', () {
     final Map<String, dynamic> json = {
       'id': 'trig_001',

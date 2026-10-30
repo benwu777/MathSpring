@@ -1,6 +1,6 @@
 # MathSpring App Store 送審與發布清單
 
-最後更新：2026-10-24。
+最後更新：2026-10-30。
 
 ## 現階段原則
 
@@ -42,6 +42,7 @@
 - [ ] 在 Apple Developer portal 註冊正式 App ID。
 - [ ] 在 Xcode 設定 Team、Signing Certificate、Provisioning Profile 與正式 Bundle ID。
 - [ ] 在 App Store Connect 建立 app record：名稱、SKU、Bundle ID、主要語言、分類、年齡分級與內容權利。
+- [x] 題庫內容權利：283 題官方競賽題已全部實質改寫，353 題改寫題備註中的競賽／網站來源已刪除，題庫不再帶任何競賽出處（2026-10-30，見 `docs/question-bank-rights-rewrite-2026-10.md`）。Content Rights 據此回答。
 - [ ] 設定版本與 build number；目前專案版本為 `1.0.0+1`，每次上傳都必須提高 build number。
 - [ ] 先經 TestFlight 內部測試，再提交 App Review。
 

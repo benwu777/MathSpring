@@ -270,48 +270,67 @@ class _HeroPanel extends StatelessWidget {
         ],
       ),
       padding: const EdgeInsets.all(24),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      child: Stack(
         children: [
-          Text(
-            strings.dashboardFocusTitle,
-            style: TextStyle(
-              color: const Color(0xB3FFFFFF),
-              fontSize: layoutSpec.scaleText(12),
-              fontWeight: FontWeight.w600,
+          Positioned(
+            right: -4,
+            bottom: -8,
+            child: Opacity(
+              opacity: .96,
+              child: OtterCompanion(
+                pose: OtterPose.welcoming,
+                size: layoutSpec.widthClass == WidthClass.compact ? 98 : 118,
+              ),
             ),
           ),
-          const SizedBox(height: 14),
-          Text(
-            strings.dashboardFocusBody,
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: layoutSpec.headingText,
-              height: 1.4,
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-          const SizedBox(height: 24),
-          Container(
-            padding: const EdgeInsets.all(14),
-            decoration: BoxDecoration(
-              color: const Color(0x1FFFFFFF),
-              borderRadius: BorderRadius.circular(10),
-              border: Border.all(color: const Color(0x2FFFFFFF)),
-            ),
-            child: Row(
+          Padding(
+            padding: const EdgeInsets.only(right: 68),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Expanded(
-                  child: Text(
-                    '${strings.dashboardPathTitle}\n${strings.dashboardPathValue}',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: layoutSpec.captionText,
-                      height: 1.5,
-                    ),
+                Text(
+                  strings.dashboardFocusTitle,
+                  style: TextStyle(
+                    color: const Color(0xB3FFFFFF),
+                    fontSize: layoutSpec.scaleText(12),
+                    fontWeight: FontWeight.w600,
                   ),
                 ),
-                const Icon(Icons.arrow_outward, color: Colors.white, size: 18),
+                const SizedBox(height: 14),
+                Text(
+                  strings.dashboardFocusBody,
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: layoutSpec.headingText,
+                    height: 1.4,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                const SizedBox(height: 24),
+                Container(
+                  padding: const EdgeInsets.all(14),
+                  decoration: BoxDecoration(
+                    color: const Color(0x1FFFFFFF),
+                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(color: const Color(0x2FFFFFFF)),
+                  ),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Text(
+                          '${strings.dashboardPathTitle}\n${strings.dashboardPathValue}',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: layoutSpec.captionText,
+                            height: 1.5,
+                          ),
+                        ),
+                      ),
+                      const Icon(Icons.arrow_outward,
+                          color: Colors.white, size: 18),
+                    ],
+                  ),
+                ),
               ],
             ),
           ),
@@ -326,11 +345,13 @@ class _CompactHeroBanner extends StatelessWidget {
     required this.title,
     required this.subtitle,
     required this.icon,
+    this.otterPose,
   });
 
   final String title;
   final String subtitle;
   final IconData icon;
+  final OtterPose? otterPose;
 
   @override
   Widget build(BuildContext context) {
@@ -378,6 +399,10 @@ class _CompactHeroBanner extends StatelessWidget {
               ],
             ),
           ),
+          if (otterPose != null) ...[
+            const SizedBox(width: 8),
+            OtterCompanion(pose: otterPose!, size: 58),
+          ],
         ],
       ),
     );
