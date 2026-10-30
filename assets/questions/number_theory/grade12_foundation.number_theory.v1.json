@@ -6441,6 +6441,531 @@
         "subtopicCode": "binary_lamp_count_sum"
       },
       "reviewStatus": "ok"
+    },
+    {
+      "id": "number_theory_grade12_foundation_070",
+      "topic": "number_theory",
+      "subtopic": "paper_folding_crease_types",
+      "tags": [
+        "c:pattern",
+        "c:number_base",
+        "c:modular",
+        "m:invariant"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一條長紙條平放，把右端往上翻、疊到左端上，對摺一次；再把整疊用同樣方式對摺，一共對摺 3 次。攤開回原來的方向後，紙條上有 7 條摺痕，由左而右的情形如圖：V 表示凹下去的谷摺，M 表示凸起來的山摺。如果改成用同樣方式對摺 7 次，攤開後有 127 條摺痕。由左邊數起的前 100 條摺痕中，谷摺 V 有幾條？",
+        "zh-Hans": "一条长纸条平放，把右端往上翻、叠到左端上，对折一次；再把整叠用同样方式对折，一共对折 3 次。展开回原来的方向后，纸条上有 7 条折痕，从左往右的情形如图：V 表示凹下去的谷折，M 表示凸起来的山折。如果改成用同样方式对折 7 次，展开后有 127 条折痕。从左边数起的前 100 条折痕中，谷折 V 有几条？",
+        "en": "A long paper strip lies flat. Fold it in half by lifting the right end over onto the left end; then fold the whole stack the same way again, 3 folds in all. Unfolded to its original position, the strip has 7 creases, shown from left to right in the figure: V is a valley fold (sunken) and M a mountain fold (raised). If instead the strip is folded the same way 7 times, it has 127 creases when unfolded. Among the first 100 creases counted from the left, how many are valley folds V?",
+        "ja": "長い紙テープを平らに置き、右端を持ち上げて左端に重ねて二つ折りにします。重なったまま同じように折ることをくり返し、合計 3 回折ります。元の向きに広げると折り目が 7 本でき、左から順に図のようになります（V はへこんだ谷折り、M は盛り上がった山折り）。同じように 7 回折ると、広げたとき折り目は 127 本あります。左から数えて最初の 100 本のうち、谷折り V は何本ですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 52。",
+        "zh-Hans": "答案是 52。",
+        "en": "The answer is 52.",
+        "ja": "答えは 52 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "多摺一次，就是把現在那一疊再對摺一次：原有的摺痕仍在，攤開後位置變成第 2、4、6、⋯ 條，第 k 條變成第 2k 條且山谷不變；新摺痕落在每兩條舊摺痕（和兩端）的正中間，也就是奇數位置。疊在一起的各層紙正反交替，所以新摺痕在攤開後谷、山交替。",
+          "用圖驗證：第 1、3、5、7 條是 V、M、V、M（交替，第 1 條是 V）；第 2、4、6 條是 V、V、M，正好和第 1、2、3 條相同。",
+          "所以規則是：把 k 寫成 2ᵉ × m（m 是奇數），第 k 條和第 m 條相同；奇數位置 m 除以 4 餘 1 時是 V，餘 3 時是 M。摺 7 次時前 100 條都照這個規則。",
+          "數 m ≡ 1（mod 4）的個數：e = 0：m ≤ 100 有 1、5、⋯、97 共 25 個；e = 1：m ≤ 50 有 13 個；e = 2：m ≤ 25 有 7 個；e = 3：m ≤ 12 有 1、5、9 共 3 個；e = 4：m ≤ 6 有 2 個；e = 5、6 各 1 個。",
+          "合計 25 + 13 + 7 + 3 + 2 + 1 + 1 = 52 條。"
+        ],
+        "zh-Hans": [
+          "多折一次，就是把现在那一叠再对折一次：原有的折痕仍在，展开后位置变成第 2、4、6、⋯ 条，第 k 条变成第 2k 条且山谷不变；新折痕落在每两条旧折痕（和两端）的正中间，也就是奇数位置。叠在一起的各层纸正反交替，所以新折痕在展开后谷、山交替。",
+          "用图验证：第 1、3、5、7 条是 V、M、V、M（交替，第 1 条是 V）；第 2、4、6 条是 V、V、M，正好和第 1、2、3 条相同。",
+          "所以规则是：把 k 写成 2ᵉ × m（m 是奇数），第 k 条和第 m 条相同；奇数位置 m 除以 4 余 1 时是 V，余 3 时是 M。折 7 次时前 100 条都照这个规则。",
+          "数 m ≡ 1（mod 4）的个数：e = 0：m ≤ 100 有 1、5、⋯、97 共 25 个；e = 1：m ≤ 50 有 13 个；e = 2：m ≤ 25 有 7 个；e = 3：m ≤ 12 有 1、5、9 共 3 个；e = 4：m ≤ 6 有 2 个；e = 5、6 各 1 个。",
+          "合计 25 + 13 + 7 + 3 + 2 + 1 + 1 = 52 条。"
+        ],
+        "en": [
+          "One more fold means folding the current stack once more: the old creases stay, and when unfolded they move to positions 2, 4, 6, …, crease k becoming crease 2k with the same type; the new creases fall midway between old creases (and the ends), i.e. at the odd positions. The layers in the stack alternate face up and face down, so the new creases alternate valley, mountain when unfolded.",
+          "Check with the figure: creases 1, 3, 5, 7 are V, M, V, M (alternating, crease 1 is V); creases 2, 4, 6 are V, V, M, the same as creases 1, 2, 3.",
+          "So the rule is: write k = 2ᵉ × m with m odd; crease k has the same type as crease m, and an odd position m is V when m leaves remainder 1 on division by 4 and M when it leaves 3. With 7 folds, the first 100 creases all follow this rule.",
+          "Count the m ≡ 1 (mod 4): e = 0: m ≤ 100 gives 1, 5, …, 97, 25 of them; e = 1: m ≤ 50 gives 13; e = 2: m ≤ 25 gives 7; e = 3: m ≤ 12 gives 1, 5, 9, 3 of them; e = 4: m ≤ 6 gives 2; e = 5 and e = 6 give 1 each.",
+          "Total 25 + 13 + 7 + 3 + 2 + 1 + 1 = 52."
+        ],
+        "ja": [
+          "もう 1 回折ることは、いまの重なりをさらに二つ折りにすることです。もとの折り目は残り、広げると 2、4、6、… 本目に移り、k 本目が 2k 本目になって山谷は変わりません。新しい折り目は古い折り目（と両端）のちょうど真ん中、つまり奇数番目にでき、重なった紙は表裏が交互なので、広げると谷、山が交互に並びます。",
+          "図で確かめると、1、3、5、7 本目は V、M、V、M（交互で 1 本目は V）、2、4、6 本目は V、V、M で 1、2、3 本目と同じです。",
+          "よって規則は、k = 2ᵉ × m（m は奇数）と書くと k 本目は m 本目と同じで、奇数番目 m は 4 で割った余りが 1 なら V、3 なら M。7 回折ったときの最初の 100 本もこの規則に従います。",
+          "m ≡ 1（mod 4）の個数を数えます：e = 0 は m ≤ 100 で 1、5、…、97 の 25 個、e = 1 は m ≤ 50 で 13 個、e = 2 は m ≤ 25 で 7 個、e = 3 は m ≤ 12 で 1、5、9 の 3 個、e = 4 は m ≤ 6 で 2 個、e = 5 と e = 6 は 1 個ずつ。",
+          "合計 25 + 13 + 7 + 3 + 2 + 1 + 1 = 52 本です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "geometry_scene",
+        "params": {
+          "bounds": {
+            "minX": -0.4,
+            "minY": -0.6,
+            "maxX": 8.4,
+            "maxY": 1.9
+          },
+          "points": [
+            {
+              "name": "h1",
+              "x": 0,
+              "y": 0,
+              "pos": "r",
+              "visible": false
+            },
+            {
+              "name": "h2",
+              "x": 8,
+              "y": 0,
+              "pos": "r",
+              "visible": false
+            },
+            {
+              "name": "h3",
+              "x": 8,
+              "y": 1,
+              "pos": "r",
+              "visible": false
+            },
+            {
+              "name": "h4",
+              "x": 0,
+              "y": 1,
+              "pos": "r",
+              "visible": false
+            },
+            {
+              "name": "h5",
+              "x": 1,
+              "y": 0,
+              "pos": "r",
+              "visible": false
+            },
+            {
+              "name": "h6",
+              "x": 1,
+              "y": 1,
+              "pos": "r",
+              "visible": false
+            },
+            {
+              "name": "t7",
+              "x": 0.88,
+              "y": 1.35,
+              "pos": "r",
+              "visible": false,
+              "label": "V"
+            },
+            {
+              "name": "h8",
+              "x": 2,
+              "y": 0,
+              "pos": "r",
+              "visible": false
+            },
+            {
+              "name": "h9",
+              "x": 2,
+              "y": 1,
+              "pos": "r",
+              "visible": false
+            },
+            {
+              "name": "t10",
+              "x": 1.88,
+              "y": 1.35,
+              "pos": "r",
+              "visible": false,
+              "label": "V"
+            },
+            {
+              "name": "h11",
+              "x": 3,
+              "y": 0,
+              "pos": "r",
+              "visible": false
+            },
+            {
+              "name": "h12",
+              "x": 3,
+              "y": 1,
+              "pos": "r",
+              "visible": false
+            },
+            {
+              "name": "t13",
+              "x": 2.88,
+              "y": 1.35,
+              "pos": "r",
+              "visible": false,
+              "label": "M"
+            },
+            {
+              "name": "h14",
+              "x": 4,
+              "y": 0,
+              "pos": "r",
+              "visible": false
+            },
+            {
+              "name": "h15",
+              "x": 4,
+              "y": 1,
+              "pos": "r",
+              "visible": false
+            },
+            {
+              "name": "t16",
+              "x": 3.88,
+              "y": 1.35,
+              "pos": "r",
+              "visible": false,
+              "label": "V"
+            },
+            {
+              "name": "h17",
+              "x": 5,
+              "y": 0,
+              "pos": "r",
+              "visible": false
+            },
+            {
+              "name": "h18",
+              "x": 5,
+              "y": 1,
+              "pos": "r",
+              "visible": false
+            },
+            {
+              "name": "t19",
+              "x": 4.88,
+              "y": 1.35,
+              "pos": "r",
+              "visible": false,
+              "label": "V"
+            },
+            {
+              "name": "h20",
+              "x": 6,
+              "y": 0,
+              "pos": "r",
+              "visible": false
+            },
+            {
+              "name": "h21",
+              "x": 6,
+              "y": 1,
+              "pos": "r",
+              "visible": false
+            },
+            {
+              "name": "t22",
+              "x": 5.88,
+              "y": 1.35,
+              "pos": "r",
+              "visible": false,
+              "label": "M"
+            },
+            {
+              "name": "h23",
+              "x": 7,
+              "y": 0,
+              "pos": "r",
+              "visible": false
+            },
+            {
+              "name": "h24",
+              "x": 7,
+              "y": 1,
+              "pos": "r",
+              "visible": false
+            },
+            {
+              "name": "t25",
+              "x": 6.88,
+              "y": 1.35,
+              "pos": "r",
+              "visible": false,
+              "label": "M"
+            }
+          ],
+          "segments": [
+            {
+              "from": "h1",
+              "to": "h2",
+              "style": "solid"
+            },
+            {
+              "from": "h2",
+              "to": "h3",
+              "style": "solid"
+            },
+            {
+              "from": "h3",
+              "to": "h4",
+              "style": "solid"
+            },
+            {
+              "from": "h4",
+              "to": "h1",
+              "style": "solid"
+            },
+            {
+              "from": "h5",
+              "to": "h6",
+              "style": "construction"
+            },
+            {
+              "from": "h8",
+              "to": "h9",
+              "style": "construction"
+            },
+            {
+              "from": "h11",
+              "to": "h12",
+              "style": "construction"
+            },
+            {
+              "from": "h14",
+              "to": "h15",
+              "style": "construction"
+            },
+            {
+              "from": "h17",
+              "to": "h18",
+              "style": "construction"
+            },
+            {
+              "from": "h20",
+              "to": "h21",
+              "style": "construction"
+            },
+            {
+              "from": "h23",
+              "to": "h24",
+              "style": "construction"
+            }
+          ]
+        }
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "52"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "對摺摺痕序列：第 2k 條同第 k 條，奇數位置依 mod 4 決定山谷",
+        "notes": "設計依據：正則摺紙序列的遞迴（2 的冪次分解＋模 4）。全庫搜「摺痕.{0,30}(山|谷)」0 題；對摺題（logic_grade8_foundation_021 層數、logic_grade8_foundation_032 剪段數、logic_grade5_foundation_064）都只算層數或段數，沒有山谷摺的分布。圖畫出摺 3 次後的紙條與 7 條摺痕的 V／M；摺 7 次的情形不在圖上。答案 52 已逐條依遞迴生成序列核對。",
+        "displayText": "改寫題（紙條的山谷摺痕）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "數論",
+        "topicCode": "number_theory",
+        "subtopic": "反覆對摺紙條的山谷摺痕",
+        "subtopicCode": "paper_folding_crease_types"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "number_theory_grade12_foundation_071",
+      "topic": "number_theory",
+      "subtopic": "rational_point_unit_circle_triple",
+      "tags": [
+        "c:coordinate",
+        "c:circle",
+        "c:pythagoras",
+        "m:construction"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "如圖，單位圓 x² + y² = 1 上有一點 A(−1, 0)。過 A 作一條斜率是 3/7 的直線，它與單位圓交於另一點 P。P 的坐標可以寫成 (a/c, b/c)，其中 a、b、c 是正整數且 c 盡量小。求 a + b + c。",
+        "zh-Hans": "如图，单位圆 x² + y² = 1 上有一点 A(−1, 0)。过 A 作一条斜率是 3/7 的直线，它与单位圆交于另一点 P。P 的坐标可以写成 (a/c, b/c)，其中 a、b、c 是正整数且 c 尽量小。求 a + b + c。",
+        "en": "In the figure, A(−1, 0) lies on the unit circle x² + y² = 1. The line through A with slope 3/7 meets the unit circle again at P. The coordinates of P can be written as (a/c, b/c) with positive integers a, b, c and c as small as possible. Find a + b + c.",
+        "ja": "図のように、単位円 x² + y² = 1 上に点 A(−1, 0) があります。A を通る傾き 3/7 の直線は単位円ともう 1 点 P で交わります。P の座標は (a/c, b/c)（a、b、c は正の整数で c はできるだけ小さい）と書けます。a + b + c を求めなさい。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 70。",
+        "zh-Hans": "答案是 70。",
+        "en": "The answer is 70.",
+        "ja": "答えは 70 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "直線是 y = (3/7)(x + 1)。代入 x² + y² = 1：x² + (9/49)(x + 1)² = 1，乘以 49：49x² + 9(x + 1)² = 49，整理成 58x² + 18x − 40 = 0，即 29x² + 9x − 20 = 0。",
+          "已知 x = −1（點 A）是一個根，所以 29x² + 9x − 20 = (x + 1)(29x − 20)，另一個根 x = 20/29。",
+          "y = (3/7)(20/29 + 1) = (3/7)(49/29) = 21/29，P = (20/29, 21/29)。20/29、21/29 都已最簡，所以 a = 20、b = 21、c = 29。",
+          "順帶一提 20² + 21² = 400 + 441 = 841 = 29²：斜率為有理數的直線會交出有理點，也就給出一組畢氏三元數。a + b + c = 70。"
+        ],
+        "zh-Hans": [
+          "直线是 y = (3/7)(x + 1)。代入 x² + y² = 1：x² + (9/49)(x + 1)² = 1，乘以 49：49x² + 9(x + 1)² = 49，整理成 58x² + 18x − 40 = 0，即 29x² + 9x − 20 = 0。",
+          "已知 x = −1（点 A）是一个根，所以 29x² + 9x − 20 = (x + 1)(29x − 20)，另一个根 x = 20/29。",
+          "y = (3/7)(20/29 + 1) = (3/7)(49/29) = 21/29，P = (20/29, 21/29)。20/29、21/29 都已最简，所以 a = 20、b = 21、c = 29。",
+          "顺带一提 20² + 21² = 400 + 441 = 841 = 29²：斜率为有理数的直线会交出有理点，也就给出一组勾股数。a + b + c = 70。"
+        ],
+        "en": [
+          "The line is y = (3/7)(x + 1). Substituting into x² + y² = 1: x² + (9/49)(x + 1)² = 1; times 49: 49x² + 9(x + 1)² = 49, i.e. 58x² + 18x − 40 = 0, or 29x² + 9x − 20 = 0.",
+          "x = −1 (point A) is one root, so 29x² + 9x − 20 = (x + 1)(29x − 20), and the other root is x = 20/29.",
+          "y = (3/7)(20/29 + 1) = (3/7)(49/29) = 21/29, so P = (20/29, 21/29). Both fractions are in lowest terms, so a = 20, b = 21, c = 29.",
+          "Note 20² + 21² = 400 + 441 = 841 = 29²: a line of rational slope cuts out a rational point, which gives a Pythagorean triple. a + b + c = 70."
+        ],
+        "ja": [
+          "直線は y = (3/7)(x + 1)。x² + y² = 1 に代入すると x² + (9/49)(x + 1)² = 1、49 倍して 49x² + 9(x + 1)² = 49、整理して 58x² + 18x − 40 = 0、つまり 29x² + 9x − 20 = 0。",
+          "x = −1（点 A）が 1 つの解なので 29x² + 9x − 20 = (x + 1)(29x − 20)、もう 1 つの解は x = 20/29。",
+          "y = (3/7)(20/29 + 1) = (3/7)(49/29) = 21/29 で P = (20/29, 21/29)。どちらも既約なので a = 20、b = 21、c = 29。",
+          "ちなみに 20² + 21² = 400 + 441 = 841 = 29² で、有理数の傾きの直線から有理点、つまりピタゴラス数が得られます。a + b + c = 70 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "geometry_scene",
+        "params": {
+          "bounds": {
+            "minX": -1.45,
+            "minY": -1.3,
+            "maxX": 1.45,
+            "maxY": 1.3
+          },
+          "points": [
+            {
+              "name": "h1",
+              "x": -1.35,
+              "y": 0,
+              "pos": "r",
+              "visible": false
+            },
+            {
+              "name": "h2",
+              "x": 1.38,
+              "y": 0,
+              "pos": "r",
+              "visible": false
+            },
+            {
+              "name": "h3",
+              "x": 0,
+              "y": -1.2,
+              "pos": "r",
+              "visible": false
+            },
+            {
+              "name": "h4",
+              "x": 0,
+              "y": 1.22,
+              "pos": "r",
+              "visible": false
+            },
+            {
+              "name": "t5",
+              "x": 1.38,
+              "y": 0,
+              "pos": "b",
+              "visible": false,
+              "label": "x"
+            },
+            {
+              "name": "t6",
+              "x": 0,
+              "y": 1.22,
+              "pos": "r",
+              "visible": false,
+              "label": "y"
+            },
+            {
+              "name": "A",
+              "x": -1,
+              "y": 0,
+              "pos": "bl"
+            },
+            {
+              "name": "P",
+              "x": 0.6897,
+              "y": 0.7241,
+              "pos": "tr"
+            },
+            {
+              "name": "h7",
+              "x": -1.3,
+              "y": -0.1286,
+              "pos": "r",
+              "visible": false
+            },
+            {
+              "name": "h8",
+              "x": 1,
+              "y": 0.8571,
+              "pos": "r",
+              "visible": false
+            },
+            {
+              "name": "O",
+              "x": 0,
+              "y": 0,
+              "pos": "bl",
+              "visible": false,
+              "label": "O"
+            }
+          ],
+          "segments": [
+            {
+              "from": "h1",
+              "to": "h2",
+              "style": "solid"
+            },
+            {
+              "from": "h3",
+              "to": "h4",
+              "style": "solid"
+            },
+            {
+              "from": "h7",
+              "to": "h8",
+              "style": "solid"
+            }
+          ],
+          "arcs": [
+            {
+              "cx": 0,
+              "cy": 0,
+              "r": 1,
+              "from": 0,
+              "to": 360
+            }
+          ]
+        }
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "70"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "過 (−1, 0) 斜率 t 的直線交單位圓於 ((1 − t²)/(1 + t²), 2t/(1 + t²))，產生畢氏三元數",
+        "notes": "設計依據：單位圓上的有理點參數化。全庫搜「有理點／畢氏／勾股」0 題；直線與圓交點題（geometry_grade10 各題）多求弦長或切線，沒有利用已知根 x = −1 因式分解得到有理點並連到整數三元組。圖畫出單位圓、A、直線與交點 P（座標實算）；P 的座標不在圖上。",
+        "displayText": "改寫題（單位圓上的有理點）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "數論",
+        "topicCode": "number_theory",
+        "subtopic": "單位圓上的有理點與畢氏三元數",
+        "subtopicCode": "rational_point_unit_circle_triple"
+      },
+      "reviewStatus": "ok"
     }
   ]
 }
