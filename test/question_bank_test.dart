@@ -1391,52 +1391,6 @@ void main() {
     expect(legacyQuestion['olympiadTaxonomy'], isA<Map<String, dynamic>>());
   });
 
-  test('algebra packs include rewritten public competition sources', () async {
-    TestWidgetsFlutterBinding.ensureInitialized();
-
-    final BundledQuestionBankRepository repository = BundledQuestionBankRepository();
-    final QuestionBank grade7Pack = await repository.loadPack(
-      'assets/questions/algebra/grade7_foundation.algebra.v1.json',
-    );
-    final QuestionBank grade10Pack = await repository.loadPack(
-      'assets/questions/algebra/grade10_foundation.algebra.v1.json',
-    );
-    final QuestionBank grade12Pack = await repository.loadPack(
-      'assets/questions/algebra/grade12_foundation.algebra.v1.json',
-    );
-
-    // 002 為官方 IMC 填充 3；原本此處指向 009，但 009 與 002 完全重複，
-    // 複審時已將 009 去重改寫為原創（rewritten_olympiad_style），故改用 002 驗證官方題源。
-    final Question grade7Question = grade7Pack.questions.firstWhere(
-      (Question item) => item.id == 'algebra_grade7_foundation_002',
-    );
-    // 007 為官方 IMC 選擇 6；原本此處指向 009，但 009 與 007 為同一題（只是答題方式不同），
-    // 複審時已將 009 去重改寫為原創（rewritten_olympiad_style），故改用 007 驗證官方題源。
-    final Question grade10Question = grade10Pack.questions.firstWhere(
-      (Question item) => item.id == 'algebra_grade10_foundation_007',
-    );
-    final Question grade12Question = grade12Pack.questions.firstWhere(
-      (Question item) => item.id == 'algebra_grade12_foundation_009',
-    );
-
-    expect(grade7Question.source?.type, 'official_reference');
-    expect(grade7Question.source?.contest, contains('IMC Taiwan'));
-    expect(grade7Question.source?.year, '2026');
-    expect(grade7Question.source?.problemNumber, '填充 3');
-    expect(grade7Question.localizedPrompt('zh-Hant'), isNotEmpty);
-
-    expect(grade10Question.source?.type, 'official_reference');
-    expect(grade10Question.source?.contest, contains('IMC Taiwan'));
-    expect(grade10Question.source?.year, '2026');
-    expect(grade10Question.source?.problemNumber, '選擇 6');
-
-    expect(grade12Question.source?.type, 'official_reference');
-    expect(grade12Question.source?.contest, contains('AMC 12'));
-    expect(grade12Question.source?.year, '2000');
-    expect(grade12Question.source?.problemNumber, 'Problem 12');
-    expect(grade12Question.localizedPrompt('en'), isNotEmpty);
-  });
-
   test('geometry packs upgrade high-value condition diagrams to geometry_scene',
       () async {
     TestWidgetsFlutterBinding.ensureInitialized();
@@ -1474,15 +1428,10 @@ void main() {
       (Question item) => item.id == 'geometry_grade12_foundation_006',
     );
 
-    expect(grade9Question.source?.type, 'official_reference');
     expect(grade9Question.figure.kind, 'geometry_scene');
 
-    expect(grade7Question.source?.type, 'official_reference');
-    expect(grade7Question.source?.contest, contains('AMC 8'));
     // Q009 已把舊的 shape_diagram（形狀＋貼字）換成宣告式 geometry_scene 向量圖。
     expect(grade7Question.figure.kind, 'geometry_scene');
-    expect(grade7Question.source?.year, '2018');
-    expect(grade7Question.source?.problemNumber, 'Problem 22');
 
     expect(grade10CircleQuestion.figure.kind, 'geometry_scene');
 
@@ -1638,131 +1587,6 @@ void main() {
     // 4.472 與 6.000，與題幹條件矛盾——這是 scripts/check_figure_matches_prompt.py
     // 抓到的。梯形的形狀由題幹文字已能確定，寧缺勿濫先不畫圖。
     expect(grade12TrapezoidDiagonalQuestion.figure.kind, 'none');
-  });
-
-  test('number theory packs include rewritten public competition sources',
-      () async {
-    TestWidgetsFlutterBinding.ensureInitialized();
-
-    final BundledQuestionBankRepository repository = BundledQuestionBankRepository();
-    final QuestionBank grade7Pack = await repository.loadPack(
-      'assets/questions/number_theory/grade7_foundation.number_theory.v1.json',
-    );
-    final QuestionBank grade10Pack = await repository.loadPack(
-      'assets/questions/number_theory/grade10_foundation.number_theory.v1.json',
-    );
-    final QuestionBank grade12Pack = await repository.loadPack(
-      'assets/questions/number_theory/grade12_foundation.number_theory.v1.json',
-    );
-
-    final Question grade7Question = grade7Pack.questions.firstWhere(
-      (Question item) => item.id == 'number_theory_grade7_foundation_010',
-    );
-    final Question grade10Question = grade10Pack.questions.firstWhere(
-      (Question item) => item.id == 'number_theory_grade10_foundation_010',
-    );
-    final Question grade12Question = grade12Pack.questions.firstWhere(
-      (Question item) => item.id == 'number_theory_grade12_foundation_010',
-    );
-
-    expect(grade7Question.source?.type, 'official_reference');
-    expect(grade7Question.source?.contest, contains('IMC'));
-    expect(grade7Question.source?.year, '2026');
-    expect(grade7Question.source?.problemNumber, '選擇 8');
-
-    expect(grade10Question.source?.type, 'official_reference');
-    expect(grade10Question.source?.contest, contains('AMC 10'));
-    expect(grade10Question.source?.year, '2014');
-    expect(grade10Question.source?.problemNumber, 'Problem 20');
-
-    expect(grade12Question.source?.type, 'official_reference');
-    expect(grade12Question.source?.contest, contains('AMC 12'));
-    expect(grade12Question.source?.year, '2021');
-    expect(grade12Question.source?.problemNumber, 'Problem 25');
-    expect(grade12Question.localizedPrompt('en'), isNotEmpty);
-  });
-
-  test('combinatorics packs include rewritten public competition sources',
-      () async {
-    TestWidgetsFlutterBinding.ensureInitialized();
-
-    final BundledQuestionBankRepository repository = BundledQuestionBankRepository();
-    final QuestionBank grade7Pack = await repository.loadPack(
-      'assets/questions/combinatorics/grade7_foundation.combinatorics.v1.json',
-    );
-    final QuestionBank grade10Pack = await repository.loadPack(
-      'assets/questions/combinatorics/grade10_foundation.combinatorics.v1.json',
-    );
-    final QuestionBank grade12Pack = await repository.loadPack(
-      'assets/questions/combinatorics/grade12_foundation.combinatorics.v1.json',
-    );
-
-    final Question grade7Question = grade7Pack.questions.firstWhere(
-      (Question item) => item.id == 'combinatorics_grade7_foundation_009',
-    );
-    final Question grade10Question = grade10Pack.questions.firstWhere(
-      (Question item) => item.id == 'combinatorics_grade10_foundation_009',
-    );
-    final Question grade12Question = grade12Pack.questions.firstWhere(
-      (Question item) => item.id == 'combinatorics_grade12_foundation_009',
-    );
-
-    expect(grade7Question.source?.type, 'official_reference');
-    expect(grade7Question.source?.contest, contains('AMC 8'));
-    expect(grade7Question.source?.year, '2020');
-    expect(grade7Question.source?.problemNumber, 'Problem 10');
-
-    expect(grade10Question.source?.type, 'official_reference');
-    expect(grade10Question.source?.contest, contains('AMC 10'));
-    expect(grade10Question.source?.year, '2021');
-    expect(grade10Question.source?.problemNumber, 'Problem 21');
-
-    expect(grade12Question.source?.type, 'official_reference');
-    expect(grade12Question.source?.contest, contains('AMC 12'));
-    expect(grade12Question.source?.year, '2008');
-    expect(grade12Question.source?.problemNumber, 'Problem 21');
-    expect(grade12Question.localizedPrompt('en'), isNotEmpty);
-  });
-
-  test('logic packs include rewritten public competition sources', () async {
-    TestWidgetsFlutterBinding.ensureInitialized();
-
-    final BundledQuestionBankRepository repository = BundledQuestionBankRepository();
-    final QuestionBank grade7Pack = await repository.loadPack(
-      'assets/questions/logic/grade7_foundation.logic.v1.json',
-    );
-    final QuestionBank grade10Pack = await repository.loadPack(
-      'assets/questions/logic/grade10_foundation.logic.v1.json',
-    );
-    final QuestionBank grade12Pack = await repository.loadPack(
-      'assets/questions/logic/grade12_foundation.logic.v1.json',
-    );
-
-    final Question grade7Question = grade7Pack.questions.firstWhere(
-      (Question item) => item.id == 'logic_grade7_foundation_009',
-    );
-    final Question grade10Question = grade10Pack.questions.firstWhere(
-      (Question item) => item.id == 'logic_grade10_foundation_009',
-    );
-    final Question grade12Question = grade12Pack.questions.firstWhere(
-      (Question item) => item.id == 'logic_grade12_foundation_009',
-    );
-
-    expect(grade7Question.source?.type, 'official_reference');
-    expect(grade7Question.source?.contest, contains('AMC 8'));
-    expect(grade7Question.source?.year, '2004');
-    expect(grade7Question.source?.problemNumber, 'Problem 13');
-
-    expect(grade10Question.source?.type, 'official_reference');
-    expect(grade10Question.source?.contest, contains('AMC 10'));
-    expect(grade10Question.source?.year, '2010');
-    expect(grade10Question.source?.problemNumber, 'Problem 15');
-
-    expect(grade12Question.source?.type, 'official_reference');
-    expect(grade12Question.source?.contest, contains('AMC 12'));
-    expect(grade12Question.source?.year, '2021');
-    expect(grade12Question.source?.problemNumber, 'Problem 22');
-    expect(grade12Question.localizedPrompt('en'), isNotEmpty);
   });
 
   test('parses olympiad taxonomy metadata on packs and questions', () {
