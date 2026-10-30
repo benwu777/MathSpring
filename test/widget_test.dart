@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -3740,12 +3742,22 @@ void main() {
     final AppServices services = createTestServices();
     const String packPath =
         'assets/questions/algebra/grade10_foundation.algebra.v1.json';
+    // 題庫已不帶任何競賽出處（2026-10-30 全部改寫），這裡用一題真實題目
+    // 補上示範出處，只驗證畫面的出處前綴會跟著語系。
     late final Question question;
     await tester.runAsync(() async {
-      final QuestionBank pack =
-          await BundledQuestionBankRepository().loadPack(packPath);
-      question = pack.questions
-          .firstWhere((Question q) => q.id == 'algebra_grade10_foundation_001');
+      final Map<String, dynamic> pack = jsonDecode(
+        await rootBundle.loadString(packPath),
+      ) as Map<String, dynamic>;
+      final Map<String, dynamic> raw = Map<String, dynamic>.from(
+        (pack['questions'] as List<dynamic>).first as Map<String, dynamic>,
+      );
+      raw['source'] = <String, dynamic>{
+        'type': 'official_reference',
+        'name': 'Sample Contest',
+        'displayText': 'Sample Contest 2026 Problem 4',
+      };
+      question = Question.fromJson(raw);
     });
 
     await tester.pumpWidget(
@@ -3777,7 +3789,7 @@ void main() {
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 300));
 
-    expect(find.textContaining('出處：IMC Taiwan 2026'), findsOneWidget);
+    expect(find.textContaining('出處：Sample Contest 2026'), findsOneWidget);
     expect(find.textContaining('Source:'), findsNothing);
   });
 

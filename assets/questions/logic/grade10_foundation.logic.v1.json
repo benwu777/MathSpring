@@ -26,45 +26,41 @@
       "levelStage": "grade10",
       "challengeTier": "foundation",
       "prompt": {
-        "zh-Hant": "有 9 顆外觀相同的球，其中 1 顆較重。用沒有砝碼的天平最少要稱幾次，才能保證找出較重的球？",
-        "zh-Hans": "有 9 颗外观相同的球，其中 1 颗较重。用没有砝码的天平最少要称几次，才能保证找出较重的球？",
-        "en": "There are 9 identical-looking balls, and one is heavier. Using a balance scale with no weights, what is the minimum number of weighings needed to guarantee finding the heavier ball?",
-        "ja": "見た目が同じ球 9 個のうち 1 個だけ重い球があります。分銅のない天秤を使うとき、重い球を必ず見つけるのに必要な最小の回数は何回ですか。"
+        "zh-Hant": "一批外觀一模一樣的零件中，恰好有 1 個是瑕疵品，它比其他零件輕，其他零件都一樣重。手邊只有一台沒有砝碼的天平，每次可以在兩邊各放任意多個零件比較。如果規定最多只能秤 4 次、而且一定要保證找出那個瑕疵品，這批零件最多可以有幾個？",
+        "zh-Hans": "一批外观一模一样的零件中，恰好有 1 个是瑕疵品，它比其他零件轻，其他零件都一样重。手边只有一台没有砝码的天平，每次可以在两边各放任意多个零件比较。如果规定最多只能称 4 次、而且一定要保证找出那个瑕疵品，这批零件最多可以有几个？",
+        "en": "One part in a look-alike batch is defective and lighter; every other part has equal mass. Using only a two-pan balance (any amount per pan) at most 4 times, you must surely pick out the faulty part. Largest batch size for which this can be done?",
+        "ja": "見た目がまったく同じ部品の中に、ちょうど 1 個だけ不良品があり、それはほかより軽い（ほかはすべて同じ重さ）。使えるのは分銅のない天びんだけで、両側にいくつでも部品をのせられる。量るのは最大 4 回までで、必ず不良品を見つけられるようにしたい。部品は最大で何個まで許されるか。"
       },
       "answer": {
-        "zh-Hant": "答案是 2。",
-        "zh-Hans": "答案是 2。",
-        "en": "The answer is 2.",
-        "ja": "答えは 2 回です。"
+        "zh-Hant": "答案是 81。",
+        "zh-Hans": "答案是 81。",
+        "en": "The answer is 81.",
+        "ja": "答えは 81 です。"
       },
       "solutionSteps": {
         "zh-Hant": [
-          "**先說明 1 次為什麼不夠。**天平稱一次只有三種結果：左邊重、右邊重、兩邊平。三種結果最多只能區分 3 種情況，但「哪一顆是重球」有 **9** 種可能，3 < 9，**所以 1 次絕對無法保證找出來**。",
-          "**接著給出 2 次的做法。**先把 9 顆分成 3 組，每組 3 顆，記作 A、B、C。",
-          "**第一次**：把 A 組與 B 組放上天平。若 A 邊重，重球在 A；若 B 邊重，重球在 B；**若兩邊平衡，表示 A、B 六顆都是正常球，重球在沒上秤的 C**。三種結果都能鎖定某一組 3 顆。",
-          "**第二次**：從鎖定的那 3 顆中任取 2 顆放上天平。哪一邊重，那一顆就是重球；**若平衡，則沒上秤的第 3 顆就是重球**。",
-          "所以 2 次一定找得到，而 1 次做不到——**最少要稱 2 次**。"
+          "上界：每秤一次只有三種結果（左邊輕、右邊輕、平衡），秤 4 次最多分辨 3 × 3 × 3 × 3 = 3⁴ = 81 種不同的情況。",
+          "「第幾個是瑕疵品」每一種可能都必須對應到不同的結果組合，否則有兩個零件會分不出來，所以零件不能超過 81 個。",
+          "構造：81 個時分成三堆各 27 個，把兩堆放上天平。較輕的那一邊含有瑕疵品；若平衡，瑕疵品在沒放上去的那一堆。一次就把範圍縮成 27 個。",
+          "同樣的方法再做三次：27 → 9 → 3 → 1，總共恰好 4 次就能找到。所以最多可以有 81 個零件。"
         ],
         "zh-Hans": [
-          "**先说明 1 次为什么不够。**天平称一次只有三种结果：左边重、右边重、两边平。三种结果最多只能区分 3 种情况，但“哪一颗是重球”有 **9** 种可能，3 < 9，**所以 1 次绝对无法保证找出来**。",
-          "**接着给出 2 次的做法。**先把 9 颗分成 3 组，每组 3 颗，记作 A、B、C。",
-          "**第一次**：把 A 组与 B 组放上天平。若 A 边重，重球在 A；若 B 边重，重球在 B；**若两边平衡，表示 A、B 六颗都是正常球，重球在没上秤的 C**。三种结果都能锁定某一组 3 颗。",
-          "**第二次**：从锁定的那 3 颗中任取 2 颗放上天平。哪一边重，那一颗就是重球；**若平衡，则没上秤的第 3 颗就是重球**。",
-          "所以 2 次一定找得到，而 1 次做不到——**最少要称 2 次**。"
+          "上界：每称一次只有三种结果（左边轻、右边轻、平衡），称 4 次最多分辨 3 × 3 × 3 × 3 = 3⁴ = 81 种不同的情况。",
+          "「第几个是瑕疵品」每一种可能都必须对应到不同的结果组合，否则有两个零件会分不出来，所以零件不能超过 81 个。",
+          "构造：81 个时分成三堆各 27 个，把两堆放上天平。较轻的那一边含有瑕疵品；若平衡，瑕疵品在没放上去的那一堆。一次就把范围缩成 27 个。",
+          "同样的方法再做三次：27 → 9 → 3 → 1，总共恰好 4 次就能找到。所以最多可以有 81 个零件。"
         ],
         "en": [
-          "First, why one weighing cannot suffice. A single weighing has only three outcomes: left heavier, right heavier, or balanced. Three outcomes can distinguish at most 3 cases, but there are 9 possibilities for which ball is the heavy one, and 3 < 9, so one weighing can never guarantee an answer.",
-          "Now a procedure that works in two. Split the 9 balls into three groups of 3, called A, B and C.",
-          "First weighing: put group A against group B. If A is heavier the ball is in A; if B is heavier it is in B; and if they balance, all six of A and B are normal, so the heavy ball is in C, which was never weighed. All three outcomes pin it down to one group of 3.",
-          "Second weighing: take any 2 of those 3 balls and weigh them against each other. Whichever side is heavier holds the ball; if they balance, the third ball, left off the scale, is the heavy one.",
-          "So two weighings always succeed while one cannot, making 2 the minimum."
+          "Upper bound: each weighing has only three outcomes (left lighter, right lighter, balanced), so 4 weighings can tell apart at most 3 × 3 × 3 × 3 = 3⁴ = 81 different situations.",
+          "Each possibility \"part number k is the defective one\" must lead to a different sequence of outcomes, or two parts could not be told apart; so there can be at most 81 parts.",
+          "Construction: with 81 parts, split them into three piles of 27 and weigh two piles. The lighter pan holds the defective part; if they balance, it is in the pile left off. One weighing narrows it to 27.",
+          "Repeat the same idea three more times: 27 → 9 → 3 → 1, exactly 4 weighings in all. So the batch can have at most 81 parts."
         ],
         "ja": [
-          "**まず 1 回では足りない理由**です。天びん 1 回の結果は「左が重い」「右が重い」「つり合う」の 3 通りしかありません。3 通りでは高々 3 つの場合しか区別できませんが、「どの球が重いか」は **9** 通りあり、3 < 9 なので **1 回では絶対に保証できません**。",
-          "**次に 2 回で済む方法**です。9 個を 3 個ずつ 3 組に分け、A、B、C とします。",
-          "**1 回目**：A 組と B 組を天びんに載せます。A が重ければ重い球は A に、B が重ければ B に、**つり合えば A と B の 6 個は正常なので、載せていない C に**あります。どの結果でも 3 個の組に絞れます。",
-          "**2 回目**：絞った 3 個から任意の 2 個を天びんに載せます。重いほうがその球であり、**つり合えば載せなかった 3 個目が重い球**です。",
-          "したがって 2 回なら必ず見つかり、1 回では不可能——**最少は 2 回**です。"
+          "上限：1 回量るごとに結果は 3 通り（左が軽い・右が軽い・つり合う）しかないので、4 回で区別できる状況は最大 3 × 3 × 3 × 3 = 3⁴ = 81 通り。",
+          "「何番目が不良品か」の各可能性は異なる結果の組合せに対応しなければならず、そうでないと区別できない 2 個が生じる。よって部品は 81 個以下。",
+          "構成：81 個を 27 個ずつ 3 山に分け、2 山を天びんにのせる。軽い側に不良品があり、つり合えば残りの山にある。1 回で候補が 27 個に絞られる。",
+          "同じ方法をあと 3 回行うと 27 → 9 → 3 → 1 となり、ちょうど 4 回で見つかる。よって最大 81 個。"
         ]
       },
       "figure": {
@@ -75,25 +71,17 @@
       "answerMode": "integer_input",
       "correctAnswer": {
         "type": "integer",
-        "value": "2"
+        "value": "81"
       },
       "inputConstraints": {
         "allowNegative": false,
-        "maxDigits": 1
+        "maxDigits": 2
       },
       "source": {
-        "type": "official_reference",
-        "name": "IMC",
-        "contest": "IMC Taiwan",
-        "year": "2026",
-        "round": "複賽",
-        "division": "10 年級",
-        "problemNumber": "選擇 1",
-        "reference": "22nd IMC Taiwan semifinal grade 10 choice 1",
-        "displayText": "IMC Taiwan 2026 複賽 10年級 選擇 1",
-        "sourceUrl": "https://imcct.net/UserFiles/news/583/20260417120202_1.pdf",
-        "rightsStatus": "needs_review",
-        "notes": "Rewritten from the official public competition PDF."
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "天平找唯一輕品，由秤量次數反求可處理的最大數量（3 的次方）的題型",
+        "notes": "把「給數量求次數」反過來問「給次數求最大數量」，詳解同時給出 3⁴ 的資訊上界與三等分的構造；常見錯誤是答成 2⁴ = 16 或 3 × 4 = 12。"
       },
       "olympiadTaxonomy": {
         "topic": "邏輯",
@@ -116,53 +104,41 @@
       "levelStage": "grade10",
       "challengeTier": "foundation",
       "prompt": {
-        "zh-Hant": "找最小的大於 1 的正整數 n，使得 n 除以 2、3、4 都餘 1。n 是多少？",
-        "zh-Hans": "找最小的大于 1 的正整数 n，使得 n 除以 2、3、4 都余 1。n 是多少？",
-        "en": "Find the smallest positive integer n greater than 1 such that dividing n by 2, 3, or 4 always leaves remainder 1.",
-        "ja": "2、3、4 のいずれで割っても余りが 1 になる、1 より大きい最小の正整数 n を求めなさい。"
+        "zh-Hant": "禮堂裡有一批折疊椅，數量在 100 到 200 張之間。總務組發現：每排擺 6 張會剩下 5 張，每排擺 8 張會剩下 7 張，每排擺 5 張會剩下 2 張。這批折疊椅共有幾張？",
+        "zh-Hans": "礼堂里有一批折叠椅，数量在 100 到 200 张之间。总务组发现：每排摆 6 张会剩下 5 张，每排摆 8 张会剩下 7 张，每排摆 5 张会剩下 2 张。这批折叠椅共有几张？",
+        "en": "A hall keeps a stock of folding chairs, somewhere from 100 to 200 of them. Rows of 6 leave 5 spare, rows of 8 leave 7 spare, and rows of 5 leave 2 spare. How many folding chairs are there?",
+        "ja": "ホールに折りたたみ椅子があり、その数は 100 脚から 200 脚の間である。1 列 6 脚ずつ並べると 5 脚余り、1 列 8 脚ずつだと 7 脚余り、1 列 5 脚ずつだと 2 脚余る。折りたたみ椅子は何脚あるか。"
       },
       "answer": {
-        "zh-Hant": "答案是 13。",
-        "zh-Hans": "答案是 13。",
-        "en": "The answer is 13.",
-        "ja": "答えは 13 です。"
+        "zh-Hant": "答案是 167。",
+        "zh-Hans": "答案是 167。",
+        "en": "The answer is 167.",
+        "ja": "答えは 167 です。"
       },
       "solutionSteps": {
         "zh-Hant": [
-          "「除以 2、3、4 都餘 1」的共同特徵是：把 n 減掉 1 之後，就能被 2、3、4 整除。",
-          "所以 n − 1 必須同時是 2 的倍數、3 的倍數、4 的倍數。",
-          "一個數同時是這三者的倍數，等價於它是這三個數最小公倍數的倍數。",
-          "求最小公倍數：4 = 2²，而 3 是質數，所以 lcm(2, 3, 4) = 2² × 3 = 12。",
-          "因此 n − 1 必須是 12 的倍數，也就是 n − 1 = 0, 12, 24, ⋯。",
-          "題目要最小的大於 1 的正整數 n，若取 n − 1 = 0 則 n = 1，雖然三個條件都成立，但題目已限定 n 大於 1，所以不能取。下一個可能是 n − 1 = 12。",
-          "於是 n = 12 + 1 = 13。驗算：13 ÷ 2 = 6 餘 1、13 ÷ 3 = 4 餘 1、13 ÷ 4 = 3 餘 1，三個條件都成立。"
+          "除以 6 餘 5、除以 8 餘 7，都是「再多 1 張就剛好排完」，所以椅子數 N 加 1 是 6 和 8 的公倍數，也就是 24 的倍數：N = 24k − 1。",
+          "依序列出 24k − 1：23、47、71、⋯，再看除以 5 餘 2：23 不行，47 = 45 + 2 可以。5、6、8 的最小公倍數是 120，所以之後每隔 120 重複一次：47、167、287、⋯。",
+          "其中在 100 到 200 之間的只有 167。",
+          "驗算：167 = 6 × 27 + 5 = 8 × 20 + 7 = 5 × 33 + 2，三個條件都成立。"
         ],
         "zh-Hans": [
-          "「除以 2、3、4 都余 1」的共同特征是：把 n 减掉 1 之后，就能被 2、3、4 整除。",
-          "所以 n − 1 必须同时是 2 的倍数、3 的倍数、4 的倍数。",
-          "一个数同时是这三者的倍数，等价于它是这三个数最小公倍数的倍数。",
-          "求最小公倍数：4 = 2²，而 3 是质数，所以 lcm(2, 3, 4) = 2² × 3 = 12。",
-          "因此 n − 1 必须是 12 的倍数，也就是 n − 1 = 0, 12, 24, ⋯。",
-          "题目要最小的大于 1 的正整数 n，若取 n − 1 = 0 则 n = 1，虽然三个条件都成立，但题目已限定 n 大于 1，所以不能取。下一个可能是 n − 1 = 12。",
-          "于是 n = 12 + 1 = 13。验算：13 ÷ 2 = 6 余 1、13 ÷ 3 = 4 余 1、13 ÷ 4 = 3 余 1，三个条件都成立。"
+          "除以 6 余 5、除以 8 余 7，都是「再多 1 张就刚好排完」，所以椅子数 N 加 1 是 6 和 8 的公倍数，也就是 24 的倍数：N = 24k − 1。",
+          "依序列出 24k − 1：23、47、71、⋯，再看除以 5 余 2：23 不行，47 = 45 + 2 可以。5、6、8 的最小公倍数是 120，所以之后每隔 120 重复一次：47、167、287、⋯。",
+          "其中在 100 到 200 之间的只有 167。",
+          "验算：167 = 6 × 27 + 5 = 8 × 20 + 7 = 5 × 33 + 2，三个条件都成立。"
         ],
         "en": [
-          "The shared feature of leaving remainder 1 upon division by 2, 3, and 4 is that n − 1 is divisible by all three.",
-          "So n − 1 must be a multiple of 2, of 3, and of 4 simultaneously.",
-          "A number that is a multiple of all three is exactly a multiple of their least common multiple.",
-          "Computing it: 4 = 2² and 3 is prime, so lcm(2, 3, 4) = 2² × 3 = 12.",
-          "Hence n − 1 must be a multiple of 12, that is n − 1 = 0, 12, 24, ….",
-          "We want the smallest n greater than 1. Taking n − 1 = 0 gives n = 1, which does satisfy all three remainder conditions but is excluded because the problem requires n > 1, so the next possibility is n − 1 = 12.",
-          "This gives n = 12 + 1 = 13. Check: 13 ÷ 2 = 6 remainder 1, 13 ÷ 3 = 4 remainder 1, 13 ÷ 4 = 3 remainder 1, so all three conditions hold."
+          "Remainder 5 on division by 6 and remainder 7 on division by 8 both mean \"one more chair would fill the rows exactly\", so N + 1 is a common multiple of 6 and 8, i.e. a multiple of 24: N = 24k − 1.",
+          "List 24k − 1: 23, 47, 71, … and check remainder 2 on division by 5: 23 fails, 47 = 45 + 2 works. The least common multiple of 5, 6, 8 is 120, so the solutions repeat every 120: 47, 167, 287, ….",
+          "The only one between 100 and 200 is 167.",
+          "Check: 167 = 6 × 27 + 5 = 8 × 20 + 7 = 5 × 33 + 2, so all three conditions hold."
         ],
         "ja": [
-          "「2、3、4 で割るとどれも 1 余る」ことの共通点は、n から 1 を引くと 2、3、4 のどれでも割り切れるということです。",
-          "したがって n − 1 は 2 の倍数、3 の倍数、4 の倍数を同時に満たさねばなりません。",
-          "3 つすべての倍数であることは、それらの最小公倍数の倍数であることと同値です。",
-          "最小公倍数を求めます：4 = 2²、3 は素数なので lcm(2, 3, 4) = 2² × 3 = 12。",
-          "よって n − 1 は 12 の倍数、すなわち n − 1 = 0, 12, 24, … です。",
-          "1 より大きい最小の正の整数 n を求めます。n − 1 = 0 なら n = 1 で 3 つの条件は満たしますが、問題は n が 1 より大きいことを求めているので取れません。次の候補は n − 1 = 12 です。",
-          "よって n = 12 + 1 = 13。検算：13 ÷ 2 = 6 余り 1、13 ÷ 3 = 4 余り 1、13 ÷ 4 = 3 余り 1 ですべて成立します。"
+          "6 で割って 5 余り、8 で割って 7 余るのは、どちらも「あと 1 脚あればちょうど並ぶ」ということ。よって椅子の数 N に 1 を足すと 6 と 8 の公倍数、すなわち 24 の倍数で N = 24k − 1。",
+          "24k − 1 を並べると 23、47、71、…。5 で割って 2 余るものを探すと 23 は不適、47 = 45 + 2 は適する。5、6、8 の最小公倍数は 120 なので、解は 120 ごとに 47、167、287、… と続く。",
+          "そのうち 100 から 200 の間にあるのは 167 だけ。",
+          "確認：167 = 6 × 27 + 5 = 8 × 20 + 7 = 5 × 33 + 2 で 3 つの条件をすべて満たす。"
         ]
       },
       "figure": {
@@ -173,25 +149,17 @@
       "answerMode": "integer_input",
       "correctAnswer": {
         "type": "integer",
-        "value": "13"
+        "value": "167"
       },
       "inputConstraints": {
         "allowNegative": false,
-        "maxDigits": 2
+        "maxDigits": 3
       },
       "source": {
-        "type": "official_reference",
-        "name": "IMC",
-        "contest": "IMC Taiwan",
-        "year": "2026",
-        "round": "複賽",
-        "division": "10 年級",
-        "problemNumber": "填充 1",
-        "reference": "22nd IMC Taiwan semifinal grade 10 fill-in 1",
-        "displayText": "IMC Taiwan 2026 複賽 10年級 填充 1",
-        "sourceUrl": "https://imcct.net/UserFiles/news/583/20260417120202_1.pdf",
-        "rightsStatus": "needs_review",
-        "notes": "Rewritten from the official public competition PDF."
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "多個除法餘數條件同時成立，用「差同」合併再配合範圍找數的題型",
+        "notes": "前兩個條件餘數都比除數少 1，可合併成 N + 1 是 24 的倍數；第三個條件餘數不同，要逐一篩選並利用週期 120 鎖定範圍內唯一解。"
       },
       "olympiadTaxonomy": {
         "topic": "邏輯",
@@ -213,53 +181,41 @@
       "levelStage": "grade10",
       "challengeTier": "foundation",
       "prompt": {
-        "zh-Hant": "有 4 張卡片，分別寫著 1、2、3、4。從中選出兩張排成兩位數，且十位數比個位數大。共有多少個不同兩位數？",
-        "zh-Hans": "有 4 张卡片，分别写着 1、2、3、4。从中选出两张排成两位数，且十位数比个位数大。共有多少个不同两位数？",
-        "en": "There are four cards labeled 1, 2, 3, and 4. Form two-digit numbers using two cards so that the tens digit is larger than the ones digit. How many such numbers are there?",
-        "ja": "1、2、3、4 と書かれた 4 枚のカードがあります。2 枚を使って 2 桁の数を作るとき、十の位が一の位より大きいものは何個ありますか。"
+        "zh-Hant": "桌上有七張數字卡，分別寫著 1 到 7。從中取出三張排成一個三位數，要求十位數字比百位數字大、也比個位數字大。可以排出幾個不同的三位數？",
+        "zh-Hans": "桌上有七张数字卡，分别写着 1 到 7。从中取出三张排成一个三位数，要求十位数字比百位数字大、也比个位数字大。可以排出几个不同的三位数？",
+        "en": "Seven cards carry 1 to 7. Pick three and lay them out as a 3-digit number whose middle digit beats both outer digits. How many different results are possible?",
+        "ja": "1 から 7 までの数字が 1 つずつ書かれた 7 枚のカードがある。このうち 3 枚を取って 3 けたの数を作るとき、十の位の数字が百の位の数字よりも一の位の数字よりも大きくなるようにする。作れる 3 けたの数は何個あるか。"
       },
       "answer": {
-        "zh-Hant": "答案是 6。",
-        "zh-Hans": "答案是 6。",
-        "en": "The answer is 6.",
-        "ja": "答えは 6 です。"
+        "zh-Hant": "答案是 70。",
+        "zh-Hans": "答案是 70。",
+        "en": "The answer is 70.",
+        "ja": "答えは 70 です。"
       },
       "solutionSteps": {
         "zh-Hant": [
-          "先想清楚一個兩位數要怎麼從卡片產生：先挑兩張不同的卡片，再決定哪一張放十位、哪一張放個位。",
-          "一般來說每挑一組兩張卡片，可以排出 2 個不同的兩位數（大的在前或小的在前）。",
-          "但題目限制十位數必須比個位數大，所以在這 2 種排法中只有 1 種符合。",
-          "換句話說，每一組「兩張不同的卡片」恰好對應到 1 個合格的兩位數，而且不同的卡片組會給出不同的數。",
-          "於是問題化為：從 4 張卡片中選出 2 張，有幾種選法。",
-          "C(4, 2) = (4 × 3) ÷ (2 × 1) = 6。",
-          "所以共有 6 個不同的兩位數，實際列出為 21、31、32、41、42、43。"
+          "先選出要用的三張卡：從 7 張選 3 張，有 C(7, 3) = 35 種。",
+          "十位要比另外兩位都大，所以三個數字中最大的那個一定放在十位，只有 1 種放法。",
+          "剩下兩個數字放百位和個位，可以對調，有 2 種。",
+          "總數 = 35 × 1 × 2 = 70。"
         ],
         "zh-Hans": [
-          "先想清楚一个两位数要怎么从卡片产生：先挑两张不同的卡片，再决定哪一张放十位、哪一张放个位。",
-          "一般来说每挑一组两张卡片，可以排出 2 个不同的两位数（大的在前或小的在前）。",
-          "但题目限制十位数必须比个位数大，所以在这 2 种排法中只有 1 种符合。",
-          "换句话说，每一组「两张不同的卡片」恰好对应到 1 个合格的两位数，而且不同的卡片组会给出不同的数。",
-          "于是问题化为：从 4 张卡片中选出 2 张，有几种选法。",
-          "C(4, 2) = (4 × 3) ÷ (2 × 1) = 6。",
-          "所以共有 6 个不同的两位数，实际列出为 21、31、32、41、42、43。"
+          "先选出要用的三张卡：从 7 张选 3 张，有 C(7, 3) = 35 种。",
+          "十位要比另外两位都大，所以三个数字中最大的那个一定放在十位，只有 1 种放法。",
+          "剩下两个数字放百位和个位，可以对调，有 2 种。",
+          "总数 = 35 × 1 × 2 = 70。"
         ],
         "en": [
-          "First be clear how a two-digit number arises from the cards: pick two different cards, then decide which goes in the tens place and which in the units place.",
-          "In general each pair of cards can be arranged into 2 different two-digit numbers, larger first or smaller first.",
-          "But the problem requires the tens digit to be larger than the units digit, so only 1 of those 2 arrangements qualifies.",
-          "In other words each unordered pair of distinct cards corresponds to exactly 1 valid number, and different pairs give different numbers.",
-          "The problem therefore reduces to counting how many ways 2 cards can be chosen from 4.",
-          "C(4, 2) = (4 × 3) ÷ (2 × 1) = 6.",
-          "So there are 6 such two-digit numbers, namely 21, 31, 32, 41, 42, 43."
+          "First choose which three cards are used: 3 of the 7, C(7, 3) = 35 ways.",
+          "The tens digit must beat the other two, so the largest of the three digits must go in the tens place: only 1 way.",
+          "The other two digits go in the hundreds and units places, in either order: 2 ways.",
+          "Total = 35 × 1 × 2 = 70."
         ],
         "ja": [
-          "まず 2 桁の数がカードからどう作られるかを整理します：異なる 2 枚を選び、どちらを十の位、どちらを一の位にするかを決めます。",
-          "一般には 2 枚の組ごとに 2 通りの 2 桁の数ができます（大きい方が先か、小さい方が先か）。",
-          "しかし十の位が一の位より大きいという条件があるので、この 2 通りのうち 1 通りだけが該当します。",
-          "つまり異なる 2 枚の組はちょうど 1 個の条件を満たす数に対応し、組が違えば数も違います。",
-          "よって問題は 4 枚から 2 枚を選ぶ選び方の数に帰着します。",
-          "C(4, 2) = (4 × 3) ÷ (2 × 1) = 6。",
-          "したがって条件を満たす 2 桁の数は 6 個で、具体的には 21、31、32、41、42、43 です。"
+          "まず使う 3 枚を選ぶ：7 枚から 3 枚で C(7, 3) = 35 通り。",
+          "十の位はほかの 2 つより大きいので、3 つの数字のうち最大のものが必ず十の位にくる。置き方は 1 通り。",
+          "残りの 2 つは百の位と一の位に入り、入れ替えられるので 2 通り。",
+          "合計 = 35 × 1 × 2 = 70。"
         ]
       },
       "figure": {
@@ -270,25 +226,17 @@
       "answerMode": "integer_input",
       "correctAnswer": {
         "type": "integer",
-        "value": "6"
+        "value": "70"
       },
       "inputConstraints": {
         "allowNegative": false,
-        "maxDigits": 1
+        "maxDigits": 2
       },
       "source": {
-        "type": "official_reference",
-        "name": "IMC",
-        "contest": "IMC Taiwan",
-        "year": "2026",
-        "round": "複賽",
-        "division": "10 年級",
-        "problemNumber": "選擇 9",
-        "reference": "22nd IMC Taiwan semifinal grade 10 choice 9",
-        "displayText": "IMC Taiwan 2026 複賽 10年級 選擇 9",
-        "sourceUrl": "https://imcct.net/UserFiles/news/583/20260417120202_1.pdf",
-        "rightsStatus": "needs_review",
-        "notes": "Rewritten from the official public competition PDF."
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "數字大小位置限制的計數，用「先選數字、最大者位置固定」處理的題型",
+        "notes": "關鍵轉折是看出最大的數字被迫放在十位，於是只剩另外兩個數字的排列；常見錯誤是用 7 × 6 × 5 去扣或忘了乘 2 而得到 35。"
       },
       "olympiadTaxonomy": {
         "topic": "邏輯",
@@ -619,49 +567,45 @@
       "levelStage": "grade10",
       "challengeTier": "foundation",
       "prompt": {
-        "zh-Hant": "31 個孩子依照回答習慣分成三種：永遠說真話的人、永遠說假話的人、以及真話與假話交替的人（交替的人可能從真話開始，也可能從假話開始）。校長依序問每個孩子三個問題：「你是說真話的人嗎？」「你是交替的人嗎？」「你是說假話的人嗎？」**每當一個孩子回答「是」，就得到一顆糖**。結果三個問題分別有 22 人、15 人、9 人回答「是」。問：那些永遠說真話的孩子一共拿到了幾顆糖？",
-        "zh-Hans": "31 个孩子依照回答习惯分成三种：永远说真话的人、永远说假话的人、以及真话与假话交替的人（交替的人可能从真话开始，也可能从假话开始）。校长依序问每个孩子三个问题：「你是说真话的人吗？」「你是交替的人吗？」「你是说假话的人吗？」**每当一个孩子回答「是」，就得到一颗糖**。结果三个问题分别有 22 人、15 人、9 人回答「是」。问：那些永远说真话的孩子一共拿到了几颗糖？",
-        "en": "Thirty-one children are of three kinds according to how they answer: those who always tell the truth, those who always lie, and those who alternate between truth and lies (an alternator may start with either a truth or a lie). The principal asks every child three questions in order: \"Are you a truth-teller?\", \"Are you an alternator?\", \"Are you a liar?\" **Each time a child answers \"yes\" that child receives one candy.** In the end 22, 15, and 9 children answered \"yes\" to the three questions respectively. How many candies did the truth-tellers receive in total?",
-        "ja": "31 人の子どもは答え方によって 3 種類に分かれます：常に本当のことを言う人、常に嘘をつく人、そして本当と嘘を交互に言う人（交互の人は本当から始まる場合も嘘から始まる場合もあります）。校長は各児童に順に 3 つの質問をします：「あなたは正直者ですか」「あなたは交互に言う人ですか」「あなたは嘘つきですか」。**子どもが「はい」と答えるたびにアメを 1 個もらえます。** その結果、3 つの質問にそれぞれ 22 人、15 人、9 人が「はい」と答えました。常に本当のことを言う子どもたちが受け取ったアメは合計何個ですか。"
+        "zh-Hant": "某座島上住著 40 位居民，每一位都屬於下面三種之一：只說真話的「誠實者」、只說假話的「說謊者」，以及一句真一句假輪流說的「交替者」（交替者的第一句話可能是真的，也可能是假的）。調查員依序問每位居民三個問題：①「你是說謊者嗎？」②「你是交替者嗎？」③「你是誠實者嗎？」每個問題都只能回答「是」或「不是」。結果三個問題回答「是」的分別有 8 人、17 人、29 人。島上的交替者共有幾位？",
+        "zh-Hans": "某座岛上住着 40 位居民，每一位都属于下面三种之一：只说真话的「诚实者」、只说假话的「说谎者」，以及一句真一句假轮流说的「交替者」（交替者的第一句话可能是真的，也可能是假的）。调查员依序问每位居民三个问题：①「你是说谎者吗？」②「你是交替者吗？」③「你是诚实者吗？」每个问题都只能回答「是」或「不是」。结果三个问题回答「是」的分别有 8 人、17 人、29 人。岛上的交替者共有几位？",
+        "en": "Forty islanders split into three types. Honest: every statement true. Fibber: every statement false. Switcher: statements go true, false, true, … or false, true, false, …. A surveyor poses three yes/no queries to everybody, in sequence: Q1 \"Fibber?\", Q2 \"Switcher?\", Q3 \"Honest?\", getting 8, 17 and 29 yeses. Find the number of Switchers.",
+        "ja": "ある島に 40 人の住民がいて、それぞれ次の 3 種類のどれかである：本当のことだけを言う「正直者」、うそだけを言う「うそつき」、本当とうそを 1 回ずつ交互に言う「交互者」（交互者の最初の発言は本当のこともうそのこともある）。調査員は全員に順に 3 つの質問をした：①「あなたはうそつきですか？」②「あなたは交互者ですか？」③「あなたは正直者ですか？」答えは「はい」か「いいえ」だけである。「はい」と答えた人数はそれぞれ 8 人、17 人、29 人だった。島の交互者は何人か。"
       },
       "answer": {
-        "zh-Hant": "答案是 7。",
-        "zh-Hans": "答案是 7。",
-        "en": "The answer is 7.",
-        "ja": "答えは 7 です。"
+        "zh-Hant": "答案是 19。",
+        "zh-Hans": "答案是 19。",
+        "en": "The answer is 19.",
+        "ja": "答えは 19 です。"
       },
       "solutionSteps": {
         "zh-Hant": [
-          "永遠說真話的人三題的回答型態是 是、否、否。",
-          "永遠說假話的人會回答 是、是、否。",
-          "若交替者第一題說假話，三題會是 是、是、是；若第一題說真話，則是 否、否、否。",
-          "設真話者有 T 人、假話者有 L 人、第一題先說假話的交替者有 A 人。",
-          "由前兩題回答『是』的人數得 T + L + A = 22，且 L + A = 15。兩式相減得到 T = 7。",
-          "真話者只在第一題拿到糖，所以總共拿到 7 顆。"
+          "先找每種人的回答模式。誠實者照實回答：①不是、②不是、③是。",
+          "說謊者把真實答案顛倒：真實答案是「是、不是、不是」，所以他回答①不是、②是、③是。",
+          "交替者的真實答案是「不是、是、不是」。從真話開始的：①真「不是」、②假「不是」、③真「不是」，三題都答不是；從假話開始的：①假「是」、②真「是」、③假「是」，三題都答是。",
+          "設誠實者 a 人、說謊者 b 人、先假的交替者 c 人、先真的交替者 d 人。回答「是」的：第①題只有先假的交替者，c = 8；第②題是說謊者和先假的交替者，b + c = 17，b = 9；第③題是誠實者、說謊者和先假的交替者，a + b + c = 29，a = 12。",
+          "先真的交替者 d = 40 − 29 = 11（就是三題都答不是的人）。交替者共 c + d = 8 + 11 = 19 位。"
         ],
         "zh-Hans": [
-          "永远说真话的人三题的回答型态是 是、否、否。",
-          "永远说假话的人会回答 是、是、否。",
-          "若交替者第一题说假话，三题会是 是、是、是；若第一题说真话，则是 否、否、否。",
-          "设真话者有 T 人、假话者有 L 人、第一题先说假话的交替者有 A 人。",
-          "由前两题回答『是』的人数得 T + L + A = 22，且 L + A = 15。两式相减得到 T = 7。",
-          "真话者只在第一题拿到糖，所以总共拿到 7 颗。"
+          "先找每种人的回答模式。诚实者照实回答：①不是、②不是、③是。",
+          "说谎者把真实答案颠倒：真实答案是「是、不是、不是」，所以他回答①不是、②是、③是。",
+          "交替者的真实答案是「不是、是、不是」。从真话开始的：①真「不是」、②假「不是」、③真「不是」，三题都答不是；从假话开始的：①假「是」、②真「是」、③假「是」，三题都答是。",
+          "设诚实者 a 人、说谎者 b 人、先假的交替者 c 人、先真的交替者 d 人。回答「是」的：第①题只有先假的交替者，c = 8；第②题是说谎者和先假的交替者，b + c = 17，b = 9；第③题是诚实者、说谎者和先假的交替者，a + b + c = 29，a = 12。",
+          "先真的交替者 d = 40 − 29 = 11（就是三题都答不是的人）。交替者共 c + d = 8 + 11 = 19 位。"
         ],
         "en": [
-          "Truth-tellers answer yes, no, no to the three questions.",
-          "Liars answer yes, yes, no.",
-          "Alternaters either answer yes, yes, yes or no, no, no, depending on how they start.",
-          "Let T be the number of truth-tellers, L the number of liars, and A the number of alternaters who begin by lying.",
-          "From the first two questions we get T + L + A = 22 and L + A = 15. Subtracting gives T = 7.",
-          "Truth-tellers receive candy only on the first question, so they receive 7 pieces in total."
+          "First find each kind's answer pattern. An Honest islander answers truthfully: (1) no, (2) no, (3) yes.",
+          "A Fibber reverses the true answers \"yes, no, no\", so says (1) no, (2) yes, (3) yes.",
+          "A Switcher's true answers are \"no, yes, no\". One who starts truthfully says (1) no (true), (2) no (false), (3) no (true): no to all three. One who starts with a lie says (1) yes (false), (2) yes (true), (3) yes (false): yes to all three.",
+          "Let there be a Honest islanders, b Fibbers, c Switchers who start false and d who start true. Yes to Q1: only the false-first Switchers, so c = 8. Yes to Q2: Fibbers and false-first Switchers, b + c = 17, so b = 9. Yes to Q3: Honest, Fibbers and false-first Switchers, a + b + c = 29, so a = 12.",
+          "The true-first Switchers are d = 40 − 29 = 11 (exactly those who said no three times). So there are c + d = 8 + 11 = 19 Switchers."
         ],
         "ja": [
-          "真実を言う子の 3 つの答えは『はい、いいえ、いいえ』です。",
-          "うそつきの 3 つの答えは『はい、はい、いいえ』です。",
-          "交互型は始め方によって『はい、はい、はい』または『いいえ、いいえ、いいえ』になります。",
-          "真実を言う子を T 人、うそつきを L 人、最初にうそから始める交互型を A 人とします。",
-          "最初の 2 問から T + L + A = 22、L + A = 15 です。差を取ると T = 7 です。",
-          "真実を言う子は最初の質問でしかキャンディーをもらわないので、合計 7 個です。"
+          "まず種類ごとの答え方を調べる。正直者は事実どおり：①いいえ、②いいえ、③はい。",
+          "うそつきは本当の答え「はい・いいえ・いいえ」を逆にするので、①いいえ、②はい、③はい。",
+          "交互者の本当の答えは「いいえ・はい・いいえ」。本当から始める人は ①いいえ（本当）②いいえ（うそ）③いいえ（本当）で全部いいえ。うそから始める人は ①はい（うそ）②はい（本当）③はい（うそ）で全部はい。",
+          "正直者 a 人、うそつき b 人、うそから始める交互者 c 人、本当から始める交互者 d 人とする。①に「はい」はうそから始める交互者だけで c = 8。②は うそつきとうそから始める交互者で b + c = 17、b = 9。③は正直者・うそつき・うそから始める交互者で a + b + c = 29、a = 12。",
+          "本当から始める交互者は d = 40 − 29 = 11（3 問とも「いいえ」の人）。交互者は c + d = 8 + 11 = 19 人。"
         ]
       },
       "figure": {
@@ -672,25 +616,17 @@
       "answerMode": "integer_input",
       "correctAnswer": {
         "type": "integer",
-        "value": "7"
+        "value": "19"
       },
       "inputConstraints": {
         "allowNegative": false,
         "maxDigits": 2
       },
       "source": {
-        "type": "official_reference",
-        "name": "AMC 10",
-        "contest": "AMC 10",
-        "year": "2022",
-        "round": "A",
-        "division": "High School",
-        "problemNumber": "Problem 12",
-        "reference": "2022 AMC 10A Problem 12",
-        "displayText": "AMC 10A 2022 Problem 12",
-        "sourceUrl": "https://artofproblemsolving.com/wiki/index.php/2022_AMC_10A_Problems/Problem_12",
-        "rightsStatus": "needs_review",
-        "notes": "Rewritten from a publicly archived competition statement."
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "誠實者、說謊者、交替者對一組固定問題的回答模式分析題型",
+        "notes": "問題順序經過設計，使「先假的交替者」三題全答是、「先真的交替者」三題全答不是，學生要分兩類交替者分別定人數；問的是交替者總數，必須用總人數補出全答不是的那一類。"
       },
       "olympiadTaxonomy": {
         "topic": "邏輯",
@@ -806,49 +742,45 @@
       "levelStage": "grade10",
       "challengeTier": "foundation",
       "prompt": {
-        "zh-Hant": "在一個沼澤裡有兩種會說話的生物：蟾蜍永遠說真話，青蛙永遠說假話。Brian、Chris、LeRoy、Mike 四位居民分別說：\nBrian：「我和 Mike 不是同一種。」\nChris：「LeRoy 是青蛙。」\nLeRoy：「Chris 是青蛙。」\nMike：「我們四個當中至少有兩個是蟾蜍。」\n請問這四位居民之中有幾隻青蛙？",
-        "zh-Hans": "在一个沼泽里有两种会说话的生物：蟾蜍永远说真话，青蛙永远说假话。Brian、Chris、LeRoy、Mike 四位居民分别说：\nBrian：「我和 Mike 不是同一种。」\nChris：「LeRoy 是青蛙。」\nLeRoy：「Chris 是青蛙。」\nMike：「我们四个当中至少有两个是蟾蜍。」\n请问这四位居民之中有几只青蛙？",
-        "en": "In a magical swamp there are two kinds of talking creatures: toads always tell the truth, and frogs always lie. Brian, Chris, LeRoy, and Mike say:\nBrian: 'Mike and I are different species.'\nChris: 'LeRoy is a frog.'\nLeRoy: 'Chris is a frog.'\nMike: 'At least two of the four of us are toads.'\nHow many of the four are frogs?",
-        "ja": "ある沼には 2 種類の話す生き物がいます。ヒキガエルはいつも真実を言い、カエルはいつもうそを言います。Brian、Chris、LeRoy、Mike は次のように言いました。\nBrian『Mike と私は違う種類だ。』\nChris『LeRoy はカエルだ。』\nLeRoy『Chris はカエルだ。』\nMike『4 人のうち少なくとも 2 人はヒキガエルだ。』\n4 人のうちカエルは何匹ですか。"
+        "zh-Hant": "實驗室有 A、B、C、D、E 五台機器人。每一台不是「正常型」（說的話一定是真的），就是「故障型」（說的話一定是假的）。它們各說了一句話：\nA：「B 是故障型。」\nB：「C 和 D 都是正常型。」\nC：「B 和 E 不是同一型。」\nD：「我們五台之中至少有三台是正常型。」\nE：「D 是故障型。」\n哪幾台是故障型？",
+        "zh-Hans": "实验室有 A、B、C、D、E 五台机器人。每一台不是「正常型」（说的话一定是真的），就是「故障型」（说的话一定是假的）。它们各说了一句话：\nA：「B 是故障型。」\nB：「C 和 D 都是正常型。」\nC：「B 和 E 不是同一型。」\nD：「我们五台之中至少有三台是正常型。」\nE：「D 是故障型。」\n哪几台是故障型？",
+        "en": "A lab has five robots A, B, C, D, E. Each is either \"sound\" (everything it says is true) or \"faulty\" (everything it says is false). Each makes one statement:\nA: \"B is faulty.\"\nB: \"C and D are both sound.\"\nC: \"B and E are of different types.\"\nD: \"At least three of the five of us are sound.\"\nE: \"D is faulty.\"\nWhich robots are faulty?",
+        "ja": "研究室に A、B、C、D、E の 5 台のロボットがある。どれも「正常型」（言うことは必ず本当）か「故障型」（言うことは必ずうそ）のどちらかである。それぞれが 1 つずつ発言した：\nA「B は故障型だ。」\nB「C と D はどちらも正常型だ。」\nC「B と E は違う型だ。」\nD「私たち 5 台のうち少なくとも 3 台は正常型だ。」\nE「D は故障型だ。」\n故障型はどれか。"
       },
       "answer": {
-        "zh-Hant": "答案是 3。",
-        "zh-Hans": "答案是 3。",
-        "en": "The answer is 3.",
-        "ja": "答えは 3 です。"
+        "zh-Hant": "答案是 A 和 E。",
+        "zh-Hans": "答案是 A 和 E。",
+        "en": "The answer is A and E.",
+        "ja": "答えは A と E です。"
       },
       "solutionSteps": {
         "zh-Hant": [
-          "先看 Brian。若 Brian 說真話，則 Mike 和他不同種，所以 Mike 是青蛙。若 Brian 說假話，則 Mike 和他同種，因此 Mike 仍是青蛙。",
-          "所以不論如何，Mike 一定是青蛙。",
-          "Mike 說『至少兩個是蟾蜍』，但他是青蛙，所以這句是假，表示蟾蜍不到兩個，也就是至多只有 1 個蟾蜍。",
-          "Chris 與 LeRoy 的話互相指向對方是青蛙，因此兩人不可能同為蟾蜍，也不可能同為青蛙；其中恰有一個是蟾蜍。",
-          "既然總共至多 1 個蟾蜍，而 Chris 與 LeRoy 已經有且只有 1 個是蟾蜍，那 Brian 也必是青蛙。",
-          "於是青蛙是 Brian、Mike，以及 Chris 和 LeRoy 其中之一，共 3 隻。"
+          "A 說「B 是故障型」：若 A 正常，B 就是故障型；若 A 故障，B 就是正常型。所以 A、B 一定是不同型。同理，E 說「D 是故障型」，所以 D、E 一定不同型。",
+          "情形一：B 正常。則 C、D 都正常；D 正常說明至少三台正常（B、C、D 已三台）；E 與 D 不同型，E 故障；A 與 B 不同型，A 故障。檢查 C 的話「B 和 E 不同型」：B 正常、E 故障，確實為真。這個情形完全成立。",
+          "情形二：B 故障，則 A 正常，而且 B 的話是假的：C、D 不全是正常型。若 C 正常，B、E 不同型，E 正常，於是 D 故障；但此時正常的是 A、C、E 三台，D 的話「至少三台正常」成了真話，矛盾。",
+          "若 C 故障，B、E 同型，E 故障，於是 D 正常；但此時正常的只有 A、D 兩台，D 的話成了假話，也矛盾。所以情形二不可能。",
+          "唯一的情形是 B、C、D 正常，A、E 故障：故障型的是 A 和 E，共 2 台。"
         ],
         "zh-Hans": [
-          "先看 Brian。若 Brian 说真话，则 Mike 和他不同种，所以 Mike 是青蛙。若 Brian 说假话，则 Mike 和他同种，因此 Mike 仍是青蛙。",
-          "所以不论如何，Mike 一定是青蛙。",
-          "Mike 说『至少两个是蟾蜍』，但他是青蛙，所以这句是假，表示蟾蜍不到两个，也就是至多只有 1 个蟾蜍。",
-          "Chris 与 LeRoy 的话互相指向对方是青蛙，因此两人不可能同为蟾蜍，也不可能同为青蛙；其中恰有一个是蟾蜍。",
-          "既然总共至多 1 个蟾蜍，而 Chris 与 LeRoy 已经有且只有 1 个是蟾蜍，那 Brian 也必是青蛙。",
-          "于是青蛙是 Brian、Mike，以及 Chris 和 LeRoy 其中之一，共 3 只。"
+          "A 说「B 是故障型」：若 A 正常，B 就是故障型；若 A 故障，B 就是正常型。所以 A、B 一定是不同型。同理，E 说「D 是故障型」，所以 D、E 一定不同型。",
+          "情形一：B 正常。则 C、D 都正常；D 正常说明至少三台正常（B、C、D 已三台）；E 与 D 不同型，E 故障；A 与 B 不同型，A 故障。检查 C 的话「B 和 E 不同型」：B 正常、E 故障，确实为真。这个情形完全成立。",
+          "情形二：B 故障，则 A 正常，而且 B 的话是假的：C、D 不全是正常型。若 C 正常，B、E 不同型，E 正常，于是 D 故障；但此时正常的是 A、C、E 三台，D 的话「至少三台正常」成了真话，矛盾。",
+          "若 C 故障，B、E 同型，E 故障，于是 D 正常；但此时正常的只有 A、D 两台，D 的话成了假话，也矛盾。所以情形二不可能。",
+          "唯一的情形是 B、C、D 正常，A、E 故障：故障型的是 A 和 E，共 2 台。"
         ],
         "en": [
-          "Start with Brian. If Brian tells the truth, then he and Mike are different species, so Mike is a frog. If Brian lies, then he and Mike are the same species, so Mike is still a frog.",
-          "Thus Mike must be a frog.",
-          "Mike says that at least two of the four are toads, but since Mike is a frog, that statement is false. Therefore there are fewer than two toads, so at most one toad.",
-          "Chris and LeRoy accuse each other of being frogs. They cannot both be toads, and they cannot both be frogs, so exactly one of them is a toad.",
-          "Since there is at most one toad total, Brian must also be a frog.",
-          "Therefore the frogs are Brian, Mike, and exactly one of Chris and LeRoy, for a total of 3 frogs."
+          "A says \"B is faulty\": if A is sound then B is faulty, and if A is faulty then B is sound. So A and B are always of different types. Likewise E says \"D is faulty\", so D and E are of different types.",
+          "Case 1: B is sound. Then C and D are sound; D being sound needs at least three sound robots (B, C, D already). E differs from D, so E is faulty; A differs from B, so A is faulty. Check C's claim \"B and E differ\": B sound, E faulty — true. This case is fully consistent.",
+          "Case 2: B is faulty, so A is sound and B's claim is false: C and D are not both sound. If C is sound, B and E differ, so E is sound and D is faulty; but then the sound ones are A, C, E — three — making D's claim true, a contradiction.",
+          "If C is faulty, B and E are alike, so E is faulty and D is sound; but then only A and D are sound, making D's claim false — again a contradiction. So case 2 is impossible.",
+          "The only possibility is B, C, D sound and A, E faulty: the faulty ones are A and E, 2 robots."
         ],
         "ja": [
-          "まず Brian を見ます。Brian が真実を言うなら Mike とは別種なので Mike はカエルです。Brian がうそつきなら Mike と同種なので、やはり Mike はカエルです。",
-          "したがって Mike は必ずカエルです。",
-          "Mike の『少なくとも 2 人はヒキガエル』は偽なので、ヒキガエルは 2 人未満、つまり高々 1 人です。",
-          "Chris と LeRoy は互いをカエルだと言っているので、2 人が同時にヒキガエルであることも、同時にカエルであることもできません。したがってちょうど 1 人だけがヒキガエルです。",
-          "全体でヒキガエルは高々 1 人なので、Brian もカエルでなければなりません。",
-          "よってカエルは Brian、Mike、そして Chris と LeRoy のうち 1 人で、合計 3 匹です。"
+          "A は「B は故障型」と言う。A が正常なら B は故障型、A が故障型なら B は正常型。よって A と B は必ず違う型。同様に E の発言から D と E も違う型。",
+          "場合 1：B が正常。すると C と D は正常。D が正常なので少なくとも 3 台が正常（B、C、D で 3 台）。E は D と違うので故障型、A は B と違うので故障型。C の発言「B と E は違う型」も B が正常、E が故障で本当。矛盾なし。",
+          "場合 2：B が故障型なら A は正常で、B の発言はうそなので C と D は両方正常ではない。C が正常なら B と E は違う型で E は正常、よって D は故障型。しかし正常なのは A、C、E の 3 台で D の発言が本当になり矛盾。",
+          "C が故障型なら B と E は同じ型で E は故障型、よって D は正常。しかし正常なのは A と D の 2 台だけで D の発言がうそになり、やはり矛盾。場合 2 はありえない。",
+          "唯一の可能性は B、C、D が正常で A、E が故障型。故障型は A と E の 2 台。"
         ]
       },
       "figure": {
@@ -859,53 +791,45 @@
       "answerMode": "multiple_choice",
       "options": {
         "A": {
-          "zh-Hant": "0",
-          "zh-Hans": "0",
-          "en": "0",
-          "ja": "0"
+          "zh-Hant": "只有 E",
+          "zh-Hans": "只有 E",
+          "en": "only E",
+          "ja": "E だけ"
         },
         "B": {
-          "zh-Hant": "1",
-          "zh-Hans": "1",
-          "en": "1",
-          "ja": "1"
+          "zh-Hant": "A、B 和 E",
+          "zh-Hans": "A、B 和 E",
+          "en": "A, B and E",
+          "ja": "A と B と E"
         },
         "C": {
-          "zh-Hant": "2",
-          "zh-Hans": "2",
-          "en": "2",
-          "ja": "2"
+          "zh-Hant": "A 和 E",
+          "zh-Hans": "A 和 E",
+          "en": "A and E",
+          "ja": "A と E"
         },
         "D": {
-          "zh-Hant": "3",
-          "zh-Hans": "3",
-          "en": "3",
-          "ja": "3"
+          "zh-Hant": "B 和 D",
+          "zh-Hans": "B 和 D",
+          "en": "B and D",
+          "ja": "B と D"
         },
         "E": {
-          "zh-Hant": "4",
-          "zh-Hans": "4",
-          "en": "4",
-          "ja": "4"
+          "zh-Hant": "C 和 D",
+          "zh-Hans": "C 和 D",
+          "en": "C and D",
+          "ja": "C と D"
         }
       },
       "correctAnswer": {
         "type": "choice",
-        "value": "D"
+        "value": "C"
       },
       "source": {
-        "type": "official_reference",
-        "name": "AMC 10",
-        "contest": "AMC 10",
-        "year": "2010",
-        "round": "A",
-        "division": "Grade 9-10",
-        "problemNumber": "Problem 15",
-        "reference": "2010 AMC 10A Problem 15",
-        "displayText": "AMC 10A 2010 Problem 15",
-        "sourceUrl": "https://artofproblemsolving.com/wiki/index.php/2010_AMC_12A_Problems/Problem_12",
-        "rightsStatus": "needs_review",
-        "notes": "Rewritten from a publicly archived competition statement shared with AMC 12A 2010 Problem 12."
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "說真話與說假話兩類角色的陳述推理，先找出「必不同型」的配對再分情形的題型",
+        "notes": "先從 A、E 兩句話得出兩組「必不同型」，再只需對 B 分兩種情形；D 的計數陳述是讓情形二矛盾的關鍵。誘答是只檢查一種情形、或把 C 的話當成「同型」時會得到的組合。"
       },
       "olympiadTaxonomy": {
         "topic": "邏輯",

@@ -126,57 +126,41 @@
       "levelStage": "grade10",
       "challengeTier": "foundation",
       "prompt": {
-        "zh-Hant": "求方程 5x + 7y = 2026 的非負整數解共有多少組。",
-        "zh-Hans": "求方程 5x + 7y = 2026 的非负整数解共有多少组。",
-        "en": "How many nonnegative integer solutions does 5x + 7y = 2026 have?",
-        "ja": "方程式 5x + 7y = 2026 の非負整数解は何組ありますか。"
+        "zh-Hant": "在坐標平面上，x、y 坐標都是整數的點叫做格子點。直線 6x + 10y = 2026 落在第一象限或兩條坐標軸上的部分（也就是 x ≥ 0、y ≥ 0 的部分）共經過幾個格子點？",
+        "zh-Hans": "在坐标平面上，x、y 坐标都是整数的点叫做格点。直线 6x + 10y = 2026 落在第一象限或两条坐标轴上的部分（也就是 x ≥ 0、y ≥ 0 的部分）共经过几个格点？",
+        "en": "Call a point lattice if both coordinates are whole. Count the lattice points on 6x + 10y = 2026 with x ≥ 0 and y ≥ 0 (first quadrant plus axes).",
+        "ja": "座標平面上で、x 座標と y 座標がともに整数である点を格子点という。直線 6x + 10y = 2026 の x ≥ 0、y ≥ 0 の部分（第 1 象限と座標軸上）には格子点がいくつあるか。"
       },
       "answer": {
-        "zh-Hant": "答案是 58。",
-        "zh-Hans": "答案是 58。",
-        "en": "The answer is 58.",
-        "ja": "答えは 58 です。"
+        "zh-Hant": "答案是 68。",
+        "zh-Hans": "答案是 68。",
+        "en": "The answer is 68.",
+        "ja": "答えは 68 です。"
       },
       "solutionSteps": {
         "zh-Hant": [
-          "先確定變數的範圍：x、y 都是非負整數，由 7y ≤ 2026 得 y ≤ 289.4，所以 0 ≤ y ≤ 289。",
-          "把方程改寫成 5x = 2026 − 7y，因此 2026 − 7y 必須是非負的 5 的倍數。",
-          "改用同餘處理：2026 ≡ 1 (mod 5)，而 7 ≡ 2 (mod 5)，所以條件變成 1 − 2y ≡ 0 (mod 5)，即 2y ≡ 1 (mod 5)。",
-          "在 mod 5 之下逐一試 y = 0, 1, 2, 3：2 × 3 = 6 ≡ 1，所以 y ≡ 3 (mod 5)。",
-          "於是符合的 y 依序是 3, 8, 13, ⋯，形成公差 5 的等差數列，且必須落在 0 到 289 之間。",
-          "最大的一項：3 + 5k ≤ 289 得 k ≤ 57.2，所以 k 最大為 57，對應 y = 3 + 5 × 57 = 288。",
-          "因此 y 共有 k = 0 到 57 共 58 個取值，每一個 y 都唯一決定一個非負整數 x。",
-          "驗算最大的一組：y = 288 時 7 × 288 = 2016，x = (2026 − 2016) ÷ 5 = 2，確實是非負整數。所以共有 58 組解。"
+          "6、10、2026 都是偶數，兩邊同除以 2：3x + 5y = 1013。要找的是這條方程式的 0 以上整數解 (x, y) 有幾組。",
+          "3x = 1013 − 5y 要是 3 的倍數。1013 除以 3 餘 2，5y 除以 3 的餘數和 2y 相同，所以要 2y 除以 3 餘 2，也就是 y 除以 3 餘 1：y = 3t + 1（t 是 0 以上的整數）。",
+          "代回去：3x = 1013 − 15t − 5 = 1008 − 15t，x = 336 − 5t。x ≥ 0 要求 5t ≤ 336，t ≤ 67。",
+          "t 可以是 0、1、2、⋯、67，共 68 個值，每個值對應一個格子點（從 (336, 1) 到 (1, 202)），所以共有 68 個格子點。"
         ],
         "zh-Hans": [
-          "先确定变量的范围：x、y 都是非负整数，由 7y ≤ 2026 得 y ≤ 289.4，所以 0 ≤ y ≤ 289。",
-          "把方程改写成 5x = 2026 − 7y，因此 2026 − 7y 必须是非负的 5 的倍数。",
-          "改用同余处理：2026 ≡ 1 (mod 5)，而 7 ≡ 2 (mod 5)，所以条件变成 1 − 2y ≡ 0 (mod 5)，即 2y ≡ 1 (mod 5)。",
-          "在 mod 5 之下逐一试 y = 0, 1, 2, 3：2 × 3 = 6 ≡ 1，所以 y ≡ 3 (mod 5)。",
-          "于是符合的 y 依序是 3, 8, 13, ⋯，形成公差 5 的等差数列，且必须落在 0 到 289 之间。",
-          "最大的一项：3 + 5k ≤ 289 得 k ≤ 57.2，所以 k 最大为 57，对应 y = 3 + 5 × 57 = 288。",
-          "因此 y 共有 k = 0 到 57 共 58 个取值，每一个 y 都唯一决定一个非负整数 x。",
-          "验算最大的一组：y = 288 时 7 × 288 = 2016，x = (2026 − 2016) ÷ 5 = 2，确实是非负整数。所以共有 58 组解。"
+          "6、10、2026 都是偶数，两边同除以 2：3x + 5y = 1013。要找的是这条方程的 0 以上整数解 (x, y) 有几组。",
+          "3x = 1013 − 5y 要是 3 的倍数。1013 除以 3 余 2，5y 除以 3 的余数和 2y 相同，所以要 2y 除以 3 余 2，也就是 y 除以 3 余 1：y = 3t + 1（t 是 0 以上的整数）。",
+          "代回去：3x = 1013 − 15t − 5 = 1008 − 15t，x = 336 − 5t。x ≥ 0 要求 5t ≤ 336，t ≤ 67。",
+          "t 可以是 0、1、2、⋯、67，共 68 个值，每个值对应一个格点（从 (336, 1) 到 (1, 202)），所以共有 68 个格点。"
         ],
         "en": [
-          "First bound the variables: x and y are non-negative integers, and 7y ≤ 2026 gives y ≤ 289.4, so 0 ≤ y ≤ 289.",
-          "Rewrite the equation as 5x = 2026 − 7y, so 2026 − 7y must be a non-negative multiple of 5.",
-          "Switch to congruences: 2026 ≡ 1 (mod 5) and 7 ≡ 2 (mod 5), so the condition becomes 1 − 2y ≡ 0 (mod 5), that is 2y ≡ 1 (mod 5).",
-          "Testing y = 0, 1, 2, 3 modulo 5: 2 × 3 = 6 ≡ 1, so y ≡ 3 (mod 5).",
-          "The valid values of y are therefore 3, 8, 13, …, an arithmetic sequence with common difference 5, restricted to 0 through 289.",
-          "For the largest term, 3 + 5k ≤ 289 gives k ≤ 57.2, so the largest k is 57, corresponding to y = 3 + 5 × 57 = 288.",
-          "Hence y takes 58 values, for k = 0 through 57, and each y determines exactly one non-negative integer x.",
-          "Check the largest case: y = 288 gives 7 × 288 = 2016 and x = (2026 − 2016) ÷ 5 = 2, a non-negative integer. So there are 58 solutions."
+          "6, 10 and 2026 are all even, so divide by 2: 3x + 5y = 1013. We need the number of nonnegative integer solutions (x, y).",
+          "3x = 1013 − 5y must be a multiple of 3. 1013 leaves remainder 2 on division by 3, and 5y leaves the same remainder as 2y, so 2y must leave remainder 2, i.e. y leaves remainder 1: y = 3t + 1 with t a nonnegative integer.",
+          "Substitute: 3x = 1013 − 15t − 5 = 1008 − 15t, so x = 336 − 5t. x ≥ 0 requires 5t ≤ 336, i.e. t ≤ 67.",
+          "t can be 0, 1, 2, …, 67, which is 68 values, each giving one lattice point (from (336, 1) to (1, 202)); so there are 68 lattice points."
         ],
         "ja": [
-          "まず変数の範囲を定めます。x、y は非負整数で、7y ≤ 2026 より y ≤ 289.4、すなわち 0 ≤ y ≤ 289。",
-          "方程式を 5x = 2026 − 7y と書き換えると、2026 − 7y は非負の 5 の倍数でなければなりません。",
-          "合同式で扱います：2026 ≡ 1 (mod 5)、7 ≡ 2 (mod 5) なので、条件は 1 − 2y ≡ 0 (mod 5)、つまり 2y ≡ 1 (mod 5)。",
-          "mod 5 で y = 0, 1, 2, 3 を試すと 2 × 3 = 6 ≡ 1 なので y ≡ 3 (mod 5)。",
-          "よって適する y は 3, 8, 13, … と公差 5 の等差数列をなし、0 以上 289 以下に限られます。",
-          "最大の項は 3 + 5k ≤ 289 より k ≤ 57.2、k の最大は 57 で y = 3 + 5 × 57 = 288。",
-          "したがって y は k = 0 から 57 までの 58 個の値をとり、各 y が非負整数 x をただ 1 つ定めます。",
-          "最大の場合を検算すると、y = 288 で 7 × 288 = 2016、x = (2026 − 2016) ÷ 5 = 2 で非負整数です。よって解は 58 組です。"
+          "6、10、2026 はすべて偶数なので両辺を 2 で割ると 3x + 5y = 1013。この式の 0 以上の整数解 (x, y) の個数を求めればよい。",
+          "3x = 1013 − 5y は 3 の倍数でなければならない。1013 を 3 で割ると余り 2、5y の余りは 2y の余りと同じなので、2y の余りが 2、すなわち y を 3 で割った余りが 1：y = 3t + 1（t は 0 以上の整数）。",
+          "代入すると 3x = 1013 − 15t − 5 = 1008 − 15t、x = 336 − 5t。x ≥ 0 より 5t ≤ 336、t ≤ 67。",
+          "t は 0、1、2、…、67 の 68 通りで、それぞれ 1 つの格子点（(336, 1) から (1, 202) まで）に対応する。よって格子点は 68 個。"
         ]
       },
       "figure": {
@@ -187,25 +171,17 @@
       "answerMode": "integer_input",
       "correctAnswer": {
         "type": "integer",
-        "value": "58"
+        "value": "68"
       },
       "inputConstraints": {
         "allowNegative": false,
         "maxDigits": 2
       },
       "source": {
-        "type": "official_reference",
-        "name": "IMC",
-        "contest": "IMC Taiwan",
-        "year": "2026",
-        "round": "複賽",
-        "division": "10 年級",
-        "problemNumber": "計算 2",
-        "reference": "22nd IMC Taiwan semifinal grade 10 calculation 2",
-        "displayText": "IMC Taiwan 2026 複賽 10年級 計算 2",
-        "sourceUrl": "https://imcct.net/UserFiles/news/583/20260417120202_1.pdf",
-        "rightsStatus": "needs_review",
-        "notes": "Rewritten from the official public competition PDF."
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "二元一次不定方程式的非負整數解計數（先約去公因數再用同餘找通解）的題型",
+        "notes": "係數與常數有公因數 2，要先約掉才能用「除以 3 的餘數」找出 y 的形式；學生若不約分直接猜，容易算成 t ≤ 68 而多算一個。"
       },
       "olympiadTaxonomy": {
         "topic": "數論",
@@ -227,57 +203,45 @@
       "levelStage": "grade10",
       "challengeTier": "foundation",
       "prompt": {
-        "zh-Hant": "四位數 2a5b 可被 36 整除。求 a + b 的最大值。",
-        "zh-Hans": "四位数 2a5b 可被 36 整除。求 a + b 的最大值。",
-        "en": "The four-digit number 2a5b is divisible by 36. Find the maximum possible value of a + b.",
-        "ja": "4桁の数 2a5b が 36 で割り切れるとき、a + b の最大値を求めなさい。"
+        "zh-Hant": "a、b 都是 0 到 9 的數字，五位數 6a3b2 能被 24 整除。符合條件的數字組 (a, b) 共有幾組？",
+        "zh-Hans": "a、b 都是 0 到 9 的数字，五位数 6a3b2 能被 24 整除。符合条件的数字组 (a, b) 共有几组？",
+        "en": "Digits a and b (each 0 to 9) make 6a3b2 a multiple of 24. Count the pairs (a, b).",
+        "ja": "a、b は 0 から 9 までの数字で、5 けたの数 6a3b2 は 24 で割り切れる。条件を満たす数字の組 (a, b) は何組あるか。"
       },
       "answer": {
-        "zh-Hant": "答案是 11。",
-        "zh-Hans": "答案是 11。",
-        "en": "The answer is 11.",
-        "ja": "答えは 11 です。"
+        "zh-Hant": "答案是 10。",
+        "zh-Hans": "答案是 10。",
+        "en": "The answer is 10.",
+        "ja": "答えは 10 です。"
       },
       "solutionSteps": {
         "zh-Hant": [
-          "36 = 4 × 9，而 4 與 9 互質，所以「被 36 整除」等價於「同時被 4 與被 9 整除」。",
-          "被 4 整除只看末兩位，也就是 5b 這兩位所組成的數 50 + b 要被 4 整除。",
-          "逐一檢查 b = 0 到 9：只有 52 與 56 是 4 的倍數，所以 b 只能是 2 或 6。",
-          "被 9 整除看各位數字和：2 + a + 5 + b = a + b + 7 要是 9 的倍數。",
-          "所以 a + b + 7 ∈ {9, 18, 27, ⋯}，即 a + b ∈ {2, 11, 20, ⋯}。",
-          "再看 a + b 的上限：a 最大是 9，而 b 只能是 2 或 6，所以 a + b 最大不超過 9 + 6 = 15，因此 20 以上都不可能，a + b 只能是 2 或 11。",
-          "檢查 a + b = 11 是否真的做得到：若 b = 2 則 a = 9，得 2952 = 36 × 82；若 b = 6 則 a = 5，得 2556 = 36 × 71，兩者都成立。",
-          "所以 a + b 的最大值是 11。（符合條件的四位數只有 2052、2556、2952 三個，已逐一驗證。）"
+          "24 = 8 × 3，而 8 和 3 互質，所以 6a3b2 要同時是 8 的倍數和 3 的倍數。",
+          "8 的倍數只看末三位 3b2：3b2 = 302 + 10b。302 = 8 × 37 + 6，所以要 6 + 10b 是 8 的倍數；逐一檢查 b，只有 b = 1、5、9 可以（312 = 8 × 39、352 = 8 × 44、392 = 8 × 49）。",
+          "3 的倍數看數字和：6 + a + 3 + b + 2 = 11 + a + b 要是 3 的倍數。",
+          "b = 1：12 + a 是 3 的倍數，a = 0、3、6、9，共 4 組。b = 5：16 + a，a = 2、5、8，共 3 組。b = 9：20 + a，a = 1、4、7，共 3 組。",
+          "合計 4 + 3 + 3 = 10 組。"
         ],
         "zh-Hans": [
-          "36 = 4 × 9，而 4 与 9 互质，所以「被 36 整除」等价于「同时被 4 与被 9 整除」。",
-          "被 4 整除只看末两位，也就是 5b 这两位所组成的数 50 + b 要被 4 整除。",
-          "逐一检查 b = 0 到 9：只有 52 与 56 是 4 的倍数，所以 b 只能是 2 或 6。",
-          "被 9 整除看各位数字和：2 + a + 5 + b = a + b + 7 要是 9 的倍数。",
-          "所以 a + b + 7 ∈ {9, 18, 27, ⋯}，即 a + b ∈ {2, 11, 20, ⋯}。",
-          "再看 a + b 的上限：a 最大是 9，而 b 只能是 2 或 6，所以 a + b 最大不超过 9 + 6 = 15，因此 20 以上都不可能，a + b 只能是 2 或 11。",
-          "检查 a + b = 11 是否真的做得到：若 b = 2 则 a = 9，得 2952 = 36 × 82；若 b = 6 则 a = 5，得 2556 = 36 × 71，两者都成立。",
-          "所以 a + b 的最大值是 11。（符合条件的四位数只有 2052、2556、2952 三个，已逐一验证。）"
+          "24 = 8 × 3，而 8 和 3 互质，所以 6a3b2 要同时是 8 的倍数和 3 的倍数。",
+          "8 的倍数只看末三位 3b2：3b2 = 302 + 10b。302 = 8 × 37 + 6，所以要 6 + 10b 是 8 的倍数；逐一检查 b，只有 b = 1、5、9 可以（312 = 8 × 39、352 = 8 × 44、392 = 8 × 49）。",
+          "3 的倍数看数字和：6 + a + 3 + b + 2 = 11 + a + b 要是 3 的倍数。",
+          "b = 1：12 + a 是 3 的倍数，a = 0、3、6、9，共 4 组。b = 5：16 + a，a = 2、5、8，共 3 组。b = 9：20 + a，a = 1、4、7，共 3 组。",
+          "合计 4 + 3 + 3 = 10 组。"
         ],
         "en": [
-          "Since 36 = 4 × 9 with 4 and 9 coprime, divisibility by 36 is equivalent to divisibility by both 4 and 9.",
-          "Divisibility by 4 depends only on the last two digits, so the number 50 + b formed by 5b must be a multiple of 4.",
-          "Checking b = 0 through 9, only 52 and 56 are multiples of 4, so b is 2 or 6.",
-          "Divisibility by 9 depends on the digit sum: 2 + a + 5 + b = a + b + 7 must be a multiple of 9.",
-          "So a + b + 7 ∈ {9, 18, 27, …}, that is a + b ∈ {2, 11, 20, …}.",
-          "Now bound a + b: the largest a is 9 and b is 2 or 6, so a + b ≤ 9 + 6 = 15. Values 20 and above are impossible, leaving a + b = 2 or 11.",
-          "Check that a + b = 11 is attainable: b = 2 gives a = 9 and 2952 = 36 × 82, while b = 6 gives a = 5 and 2556 = 36 × 71, both valid.",
-          "Therefore the maximum of a + b is 11. (The only qualifying four-digit numbers are 2052, 2556, and 2952, each verified directly.)"
+          "24 = 8 × 3 with 8 and 3 coprime, so 6a3b2 must be a multiple of both 8 and 3.",
+          "Divisibility by 8 depends only on the last three digits 3b2 = 302 + 10b. Since 302 = 8 × 37 + 6, we need 6 + 10b to be a multiple of 8; checking b, only b = 1, 5, 9 work (312 = 8 × 39, 352 = 8 × 44, 392 = 8 × 49).",
+          "Divisibility by 3 depends on the digit sum: 6 + a + 3 + b + 2 = 11 + a + b must be a multiple of 3.",
+          "b = 1: 12 + a must be a multiple of 3, so a = 0, 3, 6, 9: 4 pairs. b = 5: 16 + a, so a = 2, 5, 8: 3 pairs. b = 9: 20 + a, so a = 1, 4, 7: 3 pairs.",
+          "Altogether 4 + 3 + 3 = 10 pairs."
         ],
         "ja": [
-          "36 = 4 × 9 で 4 と 9 は互いに素なので、36 で割り切れることは 4 でも 9 でも割り切れることと同値です。",
-          "4 で割り切れるかは下 2 桁だけで決まるので、5b がつくる数 50 + b が 4 の倍数である必要があります。",
-          "b = 0 から 9 まで調べると 4 の倍数になるのは 52 と 56 だけなので、b は 2 か 6 です。",
-          "9 で割り切れるかは各位の和で決まります：2 + a + 5 + b = a + b + 7 が 9 の倍数である必要があります。",
-          "よって a + b + 7 ∈ {9, 18, 27, …}、すなわち a + b ∈ {2, 11, 20, …}。",
-          "次に a + b の上限を見ます。a は最大 9、b は 2 か 6 なので a + b ≤ 9 + 6 = 15。したがって 20 以上は不可能で、a + b は 2 か 11 です。",
-          "a + b = 11 が実現できるか確認します：b = 2 なら a = 9 で 2952 = 36 × 82、b = 6 なら a = 5 で 2556 = 36 × 71 となり、どちらも成立します。",
-          "したがって a + b の最大値は 11 です。（条件を満たす 4 桁の数は 2052、2556、2952 の 3 つだけで、すべて直接検証済みです。）"
+          "24 = 8 × 3 で 8 と 3 は互いに素なので、6a3b2 は 8 の倍数かつ 3 の倍数でなければならない。",
+          "8 の倍数かどうかは下 3 けた 3b2 = 302 + 10b だけで決まる。302 = 8 × 37 + 6 なので 6 + 10b が 8 の倍数であればよく、b を調べると b = 1、5、9 だけ（312 = 8 × 39、352 = 8 × 44、392 = 8 × 49）。",
+          "3 の倍数かどうかは各位の和で決まる：6 + a + 3 + b + 2 = 11 + a + b が 3 の倍数。",
+          "b = 1：12 + a が 3 の倍数で a = 0、3、6、9 の 4 組。b = 5：16 + a で a = 2、5、8 の 3 組。b = 9：20 + a で a = 1、4、7 の 3 組。",
+          "合計 4 + 3 + 3 = 10 組。"
         ]
       },
       "figure": {
@@ -288,25 +252,17 @@
       "answerMode": "integer_input",
       "correctAnswer": {
         "type": "integer",
-        "value": "11"
+        "value": "10"
       },
       "inputConstraints": {
         "allowNegative": false,
         "maxDigits": 2
       },
       "source": {
-        "type": "official_reference",
-        "name": "IMC",
-        "contest": "IMC Taiwan",
-        "year": "2026",
-        "round": "複賽",
-        "division": "10 年級",
-        "problemNumber": "選擇 6",
-        "reference": "22nd IMC Taiwan semifinal grade 10 choice 6",
-        "displayText": "IMC Taiwan 2026 複賽 10年級 選擇 6",
-        "sourceUrl": "https://imcct.net/UserFiles/news/583/20260417120202_1.pdf",
-        "rightsStatus": "needs_review",
-        "notes": "Rewritten from the official public competition PDF."
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "把合成數的整除拆成互質因數的整除條件，分別用末幾位與數字和判斷的題型",
+        "notes": "先用 8 的末三位條件鎖定 b 只能是 1、5、9，再依 b 分類用數字和數 a；問的是組數而非極值，學生要完整列舉，常見遺漏是忘了 a = 0。"
       },
       "olympiadTaxonomy": {
         "topic": "數論",
@@ -618,41 +574,45 @@
       "levelStage": "grade10",
       "challengeTier": "foundation",
       "prompt": {
-        "zh-Hant": "令 S = 1! + 2! + 3! + ⋯ + 100!。求 S² 除以 28 的餘數。",
-        "zh-Hans": "令 S = 1! + 2! + 3! + ⋯ + 100!。求 S² 除以 28 的余数。",
-        "en": "Let S = 1! + 2! + 3! + ⋯ + 100!. Find the remainder when S² is divided by 28.",
-        "ja": "S = 1! + 2! + 3! + ⋯ + 100! とします。S² を 28 で割った余りを求めなさい。"
+        "zh-Hant": "令 T = 1! + 2! + 3! + ⋯ + 2026!（n! 表示 1 × 2 × ⋯ × n）。T 除以 81 的餘數是多少？",
+        "zh-Hans": "令 T = 1! + 2! + 3! + ⋯ + 2026!（n! 表示 1 × 2 × ⋯ × n）。T 除以 81 的余数是多少？",
+        "en": "Add up n! = 1 × 2 × ⋯ × n for every n from 1 to 2026 and call the total T. What is left over after removing from T as many 81s as possible?",
+        "ja": "T = 1! + 2! + 3! + ⋯ + 2026!（n! は 1 × 2 × ⋯ × n を表す）とする。T を 81 で割った余りはいくつか。"
       },
       "answer": {
-        "zh-Hant": "答案是 25。",
-        "zh-Hans": "答案是 25。",
-        "en": "The answer is 25.",
-        "ja": "答えは 25 です。"
+        "zh-Hant": "答案是 63。",
+        "zh-Hans": "答案是 63。",
+        "en": "The answer is 63.",
+        "ja": "答えは 63 です。"
       },
       "solutionSteps": {
         "zh-Hant": [
-          "先看模 4：從 4! 開始都能被 4 整除，所以 S ≡ 1! + 2! + 3! = 9 ≡ 1 (mod 4)，因此 S² ≡ 1 (mod 4)。",
-          "再看模 7：從 7! 開始都能被 7 整除，所以 S ≡ 1! + 2! + 3! + 4! + 5! + 6! = 873 ≡ 5 (mod 7)。",
-          "因此 S² ≡ 25 ≡ 4 (mod 7)。",
-          "在 0 到 27 中，同時滿足餘 1 mod 4 且餘 4 mod 7 的數是 25。"
+          "81 = 3⁴。數一數 n! 裡有幾個因數 3：1 到 8 之中只有 3 和 6 各貢獻一個 3，所以 8! 只含 3²；乘上 9 = 3² 後，9! 含 3⁴，是 81 的倍數。",
+          "n ≥ 9 時 n! 都含有 9! 這個因數，都是 81 的倍數，所以 T 除以 81 的餘數等於 1! + 2! + ⋯ + 8! 除以 81 的餘數。",
+          "逐項取除以 81 的餘數（每項由前一項乘上 n 得到）：1、2、6、24；5! = 120 餘 39；6! 餘 39 × 6 = 234 → 234 − 162 = 72；7! 餘 72 × 7 = 504 → 504 − 486 = 18；8! 餘 18 × 8 = 144 → 144 − 81 = 63。",
+          "相加：1 + 2 + 6 + 24 + 39 + 72 + 18 + 63 = 225，225 − 162 = 63，所以餘數是 63。",
+          "驗算：1! + ⋯ + 8! = 46233 = 81 × 570 + 63，一致。"
         ],
         "zh-Hans": [
-          "先看模 4：从 4! 开始都能被 4 整除，所以 S ≡ 1! + 2! + 3! = 9 ≡ 1 (mod 4)，因此 S² ≡ 1 (mod 4)。",
-          "再看模 7：从 7! 开始都能被 7 整除，所以 S ≡ 1! + 2! + 3! + 4! + 5! + 6! = 873 ≡ 5 (mod 7)。",
-          "因此 S² ≡ 25 ≡ 4 (mod 7)。",
-          "在 0 到 27 中，同时满足余 1 mod 4 且余 4 mod 7 的数是 25。"
+          "81 = 3⁴。数一数 n! 里有几个因数 3：1 到 8 之中只有 3 和 6 各贡献一个 3，所以 8! 只含 3²；乘上 9 = 3² 后，9! 含 3⁴，是 81 的倍数。",
+          "n ≥ 9 时 n! 都含有 9! 这个因数，都是 81 的倍数，所以 T 除以 81 的余数等于 1! + 2! + ⋯ + 8! 除以 81 的余数。",
+          "逐项取除以 81 的余数（每项由前一项乘上 n 得到）：1、2、6、24；5! = 120 余 39；6! 余 39 × 6 = 234 → 234 − 162 = 72；7! 余 72 × 7 = 504 → 504 − 486 = 18；8! 余 18 × 8 = 144 → 144 − 81 = 63。",
+          "相加：1 + 2 + 6 + 24 + 39 + 72 + 18 + 63 = 225，225 − 162 = 63，所以余数是 63。",
+          "验算：1! + ⋯ + 8! = 46233 = 81 × 570 + 63，一致。"
         ],
         "en": [
-          "Modulo 4, every factorial from 4! onward is divisible by 4, so S ≡ 1! + 2! + 3! = 9 ≡ 1 (mod 4). Hence S² ≡ 1 (mod 4).",
-          "Modulo 7, every factorial from 7! onward is divisible by 7, so S ≡ 1! + 2! + 3! + 4! + 5! + 6! = 873 ≡ 5 (mod 7).",
-          "Therefore S² ≡ 25 ≡ 4 (mod 7).",
-          "The unique number from 0 to 27 that is 1 modulo 4 and 4 modulo 7 is 25."
+          "81 = 3⁴. Count the factors of 3 in n!: among 1 to 8 only 3 and 6 contribute one 3 each, so 8! contains only 3²; multiplying by 9 = 3² makes 9! contain 3⁴, a multiple of 81.",
+          "For n ≥ 9, n! contains 9! as a factor, so it is a multiple of 81. Hence T has the same remainder as 1! + 2! + ⋯ + 8!.",
+          "Take remainders mod 81 term by term (each term is the previous one times n): 1, 2, 6, 24; 5! = 120 gives 39; 6! gives 39 × 6 = 234 → 234 − 162 = 72; 7! gives 72 × 7 = 504 → 504 − 486 = 18; 8! gives 18 × 8 = 144 → 144 − 81 = 63.",
+          "Add: 1 + 2 + 6 + 24 + 39 + 72 + 18 + 63 = 225, and 225 − 162 = 63, so the remainder is 63.",
+          "Check: 1! + ⋯ + 8! = 46233 = 81 × 570 + 63, the same."
         ],
         "ja": [
-          "4 を法に見ると、4! 以降はすべて 4 の倍数なので S ≡ 1! + 2! + 3! = 9 ≡ 1 (mod 4)。したがって S² ≡ 1 (mod 4)。",
-          "7 を法に見ると、7! 以降はすべて 7 の倍数なので S ≡ 1! + 2! + 3! + 4! + 5! + 6! = 873 ≡ 5 (mod 7)。",
-          "よって S² ≡ 25 ≡ 4 (mod 7)。",
-          "0 から 27 のうち、4 で割って 1 余り、7 で割って 4 余る数は 25 です。"
+          "81 = 3⁴。n! に含まれる因数 3 を数えると、1〜8 では 3 と 6 が 1 つずつなので 8! は 3² しか含まない。9 = 3² を掛けると 9! は 3⁴ を含み、81 の倍数になる。",
+          "n ≥ 9 では n! は 9! を因数にもつので 81 の倍数。よって T の余りは 1! + 2! + ⋯ + 8! の余りと同じ。",
+          "各項を 81 で割った余りを順に求める（各項は前の項に n を掛けたもの）：1、2、6、24。5! = 120 は 39。6! は 39 × 6 = 234 → 234 − 162 = 72。7! は 72 × 7 = 504 → 504 − 486 = 18。8! は 18 × 8 = 144 → 144 − 81 = 63。",
+          "合計 1 + 2 + 6 + 24 + 39 + 72 + 18 + 63 = 225、225 − 162 = 63。余りは 63。",
+          "確認：1! + ⋯ + 8! = 46233 = 81 × 570 + 63 で一致。"
         ]
       },
       "figure": {
@@ -663,25 +623,17 @@
       "answerMode": "integer_input",
       "correctAnswer": {
         "type": "integer",
-        "value": "25"
+        "value": "63"
       },
       "inputConstraints": {
         "allowNegative": false,
         "maxDigits": 2
       },
       "source": {
-        "type": "official_reference",
-        "name": "IMC",
-        "contest": "IMC Taiwan",
-        "year": "2026",
-        "round": "複賽",
-        "division": "10 年級",
-        "problemNumber": "選擇 1",
-        "reference": "22nd IMC Taiwan semifinal grade 10 choice 1",
-        "displayText": "IMC Taiwan 2026 複賽 10年級 選擇 1",
-        "sourceUrl": "https://imcct.net/UserFiles/news/583/20260417120202_1.pdf",
-        "rightsStatus": "needs_review",
-        "notes": "Rewritten from the official public competition PDF."
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "階乘和除以某數的餘數，找出從哪一項起全部整除再截斷計算的題型",
+        "notes": "模數取 3⁴ = 81，學生必須數清楚因數 3 的個數，才知道要算到 8!（不是 4! 或 6!）；逐項取餘數可避免大數。"
       },
       "olympiadTaxonomy": {
         "topic": "數論",
@@ -704,65 +656,49 @@
       "levelStage": "grade10",
       "challengeTier": "foundation",
       "prompt": {
-        "zh-Hant": "正整數 a、b、c、d 滿足 gcd(a,b)=24、gcd(b,c)=36、gcd(c,d)=54，而且 70 < gcd(d,a) < 100。求一定整除 a 的最大質數。",
-        "zh-Hans": "正整数 a、b、c、d 满足 gcd(a,b)=24、gcd(b,c)=36、gcd(c,d)=54，而且 70 < gcd(d,a) < 100。求一定整除 a 的最大质数。",
-        "en": "Positive integers a, b, c, and d satisfy gcd(a,b)=24, gcd(b,c)=36, gcd(c,d)=54, and 70 < gcd(d,a) < 100. Find the largest prime that must divide a.",
-        "ja": "正の整数 a、b、c、d が gcd(a,b)=24、gcd(b,c)=36、gcd(c,d)=54 を満たし、さらに 70 < gcd(d,a) < 100 とします。a を必ず割り切る素数のうち最大のものを求めなさい。"
+        "zh-Hant": "正整數 a、b、c 滿足：a 與 b 的最大公因數是 12，b 與 c 的最大公因數是 18，而 a 與 c 的最大公因數大於 70、小於 90。a 與 c 的最大公因數是多少？",
+        "zh-Hans": "正整数 a、b、c 满足：a 与 b 的最大公约数是 12，b 与 c 的最大公约数是 18，而 a 与 c 的最大公约数大于 70、小于 90。a 与 c 的最大公约数是多少？",
+        "en": "For whole numbers a, b, c > 0: a and b share 12 as greatest common divisor, b and c share 18, while a and c have a greatest common divisor strictly between 70 and 90. What is that last one?",
+        "ja": "正の整数 a、b、c について、a と b の最大公約数は 12、b と c の最大公約数は 18、a と c の最大公約数は 70 より大きく 90 より小さい。a と c の最大公約数はいくつか。"
       },
       "answer": {
-        "zh-Hant": "答案是 13。",
-        "zh-Hans": "答案是 13。",
-        "en": "The answer is 13.",
-        "ja": "答えは 13 です。"
+        "zh-Hant": "答案是 78。",
+        "zh-Hans": "答案是 78。",
+        "en": "The answer is 78.",
+        "ja": "答えは 78 です。"
       },
       "solutionSteps": {
         "zh-Hant": [
-          "先分解：24 = 2³ × 3、36 = 2² × 3²、54 = 2 × 3³。**最大公因數在每個質因數上取的是兩者指數的較小值**，所以四個條件可以拆成「2 的指數」與「3 的指數」兩條獨立的鏈分別追。",
-          "**先追 2 的指數**，把 x 的 2 的指數記成 v(x)。由 gcd(a, b) = 24 得 min(v(a), v(b)) = 3，所以 **v(a) ≥ 3 且 v(b) ≥ 3**。",
-          "由 gcd(b, c) = 36 得 min(v(b), v(c)) = 2。**因為 v(b) ≥ 3 > 2，這個最小值只能由 c 提供**，所以 **v(c) 恰好是 2**。",
-          "由 gcd(c, d) = 54 得 min(v(c), v(d)) = 1。同理 v(c) = 2 > 1，所以 **v(d) 恰好是 1**。於是 gcd(a, d) 的 2 的指數 = min(v(a), v(d)) = min(≥3, 1) = **1**——**這一步正是「a 很多個 2 也沒用，被 d 卡死在 2¹」的關鍵**。",
-          "**再追 3 的指數**，記成 w(x)。由 gcd(b, c) = 36 得 min(w(b), w(c)) = 2，所以 **w(b) ≥ 2**。",
-          "由 gcd(a, b) = 24 = 2³ × 3 得 min(w(a), w(b)) = 1。**因為 w(b) ≥ 2 > 1，只能由 a 提供**，所以 **w(a) 恰好是 1**。又由 gcd(c, d) = 54 = 2 × 3³ 得 w(d) ≥ 3，所以 gcd(a, d) 的 3 的指數 = min(1, ≥3) = **1**。",
-          "兩條鏈合起來：gcd(a, d) = 2¹ × 3¹ × k = **6k**，其中 **k 不含質因數 2 與 3**（2 與 3 的部分已經被鎖死，剩下的因數只能來自其他質數）。",
-          "代入範圍 70 < 6k < 100。這個區間裡 6 的倍數是 72、78、84、90、96，對應 k = 12、13、14、15、16。逐一檢查 k 是否與 6 互質：12 ✗（含 2、3）、**13 ✓**、14 ✗（含 2）、15 ✗（含 3）、16 ✗（含 2）。**只有 k = 13 通過**。",
-          "所以 gcd(a, d) = 78 = 2 × 3 × 13。既然 78 整除 a，**2、3、13 都一定整除 a**，其中最大的質數是 **13**。",
-          "驗算：舉一組真的滿足全部條件的實例——**a = 2³ × 3 × 13 = 312、b = 2³ × 3² = 72、c = 2² × 3³ = 108、d = 2 × 3³ × 13 = 702**。核對四個條件：gcd(312, 72) = 24 ✓、gcd(72, 108) = 36 ✓、gcd(108, 702) = 54 ✓、gcd(702, 312) = 78 ✓ 且 70 < 78 < 100 ✓ 全部成立。**而這個 a = 312 沒有任何大於 13 的質因數**，所以 13 確實是「一定整除 a」的最大質數，不會更大。"
+          "b 同時是 12 和 18 的倍數，所以是 36 = 2² × 3² 的倍數：b 至少含 2² 與 3²。",
+          "a 與 b 的最大公因數是 12 = 2² × 3：b 已含 3²，最大公因數卻只有一個 3，所以 a 恰好含一個因數 3；a 至少含 2²。",
+          "b 與 c 的最大公因數是 18 = 2 × 3²：b 已含 2²，最大公因數卻只有一個 2，所以 c 恰好含一個因數 2；c 至少含 3²。",
+          "所以 a、c 的最大公因數裡，2 恰好一個（c 只有一個）、3 恰好一個（a 只有一個），可寫成 6m，m 不含因數 2 和 3。",
+          "70 < 6m < 90 得 m 是 12、13、14 之一，其中不含因數 2、3 的只有 13，所以最大公因數是 6 × 13 = 78。",
+          "確實做得到：a = 156、b = 36、c = 234 時，三組最大公因數依序是 12、18、78。"
         ],
         "zh-Hans": [
-          "先分解：24 = 2³ × 3、36 = 2² × 3²、54 = 2 × 3³。**最大公约数在每个质因数上取的是两者指数的较小值**，所以四个条件可以拆成「2 的指数」与「3 的指数」两条独立的链分别追。",
-          "**先追 2 的指数**，把 x 的 2 的指数记成 v(x)。由 gcd(a, b) = 24 得 min(v(a), v(b)) = 3，所以 **v(a) ≥ 3 且 v(b) ≥ 3**。",
-          "由 gcd(b, c) = 36 得 min(v(b), v(c)) = 2。**因为 v(b) ≥ 3 > 2，这个最小值只能由 c 提供**，所以 **v(c) 恰好是 2**。",
-          "由 gcd(c, d) = 54 得 min(v(c), v(d)) = 1。同理 v(c) = 2 > 1，所以 **v(d) 恰好是 1**。于是 gcd(a, d) 的 2 的指数 = min(v(a), v(d)) = min(≥3, 1) = **1**——**这一步正是「a 很多个 2 也没用，被 d 卡死在 2¹」的关键**。",
-          "**再追 3 的指数**，记成 w(x)。由 gcd(b, c) = 36 得 min(w(b), w(c)) = 2，所以 **w(b) ≥ 2**。",
-          "由 gcd(a, b) = 24 = 2³ × 3 得 min(w(a), w(b)) = 1。**因为 w(b) ≥ 2 > 1，只能由 a 提供**，所以 **w(a) 恰好是 1**。又由 gcd(c, d) = 54 = 2 × 3³ 得 w(d) ≥ 3，所以 gcd(a, d) 的 3 的指数 = min(1, ≥3) = **1**。",
-          "两条链合起来：gcd(a, d) = 2¹ × 3¹ × k = **6k**，其中 **k 不含质因数 2 与 3**（2 与 3 的部分已经被锁死，剩下的因数只能来自其他质数）。",
-          "代入范围 70 < 6k < 100。这个区间里 6 的倍数是 72、78、84、90、96，对应 k = 12、13、14、15、16。逐一检查 k 是否与 6 互质：12 ✗（含 2、3）、**13 ✓**、14 ✗（含 2）、15 ✗（含 3）、16 ✗（含 2）。**只有 k = 13 通过**。",
-          "所以 gcd(a, d) = 78 = 2 × 3 × 13。既然 78 整除 a，**2、3、13 都一定整除 a**，其中最大的质数是 **13**。",
-          "验算：举一组真的满足全部条件的实例——**a = 2³ × 3 × 13 = 312、b = 2³ × 3² = 72、c = 2² × 3³ = 108、d = 2 × 3³ × 13 = 702**。核对四个条件：gcd(312, 72) = 24 ✓、gcd(72, 108) = 36 ✓、gcd(108, 702) = 54 ✓、gcd(702, 312) = 78 ✓ 且 70 < 78 < 100 ✓ 全部成立。**而这个 a = 312 没有任何大于 13 的质因数**，所以 13 确实是「一定整除 a」的最大质数，不会更大。"
+          "b 同时是 12 和 18 的倍数，所以是 36 = 2² × 3² 的倍数：b 至少含 2² 与 3²。",
+          "a 与 b 的最大公约数是 12 = 2² × 3：b 已含 3²，最大公约数却只有一个 3，所以 a 恰好含一个因数 3；a 至少含 2²。",
+          "b 与 c 的最大公约数是 18 = 2 × 3²：b 已含 2²，最大公约数却只有一个 2，所以 c 恰好含一个因数 2；c 至少含 3²。",
+          "所以 a、c 的最大公约数里，2 恰好一个（c 只有一个）、3 恰好一个（a 只有一个），可写成 6m，m 不含因数 2 和 3。",
+          "70 < 6m < 90 得 m 是 12、13、14 之一，其中不含因数 2、3 的只有 13，所以最大公约数是 6 × 13 = 78。",
+          "确实做得到：a = 156、b = 36、c = 234 时，三组最大公约数依序是 12、18、78。"
         ],
         "en": [
-          "Factorise first: 24 = 2³ × 3, 36 = 2² × 3², 54 = 2 × 3³. A gcd takes the smaller exponent at each prime, so the four conditions split into two independent chains, one for the exponent of 2 and one for the exponent of 3.",
-          "Follow the exponent of 2 first, writing v(x) for it. From gcd(a, b) = 24 we get min(v(a), v(b)) = 3, so v(a) ≥ 3 and v(b) ≥ 3.",
-          "From gcd(b, c) = 36 we get min(v(b), v(c)) = 2. Since v(b) ≥ 3 > 2, that minimum can only come from c, so v(c) is exactly 2.",
-          "From gcd(c, d) = 54 we get min(v(c), v(d)) = 1, and since v(c) = 2 > 1 the same reasoning gives v(d) exactly 1. Hence the exponent of 2 in gcd(a, d) is min(v(a), v(d)) = min(at least 3, 1) = 1. This is the crucial step: however many factors of 2 sit inside a, d pins the gcd down to 2¹.",
-          "Now follow the exponent of 3, written w(x). From gcd(b, c) = 36 we get min(w(b), w(c)) = 2, so w(b) ≥ 2.",
-          "From gcd(a, b) = 24 = 2³ × 3 we get min(w(a), w(b)) = 1, and since w(b) ≥ 2 > 1 that minimum can only come from a, so w(a) is exactly 1. From gcd(c, d) = 54 = 2 × 3³ we also get w(d) ≥ 3, so the exponent of 3 in gcd(a, d) is min(1, at least 3) = 1.",
-          "Putting the two chains together, gcd(a, d) = 2¹ × 3¹ × k = 6k, where k has no prime factor 2 or 3, since those parts are already pinned down and anything left must come from other primes.",
-          "Now impose 70 < 6k < 100. The multiples of 6 in that range are 72, 78, 84, 90 and 96, giving k = 12, 13, 14, 15, 16. Checking which k are coprime to 6: 12 fails, 13 works, 14 has a factor 2, 15 has a factor 3, and 16 has a factor 2. Only k = 13 survives.",
-          "So gcd(a, d) = 78 = 2 × 3 × 13. Since 78 divides a, the primes 2, 3 and 13 all must divide a, and the largest of them is 13.",
-          "Check with an explicit example satisfying every condition: a = 2³ × 3 × 13 = 312, b = 2³ × 3² = 72, c = 2² × 3³ = 108, d = 2 × 3³ × 13 = 702. Then gcd(312, 72) = 24, gcd(72, 108) = 36, gcd(108, 702) = 54, and gcd(702, 312) = 78 with 70 < 78 < 100, so all four conditions hold. This a = 312 has no prime factor larger than 13, confirming that 13 really is the largest prime forced to divide a."
+          "b is a multiple of both 12 and 18, hence of 36 = 2² × 3²: b contains at least 2² and 3².",
+          "The gcd of a and b is 12 = 2² × 3: b already has 3², yet the gcd has only one 3, so a has exactly one factor 3; a also has at least 2².",
+          "The gcd of b and c is 18 = 2 × 3²: b already has 2², yet the gcd has only one 2, so c has exactly one factor 2; c also has at least 3².",
+          "So in the gcd of a and c there is exactly one 2 (c has only one) and exactly one 3 (a has only one): it equals 6m with m having no factor 2 or 3.",
+          "70 < 6m < 90 gives m = 12, 13 or 14, and the only one without factors 2 or 3 is 13, so the gcd is 6 × 13 = 78.",
+          "It is achievable: with a = 156, b = 36, c = 234 the three gcds are 12, 18 and 78."
         ],
         "ja": [
-          "まず素因数分解します：24 = 2³ × 3、36 = 2² × 3²、54 = 2 × 3³。**最大公約数は各素因数について指数の小さい方を取る**ので、四つの条件は「2 の指数」と「3 の指数」という独立した二本の鎖に分けて追えます。",
-          "**まず 2 の指数**を追い、x の 2 の指数を v(x) と書きます。gcd(a, b) = 24 より min(v(a), v(b)) = 3、よって **v(a) ≥ 3 かつ v(b) ≥ 3**。",
-          "gcd(b, c) = 36 より min(v(b), v(c)) = 2。**v(b) ≥ 3 > 2 なので、この最小値は c 側からしか来ません**。よって **v(c) はちょうど 2**。",
-          "gcd(c, d) = 54 より min(v(c), v(d)) = 1。同様に v(c) = 2 > 1 なので **v(d) はちょうど 1**。したがって gcd(a, d) の 2 の指数は min(v(a), v(d)) = min(3 以上, 1) = **1**——**a にいくら 2 が入っていても d が 2¹ で止める**、これが要です。",
-          "**次に 3 の指数**を w(x) と書いて追います。gcd(b, c) = 36 より min(w(b), w(c)) = 2、よって **w(b) ≥ 2**。",
-          "gcd(a, b) = 24 = 2³ × 3 より min(w(a), w(b)) = 1。**w(b) ≥ 2 > 1 なので a 側からしか来ず**、**w(a) はちょうど 1**。また gcd(c, d) = 54 = 2 × 3³ より w(d) ≥ 3 なので、gcd(a, d) の 3 の指数は min(1, 3 以上) = **1**。",
-          "二本の鎖を合わせると gcd(a, d) = 2¹ × 3¹ × k = **6k**。ここで **k は素因数 2 と 3 を含みません**（2 と 3 の分はすでに固定され、残りは他の素数からしか来ないため）。",
-          "範囲 70 < 6k < 100 を入れます。この区間の 6 の倍数は 72、78、84、90、96 で、k = 12、13、14、15、16 に対応。k が 6 と互いに素かを確認すると 12 ✗、**13 ✓**、14 ✗（2 を含む）、15 ✗（3 を含む）、16 ✗（2 を含む）。**k = 13 だけが残ります**。",
-          "よって gcd(a, d) = 78 = 2 × 3 × 13。78 が a を割り切るので **2、3、13 はいずれも必ず a を割り切り**、その中で最大の素数は **13** です。",
-          "検算：すべての条件を実際に満たす例を挙げます——**a = 2³ × 3 × 13 = 312、b = 2³ × 3² = 72、c = 2² × 3³ = 108、d = 2 × 3³ × 13 = 702**。gcd(312, 72) = 24 ✓、gcd(72, 108) = 36 ✓、gcd(108, 702) = 54 ✓、gcd(702, 312) = 78 ✓ で 70 < 78 < 100 ✓ とすべて成立。**しかもこの a = 312 には 13 より大きい素因数がない**ので、13 が「必ず a を割り切る最大の素数」であり、それ以上にはならないことも確認できます。"
+          "b は 12 と 18 の両方の倍数なので 36 = 2² × 3² の倍数。b は少なくとも 2² と 3² を含む。",
+          "a と b の最大公約数は 12 = 2² × 3。b は 3² を含むのに最大公約数には 3 が 1 つしかないので、a はちょうど 1 つの因数 3 をもつ。また a は少なくとも 2² を含む。",
+          "b と c の最大公約数は 18 = 2 × 3²。b は 2² を含むのに最大公約数には 2 が 1 つしかないので、c はちょうど 1 つの因数 2 をもつ。また c は少なくとも 3² を含む。",
+          "よって a と c の最大公約数には 2 がちょうど 1 つ（c に 1 つしかない）、3 がちょうど 1 つ（a に 1 つしかない）含まれ、6m（m は 2 も 3 も因数にもたない）と書ける。",
+          "70 < 6m < 90 より m は 12、13、14 のどれかで、2 も 3 も因数にもたないのは 13 だけ。よって最大公約数は 6 × 13 = 78。",
+          "実際に a = 156、b = 36、c = 234 とすると、3 つの最大公約数は順に 12、18、78 になる。"
         ]
       },
       "figure": {
@@ -773,25 +709,17 @@
       "answerMode": "integer_input",
       "correctAnswer": {
         "type": "integer",
-        "value": "13"
+        "value": "78"
       },
       "inputConstraints": {
         "allowNegative": false,
         "maxDigits": 2
       },
       "source": {
-        "type": "official_reference",
-        "name": "AMC 10",
-        "contest": "AMC 10",
-        "year": "2018",
-        "round": "A",
-        "division": "Grade 9-10",
-        "problemNumber": "Problem 22",
-        "reference": "2018 AMC 10A Problem 22",
-        "displayText": "AMC 10A 2018 Problem 22",
-        "sourceUrl": "https://artofproblemsolving.com/wiki/index.php/2018_AMC_10A_Problems/Problem_22",
-        "rightsStatus": "needs_review",
-        "notes": "Rewritten from a publicly archived competition statement."
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "由幾組最大公因數的質因數次方推出另一組最大公因數的題型",
+        "notes": "關鍵是比較每個質因數的次方：b 的 3² 迫使 a 只有一個 3，b 的 2² 迫使 c 只有一個 2；範圍 70 到 90 剛好只留下 m = 13，並給出實例確認存在。"
       },
       "olympiadTaxonomy": {
         "topic": "數論",
@@ -814,53 +742,37 @@
       "levelStage": "grade10",
       "challengeTier": "foundation",
       "prompt": {
-        "zh-Hant": "十六進位除了 0 到 9 外，還用 A 到 F 表示 10 到 15。在前 1000 個正整數中，設有 n 個數的十六進位表示只含數字 0 到 9、不含 A 到 F。求 n 的各位數字和。",
-        "zh-Hans": "十六进位除了 0 到 9 外，还用 A 到 F 表示 10 到 15。在前 1000 个正整数中，设有 n 个数的十六进位表示只含数字 0 到 9、不含 A 到 F。求 n 的各位数字和。",
-        "en": "In hexadecimal, the digits A through F represent 10 through 15. Among the first 1000 positive integers, let n be the number whose hexadecimal representation uses only the symbols 0 through 9 and no letters. What is the sum of the digits of n?",
-        "ja": "16 進法では A から F が 10 から 15 を表します。最初の 1000 個の正の整数のうち、16 進表示に 0 から 9 だけを用い、A から F を含まないものの個数を n とします。n の各位の和を求めなさい。"
+        "zh-Hant": "五進位只用 0、1、2、3、4 五個數字（例如 38 寫成 123₅，因為 1 × 25 + 2 × 5 + 3 = 38）。在 1 到 1000 的正整數中，寫成五進位後只用到數字 0 和 1 的有幾個？",
+        "zh-Hans": "五进制只用 0、1、2、3、4 五个数字（例如 38 写成 123₅，因为 1 × 25 + 2 × 5 + 3 = 38）。在 1 到 1000 的正整数中，写成五进制后只用到数字 0 和 1 的有几个？",
+        "en": "In base 5 each place holds 0, 1, 2, 3 or 4 (e.g. 38 is 123₅ since 1 × 25 + 2 × 5 + 3 = 38). How many whole numbers from 1 up to 1000 need nothing but 0s and 1s when written this way?",
+        "ja": "5 進法では 0、1、2、3、4 の 5 つの数字だけを使う（たとえば 38 は 1 × 25 + 2 × 5 + 3 = 38 なので 123₅ と書く）。1 から 1000 までの整数のうち、5 進法で書いたとき数字 0 と 1 だけを使うものは何個あるか。"
       },
       "answer": {
-        "zh-Hant": "答案是 21。",
-        "zh-Hans": "答案是 21。",
-        "en": "The answer is 21.",
-        "ja": "答えは 21 です。"
+        "zh-Hant": "答案是 31。",
+        "zh-Hans": "答案是 31。",
+        "en": "The answer is 31.",
+        "ja": "答えは 31 です。"
       },
       "solutionSteps": {
         "zh-Hant": [
-          "先把 1000 轉成十六進位：1000 = 3 × 256 + 14 × 16 + 8，所以 1000 的十六進位表示是 3E8。",
-          "因此 1 到 1000 的數，其十六進位表示最多只有三位。",
-          "若要求三個位數都只用 0 到 9，先看十六進位的百位：它最大只能是 3（因為 4 × 256 = 1024 已經超過 1000）。",
-          "所以百位有 0、1、2、3 共 4 種選擇，十位與個位各有 0 到 9 共 10 種選擇。",
-          "這樣的組合共有 4 × 10 × 10 = 400 個，但其中包含全為 0 的那一組，對應到數字 0，不是正整數。",
-          "扣掉之後得 n = 400 − 1 = 399。（要確認上界：百位為 3 時最大是 3 9 9 十六進位，等於 3 × 256 + 9 × 16 + 9 = 921，確實不超過 1000。）",
-          "最後求 n 的各位數字和：3 + 9 + 9 = 21。"
+          "五進位只用 0 和 1 的數，就是把幾個不同的 5 的次方（1、5、25、125、625、⋯）各取一次相加得到的數。",
+          "5⁵ = 3125 已經超過 1000，所以只能用 1、5、25、125、625 這五個；而且全部加起來 1 + 5 + 25 + 125 + 625 = 781 ≤ 1000，任何取法都不會超過 1000。",
+          "五個次方各有「取」或「不取」兩種選擇，共 2⁵ = 32 種；不同取法給出不同的數（五進位寫法唯一），扣掉一個都不取的 0，共 32 − 1 = 31 個。"
         ],
         "zh-Hans": [
-          "先把 1000 转成十六进位：1000 = 3 × 256 + 14 × 16 + 8，所以 1000 的十六进位表示是 3E8。",
-          "因此 1 到 1000 的数，其十六进位表示最多只有三位。",
-          "若要求三个位数都只用 0 到 9，先看十六进位的百位：它最大只能是 3（因为 4 × 256 = 1024 已经超过 1000）。",
-          "所以百位有 0、1、2、3 共 4 种选择，十位与个位各有 0 到 9 共 10 种选择。",
-          "这样的组合共有 4 × 10 × 10 = 400 个，但其中包含全为 0 的那一组，对应到数字 0，不是正整数。",
-          "扣掉之后得 n = 400 − 1 = 399。（要确认上界：百位为 3 时最大是 3 9 9 十六进位，等于 3 × 256 + 9 × 16 + 9 = 921，确实不超过 1000。）",
-          "最后求 n 的各位数字和：3 + 9 + 9 = 21。"
+          "五进制只用 0 和 1 的数，就是把几个不同的 5 的次方（1、5、25、125、625、⋯）各取一次相加得到的数。",
+          "5⁵ = 3125 已经超过 1000，所以只能用 1、5、25、125、625 这五个；而且全部加起来 1 + 5 + 25 + 125 + 625 = 781 ≤ 1000，任何取法都不会超过 1000。",
+          "五个次方各有「取」或「不取」两种选择，共 2⁵ = 32 种；不同取法给出不同的数（五进制写法唯一），扣掉一个都不取的 0，共 32 − 1 = 31 个。"
         ],
         "en": [
-          "First convert 1000 to hexadecimal: 1000 = 3 × 256 + 14 × 16 + 8, so 1000 is 3E8 in hex.",
-          "Hence every number from 1 to 1000 has at most three hexadecimal digits.",
-          "If all three digits must lie in 0 through 9, consider the leading (256s) digit first: it can be at most 3, since 4 × 256 = 1024 already exceeds 1000.",
-          "So the leading digit has 4 choices (0, 1, 2, 3) and each of the other two digits has 10 choices (0 through 9).",
-          "That gives 4 × 10 × 10 = 400 combinations, but one of them is all zeros, which represents 0 and is not a positive integer.",
-          "Subtracting it gives n = 400 − 1 = 399. (Check the upper bound: with leading digit 3 the largest such number is 399 in hex, equal to 3 × 256 + 9 × 16 + 9 = 921, indeed below 1000.)",
-          "Finally, the digit sum of n is 3 + 9 + 9 = 21."
+          "A number written with only 0s and 1s in base five is exactly a sum of distinct powers of 5 (1, 5, 25, 125, 625, …), each used at most once.",
+          "5⁵ = 3125 already exceeds 1000, so only 1, 5, 25, 125, 625 are usable; and even all of them add to 1 + 5 + 25 + 125 + 625 = 781 ≤ 1000, so no choice exceeds 1000.",
+          "Each of the five powers is either taken or not, 2⁵ = 32 choices; different choices give different numbers (base-five notation is unique), and removing the empty choice (which gives 0) leaves 32 − 1 = 31 numbers."
         ],
         "ja": [
-          "まず 1000 を 16 進法に直します：1000 = 3 × 256 + 14 × 16 + 8 なので、1000 は 16 進法で 3E8 です。",
-          "したがって 1 から 1000 までの数は 16 進法で高々 3 桁です。",
-          "3 桁すべてが 0 から 9 であるとき、まず 16 進法の最上位（256 の位）を見ます。4 × 256 = 1024 は 1000 を超えるので、最上位は最大でも 3 です。",
-          "よって最上位は 0、1、2、3 の 4 通り、残る 2 桁はそれぞれ 0 から 9 の 10 通りです。",
-          "組合せは 4 × 10 × 10 = 400 個ですが、そのうちすべて 0 のものは数 0 を表し正の整数ではありません。",
-          "これを除いて n = 400 − 1 = 399。（上限の確認：最上位が 3 のとき最大は 16 進法の 399 で 3 × 256 + 9 × 16 + 9 = 921 となり 1000 以下です。）",
-          "最後に n の各位の和は 3 + 9 + 9 = 21。"
+          "5 進法で 0 と 1 だけで書ける数は、異なる 5 のべき（1、5、25、125、625、…）をそれぞれ高々 1 回ずつ足した数にほかならない。",
+          "5⁵ = 3125 は 1000 を超えるので、使えるのは 1、5、25、125、625 の 5 つ。しかも全部足しても 1 + 5 + 25 + 125 + 625 = 781 ≤ 1000 で、どの選び方も 1000 を超えない。",
+          "5 つのべきそれぞれに「使う・使わない」の 2 通りで 2⁵ = 32 通り。選び方が違えば数も違う（5 進法の表し方は一意）。何も使わない 0 を除いて 32 − 1 = 31 個。"
         ]
       },
       "figure": {
@@ -871,25 +783,17 @@
       "answerMode": "integer_input",
       "correctAnswer": {
         "type": "integer",
-        "value": "21"
+        "value": "31"
       },
       "inputConstraints": {
         "allowNegative": false,
         "maxDigits": 2
       },
       "source": {
-        "type": "official_reference",
-        "name": "AMC 10",
-        "contest": "AMC 10",
-        "year": "2015",
-        "round": "A",
-        "division": "Grade 9-10",
-        "problemNumber": "Problem 18",
-        "reference": "2015 AMC 10A Problem 18",
-        "displayText": "AMC 10A 2015 Problem 18",
-        "sourceUrl": "https://artofproblemsolving.com/wiki/index.php/2015_AMC_10A_Problems/Problem_18",
-        "rightsStatus": "needs_review",
-        "notes": "Rewritten from a publicly archived competition statement."
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "在某進位制下只用特定數字的整數個數，轉成「不同次方之和」計數的題型",
+        "notes": "關鍵轉折是把「只用 0 和 1」看成每個 5 的次方取或不取；學生要確認最大和 781 不超過 1000，並記得扣掉 0。"
       },
       "olympiadTaxonomy": {
         "topic": "數論",
@@ -911,65 +815,41 @@
       "levelStage": "grade10",
       "challengeTier": "foundation",
       "prompt": {
-        "zh-Hant": "把一個有 k 位數的整數 88…8（每一位都是 8）乘以 8，所得乘積的各位數字和是 1000。求 k。",
-        "zh-Hans": "把一个有 k 位数的整数 88…8（每一位都是 8）乘以 8，所得乘积的各位数字和是 1000。求 k。",
-        "en": "Let the second factor be the k-digit integer 88...8, with every digit equal to 8. The sum of the digits of 8·(88...8) is 1000. Find k.",
-        "ja": "k 桁の数 88...8（すべての桁が 8）に 8 を掛けます。その積の各桁の和が 1000 になるとき、k を求めなさい。"
+        "zh-Hant": "N 是由 k 個 7 組成的整數 77⋯7。已知 8 × N 的各位數字和是 2025，k 是多少？",
+        "zh-Hans": "N 是由 k 个 7 组成的整数 77⋯7。已知 8 × N 的各位数字和是 2025，k 是多少？",
+        "en": "Take k sevens in a row, 77⋯7, and multiply by 8. If the resulting number's digit total is 2025, what is k?",
+        "ja": "N は 7 が k 個並んだ整数 77⋯7 である。8 × N の各位の数字の和が 2025 のとき、k はいくつか。"
       },
       "answer": {
-        "zh-Hant": "答案是 991。",
-        "zh-Hans": "答案是 991。",
-        "en": "The answer is 991.",
-        "ja": "答えは 991 です。"
+        "zh-Hant": "答案是 1008。",
+        "zh-Hans": "答案是 1008。",
+        "en": "The answer is 1008.",
+        "ja": "答えは 1008 です。"
       },
       "solutionSteps": {
         "zh-Hant": [
-          "先看前幾個例子：8×8=64，8×88=704，8×888=7104，8×8888=71104。",
-          "光看幾個例子還不能保證 k = 991 時也長這樣，所以用直式乘法把每一欄實際算一次。",
-          "個位：8 × 8 = 64，寫下 **4**、進位 6。",
-          "十位：8 × 8 + 6 = 70，寫下 **0**、進位 7。",
-          "百位：8 × 8 + 7 = 71，寫下 **1**、進位 7——**進位又回到 7，所以從這一欄起每一欄都完全相同**，一路到第 k 欄都是寫下 1、進位 7。",
-          "算完第 k 欄之後，剩下的進位 7 直接寫在最前面。",
-          "所以乘積的長相是：首位 7，接著第 3 欄到第 k 欄共 k − 2 個 1，最後兩位是 0 和 4（k ≥ 2 時）。",
-          "因此各位數字和是 7 + (k-2)×1 + 0 + 4 = k+9。",
-          "題目說這個數字和是 1000，所以 k+9=1000。",
-          "解得 k=991。"
+          "先算幾個小例子：8 × 7 = 56，8 × 77 = 616，8 × 777 = 6216，8 × 7777 = 62216。",
+          "說明規律：8 × 77⋯7 = 56 × 11⋯1 = 50 × 11⋯1 + 6 × 11⋯1 = 55⋯50 + 66⋯6（各 k 位的 5 後面補 0，與 k 個 6 相加）。直式加法：個位 0 + 6 = 6；十位 5 + 6 = 11，寫 1 進 1；再往上每一位 5 + 6 + 1 = 12，寫 2 進 1；最高位 5 + 1 = 6。",
+          "所以 k ≥ 2 時，8 × N = 6 22⋯2 1 6，中間有 k − 2 個 2。數字和 = 6 + 2(k − 2) + 1 + 6 = 2k + 9。",
+          "2k + 9 = 2025，所以 2k = 2016，k = 1008。"
         ],
         "zh-Hans": [
-          "先看前几个例子：8×8=64，8×88=704，8×888=7104，8×8888=71104。",
-          "光看几个例子还不能保证 k = 991 时也长这样，所以用竖式乘法把每一栏实际算一次。",
-          "个位：8 × 8 = 64，写下 **4**、进位 6。",
-          "十位：8 × 8 + 6 = 70，写下 **0**、进位 7。",
-          "百位：8 × 8 + 7 = 71，写下 **1**、进位 7——**进位又回到 7，所以从这一栏起每一栏都完全相同**，一路到第 k 栏都是写下 1、进位 7。",
-          "算完第 k 栏之后，剩下的进位 7 直接写在最前面。",
-          "所以乘积的长相是：首位 7，接着第 3 栏到第 k 栏共 k − 2 个 1，最后两位是 0 和 4（k ≥ 2 时）。",
-          "因此各位数字和是 7 + (k-2)×1 + 0 + 4 = k+9。",
-          "题目说这个数字和是 1000，所以 k+9=1000。",
-          "解得 k=991。"
+          "先算几个小例子：8 × 7 = 56，8 × 77 = 616，8 × 777 = 6216，8 × 7777 = 62216。",
+          "说明规律：8 × 77⋯7 = 56 × 11⋯1 = 50 × 11⋯1 + 6 × 11⋯1 = 55⋯50 + 66⋯6（各 k 位的 5 后面补 0，与 k 个 6 相加）。直式加法：个位 0 + 6 = 6；十位 5 + 6 = 11，写 1 进 1；再往上每一位 5 + 6 + 1 = 12，写 2 进 1；最高位 5 + 1 = 6。",
+          "所以 k ≥ 2 时，8 × N = 6 22⋯2 1 6，中间有 k − 2 个 2。数字和 = 6 + 2(k − 2) + 1 + 6 = 2k + 9。",
+          "2k + 9 = 2025，所以 2k = 2016，k = 1008。"
         ],
         "en": [
-          "Compute a few cases: 8·8=64, 8·88=704, 8·888=7104, and 8·8888=71104.",
-          "A few examples do not yet guarantee the same shape at k = 991, so work through the long multiplication column by column.",
-          "Units column: 8 × 8 = 64, write 4 and carry 6.",
-          "Tens column: 8 × 8 + 6 = 70, write 0 and carry 7.",
-          "Hundreds column: 8 × 8 + 7 = 71, write 1 and carry 7 — the carry is 7 again, so every column from here on is identical, writing 1 and carrying 7 all the way to column k.",
-          "After column k the remaining carry of 7 is written at the front.",
-          "So the product looks like this: a leading 7, then k − 2 ones from column 3 through column k, and 0 and 4 as the last two digits (for k ≥ 2).",
-          "So the sum of its digits is 7 + (k-2) + 0 + 4 = k+9.",
-          "We are told this sum is 1000, so k+9=1000.",
-          "Hence k=991."
+          "Try small cases: 8 × 7 = 56, 8 × 77 = 616, 8 × 777 = 6216, 8 × 7777 = 62216.",
+          "Why: 8 × 77⋯7 = 56 × 11⋯1 = 50 × 11⋯1 + 6 × 11⋯1 = 55⋯50 + 66⋯6 (k fives followed by a 0, plus k sixes). Column addition: units 0 + 6 = 6; tens 5 + 6 = 11, write 1 carry 1; every higher column 5 + 6 + 1 = 12, write 2 carry 1; the top column 5 + 1 = 6.",
+          "So for k ≥ 2, 8 × N = 6 22⋯2 1 6 with k − 2 twos in the middle. Its digit sum is 6 + 2(k − 2) + 1 + 6 = 2k + 9.",
+          "2k + 9 = 2025 gives 2k = 2016, so k = 1008."
         ],
         "ja": [
-          "いくつか計算すると、8×8=64、8×88=704、8×888=7104、8×8888=71104 です。",
-          "例をいくつか見ただけでは k = 991 でも同じ形になる保証はないので、筆算で各桁を実際に計算します。",
-          "一の位：8 × 8 = 64、**4** を書いて 6 繰り上げ。",
-          "十の位：8 × 8 + 6 = 70、**0** を書いて 7 繰り上げ。",
-          "百の位：8 × 8 + 7 = 71、**1** を書いて 7 繰り上げ——**繰り上がりがまた 7 に戻るので、この桁から先はすべて同じ**で、第 k 桁まで 1 を書いて 7 を繰り上げます。",
-          "第 k 桁を終えたあと、残った繰り上がり 7 をそのまま先頭に書きます。",
-          "したがって積の形は、先頭が 7、続いて第 3 桁から第 k 桁までの 1 が k − 2 個、最後の 2 桁が 0 と 4 です（k ≥ 2 のとき）。",
-          "したがって各位の和は 7 + (k-2) + 0 + 4 = k+9。",
-          "これが 1000 なので k+9=1000。",
-          "よって k=991 です。"
+          "小さい場合を計算する：8 × 7 = 56、8 × 77 = 616、8 × 777 = 6216、8 × 7777 = 62216。",
+          "理由：8 × 77⋯7 = 56 × 11⋯1 = 50 × 11⋯1 + 6 × 11⋯1 = 55⋯50 + 66⋯6（k 個の 5 の後に 0、と k 個の 6 の和）。筆算すると一の位 0 + 6 = 6、十の位 5 + 6 = 11 で 1 を書き 1 繰り上げ、それより上の位は 5 + 6 + 1 = 12 で 2 を書き 1 繰り上げ、最上位は 5 + 1 = 6。",
+          "よって k ≥ 2 のとき 8 × N = 6 22⋯2 1 6 で、間に 2 が k − 2 個並ぶ。数字の和は 6 + 2(k − 2) + 1 + 6 = 2k + 9。",
+          "2k + 9 = 2025 より 2k = 2016、k = 1008。"
         ]
       },
       "figure": {
@@ -980,53 +860,45 @@
       "answerMode": "multiple_choice",
       "options": {
         "A": {
-          "zh-Hant": "901",
-          "zh-Hans": "901",
-          "en": "901",
-          "ja": "901"
+          "zh-Hant": "1008",
+          "zh-Hans": "1008",
+          "en": "1008",
+          "ja": "1008"
         },
         "B": {
-          "zh-Hant": "911",
-          "zh-Hans": "911",
-          "en": "911",
-          "ja": "911"
+          "zh-Hant": "1007",
+          "zh-Hans": "1007",
+          "en": "1007",
+          "ja": "1007"
         },
         "C": {
-          "zh-Hant": "919",
-          "zh-Hans": "919",
-          "en": "919",
-          "ja": "919"
+          "zh-Hant": "1012",
+          "zh-Hans": "1012",
+          "en": "1012",
+          "ja": "1012"
         },
         "D": {
-          "zh-Hant": "991",
-          "zh-Hans": "991",
-          "en": "991",
-          "ja": "991"
+          "zh-Hant": "1013",
+          "zh-Hans": "1013",
+          "en": "1013",
+          "ja": "1013"
         },
         "E": {
-          "zh-Hant": "999",
-          "zh-Hans": "999",
-          "en": "999",
-          "ja": "999"
+          "zh-Hant": "2016",
+          "zh-Hans": "2016",
+          "en": "2016",
+          "ja": "2016"
         }
       },
       "correctAnswer": {
         "type": "choice",
-        "value": "D"
+        "value": "A"
       },
       "source": {
-        "type": "official_reference",
-        "name": "AMC 10",
-        "contest": "AMC 10",
-        "year": "2014",
-        "round": "A",
-        "division": "Grade 9-10",
-        "problemNumber": "Problem 20",
-        "reference": "2014 AMC 10A Problem 20",
-        "displayText": "AMC 10A 2014 Problem 20",
-        "sourceUrl": "https://artofproblemsolving.com/wiki/index.php/2014_AMC_10A_Problems/Problem_20",
-        "rightsStatus": "needs_review",
-        "notes": "Rewritten from a publicly archived competition statement."
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "重複數字整數乘以一位數後的數字規律，由數字和反推位數的題型",
+        "notes": "把 8 × 77⋯7 拆成 55⋯50 + 66⋯6 解釋進位規律，得到數字和 2k + 9；誘答 2016 是忘了除以 2，1007、1013 是把 2 的個數算成 k − 1 或 k − 3 時的結果。"
       },
       "olympiadTaxonomy": {
         "topic": "數論",
