@@ -82,9 +82,16 @@ class StoreKitMonetizationService extends ValueNotifier<MonetizationState>
     await _purchaseSubscription?.cancel();
     _purchaseSubscription = _gateway.purchaseUpdates.listen(_handleEvent);
     value = const MonetizationState(status: MonetizationStatus.loading);
+    // Re-establish a non-consumable purchase before touching the network.
+    // StoreKit 2 answers from its local entitlement cache, so a paying
+    // customer keeps the unlock offline even when the product query below
+    // fails. Best-effort: a restore failure must not hide the product.
+    try {
+      await _gateway.restore();
+    } catch (_) {}
     try {
       if (!await _gateway.isAvailable()) {
-        value = const MonetizationState.unavailable();
+        value = value.copyWith(status: MonetizationStatus.unavailable);
         return;
       }
       final List<StorefrontProduct> products = await _gateway
@@ -97,10 +104,10 @@ class StoreKitMonetizationService extends ValueNotifier<MonetizationState>
         }
       }
       if (fullUnlock == null) {
-        value = const MonetizationState.unavailable();
+        value = value.copyWith(status: MonetizationStatus.unavailable);
         return;
       }
-      value = MonetizationState(
+      value = value.copyWith(
         status: MonetizationStatus.ready,
         product: MonetizationProduct(
           id: fullUnlock.id,
@@ -108,14 +115,8 @@ class StoreKitMonetizationService extends ValueNotifier<MonetizationState>
           price: fullUnlock.price,
         ),
       );
-      // Re-establish a non-consumable purchase on every app launch. This is
-      // deliberately best-effort: a temporary restore failure must not stop a
-      // new customer from seeing the product and making a purchase.
-      try {
-        await _gateway.restore();
-      } catch (_) {}
     } catch (error) {
-      value = MonetizationState(
+      value = value.copyWith(
         status: MonetizationStatus.error,
         errorMessage: error.toString(),
       );
@@ -143,17 +144,25 @@ class StoreKitMonetizationService extends ValueNotifier<MonetizationState>
 
   @override
   Future<void> restorePurchases() async {
-    if (value.product == null) {
-      return;
-    }
+    // Restore must stay reachable even when the product failed to load, so
+    // that a paying customer is never locked out by a storefront hiccup.
+    final MonetizationStatus settledStatus = value.product == null
+        ? MonetizationStatus.unavailable
+        : MonetizationStatus.ready;
     value = value.copyWith(
       status: MonetizationStatus.restoring,
       clearError: true,
     );
     try {
       await _gateway.restore();
+      // Restored transactions arrive on the purchase stream; let them land
+      // before deciding that nothing was found.
+      await Future<void>.delayed(Duration.zero);
       if (value.status == MonetizationStatus.restoring) {
-        value = value.copyWith(status: MonetizationStatus.ready);
+        value = value.copyWith(
+          status: settledStatus,
+          restoreFoundNothing: !value.hasFullUnlock,
+        );
       }
     } catch (error) {
       value = value.copyWith(

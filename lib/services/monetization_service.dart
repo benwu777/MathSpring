@@ -35,30 +35,34 @@ class MonetizationState {
     this.product,
     this.hasFullUnlock = false,
     this.errorMessage,
+    this.restoreFoundNothing = false,
   });
 
   const MonetizationState.unavailable()
       : status = MonetizationStatus.unavailable,
         product = null,
         hasFullUnlock = false,
-        errorMessage = null;
+        errorMessage = null,
+        restoreFoundNothing = false;
 
   const MonetizationState.unlocked()
       : status = MonetizationStatus.ready,
         product = MonetizationProduct.fullUnlock,
         hasFullUnlock = true,
-        errorMessage = null;
+        errorMessage = null,
+        restoreFoundNothing = false;
 
   final MonetizationStatus status;
   final MonetizationProduct? product;
   final bool hasFullUnlock;
   final String? errorMessage;
 
+  /// True after a user-initiated restore finished without finding a purchase.
+  final bool restoreFoundNothing;
+
   bool get canViewSolutionSteps => hasFullUnlock;
-  bool get hasAdFreeEntitlement => hasFullUnlock;
   bool get canUsePremiumAvatarOptions => hasFullUnlock;
   int get maxLearnerProfiles => hasFullUnlock ? 5 : 1;
-  bool get shouldShowBanner => !hasAdFreeEntitlement;
 
   MonetizationState copyWith({
     MonetizationStatus? status,
@@ -66,12 +70,14 @@ class MonetizationState {
     bool? hasFullUnlock,
     String? errorMessage,
     bool clearError = false,
+    bool? restoreFoundNothing,
   }) =>
       MonetizationState(
         status: status ?? this.status,
         product: product ?? this.product,
         hasFullUnlock: hasFullUnlock ?? this.hasFullUnlock,
         errorMessage: clearError ? null : errorMessage ?? this.errorMessage,
+        restoreFoundNothing: restoreFoundNothing ?? false,
       );
 }
 

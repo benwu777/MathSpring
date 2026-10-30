@@ -94,18 +94,112 @@ void main() {
     expect(service.value.status, MonetizationStatus.error);
     expect(service.value.hasFullUnlock, isFalse);
   });
+
+  test('keeps an existing entitlement when products cannot load offline',
+      () async {
+    final _FakeStorefrontGateway gateway = _FakeStorefrontGateway(
+      restoreOnRequest: true,
+      throwOnLoadProducts: true,
+    );
+    final StoreKitMonetizationService service =
+        StoreKitMonetizationService(gateway: gateway);
+
+    await service.initialize();
+    await _settle();
+
+    expect(gateway.restoreCalls, 1);
+    expect(service.value.hasFullUnlock, isTrue);
+  });
+
+  test('keeps an existing entitlement when the product is not listed',
+      () async {
+    final _FakeStorefrontGateway gateway = _FakeStorefrontGateway(
+      restoreOnRequest: true,
+      returnNoProducts: true,
+    );
+    final StoreKitMonetizationService service =
+        StoreKitMonetizationService(gateway: gateway);
+
+    await service.initialize();
+    await _settle();
+
+    expect(gateway.restoreCalls, 1);
+    expect(service.value.hasFullUnlock, isTrue);
+  });
+
+  test('restore still runs when the product could not be loaded', () async {
+    final _FakeStorefrontGateway gateway =
+        _FakeStorefrontGateway(returnNoProducts: true);
+    final StoreKitMonetizationService service =
+        StoreKitMonetizationService(gateway: gateway);
+    await service.initialize();
+    gateway.restoreOnRequest = true;
+
+    await service.restorePurchases();
+    await _settle();
+
+    expect(gateway.restoreCalls, 2);
+    expect(service.value.hasFullUnlock, isTrue);
+  });
+
+  test('restore without a previous purchase reports nothing to restore',
+      () async {
+    final _FakeStorefrontGateway gateway = _FakeStorefrontGateway();
+    final StoreKitMonetizationService service =
+        StoreKitMonetizationService(gateway: gateway);
+    await service.initialize();
+
+    await service.restorePurchases();
+
+    expect(service.value.status, MonetizationStatus.ready);
+    expect(service.value.hasFullUnlock, isFalse);
+    expect(service.value.restoreFoundNothing, isTrue);
+  });
+
+  test('restore that finds the purchase does not report nothing to restore',
+      () async {
+    final _FakeStorefrontGateway gateway = _FakeStorefrontGateway();
+    final StoreKitMonetizationService service =
+        StoreKitMonetizationService(gateway: gateway);
+    await service.initialize();
+    gateway.restoreOnRequest = true;
+
+    await service.restorePurchases();
+
+    expect(service.value.hasFullUnlock, isTrue);
+    expect(service.value.restoreFoundNothing, isFalse);
+  });
+
+  test('starting a purchase clears a previous nothing-to-restore notice',
+      () async {
+    final _FakeStorefrontGateway gateway = _FakeStorefrontGateway();
+    final StoreKitMonetizationService service =
+        StoreKitMonetizationService(gateway: gateway);
+    await service.initialize();
+    await service.restorePurchases();
+
+    await service.purchaseFullUnlock();
+
+    expect(service.value.restoreFoundNothing, isFalse);
+  });
 }
 
 Future<void> _settle() => Future<void>.delayed(Duration.zero);
 
+// StoreKit 只能在實機或模擬器的原生層執行，flutter test 叫不到，
+// 所以只替換最外層的 StorefrontGateway；狀態機本身走真的實作。
 class _FakeStorefrontGateway implements StorefrontGateway {
   _FakeStorefrontGateway({
     this.throwOnAvailability = false,
     this.restoreOnRequest = false,
+    this.throwOnLoadProducts = false,
+    this.returnNoProducts = false,
   });
 
   final bool throwOnAvailability;
-  final bool restoreOnRequest;
+  bool restoreOnRequest;
+  final bool throwOnLoadProducts;
+  final bool returnNoProducts;
   final StreamController<StorePurchaseEvent> _events =
       StreamController<StorePurchaseEvent>.broadcast();
   Set<String>? requestedProductIds;
@@ -124,6 +218,8 @@ class _FakeStorefrontGateway implements StorefrontGateway {
   @override
   Future<List<StorefrontProduct>> loadProducts(Set<String> productIds) async {
     requestedProductIds = productIds;
+    if (throwOnLoadProducts) throw StateError('The Internet is offline.');
+    if (returnNoProducts) return const <StorefrontProduct>[];
     return const <StorefrontProduct>[
       StorefrontProduct(
         id: 'com.benwu.mathspring.full_unlock',

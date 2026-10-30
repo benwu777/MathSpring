@@ -1345,9 +1345,9 @@ class _FullUnlockSection extends StatelessWidget {
             ? const Icon(Icons.verified_rounded, color: AppVisualTokens.brand)
             : TextButton(
                 key: const ValueKey<String>('open_full_unlock'),
-                onPressed: state.status == MonetizationStatus.unavailable
-                    ? null
-                    : () => _showPaywall(context),
+                // Stays tappable without a product so the sheet's restore
+                // action is always reachable.
+                onPressed: () => _showPaywall(context),
                 child:
                     Text(state.product?.price ?? strings.purchaseUnavailable),
               ),
@@ -1403,23 +1403,29 @@ class _FullUnlockSheet extends StatelessWidget {
               Text(strings.fullUnlockDescription),
               const SizedBox(height: 20),
               if (state.errorMessage != null) ...[
-                Text(state.errorMessage!,
+                Text(strings.purchaseFailed,
                     style: const TextStyle(color: Colors.red)),
+                const SizedBox(height: 12),
+              ],
+              if (state.restoreFoundNothing) ...[
+                Text(strings.nothingToRestore),
                 const SizedBox(height: 12),
               ],
               if (state.hasFullUnlock)
                 Text(strings.fullUnlockAlreadyPurchased)
-              else if (state.product == null)
-                Text(strings.fullUnlockProductUnavailable)
               else ...[
-                FilledButton(
-                  key: const ValueKey<String>('purchase_full_unlock'),
-                  onPressed: state.status == MonetizationStatus.purchasing ||
-                          state.status == MonetizationStatus.restoring
-                      ? null
-                      : monetization.purchaseFullUnlock,
-                  child: Text(strings.purchaseFullUnlock(state.product!.price)),
-                ),
+                if (state.product == null)
+                  Text(strings.fullUnlockProductUnavailable)
+                else
+                  FilledButton(
+                    key: const ValueKey<String>('purchase_full_unlock'),
+                    onPressed: state.status == MonetizationStatus.purchasing ||
+                            state.status == MonetizationStatus.restoring
+                        ? null
+                        : monetization.purchaseFullUnlock,
+                    child:
+                        Text(strings.purchaseFullUnlock(state.product!.price)),
+                  ),
                 const SizedBox(height: 8),
                 TextButton(
                   key: const ValueKey<String>('restore_purchases'),
@@ -5155,7 +5161,7 @@ class _QuestionSourceText extends StatelessWidget {
   Widget build(BuildContext context) {
     final LayoutSpec layoutSpec = LayoutSpec.of(context);
     return Text(
-      'Source: $text',
+      '${AppStrings.of(context).questionSourcePrefix}$text',
       style: Theme.of(context).textTheme.bodySmall?.copyWith(
             fontSize: layoutSpec.scaleText(12),
             height: 1.5,
@@ -5324,6 +5330,24 @@ class AppStrings {
         zhHans: '以 $price 解锁',
         en: 'Unlock for $price',
         ja: '$price で解除',
+      );
+  String get purchaseFailed => _text(
+        zhHant: '購買沒有完成，請稍後再試。',
+        zhHans: '购买没有完成，请稍后再试。',
+        en: 'The purchase could not be completed. Please try again later.',
+        ja: '購入を完了できませんでした。しばらくしてからもう一度お試しください。',
+      );
+  String get nothingToRestore => _text(
+        zhHant: '此 Apple 帳號沒有可回復的購買紀錄。',
+        zhHans: '此 Apple 账户没有可恢复的购买记录。',
+        en: 'No previous purchase was found for this Apple Account.',
+        ja: 'この Apple Account に復元できる購入はありません。',
+      );
+  String get questionSourcePrefix => _text(
+        zhHant: '出處：',
+        zhHans: '出处：',
+        en: 'Source: ',
+        ja: '出典：',
       );
   String get restorePurchases => _text(
         zhHant: '回復購買',
