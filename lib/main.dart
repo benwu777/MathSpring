@@ -50,6 +50,7 @@ part 'src/app_strings.dart';
 part 'src/question_figures.dart';
 part 'src/session_helpers.dart';
 part 'src/diagram_painters.dart';
+part 'src/welcome_page.dart';
 
 const String appSupportUrl = 'https://benwu777.github.io/MathSpring/support/';
 const String appPrivacyPolicyUrl =
@@ -77,10 +78,18 @@ void main() {
 }
 
 class MathSpringApp extends StatefulWidget {
-  const MathSpringApp({super.key, this.services, this.monetizationService});
+  const MathSpringApp({
+    super.key,
+    this.services,
+    this.monetizationService,
+    this.showWelcome = true,
+  });
 
   final AppServices? services;
   final MonetizationService? monetizationService;
+
+  /// 冷啟動時先顯示進入畫面（[WelcomePage]）。
+  final bool showWelcome;
 
   @override
   State<MathSpringApp> createState() => _MathSpringAppState();
@@ -89,6 +98,8 @@ class MathSpringApp extends StatefulWidget {
 class _MathSpringAppState extends State<MathSpringApp> {
   Locale? _localeOverride;
   late final Future<AppServices> _servicesFuture;
+  bool _entered = false;
+  InProgressSession? _pendingResume;
   late final MonetizationService _monetization;
 
   @override
@@ -113,6 +124,24 @@ class _MathSpringAppState extends State<MathSpringApp> {
   void dispose() {
     _monetization.dispose();
     super.dispose();
+  }
+
+  Widget _homeOrWelcome(AppServices services) {
+    if (widget.showWelcome && !_entered) {
+      return WelcomePage(
+        services: services,
+        onEnter: (InProgressSession? resume) => setState(() {
+          _entered = true;
+          _pendingResume = resume;
+        }),
+      );
+    }
+    return MathSpringHomePage(
+      onLocaleChanged: _updateLocale,
+      services: services,
+      monetization: _monetization,
+      pendingResume: _pendingResume,
+    );
   }
 
   void _updateLocale(Locale locale) {
@@ -331,11 +360,7 @@ class _MathSpringAppState extends State<MathSpringApp> {
         valueListenable: _monetization,
         builder: (BuildContext context, MonetizationState monetization, _) =>
             widget.services != null
-                ? MathSpringHomePage(
-                    onLocaleChanged: _updateLocale,
-                    services: widget.services!,
-                    monetization: _monetization,
-                  )
+                ? _homeOrWelcome(widget.services!)
                 : FutureBuilder<AppServices>(
                     future: _servicesFuture,
                     builder: (context, snapshot) {
@@ -344,11 +369,7 @@ class _MathSpringAppState extends State<MathSpringApp> {
                           body: Center(child: CircularProgressIndicator()),
                         );
                       }
-                      return MathSpringHomePage(
-                        onLocaleChanged: _updateLocale,
-                        services: snapshot.data!,
-                        monetization: _monetization,
-                      );
+                      return _homeOrWelcome(snapshot.data!);
                     },
                   ),
       ),

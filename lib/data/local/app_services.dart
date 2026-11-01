@@ -497,6 +497,24 @@ class AppServices {
     return true;
   }
 
+  bool _enteredBefore = false;
+
+  /// 是否曾經從進入畫面進過 app：決定問候語是「歡迎來到」還是「歡迎回來」。
+  Future<bool> hasEnteredBefore() async {
+    if (appPreferencesRepository != null) {
+      return await appPreferencesRepository!.getValue('has_entered_before') ==
+          'true';
+    }
+    return _enteredBefore;
+  }
+
+  Future<void> markEntered() async {
+    _enteredBefore = true;
+    if (appPreferencesRepository != null) {
+      await appPreferencesRepository!.setValue('has_entered_before', 'true');
+    }
+  }
+
   /// 測試或沒有資料庫時的暫存，結構與資料庫中的字串相同。
   final Map<String, String> _inProgressSessions = <String, String>{};
 

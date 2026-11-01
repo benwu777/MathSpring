@@ -33,7 +33,7 @@ void main() {
     TestWidgetsFlutterBinding.ensureInitialized()
         .platformDispatcher
         .localeTestValue = const Locale('en');
-    await tester.pumpWidget(MathSpringApp(services: services()));
+    await tester.pumpWidget(MathSpringApp(showWelcome: false, services: services()));
     await tester.runAsync(() async {
       await Future<void>.delayed(const Duration(milliseconds: 50));
     });

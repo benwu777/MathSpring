@@ -505,7 +505,7 @@ void main() {
     );
     const InProgressSession quiz = InProgressSession(
       kind: InProgressSessionKind.quiz,
-      packJson: const <String, dynamic>{
+      packJson: <String, dynamic>{
         'path': 'assets/questions/mixed/grade4_foundation.mixed.v1.json',
         'topic': '綜合',
         'topicCode': 'mixed',
@@ -513,9 +513,9 @@ void main() {
         'challengeTier': 'foundation',
         'questionCount': 10,
       },
-      questionIds: const <String>['q1', 'q2', 'q3'],
+      questionIds: <String>['q1', 'q2', 'q3'],
       currentIndex: 1,
-      answers: const <String, String>{'q1': 'B'},
+      answers: <String, String>{'q1': 'B'},
       startedAtIso: '2026-11-01T08:00:00.000Z',
       examQuestionCount: 3,
       examTimeLimitSeconds: 600,

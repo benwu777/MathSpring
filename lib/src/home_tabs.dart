@@ -6,11 +6,15 @@ class MathSpringHomePage extends StatefulWidget {
     required this.onLocaleChanged,
     required this.services,
     required this.monetization,
+    this.pendingResume,
   });
 
   final ValueChanged<Locale> onLocaleChanged;
   final AppServices services;
   final MonetizationService monetization;
+
+  /// 從進入畫面選了「繼續上次」：首頁出現後接著打開那一回。
+  final InProgressSession? pendingResume;
 
   @override
   State<MathSpringHomePage> createState() => _MathSpringHomePageState();
@@ -21,6 +25,23 @@ enum _HomeTab { practice, quiz, review, settings }
 class _MathSpringHomePageState extends State<MathSpringHomePage> {
   int _progressVersion = 0;
   _HomeTab _currentTab = _HomeTab.practice;
+
+  @override
+  void initState() {
+    super.initState();
+    final InProgressSession? resume = widget.pendingResume;
+    if (resume != null) {
+      WidgetsBinding.instance.addPostFrameCallback((_) async {
+        if (!mounted) {
+          return;
+        }
+        await _openResumedSession(context, widget.services, resume);
+        if (mounted) {
+          _handleLearnerChanged();
+        }
+      });
+    }
+  }
 
   void _handleLearnerChanged() {
     setState(() {

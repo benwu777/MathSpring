@@ -58,6 +58,24 @@ void main() {
     expect(question.figure.params['angleMarks'], isNotEmpty);
   });
 
+  test('questions can be looked up by id across packs in the given order',
+      () async {
+    // 接續上次只存題號；練習的題目可能來自不同年級、不同主題的題包。
+    TestWidgetsFlutterBinding.ensureInitialized();
+    final List<Question> questions =
+        await BundledQuestionBankRepository().loadQuestionsByIds(<String>[
+      'geometry_grade9_foundation_160',
+      'arithmetic_grade1_foundation_001',
+      'logic_grade12_foundation_001',
+      'missing_grade1_foundation_999',
+    ]);
+    expect(questions.map((Question q) => q.id), <String>[
+      'geometry_grade9_foundation_160',
+      'arithmetic_grade1_foundation_001',
+      'logic_grade12_foundation_001',
+    ]);
+  });
+
   test('parses a custom figure question with multilingual fields', () {
     final Map<String, dynamic> json = {
       'id': 'trig_001',

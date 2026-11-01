@@ -668,7 +668,7 @@ void main() {
     tester.view.devicePixelRatio = 1.0;
     tester.view.physicalSize = size;
     addTearDown(tester.view.reset);
-    await tester.pumpWidget(MathSpringApp(
+    await tester.pumpWidget(MathSpringApp(showWelcome: false, 
       services: services,
       monetizationService: monetizationService,
     ));
@@ -1088,7 +1088,7 @@ void main() {
   testWidgets('shows the daily mission before ordinary practice',
       (WidgetTester tester) async {
     await tester.pumpWidget(
-      MathSpringApp(services: createTestServices(completeDailyMission: false)),
+      MathSpringApp(showWelcome: false, services: createTestServices(completeDailyMission: false)),
     );
     await tester.pumpAndSettle();
 
@@ -1106,7 +1106,7 @@ void main() {
     binding.platformDispatcher.localeTestValue = const Locale('en');
 
     await tester.pumpWidget(
-      MathSpringApp(services: createTestServices(completeDailyMission: false)),
+      MathSpringApp(showWelcome: false, services: createTestServices(completeDailyMission: false)),
     );
     await tester.pumpAndSettle();
 
@@ -1365,7 +1365,7 @@ void main() {
 
   testWidgets('formal exam start offers the fixed exam presets',
       (WidgetTester tester) async {
-    await tester.pumpWidget(MathSpringApp(services: createTestServices()));
+    await tester.pumpWidget(MathSpringApp(showWelcome: false, services: createTestServices()));
     await tester.pumpAndSettle();
     await tester.tap(find.byTooltip('Quiz'));
     await tester.pumpAndSettle();
@@ -1733,7 +1733,7 @@ void main() {
     tester.view.physicalSize = const Size(1290, 2796);
     tester.view.devicePixelRatio = 3;
     addTearDown(tester.view.reset);
-    await tester.pumpWidget(MathSpringApp(services: createTestServices()));
+    await tester.pumpWidget(MathSpringApp(showWelcome: false, services: createTestServices()));
     await tester.pumpAndSettle();
 
     expect(tester.getSize(find.byType(NavigationBar)).height,
@@ -1756,7 +1756,7 @@ void main() {
     tester.view.physicalSize = const Size(1290, 2796);
     tester.view.devicePixelRatio = 3;
     addTearDown(tester.view.reset);
-    await tester.pumpWidget(MathSpringApp(services: createTestServices()));
+    await tester.pumpWidget(MathSpringApp(showWelcome: false, services: createTestServices()));
     await tester.pumpAndSettle();
     await tester.tap(find.byIcon(Icons.settings_outlined));
     await tester.pumpAndSettle();
@@ -2057,6 +2057,101 @@ void main() {
     await tester.pump(const Duration(seconds: 5));
     expect(find.textContaining('2:00 left'), findsOneWidget);
     await tester.pumpWidget(const SizedBox.shrink());
+  });
+
+  Future<void> pumpWelcome(WidgetTester tester, AppServices services) async {
+    final TestWidgetsFlutterBinding binding =
+        TestWidgetsFlutterBinding.ensureInitialized();
+    binding.platformDispatcher.localeTestValue = const Locale('en');
+    tester.view.physicalSize = const Size(1290, 2796);
+    tester.view.devicePixelRatio = 3;
+    addTearDown(tester.view.reset);
+    await tester.pumpWidget(MathSpringApp(
+      services: services,
+      monetizationService: NoopMonetizationService(),
+      showWelcome: true,
+    ));
+    await tester.runAsync(() async {
+      await Future<void>.delayed(const Duration(milliseconds: 50));
+    });
+    await tester.pumpAndSettle();
+  }
+
+  testWidgets('a cold start shows the welcome screen before home',
+      (WidgetTester tester) async {
+    // 2026-11-01 進入畫面：每次冷啟動先出現，按「開始練習」才進首頁。
+    final AppServices services = createTestServices();
+    await pumpWelcome(tester, services);
+
+    expect(find.text('Welcome to MathSpring!'), findsOneWidget);
+    expect(find.byType(NavigationBar), findsNothing);
+
+    await tester.tap(find.text('Start practice'));
+    await tester.pumpAndSettle();
+    expect(find.byType(NavigationBar), findsOneWidget);
+    expect(await services.hasEnteredBefore(), isTrue);
+  });
+
+  testWidgets('the welcome screen greets a returning learner by name',
+      (WidgetTester tester) async {
+    final AppServices services = createTestServices();
+    await services.markEntered();
+    await pumpWelcome(tester, services);
+
+    expect(find.text('Welcome back, Allen!'), findsOneWidget);
+    expect(find.text('Switch learner'), findsOneWidget);
+
+    await tester.tap(find.text('Switch learner'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Mia').last);
+    await tester.pumpAndSettle();
+    expect(find.text('Welcome back, Mia!'), findsOneWidget);
+  });
+
+  testWidgets('the welcome screen continues an unfinished practice',
+      (WidgetTester tester) async {
+    final AppServices services = createTestServices();
+    await services.markEntered();
+    await services.saveInProgressSession(
+      'learner_allen',
+      const InProgressSession(
+        kind: InProgressSessionKind.practice,
+        packJson: <String, dynamic>{
+          'path': 'assets/questions/arithmetic/grade1_foundation.arithmetic.v1.json',
+          'topic': '算術',
+          'topicCode': 'arithmetic',
+          'levelStage': 'grade1',
+          'challengeTier': 'foundation',
+          'questionCount': 2,
+        },
+        questionIds: <String>[
+          'arithmetic_grade1_foundation_001',
+          'arithmetic_grade1_foundation_002',
+        ],
+        currentIndex: 1,
+        startedAtIso: '2026-11-01T08:00:00.000Z',
+      ),
+    );
+    await pumpWelcome(tester, services);
+
+    expect(find.text('Start something new'), findsOneWidget);
+    await tester.tap(find.text('Continue practice (question 2 of 2)'));
+    // 接回時要從內建題庫讀題目（真的 I/O），在 runAsync 裡給它時間並持續重繪。
+    for (int i = 0;
+        i < 20 && find.byType(PracticeSessionPage).evaluate().isEmpty;
+        i++) {
+      await tester.runAsync(() async {
+        await Future<void>.delayed(const Duration(milliseconds: 100));
+      });
+      await tester.pump();
+    }
+    await tester.pumpAndSettle();
+
+    expect(find.byType(PracticeSessionPage), findsOneWidget);
+    expect(
+        find.byKey(const ValueKey<String>(
+            'question_prompt_arithmetic_grade1_foundation_002')),
+        findsOneWidget);
   });
 
   testWidgets('answer review card keeps the neutral style without the otter',
@@ -3544,7 +3639,7 @@ void main() {
         ),
       ],
     );
-    await tester.pumpWidget(MathSpringApp(services: services));
+    await tester.pumpWidget(MathSpringApp(showWelcome: false, services: services));
     await tester.pumpAndSettle();
 
     await tester.tap(find.byKey(const ValueKey<String>('start_daily_mission')));
@@ -4041,7 +4136,7 @@ void main() {
     final InMemoryMonetizationService monetization =
         InMemoryMonetizationService.withProduct();
     await monetization.initialize();
-    await tester.pumpWidget(MathSpringApp(
+    await tester.pumpWidget(MathSpringApp(showWelcome: false, 
       services: createTestServices(),
       monetizationService: monetization,
     ));
@@ -4068,7 +4163,7 @@ void main() {
     WidgetTester tester,
     MonetizationService monetization,
   ) async {
-    await tester.pumpWidget(MathSpringApp(
+    await tester.pumpWidget(MathSpringApp(showWelcome: false, 
       services: createTestServices(),
       monetizationService: monetization,
     ));
@@ -4216,7 +4311,7 @@ void main() {
     tester.view.physicalSize = const Size(1290, 2796);
     tester.view.devicePixelRatio = 3;
     addTearDown(tester.view.reset);
-    await tester.pumpWidget(MathSpringApp(services: createTestServices()));
+    await tester.pumpWidget(MathSpringApp(showWelcome: false, services: createTestServices()));
     await tester.pumpAndSettle();
 
     final Finder header = find.byKey(const ValueKey<String>('home_hero_surface'));
@@ -4237,7 +4332,7 @@ void main() {
 
   testWidgets('no otter companion is shown on home or review',
       (WidgetTester tester) async {
-    await tester.pumpWidget(MathSpringApp(
+    await tester.pumpWidget(MathSpringApp(showWelcome: false, 
       services: createTestServices(),
       monetizationService: NoopMonetizationService(),
     ));
@@ -4252,7 +4347,7 @@ void main() {
 
   testWidgets('home shell uses rounded filled icons for the selected destination',
       (WidgetTester tester) async {
-    await tester.pumpWidget(MathSpringApp(services: createTestServices()));
+    await tester.pumpWidget(MathSpringApp(showWelcome: false, services: createTestServices()));
     await tester.pumpAndSettle();
 
     expect(find.byKey(const ValueKey<String>('home_background_glow')),
@@ -4263,7 +4358,7 @@ void main() {
 
   testWidgets('app uses the compact indigo and teal learning-workspace theme',
       (WidgetTester tester) async {
-    await tester.pumpWidget(MathSpringApp(services: createTestServices()));
+    await tester.pumpWidget(MathSpringApp(showWelcome: false, services: createTestServices()));
     await tester.pumpAndSettle();
 
     final ThemeData theme =
@@ -4279,7 +4374,7 @@ void main() {
 
   testWidgets('home primary actions use the shared indigo accent',
       (WidgetTester tester) async {
-    await tester.pumpWidget(MathSpringApp(services: createTestServices()));
+    await tester.pumpWidget(MathSpringApp(showWelcome: false, services: createTestServices()));
     await tester.pumpAndSettle();
 
     final FilledButton practiceButton = tester.widget<FilledButton>(
