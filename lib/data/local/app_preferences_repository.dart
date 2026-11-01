@@ -30,4 +30,12 @@ class AppPreferencesRepository {
 
     return rows.first['value'] as String;
   }
+
+  Future<void> deleteValue(String key) {
+    return _database.delete(
+      'app_preferences',
+      where: 'key = ?',
+      whereArgs: [key],
+    );
+  }
 }

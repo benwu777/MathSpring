@@ -7,6 +7,7 @@ import 'package:mathspring/data/local/question_progress_repository.dart';
 import 'package:mathspring/models/answer_session.dart';
 import 'package:mathspring/models/avatar_configuration.dart';
 import 'package:mathspring/models/favorite_question.dart';
+import 'package:mathspring/models/in_progress_session.dart';
 import 'package:mathspring/models/learner_profile.dart';
 import 'package:mathspring/models/question_progress.dart';
 import 'package:mathspring/models/session_answer_record.dart';
@@ -90,7 +91,9 @@ class AppServices {
     return services;
   }
 
-  static Future<AppServices> openDefault() async {
+  static Future<AppServices> openDefault({
+    String defaultLearnerName = 'Student',
+  }) async {
     final Database database = await MathSpringDatabase.openDefault();
     final AppServices services = AppServices(
       database: database,
@@ -100,11 +103,18 @@ class AppServices {
       answerSessionRepository: AnswerSessionRepository(database),
       favoriteQuestionRepository: FavoriteQuestionRepository(database),
     );
-    await services.seedDefaultDataIfNeeded();
+    await services.seedDefaultDataIfNeeded(
+        defaultLearnerName: defaultLearnerName);
     return services;
   }
 
-  Future<void> seedDefaultDataIfNeeded() async {
+  /// 新安裝只建立一位預設學習者（名字依裝置語言，由呼叫端傳入），年級 1～2。
+  ///
+  /// 2026-11-01 前會建立 Allen、Mia 兩位示範學習者：和免費版「1 位學習者」的
+  /// 限制不一致，家長也會看到別人家的名字。已有學習者的裝置完全不動。
+  Future<void> seedDefaultDataIfNeeded({
+    String defaultLearnerName = 'Student',
+  }) async {
     final LearnerProfileRepository learnerRepository =
         learnerProfileRepository!;
     final AppPreferencesRepository preferencesRepository =
@@ -112,37 +122,26 @@ class AppServices {
     final List<LearnerProfile> existingProfiles =
         await learnerRepository.fetchAll();
     if (existingProfiles.isEmpty) {
-      await learnerRepository.save(
-        const LearnerProfile(
-          id: 'learner_allen',
-          displayName: 'Allen',
-          levelStage: 'grade4',
-          minLevelStage: 'grade3',
-          maxLevelStage: 'grade4',
-          challengeTier: 'advanced',
-          createdAtIso: '2026-07-16T00:00:00Z',
-        ),
+      final LearnerProfile learner = LearnerProfile(
+        id: 'learner_default',
+        displayName: defaultLearnerName,
+        levelStage: 'grade1',
+        minLevelStage: 'grade1',
+        maxLevelStage: 'grade2',
+        challengeTier: 'foundation',
+        createdAtIso: DateTime.now().toUtc().toIso8601String(),
       );
-      await learnerRepository.save(
-        const LearnerProfile(
-          id: 'learner_mia',
-          displayName: 'Mia',
-          levelStage: 'grade2',
-          minLevelStage: 'grade1',
-          maxLevelStage: 'grade2',
-          challengeTier: 'foundation',
-          createdAtIso: '2026-07-16T00:01:00Z',
-        ),
-      );
+      await learnerRepository.save(learner);
+      await preferencesRepository.setValue('current_learner_id', learner.id);
     }
 
     final String? currentLearnerId =
         await preferencesRepository.getValue('current_learner_id');
-    if (currentLearnerId == null) {
+    final List<LearnerProfile> profiles = await learnerRepository.fetchAll();
+    if (currentLearnerId == null ||
+        !profiles.any((LearnerProfile p) => p.id == currentLearnerId)) {
       await preferencesRepository.setValue(
-        'current_learner_id',
-        'learner_allen',
-      );
+          'current_learner_id', profiles.first.id);
     }
 
     learnerProfiles
@@ -496,6 +495,37 @@ class AppServices {
           .setValue(_freeSolutionsKey, next.encode());
     }
     return true;
+  }
+
+  /// 測試或沒有資料庫時的暫存，結構與資料庫中的字串相同。
+  final Map<String, String> _inProgressSessions = <String, String>{};
+
+  static String _inProgressKey(String learnerId) =>
+      'in_progress_session:$learnerId';
+
+  Future<void> saveInProgressSession(
+      String learnerId, InProgressSession session) async {
+    final String encoded = session.encode();
+    _inProgressSessions[learnerId] = encoded;
+    if (appPreferencesRepository != null) {
+      await appPreferencesRepository!
+          .setValue(_inProgressKey(learnerId), encoded);
+    }
+  }
+
+  Future<InProgressSession?> loadInProgressSession(String learnerId) async {
+    if (appPreferencesRepository != null) {
+      return InProgressSession.decode(await appPreferencesRepository!
+          .getValue(_inProgressKey(learnerId)));
+    }
+    return InProgressSession.decode(_inProgressSessions[learnerId]);
+  }
+
+  Future<void> clearInProgressSession(String learnerId) async {
+    _inProgressSessions.remove(learnerId);
+    if (appPreferencesRepository != null) {
+      await appPreferencesRepository!.deleteValue(_inProgressKey(learnerId));
+    }
   }
 
   Future<void> setCurrentLearner(String learnerId) async {

@@ -297,6 +297,48 @@ class AppStrings {
         en: 'Each number shows a question’s status: blue means answered, white means not answered yet. Tap a number to jump straight to that question.',
         ja: '番号のマスは各問題の状態を示します。青は解答済み、白は未解答です。番号をタップするとその問題へ移動します。',
       );
+  String get defaultLearnerName => _text(
+        zhHant: '小學生',
+        zhHans: '小学生',
+        en: 'Student',
+        ja: '学習者',
+      );
+  String get welcomeFirstTime => _text(
+        zhHant: '歡迎來到 MathSpring！',
+        zhHans: '欢迎来到 MathSpring！',
+        en: 'Welcome to MathSpring!',
+        ja: 'MathSpring へようこそ！',
+      );
+  String welcomeBack(String name) => _text(
+        zhHant: '歡迎回來，$name！',
+        zhHans: '欢迎回来，$name！',
+        en: 'Welcome back, $name!',
+        ja: 'おかえりなさい、$name さん！',
+      );
+  String get startNewPractice => _text(
+        zhHant: '開始新的練習',
+        zhHans: '开始新的练习',
+        en: 'Start something new',
+        ja: '新しく練習をはじめる',
+      );
+  String resumePractice(int current, int total) => _text(
+        zhHant: '繼續上次的練習（第 $current／$total 題）',
+        zhHans: '继续上次的练习（第 $current／$total 题）',
+        en: 'Continue practice (question $current of $total)',
+        ja: '前回の練習のつづき（$current／$total 問目）',
+      );
+  String resumeQuiz(int current, int total) => _text(
+        zhHant: '繼續上次的測驗（第 $current／$total 題）',
+        zhHans: '继续上次的测验（第 $current／$total 题）',
+        en: 'Continue quiz (question $current of $total)',
+        ja: '前回のテストのつづき（$current／$total 問目）',
+      );
+  String get switchLearner => _text(
+        zhHant: '切換學習者',
+        zhHans: '切换学习者',
+        en: 'Switch learner',
+        ja: '学習者を切り替える',
+      );
   String get restorePurchases => _text(
         zhHant: '回復購買',
         zhHans: '恢复购买',

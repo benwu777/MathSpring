@@ -17,6 +17,7 @@ import 'package:mathspring/models/geometry_scene.dart';
 import 'package:mathspring/models/question.dart';
 import 'package:mathspring/models/question_bank.dart';
 import 'package:mathspring/models/question_progress.dart';
+import 'package:mathspring/models/in_progress_session.dart';
 import 'package:mathspring/models/learner_profile.dart';
 import 'package:mathspring/models/session_answer_record.dart';
 import 'package:mathspring/services/learner_overview.dart';
@@ -94,7 +95,12 @@ class _MathSpringAppState extends State<MathSpringApp> {
   void initState() {
     super.initState();
     _servicesFuture = widget.services == null
-        ? AppServices.openDefault()
+        ? AppServices.openDefault(
+            defaultLearnerName: AppStrings(AppStrings.resolveLocale(
+              WidgetsBinding.instance.platformDispatcher.locale,
+              AppStrings.supportedLocales,
+            )).defaultLearnerName,
+          )
         : Future<AppServices>.value(widget.services!);
     _monetization = widget.monetizationService ??
         StoreKitMonetizationService(

@@ -37,6 +37,17 @@ class BundledQuestionPackInfo {
       questionCount: json['questionCount'] as int,
     );
   }
+
+  Map<String, dynamic> toJson() => <String, dynamic>{
+        'path': path,
+        'topic': topic,
+        'topicCode': topicCode,
+        if (olympiadTopic != null) 'olympiadTopic': olympiadTopic,
+        if (olympiadTopicCode != null) 'olympiadTopicCode': olympiadTopicCode,
+        'levelStage': levelStage,
+        'challengeTier': challengeTier,
+        'questionCount': questionCount,
+      };
 }
 
 class BundledQuestionManifest {

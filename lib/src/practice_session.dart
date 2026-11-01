@@ -7,6 +7,7 @@ class PracticeSessionPage extends StatefulWidget {
     required this.pack,
     this.initialQuestions,
     this.learner,
+    this.resume,
   });
 
   final AppServices services;
@@ -14,14 +15,18 @@ class PracticeSessionPage extends StatefulWidget {
   final List<Question>? initialQuestions;
   final LearnerProfile? learner;
 
+  /// 冷啟動時從進入畫面接回的未完成練習。
+  final InProgressSession? resume;
+
   @override
   State<PracticeSessionPage> createState() => _PracticeSessionPageState();
 }
 
 class _PracticeSessionPageState extends State<PracticeSessionPage> {
   late final Future<QuestionBank> _packFuture;
-  final DateTime _startedAt = DateTime.now();
+  DateTime _startedAt = DateTime.now();
   final List<PracticeAnswerRecord> _records = <PracticeAnswerRecord>[];
+  List<Question> _questions = const <Question>[];
   final ScrollController _scrollController = ScrollController();
   final GlobalKey _reviewCardKey = GlobalKey();
   int _currentIndex = 0;
@@ -43,7 +48,68 @@ class _PracticeSessionPageState extends State<PracticeSessionPage> {
               questions: widget.initialQuestions!,
             ),
           );
+    final InProgressSession? resume = widget.resume;
+    if (resume != null) {
+      _currentIndex = resume.currentIndex;
+      _startedAt =
+          DateTime.tryParse(resume.startedAtIso)?.toLocal() ?? _startedAt;
+    }
+    _packFuture.then((QuestionBank bank) {
+      _questions = bank.questions;
+      if (resume == null || !mounted) {
+        return;
+      }
+      final Map<String, Question> byId = <String, Question>{
+        for (final Question q in bank.questions) q.id: q,
+      };
+      setState(() {
+        for (final InProgressPracticeAnswer a in resume.practiceAnswers) {
+          final Question? q = byId[a.questionId];
+          if (q == null) {
+            continue;
+          }
+          _records.add(PracticeAnswerRecord(
+            question: q,
+            submittedAnswer: a.submittedAnswer,
+            isCorrect: a.isCorrect,
+            answeredAt:
+                DateTime.tryParse(a.answeredAtIso)?.toLocal() ?? DateTime.now(),
+          ));
+        }
+        if (resume.isReviewing && _records.isNotEmpty) {
+          _isReviewing = true;
+          _latestRecord = _records.last;
+        }
+      });
+    });
     _loadFavoriteForCurrentQuestion();
+  }
+
+  /// 每答一題、每換一題都存一次，讓 app 被系統回收後可以從進入畫面接回。
+  Future<void> _saveProgress() async {
+    final String? learnerId = widget.services.currentLearnerId;
+    if (learnerId == null || _questions.isEmpty) {
+      return;
+    }
+    await widget.services.saveInProgressSession(
+      learnerId,
+      InProgressSession(
+        kind: InProgressSessionKind.practice,
+        packJson: widget.pack.toJson(),
+        questionIds: _questions.map((Question q) => q.id).toList(),
+        currentIndex: _currentIndex,
+        startedAtIso: _startedAt.toUtc().toIso8601String(),
+        isReviewing: _isReviewing,
+        practiceAnswers: _records
+            .map((PracticeAnswerRecord r) => InProgressPracticeAnswer(
+                  questionId: r.question.id,
+                  submittedAnswer: r.submittedAnswer,
+                  isCorrect: r.isCorrect,
+                  answeredAtIso: r.answeredAt.toUtc().toIso8601String(),
+                ))
+            .toList(),
+      ),
+    );
   }
 
   Future<void> _loadFavoriteForCurrentQuestion() async {
@@ -266,6 +332,7 @@ class _PracticeSessionPageState extends State<PracticeSessionPage> {
       _latestRecord = record;
       _isReviewing = true;
     });
+    await _saveProgress();
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _scrollToReviewCard();
@@ -283,6 +350,7 @@ class _PracticeSessionPageState extends State<PracticeSessionPage> {
       _isCurrentQuestionFavorite = false;
     });
     _loadFavoriteForCurrentQuestion();
+    unawaited(_saveProgress());
   }
 
   Future<void> _scrollToReviewCard() async {
@@ -299,6 +367,10 @@ class _PracticeSessionPageState extends State<PracticeSessionPage> {
   }
 
   Future<void> _openSummary() async {
+    final String? learnerId = widget.services.currentLearnerId;
+    if (learnerId != null) {
+      await widget.services.clearInProgressSession(learnerId);
+    }
     final PracticeSessionResult result = PracticeSessionResult(
       records: List<PracticeAnswerRecord>.unmodifiable(_records),
       startedAt: _startedAt,

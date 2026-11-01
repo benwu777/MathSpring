@@ -10,6 +10,7 @@ import 'package:mathspring/data/local/learner_profile_repository.dart';
 import 'package:mathspring/data/local/mathspring_database.dart';
 import 'package:mathspring/data/local/question_progress_repository.dart';
 import 'package:mathspring/models/learner_profile.dart';
+import 'package:mathspring/models/in_progress_session.dart';
 import 'package:mathspring/models/answer_session.dart';
 import 'package:mathspring/models/avatar_configuration.dart';
 import 'package:mathspring/models/favorite_question.dart';
@@ -493,6 +494,98 @@ void main() {
     expect(value, 'learner_001');
   });
 
+  test('an unfinished session is saved per learner and can be cleared',
+      () async {
+    // 2026-11-01 接續上次：app 被系統回收後，進入畫面要能接回做到一半的練習或測驗。
+    final AppServices services = AppServices(
+      database: database,
+      learnerProfileRepository: learnerProfileRepository,
+      questionProgressRepository: questionProgressRepository,
+      appPreferencesRepository: appPreferencesRepository,
+    );
+    final InProgressSession quiz = InProgressSession(
+      kind: InProgressSessionKind.quiz,
+      packJson: const <String, dynamic>{
+        'path': 'assets/questions/mixed/grade4_foundation.mixed.v1.json',
+        'topic': '綜合',
+        'topicCode': 'mixed',
+        'levelStage': 'grade4',
+        'challengeTier': 'foundation',
+        'questionCount': 10,
+      },
+      questionIds: const <String>['q1', 'q2', 'q3'],
+      currentIndex: 1,
+      answers: const <String, String>{'q1': 'B'},
+      startedAtIso: '2026-11-01T08:00:00.000Z',
+      examQuestionCount: 3,
+      examTimeLimitSeconds: 600,
+      remainingSeconds: 412,
+    );
+
+    await services.saveInProgressSession('learner_allen', quiz);
+
+    final InProgressSession? loaded =
+        await services.loadInProgressSession('learner_allen');
+    expect(loaded, isNotNull);
+    expect(loaded!.kind, InProgressSessionKind.quiz);
+    expect(loaded.questionIds, <String>['q1', 'q2', 'q3']);
+    expect(loaded.currentIndex, 1);
+    expect(loaded.answers, <String, String>{'q1': 'B'});
+    expect(loaded.remainingSeconds, 412);
+    expect(loaded.packJson['topicCode'], 'mixed');
+    expect(await services.loadInProgressSession('learner_mia'), isNull);
+
+    await services.clearInProgressSession('learner_allen');
+    expect(await services.loadInProgressSession('learner_allen'), isNull);
+  });
+
+  test('a fresh install gets exactly one default learner', () async {
+    // 2026-11-01 不再預設建立 Allen、Mia 兩位示範學習者：免費版只能有 1 位，
+    // 家長也不該看到別人家的名字。
+    final AppServices services = AppServices(
+      database: database,
+      learnerProfileRepository: learnerProfileRepository,
+      questionProgressRepository: questionProgressRepository,
+      appPreferencesRepository: appPreferencesRepository,
+    );
+
+    await services.seedDefaultDataIfNeeded(defaultLearnerName: '小學生');
+
+    final List<LearnerProfile> profiles =
+        await learnerProfileRepository.fetchAll();
+    expect(profiles, hasLength(1));
+    expect(profiles.single.displayName, '小學生');
+    expect(profiles.single.minLevelStage, 'grade1');
+    expect(profiles.single.maxLevelStage, 'grade2');
+    expect(services.currentLearnerId, profiles.single.id);
+  });
+
+  test('seeding leaves an existing device untouched', () async {
+    final AppServices services = AppServices(
+      database: database,
+      learnerProfileRepository: learnerProfileRepository,
+      questionProgressRepository: questionProgressRepository,
+      appPreferencesRepository: appPreferencesRepository,
+    );
+    await learnerProfileRepository.save(const LearnerProfile(
+      id: 'learner_allen',
+      displayName: 'Allen',
+      levelStage: 'grade4',
+      minLevelStage: 'grade3',
+      maxLevelStage: 'grade4',
+      challengeTier: 'foundation',
+      createdAtIso: '2026-07-16T00:00:00Z',
+    ));
+    await appPreferencesRepository.setValue('current_learner_id', 'learner_allen');
+
+    await services.seedDefaultDataIfNeeded(defaultLearnerName: '小學生');
+
+    final List<LearnerProfile> profiles =
+        await learnerProfileRepository.fetchAll();
+    expect(profiles.map((LearnerProfile p) => p.displayName), <String>['Allen']);
+    expect(services.currentLearnerId, 'learner_allen');
+  });
+
   test('deleting the current learner switches to another learner', () async {
     final AppServices services = AppServices(
       database: database,
@@ -501,7 +594,30 @@ void main() {
       appPreferencesRepository: appPreferencesRepository,
     );
 
+    for (final LearnerProfile profile in const <LearnerProfile>[
+      LearnerProfile(
+        id: 'learner_allen',
+        displayName: 'Allen',
+        levelStage: 'grade4',
+        minLevelStage: 'grade3',
+        maxLevelStage: 'grade4',
+        challengeTier: 'foundation',
+        createdAtIso: '2026-07-16T00:00:00Z',
+      ),
+      LearnerProfile(
+        id: 'learner_mia',
+        displayName: 'Mia',
+        levelStage: 'grade2',
+        minLevelStage: 'grade1',
+        maxLevelStage: 'grade2',
+        challengeTier: 'foundation',
+        createdAtIso: '2026-07-16T00:01:00Z',
+      ),
+    ]) {
+      await learnerProfileRepository.save(profile);
+    }
     await services.seedDefaultDataIfNeeded();
+    await services.setCurrentLearner('learner_allen');
     expect(services.currentLearnerId, 'learner_allen');
 
     await services.deleteLearner('learner_allen');

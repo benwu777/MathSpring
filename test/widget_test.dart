@@ -8,6 +8,7 @@ import 'package:mathspring/data/bundled/bundled_question_bank_repository.dart';
 import 'package:mathspring/data/local/app_services.dart';
 import 'package:mathspring/main.dart';
 import 'package:mathspring/models/answer_session.dart';
+import 'package:mathspring/models/in_progress_session.dart';
 import 'package:mathspring/models/learner_profile.dart';
 import 'package:mathspring/models/question.dart';
 import 'package:mathspring/models/question_bank.dart';
@@ -1815,6 +1816,138 @@ void main() {
         expect(text.trim(), isNotEmpty, reason: '$locale');
       }
     }
+  });
+
+  Future<void> pumpPractice(WidgetTester tester, AppServices services,
+      {InProgressSession? resume}) async {
+    final TestWidgetsFlutterBinding binding =
+        TestWidgetsFlutterBinding.ensureInitialized();
+    binding.platformDispatcher.localeTestValue = const Locale('en');
+    tester.view.physicalSize = const Size(1290, 2796);
+    tester.view.devicePixelRatio = 3;
+    addTearDown(tester.view.reset);
+    await tester.pumpWidget(
+      MaterialApp(
+        locale: const Locale('en'),
+        supportedLocales: AppStrings.supportedLocales,
+        localizationsDelegates: const [
+          GlobalMaterialLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+        ],
+        home: PracticeSessionPage(
+          services: services,
+          pack: const BundledQuestionPackInfo(
+            path: 'assets/questions/geometry/grade2_foundation.geometry.v1.json',
+            topic: '幾何',
+            topicCode: 'geometry',
+            levelStage: 'grade2',
+            challengeTier: 'foundation',
+            questionCount: 2,
+          ),
+          initialQuestions: [
+            createShapeDiagramQuestion(),
+            createSecondDemoQuestion(),
+          ],
+          resume: resume,
+        ),
+      ),
+    );
+    await tester.runAsync(() async {
+      await Future<void>.delayed(const Duration(milliseconds: 50));
+    });
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 300));
+  }
+
+  testWidgets('practice saves its progress after every answer',
+      (WidgetTester tester) async {
+    // 2026-11-01 接續上次：app 被系統回收後要能接回做到一半的練習。
+    final AppServices services = createTestServices();
+    await pumpPractice(tester, services);
+
+    await tester.enterText(
+        find.byKey(const ValueKey<String>(
+            'practice_integer_input_geometry_grade2_foundation_001')),
+        '16');
+    await tester.tap(find.byKey(const ValueKey<String>(
+        'submit_answer_geometry_grade2_foundation_001')));
+    await tester.pumpAndSettle();
+
+    InProgressSession? saved =
+        await services.loadInProgressSession('learner_allen');
+    expect(saved, isNotNull);
+    expect(saved!.kind, InProgressSessionKind.practice);
+    expect(saved.questionIds, <String>[
+      'geometry_grade2_foundation_001',
+      'arithmetic_grade4_foundation_002',
+    ]);
+    expect(saved.currentIndex, 0);
+    expect(saved.isReviewing, isTrue);
+    expect(saved.practiceAnswers.single.submittedAnswer, '16');
+    expect(saved.practiceAnswers.single.isCorrect, isTrue);
+
+    await tester.ensureVisible(find.text('Next question'));
+    await tester.tap(find.text('Next question'));
+    await tester.pumpAndSettle();
+    saved = await services.loadInProgressSession('learner_allen');
+    expect(saved!.currentIndex, 1);
+    expect(saved.isReviewing, isFalse);
+  });
+
+  testWidgets('practice resumes at the saved question',
+      (WidgetTester tester) async {
+    final AppServices services = createTestServices();
+    await pumpPractice(
+      tester,
+      services,
+      resume: const InProgressSession(
+        kind: InProgressSessionKind.practice,
+        packJson: <String, dynamic>{},
+        questionIds: <String>[
+          'geometry_grade2_foundation_001',
+          'arithmetic_grade4_foundation_002',
+        ],
+        currentIndex: 1,
+        startedAtIso: '2026-11-01T08:00:00.000Z',
+        practiceAnswers: <InProgressPracticeAnswer>[
+          InProgressPracticeAnswer(
+            questionId: 'geometry_grade2_foundation_001',
+            submittedAnswer: '16',
+            isCorrect: true,
+            answeredAtIso: '2026-11-01T08:01:00.000Z',
+          ),
+        ],
+      ),
+    );
+
+    expect(
+        find.byKey(const ValueKey<String>(
+            'submit_answer_arithmetic_grade4_foundation_002')),
+        findsOneWidget);
+    expect(
+        find.byKey(const ValueKey<String>(
+            'submit_answer_geometry_grade2_foundation_001')),
+        findsNothing);
+  });
+
+  testWidgets('closing a practice clears the unfinished session',
+      (WidgetTester tester) async {
+    final AppServices services = createTestServices();
+    await pumpPractice(tester, services);
+    await tester.enterText(
+        find.byKey(const ValueKey<String>(
+            'practice_integer_input_geometry_grade2_foundation_001')),
+        '16');
+    await tester.tap(find.byKey(const ValueKey<String>(
+        'submit_answer_geometry_grade2_foundation_001')));
+    await tester.pumpAndSettle();
+    expect(await services.loadInProgressSession('learner_allen'), isNotNull);
+
+    await tester.tap(
+        find.byKey(const ValueKey<String>('close_practice_session')));
+    await tester.pumpAndSettle();
+    expect(await services.loadInProgressSession('learner_allen'), isNull);
   });
 
   testWidgets('answer review card keeps the neutral style without the otter',
