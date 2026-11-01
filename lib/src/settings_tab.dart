@@ -24,13 +24,13 @@ class _SettingsTab extends StatelessWidget {
       children: [
         _CompactHeroBanner(
           title: strings.settingsTitle,
-          subtitle: strings.settingsSubtitle,
+          info: strings.settingsInfo,
           icon: Icons.tune_rounded,
         ),
         const SizedBox(height: 18),
         _LearnerProfilesSection(
           title: strings.settingsTitle,
-          subtitle: strings.settingsSubtitle,
+          info: strings.learnerProfilesInfo,
           services: services,
           onChanged: onChanged,
           maxLearnerProfiles: monetization.value.maxLearnerProfiles,
@@ -61,7 +61,7 @@ class _SettingsTab extends StatelessWidget {
         const SizedBox(height: 16),
         _ProgressSection(
           title: strings.progressTitle,
-          subtitle: strings.progressSubtitle,
+          info: strings.progressInfo,
           services: services,
         ),
         const SizedBox(height: 16),
@@ -336,7 +336,7 @@ class _SupportAndPrivacySection extends StatelessWidget {
     final AppStrings strings = AppStrings.of(context);
     return _SectionCard(
       title: strings.helpAndPrivacyTitle,
-      subtitle: strings.helpAndPrivacySubtitle,
+      info: strings.helpAndPrivacyInfo,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
@@ -546,7 +546,7 @@ class _LearnersOverviewSectionState extends State<_LearnersOverviewSection> {
     return _SectionCard(
       cardKey: const ValueKey<String>('learners_overview'),
       title: strings.learnersOverviewTitle,
-      subtitle: strings.learnersOverviewSubtitle,
+      info: strings.learnersOverviewInfo,
       child: FutureBuilder<Map<String, LearnerOverview>>(
         future: _overviews,
         builder: (BuildContext context,
@@ -629,7 +629,7 @@ class _LocaleSettingsSection extends StatelessWidget {
     final AppStrings strings = AppStrings.of(context);
     return _SectionCard(
       title: strings.languageSettingsTitle,
-      subtitle: strings.languageSettingsSubtitle,
+      info: strings.languageSettingsInfo,
       child: Wrap(
         spacing: 8,
         runSpacing: 8,

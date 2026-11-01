@@ -80,7 +80,7 @@ void main() {
   // 畫面下半部整片空白（iPad 上特別明顯）。
   testWidgets('測驗分頁的主卡片撐滿剩餘高度', (WidgetTester tester) async {
     await pumpAt(tester, const Size(820, 1180));
-    await tester.tap(find.text('Quiz').last);
+    await tester.tap(find.byTooltip('Quiz'));
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 300));
 

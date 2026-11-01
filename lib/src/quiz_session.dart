@@ -326,8 +326,15 @@ class _QuizSessionPageState extends State<QuizSessionPage> {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(strings.questionOverview,
-                  style: Theme.of(sheetContext).textTheme.titleLarge),
+              Row(
+                children: [
+                  Text(strings.questionOverview,
+                      style: Theme.of(sheetContext).textTheme.titleLarge),
+                  _InfoButton(
+                      title: strings.questionOverview,
+                      body: strings.questionOverviewInfo),
+                ],
+              ),
               const SizedBox(height: 14),
               Wrap(
                 spacing: 8,
@@ -350,8 +357,6 @@ class _QuizSessionPageState extends State<QuizSessionPage> {
                     ),
                 ],
               ),
-              const SizedBox(height: 12),
-              Text(strings.questionOverviewLegend),
             ],
           ),
         ),

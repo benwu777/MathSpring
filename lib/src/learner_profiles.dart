@@ -3,7 +3,7 @@ part of '../main.dart';
 class _LearnerProfilesSection extends StatefulWidget {
   const _LearnerProfilesSection({
     required this.title,
-    required this.subtitle,
+    required this.info,
     required this.services,
     required this.onChanged,
     this.maxLearnerProfiles = 1,
@@ -12,7 +12,7 @@ class _LearnerProfilesSection extends StatefulWidget {
   });
 
   final String title;
-  final String subtitle;
+  final String info;
   final AppServices services;
   final VoidCallback onChanged;
   final int maxLearnerProfiles;
@@ -114,7 +114,7 @@ class _LearnerProfilesSectionState extends State<_LearnerProfilesSection> {
     final List<LearnerProfile> profiles = widget.services.learnerProfiles;
     return _SectionCard(
       title: widget.title,
-      subtitle: widget.subtitle,
+      info: widget.info,
       trailing: TextButton.icon(
         onPressed: () => _openCreateLearnerDialog(context),
         icon: const Icon(Icons.add, size: 18),
@@ -326,12 +326,12 @@ class _ProfileTile extends StatelessWidget {
 class _ProgressSection extends StatelessWidget {
   const _ProgressSection({
     required this.title,
-    required this.subtitle,
+    required this.info,
     required this.services,
   });
 
   final String title;
-  final String subtitle;
+  final String info;
   final AppServices services;
 
   @override
@@ -348,7 +348,7 @@ class _ProgressSection extends StatelessWidget {
             const LearnerProgressSummary(solvedCount: 0, correctCount: 0);
         return _SectionCard(
           title: title,
-          subtitle: subtitle,
+          info: info,
           child: _StatRow(
             leftValue: '${summary.solvedCount}',
             leftLabel: AppStrings.of(context).solvedLabel,
@@ -602,16 +602,17 @@ class _LearnerGradeRangeSelector extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          strings.gradeRangeLabel,
-          style: Theme.of(context).textTheme.titleMedium,
+        Row(
+          children: [
+            Text(
+              strings.gradeRangeLabel,
+              style: Theme.of(context).textTheme.titleMedium,
+            ),
+            _InfoButton(
+                title: strings.gradeRangeLabel, body: strings.gradeRangeInfo),
+          ],
         ),
         const SizedBox(height: 8),
-        Text(
-          strings.gradeRangeHint,
-          style: Theme.of(context).textTheme.bodySmall,
-        ),
-        const SizedBox(height: 14),
         Container(
           width: double.infinity,
           padding: const EdgeInsets.fromLTRB(16, 16, 16, 12),

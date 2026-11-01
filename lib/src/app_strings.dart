@@ -179,6 +179,130 @@ class AppStrings {
         en: 'Source: ',
         ja: '出典：',
       );
+  String get gotIt => _text(
+        zhHant: '知道了',
+        zhHans: '知道了',
+        en: 'Got it',
+        ja: 'わかりました',
+      );
+  String get infoTooltip => _text(
+        zhHant: '說明',
+        zhHans: '说明',
+        en: 'About this',
+        ja: '説明',
+      );
+  String get practiceEntryInfo => _text(
+        zhHant:
+            '練習會從目前學習者設定的年級範圍抽題，一次一題，答完馬上知道對錯並可以看詳解。也可以先選一個主題，只練那個主題。答對率偏低的概念會比較常出現，幫你把弱點補起來。',
+        zhHans:
+            '练习会从当前学习者设定的年级范围抽题，一次一题，答完马上知道对错并可以看详解。也可以先选一个主题，只练那个主题。正确率偏低的概念会比较常出现，帮你把弱点补起来。',
+        en: 'Practice draws questions from the current learner’s grade range, one at a time. You see right away whether each answer is correct and can open the worked solution. You can also pick a single topic to focus on. Concepts with a low accuracy rate come up more often, so weak spots get extra practice.',
+        ja: '練習は、いまの学習者に設定した学年の範囲から 1 問ずつ出題されます。答えるとすぐに正解かどうかがわかり、解説も見られます。テーマを 1 つ選んで、そのテーマだけを練習することもできます。正答率の低い概念はよく出るようになり、苦手を重点的に補えます。',
+      );
+  String get dailyMissionTaskInfo => _text(
+        zhHant:
+            '每天在一般練習作答 5 題，就算完成今天的任務，答對或答錯都算。完成之後可以繼續練習。每天固定練一點，比久久練一大堆更容易記得。',
+        zhHans:
+            '每天在一般练习作答 5 题，就算完成今天的任务，答对或答错都算。完成之后可以继续练习。每天固定练一点，比隔很久才练一大堆更容易记住。',
+        en: 'Answer 5 questions in regular practice each day to complete the daily mission — right or wrong, every answer counts. You can keep practicing after it is done. A little practice every day sticks better than a lot all at once.',
+        ja: '通常の練習で 1 日 5 問に答えると、今日のミッション達成です。正解でも不正解でも数えます。達成後も続けて練習できます。毎日少しずつのほうが、まとめてたくさん解くより身につきます。',
+      );
+  String get quizEntryInfo => _text(
+        zhHant:
+            '測驗會依目前的年級範圍自動抽題，組成一份考卷。作答過程不顯示對錯，整份交卷後才統一看分數與詳解。正式測驗可以選題數與時間，總分 100 分；考試中可以自由跳題，時間到會自動交卷。',
+        zhHans:
+            '测验会依当前的年级范围自动抽题，组成一份试卷。作答过程中不显示对错，整份交卷后才统一看分数与详解。正式测验可以选题数与时间，总分 100 分；考试中可以自由跳题，时间到会自动交卷。',
+        en: 'A quiz builds a paper from the current grade range. Answers are not marked while you work; you see the score and solutions after submitting the whole paper. For a formal exam you choose the number of questions and the time limit, the total is 100 points, you can move freely between questions, and the paper is submitted automatically when time runs out.',
+        ja: 'テストは、いまの学年の範囲から自動で問題を選んで 1 回分を作ります。解いている間は正誤を表示せず、全部提出したあとで点数と解説をまとめて確認します。本番形式では問題数と時間を選べ、満点は 100 点です。問題は自由に行き来でき、時間になると自動で提出されます。',
+      );
+  String get reviewInfo => _text(
+        zhHant:
+            '這裡整理目前學習者的學習狀況：成就、每天的作答月曆、還沒訂正的錯題，以及答對率偏低的概念。也可以打開作答紀錄，重看每一次練習與測驗的題目和詳解。',
+        zhHans:
+            '这里整理当前学习者的学习情况：成就、每天的作答日历、还没订正的错题，以及正确率偏低的概念。也可以打开作答记录，重看每一次练习与测验的题目和详解。',
+        en: 'This page sums up the current learner’s progress: achievements, a calendar of daily answers, mistakes that still need fixing, and concepts with low accuracy. You can also open the answer history to revisit the questions and solutions from every practice and quiz.',
+        ja: 'いまの学習者の学習状況をまとめています。実績、毎日の解答カレンダー、まだ直していない間違い、正答率の低い概念を確認できます。解答履歴を開けば、これまでの練習とテストの問題や解説を見直せます。',
+      );
+  String get achievementsInfo => _text(
+        zhHant: '成就會依累積的練習量、錯題訂正，以及連續學習的天數自動解鎖。每位學習者的成就分開計算。',
+        zhHans: '成就会依累积的练习量、错题订正，以及连续学习的天数自动解锁。每位学习者的成就分开计算。',
+        en: 'Achievements unlock automatically from the total amount of practice, fixed mistakes, and consecutive days of learning. Each learner has their own achievements.',
+        ja: '実績は、練習の累計、間違いの直し、連続で学習した日数に応じて自動で解除されます。実績は学習者ごとに別々です。',
+      );
+  String get calendarInfo => _text(
+        zhHant: '月曆會標出這個月有作答的日子。點選某一天，可以看到那天作答的題數與正確率。',
+        zhHans: '日历会标出这个月有作答的日子。点选某一天，可以看到那天作答的题数与正确率。',
+        en: 'The calendar marks the days this month on which questions were answered. Tap a day to see how many questions were answered and the accuracy rate.',
+        ja: 'カレンダーには、今月問題に答えた日が表示されます。日付をタップすると、その日に解いた問題数と正答率がわかります。',
+      );
+  String get mistakePracticeInfo => _text(
+        zhHant:
+            '答錯、還沒訂正的題目會集中在這裡。重新作答只要答對一次，那題就會從清單移除；再答錯就繼續留著。專門練錯題，是最有效率的複習方式。',
+        zhHans:
+            '答错、还没订正的题目会集中在这里。重新作答只要答对一次，那题就会从列表移除；再答错就继续留着。专门练错题，是最有效率的复习方式。',
+        en: 'Questions you got wrong and have not fixed yet are collected here. Answer one correctly once and it leaves the list; answer it wrong again and it stays. Practicing your mistakes is the most efficient way to review.',
+        ja: '間違えてまだ直していない問題がここに集まります。もう一度解いて 1 回正解すればリストから消え、また間違えると残ります。間違えた問題を集中して解くのが、いちばん効率のよい復習です。',
+      );
+  String get weakConceptsInfo => _text(
+        zhHant:
+            '系統依作答紀錄計算每個概念的答對率。一個概念至少作答 3 題、而且答對率低於一半，就會列在這裡。之後練習時，這些概念的題目會比較常出現。',
+        zhHans:
+            '系统依作答记录计算每个概念的正确率。一个概念至少作答 3 题，而且正确率低于一半，就会列在这里。之后练习时，这些概念的题目会比较常出现。',
+        en: 'Accuracy is tracked for every concept from the answer history. A concept is listed here once it has at least 3 answers and its accuracy is below one half. Questions on these concepts then come up more often in practice.',
+        ja: '解答履歴から、概念ごとの正答率を計算しています。3 問以上解いていて正答率が半分未満の概念がここに表示されます。その後の練習では、これらの概念の問題がよく出るようになります。',
+      );
+  String get settingsInfo => _text(
+        zhHant: '設定頁可以管理學習者角色與各自的出題年級範圍、切換目前使用的學習者、查看學習進度、選擇介面語言，以及購買或回復完整版。',
+        zhHans: '设置页可以管理学习者角色与各自的出题年级范围、切换当前使用的学习者、查看学习进度、选择界面语言，以及购买或恢复完整版。',
+        en: 'Here you manage learner profiles and each one’s grade range, switch the active learner, check progress, choose the interface language, and buy or restore the full version.',
+        ja: 'ここでは学習者と、それぞれの出題学年の範囲を管理し、使う学習者の切り替え、進み具合の確認、表示言語の選択、フル版の購入や復元ができます。',
+      );
+  String get learnerProfilesInfo => _text(
+        zhHant:
+            '可以在同一台裝置為不同的孩子建立學習者角色，每個角色有自己的名字、頭像、出題年級範圍與學習紀錄。免費版可以建立 1 位，完整版最多 5 位。點選角色可以切換目前的學習者或編輯設定。',
+        zhHans:
+            '可以在同一台设备为不同的孩子创建学习者角色，每个角色有自己的名字、头像、出题年级范围与学习记录。免费版可以创建 1 位，完整版最多 5 位。点选角色可以切换当前的学习者或编辑设置。',
+        en: 'Create a learner profile for each child on the same device. Every profile has its own name, avatar, grade range, and learning history. The free version allows 1 learner and the full version up to 5. Tap a profile to switch to it or edit its settings.',
+        ja: '同じ端末で、子どもごとに学習者を作れます。学習者ごとに名前、アバター、出題学年の範囲、学習記録が別々です。無料版は 1 人、フル版は最大 5 人まで作れます。学習者をタップすると切り替えや設定の編集ができます。',
+      );
+  String get progressInfo => _text(
+        zhHant: '顯示目前學習者累計作答過的題目數，以及這些題目目前答對的比例。同一題重複作答只算一題，以最近一次的結果為準。',
+        zhHans: '显示当前学习者累计作答过的题目数，以及这些题目目前答对的比例。同一题重复作答只算一题，以最近一次的结果为准。',
+        en: 'Shows how many different questions the current learner has answered so far and what share of them are currently correct. A question answered several times counts once, using the most recent result.',
+        ja: 'いまの学習者がこれまでに解いた問題の数と、そのうち現在正解になっている割合です。同じ問題を何度解いても 1 問として数え、いちばん新しい結果を使います。',
+      );
+  String get learnersOverviewInfo => _text(
+        zhHant: '列出每位學習者最近 7 天練習了幾天、作答幾題、答對率多少，以及最需要加強的概念，方便一次掌握所有孩子的學習狀況。',
+        zhHans: '列出每位学习者最近 7 天练习了几天、作答几题、正确率多少，以及最需要加强的概念，方便一次掌握所有孩子的学习情况。',
+        en: 'For each learner, shows how many of the last 7 days they practiced, how many questions they answered, their accuracy, and the concept that most needs work — so you can see every child at a glance.',
+        ja: '学習者ごとに、直近 7 日間で練習した日数、解いた問題数、正答率、いちばん補強が必要な概念を表示します。すべての子どもの様子を一度に確認できます。',
+      );
+  String get languageSettingsInfo => _text(
+        zhHant: '切換介面使用的語言：繁體中文、簡體中文、English、日本語。題目、選項與詳解也會一起切換成該語言的版本。',
+        zhHans: '切换界面使用的语言：繁体中文、简体中文、English、日本語。题目、选项与详解也会一起切换成该语言的版本。',
+        en: 'Switch the interface language between Traditional Chinese, Simplified Chinese, English, and Japanese. Questions, choices, and solutions switch to the same language.',
+        ja: '表示言語を繁体字中国語、簡体字中国語、英語、日本語から切り替えます。問題・選択肢・解説も同じ言語に切り替わります。',
+      );
+  String get helpAndPrivacyInfo => _text(
+        zhHant:
+            '支援頁有使用說明與聯絡方式；隱私權政策說明 App 如何處理資料。MathSpring 的學習紀錄只儲存在這台裝置上，不會上傳到伺服器。',
+        zhHans:
+            '支持页有使用说明与联系方式；隐私政策说明 App 如何处理数据。MathSpring 的学习记录只保存在这台设备上，不会上传到服务器。',
+        en: 'The support page has help and contact details; the privacy policy explains how the app handles data. MathSpring keeps learning records only on this device and never uploads them to a server.',
+        ja: 'サポートページには使い方と連絡先、プライバシーポリシーにはデータの扱いが書かれています。MathSpring の学習記録はこの端末だけに保存され、サーバーには送信されません。',
+      );
+  String get gradeRangeInfo => _text(
+        zhHant: '拖曳左右兩端，設定這位學習者會抽到的題目年級範圍。範圍越寬，難度變化越大；建議從孩子目前的年級開始，再慢慢往上加。',
+        zhHans: '拖动左右两端，设定这位学习者会抽到的题目年级范围。范围越宽，难度变化越大；建议从孩子当前的年级开始，再慢慢往上加。',
+        en: 'Drag the two ends to set which grades this learner’s questions come from. A wider range means a wider spread of difficulty; starting at the child’s current grade and widening gradually works well.',
+        ja: '左右の端をドラッグして、この学習者に出題する学年の範囲を決めます。範囲が広いほど難しさの幅も広がります。いまの学年から始めて、少しずつ広げるのがおすすめです。',
+      );
+  String get questionOverviewInfo => _text(
+        zhHant: '題號格子顯示每一題的作答狀態：藍色代表已作答，白色代表尚未作答。點選題號可以直接跳到那一題。',
+        zhHans: '题号格子显示每一题的作答状态：蓝色代表已作答，白色代表尚未作答。点选题号可以直接跳到那一题。',
+        en: 'Each number shows a question’s status: blue means answered, white means not answered yet. Tap a number to jump straight to that question.',
+        ja: '番号のマスは各問題の状態を示します。青は解答済み、白は未解答です。番号をタップするとその問題へ移動します。',
+      );
   String get restorePurchases => _text(
         zhHant: '回復購買',
         zhHans: '恢复购买',
@@ -233,12 +357,6 @@ class AppStrings {
       );
   String get editLearner =>
       _text(zhHant: '編輯角色', zhHans: '编辑角色', en: 'Edit learner', ja: '学習者を編集');
-  String get gradeRangeHint => _text(
-        zhHant: '拖曳左右兩端，設定這個角色可抽到的題目年級範圍。',
-        zhHans: '拖动左右两端，设置这个角色可抽到的题目年级范围。',
-        en: 'Drag both ends to choose the grades this learner can receive.',
-        ja: '左右のつまみを動かして、この学習者に出題する学年範囲を設定します。',
-      );
   String get learnerName =>
       _text(zhHant: '名稱', zhHans: '名称', en: 'Name', ja: '名前');
   String get levelStage =>
@@ -250,13 +368,8 @@ class AppStrings {
   String get saveLearner =>
       _text(zhHant: '儲存', zhHans: '保存', en: 'Save', ja: '保存');
   String get progressTitle =>
-      _text(zhHant: '今日進度', zhHans: '今日进度', en: 'Today', ja: '今日の進捗');
-  String get progressSubtitle => _text(
-        zhHant: '保留簡單、清楚、可以持續練習的節奏。',
-        zhHans: '保持简单、清楚、可以持续练习的节奏。',
-        en: 'Keep practice focused, calm, and easy to continue.',
-        ja: '落ち着いて継続できる練習リズムを保つ。',
-      );
+      _text(
+          zhHant: '學習進度', zhHans: '学习进度', en: 'Progress', ja: '学習の進み具合');
   String get dashboardFocusTitle =>
       _text(zhHant: '今日重點', zhHans: '今日重点', en: 'Daily Focus', ja: '今日の重点');
   String get dashboardFocusBody => _text(
@@ -287,39 +400,15 @@ class AppStrings {
       _text(zhHant: '設定', zhHans: '设置', en: 'Settings', ja: '設定');
   String get practiceEntryTitle =>
       _text(zhHant: '開始練習', zhHans: '开始练习', en: 'Practice', ja: '練習開始');
-  String get practiceEntrySubtitle => _text(
-        zhHant: '直接開始目前年級範圍的練習，或指定主題。',
-        zhHans: '直接开始当前年级范围的练习，或指定主题。',
-        en: 'Start a session for the current grade range or choose a topic.',
-        ja: '現在の学年範囲で練習を始めるか、分野を指定します。',
-      );
   String get quizEntryTitle =>
       _text(zhHant: '開始測驗', zhHans: '开始测验', en: 'Quiz', ja: 'テスト開始');
-  String get quizEntrySubtitle => _text(
-        zhHant: '用目前年級範圍出一組測驗，完成後再看詳解。',
-        zhHans: '按当前年级范围生成一组测验，完成后再看详解。',
-        en: 'Generate a quiz for the current grade range and review solutions after submission.',
-        ja: '現在の学年範囲に合わせて出題し、提出後に解説を確認します。',
-      );
   String get reviewTitle =>
       _text(zhHant: '學習回顧', zhHans: '学习回顾', en: 'Review', ja: '学習ふり返り');
-  String get reviewSubtitle => _text(
-        zhHant: '回顧最近練習與測驗，重新檢查解題過程。',
-        zhHans: '回顾最近练习与测验，重新检查解题过程。',
-        en: 'Revisit recent practice and quiz sessions and inspect each solution again.',
-        ja: '最近の練習とテストを見返し、解き方を再確認します。',
-      );
   String get achievementsTitle => _text(
         zhHant: '學習成就',
         zhHans: '学习成就',
         en: 'Achievements',
         ja: '学習の達成',
-      );
-  String get achievementsSubtitle => _text(
-        zhHant: '依累積練習、錯題重做與持續學習解鎖。',
-        zhHans: '依累计练习、错题重做与持续学习解锁。',
-        en: 'Unlocked through steady practice, review, and persistence.',
-        ja: '練習の積み重ね、解き直し、継続によって達成します。',
       );
   String get achievementsEmpty => _text(
         zhHant: '完成第一輪練習後，這裡會出現你的成就。',
@@ -332,12 +421,6 @@ class AppStrings {
         zhHans: '答题日历',
         en: 'Answer calendar',
         ja: '回答カレンダー',
-      );
-  String get calendarSubtitle => _text(
-        zhHant: '選擇日期查看答題數與正確率。',
-        zhHans: '选择日期查看答题数与正确率。',
-        en: 'Choose a date to see question count and accuracy.',
-        ja: '日付を選んで回答数と正答率を確認します。',
       );
   String get calendarNoPractice => _text(
         zhHant: '這一天沒有答題紀錄。',
@@ -426,12 +509,6 @@ class AppStrings {
         zhHans: '角色与设置',
         en: 'Profiles & Settings',
         ja: 'プロフィールと設定',
-      );
-  String get settingsSubtitle => _text(
-        zhHant: '在這裡管理角色、出題年級範圍與目前使用者。',
-        zhHans: '在这里管理角色、出题年级范围与当前使用者。',
-        en: 'Manage learners, grade ranges, and the active profile here.',
-        ja: 'ここで学習者、出題学年範囲、現在の利用者を管理します。',
       );
   String get topicPracticeTitle => _text(
         zhHant: '指定主題練習',
@@ -690,12 +767,6 @@ class AppStrings {
         en: '$number・$points pts',
         ja: '$number・$points 点',
       );
-  String get questionOverviewLegend => _text(
-        zhHant: '藍色代表已作答，白色代表尚未作答。',
-        zhHans: '蓝色代表已作答，白色代表尚未作答。',
-        en: 'Blue means answered; white means not answered yet.',
-        ja: '青は解答済み、白はまだ解答していない問題です。',
-      );
   String formalExamScore(int earned, int max) => _text(
         zhHant: '正式測驗成績：$earned / $max',
         zhHans: '正式测验成绩：$earned / $max',
@@ -732,12 +803,6 @@ class AppStrings {
         en: 'Fix your mistakes',
         ja: 'まちがえた問題に再挑戦',
       );
-  String get mistakePracticeSubtitle => _text(
-        zhHant: '上次答錯、還沒訂正的題目。答對一次就會從這裡移除。',
-        zhHans: '上次答错、还没订正的题目。答对一次就会从这里移除。',
-        en: 'Questions you got wrong last time. Answer one correctly and it leaves this list.',
-        ja: '前回まちがえて、まだ直していない問題です。一度正解するとここから消えます。',
-      );
   String mistakesToFix(int count) => _text(
         zhHant: '$count 題待訂正',
         zhHans: '$count 题待订正',
@@ -762,12 +827,6 @@ class AppStrings {
         en: 'Concepts to strengthen',
         ja: '強化したい単元',
       );
-  String get weakConceptsSubtitle => _text(
-        zhHant: '依作答紀錄找出答對率偏低的概念，練習時會多出這些題目。',
-        zhHans: '依作答记录找出答对率偏低的概念，练习时会多出这些题目。',
-        en: 'Concepts with low accuracy in your answers. Practice will show more of them.',
-        ja: '正答率が低めの単元です。練習ではこれらの問題が多めに出ます。',
-      );
   String get noWeakConcepts => _text(
         zhHant: '目前沒有明顯偏弱的概念。多練幾題後，這裡會列出需要加強的地方。',
         zhHans: '目前没有明显偏弱的概念。多练几题后，这里会列出需要加强的地方。',
@@ -785,12 +844,6 @@ class AppStrings {
         zhHans: '孩子们的学习情况',
         en: 'Learners at a glance',
         ja: '学習者ごとの様子',
-      );
-  String get learnersOverviewSubtitle => _text(
-        zhHant: '每位學習者近 7 天的練習量、答對率，以及最需要加強的概念。',
-        zhHans: '每位学习者近 7 天的练习量、答对率，以及最需要加强的概念。',
-        en: 'Practice and accuracy over the last 7 days, plus the concept each learner most needs to work on.',
-        ja: '直近7日間の練習量と正答率、いちばん強化したい単元です。',
       );
   String overviewRecentPractice(int days, int answered, int percent) => _text(
         zhHant: '近 7 天：練了 $days 天 · $answered 題 · 答對 $percent%',
@@ -854,12 +907,6 @@ class AppStrings {
         en: "Today's mission",
         ja: '今日のミッション',
       );
-  String get dailyMissionTaskSubtitle => _text(
-        zhHant: '一般練習作答五題即可完成，不限答對或答錯。',
-        zhHans: '一般练习作答五题即可完成，不限答对或答错。',
-        en: 'Answer five practice questions to finish. Right or wrong both count.',
-        ja: '練習で5問答えれば達成です。正解でも不正解でも数えます。',
-      );
   String get dailyMissionStart => _text(
         zhHant: '開始今日任務',
         zhHans: '开始今日任务',
@@ -871,12 +918,6 @@ class AppStrings {
         zhHans: '仍要自由练习？从这里开始',
         en: 'Want free practice instead? Start here',
         ja: '自由に練習したい場合はこちら',
-      );
-  String get quizStartHint => _text(
-        zhHant: '測驗會依目前年級範圍自動抽題，完成整份後再統一看分數與詳解。',
-        zhHans: '测验会按当前年级范围自动抽题，完成整份后再统一看分数与详解。',
-        en: 'Quiz questions are selected automatically for the current grade range. Review score and solutions after submission.',
-        ja: 'テスト問題は現在の学年範囲に合わせて自動選定され、提出後に得点と解説をまとめて確認します。',
       );
   String get noApprovedQuestionsInRange => _text(
         zhHant: '這個年級範圍目前還沒有通過審查的題目。',
@@ -890,23 +931,11 @@ class AppStrings {
         en: 'Language',
         ja: '言語',
       );
-  String get languageSettingsSubtitle => _text(
-        zhHant: '介面語系在這裡切換，題目內容也會同步切換到可用版本。',
-        zhHans: '界面语言在这里切换，题目内容也会同步切换到可用版本。',
-        en: 'Switch the interface language here. Question content follows the selected locale when translations are available.',
-        ja: 'ここで表示言語を切り替えます。問題文も利用可能な翻訳に合わせて切り替わります。',
-      );
   String get helpAndPrivacyTitle => _text(
         zhHant: '支援與隱私',
         zhHans: '支持与隐私',
         en: 'Help & Privacy',
         ja: 'サポートとプライバシー',
-      );
-  String get helpAndPrivacySubtitle => _text(
-        zhHant: '查看使用說明與資料處理方式。',
-        zhHans: '查看使用说明与数据处理方式。',
-        en: 'Read support information and how data is handled.',
-        ja: '使い方とデータの取り扱いを確認します。',
       );
   String get supportLinkLabel =>
       _text(zhHant: '支援', zhHans: '支持', en: 'Support', ja: 'サポート');

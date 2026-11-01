@@ -699,7 +699,7 @@ void main() {
     binding.platformDispatcher.localeTestValue = const Locale('en');
 
     await pumpApp(tester, createTestServices());
-    await tester.tap(find.text('Review').first);
+    await tester.tap(find.byTooltip('Review'));
     await tester.pumpAndSettle();
 
     expect(
@@ -857,7 +857,7 @@ void main() {
         findsOneWidget);
     expect(find.byKey(const ValueKey<String>('home_background_glow')),
         findsNothing);
-    await tester.tap(find.text('Settings').first);
+    await tester.tap(find.byTooltip('Settings'));
     await tester.pumpAndSettle();
 
     expect(
@@ -1196,7 +1196,7 @@ void main() {
 
     expect(find.text('開始練習'), findsWidgets);
 
-    await tester.tap(find.text('設定'));
+    await tester.tap(find.byTooltip('設定'));
     await tester.pumpAndSettle();
     await tester
         .ensureVisible(find.byKey(const ValueKey<String>('locale_option_en')));
@@ -1204,7 +1204,7 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.text('Language'), findsOneWidget);
-    await tester.tap(find.text('Practice'));
+    await tester.tap(find.byTooltip('Practice'));
     await tester.pumpAndSettle();
     expect(find.text('Start practice'), findsOneWidget);
     expect(find.text('Practice'), findsWidgets);
@@ -1217,7 +1217,7 @@ void main() {
     binding.platformDispatcher.localeTestValue = const Locale('zh', 'TW');
 
     await pumpApp(tester, createTestServices());
-    await tester.tap(find.text('設定'));
+    await tester.tap(find.byTooltip('設定'));
     await tester.pumpAndSettle();
 
     expect(
@@ -1245,7 +1245,7 @@ void main() {
     binding.platformDispatcher.localeTestValue = const Locale('en');
 
     await pumpApp(tester, createTestServices());
-    await tester.tap(find.text('Settings').first);
+    await tester.tap(find.byTooltip('Settings'));
     for (int attempt = 0;
         attempt < 30 && find.textContaining('5 questions').evaluate().isEmpty;
         attempt += 1) {
@@ -1292,7 +1292,7 @@ void main() {
     );
 
     await pumpApp(tester, services);
-    await tester.tap(find.text('Settings').first);
+    await tester.tap(find.byTooltip('Settings'));
     await tester.pumpAndSettle();
 
     expect(
@@ -1307,7 +1307,7 @@ void main() {
     final AppServices services = createTestServices();
 
     await pumpApp(tester, services);
-    await tester.tap(find.text('設定'));
+    await tester.tap(find.byTooltip('設定'));
     await tester.pumpAndSettle();
     await tester.tap(find.byKey(const ValueKey<String>('locale_option_en')));
     await tester.pumpAndSettle();
@@ -1354,7 +1354,7 @@ void main() {
 
     await pumpApp(tester, services);
 
-    await tester.tap(find.text('Quiz'));
+    await tester.tap(find.byTooltip('Quiz'));
     await tester.pumpAndSettle();
 
     expect(find.text('Start quiz'), findsOneWidget);
@@ -1366,7 +1366,7 @@ void main() {
       (WidgetTester tester) async {
     await tester.pumpWidget(MathSpringApp(services: createTestServices()));
     await tester.pumpAndSettle();
-    await tester.tap(find.text('Quiz'));
+    await tester.tap(find.byTooltip('Quiz'));
     await tester.pumpAndSettle();
     final Finder startButton =
         find.byKey(const ValueKey<String>('open_start_quiz'));
@@ -1736,8 +1736,85 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(tester.getSize(find.byType(NavigationBar)).height,
-        lessThanOrEqualTo(62));
-    expect(find.text('Settings'), findsWidgets);
+        lessThanOrEqualTo(50));
+    // 2026-11-01 改成只留圖示：文字不顯示，但每個按鈕仍有提示與語意標籤。
+    final NavigationBar bar = tester.widget(find.byType(NavigationBar));
+    expect(bar.labelBehavior ??
+        Theme.of(tester.element(find.byType(NavigationBar)))
+            .navigationBarTheme
+            .labelBehavior,
+        NavigationDestinationLabelBehavior.alwaysHide);
+    for (final String label in <String>['Practice', 'Quiz', 'Review', 'Settings']) {
+      expect(find.byTooltip(label), findsOneWidget, reason: label);
+    }
+  });
+
+  testWidgets('settings explains sections through info dialogs',
+      (WidgetTester tester) async {
+    // 2026-11-01 說明文字不再常駐畫面，改由標題旁的 ⓘ 開對話框。
+    tester.view.physicalSize = const Size(1290, 2796);
+    tester.view.devicePixelRatio = 3;
+    addTearDown(tester.view.reset);
+    await tester.pumpWidget(MathSpringApp(services: createTestServices()));
+    await tester.pumpAndSettle();
+    await tester.tap(find.byIcon(Icons.settings_outlined));
+    await tester.pumpAndSettle();
+
+    final AppStrings strings = AppStrings(const Locale('en'));
+    expect(
+        find.text('Manage learners, grade ranges, and the active profile here.'),
+        findsNothing);
+    expect(find.textContaining('Switch the interface language here.'),
+        findsNothing);
+
+    final Finder info =
+        find.byKey(const ValueKey<String>('info_${'Language'}'));
+    await tester.ensureVisible(info);
+    await tester.tap(info);
+    await tester.pumpAndSettle();
+
+    expect(find.byType(AlertDialog), findsOneWidget);
+    expect(
+        find.descendant(
+            of: find.byType(AlertDialog),
+            matching: find.text(strings.languageSettingsInfo)),
+        findsOneWidget);
+    await tester.tap(find.text(strings.gotIt));
+    await tester.pumpAndSettle();
+    expect(find.byType(AlertDialog), findsNothing);
+  });
+
+  test('every info explanation is written in all four languages', () {
+    for (final Locale locale in const <Locale>[
+      Locale('zh', 'TW'),
+      Locale('zh', 'CN'),
+      Locale('en'),
+      Locale('ja'),
+    ]) {
+      final AppStrings s = AppStrings(locale);
+      final List<String> infos = <String>[
+        s.practiceEntryInfo,
+        s.dailyMissionTaskInfo,
+        s.quizEntryInfo,
+        s.reviewInfo,
+        s.achievementsInfo,
+        s.calendarInfo,
+        s.mistakePracticeInfo,
+        s.weakConceptsInfo,
+        s.settingsInfo,
+        s.learnerProfilesInfo,
+        s.progressInfo,
+        s.learnersOverviewInfo,
+        s.languageSettingsInfo,
+        s.helpAndPrivacyInfo,
+        s.gradeRangeInfo,
+        s.questionOverviewInfo,
+        s.gotIt,
+      ];
+      for (final String text in infos) {
+        expect(text.trim(), isNotEmpty, reason: '$locale');
+      }
+    }
   });
 
   testWidgets('answer review card keeps the neutral style without the otter',
@@ -2073,7 +2150,7 @@ void main() {
 
     await pumpApp(tester, services);
 
-    await tester.tap(find.text('Settings'));
+    await tester.tap(find.byTooltip('Settings'));
     await tester.pumpAndSettle();
     expect(find.text('Current'), findsOneWidget);
 
@@ -2140,7 +2217,7 @@ void main() {
     final AppServices services = createTestServices();
 
     await pumpApp(tester, services);
-    await tester.tap(find.text('Settings'));
+    await tester.tap(find.byTooltip('Settings'));
     await tester.pumpAndSettle();
 
     expect(find.text('Grades 3-4'), findsWidgets);
@@ -2158,7 +2235,7 @@ void main() {
     final AppServices services = createTestServices();
 
     await pumpApp(tester, services);
-    await tester.tap(find.text('設定'));
+    await tester.tap(find.byTooltip('設定'));
     await tester.pumpAndSettle();
 
     expect(find.text('年級範圍'), findsWidgets);
@@ -2175,7 +2252,7 @@ void main() {
     final AppServices services = createTestServices();
 
     await pumpApp(tester, services);
-    await tester.tap(find.text('設定'));
+    await tester.tap(find.byTooltip('設定'));
     await tester.pumpAndSettle();
     await tester
         .tap(find.byKey(const ValueKey<String>('edit_learner_learner_allen')));
@@ -2197,7 +2274,7 @@ void main() {
     final AppServices services = createTestServices();
 
     await pumpApp(tester, services);
-    await tester.tap(find.text('設定'));
+    await tester.tap(find.byTooltip('設定'));
     await tester.pumpAndSettle();
 
     final Text currentRoleLabel = tester.widget<Text>(find.text('目前角色').first);
@@ -2232,7 +2309,7 @@ void main() {
     );
 
     await pumpApp(tester, services);
-    await tester.tap(find.text('設定'));
+    await tester.tap(find.byTooltip('設定'));
     await tester.pumpAndSettle();
 
     expect(find.text('國一到高三'), findsWidgets);
@@ -2254,7 +2331,7 @@ void main() {
 
     await pumpApp(tester, services, monetizationService: monetization);
 
-    await tester.tap(find.text('Settings'));
+    await tester.tap(find.byTooltip('Settings'));
     await tester.pumpAndSettle();
     await tester.tap(find.text('Add learner'));
     await tester.pumpAndSettle();
@@ -2283,7 +2360,7 @@ void main() {
 
     await pumpApp(tester, services);
 
-    await tester.tap(find.text('Settings'));
+    await tester.tap(find.byTooltip('Settings'));
     await tester.pumpAndSettle();
     await tester.tap(
       find.byKey(const ValueKey<String>('delete_learner_learner_allen')),
@@ -2308,7 +2385,7 @@ void main() {
     final AppServices services = createTestServices();
     await pumpApp(tester, services);
 
-    await tester.tap(find.text('Settings'));
+    await tester.tap(find.byTooltip('Settings'));
     await tester.pumpAndSettle();
     await tester.tap(
       find.byKey(const ValueKey<String>('delete_learner_learner_allen')),
@@ -2357,9 +2434,9 @@ void main() {
 
     await pumpApp(tester, services);
 
-    await tester.tap(find.text('Settings'));
+    await tester.tap(find.byTooltip('Settings'));
     await tester.pumpAndSettle();
-    await tester.ensureVisible(find.text('Today'));
+    await tester.ensureVisible(find.text('Progress'));
     expect(find.text('2'), findsOneWidget);
     expect(find.text('50%'), findsOneWidget);
     expect(find.text('Solved'), findsOneWidget);
@@ -2400,9 +2477,9 @@ void main() {
 
     await pumpApp(tester, services);
 
-    await tester.tap(find.text('Settings'));
+    await tester.tap(find.byTooltip('Settings'));
     await tester.pumpAndSettle();
-    await tester.ensureVisible(find.text('Today'));
+    await tester.ensureVisible(find.text('Progress'));
     expect(find.text('2'), findsOneWidget);
     expect(find.text('50%'), findsOneWidget);
 
@@ -3152,7 +3229,7 @@ void main() {
 
     await pumpApp(tester, services);
 
-    await tester.tap(find.text('Review'));
+    await tester.tap(find.byTooltip('Review'));
     await tester.pumpAndSettle();
     final Finder viewHistoryButton = find.text('View history');
     await tester.ensureVisible(viewHistoryButton);
@@ -3193,7 +3270,7 @@ void main() {
     );
 
     await pumpApp(tester, services);
-    await tester.tap(find.text('Review'));
+    await tester.tap(find.byTooltip('Review'));
     await tester.pumpAndSettle();
 
     expect(find.text('1 question to fix'), findsOneWidget);
@@ -3288,7 +3365,7 @@ void main() {
     );
 
     await pumpApp(tester, services);
-    await tester.tap(find.text('Review'));
+    await tester.tap(find.byTooltip('Review'));
     for (int attempt = 0;
         attempt < 50 && find.textContaining('Fractions').evaluate().isEmpty;
         attempt += 1) {
@@ -3384,7 +3461,7 @@ void main() {
     binding.platformDispatcher.localeTestValue = const Locale('en');
 
     await pumpApp(tester, createTestServices());
-    await tester.tap(find.text('Review'));
+    await tester.tap(find.byTooltip('Review'));
     await tester.pumpAndSettle();
 
     expect(find.text('No mistakes to fix. Wrong answers will show up here.'),
@@ -3437,7 +3514,7 @@ void main() {
     );
 
     await pumpApp(tester, services);
-    await tester.tap(find.text('Review'));
+    await tester.tap(find.byTooltip('Review'));
     await tester.pumpAndSettle();
 
     expect(find.text('Achievements'), findsOneWidget);

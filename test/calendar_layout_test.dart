@@ -39,7 +39,7 @@ void main() {
     });
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 300));
-    await tester.tap(find.text('Review').first);
+    await tester.tap(find.byTooltip('Review'));
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 300));
   }

@@ -343,13 +343,19 @@ class _HeroPanel extends StatelessWidget {
 class _CompactHeroBanner extends StatelessWidget {
   const _CompactHeroBanner({
     required this.title,
-    required this.subtitle,
+    this.subtitle,
+    this.info,
     required this.icon,
     this.otterPose,
   });
 
   final String title;
-  final String subtitle;
+
+  /// 常駐畫面的短句（例如每日鼓勵語）；說明性的文字請放 [info]。
+  final String? subtitle;
+
+  /// 點標題旁 ⓘ 才顯示的說明。
+  final String? info;
   final IconData icon;
   final OtterPose? otterPose;
 
@@ -381,21 +387,30 @@ class _CompactHeroBanner extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  title,
-                  style: textTheme.titleLarge?.copyWith(
-                    fontSize: layoutSpec.scaleText(20),
-                    fontWeight: FontWeight.w700,
-                    letterSpacing: -0.4,
-                  ),
+                Row(
+                  children: [
+                    Flexible(
+                      child: Text(
+                        title,
+                        style: textTheme.titleLarge?.copyWith(
+                          fontSize: layoutSpec.scaleText(20),
+                          fontWeight: FontWeight.w700,
+                          letterSpacing: -0.4,
+                        ),
+                      ),
+                    ),
+                    if (info != null) _InfoButton(title: title, body: info!),
+                  ],
                 ),
-                const SizedBox(height: 4),
-                Text(
-                  subtitle,
-                  style: textTheme.bodyMedium?.copyWith(
-                    color: AppVisualTokens.inkMuted,
+                if (subtitle != null && subtitle!.isNotEmpty) ...[
+                  const SizedBox(height: 4),
+                  Text(
+                    subtitle!,
+                    style: textTheme.bodyMedium?.copyWith(
+                      color: AppVisualTokens.inkMuted,
+                    ),
                   ),
-                ),
+                ],
               ],
             ),
           ),
@@ -412,14 +427,20 @@ class _CompactHeroBanner extends StatelessWidget {
 class _SectionCard extends StatelessWidget {
   const _SectionCard({
     required this.title,
-    required this.subtitle,
+    this.subtitle,
+    this.info,
     required this.child,
     this.trailing,
     this.cardKey,
   });
 
   final String title;
-  final String subtitle;
+
+  /// 常駐畫面的資訊（數據、購買條件等）；說明性的文字請放 [info]。
+  final String? subtitle;
+
+  /// 點標題旁 ⓘ 才顯示的說明。
+  final String? info;
   final Widget child;
   final Widget? trailing;
   final Key? cardKey;
@@ -443,12 +464,22 @@ class _SectionCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Expanded(
-                  child: Text(
-                    title,
-                    style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                          fontSize: layoutSpec.titleText,
-                          letterSpacing: -0.3,
+                  child: Row(
+                    children: [
+                      Flexible(
+                        child: Text(
+                          title,
+                          style: Theme.of(context)
+                              .textTheme
+                              .headlineSmall
+                              ?.copyWith(
+                                fontSize: layoutSpec.titleText,
+                                letterSpacing: -0.3,
+                              ),
                         ),
+                      ),
+                      if (info != null) _InfoButton(title: title, body: info!),
+                    ],
                   ),
                 ),
                 if (trailing != null) ...[
@@ -457,16 +488,56 @@ class _SectionCard extends StatelessWidget {
                 ],
               ],
             ),
-            const SizedBox(height: 8),
-            Text(
-              subtitle,
-              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                    color: const Color(0xFF64748B),
-                    height: 1.45,
-                  ),
-            ),
-            const SizedBox(height: 20),
+            if (subtitle != null && subtitle!.isNotEmpty) ...[
+              const SizedBox(height: 8),
+              Text(
+                subtitle!,
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      color: const Color(0xFF64748B),
+                      height: 1.45,
+                    ),
+              ),
+            ],
+            const SizedBox(height: 16),
             child,
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+/// 標題旁的 ⓘ：點了在畫面中央開對話框顯示 [body]。
+///
+/// 說明文字不常駐畫面（2026-11-01 使用者回饋說明佔太多版面），
+/// 收進對話框後可以寫得比較完整。
+class _InfoButton extends StatelessWidget {
+  const _InfoButton({required this.title, required this.body});
+
+  final String title;
+  final String body;
+
+  @override
+  Widget build(BuildContext context) {
+    final AppStrings strings = AppStrings.of(context);
+    return IconButton(
+      key: ValueKey<String>('info_$title'),
+      tooltip: strings.infoTooltip,
+      icon: const Icon(Icons.info_outline, size: 20),
+      color: AppVisualTokens.inkMuted,
+      visualDensity: VisualDensity.compact,
+      onPressed: () => showDialog<void>(
+        context: context,
+        builder: (BuildContext dialogContext) => AlertDialog(
+          title: Text(title),
+          content: SingleChildScrollView(
+            child: Text(body, style: const TextStyle(height: 1.6)),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(dialogContext).pop(),
+              child: Text(strings.gotIt),
+            ),
           ],
         ),
       ),

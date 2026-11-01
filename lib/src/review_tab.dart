@@ -64,7 +64,7 @@ class _LearningReviewSectionState extends State<_LearningReviewSection> {
             ),
             _CompactHeroBanner(
               title: strings.reviewTitle,
-              subtitle: strings.reviewSubtitle,
+              info: strings.reviewInfo,
               icon: Icons.history_edu_rounded,
               otterPose: OtterPose.reflecting,
             ),
@@ -75,13 +75,13 @@ class _LearningReviewSectionState extends State<_LearningReviewSection> {
             const SizedBox(height: 18),
             _SectionCard(
               title: strings.achievementsTitle,
-              subtitle: strings.achievementsSubtitle,
+              info: strings.achievementsInfo,
               child: _AchievementOverview(summary: summary, strings: strings),
             ),
             const SizedBox(height: 18),
             _SectionCard(
               title: strings.calendarTitle,
-              subtitle: strings.calendarSubtitle,
+              info: strings.calendarInfo,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -177,7 +177,7 @@ class _MistakeReviewSectionState extends State<_MistakeReviewSection> {
         final List<String> mistakeIds = snapshot.data ?? const <String>[];
         return _SectionCard(
           title: strings.mistakePracticeTitle,
-          subtitle: strings.mistakePracticeSubtitle,
+          info: strings.mistakePracticeInfo,
           child: mistakeIds.isEmpty
               ? Text(strings.noMistakesToFix)
               : Column(
@@ -259,7 +259,7 @@ class _WeakConceptSectionState extends State<_WeakConceptSection> {
                 const <String>[];
         return _SectionCard(
           title: strings.weakConceptsTitle,
-          subtitle: strings.weakConceptsSubtitle,
+          info: strings.weakConceptsInfo,
           child: weak.isEmpty
               ? Text(strings.noWeakConcepts)
               : Column(

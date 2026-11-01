@@ -201,7 +201,7 @@ class _PracticeTabState extends State<_PracticeTab> {
           const SizedBox(height: 18),
           _SectionCard(
             title: strings.practiceEntryTitle,
-            subtitle: strings.practiceEntrySubtitle,
+            info: strings.practiceEntryInfo,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -379,7 +379,7 @@ class _DailyMissionLanding extends StatelessWidget {
         Expanded(
           child: _SectionCard(
             title: strings.dailyMissionTaskTitle,
-            subtitle: strings.dailyMissionTaskSubtitle,
+            info: strings.dailyMissionTaskInfo,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -428,7 +428,7 @@ class _QuizTab extends StatelessWidget {
       children: [
         _CompactHeroBanner(
           title: strings.quizEntryTitle,
-          subtitle: strings.quizEntrySubtitle,
+          info: strings.quizEntryInfo,
           icon: Icons.fact_check_rounded,
         ),
         const SizedBox(height: 18),
@@ -437,7 +437,7 @@ class _QuizTab extends StatelessWidget {
         Expanded(
           child: _SectionCard(
             title: strings.quizEntryTitle,
-            subtitle: strings.quizEntrySubtitle,
+            info: strings.quizEntryInfo,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -447,11 +447,6 @@ class _QuizTab extends StatelessWidget {
                   secondaryLabel: strings.gradeRangeLabel,
                 ),
                 const SizedBox(height: 18),
-                Text(
-                  strings.quizStartHint,
-                  style: Theme.of(context).textTheme.bodyMedium,
-                ),
-                const SizedBox(height: 16),
                 FilledButton(
                   key: const ValueKey<String>('open_start_quiz'),
                   onPressed: () async {
