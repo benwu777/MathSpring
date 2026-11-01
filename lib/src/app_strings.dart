@@ -73,12 +73,6 @@ class AppStrings {
     return en;
   }
 
-  String get heroBadge => _text(
-        zhHant: '為 iPhone 與 iPad 打造',
-        zhHans: '为 iPhone 与 iPad 打造',
-        en: 'Built for iPhone and iPad',
-        ja: 'iPhone と iPad のために設計',
-      );
   String get appSubtitle => _text(
         zhHant: '數學思維與進階練習',
         zhHans: '数学思维与进阶练习',
@@ -316,12 +310,6 @@ class AppStrings {
         en: 'Build mathematical thinking with clarity.',
         ja: '数学的思考を、より明快に鍛える。',
       );
-  String get pillAdaptive => _text(
-      zhHant: '自適應版面', zhHans: '自适应版面', en: 'Adaptive layout', ja: '適応レイアウト');
-  String get pillProfiles => _text(
-      zhHant: '多學習者切換', zhHans: '多学习者切换', en: 'Multi-profile', ja: '複数プロフィール');
-  String get pillBilingual => _text(
-      zhHant: '雙語題庫', zhHans: '双语题库', en: 'Bilingual content', ja: '多言語問題集');
   String get profilesTitle =>
       _text(zhHant: '學習者', zhHans: '学习者', en: 'Profiles', ja: '学習者');
   String get profilesSubtitle => _text(
@@ -370,22 +358,6 @@ class AppStrings {
   String get progressTitle =>
       _text(
           zhHant: '學習進度', zhHans: '学习进度', en: 'Progress', ja: '学習の進み具合');
-  String get dashboardFocusTitle =>
-      _text(zhHant: '今日重點', zhHans: '今日重点', en: 'Daily Focus', ja: '今日の重点');
-  String get dashboardFocusBody => _text(
-        zhHant: '2 題幾何推理\n1 題數列規律\n1 次作答回顧',
-        zhHans: '2 题几何推理\n1 题数列规律\n1 次作答回顾',
-        en: '2 geometry proofs\n1 number pattern\n1 review session',
-        ja: '幾何 2 題\n数列 1 題\n復習 1 セッション',
-      );
-  String get dashboardPathTitle =>
-      _text(zhHant: '目前路徑', zhHans: '当前路径', en: 'Level Path', ja: '現在のルート');
-  String get dashboardPathValue => _text(
-        zhHant: '年級範圍',
-        zhHans: '年级范围',
-        en: 'Grade range',
-        ja: '学年範囲',
-      );
   String get navPractice =>
       _text(zhHant: '練習', zhHans: '练习', en: 'Practice', ja: '練習');
   String get navQuiz =>

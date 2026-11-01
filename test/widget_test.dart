@@ -865,7 +865,7 @@ void main() {
     expect(find.byKey(const ValueKey<String>('top_bar_brand_chip')),
         findsOneWidget);
     expect(
-        find.byKey(const ValueKey<String>('section_card_Profiles & Settings')),
+        find.byKey(const ValueKey<String>('section_card_Profiles')),
         findsOneWidget);
     expect(find.byKey(const ValueKey<String>('learner_summary_banner')),
         findsOneWidget);
@@ -1872,7 +1872,7 @@ void main() {
         .widgetList<Container>(find.byType(Container))
         .map((Container c) => c.decoration)
         .whereType<BoxDecoration>()
-        .where((BoxDecoration d) => d.color == AppVisualTokens.celebrationSoft);
+        .where((BoxDecoration d) => d.color == const Color(0xFFFFF1E8));
     expect(warmCards, isEmpty);
   });
 
@@ -3964,38 +3964,48 @@ void main() {
     expect(AppStrings(const Locale('en')).questionSourcePrefix, 'Source: ');
   });
 
-  testWidgets('home hero presents the welcoming otter companion',
+  testWidgets('home header is a slim title without placeholder content',
       (WidgetTester tester) async {
-    await tester.pumpWidget(
-      MathSpringApp(
-        services: createTestServices(),
-        monetizationService: NoopMonetizationService(),
-      ),
-    );
+    // 2026-11-01 首頁大卡片寫死「今日重點」「目前路徑」與宣傳標籤，不是真資料，
+    // 縮成 App 名稱加一行標語。
+    final TestWidgetsFlutterBinding binding =
+        TestWidgetsFlutterBinding.ensureInitialized();
+    binding.platformDispatcher.localeTestValue = const Locale('en');
+    tester.view.physicalSize = const Size(1290, 2796);
+    tester.view.devicePixelRatio = 3;
+    addTearDown(tester.view.reset);
+    await tester.pumpWidget(MathSpringApp(services: createTestServices()));
     await tester.pumpAndSettle();
 
-    expect(
-      find.byKey(const ValueKey<String>('otter_companion_welcoming')),
-      findsOneWidget,
-    );
+    final Finder header = find.byKey(const ValueKey<String>('home_hero_surface'));
+    expect(find.descendant(of: header, matching: find.text('MathSpring')),
+        findsOneWidget);
+    for (final String placeholder in <String>[
+      'Daily Focus',
+      'Level Path',
+      'Built for iPhone and iPad',
+      'Adaptive layout',
+      'Multi-profile',
+      'Bilingual content',
+    ]) {
+      expect(find.text(placeholder), findsNothing, reason: placeholder);
+    }
+    expect(tester.getSize(header).height, lessThan(140));
   });
 
-  testWidgets('review tab presents the reflecting otter companion',
+  testWidgets('no otter companion is shown on home or review',
       (WidgetTester tester) async {
-    await tester.pumpWidget(
-      MathSpringApp(
-        services: createTestServices(),
-        monetizationService: NoopMonetizationService(),
-      ),
-    );
+    await tester.pumpWidget(MathSpringApp(
+      services: createTestServices(),
+      monetizationService: NoopMonetizationService(),
+    ));
     await tester.pumpAndSettle();
+    expect(find.byKey(const ValueKey<String>('otter_companion_welcoming')),
+        findsNothing);
     await tester.tap(find.byIcon(Icons.history_edu_outlined));
     await tester.pumpAndSettle();
-
-    expect(
-      find.byKey(const ValueKey<String>('otter_companion_reflecting')),
-      findsOneWidget,
-    );
+    expect(find.byKey(const ValueKey<String>('otter_companion_reflecting')),
+        findsNothing);
   });
 
   testWidgets('home shell uses rounded filled icons for the selected destination',
@@ -4019,8 +4029,6 @@ void main() {
     expect(theme.scaffoldBackgroundColor, const Color(0xFFF8F8F5));
     expect(theme.colorScheme.primary, AppVisualTokens.brand);
     expect(theme.navigationBarTheme.indicatorColor, AppVisualTokens.brandSoft);
-    expect(AppVisualTokens.warmAccent, const Color(0xFFFFA87D));
-    expect(AppVisualTokens.celebrationSoft, const Color(0xFFFFF1E8));
 
     final RoundedRectangleBorder cardShape =
         theme.cardTheme.shape! as RoundedRectangleBorder;

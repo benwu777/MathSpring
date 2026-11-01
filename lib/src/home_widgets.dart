@@ -140,6 +140,11 @@ class _TopicActionButton extends StatelessWidget {
   }
 }
 
+/// 練習頁頂端的精簡標題列：App 名稱加一行標語。
+///
+/// 2026-11-01 前這裡是半個螢幕高的大卡片，裡面「今日重點」「目前路徑」與宣傳標籤
+/// 都是寫死的文字，不是學習者的真實資料；目前學習者與年級範圍在下方的
+/// [_LearnerSummaryBanner] 已經有了。
 class _HeroCard extends StatelessWidget {
   const _HeroCard({required this.strings});
 
@@ -147,191 +152,28 @@ class _HeroCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bool isWideLayout =
-        LayoutSpec.of(context).widthClass != WidthClass.compact;
-
-    return Container(
-      key: const ValueKey<String>('home_hero_surface'),
-      decoration: BoxDecoration(
-        color: AppVisualTokens.surface,
-        borderRadius: BorderRadius.circular(14),
-        border: Border.all(color: AppVisualTokens.outline),
-        boxShadow: const [
-          BoxShadow(
-            color: Color(0x1217201D),
-            blurRadius: 14,
-            offset: Offset(0, 5),
-          ),
-        ],
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(20),
-        child: isWideLayout
-            ? Row(
-                children: [
-                  Expanded(
-                    child: _HeroCopy(
-                      strings: strings,
-                    ),
-                  ),
-                  const SizedBox(width: 24),
-                  const Expanded(child: _HeroPanel()),
-                ],
-              )
-            : Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  _HeroCopy(strings: strings),
-                  const SizedBox(height: 24),
-                  const _HeroPanel(),
-                ],
-              ),
-      ),
-    );
-  }
-}
-
-class _HeroCopy extends StatelessWidget {
-  const _HeroCopy({required this.strings});
-
-  final AppStrings strings;
-
-  @override
-  Widget build(BuildContext context) {
     final LayoutSpec layoutSpec = LayoutSpec.of(context);
     final TextTheme textTheme = Theme.of(context).textTheme;
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Container(
-          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-          decoration: BoxDecoration(
-            color: AppVisualTokens.primarySoft,
-            borderRadius: BorderRadius.circular(10),
-          ),
-          child: Text(
-            strings.heroBadge,
-            style: TextStyle(
-              color: AppVisualTokens.primary,
-              fontWeight: FontWeight.w700,
-              fontSize: layoutSpec.scaleText(12),
-            ),
-          ),
-        ),
-        const SizedBox(height: 14),
-        Text(
-          strings.heroTitle,
-          style: textTheme.displaySmall?.copyWith(
-            fontSize: layoutSpec.scaleText(34),
-            height: 1.05,
-          ),
-        ),
-        const SizedBox(height: 12),
-        Text(
-          strings.heroSubtitle,
-          style: textTheme.bodyLarge?.copyWith(
-            color: AppVisualTokens.inkMuted,
-          ),
-        ),
-        const SizedBox(height: 18),
-        Wrap(
-          spacing: 8,
-          runSpacing: 8,
-          children: [
-            _InfoPill(label: strings.pillAdaptive),
-            _InfoPill(label: strings.pillProfiles),
-            _InfoPill(label: strings.pillBilingual),
-          ],
-        ),
-      ],
-    );
-  }
-}
-
-class _HeroPanel extends StatelessWidget {
-  const _HeroPanel();
-
-  @override
-  Widget build(BuildContext context) {
-    final LayoutSpec layoutSpec = LayoutSpec.of(context);
-    final AppStrings strings = AppStrings.of(context);
-    return Container(
-      constraints: const BoxConstraints(minHeight: 220),
-      decoration: BoxDecoration(
-        color: AppVisualTokens.primary,
-        borderRadius: BorderRadius.circular(14),
-        boxShadow: const [
-          BoxShadow(
-            color: Color(0x26177C87),
-            blurRadius: 12,
-            offset: Offset(0, 5),
-          ),
-        ],
-      ),
-      padding: const EdgeInsets.all(24),
-      child: Stack(
+    return Padding(
+      key: const ValueKey<String>('home_hero_surface'),
+      padding: const EdgeInsets.fromLTRB(4, 4, 4, 0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Positioned(
-            right: -4,
-            bottom: -8,
-            child: Opacity(
-              opacity: .96,
-              child: OtterCompanion(
-                pose: OtterPose.welcoming,
-                size: layoutSpec.widthClass == WidthClass.compact ? 98 : 118,
-              ),
+          Text(
+            strings.heroTitle,
+            style: textTheme.headlineMedium?.copyWith(
+              fontSize: layoutSpec.headingText,
+              fontWeight: FontWeight.w800,
+              letterSpacing: -0.6,
+              color: AppVisualTokens.ink,
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.only(right: 68),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  strings.dashboardFocusTitle,
-                  style: TextStyle(
-                    color: const Color(0xB3FFFFFF),
-                    fontSize: layoutSpec.scaleText(12),
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-                const SizedBox(height: 14),
-                Text(
-                  strings.dashboardFocusBody,
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: layoutSpec.headingText,
-                    height: 1.4,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-                const SizedBox(height: 24),
-                Container(
-                  padding: const EdgeInsets.all(14),
-                  decoration: BoxDecoration(
-                    color: const Color(0x1FFFFFFF),
-                    borderRadius: BorderRadius.circular(10),
-                    border: Border.all(color: const Color(0x2FFFFFFF)),
-                  ),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: Text(
-                          '${strings.dashboardPathTitle}\n${strings.dashboardPathValue}',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: layoutSpec.captionText,
-                            height: 1.5,
-                          ),
-                        ),
-                      ),
-                      const Icon(Icons.arrow_outward,
-                          color: Colors.white, size: 18),
-                    ],
-                  ),
-                ),
-              ],
+          const SizedBox(height: 2),
+          Text(
+            strings.heroSubtitle,
+            style: textTheme.bodyMedium?.copyWith(
+              color: AppVisualTokens.inkMuted,
             ),
           ),
         ],
@@ -346,7 +188,6 @@ class _CompactHeroBanner extends StatelessWidget {
     this.subtitle,
     this.info,
     required this.icon,
-    this.otterPose,
   });
 
   final String title;
@@ -357,7 +198,6 @@ class _CompactHeroBanner extends StatelessWidget {
   /// 點標題旁 ⓘ 才顯示的說明。
   final String? info;
   final IconData icon;
-  final OtterPose? otterPose;
 
   @override
   Widget build(BuildContext context) {
@@ -414,10 +254,6 @@ class _CompactHeroBanner extends StatelessWidget {
               ],
             ),
           ),
-          if (otterPose != null) ...[
-            const SizedBox(width: 8),
-            OtterCompanion(pose: otterPose!, size: 58),
-          ],
         ],
       ),
     );

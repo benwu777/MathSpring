@@ -29,7 +29,7 @@ class _SettingsTab extends StatelessWidget {
         ),
         const SizedBox(height: 18),
         _LearnerProfilesSection(
-          title: strings.settingsTitle,
+          title: strings.profilesTitle,
           info: strings.learnerProfilesInfo,
           services: services,
           onChanged: onChanged,
