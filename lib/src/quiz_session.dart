@@ -8,6 +8,7 @@ class QuizSessionPage extends StatefulWidget {
     this.initialQuestions,
     this.formalExamPreset,
     this.learner,
+    this.resume,
   });
 
   final AppServices services;
@@ -16,17 +17,26 @@ class QuizSessionPage extends StatefulWidget {
   final FormalExamPreset? formalExamPreset;
   final LearnerProfile? learner;
 
+  /// 冷啟動時從進入畫面接回的未完成測驗。
+  final InProgressSession? resume;
+
   @override
   State<QuizSessionPage> createState() => _QuizSessionPageState();
 }
 
-class _QuizSessionPageState extends State<QuizSessionPage> {
+class _QuizSessionPageState extends State<QuizSessionPage>
+    with WidgetsBindingObserver {
   late final Future<QuestionBank> _packFuture;
   final Map<String, String> _answers = <String, String>{};
-  final DateTime _startedAt = DateTime.now();
+  DateTime _startedAt = DateTime.now();
   int _currentIndex = 0;
   Timer? _countdownTimer;
-  DateTime? _deadline;
+
+  /// 正式測驗剩餘時間。採暫停計時：只有 app 在前景時每秒扣一秒，
+  /// 被系統回收或切到背景的時間不算（2026-11-01 接續上次）。
+  Duration? _remaining;
+  bool _inForeground = true;
+  int _ticksSinceSave = 0;
   List<Question>? _activeQuestions;
   bool _hasAutoSubmitted = false;
   final Set<String> _favoriteQuestionIds = <String>{};
@@ -34,12 +44,29 @@ class _QuizSessionPageState extends State<QuizSessionPage> {
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addObserver(this);
+    final InProgressSession? resume = widget.resume;
+    if (resume != null) {
+      _currentIndex = resume.currentIndex;
+      _answers.addAll(resume.answers);
+      _startedAt =
+          DateTime.tryParse(resume.startedAtIso)?.toLocal() ?? _startedAt;
+    }
     if (widget.formalExamPreset != null) {
-      _deadline = _startedAt.add(widget.formalExamPreset!.timeLimit);
+      _remaining = resume?.remainingSeconds != null
+          ? Duration(seconds: resume!.remainingSeconds!)
+          : widget.formalExamPreset!.timeLimit;
       _countdownTimer = Timer.periodic(const Duration(seconds: 1), (_) {
         final List<Question>? questions = _activeQuestions;
-        if (questions == null || !mounted) {
+        if (questions == null || !mounted || !_inForeground) {
           return;
+        }
+        final Duration left = _remaining! - const Duration(seconds: 1);
+        _remaining = left.isNegative ? Duration.zero : left;
+        _ticksSinceSave++;
+        if (_ticksSinceSave >= 5) {
+          _ticksSinceSave = 0;
+          unawaited(_saveProgress());
         }
         if (_remainingExamTime.inSeconds <= 0 && !_hasAutoSubmitted) {
           _hasAutoSubmitted = true;
@@ -88,16 +115,48 @@ class _QuizSessionPageState extends State<QuizSessionPage> {
 
   @override
   void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
     _countdownTimer?.cancel();
     super.dispose();
   }
 
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    _inForeground = state == AppLifecycleState.resumed;
+    if (!_inForeground) {
+      unawaited(_saveProgress());
+    }
+  }
+
+  /// 作答、換題、離開前景時都存一次，讓 app 被系統回收後可以從進入畫面接回。
+  Future<void> _saveProgress() async {
+    final String? learnerId = widget.services.currentLearnerId;
+    final List<Question>? questions = _activeQuestions;
+    if (learnerId == null || questions == null || _hasAutoSubmitted) {
+      return;
+    }
+    final FormalExamPreset? preset = widget.formalExamPreset;
+    await widget.services.saveInProgressSession(
+      learnerId,
+      InProgressSession(
+        kind: InProgressSessionKind.quiz,
+        packJson: widget.pack.toJson(),
+        questionIds: questions.map((Question q) => q.id).toList(),
+        currentIndex: _currentIndex,
+        startedAtIso: _startedAt.toUtc().toIso8601String(),
+        answers: Map<String, String>.of(_answers),
+        examQuestionCount: preset?.questionCount,
+        examTimeLimitSeconds: preset?.timeLimit.inSeconds,
+        remainingSeconds: _remaining?.inSeconds,
+      ),
+    );
+  }
+
   Duration get _remainingExamTime {
-    final DateTime? deadline = _deadline;
-    if (deadline == null) {
+    final Duration? remaining = _remaining;
+    if (remaining == null) {
       return Duration.zero;
     }
-    final Duration remaining = deadline.difference(DateTime.now());
     return remaining.isNegative ? Duration.zero : remaining;
   }
 
@@ -242,6 +301,7 @@ class _QuizSessionPageState extends State<QuizSessionPage> {
                             setState(() {
                               _answers[question.id] = answer;
                             });
+                            unawaited(_saveProgress());
                           },
                         ),
                       ],
@@ -344,6 +404,7 @@ class _QuizSessionPageState extends State<QuizSessionPage> {
                     OutlinedButton(
                       onPressed: () {
                         setState(() => _currentIndex = index);
+                        unawaited(_saveProgress());
                         Navigator.of(sheetContext).pop();
                       },
                       style: OutlinedButton.styleFrom(
@@ -400,6 +461,7 @@ class _QuizSessionPageState extends State<QuizSessionPage> {
     setState(() {
       _currentIndex++;
     });
+    unawaited(_saveProgress());
   }
 
   Future<void> _finishQuiz(
@@ -409,6 +471,11 @@ class _QuizSessionPageState extends State<QuizSessionPage> {
   }) async {
     final Map<String, String> finalAnswers = overrideAnswers ?? _answers;
     _countdownTimer?.cancel();
+    _hasAutoSubmitted = true;
+    final String? learnerId = widget.services.currentLearnerId;
+    if (learnerId != null) {
+      await widget.services.clearInProgressSession(learnerId);
+    }
     final DateTime submittedAt = DateTime.now();
     final List<QuizAnswerRecord> records = <QuizAnswerRecord>[
       for (final Question item in questions)

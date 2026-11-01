@@ -503,7 +503,7 @@ void main() {
       questionProgressRepository: questionProgressRepository,
       appPreferencesRepository: appPreferencesRepository,
     );
-    final InProgressSession quiz = InProgressSession(
+    const InProgressSession quiz = InProgressSession(
       kind: InProgressSessionKind.quiz,
       packJson: const <String, dynamic>{
         'path': 'assets/questions/mixed/grade4_foundation.mixed.v1.json',

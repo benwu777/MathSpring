@@ -1950,6 +1950,115 @@ void main() {
     expect(await services.loadInProgressSession('learner_allen'), isNull);
   });
 
+  Future<void> pumpFormalQuiz(WidgetTester tester, AppServices services,
+      {InProgressSession? resume}) async {
+    await tester.pumpWidget(MaterialApp(
+      home: QuizSessionPage(
+        services: services,
+        pack: const BundledQuestionPackInfo(
+          path: 'unused',
+          topic: 'Mixed',
+          topicCode: 'mixed',
+          levelStage: 'grade4',
+          challengeTier: 'foundation',
+          questionCount: 2,
+        ),
+        initialQuestions: <Question>[
+          createDemoQuestion(),
+          createSecondDemoQuestion(),
+        ],
+        formalExamPreset: FormalExamPreset.standard.first,
+        resume: resume,
+      ),
+    ));
+    await tester.pump();
+  }
+
+  testWidgets('formal exam saves answers and the remaining time',
+      (WidgetTester tester) async {
+    final AppServices services = createTestServices();
+    await pumpFormalQuiz(tester, services);
+
+    final Finder optionB = find.byKey(
+        const ValueKey<String>('quiz_option_geometry_grade4_foundation_001_B'));
+    await tester.ensureVisible(optionB);
+    await tester.tap(optionB);
+    await tester.pump();
+    await tester.pump(const Duration(seconds: 3));
+
+    final InProgressSession? saved =
+        await services.loadInProgressSession('learner_allen');
+    expect(saved, isNotNull);
+    expect(saved!.kind, InProgressSessionKind.quiz);
+    expect(saved.answers,
+        <String, String>{'geometry_grade4_foundation_001': 'B'});
+    expect(saved.examQuestionCount, 5);
+    expect(saved.examTimeLimitSeconds, 600);
+    expect(saved.remainingSeconds, inInclusiveRange(590, 600));
+    await tester.pumpWidget(const SizedBox.shrink());
+  });
+
+  testWidgets('submitting the exam clears the unfinished session',
+      (WidgetTester tester) async {
+    final AppServices services = createTestServices();
+    await pumpFormalQuiz(tester, services);
+    final Finder optionB = find.byKey(
+        const ValueKey<String>('quiz_option_geometry_grade4_foundation_001_B'));
+    await tester.ensureVisible(optionB);
+    await tester.tap(optionB);
+    await tester.pump();
+    expect(await services.loadInProgressSession('learner_allen'), isNotNull);
+
+    final Finder submitEarly =
+        find.byKey(const ValueKey<String>('submit_quiz_early'));
+    await tester.ensureVisible(submitEarly);
+    await tester.tap(submitEarly);
+    await tester.pumpAndSettle();
+    final Finder confirm = find.text('Submit');
+    if (confirm.evaluate().isNotEmpty) {
+      await tester.tap(confirm.last);
+      await tester.pumpAndSettle();
+    }
+    expect(await services.loadInProgressSession('learner_allen'), isNull);
+    await tester.pumpWidget(const SizedBox.shrink());
+  });
+
+  testWidgets('formal exam resumes with the clock paused while away',
+      (WidgetTester tester) async {
+    // 暫停計時：開始時間是兩小時前，但剩餘時間照存檔的 125 秒接著算，不會一回來就交卷。
+    final AppServices services = createTestServices();
+    await pumpFormalQuiz(
+      tester,
+      services,
+      resume: InProgressSession(
+        kind: InProgressSessionKind.quiz,
+        packJson: const <String, dynamic>{},
+        questionIds: const <String>[
+          'geometry_grade4_foundation_001',
+          'arithmetic_grade4_foundation_002',
+        ],
+        currentIndex: 1,
+        startedAtIso: DateTime.now()
+            .subtract(const Duration(hours: 2))
+            .toUtc()
+            .toIso8601String(),
+        answers: const <String, String>{'geometry_grade4_foundation_001': 'B'},
+        examQuestionCount: 5,
+        examTimeLimitSeconds: 600,
+        remainingSeconds: 125,
+      ),
+    );
+
+    expect(
+        find.byKey(const ValueKey<String>(
+            'question_prompt_arithmetic_grade4_foundation_002')),
+        findsOneWidget);
+    expect(find.textContaining('2:05 left'), findsOneWidget);
+    await tester.pump(const Duration(seconds: 5));
+    expect(find.textContaining('2:00 left'), findsOneWidget);
+    await tester.pumpWidget(const SizedBox.shrink());
+  });
+
   testWidgets('answer review card keeps the neutral style without the otter',
       (WidgetTester tester) async {
     // 2026-10-31 使用者：答對時的暖色底和右側水獺圖「不搭、太幼稚」，改回中性卡片。
