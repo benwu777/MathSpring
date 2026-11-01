@@ -5999,30 +5999,30 @@
         "zh-Hant": [
           "把每一列兩顆棋子之間的空格數記下來：由上而下是 3、5、6、2。把自己的棋子往對方推近，就是把那一列的空格數減少；往後退則是增加。",
           "如果只能前進，這就是取石子（Nim）：四堆石子 3、5、6、2，每次從一堆拿走若干顆。把各數寫成二進位做「不進位加法」（互斥或）得到的 nim 和為 0 時，輪到的人必輸；不為 0 時，可以走一步讓它變成 0。",
-          "後退不會改變結論：對手若把某列的棋子往後退 k 格，自己就把同一列自己的棋子往前推 k 格，空格數又恢復；對手的棋子越退越靠邊，不能無限退下去。所以「走完後 nim 和為 0」就是必勝的走法。",
+          "後退不會改變結論：對手若把某列的棋子往後退 k 格，自己就把同一列自己的棋子往前推 k 格，空格數又恢復；對手的棋子越退越靠邊，不能無限退下去。所以 nim 和為 0 時輪到的人必輸、不為 0 時輪到的人必勝（先走一步讓它變 0，之後照上面的方法應對）。對甲的第一步來說：走完 nim 和為 0，乙必輸，甲必勝；走完 nim 和不為 0，乙只要照同樣的方法走就必勝，甲不能保證贏。",
           "3 ⊕ 5 ⊕ 6 ⊕ 2：011 ⊕ 101 ⊕ 110 ⊕ 010 = 010 = 2。要讓 nim 和變 0，必須把某一列的空格數 g 改成 g ⊕ 2：第 1 列 3 → 1（白子前進 2 格）；第 2 列 5 → 7（白子後退 2 格，圖中白子左邊正好有 2 格空位，可以）；第 3 列 6 → 4（前進 2 格）；第 4 列 2 → 0（前進 2 格，緊貼黑子）。",
-          "每一列只有這一種改法，四列都做得到，所以必勝的第一步共有 4 種。"
+          "每一列的空格數都只有 g ⊕ 2 這一個目標，四列都做得到，所以 nim 和變 0 的第一步恰好 4 種；其他走法都留下不為 0 的 nim 和，讓乙必勝。答案是 4 種。"
         ],
         "zh-Hans": [
           "把每一行两颗棋子之间的空格数记下来：从上往下是 3、5、6、2。把自己的棋子往对方推近，就是把那一行的空格数减少；往后退则是增加。",
           "如果只能前进，这就是取石子（Nim）：四堆石子 3、5、6、2，每次从一堆拿走若干颗。把各数写成二进制做“不进位加法”（异或）得到的 nim 和为 0 时，轮到的人必输；不为 0 时，可以走一步让它变成 0。",
-          "后退不会改变结论：对手若把某行的棋子往后退 k 格，自己就把同一行自己的棋子往前推 k 格，空格数又恢复；对手的棋子越退越靠边，不能无限退下去。所以“走完后 nim 和为 0”就是必胜的走法。",
+          "后退不会改变结论：对手若把某行的棋子往后退 k 格，自己就把同一行自己的棋子往前推 k 格，空格数又恢复；对手的棋子越退越靠边，不能无限退下去。所以 nim 和为 0 时轮到的人必输、不为 0 时轮到的人必胜（先走一步让它变 0，之后照上面的方法应对）。对甲的第一步来说：走完 nim 和为 0，乙必输，甲必胜；走完 nim 和不为 0，乙只要照同样的方法走就必胜，甲不能保证赢。",
           "3 ⊕ 5 ⊕ 6 ⊕ 2：011 ⊕ 101 ⊕ 110 ⊕ 010 = 010 = 2。要让 nim 和变 0，必须把某一行的空格数 g 改成 g ⊕ 2：第 1 行 3 → 1（白子前进 2 格）；第 2 行 5 → 7（白子后退 2 格，图中白子左边正好有 2 格空位，可以）；第 3 行 6 → 4（前进 2 格）；第 4 行 2 → 0（前进 2 格，紧贴黑子）。",
-          "每一行只有这一种改法，四行都做得到，所以必胜的第一步共有 4 种。"
+          "每一行的空格数都只有 g ⊕ 2 这一个目标，四行都做得到，所以 nim 和变 0 的第一步恰好 4 种；其他走法都留下不为 0 的 nim 和，让乙必胜。答案是 4 种。"
         ],
         "en": [
           "Record the number of empty squares between the two pieces in each row: from top to bottom 3, 5, 6, 2. Pushing your piece toward the opponent decreases that row's gap; retreating increases it.",
           "If only advances were allowed, this would be Nim with heaps 3, 5, 6, 2 (each move removes some from one heap). Write the numbers in binary and add without carrying (XOR): if this nim-sum is 0, the player to move loses; if not, one move can make it 0.",
-          "Retreats do not change this: if the opponent retreats a piece by k squares, answer by pushing your own piece in that row forward k squares, restoring the gap; the opponent's pieces get pushed toward the edge and cannot retreat forever. So a winning move is exactly one after which the nim-sum is 0.",
+          "Retreats do not change this: if the opponent retreats a piece by k squares, answer by pushing your own piece in that row forward k squares, restoring the gap; the opponent's pieces get pushed toward the edge and cannot retreat forever. So with nim-sum 0 the player to move loses, and with nim-sum not 0 the player to move wins (first make it 0, then answer as above). For A's first move: if the nim-sum becomes 0, B loses and A wins; if it is not 0, B wins by the same method, so A cannot be sure of winning.",
           "3 ⊕ 5 ⊕ 6 ⊕ 2: 011 ⊕ 101 ⊕ 110 ⊕ 010 = 010 = 2. To make the nim-sum 0, change one row's gap g to g ⊕ 2: row 1, 3 → 1 (white advances 2); row 2, 5 → 7 (white retreats 2, and there are exactly 2 empty squares to its left, so it is possible); row 3, 6 → 4 (advance 2); row 4, 2 → 0 (advance 2, next to the black piece).",
-          "Each row allows exactly this one change, and all four are possible, so A has 4 winning first moves."
+          "Each row has only the one target g ⊕ 2, and all four rows can reach it, so exactly 4 first moves make the nim-sum 0; every other move leaves a nonzero nim-sum and lets B win. The answer is 4."
         ],
         "ja": [
           "各行の 2 つの駒の間の空きマスの数を書くと、上から 3、5、6、2 です。自分の駒を相手に近づけるとその行の空きマスが減り、後ろに下げると増えます。",
           "前進しかできなければ、これは石取りゲーム（Nim）で、石の山 3、5、6、2 から毎回 1 つの山の石をいくつか取るのと同じです。各数を 2 進法で書いて繰り上がりなしで足した値（排他的論理和、nim 和）が 0 なら手番の人の負け、0 でなければ 1 手で 0 にできます。",
-          "後退しても結論は変わりません。相手がある行の駒を k マス下げたら、同じ行の自分の駒を k マス進めれば空きマスは元に戻り、相手の駒は端へ追いやられ、無限には下がれません。よって「動かした後に nim 和が 0」になる手がちょうど必勝の手です。",
+          "後退しても結論は変わりません。相手がある行の駒を k マス下げたら、同じ行の自分の駒を k マス進めれば空きマスは元に戻り、相手の駒は端へ追いやられ、無限には下がれません。よって nim 和が 0 なら手番の人の負け、0 でなければ手番の人の勝ち（まず 0 にして、あとは上の方法で応じる）です。甲の最初の手で nim 和が 0 になれば乙の負けで甲の必勝、0 にならなければ乙が同じ方法で勝てるので、甲は勝ちを保証できません。",
           "3 ⊕ 5 ⊕ 6 ⊕ 2 = 011 ⊕ 101 ⊕ 110 ⊕ 010 = 010 = 2。nim 和を 0 にするには、ある行の空きマス g を g ⊕ 2 に変えます：1 行目 3 → 1（白が 2 マス前進）、2 行目 5 → 7（白が 2 マス後退。図では白の左にちょうど 2 マスあるので可能）、3 行目 6 → 4（2 マス前進）、4 行目 2 → 0（2 マス前進して黒の隣へ）。",
-          "どの行もこの 1 通りだけで、4 行とも実行できるので、必勝の最初の手は 4 通りです。"
+          "どの行も目標は g ⊕ 2 の 1 つだけで、4 行とも実行できるので、nim 和を 0 にする最初の手はちょうど 4 通りです。それ以外の手は nim 和が 0 でなく、乙が勝てます。答えは 4 通りです。"
         ]
       },
       "figure": {
