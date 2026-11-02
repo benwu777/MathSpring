@@ -131,18 +131,18 @@ class _MathSpringHomePageState extends State<MathSpringHomePage> {
                   },
                   destinations: [
                     NavigationDestination(
-                      icon: const Icon(Icons.play_circle_outline),
-                      selectedIcon: const Icon(Icons.play_circle_rounded),
+                      icon: const Icon(Icons.edit_outlined),
+                      selectedIcon: const Icon(Icons.edit_rounded),
                       label: strings.navPractice,
                     ),
                     NavigationDestination(
-                      icon: const Icon(Icons.fact_check_outlined),
-                      selectedIcon: const Icon(Icons.fact_check_rounded),
+                      icon: const Icon(Icons.assignment_outlined),
+                      selectedIcon: const Icon(Icons.assignment_rounded),
                       label: strings.navQuiz,
                     ),
                     NavigationDestination(
-                      icon: const Icon(Icons.history_edu_outlined),
-                      selectedIcon: const Icon(Icons.history_edu_rounded),
+                      icon: const Icon(Icons.insert_chart_outlined),
+                      selectedIcon: const Icon(Icons.insert_chart_rounded),
                       label: strings.navReview,
                     ),
                     NavigationDestination(
@@ -450,7 +450,7 @@ class _QuizTab extends StatelessWidget {
         _CompactHeroBanner(
           title: strings.quizEntryTitle,
           info: strings.quizEntryInfo,
-          icon: Icons.fact_check_rounded,
+          icon: Icons.assignment_rounded,
         ),
         const SizedBox(height: 18),
         // 撐滿剩餘高度：外殼的 fill 只把分頁內容包成 Expanded，

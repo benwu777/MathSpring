@@ -4339,7 +4339,7 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.byKey(const ValueKey<String>('otter_companion_welcoming')),
         findsNothing);
-    await tester.tap(find.byIcon(Icons.history_edu_outlined));
+    await tester.tap(find.byIcon(Icons.insert_chart_outlined));
     await tester.pumpAndSettle();
     expect(find.byKey(const ValueKey<String>('otter_companion_reflecting')),
         findsNothing);
@@ -4352,8 +4352,35 @@ void main() {
 
     expect(find.byKey(const ValueKey<String>('home_background_glow')),
         findsNothing);
-    expect(find.byIcon(Icons.play_circle_rounded), findsOneWidget);
-    expect(find.byIcon(Icons.play_circle_outline), findsNothing);
+    expect(find.byIcon(Icons.edit_rounded), findsOneWidget);
+    expect(find.byIcon(Icons.edit_outlined), findsNothing);
+  });
+
+  testWidgets('bottom navigation icons match each tab purpose',
+      (WidgetTester tester) async {
+    // 導覽列只顯示圖示，圖示本身要說得出功能：練習＝鉛筆作答、測驗＝考卷、
+    // 學習回顧＝進度圖表、設定＝齒輪。
+    await tester.pumpWidget(MathSpringApp(
+        showWelcome: false, services: createTestServices()));
+    await tester.pumpAndSettle();
+
+    final List<NavigationDestination> destinations = tester
+        .widgetList<NavigationDestination>(find.byType(NavigationDestination))
+        .toList();
+    IconData iconOf(Widget widget) => (widget as Icon).icon!;
+    expect(destinations.map((d) => iconOf(d.icon)).toList(), <IconData>[
+      Icons.edit_outlined,
+      Icons.assignment_outlined,
+      Icons.insert_chart_outlined,
+      Icons.settings_outlined,
+    ]);
+    expect(destinations.map((d) => iconOf(d.selectedIcon!)).toList(),
+        <IconData>[
+      Icons.edit_rounded,
+      Icons.assignment_rounded,
+      Icons.insert_chart_rounded,
+      Icons.settings_rounded,
+    ]);
   });
 
   testWidgets('app uses the compact indigo and teal learning-workspace theme',
