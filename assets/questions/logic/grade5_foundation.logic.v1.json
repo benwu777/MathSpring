@@ -9940,6 +9940,826 @@
         "notes": "設計依據：每個數字是「四個方向看得到的白格數」，配合黑格不相鄰、白格連通推出唯一塗法；關鍵是 3 一出現就封住兩側，以及 (3,1) 若塗黑會把角落白格關起來。全庫的塗黑謎題（數島 logic_grade6_foundation_142、黑白子 logic_grade3_foundation_135、刪數 logic_grade4_foundation_125）規則都不同，沒有用視線計數的。已另行窮舉 562 種合法塗法確認唯一。",
         "displayText": "MathSpring 改寫題（附圖）"
       }
+    },
+    {
+      "id": "logic_grade5_foundation_122",
+      "topic": "logic",
+      "subtopic": "binary_grid_no_three_in_a_row_bottom_row",
+      "tags": [
+        "c:logic_deduction",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade5",
+      "challengeTier": "foundation",
+      "reviewStatus": "ok",
+      "prompt": {
+        "zh-Hant": "如圖的 6 × 6 方格要在每一格填 0 或 1，規則是：① 每一橫排、每一直行都剛好有 3 個 0 和 3 個 1；② 同一橫排或同一直行裡，不能有 3 個相同的數字連在一起；③ 任兩橫排不完全一樣，任兩直行也不完全一樣。圖中已經填了 9 格，而且填法只有一種。最下面一橫排由左到右是哪一個？",
+        "zh-Hans": "如图的 6 × 6 方格要在每一格填 0 或 1，规则是：① 每一横排、每一竖排都刚好有 3 个 0 和 3 个 1；② 同一横排或同一竖排里，不能有 3 个相同的数字连在一起；③ 任两横排不完全一样，任两竖排也不完全一样。图中已经填了 9 格，而且填法只有一种。最下面一横排由左到右是哪一个？",
+        "en": "Each cell of the 6 × 6 grid gets a 0 or a 1. Rules: (1) every row and every column has exactly three 0s and three 1s; (2) no row or column has three equal digits next to each other; (3) no two rows are identical, and no two columns are identical. Nine cells are filled in, and there is only one solution. What is the bottom row, from left to right?",
+        "ja": "図の 6 × 6 の方眼の各マスに 0 か 1 を入れます。ルール：① どの段・どの列にも 0 と 1 がちょうど3つずつ。② 同じ段や列で同じ数字が3つ続けてならんではいけない。③ どの2つの段も、どの2つの列もまったく同じではない。9マスはもう入っていて、入れ方は1通りだけです。いちばん下の段は左から順にどれですか。"
+      },
+      "answer": {
+        "zh-Hant": "最下面一排是 0 0 1 1 0 1。",
+        "zh-Hans": "最下面一排是 0 0 1 1 0 1。",
+        "en": "The bottom row is 0 0 1 1 0 1.",
+        "ja": "いちばん下の段は 0 0 1 1 0 1 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "橫排由上往下叫第 1～6 排、直行由左往右叫第 1～6 行。第 4 排有「0 0」連在第 2、3 行，依規則 ②，它們兩邊的第 1、4 行都要填 1。",
+          "現在第 1 直行的第 4、5 排都是 1，依規則 ②，它們上面的第 3 排和下面的第 6 排都要填 0。",
+          "第 6 排變成「0 0 ? ? 0 ?」：第 1、2 行連著兩個 0，第 3 行要填 1；這一排已經有 3 個 0，剩下的第 4、6 行都填 1。",
+          "最下面一排是 0 0 1 1 0 1。（其他格子也能照同樣的規則一路填完，確認整張方格只有一種填法。）"
+        ],
+        "zh-Hans": [
+          "横排由上往下叫第 1～6 排、竖排由左往右叫第 1～6 列。第 4 排有“0 0”连在第 2、3 列，依规则 ②，它们两边的第 1、4 列都要填 1。",
+          "现在第 1 竖排的第 4、5 排都是 1，依规则 ②，它们上面的第 3 排和下面的第 6 排都要填 0。",
+          "第 6 排变成“0 0 ? ? 0 ?”：第 1、2 列连着两个 0，第 3 列要填 1；这一排已经有 3 个 0，剩下的第 4、6 列都填 1。",
+          "最下面一排是 0 0 1 1 0 1。（其他格子也能照同样的规则一路填完，确认整张方格只有一种填法。）"
+        ],
+        "en": [
+          "Number the rows 1–6 from the top and the columns 1–6 from the left. Row 4 has \"0 0\" in columns 2 and 3, so by rule (2) columns 1 and 4 of that row are 1.",
+          "Now column 1 has 1s in rows 4 and 5, so by rule (2) the cells above (row 3) and below (row 6) are 0.",
+          "Row 6 becomes \"0 0 ? ? 0 ?\": the two 0s in columns 1 and 2 force a 1 in column 3, and the row already has three 0s, so columns 4 and 6 are 1.",
+          "The bottom row is 0 0 1 1 0 1. (The rest of the grid can be filled the same way, confirming the solution is unique.)"
+        ],
+        "ja": [
+          "段を上から1〜6段目、列を左から1〜6列目とよびます。4段目は2列目と3列目に「0 0」があるので、ルール②よりその両どなりの1列目と4列目は 1 です。",
+          "すると1列目は4段目と5段目が 1 になるので、ルール②よりその上の3段目と下の6段目は 0 です。",
+          "6段目は「0 0 ? ? 0 ?」になります。1列目と2列目の 0 が2つ続くので3列目は 1、この段にはもう 0 が3つあるので4列目と6列目は 1 です。",
+          "いちばん下の段は 0 0 1 1 0 1 です。（ほかのマスも同じルールで最後まで入り、入れ方が1通りであることが確かめられます。）"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "composite_grid_shape",
+        "params": {
+          "rows": 6,
+          "cols": 6,
+          "filledCells": [
+            [
+              0,
+              0
+            ],
+            [
+              1,
+              3
+            ],
+            [
+              1,
+              4
+            ],
+            [
+              2,
+              5
+            ],
+            [
+              3,
+              1
+            ],
+            [
+              3,
+              2
+            ],
+            [
+              4,
+              0
+            ],
+            [
+              5,
+              1
+            ],
+            [
+              5,
+              4
+            ]
+          ],
+          "cellLabels": {
+            "0,0": "1",
+            "1,3": "0",
+            "1,4": "0",
+            "2,5": "0",
+            "3,1": "0",
+            "3,2": "0",
+            "4,0": "1",
+            "5,1": "0",
+            "5,4": "0"
+          }
+        }
+      },
+      "answerMode": "multiple_choice",
+      "options": {
+        "A": {
+          "zh-Hant": "0 1 0 1 0 1",
+          "zh-Hans": "0 1 0 1 0 1",
+          "en": "0 1 0 1 0 1",
+          "ja": "0 1 0 1 0 1"
+        },
+        "B": {
+          "zh-Hant": "1 0 0 1 0 1",
+          "zh-Hans": "1 0 0 1 0 1",
+          "en": "1 0 0 1 0 1",
+          "ja": "1 0 0 1 0 1"
+        },
+        "C": {
+          "zh-Hant": "0 0 1 0 1 1",
+          "zh-Hans": "0 0 1 0 1 1",
+          "en": "0 0 1 0 1 1",
+          "ja": "0 0 1 0 1 1"
+        },
+        "D": {
+          "zh-Hant": "0 0 1 1 0 1",
+          "zh-Hans": "0 0 1 1 0 1",
+          "en": "0 0 1 1 0 1",
+          "ja": "0 0 1 1 0 1"
+        }
+      },
+      "correctAnswer": {
+        "type": "choice",
+        "value": "D"
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "0 與 1 方格謎題：不可三連、各半，推出最下面一排",
+        "notes": "設計依據：「二進位填格（Binairo）」謎題，用「兩個相同的旁邊必須相反」與「一排已滿 3 個」兩條規則推出底排。全庫 subtopic 查 binary／binairo：只有二進位計數與燈號題，沒有這種填格謎題；最接近的方格演繹是 logic_grade5_foundation_120（ABC 填字）與 121（塗黑規則），規則不同。整張方格的唯一性已窮舉確認。",
+        "displayText": "MathSpring 改寫題（附圖）"
+      }
+    },
+    {
+      "id": "logic_grade5_foundation_123",
+      "topic": "logic",
+      "subtopic": "dots_and_boxes_longest_capture_chain",
+      "tags": [
+        "c:game_theory",
+        "c:logic_deduction",
+        "m:direct"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade5",
+      "challengeTier": "foundation",
+      "reviewStatus": "ok",
+      "prompt": {
+        "zh-Hant": "小安和小美玩「點格棋」：在 4 × 4 個點之間輪流畫一條連接相鄰兩點的短線（橫的或直的）。誰畫的線剛好圍住一個小正方形（四邊都畫好），就得到那一格，而且還要接著再畫一條線；沒有圍住格子，就換對方畫。如圖是現在的盤面（實線是已經畫的線），輪到小安畫。這一回合小安最多可以得到幾格？",
+        "zh-Hans": "小安和小美玩“点格棋”：在 4 × 4 个点之间轮流画一条连接相邻两点的短线（横的或竖的）。谁画的线刚好围住一个小正方形（四边都画好），就得到那一格，而且还要接着再画一条线；没有围住格子，就换对方画。如图是现在的盘面（实线是已经画的线），轮到小安画。这一回合小安最多可以得到几格？",
+        "en": "An and Mei play dots and boxes on a 4 × 4 array of dots, taking turns to draw a short line joining two neighbouring dots (across or down). Whoever completes the fourth side of a small square wins that square and must draw another line; if no square is completed, the turn passes. The figure shows the board now (solid lines are already drawn), and it is An's turn. At most how many squares can An win in this turn?",
+        "ja": "アンさんとメイさんが「ドット・アンド・ボックス」をします。4 × 4 の点の間に、となり合う2点を結ぶ短い線（横かたて）を交代でかきます。線をかいて小さな正方形の4辺目を閉じた人はそのマスをもらい、続けてもう1本かきます。閉じられなければ相手の番です。図はいまの盤面（実線はかいた線）で、アンさんの番です。この番でアンさんは最大何マスもらえますか。"
+      },
+      "answer": {
+        "zh-Hant": "最多可以得到 6 格。",
+        "zh-Hans": "最多可以得到 6 格。",
+        "en": "At most 6 squares.",
+        "ja": "最大 6 マスです。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "小正方形橫排由上往下叫第 1～3 排、直行由左往右叫第 1～3 行。現在只有第 1 排第 2 行那一格已經畫了 3 邊，小安畫上它下面那條線，得到第 1 格。",
+          "這條線也是第 2 排第 2 行那一格的上邊，它就變成 3 邊；小安補上它的下邊得第 2 格，接著第 3 排第 2 行也變成 3 邊。",
+          "照這樣一格接一格：第 3 排第 2 行 → 第 3 排第 3 行 → 第 2 排第 3 行 → 第 1 排第 3 行，每補一條線都讓下一格變成 3 邊，一共得到 6 格。",
+          "剩下第 1 行的 3 格都只畫了 2 邊，畫任何一條線都圍不住格子，小安這回合到此結束。最多 6 格。"
+        ],
+        "zh-Hans": [
+          "小正方形横排由上往下叫第 1～3 排、竖排由左往右叫第 1～3 列。现在只有第 1 排第 2 列那一格已经画了 3 边，小安画上它下面那条线，得到第 1 格。",
+          "这条线也是第 2 排第 2 列那一格的上边，它就变成 3 边；小安补上它的下边得第 2 格，接着第 3 排第 2 列也变成 3 边。",
+          "照这样一格接一格：第 3 排第 2 列 → 第 3 排第 3 列 → 第 2 排第 3 列 → 第 1 排第 3 列，每补一条线都让下一格变成 3 边，一共得到 6 格。",
+          "剩下第 1 列的 3 格都只画了 2 边，画任何一条线都围不住格子，小安这回合到此结束。最多 6 格。"
+        ],
+        "en": [
+          "Call the squares rows 1–3 from the top and columns 1–3 from the left. Only the square in row 1, column 2 has 3 sides now; An draws its bottom side and wins square 1.",
+          "That line is also the top of the square in row 2, column 2, which now has 3 sides; An draws its bottom and wins square 2, and the square in row 3, column 2 now has 3 sides.",
+          "It goes on square by square: row 3 col 2 → row 3 col 3 → row 2 col 3 → row 1 col 3. Each new line gives the next square its third side, so An wins 6 squares.",
+          "The three squares in column 1 have only 2 sides each, so no line can complete one; An's turn ends there. At most 6."
+        ],
+        "ja": [
+          "小さな正方形を上から1〜3段目、左から1〜3列目とよびます。いま3辺かかれているのは1段目2列目のマスだけで、アンさんはその下の辺をかいて1マス目をもらいます。",
+          "その線は2段目2列目のマスの上の辺でもあるので、そのマスは3辺になります。下の辺をかいて2マス目、すると3段目2列目のマスが3辺になります。",
+          "このように1マスずつ、3段目2列目 → 3段目3列目 → 2段目3列目 → 1段目3列目と続き、線をかくたびに次のマスが3辺になって、全部で6マスもらえます。",
+          "残る1列目の3マスは2辺しかかかれておらず、どの線をかいても閉じられないので、アンさんの番はここで終わります。最大 6 マスです。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "geometry_scene",
+        "params": {
+          "bounds": {
+            "minX": -0.6,
+            "minY": -0.6,
+            "maxX": 6.6,
+            "maxY": 6.6
+          },
+          "points": [
+            {
+              "name": "d00",
+              "x": 0,
+              "y": 6,
+              "visible": false
+            },
+            {
+              "name": "d01",
+              "x": 2,
+              "y": 6,
+              "visible": false
+            },
+            {
+              "name": "d02",
+              "x": 4,
+              "y": 6,
+              "visible": false
+            },
+            {
+              "name": "d03",
+              "x": 6,
+              "y": 6,
+              "visible": false
+            },
+            {
+              "name": "d10",
+              "x": 0,
+              "y": 4,
+              "visible": false
+            },
+            {
+              "name": "d11",
+              "x": 2,
+              "y": 4,
+              "visible": false
+            },
+            {
+              "name": "d12",
+              "x": 4,
+              "y": 4,
+              "visible": false
+            },
+            {
+              "name": "d13",
+              "x": 6,
+              "y": 4,
+              "visible": false
+            },
+            {
+              "name": "d20",
+              "x": 0,
+              "y": 2,
+              "visible": false
+            },
+            {
+              "name": "d21",
+              "x": 2,
+              "y": 2,
+              "visible": false
+            },
+            {
+              "name": "d22",
+              "x": 4,
+              "y": 2,
+              "visible": false
+            },
+            {
+              "name": "d23",
+              "x": 6,
+              "y": 2,
+              "visible": false
+            },
+            {
+              "name": "d30",
+              "x": 0,
+              "y": 0,
+              "visible": false
+            },
+            {
+              "name": "d31",
+              "x": 2,
+              "y": 0,
+              "visible": false
+            },
+            {
+              "name": "d32",
+              "x": 4,
+              "y": 0,
+              "visible": false
+            },
+            {
+              "name": "d33",
+              "x": 6,
+              "y": 0,
+              "visible": false
+            }
+          ],
+          "segments": [
+            {
+              "from": "d00",
+              "to": "d01",
+              "style": "solid"
+            },
+            {
+              "from": "d01",
+              "to": "d02",
+              "style": "solid"
+            },
+            {
+              "from": "d02",
+              "to": "d03",
+              "style": "solid"
+            },
+            {
+              "from": "d31",
+              "to": "d32",
+              "style": "solid"
+            },
+            {
+              "from": "d32",
+              "to": "d33",
+              "style": "solid"
+            },
+            {
+              "from": "d01",
+              "to": "d11",
+              "style": "solid"
+            },
+            {
+              "from": "d02",
+              "to": "d12",
+              "style": "solid"
+            },
+            {
+              "from": "d10",
+              "to": "d20",
+              "style": "solid"
+            },
+            {
+              "from": "d11",
+              "to": "d21",
+              "style": "solid"
+            },
+            {
+              "from": "d12",
+              "to": "d22",
+              "style": "solid"
+            },
+            {
+              "from": "d13",
+              "to": "d23",
+              "style": "solid"
+            },
+            {
+              "from": "d20",
+              "to": "d30",
+              "style": "solid"
+            },
+            {
+              "from": "d21",
+              "to": "d31",
+              "style": "solid"
+            },
+            {
+              "from": "d23",
+              "to": "d33",
+              "style": "solid"
+            }
+          ],
+          "arcs": [
+            {
+              "cx": 0,
+              "cy": 6,
+              "r": 0.09,
+              "from": 0,
+              "to": 360
+            },
+            {
+              "cx": 2,
+              "cy": 6,
+              "r": 0.09,
+              "from": 0,
+              "to": 360
+            },
+            {
+              "cx": 4,
+              "cy": 6,
+              "r": 0.09,
+              "from": 0,
+              "to": 360
+            },
+            {
+              "cx": 6,
+              "cy": 6,
+              "r": 0.09,
+              "from": 0,
+              "to": 360
+            },
+            {
+              "cx": 0,
+              "cy": 4,
+              "r": 0.09,
+              "from": 0,
+              "to": 360
+            },
+            {
+              "cx": 2,
+              "cy": 4,
+              "r": 0.09,
+              "from": 0,
+              "to": 360
+            },
+            {
+              "cx": 4,
+              "cy": 4,
+              "r": 0.09,
+              "from": 0,
+              "to": 360
+            },
+            {
+              "cx": 6,
+              "cy": 4,
+              "r": 0.09,
+              "from": 0,
+              "to": 360
+            },
+            {
+              "cx": 0,
+              "cy": 2,
+              "r": 0.09,
+              "from": 0,
+              "to": 360
+            },
+            {
+              "cx": 2,
+              "cy": 2,
+              "r": 0.09,
+              "from": 0,
+              "to": 360
+            },
+            {
+              "cx": 4,
+              "cy": 2,
+              "r": 0.09,
+              "from": 0,
+              "to": 360
+            },
+            {
+              "cx": 6,
+              "cy": 2,
+              "r": 0.09,
+              "from": 0,
+              "to": 360
+            },
+            {
+              "cx": 0,
+              "cy": 0,
+              "r": 0.09,
+              "from": 0,
+              "to": 360
+            },
+            {
+              "cx": 2,
+              "cy": 0,
+              "r": 0.09,
+              "from": 0,
+              "to": 360
+            },
+            {
+              "cx": 4,
+              "cy": 0,
+              "r": 0.09,
+              "from": 0,
+              "to": 360
+            },
+            {
+              "cx": 6,
+              "cy": 0,
+              "r": 0.09,
+              "from": 0,
+              "to": 360
+            }
+          ]
+        }
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "6"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "點格棋盤面上一連串可以接著拿下的格子",
+        "notes": "設計依據：點格棋的「連鎖」：補一條線同時讓下一格變成三邊。全庫 subtopic 查 dots／box：只有方塊、骨牌類，沒有點格棋；博弈題（alternating_turns、domino_strip_of_five_second_player_wins 等）都不是這個遊戲。已依序模擬確認恰為 6 格，左邊一行三格無法取得。",
+        "displayText": "MathSpring 改寫題（附圖）"
+      }
+    },
+    {
+      "id": "logic_grade5_foundation_124",
+      "topic": "logic",
+      "subtopic": "fewest_roads_closed_to_separate_two_towns",
+      "tags": [
+        "c:graph_theory",
+        "c:logic_deduction",
+        "m:extremal"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade5",
+      "challengeTier": "foundation",
+      "reviewStatus": "ok",
+      "prompt": {
+        "zh-Hant": "如圖，A～H 八個村子之間的線段是道路，每條路都可以雙向通行。颱風要來了，公路局想封閉一些道路，讓人沒有辦法從 A 村經由任何道路到達 H 村。最少要封閉幾條路？",
+        "zh-Hans": "如图，A～H 八个村子之间的线段是道路，每条路都可以双向通行。台风要来了，公路局想封闭一些道路，让人没有办法从 A 村经由任何道路到达 H 村。最少要封闭几条路？",
+        "en": "The segments between the eight villages A–H are roads, each usable in both directions. Before a typhoon, the road office wants to close some roads so that nobody can get from village A to village H by any route. What is the least number of roads that must be closed?",
+        "ja": "図の A〜H の8つの村を結ぶ線分は道路で、どれも両方向に通れます。台風が来るので、どの道を通っても A 村から H 村へ行けないように、いくつかの道路を通行止めにします。少なくとも何本通行止めにすればよいですか。"
+      },
+      "answer": {
+        "zh-Hant": "最少封閉 2 條路。",
+        "zh-Hans": "最少封闭 2 条路。",
+        "en": "At least 2 roads.",
+        "ja": "少なくとも 2 本です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "做得到 2 條：左邊 A、B、C、D 四村和右邊 E、F、G、H 四村之間，只有 C–E 和 D–F 兩條路相連。封閉這兩條，A 就到不了右邊，也到不了 H。",
+          "1 條不夠：A → C → E → H 和 A → D → F → H 這兩條路線沒有共用任何一條道路。只封 1 條路，最多擋住其中一條路線，另一條還能走。",
+          "所以最少要封閉 2 條。只看 A 或 H 身上的路會以為要封 3 條，那不是最少。"
+        ],
+        "zh-Hans": [
+          "做得到 2 条：左边 A、B、C、D 四村和右边 E、F、G、H 四村之间，只有 C–E 和 D–F 两条路相连。封闭这两条，A 就到不了右边，也到不了 H。",
+          "1 条不够：A → C → E → H 和 A → D → F → H 这两条路线没有共用任何一条道路。只封 1 条路，最多挡住其中一条路线，另一条还能走。",
+          "所以最少要封闭 2 条。只看 A 或 H 身上的路会以为要封 3 条，那不是最少。"
+        ],
+        "en": [
+          "Two is enough: the left group A, B, C, D and the right group E, F, G, H are joined only by the roads C–E and D–F. Closing these two cuts A off from the right side, and so from H.",
+          "One is not enough: the routes A → C → E → H and A → D → F → H share no road, so closing a single road blocks at most one of them and the other still works.",
+          "So the least is 2. Looking only at the roads at A or at H suggests 3, which is not the least."
+        ],
+        "ja": [
+          "2本でできます：左の A、B、C、D の4村と右の E、F、G、H の4村をつなぐのは C–E と D–F の2本だけです。この2本を止めれば、A から右側へ、つまり H へは行けません。",
+          "1本では足りません：A → C → E → H と A → D → F → H の2つの道すじは同じ道路を1本も使わないので、1本止めても少なくとも一方は通れます。",
+          "よって少なくとも 2 本です。A や H につながる道だけを見ると 3 本と考えてしまいますが、それは最少ではありません。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "geometry_scene",
+        "params": {
+          "bounds": {
+            "minX": -0.8,
+            "minY": -0.8,
+            "maxX": 8.8,
+            "maxY": 4.8
+          },
+          "points": [
+            {
+              "name": "A",
+              "x": 0,
+              "y": 2,
+              "pos": "l"
+            },
+            {
+              "name": "B",
+              "x": 1.6,
+              "y": 4,
+              "pos": "t"
+            },
+            {
+              "name": "C",
+              "x": 2.6,
+              "y": 2.6,
+              "pos": "t"
+            },
+            {
+              "name": "D",
+              "x": 1.6,
+              "y": 0,
+              "pos": "b"
+            },
+            {
+              "name": "E",
+              "x": 5.4,
+              "y": 2.6,
+              "pos": "t"
+            },
+            {
+              "name": "F",
+              "x": 6.4,
+              "y": 0,
+              "pos": "b"
+            },
+            {
+              "name": "G",
+              "x": 6.4,
+              "y": 4,
+              "pos": "t"
+            },
+            {
+              "name": "H",
+              "x": 8,
+              "y": 2,
+              "pos": "r"
+            }
+          ],
+          "segments": [
+            {
+              "from": "A",
+              "to": "B",
+              "style": "solid"
+            },
+            {
+              "from": "A",
+              "to": "C",
+              "style": "solid"
+            },
+            {
+              "from": "A",
+              "to": "D",
+              "style": "solid"
+            },
+            {
+              "from": "B",
+              "to": "C",
+              "style": "solid"
+            },
+            {
+              "from": "C",
+              "to": "D",
+              "style": "solid"
+            },
+            {
+              "from": "B",
+              "to": "D",
+              "style": "solid"
+            },
+            {
+              "from": "E",
+              "to": "F",
+              "style": "solid"
+            },
+            {
+              "from": "E",
+              "to": "G",
+              "style": "solid"
+            },
+            {
+              "from": "E",
+              "to": "H",
+              "style": "solid"
+            },
+            {
+              "from": "F",
+              "to": "G",
+              "style": "solid"
+            },
+            {
+              "from": "F",
+              "to": "H",
+              "style": "solid"
+            },
+            {
+              "from": "G",
+              "to": "H",
+              "style": "solid"
+            },
+            {
+              "from": "C",
+              "to": "E",
+              "style": "solid"
+            },
+            {
+              "from": "D",
+              "to": "F",
+              "style": "solid"
+            }
+          ]
+        }
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "2"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 1
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "道路圖中最少封閉幾條路才能使兩村不通",
+        "notes": "設計依據：找出兩群村子之間的瓶頸（構造）＋兩條不共用道路的路線（下界）。全庫 subtopic 有 cells_whose_removal_disconnects、count_islands_edge_connected（方格）與 max_edges_disconnected，沒有「最少封幾條路使兩點不通」；誘答 3 來自只看 A 或 H 的道路數。",
+        "displayText": "MathSpring 改寫題（附圖）"
+      }
+    },
+    {
+      "id": "logic_grade5_foundation_125",
+      "topic": "logic",
+      "subtopic": "grid_cell_equals_left_plus_above_backtrack",
+      "tags": [
+        "c:add_sub",
+        "c:logic_deduction",
+        "m:reverse"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade5",
+      "challengeTier": "foundation",
+      "reviewStatus": "ok",
+      "prompt": {
+        "zh-Hant": "如圖的 4 × 4 方格要填數：除了最上面一橫排和最左邊一直行之外，每一格的數都等於它左邊那一格的數加上它上面那一格的數。圖中只寫出了幾格，其他格子空著。標 ? 的右下角那一格是多少？",
+        "zh-Hans": "如图的 4 × 4 方格要填数：除了最上面一横排和最左边一竖排之外，每一格的数都等于它左边那一格的数加上它上面那一格的数。图中只写出了几格，其他格子空着。标 ? 的右下角那一格是多少？",
+        "en": "Numbers go in the 4 × 4 grid: except for the top row and the left column, every cell equals the cell to its left plus the cell above it. Only a few cells are shown. What number goes in the bottom-right cell, marked ?",
+        "ja": "図の 4 × 4 の方眼に数を入れます。いちばん上の段といちばん左の列をのぞいて、どのマスの数も「左のマスの数 + 上のマスの数」です。いくつかのマスだけ書いてあります。? の右下のマスはいくつですか。"
+      },
+      "answer": {
+        "zh-Hant": "右下角是 48。",
+        "zh-Hans": "右下角是 48。",
+        "en": "The bottom-right cell is 48.",
+        "ja": "右下のマスは 48 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "橫排由上往下 1～4、直行由左往右 1～4。第 2 排第 2 格 = 3 + 2 = 5。第 2 排第 3 格是 9 = 5 + (第 1 排第 3 格)，所以第 1 排第 3 格是 4。",
+          "第 3 排第 2 格是 6 = (第 3 排第 1 格) + 5，所以第 3 排第 1 格是 1；第 3 排第 3 格 = 6 + 9 = 15。第 3 排第 4 格是 25 = 15 + (第 2 排第 4 格)，所以第 2 排第 4 格是 10。",
+          "第 4 排：第 2 格 = 2 + 6 = 8，第 3 格 = 8 + 15 = 23，第 4 格 = 23 + 25 = 48。"
+        ],
+        "zh-Hans": [
+          "横排由上往下 1～4、竖排由左往右 1～4。第 2 排第 2 格 = 3 + 2 = 5。第 2 排第 3 格是 9 = 5 + (第 1 排第 3 格)，所以第 1 排第 3 格是 4。",
+          "第 3 排第 2 格是 6 = (第 3 排第 1 格) + 5，所以第 3 排第 1 格是 1；第 3 排第 3 格 = 6 + 9 = 15。第 3 排第 4 格是 25 = 15 + (第 2 排第 4 格)，所以第 2 排第 4 格是 10。",
+          "第 4 排：第 2 格 = 2 + 6 = 8，第 3 格 = 8 + 15 = 23，第 4 格 = 23 + 25 = 48。"
+        ],
+        "en": [
+          "Rows 1–4 from the top, columns 1–4 from the left. Row 2 col 2 = 3 + 2 = 5. Row 2 col 3 is 9 = 5 + (row 1 col 3), so row 1 col 3 is 4.",
+          "Row 3 col 2 is 6 = (row 3 col 1) + 5, so row 3 col 1 is 1, and row 3 col 3 = 6 + 9 = 15. Row 3 col 4 is 25 = 15 + (row 2 col 4), so row 2 col 4 is 10.",
+          "Row 4: col 2 = 2 + 6 = 8, col 3 = 8 + 15 = 23, col 4 = 23 + 25 = 48."
+        ],
+        "ja": [
+          "上から1〜4段目、左から1〜4列目とよびます。2段目2列目 = 3 + 2 = 5。2段目3列目は 9 = 5 + (1段目3列目) なので、1段目3列目は 4 です。",
+          "3段目2列目は 6 = (3段目1列目) + 5 なので3段目1列目は 1、3段目3列目 = 6 + 9 = 15。3段目4列目は 25 = 15 + (2段目4列目) なので、2段目4列目は 10 です。",
+          "4段目は 2列目 = 2 + 6 = 8、3列目 = 8 + 15 = 23、4列目 = 23 + 25 = 48 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "composite_grid_shape",
+        "params": {
+          "rows": 4,
+          "cols": 4,
+          "filledCells": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              0,
+              3
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              2,
+              0
+            ],
+            [
+              3,
+              0
+            ]
+          ],
+          "cellLabels": {
+            "0,0": "1",
+            "0,1": "2",
+            "1,0": "3",
+            "1,2": "9",
+            "2,1": "6",
+            "2,3": "25",
+            "3,0": "2",
+            "3,3": "?"
+          }
+        }
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "48"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "每格等於左格加上格的方格，由中間的數倒推邊界再算到角落",
+        "notes": "設計依據：有些邊界格要從裡面的格子倒推（減法），再往右下加。全庫最接近 arithmetic_grade4_foundation_209（數字塔：上面＝左下＋右下）與 subtopic grid_average_neighbors_system、two_way_constant_step_table；方向與規則都不同，本題是二維「左＋上」並需要倒推。塗色是最上排與最左行。",
+        "displayText": "MathSpring 改寫題（附圖）"
+      }
     }
   ]
 }
