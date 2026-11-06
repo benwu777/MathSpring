@@ -14227,6 +14227,717 @@
         "subtopicCode": "bridges_walk_end_island"
       },
       "reviewStatus": "ok"
+    },
+    {
+      "id": "logic_grade2_foundation_170",
+      "topic": "logic",
+      "subtopic": "floor_plan_fewest_doors",
+      "tags": [
+        "c:graph_theory",
+        "m:estimate_bound"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade2",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "如圖是一間屋子的平面圖，寫著同一個字母的格子是同一個房間。只要兩個房間有一段牆貼在一起，牆上就有一扇門可以從這間走到那間（只碰到一個角的沒有門）。小安在 S 房間，要走到 T 房間。他最少要穿過幾扇門？",
+        "zh-Hans": "如图是一间屋子的平面图，写着同一个字母的格子是同一个房间。只要两个房间有一段墙贴在一起，墙上就有一扇门可以从这间走到那间（只碰到一个角的没有门）。小安在 S 房间，要走到 T 房间。他最少要穿过几扇门？",
+        "en": "The figure is the floor plan of a house; squares with the same letter form one room. Whenever two rooms share a stretch of wall, there is a door in that wall between them (rooms touching only at a corner have no door). An is in room S and wants to reach room T. At least how many doors must he go through?",
+        "ja": "図は家の間取り図で、同じ文字のマスは同じへやです。2 つのへやのかべが少しでもくっついていれば、そのかべにはとびらがあって行き来できます（かどだけでさわっているへやにはとびらはありません）。アンさんはへや S にいて、へや T へ行きます。少なくとも何まいのとびらを通りますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 3 扇。",
+        "zh-Hans": "答案是 3 扇。",
+        "en": "The answer is 3 doors.",
+        "ja": "答えは 3 まい です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "和 S 有牆貼在一起的房間是 A、C、D，穿過 1 扇門就到得了。和 T 有牆貼在一起的房間是 E、F、G。",
+          "A、C、D 都不和 T 相鄰，所以 2 扇門到不了 T：第 1 扇門只能到 A、C、D，第 2 扇門要直接進 T，可是它們和 T 之間沒有門。至少要 3 扇。",
+          "3 扇做得到：S → D → E → T（D 和 E、E 和 T 都有牆貼在一起）。答案是 3。"
+        ],
+        "zh-Hans": [
+          "和 S 有墙贴在一起的房间是 A、C、D，穿过 1 扇门就到得了。和 T 有墙贴在一起的房间是 E、F、G。",
+          "A、C、D 都不和 T 相邻，所以 2 扇门到不了 T：第 1 扇门只能到 A、C、D，第 2 扇门要直接进 T，可是它们和 T 之间没有门。至少要 3 扇。",
+          "3 扇做得到：S → D → E → T（D 和 E、E 和 T 都有墙贴在一起）。答案是 3。"
+        ],
+        "en": [
+          "The rooms sharing a wall with S are A, C and D, reachable through 1 door. The rooms sharing a wall with T are E, F and G.",
+          "None of A, C, D borders T, so 2 doors cannot reach T: the first door leads only to A, C or D, and the second would have to open straight into T, but there is no door from them to T. At least 3 doors are needed.",
+          "3 doors is possible: S → D → E → T (D borders E, and E borders T). The answer is 3."
+        ],
+        "ja": [
+          "S とかべがくっついているのは A、C、D で、とびら 1 まいで行けます。T とくっついているのは E、F、G です。",
+          "A、C、D はどれも T ととなりあっていないので、とびら 2 まいでは T に着けません。1 まい目で行けるのは A、C、D だけで、2 まい目で T に入ろうにも、そこから T へのとびらがありません。少なくとも 3 まいです。",
+          "3 まいでできます：S → D → E → T（D と E、E と T はかべがくっついています）。答えは 3 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "composite_grid_shape",
+        "params": {
+          "rows": 5,
+          "cols": 6,
+          "filledCells": [],
+          "cellLabels": {
+            "0,0": "S",
+            "0,1": "S",
+            "0,2": "A",
+            "0,3": "A",
+            "0,4": "A",
+            "0,5": "B",
+            "1,0": "C",
+            "1,1": "D",
+            "1,2": "D",
+            "1,3": "D",
+            "1,4": "A",
+            "1,5": "B",
+            "2,0": "C",
+            "2,1": "D",
+            "2,2": "E",
+            "2,3": "E",
+            "2,4": "F",
+            "2,5": "B",
+            "3,0": "C",
+            "3,1": "G",
+            "3,2": "G",
+            "3,3": "E",
+            "3,4": "F",
+            "3,5": "F",
+            "4,0": "H",
+            "4,1": "H",
+            "4,2": "G",
+            "4,3": "T",
+            "4,4": "T",
+            "4,5": "F"
+          }
+        }
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "3"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "平面圖最少穿過幾扇門",
+        "notes": "設計依據：要從平面圖讀出哪些房間相鄰，再證明 2 扇門不夠（S 的鄰室都不鄰 T）並給出 3 扇的走法。查過的最接近既有題：logic_grade7_foundation_073（平面圖每扇門恰好穿過一次）、logic_grade1_foundation_129（一排四個房間都進去過）；本題是最少門數的界與構造，推理不同。",
+        "displayText": "改寫題（平面圖最少穿過幾扇門）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "邏輯",
+        "topicCode": "logic",
+        "subtopic": "平面圖最少穿過幾扇門",
+        "subtopicCode": "floor_plan_fewest_doors"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "logic_grade2_foundation_171",
+      "topic": "logic",
+      "subtopic": "frog_stones_broken_count_ways",
+      "tags": [
+        "c:basic_counting",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade2",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "如圖，河的左岸（L）和右岸（R）之間有一排 9 塊石頭，編號 1 到 9，塗色的 4 號和 7 號石頭是壞的，不能踩。青蛙從左岸出發，每一次往右跳到下一塊，或是往右跳過一塊、落在再下一塊（右岸也可以這樣跳上去），不能往回跳。青蛙跳到右岸，一共有幾種不同的跳法？",
+        "zh-Hans": "如图，河的左岸（L）和右岸（R）之间有一排 9 块石头，编号 1 到 9，涂色的 4 号和 7 号石头是坏的，不能踩。青蛙从左岸出发，每一次往右跳到下一块，或是往右跳过一块、落在再下一块（右岸也可以这样跳上去），不能往回跳。青蛙跳到右岸，一共有几种不同的跳法？",
+        "en": "Between the left bank (L) and the right bank (R) of a river lies a row of 9 stones numbered 1 to 9; the shaded stones 4 and 7 are broken and must not be landed on. A frog starts on the left bank; each jump goes right either to the next stone or over one stone to the stone after it (it may reach the right bank the same way), and it never jumps back. How many different ways can the frog reach the right bank?",
+        "ja": "図のように、川の左岸（L）と右岸（R）のあいだに 1 から 9 の番号の石が 9 こならんでいます。色のついた 4 番と 7 番の石はこわれていて、ふめません。カエルは左岸から出発し、1 回に右どなりの石へとぶか、石を 1 つとびこえてそのつぎの石へとびます（右岸へも同じようにとべます）。もどることはしません。右岸まで行くとび方は何通りありますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 6 種。",
+        "zh-Hans": "答案是 6 种。",
+        "en": "The answer is 6 ways.",
+        "ja": "答えは 6 通り です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "4 號壞了，要過 4 號只能從 3 號跳過去落在 5 號，所以一定會踩 3 號和 5 號；同樣地，要過 7 號只能從 6 號跳到 8 號，一定會踩 6 號和 8 號。",
+          "左岸到 3 號：L→1→2→3、L→2→3、L→1→3，有 3 種。5 號到 8 號：只能 5→6→8，1 種。8 號到右岸：8→9→R 或 8→R，2 種。",
+          "每一段的跳法可以任意搭配：3 × 1 × 2 = 6 種。答案是 6。"
+        ],
+        "zh-Hans": [
+          "4 号坏了，要过 4 号只能从 3 号跳过去落在 5 号，所以一定会踩 3 号和 5 号；同样地，要过 7 号只能从 6 号跳到 8 号，一定会踩 6 号和 8 号。",
+          "左岸到 3 号：L→1→2→3、L→2→3、L→1→3，有 3 种。5 号到 8 号：只能 5→6→8，1 种。8 号到右岸：8→9→R 或 8→R，2 种。",
+          "每一段的跳法可以任意搭配：3 × 1 × 2 = 6 种。答案是 6。"
+        ],
+        "en": [
+          "Stone 4 is broken, so the only way past it is to jump from 3 over to 5; the frog must land on both 3 and 5. In the same way, passing 7 needs a jump from 6 to 8, so it must land on 6 and 8.",
+          "Left bank to stone 3: L→1→2→3, L→2→3, L→1→3, 3 ways. Stone 5 to stone 8: only 5→6→8, 1 way. Stone 8 to the right bank: 8→9→R or 8→R, 2 ways.",
+          "The parts can be combined freely: 3 × 1 × 2 = 6 ways. The answer is 6."
+        ],
+        "ja": [
+          "4 番がこわれているので、4 番をこえるには 3 番から 5 番へとぶしかなく、3 番と 5 番はかならずふみます。同じように 7 番をこえるには 6 番から 8 番へとぶので、6 番と 8 番もかならずふみます。",
+          "左岸から 3 番まで：L→1→2→3、L→2→3、L→1→3 の 3 通り。5 番から 8 番まで：5→6→8 の 1 通り。8 番から右岸まで：8→9→R か 8→R の 2 通り。",
+          "それぞれの区間のとび方は自由に組み合わせられるので、3 × 1 × 2 = 6 通り。答えは 6 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "composite_grid_shape",
+        "params": {
+          "rows": 1,
+          "cols": 11,
+          "filledCells": [
+            [
+              0,
+              4
+            ],
+            [
+              0,
+              7
+            ]
+          ],
+          "cellLabels": {
+            "0,0": "L",
+            "0,1": "1",
+            "0,2": "2",
+            "0,3": "3",
+            "0,4": "4",
+            "0,5": "5",
+            "0,6": "6",
+            "0,7": "7",
+            "0,8": "8",
+            "0,9": "9",
+            "0,10": "R"
+          }
+        }
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "6"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "跳石過河避開壞石頭的跳法",
+        "notes": "設計依據：壞石頭逼得青蛙一定要踩它前後兩塊，把路線切成三段分別數再相乘。查過的最接近既有題：logic_grade1_foundation_146（每次跳 2 或 3 塊且不能連續）、arithmetic_grade2_foundation_221（樓梯每步 1 或 2 階踩到的數最小和）；本題是有障礙時數跳法，推理不同。",
+        "displayText": "改寫題（跳石過河避開壞石頭的跳法）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "邏輯",
+        "topicCode": "logic",
+        "subtopic": "跳石過河避開壞石頭的跳法",
+        "subtopicCode": "frog_stones_broken_count_ways"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "logic_grade2_foundation_172",
+      "topic": "logic",
+      "subtopic": "pet_logic_table_crosses",
+      "tags": [
+        "c:logic_deduction",
+        "m:contradiction"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade2",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "小安（①）、小美（②）、小華（③）三個人各養一種寵物，分別是 ●、▲、■ 三種，每人養的都不一樣。如圖的表格，最左邊一直行是人，最上面一橫排是寵物，打「×」的格子表示那個人「沒有」養那種寵物。小華（③）養的是哪一種？",
+        "zh-Hans": "小安（①）、小美（②）、小华（③）三个人各养一种宠物，分别是 ●、▲、■ 三种，每人养的都不一样。如图的表格，最左边一竖排是人，最上面一横排是宠物，打「×」的格子表示那个人「没有」养那种宠物。小华（③）养的是哪一种？",
+        "en": "An (①), Mei (②) and Hua (③) each keep one pet, and the three pets are ●, ▲ and ■, all different. In the table, the left column lists the people, the top row lists the pets, and a \"×\" means that person does not keep that pet. Which pet does Hua (③) keep?",
+        "ja": "アンさん（①）、メイさん（②）、ファさん（③）の 3 人は、●、▲、■ のちがうペットを 1 ぴきずつかっています。図の表で、いちばん左のたての列が人、いちばん上の横の列がペットで、「×」のマスはその人がそのペットをかっていないことを表します。ファさん（③）がかっているのはどれですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 A：●。",
+        "zh-Hans": "答案是 A：●。",
+        "en": "The answer is A: ●.",
+        "ja": "答えは A：● です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "看 ② 那一橫排：● 和 ■ 都打 ×，所以小美養的是 ▲。",
+          "看 ● 那一直行：① 和 ② 都打 ×，所以養 ● 的只能是 ③。",
+          "剩下 ■ 是小安的。所以小華養 ●。③ 那一橫排雖然沒有 ×，答案還是確定的。答案是 A。"
+        ],
+        "zh-Hans": [
+          "看 ② 那一横排：● 和 ■ 都打 ×，所以小美养的是 ▲。",
+          "看 ● 那一竖排：① 和 ② 都打 ×，所以养 ● 的只能是 ③。",
+          "剩下 ■ 是小安的。所以小华养 ●。③ 那一横排虽然没有 ×，答案还是确定的。答案是 A。"
+        ],
+        "en": [
+          "Row ②: ● and ■ are both crossed out, so Mei keeps ▲.",
+          "Column ●: ① and ② are both crossed out, so the one keeping ● must be ③.",
+          "That leaves ■ for An. So Hua keeps ●. Even though row ③ has no × at all, the answer is still decided. The answer is A."
+        ],
+        "ja": [
+          "② の横の列は ● と ■ に × があるので、メイさんは ▲ です。",
+          "● のたての列は ① と ② に × があるので、● をかっているのは ③ しかいません。",
+          "のこりの ■ はアンさんです。ファさんは ● です。③ の列には × がひとつもありませんが、答えは決まります。答えは A です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "composite_grid_shape",
+        "params": {
+          "rows": 4,
+          "cols": 4,
+          "filledCells": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              0,
+              3
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              2,
+              0
+            ],
+            [
+              3,
+              0
+            ]
+          ],
+          "cellLabels": {
+            "0,1": "●",
+            "0,2": "▲",
+            "0,3": "■",
+            "1,0": "①",
+            "1,1": "×",
+            "2,0": "②",
+            "2,1": "×",
+            "2,3": "×",
+            "3,0": "③"
+          }
+        }
+      },
+      "answerMode": "multiple_choice",
+      "options": {
+        "A": {
+          "zh-Hant": "●",
+          "zh-Hans": "●",
+          "en": "●",
+          "ja": "●"
+        },
+        "B": {
+          "zh-Hant": "▲",
+          "zh-Hans": "▲",
+          "en": "▲",
+          "ja": "▲"
+        },
+        "C": {
+          "zh-Hant": "■",
+          "zh-Hans": "■",
+          "en": "■",
+          "ja": "■"
+        },
+        "D": {
+          "zh-Hant": "不能確定",
+          "zh-Hans": "不能确定",
+          "en": "Cannot be decided",
+          "ja": "わからない"
+        }
+      },
+      "correctAnswer": {
+        "type": "choice",
+        "value": "A"
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "打叉表格推出寵物",
+        "notes": "設計依據：③ 那一排完全沒有 ×，要改看「● 那一直行」才推得出來，容易誤選「不能確定」。查過的最接近既有題：logic_grade2_foundation_053（三個盒子 2、5、8 顆糖）、logic_grade3_foundation_142（四隊比賽勝負表）；本題是讀表格的直行與橫排雙向排除，推理不同。",
+        "displayText": "改寫題（打叉表格推出寵物）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "邏輯",
+        "topicCode": "logic",
+        "subtopic": "打叉表格推出寵物",
+        "subtopicCode": "pet_logic_table_crosses"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "logic_grade2_foundation_173",
+      "topic": "logic",
+      "subtopic": "two_tokens_ring_first_meeting",
+      "tags": [
+        "c:pattern",
+        "c:modular",
+        "m:enumeration"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade2",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "如圖，左邊是第 1 張圖，右邊是第 2 張圖：塗色的 8 格圍成一圈，● 和 ▲ 都在圈上。從一張圖到下一張圖，● 都照順時針方向走 1 格，▲ 都照逆時針方向走 2 格，一直這樣畫下去。● 和 ▲ 第一次在同一格，是第幾張圖？",
+        "zh-Hans": "如图，左边是第 1 张图，右边是第 2 张图：涂色的 8 格围成一圈，● 和 ▲ 都在圈上。从一张图到下一张图，● 都照顺时针方向走 1 格，▲ 都照逆时针方向走 2 格，一直这样画下去。● 和 ▲ 第一次在同一格，是第几张图？",
+        "en": "The left picture is picture 1 and the right picture is picture 2: the 8 shaded squares form a ring, and ● and ▲ are on the ring. From one picture to the next, ● always moves 1 square clockwise and ▲ always moves 2 squares counterclockwise, and the pictures go on like this. In which picture are ● and ▲ in the same square for the first time?",
+        "ja": "図の左が 1 まい目、右が 2 まい目の絵です。色のついた 8 マスが 1 まわりの輪になっていて、● と ▲ は輪の上にあります。1 まいの絵からつぎの絵へ、● はいつも時計まわりに 1 マス、▲ はいつも反時計まわりに 2 マス進み、ずっとつづけてかきます。● と ▲ がはじめて同じマスに来るのは何まい目の絵ですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 8 張。",
+        "zh-Hans": "答案是 8 张。",
+        "en": "The answer is 8.",
+        "ja": "答えは 8 まい目 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "把圈上的 8 格從左上角開始，照順時針編號 1 到 8。第 1 張圖：● 在 1 號格，▲ 在 6 號格。",
+          "每過一張圖，兩個符號一個順時針 1 格、一個逆時針 2 格，它們之間（照順時針從 ● 數到 ▲）的距離每次少 3 格。一開始 ● 到 ▲ 順時針隔 5 格。",
+          "距離依序是 5、2、7（2 再少 3，要繞過一整圈 8 格）、4、1、6、3、0。變成 0 的是第 8 張圖。也可以直接列：第 8 張時 ● 走了 7 格到 8 號格，▲ 逆時針走了 14 格也到 8 號格。答案是 8。"
+        ],
+        "zh-Hans": [
+          "把圈上的 8 格从左上角开始，照顺时针编号 1 到 8。第 1 张图：● 在 1 号格，▲ 在 6 号格。",
+          "每过一张图，两个符号一个顺时针 1 格、一个逆时针 2 格，它们之间（照顺时针从 ● 数到 ▲）的距离每次少 3 格。一开始 ● 到 ▲ 顺时针隔 5 格。",
+          "距离依序是 5、2、7（2 再少 3，要绕过一整圈 8 格）、4、1、6、3、0。变成 0 的是第 8 张图。也可以直接列：第 8 张时 ● 走了 7 格到 8 号格，▲ 逆时针走了 14 格也到 8 号格。答案是 8。"
+        ],
+        "en": [
+          "Number the 8 ring squares 1 to 8 clockwise starting at the top-left corner. In picture 1, ● is on square 1 and ▲ on square 6.",
+          "With each new picture one symbol moves 1 clockwise and the other 2 counterclockwise, so the clockwise distance from ● to ▲ shrinks by 3 each time. At the start it is 5 squares.",
+          "The distance goes 5, 2, 7 (2 minus 3 wraps round the 8-square ring), 4, 1, 6, 3, 0. It reaches 0 in picture 8. Checking directly: by picture 8, ● has moved 7 squares to square 8 and ▲ has moved 14 squares counterclockwise, also to square 8. The answer is 8."
+        ],
+        "ja": [
+          "輪の 8 マスに、左上から時計まわりに 1 から 8 の番号をつけます。1 まい目は ● が 1 番、▲ が 6 番です。",
+          "1 まい進むごとに、● は時計まわりに 1、▲ は反時計まわりに 2 進むので、● から ▲ まで時計まわりに数えたきょりは毎回 3 へります。はじめは 5 マスです。",
+          "きょりは 5、2、7（2 から 3 へると 8 マスの輪をひとまわり）、4、1、6、3、0 となり、0 になるのは 8 まい目です。たしかめると、8 まい目では ● は 7 マス進んで 8 番、▲ は反時計まわりに 14 マス進んで同じ 8 番です。答えは 8 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "composite_grid_shape",
+        "params": {
+          "rows": 3,
+          "cols": 7,
+          "filledCells": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              0,
+              4
+            ],
+            [
+              0,
+              5
+            ],
+            [
+              0,
+              6
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              1,
+              2
+            ],
+            [
+              1,
+              4
+            ],
+            [
+              1,
+              6
+            ],
+            [
+              2,
+              0
+            ],
+            [
+              2,
+              1
+            ],
+            [
+              2,
+              2
+            ],
+            [
+              2,
+              4
+            ],
+            [
+              2,
+              5
+            ],
+            [
+              2,
+              6
+            ]
+          ],
+          "cellLabels": {
+            "0,0": "●",
+            "0,5": "●",
+            "1,6": "▲",
+            "2,1": "▲"
+          }
+        }
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "8"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "圈上兩個符號反向走何時相遇",
+        "notes": "設計依據：要從兩張圖讀出移動規則（● 順時針 1、▲ 逆時針 2），再算兩者的距離每次少 3、繞圈要加 8；兩者在第 3 張圖附近會「擦身而過」但不同格。查過的最接近既有題：logic_grade2_foundation_143（圓桌每輪往右移 2 回到原位）、logic_grade1_foundation_107（圍一圈的杯子顏色規律）；本題是兩個物體反向等速繞圈求同格，推理不同。",
+        "displayText": "改寫題（圈上兩個符號反向走何時相遇）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "邏輯",
+        "topicCode": "logic",
+        "subtopic": "圈上兩個符號反向走何時相遇",
+        "subtopicCode": "two_tokens_ring_first_meeting"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "logic_grade2_foundation_174",
+      "topic": "logic",
+      "subtopic": "spell_abcd_adjacent_paths",
+      "tags": [
+        "c:basic_counting",
+        "m:enumeration"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade2",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "如圖，九宮格裡寫著字母。從寫著 A 的格子出發，每一步走到上、下、左、右緊鄰的一格（不能斜走），依序踩到 A、B、C、D，就拼出了「ABCD」。一共有幾種不同的走法可以拼出「ABCD」？",
+        "zh-Hans": "如图，九宫格里写着字母。从写着 A 的格子出发，每一步走到上、下、左、右紧邻的一格（不能斜走），依序踩到 A、B、C、D，就拼出了「ABCD」。一共有几种不同的走法可以拼出「ABCD」？",
+        "en": "The 3 × 3 grid has letters in it. Starting on the square with A, each step goes to the square directly up, down, left or right (not diagonal); stepping on A, B, C, D in that order spells \"ABCD\". How many different ways are there to spell \"ABCD\"?",
+        "ja": "図の 3 × 3 のマスに文字が書いてあります。A のマスから出発し、1 歩ごとに上・下・左・右のとなりのマスへ進み（ななめはだめ）、A、B、C、D の順にふむと「ABCD」になります。「ABCD」をつくる進み方は何通りありますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 6 種。",
+        "zh-Hans": "答案是 6 种。",
+        "en": "The answer is 6 ways.",
+        "ja": "答えは 6 通り です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "A 在上排中間，它旁邊的 B 有三個：左上角、右上角、正中間。分三種情形數。",
+          "走到左上角的 B：旁邊的 C 只有左邊中間，再到左下角的 D，1 種。走到右上角的 B：同樣只有 1 種。",
+          "走到正中間的 B：旁邊的 C 有左邊中間、右邊中間、下排中間三個。左邊中間的 C 只連到左下角的 D，右邊中間的 C 只連到右下角的 D，下排中間的 C 左右都有 D，有 2 種。這裡共 1 + 1 + 2 = 4 種。",
+          "合起來 1 + 1 + 4 = 6 種。答案是 6。"
+        ],
+        "zh-Hans": [
+          "A 在上排中间，它旁边的 B 有三个：左上角、右上角、正中间。分三种情形数。",
+          "走到左上角的 B：旁边的 C 只有左边中间，再到左下角的 D，1 种。走到右上角的 B：同样只有 1 种。",
+          "走到正中间的 B：旁边的 C 有左边中间、右边中间、下排中间三个。左边中间的 C 只连到左下角的 D，右边中间的 C 只连到右下角的 D，下排中间的 C 左右都有 D，有 2 种。这里共 1 + 1 + 2 = 4 种。",
+          "合起来 1 + 1 + 4 = 6 种。答案是 6。"
+        ],
+        "en": [
+          "A is top-middle, and it has three neighbouring Bs: top-left, top-right and the centre. Count the three cases.",
+          "Via the top-left B: its only neighbouring C is middle-left, then the bottom-left D, 1 way. Via the top-right B: likewise 1 way.",
+          "Via the centre B: its neighbouring Cs are middle-left, middle-right and bottom-middle. Middle-left C reaches only the bottom-left D, middle-right C only the bottom-right D, and bottom-middle C has a D on each side, 2 ways. That gives 1 + 1 + 2 = 4 here.",
+          "Altogether 1 + 1 + 4 = 6 ways. The answer is 6."
+        ],
+        "ja": [
+          "A は上のまん中で、となりの B は左上、右上、まん中の 3 つです。3 つに分けて数えます。",
+          "左上の B へ行くと、となりの C は左のまん中だけで、そこから左下の D へ、1 通り。右上の B も同じく 1 通り。",
+          "まん中の B へ行くと、となりの C は左のまん中、右のまん中、下のまん中の 3 つ。左のまん中の C からは左下の D だけ、右のまん中の C からは右下の D だけ、下のまん中の C からは左右どちらの D へも行けて 2 通り。ここで 1 + 1 + 2 = 4 通り。",
+          "合わせて 1 + 1 + 4 = 6 通り。答えは 6 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "composite_grid_shape",
+        "params": {
+          "rows": 3,
+          "cols": 3,
+          "filledCells": [],
+          "cellLabels": {
+            "0,0": "B",
+            "0,1": "A",
+            "0,2": "B",
+            "1,0": "C",
+            "1,1": "B",
+            "1,2": "C",
+            "2,0": "D",
+            "2,1": "C",
+            "2,2": "D"
+          }
+        }
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "6"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "相鄰格子依序拼出 ABCD",
+        "notes": "設計依據：要依第一步走到哪個 B 分類，再看每個 C 能接到幾個 D，正中間的 B 分支最多；漏數下排中間 C 的兩個 D 是常見錯誤。查過的最接近既有題：logic_grade1_foundation_170（青蛙沿 +1 數字跳）、logic_grade3_foundation_143（● ▲ 輪流踩的路線）；本題是數依序拼字的路線數，問法不同。",
+        "displayText": "改寫題（相鄰格子依序拼出 ABCD）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "邏輯",
+        "topicCode": "logic",
+        "subtopic": "相鄰格子依序拼出 ABCD",
+        "subtopicCode": "spell_abcd_adjacent_paths"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "logic_grade2_foundation_175",
+      "topic": "logic",
+      "subtopic": "three_colour_map_forced_region",
+      "tags": [
+        "c:logic_deduction",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade2",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "如圖是一張地圖，寫著同一個字母的格子是同一區。每一區要塗 ●、▲、■ 三種顏色中的一種，有一整段邊界貼在一起的兩區不能塗同一種顏色（只碰到一個角不算）。A 區已經塗了 ●，B 區已經塗了 ▲。E 區一定要塗哪一種顏色？",
+        "zh-Hans": "如图是一张地图，写着同一个字母的格子是同一区。每一区要涂 ●、▲、■ 三种颜色中的一种，有一整段边界贴在一起的两区不能涂同一种颜色（只碰到一个角不算）。A 区已经涂了 ●，B 区已经涂了 ▲。E 区一定要涂哪一种颜色？",
+        "en": "The figure is a map; squares with the same letter form one region. Each region is coloured with one of three colours ●, ▲, ■, and two regions sharing a stretch of border must get different colours (touching only at a corner does not count). Region A is already ● and region B is already ▲. Which colour must region E be?",
+        "ja": "図は地図で、同じ文字のマスは同じ区です。どの区も ●、▲、■ の 3 色のどれかでぬり、さかいめがひとつづきにくっついている 2 つの区は同じ色にできません（かどだけでさわっているのはかまいません）。A 区は ●、B 区は ▲ でぬってあります。E 区はかならずどの色になりますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 A：●。",
+        "zh-Hans": "答案是 A：●。",
+        "en": "The answer is A: ●.",
+        "ja": "答えは A：● です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "D 區和 A、B 兩區都貼在一起，所以 D 不能是 ●，也不能是 ▲，只能是 ■。",
+          "E 區和 B 區（▲）、D 區（■）都貼在一起，所以 E 只剩 ●。",
+          "C 區和 A 區（●）、D 區（■）貼在一起，所以 C 是 ▲；F 區和 C 區（▲）、E 區（●）貼在一起，所以 F 是 ■。整張地圖都塗得完，而且塗法只有這一種。",
+          "E 和 A 都是 ●，可是 A、E 沒有貼在一起，所以可以。答案是 A。"
+        ],
+        "zh-Hans": [
+          "D 区和 A、B 两区都贴在一起，所以 D 不能是 ●，也不能是 ▲，只能是 ■。",
+          "E 区和 B 区（▲）、D 区（■）都贴在一起，所以 E 只剩 ●。",
+          "C 区和 A 区（●）、D 区（■）贴在一起，所以 C 是 ▲；F 区和 C 区（▲）、E 区（●）贴在一起，所以 F 是 ■。整张地图都涂得完，而且涂法只有这一种。",
+          "E 和 A 都是 ●，可是 A、E 没有贴在一起，所以可以。答案是 A。"
+        ],
+        "en": [
+          "Region D borders both A and B, so D can be neither ● nor ▲; it must be ■.",
+          "Region E borders B (▲) and D (■), so the only colour left for E is ●.",
+          "Region C borders A (●) and D (■), so C is ▲; region F borders C (▲) and E (●), so F is ■. The whole map can be coloured, and in only this one way.",
+          "E and A are both ●, but A and E do not border each other, so this is allowed. The answer is A."
+        ],
+        "ja": [
+          "D 区は A 区とも B 区ともくっついているので、● でも ▲ でもなく、■ です。",
+          "E 区は B 区（▲）とも D 区（■）ともくっついているので、のこりは ● だけです。",
+          "C 区は A 区（●）とも D 区（■）ともくっついているので ▲、F 区は C 区（▲）とも E 区（●）ともくっついているので ■ です。地図全体がぬれて、ぬり方はこの 1 通りだけです。",
+          "E と A はどちらも ● ですが、A と E はくっついていないのでかまいません。答えは A です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "composite_grid_shape",
+        "params": {
+          "rows": 4,
+          "cols": 4,
+          "filledCells": [],
+          "cellLabels": {
+            "0,0": "A",
+            "0,1": "A",
+            "0,2": "B",
+            "0,3": "B",
+            "1,0": "C",
+            "1,1": "D",
+            "1,2": "D",
+            "1,3": "B",
+            "2,0": "C",
+            "2,1": "D",
+            "2,2": "E",
+            "2,3": "E",
+            "3,0": "F",
+            "3,1": "E",
+            "3,2": "E",
+            "3,3": "E"
+          }
+        }
+      },
+      "answerMode": "multiple_choice",
+      "options": {
+        "A": {
+          "zh-Hant": "●",
+          "zh-Hans": "●",
+          "en": "●",
+          "ja": "●"
+        },
+        "B": {
+          "zh-Hant": "▲",
+          "zh-Hans": "▲",
+          "en": "▲",
+          "ja": "▲"
+        },
+        "C": {
+          "zh-Hant": "■",
+          "zh-Hans": "■",
+          "en": "■",
+          "ja": "■"
+        },
+        "D": {
+          "zh-Hant": "還不能確定",
+          "zh-Hans": "还不能确定",
+          "en": "Not yet decided",
+          "ja": "まだ決まらない"
+        }
+      },
+      "correctAnswer": {
+        "type": "choice",
+        "value": "A"
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "三色地圖推出某區顏色",
+        "notes": "設計依據：先由 D 同時鄰接 A、B 推出 D 是 ■，再由 E 鄰接 B、D 推出 E 是 ●；E 不與 A 相鄰、卻和 A 同色，容易被誤判。查過的最接近既有題：logic_grade4_foundation_130（地圖最少要幾種顏色）、logic_grade1_foundation_181（相鄰格子一塗一白）；本題是三色已給兩區、逐步推定，推理不同。",
+        "displayText": "改寫題（三色地圖推出某區顏色）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "邏輯",
+        "topicCode": "logic",
+        "subtopic": "三色地圖推出某區顏色",
+        "subtopicCode": "three_colour_map_forced_region"
+      },
+      "reviewStatus": "ok"
     }
   ]
 }
