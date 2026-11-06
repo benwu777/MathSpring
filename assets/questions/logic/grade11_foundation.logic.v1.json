@@ -6067,6 +6067,536 @@
         "subtopicCode": "northcott_game_winning_moves"
       },
       "reviewStatus": "ok"
+    },
+    {
+      "id": "logic_grade11_foundation_070",
+      "topic": "logic",
+      "subtopic": "chomp_2x6_winning_first_move",
+      "tags": [
+        "c:game_theory",
+        "c:logic_deduction",
+        "m:invariant"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade11",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "如圖是一塊 2 × 6 的巧克力，左下角標 P 的那一格有毒。甲、乙輪流吃，甲先：每次選一格還在的格子，把它以及所有「在它右方或上方（含右上方）」還在的格子一起吃掉。吃到 P 的人輸。甲的第一步若選圖中標 a、b、c、d 的其中一格，選哪一格能保證甲獲勝？",
+        "zh-Hans": "如图是一块 2 × 6 的巧克力，左下角标 P 的那一格有毒。甲、乙轮流吃，甲先：每次选一格还在的格子，把它以及所有「在它右方或上方（含右上方）」还在的格子一起吃掉。吃到 P 的人输。甲的第一步若选图中标 a、b、c、d 的其中一格，选哪一格能保证甲获胜？",
+        "en": "The figure shows a 2 × 6 bar of chocolate; the bottom-left square P is poisoned. A and B take turns, A first: each picks a remaining square and eats it together with every remaining square to its right or above it (including above-right). Whoever eats P loses. If A’s first pick is one of the squares marked a, b, c, d, which one guarantees that A wins?",
+        "ja": "図は 2 × 6 の板チョコで、左下の P のマスには毒があります。甲と乙が交互に食べ、甲が先です。毎回残っているマスを 1 つ選び、そのマスと、その右または上（右上も含む）に残っているマスをすべて食べます。P を食べた人の負けです。甲の最初の手が図の a、b、c、d のどれかのとき、どれを選べば甲は必ず勝てますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 A：a。",
+        "zh-Hans": "答案是 A：a。",
+        "en": "The answer is A: a.",
+        "ja": "答えは A：a です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "把局面記成（下排剩幾格, 上排剩幾格），開局是 (6, 6)。關鍵：「上排比下排少 1 格」的局面 (n, n − 1) 對輪到的人是必敗的。",
+          "理由：從 (n, n − 1) 出發，對手若吃下排第 j 格（j ≥ 2，由左數），局面變成 (j − 1, j − 1)，我再吃上排最右一格回到 (j − 1, j − 2)；對手若吃上排第 j 格，局面變成 (n, j − 1)，我吃下排第 j + 1 格回到 (j, j − 1)。每次都能回到這種形狀，最後是 (1, 0)：只剩 P，對手只好吃 P。",
+          "甲選 a（右上角）：局面變成 (6, 5)，正是給乙的必敗局面，甲必勝。",
+          "其他三格都讓乙能做出這種形狀：選 b 吃掉整個上排成 (6, 0)，乙吃下排第 2 格得 (1, 0)；選 c 成 (5, 5)，乙吃右上角得 (5, 4)；選 d 成 (6, 2)，乙吃下排第 4 格得 (3, 2)。答案是 A（a）。"
+        ],
+        "zh-Hans": [
+          "把局面记成（下排剩几格, 上排剩几格），开局是 (6, 6)。关键：「上排比下排少 1 格」的局面 (n, n − 1) 对轮到的人是必败的。",
+          "理由：从 (n, n − 1) 出发，对手若吃下排第 j 格（j ≥ 2，由左数），局面变成 (j − 1, j − 1)，我再吃上排最右一格回到 (j − 1, j − 2)；对手若吃上排第 j 格，局面变成 (n, j − 1)，我吃下排第 j + 1 格回到 (j, j − 1)。每次都能回到这种形状，最后是 (1, 0)：只剩 P，对手只好吃 P。",
+          "甲选 a（右上角）：局面变成 (6, 5)，正是给乙的必败局面，甲必胜。",
+          "其他三格都让乙能做出这种形状：选 b 吃掉整个上排成 (6, 0)，乙吃下排第 2 格得 (1, 0)；选 c 成 (5, 5)，乙吃右上角得 (5, 4)；选 d 成 (6, 2)，乙吃下排第 4 格得 (3, 2)。答案是 A（a）。"
+        ],
+        "en": [
+          "Write a position as (squares left in the bottom row, squares left in the top row); the start is (6, 6). Key fact: a position (n, n − 1), with the top row one shorter, is a loss for the player to move.",
+          "Reason: from (n, n − 1), if the opponent eats the j-th bottom square (j ≥ 2, from the left) the position becomes (j − 1, j − 1) and I eat the rightmost top square to get (j − 1, j − 2); if the opponent eats the j-th top square the position becomes (n, j − 1) and I eat the (j + 1)-th bottom square to get (j, j − 1). I can always restore the shape, ending at (1, 0): only P is left and the opponent must eat it.",
+          "If A picks a (top right), the position becomes (6, 5) — exactly the losing shape handed to B — so A wins.",
+          "Each of the other picks lets B make that shape: b eats the whole top row, giving (6, 0), and B eats the 2nd bottom square to give (1, 0); c gives (5, 5) and B eats the top-right square to give (5, 4); d gives (6, 2) and B eats the 4th bottom square to give (3, 2). The answer is A (a)."
+        ],
+        "ja": [
+          "局面を（下の行に残るマス数, 上の行に残るマス数）で表すと、最初は (6, 6)。ポイント：上の行が下の行より 1 つ少ない (n, n − 1) は、手番の人の負けの局面です。",
+          "理由：(n, n − 1) から相手が下の行の左から j 番目（j ≥ 2）を食べると (j − 1, j − 1) になり、こちらは上の行の右端を食べて (j − 1, j − 2) にします。相手が上の行の j 番目を食べると (n, j − 1) になり、こちらは下の行の j + 1 番目を食べて (j, j − 1) にします。いつもこの形にもどせて、最後は (1, 0)：P だけが残り、相手が P を食べます。",
+          "甲が a（右上）を選ぶと (6, 5) になり、乙に負けの局面を渡すので甲が勝ちます。",
+          "ほかの 3 マスでは乙がこの形をつくれます。b なら上の行がすべてなくなって (6, 0)、乙が下の 2 番目を食べて (1, 0)。c なら (5, 5)、乙が右上を食べて (5, 4)。d なら (6, 2)、乙が下の 4 番目を食べて (3, 2)。答えは A（a）です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "composite_grid_shape",
+        "params": {
+          "rows": 2,
+          "cols": 6,
+          "filledCells": [],
+          "cellLabels": {
+            "1,0": "P",
+            "0,5": "a",
+            "0,0": "b",
+            "1,5": "c",
+            "0,2": "d"
+          }
+        }
+      },
+      "answerMode": "multiple_choice",
+      "options": {
+        "A": {
+          "zh-Hant": "a",
+          "zh-Hans": "a",
+          "en": "a",
+          "ja": "a"
+        },
+        "B": {
+          "zh-Hant": "b",
+          "zh-Hans": "b",
+          "en": "b",
+          "ja": "b"
+        },
+        "C": {
+          "zh-Hant": "c",
+          "zh-Hans": "c",
+          "en": "c",
+          "ja": "c"
+        },
+        "D": {
+          "zh-Hant": "d",
+          "zh-Hans": "d",
+          "en": "d",
+          "ja": "d"
+        }
+      },
+      "correctAnswer": {
+        "type": "choice",
+        "value": "A"
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "找出必敗形狀「上排比下排少一格」，第一步就把它交給對手",
+        "notes": "設計依據：吃巧克力（Chomp）在 2 × n 板上的完整策略：維持 (n, n − 1) 形狀。全庫搜「毒」「巧克力 吃」沒有這個遊戲；既有的博弈題（取石子、報數）都可以用餘數判斷，本題要找出「形狀不變量」並逐一說明其他三步為何會輸。四個選項是圖上的四格，圖只標出毒格與候選格。",
+        "displayText": "改寫題（吃巧克力遊戲）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "邏輯",
+        "topicCode": "logic",
+        "subtopic": "2 × 6 吃巧克力遊戲的必勝第一步",
+        "subtopicCode": "chomp_2x6_winning_first_move"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "logic_grade11_foundation_071",
+      "topic": "logic",
+      "subtopic": "pure_nash_equilibria_3x3_table",
+      "tags": [
+        "c:game_theory",
+        "c:logic_deduction",
+        "m:enumeration"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade11",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "甲、乙兩人同時各做一個選擇：甲選 R1、R2、R3 其中之一，乙選 C1、C2、C3 其中之一。圖中的表格列出每種組合下兩人的得分，格子裡的「p, q」表示甲得 p 分、乙得 q 分。如果在某個組合中，甲單獨改變自己的選擇不會得到更高分，乙單獨改變自己的選擇也不會得到更高分，就稱這個組合是「穩定的」。把所有穩定組合中甲的得分加起來，是多少？",
+        "zh-Hans": "甲、乙两人同时各做一个选择：甲选 R1、R2、R3 其中之一，乙选 C1、C2、C3 其中之一。图中的表格列出每种组合下两人的得分，格子里的「p, q」表示甲得 p 分、乙得 q 分。如果在某个组合中，甲单独改变自己的选择不会得到更高分，乙单独改变自己的选择也不会得到更高分，就称这个组合是「稳定的」。把所有稳定组合中甲的得分加起来，是多少？",
+        "en": "A and B each make one choice at the same time: A picks one of R1, R2, R3 and B one of C1, C2, C3. The table in the figure gives both scores for every combination: “p, q” means A scores p and B scores q. A combination is called stable if A cannot score more by changing only A’s own choice, and B cannot score more by changing only B’s own choice. What is the sum of A’s scores over all stable combinations?",
+        "ja": "甲と乙は同時に 1 つずつ選びます。甲は R1、R2、R3 のどれか、乙は C1、C2、C3 のどれかです。図の表は各組み合わせでの 2 人の得点で、「p, q」は甲が p 点、乙が q 点を表します。ある組み合わせで、甲が自分の選択だけを変えても点が増えず、乙が自分の選択だけを変えても点が増えないとき、その組み合わせを「安定」とよびます。安定な組み合わせすべてについて甲の得点を合計するといくつですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 7。",
+        "zh-Hans": "答案是 7。",
+        "en": "The answer is 7.",
+        "ja": "答えは 7 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "甲的最佳反應（固定乙的選擇，看同一直行甲分數最大的）：C1 那一行甲的分數是 4、2、1，最好是 R1；C2 那一行是 1、3、2，最好是 R2；C3 那一行是 3、0、2，最好是 R1。",
+          "乙的最佳反應（固定甲的選擇，看同一橫列乙分數最大的）：R1 那一列乙的分數是 2、1、0，最好是 C1；R2 那一列是 1、3、2，最好是 C2；R3 那一列是 0、4、5，最好是 C3。",
+          "穩定組合必須同時是兩人的最佳反應：(R1, C1) 是（甲在 C1 最好是 R1、乙在 R1 最好是 C1）；(R2, C2) 也是；(R3, C3) 不是，因為乙選 C3 時甲改選 R1 可以從 2 分變 3 分；其他格至少有一人能改得更好。",
+          "穩定組合是 (R1, C1) 與 (R2, C2)，甲的得分 4 + 3 = 7。"
+        ],
+        "zh-Hans": [
+          "甲的最佳反应（固定乙的选择，看同一列甲分数最大的）：C1 那一列甲的分数是 4、2、1，最好是 R1；C2 那一列是 1、3、2，最好是 R2；C3 那一列是 3、0、2，最好是 R1。",
+          "乙的最佳反应（固定甲的选择，看同一行乙分数最大的）：R1 那一行乙的分数是 2、1、0，最好是 C1；R2 那一行是 1、3、2，最好是 C2；R3 那一行是 0、4、5，最好是 C3。",
+          "稳定组合必须同时是两人的最佳反应：(R1, C1) 是（甲在 C1 最好是 R1、乙在 R1 最好是 C1）；(R2, C2) 也是；(R3, C3) 不是，因为乙选 C3 时甲改选 R1 可以从 2 分变 3 分；其他格至少有一人能改得更好。",
+          "稳定组合是 (R1, C1) 与 (R2, C2)，甲的得分 4 + 3 = 7。"
+        ],
+        "en": [
+          "A’s best replies (fix B’s choice and look down that column for A’s largest score): in column C1 A’s scores are 4, 2, 1, best R1; in C2 they are 1, 3, 2, best R2; in C3 they are 3, 0, 2, best R1.",
+          "B’s best replies (fix A’s choice and look along that row for B’s largest score): in row R1 B’s scores are 2, 1, 0, best C1; in R2 they are 1, 3, 2, best C2; in R3 they are 0, 4, 5, best C3.",
+          "A stable combination must be a best reply for both: (R1, C1) is; (R2, C2) is; (R3, C3) is not, because against C3 A gains by switching to R1 (from 2 to 3 points); every other cell lets at least one player improve.",
+          "The stable combinations are (R1, C1) and (R2, C2), and A’s scores add up to 4 + 3 = 7."
+        ],
+        "ja": [
+          "甲の最善の応答（乙の選択を固定して、その列で甲の点がいちばん大きいもの）：C1 の列では甲の点は 4、2、1 で R1、C2 では 1、3、2 で R2、C3 では 3、0、2 で R1。",
+          "乙の最善の応答（甲の選択を固定して、その行で乙の点がいちばん大きいもの）：R1 の行では乙の点は 2、1、0 で C1、R2 では 1、3、2 で C2、R3 では 0、4、5 で C3。",
+          "安定な組み合わせは両者の最善の応答が一致するところです。(R1, C1) と (R2, C2) は安定。(R3, C3) は、乙が C3 のとき甲が R1 に変えると 2 点から 3 点に増えるので安定ではありません。ほかのマスはどちらかが改善できます。",
+          "安定な組み合わせは (R1, C1) と (R2, C2) で、甲の得点の合計は 4 + 3 = 7。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "composite_grid_shape",
+        "params": {
+          "rows": 4,
+          "cols": 4,
+          "filledCells": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              0,
+              3
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              2,
+              0
+            ],
+            [
+              3,
+              0
+            ]
+          ],
+          "cellLabels": {
+            "0,1": "C1",
+            "0,2": "C2",
+            "0,3": "C3",
+            "1,0": "R1",
+            "1,1": "4, 2",
+            "1,2": "1, 1",
+            "1,3": "3, 0",
+            "2,0": "R2",
+            "2,1": "2, 1",
+            "2,2": "3, 3",
+            "2,3": "0, 2",
+            "3,0": "R3",
+            "3,1": "1, 0",
+            "3,2": "2, 4",
+            "3,3": "2, 5"
+          }
+        }
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "7"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "分別標出兩人的最佳反應，兩者重合的格子才穩定",
+        "notes": "設計依據：純策略奈許均衡（題中稱「穩定組合」）的判斷，3 × 3 表格有兩個均衡，而 (R3, C3) 看似乙最滿意卻不穩定。全庫有 logic_grade12 的兩家店定價（2 × 2 囚犯困境）與藏硬幣的混合策略；3 × 3 表格、逐行逐列找最佳反應的題沒有。圖是報酬表，資料只在圖中。",
+        "displayText": "改寫題（報酬表的穩定組合）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "邏輯",
+        "topicCode": "logic",
+        "subtopic": "3 × 3 報酬表中的穩定選擇",
+        "subtopicCode": "pure_nash_equilibria_3x3_table"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "logic_grade11_foundation_072",
+      "topic": "logic",
+      "subtopic": "guards_domination_h_shaped_plan",
+      "tags": [
+        "c:graph_theory",
+        "c:logic_deduction",
+        "m:extremal"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade11",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "如圖，塗色的 13 格是一座 H 形展覽館的 13 間展覽室（左右各一排 5 間，中間一排 3 間把兩排連起來），有公共邊的兩間之間有門相通。每位警衛站在某一間裡，能照看自己那一間以及和它有公共邊的展覽室。要讓 13 間都有人照看，最少需要幾位警衛？",
+        "zh-Hans": "如图，涂色的 13 格是一座 H 形展览馆的 13 间展览室（左右各一排 5 间，中间一排 3 间把两排连起来），有公共边的两间之间有门相通。每位警卫站在某一间里，能照看自己那一间以及和它有公共边的展览室。要让 13 间都有人照看，最少需要几位警卫？",
+        "en": "In the figure, the 13 shaded squares are the 13 rooms of an H-shaped museum (a column of 5 rooms on each side and a row of 3 joining them), with a door between any two rooms sharing an edge. A guard standing in a room watches that room and every room sharing an edge with it. What is the least number of guards needed so that all 13 rooms are watched?",
+        "ja": "図の色のついた 13 マスは H 形の展示館の 13 の展示室です（左右に 5 室ずつの列、まん中の 3 室がそれをつなぐ）。辺を共有する 2 室の間にはドアがあります。警備員はいる部屋と、それと辺を共有する部屋を見守れます。13 室すべてを見守るには、警備員は最少で何人必要ですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 5。",
+        "zh-Hans": "答案是 5。",
+        "en": "The answer is 5.",
+        "ja": "答えは 5 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "H 的四個端點（左上、左下、右上、右下）各只和一間相鄰，例如左上角那間只和它下面那間相鄰。要照看左上角，警衛必須站在「左上角或它下面那間」這兩間之一；四個端點各有這樣的兩間，彼此互不重疊。",
+          "中間橫排正中央那一間只和左右兩間相鄰，要照看它，警衛必須站在中間橫排的 3 間之一；這 3 間也和前面四組都不重疊。",
+          "五組互不重疊、每組至少要一位警衛，所以至少要 5 位。",
+          "5 位做得到：站在左上角、右上角、正中央，以及左右兩排由上數第 4 間。檢查：左排第 1、2 間由左上角照看，第 3、4、5 間由第 4 間照看；右排同理；中間 3 間由正中央照看。最少要 5 位。"
+        ],
+        "zh-Hans": [
+          "H 的四个端点（左上、左下、右上、右下）各只和一间相邻，例如左上角那间只和它下面那间相邻。要照看左上角，警卫必须站在「左上角或它下面那间」这两间之一；四个端点各有这样的两间，彼此互不重叠。",
+          "中间横排正中央那一间只和左右两间相邻，要照看它，警卫必须站在中间横排的 3 间之一；这 3 间也和前面四组都不重叠。",
+          "五组互不重叠、每组至少要一位警卫，所以至少要 5 位。",
+          "5 位做得到：站在左上角、右上角、正中央，以及左右两排由上数第 4 间。检查：左排第 1、2 间由左上角照看，第 3、4、5 间由第 4 间照看；右排同理；中间 3 间由正中央照看。最少要 5 位。"
+        ],
+        "en": [
+          "Each of the four ends of the H (top left, bottom left, top right, bottom right) has only one neighbour; e.g. the top-left room touches only the room below it. To watch the top-left room a guard must stand in it or in the room below it; the four ends give four such pairs, none overlapping.",
+          "The middle room of the cross-bar touches only its left and right neighbours, so to watch it a guard must stand in one of the 3 cross-bar rooms; these 3 do not overlap the four pairs either.",
+          "Five non-overlapping groups each need at least one guard, so at least 5 guards are needed.",
+          "5 suffice: put guards in the top-left and top-right rooms, the centre room, and the 4th room from the top in each side column. Check: rooms 1, 2 of the left column are watched from the top-left, rooms 3, 4, 5 from the 4th room; the right column likewise; the cross-bar from the centre. The minimum is 5."
+        ],
+        "ja": [
+          "H の 4 つの端（左上、左下、右上、右下）の部屋は、それぞれ 1 室としか接していません。たとえば左上の部屋はその下の部屋とだけ接します。左上を見守るには、警備員は「左上かその下」の 2 室のどちらかにいる必要があり、4 つの端のこうした 2 室ずつの組は重なりません。",
+          "まん中の横の列の中央の部屋は左右の 2 室とだけ接するので、見守るには横の列の 3 室のどれかに警備員が必要で、この 3 室も前の 4 組と重なりません。",
+          "重ならない 5 つの組にそれぞれ 1 人以上必要なので、少なくとも 5 人です。",
+          "5 人でできます：左上、右上、中央、左右の列の上から 4 番目の部屋。確認：左の列の 1、2 番目は左上から、3、4、5 番目は 4 番目から見守れ、右の列も同様、横の列の 3 室は中央から見守れます。最少で 5 人です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "composite_grid_shape",
+        "params": {
+          "rows": 5,
+          "cols": 5,
+          "filledCells": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              4
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              1,
+              4
+            ],
+            [
+              2,
+              0
+            ],
+            [
+              2,
+              1
+            ],
+            [
+              2,
+              2
+            ],
+            [
+              2,
+              3
+            ],
+            [
+              2,
+              4
+            ],
+            [
+              3,
+              0
+            ],
+            [
+              3,
+              4
+            ],
+            [
+              4,
+              0
+            ],
+            [
+              4,
+              4
+            ]
+          ],
+          "cellLabels": {}
+        }
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "5"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "找出互不重疊、各自至少需要一位警衛的房間組（端點與中央）得下界，再給出構造",
+        "notes": "設計依據：圖的支配數（最少警衛），下界來自「端點房間只有一個鄰居」造出的五組互斥鄰域，上界是具體擺法。查過 logic_grade12#022（五路口的監視器要看住每條道路，是頂點覆蓋）與 logic_grade12#018（美術館定理）：前者看「邊」、後者看視線；本題看「房間」且平面圖只在圖上。圖只塗出 13 間展覽室。",
+        "displayText": "改寫題（H 形展覽館的警衛）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "邏輯",
+        "topicCode": "logic",
+        "subtopic": "H 形展覽館最少需要的警衛",
+        "subtopicCode": "guards_domination_h_shaped_plan"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "logic_grade11_foundation_073",
+      "topic": "logic",
+      "subtopic": "height_orderings_from_comparison_diagram",
+      "tags": [
+        "c:logic_deduction",
+        "c:compare_order",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade11",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "a、b、c、d、e、f 六個人的身高都不相同。圖中每條線段連接的兩人，位置較高的那一個比較高（例如 c 比 a 高、e 比 c 高）；沒有線段直接相連的兩人，除了能由線段一路推出的之外，誰高誰矮不知道。把六個人由矮到高排成一列，和圖中資訊不矛盾的排法共有幾種？",
+        "zh-Hans": "a、b、c、d、e、f 六个人的身高都不相同。图中每条线段连接的两人，位置较高的那一个比较高（例如 c 比 a 高、e 比 c 高）；没有线段直接相连的两人，除了能由线段一路推出的之外，谁高谁矮不知道。把六个人由矮到高排成一列，和图中信息不矛盾的排法共有几种？",
+        "en": "Six people a, b, c, d, e, f all have different heights. For each segment in the figure, the person drawn higher is taller (for example c is taller than a, and e taller than c); for two people not joined by a segment, nothing is known beyond what follows by chaining segments. In how many ways can the six be lined up from shortest to tallest consistently with the figure?",
+        "ja": "a、b、c、d、e、f の 6 人の身長はすべて異なります。図の線分で結ばれた 2 人は、上にかかれた人の方が背が高い（たとえば c は a より高く、e は c より高い）ことを表します。線分で直接結ばれていない 2 人については、線分をたどって分かること以外は不明です。6 人を背の低い順に 1 列に並べる並べ方のうち、図と矛盾しないものは何通りありますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 14。",
+        "zh-Hans": "答案是 14。",
+        "en": "The answer is 14.",
+        "ja": "答えは 14 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "由圖讀出條件：a < c、b < c、b < d、c < e、d < e、d < f。最矮的人一定是 a 或 b（其他人都有人比他矮）。",
+          "最矮是 a：接下來 c 還要比 b 高，所以第二矮只能是 b。剩下 c、d、e、f 滿足 c < e、d < e、d < f：若 c 先，之後 d 必須在 e、f 之前，有 2 種；若 d 先，剩下 c、e、f 只要 c 在 e 前，有 3 種。共 5 種。",
+          "最矮是 b：剩下 a、c、d、e、f 滿足 a < c < e、d < e、d < f。先把 d 插進 a、c、e 這串之中且在 e 之前：在 a 前、a 與 c 之間、c 與 e 之間 3 種，排出 4 人順序；再把 f 插在 d 之後的任一個空位，分別有 4、3、2 種。共 4 + 3 + 2 = 9 種。",
+          "總共 5 + 9 = 14 種排法。"
+        ],
+        "zh-Hans": [
+          "由图读出条件：a < c、b < c、b < d、c < e、d < e、d < f。最矮的人一定是 a 或 b（其他人都有人比他矮）。",
+          "最矮是 a：接下来 c 还要比 b 高，所以第二矮只能是 b。剩下 c、d、e、f 满足 c < e、d < e、d < f：若 c 先，之后 d 必须在 e、f 之前，有 2 种；若 d 先，剩下 c、e、f 只要 c 在 e 前，有 3 种。共 5 种。",
+          "最矮是 b：剩下 a、c、d、e、f 满足 a < c < e、d < e、d < f。先把 d 插进 a、c、e 这串之中且在 e 之前：在 a 前、a 与 c 之间、c 与 e 之间 3 种，排出 4 人顺序；再把 f 插在 d 之后的任一个空位，分别有 4、3、2 种。共 4 + 3 + 2 = 9 种。",
+          "总共 5 + 9 = 14 种排法。"
+        ],
+        "en": [
+          "From the figure: a < c, b < c, b < d, c < e, d < e, d < f. The shortest must be a or b (everyone else has someone shorter).",
+          "Shortest a: c must still be taller than b, so b is second. The rest c, d, e, f need c < e, d < e, d < f: if c comes next, then d must precede both e and f, 2 ways; if d comes next, then c, e, f only need c before e, 3 ways. Total 5.",
+          "Shortest b: the rest a, c, d, e, f need a < c < e, d < e, d < f. Insert d into the chain a, c, e before e: before a, between a and c, or between c and e — 3 orders of four people; then insert f anywhere after d: 4, 3 or 2 places respectively. Total 4 + 3 + 2 = 9.",
+          "Altogether 5 + 9 = 14 orderings."
+        ],
+        "ja": [
+          "図から条件は a < c、b < c、b < d、c < e、d < e、d < f。いちばん低いのは a か b です（ほかの人には自分より低い人がいる）。",
+          "いちばん低いのが a：c は b より高い必要があるので 2 番目は b。残り c、d、e、f は c < e、d < e、d < f：c が先なら d は e、f より前で 2 通り、d が先なら残りの c、e、f は c が e より前で 3 通り。計 5 通り。",
+          "いちばん低いのが b：残り a、c、d、e、f は a < c < e、d < e、d < f。まず d を列 a、c、e の e より前に入れる：a の前、a と c の間、c と e の間の 3 通りで 4 人の順ができ、そのあと f を d より後ろのどこかに入れると、それぞれ 4、3、2 通り。計 4 + 3 + 2 = 9 通り。",
+          "合計 5 + 9 = 14 通り。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "geometry_scene",
+        "params": {
+          "bounds": {
+            "minX": -0.8,
+            "minY": -0.8,
+            "maxX": 4.4,
+            "maxY": 4.0
+          },
+          "points": [
+            {
+              "name": "a",
+              "x": 0,
+              "y": 0,
+              "pos": "b"
+            },
+            {
+              "name": "b",
+              "x": 2,
+              "y": 0,
+              "pos": "b"
+            },
+            {
+              "name": "c",
+              "x": 0.6,
+              "y": 1.6,
+              "pos": "r"
+            },
+            {
+              "name": "d",
+              "x": 2.6,
+              "y": 1.6,
+              "pos": "r"
+            },
+            {
+              "name": "e",
+              "x": 1.4,
+              "y": 3.2,
+              "pos": "t"
+            },
+            {
+              "name": "f",
+              "x": 3.6,
+              "y": 3.2,
+              "pos": "t"
+            }
+          ],
+          "segments": [
+            {
+              "from": "a",
+              "to": "c",
+              "style": "solid"
+            },
+            {
+              "from": "b",
+              "to": "c",
+              "style": "solid"
+            },
+            {
+              "from": "b",
+              "to": "d",
+              "style": "solid"
+            },
+            {
+              "from": "c",
+              "to": "e",
+              "style": "solid"
+            },
+            {
+              "from": "d",
+              "to": "e",
+              "style": "solid"
+            },
+            {
+              "from": "d",
+              "to": "f",
+              "style": "solid"
+            }
+          ]
+        }
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "14"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "從比較圖讀出偏序，依最矮者分情形，再把其餘的人一個個插進鏈中",
+        "notes": "設計依據：偏序的線性延拓計數（由哈斯圖讀出條件）。全庫的排序推理題（logic 各年級）多是「誰第幾名」的唯一解推理；本題是計數所有相容的排法，條件只畫在圖中。圖畫出 6 個點與 6 條線段，排法數不在圖上。",
+        "displayText": "改寫題（比較圖的排序數）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "邏輯",
+        "topicCode": "logic",
+        "subtopic": "由比較圖推出可能的身高排序數",
+        "subtopicCode": "height_orderings_from_comparison_diagram"
+      },
+      "reviewStatus": "ok"
     }
   ]
 }

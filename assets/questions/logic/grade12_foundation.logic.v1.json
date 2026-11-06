@@ -6331,6 +6331,845 @@
         "subtopicCode": "inequality_latin_square_4x4"
       },
       "reviewStatus": "ok"
+    },
+    {
+      "id": "logic_grade12_foundation_069",
+      "topic": "logic",
+      "subtopic": "incomplete_sorting_network_count",
+      "tags": [
+        "c:logic_deduction",
+        "c:permutation_combination",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "如圖是一個「比較器網路」：4 條橫線（由上而下編號 1～4）從左邊各輸入一個數，數沿著橫線往右走；每遇到一條直的比較器，就把它連接的兩條線上的數比較，較小的換到上面那條線、較大的換到下面那條線。把 1、2、3、4 以某種順序輸入（共 24 種順序），從右邊輸出時，有幾種輸入順序會讓輸出由上而下恰好是 1、2、3、4？",
+        "zh-Hans": "如图是一个「比较器网络」：4 条横线（由上而下编号 1～4）从左边各输入一个数，数沿着横线往右走；每遇到一条直的比较器，就把它连接的两条线上的数比较，较小的换到上面那条线、较大的换到下面那条线。把 1、2、3、4 以某种顺序输入（共 24 种顺序），从右边输出时，有几种输入顺序会让输出由上而下恰好是 1、2、3、4？",
+        "en": "The figure is a comparator network: 4 horizontal wires (numbered 1–4 from the top) each take a number on the left, and the numbers travel right. At each vertical comparator, the numbers on the two wires it joins are compared, and the smaller moves to the upper wire, the larger to the lower one. If 1, 2, 3, 4 are fed in in some order (24 orders in all), for how many input orders does the output on the right read exactly 1, 2, 3, 4 from top to bottom?",
+        "ja": "図は「比較器ネットワーク」です。4 本の横線（上から 1〜4）に左から数を 1 つずつ入れ、数は右へ進みます。縦の比較器に出会うと、それがつなぐ 2 本の線の数を比べ、小さい方を上の線に、大きい方を下の線に移します。1、2、3、4 をある順に入れるとき（全部で 24 通り）、右から出てくる数が上から順にちょうど 1、2、3、4 になる入れ方は何通りですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 8。",
+        "zh-Hans": "答案是 8。",
+        "en": "The answer is 8.",
+        "ja": "答えは 8 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "設輸入是 (a, b, c, d)。第一層的兩個比較器之後，線 1、2 是 min(a, b)、max(a, b)，線 3、4 是 min(c, d)、max(c, d)。",
+          "第二層：線 1 與線 3 比較，線 1 得到四個數的最小值 1、線 3 得到 max(min(a, b), min(c, d))；線 2 與線 4 比較，線 4 得到最大值 4、線 2 得到 min(max(a, b), max(c, d))。所以線 1、線 4 一定正確，只看線 2 的數是否小於線 3 的數。",
+          "線 2 的數大於線 3 的數，恰好發生在「兩組的較小者是 1 和 2」：也就是 1 和 2 分在 {a, b} 與 {c, d} 兩組。此時線 2 是 3、線 3 是 2，輸出錯誤；否則（1、2 在同一組）線 2 是 2、線 3 是 3，輸出正確。",
+          "1 和 2 在同一組：先把 1、2 放在同一組（2 種選組）、組內順序 2 種、另一組的 3、4 順序 2 種，共 2 × 2 × 2 = 8 種。答案是 8。"
+        ],
+        "zh-Hans": [
+          "设输入是 (a, b, c, d)。第一层的两个比较器之后，线 1、2 是 min(a, b)、max(a, b)，线 3、4 是 min(c, d)、max(c, d)。",
+          "第二层：线 1 与线 3 比较，线 1 得到四个数的最小值 1、线 3 得到 max(min(a, b), min(c, d))；线 2 与线 4 比较，线 4 得到最大值 4、线 2 得到 min(max(a, b), max(c, d))。所以线 1、线 4 一定正确，只看线 2 的数是否小于线 3 的数。",
+          "线 2 的数大于线 3 的数，恰好发生在「两组的较小者是 1 和 2」：也就是 1 和 2 分在 {a, b} 与 {c, d} 两组。此时线 2 是 3、线 3 是 2，输出错误；否则（1、2 在同一组）线 2 是 2、线 3 是 3，输出正确。",
+          "1 和 2 在同一组：先把 1、2 放在同一组（2 种选组）、组内顺序 2 种、另一组的 3、4 顺序 2 种，共 2 × 2 × 2 = 8 种。答案是 8。"
+        ],
+        "en": [
+          "Let the input be (a, b, c, d). After the first layer, wires 1, 2 hold min(a, b), max(a, b) and wires 3, 4 hold min(c, d), max(c, d).",
+          "Second layer: comparing wires 1 and 3 puts the overall minimum 1 on wire 1 and max(min(a, b), min(c, d)) on wire 3; comparing wires 2 and 4 puts the maximum 4 on wire 4 and min(max(a, b), max(c, d)) on wire 2. So wires 1 and 4 are always right; only wire 2 < wire 3 is in question.",
+          "Wire 2 exceeds wire 3 exactly when the two pair-minima are 1 and 2, i.e. 1 and 2 are in different pairs {a, b} and {c, d}. Then wire 2 holds 3 and wire 3 holds 2 — wrong. Otherwise (1 and 2 in the same pair) wire 2 holds 2 and wire 3 holds 3 — right.",
+          "1 and 2 in the same pair: choose which pair (2 ways), their order (2), and the order of 3, 4 in the other pair (2): 2 × 2 × 2 = 8. The answer is 8."
+        ],
+        "ja": [
+          "入力を (a, b, c, d) とします。1 段目の 2 つの比較器のあと、線 1、2 は min(a, b)、max(a, b)、線 3、4 は min(c, d)、max(c, d)。",
+          "2 段目：線 1 と線 3 を比べると線 1 には全体の最小 1、線 3 には max(min(a, b), min(c, d))。線 2 と線 4 を比べると線 4 には最大 4、線 2 には min(max(a, b), max(c, d))。線 1、4 は必ず正しく、線 2 の数が線 3 の数より小さいかだけが問題です。",
+          "線 2 が線 3 より大きくなるのは、2 組の小さい方が 1 と 2 のとき、つまり 1 と 2 が {a, b} と {c, d} に分かれるときです。このとき線 2 は 3、線 3 は 2 で誤り。1 と 2 が同じ組なら線 2 は 2、線 3 は 3 で正しい。",
+          "1 と 2 が同じ組：どちらの組か 2 通り、その組の中の順 2 通り、もう一方の 3、4 の順 2 通りで 2 × 2 × 2 = 8 通り。答えは 8。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "geometry_scene",
+        "params": {
+          "bounds": {
+            "minX": -1.0,
+            "minY": -0.6,
+            "maxX": 5.0,
+            "maxY": 3.6
+          },
+          "points": [
+            {
+              "name": "h1",
+              "x": 0,
+              "y": 3,
+              "visible": false
+            },
+            {
+              "name": "h2",
+              "x": 4,
+              "y": 3,
+              "visible": false
+            },
+            {
+              "name": "t3",
+              "x": 0,
+              "y": 3,
+              "visible": false,
+              "label": "1",
+              "pos": "l"
+            },
+            {
+              "name": "h4",
+              "x": 0,
+              "y": 2,
+              "visible": false
+            },
+            {
+              "name": "h5",
+              "x": 4,
+              "y": 2,
+              "visible": false
+            },
+            {
+              "name": "t6",
+              "x": 0,
+              "y": 2,
+              "visible": false,
+              "label": "2",
+              "pos": "l"
+            },
+            {
+              "name": "h7",
+              "x": 0,
+              "y": 1,
+              "visible": false
+            },
+            {
+              "name": "h8",
+              "x": 4,
+              "y": 1,
+              "visible": false
+            },
+            {
+              "name": "t9",
+              "x": 0,
+              "y": 1,
+              "visible": false,
+              "label": "3",
+              "pos": "l"
+            },
+            {
+              "name": "h10",
+              "x": 0,
+              "y": 0,
+              "visible": false
+            },
+            {
+              "name": "h11",
+              "x": 4,
+              "y": 0,
+              "visible": false
+            },
+            {
+              "name": "t12",
+              "x": 0,
+              "y": 0,
+              "visible": false,
+              "label": "4",
+              "pos": "l"
+            },
+            {
+              "name": "c01",
+              "x": 1,
+              "y": 3,
+              "pos": "r",
+              "label": ""
+            },
+            {
+              "name": "d01",
+              "x": 1,
+              "y": 2,
+              "pos": "r",
+              "label": ""
+            },
+            {
+              "name": "c23",
+              "x": 1,
+              "y": 1,
+              "pos": "r",
+              "label": ""
+            },
+            {
+              "name": "d23",
+              "x": 1,
+              "y": 0,
+              "pos": "r",
+              "label": ""
+            },
+            {
+              "name": "c02",
+              "x": 2,
+              "y": 3,
+              "pos": "r",
+              "label": ""
+            },
+            {
+              "name": "d02",
+              "x": 2,
+              "y": 1,
+              "pos": "r",
+              "label": ""
+            },
+            {
+              "name": "c13",
+              "x": 3,
+              "y": 2,
+              "pos": "r",
+              "label": ""
+            },
+            {
+              "name": "d13",
+              "x": 3,
+              "y": 0,
+              "pos": "r",
+              "label": ""
+            }
+          ],
+          "segments": [
+            {
+              "from": "h1",
+              "to": "h2",
+              "style": "solid"
+            },
+            {
+              "from": "h4",
+              "to": "h5",
+              "style": "solid"
+            },
+            {
+              "from": "h7",
+              "to": "h8",
+              "style": "solid"
+            },
+            {
+              "from": "h10",
+              "to": "h11",
+              "style": "solid"
+            },
+            {
+              "from": "c01",
+              "to": "d01",
+              "style": "solid"
+            },
+            {
+              "from": "c23",
+              "to": "d23",
+              "style": "solid"
+            },
+            {
+              "from": "c02",
+              "to": "d02",
+              "style": "solid"
+            },
+            {
+              "from": "c13",
+              "to": "d13",
+              "style": "solid"
+            }
+          ]
+        }
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "8"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "追蹤每條線上是哪幾個數的最小／最大，找出唯一可能出錯的位置",
+        "notes": "設計依據：比較器網路（少了最後一個比較器 2–3）的正確性分析，用 min／max 表示每條線的內容。全庫搜「比較器」「排序網路」沒有同題；logic 題庫的排序題（如一疊牌的插入操作）是另一種模型。圖畫出 4 條線與 4 個比較器，線的編號標在左邊。",
+        "displayText": "改寫題（比較器網路）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "邏輯",
+        "topicCode": "logic",
+        "subtopic": "不完整的排序網路能排好幾種輸入",
+        "subtopicCode": "incomplete_sorting_network_count"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "logic_grade12_foundation_070",
+      "topic": "logic",
+      "subtopic": "minimax_game_tree_value",
+      "tags": [
+        "c:game_theory",
+        "c:logic_deduction",
+        "m:reverse"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "甲、乙玩一個三步的遊戲：甲先在最上面的點選一條往下的線，接著乙選一條，最後甲再選一條，走到最下面的點，甲得到那一點上的分數。甲想讓分數越高越好，乙想讓它越低越好，兩人都採取最佳策略。如圖（左邊標出每一層由誰選：MAX 是甲、MIN 是乙），最下面 8 個點的分數由左到右是 5、2、7、3、8、1、4、9。甲最後會得到幾分？",
+        "zh-Hans": "甲、乙玩一个三步的游戏：甲先在最上面的点选一条往下的线，接着乙选一条，最后甲再选一条，走到最下面的点，甲得到那一点上的分数。甲想让分数越高越好，乙想让它越低越好，两人都采取最佳策略。如图（左边标出每一层由谁选：MAX 是甲、MIN 是乙），最下面 8 个点的分数由左到右是 5、2、7、3、8、1、4、9。甲最后会得到几分？",
+        "en": "A and B play a three-move game: A first chooses a downward line at the top point, then B chooses one, then A chooses one, reaching a bottom point, and A scores the number there. A wants the score as high as possible and B as low as possible, both playing optimally. In the figure (the left side shows who chooses at each level: MAX is A, MIN is B), the 8 bottom points carry 5, 2, 7, 3, 8, 1, 4, 9 from left to right. What score does A end up with?",
+        "ja": "甲と乙が 3 手のゲームをします。いちばん上の点で甲が下への線を 1 本選び、次に乙が選び、最後に甲が選んで最下段の点に着き、甲はその点の得点を得ます。甲は得点をできるだけ高く、乙はできるだけ低くしたいと考え、2 人とも最善をつくします。図（左にどの段を誰が選ぶかを示し、MAX が甲、MIN が乙）の最下段 8 点の得点は左から 5、2、7、3、8、1、4、9 です。甲は最終的に何点を得ますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 8。",
+        "zh-Hans": "答案是 8。",
+        "en": "The answer is 8.",
+        "ja": "答えは 8 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "從最下面往上倒推。最後一步由甲選，甲會選兩個分數中較大的：四個 MAX 點的值是 max(5, 2) = 5、max(7, 3) = 7、max(8, 1) = 8、max(4, 9) = 9。",
+          "中間一步由乙選，乙會選較小的：左邊 MIN 點的值是 min(5, 7) = 5，右邊是 min(8, 9) = 8。",
+          "第一步由甲選，選較大的：max(5, 8) = 8。甲第一步應該往右走。",
+          "甲最後會得到 8 分（之後乙往左選到 8 那一支、甲再選 8）。"
+        ],
+        "zh-Hans": [
+          "从最下面往上倒推。最后一步由甲选，甲会选两个分数中较大的：四个 MAX 点的值是 max(5, 2) = 5、max(7, 3) = 7、max(8, 1) = 8、max(4, 9) = 9。",
+          "中间一步由乙选，乙会选较小的：左边 MIN 点的值是 min(5, 7) = 5，右边是 min(8, 9) = 8。",
+          "第一步由甲选，选较大的：max(5, 8) = 8。甲第一步应该往右走。",
+          "甲最后会得到 8 分（之后乙往左选到 8 那一支、甲再选 8）。"
+        ],
+        "en": [
+          "Work up from the bottom. A makes the last choice and takes the larger of two scores: the four MAX points are worth max(5, 2) = 5, max(7, 3) = 7, max(8, 1) = 8, max(4, 9) = 9.",
+          "B makes the middle choice and takes the smaller: the left MIN point is worth min(5, 7) = 5 and the right one min(8, 9) = 8.",
+          "A makes the first choice and takes the larger: max(5, 8) = 8, so A should go right.",
+          "A ends up with 8 (B then picks the branch worth 8 and A picks 8)."
+        ],
+        "ja": [
+          "下からさかのぼります。最後は甲が選び、2 つのうち大きい方を取るので、4 つの MAX の点の値は max(5, 2) = 5、max(7, 3) = 7、max(8, 1) = 8、max(4, 9) = 9。",
+          "まん中は乙が選び、小さい方を取るので、左の MIN の点は min(5, 7) = 5、右は min(8, 9) = 8。",
+          "最初は甲が大きい方を選んで max(5, 8) = 8、甲は最初に右へ進むべきです。",
+          "甲は最終的に 8 点を得ます（乙は 8 の枝を選び、甲が 8 を取る）。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "geometry_scene",
+        "params": {
+          "bounds": {
+            "minX": -1.6,
+            "minY": -0.9,
+            "maxX": 8.6,
+            "maxY": 3.7
+          },
+          "points": [
+            {
+              "name": "l0",
+              "x": 0,
+              "y": 0,
+              "pos": "b",
+              "label": "5"
+            },
+            {
+              "name": "l1",
+              "x": 1,
+              "y": 0,
+              "pos": "b",
+              "label": "2"
+            },
+            {
+              "name": "l2",
+              "x": 2,
+              "y": 0,
+              "pos": "b",
+              "label": "7"
+            },
+            {
+              "name": "l3",
+              "x": 3,
+              "y": 0,
+              "pos": "b",
+              "label": "3"
+            },
+            {
+              "name": "l4",
+              "x": 4,
+              "y": 0,
+              "pos": "b",
+              "label": "8"
+            },
+            {
+              "name": "l5",
+              "x": 5,
+              "y": 0,
+              "pos": "b",
+              "label": "1"
+            },
+            {
+              "name": "l6",
+              "x": 6,
+              "y": 0,
+              "pos": "b",
+              "label": "4"
+            },
+            {
+              "name": "l7",
+              "x": 7,
+              "y": 0,
+              "pos": "b",
+              "label": "9"
+            },
+            {
+              "name": "m0",
+              "x": 0.5,
+              "y": 1,
+              "pos": "r",
+              "label": ""
+            },
+            {
+              "name": "m1",
+              "x": 2.5,
+              "y": 1,
+              "pos": "r",
+              "label": ""
+            },
+            {
+              "name": "m2",
+              "x": 4.5,
+              "y": 1,
+              "pos": "r",
+              "label": ""
+            },
+            {
+              "name": "m3",
+              "x": 6.5,
+              "y": 1,
+              "pos": "r",
+              "label": ""
+            },
+            {
+              "name": "n0",
+              "x": 1.5,
+              "y": 2,
+              "pos": "r",
+              "label": ""
+            },
+            {
+              "name": "n1",
+              "x": 5.5,
+              "y": 2,
+              "pos": "r",
+              "label": ""
+            },
+            {
+              "name": "root",
+              "x": 3.5,
+              "y": 3,
+              "pos": "t",
+              "label": ""
+            },
+            {
+              "name": "t1",
+              "x": -0.5,
+              "y": 3,
+              "visible": false,
+              "label": "MAX",
+              "pos": "l"
+            },
+            {
+              "name": "t2",
+              "x": -0.5,
+              "y": 2,
+              "visible": false,
+              "label": "MIN",
+              "pos": "l"
+            },
+            {
+              "name": "t3",
+              "x": -0.5,
+              "y": 1,
+              "visible": false,
+              "label": "MAX",
+              "pos": "l"
+            }
+          ],
+          "segments": [
+            {
+              "from": "m0",
+              "to": "l0",
+              "style": "solid"
+            },
+            {
+              "from": "m0",
+              "to": "l1",
+              "style": "solid"
+            },
+            {
+              "from": "m1",
+              "to": "l2",
+              "style": "solid"
+            },
+            {
+              "from": "m1",
+              "to": "l3",
+              "style": "solid"
+            },
+            {
+              "from": "m2",
+              "to": "l4",
+              "style": "solid"
+            },
+            {
+              "from": "m2",
+              "to": "l5",
+              "style": "solid"
+            },
+            {
+              "from": "m3",
+              "to": "l6",
+              "style": "solid"
+            },
+            {
+              "from": "m3",
+              "to": "l7",
+              "style": "solid"
+            },
+            {
+              "from": "n0",
+              "to": "m0",
+              "style": "solid"
+            },
+            {
+              "from": "n0",
+              "to": "m1",
+              "style": "solid"
+            },
+            {
+              "from": "n1",
+              "to": "m2",
+              "style": "solid"
+            },
+            {
+              "from": "n1",
+              "to": "m3",
+              "style": "solid"
+            },
+            {
+              "from": "root",
+              "to": "n0",
+              "style": "solid"
+            },
+            {
+              "from": "root",
+              "to": "n1",
+              "style": "solid"
+            }
+          ]
+        }
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "8"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "由葉子往上：甲層取大、乙層取小，交替倒推到根",
+        "notes": "設計依據：極小化極大（minimax）倒推。全庫的博弈題（取石子、Nim、報數）都有規律可循；本題的局面是任意的樹，必須逐層取大取小，而且最大的 9 不一定拿得到。圖畫出三層的二元樹、各層由誰選與葉子分數。",
+        "displayText": "改寫題（博弈樹）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "邏輯",
+        "topicCode": "logic",
+        "subtopic": "博弈樹的倒推值",
+        "subtopicCode": "minimax_game_tree_value"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "logic_grade12_foundation_071",
+      "topic": "logic",
+      "subtopic": "bst_insertion_orders_count",
+      "tags": [
+        "c:permutation_combination",
+        "c:logic_deduction",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "把 1～7 依某種順序一個一個放進「二元搜尋樹」：第一個數放在最上面；之後每個數從最上面開始比較，比目前那個點小就往左下、大就往右下，直到遇到空位就停在那裡。圖是放完 7 個數後得到的樹。在 1～7 的 7! = 5040 種放入順序中，有幾種會得到圖中這棵樹？",
+        "zh-Hans": "把 1～7 依某种顺序一个一个放进「二叉搜索树」：第一个数放在最上面；之后每个数从最上面开始比较，比目前那个点小就往左下、大就往右下，直到遇到空位就停在那里。图是放完 7 个数后得到的树。在 1～7 的 7! = 5040 种放入顺序中，有几种会得到图中这棵树？",
+        "en": "The numbers 1–7 are inserted one by one, in some order, into a binary search tree: the first number goes at the top; each later number starts at the top and moves down-left if it is smaller than the current point and down-right if larger, until it reaches an empty place, where it stays. The figure shows the tree after all 7 numbers are inserted. Of the 7! = 5040 insertion orders, how many produce this tree?",
+        "ja": "1〜7 をある順に 1 つずつ「二分探索木」に入れます。最初の数はいちばん上に置き、それ以降の数は上から比べて、今の点より小さければ左下へ、大きければ右下へ進み、空いた場所に来たらそこに止まります。図は 7 個入れ終えた木です。7! = 5040 通りの入れ方のうち、図の木になるのは何通りですか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 80。",
+        "zh-Hans": "答案是 80。",
+        "en": "The answer is 80.",
+        "ja": "答えは 80 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "根是 4，所以 4 必須第一個放。之後左邊子樹 {1, 2, 3} 與右邊子樹 {5, 6, 7} 互不影響，只要各自內部的先後順序對就行。",
+          "左子樹的根是 2，所以在 1、2、3 之中 2 必須最先出現，1 與 3 的先後任意：2 種內部順序。右子樹同理（6 最先，5、7 任意）：2 種。",
+          "剩下的 6 個位置中，選 3 個給左子樹的數、其餘給右子樹：C(6, 3) = 20 種交錯方式。",
+          "總數 = 20 × 2 × 2 = 80。"
+        ],
+        "zh-Hans": [
+          "根是 4，所以 4 必须第一个放。之后左边子树 {1, 2, 3} 与右边子树 {5, 6, 7} 互不影响，只要各自内部的先后顺序对就行。",
+          "左子树的根是 2，所以在 1、2、3 之中 2 必须最先出现，1 与 3 的先后任意：2 种内部顺序。右子树同理（6 最先，5、7 任意）：2 种。",
+          "剩下的 6 个位置中，选 3 个给左子树的数、其余给右子树：C(6, 3) = 20 种交错方式。",
+          "总数 = 20 × 2 × 2 = 80。"
+        ],
+        "en": [
+          "The root is 4, so 4 must be inserted first. After that the left subtree {1, 2, 3} and right subtree {5, 6, 7} do not affect each other; only the order within each matters.",
+          "The left subtree’s root is 2, so among 1, 2, 3 the 2 must come first, with 1 and 3 in either order: 2 internal orders. Likewise on the right (6 first, then 5 and 7 in either order): 2.",
+          "Of the remaining 6 positions, choose 3 for the left-subtree numbers and give the rest to the right: C(6, 3) = 20 interleavings.",
+          "Total = 20 × 2 × 2 = 80."
+        ],
+        "ja": [
+          "根は 4 なので 4 は最初に入れる必要があります。そのあと左の部分木 {1, 2, 3} と右の部分木 {5, 6, 7} は互いに影響せず、それぞれの中の順番だけが問題です。",
+          "左の部分木の根は 2 なので、1、2、3 の中では 2 が最初で、1 と 3 の順は自由：2 通り。右も同様（6 が最初、5 と 7 は自由）：2 通り。",
+          "残り 6 か所のうち 3 か所を左の部分木の数に、残りを右に割り当てる方法は C(6, 3) = 20 通り。",
+          "合計 = 20 × 2 × 2 = 80 通り。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "geometry_scene",
+        "params": {
+          "bounds": {
+            "minX": -0.6,
+            "minY": -0.7,
+            "maxX": 6.6,
+            "maxY": 3.0
+          },
+          "points": [
+            {
+              "name": "b4",
+              "x": 3,
+              "y": 2.4,
+              "pos": "r",
+              "label": "4"
+            },
+            {
+              "name": "b2",
+              "x": 1.5,
+              "y": 1.2,
+              "pos": "r",
+              "label": "2"
+            },
+            {
+              "name": "b6",
+              "x": 4.5,
+              "y": 1.2,
+              "pos": "r",
+              "label": "6"
+            },
+            {
+              "name": "b1",
+              "x": 0.75,
+              "y": 0,
+              "pos": "r",
+              "label": "1"
+            },
+            {
+              "name": "b3",
+              "x": 2.25,
+              "y": 0,
+              "pos": "r",
+              "label": "3"
+            },
+            {
+              "name": "b5",
+              "x": 3.75,
+              "y": 0,
+              "pos": "r",
+              "label": "5"
+            },
+            {
+              "name": "b7",
+              "x": 5.25,
+              "y": 0,
+              "pos": "r",
+              "label": "7"
+            }
+          ],
+          "segments": [
+            {
+              "from": "b4",
+              "to": "b2",
+              "style": "solid"
+            },
+            {
+              "from": "b4",
+              "to": "b6",
+              "style": "solid"
+            },
+            {
+              "from": "b2",
+              "to": "b1",
+              "style": "solid"
+            },
+            {
+              "from": "b2",
+              "to": "b3",
+              "style": "solid"
+            },
+            {
+              "from": "b6",
+              "to": "b5",
+              "style": "solid"
+            },
+            {
+              "from": "b6",
+              "to": "b7",
+              "style": "solid"
+            }
+          ]
+        }
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "80"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "根必須最先；左右子樹各自的內部順序相乘，再乘上交錯方式 C(6, 3)",
+        "notes": "設計依據：二元搜尋樹的插入順序計數＝遞迴的「根先出現＋子樹交錯」。全庫搜「二元搜尋樹」沒有同題；number_theory_grade10#079（1～15 排成 2n、2n + 1 的樹，求兩數距離）是固定的樹、問路徑長。圖畫出 7 個點的完全二元樹。",
+        "displayText": "改寫題（二元搜尋樹的插入順序）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "邏輯",
+        "topicCode": "logic",
+        "subtopic": "產生同一棵二元搜尋樹的插入順序數",
+        "subtopicCode": "bst_insertion_orders_count"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "logic_grade12_foundation_072",
+      "topic": "logic",
+      "subtopic": "code_breaking_ab_feedback",
+      "tags": [
+        "c:logic_deduction",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade12",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "一組密碼由 1～6 中三個不同的數字依序組成。圖中的表格是四次猜測：每一橫列前三格是猜的三位數字，A 欄是「數字對、位置也對」的個數，B 欄是「數字對、但位置不對」的個數。例如第一次猜 1、2、3，得到 0A1B。密碼只有一種可能。把密碼寫成三位數，是多少？",
+        "zh-Hans": "一组密码由 1～6 中三个不同的数字依序组成。图中的表格是四次猜测：每一行前三格是猜的三位数字，A 栏是「数字对、位置也对」的个数，B 栏是「数字对、但位置不对」的个数。例如第一次猜 1、2、3，得到 0A1B。密码只有一种可能。把密码写成三位数，是多少？",
+        "en": "A code consists of three different digits from 1–6 in order. The table in the figure shows four guesses: in each row the first three cells are the guessed digits, column A counts digits that are correct and in the correct place, and column B counts digits that are correct but in the wrong place. For example, the first guess 1, 2, 3 got 0A1B. There is exactly one possible code. Written as a three-digit number, what is it?",
+        "ja": "暗号は 1〜6 の異なる 3 つの数字を順に並べたものです。図の表は 4 回の推測で、各行の最初の 3 マスが推測した数字、A の列は「数字も位置も正しい」個数、B の列は「数字は正しいが位置がちがう」個数です。たとえば 1 回目の推測 1、2、3 は 0A1B でした。暗号はただ 1 通りに決まります。3 けたの数で答えなさい。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 346。",
+        "zh-Hans": "答案是 346。",
+        "en": "The answer is 346.",
+        "ja": "答えは 346 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "第 1 次：{1, 2, 3} 中恰有 1 個在密碼裡；第 2 次：{4, 5, 6} 中恰有 2 個在密碼裡。所以密碼是 {1, 2, 3} 中的 1 個加上 {4, 5, 6} 中的 2 個。",
+          "第 4 次（6、1、4，0A2B）：{6, 1, 4} 中恰有 2 個在密碼裡，而且都不在猜的位置。分三種情形：若是 6、1，則 4 不在、{4, 5, 6} 中的兩個是 6、5，密碼數字是 {1, 5, 6}；若是 1、4，則 6 不在，密碼數字是 {1, 4, 5}；若是 6、4，則 1 不在，密碼數字是 {x, 4, 6}，x 是 2 或 3。",
+          "第 3 次（2、4、1，1A0B）：{2, 4, 1} 中恰有 1 個在密碼裡且位置正確。{1, 4, 5} 含 4 與 1 兩個，不合。{1, 5, 6}：1 必須在第 3 位，6 不能在第 1 位（第 4 次），密碼是 5、6、1，但第 2 次猜 4、5、6 會得到 0A2B，不合。{x, 4, 6}：若 x = 2 則含 2 與 4，不合，所以 x = 3，且 4 在第 2 位。",
+          "再由第 4 次，6 不能在第 1 位，所以 6 在第 3 位、3 在第 1 位，密碼是 3、4、6。驗算四次回饋：0A1B、1A1B、1A0B、0A2B，全部吻合。答案是 346。"
+        ],
+        "zh-Hans": [
+          "第 1 次：{1, 2, 3} 中恰有 1 个在密码里；第 2 次：{4, 5, 6} 中恰有 2 个在密码里。所以密码是 {1, 2, 3} 中的 1 个加上 {4, 5, 6} 中的 2 个。",
+          "第 4 次（6、1、4，0A2B）：{6, 1, 4} 中恰有 2 个在密码里，而且都不在猜的位置。分三种情形：若是 6、1，则 4 不在、{4, 5, 6} 中的两个是 6、5，密码数字是 {1, 5, 6}；若是 1、4，则 6 不在，密码数字是 {1, 4, 5}；若是 6、4，则 1 不在，密码数字是 {x, 4, 6}，x 是 2 或 3。",
+          "第 3 次（2、4、1，1A0B）：{2, 4, 1} 中恰有 1 个在密码里且位置正确。{1, 4, 5} 含 4 与 1 两个，不合。{1, 5, 6}：1 必须在第 3 位，6 不能在第 1 位（第 4 次），密码是 5、6、1，但第 2 次猜 4、5、6 会得到 0A2B，不合。{x, 4, 6}：若 x = 2 则含 2 与 4，不合，所以 x = 3，且 4 在第 2 位。",
+          "再由第 4 次，6 不能在第 1 位，所以 6 在第 3 位、3 在第 1 位，密码是 3、4、6。验算四次回馈：0A1B、1A1B、1A0B、0A2B，全部吻合。答案是 346。"
+        ],
+        "en": [
+          "Guess 1: exactly one of {1, 2, 3} is in the code; guess 2: exactly two of {4, 5, 6} are. So the code is one digit from {1, 2, 3} and two from {4, 5, 6}.",
+          "Guess 4 (6, 1, 4, 0A2B): exactly two of {6, 1, 4} are in the code, neither in its guessed place. Three cases: 6 and 1 — then 4 is out and the two from {4, 5, 6} are 6, 5, digits {1, 5, 6}; 1 and 4 — then 6 is out, digits {1, 4, 5}; 6 and 4 — then 1 is out, digits {x, 4, 6} with x = 2 or 3.",
+          "Guess 3 (2, 4, 1, 1A0B): exactly one of {2, 4, 1} is in the code, in the right place. {1, 4, 5} contains both 4 and 1: impossible. {1, 5, 6}: 1 must be 3rd and 6 cannot be 1st (guess 4), giving 5, 6, 1, but then guess 2 (4, 5, 6) would score 0A2B: impossible. {x, 4, 6}: x = 2 would put both 2 and 4 in, so x = 3, and 4 is 2nd.",
+          "By guess 4, 6 cannot be 1st, so 6 is 3rd and 3 is 1st: the code is 3, 4, 6. Checking the four responses gives 0A1B, 1A1B, 1A0B, 0A2B, all matching. The answer is 346."
+        ],
+        "ja": [
+          "1 回目：{1, 2, 3} のうちちょうど 1 個が暗号に入る。2 回目：{4, 5, 6} のうちちょうど 2 個が入る。よって暗号は {1, 2, 3} から 1 個、{4, 5, 6} から 2 個。",
+          "4 回目（6、1、4、0A2B）：{6, 1, 4} のうちちょうど 2 個が入り、どちらも推測の位置にはない。3 つの場合：6 と 1 なら 4 は入らず {4, 5, 6} からは 6、5 で数字は {1, 5, 6}。1 と 4 なら 6 は入らず {1, 4, 5}。6 と 4 なら 1 は入らず {x, 4, 6}（x は 2 か 3）。",
+          "3 回目（2、4、1、1A0B）：{2, 4, 1} のうちちょうど 1 個が正しい位置に入る。{1, 4, 5} は 4 と 1 の 2 個を含むので不可。{1, 5, 6} は 1 が 3 番目、6 は 1 番目にできない（4 回目）ので 5、6、1 だが、2 回目（4、5、6）が 0A2B になり不可。{x, 4, 6} は x = 2 だと 2 と 4 を含むので x = 3、4 は 2 番目。",
+          "4 回目より 6 は 1 番目にできないので 6 が 3 番目、3 が 1 番目で暗号は 3、4、6。4 回の結果 0A1B、1A1B、1A0B、0A2B がすべて一致します。答えは 346。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "composite_grid_shape",
+        "params": {
+          "rows": 5,
+          "cols": 5,
+          "filledCells": [
+            [
+              0,
+              3
+            ],
+            [
+              0,
+              4
+            ]
+          ],
+          "cellLabels": {
+            "0,3": "A",
+            "0,4": "B",
+            "1,0": "1",
+            "1,1": "2",
+            "1,2": "3",
+            "1,3": "0",
+            "1,4": "1",
+            "2,0": "4",
+            "2,1": "5",
+            "2,2": "6",
+            "2,3": "1",
+            "2,4": "1",
+            "3,0": "2",
+            "3,1": "4",
+            "3,2": "1",
+            "3,3": "1",
+            "3,4": "0",
+            "4,0": "6",
+            "4,1": "1",
+            "4,2": "4",
+            "4,3": "0",
+            "4,4": "2"
+          }
+        }
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "346"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "先由前兩次定出數字來源，再依第 4 次分三種情形，用第 3、2 次刪去",
+        "notes": "設計依據：猜數字（幾 A 幾 B）的邏輯推理，唯一解要靠分情形與交叉驗證。全庫搜「幾 A 幾 B」「猜數字」沒有同題；logic 題庫的推理題多是真假話與排序。表格中的四次猜測與回饋只在圖中。",
+        "displayText": "改寫題（猜密碼）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "邏輯",
+        "topicCode": "logic",
+        "subtopic": "由「幾 A 幾 B」的回饋推出密碼",
+        "subtopicCode": "code_breaking_ab_feedback"
+      },
+      "reviewStatus": "ok"
     }
   ]
 }

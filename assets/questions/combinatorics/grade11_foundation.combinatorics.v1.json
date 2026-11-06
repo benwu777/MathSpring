@@ -9666,6 +9666,570 @@
         "subtopicCode": "count_spanning_trees_roads"
       },
       "reviewStatus": "ok"
+    },
+    {
+      "id": "combinatorics_grade11_foundation_105",
+      "topic": "combinatorics",
+      "subtopic": "no_two_adjacent_shaded_cells_3x3",
+      "tags": [
+        "c:basic_counting",
+        "c:recurrence",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade11",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "如圖是一個 3 × 3 的方格，要把其中一些格子塗色（也可以一格都不塗），規定任兩個塗色的格子都不能有公共邊（只在角落碰到可以）。圖中是一種合格的塗法。一共有幾種合格的塗法？",
+        "zh-Hans": "如图是一个 3 × 3 的方格，要把其中一些格子涂色（也可以一格都不涂），规定任两个涂色的格子都不能有公共边（只在角落碰到可以）。图中是一种合格的涂法。一共有几种合格的涂法？",
+        "en": "The figure shows a 3 × 3 grid. Some of the cells are to be shaded (possibly none), with no two shaded cells sharing an edge (touching only at a corner is allowed). The figure shows one valid shading. How many valid shadings are there?",
+        "ja": "図は 3 × 3 のマス目です。いくつかのマスに色をぬります（1 つもぬらなくてもよい）。ただし、色をぬった 2 つのマスが辺を共有してはいけません（角で接するのはかまいません）。図は条件に合うぬり方の 1 つです。条件に合うぬり方は全部で何通りありますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 63。",
+        "zh-Hans": "答案是 63。",
+        "en": "The answer is 63.",
+        "ja": "答えは 63 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "先看一個橫列（3 格）自己能怎麼塗：不能有兩格相鄰，所以只有 5 種：都不塗、只塗左、只塗中、只塗右、塗左與右。分別記為 0、L、M、R、LR。",
+          "上下相鄰的兩個橫列不能在同一直行都塗色。和 0 相容的有 5 種；和 L 相容的是 0、M、R 共 3 種；和 M 相容的是 0、L、R、LR 共 4 種；和 R 相容的有 3 種；和 LR 相容的是 0、M 共 2 種。",
+          "第 1 橫列每種各 1 種方法。排好前兩列、第 2 列是 0、L、M、R、LR 的方法數依序是 5、3、4、3、2。",
+          "第 3 列是 0 的方法數 = 5 + 3 + 4 + 3 + 2 = 17；是 L：5 + 4 + 3 = 12；是 M：5 + 3 + 3 + 2 = 13；是 R：12；是 LR：5 + 4 = 9。",
+          "合計 17 + 12 + 13 + 12 + 9 = 63 種。"
+        ],
+        "zh-Hans": [
+          "先看一行（3 格）自己能怎么涂：不能有两格相邻，所以只有 5 种：都不涂、只涂左、只涂中、只涂右、涂左与右。分别记为 0、L、M、R、LR。",
+          "上下相邻的两行不能在同一列都涂色。和 0 相容的有 5 种；和 L 相容的是 0、M、R 共 3 种；和 M 相容的是 0、L、R、LR 共 4 种；和 R 相容的有 3 种；和 LR 相容的是 0、M 共 2 种。",
+          "第 1 行每种各 1 种方法。排好前两行、第 2 行是 0、L、M、R、LR 的方法数依序是 5、3、4、3、2。",
+          "第 3 行是 0 的方法数 = 5 + 3 + 4 + 3 + 2 = 17；是 L：5 + 4 + 3 = 12；是 M：5 + 3 + 3 + 2 = 13；是 R：12；是 LR：5 + 4 = 9。",
+          "合计 17 + 12 + 13 + 12 + 9 = 63 种。"
+        ],
+        "en": [
+          "First, a single row of 3 cells can be shaded in only 5 ways with no two neighbours: none, left only, middle only, right only, left and right. Call them 0, L, M, R, LR.",
+          "Two rows one above the other may not both be shaded in the same column. Compatible with 0: all 5; with L: 0, M, R (3); with M: 0, L, R, LR (4); with R: 3; with LR: 0, M (2).",
+          "Row 1 can be each pattern in 1 way. After two rows, the counts with row 2 equal to 0, L, M, R, LR are 5, 3, 4, 3, 2.",
+          "Row 3 = 0: 5 + 3 + 4 + 3 + 2 = 17; = L: 5 + 4 + 3 = 12; = M: 5 + 3 + 3 + 2 = 13; = R: 12; = LR: 5 + 4 = 9.",
+          "Total 17 + 12 + 13 + 12 + 9 = 63."
+        ],
+        "ja": [
+          "まず横の 1 行（3 マス）だけのぬり方は、となり合わないようにすると 5 通り：ぬらない、左だけ、中だけ、右だけ、左と右。0、L、M、R、LR とよびます。",
+          "上下にとなり合う 2 行は、同じ列を両方ぬってはいけません。0 と両立するのは 5 通り、L と両立するのは 0、M、R の 3 通り、M とは 0、L、R、LR の 4 通り、R とは 3 通り、LR とは 0、M の 2 通り。",
+          "1 行目はどの型も 1 通り。2 行目までで、2 行目が 0、L、M、R、LR になる方法は順に 5、3、4、3、2 通り。",
+          "3 行目が 0：5 + 3 + 4 + 3 + 2 = 17、L：5 + 4 + 3 = 12、M：5 + 3 + 3 + 2 = 13、R：12、LR：5 + 4 = 9。",
+          "合計 17 + 12 + 13 + 12 + 9 = 63 通り。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "composite_grid_shape",
+        "params": {
+          "rows": 3,
+          "cols": 3,
+          "filledCells": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              2,
+              1
+            ]
+          ],
+          "cellLabels": {}
+        }
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "63"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "逐列遞推：每列 5 種型，記錄和上一列相容的方法數",
+        "notes": "設計依據：方格的獨立集計數，用「逐列轉移」的遞推。全庫搜「不相鄰＋格＋塗」只有低年級的一排格子；combinatorics_grade10#044（一排 5 個開關不能兩個相鄰都關）是一維版本。本題是二維方格，要先列出每列的 5 種型再做相容表。圖畫出 3 × 3 方格與一種示範塗法，總數不在圖上。",
+        "displayText": "改寫題（互不相鄰的塗色）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "組合",
+        "topicCode": "combinatorics",
+        "subtopic": "3 × 3 方格中互不相鄰的塗色方法",
+        "subtopicCode": "no_two_adjacent_shaded_cells_3x3"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "combinatorics_grade11_foundation_106",
+      "topic": "combinatorics",
+      "subtopic": "triangles_from_seven_lines_two_parallel",
+      "tags": [
+        "c:permutation_combination",
+        "c:triangle",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade11",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "如圖，平面上畫了 7 條直線，其中恰有兩條互相平行，其餘任兩條都相交，而且沒有三條直線交於同一點。以其中 3 條直線為三邊所在直線，能圍出一個三角形的選法有幾種？（也就是這 7 條直線一共能決定幾個三角形。）",
+        "zh-Hans": "如图，平面上画了 7 条直线，其中恰有两条互相平行，其余任两条都相交，而且没有三条直线交于同一点。以其中 3 条直线为三边所在直线，能围出一个三角形的选法有几种？（也就是这 7 条直线一共能决定几个三角形。）",
+        "en": "In the figure, 7 lines are drawn in the plane: exactly two of them are parallel, every other pair meets, and no three lines pass through one point. In how many ways can 3 of the lines be chosen so that they enclose a triangle? (That is, how many triangles do the 7 lines determine?)",
+        "ja": "図のように、平面に 7 本の直線がかかれています。そのうちちょうど 2 本が平行で、ほかのどの 2 本も交わり、3 本が 1 点で交わることはありません。3 本の直線を選んで、それらを 3 辺とする三角形ができる選び方は何通りありますか。（つまり、7 本の直線で決まる三角形はいくつありますか。）"
+      },
+      "answer": {
+        "zh-Hant": "答案是 30。",
+        "zh-Hans": "答案是 30。",
+        "en": "The answer is 30.",
+        "ja": "答えは 30 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "任選 3 條直線，若兩兩相交而且三個交點不重合，就恰好圍成一個三角形。題目保證沒有三線共點，所以只要三條中沒有平行的一對就行。",
+          "從 7 條中選 3 條共有 C(7, 3) = 35 種。",
+          "不行的是包含那兩條平行線的選法：兩條平行線都選進去，第三條從其餘 5 條中選，有 5 種。",
+          "能圍成三角形的選法 = 35 − 5 = 30。"
+        ],
+        "zh-Hans": [
+          "任选 3 条直线，若两两相交而且三个交点不重合，就恰好围成一个三角形。题目保证没有三线共点，所以只要三条中没有平行的一对就行。",
+          "从 7 条中选 3 条共有 C(7, 3) = 35 种。",
+          "不行的是包含那两条平行线的选法：两条平行线都选进去，第三条从其余 5 条中选，有 5 种。",
+          "能围成三角形的选法 = 35 − 5 = 30。"
+        ],
+        "en": [
+          "Any 3 lines that pairwise meet, with three distinct meeting points, enclose exactly one triangle. Since no three lines are concurrent, a choice works unless it contains the parallel pair.",
+          "There are C(7, 3) = 35 ways to choose 3 of the 7 lines.",
+          "The bad choices contain both parallel lines plus one of the other 5: 5 choices.",
+          "Triangles = 35 − 5 = 30."
+        ],
+        "ja": [
+          "3 本の直線がどの 2 本も交わり、3 つの交点が異なれば、ちょうど 1 つの三角形ができます。3 本が 1 点で交わることはないので、平行な 2 本を両方含まなければよいことになります。",
+          "7 本から 3 本選ぶ方法は C(7, 3) = 35 通り。",
+          "だめなのは平行な 2 本を両方含む選び方で、3 本目は残り 5 本から選ぶので 5 通り。",
+          "三角形ができる選び方 = 35 − 5 = 30 通り。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "geometry_scene",
+        "params": {
+          "bounds": {
+            "minX": -6.6,
+            "minY": -6.6,
+            "maxX": 6.6,
+            "maxY": 6.6
+          },
+          "points": [
+            {
+              "name": "h1",
+              "x": -6.6,
+              "y": 0.1,
+              "visible": false
+            },
+            {
+              "name": "h2",
+              "x": 6.6,
+              "y": 4.06,
+              "visible": false
+            },
+            {
+              "name": "h3",
+              "x": -6.6,
+              "y": -4.41,
+              "visible": false
+            },
+            {
+              "name": "h4",
+              "x": 6.6,
+              "y": -0.45,
+              "visible": false
+            },
+            {
+              "name": "h5",
+              "x": -2.0419,
+              "y": 6.6,
+              "visible": false
+            },
+            {
+              "name": "h6",
+              "x": 1.4136,
+              "y": -6.6,
+              "visible": false
+            },
+            {
+              "name": "h7",
+              "x": -2.7748,
+              "y": 6.6,
+              "visible": false
+            },
+            {
+              "name": "h8",
+              "x": 5.9669,
+              "y": -6.6,
+              "visible": false
+            },
+            {
+              "name": "h9",
+              "x": -5.928,
+              "y": -6.6,
+              "visible": false
+            },
+            {
+              "name": "h10",
+              "x": 4.632,
+              "y": 6.6,
+              "visible": false
+            },
+            {
+              "name": "h11",
+              "x": -6.6,
+              "y": 1.462,
+              "visible": false
+            },
+            {
+              "name": "h12",
+              "x": 6.6,
+              "y": -2.102,
+              "visible": false
+            },
+            {
+              "name": "h13",
+              "x": -2.5707,
+              "y": -6.6,
+              "visible": false
+            },
+            {
+              "name": "h14",
+              "x": 3.8683,
+              "y": 6.6,
+              "visible": false
+            }
+          ],
+          "segments": [
+            {
+              "from": "h1",
+              "to": "h2",
+              "style": "solid"
+            },
+            {
+              "from": "h3",
+              "to": "h4",
+              "style": "solid"
+            },
+            {
+              "from": "h5",
+              "to": "h6",
+              "style": "solid"
+            },
+            {
+              "from": "h7",
+              "to": "h8",
+              "style": "solid"
+            },
+            {
+              "from": "h9",
+              "to": "h10",
+              "style": "solid"
+            },
+            {
+              "from": "h11",
+              "to": "h12",
+              "style": "solid"
+            },
+            {
+              "from": "h13",
+              "to": "h14",
+              "style": "solid"
+            }
+          ]
+        }
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "30"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "三條直線圍成三角形 ⇔ 兩兩不平行且不共點；扣掉含平行對的選法",
+        "notes": "設計依據：直線圍成三角形的條件（兩兩不平行、不三線共點），用總數扣除。全庫搜「條直線＋三角形」沒有計數題；三等分三角形數三角形（禁用題型）是數圖中現成的三角形，本題是由直線的選法決定。圖依座標畫出 7 條直線（兩條斜率相同），已驗證 20 個交點互不重合；答案不靠數圖。",
+        "displayText": "改寫題（直線圍成的三角形）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "組合",
+        "topicCode": "combinatorics",
+        "subtopic": "七條直線圍成的三角形個數",
+        "subtopicCode": "triangles_from_seven_lines_two_parallel"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "combinatorics_grade11_foundation_107",
+      "topic": "combinatorics",
+      "subtopic": "self_avoiding_paths_ladder_2x6",
+      "tags": [
+        "c:basic_counting",
+        "c:graph_theory",
+        "m:bijection"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade11",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "如圖是一個由 2 排、每排 6 個路口組成的梯子形路網，線段是道路。從左下角的 S 走到右上角的 T，每一步沿道路走到相鄰的路口，可以往左、往右、往上、往下，但同一個路口不能經過兩次。一共有幾種走法？",
+        "zh-Hans": "如图是一个由 2 排、每排 6 个路口组成的梯子形路网，线段是道路。从左下角的 S 走到右上角的 T，每一步沿道路走到相邻的路口，可以往左、往右、往上、往下，但同一个路口不能经过两次。一共有几种走法？",
+        "en": "The figure shows a ladder-shaped road network with 2 rows of 6 junctions; the segments are roads. Walk from S at the bottom left to T at the top right, each step going along a road to a neighbouring junction (left, right, up or down allowed), never visiting a junction twice. How many routes are there?",
+        "ja": "図は 2 列、各列 6 個の交差点からなるはしご形の道路網で、線分が道路です。左下の S から右上の T まで、毎回道路にそってとなりの交差点へ進みます（左右上下どれでもよい）が、同じ交差点を 2 回通ってはいけません。進み方は全部で何通りありますか。"
+      },
+      "answer": {
+        "zh-Hant": "答案是 32。",
+        "zh-Hans": "答案是 32。",
+        "en": "The answer is 32.",
+        "ja": "答えは 32 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "先說明路線不會往左走：看第一次往左的那一步，它在同一排由第 k 直行走到第 k − 1 直行。在此之前只往右或換排，所以抵達第 k 直行這個路口之前，一定是從同一直行的另一個路口換排上來（或下來）的。之後要再往右到 T，必須再經過第 k 直行，但這一直行的兩個路口都已經用過，所以到不了 T。因此路線只會往右走或換排。",
+          "於是路線完全由「在哪幾條直行換排」決定：每條直行最多換排一次。從下排出發、要停在上排，換排的次數必須是奇數。",
+          "6 條直行中選奇數條換排：C(6, 1) + C(6, 3) + C(6, 5) = 6 + 20 + 6 = 32，而且每一種選法都對應一條合格的路線。",
+          "共 32 種走法。"
+        ],
+        "zh-Hans": [
+          "先说明路线不会往左走：看第一次往左的那一步，它在同一排由第 k 列走到第 k − 1 列。在此之前只往右或换排，所以抵达第 k 列这个路口之前，一定是从同一列的另一个路口换排上来（或下来）的。之后要再往右到 T，必须再经过第 k 列，但这一列的两个路口都已经用过，所以到不了 T。因此路线只会往右走或换排。",
+          "于是路线完全由「在哪几列换排」决定：每列最多换排一次。从下排出发、要停在上排，换排的次数必须是奇数。",
+          "6 列中选奇数条换排：C(6, 1) + C(6, 3) + C(6, 5) = 6 + 20 + 6 = 32，而且每一种选法都对应一条合格的路线。",
+          "共 32 种走法。"
+        ],
+        "en": [
+          "First, a route never moves left: if it stepped left within a row, from column k to column k − 1, then afterwards to get back to the right it would have to pass column k again, but both junctions of column k are already used (one it came from, the other it must have used to arrive). So it could never reach T. Hence the route only moves right or switches rows.",
+          "So a route is determined exactly by the set of columns where it switches rows, each column at most once. Starting in the bottom row and ending in the top row, the number of switches must be odd.",
+          "Choosing an odd number of the 6 columns: C(6, 1) + C(6, 3) + C(6, 5) = 6 + 20 + 6 = 32, and each choice gives exactly one valid route.",
+          "There are 32 routes."
+        ],
+        "ja": [
+          "まず左へは進まないことを示します。ある行で列 k から列 k − 1 へ左に進むと、そのあと右へもどるには列 k をもう一度通る必要がありますが、列 k の 2 つの交差点はすでに使われています（来た所と、そこへ着くのに使った所）。だから T に着けません。よって進み方は右へ進むか行を移るかだけです。",
+          "すると道すじは「どの列で行を移るか」だけで決まり、各列で移るのは多くても 1 回です。下の行から出発して上の行で終わるので、移る回数は奇数です。",
+          "6 本の列から奇数本を選ぶ方法：C(6, 1) + C(6, 3) + C(6, 5) = 6 + 20 + 6 = 32。どの選び方もちょうど 1 つの道すじになります。",
+          "全部で 32 通りです。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "geometry_scene",
+        "params": {
+          "bounds": {
+            "minX": -0.6,
+            "minY": -0.7,
+            "maxX": 5.6,
+            "maxY": 1.7
+          },
+          "points": [
+            {
+              "name": "v00",
+              "x": 0,
+              "y": 0,
+              "pos": "b",
+              "label": "S"
+            },
+            {
+              "name": "v10",
+              "x": 0,
+              "y": 1,
+              "pos": "t",
+              "label": ""
+            },
+            {
+              "name": "v01",
+              "x": 1,
+              "y": 0,
+              "pos": "b",
+              "label": ""
+            },
+            {
+              "name": "v11",
+              "x": 1,
+              "y": 1,
+              "pos": "t",
+              "label": ""
+            },
+            {
+              "name": "v02",
+              "x": 2,
+              "y": 0,
+              "pos": "b",
+              "label": ""
+            },
+            {
+              "name": "v12",
+              "x": 2,
+              "y": 1,
+              "pos": "t",
+              "label": ""
+            },
+            {
+              "name": "v03",
+              "x": 3,
+              "y": 0,
+              "pos": "b",
+              "label": ""
+            },
+            {
+              "name": "v13",
+              "x": 3,
+              "y": 1,
+              "pos": "t",
+              "label": ""
+            },
+            {
+              "name": "v04",
+              "x": 4,
+              "y": 0,
+              "pos": "b",
+              "label": ""
+            },
+            {
+              "name": "v14",
+              "x": 4,
+              "y": 1,
+              "pos": "t",
+              "label": ""
+            },
+            {
+              "name": "v05",
+              "x": 5,
+              "y": 0,
+              "pos": "b",
+              "label": ""
+            },
+            {
+              "name": "v15",
+              "x": 5,
+              "y": 1,
+              "pos": "t",
+              "label": "T"
+            }
+          ],
+          "segments": [
+            {
+              "from": "v00",
+              "to": "v10",
+              "style": "solid"
+            },
+            {
+              "from": "v01",
+              "to": "v11",
+              "style": "solid"
+            },
+            {
+              "from": "v02",
+              "to": "v12",
+              "style": "solid"
+            },
+            {
+              "from": "v03",
+              "to": "v13",
+              "style": "solid"
+            },
+            {
+              "from": "v04",
+              "to": "v14",
+              "style": "solid"
+            },
+            {
+              "from": "v05",
+              "to": "v15",
+              "style": "solid"
+            },
+            {
+              "from": "v00",
+              "to": "v01",
+              "style": "solid"
+            },
+            {
+              "from": "v10",
+              "to": "v11",
+              "style": "solid"
+            },
+            {
+              "from": "v01",
+              "to": "v02",
+              "style": "solid"
+            },
+            {
+              "from": "v11",
+              "to": "v12",
+              "style": "solid"
+            },
+            {
+              "from": "v02",
+              "to": "v03",
+              "style": "solid"
+            },
+            {
+              "from": "v12",
+              "to": "v13",
+              "style": "solid"
+            },
+            {
+              "from": "v03",
+              "to": "v04",
+              "style": "solid"
+            },
+            {
+              "from": "v13",
+              "to": "v14",
+              "style": "solid"
+            },
+            {
+              "from": "v04",
+              "to": "v05",
+              "style": "solid"
+            },
+            {
+              "from": "v14",
+              "to": "v15",
+              "style": "solid"
+            }
+          ]
+        }
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "32"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "證明路線不會往左回頭，於是一一對應到「奇數條⟨直C⟩上換排」的選法",
+        "notes": "設計依據：不重複經過路口的路徑計數，關鍵是證明在兩排的梯子上不能回頭，化成選奇數個子集。查過 combinatorics_grade12#022（正方體經過所有頂點的路線數）與 logic_grade7#050（3 × 3 方格一筆走完的起點）：都是哈密頓路徑；本題不要求走完所有路口，而且有一一對應的漂亮計數。圖畫出 2 × 6 的路網與 S、T。",
+        "displayText": "改寫題（梯子路網的走法）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "組合",
+        "topicCode": "combinatorics",
+        "subtopic": "梯子形路網上不重複經過路口的走法",
+        "subtopicCode": "self_avoiding_paths_ladder_2x6"
+      },
+      "reviewStatus": "ok"
     }
   ]
 }
