@@ -12371,6 +12371,333 @@
         "notes": "設計依據：每排每行 1～4 各一，再加上分區的和或積條件；從「整行和是 10」與「48 = 4 × 4 × 3、18 = 3 × 3 × 2 中重複的數必須錯開」切入，一路推完。全庫搜尋「每一區…乘積／加起來」只有 logic_grade5_foundation_118（分區塗黑骨牌），沒有分區算式的拉丁方陣；logic_grade10_foundation_070 是一般數獨（給數字、無算式）。已另行窮舉 576 個四階拉丁方陣確認唯一。",
         "displayText": "MathSpring 改寫題（附圖）"
       }
+    },
+    {
+      "id": "logic_grade6_foundation_146",
+      "topic": "logic",
+      "subtopic": "pipe_network_max_flow_with_bottleneck_cut",
+      "tags": [
+        "c:graph_theory",
+        "m:extremal",
+        "m:construction"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade6",
+      "challengeTier": "foundation",
+      "reviewStatus": "ok",
+      "prompt": {
+        "zh-Hant": "如圖是一組水管，水從 S 流進來、從 T 流出去。每一條線段是一根水管，水在每根水管裡都只能由左往右流；線段旁的數是那根水管每分鐘最多能流過的公升數。在 A～E 這些接頭，流進來多少水就流出去多少水（水不會留在接頭，也可以任意分配到往右的水管）。從 S 到 T 每分鐘最多能送多少公升的水？",
+        "zh-Hans": "如图是一组水管，水从 S 流进来、从 T 流出去。每一条线段是一根水管，水在每根水管里都只能由左往右流；线段旁的数是那根水管每分钟最多能流过的升数。在 A～E 这些接头，流进来多少水就流出去多少水（水不会留在接头，也可以任意分配到往右的水管）。从 S 到 T 每分钟最多能送多少升水？",
+        "en": "The figure shows a set of water pipes: water enters at S and leaves at T. Each segment is a pipe in which water can flow only from left to right, and the number beside it is the most litres per minute it can carry. At each junction A–E, all the water that flows in must flow out (none is stored, and it may be split among the pipes going right in any way). At most how many litres per minute can be sent from S to T?",
+        "ja": "図は水道管のつながりで、水は S から入って T から出ます。それぞれの線分が1本の管で、水は管の中を左から右へしか流れません。線分のそばの数は、その管に1分間に流せる最大の量（L）です。つなぎ目 A～E では、入った水はすべて出ていきます（たまることはなく、右へ向かう管にどう分けてもかまいません）。S から T へ1分間に最大何 L の水を送れますか。"
+      },
+      "answer": {
+        "zh-Hant": "每分鐘最多 13 公升。",
+        "zh-Hans": "每分钟最多 13 升。",
+        "en": "At most 13 litres per minute.",
+        "ja": "1分間に最大 13 L です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "先找上限。流進 T 的水，一定是從 C → T、D → T、E → T 這三根水管來的。C 只有一根水管流進來（A → C，最多 4 公升），所以 C → T 最多也只有 4 公升；D → T 最多 5 公升；E → T 最多 4 公升。T 每分鐘最多收到 4 + 5 + 4 = 13 公升。",
+          "再做出 13 公升：S → A 送 9 公升，在 A 分成 A → C 4 公升、A → D 5 公升；S → B 送 4 公升，全部走 B → E。接著 C → T 4、D → T 5、E → T 4，D → E 和 B → D 都不用。每根水管都沒有超過上限，T 收到 4 + 5 + 4 = 13 公升。",
+          "上限是 13、也真的做得到，所以每分鐘最多 13 公升。注意 S 流出去的兩根加起來 9 + 8 = 17、流進 T 的三根加起來 7 + 5 + 4 = 16，都送不到：卡住的是 A → C 這一根細管。"
+        ],
+        "zh-Hans": [
+          "先找上限。流进 T 的水，一定是从 C → T、D → T、E → T 这三根水管来的。C 只有一根水管流进来（A → C，最多 4 升），所以 C → T 最多也只有 4 升；D → T 最多 5 升；E → T 最多 4 升。T 每分钟最多收到 4 + 5 + 4 = 13 升。",
+          "再做出 13 升：S → A 送 9 升，在 A 分成 A → C 4 升、A → D 5 升；S → B 送 4 升，全部走 B → E。接着 C → T 4、D → T 5、E → T 4，D → E 和 B → D 都不用。每根水管都没有超过上限，T 收到 4 + 5 + 4 = 13 升。",
+          "上限是 13、也真的做得到，所以每分钟最多 13 升。注意 S 流出去的两根加起来 9 + 8 = 17、流进 T 的三根加起来 7 + 5 + 4 = 16，都送不到：卡住的是 A → C 这一根细管。"
+        ],
+        "en": [
+          "First an upper bound. All water reaching T comes through C → T, D → T or E → T. C is fed only by A → C (at most 4 L), so C → T carries at most 4 L; D → T carries at most 5 L; E → T at most 4 L. So T receives at most 4 + 5 + 4 = 13 L per minute.",
+          "Now achieve 13 L: send 9 L along S → A and split it into A → C 4 L and A → D 5 L; send 4 L along S → B, all through B → E. Then C → T 4, D → T 5, E → T 4, with D → E and B → D unused. No pipe exceeds its limit and T receives 4 + 5 + 4 = 13 L.",
+          "The bound 13 is reached, so the maximum is 13 L per minute. Note that the pipes leaving S total 9 + 8 = 17 and those entering T total 7 + 5 + 4 = 16, but neither can be used fully: the bottleneck is the narrow pipe A → C."
+        ],
+        "ja": [
+          "まず上限を考えます。T に入る水は必ず C → T、D → T、E → T のどれかを通ります。C に入る管は A → C（最大 4 L）だけなので C → T も最大 4 L、D → T は最大 5 L、E → T は最大 4 L。T に入るのは1分間に最大 4 + 5 + 4 = 13 L です。",
+          "次に 13 L を実際に流します。S → A に 9 L 流して A で A → C に 4 L、A → D に 5 L に分け、S → B に 4 L 流してすべて B → E へ。すると C → T 4、D → T 5、E → T 4 で、D → E と B → D は使いません。どの管も上限をこえず、T には 4 + 5 + 4 = 13 L 入ります。",
+          "上限 13 が実際に流せるので、最大は1分間に 13 L です。S から出る2本の合計 9 + 8 = 17 も、T に入る3本の合計 7 + 5 + 4 = 16 も流しきれません。つまっているのは細い管 A → C です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "geometry_scene",
+        "params": {
+          "bounds": {
+            "minX": -0.8,
+            "minY": -0.5,
+            "maxX": 8.4,
+            "maxY": 4.7
+          },
+          "points": [
+            {
+              "name": "S",
+              "x": 0,
+              "y": 2,
+              "pos": "l"
+            },
+            {
+              "name": "A",
+              "x": 2.2,
+              "y": 3.6,
+              "pos": "t"
+            },
+            {
+              "name": "B",
+              "x": 2.2,
+              "y": 0.4,
+              "pos": "b"
+            },
+            {
+              "name": "C",
+              "x": 5,
+              "y": 4,
+              "pos": "t"
+            },
+            {
+              "name": "D",
+              "x": 4,
+              "y": 2,
+              "pos": "t"
+            },
+            {
+              "name": "E",
+              "x": 5.6,
+              "y": 0.4,
+              "pos": "b"
+            },
+            {
+              "name": "T",
+              "x": 7.6,
+              "y": 2,
+              "pos": "r"
+            },
+            {
+              "name": "cSA",
+              "x": 0.75,
+              "y": 3.05,
+              "visible": false,
+              "label": "9"
+            },
+            {
+              "name": "cSB",
+              "x": 0.75,
+              "y": 0.95,
+              "visible": false,
+              "label": "8"
+            },
+            {
+              "name": "cAC",
+              "x": 3.6,
+              "y": 4.1,
+              "visible": false,
+              "label": "4"
+            },
+            {
+              "name": "cAD",
+              "x": 3.25,
+              "y": 3.1,
+              "visible": false,
+              "label": "6"
+            },
+            {
+              "name": "cBD",
+              "x": 3.4,
+              "y": 1.15,
+              "visible": false,
+              "label": "3"
+            },
+            {
+              "name": "cBE",
+              "x": 3.9,
+              "y": 0.1,
+              "visible": false,
+              "label": "7"
+            },
+            {
+              "name": "cCT",
+              "x": 6.6,
+              "y": 3.25,
+              "visible": false,
+              "label": "7"
+            },
+            {
+              "name": "cDT",
+              "x": 5.8,
+              "y": 2.25,
+              "visible": false,
+              "label": "5"
+            },
+            {
+              "name": "cET",
+              "x": 6.9,
+              "y": 0.95,
+              "visible": false,
+              "label": "4"
+            },
+            {
+              "name": "cDE",
+              "x": 4.42,
+              "y": 0.82,
+              "visible": false,
+              "label": "4"
+            }
+          ],
+          "segments": [
+            {
+              "from": "S",
+              "to": "A",
+              "style": "solid"
+            },
+            {
+              "from": "S",
+              "to": "B",
+              "style": "solid"
+            },
+            {
+              "from": "A",
+              "to": "C",
+              "style": "solid"
+            },
+            {
+              "from": "A",
+              "to": "D",
+              "style": "solid"
+            },
+            {
+              "from": "B",
+              "to": "D",
+              "style": "solid"
+            },
+            {
+              "from": "B",
+              "to": "E",
+              "style": "solid"
+            },
+            {
+              "from": "C",
+              "to": "T",
+              "style": "solid"
+            },
+            {
+              "from": "D",
+              "to": "T",
+              "style": "solid"
+            },
+            {
+              "from": "E",
+              "to": "T",
+              "style": "solid"
+            },
+            {
+              "from": "D",
+              "to": "E",
+              "style": "solid"
+            }
+          ]
+        }
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "13"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "水管網路每分鐘最大流量：找卡住的一組水管當上限，再實際分配",
+        "notes": "設計依據：最大流＝最小割，但最小割不是 S 的出口（17）也不是 T 的入口（16），而是 {A→C, D→T, E→T}＝13，要看出 C 只靠 A→C 供水。全庫搜尋「水管＋最多」「每分鐘＋管」只有注水折線圖與 arithmetic_grade3_foundation_202（分岔水管平均分流求分數）、combinatorics_grade9_foundation_087（分岔機率）；logic_grade5_foundation_124 是最少封幾條路（不加權的割）；algebra_grade11_foundation_161 是單行道車流方程組。已另行列舉全部 32 種割確認最小值 13 唯一。",
+        "displayText": "MathSpring 改寫題（附圖）"
+      }
+    },
+    {
+      "id": "logic_grade6_foundation_147",
+      "topic": "logic",
+      "subtopic": "loop_along_grid_lines_cell_edge_counts_length",
+      "tags": [
+        "c:logic_deduction",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade6",
+      "challengeTier": "foundation",
+      "reviewStatus": "ok",
+      "prompt": {
+        "zh-Hant": "如圖的 4 × 4 方格，要沿著格線畫一條封閉的線（繞一圈回到起點），規則是：① 線不能分岔、不能交叉，也不能重複走同一段；② 有數字的格子，它的四條邊中剛好有那麼多條是線的一部分；沒有數字的格子沒有限制。照規則畫好的線只有一種。這條線一共由幾段小格邊組成？",
+        "zh-Hans": "如图的 4 × 4 方格，要沿着格线画一条封闭的线（绕一圈回到起点），规则是：① 线不能分岔、不能交叉，也不能重复走同一段；② 有数字的格子，它的四条边中刚好有那么多条是线的一部分；没有数字的格子没有限制。照规则画好的线只有一种。这条线一共由几段小格边组成？",
+        "en": "On the 4 × 4 grid in the figure, draw one closed loop along the grid lines (it goes round and returns to its start). Rules: ① the loop never branches, crosses itself or uses a segment twice; ② for a cell with a number, exactly that many of its four sides are part of the loop; cells without numbers have no condition. There is only one such loop. How many unit segments does it consist of?",
+        "ja": "図の 4 × 4 のマスで、マスの線にそって1本の閉じた線（ひと回りして出発点にもどる線）をかきます。きまりは ① 線は枝分かれ・交差をせず、同じところを2回通らない、② 数字の書いてあるマスは、4本の辺のうちちょうどその数だけが線になる（数字のないマスには条件なし）、です。きまりに合う線は1通りだけです。この線は小さいマスの辺何本分でできていますか。"
+      },
+      "answer": {
+        "zh-Hant": "一共 14 段。",
+        "zh-Hans": "一共 14 段。",
+        "en": "It consists of 14 segments.",
+        "ja": "14 本分です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "橫排由上往下叫第 1～4 排，直行由左往右叫第 1～4 行。三個 0 格（第 1 排第 1、4 行，第 3 排第 3 行）的四條邊都不在線上。線經過的每一個格點都要剛好連兩段，所以一個格點如果只剩一段可以走，那一段也不能用。第 2 排第 1 行的左上角，上面和右邊都是 0 格的邊，只剩往下那段，所以那段（這一格的左邊）不能用；它的上邊也是 0 格的邊。這格寫 2，只能用右邊和下邊。",
+          "這兩段在第 2 排第 1 行的右下角接在一起，那個格點已經有兩段，所以第 3 排第 1 行的右邊不能用；這格寫 3，必須用上、左、下三邊。線從第 2 排第 1 行的右邊往上到它的右上角，那裡往上、往左都是 0 格的邊，只能往右走；到下一個格點，往下會走到第 3 排第 3 行（0 格）的左上角，那個點已無路可接，往上又是死路，所以繼續往右；再下一個格點的上、右都是 0 格的邊，只能往下；到第 3 排第 3 行的右上角，只能往右，再到方格右邊緣往下。",
+          "第 3 排第 4 行寫 2，已用了上邊和右邊，所以下邊不用；線沿右邊緣一直往下到右下角，再沿底邊往左。第 4 排第 3 行寫 2，上邊是 0 格的邊，右邊的上端點已無路可接也不能用，所以用下邊和左邊；線往上到第 3 排第 3 行的左下角，只能往左，剛好接到第 3 排第 1 行的下邊，封閉成一圈。",
+          "每一步都是被迫的，所以線只有這一種。數段數：上面往右 2 段、往下 1 段、往右 1 段、右邊緣往下 2 段、底邊往左 2 段、往上 1 段、往左 2 段，再加第 3 排第 1 行的左邊 1 段、第 2 排第 1 行的下邊 1 段和右邊 1 段，共 2 + 1 + 1 + 2 + 2 + 1 + 2 + 1 + 1 + 1 = 14 段。"
+        ],
+        "zh-Hans": [
+          "横排由上往下叫第 1～4 排，竖排由左往右叫第 1～4 竖排。三个 0 格（第 1 排第 1、4 格，第 3 排第 3 格）的四条边都不在线上。线经过的每一个格点都要刚好连两段，所以一个格点如果只剩一段可以走，那一段也不能用。第 2 排第 1 格的左上角，上面和右边都是 0 格的边，只剩往下那段，所以那段（这一格的左边）不能用；它的上边也是 0 格的边。这格写 2，只能用右边和下边。",
+          "这两段在第 2 排第 1 格的右下角接在一起，那个格点已经有两段，所以第 3 排第 1 格的右边不能用；这格写 3，必须用上、左、下三边。线从第 2 排第 1 格的右边往上到它的右上角，那里往上、往左都是 0 格的边，只能往右走；到下一个格点，往下会走到第 3 排第 3 格（0 格）的左上角，那个点已无路可接，往上又是死路，所以继续往右；再下一个格点的上、右都是 0 格的边，只能往下；到第 3 排第 3 格的右上角，只能往右，再到方格右边缘往下。",
+          "第 3 排第 4 格写 2，已用了上边和右边，所以下边不用；线沿右边缘一直往下到右下角，再沿底边往左。第 4 排第 3 格写 2，上边是 0 格的边，右边的上端点已无路可接也不能用，所以用下边和左边；线往上到第 3 排第 3 格的左下角，只能往左，刚好接到第 3 排第 1 格的下边，封闭成一圈。",
+          "每一步都是被迫的，所以线只有这一种。数段数：上面往右 2 段、往下 1 段、往右 1 段、右边缘往下 2 段、底边往左 2 段、往上 1 段、往左 2 段，再加第 3 排第 1 格的左边 1 段、第 2 排第 1 格的下边 1 段和右边 1 段，共 2 + 1 + 1 + 2 + 2 + 1 + 2 + 1 + 1 + 1 = 14 段。"
+        ],
+        "en": [
+          "Number rows 1–4 from the top and columns 1–4 from the left. The three 0-cells (row 1, columns 1 and 4; row 3, column 3) have none of their sides on the loop. Every dot on the loop joins exactly two segments, so a dot with only one usable segment left cannot use it. The top-left dot of the cell in row 2, column 1 has its upward and rightward segments on a 0-cell, leaving only the downward one, so that segment (the cell's left side) is unused; its top side belongs to a 0-cell too. This cell shows 2, so it uses its right and bottom sides.",
+          "These two sides meet at the cell's bottom-right dot, which then has two segments, so the right side of the cell in row 3, column 1 is unused; that cell shows 3, so it uses its top, left and bottom sides. From the top of the right side of the row-2, column-1 cell, up and left are 0-cell sides, so the loop goes right. At the next dot, going down would reach the top-left corner of the 0-cell in row 3, column 3, a dead end, and up is also dead, so it goes right again. At the next dot, up and right are 0-cell sides, so it goes down. At the top-right corner of the row-3, column-3 cell it can only go right, then down along the right edge of the grid.",
+          "The cell in row 3, column 4 shows 2 and already uses its top and right sides, so its bottom side is unused; the loop runs down the right edge to the bottom-right corner, then left along the bottom. The cell in row 4, column 3 shows 2; its top side is a 0-cell side and its right side ends at a dead dot, so it uses its bottom and left sides. The loop goes up to the bottom-left corner of the row-3, column-3 cell, can only turn left, and meets the bottom side of the row-3, column-1 cell, closing the loop.",
+          "Every step was forced, so the loop is unique. Counting: 2 to the right along the top, 1 down, 1 right, 2 down the right edge, 2 left along the bottom, 1 up, 2 left, plus the left side of the row-3, column-1 cell, and the bottom and right sides of the row-2, column-1 cell: 2 + 1 + 1 + 2 + 2 + 1 + 2 + 1 + 1 + 1 = 14 segments."
+        ],
+        "ja": [
+          "段を上から1～4段目、列を左から1～4列目とします。3つの 0 のマス（1段目の1列目・4列目、3段目の3列目）の辺はどれも線になりません。線が通る点ではちょうど2本の線がつながるので、ある点で使える辺が1本しか残らなければ、その辺も使えません。2段目1列目のマスの左上の点は、上と右が 0 のマスの辺で、残るのは下だけなので、その辺（このマスの左辺）は使えません。上辺も 0 のマスの辺です。このマスは 2 なので、右辺と下辺を使います。",
+          "この2本は2段目1列目のマスの右下の点でつながり、その点はもう2本なので、3段目1列目のマスの右辺は使えません。このマスは 3 なので上・左・下の3辺を使います。2段目1列目のマスの右辺の上の点では、上と左が 0 のマスの辺なので右へ進みます。次の点で下へ行くと3段目3列目（0）の左上の点に行き止まり、上も行き止まりなのでさらに右へ。次の点は上と右が 0 のマスの辺なので下へ進み、3段目3列目のマスの右上の点では右へ進むしかなく、方眼の右はしにそって下へ進みます。",
+          "3段目4列目のマスは 2 で、上辺と右辺を使ったので下辺は使いません。線は右はしを右下のかどまで下り、下のはしにそって左へ進みます。4段目3列目のマスは 2 で、上辺は 0 のマスの辺、右辺は上の点が行き止まりなので、下辺と左辺を使います。線は上へ進んで3段目3列目のマスの左下の点に着き、左へ進むと3段目1列目のマスの下辺につながって、ひと回りが閉じます。",
+          "どの段階も1通りに決まったので、線は1通りです。数えると、上で右へ 2、下へ 1、右へ 1、右はしを下へ 2、下のはしを左へ 2、上へ 1、左へ 2、さらに3段目1列目のマスの左辺 1、2段目1列目のマスの下辺 1 と右辺 1 で、2 + 1 + 1 + 2 + 2 + 1 + 2 + 1 + 1 + 1 = 14 本分です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "composite_grid_shape",
+        "params": {
+          "rows": 4,
+          "cols": 4,
+          "filledCells": [],
+          "cellLabels": {
+            "0,0": "0",
+            "0,3": "0",
+            "1,0": "2",
+            "2,0": "3",
+            "2,2": "0",
+            "2,3": "2",
+            "3,2": "2"
+          }
+        }
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "14"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "沿格線畫一圈、數字表示該格用了幾條邊的方格謎題，求這圈的長度",
+        "notes": "設計依據：從 0 格旁的「死點」（只剩一段可走的格點不能用）一路推出整圈，每一步都是被迫的。全庫查「封閉」「圍成一圈」「迴圈」無這種謎題；方格演繹題有點燈（B06 草稿）、踩地雷 logic_grade4_foundation_119、Kuromasu logic_grade5_foundation_121、數島 logic_grade6_foundation_142、長方形分割 logic_grade4_foundation_121 等，規則都不同（是塗格或分割，不是畫邊）。已另行列舉 4 × 4 方格全部 9349 條封閉線，符合 7 個數字的只有這一條。",
+        "displayText": "MathSpring 改寫題（附圖）"
+      }
     }
   ]
 }
