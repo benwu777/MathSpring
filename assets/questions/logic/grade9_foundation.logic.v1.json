@@ -6275,6 +6275,874 @@
         "subtopicCode": "magic_triangle_1_to_9_side_sum_17"
       },
       "reviewStatus": "ok"
+    },
+    {
+      "id": "logic_grade9_foundation_072",
+      "topic": "logic",
+      "subtopic": "shortest_route_weighted_road_map",
+      "tags": [
+        "c:logic_deduction",
+        "c:graph_theory",
+        "m:extremal"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade9",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "如圖是 A、B、C、D、E、F 六個地點之間的道路圖，每條路旁的數字是那條路的長度（公里），兩條路只在地點相交（圖中交叉的 CD、BE 在中間不相通）。從 A 到 F 最短要走幾公里？",
+        "zh-Hans": "如图是 A、B、C、D、E、F 六个地点之间的道路图，每条路旁的数字是那条路的长度（公里），两条路只在地点相交（图中交叉的 CD、BE 在中间不相通）。从 A 到 F 最短要走几公里？",
+        "en": "The figure is a road map between six places A, B, C, D, E, F; the number beside each road is its length in kilometres, and roads meet only at the places (the crossing roads CD and BE are not connected in the middle). What is the shortest distance from A to F, in kilometres?",
+        "ja": "図は A、B、C、D、E、F の 6 地点を結ぶ道路の図で、道のそばの数はその道の長さ（km）です。道は地点でだけつながっています（交差している CD と BE は途中ではつながっていません）。A から F まで最短で何 km ですか。"
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "13"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "answer": {
+        "zh-Hant": "答案是 13。",
+        "zh-Hans": "答案是 13。",
+        "en": "The answer is 13.",
+        "ja": "答えは 13 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "從 A 出發，依序找出到各點的最短距離：到 C 最短 2（直接走）；到 B 可以直接 4，或 A → C → B = 2 + 1 = 3，所以 B 是 3。",
+          "到 D：經 B 是 3 + 5 = 8，經 C 是 2 + 9 = 11，所以 D 是 8。到 E：經 C 是 2 + 10 = 12，經 B 是 3 + 8 = 11，經 D 是 8 + 2 = 10，所以 E 是 10。",
+          "到 F：經 D 是 8 + 6 = 14，經 E 是 10 + 3 = 13，所以最短是 13，路線 A → C → B → D → E → F（2 + 1 + 5 + 2 + 3 = 13）。",
+          "最短要走 13 公里（看起來直接的 A → B → D → F 是 15 公里）。"
+        ],
+        "zh-Hans": [
+          "从 A 出发，依序找出到各点的最短距离：到 C 最短 2（直接走）；到 B 可以直接 4，或 A → C → B = 2 + 1 = 3，所以 B 是 3。",
+          "到 D：经 B 是 3 + 5 = 8，经 C 是 2 + 9 = 11，所以 D 是 8。到 E：经 C 是 2 + 10 = 12，经 B 是 3 + 8 = 11，经 D 是 8 + 2 = 10，所以 E 是 10。",
+          "到 F：经 D 是 8 + 6 = 14，经 E 是 10 + 3 = 13，所以最短是 13，路线 A → C → B → D → E → F（2 + 1 + 5 + 2 + 3 = 13）。",
+          "最短要走 13 公里（看起来直接的 A → B → D → F 是 15 公里）。"
+        ],
+        "en": [
+          "Starting from A, find the shortest distance to each place in turn: to C it is 2 (directly); to B it is 4 directly or A → C → B = 2 + 1 = 3, so B is 3.",
+          "To D: via B 3 + 5 = 8, via C 2 + 9 = 11, so D is 8. To E: via C 2 + 10 = 12, via B 3 + 8 = 11, via D 8 + 2 = 10, so E is 10.",
+          "To F: via D 8 + 6 = 14, via E 10 + 3 = 13, so the shortest is 13, by A → C → B → D → E → F (2 + 1 + 5 + 2 + 3 = 13).",
+          "The shortest distance is 13 km (the direct-looking A → B → D → F is 15 km)."
+        ],
+        "ja": [
+          "A から出発して、各地点までの最短距離を順に求めます。C へは直接 2。B へは直接 4、または A → C → B = 2 + 1 = 3 なので B は 3。",
+          "D へは B 経由 3 + 5 = 8、C 経由 2 + 9 = 11 なので D は 8。E へは C 経由 2 + 10 = 12、B 経由 3 + 8 = 11、D 経由 8 + 2 = 10 なので E は 10。",
+          "F へは D 経由 8 + 6 = 14、E 経由 10 + 3 = 13 なので最短は 13 で、道すじは A → C → B → D → E → F（2 + 1 + 5 + 2 + 3 = 13）。",
+          "最短 13 km です（いかにも近そうな A → B → D → F は 15 km）。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "geometry_scene",
+        "params": {
+          "bounds": {
+            "minX": -0.8,
+            "minY": -0.8,
+            "maxX": 10.8,
+            "maxY": 4.8
+          },
+          "points": [
+            {
+              "name": "A",
+              "x": 0,
+              "y": 2,
+              "pos": "l"
+            },
+            {
+              "name": "B",
+              "x": 3,
+              "y": 4,
+              "pos": "t"
+            },
+            {
+              "name": "C",
+              "x": 3,
+              "y": 0,
+              "pos": "b"
+            },
+            {
+              "name": "D",
+              "x": 7,
+              "y": 4,
+              "pos": "t"
+            },
+            {
+              "name": "E",
+              "x": 7,
+              "y": 0,
+              "pos": "b"
+            },
+            {
+              "name": "F",
+              "x": 10,
+              "y": 2,
+              "pos": "r"
+            },
+            {
+              "name": "_t1",
+              "x": 1.5,
+              "y": 3.3,
+              "pos": "r",
+              "visible": false,
+              "label": "4"
+            },
+            {
+              "name": "_t2",
+              "x": 1.5,
+              "y": 1.3,
+              "pos": "r",
+              "visible": false,
+              "label": "2"
+            },
+            {
+              "name": "_t3",
+              "x": 3.25,
+              "y": 2,
+              "pos": "r",
+              "visible": false,
+              "label": "1"
+            },
+            {
+              "name": "_t4",
+              "x": 5,
+              "y": 4.3,
+              "pos": "r",
+              "visible": false,
+              "label": "5"
+            },
+            {
+              "name": "_t5",
+              "x": 4.1,
+              "y": 2.9,
+              "pos": "r",
+              "visible": false,
+              "label": "8"
+            },
+            {
+              "name": "_t6",
+              "x": 5,
+              "y": 0.3,
+              "pos": "r",
+              "visible": false,
+              "label": "10"
+            },
+            {
+              "name": "_t7",
+              "x": 7.25,
+              "y": 2,
+              "pos": "r",
+              "visible": false,
+              "label": "2"
+            },
+            {
+              "name": "_t8",
+              "x": 8.5,
+              "y": 3.3,
+              "pos": "r",
+              "visible": false,
+              "label": "6"
+            },
+            {
+              "name": "_t9",
+              "x": 8.5,
+              "y": 1.3,
+              "pos": "r",
+              "visible": false,
+              "label": "3"
+            },
+            {
+              "name": "_t10",
+              "x": 5.9,
+              "y": 2.9,
+              "pos": "r",
+              "visible": false,
+              "label": "9"
+            }
+          ],
+          "segments": [
+            {
+              "from": "A",
+              "to": "B",
+              "style": "solid"
+            },
+            {
+              "from": "A",
+              "to": "C",
+              "style": "solid"
+            },
+            {
+              "from": "B",
+              "to": "C",
+              "style": "solid"
+            },
+            {
+              "from": "B",
+              "to": "D",
+              "style": "solid"
+            },
+            {
+              "from": "C",
+              "to": "D",
+              "style": "solid"
+            },
+            {
+              "from": "C",
+              "to": "E",
+              "style": "solid"
+            },
+            {
+              "from": "D",
+              "to": "E",
+              "style": "solid"
+            },
+            {
+              "from": "D",
+              "to": "F",
+              "style": "solid"
+            },
+            {
+              "from": "E",
+              "to": "F",
+              "style": "solid"
+            },
+            {
+              "from": "B",
+              "to": "E",
+              "style": "solid"
+            }
+          ]
+        }
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "道路圖上的最短路線",
+        "notes": "設計：由近到遠逐點更新最短距離，最短路線要先繞到 C 再回 B、再經 E。最接近的既有題：logic_grade6_077（郵差走遍道路）、combinatorics_grade8_067（每條路走一次）。禁用的是最小生成樹與郵差路線；本題是帶權最短路徑。",
+        "displayText": "改寫題（道路圖最短路線）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "邏輯",
+        "topicCode": "logic",
+        "subtopic": "道路圖最短路線",
+        "subtopicCode": "shortest_route_weighted_road_map"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "logic_grade9_foundation_073",
+      "topic": "logic",
+      "subtopic": "ghost_leg_minimum_rungs_to_restore",
+      "tags": [
+        "c:logic_deduction",
+        "c:permutation_combination",
+        "m:invariant"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade9",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "如圖是一張「爬梯子」：5 條直線上端寫著 1～5（代表 5 個人），下端也寫著 1～5。每個人從自己號碼的上端往下走，遇到橫線就一定沿橫線走到隔壁的直線，再繼續往下。現在每個人走到的下端號碼不一定是自己的號碼。要在圖的最下方再加畫一些橫線（每條連接相鄰的兩條直線，高度都不同），使每個人最後都走到和自己相同的號碼。最少要再加幾條橫線？",
+        "zh-Hans": "如图是一张「爬梯子」：5 条直线上端写着 1～5（代表 5 个人），下端也写着 1～5。每个人从自己号码的上端往下走，遇到横线就一定沿横线走到隔壁的直线，再继续往下。现在每个人走到的下端号码不一定是自己的号码。要在图的最下方再加画一些横线（每条连接相邻的两条直线，高度都不同），使每个人最后都走到和自己相同的号码。最少要再加几条横线？",
+        "en": "The figure is a “ghost leg” (amidakuji): 5 vertical lines labelled 1–5 at the top (5 people) and 1–5 at the bottom. Each person starts at the top of their own line and walks down; whenever they meet a horizontal rung they must cross it to the neighbouring line and then continue down. At present not everyone reaches their own number at the bottom. More rungs are to be added at the very bottom (each joining two neighbouring lines, all at different heights) so that everyone ends at the bottom number equal to their own. At least how many rungs must be added?",
+        "ja": "図は「あみだくじ」です。5 本のたて線の上に 1〜5（5 人）、下にも 1〜5 が書いてあります。各人は自分の番号の上はしから下へ進み、横線に出会うと必ず横線を通ってとなりのたて線に移り、また下へ進みます。今は全員が自分と同じ番号に着くとはかぎりません。図のいちばん下に横線をいくつか書き足し（どれもとなり合うたて線を結び、高さはすべてちがう）、全員が自分と同じ番号に着くようにします。少なくとも何本書き足す必要がありますか。"
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "4"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "answer": {
+        "zh-Hant": "答案是 4。",
+        "zh-Hans": "答案是 4。",
+        "en": "The answer is 4.",
+        "ja": "答えは 4 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "先照圖走一遍：每一條橫線都把「站在它兩端直線上的兩個人」對調位置。依序走完 8 條橫線，下端 1～5 號位置上站的人依序是 3、1、4、5、2。",
+          "在最下方加一條橫線，只會把相鄰兩個位置上的人對調。看「逆序對」（左邊的人號碼比右邊的大的兩人）：3、1、4、5、2 的逆序對有 (3, 1)、(3, 2)、(4, 2)、(5, 2)，共 4 對。對調相鄰兩人，逆序對的數目恰好增加或減少 1。",
+          "要變成 1、2、3、4、5（逆序對 0），至少要加 4 條橫線。4 條做得到：依序在第 4、5 號之間（5、2 對調）、第 3、4 號之間、第 1、2 號之間、第 2、3 號之間各加一條：3、1、4、5、2 → 3、1、4、2、5 → 3、1、2、4、5 → 1、3、2、4、5 → 1、2、3、4、5。",
+          "最少要再加 4 條。"
+        ],
+        "zh-Hans": [
+          "先照图走一遍：每一条横线都把「站在它两端直线上的两个人」对调位置。依序走完 8 条横线，下端 1～5 号位置上站的人依序是 3、1、4、5、2。",
+          "在最下方加一条横线，只会把相邻两个位置上的人对调。看「逆序对」（左边的人号码比右边的大的两人）：3、1、4、5、2 的逆序对有 (3, 1)、(3, 2)、(4, 2)、(5, 2)，共 4 对。对调相邻两人，逆序对的数目恰好增加或减少 1。",
+          "要变成 1、2、3、4、5（逆序对 0），至少要加 4 条横线。4 条做得到：依序在第 4、5 号之间（5、2 对调）、第 3、4 号之间、第 1、2 号之间、第 2、3 号之间各加一条：3、1、4、5、2 → 3、1、4、2、5 → 3、1、2、4、5 → 1、3、2、4、5 → 1、2、3、4、5。",
+          "最少要再加 4 条。"
+        ],
+        "en": [
+          "First trace the figure: each rung swaps the two people on the lines at its ends. Going through the 8 rungs in order, the people standing at bottom positions 1–5 are 3, 1, 4, 5, 2.",
+          "A rung added at the bottom only swaps the people at two neighbouring positions. Count “inversions” (pairs where the left person has the larger number): 3, 1, 4, 5, 2 has (3, 1), (3, 2), (4, 2), (5, 2), 4 inversions. Swapping two neighbours changes the number of inversions by exactly 1.",
+          "To reach 1, 2, 3, 4, 5 (0 inversions) at least 4 rungs are needed, and 4 suffice: add rungs between positions 4 and 5 (swapping 5 and 2), then 3 and 4, then 1 and 2, then 2 and 3: 3, 1, 4, 5, 2 → 3, 1, 4, 2, 5 → 3, 1, 2, 4, 5 → 1, 3, 2, 4, 5 → 1, 2, 3, 4, 5.",
+          "At least 4 rungs must be added."
+        ],
+        "ja": [
+          "まず図をたどります。横線は 1 本ごとに、その両はしのたて線にいる 2 人の位置を入れかえます。8 本の横線を順に通ると、下の 1〜5 の位置にいる人は順に 3、1、4、5、2 です。",
+          "いちばん下に横線を 1 本足すと、となり合う 2 つの位置の人が入れかわるだけです。「逆順の組」（左の人の番号が右の人より大きい 2 人）を数えると、3、1、4、5、2 では (3, 1)、(3, 2)、(4, 2)、(5, 2) の 4 組。となりどうしを入れかえると、逆順の組の数はちょうど 1 増えるか 1 減ります。",
+          "1、2、3、4、5（逆順の組 0）にするには少なくとも 4 本必要で、4 本でできます。4 と 5 の間（5 と 2 を入れかえ）、3 と 4 の間、1 と 2 の間、2 と 3 の間に順に足すと 3、1、4、5、2 → 3、1、4、2、5 → 3、1、2、4、5 → 1、3、2、4、5 → 1、2、3、4、5。",
+          "少なくとも 4 本です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "geometry_scene",
+        "params": {
+          "bounds": {
+            "minX": -0.8,
+            "minY": -1.2,
+            "maxX": 6.8,
+            "maxY": 10.2
+          },
+          "points": [
+            {
+              "name": "_h1",
+              "x": 0,
+              "y": 0,
+              "pos": "r",
+              "visible": false
+            },
+            {
+              "name": "_h2",
+              "x": 0,
+              "y": 9,
+              "pos": "r",
+              "visible": false
+            },
+            {
+              "name": "_t3",
+              "x": 0,
+              "y": 9.35,
+              "pos": "t",
+              "visible": false,
+              "label": "1"
+            },
+            {
+              "name": "_t4",
+              "x": 0,
+              "y": -0.35,
+              "pos": "b",
+              "visible": false,
+              "label": "1"
+            },
+            {
+              "name": "_h5",
+              "x": 1.5,
+              "y": 0,
+              "pos": "r",
+              "visible": false
+            },
+            {
+              "name": "_h6",
+              "x": 1.5,
+              "y": 9,
+              "pos": "r",
+              "visible": false
+            },
+            {
+              "name": "_t7",
+              "x": 1.5,
+              "y": 9.35,
+              "pos": "t",
+              "visible": false,
+              "label": "2"
+            },
+            {
+              "name": "_t8",
+              "x": 1.5,
+              "y": -0.35,
+              "pos": "b",
+              "visible": false,
+              "label": "2"
+            },
+            {
+              "name": "_h9",
+              "x": 3,
+              "y": 0,
+              "pos": "r",
+              "visible": false
+            },
+            {
+              "name": "_h10",
+              "x": 3,
+              "y": 9,
+              "pos": "r",
+              "visible": false
+            },
+            {
+              "name": "_t11",
+              "x": 3,
+              "y": 9.35,
+              "pos": "t",
+              "visible": false,
+              "label": "3"
+            },
+            {
+              "name": "_t12",
+              "x": 3,
+              "y": -0.35,
+              "pos": "b",
+              "visible": false,
+              "label": "3"
+            },
+            {
+              "name": "_h13",
+              "x": 4.5,
+              "y": 0,
+              "pos": "r",
+              "visible": false
+            },
+            {
+              "name": "_h14",
+              "x": 4.5,
+              "y": 9,
+              "pos": "r",
+              "visible": false
+            },
+            {
+              "name": "_t15",
+              "x": 4.5,
+              "y": 9.35,
+              "pos": "t",
+              "visible": false,
+              "label": "4"
+            },
+            {
+              "name": "_t16",
+              "x": 4.5,
+              "y": -0.35,
+              "pos": "b",
+              "visible": false,
+              "label": "4"
+            },
+            {
+              "name": "_h17",
+              "x": 6,
+              "y": 0,
+              "pos": "r",
+              "visible": false
+            },
+            {
+              "name": "_h18",
+              "x": 6,
+              "y": 9,
+              "pos": "r",
+              "visible": false
+            },
+            {
+              "name": "_t19",
+              "x": 6,
+              "y": 9.35,
+              "pos": "t",
+              "visible": false,
+              "label": "5"
+            },
+            {
+              "name": "_t20",
+              "x": 6,
+              "y": -0.35,
+              "pos": "b",
+              "visible": false,
+              "label": "5"
+            },
+            {
+              "name": "_h21",
+              "x": 1.5,
+              "y": 8.2,
+              "pos": "r",
+              "visible": false
+            },
+            {
+              "name": "_h22",
+              "x": 3,
+              "y": 8.2,
+              "pos": "r",
+              "visible": false
+            },
+            {
+              "name": "_h23",
+              "x": 4.5,
+              "y": 7.25,
+              "pos": "r",
+              "visible": false
+            },
+            {
+              "name": "_h24",
+              "x": 6,
+              "y": 7.25,
+              "pos": "r",
+              "visible": false
+            },
+            {
+              "name": "_h25",
+              "x": 0,
+              "y": 6.3,
+              "pos": "r",
+              "visible": false
+            },
+            {
+              "name": "_h26",
+              "x": 1.5,
+              "y": 6.3,
+              "pos": "r",
+              "visible": false
+            },
+            {
+              "name": "_h27",
+              "x": 3,
+              "y": 5.35,
+              "pos": "r",
+              "visible": false
+            },
+            {
+              "name": "_h28",
+              "x": 4.5,
+              "y": 5.35,
+              "pos": "r",
+              "visible": false
+            },
+            {
+              "name": "_h29",
+              "x": 1.5,
+              "y": 4.4,
+              "pos": "r",
+              "visible": false
+            },
+            {
+              "name": "_h30",
+              "x": 3,
+              "y": 4.4,
+              "pos": "r",
+              "visible": false
+            },
+            {
+              "name": "_h31",
+              "x": 1.5,
+              "y": 3.45,
+              "pos": "r",
+              "visible": false
+            },
+            {
+              "name": "_h32",
+              "x": 3,
+              "y": 3.45,
+              "pos": "r",
+              "visible": false
+            },
+            {
+              "name": "_h33",
+              "x": 4.5,
+              "y": 2.5,
+              "pos": "r",
+              "visible": false
+            },
+            {
+              "name": "_h34",
+              "x": 6,
+              "y": 2.5,
+              "pos": "r",
+              "visible": false
+            },
+            {
+              "name": "_h35",
+              "x": 3,
+              "y": 1.55,
+              "pos": "r",
+              "visible": false
+            },
+            {
+              "name": "_h36",
+              "x": 4.5,
+              "y": 1.55,
+              "pos": "r",
+              "visible": false
+            }
+          ],
+          "segments": [
+            {
+              "from": "_h1",
+              "to": "_h2",
+              "style": "solid"
+            },
+            {
+              "from": "_h5",
+              "to": "_h6",
+              "style": "solid"
+            },
+            {
+              "from": "_h9",
+              "to": "_h10",
+              "style": "solid"
+            },
+            {
+              "from": "_h13",
+              "to": "_h14",
+              "style": "solid"
+            },
+            {
+              "from": "_h17",
+              "to": "_h18",
+              "style": "solid"
+            },
+            {
+              "from": "_h21",
+              "to": "_h22",
+              "style": "solid"
+            },
+            {
+              "from": "_h23",
+              "to": "_h24",
+              "style": "solid"
+            },
+            {
+              "from": "_h25",
+              "to": "_h26",
+              "style": "solid"
+            },
+            {
+              "from": "_h27",
+              "to": "_h28",
+              "style": "solid"
+            },
+            {
+              "from": "_h29",
+              "to": "_h30",
+              "style": "solid"
+            },
+            {
+              "from": "_h31",
+              "to": "_h32",
+              "style": "solid"
+            },
+            {
+              "from": "_h33",
+              "to": "_h34",
+              "style": "solid"
+            },
+            {
+              "from": "_h35",
+              "to": "_h36",
+              "style": "solid"
+            }
+          ]
+        }
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "爬梯子最少加幾條橫線使人人回到自己的號碼",
+        "notes": "設計：每條橫線是一次相鄰對調，逆序對數每次恰變 1，給出下界並用冒泡式構造達到。最接近的既有題：logic_grade1_142（3 條線爬梯子追蹤結果）、logic_grade6_137（相鄰卡片交換排序最少 5 次）。後者是同一個「逆序對」原理但在一排卡片上；本題要先從圖追出排列，且是加橫線的情境。",
+        "displayText": "改寫題（爬梯子加橫線）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "邏輯",
+        "topicCode": "logic",
+        "subtopic": "爬梯子加橫線",
+        "subtopicCode": "ghost_leg_minimum_rungs_to_restore"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "logic_grade9_foundation_074",
+      "topic": "logic",
+      "subtopic": "round_robin_table_deduce_result",
+      "tags": [
+        "c:logic_deduction",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade9",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "P、Q、R、S、T 五隊進行單循環賽，每兩隊比一場，沒有平手。圖中的表格：第 i 橫列、第 j 直行寫 1 表示橫列那一隊贏了直行那一隊，寫 0 表示輸了，空白的還沒填；最右邊一行是每隊的勝場數。已知的結果只有 Q 勝 R、S 勝 Q。T 隊贏的是哪一隊？",
+        "zh-Hans": "P、Q、R、S、T 五队进行单循环赛，每两队比一场，没有平局。图中的表格：第 i 行、第 j 列写 1 表示行那一队赢了列那一队，写 0 表示输了，空白的还没填；最右边一列是每队的胜场数。已知的结果只有 Q 胜 R、S 胜 Q。T 队赢的是哪一队？",
+        "en": "Five teams P, Q, R, S, T play a round robin, each pair meeting once with no draws. In the table, a 1 in row i, column j means the row team beat the column team, a 0 means it lost, and blanks are not yet filled; the rightmost column gives each team’s number of wins. The only known results are Q beat R and S beat Q. Which team did T beat?",
+        "ja": "P、Q、R、S、T の 5 チームが総当たり戦をし、どの 2 チームも 1 回ずつ対戦し、引き分けはありません。表の i 行 j 列の 1 は行のチームが列のチームに勝ったこと、0 は負けたことを表し、空白はまだ書いていません。いちばん右の列は各チームの勝った試合数です。わかっている結果は Q が R に勝ち、S が Q に勝ったことだけです。T が勝った相手はどのチームですか。"
+      },
+      "answerMode": "multiple_choice",
+      "options": {
+        "A": {
+          "zh-Hant": "S",
+          "zh-Hans": "S",
+          "en": "S",
+          "ja": "S"
+        },
+        "B": {
+          "zh-Hant": "Q",
+          "zh-Hans": "Q",
+          "en": "Q",
+          "ja": "Q"
+        },
+        "C": {
+          "zh-Hant": "R",
+          "zh-Hans": "R",
+          "en": "R",
+          "ja": "R"
+        },
+        "D": {
+          "zh-Hant": "P",
+          "zh-Hans": "P",
+          "en": "P",
+          "ja": "P"
+        }
+      },
+      "correctAnswer": {
+        "type": "choice",
+        "value": "A"
+      },
+      "answer": {
+        "zh-Hant": "答案是 A：S",
+        "zh-Hans": "答案是 A：S",
+        "en": "The answer is A: S",
+        "ja": "答えは A：S"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "每隊比 4 場。P 勝 4 場，所以 P 全勝，Q、R、S、T 都輸給 P。",
+          "Q 勝 2 場：Q 輸給 P、S，贏了 R，所以剩下和 T 的比賽 Q 一定贏，Q 勝 T。",
+          "R 勝 2 場：R 輸給 P、Q，剩下和 S、T 的兩場都要贏，R 勝 S、R 勝 T。",
+          "S 勝 1 場：S 已經贏了 Q，所以 S 對 T 輸了，T 勝 S。檢查 T：輸 P、Q、R，贏 S，勝 1 場 ✓。T 贏的是 S。"
+        ],
+        "zh-Hans": [
+          "每队比 4 场。P 胜 4 场，所以 P 全胜，Q、R、S、T 都输给 P。",
+          "Q 胜 2 场：Q 输给 P、S，赢了 R，所以剩下和 T 的比赛 Q 一定赢，Q 胜 T。",
+          "R 胜 2 场：R 输给 P、Q，剩下和 S、T 的两场都要赢，R 胜 S、R 胜 T。",
+          "S 胜 1 场：S 已经赢了 Q，所以 S 对 T 输了，T 胜 S。检查 T：输 P、Q、R，赢 S，胜 1 场 ✓。T 赢的是 S。"
+        ],
+        "en": [
+          "Each team plays 4 games. P has 4 wins, so P won every game and Q, R, S, T all lost to P.",
+          "Q has 2 wins: Q lost to P and S and beat R, so Q must have beaten T.",
+          "R has 2 wins: R lost to P and Q, so it won its two remaining games: R beat S and R beat T.",
+          "S has 1 win: S already beat Q, so S lost to T, i.e. T beat S. Check T: lost to P, Q, R and beat S, 1 win. T beat S."
+        ],
+        "ja": [
+          "どのチームも 4 試合です。P は 4 勝なので全勝で、Q、R、S、T はみな P に負けています。",
+          "Q は 2 勝：P と S に負け R に勝ったので、残りの T には勝っています。Q が T に勝ち。",
+          "R は 2 勝：P と Q に負けたので、残りの S、T との 2 試合はどちらも勝ち。R が S と T に勝ち。",
+          "S は 1 勝：すでに Q に勝っているので T には負け、T が S に勝ち。T を確認：P、Q、R に負け S に勝って 1 勝 ✓。T が勝ったのは S。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "composite_grid_shape",
+        "params": {
+          "rows": 6,
+          "cols": 7,
+          "filledCells": [
+            [
+              1,
+              1
+            ],
+            [
+              2,
+              2
+            ],
+            [
+              3,
+              3
+            ],
+            [
+              4,
+              4
+            ],
+            [
+              5,
+              5
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              0,
+              3
+            ],
+            [
+              0,
+              4
+            ],
+            [
+              0,
+              5
+            ],
+            [
+              0,
+              6
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              2,
+              0
+            ],
+            [
+              3,
+              0
+            ],
+            [
+              4,
+              0
+            ],
+            [
+              5,
+              0
+            ]
+          ],
+          "cellLabels": {
+            "0,6": "#",
+            "0,1": "P",
+            "1,0": "P",
+            "0,2": "Q",
+            "2,0": "Q",
+            "0,3": "R",
+            "3,0": "R",
+            "0,4": "S",
+            "4,0": "S",
+            "0,5": "T",
+            "5,0": "T",
+            "2,3": "1",
+            "3,2": "0",
+            "4,2": "1",
+            "2,4": "0",
+            "1,6": "4",
+            "2,6": "2",
+            "3,6": "2",
+            "4,6": "1",
+            "5,6": "1"
+          }
+        }
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "循環賽勝負表的推理",
+        "notes": "設計：從全勝隊開始，依勝場數逐隊補完勝負表。最接近的既有題：logic_grade10_015（五隊勝場 4、3、2、1 求第五隊）、combinatorics_grade8_058（五隊各贏 2 場的結果數）。本題要從表格和勝場數推出特定一場的勝負。",
+        "displayText": "改寫題（循環賽勝負表）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "邏輯",
+        "topicCode": "logic",
+        "subtopic": "循環賽勝負表",
+        "subtopicCode": "round_robin_table_deduce_result"
+      },
+      "reviewStatus": "ok"
     }
   ]
 }

@@ -7033,6 +7033,937 @@
         "subtopicCode": "lattice_points_forming_right_triangle"
       },
       "reviewStatus": "ok"
+    },
+    {
+      "id": "combinatorics_grade8_foundation_070",
+      "topic": "combinatorics",
+      "subtopic": "octahedron_simple_paths_top_to_bottom",
+      "tags": [
+        "c:graph_theory",
+        "c:basic_counting",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade8",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "如圖是一個正八面體的骨架（虛線是背面看不到的稜）：上頂點 T、下頂點 B，中間一圈 P、Q、R、S 四個點，每個中間點都和 T、B 以及左右相鄰的兩個中間點用稜相連。一隻小蟲從 T 沿著稜爬到 B，途中每個頂點最多經過一次（不一定要經過所有頂點）。一共有幾種不同的爬法？",
+        "zh-Hans": "如图是一个正八面体的骨架（虚线是背面看不到的棱）：上顶点 T、下顶点 B，中间一圈 P、Q、R、S 四个点，每个中间点都和 T、B 以及左右相邻的两个中间点用棱相连。一只小虫从 T 沿着棱爬到 B，途中每个顶点最多经过一次（不一定要经过所有顶点）。一共有几种不同的爬法？",
+        "en": "The figure shows the frame of a regular octahedron (dashed edges are hidden at the back): top vertex T, bottom vertex B, and a middle ring P, Q, R, S, each middle vertex joined by edges to T, B and its two neighbours in the ring. A bug crawls along edges from T to B, visiting each vertex at most once (it need not visit all of them). How many different routes are there?",
+        "ja": "図は正八面体の骨組みです（点線は裏側の見えない辺）。上の頂点 T、下の頂点 B、真ん中の輪に P、Q、R、S の 4 点があり、真ん中の点はどれも T、B、輪のとなりの 2 点と辺で結ばれています。虫が T から辺にそって B まで進みます。どの頂点も 2 回以上は通りません（すべて通る必要はありません）。進み方は何通りありますか。"
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "28"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "answer": {
+        "zh-Hant": "答案是 28。",
+        "zh-Hans": "答案是 28。",
+        "en": "The answer is 28.",
+        "ja": "答えは 28 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "T 只和中間 4 點相連，所以第一步一定走到中間某一點，有 4 種選擇；之後在中間這一圈上繞若干步，最後從所在的中間點直接下到 B（B 也只和中間點相連，到了 B 就結束）。",
+          "設第一步到了 P。在中間這一圈上不重複經過點：可以不再走（直接 P → B），1 種；或者沿圈往其中一個方向走 1、2、3 步再下到 B，方向有 2 種，步數有 3 種，共 2 × 3 = 6 種。不能回頭，因為回頭就會重複經過點。",
+          "所以從 P 開始有 1 + 6 = 7 種，第一步有 4 種，總共 4 × 7 = 28 種爬法。"
+        ],
+        "zh-Hans": [
+          "T 只和中间 4 点相连，所以第一步一定走到中间某一点，有 4 种选择；之后在中间这一圈上绕若干步，最后从所在的中间点直接下到 B（B 也只和中间点相连，到了 B 就结束）。",
+          "设第一步到了 P。在中间这一圈上不重复经过点：可以不再走（直接 P → B），1 种；或者沿圈往其中一个方向走 1、2、3 步再下到 B，方向有 2 种，步数有 3 种，共 2 × 3 = 6 种。不能回头，因为回头就会重复经过点。",
+          "所以从 P 开始有 1 + 6 = 7 种，第一步有 4 种，总共 4 × 7 = 28 种爬法。"
+        ],
+        "en": [
+          "T is joined only to the 4 middle vertices, so the first move goes to one of them: 4 choices. Then the bug walks some steps around the middle ring and finally goes straight down to B from where it is (B is also joined only to middle vertices, and the walk ends there).",
+          "Say the first move reaches P. Moving around the ring without repeating a vertex: either no ring steps (P → B), 1 way; or 1, 2 or 3 steps in one direction and then down to B: 2 directions × 3 lengths = 6 ways. Turning back is impossible, since it would repeat a vertex.",
+          "So there are 1 + 6 = 7 routes from P, and with 4 first moves the total is 4 × 7 = 28."
+        ],
+        "ja": [
+          "T は真ん中の 4 点としか結ばれていないので、最初はそのどれかへ進み 4 通り。そのあと真ん中の輪の上を何歩か進み、最後にいる点から B へ下ります（B も真ん中の点としか結ばれず、B に着いたら終わり）。",
+          "最初に P に着いたとします。輪の上を同じ点を通らずに進むのは、進まずにすぐ P → B の 1 通りか、どちらかの向きに 1、2、3 歩進んでから B へ下りるかで、向き 2 通り × 歩数 3 通り = 6 通り。引き返すと同じ点を通るのでできません。",
+          "P からは 1 + 6 = 7 通りで、最初の 4 通りと合わせて 4 × 7 = 28 通り。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "geometry_scene",
+        "params": {
+          "bounds": {
+            "minX": -3.4,
+            "minY": -3.8,
+            "maxX": 3.4,
+            "maxY": 3.8
+          },
+          "points": [
+            {
+              "name": "T",
+              "x": 0,
+              "y": 3.4,
+              "pos": "t"
+            },
+            {
+              "name": "B",
+              "x": 0,
+              "y": -3.4,
+              "pos": "b"
+            },
+            {
+              "name": "P",
+              "x": -2.6,
+              "y": 0.2,
+              "pos": "l"
+            },
+            {
+              "name": "Q",
+              "x": -0.8,
+              "y": -0.9,
+              "pos": "bl"
+            },
+            {
+              "name": "R",
+              "x": 2.6,
+              "y": -0.2,
+              "pos": "r"
+            },
+            {
+              "name": "S",
+              "x": 0.8,
+              "y": 0.9,
+              "pos": "tr"
+            }
+          ],
+          "segments": [
+            {
+              "from": "T",
+              "to": "P",
+              "style": "solid"
+            },
+            {
+              "from": "B",
+              "to": "P",
+              "style": "solid"
+            },
+            {
+              "from": "T",
+              "to": "Q",
+              "style": "solid"
+            },
+            {
+              "from": "B",
+              "to": "Q",
+              "style": "solid"
+            },
+            {
+              "from": "T",
+              "to": "R",
+              "style": "solid"
+            },
+            {
+              "from": "B",
+              "to": "R",
+              "style": "solid"
+            },
+            {
+              "from": "T",
+              "to": "S",
+              "style": "construction"
+            },
+            {
+              "from": "B",
+              "to": "S",
+              "style": "construction"
+            },
+            {
+              "from": "P",
+              "to": "Q",
+              "style": "solid"
+            },
+            {
+              "from": "Q",
+              "to": "R",
+              "style": "solid"
+            },
+            {
+              "from": "R",
+              "to": "S",
+              "style": "construction"
+            },
+            {
+              "from": "S",
+              "to": "P",
+              "style": "construction"
+            }
+          ]
+        }
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "正八面體骨架上的不重複路徑",
+        "notes": "設計：路徑結構固定為「T → 中間點 → 沿圈單向若干步 → B」，分步數與方向計數。最接近的既有題：combinatorics_grade8_064（正六邊形加中心從 A 到 D 不重複，21）、combinatorics_grade8_067（公園小路一筆走完）、combinatorics_grade10_018（正方體最短路線）。全庫沒有正八面體的路徑計數；圖提供頂點的連接方式。",
+        "displayText": "改寫題（正八面體上的路徑）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "組合",
+        "topicCode": "combinatorics",
+        "subtopic": "正八面體上的路徑",
+        "subtopicCode": "octahedron_simple_paths_top_to_bottom"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "combinatorics_grade8_foundation_071",
+      "topic": "combinatorics",
+      "subtopic": "ladder_graph_self_avoiding_paths",
+      "tags": [
+        "c:basic_counting",
+        "c:graph_theory",
+        "m:bijection"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade8",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "如圖是一個「梯子」形的道路網：上下兩條長路，中間有 6 條橫檔把它們連起來，A 在左下角、B 在右上角。小安從 A 沿著道路走到 B，可以往任何方向走，但每個路口（圖中的點）最多只能經過一次。一共有幾種不同的走法？",
+        "zh-Hans": "如图是一个「梯子」形的道路网：上下两条长路，中间有 6 条横档把它们连起来，A 在左下角、B 在右上角。小安从 A 沿着道路走到 B，可以往任何方向走，但每个路口（图中的点）最多只能经过一次。一共有几种不同的走法？",
+        "en": "The figure shows a ladder-shaped road network: two long roads, upper and lower, joined by 6 rungs, with A at the bottom-left and B at the top-right. An walks along the roads from A to B in any direction, but may pass each junction (dot) at most once. How many different routes are there?",
+        "ja": "図は「はしご」の形の道路です。上と下に長い道が 2 本あり、6 本の横木でつながっています。A は左下、B は右上です。アンさんは A から B まで道にそって進みます。どの向きに進んでもかまいませんが、どの交差点（図の点）も 2 回以上は通れません。進み方は何通りありますか。"
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "32"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "answer": {
+        "zh-Hant": "答案是 32。",
+        "zh-Hans": "答案是 32。",
+        "en": "The answer is 32.",
+        "ja": "答えは 32 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "先說明路線不會往左走：如果在某一條長路上往左走，回頭再往右時一定要經過已走過的路口（另一條長路在那一段也已經走過或會被擋住），所以路線只會往右，並在某些橫檔上換到另一條長路。",
+          "於是一條路線就等於「在 6 條橫檔中選哪些要走」：在每一條選到的橫檔上換一次邊，其他地方都沿著所在的長路往右走。",
+          "從下面的 A 出發、要停在上面的 B，換邊的次數必須是奇數。6 條橫檔共有 2⁶ = 64 種選法，其中選奇數條和選偶數條的一樣多（第 6 條選或不選，會把奇偶互換），所以奇數條的有 64 ÷ 2 = 32 種。",
+          "一共有 32 種走法。"
+        ],
+        "zh-Hans": [
+          "先说明路线不会往左走：如果在某一条长路上往左走，回头再往右时一定要经过已走过的路口（另一条长路在那一段也已经走过或会被挡住），所以路线只会往右，并在某些横档上换到另一条长路。",
+          "于是一条路线就等于「在 6 条横档中选哪些要走」：在每一条选到的横档上换一次边，其他地方都沿着所在的长路往右走。",
+          "从下面的 A 出发、要停在上面的 B，换边的次数必须是奇数。6 条横档共有 2⁶ = 64 种选法，其中选奇数条和选偶数条的一样多（第 6 条选或不选，会把奇偶互换），所以奇数条的有 64 ÷ 2 = 32 种。",
+          "一共有 32 种走法。"
+        ],
+        "en": [
+          "First, a route never goes left: if it went left along one road, turning back to the right would force it through a junction already used (the other road over that stretch is already used or blocked), so the route always moves right and switches roads on some rungs.",
+          "So a route is just a choice of which of the 6 rungs to use: it switches sides on each chosen rung and otherwise goes right along its road.",
+          "Starting on the lower road at A and ending on the upper road at B, the number of switches must be odd. The 6 rungs give 2⁶ = 64 choices, and odd and even choices are equally many (using or not using the 6th rung swaps the parity), so 64 ÷ 2 = 32 are odd.",
+          "There are 32 routes."
+        ],
+        "ja": [
+          "まず、左へは進めません。どちらかの道を左へ進むと、もう一度右へもどるときにすでに通った交差点を通るしかない（その区間のもう一方の道も通ったか、ふさがれる）からです。よって道すじは右へ進みながら、いくつかの横木でもう一方の道に移るだけです。",
+          "つまり道すじは「6 本の横木のうちどれを使うか」の選び方と同じで、選んだ横木で道を乗りかえ、それ以外は今いる道を右へ進みます。",
+          "下の A から出発して上の B に着くので、乗りかえの回数は奇数です。6 本の選び方は 2⁶ = 64 通りで、奇数本と偶数本は同じ数だけある（6 本目を使うかどうかで奇偶が入れかわる）ので、奇数本は 64 ÷ 2 = 32 通り。",
+          "全部で 32 通り。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "geometry_scene",
+        "params": {
+          "bounds": {
+            "minX": -0.6,
+            "minY": -0.8,
+            "maxX": 5.6,
+            "maxY": 1.8
+          },
+          "points": [
+            {
+              "name": "u0",
+              "x": 0,
+              "y": 1,
+              "pos": "t",
+              "label": ""
+            },
+            {
+              "name": "d0",
+              "x": 0,
+              "y": 0,
+              "pos": "b",
+              "label": "A"
+            },
+            {
+              "name": "u1",
+              "x": 1,
+              "y": 1,
+              "pos": "t",
+              "label": ""
+            },
+            {
+              "name": "d1",
+              "x": 1,
+              "y": 0,
+              "pos": "b",
+              "label": ""
+            },
+            {
+              "name": "u2",
+              "x": 2,
+              "y": 1,
+              "pos": "t",
+              "label": ""
+            },
+            {
+              "name": "d2",
+              "x": 2,
+              "y": 0,
+              "pos": "b",
+              "label": ""
+            },
+            {
+              "name": "u3",
+              "x": 3,
+              "y": 1,
+              "pos": "t",
+              "label": ""
+            },
+            {
+              "name": "d3",
+              "x": 3,
+              "y": 0,
+              "pos": "b",
+              "label": ""
+            },
+            {
+              "name": "u4",
+              "x": 4,
+              "y": 1,
+              "pos": "t",
+              "label": ""
+            },
+            {
+              "name": "d4",
+              "x": 4,
+              "y": 0,
+              "pos": "b",
+              "label": ""
+            },
+            {
+              "name": "u5",
+              "x": 5,
+              "y": 1,
+              "pos": "t",
+              "label": "B"
+            },
+            {
+              "name": "d5",
+              "x": 5,
+              "y": 0,
+              "pos": "b",
+              "label": ""
+            }
+          ],
+          "segments": [
+            {
+              "from": "u0",
+              "to": "d0",
+              "style": "solid"
+            },
+            {
+              "from": "u0",
+              "to": "u1",
+              "style": "solid"
+            },
+            {
+              "from": "d0",
+              "to": "d1",
+              "style": "solid"
+            },
+            {
+              "from": "u1",
+              "to": "d1",
+              "style": "solid"
+            },
+            {
+              "from": "u1",
+              "to": "u2",
+              "style": "solid"
+            },
+            {
+              "from": "d1",
+              "to": "d2",
+              "style": "solid"
+            },
+            {
+              "from": "u2",
+              "to": "d2",
+              "style": "solid"
+            },
+            {
+              "from": "u2",
+              "to": "u3",
+              "style": "solid"
+            },
+            {
+              "from": "d2",
+              "to": "d3",
+              "style": "solid"
+            },
+            {
+              "from": "u3",
+              "to": "d3",
+              "style": "solid"
+            },
+            {
+              "from": "u3",
+              "to": "u4",
+              "style": "solid"
+            },
+            {
+              "from": "d3",
+              "to": "d4",
+              "style": "solid"
+            },
+            {
+              "from": "u4",
+              "to": "d4",
+              "style": "solid"
+            },
+            {
+              "from": "u4",
+              "to": "u5",
+              "style": "solid"
+            },
+            {
+              "from": "d4",
+              "to": "d5",
+              "style": "solid"
+            },
+            {
+              "from": "u5",
+              "to": "d5",
+              "style": "solid"
+            }
+          ]
+        }
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "梯子形道路網不重複路口的走法",
+        "notes": "設計：證明路線只能往右，於是路線 ↔ 橫檔的奇數子集，數成 2⁵。最接近的既有題：combinatorics_grade12_094（2 × 3 梯子拆 2 條路保持連通 15）、combinatorics_grade8_064（正六邊形加中心不重複路線 21）。本題要先論證不能往左，再做一一對應。",
+        "displayText": "改寫題（梯子形道路的走法）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "組合",
+        "topicCode": "combinatorics",
+        "subtopic": "梯子形道路的走法",
+        "subtopicCode": "ladder_graph_self_avoiding_paths"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "combinatorics_grade8_foundation_072",
+      "topic": "combinatorics",
+      "subtopic": "max_regions_cut_by_lines_general_position",
+      "tags": [
+        "c:sequence",
+        "c:basic_counting",
+        "m:direct"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade8",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "如圖，平面上 3 條直線兩兩相交、而且沒有三條交於同一點，把平面分成 7 塊。若平面上有 8 條直線，任兩條都不平行、任三條都不交於同一點，平面會被分成幾塊？",
+        "zh-Hans": "如图，平面上 3 条直线两两相交、而且没有三条交于同一点，把平面分成 7 块。若平面上有 8 条直线，任两条都不平行、任三条都不交于同一点，平面会被分成几块？",
+        "en": "As shown, 3 lines in the plane, each pair crossing and no three through one point, cut the plane into 7 regions. If there are 8 lines in the plane, no two parallel and no three through one point, into how many regions is the plane cut?",
+        "ja": "図のように、平面上の 3 本の直線がどの 2 本も交わり、3 本が 1 点で交わることはないとき、平面は 7 つの部分に分かれます。平面上に 8 本の直線があり、どの 2 本も平行でなく、どの 3 本も 1 点で交わらないとき、平面はいくつの部分に分かれますか。"
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "37"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "answer": {
+        "zh-Hant": "答案是 37。",
+        "zh-Hans": "答案是 37。",
+        "en": "The answer is 37.",
+        "ja": "答えは 37 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "一條直線把平面分成 2 塊。加入第 k 條直線時，它和前面 k − 1 條直線各交於一點，這些交點都不同，把它切成 k 段；每一段把它經過的那一塊一分為二，所以塊數增加 k。",
+          "檢查圖中的情形：1 條 2 塊，第 2 條加 2 塊得 4，第 3 條加 3 塊得 7 ✓。",
+          "8 條直線：2 + 2 + 3 + 4 + 5 + 6 + 7 + 8 = 1 + (1 + 2 + ⋯ + 8) = 1 + 36 = 37 塊。"
+        ],
+        "zh-Hans": [
+          "一条直线把平面分成 2 块。加入第 k 条直线时，它和前面 k − 1 条直线各交于一点，这些交点都不同，把它切成 k 段；每一段把它经过的那一块一分为二，所以块数增加 k。",
+          "检查图中的情形：1 条 2 块，第 2 条加 2 块得 4，第 3 条加 3 块得 7 ✓。",
+          "8 条直线：2 + 2 + 3 + 4 + 5 + 6 + 7 + 8 = 1 + (1 + 2 + ⋯ + 8) = 1 + 36 = 37 块。"
+        ],
+        "en": [
+          "One line cuts the plane into 2 regions. When the k-th line is added it meets each of the previous k − 1 lines at a different point, which cut it into k pieces; each piece splits the region it passes through in two, so the number of regions increases by k.",
+          "Check with the figure: 1 line gives 2 regions, the 2nd adds 2 to give 4, the 3rd adds 3 to give 7.",
+          "For 8 lines: 2 + 2 + 3 + 4 + 5 + 6 + 7 + 8 = 1 + (1 + 2 + ⋯ + 8) = 1 + 36 = 37 regions."
+        ],
+        "ja": [
+          "直線 1 本で平面は 2 つに分かれます。k 本目の直線を加えると、それまでの k − 1 本とそれぞれちがう点で交わり、k 個の部分に切られます。それぞれの部分が通る領域を 2 つに分けるので、領域は k 増えます。",
+          "図で確認：1 本で 2、2 本目で 2 増えて 4、3 本目で 3 増えて 7 ✓。",
+          "8 本では 2 + 2 + 3 + 4 + 5 + 6 + 7 + 8 = 1 + (1 + 2 + ⋯ + 8) = 1 + 36 = 37。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "geometry_scene",
+        "params": {
+          "bounds": {
+            "minX": -3.2,
+            "minY": -3.0,
+            "maxX": 3.2,
+            "maxY": 3.2
+          },
+          "points": [
+            {
+              "name": "_h1",
+              "x": -3,
+              "y": -1.2,
+              "pos": "r",
+              "visible": false
+            },
+            {
+              "name": "_h2",
+              "x": 3,
+              "y": 1.4,
+              "pos": "r",
+              "visible": false
+            },
+            {
+              "name": "_h3",
+              "x": -2.4,
+              "y": 2.9,
+              "pos": "r",
+              "visible": false
+            },
+            {
+              "name": "_h4",
+              "x": 1.6,
+              "y": -2.8,
+              "pos": "r",
+              "visible": false
+            },
+            {
+              "name": "_h5",
+              "x": -1,
+              "y": -2.8,
+              "pos": "r",
+              "visible": false
+            },
+            {
+              "name": "_h6",
+              "x": 2.6,
+              "y": 2.9,
+              "pos": "r",
+              "visible": false
+            }
+          ],
+          "segments": [
+            {
+              "from": "_h1",
+              "to": "_h2",
+              "style": "solid"
+            },
+            {
+              "from": "_h3",
+              "to": "_h4",
+              "style": "solid"
+            },
+            {
+              "from": "_h5",
+              "to": "_h6",
+              "style": "solid"
+            }
+          ]
+        }
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "一般位置的直線分割平面塊數",
+        "notes": "設計：第 k 條線被前面 k − 1 個交點切成 k 段、多出 k 塊，累加成 1 + n(n + 1)/2。最接近的既有題：geometry_grade7_074（5 條共點直線的對頂角對數）、combinatorics_grade10_120（六邊形對角線三角剖分）。全庫沒有「直線分割平面塊數」。",
+        "displayText": "改寫題（直線分割平面）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "組合",
+        "topicCode": "combinatorics",
+        "subtopic": "直線分割平面",
+        "subtopicCode": "max_regions_cut_by_lines_general_position"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "combinatorics_grade8_foundation_073",
+      "topic": "combinatorics",
+      "subtopic": "count_triangles_three_medians_figure",
+      "tags": [
+        "c:basic_counting",
+        "c:triangle",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade8",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "如圖，D、E、F 分別是 △ABC 三邊 BC、CA、AB 的中點，三條中線 AD、BE、CF 交於 G。圖中一共可以數出幾個三角形（三個頂點都是圖中的點，三條邊都在圖中的線段上）？",
+        "zh-Hans": "如图，D、E、F 分别是 △ABC 三边 BC、CA、AB 的中点，三条中线 AD、BE、CF 交于 G。图中一共可以数出几个三角形（三个顶点都是图中的点，三条边都在图中的线段上）？",
+        "en": "In the figure, D, E, F are the midpoints of sides BC, CA, AB of △ABC, and the three medians AD, BE, CF meet at G. How many triangles can be counted in the figure (all three vertices are labelled points and all three sides lie along drawn segments)?",
+        "ja": "図のように、D、E、F はそれぞれ △ABC の辺 BC、CA、AB の中点で、3 本の中線 AD、BE、CF は G で交わります。図の中に三角形はいくつありますか（3 つの頂点が図の点で、3 辺が図の線分の上にあるもの）。"
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "16"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "answer": {
+        "zh-Hant": "答案是 16。",
+        "zh-Hans": "答案是 16。",
+        "en": "The answer is 16.",
+        "ja": "答えは 16 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "三條中線把 △ABC 分成 6 個小三角形（以 G 為一個頂點）：AFG、BFG、BDG、CDG、CEG、AEG，共 6 個。",
+          "兩個小三角形合成的三角形：相鄰兩塊若沿著中線的一段相接、且外側兩邊在同一條直線上，就合成三角形，例如 AFG 和 BFG 合成 ABG。這樣的有 ABG、BCG、CAG，共 3 個。",
+          "三個小三角形合成的三角形：每條中線把 △ABC 分成兩半，例如 AD 分成 ABD 和 ACD，三條中線共 6 個；6 塊全部就是 △ABC 本身，1 個。四塊或五塊拼不成三角形。",
+          "一共 6 + 3 + 6 + 1 = 16 個三角形。"
+        ],
+        "zh-Hans": [
+          "三条中线把 △ABC 分成 6 个小三角形（以 G 为一个顶点）：AFG、BFG、BDG、CDG、CEG、AEG，共 6 个。",
+          "两个小三角形合成的三角形：相邻两块若沿着中线的一段相接、且外侧两边在同一条直线上，就合成三角形，例如 AFG 和 BFG 合成 ABG。这样的有 ABG、BCG、CAG，共 3 个。",
+          "三个小三角形合成的三角形：每条中线把 △ABC 分成两半，例如 AD 分成 ABD 和 ACD，三条中线共 6 个；6 块全部就是 △ABC 本身，1 个。四块或五块拼不成三角形。",
+          "一共 6 + 3 + 6 + 1 = 16 个三角形。"
+        ],
+        "en": [
+          "The three medians cut △ABC into 6 small triangles with vertex G: AFG, BFG, BDG, CDG, CEG, AEG: 6.",
+          "Triangles made of two small ones: two neighbours sharing part of a median whose outer sides lie on one line form a triangle, for example AFG and BFG form ABG. These are ABG, BCG, CAG: 3.",
+          "Triangles made of three small ones: each median cuts △ABC into two halves, e.g. AD gives ABD and ACD, so 6 in all; and all six pieces form △ABC itself, 1. Four or five pieces never form a triangle.",
+          "In total 6 + 3 + 6 + 1 = 16 triangles."
+        ],
+        "ja": [
+          "3 本の中線で △ABC は G を頂点とする 6 個の小さな三角形 AFG、BFG、BDG、CDG、CEG、AEG に分かれます。6 個。",
+          "小さな三角形 2 個でできる三角形：中線の一部を共有し、外側の 2 辺が一直線になるもので、たとえば AFG と BFG で ABG。ABG、BCG、CAG の 3 個。",
+          "小さな三角形 3 個でできる三角形：中線はそれぞれ △ABC を半分に分け、たとえば AD で ABD と ACD ができるので、3 本で 6 個。6 個全部で △ABC 自身の 1 個。4 個や 5 個では三角形になりません。",
+          "合計 6 + 3 + 6 + 1 = 16 個。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "geometry_scene",
+        "params": {
+          "bounds": {
+            "minX": -4.6,
+            "minY": -0.7,
+            "maxX": 4.6,
+            "maxY": 6.6
+          },
+          "points": [
+            {
+              "name": "A",
+              "x": 0,
+              "y": 6,
+              "pos": "t"
+            },
+            {
+              "name": "B",
+              "x": -4,
+              "y": 0,
+              "pos": "bl"
+            },
+            {
+              "name": "C",
+              "x": 4,
+              "y": 0,
+              "pos": "br"
+            },
+            {
+              "name": "D",
+              "x": 0,
+              "y": 0,
+              "pos": "b"
+            },
+            {
+              "name": "E",
+              "x": 2,
+              "y": 3,
+              "pos": "r"
+            },
+            {
+              "name": "F",
+              "x": -2,
+              "y": 3,
+              "pos": "l"
+            },
+            {
+              "name": "G",
+              "x": 0,
+              "y": 2,
+              "pos": "tr"
+            }
+          ],
+          "segments": [
+            {
+              "from": "A",
+              "to": "B",
+              "style": "solid"
+            },
+            {
+              "from": "B",
+              "to": "C",
+              "style": "solid"
+            },
+            {
+              "from": "C",
+              "to": "A",
+              "style": "solid"
+            },
+            {
+              "from": "A",
+              "to": "D",
+              "style": "solid"
+            },
+            {
+              "from": "B",
+              "to": "E",
+              "style": "solid"
+            },
+            {
+              "from": "C",
+              "to": "F",
+              "style": "solid"
+            }
+          ]
+        }
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "三條中線圖中的三角形個數",
+        "notes": "設計：依組成的小三角形塊數分類計數（1、2、3、6 塊）。最接近的既有題：combinatorics_grade7_064（三角形內兩條 cevian 加一條線數三角形 15）、geometry_grade7_095（三條中線分成 6 塊的面積）。禁用的「三等分三角形數三角形」是另一種圖形；本題是三條中線共點。",
+        "displayText": "改寫題（中線圖數三角形）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "組合",
+        "topicCode": "combinatorics",
+        "subtopic": "中線圖數三角形",
+        "subtopicCode": "count_triangles_three_medians_figure"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "combinatorics_grade8_foundation_074",
+      "topic": "combinatorics",
+      "subtopic": "distinct_lines_through_3x3_dot_grid",
+      "tags": [
+        "c:basic_counting",
+        "m:reverse"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade8",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "如圖，9 個點排成 3 × 3 的正方形點陣（相鄰兩點距離相同）。通過其中至少 2 個點的直線一共有幾條？（圖中兩條虛線是例子：一條通過 3 個點，一條只通過 2 個點。）",
+        "zh-Hans": "如图，9 个点排成 3 × 3 的正方形点阵（相邻两点距离相同）。通过其中至少 2 个点的直线一共有几条？（图中两条虚线是例子：一条通过 3 个点，一条只通过 2 个点。）",
+        "en": "As shown, 9 points form a 3 × 3 square array (neighbouring points equally spaced). How many lines pass through at least 2 of the points? (The two dashed lines are examples: one passes through 3 points, the other through only 2.)",
+        "ja": "図のように、9 個の点が 3 × 3 の正方形に並んでいます（となりの点の間かくは同じ）。このうち少なくとも 2 点を通る直線は何本ありますか。（図の 2 本の点線は例で、1 本は 3 点を、もう 1 本は 2 点だけを通ります。）"
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "20"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "answer": {
+        "zh-Hant": "答案是 20。",
+        "zh-Hans": "答案是 20。",
+        "en": "The answer is 20.",
+        "ja": "答えは 20 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "任兩點決定一條直線，9 個點共有 C(9, 2) = 36 對。但通過 3 個點的直線會被它上面的 3 對點重複算 3 次。",
+          "通過 3 個點的直線：3 條橫線、3 條直線、2 條對角線，共 8 條；點陣中沒有通過 4 個點的直線，其他直線都只通過 2 個點。",
+          "8 條「3 點線」用掉 8 × 3 = 24 對點，剩下 36 − 24 = 12 對，每一對各決定一條只通過 2 點的直線。",
+          "直線一共有 8 + 12 = 20 條。"
+        ],
+        "zh-Hans": [
+          "任两点决定一条直线，9 个点共有 C(9, 2) = 36 对。但通过 3 个点的直线会被它上面的 3 对点重复算 3 次。",
+          "通过 3 个点的直线：3 条横线、3 条直线、2 条对角线，共 8 条；点阵中没有通过 4 个点的直线，其他直线都只通过 2 个点。",
+          "8 条「3 点线」用掉 8 × 3 = 24 对点，剩下 36 − 24 = 12 对，每一对各决定一条只通过 2 点的直线。",
+          "直线一共有 8 + 12 = 20 条。"
+        ],
+        "en": [
+          "Any two points determine a line, and 9 points give C(9, 2) = 36 pairs. But a line through 3 points is counted 3 times, once for each of its 3 pairs.",
+          "Lines through 3 points: 3 horizontal, 3 vertical and 2 diagonals, 8 in all; no line passes through 4 points, and every other line passes through exactly 2.",
+          "The 8 three-point lines use 8 × 3 = 24 pairs, leaving 36 − 24 = 12 pairs, each giving a line through exactly 2 points.",
+          "So there are 8 + 12 = 20 lines."
+        ],
+        "ja": [
+          "2 点で直線が 1 本決まり、9 点の組は C(9, 2) = 36 組。ただし 3 点を通る直線は、その上の 3 組で 3 回数えられます。",
+          "3 点を通る直線は横 3 本、たて 3 本、対角線 2 本の 8 本。4 点を通る直線はなく、ほかの直線はちょうど 2 点を通ります。",
+          "3 点を通る 8 本で 8 × 3 = 24 組を使い、残りの 36 − 24 = 12 組がそれぞれ 2 点だけを通る直線を 1 本ずつ決めます。",
+          "直線は全部で 8 + 12 = 20 本。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "geometry_scene",
+        "params": {
+          "bounds": {
+            "minX": -0.8,
+            "minY": -0.8,
+            "maxX": 2.8,
+            "maxY": 2.8
+          },
+          "points": [
+            {
+              "name": "d00",
+              "x": 0,
+              "y": 0,
+              "pos": "r",
+              "label": ""
+            },
+            {
+              "name": "d01",
+              "x": 0,
+              "y": 1,
+              "pos": "r",
+              "label": ""
+            },
+            {
+              "name": "d02",
+              "x": 0,
+              "y": 2,
+              "pos": "r",
+              "label": ""
+            },
+            {
+              "name": "d10",
+              "x": 1,
+              "y": 0,
+              "pos": "r",
+              "label": ""
+            },
+            {
+              "name": "d11",
+              "x": 1,
+              "y": 1,
+              "pos": "r",
+              "label": ""
+            },
+            {
+              "name": "d12",
+              "x": 1,
+              "y": 2,
+              "pos": "r",
+              "label": ""
+            },
+            {
+              "name": "d20",
+              "x": 2,
+              "y": 0,
+              "pos": "r",
+              "label": ""
+            },
+            {
+              "name": "d21",
+              "x": 2,
+              "y": 1,
+              "pos": "r",
+              "label": ""
+            },
+            {
+              "name": "d22",
+              "x": 2,
+              "y": 2,
+              "pos": "r",
+              "label": ""
+            },
+            {
+              "name": "_h1",
+              "x": -0.6,
+              "y": -0.3,
+              "pos": "r",
+              "visible": false
+            },
+            {
+              "name": "_h2",
+              "x": 2.6,
+              "y": 1.3,
+              "pos": "r",
+              "visible": false
+            },
+            {
+              "name": "_h3",
+              "x": -0.5,
+              "y": -0.5,
+              "pos": "r",
+              "visible": false
+            },
+            {
+              "name": "_h4",
+              "x": 2.5,
+              "y": 2.5,
+              "pos": "r",
+              "visible": false
+            }
+          ],
+          "segments": [
+            {
+              "from": "_h1",
+              "to": "_h2",
+              "style": "construction"
+            },
+            {
+              "from": "_h3",
+              "to": "_h4",
+              "style": "construction"
+            }
+          ]
+        }
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "3 × 3 點陣決定的直線數",
+        "notes": "設計：點對計數再扣掉三點共線的重複，3 點線佔 3 對。最接近的既有題：combinatorics_grade11_006（4 × 4 點陣不共線三點 516）、combinatorics_grade8_013（10 點中 4 點共線的三角形數）。本題數的是直線而非三角形，重複的扣法不同。",
+        "displayText": "改寫題（點陣決定的直線數）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "組合",
+        "topicCode": "combinatorics",
+        "subtopic": "點陣決定的直線數",
+        "subtopicCode": "distinct_lines_through_3x3_dot_grid"
+      },
+      "reviewStatus": "ok"
     }
   ]
 }

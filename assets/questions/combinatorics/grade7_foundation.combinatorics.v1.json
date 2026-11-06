@@ -6356,6 +6356,411 @@
         "subtopicCode": "rectangles_inside_plus_shape"
       },
       "reviewStatus": "ok"
+    },
+    {
+      "id": "combinatorics_grade7_foundation_072",
+      "topic": "combinatorics",
+      "subtopic": "straight_tromino_tilings_3_by_7",
+      "tags": [
+        "c:recurrence",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade7",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "要用 7 塊 1 × 3 的長條積木把 3 × 7 的長方形（3 個橫列、7 個直行）剛好鋪滿，積木可以橫放或直放，不重疊也不超出。圖中是其中一種鋪法，寫著相同數字的 3 格是同一塊積木。一共有幾種鋪法？",
+        "zh-Hans": "要用 7 块 1 × 3 的长条积木把 3 × 7 的长方形（3 个行、7 个列）刚好铺满，积木可以横放或直放，不重叠也不超出。图中是其中一种铺法，写着相同数字的 3 格是同一块积木。一共有几种铺法？",
+        "en": "Seven 1 × 3 bars are to cover a 3 × 7 rectangle (3 rows, 7 columns) exactly, placed horizontally or vertically, without overlapping or sticking out. The figure shows one tiling; the 3 squares with the same number form one bar. How many tilings are there?",
+        "ja": "1 × 3 の細長いブロック 7 個で、3 × 7 の長方形（横 3 行、たて 7 列）をすき間なく重ならずにしきつめます。ブロックは横にもたてにも置けます。図はしきつめ方の 1 つで、同じ数字の 3 マスが 1 個のブロックです。しきつめ方は全部で何通りありますか。"
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "9"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "answer": {
+        "zh-Hant": "答案是 9。",
+        "zh-Hans": "答案是 9。",
+        "en": "The answer is 9.",
+        "ja": "答えは 9 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "看最左邊那一直行：如果它被一塊直放的積木蓋住，剩下 3 × (n − 1)；如果最左上那格是橫放，這一直行另外兩格也只能橫放（直放會蓋到上面那格），三塊橫放的積木疊成一個 3 × 3，剩下 3 × (n − 3)。",
+          "設 3 × n 有 f(n) 種鋪法，則 f(n) = f(n − 1) + f(n − 3)，而 f(0) = 1（不用鋪）、f(1) = 1、f(2) = 1。",
+          "f(3) = 1 + 1 = 2，f(4) = 2 + 1 = 3，f(5) = 3 + 1 = 4，f(6) = 4 + 2 = 6，f(7) = 6 + 3 = 9。",
+          "所以 3 × 7 一共有 9 種鋪法（圖中是「直、3 × 3 橫塊、直、直、直」那一種）。"
+        ],
+        "zh-Hans": [
+          "看最左边那一列：如果它被一块直放的积木盖住，剩下 3 × (n − 1)；如果最左上那格是横放，这一列另外两格也只能横放（直放会盖到上面那格），三块横放的积木叠成一个 3 × 3，剩下 3 × (n − 3)。",
+          "设 3 × n 有 f(n) 种铺法，则 f(n) = f(n − 1) + f(n − 3)，而 f(0) = 1（不用铺）、f(1) = 1、f(2) = 1。",
+          "f(3) = 1 + 1 = 2，f(4) = 2 + 1 = 3，f(5) = 3 + 1 = 4，f(6) = 4 + 2 = 6，f(7) = 6 + 3 = 9。",
+          "所以 3 × 7 一共有 9 种铺法（图中是「直、3 × 3 横块、直、直、直」那一种）。"
+        ],
+        "en": [
+          "Look at the leftmost column. If a vertical bar covers it, a 3 × (n − 1) board remains. If the top-left square is covered by a horizontal bar, the other two squares of that column must also be horizontal (a vertical bar would hit the top square), so three horizontal bars form a 3 × 3 block and a 3 × (n − 3) board remains.",
+          "Let f(n) be the number of tilings of 3 × n. Then f(n) = f(n − 1) + f(n − 3), with f(0) = 1 (nothing to cover), f(1) = 1, f(2) = 1.",
+          "f(3) = 1 + 1 = 2, f(4) = 2 + 1 = 3, f(5) = 3 + 1 = 4, f(6) = 4 + 2 = 6, f(7) = 6 + 3 = 9.",
+          "So the 3 × 7 rectangle has 9 tilings (the figure shows “vertical, 3 × 3 horizontal block, vertical, vertical, vertical”)."
+        ],
+        "ja": [
+          "いちばん左の列を見ます。たて置きのブロック 1 個でおおうと、3 × (n − 1) が残ります。左上のマスを横置きでおおうと、その列の残り 2 マスも横置きしかできず（たて置きは左上のマスに重なる）、横置き 3 個で 3 × 3 ができて 3 × (n − 3) が残ります。",
+          "3 × n のしきつめ方を f(n) 通りとすると f(n) = f(n − 1) + f(n − 3)、f(0) = 1（何もしかない）、f(1) = 1、f(2) = 1。",
+          "f(3) = 1 + 1 = 2、f(4) = 2 + 1 = 3、f(5) = 3 + 1 = 4、f(6) = 4 + 2 = 6、f(7) = 6 + 3 = 9。",
+          "よって 3 × 7 のしきつめ方は 9 通り（図は「たて、横 3 個の 3 × 3、たて、たて、たて」）。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "composite_grid_shape",
+        "params": {
+          "rows": 3,
+          "cols": 7,
+          "filledCells": [],
+          "cellLabels": {
+            "0,0": "1",
+            "1,0": "1",
+            "2,0": "1",
+            "0,1": "2",
+            "0,2": "2",
+            "0,3": "2",
+            "1,1": "3",
+            "1,2": "3",
+            "1,3": "3",
+            "2,1": "4",
+            "2,2": "4",
+            "2,3": "4",
+            "0,4": "5",
+            "1,4": "5",
+            "2,4": "5",
+            "0,5": "6",
+            "1,5": "6",
+            "2,5": "6",
+            "0,6": "7",
+            "1,6": "7",
+            "2,6": "7"
+          }
+        }
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "1 × 3 長條鋪滿 3 × 7",
+        "notes": "設計：看最左直行分兩類，得遞迴 f(n) = f(n − 1) + f(n − 3)。最接近的既有題：logic_grade8_066（5 × 5 拿掉一格用 1 × 3 鋪滿，染色論證）、combinatorics_grade9_042（5 × 5 用 8 條 1 × 3 與 1 個 1 × 1）、combinatorics_grade8_065（十字形骨牌鋪法 8）。前兩題問能否鋪、單格位置；本題計數且遞迴步長 1 與 3，不同。",
+        "displayText": "改寫題（1 × 3 長條鋪長方形計數）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "組合",
+        "topicCode": "combinatorics",
+        "subtopic": "1 × 3 長條鋪長方形計數",
+        "subtopicCode": "straight_tromino_tilings_3_by_7"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "combinatorics_grade7_foundation_073",
+      "topic": "combinatorics",
+      "subtopic": "seat_layout_two_people_not_adjacent",
+      "tags": [
+        "c:permutation_combination",
+        "m:reverse"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade7",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "如圖，一輛小車廂裡有 6 個座位（塗色的格子），排法和圖中一樣。6 個人各坐一個座位，其中小安和小美吵架了，不願意坐在相鄰的座位上（兩個座位共用一條邊才算相鄰，只有角碰在一起不算）。一共有幾種坐法？",
+        "zh-Hans": "如图，一辆小车厢里有 6 个座位（涂色的格子），排法和图中一样。6 个人各坐一个座位，其中小安和小美吵架了，不愿意坐在相邻的座位上（两个座位共用一条边才算相邻，只有角碰在一起不算）。一共有几种坐法？",
+        "en": "A small cabin has 6 seats (the shaded squares), arranged exactly as in the figure. Six people each take one seat, but An and Mei have quarrelled and refuse to sit in adjacent seats (two seats are adjacent only if they share a side; touching at a corner does not count). How many seatings are possible?",
+        "ja": "図のように、小さな車両に 6 つの座席（色のついたマス）があります。6 人が 1 席ずつすわりますが、アンさんとメイさんはけんかをしていて、となり合う席にすわりたくありません（辺を共有する 2 席だけをとなり合うとし、角だけで接するものはふくみません）。すわり方は全部で何通りありますか。"
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "480"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 3
+      },
+      "answer": {
+        "zh-Hant": "答案是 480。",
+        "zh-Hans": "答案是 480。",
+        "en": "The answer is 480.",
+        "ja": "答えは 480 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "不管限制，6 個人坐 6 個座位有 6! = 720 種坐法。",
+          "從圖數相鄰的座位對：第一排左邊和第二排左邊、第一排右邊和第二排右邊、第二排左和中、第二排中和右、第二排中和第三排，一共 5 對（第一排兩個座位中間隔著空格，不相鄰）。",
+          "小安和小美坐在相鄰座位的坐法：選 1 對相鄰座位 5 種，兩人誰坐哪邊 2 種，其餘 4 人坐 4 個座位 4! = 24 種，共 5 × 2 × 24 = 240 種。",
+          "所以符合要求的坐法有 720 − 240 = 480 種。"
+        ],
+        "zh-Hans": [
+          "不管限制，6 个人坐 6 个座位有 6! = 720 种坐法。",
+          "从图数相邻的座位对：第一排左边和第二排左边、第一排右边和第二排右边、第二排左和中、第二排中和右、第二排中和第三排，一共 5 对（第一排两个座位中间隔着空格，不相邻）。",
+          "小安和小美坐在相邻座位的坐法：选 1 对相邻座位 5 种，两人谁坐哪边 2 种，其余 4 人坐 4 个座位 4! = 24 种，共 5 × 2 × 24 = 240 种。",
+          "所以符合要求的坐法有 720 − 240 = 480 种。"
+        ],
+        "en": [
+          "Without the restriction, 6 people can sit in 6 seats in 6! = 720 ways.",
+          "Count adjacent pairs of seats in the figure: front-left with middle-left, front-right with middle-right, middle-left with middle-centre, middle-centre with middle-right, and middle-centre with the back seat: 5 pairs (the two front seats are separated by an empty square).",
+          "Seatings with An and Mei adjacent: choose one of the 5 adjacent pairs, 2 ways to place the two of them, and 4! = 24 ways for the other 4 people: 5 × 2 × 24 = 240.",
+          "So the number of acceptable seatings is 720 − 240 = 480."
+        ],
+        "ja": [
+          "制限がなければ、6 人が 6 席にすわる方法は 6! = 720 通り。",
+          "図でとなり合う席の組を数えると、1 列目左と 2 列目左、1 列目右と 2 列目右、2 列目の左と中、2 列目の中と右、2 列目の中と 3 列目の 5 組です（1 列目の 2 席は間が空いていて、となり合いません）。",
+          "アンさんとメイさんがとなり合うすわり方は、となり合う組の選び方 5 通り、2 人の左右 2 通り、残り 4 人の 4! = 24 通りで、5 × 2 × 24 = 240 通り。",
+          "よって条件に合うすわり方は 720 − 240 = 480 通り。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "composite_grid_shape",
+        "params": {
+          "rows": 3,
+          "cols": 3,
+          "filledCells": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              1,
+              2
+            ],
+            [
+              2,
+              1
+            ]
+          ],
+          "cellLabels": {}
+        }
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "特殊座位圖中兩人不相鄰的坐法",
+        "notes": "設計：補集合計數，相鄰座位對數 5 必須從不規則的座位圖數出。最接近的既有題：combinatorics_grade12_106（3 × 4 座位相鄰換位）、combinatorics_grade9_001（圓桌甲乙正對、丙丁相鄰）。前者是錯排配對、後者是圓排列；本題座位圖不規則，相鄰對數只能看圖。",
+        "displayText": "改寫題（不規則座位圖的不相鄰坐法）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "組合",
+        "topicCode": "combinatorics",
+        "subtopic": "不規則座位圖的不相鄰坐法",
+        "subtopicCode": "seat_layout_two_people_not_adjacent"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "combinatorics_grade7_foundation_074",
+      "topic": "combinatorics",
+      "subtopic": "strip_steps_one_two_with_slide_and_trap",
+      "tags": [
+        "c:recurrence",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade7",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "如圖，一排 10 格編號 1 到 10。棋子從 1 號格出發，每一步往右走 1 格或 2 格，要剛好停在 10 號格。塗色的兩格有機關：棋子一停在 4 號格，就立刻被送到 8 號格（從 8 號格繼續走）；6 號格是陷阱，不可以停在那裡（可以跳過）。從 1 號格到 10 號格一共有幾種走法？",
+        "zh-Hans": "如图，一排 10 格编号 1 到 10。棋子从 1 号格出发，每一步往右走 1 格或 2 格，要刚好停在 10 号格。涂色的两格有机关：棋子一停在 4 号格，就立刻被送到 8 号格（从 8 号格继续走）；6 号格是陷阱，不可以停在那里（可以跳过）。从 1 号格到 10 号格一共有几种走法？",
+        "en": "In the figure, 10 squares in a row are numbered 1 to 10. A token starts on square 1 and each move goes 1 or 2 squares to the right; it must stop exactly on square 10. The two shaded squares are special: whenever the token stops on square 4 it is sent at once to square 8 (and continues from 8); square 6 is a trap and the token may not stop there (it may jump over it). How many ways are there to get from square 1 to square 10?",
+        "ja": "図のように、1 列に並んだ 10 マスに 1 から 10 の番号があります。コマは 1 番から出発し、1 回に右へ 1 マスか 2 マス進み、ちょうど 10 番に止まらなければなりません。色のついた 2 マスにはしかけがあり、4 番に止まるとすぐに 8 番へ送られ（8 番から続ける）、6 番はわななので止まってはいけません（とびこすのはよい）。1 番から 10 番への進み方は何通りありますか。"
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "12"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "answer": {
+        "zh-Hant": "答案是 12。",
+        "zh-Hans": "答案是 12。",
+        "en": "The answer is 12.",
+        "ja": "答えは 12 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "設 g(k) 是從 k 號格走到 10 號格的走法數，從後面往前算：g(10) = 1，g(9) = 1（只能走 1 格），g(8) = g(9) + g(10) = 2，g(7) = g(8) + g(9) = 3。",
+          "6 號格不能停，所以從 5 號格只能走 2 格到 7：g(5) = g(7) = 3。停在 4 號格等於停在 8 號格。",
+          "g(3) = （走 1 格到 4，被送到 8）g(8) + （走 2 格到 5）g(5) = 2 + 3 = 5；g(2) = （到 3）g(3) + （到 4 再到 8）g(8) = 5 + 2 = 7。",
+          "g(1) = g(2) + g(3) = 7 + 5 = 12。所以一共有 12 種走法。"
+        ],
+        "zh-Hans": [
+          "设 g(k) 是从 k 号格走到 10 号格的走法数，从后面往前算：g(10) = 1，g(9) = 1（只能走 1 格），g(8) = g(9) + g(10) = 2，g(7) = g(8) + g(9) = 3。",
+          "6 号格不能停，所以从 5 号格只能走 2 格到 7：g(5) = g(7) = 3。停在 4 号格等于停在 8 号格。",
+          "g(3) = （走 1 格到 4，被送到 8）g(8) + （走 2 格到 5）g(5) = 2 + 3 = 5；g(2) = （到 3）g(3) + （到 4 再到 8）g(8) = 5 + 2 = 7。",
+          "g(1) = g(2) + g(3) = 7 + 5 = 12。所以一共有 12 种走法。"
+        ],
+        "en": [
+          "Let g(k) be the number of ways from square k to square 10, computed backwards: g(10) = 1, g(9) = 1 (only a 1-step), g(8) = g(9) + g(10) = 2, g(7) = g(8) + g(9) = 3.",
+          "Square 6 cannot be used, so from square 5 the only move is 2 squares to 7: g(5) = g(7) = 3. Stopping on square 4 is the same as stopping on square 8.",
+          "g(3) = (1 step to 4, sent to 8) g(8) + (2 steps to 5) g(5) = 2 + 3 = 5; g(2) = (to 3) g(3) + (to 4, sent to 8) g(8) = 5 + 2 = 7.",
+          "g(1) = g(2) + g(3) = 7 + 5 = 12. So there are 12 ways."
+        ],
+        "ja": [
+          "k 番から 10 番への進み方を g(k) 通りとし、後ろから計算します。g(10) = 1、g(9) = 1（1 マスだけ）、g(8) = g(9) + g(10) = 2、g(7) = g(8) + g(9) = 3。",
+          "6 番には止まれないので、5 番からは 2 マス進んで 7 番へ行くしかなく g(5) = g(7) = 3。4 番に止まることは 8 番に止まることと同じです。",
+          "g(3) =（1 マスで 4 番、8 番へ送られる）g(8) +（2 マスで 5 番）g(5) = 2 + 3 = 5。g(2) =（3 番へ）g(3) +（4 番から 8 番へ）g(8) = 5 + 2 = 7。",
+          "g(1) = g(2) + g(3) = 7 + 5 = 12。全部で 12 通り。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "composite_grid_shape",
+        "params": {
+          "rows": 1,
+          "cols": 10,
+          "filledCells": [
+            [
+              0,
+              3
+            ],
+            [
+              0,
+              5
+            ]
+          ],
+          "cellLabels": {
+            "0,0": "1",
+            "0,1": "2",
+            "0,2": "3",
+            "0,3": "4",
+            "0,4": "5",
+            "0,5": "6",
+            "0,6": "7",
+            "0,7": "8",
+            "0,8": "9",
+            "0,9": "10"
+          }
+        }
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "有滑梯與陷阱的一排格子走法",
+        "notes": "設計：1、2 步的遞推（費氏型）加上「傳送」與「禁停」兩種機關，要從終點倒推。最接近的既有題：combinatorics_grade10_130（荷葉青蛙有彈簧，求機率）、combinatorics_grade12_008（踏腳石每塊恰踩一次）。前者是機率、後者是排列限制；本題是計數遞推，機關位置看圖。",
+        "displayText": "改寫題（有傳送格與陷阱格的走法）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "組合",
+        "topicCode": "combinatorics",
+        "subtopic": "有傳送格與陷阱格的走法",
+        "subtopicCode": "strip_steps_one_two_with_slide_and_trap"
+      },
+      "reviewStatus": "ok"
+    },
+    {
+      "id": "combinatorics_grade7_foundation_075",
+      "topic": "combinatorics",
+      "subtopic": "count_grid_squares_avoiding_hole",
+      "tags": [
+        "c:basic_counting",
+        "m:reverse",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade7",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "如圖，4 × 5 的方格紙（4 個橫列、5 個直行）上，塗色的那一格被挖成了洞。沿著格線畫正方形（各種大小都算），而且正方形裡面不能包含那個洞。這樣的正方形一共有幾個？",
+        "zh-Hans": "如图，4 × 5 的方格纸（4 个行、5 个列）上，涂色的那一格被挖成了洞。沿着格线画正方形（各种大小都算），而且正方形里面不能包含那个洞。这样的正方形一共有几个？",
+        "en": "On the 4 × 5 grid shown (4 rows, 5 columns), the shaded square has been cut out as a hole. Squares of any size are drawn along the grid lines, and a square may not contain the hole. How many such squares are there?",
+        "ja": "図の 4 × 5 の方眼（横 4 行、たて 5 列）で、色のついたマスは穴があけてあります。方眼の線にそって、大きさにかかわらず正方形をかきますが、正方形の中に穴をふくんではいけません。このような正方形は何個ありますか。"
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "27"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "answer": {
+        "zh-Hant": "答案是 27。",
+        "zh-Hans": "答案是 27。",
+        "en": "The answer is 27.",
+        "ja": "答えは 27 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "先不管洞：1 × 1 有 4 × 5 = 20 個，2 × 2 有 3 × 4 = 12 個，3 × 3 有 2 × 3 = 6 個，4 × 4 有 1 × 2 = 2 個，共 40 個。",
+          "洞在第 2 橫列、第 3 直行。數含有洞的正方形：1 × 1 只有 1 個；2 × 2 的左上角可以在第 1、2 橫列和第 2、3 直行，共 2 × 2 = 4 個；3 × 3 的左上角在第 1、2 橫列、第 1、2、3 直行都會蓋到洞，共 2 × 3 = 6 個；4 × 4 的兩個都蓋到洞，2 個。",
+          "含有洞的共 1 + 4 + 6 + 2 = 13 個。",
+          "不含洞的正方形有 40 − 13 = 27 個。"
+        ],
+        "zh-Hans": [
+          "先不管洞：1 × 1 有 4 × 5 = 20 个，2 × 2 有 3 × 4 = 12 个，3 × 3 有 2 × 3 = 6 个，4 × 4 有 1 × 2 = 2 个，共 40 个。",
+          "洞在第 2 行、第 3 列。数含有洞的正方形：1 × 1 只有 1 个；2 × 2 的左上角可以在第 1、2 行和第 2、3 列，共 2 × 2 = 4 个；3 × 3 的左上角在第 1、2 行、第 1、2、3 列都会盖到洞，共 2 × 3 = 6 个；4 × 4 的两个都盖到洞，2 个。",
+          "含有洞的共 1 + 4 + 6 + 2 = 13 个。",
+          "不含洞的正方形有 40 − 13 = 27 个。"
+        ],
+        "en": [
+          "Ignoring the hole: 4 × 5 = 20 squares of size 1 × 1, 3 × 4 = 12 of size 2 × 2, 2 × 3 = 6 of size 3 × 3, 1 × 2 = 2 of size 4 × 4: 40 in all.",
+          "The hole is in row 2, column 3. Count the squares containing it: 1 of size 1 × 1; a 2 × 2 square contains it when its top-left square is in row 1 or 2 and column 2 or 3, 2 × 2 = 4; every 3 × 3 square (top-left in rows 1–2, columns 1–3) contains it, 2 × 3 = 6; both 4 × 4 squares contain it, 2.",
+          "So 1 + 4 + 6 + 2 = 13 squares contain the hole.",
+          "The number of squares avoiding the hole is 40 − 13 = 27."
+        ],
+        "ja": [
+          "穴を考えなければ、1 × 1 が 4 × 5 = 20 個、2 × 2 が 3 × 4 = 12 個、3 × 3 が 2 × 3 = 6 個、4 × 4 が 1 × 2 = 2 個で、合計 40 個。",
+          "穴は 2 行目 3 列目。穴をふくむ正方形を数えます。1 × 1 は 1 個。2 × 2 は左上のマスが 1、2 行目かつ 2、3 列目のとき穴をふくみ 2 × 2 = 4 個。3 × 3 は左上が 1、2 行目、1〜3 列目のどれでも穴をふくみ 2 × 3 = 6 個。4 × 4 は 2 個とも穴をふくむ。",
+          "穴をふくむのは 1 + 4 + 6 + 2 = 13 個。",
+          "穴をふくまない正方形は 40 − 13 = 27 個。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "composite_grid_shape",
+        "params": {
+          "rows": 4,
+          "cols": 5,
+          "filledCells": [
+            [
+              1,
+              2
+            ]
+          ],
+          "cellLabels": {}
+        }
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "挖洞方格中不含洞的正方形",
+        "notes": "設計：先數全部正方形，再扣掉含洞的（左上角位置的範圍），用補集合。最接近的既有題：geometry_grade6_088（5 × 5 包含正中央那格的長方形 81 個）、combinatorics_grade10_126（十字形內的正方形 62 個）。前者是長方形且「包含」，本題是正方形且「避開」、洞不在正中央，各尺寸要分開算。",
+        "displayText": "改寫題（避開洞的正方形個數）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "組合",
+        "topicCode": "combinatorics",
+        "subtopic": "避開洞的正方形個數",
+        "subtopicCode": "count_grid_squares_avoiding_hole"
+      },
+      "reviewStatus": "ok"
     }
   ]
 }
