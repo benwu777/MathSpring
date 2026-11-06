@@ -11301,6 +11301,991 @@
         "notes": "設計依據：中央一區被 5 區（奇數）圍成一圈，外圈兩色交替會在繞回時衝突，再加上中央一色，下界 4、構造 4。最接近 logic_grade7_foundation_024（4 國兩兩相鄰需 4 色）與 logic_grade9_foundation_033（8 個扇形需 2 色），本題的下界來自「奇數環 + 中心」而不是兩兩相鄰。已另行窮舉確認 3 色不可行、4 色可行。",
         "displayText": "MathSpring 改寫題（附圖）"
       }
+    },
+    {
+      "id": "logic_grade4_foundation_131",
+      "topic": "logic",
+      "subtopic": "light_up_bulbs_count",
+      "tags": [
+        "c:logic_deduction",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade4",
+      "challengeTier": "foundation",
+      "reviewStatus": "ok",
+      "prompt": {
+        "zh-Hant": "如圖是一個「點燈」謎題：塗色的格子是牆，其他白色格子是房間。要在一些白色格子裡放燈泡，規則是：① 燈泡會照亮自己那一格，以及同一橫排、同一直行上的格子，一直照到碰到牆或邊界為止；② 任兩個燈泡不可以互相照到；③ 牆上的數字表示這面牆上、下、左、右緊鄰的格子裡一共有幾個燈泡（沒寫數字的牆不限）；④ 最後每一個白色格子都要被照亮。照規則放好，一共要放幾個燈泡？",
+        "zh-Hans": "如图是一个“点灯”谜题：涂色的格子是墙，其他白色格子是房间。要在一些白色格子里放灯泡，规则是：① 灯泡会照亮自己那一格，以及同一横排、同一竖排上的格子，一直照到碰到墙或边界为止；② 任两个灯泡不可以互相照到；③ 墙上的数字表示这面墙上、下、左、右紧邻的格子里一共有几个灯泡（没写数字的墙不限）；④ 最后每一个白色格子都要被照亮。照规则放好，一共要放几个灯泡？",
+        "en": "The figure is a \"light up\" puzzle: shaded cells are walls and the white cells are rooms. Bulbs are placed in some white cells. Rules: (1) a bulb lights its own cell and the cells in its row and column, until the light reaches a wall or the edge; (2) no two bulbs may light each other; (3) a number on a wall tells how many bulbs are in the cells directly above, below, left and right of it (walls without numbers have no rule); (4) in the end every white cell must be lit. How many bulbs are needed?",
+        "ja": "図は「あかり」パズルです。色のついたマスはかべ、白いマスは部屋です。白いマスのいくつかに電球を置きます。ルール：① 電球は自分のマスと、同じ横の段・たての列のマスを、かべかはしにぶつかるまで照らす。② 2つの電球がたがいに照らし合ってはいけない。③ かべの数字は、そのかべの上下左右のとなりのマスにある電球の数を表す（数字のないかべは何個でもよい）。④ 最後にすべての白いマスが照らされている。ルールどおりに置くと、電球は全部で何個ですか。"
+      },
+      "answer": {
+        "zh-Hant": "一共要放 8 個燈泡。",
+        "zh-Hans": "一共要放 8 个灯泡。",
+        "en": "8 bulbs are needed.",
+        "ja": "電球は全部で 8 個です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "橫排由上往下叫第 1～6 排，直行由左往右叫第 1～6 行。第 1 排第 5 行的「3」只有三個白色鄰格（左、右、下），三格都要放燈泡；第 1 排第 1 行的「2」只有兩個白色鄰格（右、下），兩格都放燈泡。",
+          "第 2 排第 4 行的「2」：它上面和右邊已經各有一個燈泡，夠 2 個了，所以它左邊、下面那兩格不能放。",
+          "第 3 排第 4 行那一格上下都是牆，自己又不能放（上一步），只能靠第 3 排的燈泡照到。第 3 排其他格子中，第 1、2、5、6 行都已經被上面的燈泡照到，不能再放；所以燈泡只能放在第 3 排第 3 行。",
+          "第 4 排第 2 行的「1」：它的上、左、右三格都已經被照到，只剩下面那一格（第 5 排第 2 行），放燈泡。",
+          "最後只剩第 6 排第 4 行沒被照到，而能照到它的格子都已被其他燈泡照到，所以它自己放燈泡。檢查：每格都亮、燈泡互不照到、數字都對。",
+          "燈泡一共 3 + 2 + 1 + 1 + 1 = 8 個。"
+        ],
+        "zh-Hans": [
+          "横排由上往下叫第 1～6 排，竖排由左往右叫第 1～6 列。第 1 排第 5 列的“3”只有三个白色邻格（左、右、下），三格都要放灯泡；第 1 排第 1 列的“2”只有两个白色邻格（右、下），两格都放灯泡。",
+          "第 2 排第 4 列的“2”：它上面和右边已经各有一个灯泡，够 2 个了，所以它左边、下面那两格不能放。",
+          "第 3 排第 4 列那一格上下都是墙，自己又不能放（上一步），只能靠第 3 排的灯泡照到。第 3 排其他格子中，第 1、2、5、6 列都已经被上面的灯泡照到，不能再放；所以灯泡只能放在第 3 排第 3 列。",
+          "第 4 排第 2 列的“1”：它的上、左、右三格都已经被照到，只剩下面那一格（第 5 排第 2 列），放灯泡。",
+          "最后只剩第 6 排第 4 列没被照到，而能照到它的格子都已被其他灯泡照到，所以它自己放灯泡。检查：每格都亮、灯泡互不照到、数字都对。",
+          "灯泡一共 3 + 2 + 1 + 1 + 1 = 8 个。"
+        ],
+        "en": [
+          "Number the rows 1–6 from the top and the columns 1–6 from the left. The \"3\" in row 1, column 5 has only three white neighbours (left, right, below), so all three get bulbs; the \"2\" in row 1, column 1 has only two (right, below), so both get bulbs.",
+          "The \"2\" in row 2, column 4 already has bulbs above it and to its right, so the cells to its left and below it get no bulb.",
+          "The cell in row 3, column 4 has walls above and below and cannot hold a bulb itself (previous step), so it can only be lit from row 3. In row 3, columns 1, 2, 5 and 6 are already lit from above and cannot hold bulbs, so the bulb must go in row 3, column 3.",
+          "The \"1\" in row 4, column 2: its cells above, left and right are already lit, so the bulb goes below it, in row 5, column 2.",
+          "Only row 6, column 4 is still dark, and every cell that could light it is already lit by another bulb, so it holds a bulb itself. Check: every cell is lit, no two bulbs see each other, and all numbers are right.",
+          "Bulbs: 3 + 2 + 1 + 1 + 1 = 8."
+        ],
+        "ja": [
+          "横の段を上から1〜6段目、たての列を左から1〜6列目とよびます。1段目5列目の「3」は白いとなりが左・右・下の3つしかないので、3つとも電球です。1段目1列目の「2」も白いとなりが右・下の2つだけなので、両方とも電球です。",
+          "2段目4列目の「2」は、上と右にもう電球があって2個そろったので、左と下のマスには置けません。",
+          "3段目4列目のマスは上下がかべで、自分にも置けない（前の手順）ので、3段目の電球でしか照らせません。3段目のほかのマスのうち 1、2、5、6 列目はもう上の電球に照らされていて置けないので、電球は3段目3列目です。",
+          "4段目2列目の「1」：上・左・右のマスはもう照らされているので、残る下のマス（5段目2列目）に電球を置きます。",
+          "最後に6段目4列目だけが暗く、そこを照らせるマスはどれもほかの電球に照らされているので、そのマス自身に電球を置きます。確かめ：全部のマスが明るく、電球どうしは照らし合わず、数字も合っています。",
+          "電球は 3 + 2 + 1 + 1 + 1 = 8 個です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "composite_grid_shape",
+        "params": {
+          "rows": 6,
+          "cols": 6,
+          "filledCells": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              0,
+              4
+            ],
+            [
+              1,
+              3
+            ],
+            [
+              3,
+              1
+            ],
+            [
+              3,
+              3
+            ],
+            [
+              5,
+              4
+            ]
+          ],
+          "cellLabels": {
+            "0,0": "2",
+            "0,4": "3",
+            "1,3": "2",
+            "3,1": "1"
+          }
+        }
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "8"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "點燈謎題：數字牆與光線互不照到的推理",
+        "notes": "設計依據：「點燈（Light Up）」謎題。全庫 subtopic 查 light／lamp／bulb：只有開關切換類（lights_out_min_presses、lamp_buttons_toggle_neighbors_all_on）與 street_lamps_cover_houses_minimum，沒有點燈謎題；最接近的方格演繹題是 logic_grade5_foundation_121（數字表示看得到的白格數）與 logic_grade4_foundation_119 踩地雷，規則與推理都不同。答案唯一性已另行窮舉確認，詳解是一條不需猜測的推理鏈。",
+        "displayText": "MathSpring 改寫題（附圖）"
+      }
+    },
+    {
+      "id": "logic_grade4_foundation_132",
+      "topic": "logic",
+      "subtopic": "square_vertices_from_edge_and_diagonal_sums",
+      "tags": [
+        "c:add_sub",
+        "c:logic_deduction",
+        "m:direct"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade4",
+      "challengeTier": "foundation",
+      "reviewStatus": "ok",
+      "prompt": {
+        "zh-Hant": "如圖，正方形 ABCD 的四個頂點各藏著一個數。四條邊和對角線 AC 旁邊寫的數，等於這條線兩端的兩個頂點藏的數加起來。D 藏的數是多少？",
+        "zh-Hans": "如图，正方形 ABCD 的四个顶点各藏着一个数。四条边和对角线 AC 旁边写的数，等于这条线两端的两个顶点藏的数加起来。D 藏的数是多少？",
+        "en": "Each vertex of square ABCD hides a number. The number written beside each side and beside the diagonal AC is the sum of the numbers hidden at the two ends of that line. What number is hidden at D?",
+        "ja": "図の正方形 ABCD の4つの頂点には、それぞれ数がかくれています。4つの辺と対角線 AC のそばに書かれた数は、その線の両はしの頂点にかくれた数の和です。D にかくれている数はいくつですか。"
+      },
+      "answer": {
+        "zh-Hant": "D 藏的數是 6。",
+        "zh-Hans": "D 藏的数是 6。",
+        "en": "The number at D is 6.",
+        "ja": "D の数は 6 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "AB 與 BC 加起來：(A + B) + (B + C) = 13 + 17 = 30，這等於 A + C 再加上兩個 B。",
+          "對角線 AC 說 A + C = 14，所以兩個 B 是 30 − 14 = 16，B = 8。",
+          "由 AB：A = 13 − 8 = 5；再由 DA：D = 11 − 5 = 6。",
+          "驗算：C = 14 − 5 = 9，CD = 9 + 6 = 15，和圖上一樣。D = 6。"
+        ],
+        "zh-Hans": [
+          "AB 与 BC 加起来：(A + B) + (B + C) = 13 + 17 = 30，这等于 A + C 再加上两个 B。",
+          "对角线 AC 说 A + C = 14，所以两个 B 是 30 − 14 = 16，B = 8。",
+          "由 AB：A = 13 − 8 = 5；再由 DA：D = 11 − 5 = 6。",
+          "验算：C = 14 − 5 = 9，CD = 9 + 6 = 15，和图上一样。D = 6。"
+        ],
+        "en": [
+          "Add AB and BC: (A + B) + (B + C) = 13 + 17 = 30, which is A + C plus two Bs.",
+          "The diagonal says A + C = 14, so two Bs make 30 − 14 = 16 and B = 8.",
+          "From AB, A = 13 − 8 = 5; from DA, D = 11 − 5 = 6.",
+          "Check: C = 14 − 5 = 9 and CD = 9 + 6 = 15, as in the figure. D = 6."
+        ],
+        "ja": [
+          "AB と BC をたすと (A + B) + (B + C) = 13 + 17 = 30 で、これは A + C に B を2つたしたものです。",
+          "対角線から A + C = 14 なので、B 2つ分は 30 − 14 = 16、B = 8 です。",
+          "AB から A = 13 − 8 = 5、DA から D = 11 − 5 = 6 です。",
+          "確かめ：C = 14 − 5 = 9 で CD = 9 + 6 = 15 となり、図と合います。D = 6 です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "geometry_scene",
+        "params": {
+          "bounds": {
+            "minX": -1.2,
+            "minY": -1.2,
+            "maxX": 7.2,
+            "maxY": 7.2
+          },
+          "points": [
+            {
+              "name": "A",
+              "x": 0,
+              "y": 0,
+              "pos": "bl"
+            },
+            {
+              "name": "B",
+              "x": 6,
+              "y": 0,
+              "pos": "br"
+            },
+            {
+              "name": "C",
+              "x": 6,
+              "y": 6,
+              "pos": "tr"
+            },
+            {
+              "name": "D",
+              "x": 0,
+              "y": 6,
+              "pos": "tl"
+            },
+            {
+              "name": "lab",
+              "x": 2.8,
+              "y": -0.75,
+              "visible": false,
+              "label": "13"
+            },
+            {
+              "name": "lbc",
+              "x": 6.15,
+              "y": 3,
+              "visible": false,
+              "label": "17"
+            },
+            {
+              "name": "lcd",
+              "x": 2.8,
+              "y": 6.75,
+              "visible": false,
+              "label": "15"
+            },
+            {
+              "name": "lda",
+              "x": -1.05,
+              "y": 3,
+              "visible": false,
+              "label": "11"
+            },
+            {
+              "name": "lac",
+              "x": 3.3,
+              "y": 2.4,
+              "visible": false,
+              "label": "14"
+            }
+          ],
+          "segments": [
+            {
+              "from": "A",
+              "to": "B",
+              "style": "solid"
+            },
+            {
+              "from": "B",
+              "to": "C",
+              "style": "solid"
+            },
+            {
+              "from": "C",
+              "to": "D",
+              "style": "solid"
+            },
+            {
+              "from": "D",
+              "to": "A",
+              "style": "solid"
+            },
+            {
+              "from": "A",
+              "to": "C",
+              "style": "construction"
+            }
+          ]
+        }
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "6"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 2
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "正方形四邊與一條對角線的兩端和，求頂點的數",
+        "notes": "設計依據：繞一圈的四個兩兩和不能定出四數，要再用對角線 AC 才能先解出 B。全庫最接近 logic_grade2_foundation_042（三數兩兩相加求最大）與 logic_grade6_foundation_039（四數六個兩兩和），都是給出全部兩兩和；本題只給五個和、配置在圖上，關鍵是「AB + BC − AC = 2B」。",
+        "displayText": "MathSpring 改寫題（附圖）"
+      }
+    },
+    {
+      "id": "logic_grade4_foundation_133",
+      "topic": "logic",
+      "subtopic": "arrow_signs_one_false_locate_treasure",
+      "tags": [
+        "c:logic_deduction",
+        "m:contradiction"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade4",
+      "challengeTier": "foundation",
+      "reviewStatus": "ok",
+      "prompt": {
+        "zh-Hant": "如圖，5 × 5 的花園裡有一格埋著寶藏。塗色的 5 格各插著一個箭頭牌子，每個牌子的意思是：「寶藏在這個箭頭指的方向上」，也就是在同一橫排或同一直行、箭頭前方的某一格（不一定緊鄰）。這 5 個牌子中剛好有 1 個是錯的，其他都是對的，而且寶藏不在插牌子的格子裡。寶藏在標著 A、B、C、D 的哪一格？",
+        "zh-Hans": "如图，5 × 5 的花园里有一格埋着宝藏。涂色的 5 格各插着一个箭头牌子，每个牌子的意思是：“宝藏在这个箭头指的方向上”，也就是在同一横排或同一竖排、箭头前方的某一格（不一定紧邻）。这 5 个牌子中刚好有 1 个是错的，其他都是对的，而且宝藏不在插牌子的格子里。宝藏在标着 A、B、C、D 的哪一格？",
+        "en": "A treasure is buried in one cell of the 5 × 5 garden. Each of the 5 shaded cells has an arrow sign meaning \"the treasure lies in the direction of this arrow\", that is, in some cell ahead of the arrow in the same row or column (not necessarily next to it). Exactly 1 of the 5 signs is wrong and the others are right, and the treasure is not under a sign. In which of the cells A, B, C, D is the treasure?",
+        "ja": "図の 5 × 5 の花だんのどこか1マスに宝物がうまっています。色のついた5マスには矢印のふだが立っていて、ふだの意味は「宝物はこの矢印の向きにある」、つまり同じ横の段かたての列で、矢印の先のどこかのマス（となりとは限らない）にあるということです。5つのふだのうちちょうど1つがまちがいで、ほかは正しく、宝物はふだのあるマスにはありません。宝物は A、B、C、D のどのマスにありますか。"
+      },
+      "answer": {
+        "zh-Hant": "寶藏在 C 格。",
+        "zh-Hans": "宝藏在 C 格。",
+        "en": "The treasure is in cell C.",
+        "ja": "宝物は C のマスにあります。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "橫排由上往下叫第 1～5 排、直行由左往右叫第 1～5 行。第 2 排的「←」說寶藏在第 2 排；第 3 排的兩個「→」說寶藏在第 3 排。寶藏不可能同時在第 2 排和第 3 排。",
+          "如果錯的是第 3 排的某一個「→」，那第 3 排另一個「→」和第 2 排的「←」都是對的，又會同時要求第 2 排和第 3 排，還是矛盾。所以錯的一定是第 2 排的「←」，其他 4 個都對。",
+          "第 3 排第 3 行的「→」說寶藏在第 3 排第 4 或第 5 格；第 5 行的「↓」和「↑」都說寶藏在第 5 行。兩個條件同時成立的只有第 3 排第 5 行，也就是 C。",
+          "驗算：C 在第 3 排第 1 行「→」的右方、第 3 行「→」的右方，在第 1 排「↓」的下方、第 5 排「↑」的上方，4 個都對，只有「←」錯。答案是 C。"
+        ],
+        "zh-Hans": [
+          "横排由上往下叫第 1～5 排、竖排由左往右叫第 1～5 列。第 2 排的“←”说宝藏在第 2 排；第 3 排的两个“→”说宝藏在第 3 排。宝藏不可能同时在第 2 排和第 3 排。",
+          "如果错的是第 3 排的某一个“→”，那第 3 排另一个“→”和第 2 排的“←”都是对的，又会同时要求第 2 排和第 3 排，还是矛盾。所以错的一定是第 2 排的“←”，其他 4 个都对。",
+          "第 3 排第 3 列的“→”说宝藏在第 3 排第 4 或第 5 格；第 5 列的“↓”和“↑”都说宝藏在第 5 列。两个条件同时成立的只有第 3 排第 5 列，也就是 C。",
+          "验算：C 在第 3 排第 1 列“→”的右方、第 3 列“→”的右方，在第 1 排“↓”的下方、第 5 排“↑”的上方，4 个都对，只有“←”错。答案是 C。"
+        ],
+        "en": [
+          "Number the rows 1–5 from the top and the columns 1–5 from the left. The \"←\" in row 2 says the treasure is in row 2; the two \"→\" signs in row 3 say it is in row 3. It cannot be in both rows.",
+          "If the wrong sign were one of the \"→\" in row 3, the other \"→\" and the \"←\" would both be right and still demand rows 2 and 3 at once — impossible. So the wrong sign is the \"←\" in row 2, and the other 4 are right.",
+          "The \"→\" in row 3, column 3 puts the treasure in row 3, column 4 or 5; the \"↓\" and \"↑\" in column 5 both put it in column 5. Only row 3, column 5 satisfies both: cell C.",
+          "Check: C is to the right of both \"→\" signs in row 3, below the \"↓\" in row 1 and above the \"↑\" in row 5, so those 4 are right and only \"←\" is wrong. The answer is C."
+        ],
+        "ja": [
+          "横の段を上から1〜5段目、たての列を左から1〜5列目とよびます。2段目の「←」は宝物が2段目にあると言い、3段目の2つの「→」は3段目にあると言います。宝物が2段目と3段目の両方にあることはありません。",
+          "もしまちがいが3段目の「→」のどちらかなら、もう1つの「→」と2段目の「←」がどちらも正しくなり、やはり2段目と3段目の両方が必要になって矛盾します。よってまちがいは2段目の「←」で、ほかの4つは正しいです。",
+          "3段目3列目の「→」から宝物は3段目の4列目か5列目、5列目の「↓」と「↑」から宝物は5列目です。両方に合うのは3段目5列目、つまり C です。",
+          "確かめ：C は3段目の2つの「→」の右、1段目の「↓」の下、5段目の「↑」の上にあり、4つは正しく「←」だけがまちがいです。答えは C です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "composite_grid_shape",
+        "params": {
+          "rows": 5,
+          "cols": 5,
+          "filledCells": [
+            [
+              1,
+              2
+            ],
+            [
+              0,
+              4
+            ],
+            [
+              2,
+              2
+            ],
+            [
+              4,
+              4
+            ],
+            [
+              2,
+              0
+            ]
+          ],
+          "cellLabels": {
+            "1,2": "←",
+            "0,4": "↓",
+            "2,2": "→",
+            "4,4": "↑",
+            "2,0": "→",
+            "2,4": "C",
+            "1,0": "A",
+            "2,3": "B",
+            "3,4": "D"
+          }
+        }
+      },
+      "answerMode": "multiple_choice",
+      "options": {
+        "A": {
+          "zh-Hant": "A",
+          "zh-Hans": "A",
+          "en": "A",
+          "ja": "A"
+        },
+        "B": {
+          "zh-Hant": "B",
+          "zh-Hans": "B",
+          "en": "B",
+          "ja": "B"
+        },
+        "C": {
+          "zh-Hant": "C",
+          "zh-Hans": "C",
+          "en": "C",
+          "ja": "C"
+        },
+        "D": {
+          "zh-Hant": "D",
+          "zh-Hans": "D",
+          "en": "D",
+          "ja": "D"
+        }
+      },
+      "correctAnswer": {
+        "type": "choice",
+        "value": "C"
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "箭頭牌子恰有一個錯，找出寶藏的位置",
+        "notes": "設計依據：先找出互相矛盾的牌子（不同橫排的方向不能同時成立），用「只有一個錯」排除，剩下四個條件取交集。全庫 subtopic 查 arrow／sign／false：logic_grade1_foundation_172 是照箭頭走路；logic_grade5_foundation_115 是用距離線索找寶藏（全部為真）；沒有「箭頭牌子恰有一個錯」的題。答案唯一性已另行窮舉 20 個空格確認。",
+        "displayText": "MathSpring 改寫題（附圖）"
+      }
+    },
+    {
+      "id": "logic_grade4_foundation_134",
+      "topic": "logic",
+      "subtopic": "three_colour_map_forced_region",
+      "tags": [
+        "c:logic_deduction",
+        "m:coloring",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade4",
+      "challengeTier": "foundation",
+      "reviewStatus": "ok",
+      "prompt": {
+        "zh-Hant": "如圖是一張分成 A～H 八區的地圖，寫著同一個字母的格子屬於同一區。要用紅、藍、綠三種顏色替每一區塗色，有一段共同邊界的兩區不能同色（只碰到一個角不算）。已經決定 A 區塗紅色、B 區塗藍色。H 區一定要塗什麼顏色？",
+        "zh-Hans": "如图是一张分成 A～H 八区的地图，写着同一个字母的格子属于同一区。要用红、蓝、绿三种颜色替每一区涂色，有一段共同边界的两区不能同色（只碰到一个角不算）。已经决定 A 区涂红色、B 区涂蓝色。H 区一定要涂什么颜色？",
+        "en": "The map is divided into eight regions A–H; cells with the same letter belong to the same region. Each region is to be coloured red, blue or green, and two regions sharing a stretch of border must have different colours (touching at a corner does not count). A is red and B is blue. What colour must H be?",
+        "ja": "図は A〜H の8つの区に分かれた地図で、同じ文字のマスは同じ区です。赤・青・緑の3色で各区をぬり、さかい目の辺を共有する2つの区は同じ色にしません（角だけでふれるのは数えません）。A 区は赤、B 区は青にぬることが決まっています。H 区は何色にぬらなければなりませんか。"
+      },
+      "answer": {
+        "zh-Hant": "H 區一定塗紅色。",
+        "zh-Hans": "H 区一定涂红色。",
+        "en": "H must be red.",
+        "ja": "H 区は赤です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "D 和 E 都和 B（藍）相鄰，所以 D、E 只能是紅或綠；D 和 E 又互相相鄰，所以一個紅、一個綠。",
+          "G 同時和 D、E 相鄰，紅、綠都被用掉了，G 一定是藍色。",
+          "C 和 A（紅）、G（藍）相鄰，C 是綠色；D 和 C 相鄰，D 是紅色，所以 E 是綠色。",
+          "H 和 E（綠）、G（藍）相鄰，只剩紅色。H 一定塗紅色。"
+        ],
+        "zh-Hans": [
+          "D 和 E 都和 B（蓝）相邻，所以 D、E 只能是红或绿；D 和 E 又互相相邻，所以一个红、一个绿。",
+          "G 同时和 D、E 相邻，红、绿都被用掉了，G 一定是蓝色。",
+          "C 和 A（红）、G（蓝）相邻，C 是绿色；D 和 C 相邻，D 是红色，所以 E 是绿色。",
+          "H 和 E（绿）、G（蓝）相邻，只剩红色。H 一定涂红色。"
+        ],
+        "en": [
+          "D and E both border B (blue), so each is red or green; D and E also border each other, so one is red and the other green.",
+          "G borders both D and E, which use up red and green, so G is blue.",
+          "C borders A (red) and G (blue), so C is green; D borders C, so D is red and E is green.",
+          "H borders E (green) and G (blue), so only red is left. H must be red."
+        ],
+        "ja": [
+          "D と E はどちらも B（青）ととなり合うので赤か緑です。また D と E もとなり合うので、一方が赤、もう一方が緑です。",
+          "G は D とも E ともとなり合い、赤と緑が使われているので G は青です。",
+          "C は A（赤）と G（青）ととなり合うので緑、D は C ととなり合うので赤、よって E は緑です。",
+          "H は E（緑）と G（青）ととなり合うので、残る赤しかありません。H は赤です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "composite_grid_shape",
+        "params": {
+          "rows": 5,
+          "cols": 5,
+          "filledCells": [],
+          "cellLabels": {
+            "0,0": "A",
+            "0,1": "A",
+            "0,2": "B",
+            "0,3": "B",
+            "0,4": "B",
+            "1,0": "A",
+            "1,1": "C",
+            "1,2": "D",
+            "1,3": "D",
+            "1,4": "B",
+            "2,0": "C",
+            "2,1": "C",
+            "2,2": "D",
+            "2,3": "E",
+            "2,4": "E",
+            "3,0": "F",
+            "3,1": "C",
+            "3,2": "G",
+            "3,3": "G",
+            "3,4": "E",
+            "4,0": "F",
+            "4,1": "F",
+            "4,2": "G",
+            "4,3": "H",
+            "4,4": "H"
+          }
+        }
+      },
+      "answerMode": "multiple_choice",
+      "options": {
+        "A": {
+          "zh-Hant": "藍色",
+          "zh-Hans": "蓝色",
+          "en": "Blue",
+          "ja": "青"
+        },
+        "B": {
+          "zh-Hant": "紅色",
+          "zh-Hans": "红色",
+          "en": "Red",
+          "ja": "赤"
+        },
+        "C": {
+          "zh-Hant": "綠色",
+          "zh-Hans": "绿色",
+          "en": "Green",
+          "ja": "緑"
+        },
+        "D": {
+          "zh-Hant": "紅色或綠色都可以",
+          "zh-Hans": "红色或绿色都可以",
+          "en": "Either red or green",
+          "ja": "赤でも緑でもよい"
+        }
+      },
+      "correctAnswer": {
+        "type": "choice",
+        "value": "B"
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "三色地圖中由已塗的兩區推出遠處一區的顏色",
+        "notes": "設計依據：三色塗色的強迫連鎖（相鄰兩區分掉兩色 → 共同鄰區只剩一色）。全庫最接近 logic_grade4_foundation_130（同類字母地圖，問最少幾色）與 subtopic grid_proper_colouring_three_colours、map_four_colors（計數塗法），都不是「給兩區顏色推出另一區」；已窮舉 3⁶ 種塗法確認只有一種合法。",
+        "displayText": "MathSpring 改寫題（附圖）"
+      }
+    },
+    {
+      "id": "logic_grade4_foundation_135",
+      "topic": "logic",
+      "subtopic": "ladder_lottery_choose_rung_to_add",
+      "tags": [
+        "c:logic_deduction",
+        "m:reverse",
+        "m:casework"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade4",
+      "challengeTier": "foundation",
+      "reviewStatus": "ok",
+      "prompt": {
+        "zh-Hant": "如圖是一張「爬梯子」：從上面的字母出發往下走，碰到橫線就一定要沿著橫線走到旁邊那條直線，再繼續往下走，一直走到下面的數字。圖中實線是已經畫好的橫線，現在要從虛線 P、Q、R、S 中選一條加畫成實線，讓從 A 出發的人最後走到 5。應該加畫哪一條？",
+        "zh-Hans": "如图是一张“爬梯子”：从上面的字母出发往下走，碰到横线就一定要沿着横线走到旁边那条竖线，再继续往下走，一直走到下面的数字。图中实线是已经画好的横线，现在要从虚线 P、Q、R、S 中选一条加画成实线，让从 A 出发的人最后走到 5。应该加画哪一条？",
+        "en": "The figure is a \"ladder lottery\": start at a letter at the top and go down; whenever you meet a rung you must cross it to the next vertical line and keep going down, until you reach a number at the bottom. The solid rungs are already drawn. One of the dashed rungs P, Q, R, S is to be drawn in as a solid rung so that a path starting from A ends at 5. Which one?",
+        "ja": "図は「あみだくじ」です。上の文字から下へ進み、横線に出会ったら必ず横線をわたってとなりのたて線に移り、また下へ進んで、下の数字まで行きます。実線の横線はもうかいてあります。点線 P、Q、R、S のうち1本を実線にかき加えて、A から出発すると 5 に着くようにします。どれをかき加えればよいですか。"
+      },
+      "answer": {
+        "zh-Hant": "應該加畫 Q。",
+        "zh-Hans": "应该加画 Q。",
+        "en": "Draw in Q.",
+        "ja": "Q をかき加えます。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "先看不加線時 A 怎麼走：沿第 1 條直線往下，碰到第一條橫線走到第 2 條，再碰到同一對直線之間的第二條橫線又走回第 1 條，最後到 1，不是 5。",
+          "要走到 5，A 必須在第一次換到第 2 條直線之後、走回來之前，就離開第 1、2 條這一對。夾在這兩條橫線之間、接在第 2 條直線上的虛線只有 Q。",
+          "加畫 Q 後：A → 第 2 條 → 經 Q 到第 3 條 → 往下碰到第 3、4 條之間的橫線到第 4 條 → 再碰到最下面第 4、5 條之間的橫線到第 5 條，走到 5。",
+          "檢查其他虛線：沒有加線時 A 只走第 1、2 條直線，而 P、R、S 都接在第 3 條以右的直線之間，A 碰不到，加畫後 A 仍然走到 1。答案是 Q。"
+        ],
+        "zh-Hans": [
+          "先看不加线时 A 怎么走：沿第 1 条竖线往下，碰到第一条横线走到第 2 条，再碰到同一对竖线之间的第二条横线又走回第 1 条，最后到 1，不是 5。",
+          "要走到 5，A 必须在第一次换到第 2 条竖线之后、走回来之前，就离开第 1、2 条这一对。夹在这两条横线之间、接在第 2 条竖线上的虚线只有 Q。",
+          "加画 Q 后：A → 第 2 条 → 经 Q 到第 3 条 → 往下碰到第 3、4 条之间的横线到第 4 条 → 再碰到最下面第 4、5 条之间的横线到第 5 条，走到 5。",
+          "检查其他虚线：没有加线时 A 只走第 1、2 条竖线，而 P、R、S 都接在第 3 条以右的竖线之间，A 碰不到，加画后 A 仍然走到 1。答案是 Q。"
+        ],
+        "en": [
+          "Without a new rung, A goes down line 1, crosses the first rung to line 2, then meets a second rung between the same two lines and crosses back to line 1, ending at 1, not 5.",
+          "To reach 5, A must leave the pair of lines 1–2 after its first crossing and before it crosses back. The only dashed rung between those two rungs and attached to line 2 is Q.",
+          "With Q drawn: A → line 2 → across Q to line 3 → down to the rung between lines 3 and 4, to line 4 → down to the bottom rung between lines 4 and 5, to line 5, ending at 5.",
+          "Check the others: without a new rung A only uses lines 1 and 2, while P, R and S join lines from line 3 rightwards, so A never meets them and still ends at 1. The answer is Q."
+        ],
+        "ja": [
+          "横線を加えないとき、A は1本目を下り、最初の横線で2本目へ、同じ2本の間の2本目の横線でまた1本目にもどり、1 に着きます。5 ではありません。",
+          "5 に着くには、A が最初に2本目に移ったあと、もどる前に1本目・2本目の組から出なければなりません。その2本の横線の間にあり、2本目につながる点線は Q だけです。",
+          "Q を加えると、A → 2本目 → Q をわたって3本目 → 下って3本目と4本目の間の横線で4本目 → いちばん下の4本目と5本目の間の横線で5本目へ行き、5 に着きます。",
+          "ほかを確かめると、横線を加えないとき A は1本目と2本目しか通らず、P、R、S は3本目より右のたて線の間にあるので A は出会わず、やはり 1 に着きます。答えは Q です。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "geometry_scene",
+        "params": {
+          "bounds": {
+            "minX": -0.8,
+            "minY": -1.3,
+            "maxX": 8.8,
+            "maxY": 17.3
+          },
+          "points": [
+            {
+              "name": "t0",
+              "x": 0,
+              "y": 16,
+              "visible": false
+            },
+            {
+              "name": "b0",
+              "x": 0,
+              "y": 0,
+              "visible": false
+            },
+            {
+              "name": "tl0",
+              "x": -0.25,
+              "y": 16.7,
+              "visible": false,
+              "label": "A"
+            },
+            {
+              "name": "bl0",
+              "x": -0.2,
+              "y": -0.7,
+              "visible": false,
+              "label": "1"
+            },
+            {
+              "name": "t1",
+              "x": 2,
+              "y": 16,
+              "visible": false
+            },
+            {
+              "name": "b1",
+              "x": 2,
+              "y": 0,
+              "visible": false
+            },
+            {
+              "name": "tl1",
+              "x": 1.75,
+              "y": 16.7,
+              "visible": false,
+              "label": "B"
+            },
+            {
+              "name": "bl1",
+              "x": 1.8,
+              "y": -0.7,
+              "visible": false,
+              "label": "2"
+            },
+            {
+              "name": "t2",
+              "x": 4,
+              "y": 16,
+              "visible": false
+            },
+            {
+              "name": "b2",
+              "x": 4,
+              "y": 0,
+              "visible": false
+            },
+            {
+              "name": "tl2",
+              "x": 3.75,
+              "y": 16.7,
+              "visible": false,
+              "label": "C"
+            },
+            {
+              "name": "bl2",
+              "x": 3.8,
+              "y": -0.7,
+              "visible": false,
+              "label": "3"
+            },
+            {
+              "name": "t3",
+              "x": 6,
+              "y": 16,
+              "visible": false
+            },
+            {
+              "name": "b3",
+              "x": 6,
+              "y": 0,
+              "visible": false
+            },
+            {
+              "name": "tl3",
+              "x": 5.75,
+              "y": 16.7,
+              "visible": false,
+              "label": "D"
+            },
+            {
+              "name": "bl3",
+              "x": 5.8,
+              "y": -0.7,
+              "visible": false,
+              "label": "4"
+            },
+            {
+              "name": "t4",
+              "x": 8,
+              "y": 16,
+              "visible": false
+            },
+            {
+              "name": "b4",
+              "x": 8,
+              "y": 0,
+              "visible": false
+            },
+            {
+              "name": "tl4",
+              "x": 7.75,
+              "y": 16.7,
+              "visible": false,
+              "label": "E"
+            },
+            {
+              "name": "bl4",
+              "x": 7.8,
+              "y": -0.7,
+              "visible": false,
+              "label": "5"
+            },
+            {
+              "name": "r0a",
+              "x": 0,
+              "y": 10,
+              "visible": false
+            },
+            {
+              "name": "r0b",
+              "x": 2,
+              "y": 10,
+              "visible": false
+            },
+            {
+              "name": "r1a",
+              "x": 6,
+              "y": 8,
+              "visible": false
+            },
+            {
+              "name": "r1b",
+              "x": 8,
+              "y": 8,
+              "visible": false
+            },
+            {
+              "name": "r2a",
+              "x": 0,
+              "y": 6,
+              "visible": false
+            },
+            {
+              "name": "r2b",
+              "x": 2,
+              "y": 6,
+              "visible": false
+            },
+            {
+              "name": "r3a",
+              "x": 4,
+              "y": 4,
+              "visible": false
+            },
+            {
+              "name": "r3b",
+              "x": 6,
+              "y": 4,
+              "visible": false
+            },
+            {
+              "name": "r4a",
+              "x": 6,
+              "y": 2,
+              "visible": false
+            },
+            {
+              "name": "r4b",
+              "x": 8,
+              "y": 2,
+              "visible": false
+            },
+            {
+              "name": "c0a",
+              "x": 4,
+              "y": 13,
+              "visible": false
+            },
+            {
+              "name": "c0b",
+              "x": 6,
+              "y": 13,
+              "visible": false
+            },
+            {
+              "name": "cl0",
+              "x": 4.75,
+              "y": 13.45,
+              "visible": false,
+              "label": "P"
+            },
+            {
+              "name": "c1a",
+              "x": 2,
+              "y": 9,
+              "visible": false
+            },
+            {
+              "name": "c1b",
+              "x": 4,
+              "y": 9,
+              "visible": false
+            },
+            {
+              "name": "cl1",
+              "x": 2.75,
+              "y": 9.45,
+              "visible": false,
+              "label": "Q"
+            },
+            {
+              "name": "c2a",
+              "x": 6,
+              "y": 5,
+              "visible": false
+            },
+            {
+              "name": "c2b",
+              "x": 8,
+              "y": 5,
+              "visible": false
+            },
+            {
+              "name": "cl2",
+              "x": 6.75,
+              "y": 5.45,
+              "visible": false,
+              "label": "R"
+            },
+            {
+              "name": "c3a",
+              "x": 6,
+              "y": 9,
+              "visible": false
+            },
+            {
+              "name": "c3b",
+              "x": 8,
+              "y": 9,
+              "visible": false
+            },
+            {
+              "name": "cl3",
+              "x": 6.75,
+              "y": 9.45,
+              "visible": false,
+              "label": "S"
+            }
+          ],
+          "segments": [
+            {
+              "from": "t0",
+              "to": "b0",
+              "style": "solid"
+            },
+            {
+              "from": "t1",
+              "to": "b1",
+              "style": "solid"
+            },
+            {
+              "from": "t2",
+              "to": "b2",
+              "style": "solid"
+            },
+            {
+              "from": "t3",
+              "to": "b3",
+              "style": "solid"
+            },
+            {
+              "from": "t4",
+              "to": "b4",
+              "style": "solid"
+            },
+            {
+              "from": "r0a",
+              "to": "r0b",
+              "style": "solid"
+            },
+            {
+              "from": "r1a",
+              "to": "r1b",
+              "style": "solid"
+            },
+            {
+              "from": "r2a",
+              "to": "r2b",
+              "style": "solid"
+            },
+            {
+              "from": "r3a",
+              "to": "r3b",
+              "style": "solid"
+            },
+            {
+              "from": "r4a",
+              "to": "r4b",
+              "style": "solid"
+            },
+            {
+              "from": "c0a",
+              "to": "c0b",
+              "style": "construction"
+            },
+            {
+              "from": "c1a",
+              "to": "c1b",
+              "style": "construction"
+            },
+            {
+              "from": "c2a",
+              "to": "c2b",
+              "style": "construction"
+            },
+            {
+              "from": "c3a",
+              "to": "c3b",
+              "style": "construction"
+            }
+          ]
+        }
+      },
+      "answerMode": "multiple_choice",
+      "options": {
+        "A": {
+          "zh-Hant": "P",
+          "zh-Hans": "P",
+          "en": "P",
+          "ja": "P"
+        },
+        "B": {
+          "zh-Hant": "Q",
+          "zh-Hans": "Q",
+          "en": "Q",
+          "ja": "Q"
+        },
+        "C": {
+          "zh-Hant": "R",
+          "zh-Hans": "R",
+          "en": "R",
+          "ja": "R"
+        },
+        "D": {
+          "zh-Hant": "S",
+          "zh-Hans": "S",
+          "en": "S",
+          "ja": "S"
+        }
+      },
+      "correctAnswer": {
+        "type": "choice",
+        "value": "B"
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "爬梯子圖中選一條要加畫的橫線，使指定起點走到指定終點",
+        "notes": "設計依據：先追出原路徑，找出「必須在哪一段離開」，再檢查四條候選線。全庫爬梯子只有 logic_grade1_foundation_142（3 條直線、照走看終點，文字題）；本題要反推加線位置並排除其他候選，subtopic 無同類。已逐一驗證四條候選中只有 Q 能讓 A 走到 5。",
+        "displayText": "MathSpring 改寫題（附圖）"
+      }
     }
   ]
 }
