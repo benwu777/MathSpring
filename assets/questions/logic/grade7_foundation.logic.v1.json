@@ -7497,6 +7497,94 @@
         "subtopicCode": "max_path_length_checkerboard_bound"
       },
       "reviewStatus": "ok"
+    },
+    {
+      "id": "logic_grade7_foundation_078",
+      "topic": "logic",
+      "subtopic": "diagonal_latin_square_4x4_row",
+      "tags": [
+        "c:logic_deduction",
+        "m:direct"
+      ],
+      "difficulty": "foundation",
+      "levelStage": "grade7",
+      "challengeTier": "foundation",
+      "prompt": {
+        "zh-Hant": "如圖，要在 4 × 4 方格的每一格填入 1、2、3、4 其中一個數，使每一橫列、每一直行，以及兩條對角線上的 4 個數，都恰好是 1、2、3、4 各一個。圖中已經填好 4 個數。填好後，把第 3 橫列（由上往下數）的 4 個數由左到右寫成一個四位數，這個四位數是多少？",
+        "zh-Hans": "如图，要在 4 × 4 方格的每一格填入 1、2、3、4 其中一个数，使每一行、每一列，以及两条对角线上的 4 个数，都恰好是 1、2、3、4 各一个。图中已经填好 4 个数。填好后，把第 3 行（由上往下数）的 4 个数由左到右写成一个四位数，这个四位数是多少？",
+        "en": "Each square of the 4 × 4 grid is to get one of 1, 2, 3, 4 so that every row, every column and both diagonals contain each of 1, 2, 3, 4 exactly once. Four numbers are already filled in. When the grid is complete, write the 4 numbers of the third row (counting from the top) from left to right as a four-digit number. What is it?",
+        "ja": "図の 4 × 4 のマスに 1、2、3、4 のどれかを入れ、どの横の行、どのたての列、そして 2 本の対角線の 4 つの数も、1、2、3、4 が 1 つずつになるようにします。4 つの数はすでに入っています。完成したら、上から 3 行目の 4 つの数を左から並べて 4 けたの数にします。その数はいくつですか。"
+      },
+      "answerMode": "integer_input",
+      "correctAnswer": {
+        "type": "integer",
+        "value": "4321"
+      },
+      "inputConstraints": {
+        "allowNegative": false,
+        "maxDigits": 4
+      },
+      "answer": {
+        "zh-Hant": "答案是 4321。",
+        "zh-Hans": "答案是 4321。",
+        "en": "The answer is 4321.",
+        "ja": "答えは 4321 です。"
+      },
+      "solutionSteps": {
+        "zh-Hant": [
+          "用 (r, c) 表示第 r 橫列、第 c 直行。(1, 1)：同一列已有 2、同一行已有 3、4，只能填 1。(1, 3)：同列已有 1、2，同行已有 4，只能填 3；於是 (1, 4) = 4。",
+          "(2, 2)：同列有 3、同行有 2、左上到右下的對角線上已有 1，只能填 4。(3, 3)：同列有 4、同行有 3、4，對角線上有 1、4，只能填 2。(4, 1)：同行已有 1、3、4，填 2；(4, 4)：對角線上已有 1、4、2，填 3。",
+          "第 2 列已有 3、4，還缺 1、2，而第 3 行已有 2（在 (3, 3)），所以 (2, 3) = 1、(2, 4) = 2。第 3 列已有 4、2，還缺 1、3：(3, 2) 在右上到左下的對角線上，那條對角線已有 4、1、2，所以 (3, 2) = 3、(3, 4) = 1。最後一列是 2、1、4、3 ✓。",
+          "第 3 橫列由左到右是 4、3、2、1，四位數是 4321。"
+        ],
+        "zh-Hans": [
+          "用 (r, c) 表示第 r 行、第 c 列。(1, 1)：同一行已有 2、同一列已有 3、4，只能填 1。(1, 3)：同行已有 1、2，同列已有 4，只能填 3；于是 (1, 4) = 4。",
+          "(2, 2)：同行有 3、同列有 2、左上到右下的对角线上已有 1，只能填 4。(3, 3)：同行有 4、同列有 3、4，对角线上有 1、4，只能填 2。(4, 1)：同列已有 1、3、4，填 2；(4, 4)：对角线上已有 1、4、2，填 3。",
+          "第 2 行已有 3、4，还缺 1、2，而第 3 列已有 2（在 (3, 3)），所以 (2, 3) = 1、(2, 4) = 2。第 3 行已有 4、2，还缺 1、3：(3, 2) 在右上到左下的对角线上，那条对角线已有 4、1、2，所以 (3, 2) = 3、(3, 4) = 1。最后一行是 2、1、4、3 ✓。",
+          "第 3 行由左到右是 4、3、2、1，四位数是 4321。"
+        ],
+        "en": [
+          "Write (r, c) for row r, column c. (1, 1): its row has 2 and its column has 3, 4, so it is 1. (1, 3): its row has 1, 2 and its column has 4, so it is 3; then (1, 4) = 4.",
+          "(2, 2): its row has 3, its column has 2, and the main diagonal already has 1, so it is 4. (3, 3): its row has 4, its column has 3, 4, the diagonal has 1, 4, so it is 2. (4, 1): its column has 1, 3, 4, so 2; (4, 4): the diagonal has 1, 4, 2, so 3.",
+          "Row 2 has 3, 4 and needs 1, 2; column 3 already has 2 (at (3, 3)), so (2, 3) = 1 and (2, 4) = 2. Row 3 has 4, 2 and needs 1, 3; (3, 2) lies on the top-right to bottom-left diagonal, which already has 4, 1, 2, so (3, 2) = 3 and (3, 4) = 1. The last row is 2, 1, 4, 3.",
+          "Row 3 reads 4, 3, 2, 1, so the number is 4321."
+        ],
+        "ja": [
+          "(r, c) で r 行目 c 列目を表します。(1, 1)：同じ行に 2、同じ列に 3、4 があるので 1。(1, 3)：同じ行に 1、2、同じ列に 4 があるので 3、すると (1, 4) = 4。",
+          "(2, 2)：同じ行に 3、同じ列に 2、左上から右下の対角線に 1 があるので 4。(3, 3)：同じ行に 4、同じ列に 3、4、対角線に 1、4 があるので 2。(4, 1)：同じ列に 1、3、4 があるので 2。(4, 4)：対角線に 1、4、2 があるので 3。",
+          "2 行目には 3、4 があり 1、2 が足りません。3 列目にはすでに 2（(3, 3)）があるので (2, 3) = 1、(2, 4) = 2。3 行目には 4、2 があり 1、3 が足りません。(3, 2) は右上から左下の対角線の上にあり、その対角線にはすでに 4、1、2 があるので (3, 2) = 3、(3, 4) = 1。最後の行は 2、1、4、3 ✓。",
+          "3 行目は左から 4、3、2、1 なので、4 けたの数は 4321。"
+        ]
+      },
+      "figure": {
+        "type": "custom",
+        "kind": "composite_grid_shape",
+        "params": {
+          "rows": 4,
+          "cols": 4,
+          "filledCells": [],
+          "cellLabels": {
+            "0,1": "2",
+            "1,0": "3",
+            "2,0": "4",
+            "3,2": "4"
+          }
+        }
+      },
+      "source": {
+        "type": "rewritten_olympiad_style",
+        "name": "MathSpring 改寫題",
+        "reference": "對角線也不重複的 4 × 4 數獨",
+        "notes": "設計：4 × 4 拉丁方陣再加兩條對角線限制，4 個提示可逐格唯一推出。最接近的既有題：logic_grade8_068、logic_grade12_068（4 × 4 不等號拉丁方陣）、logic_grade5_120（字母拉丁方陣看進去第一個字母）。本題的關鍵限制是對角線，推理路徑不同。",
+        "displayText": "改寫題（對角線拉丁方陣）"
+      },
+      "olympiadTaxonomy": {
+        "topic": "邏輯",
+        "topicCode": "logic",
+        "subtopic": "對角線拉丁方陣",
+        "subtopicCode": "diagonal_latin_square_4x4_row"
+      },
+      "reviewStatus": "ok"
     }
   ]
 }
