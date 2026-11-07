@@ -58,7 +58,7 @@ void main() {
     ];
     return AppServices.forTesting(
       learnerProfiles: <LearnerProfile>[
-        LearnerProfile(
+        const LearnerProfile(
           id: 'learner_demo',
           displayName: '小安',
           levelStage: 'grade5',
