@@ -90,16 +90,19 @@ class _TopicActionGrid extends StatelessWidget {
       children: [
         _TopicActionButton(
           buttonKey: const ValueKey<String>('topic_action_geometry'),
+          topicCode: 'geometry',
           label: strings.topicGeometry,
           onPressed: () async => onTopicSelected('geometry'),
         ),
         _TopicActionButton(
           buttonKey: const ValueKey<String>('topic_action_arithmetic'),
+          topicCode: 'arithmetic',
           label: strings.topicArithmetic,
           onPressed: () async => onTopicSelected('arithmetic'),
         ),
         _TopicActionButton(
           buttonKey: const ValueKey<String>('topic_action_logic'),
+          topicCode: 'logic',
           label: strings.topicLogic,
           onPressed: () async => onTopicSelected('logic'),
         ),
@@ -111,11 +114,13 @@ class _TopicActionGrid extends StatelessWidget {
 class _TopicActionButton extends StatelessWidget {
   const _TopicActionButton({
     required this.buttonKey,
+    required this.topicCode,
     required this.label,
     required this.onPressed,
   });
 
   final Key buttonKey;
+  final String topicCode;
   final String label;
   final VoidCallback onPressed;
 
@@ -127,9 +132,9 @@ class _TopicActionButton extends StatelessWidget {
         key: buttonKey,
         onPressed: onPressed,
         style: OutlinedButton.styleFrom(
-          foregroundColor: const Color(0xFF111827),
+          foregroundColor: TopicPalette.accentOf(topicCode),
           minimumSize: const Size.fromHeight(52),
-          side: const BorderSide(color: Color(0xFFE5E7EB)),
+          side: BorderSide(color: TopicPalette.accentOf(topicCode), width: 1.5),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10),
           ),
@@ -376,6 +381,87 @@ class _InfoButton extends StatelessWidget {
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+/// 卡片左側的主題色細條：只是標記，卡片本體維持白底。
+class _TopicAccentStripe extends StatelessWidget {
+  const _TopicAccentStripe({required this.topicCode});
+
+  final String topicCode;
+
+  @override
+  Widget build(BuildContext context) {
+    return ColoredBox(
+      key: ValueKey<String>('topic_accent_$topicCode'),
+      color: TopicPalette.accentOf(topicCode),
+      child: const SizedBox(width: 5),
+    );
+  }
+}
+
+/// 把內容包成「左側主題色條＋原本的卡片」，圓角與外框不變。
+class _TopicAccentFrame extends StatelessWidget {
+  const _TopicAccentFrame({
+    required this.topicCode,
+    required this.decoration,
+    required this.padding,
+    required this.child,
+  });
+
+  final String topicCode;
+  final BoxDecoration decoration;
+  final EdgeInsetsGeometry padding;
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    final BorderRadius radius =
+        (decoration.borderRadius as BorderRadius?) ?? BorderRadius.zero;
+    return Container(
+      width: double.infinity,
+      decoration: decoration,
+      child: ClipRRect(
+        borderRadius: radius,
+        child: IntrinsicHeight(
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              _TopicAccentStripe(topicCode: topicCode),
+              Expanded(child: Padding(padding: padding, child: child)),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+/// 主題名稱的小標籤：白底，文字與外框用主題色。
+class _TopicChip extends StatelessWidget {
+  const _TopicChip({required this.topicCode, required this.label});
+
+  final String topicCode;
+  final String label;
+
+  @override
+  Widget build(BuildContext context) {
+    final Color accent = TopicPalette.accentOf(topicCode);
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 3),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(999),
+        border: Border.all(color: accent, width: 1.5),
+      ),
+      child: Text(
+        label,
+        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+              color: accent,
+              fontWeight: FontWeight.w700,
+            ),
       ),
     );
   }

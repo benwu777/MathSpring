@@ -13,6 +13,7 @@ import 'package:mathspring/models/learner_profile.dart';
 import 'package:mathspring/models/question.dart';
 import 'package:mathspring/models/question_bank.dart';
 import 'package:mathspring/ui/layout_spec.dart';
+import 'package:mathspring/ui/topic_palette.dart';
 import 'package:mathspring/models/question_progress.dart';
 import 'package:mathspring/models/session_answer_record.dart';
 import 'package:mathspring/services/session_launch_plan_builder.dart';
@@ -1343,6 +1344,55 @@ void main() {
     expect(find.text('Geometry'), findsAtLeastNWidgets(1));
     expect(find.byKey(const ValueKey<String>('open_start_practice')),
         findsOneWidget);
+  });
+
+  testWidgets('topic picker outlines each topic in its accent colour',
+      (WidgetTester tester) async {
+    final TestWidgetsFlutterBinding binding =
+        TestWidgetsFlutterBinding.ensureInitialized();
+    binding.platformDispatcher.localeTestValue = const Locale('en');
+
+    await pumpApp(tester, createTestServices());
+    await tester.tap(find.byKey(const ValueKey<String>('open_topic_practice')));
+    await tester.pumpAndSettle();
+
+    for (final String code in <String>['geometry', 'arithmetic', 'logic']) {
+      final ButtonStyle style = tester
+          .widget<OutlinedButton>(
+              find.byKey(ValueKey<String>('topic_action_$code')))
+          .style!;
+      final Color accent = TopicPalette.accentOf(code);
+      expect(style.side!.resolve(<WidgetState>{})!.color, accent,
+          reason: code);
+      expect(style.foregroundColor!.resolve(<WidgetState>{}), accent,
+          reason: code);
+    }
+  });
+
+  testWidgets('selected topic surface carries the topic accent stripe',
+      (WidgetTester tester) async {
+    final TestWidgetsFlutterBinding binding =
+        TestWidgetsFlutterBinding.ensureInitialized();
+    binding.platformDispatcher.localeTestValue = const Locale('en');
+
+    await pumpApp(tester, createTestServices());
+    await tester.tap(find.byKey(const ValueKey<String>('open_topic_practice')));
+    await tester.pumpAndSettle();
+    await tester
+        .tap(find.byKey(const ValueKey<String>('topic_action_logic')));
+    await tester.pumpAndSettle();
+
+    final ColoredBox stripe = tester.widget<ColoredBox>(
+        find.byKey(const ValueKey<String>('topic_accent_logic')));
+    expect(stripe.color, TopicPalette.accentOf('logic'));
+    final Text name = tester.widget<Text>(find.byKey(
+        const ValueKey<String>('selected_topic_name')));
+    expect(name.style?.color, TopicPalette.accentOf('logic'));
+    // 開始按鈕維持靛藍主色，不跟著主題變色。
+    final FilledButton start = tester.widget<FilledButton>(
+        find.byKey(const ValueKey<String>('open_start_practice')));
+    expect(start.style?.backgroundColor?.resolve(<WidgetState>{}),
+        isNot(TopicPalette.accentOf('logic')));
   });
 
   testWidgets('quiz tab focuses on start action instead of topic selection',
@@ -3863,6 +3913,111 @@ void main() {
     );
     await tester.pumpAndSettle();
     expect(find.text('2 questions · 50% correct'), findsOneWidget);
+  });
+
+  testWidgets('topic milestone badges use the topic accent colour',
+      (WidgetTester tester) async {
+    final TestWidgetsFlutterBinding binding =
+        TestWidgetsFlutterBinding.ensureInitialized();
+    binding.platformDispatcher.localeTestValue = const Locale('en');
+    // 20 題幾何就達到第一個主題里程碑。
+    final List<SessionAnswerRecord> records = List<SessionAnswerRecord>.generate(
+      20,
+      (int i) => SessionAnswerRecord(
+        sessionId: 'session_geometry',
+        questionId: 'geometry_q$i',
+        sequence: i + 1,
+        submittedAnswer: 'A',
+        isCorrect: true,
+        answeredAtIso: '2026-08-20T09:${(i + 1).toString().padLeft(2, '0')}:00Z',
+      ),
+    );
+    final AppServices services = createTestServices(
+      initialSessions: const [
+        AnswerSession(
+          id: 'session_geometry',
+          learnerId: 'learner_allen',
+          mode: 'practice',
+          topicCode: 'geometry',
+          levelStage: 'grade4',
+          challengeTier: 'foundation',
+          startedAtIso: '2026-08-20T09:00:00Z',
+          endedAtIso: '2026-08-20T09:30:00Z',
+          elapsedSeconds: 1800,
+          totalQuestions: 20,
+          correctCount: 20,
+        ),
+      ],
+      initialSessionRecords: {'session_geometry': records},
+    );
+
+    await pumpApp(tester, services);
+    await tester.tap(find.byTooltip('Review'));
+    await tester.pumpAndSettle();
+
+    final Finder badge =
+        find.byKey(const ValueKey<String>('topic_badge_geometry_20'));
+    expect(badge, findsOneWidget);
+    final BoxDecoration decoration = tester
+        .widget<Container>(
+            find.descendant(of: badge, matching: find.byType(Container)).first)
+        .decoration! as BoxDecoration;
+    expect((decoration.border! as Border).top.color,
+        TopicPalette.accentOf('geometry'));
+    final Icon icon =
+        tester.widget<Icon>(find.descendant(of: badge, matching: find.byType(Icon)));
+    expect(icon.color, TopicPalette.accentOf('geometry'));
+  });
+
+  testWidgets('history session cards mark their topic with the accent colour',
+      (WidgetTester tester) async {
+    final AppServices services = createTestServices(
+      initialSessions: const [
+        AnswerSession(
+          id: 'session_algebra',
+          learnerId: 'learner_allen',
+          mode: 'practice',
+          topicCode: 'algebra',
+          levelStage: 'grade8',
+          challengeTier: 'foundation',
+          startedAtIso: '2026-07-17T09:00:00Z',
+          endedAtIso: '2026-07-17T09:05:00Z',
+          elapsedSeconds: 300,
+          totalQuestions: 1,
+          correctCount: 1,
+        ),
+      ],
+    );
+
+    await tester.binding.setSurfaceSize(const Size(1200, 1600));
+    await tester.pumpWidget(
+      MaterialApp(
+        locale: const Locale('en'),
+        supportedLocales: AppStrings.supportedLocales,
+        localizationsDelegates: const [
+          GlobalMaterialLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+        ],
+        home: AnswerHistoryPage(services: services),
+      ),
+    );
+    await tester.runAsync(() async {
+      await Future<void>.delayed(const Duration(milliseconds: 50));
+    });
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 300));
+
+    final Finder card = find
+        .byKey(const ValueKey<String>('history_session_session_algebra'));
+    expect(card, findsOneWidget);
+    final ColoredBox stripe = tester.widget<ColoredBox>(find.descendant(
+        of: card,
+        matching: find.byKey(const ValueKey<String>('topic_accent_algebra'))));
+    expect(stripe.color, TopicPalette.accentOf('algebra'));
+    final Text chip = tester.widget<Text>(find.descendant(
+        of: card, matching: find.text('Algebra')));
+    expect(chip.style?.color, TopicPalette.accentOf('algebra'));
   });
 
   testWidgets(

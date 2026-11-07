@@ -1114,7 +1114,8 @@ class AnswerHistoryPage extends StatelessWidget {
                     ),
                   );
                 },
-                child: Container(
+                child: _TopicAccentFrame(
+                  topicCode: session.topicCode,
                   padding: const EdgeInsets.all(18),
                   decoration: BoxDecoration(
                     color: Colors.white,
@@ -1131,9 +1132,9 @@ class AnswerHistoryPage extends StatelessWidget {
                         style: Theme.of(context).textTheme.titleLarge,
                       ),
                       const SizedBox(height: 6),
-                      Text(
-                        _displayTopicCode(session.topicCode, strings),
-                        style: Theme.of(context).textTheme.bodyLarge,
+                      _TopicChip(
+                        topicCode: session.topicCode,
+                        label: _displayTopicCode(session.topicCode, strings),
                       ),
                       const SizedBox(height: 10),
                       Text(

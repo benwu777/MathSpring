@@ -9,6 +9,7 @@ import 'package:mathspring/data/bundled/bundled_question_bank_repository.dart'
     as bundled;
 import 'package:mathspring/data/local/app_services.dart';
 import 'package:mathspring/ui/favorite_collection_palette.dart';
+import 'package:mathspring/ui/topic_palette.dart';
 import 'package:mathspring/data/local/favorite_question_repository.dart';
 import 'package:mathspring/models/answer_session.dart';
 import 'package:mathspring/models/avatar_configuration.dart';

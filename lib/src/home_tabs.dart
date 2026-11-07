@@ -253,8 +253,8 @@ class _PracticeTabState extends State<_PracticeTab> {
                 ),
                 if (_selectedTopicCode != null) ...[
                   const SizedBox(height: 16),
-                  Container(
-                    width: double.infinity,
+                  _TopicAccentFrame(
+                    topicCode: _selectedTopicCode!,
                     padding: const EdgeInsets.all(16),
                     decoration: BoxDecoration(
                       color: const Color(0xFFF9FAFB),
@@ -271,7 +271,14 @@ class _PracticeTabState extends State<_PracticeTab> {
                         const SizedBox(height: 6),
                         Text(
                           _displayTopicCode(_selectedTopicCode!, strings),
-                          style: Theme.of(context).textTheme.titleMedium,
+                          key: const ValueKey<String>('selected_topic_name'),
+                          style: Theme.of(context)
+                              .textTheme
+                              .titleMedium
+                              ?.copyWith(
+                                color:
+                                    TopicPalette.accentOf(_selectedTopicCode),
+                              ),
                         ),
                       ],
                     ),

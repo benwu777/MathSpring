@@ -306,11 +306,13 @@ class _AchievementOverview extends StatelessWidget {
           .expand((MapEntry<String, int> entry) {
         return summary.reachedTopicMilestones(entry.key).map(
               (int milestone) => _AchievementBadge(
+                key: ValueKey<String>('topic_badge_${entry.key}_$milestone'),
                 label: strings.topicAchievement(
                   _displayTopicCode(entry.key, strings),
                   milestone,
                 ),
                 icon: Icons.workspace_premium_outlined,
+                topicCode: entry.key,
               ),
             );
       }),
@@ -323,23 +325,44 @@ class _AchievementOverview extends StatelessWidget {
 }
 
 class _AchievementBadge extends StatelessWidget {
-  const _AchievementBadge({required this.label, required this.icon});
+  const _AchievementBadge({
+    super.key,
+    required this.label,
+    required this.icon,
+    this.topicCode,
+  });
 
   final String label;
   final IconData icon;
+
+  /// 主題里程碑徽章才有；連續天數、訂正這類徽章維持原本的靛藍。
+  final String? topicCode;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
-      decoration: BoxDecoration(
-        color: const Color(0xFFF4F7FC),
-        borderRadius: BorderRadius.circular(12),
-      ),
+      decoration: topicCode == null
+          ? BoxDecoration(
+              color: const Color(0xFFF4F7FC),
+              borderRadius: BorderRadius.circular(12),
+            )
+          : BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(12),
+              border: Border.all(
+                  color: TopicPalette.accentOf(topicCode), width: 1.5),
+            ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(icon, size: 18, color: AppVisualTokens.brand),
+          Icon(
+            icon,
+            size: 18,
+            color: topicCode == null
+                ? AppVisualTokens.brand
+                : TopicPalette.accentOf(topicCode),
+          ),
           const SizedBox(width: 6),
           // 成就文字必須可壓縮：外層是 Wrap，寬度受限於一行的可用空間，
           // 英文的成就描述比中文長，在 390pt 上會把徽章自己的 Row 撐爆 34px。
