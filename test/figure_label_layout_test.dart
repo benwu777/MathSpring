@@ -40,6 +40,22 @@ void main() {
     });
   });
 
+  group('visible point label distance', () {
+    test('a wide label beside a point clears the point by its half width', () {
+      // 「10」放在點右邊：距離要大於點半徑＋半個字寬，不能讀成「100」。
+      final double d = FigureLabelLayout.visibleLabelDistance(
+          direction: const Offset(1, 0), textSize: const Size(20, 16));
+      expect(d, greaterThanOrEqualTo(4.5 + 10 + 3));
+    });
+
+    test('a label above a point clears it by half its height', () {
+      final double d = FigureLabelLayout.visibleLabelDistance(
+          direction: const Offset(0, -1), textSize: const Size(40, 16));
+      expect(d, greaterThanOrEqualTo(4.5 + 8 + 3));
+      expect(d, lessThan(4.5 + 20));
+    });
+  });
+
   test('labels get a white halo so lines running through stay readable', () {
     final Paint halo = FigureLabelLayout.haloPaint();
     expect(halo.style, PaintingStyle.stroke);

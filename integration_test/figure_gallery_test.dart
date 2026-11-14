@@ -16,6 +16,7 @@ import 'package:mathspring/models/question_bank.dart';
 ///     --dart-define=IDS_FILE=/絕對路徑/ids.json
 ///
 /// IDS_FILE 是題號的 JSON 陣列；模擬器讀得到 Mac 上的檔案。沒給就畫全部有圖的題。
+/// DRAFT_FILE 則直接畫草稿檔裡的題（修圖時用）。
 void main() {
   final IntegrationTestWidgetsFlutterBinding binding =
       IntegrationTestWidgetsFlutterBinding.ensureInitialized();
@@ -28,15 +29,31 @@ void main() {
             .cast<String>()
             .toSet();
 
-    final List<QuestionBank> packs =
-        await BundledQuestionBankRepository().loadAllPacks();
-    final List<Question> questions = <Question>[
-      for (final QuestionBank pack in packs)
-        for (final Question q in pack.questions)
-          if ((wanted == null || wanted.contains(q.id)) &&
-              buildFigureRenderSpec(q.figure) != null)
-            q,
-    ]..sort((Question a, Question b) => a.id.compareTo(b.id));
+    // DRAFT_FILE：修圖用的草稿（[{"key":…, "question":{…}}]），直接畫草稿裡的圖，
+    // 不必先寫回題庫。
+    const String draftFile = String.fromEnvironment('DRAFT_FILE');
+    final List<Question> questions;
+    if (draftFile.isNotEmpty) {
+      questions = <Question>[
+        for (final dynamic d
+            in jsonDecode(File(draftFile).readAsStringSync()) as List<dynamic>)
+          Question.fromJson(<String, dynamic>{
+            ...Map<String, dynamic>.from(
+                (d as Map<String, dynamic>)['question'] as Map),
+            'id': d['key'],
+          }),
+      ];
+    } else {
+      final List<QuestionBank> packs =
+          await BundledQuestionBankRepository().loadAllPacks();
+      questions = <Question>[
+        for (final QuestionBank pack in packs)
+          for (final Question q in pack.questions)
+            if ((wanted == null || wanted.contains(q.id)) &&
+                buildFigureRenderSpec(q.figure) != null)
+              q,
+      ]..sort((Question a, Question b) => a.id.compareTo(b.id));
+    }
 
     await binding.convertFlutterSurfaceToImage();
     const int perPage = 3;

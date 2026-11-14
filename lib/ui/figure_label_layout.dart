@@ -19,6 +19,22 @@ abstract final class FigureLabelLayout {
         _ => Offset.zero,
       };
 
+  /// How far a visible point's label sits from the point along [direction]:
+  /// the point's radius, a small gap, and half the text's extent that way, so
+  /// a wide label such as "10" never touches its point.
+  static double visibleLabelDistance(
+      {required Offset direction, required Size textSize}) {
+    const double pointRadius = 4.5;
+    const double gap = 4;
+    final double len = direction.distance;
+    if (len == 0) return 0;
+    final Offset unit = direction / len;
+    return pointRadius +
+        gap +
+        unit.dx.abs() * textSize.width / 2 +
+        unit.dy.abs() * textSize.height / 2;
+  }
+
   /// Scale factor (≤ 1) that makes [textWidth] fit within [maxWidth].
   static double fitScale({required double textWidth, required double maxWidth}) {
     if (textWidth <= maxWidth || textWidth <= 0) return 1.0;

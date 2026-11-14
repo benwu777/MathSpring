@@ -266,7 +266,8 @@ class GeometryScenePainter extends CustomPainter {
   /// 標籤字型；app 端不傳（用系統預設字型），僅供無頭渲染指定字型使用。
   final String? labelFontFamily;
 
-  static const double _pad = 18;
+  // 邊框留白：點落在 bounds 邊上時，標籤才有地方放，不會被夾回壓在點上。
+  static const double _pad = 26;
   static const Color _ink = Color(0xFF1F2937);
   static const Color _accent = Color(0xFF2B5FA6);
   static const Color _shadeFill = Color(0x1FE47855);
@@ -442,7 +443,11 @@ class GeometryScenePainter extends CustomPainter {
       _text(
         canvas,
         label,
-        o + dir * 15,
+        o +
+            _unit(dir) *
+                FigureLabelLayout.visibleLabelDistance(
+                    direction: dir,
+                    textSize: _measure(label, sizePx: 14, bold: true)),
         size,
         color: _ink,
         sizePx: 14,
@@ -481,6 +486,21 @@ class GeometryScenePainter extends CustomPainter {
         'br' => const Offset(0.7, 0.7),
         _ => const Offset(1, 0),
       };
+
+  Size _measure(String text, {required double sizePx, bool bold = false}) {
+    final TextPainter tp = TextPainter(
+      text: TextSpan(
+        text: normalizeMathText(text),
+        style: TextStyle(
+          fontSize: sizePx,
+          fontFamily: labelFontFamily,
+          fontWeight: bold ? FontWeight.w700 : FontWeight.w500,
+        ),
+      ),
+      textDirection: TextDirection.ltr,
+    )..layout();
+    return tp.size;
+  }
 
   void _text(
     Canvas canvas,
