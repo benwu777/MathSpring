@@ -410,13 +410,21 @@ class _TopBar extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                title,
-                style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                      fontSize: layoutSpec.scaleText(20),
-                      letterSpacing: -0.6,
-                      fontWeight: FontWeight.w700,
-                    ),
+              // App 名稱一定一行：字級放大時整個縮小，不要拆成「MathSprin / g」。
+              FittedBox(
+                fit: BoxFit.scaleDown,
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  title,
+                  key: const ValueKey<String>('top_bar_title'),
+                  maxLines: 1,
+                  softWrap: false,
+                  style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                        fontSize: layoutSpec.scaleText(20),
+                        letterSpacing: -0.6,
+                        fontWeight: FontWeight.w700,
+                      ),
+                ),
               ),
               const SizedBox(height: 2),
               Text(

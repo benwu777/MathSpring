@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -1790,6 +1791,21 @@ void main() {
     expect(MediaQuery.textScalerOf(context).scale(10),
         lessThanOrEqualTo(10 * AppTextScale.max));
     expect(AppTextScale.max, greaterThan(1.0));
+  });
+
+  testWidgets('top bar app name never breaks across lines on a phone',
+      (WidgetTester tester) async {
+    tester.platformDispatcher.textScaleFactorTestValue = 3.1;
+    addTearDown(tester.platformDispatcher.clearTextScaleFactorTestValue);
+
+    await pumpApp(tester, createTestServices(), size: const Size(390, 844));
+
+    final Finder title = find.byKey(const ValueKey<String>('top_bar_title'));
+    expect(title, findsOneWidget);
+    final RenderParagraph paragraph = tester.renderObject(title);
+    // 一行字的高度不會超過字級的兩倍；被拆成「MathSprin / g」就會超過。
+    expect(paragraph.size.height,
+        lessThan(paragraph.text.style!.fontSize! * 2));
   });
 
   testWidgets('bottom navigation bar stays compact', (WidgetTester tester) async {
