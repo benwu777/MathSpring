@@ -1001,9 +1001,11 @@ void main() {
         findQuestion(geometryPack, 'geometry_grade6_foundation_014');
 
     // 圓內接正方形要畫出構造，shape_diagram 只畫得出一個空圓（2026-09-04 改用
-    // geometry_scene）。2026-10-30 兩題都已改寫成自製題，圖形種類維持不變。
+    // geometry_scene）。2026-10-30 兩題都已改寫成自製題。
+    // 2026-11-14：014 的 P 點標籤在 iPhone 上和扇形數值疊成「21P」，
+    // circle_quadrants_point 無法調整標籤位置，改用 geometry_scene 畫同一張圖。
     expect(circleSquareQuestion.figure.kind, 'geometry_scene');
-    expect(circleRegionQuestion.figure.kind, 'circle_quadrants_point');
+    expect(circleRegionQuestion.figure.kind, 'geometry_scene');
     expect(circleRegionQuestion.correctAnswer.value, '18');
     expect(
       circleRegionQuestion.localizedPrompt('zh-Hant'),
