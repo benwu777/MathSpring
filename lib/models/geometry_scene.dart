@@ -113,7 +113,9 @@ class GeometryScene {
       final Map<String, dynamic> p = Map<String, dynamic>.from(raw as Map);
       final String name = p['name'] as String;
       pts[name] = Offset(_toDouble(p['x']), _toDouble(p['y']));
-      labelPos[name] = (p['pos'] as String?) ?? 'r';
+      // 只記作者寫的 pos：沒寫時，可見點的標籤由畫圖端預設放右邊，
+      // 隱藏標籤則置中在點上（作者把隱藏點放在字要出現的位置）。
+      if (p['pos'] is String) labelPos[name] = p['pos'] as String;
       final String? label = p['label'] as String?;
       if (label != null) labels[name] = label;
       pointIsVisible[name] = p['visible'] as bool? ?? true;

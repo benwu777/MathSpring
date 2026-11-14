@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:mathspring/data/local/app_services.dart';
@@ -11,7 +12,8 @@ import 'package:mathspring/services/monetization_service.dart';
 /// 在真機或模擬器上拍介面截圖（設計確認、商店截圖用）。
 ///
 ///   flutter drive --driver=test_driver/integration_test.dart \
-///     --target=integration_test/ui_screenshots_test.dart -d <device>
+///     --target=integration_test/ui_screenshots_test.dart -d <device> \
+///     [--dart-define=ORIENTATION=landscape]
 ///
 /// 學習紀錄用 [AppServices.forTesting] 的記憶體資料，不寫進裝置上的資料庫。
 void main() {
@@ -84,6 +86,12 @@ void main() {
   }
 
   testWidgets('ui screenshots', (WidgetTester tester) async {
+    // --dart-define=ORIENTATION=landscape 拍橫向（iPad 用）。
+    if (const String.fromEnvironment('ORIENTATION') == 'landscape') {
+      await SystemChrome.setPreferredOrientations(<DeviceOrientation>[
+        DeviceOrientation.landscapeLeft,
+      ]);
+    }
     binding.platformDispatcher.localeTestValue = const Locale('zh', 'TW');
     binding.platformDispatcher.localesTestValue = const <Locale>[
       Locale.fromSubtags(languageCode: 'zh', scriptCode: 'Hant', countryCode: 'TW'),

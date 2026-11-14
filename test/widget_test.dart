@@ -1776,6 +1776,22 @@ void main() {
         findsOneWidget);
   });
 
+  testWidgets('accessibility text sizes are capped so headers do not break apart',
+      (WidgetTester tester) async {
+    // iOS 最大輔助字級約 3.1 倍：首頁標題會被拆成「Mat / hSp / ring」，
+    // 選主題按鈕也被擠出畫面（2026-11-14 模擬器實測）。
+    tester.platformDispatcher.textScaleFactorTestValue = 3.1;
+    addTearDown(tester.platformDispatcher.clearTextScaleFactorTestValue);
+
+    await pumpApp(tester, createTestServices());
+
+    final BuildContext context =
+        tester.element(find.byKey(const ValueKey<String>('home_hero_surface')));
+    expect(MediaQuery.textScalerOf(context).scale(10),
+        lessThanOrEqualTo(10 * AppTextScale.max));
+    expect(AppTextScale.max, greaterThan(1.0));
+  });
+
   testWidgets('bottom navigation bar stays compact', (WidgetTester tester) async {
     // 2026-10-31 使用者：底部四個按鈕的區塊太高、佔太多空間。
     // 模擬 iPhone 15 Pro Max（430×932 pt）；只改 setSurfaceSize 的話 MediaQuery

@@ -427,7 +427,10 @@ class GeometryScenePainter extends CustomPainter {
         _text(
           canvas,
           label,
-          o + dir * 11,
+          o +
+              FigureLabelLayout.hiddenLabelDirection(
+                      scene.pointLabelPos[name]) *
+                  11,
           size,
           color: _accent,
           sizePx: 13,
@@ -512,7 +515,9 @@ class GeometryScenePainter extends CustomPainter {
       halfHeight + edgePadding,
       bounds.height - halfHeight - edgePadding,
     );
-    tp.paint(canvas, Offset(clampedX - halfWidth, clampedY - halfHeight));
+    // 先畫一圈白底再畫字，線穿過標籤時字仍讀得出來。
+    FigureLabelLayout.paintWithHalo(canvas, tp.text! as TextSpan,
+        Offset(clampedX - halfWidth, clampedY - halfHeight));
   }
 
   @override

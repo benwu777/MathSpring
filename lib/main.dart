@@ -9,6 +9,7 @@ import 'package:mathspring/data/bundled/bundled_question_bank_repository.dart'
     as bundled;
 import 'package:mathspring/data/local/app_services.dart';
 import 'package:mathspring/ui/favorite_collection_palette.dart';
+import 'package:mathspring/ui/figure_label_layout.dart';
 import 'package:mathspring/ui/topic_palette.dart';
 import 'package:mathspring/data/local/favorite_question_repository.dart';
 import 'package:mathspring/models/answer_session.dart';
@@ -72,6 +73,12 @@ abstract final class AppVisualTokens {
   static const Color primary = brand;
   static const Color primarySoft = brandSoft;
   static const Color danger = Color(0xFFB54747);
+}
+
+/// 系統字級放大的上限。iOS 最大輔助字級約 3.1 倍會把首頁標題拆成好幾行、
+/// 把按鈕擠出畫面；1.3 倍仍明顯放大，版面也撐得住。
+abstract final class AppTextScale {
+  static const double max = 1.3;
 }
 
 void main() {
@@ -175,13 +182,17 @@ class _MathSpringAppState extends State<MathSpringApp> {
       // 已經在用 Theme.of(context).textTheme 的畫面因此自動跟著縮放。
       builder: (BuildContext context, Widget? child) {
         final ThemeData base = Theme.of(context);
-        return MonetizationScope(
-          service: _monetization,
-          child: Theme(
-            data: base.copyWith(
-              textTheme: LayoutSpec.of(context).textThemeFrom(base.textTheme),
+        return MediaQuery.withClampedTextScaling(
+          maxScaleFactor: AppTextScale.max,
+          child: MonetizationScope(
+            service: _monetization,
+            child: Theme(
+              data: base.copyWith(
+                textTheme:
+                    LayoutSpec.of(context).textThemeFrom(base.textTheme),
+              ),
+              child: child ?? const SizedBox.shrink(),
             ),
-            child: child ?? const SizedBox.shrink(),
           ),
         );
       },

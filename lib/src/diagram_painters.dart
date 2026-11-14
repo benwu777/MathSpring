@@ -191,11 +191,8 @@ class TrigGraphPainter extends CustomPainter {
     Offset offset,
     TextStyle style,
   ) {
-    final TextPainter painter = TextPainter(
-      text: TextSpan(text: text, style: style),
-      textDirection: TextDirection.ltr,
-    )..layout();
-    painter.paint(canvas, offset);
+    FigureLabelLayout.paintWithHalo(
+        canvas, TextSpan(text: text, style: style), offset);
   }
 
   @override
@@ -633,18 +630,28 @@ class CoordinatePlanePainter extends CustomPainter {
     double mapY(int y) => plot.bottom - (y - minY) / ySpan * plot.height;
 
     if (showGrid) {
+      // 格子太密時隔幾格才標一個數，避免「9101112」黏成一串。
+      final double widest = <int>[minX, maxX]
+          .map((int v) => _measureText('$v', fontFamily: labelFontFamily))
+          .reduce(math.max);
+      final int xStride = FigureLabelLayout.tickStride(
+          unitPx: plot.width / xSpan, labelWidthPx: widest);
+      final int yStride = FigureLabelLayout.tickStride(
+          unitPx: plot.height / ySpan, labelWidthPx: 16);
       for (int x = minX; x <= maxX; x++) {
         final double dx = mapX(x);
         canvas.drawLine(
             Offset(dx, plot.top), Offset(dx, plot.bottom), gridPaint);
-        _paintText(canvas, '$x', Offset(dx, plot.bottom + 14),
-            fontFamily: labelFontFamily);
+        if ((x - minX) % xStride == 0) {
+          _paintText(canvas, '$x', Offset(dx, plot.bottom + 14),
+              fontFamily: labelFontFamily);
+        }
       }
       for (int y = minY; y <= maxY; y++) {
         final double dy = mapY(y);
         canvas.drawLine(
             Offset(plot.left, dy), Offset(plot.right, dy), gridPaint);
-        if (y != 0) {
+        if (y != 0 && (y - minY) % yStride == 0) {
           _paintText(canvas, '$y', Offset(plot.left - 14, dy),
               fontFamily: labelFontFamily);
         }
@@ -752,8 +759,6 @@ class CompositeGridShapePainter extends CustomPainter {
         canvas.drawRect(
             cellRect, filledKeys.contains(key) ? fillPaint : emptyPaint);
         canvas.drawRect(cellRect, gridPaint);
-        _paintText(canvas, cellLabels[key], cellRect.center,
-            fontFamily: labelFontFamily);
       }
     }
 
@@ -779,6 +784,16 @@ class CompositeGridShapePainter extends CustomPainter {
         canvas.drawLine(cellRect.topRight, cellRect.bottomRight, outlinePaint);
       }
     }
+
+    // 文字最後才畫，粗外框才不會壓住格子裡的字；太長就縮小塞進格子。
+    for (int row = 0; row < rows; row++) {
+      for (int col = 0; col < cols; col++) {
+        final Offset center = Offset(startX + (col + 0.5) * cellSize,
+            startY + (row + 0.5) * cellSize);
+        _paintText(canvas, cellLabels['$row,$col'], center,
+            fontFamily: labelFontFamily, maxWidth: cellSize - 6);
+      }
+    }
   }
 
   @override
@@ -790,27 +805,45 @@ class CompositeGridShapePainter extends CustomPainter {
   }
 }
 
-void _paintText(Canvas canvas, String? text, Offset center,
-    {String? fontFamily}) {
-  if (text == null || text.isEmpty) {
-    return;
-  }
-  final TextPainter painter = TextPainter(
-    text: TextSpan(
+TextSpan _labelSpan(String text, {String? fontFamily, double fontSize = 13}) =>
+    TextSpan(
       text: text,
       style: TextStyle(
         color: const Color(0xFF0F172A),
-        fontSize: 13,
+        fontSize: fontSize,
         fontWeight: FontWeight.w600,
         // 預設 null，用 app 的字型；預覽工具會塞自己載進來的字型，
         // 否則測試環境沒有系統字型，文字全部畫成黑方塊。
         fontFamily: fontFamily,
       ),
-    ),
+    );
+
+double _measureText(String text, {String? fontFamily}) {
+  final TextPainter painter = TextPainter(
+    text: _labelSpan(text, fontFamily: fontFamily),
     textDirection: TextDirection.ltr,
   )..layout();
-  painter.paint(
+  return painter.width;
+}
+
+void _paintText(Canvas canvas, String? text, Offset center,
+    {String? fontFamily, double? maxWidth}) {
+  if (text == null || text.isEmpty) {
+    return;
+  }
+  double fontSize = 13;
+  if (maxWidth != null) {
+    fontSize *= FigureLabelLayout.fitScale(
+        textWidth: _measureText(text, fontFamily: fontFamily),
+        maxWidth: maxWidth);
+  }
+  final TextSpan span =
+      _labelSpan(text, fontFamily: fontFamily, fontSize: fontSize);
+  final TextPainter painter =
+      TextPainter(text: span, textDirection: TextDirection.ltr)..layout();
+  FigureLabelLayout.paintWithHalo(
     canvas,
+    span,
     Offset(center.dx - painter.width / 2, center.dy - painter.height / 2),
   );
 }

@@ -48,6 +48,17 @@ void main() {
     expect(scene.points['F'], const Offset(4, 2));
   });
 
+  test('only records a label position the author actually gave', () {
+    final Map<String, dynamic> params = sampleParams();
+    (params['points'] as List).add(
+      {'name': 'lab', 'x': 3, 'y': 3, 'visible': false, 'label': '9'},
+    );
+    final GeometryScene scene = GeometryScene.fromParams(params);
+    expect(scene.pointLabelPos['A'], 'tl');
+    // 沒寫 pos 的隱藏標籤要置中在點上，所以不能被補成預設的 'r'。
+    expect(scene.pointLabelPos.containsKey('lab'), isFalse);
+  });
+
   test('keeps construction-only points out of the visible point layer', () {
     final Map<String, dynamic> params = sampleParams();
     (params['points'] as List).add(
