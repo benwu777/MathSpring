@@ -1,3 +1,5 @@
+import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
 
 /// Rules that keep figure text readable on a phone: labels sit where the
@@ -33,6 +35,21 @@ abstract final class FigureLabelLayout {
         gap +
         unit.dx.abs() * textSize.width / 2 +
         unit.dy.abs() * textSize.height / 2;
+  }
+
+  /// Distance from an angle's vertex to the centre of its value label, along
+  /// the bisector. Narrow angles push the label out until the text clears both
+  /// rays, so the halo never cuts the sides of the angle.
+  static double angleLabelDistance({
+    required double sweepRadians,
+    required Size textSize,
+    required double arcRadius,
+  }) {
+    final double base = arcRadius + 12;
+    final double half = sweepRadians.abs() / 2;
+    if (half >= math.pi / 2) return base;
+    final double needed = (textSize.longestSide / 2) / math.sin(half);
+    return math.min(math.max(base, needed), 140);
   }
 
   /// Scale factor (≤ 1) that makes [textWidth] fit within [maxWidth].

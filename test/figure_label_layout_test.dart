@@ -1,3 +1,5 @@
+import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mathspring/ui/figure_label_layout.dart';
@@ -53,6 +55,24 @@ void main() {
           direction: const Offset(0, -1), textSize: const Size(40, 16));
       expect(d, greaterThanOrEqualTo(4.5 + 8 + 3));
       expect(d, lessThan(4.5 + 20));
+    });
+  });
+
+  group('angle label distance', () {
+    test('a wide angle keeps the label just outside the arc', () {
+      final double d = FigureLabelLayout.angleLabelDistance(
+          sweepRadians: 1.6, textSize: const Size(24, 16), arcRadius: 22);
+      expect(d, 22 + 12);
+    });
+
+    test('a narrow angle pushes the label out until it clears both rays', () {
+      // 20° 的角：字的半個對角線要小於「距離 × sin(10°)」，字才不會壓到兩條邊。
+      const double sweep = 20 * 3.141592653589793 / 180;
+      const Size text = Size(28, 16);
+      final double d = FigureLabelLayout.angleLabelDistance(
+          sweepRadians: sweep, textSize: text, arcRadius: 22);
+      final double halfDiagonal = text.longestSide / 2;
+      expect(d * math.sin(sweep / 2), greaterThanOrEqualTo(halfDiagonal));
     });
   });
 

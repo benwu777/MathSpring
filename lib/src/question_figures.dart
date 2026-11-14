@@ -387,8 +387,13 @@ class GeometryScenePainter extends CustomPainter {
           Rect.fromCircle(center: v, radius: r), a1, sweep, false, markPaint);
       if (am.label != null && am.label!.isNotEmpty) {
         final double midA = a1 + sweep / 2;
-        final Offset lblAt =
-            v + Offset(math.cos(midA), math.sin(midA)) * (r + 12);
+        // 窄角時沿角平分線往外推，字才不會壓到角的兩條邊。
+        final Offset lblAt = v +
+            Offset(math.cos(midA), math.sin(midA)) *
+                FigureLabelLayout.angleLabelDistance(
+                    sweepRadians: sweep,
+                    textSize: _measure(am.label!, sizePx: 13),
+                    arcRadius: r);
         _text(canvas, am.label!, lblAt, size, color: _accent, sizePx: 13);
       }
     }
